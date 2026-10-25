@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "observedAt": "2026-10-23",
+  "observedAt": "2026-10-25",
   "purpose": "Pinned exact-configuration identities of each ranked ValueRank configuration in the AA cost sources that are not on the AA model page (owner decision O15 basket; exact model and effort only, never transferred between efforts or versions).",
   "derivedFrom": "research/2026-10-19-methodology-codesign/basket-cost-capture-2026-10-19.json",
   "sources": {
@@ -266,6 +266,11 @@
     "gpt-6-astra-xhigh": {
       "coding-agent-index": null,
       "frontiercode": null,
+      "itbench-aa": null
+    },
+    "kimi-k3-1-pro": {
+      "coding-agent-index": null,
+      "frontiercode": "Kimi K3.1 Pro",
       "itbench-aa": null
     }
   }

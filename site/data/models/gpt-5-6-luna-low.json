@@ -7,15 +7,15 @@
   "selectedPage": "https://artificialanalysis.ai/models/gpt-5-6-luna-low",
   "summary": {
     "rank": {
-      "api": 15,
-      "plan": 47
+      "api": 16,
+      "plan": 48
     },
     "overall": {
-      "api": 38.1570888553376,
-      "plan": 36.628741014084824
+      "api": 38.1644013553376,
+      "plan": 36.73652019998123
     },
-    "quality": 21.3110661205628,
-    "qualityRank": 15,
+    "quality": 21.3208161205628,
+    "qualityRank": 16,
     "coverage": {
       "pct": 100.0,
       "costAvailable": true,
@@ -42,7 +42,7 @@
         "name": "Cognition (FrontierCode's author)",
         "url": "https://cognition.com/data/frontiercode-leaderboard/data.json"
       },
-      "observedAt": "2026-10-23",
+      "observedAt": "2026-10-25",
       "evaluatedVariant": "GPT-5.6 Luna (low), harness codex",
       "note": null,
       "grade": "measured"
@@ -60,7 +60,7 @@
         "name": "Artificial Analysis Terminal-Bench 4.0 run (mini-SWE-agent)",
         "url": "https://www.tbench.ai/leaderboard/terminal-bench/4.0"
       },
-      "observedAt": "2026-10-23",
+      "observedAt": "2026-10-25",
       "evaluatedVariant": "mini-SWE-agent",
       "note": null,
       "grade": "measured"
@@ -78,7 +78,7 @@
         "name": "Bug Hunt Bench published runs",
         "url": "https://bughunt.productcompass.pm/"
       },
-      "observedAt": "2026-10-19",
+      "observedAt": "2026-10-23",
       "evaluatedVariant": "GPT-5.6 Luna (low effort) / Codex CLI",
       "note": null,
       "grade": "measured"
@@ -96,7 +96,7 @@
         "name": "Artificial Analysis model page (Intelligence Index v4.3.2)",
         "url": "https://aicodingdaily.com/leaderboard"
       },
-      "observedAt": "2026-10-23",
+      "observedAt": "2026-10-25",
       "evaluatedVariant": "GPT-5.6-Luna (Low) / Codex CLI",
       "note": null,
       "grade": "measured"
@@ -106,15 +106,15 @@
       "label": "GDPval-AA v2.1",
       "category": "Professional work",
       "weightPct": 7.5,
-      "value": 992.25,
+      "value": 994.2,
       "decimals": 1,
       "unit": "Elo",
-      "normalized": 24.6125,
+      "normalized": 24.710000000000004,
       "source": {
         "name": "Artificial Analysis model page (Intelligence Index v4.3.2)",
         "url": "https://artificialanalysis.ai/evaluations/gdpval-aa"
       },
-      "observedAt": "2026-10-23",
+      "observedAt": "2026-10-25",
       "evaluatedVariant": null,
       "note": null,
       "grade": "measured"
@@ -132,7 +132,7 @@
         "name": "Artificial Analysis model page (Intelligence Index v4.3.2)",
         "url": "https://artificialanalysis.ai/evaluations/automationbench-aa"
       },
-      "observedAt": "2026-10-23",
+      "observedAt": "2026-10-25",
       "evaluatedVariant": null,
       "note": null,
       "grade": "measured"
@@ -150,7 +150,7 @@
         "name": "Artificial Analysis model page (Intelligence Index v4.3.2)",
         "url": "https://artificialanalysis.ai/evaluations/omniscience"
       },
-      "observedAt": "2026-10-23",
+      "observedAt": "2026-10-25",
       "evaluatedVariant": null,
       "note": null,
       "grade": "measured"
@@ -168,7 +168,7 @@
         "name": "Artificial Analysis model page (Intelligence Index v4.3.2)",
         "url": "https://artificialanalysis.ai/evaluations/artificial-analysis-long-context-reasoning"
       },
-      "observedAt": "2026-10-23",
+      "observedAt": "2026-10-25",
       "evaluatedVariant": null,
       "note": null,
       "grade": "measured"
@@ -186,7 +186,7 @@
         "name": "Artificial Analysis model page (Intelligence Index v4.3.2)",
         "url": "https://artificialanalysis.ai/evaluations/humanitys-last-exam"
       },
-      "observedAt": "2026-10-23",
+      "observedAt": "2026-10-25",
       "evaluatedVariant": null,
       "note": null,
       "grade": "measured"
@@ -204,7 +204,7 @@
         "name": "Artificial Analysis model page (Intelligence Index v4.3.2)",
         "url": "https://artificialanalysis.ai/evaluations/scicode"
       },
-      "observedAt": "2026-10-23",
+      "observedAt": "2026-10-25",
       "evaluatedVariant": null,
       "note": null,
       "grade": "measured"
@@ -222,7 +222,7 @@
         "name": "Artificial Analysis model page (Intelligence Index v4.3.2)",
         "url": "https://artificialanalysis.ai/evaluations/critpt"
       },
-      "observedAt": "2026-10-23",
+      "observedAt": "2026-10-25",
       "evaluatedVariant": null,
       "note": null,
       "grade": "measured"
@@ -253,7 +253,7 @@
     ],
     "costScore": {
       "api": 88.695157059662,
-      "plan": 82.58176569465091
+      "plan": 82.98363243823651
     },
     "components": [
       {
@@ -350,8 +350,8 @@
       "planIntervalEligible": false,
       "usdPerRun": 1.922567896540046,
       "selected": true,
-      "planRank": 47,
-      "planValue": 36.628741014084824
+      "planRank": 48,
+      "planValue": 36.73652019998123
     },
     {
       "id": "chatgpt-pro100-gpt-5.6-luna-low-common-gpt-assumption",
@@ -367,8 +367,8 @@
       "planIntervalEligible": false,
       "usdPerRun": 1.9630238276331158,
       "selected": false,
-      "planRank": 48,
-      "planValue": 36.57192274419093
+      "planRank": 49,
+      "planValue": 36.681012819164735
     },
     {
       "id": "chatgpt-pro200-gpt-5.6-luna-low-common-gpt-assumption",
@@ -384,8 +384,8 @@
       "planIntervalEligible": false,
       "usdPerRun": 1.987514527977867,
       "selected": false,
-      "planRank": 49,
-      "planValue": 36.53809307418402
+      "planRank": 50,
+      "planValue": 36.64796365417824
     },
     {
       "id": "chatgpt-plus-gpt-5.6-luna-low-common-gpt-assumption",
@@ -401,8 +401,8 @@
       "planIntervalEligible": false,
       "usdPerRun": 2.55677794833696,
       "selected": false,
-      "planRank": 50,
-      "planValue": 35.8508955144555
+      "planRank": 51,
+      "planValue": 35.97662084991384
     }
   ],
   "scenarios": {
@@ -532,8 +532,8 @@
       "version": "v3.0.0",
       "date": "2026-10-19",
       "rank": {
-        "api": 15,
-        "plan": 47
+        "api": 16,
+        "plan": 48
       }
     }
   ],
@@ -568,12 +568,12 @@
       "shown": true,
       "rankingEligible": true,
       "rank": {
-        "api": 15,
-        "plan": 47
+        "api": 16,
+        "plan": 48
       },
       "overall": {
-        "api": 38.1570888553376,
-        "plan": 36.628741014084824
+        "api": 38.1644013553376,
+        "plan": 36.73652019998123
       }
     }
   ]

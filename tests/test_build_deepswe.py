@@ -360,7 +360,7 @@ def test_main_stamps_the_pinned_clock_when_the_capture_has_no_scrape_time(tmp_pa
 
     build_deepswe.main([str(source), str(output)])
 
-    assert json.loads(output.read_text(encoding="utf-8"))["observedAt"] == "2026-10-23T06:26:23Z"
+    assert json.loads(output.read_text(encoding="utf-8"))["observedAt"] == "2026-10-25T09:56:47Z"
 
 
 def test_main_creates_a_missing_output_directory(tmp_path):

@@ -20,6 +20,8 @@ EFFORT_EQUIVALENTS = {
     "qwen3.8-max": ({"max"}, "AA lists one reasoning mode; Bug Hunt records max as the verified effort ceiling"),
     "mimo-v2-6-pro": ({"enabled"}, "AA lists one reasoning mode; Bug Hunt records the verified binary thinking toggle"),
     "mimo-v2-6-flash": ({"enabled"}, "AA lists one reasoning mode; thinking toggle switched on"),
+    # O66 (2026-10-25): Moonshot documents reasoning_effort low / high / max with max the default; AA's effort-less row is max.
+    "kimi-k3-1-pro": ({"max"}, "AA lists no effort; owner decision O66 takes Kimi K3.1 Pro at max, its maximum and default effort"),
 }
 
 # tbench.ai leaderboard base names (effort removed) mapped to ValueRank model ids. O33: a family ranked at several

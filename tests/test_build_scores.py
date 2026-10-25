@@ -411,7 +411,7 @@ def test_manifest_and_outputs_list_expected_relative_paths(world, capsys):
     manifest = json.loads((world / "data/run_manifest.json").read_text())
     scoring = manifest["scoring"]
     assert scoring["weights"] == json.loads((world / "data/scores.json").read_text())["weights"]
-    assert scoring["observedAt"] == "2026-10-23T06:26:23Z"
+    assert scoring["observedAt"] == "2026-10-25T09:56:47Z"
     # O51: DeepSeek V4 Flash is off the frontier, so no committed claim targets a cohort configuration.
     assert scoring["providerClaimsUsed"] == []
     assert scoring["primaryMissingFields"]

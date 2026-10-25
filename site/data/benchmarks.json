@@ -5,7 +5,7 @@
       "name": "FrontierCode 1.1",
       "owner": "Artificial Analysis",
       "url": "https://artificialanalysis.ai/evaluations/frontiercode",
-      "observedAt": "2026-10-23",
+      "observedAt": "2026-10-25",
       "role": "quality leaf (Software engineering)",
       "weightPct": 11.25,
       "coverage": {
@@ -21,7 +21,7 @@
       "name": "Terminal-Bench 4.0 (AA run)",
       "owner": "Artificial Analysis",
       "url": "https://www.tbench.ai/leaderboard/terminal-bench/4.0",
-      "observedAt": "2026-10-23",
+      "observedAt": "2026-10-25",
       "role": "quality leaf (Software engineering)",
       "weightPct": 8.25,
       "coverage": {
@@ -37,7 +37,7 @@
       "name": "Bug Hunt Bench",
       "owner": "Bug Hunt Bench benchmark owner",
       "url": "https://bughunt.productcompass.pm/",
-      "observedAt": "2026-10-19",
+      "observedAt": "2026-10-23",
       "role": "quality leaf (Software engineering)",
       "weightPct": 6.0,
       "coverage": {
@@ -53,7 +53,7 @@
       "name": "Vibe Code Bench v1.1 (Vals)",
       "owner": "Artificial Analysis",
       "url": "https://www.vals.ai/benchmarks/vibe-code",
-      "observedAt": "2026-10-23",
+      "observedAt": "2026-10-25",
       "role": "quality leaf (Software engineering)",
       "weightPct": 3.75,
       "coverage": {
@@ -69,7 +69,7 @@
       "name": "Code Migration v1.1 (Vals)",
       "owner": "Artificial Analysis",
       "url": "https://www.vals.ai/benchmarks/code-migration-v1-1",
-      "observedAt": "2026-10-23",
+      "observedAt": "2026-10-25",
       "role": "quality leaf (Software engineering)",
       "weightPct": 4.5,
       "coverage": {
@@ -85,7 +85,7 @@
       "name": "LiveBench 2.0 Overall",
       "owner": "Artificial Analysis",
       "url": "https://livebench.ai/",
-      "observedAt": "2026-10-23",
+      "observedAt": "2026-10-25",
       "role": "quality leaf (Software engineering)",
       "weightPct": 11.25,
       "coverage": {
@@ -101,7 +101,7 @@
       "name": "GDPval-AA v2.1",
       "owner": "Artificial Analysis",
       "url": "https://artificialanalysis.ai/evaluations/gdpval-aa",
-      "observedAt": "2026-10-23",
+      "observedAt": "2026-10-25",
       "role": "quality leaf (Professional work)",
       "weightPct": 7.5,
       "coverage": {
@@ -117,7 +117,7 @@
       "name": "AutomationBench-AA",
       "owner": "Artificial Analysis",
       "url": "https://artificialanalysis.ai/evaluations/automationbench-aa",
-      "observedAt": "2026-10-23",
+      "observedAt": "2026-10-25",
       "role": "quality leaf (Professional work)",
       "weightPct": 7.5,
       "coverage": {
@@ -133,7 +133,7 @@
       "name": "AA-Omniscience",
       "owner": "Artificial Analysis",
       "url": "https://artificialanalysis.ai/evaluations/omniscience",
-      "observedAt": "2026-10-23",
+      "observedAt": "2026-10-25",
       "role": "quality leaf (Reliability)",
       "weightPct": 7.5,
       "coverage": {
@@ -149,7 +149,7 @@
       "name": "AA-LCR v1.1",
       "owner": "Artificial Analysis",
       "url": "https://artificialanalysis.ai/evaluations/artificial-analysis-long-context-reasoning",
-      "observedAt": "2026-10-23",
+      "observedAt": "2026-10-25",
       "role": "quality leaf (Knowledge and science)",
       "weightPct": 3.75,
       "coverage": {
@@ -165,7 +165,7 @@
       "name": "Humanity's Last Exam",
       "owner": "Artificial Analysis",
       "url": "https://artificialanalysis.ai/evaluations/humanitys-last-exam",
-      "observedAt": "2026-10-23",
+      "observedAt": "2026-10-25",
       "role": "quality leaf (Knowledge and science)",
       "weightPct": 1.25,
       "coverage": {
@@ -181,7 +181,7 @@
       "name": "SciCode",
       "owner": "Artificial Analysis",
       "url": "https://artificialanalysis.ai/evaluations/scicode",
-      "observedAt": "2026-10-23",
+      "observedAt": "2026-10-25",
       "role": "quality leaf (Knowledge and science)",
       "weightPct": 1.25,
       "coverage": {
@@ -197,7 +197,7 @@
       "name": "CritPt",
       "owner": "Artificial Analysis",
       "url": "https://artificialanalysis.ai/evaluations/critpt",
-      "observedAt": "2026-10-23",
+      "observedAt": "2026-10-25",
       "role": "quality leaf (Knowledge and science)",
       "weightPct": 1.25,
       "coverage": {
@@ -262,12 +262,12 @@
   },
   "frontier": {
     "status": "complete",
-    "checkedAt": "2026-10-23T06:26:23+00:00",
-    "observedAt": "2026-10-23T05:27:39Z",
+    "checkedAt": "2026-10-25T09:56:47+00:00",
+    "observedAt": "2026-10-25T09:53:28Z",
     "sourceUrl": "https://artificialanalysis.ai/evaluations/artificial-analysis-intelligence-index?eval-cost=intelligence-vs-total-cost",
     "benchmarkVersion": "Artificial Analysis Intelligence Index v4.3.2",
     "definition": "Directly observed AA displayed intelligence-versus-total-cost frontier; not recomputed from a subset.",
-    "note": "All 697 catalog models selected; all 189 plotted points and all 18 Pareto path vertices captured from public tooltips (rounded integer Intelligence Index, two-decimal USD total cost) with Playwright on 2026-10-23. Every hover returned a distinct tooltip, so no overlapped-circle resolution was needed. No hidden state or paid export used.",
+    "note": "All 698 catalog models selected; all 190 plotted points and all 19 Pareto path vertices captured from public tooltips (rounded integer Intelligence Index, two-decimal USD total cost) with Playwright on 2026-10-25. Every hover returned a distinct tooltip, so no overlapped-circle resolution was needed. No hidden state or paid export used.",
     "rows": [
       {
         "aaId": "gpt-6-luna-low",
@@ -418,6 +418,16 @@
         "family": "Claude Opus 5.5",
         "slug": "claude-opus-5-5-high",
         "sourceUrl": "https://artificialanalysis.ai/models/claude-opus-5-5-high"
+      },
+      {
+        "aaId": "kimi-k3-1-pro",
+        "name": "Kimi K3.1 Pro",
+        "evaluatedVariant": "reasoning",
+        "intelligenceIndex": 55,
+        "totalCostUsd": 3117.31,
+        "family": "Kimi K3.1 Pro",
+        "slug": "kimi-k3-1-pro",
+        "sourceUrl": "https://artificialanalysis.ai/models/kimi-k3-1-pro"
       },
       {
         "aaId": "claude-opus-5-5-xhigh",

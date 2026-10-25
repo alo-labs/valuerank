@@ -1,12 +1,12 @@
 {
   "schemaVersion": 1,
-  "capturedAt": "2026-10-23T07:58:31Z",
+  "capturedAt": "2026-10-25T10:44:11Z",
   "rule": "Owner decisions O53-O55: leaves added by the max-effort and AI Coding Daily rankings; exact configuration only (O36), MiMo-V2.6-Pro matched at high by owner statement (O54, E252)",
   "sources": {
     "vibeCode": {
       "benchmark": "Vibe Code Bench v1.1",
       "publisher": "Vals AI",
-      "updated": "2026-10-20",
+      "updated": "2026-10-24",
       "url": "https://www.vals.ai/benchmarks/vibe-code",
       "harness": "OpenHands, the same for every model",
       "metric": "test-workflow pass rate (percent), with Vals' published standard error",
@@ -14,7 +14,7 @@
       "sampling": {
         "kind": "publishedStandardError"
       },
-      "capturedAt": "2026-10-23T07:58:05Z"
+      "capturedAt": "2026-10-25T10:44:11Z"
     },
     "codeMigration": {
       "benchmark": "Code Migration v1.1",
@@ -28,15 +28,15 @@
         "kind": "publishedStandardError",
         "tasks": 130
       },
-      "capturedAt": "2026-10-23T07:58:05Z"
+      "capturedAt": "2026-10-25T10:44:11Z"
     },
     "livebench2Overall": {
-      "benchmark": "LiveBench 2.0 Overall (release 2026-10-14)",
+      "benchmark": "LiveBench 2.0 Overall (release 2026-10-23)",
       "publisher": "LiveBench",
-      "updated": "2026-10-18",
-      "url": "https://livebench.ai/data/20261014/table.csv",
+      "updated": "2026-10-24",
+      "url": "https://livebench.ai/data/20261023/table.csv",
       "harness": "LiveBench's own, one run per model at its top effort",
-      "metric": "mean of the seven category scores (Long Agentic, Reasoning, Coding, Browser, Data Analysis, Research, Design), 0-100",
+      "metric": "LiveBench's weighted Overall of the seven category scores (Long Agentic 2, Coding 1.5, Design 1.5, Reasoning, Browser, Data Analysis and Research 1; O67), 0-100",
       "unit": "percent",
       "sampling": {
         "kind": "categories",
@@ -50,12 +50,12 @@
           "design": 25
         }
       },
-      "capturedAt": "2026-10-23T07:58:31Z"
+      "capturedAt": "2026-10-25T10:44:11Z"
     },
     "aiCodingDaily": {
       "benchmark": "AI Coding Daily LLM Coding Leaderboard (Laravel quality + React-TS quality + edge-case testing, max 60)",
       "publisher": "AI Coding Daily (Povilas Korop)",
-      "updated": "2026-10-21",
+      "updated": "2026-10-24",
       "url": "https://aicodingdaily.com/leaderboard",
       "harness": "varies by model: Claude Code, Codex CLI, OpenCode, Devin, DeepSeek's harness (named on each record)",
       "metric": "judged points out of 60 (the 10-point bug-finding column is excluded: it overlaps Bug Hunt)",
@@ -65,7 +65,7 @@
         "tasks": 6,
         "unit": "graded projects (Laravel, React-TS and 4 edge-case projects)"
       },
-      "capturedAt": "2026-10-23T07:58:31Z"
+      "capturedAt": "2026-10-25T10:44:11Z"
     }
   },
   "records": [
@@ -75,7 +75,7 @@
       "value": 90.444,
       "sourceLabel": "anthropic/claude-haiku-5-5",
       "effort": "max",
-      "locator": "research/2026-10-23-swe-benchmarks/vals-catalogue-2026-10-23.json benchmarks[slug=vibe-code].coverage[claude-haiku-5-5-max]",
+      "locator": "research/2026-10-25-board-reread/vals-catalogue-2026-10-25.json benchmarks[slug=vibe-code].coverage[claude-haiku-5-5-max]",
       "stderr": 1.725
     },
     {
@@ -84,7 +84,7 @@
       "value": 90.294,
       "sourceLabel": "anthropic/claude-opus-5-5",
       "effort": "max",
-      "locator": "research/2026-10-23-swe-benchmarks/vals-catalogue-2026-10-23.json benchmarks[slug=vibe-code].coverage[claude-opus-5-5]",
+      "locator": "research/2026-10-25-board-reread/vals-catalogue-2026-10-25.json benchmarks[slug=vibe-code].coverage[claude-opus-5-5]",
       "stderr": 1.526,
       "note": "AA labels this configuration 'Claude Opus 5.5 (max with fallback)'; Vals has no fallback qualifier."
     },
@@ -94,7 +94,7 @@
       "value": 92.392,
       "sourceLabel": "anthropic/claude-sonnet-5-5",
       "effort": "max",
-      "locator": "research/2026-10-23-swe-benchmarks/vals-catalogue-2026-10-23.json benchmarks[slug=vibe-code].coverage[claude-sonnet-5-5]",
+      "locator": "research/2026-10-25-board-reread/vals-catalogue-2026-10-25.json benchmarks[slug=vibe-code].coverage[claude-sonnet-5-5]",
       "stderr": 1.26,
       "note": "AA labels this configuration 'Claude Sonnet 5.5 (max with fallback)'; Vals has no fallback qualifier."
     },
@@ -104,7 +104,7 @@
       "value": 87.73,
       "sourceLabel": "deepseek/deepseek-v4.1-flash-1017",
       "effort": "max",
-      "locator": "research/2026-10-23-swe-benchmarks/vals-catalogue-2026-10-23.json benchmarks[slug=vibe-code].coverage[deepseek-v4-1-flash-1017]",
+      "locator": "research/2026-10-25-board-reread/vals-catalogue-2026-10-25.json benchmarks[slug=vibe-code].coverage[deepseek-v4-1-flash-1017]",
       "stderr": 2.752,
       "note": "Board has deepseek/deepseek-v4.1-flash (Vals: separate release of 2026-09-10, high effort, 84.739); not mapped to the 1017 release (2026-10-17)."
     },
@@ -114,7 +114,7 @@
       "value": 91.906,
       "sourceLabel": "google/gemini-4-argon",
       "effort": "high",
-      "locator": "research/2026-10-23-swe-benchmarks/vals-catalogue-2026-10-23.json benchmarks[slug=vibe-code].coverage[gemini-4-argon]",
+      "locator": "research/2026-10-25-board-reread/vals-catalogue-2026-10-25.json benchmarks[slug=vibe-code].coverage[gemini-4-argon]",
       "stderr": 1.899
     },
     {
@@ -123,7 +123,7 @@
       "value": 89.594,
       "sourceLabel": "openai/gpt-6-astra",
       "effort": "max",
-      "locator": "research/2026-10-23-swe-benchmarks/vals-catalogue-2026-10-23.json benchmarks[slug=vibe-code].coverage[gpt-6-astra]",
+      "locator": "research/2026-10-25-board-reread/vals-catalogue-2026-10-25.json benchmarks[slug=vibe-code].coverage[gpt-6-astra]",
       "stderr": 2.174
     },
     {
@@ -132,7 +132,7 @@
       "value": 81.649,
       "sourceLabel": "openai/gpt-6-luna",
       "effort": "max",
-      "locator": "research/2026-10-23-swe-benchmarks/vals-catalogue-2026-10-23.json benchmarks[slug=vibe-code].coverage[gpt-6-luna]",
+      "locator": "research/2026-10-25-board-reread/vals-catalogue-2026-10-25.json benchmarks[slug=vibe-code].coverage[gpt-6-luna]",
       "stderr": 3.377
     },
     {
@@ -141,7 +141,7 @@
       "value": 88.931,
       "sourceLabel": "openai/gpt-6.1-sol",
       "effort": "max",
-      "locator": "research/2026-10-23-swe-benchmarks/vals-catalogue-2026-10-23.json benchmarks[slug=vibe-code].coverage[gpt-6.1-sol]",
+      "locator": "research/2026-10-25-board-reread/vals-catalogue-2026-10-25.json benchmarks[slug=vibe-code].coverage[gpt-6.1-sol]",
       "stderr": 1.893
     },
     {
@@ -150,10 +150,20 @@
       "value": 85.223,
       "sourceLabel": "xiaomi/mimo-v2.6-pro",
       "effort": null,
-      "locator": "research/2026-10-23-swe-benchmarks/vals-catalogue-2026-10-23.json benchmarks[slug=vibe-code].coverage[mimo-v2-6-pro]",
+      "locator": "research/2026-10-25-board-reread/vals-catalogue-2026-10-25.json benchmarks[slug=vibe-code].coverage[mimo-v2-6-pro]",
       "stderr": 3.392,
       "match": "owner (O54): AA's configuration is high; Vals records reasoning enabled with no level, taken as high (E252)",
       "note": "AA plots this model in reasoning mode with no effort label; Vals effort recorded as null (not stated). Vals model page: evaluated 'with reasoning enabled'."
+    },
+    {
+      "modelId": "kimi-k3-1-pro",
+      "leaf": "vibeCode",
+      "value": 84.894,
+      "sourceLabel": "kimi/kimi-k3.1-pro",
+      "effort": "max",
+      "locator": "research/2026-10-25-board-reread/vals-catalogue-2026-10-25.json benchmarks[slug=vibe-code].coverage[kimi-k3-1-pro]",
+      "stderr": 2.949,
+      "note": "Owner decision O66 (2026-10-25): AA plots Kimi K3.1 Pro without an effort; Moonshot's API documents reasoning_effort low / high / max with max the default, so its configuration is taken at max, its maximum effort."
     },
     {
       "modelId": "claude-haiku-5-5-max",
@@ -161,7 +171,7 @@
       "value": 52.36,
       "sourceLabel": "anthropic/claude-haiku-5-5",
       "effort": "max",
-      "locator": "research/2026-10-23-swe-benchmarks/vals-catalogue-2026-10-23.json benchmarks[slug=code-migration-v1-1].coverage[claude-haiku-5-5-max]",
+      "locator": "research/2026-10-25-board-reread/vals-catalogue-2026-10-25.json benchmarks[slug=code-migration-v1-1].coverage[claude-haiku-5-5-max]",
       "stderr": 3.489
     },
     {
@@ -170,7 +180,7 @@
       "value": 81.012,
       "sourceLabel": "anthropic/claude-opus-5-5",
       "effort": "max",
-      "locator": "research/2026-10-23-swe-benchmarks/vals-catalogue-2026-10-23.json benchmarks[slug=code-migration-v1-1].coverage[claude-opus-5-5]",
+      "locator": "research/2026-10-25-board-reread/vals-catalogue-2026-10-25.json benchmarks[slug=code-migration-v1-1].coverage[claude-opus-5-5]",
       "stderr": 3.207,
       "note": "AA labels this configuration 'Claude Opus 5.5 (max with fallback)'; Vals has no fallback qualifier."
     },
@@ -180,7 +190,7 @@
       "value": 86.875,
       "sourceLabel": "anthropic/claude-sonnet-5-5",
       "effort": "max",
-      "locator": "research/2026-10-23-swe-benchmarks/vals-catalogue-2026-10-23.json benchmarks[slug=code-migration-v1-1].coverage[claude-sonnet-5-5]",
+      "locator": "research/2026-10-25-board-reread/vals-catalogue-2026-10-25.json benchmarks[slug=code-migration-v1-1].coverage[claude-sonnet-5-5]",
       "stderr": 1.521,
       "note": "AA labels this configuration 'Claude Sonnet 5.5 (max with fallback)'; Vals has no fallback qualifier."
     },
@@ -190,7 +200,7 @@
       "value": 67.524,
       "sourceLabel": "deepseek/deepseek-v4.1-flash-1017",
       "effort": "max",
-      "locator": "research/2026-10-23-swe-benchmarks/vals-catalogue-2026-10-23.json benchmarks[slug=code-migration-v1-1].coverage[deepseek-v4-1-flash-1017]",
+      "locator": "research/2026-10-25-board-reread/vals-catalogue-2026-10-25.json benchmarks[slug=code-migration-v1-1].coverage[deepseek-v4-1-flash-1017]",
       "stderr": 2.763,
       "note": "Board has deepseek/deepseek-v4.1-flash (Vals: separate release of 2026-09-10, max effort, 58.936); not mapped to the 1017 release (2026-10-17)."
     },
@@ -200,7 +210,7 @@
       "value": 70.796,
       "sourceLabel": "google/gemini-4-argon",
       "effort": "high",
-      "locator": "research/2026-10-23-swe-benchmarks/vals-catalogue-2026-10-23.json benchmarks[slug=code-migration-v1-1].coverage[gemini-4-argon]",
+      "locator": "research/2026-10-25-board-reread/vals-catalogue-2026-10-25.json benchmarks[slug=code-migration-v1-1].coverage[gemini-4-argon]",
       "stderr": 3.723
     },
     {
@@ -209,7 +219,7 @@
       "value": 80.579,
       "sourceLabel": "openai/gpt-6-astra",
       "effort": "max",
-      "locator": "research/2026-10-23-swe-benchmarks/vals-catalogue-2026-10-23.json benchmarks[slug=code-migration-v1-1].coverage[gpt-6-astra]",
+      "locator": "research/2026-10-25-board-reread/vals-catalogue-2026-10-25.json benchmarks[slug=code-migration-v1-1].coverage[gpt-6-astra]",
       "stderr": 2.336
     },
     {
@@ -218,7 +228,7 @@
       "value": 46.669,
       "sourceLabel": "openai/gpt-6-luna",
       "effort": "max",
-      "locator": "research/2026-10-23-swe-benchmarks/vals-catalogue-2026-10-23.json benchmarks[slug=code-migration-v1-1].coverage[gpt-6-luna]",
+      "locator": "research/2026-10-25-board-reread/vals-catalogue-2026-10-25.json benchmarks[slug=code-migration-v1-1].coverage[gpt-6-luna]",
       "stderr": 3.613
     },
     {
@@ -227,7 +237,7 @@
       "value": 77.324,
       "sourceLabel": "openai/gpt-6.1-sol",
       "effort": "max",
-      "locator": "research/2026-10-23-swe-benchmarks/vals-catalogue-2026-10-23.json benchmarks[slug=code-migration-v1-1].coverage[gpt-6.1-sol]",
+      "locator": "research/2026-10-25-board-reread/vals-catalogue-2026-10-25.json benchmarks[slug=code-migration-v1-1].coverage[gpt-6.1-sol]",
       "stderr": 2.976
     },
     {
@@ -236,7 +246,7 @@
       "value": 48.786,
       "sourceLabel": "xiaomi/mimo-v2.6-pro",
       "effort": null,
-      "locator": "research/2026-10-23-swe-benchmarks/vals-catalogue-2026-10-23.json benchmarks[slug=code-migration-v1-1].coverage[mimo-v2-6-pro]",
+      "locator": "research/2026-10-25-board-reread/vals-catalogue-2026-10-25.json benchmarks[slug=code-migration-v1-1].coverage[mimo-v2-6-pro]",
       "stderr": 3.876,
       "match": "owner (O54): AA's configuration is high; Vals records reasoning enabled with no level, taken as high (E252)",
       "note": "AA plots this model in reasoning mode with no effort label; Vals effort recorded as null (not stated). Vals model page: evaluated 'with reasoning enabled'."
@@ -244,165 +254,273 @@
     {
       "modelId": "claude-haiku-5-5-max",
       "leaf": "livebench2Overall",
-      "value": 75.64,
+      "value": 69.85,
       "sourceLabel": "claude-haiku-5.5",
       "effort": "max",
-      "locator": "research/2026-10-23-swe-benchmarks/other-coverage-2026-10-23.json benchmarks[key=livebench2-coding].coverage[claude-haiku-5-5-max]",
+      "locator": "research/2026-10-25-board-reread/other-coverage-2026-10-25.json benchmarks[key=livebench2-coding].coverage[claude-haiku-5-5-max]",
       "categories": {
-        "long_agentic": 57.6,
+        "long_agentic": 40.0,
         "reasoning": 82.4,
         "coding": 91.4,
-        "browser": 80.0,
+        "browser": 69.5,
         "data_analysis": 53.1,
         "research": 81.9,
         "design": 83.1
       },
-      "note": "Effort from bundle model metadata (main.074b2ee8.js); single run; 29 tasks."
+      "weights": {
+        "long_agentic": 2.0,
+        "reasoning": 1.0,
+        "coding": 1.5,
+        "browser": 1.0,
+        "data_analysis": 1.0,
+        "research": 1.0,
+        "design": 1.5
+      },
+      "note": "2026-10-23 release (O67); effort from the site bundle's model metadata."
     },
     {
       "modelId": "claude-opus-5-5",
       "leaf": "livebench2Overall",
-      "value": 86.53,
+      "value": 85.14,
       "sourceLabel": "claude-opus-5.5",
       "effort": "max",
-      "locator": "research/2026-10-23-swe-benchmarks/other-coverage-2026-10-23.json benchmarks[key=livebench2-coding].coverage[claude-opus-5-5]",
+      "locator": "research/2026-10-25-board-reread/other-coverage-2026-10-25.json benchmarks[key=livebench2-coding].coverage[claude-opus-5-5]",
       "categories": {
-        "long_agentic": 85.0,
+        "long_agentic": 72.8,
         "reasoning": 92.2,
         "coding": 96.3,
-        "browser": 80.0,
+        "browser": 88.4,
         "data_analysis": 80.3,
         "research": 85.0,
         "design": 86.9
       },
-      "note": "Effort from bundle model metadata (main.074b2ee8.js); single run; 29 tasks."
+      "weights": {
+        "long_agentic": 2.0,
+        "reasoning": 1.0,
+        "coding": 1.5,
+        "browser": 1.0,
+        "data_analysis": 1.0,
+        "research": 1.0,
+        "design": 1.5
+      },
+      "note": "2026-10-23 release (O67); effort from the site bundle's model metadata."
     },
     {
       "modelId": "claude-sonnet-5-5",
       "leaf": "livebench2Overall",
-      "value": 82.46,
+      "value": 80.04,
       "sourceLabel": "claude-sonnet-5.5",
       "effort": "max",
-      "locator": "research/2026-10-23-swe-benchmarks/other-coverage-2026-10-23.json benchmarks[key=livebench2-coding].coverage[claude-sonnet-5-5]",
+      "locator": "research/2026-10-25-board-reread/other-coverage-2026-10-25.json benchmarks[key=livebench2-coding].coverage[claude-sonnet-5-5]",
       "categories": {
-        "long_agentic": 78.8,
+        "long_agentic": 63.4,
         "reasoning": 91.6,
         "coding": 94.7,
-        "browser": 84.0,
+        "browser": 89.3,
         "data_analysis": 59.5,
         "research": 83.6,
         "design": 85.0
       },
-      "note": "Effort from bundle model metadata (main.074b2ee8.js); single run; 29 tasks."
+      "weights": {
+        "long_agentic": 2.0,
+        "reasoning": 1.0,
+        "coding": 1.5,
+        "browser": 1.0,
+        "data_analysis": 1.0,
+        "research": 1.0,
+        "design": 1.5
+      },
+      "note": "2026-10-23 release (O67); effort from the site bundle's model metadata."
     },
     {
       "modelId": "deepseek-v4-1-flash-1017",
       "leaf": "livebench2Overall",
-      "value": 79.2,
+      "value": 74.02,
       "sourceLabel": "deepseek-v4.1-flash-1017",
       "effort": "max",
-      "locator": "research/2026-10-23-swe-benchmarks/other-coverage-2026-10-23.json benchmarks[key=livebench2-coding].coverage[deepseek-v4-1-flash-1017]",
+      "locator": "research/2026-10-25-board-reread/other-coverage-2026-10-25.json benchmarks[key=livebench2-coding].coverage[deepseek-v4-1-flash-1017]",
       "categories": {
-        "long_agentic": 50.9,
+        "long_agentic": 40.9,
         "reasoning": 89.1,
         "coding": 96.0,
-        "browser": 76.0,
+        "browser": 67.2,
         "data_analysis": 79.5,
         "research": 79.5,
         "design": 83.4
       },
-      "note": "Effort from bundle model metadata (main.074b2ee8.js); single run; 29 tasks. Version \"1017\" in metadata."
+      "weights": {
+        "long_agentic": 2.0,
+        "reasoning": 1.0,
+        "coding": 1.5,
+        "browser": 1.0,
+        "data_analysis": 1.0,
+        "research": 1.0,
+        "design": 1.5
+      },
+      "note": "2026-10-23 release (O67); effort from the site bundle's model metadata."
     },
     {
       "modelId": "gemini-4-argon",
       "leaf": "livebench2Overall",
-      "value": 84.1,
+      "value": 79.3,
       "sourceLabel": "gemini-4-argon",
       "effort": "high",
-      "locator": "research/2026-10-23-swe-benchmarks/other-coverage-2026-10-23.json benchmarks[key=livebench2-coding].coverage[gemini-4-argon]",
+      "locator": "research/2026-10-25-board-reread/other-coverage-2026-10-25.json benchmarks[key=livebench2-coding].coverage[gemini-4-argon]",
       "categories": {
-        "long_agentic": 69.9,
+        "long_agentic": 61.2,
         "reasoning": 95.1,
         "coding": 89.7,
-        "browser": 92.0,
+        "browser": 82.8,
         "data_analysis": 85.2,
         "research": 83.1,
         "design": 73.7
       },
-      "note": "Effort from bundle model metadata (main.074b2ee8.js); single run; 29 tasks."
+      "weights": {
+        "long_agentic": 2.0,
+        "reasoning": 1.0,
+        "coding": 1.5,
+        "browser": 1.0,
+        "data_analysis": 1.0,
+        "research": 1.0,
+        "design": 1.5
+      },
+      "note": "2026-10-23 release (O67); effort from the site bundle's model metadata."
     },
     {
       "modelId": "gpt-6-astra",
       "leaf": "livebench2Overall",
-      "value": 86.14,
+      "value": 85.64,
       "sourceLabel": "gpt-6-astra",
       "effort": "max",
-      "locator": "research/2026-10-23-swe-benchmarks/other-coverage-2026-10-23.json benchmarks[key=livebench2-coding].coverage[gpt-6-astra]",
+      "locator": "research/2026-10-25-board-reread/other-coverage-2026-10-25.json benchmarks[key=livebench2-coding].coverage[gpt-6-astra]",
       "categories": {
-        "long_agentic": 82.4,
+        "long_agentic": 77.5,
         "reasoning": 92.7,
         "coding": 93.7,
-        "browser": 84.0,
+        "browser": 91.3,
         "data_analysis": 83.0,
         "research": 85.2,
         "design": 82.0
       },
-      "note": "Effort from bundle model metadata (main.074b2ee8.js); single run; 29 tasks."
+      "weights": {
+        "long_agentic": 2.0,
+        "reasoning": 1.0,
+        "coding": 1.5,
+        "browser": 1.0,
+        "data_analysis": 1.0,
+        "research": 1.0,
+        "design": 1.5
+      },
+      "note": "2026-10-23 release (O67); effort from the site bundle's model metadata."
     },
     {
       "modelId": "gpt-6-luna",
       "leaf": "livebench2Overall",
-      "value": 69.4,
+      "value": 64.59,
       "sourceLabel": "gpt-6-luna",
       "effort": "max",
-      "locator": "research/2026-10-23-swe-benchmarks/other-coverage-2026-10-23.json benchmarks[key=livebench2-coding].coverage[gpt-6-luna]",
+      "locator": "research/2026-10-25-board-reread/other-coverage-2026-10-25.json benchmarks[key=livebench2-coding].coverage[gpt-6-luna]",
       "categories": {
-        "long_agentic": 48.1,
+        "long_agentic": 30.9,
         "reasoning": 81.8,
         "coding": 84.5,
-        "browser": 72.0,
+        "browser": 70.3,
         "data_analysis": 73.4,
         "research": 43.5,
         "design": 82.5
       },
-      "note": "Effort from bundle model metadata (main.074b2ee8.js); single run; 29 tasks."
+      "weights": {
+        "long_agentic": 2.0,
+        "reasoning": 1.0,
+        "coding": 1.5,
+        "browser": 1.0,
+        "data_analysis": 1.0,
+        "research": 1.0,
+        "design": 1.5
+      },
+      "note": "2026-10-23 release (O67); effort from the site bundle's model metadata."
     },
     {
       "modelId": "gpt-6.1-sol",
       "leaf": "livebench2Overall",
-      "value": 85.41,
+      "value": 84.07,
       "sourceLabel": "gpt-6.1-sol",
       "effort": "max",
-      "locator": "research/2026-10-23-swe-benchmarks/other-coverage-2026-10-23.json benchmarks[key=livebench2-coding].coverage[gpt-6.1-sol]",
+      "locator": "research/2026-10-25-board-reread/other-coverage-2026-10-25.json benchmarks[key=livebench2-coding].coverage[gpt-6.1-sol]",
       "categories": {
-        "long_agentic": 73.0,
+        "long_agentic": 68.7,
         "reasoning": 92.6,
         "coding": 96.0,
-        "browser": 88.0,
+        "browser": 93.3,
         "data_analysis": 82.7,
         "research": 83.5,
         "design": 82.1
       },
-      "note": "Effort from bundle model metadata (main.074b2ee8.js); single run; 29 tasks."
+      "weights": {
+        "long_agentic": 2.0,
+        "reasoning": 1.0,
+        "coding": 1.5,
+        "browser": 1.0,
+        "data_analysis": 1.0,
+        "research": 1.0,
+        "design": 1.5
+      },
+      "note": "2026-10-23 release (O67); effort from the site bundle's model metadata."
     },
     {
       "modelId": "mimo-v2-6-pro",
       "leaf": "livebench2Overall",
-      "value": 74.87,
+      "value": 68.48,
       "sourceLabel": "mimo-v2.6-pro",
       "effort": "high",
-      "locator": "research/2026-10-23-swe-benchmarks/other-coverage-2026-10-23.json benchmarks[key=livebench2-coding].coverage[mimo-v2-6-pro]",
+      "locator": "research/2026-10-25-board-reread/other-coverage-2026-10-25.json benchmarks[key=livebench2-coding].coverage[mimo-v2-6-pro]",
       "categories": {
-        "long_agentic": 47.5,
+        "long_agentic": 35.2,
         "reasoning": 79.6,
         "coding": 81.5,
-        "browser": 88.0,
+        "browser": 77.3,
         "data_analysis": 72.3,
         "research": 76.7,
         "design": 78.5
       },
+      "weights": {
+        "long_agentic": 2.0,
+        "reasoning": 1.0,
+        "coding": 1.5,
+        "browser": 1.0,
+        "data_analysis": 1.0,
+        "research": 1.0,
+        "design": 1.5
+      },
       "match": "owner (O54): AA's configuration is high; the source labels it high",
-      "note": "Effort from bundle model metadata (main.074b2ee8.js); single run; 29 tasks. AA plots this model without an effort label (reasoning mode); a source row at one labelled effort is plausible, not exact."
+      "note": "2026-10-23 release (O67); effort from the site bundle's model metadata."
+    },
+    {
+      "modelId": "kimi-k3-1-pro",
+      "leaf": "livebench2Overall",
+      "value": 71.29,
+      "sourceLabel": "kimi-k3.1-pro",
+      "effort": "max",
+      "locator": "research/2026-10-25-board-reread/other-coverage-2026-10-25.json benchmarks[key=livebench2-coding].coverage[kimi-k3-1-pro]",
+      "categories": {
+        "long_agentic": 39.1,
+        "reasoning": 91.1,
+        "coding": 81.8,
+        "browser": 75.9,
+        "data_analysis": 79.1,
+        "research": 77.9,
+        "design": 77.8
+      },
+      "weights": {
+        "long_agentic": 2.0,
+        "reasoning": 1.0,
+        "coding": 1.5,
+        "browser": 1.0,
+        "data_analysis": 1.0,
+        "research": 1.0,
+        "design": 1.5
+      },
+      "note": "Owner decision O66 (2026-10-25): AA plots Kimi K3.1 Pro without an effort; Moonshot's API documents reasoning_effort low / high / max with max the default, so its configuration is taken at max, its maximum effort. LiveBench's model metadata records effort max."
     },
     {
       "modelId": "claude-haiku-5-5-high",
@@ -410,7 +528,7 @@
       "value": 51.55,
       "sourceLabel": "Haiku 5.5 (High)",
       "effort": "high",
-      "locator": "research/2026-10-23-swe-benchmarks/other-coverage-2026-10-23.json benchmarks[key=aicd-non-bug].coverage[claude-haiku-5-5-high]",
+      "locator": "research/2026-10-25-board-reread/other-coverage-2026-10-25.json benchmarks[key=aicd-non-bug].coverage[claude-haiku-5-5-high]",
       "note": "Tested 2026-10-08 with Claude Code; cost/prompt $0.05.",
       "harness": "Claude Code",
       "tested": "2026-10-08"
@@ -421,7 +539,7 @@
       "value": 51.32,
       "sourceLabel": "Haiku 5.5 (Medium)",
       "effort": "medium",
-      "locator": "research/2026-10-23-swe-benchmarks/other-coverage-2026-10-23.json benchmarks[key=aicd-non-bug].coverage[claude-haiku-5-5-medium]",
+      "locator": "research/2026-10-25-board-reread/other-coverage-2026-10-25.json benchmarks[key=aicd-non-bug].coverage[claude-haiku-5-5-medium]",
       "note": "Tested 2026-10-08 with Claude Code; cost/prompt $0.03.",
       "harness": "Claude Code",
       "tested": "2026-10-08"
@@ -432,7 +550,7 @@
       "value": 57.68,
       "sourceLabel": "Opus 5.5 (High)",
       "effort": "high",
-      "locator": "research/2026-10-23-swe-benchmarks/other-coverage-2026-10-23.json benchmarks[key=aicd-non-bug].coverage[claude-opus-5-5-high]",
+      "locator": "research/2026-10-25-board-reread/other-coverage-2026-10-25.json benchmarks[key=aicd-non-bug].coverage[claude-opus-5-5-high]",
       "note": "Tested 2026-10-20 with Claude Code; cost/prompt $0.83.",
       "harness": "Claude Code",
       "tested": "2026-10-20"
@@ -443,7 +561,7 @@
       "value": 56.95,
       "sourceLabel": "Opus 5.5 (Medium)",
       "effort": "medium",
-      "locator": "research/2026-10-23-swe-benchmarks/other-coverage-2026-10-23.json benchmarks[key=aicd-non-bug].coverage[claude-opus-5-5-medium]",
+      "locator": "research/2026-10-25-board-reread/other-coverage-2026-10-25.json benchmarks[key=aicd-non-bug].coverage[claude-opus-5-5-medium]",
       "note": "Tested 2026-10-19 with Claude Code; cost/prompt $0.57.",
       "harness": "Claude Code",
       "tested": "2026-10-19"
@@ -454,7 +572,7 @@
       "value": 52.24,
       "sourceLabel": "Deepseek-V4.1-Flash-1017 (Max)",
       "effort": "max",
-      "locator": "research/2026-10-23-swe-benchmarks/other-coverage-2026-10-23.json benchmarks[key=aicd-non-bug].coverage[deepseek-v4-1-flash-1017]",
+      "locator": "research/2026-10-25-board-reread/other-coverage-2026-10-25.json benchmarks[key=aicd-non-bug].coverage[deepseek-v4-1-flash-1017]",
       "note": "Tested 2026-10-18 with DeepSeek Harness; one of 2 rows for this configuration, chosen by the harness of its Bug Hunt record (I50 M2); the other rows are listed under alternates.",
       "harness": "DeepSeek Harness",
       "tested": "2026-10-18",
@@ -473,7 +591,7 @@
       "value": 49.9,
       "sourceLabel": "Gemini 4 Argon (High)",
       "effort": "high",
-      "locator": "research/2026-10-23-swe-benchmarks/other-coverage-2026-10-23.json benchmarks[key=aicd-non-bug].coverage[gemini-4-argon]",
+      "locator": "research/2026-10-25-board-reread/other-coverage-2026-10-25.json benchmarks[key=aicd-non-bug].coverage[gemini-4-argon]",
       "note": "Tested 2026-10-14 with Devin; cost/prompt N/A.",
       "harness": "Devin",
       "tested": "2026-10-14"
@@ -484,7 +602,7 @@
       "value": 30.51,
       "sourceLabel": "GPT-5.6-Luna (Low)",
       "effort": "low",
-      "locator": "research/2026-10-23-swe-benchmarks/other-coverage-2026-10-23.json benchmarks[key=aicd-non-bug].coverage[gpt-5.6-luna-low]",
+      "locator": "research/2026-10-25-board-reread/other-coverage-2026-10-25.json benchmarks[key=aicd-non-bug].coverage[gpt-5.6-luna-low]",
       "note": "Tested 2026-09-12 with Codex CLI; cost/prompt $0.01. Row is hidden by default as an older LLM; read from the page Livewire state with the hidden-model filter cleared (aicd-leaderboard-livewire-allrows.html).",
       "harness": "Codex CLI",
       "tested": "2026-09-12"
@@ -495,7 +613,7 @@
       "value": 56.77,
       "sourceLabel": "GPT-6-Astra (High)",
       "effort": "high",
-      "locator": "research/2026-10-23-swe-benchmarks/other-coverage-2026-10-23.json benchmarks[key=aicd-non-bug].coverage[gpt-6-astra-high]",
+      "locator": "research/2026-10-25-board-reread/other-coverage-2026-10-25.json benchmarks[key=aicd-non-bug].coverage[gpt-6-astra-high]",
       "note": "Tested 2026-10-01 with Codex CLI; cost/prompt $0.96.",
       "harness": "Codex CLI",
       "tested": "2026-10-01"
@@ -506,7 +624,7 @@
       "value": 51.99,
       "sourceLabel": "GPT-6-Luna (Max)",
       "effort": "max",
-      "locator": "research/2026-10-23-swe-benchmarks/other-coverage-2026-10-23.json benchmarks[key=aicd-non-bug].coverage[gpt-6-luna]",
+      "locator": "research/2026-10-25-board-reread/other-coverage-2026-10-25.json benchmarks[key=aicd-non-bug].coverage[gpt-6-luna]",
       "note": "Tested 2026-10-01 with Codex CLI; cost/prompt $0.03.",
       "harness": "Codex CLI",
       "tested": "2026-10-01"
@@ -517,7 +635,7 @@
       "value": 47.73,
       "sourceLabel": "GPT-6-Luna (High)",
       "effort": "high",
-      "locator": "research/2026-10-23-swe-benchmarks/other-coverage-2026-10-23.json benchmarks[key=aicd-non-bug].coverage[gpt-6-luna-high]",
+      "locator": "research/2026-10-25-board-reread/other-coverage-2026-10-25.json benchmarks[key=aicd-non-bug].coverage[gpt-6-luna-high]",
       "note": "Tested 2026-10-01 with Codex CLI; cost/prompt $0.01.",
       "harness": "Codex CLI",
       "tested": "2026-10-01"
@@ -528,7 +646,7 @@
       "value": 40.2,
       "sourceLabel": "GPT-6-Luna (Medium)",
       "effort": "medium",
-      "locator": "research/2026-10-23-swe-benchmarks/other-coverage-2026-10-23.json benchmarks[key=aicd-non-bug].coverage[gpt-6-luna-medium]",
+      "locator": "research/2026-10-25-board-reread/other-coverage-2026-10-25.json benchmarks[key=aicd-non-bug].coverage[gpt-6-luna-medium]",
       "note": "Tested 2026-09-30 with Codex CLI; cost/prompt $0.01.",
       "harness": "Codex CLI",
       "tested": "2026-09-30"
@@ -539,7 +657,7 @@
       "value": 49.94,
       "sourceLabel": "GPT-6-Luna (Xhigh)",
       "effort": "xhigh",
-      "locator": "research/2026-10-23-swe-benchmarks/other-coverage-2026-10-23.json benchmarks[key=aicd-non-bug].coverage[gpt-6-luna-xhigh]",
+      "locator": "research/2026-10-25-board-reread/other-coverage-2026-10-25.json benchmarks[key=aicd-non-bug].coverage[gpt-6-luna-xhigh]",
       "note": "Tested 2026-10-01 with Codex CLI; cost/prompt $0.03.",
       "harness": "Codex CLI",
       "tested": "2026-10-01"
@@ -550,7 +668,7 @@
       "value": 56.83,
       "sourceLabel": "GPT-6.1-Sol (High)",
       "effort": "high",
-      "locator": "research/2026-10-23-swe-benchmarks/other-coverage-2026-10-23.json benchmarks[key=aicd-non-bug].coverage[gpt-6.1-sol-high]",
+      "locator": "research/2026-10-25-board-reread/other-coverage-2026-10-25.json benchmarks[key=aicd-non-bug].coverage[gpt-6.1-sol-high]",
       "note": "Tested 2026-10-19 with Codex CLI; cost/prompt $0.23.",
       "harness": "Codex CLI",
       "tested": "2026-10-19"
@@ -561,7 +679,7 @@
       "value": 55.67,
       "sourceLabel": "GPT-6.1-Sol (Medium)",
       "effort": "medium",
-      "locator": "research/2026-10-23-swe-benchmarks/other-coverage-2026-10-23.json benchmarks[key=aicd-non-bug].coverage[gpt-6.1-sol-medium]",
+      "locator": "research/2026-10-25-board-reread/other-coverage-2026-10-25.json benchmarks[key=aicd-non-bug].coverage[gpt-6.1-sol-medium]",
       "note": "Tested 2026-10-19 with Codex CLI; cost/prompt $0.15.",
       "harness": "Codex CLI",
       "tested": "2026-10-19"
@@ -572,11 +690,22 @@
       "value": 47.56,
       "sourceLabel": "MiMo-V2.6 Pro (High)",
       "effort": "high",
-      "locator": "research/2026-10-23-swe-benchmarks/other-coverage-2026-10-23.json benchmarks[key=aicd-non-bug].coverage[mimo-v2-6-pro]",
+      "locator": "research/2026-10-25-board-reread/other-coverage-2026-10-25.json benchmarks[key=aicd-non-bug].coverage[mimo-v2-6-pro]",
       "match": "owner (O54): AA's configuration is high; the source labels it high",
       "note": "Tested 2026-10-02 with OpenCode; cost/prompt $0.09. AA plots this model without an effort label (reasoning mode); a source row at one labelled effort is plausible, not exact.",
       "harness": "OpenCode",
       "tested": "2026-10-02"
+    },
+    {
+      "modelId": "kimi-k3-1-pro",
+      "leaf": "aiCodingDaily",
+      "value": 54.63,
+      "sourceLabel": "Kimi K3.1 Pro (Max)",
+      "effort": "max",
+      "locator": "research/2026-10-25-board-reread/other-coverage-2026-10-25.json benchmarks[key=aicd-non-bug].coverage[kimi-k3-1-pro]",
+      "note": "Tested 2026-10-25 with OpenCode; cost/prompt $0.74. Owner decision O66 (2026-10-25): AA plots Kimi K3.1 Pro without an effort; Moonshot's API documents reasoning_effort low / high / max with max the default, so its configuration is taken at max, its maximum effort. The Kimi K3.1 Pro (High) row is another effort and is not used.",
+      "harness": "OpenCode",
+      "tested": "2026-10-25"
     }
   ]
 }

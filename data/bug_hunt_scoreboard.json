@@ -1,11 +1,11 @@
 {
   "schemaVersion": 1,
   "benchmark": "Bug Hunt Bench",
-  "sourceCommit": "46802fc312b6fd467b0baee519df05693f120232",
-  "sourceUrl": "https://github.com/phuryn/bug-hunt-bench/blob/46802fc312b6fd467b0baee519df05693f120232/results/combined-scoreboard.csv",
-  "capturedAt": "2026-10-23T05:37:06Z",
-  "sourceUpdated": "2026-10-19",
-  "sha256": "1636e4e08269a5d9b57214438f030374fb2b127cfe88cbb100734ac0195f490b",
+  "sourceCommit": "9089dc552a2b4eb94749c4da34d2cb872c7e0b43",
+  "sourceUrl": "https://github.com/phuryn/bug-hunt-bench/blob/9089dc552a2b4eb94749c4da34d2cb872c7e0b43/results/combined-scoreboard.csv",
+  "capturedAt": "2026-10-25T10:44:11Z",
+  "sourceUpdated": "2026-10-23",
+  "sha256": "ed39128a222d286997b987e0e40116496bae803221a2d3d056de04cd98e05e94",
   "purpose": "Every row of the owner's combined scoreboard at the pinned commit, so the build can check that every configuration with an exact AA DeepSWE result and a Bug Hunt result is in the roster (owner decision O31).",
   "rows": [
     {
@@ -1017,6 +1017,11 @@
       "model": "DeepSeek V4.1 Flash 1017 (low effort, OpenCode) - mean of 5",
       "harness": "OpenCode / DeepSeek API",
       "fixedOf105": 32.8
+    },
+    {
+      "model": "Kimi K3.1 Pro (max effort, Moonshot API) - mean of 3",
+      "harness": "Claude Code / Moonshot API",
+      "fixedOf105": 36.0
     }
   ]
 }

@@ -79,6 +79,8 @@ COHORT_MAP = {
     "grok-4.7": "grok-4.7-xhigh",
     # No verified exact identity in the pinned release; keep missing rows.
     "mimo-v2-6-pro": None,
+    # Added 2026-10-25 (a rendered-frontier vertex); released after the pinned legacy release.
+    "kimi-k3-1-pro": None,
     "mimo-v2-6-flash": None,
     # Added to the roster 2026-10-18; released after the pinned June 25 release.
     "claude-haiku-5-5": None,

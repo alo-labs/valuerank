@@ -12,13 +12,15 @@ import json
 from pathlib import Path
 
 HERE = Path(__file__).parent
+# O68 (2026-10-25): every added-leaf board re-read in full on 2026-10-25.
+READ = HERE.parent / "2026-10-25-board-reread"
 ROOT = HERE.parent.parent
 OWNER_MATCHED = {"mimo-v2-6-pro"}  # O54, E252
 
 LEAVES = {
     # leaf key: (coverage key, coverage file, source metadata)
     "vibeCode": ("vibe-code", "vals", {
-        "benchmark": "Vibe Code Bench v1.1", "publisher": "Vals AI", "updated": "2026-10-20",
+        "benchmark": "Vibe Code Bench v1.1", "publisher": "Vals AI", "updated": "2026-10-24",
         "url": "https://www.vals.ai/benchmarks/vibe-code", "harness": "OpenHands, the same for every model",
         "metric": "test-workflow pass rate (percent), with Vals' published standard error", "unit": "percent",
         "sampling": {"kind": "publishedStandardError"},
@@ -29,20 +31,21 @@ LEAVES = {
         "metric": "hidden-test pass rate (percent), with Vals' published standard error", "unit": "percent",
         "sampling": {"kind": "publishedStandardError", "tasks": 130},
     }),
-    # O61 (2026-10-23): LiveBench 2.0 Overall, the plain mean of its seven category scores as LiveBench's site computes
-    # it (to two decimals), replaces the Long Agentic and Coding categories. The configuration match is the coverage
-    # capture's (one LiveBench row per model, at its top effort); the categories come from the release table.
+    # O61 (2026-10-23): LiveBench 2.0 Overall replaces the Long Agentic and Coding categories. O67 (2026-10-25): the
+    # 2026-10-23 release, whose Overall is LiveBench's weighted mean of its seven categories (the release's
+    # _overall_weights), to two decimals. The configuration match is the coverage capture's (one LiveBench row per model,
+    # at its top effort); the categories come from the release table.
     "livebench2Overall": ("livebench2-coding", "other", {
-        "benchmark": "LiveBench 2.0 Overall (release 2026-10-14)", "publisher": "LiveBench", "updated": "2026-10-18",
-        "url": "https://livebench.ai/data/20261014/table.csv", "harness": "LiveBench's own, one run per model at its top effort",
-        "metric": "mean of the seven category scores (Long Agentic, Reasoning, Coding, Browser, Data Analysis, Research, Design), 0-100",
+        "benchmark": "LiveBench 2.0 Overall (release 2026-10-23)", "publisher": "LiveBench", "updated": "2026-10-24",
+        "url": "https://livebench.ai/data/20261023/table.csv", "harness": "LiveBench's own, one run per model at its top effort",
+        "metric": "LiveBench's weighted Overall of the seven category scores (Long Agentic 2, Coding 1.5, Design 1.5, Reasoning, Browser, Data Analysis and Research 1; O67), 0-100",
         "unit": "percent",
         "sampling": {"kind": "categories", "tasks": {"long_agentic": 18, "reasoning": 4, "coding": 29, "browser": 25, "data_analysis": 3,
                                                      "research": 22, "design": 25}},
     }),
     "aiCodingDaily": ("aicd-non-bug", "other", {
         "benchmark": "AI Coding Daily LLM Coding Leaderboard (Laravel quality + React-TS quality + edge-case testing, max 60)",
-        "publisher": "AI Coding Daily (Povilas Korop)", "updated": "2026-10-21", "url": "https://aicodingdaily.com/leaderboard",
+        "publisher": "AI Coding Daily (Povilas Korop)", "updated": "2026-10-24", "url": "https://aicodingdaily.com/leaderboard",
         "harness": "varies by model: Claude Code, Codex CLI, OpenCode, Devin, DeepSeek's harness (named on each record)",
         "metric": "judged points out of 60 (the 10-point bug-finding column is excluded: it overlaps Bug Hunt)", "unit": "points of 60",
         "sampling": {"kind": "tasks", "tasks": 6, "unit": "graded projects (Laravel, React-TS and 4 edge-case projects)"},
@@ -54,7 +57,7 @@ def aicd_rows() -> dict[str, list[dict]]:
     """Every captured AI Coding Daily row by its model label (the board can list one model and effort more than once)."""
 
     rows: dict[str, list[dict]] = {}
-    for row in json.loads((HERE / "other-capture" / "aicd-leaderboard-allrows-parsed.json").read_text()):
+    for row in json.loads((READ / "aicd" / "leaderboard-allrows-parsed.json").read_text()):
         rows.setdefault(row["model"], []).append(row)
     return rows
 
@@ -92,14 +95,15 @@ def aicd_points(row: dict) -> float:
 
 
 def main() -> None:
-    vals_document = json.loads((HERE / "vals-catalogue-2026-10-23.json").read_text())
-    other_document = json.loads((HERE / "other-coverage-2026-10-23.json").read_text())
+    vals_document = json.loads((READ / "vals-catalogue-2026-10-25.json").read_text())
+    other_document = json.loads((READ / "other-coverage-2026-10-25.json").read_text())
     vals = {item["slug"]: item for item in vals_document["benchmarks"]}
     other = {item["key"]: item for item in other_document["benchmarks"]}
     # O59/O60: each source carries the instant its coverage was captured.
     captured = {"vals": vals_document["capturedAt"], "other": other_document["capturedAt"]}
-    cohort = [row["id"] for row in json.loads((HERE / "cohort-2026-10-23.json").read_text())["configurations"]]
-    table = {row["model"]: row for row in csv.DictReader((HERE / "other-capture" / "livebench2-table.csv").open())}
+    cohort = [row["id"] for row in json.loads((READ / "cohort-2026-10-25.json").read_text())["configurations"]]
+    table = {row["model"]: row for row in csv.DictReader((READ / "livebench" / "table-20261023.csv").open())}
+    weights = json.loads((READ / "livebench" / "weights-20261023.json").read_text())
     board = aicd_rows()
     records, sources = [], {}
     for leaf, (key, origin, meta) in LEAVES.items():
@@ -111,13 +115,14 @@ def main() -> None:
                 record = {
                     "modelId": model_id, "leaf": leaf, "value": cell["value"],
                     "sourceLabel": cell.get("valsKey") or cell.get("sourceLabel"), "effort": cell.get("effort"),
-                    "locator": f"research/2026-10-23-swe-benchmarks/{'vals-catalogue' if origin == 'vals' else 'other-coverage'}-2026-10-23.json"
+                    "locator": f"research/2026-10-25-board-reread/{'vals-catalogue' if origin == 'vals' else 'other-coverage'}-2026-10-25.json"
                                f" benchmarks[{'slug' if origin == 'vals' else 'key'}={key}].coverage[{model_id}]",
                 }
                 if leaf == "livebench2Overall":
                     categories = {name: float(value) for name, value in table[cell["sourceLabel"]].items() if name != "model"}
-                    record["value"] = round(sum(categories.values()) / len(categories), 2)
+                    record["value"] = round(sum(weights[name] * value for name, value in categories.items()) / sum(weights[name] for name in categories), 2)
                     record["categories"] = categories
+                    record["weights"] = weights
                 if cell.get("stderr") is not None:
                     record["stderr"] = cell["stderr"]
                 if cell["status"] == "plausible":

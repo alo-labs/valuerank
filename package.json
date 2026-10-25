@@ -19,7 +19,7 @@
     "build:docs": "python3 -m valuerank.emit_docs && python3 -m valuerank.site.build && python3 -m valuerank.draft_figures manifest",
     "build:publication": "npm run build:docs && npm run generate:og",
     "generate:og": "node scripts/generate-og-cards.mjs",
-    "refresh": "npm run refresh:external && npm run build:aa && npm run build:scores && npm run reconcile:aa && npm run build:publication",
+    "refresh": "npm run refresh:external && npm run build:aa && npm run capture:basket && npm run build:scores && npm run reconcile:aa && npm run build:publication",
     "verify:docs": "VALUERANK_NOW=$(node -p \"require('./data/ranking_summary.json').observedAt\") npm run build:docs && git diff --exit-code --stat -- README.md methodology.md scores.md raw-data.md site data && test -z \"$(git status --porcelain -- site data)\" && python3 -m valuerank.draft_figures check",
     "test": "npm run test:py && npm run test:js && npm run test:e2e",
     "test:py": "python3 -m pytest --cov --cov-report=term-missing",

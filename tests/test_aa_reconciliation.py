@@ -888,14 +888,14 @@ def run_main(world, monkeypatch, capsys, args=()):
 
 
 def test_main_exit_zero_when_reconciled(world, monkeypatch, capsys, pinned_clock):
-    world.setup(inventory(observedAt="2026-10-17T00:00:00Z"))
+    world.setup(inventory(observedAt="2026-10-19T00:00:00Z"))
     status, out, report = run_main(world, monkeypatch, capsys)
     assert status == 0 and report["status"] == "reconciled"
     assert out == "AA reconciliation reconciled: data/aa_reconciliation_report.json\n"
 
 
 def test_main_exit_one_when_blocked_and_lists_issues(world, monkeypatch, capsys, pinned_clock):
-    world.setup(pair_doc(observedAt="2026-10-17T00:00:00Z"))
+    world.setup(pair_doc(observedAt="2026-10-19T00:00:00Z"))
     status, out, report = run_main(world, monkeypatch, capsys)
     assert status == 1 and report["status"] == "blocked"
     assert out.startswith("AA reconciliation blocked: data/aa_reconciliation_report.json\n- ")
@@ -903,7 +903,7 @@ def test_main_exit_one_when_blocked_and_lists_issues(world, monkeypatch, capsys,
 
 
 def test_main_report_only_exits_zero_even_when_blocked(world, monkeypatch, capsys, pinned_clock):
-    world.setup(pair_doc(observedAt="2026-10-17T00:00:00Z"))
+    world.setup(pair_doc(observedAt="2026-10-19T00:00:00Z"))
     status, _, report = run_main(world, monkeypatch, capsys, ["--report-only"])
     assert status == 0 and report["status"] == "blocked"
 
@@ -916,7 +916,7 @@ def test_main_blocks_when_inventory_is_missing(world, monkeypatch, capsys, pinne
 def test_module_guard_exits_with_main_status(world, monkeypatch, pinned_clock):
     import valuerank.paths as paths
 
-    world.setup(inventory(observedAt="2026-10-17T00:00:00Z"))
+    world.setup(inventory(observedAt="2026-10-19T00:00:00Z"))
     monkeypatch.setattr(paths, "ROOT", world.root)
     monkeypatch.setattr(paths, "DATA", world.data)
     monkeypatch.setattr(sys, "argv", ["aa_reconciliation"])

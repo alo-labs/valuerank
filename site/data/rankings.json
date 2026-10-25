@@ -6,7 +6,7 @@
   },
   "version": "v3.0.0",
   "publishDate": "October 19, 2026",
-  "observedAt": "2026-10-23T06:26:23Z",
+  "observedAt": "2026-10-25T09:56:47Z",
   "methodologyVersion": "3.0.0",
   "basketVersion": "SDLC basket v1",
   "bases": {
@@ -47,7 +47,7 @@
     "nearFrontierGap": "3",
     "nearFrontierRule": "A plotted configuration is near-frontier when its public (rounded integer) Intelligence Index is within 3 points of the rendered frontier's Index at its cost, meaning the highest Index among rendered-frontier points that cost no more. Every near-frontier family is ranked or is explicitly deferred by a dated, reasoned roster decision. Every configuration AA plots on the frontier or within the gap is a cohort row (O51); a near family's primary configuration is its near point with the smallest Index gap. The cost ratio to the frontier is reported for information only.",
     "policyText": "A plotted configuration is near-frontier when it lies within 3 Intelligence Index points of the rendered frontier at its cost. Every near-frontier model family must be in the primary ranking, with its own selected configuration, or be explicitly deferred with a dated, reasoned roster decision. The cost ratio to the cheapest frontier point of equal or higher intelligence is reported for information only.",
-    "observation": "Chart observed 2026-10-23T05:27:39Z (Intelligence Index v4.3.2): 697 catalog models selected, 189 plotted points and 18 rendered Pareto vertices across 7 families. 11 plotted points across 8 families are near-frontier.",
+    "observation": "Chart observed 2026-10-25T09:53:28Z (Intelligence Index v4.3.2): 698 catalog models selected, 190 plotted points and 19 rendered Pareto vertices across 8 families. 11 plotted points across 8 families are near-frontier.",
     "nearFrontierStatus": "Near-frontier models: 8 required, 0 deferred by roster decision.",
     "frontierFamilies": [
       {
@@ -69,6 +69,10 @@
       {
         "family": "GPT-6.1 Sol",
         "configuration": "GPT-6.1 Sol (max)"
+      },
+      {
+        "family": "Kimi K3.1 Pro",
+        "configuration": "Kimi K3.1 Pro"
       },
       {
         "family": "MiMo-V2.6-Flash",
@@ -107,8 +111,8 @@
       },
       {
         "family": "GPT-6 Astra",
-        "configuration": "GPT-6 Astra (xhigh)",
-        "gap": "2"
+        "configuration": "GPT-6 Astra (high)",
+        "gap": "3"
       },
       {
         "family": "Gemini 4 Argon",
@@ -297,7 +301,7 @@
         "value": 57.6223698102963,
         "status": "measured"
       },
-      "speed": 95.8510129559586,
+      "speed": 96.1511548287943,
       "aaFrontierTier": "frontier",
       "aaFrontierConfiguration": "Claude Opus 5.5 (max with fallback)",
       "aaFrontierIntelligenceGap": 0,
@@ -307,10 +311,10 @@
         "plan": 1
       },
       "overall": {
-        "api": 53.98178468213949,
-        "plan": 64.31713427060696
+        "api": 53.82540968213948,
+        "plan": 64.16075927060695
       },
-      "quality": 67.91906051781837,
+      "quality": 67.71056051781835,
       "qualityRank": 1,
       "dims": {
         "costComposite": null,
@@ -319,7 +323,7 @@
         "bugHunt": 39.714285714285715,
         "vibeCode": 90.294,
         "codeMigration": 81.012,
-        "livebench2Overall": 86.53,
+        "livebench2Overall": 85.14,
         "gdpval": 68.3135,
         "automationBench": 69.5386812863607,
         "omniscience": 73.20833333333333,
@@ -338,7 +342,7 @@
         "bugHunt": 41.7,
         "vibeCode": 90.294,
         "codeMigration": 81.012,
-        "livebench2Overall": 86.53,
+        "livebench2Overall": 85.14,
         "gdpval": 1866.27,
         "automationBench": 0.6953868128636069,
         "omniscience": 46.416666666666664,
@@ -406,7 +410,7 @@
       "band": {
         "api": [
           6,
-          9
+          8
         ],
         "plan": [
           1,
@@ -428,7 +432,7 @@
         "value": 56.0001286580794,
         "status": "measured"
       },
-      "speed": 133.818391860326,
+      "speed": 133.906917130213,
       "aaFrontierTier": "frontier",
       "aaFrontierConfiguration": "Claude Sonnet 5.5 (max with fallback)",
       "aaFrontierIntelligenceGap": 0,
@@ -438,10 +442,10 @@
         "plan": 4
       },
       "overall": {
-        "api": 53.535448313562,
-        "plan": 63.8307190661707
+        "api": 53.263198313562,
+        "plan": 63.5584690661707
       },
-      "quality": 67.0547274987033,
+      "quality": 66.6917274987033,
       "qualityRank": 2,
       "dims": {
         "costComposite": null,
@@ -450,7 +454,7 @@
         "bugHunt": 48.857142857142854,
         "vibeCode": 92.392,
         "codeMigration": 86.875,
-        "livebench2Overall": 82.46,
+        "livebench2Overall": 80.04,
         "gdpval": 66.891,
         "automationBench": 71.76882128193995,
         "omniscience": 66.15,
@@ -469,7 +473,7 @@
         "bugHunt": 51.3,
         "vibeCode": 92.392,
         "codeMigration": 86.875,
-        "livebench2Overall": 82.46,
+        "livebench2Overall": 80.04,
         "gdpval": 1837.82,
         "automationBench": 0.7176882128193995,
         "omniscience": 32.3,
@@ -534,7 +538,7 @@
       "band": {
         "api": [
           6,
-          9
+          8
         ],
         "plan": [
           1,
@@ -556,20 +560,20 @@
         "value": 51.8332597011541,
         "status": "measured"
       },
-      "speed": 54.3281820685133,
+      "speed": 58.8206752736493,
       "aaFrontierTier": "frontier",
       "aaFrontierConfiguration": "GPT-6.1 Sol (max)",
       "aaFrontierIntelligenceGap": 0,
       "aaFrontierFootnote": null,
       "rank": {
-        "api": 3,
+        "api": 1,
         "plan": 7
       },
       "overall": {
-        "api": 60.156636044107074,
-        "plan": 62.74988182625437
+        "api": 60.02126104410708,
+        "plan": 62.61450682625437
       },
-      "quality": 64.29488501376613,
+      "quality": 64.11438501376614,
       "qualityRank": 4,
       "dims": {
         "costComposite": null,
@@ -578,8 +582,8 @@
         "bugHunt": 42.19047619047619,
         "vibeCode": 88.931,
         "codeMigration": 77.324,
-        "livebench2Overall": 85.41,
-        "gdpval": 54.60499999999999,
+        "livebench2Overall": 84.07,
+        "gdpval": 54.81,
         "automationBench": 64.86844882398171,
         "omniscience": 70.76666666666667,
         "lcr": 83.0,
@@ -597,8 +601,8 @@
         "bugHunt": 44.3,
         "vibeCode": 88.931,
         "codeMigration": 77.324,
-        "livebench2Overall": 85.41,
-        "gdpval": 1592.1,
+        "livebench2Overall": 84.07,
+        "gdpval": 1596.2,
         "automationBench": 0.6486844882398171,
         "omniscience": 41.53333333333333,
         "lcr": 0.83,
@@ -650,7 +654,7 @@
       },
       "scenario": {
         "api": {
-          "top1": 0.0,
+          "top1": 1.0,
           "top3": 1.0,
           "frontier": 1.0
         },
@@ -687,7 +691,7 @@
         "value": 43.3950199670746,
         "status": "measured"
       },
-      "speed": 238.314202795609,
+      "speed": 234.216188536494,
       "aaFrontierTier": "near",
       "aaFrontierConfiguration": "Claude Haiku 5.5 (max)",
       "aaFrontierIntelligenceGap": 3,
@@ -697,10 +701,10 @@
         "plan": 11
       },
       "overall": {
-        "api": 51.47328458391714,
-        "plan": 59.83154550890208
+        "api": 50.83012208391714,
+        "plan": 59.18838300890208
       },
-      "quality": 51.293878714987116,
+      "quality": 50.43632871498711,
       "qualityRank": 8,
       "dims": {
         "costComposite": null,
@@ -709,8 +713,8 @@
         "bugHunt": 20.476190476190474,
         "vibeCode": 90.444,
         "codeMigration": 52.36,
-        "livebench2Overall": 75.64,
-        "gdpval": 55.856500000000004,
+        "livebench2Overall": 69.85,
+        "gdpval": 55.966,
         "automationBench": 35.411015132783625,
         "omniscience": 55.333333333333336,
         "lcr": 82.6666666666667,
@@ -728,8 +732,8 @@
         "bugHunt": 21.5,
         "vibeCode": 90.444,
         "codeMigration": 52.36,
-        "livebench2Overall": 75.64,
-        "gdpval": 1617.13,
+        "livebench2Overall": 69.85,
+        "gdpval": 1619.32,
         "automationBench": 0.35411015132783624,
         "omniscience": 10.666666666666666,
         "lcr": 0.826666666666667,
@@ -794,12 +798,12 @@
       "tier": "Budget",
       "band": {
         "api": [
-          6,
+          9,
           9
         ],
         "plan": [
           11,
-          20
+          21
         ]
       },
       "bandExcludesTransfer": true
@@ -817,7 +821,7 @@
         "value": 52.673669395513,
         "status": "measured"
       },
-      "speed": 56.2535705567599,
+      "speed": 67.7769430044794,
       "aaFrontierTier": "near",
       "aaFrontierConfiguration": "GPT-6 Astra (max)",
       "aaFrontierIntelligenceGap": 3,
@@ -827,10 +831,10 @@
         "plan": 14
       },
       "overall": {
-        "api": 53.82841372156053,
-        "plan": 58.8252847025515
+        "api": 53.782288721560526,
+        "plan": 58.779159702551496
       },
-      "quality": 65.00400168018204,
+      "quality": 64.94250168018203,
       "qualityRank": 3,
       "dims": {
         "costComposite": null,
@@ -839,8 +843,8 @@
         "bugHunt": 42.857142857142854,
         "vibeCode": 89.594,
         "codeMigration": 80.579,
-        "livebench2Overall": 86.14,
-        "gdpval": 53.588,
+        "livebench2Overall": 85.64,
+        "gdpval": 53.723,
         "automationBench": 68.49174806688876,
         "omniscience": 71.7,
         "lcr": 80.6666666666667,
@@ -858,8 +862,8 @@
         "bugHunt": 45.0,
         "vibeCode": 89.594,
         "codeMigration": 80.579,
-        "livebench2Overall": 86.14,
-        "gdpval": 1571.76,
+        "livebench2Overall": 85.64,
+        "gdpval": 1574.46,
         "automationBench": 0.6849174806688876,
         "omniscience": 43.4,
         "lcr": 0.806666666666667,
@@ -926,11 +930,11 @@
       "band": {
         "api": [
           6,
-          9
+          8
         ],
         "plan": [
           11,
-          20
+          21
         ]
       },
       "bandExcludesTransfer": false
@@ -948,7 +952,7 @@
         "value": 38.1245186869738,
         "status": "measured"
       },
-      "speed": 135.214499121147,
+      "speed": 138.462831485269,
       "aaFrontierTier": "frontier",
       "aaFrontierConfiguration": "GPT-6 Luna (max)",
       "aaFrontierIntelligenceGap": 0,
@@ -958,10 +962,10 @@
         "plan": 17
       },
       "overall": {
-        "api": 57.516504418501434,
-        "plan": 58.12042387886724
+        "api": 56.98201691850143,
+        "plan": 57.58593637886723
       },
-      "quality": 47.411991616369534,
+      "quality": 46.69934161636953,
       "qualityRank": 9,
       "dims": {
         "costComposite": null,
@@ -970,8 +974,8 @@
         "bugHunt": 17.428571428571427,
         "vibeCode": 81.649,
         "codeMigration": 46.669,
-        "livebench2Overall": 69.4,
-        "gdpval": 46.551,
+        "livebench2Overall": 64.59,
+        "gdpval": 46.6395,
         "automationBench": 53.16814034483175,
         "omniscience": 50.325,
         "lcr": 83.3333333333333,
@@ -989,8 +993,8 @@
         "bugHunt": 18.3,
         "vibeCode": 81.649,
         "codeMigration": 46.669,
-        "livebench2Overall": 69.4,
-        "gdpval": 1431.02,
+        "livebench2Overall": 64.59,
+        "gdpval": 1432.79,
         "automationBench": 0.5316814034483175,
         "omniscience": 0.65,
         "lcr": 0.833333333333333,
@@ -1058,7 +1062,7 @@
         ],
         "plan": [
           11,
-          20
+          21
         ]
       },
       "bandExcludesTransfer": true
@@ -1076,20 +1080,20 @@
         "value": 45.0965048681912,
         "status": "measured"
       },
-      "speed": 203.742544335617,
+      "speed": 169.08358466946,
       "aaFrontierTier": "near",
       "aaFrontierConfiguration": "DeepSeek V4.1 Flash 1017 (max)",
       "aaFrontierIntelligenceGap": 3,
       "aaFrontierFootnote": null,
       "rank": {
-        "api": 1,
+        "api": 2,
         "plan": 22
       },
       "overall": {
-        "api": 60.38662179090506,
-        "plan": 53.6581856331888
+        "api": 59.80387179090506,
+        "plan": 53.0754356331888
       },
-      "quality": 58.15769146301675,
+      "quality": 57.380691463016746,
       "qualityRank": 6,
       "dims": {
         "costComposite": null,
@@ -1098,7 +1102,7 @@
         "bugHunt": 40.666666666666664,
         "vibeCode": 87.73,
         "codeMigration": 67.524,
-        "livebench2Overall": 79.2,
+        "livebench2Overall": 74.02,
         "gdpval": 62.2885,
         "automationBench": 66.64095364949257,
         "omniscience": 52.35,
@@ -1117,7 +1121,7 @@
         "bugHunt": 42.7,
         "vibeCode": 87.73,
         "codeMigration": 67.524,
-        "livebench2Overall": 79.2,
+        "livebench2Overall": 74.02,
         "gdpval": 1745.77,
         "automationBench": 0.6664095364949257,
         "omniscience": 4.7,
@@ -1160,7 +1164,7 @@
       },
       "scenario": {
         "api": {
-          "top1": 1.0,
+          "top1": 0.0,
           "top3": 1.0,
           "frontier": 1.0
         },
@@ -1197,20 +1201,20 @@
         "value": 46.3242065310383,
         "status": "measured"
       },
-      "speed": 52.6200256226423,
+      "speed": 56.8119687782978,
       "aaFrontierTier": "frontier",
       "aaFrontierConfiguration": "MiMo-V2.6-Pro",
       "aaFrontierIntelligenceGap": 0,
       "aaFrontierFootnote": null,
       "rank": {
-        "api": 2,
+        "api": 3,
         "plan": 23
       },
       "overall": {
-        "api": 60.292266592541466,
-        "plan": 51.89848913455756
+        "api": 59.57237909254148,
+        "plan": 51.178601634557566
       },
-      "quality": 54.23053467083996,
+      "quality": 53.27068467083996,
       "qualityRank": 7,
       "dims": {
         "costComposite": null,
@@ -1219,8 +1223,8 @@
         "bugHunt": 17.142857142857142,
         "vibeCode": 85.223,
         "codeMigration": 48.786,
-        "livebench2Overall": 74.87,
-        "gdpval": 59.1645,
+        "livebench2Overall": 68.48,
+        "gdpval": 59.151,
         "automationBench": 58.623409434190854,
         "omniscience": 54.19166666666666,
         "lcr": 86.3333333333333,
@@ -1238,8 +1242,8 @@
         "bugHunt": 18,
         "vibeCode": 85.223,
         "codeMigration": 48.786,
-        "livebench2Overall": 74.87,
-        "gdpval": 1683.29,
+        "livebench2Overall": 68.48,
+        "gdpval": 1683.02,
         "automationBench": 0.5862340943419085,
         "omniscience": 8.383333333333333,
         "lcr": 0.863333333333333,
@@ -1321,7 +1325,7 @@
         "value": 52.5605655745982,
         "status": "measured"
       },
-      "speed": 81.5023279454512,
+      "speed": 78.8356384450369,
       "aaFrontierTier": "near",
       "aaFrontierConfiguration": "Gemini 4 Argon (high)",
       "aaFrontierIntelligenceGap": 1,
@@ -1331,10 +1335,10 @@
         "plan": 27
       },
       "overall": {
-        "api": 55.47686275090185,
-        "plan": 50.63092404628401
+        "api": 54.94057525090185,
+        "plan": 50.09463654628401
       },
-      "quality": 64.25647228383212,
+      "quality": 63.54142228383213,
       "qualityRank": 5,
       "dims": {
         "costComposite": null,
@@ -1343,8 +1347,8 @@
         "bugHunt": 38.761904761904766,
         "vibeCode": 91.906,
         "codeMigration": 70.796,
-        "livebench2Overall": 84.1,
-        "gdpval": 56.15549999999999,
+        "livebench2Overall": 79.3,
+        "gdpval": 56.20499999999999,
         "automationBench": 77.51346945899195,
         "omniscience": 71.175,
         "lcr": 79.6666666666667,
@@ -1362,8 +1366,8 @@
         "bugHunt": 40.7,
         "vibeCode": 91.906,
         "codeMigration": 70.796,
-        "livebench2Overall": 84.1,
-        "gdpval": 1623.11,
+        "livebench2Overall": 79.3,
+        "gdpval": 1624.1,
         "automationBench": 0.7751346945899195,
         "omniscience": 42.35,
         "lcr": 0.796666666666667,
@@ -1444,7 +1448,7 @@
         "value": 49.6258202733378,
         "status": "measured"
       },
-      "speed": 69.9216549386748,
+      "speed": 65.2579716533112,
       "aaFrontierTier": null,
       "aaFrontierConfiguration": null,
       "aaFrontierIntelligenceGap": null,
@@ -1561,7 +1565,7 @@
         "value": 53.3549259623252,
         "status": "measured"
       },
-      "speed": 68.5155750277027,
+      "speed": 69.630896692981,
       "aaFrontierTier": null,
       "aaFrontierConfiguration": null,
       "aaFrontierIntelligenceGap": null,
@@ -1678,7 +1682,7 @@
         "value": 41.2489304677024,
         "status": "measured"
       },
-      "speed": 192.468238146076,
+      "speed": 186.127571446598,
       "aaFrontierTier": "frontier",
       "aaFrontierConfiguration": "Claude Haiku 5.5 (xhigh)",
       "aaFrontierIntelligenceGap": 0,
@@ -1795,7 +1799,7 @@
         "value": 37.8240211671094,
         "status": "measured"
       },
-      "speed": 181.012503571331,
+      "speed": 180.519945676338,
       "aaFrontierTier": "frontier",
       "aaFrontierConfiguration": "Claude Haiku 5.5 (high)",
       "aaFrontierIntelligenceGap": 0,
@@ -1912,7 +1916,7 @@
         "value": 29.4523685891139,
         "status": "measured"
       },
-      "speed": 173.328043596833,
+      "speed": 173.139253959206,
       "aaFrontierTier": "near",
       "aaFrontierConfiguration": "Claude Haiku 5.5 (low)",
       "aaFrontierIntelligenceGap": 1,
@@ -2029,7 +2033,7 @@
         "value": 34.4646519474657,
         "status": "measured"
       },
-      "speed": 177.520010450848,
+      "speed": 179.117141046101,
       "aaFrontierTier": "frontier",
       "aaFrontierConfiguration": "Claude Haiku 5.5 (medium)",
       "aaFrontierIntelligenceGap": 0,
@@ -2146,7 +2150,7 @@
         "value": 41.7899103794639,
         "status": "measured"
       },
-      "speed": 64.3788190834396,
+      "speed": 60.1964584175013,
       "aaFrontierTier": null,
       "aaFrontierConfiguration": null,
       "aaFrontierIntelligenceGap": null,
@@ -2263,7 +2267,7 @@
         "value": 50.7771115797629,
         "status": "measured"
       },
-      "speed": 54.0971510836196,
+      "speed": 52.2937155235414,
       "aaFrontierTier": null,
       "aaFrontierConfiguration": null,
       "aaFrontierIntelligenceGap": null,
@@ -2380,7 +2384,7 @@
         "value": 53.5831959822067,
         "status": "measured"
       },
-      "speed": 77.3378196243521,
+      "speed": 80.3420037119972,
       "aaFrontierTier": "frontier",
       "aaFrontierConfiguration": "Claude Opus 5.5 (high with fallback)",
       "aaFrontierIntelligenceGap": 0,
@@ -2497,7 +2501,7 @@
         "value": 51.2434931792768,
         "status": "measured"
       },
-      "speed": 79.1139184015285,
+      "speed": 83.0038385398776,
       "aaFrontierTier": "near",
       "aaFrontierConfiguration": "Claude Opus 5.5 (medium with fallback)",
       "aaFrontierIntelligenceGap": 1,
@@ -2614,7 +2618,7 @@
         "value": 55.9873505840139,
         "status": "measured"
       },
-      "speed": 83.7532842098936,
+      "speed": 82.0442001498324,
       "aaFrontierTier": "frontier",
       "aaFrontierConfiguration": "Claude Opus 5.5 (xhigh with fallback)",
       "aaFrontierIntelligenceGap": 0,
@@ -2731,7 +2735,7 @@
         "value": 38.1638712882576,
         "status": "measured"
       },
-      "speed": 83.7882524910718,
+      "speed": 83.2076803354227,
       "aaFrontierTier": null,
       "aaFrontierConfiguration": null,
       "aaFrontierIntelligenceGap": null,
@@ -2848,7 +2852,7 @@
         "value": 46.7533528066958,
         "status": "measured"
       },
-      "speed": 102.108322678532,
+      "speed": 105.973186311864,
       "aaFrontierTier": null,
       "aaFrontierConfiguration": null,
       "aaFrontierIntelligenceGap": null,
@@ -2965,7 +2969,7 @@
         "value": 35.8681594577587,
         "status": "measured"
       },
-      "speed": 101.309164322518,
+      "speed": 105.194381914952,
       "aaFrontierTier": null,
       "aaFrontierConfiguration": null,
       "aaFrontierIntelligenceGap": null,
@@ -3082,7 +3086,7 @@
         "value": 40.838652287929,
         "status": "measured"
       },
-      "speed": 101.64056604037,
+      "speed": 106.143990595688,
       "aaFrontierTier": null,
       "aaFrontierConfiguration": null,
       "aaFrontierIntelligenceGap": null,
@@ -3199,7 +3203,7 @@
         "value": 51.8955544183089,
         "status": "measured"
       },
-      "speed": 105.232412368262,
+      "speed": 108.047239373505,
       "aaFrontierTier": "near",
       "aaFrontierConfiguration": "Claude Sonnet 5.5 (xhigh with fallback)",
       "aaFrontierIntelligenceGap": 2,
@@ -3316,7 +3320,7 @@
         "value": 34.3305129347816,
         "status": "measured"
       },
-      "speed": 149.993680727674,
+      "speed": 150.147659307021,
       "aaFrontierTier": null,
       "aaFrontierConfiguration": null,
       "aaFrontierIntelligenceGap": null,
@@ -3433,7 +3437,7 @@
         "value": 35.9967791278402,
         "status": "measured"
       },
-      "speed": 86.5586055788924,
+      "speed": 103.434579572368,
       "aaFrontierTier": null,
       "aaFrontierConfiguration": null,
       "aaFrontierIntelligenceGap": null,
@@ -3551,7 +3555,7 @@
         "value": 33.7054572377545,
         "status": "measured"
       },
-      "speed": 88.2383768266289,
+      "speed": 94.0836886023789,
       "aaFrontierTier": null,
       "aaFrontierConfiguration": null,
       "aaFrontierIntelligenceGap": null,
@@ -3668,7 +3672,7 @@
         "value": 44.777392385614,
         "status": "measured"
       },
-      "speed": 76.7442109286699,
+      "speed": 94.8971127613436,
       "aaFrontierTier": null,
       "aaFrontierConfiguration": null,
       "aaFrontierIntelligenceGap": null,
@@ -3785,7 +3789,7 @@
         "value": 41.807466113455,
         "status": "measured"
       },
-      "speed": 64.818528579187,
+      "speed": 69.5551039267307,
       "aaFrontierTier": null,
       "aaFrontierConfiguration": null,
       "aaFrontierIntelligenceGap": null,
@@ -3903,7 +3907,7 @@
         "value": 38.3556437590607,
         "status": "measured"
       },
-      "speed": 83.3894653194255,
+      "speed": 89.1713657415737,
       "aaFrontierTier": null,
       "aaFrontierConfiguration": null,
       "aaFrontierIntelligenceGap": null,
@@ -4020,7 +4024,7 @@
         "value": 37.3244239690841,
         "status": "measured"
       },
-      "speed": 128.372798137841,
+      "speed": 127.139543725604,
       "aaFrontierTier": null,
       "aaFrontierConfiguration": null,
       "aaFrontierIntelligenceGap": null,
@@ -4137,7 +4141,7 @@
         "value": 21.0124783424265,
         "status": "measured"
       },
-      "speed": 122.102985599068,
+      "speed": 117.116468716467,
       "aaFrontierTier": "near",
       "aaFrontierConfiguration": "GPT-5.6 Luna (low)",
       "aaFrontierIntelligenceGap": 1,
@@ -4254,7 +4258,7 @@
         "value": 46.9727068915036,
         "status": "measured"
       },
-      "speed": 80.8788143484042,
+      "speed": 81.7116304841162,
       "aaFrontierTier": null,
       "aaFrontierConfiguration": null,
       "aaFrontierIntelligenceGap": null,
@@ -4371,7 +4375,7 @@
         "value": 50.9191471636152,
         "status": "measured"
       },
-      "speed": 53.0639823310158,
+      "speed": 56.6147429977635,
       "aaFrontierTier": "near",
       "aaFrontierConfiguration": "GPT-6 Astra (high)",
       "aaFrontierIntelligenceGap": 3,
@@ -4488,10 +4492,10 @@
         "value": 52.3863277108782,
         "status": "measured"
       },
-      "speed": 53.7956113596723,
+      "speed": 61.4911514119706,
       "aaFrontierTier": "near",
       "aaFrontierConfiguration": "GPT-6 Astra (xhigh)",
-      "aaFrontierIntelligenceGap": 2,
+      "aaFrontierIntelligenceGap": 3,
       "aaFrontierFootnote": null,
       "rank": {
         "api": null,
@@ -4605,7 +4609,7 @@
         "value": 32.9282054150837,
         "status": "measured"
       },
-      "speed": 123.035249875314,
+      "speed": 118.908063051297,
       "aaFrontierTier": "frontier",
       "aaFrontierConfiguration": "GPT-6 Luna (high)",
       "aaFrontierIntelligenceGap": 0,
@@ -4722,7 +4726,7 @@
         "value": 21.5261980080866,
         "status": "measured"
       },
-      "speed": 114.846694949189,
+      "speed": 117.467042087552,
       "aaFrontierTier": "frontier",
       "aaFrontierConfiguration": "GPT-6 Luna (low)",
       "aaFrontierIntelligenceGap": 0,
@@ -4956,7 +4960,7 @@
         "value": 34.5587320217785,
         "status": "measured"
       },
-      "speed": 123.38164128531,
+      "speed": 127.08809426667,
       "aaFrontierTier": "frontier",
       "aaFrontierConfiguration": "GPT-6 Luna (xhigh)",
       "aaFrontierIntelligenceGap": 0,
@@ -5073,7 +5077,7 @@
         "value": 47.6305176437724,
         "status": "measured"
       },
-      "speed": 103.470991184621,
+      "speed": 106.451300416298,
       "aaFrontierTier": null,
       "aaFrontierConfiguration": null,
       "aaFrontierIntelligenceGap": null,
@@ -5190,7 +5194,7 @@
         "value": 50.2377777519769,
         "status": "measured"
       },
-      "speed": 49.0324958435188,
+      "speed": 52.3005440465197,
       "aaFrontierTier": "frontier",
       "aaFrontierConfiguration": "GPT-6.1 Sol (high)",
       "aaFrontierIntelligenceGap": 0,
@@ -5307,7 +5311,7 @@
         "value": 42.0835618555848,
         "status": "measured"
       },
-      "speed": 47.4246869495732,
+      "speed": 50.7940843123345,
       "aaFrontierTier": null,
       "aaFrontierConfiguration": null,
       "aaFrontierIntelligenceGap": null,
@@ -5424,7 +5428,7 @@
         "value": 47.7833271274065,
         "status": "measured"
       },
-      "speed": 48.20476433994,
+      "speed": 50.4244080636367,
       "aaFrontierTier": "frontier",
       "aaFrontierConfiguration": "GPT-6.1 Sol (medium)",
       "aaFrontierIntelligenceGap": 0,
@@ -5541,7 +5545,7 @@
         "value": 51.0377679093761,
         "status": "measured"
       },
-      "speed": 50.7260220999208,
+      "speed": 52.4869992333642,
       "aaFrontierTier": "frontier",
       "aaFrontierConfiguration": "GPT-6.1 Sol (xhigh)",
       "aaFrontierIntelligenceGap": 0,
@@ -5659,7 +5663,7 @@
         "value": 32.5983283695905,
         "status": "measured"
       },
-      "speed": 215.825317394618,
+      "speed": 203.342235900918,
       "aaFrontierTier": null,
       "aaFrontierConfiguration": null,
       "aaFrontierIntelligenceGap": null,
@@ -5777,7 +5781,7 @@
         "value": 33.9785928920714,
         "status": "measured"
       },
-      "speed": 211.952579831942,
+      "speed": 202.363409930968,
       "aaFrontierTier": null,
       "aaFrontierConfiguration": null,
       "aaFrontierIntelligenceGap": null,
@@ -6012,7 +6016,7 @@
         "value": 40.9262321765904,
         "status": "measured"
       },
-      "speed": 141.521760096549,
+      "speed": 136.877168385181,
       "aaFrontierTier": null,
       "aaFrontierConfiguration": null,
       "aaFrontierIntelligenceGap": null,
@@ -6130,7 +6134,7 @@
         "value": 42.836322654063,
         "status": "measured"
       },
-      "speed": 83.8437455474684,
+      "speed": 70.6899346209086,
       "aaFrontierTier": null,
       "aaFrontierConfiguration": null,
       "aaFrontierIntelligenceGap": null,
@@ -6247,7 +6251,7 @@
         "value": 44.199810436996,
         "status": "measured"
       },
-      "speed": 82.0216249185749,
+      "speed": 79.7275877451647,
       "aaFrontierTier": null,
       "aaFrontierConfiguration": null,
       "aaFrontierIntelligenceGap": null,
@@ -6364,7 +6368,7 @@
         "value": 46.4465506302286,
         "status": "measured"
       },
-      "speed": 88.85458071894,
+      "speed": 92.6558883015873,
       "aaFrontierTier": null,
       "aaFrontierConfiguration": null,
       "aaFrontierIntelligenceGap": null,
@@ -6482,10 +6486,127 @@
         "value": 43.5938229518782,
         "status": "measured"
       },
-      "speed": 36.9047986030671,
+      "speed": 46.5275785590327,
       "aaFrontierTier": null,
       "aaFrontierConfiguration": null,
       "aaFrontierIntelligenceGap": null,
+      "aaFrontierFootnote": null,
+      "rank": {
+        "api": null,
+        "plan": null
+      },
+      "overall": {
+        "api": null,
+        "plan": null
+      },
+      "quality": null,
+      "qualityRank": null,
+      "dims": {
+        "costComposite": null,
+        "frontierCode": null,
+        "terminalBench": null,
+        "bugHunt": null,
+        "vibeCode": null,
+        "codeMigration": null,
+        "livebench2Overall": null,
+        "gdpval": null,
+        "automationBench": null,
+        "omniscience": null,
+        "lcr": null,
+        "hle": null,
+        "scicode": null,
+        "critpt": null
+      },
+      "costDims": {
+        "api": null,
+        "plan": null
+      },
+      "raw": {
+        "frontierCode": null,
+        "terminalBench": null,
+        "bugHunt": null,
+        "vibeCode": null,
+        "codeMigration": null,
+        "livebench2Overall": null,
+        "gdpval": null,
+        "automationBench": null,
+        "omniscience": null,
+        "lcr": null,
+        "hle": null,
+        "scicode": null,
+        "critpt": null
+      },
+      "coverage": {
+        "pct": 0.0,
+        "costAvailable": false,
+        "missing": [
+          "FrontierCode 1.1",
+          "Terminal-Bench 4.0 (AA run)",
+          "Bug Hunt Bench",
+          "Vibe Code Bench v1.1 (Vals)",
+          "Code Migration v1.1 (Vals)",
+          "LiveBench 2.0 Overall",
+          "GDPval-AA v2.1",
+          "AutomationBench-AA",
+          "AA-Omniscience",
+          "AA-LCR v1.1",
+          "Humanity's Last Exam",
+          "SciCode",
+          "CritPt"
+        ],
+        "provisional": null,
+        "provisionalReasons": []
+      },
+      "cost": {
+        "apiUsd": null,
+        "planUsd": null,
+        "fallback": null,
+        "route": null,
+        "subset": null,
+        "partialComponents": [],
+        "workload": null,
+        "planFlags": []
+      },
+      "grade": "missing",
+      "pareto": {
+        "api": false,
+        "plan": false
+      },
+      "frontierStatus": {
+        "api": null,
+        "plan": null
+      },
+      "scenario": {
+        "api": null,
+        "plan": null
+      },
+      "flags": [],
+      "tier": null,
+      "band": {
+        "api": null,
+        "plan": null
+      },
+      "bandExcludesTransfer": false
+    },
+    {
+      "slug": "kimi-k3-1-pro",
+      "name": "Kimi K3.1 Pro",
+      "shortName": "Kimi K3.1 Pro",
+      "developer": "Moonshot AI",
+      "aaUrl": "https://artificialanalysis.ai/models/kimi-k3-1-pro",
+      "aaVariant": null,
+      "rankingEligible": false,
+      "exclusionReasons": [
+        "Not in the max-effort ranking: no Code Migration v1.1 (Vals); ranked in the AI Coding Daily ranking"
+      ],
+      "intelligenceIndex": {
+        "value": 55.0869210959395,
+        "status": "measured"
+      },
+      "speed": 57.5311225248271,
+      "aaFrontierTier": "frontier",
+      "aaFrontierConfiguration": "Kimi K3.1 Pro",
+      "aaFrontierIntelligenceGap": 0,
       "aaFrontierFootnote": null,
       "rank": {
         "api": null,
@@ -6599,7 +6720,7 @@
         "value": 37.8843590141754,
         "status": "measured"
       },
-      "speed": 56.9560317582743,
+      "speed": 55.7583257414068,
       "aaFrontierTier": "frontier",
       "aaFrontierConfiguration": "MiMo-V2.6-Flash",
       "aaFrontierIntelligenceGap": 0,
@@ -6716,7 +6837,7 @@
         "value": 42.7057475126235,
         "status": "measured"
       },
-      "speed": 95.5531649197315,
+      "speed": 111.713489047707,
       "aaFrontierTier": "near",
       "aaFrontierConfiguration": "MiniMax-M3.1-Flash",
       "aaFrontierIntelligenceGap": 3,
@@ -6834,7 +6955,7 @@
         "value": 39.5758607970943,
         "status": "measured"
       },
-      "speed": 269.562501244102,
+      "speed": 270.626558772591,
       "aaFrontierTier": null,
       "aaFrontierConfiguration": null,
       "aaFrontierIntelligenceGap": null,
@@ -6951,7 +7072,7 @@
         "value": 48.0923107719685,
         "status": "measured"
       },
-      "speed": 111.586088325733,
+      "speed": 146.11468191899,
       "aaFrontierTier": null,
       "aaFrontierConfiguration": null,
       "aaFrontierIntelligenceGap": null,
@@ -7068,7 +7189,7 @@
         "value": 45.0732966922226,
         "status": "measured"
       },
-      "speed": 285.44656525553,
+      "speed": 304.703313813038,
       "aaFrontierTier": null,
       "aaFrontierConfiguration": null,
       "aaFrontierIntelligenceGap": null,
@@ -7185,7 +7306,7 @@
         "value": 52.393894697293,
         "status": "measured"
       },
-      "speed": 145.137944782008,
+      "speed": 161.638337420513,
       "aaFrontierTier": null,
       "aaFrontierConfiguration": null,
       "aaFrontierIntelligenceGap": null,
@@ -7419,7 +7540,7 @@
         "value": 45.4152084980521,
         "status": "measured"
       },
-      "speed": 41.1112109720989,
+      "speed": 39.9628278179705,
       "aaFrontierTier": null,
       "aaFrontierConfiguration": null,
       "aaFrontierIntelligenceGap": null,
@@ -7536,7 +7657,7 @@
         "value": 57.6223698102963,
         "status": "measured"
       },
-      "speed": 95.8510129559586,
+      "speed": 96.1511548287943,
       "aaFrontierTier": "frontier",
       "aaFrontierConfiguration": "Claude Opus 5.5 (max with fallback)",
       "aaFrontierIntelligenceGap": 0,
@@ -7546,10 +7667,10 @@
         "plan": 1
       },
       "overall": {
-        "api": 53.98178468213949,
-        "plan": 64.31713427060696
+        "api": 53.82540968213948,
+        "plan": 64.16075927060695
       },
-      "quality": 67.91906051781837,
+      "quality": 67.71056051781835,
       "qualityRank": 1,
       "dims": {
         "costComposite": null,
@@ -7558,7 +7679,7 @@
         "bugHunt": 39.714285714285715,
         "vibeCode": 90.294,
         "codeMigration": 81.012,
-        "livebench2Overall": 86.53,
+        "livebench2Overall": 85.14,
         "gdpval": 68.3135,
         "automationBench": 69.5386812863607,
         "omniscience": 73.20833333333333,
@@ -7577,7 +7698,7 @@
         "bugHunt": 41.7,
         "vibeCode": 90.294,
         "codeMigration": 81.012,
-        "livebench2Overall": 86.53,
+        "livebench2Overall": 85.14,
         "gdpval": 1866.27,
         "automationBench": 0.6953868128636069,
         "omniscience": 46.416666666666664,
@@ -7645,7 +7766,7 @@
       "band": {
         "api": [
           6,
-          9
+          8
         ],
         "plan": [
           1,
@@ -7674,7 +7795,7 @@
         "value": 57.6223698102963,
         "status": "measured"
       },
-      "speed": 95.8510129559586,
+      "speed": 96.1511548287943,
       "aaFrontierTier": "frontier",
       "aaFrontierConfiguration": "Claude Opus 5.5 (max with fallback)",
       "aaFrontierIntelligenceGap": 0,
@@ -7684,10 +7805,10 @@
         "plan": 2
       },
       "overall": {
-        "api": 53.98178468213949,
-        "plan": 64.30097002191269
+        "api": 53.82540968213948,
+        "plan": 64.14459502191268
       },
-      "quality": 67.91906051781837,
+      "quality": 67.71056051781835,
       "qualityRank": 1,
       "dims": {
         "costComposite": null,
@@ -7696,7 +7817,7 @@
         "bugHunt": 39.714285714285715,
         "vibeCode": 90.294,
         "codeMigration": 81.012,
-        "livebench2Overall": 86.53,
+        "livebench2Overall": 85.14,
         "gdpval": 68.3135,
         "automationBench": 69.5386812863607,
         "omniscience": 73.20833333333333,
@@ -7715,7 +7836,7 @@
         "bugHunt": 41.7,
         "vibeCode": 90.294,
         "codeMigration": 81.012,
-        "livebench2Overall": 86.53,
+        "livebench2Overall": 85.14,
         "gdpval": 1866.27,
         "automationBench": 0.6953868128636069,
         "omniscience": 46.416666666666664,
@@ -7783,7 +7904,7 @@
       "band": {
         "api": [
           6,
-          9
+          8
         ],
         "plan": [
           1,
@@ -7812,7 +7933,7 @@
         "value": 57.6223698102963,
         "status": "measured"
       },
-      "speed": 95.8510129559586,
+      "speed": 96.1511548287943,
       "aaFrontierTier": "frontier",
       "aaFrontierConfiguration": "Claude Opus 5.5 (max with fallback)",
       "aaFrontierIntelligenceGap": 0,
@@ -7822,10 +7943,10 @@
         "plan": 3
       },
       "overall": {
-        "api": 53.98178468213949,
-        "plan": 64.21717256024661
+        "api": 53.82540968213948,
+        "plan": 64.06079756024658
       },
-      "quality": 67.91906051781837,
+      "quality": 67.71056051781835,
       "qualityRank": 1,
       "dims": {
         "costComposite": null,
@@ -7834,7 +7955,7 @@
         "bugHunt": 39.714285714285715,
         "vibeCode": 90.294,
         "codeMigration": 81.012,
-        "livebench2Overall": 86.53,
+        "livebench2Overall": 85.14,
         "gdpval": 68.3135,
         "automationBench": 69.5386812863607,
         "omniscience": 73.20833333333333,
@@ -7853,7 +7974,7 @@
         "bugHunt": 41.7,
         "vibeCode": 90.294,
         "codeMigration": 81.012,
-        "livebench2Overall": 86.53,
+        "livebench2Overall": 85.14,
         "gdpval": 1866.27,
         "automationBench": 0.6953868128636069,
         "omniscience": 46.416666666666664,
@@ -7921,7 +8042,7 @@
       "band": {
         "api": [
           6,
-          9
+          8
         ],
         "plan": [
           1,
@@ -7950,7 +8071,7 @@
         "value": 56.0001286580794,
         "status": "measured"
       },
-      "speed": 133.818391860326,
+      "speed": 133.906917130213,
       "aaFrontierTier": "frontier",
       "aaFrontierConfiguration": "Claude Sonnet 5.5 (max with fallback)",
       "aaFrontierIntelligenceGap": 0,
@@ -7960,10 +8081,10 @@
         "plan": 4
       },
       "overall": {
-        "api": 53.535448313562,
-        "plan": 63.8307190661707
+        "api": 53.263198313562,
+        "plan": 63.5584690661707
       },
-      "quality": 67.0547274987033,
+      "quality": 66.6917274987033,
       "qualityRank": 2,
       "dims": {
         "costComposite": null,
@@ -7972,7 +8093,7 @@
         "bugHunt": 48.857142857142854,
         "vibeCode": 92.392,
         "codeMigration": 86.875,
-        "livebench2Overall": 82.46,
+        "livebench2Overall": 80.04,
         "gdpval": 66.891,
         "automationBench": 71.76882128193995,
         "omniscience": 66.15,
@@ -7991,7 +8112,7 @@
         "bugHunt": 51.3,
         "vibeCode": 92.392,
         "codeMigration": 86.875,
-        "livebench2Overall": 82.46,
+        "livebench2Overall": 80.04,
         "gdpval": 1837.82,
         "automationBench": 0.7176882128193995,
         "omniscience": 32.3,
@@ -8056,7 +8177,7 @@
       "band": {
         "api": [
           6,
-          9
+          8
         ],
         "plan": [
           1,
@@ -8085,7 +8206,7 @@
         "value": 56.0001286580794,
         "status": "measured"
       },
-      "speed": 133.818391860326,
+      "speed": 133.906917130213,
       "aaFrontierTier": "frontier",
       "aaFrontierConfiguration": "Claude Sonnet 5.5 (max with fallback)",
       "aaFrontierIntelligenceGap": 0,
@@ -8095,10 +8216,10 @@
         "plan": 5
       },
       "overall": {
-        "api": 53.535448313562,
-        "plan": 63.814554817476434
+        "api": 53.263198313562,
+        "plan": 63.542304817476435
       },
-      "quality": 67.0547274987033,
+      "quality": 66.6917274987033,
       "qualityRank": 2,
       "dims": {
         "costComposite": null,
@@ -8107,7 +8228,7 @@
         "bugHunt": 48.857142857142854,
         "vibeCode": 92.392,
         "codeMigration": 86.875,
-        "livebench2Overall": 82.46,
+        "livebench2Overall": 80.04,
         "gdpval": 66.891,
         "automationBench": 71.76882128193995,
         "omniscience": 66.15,
@@ -8126,7 +8247,7 @@
         "bugHunt": 51.3,
         "vibeCode": 92.392,
         "codeMigration": 86.875,
-        "livebench2Overall": 82.46,
+        "livebench2Overall": 80.04,
         "gdpval": 1837.82,
         "automationBench": 0.7176882128193995,
         "omniscience": 32.3,
@@ -8191,7 +8312,7 @@
       "band": {
         "api": [
           6,
-          9
+          8
         ],
         "plan": [
           1,
@@ -8220,7 +8341,7 @@
         "value": 56.0001286580794,
         "status": "measured"
       },
-      "speed": 133.818391860326,
+      "speed": 133.906917130213,
       "aaFrontierTier": "frontier",
       "aaFrontierConfiguration": "Claude Sonnet 5.5 (max with fallback)",
       "aaFrontierIntelligenceGap": 0,
@@ -8230,10 +8351,10 @@
         "plan": 6
       },
       "overall": {
-        "api": 53.535448313562,
-        "plan": 63.73075735581035
+        "api": 53.263198313562,
+        "plan": 63.45850735581035
       },
-      "quality": 67.0547274987033,
+      "quality": 66.6917274987033,
       "qualityRank": 2,
       "dims": {
         "costComposite": null,
@@ -8242,7 +8363,7 @@
         "bugHunt": 48.857142857142854,
         "vibeCode": 92.392,
         "codeMigration": 86.875,
-        "livebench2Overall": 82.46,
+        "livebench2Overall": 80.04,
         "gdpval": 66.891,
         "automationBench": 71.76882128193995,
         "omniscience": 66.15,
@@ -8261,7 +8382,7 @@
         "bugHunt": 51.3,
         "vibeCode": 92.392,
         "codeMigration": 86.875,
-        "livebench2Overall": 82.46,
+        "livebench2Overall": 80.04,
         "gdpval": 1837.82,
         "automationBench": 0.7176882128193995,
         "omniscience": 32.3,
@@ -8326,7 +8447,7 @@
       "band": {
         "api": [
           6,
-          9
+          8
         ],
         "plan": [
           1,
@@ -8355,20 +8476,20 @@
         "value": 51.8332597011541,
         "status": "measured"
       },
-      "speed": 54.3281820685133,
+      "speed": 58.8206752736493,
       "aaFrontierTier": "frontier",
       "aaFrontierConfiguration": "GPT-6.1 Sol (max)",
       "aaFrontierIntelligenceGap": 0,
       "aaFrontierFootnote": null,
       "rank": {
-        "api": 3,
+        "api": 1,
         "plan": 7
       },
       "overall": {
-        "api": 60.156636044107074,
-        "plan": 62.74988182625437
+        "api": 60.02126104410708,
+        "plan": 62.61450682625437
       },
-      "quality": 64.29488501376613,
+      "quality": 64.11438501376614,
       "qualityRank": 4,
       "dims": {
         "costComposite": null,
@@ -8377,8 +8498,8 @@
         "bugHunt": 42.19047619047619,
         "vibeCode": 88.931,
         "codeMigration": 77.324,
-        "livebench2Overall": 85.41,
-        "gdpval": 54.60499999999999,
+        "livebench2Overall": 84.07,
+        "gdpval": 54.81,
         "automationBench": 64.86844882398171,
         "omniscience": 70.76666666666667,
         "lcr": 83.0,
@@ -8396,8 +8517,8 @@
         "bugHunt": 44.3,
         "vibeCode": 88.931,
         "codeMigration": 77.324,
-        "livebench2Overall": 85.41,
-        "gdpval": 1592.1,
+        "livebench2Overall": 84.07,
+        "gdpval": 1596.2,
         "automationBench": 0.6486844882398171,
         "omniscience": 41.53333333333333,
         "lcr": 0.83,
@@ -8449,7 +8570,7 @@
       },
       "scenario": {
         "api": {
-          "top1": 0.0,
+          "top1": 1.0,
           "top3": 1.0,
           "frontier": 1.0
         },
@@ -8493,20 +8614,20 @@
         "value": 51.8332597011541,
         "status": "measured"
       },
-      "speed": 54.3281820685133,
+      "speed": 58.8206752736493,
       "aaFrontierTier": "frontier",
       "aaFrontierConfiguration": "GPT-6.1 Sol (max)",
       "aaFrontierIntelligenceGap": 0,
       "aaFrontierFootnote": null,
       "rank": {
-        "api": 3,
+        "api": 1,
         "plan": 8
       },
       "overall": {
-        "api": 60.156636044107074,
-        "plan": 62.67661954105555
+        "api": 60.02126104410708,
+        "plan": 62.541244541055555
       },
-      "quality": 64.29488501376613,
+      "quality": 64.11438501376614,
       "qualityRank": 4,
       "dims": {
         "costComposite": null,
@@ -8515,8 +8636,8 @@
         "bugHunt": 42.19047619047619,
         "vibeCode": 88.931,
         "codeMigration": 77.324,
-        "livebench2Overall": 85.41,
-        "gdpval": 54.60499999999999,
+        "livebench2Overall": 84.07,
+        "gdpval": 54.81,
         "automationBench": 64.86844882398171,
         "omniscience": 70.76666666666667,
         "lcr": 83.0,
@@ -8534,8 +8655,8 @@
         "bugHunt": 44.3,
         "vibeCode": 88.931,
         "codeMigration": 77.324,
-        "livebench2Overall": 85.41,
-        "gdpval": 1592.1,
+        "livebench2Overall": 84.07,
+        "gdpval": 1596.2,
         "automationBench": 0.6486844882398171,
         "omniscience": 41.53333333333333,
         "lcr": 0.83,
@@ -8587,7 +8708,7 @@
       },
       "scenario": {
         "api": {
-          "top1": 0.0,
+          "top1": 1.0,
           "top3": 1.0,
           "frontier": 1.0
         },
@@ -8631,20 +8752,20 @@
         "value": 51.8332597011541,
         "status": "measured"
       },
-      "speed": 54.3281820685133,
+      "speed": 58.8206752736493,
       "aaFrontierTier": "frontier",
       "aaFrontierConfiguration": "GPT-6.1 Sol (max)",
       "aaFrontierIntelligenceGap": 0,
       "aaFrontierFootnote": null,
       "rank": {
-        "api": 3,
+        "api": 1,
         "plan": 8
       },
       "overall": {
-        "api": 60.156636044107074,
-        "plan": 62.67661954105555
+        "api": 60.02126104410708,
+        "plan": 62.541244541055555
       },
-      "quality": 64.29488501376613,
+      "quality": 64.11438501376614,
       "qualityRank": 4,
       "dims": {
         "costComposite": null,
@@ -8653,8 +8774,8 @@
         "bugHunt": 42.19047619047619,
         "vibeCode": 88.931,
         "codeMigration": 77.324,
-        "livebench2Overall": 85.41,
-        "gdpval": 54.60499999999999,
+        "livebench2Overall": 84.07,
+        "gdpval": 54.81,
         "automationBench": 64.86844882398171,
         "omniscience": 70.76666666666667,
         "lcr": 83.0,
@@ -8672,8 +8793,8 @@
         "bugHunt": 44.3,
         "vibeCode": 88.931,
         "codeMigration": 77.324,
-        "livebench2Overall": 85.41,
-        "gdpval": 1592.1,
+        "livebench2Overall": 84.07,
+        "gdpval": 1596.2,
         "automationBench": 0.6486844882398171,
         "omniscience": 41.53333333333333,
         "lcr": 0.83,
@@ -8725,7 +8846,7 @@
       },
       "scenario": {
         "api": {
-          "top1": 0.0,
+          "top1": 1.0,
           "top3": 1.0,
           "frontier": 1.0
         },
@@ -8769,20 +8890,20 @@
         "value": 51.8332597011541,
         "status": "measured"
       },
-      "speed": 54.3281820685133,
+      "speed": 58.8206752736493,
       "aaFrontierTier": "frontier",
       "aaFrontierConfiguration": "GPT-6.1 Sol (max)",
       "aaFrontierIntelligenceGap": 0,
       "aaFrontierFootnote": null,
       "rank": {
-        "api": 3,
+        "api": 1,
         "plan": 10
       },
       "overall": {
-        "api": 60.156636044107074,
-        "plan": 62.63299908346581
+        "api": 60.02126104410708,
+        "plan": 62.497624083465816
       },
-      "quality": 64.29488501376613,
+      "quality": 64.11438501376614,
       "qualityRank": 4,
       "dims": {
         "costComposite": null,
@@ -8791,8 +8912,8 @@
         "bugHunt": 42.19047619047619,
         "vibeCode": 88.931,
         "codeMigration": 77.324,
-        "livebench2Overall": 85.41,
-        "gdpval": 54.60499999999999,
+        "livebench2Overall": 84.07,
+        "gdpval": 54.81,
         "automationBench": 64.86844882398171,
         "omniscience": 70.76666666666667,
         "lcr": 83.0,
@@ -8810,8 +8931,8 @@
         "bugHunt": 44.3,
         "vibeCode": 88.931,
         "codeMigration": 77.324,
-        "livebench2Overall": 85.41,
-        "gdpval": 1592.1,
+        "livebench2Overall": 84.07,
+        "gdpval": 1596.2,
         "automationBench": 0.6486844882398171,
         "omniscience": 41.53333333333333,
         "lcr": 0.83,
@@ -8863,7 +8984,7 @@
       },
       "scenario": {
         "api": {
-          "top1": 0.0,
+          "top1": 1.0,
           "top3": 1.0,
           "frontier": 1.0
         },
@@ -8907,7 +9028,7 @@
         "value": 43.3950199670746,
         "status": "measured"
       },
-      "speed": 238.314202795609,
+      "speed": 234.216188536494,
       "aaFrontierTier": "near",
       "aaFrontierConfiguration": "Claude Haiku 5.5 (max)",
       "aaFrontierIntelligenceGap": 3,
@@ -8917,10 +9038,10 @@
         "plan": 11
       },
       "overall": {
-        "api": 51.47328458391714,
-        "plan": 59.83154550890208
+        "api": 50.83012208391714,
+        "plan": 59.18838300890208
       },
-      "quality": 51.293878714987116,
+      "quality": 50.43632871498711,
       "qualityRank": 8,
       "dims": {
         "costComposite": null,
@@ -8929,8 +9050,8 @@
         "bugHunt": 20.476190476190474,
         "vibeCode": 90.444,
         "codeMigration": 52.36,
-        "livebench2Overall": 75.64,
-        "gdpval": 55.856500000000004,
+        "livebench2Overall": 69.85,
+        "gdpval": 55.966,
         "automationBench": 35.411015132783625,
         "omniscience": 55.333333333333336,
         "lcr": 82.6666666666667,
@@ -8948,8 +9069,8 @@
         "bugHunt": 21.5,
         "vibeCode": 90.444,
         "codeMigration": 52.36,
-        "livebench2Overall": 75.64,
-        "gdpval": 1617.13,
+        "livebench2Overall": 69.85,
+        "gdpval": 1619.32,
         "automationBench": 0.35411015132783624,
         "omniscience": 10.666666666666666,
         "lcr": 0.826666666666667,
@@ -9014,12 +9135,12 @@
       "tier": "Budget",
       "band": {
         "api": [
-          6,
+          9,
           9
         ],
         "plan": [
           11,
-          20
+          21
         ]
       },
       "bandExcludesTransfer": true,
@@ -9044,7 +9165,7 @@
         "value": 43.3950199670746,
         "status": "measured"
       },
-      "speed": 238.314202795609,
+      "speed": 234.216188536494,
       "aaFrontierTier": "near",
       "aaFrontierConfiguration": "Claude Haiku 5.5 (max)",
       "aaFrontierIntelligenceGap": 3,
@@ -9054,10 +9175,10 @@
         "plan": 12
       },
       "overall": {
-        "api": 51.47328458391714,
-        "plan": 59.815381260207815
+        "api": 50.83012208391714,
+        "plan": 59.17221876020781
       },
-      "quality": 51.293878714987116,
+      "quality": 50.43632871498711,
       "qualityRank": 8,
       "dims": {
         "costComposite": null,
@@ -9066,8 +9187,8 @@
         "bugHunt": 20.476190476190474,
         "vibeCode": 90.444,
         "codeMigration": 52.36,
-        "livebench2Overall": 75.64,
-        "gdpval": 55.856500000000004,
+        "livebench2Overall": 69.85,
+        "gdpval": 55.966,
         "automationBench": 35.411015132783625,
         "omniscience": 55.333333333333336,
         "lcr": 82.6666666666667,
@@ -9085,8 +9206,8 @@
         "bugHunt": 21.5,
         "vibeCode": 90.444,
         "codeMigration": 52.36,
-        "livebench2Overall": 75.64,
-        "gdpval": 1617.13,
+        "livebench2Overall": 69.85,
+        "gdpval": 1619.32,
         "automationBench": 0.35411015132783624,
         "omniscience": 10.666666666666666,
         "lcr": 0.826666666666667,
@@ -9151,12 +9272,12 @@
       "tier": "Budget",
       "band": {
         "api": [
-          6,
+          9,
           9
         ],
         "plan": [
           11,
-          20
+          21
         ]
       },
       "bandExcludesTransfer": true,
@@ -9181,7 +9302,7 @@
         "value": 43.3950199670746,
         "status": "measured"
       },
-      "speed": 238.314202795609,
+      "speed": 234.216188536494,
       "aaFrontierTier": "near",
       "aaFrontierConfiguration": "Claude Haiku 5.5 (max)",
       "aaFrontierIntelligenceGap": 3,
@@ -9191,10 +9312,10 @@
         "plan": 13
       },
       "overall": {
-        "api": 51.47328458391714,
-        "plan": 59.73158379854173
+        "api": 50.83012208391714,
+        "plan": 59.088421298541725
       },
-      "quality": 51.293878714987116,
+      "quality": 50.43632871498711,
       "qualityRank": 8,
       "dims": {
         "costComposite": null,
@@ -9203,8 +9324,8 @@
         "bugHunt": 20.476190476190474,
         "vibeCode": 90.444,
         "codeMigration": 52.36,
-        "livebench2Overall": 75.64,
-        "gdpval": 55.856500000000004,
+        "livebench2Overall": 69.85,
+        "gdpval": 55.966,
         "automationBench": 35.411015132783625,
         "omniscience": 55.333333333333336,
         "lcr": 82.6666666666667,
@@ -9222,8 +9343,8 @@
         "bugHunt": 21.5,
         "vibeCode": 90.444,
         "codeMigration": 52.36,
-        "livebench2Overall": 75.64,
-        "gdpval": 1617.13,
+        "livebench2Overall": 69.85,
+        "gdpval": 1619.32,
         "automationBench": 0.35411015132783624,
         "omniscience": 10.666666666666666,
         "lcr": 0.826666666666667,
@@ -9288,12 +9409,12 @@
       "tier": "Budget",
       "band": {
         "api": [
-          6,
+          9,
           9
         ],
         "plan": [
           11,
-          20
+          21
         ]
       },
       "bandExcludesTransfer": true,
@@ -9318,7 +9439,7 @@
         "value": 52.673669395513,
         "status": "measured"
       },
-      "speed": 56.2535705567599,
+      "speed": 67.7769430044794,
       "aaFrontierTier": "near",
       "aaFrontierConfiguration": "GPT-6 Astra (max)",
       "aaFrontierIntelligenceGap": 3,
@@ -9328,10 +9449,10 @@
         "plan": 14
       },
       "overall": {
-        "api": 53.82841372156053,
-        "plan": 58.8252847025515
+        "api": 53.782288721560526,
+        "plan": 58.779159702551496
       },
-      "quality": 65.00400168018204,
+      "quality": 64.94250168018203,
       "qualityRank": 3,
       "dims": {
         "costComposite": null,
@@ -9340,8 +9461,8 @@
         "bugHunt": 42.857142857142854,
         "vibeCode": 89.594,
         "codeMigration": 80.579,
-        "livebench2Overall": 86.14,
-        "gdpval": 53.588,
+        "livebench2Overall": 85.64,
+        "gdpval": 53.723,
         "automationBench": 68.49174806688876,
         "omniscience": 71.7,
         "lcr": 80.6666666666667,
@@ -9359,8 +9480,8 @@
         "bugHunt": 45.0,
         "vibeCode": 89.594,
         "codeMigration": 80.579,
-        "livebench2Overall": 86.14,
-        "gdpval": 1571.76,
+        "livebench2Overall": 85.64,
+        "gdpval": 1574.46,
         "automationBench": 0.6849174806688876,
         "omniscience": 43.4,
         "lcr": 0.806666666666667,
@@ -9427,11 +9548,11 @@
       "band": {
         "api": [
           6,
-          9
+          8
         ],
         "plan": [
           11,
-          20
+          21
         ]
       },
       "bandExcludesTransfer": false,
@@ -9456,7 +9577,7 @@
         "value": 52.673669395513,
         "status": "measured"
       },
-      "speed": 56.2535705567599,
+      "speed": 67.7769430044794,
       "aaFrontierTier": "near",
       "aaFrontierConfiguration": "GPT-6 Astra (max)",
       "aaFrontierIntelligenceGap": 3,
@@ -9466,10 +9587,10 @@
         "plan": 15
       },
       "overall": {
-        "api": 53.82841372156053,
-        "plan": 58.68278135163841
+        "api": 53.782288721560526,
+        "plan": 58.63665635163841
       },
-      "quality": 65.00400168018204,
+      "quality": 64.94250168018203,
       "qualityRank": 3,
       "dims": {
         "costComposite": null,
@@ -9478,8 +9599,8 @@
         "bugHunt": 42.857142857142854,
         "vibeCode": 89.594,
         "codeMigration": 80.579,
-        "livebench2Overall": 86.14,
-        "gdpval": 53.588,
+        "livebench2Overall": 85.64,
+        "gdpval": 53.723,
         "automationBench": 68.49174806688876,
         "omniscience": 71.7,
         "lcr": 80.6666666666667,
@@ -9497,8 +9618,8 @@
         "bugHunt": 45.0,
         "vibeCode": 89.594,
         "codeMigration": 80.579,
-        "livebench2Overall": 86.14,
-        "gdpval": 1571.76,
+        "livebench2Overall": 85.64,
+        "gdpval": 1574.46,
         "automationBench": 0.6849174806688876,
         "omniscience": 43.4,
         "lcr": 0.806666666666667,
@@ -9565,11 +9686,11 @@
       "band": {
         "api": [
           6,
-          9
+          8
         ],
         "plan": [
           11,
-          20
+          21
         ]
       },
       "bandExcludesTransfer": false,
@@ -9594,7 +9715,7 @@
         "value": 52.673669395513,
         "status": "measured"
       },
-      "speed": 56.2535705567599,
+      "speed": 67.7769430044794,
       "aaFrontierTier": "near",
       "aaFrontierConfiguration": "GPT-6 Astra (max)",
       "aaFrontierIntelligenceGap": 3,
@@ -9604,10 +9725,10 @@
         "plan": 16
       },
       "overall": {
-        "api": 53.82841372156053,
-        "plan": 58.5037897332094
+        "api": 53.782288721560526,
+        "plan": 58.4576647332094
       },
-      "quality": 65.00400168018204,
+      "quality": 64.94250168018203,
       "qualityRank": 3,
       "dims": {
         "costComposite": null,
@@ -9616,8 +9737,8 @@
         "bugHunt": 42.857142857142854,
         "vibeCode": 89.594,
         "codeMigration": 80.579,
-        "livebench2Overall": 86.14,
-        "gdpval": 53.588,
+        "livebench2Overall": 85.64,
+        "gdpval": 53.723,
         "automationBench": 68.49174806688876,
         "omniscience": 71.7,
         "lcr": 80.6666666666667,
@@ -9635,8 +9756,8 @@
         "bugHunt": 45.0,
         "vibeCode": 89.594,
         "codeMigration": 80.579,
-        "livebench2Overall": 86.14,
-        "gdpval": 1571.76,
+        "livebench2Overall": 85.64,
+        "gdpval": 1574.46,
         "automationBench": 0.6849174806688876,
         "omniscience": 43.4,
         "lcr": 0.806666666666667,
@@ -9703,11 +9824,11 @@
       "band": {
         "api": [
           6,
-          9
+          8
         ],
         "plan": [
           11,
-          20
+          21
         ]
       },
       "bandExcludesTransfer": false,
@@ -9732,7 +9853,7 @@
         "value": 38.1245186869738,
         "status": "measured"
       },
-      "speed": 135.214499121147,
+      "speed": 138.462831485269,
       "aaFrontierTier": "frontier",
       "aaFrontierConfiguration": "GPT-6 Luna (max)",
       "aaFrontierIntelligenceGap": 0,
@@ -9742,10 +9863,10 @@
         "plan": 17
       },
       "overall": {
-        "api": 57.516504418501434,
-        "plan": 58.12042387886724
+        "api": 56.98201691850143,
+        "plan": 57.58593637886723
       },
-      "quality": 47.411991616369534,
+      "quality": 46.69934161636953,
       "qualityRank": 9,
       "dims": {
         "costComposite": null,
@@ -9754,8 +9875,8 @@
         "bugHunt": 17.428571428571427,
         "vibeCode": 81.649,
         "codeMigration": 46.669,
-        "livebench2Overall": 69.4,
-        "gdpval": 46.551,
+        "livebench2Overall": 64.59,
+        "gdpval": 46.6395,
         "automationBench": 53.16814034483175,
         "omniscience": 50.325,
         "lcr": 83.3333333333333,
@@ -9773,8 +9894,8 @@
         "bugHunt": 18.3,
         "vibeCode": 81.649,
         "codeMigration": 46.669,
-        "livebench2Overall": 69.4,
-        "gdpval": 1431.02,
+        "livebench2Overall": 64.59,
+        "gdpval": 1432.79,
         "automationBench": 0.5316814034483175,
         "omniscience": 0.65,
         "lcr": 0.833333333333333,
@@ -9842,7 +9963,7 @@
         ],
         "plan": [
           11,
-          20
+          21
         ]
       },
       "bandExcludesTransfer": true,
@@ -9867,7 +9988,7 @@
         "value": 38.1245186869738,
         "status": "measured"
       },
-      "speed": 135.214499121147,
+      "speed": 138.462831485269,
       "aaFrontierTier": "frontier",
       "aaFrontierConfiguration": "GPT-6 Luna (max)",
       "aaFrontierIntelligenceGap": 0,
@@ -9877,10 +9998,10 @@
         "plan": 18
       },
       "overall": {
-        "api": 57.516504418501434,
-        "plan": 58.04716159366842
+        "api": 56.98201691850143,
+        "plan": 57.512674093668416
       },
-      "quality": 47.411991616369534,
+      "quality": 46.69934161636953,
       "qualityRank": 9,
       "dims": {
         "costComposite": null,
@@ -9889,8 +10010,8 @@
         "bugHunt": 17.428571428571427,
         "vibeCode": 81.649,
         "codeMigration": 46.669,
-        "livebench2Overall": 69.4,
-        "gdpval": 46.551,
+        "livebench2Overall": 64.59,
+        "gdpval": 46.6395,
         "automationBench": 53.16814034483175,
         "omniscience": 50.325,
         "lcr": 83.3333333333333,
@@ -9908,8 +10029,8 @@
         "bugHunt": 18.3,
         "vibeCode": 81.649,
         "codeMigration": 46.669,
-        "livebench2Overall": 69.4,
-        "gdpval": 1431.02,
+        "livebench2Overall": 64.59,
+        "gdpval": 1432.79,
         "automationBench": 0.5316814034483175,
         "omniscience": 0.65,
         "lcr": 0.833333333333333,
@@ -9977,7 +10098,7 @@
         ],
         "plan": [
           11,
-          20
+          21
         ]
       },
       "bandExcludesTransfer": true,
@@ -10002,7 +10123,7 @@
         "value": 38.1245186869738,
         "status": "measured"
       },
-      "speed": 135.214499121147,
+      "speed": 138.462831485269,
       "aaFrontierTier": "frontier",
       "aaFrontierConfiguration": "GPT-6 Luna (max)",
       "aaFrontierIntelligenceGap": 0,
@@ -10012,10 +10133,10 @@
         "plan": 19
       },
       "overall": {
-        "api": 57.516504418501434,
-        "plan": 58.00354113607868
+        "api": 56.98201691850143,
+        "plan": 57.46905363607867
       },
-      "quality": 47.411991616369534,
+      "quality": 46.69934161636953,
       "qualityRank": 9,
       "dims": {
         "costComposite": null,
@@ -10024,8 +10145,8 @@
         "bugHunt": 17.428571428571427,
         "vibeCode": 81.649,
         "codeMigration": 46.669,
-        "livebench2Overall": 69.4,
-        "gdpval": 46.551,
+        "livebench2Overall": 64.59,
+        "gdpval": 46.6395,
         "automationBench": 53.16814034483175,
         "omniscience": 50.325,
         "lcr": 83.3333333333333,
@@ -10043,8 +10164,8 @@
         "bugHunt": 18.3,
         "vibeCode": 81.649,
         "codeMigration": 46.669,
-        "livebench2Overall": 69.4,
-        "gdpval": 1431.02,
+        "livebench2Overall": 64.59,
+        "gdpval": 1432.79,
         "automationBench": 0.5316814034483175,
         "omniscience": 0.65,
         "lcr": 0.833333333333333,
@@ -10112,7 +10233,7 @@
         ],
         "plan": [
           11,
-          20
+          21
         ]
       },
       "bandExcludesTransfer": true,
@@ -10121,6 +10242,144 @@
         "plan": "ChatGPT Pro 200",
         "routeId": "chatgpt-pro200-gpt-6-luna-common-gpt-assumption",
         "multiple": 10.42,
+        "representative": false
+      }
+    },
+    {
+      "slug": "gpt-6-astra",
+      "name": "GPT-6 Astra · ChatGPT Plus",
+      "shortName": "GPT-6 Astra",
+      "developer": "OpenAI",
+      "aaUrl": "https://artificialanalysis.ai/models/gpt-6-astra",
+      "aaVariant": "max",
+      "rankingEligible": true,
+      "exclusionReasons": [],
+      "intelligenceIndex": {
+        "value": 52.673669395513,
+        "status": "measured"
+      },
+      "speed": 67.7769430044794,
+      "aaFrontierTier": "near",
+      "aaFrontierConfiguration": "GPT-6 Astra (max)",
+      "aaFrontierIntelligenceGap": 3,
+      "aaFrontierFootnote": null,
+      "rank": {
+        "api": 7,
+        "plan": 20
+      },
+      "overall": {
+        "api": 53.782288721560526,
+        "plan": 56.73425826498836
+      },
+      "quality": 64.94250168018203,
+      "qualityRank": 3,
+      "dims": {
+        "costComposite": null,
+        "frontierCode": 46.9827666666667,
+        "terminalBench": 59.09090909090911,
+        "bugHunt": 42.857142857142854,
+        "vibeCode": 89.594,
+        "codeMigration": 80.579,
+        "livebench2Overall": 85.64,
+        "gdpval": 53.723,
+        "automationBench": 68.49174806688876,
+        "omniscience": 71.7,
+        "lcr": 80.6666666666667,
+        "hle": 54.6802594995366,
+        "scicode": 56.4814814814815,
+        "critpt": 31.7142857142857
+      },
+      "costDims": {
+        "api": 20.301649845696005,
+        "plan": 32.10952801940735
+      },
+      "raw": {
+        "frontierCode": 0.469827666666667,
+        "terminalBench": 59.09090909090911,
+        "bugHunt": 45.0,
+        "vibeCode": 89.594,
+        "codeMigration": 80.579,
+        "livebench2Overall": 85.64,
+        "gdpval": 1574.46,
+        "automationBench": 0.6849174806688876,
+        "omniscience": 43.4,
+        "lcr": 0.806666666666667,
+        "hle": 0.546802594995366,
+        "scicode": 0.564814814814815,
+        "critpt": 0.317142857142857
+      },
+      "coverage": {
+        "pct": 100.0,
+        "costAvailable": true,
+        "missing": [],
+        "provisional": false,
+        "provisionalReasons": []
+      },
+      "cost": {
+        "apiUsd": 5885.045403144297,
+        "planUsd": 726.5488152029997,
+        "fallback": null,
+        "route": {
+          "id": "chatgpt-plus-gpt6astra-semianalysis",
+          "planLabel": "ChatGPT Plus $20 · GPT-6 Astra",
+          "planFeeUsd": 20,
+          "valueMultiple": 8.1,
+          "grade": "measured",
+          "evidenceLabel": "Controlled account measurement / workload projection",
+          "sourceModel": "GPT-6 Astra",
+          "sourceUrl": "https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x",
+          "sourceDate": "2026-10-06"
+        },
+        "subset": false,
+        "partialComponents": [],
+        "workload": "9a0d376cc6080f3c",
+        "planFlags": [
+          "workload-unmatched",
+          "valuation basis unverified"
+        ]
+      },
+      "grade": "measured",
+      "pareto": {
+        "api": true,
+        "plan": false
+      },
+      "frontierStatus": {
+        "api": {
+          "definite": "certified",
+          "possible": "certified"
+        },
+        "plan": null
+      },
+      "scenario": {
+        "api": {
+          "top1": 0.0,
+          "top3": 0.0,
+          "frontier": 1.0
+        },
+        "plan": {
+          "top1": 0.0,
+          "top3": 0.0,
+          "frontier": 0.0
+        }
+      },
+      "flags": [],
+      "tier": "Expensive",
+      "band": {
+        "api": [
+          6,
+          8
+        ],
+        "plan": [
+          11,
+          21
+        ]
+      },
+      "bandExcludesTransfer": false,
+      "key": "gpt-6-astra--chatgpt-plus",
+      "planRow": {
+        "plan": "ChatGPT Plus",
+        "routeId": "chatgpt-plus-gpt6astra-semianalysis",
+        "multiple": 8.1,
         "representative": false
       }
     },
@@ -10137,20 +10396,20 @@
         "value": 38.1245186869738,
         "status": "measured"
       },
-      "speed": 135.214499121147,
+      "speed": 138.462831485269,
       "aaFrontierTier": "frontier",
       "aaFrontierConfiguration": "GPT-6 Luna (max)",
       "aaFrontierIntelligenceGap": 0,
       "aaFrontierFootnote": null,
       "rank": {
         "api": 4,
-        "plan": 20
+        "plan": 21
       },
       "overall": {
-        "api": 57.516504418501434,
-        "plan": 57.11745883010943
+        "api": 56.98201691850143,
+        "plan": 56.58297133010943
       },
-      "quality": 47.411991616369534,
+      "quality": 46.69934161636953,
       "qualityRank": 9,
       "dims": {
         "costComposite": null,
@@ -10159,8 +10418,8 @@
         "bugHunt": 17.428571428571427,
         "vibeCode": 81.649,
         "codeMigration": 46.669,
-        "livebench2Overall": 69.4,
-        "gdpval": 46.551,
+        "livebench2Overall": 64.59,
+        "gdpval": 46.6395,
         "automationBench": 53.16814034483175,
         "omniscience": 50.325,
         "lcr": 83.3333333333333,
@@ -10178,8 +10437,8 @@
         "bugHunt": 18.3,
         "vibeCode": 81.649,
         "codeMigration": 46.669,
-        "livebench2Overall": 69.4,
-        "gdpval": 1431.02,
+        "livebench2Overall": 64.59,
+        "gdpval": 1432.79,
         "automationBench": 0.5316814034483175,
         "omniscience": 0.65,
         "lcr": 0.833333333333333,
@@ -10247,7 +10506,7 @@
         ],
         "plan": [
           11,
-          20
+          21
         ]
       },
       "bandExcludesTransfer": true,
@@ -10255,144 +10514,6 @@
       "planRow": {
         "plan": "ChatGPT Plus",
         "routeId": "chatgpt-plus-gpt-6-luna-common-gpt-assumption",
-        "multiple": 8.1,
-        "representative": false
-      }
-    },
-    {
-      "slug": "gpt-6-astra",
-      "name": "GPT-6 Astra · ChatGPT Plus",
-      "shortName": "GPT-6 Astra",
-      "developer": "OpenAI",
-      "aaUrl": "https://artificialanalysis.ai/models/gpt-6-astra",
-      "aaVariant": "max",
-      "rankingEligible": true,
-      "exclusionReasons": [],
-      "intelligenceIndex": {
-        "value": 52.673669395513,
-        "status": "measured"
-      },
-      "speed": 56.2535705567599,
-      "aaFrontierTier": "near",
-      "aaFrontierConfiguration": "GPT-6 Astra (max)",
-      "aaFrontierIntelligenceGap": 3,
-      "aaFrontierFootnote": null,
-      "rank": {
-        "api": 7,
-        "plan": 21
-      },
-      "overall": {
-        "api": 53.82841372156053,
-        "plan": 56.780383264988366
-      },
-      "quality": 65.00400168018204,
-      "qualityRank": 3,
-      "dims": {
-        "costComposite": null,
-        "frontierCode": 46.9827666666667,
-        "terminalBench": 59.09090909090911,
-        "bugHunt": 42.857142857142854,
-        "vibeCode": 89.594,
-        "codeMigration": 80.579,
-        "livebench2Overall": 86.14,
-        "gdpval": 53.588,
-        "automationBench": 68.49174806688876,
-        "omniscience": 71.7,
-        "lcr": 80.6666666666667,
-        "hle": 54.6802594995366,
-        "scicode": 56.4814814814815,
-        "critpt": 31.7142857142857
-      },
-      "costDims": {
-        "api": 20.301649845696005,
-        "plan": 32.10952801940735
-      },
-      "raw": {
-        "frontierCode": 0.469827666666667,
-        "terminalBench": 59.09090909090911,
-        "bugHunt": 45.0,
-        "vibeCode": 89.594,
-        "codeMigration": 80.579,
-        "livebench2Overall": 86.14,
-        "gdpval": 1571.76,
-        "automationBench": 0.6849174806688876,
-        "omniscience": 43.4,
-        "lcr": 0.806666666666667,
-        "hle": 0.546802594995366,
-        "scicode": 0.564814814814815,
-        "critpt": 0.317142857142857
-      },
-      "coverage": {
-        "pct": 100.0,
-        "costAvailable": true,
-        "missing": [],
-        "provisional": false,
-        "provisionalReasons": []
-      },
-      "cost": {
-        "apiUsd": 5885.045403144297,
-        "planUsd": 726.5488152029997,
-        "fallback": null,
-        "route": {
-          "id": "chatgpt-plus-gpt6astra-semianalysis",
-          "planLabel": "ChatGPT Plus $20 · GPT-6 Astra",
-          "planFeeUsd": 20,
-          "valueMultiple": 8.1,
-          "grade": "measured",
-          "evidenceLabel": "Controlled account measurement / workload projection",
-          "sourceModel": "GPT-6 Astra",
-          "sourceUrl": "https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x",
-          "sourceDate": "2026-10-06"
-        },
-        "subset": false,
-        "partialComponents": [],
-        "workload": "9a0d376cc6080f3c",
-        "planFlags": [
-          "workload-unmatched",
-          "valuation basis unverified"
-        ]
-      },
-      "grade": "measured",
-      "pareto": {
-        "api": true,
-        "plan": false
-      },
-      "frontierStatus": {
-        "api": {
-          "definite": "certified",
-          "possible": "certified"
-        },
-        "plan": null
-      },
-      "scenario": {
-        "api": {
-          "top1": 0.0,
-          "top3": 0.0,
-          "frontier": 1.0
-        },
-        "plan": {
-          "top1": 0.0,
-          "top3": 0.0,
-          "frontier": 0.0
-        }
-      },
-      "flags": [],
-      "tier": "Expensive",
-      "band": {
-        "api": [
-          6,
-          9
-        ],
-        "plan": [
-          21,
-          21
-        ]
-      },
-      "bandExcludesTransfer": false,
-      "key": "gpt-6-astra--chatgpt-plus",
-      "planRow": {
-        "plan": "ChatGPT Plus",
-        "routeId": "chatgpt-plus-gpt6astra-semianalysis",
         "multiple": 8.1,
         "representative": false
       }
@@ -10410,20 +10531,20 @@
         "value": 45.0965048681912,
         "status": "measured"
       },
-      "speed": 203.742544335617,
+      "speed": 169.08358466946,
       "aaFrontierTier": "near",
       "aaFrontierConfiguration": "DeepSeek V4.1 Flash 1017 (max)",
       "aaFrontierIntelligenceGap": 3,
       "aaFrontierFootnote": null,
       "rank": {
-        "api": 1,
+        "api": 2,
         "plan": 22
       },
       "overall": {
-        "api": 60.38662179090506,
-        "plan": 53.6581856331888
+        "api": 59.80387179090506,
+        "plan": 53.0754356331888
       },
-      "quality": 58.15769146301675,
+      "quality": 57.380691463016746,
       "qualityRank": 6,
       "dims": {
         "costComposite": null,
@@ -10432,7 +10553,7 @@
         "bugHunt": 40.666666666666664,
         "vibeCode": 87.73,
         "codeMigration": 67.524,
-        "livebench2Overall": 79.2,
+        "livebench2Overall": 74.02,
         "gdpval": 62.2885,
         "automationBench": 66.64095364949257,
         "omniscience": 52.35,
@@ -10451,7 +10572,7 @@
         "bugHunt": 42.7,
         "vibeCode": 87.73,
         "codeMigration": 67.524,
-        "livebench2Overall": 79.2,
+        "livebench2Overall": 74.02,
         "gdpval": 1745.77,
         "automationBench": 0.6664095364949257,
         "omniscience": 4.7,
@@ -10494,7 +10615,7 @@
       },
       "scenario": {
         "api": {
-          "top1": 1.0,
+          "top1": 0.0,
           "top3": 1.0,
           "frontier": 1.0
         },
@@ -10538,20 +10659,20 @@
         "value": 46.3242065310383,
         "status": "measured"
       },
-      "speed": 52.6200256226423,
+      "speed": 56.8119687782978,
       "aaFrontierTier": "frontier",
       "aaFrontierConfiguration": "MiMo-V2.6-Pro",
       "aaFrontierIntelligenceGap": 0,
       "aaFrontierFootnote": null,
       "rank": {
-        "api": 2,
+        "api": 3,
         "plan": 23
       },
       "overall": {
-        "api": 60.292266592541466,
-        "plan": 51.89848913455756
+        "api": 59.57237909254148,
+        "plan": 51.178601634557566
       },
-      "quality": 54.23053467083996,
+      "quality": 53.27068467083996,
       "qualityRank": 7,
       "dims": {
         "costComposite": null,
@@ -10560,8 +10681,8 @@
         "bugHunt": 17.142857142857142,
         "vibeCode": 85.223,
         "codeMigration": 48.786,
-        "livebench2Overall": 74.87,
-        "gdpval": 59.1645,
+        "livebench2Overall": 68.48,
+        "gdpval": 59.151,
         "automationBench": 58.623409434190854,
         "omniscience": 54.19166666666666,
         "lcr": 86.3333333333333,
@@ -10579,8 +10700,8 @@
         "bugHunt": 18,
         "vibeCode": 85.223,
         "codeMigration": 48.786,
-        "livebench2Overall": 74.87,
-        "gdpval": 1683.29,
+        "livebench2Overall": 68.48,
+        "gdpval": 1683.02,
         "automationBench": 0.5862340943419085,
         "omniscience": 8.383333333333333,
         "lcr": 0.863333333333333,
@@ -10669,20 +10790,20 @@
         "value": 46.3242065310383,
         "status": "measured"
       },
-      "speed": 52.6200256226423,
+      "speed": 56.8119687782978,
       "aaFrontierTier": "frontier",
       "aaFrontierConfiguration": "MiMo-V2.6-Pro",
       "aaFrontierIntelligenceGap": 0,
       "aaFrontierFootnote": null,
       "rank": {
-        "api": 2,
+        "api": 3,
         "plan": 24
       },
       "overall": {
-        "api": 60.292266592541466,
-        "plan": 51.652882095268254
+        "api": 59.57237909254148,
+        "plan": 50.932994595268255
       },
-      "quality": 54.23053467083996,
+      "quality": 53.27068467083996,
       "qualityRank": 7,
       "dims": {
         "costComposite": null,
@@ -10691,8 +10812,8 @@
         "bugHunt": 17.142857142857142,
         "vibeCode": 85.223,
         "codeMigration": 48.786,
-        "livebench2Overall": 74.87,
-        "gdpval": 59.1645,
+        "livebench2Overall": 68.48,
+        "gdpval": 59.151,
         "automationBench": 58.623409434190854,
         "omniscience": 54.19166666666666,
         "lcr": 86.3333333333333,
@@ -10710,8 +10831,8 @@
         "bugHunt": 18,
         "vibeCode": 85.223,
         "codeMigration": 48.786,
-        "livebench2Overall": 74.87,
-        "gdpval": 1683.29,
+        "livebench2Overall": 68.48,
+        "gdpval": 1683.02,
         "automationBench": 0.5862340943419085,
         "omniscience": 8.383333333333333,
         "lcr": 0.863333333333333,
@@ -10800,20 +10921,20 @@
         "value": 46.3242065310383,
         "status": "measured"
       },
-      "speed": 52.6200256226423,
+      "speed": 56.8119687782978,
       "aaFrontierTier": "frontier",
       "aaFrontierConfiguration": "MiMo-V2.6-Pro",
       "aaFrontierIntelligenceGap": 0,
       "aaFrontierFootnote": null,
       "rank": {
-        "api": 2,
+        "api": 3,
         "plan": 25
       },
       "overall": {
-        "api": 60.292266592541466,
-        "plan": 51.32882558804182
+        "api": 59.57237909254148,
+        "plan": 50.60893808804183
       },
-      "quality": 54.23053467083996,
+      "quality": 53.27068467083996,
       "qualityRank": 7,
       "dims": {
         "costComposite": null,
@@ -10822,8 +10943,8 @@
         "bugHunt": 17.142857142857142,
         "vibeCode": 85.223,
         "codeMigration": 48.786,
-        "livebench2Overall": 74.87,
-        "gdpval": 59.1645,
+        "livebench2Overall": 68.48,
+        "gdpval": 59.151,
         "automationBench": 58.623409434190854,
         "omniscience": 54.19166666666666,
         "lcr": 86.3333333333333,
@@ -10841,8 +10962,8 @@
         "bugHunt": 18,
         "vibeCode": 85.223,
         "codeMigration": 48.786,
-        "livebench2Overall": 74.87,
-        "gdpval": 1683.29,
+        "livebench2Overall": 68.48,
+        "gdpval": 1683.02,
         "automationBench": 0.5862340943419085,
         "omniscience": 8.383333333333333,
         "lcr": 0.863333333333333,
@@ -10931,20 +11052,20 @@
         "value": 46.3242065310383,
         "status": "measured"
       },
-      "speed": 52.6200256226423,
+      "speed": 56.8119687782978,
       "aaFrontierTier": "frontier",
       "aaFrontierConfiguration": "MiMo-V2.6-Pro",
       "aaFrontierIntelligenceGap": 0,
       "aaFrontierFootnote": null,
       "rank": {
-        "api": 2,
+        "api": 3,
         "plan": 26
       },
       "overall": {
-        "api": 60.292266592541466,
-        "plan": 51.30917646404101
+        "api": 59.57237909254148,
+        "plan": 50.58928896404102
       },
-      "quality": 54.23053467083996,
+      "quality": 53.27068467083996,
       "qualityRank": 7,
       "dims": {
         "costComposite": null,
@@ -10953,8 +11074,8 @@
         "bugHunt": 17.142857142857142,
         "vibeCode": 85.223,
         "codeMigration": 48.786,
-        "livebench2Overall": 74.87,
-        "gdpval": 59.1645,
+        "livebench2Overall": 68.48,
+        "gdpval": 59.151,
         "automationBench": 58.623409434190854,
         "omniscience": 54.19166666666666,
         "lcr": 86.3333333333333,
@@ -10972,8 +11093,8 @@
         "bugHunt": 18,
         "vibeCode": 85.223,
         "codeMigration": 48.786,
-        "livebench2Overall": 74.87,
-        "gdpval": 1683.29,
+        "livebench2Overall": 68.48,
+        "gdpval": 1683.02,
         "automationBench": 0.5862340943419085,
         "omniscience": 8.383333333333333,
         "lcr": 0.863333333333333,
@@ -11062,7 +11183,7 @@
         "value": 52.5605655745982,
         "status": "measured"
       },
-      "speed": 81.5023279454512,
+      "speed": 78.8356384450369,
       "aaFrontierTier": "near",
       "aaFrontierConfiguration": "Gemini 4 Argon (high)",
       "aaFrontierIntelligenceGap": 1,
@@ -11072,10 +11193,10 @@
         "plan": 27
       },
       "overall": {
-        "api": 55.47686275090185,
-        "plan": 50.63092404628401
+        "api": 54.94057525090185,
+        "plan": 50.09463654628401
       },
-      "quality": 64.25647228383212,
+      "quality": 63.54142228383213,
       "qualityRank": 5,
       "dims": {
         "costComposite": null,
@@ -11084,8 +11205,8 @@
         "bugHunt": 38.761904761904766,
         "vibeCode": 91.906,
         "codeMigration": 70.796,
-        "livebench2Overall": 84.1,
-        "gdpval": 56.15549999999999,
+        "livebench2Overall": 79.3,
+        "gdpval": 56.20499999999999,
         "automationBench": 77.51346945899195,
         "omniscience": 71.175,
         "lcr": 79.6666666666667,
@@ -11103,8 +11224,8 @@
         "bugHunt": 40.7,
         "vibeCode": 91.906,
         "codeMigration": 70.796,
-        "livebench2Overall": 84.1,
-        "gdpval": 1623.11,
+        "livebench2Overall": 79.3,
+        "gdpval": 1624.1,
         "automationBench": 0.7751346945899195,
         "omniscience": 42.35,
         "lcr": 0.796666666666667,
@@ -11192,7 +11313,7 @@
         "value": 49.6258202733378,
         "status": "measured"
       },
-      "speed": 69.9216549386748,
+      "speed": 65.2579716533112,
       "aaFrontierTier": null,
       "aaFrontierConfiguration": null,
       "aaFrontierIntelligenceGap": null,
@@ -11309,7 +11430,7 @@
         "value": 53.3549259623252,
         "status": "measured"
       },
-      "speed": 68.5155750277027,
+      "speed": 69.630896692981,
       "aaFrontierTier": null,
       "aaFrontierConfiguration": null,
       "aaFrontierIntelligenceGap": null,
@@ -11426,7 +11547,7 @@
         "value": 41.2489304677024,
         "status": "measured"
       },
-      "speed": 192.468238146076,
+      "speed": 186.127571446598,
       "aaFrontierTier": "frontier",
       "aaFrontierConfiguration": "Claude Haiku 5.5 (xhigh)",
       "aaFrontierIntelligenceGap": 0,
@@ -11543,7 +11664,7 @@
         "value": 37.8240211671094,
         "status": "measured"
       },
-      "speed": 181.012503571331,
+      "speed": 180.519945676338,
       "aaFrontierTier": "frontier",
       "aaFrontierConfiguration": "Claude Haiku 5.5 (high)",
       "aaFrontierIntelligenceGap": 0,
@@ -11660,7 +11781,7 @@
         "value": 29.4523685891139,
         "status": "measured"
       },
-      "speed": 173.328043596833,
+      "speed": 173.139253959206,
       "aaFrontierTier": "near",
       "aaFrontierConfiguration": "Claude Haiku 5.5 (low)",
       "aaFrontierIntelligenceGap": 1,
@@ -11777,7 +11898,7 @@
         "value": 34.4646519474657,
         "status": "measured"
       },
-      "speed": 177.520010450848,
+      "speed": 179.117141046101,
       "aaFrontierTier": "frontier",
       "aaFrontierConfiguration": "Claude Haiku 5.5 (medium)",
       "aaFrontierIntelligenceGap": 0,
@@ -11894,7 +12015,7 @@
         "value": 41.7899103794639,
         "status": "measured"
       },
-      "speed": 64.3788190834396,
+      "speed": 60.1964584175013,
       "aaFrontierTier": null,
       "aaFrontierConfiguration": null,
       "aaFrontierIntelligenceGap": null,
@@ -12011,7 +12132,7 @@
         "value": 50.7771115797629,
         "status": "measured"
       },
-      "speed": 54.0971510836196,
+      "speed": 52.2937155235414,
       "aaFrontierTier": null,
       "aaFrontierConfiguration": null,
       "aaFrontierIntelligenceGap": null,
@@ -12128,7 +12249,7 @@
         "value": 53.5831959822067,
         "status": "measured"
       },
-      "speed": 77.3378196243521,
+      "speed": 80.3420037119972,
       "aaFrontierTier": "frontier",
       "aaFrontierConfiguration": "Claude Opus 5.5 (high with fallback)",
       "aaFrontierIntelligenceGap": 0,
@@ -12245,7 +12366,7 @@
         "value": 51.2434931792768,
         "status": "measured"
       },
-      "speed": 79.1139184015285,
+      "speed": 83.0038385398776,
       "aaFrontierTier": "near",
       "aaFrontierConfiguration": "Claude Opus 5.5 (medium with fallback)",
       "aaFrontierIntelligenceGap": 1,
@@ -12362,7 +12483,7 @@
         "value": 55.9873505840139,
         "status": "measured"
       },
-      "speed": 83.7532842098936,
+      "speed": 82.0442001498324,
       "aaFrontierTier": "frontier",
       "aaFrontierConfiguration": "Claude Opus 5.5 (xhigh with fallback)",
       "aaFrontierIntelligenceGap": 0,
@@ -12479,7 +12600,7 @@
         "value": 38.1638712882576,
         "status": "measured"
       },
-      "speed": 83.7882524910718,
+      "speed": 83.2076803354227,
       "aaFrontierTier": null,
       "aaFrontierConfiguration": null,
       "aaFrontierIntelligenceGap": null,
@@ -12596,7 +12717,7 @@
         "value": 46.7533528066958,
         "status": "measured"
       },
-      "speed": 102.108322678532,
+      "speed": 105.973186311864,
       "aaFrontierTier": null,
       "aaFrontierConfiguration": null,
       "aaFrontierIntelligenceGap": null,
@@ -12713,7 +12834,7 @@
         "value": 35.8681594577587,
         "status": "measured"
       },
-      "speed": 101.309164322518,
+      "speed": 105.194381914952,
       "aaFrontierTier": null,
       "aaFrontierConfiguration": null,
       "aaFrontierIntelligenceGap": null,
@@ -12830,7 +12951,7 @@
         "value": 40.838652287929,
         "status": "measured"
       },
-      "speed": 101.64056604037,
+      "speed": 106.143990595688,
       "aaFrontierTier": null,
       "aaFrontierConfiguration": null,
       "aaFrontierIntelligenceGap": null,
@@ -12947,7 +13068,7 @@
         "value": 51.8955544183089,
         "status": "measured"
       },
-      "speed": 105.232412368262,
+      "speed": 108.047239373505,
       "aaFrontierTier": "near",
       "aaFrontierConfiguration": "Claude Sonnet 5.5 (xhigh with fallback)",
       "aaFrontierIntelligenceGap": 2,
@@ -13064,7 +13185,7 @@
         "value": 34.3305129347816,
         "status": "measured"
       },
-      "speed": 149.993680727674,
+      "speed": 150.147659307021,
       "aaFrontierTier": null,
       "aaFrontierConfiguration": null,
       "aaFrontierIntelligenceGap": null,
@@ -13181,7 +13302,7 @@
         "value": 35.9967791278402,
         "status": "measured"
       },
-      "speed": 86.5586055788924,
+      "speed": 103.434579572368,
       "aaFrontierTier": null,
       "aaFrontierConfiguration": null,
       "aaFrontierIntelligenceGap": null,
@@ -13299,7 +13420,7 @@
         "value": 33.7054572377545,
         "status": "measured"
       },
-      "speed": 88.2383768266289,
+      "speed": 94.0836886023789,
       "aaFrontierTier": null,
       "aaFrontierConfiguration": null,
       "aaFrontierIntelligenceGap": null,
@@ -13416,7 +13537,7 @@
         "value": 44.777392385614,
         "status": "measured"
       },
-      "speed": 76.7442109286699,
+      "speed": 94.8971127613436,
       "aaFrontierTier": null,
       "aaFrontierConfiguration": null,
       "aaFrontierIntelligenceGap": null,
@@ -13533,7 +13654,7 @@
         "value": 41.807466113455,
         "status": "measured"
       },
-      "speed": 64.818528579187,
+      "speed": 69.5551039267307,
       "aaFrontierTier": null,
       "aaFrontierConfiguration": null,
       "aaFrontierIntelligenceGap": null,
@@ -13651,7 +13772,7 @@
         "value": 38.3556437590607,
         "status": "measured"
       },
-      "speed": 83.3894653194255,
+      "speed": 89.1713657415737,
       "aaFrontierTier": null,
       "aaFrontierConfiguration": null,
       "aaFrontierIntelligenceGap": null,
@@ -13768,7 +13889,7 @@
         "value": 37.3244239690841,
         "status": "measured"
       },
-      "speed": 128.372798137841,
+      "speed": 127.139543725604,
       "aaFrontierTier": null,
       "aaFrontierConfiguration": null,
       "aaFrontierIntelligenceGap": null,
@@ -13885,7 +14006,7 @@
         "value": 21.0124783424265,
         "status": "measured"
       },
-      "speed": 122.102985599068,
+      "speed": 117.116468716467,
       "aaFrontierTier": "near",
       "aaFrontierConfiguration": "GPT-5.6 Luna (low)",
       "aaFrontierIntelligenceGap": 1,
@@ -14002,7 +14123,7 @@
         "value": 46.9727068915036,
         "status": "measured"
       },
-      "speed": 80.8788143484042,
+      "speed": 81.7116304841162,
       "aaFrontierTier": null,
       "aaFrontierConfiguration": null,
       "aaFrontierIntelligenceGap": null,
@@ -14119,7 +14240,7 @@
         "value": 50.9191471636152,
         "status": "measured"
       },
-      "speed": 53.0639823310158,
+      "speed": 56.6147429977635,
       "aaFrontierTier": "near",
       "aaFrontierConfiguration": "GPT-6 Astra (high)",
       "aaFrontierIntelligenceGap": 3,
@@ -14236,10 +14357,10 @@
         "value": 52.3863277108782,
         "status": "measured"
       },
-      "speed": 53.7956113596723,
+      "speed": 61.4911514119706,
       "aaFrontierTier": "near",
       "aaFrontierConfiguration": "GPT-6 Astra (xhigh)",
-      "aaFrontierIntelligenceGap": 2,
+      "aaFrontierIntelligenceGap": 3,
       "aaFrontierFootnote": null,
       "rank": {
         "api": null,
@@ -14353,7 +14474,7 @@
         "value": 32.9282054150837,
         "status": "measured"
       },
-      "speed": 123.035249875314,
+      "speed": 118.908063051297,
       "aaFrontierTier": "frontier",
       "aaFrontierConfiguration": "GPT-6 Luna (high)",
       "aaFrontierIntelligenceGap": 0,
@@ -14470,7 +14591,7 @@
         "value": 21.5261980080866,
         "status": "measured"
       },
-      "speed": 114.846694949189,
+      "speed": 117.467042087552,
       "aaFrontierTier": "frontier",
       "aaFrontierConfiguration": "GPT-6 Luna (low)",
       "aaFrontierIntelligenceGap": 0,
@@ -14704,7 +14825,7 @@
         "value": 34.5587320217785,
         "status": "measured"
       },
-      "speed": 123.38164128531,
+      "speed": 127.08809426667,
       "aaFrontierTier": "frontier",
       "aaFrontierConfiguration": "GPT-6 Luna (xhigh)",
       "aaFrontierIntelligenceGap": 0,
@@ -14821,7 +14942,7 @@
         "value": 47.6305176437724,
         "status": "measured"
       },
-      "speed": 103.470991184621,
+      "speed": 106.451300416298,
       "aaFrontierTier": null,
       "aaFrontierConfiguration": null,
       "aaFrontierIntelligenceGap": null,
@@ -14938,7 +15059,7 @@
         "value": 50.2377777519769,
         "status": "measured"
       },
-      "speed": 49.0324958435188,
+      "speed": 52.3005440465197,
       "aaFrontierTier": "frontier",
       "aaFrontierConfiguration": "GPT-6.1 Sol (high)",
       "aaFrontierIntelligenceGap": 0,
@@ -15055,7 +15176,7 @@
         "value": 42.0835618555848,
         "status": "measured"
       },
-      "speed": 47.4246869495732,
+      "speed": 50.7940843123345,
       "aaFrontierTier": null,
       "aaFrontierConfiguration": null,
       "aaFrontierIntelligenceGap": null,
@@ -15172,7 +15293,7 @@
         "value": 47.7833271274065,
         "status": "measured"
       },
-      "speed": 48.20476433994,
+      "speed": 50.4244080636367,
       "aaFrontierTier": "frontier",
       "aaFrontierConfiguration": "GPT-6.1 Sol (medium)",
       "aaFrontierIntelligenceGap": 0,
@@ -15289,7 +15410,7 @@
         "value": 51.0377679093761,
         "status": "measured"
       },
-      "speed": 50.7260220999208,
+      "speed": 52.4869992333642,
       "aaFrontierTier": "frontier",
       "aaFrontierConfiguration": "GPT-6.1 Sol (xhigh)",
       "aaFrontierIntelligenceGap": 0,
@@ -15407,7 +15528,7 @@
         "value": 32.5983283695905,
         "status": "measured"
       },
-      "speed": 215.825317394618,
+      "speed": 203.342235900918,
       "aaFrontierTier": null,
       "aaFrontierConfiguration": null,
       "aaFrontierIntelligenceGap": null,
@@ -15525,7 +15646,7 @@
         "value": 33.9785928920714,
         "status": "measured"
       },
-      "speed": 211.952579831942,
+      "speed": 202.363409930968,
       "aaFrontierTier": null,
       "aaFrontierConfiguration": null,
       "aaFrontierIntelligenceGap": null,
@@ -15760,7 +15881,7 @@
         "value": 40.9262321765904,
         "status": "measured"
       },
-      "speed": 141.521760096549,
+      "speed": 136.877168385181,
       "aaFrontierTier": null,
       "aaFrontierConfiguration": null,
       "aaFrontierIntelligenceGap": null,
@@ -15878,7 +15999,7 @@
         "value": 42.836322654063,
         "status": "measured"
       },
-      "speed": 83.8437455474684,
+      "speed": 70.6899346209086,
       "aaFrontierTier": null,
       "aaFrontierConfiguration": null,
       "aaFrontierIntelligenceGap": null,
@@ -15995,7 +16116,7 @@
         "value": 44.199810436996,
         "status": "measured"
       },
-      "speed": 82.0216249185749,
+      "speed": 79.7275877451647,
       "aaFrontierTier": null,
       "aaFrontierConfiguration": null,
       "aaFrontierIntelligenceGap": null,
@@ -16112,7 +16233,7 @@
         "value": 46.4465506302286,
         "status": "measured"
       },
-      "speed": 88.85458071894,
+      "speed": 92.6558883015873,
       "aaFrontierTier": null,
       "aaFrontierConfiguration": null,
       "aaFrontierIntelligenceGap": null,
@@ -16230,10 +16351,127 @@
         "value": 43.5938229518782,
         "status": "measured"
       },
-      "speed": 36.9047986030671,
+      "speed": 46.5275785590327,
       "aaFrontierTier": null,
       "aaFrontierConfiguration": null,
       "aaFrontierIntelligenceGap": null,
+      "aaFrontierFootnote": null,
+      "rank": {
+        "api": null,
+        "plan": null
+      },
+      "overall": {
+        "api": null,
+        "plan": null
+      },
+      "quality": null,
+      "qualityRank": null,
+      "dims": {
+        "costComposite": null,
+        "frontierCode": null,
+        "terminalBench": null,
+        "bugHunt": null,
+        "vibeCode": null,
+        "codeMigration": null,
+        "livebench2Overall": null,
+        "gdpval": null,
+        "automationBench": null,
+        "omniscience": null,
+        "lcr": null,
+        "hle": null,
+        "scicode": null,
+        "critpt": null
+      },
+      "costDims": {
+        "api": null,
+        "plan": null
+      },
+      "raw": {
+        "frontierCode": null,
+        "terminalBench": null,
+        "bugHunt": null,
+        "vibeCode": null,
+        "codeMigration": null,
+        "livebench2Overall": null,
+        "gdpval": null,
+        "automationBench": null,
+        "omniscience": null,
+        "lcr": null,
+        "hle": null,
+        "scicode": null,
+        "critpt": null
+      },
+      "coverage": {
+        "pct": 0.0,
+        "costAvailable": false,
+        "missing": [
+          "FrontierCode 1.1",
+          "Terminal-Bench 4.0 (AA run)",
+          "Bug Hunt Bench",
+          "Vibe Code Bench v1.1 (Vals)",
+          "Code Migration v1.1 (Vals)",
+          "LiveBench 2.0 Overall",
+          "GDPval-AA v2.1",
+          "AutomationBench-AA",
+          "AA-Omniscience",
+          "AA-LCR v1.1",
+          "Humanity's Last Exam",
+          "SciCode",
+          "CritPt"
+        ],
+        "provisional": null,
+        "provisionalReasons": []
+      },
+      "cost": {
+        "apiUsd": null,
+        "planUsd": null,
+        "fallback": null,
+        "route": null,
+        "subset": null,
+        "partialComponents": [],
+        "workload": null,
+        "planFlags": []
+      },
+      "grade": "missing",
+      "pareto": {
+        "api": false,
+        "plan": false
+      },
+      "frontierStatus": {
+        "api": null,
+        "plan": null
+      },
+      "scenario": {
+        "api": null,
+        "plan": null
+      },
+      "flags": [],
+      "tier": null,
+      "band": {
+        "api": null,
+        "plan": null
+      },
+      "bandExcludesTransfer": false
+    },
+    {
+      "slug": "kimi-k3-1-pro",
+      "name": "Kimi K3.1 Pro",
+      "shortName": "Kimi K3.1 Pro",
+      "developer": "Moonshot AI",
+      "aaUrl": "https://artificialanalysis.ai/models/kimi-k3-1-pro",
+      "aaVariant": null,
+      "rankingEligible": false,
+      "exclusionReasons": [
+        "Not in the max-effort ranking: no Code Migration v1.1 (Vals); ranked in the AI Coding Daily ranking"
+      ],
+      "intelligenceIndex": {
+        "value": 55.0869210959395,
+        "status": "measured"
+      },
+      "speed": 57.5311225248271,
+      "aaFrontierTier": "frontier",
+      "aaFrontierConfiguration": "Kimi K3.1 Pro",
+      "aaFrontierIntelligenceGap": 0,
       "aaFrontierFootnote": null,
       "rank": {
         "api": null,
@@ -16347,7 +16585,7 @@
         "value": 37.8843590141754,
         "status": "measured"
       },
-      "speed": 56.9560317582743,
+      "speed": 55.7583257414068,
       "aaFrontierTier": "frontier",
       "aaFrontierConfiguration": "MiMo-V2.6-Flash",
       "aaFrontierIntelligenceGap": 0,
@@ -16464,7 +16702,7 @@
         "value": 42.7057475126235,
         "status": "measured"
       },
-      "speed": 95.5531649197315,
+      "speed": 111.713489047707,
       "aaFrontierTier": "near",
       "aaFrontierConfiguration": "MiniMax-M3.1-Flash",
       "aaFrontierIntelligenceGap": 3,
@@ -16582,7 +16820,7 @@
         "value": 39.5758607970943,
         "status": "measured"
       },
-      "speed": 269.562501244102,
+      "speed": 270.626558772591,
       "aaFrontierTier": null,
       "aaFrontierConfiguration": null,
       "aaFrontierIntelligenceGap": null,
@@ -16699,7 +16937,7 @@
         "value": 48.0923107719685,
         "status": "measured"
       },
-      "speed": 111.586088325733,
+      "speed": 146.11468191899,
       "aaFrontierTier": null,
       "aaFrontierConfiguration": null,
       "aaFrontierIntelligenceGap": null,
@@ -16816,7 +17054,7 @@
         "value": 45.0732966922226,
         "status": "measured"
       },
-      "speed": 285.44656525553,
+      "speed": 304.703313813038,
       "aaFrontierTier": null,
       "aaFrontierConfiguration": null,
       "aaFrontierIntelligenceGap": null,
@@ -16933,7 +17171,7 @@
         "value": 52.393894697293,
         "status": "measured"
       },
-      "speed": 145.137944782008,
+      "speed": 161.638337420513,
       "aaFrontierTier": null,
       "aaFrontierConfiguration": null,
       "aaFrontierIntelligenceGap": null,
@@ -17167,7 +17405,7 @@
         "value": 45.4152084980521,
         "status": "measured"
       },
-      "speed": 41.1112109720989,
+      "speed": 39.9628278179705,
       "aaFrontierTier": null,
       "aaFrontierConfiguration": null,
       "aaFrontierIntelligenceGap": null,
@@ -17273,24 +17511,24 @@
   "picks": {
     "api": {
       "value": {
-        "slug": "deepseek-v4-1-flash-1017",
+        "slug": "gpt-6-1-sol",
         "label": "Best overall value",
-        "reason": "DeepSeek V4.1 Flash 1017 has the highest overall score in the API ranking at 60.4, costing $410.04 per basket run.",
-        "score": 60.38662179090506,
+        "reason": "GPT-6.1 Sol has the highest overall score in the API ranking at 60.0, costing $1,233.11 per basket run.",
+        "score": 60.02126104410708,
         "unit": "overall"
       },
       "other": {
         "slug": "claude-opus-5-5",
         "label": "Best on a subscription",
         "reason": "Claude Opus 5.5 ranks #1 on a subscription and #6 in the API ranking.",
-        "score": 64.31713427060696,
+        "score": 64.16075927060695,
         "unit": "overall on a subscription"
       },
       "budget": {
-        "slug": "mimo-v2-6-pro",
+        "slug": "deepseek-v4-1-flash-1017",
         "label": "Best on a budget",
-        "reason": "MiMo-V2.6-Pro scores best overall (60.3) among the cheapest third, at $136.13 per basket run. Subset cost: cross-workload ordering not identified.",
-        "score": 60.292266592541466,
+        "reason": "DeepSeek V4.1 Flash 1017 scores best overall (59.8) among the cheapest third, at $410.04 per basket run.",
+        "score": 59.80387179090506,
         "unit": "overall"
       }
     },
@@ -17298,22 +17536,22 @@
       "value": {
         "slug": "claude-opus-5-5",
         "label": "Best overall value",
-        "reason": "Claude Opus 5.5 has the highest overall score in the Plan ranking at 64.3, costing $158.77 per basket run.",
-        "score": 64.31713427060696,
+        "reason": "Claude Opus 5.5 has the highest overall score in the Plan ranking at 64.2, costing $158.77 per basket run.",
+        "score": 64.16075927060695,
         "unit": "overall"
       },
       "other": {
-        "slug": "deepseek-v4-1-flash-1017",
+        "slug": "gpt-6-1-sol",
         "label": "Best at API rates",
-        "reason": "DeepSeek V4.1 Flash 1017 ranks #1 at API rates and #22 in the Plan ranking.",
-        "score": 60.38662179090506,
+        "reason": "GPT-6.1 Sol ranks #1 at API rates and #7 in the Plan ranking.",
+        "score": 60.02126104410708,
         "unit": "overall at API rates"
       },
       "budget": {
-        "slug": "gpt-6-1-sol",
+        "slug": "claude-haiku-5-5-max",
         "label": "Best on a budget",
-        "reason": "GPT-6.1 Sol scores best overall (62.7) among the cheapest third, at $114.47 per basket run.",
-        "score": 62.74988182625437,
+        "reason": "Claude Haiku 5.5 (max) scores best overall (59.2) among the cheapest third, at $16.42 per basket run.",
+        "score": 59.18838300890208,
         "unit": "overall"
       }
     }

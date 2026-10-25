@@ -11,10 +11,10 @@
       "plan": 1
     },
     "overall": {
-      "api": 53.98178468213949,
-      "plan": 64.31713427060696
+      "api": 53.82540968213948,
+      "plan": 64.16075927060695
     },
-    "quality": 67.91906051781837,
+    "quality": 67.71056051781835,
     "qualityRank": 1,
     "coverage": {
       "pct": 100.0,
@@ -42,7 +42,7 @@
         "name": "Artificial Analysis model page (Intelligence Index v4.3.2)",
         "url": "https://artificialanalysis.ai/evaluations/frontiercode"
       },
-      "observedAt": "2026-10-23",
+      "observedAt": "2026-10-25",
       "evaluatedVariant": null,
       "note": null,
       "grade": "measured"
@@ -52,15 +52,15 @@
       "label": "LiveBench 2.0 Overall",
       "category": "Software engineering",
       "weightPct": 11.25,
-      "value": 86.53,
+      "value": 85.14,
       "decimals": 1,
       "unit": "mean of seven category scores (0-100)",
-      "normalized": 86.53,
+      "normalized": 85.14,
       "source": {
         "name": "Artificial Analysis model page (Intelligence Index v4.3.2)",
         "url": "https://livebench.ai/"
       },
-      "observedAt": "2026-10-23",
+      "observedAt": "2026-10-25",
       "evaluatedVariant": "claude-opus-5.5 / LiveBench's own, one run per model at its top effort",
       "note": null,
       "grade": "measured"
@@ -78,7 +78,7 @@
         "name": "Artificial Analysis Terminal-Bench 4.0 run (mini-SWE-agent)",
         "url": "https://www.tbench.ai/leaderboard/terminal-bench/4.0"
       },
-      "observedAt": "2026-10-23",
+      "observedAt": "2026-10-25",
       "evaluatedVariant": "mini-SWE-agent",
       "note": null,
       "grade": "measured"
@@ -96,7 +96,7 @@
         "name": "Artificial Analysis model page (Intelligence Index v4.3.2)",
         "url": "https://artificialanalysis.ai/evaluations/gdpval-aa"
       },
-      "observedAt": "2026-10-23",
+      "observedAt": "2026-10-25",
       "evaluatedVariant": null,
       "note": null,
       "grade": "measured"
@@ -114,7 +114,7 @@
         "name": "Artificial Analysis model page (Intelligence Index v4.3.2)",
         "url": "https://artificialanalysis.ai/evaluations/automationbench-aa"
       },
-      "observedAt": "2026-10-23",
+      "observedAt": "2026-10-25",
       "evaluatedVariant": null,
       "note": null,
       "grade": "measured"
@@ -132,7 +132,7 @@
         "name": "Artificial Analysis model page (Intelligence Index v4.3.2)",
         "url": "https://artificialanalysis.ai/evaluations/omniscience"
       },
-      "observedAt": "2026-10-23",
+      "observedAt": "2026-10-25",
       "evaluatedVariant": null,
       "note": null,
       "grade": "measured"
@@ -150,7 +150,7 @@
         "name": "Bug Hunt Bench published runs",
         "url": "https://bughunt.productcompass.pm/"
       },
-      "observedAt": "2026-10-19",
+      "observedAt": "2026-10-23",
       "evaluatedVariant": "Opus 5.5 (max effort) - mean of 3 / Claude Code",
       "note": null,
       "grade": "measured"
@@ -168,7 +168,7 @@
         "name": "Artificial Analysis model page (Intelligence Index v4.3.2)",
         "url": "https://www.vals.ai/benchmarks/code-migration-v1-1"
       },
-      "observedAt": "2026-10-23",
+      "observedAt": "2026-10-25",
       "evaluatedVariant": "anthropic/claude-opus-5-5 / Pi agent harness, the same for every model",
       "note": null,
       "grade": "measured"
@@ -186,7 +186,7 @@
         "name": "Artificial Analysis model page (Intelligence Index v4.3.2)",
         "url": "https://www.vals.ai/benchmarks/vibe-code"
       },
-      "observedAt": "2026-10-23",
+      "observedAt": "2026-10-25",
       "evaluatedVariant": "anthropic/claude-opus-5-5 / OpenHands, the same for every model",
       "note": null,
       "grade": "measured"
@@ -204,7 +204,7 @@
         "name": "Artificial Analysis model page (Intelligence Index v4.3.2)",
         "url": "https://artificialanalysis.ai/evaluations/artificial-analysis-long-context-reasoning"
       },
-      "observedAt": "2026-10-23",
+      "observedAt": "2026-10-25",
       "evaluatedVariant": null,
       "note": null,
       "grade": "measured"
@@ -222,7 +222,7 @@
         "name": "Artificial Analysis model page (Intelligence Index v4.3.2)",
         "url": "https://artificialanalysis.ai/evaluations/humanitys-last-exam"
       },
-      "observedAt": "2026-10-23",
+      "observedAt": "2026-10-25",
       "evaluatedVariant": null,
       "note": null,
       "grade": "measured"
@@ -240,7 +240,7 @@
         "name": "Artificial Analysis model page (Intelligence Index v4.3.2)",
         "url": "https://artificialanalysis.ai/evaluations/scicode"
       },
-      "observedAt": "2026-10-23",
+      "observedAt": "2026-10-25",
       "evaluatedVariant": null,
       "note": null,
       "grade": "measured"
@@ -258,7 +258,7 @@
         "name": "Artificial Analysis model page (Intelligence Index v4.3.2)",
         "url": "https://artificialanalysis.ai/evaluations/critpt"
       },
-      "observedAt": "2026-10-23",
+      "observedAt": "2026-10-25",
       "evaluatedVariant": null,
       "note": null,
       "grade": "measured"
@@ -402,7 +402,7 @@
       "usdPerRun": 158.77276952112044,
       "selected": true,
       "planRank": 1,
-      "planValue": 64.31713427060696
+      "planValue": 64.16075927060695
     },
     {
       "id": "claude-max20x-opus55-semianalysis",
@@ -419,7 +419,7 @@
       "usdPerRun": 159.50394209097718,
       "selected": false,
       "planRank": 2,
-      "planValue": 64.30097002191269
+      "planValue": 64.14459502191268
     },
     {
       "id": "claude-max5x-opus55-semianalysis",
@@ -436,7 +436,7 @@
       "usdPerRun": 163.3487532715108,
       "selected": false,
       "planRank": 3,
-      "planValue": 64.21717256024661
+      "planValue": 64.06079756024658
     }
   ],
   "scenarios": {
@@ -467,7 +467,7 @@
         "unevaluable": null,
         "top1": 0.0,
         "top3": 0.0,
-        "frontier": 0.9399
+        "frontier": 0.9647
       },
       {
         "stratum": "S1",
@@ -493,8 +493,8 @@
         "targetProfile": "published-record leaf values redrawn with plug-in binomial task-sampling noise from each leaf's published task count (independent-task approximation; GDPval-AA from its displayed rating interval, an assumption) + conventional identification of missing leaves",
         "unevaluable": null,
         "top1": 0.0,
-        "top3": 0.0039,
-        "frontier": 0.6404
+        "top3": 0.01,
+        "frontier": 0.6828
       }
     ],
     "plan": [
@@ -548,9 +548,9 @@
         "kernel": "primary",
         "targetProfile": "published-record leaf values redrawn with plug-in binomial task-sampling noise from each leaf's published task count (independent-task approximation; GDPval-AA from its displayed rating interval, an assumption) + conventional identification of missing leaves",
         "unevaluable": null,
-        "top1": 0.8594,
-        "top3": 0.8714,
-        "frontier": 0.9713
+        "top1": 0.8606,
+        "top3": 0.8716,
+        "frontier": 0.9707
       }
     ]
   },
@@ -663,8 +663,8 @@
         "plan": 1
       },
       "overall": {
-        "api": 53.98178468213949,
-        "plan": 64.31713427060696
+        "api": 53.82540968213948,
+        "plan": 64.16075927060695
       }
     },
     {

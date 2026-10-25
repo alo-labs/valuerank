@@ -7,15 +7,15 @@
   "selectedPage": "https://artificialanalysis.ai/models/claude-opus-5-5-medium",
   "summary": {
     "rank": {
-      "api": 5,
+      "api": 6,
       "plan": 4
     },
     "overall": {
-      "api": 49.171638385958666,
-      "plan": 57.98503869926958
+      "api": 49.17977588595866,
+      "plan": 58.25300118587574
     },
-    "quality": 58.995617719976366,
-    "qualityRank": 2,
+    "quality": 59.006467719976364,
+    "qualityRank": 3,
     "coverage": {
       "pct": 100.0,
       "costAvailable": true,
@@ -42,7 +42,7 @@
         "name": "Artificial Analysis model page (Intelligence Index v4.3.2)",
         "url": "https://artificialanalysis.ai/evaluations/frontiercode"
       },
-      "observedAt": "2026-10-23",
+      "observedAt": "2026-10-25",
       "evaluatedVariant": null,
       "note": null,
       "grade": "measured"
@@ -60,7 +60,7 @@
         "name": "Artificial Analysis Terminal-Bench 4.0 run (mini-SWE-agent)",
         "url": "https://www.tbench.ai/leaderboard/terminal-bench/4.0"
       },
-      "observedAt": "2026-10-23",
+      "observedAt": "2026-10-25",
       "evaluatedVariant": "mini-SWE-agent",
       "note": null,
       "grade": "measured"
@@ -78,7 +78,7 @@
         "name": "Bug Hunt Bench published runs",
         "url": "https://bughunt.productcompass.pm/"
       },
-      "observedAt": "2026-10-19",
+      "observedAt": "2026-10-23",
       "evaluatedVariant": "Opus 5.5 (medium effort) - mean of 3 / Claude Code",
       "note": null,
       "grade": "measured"
@@ -96,7 +96,7 @@
         "name": "Artificial Analysis model page (Intelligence Index v4.3.2)",
         "url": "https://aicodingdaily.com/leaderboard"
       },
-      "observedAt": "2026-10-23",
+      "observedAt": "2026-10-25",
       "evaluatedVariant": "Opus 5.5 (Medium) / Claude Code",
       "note": null,
       "grade": "measured"
@@ -106,15 +106,15 @@
       "label": "GDPval-AA v2.1",
       "category": "Professional work",
       "weightPct": 7.5,
-      "value": 1582.9,
+      "value": 1585.07,
       "decimals": 1,
       "unit": "Elo",
-      "normalized": 54.14500000000001,
+      "normalized": 54.2535,
       "source": {
         "name": "Artificial Analysis model page (Intelligence Index v4.3.2)",
         "url": "https://artificialanalysis.ai/evaluations/gdpval-aa"
       },
-      "observedAt": "2026-10-23",
+      "observedAt": "2026-10-25",
       "evaluatedVariant": null,
       "note": null,
       "grade": "measured"
@@ -132,7 +132,7 @@
         "name": "Artificial Analysis model page (Intelligence Index v4.3.2)",
         "url": "https://artificialanalysis.ai/evaluations/automationbench-aa"
       },
-      "observedAt": "2026-10-23",
+      "observedAt": "2026-10-25",
       "evaluatedVariant": null,
       "note": null,
       "grade": "measured"
@@ -150,7 +150,7 @@
         "name": "Artificial Analysis model page (Intelligence Index v4.3.2)",
         "url": "https://artificialanalysis.ai/evaluations/omniscience"
       },
-      "observedAt": "2026-10-23",
+      "observedAt": "2026-10-25",
       "evaluatedVariant": null,
       "note": null,
       "grade": "measured"
@@ -168,7 +168,7 @@
         "name": "Artificial Analysis model page (Intelligence Index v4.3.2)",
         "url": "https://artificialanalysis.ai/evaluations/artificial-analysis-long-context-reasoning"
       },
-      "observedAt": "2026-10-23",
+      "observedAt": "2026-10-25",
       "evaluatedVariant": null,
       "note": null,
       "grade": "measured"
@@ -186,7 +186,7 @@
         "name": "Artificial Analysis model page (Intelligence Index v4.3.2)",
         "url": "https://artificialanalysis.ai/evaluations/humanitys-last-exam"
       },
-      "observedAt": "2026-10-23",
+      "observedAt": "2026-10-25",
       "evaluatedVariant": null,
       "note": null,
       "grade": "measured"
@@ -204,7 +204,7 @@
         "name": "Artificial Analysis model page (Intelligence Index v4.3.2)",
         "url": "https://artificialanalysis.ai/evaluations/scicode"
       },
-      "observedAt": "2026-10-23",
+      "observedAt": "2026-10-25",
       "evaluatedVariant": null,
       "note": null,
       "grade": "measured"
@@ -222,7 +222,7 @@
         "name": "Artificial Analysis model page (Intelligence Index v4.3.2)",
         "url": "https://artificialanalysis.ai/evaluations/critpt"
       },
-      "observedAt": "2026-10-23",
+      "observedAt": "2026-10-25",
       "evaluatedVariant": null,
       "note": null,
       "grade": "measured"
@@ -253,7 +253,7 @@
     ],
     "costScore": {
       "api": 19.699700383905565,
-      "plan": 54.953301637149224
+      "plan": 55.99260158357388
     },
     "components": [
       {
@@ -351,7 +351,7 @@
       "usdPerRun": 24.171414285944287,
       "selected": true,
       "planRank": 4,
-      "planValue": 57.98503869926958
+      "planValue": 58.25300118587574
     },
     {
       "id": "claude-max20x-claude-opus-5-5-medium-common-opus55-assumption",
@@ -368,7 +368,7 @@
       "usdPerRun": 24.28272729732421,
       "selected": false,
       "planRank": 5,
-      "planValue": 57.972502581368666
+      "planValue": 58.240754296423
     },
     {
       "id": "claude-max5x-claude-opus-5-5-medium-common-opus55-assumption",
@@ -385,7 +385,7 @@
       "usdPerRun": 24.86805766711124,
       "selected": false,
       "planRank": 6,
-      "planValue": 57.9075137978432
+      "planValue": 58.17726490889527
     }
   ],
   "scenarios": {
@@ -416,7 +416,7 @@
         "unevaluable": null,
         "top1": 0.0,
         "top3": 0.0,
-        "frontier": 0.9999
+        "frontier": 0.9996
       },
       {
         "stratum": "S1",
@@ -441,9 +441,9 @@
         "kernel": "primary",
         "targetProfile": "published-record leaf values redrawn with plug-in binomial task-sampling noise from each leaf's published task count (independent-task approximation; GDPval-AA from its displayed rating interval, an assumption) + conventional identification of missing leaves",
         "unevaluable": null,
-        "top1": 0.0062,
-        "top3": 0.09,
-        "frontier": 0.7416
+        "top1": 0.0057,
+        "top3": 0.0809,
+        "frontier": 0.7429
       }
     ],
     "plan": [
@@ -515,7 +515,7 @@
       "version": "v3.0.0",
       "date": "2026-10-19",
       "rank": {
-        "api": 5,
+        "api": 6,
         "plan": 4
       }
     }
@@ -551,12 +551,12 @@
       "shown": true,
       "rankingEligible": true,
       "rank": {
-        "api": 5,
+        "api": 6,
         "plan": 4
       },
       "overall": {
-        "api": 49.171638385958666,
-        "plan": 57.98503869926958
+        "api": 49.17977588595866,
+        "plan": 58.25300118587574
       }
     }
   ]

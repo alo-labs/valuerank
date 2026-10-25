@@ -58,7 +58,7 @@ def test_offline_stages_regenerate_the_committed_publication(repo_copy, pinned_c
 
 @pytest.mark.integration
 def test_reconciliation_gate_blocks_a_stale_inventory(repo_copy, monkeypatch):
-    monkeypatch.setenv("VALUERANK_NOW", "2026-11-01T00:00:00Z")
+    monkeypatch.setenv("VALUERANK_NOW", "2026-11-03T00:00:00Z")
 
     completed = subprocess.run(
         [sys.executable, "-m", "valuerank.aa_reconciliation"], cwd=repo_copy, capture_output=True, text=True

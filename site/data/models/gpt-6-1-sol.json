@@ -7,14 +7,14 @@
   "selectedPage": "https://artificialanalysis.ai/models/gpt-6-1-sol",
   "summary": {
     "rank": {
-      "api": 3,
+      "api": 1,
       "plan": 7
     },
     "overall": {
-      "api": 60.156636044107074,
-      "plan": 62.74988182625437
+      "api": 60.02126104410708,
+      "plan": 62.61450682625437
     },
-    "quality": 64.29488501376613,
+    "quality": 64.11438501376614,
     "qualityRank": 4,
     "coverage": {
       "pct": 100.0,
@@ -42,7 +42,7 @@
         "name": "Artificial Analysis model page (Intelligence Index v4.3.2)",
         "url": "https://artificialanalysis.ai/evaluations/frontiercode"
       },
-      "observedAt": "2026-10-23",
+      "observedAt": "2026-10-25",
       "evaluatedVariant": null,
       "note": null,
       "grade": "measured"
@@ -52,15 +52,15 @@
       "label": "LiveBench 2.0 Overall",
       "category": "Software engineering",
       "weightPct": 11.25,
-      "value": 85.41,
+      "value": 84.07,
       "decimals": 1,
       "unit": "mean of seven category scores (0-100)",
-      "normalized": 85.41,
+      "normalized": 84.07,
       "source": {
         "name": "Artificial Analysis model page (Intelligence Index v4.3.2)",
         "url": "https://livebench.ai/"
       },
-      "observedAt": "2026-10-23",
+      "observedAt": "2026-10-25",
       "evaluatedVariant": "gpt-6.1-sol / LiveBench's own, one run per model at its top effort",
       "note": null,
       "grade": "measured"
@@ -78,7 +78,7 @@
         "name": "Artificial Analysis Terminal-Bench 4.0 run (mini-SWE-agent)",
         "url": "https://www.tbench.ai/leaderboard/terminal-bench/4.0"
       },
-      "observedAt": "2026-10-23",
+      "observedAt": "2026-10-25",
       "evaluatedVariant": "mini-SWE-agent",
       "note": null,
       "grade": "measured"
@@ -88,15 +88,15 @@
       "label": "GDPval-AA v2.1",
       "category": "Professional work",
       "weightPct": 7.5,
-      "value": 1592.1,
+      "value": 1596.2,
       "decimals": 1,
       "unit": "Elo",
-      "normalized": 54.60499999999999,
+      "normalized": 54.81,
       "source": {
         "name": "Artificial Analysis model page (Intelligence Index v4.3.2)",
         "url": "https://artificialanalysis.ai/evaluations/gdpval-aa"
       },
-      "observedAt": "2026-10-23",
+      "observedAt": "2026-10-25",
       "evaluatedVariant": null,
       "note": null,
       "grade": "measured"
@@ -114,7 +114,7 @@
         "name": "Artificial Analysis model page (Intelligence Index v4.3.2)",
         "url": "https://artificialanalysis.ai/evaluations/automationbench-aa"
       },
-      "observedAt": "2026-10-23",
+      "observedAt": "2026-10-25",
       "evaluatedVariant": null,
       "note": null,
       "grade": "measured"
@@ -132,7 +132,7 @@
         "name": "Artificial Analysis model page (Intelligence Index v4.3.2)",
         "url": "https://artificialanalysis.ai/evaluations/omniscience"
       },
-      "observedAt": "2026-10-23",
+      "observedAt": "2026-10-25",
       "evaluatedVariant": null,
       "note": null,
       "grade": "measured"
@@ -150,7 +150,7 @@
         "name": "Bug Hunt Bench published runs",
         "url": "https://bughunt.productcompass.pm/"
       },
-      "observedAt": "2026-10-19",
+      "observedAt": "2026-10-23",
       "evaluatedVariant": "GPT-6.1 Sol (max effort) - mean of 3 / Codex CLI",
       "note": null,
       "grade": "measured"
@@ -168,7 +168,7 @@
         "name": "Artificial Analysis model page (Intelligence Index v4.3.2)",
         "url": "https://www.vals.ai/benchmarks/code-migration-v1-1"
       },
-      "observedAt": "2026-10-23",
+      "observedAt": "2026-10-25",
       "evaluatedVariant": "openai/gpt-6.1-sol / Pi agent harness, the same for every model",
       "note": null,
       "grade": "measured"
@@ -186,7 +186,7 @@
         "name": "Artificial Analysis model page (Intelligence Index v4.3.2)",
         "url": "https://www.vals.ai/benchmarks/vibe-code"
       },
-      "observedAt": "2026-10-23",
+      "observedAt": "2026-10-25",
       "evaluatedVariant": "openai/gpt-6.1-sol / OpenHands, the same for every model",
       "note": null,
       "grade": "measured"
@@ -204,7 +204,7 @@
         "name": "Artificial Analysis model page (Intelligence Index v4.3.2)",
         "url": "https://artificialanalysis.ai/evaluations/artificial-analysis-long-context-reasoning"
       },
-      "observedAt": "2026-10-23",
+      "observedAt": "2026-10-25",
       "evaluatedVariant": null,
       "note": null,
       "grade": "measured"
@@ -222,7 +222,7 @@
         "name": "Artificial Analysis model page (Intelligence Index v4.3.2)",
         "url": "https://artificialanalysis.ai/evaluations/humanitys-last-exam"
       },
-      "observedAt": "2026-10-23",
+      "observedAt": "2026-10-25",
       "evaluatedVariant": null,
       "note": null,
       "grade": "measured"
@@ -240,7 +240,7 @@
         "name": "Artificial Analysis model page (Intelligence Index v4.3.2)",
         "url": "https://artificialanalysis.ai/evaluations/scicode"
       },
-      "observedAt": "2026-10-23",
+      "observedAt": "2026-10-25",
       "evaluatedVariant": null,
       "note": null,
       "grade": "measured"
@@ -258,7 +258,7 @@
         "name": "Artificial Analysis model page (Intelligence Index v4.3.2)",
         "url": "https://artificialanalysis.ai/evaluations/critpt"
       },
-      "observedAt": "2026-10-23",
+      "observedAt": "2026-10-25",
       "evaluatedVariant": null,
       "note": null,
       "grade": "measured"
@@ -394,7 +394,7 @@
       "usdPerRun": 114.47361271340715,
       "selected": true,
       "planRank": 7,
-      "planValue": 62.74988182625437
+      "planValue": 62.61450682625437
     },
     {
       "id": "chatgpt-plus-gpt61sol-semianalysis",
@@ -411,7 +411,7 @@
       "usdPerRun": 116.88244134112054,
       "selected": false,
       "planRank": 8,
-      "planValue": 62.67661954105555
+      "planValue": 62.541244541055555
     },
     {
       "id": "chatgpt-pro100-gpt61sol-semianalysis",
@@ -428,7 +428,7 @@
       "usdPerRun": 116.88244134112054,
       "selected": false,
       "planRank": 8,
-      "planValue": 62.67661954105555
+      "planValue": 62.541244541055555
     },
     {
       "id": "chatgpt-pro200-gpt61sol-semianalysis",
@@ -445,7 +445,7 @@
       "usdPerRun": 118.34066757666237,
       "selected": false,
       "planRank": 10,
-      "planValue": 62.63299908346581
+      "planValue": 62.497624083465816
     }
   ],
   "scenarios": {
@@ -456,7 +456,7 @@
         "kernel": "primary",
         "targetProfile": "published-record reporting precision",
         "unevaluable": null,
-        "top1": 0.0,
+        "top1": 1.0,
         "top3": 1.0,
         "frontier": 1.0
       },
@@ -465,7 +465,7 @@
         "kernel": "primary",
         "targetProfile": "published-record reporting precision + conventional identification of missing leaves",
         "unevaluable": null,
-        "top1": 0.0,
+        "top1": 1.0,
         "top3": 1.0,
         "frontier": 1.0
       },
@@ -474,7 +474,7 @@
         "kernel": "primary",
         "targetProfile": "published-record reporting precision + conventional identification of missing leaves + weight-specification stress",
         "unevaluable": null,
-        "top1": 0.3583,
+        "top1": 0.6269,
         "top3": 1.0,
         "frontier": 1.0
       },
@@ -483,7 +483,7 @@
         "kernel": "endpoint-heavy",
         "targetProfile": "published-record reporting precision + conventional identification of missing leaves",
         "unevaluable": null,
-        "top1": 0.0,
+        "top1": 1.0,
         "top3": 1.0,
         "frontier": 1.0
       },
@@ -492,7 +492,7 @@
         "kernel": "primary",
         "targetProfile": "published-record reporting precision + conventional identification of missing leaves + conventional range sensitivity inside published 95% confidence intervals (no tail model)",
         "unevaluable": null,
-        "top1": 0.0,
+        "top1": 1.0,
         "top3": 1.0,
         "frontier": 1.0
       },
@@ -501,9 +501,9 @@
         "kernel": "primary",
         "targetProfile": "published-record leaf values redrawn with plug-in binomial task-sampling noise from each leaf's published task count (independent-task approximation; GDPval-AA from its displayed rating interval, an assumption) + conventional identification of missing leaves",
         "unevaluable": null,
-        "top1": 0.4387,
-        "top3": 0.9994,
-        "frontier": 0.9991
+        "top1": 0.5569,
+        "top3": 0.9998,
+        "frontier": 0.9998
       }
     ],
     "plan": [
@@ -557,8 +557,8 @@
         "kernel": "primary",
         "targetProfile": "published-record leaf values redrawn with plug-in binomial task-sampling noise from each leaf's published task count (independent-task approximation; GDPval-AA from its displayed rating interval, an assumption) + conventional identification of missing leaves",
         "unevaluable": null,
-        "top1": 0.1405,
-        "top3": 0.1562,
+        "top1": 0.1393,
+        "top3": 0.1545,
         "frontier": 1.0
       }
     ]
@@ -607,7 +607,7 @@
       "version": "v3.0.0",
       "date": "2026-10-19",
       "rank": {
-        "api": 3,
+        "api": 1,
         "plan": 7
       }
     }
@@ -628,12 +628,12 @@
       "shown": true,
       "rankingEligible": true,
       "rank": {
-        "api": 3,
+        "api": 1,
         "plan": 7
       },
       "overall": {
-        "api": 60.156636044107074,
-        "plan": 62.74988182625437
+        "api": 60.02126104410708,
+        "plan": 62.61450682625437
       }
     },
     {

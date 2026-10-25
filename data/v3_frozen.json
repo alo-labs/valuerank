@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
   "methodologyVersion": "3.0.0",
-  "anchorVersion": "v3-2026-10-23",
-  "frozenAt": "2026-10-23",
+  "anchorVersion": "v3-2026-10-25",
+  "frozenAt": "2026-10-25",
   "basketVersion": "SDLC basket v1",
   "mainWorkload": "9a0d376cc6080f3c",
   "workloads": {
@@ -223,19 +223,19 @@
   "barReferences": [
     {
       "id": "bar:median-quality",
-      "level": 64.25647228383212,
+      "level": 63.54142228383213,
       "levelConfiguration": "gemini-4-argon",
       "rule": "lower-median displayed quality of the non-provisional cohort configurations at freeze (E192; headline bar)"
     },
     {
       "id": "bar:lower-quartile-quality",
-      "level": 54.23053467083996,
+      "level": 53.27068467083996,
       "levelConfiguration": "mimo-v2-6-pro",
       "rule": "lower-quartile displayed quality of the non-provisional cohort configurations at freeze (O34)"
     },
     {
       "id": "bar:upper-quartile-quality",
-      "level": 65.00400168018204,
+      "level": 64.94250168018203,
       "levelConfiguration": "gpt-6-astra",
       "rule": "upper-quartile displayed quality of the non-provisional cohort configurations at freeze (O34)"
     }
@@ -262,7 +262,7 @@
     "ladderPopulation": "fewer than four population configurations: only the headline bar is pinned, because the quartile positions would coincide with it (E215)",
     "nonTautology": "a frozen level is never a configuration, so no bar can return its setter by construction; whether a result compares alternatives is published per result (possibleQualifierN, E198)",
     "lifetime": "fixed for the anchor version; replaced only by a versioned re-freeze that publishes old- and new-bar results on the common evaluable panel",
-    "selectionCutoff": "2026-10-23",
+    "selectionCutoff": "2026-10-25",
     "population": [
       "claude-haiku-5-5-max",
       "claude-opus-5-5",
@@ -277,17 +277,17 @@
     "bars": [
       {
         "id": "bar:median-quality",
-        "level": 64.25647228383212,
+        "level": 63.54142228383213,
         "levelConfiguration": "gemini-4-argon"
       },
       {
         "id": "bar:lower-quartile-quality",
-        "level": 54.23053467083996,
+        "level": 53.27068467083996,
         "levelConfiguration": "mimo-v2-6-pro"
       },
       {
         "id": "bar:upper-quartile-quality",
-        "level": 65.00400168018204,
+        "level": 64.94250168018203,
         "levelConfiguration": "gpt-6-astra"
       }
     ]

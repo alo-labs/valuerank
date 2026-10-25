@@ -14,7 +14,7 @@ import pytest
 
 from valuerank import capture_aa as ca
 
-NOW = "2026-10-23T06:26:23Z"  # pinned_clock instant
+NOW = "2026-10-25T09:56:47Z"  # pinned_clock instant
 
 
 def _shifted(delta: timedelta) -> str:

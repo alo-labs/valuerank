@@ -157,7 +157,7 @@ def test_main_normalises_rows_matches_the_cohort_and_records_capture_provenance(
     document = read_document(output)
     assert document["schemaVersion"] == "valuerank-terminal-bench-v1"
     assert document["version"] == "4.0"
-    assert document["observedAt"] == "2026-10-23T06:26:23Z"
+    assert document["observedAt"] == "2026-10-25T09:56:47Z"
     assert document["source"] == {
         "publisher": "Terminal-Bench / Harbor",
         "targetUrl": "https://www.tbench.ai/leaderboard/terminal-bench/4.0",

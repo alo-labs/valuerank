@@ -7,14 +7,14 @@
   "selectedPage": "https://artificialanalysis.ai/models/deepseek-v4-1-flash-1017",
   "summary": {
     "rank": {
-      "api": 1,
+      "api": 2,
       "plan": 22
     },
     "overall": {
-      "api": 60.38662179090506,
-      "plan": 53.6581856331888
+      "api": 59.80387179090506,
+      "plan": 53.0754356331888
     },
-    "quality": 58.15769146301675,
+    "quality": 57.380691463016746,
     "qualityRank": 6,
     "coverage": {
       "pct": 100.0,
@@ -42,7 +42,7 @@
         "name": "Artificial Analysis model page (Intelligence Index v4.3.2)",
         "url": "https://artificialanalysis.ai/evaluations/frontiercode"
       },
-      "observedAt": "2026-10-23",
+      "observedAt": "2026-10-25",
       "evaluatedVariant": null,
       "note": null,
       "grade": "measured"
@@ -52,15 +52,15 @@
       "label": "LiveBench 2.0 Overall",
       "category": "Software engineering",
       "weightPct": 11.25,
-      "value": 79.2,
+      "value": 74.02,
       "decimals": 1,
       "unit": "mean of seven category scores (0-100)",
-      "normalized": 79.2,
+      "normalized": 74.02,
       "source": {
         "name": "Artificial Analysis model page (Intelligence Index v4.3.2)",
         "url": "https://livebench.ai/"
       },
-      "observedAt": "2026-10-23",
+      "observedAt": "2026-10-25",
       "evaluatedVariant": "deepseek-v4.1-flash-1017 / LiveBench's own, one run per model at its top effort",
       "note": null,
       "grade": "measured"
@@ -78,7 +78,7 @@
         "name": "Artificial Analysis Terminal-Bench 4.0 run (mini-SWE-agent)",
         "url": "https://www.tbench.ai/leaderboard/terminal-bench/4.0"
       },
-      "observedAt": "2026-10-23",
+      "observedAt": "2026-10-25",
       "evaluatedVariant": "mini-SWE-agent",
       "note": null,
       "grade": "measured"
@@ -96,7 +96,7 @@
         "name": "Artificial Analysis model page (Intelligence Index v4.3.2)",
         "url": "https://artificialanalysis.ai/evaluations/gdpval-aa"
       },
-      "observedAt": "2026-10-23",
+      "observedAt": "2026-10-25",
       "evaluatedVariant": null,
       "note": null,
       "grade": "measured"
@@ -114,7 +114,7 @@
         "name": "Artificial Analysis model page (Intelligence Index v4.3.2)",
         "url": "https://artificialanalysis.ai/evaluations/automationbench-aa"
       },
-      "observedAt": "2026-10-23",
+      "observedAt": "2026-10-25",
       "evaluatedVariant": null,
       "note": null,
       "grade": "measured"
@@ -132,7 +132,7 @@
         "name": "Artificial Analysis model page (Intelligence Index v4.3.2)",
         "url": "https://artificialanalysis.ai/evaluations/omniscience"
       },
-      "observedAt": "2026-10-23",
+      "observedAt": "2026-10-25",
       "evaluatedVariant": null,
       "note": null,
       "grade": "measured"
@@ -150,7 +150,7 @@
         "name": "Bug Hunt Bench published runs",
         "url": "https://bughunt.productcompass.pm/"
       },
-      "observedAt": "2026-10-19",
+      "observedAt": "2026-10-23",
       "evaluatedVariant": "DeepSeek V4.1 Flash 1017 (max effort, DeepSeek Harness) - mean of 7 / DeepSeek Harness / DeepSeek API",
       "note": null,
       "grade": "measured"
@@ -168,7 +168,7 @@
         "name": "Artificial Analysis model page (Intelligence Index v4.3.2)",
         "url": "https://www.vals.ai/benchmarks/code-migration-v1-1"
       },
-      "observedAt": "2026-10-23",
+      "observedAt": "2026-10-25",
       "evaluatedVariant": "deepseek/deepseek-v4.1-flash-1017 / Pi agent harness, the same for every model",
       "note": null,
       "grade": "measured"
@@ -186,7 +186,7 @@
         "name": "Artificial Analysis model page (Intelligence Index v4.3.2)",
         "url": "https://www.vals.ai/benchmarks/vibe-code"
       },
-      "observedAt": "2026-10-23",
+      "observedAt": "2026-10-25",
       "evaluatedVariant": "deepseek/deepseek-v4.1-flash-1017 / OpenHands, the same for every model",
       "note": null,
       "grade": "measured"
@@ -204,7 +204,7 @@
         "name": "Artificial Analysis model page (Intelligence Index v4.3.2)",
         "url": "https://artificialanalysis.ai/evaluations/artificial-analysis-long-context-reasoning"
       },
-      "observedAt": "2026-10-23",
+      "observedAt": "2026-10-25",
       "evaluatedVariant": null,
       "note": null,
       "grade": "measured"
@@ -222,7 +222,7 @@
         "name": "Artificial Analysis model page (Intelligence Index v4.3.2)",
         "url": "https://artificialanalysis.ai/evaluations/humanitys-last-exam"
       },
-      "observedAt": "2026-10-23",
+      "observedAt": "2026-10-25",
       "evaluatedVariant": null,
       "note": null,
       "grade": "measured"
@@ -240,7 +240,7 @@
         "name": "Artificial Analysis model page (Intelligence Index v4.3.2)",
         "url": "https://artificialanalysis.ai/evaluations/scicode"
       },
-      "observedAt": "2026-10-23",
+      "observedAt": "2026-10-25",
       "evaluatedVariant": null,
       "note": null,
       "grade": "measured"
@@ -258,7 +258,7 @@
         "name": "Artificial Analysis model page (Intelligence Index v4.3.2)",
         "url": "https://artificialanalysis.ai/evaluations/critpt"
       },
-      "observedAt": "2026-10-23",
+      "observedAt": "2026-10-25",
       "evaluatedVariant": null,
       "note": null,
       "grade": "measured"
@@ -359,7 +359,7 @@
         "kernel": "primary",
         "targetProfile": "published-record reporting precision",
         "unevaluable": null,
-        "top1": 1.0,
+        "top1": 0.0,
         "top3": 1.0,
         "frontier": 1.0
       },
@@ -368,7 +368,7 @@
         "kernel": "primary",
         "targetProfile": "published-record reporting precision + conventional identification of missing leaves",
         "unevaluable": null,
-        "top1": 1.0,
+        "top1": 0.0,
         "top3": 1.0,
         "frontier": 1.0
       },
@@ -377,7 +377,7 @@
         "kernel": "primary",
         "targetProfile": "published-record reporting precision + conventional identification of missing leaves + weight-specification stress",
         "unevaluable": null,
-        "top1": 0.6417,
+        "top1": 0.3731,
         "top3": 1.0,
         "frontier": 1.0
       },
@@ -386,7 +386,7 @@
         "kernel": "endpoint-heavy",
         "targetProfile": "published-record reporting precision + conventional identification of missing leaves",
         "unevaluable": null,
-        "top1": 1.0,
+        "top1": 0.0,
         "top3": 1.0,
         "frontier": 1.0
       },
@@ -395,7 +395,7 @@
         "kernel": "primary",
         "targetProfile": "published-record reporting precision + conventional identification of missing leaves + conventional range sensitivity inside published 95% confidence intervals (no tail model)",
         "unevaluable": null,
-        "top1": 1.0,
+        "top1": 0.0,
         "top3": 1.0,
         "frontier": 1.0
       },
@@ -404,7 +404,7 @@
         "kernel": "primary",
         "targetProfile": "published-record leaf values redrawn with plug-in binomial task-sampling noise from each leaf's published task count (independent-task approximation; GDPval-AA from its displayed rating interval, an assumption) + conventional identification of missing leaves",
         "unevaluable": null,
-        "top1": 0.5567,
+        "top1": 0.4401,
         "top3": 0.9999,
         "frontier": 1.0
       }
@@ -478,7 +478,7 @@
       "version": "v3.0.0",
       "date": "2026-10-19",
       "rank": {
-        "api": 1,
+        "api": 2,
         "plan": 22
       }
     }
@@ -499,12 +499,12 @@
       "shown": true,
       "rankingEligible": true,
       "rank": {
-        "api": 1,
+        "api": 2,
         "plan": 22
       },
       "overall": {
-        "api": 60.38662179090506,
-        "plan": 53.6581856331888
+        "api": 59.80387179090506,
+        "plan": 53.0754356331888
       }
     },
     {
@@ -515,11 +515,11 @@
       "rankingEligible": true,
       "rank": {
         "api": 4,
-        "plan": 33
+        "plan": 34
       },
       "overall": {
         "api": 50.576257489052985,
-        "plan": 46.272662471254364
+        "plan": 46.69590205466544
       }
     }
   ]

@@ -47,6 +47,6 @@ def repo_copy(tmp_path: Path) -> Path:
 def pinned_clock(monkeypatch: pytest.MonkeyPatch) -> str:
     """Pin ``VALUERANK_NOW`` to the instant stamped into the committed publication."""
 
-    instant = "2026-10-23T06:26:23Z"
+    instant = "2026-10-25T09:56:47Z"
     monkeypatch.setenv("VALUERANK_NOW", instant)
     return instant

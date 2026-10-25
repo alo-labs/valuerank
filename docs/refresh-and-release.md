@@ -24,7 +24,10 @@ Automated captures:
 npm run refresh:external   # LiveBench (HTTPS) and Terminal-Bench 4.0 (Playwright) -> data/livebench.json, data/tb4.json
 npm run capture:deepswe    # AA DeepSWE v1.1 coding-agent chart (HTTPS, page payload) -> data/aa_deepswe.json
 npm run build:aa           # AA model pages (HTTPS) -> data/aa/aa_v432_snapshot.json -> data/aa_metrics.json
+npm run capture:basket     # AA Coding Agent Index (with safety-refusal counts, O63) and cost charts -> data/aa/coding_agents_capture.json, data/aa/cost_charts_capture.json
 ```
+
+`npm run refresh` runs all of these. The basket captures must be within 7 days of the model-page snapshot and not after the release cutoff (E217, O65); AA data read after the cutoff moves the cutoff and every AA source is re-captured. After each capture, review `data/aa/coding_agents_manifest.json` (O64): a new, relabelled or vanished Coding Agent Index row stops the build until it is registered.
 
 The AA page capture decodes each model page's payload object keyed by the page slug. `capture:deepswe` records every configuration that has a DeepSWE evaluation at the owner's full precision.
 

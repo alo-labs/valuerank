@@ -1,30 +1,30 @@
 {
   "version": "v3.0.0",
   "publishDate": "October 19, 2026",
-  "observedAt": "2026-10-23T06:26:23Z",
-  "cohortN": 29,
-  "scoredN": 20,
+  "observedAt": "2026-10-25T09:56:47Z",
+  "cohortN": 30,
+  "scoredN": 21,
   "otherPlottedEffortN": 17,
-  "frontierRequiredModelN": 7,
+  "frontierRequiredModelN": 8,
   "frontierSelection": {
     "sourceUrl": "https://artificialanalysis.ai/evaluations/artificial-analysis-intelligence-index?eval-cost=intelligence-vs-total-cost",
     "captureArtifact": "data/aa_frontier_capture.json",
-    "capturedAt": "2026-10-23T05:27:39Z",
+    "capturedAt": "2026-10-25T09:53:28Z",
     "indexVersion": "4.3.2",
     "chartTitle": "Intelligence Index vs. Cost to Run Artificial Analysis Intelligence Index",
     "costUnit": "USD to run all Intelligence Index evaluations",
     "completeness": {
       "status": "complete",
-      "note": "All 697 catalog models selected; all 189 plotted points and all 18 Pareto path vertices captured from public tooltips (rounded integer Intelligence Index, two-decimal USD total cost) with Playwright on 2026-10-23. Every hover returned a distinct tooltip, so no overlapped-circle resolution was needed. No hidden state or paid export used."
+      "note": "All 698 catalog models selected; all 190 plotted points and all 19 Pareto path vertices captured from public tooltips (rounded integer Intelligence Index, two-decimal USD total cost) with Playwright on 2026-10-25. Every hover returned a distinct tooltip, so no overlapped-circle resolution was needed. No hidden state or paid export used."
     },
     "sourceUniverse": {
-      "selectedModelN": 697,
-      "plottedPointN": 189,
-      "observedFrontierPointN": 18,
+      "selectedModelN": 698,
+      "plottedPointN": 190,
+      "observedFrontierPointN": 19,
       "nearFrontierPointN": 11
     },
-    "configurationN": 18,
-    "familyN": 7,
+    "configurationN": 19,
+    "familyN": 8,
     "frontierFamilies": [
       {
         "family": "Claude Haiku 5.5",
@@ -50,6 +50,11 @@
         "family": "GPT-6.1 Sol",
         "modelId": "gpt-6.1-sol",
         "configuration": "GPT-6.1 Sol (max)"
+      },
+      {
+        "family": "Kimi K3.1 Pro",
+        "modelId": "kimi-k3-1-pro",
+        "configuration": "Kimi K3.1 Pro"
       },
       {
         "family": "MiMo-V2.6-Flash",
@@ -104,9 +109,9 @@
       },
       {
         "family": "GPT-6 Astra",
-        "modelId": "gpt-6-astra-xhigh",
-        "configuration": "GPT-6 Astra (xhigh)",
-        "intelligenceGap": 2
+        "modelId": "gpt-6-astra-high",
+        "configuration": "GPT-6 Astra (high)",
+        "intelligenceGap": 3
       },
       {
         "family": "Gemini 4 Argon",
@@ -173,6 +178,16 @@
         "totalCostUsd": 1081.55
       },
       {
+        "modelId": "kimi-k3-1-pro",
+        "family": "Kimi K3.1 Pro",
+        "modelName": "Kimi K3.1 Pro",
+        "effort": "reasoning",
+        "fallback": null,
+        "url": "https://artificialanalysis.ai/models/kimi-k3-1-pro",
+        "intelligenceIndexDisplay": 55,
+        "totalCostUsd": 3117.31
+      },
+      {
         "modelId": "mimo-v2-6-flash",
         "family": "MiMo-V2.6-Flash",
         "modelName": "MiMo-V2.6-Flash",
@@ -194,7 +209,7 @@
       }
     ]
   },
-  "sourceCohortN": 61,
+  "sourceCohortN": 62,
   "rankingExcludedModels": [
     "Gemini 3.8 Flash",
     "Claude Opus 5",
@@ -528,7 +543,8 @@
         "Claude Opus 5.5 (medium)",
         "GPT-5.6 Luna (low)",
         "GPT-6 Astra (high)",
-        "GPT-6 Astra (xhigh)"
+        "GPT-6 Astra (xhigh)",
+        "Kimi K3.1 Pro"
       ],
       "sourceMissing": [
         "Claude Opus 5",
@@ -580,7 +596,8 @@
         "Claude Opus 5.5 (medium)",
         "GPT-5.6 Luna (low)",
         "GPT-6 Astra (high)",
-        "GPT-6 Astra (xhigh)"
+        "GPT-6 Astra (xhigh)",
+        "Kimi K3.1 Pro"
       ],
       "availableN": 1,
       "reason": "fewer than two primary models have observed values; no comparative percentile is assigned"
@@ -589,10 +606,10 @@
   "zeroGap": false,
   "costMode": "aa-per-index-point",
   "costCoverage": {
-    "availableN": 29,
-    "cohortN": 29,
-    "sourceAvailableN": 59,
-    "sourceCohortN": 61,
+    "availableN": 30,
+    "cohortN": 30,
+    "sourceAvailableN": 60,
+    "sourceCohortN": 62,
     "missingModels": [],
     "sourceMissingModels": [
       "Gemini 3.7 Flash",
@@ -619,69 +636,69 @@
     {
       "rank": 1,
       "name": "Claude Sonnet 5.5",
-      "overallScore": 65.8,
-      "qualityScore": 86.7
+      "overallScore": 65.1,
+      "qualityScore": 85.8
     },
     {
       "rank": 2,
-      "name": "DeepSeek V4.1 Flash 1017",
-      "overallScore": 63.6,
-      "qualityScore": 66.5
+      "name": "Claude Opus 5.5",
+      "overallScore": 62.5,
+      "qualityScore": 83.4
     },
     {
       "rank": 3,
-      "name": "Claude Opus 5.5",
-      "overallScore": 62.7,
-      "qualityScore": 83.6
+      "name": "DeepSeek V4.1 Flash 1017",
+      "overallScore": 61.9,
+      "qualityScore": 64.3
     },
     {
       "rank": 4,
       "name": "GPT-6.1 Sol",
-      "overallScore": 61.9,
-      "qualityScore": 69.2
+      "overallScore": 61.3,
+      "qualityScore": 68.4
     },
     {
       "rank": 5,
       "name": "Gemini 4 Argon",
-      "overallScore": 61.4,
-      "qualityScore": 73.8
+      "overallScore": 60.7,
+      "qualityScore": 72.9
     }
   ],
   "bugHuntEmphasis": {
-    "matchedN": 20,
-    "cohortN": 61,
+    "matchedN": 21,
+    "cohortN": 62,
     "benchmarkWeightPct": 26.1628,
-    "sourceCommit": "46802fc312b6fd467b0baee519df05693f120232",
+    "sourceCommit": "9089dc552a2b4eb94749c4da34d2cb872c7e0b43",
     "topFive": [
       {
         "rank": 1,
         "name": "Claude Sonnet 5.5",
-        "score": 67.9,
+        "score": 67.5,
         "fixedOf105": 51.3
       },
       {
         "rank": 2,
-        "name": "DeepSeek V4.1 Flash 1017",
-        "score": 66.4,
-        "fixedOf105": 42.7
-      },
-      {
-        "rank": 3,
         "name": "GPT-6.1 Sol",
-        "score": 66.3,
+        "score": 66.0,
         "fixedOf105": 44.3
       },
       {
+        "rank": 3,
+        "name": "DeepSeek V4.1 Flash 1017",
+        "score": 65.7,
+        "fixedOf105": 42.7
+      },
+      {
         "rank": 4,
-        "name": "Gemini 4 Argon",
-        "score": 63.4,
-        "fixedOf105": 40.7
+        "name": "Claude Opus 5.5",
+        "score": 63.0,
+        "fixedOf105": 41.7
       },
       {
         "rank": 5,
-        "name": "Claude Opus 5.5",
-        "score": 63.2,
-        "fixedOf105": 41.7
+        "name": "Gemini 4 Argon",
+        "score": 62.9,
+        "fixedOf105": 40.7
       }
     ]
   },
@@ -689,8 +706,8 @@
     "livebench": "25/51",
     "livebenchPublishedN": 64,
     "livebenchSupplementalModels": [],
-    "bugHunt": "53/61 owner matches; 17 exact DeepSWE and Bug Hunt overlaps plus 7 selected AA frontier family models enter the primary cohort",
-    "terminalBenchV4": "14/51 including 1 provider claim"
+    "bugHunt": "54/62 owner matches; 17 exact DeepSWE and Bug Hunt overlaps plus 8 selected AA frontier family models enter the primary cohort",
+    "terminalBenchV4": "14/62 including 1 provider claim"
   },
   "weights": [
     {
@@ -795,15 +812,15 @@
   "bugHuntEmphasisRanking": {
     "benchmark": "Bug Hunt Bench",
     "benchmarkVersion": "105 planted bugs across two repositories; rolling public results snapshot",
-    "sourceCommit": "46802fc312b6fd467b0baee519df05693f120232",
+    "sourceCommit": "9089dc552a2b4eb94749c4da34d2cb872c7e0b43",
     "sources": {
       "homepage": "https://bughunt.productcompass.pm/",
-      "scoreboard": "https://github.com/phuryn/bug-hunt-bench/blob/46802fc312b6fd467b0baee519df05693f120232/results/combined-scoreboard.csv",
-      "runNotes": "https://github.com/phuryn/bug-hunt-bench/blob/46802fc312b6fd467b0baee519df05693f120232/results/run-notes.md"
+      "scoreboard": "https://github.com/phuryn/bug-hunt-bench/blob/9089dc552a2b4eb94749c4da34d2cb872c7e0b43/results/combined-scoreboard.csv",
+      "runNotes": "https://github.com/phuryn/bug-hunt-bench/blob/9089dc552a2b4eb94749c4da34d2cb872c7e0b43/results/run-notes.md"
     },
-    "matchedN": 20,
-    "cohortN": 61,
-    "coveragePct": 32.79,
+    "matchedN": 21,
+    "cohortN": 62,
+    "coveragePct": 33.87,
     "basePrioritySum": 56,
     "benchmarkPriority": 30,
     "totalPriority": 86,
@@ -1194,160 +1211,168 @@
         "modelId": "claude-sonnet-5-5",
         "name": "Claude Sonnet 5.5",
         "fixedOf105": 51.3,
-        "emphasisScore": 67.9,
+        "emphasisScore": 67.5,
         "primaryRank": 1
       },
       {
         "rank": 2,
-        "modelId": "deepseek-v4-1-flash-1017",
-        "name": "DeepSeek V4.1 Flash 1017",
-        "fixedOf105": 42.7,
-        "emphasisScore": 66.4,
-        "primaryRank": 2
-      },
-      {
-        "rank": 3,
         "modelId": "gpt-6.1-sol",
         "name": "GPT-6.1 Sol",
         "fixedOf105": 44.3,
-        "emphasisScore": 66.3,
+        "emphasisScore": 66.0,
         "primaryRank": 4
       },
       {
-        "rank": 4,
-        "modelId": "gemini-4-argon",
-        "name": "Gemini 4 Argon",
-        "fixedOf105": 40.7,
-        "emphasisScore": 63.4,
-        "primaryRank": 5
+        "rank": 3,
+        "modelId": "deepseek-v4-1-flash-1017",
+        "name": "DeepSeek V4.1 Flash 1017",
+        "fixedOf105": 42.7,
+        "emphasisScore": 65.7,
+        "primaryRank": 3
       },
       {
-        "rank": 5,
+        "rank": 4,
         "modelId": "claude-opus-5-5",
         "name": "Claude Opus 5.5",
         "fixedOf105": 41.7,
-        "emphasisScore": 63.2,
-        "primaryRank": 3
+        "emphasisScore": 63.0,
+        "primaryRank": 2
+      },
+      {
+        "rank": 5,
+        "modelId": "gemini-4-argon",
+        "name": "Gemini 4 Argon",
+        "fixedOf105": 40.7,
+        "emphasisScore": 62.9,
+        "primaryRank": 5
       },
       {
         "rank": 6,
         "modelId": "gpt-6.1-sol-high",
         "name": "GPT-6.1 Sol (high)",
         "fixedOf105": 36.5,
-        "emphasisScore": 62.1,
-        "primaryRank": 7
+        "emphasisScore": 61.9,
+        "primaryRank": 8
       },
       {
         "rank": 7,
         "modelId": "gpt-6-astra",
         "name": "GPT-6 Astra",
         "fixedOf105": 45.0,
-        "emphasisScore": 61.9,
+        "emphasisScore": 61.8,
         "primaryRank": 6
       },
       {
         "rank": 8,
-        "modelId": "claude-opus-5-5-high",
-        "name": "Claude Opus 5.5 (high)",
-        "fixedOf105": 31.7,
-        "emphasisScore": 57.3,
-        "primaryRank": 8
+        "modelId": "kimi-k3-1-pro",
+        "name": "Kimi K3.1 Pro",
+        "fixedOf105": 36.0,
+        "emphasisScore": 61.1,
+        "primaryRank": 7
       },
       {
         "rank": 9,
-        "modelId": "claude-opus-5-5-medium",
-        "name": "Claude Opus 5.5 (medium)",
-        "fixedOf105": 30.3,
-        "emphasisScore": 53.9,
-        "primaryRank": 11
+        "modelId": "claude-opus-5-5-high",
+        "name": "Claude Opus 5.5 (high)",
+        "fixedOf105": 31.7,
+        "emphasisScore": 56.7,
+        "primaryRank": 9
       },
       {
         "rank": 10,
-        "modelId": "gpt-6.1-sol-medium",
-        "name": "GPT-6.1 Sol (medium)",
-        "fixedOf105": 29.0,
-        "emphasisScore": 53.8,
+        "modelId": "claude-opus-5-5-medium",
+        "name": "Claude Opus 5.5 (medium)",
+        "fixedOf105": 30.3,
+        "emphasisScore": 53.6,
         "primaryRank": 12
       },
       {
         "rank": 11,
-        "modelId": "gpt-6-astra-high",
-        "name": "GPT-6 Astra (high)",
-        "fixedOf105": 35.0,
-        "emphasisScore": 53.8,
+        "modelId": "gpt-6.1-sol-medium",
+        "name": "GPT-6.1 Sol (medium)",
+        "fixedOf105": 29.0,
+        "emphasisScore": 53.2,
         "primaryRank": 13
       },
       {
         "rank": 12,
-        "modelId": "mimo-v2-6-pro",
-        "name": "MiMo-V2.6-Pro",
-        "fixedOf105": 18,
-        "emphasisScore": 51.6,
-        "primaryRank": 9
+        "modelId": "gpt-6-astra-high",
+        "name": "GPT-6 Astra (high)",
+        "fixedOf105": 35.0,
+        "emphasisScore": 53.1,
+        "primaryRank": 14
       },
       {
         "rank": 13,
-        "modelId": "claude-haiku-5-5-max",
-        "name": "Claude Haiku 5.5 (max)",
-        "fixedOf105": 21.5,
-        "emphasisScore": 49.6,
+        "modelId": "mimo-v2-6-pro",
+        "name": "MiMo-V2.6-Pro",
+        "fixedOf105": 18,
+        "emphasisScore": 51.4,
         "primaryRank": 10
       },
       {
         "rank": 14,
-        "modelId": "gpt-6-luna",
-        "name": "GPT-6 Luna",
-        "fixedOf105": 18.3,
-        "emphasisScore": 44.0,
-        "primaryRank": 14
+        "modelId": "claude-haiku-5-5-max",
+        "name": "Claude Haiku 5.5 (max)",
+        "fixedOf105": 21.5,
+        "emphasisScore": 49.1,
+        "primaryRank": 11
       },
       {
         "rank": 15,
-        "modelId": "claude-haiku-5-5-high",
-        "name": "Claude Haiku 5.5 (high)",
-        "fixedOf105": 16.0,
-        "emphasisScore": 40.3,
+        "modelId": "gpt-6-luna",
+        "name": "GPT-6 Luna",
+        "fixedOf105": 18.3,
+        "emphasisScore": 43.6,
         "primaryRank": 15
       },
       {
         "rank": 16,
-        "modelId": "gpt-6-luna-xhigh",
-        "name": "GPT-6 Luna (xhigh)",
-        "fixedOf105": 14.0,
-        "emphasisScore": 38.7,
+        "modelId": "claude-haiku-5-5-high",
+        "name": "Claude Haiku 5.5 (high)",
+        "fixedOf105": 16.0,
+        "emphasisScore": 40.1,
         "primaryRank": 16
       },
       {
         "rank": 17,
-        "modelId": "claude-haiku-5-5-medium",
-        "name": "Claude Haiku 5.5 (medium)",
-        "fixedOf105": 12.0,
-        "emphasisScore": 37.7,
+        "modelId": "gpt-6-luna-xhigh",
+        "name": "GPT-6 Luna (xhigh)",
+        "fixedOf105": 14.0,
+        "emphasisScore": 38.4,
         "primaryRank": 17
       },
       {
         "rank": 18,
-        "modelId": "gpt-6-luna-high",
-        "name": "GPT-6 Luna (high)",
-        "fixedOf105": 9.0,
-        "emphasisScore": 35.4,
+        "modelId": "claude-haiku-5-5-medium",
+        "name": "Claude Haiku 5.5 (medium)",
+        "fixedOf105": 12.0,
+        "emphasisScore": 37.6,
         "primaryRank": 18
       },
       {
         "rank": 19,
-        "modelId": "gpt-6-luna-medium",
-        "name": "GPT-6 Luna (medium)",
-        "fixedOf105": 4.0,
-        "emphasisScore": 33.6,
+        "modelId": "gpt-6-luna-high",
+        "name": "GPT-6 Luna (high)",
+        "fixedOf105": 9.0,
+        "emphasisScore": 35.2,
         "primaryRank": 19
       },
       {
         "rank": 20,
+        "modelId": "gpt-6-luna-medium",
+        "name": "GPT-6 Luna (medium)",
+        "fixedOf105": 4.0,
+        "emphasisScore": 33.2,
+        "primaryRank": 20
+      },
+      {
+        "rank": 21,
         "modelId": "gpt-5.6-luna-low",
         "name": "GPT-5.6 Luna (low)",
         "fixedOf105": 4.0,
-        "emphasisScore": 28.9,
-        "primaryRank": 20
+        "emphasisScore": 28.7,
+        "primaryRank": 21
       }
     ]
   },
@@ -1380,7 +1405,8 @@
       "Claude Opus 5.5 (medium)",
       "GPT-5.6 Luna (low)",
       "GPT-6 Astra (high)",
-      "GPT-6 Astra (xhigh)"
+      "GPT-6 Astra (xhigh)",
+      "Kimi K3.1 Pro"
     ],
     "livebenchInstructionFollowing": [
       "Claude Opus 5.5",
@@ -1409,7 +1435,8 @@
       "Claude Opus 5.5 (medium)",
       "GPT-5.6 Luna (low)",
       "GPT-6 Astra (high)",
-      "GPT-6 Astra (xhigh)"
+      "GPT-6 Astra (xhigh)",
+      "Kimi K3.1 Pro"
     ],
     "gpqaDiamond": [
       "Claude Opus 5.5",
@@ -1436,7 +1463,8 @@
       "GPT-6 Luna (xhigh)",
       "Claude Opus 5.5 (high)",
       "Claude Opus 5.5 (xhigh)",
-      "Claude Opus 5.5 (medium)"
+      "Claude Opus 5.5 (medium)",
+      "Kimi K3.1 Pro"
     ]
   },
   "providerClaimsUsed": []

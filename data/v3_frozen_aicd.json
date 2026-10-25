@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
   "methodologyVersion": "3.0.0",
-  "anchorVersion": "v3-2026-10-23-aicd",
-  "frozenAt": "2026-10-23",
+  "anchorVersion": "v3-2026-10-25-aicd",
+  "frozenAt": "2026-10-25",
   "basketVersion": "SDLC basket v1",
   "mainWorkload": "1453a9a0576b02ea",
   "workloads": {
@@ -37,6 +37,7 @@
             "gpt-6-luna-xhigh",
             "gpt-6.1-sol-high",
             "gpt-6.1-sol-medium",
+            "kimi-k3-1-pro",
             "mimo-v2-6-pro"
           ],
           "referenceCosts": {
@@ -54,6 +55,7 @@
             "gpt-6-luna-xhigh": 49.41412664069927,
             "gpt-6.1-sol-high": 431.0726459431111,
             "gpt-6.1-sol-medium": 318.04572523681617,
+            "kimi-k3-1-pro": 2306.7883281613126,
             "mimo-v2-6-pro": 136.12695920883297
           },
           "low": 10.354950690764687,
@@ -111,6 +113,7 @@
             "gpt-6.1-sol-medium@chatgpt-pro-100",
             "gpt-6.1-sol-medium@chatgpt-pro-200",
             "gpt-6.1-sol-medium@chatgpt-pro-500",
+            "kimi-k3-1-pro@api",
             "mimo-v2-6-pro@mimo-token-plan-lite",
             "mimo-v2-6-pro@mimo-token-plan-max",
             "mimo-v2-6-pro@mimo-token-plan-pro",
@@ -163,13 +166,14 @@
             "gpt-6.1-sol-medium@chatgpt-pro-100": 30.146514240456508,
             "gpt-6.1-sol-medium@chatgpt-pro-200": 30.52262238357161,
             "gpt-6.1-sol-medium@chatgpt-pro-500": 29.525225142667672,
+            "kimi-k3-1-pro@api": 2306.7883281613126,
             "mimo-v2-6-pro@mimo-token-plan-lite": 138.3404057000335,
             "mimo-v2-6-pro@mimo-token-plan-max": 115.28367141669459,
             "mimo-v2-6-pro@mimo-token-plan-pro": 124.38501389695995,
             "mimo-v2-6-pro@mimo-token-plan-standard": 137.5019789988212
           },
           "low": 0.38972414899704105,
-          "high": 3715.870716323286,
+          "high": 4613.576656322625,
           "padding": 2.0
         }
       },
@@ -179,20 +183,20 @@
   "barReferences": [
     {
       "id": "bar:median-quality",
-      "level": 49.23993471413,
+      "level": 49.23858471413,
       "levelConfiguration": "mimo-v2-6-pro",
       "rule": "lower-median displayed quality of the non-provisional cohort configurations at freeze (E192; headline bar)"
     },
     {
       "id": "bar:lower-quartile-quality",
-      "level": 37.997018582781905,
+      "level": 38.00296858278191,
       "levelConfiguration": "gpt-6-luna-xhigh",
       "rule": "lower-quartile displayed quality of the non-provisional cohort configurations at freeze (O34)"
     },
     {
       "id": "bar:upper-quartile-quality",
-      "level": 57.15568127995559,
-      "levelConfiguration": "gpt-6.1-sol-high",
+      "level": 58.607479521080364,
+      "levelConfiguration": "gpt-6-astra-high",
       "rule": "upper-quartile displayed quality of the non-provisional cohort configurations at freeze (O34)"
     }
   ],
@@ -218,7 +222,7 @@
     "ladderPopulation": "fewer than four population configurations: only the headline bar is pinned, because the quartile positions would coincide with it (E215)",
     "nonTautology": "a frozen level is never a configuration, so no bar can return its setter by construction; whether a result compares alternatives is published per result (possibleQualifierN, E198)",
     "lifetime": "fixed for the anchor version; replaced only by a versioned re-freeze that publishes old- and new-bar results on the common evaluable panel",
-    "selectionCutoff": "2026-10-23",
+    "selectionCutoff": "2026-10-25",
     "population": [
       "claude-haiku-5-5-high",
       "claude-haiku-5-5-medium",
@@ -234,23 +238,24 @@
       "gpt-6-luna-xhigh",
       "gpt-6.1-sol-high",
       "gpt-6.1-sol-medium",
+      "kimi-k3-1-pro",
       "mimo-v2-6-pro"
     ],
     "bars": [
       {
         "id": "bar:median-quality",
-        "level": 49.23993471413,
+        "level": 49.23858471413,
         "levelConfiguration": "mimo-v2-6-pro"
       },
       {
         "id": "bar:lower-quartile-quality",
-        "level": 37.997018582781905,
+        "level": 38.00296858278191,
         "levelConfiguration": "gpt-6-luna-xhigh"
       },
       {
         "id": "bar:upper-quartile-quality",
-        "level": 57.15568127995559,
-        "levelConfiguration": "gpt-6.1-sol-high"
+        "level": 58.607479521080364,
+        "levelConfiguration": "gpt-6-astra-high"
       }
     ]
   }

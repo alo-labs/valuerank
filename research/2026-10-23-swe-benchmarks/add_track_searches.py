@@ -13,28 +13,31 @@ from pathlib import Path
 
 HERE = Path(__file__).parent
 ROOT = HERE.parent.parent
-SEARCHED = "2026-10-23"
+SEARCHED = "2026-10-25"  # O68: every added-leaf board re-read in full on 2026-10-25
 MARK = "O53 track leaf search"
 RESEARCH = [
     "Claude deep research, three researchers: research/2026-10-23-swe-benchmarks/research_notes/SWE benchmark candidates/ (owner-named sources, Vals AI, other agentic benchmarks)",
     "Perplexity Search with Thinking on research/2026-10-23-swe-benchmarks/brief.md: GPT-6.1 Sol, Grok 4.7, Gemini 3.8 Flash (pplx-*.md)",
     "Coverage capture of every cohort configuration: research/2026-10-23-swe-benchmarks/vals-catalogue-2026-10-23.json and other-coverage-2026-10-23.json (raw pages and JSON in vals-capture/ and other-capture/)",
     "Check of Epoch MirrorCode, SWE-bench-Live and SWE-PolyBench (report addendum)",
+    "Board re-read of 2026-10-25 (owner decision O68): research/2026-10-25-board-reread/ (Vals, AI Coding Daily with hidden rows, Bug Hunt at 9089dc5, LiveBench 2.0 release 2026-10-23)",
+    "Kimi K3.1 Pro exhaustive search with open-web queries, 2026-10-25: research/2026-10-25-board-reread/kimi-search.md and kimi-search.json",
 ]
 LEAVES = {
-    "vibeCode": ("vals", "vibe-code", "https://www.vals.ai/benchmarks/vibe-code (benchmark_view JSON, updated 2026-10-20)"),
-    "codeMigration": ("vals", "code-migration-v1-1", "https://www.vals.ai/benchmarks/code-migration-v1-1 (benchmark_view JSON, updated 2026-10-20)"),
+    "vibeCode": ("vals", "vibe-code", "https://www.vals.ai/benchmarks/vibe-code (benchmark_view JSON, updated 2026-10-24, read 2026-10-25)"),
+    "codeMigration": ("vals", "code-migration-v1-1", "https://www.vals.ai/benchmarks/code-migration-v1-1 (benchmark_view JSON, updated 2026-10-20, read 2026-10-25)"),
     # O61: LiveBench 2.0 Overall replaces the Long Agentic and Coding categories; one LiveBench row per model, so its
     # coverage is the coding capture's.
-    "livebench2Overall": ("other", "livebench2-coding", "https://livebench.ai/data/20261014/table.csv and the site bundle's model metadata (release 2026-10-14, updated 2026-10-18)"),
-    "aiCodingDaily": ("other", "aicd-non-bug", "https://aicodingdaily.com/leaderboard, every row including hidden older models (updated 2026-10-21)"),
+    "livebench2Overall": ("other", "livebench2-coding", "https://livebench.ai/data/20261023/table.csv and the site bundle's model metadata (release 2026-10-23, updated 2026-10-24, read 2026-10-25; O67)"),
+    "aiCodingDaily": ("other", "aicd-non-bug", "https://aicodingdaily.com/leaderboard, every row including hidden older models (updated 2026-10-24, read 2026-10-25)"),
 }
 
 
 def main() -> None:
-    vals = {item["slug"]: item for item in json.loads((HERE / "vals-catalogue-2026-10-23.json").read_text())["benchmarks"]}
-    other = {item["key"]: item for item in json.loads((HERE / "other-coverage-2026-10-23.json").read_text())["benchmarks"]}
-    cohort = [row["id"] for row in json.loads((HERE / "cohort-2026-10-23.json").read_text())["configurations"]]
+    read = HERE.parent / "2026-10-25-board-reread"
+    vals = {item["slug"]: item for item in json.loads((read / "vals-catalogue-2026-10-25.json").read_text())["benchmarks"]}
+    other = {item["key"]: item for item in json.loads((read / "other-coverage-2026-10-25.json").read_text())["benchmarks"]}
+    cohort = [row["id"] for row in json.loads((read / "cohort-2026-10-25.json").read_text())["configurations"]]
     records = {(record["modelId"], record["leaf"]) for record in json.loads((ROOT / "data" / "swe_tracks.json").read_text())["records"]}
     path = ROOT / "data" / "leaf_evidence.json"
     evidence = json.loads(path.read_text())

@@ -74,8 +74,8 @@ SAMPLING_TASKS = {
     # publishes a standard error per record, which the stream reads instead; LiveBench 2.0 Overall is read per category.
     "aiCodingDaily": 6,
 }
-# O61, E264: LiveBench 2.0 Overall is the plain mean of seven category means, so its noise is the mean of seven binomial
-# category draws. Counts are LiveBench's published task counts; Reasoning and Data Analysis publish only their parts (4
+# O61, E264, O67: LiveBench 2.0 Overall is the release's weighted mean of seven category means, so its noise is the
+# weighted mean of seven binomial category draws. Counts are LiveBench's published task counts; Reasoning and Data Analysis publish only their parts (4
 # and 3), each holding several short questions, so reading them as 4 and 3 trials overstates their noise (the wide reading).
 LIVEBENCH_CATEGORY_TASKS = {"long_agentic": 18, "reasoning": 4, "coding": 29, "browser": 25, "data_analysis": 3, "research": 22, "design": 25}
 # O39: GDPval-AA is a fitted Elo with no task-level outcome; AA displays a rating interval (e.g. -26/+26 for Claude
@@ -227,6 +227,7 @@ def leaf_evidence(model_id: str, effort: str | None, page: dict, tb4_rows: list[
                 {"source": f"{meta['publisher']}: {meta['benchmark']}", "configuration": record.get("sourceLabel"), "effort": record.get("effort"),
                  "harness": record.get("harness") or meta["harness"], "url": meta["url"], "publishedOn": meta["updated"], "stderr": record.get("stderr"), "match": record.get("match"),
                  **({"categories": record["categories"]} if record.get("categories") else {}),
+                 **({"weights": record["weights"]} if record.get("weights") else {}),
                  **({"note": record["note"]} if record.get("note") else {}),
                  # I50 M2: a board that lists the configuration more than once names its selection and the other rows.
                  **({"selection": record["selection"], "alternates": record["alternates"]} if record.get("alternates") else {})},
@@ -594,7 +595,7 @@ AGENT_EFFORTS = "minimal|low|medium|high|xhigh|max"
 _KEYED_EFFORT = re.compile(rf" \(\{{'reasoning_effort': '(?P<effort>{AGENT_EFFORTS})'\}}\)\Z")
 _PLAIN_EFFORT = re.compile(rf" \((?P<effort>{AGENT_EFFORTS})\)\Z")
 # O54: the owner stated that AA's effort-less MiMo-V2.6-Pro configuration is high, so a record at high is exact too.
-OWNER_STATED_EFFORT = {"mimo-v2-6-pro": "high"}
+OWNER_STATED_EFFORT = {"mimo-v2-6-pro": "high", "kimi-k3-1-pro": "max"}  # O66: Kimi K3.1 Pro at max
 
 
 def parse_agent_label(label: str) -> dict | None:
@@ -740,6 +741,17 @@ def assemble(configurations: list[dict], documents: dict, *, release_day: date, 
     chart, pages_at = (documents.get("frontierCapture") or {}).get("captured_at"), documents["snapshot"].get("capturedAt")
     if chart and pages_at and abs(_instant(chart) - _instant(pages_at)).total_seconds() > CAPTURE_GAP_MAX_DAYS * 86400:
         raise ValueError(f"the AA chart capture ({chart}) and model-page snapshot ({pages_at}) are more than {CAPTURE_GAP_MAX_DAYS} days apart (E217)")
+    # I57 M1: the Coding Agent Index and cost-chart captures price the basket, so they describe the same AA state too, and
+    # none is taken after the release cutoff (O65: AA data read after the cutoff moves the cutoff and is re-captured).
+    cutoff = now if now.date() == release_day else datetime.combine(release_day, time.max, tzinfo=timezone.utc)
+    for name, stamp in (("Coding Agent Index capture", (documents.get("codingAgents") or {}).get("capturedAt")),
+                        ("cost-chart capture", (documents.get("costCharts") or {}).get("capturedAt"))):
+        if pages_at and not stamp:
+            raise ValueError(f"the {name} carries no capture instant (E217)")
+        if stamp and pages_at and abs(_instant(stamp) - _instant(pages_at)).total_seconds() > CAPTURE_GAP_MAX_DAYS * 86400:
+            raise ValueError(f"the {name} ({stamp}) and model-page snapshot ({pages_at}) are more than {CAPTURE_GAP_MAX_DAYS} days apart (E217)")
+        if stamp and _instant(stamp) > cutoff:
+            raise ValueError(f"the {name} ({stamp}) was taken after the release cutoff (O65)")
     price_records = documents["priceRecords"]["records"]
     points = (documents.get("frontierCapture") or {}).get("points", [])
     rows, supplements, tracks = [], leaf_supplements(documents), track_records(documents)
@@ -2441,9 +2453,10 @@ def sampling_sd(key: str, observation: q.Observation, source: dict, gdpval_sd: f
     if source.get("stderr") is not None:
         return source["stderr"]  # Vals' published standard error, in percentage points (the leaf's z unit)
     if key == "livebench2Overall":
-        categories = source["categories"]
-        variance = sum(_binomial_variance(categories[name], tasks) for name, tasks in LIVEBENCH_CATEGORY_TASKS.items())
-        return 100.0 * math.sqrt(variance) / len(LIVEBENCH_CATEGORY_TASKS)
+        # O67: LiveBench's Overall is the release's weighted mean, so the category draws carry the same weights.
+        categories, weights = source["categories"], source.get("weights") or {name: 1.0 for name in LIVEBENCH_CATEGORY_TASKS}
+        variance = sum(weights[name] ** 2 * _binomial_variance(categories[name], tasks) for name, tasks in LIVEBENCH_CATEGORY_TASKS.items())
+        return 100.0 * math.sqrt(variance) / sum(weights[name] for name in LIVEBENCH_CATEGORY_TASKS)
     tasks = (tasks_of or SAMPLING_TASKS)[key]
     if key == "omniscience" and source.get("accuracy") is not None and source.get("hallucinationRate") is not None:
         correct = source["accuracy"]

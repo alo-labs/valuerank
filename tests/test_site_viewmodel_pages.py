@@ -56,7 +56,7 @@ def test_export_writes_frontier_tier_fields_and_model_inclusion(data, tmp_path):
 def test_models_index_lists_every_roster_model_ranked_first(bundle):
     page = viewmodel.models_page(bundle)
     models = page["models"]
-    assert len(models) == 61
+    assert len(models) == 62
     assert {"slug", "name", "developer", "rank", "overall", "grade", "rankingEligible", "coveragePct"} <= set(models[0])
     ranked = [m for m in models if m["rank"]["plan"] is not None]
     plan_ranks = [m["rank"]["plan"] for m in ranked]
@@ -65,7 +65,7 @@ def test_models_index_lists_every_roster_model_ranked_first(bundle):
     assert all(m["rank"]["plan"] is None for m in models[9:])
     # O51: every configuration with the max-effort ranking's full set has a cost and a rank there.
     assert [m["slug"] for m in models[9:] if m["rankingEligible"]] == []
-    assert page["rankedCount"] == 9 and page["unrankedCount"] == 52
+    assert page["rankedCount"] == 9 and page["unrankedCount"] == 53
 
 
 def test_index_models_carry_the_coverage_object(bundle):

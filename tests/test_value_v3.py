@@ -87,11 +87,11 @@ def documents(**overrides) -> dict:
             {"modelId": "b", "matched": False, "fixedOf105": None},
         ]},
         "tb4": {"observedAt": "2026-10-19T00:00:00Z", "rows": [{"model": "Opus 5.5 (max)", "agent": "Terminus 2", "resolutionRatePct": 60.0}]},
-        "codingAgents": {"configurations": [
+        "codingAgents": {"capturedAt": "2026-10-18T00:00:00Z", "configurations": [
             {"label": "Agent - A (max)", "meanCostPerTaskUsd": 2.0, "totalCostUsd": 600.0, "components": []},
             {"label": "Agent - B (max)", "meanCostPerTaskUsd": 6.0, "totalCostUsd": 1800.0, "components": []},
         ]},
-        "costCharts": {"evaluations": [
+        "costCharts": {"capturedAt": "2026-10-18T00:00:00Z", "evaluations": [
             {"slug": "itbench-aa", "rows": [{"model": "A (max)", "totalUsd": 9, "declinedTasks": True}]},
         ]},
         "configurationMap": {"rows": {
@@ -1452,7 +1452,10 @@ def test_cost_evidence_ages_at_the_cutoff():
     """E216: the AA model-page snapshot is at most 45 days old and the price records at most 7 days at the release cutoff."""
 
     fresh = {**documents()["snapshot"], "capturedAt": "2026-09-04T00:00:00Z"}
-    assert v.assemble(CONFIGURATIONS, documents(snapshot=fresh, priceRecords={"records": [], "observedAt": "2026-10-12T00:00:00Z"}), release_day=DAY)["rows"]
+    basket_captures = {"codingAgents": {**documents()["codingAgents"], "capturedAt": "2026-09-04T00:00:00Z"},
+                       "costCharts": {**documents()["costCharts"], "capturedAt": "2026-09-04T00:00:00Z"}}
+    assert v.assemble(CONFIGURATIONS, documents(snapshot=fresh, priceRecords={"records": [], "observedAt": "2026-10-12T00:00:00Z"}, **basket_captures),
+                      release_day=DAY)["rows"]
     with pytest.raises(ValueError, match=r"AA model-page snapshot \(2026-09-03\) is more than 45 days old .* \(E216\)"):
         v.assemble(CONFIGURATIONS, documents(snapshot={**fresh, "capturedAt": "2026-09-03T23:00:00Z"}), release_day=DAY)
     with pytest.raises(ValueError, match=r"price records \(2026-10-11\) is more than 7 days old"):
@@ -1934,3 +1937,16 @@ def test_agent_safety_sums_blocked_and_fallback_attempts():
     assert v.agent_safety(None) is None and v.agent_safety({"components": [{"attempts": 1}]}) == {"status": "not captured"}
     clean = {"components": [{"attempts": 1, "safety": {"blocked": 0, "fallback": None, "fallbackModels": []}}]}
     assert v.agent_safety(clean)["status"] == "none"
+
+
+
+def test_the_basket_captures_describe_the_same_aa_state_and_predate_the_cutoff():
+    """I57 M1, O65: the Coding Agent Index and cost-chart captures carry an instant within 7 days of the model pages and
+    before the release cutoff."""
+
+    pages = {"capturedAt": "2026-10-18T00:00:00Z", "pages": documents()["snapshot"]["pages"]}
+    for agents, message in (({**documents()["codingAgents"], "capturedAt": None}, "carries no capture instant"),
+                            ({**documents()["codingAgents"], "capturedAt": "2026-10-01T00:00:00Z"}, "more than 7 days apart"),
+                            ({**documents()["codingAgents"], "capturedAt": "2026-10-20T00:00:00Z"}, r"was taken after the release cutoff \(O65\)")):
+        with pytest.raises(ValueError, match=message):
+            v.assemble(CONFIGURATIONS, documents(snapshot=pages, codingAgents=agents), release_day=DAY)

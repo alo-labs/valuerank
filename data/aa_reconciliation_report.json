@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "checkedAt": "2026-10-23T06:26:23+00:00",
+  "checkedAt": "2026-10-25T09:56:47+00:00",
   "inventoryPath": "data/aa_reconciliation_inventory.json",
   "maxAgeDays": 7,
   "issues": [],
@@ -284,6 +284,24 @@
       "rankStatus": "Primary ranked"
     },
     {
+      "aaId": "kimi-k3-1-pro",
+      "name": "Kimi K3.1 Pro",
+      "evaluatedVariant": "reasoning",
+      "intelligenceIndex": 55,
+      "totalCostUsd": 3117.31,
+      "directlyObservedFrontier": true,
+      "sourceUrl": "https://artificialanalysis.ai/models/kimi-k3-1-pro",
+      "family": "Kimi K3.1 Pro",
+      "requiredFamilyModelId": "kimi-k3-1-pro",
+      "sourceFootnote": null,
+      "valueRankModelId": "kimi-k3-1-pro",
+      "intelligenceIndexPrecision": "rounded_whole_public_label",
+      "rosterDecision": null,
+      "primaryRankingGaps": [],
+      "metricGap": null,
+      "rankStatus": "Primary ranked"
+    },
+    {
       "aaId": "claude-opus-5-5-xhigh",
       "name": "Claude Opus 5.5 (xhigh with fallback)",
       "evaluatedVariant": "xhigh with fallback",
@@ -342,10 +360,10 @@
   ],
   "comparisonCandidates": [],
   "frontierDefinition": "Directly observed AA displayed intelligence-versus-total-cost frontier; not recomputed from a subset.",
-  "scope": "Complete displayed intelligence versus total evaluation cost Pareto line with all 697 catalog models selected; 189 eligible plotted points, every one read from its public tooltip. This is not ValueRank's composite-quality frontier.",
+  "scope": "Complete displayed intelligence versus total evaluation cost Pareto line with all 698 catalog models selected; 190 eligible plotted points, every one read from its public tooltip. This is not ValueRank's composite-quality frontier.",
   "completeness": {
     "status": "complete",
-    "note": "All 697 catalog models selected; all 189 plotted points and all 18 Pareto path vertices captured from public tooltips (rounded integer Intelligence Index, two-decimal USD total cost) with Playwright on 2026-10-23. Every hover returned a distinct tooltip, so no overlapped-circle resolution was needed. No hidden state or paid export used."
+    "note": "All 698 catalog models selected; all 190 plotted points and all 19 Pareto path vertices captured from public tooltips (rounded integer Intelligence Index, two-decimal USD total cost) with Playwright on 2026-10-25. Every hover returned a distinct tooltip, so no overlapped-circle resolution was needed. No hidden state or paid export used."
   },
   "nearFrontierPolicy": {
     "maxIntelligenceGap": 3,
@@ -539,7 +557,7 @@
       "directlyObservedFrontier": false,
       "sourceUrl": "https://artificialanalysis.ai/models/gpt-6-astra-high",
       "family": "GPT-6 Astra",
-      "requiredFamilyModelId": "gpt-6-astra-xhigh",
+      "requiredFamilyModelId": "gpt-6-astra-high",
       "sourceFootnote": null,
       "valueRankModelId": "gpt-6-astra-high",
       "intelligenceIndexPrecision": "rounded_whole_public_label",
@@ -554,13 +572,13 @@
       "evaluatedVariant": "xhigh",
       "intelligenceIndex": 52,
       "totalCostUsd": 3802.98,
-      "intelligenceGap": 2,
+      "intelligenceGap": 3,
       "costRatio": 3.5162,
-      "nearestFrontierAaId": "claude-opus-5-5-high",
+      "nearestFrontierAaId": "kimi-k3-1-pro",
       "directlyObservedFrontier": false,
       "sourceUrl": "https://artificialanalysis.ai/models/gpt-6-astra-xhigh",
       "family": "GPT-6 Astra",
-      "requiredFamilyModelId": "gpt-6-astra-xhigh",
+      "requiredFamilyModelId": "gpt-6-astra-high",
       "sourceFootnote": null,
       "valueRankModelId": "gpt-6-astra-xhigh",
       "intelligenceIndexPrecision": "rounded_whole_public_label",
@@ -583,7 +601,7 @@
       "directlyObservedFrontier": false,
       "sourceUrl": "https://artificialanalysis.ai/models/gpt-6-astra",
       "family": "GPT-6 Astra",
-      "requiredFamilyModelId": "gpt-6-astra-xhigh",
+      "requiredFamilyModelId": "gpt-6-astra-high",
       "sourceFootnote": null,
       "valueRankModelId": "gpt-6-astra",
       "intelligenceIndexPrecision": "rounded_whole_public_label",
@@ -659,28 +677,28 @@
     },
     {
       "family": "GPT-6 Astra",
-      "modelId": "gpt-6-astra-xhigh",
+      "modelId": "gpt-6-astra-high",
       "configurationN": 3,
       "inRoster": true,
-      "primaryRanked": false,
+      "primaryRanked": true,
       "deferred": false,
-      "incompleteEvidence": true
+      "incompleteEvidence": false
     }
   ],
   "missingNearFrontierIds": [],
   "unresolvedNearFrontierIds": [],
   "deferredNearFrontierIds": [],
-  "observedAt": "2026-10-23T05:27:39Z",
+  "observedAt": "2026-10-25T09:53:28Z",
   "benchmarkVersion": "Artificial Analysis Intelligence Index v4.3.2",
   "sourceUrl": "https://artificialanalysis.ai/evaluations/artificial-analysis-intelligence-index?eval-cost=intelligence-vs-total-cost",
   "mode": "observedFrontier",
   "sourceUniverse": {
-    "selectedModelN": 697,
-    "plottedPointN": 189,
-    "observedFrontierPointN": 18,
+    "selectedModelN": 698,
+    "plottedPointN": 190,
+    "observedFrontierPointN": 19,
     "nearFrontierPointN": 11
   },
-  "ageDays": 0.041,
+  "ageDays": 0.002,
   "requiredFamilies": [
     {
       "family": "GPT-6 Luna",
@@ -725,6 +743,13 @@
       "incompleteEvidence": false
     },
     {
+      "family": "Kimi K3.1 Pro",
+      "modelId": "kimi-k3-1-pro",
+      "selectedFrontierConfigurationN": 1,
+      "primaryRanked": true,
+      "incompleteEvidence": false
+    },
+    {
       "family": "Claude Sonnet 5.5",
       "modelId": "claude-sonnet-5-5",
       "selectedFrontierConfigurationN": 1,
@@ -733,8 +758,8 @@
     }
   ],
   "metricGaps": [],
-  "observedRowN": 18,
-  "validRowN": 18,
+  "observedRowN": 19,
+  "validRowN": 19,
   "missingFrontierIds": [],
   "unresolvedFrontierIds": [],
   "deferredFrontierIds": [],

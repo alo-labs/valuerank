@@ -153,13 +153,13 @@ describe('evidence footnotes', () => {
 describe('rankings instrument', () => {
   test('filters, sorting, columns and comparison all live in the URL', async () => {
     const { page, context, errors } = await open('/rankings/');
-    // O48/O53: the max-effort ranking's Plan basis has one row per configuration and plan (27), then every roster model it does not rank (52).
-    assert.equal(await page.locator('#rankings-body tr').count(), 79);
+    // O48/O53: the max-effort ranking's Plan basis has one row per configuration and plan (27), then every roster model it does not rank (53).
+    assert.equal(await page.locator('#rankings-body tr').count(), 80);
 
     await page.locator('#filters input[name="provider"][value="OpenAI"]').check();
     assert.match(await query(page), /provider=OpenAI/);
     const openAiRows = await page.locator('#rankings-body tr[data-slug]').count();
-    assert.ok(openAiRows > 0 && openAiRows < 79);
+    assert.ok(openAiRows > 0 && openAiRows < 80);
 
     await page.locator('#filters input[name="q"]').fill('sol');
     await page.locator('#filters input[name="q"]').dispatchEvent('input');
@@ -281,9 +281,9 @@ describe('charts, model, plans and listing pages', () => {
     await context.close();
   });
 
-  test('the models index lists all 61 models and links to their pages', async () => {
+  test('the models index lists all 62 models and links to their pages', async () => {
     const { page, context } = await open('/models/');
-    assert.equal(await page.locator('#models-table tbody tr').count(), 61);
+    assert.equal(await page.locator('#models-table tbody tr').count(), 62);
     // O33: each ranked effort of a family has its own row and page.
     assert.equal(await page.locator('#models-table a.model-name[href$="/models/gpt-6-1-sol-xhigh/"]').innerText(), 'GPT-6.1 Sol (xhigh)');
     await page.locator('#models-table a.model-name', { hasText: /^GPT-6\.1 Sol$/ }).click();

@@ -1,0 +1,4745 @@
+{
+ "capturedAt": "2026-10-25T10:44:11Z",
+ "cohort": "cohort-2026-10-23.json (29 configurations)",
+ "statusRule": "exact = source row names the same model version and the same reasoning effort as the AA configuration; plausible = same model but effort/snapshot not confirmable (AA plots MiMo-V2.6-Pro/Flash and MiniMax-M3.1-Flash without an effort; or the source states no effort/snapshot); absent = no row. No value is transferred across efforts or versions.",
+ "benchmarks": [
+  {
+   "key": "aicd-total",
+   "name": "AI Coding Daily LLM Coding Leaderboard: Total points (max 70)",
+   "version": "v2 scoring with Bug Finding (since 2026-10-03)",
+   "updated": "2026-10-24",
+   "measures": "Agentic coding on existing repos (Laravel/PHP, React+TS, Flutter, Go): judged code quality, hidden-test edge cases, bug finding without edits. Includes the 10-point Bug Finding column, which overlaps the Bug Hunt leaf in construct.",
+   "domain": "software engineering",
+   "effortOnRow": true,
+   "harness": "Varies by model: Claude Code (Anthropic), Codex CLI (OpenAI), OpenCode (open models), Devin (Gemini 4 Argon), DeepSeek Harness, Cursor, Antigravity",
+   "metric": "points (max 70)",
+   "sourceUrl": "https://aicodingdaily.com/leaderboard (every row, hidden older rows included)",
+   "machineReadable": "No export; server-rendered Livewire HTML table. Hidden older rows obtained by POST to /livewire-71a08158/update with hiddenOlderModelIds=[] (captured).",
+   "coverage": {
+    "claude-haiku-5-5": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "AICD has Haiku 5.5 Medium/High only."
+    },
+    "claude-haiku-5-5-high": {
+     "status": "exact",
+     "value": 58.63,
+     "sourceLabel": "Haiku 5.5 (High)",
+     "effort": "high",
+     "note": "Tested 2026-10-08 with Claude Code; cost/prompt $0.05."
+    },
+    "claude-haiku-5-5-low": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "AICD has Haiku 5.5 Medium/High only."
+    },
+    "claude-haiku-5-5-max": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "AICD has Haiku 5.5 Medium/High only."
+    },
+    "claude-haiku-5-5-medium": {
+     "status": "exact",
+     "value": 58.2,
+     "sourceLabel": "Haiku 5.5 (Medium)",
+     "effort": "medium",
+     "note": "Tested 2026-10-08 with Claude Code; cost/prompt $0.03."
+    },
+    "claude-opus-5-5": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "AICD has Opus 5.5 Low/Medium/High only."
+    },
+    "claude-opus-5-5-high": {
+     "status": "exact",
+     "value": 67.26,
+     "sourceLabel": "Opus 5.5 (High)",
+     "effort": "high",
+     "note": "Tested 2026-10-20 with Claude Code; cost/prompt $0.83."
+    },
+    "claude-opus-5-5-medium": {
+     "status": "exact",
+     "value": 65.28,
+     "sourceLabel": "Opus 5.5 (Medium)",
+     "effort": "medium",
+     "note": "Tested 2026-10-19 with Claude Code; cost/prompt $0.57."
+    },
+    "claude-opus-5-5-xhigh": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "AICD has Opus 5.5 Low/Medium/High only."
+    },
+    "claude-sonnet-5-5": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "AICD has Sonnet 5.5 Medium/High only."
+    },
+    "claude-sonnet-5-5-xhigh": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "AICD has Sonnet 5.5 Medium/High only."
+    },
+    "deepseek-v4-1-flash-1017": {
+     "status": "exact",
+     "value": 61.2,
+     "sourceLabel": "Deepseek-V4.1-Flash-1017 (Max)",
+     "effort": "max",
+     "note": "Tested 2026-10-18 with DeepSeek Harness; cost/prompt N/A. Second row for the same configuration: OpenCode total 60.97 (Laravel 17.42, React 18.17, Bug 8.13, Edge 17.25, tested 2026-10-17); value shown is the first-listed row."
+    },
+    "gemini-4-argon": {
+     "status": "exact",
+     "value": 57.09,
+     "sourceLabel": "Gemini 4 Argon (High)",
+     "effort": "high",
+     "note": "Tested 2026-10-14 with Devin; cost/prompt N/A."
+    },
+    "gpt-5.6-luna-low": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": "GPT-5.6-Luna (Low)",
+     "effort": "low",
+     "note": "Tested 2026-09-12 with Codex CLI; cost/prompt $0.01. Row is hidden by default as an older LLM; read from the page Livewire state with the hidden-model filter cleared (aicd-leaderboard-livewire-allrows.html). Tested 2026-09-12, before the Bug Finding project was added (2026-10-03); its listed total 30.51 is out of 60, so no /70 total or bug-finding score exists."
+    },
+    "gpt-6-astra": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "AICD has GPT-6-Astra Medium/High only."
+    },
+    "gpt-6-astra-high": {
+     "status": "exact",
+     "value": 66.35,
+     "sourceLabel": "GPT-6-Astra (High)",
+     "effort": "high",
+     "note": "Tested 2026-10-01 with Codex CLI; cost/prompt $0.96."
+    },
+    "gpt-6-astra-xhigh": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "AICD has GPT-6-Astra Medium/High only."
+    },
+    "gpt-6-luna": {
+     "status": "exact",
+     "value": 59.07,
+     "sourceLabel": "GPT-6-Luna (Max)",
+     "effort": "max",
+     "note": "Tested 2026-10-01 with Codex CLI; cost/prompt $0.03."
+    },
+    "gpt-6-luna-high": {
+     "status": "exact",
+     "value": 53.04,
+     "sourceLabel": "GPT-6-Luna (High)",
+     "effort": "high",
+     "note": "Tested 2026-10-01 with Codex CLI; cost/prompt $0.01."
+    },
+    "gpt-6-luna-low": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "AICD has GPT-6-Luna Medium/High/Xhigh/Max only."
+    },
+    "gpt-6-luna-medium": {
+     "status": "exact",
+     "value": 43.74,
+     "sourceLabel": "GPT-6-Luna (Medium)",
+     "effort": "medium",
+     "note": "Tested 2026-09-30 with Codex CLI; cost/prompt $0.01."
+    },
+    "gpt-6-luna-xhigh": {
+     "status": "exact",
+     "value": 56.4,
+     "sourceLabel": "GPT-6-Luna (Xhigh)",
+     "effort": "xhigh",
+     "note": "Tested 2026-10-01 with Codex CLI; cost/prompt $0.03."
+    },
+    "gpt-6.1-sol": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "AICD has GPT-6.1-Sol Low/Medium/High only."
+    },
+    "gpt-6.1-sol-high": {
+     "status": "exact",
+     "value": 66.0,
+     "sourceLabel": "GPT-6.1-Sol (High)",
+     "effort": "high",
+     "note": "Tested 2026-10-19 with Codex CLI; cost/prompt $0.23."
+    },
+    "gpt-6.1-sol-medium": {
+     "status": "exact",
+     "value": 65.05,
+     "sourceLabel": "GPT-6.1-Sol (Medium)",
+     "effort": "medium",
+     "note": "Tested 2026-10-19 with Codex CLI; cost/prompt $0.15."
+    },
+    "gpt-6.1-sol-xhigh": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "AICD has GPT-6.1-Sol Low/Medium/High only."
+    },
+    "mimo-v2-6-flash": {
+     "status": "plausible",
+     "value": 53.29,
+     "sourceLabel": "MiMo-V2.6 Flash (High)",
+     "effort": "high",
+     "note": "Tested 2026-10-02 with OpenCode; cost/prompt $0.04. AA plots this model without an effort label (reasoning mode); a source row at one labelled effort is plausible, not exact."
+    },
+    "mimo-v2-6-pro": {
+     "status": "plausible",
+     "value": 53.81,
+     "sourceLabel": "MiMo-V2.6 Pro (High)",
+     "effort": "high",
+     "note": "Tested 2026-10-02 with OpenCode; cost/prompt $0.09. AA plots this model without an effort label (reasoning mode); a source row at one labelled effort is plausible, not exact."
+    },
+    "minimax-m3-1-flash": {
+     "status": "plausible",
+     "value": 54.48,
+     "sourceLabel": "MiniMax M3.1-Flash (Max)",
+     "effort": "max",
+     "note": "Tested 2026-10-20 with OpenCode; cost/prompt N/A. AA plots this model without an effort label (reasoning mode); a source row at one labelled effort is plausible, not exact."
+    },
+    "kimi-k3-1-pro": {
+     "status": "exact",
+     "value": 63.8,
+     "sourceLabel": "Kimi K3.1 Pro (Max)",
+     "effort": "max",
+     "note": "Tested 2026-10-25 with OpenCode; cost/prompt $0.74. Owner decision O66 (2026-10-25): AA plots Kimi K3.1 Pro without an effort; Moonshot's API documents reasoning_effort low / high / max with max the default, so its configuration is taken at max, its maximum effort. The Kimi K3.1 Pro (High) row is another effort and is not used."
+    }
+   },
+   "readAt": "2026-10-25T10:44:11Z"
+  },
+  {
+   "key": "aicd-non-bug",
+   "name": "AI Coding Daily LLM Coding Leaderboard: Total minus Bug Finding Test (max 60)",
+   "version": "v2 scoring with Bug Finding (since 2026-10-03)",
+   "updated": "2026-10-24",
+   "measures": "Agentic coding on existing repos (Laravel/PHP, React+TS, Flutter, Go): judged code quality, hidden-test edge cases, bug finding without edits. Computed here as Laravel + React-TS + Edge-case from the page columns (not published by AICD).",
+   "domain": "software engineering",
+   "effortOnRow": true,
+   "harness": "Varies by model: Claude Code (Anthropic), Codex CLI (OpenAI), OpenCode (open models), Devin (Gemini 4 Argon), DeepSeek Harness, Cursor, Antigravity",
+   "metric": "points (max 60)",
+   "sourceUrl": "https://aicodingdaily.com/leaderboard (every row, hidden older rows included)",
+   "machineReadable": "No export; server-rendered Livewire HTML table. Hidden older rows obtained by POST to /livewire-71a08158/update with hiddenOlderModelIds=[] (captured).",
+   "coverage": {
+    "claude-haiku-5-5": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "AICD has Haiku 5.5 Medium/High only."
+    },
+    "claude-haiku-5-5-high": {
+     "status": "exact",
+     "value": 51.55,
+     "sourceLabel": "Haiku 5.5 (High)",
+     "effort": "high",
+     "note": "Tested 2026-10-08 with Claude Code; cost/prompt $0.05."
+    },
+    "claude-haiku-5-5-low": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "AICD has Haiku 5.5 Medium/High only."
+    },
+    "claude-haiku-5-5-max": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "AICD has Haiku 5.5 Medium/High only."
+    },
+    "claude-haiku-5-5-medium": {
+     "status": "exact",
+     "value": 51.32,
+     "sourceLabel": "Haiku 5.5 (Medium)",
+     "effort": "medium",
+     "note": "Tested 2026-10-08 with Claude Code; cost/prompt $0.03."
+    },
+    "claude-opus-5-5": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "AICD has Opus 5.5 Low/Medium/High only."
+    },
+    "claude-opus-5-5-high": {
+     "status": "exact",
+     "value": 57.68,
+     "sourceLabel": "Opus 5.5 (High)",
+     "effort": "high",
+     "note": "Tested 2026-10-20 with Claude Code; cost/prompt $0.83."
+    },
+    "claude-opus-5-5-medium": {
+     "status": "exact",
+     "value": 56.95,
+     "sourceLabel": "Opus 5.5 (Medium)",
+     "effort": "medium",
+     "note": "Tested 2026-10-19 with Claude Code; cost/prompt $0.57."
+    },
+    "claude-opus-5-5-xhigh": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "AICD has Opus 5.5 Low/Medium/High only."
+    },
+    "claude-sonnet-5-5": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "AICD has Sonnet 5.5 Medium/High only."
+    },
+    "claude-sonnet-5-5-xhigh": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "AICD has Sonnet 5.5 Medium/High only."
+    },
+    "deepseek-v4-1-flash-1017": {
+     "status": "exact",
+     "value": 52.24,
+     "sourceLabel": "Deepseek-V4.1-Flash-1017 (Max)",
+     "effort": "max",
+     "note": "Tested 2026-10-18 with DeepSeek Harness; cost/prompt N/A. Second row for the same configuration: OpenCode total 60.97 (Laravel 17.42, React 18.17, Bug 8.13, Edge 17.25, tested 2026-10-17); value shown is the first-listed row."
+    },
+    "gemini-4-argon": {
+     "status": "exact",
+     "value": 49.9,
+     "sourceLabel": "Gemini 4 Argon (High)",
+     "effort": "high",
+     "note": "Tested 2026-10-14 with Devin; cost/prompt N/A."
+    },
+    "gpt-5.6-luna-low": {
+     "status": "exact",
+     "value": 30.51,
+     "sourceLabel": "GPT-5.6-Luna (Low)",
+     "effort": "low",
+     "note": "Tested 2026-09-12 with Codex CLI; cost/prompt $0.01. Row is hidden by default as an older LLM; read from the page Livewire state with the hidden-model filter cleared (aicd-leaderboard-livewire-allrows.html)."
+    },
+    "gpt-6-astra": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "AICD has GPT-6-Astra Medium/High only."
+    },
+    "gpt-6-astra-high": {
+     "status": "exact",
+     "value": 56.77,
+     "sourceLabel": "GPT-6-Astra (High)",
+     "effort": "high",
+     "note": "Tested 2026-10-01 with Codex CLI; cost/prompt $0.96."
+    },
+    "gpt-6-astra-xhigh": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "AICD has GPT-6-Astra Medium/High only."
+    },
+    "gpt-6-luna": {
+     "status": "exact",
+     "value": 51.99,
+     "sourceLabel": "GPT-6-Luna (Max)",
+     "effort": "max",
+     "note": "Tested 2026-10-01 with Codex CLI; cost/prompt $0.03."
+    },
+    "gpt-6-luna-high": {
+     "status": "exact",
+     "value": 47.73,
+     "sourceLabel": "GPT-6-Luna (High)",
+     "effort": "high",
+     "note": "Tested 2026-10-01 with Codex CLI; cost/prompt $0.01."
+    },
+    "gpt-6-luna-low": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "AICD has GPT-6-Luna Medium/High/Xhigh/Max only."
+    },
+    "gpt-6-luna-medium": {
+     "status": "exact",
+     "value": 40.2,
+     "sourceLabel": "GPT-6-Luna (Medium)",
+     "effort": "medium",
+     "note": "Tested 2026-09-30 with Codex CLI; cost/prompt $0.01."
+    },
+    "gpt-6-luna-xhigh": {
+     "status": "exact",
+     "value": 49.94,
+     "sourceLabel": "GPT-6-Luna (Xhigh)",
+     "effort": "xhigh",
+     "note": "Tested 2026-10-01 with Codex CLI; cost/prompt $0.03."
+    },
+    "gpt-6.1-sol": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "AICD has GPT-6.1-Sol Low/Medium/High only."
+    },
+    "gpt-6.1-sol-high": {
+     "status": "exact",
+     "value": 56.83,
+     "sourceLabel": "GPT-6.1-Sol (High)",
+     "effort": "high",
+     "note": "Tested 2026-10-19 with Codex CLI; cost/prompt $0.23."
+    },
+    "gpt-6.1-sol-medium": {
+     "status": "exact",
+     "value": 55.67,
+     "sourceLabel": "GPT-6.1-Sol (Medium)",
+     "effort": "medium",
+     "note": "Tested 2026-10-19 with Codex CLI; cost/prompt $0.15."
+    },
+    "gpt-6.1-sol-xhigh": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "AICD has GPT-6.1-Sol Low/Medium/High only."
+    },
+    "mimo-v2-6-flash": {
+     "status": "plausible",
+     "value": 45.48,
+     "sourceLabel": "MiMo-V2.6 Flash (High)",
+     "effort": "high",
+     "note": "Tested 2026-10-02 with OpenCode; cost/prompt $0.04. AA plots this model without an effort label (reasoning mode); a source row at one labelled effort is plausible, not exact."
+    },
+    "mimo-v2-6-pro": {
+     "status": "plausible",
+     "value": 47.56,
+     "sourceLabel": "MiMo-V2.6 Pro (High)",
+     "effort": "high",
+     "note": "Tested 2026-10-02 with OpenCode; cost/prompt $0.09. AA plots this model without an effort label (reasoning mode); a source row at one labelled effort is plausible, not exact."
+    },
+    "minimax-m3-1-flash": {
+     "status": "plausible",
+     "value": 49.69,
+     "sourceLabel": "MiniMax M3.1-Flash (Max)",
+     "effort": "max",
+     "note": "Tested 2026-10-20 with OpenCode; cost/prompt N/A. AA plots this model without an effort label (reasoning mode); a source row at one labelled effort is plausible, not exact."
+    },
+    "kimi-k3-1-pro": {
+     "status": "exact",
+     "value": 54.63,
+     "sourceLabel": "Kimi K3.1 Pro (Max)",
+     "effort": "max",
+     "note": "Tested 2026-10-25 with OpenCode; cost/prompt $0.74. Owner decision O66 (2026-10-25): AA plots Kimi K3.1 Pro without an effort; Moonshot's API documents reasoning_effort low / high / max with max the default, so its configuration is taken at max, its maximum effort. The Kimi K3.1 Pro (High) row is another effort and is not used."
+    }
+   },
+   "readAt": "2026-10-25T10:44:11Z"
+  },
+  {
+   "key": "aicd-laravel-quality",
+   "name": "AI Coding Daily LLM Coding Leaderboard: Laravel Code Quality (max 20)",
+   "version": "v2 scoring with Bug Finding (since 2026-10-03)",
+   "updated": "2026-10-24",
+   "measures": "Agentic coding on existing repos (Laravel/PHP, React+TS, Flutter, Go): judged code quality, hidden-test edge cases, bug finding without edits.",
+   "domain": "software engineering",
+   "effortOnRow": true,
+   "harness": "Varies by model: Claude Code (Anthropic), Codex CLI (OpenAI), OpenCode (open models), Devin (Gemini 4 Argon), DeepSeek Harness, Cursor, Antigravity",
+   "metric": "points (max 20)",
+   "sourceUrl": "https://aicodingdaily.com/leaderboard (every row, hidden older rows included)",
+   "machineReadable": "No export; server-rendered Livewire HTML table. Hidden older rows obtained by POST to /livewire-71a08158/update with hiddenOlderModelIds=[] (captured).",
+   "coverage": {
+    "claude-haiku-5-5": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "AICD has Haiku 5.5 Medium/High only."
+    },
+    "claude-haiku-5-5-high": {
+     "status": "exact",
+     "value": 17.3,
+     "sourceLabel": "Haiku 5.5 (High)",
+     "effort": "high",
+     "note": "Tested 2026-10-08 with Claude Code; cost/prompt $0.05."
+    },
+    "claude-haiku-5-5-low": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "AICD has Haiku 5.5 Medium/High only."
+    },
+    "claude-haiku-5-5-max": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "AICD has Haiku 5.5 Medium/High only."
+    },
+    "claude-haiku-5-5-medium": {
+     "status": "exact",
+     "value": 17.32,
+     "sourceLabel": "Haiku 5.5 (Medium)",
+     "effort": "medium",
+     "note": "Tested 2026-10-08 with Claude Code; cost/prompt $0.03."
+    },
+    "claude-opus-5-5": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "AICD has Opus 5.5 Low/Medium/High only."
+    },
+    "claude-opus-5-5-high": {
+     "status": "exact",
+     "value": 18.68,
+     "sourceLabel": "Opus 5.5 (High)",
+     "effort": "high",
+     "note": "Tested 2026-10-20 with Claude Code; cost/prompt $0.83."
+    },
+    "claude-opus-5-5-medium": {
+     "status": "exact",
+     "value": 18.95,
+     "sourceLabel": "Opus 5.5 (Medium)",
+     "effort": "medium",
+     "note": "Tested 2026-10-19 with Claude Code; cost/prompt $0.57."
+    },
+    "claude-opus-5-5-xhigh": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "AICD has Opus 5.5 Low/Medium/High only."
+    },
+    "claude-sonnet-5-5": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "AICD has Sonnet 5.5 Medium/High only."
+    },
+    "claude-sonnet-5-5-xhigh": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "AICD has Sonnet 5.5 Medium/High only."
+    },
+    "deepseek-v4-1-flash-1017": {
+     "status": "exact",
+     "value": 18.07,
+     "sourceLabel": "Deepseek-V4.1-Flash-1017 (Max)",
+     "effort": "max",
+     "note": "Tested 2026-10-18 with DeepSeek Harness; cost/prompt N/A. Second row for the same configuration: OpenCode total 60.97 (Laravel 17.42, React 18.17, Bug 8.13, Edge 17.25, tested 2026-10-17); value shown is the first-listed row."
+    },
+    "gemini-4-argon": {
+     "status": "exact",
+     "value": 17.15,
+     "sourceLabel": "Gemini 4 Argon (High)",
+     "effort": "high",
+     "note": "Tested 2026-10-14 with Devin; cost/prompt N/A."
+    },
+    "gpt-5.6-luna-low": {
+     "status": "exact",
+     "value": 13.08,
+     "sourceLabel": "GPT-5.6-Luna (Low)",
+     "effort": "low",
+     "note": "Tested 2026-09-12 with Codex CLI; cost/prompt $0.01. Row is hidden by default as an older LLM; read from the page Livewire state with the hidden-model filter cleared (aicd-leaderboard-livewire-allrows.html)."
+    },
+    "gpt-6-astra": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "AICD has GPT-6-Astra Medium/High only."
+    },
+    "gpt-6-astra-high": {
+     "status": "exact",
+     "value": 18.6,
+     "sourceLabel": "GPT-6-Astra (High)",
+     "effort": "high",
+     "note": "Tested 2026-10-01 with Codex CLI; cost/prompt $0.96."
+    },
+    "gpt-6-astra-xhigh": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "AICD has GPT-6-Astra Medium/High only."
+    },
+    "gpt-6-luna": {
+     "status": "exact",
+     "value": 18.12,
+     "sourceLabel": "GPT-6-Luna (Max)",
+     "effort": "max",
+     "note": "Tested 2026-10-01 with Codex CLI; cost/prompt $0.03."
+    },
+    "gpt-6-luna-high": {
+     "status": "exact",
+     "value": 16.9,
+     "sourceLabel": "GPT-6-Luna (High)",
+     "effort": "high",
+     "note": "Tested 2026-10-01 with Codex CLI; cost/prompt $0.01."
+    },
+    "gpt-6-luna-low": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "AICD has GPT-6-Luna Medium/High/Xhigh/Max only."
+    },
+    "gpt-6-luna-medium": {
+     "status": "exact",
+     "value": 16.33,
+     "sourceLabel": "GPT-6-Luna (Medium)",
+     "effort": "medium",
+     "note": "Tested 2026-09-30 with Codex CLI; cost/prompt $0.01."
+    },
+    "gpt-6-luna-xhigh": {
+     "status": "exact",
+     "value": 17.02,
+     "sourceLabel": "GPT-6-Luna (Xhigh)",
+     "effort": "xhigh",
+     "note": "Tested 2026-10-01 with Codex CLI; cost/prompt $0.03."
+    },
+    "gpt-6.1-sol": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "AICD has GPT-6.1-Sol Low/Medium/High only."
+    },
+    "gpt-6.1-sol-high": {
+     "status": "exact",
+     "value": 18.5,
+     "sourceLabel": "GPT-6.1-Sol (High)",
+     "effort": "high",
+     "note": "Tested 2026-10-19 with Codex CLI; cost/prompt $0.23."
+    },
+    "gpt-6.1-sol-medium": {
+     "status": "exact",
+     "value": 18.17,
+     "sourceLabel": "GPT-6.1-Sol (Medium)",
+     "effort": "medium",
+     "note": "Tested 2026-10-19 with Codex CLI; cost/prompt $0.15."
+    },
+    "gpt-6.1-sol-xhigh": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "AICD has GPT-6.1-Sol Low/Medium/High only."
+    },
+    "mimo-v2-6-flash": {
+     "status": "plausible",
+     "value": 17.83,
+     "sourceLabel": "MiMo-V2.6 Flash (High)",
+     "effort": "high",
+     "note": "Tested 2026-10-02 with OpenCode; cost/prompt $0.04. AA plots this model without an effort label (reasoning mode); a source row at one labelled effort is plausible, not exact."
+    },
+    "mimo-v2-6-pro": {
+     "status": "plausible",
+     "value": 17.41,
+     "sourceLabel": "MiMo-V2.6 Pro (High)",
+     "effort": "high",
+     "note": "Tested 2026-10-02 with OpenCode; cost/prompt $0.09. AA plots this model without an effort label (reasoning mode); a source row at one labelled effort is plausible, not exact."
+    },
+    "minimax-m3-1-flash": {
+     "status": "plausible",
+     "value": 17.44,
+     "sourceLabel": "MiniMax M3.1-Flash (Max)",
+     "effort": "max",
+     "note": "Tested 2026-10-20 with OpenCode; cost/prompt N/A. AA plots this model without an effort label (reasoning mode); a source row at one labelled effort is plausible, not exact."
+    },
+    "kimi-k3-1-pro": {
+     "status": "exact",
+     "value": 18.55,
+     "sourceLabel": "Kimi K3.1 Pro (Max)",
+     "effort": "max",
+     "note": "Tested 2026-10-25 with OpenCode; cost/prompt $0.74. Owner decision O66 (2026-10-25): AA plots Kimi K3.1 Pro without an effort; Moonshot's API documents reasoning_effort low / high / max with max the default, so its configuration is taken at max, its maximum effort. The Kimi K3.1 Pro (High) row is another effort and is not used."
+    }
+   },
+   "readAt": "2026-10-25T10:44:11Z"
+  },
+  {
+   "key": "aicd-react-quality",
+   "name": "AI Coding Daily LLM Coding Leaderboard: React-TS Code Quality (max 20)",
+   "version": "v2 scoring with Bug Finding (since 2026-10-03)",
+   "updated": "2026-10-24",
+   "measures": "Agentic coding on existing repos (Laravel/PHP, React+TS, Flutter, Go): judged code quality, hidden-test edge cases, bug finding without edits.",
+   "domain": "software engineering",
+   "effortOnRow": true,
+   "harness": "Varies by model: Claude Code (Anthropic), Codex CLI (OpenAI), OpenCode (open models), Devin (Gemini 4 Argon), DeepSeek Harness, Cursor, Antigravity",
+   "metric": "points (max 20)",
+   "sourceUrl": "https://aicodingdaily.com/leaderboard (every row, hidden older rows included)",
+   "machineReadable": "No export; server-rendered Livewire HTML table. Hidden older rows obtained by POST to /livewire-71a08158/update with hiddenOlderModelIds=[] (captured).",
+   "coverage": {
+    "claude-haiku-5-5": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "AICD has Haiku 5.5 Medium/High only."
+    },
+    "claude-haiku-5-5-high": {
+     "status": "exact",
+     "value": 17.0,
+     "sourceLabel": "Haiku 5.5 (High)",
+     "effort": "high",
+     "note": "Tested 2026-10-08 with Claude Code; cost/prompt $0.05."
+    },
+    "claude-haiku-5-5-low": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "AICD has Haiku 5.5 Medium/High only."
+    },
+    "claude-haiku-5-5-max": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "AICD has Haiku 5.5 Medium/High only."
+    },
+    "claude-haiku-5-5-medium": {
+     "status": "exact",
+     "value": 17.0,
+     "sourceLabel": "Haiku 5.5 (Medium)",
+     "effort": "medium",
+     "note": "Tested 2026-10-08 with Claude Code; cost/prompt $0.03."
+    },
+    "claude-opus-5-5": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "AICD has Opus 5.5 Low/Medium/High only."
+    },
+    "claude-opus-5-5-high": {
+     "status": "exact",
+     "value": 19.0,
+     "sourceLabel": "Opus 5.5 (High)",
+     "effort": "high",
+     "note": "Tested 2026-10-20 with Claude Code; cost/prompt $0.83."
+    },
+    "claude-opus-5-5-medium": {
+     "status": "exact",
+     "value": 18.5,
+     "sourceLabel": "Opus 5.5 (Medium)",
+     "effort": "medium",
+     "note": "Tested 2026-10-19 with Claude Code; cost/prompt $0.57."
+    },
+    "claude-opus-5-5-xhigh": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "AICD has Opus 5.5 Low/Medium/High only."
+    },
+    "claude-sonnet-5-5": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "AICD has Sonnet 5.5 Medium/High only."
+    },
+    "claude-sonnet-5-5-xhigh": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "AICD has Sonnet 5.5 Medium/High only."
+    },
+    "deepseek-v4-1-flash-1017": {
+     "status": "exact",
+     "value": 18.67,
+     "sourceLabel": "Deepseek-V4.1-Flash-1017 (Max)",
+     "effort": "max",
+     "note": "Tested 2026-10-18 with DeepSeek Harness; cost/prompt N/A. Second row for the same configuration: OpenCode total 60.97 (Laravel 17.42, React 18.17, Bug 8.13, Edge 17.25, tested 2026-10-17); value shown is the first-listed row."
+    },
+    "gemini-4-argon": {
+     "status": "exact",
+     "value": 18.5,
+     "sourceLabel": "Gemini 4 Argon (High)",
+     "effort": "high",
+     "note": "Tested 2026-10-14 with Devin; cost/prompt N/A."
+    },
+    "gpt-5.6-luna-low": {
+     "status": "exact",
+     "value": 12.33,
+     "sourceLabel": "GPT-5.6-Luna (Low)",
+     "effort": "low",
+     "note": "Tested 2026-09-12 with Codex CLI; cost/prompt $0.01. Row is hidden by default as an older LLM; read from the page Livewire state with the hidden-model filter cleared (aicd-leaderboard-livewire-allrows.html)."
+    },
+    "gpt-6-astra": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "AICD has GPT-6-Astra Medium/High only."
+    },
+    "gpt-6-astra-high": {
+     "status": "exact",
+     "value": 18.17,
+     "sourceLabel": "GPT-6-Astra (High)",
+     "effort": "high",
+     "note": "Tested 2026-10-01 with Codex CLI; cost/prompt $0.96."
+    },
+    "gpt-6-astra-xhigh": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "AICD has GPT-6-Astra Medium/High only."
+    },
+    "gpt-6-luna": {
+     "status": "exact",
+     "value": 17.17,
+     "sourceLabel": "GPT-6-Luna (Max)",
+     "effort": "max",
+     "note": "Tested 2026-10-01 with Codex CLI; cost/prompt $0.03."
+    },
+    "gpt-6-luna-high": {
+     "status": "exact",
+     "value": 15.83,
+     "sourceLabel": "GPT-6-Luna (High)",
+     "effort": "high",
+     "note": "Tested 2026-10-01 with Codex CLI; cost/prompt $0.01."
+    },
+    "gpt-6-luna-low": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "AICD has GPT-6-Luna Medium/High/Xhigh/Max only."
+    },
+    "gpt-6-luna-medium": {
+     "status": "exact",
+     "value": 14.17,
+     "sourceLabel": "GPT-6-Luna (Medium)",
+     "effort": "medium",
+     "note": "Tested 2026-09-30 with Codex CLI; cost/prompt $0.01."
+    },
+    "gpt-6-luna-xhigh": {
+     "status": "exact",
+     "value": 17.17,
+     "sourceLabel": "GPT-6-Luna (Xhigh)",
+     "effort": "xhigh",
+     "note": "Tested 2026-10-01 with Codex CLI; cost/prompt $0.03."
+    },
+    "gpt-6.1-sol": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "AICD has GPT-6.1-Sol Low/Medium/High only."
+    },
+    "gpt-6.1-sol-high": {
+     "status": "exact",
+     "value": 18.83,
+     "sourceLabel": "GPT-6.1-Sol (High)",
+     "effort": "high",
+     "note": "Tested 2026-10-19 with Codex CLI; cost/prompt $0.23."
+    },
+    "gpt-6.1-sol-medium": {
+     "status": "exact",
+     "value": 18.0,
+     "sourceLabel": "GPT-6.1-Sol (Medium)",
+     "effort": "medium",
+     "note": "Tested 2026-10-19 with Codex CLI; cost/prompt $0.15."
+    },
+    "gpt-6.1-sol-xhigh": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "AICD has GPT-6.1-Sol Low/Medium/High only."
+    },
+    "mimo-v2-6-flash": {
+     "status": "plausible",
+     "value": 17.5,
+     "sourceLabel": "MiMo-V2.6 Flash (High)",
+     "effort": "high",
+     "note": "Tested 2026-10-02 with OpenCode; cost/prompt $0.04. AA plots this model without an effort label (reasoning mode); a source row at one labelled effort is plausible, not exact."
+    },
+    "mimo-v2-6-pro": {
+     "status": "plausible",
+     "value": 18.0,
+     "sourceLabel": "MiMo-V2.6 Pro (High)",
+     "effort": "high",
+     "note": "Tested 2026-10-02 with OpenCode; cost/prompt $0.09. AA plots this model without an effort label (reasoning mode); a source row at one labelled effort is plausible, not exact."
+    },
+    "minimax-m3-1-flash": {
+     "status": "plausible",
+     "value": 17.0,
+     "sourceLabel": "MiniMax M3.1-Flash (Max)",
+     "effort": "max",
+     "note": "Tested 2026-10-20 with OpenCode; cost/prompt N/A. AA plots this model without an effort label (reasoning mode); a source row at one labelled effort is plausible, not exact."
+    },
+    "kimi-k3-1-pro": {
+     "status": "exact",
+     "value": 18.33,
+     "sourceLabel": "Kimi K3.1 Pro (Max)",
+     "effort": "max",
+     "note": "Tested 2026-10-25 with OpenCode; cost/prompt $0.74. Owner decision O66 (2026-10-25): AA plots Kimi K3.1 Pro without an effort; Moonshot's API documents reasoning_effort low / high / max with max the default, so its configuration is taken at max, its maximum effort. The Kimi K3.1 Pro (High) row is another effort and is not used."
+    }
+   },
+   "readAt": "2026-10-25T10:44:11Z"
+  },
+  {
+   "key": "aicd-bug-finding",
+   "name": "AI Coding Daily LLM Coding Leaderboard: Bug Finding Test (max 10)",
+   "version": "v2 scoring with Bug Finding (since 2026-10-03)",
+   "updated": "2026-10-24",
+   "measures": "Agentic coding on existing repos (Laravel/PHP, React+TS, Flutter, Go): judged code quality, hidden-test edge cases, bug finding without edits. Overlaps ValueRank's Bug Hunt leaf in construct (bug finding without editing); it is AICD's own project, not Bug Hunt Bench.",
+   "domain": "software engineering",
+   "effortOnRow": true,
+   "harness": "Varies by model: Claude Code (Anthropic), Codex CLI (OpenAI), OpenCode (open models), Devin (Gemini 4 Argon), DeepSeek Harness, Cursor, Antigravity",
+   "metric": "points (max 10)",
+   "sourceUrl": "https://aicodingdaily.com/leaderboard (every row, hidden older rows included)",
+   "machineReadable": "No export; server-rendered Livewire HTML table. Hidden older rows obtained by POST to /livewire-71a08158/update with hiddenOlderModelIds=[] (captured).",
+   "coverage": {
+    "claude-haiku-5-5": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "AICD has Haiku 5.5 Medium/High only."
+    },
+    "claude-haiku-5-5-high": {
+     "status": "exact",
+     "value": 7.08,
+     "sourceLabel": "Haiku 5.5 (High)",
+     "effort": "high",
+     "note": "Tested 2026-10-08 with Claude Code; cost/prompt $0.05."
+    },
+    "claude-haiku-5-5-low": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "AICD has Haiku 5.5 Medium/High only."
+    },
+    "claude-haiku-5-5-max": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "AICD has Haiku 5.5 Medium/High only."
+    },
+    "claude-haiku-5-5-medium": {
+     "status": "exact",
+     "value": 6.88,
+     "sourceLabel": "Haiku 5.5 (Medium)",
+     "effort": "medium",
+     "note": "Tested 2026-10-08 with Claude Code; cost/prompt $0.03."
+    },
+    "claude-opus-5-5": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "AICD has Opus 5.5 Low/Medium/High only."
+    },
+    "claude-opus-5-5-high": {
+     "status": "exact",
+     "value": 9.58,
+     "sourceLabel": "Opus 5.5 (High)",
+     "effort": "high",
+     "note": "Tested 2026-10-20 with Claude Code; cost/prompt $0.83."
+    },
+    "claude-opus-5-5-medium": {
+     "status": "exact",
+     "value": 8.33,
+     "sourceLabel": "Opus 5.5 (Medium)",
+     "effort": "medium",
+     "note": "Tested 2026-10-19 with Claude Code; cost/prompt $0.57."
+    },
+    "claude-opus-5-5-xhigh": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "AICD has Opus 5.5 Low/Medium/High only."
+    },
+    "claude-sonnet-5-5": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "AICD has Sonnet 5.5 Medium/High only."
+    },
+    "claude-sonnet-5-5-xhigh": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "AICD has Sonnet 5.5 Medium/High only."
+    },
+    "deepseek-v4-1-flash-1017": {
+     "status": "exact",
+     "value": 8.96,
+     "sourceLabel": "Deepseek-V4.1-Flash-1017 (Max)",
+     "effort": "max",
+     "note": "Tested 2026-10-18 with DeepSeek Harness; cost/prompt N/A. Second row for the same configuration: OpenCode total 60.97 (Laravel 17.42, React 18.17, Bug 8.13, Edge 17.25, tested 2026-10-17); value shown is the first-listed row."
+    },
+    "gemini-4-argon": {
+     "status": "exact",
+     "value": 7.19,
+     "sourceLabel": "Gemini 4 Argon (High)",
+     "effort": "high",
+     "note": "Tested 2026-10-14 with Devin; cost/prompt N/A."
+    },
+    "gpt-5.6-luna-low": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": "GPT-5.6-Luna (Low)",
+     "effort": "low",
+     "note": "Tested 2026-09-12 with Codex CLI; cost/prompt $0.01. Row is hidden by default as an older LLM; read from the page Livewire state with the hidden-model filter cleared (aicd-leaderboard-livewire-allrows.html). Tested 2026-09-12, before the Bug Finding project was added (2026-10-03); its listed total 30.51 is out of 60, so no /70 total or bug-finding score exists."
+    },
+    "gpt-6-astra": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "AICD has GPT-6-Astra Medium/High only."
+    },
+    "gpt-6-astra-high": {
+     "status": "exact",
+     "value": 9.58,
+     "sourceLabel": "GPT-6-Astra (High)",
+     "effort": "high",
+     "note": "Tested 2026-10-01 with Codex CLI; cost/prompt $0.96."
+    },
+    "gpt-6-astra-xhigh": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "AICD has GPT-6-Astra Medium/High only."
+    },
+    "gpt-6-luna": {
+     "status": "exact",
+     "value": 7.08,
+     "sourceLabel": "GPT-6-Luna (Max)",
+     "effort": "max",
+     "note": "Tested 2026-10-01 with Codex CLI; cost/prompt $0.03."
+    },
+    "gpt-6-luna-high": {
+     "status": "exact",
+     "value": 5.31,
+     "sourceLabel": "GPT-6-Luna (High)",
+     "effort": "high",
+     "note": "Tested 2026-10-01 with Codex CLI; cost/prompt $0.01."
+    },
+    "gpt-6-luna-low": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "AICD has GPT-6-Luna Medium/High/Xhigh/Max only."
+    },
+    "gpt-6-luna-medium": {
+     "status": "exact",
+     "value": 3.54,
+     "sourceLabel": "GPT-6-Luna (Medium)",
+     "effort": "medium",
+     "note": "Tested 2026-09-30 with Codex CLI; cost/prompt $0.01."
+    },
+    "gpt-6-luna-xhigh": {
+     "status": "exact",
+     "value": 6.46,
+     "sourceLabel": "GPT-6-Luna (Xhigh)",
+     "effort": "xhigh",
+     "note": "Tested 2026-10-01 with Codex CLI; cost/prompt $0.03."
+    },
+    "gpt-6.1-sol": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "AICD has GPT-6.1-Sol Low/Medium/High only."
+    },
+    "gpt-6.1-sol-high": {
+     "status": "exact",
+     "value": 9.17,
+     "sourceLabel": "GPT-6.1-Sol (High)",
+     "effort": "high",
+     "note": "Tested 2026-10-19 with Codex CLI; cost/prompt $0.23."
+    },
+    "gpt-6.1-sol-medium": {
+     "status": "exact",
+     "value": 9.38,
+     "sourceLabel": "GPT-6.1-Sol (Medium)",
+     "effort": "medium",
+     "note": "Tested 2026-10-19 with Codex CLI; cost/prompt $0.15."
+    },
+    "gpt-6.1-sol-xhigh": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "AICD has GPT-6.1-Sol Low/Medium/High only."
+    },
+    "mimo-v2-6-flash": {
+     "status": "plausible",
+     "value": 7.81,
+     "sourceLabel": "MiMo-V2.6 Flash (High)",
+     "effort": "high",
+     "note": "Tested 2026-10-02 with OpenCode; cost/prompt $0.04. AA plots this model without an effort label (reasoning mode); a source row at one labelled effort is plausible, not exact."
+    },
+    "mimo-v2-6-pro": {
+     "status": "plausible",
+     "value": 6.25,
+     "sourceLabel": "MiMo-V2.6 Pro (High)",
+     "effort": "high",
+     "note": "Tested 2026-10-02 with OpenCode; cost/prompt $0.09. AA plots this model without an effort label (reasoning mode); a source row at one labelled effort is plausible, not exact."
+    },
+    "minimax-m3-1-flash": {
+     "status": "plausible",
+     "value": 4.79,
+     "sourceLabel": "MiniMax M3.1-Flash (Max)",
+     "effort": "max",
+     "note": "Tested 2026-10-20 with OpenCode; cost/prompt N/A. AA plots this model without an effort label (reasoning mode); a source row at one labelled effort is plausible, not exact."
+    },
+    "kimi-k3-1-pro": {
+     "status": "exact",
+     "value": 9.17,
+     "sourceLabel": "Kimi K3.1 Pro (Max)",
+     "effort": "max",
+     "note": "Tested 2026-10-25 with OpenCode; cost/prompt $0.74. Owner decision O66 (2026-10-25): AA plots Kimi K3.1 Pro without an effort; Moonshot's API documents reasoning_effort low / high / max with max the default, so its configuration is taken at max, its maximum effort. The Kimi K3.1 Pro (High) row is another effort and is not used."
+    }
+   },
+   "readAt": "2026-10-25T10:44:11Z"
+  },
+  {
+   "key": "aicd-edge-case",
+   "name": "AI Coding Daily LLM Coding Leaderboard: Edge-case Testing, 4 projects (max 20)",
+   "version": "v2 scoring with Bug Finding (since 2026-10-03)",
+   "updated": "2026-10-24",
+   "measures": "Agentic coding on existing repos (Laravel/PHP, React+TS, Flutter, Go): judged code quality, hidden-test edge cases, bug finding without edits.",
+   "domain": "software engineering",
+   "effortOnRow": true,
+   "harness": "Varies by model: Claude Code (Anthropic), Codex CLI (OpenAI), OpenCode (open models), Devin (Gemini 4 Argon), DeepSeek Harness, Cursor, Antigravity",
+   "metric": "points (max 20)",
+   "sourceUrl": "https://aicodingdaily.com/leaderboard (every row, hidden older rows included)",
+   "machineReadable": "No export; server-rendered Livewire HTML table. Hidden older rows obtained by POST to /livewire-71a08158/update with hiddenOlderModelIds=[] (captured).",
+   "coverage": {
+    "claude-haiku-5-5": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "AICD has Haiku 5.5 Medium/High only."
+    },
+    "claude-haiku-5-5-high": {
+     "status": "exact",
+     "value": 17.25,
+     "sourceLabel": "Haiku 5.5 (High)",
+     "effort": "high",
+     "note": "Tested 2026-10-08 with Claude Code; cost/prompt $0.05."
+    },
+    "claude-haiku-5-5-low": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "AICD has Haiku 5.5 Medium/High only."
+    },
+    "claude-haiku-5-5-max": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "AICD has Haiku 5.5 Medium/High only."
+    },
+    "claude-haiku-5-5-medium": {
+     "status": "exact",
+     "value": 17.0,
+     "sourceLabel": "Haiku 5.5 (Medium)",
+     "effort": "medium",
+     "note": "Tested 2026-10-08 with Claude Code; cost/prompt $0.03."
+    },
+    "claude-opus-5-5": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "AICD has Opus 5.5 Low/Medium/High only."
+    },
+    "claude-opus-5-5-high": {
+     "status": "exact",
+     "value": 20.0,
+     "sourceLabel": "Opus 5.5 (High)",
+     "effort": "high",
+     "note": "Tested 2026-10-20 with Claude Code; cost/prompt $0.83."
+    },
+    "claude-opus-5-5-medium": {
+     "status": "exact",
+     "value": 19.5,
+     "sourceLabel": "Opus 5.5 (Medium)",
+     "effort": "medium",
+     "note": "Tested 2026-10-19 with Claude Code; cost/prompt $0.57."
+    },
+    "claude-opus-5-5-xhigh": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "AICD has Opus 5.5 Low/Medium/High only."
+    },
+    "claude-sonnet-5-5": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "AICD has Sonnet 5.5 Medium/High only."
+    },
+    "claude-sonnet-5-5-xhigh": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "AICD has Sonnet 5.5 Medium/High only."
+    },
+    "deepseek-v4-1-flash-1017": {
+     "status": "exact",
+     "value": 15.5,
+     "sourceLabel": "Deepseek-V4.1-Flash-1017 (Max)",
+     "effort": "max",
+     "note": "Tested 2026-10-18 with DeepSeek Harness; cost/prompt N/A. Second row for the same configuration: OpenCode total 60.97 (Laravel 17.42, React 18.17, Bug 8.13, Edge 17.25, tested 2026-10-17); value shown is the first-listed row."
+    },
+    "gemini-4-argon": {
+     "status": "exact",
+     "value": 14.25,
+     "sourceLabel": "Gemini 4 Argon (High)",
+     "effort": "high",
+     "note": "Tested 2026-10-14 with Devin; cost/prompt N/A."
+    },
+    "gpt-5.6-luna-low": {
+     "status": "exact",
+     "value": 5.1,
+     "sourceLabel": "GPT-5.6-Luna (Low)",
+     "effort": "low",
+     "note": "Tested 2026-09-12 with Codex CLI; cost/prompt $0.01. Row is hidden by default as an older LLM; read from the page Livewire state with the hidden-model filter cleared (aicd-leaderboard-livewire-allrows.html)."
+    },
+    "gpt-6-astra": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "AICD has GPT-6-Astra Medium/High only."
+    },
+    "gpt-6-astra-high": {
+     "status": "exact",
+     "value": 20.0,
+     "sourceLabel": "GPT-6-Astra (High)",
+     "effort": "high",
+     "note": "Tested 2026-10-01 with Codex CLI; cost/prompt $0.96."
+    },
+    "gpt-6-astra-xhigh": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "AICD has GPT-6-Astra Medium/High only."
+    },
+    "gpt-6-luna": {
+     "status": "exact",
+     "value": 16.7,
+     "sourceLabel": "GPT-6-Luna (Max)",
+     "effort": "max",
+     "note": "Tested 2026-10-01 with Codex CLI; cost/prompt $0.03."
+    },
+    "gpt-6-luna-high": {
+     "status": "exact",
+     "value": 15.0,
+     "sourceLabel": "GPT-6-Luna (High)",
+     "effort": "high",
+     "note": "Tested 2026-10-01 with Codex CLI; cost/prompt $0.01."
+    },
+    "gpt-6-luna-low": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "AICD has GPT-6-Luna Medium/High/Xhigh/Max only."
+    },
+    "gpt-6-luna-medium": {
+     "status": "exact",
+     "value": 9.7,
+     "sourceLabel": "GPT-6-Luna (Medium)",
+     "effort": "medium",
+     "note": "Tested 2026-09-30 with Codex CLI; cost/prompt $0.01."
+    },
+    "gpt-6-luna-xhigh": {
+     "status": "exact",
+     "value": 15.75,
+     "sourceLabel": "GPT-6-Luna (Xhigh)",
+     "effort": "xhigh",
+     "note": "Tested 2026-10-01 with Codex CLI; cost/prompt $0.03."
+    },
+    "gpt-6.1-sol": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "AICD has GPT-6.1-Sol Low/Medium/High only."
+    },
+    "gpt-6.1-sol-high": {
+     "status": "exact",
+     "value": 19.5,
+     "sourceLabel": "GPT-6.1-Sol (High)",
+     "effort": "high",
+     "note": "Tested 2026-10-19 with Codex CLI; cost/prompt $0.23."
+    },
+    "gpt-6.1-sol-medium": {
+     "status": "exact",
+     "value": 19.5,
+     "sourceLabel": "GPT-6.1-Sol (Medium)",
+     "effort": "medium",
+     "note": "Tested 2026-10-19 with Codex CLI; cost/prompt $0.15."
+    },
+    "gpt-6.1-sol-xhigh": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "AICD has GPT-6.1-Sol Low/Medium/High only."
+    },
+    "mimo-v2-6-flash": {
+     "status": "plausible",
+     "value": 10.15,
+     "sourceLabel": "MiMo-V2.6 Flash (High)",
+     "effort": "high",
+     "note": "Tested 2026-10-02 with OpenCode; cost/prompt $0.04. AA plots this model without an effort label (reasoning mode); a source row at one labelled effort is plausible, not exact."
+    },
+    "mimo-v2-6-pro": {
+     "status": "plausible",
+     "value": 12.15,
+     "sourceLabel": "MiMo-V2.6 Pro (High)",
+     "effort": "high",
+     "note": "Tested 2026-10-02 with OpenCode; cost/prompt $0.09. AA plots this model without an effort label (reasoning mode); a source row at one labelled effort is plausible, not exact."
+    },
+    "minimax-m3-1-flash": {
+     "status": "plausible",
+     "value": 15.25,
+     "sourceLabel": "MiniMax M3.1-Flash (Max)",
+     "effort": "max",
+     "note": "Tested 2026-10-20 with OpenCode; cost/prompt N/A. AA plots this model without an effort label (reasoning mode); a source row at one labelled effort is plausible, not exact."
+    },
+    "kimi-k3-1-pro": {
+     "status": "exact",
+     "value": 17.75,
+     "sourceLabel": "Kimi K3.1 Pro (Max)",
+     "effort": "max",
+     "note": "Tested 2026-10-25 with OpenCode; cost/prompt $0.74. Owner decision O66 (2026-10-25): AA plots Kimi K3.1 Pro without an effort; Moonshot's API documents reasoning_effort low / high / max with max the default, so its configuration is taken at max, its maximum effort. The Kimi K3.1 Pro (High) row is another effort and is not used."
+    }
+   },
+   "readAt": "2026-10-25T10:44:11Z"
+  },
+  {
+   "key": "livebench2-coding",
+   "name": "LiveBench 2.0: Coding",
+   "version": "LiveBench 2.0 release 20261023",
+   "updated": "2026-10-24",
+   "measures": "Fix real bugs from merged PRs in a frozen production codebase; hidden tests; a fix that breaks behaviour scores 0",
+   "domain": "software engineering",
+   "effortOnRow": true,
+   "harness": "LiveBench-run harness (not named); one run per model at highest supported effort",
+   "metric": "mean task score 0-100",
+   "sourceUrl": "https://livebench.ai/data/20261023/table.csv (shown at https://livebench.ai/new; O67)",
+   "machineReadable": "Yes: static CSV/JSON (table.csv, cost.csv, breakdown.json, notes.json); effort in JS bundle model metadata",
+   "coverage": {
+    "claude-haiku-5-5": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "LiveBench 2.0 has one row per model at its highest effort only; this effort is not run."
+    },
+    "claude-haiku-5-5-high": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "LiveBench 2.0 has one row per model at its highest effort only; this effort is not run."
+    },
+    "claude-haiku-5-5-low": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "LiveBench 2.0 has one row per model at its highest effort only; this effort is not run."
+    },
+    "claude-haiku-5-5-max": {
+     "status": "exact",
+     "value": 91.4,
+     "sourceLabel": "claude-haiku-5.5",
+     "effort": "max",
+     "note": "2026-10-23 release (O67); effort from the site bundle's model metadata."
+    },
+    "claude-haiku-5-5-medium": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "LiveBench 2.0 has one row per model at its highest effort only; this effort is not run."
+    },
+    "claude-opus-5-5": {
+     "status": "exact",
+     "value": 96.3,
+     "sourceLabel": "claude-opus-5.5",
+     "effort": "max",
+     "note": "2026-10-23 release (O67); effort from the site bundle's model metadata."
+    },
+    "claude-opus-5-5-high": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "LiveBench 2.0 has one row per model at its highest effort only; this effort is not run."
+    },
+    "claude-opus-5-5-medium": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "LiveBench 2.0 has one row per model at its highest effort only; this effort is not run."
+    },
+    "claude-opus-5-5-xhigh": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "LiveBench 2.0 has one row per model at its highest effort only; this effort is not run."
+    },
+    "claude-sonnet-5-5": {
+     "status": "exact",
+     "value": 94.7,
+     "sourceLabel": "claude-sonnet-5.5",
+     "effort": "max",
+     "note": "2026-10-23 release (O67); effort from the site bundle's model metadata."
+    },
+    "claude-sonnet-5-5-xhigh": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "LiveBench 2.0 has one row per model at its highest effort only; this effort is not run."
+    },
+    "deepseek-v4-1-flash-1017": {
+     "status": "exact",
+     "value": 96.0,
+     "sourceLabel": "deepseek-v4.1-flash-1017",
+     "effort": "max",
+     "note": "2026-10-23 release (O67); effort from the site bundle's model metadata."
+    },
+    "gemini-4-argon": {
+     "status": "exact",
+     "value": 89.7,
+     "sourceLabel": "gemini-4-argon",
+     "effort": "high",
+     "note": "2026-10-23 release (O67); effort from the site bundle's model metadata."
+    },
+    "gpt-5.6-luna-low": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "LiveBench 2.0 has gpt-5.6-luna at max only (73.6)."
+    },
+    "gpt-6-astra": {
+     "status": "exact",
+     "value": 93.7,
+     "sourceLabel": "gpt-6-astra",
+     "effort": "max",
+     "note": "2026-10-23 release (O67); effort from the site bundle's model metadata."
+    },
+    "gpt-6-astra-high": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "LiveBench 2.0 has one row per model at its highest effort only; this effort is not run."
+    },
+    "gpt-6-astra-xhigh": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "LiveBench 2.0 has one row per model at its highest effort only; this effort is not run."
+    },
+    "gpt-6-luna": {
+     "status": "exact",
+     "value": 84.5,
+     "sourceLabel": "gpt-6-luna",
+     "effort": "max",
+     "note": "2026-10-23 release (O67); effort from the site bundle's model metadata."
+    },
+    "gpt-6-luna-high": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "LiveBench 2.0 has one row per model at its highest effort only; this effort is not run."
+    },
+    "gpt-6-luna-low": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "LiveBench 2.0 has one row per model at its highest effort only; this effort is not run."
+    },
+    "gpt-6-luna-medium": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "LiveBench 2.0 has one row per model at its highest effort only; this effort is not run."
+    },
+    "gpt-6-luna-xhigh": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "LiveBench 2.0 has one row per model at its highest effort only; this effort is not run."
+    },
+    "gpt-6.1-sol": {
+     "status": "exact",
+     "value": 96.0,
+     "sourceLabel": "gpt-6.1-sol",
+     "effort": "max",
+     "note": "2026-10-23 release (O67); effort from the site bundle's model metadata."
+    },
+    "gpt-6.1-sol-high": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "LiveBench 2.0 has one row per model at its highest effort only; this effort is not run."
+    },
+    "gpt-6.1-sol-medium": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "LiveBench 2.0 has one row per model at its highest effort only; this effort is not run."
+    },
+    "gpt-6.1-sol-xhigh": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "LiveBench 2.0 has one row per model at its highest effort only; this effort is not run."
+    },
+    "mimo-v2-6-flash": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "No MiMo-V2.6-Flash row in LiveBench 2.0."
+    },
+    "mimo-v2-6-pro": {
+     "status": "plausible",
+     "value": 81.5,
+     "sourceLabel": "mimo-v2.6-pro",
+     "effort": "high",
+     "note": "2026-10-23 release (O67); effort from the site bundle's model metadata."
+    },
+    "minimax-m3-1-flash": {
+     "status": "plausible",
+     "value": 83.9,
+     "sourceLabel": "minimax-m3.1-flash",
+     "effort": "max",
+     "note": "2026-10-23 release (O67); effort from the site bundle's model metadata."
+    },
+    "kimi-k3-1-pro": {
+     "status": "exact",
+     "value": 81.8,
+     "sourceLabel": "kimi-k3.1-pro",
+     "effort": "max",
+     "note": "Owner decision O66 (2026-10-25): AA plots Kimi K3.1 Pro without an effort; Moonshot's API documents reasoning_effort low / high / max with max the default, so its configuration is taken at max, its maximum effort. LiveBench's model metadata records effort max."
+    }
+   },
+   "readAt": "2026-10-25T10:44:11Z"
+  },
+  {
+   "key": "livebench2-agentic",
+   "name": "LiveBench 2.0: Long Agentic",
+   "version": "LiveBench 2.0 release 20261023",
+   "updated": "2026-10-24",
+   "measures": "Long-running agentic work: apps extended over changing requirements, ops on an existing codebase over simulated months, compiler/simulator/perf tasks; deterministic grading",
+   "domain": "software engineering / agentic",
+   "effortOnRow": true,
+   "harness": "LiveBench-run harness (not named); one run per model at highest supported effort",
+   "metric": "mean task score 0-100",
+   "sourceUrl": "https://livebench.ai/data/20261023/table.csv (shown at https://livebench.ai/new; O67)",
+   "machineReadable": "Yes: static CSV/JSON (table.csv, cost.csv, breakdown.json, notes.json); effort in JS bundle model metadata",
+   "coverage": {
+    "claude-haiku-5-5": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "LiveBench 2.0 has one row per model at its highest effort only; this effort is not run."
+    },
+    "claude-haiku-5-5-high": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "LiveBench 2.0 has one row per model at its highest effort only; this effort is not run."
+    },
+    "claude-haiku-5-5-low": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "LiveBench 2.0 has one row per model at its highest effort only; this effort is not run."
+    },
+    "claude-haiku-5-5-max": {
+     "status": "exact",
+     "value": 40.0,
+     "sourceLabel": "claude-haiku-5.5",
+     "effort": "max",
+     "note": "2026-10-23 release (O67); effort from the site bundle's model metadata."
+    },
+    "claude-haiku-5-5-medium": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "LiveBench 2.0 has one row per model at its highest effort only; this effort is not run."
+    },
+    "claude-opus-5-5": {
+     "status": "exact",
+     "value": 72.8,
+     "sourceLabel": "claude-opus-5.5",
+     "effort": "max",
+     "note": "2026-10-23 release (O67); effort from the site bundle's model metadata."
+    },
+    "claude-opus-5-5-high": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "LiveBench 2.0 has one row per model at its highest effort only; this effort is not run."
+    },
+    "claude-opus-5-5-medium": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "LiveBench 2.0 has one row per model at its highest effort only; this effort is not run."
+    },
+    "claude-opus-5-5-xhigh": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "LiveBench 2.0 has one row per model at its highest effort only; this effort is not run."
+    },
+    "claude-sonnet-5-5": {
+     "status": "exact",
+     "value": 63.4,
+     "sourceLabel": "claude-sonnet-5.5",
+     "effort": "max",
+     "note": "2026-10-23 release (O67); effort from the site bundle's model metadata."
+    },
+    "claude-sonnet-5-5-xhigh": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "LiveBench 2.0 has one row per model at its highest effort only; this effort is not run."
+    },
+    "deepseek-v4-1-flash-1017": {
+     "status": "exact",
+     "value": 40.9,
+     "sourceLabel": "deepseek-v4.1-flash-1017",
+     "effort": "max",
+     "note": "2026-10-23 release (O67); effort from the site bundle's model metadata."
+    },
+    "gemini-4-argon": {
+     "status": "exact",
+     "value": 61.2,
+     "sourceLabel": "gemini-4-argon",
+     "effort": "high",
+     "note": "2026-10-23 release (O67); effort from the site bundle's model metadata."
+    },
+    "gpt-5.6-luna-low": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "LiveBench 2.0 has gpt-5.6-luna at max only (30.4)."
+    },
+    "gpt-6-astra": {
+     "status": "exact",
+     "value": 77.5,
+     "sourceLabel": "gpt-6-astra",
+     "effort": "max",
+     "note": "2026-10-23 release (O67); effort from the site bundle's model metadata."
+    },
+    "gpt-6-astra-high": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "LiveBench 2.0 has one row per model at its highest effort only; this effort is not run."
+    },
+    "gpt-6-astra-xhigh": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "LiveBench 2.0 has one row per model at its highest effort only; this effort is not run."
+    },
+    "gpt-6-luna": {
+     "status": "exact",
+     "value": 30.9,
+     "sourceLabel": "gpt-6-luna",
+     "effort": "max",
+     "note": "2026-10-23 release (O67); effort from the site bundle's model metadata."
+    },
+    "gpt-6-luna-high": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "LiveBench 2.0 has one row per model at its highest effort only; this effort is not run."
+    },
+    "gpt-6-luna-low": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "LiveBench 2.0 has one row per model at its highest effort only; this effort is not run."
+    },
+    "gpt-6-luna-medium": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "LiveBench 2.0 has one row per model at its highest effort only; this effort is not run."
+    },
+    "gpt-6-luna-xhigh": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "LiveBench 2.0 has one row per model at its highest effort only; this effort is not run."
+    },
+    "gpt-6.1-sol": {
+     "status": "exact",
+     "value": 68.7,
+     "sourceLabel": "gpt-6.1-sol",
+     "effort": "max",
+     "note": "2026-10-23 release (O67); effort from the site bundle's model metadata."
+    },
+    "gpt-6.1-sol-high": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "LiveBench 2.0 has one row per model at its highest effort only; this effort is not run."
+    },
+    "gpt-6.1-sol-medium": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "LiveBench 2.0 has one row per model at its highest effort only; this effort is not run."
+    },
+    "gpt-6.1-sol-xhigh": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "LiveBench 2.0 has one row per model at its highest effort only; this effort is not run."
+    },
+    "mimo-v2-6-flash": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "No MiMo-V2.6-Flash row in LiveBench 2.0."
+    },
+    "mimo-v2-6-pro": {
+     "status": "plausible",
+     "value": 35.2,
+     "sourceLabel": "mimo-v2.6-pro",
+     "effort": "high",
+     "note": "2026-10-23 release (O67); effort from the site bundle's model metadata."
+    },
+    "minimax-m3-1-flash": {
+     "status": "plausible",
+     "value": 28.8,
+     "sourceLabel": "minimax-m3.1-flash",
+     "effort": "max",
+     "note": "2026-10-23 release (O67); effort from the site bundle's model metadata."
+    },
+    "kimi-k3-1-pro": {
+     "status": "exact",
+     "value": 39.1,
+     "sourceLabel": "kimi-k3.1-pro",
+     "effort": "max",
+     "note": "Owner decision O66 (2026-10-25): AA plots Kimi K3.1 Pro without an effort; Moonshot's API documents reasoning_effort low / high / max with max the default, so its configuration is taken at max, its maximum effort. LiveBench's model metadata records effort max."
+    }
+   },
+   "readAt": "2026-10-25T10:44:11Z"
+  },
+  {
+   "key": "livebench2-reasoning",
+   "name": "LiveBench 2.0: Reasoning",
+   "version": "LiveBench 2.0 release 20261023",
+   "updated": "2026-10-24",
+   "measures": "Short logic, spatial and theory-of-mind questions with single answers",
+   "domain": "reasoning",
+   "effortOnRow": true,
+   "harness": "LiveBench-run harness (not named); one run per model at highest supported effort",
+   "metric": "mean task score 0-100",
+   "sourceUrl": "https://livebench.ai/data/20261023/table.csv (shown at https://livebench.ai/new; O67)",
+   "machineReadable": "Yes: static CSV/JSON (table.csv, cost.csv, breakdown.json, notes.json); effort in JS bundle model metadata",
+   "coverage": {
+    "claude-haiku-5-5": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "LiveBench 2.0 has one row per model at its highest effort only; this effort is not run."
+    },
+    "claude-haiku-5-5-high": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "LiveBench 2.0 has one row per model at its highest effort only; this effort is not run."
+    },
+    "claude-haiku-5-5-low": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "LiveBench 2.0 has one row per model at its highest effort only; this effort is not run."
+    },
+    "claude-haiku-5-5-max": {
+     "status": "exact",
+     "value": 82.4,
+     "sourceLabel": "claude-haiku-5.5",
+     "effort": "max",
+     "note": "2026-10-23 release (O67); effort from the site bundle's model metadata."
+    },
+    "claude-haiku-5-5-medium": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "LiveBench 2.0 has one row per model at its highest effort only; this effort is not run."
+    },
+    "claude-opus-5-5": {
+     "status": "exact",
+     "value": 92.2,
+     "sourceLabel": "claude-opus-5.5",
+     "effort": "max",
+     "note": "2026-10-23 release (O67); effort from the site bundle's model metadata."
+    },
+    "claude-opus-5-5-high": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "LiveBench 2.0 has one row per model at its highest effort only; this effort is not run."
+    },
+    "claude-opus-5-5-medium": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "LiveBench 2.0 has one row per model at its highest effort only; this effort is not run."
+    },
+    "claude-opus-5-5-xhigh": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "LiveBench 2.0 has one row per model at its highest effort only; this effort is not run."
+    },
+    "claude-sonnet-5-5": {
+     "status": "exact",
+     "value": 91.6,
+     "sourceLabel": "claude-sonnet-5.5",
+     "effort": "max",
+     "note": "2026-10-23 release (O67); effort from the site bundle's model metadata."
+    },
+    "claude-sonnet-5-5-xhigh": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "LiveBench 2.0 has one row per model at its highest effort only; this effort is not run."
+    },
+    "deepseek-v4-1-flash-1017": {
+     "status": "exact",
+     "value": 89.1,
+     "sourceLabel": "deepseek-v4.1-flash-1017",
+     "effort": "max",
+     "note": "2026-10-23 release (O67); effort from the site bundle's model metadata."
+    },
+    "gemini-4-argon": {
+     "status": "exact",
+     "value": 95.1,
+     "sourceLabel": "gemini-4-argon",
+     "effort": "high",
+     "note": "2026-10-23 release (O67); effort from the site bundle's model metadata."
+    },
+    "gpt-5.6-luna-low": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "LiveBench 2.0 has gpt-5.6-luna at max only (85.6)."
+    },
+    "gpt-6-astra": {
+     "status": "exact",
+     "value": 92.7,
+     "sourceLabel": "gpt-6-astra",
+     "effort": "max",
+     "note": "2026-10-23 release (O67); effort from the site bundle's model metadata."
+    },
+    "gpt-6-astra-high": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "LiveBench 2.0 has one row per model at its highest effort only; this effort is not run."
+    },
+    "gpt-6-astra-xhigh": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "LiveBench 2.0 has one row per model at its highest effort only; this effort is not run."
+    },
+    "gpt-6-luna": {
+     "status": "exact",
+     "value": 81.8,
+     "sourceLabel": "gpt-6-luna",
+     "effort": "max",
+     "note": "2026-10-23 release (O67); effort from the site bundle's model metadata."
+    },
+    "gpt-6-luna-high": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "LiveBench 2.0 has one row per model at its highest effort only; this effort is not run."
+    },
+    "gpt-6-luna-low": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "LiveBench 2.0 has one row per model at its highest effort only; this effort is not run."
+    },
+    "gpt-6-luna-medium": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "LiveBench 2.0 has one row per model at its highest effort only; this effort is not run."
+    },
+    "gpt-6-luna-xhigh": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "LiveBench 2.0 has one row per model at its highest effort only; this effort is not run."
+    },
+    "gpt-6.1-sol": {
+     "status": "exact",
+     "value": 92.6,
+     "sourceLabel": "gpt-6.1-sol",
+     "effort": "max",
+     "note": "2026-10-23 release (O67); effort from the site bundle's model metadata."
+    },
+    "gpt-6.1-sol-high": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "LiveBench 2.0 has one row per model at its highest effort only; this effort is not run."
+    },
+    "gpt-6.1-sol-medium": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "LiveBench 2.0 has one row per model at its highest effort only; this effort is not run."
+    },
+    "gpt-6.1-sol-xhigh": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "LiveBench 2.0 has one row per model at its highest effort only; this effort is not run."
+    },
+    "mimo-v2-6-flash": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "No MiMo-V2.6-Flash row in LiveBench 2.0."
+    },
+    "mimo-v2-6-pro": {
+     "status": "plausible",
+     "value": 79.6,
+     "sourceLabel": "mimo-v2.6-pro",
+     "effort": "high",
+     "note": "2026-10-23 release (O67); effort from the site bundle's model metadata."
+    },
+    "minimax-m3-1-flash": {
+     "status": "plausible",
+     "value": 82.9,
+     "sourceLabel": "minimax-m3.1-flash",
+     "effort": "max",
+     "note": "2026-10-23 release (O67); effort from the site bundle's model metadata."
+    },
+    "kimi-k3-1-pro": {
+     "status": "exact",
+     "value": 91.1,
+     "sourceLabel": "kimi-k3.1-pro",
+     "effort": "max",
+     "note": "Owner decision O66 (2026-10-25): AA plots Kimi K3.1 Pro without an effort; Moonshot's API documents reasoning_effort low / high / max with max the default, so its configuration is taken at max, its maximum effort. LiveBench's model metadata records effort max."
+    }
+   },
+   "readAt": "2026-10-25T10:44:11Z"
+  },
+  {
+   "key": "livebench2-browser",
+   "name": "LiveBench 2.0: Browser Use",
+   "version": "LiveBench 2.0 release 20261023",
+   "updated": "2026-10-24",
+   "measures": "Multi-step tasks in working web apps via a real browser; share passed (needs screenshots; non-vision models score 0)",
+   "domain": "agentic computer use",
+   "effortOnRow": true,
+   "harness": "LiveBench-run harness (not named); one run per model at highest supported effort",
+   "metric": "mean task score 0-100",
+   "sourceUrl": "https://livebench.ai/data/20261023/table.csv (shown at https://livebench.ai/new; O67)",
+   "machineReadable": "Yes: static CSV/JSON (table.csv, cost.csv, breakdown.json, notes.json); effort in JS bundle model metadata",
+   "coverage": {
+    "claude-haiku-5-5": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "LiveBench 2.0 has one row per model at its highest effort only; this effort is not run."
+    },
+    "claude-haiku-5-5-high": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "LiveBench 2.0 has one row per model at its highest effort only; this effort is not run."
+    },
+    "claude-haiku-5-5-low": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "LiveBench 2.0 has one row per model at its highest effort only; this effort is not run."
+    },
+    "claude-haiku-5-5-max": {
+     "status": "exact",
+     "value": 69.5,
+     "sourceLabel": "claude-haiku-5.5",
+     "effort": "max",
+     "note": "2026-10-23 release (O67); effort from the site bundle's model metadata."
+    },
+    "claude-haiku-5-5-medium": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "LiveBench 2.0 has one row per model at its highest effort only; this effort is not run."
+    },
+    "claude-opus-5-5": {
+     "status": "exact",
+     "value": 88.4,
+     "sourceLabel": "claude-opus-5.5",
+     "effort": "max",
+     "note": "2026-10-23 release (O67); effort from the site bundle's model metadata."
+    },
+    "claude-opus-5-5-high": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "LiveBench 2.0 has one row per model at its highest effort only; this effort is not run."
+    },
+    "claude-opus-5-5-medium": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "LiveBench 2.0 has one row per model at its highest effort only; this effort is not run."
+    },
+    "claude-opus-5-5-xhigh": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "LiveBench 2.0 has one row per model at its highest effort only; this effort is not run."
+    },
+    "claude-sonnet-5-5": {
+     "status": "exact",
+     "value": 89.3,
+     "sourceLabel": "claude-sonnet-5.5",
+     "effort": "max",
+     "note": "2026-10-23 release (O67); effort from the site bundle's model metadata."
+    },
+    "claude-sonnet-5-5-xhigh": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "LiveBench 2.0 has one row per model at its highest effort only; this effort is not run."
+    },
+    "deepseek-v4-1-flash-1017": {
+     "status": "exact",
+     "value": 67.2,
+     "sourceLabel": "deepseek-v4.1-flash-1017",
+     "effort": "max",
+     "note": "2026-10-23 release (O67); effort from the site bundle's model metadata."
+    },
+    "gemini-4-argon": {
+     "status": "exact",
+     "value": 82.8,
+     "sourceLabel": "gemini-4-argon",
+     "effort": "high",
+     "note": "2026-10-23 release (O67); effort from the site bundle's model metadata."
+    },
+    "gpt-5.6-luna-low": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "LiveBench 2.0 has gpt-5.6-luna at max only (68.0)."
+    },
+    "gpt-6-astra": {
+     "status": "exact",
+     "value": 91.3,
+     "sourceLabel": "gpt-6-astra",
+     "effort": "max",
+     "note": "2026-10-23 release (O67); effort from the site bundle's model metadata."
+    },
+    "gpt-6-astra-high": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "LiveBench 2.0 has one row per model at its highest effort only; this effort is not run."
+    },
+    "gpt-6-astra-xhigh": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "LiveBench 2.0 has one row per model at its highest effort only; this effort is not run."
+    },
+    "gpt-6-luna": {
+     "status": "exact",
+     "value": 70.3,
+     "sourceLabel": "gpt-6-luna",
+     "effort": "max",
+     "note": "2026-10-23 release (O67); effort from the site bundle's model metadata."
+    },
+    "gpt-6-luna-high": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "LiveBench 2.0 has one row per model at its highest effort only; this effort is not run."
+    },
+    "gpt-6-luna-low": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "LiveBench 2.0 has one row per model at its highest effort only; this effort is not run."
+    },
+    "gpt-6-luna-medium": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "LiveBench 2.0 has one row per model at its highest effort only; this effort is not run."
+    },
+    "gpt-6-luna-xhigh": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "LiveBench 2.0 has one row per model at its highest effort only; this effort is not run."
+    },
+    "gpt-6.1-sol": {
+     "status": "exact",
+     "value": 93.3,
+     "sourceLabel": "gpt-6.1-sol",
+     "effort": "max",
+     "note": "2026-10-23 release (O67); effort from the site bundle's model metadata."
+    },
+    "gpt-6.1-sol-high": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "LiveBench 2.0 has one row per model at its highest effort only; this effort is not run."
+    },
+    "gpt-6.1-sol-medium": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "LiveBench 2.0 has one row per model at its highest effort only; this effort is not run."
+    },
+    "gpt-6.1-sol-xhigh": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "LiveBench 2.0 has one row per model at its highest effort only; this effort is not run."
+    },
+    "mimo-v2-6-flash": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "No MiMo-V2.6-Flash row in LiveBench 2.0."
+    },
+    "mimo-v2-6-pro": {
+     "status": "plausible",
+     "value": 77.3,
+     "sourceLabel": "mimo-v2.6-pro",
+     "effort": "high",
+     "note": "2026-10-23 release (O67); effort from the site bundle's model metadata."
+    },
+    "minimax-m3-1-flash": {
+     "status": "plausible",
+     "value": 80.6,
+     "sourceLabel": "minimax-m3.1-flash",
+     "effort": "max",
+     "note": "2026-10-23 release (O67); effort from the site bundle's model metadata."
+    },
+    "kimi-k3-1-pro": {
+     "status": "exact",
+     "value": 75.9,
+     "sourceLabel": "kimi-k3.1-pro",
+     "effort": "max",
+     "note": "Owner decision O66 (2026-10-25): AA plots Kimi K3.1 Pro without an effort; Moonshot's API documents reasoning_effort low / high / max with max the default, so its configuration is taken at max, its maximum effort. LiveBench's model metadata records effort max."
+    }
+   },
+   "readAt": "2026-10-25T10:44:11Z"
+  },
+  {
+   "key": "livebench2-data-analysis",
+   "name": "LiveBench 2.0: Data Analysis",
+   "version": "LiveBench 2.0 release 20261023",
+   "updated": "2026-10-24",
+   "measures": "Short table questions (growth runs, column mapping, format conversion) with ground truth",
+   "domain": "data analysis",
+   "effortOnRow": true,
+   "harness": "LiveBench-run harness (not named); one run per model at highest supported effort",
+   "metric": "mean task score 0-100",
+   "sourceUrl": "https://livebench.ai/data/20261023/table.csv (shown at https://livebench.ai/new; O67)",
+   "machineReadable": "Yes: static CSV/JSON (table.csv, cost.csv, breakdown.json, notes.json); effort in JS bundle model metadata",
+   "coverage": {
+    "claude-haiku-5-5": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "LiveBench 2.0 has one row per model at its highest effort only; this effort is not run."
+    },
+    "claude-haiku-5-5-high": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "LiveBench 2.0 has one row per model at its highest effort only; this effort is not run."
+    },
+    "claude-haiku-5-5-low": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "LiveBench 2.0 has one row per model at its highest effort only; this effort is not run."
+    },
+    "claude-haiku-5-5-max": {
+     "status": "exact",
+     "value": 53.1,
+     "sourceLabel": "claude-haiku-5.5",
+     "effort": "max",
+     "note": "2026-10-23 release (O67); effort from the site bundle's model metadata."
+    },
+    "claude-haiku-5-5-medium": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "LiveBench 2.0 has one row per model at its highest effort only; this effort is not run."
+    },
+    "claude-opus-5-5": {
+     "status": "exact",
+     "value": 80.3,
+     "sourceLabel": "claude-opus-5.5",
+     "effort": "max",
+     "note": "2026-10-23 release (O67); effort from the site bundle's model metadata."
+    },
+    "claude-opus-5-5-high": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "LiveBench 2.0 has one row per model at its highest effort only; this effort is not run."
+    },
+    "claude-opus-5-5-medium": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "LiveBench 2.0 has one row per model at its highest effort only; this effort is not run."
+    },
+    "claude-opus-5-5-xhigh": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "LiveBench 2.0 has one row per model at its highest effort only; this effort is not run."
+    },
+    "claude-sonnet-5-5": {
+     "status": "exact",
+     "value": 59.5,
+     "sourceLabel": "claude-sonnet-5.5",
+     "effort": "max",
+     "note": "2026-10-23 release (O67); effort from the site bundle's model metadata."
+    },
+    "claude-sonnet-5-5-xhigh": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "LiveBench 2.0 has one row per model at its highest effort only; this effort is not run."
+    },
+    "deepseek-v4-1-flash-1017": {
+     "status": "exact",
+     "value": 79.5,
+     "sourceLabel": "deepseek-v4.1-flash-1017",
+     "effort": "max",
+     "note": "2026-10-23 release (O67); effort from the site bundle's model metadata."
+    },
+    "gemini-4-argon": {
+     "status": "exact",
+     "value": 85.2,
+     "sourceLabel": "gemini-4-argon",
+     "effort": "high",
+     "note": "2026-10-23 release (O67); effort from the site bundle's model metadata."
+    },
+    "gpt-5.6-luna-low": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "LiveBench 2.0 has gpt-5.6-luna at max only (78.0)."
+    },
+    "gpt-6-astra": {
+     "status": "exact",
+     "value": 83.0,
+     "sourceLabel": "gpt-6-astra",
+     "effort": "max",
+     "note": "2026-10-23 release (O67); effort from the site bundle's model metadata."
+    },
+    "gpt-6-astra-high": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "LiveBench 2.0 has one row per model at its highest effort only; this effort is not run."
+    },
+    "gpt-6-astra-xhigh": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "LiveBench 2.0 has one row per model at its highest effort only; this effort is not run."
+    },
+    "gpt-6-luna": {
+     "status": "exact",
+     "value": 73.4,
+     "sourceLabel": "gpt-6-luna",
+     "effort": "max",
+     "note": "2026-10-23 release (O67); effort from the site bundle's model metadata."
+    },
+    "gpt-6-luna-high": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "LiveBench 2.0 has one row per model at its highest effort only; this effort is not run."
+    },
+    "gpt-6-luna-low": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "LiveBench 2.0 has one row per model at its highest effort only; this effort is not run."
+    },
+    "gpt-6-luna-medium": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "LiveBench 2.0 has one row per model at its highest effort only; this effort is not run."
+    },
+    "gpt-6-luna-xhigh": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "LiveBench 2.0 has one row per model at its highest effort only; this effort is not run."
+    },
+    "gpt-6.1-sol": {
+     "status": "exact",
+     "value": 82.7,
+     "sourceLabel": "gpt-6.1-sol",
+     "effort": "max",
+     "note": "2026-10-23 release (O67); effort from the site bundle's model metadata."
+    },
+    "gpt-6.1-sol-high": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "LiveBench 2.0 has one row per model at its highest effort only; this effort is not run."
+    },
+    "gpt-6.1-sol-medium": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "LiveBench 2.0 has one row per model at its highest effort only; this effort is not run."
+    },
+    "gpt-6.1-sol-xhigh": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "LiveBench 2.0 has one row per model at its highest effort only; this effort is not run."
+    },
+    "mimo-v2-6-flash": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "No MiMo-V2.6-Flash row in LiveBench 2.0."
+    },
+    "mimo-v2-6-pro": {
+     "status": "plausible",
+     "value": 72.3,
+     "sourceLabel": "mimo-v2.6-pro",
+     "effort": "high",
+     "note": "2026-10-23 release (O67); effort from the site bundle's model metadata."
+    },
+    "minimax-m3-1-flash": {
+     "status": "plausible",
+     "value": 71.4,
+     "sourceLabel": "minimax-m3.1-flash",
+     "effort": "max",
+     "note": "2026-10-23 release (O67); effort from the site bundle's model metadata."
+    },
+    "kimi-k3-1-pro": {
+     "status": "exact",
+     "value": 79.1,
+     "sourceLabel": "kimi-k3.1-pro",
+     "effort": "max",
+     "note": "Owner decision O66 (2026-10-25): AA plots Kimi K3.1 Pro without an effort; Moonshot's API documents reasoning_effort low / high / max with max the default, so its configuration is taken at max, its maximum effort. LiveBench's model metadata records effort max."
+    }
+   },
+   "readAt": "2026-10-25T10:44:11Z"
+  },
+  {
+   "key": "livebench2-research",
+   "name": "LiveBench 2.0: Research",
+   "version": "LiveBench 2.0 release 20261023",
+   "updated": "2026-10-24",
+   "measures": "Open-ended research briefs producing a report; rubric graded",
+   "domain": "research / professional work",
+   "effortOnRow": true,
+   "harness": "LiveBench-run harness (not named); one run per model at highest supported effort",
+   "metric": "mean task score 0-100",
+   "sourceUrl": "https://livebench.ai/data/20261023/table.csv (shown at https://livebench.ai/new; O67)",
+   "machineReadable": "Yes: static CSV/JSON (table.csv, cost.csv, breakdown.json, notes.json); effort in JS bundle model metadata",
+   "coverage": {
+    "claude-haiku-5-5": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "LiveBench 2.0 has one row per model at its highest effort only; this effort is not run."
+    },
+    "claude-haiku-5-5-high": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "LiveBench 2.0 has one row per model at its highest effort only; this effort is not run."
+    },
+    "claude-haiku-5-5-low": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "LiveBench 2.0 has one row per model at its highest effort only; this effort is not run."
+    },
+    "claude-haiku-5-5-max": {
+     "status": "exact",
+     "value": 81.9,
+     "sourceLabel": "claude-haiku-5.5",
+     "effort": "max",
+     "note": "2026-10-23 release (O67); effort from the site bundle's model metadata."
+    },
+    "claude-haiku-5-5-medium": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "LiveBench 2.0 has one row per model at its highest effort only; this effort is not run."
+    },
+    "claude-opus-5-5": {
+     "status": "exact",
+     "value": 85.0,
+     "sourceLabel": "claude-opus-5.5",
+     "effort": "max",
+     "note": "2026-10-23 release (O67); effort from the site bundle's model metadata."
+    },
+    "claude-opus-5-5-high": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "LiveBench 2.0 has one row per model at its highest effort only; this effort is not run."
+    },
+    "claude-opus-5-5-medium": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "LiveBench 2.0 has one row per model at its highest effort only; this effort is not run."
+    },
+    "claude-opus-5-5-xhigh": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "LiveBench 2.0 has one row per model at its highest effort only; this effort is not run."
+    },
+    "claude-sonnet-5-5": {
+     "status": "exact",
+     "value": 83.6,
+     "sourceLabel": "claude-sonnet-5.5",
+     "effort": "max",
+     "note": "2026-10-23 release (O67); effort from the site bundle's model metadata."
+    },
+    "claude-sonnet-5-5-xhigh": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "LiveBench 2.0 has one row per model at its highest effort only; this effort is not run."
+    },
+    "deepseek-v4-1-flash-1017": {
+     "status": "exact",
+     "value": 79.5,
+     "sourceLabel": "deepseek-v4.1-flash-1017",
+     "effort": "max",
+     "note": "2026-10-23 release (O67); effort from the site bundle's model metadata."
+    },
+    "gemini-4-argon": {
+     "status": "exact",
+     "value": 83.1,
+     "sourceLabel": "gemini-4-argon",
+     "effort": "high",
+     "note": "2026-10-23 release (O67); effort from the site bundle's model metadata."
+    },
+    "gpt-5.6-luna-low": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "LiveBench 2.0 has gpt-5.6-luna at max only (51.0)."
+    },
+    "gpt-6-astra": {
+     "status": "exact",
+     "value": 85.2,
+     "sourceLabel": "gpt-6-astra",
+     "effort": "max",
+     "note": "2026-10-23 release (O67); effort from the site bundle's model metadata."
+    },
+    "gpt-6-astra-high": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "LiveBench 2.0 has one row per model at its highest effort only; this effort is not run."
+    },
+    "gpt-6-astra-xhigh": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "LiveBench 2.0 has one row per model at its highest effort only; this effort is not run."
+    },
+    "gpt-6-luna": {
+     "status": "exact",
+     "value": 43.5,
+     "sourceLabel": "gpt-6-luna",
+     "effort": "max",
+     "note": "2026-10-23 release (O67); effort from the site bundle's model metadata."
+    },
+    "gpt-6-luna-high": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "LiveBench 2.0 has one row per model at its highest effort only; this effort is not run."
+    },
+    "gpt-6-luna-low": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "LiveBench 2.0 has one row per model at its highest effort only; this effort is not run."
+    },
+    "gpt-6-luna-medium": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "LiveBench 2.0 has one row per model at its highest effort only; this effort is not run."
+    },
+    "gpt-6-luna-xhigh": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "LiveBench 2.0 has one row per model at its highest effort only; this effort is not run."
+    },
+    "gpt-6.1-sol": {
+     "status": "exact",
+     "value": 83.5,
+     "sourceLabel": "gpt-6.1-sol",
+     "effort": "max",
+     "note": "2026-10-23 release (O67); effort from the site bundle's model metadata."
+    },
+    "gpt-6.1-sol-high": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "LiveBench 2.0 has one row per model at its highest effort only; this effort is not run."
+    },
+    "gpt-6.1-sol-medium": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "LiveBench 2.0 has one row per model at its highest effort only; this effort is not run."
+    },
+    "gpt-6.1-sol-xhigh": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "LiveBench 2.0 has one row per model at its highest effort only; this effort is not run."
+    },
+    "mimo-v2-6-flash": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "No MiMo-V2.6-Flash row in LiveBench 2.0."
+    },
+    "mimo-v2-6-pro": {
+     "status": "plausible",
+     "value": 76.7,
+     "sourceLabel": "mimo-v2.6-pro",
+     "effort": "high",
+     "note": "2026-10-23 release (O67); effort from the site bundle's model metadata."
+    },
+    "minimax-m3-1-flash": {
+     "status": "plausible",
+     "value": 72.7,
+     "sourceLabel": "minimax-m3.1-flash",
+     "effort": "max",
+     "note": "2026-10-23 release (O67); effort from the site bundle's model metadata."
+    },
+    "kimi-k3-1-pro": {
+     "status": "exact",
+     "value": 77.9,
+     "sourceLabel": "kimi-k3.1-pro",
+     "effort": "max",
+     "note": "Owner decision O66 (2026-10-25): AA plots Kimi K3.1 Pro without an effort; Moonshot's API documents reasoning_effort low / high / max with max the default, so its configuration is taken at max, its maximum effort. LiveBench's model metadata records effort max."
+    }
+   },
+   "readAt": "2026-10-25T10:44:11Z"
+  },
+  {
+   "key": "livebench2-design",
+   "name": "LiveBench 2.0: Design",
+   "version": "LiveBench 2.0 release 20261023",
+   "updated": "2026-10-24",
+   "measures": "Layout/design tasks for presentations, PDFs, documents; visual and structural checks",
+   "domain": "design / professional work",
+   "effortOnRow": true,
+   "harness": "LiveBench-run harness (not named); one run per model at highest supported effort",
+   "metric": "mean task score 0-100",
+   "sourceUrl": "https://livebench.ai/data/20261023/table.csv (shown at https://livebench.ai/new; O67)",
+   "machineReadable": "Yes: static CSV/JSON (table.csv, cost.csv, breakdown.json, notes.json); effort in JS bundle model metadata",
+   "coverage": {
+    "claude-haiku-5-5": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "LiveBench 2.0 has one row per model at its highest effort only; this effort is not run."
+    },
+    "claude-haiku-5-5-high": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "LiveBench 2.0 has one row per model at its highest effort only; this effort is not run."
+    },
+    "claude-haiku-5-5-low": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "LiveBench 2.0 has one row per model at its highest effort only; this effort is not run."
+    },
+    "claude-haiku-5-5-max": {
+     "status": "exact",
+     "value": 83.1,
+     "sourceLabel": "claude-haiku-5.5",
+     "effort": "max",
+     "note": "2026-10-23 release (O67); effort from the site bundle's model metadata."
+    },
+    "claude-haiku-5-5-medium": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "LiveBench 2.0 has one row per model at its highest effort only; this effort is not run."
+    },
+    "claude-opus-5-5": {
+     "status": "exact",
+     "value": 86.9,
+     "sourceLabel": "claude-opus-5.5",
+     "effort": "max",
+     "note": "2026-10-23 release (O67); effort from the site bundle's model metadata."
+    },
+    "claude-opus-5-5-high": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "LiveBench 2.0 has one row per model at its highest effort only; this effort is not run."
+    },
+    "claude-opus-5-5-medium": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "LiveBench 2.0 has one row per model at its highest effort only; this effort is not run."
+    },
+    "claude-opus-5-5-xhigh": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "LiveBench 2.0 has one row per model at its highest effort only; this effort is not run."
+    },
+    "claude-sonnet-5-5": {
+     "status": "exact",
+     "value": 85.0,
+     "sourceLabel": "claude-sonnet-5.5",
+     "effort": "max",
+     "note": "2026-10-23 release (O67); effort from the site bundle's model metadata."
+    },
+    "claude-sonnet-5-5-xhigh": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "LiveBench 2.0 has one row per model at its highest effort only; this effort is not run."
+    },
+    "deepseek-v4-1-flash-1017": {
+     "status": "exact",
+     "value": 83.4,
+     "sourceLabel": "deepseek-v4.1-flash-1017",
+     "effort": "max",
+     "note": "2026-10-23 release (O67); effort from the site bundle's model metadata."
+    },
+    "gemini-4-argon": {
+     "status": "exact",
+     "value": 73.7,
+     "sourceLabel": "gemini-4-argon",
+     "effort": "high",
+     "note": "2026-10-23 release (O67); effort from the site bundle's model metadata."
+    },
+    "gpt-5.6-luna-low": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "LiveBench 2.0 has gpt-5.6-luna at max only (76.0)."
+    },
+    "gpt-6-astra": {
+     "status": "exact",
+     "value": 82.0,
+     "sourceLabel": "gpt-6-astra",
+     "effort": "max",
+     "note": "2026-10-23 release (O67); effort from the site bundle's model metadata."
+    },
+    "gpt-6-astra-high": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "LiveBench 2.0 has one row per model at its highest effort only; this effort is not run."
+    },
+    "gpt-6-astra-xhigh": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "LiveBench 2.0 has one row per model at its highest effort only; this effort is not run."
+    },
+    "gpt-6-luna": {
+     "status": "exact",
+     "value": 82.5,
+     "sourceLabel": "gpt-6-luna",
+     "effort": "max",
+     "note": "2026-10-23 release (O67); effort from the site bundle's model metadata."
+    },
+    "gpt-6-luna-high": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "LiveBench 2.0 has one row per model at its highest effort only; this effort is not run."
+    },
+    "gpt-6-luna-low": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "LiveBench 2.0 has one row per model at its highest effort only; this effort is not run."
+    },
+    "gpt-6-luna-medium": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "LiveBench 2.0 has one row per model at its highest effort only; this effort is not run."
+    },
+    "gpt-6-luna-xhigh": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "LiveBench 2.0 has one row per model at its highest effort only; this effort is not run."
+    },
+    "gpt-6.1-sol": {
+     "status": "exact",
+     "value": 82.1,
+     "sourceLabel": "gpt-6.1-sol",
+     "effort": "max",
+     "note": "2026-10-23 release (O67); effort from the site bundle's model metadata."
+    },
+    "gpt-6.1-sol-high": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "LiveBench 2.0 has one row per model at its highest effort only; this effort is not run."
+    },
+    "gpt-6.1-sol-medium": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "LiveBench 2.0 has one row per model at its highest effort only; this effort is not run."
+    },
+    "gpt-6.1-sol-xhigh": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "LiveBench 2.0 has one row per model at its highest effort only; this effort is not run."
+    },
+    "mimo-v2-6-flash": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "No MiMo-V2.6-Flash row in LiveBench 2.0."
+    },
+    "mimo-v2-6-pro": {
+     "status": "plausible",
+     "value": 78.5,
+     "sourceLabel": "mimo-v2.6-pro",
+     "effort": "high",
+     "note": "2026-10-23 release (O67); effort from the site bundle's model metadata."
+    },
+    "minimax-m3-1-flash": {
+     "status": "plausible",
+     "value": 74.0,
+     "sourceLabel": "minimax-m3.1-flash",
+     "effort": "max",
+     "note": "2026-10-23 release (O67); effort from the site bundle's model metadata."
+    },
+    "kimi-k3-1-pro": {
+     "status": "exact",
+     "value": 77.8,
+     "sourceLabel": "kimi-k3.1-pro",
+     "effort": "max",
+     "note": "Owner decision O66 (2026-10-25): AA plots Kimi K3.1 Pro without an effort; Moonshot's API documents reasoning_effort low / high / max with max the default, so its configuration is taken at max, its maximum effort. LiveBench's model metadata records effort max."
+    }
+   },
+   "readAt": "2026-10-25T10:44:11Z"
+  },
+  {
+   "key": "surge-complex-constraints",
+   "name": "Surge AI ComplexConstraints",
+   "version": "75 prompts / 1,559 rubric criteria (public set, arXiv 2606.09118)",
+   "updated": "No leaderboard date on page; blog dated 2026-06-03, updated 2026-10-21; Webflow site last published 2026-10-23T03:58:45Z",
+   "measures": "Professional instruction following with entangled, conditional, inferred constraints; single completion, no tools; each rubric criterion graded independently by an LLM judge",
+   "domain": "instruction following (not software engineering)",
+   "effortOnRow": true,
+   "harness": "Surge Inspect AI harness (github.com/surge-ai/complex-constraints); single completion; harness default judge google/gemini-3.5-flash (leaderboard judge not stated)",
+   "metric": "percent of prompts with every rubric criterion passed (all_pass/mean, per harness README)",
+   "sourceUrl": "https://surgehq.ai/benchmarks/complex-constraints",
+   "machineReadable": "No: Webflow CMS HTML list (44 rows, no pagination, no JSON). Dataset https://huggingface.co/datasets/surgeai/ComplexConstraints returned HTTP 401 (gated/unavailable; not in surgeai public dataset list); harness repo readable via raw.githubusercontent.com.",
+   "coverage": {
+    "claude-haiku-5-5": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "No row for this model family/effort on the 44-row leaderboard captured 2026-10-23."
+    },
+    "claude-haiku-5-5-high": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "No row for this model family/effort on the 44-row leaderboard captured 2026-10-23."
+    },
+    "claude-haiku-5-5-low": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "No row for this model family/effort on the 44-row leaderboard captured 2026-10-23."
+    },
+    "claude-haiku-5-5-max": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "No row for this model family/effort on the 44-row leaderboard captured 2026-10-23."
+    },
+    "claude-haiku-5-5-medium": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "No row for this model family/effort on the 44-row leaderboard captured 2026-10-23."
+    },
+    "claude-opus-5-5": {
+     "status": "exact",
+     "value": 49.9,
+     "sourceLabel": "Claude Opus 5.5 (Adaptive/Max)",
+     "effort": "max",
+     "note": "Surge labels Anthropic rows \"Adaptive/Max\" (adaptive thinking at max effort); AA plots \"max with fallback\"."
+    },
+    "claude-opus-5-5-high": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "Only Claude Opus 5.5 (Adaptive/Max) is listed."
+    },
+    "claude-opus-5-5-medium": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "Only Claude Opus 5.5 (Adaptive/Max) is listed."
+    },
+    "claude-opus-5-5-xhigh": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "Only Claude Opus 5.5 (Adaptive/Max) is listed."
+    },
+    "claude-sonnet-5-5": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "No row for this model family/effort on the 44-row leaderboard captured 2026-10-23."
+    },
+    "claude-sonnet-5-5-xhigh": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "No row for this model family/effort on the 44-row leaderboard captured 2026-10-23."
+    },
+    "deepseek-v4-1-flash-1017": {
+     "status": "plausible",
+     "value": 49.7,
+     "sourceLabel": "DeepSeek V4.1 Flash (Max reasoning)",
+     "effort": "max",
+     "note": "Snapshot not stated (V4.1 Flash exists as 20260910 and 20261017); cannot confirm it is 1017."
+    },
+    "gemini-4-argon": {
+     "status": "exact",
+     "value": 53.3,
+     "sourceLabel": "Gemini 4 Argon (High reasoning)",
+     "effort": "high",
+     "note": null
+    },
+    "gpt-5.6-luna-low": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "No row for this model family/effort on the 44-row leaderboard captured 2026-10-23."
+    },
+    "gpt-6-astra": {
+     "status": "exact",
+     "value": 57.7,
+     "sourceLabel": "GPT 6 Astra (Max reasoning)",
+     "effort": "max",
+     "note": null
+    },
+    "gpt-6-astra-high": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "Only GPT 6 Astra (Max reasoning) is listed."
+    },
+    "gpt-6-astra-xhigh": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "Only GPT 6 Astra (Max reasoning) is listed."
+    },
+    "gpt-6-luna": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "No row for this model family/effort on the 44-row leaderboard captured 2026-10-23."
+    },
+    "gpt-6-luna-high": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "No row for this model family/effort on the 44-row leaderboard captured 2026-10-23."
+    },
+    "gpt-6-luna-low": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "No row for this model family/effort on the 44-row leaderboard captured 2026-10-23."
+    },
+    "gpt-6-luna-medium": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "No row for this model family/effort on the 44-row leaderboard captured 2026-10-23."
+    },
+    "gpt-6-luna-xhigh": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "No row for this model family/effort on the 44-row leaderboard captured 2026-10-23."
+    },
+    "gpt-6.1-sol": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "No row for this model family/effort on the 44-row leaderboard captured 2026-10-23."
+    },
+    "gpt-6.1-sol-high": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "No row for this model family/effort on the 44-row leaderboard captured 2026-10-23."
+    },
+    "gpt-6.1-sol-medium": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "No row for this model family/effort on the 44-row leaderboard captured 2026-10-23."
+    },
+    "gpt-6.1-sol-xhigh": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "No row for this model family/effort on the 44-row leaderboard captured 2026-10-23."
+    },
+    "mimo-v2-6-flash": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "No row for this model family/effort on the 44-row leaderboard captured 2026-10-23."
+    },
+    "mimo-v2-6-pro": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "No row for this model family/effort on the 44-row leaderboard captured 2026-10-23."
+    },
+    "minimax-m3-1-flash": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "No row for this model family/effort on the 44-row leaderboard captured 2026-10-23."
+    },
+    "kimi-k3-1-pro": {
+     "status": "not captured",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "Source not re-read on 2026-10-25: it feeds no ValueRank leaf."
+    }
+   }
+  },
+  {
+   "key": "surge-sudo-l7",
+   "name": "Surge AI sudo L7 (for reference; not owner-named)",
+   "version": "60 private tasks",
+   "updated": "blog updated 2026-10-21",
+   "measures": "Senior-engineer judgement on agentic coding tasks in mostly private repos; rubric graded by grader models",
+   "domain": "software engineering",
+   "effortOnRow": true,
+   "harness": "Each lab's own coding agent (Claude Code, Codex, Antigravity, OpenCode, ...)",
+   "metric": "percent",
+   "sourceUrl": "https://surgehq.ai/benchmarks/sudo-l7",
+   "machineReadable": "No: Webflow HTML (15 rows)",
+   "coverage": {
+    "claude-haiku-5-5": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": null
+    },
+    "claude-haiku-5-5-high": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": null
+    },
+    "claude-haiku-5-5-low": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": null
+    },
+    "claude-haiku-5-5-max": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": null
+    },
+    "claude-haiku-5-5-medium": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": null
+    },
+    "claude-opus-5-5": {
+     "status": "exact",
+     "value": 41.7,
+     "sourceLabel": "Claude Opus 5.5 (Adaptive/Max) [Claude Code]",
+     "effort": "max",
+     "note": "Claude Code; \"Adaptive/Max\"."
+    },
+    "claude-opus-5-5-high": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": null
+    },
+    "claude-opus-5-5-medium": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": null
+    },
+    "claude-opus-5-5-xhigh": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": null
+    },
+    "claude-sonnet-5-5": {
+     "status": "exact",
+     "value": 41.7,
+     "sourceLabel": "Claude Sonnet 5.5 (Adaptive/Max) [Claude Code]",
+     "effort": "max",
+     "note": "Claude Code; \"Adaptive/Max\"."
+    },
+    "claude-sonnet-5-5-xhigh": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": null
+    },
+    "deepseek-v4-1-flash-1017": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": null
+    },
+    "gemini-4-argon": {
+     "status": "exact",
+     "value": 18.9,
+     "sourceLabel": "Gemini 4 Argon (High reasoning) [Antigravity]",
+     "effort": "high",
+     "note": "Antigravity."
+    },
+    "gpt-5.6-luna-low": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": null
+    },
+    "gpt-6-astra": {
+     "status": "exact",
+     "value": 33.9,
+     "sourceLabel": "GPT 6 Astra (Max reasoning) [Codex]",
+     "effort": "max",
+     "note": "Codex."
+    },
+    "gpt-6-astra-high": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": null
+    },
+    "gpt-6-astra-xhigh": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": null
+    },
+    "gpt-6-luna": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": null
+    },
+    "gpt-6-luna-high": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": null
+    },
+    "gpt-6-luna-low": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": null
+    },
+    "gpt-6-luna-medium": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": null
+    },
+    "gpt-6-luna-xhigh": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": null
+    },
+    "gpt-6.1-sol": {
+     "status": "exact",
+     "value": 28.9,
+     "sourceLabel": "GPT 6.1 Sol (Max reasoning) [Codex]",
+     "effort": "max",
+     "note": "Codex."
+    },
+    "gpt-6.1-sol-high": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": null
+    },
+    "gpt-6.1-sol-medium": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": null
+    },
+    "gpt-6.1-sol-xhigh": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": null
+    },
+    "mimo-v2-6-flash": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": null
+    },
+    "mimo-v2-6-pro": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": null
+    },
+    "minimax-m3-1-flash": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": null
+    },
+    "kimi-k3-1-pro": {
+     "status": "not captured",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "Source not re-read on 2026-10-25: it feeds no ValueRank leaf."
+    }
+   }
+  },
+  {
+   "key": "cursorbench-4",
+   "name": "CursorBench 4.0",
+   "version": "4.0 (tasks 2026-09-10)",
+   "updated": "2026-10-07 (latest changelog entry)",
+   "measures": "Agent success on ambiguous multi-file tasks from real Cursor sessions (edit, refactor, investigation, intent, jobs, design adherence)",
+   "domain": "software engineering",
+   "effortOnRow": true,
+   "harness": "Cursor agent (not disclosed in detail); task count not disclosed",
+   "metric": "score %",
+   "sourceUrl": "https://cursor.com/cursorbench",
+   "machineReadable": "Rendered page only; Epoch AI mirror cursorbench_external.csv (CC-BY) in https://epoch.ai/data/benchmark_data.zip",
+   "coverage": {
+    "claude-haiku-5-5": {
+     "status": "exact",
+     "value": 44.3,
+     "sourceLabel": "Haiku 5.5 Extra High",
+     "effort": "xhigh",
+     "note": "Cost/task $0.56; verified against cursor.com/cursorbench page text 2026-10-23."
+    },
+    "claude-haiku-5-5-high": {
+     "status": "exact",
+     "value": 42.3,
+     "sourceLabel": "Haiku 5.5 High",
+     "effort": "high",
+     "note": "Cost/task $0.32; verified against cursor.com/cursorbench page text 2026-10-23."
+    },
+    "claude-haiku-5-5-low": {
+     "status": "exact",
+     "value": 30.9,
+     "sourceLabel": "Haiku 5.5 Low",
+     "effort": "low",
+     "note": "Cost/task $0.08; verified against cursor.com/cursorbench page text 2026-10-23."
+    },
+    "claude-haiku-5-5-max": {
+     "status": "exact",
+     "value": 48.4,
+     "sourceLabel": "Haiku 5.5 Max",
+     "effort": "max",
+     "note": "Cost/task $1.12; verified against cursor.com/cursorbench page text 2026-10-23."
+    },
+    "claude-haiku-5-5-medium": {
+     "status": "exact",
+     "value": 36.9,
+     "sourceLabel": "Haiku 5.5 Medium",
+     "effort": "medium",
+     "note": "Cost/task $0.17; verified against cursor.com/cursorbench page text 2026-10-23."
+    },
+    "claude-opus-5-5": {
+     "status": "exact",
+     "value": 57.8,
+     "sourceLabel": "Opus 5.5 Max",
+     "effort": "max",
+     "note": "Cost/task $13.43; verified against cursor.com/cursorbench page text 2026-10-23."
+    },
+    "claude-opus-5-5-high": {
+     "status": "exact",
+     "value": 56.0,
+     "sourceLabel": "Opus 5.5 High",
+     "effort": "high",
+     "note": "Cost/task $3.97; verified against cursor.com/cursorbench page text 2026-10-23."
+    },
+    "claude-opus-5-5-medium": {
+     "status": "exact",
+     "value": 52.5,
+     "sourceLabel": "Opus 5.5 Medium",
+     "effort": "medium",
+     "note": "Cost/task $2.91; verified against cursor.com/cursorbench page text 2026-10-23."
+    },
+    "claude-opus-5-5-xhigh": {
+     "status": "exact",
+     "value": 56.0,
+     "sourceLabel": "Opus 5.5 Extra High",
+     "effort": "xhigh",
+     "note": "Cost/task $6.98; verified against cursor.com/cursorbench page text 2026-10-23."
+    },
+    "claude-sonnet-5-5": {
+     "status": "exact",
+     "value": 55.5,
+     "sourceLabel": "Sonnet 5.5 Max",
+     "effort": "max",
+     "note": "Cost/task $7.05; verified against cursor.com/cursorbench page text 2026-10-23."
+    },
+    "claude-sonnet-5-5-xhigh": {
+     "status": "exact",
+     "value": 53.1,
+     "sourceLabel": "Sonnet 5.5 Extra High",
+     "effort": "xhigh",
+     "note": "Cost/task $2.81; verified against cursor.com/cursorbench page text 2026-10-23."
+    },
+    "deepseek-v4-1-flash-1017": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "CursorBench 4.0 has no rows for the GPT-6 family, MiMo, DeepSeek or MiniMax."
+    },
+    "gemini-4-argon": {
+     "status": "exact",
+     "value": 52.9,
+     "sourceLabel": "Gemini 4 Argon High",
+     "effort": "high",
+     "note": "Cost/task $4.57; verified against cursor.com/cursorbench page text 2026-10-23."
+    },
+    "gpt-5.6-luna-low": {
+     "status": "exact",
+     "value": 16.0,
+     "sourceLabel": "GPT-5.6 Luna Low",
+     "effort": "low",
+     "note": "Cost/task $0.03; verified against cursor.com/cursorbench page text 2026-10-23."
+    },
+    "gpt-6-astra": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "CursorBench 4.0 has no rows for the GPT-6 family, MiMo, DeepSeek or MiniMax."
+    },
+    "gpt-6-astra-high": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "CursorBench 4.0 has no rows for the GPT-6 family, MiMo, DeepSeek or MiniMax."
+    },
+    "gpt-6-astra-xhigh": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "CursorBench 4.0 has no rows for the GPT-6 family, MiMo, DeepSeek or MiniMax."
+    },
+    "gpt-6-luna": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "CursorBench 4.0 has no rows for the GPT-6 family, MiMo, DeepSeek or MiniMax."
+    },
+    "gpt-6-luna-high": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "CursorBench 4.0 has no rows for the GPT-6 family, MiMo, DeepSeek or MiniMax."
+    },
+    "gpt-6-luna-low": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "CursorBench 4.0 has no rows for the GPT-6 family, MiMo, DeepSeek or MiniMax."
+    },
+    "gpt-6-luna-medium": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "CursorBench 4.0 has no rows for the GPT-6 family, MiMo, DeepSeek or MiniMax."
+    },
+    "gpt-6-luna-xhigh": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "CursorBench 4.0 has no rows for the GPT-6 family, MiMo, DeepSeek or MiniMax."
+    },
+    "gpt-6.1-sol": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "CursorBench 4.0 has no rows for the GPT-6 family, MiMo, DeepSeek or MiniMax."
+    },
+    "gpt-6.1-sol-high": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "CursorBench 4.0 has no rows for the GPT-6 family, MiMo, DeepSeek or MiniMax."
+    },
+    "gpt-6.1-sol-medium": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "CursorBench 4.0 has no rows for the GPT-6 family, MiMo, DeepSeek or MiniMax."
+    },
+    "gpt-6.1-sol-xhigh": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "CursorBench 4.0 has no rows for the GPT-6 family, MiMo, DeepSeek or MiniMax."
+    },
+    "mimo-v2-6-flash": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "CursorBench 4.0 has no rows for the GPT-6 family, MiMo, DeepSeek or MiniMax."
+    },
+    "mimo-v2-6-pro": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "CursorBench 4.0 has no rows for the GPT-6 family, MiMo, DeepSeek or MiniMax."
+    },
+    "minimax-m3-1-flash": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "CursorBench 4.0 has no rows for the GPT-6 family, MiMo, DeepSeek or MiniMax."
+    },
+    "kimi-k3-1-pro": {
+     "status": "not captured",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "Source not re-read on 2026-10-25: it feeds no ValueRank leaf."
+    }
+   }
+  },
+  {
+   "key": "arena-webdev",
+   "name": "Arena Code Arena: WebDev (overall)",
+   "version": "leaderboard_publish_date 2026-10-22",
+   "updated": "2026-10-22",
+   "measures": "Pairwise human preference between web apps built by two models (Bradley-Terry Elo); not task success",
+   "domain": "software engineering (front-end web dev) - human preference",
+   "effortOnRow": true,
+   "harness": "Arena Code Arena environment",
+   "metric": "Arena rating (Elo-scale)",
+   "sourceUrl": "https://huggingface.co/datasets/lmarena-ai/leaderboard-dataset (webdev/latest); arena.ai/leaderboard/webdev",
+   "machineReadable": "Yes: official lmarena-ai/leaderboard-dataset parquet on Hugging Face (arena.ai page itself returns HTTP 403 Cloudflare challenge). Sub-boards webdev-html, webdev-react, image_to_webdev also captured.",
+   "coverage": {
+    "claude-haiku-5-5": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "No WebDev row at this effort (Arena lists Sonnet 5.5 only at xHigh/High, Haiku 5.5 only at High, GPT-6.1 Sol/Astra/Luna only at Max, Opus 5.5 only at Max, GPT-5.6 Luna only at xHigh)."
+    },
+    "claude-haiku-5-5-high": {
+     "status": "exact",
+     "value": 1584.8,
+     "sourceLabel": "Claude Haiku 5.5 (High)",
+     "effort": "high",
+     "note": "95% CI 1574.3-1595.3; 3860 votes; publish date 2026-10-22."
+    },
+    "claude-haiku-5-5-low": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "No WebDev row at this effort (Arena lists Sonnet 5.5 only at xHigh/High, Haiku 5.5 only at High, GPT-6.1 Sol/Astra/Luna only at Max, Opus 5.5 only at Max, GPT-5.6 Luna only at xHigh)."
+    },
+    "claude-haiku-5-5-max": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "No WebDev row at this effort (Arena lists Sonnet 5.5 only at xHigh/High, Haiku 5.5 only at High, GPT-6.1 Sol/Astra/Luna only at Max, Opus 5.5 only at Max, GPT-5.6 Luna only at xHigh)."
+    },
+    "claude-haiku-5-5-medium": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "No WebDev row at this effort (Arena lists Sonnet 5.5 only at xHigh/High, Haiku 5.5 only at High, GPT-6.1 Sol/Astra/Luna only at Max, Opus 5.5 only at Max, GPT-5.6 Luna only at xHigh)."
+    },
+    "claude-opus-5-5": {
+     "status": "exact",
+     "value": 1806.9,
+     "sourceLabel": "Claude Opus 5.5 (Max)",
+     "effort": "max",
+     "note": "95% CI 1793.5-1820.3; 3119 votes; publish date 2026-10-22."
+    },
+    "claude-opus-5-5-high": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "No WebDev row at this effort (Arena lists Sonnet 5.5 only at xHigh/High, Haiku 5.5 only at High, GPT-6.1 Sol/Astra/Luna only at Max, Opus 5.5 only at Max, GPT-5.6 Luna only at xHigh)."
+    },
+    "claude-opus-5-5-medium": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "No WebDev row at this effort (Arena lists Sonnet 5.5 only at xHigh/High, Haiku 5.5 only at High, GPT-6.1 Sol/Astra/Luna only at Max, Opus 5.5 only at Max, GPT-5.6 Luna only at xHigh)."
+    },
+    "claude-opus-5-5-xhigh": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "No WebDev row at this effort (Arena lists Sonnet 5.5 only at xHigh/High, Haiku 5.5 only at High, GPT-6.1 Sol/Astra/Luna only at Max, Opus 5.5 only at Max, GPT-5.6 Luna only at xHigh)."
+    },
+    "claude-sonnet-5-5": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "No WebDev row at this effort (Arena lists Sonnet 5.5 only at xHigh/High, Haiku 5.5 only at High, GPT-6.1 Sol/Astra/Luna only at Max, Opus 5.5 only at Max, GPT-5.6 Luna only at xHigh)."
+    },
+    "claude-sonnet-5-5-xhigh": {
+     "status": "exact",
+     "value": 1767.5,
+     "sourceLabel": "Claude Sonnet 5.5 (xHigh)",
+     "effort": "xhigh",
+     "note": "95% CI 1755.3-1779.7; 3776 votes; publish date 2026-10-22."
+    },
+    "deepseek-v4-1-flash-1017": {
+     "status": "exact",
+     "value": 1664.0,
+     "sourceLabel": "DeepSeek-V4.1-Flash-20261017 (Max)",
+     "effort": "max",
+     "note": "95% CI 1650.8-1677.2; 2425 votes; publish date 2026-10-22."
+    },
+    "gemini-4-argon": {
+     "status": "exact",
+     "value": 1672.7,
+     "sourceLabel": "Gemini 4 Argon (High)",
+     "effort": "high",
+     "note": "95% CI 1660.0-1685.4; 2680 votes; publish date 2026-10-22."
+    },
+    "gpt-5.6-luna-low": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "No WebDev row at this effort (Arena lists Sonnet 5.5 only at xHigh/High, Haiku 5.5 only at High, GPT-6.1 Sol/Astra/Luna only at Max, Opus 5.5 only at Max, GPT-5.6 Luna only at xHigh)."
+    },
+    "gpt-6-astra": {
+     "status": "exact",
+     "value": 1774.7,
+     "sourceLabel": "GPT-6 Astra (Max)",
+     "effort": "max",
+     "note": "95% CI 1764.8-1784.7; 6511 votes; publish date 2026-10-22."
+    },
+    "gpt-6-astra-high": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "No WebDev row at this effort (Arena lists Sonnet 5.5 only at xHigh/High, Haiku 5.5 only at High, GPT-6.1 Sol/Astra/Luna only at Max, Opus 5.5 only at Max, GPT-5.6 Luna only at xHigh)."
+    },
+    "gpt-6-astra-xhigh": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "No WebDev row at this effort (Arena lists Sonnet 5.5 only at xHigh/High, Haiku 5.5 only at High, GPT-6.1 Sol/Astra/Luna only at Max, Opus 5.5 only at Max, GPT-5.6 Luna only at xHigh)."
+    },
+    "gpt-6-luna": {
+     "status": "exact",
+     "value": 1578.4,
+     "sourceLabel": "GPT-6 Luna (Max)",
+     "effort": "max",
+     "note": "95% CI 1572.4-1584.3; 24237 votes; publish date 2026-10-22."
+    },
+    "gpt-6-luna-high": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "No WebDev row at this effort (Arena lists Sonnet 5.5 only at xHigh/High, Haiku 5.5 only at High, GPT-6.1 Sol/Astra/Luna only at Max, Opus 5.5 only at Max, GPT-5.6 Luna only at xHigh)."
+    },
+    "gpt-6-luna-low": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "No WebDev row at this effort (Arena lists Sonnet 5.5 only at xHigh/High, Haiku 5.5 only at High, GPT-6.1 Sol/Astra/Luna only at Max, Opus 5.5 only at Max, GPT-5.6 Luna only at xHigh)."
+    },
+    "gpt-6-luna-medium": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "No WebDev row at this effort (Arena lists Sonnet 5.5 only at xHigh/High, Haiku 5.5 only at High, GPT-6.1 Sol/Astra/Luna only at Max, Opus 5.5 only at Max, GPT-5.6 Luna only at xHigh)."
+    },
+    "gpt-6-luna-xhigh": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "No WebDev row at this effort (Arena lists Sonnet 5.5 only at xHigh/High, Haiku 5.5 only at High, GPT-6.1 Sol/Astra/Luna only at Max, Opus 5.5 only at Max, GPT-5.6 Luna only at xHigh)."
+    },
+    "gpt-6.1-sol": {
+     "status": "exact",
+     "value": 1749.0,
+     "sourceLabel": "GPT-6.1 Sol (Max)",
+     "effort": "max",
+     "note": "95% CI 1736.6-1761.3; 3414 votes; publish date 2026-10-22."
+    },
+    "gpt-6.1-sol-high": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "No WebDev row at this effort (Arena lists Sonnet 5.5 only at xHigh/High, Haiku 5.5 only at High, GPT-6.1 Sol/Astra/Luna only at Max, Opus 5.5 only at Max, GPT-5.6 Luna only at xHigh)."
+    },
+    "gpt-6.1-sol-medium": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "No WebDev row at this effort (Arena lists Sonnet 5.5 only at xHigh/High, Haiku 5.5 only at High, GPT-6.1 Sol/Astra/Luna only at Max, Opus 5.5 only at Max, GPT-5.6 Luna only at xHigh)."
+    },
+    "gpt-6.1-sol-xhigh": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "No WebDev row at this effort (Arena lists Sonnet 5.5 only at xHigh/High, Haiku 5.5 only at High, GPT-6.1 Sol/Astra/Luna only at Max, Opus 5.5 only at Max, GPT-5.6 Luna only at xHigh)."
+    },
+    "mimo-v2-6-flash": {
+     "status": "plausible",
+     "value": 1634.0,
+     "sourceLabel": "MiMo-V2.6-Flash",
+     "effort": null,
+     "note": "95% CI 1624.8-1643.2; 5681 votes; publish date 2026-10-22. No effort label on the Arena row. AA plots this model without an effort label (reasoning mode); a source row at one labelled effort is plausible, not exact."
+    },
+    "mimo-v2-6-pro": {
+     "status": "plausible",
+     "value": 1625.4,
+     "sourceLabel": "MiMo-V2.6-Pro",
+     "effort": null,
+     "note": "95% CI 1616.2-1634.6; 5609 votes; publish date 2026-10-22. No effort label on the Arena row. AA plots this model without an effort label (reasoning mode); a source row at one labelled effort is plausible, not exact."
+    },
+    "minimax-m3-1-flash": {
+     "status": "plausible",
+     "value": 1589.7,
+     "sourceLabel": "MiniMax-M3.1-Flash",
+     "effort": null,
+     "note": "95% CI 1576.4-1603.1; 2164 votes; publish date 2026-10-22. No effort label on the Arena row. AA plots this model without an effort label (reasoning mode); a source row at one labelled effort is plausible, not exact."
+    },
+    "kimi-k3-1-pro": {
+     "status": "not captured",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "Source not re-read on 2026-10-25: it feeds no ValueRank leaf."
+    }
+   }
+  },
+  {
+   "key": "arena-agent",
+   "name": "Arena Agent Arena (overall)",
+   "version": "leaderboard_publish_date 2026-10-20",
+   "updated": "2026-10-20",
+   "measures": "Agentic sessions in Arena with user-outcome-derived score; preference/outcome signal, not a fixed task set",
+   "domain": "agentic coding / tool use - user outcomes",
+   "effortOnRow": true,
+   "harness": "Arena agent environment",
+   "metric": "Arena agent score (centred, can be negative)",
+   "sourceUrl": "https://huggingface.co/datasets/lmarena-ai/leaderboard-dataset (agent/latest)",
+   "machineReadable": "Yes: official HF parquet",
+   "coverage": {
+    "claude-haiku-5-5": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "No Agent Arena row at this effort (DeepSeek V4.1 Flash only as 20260910; no MiniMax-M3.1-Flash)."
+    },
+    "claude-haiku-5-5-high": {
+     "status": "exact",
+     "value": 0.0149,
+     "sourceLabel": "Claude Haiku 5.5 (High)",
+     "effort": "high",
+     "note": "95% CI 0.0048 to 0.0249; 26803 sessions; publish date 2026-10-20."
+    },
+    "claude-haiku-5-5-low": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "No Agent Arena row at this effort (DeepSeek V4.1 Flash only as 20260910; no MiniMax-M3.1-Flash)."
+    },
+    "claude-haiku-5-5-max": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "No Agent Arena row at this effort (DeepSeek V4.1 Flash only as 20260910; no MiniMax-M3.1-Flash)."
+    },
+    "claude-haiku-5-5-medium": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "No Agent Arena row at this effort (DeepSeek V4.1 Flash only as 20260910; no MiniMax-M3.1-Flash)."
+    },
+    "claude-opus-5-5": {
+     "status": "exact",
+     "value": 0.2092,
+     "sourceLabel": "Claude Opus 5.5 (Max)",
+     "effort": "max",
+     "note": "95% CI 0.1842 to 0.2342; 11538 sessions; publish date 2026-10-20."
+    },
+    "claude-opus-5-5-high": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "No Agent Arena row at this effort (DeepSeek V4.1 Flash only as 20260910; no MiniMax-M3.1-Flash)."
+    },
+    "claude-opus-5-5-medium": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "No Agent Arena row at this effort (DeepSeek V4.1 Flash only as 20260910; no MiniMax-M3.1-Flash)."
+    },
+    "claude-opus-5-5-xhigh": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "No Agent Arena row at this effort (DeepSeek V4.1 Flash only as 20260910; no MiniMax-M3.1-Flash)."
+    },
+    "claude-sonnet-5-5": {
+     "status": "exact",
+     "value": 0.1267,
+     "sourceLabel": "Claude Sonnet 5.5 (Max)",
+     "effort": "max",
+     "note": "95% CI 0.0968 to 0.1565; 7955 sessions; publish date 2026-10-20."
+    },
+    "claude-sonnet-5-5-xhigh": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "No Agent Arena row at this effort (DeepSeek V4.1 Flash only as 20260910; no MiniMax-M3.1-Flash)."
+    },
+    "deepseek-v4-1-flash-1017": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "No Agent Arena row at this effort (DeepSeek V4.1 Flash only as 20260910; no MiniMax-M3.1-Flash)."
+    },
+    "gemini-4-argon": {
+     "status": "exact",
+     "value": 0.1203,
+     "sourceLabel": "Gemini 4 Argon (High)",
+     "effort": "high",
+     "note": "95% CI 0.1097 to 0.1309; 37164 sessions; publish date 2026-10-20."
+    },
+    "gpt-5.6-luna-low": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "No Agent Arena row at this effort (DeepSeek V4.1 Flash only as 20260910; no MiniMax-M3.1-Flash)."
+    },
+    "gpt-6-astra": {
+     "status": "exact",
+     "value": 0.147,
+     "sourceLabel": "GPT-6 Astra (Max)",
+     "effort": "max",
+     "note": "95% CI 0.1253 to 0.1686; 14216 sessions; publish date 2026-10-20."
+    },
+    "gpt-6-astra-high": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "No Agent Arena row at this effort (DeepSeek V4.1 Flash only as 20260910; no MiniMax-M3.1-Flash)."
+    },
+    "gpt-6-astra-xhigh": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "No Agent Arena row at this effort (DeepSeek V4.1 Flash only as 20260910; no MiniMax-M3.1-Flash)."
+    },
+    "gpt-6-luna": {
+     "status": "exact",
+     "value": 0.0303,
+     "sourceLabel": "GPT-6 Luna (Max)",
+     "effort": "max",
+     "note": "95% CI 0.0261 to 0.0345; 186259 sessions; publish date 2026-10-20."
+    },
+    "gpt-6-luna-high": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "No Agent Arena row at this effort (DeepSeek V4.1 Flash only as 20260910; no MiniMax-M3.1-Flash)."
+    },
+    "gpt-6-luna-low": {
+     "status": "exact",
+     "value": -0.0459,
+     "sourceLabel": "GPT-6 Luna (Low)",
+     "effort": "low",
+     "note": "95% CI -0.0579 to -0.0339; 14197 sessions; publish date 2026-10-20."
+    },
+    "gpt-6-luna-medium": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "No Agent Arena row at this effort (DeepSeek V4.1 Flash only as 20260910; no MiniMax-M3.1-Flash)."
+    },
+    "gpt-6-luna-xhigh": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "No Agent Arena row at this effort (DeepSeek V4.1 Flash only as 20260910; no MiniMax-M3.1-Flash)."
+    },
+    "gpt-6.1-sol": {
+     "status": "exact",
+     "value": 0.1355,
+     "sourceLabel": "GPT-6.1 Sol (Max)",
+     "effort": "max",
+     "note": "95% CI 0.1184 to 0.1526; 15208 sessions; publish date 2026-10-20."
+    },
+    "gpt-6.1-sol-high": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "No Agent Arena row at this effort (DeepSeek V4.1 Flash only as 20260910; no MiniMax-M3.1-Flash)."
+    },
+    "gpt-6.1-sol-medium": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "No Agent Arena row at this effort (DeepSeek V4.1 Flash only as 20260910; no MiniMax-M3.1-Flash)."
+    },
+    "gpt-6.1-sol-xhigh": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "No Agent Arena row at this effort (DeepSeek V4.1 Flash only as 20260910; no MiniMax-M3.1-Flash)."
+    },
+    "mimo-v2-6-flash": {
+     "status": "plausible",
+     "value": 0.0252,
+     "sourceLabel": "MiMo-V2.6-Flash",
+     "effort": null,
+     "note": "95% CI 0.0115 to 0.0389; 21908 sessions; publish date 2026-10-20. No effort label on the Arena row. AA plots this model without an effort label (reasoning mode); a source row at one labelled effort is plausible, not exact."
+    },
+    "mimo-v2-6-pro": {
+     "status": "plausible",
+     "value": 0.0368,
+     "sourceLabel": "MiMo-V2.6-Pro",
+     "effort": null,
+     "note": "95% CI 0.0280 to 0.0456; 38839 sessions; publish date 2026-10-20. No effort label on the Arena row. AA plots this model without an effort label (reasoning mode); a source row at one labelled effort is plausible, not exact."
+    },
+    "minimax-m3-1-flash": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "No Agent Arena row at this effort (DeepSeek V4.1 Flash only as 20260910; no MiniMax-M3.1-Flash)."
+    },
+    "kimi-k3-1-pro": {
+     "status": "not captured",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "Source not re-read on 2026-10-25: it feeds no ValueRank leaf."
+    }
+   }
+  },
+  {
+   "key": "frontierswe-v2",
+   "name": "FrontierSWE V2",
+   "version": "V2 (34 tasks, 5 trials, 20h budget)",
+   "updated": "latest roster row 2026-10-07 (Haiku 5.5)",
+   "measures": "Very long-horizon software engineering projects (implementation, performance, research)",
+   "domain": "software engineering",
+   "effortOnRow": false,
+   "harness": "proximus (Proximal)",
+   "metric": "mean@5 reward %",
+   "sourceUrl": "https://www.frontierswe.com/",
+   "machineReadable": "Rendered page; Epoch mirror frontierswe_external.csv",
+   "coverage": {
+    "claude-haiku-5-5": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "No FrontierSWE V2 row (no GPT-6.1 Sol, GPT-6 Luna, MiMo, DeepSeek V4.1, MiniMax M3.1; one row per model)."
+    },
+    "claude-haiku-5-5-high": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "No FrontierSWE V2 row (no GPT-6.1 Sol, GPT-6 Luna, MiMo, DeepSeek V4.1, MiniMax M3.1; one row per model)."
+    },
+    "claude-haiku-5-5-low": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "No FrontierSWE V2 row (no GPT-6.1 Sol, GPT-6 Luna, MiMo, DeepSeek V4.1, MiniMax M3.1; one row per model)."
+    },
+    "claude-haiku-5-5-max": {
+     "status": "plausible",
+     "value": 43.8,
+     "sourceLabel": "Claude Haiku 5.5",
+     "effort": "max",
+     "note": "Mean@5 over 34 tasks; avg cost/trial $20.55. Effort label only in Epoch's mirror; frontierswe.com states no effort."
+    },
+    "claude-haiku-5-5-medium": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "No FrontierSWE V2 row (no GPT-6.1 Sol, GPT-6 Luna, MiMo, DeepSeek V4.1, MiniMax M3.1; one row per model)."
+    },
+    "claude-opus-5-5": {
+     "status": "plausible",
+     "value": 62.3,
+     "sourceLabel": "Claude Opus 5.5",
+     "effort": "max",
+     "note": "Mean@5 over 34 tasks; avg cost/trial $98.87. Effort label only in Epoch's mirror; frontierswe.com states no effort."
+    },
+    "claude-opus-5-5-high": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "No FrontierSWE V2 row (no GPT-6.1 Sol, GPT-6 Luna, MiMo, DeepSeek V4.1, MiniMax M3.1; one row per model)."
+    },
+    "claude-opus-5-5-medium": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "No FrontierSWE V2 row (no GPT-6.1 Sol, GPT-6 Luna, MiMo, DeepSeek V4.1, MiniMax M3.1; one row per model)."
+    },
+    "claude-opus-5-5-xhigh": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "No FrontierSWE V2 row (no GPT-6.1 Sol, GPT-6 Luna, MiMo, DeepSeek V4.1, MiniMax M3.1; one row per model)."
+    },
+    "claude-sonnet-5-5": {
+     "status": "plausible",
+     "value": 61.9,
+     "sourceLabel": "Claude Sonnet 5.5",
+     "effort": "max",
+     "note": "Mean@5 over 34 tasks; avg cost/trial $110.45. Effort label only in Epoch's mirror; frontierswe.com states no effort."
+    },
+    "claude-sonnet-5-5-xhigh": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "No FrontierSWE V2 row (no GPT-6.1 Sol, GPT-6 Luna, MiMo, DeepSeek V4.1, MiniMax M3.1; one row per model)."
+    },
+    "deepseek-v4-1-flash-1017": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "No FrontierSWE V2 row (no GPT-6.1 Sol, GPT-6 Luna, MiMo, DeepSeek V4.1, MiniMax M3.1; one row per model)."
+    },
+    "gemini-4-argon": {
+     "status": "plausible",
+     "value": 55.0,
+     "sourceLabel": "Gemini 4 Argon",
+     "effort": "high",
+     "note": "Mean@5 over 34 tasks; avg cost/trial $129.36. Effort label only in Epoch's mirror; frontierswe.com states no effort. FrontierSWE flags a non-production setting with low cache-hit rate."
+    },
+    "gpt-5.6-luna-low": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "No FrontierSWE V2 row (no GPT-6.1 Sol, GPT-6 Luna, MiMo, DeepSeek V4.1, MiniMax M3.1; one row per model)."
+    },
+    "gpt-6-astra": {
+     "status": "plausible",
+     "value": 65.5,
+     "sourceLabel": "GPT-6 Astra",
+     "effort": "max",
+     "note": "Mean@5 over 34 tasks; avg cost/trial $1029.65. Effort label only in Epoch's mirror; frontierswe.com states no effort."
+    },
+    "gpt-6-astra-high": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "No FrontierSWE V2 row (no GPT-6.1 Sol, GPT-6 Luna, MiMo, DeepSeek V4.1, MiniMax M3.1; one row per model)."
+    },
+    "gpt-6-astra-xhigh": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "No FrontierSWE V2 row (no GPT-6.1 Sol, GPT-6 Luna, MiMo, DeepSeek V4.1, MiniMax M3.1; one row per model)."
+    },
+    "gpt-6-luna": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "No FrontierSWE V2 row (no GPT-6.1 Sol, GPT-6 Luna, MiMo, DeepSeek V4.1, MiniMax M3.1; one row per model)."
+    },
+    "gpt-6-luna-high": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "No FrontierSWE V2 row (no GPT-6.1 Sol, GPT-6 Luna, MiMo, DeepSeek V4.1, MiniMax M3.1; one row per model)."
+    },
+    "gpt-6-luna-low": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "No FrontierSWE V2 row (no GPT-6.1 Sol, GPT-6 Luna, MiMo, DeepSeek V4.1, MiniMax M3.1; one row per model)."
+    },
+    "gpt-6-luna-medium": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "No FrontierSWE V2 row (no GPT-6.1 Sol, GPT-6 Luna, MiMo, DeepSeek V4.1, MiniMax M3.1; one row per model)."
+    },
+    "gpt-6-luna-xhigh": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "No FrontierSWE V2 row (no GPT-6.1 Sol, GPT-6 Luna, MiMo, DeepSeek V4.1, MiniMax M3.1; one row per model)."
+    },
+    "gpt-6.1-sol": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "No FrontierSWE V2 row (no GPT-6.1 Sol, GPT-6 Luna, MiMo, DeepSeek V4.1, MiniMax M3.1; one row per model)."
+    },
+    "gpt-6.1-sol-high": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "No FrontierSWE V2 row (no GPT-6.1 Sol, GPT-6 Luna, MiMo, DeepSeek V4.1, MiniMax M3.1; one row per model)."
+    },
+    "gpt-6.1-sol-medium": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "No FrontierSWE V2 row (no GPT-6.1 Sol, GPT-6 Luna, MiMo, DeepSeek V4.1, MiniMax M3.1; one row per model)."
+    },
+    "gpt-6.1-sol-xhigh": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "No FrontierSWE V2 row (no GPT-6.1 Sol, GPT-6 Luna, MiMo, DeepSeek V4.1, MiniMax M3.1; one row per model)."
+    },
+    "mimo-v2-6-flash": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "No FrontierSWE V2 row (no GPT-6.1 Sol, GPT-6 Luna, MiMo, DeepSeek V4.1, MiniMax M3.1; one row per model)."
+    },
+    "mimo-v2-6-pro": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "No FrontierSWE V2 row (no GPT-6.1 Sol, GPT-6 Luna, MiMo, DeepSeek V4.1, MiniMax M3.1; one row per model)."
+    },
+    "minimax-m3-1-flash": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "No FrontierSWE V2 row (no GPT-6.1 Sol, GPT-6 Luna, MiMo, DeepSeek V4.1, MiniMax M3.1; one row per model)."
+    },
+    "kimi-k3-1-pro": {
+     "status": "not captured",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "Source not re-read on 2026-10-25: it feeds no ValueRank leaf."
+    }
+   }
+  },
+  {
+   "key": "swe-rebench",
+   "name": "SWE-rebench (Nebius)",
+   "version": "rolling window 2026-05-15 to 2026-07-01",
+   "updated": "2026-07 (stale)",
+   "measures": "Fresh GitHub issue resolution, contamination-resistant",
+   "domain": "software engineering",
+   "effortOnRow": true,
+   "harness": "uniform agent scaffold plus some named agent rows",
+   "metric": "resolved %",
+   "sourceUrl": "https://swe-rebench.com/",
+   "machineReadable": "HF dataset nebius/SWE-rebench-leaderboard",
+   "coverage": {
+    "claude-haiku-5-5": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "No post-July-2026 model on SWE-rebench (latest date on page 2026-07-24; window to 2026-07-01)."
+    },
+    "claude-haiku-5-5-high": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "No post-July-2026 model on SWE-rebench (latest date on page 2026-07-24; window to 2026-07-01)."
+    },
+    "claude-haiku-5-5-low": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "No post-July-2026 model on SWE-rebench (latest date on page 2026-07-24; window to 2026-07-01)."
+    },
+    "claude-haiku-5-5-max": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "No post-July-2026 model on SWE-rebench (latest date on page 2026-07-24; window to 2026-07-01)."
+    },
+    "claude-haiku-5-5-medium": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "No post-July-2026 model on SWE-rebench (latest date on page 2026-07-24; window to 2026-07-01)."
+    },
+    "claude-opus-5-5": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "No post-July-2026 model on SWE-rebench (latest date on page 2026-07-24; window to 2026-07-01)."
+    },
+    "claude-opus-5-5-high": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "No post-July-2026 model on SWE-rebench (latest date on page 2026-07-24; window to 2026-07-01)."
+    },
+    "claude-opus-5-5-medium": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "No post-July-2026 model on SWE-rebench (latest date on page 2026-07-24; window to 2026-07-01)."
+    },
+    "claude-opus-5-5-xhigh": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "No post-July-2026 model on SWE-rebench (latest date on page 2026-07-24; window to 2026-07-01)."
+    },
+    "claude-sonnet-5-5": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "No post-July-2026 model on SWE-rebench (latest date on page 2026-07-24; window to 2026-07-01)."
+    },
+    "claude-sonnet-5-5-xhigh": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "No post-July-2026 model on SWE-rebench (latest date on page 2026-07-24; window to 2026-07-01)."
+    },
+    "deepseek-v4-1-flash-1017": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "No post-July-2026 model on SWE-rebench (latest date on page 2026-07-24; window to 2026-07-01)."
+    },
+    "gemini-4-argon": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "No post-July-2026 model on SWE-rebench (latest date on page 2026-07-24; window to 2026-07-01)."
+    },
+    "gpt-5.6-luna-low": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "No post-July-2026 model on SWE-rebench (latest date on page 2026-07-24; window to 2026-07-01)."
+    },
+    "gpt-6-astra": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "No post-July-2026 model on SWE-rebench (latest date on page 2026-07-24; window to 2026-07-01)."
+    },
+    "gpt-6-astra-high": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "No post-July-2026 model on SWE-rebench (latest date on page 2026-07-24; window to 2026-07-01)."
+    },
+    "gpt-6-astra-xhigh": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "No post-July-2026 model on SWE-rebench (latest date on page 2026-07-24; window to 2026-07-01)."
+    },
+    "gpt-6-luna": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "No post-July-2026 model on SWE-rebench (latest date on page 2026-07-24; window to 2026-07-01)."
+    },
+    "gpt-6-luna-high": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "No post-July-2026 model on SWE-rebench (latest date on page 2026-07-24; window to 2026-07-01)."
+    },
+    "gpt-6-luna-low": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "No post-July-2026 model on SWE-rebench (latest date on page 2026-07-24; window to 2026-07-01)."
+    },
+    "gpt-6-luna-medium": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "No post-July-2026 model on SWE-rebench (latest date on page 2026-07-24; window to 2026-07-01)."
+    },
+    "gpt-6-luna-xhigh": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "No post-July-2026 model on SWE-rebench (latest date on page 2026-07-24; window to 2026-07-01)."
+    },
+    "gpt-6.1-sol": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "No post-July-2026 model on SWE-rebench (latest date on page 2026-07-24; window to 2026-07-01)."
+    },
+    "gpt-6.1-sol-high": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "No post-July-2026 model on SWE-rebench (latest date on page 2026-07-24; window to 2026-07-01)."
+    },
+    "gpt-6.1-sol-medium": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "No post-July-2026 model on SWE-rebench (latest date on page 2026-07-24; window to 2026-07-01)."
+    },
+    "gpt-6.1-sol-xhigh": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "No post-July-2026 model on SWE-rebench (latest date on page 2026-07-24; window to 2026-07-01)."
+    },
+    "mimo-v2-6-flash": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "No post-July-2026 model on SWE-rebench (latest date on page 2026-07-24; window to 2026-07-01)."
+    },
+    "mimo-v2-6-pro": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "No post-July-2026 model on SWE-rebench (latest date on page 2026-07-24; window to 2026-07-01)."
+    },
+    "minimax-m3-1-flash": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "No post-July-2026 model on SWE-rebench (latest date on page 2026-07-24; window to 2026-07-01)."
+    },
+    "kimi-k3-1-pro": {
+     "status": "not captured",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "Source not re-read on 2026-10-25: it feeds no ValueRank leaf."
+    }
+   }
+  },
+  {
+   "key": "ifbench",
+   "name": "IFBench (AA run)",
+   "version": "IFBench (allenai), AA methodology",
+   "updated": "Removed from AA Intelligence Index in v4.1 (2026-06-16); AA said it would continue to publish results on new releases",
+   "measures": "Precise instruction following on 58 verifiable out-of-domain constraints",
+   "domain": "instruction following",
+   "effortOnRow": true,
+   "harness": "AA single-turn",
+   "metric": "score %",
+   "sourceUrl": "https://artificialanalysis.ai/evaluations/ifbench",
+   "machineReadable": "AA page JSON (embedded)",
+   "coverage": {
+    "claude-haiku-5-5": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "AA ifbench field is null for this configuration in the v4.3.2 snapshot captured 2026-10-23T06:26:23Z (data/aa/aa_v432_snapshot.json); AA IFBench page lists 5 models (MiniMax-M3, Grok 4.20 0309, Grok 4.3, Grok 4.3 medium, Nemotron 3 Ultra), none in the cohort. No third-party IFBench result found for the cohort (BenchLM IFBench page, updated 2026-10-20, lists none)."
+    },
+    "claude-haiku-5-5-high": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "AA ifbench field is null for this configuration in the v4.3.2 snapshot captured 2026-10-23T06:26:23Z (data/aa/aa_v432_snapshot.json); AA IFBench page lists 5 models (MiniMax-M3, Grok 4.20 0309, Grok 4.3, Grok 4.3 medium, Nemotron 3 Ultra), none in the cohort. No third-party IFBench result found for the cohort (BenchLM IFBench page, updated 2026-10-20, lists none)."
+    },
+    "claude-haiku-5-5-low": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "AA ifbench field is null for this configuration in the v4.3.2 snapshot captured 2026-10-23T06:26:23Z (data/aa/aa_v432_snapshot.json); AA IFBench page lists 5 models (MiniMax-M3, Grok 4.20 0309, Grok 4.3, Grok 4.3 medium, Nemotron 3 Ultra), none in the cohort. No third-party IFBench result found for the cohort (BenchLM IFBench page, updated 2026-10-20, lists none)."
+    },
+    "claude-haiku-5-5-max": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "AA ifbench field is null for this configuration in the v4.3.2 snapshot captured 2026-10-23T06:26:23Z (data/aa/aa_v432_snapshot.json); AA IFBench page lists 5 models (MiniMax-M3, Grok 4.20 0309, Grok 4.3, Grok 4.3 medium, Nemotron 3 Ultra), none in the cohort. No third-party IFBench result found for the cohort (BenchLM IFBench page, updated 2026-10-20, lists none)."
+    },
+    "claude-haiku-5-5-medium": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "AA ifbench field is null for this configuration in the v4.3.2 snapshot captured 2026-10-23T06:26:23Z (data/aa/aa_v432_snapshot.json); AA IFBench page lists 5 models (MiniMax-M3, Grok 4.20 0309, Grok 4.3, Grok 4.3 medium, Nemotron 3 Ultra), none in the cohort. No third-party IFBench result found for the cohort (BenchLM IFBench page, updated 2026-10-20, lists none)."
+    },
+    "claude-opus-5-5": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "AA ifbench field is null for this configuration in the v4.3.2 snapshot captured 2026-10-23T06:26:23Z (data/aa/aa_v432_snapshot.json); AA IFBench page lists 5 models (MiniMax-M3, Grok 4.20 0309, Grok 4.3, Grok 4.3 medium, Nemotron 3 Ultra), none in the cohort. No third-party IFBench result found for the cohort (BenchLM IFBench page, updated 2026-10-20, lists none)."
+    },
+    "claude-opus-5-5-high": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "AA ifbench field is null for this configuration in the v4.3.2 snapshot captured 2026-10-23T06:26:23Z (data/aa/aa_v432_snapshot.json); AA IFBench page lists 5 models (MiniMax-M3, Grok 4.20 0309, Grok 4.3, Grok 4.3 medium, Nemotron 3 Ultra), none in the cohort. No third-party IFBench result found for the cohort (BenchLM IFBench page, updated 2026-10-20, lists none)."
+    },
+    "claude-opus-5-5-medium": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "AA ifbench field is null for this configuration in the v4.3.2 snapshot captured 2026-10-23T06:26:23Z (data/aa/aa_v432_snapshot.json); AA IFBench page lists 5 models (MiniMax-M3, Grok 4.20 0309, Grok 4.3, Grok 4.3 medium, Nemotron 3 Ultra), none in the cohort. No third-party IFBench result found for the cohort (BenchLM IFBench page, updated 2026-10-20, lists none)."
+    },
+    "claude-opus-5-5-xhigh": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "AA ifbench field is null for this configuration in the v4.3.2 snapshot captured 2026-10-23T06:26:23Z (data/aa/aa_v432_snapshot.json); AA IFBench page lists 5 models (MiniMax-M3, Grok 4.20 0309, Grok 4.3, Grok 4.3 medium, Nemotron 3 Ultra), none in the cohort. No third-party IFBench result found for the cohort (BenchLM IFBench page, updated 2026-10-20, lists none)."
+    },
+    "claude-sonnet-5-5": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "AA ifbench field is null for this configuration in the v4.3.2 snapshot captured 2026-10-23T06:26:23Z (data/aa/aa_v432_snapshot.json); AA IFBench page lists 5 models (MiniMax-M3, Grok 4.20 0309, Grok 4.3, Grok 4.3 medium, Nemotron 3 Ultra), none in the cohort. No third-party IFBench result found for the cohort (BenchLM IFBench page, updated 2026-10-20, lists none)."
+    },
+    "claude-sonnet-5-5-xhigh": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "AA ifbench field is null for this configuration in the v4.3.2 snapshot captured 2026-10-23T06:26:23Z (data/aa/aa_v432_snapshot.json); AA IFBench page lists 5 models (MiniMax-M3, Grok 4.20 0309, Grok 4.3, Grok 4.3 medium, Nemotron 3 Ultra), none in the cohort. No third-party IFBench result found for the cohort (BenchLM IFBench page, updated 2026-10-20, lists none)."
+    },
+    "deepseek-v4-1-flash-1017": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "AA ifbench field is null for this configuration in the v4.3.2 snapshot captured 2026-10-23T06:26:23Z (data/aa/aa_v432_snapshot.json); AA IFBench page lists 5 models (MiniMax-M3, Grok 4.20 0309, Grok 4.3, Grok 4.3 medium, Nemotron 3 Ultra), none in the cohort. No third-party IFBench result found for the cohort (BenchLM IFBench page, updated 2026-10-20, lists none)."
+    },
+    "gemini-4-argon": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "AA ifbench field is null for this configuration in the v4.3.2 snapshot captured 2026-10-23T06:26:23Z (data/aa/aa_v432_snapshot.json); AA IFBench page lists 5 models (MiniMax-M3, Grok 4.20 0309, Grok 4.3, Grok 4.3 medium, Nemotron 3 Ultra), none in the cohort. No third-party IFBench result found for the cohort (BenchLM IFBench page, updated 2026-10-20, lists none)."
+    },
+    "gpt-5.6-luna-low": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "AA ifbench field is null for this configuration in the v4.3.2 snapshot captured 2026-10-23T06:26:23Z (data/aa/aa_v432_snapshot.json); AA IFBench page lists 5 models (MiniMax-M3, Grok 4.20 0309, Grok 4.3, Grok 4.3 medium, Nemotron 3 Ultra), none in the cohort. No third-party IFBench result found for the cohort (BenchLM IFBench page, updated 2026-10-20, lists none)."
+    },
+    "gpt-6-astra": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "AA ifbench field is null for this configuration in the v4.3.2 snapshot captured 2026-10-23T06:26:23Z (data/aa/aa_v432_snapshot.json); AA IFBench page lists 5 models (MiniMax-M3, Grok 4.20 0309, Grok 4.3, Grok 4.3 medium, Nemotron 3 Ultra), none in the cohort. No third-party IFBench result found for the cohort (BenchLM IFBench page, updated 2026-10-20, lists none)."
+    },
+    "gpt-6-astra-high": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "AA ifbench field is null for this configuration in the v4.3.2 snapshot captured 2026-10-23T06:26:23Z (data/aa/aa_v432_snapshot.json); AA IFBench page lists 5 models (MiniMax-M3, Grok 4.20 0309, Grok 4.3, Grok 4.3 medium, Nemotron 3 Ultra), none in the cohort. No third-party IFBench result found for the cohort (BenchLM IFBench page, updated 2026-10-20, lists none)."
+    },
+    "gpt-6-astra-xhigh": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "AA ifbench field is null for this configuration in the v4.3.2 snapshot captured 2026-10-23T06:26:23Z (data/aa/aa_v432_snapshot.json); AA IFBench page lists 5 models (MiniMax-M3, Grok 4.20 0309, Grok 4.3, Grok 4.3 medium, Nemotron 3 Ultra), none in the cohort. No third-party IFBench result found for the cohort (BenchLM IFBench page, updated 2026-10-20, lists none)."
+    },
+    "gpt-6-luna": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "AA ifbench field is null for this configuration in the v4.3.2 snapshot captured 2026-10-23T06:26:23Z (data/aa/aa_v432_snapshot.json); AA IFBench page lists 5 models (MiniMax-M3, Grok 4.20 0309, Grok 4.3, Grok 4.3 medium, Nemotron 3 Ultra), none in the cohort. No third-party IFBench result found for the cohort (BenchLM IFBench page, updated 2026-10-20, lists none)."
+    },
+    "gpt-6-luna-high": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "AA ifbench field is null for this configuration in the v4.3.2 snapshot captured 2026-10-23T06:26:23Z (data/aa/aa_v432_snapshot.json); AA IFBench page lists 5 models (MiniMax-M3, Grok 4.20 0309, Grok 4.3, Grok 4.3 medium, Nemotron 3 Ultra), none in the cohort. No third-party IFBench result found for the cohort (BenchLM IFBench page, updated 2026-10-20, lists none)."
+    },
+    "gpt-6-luna-low": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "AA ifbench field is null for this configuration in the v4.3.2 snapshot captured 2026-10-23T06:26:23Z (data/aa/aa_v432_snapshot.json); AA IFBench page lists 5 models (MiniMax-M3, Grok 4.20 0309, Grok 4.3, Grok 4.3 medium, Nemotron 3 Ultra), none in the cohort. No third-party IFBench result found for the cohort (BenchLM IFBench page, updated 2026-10-20, lists none)."
+    },
+    "gpt-6-luna-medium": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "AA ifbench field is null for this configuration in the v4.3.2 snapshot captured 2026-10-23T06:26:23Z (data/aa/aa_v432_snapshot.json); AA IFBench page lists 5 models (MiniMax-M3, Grok 4.20 0309, Grok 4.3, Grok 4.3 medium, Nemotron 3 Ultra), none in the cohort. No third-party IFBench result found for the cohort (BenchLM IFBench page, updated 2026-10-20, lists none)."
+    },
+    "gpt-6-luna-xhigh": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "AA ifbench field is null for this configuration in the v4.3.2 snapshot captured 2026-10-23T06:26:23Z (data/aa/aa_v432_snapshot.json); AA IFBench page lists 5 models (MiniMax-M3, Grok 4.20 0309, Grok 4.3, Grok 4.3 medium, Nemotron 3 Ultra), none in the cohort. No third-party IFBench result found for the cohort (BenchLM IFBench page, updated 2026-10-20, lists none)."
+    },
+    "gpt-6.1-sol": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "AA ifbench field is null for this configuration in the v4.3.2 snapshot captured 2026-10-23T06:26:23Z (data/aa/aa_v432_snapshot.json); AA IFBench page lists 5 models (MiniMax-M3, Grok 4.20 0309, Grok 4.3, Grok 4.3 medium, Nemotron 3 Ultra), none in the cohort. No third-party IFBench result found for the cohort (BenchLM IFBench page, updated 2026-10-20, lists none)."
+    },
+    "gpt-6.1-sol-high": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "AA ifbench field is null for this configuration in the v4.3.2 snapshot captured 2026-10-23T06:26:23Z (data/aa/aa_v432_snapshot.json); AA IFBench page lists 5 models (MiniMax-M3, Grok 4.20 0309, Grok 4.3, Grok 4.3 medium, Nemotron 3 Ultra), none in the cohort. No third-party IFBench result found for the cohort (BenchLM IFBench page, updated 2026-10-20, lists none)."
+    },
+    "gpt-6.1-sol-medium": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "AA ifbench field is null for this configuration in the v4.3.2 snapshot captured 2026-10-23T06:26:23Z (data/aa/aa_v432_snapshot.json); AA IFBench page lists 5 models (MiniMax-M3, Grok 4.20 0309, Grok 4.3, Grok 4.3 medium, Nemotron 3 Ultra), none in the cohort. No third-party IFBench result found for the cohort (BenchLM IFBench page, updated 2026-10-20, lists none)."
+    },
+    "gpt-6.1-sol-xhigh": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "AA ifbench field is null for this configuration in the v4.3.2 snapshot captured 2026-10-23T06:26:23Z (data/aa/aa_v432_snapshot.json); AA IFBench page lists 5 models (MiniMax-M3, Grok 4.20 0309, Grok 4.3, Grok 4.3 medium, Nemotron 3 Ultra), none in the cohort. No third-party IFBench result found for the cohort (BenchLM IFBench page, updated 2026-10-20, lists none)."
+    },
+    "mimo-v2-6-flash": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "AA ifbench field is null for this configuration in the v4.3.2 snapshot captured 2026-10-23T06:26:23Z (data/aa/aa_v432_snapshot.json); AA IFBench page lists 5 models (MiniMax-M3, Grok 4.20 0309, Grok 4.3, Grok 4.3 medium, Nemotron 3 Ultra), none in the cohort. No third-party IFBench result found for the cohort (BenchLM IFBench page, updated 2026-10-20, lists none)."
+    },
+    "mimo-v2-6-pro": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "AA ifbench field is null for this configuration in the v4.3.2 snapshot captured 2026-10-23T06:26:23Z (data/aa/aa_v432_snapshot.json); AA IFBench page lists 5 models (MiniMax-M3, Grok 4.20 0309, Grok 4.3, Grok 4.3 medium, Nemotron 3 Ultra), none in the cohort. No third-party IFBench result found for the cohort (BenchLM IFBench page, updated 2026-10-20, lists none)."
+    },
+    "minimax-m3-1-flash": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "AA ifbench field is null for this configuration in the v4.3.2 snapshot captured 2026-10-23T06:26:23Z (data/aa/aa_v432_snapshot.json); AA IFBench page lists 5 models (MiniMax-M3, Grok 4.20 0309, Grok 4.3, Grok 4.3 medium, Nemotron 3 Ultra), none in the cohort. No third-party IFBench result found for the cohort (BenchLM IFBench page, updated 2026-10-20, lists none)."
+    },
+    "kimi-k3-1-pro": {
+     "status": "not captured",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "Source not re-read on 2026-10-25: it feeds no ValueRank leaf."
+    }
+   }
+  }
+ ]
+}

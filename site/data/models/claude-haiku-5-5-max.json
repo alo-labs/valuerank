@@ -11,10 +11,10 @@
       "plan": 11
     },
     "overall": {
-      "api": 51.47328458391714,
-      "plan": 59.83154550890208
+      "api": 50.83012208391714,
+      "plan": 59.18838300890208
     },
-    "quality": 51.293878714987116,
+    "quality": 50.43632871498711,
     "qualityRank": 8,
     "coverage": {
       "pct": 100.0,
@@ -44,7 +44,7 @@
         "name": "Artificial Analysis model page (Intelligence Index v4.3.2)",
         "url": "https://artificialanalysis.ai/evaluations/frontiercode"
       },
-      "observedAt": "2026-10-23",
+      "observedAt": "2026-10-25",
       "evaluatedVariant": null,
       "note": null,
       "grade": "measured"
@@ -54,15 +54,15 @@
       "label": "LiveBench 2.0 Overall",
       "category": "Software engineering",
       "weightPct": 11.25,
-      "value": 75.64,
+      "value": 69.85,
       "decimals": 1,
       "unit": "mean of seven category scores (0-100)",
-      "normalized": 75.64,
+      "normalized": 69.85,
       "source": {
         "name": "Artificial Analysis model page (Intelligence Index v4.3.2)",
         "url": "https://livebench.ai/"
       },
-      "observedAt": "2026-10-23",
+      "observedAt": "2026-10-25",
       "evaluatedVariant": "claude-haiku-5.5 / LiveBench's own, one run per model at its top effort",
       "note": null,
       "grade": "measured"
@@ -80,7 +80,7 @@
         "name": "Artificial Analysis Terminal-Bench 4.0 run (mini-SWE-agent)",
         "url": "https://www.tbench.ai/leaderboard/terminal-bench/4.0"
       },
-      "observedAt": "2026-10-23",
+      "observedAt": "2026-10-25",
       "evaluatedVariant": "mini-SWE-agent",
       "note": null,
       "grade": "measured"
@@ -90,15 +90,15 @@
       "label": "GDPval-AA v2.1",
       "category": "Professional work",
       "weightPct": 7.5,
-      "value": 1617.13,
+      "value": 1619.32,
       "decimals": 1,
       "unit": "Elo",
-      "normalized": 55.856500000000004,
+      "normalized": 55.966,
       "source": {
         "name": "Artificial Analysis model page (Intelligence Index v4.3.2)",
         "url": "https://artificialanalysis.ai/evaluations/gdpval-aa"
       },
-      "observedAt": "2026-10-23",
+      "observedAt": "2026-10-25",
       "evaluatedVariant": null,
       "note": null,
       "grade": "measured"
@@ -116,7 +116,7 @@
         "name": "Artificial Analysis model page (Intelligence Index v4.3.2)",
         "url": "https://artificialanalysis.ai/evaluations/automationbench-aa"
       },
-      "observedAt": "2026-10-23",
+      "observedAt": "2026-10-25",
       "evaluatedVariant": null,
       "note": null,
       "grade": "measured"
@@ -134,7 +134,7 @@
         "name": "Artificial Analysis model page (Intelligence Index v4.3.2)",
         "url": "https://artificialanalysis.ai/evaluations/omniscience"
       },
-      "observedAt": "2026-10-23",
+      "observedAt": "2026-10-25",
       "evaluatedVariant": null,
       "note": null,
       "grade": "measured"
@@ -152,7 +152,7 @@
         "name": "Bug Hunt Bench published runs",
         "url": "https://bughunt.productcompass.pm/"
       },
-      "observedAt": "2026-10-19",
+      "observedAt": "2026-10-23",
       "evaluatedVariant": "Haiku 5.5 (max effort) - mean of 2 / Claude Code",
       "note": null,
       "grade": "measured"
@@ -170,7 +170,7 @@
         "name": "Artificial Analysis model page (Intelligence Index v4.3.2)",
         "url": "https://www.vals.ai/benchmarks/code-migration-v1-1"
       },
-      "observedAt": "2026-10-23",
+      "observedAt": "2026-10-25",
       "evaluatedVariant": "anthropic/claude-haiku-5-5 / Pi agent harness, the same for every model",
       "note": null,
       "grade": "measured"
@@ -188,7 +188,7 @@
         "name": "Artificial Analysis model page (Intelligence Index v4.3.2)",
         "url": "https://www.vals.ai/benchmarks/vibe-code"
       },
-      "observedAt": "2026-10-23",
+      "observedAt": "2026-10-25",
       "evaluatedVariant": "anthropic/claude-haiku-5-5 / OpenHands, the same for every model",
       "note": null,
       "grade": "measured"
@@ -206,7 +206,7 @@
         "name": "Artificial Analysis model page (Intelligence Index v4.3.2)",
         "url": "https://artificialanalysis.ai/evaluations/artificial-analysis-long-context-reasoning"
       },
-      "observedAt": "2026-10-23",
+      "observedAt": "2026-10-25",
       "evaluatedVariant": null,
       "note": null,
       "grade": "measured"
@@ -224,7 +224,7 @@
         "name": "Artificial Analysis model page (Intelligence Index v4.3.2)",
         "url": "https://artificialanalysis.ai/evaluations/humanitys-last-exam"
       },
-      "observedAt": "2026-10-23",
+      "observedAt": "2026-10-25",
       "evaluatedVariant": null,
       "note": null,
       "grade": "measured"
@@ -242,7 +242,7 @@
         "name": "Artificial Analysis model page (Intelligence Index v4.3.2)",
         "url": "https://artificialanalysis.ai/evaluations/scicode"
       },
-      "observedAt": "2026-10-23",
+      "observedAt": "2026-10-25",
       "evaluatedVariant": null,
       "note": null,
       "grade": "measured"
@@ -260,7 +260,7 @@
         "name": "Artificial Analysis model page (Intelligence Index v4.3.2)",
         "url": "https://artificialanalysis.ai/evaluations/critpt"
       },
-      "observedAt": "2026-10-23",
+      "observedAt": "2026-10-25",
       "evaluatedVariant": null,
       "note": null,
       "grade": "measured"
@@ -397,7 +397,7 @@
       "usdPerRun": 16.416305226814956,
       "selected": true,
       "planRank": 11,
-      "planValue": 59.83154550890208
+      "planValue": 59.18838300890208
     },
     {
       "id": "claude-max20x-claude-haiku-5-5-max-common-opus55-assumption",
@@ -414,7 +414,7 @@
       "usdPerRun": 16.491904790370132,
       "selected": false,
       "planRank": 12,
-      "planValue": 59.815381260207815
+      "planValue": 59.17221876020781
     },
     {
       "id": "claude-max5x-claude-haiku-5-5-max-common-opus55-assumption",
@@ -431,7 +431,7 @@
       "usdPerRun": 16.88943891457469,
       "selected": false,
       "planRank": 13,
-      "planValue": 59.73158379854173
+      "planValue": 59.088421298541725
     }
   ],
   "scenarios": {
@@ -489,7 +489,7 @@
         "unevaluable": null,
         "top1": 0.0,
         "top3": 0.0,
-        "frontier": 0.0001
+        "frontier": 0.0004
       }
     ],
     "plan": [
@@ -586,8 +586,8 @@
         "plan": 11
       },
       "overall": {
-        "api": 51.47328458391714,
-        "plan": 59.83154550890208
+        "api": 50.83012208391714,
+        "plan": 59.18838300890208
       }
     },
     {

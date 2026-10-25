@@ -1,0 +1,276 @@
+{
+ "capturedFrom": "data/aa_frontier_capture.json captured 2026-10-25T09:53:28Z (O65)",
+ "configurations": [
+  {
+   "id": "claude-haiku-5-5",
+   "name": "Claude Haiku 5.5",
+   "aaEffort": "xhigh",
+   "aaSlug": "claude-haiku-5-5-xhigh",
+   "aaFrontierConfiguration": "Claude Haiku 5.5 (xhigh)",
+   "tier": "frontier",
+   "ranked": true
+  },
+  {
+   "id": "claude-haiku-5-5-high",
+   "name": "Claude Haiku 5.5 (high)",
+   "aaEffort": "high",
+   "aaSlug": "claude-haiku-5-5-high",
+   "aaFrontierConfiguration": "Claude Haiku 5.5 (high)",
+   "tier": "frontier",
+   "ranked": true
+  },
+  {
+   "id": "claude-haiku-5-5-low",
+   "name": "Claude Haiku 5.5 (low)",
+   "aaEffort": "low",
+   "aaSlug": "claude-haiku-5-5-low",
+   "aaFrontierConfiguration": "Claude Haiku 5.5 (low)",
+   "tier": "near",
+   "ranked": true
+  },
+  {
+   "id": "claude-haiku-5-5-max",
+   "name": "Claude Haiku 5.5 (max)",
+   "aaEffort": "max",
+   "aaSlug": "claude-haiku-5-5",
+   "aaFrontierConfiguration": "Claude Haiku 5.5 (max)",
+   "tier": "near",
+   "ranked": true
+  },
+  {
+   "id": "claude-haiku-5-5-medium",
+   "name": "Claude Haiku 5.5 (medium)",
+   "aaEffort": "medium",
+   "aaSlug": "claude-haiku-5-5-medium",
+   "aaFrontierConfiguration": "Claude Haiku 5.5 (medium)",
+   "tier": "frontier",
+   "ranked": true
+  },
+  {
+   "id": "claude-opus-5-5",
+   "name": "Claude Opus 5.5",
+   "aaEffort": "max",
+   "aaSlug": "claude-opus-5-5",
+   "aaFrontierConfiguration": "Claude Opus 5.5 (max with fallback)",
+   "tier": "frontier",
+   "ranked": true
+  },
+  {
+   "id": "claude-opus-5-5-high",
+   "name": "Claude Opus 5.5 (high)",
+   "aaEffort": "high",
+   "aaSlug": "claude-opus-5-5-high",
+   "aaFrontierConfiguration": "Claude Opus 5.5 (high with fallback)",
+   "tier": "frontier",
+   "ranked": true
+  },
+  {
+   "id": "claude-opus-5-5-medium",
+   "name": "Claude Opus 5.5 (medium)",
+   "aaEffort": "medium",
+   "aaSlug": "claude-opus-5-5-medium",
+   "aaFrontierConfiguration": "Claude Opus 5.5 (medium with fallback)",
+   "tier": "near",
+   "ranked": true
+  },
+  {
+   "id": "claude-opus-5-5-xhigh",
+   "name": "Claude Opus 5.5 (xhigh)",
+   "aaEffort": "xhigh",
+   "aaSlug": "claude-opus-5-5-xhigh",
+   "aaFrontierConfiguration": "Claude Opus 5.5 (xhigh with fallback)",
+   "tier": "frontier",
+   "ranked": true
+  },
+  {
+   "id": "claude-sonnet-5-5",
+   "name": "Claude Sonnet 5.5",
+   "aaEffort": "max",
+   "aaSlug": "claude-sonnet-5-5",
+   "aaFrontierConfiguration": "Claude Sonnet 5.5 (max with fallback)",
+   "tier": "frontier",
+   "ranked": true
+  },
+  {
+   "id": "claude-sonnet-5-5-xhigh",
+   "name": "Claude Sonnet 5.5 (xhigh)",
+   "aaEffort": "xhigh",
+   "aaSlug": "claude-sonnet-5-5-xhigh",
+   "aaFrontierConfiguration": "Claude Sonnet 5.5 (xhigh with fallback)",
+   "tier": "near",
+   "ranked": true
+  },
+  {
+   "id": "deepseek-v4-1-flash-1017",
+   "name": "DeepSeek V4.1 Flash 1017",
+   "aaEffort": "max",
+   "aaSlug": "deepseek-v4-1-flash-1017",
+   "aaFrontierConfiguration": "DeepSeek V4.1 Flash 1017 (max)",
+   "tier": "near",
+   "ranked": true
+  },
+  {
+   "id": "gemini-4-argon",
+   "name": "Gemini 4 Argon",
+   "aaEffort": "high",
+   "aaSlug": "gemini-4-argon",
+   "aaFrontierConfiguration": "Gemini 4 Argon (high)",
+   "tier": "near",
+   "ranked": true
+  },
+  {
+   "id": "gpt-5.6-luna-low",
+   "name": "GPT-5.6 Luna (low)",
+   "aaEffort": "low",
+   "aaSlug": "gpt-5-6-luna-low",
+   "aaFrontierConfiguration": "GPT-5.6 Luna (low)",
+   "tier": "near",
+   "ranked": true
+  },
+  {
+   "id": "gpt-6-astra",
+   "name": "GPT-6 Astra",
+   "aaEffort": "max",
+   "aaSlug": "gpt-6-astra",
+   "aaFrontierConfiguration": "GPT-6 Astra (max)",
+   "tier": "near",
+   "ranked": true
+  },
+  {
+   "id": "gpt-6-astra-high",
+   "name": "GPT-6 Astra (high)",
+   "aaEffort": "high",
+   "aaSlug": "gpt-6-astra-high",
+   "aaFrontierConfiguration": "GPT-6 Astra (high)",
+   "tier": "near",
+   "ranked": true
+  },
+  {
+   "id": "gpt-6-astra-xhigh",
+   "name": "GPT-6 Astra (xhigh)",
+   "aaEffort": "xhigh",
+   "aaSlug": "gpt-6-astra-xhigh",
+   "aaFrontierConfiguration": "GPT-6 Astra (xhigh)",
+   "tier": "near",
+   "ranked": true
+  },
+  {
+   "id": "gpt-6-luna",
+   "name": "GPT-6 Luna",
+   "aaEffort": "max",
+   "aaSlug": "gpt-6-luna",
+   "aaFrontierConfiguration": "GPT-6 Luna (max)",
+   "tier": "frontier",
+   "ranked": true
+  },
+  {
+   "id": "gpt-6-luna-high",
+   "name": "GPT-6 Luna (high)",
+   "aaEffort": "high",
+   "aaSlug": "gpt-6-luna-high",
+   "aaFrontierConfiguration": "GPT-6 Luna (high)",
+   "tier": "frontier",
+   "ranked": true
+  },
+  {
+   "id": "gpt-6-luna-low",
+   "name": "GPT-6 Luna (low)",
+   "aaEffort": "low",
+   "aaSlug": "gpt-6-luna-low",
+   "aaFrontierConfiguration": "GPT-6 Luna (low)",
+   "tier": "frontier",
+   "ranked": true
+  },
+  {
+   "id": "gpt-6-luna-medium",
+   "name": "GPT-6 Luna (medium)",
+   "aaEffort": "medium",
+   "aaSlug": "gpt-6-luna-medium",
+   "aaFrontierConfiguration": "GPT-6 Luna (medium)",
+   "tier": "frontier",
+   "ranked": true
+  },
+  {
+   "id": "gpt-6-luna-xhigh",
+   "name": "GPT-6 Luna (xhigh)",
+   "aaEffort": "xhigh",
+   "aaSlug": "gpt-6-luna-xhigh",
+   "aaFrontierConfiguration": "GPT-6 Luna (xhigh)",
+   "tier": "frontier",
+   "ranked": true
+  },
+  {
+   "id": "gpt-6.1-sol",
+   "name": "GPT-6.1 Sol",
+   "aaEffort": "max",
+   "aaSlug": "gpt-6-1-sol",
+   "aaFrontierConfiguration": "GPT-6.1 Sol (max)",
+   "tier": "frontier",
+   "ranked": true
+  },
+  {
+   "id": "gpt-6.1-sol-high",
+   "name": "GPT-6.1 Sol (high)",
+   "aaEffort": "high",
+   "aaSlug": "gpt-6-1-sol-high",
+   "aaFrontierConfiguration": "GPT-6.1 Sol (high)",
+   "tier": "frontier",
+   "ranked": true
+  },
+  {
+   "id": "gpt-6.1-sol-medium",
+   "name": "GPT-6.1 Sol (medium)",
+   "aaEffort": "medium",
+   "aaSlug": "gpt-6-1-sol-medium",
+   "aaFrontierConfiguration": "GPT-6.1 Sol (medium)",
+   "tier": "frontier",
+   "ranked": true
+  },
+  {
+   "id": "gpt-6.1-sol-xhigh",
+   "name": "GPT-6.1 Sol (xhigh)",
+   "aaEffort": "xhigh",
+   "aaSlug": "gpt-6-1-sol-xhigh",
+   "aaFrontierConfiguration": "GPT-6.1 Sol (xhigh)",
+   "tier": "frontier",
+   "ranked": true
+  },
+  {
+   "id": "mimo-v2-6-flash",
+   "name": "MiMo-V2.6-Flash",
+   "aaEffort": null,
+   "aaSlug": "mimo-v2-6-flash",
+   "aaFrontierConfiguration": "MiMo-V2.6-Flash",
+   "tier": "frontier",
+   "ranked": false
+  },
+  {
+   "id": "mimo-v2-6-pro",
+   "name": "MiMo-V2.6-Pro",
+   "aaEffort": null,
+   "aaSlug": "mimo-v2-6-pro",
+   "aaFrontierConfiguration": "MiMo-V2.6-Pro",
+   "tier": "frontier",
+   "ranked": true
+  },
+  {
+   "id": "minimax-m3-1-flash",
+   "name": "MiniMax-M3.1-Flash",
+   "aaEffort": null,
+   "aaSlug": "minimax-m3-1-flash",
+   "aaFrontierConfiguration": "MiniMax-M3.1-Flash",
+   "tier": "near",
+   "ranked": false
+  },
+  {
+   "id": "kimi-k3-1-pro",
+   "name": "Kimi K3.1 Pro",
+   "aaEffort": null,
+   "aaSlug": "kimi-k3-1-pro",
+   "aaFrontierConfiguration": "Kimi K3.1 Pro",
+   "tier": "frontier",
+   "ranked": true,
+   "ownerStatedEffort": "max (O66)"
+  }
+ ]
+}

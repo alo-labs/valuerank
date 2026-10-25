@@ -13,7 +13,7 @@ Every input behind the published scores, with the artifact and locator that hold
 | Claude Opus 5.5 (max) | Bug Hunt Bench | 41.7 | bugs fixed of 105 | 39.71 | Opus 5.5 (max effort) - mean of 3 | `data/bug_hunt.json` `models[modelId=claude-opus-5-5].fixedOf105` |
 | Claude Opus 5.5 (max) | Vibe Code Bench v1.1 (Vals) | 90.294 | percent | 90.29 | anthropic/claude-opus-5-5 | `data/swe_tracks.json` `records[modelId=claude-opus-5-5, leaf=vibeCode].value` |
 | Claude Opus 5.5 (max) | Code Migration v1.1 (Vals) | 81.012 | percent | 81.01 | anthropic/claude-opus-5-5 | `data/swe_tracks.json` `records[modelId=claude-opus-5-5, leaf=codeMigration].value` |
-| Claude Opus 5.5 (max) | LiveBench 2.0 Overall | 86.53 | percent | 86.53 | claude-opus-5.5 | `data/swe_tracks.json` `records[modelId=claude-opus-5-5, leaf=livebench2Overall].value` |
+| Claude Opus 5.5 (max) | LiveBench 2.0 Overall | 85.14 | percent | 85.14 | claude-opus-5.5 | `data/swe_tracks.json` `records[modelId=claude-opus-5-5, leaf=livebench2Overall].value` |
 | Claude Opus 5.5 (max) | GDPval-AA v2.1 | 1866.27 | Elo | 68.31 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=claude-opus-5-5].model.gdpval` |
 | Claude Opus 5.5 (max) | AutomationBench-AA | 0.6953868128636069 | fraction | 69.54 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=claude-opus-5-5].model.automationBenchPartialScore` |
 | Claude Opus 5.5 (max) | AA-Omniscience | 46.416666666666664 | AA Omniscience Index | 73.21 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=claude-opus-5-5].model.omniscience` |
@@ -26,7 +26,7 @@ Every input behind the published scores, with the artifact and locator that hold
 | Claude Sonnet 5.5 (max) | Bug Hunt Bench | 51.3 | bugs fixed of 105 | 48.86 | Sonnet 5.5 (max effort) - mean of 3 | `data/bug_hunt.json` `models[modelId=claude-sonnet-5-5].fixedOf105` |
 | Claude Sonnet 5.5 (max) | Vibe Code Bench v1.1 (Vals) | 92.392 | percent | 92.39 | anthropic/claude-sonnet-5-5 | `data/swe_tracks.json` `records[modelId=claude-sonnet-5-5, leaf=vibeCode].value` |
 | Claude Sonnet 5.5 (max) | Code Migration v1.1 (Vals) | 86.875 | percent | 86.88 | anthropic/claude-sonnet-5-5 | `data/swe_tracks.json` `records[modelId=claude-sonnet-5-5, leaf=codeMigration].value` |
-| Claude Sonnet 5.5 (max) | LiveBench 2.0 Overall | 82.46 | percent | 82.46 | claude-sonnet-5.5 | `data/swe_tracks.json` `records[modelId=claude-sonnet-5-5, leaf=livebench2Overall].value` |
+| Claude Sonnet 5.5 (max) | LiveBench 2.0 Overall | 80.04 | percent | 80.04 | claude-sonnet-5.5 | `data/swe_tracks.json` `records[modelId=claude-sonnet-5-5, leaf=livebench2Overall].value` |
 | Claude Sonnet 5.5 (max) | GDPval-AA v2.1 | 1837.82 | Elo | 66.89 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=claude-sonnet-5-5].model.gdpval` |
 | Claude Sonnet 5.5 (max) | AutomationBench-AA | 0.7176882128193995 | fraction | 71.77 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=claude-sonnet-5-5].model.automationBenchPartialScore` |
 | Claude Sonnet 5.5 (max) | AA-Omniscience | 32.3 | AA Omniscience Index | 66.15 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=claude-sonnet-5-5].model.omniscience` |
@@ -39,8 +39,8 @@ Every input behind the published scores, with the artifact and locator that hold
 | GPT-6.1 Sol (max) | Bug Hunt Bench | 44.3 | bugs fixed of 105 | 42.19 | GPT-6.1 Sol (max effort) - mean of 3 | `data/bug_hunt.json` `models[modelId=gpt-6.1-sol].fixedOf105` |
 | GPT-6.1 Sol (max) | Vibe Code Bench v1.1 (Vals) | 88.931 | percent | 88.93 | openai/gpt-6.1-sol | `data/swe_tracks.json` `records[modelId=gpt-6.1-sol, leaf=vibeCode].value` |
 | GPT-6.1 Sol (max) | Code Migration v1.1 (Vals) | 77.324 | percent | 77.32 | openai/gpt-6.1-sol | `data/swe_tracks.json` `records[modelId=gpt-6.1-sol, leaf=codeMigration].value` |
-| GPT-6.1 Sol (max) | LiveBench 2.0 Overall | 85.41 | percent | 85.41 | gpt-6.1-sol | `data/swe_tracks.json` `records[modelId=gpt-6.1-sol, leaf=livebench2Overall].value` |
-| GPT-6.1 Sol (max) | GDPval-AA v2.1 | 1592.1 | Elo | 54.60 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=gpt-6-1-sol].model.gdpval` |
+| GPT-6.1 Sol (max) | LiveBench 2.0 Overall | 84.07 | percent | 84.07 | gpt-6.1-sol | `data/swe_tracks.json` `records[modelId=gpt-6.1-sol, leaf=livebench2Overall].value` |
+| GPT-6.1 Sol (max) | GDPval-AA v2.1 | 1596.2 | Elo | 54.81 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=gpt-6-1-sol].model.gdpval` |
 | GPT-6.1 Sol (max) | AutomationBench-AA | 0.6486844882398171 | fraction | 64.87 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=gpt-6-1-sol].model.automationBenchPartialScore` |
 | GPT-6.1 Sol (max) | AA-Omniscience | 41.53333333333333 | AA Omniscience Index | 70.77 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=gpt-6-1-sol].model.omniscience` |
 | GPT-6.1 Sol (max) | AA-LCR v1.1 | 0.83 | fraction | 83.00 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=gpt-6-1-sol].model.lcr` |
@@ -52,8 +52,8 @@ Every input behind the published scores, with the artifact and locator that hold
 | Claude Haiku 5.5 (max) | Bug Hunt Bench | 21.5 | bugs fixed of 105 | 20.48 | Haiku 5.5 (max effort) - mean of 2 | `data/bug_hunt.json` `models[modelId=claude-haiku-5-5-max].fixedOf105` |
 | Claude Haiku 5.5 (max) | Vibe Code Bench v1.1 (Vals) | 90.444 | percent | 90.44 | anthropic/claude-haiku-5-5 | `data/swe_tracks.json` `records[modelId=claude-haiku-5-5-max, leaf=vibeCode].value` |
 | Claude Haiku 5.5 (max) | Code Migration v1.1 (Vals) | 52.36 | percent | 52.36 | anthropic/claude-haiku-5-5 | `data/swe_tracks.json` `records[modelId=claude-haiku-5-5-max, leaf=codeMigration].value` |
-| Claude Haiku 5.5 (max) | LiveBench 2.0 Overall | 75.64 | percent | 75.64 | claude-haiku-5.5 | `data/swe_tracks.json` `records[modelId=claude-haiku-5-5-max, leaf=livebench2Overall].value` |
-| Claude Haiku 5.5 (max) | GDPval-AA v2.1 | 1617.13 | Elo | 55.86 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=claude-haiku-5-5].model.gdpval` |
+| Claude Haiku 5.5 (max) | LiveBench 2.0 Overall | 69.85 | percent | 69.85 | claude-haiku-5.5 | `data/swe_tracks.json` `records[modelId=claude-haiku-5-5-max, leaf=livebench2Overall].value` |
+| Claude Haiku 5.5 (max) | GDPval-AA v2.1 | 1619.32 | Elo | 55.97 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=claude-haiku-5-5].model.gdpval` |
 | Claude Haiku 5.5 (max) | AutomationBench-AA | 0.35411015132783624 | fraction | 35.41 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=claude-haiku-5-5].model.automationBenchPartialScore` |
 | Claude Haiku 5.5 (max) | AA-Omniscience | 10.666666666666666 | AA Omniscience Index | 55.33 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=claude-haiku-5-5].model.omniscience` |
 | Claude Haiku 5.5 (max) | AA-LCR v1.1 | 0.826666666666667 | fraction | 82.67 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=claude-haiku-5-5].model.lcr` |
@@ -65,8 +65,8 @@ Every input behind the published scores, with the artifact and locator that hold
 | GPT-6 Astra (max) | Bug Hunt Bench | 45.0 | bugs fixed of 105 | 42.86 | GPT-6 Astra (max effort) - mean of 3 | `data/bug_hunt.json` `models[modelId=gpt-6-astra].fixedOf105` |
 | GPT-6 Astra (max) | Vibe Code Bench v1.1 (Vals) | 89.594 | percent | 89.59 | openai/gpt-6-astra | `data/swe_tracks.json` `records[modelId=gpt-6-astra, leaf=vibeCode].value` |
 | GPT-6 Astra (max) | Code Migration v1.1 (Vals) | 80.579 | percent | 80.58 | openai/gpt-6-astra | `data/swe_tracks.json` `records[modelId=gpt-6-astra, leaf=codeMigration].value` |
-| GPT-6 Astra (max) | LiveBench 2.0 Overall | 86.14 | percent | 86.14 | gpt-6-astra | `data/swe_tracks.json` `records[modelId=gpt-6-astra, leaf=livebench2Overall].value` |
-| GPT-6 Astra (max) | GDPval-AA v2.1 | 1571.76 | Elo | 53.59 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=gpt-6-astra].model.gdpval` |
+| GPT-6 Astra (max) | LiveBench 2.0 Overall | 85.64 | percent | 85.64 | gpt-6-astra | `data/swe_tracks.json` `records[modelId=gpt-6-astra, leaf=livebench2Overall].value` |
+| GPT-6 Astra (max) | GDPval-AA v2.1 | 1574.46 | Elo | 53.72 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=gpt-6-astra].model.gdpval` |
 | GPT-6 Astra (max) | AutomationBench-AA | 0.6849174806688876 | fraction | 68.49 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=gpt-6-astra].model.automationBenchPartialScore` |
 | GPT-6 Astra (max) | AA-Omniscience | 43.4 | AA Omniscience Index | 71.70 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=gpt-6-astra].model.omniscience` |
 | GPT-6 Astra (max) | AA-LCR v1.1 | 0.806666666666667 | fraction | 80.67 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=gpt-6-astra].model.lcr` |
@@ -78,8 +78,8 @@ Every input behind the published scores, with the artifact and locator that hold
 | GPT-6 Luna (max) | Bug Hunt Bench | 18.3 | bugs fixed of 105 | 17.43 | GPT-6 Luna MAX - mean of 3 | `data/bug_hunt.json` `models[modelId=gpt-6-luna].fixedOf105` |
 | GPT-6 Luna (max) | Vibe Code Bench v1.1 (Vals) | 81.649 | percent | 81.65 | openai/gpt-6-luna | `data/swe_tracks.json` `records[modelId=gpt-6-luna, leaf=vibeCode].value` |
 | GPT-6 Luna (max) | Code Migration v1.1 (Vals) | 46.669 | percent | 46.67 | openai/gpt-6-luna | `data/swe_tracks.json` `records[modelId=gpt-6-luna, leaf=codeMigration].value` |
-| GPT-6 Luna (max) | LiveBench 2.0 Overall | 69.4 | percent | 69.40 | gpt-6-luna | `data/swe_tracks.json` `records[modelId=gpt-6-luna, leaf=livebench2Overall].value` |
-| GPT-6 Luna (max) | GDPval-AA v2.1 | 1431.02 | Elo | 46.55 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=gpt-6-luna].model.gdpval` |
+| GPT-6 Luna (max) | LiveBench 2.0 Overall | 64.59 | percent | 64.59 | gpt-6-luna | `data/swe_tracks.json` `records[modelId=gpt-6-luna, leaf=livebench2Overall].value` |
+| GPT-6 Luna (max) | GDPval-AA v2.1 | 1432.79 | Elo | 46.64 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=gpt-6-luna].model.gdpval` |
 | GPT-6 Luna (max) | AutomationBench-AA | 0.5316814034483175 | fraction | 53.17 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=gpt-6-luna].model.automationBenchPartialScore` |
 | GPT-6 Luna (max) | AA-Omniscience | 0.65 | AA Omniscience Index | 50.33 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=gpt-6-luna].model.omniscience` |
 | GPT-6 Luna (max) | AA-LCR v1.1 | 0.833333333333333 | fraction | 83.33 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=gpt-6-luna].model.lcr` |
@@ -91,7 +91,7 @@ Every input behind the published scores, with the artifact and locator that hold
 | DeepSeek V4.1 Flash 1017 (max) | Bug Hunt Bench | 42.7 | bugs fixed of 105 | 40.67 | DeepSeek V4.1 Flash 1017 (max effort, DeepSeek Harness) - mean of 7 | `data/bug_hunt.json` `models[modelId=deepseek-v4-1-flash-1017].fixedOf105` |
 | DeepSeek V4.1 Flash 1017 (max) | Vibe Code Bench v1.1 (Vals) | 87.73 | percent | 87.73 | deepseek/deepseek-v4.1-flash-1017 | `data/swe_tracks.json` `records[modelId=deepseek-v4-1-flash-1017, leaf=vibeCode].value` |
 | DeepSeek V4.1 Flash 1017 (max) | Code Migration v1.1 (Vals) | 67.524 | percent | 67.52 | deepseek/deepseek-v4.1-flash-1017 | `data/swe_tracks.json` `records[modelId=deepseek-v4-1-flash-1017, leaf=codeMigration].value` |
-| DeepSeek V4.1 Flash 1017 (max) | LiveBench 2.0 Overall | 79.2 | percent | 79.20 | deepseek-v4.1-flash-1017 | `data/swe_tracks.json` `records[modelId=deepseek-v4-1-flash-1017, leaf=livebench2Overall].value` |
+| DeepSeek V4.1 Flash 1017 (max) | LiveBench 2.0 Overall | 74.02 | percent | 74.02 | deepseek-v4.1-flash-1017 | `data/swe_tracks.json` `records[modelId=deepseek-v4-1-flash-1017, leaf=livebench2Overall].value` |
 | DeepSeek V4.1 Flash 1017 (max) | GDPval-AA v2.1 | 1745.77 | Elo | 62.29 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=deepseek-v4-1-flash-1017].model.gdpval` |
 | DeepSeek V4.1 Flash 1017 (max) | AutomationBench-AA | 0.6664095364949257 | fraction | 66.64 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=deepseek-v4-1-flash-1017].model.automationBenchPartialScore` |
 | DeepSeek V4.1 Flash 1017 (max) | AA-Omniscience | 4.7 | AA Omniscience Index | 52.35 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=deepseek-v4-1-flash-1017].model.omniscience` |
@@ -104,8 +104,8 @@ Every input behind the published scores, with the artifact and locator that hold
 | MiMo-V2.6-Pro | Bug Hunt Bench | 18 | bugs fixed of 105 | 17.14 | MiMo-V2.6-Pro (first-party, thinking enabled) | `data/bug_hunt.json` `models[modelId=mimo-v2-6-pro].fixedOf105` |
 | MiMo-V2.6-Pro | Vibe Code Bench v1.1 (Vals) | 85.223 | percent | 85.22 | xiaomi/mimo-v2.6-pro | `data/swe_tracks.json` `records[modelId=mimo-v2-6-pro, leaf=vibeCode].value` |
 | MiMo-V2.6-Pro | Code Migration v1.1 (Vals) | 48.786 | percent | 48.79 | xiaomi/mimo-v2.6-pro | `data/swe_tracks.json` `records[modelId=mimo-v2-6-pro, leaf=codeMigration].value` |
-| MiMo-V2.6-Pro | LiveBench 2.0 Overall | 74.87 | percent | 74.87 | mimo-v2.6-pro | `data/swe_tracks.json` `records[modelId=mimo-v2-6-pro, leaf=livebench2Overall].value` |
-| MiMo-V2.6-Pro | GDPval-AA v2.1 | 1683.29 | Elo | 59.16 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=mimo-v2-6-pro].model.gdpval` |
+| MiMo-V2.6-Pro | LiveBench 2.0 Overall | 68.48 | percent | 68.48 | mimo-v2.6-pro | `data/swe_tracks.json` `records[modelId=mimo-v2-6-pro, leaf=livebench2Overall].value` |
+| MiMo-V2.6-Pro | GDPval-AA v2.1 | 1683.02 | Elo | 59.15 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=mimo-v2-6-pro].model.gdpval` |
 | MiMo-V2.6-Pro | AutomationBench-AA | 0.5862340943419085 | fraction | 58.62 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=mimo-v2-6-pro].model.automationBenchPartialScore` |
 | MiMo-V2.6-Pro | AA-Omniscience | 8.383333333333333 | AA Omniscience Index | 54.19 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=mimo-v2-6-pro].model.omniscience` |
 | MiMo-V2.6-Pro | AA-LCR v1.1 | 0.863333333333333 | fraction | 86.33 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=mimo-v2-6-pro].model.lcr` |
@@ -117,8 +117,8 @@ Every input behind the published scores, with the artifact and locator that hold
 | Gemini 4 Argon (high) | Bug Hunt Bench | 40.7 | bugs fixed of 105 | 38.76 | Gemini 4 Argon (high effort, Antigravity CLI) - mean of 3 | `data/bug_hunt.json` `models[modelId=gemini-4-argon].fixedOf105` |
 | Gemini 4 Argon (high) | Vibe Code Bench v1.1 (Vals) | 91.906 | percent | 91.91 | google/gemini-4-argon | `data/swe_tracks.json` `records[modelId=gemini-4-argon, leaf=vibeCode].value` |
 | Gemini 4 Argon (high) | Code Migration v1.1 (Vals) | 70.796 | percent | 70.80 | google/gemini-4-argon | `data/swe_tracks.json` `records[modelId=gemini-4-argon, leaf=codeMigration].value` |
-| Gemini 4 Argon (high) | LiveBench 2.0 Overall | 84.1 | percent | 84.10 | gemini-4-argon | `data/swe_tracks.json` `records[modelId=gemini-4-argon, leaf=livebench2Overall].value` |
-| Gemini 4 Argon (high) | GDPval-AA v2.1 | 1623.11 | Elo | 56.16 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=gemini-4-argon].model.gdpval` |
+| Gemini 4 Argon (high) | LiveBench 2.0 Overall | 79.3 | percent | 79.30 | gemini-4-argon | `data/swe_tracks.json` `records[modelId=gemini-4-argon, leaf=livebench2Overall].value` |
+| Gemini 4 Argon (high) | GDPval-AA v2.1 | 1624.1 | Elo | 56.20 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=gemini-4-argon].model.gdpval` |
 | Gemini 4 Argon (high) | AutomationBench-AA | 0.7751346945899195 | fraction | 77.51 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=gemini-4-argon].model.automationBenchPartialScore` |
 | Gemini 4 Argon (high) | AA-Omniscience | 42.35 | AA Omniscience Index | 71.17 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=gemini-4-argon].model.omniscience` |
 | Gemini 4 Argon (high) | AA-LCR v1.1 | 0.796666666666667 | fraction | 79.67 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=gemini-4-argon].model.lcr` |
@@ -129,7 +129,7 @@ Every input behind the published scores, with the artifact and locator that hold
 | Claude Opus 5.5 (high) | Terminal-Bench 4.0 (AA run) | 56.565656565656596 | percent | 56.57 | mini-SWE-agent | `data/aa/aa_v432_snapshot.json` `pages[model.slug=claude-opus-5-5-high].model.terminalBench40` |
 | Claude Opus 5.5 (high) | Bug Hunt Bench | 31.7 | bugs fixed of 105 | 30.19 | Opus 5.5 (high effort) - mean of 3 | `data/bug_hunt.json` `models[modelId=claude-opus-5-5-high].fixedOf105` |
 | Claude Opus 5.5 (high) | AI Coding Daily (excl. bug finding) | 57.68 | points of 60 | 96.13 | Opus 5.5 (High) | `data/swe_tracks.json` `records[modelId=claude-opus-5-5-high, leaf=aiCodingDaily].value` |
-| Claude Opus 5.5 (high) | GDPval-AA v2.1 | 1703.4 | Elo | 60.17 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=claude-opus-5-5-high].model.gdpval` |
+| Claude Opus 5.5 (high) | GDPval-AA v2.1 | 1703.59 | Elo | 60.18 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=claude-opus-5-5-high].model.gdpval` |
 | Claude Opus 5.5 (high) | AutomationBench-AA | 0.6320677483186213 | fraction | 63.21 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=claude-opus-5-5-high].model.automationBenchPartialScore` |
 | Claude Opus 5.5 (high) | AA-Omniscience | 40.63333333333333 | AA Omniscience Index | 70.32 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=claude-opus-5-5-high].model.omniscience` |
 | Claude Opus 5.5 (high) | AA-LCR v1.1 | 0.826666666666667 | fraction | 82.67 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=claude-opus-5-5-high].model.lcr` |
@@ -140,7 +140,7 @@ Every input behind the published scores, with the artifact and locator that hold
 | Claude Opus 5.5 (medium) | Terminal-Bench 4.0 (AA run) | 52.5252525252525 | percent | 52.53 | mini-SWE-agent | `data/aa/aa_v432_snapshot.json` `pages[model.slug=claude-opus-5-5-medium].model.terminalBench40` |
 | Claude Opus 5.5 (medium) | Bug Hunt Bench | 30.3 | bugs fixed of 105 | 28.86 | Opus 5.5 (medium effort) - mean of 3 | `data/bug_hunt.json` `models[modelId=claude-opus-5-5-medium].fixedOf105` |
 | Claude Opus 5.5 (medium) | AI Coding Daily (excl. bug finding) | 56.95 | points of 60 | 94.92 | Opus 5.5 (Medium) | `data/swe_tracks.json` `records[modelId=claude-opus-5-5-medium, leaf=aiCodingDaily].value` |
-| Claude Opus 5.5 (medium) | GDPval-AA v2.1 | 1582.9 | Elo | 54.15 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=claude-opus-5-5-medium].model.gdpval` |
+| Claude Opus 5.5 (medium) | GDPval-AA v2.1 | 1585.07 | Elo | 54.25 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=claude-opus-5-5-medium].model.gdpval` |
 | Claude Opus 5.5 (medium) | AutomationBench-AA | 0.6121742919892179 | fraction | 61.22 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=claude-opus-5-5-medium].model.automationBenchPartialScore` |
 | Claude Opus 5.5 (medium) | AA-Omniscience | 40.31666666666667 | AA Omniscience Index | 70.16 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=claude-opus-5-5-medium].model.omniscience` |
 | Claude Opus 5.5 (medium) | AA-LCR v1.1 | 0.843333333333333 | fraction | 84.33 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=claude-opus-5-5-medium].model.lcr` |
@@ -151,7 +151,7 @@ Every input behind the published scores, with the artifact and locator that hold
 | GPT-6.1 Sol (high) | Terminal-Bench 4.0 (AA run) | 51.5151515151515 | percent | 51.52 | mini-SWE-agent | `data/aa/aa_v432_snapshot.json` `pages[model.slug=gpt-6-1-sol-high].model.terminalBench40` |
 | GPT-6.1 Sol (high) | Bug Hunt Bench | 36.5 | bugs fixed of 105 | 34.76 | GPT-6.1 Sol (high effort) - mean of 2 | `data/bug_hunt.json` `models[modelId=gpt-6.1-sol-high].fixedOf105` |
 | GPT-6.1 Sol (high) | AI Coding Daily (excl. bug finding) | 56.83 | points of 60 | 94.72 | GPT-6.1-Sol (High) | `data/swe_tracks.json` `records[modelId=gpt-6.1-sol-high, leaf=aiCodingDaily].value` |
-| GPT-6.1 Sol (high) | GDPval-AA v2.1 | 1508.57 | Elo | 50.43 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=gpt-6-1-sol-high].model.gdpval` |
+| GPT-6.1 Sol (high) | GDPval-AA v2.1 | 1512.41 | Elo | 50.62 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=gpt-6-1-sol-high].model.gdpval` |
 | GPT-6.1 Sol (high) | AutomationBench-AA | 0.6449523732184466 | fraction | 64.50 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=gpt-6-1-sol-high].model.automationBenchPartialScore` |
 | GPT-6.1 Sol (high) | AA-Omniscience | 41.45 | AA Omniscience Index | 70.72 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=gpt-6-1-sol-high].model.omniscience` |
 | GPT-6.1 Sol (high) | AA-LCR v1.1 | 0.823333333333333 | fraction | 82.33 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=gpt-6-1-sol-high].model.lcr` |
@@ -162,7 +162,7 @@ Every input behind the published scores, with the artifact and locator that hold
 | GPT-6.1 Sol (medium) | Terminal-Bench 4.0 (AA run) | 47.979797979798 | percent | 47.98 | mini-SWE-agent | `data/aa/aa_v432_snapshot.json` `pages[model.slug=gpt-6-1-sol-medium].model.terminalBench40` |
 | GPT-6.1 Sol (medium) | Bug Hunt Bench | 29.0 | bugs fixed of 105 | 27.62 | GPT-6.1 Sol (medium effort) - mean of 2 | `data/bug_hunt.json` `models[modelId=gpt-6.1-sol-medium].fixedOf105` |
 | GPT-6.1 Sol (medium) | AI Coding Daily (excl. bug finding) | 55.67 | points of 60 | 92.78 | GPT-6.1-Sol (Medium) | `data/swe_tracks.json` `records[modelId=gpt-6.1-sol-medium, leaf=aiCodingDaily].value` |
-| GPT-6.1 Sol (medium) | GDPval-AA v2.1 | 1448.5 | Elo | 47.42 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=gpt-6-1-sol-medium].model.gdpval` |
+| GPT-6.1 Sol (medium) | GDPval-AA v2.1 | 1450.23 | Elo | 47.51 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=gpt-6-1-sol-medium].model.gdpval` |
 | GPT-6.1 Sol (medium) | AutomationBench-AA | 0.6257350970435687 | fraction | 62.57 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=gpt-6-1-sol-medium].model.automationBenchPartialScore` |
 | GPT-6.1 Sol (medium) | AA-Omniscience | 39.95 | AA Omniscience Index | 69.97 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=gpt-6-1-sol-medium].model.omniscience` |
 | GPT-6.1 Sol (medium) | AA-LCR v1.1 | 0.833333333333333 | fraction | 83.33 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=gpt-6-1-sol-medium].model.lcr` |
@@ -173,41 +173,52 @@ Every input behind the published scores, with the artifact and locator that hold
 | Claude Haiku 5.5 (high) | Terminal-Bench 4.0 (AA run) | 21.7171717171717 | percent | 21.72 | mini-SWE-agent | `data/aa/aa_v432_snapshot.json` `pages[model.slug=claude-haiku-5-5-high].model.terminalBench40` |
 | Claude Haiku 5.5 (high) | Bug Hunt Bench | 16.0 | bugs fixed of 105 | 15.24 | Haiku 5.5 (high effort) - mean of 2 | `data/bug_hunt.json` `models[modelId=claude-haiku-5-5-high].fixedOf105` |
 | Claude Haiku 5.5 (high) | AI Coding Daily (excl. bug finding) | 51.55 | points of 60 | 85.92 | Haiku 5.5 (High) | `data/swe_tracks.json` `records[modelId=claude-haiku-5-5-high, leaf=aiCodingDaily].value` |
-| Claude Haiku 5.5 (high) | GDPval-AA v2.1 | 1415.97 | Elo | 45.80 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=claude-haiku-5-5-high].model.gdpval` |
+| Claude Haiku 5.5 (high) | GDPval-AA v2.1 | 1416.46 | Elo | 45.82 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=claude-haiku-5-5-high].model.gdpval` |
 | Claude Haiku 5.5 (high) | AutomationBench-AA | 0.3372685311767238 | fraction | 33.73 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=claude-haiku-5-5-high].model.automationBenchPartialScore` |
 | Claude Haiku 5.5 (high) | AA-Omniscience | 5.75 | AA Omniscience Index | 52.88 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=claude-haiku-5-5-high].model.omniscience` |
 | Claude Haiku 5.5 (high) | AA-LCR v1.1 | 0.773333333333333 | fraction | 77.33 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=claude-haiku-5-5-high].model.lcr` |
 | Claude Haiku 5.5 (high) | Humanity's Last Exam | 0.3725671918443 | fraction | 37.26 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=claude-haiku-5-5-high].model.hle` |
 | Claude Haiku 5.5 (high) | SciCode | 0.487268518518519 | fraction | 48.73 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=claude-haiku-5-5-high].model.scicode` |
 | Claude Haiku 5.5 (high) | CritPt | 0.185714285714286 | fraction | 18.57 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=claude-haiku-5-5-high].model.critpt` |
-| Claude Haiku 5.5 (medium) | FrontierCode 1.1 | 0.404265666666667 | fraction | 40.43 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=claude-haiku-5-5-medium].model.frontierCode` |
-| Claude Haiku 5.5 (medium) | Terminal-Bench 4.0 (AA run) | 15.151515151515198 | percent | 15.15 | mini-SWE-agent | `data/aa/aa_v432_snapshot.json` `pages[model.slug=claude-haiku-5-5-medium].model.terminalBench40` |
-| Claude Haiku 5.5 (medium) | Bug Hunt Bench | 12.0 | bugs fixed of 105 | 11.43 | Haiku 5.5 (medium effort) | `data/bug_hunt.json` `models[modelId=claude-haiku-5-5-medium].fixedOf105` |
-| Claude Haiku 5.5 (medium) | AI Coding Daily (excl. bug finding) | 51.32 | points of 60 | 85.53 | Haiku 5.5 (Medium) | `data/swe_tracks.json` `records[modelId=claude-haiku-5-5-medium, leaf=aiCodingDaily].value` |
-| Claude Haiku 5.5 (medium) | GDPval-AA v2.1 | 1272.78 | Elo | 38.64 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=claude-haiku-5-5-medium].model.gdpval` |
-| Claude Haiku 5.5 (medium) | AutomationBench-AA | 0.2858961481429316 | fraction | 28.59 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=claude-haiku-5-5-medium].model.automationBenchPartialScore` |
-| Claude Haiku 5.5 (medium) | AA-Omniscience | 4.466666666666667 | AA Omniscience Index | 52.23 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=claude-haiku-5-5-medium].model.omniscience` |
-| Claude Haiku 5.5 (medium) | AA-LCR v1.1 | 0.773333333333333 | fraction | 77.33 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=claude-haiku-5-5-medium].model.lcr` |
-| Claude Haiku 5.5 (medium) | Humanity's Last Exam | 0.337812789620019 | fraction | 33.78 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=claude-haiku-5-5-medium].model.hle` |
-| Claude Haiku 5.5 (medium) | SciCode | 0.489583333333333 | fraction | 48.96 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=claude-haiku-5-5-medium].model.scicode` |
-| Claude Haiku 5.5 (medium) | CritPt | 0.128571428571429 | fraction | 12.86 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=claude-haiku-5-5-medium].model.critpt` |
 | GPT-6 Astra (high) | FrontierCode 1.1 | 0.5094 | fraction | 50.94 | GPT-6 Astra (high), harness codex | `data/cognition_frontiercode.json` `v1_1.data['GPT-6 Astra'].high.main.new_score` |
 | GPT-6 Astra (high) | Terminal-Bench 4.0 (AA run) | 54.040404040404 | percent | 54.04 | mini-SWE-agent | `data/aa/aa_v432_snapshot.json` `pages[model.slug=gpt-6-astra-high].model.terminalBench40` |
 | GPT-6 Astra (high) | Bug Hunt Bench | 35.0 | bugs fixed of 105 | 33.33 | GPT-6 Astra (high effort) | `data/bug_hunt.json` `models[modelId=gpt-6-astra-high].fixedOf105` |
 | GPT-6 Astra (high) | AI Coding Daily (excl. bug finding) | 56.77 | points of 60 | 94.62 | GPT-6-Astra (High) | `data/swe_tracks.json` `records[modelId=gpt-6-astra-high, leaf=aiCodingDaily].value` |
-| GPT-6 Astra (high) | GDPval-AA v2.1 | 1522.36 | Elo | 51.12 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=gpt-6-astra-high].model.gdpval` |
+| GPT-6 Astra (high) | GDPval-AA v2.1 | 1524.88 | Elo | 51.24 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=gpt-6-astra-high].model.gdpval` |
 | GPT-6 Astra (high) | AutomationBench-AA | 0.666122174975011 | fraction | 66.61 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=gpt-6-astra-high].model.automationBenchPartialScore` |
 | GPT-6 Astra (high) | AA-Omniscience | 43.733333333333334 | AA Omniscience Index | 71.87 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=gpt-6-astra-high].model.omniscience` |
 | GPT-6 Astra (high) | AA-LCR v1.1 | 0.8 | fraction | 80.00 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=gpt-6-astra-high].model.lcr` |
 | GPT-6 Astra (high) | Humanity's Last Exam | 0.530583873957368 | fraction | 53.06 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=gpt-6-astra-high].model.hle` |
 | GPT-6 Astra (high) | SciCode | 0.554398148148148 | fraction | 55.44 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=gpt-6-astra-high].model.scicode` |
 | GPT-6 Astra (high) | CritPt | 0.288571428571429 | fraction | 28.86 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=gpt-6-astra-high].model.critpt` |
+| Claude Haiku 5.5 (medium) | FrontierCode 1.1 | 0.404265666666667 | fraction | 40.43 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=claude-haiku-5-5-medium].model.frontierCode` |
+| Claude Haiku 5.5 (medium) | Terminal-Bench 4.0 (AA run) | 15.151515151515198 | percent | 15.15 | mini-SWE-agent | `data/aa/aa_v432_snapshot.json` `pages[model.slug=claude-haiku-5-5-medium].model.terminalBench40` |
+| Claude Haiku 5.5 (medium) | Bug Hunt Bench | 12.0 | bugs fixed of 105 | 11.43 | Haiku 5.5 (medium effort) | `data/bug_hunt.json` `models[modelId=claude-haiku-5-5-medium].fixedOf105` |
+| Claude Haiku 5.5 (medium) | AI Coding Daily (excl. bug finding) | 51.32 | points of 60 | 85.53 | Haiku 5.5 (Medium) | `data/swe_tracks.json` `records[modelId=claude-haiku-5-5-medium, leaf=aiCodingDaily].value` |
+| Claude Haiku 5.5 (medium) | GDPval-AA v2.1 | 1275.13 | Elo | 38.76 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=claude-haiku-5-5-medium].model.gdpval` |
+| Claude Haiku 5.5 (medium) | AutomationBench-AA | 0.2858961481429316 | fraction | 28.59 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=claude-haiku-5-5-medium].model.automationBenchPartialScore` |
+| Claude Haiku 5.5 (medium) | AA-Omniscience | 4.466666666666667 | AA Omniscience Index | 52.23 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=claude-haiku-5-5-medium].model.omniscience` |
+| Claude Haiku 5.5 (medium) | AA-LCR v1.1 | 0.773333333333333 | fraction | 77.33 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=claude-haiku-5-5-medium].model.lcr` |
+| Claude Haiku 5.5 (medium) | Humanity's Last Exam | 0.337812789620019 | fraction | 33.78 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=claude-haiku-5-5-medium].model.hle` |
+| Claude Haiku 5.5 (medium) | SciCode | 0.489583333333333 | fraction | 48.96 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=claude-haiku-5-5-medium].model.scicode` |
+| Claude Haiku 5.5 (medium) | CritPt | 0.128571428571429 | fraction | 12.86 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=claude-haiku-5-5-medium].model.critpt` |
 | GPT-6 Luna (max) | AI Coding Daily (excl. bug finding) | 51.99 | points of 60 | 86.65 | GPT-6-Luna (Max) | `data/swe_tracks.json` `records[modelId=gpt-6-luna, leaf=aiCodingDaily].value` |
+| Kimi K3.1 Pro | FrontierCode 1.1 | 0.470664 | fraction | 47.07 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=kimi-k3-1-pro].model.frontierCode` |
+| Kimi K3.1 Pro | Terminal-Bench 4.0 (AA run) | 67.1717171717172 | percent | 67.17 | mini-SWE-agent | `data/aa/aa_v432_snapshot.json` `pages[model.slug=kimi-k3-1-pro].model.terminalBench40` |
+| Kimi K3.1 Pro | Bug Hunt Bench | 36.0 | bugs fixed of 105 | 34.29 | Kimi K3.1 Pro (max effort, Moonshot API) - mean of 3 | `data/bug_hunt.json` `models[modelId=kimi-k3-1-pro].fixedOf105` |
+| Kimi K3.1 Pro | AI Coding Daily (excl. bug finding) | 54.63 | points of 60 | 91.05 | Kimi K3.1 Pro (Max) | `data/swe_tracks.json` `records[modelId=kimi-k3-1-pro, leaf=aiCodingDaily].value` |
+| Kimi K3.1 Pro | GDPval-AA v2.1 | 1845.72 | Elo | 67.29 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=kimi-k3-1-pro].model.gdpval` |
+| Kimi K3.1 Pro | AutomationBench-AA | 0.7329771090921112 | fraction | 73.30 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=kimi-k3-1-pro].model.automationBenchPartialScore` |
+| Kimi K3.1 Pro | AA-Omniscience | 29.516666666666666 | AA Omniscience Index | 64.76 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=kimi-k3-1-pro].model.omniscience` |
+| Kimi K3.1 Pro | AA-LCR v1.1 | 0.863333333333333 | fraction | 86.33 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=kimi-k3-1-pro].model.lcr` |
+| Kimi K3.1 Pro | Humanity's Last Exam | 0.524559777571826 | fraction | 52.46 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=kimi-k3-1-pro].model.hle` |
+| Kimi K3.1 Pro | SciCode | 0.607638888888889 | fraction | 60.76 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=kimi-k3-1-pro].model.scicode` |
+| Kimi K3.1 Pro | CritPt | 0.245714285714286 | fraction | 24.57 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=kimi-k3-1-pro].model.critpt` |
 | GPT-6 Luna (xhigh) | FrontierCode 1.1 | 0.332155333333333 | fraction | 33.22 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=gpt-6-luna-xhigh].model.frontierCode` |
 | GPT-6 Luna (xhigh) | Terminal-Bench 4.0 (AA run) | 8.08080808080808 | percent | 8.08 | mini-SWE-agent | `data/aa/aa_v432_snapshot.json` `pages[model.slug=gpt-6-luna-xhigh].model.terminalBench40` |
 | GPT-6 Luna (xhigh) | Bug Hunt Bench | 14.0 | bugs fixed of 105 | 13.33 | GPT-6 Luna (xhigh effort) | `data/bug_hunt.json` `models[modelId=gpt-6-luna-xhigh].fixedOf105` |
 | GPT-6 Luna (xhigh) | AI Coding Daily (excl. bug finding) | 49.94 | points of 60 | 83.23 | GPT-6-Luna (Xhigh) | `data/swe_tracks.json` `records[modelId=gpt-6-luna-xhigh, leaf=aiCodingDaily].value` |
-| GPT-6 Luna (xhigh) | GDPval-AA v2.1 | 1362.25 | Elo | 43.11 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=gpt-6-luna-xhigh].model.gdpval` |
+| GPT-6 Luna (xhigh) | GDPval-AA v2.1 | 1363.44 | Elo | 43.17 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=gpt-6-luna-xhigh].model.gdpval` |
 | GPT-6 Luna (xhigh) | AutomationBench-AA | 0.47800686767566575 | fraction | 47.80 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=gpt-6-luna-xhigh].model.automationBenchPartialScore` |
 | GPT-6 Luna (xhigh) | AA-Omniscience | -1.8333333333333333 | AA Omniscience Index | 49.08 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=gpt-6-luna-xhigh].model.omniscience` |
 | GPT-6 Luna (xhigh) | AA-LCR v1.1 | 0.8 | fraction | 80.00 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=gpt-6-luna-xhigh].model.lcr` |
@@ -221,7 +232,7 @@ Every input behind the published scores, with the artifact and locator that hold
 | GPT-6 Luna (high) | Terminal-Bench 4.0 (AA run) | 4.545454545454549 | percent | 4.55 | mini-SWE-agent | `data/aa/aa_v432_snapshot.json` `pages[model.slug=gpt-6-luna-high].model.terminalBench40` |
 | GPT-6 Luna (high) | Bug Hunt Bench | 9.0 | bugs fixed of 105 | 8.57 | GPT-6 Luna (high effort) | `data/bug_hunt.json` `models[modelId=gpt-6-luna-high].fixedOf105` |
 | GPT-6 Luna (high) | AI Coding Daily (excl. bug finding) | 47.73 | points of 60 | 79.55 | GPT-6-Luna (High) | `data/swe_tracks.json` `records[modelId=gpt-6-luna-high, leaf=aiCodingDaily].value` |
-| GPT-6 Luna (high) | GDPval-AA v2.1 | 1339.36 | Elo | 41.97 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=gpt-6-luna-high].model.gdpval` |
+| GPT-6 Luna (high) | GDPval-AA v2.1 | 1342.92 | Elo | 42.15 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=gpt-6-luna-high].model.gdpval` |
 | GPT-6 Luna (high) | AutomationBench-AA | 0.4782449139916615 | fraction | 47.82 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=gpt-6-luna-high].model.automationBenchPartialScore` |
 | GPT-6 Luna (high) | AA-Omniscience | -5.5 | AA Omniscience Index | 47.25 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=gpt-6-luna-high].model.omniscience` |
 | GPT-6 Luna (high) | AA-LCR v1.1 | 0.793333333333333 | fraction | 79.33 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=gpt-6-luna-high].model.lcr` |
@@ -232,7 +243,7 @@ Every input behind the published scores, with the artifact and locator that hold
 | GPT-6 Luna (medium) | Terminal-Bench 4.0 (AA run) | 2.52525252525253 | percent | 2.53 | mini-SWE-agent | `data/aa/aa_v432_snapshot.json` `pages[model.slug=gpt-6-luna-medium].model.terminalBench40` |
 | GPT-6 Luna (medium) | Bug Hunt Bench | 4.0 | bugs fixed of 105 | 3.81 | GPT-6 Luna (medium effort) | `data/bug_hunt.json` `models[modelId=gpt-6-luna-medium].fixedOf105` |
 | GPT-6 Luna (medium) | AI Coding Daily (excl. bug finding) | 40.2 | points of 60 | 67.00 | GPT-6-Luna (Medium) | `data/swe_tracks.json` `records[modelId=gpt-6-luna-medium, leaf=aiCodingDaily].value` |
-| GPT-6 Luna (medium) | GDPval-AA v2.1 | 1261.32 | Elo | 38.07 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=gpt-6-luna-medium].model.gdpval` |
+| GPT-6 Luna (medium) | GDPval-AA v2.1 | 1262.61 | Elo | 38.13 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=gpt-6-luna-medium].model.gdpval` |
 | GPT-6 Luna (medium) | AutomationBench-AA | 0.4046136879135791 | fraction | 40.46 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=gpt-6-luna-medium].model.automationBenchPartialScore` |
 | GPT-6 Luna (medium) | AA-Omniscience | -5.05 | AA Omniscience Index | 47.48 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=gpt-6-luna-medium].model.omniscience` |
 | GPT-6 Luna (medium) | AA-LCR v1.1 | 0.783333333333333 | fraction | 78.33 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=gpt-6-luna-medium].model.lcr` |
@@ -243,7 +254,7 @@ Every input behind the published scores, with the artifact and locator that hold
 | GPT-5.6 Luna (low) | Terminal-Bench 4.0 (AA run) | 0.0 | percent | 0.00 | mini-SWE-agent | `data/aa/aa_v432_snapshot.json` `pages[model.slug=gpt-5-6-luna-low].model.terminalBench40` |
 | GPT-5.6 Luna (low) | Bug Hunt Bench | 4.0 | bugs fixed of 105 | 3.81 | GPT-5.6 Luna (low effort) | `data/bug_hunt.json` `models[modelId=gpt-5.6-luna-low].fixedOf105` |
 | GPT-5.6 Luna (low) | AI Coding Daily (excl. bug finding) | 30.51 | points of 60 | 50.85 | GPT-5.6-Luna (Low) | `data/swe_tracks.json` `records[modelId=gpt-5.6-luna-low, leaf=aiCodingDaily].value` |
-| GPT-5.6 Luna (low) | GDPval-AA v2.1 | 992.25 | Elo | 24.61 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=gpt-5-6-luna-low].model.gdpval` |
+| GPT-5.6 Luna (low) | GDPval-AA v2.1 | 994.2 | Elo | 24.71 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=gpt-5-6-luna-low].model.gdpval` |
 | GPT-5.6 Luna (low) | AutomationBench-AA | 0.11692162258271627 | fraction | 11.69 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=gpt-5-6-luna-low].model.automationBenchPartialScore` |
 | GPT-5.6 Luna (low) | AA-Omniscience | -14.65 | AA Omniscience Index | 42.67 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=gpt-5-6-luna-low].model.omniscience` |
 | GPT-5.6 Luna (low) | AA-LCR v1.1 | 0.7 | fraction | 70.00 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=gpt-5-6-luna-low].model.lcr` |
@@ -266,80 +277,81 @@ Exhaustive searches for the leaves a cohort configuration still lacks (each with
 | Grok 4.6 (xhigh) | FrontierCode 1.1 | 2026-10-21 | not found | 7 | 2026-10-23: 8 queries, 6 candidates (0 registered, 6 rejected) | xAI publishes FrontierCode v1.1 Extended 61.3% for Grok 4.6 at High effort only; xhigh appears nowhere. Cognition and its relays list Grok 4.6 at high effort (Main 48.0%). No exact-effort (xhigh) score exists; efforts are not transferred. |
 | DeepSeek V4 Flash | FrontierCode 1.1 | 2026-10-21 | not found | 8 | 2026-10-23: 7 queries, 5 candidates (0 registered, 5 rejected) | DeepSeek's model card and release note publish no FrontierCode result. Cognition (relayed by codingfleet) lists DeepSeek V4 Flash 0731 at high effort only (18.8%); AA's 44% is DeepSeek V4.1 Flash, a different version. No max-effort score exists. |
 | MiniMax-M3.1-Flash | Bug Hunt Bench | 2026-10-23 | not found | 5 | 2026-10-23: 7 queries, 6 candidates (0 registered, 6 rejected) | Bug Hunt Bench's owner has published no MiniMax-M3.1-Flash run (the model was released 2026-10-19, the board and repo main date from 2026-10-19 12:02 CEST). The provider's launch post and model card carry no Bug Hunt Bench result, so the last-resort provider fill does not exist either. No other party reports a Bug Hunt score for this model: BenchLM shows 'Coming soon'. The repo's only MiniMax files are M2.7 effort-dial probes, a different model version. Limitation: the GitHub API was not reachable for this session (repository not enabled), so open issues or pull requests in the repo could not be listed; the pinned commit's files and the site's benchmark.json were inspected directly. Repeat the search on the next refresh. |
-| Claude Haiku 5.5 | Vibe Code Bench v1.1 (Vals) | 2026-10-23 | not found | 1 | 2026-10-23: 4 queries, 0 candidates (0 registered, 0 rejected) | Vals ran this model only at max (90.444), not xhigh; not transferred. |
-| Claude Haiku 5.5 (high) | Vibe Code Bench v1.1 (Vals) | 2026-10-23 | not found | 1 | 2026-10-23: 4 queries, 0 candidates (0 registered, 0 rejected) | Vals ran this model only at max (90.444), not high; not transferred. |
-| Claude Haiku 5.5 (low) | Vibe Code Bench v1.1 (Vals) | 2026-10-23 | not found | 1 | 2026-10-23: 4 queries, 0 candidates (0 registered, 0 rejected) | Vals ran this model only at max (90.444), not low; not transferred. |
-| Claude Haiku 5.5 (medium) | Vibe Code Bench v1.1 (Vals) | 2026-10-23 | not found | 1 | 2026-10-23: 4 queries, 0 candidates (0 registered, 0 rejected) | Vals ran this model only at max (90.444), not medium; not transferred. |
-| Claude Opus 5.5 (high) | Vibe Code Bench v1.1 (Vals) | 2026-10-23 | not found | 1 | 2026-10-23: 4 queries, 0 candidates (0 registered, 0 rejected) | Vals ran this model only at max (90.294), not high; not transferred. |
-| Claude Opus 5.5 (medium) | Vibe Code Bench v1.1 (Vals) | 2026-10-23 | not found | 1 | 2026-10-23: 4 queries, 0 candidates (0 registered, 0 rejected) | Vals ran this model only at max (90.294), not medium; not transferred. |
-| Claude Opus 5.5 (xhigh) | Vibe Code Bench v1.1 (Vals) | 2026-10-23 | not found | 1 | 2026-10-23: 4 queries, 0 candidates (0 registered, 0 rejected) | Vals ran this model only at max (90.294), not xhigh; not transferred. |
-| Claude Sonnet 5.5 (xhigh) | Vibe Code Bench v1.1 (Vals) | 2026-10-23 | not found | 1 | 2026-10-23: 4 queries, 0 candidates (0 registered, 0 rejected) | Vals ran this model only at max (92.392), not xhigh; not transferred. |
-| GPT-5.6 Luna (low) | Vibe Code Bench v1.1 (Vals) | 2026-10-23 | not found | 1 | 2026-10-23: 4 queries, 0 candidates (0 registered, 0 rejected) | Vals ran this model only at max (77.055), not low; not transferred. |
-| GPT-6 Astra (high) | Vibe Code Bench v1.1 (Vals) | 2026-10-23 | not found | 1 | 2026-10-23: 4 queries, 0 candidates (0 registered, 0 rejected) | Vals ran this model only at max (89.594), not high; not transferred. |
-| GPT-6 Astra (xhigh) | Vibe Code Bench v1.1 (Vals) | 2026-10-23 | not found | 1 | 2026-10-23: 4 queries, 0 candidates (0 registered, 0 rejected) | Vals ran this model only at max (89.594), not xhigh; not transferred. |
-| GPT-6 Luna (high) | Vibe Code Bench v1.1 (Vals) | 2026-10-23 | not found | 1 | 2026-10-23: 4 queries, 0 candidates (0 registered, 0 rejected) | Vals ran this model only at max (81.649), not high; not transferred. |
-| GPT-6 Luna (low) | Vibe Code Bench v1.1 (Vals) | 2026-10-23 | not found | 1 | 2026-10-23: 4 queries, 0 candidates (0 registered, 0 rejected) | Vals ran this model only at max (81.649), not low; not transferred. |
-| GPT-6 Luna (medium) | Vibe Code Bench v1.1 (Vals) | 2026-10-23 | not found | 1 | 2026-10-23: 4 queries, 0 candidates (0 registered, 0 rejected) | Vals ran this model only at max (81.649), not medium; not transferred. |
-| GPT-6 Luna (xhigh) | Vibe Code Bench v1.1 (Vals) | 2026-10-23 | not found | 1 | 2026-10-23: 4 queries, 0 candidates (0 registered, 0 rejected) | Vals ran this model only at max (81.649), not xhigh; not transferred. |
-| GPT-6.1 Sol (high) | Vibe Code Bench v1.1 (Vals) | 2026-10-23 | not found | 1 | 2026-10-23: 4 queries, 0 candidates (0 registered, 0 rejected) | Vals ran this model only at max (88.931), not high; not transferred. |
-| GPT-6.1 Sol (medium) | Vibe Code Bench v1.1 (Vals) | 2026-10-23 | not found | 1 | 2026-10-23: 4 queries, 0 candidates (0 registered, 0 rejected) | Vals ran this model only at max (88.931), not medium; not transferred. |
-| GPT-6.1 Sol (xhigh) | Vibe Code Bench v1.1 (Vals) | 2026-10-23 | not found | 1 | 2026-10-23: 4 queries, 0 candidates (0 registered, 0 rejected) | Vals ran this model only at max (88.931), not xhigh; not transferred. |
-| MiMo-V2.6-Flash | Vibe Code Bench v1.1 (Vals) | 2026-10-23 | not found | 1 | 2026-10-23: 4 queries, 1 candidates (0 registered, 1 rejected) | AA plots this model in reasoning mode with no effort label; Vals effort recorded as null (not stated). Vals model page: evaluated 'with reasoning enabled'. |
-| MiniMax-M3.1-Flash | Vibe Code Bench v1.1 (Vals) | 2026-10-23 | not found | 1 | 2026-10-23: 4 queries, 1 candidates (0 registered, 1 rejected) | AA plots this model in reasoning mode with no effort label; Vals effort recorded as max. |
-| Claude Haiku 5.5 | Code Migration v1.1 (Vals) | 2026-10-23 | not found | 1 | 2026-10-23: 4 queries, 0 candidates (0 registered, 0 rejected) | Vals ran this model only at max (52.360), not xhigh; not transferred. |
-| Claude Haiku 5.5 (high) | Code Migration v1.1 (Vals) | 2026-10-23 | not found | 1 | 2026-10-23: 4 queries, 0 candidates (0 registered, 0 rejected) | Vals ran this model only at max (52.360), not high; not transferred. |
-| Claude Haiku 5.5 (low) | Code Migration v1.1 (Vals) | 2026-10-23 | not found | 1 | 2026-10-23: 4 queries, 0 candidates (0 registered, 0 rejected) | Vals ran this model only at max (52.360), not low; not transferred. |
-| Claude Haiku 5.5 (medium) | Code Migration v1.1 (Vals) | 2026-10-23 | not found | 1 | 2026-10-23: 4 queries, 0 candidates (0 registered, 0 rejected) | Vals ran this model only at max (52.360), not medium; not transferred. |
-| Claude Opus 5.5 (high) | Code Migration v1.1 (Vals) | 2026-10-23 | not found | 1 | 2026-10-23: 4 queries, 0 candidates (0 registered, 0 rejected) | Vals ran this model only at max (81.012), not high; not transferred. |
-| Claude Opus 5.5 (medium) | Code Migration v1.1 (Vals) | 2026-10-23 | not found | 1 | 2026-10-23: 4 queries, 0 candidates (0 registered, 0 rejected) | Vals ran this model only at max (81.012), not medium; not transferred. |
-| Claude Opus 5.5 (xhigh) | Code Migration v1.1 (Vals) | 2026-10-23 | not found | 1 | 2026-10-23: 4 queries, 0 candidates (0 registered, 0 rejected) | Vals ran this model only at max (81.012), not xhigh; not transferred. |
-| Claude Sonnet 5.5 (xhigh) | Code Migration v1.1 (Vals) | 2026-10-23 | not found | 1 | 2026-10-23: 4 queries, 0 candidates (0 registered, 0 rejected) | Vals ran this model only at max (86.875), not xhigh; not transferred. |
-| GPT-5.6 Luna (low) | Code Migration v1.1 (Vals) | 2026-10-23 | not found | 1 | 2026-10-23: 4 queries, 0 candidates (0 registered, 0 rejected) | No codeMigration record for this configuration at its exact effort. |
-| GPT-6 Astra (high) | Code Migration v1.1 (Vals) | 2026-10-23 | not found | 1 | 2026-10-23: 4 queries, 0 candidates (0 registered, 0 rejected) | Vals ran this model only at max (80.579), not high; not transferred. |
-| GPT-6 Astra (xhigh) | Code Migration v1.1 (Vals) | 2026-10-23 | not found | 1 | 2026-10-23: 4 queries, 0 candidates (0 registered, 0 rejected) | Vals ran this model only at max (80.579), not xhigh; not transferred. |
-| GPT-6 Luna (high) | Code Migration v1.1 (Vals) | 2026-10-23 | not found | 1 | 2026-10-23: 4 queries, 0 candidates (0 registered, 0 rejected) | Vals ran this model only at max (46.669), not high; not transferred. |
-| GPT-6 Luna (low) | Code Migration v1.1 (Vals) | 2026-10-23 | not found | 1 | 2026-10-23: 4 queries, 0 candidates (0 registered, 0 rejected) | Vals ran this model only at max (46.669), not low; not transferred. |
-| GPT-6 Luna (medium) | Code Migration v1.1 (Vals) | 2026-10-23 | not found | 1 | 2026-10-23: 4 queries, 0 candidates (0 registered, 0 rejected) | Vals ran this model only at max (46.669), not medium; not transferred. |
-| GPT-6 Luna (xhigh) | Code Migration v1.1 (Vals) | 2026-10-23 | not found | 1 | 2026-10-23: 4 queries, 0 candidates (0 registered, 0 rejected) | Vals ran this model only at max (46.669), not xhigh; not transferred. |
-| GPT-6.1 Sol (high) | Code Migration v1.1 (Vals) | 2026-10-23 | not found | 1 | 2026-10-23: 4 queries, 0 candidates (0 registered, 0 rejected) | Vals ran this model only at max (77.324), not high; not transferred. |
-| GPT-6.1 Sol (medium) | Code Migration v1.1 (Vals) | 2026-10-23 | not found | 1 | 2026-10-23: 4 queries, 0 candidates (0 registered, 0 rejected) | Vals ran this model only at max (77.324), not medium; not transferred. |
-| GPT-6.1 Sol (xhigh) | Code Migration v1.1 (Vals) | 2026-10-23 | not found | 1 | 2026-10-23: 4 queries, 0 candidates (0 registered, 0 rejected) | Vals ran this model only at max (77.324), not xhigh; not transferred. |
-| MiMo-V2.6-Flash | Code Migration v1.1 (Vals) | 2026-10-23 | not found | 1 | 2026-10-23: 4 queries, 1 candidates (0 registered, 1 rejected) | AA plots this model in reasoning mode with no effort label; Vals effort recorded as null (not stated). Vals model page: evaluated 'with reasoning enabled'. |
-| MiniMax-M3.1-Flash | Code Migration v1.1 (Vals) | 2026-10-23 | not found | 1 | 2026-10-23: 4 queries, 0 candidates (0 registered, 0 rejected) | No codeMigration record for this configuration at its exact effort. |
-| Claude Haiku 5.5 | LiveBench 2.0 Overall | 2026-10-23 | not found | 1 | 2026-10-23: 4 queries, 0 candidates (0 registered, 0 rejected) | LiveBench 2.0 has one row per model at its highest effort only; this effort is not run. |
-| Claude Haiku 5.5 (high) | LiveBench 2.0 Overall | 2026-10-23 | not found | 1 | 2026-10-23: 4 queries, 0 candidates (0 registered, 0 rejected) | LiveBench 2.0 has one row per model at its highest effort only; this effort is not run. |
-| Claude Haiku 5.5 (low) | LiveBench 2.0 Overall | 2026-10-23 | not found | 1 | 2026-10-23: 4 queries, 0 candidates (0 registered, 0 rejected) | LiveBench 2.0 has one row per model at its highest effort only; this effort is not run. |
-| Claude Haiku 5.5 (medium) | LiveBench 2.0 Overall | 2026-10-23 | not found | 1 | 2026-10-23: 4 queries, 0 candidates (0 registered, 0 rejected) | LiveBench 2.0 has one row per model at its highest effort only; this effort is not run. |
-| Claude Opus 5.5 (high) | LiveBench 2.0 Overall | 2026-10-23 | not found | 1 | 2026-10-23: 4 queries, 0 candidates (0 registered, 0 rejected) | LiveBench 2.0 has one row per model at its highest effort only; this effort is not run. |
-| Claude Opus 5.5 (medium) | LiveBench 2.0 Overall | 2026-10-23 | not found | 1 | 2026-10-23: 4 queries, 0 candidates (0 registered, 0 rejected) | LiveBench 2.0 has one row per model at its highest effort only; this effort is not run. |
-| Claude Opus 5.5 (xhigh) | LiveBench 2.0 Overall | 2026-10-23 | not found | 1 | 2026-10-23: 4 queries, 0 candidates (0 registered, 0 rejected) | LiveBench 2.0 has one row per model at its highest effort only; this effort is not run. |
-| Claude Sonnet 5.5 (xhigh) | LiveBench 2.0 Overall | 2026-10-23 | not found | 1 | 2026-10-23: 4 queries, 0 candidates (0 registered, 0 rejected) | LiveBench 2.0 has one row per model at its highest effort only; this effort is not run. |
-| GPT-5.6 Luna (low) | LiveBench 2.0 Overall | 2026-10-23 | not found | 1 | 2026-10-23: 4 queries, 0 candidates (0 registered, 0 rejected) | LiveBench 2.0 has gpt-5.6-luna at max only (73.6). |
-| GPT-6 Astra (high) | LiveBench 2.0 Overall | 2026-10-23 | not found | 1 | 2026-10-23: 4 queries, 0 candidates (0 registered, 0 rejected) | LiveBench 2.0 has one row per model at its highest effort only; this effort is not run. |
-| GPT-6 Astra (xhigh) | LiveBench 2.0 Overall | 2026-10-23 | not found | 1 | 2026-10-23: 4 queries, 0 candidates (0 registered, 0 rejected) | LiveBench 2.0 has one row per model at its highest effort only; this effort is not run. |
-| GPT-6 Luna (high) | LiveBench 2.0 Overall | 2026-10-23 | not found | 1 | 2026-10-23: 4 queries, 0 candidates (0 registered, 0 rejected) | LiveBench 2.0 has one row per model at its highest effort only; this effort is not run. |
-| GPT-6 Luna (low) | LiveBench 2.0 Overall | 2026-10-23 | not found | 1 | 2026-10-23: 4 queries, 0 candidates (0 registered, 0 rejected) | LiveBench 2.0 has one row per model at its highest effort only; this effort is not run. |
-| GPT-6 Luna (medium) | LiveBench 2.0 Overall | 2026-10-23 | not found | 1 | 2026-10-23: 4 queries, 0 candidates (0 registered, 0 rejected) | LiveBench 2.0 has one row per model at its highest effort only; this effort is not run. |
-| GPT-6 Luna (xhigh) | LiveBench 2.0 Overall | 2026-10-23 | not found | 1 | 2026-10-23: 4 queries, 0 candidates (0 registered, 0 rejected) | LiveBench 2.0 has one row per model at its highest effort only; this effort is not run. |
-| GPT-6.1 Sol (high) | LiveBench 2.0 Overall | 2026-10-23 | not found | 1 | 2026-10-23: 4 queries, 0 candidates (0 registered, 0 rejected) | LiveBench 2.0 has one row per model at its highest effort only; this effort is not run. |
-| GPT-6.1 Sol (medium) | LiveBench 2.0 Overall | 2026-10-23 | not found | 1 | 2026-10-23: 4 queries, 0 candidates (0 registered, 0 rejected) | LiveBench 2.0 has one row per model at its highest effort only; this effort is not run. |
-| GPT-6.1 Sol (xhigh) | LiveBench 2.0 Overall | 2026-10-23 | not found | 1 | 2026-10-23: 4 queries, 0 candidates (0 registered, 0 rejected) | LiveBench 2.0 has one row per model at its highest effort only; this effort is not run. |
-| MiMo-V2.6-Flash | LiveBench 2.0 Overall | 2026-10-23 | not found | 1 | 2026-10-23: 4 queries, 0 candidates (0 registered, 0 rejected) | No MiMo-V2.6-Flash row in LiveBench 2.0. |
-| MiniMax-M3.1-Flash | LiveBench 2.0 Overall | 2026-10-23 | not found | 1 | 2026-10-23: 4 queries, 1 candidates (0 registered, 1 rejected) | Effort from bundle model metadata (main.074b2ee8.js); single run; 29 tasks. AA plots this model without an effort label (reasoning mode); a source row at one labelled effort is plausible, not exact. |
-| Claude Haiku 5.5 | AI Coding Daily (excl. bug finding) | 2026-10-23 | not found | 1 | 2026-10-23: 4 queries, 0 candidates (0 registered, 0 rejected) | AICD has Haiku 5.5 Medium/High only. |
-| Claude Haiku 5.5 (low) | AI Coding Daily (excl. bug finding) | 2026-10-23 | not found | 1 | 2026-10-23: 4 queries, 0 candidates (0 registered, 0 rejected) | AICD has Haiku 5.5 Medium/High only. |
-| Claude Haiku 5.5 (max) | AI Coding Daily (excl. bug finding) | 2026-10-23 | not found | 1 | 2026-10-23: 4 queries, 0 candidates (0 registered, 0 rejected) | AICD has Haiku 5.5 Medium/High only. |
-| Claude Opus 5.5 | AI Coding Daily (excl. bug finding) | 2026-10-23 | not found | 1 | 2026-10-23: 4 queries, 0 candidates (0 registered, 0 rejected) | AICD has Opus 5.5 Low/Medium/High only. |
-| Claude Opus 5.5 (xhigh) | AI Coding Daily (excl. bug finding) | 2026-10-23 | not found | 1 | 2026-10-23: 4 queries, 0 candidates (0 registered, 0 rejected) | AICD has Opus 5.5 Low/Medium/High only. |
-| Claude Sonnet 5.5 | AI Coding Daily (excl. bug finding) | 2026-10-23 | not found | 1 | 2026-10-23: 4 queries, 0 candidates (0 registered, 0 rejected) | AICD has Sonnet 5.5 Medium/High only. |
-| Claude Sonnet 5.5 (xhigh) | AI Coding Daily (excl. bug finding) | 2026-10-23 | not found | 1 | 2026-10-23: 4 queries, 0 candidates (0 registered, 0 rejected) | AICD has Sonnet 5.5 Medium/High only. |
-| GPT-6 Astra | AI Coding Daily (excl. bug finding) | 2026-10-23 | not found | 1 | 2026-10-23: 4 queries, 0 candidates (0 registered, 0 rejected) | AICD has GPT-6-Astra Medium/High only. |
-| GPT-6 Astra (xhigh) | AI Coding Daily (excl. bug finding) | 2026-10-23 | not found | 1 | 2026-10-23: 4 queries, 0 candidates (0 registered, 0 rejected) | AICD has GPT-6-Astra Medium/High only. |
-| GPT-6 Luna (low) | AI Coding Daily (excl. bug finding) | 2026-10-23 | not found | 1 | 2026-10-23: 4 queries, 0 candidates (0 registered, 0 rejected) | AICD has GPT-6-Luna Medium/High/Xhigh/Max only. |
-| GPT-6.1 Sol | AI Coding Daily (excl. bug finding) | 2026-10-23 | not found | 1 | 2026-10-23: 4 queries, 0 candidates (0 registered, 0 rejected) | AICD has GPT-6.1-Sol Low/Medium/High only. |
-| GPT-6.1 Sol (xhigh) | AI Coding Daily (excl. bug finding) | 2026-10-23 | not found | 1 | 2026-10-23: 4 queries, 0 candidates (0 registered, 0 rejected) | AICD has GPT-6.1-Sol Low/Medium/High only. |
-| MiMo-V2.6-Flash | AI Coding Daily (excl. bug finding) | 2026-10-23 | not found | 1 | 2026-10-23: 4 queries, 1 candidates (0 registered, 1 rejected) | Tested 2026-10-02 with OpenCode; cost/prompt $0.04. AA plots this model without an effort label (reasoning mode); a source row at one labelled effort is plausible, not exact. |
-| MiniMax-M3.1-Flash | AI Coding Daily (excl. bug finding) | 2026-10-23 | not found | 1 | 2026-10-23: 4 queries, 1 candidates (0 registered, 1 rejected) | Tested 2026-10-20 with OpenCode; cost/prompt N/A. AA plots this model without an effort label (reasoning mode); a source row at one labelled effort is plausible, not exact. |
+| Claude Haiku 5.5 | Vibe Code Bench v1.1 (Vals) | 2026-10-25 | not found | 1 | 2026-10-25: 6 queries, 0 candidates (0 registered, 0 rejected) | Vals ran this model only at max (90.444), not xhigh; not transferred. |
+| Claude Haiku 5.5 (high) | Vibe Code Bench v1.1 (Vals) | 2026-10-25 | not found | 1 | 2026-10-25: 6 queries, 0 candidates (0 registered, 0 rejected) | Vals ran this model only at max (90.444), not high; not transferred. |
+| Claude Haiku 5.5 (low) | Vibe Code Bench v1.1 (Vals) | 2026-10-25 | not found | 1 | 2026-10-25: 6 queries, 0 candidates (0 registered, 0 rejected) | Vals ran this model only at max (90.444), not low; not transferred. |
+| Claude Haiku 5.5 (medium) | Vibe Code Bench v1.1 (Vals) | 2026-10-25 | not found | 1 | 2026-10-25: 6 queries, 0 candidates (0 registered, 0 rejected) | Vals ran this model only at max (90.444), not medium; not transferred. |
+| Claude Opus 5.5 (high) | Vibe Code Bench v1.1 (Vals) | 2026-10-25 | not found | 1 | 2026-10-25: 6 queries, 0 candidates (0 registered, 0 rejected) | Vals ran this model only at max (90.294), not high; not transferred. |
+| Claude Opus 5.5 (medium) | Vibe Code Bench v1.1 (Vals) | 2026-10-25 | not found | 1 | 2026-10-25: 6 queries, 0 candidates (0 registered, 0 rejected) | Vals ran this model only at max (90.294), not medium; not transferred. |
+| Claude Opus 5.5 (xhigh) | Vibe Code Bench v1.1 (Vals) | 2026-10-25 | not found | 1 | 2026-10-25: 6 queries, 0 candidates (0 registered, 0 rejected) | Vals ran this model only at max (90.294), not xhigh; not transferred. |
+| Claude Sonnet 5.5 (xhigh) | Vibe Code Bench v1.1 (Vals) | 2026-10-25 | not found | 1 | 2026-10-25: 6 queries, 0 candidates (0 registered, 0 rejected) | Vals ran this model only at max (92.392), not xhigh; not transferred. |
+| GPT-5.6 Luna (low) | Vibe Code Bench v1.1 (Vals) | 2026-10-25 | not found | 1 | 2026-10-25: 6 queries, 0 candidates (0 registered, 0 rejected) | Vals ran this model only at max (77.055), not low; not transferred. |
+| GPT-6 Astra (high) | Vibe Code Bench v1.1 (Vals) | 2026-10-25 | not found | 1 | 2026-10-25: 6 queries, 0 candidates (0 registered, 0 rejected) | Vals ran this model only at max (89.594), not high; not transferred. |
+| GPT-6 Astra (xhigh) | Vibe Code Bench v1.1 (Vals) | 2026-10-25 | not found | 1 | 2026-10-25: 6 queries, 0 candidates (0 registered, 0 rejected) | Vals ran this model only at max (89.594), not xhigh; not transferred. |
+| GPT-6 Luna (high) | Vibe Code Bench v1.1 (Vals) | 2026-10-25 | not found | 1 | 2026-10-25: 6 queries, 0 candidates (0 registered, 0 rejected) | Vals ran this model only at max (81.649), not high; not transferred. |
+| GPT-6 Luna (low) | Vibe Code Bench v1.1 (Vals) | 2026-10-25 | not found | 1 | 2026-10-25: 6 queries, 0 candidates (0 registered, 0 rejected) | Vals ran this model only at max (81.649), not low; not transferred. |
+| GPT-6 Luna (medium) | Vibe Code Bench v1.1 (Vals) | 2026-10-25 | not found | 1 | 2026-10-25: 6 queries, 0 candidates (0 registered, 0 rejected) | Vals ran this model only at max (81.649), not medium; not transferred. |
+| GPT-6 Luna (xhigh) | Vibe Code Bench v1.1 (Vals) | 2026-10-25 | not found | 1 | 2026-10-25: 6 queries, 0 candidates (0 registered, 0 rejected) | Vals ran this model only at max (81.649), not xhigh; not transferred. |
+| GPT-6.1 Sol (high) | Vibe Code Bench v1.1 (Vals) | 2026-10-25 | not found | 1 | 2026-10-25: 6 queries, 0 candidates (0 registered, 0 rejected) | Vals ran this model only at max (88.931), not high; not transferred. |
+| GPT-6.1 Sol (medium) | Vibe Code Bench v1.1 (Vals) | 2026-10-25 | not found | 1 | 2026-10-25: 6 queries, 0 candidates (0 registered, 0 rejected) | Vals ran this model only at max (88.931), not medium; not transferred. |
+| GPT-6.1 Sol (xhigh) | Vibe Code Bench v1.1 (Vals) | 2026-10-25 | not found | 1 | 2026-10-25: 6 queries, 0 candidates (0 registered, 0 rejected) | Vals ran this model only at max (88.931), not xhigh; not transferred. |
+| MiMo-V2.6-Flash | Vibe Code Bench v1.1 (Vals) | 2026-10-25 | not found | 1 | 2026-10-25: 6 queries, 1 candidates (0 registered, 1 rejected) | AA plots this model in reasoning mode with no effort label; Vals effort recorded as null (not stated). Vals model page: evaluated 'with reasoning enabled'. |
+| MiniMax-M3.1-Flash | Vibe Code Bench v1.1 (Vals) | 2026-10-25 | not found | 1 | 2026-10-25: 6 queries, 1 candidates (0 registered, 1 rejected) | AA plots this model in reasoning mode with no effort label; Vals effort recorded as max. |
+| Claude Haiku 5.5 | Code Migration v1.1 (Vals) | 2026-10-25 | not found | 1 | 2026-10-25: 6 queries, 0 candidates (0 registered, 0 rejected) | Vals ran this model only at max (52.360), not xhigh; not transferred. |
+| Claude Haiku 5.5 (high) | Code Migration v1.1 (Vals) | 2026-10-25 | not found | 1 | 2026-10-25: 6 queries, 0 candidates (0 registered, 0 rejected) | Vals ran this model only at max (52.360), not high; not transferred. |
+| Claude Haiku 5.5 (low) | Code Migration v1.1 (Vals) | 2026-10-25 | not found | 1 | 2026-10-25: 6 queries, 0 candidates (0 registered, 0 rejected) | Vals ran this model only at max (52.360), not low; not transferred. |
+| Claude Haiku 5.5 (medium) | Code Migration v1.1 (Vals) | 2026-10-25 | not found | 1 | 2026-10-25: 6 queries, 0 candidates (0 registered, 0 rejected) | Vals ran this model only at max (52.360), not medium; not transferred. |
+| Claude Opus 5.5 (high) | Code Migration v1.1 (Vals) | 2026-10-25 | not found | 1 | 2026-10-25: 6 queries, 0 candidates (0 registered, 0 rejected) | Vals ran this model only at max (81.012), not high; not transferred. |
+| Claude Opus 5.5 (medium) | Code Migration v1.1 (Vals) | 2026-10-25 | not found | 1 | 2026-10-25: 6 queries, 0 candidates (0 registered, 0 rejected) | Vals ran this model only at max (81.012), not medium; not transferred. |
+| Claude Opus 5.5 (xhigh) | Code Migration v1.1 (Vals) | 2026-10-25 | not found | 1 | 2026-10-25: 6 queries, 0 candidates (0 registered, 0 rejected) | Vals ran this model only at max (81.012), not xhigh; not transferred. |
+| Claude Sonnet 5.5 (xhigh) | Code Migration v1.1 (Vals) | 2026-10-25 | not found | 1 | 2026-10-25: 6 queries, 0 candidates (0 registered, 0 rejected) | Vals ran this model only at max (86.875), not xhigh; not transferred. |
+| GPT-5.6 Luna (low) | Code Migration v1.1 (Vals) | 2026-10-25 | not found | 1 | 2026-10-25: 6 queries, 0 candidates (0 registered, 0 rejected) | No codeMigration record for this configuration at its exact effort. |
+| GPT-6 Astra (high) | Code Migration v1.1 (Vals) | 2026-10-25 | not found | 1 | 2026-10-25: 6 queries, 0 candidates (0 registered, 0 rejected) | Vals ran this model only at max (80.579), not high; not transferred. |
+| GPT-6 Astra (xhigh) | Code Migration v1.1 (Vals) | 2026-10-25 | not found | 1 | 2026-10-25: 6 queries, 0 candidates (0 registered, 0 rejected) | Vals ran this model only at max (80.579), not xhigh; not transferred. |
+| GPT-6 Luna (high) | Code Migration v1.1 (Vals) | 2026-10-25 | not found | 1 | 2026-10-25: 6 queries, 0 candidates (0 registered, 0 rejected) | Vals ran this model only at max (46.669), not high; not transferred. |
+| GPT-6 Luna (low) | Code Migration v1.1 (Vals) | 2026-10-25 | not found | 1 | 2026-10-25: 6 queries, 0 candidates (0 registered, 0 rejected) | Vals ran this model only at max (46.669), not low; not transferred. |
+| GPT-6 Luna (medium) | Code Migration v1.1 (Vals) | 2026-10-25 | not found | 1 | 2026-10-25: 6 queries, 0 candidates (0 registered, 0 rejected) | Vals ran this model only at max (46.669), not medium; not transferred. |
+| GPT-6 Luna (xhigh) | Code Migration v1.1 (Vals) | 2026-10-25 | not found | 1 | 2026-10-25: 6 queries, 0 candidates (0 registered, 0 rejected) | Vals ran this model only at max (46.669), not xhigh; not transferred. |
+| GPT-6.1 Sol (high) | Code Migration v1.1 (Vals) | 2026-10-25 | not found | 1 | 2026-10-25: 6 queries, 0 candidates (0 registered, 0 rejected) | Vals ran this model only at max (77.324), not high; not transferred. |
+| GPT-6.1 Sol (medium) | Code Migration v1.1 (Vals) | 2026-10-25 | not found | 1 | 2026-10-25: 6 queries, 0 candidates (0 registered, 0 rejected) | Vals ran this model only at max (77.324), not medium; not transferred. |
+| GPT-6.1 Sol (xhigh) | Code Migration v1.1 (Vals) | 2026-10-25 | not found | 1 | 2026-10-25: 6 queries, 0 candidates (0 registered, 0 rejected) | Vals ran this model only at max (77.324), not xhigh; not transferred. |
+| MiMo-V2.6-Flash | Code Migration v1.1 (Vals) | 2026-10-25 | not found | 1 | 2026-10-25: 6 queries, 1 candidates (0 registered, 1 rejected) | AA plots this model in reasoning mode with no effort label; Vals effort recorded as null (not stated). Vals model page: evaluated 'with reasoning enabled'. |
+| MiniMax-M3.1-Flash | Code Migration v1.1 (Vals) | 2026-10-25 | not found | 1 | 2026-10-25: 6 queries, 0 candidates (0 registered, 0 rejected) | No codeMigration record for this configuration at its exact effort. |
+| Kimi K3.1 Pro | Code Migration v1.1 (Vals) | 2026-10-25 | not found | 1 | 2026-10-25: 6 queries, 0 candidates (0 registered, 0 rejected) | No Kimi K3.1 Pro row (the board has kimi/kimi-k3 only, a different model version; not transferred). |
+| Claude Haiku 5.5 | LiveBench 2.0 Overall | 2026-10-25 | not found | 1 | 2026-10-25: 6 queries, 0 candidates (0 registered, 0 rejected) | LiveBench 2.0 has one row per model at its highest effort only; this effort is not run. |
+| Claude Haiku 5.5 (high) | LiveBench 2.0 Overall | 2026-10-25 | not found | 1 | 2026-10-25: 6 queries, 0 candidates (0 registered, 0 rejected) | LiveBench 2.0 has one row per model at its highest effort only; this effort is not run. |
+| Claude Haiku 5.5 (low) | LiveBench 2.0 Overall | 2026-10-25 | not found | 1 | 2026-10-25: 6 queries, 0 candidates (0 registered, 0 rejected) | LiveBench 2.0 has one row per model at its highest effort only; this effort is not run. |
+| Claude Haiku 5.5 (medium) | LiveBench 2.0 Overall | 2026-10-25 | not found | 1 | 2026-10-25: 6 queries, 0 candidates (0 registered, 0 rejected) | LiveBench 2.0 has one row per model at its highest effort only; this effort is not run. |
+| Claude Opus 5.5 (high) | LiveBench 2.0 Overall | 2026-10-25 | not found | 1 | 2026-10-25: 6 queries, 0 candidates (0 registered, 0 rejected) | LiveBench 2.0 has one row per model at its highest effort only; this effort is not run. |
+| Claude Opus 5.5 (medium) | LiveBench 2.0 Overall | 2026-10-25 | not found | 1 | 2026-10-25: 6 queries, 0 candidates (0 registered, 0 rejected) | LiveBench 2.0 has one row per model at its highest effort only; this effort is not run. |
+| Claude Opus 5.5 (xhigh) | LiveBench 2.0 Overall | 2026-10-25 | not found | 1 | 2026-10-25: 6 queries, 0 candidates (0 registered, 0 rejected) | LiveBench 2.0 has one row per model at its highest effort only; this effort is not run. |
+| Claude Sonnet 5.5 (xhigh) | LiveBench 2.0 Overall | 2026-10-25 | not found | 1 | 2026-10-25: 6 queries, 0 candidates (0 registered, 0 rejected) | LiveBench 2.0 has one row per model at its highest effort only; this effort is not run. |
+| GPT-5.6 Luna (low) | LiveBench 2.0 Overall | 2026-10-25 | not found | 1 | 2026-10-25: 6 queries, 0 candidates (0 registered, 0 rejected) | LiveBench 2.0 has gpt-5.6-luna at max only (73.6). |
+| GPT-6 Astra (high) | LiveBench 2.0 Overall | 2026-10-25 | not found | 1 | 2026-10-25: 6 queries, 0 candidates (0 registered, 0 rejected) | LiveBench 2.0 has one row per model at its highest effort only; this effort is not run. |
+| GPT-6 Astra (xhigh) | LiveBench 2.0 Overall | 2026-10-25 | not found | 1 | 2026-10-25: 6 queries, 0 candidates (0 registered, 0 rejected) | LiveBench 2.0 has one row per model at its highest effort only; this effort is not run. |
+| GPT-6 Luna (high) | LiveBench 2.0 Overall | 2026-10-25 | not found | 1 | 2026-10-25: 6 queries, 0 candidates (0 registered, 0 rejected) | LiveBench 2.0 has one row per model at its highest effort only; this effort is not run. |
+| GPT-6 Luna (low) | LiveBench 2.0 Overall | 2026-10-25 | not found | 1 | 2026-10-25: 6 queries, 0 candidates (0 registered, 0 rejected) | LiveBench 2.0 has one row per model at its highest effort only; this effort is not run. |
+| GPT-6 Luna (medium) | LiveBench 2.0 Overall | 2026-10-25 | not found | 1 | 2026-10-25: 6 queries, 0 candidates (0 registered, 0 rejected) | LiveBench 2.0 has one row per model at its highest effort only; this effort is not run. |
+| GPT-6 Luna (xhigh) | LiveBench 2.0 Overall | 2026-10-25 | not found | 1 | 2026-10-25: 6 queries, 0 candidates (0 registered, 0 rejected) | LiveBench 2.0 has one row per model at its highest effort only; this effort is not run. |
+| GPT-6.1 Sol (high) | LiveBench 2.0 Overall | 2026-10-25 | not found | 1 | 2026-10-25: 6 queries, 0 candidates (0 registered, 0 rejected) | LiveBench 2.0 has one row per model at its highest effort only; this effort is not run. |
+| GPT-6.1 Sol (medium) | LiveBench 2.0 Overall | 2026-10-25 | not found | 1 | 2026-10-25: 6 queries, 0 candidates (0 registered, 0 rejected) | LiveBench 2.0 has one row per model at its highest effort only; this effort is not run. |
+| GPT-6.1 Sol (xhigh) | LiveBench 2.0 Overall | 2026-10-25 | not found | 1 | 2026-10-25: 6 queries, 0 candidates (0 registered, 0 rejected) | LiveBench 2.0 has one row per model at its highest effort only; this effort is not run. |
+| MiMo-V2.6-Flash | LiveBench 2.0 Overall | 2026-10-25 | not found | 1 | 2026-10-25: 6 queries, 0 candidates (0 registered, 0 rejected) | No MiMo-V2.6-Flash row in LiveBench 2.0. |
+| MiniMax-M3.1-Flash | LiveBench 2.0 Overall | 2026-10-25 | not found | 1 | 2026-10-25: 6 queries, 1 candidates (0 registered, 1 rejected) | 2026-10-23 release (O67); effort from the site bundle's model metadata. |
+| Claude Haiku 5.5 | AI Coding Daily (excl. bug finding) | 2026-10-25 | not found | 1 | 2026-10-25: 6 queries, 0 candidates (0 registered, 0 rejected) | AICD has Haiku 5.5 Medium/High only. |
+| Claude Haiku 5.5 (low) | AI Coding Daily (excl. bug finding) | 2026-10-25 | not found | 1 | 2026-10-25: 6 queries, 0 candidates (0 registered, 0 rejected) | AICD has Haiku 5.5 Medium/High only. |
+| Claude Haiku 5.5 (max) | AI Coding Daily (excl. bug finding) | 2026-10-25 | not found | 1 | 2026-10-25: 6 queries, 0 candidates (0 registered, 0 rejected) | AICD has Haiku 5.5 Medium/High only. |
+| Claude Opus 5.5 | AI Coding Daily (excl. bug finding) | 2026-10-25 | not found | 1 | 2026-10-25: 6 queries, 0 candidates (0 registered, 0 rejected) | AICD has Opus 5.5 Low/Medium/High only. |
+| Claude Opus 5.5 (xhigh) | AI Coding Daily (excl. bug finding) | 2026-10-25 | not found | 1 | 2026-10-25: 6 queries, 0 candidates (0 registered, 0 rejected) | AICD has Opus 5.5 Low/Medium/High only. |
+| Claude Sonnet 5.5 | AI Coding Daily (excl. bug finding) | 2026-10-25 | not found | 1 | 2026-10-25: 6 queries, 0 candidates (0 registered, 0 rejected) | AICD has Sonnet 5.5 Medium/High only. |
+| Claude Sonnet 5.5 (xhigh) | AI Coding Daily (excl. bug finding) | 2026-10-25 | not found | 1 | 2026-10-25: 6 queries, 0 candidates (0 registered, 0 rejected) | AICD has Sonnet 5.5 Medium/High only. |
+| GPT-6 Astra | AI Coding Daily (excl. bug finding) | 2026-10-25 | not found | 1 | 2026-10-25: 6 queries, 0 candidates (0 registered, 0 rejected) | AICD has GPT-6-Astra Medium/High only. |
+| GPT-6 Astra (xhigh) | AI Coding Daily (excl. bug finding) | 2026-10-25 | not found | 1 | 2026-10-25: 6 queries, 0 candidates (0 registered, 0 rejected) | AICD has GPT-6-Astra Medium/High only. |
+| GPT-6 Luna (low) | AI Coding Daily (excl. bug finding) | 2026-10-25 | not found | 1 | 2026-10-25: 6 queries, 0 candidates (0 registered, 0 rejected) | AICD has GPT-6-Luna Medium/High/Xhigh/Max only. |
+| GPT-6.1 Sol | AI Coding Daily (excl. bug finding) | 2026-10-25 | not found | 1 | 2026-10-25: 6 queries, 0 candidates (0 registered, 0 rejected) | AICD has GPT-6.1-Sol Low/Medium/High only. |
+| GPT-6.1 Sol (xhigh) | AI Coding Daily (excl. bug finding) | 2026-10-25 | not found | 1 | 2026-10-25: 6 queries, 0 candidates (0 registered, 0 rejected) | AICD has GPT-6.1-Sol Low/Medium/High only. |
+| MiMo-V2.6-Flash | AI Coding Daily (excl. bug finding) | 2026-10-25 | not found | 1 | 2026-10-25: 6 queries, 1 candidates (0 registered, 1 rejected) | Tested 2026-10-02 with OpenCode; cost/prompt $0.04. AA plots this model without an effort label (reasoning mode); a source row at one labelled effort is plausible, not exact. |
+| MiniMax-M3.1-Flash | AI Coding Daily (excl. bug finding) | 2026-10-25 | not found | 1 | 2026-10-25: 6 queries, 1 candidates (0 registered, 1 rejected) | Tested 2026-10-20 with OpenCode; cost/prompt N/A. AA plots this model without an effort label (reasoning mode); a source row at one labelled effort is plausible, not exact. |
 
 ## Basket cost components
 
@@ -486,7 +498,7 @@ AA withdrew DeepSWE v1.1 from its Coding Agent Index (v2.0, October 2026) and th
 
 ## Terminal-Bench 4.0 official rows
 
-23 official rows (13 of 51 cohort matches), observed 2026-10-23T05:35:48Z. The published ± is the source's 95% confidence interval (used by stream S1M). Since O37 the Terminal-Bench leaf is AA's own run; these rows cross-check it and fill a gap. Matched agents for cohort rows, in the registered preference order (E225): Claude Code 2, Codex 3.
+23 official rows (13 of 62 cohort matches), observed 2026-10-25T09:56:47Z. The published ± is the source's 95% confidence interval (used by stream S1M). Since O37 the Terminal-Bench leaf is AA's own run; these rows cross-check it and fill a gap. Matched agents for cohort rows, in the registered preference order (E225): Claude Code 2, Codex 3.
 
 | Rank | Base model | Agent | Resolution rate | Tokens | Cost |
 |---|---|---|---:|---|---:|
@@ -516,7 +528,7 @@ AA withdrew DeepSWE v1.1 from its Coding Agent Index (v2.0, October 2026) and th
 
 ## Bug Hunt Bench matched runs
 
-Owner-published runs at commit `46802fc312b6fd467b0baee519df05693f120232`; the score is the owner's largest-sample mean of bugs fixed of 105 for the exact model and effort, with the harness that result was run on (E206). Cross-harness results at the same effort (E224, diagnostic): DeepSeek V4.1 Flash 1017: Claude Code / DeepSeek API 39.1 (7 runs), DeepSeek Harness / DeepSeek API 42.7 (7 runs), OpenCode / DeepSeek API 37.6 (5 runs), Pi / DeepSeek API 42.2 (5 runs); Gemini 4 Argon: Antigravity CLI 40.7 (3 runs), Gemini CLI 33.0 (1 run).
+Owner-published runs at commit `9089dc552a2b4eb94749c4da34d2cb872c7e0b43`; the score is the owner's largest-sample mean of bugs fixed of 105 for the exact model and effort, with the harness that result was run on (E206). Cross-harness results at the same effort (E224, diagnostic): DeepSeek V4.1 Flash 1017: Claude Code / DeepSeek API 39.1 (7 runs), DeepSeek Harness / DeepSeek API 42.7 (7 runs), OpenCode / DeepSeek API 37.6 (5 runs), Pi / DeepSeek API 42.2 (5 runs); Gemini 4 Argon: Antigravity CLI 40.7 (3 runs), Gemini CLI 33.0 (1 run).
 
 | Model | Evaluated model | Bugs fixed of 105 | Runs | Effort | Harness |
 |---|---|---:|---:|---|---|
@@ -573,6 +585,7 @@ Owner-published runs at commit `46802fc312b6fd467b0baee519df05693f120232`; the s
 | GPT-5.6 Luna (low) | GPT-5.6 Luna (low effort) | 4.0 | 1 | low | Codex CLI |
 | GPT-6 Astra (high) | GPT-6 Astra (high effort) | 35.0 | 1 | high | Codex CLI |
 | GPT-6 Astra (xhigh) | GPT-6 Astra (xhigh effort) | 43.0 | 1 | xhigh | Codex CLI |
+| Kimi K3.1 Pro | Kimi K3.1 Pro (max effort, Moonshot API) - mean of 3 | 36.0 | 3 | max | Claude Code / Moonshot API |
 
 ## Plan routes
 
@@ -734,32 +747,32 @@ Each routed row's amount with what it measures, how it was derived and which obj
 
 ## Evidence bundle
 
-Bundle hash `52bd888352339da35c4799b554f736f5acdf1f84539a486dd62a46f6b8d831e7`: every published output is rebuilt from these artifacts at the pinned publication clock (npm run verify:docs), never from live pages.
+Bundle hash `52b6fabf2abe45828323285dda5f5a77b0039682605a7ab0961ef2416db5f170`: every published output is rebuilt from these artifacts at the pinned publication clock (npm run verify:docs), never from live pages.
 
 | Key | Artifact | SHA-256 | Captured | Extractor |
 |---|---|---|---|---|
-| snapshot | `data/aa/aa_v432_snapshot.json` | `d572e37ee84df0a7f2ed7564acda9ebd31a726026821536a6c604208dae21d1e` | 2026-10-23T06:26:23Z | valuerank.capture_aa |
-| bugHunt | `data/bug_hunt.json` | `85c7b4f4d5a19465aa2c48bdd2e32fdc6eb831705870a66f43aadf11164cb02a` | 2026-10-19 | editorial capture of the owner's published results (source commit recorded) |
-| tb4 | `data/tb4.json` | `dee07f85c6286fa8a94b5205b539fb5c8929b7d72e240ff1ee525dd542fe96e5` | 2026-10-23T05:35:48Z | scripts/scrape-tb4.js, then valuerank.build_tb4 |
-| codingAgents | `data/aa/coding_agents_capture.json` | `83efc5ac9def13f98c994b8b0759f05b931a9e5987aea684167b286b043a2edc` | 2026-10-23T05:31:41Z | valuerank.capture_coding_agents |
-| costCharts | `data/aa/cost_charts_capture.json` | `9c000c036842409d8de48163bd77ff2e64a18a8ac2a1562760ad368472c8ed80` | 2026-10-23T05:35:10.660Z | scripts/capture-aa-cost-charts.js |
-| configurationMap | `data/v3_configuration_map.json` | `64845d210a4acb31c1032e7c8b57bee0403e6b1cdb8426e1295dc1d40246a049` | 2026-10-23 | editorial pinning from the research capture |
+| snapshot | `data/aa/aa_v432_snapshot.json` | `c97b402550f8bd35b31c9dc78e16e3db05e66a09ae4ec568eaab1d34bb56c749` | 2026-10-25T09:56:47Z | valuerank.capture_aa |
+| bugHunt | `data/bug_hunt.json` | `5db0e8a63dc707d883d2ba8466d6ca8401239950a23ae7ddef2f98c62f86c7b8` | 2026-10-23 | editorial capture of the owner's published results (source commit recorded) |
+| tb4 | `data/tb4.json` | `303c4a4a08e33589e9f5c77ef17684d85d8cc25919e86528fcc23b07928cfd50` | 2026-10-25T09:56:47Z | scripts/scrape-tb4.js, then valuerank.build_tb4 |
+| codingAgents | `data/aa/coding_agents_capture.json` | `3eea1192ad6fb075c32723f114f9c3146003bdcc370d5a1fc90da1794658f522` | 2026-10-25T09:55:06Z | valuerank.capture_coding_agents |
+| costCharts | `data/aa/cost_charts_capture.json` | `32ffe791efffe4eb918f786bbbf62ecd8055aa2ccd34e8a9cbf0588b9ac1132e` | 2026-10-25T09:55:32.879Z | scripts/capture-aa-cost-charts.js |
+| configurationMap | `data/v3_configuration_map.json` | `554cb718f93d417df82ee3b8dcf0e827c41d49db504bf157334ad3cae57de0ea` | 2026-10-25 | editorial pinning from the research capture |
 | codingAgentsManifest | `data/aa/coding_agents_manifest.json` | `8329ba171929e11012047c0411d936c435415f15b89990910f067bf01fc29a42` | — | editorial manifest of every AA Coding Agent Index row, reviewed at each capture (O64) |
-| frontierCapture | `data/aa_frontier_capture.json` | `5bf1cf99ab60f97a5c250638a3001cad2f268df6b8e3cc13f44038ded361fb61` | — | browser capture of AA's Intelligence Index vs cost chart from public tooltips (frontier membership, E195; unevaluated cheaper siblings, E201) |
-| roster | `data/aa_mapping.json` | `c5a3a57c71a093fed39353f1ccc18a6583b8bb2392964775ef802e6e78f5fd6f` | — | editorial roster: every configuration AA plots on its rendered frontier or within 3 Index points of it (O51) |
-| bugHuntScoreboard | `data/bug_hunt_scoreboard.json` | `094855a7ca761618645c2da1c6c006190d97e77c1b1bce7a7bb5630f60a0862a` | 2026-10-23T05:37:06Z | the owner's combined scoreboard at the pinned commit (O31 roster check) |
-| planRoutes | `data/plan_cost_routes.json` | `78d65e39b909ff101aa4e60606d9fe9b7aa8051a8bfe721764720dd6229c93f5` | 2026-10-08 | editorial Plan evidence registry |
+| frontierCapture | `data/aa_frontier_capture.json` | `fe010fe4a624d1fa13309e5256c1c44a073280640db13490447be9199b566b87` | — | browser capture of AA's Intelligence Index vs cost chart from public tooltips (frontier membership, E195; unevaluated cheaper siblings, E201) |
+| roster | `data/aa_mapping.json` | `871ff30c9613bbf5fe81d22b61cbd429ea7fe11587b77e0285765c817ee195d1` | — | editorial roster: every configuration AA plots on its rendered frontier or within 3 Index points of it (O51) |
+| bugHuntScoreboard | `data/bug_hunt_scoreboard.json` | `621695b6104795ce5810bb230d17422bb657010acc8a97e4d77b1fece10cd3a3` | 2026-10-25T10:44:11Z | the owner's combined scoreboard at the pinned commit (O31 roster check) |
+| planRoutes | `data/plan_cost_routes.json` | `24ce9946272da82d2c058d07cc5be74619b8f7519c5988400574d22af1b5e8cc` | 2026-10-08 | editorial Plan evidence registry |
 | priceRecords | `data/price_records.json` | `9be099828d530cc4ad2294d6fdf6ff03a3d94cc5530e8d6ef3279133491930bd` | 2026-10-23T06:26:23Z | editorial E141 price-record registry (superseded and promotional tariffs) |
-| leafEvidence | `data/leaf_evidence.json` | `8e61c9affd4bd352c14a2f01d0fcfe4665130ae10574b50a74fa1e4c48979eb4` | 2026-10-23 | editorial supplementary leaf evidence and the exhaustive-search log (O36) |
+| leafEvidence | `data/leaf_evidence.json` | `d1f676efbd9311db89a9daf2b23e90ee89d30c4afc5edd835e0cbb47f870af46` | 2026-10-23 | editorial supplementary leaf evidence and the exhaustive-search log (O36) |
 | cognitionFrontierCode | `data/cognition_frontiercode.json` | `ff0040778b7bdf69c705ad7474f771fb5e53cfaf5cf8573b3a4614153543d75f` | — | Cognition's FrontierCode leaderboard data (https://cognition.com/data/frontiercode-leaderboard/data.json), captured unchanged (O37) |
-| sweTracks | `data/swe_tracks.json` | `3818ca01f508c16101d9aceed44b28a3b89dd682a92f589a2c5e864f0dcf4ceb` | 2026-10-23T07:58:31Z | research/2026-10-23-swe-benchmarks/build_swe_tracks.py from the verified coverage captures (O53-O55) |
-| anchors | `data/v3_frozen.json` | `0211ddbaf18e78d3c289005bd27dc1705109e7016c7ddba1b3a091b15e13d6ea` | 2026-10-23 | valuerank.value_v3 freeze |
-| anchors:aicd | `data/v3_frozen_aicd.json` | `bbd1b7f12d54e6dd7d13a0a96cc8314557bf6df2bd1abffc14769faf403af13c` | 2026-10-23 | valuerank.value_v3 freeze |
+| sweTracks | `data/swe_tracks.json` | `922f5893228eb02fed2c0e81a8a3a8d617c0be4ddd186ec76fde9df16e81801d` | 2026-10-25T10:44:11Z | research/2026-10-23-swe-benchmarks/build_swe_tracks.py from the verified coverage captures (O53-O55) |
+| anchors | `data/v3_frozen.json` | `d4f3bb4b769b2fcfc1b5c5847f67b396c6a386d7db4b17f99dffa9321e480cfc` | 2026-10-25 | valuerank.value_v3 freeze |
+| anchors:aicd | `data/v3_frozen_aicd.json` | `04a9d0fa638df44b005021793675bb333bc3aa40fd14dec9b706efbd7688bd41` | 2026-10-25 | valuerank.value_v3 freeze |
 
 
 ## AA intelligence and total-cost comparison
 
-Observed 2026-10-23T05:27:39Z; Artificial Analysis Intelligence Index v4.3.2. Scope: Complete displayed intelligence versus total evaluation cost Pareto line with all 697 catalog models selected; 189 eligible plotted points, every one read from its public tooltip. This is not ValueRank's composite-quality frontier.. Reconciliation: reconciled. This view compares AA intelligence index with AA total evaluation cost in USD. Primary composite-rank eligibility is shown separately. Membership is AA's directly observed displayed frontier; no frontier is recomputed from these rows. Source selected 697 models, plotted 189 eligible points, and displayed 18 frontier points. Public metric/export gaps are shown explicitly. All 7 distinct frontier model families are required in the main ranking using exact selected configurations; 5 are included. Other effort configurations remain separate comparison entries. 11 plotted configurations from 8 families lie within 3 Index points of the rendered frontier; 5 of those families are in the main ranking, 0 are deferred.
+Observed 2026-10-25T09:53:28Z; Artificial Analysis Intelligence Index v4.3.2. Scope: Complete displayed intelligence versus total evaluation cost Pareto line with all 698 catalog models selected; 190 eligible plotted points, every one read from its public tooltip. This is not ValueRank's composite-quality frontier.. Reconciliation: reconciled. This view compares AA intelligence index with AA total evaluation cost in USD. Primary composite-rank eligibility is shown separately. Membership is AA's directly observed displayed frontier; no frontier is recomputed from these rows. Source selected 698 models, plotted 190 eligible points, and displayed 19 frontier points. Public metric/export gaps are shown explicitly. All 8 distinct frontier model families are required in the main ranking using exact selected configurations; 6 are included. Other effort configurations remain separate comparison entries. 11 plotted configurations from 8 families lie within 3 Index points of the rendered frontier; 6 of those families are in the main ranking, 0 are deferred.
 
 | Exact AA model | AA ID | Intelligence index | Total evaluation cost (USD) | Observed comparison | Primary rank status | Primary evidence gaps |
 |---|---|---|---|---|---|---|
@@ -778,6 +791,7 @@ Observed 2026-10-23T05:27:39Z; Artificial Analysis Intelligence Index v4.3.2. Sc
 | [GPT-6.1 Sol (xhigh)](https://artificialanalysis.ai/models/gpt-6-1-sol-xhigh) | gpt-6-1-sol-xhigh | 51 (rounded) | $662.28 | Observed AA frontier | Unranked: incomplete benchmark evidence (O36) | Incomplete benchmark evidence after an exhaustive search (O36, O53): Max-effort ranking: no Vibe Code Bench v1.1 (Vals), Code Migration v1.1 (Vals), LiveBench 2.0 Overall; AI Coding Daily ranking: no AI Coding Daily (excl. bug finding) |
 | [GPT-6.1 Sol (max)](https://artificialanalysis.ai/models/gpt-6-1-sol) | gpt-6-1-sol | 52 (rounded) | $1,081.55 | Observed AA frontier | Primary ranked | None |
 | [Claude Opus 5.5 (high with fallback)](https://artificialanalysis.ai/models/claude-opus-5-5-high) | claude-opus-5-5-high | 54 (rounded) | $2,172.43 | Observed AA frontier | Primary ranked | None |
+| [Kimi K3.1 Pro](https://artificialanalysis.ai/models/kimi-k3-1-pro) | kimi-k3-1-pro | 55 (rounded) | $3,117.31 | Observed AA frontier | Primary ranked | None |
 | [Claude Opus 5.5 (xhigh with fallback)](https://artificialanalysis.ai/models/claude-opus-5-5-xhigh) | claude-opus-5-5-xhigh | 56 (rounded) | $4,056.65 | Observed AA frontier | Unranked: incomplete benchmark evidence (O36) | Incomplete benchmark evidence after an exhaustive search (O36, O53): Max-effort ranking: no Vibe Code Bench v1.1 (Vals), Code Migration v1.1 (Vals), LiveBench 2.0 Overall; AI Coding Daily ranking: no AI Coding Daily (excl. bug finding) |
 | [Claude Sonnet 5.5 (max with fallback)](https://artificialanalysis.ai/models/claude-sonnet-5-5) | claude-sonnet-5-5 | 56 (rounded) | $7,259.50 | Observed AA frontier | Primary ranked | None |
 | [Claude Opus 5.5 (max with fallback)](https://artificialanalysis.ai/models/claude-opus-5-5) | claude-opus-5-5 | 58 (rounded) | $8,708.20 | Observed AA frontier | Primary ranked | None |

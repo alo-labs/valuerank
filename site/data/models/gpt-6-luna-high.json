@@ -7,15 +7,15 @@
   "selectedPage": "https://artificialanalysis.ai/models/gpt-6-luna-high",
   "summary": {
     "rank": {
-      "api": 13,
-      "plan": 39
+      "api": 14,
+      "plan": 40
     },
     "overall": {
-      "api": 46.6129850513685,
-      "plan": 45.88168729996789
+      "api": 46.6263350513685,
+      "plan": 46.032700340771974
     },
-    "quality": 35.79794529053887,
-    "qualityRank": 13,
+    "quality": 35.815745290538864,
+    "qualityRank": 14,
     "coverage": {
       "pct": 100.0,
       "costAvailable": true,
@@ -42,7 +42,7 @@
         "name": "Artificial Analysis model page (Intelligence Index v4.3.2)",
         "url": "https://artificialanalysis.ai/evaluations/frontiercode"
       },
-      "observedAt": "2026-10-23",
+      "observedAt": "2026-10-25",
       "evaluatedVariant": null,
       "note": null,
       "grade": "measured"
@@ -60,7 +60,7 @@
         "name": "Artificial Analysis Terminal-Bench 4.0 run (mini-SWE-agent)",
         "url": "https://www.tbench.ai/leaderboard/terminal-bench/4.0"
       },
-      "observedAt": "2026-10-23",
+      "observedAt": "2026-10-25",
       "evaluatedVariant": "mini-SWE-agent",
       "note": null,
       "grade": "measured"
@@ -78,7 +78,7 @@
         "name": "Bug Hunt Bench published runs",
         "url": "https://bughunt.productcompass.pm/"
       },
-      "observedAt": "2026-10-19",
+      "observedAt": "2026-10-23",
       "evaluatedVariant": "GPT-6 Luna (high effort) / Codex CLI",
       "note": null,
       "grade": "measured"
@@ -96,7 +96,7 @@
         "name": "Artificial Analysis model page (Intelligence Index v4.3.2)",
         "url": "https://aicodingdaily.com/leaderboard"
       },
-      "observedAt": "2026-10-23",
+      "observedAt": "2026-10-25",
       "evaluatedVariant": "GPT-6-Luna (High) / Codex CLI",
       "note": null,
       "grade": "measured"
@@ -106,15 +106,15 @@
       "label": "GDPval-AA v2.1",
       "category": "Professional work",
       "weightPct": 7.5,
-      "value": 1339.36,
+      "value": 1342.92,
       "decimals": 1,
       "unit": "Elo",
-      "normalized": 41.96799999999999,
+      "normalized": 42.146,
       "source": {
         "name": "Artificial Analysis model page (Intelligence Index v4.3.2)",
         "url": "https://artificialanalysis.ai/evaluations/gdpval-aa"
       },
-      "observedAt": "2026-10-23",
+      "observedAt": "2026-10-25",
       "evaluatedVariant": null,
       "note": null,
       "grade": "measured"
@@ -132,7 +132,7 @@
         "name": "Artificial Analysis model page (Intelligence Index v4.3.2)",
         "url": "https://artificialanalysis.ai/evaluations/automationbench-aa"
       },
-      "observedAt": "2026-10-23",
+      "observedAt": "2026-10-25",
       "evaluatedVariant": null,
       "note": null,
       "grade": "measured"
@@ -150,7 +150,7 @@
         "name": "Artificial Analysis model page (Intelligence Index v4.3.2)",
         "url": "https://artificialanalysis.ai/evaluations/omniscience"
       },
-      "observedAt": "2026-10-23",
+      "observedAt": "2026-10-25",
       "evaluatedVariant": null,
       "note": null,
       "grade": "measured"
@@ -168,7 +168,7 @@
         "name": "Artificial Analysis model page (Intelligence Index v4.3.2)",
         "url": "https://artificialanalysis.ai/evaluations/artificial-analysis-long-context-reasoning"
       },
-      "observedAt": "2026-10-23",
+      "observedAt": "2026-10-25",
       "evaluatedVariant": null,
       "note": null,
       "grade": "measured"
@@ -186,7 +186,7 @@
         "name": "Artificial Analysis model page (Intelligence Index v4.3.2)",
         "url": "https://artificialanalysis.ai/evaluations/humanitys-last-exam"
       },
-      "observedAt": "2026-10-23",
+      "observedAt": "2026-10-25",
       "evaluatedVariant": null,
       "note": null,
       "grade": "measured"
@@ -204,7 +204,7 @@
         "name": "Artificial Analysis model page (Intelligence Index v4.3.2)",
         "url": "https://artificialanalysis.ai/evaluations/scicode"
       },
-      "observedAt": "2026-10-23",
+      "observedAt": "2026-10-25",
       "evaluatedVariant": null,
       "note": null,
       "grade": "measured"
@@ -222,7 +222,7 @@
         "name": "Artificial Analysis model page (Intelligence Index v4.3.2)",
         "url": "https://artificialanalysis.ai/evaluations/critpt"
       },
-      "observedAt": "2026-10-23",
+      "observedAt": "2026-10-25",
       "evaluatedVariant": null,
       "note": null,
       "grade": "measured"
@@ -253,7 +253,7 @@
     ],
     "costScore": {
       "api": 79.0581043338574,
-      "plan": 76.13291332825499
+      "plan": 76.68356549147131
     },
     "components": [
       {
@@ -350,8 +350,8 @@
       "planIntervalEligible": false,
       "usdPerRun": 3.4713713891041857,
       "selected": true,
-      "planRank": 39,
-      "planValue": 45.88168729996789
+      "planRank": 40,
+      "planValue": 46.032700340771974
     },
     {
       "id": "chatgpt-pro100-gpt-6-luna-high-common-gpt-assumption",
@@ -367,8 +367,8 @@
       "planIntervalEligible": false,
       "usdPerRun": 3.5444182562493163,
       "selected": false,
-      "planRank": 40,
-      "planValue": 45.824869030074005
+      "planRank": 41,
+      "planValue": 45.977192959955474
     },
     {
       "id": "chatgpt-pro200-gpt-6-luna-high-common-gpt-assumption",
@@ -384,8 +384,8 @@
       "planIntervalEligible": false,
       "usdPerRun": 3.5886384456267075,
       "selected": false,
-      "planRank": 41,
-      "planValue": 45.79103936006709
+      "planRank": 42,
+      "planValue": 45.94414379496899
     },
     {
       "id": "chatgpt-plus-gpt-6-luna-high-common-gpt-assumption",
@@ -401,8 +401,8 @@
       "planIntervalEligible": false,
       "usdPerRun": 4.616495383139543,
       "selected": false,
-      "planRank": 42,
-      "planValue": 45.10384180033857
+      "planRank": 43,
+      "planValue": 45.272800990704596
     }
   ],
   "scenarios": {
@@ -459,8 +459,8 @@
         "targetProfile": "published-record leaf values redrawn with plug-in binomial task-sampling noise from each leaf's published task count (independent-task approximation; GDPval-AA from its displayed rating interval, an assumption) + conventional identification of missing leaves",
         "unevaluable": null,
         "top1": 0.0,
-        "top3": 0.001,
-        "frontier": 0.8776
+        "top3": 0.0003,
+        "frontier": 0.8779
       }
     ],
     "plan": [
@@ -532,8 +532,8 @@
       "version": "v3.0.0",
       "date": "2026-10-19",
       "rank": {
-        "api": 13,
-        "plan": 39
+        "api": 14,
+        "plan": 40
       }
     }
   ],
@@ -568,12 +568,12 @@
       "shown": true,
       "rankingEligible": true,
       "rank": {
-        "api": 13,
-        "plan": 39
+        "api": 14,
+        "plan": 40
       },
       "overall": {
-        "api": 46.6129850513685,
-        "plan": 45.88168729996789
+        "api": 46.6263350513685,
+        "plan": 46.032700340771974
       }
     }
   ]

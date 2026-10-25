@@ -75,7 +75,7 @@ def test_dimensions_are_cost_and_the_leading_rankings_quality_leaves(bundle):
 
 def test_roster_has_61_models_with_the_9_max_effort_rows_ranked_first(bundle, v3_rows):
     models = bundle.rankings["models"]
-    assert len(models) == 61 and sum(m["rankingEligible"] for m in models) == len(v3_rows) == 9
+    assert len(models) == 62 and sum(m["rankingEligible"] for m in models) == len(v3_rows) == 9
     leading, trailing = models[:9], models[9:]
     assert all(m["rankingEligible"] and m["rank"]["plan"] is not None for m in leading)
     plan_ranks = [m["rank"]["plan"] for m in leading]
@@ -169,15 +169,15 @@ def test_picks_reference_ranked_models_with_plain_reasons(bundle):
         for pick in picks.values():
             assert models[pick["slug"]]["rankingEligible"] and len(pick["reason"].split()) < 25
         assert "per basket run" in picks["value"]["reason"]
-    assert bundle.rankings["picks"]["api"]["value"]["slug"] == "deepseek-v4-1-flash-1017"
-    assert bundle.rankings["picks"]["api"]["value"]["reason"].startswith("DeepSeek V4.1 Flash 1017 has the highest overall score")
+    assert bundle.rankings["picks"]["api"]["value"]["slug"] == "gpt-6-1-sol"
+    assert bundle.rankings["picks"]["api"]["value"]["reason"].startswith("GPT-6.1 Sol has the highest overall score")
 
 
 # --- per-model documents -------------------------------------------------------------------------
 
 
 def test_model_documents_cover_the_roster(bundle):
-    assert set(bundle.models) == {m["slug"] for m in bundle.rankings["models"]} and len(bundle.models) == 61
+    assert set(bundle.models) == {m["slug"] for m in bundle.rankings["models"]} and len(bundle.models) == 62
 
 
 def test_model_document_leaves_components_routes_and_scenarios(bundle, v3_rows):
@@ -270,14 +270,14 @@ def test_benchmarks_document(bundle, v3):
     assert {c["key"] for c in doc["basket"]["pending"]} == {"itbench-aa"}  # O50: v2.0 prices 7 of the max-effort ranking's 9 rows
     assert doc["basket"]["referencePanelSize"] >= doc["basket"]["requiredPanelSize"]
     frontier = doc["frontier"]
-    assert frontier["status"] == "complete" and len(frontier["rows"]) == 18
+    assert frontier["status"] == "complete" and len(frontier["rows"]) == 19
     assert next(r for r in frontier["rows"] if r["aaId"] == "gpt-6-luna")["slug"] == "gpt-6-luna"
 
 
 def test_tb4_document(bundle, data):
     tb4 = json.loads((data / "tb4.json").read_text())
     doc = bundle.tb4
-    assert doc["rows"] == tb4["rows"] and doc["frontierCount"] >= 1 and len(doc["cohortMapping"]) == 61
+    assert doc["rows"] == tb4["rows"] and doc["frontierCount"] >= 1 and len(doc["cohortMapping"]) == 62
     assert doc["cohortMapping"]["deepseek-v4-flash"]["status"] == "provider_claim"
     assert doc["cohortMapping"]["claude-opus-5"]["status"] == "official"
     # O33: the exact Muse Spark 1.3 (xhigh) row belongs to that effort only.
@@ -296,8 +296,8 @@ def test_changelog_document(bundle):
 
 def test_index_page(bundle):
     page = viewmodel.index_page(bundle)
-    assert page["headline"]["api"] == "DeepSeek V4.1 Flash 1017 leads the API ranking at 60.4; Claude Opus 5.5 leads on quality."
-    assert page["headline"]["plan"] == "Claude Opus 5.5 leads the Plan ranking at 64.3 and also leads on quality."
+    assert page["headline"]["api"] == "GPT-6.1 Sol leads the API ranking at 60.0; Claude Opus 5.5 leads on quality."
+    assert page["headline"]["plan"] == "Claude Opus 5.5 leads the Plan ranking at 64.2 and also leads on quality."
     assert page["picks"] == bundle.rankings["picks"] and page["rankingsJson"] is bundle.rankings
     assert len(page["models"]) == 9 and page["dimensions"] == bundle.rankings["dimensions"]
     assert len(page["chart"]["api"]) == len(page["chart"]["plan"]) == 9  # a row without a cost has no point and set(page["chart"]["plan"][0]) == {"slug", "name", "x", "y", "pareto", "costLabel"}
@@ -310,7 +310,7 @@ def test_rankings_and_models_pages(bundle):
     assert [c["key"] for c in page["columns"] if c["default"]] == ["rank", "name", "overall", "quality", "cost", "grade", "coverage"]
     assert {c["key"] for c in page["columns"]} >= {leaf.key for leaf in q.LEAVES}
     models = viewmodel.models_page(bundle)
-    assert models["rankedCount"] == 9 and models["unrankedCount"] == 52
+    assert models["rankedCount"] == 9 and models["unrankedCount"] == 53
 
 
 def test_model_page(bundle):
@@ -337,7 +337,7 @@ def test_benchmark_pages_wrap_their_documents(bundle):
 def test_methodology_page(bundle, v3):
     page = viewmodel.methodology_page(bundle)
     method = page["method"]
-    assert method["costLabel"].startswith("contestant-model API token cost") and method["barLevel"] == "quality 64.3 (the displayed quality of Gemini 4 Argon at freeze)"
+    assert method["costLabel"].startswith("contestant-model API token cost") and method["barLevel"] == "quality 63.5 (the displayed quality of Gemini 4 Argon at freeze)"
     assert method["anchors"]["api"]["low"] == v3["workloads"][v3["mainWorkload"]]["anchors"]["api"]["low"]
     assert method["streamDescriptions"]["S0"] == "published-record reporting precision" and method["notQuantified"]
     example = page["workedExample"]
@@ -367,7 +367,7 @@ def test_export_writes_every_public_file_deterministically(data, tmp_path):
     first = export.export_public_data(data, tmp_path / "one")
     second = export.export_public_data(data, tmp_path / "two")
     relative = sorted(p.relative_to(tmp_path / "one").as_posix() for p in first)
-    assert len(first) == 68 and "plans.json" in relative and "rankings-aicd.json" in relative  # 7 site documents and 61 model documents
+    assert len(first) == 69 and "plans.json" in relative and "rankings-aicd.json" in relative  # 7 site documents and 62 model documents
     for left, right in zip(sorted(first), sorted(second)):
         assert left.read_bytes() == right.read_bytes()
     text = (tmp_path / "one" / "rankings.json").read_text()
@@ -394,7 +394,7 @@ def test_the_ai_coding_daily_ranking_is_a_bundle_of_its_own(bundle, scores):
     assert rankings["track"] == {"key": "aicd", "label": "AI Coding Daily ranking", "href": "/rankings/ai-coding-daily/"}
     assert bundle.rankings["track"]["key"] == "max" and set(bundle.extras["tracks"]) == {"aicd"}
     ranked = {m["slug"] for m in rankings["models"] if m["rankingEligible"]}
-    assert len(ranked) == len(scores["v3Tracks"]["aicd"]["rows"]) == 15
+    assert len(ranked) == len(scores["v3Tracks"]["aicd"]["rows"]) == 16
     assert "aiCodingDaily" in {d["key"] for d in rankings["dimensions"]} and "vibeCode" not in {d["key"] for d in rankings["dimensions"]}
     # A configuration ranked only there takes its model page from that ranking, and every page lists both rankings.
     opus_high = bundle.models["claude-opus-5-5-high"]
