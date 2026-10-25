@@ -12,3 +12,4 @@ research agent returned it (dollar figures are the agent's conversions at the st
 - `stage1-google.md` — Gemini 4 Argon (and Gemini 3.8 Flash) on Google AI Pro / Ultra (plain web search)
 - `stage1-mimo.md` — MiMo-V2.6-Pro / Flash on Xiaomi Token Plan tiers (plain web search)
 - `stage1-assessment.md` — every model × tier against O11 after stage 1
+- `research_notes/Plan allowance user reports/` and `reports/Plan allowance user reports.md` — stage 2 (Claude's Deep Research): no model × tier passes O11
