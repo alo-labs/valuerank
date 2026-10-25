@@ -41,7 +41,7 @@ from valuerank import plan_routes
 from valuerank import quality as q
 from valuerank import scenarios
 from valuerank.clock import utcnow
-from valuerank.paths import DATA
+from valuerank.paths import DATA, ROOT
 from valuerank.plan_costs import COST_WEIGHT_PCT
 
 METHODOLOGY_VERSION = "3.0.0"
@@ -78,12 +78,14 @@ SAMPLING_TASKS = {
 # weighted mean of seven binomial category draws. Counts are LiveBench's published task counts; Reasoning and Data Analysis publish only their parts (4
 # and 3), each holding several short questions, so reading them as 4 and 3 trials overstates their noise (the wide reading).
 LIVEBENCH_CATEGORY_TASKS = {"long_agentic": 18, "reasoning": 4, "coding": 29, "browser": 25, "data_analysis": 3, "research": 22, "design": 25}
-# O39: GDPval-AA is a fitted Elo with no task-level outcome; AA displays a rating interval (e.g. -26/+26 for Claude
-# Opus 5.5 on 2026-10-20) without its level, so the stream reads it as a 95% normal interval: an assumption, labelled.
+# O39: GDPval-AA is a fitted Elo with no task-level outcome; AA's model page displays each configuration's rating interval
+# without its level, so the stream reads the row's own interval as a 95% normal interval (I60 M2): an assumption,
+# labelled. A row without a captured interval takes the -26/+26 width AA displayed for Claude Opus 5.5 on 2026-10-20.
 GDPVAL_RATING_SD = 26.0 / 1.96
+GDPVAL_SOURCE = "AA GDPval-AA v2.1 Elo as displayed on AA's model page at the capture (E90, O70)"
 SAMPLING_ASSUMPTIONS = (
     "tasks are independent and each leaf's score is a mean over its published task count (plug-in binomial with the proportion (k + 1/2) / (n + 1), I28); attempts averaged within a task and tasks shared across models are ignored, so the noise is approximate",
-    "GDPval-AA: AA's displayed rating interval (-26/+26 Elo for Claude Opus 5.5) read as a 95% normal interval, SD 13.3 Elo for every row",
+    "GDPval-AA: each row's rating interval as AA's model page displays it, read as a 95% normal interval (AA states no level), SD = half-width / 1.96",
     "AA-Omniscience: each of 6,000 questions scores +1, 0 or -1, with the shares from AA's accuracy and hallucination rate",
     "Vals boards (Vibe Code Bench v1.1, Code Migration v1.1): Vals' published standard error per record, read as the leaf's SD",
     "AI Coding Daily: judged points over its six graded projects read as a binomial share of 60 points (an assumption; the board publishes no error)",
@@ -206,7 +208,10 @@ def leaf_evidence(model_id: str, effort: str | None, page: dict, tb4_rows: list[
              "ci95HalfWidthPct": tb4.get("uncertaintyPct")},
             "tb4", f"rows[model={tb4['model']}, agent={tb4.get('agent')}].resolutionRatePct")
     if page.get("gdpval") is not None:
-        add("gdpval", page["gdpval"], q.gdpval_z(page["gdpval"]), {"source": "AA GDPval-AA v2.1 Elo as integrated in the pinned Index (E90)"}, "snapshot", f"{page_path}.gdpval")
+        # E90, O70: the Elo AA's model page displays at the capture (AA refits it as models join; the Index total does not
+        # move with it), with the page's displayed rating interval beside it (I60 M2; its level is not stated).
+        add("gdpval", page["gdpval"], q.gdpval_z(page["gdpval"]),
+            {"source": GDPVAL_SOURCE, "ratingInterval": page.get("gdpvalInterval"), "intervalLevel": "not stated by AA"}, "snapshot", f"{page_path}.gdpval")
     for key, field in FRACTION_LEAVES.items():
         if page.get(field) is not None:
             add(key, page[field], q.fraction_z(page[field]), {"source": f"AA field {field}"}, "snapshot", f"{page_path}.{field}")
@@ -381,11 +386,11 @@ METERING_BASES = ("provider-reported", "canonical-tokenizer fallback", "not publ
 SOURCE_INTERVALS = [
     {"leaf": "terminalBench", "status": "captured", "level": "95% (tbench.ai: \"The whiskers span the 95% confidence interval\")", "stream": "S1M"},
     {
-        "leaf": "gdpval", "status": "published, not captured",
+        "leaf": "gdpval", "status": "captured, level unstated",
+        "field": "model.gdpvalInterval {lower, upper} on every AA model page (captured since the 2026-10-23 re-capture, O47)",
         "method": "Crowd-BT maximum likelihood with sandwich-estimator confidence intervals (AA methodology, GDPval-AA v2.1)",
         "level": "not stated by the source (the 95% level on AA's methodology page belongs to AA-Briefcase)",
-        "stream": "none until captured with a documented level; otherwise published beside the leaf outside every stream",
-        "captureTask": "capture the GDPval-AA leaderboard CI column for the exact configurations",
+        "stream": "S1T: each row's half-width / 1.96 as its SD (read as a 95% interval, an analyst convention); published beside the leaf in each row's provenance (ratingInterval)",
     },
 ]
 SOURCE_DATES = {"LiveBench 2.0": {"release": "2026-10-14", "lastUpdated": "2026-10-18", "observedOn": "2026-10-20", "role": "retired quality source (O26)"}}
@@ -574,7 +579,49 @@ def source_clocks(documents: dict) -> list[dict]:
     if cognition:
         clocks.append({"source": "Cognition: FrontierCode leaderboard", "artifact": cognition["file"], "capturedAt": cognition["capturedOn"],
                        "sourceUpdated": cognition.get("lastModified")})
+    # I60 L6: an O68 re-read that found the board unchanged is printed beside the pinned capture's clock.
+    rereads = {item["source"]: item for item in (documents.get("sourceRereads") or {}).get("rereads", [])}
+    for clock in clocks:
+        if clock["source"] in rereads:
+            item = rereads[clock["source"]]
+            clock["reRead"] = {"at": item["reReadAt"], "result": item["result"], "file": item["file"],
+                               **({"lastModified": item["lastModified"]} if item.get("lastModified") else {})}
     return clocks
+
+
+def check_rereads(documents: dict) -> None:
+    """I60 L6: an O68 re-read record must name, by hash, the pinned capture the build uses; a record left behind by a
+    newer capture stops the build (the tests compare each 'unchanged' result with the re-read file, `reread_matches`)."""
+
+    for item in (documents.get("sourceRereads") or {}).get("rereads", []):
+        key, *path = item["pinnedKey"].split(".")
+        pinned = documents.get(key) or {}
+        for part in path:
+            pinned = (pinned or {}).get(part)
+        if pinned != item["pinnedSha256"]:
+            raise ValueError(f"{item['source']}: the O68 re-read at {item['reReadAt']} was compared with a capture ({item['pinnedSha256'][:12]}) that is not the pinned one ({str(pinned)[:12]})")
+
+
+def reread_matches(item: dict, root: Path = ROOT) -> bool:
+    """Whether a re-read file equals the pinned capture (file hash, or the compared fields of a scrape)."""
+
+    pinned, reread = (root / item["pinned"]).read_bytes(), (root / item["file"]).read_bytes()
+    if item["compare"] == "sha256":
+        return hashlib.sha256(pinned).hexdigest() == hashlib.sha256(reread).hexdigest() == item["pinnedSha256"]
+    old, new = json.loads(pinned), json.loads(reread)
+    return hashlib.sha256(pinned).hexdigest() == item["pinnedSha256"] and all(old.get(field) == new.get(field) for field in item["compare"])
+
+
+def check_bug_hunt_dates(records: list[dict], release_day: date) -> str | None:
+    """O69, I60 L3: a Bug Hunt record dated after the cutoff's day stops the build; one dated on the cutoff's day has no
+    recorded instant, so it stops too. Returns the newest record date, printed beside the scoreboard's clock."""
+
+    days = [record["reportedOn"] for record in records if record.get("reportedOn")]
+    for record in records:
+        day = record.get("reportedOn")
+        if day and date.fromisoformat(day) >= release_day:
+            raise ValueError(f"Bug Hunt record {record['modelId']} is dated {day}, not before the release cutoff's day {release_day} (O69)")
+    return max(days) if days else None
 
 
 def check_source_clocks(clocks: list[dict], release_day: date, cutoff: datetime) -> None:
@@ -741,6 +788,11 @@ def assemble(configurations: list[dict], documents: dict, *, release_day: date, 
     # release day, otherwise the end of that day.
     now = utcnow()
     clocks = source_clocks(documents)
+    check_rereads(documents)
+    newest = check_bug_hunt_dates(documents["bugHunt"]["models"], release_day)
+    for clock in clocks:
+        if clock["source"] == "Bug Hunt Bench scoreboard":
+            clock["newestRowDate"] = newest
     check_source_clocks(clocks, release_day, now if now.date() == release_day else datetime.combine(release_day, time.max, tzinfo=timezone.utc))
     # E217: the model pages (costs and AA-run leaves) and the chart that defines the cohort describe one AA state.
     chart, pages_at = (documents.get("frontierCapture") or {}).get("captured_at"), documents["snapshot"].get("capturedAt")
@@ -750,7 +802,8 @@ def assemble(configurations: list[dict], documents: dict, *, release_day: date, 
     # none is taken after the release cutoff (O65: AA data read after the cutoff moves the cutoff and is re-captured).
     cutoff = now if now.date() == release_day else datetime.combine(release_day, time.max, tzinfo=timezone.utc)
     for name, stamp in (("Coding Agent Index capture", (documents.get("codingAgents") or {}).get("capturedAt")),
-                        ("cost-chart capture", (documents.get("costCharts") or {}).get("capturedAt"))):
+                        ("cost-chart capture", (documents.get("costCharts") or {}).get("capturedAt")),
+                        *((("AA frontier chart capture", chart),) if chart else ())):
         if pages_at and not stamp:
             raise ValueError(f"the {name} carries no capture instant (E217)")
         if stamp and pages_at and abs(_instant(stamp) - _instant(pages_at)).total_seconds() > CAPTURE_GAP_MAX_DAYS * 86400:
@@ -826,6 +879,8 @@ def assemble(configurations: list[dict], documents: dict, *, release_day: date, 
         "mainWorkload": main, "releaseDay": release_day.isoformat(), "tb4Rows": documents["tb4"]["rows"], "incomplete": incomplete, "listed": listed,
         "cognition": documents.get("cognitionFrontierCode") or {"v1_1": {"data": {}}},
         "sourceClocks": clocks,
+        "gdpvalPrevious": documents.get("aaPreviousCapture"),
+        "pages": documents["snapshot"]["pages"],
     }
 
 
@@ -1973,6 +2028,7 @@ def score(assembled: dict, frozen: dict) -> dict:
             "anchorStability": _anchor_stability(rows, frozen, main, per_row),
             "omniscienceAbstentionSensitivity": _abstention_sensitivity(rows, per_row),
             "gdpvalLogisticSensitivity": _gdpval_logistic_sensitivity(rows, per_row),
+            "gdpvalMovement": gdpval_movement(assembled, rows),
             "qualitySourceShares": q.source_shares(),
             "qualityAgreement": agreement,
             "qualitySubstitutionAgreement": _substitution_agreement(rows, per_row),
@@ -2191,6 +2247,37 @@ def _abstention_sensitivity(rows: list[dict], per_row: dict) -> dict:
         primary[row["id"]] = value
         penalised[row["id"]] = anchor_math.value_score(per_row[row["id"]]["api"]["costScore"], q.summarize(observations).displayed, BETA)
     return {"rule": "z_pen = max(0, I)", "rankChanges": diagnostics.paired_rank_change(primary, penalised)}
+
+
+def gdpval_movement(assembled: dict, rows: list[dict]) -> dict | None:
+    """E90, O70, I60 M1: how far the displayed GDPval-AA Elo moved since the capture this one replaced, and whether the
+    page's Intelligence Index total moved with it (it does not when AA keeps a rating frozen at addition in the Index)."""
+
+    previous = assembled.get("gdpvalPrevious")
+    if not previous:
+        return None
+    before = {page["id"]: page for page in previous["pages"]}
+    common, moved, index_moved, frozen_index, deltas = 0, 0, 0, 0, {}
+    for page in assembled["pages"]:
+        old, model = before.get(page.get("id")), page["model"]
+        if old is None or old.get("gdpval") is None or model.get("gdpval") is None:
+            continue
+        common += 1
+        delta = model["gdpval"] - old["gdpval"]
+        index_changed = model.get("intelligenceIndex") != old.get("intelligenceIndex")
+        moved += delta != 0
+        index_moved += index_changed
+        frozen_index += delta != 0 and not index_changed
+        deltas[page["id"]] = delta
+    weight = q.LEAF_BY_KEY["gdpval"].weight / 100.0
+    # A row's z moves by delta / 20 (E90) and its value by (1 - beta) x the leaf weight x that.
+    ranked = [abs(deltas[row["id"]]) for row in rows if row["id"] in deltas]
+    largest = max(ranked, default=0.0)
+    return {"previousCapturedAt": previous["capturedAt"], "previousSha256": previous["sha256"], "commonPages": common,
+            "eloMoved": moved, "indexMoved": index_moved, "eloMovedIndexUnchanged": frozen_index,
+            "minDeltaElo": min(deltas.values(), default=0.0), "maxDeltaElo": max(deltas.values(), default=0.0),
+            "rankedLargestAbsDeltaElo": largest, "rankedLargestAbsDeltaZ": largest / 20.0,
+            "rankedLargestAbsDeltaValue": (1.0 - BETA) * weight * largest / 20.0}
 
 
 def _gdpval_logistic_sensitivity(rows: list[dict], per_row: dict) -> dict:
@@ -2448,13 +2535,20 @@ def _binomial_variance(score: float, tasks: int) -> float:
     return p * (1.0 - p) / tasks
 
 
-def sampling_sd(key: str, observation: q.Observation, source: dict, gdpval_sd: float = GDPVAL_RATING_SD, tasks_of: dict | None = None) -> float:
+def gdpval_row_sd(source: dict) -> float:
+    """I60 M2: the row's displayed GDPval-AA interval read as a 95% normal interval, in Elo."""
+
+    interval = source.get("ratingInterval")
+    return (interval["upper"] - interval["lower"]) / 2.0 / 1.96 if interval else GDPVAL_RATING_SD
+
+
+def sampling_sd(key: str, observation: q.Observation, source: dict, gdpval_sd: float | None = None, tasks_of: dict | None = None) -> float:
     """O39: the plug-in standard error of one leaf's z score under the independent-task approximation (binomial
     leaves with the Jeffreys-type proportion, I28)."""
 
     z = observation.z
     if key == "gdpval":
-        return gdpval_sd * 100.0 / 2000.0  # E90: z = (Elo - 500) / 20
+        return (gdpval_row_sd(source) if gdpval_sd is None else gdpval_sd) * 100.0 / 2000.0  # E90: z = (Elo - 500) / 20
     if source.get("stderr") is not None:
         return source["stderr"]  # Vals' published standard error, in percentage points (the leaf's z unit)
     if key == "livebench2Overall":
@@ -2480,7 +2574,7 @@ def sampling_kernel(key: str, observation: q.Observation, source: dict) -> scena
     return scenarios.Kernel("normal", (observation.z, sampling_sd(key, observation, source), 0.0, 100.0), None, scenarios.TASK_SAMPLING, derivation)
 
 
-def quality_sd(row: dict, gdpval_sd: float = GDPVAL_RATING_SD, tasks_of: dict | None = None) -> float:
+def quality_sd(row: dict, gdpval_sd: float | None = None, tasks_of: dict | None = None) -> float:
     """O39: a row's analytic quality SD from its leaves' task-sampling SDs (cost is not drawn)."""
 
     observations, provenance = row["evidence"]["observations"], row["evidence"]["provenance"]
@@ -2542,7 +2636,7 @@ def rank_separability(assembled: dict, per_row: dict, exchange: dict | None = No
 
 SEPARABILITY_CORRELATIONS = (0.0, 0.3, 0.6)
 AICD_NARROW_TASKS = 60  # E263: one trial per point of 60, the narrow reading of AI Coding Daily's noise
-GDPVAL_WIDE_SD = 26.0  # I26: AA's displayed +/-26 Elo read as one SD, the wide reading of an interval whose level is unstated
+GDPVAL_WIDE_SD = 26.0  # I26, I60: AA's displayed +/-26 Elo for Claude Opus 5.5 read as one SD for every row, the wide reading of an interval whose level is unstated
 SEPARABILITY_BIAS = ("net direction not established: treating two rows' errors as independent overstates the threshold, because every row "
                      "is scored on the same tasks and attempts are averaged within a task; sources it omits (run-to-run and harness "
                      "variance, AA's single cost run and, on the Plan basis, owner-named transfer error) work the other way")
@@ -2908,8 +3002,16 @@ EVIDENCE_FILES = {
     "leafEvidence": ("leaf_evidence.json", "editorial supplementary leaf evidence and the exhaustive-search log (O36)"),
     "cognitionFrontierCode": ("cognition_frontiercode.json", "Cognition's FrontierCode leaderboard data (https://cognition.com/data/frontiercode-leaderboard/data.json), captured unchanged (O37)"),
     "sweTracks": ("swe_tracks.json", "research/2026-10-23-swe-benchmarks/build_swe_tracks.py from the verified coverage captures (O53-O55)"),
+    "aaPreviousCapture": ("aa/aa_previous_capture.json", "valuerank.capture_aa: digest of the model-page capture this one replaced (I60)"),
+    "sourceRereads": ("source_rereads.json", "editorial record of the O68 re-reads, each 'unchanged' result verified against the re-read file"),
 }
 CAPTURE_FIELDS = ("capturedAt", "observedAt", "snapshotDate", "asOf", "frozenAt")
+SOURCE_INSTANTS = {
+    "tb4": lambda document: (document.get("source") or {}).get("capturedAt"),
+    "bugHunt": lambda document: max((record["observedAt"] for record in document.get("models", []) if record.get("observedAt")), default=None),
+    "leafEvidence": lambda document: max((day for search in document.get("searches", [])
+                                          for day in (search.get("searchedOn"), (search.get("openWeb") or {}).get("searchedOn")) if day), default=None),
+}
 
 
 def load_documents(data: Path) -> dict:
@@ -2932,6 +3034,8 @@ def evidence_bundle(data: Path) -> dict:
         document = json.loads(content)
         # The roster is a bare list with no capture time of its own.
         captured = next((document[field] for field in CAPTURE_FIELDS if isinstance(document.get(field), str)), None) if isinstance(document, dict) else None
+        # I60 L6: a derived or editorial artifact carries its source's own latest instant, not its build stamp.
+        captured = (SOURCE_INSTANTS[key](document) or captured) if key in SOURCE_INSTANTS else captured
         artifacts.append({"key": key, "artifact": f"data/{relative}", "sha256": hashlib.sha256(content).hexdigest(), "capturedAt": captured, "extractor": extractor})
     return {
         "artifacts": artifacts,

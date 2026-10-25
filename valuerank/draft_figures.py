@@ -6,8 +6,10 @@ from the build: ``{{max:PATH|FORMAT}}`` and ``{{aicd:PATH|FORMAT}}`` read a rank
 ``data/scores.json``, ``{{top:PATH|FORMAT}}`` reads the file's root, and ``{{fig:NAME}}`` reads a named figure of the
 figures manifest (``data/figures.json``, both rankings, rebuilt with the docs). ``render`` writes the published
 ``draft-rNNN.md`` from its source; ``check`` fails when the newest draft differs from its rendering, when a
-placeholder does not resolve, or when a sentence that speaks of today still carries an unmarked number. A stale figure
-that a reviewer finds after this is a bug in the check, not in the draft.
+placeholder does not resolve, or when a sentence that speaks of today still carries an unmarked number. A sentence that
+says a source publishes or carries no such field carries an ``{{absent:KEY}}`` marker (rendered as nothing) whose claim
+is tested against the pinned data (I60 M2). A stale figure that a reviewer finds after this is a bug in the check, not
+in the draft.
 
     python3 -m valuerank.draft_figures manifest  # write data/figures.json (run by `npm run build:docs`)
     python3 -m valuerank.draft_figures render    # (re)write the newest draft from its source
@@ -31,7 +33,7 @@ from valuerank.paths import DATA, ROOT
 
 SPEC_DIR = ROOT / "research" / "2026-10-19-methodology-codesign"
 MANIFEST = "figures.json"
-PLACEHOLDER = re.compile(r"\{\{(?P<scope>max|aicd|top|fig|name):(?P<path>[^|}]+)(?:\|(?P<fmt>[^}]+))?\}\}")
+PLACEHOLDER = re.compile(r"\{\{(?P<scope>max|aicd|top|fig|name|absent):(?P<path>[^|}]+)(?:\|(?P<fmt>[^}]+))?\}\}")
 _TOKEN = re.compile(r'\[(?P<bracket>[^\]]+)\]|(?P<key>[^.\[\]]+)')
 DRAFT = re.compile(r"draft-r(?P<number>\d+)\.src\.md$")
 
@@ -82,7 +84,7 @@ def display_names(scores: dict) -> dict:
 
 def fmt(value, spec: str | None, names: dict) -> str:
     """Format one resolved value. ``.Nf``, ``,.Nf``, ``pct.N``, ``int``, ``count``, ``name``, ``names``, ``usd.N``,
-    ``range`` (a two-item rank band) and ``str``; without a spec, a string or integer is printed as it is."""
+    ``range`` (a two-item rank band), ``signed.N`` and ``str``; without a spec, a string or integer is printed as it is."""
 
     if spec is None:
         if isinstance(value, bool) or not isinstance(value, (str, int)):
@@ -109,6 +111,8 @@ def fmt(value, spec: str | None, names: dict) -> str:
         return f"{value * 100:.{int(spec[4:])}f}%"
     if spec.startswith("usd."):
         return f"${value:,.{int(spec[4:])}f}"
+    if spec.startswith("signed."):
+        return f"{value:+.{int(spec[7:])}f}".replace("-", "−")
     if spec.startswith(",.") and spec.endswith("f"):
         return f"{value:,.{int(spec[2:-1])}f}"
     if spec.startswith(".") and spec.endswith("f"):
@@ -355,6 +359,11 @@ def render(text: str, scores: dict, manifest: dict) -> str:
             if path not in names:
                 raise FigureError(f"no configuration {path!r}")
             return names[path]
+        if scope == "absent":
+            # I60 M2: the marker names a registered absence claim; check() tests the claim against the data.
+            if path not in ABSENCE_CLAIMS:
+                raise FigureError(f"no absence claim {path!r}")
+            return ""
         if scope == "fig":
             if path not in manifest:
                 raise FigureError(f"no named figure {path!r}")
@@ -542,6 +551,93 @@ def registry_problems(text: str, manifest: dict) -> list[str]:
     return problems
 
 
+def _keys(document) -> set[str]:
+    """Every key anywhere in a JSON document."""
+
+    if isinstance(document, dict):
+        return set(document) | {key for value in document.values() for key in _keys(value)}
+    if isinstance(document, list):
+        return {key for value in document for key in _keys(value)}
+    return set()
+
+
+def _load(data: Path, relative: str):
+    path = data / relative if not relative.startswith("research/") else ROOT / relative
+    return json.loads(path.read_text())
+
+
+def _no_key(relative: str, pattern: str, allowed: tuple[str, ...] = ()):
+    return lambda data: not [key for key in _keys(_load(data, relative)) if re.search(pattern, key) and key not in allowed]
+
+
+def _bug_hunt_search_empty(model_id: str):
+    def holds(data: Path) -> bool:
+        records = [item for item in _load(data, "bug_hunt.json")["models"] if item["modelId"] == model_id]
+        searches = [item for item in _load(data, "leaf_evidence.json")["searches"] if item["modelId"] == model_id and item["leaf"] == "bugHunt"]
+        return all(item.get("fixedOf105") is None for item in records) and bool(searches) and all(item["result"] == "not found" for item in searches)
+    return holds
+
+
+AA_LEAF_FIELDS = (*value_v3.FRACTION_LEAVES.values(), "terminalBench40", "omniscience", "gdpval")
+_INTERVAL_SUFFIX = re.compile(r"(?i)(?:Interval|Ci95|Ci|Lower|Upper|Stderr|Se|Error)\Z")
+
+
+def _leaf_interval_fields(data: Path, fields: tuple[str, ...]) -> set[str]:
+    """Interval-like fields beside the named AA leaves on any captured page, and on the Index evaluation entries."""
+
+    found = set()
+    for page in _load(data, "aa/aa_v432_snapshot.json")["pages"]:
+        model = page.get("model") or {}
+        found |= {key for key in model for field in fields if key.startswith(field) and _INTERVAL_SUFFIX.match(key[len(field):])}
+        found |= {key for item in model.get("intelligenceIndexEvaluations") or [] for key in item if re.search(r"(?i)interval|ci95|lower|upper|stderr", key)}
+    return found
+
+
+def _semianalysis_unhashed(data: Path) -> bool:
+    routes = [route for route in _load(data, "plan_cost_routes.json")["routes"] if route.get("sourceEvidenceId") == "semianalysis"]
+    return bool(routes) and not [key for route in routes for key in route if re.search(r"(?i)sha256|contentHash", key)]
+
+
+# I60 M2: a statement that a source publishes, or the capture carries, no such field is a fact about the pinned data and
+# goes stale when the field appears (AA's GDPval-AA interval did at the 2026-10-23 re-capture). Each claim the draft makes
+# is registered here with its test; a sentence making one carries its {{absent:KEY}} marker, and a claim that no longer
+# holds fails the check until the sentence is rewritten.
+ABSENCE_CLAIMS = {
+    "bughunt.minimaxFlash": ("no Bug Hunt run of MiniMax-M3.1-Flash, owner's or provider's", _bug_hunt_search_empty("minimax-m3-1-flash")),
+    "aa.meteringBasis": ("AA's pages carry no per-configuration token-metering basis",
+                         lambda data: _no_key("aa/aa_v432_snapshot.json", r"(?i)metering|tokeni[sz]er|countBasis")(data)
+                         and _no_key("aa/coding_agents_capture.json", r"(?i)metering|tokeni[sz]er|countBasis")(data)),
+    "aa.agentDeclinedMarker": ("the Coding Agent Index capture carries no declined-task marker", _no_key("aa/coding_agents_capture.json", r"(?i)declin")),
+    "aa.cacheSplit": ("the basket captures carry no cache split", lambda data: _no_key("aa/coding_agents_capture.json", r"(?i)cache")(data)
+                      and _no_key("aa/cost_charts_capture.json", r"(?i)cache")(data)),
+    "semianalysis.article": ("the SemiAnalysis article is not captured (no content hash)", _semianalysis_unhashed),
+    "aa.cacheRateWindow": ("AA's pages carry no cache-rate measurement window", _no_key("aa/aa_v432_snapshot.json", r"(?i)cache\w*(?:window|date|period)")),
+    "aicd.error": ("AI Coding Daily rows carry no error", _no_key("research/2026-10-25-board-reread/aicd/leaderboard-allrows-parsed.json", r"(?i)error|stderr|interval|ci\b")),
+    "livebench.taskCounts": ("the 2026-10-23 LiveBench release carries no task counts",
+                             _no_key("research/2026-10-25-board-reread/livebench/categories-20261023.json", r"(?i)count|tasks|questions")),
+    "aa.terminalBenchInterval": ("AA's pages carry no Terminal-Bench 4.0 interval", lambda data: not _leaf_interval_fields(data, ("terminalBench40",))),
+    "aa.leafIntervals": ("AA's pages carry no interval for a ValueRank AA leaf other than GDPval-AA's",
+                         lambda data: _leaf_interval_fields(data, AA_LEAF_FIELDS) == {"gdpvalInterval"}),
+}
+ABSENCE = re.compile(r"\bnot captured\b|\b(?:carries|carry|publishes|publish|published|captures|capture) (?:no|none)\b|"
+                     r"\bdoes not (?:carry|publish|capture)\b|\bnot published\b|\bpublish(?:es)? only\b", re.I)
+
+
+def absence_problems(text: str, data: Path = DATA) -> list[str]:
+    """I60 M2: every absence sentence carries a registered marker, and every marked claim holds against the data."""
+
+    problems = []
+    for line_number, line in enumerate(text.split(HISTORY_HEADING)[0].splitlines(), 1):
+        for sentence in _SENTENCE.split(line):
+            marked = re.findall(r"\{\{absent:([^}|]+)\}\}", sentence)
+            if ABSENCE.search(PLACEHOLDER.sub("", sentence)) and not marked:
+                problems.append(f"line {line_number}: an absence statement without an {{{{absent:KEY}}}} marker: {sentence[:160]}")
+            for key in marked:
+                if key in ABSENCE_CLAIMS and not ABSENCE_CLAIMS[key][1](data):
+                    problems.append(f"line {line_number}: absence claim {key} ({ABSENCE_CLAIMS[key][0]}) no longer holds; rewrite the sentence")
+    return problems
+
+
 def check(spec_dir: Path = SPEC_DIR, data: Path = DATA) -> list[str]:
     """Every problem with the newest draft: rendering, staleness against its source, and unmarked 'today' figures."""
 
@@ -556,6 +652,7 @@ def check(spec_dir: Path = SPEC_DIR, data: Path = DATA) -> list[str]:
     problems = [f"{source.name}: {problem}" for problem in lint(text, known_names(scores, data), configuration_names(scores), release_day(scores))]
     problems += [f"{source.name}: {problem}" for problem in pointer_problems(text, scores)]
     problems += [f"{source.name}: {problem}" for problem in registry_problems(text, manifest)]
+    problems += [f"{source.name}: {problem}" for problem in absence_problems(text, data)]
     target = published(source)
     if not target.exists() or target.read_text() != rendered:
         problems.append(f"{target.name} is not the rendering of {source.name} against the current data (run `python3 -m valuerank.draft_figures render`)")

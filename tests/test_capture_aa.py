@@ -77,6 +77,7 @@ def world(tmp_path, monkeypatch, pinned_clock):
     monkeypatch.setattr(ca, "AA_DIR", aa)
     monkeypatch.setattr(ca, "EXTRACT_PATH", aa / "aa_extract.json")
     monkeypatch.setattr(ca, "OUTPUT_PATH", aa / "aa_v432_snapshot.json")
+    monkeypatch.setattr(ca, "PREVIOUS_PATH", aa / "aa_previous_capture.json")
     return aa
 
 
@@ -282,6 +283,17 @@ def test_main_keeps_fresh_public_record_from_stored_snapshot(world, net):
     pages = json.loads((world / "aa_v432_snapshot.json").read_text())["pages"]
     assert pages[1] == existing
     assert [call[0] for call in net.calls] == ["https://artificialanalysis.ai/models/a"]
+    # I60 M1: the replaced capture leaves a digest for the next release's movement figures.
+    previous = json.loads((world / "aa_previous_capture.json").read_text())
+    assert previous["pages"] == [{"id": "p", "gdpval": None, "gdpvalEvaluation": None, "intelligenceIndex": None}]
+
+
+def test_previous_capture_digest_reads_gdpval_fields():
+    document = {"capturedAt": "t", "pages": [{"id": "x", "model": {"gdpval": 1600.5, "intelligenceIndex": 50.1,
+                "intelligenceIndexEvaluations": [{"slug": "aa-briefcase", "score": 1}, {"slug": "gdpval-aa", "score": 1601.0}]}}]}
+    digest = ca.previous_capture_digest(document, b"abc")
+    assert digest["capturedAt"] == "t" and digest["sha256"] == hashlib.sha256(b"abc").hexdigest()
+    assert digest["pages"] == [{"id": "x", "gdpval": 1600.5, "gdpvalEvaluation": 1601.0, "intelligenceIndex": 50.1}]
 
 
 def test_main_stale_public_record_fails_before_any_network_request(world, net):

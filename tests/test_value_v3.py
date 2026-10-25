@@ -640,6 +640,8 @@ def write_world(root: Path) -> Path:
         # The roster is a bare JSON list; the Bug Hunt scoreboard is the O31 roster-check input.
         "aa_mapping.json": [{"id": item["id"], "displayName": item["name"]} for item in CONFIGURATIONS],
         "bug_hunt_scoreboard.json": {"capturedAt": "2026-10-21T06:30:00Z", "sourceUpdated": "2026-10-17", "rows": [{"model": "A (max effort)", "fixedOf105": 10.0}]},
+        "aa/aa_previous_capture.json": {"capturedAt": "2026-10-12T00:00:00Z", "sha256": "0" * 64, "pages": []},
+        "source_rereads.json": {"rereads": []},
         "scores.json": {
             "models": [{"id": item["id"], "name": item["name"], "aaVariant": item["effort"], "aaSlug": item["aaSlug"], "rankingEligible": True} for item in CONFIGURATIONS]
             + [{"id": "out", "name": "Out", "aaSlug": "out", "rankingEligible": False}],
@@ -1222,7 +1224,7 @@ def test_release_publishes_gate_metering_and_source_registry_facts():
     assert rows["a"]["valuation"]["cacheRateProvenance"].startswith("AA's live measurement")
     assert output["meteringMix"] == {"provider-reported": 0, "canonical-tokenizer fallback": 0, "not published per configuration": 3}
     gdpval = next(item for item in output["sourceIntervals"] if item["leaf"] == "gdpval")
-    assert gdpval["status"] == "published, not captured" and gdpval["level"].startswith("not stated")
+    assert gdpval["status"] == "captured, level unstated" and gdpval["level"].startswith("not stated")
     assert output["sourceDates"]["LiveBench 2.0"]["release"] == "2026-10-14"
 
 
@@ -1950,3 +1952,66 @@ def test_the_basket_captures_describe_the_same_aa_state_and_predate_the_cutoff()
                             ({**documents()["codingAgents"], "capturedAt": "2026-10-20T00:00:00Z"}, r"was taken after the release cutoff \(O65\)")):
         with pytest.raises(ValueError, match=message):
             v.assemble(CONFIGURATIONS, documents(snapshot=pages, codingAgents=agents), release_day=DAY)
+    # I60 L1: the chart capture is tested against the cutoff too.
+    with pytest.raises(ValueError, match=r"AA frontier chart capture \(2026-10-20T00:00:00Z\) was taken after the release cutoff"):
+        v.assemble(CONFIGURATIONS, documents(snapshot=pages, frontierCapture={"captured_at": "2026-10-20T00:00:00Z", "points": []}), release_day=DAY)
+
+
+def test_gdpval_noise_reads_each_rows_displayed_interval():
+    """I60 M2: S1T reads the row's own GDPval-AA interval as a 95% interval; without one, the -26/+26 width."""
+
+    observation = q.gdpval_z(1600.0)
+    assert v.gdpval_row_sd({"ratingInterval": {"lower": 1580, "upper": 1619.2}}) == pytest.approx(19.6 / 1.96)
+    assert v.gdpval_row_sd({}) == v.GDPVAL_RATING_SD
+    assert v.sampling_sd("gdpval", observation, {"ratingInterval": {"lower": 1580, "upper": 1619.2}}) == pytest.approx(0.5)
+    assert v.sampling_sd("gdpval", observation, {"ratingInterval": {"lower": 1580, "upper": 1619.2}}, v.GDPVAL_WIDE_SD) == pytest.approx(1.3)
+
+
+def test_gdpval_movement_compares_the_replaced_capture():
+    """E90, O70: pages whose displayed Elo moved, the Index total beside it, and the largest ranked move."""
+
+    assert v.gdpval_movement({"gdpvalPrevious": None}, []) is None
+    previous = {"capturedAt": "t0", "sha256": "h", "pages": [{"id": "a", "gdpval": 1600.0, "intelligenceIndex": 50.0},
+                                                            {"id": "b", "gdpval": 1500.0, "intelligenceIndex": 40.0},
+                                                            {"id": "c", "gdpval": None, "intelligenceIndex": 30.0}]}
+    pages = [{"id": "a", "model": {"gdpval": 1604.0, "intelligenceIndex": 50.0}}, {"id": "b", "model": {"gdpval": 1500.0, "intelligenceIndex": 41.0}},
+             {"id": "c", "model": {"gdpval": 1400.0}}, {"id": "d", "model": {"gdpval": 1400.0}}, {"model": {"gdpval": 1.0}}]
+    movement = v.gdpval_movement({"gdpvalPrevious": previous, "pages": pages}, [{"id": "a"}, {"id": "z"}])
+    assert movement["commonPages"] == 2 and movement["eloMoved"] == 1 and movement["indexMoved"] == 1 and movement["eloMovedIndexUnchanged"] == 1
+    assert (movement["minDeltaElo"], movement["maxDeltaElo"], movement["rankedLargestAbsDeltaElo"]) == (0.0, 4.0, 4.0)
+    assert movement["rankedLargestAbsDeltaZ"] == pytest.approx(0.2)
+    assert movement["rankedLargestAbsDeltaValue"] == pytest.approx((1 - v.BETA) * q.LEAF_BY_KEY["gdpval"].weight / 100 * 0.2)
+
+
+def test_rereads_name_the_pinned_capture_and_match_their_files():
+    """I60 L6: an O68 re-read record names the pinned capture by hash, and each 'unchanged' result holds."""
+
+    documents = v.load_documents(v.DATA)
+    v.check_rereads(documents)
+    assert all(v.reread_matches(item) for item in documents["sourceRereads"]["rereads"])
+    stale = {**documents, "sourceRereads": {"rereads": [{**documents["sourceRereads"]["rereads"][0], "pinnedSha256": "0" * 64}]}}
+    with pytest.raises(ValueError, match="not the pinned one"):
+        v.check_rereads(stale)
+    assert not v.reread_matches({**documents["sourceRereads"]["rereads"][1], "pinned": "data/tb4.json"})
+    clocks = {clock["source"]: clock for clock in v.source_clocks(documents)}
+    assert clocks["tbench.ai Terminal-Bench 4.0 leaderboard"]["reRead"]["result"] == "unchanged"
+    assert clocks["Cognition: FrontierCode leaderboard"]["reRead"]["lastModified"] == "2026-10-23T21:44:27Z"
+
+
+def test_bug_hunt_dates_follow_o69():
+    """O69, I60 L3: a Bug Hunt record dated on or after the cutoff's day stops the build; the newest date is returned."""
+
+    records = [{"modelId": "a", "reportedOn": "2026-10-20"}, {"modelId": "b"}]
+    assert v.check_bug_hunt_dates(records, date(2026, 10, 25)) == "2026-10-20"
+    assert v.check_bug_hunt_dates([{"modelId": "b"}], date(2026, 10, 25)) is None
+    with pytest.raises(ValueError, match="not before the release cutoff's day"):
+        v.check_bug_hunt_dates(records, date(2026, 10, 20))
+
+
+def test_evidence_bundle_stamps_derived_files_with_their_sources_instants():
+    """I60 L6: tb4 carries its scrape's instant, Bug Hunt its latest record capture, the leaf evidence its latest search."""
+
+    assert v.SOURCE_INSTANTS["tb4"]({"source": {"capturedAt": "s"}, "observedAt": "b"}) == "s"
+    assert v.SOURCE_INSTANTS["bugHunt"]({"models": [{"observedAt": "2026-10-18"}, {"observedAt": "2026-10-25"}, {}]}) == "2026-10-25"
+    assert v.SOURCE_INSTANTS["leafEvidence"]({"searches": [{"searchedOn": "2026-10-21", "openWeb": {"searchedOn": "2026-10-23"}}]}) == "2026-10-23"
+    assert v.SOURCE_INSTANTS["bugHunt"]({}) is None and v.SOURCE_INSTANTS["leafEvidence"]({}) is None

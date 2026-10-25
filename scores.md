@@ -295,8 +295,8 @@ Frequencies over 10,000 scenarios per run (seed 20261025); streams are defined i
 | GPT-6 Luna (max) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.3% |
 | GPT-6 Luna (medium) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
 | GPT-6 Luna (xhigh) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| GPT-6.1 Sol (high) | 100.0% | 100.0% | 96.3% | 100.0% | 100.0% | 49.2% |
-| GPT-6.1 Sol (medium) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 20.9% |
+| GPT-6.1 Sol (high) | 100.0% | 100.0% | 96.3% | 100.0% | 100.0% | 49.1% |
+| GPT-6.1 Sol (medium) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 20.8% |
 | Gemini 4 Argon (high) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.1% |
 | Kimi K3.1 Pro | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.6% |
 | MiMo-V2.6-Pro | 0.0% | 0.0% | 3.6% | 0.0% | 0.0% | 20.8% |
@@ -327,14 +327,14 @@ Frequencies over 10,000 scenarios per run (seed 20261025); streams are defined i
 | Configuration | S0 | S1 | S2 | S1 endpoint-heavy | S1M | S1T |
 |---|---:|---:|---:|---:|---:|---:|
 | Claude Haiku 5.5 (high) | 100.0% | 100.0% | 100.0% | 100.0% | 100.0% | 86.3% |
-| Claude Haiku 5.5 (medium) | 100.0% | 100.0% | 99.8% | 100.0% | 100.0% | 80.9% |
+| Claude Haiku 5.5 (medium) | 100.0% | 100.0% | 99.8% | 100.0% | 100.0% | 80.8% |
 | Claude Opus 5.5 (high) | 100.0% | 100.0% | 95.9% | 100.0% | 100.0% | 49.2% |
-| Claude Opus 5.5 (medium) | 100.0% | 100.0% | 100.0% | 100.0% | 100.0% | 74.3% |
+| Claude Opus 5.5 (medium) | 100.0% | 100.0% | 100.0% | 100.0% | 100.0% | 74.4% |
 | DeepSeek V4.1 Flash 1017 (max) | 0.0% | 0.0% | 9.9% | 0.0% | 0.0% | 32.0% |
 | GPT-5.6 Luna (low) | 100.0% | 100.0% | 100.0% | 100.0% | 100.0% | 100.0% |
 | GPT-6 Astra (high) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 5.3% |
 | GPT-6 Luna (high) | 100.0% | 100.0% | 100.0% | 100.0% | 100.0% | 87.8% |
-| GPT-6 Luna (max) | 100.0% | 100.0% | 82.4% | 100.0% | 100.0% | 58.0% |
+| GPT-6 Luna (max) | 100.0% | 100.0% | 82.4% | 100.0% | 100.0% | 57.9% |
 | GPT-6 Luna (medium) | 100.0% | 100.0% | 100.0% | 100.0% | 100.0% | 100.0% |
 | GPT-6 Luna (xhigh) | 0.0% | 0.0% | 28.9% | 0.0% | 0.0% | 40.9% |
 | GPT-6.1 Sol (high) | 100.0% | 100.0% | 100.0% | 100.0% | 100.0% | 83.0% |
@@ -610,7 +610,7 @@ The 90% rule's error bound holds per published event (candidate and kernel assig
 ### AI Coding Daily ranking: diagnostics
 
 - **Terminal-Bench cross-source agreement (AA's mini-SWE-agent run against tbench.ai):** undefined (panel too small); 0 rows take the leaf from tbench.ai (gap fill).
-- **Rank separability (O39, independent-task approximation):** median separation 4.43 value points (API) and 4.43 (Plan); separable adjacent ranks: API 1 of 15, Plan 1 of 20. Assumptions: tasks are independent and each leaf's score is a mean over its published task count (plug-in binomial with the proportion (k + 1/2) / (n + 1), I28); attempts averaged within a task and tasks shared across models are ignored, so the noise is approximate; GDPval-AA: AA's displayed rating interval (-26/+26 Elo for Claude Opus 5.5) read as a 95% normal interval, SD 13.3 Elo for every row; AA-Omniscience: each of 6,000 questions scores +1, 0 or -1, with the shares from AA's accuracy and hallucination rate; Vals boards (Vibe Code Bench v1.1, Code Migration v1.1): Vals' published standard error per record, read as the leaf's SD; AI Coding Daily: judged points over its six graded projects read as a binomial share of 60 points (an assumption; the board publishes no error).
+- **Rank separability (O39, independent-task approximation):** median separation 4.43 value points (API) and 4.42 (Plan); separable adjacent ranks: API 1 of 15, Plan 1 of 20. Assumptions: tasks are independent and each leaf's score is a mean over its published task count (plug-in binomial with the proportion (k + 1/2) / (n + 1), I28); attempts averaged within a task and tasks shared across models are ignored, so the noise is approximate; GDPval-AA: each row's rating interval as AA's model page displays it, read as a 95% normal interval (AA states no level), SD = half-width / 1.96; AA-Omniscience: each of 6,000 questions scores +1, 0 or -1, with the shares from AA's accuracy and hallucination rate; Vals boards (Vibe Code Bench v1.1, Code Migration v1.1): Vals' published standard error per record, read as the leaf's SD; AI Coding Daily: judged points over its six graded projects read as a binomial share of 60 points (an assumption; the board publishes no error).
 - **FrontierCode against Cognition:** FrontierCode cross-source agreement (AA against Cognition, same name and effort; E234): Kendall tau 0.77 (interval 0.58 to 0.91) on 22 rows. Cognition minus AA: mean +2.6 points, largest 11.6.
 - **Gap-fill removal (E234, diagnostic; scores unchanged):** with these leaves removed and the rest renormalised — GPT-6 Astra (high) (FrontierCode 1.1); GPT-5.6 Luna (low) (FrontierCode 1.1) — API 4 rows move; largest move 3 (GPT-6 Astra (high)); Plan no rank changes.
 - **Bar results without the gap fills (E234, sensitivity; labels unchanged):** cheapest displayed row as published, with fills removed, and with third-party fills lowered by the mean offset 2.6 points — API quality 49.2: MiMo-V2.6-Pro in all three; API quality 38.0: Claude Haiku 5.5 (medium) in all three; API quality 58.6: Claude Opus 5.5 (medium) in all three; Plan quality 49.2: Claude Opus 5.5 (medium) in all three; Plan quality 38.0: Claude Haiku 5.5 (medium) in all three; Plan quality 58.6: Claude Opus 5.5 (medium) in all three.
@@ -704,7 +704,7 @@ USD at API rates for the exact configuration; "—" marks a component without an
 
 ### Valuation basis
 
-Valuation-basis gate (E170): 9 compatible as captured. AA's Index category costs reconcile exactly with the prices AA displays for each configuration at capture, so its applied prices are the prices in force at the release cutoff. Token metering (E176): 9 not published per configuration; AA values cached input at live measurements of each model's typical cache-hit rate. Source intervals (E174): terminalBench: captured, level 95% (tbench.ai: "The whiskers span the 95% confidence interval"); gdpval: published, not captured, level not stated by the source (the 95% level on AA's methodology page belongs to AA-Briefcase).
+Valuation-basis gate (E170): 9 compatible as captured. AA's Index category costs reconcile exactly with the prices AA displays for each configuration at capture, so its applied prices are the prices in force at the release cutoff. Token metering (E176): 9 not published per configuration; AA values cached input at live measurements of each model's typical cache-hit rate. Source intervals (E174): terminalBench: captured, level 95% (tbench.ai: "The whiskers span the 95% confidence interval"); gdpval: captured, level unstated, level not stated by the source (the 95% level on AA's methodology page belongs to AA-Briefcase).
 
 ## Plan route selection
 
@@ -935,7 +935,7 @@ Frequencies over 10,000 scenarios per run (seed 20261025); streams are defined i
 | GPT-6 Astra (max) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.6% |
 | GPT-6 Luna (max) | 100.0% | 100.0% | 97.4% | 100.0% | 100.0% | 91.6% |
 | GPT-6.1 Sol (max) | 100.0% | 100.0% | 100.0% | 100.0% | 100.0% | 100.0% |
-| Gemini 4 Argon (high) | 0.0% | 0.0% | 2.6% | 0.0% | 0.0% | 6.7% |
+| Gemini 4 Argon (high) | 0.0% | 0.0% | 2.6% | 0.0% | 0.0% | 6.6% |
 
 ### API basis: on the frontier
 
@@ -945,10 +945,10 @@ Frequencies over 10,000 scenarios per run (seed 20261025); streams are defined i
 | Claude Opus 5.5 (max) | 100.0% | 100.0% | 96.5% | 100.0% | 100.0% | 68.3% |
 | Claude Sonnet 5.5 (max) | 100.0% | 100.0% | 99.9% | 100.0% | 100.0% | 76.4% |
 | DeepSeek V4.1 Flash 1017 (max) | 100.0% | 100.0% | 100.0% | 100.0% | 100.0% | 100.0% |
-| GPT-6 Astra (max) | 100.0% | 100.0% | 99.8% | 100.0% | 100.0% | 58.5% |
+| GPT-6 Astra (max) | 100.0% | 100.0% | 99.8% | 100.0% | 100.0% | 58.4% |
 | GPT-6 Luna (max) | 100.0% | 100.0% | 100.0% | 100.0% | 100.0% | 100.0% |
 | GPT-6.1 Sol (max) | 100.0% | 100.0% | 100.0% | 100.0% | 100.0% | 100.0% |
-| Gemini 4 Argon (high) | 0.0% | 0.0% | 12.8% | 0.0% | 0.0% | 37.6% |
+| Gemini 4 Argon (high) | 0.0% | 0.0% | 12.8% | 0.0% | 0.0% | 37.5% |
 
 ### API basis: value-score dispersion (SD; covariance term)
 
@@ -1001,7 +1001,7 @@ Plan streams S1, S2, S1 endpoint-heavy, S1M and S1T run with owner assumptions o
 | Claude Haiku 5.5 (max) on Claude Max 5x | 0.0% | — | — | — | — | — |
 | Claude Haiku 5.5 (max) on Claude Pro | 0.0% | — | — | — | — | — |
 | Claude Opus 5.5 (max) on Claude Max 20x | 100.0% | 100.0% | 100.0% | 100.0% | 100.0% | 87.0% |
-| Claude Opus 5.5 (max) on Claude Max 5x | 100.0% | 100.0% | 100.0% | 100.0% | 100.0% | 84.5% |
+| Claude Opus 5.5 (max) on Claude Max 5x | 100.0% | 100.0% | 100.0% | 100.0% | 100.0% | 84.6% |
 | Claude Opus 5.5 (max) on Claude Pro | 100.0% | 100.0% | 100.0% | 100.0% | 100.0% | 87.2% |
 | Claude Sonnet 5.5 (max) on Claude Max 20x | 0.0% | — | — | — | — | — |
 | Claude Sonnet 5.5 (max) on Claude Max 5x | 0.0% | — | — | — | — | — |
@@ -1030,7 +1030,7 @@ Plan streams S1, S2, S1 endpoint-heavy, S1M and S1T run with owner assumptions o
 | Claude Haiku 5.5 (max) on Claude Pro | 100.0% | — | — | — | — | — |
 | Claude Opus 5.5 (max) on Claude Max 20x | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
 | Claude Opus 5.5 (max) on Claude Max 5x | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| Claude Opus 5.5 (max) on Claude Pro | 100.0% | 100.0% | 100.0% | 100.0% | 100.0% | 97.1% |
+| Claude Opus 5.5 (max) on Claude Pro | 100.0% | 100.0% | 100.0% | 100.0% | 100.0% | 97.0% |
 | Claude Sonnet 5.5 (max) on Claude Max 20x | 0.0% | — | — | — | — | — |
 | Claude Sonnet 5.5 (max) on Claude Max 5x | 0.0% | — | — | — | — | — |
 | Claude Sonnet 5.5 (max) on Claude Pro | 100.0% | — | — | — | — | — |
@@ -1097,7 +1097,7 @@ The 90% rule's error bound holds per published event (candidate and kernel assig
 ## Diagnostics
 
 - **Terminal-Bench cross-source agreement (AA's mini-SWE-agent run against tbench.ai):** defined; 0 rows take the leaf from tbench.ai (gap fill).
-- **Rank separability (O39, independent-task approximation):** median separation 2.76 value points (API) and 2.76 (Plan); separable adjacent ranks: API 0 of 8, Plan 2 of 10. Assumptions: tasks are independent and each leaf's score is a mean over its published task count (plug-in binomial with the proportion (k + 1/2) / (n + 1), I28); attempts averaged within a task and tasks shared across models are ignored, so the noise is approximate; GDPval-AA: AA's displayed rating interval (-26/+26 Elo for Claude Opus 5.5) read as a 95% normal interval, SD 13.3 Elo for every row; AA-Omniscience: each of 6,000 questions scores +1, 0 or -1, with the shares from AA's accuracy and hallucination rate; Vals boards (Vibe Code Bench v1.1, Code Migration v1.1): Vals' published standard error per record, read as the leaf's SD; AI Coding Daily: judged points over its six graded projects read as a binomial share of 60 points (an assumption; the board publishes no error).
+- **Rank separability (O39, independent-task approximation):** median separation 2.76 value points (API) and 2.76 (Plan); separable adjacent ranks: API 0 of 8, Plan 2 of 10. Assumptions: tasks are independent and each leaf's score is a mean over its published task count (plug-in binomial with the proportion (k + 1/2) / (n + 1), I28); attempts averaged within a task and tasks shared across models are ignored, so the noise is approximate; GDPval-AA: each row's rating interval as AA's model page displays it, read as a 95% normal interval (AA states no level), SD = half-width / 1.96; AA-Omniscience: each of 6,000 questions scores +1, 0 or -1, with the shares from AA's accuracy and hallucination rate; Vals boards (Vibe Code Bench v1.1, Code Migration v1.1): Vals' published standard error per record, read as the leaf's SD; AI Coding Daily: judged points over its six graded projects read as a binomial share of 60 points (an assumption; the board publishes no error).
 - **FrontierCode against Cognition:** FrontierCode cross-source agreement (AA against Cognition, same name and effort; E234): Kendall tau 0.77 (interval 0.58 to 0.91) on 22 rows. Cognition minus AA: mean +2.6 points, largest 11.6.
 - **Gap-fill removal (E234, diagnostic):** no ranked row has a leaf from another party or the provider.
 - **Bar results without the gap fills (E234, sensitivity; labels unchanged):** cheapest displayed row as published, with fills removed, and with third-party fills lowered by the mean offset 2.6 points — API quality 63.5: GPT-6.1 Sol (max) in all three; API quality 53.3: DeepSeek V4.1 Flash 1017 (max) in all three; API quality 64.9: GPT-6 Astra (max) in all three; Plan quality 63.5: GPT-6.1 Sol (max) in all three; Plan quality 53.3: GPT-6.1 Sol (max) in all three; Plan quality 64.9: Claude Sonnet 5.5 (max) in all three.

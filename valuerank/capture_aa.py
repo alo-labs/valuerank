@@ -18,6 +18,7 @@ from valuerank.paths import DATA, ROOT
 AA_DIR = DATA / "aa"
 EXTRACT_PATH = AA_DIR / "aa_extract.json"
 OUTPUT_PATH = AA_DIR / "aa_v432_snapshot.json"
+PREVIOUS_PATH = AA_DIR / "aa_previous_capture.json"
 MAX_WORKERS = 4
 PUBLIC_CAPTURE_MAX_AGE_DAYS = 7
 
@@ -84,11 +85,26 @@ def capture(entry: dict, preserved_pages: dict) -> dict:
         }
 
 
+def previous_capture_digest(document: dict, content: bytes) -> dict:
+    """I60 M1: the fields of the capture being replaced that the next release compares against (GDPval-AA's displayed
+    Elo, its Index evaluation score and the Index total), with the replaced file's hash, so the movement is generated."""
+
+    pages = []
+    for page in document.get("pages", []):
+        model = page.get("model") or {}
+        evaluations = {item.get("slug"): item.get("score") for item in model.get("intelligenceIndexEvaluations") or []}
+        pages.append({"id": page["id"], "gdpval": model.get("gdpval"), "gdpvalEvaluation": evaluations.get("gdpval-aa"),
+                      "intelligenceIndex": model.get("intelligenceIndex")})
+    return {"schemaVersion": "valuerank-aa-previous-capture/v1", "capturedAt": document.get("capturedAt"),
+            "sha256": hashlib.sha256(content).hexdigest(), "pages": pages}
+
+
 def main() -> int:
     entries = json.loads(EXTRACT_PATH.read_text())
     if not entries or len({item["id"] for item in entries}) != len(entries):
         raise ValueError("AA capture requires a non-empty cohort of unique selected URLs")
-    stored_document = json.loads(OUTPUT_PATH.read_text()) if OUTPUT_PATH.exists() else {}
+    stored_content = OUTPUT_PATH.read_bytes() if OUTPUT_PATH.exists() else b""
+    stored_document = json.loads(stored_content) if stored_content else {}
     stored_pages = stored_document.get("pages", []) if isinstance(stored_document, dict) else []
     preserved_pages = {page["id"]: page for page in stored_pages}
     # Validate browser-only records before starting automatic network captures.
@@ -105,6 +121,8 @@ def main() -> int:
         "concurrency": MAX_WORKERS,
         "pages": pages,
     }
+    if isinstance(stored_document, dict) and stored_document.get("pages"):
+        PREVIOUS_PATH.write_text(json.dumps(previous_capture_digest(stored_document, stored_content), indent=1) + "\n")
     OUTPUT_PATH.write_text(json.dumps(document, indent=2, ensure_ascii=False) + "\n")
     print(json.dumps({
         "models": len(pages),

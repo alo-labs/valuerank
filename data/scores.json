@@ -14086,11 +14086,11 @@
       },
       {
         "leaf": "gdpval",
-        "status": "published, not captured",
+        "status": "captured, level unstated",
+        "field": "model.gdpvalInterval {lower, upper} on every AA model page (captured since the 2026-10-23 re-capture, O47)",
         "method": "Crowd-BT maximum likelihood with sandwich-estimator confidence intervals (AA methodology, GDPval-AA v2.1)",
         "level": "not stated by the source (the 95% level on AA's methodology page belongs to AA-Briefcase)",
-        "stream": "none until captured with a documented level; otherwise published beside the leaf outside every stream",
-        "captureTask": "capture the GDPval-AA leaderboard CI column for the exact configurations"
+        "stream": "S1T: each row's half-width / 1.96 as its SD (read as a 95% interval, an analyst convention); published beside the leaf in each row's provenance (ratingInterval)"
       }
     ],
     "sourceDates": {
@@ -14130,19 +14130,31 @@
         "source": "Bug Hunt Bench scoreboard",
         "artifact": "data/bug_hunt_scoreboard.json",
         "capturedAt": "2026-10-25T10:44:11Z",
-        "sourceUpdated": "2026-10-23"
+        "sourceUpdated": "2026-10-23",
+        "newestRowDate": "2026-10-23"
       },
       {
         "source": "tbench.ai Terminal-Bench 4.0 leaderboard",
         "artifact": "data/tb4.json",
         "capturedAt": "2026-10-23T05:35:48.623Z",
-        "sourceUpdated": null
+        "sourceUpdated": null,
+        "reRead": {
+          "at": "2026-10-25T11:34:13Z",
+          "result": "unchanged",
+          "file": "research/2026-10-25-board-reread/tbench/tb4-scrape-2026-10-25.json"
+        }
       },
       {
         "source": "Cognition: FrontierCode leaderboard",
         "artifact": "data/cognition_frontiercode.json",
         "capturedAt": "2026-10-23",
-        "sourceUpdated": "2026-10-22T22:28:12Z"
+        "sourceUpdated": "2026-10-22T22:28:12Z",
+        "reRead": {
+          "at": "2026-10-25T11:33:58Z",
+          "result": "unchanged",
+          "file": "research/2026-10-25-board-reread/cognition/data.json",
+          "lastModified": "2026-10-23T21:44:27Z"
+        }
       }
     ],
     "costInfluence": {
@@ -14664,7 +14676,12 @@
               "halfWidth": 0.0,
               "low": 66.891,
               "high": 66.891,
-              "source": "AA GDPval-AA v2.1 Elo as integrated in the pinned Index (E90)",
+              "source": "AA GDPval-AA v2.1 Elo as displayed on AA's model page at the capture (E90, O70)",
+              "ratingInterval": {
+                "lower": 1814,
+                "upper": 1861
+              },
+              "intervalLevel": "not stated by AA",
               "evidence": {
                 "artifact": "data/aa/aa_v432_snapshot.json",
                 "locator": "pages[model.slug=claude-sonnet-5-5].model.gdpval",
@@ -15469,7 +15486,12 @@
               "halfWidth": 0.0,
               "low": 68.3135,
               "high": 68.3135,
-              "source": "AA GDPval-AA v2.1 Elo as integrated in the pinned Index (E90)",
+              "source": "AA GDPval-AA v2.1 Elo as displayed on AA's model page at the capture (E90, O70)",
+              "ratingInterval": {
+                "lower": 1840,
+                "upper": 1892
+              },
+              "intervalLevel": "not stated by AA",
               "evidence": {
                 "artifact": "data/aa/aa_v432_snapshot.json",
                 "locator": "pages[model.slug=claude-opus-5-5].model.gdpval",
@@ -16280,7 +16302,12 @@
               "halfWidth": 0.0,
               "low": 62.2885,
               "high": 62.2885,
-              "source": "AA GDPval-AA v2.1 Elo as integrated in the pinned Index (E90)",
+              "source": "AA GDPval-AA v2.1 Elo as displayed on AA's model page at the capture (E90, O70)",
+              "ratingInterval": {
+                "lower": 1725,
+                "upper": 1767
+              },
+              "intervalLevel": "not stated by AA",
               "evidence": {
                 "artifact": "data/aa/aa_v432_snapshot.json",
                 "locator": "pages[model.slug=deepseek-v4-1-flash-1017].model.gdpval",
@@ -16946,7 +16973,12 @@
               "halfWidth": 0.0,
               "low": 54.81,
               "high": 54.81,
-              "source": "AA GDPval-AA v2.1 Elo as integrated in the pinned Index (E90)",
+              "source": "AA GDPval-AA v2.1 Elo as displayed on AA's model page at the capture (E90, O70)",
+              "ratingInterval": {
+                "lower": 1574,
+                "upper": 1619
+              },
+              "intervalLevel": "not stated by AA",
               "evidence": {
                 "artifact": "data/aa/aa_v432_snapshot.json",
                 "locator": "pages[model.slug=gpt-6-1-sol].model.gdpval",
@@ -17779,7 +17811,12 @@
               "halfWidth": 0.0,
               "low": 56.20499999999999,
               "high": 56.20499999999999,
-              "source": "AA GDPval-AA v2.1 Elo as integrated in the pinned Index (E90)",
+              "source": "AA GDPval-AA v2.1 Elo as displayed on AA's model page at the capture (E90, O70)",
+              "ratingInterval": {
+                "lower": 1603,
+                "upper": 1645
+              },
+              "intervalLevel": "not stated by AA",
               "evidence": {
                 "artifact": "data/aa/aa_v432_snapshot.json",
                 "locator": "pages[model.slug=gemini-4-argon].model.gdpval",
@@ -18443,7 +18480,12 @@
               "halfWidth": 0.0,
               "low": 53.723,
               "high": 53.723,
-              "source": "AA GDPval-AA v2.1 Elo as integrated in the pinned Index (E90)",
+              "source": "AA GDPval-AA v2.1 Elo as displayed on AA's model page at the capture (E90, O70)",
+              "ratingInterval": {
+                "lower": 1555,
+                "upper": 1594
+              },
+              "intervalLevel": "not stated by AA",
               "evidence": {
                 "artifact": "data/aa/aa_v432_snapshot.json",
                 "locator": "pages[model.slug=gpt-6-astra].model.gdpval",
@@ -19276,7 +19318,12 @@
               "halfWidth": 0.0,
               "low": 59.151,
               "high": 59.151,
-              "source": "AA GDPval-AA v2.1 Elo as integrated in the pinned Index (E90)",
+              "source": "AA GDPval-AA v2.1 Elo as displayed on AA's model page at the capture (E90, O70)",
+              "ratingInterval": {
+                "lower": 1662,
+                "upper": 1704
+              },
+              "intervalLevel": "not stated by AA",
               "evidence": {
                 "artifact": "data/aa/aa_v432_snapshot.json",
                 "locator": "pages[model.slug=mimo-v2-6-pro].model.gdpval",
@@ -20101,7 +20148,12 @@
               "halfWidth": 0.0,
               "low": 55.966,
               "high": 55.966,
-              "source": "AA GDPval-AA v2.1 Elo as integrated in the pinned Index (E90)",
+              "source": "AA GDPval-AA v2.1 Elo as displayed on AA's model page at the capture (E90, O70)",
+              "ratingInterval": {
+                "lower": 1597,
+                "upper": 1642
+              },
+              "intervalLevel": "not stated by AA",
               "evidence": {
                 "artifact": "data/aa/aa_v432_snapshot.json",
                 "locator": "pages[model.slug=claude-haiku-5-5].model.gdpval",
@@ -20901,7 +20953,12 @@
               "halfWidth": 0.0,
               "low": 46.6395,
               "high": 46.6395,
-              "source": "AA GDPval-AA v2.1 Elo as integrated in the pinned Index (E90)",
+              "source": "AA GDPval-AA v2.1 Elo as displayed on AA's model page at the capture (E90, O70)",
+              "ratingInterval": {
+                "lower": 1412,
+                "upper": 1454
+              },
+              "intervalLevel": "not stated by AA",
               "evidence": {
                 "artifact": "data/aa/aa_v432_snapshot.json",
                 "locator": "pages[model.slug=gpt-6-luna].model.gdpval",
@@ -23249,7 +23306,7 @@
     "displayedCheapest": {
       "api": {
         "label": "displayed record on the headline scale, not a claim: the lowest-cost scored main-workload row whose displayed quality reaches each bar (E203)",
-        "margin": 3.6982819029690237,
+        "margin": 3.697445271241777,
         "bars": [
           {
             "bar": "bar:median-quality",
@@ -23260,7 +23317,7 @@
               "gpt-6.1-sol"
             ],
             "margin": {
-              "level": 67.23970418680115,
+              "level": 67.23886755507391,
               "qualifierN": 1,
               "costUsd": 9351.716124793993,
               "cheapest": [
@@ -23277,7 +23334,7 @@
               "deepseek-v4-1-flash-1017"
             ],
             "margin": {
-              "level": 56.968966573808984,
+              "level": 56.96812994208174,
               "qualifierN": 6,
               "costUsd": 410.04054222171686,
               "cheapest": [
@@ -23294,7 +23351,7 @@
               "gpt-6-astra"
             ],
             "margin": {
-              "level": 68.64078358315106,
+              "level": 68.63994695142381,
               "qualifierN": 0,
               "costUsd": null,
               "cheapest": []
@@ -23304,7 +23361,7 @@
       },
       "plan": {
         "label": "displayed record on the headline scale, not a claim: the lowest-cost scored main-workload row whose displayed quality reaches each bar (E203)",
-        "margin": 3.6982819029690237,
+        "margin": 3.697445271241777,
         "bars": [
           {
             "bar": "bar:median-quality",
@@ -23315,7 +23372,7 @@
               "gpt-6.1-sol@chatgpt-pro-500"
             ],
             "margin": {
-              "level": 67.23970418680115,
+              "level": 67.23886755507391,
               "qualifierN": 3,
               "costUsd": 158.77276952112044,
               "cheapest": [
@@ -23332,7 +23389,7 @@
               "gpt-6.1-sol@chatgpt-pro-500"
             ],
             "margin": {
-              "level": 56.968966573808984,
+              "level": 56.96812994208174,
               "qualifierN": 16,
               "costUsd": 114.47361271340715,
               "cheapest": [
@@ -23349,7 +23406,7 @@
               "claude-sonnet-5-5@claude-pro"
             ],
             "margin": {
-              "level": 68.64078358315106,
+              "level": 68.63994695142381,
               "qualifierN": 0,
               "costUsd": null,
               "cheapest": []
@@ -24094,7 +24151,7 @@
       "rankSeparability": {
         "assumptions": [
           "tasks are independent and each leaf's score is a mean over its published task count (plug-in binomial with the proportion (k + 1/2) / (n + 1), I28); attempts averaged within a task and tasks shared across models are ignored, so the noise is approximate",
-          "GDPval-AA: AA's displayed rating interval (-26/+26 Elo for Claude Opus 5.5) read as a 95% normal interval, SD 13.3 Elo for every row",
+          "GDPval-AA: each row's rating interval as AA's model page displays it, read as a 95% normal interval (AA states no level), SD = half-width / 1.96",
           "AA-Omniscience: each of 6,000 questions scores +1, 0 or -1, with the shares from AA's accuracy and hallucination rate",
           "Vals boards (Vibe Code Bench v1.1, Code Migration v1.1): Vals' published standard error per record, read as the leaf's SD",
           "AI Coding Daily: judged points over its six graded projects read as a binomial share of 60 points (an assumption; the board publishes no error)"
@@ -24102,17 +24159,17 @@
         "bias": "net direction not established: treating two rows' errors as independent overstates the threshold, because every row is scored on the same tasks and attempts are averaged within a task; sources it omits (run-to-run and harness variance, AA's single cost run and, on the Plan basis, owner-named transfer error) work the other way",
         "bandRule": "O42: rows in value order; a row joins the current band while its value is not separable from the band's first row at correlation 0 (1.96 x sqrt(SD_i^2 + SD_j^2), analytic quality-leaf SDs, cost not drawn), otherwise it starts a new band; every row is inseparable from its band's first row, and adjacent rows in different bands may also be inseparable. O48: on the Plan basis a plan row takes its configuration's SD; a row of the band's first configuration on another plan stays in the band, and adjacent plan rows of one configuration are counted apart from the separability pairs (E258)",
         "valueSd": {
-          "claude-sonnet-5-5": 1.000668448595237,
+          "claude-sonnet-5-5": 1.000442075648416,
           "claude-opus-5-5": 0.9924980327983619,
-          "deepseek-v4-1-flash-1017": 1.0014237587080148,
-          "gpt-6.1-sol": 0.9987800634279285,
-          "gemini-4-argon": 1.004856634655419,
-          "gpt-6-astra": 0.9884911414013839,
-          "mimo-v2-6-pro": 1.0156750169347935,
-          "claude-haiku-5-5-max": 1.0059542511281658,
-          "gpt-6-luna": 0.9489673478377454
+          "deepseek-v4-1-flash-1017": 1.0009941594404832,
+          "gpt-6.1-sol": 0.9984689434052297,
+          "gemini-4-argon": 1.0044285036477638,
+          "gpt-6-astra": 0.9879433783735212,
+          "mimo-v2-6-pro": 1.0152514480435693,
+          "claude-haiku-5-5-max": 1.0056453506114804,
+          "gpt-6-luna": 0.9485139904035553
         },
-        "qualityMargin": 3.6982819029690237,
+        "qualityMargin": 3.697445271241777,
         "planAssumedRouteRows": [
           "claude-haiku-5-5-max@claude-max-20x",
           "claude-haiku-5-5-max@claude-max-5x",
@@ -24132,7 +24189,7 @@
         "api": {
           "adjacentPairs": 8,
           "separableAdjacentPairs": 0,
-          "medianSeparation": 2.7625657633692393,
+          "medianSeparation": 2.7617322282433103,
           "sameConfigurationAdjacentPairs": 0,
           "byCorrelation": {
             "0.0": 0,
@@ -24181,12 +24238,12 @@
               9
             ]
           },
-          "costTolerance": 1.8764361877510527
+          "costTolerance": 1.876079890170552
         },
         "plan": {
           "adjacentPairs": 10,
           "separableAdjacentPairs": 2,
-          "medianSeparation": 2.7633386310725205,
+          "medianSeparation": 2.7625889747432044,
           "sameConfigurationAdjacentPairs": 16,
           "byCorrelation": {
             "0.0": 2,
@@ -24307,7 +24364,7 @@
               27
             ]
           },
-          "costTolerance": 2.1934168669556273
+          "costTolerance": 2.1929495329486395
         }
       },
       "costedBarLadder": {
@@ -24689,6 +24746,19 @@
             "maxRow": "mimo-v2-6-pro"
           }
         }
+      },
+      "gdpvalMovement": {
+        "previousCapturedAt": "2026-10-23T06:26:23Z",
+        "previousSha256": "d572e37ee84df0a7f2ed7564acda9ebd31a726026821536a6c604208dae21d1e",
+        "commonPages": 61,
+        "eloMoved": 54,
+        "indexMoved": 0,
+        "eloMovedIndexUnchanged": 54,
+        "minDeltaElo": -0.8299999999999272,
+        "maxDeltaElo": 4.100000000000136,
+        "rankedLargestAbsDeltaElo": 4.100000000000136,
+        "rankedLargestAbsDeltaZ": 0.20500000000000682,
+        "rankedLargestAbsDeltaValue": 0.015375000000000513
       },
       "qualitySourceShares": {
         "aa": 0.6600000000000001,
@@ -29280,14 +29350,14 @@
           "key": "bugHunt",
           "artifact": "data/bug_hunt.json",
           "sha256": "5db0e8a63dc707d883d2ba8466d6ca8401239950a23ae7ddef2f98c62f86c7b8",
-          "capturedAt": "2026-10-23",
+          "capturedAt": "2026-10-25",
           "extractor": "editorial capture of the owner's published results (source commit recorded)"
         },
         {
           "key": "tb4",
           "artifact": "data/tb4.json",
           "sha256": "303c4a4a08e33589e9f5c77ef17684d85d8cc25919e86528fcc23b07928cfd50",
-          "capturedAt": "2026-10-25T09:56:47Z",
+          "capturedAt": "2026-10-23T05:35:48.623Z",
           "extractor": "scripts/scrape-tb4.js, then valuerank.build_tb4"
         },
         {
@@ -29314,7 +29384,7 @@
         {
           "key": "codingAgentsManifest",
           "artifact": "data/aa/coding_agents_manifest.json",
-          "sha256": "8329ba171929e11012047c0411d936c435415f15b89990910f067bf01fc29a42",
+          "sha256": "928fb02367ab79ab23cd6685f498e7a5e1cc5f9065a8e03f743e14d4240d366c",
           "capturedAt": null,
           "extractor": "editorial manifest of every AA Coding Agent Index row, reviewed at each capture (O64)"
         },
@@ -29357,7 +29427,7 @@
           "key": "leafEvidence",
           "artifact": "data/leaf_evidence.json",
           "sha256": "e7e31c0f4ae8bf333b61f24614f46470df7a62a9b6b48dfb7c090030a90ee853",
-          "capturedAt": "2026-10-23",
+          "capturedAt": "2026-10-25",
           "extractor": "editorial supplementary leaf evidence and the exhaustive-search log (O36)"
         },
         {
@@ -29370,9 +29440,23 @@
         {
           "key": "sweTracks",
           "artifact": "data/swe_tracks.json",
-          "sha256": "7c2004f14fc233efb067d2bc42f78069cfd965935b047e8bb250079868856fe5",
+          "sha256": "85db0f4c375f6473679d495b28a4b45dd989505b49aa63c9efa75aba424e6ed2",
           "capturedAt": "2026-10-25T10:44:11Z",
           "extractor": "research/2026-10-23-swe-benchmarks/build_swe_tracks.py from the verified coverage captures (O53-O55)"
+        },
+        {
+          "key": "aaPreviousCapture",
+          "artifact": "data/aa/aa_previous_capture.json",
+          "sha256": "89bef16d1be094feced8402bdac4d7e8981d86be303d5dbfda7368ce91fc0aed",
+          "capturedAt": "2026-10-23T06:26:23Z",
+          "extractor": "valuerank.capture_aa: digest of the model-page capture this one replaced (I60)"
+        },
+        {
+          "key": "sourceRereads",
+          "artifact": "data/source_rereads.json",
+          "sha256": "f4e9c22f51c66699fa89d57ae979ef89b671d0e1e4842e0e9a8d5d25558d5fd0",
+          "capturedAt": null,
+          "extractor": "editorial record of the O68 re-reads, each 'unchanged' result verified against the re-read file"
         },
         {
           "key": "anchors",
@@ -29389,7 +29473,7 @@
           "extractor": "valuerank.value_v3 freeze"
         }
       ],
-      "bundleHash": "f55f10b2f6c4db1c0d9d6914f582f237ae3fad72f7497cf7a428d0ab7218f9ec",
+      "bundleHash": "e09581a57587841209bac0f84b1fc3b3da2e7d4d4eac2ee0501c93b2c6e00f9f",
       "rebuild": "every published output is rebuilt from these artifacts at the pinned publication clock (npm run verify:docs), never from live pages"
     },
     "track": {
@@ -29493,7 +29577,7 @@
     "scenarios": {
       "status": "current",
       "schemaVersion": 1,
-      "inputHash": "b8b38fb9c2b69f93a4e0cb548f5fa73f65a4651b3c550b60d6d98002240357b4",
+      "inputHash": "0741b785d6ccf93d19331fe309cfd8ac4aa847fe82ff8648b37bb8b52262f080",
       "seed": 20261025,
       "scenarios": 10000,
       "streamDescriptions": {
@@ -30763,18 +30847,18 @@
                   "monteCarloSe": 0.0
                 },
                 "frontier": {
-                  "share": 0.7644,
-                  "monteCarloSe": 0.004243732319550799
+                  "share": 0.7643,
+                  "monteCarloSe": 0.004244355192488018
                 },
                 "qualifies": {},
                 "dispersion": {
                   "status": "defined",
                   "label": "scenario dispersion under the declared kernels",
                   "scenarios": 10000,
-                  "valueVariance": 1.0134777449502281,
-                  "valueSd": 1.0067163180112997,
+                  "valueVariance": 1.013111847374092,
+                  "valueSd": 1.0065345733625308,
                   "costTerm": 0.0,
-                  "qualityTerm": 1.0134777449502281,
+                  "qualityTerm": 1.013111847374092,
                   "covarianceTerm": 0.0
                 }
               },
@@ -30788,8 +30872,8 @@
                   "monteCarloSe": 0.0
                 },
                 "frontier": {
-                  "share": 0.6828,
-                  "monteCarloSe": 0.004653860333099824
+                  "share": 0.683,
+                  "monteCarloSe": 0.004653074252577536
                 },
                 "qualifies": {},
                 "dispersion": {
@@ -30821,10 +30905,10 @@
                   "status": "defined",
                   "label": "scenario dispersion under the declared kernels",
                   "scenarios": 10000,
-                  "valueVariance": 0.9977537765239833,
-                  "valueSd": 0.9988762568626723,
+                  "valueVariance": 0.9968015886603123,
+                  "valueSd": 0.9983995135517206,
                   "costTerm": 0.0,
-                  "qualityTerm": 0.9977537765239833,
+                  "qualityTerm": 0.9968015886603123,
                   "covarianceTerm": 0.0
                 }
               },
@@ -30846,35 +30930,35 @@
                   "status": "defined",
                   "label": "scenario dispersion under the declared kernels",
                   "scenarios": 10000,
-                  "valueVariance": 0.9972049227537026,
-                  "valueSd": 0.9986014834525846,
+                  "valueVariance": 0.9965123687823175,
+                  "valueSd": 0.9982546612875481,
                   "costTerm": 0.0,
-                  "qualityTerm": 0.9972049227537026,
+                  "qualityTerm": 0.9965123687823175,
                   "covarianceTerm": 0.0
                 }
               },
               "gemini-4-argon": {
                 "top3": {
-                  "share": 0.0668,
-                  "monteCarloSe": 0.0024967530915170604
+                  "share": 0.0664,
+                  "monteCarloSe": 0.0024897999919672262
                 },
                 "top1": {
                   "share": 0.0,
                   "monteCarloSe": 0.0
                 },
                 "frontier": {
-                  "share": 0.3756,
-                  "monteCarloSe": 0.004842774411429878
+                  "share": 0.3746,
+                  "monteCarloSe": 0.004840194624186098
                 },
                 "qualifies": {},
                 "dispersion": {
                   "status": "defined",
                   "label": "scenario dispersion under the declared kernels",
                   "scenarios": 10000,
-                  "valueVariance": 1.0089093736033115,
-                  "valueSd": 1.0044448086397337,
+                  "valueVariance": 1.0078721044136305,
+                  "valueSd": 1.0039283362937967,
                   "costTerm": 0.0,
-                  "qualityTerm": 1.0089093736033115,
+                  "qualityTerm": 1.0078721044136305,
                   "covarianceTerm": 0.0
                 }
               },
@@ -30888,18 +30972,18 @@
                   "monteCarloSe": 0.0
                 },
                 "frontier": {
-                  "share": 0.5847,
-                  "monteCarloSe": 0.004927736904502918
+                  "share": 0.5841,
+                  "monteCarloSe": 0.0049287644496364405
                 },
                 "qualifies": {},
                 "dispersion": {
                   "status": "defined",
                   "label": "scenario dispersion under the declared kernels",
                   "scenarios": 10000,
-                  "valueVariance": 0.9622306174298052,
-                  "valueSd": 0.9809335438396453,
+                  "valueVariance": 0.9611527850847899,
+                  "valueSd": 0.9803839987906727,
                   "costTerm": 0.0,
-                  "qualityTerm": 0.9622306174298052,
+                  "qualityTerm": 0.9611527850847899,
                   "covarianceTerm": 0.0
                 }
               },
@@ -30921,17 +31005,17 @@
                   "status": "defined",
                   "label": "scenario dispersion under the declared kernels",
                   "scenarios": 10000,
-                  "valueVariance": 1.0017004392568987,
-                  "valueSd": 1.0008498584987153,
+                  "valueVariance": 1.000932561666437,
+                  "valueSd": 1.0004661721749701,
                   "costTerm": 0.0,
-                  "qualityTerm": 1.0017004392568987,
+                  "qualityTerm": 1.000932561666437,
                   "covarianceTerm": 0.0
                 }
               },
               "gpt-6-luna": {
                 "top3": {
-                  "share": 0.9156,
-                  "monteCarloSe": 0.00277986762274753
+                  "share": 0.916,
+                  "monteCarloSe": 0.002773878151613729
                 },
                 "top1": {
                   "share": 0.003,
@@ -30946,10 +31030,10 @@
                   "status": "defined",
                   "label": "scenario dispersion under the declared kernels",
                   "scenarios": 10000,
-                  "valueVariance": 0.9227345338993924,
-                  "valueSd": 0.9605907213269304,
+                  "valueVariance": 0.9215851014939901,
+                  "valueSd": 0.9599922403300926,
                   "costTerm": 0.0,
-                  "qualityTerm": 0.9227345338993924,
+                  "qualityTerm": 0.9215851014939901,
                   "covarianceTerm": 0.0
                 }
               }
@@ -33264,8 +33348,8 @@
             "rows": {
               "claude-opus-5-5@claude-max-20x": {
                 "top3": {
-                  "share": 0.87,
-                  "monteCarloSe": 0.0033630343441600472
+                  "share": 0.8698,
+                  "monteCarloSe": 0.0033652334242961508
                 },
                 "top1": {
                   "share": 0.0,
@@ -33289,8 +33373,8 @@
               },
               "claude-opus-5-5@claude-max-5x": {
                 "top3": {
-                  "share": 0.8454,
-                  "monteCarloSe": 0.0036152294532989186
+                  "share": 0.8458,
+                  "monteCarloSe": 0.003611403605248242
                 },
                 "top1": {
                   "share": 0.0,
@@ -33314,16 +33398,16 @@
               },
               "claude-opus-5-5@claude-pro": {
                 "top3": {
-                  "share": 0.8716,
-                  "monteCarloSe": 0.003345346618812466
+                  "share": 0.8717,
+                  "monteCarloSe": 0.003344235488119818
                 },
                 "top1": {
-                  "share": 0.8606,
-                  "monteCarloSe": 0.0034636345072770014
+                  "share": 0.8609,
+                  "monteCarloSe": 0.0034605084886472973
                 },
                 "frontier": {
-                  "share": 0.9707,
-                  "monteCarloSe": 0.0016864610876032684
+                  "share": 0.9705,
+                  "monteCarloSe": 0.0016920328011004978
                 },
                 "qualifies": {},
                 "dispersion": {
@@ -33355,17 +33439,17 @@
                   "status": "defined",
                   "label": "scenario dispersion under the declared kernels",
                   "scenarios": 10000,
-                  "valueVariance": 1.0062375152936471,
-                  "valueSd": 1.0031139094308519,
+                  "valueVariance": 1.0054160833581858,
+                  "valueSd": 1.0027043848304373,
                   "costTerm": 0.0,
-                  "qualityTerm": 1.0062375152936471,
+                  "qualityTerm": 1.0054160833581858,
                   "covarianceTerm": 0.0
                 }
               },
               "gpt-6.1-sol@chatgpt-plus": {
                 "top3": {
-                  "share": 0.1299,
-                  "monteCarloSe": 0.003361933818503868
+                  "share": 0.1301,
+                  "monteCarloSe": 0.003364134212542656
                 },
                 "top1": {
                   "share": 0.0,
@@ -33380,17 +33464,17 @@
                   "status": "defined",
                   "label": "scenario dispersion under the declared kernels",
                   "scenarios": 10000,
-                  "valueVariance": 1.0095912444200512,
-                  "valueSd": 1.0047841780303128,
+                  "valueVariance": 1.0090557400285114,
+                  "valueSd": 1.0045176653640848,
                   "costTerm": 0.0,
-                  "qualityTerm": 1.0095912444200512,
+                  "qualityTerm": 1.0090557400285114,
                   "covarianceTerm": 0.0
                 }
               },
               "gpt-6.1-sol@chatgpt-pro-100": {
                 "top3": {
-                  "share": 0.1299,
-                  "monteCarloSe": 0.003361933818503868
+                  "share": 0.1301,
+                  "monteCarloSe": 0.003364134212542656
                 },
                 "top1": {
                   "share": 0.0,
@@ -33405,10 +33489,10 @@
                   "status": "defined",
                   "label": "scenario dispersion under the declared kernels",
                   "scenarios": 10000,
-                  "valueVariance": 1.0095912444200512,
-                  "valueSd": 1.0047841780303128,
+                  "valueVariance": 1.0090557400285114,
+                  "valueSd": 1.0045176653640848,
                   "costTerm": 0.0,
-                  "qualityTerm": 1.0095912444200512,
+                  "qualityTerm": 1.0090557400285114,
                   "covarianceTerm": 0.0
                 }
               },
@@ -33430,21 +33514,21 @@
                   "status": "defined",
                   "label": "scenario dispersion under the declared kernels",
                   "scenarios": 10000,
-                  "valueVariance": 1.0095912444200512,
-                  "valueSd": 1.0047841780303128,
+                  "valueVariance": 1.0090557400285114,
+                  "valueSd": 1.0045176653640848,
                   "costTerm": 0.0,
-                  "qualityTerm": 1.0095912444200512,
+                  "qualityTerm": 1.0090557400285114,
                   "covarianceTerm": 0.0
                 }
               },
               "gpt-6.1-sol@chatgpt-pro-500": {
                 "top3": {
-                  "share": 0.1545,
-                  "monteCarloSe": 0.003614273785976929
+                  "share": 0.1541,
+                  "monteCarloSe": 0.0036104458173472145
                 },
                 "top1": {
-                  "share": 0.1393,
-                  "monteCarloSe": 0.0034625931034414077
+                  "share": 0.139,
+                  "monteCarloSe": 0.003459465276599839
                 },
                 "frontier": {
                   "share": 1.0,
@@ -33455,10 +33539,10 @@
                   "status": "defined",
                   "label": "scenario dispersion under the declared kernels",
                   "scenarios": 10000,
-                  "valueVariance": 1.0095912444200512,
-                  "valueSd": 1.0047841780303128,
+                  "valueVariance": 1.0090557400285114,
+                  "valueSd": 1.0045176653640848,
                   "costTerm": 0.0,
-                  "qualityTerm": 1.0095912444200512,
+                  "qualityTerm": 1.0090557400285114,
                   "covarianceTerm": 0.0
                 }
               },
@@ -33480,10 +33564,10 @@
                   "status": "defined",
                   "label": "scenario dispersion under the declared kernels",
                   "scenarios": 10000,
-                  "valueVariance": 1.0068981003069686,
-                  "valueSd": 1.0034431226068414,
+                  "valueVariance": 1.0058140292818833,
+                  "valueSd": 1.002902801512631,
                   "costTerm": 0.0,
-                  "qualityTerm": 1.0068981003069686,
+                  "qualityTerm": 1.0058140292818833,
                   "covarianceTerm": 0.0
                 }
               },
@@ -33505,10 +33589,10 @@
                   "status": "defined",
                   "label": "scenario dispersion under the declared kernels",
                   "scenarios": 10000,
-                  "valueVariance": 0.9755384082601558,
-                  "valueSd": 0.9876934788992766,
+                  "valueVariance": 0.9742504042393421,
+                  "valueSd": 0.9870412373550267,
                   "costTerm": 0.0,
-                  "qualityTerm": 0.9755384082601558,
+                  "qualityTerm": 0.9742504042393421,
                   "covarianceTerm": 0.0
                 }
               },
@@ -33530,10 +33614,10 @@
                   "status": "defined",
                   "label": "scenario dispersion under the declared kernels",
                   "scenarios": 10000,
-                  "valueVariance": 0.9755384082601558,
-                  "valueSd": 0.9876934788992766,
+                  "valueVariance": 0.9742504042393421,
+                  "valueSd": 0.9870412373550267,
                   "costTerm": 0.0,
-                  "qualityTerm": 0.9755384082601558,
+                  "qualityTerm": 0.9742504042393421,
                   "covarianceTerm": 0.0
                 }
               },
@@ -33547,18 +33631,18 @@
                   "monteCarloSe": 9.999499987499375e-05
                 },
                 "frontier": {
-                  "share": 0.0671,
-                  "monteCarloSe": 0.0025019510386896067
+                  "share": 0.0666,
+                  "monteCarloSe": 0.002493279767695555
                 },
                 "qualifies": {},
                 "dispersion": {
                   "status": "defined",
                   "label": "scenario dispersion under the declared kernels",
                   "scenarios": 10000,
-                  "valueVariance": 0.9755384082601558,
-                  "valueSd": 0.9876934788992766,
+                  "valueVariance": 0.9742504042393421,
+                  "valueSd": 0.9870412373550267,
                   "costTerm": 0.0,
-                  "qualityTerm": 0.9755384082601558,
+                  "qualityTerm": 0.9742504042393421,
                   "covarianceTerm": 0.0
                 }
               },
@@ -33580,10 +33664,10 @@
                   "status": "defined",
                   "label": "scenario dispersion under the declared kernels",
                   "scenarios": 10000,
-                  "valueVariance": 0.9755384082601558,
-                  "valueSd": 0.9876934788992766,
+                  "valueVariance": 0.9742504042393421,
+                  "valueSd": 0.9870412373550267,
                   "costTerm": 0.0,
-                  "qualityTerm": 0.9755384082601558,
+                  "qualityTerm": 0.9742504042393421,
                   "covarianceTerm": 0.0
                 }
               }
@@ -35513,11 +35597,11 @@
         },
         {
           "leaf": "gdpval",
-          "status": "published, not captured",
+          "status": "captured, level unstated",
+          "field": "model.gdpvalInterval {lower, upper} on every AA model page (captured since the 2026-10-23 re-capture, O47)",
           "method": "Crowd-BT maximum likelihood with sandwich-estimator confidence intervals (AA methodology, GDPval-AA v2.1)",
           "level": "not stated by the source (the 95% level on AA's methodology page belongs to AA-Briefcase)",
-          "stream": "none until captured with a documented level; otherwise published beside the leaf outside every stream",
-          "captureTask": "capture the GDPval-AA leaderboard CI column for the exact configurations"
+          "stream": "S1T: each row's half-width / 1.96 as its SD (read as a 95% interval, an analyst convention); published beside the leaf in each row's provenance (ratingInterval)"
         }
       ],
       "sourceDates": {
@@ -35557,19 +35641,31 @@
           "source": "Bug Hunt Bench scoreboard",
           "artifact": "data/bug_hunt_scoreboard.json",
           "capturedAt": "2026-10-25T10:44:11Z",
-          "sourceUpdated": "2026-10-23"
+          "sourceUpdated": "2026-10-23",
+          "newestRowDate": "2026-10-23"
         },
         {
           "source": "tbench.ai Terminal-Bench 4.0 leaderboard",
           "artifact": "data/tb4.json",
           "capturedAt": "2026-10-23T05:35:48.623Z",
-          "sourceUpdated": null
+          "sourceUpdated": null,
+          "reRead": {
+            "at": "2026-10-25T11:34:13Z",
+            "result": "unchanged",
+            "file": "research/2026-10-25-board-reread/tbench/tb4-scrape-2026-10-25.json"
+          }
         },
         {
           "source": "Cognition: FrontierCode leaderboard",
           "artifact": "data/cognition_frontiercode.json",
           "capturedAt": "2026-10-23",
-          "sourceUpdated": "2026-10-22T22:28:12Z"
+          "sourceUpdated": "2026-10-22T22:28:12Z",
+          "reRead": {
+            "at": "2026-10-25T11:33:58Z",
+            "result": "unchanged",
+            "file": "research/2026-10-25-board-reread/cognition/data.json",
+            "lastModified": "2026-10-23T21:44:27Z"
+          }
         }
       ],
       "costInfluence": {
@@ -36036,7 +36132,12 @@
                 "halfWidth": 0.0,
                 "low": 62.2885,
                 "high": 62.2885,
-                "source": "AA GDPval-AA v2.1 Elo as integrated in the pinned Index (E90)",
+                "source": "AA GDPval-AA v2.1 Elo as displayed on AA's model page at the capture (E90, O70)",
+                "ratingInterval": {
+                  "lower": 1725,
+                  "upper": 1767
+                },
+                "intervalLevel": "not stated by AA",
                 "evidence": {
                   "artifact": "data/aa/aa_v432_snapshot.json",
                   "locator": "pages[model.slug=deepseek-v4-1-flash-1017].model.gdpval",
@@ -36625,7 +36726,12 @@
                 "halfWidth": 0.0,
                 "low": 56.20499999999999,
                 "high": 56.20499999999999,
-                "source": "AA GDPval-AA v2.1 Elo as integrated in the pinned Index (E90)",
+                "source": "AA GDPval-AA v2.1 Elo as displayed on AA's model page at the capture (E90, O70)",
+                "ratingInterval": {
+                  "lower": 1603,
+                  "upper": 1645
+                },
+                "intervalLevel": "not stated by AA",
                 "evidence": {
                   "artifact": "data/aa/aa_v432_snapshot.json",
                   "locator": "pages[model.slug=gemini-4-argon].model.gdpval",
@@ -37200,7 +37306,12 @@
                 "halfWidth": 0.0,
                 "low": 67.286,
                 "high": 67.286,
-                "source": "AA GDPval-AA v2.1 Elo as integrated in the pinned Index (E90)",
+                "source": "AA GDPval-AA v2.1 Elo as displayed on AA's model page at the capture (E90, O70)",
+                "ratingInterval": {
+                  "lower": 1820,
+                  "upper": 1872
+                },
+                "intervalLevel": "not stated by AA",
                 "evidence": {
                   "artifact": "data/aa/aa_v432_snapshot.json",
                   "locator": "pages[model.slug=kimi-k3-1-pro].model.gdpval",
@@ -37310,7 +37421,7 @@
                 "stderr": null,
                 "match": null,
                 "note": "Tested 2026-10-25 with OpenCode; cost/prompt $0.74. Owner decision O66 (2026-10-25): AA plots Kimi K3.1 Pro without an effort; Moonshot's API documents reasoning_effort low / high / max with max the default, so its configuration is taken at max, its maximum effort. The Kimi K3.1 Pro (High) row is another effort and is not used.",
-                "cutoffDayRow": "dated on the cutoff's day; placed at 2026-10-25T00:58:00Z (the board showed 'tested 9 hours ago' at 2026-10-25T09:58Z), before the cutoff 2026-10-25T09:56:47Z (O69)",
+                "cutoffDayRow": "dated on the cutoff's day; tested between 2026-10-25T00:00:00Z and 2026-10-25T01:14:11Z (shown '10 hours ago' in research/2026-10-25-board-reread/aicd/leaderboard-allrows-parsed.json, read at 2026-10-25T10:44:11Z), before the cutoff 2026-10-25T09:56:47Z (O69)",
                 "evidence": {
                   "artifact": "data/swe_tracks.json",
                   "locator": "records[modelId=kimi-k3-1-pro, leaf=aiCodingDaily].value",
@@ -37761,7 +37872,12 @@
                 "halfWidth": 0.0,
                 "low": 50.62050000000001,
                 "high": 50.62050000000001,
-                "source": "AA GDPval-AA v2.1 Elo as integrated in the pinned Index (E90)",
+                "source": "AA GDPval-AA v2.1 Elo as displayed on AA's model page at the capture (E90, O70)",
+                "ratingInterval": {
+                  "lower": 1491,
+                  "upper": 1534
+                },
+                "intervalLevel": "not stated by AA",
                 "evidence": {
                   "artifact": "data/aa/aa_v432_snapshot.json",
                   "locator": "pages[model.slug=gpt-6-1-sol-high].model.gdpval",
@@ -38491,7 +38607,12 @@
                 "halfWidth": 0.0,
                 "low": 60.17949999999999,
                 "high": 60.17949999999999,
-                "source": "AA GDPval-AA v2.1 Elo as integrated in the pinned Index (E90)",
+                "source": "AA GDPval-AA v2.1 Elo as displayed on AA's model page at the capture (E90, O70)",
+                "ratingInterval": {
+                  "lower": 1682,
+                  "upper": 1725
+                },
+                "intervalLevel": "not stated by AA",
                 "evidence": {
                   "artifact": "data/aa/aa_v432_snapshot.json",
                   "locator": "pages[model.slug=claude-opus-5-5-high].model.gdpval",
@@ -39187,7 +39308,12 @@
                 "halfWidth": 0.0,
                 "low": 59.151,
                 "high": 59.151,
-                "source": "AA GDPval-AA v2.1 Elo as integrated in the pinned Index (E90)",
+                "source": "AA GDPval-AA v2.1 Elo as displayed on AA's model page at the capture (E90, O70)",
+                "ratingInterval": {
+                  "lower": 1662,
+                  "upper": 1704
+                },
+                "intervalLevel": "not stated by AA",
                 "evidence": {
                   "artifact": "data/aa/aa_v432_snapshot.json",
                   "locator": "pages[model.slug=mimo-v2-6-pro].model.gdpval",
@@ -39918,7 +40044,12 @@
                 "halfWidth": 0.0,
                 "low": 54.2535,
                 "high": 54.2535,
-                "source": "AA GDPval-AA v2.1 Elo as integrated in the pinned Index (E90)",
+                "source": "AA GDPval-AA v2.1 Elo as displayed on AA's model page at the capture (E90, O70)",
+                "ratingInterval": {
+                  "lower": 1564,
+                  "upper": 1606
+                },
+                "intervalLevel": "not stated by AA",
                 "evidence": {
                   "artifact": "data/aa/aa_v432_snapshot.json",
                   "locator": "pages[model.slug=claude-opus-5-5-medium].model.gdpval",
@@ -40614,7 +40745,12 @@
                 "halfWidth": 0.0,
                 "low": 47.5115,
                 "high": 47.5115,
-                "source": "AA GDPval-AA v2.1 Elo as integrated in the pinned Index (E90)",
+                "source": "AA GDPval-AA v2.1 Elo as displayed on AA's model page at the capture (E90, O70)",
+                "ratingInterval": {
+                  "lower": 1428,
+                  "upper": 1472
+                },
+                "intervalLevel": "not stated by AA",
                 "evidence": {
                   "artifact": "data/aa/aa_v432_snapshot.json",
                   "locator": "pages[model.slug=gpt-6-1-sol-medium].model.gdpval",
@@ -41344,7 +41480,12 @@
                 "halfWidth": 0.0,
                 "low": 51.24400000000001,
                 "high": 51.24400000000001,
-                "source": "AA GDPval-AA v2.1 Elo as integrated in the pinned Index (E90)",
+                "source": "AA GDPval-AA v2.1 Elo as displayed on AA's model page at the capture (E90, O70)",
+                "ratingInterval": {
+                  "lower": 1505,
+                  "upper": 1545
+                },
+                "intervalLevel": "not stated by AA",
                 "evidence": {
                   "artifact": "data/aa/aa_v432_snapshot.json",
                   "locator": "pages[model.slug=gpt-6-astra-high].model.gdpval",
@@ -42084,7 +42225,12 @@
                 "halfWidth": 0.0,
                 "low": 46.6395,
                 "high": 46.6395,
-                "source": "AA GDPval-AA v2.1 Elo as integrated in the pinned Index (E90)",
+                "source": "AA GDPval-AA v2.1 Elo as displayed on AA's model page at the capture (E90, O70)",
+                "ratingInterval": {
+                  "lower": 1412,
+                  "upper": 1454
+                },
+                "intervalLevel": "not stated by AA",
                 "evidence": {
                   "artifact": "data/aa/aa_v432_snapshot.json",
                   "locator": "pages[model.slug=gpt-6-luna].model.gdpval",
@@ -42829,7 +42975,12 @@
                 "halfWidth": 0.0,
                 "low": 45.823,
                 "high": 45.823,
-                "source": "AA GDPval-AA v2.1 Elo as integrated in the pinned Index (E90)",
+                "source": "AA GDPval-AA v2.1 Elo as displayed on AA's model page at the capture (E90, O70)",
+                "ratingInterval": {
+                  "lower": 1397,
+                  "upper": 1436
+                },
+                "intervalLevel": "not stated by AA",
                 "evidence": {
                   "artifact": "data/aa/aa_v432_snapshot.json",
                   "locator": "pages[model.slug=claude-haiku-5-5-high].model.gdpval",
@@ -43525,7 +43676,12 @@
                 "halfWidth": 0.0,
                 "low": 43.172,
                 "high": 43.172,
-                "source": "AA GDPval-AA v2.1 Elo as integrated in the pinned Index (E90)",
+                "source": "AA GDPval-AA v2.1 Elo as displayed on AA's model page at the capture (E90, O70)",
+                "ratingInterval": {
+                  "lower": 1342,
+                  "upper": 1385
+                },
+                "intervalLevel": "not stated by AA",
                 "evidence": {
                   "artifact": "data/aa/aa_v432_snapshot.json",
                   "locator": "pages[model.slug=gpt-6-luna-xhigh].model.gdpval",
@@ -44255,7 +44411,12 @@
                 "halfWidth": 0.0,
                 "low": 38.75650000000001,
                 "high": 38.75650000000001,
-                "source": "AA GDPval-AA v2.1 Elo as integrated in the pinned Index (E90)",
+                "source": "AA GDPval-AA v2.1 Elo as displayed on AA's model page at the capture (E90, O70)",
+                "ratingInterval": {
+                  "lower": 1255,
+                  "upper": 1296
+                },
+                "intervalLevel": "not stated by AA",
                 "evidence": {
                   "artifact": "data/aa/aa_v432_snapshot.json",
                   "locator": "pages[model.slug=claude-haiku-5-5-medium].model.gdpval",
@@ -44951,7 +45112,12 @@
                 "halfWidth": 0.0,
                 "low": 42.146,
                 "high": 42.146,
-                "source": "AA GDPval-AA v2.1 Elo as integrated in the pinned Index (E90)",
+                "source": "AA GDPval-AA v2.1 Elo as displayed on AA's model page at the capture (E90, O70)",
+                "ratingInterval": {
+                  "lower": 1321,
+                  "upper": 1365
+                },
+                "intervalLevel": "not stated by AA",
                 "evidence": {
                   "artifact": "data/aa/aa_v432_snapshot.json",
                   "locator": "pages[model.slug=gpt-6-luna-high].model.gdpval",
@@ -45681,7 +45847,12 @@
                 "halfWidth": 0.0,
                 "low": 38.13049999999999,
                 "high": 38.13049999999999,
-                "source": "AA GDPval-AA v2.1 Elo as integrated in the pinned Index (E90)",
+                "source": "AA GDPval-AA v2.1 Elo as displayed on AA's model page at the capture (E90, O70)",
+                "ratingInterval": {
+                  "lower": 1241,
+                  "upper": 1284
+                },
+                "intervalLevel": "not stated by AA",
                 "evidence": {
                   "artifact": "data/aa/aa_v432_snapshot.json",
                   "locator": "pages[model.slug=gpt-6-luna-medium].model.gdpval",
@@ -46411,7 +46582,12 @@
                 "halfWidth": 0.0,
                 "low": 24.710000000000004,
                 "high": 24.710000000000004,
-                "source": "AA GDPval-AA v2.1 Elo as integrated in the pinned Index (E90)",
+                "source": "AA GDPval-AA v2.1 Elo as displayed on AA's model page at the capture (E90, O70)",
+                "ratingInterval": {
+                  "lower": 975,
+                  "upper": 1014
+                },
+                "intervalLevel": "not stated by AA",
                 "evidence": {
                   "artifact": "data/aa/aa_v432_snapshot.json",
                   "locator": "pages[model.slug=gpt-5-6-luna-low].model.gdpval",
@@ -49218,7 +49394,7 @@
       "displayedCheapest": {
         "api": {
           "label": "displayed record on the headline scale, not a claim: the lowest-cost scored main-workload row whose displayed quality reaches each bar (E203)",
-          "margin": 5.873129158512513,
+          "margin": 5.872176191193296,
           "bars": [
             {
               "bar": "bar:median-quality",
@@ -49229,7 +49405,7 @@
                 "mimo-v2-6-pro"
               ],
               "margin": {
-                "level": 55.11171387264251,
+                "level": 55.110760905323296,
                 "qualifierN": 6,
                 "costUsd": 431.0726459431111,
                 "cheapest": [
@@ -49246,7 +49422,7 @@
                 "claude-haiku-5-5-medium"
               ],
               "margin": {
-                "level": 43.87609774129442,
+                "level": 43.87514477397521,
                 "qualifierN": 9,
                 "costUsd": 136.12695920883297,
                 "cheapest": [
@@ -49263,7 +49439,7 @@
                 "claude-opus-5-5-medium"
               ],
               "margin": {
-                "level": 64.48060867959288,
+                "level": 64.47965571227365,
                 "qualifierN": 0,
                 "costUsd": null,
                 "cheapest": []
@@ -49273,7 +49449,7 @@
         },
         "plan": {
           "label": "displayed record on the headline scale, not a claim: the lowest-cost scored main-workload row whose displayed quality reaches each bar (E203)",
-          "margin": 5.873129158512513,
+          "margin": 5.872176191193296,
           "bars": [
             {
               "bar": "bar:median-quality",
@@ -49284,7 +49460,7 @@
                 "claude-opus-5-5-medium@claude-pro"
               ],
               "margin": {
-                "level": 55.11171387264251,
+                "level": 55.110760905323296,
                 "qualifierN": 16,
                 "costUsd": 24.171414285944287,
                 "cheapest": [
@@ -49301,7 +49477,7 @@
                 "claude-haiku-5-5-medium@claude-pro"
               ],
               "margin": {
-                "level": 43.87609774129442,
+                "level": 43.87514477397521,
                 "qualifierN": 25,
                 "costUsd": 24.171414285944287,
                 "cheapest": [
@@ -49318,7 +49494,7 @@
                 "claude-opus-5-5-medium@claude-pro"
               ],
               "margin": {
-                "level": 64.48060867959288,
+                "level": 64.47965571227365,
                 "qualifierN": 0,
                 "costUsd": null,
                 "cheapest": []
@@ -49606,7 +49782,7 @@
         "rankSeparability": {
           "assumptions": [
             "tasks are independent and each leaf's score is a mean over its published task count (plug-in binomial with the proportion (k + 1/2) / (n + 1), I28); attempts averaged within a task and tasks shared across models are ignored, so the noise is approximate",
-            "GDPval-AA: AA's displayed rating interval (-26/+26 Elo for Claude Opus 5.5) read as a 95% normal interval, SD 13.3 Elo for every row",
+            "GDPval-AA: each row's rating interval as AA's model page displays it, read as a 95% normal interval (AA states no level), SD = half-width / 1.96",
             "AA-Omniscience: each of 6,000 questions scores +1, 0 or -1, with the shares from AA's accuracy and hallucination rate",
             "Vals boards (Vibe Code Bench v1.1, Code Migration v1.1): Vals' published standard error per record, read as the leaf's SD",
             "AI Coding Daily: judged points over its six graded projects read as a binomial share of 60 points (an assumption; the board publishes no error)"
@@ -49614,24 +49790,24 @@
           "bias": "net direction not established: treating two rows' errors as independent overstates the threshold, because every row is scored on the same tasks and attempts are averaged within a task; sources it omits (run-to-run and harness variance, AA's single cost run and, on the Plan basis, owner-named transfer error) work the other way",
           "bandRule": "O42: rows in value order; a row joins the current band while its value is not separable from the band's first row at correlation 0 (1.96 x sqrt(SD_i^2 + SD_j^2), analytic quality-leaf SDs, cost not drawn), otherwise it starts a new band; every row is inseparable from its band's first row, and adjacent rows in different bands may also be inseparable. O48: on the Plan basis a plan row takes its configuration's SD; a row of the band's first configuration on another plan stays in the band, and adjacent plan rows of one configuration are counted apart from the separability pairs (E258)",
           "valueSd": {
-            "deepseek-v4-1-flash-1017": 1.6723885109601362,
-            "gemini-4-argon": 1.7407466700314809,
+            "deepseek-v4-1-flash-1017": 1.6721313029545655,
+            "gemini-4-argon": 1.7404995639053638,
             "kimi-k3-1-pro": 1.6012380506052377,
-            "gpt-6.1-sol-high": 1.557202279202491,
-            "claude-opus-5-5-high": 1.5210464685348253,
-            "mimo-v2-6-pro": 1.7573714872612585,
-            "claude-opus-5-5-medium": 1.5442999381467093,
-            "gpt-6.1-sol-medium": 1.5849322422108159,
-            "gpt-6-astra-high": 1.5582280909909607,
-            "gpt-6-luna": 1.5710155633216432,
-            "claude-haiku-5-5-high": 1.6261750056420514,
-            "gpt-6-luna-xhigh": 1.5732260170885235,
-            "claude-haiku-5-5-medium": 1.5900080066848366,
-            "gpt-6-luna-high": 1.5882543311483062,
-            "gpt-6-luna-medium": 1.6869573142240273,
-            "gpt-5.6-luna-low": 1.6633891948256068
+            "gpt-6.1-sol-high": 1.5569510231523989,
+            "claude-opus-5-5-high": 1.5207892390414037,
+            "mimo-v2-6-pro": 1.7571267190979483,
+            "claude-opus-5-5-medium": 1.5440213928857984,
+            "gpt-6.1-sol-medium": 1.5847105036081937,
+            "gpt-6-astra-high": 1.5579038681295483,
+            "gpt-6-luna": 1.5707417556453676,
+            "claude-haiku-5-5-high": 1.6258420991037235,
+            "gpt-6-luna-xhigh": 1.5729773205568118,
+            "claude-haiku-5-5-medium": 1.5897135801553144,
+            "gpt-6-luna-high": 1.5880330564122664,
+            "gpt-6-luna-medium": 1.6867253867052014,
+            "gpt-5.6-luna-low": 1.6630637377159228
           },
-          "qualityMargin": 5.873129158512513,
+          "qualityMargin": 5.872176191193296,
           "planAssumedRouteRows": [
             "claude-haiku-5-5-high@claude-max-20x",
             "claude-haiku-5-5-high@claude-max-5x",
@@ -49685,7 +49861,7 @@
           "api": {
             "adjacentPairs": 15,
             "separableAdjacentPairs": 1,
-            "medianSeparation": 4.431739460404443,
+            "medianSeparation": 4.430897310142818,
             "sameConfigurationAdjacentPairs": 0,
             "byCorrelation": {
               "0.0": 1,
@@ -49698,7 +49874,7 @@
             },
             "aicdNarrow": {
               "separableAdjacentPairs": 1,
-              "medianSeparation": 3.251835232933399
+              "medianSeparation": 3.250773940198244
             },
             "bands": {
               "gpt-6.1-sol-high": [
@@ -49766,12 +49942,12 @@
                 16
               ]
             },
-            "costTolerance": 2.965109292965276
+            "costTolerance": 2.964496933600684
           },
           "plan": {
             "adjacentPairs": 20,
             "separableAdjacentPairs": 1,
-            "medianSeparation": 4.425244334970547,
+            "medianSeparation": 4.424688225374206,
             "sameConfigurationAdjacentPairs": 30,
             "byCorrelation": {
               "0.0": 1,
@@ -49784,7 +49960,7 @@
             },
             "aicdNarrow": {
               "separableAdjacentPairs": 1,
-              "medianSeparation": 3.2462791366618466
+              "medianSeparation": 3.24517420074228
             },
             "bands": {
               "claude-opus-5-5-high@claude-pro": [
@@ -49992,7 +50168,7 @@
                 51
               ]
             },
-            "costTolerance": 5.260299172404612
+            "costTolerance": 5.25920182151222
           }
         },
         "costedBarLadder": {
@@ -50467,6 +50643,19 @@
               "maxRow": "gpt-6-luna-xhigh"
             }
           }
+        },
+        "gdpvalMovement": {
+          "previousCapturedAt": "2026-10-23T06:26:23Z",
+          "previousSha256": "d572e37ee84df0a7f2ed7564acda9ebd31a726026821536a6c604208dae21d1e",
+          "commonPages": 61,
+          "eloMoved": 54,
+          "indexMoved": 0,
+          "eloMovedIndexUnchanged": 54,
+          "minDeltaElo": -0.8299999999999272,
+          "maxDeltaElo": 4.100000000000136,
+          "rankedLargestAbsDeltaElo": 3.8400000000001455,
+          "rankedLargestAbsDeltaZ": 0.19200000000000728,
+          "rankedLargestAbsDeltaValue": 0.014400000000000548
         },
         "qualitySourceShares": {
           "aa": 0.7800000000000001,
@@ -56158,14 +56347,14 @@
             "key": "bugHunt",
             "artifact": "data/bug_hunt.json",
             "sha256": "5db0e8a63dc707d883d2ba8466d6ca8401239950a23ae7ddef2f98c62f86c7b8",
-            "capturedAt": "2026-10-23",
+            "capturedAt": "2026-10-25",
             "extractor": "editorial capture of the owner's published results (source commit recorded)"
           },
           {
             "key": "tb4",
             "artifact": "data/tb4.json",
             "sha256": "303c4a4a08e33589e9f5c77ef17684d85d8cc25919e86528fcc23b07928cfd50",
-            "capturedAt": "2026-10-25T09:56:47Z",
+            "capturedAt": "2026-10-23T05:35:48.623Z",
             "extractor": "scripts/scrape-tb4.js, then valuerank.build_tb4"
           },
           {
@@ -56192,7 +56381,7 @@
           {
             "key": "codingAgentsManifest",
             "artifact": "data/aa/coding_agents_manifest.json",
-            "sha256": "8329ba171929e11012047c0411d936c435415f15b89990910f067bf01fc29a42",
+            "sha256": "928fb02367ab79ab23cd6685f498e7a5e1cc5f9065a8e03f743e14d4240d366c",
             "capturedAt": null,
             "extractor": "editorial manifest of every AA Coding Agent Index row, reviewed at each capture (O64)"
           },
@@ -56235,7 +56424,7 @@
             "key": "leafEvidence",
             "artifact": "data/leaf_evidence.json",
             "sha256": "e7e31c0f4ae8bf333b61f24614f46470df7a62a9b6b48dfb7c090030a90ee853",
-            "capturedAt": "2026-10-23",
+            "capturedAt": "2026-10-25",
             "extractor": "editorial supplementary leaf evidence and the exhaustive-search log (O36)"
           },
           {
@@ -56248,9 +56437,23 @@
           {
             "key": "sweTracks",
             "artifact": "data/swe_tracks.json",
-            "sha256": "7c2004f14fc233efb067d2bc42f78069cfd965935b047e8bb250079868856fe5",
+            "sha256": "85db0f4c375f6473679d495b28a4b45dd989505b49aa63c9efa75aba424e6ed2",
             "capturedAt": "2026-10-25T10:44:11Z",
             "extractor": "research/2026-10-23-swe-benchmarks/build_swe_tracks.py from the verified coverage captures (O53-O55)"
+          },
+          {
+            "key": "aaPreviousCapture",
+            "artifact": "data/aa/aa_previous_capture.json",
+            "sha256": "89bef16d1be094feced8402bdac4d7e8981d86be303d5dbfda7368ce91fc0aed",
+            "capturedAt": "2026-10-23T06:26:23Z",
+            "extractor": "valuerank.capture_aa: digest of the model-page capture this one replaced (I60)"
+          },
+          {
+            "key": "sourceRereads",
+            "artifact": "data/source_rereads.json",
+            "sha256": "f4e9c22f51c66699fa89d57ae979ef89b671d0e1e4842e0e9a8d5d25558d5fd0",
+            "capturedAt": null,
+            "extractor": "editorial record of the O68 re-reads, each 'unchanged' result verified against the re-read file"
           },
           {
             "key": "anchors",
@@ -56267,7 +56470,7 @@
             "extractor": "valuerank.value_v3 freeze"
           }
         ],
-        "bundleHash": "f55f10b2f6c4db1c0d9d6914f582f237ae3fad72f7497cf7a428d0ab7218f9ec",
+        "bundleHash": "e09581a57587841209bac0f84b1fc3b3da2e7d4d4eac2ee0501c93b2c6e00f9f",
         "rebuild": "every published output is rebuilt from these artifacts at the pinned publication clock (npm run verify:docs), never from live pages"
       },
       "track": {
@@ -56357,7 +56560,7 @@
       "scenarios": {
         "status": "current",
         "schemaVersion": 1,
-        "inputHash": "543a8c3677d5838f327dac82344e7e43781431f8cb341285529967442ec29448",
+        "inputHash": "8f34d926508aa74334c449acbdaae2870c7460d54494f1c7f202b2b381f1baf0",
         "seed": 20261025,
         "scenarios": 10000,
         "streamDescriptions": {
@@ -58667,26 +58870,26 @@
               "rows": {
                 "deepseek-v4-1-flash-1017": {
                   "top3": {
-                    "share": 0.4054,
-                    "monteCarloSe": 0.004909692862084145
+                    "share": 0.4051,
+                    "monteCarloSe": 0.004909113871158419
                   },
                   "top1": {
-                    "share": 0.0691,
-                    "monteCarloSe": 0.0025362411162978965
+                    "share": 0.0688,
+                    "monteCarloSe": 0.002531137293787123
                   },
                   "frontier": {
-                    "share": 0.3197,
-                    "monteCarloSe": 0.004663602791833798
+                    "share": 0.3198,
+                    "monteCarloSe": 0.0046639892795760154
                   },
                   "qualifies": {},
                   "dispersion": {
                     "status": "defined",
                     "label": "scenario dispersion under the declared kernels",
                     "scenarios": 10000,
-                    "valueVariance": 2.332762844243879,
-                    "valueSd": 1.5273384838482527,
+                    "valueVariance": 2.3322688045528404,
+                    "valueSd": 1.5271767430631074,
                     "costTerm": 0.0,
-                    "qualityTerm": 2.332762844243879,
+                    "qualityTerm": 2.3322688045528404,
                     "covarianceTerm": 0.0
                   }
                 },
@@ -58700,33 +58903,33 @@
                     "monteCarloSe": 0.00033148001448051134
                   },
                   "frontier": {
-                    "share": 0.433,
-                    "monteCarloSe": 0.004954906659060289
+                    "share": 0.4334,
+                    "monteCarloSe": 0.004955445893156336
                   },
                   "qualifies": {},
                   "dispersion": {
                     "status": "defined",
                     "label": "scenario dispersion under the declared kernels",
                     "scenarios": 10000,
-                    "valueVariance": 2.6351774335017306,
-                    "valueSd": 1.6233229603198898,
+                    "valueVariance": 2.63446035831572,
+                    "valueSd": 1.6231020788341441,
                     "costTerm": 0.0,
-                    "qualityTerm": 2.6351774335017306,
+                    "qualityTerm": 2.63446035831572,
                     "covarianceTerm": 0.0
                   }
                 },
                 "kimi-k3-1-pro": {
                   "top3": {
-                    "share": 0.0958,
-                    "monteCarloSe": 0.0029431676812577295
+                    "share": 0.0957,
+                    "monteCarloSe": 0.0029417938404993644
                   },
                   "top1": {
                     "share": 0.0057,
                     "monteCarloSe": 0.0007528286657666537
                   },
                   "frontier": {
-                    "share": 0.6189,
-                    "monteCarloSe": 0.004856570703696179
+                    "share": 0.6192,
+                    "monteCarloSe": 0.004855835252559543
                   },
                   "qualifies": {},
                   "dispersion": {
@@ -58742,112 +58945,112 @@
                 },
                 "gpt-6.1-sol-high": {
                   "top3": {
-                    "share": 0.884,
-                    "monteCarloSe": 0.0032022492095400697
+                    "share": 0.8841,
+                    "monteCarloSe": 0.003201049671592117
                   },
                   "top1": {
-                    "share": 0.4917,
-                    "monteCarloSe": 0.004999311052535139
+                    "share": 0.4914,
+                    "monteCarloSe": 0.004999260345291091
                   },
                   "frontier": {
-                    "share": 0.8301,
-                    "monteCarloSe": 0.0037554492407700043
+                    "share": 0.8297,
+                    "monteCarloSe": 0.003758961425713225
                   },
                   "qualifies": {},
                   "dispersion": {
                     "status": "defined",
                     "label": "scenario dispersion under the declared kernels",
                     "scenarios": 10000,
-                    "valueVariance": 1.9025211351426603,
-                    "valueSd": 1.379319083875323,
+                    "valueVariance": 1.9020483539478177,
+                    "valueSd": 1.3791476911294953,
                     "costTerm": 0.0,
-                    "qualityTerm": 1.9025211351426603,
+                    "qualityTerm": 1.9020483539478177,
                     "covarianceTerm": 0.0
                   }
                 },
                 "claude-opus-5-5-high": {
                   "top3": {
-                    "share": 0.0524,
-                    "monteCarloSe": 0.002228323136351638
+                    "share": 0.0522,
+                    "monteCarloSe": 0.0022243012385915716
                   },
                   "top1": {
                     "share": 0.0034,
                     "monteCarloSe": 0.0005821030836544331
                   },
                   "frontier": {
-                    "share": 0.4925,
-                    "monteCarloSe": 0.004999437468355815
+                    "share": 0.4922,
+                    "monteCarloSe": 0.00499939156298044
                   },
                   "qualifies": {},
                   "dispersion": {
                     "status": "defined",
                     "label": "scenario dispersion under the declared kernels",
                     "scenarios": 10000,
-                    "valueVariance": 1.8597728947453844,
-                    "valueSd": 1.3637349063309132,
+                    "valueVariance": 1.8582881913774631,
+                    "valueSd": 1.3631904457475716,
                     "costTerm": 0.0,
-                    "qualityTerm": 1.8597728947453844,
+                    "qualityTerm": 1.8582881913774631,
                     "covarianceTerm": 0.0
                   }
                 },
                 "mimo-v2-6-pro": {
                   "top3": {
-                    "share": 0.6419,
-                    "monteCarloSe": 0.004794417482864837
+                    "share": 0.6421,
+                    "monteCarloSe": 0.004793825090676547
                   },
                   "top1": {
-                    "share": 0.2077,
-                    "monteCarloSe": 0.004056608312371309
+                    "share": 0.2085,
+                    "monteCarloSe": 0.004062360766844816
                   },
                   "frontier": {
-                    "share": 0.9787,
-                    "monteCarloSe": 0.0014438251279154267
+                    "share": 0.9788,
+                    "monteCarloSe": 0.001440505466841414
                   },
                   "qualifies": {},
                   "dispersion": {
                     "status": "defined",
                     "label": "scenario dispersion under the declared kernels",
                     "scenarios": 10000,
-                    "valueVariance": 2.7525937113750576,
-                    "valueSd": 1.6590942442715717,
+                    "valueVariance": 2.7512508393320037,
+                    "valueSd": 1.658689494550443,
                     "costTerm": 0.0,
-                    "qualityTerm": 2.7525937113750576,
+                    "qualityTerm": 2.7512508393320037,
                     "covarianceTerm": 0.0
                   }
                 },
                 "claude-opus-5-5-medium": {
                   "top3": {
-                    "share": 0.0809,
-                    "monteCarloSe": 0.002726814808526608
+                    "share": 0.081,
+                    "monteCarloSe": 0.0027283511504203415
                   },
                   "top1": {
-                    "share": 0.0057,
-                    "monteCarloSe": 0.0007528286657666537
+                    "share": 0.0058,
+                    "monteCarloSe": 0.0007593655246322419
                   },
                   "frontier": {
-                    "share": 0.7429,
-                    "monteCarloSe": 0.004370349985985104
+                    "share": 0.7444,
+                    "monteCarloSe": 0.004361979367213926
                   },
                   "qualifies": {},
                   "dispersion": {
                     "status": "defined",
                     "label": "scenario dispersion under the declared kernels",
                     "scenarios": 10000,
-                    "valueVariance": 1.8948848729334211,
-                    "valueSd": 1.3765481731248714,
+                    "valueVariance": 1.893860575780804,
+                    "valueSd": 1.3761760700509234,
                     "costTerm": 0.0,
-                    "qualityTerm": 1.8948848729334211,
+                    "qualityTerm": 1.893860575780804,
                     "covarianceTerm": 0.0
                   }
                 },
                 "gpt-6.1-sol-medium": {
                   "top3": {
-                    "share": 0.6903,
-                    "monteCarloSe": 0.00462369884399925
+                    "share": 0.6901,
+                    "monteCarloSe": 0.004624521488759675
                   },
                   "top1": {
-                    "share": 0.2087,
-                    "monteCarloSe": 0.004063795147396089
+                    "share": 0.2085,
+                    "monteCarloSe": 0.004062360766844816
                   },
                   "frontier": {
                     "share": 0.9516,
@@ -58858,60 +59061,60 @@
                     "status": "defined",
                     "label": "scenario dispersion under the declared kernels",
                     "scenarios": 10000,
-                    "valueVariance": 2.1146807318394125,
-                    "valueSd": 1.4541941864274566,
+                    "valueVariance": 2.1138960820054735,
+                    "valueSd": 1.4539243728631395,
                     "costTerm": 0.0,
-                    "qualityTerm": 2.1146807318394125,
+                    "qualityTerm": 2.1138960820054735,
                     "covarianceTerm": 0.0
                   }
                 },
                 "gpt-6-astra-high": {
                   "top3": {
-                    "share": 0.0008,
-                    "monteCarloSe": 0.0002827295527531567
+                    "share": 0.0009,
+                    "monteCarloSe": 0.0002998649696113236
                   },
                   "top1": {
                     "share": 0.0,
                     "monteCarloSe": 0.0
                   },
                   "frontier": {
-                    "share": 0.0526,
-                    "monteCarloSe": 0.0022323359962156237
+                    "share": 0.0531,
+                    "monteCarloSe": 0.0022423289232402993
                   },
                   "qualifies": {},
                   "dispersion": {
                     "status": "defined",
                     "label": "scenario dispersion under the declared kernels",
                     "scenarios": 10000,
-                    "valueVariance": 1.9818323481279276,
-                    "valueSd": 1.4077756739366991,
+                    "valueVariance": 1.9809343046159185,
+                    "valueSd": 1.4074566794810839,
                     "costTerm": 0.0,
-                    "qualityTerm": 1.9818323481279276,
+                    "qualityTerm": 1.9809343046159185,
                     "covarianceTerm": 0.0
                   }
                 },
                 "gpt-6-luna": {
                   "top3": {
-                    "share": 0.0546,
-                    "monteCarloSe": 0.0022719779928511634
+                    "share": 0.0548,
+                    "monteCarloSe": 0.0022758945494024984
                   },
                   "top1": {
-                    "share": 0.0028,
-                    "monteCarloSe": 0.0005284089325512959
+                    "share": 0.0027,
+                    "monteCarloSe": 0.0005189132875539034
                   },
                   "frontier": {
-                    "share": 0.5796,
-                    "monteCarloSe": 0.0049362317611716736
+                    "share": 0.5794,
+                    "monteCarloSe": 0.004936553858715612
                   },
                   "qualifies": {},
                   "dispersion": {
                     "status": "defined",
                     "label": "scenario dispersion under the declared kernels",
                     "scenarios": 10000,
-                    "valueVariance": 2.0590323178522585,
-                    "valueSd": 1.4349328617925852,
+                    "valueVariance": 2.0585849544019834,
+                    "valueSd": 1.434776970264711,
                     "costTerm": 0.0,
-                    "qualityTerm": 2.0590323178522585,
+                    "qualityTerm": 2.0585849544019834,
                     "covarianceTerm": 0.0
                   }
                 },
@@ -58925,18 +59128,18 @@
                     "monteCarloSe": 0.0006071498991188255
                   },
                   "frontier": {
-                    "share": 0.8627,
-                    "monteCarloSe": 0.003441637836844545
+                    "share": 0.8628,
+                    "monteCarloSe": 0.0034405836714139068
                   },
                   "qualifies": {},
                   "dispersion": {
                     "status": "defined",
                     "label": "scenario dispersion under the declared kernels",
                     "scenarios": 10000,
-                    "valueVariance": 2.205214900897472,
-                    "valueSd": 1.4849965996248853,
+                    "valueVariance": 2.2042293225572176,
+                    "valueSd": 1.4846647172197558,
                     "costTerm": 0.0,
-                    "qualityTerm": 2.205214900897472,
+                    "qualityTerm": 2.2042293225572176,
                     "covarianceTerm": 0.0
                   }
                 },
@@ -58950,43 +59153,43 @@
                     "monteCarloSe": 0.0
                   },
                   "frontier": {
-                    "share": 0.4087,
-                    "monteCarloSe": 0.004915936431647586
+                    "share": 0.409,
+                    "monteCarloSe": 0.004916492652287807
                   },
                   "qualifies": {},
                   "dispersion": {
                     "status": "defined",
                     "label": "scenario dispersion under the declared kernels",
                     "scenarios": 10000,
-                    "valueVariance": 2.121174797563906,
-                    "valueSd": 1.4564253491215764,
+                    "valueVariance": 2.1204538390326033,
+                    "valueSd": 1.4561778184798049,
                     "costTerm": 0.0,
-                    "qualityTerm": 2.121174797563906,
+                    "qualityTerm": 2.1204538390326033,
                     "covarianceTerm": 0.0
                   }
                 },
                 "claude-haiku-5-5-medium": {
                   "top3": {
-                    "share": 0.0082,
-                    "monteCarloSe": 0.0009018181634897359
+                    "share": 0.0083,
+                    "monteCarloSe": 0.000907254650029417
                   },
                   "top1": {
                     "share": 0.0004,
                     "monteCarloSe": 0.0001999599959991998
                   },
                   "frontier": {
-                    "share": 0.809,
-                    "monteCarloSe": 0.00393089048435593
+                    "share": 0.8084,
+                    "monteCarloSe": 0.003935599573127327
                   },
                   "qualifies": {},
                   "dispersion": {
                     "status": "defined",
                     "label": "scenario dispersion under the declared kernels",
                     "scenarios": 10000,
-                    "valueVariance": 2.12061629690956,
-                    "valueSd": 1.4562335997049238,
+                    "valueVariance": 2.119484652016096,
+                    "valueSd": 1.455844995875624,
                     "costTerm": 0.0,
-                    "qualityTerm": 2.12061629690956,
+                    "qualityTerm": 2.119484652016096,
                     "covarianceTerm": 0.0
                   }
                 },
@@ -59000,18 +59203,18 @@
                     "monteCarloSe": 0.0
                   },
                   "frontier": {
-                    "share": 0.8779,
-                    "monteCarloSe": 0.003274012675601608
+                    "share": 0.8775,
+                    "monteCarloSe": 0.0032786239491591597
                   },
                   "qualifies": {},
                   "dispersion": {
                     "status": "defined",
                     "label": "scenario dispersion under the declared kernels",
                     "scenarios": 10000,
-                    "valueVariance": 2.1454338266760535,
-                    "valueSd": 1.464729950085016,
+                    "valueVariance": 2.144991486011427,
+                    "valueSd": 1.4645789449570232,
                     "costTerm": 0.0,
-                    "qualityTerm": 2.1454338266760535,
+                    "qualityTerm": 2.144991486011427,
                     "covarianceTerm": 0.0
                   }
                 },
@@ -59033,10 +59236,10 @@
                     "status": "defined",
                     "label": "scenario dispersion under the declared kernels",
                     "scenarios": 10000,
-                    "valueVariance": 2.746707970578451,
-                    "valueSd": 1.6573195137264423,
+                    "valueVariance": 2.7460374253507065,
+                    "valueSd": 1.6571172032631567,
                     "costTerm": 0.0,
-                    "qualityTerm": 2.746707970578451,
+                    "qualityTerm": 2.7460374253507065,
                     "covarianceTerm": 0.0
                   }
                 },
@@ -59058,10 +59261,10 @@
                     "status": "defined",
                     "label": "scenario dispersion under the declared kernels",
                     "scenarios": 10000,
-                    "valueVariance": 2.6639655335162615,
-                    "valueSd": 1.6321659025712618,
+                    "valueVariance": 2.6635593453936646,
+                    "valueSd": 1.6320414655864797,
                     "costTerm": 0.0,
-                    "qualityTerm": 2.6639655335162615,
+                    "qualityTerm": 2.6635593453936646,
                     "covarianceTerm": 0.0
                   }
                 }
@@ -61666,8 +61869,8 @@
                     "monteCarloSe": 0.0
                   },
                   "top1": {
-                    "share": 0.2036,
-                    "monteCarloSe": 0.004026748564288562
+                    "share": 0.2037,
+                    "monteCarloSe": 0.004027484450621752
                   },
                   "frontier": {
                     "share": 1.0,
@@ -61678,10 +61881,10 @@
                     "status": "defined",
                     "label": "scenario dispersion under the declared kernels",
                     "scenarios": 10000,
-                    "valueVariance": 2.357620845063505,
-                    "valueSd": 1.5354546053412017,
+                    "valueVariance": 2.35663248380707,
+                    "valueSd": 1.5351327251436828,
                     "costTerm": 0.0,
-                    "qualityTerm": 2.357620845063505,
+                    "qualityTerm": 2.35663248380707,
                     "covarianceTerm": 0.0
                   }
                 },
@@ -61695,18 +61898,18 @@
                     "monteCarloSe": 0.003797959452126892
                   },
                   "frontier": {
-                    "share": 0.9788,
-                    "monteCarloSe": 0.001440505466841414
+                    "share": 0.9793,
+                    "monteCarloSe": 0.0014237805308403414
                   },
                   "qualifies": {},
                   "dispersion": {
                     "status": "defined",
                     "label": "scenario dispersion under the declared kernels",
                     "scenarios": 10000,
-                    "valueVariance": 2.6625018160033407,
-                    "valueSd": 1.631717443678084,
+                    "valueVariance": 2.661723168590299,
+                    "valueSd": 1.6314788287288005,
                     "costTerm": 0.0,
-                    "qualityTerm": 2.6625018160033407,
+                    "qualityTerm": 2.661723168590299,
                     "covarianceTerm": 0.0
                   }
                 },
@@ -61716,12 +61919,12 @@
                     "monteCarloSe": 0.0
                   },
                   "top1": {
-                    "share": 0.6216,
-                    "monteCarloSe": 0.004849880823278032
+                    "share": 0.6215,
+                    "monteCarloSe": 0.004850131441517848
                   },
                   "frontier": {
-                    "share": 0.836,
-                    "monteCarloSe": 0.0037027557305336794
+                    "share": 0.8363,
+                    "monteCarloSe": 0.0037000312160845343
                   },
                   "qualifies": {},
                   "dispersion": {

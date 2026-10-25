@@ -105,7 +105,7 @@ SOURCE_NAMES = {
 }
 TB_GAP_SOURCE = "tbench.ai Terminal-Bench 4.0 leaderboard (gap fill, O37)"
 LEAF_NOTES = {
-    "gdpval": "Scored with AA's integration transform, (Elo - 500) / 2000, on the rating as integrated in the pinned Index.",
+    "gdpval": "Scored with AA's integration transform, (Elo - 500) / 2000, on the Elo AA's model page displays at the capture (O70).",
     "omniscience": "Scored as AA's Omniscience Index I (correct minus incorrect over all questions), z = (I + 100) / 2 (owner decision O28).",
     "bugHunt": "Mean bugs fixed over the owner's published runs for the exact model, effort and harness.",
     "terminalBench": "AA's own run on one harness (mini-SWE-agent) since O37; tbench.ai rows fill a gap and are compared with it as a diagnostic.",

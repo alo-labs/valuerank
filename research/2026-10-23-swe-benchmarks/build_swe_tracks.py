@@ -9,6 +9,8 @@ exception, by owner decision O54 and editor decision E252: AA's configuration is
 
 import csv
 import json
+import re
+from datetime import datetime, timedelta, timezone
 from pathlib import Path
 
 HERE = Path(__file__).parent
@@ -93,10 +95,18 @@ def select_aicd(model_id: str, label: str, board: dict[str, list[dict]]) -> dict
 
 # O69 (2026-10-25): O60 is a board-level test; a row dated on the cutoff's day stands only with a recorded instant, from
 # the board's relative age, before the cutoff, and it is disclosed. A row dated after the cutoff's day never counts.
-CUTOFF_DAY_ROWS = {("Kimi K3.1 Pro (Max)", "OpenCode"): ("2026-10-25T00:58:00Z", "the board showed 'tested 9 hours ago' at 2026-10-25T09:58Z")}
+# O69, I60 L2: AI Coding Daily dates a row by day and shows its age ("10 hours ago") at the read. A cutoff-day row is
+# placed by the bound the archived read supports: shown "N hours ago" at the read instant, it was tested no later than
+# the read minus N - 1/2 hours (the age is rounded), and not before the day's UTC midnight. No minute is claimed.
+AICD_READ = ("research/2026-10-25-board-reread/aicd/leaderboard-allrows-parsed.json", "2026-10-25T10:44:11Z")
+_AGE = re.compile(r"\b(\d+) (minute|hour)s? ago\b")
 
 
-def check_row_date(row: dict, cutoff: str) -> str | None:
+def _iso(instant: datetime) -> str:
+    return instant.astimezone(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
+
+
+def check_row_date(row: dict, cutoff: str, read: tuple[str, str] = AICD_READ) -> str | None:
     """O69: the row's date against the release cutoff; returns the disclosure for a cutoff-day row."""
 
     day = cutoff[:10]
@@ -104,10 +114,16 @@ def check_row_date(row: dict, cutoff: str) -> str | None:
         raise ValueError(f"{row['model']} ({row['harness']}) is dated {row['tested']}, after the cutoff's day (O69)")
     if row["tested"] < day:
         return None
-    instant, basis = CUTOFF_DAY_ROWS.get((row["model"], row["harness"]), (None, None))
-    if instant is None or instant >= cutoff:
+    shown = next((match for cell in row.get("rawCells", []) if (match := _AGE.search(cell))), None)
+    if shown is None:
         raise ValueError(f"{row['model']} ({row['harness']}) is dated on the cutoff's day without a recorded instant before the cutoff (O69)")
-    return f"dated on the cutoff's day; placed at {instant} ({basis}), before the cutoff {cutoff} (O69)"
+    amount, unit = int(shown.group(1)), shown.group(2)
+    hours = amount - 0.5 if unit == "hour" else (amount - 0.5) / 60.0
+    latest = datetime.fromisoformat(read[1].replace("Z", "+00:00")) - timedelta(hours=hours)
+    if latest >= datetime.fromisoformat(cutoff.replace("Z", "+00:00")):
+        raise ValueError(f"{row['model']} ({row['harness']}) is dated on the cutoff's day without a recorded instant before the cutoff (O69)")
+    return (f"dated on the cutoff's day; tested between {day}T00:00:00Z and {_iso(latest)} (shown '{shown.group(0)}' in {read[0]}, "
+            f"read at {read[1]}), before the cutoff {cutoff} (O69)")
 
 
 def aicd_points(row: dict) -> float:

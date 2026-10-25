@@ -254,3 +254,42 @@ def test_a_model_name_with_digits_is_not_a_count():
     names = f.known_names(SCORES)
     assert f.lint("Shown on the Claude Haiku 5.5 rows.", names, f.configuration_names(SCORES), "2026-10-25") == []
     assert f.lint("Shown on 12 rows.", names, f.configuration_names(SCORES), "2026-10-25")
+
+
+def test_absence_statements_carry_a_marker_whose_claim_holds(tmp_path):
+    """I60 M2: a sentence saying a source publishes or carries no field carries an {{absent:KEY}} marker, and the claim
+    is tested against the pinned data, so a field that appears forces the sentence to change."""
+
+    assert all(test(DATA) for _, test in f.ABSENCE_CLAIMS.values())
+    text = "\n".join([
+        "AA publishes no interval for that leaf.",
+        "AA's run publishes no interval{{absent:aa.terminalBenchInterval}}.",
+        "The board publishes no error{{absent:aicd.error}}.",
+        "## Revision history",
+        "History is not captured here.",
+    ])
+    assert f.absence_problems(text) == ["line 1: an absence statement without an {{absent:KEY}} marker: AA publishes no interval for that leaf."]
+    assert f.render("x{{absent:aicd.error}}y", SCORES, {}) == "xy"
+    with pytest.raises(f.FigureError, match="no absence claim 'nope'"):
+        f.render("{{absent:nope}}", SCORES, {})
+    # A field that appears in the pinned data makes the claim fail.
+    data = tmp_path / "data"
+    shutil.copytree(DATA, data, ignore=shutil.ignore_patterns("site", "*.html"))
+    snapshot = json.loads((data / "aa" / "aa_v432_snapshot.json").read_text())
+    snapshot["pages"][0]["model"]["terminalBench40Interval"] = {"lower": 1, "upper": 2}
+    (data / "aa" / "aa_v432_snapshot.json").write_text(json.dumps(snapshot))
+    assert f.absence_problems("AA's run publishes no interval{{absent:aa.terminalBenchInterval}}.", data) == [
+        "line 1: absence claim aa.terminalBenchInterval (AA's pages carry no Terminal-Bench 4.0 interval) no longer holds; rewrite the sentence"]
+    assert not f.ABSENCE_CLAIMS["aa.leafIntervals"][1](data)
+
+
+def test_absence_claim_helpers_read_nested_keys_and_registries(tmp_path):
+    assert f._keys({"a": [{"b": 1}, {"c": {"d": 2}}]}) == {"a", "b", "c", "d"}
+    data = tmp_path / "data"
+    data.mkdir()
+    (data / "bug_hunt.json").write_text(json.dumps({"models": [{"modelId": "m", "fixedOf105": None}]}))
+    (data / "leaf_evidence.json").write_text(json.dumps({"searches": [{"modelId": "m", "leaf": "bugHunt", "result": "not found"}]}))
+    assert f._bug_hunt_search_empty("m")(data) and not f._bug_hunt_search_empty("other")(data)
+    (data / "plan_cost_routes.json").write_text(json.dumps({"routes": [{"sourceEvidenceId": "semianalysis", "contentSha256": "x"}]}))
+    assert not f._semianalysis_unhashed(data)
+    assert f.fmt(-0.83, "signed.2", {}) == "−0.83" and f.fmt(4.1, "signed.2", {}) == "+4.10"
