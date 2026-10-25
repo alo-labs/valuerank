@@ -602,14 +602,21 @@ def check_rereads(documents: dict) -> None:
             raise ValueError(f"{item['source']}: the O68 re-read at {item['reReadAt']} was compared with a capture ({item['pinnedSha256'][:12]}) that is not the pinned one ({str(pinned)[:12]})")
 
 
-def reread_matches(item: dict, root: Path = ROOT) -> bool:
-    """Whether a re-read file equals the pinned capture (file hash, or the compared fields of a scrape)."""
+def _compared_hash(document: dict, fields: list[str]) -> str:
+    return hashlib.sha256(json.dumps({field: document.get(field) for field in fields}, sort_keys=True).encode()).hexdigest()
 
-    pinned, reread = (root / item["pinned"]).read_bytes(), (root / item["file"]).read_bytes()
+
+def reread_matches(item: dict, root: Path = ROOT) -> bool:
+    """Whether a re-read file equals the pinned capture: the file hash, or for a scrape the hash of its compared fields
+    (recorded from the pinned scrape, which is not committed; checked against it too where it is present)."""
+
+    reread = (root / item["file"]).read_bytes()
     if item["compare"] == "sha256":
-        return hashlib.sha256(pinned).hexdigest() == hashlib.sha256(reread).hexdigest() == item["pinnedSha256"]
-    old, new = json.loads(pinned), json.loads(reread)
-    return hashlib.sha256(pinned).hexdigest() == item["pinnedSha256"] and all(old.get(field) == new.get(field) for field in item["compare"])
+        return hashlib.sha256(reread).hexdigest() == item["pinnedSha256"]
+    pinned = root / item["pinned"]
+    if pinned.exists() and _compared_hash(json.loads(pinned.read_bytes()), item["compare"]) != item["comparedSha256"]:
+        return False
+    return _compared_hash(json.loads(reread), item["compare"]) == item["comparedSha256"]
 
 
 def check_bug_hunt_dates(records: list[dict], release_day: date) -> str | None:

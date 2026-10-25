@@ -747,7 +747,7 @@ Each routed row's amount with what it measures, how it was derived and which obj
 
 ## Evidence bundle
 
-Bundle hash `e09581a57587841209bac0f84b1fc3b3da2e7d4d4eac2ee0501c93b2c6e00f9f`: every published output is rebuilt from these artifacts at the pinned publication clock (npm run verify:docs), never from live pages.
+Bundle hash `dc041d24b1d0b1e98b3fefc4e77df8ce6daaee0ed7536aa151039c44684e81af`: every published output is rebuilt from these artifacts at the pinned publication clock (npm run verify:docs), never from live pages.
 
 | Key | Artifact | SHA-256 | Captured | Extractor |
 |---|---|---|---|---|
@@ -767,7 +767,7 @@ Bundle hash `e09581a57587841209bac0f84b1fc3b3da2e7d4d4eac2ee0501c93b2c6e00f9f`: 
 | cognitionFrontierCode | `data/cognition_frontiercode.json` | `ff0040778b7bdf69c705ad7474f771fb5e53cfaf5cf8573b3a4614153543d75f` | — | Cognition's FrontierCode leaderboard data (https://cognition.com/data/frontiercode-leaderboard/data.json), captured unchanged (O37) |
 | sweTracks | `data/swe_tracks.json` | `85db0f4c375f6473679d495b28a4b45dd989505b49aa63c9efa75aba424e6ed2` | 2026-10-25T10:44:11Z | research/2026-10-23-swe-benchmarks/build_swe_tracks.py from the verified coverage captures (O53-O55) |
 | aaPreviousCapture | `data/aa/aa_previous_capture.json` | `89bef16d1be094feced8402bdac4d7e8981d86be303d5dbfda7368ce91fc0aed` | 2026-10-23T06:26:23Z | valuerank.capture_aa: digest of the model-page capture this one replaced (I60) |
-| sourceRereads | `data/source_rereads.json` | `f4e9c22f51c66699fa89d57ae979ef89b671d0e1e4842e0e9a8d5d25558d5fd0` | — | editorial record of the O68 re-reads, each 'unchanged' result verified against the re-read file |
+| sourceRereads | `data/source_rereads.json` | `a64ddcf196f61698b7babc18dd26dd2d1ed0762a9beb20bb8587c3eaebbd046b` | — | editorial record of the O68 re-reads, each 'unchanged' result verified against the re-read file |
 | anchors | `data/v3_frozen.json` | `d4f3bb4b769b2fcfc1b5c5847f67b396c6a386d7db4b17f99dffa9321e480cfc` | 2026-10-25 | valuerank.value_v3 freeze |
 | anchors:aicd | `data/v3_frozen_aicd.json` | `04a9d0fa638df44b005021793675bb333bc3aa40fd14dec9b706efbd7688bd41` | 2026-10-25 | valuerank.value_v3 freeze |
 

@@ -1992,7 +1992,11 @@ def test_rereads_name_the_pinned_capture_and_match_their_files():
     stale = {**documents, "sourceRereads": {"rereads": [{**documents["sourceRereads"]["rereads"][0], "pinnedSha256": "0" * 64}]}}
     with pytest.raises(ValueError, match="not the pinned one"):
         v.check_rereads(stale)
-    assert not v.reread_matches({**documents["sourceRereads"]["rereads"][1], "pinned": "data/tb4.json"})
+    assert not v.reread_matches({**documents["sourceRereads"]["rereads"][1], "pinnedSha256": "0" * 64})
+    scrape = documents["sourceRereads"]["rereads"][0]
+    assert not v.reread_matches({**scrape, "comparedSha256": "0" * 64})
+    assert not v.reread_matches({**scrape, "pinned": "data/tb4.json"})  # a committed pinned file is checked too
+    assert not v.reread_matches({**scrape, "pinned": scrape["file"], "file": "data/tb4.json"})
     clocks = {clock["source"]: clock for clock in v.source_clocks(documents)}
     assert clocks["tbench.ai Terminal-Bench 4.0 leaderboard"]["reRead"]["result"] == "unchanged"
     assert clocks["Cognition: FrontierCode leaderboard"]["reRead"]["lastModified"] == "2026-10-23T21:44:27Z"
