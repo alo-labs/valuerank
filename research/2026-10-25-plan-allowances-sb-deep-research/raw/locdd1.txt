@@ -333,3 +333,156 @@
 - 2026-06-17T01:01 SunnyDoll https://www.locdd.com/t/61344/6 | 求问各位大佬，都是怎么在同一个工程切换模型的，编码用glm5.2，文本生成使用DeepSeekV4 pro | 没填理解这么重命名，我是用的claude code + 买的腾讯云Coding Plan、MiniMax Token Plan套餐，还充值了一些钱在DeepSeek都是不同的供应商，cc switch也没有同时使用不同的供应商
 - 2026-04-22T02:20 NorthOfNorth https://www.locdd.com/t/42483/1 | 万万没想到，火山的 Coding Plan 是国内大厂里面最先上 GLM-5.1 （还有MiniMax-M2.7）的.. | 图片 https://www.volcengine.com/docs/82379/1925114?lang=zh 套餐概览–火山方舟-火山引擎 图片 试用了一下，一个问题就 9%了，火山的这个隐藏倍率啊… 图片
 - 2026-06-02T03:11 HalfSummer https://www.locdd.com/t/56357/5 | MinMax 周限额重新改为无穷了 | 大佬，大概是这样的： MINIMAX今天官方更新了对应的文档 https://platform.minimaxi.com/docs/token-plan/intro Token Plan 概要 - MiniMax 开放平台文档中心 https://platform.minimaxi.com/docs/token-plan/migration Token Plan 升级与权益调整说明 - MiniMax 开放平台文档中心 现在的问题局限在新计费标准的5小时限制上和月限制额度方面。 当前的用量显示200%是因为临时统计
+### minimax 额度: posts=50
+- 2026-06-01T15:00 StarOcean https://www.locdd.com/t/56214/1 | MiniMax 额度翻倍, M2.7 和 M3 都无周限了? | 我是无周限老套餐, 又可以继续刷了? 总额度: 200% 周: 无限制 image
+- 2026-06-25T13:53 KafkaBySea https://www.locdd.com/t/64109/1 | MiniMax周额度重置 | 如题，MiniMax服务器炸了修好后，周额度重置了 image
+- 2026-04-02T06:32 GalaxyRailway https://www.locdd.com/t/34660/1 | 如何在CC Swtich中看MiniMax的使用额度? | 分享一下 ({ request: { url: "https://www.minimaxi.com/v1/api/openplatform/coding_plan/remains", method: "GET", headers: { "Authorization": "Bearer {{apiKey}}", "Content-Type": "application/json" } }, extractor: function(response) { var data = typeof response === "
+- 2026-06-02T07:00 MoonPostman https://www.locdd.com/t/56452/1 | 关于 cc-switch 使用minimax tokenplan无法获取额度的问题 | 使用自定义模板，然后等修复吧： ({ request: { url: "https://www.minimaxi.com/v1/api/openplatform/coding_plan/remains", method: "GET", headers: { Authorization: "Bearer ${apiKey}" } }, extractor: function(response) { var remains = response.model_remains; var plan = remains[0].
+- 2026-03-20T14:18 CloudWalker https://www.locdd.com/t/29621/1 | MiniMax Token Plan在CC-Switch 里成功使用额度配置提取器查看额度 | MiniMax Token Plan CC-Switch 额度配置提取器 image CC-Switch 额度配置提取器，用于查询 MiniMax 编程套餐的 5 小时窗口用量。 直接粘贴到红箭头处 PixPin_2026-03-20_22-15-03 请求信息 接口地址 : https://www.minimaxi.com/v1/api/openplatform/coding_plan/remains 请求方式 : GET 认证方式 : Bearer Token 提取器配置 ({ request: { url: 
+- 2026-03-23T06:17 DolphinLover https://www.locdd.com/t/30464/1 | MiniMax Token Plan在CC-Switch 里成功使用额度配置提取器查看额度优化 | https://linux.do/t/topic/1790204 MiniMax Token Plan在CC-Switch 里成功使用额度配置提取器查看额度 基于这位大佬提供的脚本 本来是有用的，然后因为它变成了token plan, 后端返回的结构变了，所以优化了一版 ({ request: { url: "https://www.minimaxi.com/v1/api/openplatform/coding_plan/remains", method: "GET", headers: { "Authorizat
+- 2026-06-01T09:22 GalaxyRailway https://www.locdd.com/t/56105/1 | MiniMax Token Plan 变更公告：M2.7 次数不缩水 M3 共享额度池 无周限老用户继续无周限 | 官方公告： 图片 https://platform.minimaxi.com/docs/token-plan/migration MiniMax 开放平台文档中心 图片 Token Plan 升级公告：M3 上线 · 老用户权益完整保留 - MiniMax 开放平台文档中心 MiniMax 成立于 2021 年 12 月，是领先的通用人工智能科技公司，致力于与用户共创智能。MiniMax 自主研发多模态、万亿参数的 MoE 大模型，并基于大模型推出海螺AI、星野等原生应用。MiniMax API 开放平台提供安全、
+- 2025-12-18T09:00 GalaxyRailway https://www.locdd.com/t/3516/1 | MiniMax M2的识图MCP，是不是用一次会废掉好多coding plan的额度啊？ | 刚才配置好mcp试了试，就测试了一张图，然后配额消耗了66%。
+- 2026-08-06T09:42 BlackCoffee https://www.locdd.com/t/77831/1 | 有没有开过minimaxi token plan的大佬，套餐内有官网语音生成额度吗？ | 有没有大佬开过plus套餐的，这个套餐在官网语音生成里有给额度（声贝）吗？ 目前免费版是没有每月额度了，不知道开了会员之后会不会给额度，或者能够使用token plan里的额度。 image 翻了官网的文档半天，也没找到答案，我的理解是没有额度，要走api才能用。但是问了客服，客服说有，也没给具体数值。想问问有没有订阅了的大佬帮忙看一眼。
+- 2026-03-24T03:14 StarOcean https://www.locdd.com/t/30810/1 | 简单分享一下 minimax 49 元档的 code plan 使用体验 | 使用场景是 claude code + minimax 额度基本用不完 用不完的原因是 49 这个额度限速，白天比较严重，无法多开 minimax 的 5 小时是固定的时段 10:00-15:00 15:00-20:00 这样 感觉能力和 trae 国内版那个免费的 2.7 大差不差
+- 2026-10-23T08:29 WindTraveler https://www.locdd.com/t/103131/5 | 最近token需求太旺盛了，有没有coding plan订阅推荐？ | minimax额度很多 但是模型比ds弱比glm5.3flash强
+- 2026-06-29T03:33 SouthWindKnows https://www.locdd.com/t/65089/1 | opencode go里面的minmax现在是限时3倍额度 | MiniMax M3 限时享受 3 倍使用额度 我试了一下，现在很耐用，性价比一下子就提起来了。
+- 2026-09-17T01:49 HalfSummer https://www.locdd.com/t/91928/1 | 国内最强的 5 个编程模型你心目中怎么排名？有没有都用过对比过的大佬来分享下，最近公司给了些 trae 的额度 | 1. DeepSeek V4 Pro（深度求索） 2. MiniMax M3（稀宇科技） 3. GLM-5.3（智谱 AI） 4. Kimi K3 系列（月之暗面） 5. Qwen3.8-Max（阿里通义千问）
+- 2026-07-01T04:04 PoemFarAway https://www.locdd.com/t/65686/2 | 国内coding plan哪个性价比最高，求解 | opencode go? 5刀60的额度，有minimax和mino，还有glm5.2
+- 2026-06-25T12:35 CloudWalker https://www.locdd.com/t/64078/2 | miniMax又炸了？？？？ | 下午有点炸，现在已经修好了吧？我下午想去对比一下和MIMO的性价比。那我就进不去。 后来我再去的时候，是已经好了。 让我的虾子比出来，Minimax的额度还是要多很多的。虽然它很蠢，但是它量大呀。暂时先用用看再说吧。本来想着要不要退款了，去买MIMO的套餐。
+- 2026-04-18T11:07 StarOcean https://www.locdd.com/t/41240/2 | 目前还有啥好的codingplan吗 | 目前用的minimax但是感觉不够聪明。然后我刚刚搞了一个opencode go 主要是有glm 5.1 但是额度太少。正在考虑搞一个kimi 199 据说很够用
+- 2026-04-03T13:34 RainPoet https://www.locdd.com/t/35343/10 | mimo 的plan套餐来了，怎么说？感觉这价格还可以 | 有没有考虑买opencode go？不需要绑定opencode。一个月最高能消耗60美元额度，还有minimax和mimo模型都可用。
+- 2026-02-08T07:27 BlackCoffee https://www.locdd.com/t/17185/1 | 各位大佬觉得kimi 2.5更适合用在什么领域呢 | 看排名是挺高的，买了个体验套餐感觉就是比glm和minimax额度更低一些，还有个周使用限制，想听听大佬的意见，个人主要用在编程
+- 2026-01-28T12:46 FireflyWood https://www.locdd.com/t/14176/17 | 大佬如何评价现在国内开源coding plan御三家？ kimi，zhipu，minimax？ | 额度来说，glm给的最多，kimi给的最少。但是模型能力现在是kimi最强，glm最弱
+- 2026-02-28T05:04 HalfSummer https://www.locdd.com/t/21745/1 | OpenCode 推出Coding Plan | image 目前定价 10$/month，支持模型如下： Kimi K2.5 GLM-5 MiniMax M2.5 额度随时可能调整 当前额度限制如下： 5 hour limit — $4 of usage Weekly limit — $10 of usage Monthly limit — $20 of usage 每 token 价格如下： Model Input Output Cached Read GLM-5 $1.00 $3.20 $0.20 Kimi K2.5 $0.60 $3.00 $0.10 Mi
+- 2026-06-01T15:19 MoonPostman https://www.locdd.com/t/56219/1 | 解读MINIMAX最新公告 | 188fda382116da974170fed643ababee 你们闹得太大了，我们被迫来道个歉 M3更大计算成本更高更好用，你们先体验一下 后续token plan的调整就这么定了，你们既然只关注5小时限额和周限额，那套餐总额度我就不管了 6.1日到6.7日的5小时额度和周限额双倍，并且今晚重置总额度，重置完之后你们就赶紧用，用完就别说退款了 啥时候再有调整啥时候再说，现在就先这么滴了 但是实际上minimax的tokenplan最大的变化是以前的算请求次数变成了现在的总token 额度，同时5小时限额和周限额
+- 2026-06-30T00:28 KiteHasWind https://www.locdd.com/t/65357/1 | 小玩具 统一 skill 资产管理工具 Skillcaddy | 本帖使用社区开源推广，符合推广要求。我申明并遵循社区要求的以下内容： 我的帖子已经打上 开源推广 标签： 是 我的开源项目完整开源，无未开源部分： 是 我的开源项目已链接认可 LINUX DO 社区： 是 我帖子内的项目介绍，AI生成、润色内容部分已截图发出： 是 以上选择我承诺是永久有效的，接受社区和大佬监督： 是 以下为项目介绍正文内容，AI生成、润色内容已使用截图方式发出 14f1a1086ce027655ff6f2754cb49004_MD5 最近在玩不同agent发现一个问题. 如果我把skill都通过n
+- 2026-07-29T03:38 WindGoesOn https://www.locdd.com/t/75049/1 | 收回我的成见，用了qwen3.8-max-preview后才明白MiniMax 3的好 | 我的使用环境主要是Openclaw之类agnet，之前因为额度越来越不经用吐槽过MiniMax，直到我用上了qwen3.8-max-preview lite，才感觉MiniMax对原始套餐用户来讲算是业界良心。 在openclaw使用体验上，qwen3.8-max-preview 简直就是灾难，经常陷入兔子洞，额度一个问题全能全刷光，白天额度自不必提，晚间十倍额度也不抗用，有几次不得不启用MiniMax擦屁股。今天是忍无可忍，让其简单更新一个软件，外加修改个dns，结果就陷进去了，如下图： ScreenShot_2
+- 2026-06-01T07:54 WindGoesOn https://www.locdd.com/t/56058/1 | 我拿到了minimax的退款链接 | 如题，想必大家都知道minimax不通知也不经过用户同意就改了token plan的额度，我问minimax在微信支付的客服要到了官方退款链接：“你好，开放平台CodePlan退款需求，可通过填写以下链接申请https:/vrfi1sk8a0.feishu.cn/share/base/form/shrcnj5q5gfC4KkUxLcQXD9IDsn” Screenshot2026-06-01-15-11-10-712com.tencent.m.
+- 2026-06-01T18:06 WindTraveler https://www.locdd.com/t/56244/1 | 自己vibe的研究内容小应用测试Minimax。opus评价M3不如M2.7。 | **叠甲：**不评价minimax现在额度这块的消息，最终肯定会有个定论。 个人看法：跟之前一样minimax并不是很值得付费 ，仅能够当做龙虾玩具跑一些目标和流程比较具体小功能。 **裁判：**claude-opus-4.8 max 这次测试用的流程： image 同一个问题使用 首先耗时上，M3很慢。当然有可能是M3还没有highspeed模型。 image 然后是claude评判的结果。直接上对比总结表。 image 1. M3反直觉：最新的 M3 综合表现最差。 AI味重(57 分，两项高危)，一个真实生成
+- 2026-03-26T09:39 WindGoesOn https://www.locdd.com/t/31852/1 | glm有周限 请问minimax和kimi有吗大佬 | 最近买了glm max年费，结果发现 两天就用到一周额度超标了 所以想请问一下大大佬们minimax和kimi有没有一周额度或者月额度限制
+- 2026-05-02T14:51 NorthOfNorth https://www.locdd.com/t/46649/1 | ✨全面支持国模，与大佬共建共创 |「Aether 扶摇」正努力成为 Android 端最好看最好用的通用 AI 客户端 | [!todo]- 开源推广声明 本帖使用社区开源推广，符合推广要求。我申明并遵循社区要求的以下内容： 我的帖子已经打上 开源推广 标签： 是 我的开源项目完整开源，无未开源部分： 是 我的开源项目已链接认可 LINUX DO 社区： 是 我帖子内的项目介绍，AI生成、润色内容部分已截图发出： 是 以上选择我承诺是永久有效的，接受社区和大佬监督： 是 以下为项目介绍正文内容，AI生成、润色内容已使用截图方式发出 受限于论坛文件上传大小限制，画质比较低，只能凑合看了呜呜呜 「Aether 扶摇」 已经发布正好 1 周啦
+- 2026-03-15T10:56 HalfSummer https://www.locdd.com/t/25330/13 | OpenCode 速查表 | 这个界面都是中文,每天还有kimi和minimax免费额度用,挺舒服的
+- 2026-06-26T15:14 Dev_Leo https://www.locdd.com/t/64533/1 | 理性讨论国模 plan 选哪个？ | 现在国内的token plan五花八门，这里对比一下各大厂家的token plan，告诉大家到底应该选什么。个人建议，仅作参考。 省流 https://linux.do/t/topic/2482602/1 （点击了解更多详细信息） MiniMax mimimax量大管饱的首选。 Clipboard_Screenshot_1782472830 minimax 的token plan，5h能用40M，周额度10%，换算一下plus订阅一周能用10个5h额度，有4亿token。Max有三倍的额度，一周12亿几乎随便用。 
+- 2026-06-11T11:05 ForestElf https://www.locdd.com/t/59485/1 | 国产 Coding Plan 额度对比 | 最近因为 claude 号被封了，就去用了一下 mimo 的 token plan，发现在 claude code 里面表现还可以，尤其是我的任务基本上不需要很高的智能，更多的是消耗量比较大，这个套餐就很合适。但是用了一段时间发现这个 mimo 需要用 workflows 启用 fan out agents 才行，如果串行的话做出来的东西就挺屎的。不过这样的话又会有一个问题，就是经常触发 rate limited，感觉小米对并行的限制还是有点高。碰巧又白嫖了一个 MiniMax M3，在同样的 workflows 
+- 2026-06-09T14:44 RainPoet https://www.locdd.com/t/58723/7 | 火山方舟又出9.9的token plan了，这次加入了MiniMax-M3 | 没啥用，额度很少的。倍率很高，只能说10块钱玩玩
+- 2026-03-24T09:07 KiteRunner https://www.locdd.com/t/30956/14 | 感觉被minimax背刺了. | 那个只是周额度，仍旧受到限流
+- 2026-05-30T05:15 InkBlue https://www.locdd.com/t/55458/1 | newapi 我增加了minimax渠道，然后模型映射了一下，测试没有问题，为啥从codex中请求报错呀？ | image image image 有大佬知道这个是为啥吗？pro的额度没了，想先拿minimax顶一下 但是不想切换配置，就映射了一下。
+- 2026-09-30T08:59 GalaxyRailway https://www.locdd.com/t/96531/1 | MiniMax最新套餐已经出炉 | 订阅套餐产品升级公告 关于 M Plan 即将推出，Token Plan 相关说明 公告发布时间：2026年9月29日 M Plan 即将推出， 将承接并拓展 Token Plan 的订阅能力， 套餐订阅价格与文本使用额度保持不变，部分档位可以使用 MiniMax H3。 并且 Token Plan 将停止新购，已订阅且开启自动续费的用户的现有套餐将保持不变，也可以随时升级到 M Plan 享受更多权益。 第一部分 · MiniMax Code 产品焕新 全新视觉体验 MiniMax Code 品牌概念与产品视觉焕
+- 2026-05-03T10:11 MoonPostman https://www.locdd.com/t/46818/1 | Coding/Token Plan 简览 | 欢迎大家补充修改，也可以留言使用体验 一、智谱 GLM Coding Plan https://bigmodel.cn/glm-coding 订阅 https://docs.bigmodel.cn/cn/coding-plan/overview 概览 套餐 价格 每 5 小时限额 每周限额 可用模型 Lite ¥49 / 月 ~80 prompts ~400 prompts GLM-5.1、GLM-5-Turbo、GLM-4.7、GLM-4.5-Air Pro ¥149 / 月 ~400 prompts ~2000
+- 2026-06-04T13:57 HalfSummer https://www.locdd.com/t/57312/8 | 快讯:opencode zen又恢复了 minimax M3 蹬起来 | 额度还可以 爽吃6点用到现在还在跑 没停过
+- 2026-06-01T15:08 BlackCoffee https://www.locdd.com/t/56215/1 | MiniMax：老乡别走 | image 额度加回来了，老乡别去微信哪里退款啦 :rofl:
+- 2026-04-25T03:38 KiteHasWind https://www.locdd.com/t/44024/7 | opencode go套餐用完了，还剩十多天才能刷新额度，求推荐类似 | minimax glm kimi mimo deepseek qwen 国模基本都在了，然后也提供了api接口，不需要反代
+- 2025-12-24T04:05 BrightestStar https://www.locdd.com/t/4562/25 | GLM4.7 与 MiniMax M2.1 哪个强啊 | glm 卡就算了 还会降智 所谓的额度 根本用不完都是虚的
+- 2026-04-26T14:22 KiteHasWind https://www.locdd.com/t/44557/1 | 新注册用户有赠送额度的国产code plan有哪些? | 希望能用mimo, deepseek, kimi, minimax,有什么国产的code plan或者api key,有赠送额度或者token的provider吗?
+- 2026-03-21T11:33 HappyCoderKid https://www.locdd.com/t/29907/1 | 吃灰安卓变身 OpenClaw 服务器 — 完整手册 | 吃灰安卓变身 OpenClaw 服务器 — 完整手册 android-openclaw 本手册以 OnePlus 9 为例 · 无需 Root · 无需买 Mac Mini ， 只用安卓手机 + Termux + SSH，小白也可玩转 OpenClaw。 目录 准备工作 安装 Termux 套件 初始化 Termux 基础环境 配置 SSH — 切换到 Mac/PC 操作 安装 Ubuntu 虚拟环境 安装 Node.js 和 OpenClaw 初始化 OpenClaw 配置 修复 Android proot 兼容
+- 2026-06-25T11:48 PaperPlane https://www.locdd.com/t/64072/1 | MiniMax这是怎么了 | 如图，打开网站看额度的时候网页上显示一堆报错。。。 今天用token plan的API也总是报529错误，不知道最近是咋了 屏幕截图 2026-06-25 194229 有遇到这些情况的大佬么？
+- 2026-06-01T15:52 ForestElf https://www.locdd.com/t/56194/104 | MiniMax M3 国模第一了 | tokenplan的额度比之前少了太多…感觉对比deepseekv4也没啥特别的优势
+- 2026-02-24T17:14 SunnyDoll https://www.locdd.com/t/20768/5 | 再传喜报，阿里Coding Plan支持MiniMax-M2.5啦！ | 已更新官方额度说明
+- 2026-10-19T13:37 FireflyWood https://www.locdd.com/t/101820/23 | MiniMax M3.1 Flash：重新定义 Agent 的性能与成本 | 我去查了一下，minimax被刺老用户，砍额度，降智，取消旧套餐，所谓性能似乎也是实际与说明不符合，这些都是大概半个月前的消息，可以说minimax落得现在这个舆论境地和他自己分不开，L站的大家都对minimax失望了，如果你对minimax被骂感兴趣，上面有大佬已经解释了 模型出来就改旧的订阅规则，还出来个 M plan，我直接把原来的年订阅剩余时间都申请退款。以后都不用 MiniMax 的模型
+- 2026-10-22T05:02 TimeThief https://www.locdd.com/t/102711/15 | minimax 跌破发行价 | minimax m3.1f刚出来的时候和现在官网的dpv4.1f一样的效果，然后minimax官方开始削减用户额度，动不动就429，之后就是降智，我是用着用着就受不了了，直接跑路
+- 2026-04-01T08:46 HalfSummer https://www.locdd.com/t/34254/1 | 问下大家trae国内版用的怎么样，看起来好像没说有额度限制 | 就是好像聪明的模型（glm5，minimax2.7）会显示需要排队，其他glm4.7，qwen3.5 plus等模型体验咋样
+- 2026-09-29T13:46 InkBlue https://www.locdd.com/t/96156/1 | minimax 推出 M plan 取消 token plan | M Plan 即将推出 2026-09-29 21:31 M Plan 承接并拓展 Token Plan 的订阅能力， 套餐订阅价格与文本使用额度保持不变，部分档位可以使用 MiniMax H3 。并且 Token Plan 将停止新购，已订阅且开启自动续费的用户的现有套餐将保持不变，也可以随时升级到 M Plan享受更多权益。 https://platform.minimax.cn/docs/token-plan/announcements 点击可查看详情。
+- 2026-07-28T06:42 BlackCoffee https://www.locdd.com/t/74763/25 | 国模是选择Kimi k3 or glm5.2 | 建议转投minimax 3 ，中间档的额度远大于其他所有coding plan
+- 2026-07-07T15:18 GalaxyRailway https://www.locdd.com/t/67507/17 | 小米音频生成模型限时免费使用，做了一个调用工具 | 小米这个TTS克隆的音色还是挺不错的，就是语速控制不太行。MiniMax自动控制语速、停顿，优秀很多 Minimax也可以免费用，但是没有API，额度也少
+### codex 周额度: posts=50
+- 2026-06-18T04:15 StarOcean https://www.locdd.com/t/61829/1 | 细思极恐，Codex 的“周额度”机制其实在偷偷吞你的时间 | 各位大佬，最近我在观察 Codex 的周额度（Weekly Limit）机制时，发现它的周期计算逻辑里藏着一个极其反直觉、甚至有点恶心的大坑。 一句话总结： Codex 的周额度根本不是自然推进的，而是"触发式"的。如果你不手动去触发，你的空档时间就会被直接吞掉。 什么是"黑洞时间"？ 大家正常理解的"按周刷新"，应该是像日历一样：上个周期结束了，系统自动无缝衔接进入下一个 7 天周期。哪怕我中间几天不用，额度也在那儿摆着。 但 Codex 现在的触发式机制是： 上一个周期结束后，下一个周期压根不会自动开始。 必须
+- 2026-04-03T01:57 StarryWalker https://www.locdd.com/t/35004/1 | codex周额度又又重置了？ | image 如图，codex周额度昨天晚上又重置了？ 我记得前两天因为rate limit重置了一次，今天早上一看怎么又重置了 :rofl:
+- 2026-08-11T02:19 KiteRunner https://www.locdd.com/t/79174/1 | ChatGPT Plus续费会重置codex的周额度吗？ | 这将关系到到期前我能否猛蹬。 详细： 我的ChatGPT plus 8月15日到期，但codex的周额度在8月18日恢复，那如果8月15日的时候ChatGPT plus自动续费，那codex额度会重置吗？
+- 2026-04-04T12:36 InkBlue https://www.locdd.com/t/35675/1 | 求大佬 实测 最新的 gpt plus和team的codex 周额度是多少刀？给大家做个参考 | 求大佬 实测 最新的 gpt plus和team的codex 周额度是多少刀？给大家做个参考
+- 2026-03-27T03:12 BrightestStar https://www.locdd.com/t/32079/1 | Codex周额度刷新啦，大佬登起来 | OpenAI Codex 负责人 Thibault Sottiaux 宣布，已重置所有套餐的 Codex 用量限额，以配合新上线的插件系统并鼓励用户体验。此次插件功能首批集成 Slack、Figma、Notion 及 Gmail 等开发者常用工具，使用户可在更多应用场景中使用 Codex 能力。
+- 2026-08-14T03:37 ForestElf https://www.locdd.com/t/80485/1 | CODEX周额度分析-用了自己4个号验证 | 最近看到很多人的codex额度都被官方砍了，我对自己的号全部测试了下。用的是论坛里面大佬给的JS脚本。 感觉很玄学，昨天重置完我算了下大概额度大概1700-1800刀之间，今天截至现在使用，估算大概2650-2800之间。昨天使用的主力模型是terra xhigh，昨天晚上参照社区大佬关于子agent的配置，今天是sol xhigh+子agent luna high [image] 前提： 1、从13号昨天重置前，账号一直都是在CPA中反代使用。 2、所有账号都在我自己win客户端跑过大部分额度，大概超过50%，主
+- 2026-06-03T06:46 TimeThief https://www.locdd.com/t/56839/1 | pro订阅的codex周额度消失了 | image CPA上pro的周额度消失了，有大佬知道咋回事吗
+- 2026-05-02T14:39 TimeMachine https://www.locdd.com/t/46645/1 | 想请问一下GPT 100美元Pro套餐的周codex额度 | 如题，想请问一下GPT 100美元Pro套餐每周大概有价值多少美元的codex额度？想跟中转站比较一下哪个更划算
+- 2026-08-17T13:55 MoonDrinker https://www.locdd.com/t/81702/1 | 大佬codex plus周额度换算成刀大概是多少刀呢？ | 大佬们codex plus周额度换算成刀大概是多少刀呢？
+- 2026-03-17T12:34 RainPoet https://www.locdd.com/t/28202/1 | 有大佬知道codex的team周额度和5小时额度大概是多少token吗？ | 如题，我总感觉额度的前50%很充足，然后低于50%后用起来非常快，如流水，感觉后0~50%区间的额度还没50~100%额度多 有没有大佬计算过team的周额度和5小时额度大概是多少token吗？他的百分比是线性的吗，有没有水分
+- 2026-07-06T09:08 PoemFarAway https://www.locdd.com/t/67122/1 | codex 5小时额度和周额度一直没变化，bug了吗？还是说5.6要来了？大佬快薅！ | 今天下午4.40开始，一直在使用codex，但是不管是5小时额度，还是周额度都没发生变化
+- 2026-07-12T21:35 PoemFarAway https://www.locdd.com/t/69619/1 | codex临时全部改为周额度！哟西~~~欸嘿嘿嘿 | image 你滴，大大滴好！ image 如果总额度降了的话，那你就大大的坏了。
+- 2026-08-26T01:12 PoemFarAway https://www.locdd.com/t/84440/1 | 开一个帖子统计 Codex Plus 5 小时额度和周额度 | PixPin_2026-08-26_09-09-00 PixPin_2026-08-26_09-09-13
+- 2026-06-30T06:47 PoemFarAway https://www.locdd.com/t/65509/1 | codex这5小时额度对应的周限额对么？ | claude 20刀订阅5小时限额每轮消耗差不多周限额的10%，也就是说能用10轮5小时。 codex今天说修复了额度，但是5小时限额用满耗掉了我周限额21%，那岂不是只能用不到5轮？！
+- 2026-06-01T09:29 NightRain https://www.locdd.com/t/56111/1 | 天塌了, codex 免费账号, 周重置额度 改成按月了 ??? | 免费账号之前是每周重置额度, 也没发现官博或X之类的发布这个规则啊 大佬们也是这样吗 ? image
+- 2026-05-29T03:14 ForestElf https://www.locdd.com/t/55127/1 | codex额度显示今天消失了，不会以后取消周限制了吧 | paste_1780024294237.png 今天看样子好像是什么codex friday paste_1780024319371.png 我的plus在cockpit tools里只有五小时限制了 然后codex cli直接不显示额度 不会真的没有周限制了吧 这招反击opus4.8也太狠了
+- 2026-06-18T01:12 Dev_Leo https://www.locdd.com/t/61746/1 | codex又重置额度了，但是重置完好像5小时限制和周限制额度又降低了 | codex又重置额度了，但是重置完好像5小时限制和周限制额度又降低了？有没有大佬是同样的问题
+- 2026-06-06T16:24 TimeThief https://www.locdd.com/t/57812/1 | 现在的codex pro x5 缩水有点严重啊 从3号重置开始算 两天周额度就没了…… | 现在的codex pro x5 缩水有点严重啊 从3号重置开始算 两天周额度就没了…… 有大佬跟我有一样的吗 我感觉现在的x5的额度低的离谱 虽然不翻倍了但是也不至于额度消耗的这么快吧，我还不是一个重度使用用户 感觉额度消耗快的离谱啊…… image
+- 2026-07-01T15:26 TimeMachine https://www.locdd.com/t/65947/1 | 双车位Codex额度，无日限，周限1100，买多了有人要吗 | 双车位 Codex 额度，无日限，周限 1100，买多了 有人需要吗
+- 2026-08-01T03:45 FireflyWood https://www.locdd.com/t/76220/1 | Codex额度又重置了，周末开始 | 图片 就在刚刚，Codex额度又恢复到100%了
+- 2026-07-21T08:07 BrightestStar https://www.locdd.com/t/72666/1 | 分析一下codex plus周限的额度 | 实测PLUS周限大约是85刀 , 100M Token image
+- 2026-05-25T02:34 FireflyWood https://www.locdd.com/t/53634/1 | 今天周一，codeX好像又刷新额度了，哈哈哈哈 | 今天周一，codeX好像又刷新额度了，哈哈哈哈 该感谢奥特曼
+- 2026-07-10T12:47 TimeMachine https://www.locdd.com/t/68977/1 | codex额度是降低了还是更改5h和周限的关系了 | 今天用codex，5h额度用光后，周额度掉到了83%，一次5h用了17%的周限，我记得以前一次5h大概是降14%左右，这是周额度降低了吗
+- 2026-05-29T03:24 BrightestStar https://www.locdd.com/t/55143/1 | gpt上新版本？取消周限？CPA额度查询失败，codex还能继续用 | CPA额度查询失败，但是codex还能继续用
+- 2026-06-26T04:30 BrightestStar https://www.locdd.com/t/64302/1 | 英区48team Codex实际额度使用情况（2账号 / 周限已耗尽） | 英区 48team Codex 实际额度使用情况（双账号 + workspace） 如图所示，这是 team48 两个 Codex 账号 + 工作空间 的实际使用情况，目前均已触发 Weekly Limit。 数据来源为站内大佬提供的统计脚本（感谢大佬分享）： // ==UserScript== // @name Codex Quota Compass Shadow Edition // @namespace http://tampermonkey.net/ // @version 2.4.0 // @descri
+- 2026-06-23T09:54 CloudWalker https://www.locdd.com/t/63287/1 | 有没有研究Codex Free周限的大佬, 我目前发现周限的Free额度普遍高, 而且高很多, 如下图 | 而且出现的概率很随机, 各种域名都出现过, 目前还没有能活出周限的号(昨天刚开始准备) image 目前测了2个号, 一个9.5M 一个10.1M, 如果Free都是这个额度的话, 也不是不行(万恶的o/)
+- 2026-10-13T03:59 InkBlue https://www.locdd.com/t/99630/12 | 「快讯」8美刀！马斯克发布了推特/Cursor/Grok全家桶订阅 | 100 刀的额度实测比 gpt5x 要多。其实 cursor 家一般都是 auto 模型，你根本不需要关心用的是什么模型。然后我对此的评价就是完成我的一个任务需要用多少额度。 实测一个任务提 issue+云端 cursor Agent 跑 PR，只消耗了不到 1% 的周额度。比 Codex 好太多太多了。
+- 2026-09-22T02:29 PoemFarAway https://www.locdd.com/t/93691/3 | 如果要用kimi k3过度推荐用哪一档？ | 我只是想在codex周额度用完的情况下，找个过渡，而且肯定是执行一些稍微轻一点的任务
+- 2026-08-27T13:57 ForestElf https://www.locdd.com/t/85146/8 | hermes能接入Antigravity Tools反代的api吗 | 我最近用着没事 接到codex把周额度蹬完了也没封
+- 2026-06-15T06:26 WindTraveler https://www.locdd.com/t/60771/1 | 大家觉得 Claude max 5x和 GPT PRO 5x哪个更好 | 再问一句：在cc和codex哪个周额度会更高一点
+- 2026-05-30T18:58 DolphinLover https://www.locdd.com/t/55622/1 | 突发奇想 codex能不能调用网页的pro模型来写代码？反代或者api什么的 | 最近codex周额度用完了，干等着，能不能调用网页的pro？
+- 2026-05-18T09:23 DreamRiver https://www.locdd.com/t/51586/1 | 各位大佬,有没有在网页端里使用gpt5.5pro改项目的需求? gpt给出的方案是否靠谱? | 前段时间浏览帖子,发现有大佬说可以在网页端 gpt 上装个 gitHub 插件连接到自己的库里,让 pro 模型可以读代码 改代码,刚才试了试,发现他只能读代码,没有 push commit 权限,可能是官方把口子收紧了. (网页版 5.5pro 不消耗 codex 的周额度,好像智商也挺高) 然后我又问能不能在网页上直接通过ftp去操作我服务器上的代码,他给了我建议: PixPin2026-05-1817-13-271 后来我又想假如上面的方案可行的话,既然能操作ftp,那操作github库应该也没有问题,又继续
+- 2026-04-15T08:56 WindGoesOn https://www.locdd.com/t/39907/1 | GPT plus权益又又又缩水了？ | 今天在paypal开了个plus试用，不仅codex只有周额度，连thinking也只有mini了，然后tg机器人又过了一个还是这样，plus也缩水了？？ image image
+- 2026-03-06T17:24 DolphinLover https://www.locdd.com/t/23586/7 | chatgpt codex有人测试么？ | codex可以的，虽然没有claude强，但也很不错，特别是GPT 5.4 另外一点就是Chatgpt plus账号的codex 周期额度很足，比claude多了很多
+- 2026-02-22T15:52 BlackCoffee https://www.locdd.com/t/20307/1 | 是不是上下文窗口小的模型注意力好？spark初体验。 | 今天codex5.3的周额度干完了，一看spark是独立额度，拿来折腾了下，本来不抱希望，默默整了一晚上，竟然给干成了，虽然xhigh速度也不快，说不了几句就要自压缩。有点颠覆我的认知了，看它每次压缩完，要干嘛，一步步的都还规划的很清楚。
+- 2026-06-15T04:43 PoemFarAway https://www.locdd.com/t/60737/1 | Codex 额度实时查看工具 Quota，支持 Touch Bar 和菜单栏 | ** 本帖使用社区开源推广，符合推广要求。我申明并遵循社区要求的以下内容：** ** 我的帖子已经打上 开源推广 标签：** 是 ** 我的开源项目完整开源，无未开源部分：** 是 ** 我的开源项目已链接认可 LINUX DO 社区：** 是 ** 我帖子内的项目介绍，AI 生成、润色内容部分已截图发出：** 是 ** 以上选择我承诺是永久有效的，接受社区和大佬监督：** 是 以下为项目介绍正文内容，AI 生成、润色内容已使用截图方式发出 * 最近在使用终端编码的时候，经常遇到一个情况：正写得起劲，忽然提示被限额
+- 2026-09-22T17:16 KiteRunner https://www.locdd.com/t/94042/15 | 大佬现在 GPT puls 的周额度大概有多少啊？ | 我看codex雷达站里，astra其实更有性价比，同样的任务比sol速度更快开销更少。 image
+- 2026-09-07T15:17 SakuraFall https://www.locdd.com/t/88696/10 | 20xpro 用了7.68M 占比16%？ 周额度20$ | codex meter
+- 2026-08-18T13:23 SakuraFall https://www.locdd.com/t/82048/1 | 请教下，基于sub2api的codex额度有恢复的么？ | 大佬们，最近开了几个gpt的20x的号，周额度都缩到200-400刀了，看有同学说回退到0.1.173可恢复，有的说换ip可恢复，我尝试了一圈都没好，想请教下大家是怎么解决的
+- 2026-07-10T09:45 MoonPostman https://www.locdd.com/t/68890/6 | 有大佬有计算过吗，现在gpt plus codex的周限是多少刀？ | 这个额度，oai官方会调整，下图是今天上线5.6以后的两个plus账号使用百分比； 你按照百分比自己这算下就大概知道了。 我一般认为，之前是5h 20刀，周限110刀左右；现在看来，可能多了点。 image
+- 2026-05-12T04:15 DolphinLover https://www.locdd.com/t/49629/1 | gptplus 的 codex 周限 | 有没有大佬算过，plus的周限相当于多少api额度呢？ 下个月5x不翻倍了，20x又用不完，想着对照之前中转站的额度开几个plus用
+- 2026-03-07T11:03 NorthOfNorth https://www.locdd.com/t/24380/18 | Antigravity的额度以及周计算 | 我看了下Codex好像也是按照订阅点
+- 2026-10-06T07:26 TimeThief https://www.locdd.com/t/97711/1 | 关于 "智谱·杭州全城 Coding 计划"的一些疑问 | image 如上图,我对智谱的各个版本的订阅中的额度没有概念,Lite Pro Max 版本的订阅,额度都是多少?有没有懂的大佬帮我换算成codex的plus周额度,这样我也好决定买哪个版本的订阅,打算用国产替代做逆向,用Claude还有codex太容易封号了
+- 2026-10-09T02:41 DolphinLover https://www.locdd.com/t/98410/1 | macOS 原生菜单栏应用，看 Codex、Claude、Cursor、Antigravity、Pi、Opencode、 | 本帖使用社区开源推广，符合推广要求。我申明并遵循社区要求的以下内容： 我的帖子已经打上 开源推广 标签： 是 我的开源项目完整开源，无未开源部分： 是 我的开源项目已链接认可 LINUX DO 社区： 是 我帖子内的项目介绍，AI生成、润色内容部分已截图发出： 是 以上选择我承诺是永久有效的，接受社区和大佬监督： 是 以下为项目介绍正文内容，AI生成、润色内容已使用截图方式发出 各位大佬好，今天分享我自己开发使用半年了的 macOS 原生菜单栏应用，主要功能就是在菜单栏快速查看Codex、Claude、Cursor
+- 2026-09-17T03:52 KiteRunner https://www.locdd.com/t/91989/1 | 一个让你的ChatGPT额度当作Codex用的工具 | 本帖使用社区开源推广，符合推广要求。我申明并遵循社区要求的以下内容： 我的帖子已经打上 开源推广 标签： 是 我的开源项目完整开源，无未开源部分： 是 我的开源项目已链接认可 LINUX DO 社区： 是 我帖子内的项目介绍，AI生成、润色内容部分已截图发出： 是 以上选择我承诺是永久有效的，接受社区和大佬监督： 是 以下为项目介绍正文内容，AI生成、润色内容已使用截图方式发出 Chappie Studio 是一个跨平台桌面控制台，用 Rust（Tauri 2）+ React 19 + TypeScript 写的，
+- 2026-05-28T07:36 RainPoet https://www.locdd.com/t/54864/1 | plus给的codex额度怎么个换算？ | 有大佬算过codex的5.5周额度大约是多少token？或者说用刀换算是多少？ 如果没有5小时限制，估计一天就把周额度用完了，我现在用的中转站好像是1刀1m的样子。
+- 2026-09-19T04:42 InkBlue https://www.locdd.com/t/92702/13 | GPT PLUS周额度30刀？ | 是用的codex吗？看看是不是勾选了fast模式，这个是2.5倍用量
+- 2026-09-12T09:45 SouthWindKnows https://www.locdd.com/t/90599/1 | 一个直观的查看自己多账号凭据额度，自动进行凭据轮换，自动检测Tibo的重置并开始周限额刷新计时的CPA插件 | 本帖使用社区开源推广，符合推广要求。我申明并遵循社区要求的以下内容： 我的帖子已经打上 开源推广 标签： 是 我的开源项目完整开源，无未开源部分： 是 我的开源项目已链接认可 LINUX DO 社区： 是 我帖子内的项目介绍，AI生成、润色内容部分已截图发出： 是 以上选择我承诺是永久有效的，接受社区和大佬监督： 是 以下为项目介绍正文内容，AI生成、润色内容已使用截图方式发出 各位大佬好，看到很多大佬都有想在CPA里直观的看到自己账号的额度的需求，以及部分大佬想要充分利用每个账号5小时限额的需求，我在此为大家介绍
+- 2026-06-10T07:00 WindGoesOn https://www.locdd.com/t/59008/1 | 关于team号5小时限额刷新不到，但周限一直在掉问题 | 我一般是用完plus号后会关闭plus号，打开team号（48个月的），之前没啥问题，今天从plus号切换为team后没第一时间看额度，等一个小时后刷新额度发现5小时额度为0，周额度掉了，而且codex继续跑也没啥问题，周限额正常掉，是cpa的问题还是号的问题？ image
+- 2026-10-21T05:15 KafkaBySea https://www.locdd.com/t/102374/16 | 租gpt网页端,不使用codex额度 | 我也想租个pro200的 网页，主要是用网页里连github仓库后，仓库里@codex review用来review代码，这个是个单独cloud额度，不占用codex本地周限额度 然后顺便用用网页的gpt-6-astra-pro。 dots可用可不用。 反正本地codex额度肯定不用。
+### claude max 周: posts=50
+- 2026-04-06T08:09 RainPoet https://www.locdd.com/t/36206/1 | claude max周限额用完之后使用extra usage的计费问题? | CleanShot 2026-04-06 at 18.05.04@2x 上周二开了个max 20x,然后前两天领了claude送的400​ :kitchen_knife: extra usage的余额. 然后现在 订阅已经跑到周限额 了,我打开了 extra usage 的开关,想知道后续继续在claude code中使用时, 是不是还是缓存读不收费 ,还是就是 按api计算 正常缓存读写+读写都要收费了? 有没有了解的大佬,求解
+- 2026-02-27T06:40 MoonDrinker https://www.locdd.com/t/21390/1 | claude max 周配额重置了？ | 我两个max号，本来这周已经用了一些了，刚刚一看周配额重置了，现在额度又满了（周限额显示一点没用），是bug吗
+- 2026-02-19T04:35 TimeThief https://www.locdd.com/t/19673/1 | claude的x20 的max版本是周用量的限额x20，还是只是5小时限额x20，实际周限额还是x10 | claude的x20 的max版本是周用量的限额x20，还是只是5小时限额x20，实际周限额还是x10
+- 2026-01-18T11:29 InkBlue https://www.locdd.com/t/11099/1 | claude Max*5 账户现在5小时与周限制大约多少刀 | 【求问】claude Max*5 账户现在5小时与周限制大约多少刀 最近中转都不太稳定，稳定的价格很高 所以想试试官方的账号 先充了个pro，结果5小时只有6刀 相换max5自用 所以想问一下各位用过的大佬一个账号现在的用量大约是多少？ 是不是sonnet与opus分开计费 大约都多少
+- 2026-09-02T06:51 KiteRunner https://www.locdd.com/t/86793/1 | Claude Max 20x 意味着是 Pro 的 20 倍使用量。但原来 20 倍仅适用于 5 小时窗口。周限制根本没 | 看到 1 个分析，讨论真假，我自己一直是 max20，感觉用量不算高。 “Claude Max 20x 意味着是 Pro 的 20 倍使用量。但原来 20 倍仅适用于 5 小时窗口。周限制根本没有任何倍数加成。”
+- 2026-08-16T08:42 PaperPlane https://www.locdd.com/t/81259/1 | 大佬，你们的claude max20还有周限吗，我的只有5h限制 | 如题，现在usage里面只有5h限制和fable5的周限，大家的max20也是这样吗？
+- 2026-02-02T13:30 StarOcean https://www.locdd.com/t/15570/1 | claude max 20x的周限和5小时限制分别是多少？ | 买了max 20x 想跟人拼车，准备看看这个额度怎么分比较合适。 谁有比较准确的额度数字？
+- 2026-04-08T12:08 SunnyDoll https://www.locdd.com/t/37193/1 | 我草，我人麻了，原来claude升级max不重新计算付费周期吗 | 从 https://linux.do/t/topic/1923850/2 记录一下claude max套餐开通 继续讨论： 下午正在猛猛蹬claude，突然发现好像不对劲。 图片 我今天充的125刀怎么明天就过期了 本来是想着这个月pro既然已经用完了，就直接升级max继续用来着 查了一下，好像pro升级max居然不重新计算周期，想问问大佬这种应该怎么解决，找客服能给退款嘛
+- 2026-08-05T03:41 StarOcean https://www.locdd.com/t/77346/1 | 昨天新注册了个 Claude 账号并订阅 Max 套餐，发现没有周限了，有人知道怎么回事吗？ | 这是手机 claude App 看到的，只有5小时限制，周限只有fable的额度。 IMG_1757.PNG 在 CPA 上查询额度，也没有周限： Snipaste_2026-08-05_11-34-06 难道 Claude Max 套餐取消了周限？
+- 2026-08-29T17:54 DolphinLover https://www.locdd.com/t/85774/1 | Claude订阅周限永久上调25%（Pro和Max都涨） | image 9月14号50%临时上浮结束后，周限永久上调为25%。 算下来相当于只比活动期间减少16.67%。
+- 2026-09-09T13:51 StarOcean https://www.locdd.com/t/89560/6 | gpt是真的不耐用 | pro20 只用 astra 周限额感觉用起来和claude max20 的 fable周限额 差不多，但是 claude 还有 opus 虽然opus 很难用
+- 2026-01-19T01:19 HappyCoderKid https://www.locdd.com/t/11215/1 | claude 封号需要更换IP和卡吗 | 如题，一周多以前开通了claude max，这周末陨落了，有没有大佬知道要不要换IP和卡。顺便推荐下稳定的卡台
+- 2026-10-09T13:58 PoemFarAway https://www.locdd.com/t/98594/7 | GPT降智限速 CLAUDE封号 我们该何去何从 | pro的周额度其实比max多，自从上次claude削了周额度后，只要建立pro号池只用opus5.5，pro更好用
+- 2026-10-15T02:39 DolphinLover https://www.locdd.com/t/100388/1 | Claude的Max 20x真的坑啊 | 上一周从Max 5x升级到20x，用起来感觉不对劲 这周额度的消耗速度怎么都差不多。 然后让CC Switch记录了一下，Max 5x的周额度是$1100左右，Max 20x的周额度大概$1500 两倍的价格，周额比连1:1.5都没有 那我干嘛不买两个Max 5x轮流接力真的是
+- 2026-01-22T14:15 WindGoesOn https://www.locdd.com/t/12443/5 | 有开过Claude max 5x的吗？ | 五小时周期用量，用Pro的sonnet模型，说不定真能造
+- 2026-10-10T08:22 BlackCoffee https://www.locdd.com/t/98805/23 | codex 200 vs claude max 20x，哪个划算一些？ | 为什么我的5max,周限就有1400美金，难道不同的账号额度也不同吗
+- 2026-10-03T09:48 PoemFarAway https://www.locdd.com/t/97182/1 | 现在Claude max 5x的额度是Pro的多少倍呀 | 各位大佬们，有没有人实测过Claude max 5x的周额度是pro的多少倍呀，很久之前看的是8.33
+- 2026-09-23T04:00 WindGoesOn https://www.locdd.com/t/94250/15 | Claude全系列将提高5h可用额度 | claude max20是不是周限是max5的2倍，5h限制是max5的4倍。
+- 2026-05-12T12:39 CloudWalker https://www.locdd.com/t/49783/1 | gpt pro 5x还是claude max 5x | 开了gpt 5x自用，14号周限刷新，现在还有15的周额度，有没有了解的大佬 claude max 5x额度会比gpt5x多么
+- 2026-08-16T12:47 SakuraFall https://www.locdd.com/t/81302/4 | 最近开了一个max5x，蹬了750刀怎么周限才掉45% | 稳定才是重要性吧 claude只要不封号 妥妥的性价比天花板
+- 2026-09-14T04:18 PoemFarAway https://www.locdd.com/t/91031/1 | claude max20一周8000刀额度？？？！ | image 如图，今天用了23亿token，1100刀，居然才用了周限额的13%。这什么情况？
+- 2026-04-18T09:54 CloudWalker https://www.locdd.com/t/41199/13 | gpt pro 20x怎么还有周限啊 | image 当然有5小时限制跟周限了，到了周限，就什么模型也不能用了，只是上限比较高，而且目前到5月31号之前还有双倍额度。如果你能把这个都弄限额的话，那换成其他的Claude Code Max 200刀的，你至少要买3-4个号都不够你用，你是自己在用还是反代给别人了？如果自己一个人能把这个用光的话，那你，我非常想了解一下你是做什么工作的？专业软件外包一个人维护好几个项目吗？
+- 2026-09-08T06:30 StarOcean https://www.locdd.com/t/88931/1 | claude max 5x 的性價比突然比 gpt pro 20x 更高了？ | astra 半小時就干完手上的plus 和team, 正在想要不要直接上個20x; 然後突然想到： 根據大佬的測試，現在20x如果只用astra的話，周限只有1400刀左右，還要提防標記帳號降智； 而claude max 5x, 按現在還有50%加成的情況下，按大佬的測試，周限有2200刀, 就算之後減回只加25%，也是有1800刀, 而且5x 只要100-125刀，比200刀的20x 便宜 如果只是寫代碼的話，fable 5.1應該能跟astra 打得有來有回吧， 如果自己有claude老號不分發不容易封，感覺m
+- 2026-07-31T05:50 DreamRiver https://www.locdd.com/t/75815/2 | 周末快到了，上个周是claude pro 20x，这周会是什么呢 | 说不定是K3 max ultra+
+- 2026-09-25T08:01 PoemFarAway https://www.locdd.com/t/94979/18 | GitHub已经合并代码，500刀订阅 | Claude Code MAX 20x 的周 Token 额度是 ChatGPT 20x 额度的 3 倍。 O畜是怎么敢的?
+- 2026-05-28T19:07 PaperPlane https://www.locdd.com/t/55029/8 | 推出4.8的时候，Claude同时清零了周限 | 官方的，但我这个月开的是pro不是max，估计这个原因吧
+- 2026-04-16T06:18 KafkaBySea https://www.locdd.com/t/40233/2 | 求问Claude目前周限额大致是多少刀 | 好像确实不到100刀。我目前和别人拼车max20，算下来人均大概30刀左右一天。
+- 2026-10-25T12:28 HalfSummer https://www.locdd.com/t/103696/2 | Claude max 5x 额度求解 | Fable和其他的共用5h和周限，但是Fable有一个额外的周限
+- 2026-10-23T03:05 NightRain https://www.locdd.com/t/103027/5 | 不存在能保证开Claude Max5x不kyc的方法 | 我今早刚订阅pro。周六办护照，看看下个月情况，可能会考虑退了gpt
+- 2026-08-10T05:55 MoonPostman https://www.locdd.com/t/78935/9 | Claude max20x 为什么有人900就出 | 拿着sk，等你跑完周限给你封了，他收退款
+- 2026-07-28T06:30 RainPoet https://www.locdd.com/t/74750/21 | 老号之前一直续费Claude中间断开今天开MAX直接封 | 周末在家里薅羊毛，今天在公司弄的，我甚至项目文件夹名字和github 仓库都换了，就防止被关联
+- 2026-05-27T13:05 KiteRunner https://www.locdd.com/t/54582/13 | 记录claude Max5X开通第一天 | 已经蹬了28刀了，5小时使用量35%，周3%
+- 2026-05-13T23:47 FireflyWood https://www.locdd.com/t/50231/1 | claude订阅周限提高50% | Claude Code 每周限额将增加 50%，自即日起至 7 月 13 日。 现已对所有 Pro、Max、Team 以及基于席位的 Enterprise 用户开放。 Screenshot2026-05-14-07-44-13-599com.twitter.android
+- 2026-10-21T06:28 KiteRunner https://www.locdd.com/t/102409/3 | 退款到账27个小时了，我的Claude Max5x依旧能用 | 果子退款不通知客户的,对账周期不一样 反过来说,下次封你号再退款果子说不定就不搭理你了
+- 2026-09-20T09:51 GalaxyRailway https://www.locdd.com/t/93111/4 | 关于claude max订阅的一些疑问 | 这是Pro套餐全程Opus5+High用到了周限31%之后的CCSwitch统计 Screenshot 2026-09-20 at 17-31-26 — Screenshot 2026-09-20 at 17-31-40 —
+- 2026-02-14T14:40 MoonDrinker https://www.locdd.com/t/18959/17 | 美区 App Store 订阅 Claude Pro (5x Max) 后秒封号，苹果拒绝退款怎么办？ | 现在进入周末了， 等下周一，我到Apple支持中找美区的技术顾问问一下。现在已经写了邮件到Claude官方了，希望能退。
+- 2026-10-04T09:05 FireflyWood https://www.locdd.com/t/97379/1 | Claude Max 20X 到期了，感觉Max 5X够用了 | 之前一直有一个Claude Max20X 在用，感觉很难用满。额度倒是没有好好统计，反正一直挺空闲的。 本来以为可能Claude Pro可能也够用的，额度确实给得比GPT Plus多很多，开了两个Claude Pro，本来以为轮着换可能够，结果还是高强度使用，确实还是有点不够，我还特地只开一个窗口，充分利用它的缓存的。 结果一个到周限了，一个已经5h限制，下午憋得慌，又给自己开了一个5x了，总共140刀，感觉应该就差不多够用了。 现在Max 5X开号会弹KYC了，Pro号倒是没有。随便找个朋友帮忙过了一下KYC就可
+- 2026-08-01T02:39 KiteRunner https://www.locdd.com/t/76192/1 | 怎么感觉 claude max 20x 没有比 5x 的额度多呢？ | 如题，发现我的 5x 周限额的 10% 是差不多 400 刀，昨天 额度用完怒升了 20x，结果好像还是 400 刀 ，这是什么情况
+- 2026-06-29T02:31 BlackCoffee https://www.locdd.com/t/65032/22 | Claude Max*20反代快小半个月了，依然没封号 | 周上限贴着百分之90在用的，这几天在出差没怎么用
+- 2026-06-27T13:24 DolphinLover https://www.locdd.com/t/64736/6 | 第一次用完claude max20x五小时额度， | 大佬，你蹬满5h，耗多少周额度，我的一般是11左右
+- 2026-06-07T18:01 KafkaBySea https://www.locdd.com/t/58026/16 | 越来越想开Claude max了，但怕封号 | 20x都不够用，两小时能蹬周限10%
+- 2026-06-06T23:41 DolphinLover https://www.locdd.com/t/57830/2 | 我的claude MAX难道是假的吗，跑了62M Token 就 28%了... | image 周一重置的，还有2天要蹬完，跑个npx ccusage@latest 和我对比下token吧
+- 2026-04-04T10:38 PaperPlane https://www.locdd.com/t/35637/23 | 咸鱼上399买的claude MAX 5x ，美国家宽，看看能活几天 | 包黑，尼区最低价都要499，看你能不能刷到周限了
+- 2026-04-02T09:15 KiteRunner https://www.locdd.com/t/34765/4 | Claude 被封 Google APP store 125刀MAX | 被封的时候周限额用了20% 5小时限额用完了
+- 2026-03-15T00:11 KafkaBySea https://www.locdd.com/t/27192/1 | 狂欢吧！Anthropic 旗下ClaudeAI服务为所有用户提供2x 使用额度！尤其周末！ | 原理： 工作日太平洋时间上午5点至11点/格林威治时间中午12点至6点外 触发2倍额度 周末全天2倍使用率 自动，无需启用工作 这个额外使用适用于你在所有使用 Claude平台，包括 Claude Code 适用于：免费、Pro、Max 和 Team 套餐。 https://support.claude.com/en/articles/14063676-claude-march-2026-usage-promotion Claude March 2026 usage promotion | Claude Help 
+- 2026-10-11T04:32 KiteRunner https://www.locdd.com/t/99051/3 | Claude 感觉没那么耐用了 | 前两天max20x周限稳定3000+ 现在大概2500-2600
+- 2026-08-23T03:38 WindTraveler https://www.locdd.com/t/83515/1 | Claude Pro与Max5x额度等值API实测 & 订阅Opus5比DSv4Pro便宜 | 最近也是花 125 刀在 Google Play 开了一个 Claude Max 5X，一开始感觉5X的周额度远没有Pro的5倍，甚至只有3倍，于是让 GPT 做了一下网络调研，然后结合自己这一周的实际额度消耗，分享一些发现（结论在最后， 跳转结论） image image image image 【网络】max5x与20x 首先，在此之前，我一直以为Max 20X指的是周限额，结果指的大概只是 5 小时限额，而周限额只有 Max 5X 的两倍甚至都不到 那之前还觉得没充20X是不是亏了，现在看来5x还不错了，反正
+- 2026-10-05T16:52 MoonDrinker https://www.locdd.com/t/97620/4 | claude team6.25x周额度使用统计，这用量相当恐怖了 | 其实有点好奇 team 6.25x 和 max 5x 的额度对比
+- 2026-09-03T05:22 SouthWindKnows https://www.locdd.com/t/87062/6 | 喜报，A/决定延长Claude Code周限额提升至9月13日 | 我记得以前max有单独的sonnet额度的，现在都没有了，5x用fable没用多久额度就没了，想拿sonnet来聊天都不行。如果什么时候出一个单独的opus额度，我就不骂他A/了
+- 2026-09-01T11:02 CloudWalker https://www.locdd.com/t/86510/1 | Claude max 20x | image 想问下大家从 5x 升级到 20x 感觉量多了吗，我怎么感觉还不如 5x 的额度多呢，fabel 重置后继续对话，一句话就消费呢 3% 的周额度，这对吗
