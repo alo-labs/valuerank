@@ -23,8 +23,10 @@ import sys
 from datetime import date, timedelta
 from pathlib import Path
 
+from valuerank import exact_match
 from valuerank import plan_routes as pr
 from valuerank import quality as q
+from valuerank import value_v3
 from valuerank.paths import DATA, ROOT
 
 SPEC_DIR = ROOT / "research" / "2026-10-19-methodology-codesign"
@@ -162,7 +164,19 @@ def named_figures(scores: dict, data: Path = DATA) -> dict:
         ceilings = [route for route in routes if route["id"].endswith("-quota-ceiling") and route.get("modelIds") == [model_id]]
         figures[f"mimoCeilings.{model_id}"] = " / ".join(f"{route['valueMultiple']:g}" for route in ceilings)
         figures[f"mimoCeilings.tiers"] = " / ".join(route["plan"].replace("MiMo Token Plan ", "") for route in ceilings)
+    # I58 L2: the documented effort equivalents for AA's effort-less configurations, read from the two registries.
+    equivalents = {**{key: sorted(value[0]) for key, value in exact_match.EFFORT_EQUIVALENTS.items()},
+                   **{key: sorted({*exact_match.EFFORT_EQUIVALENTS.get(key, ((),))[0], effort}) for key, effort in value_v3.OWNER_STATED_EFFORT.items()}}
+    cohort_ids = {model["id"] for model in scores["models"] if model.get("aaFrontierTier")}
+    names_by_id = display_names(scores)
+    figures["effortEquivalents"] = series([f"{names_by_id[key]} at {' or '.join(value)}" for key, value in sorted(equivalents.items())
+                                           if key in cohort_ids]) or "none"
     figures["release.cutoff"] = scores["observedAt"]
+    # I58 M2: the sources captured after the cutoff, read from the published clocks (O60).
+    cutoff = scores["observedAt"]
+    late = sorted({clock["source"].split(":")[0].split(" (")[0] if ":" in clock["source"] else clock["source"]
+                   for clock in scores["v3"].get("sourceClocks", []) if "T" in clock["capturedAt"] and clock["capturedAt"] > cutoff})
+    figures["sourceClocks.afterCutoff"] = series(late) or "none"
     figures.update(registry_figures(capture, json.loads((data / "plan_cost_routes.json").read_text()), release_day(scores)))
     names = display_names(scores)
     family = {model["id"]: model.get("family") or model["name"] for model in scores["models"]}
@@ -282,17 +296,24 @@ def family_figures(scores: dict, excluded: set, order) -> dict:
 
     near_families = [model for model in cohort if family(model) not in frontier_families]
     frontier_near = [model for model in cohort if family(model) in frontier_families and model["aaFrontierTier"] == "near"]
+    # I58 M1: the excluded configurations fall into exactly one of five classes, checked as a partition.
+    classes = {
+        "frontierPrimaries": [m["id"] for m in cohort if m["id"] in excluded and m.get("familyPrimary") and family(m) in frontier_families],
+        "nearPrimaries": [m["id"] for m in cohort if m["id"] in excluded and m.get("familyPrimary") and family(m) not in frontier_families],
+        "nearPoints": [m["id"] for m in frontier_near if m["id"] in excluded and not m.get("familyPrimary")],
+        "frontierPoints": [m["id"] for m in cohort if m["id"] in excluded and not m.get("familyPrimary") and m["aaFrontierTier"] == "frontier"],
+        "nearFamilyPoints": [m["id"] for m in near_families if m["id"] in excluded and not m.get("familyPrimary")],
+    }
+    placed = [item for ids in classes.values() for item in ids]
+    if sorted(placed) != sorted(excluded) or len(set(placed)) != len(placed):
+        raise FigureError(f"the excluded configurations do not partition into the five classes: {sorted(set(excluded) ^ set(placed))}")
     return {
         "near.primaries": by_gap([model for model in near_families if model.get("familyPrimary")]),
         "near.others": by_gap([model for model in near_families if not model.get("familyPrimary")]),
         "frontierFamilies.nearPoints": order(model["id"] for model in frontier_near),
         "frontierFamilies.dearerNearPoints": order(model["id"] for model in frontier_near
                                                    if model["aaEvalCost"] > primary[family(model)]["aaEvalCost"]),
-        "excluded.frontierPrimaries": order(model["id"] for model in cohort if model["id"] in excluded and model.get("familyPrimary") and family(model) in frontier_families),
-        "excluded.nearPrimaries": order(model["id"] for model in cohort if model["id"] in excluded and model.get("familyPrimary") and family(model) not in frontier_families),
-        "excluded.nearPoints": order(model["id"] for model in frontier_near if model["id"] in excluded),
-        "excluded.frontierPoints": order(model["id"] for model in cohort if model["id"] in excluded and not model.get("familyPrimary")
-                                         and model["aaFrontierTier"] == "frontier"),
+        **{f"excluded.{name}": order(ids) for name, ids in classes.items()},
     }
 
 

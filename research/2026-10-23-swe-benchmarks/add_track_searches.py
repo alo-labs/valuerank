@@ -33,6 +33,19 @@ LEAVES = {
 }
 
 
+def own_search(model_id: str) -> dict | None:
+    """I58 L6: a configuration searched on its own logs its own queries and rejected candidates (E240)."""
+
+    path = HERE.parent / "2026-10-25-board-reread" / "kimi-search.json"
+    if model_id != "kimi-k3-1-pro" or not path.exists():
+        return None
+    search = json.loads(path.read_text())
+    return {"searchedOn": SEARCHED, "record": "research/2026-10-25-board-reread/kimi-search.md",
+            "queries": [item["query"] for item in search.get("openWeb", [])],
+            "candidates": [{"url": candidate.get("url"), "resolution": "reject", "reason": candidate.get("reason") or candidate.get("verdict")}
+                           for item in search.get("openWeb", []) for candidate in item.get("candidates", [])]}
+
+
 def main() -> None:
     read = HERE.parent / "2026-10-25-board-reread"
     vals = {item["slug"]: item for item in json.loads((read / "vals-catalogue-2026-10-25.json").read_text())["benchmarks"]}
@@ -59,8 +72,8 @@ def main() -> None:
                 "modelId": model_id, "leaf": leaf, "searchedOn": SEARCHED, "result": "not found", "searchKind": MARK,
                 "sources": [board],
                 "notes": cell.get("note") or f"No {leaf} record for this configuration at its exact effort.",
-                "openWeb": {"searchedOn": SEARCHED, "record": "research/2026-10-23-swe-benchmarks/reports/SWE benchmark candidates.md",
-                            "queries": RESEARCH, "candidates": candidates},
+                "openWeb": own_search(model_id) or {"searchedOn": SEARCHED, "record": "research/2026-10-23-swe-benchmarks/reports/SWE benchmark candidates.md",
+                                                     "queries": RESEARCH, "candidates": candidates},
             })
     evidence["searches"] = searches
     path.write_text(json.dumps(evidence, indent=2, ensure_ascii=False) + "\n")

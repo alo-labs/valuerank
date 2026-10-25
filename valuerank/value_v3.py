@@ -560,11 +560,15 @@ def source_clocks(documents: dict) -> list[dict]:
     clocks = [{"source": f"{source['publisher']}: {source['benchmark']}", "artifact": "data/swe_tracks.json",
                "capturedAt": source.get("capturedAt") or tracks.get("capturedAt"), "sourceUpdated": source.get("updated")}
               for source in (tracks.get("sources") or {}).values()]
-    for key, name, artifact, field in (("bugHuntScoreboard", "Bug Hunt Bench scoreboard", "data/bug_hunt_scoreboard.json", "capturedAt"),
-                                       ("tb4", "tbench.ai Terminal-Bench 4.0 leaderboard", "data/tb4.json", "observedAt")):
-        document = documents.get(key) or {}
-        if document:
-            clocks.append({"source": name, "artifact": artifact, "capturedAt": document.get(field), "sourceUpdated": document.get("sourceUpdated")})
+    scoreboard = documents.get("bugHuntScoreboard") or {}
+    if scoreboard:
+        clocks.append({"source": "Bug Hunt Bench scoreboard", "artifact": "data/bug_hunt_scoreboard.json", "capturedAt": scoreboard.get("capturedAt"),
+                       "sourceUpdated": scoreboard.get("sourceUpdated")})
+    tb4 = documents.get("tb4") or {}
+    if tb4:
+        # I58 M2: the leaderboard scrape's own instant, not the build stamp of the derived file.
+        clocks.append({"source": "tbench.ai Terminal-Bench 4.0 leaderboard", "artifact": "data/tb4.json",
+                       "capturedAt": (tb4.get("source") or {}).get("capturedAt") or tb4.get("observedAt"), "sourceUpdated": tb4.get("sourceUpdated")})
     cognition = (documents.get("leafEvidence") or {}).get("cognitionCapture")
     if cognition:
         clocks.append({"source": "Cognition: FrontierCode leaderboard", "artifact": cognition["file"], "capturedAt": cognition["capturedOn"],

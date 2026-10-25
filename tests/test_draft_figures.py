@@ -236,3 +236,15 @@ def test_subset_strata_and_excluded_missing_leaves_render_from_the_build():
         section["incompleteEvidence"] = []
     figures = f.named_figures(empty)
     assert figures["subsetStrata"] == "no ranking has a subset stratum" and figures["excluded.missingCore"] == "none"
+
+
+def test_excluded_configurations_partition_into_five_classes():
+    """I58 M1: every excluded configuration falls in exactly one class, or the figures stop."""
+
+    names = f.display_names(SCORES)
+    order = lambda ids: f.series([names[item] for item in sorted(ids)])
+    excluded = {item["id"] for item in SCORES["v3"]["incompleteEvidence"]} & {item["id"] for item in SCORES["v3Tracks"]["aicd"]["incompleteEvidence"]}
+    figures = f.family_figures(SCORES, excluded, order)
+    assert figures["excluded.nearFamilyPoints"] == "GPT-6 Astra (xhigh)"
+    with pytest.raises(f.FigureError, match="do not partition"):
+        f.family_figures(SCORES, excluded | {"not-in-the-cohort"}, order)

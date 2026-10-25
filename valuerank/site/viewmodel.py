@@ -93,7 +93,7 @@ LEAF_INFO = {
     # O53-O55: the leaves the two rankings add.
     "vibeCode": {"unit": "% of test workflows passed", "url": "https://www.vals.ai/benchmarks/vibe-code"},
     "codeMigration": {"unit": "% of hidden tests passed", "url": "https://www.vals.ai/benchmarks/code-migration-v1-1"},
-    "livebench2Overall": {"unit": "mean of seven category scores (0-100)", "url": "https://livebench.ai/"},
+    "livebench2Overall": {"unit": "LiveBench's weighted Overall of seven category scores (0-100)", "url": "https://livebench.ai/new"},
     "aiCodingDaily": {"unit": "points of 60", "url": "https://aicodingdaily.com/leaderboard"},
 }
 # Public source names (the engine's provenance strings are internal and stay in scores.json).
@@ -111,7 +111,7 @@ LEAF_NOTES = {
     "terminalBench": "AA's own run on one harness (mini-SWE-agent) since O37; tbench.ai rows fill a gap and are compared with it as a diagnostic.",
     "vibeCode": "Vals AI's run on one harness (OpenHands) at each vendor's top effort; Vals' published standard error is the sampling noise.",
     "codeMigration": "Vals AI's run on one harness (Pi) at each vendor's top effort; Vals' published standard error is the sampling noise.",
-    "livebench2Overall": "LiveBench 2.0's own run at each model's top effort (release 2026-10-14); Overall is the mean of its seven categories, as LiveBench computes it.",
+    "livebench2Overall": "LiveBench 2.0's own run at each model's top effort (release 2026-10-23, served at livebench.ai/new); Overall is LiveBench's weighted mean of its seven categories (Long Agentic 2, Coding 1.5, Design 1.5, the others 1), as LiveBench computes it.",
     "aiCodingDaily": "Laravel quality, React-TS quality and edge-case testing (max 60); the bug-finding column is left out because it overlaps Bug Hunt. The harness is chosen per model by AI Coding Daily.",
 }
 # v3 Plan evidence grades shown with the site's grade vocabulary (controlled measurements are measured).

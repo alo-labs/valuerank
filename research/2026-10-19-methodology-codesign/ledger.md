@@ -1538,3 +1538,21 @@ Vals (updated 2026-10-24), AI Coding Daily (2026-10-24) and Bug Hunt Bench (comm
 - L5 (adopted): the O63 flag is printed beside every bar claim whose cheapest row carries it.
 - Owner question (asked; O65).
 - Round status (O56): not clean (one Medium). Draft r116.
+
+## Owner decision O69 (2026-10-25): O60 is a board-level test
+Asked whether O60 should also test each row's own date (AI Coding Daily states its last update as October 24, while its Kimi K3.1 Pro (Max) row carries a date tag of 2026-10-25, which by the board's "9 hours ago" at 09:58Z is about 01:00Z, before the 09:56:47Z cutoff), the owner chose "Board date only; disclose": O60 stays a board-level test, and a row dated on the cutoff's day stands when the board's own update predates that day and the row's age places it before the cutoff instant; such a row is disclosed in the specification.
+
+## Internal review I58 (Claude Sonnet 5.5, effort xhigh, on r116) — adopted, modified or rejected
+- M1 (adopted, figures changed): the excluded-configuration sentence missed GPT-6 Astra (xhigh), a near family's non-primary point after O65 moved the Astra primary. `family_figures` now has a fifth class (near families' other near points) and fails unless the five classes partition the excluded set.
+- M2 (adopted, engine changed): tbench.ai's clock printed the derived file's build stamp; it now reads the leaderboard scrape's instant, so O59 can fire. The "captured after the cutoff" list is a figure from the published clocks (it now includes the Bug Hunt scoreboard).
+- M3 (adopted): tbench.ai and Cognition's FrontierCode board were re-read on 2026-10-25 and found unchanged (tbench.ai page text identical; Cognition's v1_1 data identical), so every board either ranking uses has been re-read; AGENTS.md and the draft now say "re-read, a changed board in full".
+- M4 (adopted): every published LiveBench description (methodology leaf row, site unit and note, the S1T stream text, a code comment) says LiveBench's weighted Overall of the 2026-10-23 release, and the site links livebench.ai/new.
+- L1 (adopted): the cutoff is attributed to O65; the stale bold-label dates are removed.
+- L2 (adopted): the owner-stated and documented effort equivalents are a figure generated from both registries, and E206 states that two unlabelled sides match.
+- L3 (adopted): the O63 flag sentence names the displayed-record results and companions it is printed beside.
+- L4 (adopted by O69): the disclosure is in the specification.
+- L5 (adopted): E90 records the GDPval-AA move between captures (54 of 61 pages, −0.83 to +4.10 Elo, Opus 5.5 unchanged).
+- L6 (adopted, generator changed): Kimi K3.1 Pro's search entry logs its own six queries and nine rejected candidates.
+- L7 (adopted): the draft names the pinned LiveBench URL and that the default page still shows 2026-10-14.
+- L8 (adopted): wording.
+- Round status (O56): not clean (four Mediums). Draft r117.

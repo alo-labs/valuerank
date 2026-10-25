@@ -84,7 +84,7 @@
       "id": "livebench2Overall",
       "name": "LiveBench 2.0 Overall",
       "owner": "Artificial Analysis",
-      "url": "https://livebench.ai/",
+      "url": "https://livebench.ai/new",
       "observedAt": "2026-10-25",
       "role": "quality leaf (Software engineering)",
       "weightPct": 11.25,
@@ -92,9 +92,9 @@
         "available": 9,
         "cohort": 9
       },
-      "unit": "mean of seven category scores (0-100)",
+      "unit": "LiveBench's weighted Overall of seven category scores (0-100)",
       "execution": "independent",
-      "notes": "LiveBench 2.0's own run at each model's top effort (release 2026-10-14); Overall is the mean of its seven categories, as LiveBench computes it."
+      "notes": "LiveBench 2.0's own run at each model's top effort (release 2026-10-23, served at livebench.ai/new); Overall is LiveBench's weighted mean of its seven categories (Long Agentic 2, Coding 1.5, Design 1.5, the others 1), as LiveBench computes it."
     },
     {
       "id": "gdpval",

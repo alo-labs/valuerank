@@ -317,7 +317,7 @@ Exhaustive searches for the leaves a cohort configuration still lacks (each with
 | GPT-6.1 Sol (xhigh) | Code Migration v1.1 (Vals) | 2026-10-25 | not found | 1 | 2026-10-25: 6 queries, 0 candidates (0 registered, 0 rejected) | Vals ran this model only at max (77.324), not xhigh; not transferred. |
 | MiMo-V2.6-Flash | Code Migration v1.1 (Vals) | 2026-10-25 | not found | 1 | 2026-10-25: 6 queries, 1 candidates (0 registered, 1 rejected) | AA plots this model in reasoning mode with no effort label; Vals effort recorded as null (not stated). Vals model page: evaluated 'with reasoning enabled'. |
 | MiniMax-M3.1-Flash | Code Migration v1.1 (Vals) | 2026-10-25 | not found | 1 | 2026-10-25: 6 queries, 0 candidates (0 registered, 0 rejected) | No codeMigration record for this configuration at its exact effort. |
-| Kimi K3.1 Pro | Code Migration v1.1 (Vals) | 2026-10-25 | not found | 1 | 2026-10-25: 6 queries, 0 candidates (0 registered, 0 rejected) | No Kimi K3.1 Pro row (the board has kimi/kimi-k3 only, a different model version; not transferred). |
+| Kimi K3.1 Pro | Code Migration v1.1 (Vals) | 2026-10-25 | not found | 1 | 2026-10-25: 6 queries, 9 candidates (0 registered, 9 rejected) | No Kimi K3.1 Pro row (the board has kimi/kimi-k3 only, a different model version; not transferred). |
 | Claude Haiku 5.5 | LiveBench 2.0 Overall | 2026-10-25 | not found | 1 | 2026-10-25: 6 queries, 0 candidates (0 registered, 0 rejected) | LiveBench 2.0 has one row per model at its highest effort only; this effort is not run. |
 | Claude Haiku 5.5 (high) | LiveBench 2.0 Overall | 2026-10-25 | not found | 1 | 2026-10-25: 6 queries, 0 candidates (0 registered, 0 rejected) | LiveBench 2.0 has one row per model at its highest effort only; this effort is not run. |
 | Claude Haiku 5.5 (low) | LiveBench 2.0 Overall | 2026-10-25 | not found | 1 | 2026-10-25: 6 queries, 0 candidates (0 registered, 0 rejected) | LiveBench 2.0 has one row per model at its highest effort only; this effort is not run. |
@@ -747,7 +747,7 @@ Each routed row's amount with what it measures, how it was derived and which obj
 
 ## Evidence bundle
 
-Bundle hash `52b6fabf2abe45828323285dda5f5a77b0039682605a7ab0961ef2416db5f170`: every published output is rebuilt from these artifacts at the pinned publication clock (npm run verify:docs), never from live pages.
+Bundle hash `7e41fb02b14d6008628956290c72501b8e4bf2bd31ce59b22457f9f85f55c935`: every published output is rebuilt from these artifacts at the pinned publication clock (npm run verify:docs), never from live pages.
 
 | Key | Artifact | SHA-256 | Captured | Extractor |
 |---|---|---|---|---|
@@ -763,7 +763,7 @@ Bundle hash `52b6fabf2abe45828323285dda5f5a77b0039682605a7ab0961ef2416db5f170`: 
 | bugHuntScoreboard | `data/bug_hunt_scoreboard.json` | `621695b6104795ce5810bb230d17422bb657010acc8a97e4d77b1fece10cd3a3` | 2026-10-25T10:44:11Z | the owner's combined scoreboard at the pinned commit (O31 roster check) |
 | planRoutes | `data/plan_cost_routes.json` | `24ce9946272da82d2c058d07cc5be74619b8f7519c5988400574d22af1b5e8cc` | 2026-10-08 | editorial Plan evidence registry |
 | priceRecords | `data/price_records.json` | `9be099828d530cc4ad2294d6fdf6ff03a3d94cc5530e8d6ef3279133491930bd` | 2026-10-23T06:26:23Z | editorial E141 price-record registry (superseded and promotional tariffs) |
-| leafEvidence | `data/leaf_evidence.json` | `d1f676efbd9311db89a9daf2b23e90ee89d30c4afc5edd835e0cbb47f870af46` | 2026-10-23 | editorial supplementary leaf evidence and the exhaustive-search log (O36) |
+| leafEvidence | `data/leaf_evidence.json` | `e7e31c0f4ae8bf333b61f24614f46470df7a62a9b6b48dfb7c090030a90ee853` | 2026-10-23 | editorial supplementary leaf evidence and the exhaustive-search log (O36) |
 | cognitionFrontierCode | `data/cognition_frontiercode.json` | `ff0040778b7bdf69c705ad7474f771fb5e53cfaf5cf8573b3a4614153543d75f` | — | Cognition's FrontierCode leaderboard data (https://cognition.com/data/frontiercode-leaderboard/data.json), captured unchanged (O37) |
 | sweTracks | `data/swe_tracks.json` | `922f5893228eb02fed2c0e81a8a3a8d617c0be4ddd186ec76fde9df16e81801d` | 2026-10-25T10:44:11Z | research/2026-10-23-swe-benchmarks/build_swe_tracks.py from the verified coverage captures (O53-O55) |
 | anchors | `data/v3_frozen.json` | `d4f3bb4b769b2fcfc1b5c5847f67b396c6a386d7db4b17f99dffa9321e480cfc` | 2026-10-25 | valuerank.value_v3 freeze |
