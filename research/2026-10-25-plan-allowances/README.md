@@ -6,3 +6,4 @@ then Claude's Deep Research, then Silver Bullet's Deep Research. Each file recor
 research agent returned it (dollar figures are the agent's conversions at the stated API list prices).
 
 - `stage1-kimi.md` — Kimi K3.1 Pro on Kimi membership plans (plain web search)
+- `stage1-anthropic.md` — Claude Opus 5.5, Sonnet 5.5, Haiku 5.5 on Claude Pro / Max 5x / Max 20x (plain web search)
