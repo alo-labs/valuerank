@@ -15138,6 +15138,7 @@
           "flags": [
             "workload-unmatched",
             "owner-named transfer (assumption)",
+            "possibly-superseded",
             "valuation basis unverified"
           ],
           "selectionReason": "larger observed multiple (observed-workload multiple — target-workload ordering not identified)",
@@ -15254,7 +15255,7 @@
               "case": 2,
               "officialDisplayEligible": true,
               "planIntervalEligible": false,
-              "expiry": "fresh",
+              "expiry": "possibly-superseded",
               "evidenceDate": "2026-10-06",
               "donorRouteId": "claude-pro-opus55-semianalysis",
               "contributingReportIds": null,
@@ -15957,6 +15958,7 @@
           "donorRouteId": null,
           "flags": [
             "workload-unmatched",
+            "possibly-superseded",
             "valuation basis unverified"
           ],
           "selectionReason": "larger observed multiple (observed-workload multiple — target-workload ordering not identified)",
@@ -16073,7 +16075,7 @@
               "case": 3,
               "officialDisplayEligible": true,
               "planIntervalEligible": false,
-              "expiry": "fresh",
+              "expiry": "possibly-superseded",
               "evidenceDate": "2026-10-06",
               "donorRouteId": null,
               "contributingReportIds": null,
@@ -20610,6 +20612,7 @@
           "flags": [
             "workload-unmatched",
             "owner-named transfer (assumption)",
+            "possibly-superseded",
             "valuation basis unverified"
           ],
           "selectionReason": "larger observed multiple (observed-workload multiple — target-workload ordering not identified)",
@@ -20726,7 +20729,7 @@
               "case": 2,
               "officialDisplayEligible": true,
               "planIntervalEligible": false,
-              "expiry": "fresh",
+              "expiry": "possibly-superseded",
               "evidenceDate": "2026-10-06",
               "donorRouteId": "claude-pro-opus55-semianalysis",
               "contributingReportIds": null,
@@ -21675,6 +21678,7 @@
         "flags": [
           "workload-unmatched",
           "owner-named transfer (assumption)",
+          "possibly-superseded",
           "valuation basis unverified"
         ],
         "selectionReason": "only remaining eligible route",
@@ -21743,6 +21747,7 @@
         "fallback": null,
         "flags": [
           "workload-unmatched",
+          "possibly-superseded",
           "valuation basis unverified"
         ],
         "selectionReason": "only remaining eligible route",
@@ -22138,6 +22143,7 @@
         "flags": [
           "workload-unmatched",
           "owner-named transfer (assumption)",
+          "possibly-superseded",
           "valuation basis unverified"
         ],
         "selectionReason": "only remaining eligible route",
@@ -29313,9 +29319,9 @@
         "detail": "fewer than half of Plan rows have an identified M_W"
       },
       {
-        "rule": "Plan evidence lifecycle and change detection (E18, E151, E269, O77)",
+        "rule": "Plan evidence lifecycle and change detection (E18, E151, E269, O77, O79)",
         "status": "fired",
-        "detail": "rows whose selected route is possibly superseded or expired: gpt-6-astra, gpt-6-luna, gpt-6.1-sol"
+        "detail": "21 of 27 plan rows carry a possibly-superseded or expired route: claude-haiku-5-5-max@claude-max-20x, claude-haiku-5-5-max@claude-max-5x, claude-haiku-5-5-max@claude-pro, claude-opus-5-5@claude-max-20x, claude-opus-5-5@claude-max-5x, claude-opus-5-5@claude-pro, claude-sonnet-5-5@claude-max-20x, claude-sonnet-5-5@claude-max-5x, claude-sonnet-5-5@claude-pro, gpt-6-astra@chatgpt-plus, gpt-6-astra@chatgpt-pro-100, gpt-6-astra@chatgpt-pro-200, gpt-6-astra@chatgpt-pro-500, gpt-6-luna@chatgpt-plus, gpt-6-luna@chatgpt-pro-100, gpt-6-luna@chatgpt-pro-200, gpt-6-luna@chatgpt-pro-500, gpt-6.1-sol@chatgpt-plus, gpt-6.1-sol@chatgpt-pro-100, gpt-6.1-sol@chatgpt-pro-200, gpt-6.1-sol@chatgpt-pro-500"
       },
       {
         "rule": "valuation-basis gate (E170)",
@@ -29326,6 +29332,11 @@
         "rule": "source clocks and evidence freshness (O59, O60, O65, E211, E216, E217, E218)",
         "status": "passed",
         "detail": "every capture is within its age gate and none after the cutoff unless its source predates the cutoff's day; the build stops otherwise"
+      },
+      {
+        "rule": "build-stopping evidence gates (O64, O69, O71, O75, E195, E204, E225)",
+        "status": "passed",
+        "detail": "the Coding Agent Index manifest (O64), the Terminal-Bench agent list (E225), cutoff-day row dates (O69), the three-stage all-provider plan search (O71, O75) and the frontier path checks (E195, E204) hold; the build stops otherwise"
       },
       {
         "rule": "score swing gate (E177)",
@@ -29448,7 +29459,7 @@
         {
           "key": "planRoutes",
           "artifact": "data/plan_cost_routes.json",
-          "sha256": "7c58e31fdc3e5b36abdd14ebc78da05e68d46d72d3ce2c52ec72a548ca983637",
+          "sha256": "94de571d89b412f67df067e2d85d386950df22bb93072a9b32988efb1f348f05",
           "capturedAt": "2026-10-25",
           "extractor": "editorial Plan evidence registry"
         },
@@ -29509,7 +29520,7 @@
           "extractor": "valuerank.value_v3 freeze"
         }
       ],
-      "bundleHash": "433801f1da52e0a9b560745105f4928ee0fd9f052d9e5be3f7699c90e3b2d382",
+      "bundleHash": "0e5bbb572de7f78f400359334c635602dc613cfb883429ec75510178bb3178ce",
       "rebuild": "every published output is rebuilt from these artifacts at the pinned publication clock (npm run verify:docs), never from live pages"
     },
     "track": {
@@ -39010,6 +39021,7 @@
             "flags": [
               "workload-unmatched",
               "owner-named transfer (assumption)",
+              "possibly-superseded",
               "valuation basis unverified"
             ],
             "selectionReason": "larger observed multiple (observed-workload multiple — target-workload ordering not identified)",
@@ -39126,7 +39138,7 @@
                 "case": 2,
                 "officialDisplayEligible": true,
                 "planIntervalEligible": false,
-                "expiry": "fresh",
+                "expiry": "possibly-superseded",
                 "evidenceDate": "2026-10-06",
                 "donorRouteId": "claude-pro-opus55-semianalysis",
                 "contributingReportIds": null,
@@ -40447,6 +40459,7 @@
             "flags": [
               "workload-unmatched",
               "owner-named transfer (assumption)",
+              "possibly-superseded",
               "valuation basis unverified"
             ],
             "selectionReason": "larger observed multiple (observed-workload multiple — target-workload ordering not identified)",
@@ -40563,7 +40576,7 @@
                 "case": 2,
                 "officialDisplayEligible": true,
                 "planIntervalEligible": false,
-                "expiry": "fresh",
+                "expiry": "possibly-superseded",
                 "evidenceDate": "2026-10-06",
                 "donorRouteId": "claude-pro-opus55-semianalysis",
                 "contributingReportIds": null,
@@ -43381,6 +43394,7 @@
             "flags": [
               "workload-unmatched",
               "owner-named transfer (assumption)",
+              "possibly-superseded",
               "valuation basis unverified"
             ],
             "selectionReason": "larger observed multiple (observed-workload multiple — target-workload ordering not identified)",
@@ -43497,7 +43511,7 @@
                 "case": 2,
                 "officialDisplayEligible": true,
                 "planIntervalEligible": false,
-                "expiry": "fresh",
+                "expiry": "possibly-superseded",
                 "evidenceDate": "2026-10-06",
                 "donorRouteId": "claude-pro-opus55-semianalysis",
                 "contributingReportIds": null,
@@ -44818,6 +44832,7 @@
             "flags": [
               "workload-unmatched",
               "owner-named transfer (assumption)",
+              "possibly-superseded",
               "valuation basis unverified"
             ],
             "selectionReason": "larger observed multiple (observed-workload multiple — target-workload ordering not identified)",
@@ -44934,7 +44949,7 @@
                 "case": 2,
                 "officialDisplayEligible": true,
                 "planIntervalEligible": false,
-                "expiry": "fresh",
+                "expiry": "possibly-superseded",
                 "evidenceDate": "2026-10-06",
                 "donorRouteId": "claude-pro-opus55-semianalysis",
                 "contributingReportIds": null,
@@ -47417,6 +47432,7 @@
           "flags": [
             "workload-unmatched",
             "owner-named transfer (assumption)",
+            "possibly-superseded",
             "valuation basis unverified"
           ],
           "selectionReason": "only remaining eligible route",
@@ -47584,6 +47600,7 @@
           "flags": [
             "workload-unmatched",
             "owner-named transfer (assumption)",
+            "possibly-superseded",
             "valuation basis unverified"
           ],
           "selectionReason": "only remaining eligible route",
@@ -47943,6 +47960,7 @@
           "flags": [
             "workload-unmatched",
             "owner-named transfer (assumption)",
+            "possibly-superseded",
             "valuation basis unverified"
           ],
           "selectionReason": "only remaining eligible route",
@@ -48110,6 +48128,7 @@
           "flags": [
             "workload-unmatched",
             "owner-named transfer (assumption)",
+            "possibly-superseded",
             "valuation basis unverified"
           ],
           "selectionReason": "only remaining eligible route",
@@ -56373,9 +56392,9 @@
           "detail": "fewer than half of Plan rows have an identified M_W"
         },
         {
-          "rule": "Plan evidence lifecycle and change detection (E18, E151, E269, O77)",
+          "rule": "Plan evidence lifecycle and change detection (E18, E151, E269, O77, O79)",
           "status": "fired",
-          "detail": "rows whose selected route is possibly superseded or expired: gpt-5.6-luna-low, gpt-6-astra-high, gpt-6-luna, gpt-6-luna-high, gpt-6-luna-medium, gpt-6-luna-xhigh, gpt-6.1-sol-high, gpt-6.1-sol-medium"
+          "detail": "44 of 51 plan rows carry a possibly-superseded or expired route: claude-haiku-5-5-high@claude-max-20x, claude-haiku-5-5-high@claude-max-5x, claude-haiku-5-5-high@claude-pro, claude-haiku-5-5-medium@claude-max-20x, claude-haiku-5-5-medium@claude-max-5x, claude-haiku-5-5-medium@claude-pro, claude-opus-5-5-high@claude-max-20x, claude-opus-5-5-high@claude-max-5x, claude-opus-5-5-high@claude-pro, claude-opus-5-5-medium@claude-max-20x, claude-opus-5-5-medium@claude-max-5x, claude-opus-5-5-medium@claude-pro, gpt-5.6-luna-low@chatgpt-plus, gpt-5.6-luna-low@chatgpt-pro-100, gpt-5.6-luna-low@chatgpt-pro-200, gpt-5.6-luna-low@chatgpt-pro-500, gpt-6-astra-high@chatgpt-plus, gpt-6-astra-high@chatgpt-pro-100, gpt-6-astra-high@chatgpt-pro-200, gpt-6-astra-high@chatgpt-pro-500, gpt-6-luna-high@chatgpt-plus, gpt-6-luna-high@chatgpt-pro-100, gpt-6-luna-high@chatgpt-pro-200, gpt-6-luna-high@chatgpt-pro-500, gpt-6-luna-medium@chatgpt-plus, gpt-6-luna-medium@chatgpt-pro-100, gpt-6-luna-medium@chatgpt-pro-200, gpt-6-luna-medium@chatgpt-pro-500, gpt-6-luna-xhigh@chatgpt-plus, gpt-6-luna-xhigh@chatgpt-pro-100, gpt-6-luna-xhigh@chatgpt-pro-200, gpt-6-luna-xhigh@chatgpt-pro-500, gpt-6-luna@chatgpt-plus, gpt-6-luna@chatgpt-pro-100, gpt-6-luna@chatgpt-pro-200, gpt-6-luna@chatgpt-pro-500, gpt-6.1-sol-high@chatgpt-plus, gpt-6.1-sol-high@chatgpt-pro-100, gpt-6.1-sol-high@chatgpt-pro-200, gpt-6.1-sol-high@chatgpt-pro-500, gpt-6.1-sol-medium@chatgpt-plus, gpt-6.1-sol-medium@chatgpt-pro-100, gpt-6.1-sol-medium@chatgpt-pro-200, gpt-6.1-sol-medium@chatgpt-pro-500"
         },
         {
           "rule": "valuation-basis gate (E170)",
@@ -56386,6 +56405,11 @@
           "rule": "source clocks and evidence freshness (O59, O60, O65, E211, E216, E217, E218)",
           "status": "passed",
           "detail": "every capture is within its age gate and none after the cutoff unless its source predates the cutoff's day; the build stops otherwise"
+        },
+        {
+          "rule": "build-stopping evidence gates (O64, O69, O71, O75, E195, E204, E225)",
+          "status": "passed",
+          "detail": "the Coding Agent Index manifest (O64), the Terminal-Bench agent list (E225), cutoff-day row dates (O69), the three-stage all-provider plan search (O71, O75) and the frontier path checks (E195, E204) hold; the build stops otherwise"
         },
         {
           "rule": "score swing gate (E177)",
@@ -56508,7 +56532,7 @@
           {
             "key": "planRoutes",
             "artifact": "data/plan_cost_routes.json",
-            "sha256": "7c58e31fdc3e5b36abdd14ebc78da05e68d46d72d3ce2c52ec72a548ca983637",
+            "sha256": "94de571d89b412f67df067e2d85d386950df22bb93072a9b32988efb1f348f05",
             "capturedAt": "2026-10-25",
             "extractor": "editorial Plan evidence registry"
           },
@@ -56569,7 +56593,7 @@
             "extractor": "valuerank.value_v3 freeze"
           }
         ],
-        "bundleHash": "433801f1da52e0a9b560745105f4928ee0fd9f052d9e5be3f7699c90e3b2d382",
+        "bundleHash": "0e5bbb572de7f78f400359334c635602dc613cfb883429ec75510178bb3178ce",
         "rebuild": "every published output is rebuilt from these artifacts at the pinned publication clock (npm run verify:docs), never from live pages"
       },
       "track": {

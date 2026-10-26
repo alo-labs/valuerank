@@ -1981,6 +1981,8 @@ def score(assembled: dict, frozen: dict) -> dict:
     measured = _measured_only_view(rows, frozen, per_row, plan_rows)
     readiness = cost_diagnostics.basket_readiness(rows, assembled["admission"], main)
     interval_rows = sorted(row["id"] for row in rows if (row["evidence"]["provenance"].get("terminalBench") or {}).get("ci95HalfWidthPct"))
+    # I63 L5: the lifecycle entry counts plan rows, where the route flags sit.
+    lifecycle_flagged = sorted(row["id"] for row in plan_rows if {"possibly-superseded", "expired"} & set((row.get("plan") or {}).get("flags", [])))
     manifest = [
         _rule("clip gate (E20)", "fired" if hold else "passed", "release held" if hold else "no basis exceeds the clipping allowance"),
         _rule("cost influence flag (E91)", "fired" if influence["api"]["flag"] or influence["plan"]["flag"] else "passed", "cost not discriminating (< 10%); informational only; beta never changes (O2)"),
@@ -1990,15 +1992,17 @@ def score(assembled: dict, frozen: dict) -> dict:
         _rule("route dominance filter (E88)", "fired" if any(row["routeSelection"]["dominated"] for row in rows) else "vacuous", "certifiably dearer routes set aside"),
         _rule("Plan exploratory label (E61)", "fired" if yield_["exploratory"] else "passed", "fewer than half of Plan rows have an identified M_W"),
         # I62 L7: the evidence lifecycle, valuation and clock gates are rules too.
-        _rule("Plan evidence lifecycle and change detection (E18, E151, E269, O77)",
-              "fired" if any("possibly-superseded" in row["plan"].get("flags", []) or "expired" in row["plan"].get("flags", []) for row in rows) else "passed",
-              "rows whose selected route is possibly superseded or expired: " + ", ".join(sorted(row["id"] for row in rows if {"possibly-superseded", "expired"} & set(row["plan"].get("flags", []))))
-              if any({"possibly-superseded", "expired"} & set(row["plan"].get("flags", [])) for row in rows) else "every selected route is fresh"),
+        _rule("Plan evidence lifecycle and change detection (E18, E151, E269, O77, O79)",
+              "fired" if lifecycle_flagged else "passed",
+              f"{len(lifecycle_flagged)} of {len(plan_rows)} plan rows carry a possibly-superseded or expired route: " + ", ".join(lifecycle_flagged)
+              if lifecycle_flagged else "every selected route is fresh"),
         _rule("valuation-basis gate (E170)", "fired" if any(row["valuationGate"]["outcome"] not in GATE_SCORED for row in rows) else "passed",
               "rows outside the scored valuation outcomes: " + ", ".join(sorted(row["id"] for row in rows if row["valuationGate"]["outcome"] not in GATE_SCORED))
               if any(row["valuationGate"]["outcome"] not in GATE_SCORED for row in rows) else "every ranked row is compatible as captured or after evidenced revaluation"),
         _rule("source clocks and evidence freshness (O59, O60, O65, E211, E216, E217, E218)", "passed",
               "every capture is within its age gate and none after the cutoff unless its source predates the cutoff's day; the build stops otherwise"),
+        _rule("build-stopping evidence gates (O64, O69, O71, O75, E195, E204, E225)", "passed",
+              "the Coding Agent Index manifest (O64), the Terminal-Bench agent list (E225), cutoff-day row dates (O69), the three-stage all-provider plan search (O71, O75) and the frontier path checks (E195, E204) hold; the build stops otherwise"),
         _rule("score swing gate (E177)", "vacuous", "first v3 release: no previous v3 release to compare"),
         _rule("anchor migration (E184)", "fired" if assembled.get("deferred") else "vacuous",
               "deferred: " + ", ".join(item["component"] for item in assembled["deferred"]) if assembled.get("deferred") else "no main-workload migration deferred"),

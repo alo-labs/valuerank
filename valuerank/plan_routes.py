@@ -51,15 +51,21 @@ def grade_rank(candidate: dict) -> float:
 
 
 def post_change_ranks(candidates: list[dict]) -> list[dict]:
-    """O78: when a controlled route carries a detected change (E18) and a report-pair route of the same row is dated after
-    that change, the controlled route loses its precedence (O73) to it; the candidates are returned, marked, as copies."""
+    """O78: when a controlled route carries a detected change (E18) and a report-pair route for the same plan has every
+    report dated after that change, the controlled route loses its precedence (O73) to it; the candidates are returned,
+    marked, as copies."""
 
-    reports = [evidence_date(candidate["route"]) for candidate in candidates if candidate["grade"] == "reports"]
+    def earliest_report(route: dict) -> date | None:
+        # I63 L2: the pair's own report dates (E194), not the route record's date.
+        days = [report_date(report) for report in route.get("reports") or [route]]
+        return None if None in days else min(days)
+
     marked = []
     for candidate in candidates:
-        changed = candidate["route"].get("changeDetectedOn")
+        route, changed = candidate["route"], candidate["route"].get("changeDetectedOn")
         superseded = (candidate["grade"] == "controlled" and changed and candidate.get("expiry") in {"possibly-superseded", "expired"}
-                      and any(day and day > date.fromisoformat(changed) for day in reports))
+                      and any(other["grade"] == "reports" and other["route"].get("plan") == route.get("plan")
+                              and (earliest_report(other["route"]) or date.min) > date.fromisoformat(changed) for other in candidates))
         marked.append({**candidate, "postChangeSuperseded": True} if superseded else candidate)
     return marked
 # E102: reports are pooled only when their public comparability records agree on all of these.

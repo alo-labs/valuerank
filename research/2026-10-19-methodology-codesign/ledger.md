@@ -1632,3 +1632,16 @@ Asked how O71's outcome applies, the owner chose "Keep authorised routes": the S
 - L8 (adopted): Output 1 names the API-fallback plan rows with generated counts.
 - Q3 (asked; O78, comparator changed with fixtures).
 - Round status (O56): clean (no Medium or higher), the first clean round at Sonnet xhigh. Draft r122.
+
+## Owner decisions O79–O80 (2026-10-26), asked on I63's questions
+- O79 (shared meter): a detected change to a meter several plans share flags every plan on it; the Claude change of 2026-10-17 flags the SemiAnalysis routes for Claude Pro, Max 5x and Max 20x (and their transfers).
+- O80 (5-hour figures): a 5-hour figure pools only with 5-hour figures of the same plan and model, and converts to a billing period only where no weekly or monthly cap binds and the provider documents the window count.
+
+## Internal review I63 (Claude Sonnet 5.5, effort xhigh, on r122) — adopted, modified or rejected
+- L1 (adopted): O77–O79 are written into the comparator key, the lifecycle table, the E18 definition and the "last Current day" sentence; the registry's `o72Application` lists O72–O80.
+- L2 (adopted, comparator changed with fixtures): O78 compares the pair's own E194 report dates (every report must postdate the change) and only a pair for the same plan.
+- L3 (adopted, data changed; O80): the eligibility profile, the accounting-fault days and the partition splits are in the registry (`evidencePolicy.reportEligibilityProfile`); "provisional" covers an inferred model version; an observer's values are one report carrying a range (`valueMultipleLower`/`Upper`); the 5-hour rule is O80.
+- L4 (asked; O79, data changed).
+- L5 (adopted, engine changed): the lifecycle entry counts flagged plan rows; one entry lists the build-stopping gates (O64, E225, O69, O71/O75, E195/E204); the manifest sentence no longer claims to list every possible rule.
+- L6 (adopted): O76 is named as the second numerator exception beside O46 (draft and AGENTS.md).
+- Round status (O56): clean (no Medium or higher). With I62, two consecutive clean rounds: the Sonnet xhigh rung has converged. Draft r123; next rung: Sonnet max.
