@@ -42,7 +42,36 @@
         "unreachable": "reddit.com directly (403), X (402), Zhihu and LINUX DO search (403), GitHub search APIs, YouTube video pages (bot check)",
         "record": "research/2026-10-25-plan-allowances/ and research/2026-10-25-plan-allowances-sb-deep-research/",
         "qualifyingNewReports": 0,
-        "o71Result": "no model × tier has two independent concordant reports (O11) after all three stages; owner decision O72 keeps the owner-authorised routes and API fallback elsewhere"
+        "o71Result": "no model × tier has two independent concordant reports (O11) after all three stages; owner decision O72 keeps the owner-authorised routes and API fallback elsewhere",
+        "providers": [
+          "Anthropic",
+          "OpenAI",
+          "Google",
+          "Xiaomi",
+          "Kimi",
+          "MiniMax",
+          "DeepSeek"
+        ],
+        "stages": [
+          {
+            "stage": "plain web search",
+            "method": "seven provider agents (WebSearch, WebFetch, curl, Hacker News Algolia, Reddit mirrors)",
+            "record": "research/2026-10-25-plan-allowances/stage1-*.md",
+            "outcome": "no model × tier passes O11 (stage1-assessment.md)"
+          },
+          {
+            "stage": "Claude's Deep Research",
+            "method": "anthropic-skills deep-research: five researchers and a report writer",
+            "record": "research/2026-10-25-plan-allowances/research_notes/ and reports/",
+            "outcome": "no model × tier passes O11"
+          },
+          {
+            "stage": "Silver Bullet's Deep Research",
+            "method": "silver-deep-research, deep mode, all nine phases and validations; run degraded: no search-cli (host search and fetch instead) and no helper agents (single retriever)",
+            "record": "research/2026-10-25-plan-allowances-sb-deep-research/",
+            "outcome": "no model × tier passes O11"
+          }
+        ]
       }
     ],
     "defaultNumerator": "Actual API-priced end-user-reported use or reported estimate anchored to measured use; exact model, tier and dates required.",
@@ -58,7 +87,7 @@
     },
     "gptApplication": "User authorizes the same ChatGPT plan multiples for every GPT model. Owner decision O45 (2026-10-23): GPT-6.1 Sol and GPT-6 Astra keep their own SemiAnalysis figures on every ChatGPT plan, bound to each model's unsuffixed (max) row because SemiAnalysis names the models without an effort; every other GPT row (other GPT models and GPT-6.1 Sol at xhigh, high, medium and low, ranked as their own rows under O33) takes, per plan, the lower of the two reported model-conditional figures as a labelled user assumption naming its donor route. Routes are one row per model and plan.",
     "routeGranularity": "Owner decision O45 (2026-10-23): every route row names exactly one model and one plan.",
-    "o72Application": "Owner decision O72 (2026-10-26): after the O71 search found no model × tier with two concordant user reports, the owner-authorised routes stay (the SemiAnalysis selection with its O40/O45 assumptions, the O46 MiMo quota ceilings) and providers without one (Google, Kimi, MiniMax) stay on API fallback; a route switches to user reports once two concordant reports exist for the exact model and tier (O11).",
+    "o72Application": "Owner decisions O72 (2026-10-26) and O73-O75 (2026-10-26): after the O71 search found no model × tier with two concordant user reports, the owner-authorised routes stay (the SemiAnalysis selection with its O40/O45 assumptions, the O46 MiMo quota ceilings) and providers without one (Google, Kimi, MiniMax) stay on API fallback. Two concordant user reports replace only an assumption-based or fallback route (O40/O45 shared multiples, O46 ceilings, API fallback); an exact controlled measurement keeps precedence, as the comparator ranks it (O73). Admission stays the strict all-reports concordance test (O74). Every release runs all three O71 stages over every cell (O75).",
     "mimoApplication": "Owner decision O46 (2026-10-23), an explicit exception to the end-user numerator rule: each MiMo-V2.6 model takes, per Token Plan tier, the quota-implied ceiling (the tier's monthly credits valued at Xiaomi's pay-as-you-go rate for that model, divided by the list fee), labelled provider-derived. It replaces the 2026-10-08 provisional 1.5x assumption. End-user measurements for the exact model and tier replace the ceiling once they meet the admission rule of any other provider's route (O11); one report alone does not (owner decision O62).",
     "unsupportedModels": "Use API fallback; do not transfer evidence across model versions, variants or thinking effort except for the explicit common GPT, Claude and MiMo assumptions.",
     "claudeApplication": "User authorizes (2026-10-18, Option 2) applying Opus 5.5's measured SemiAnalysis Claude plan multiples to every other Claude model. Opus 5.5 keeps its exact measured routes; the shared routes are labelled user assumptions, carry the recorded caution that allowances are model-specific (Fable 5.1 measured 12.4-12.7x on the same plans), and are superseded by any exact measurement for the listed model. Claude Fable 5.1 (retained 2026-10-21, owner decision O31) has exact SemiAnalysis measurements on Max 5x (12.73x) and Max 20x (12.425x), which replace the shared routes for it; it has no Pro route, because the source records Fable as unavailable on Pro, so there is no Pro allowance to measure or assume. Owner decision O33 (2026-10-21) ranks Claude Haiku 5.5 (max, high, medium, low) and Claude Sonnet 5.5 (xhigh, high, medium, low) as their own rows; as other Claude models in the roster they take the shared assumption routes."
@@ -2416,6 +2445,7 @@
       "flags": [
         "workload-unmatched",
         "owner-named transfer (assumption)",
+        "possibly-superseded",
         "valuation basis unverified"
       ],
       "measuredOnly": {
@@ -2435,6 +2465,7 @@
       "routeId": "claude-pro-opus55-semianalysis",
       "flags": [
         "workload-unmatched",
+        "possibly-superseded",
         "valuation basis unverified"
       ],
       "measuredOnly": {
@@ -2460,6 +2491,7 @@
       "flags": [
         "workload-unmatched",
         "owner-named transfer (assumption)",
+        "possibly-superseded",
         "valuation basis unverified"
       ],
       "measuredOnly": {

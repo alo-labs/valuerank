@@ -156,6 +156,12 @@ def named_figures(scores: dict, data: Path = DATA) -> dict:
             figures[f"{track}.share.independent"] = f"{shares['independent'] * 100:.0f}%"
         figures.update(plan_band_figures(track, section, display_names(scores)))
         figures[f"{track}.ranked"] = len(section["rows"])
+        # I61 L7, O72: plan rows priced at API cost because their provider has no authorised or admitted route.
+        fallback = [row for row in section["planRows"] if row["id"].endswith("@api")]
+        figures[f"{track}.planRows"] = len(section["planRows"])
+        figures[f"{track}.planFallbackRows"] = len(fallback)
+        names_of = display_names(scores)
+        figures[f"{track}.planFallbackNames"] = series([names_of.get(row["id"].split("@")[0], row["id"].split("@")[0]) for row in fallback]) or "none"
         figures[f"{track}.listed"] = len(section["listedIndicative"])
         figures[f"{track}.planRows"] = len(section["planRows"])
     for leaf, source in tracks["sources"].items():
@@ -263,6 +269,12 @@ def registry_figures(capture: dict, plan_document: dict, release: str) -> dict:
     window, cutoff = policy["reportingWindow"], policy["searchCutoff"]
     figures = {"evidence.windowStart": window["start"], "evidence.windowEnd": window["end"], "evidence.searchCutoff": cutoff,
                "evidence.searchGapDays": (date.fromisoformat(release) - date.fromisoformat(cutoff)).days}
+    # I61 L3: the stages and providers of the search that sets the cutoff, from its log entry.
+    latest = max((entry for entry in policy.get("searchLog") or [] if entry.get("searchedOn") == cutoff and not entry.get("singleProvider")),
+                 key=lambda entry: len(entry.get("stages") or []), default={})
+    stages = [stage["stage"] for stage in latest.get("stages") or []]
+    figures.update({"evidence.searchStageCount": len(stages) or 1, "evidence.searchStages": series(stages) or "plain web search",
+                    "evidence.searchProviders": series([name for name in latest.get("providers") or [] if name != "DeepSeek"]) or "the providers logged"})
     reports = [route for route in plan_document["routes"] if route.get("valueMultipleKind") in pr.REPORT_KINDS]
     figures["evidence.reportDates"] = series([route.get("reportDate") or route["sourcePublicationDate"] for route in reports]) or "none"
     figures["evidence.reportRoutes"] = series([f"{route['plan']}, dated {route.get('reportDate') or route['sourcePublicationDate']}" for route in reports]) or "none"
@@ -593,6 +605,29 @@ def _leaf_interval_fields(data: Path, fields: tuple[str, ...]) -> set[str]:
     return found
 
 
+def _cohort_slugs(data: Path) -> set[str]:
+    cohort = json.loads((ROOT / "research" / "2026-10-25-board-reread" / "cohort-2026-10-25.json").read_text())
+    return {item.get("aaSlug") or item["id"] for item in cohort["configurations"]}
+
+
+def _cohort_ifbench_absent(data: Path) -> bool:
+    slugs = _cohort_slugs(data)
+    return not [page for page in _load(data, "aa/aa_v432_snapshot.json")["pages"]
+                if (page.get("model") or {}).get("slug") in slugs and page["model"].get("ifbench") is not None]
+
+
+def _cohort_plan_routes(data: Path) -> list[dict]:
+    cohort = {item["id"] for item in json.loads((ROOT / "research" / "2026-10-25-board-reread" / "cohort-2026-10-25.json").read_text())["configurations"]}
+    return [route for route in _load(data, "plan_cost_routes.json")["routes"] if cohort & set(route.get("modelIds") or [])]
+
+
+def _no_deepseek_plan(data: Path) -> bool:
+    document = _load(data, "plan_cost_routes.json")
+    entries = [entry for key in ("routes", "providerLevelEvidence", "excludedRoutes") for entry in document.get(key) or []]
+    searched = [entry for entry in document["evidencePolicy"].get("searchLog") or [] if "DeepSeek" in (entry.get("providers") or [])]
+    return bool(searched) and not [entry for entry in entries if entry.get("provider") == "DeepSeek"]
+
+
 def _semianalysis_unhashed(data: Path) -> bool:
     routes = [route for route in _load(data, "plan_cost_routes.json")["routes"] if route.get("sourceEvidenceId") == "semianalysis"]
     return bool(routes) and not [key for route in routes for key in route if re.search(r"(?i)sha256|contentHash", key)]
@@ -612,6 +647,13 @@ ABSENCE_CLAIMS = {
                       and _no_key("aa/cost_charts_capture.json", r"(?i)cache")(data)),
     "semianalysis.article": ("the SemiAnalysis article is not captured (no content hash)", _semianalysis_unhashed),
     "aa.cacheRateWindow": ("AA's pages carry no cache-rate measurement window", _no_key("aa/aa_v432_snapshot.json", r"(?i)cache\w*(?:window|date|period)")),
+    "aa.otherCostBoundaries": ("AA's captured pages carry no cost-boundary statement for any other component", _no_key("aa/aa_v432_snapshot.json", r"(?i)boundary")),
+    "aa.eloScaleFactor": ("AA's captured pages carry no GDPval-AA Elo scale factor", _no_key("aa/aa_v432_snapshot.json", r"(?i)scale(?:Factor)?\Z|eloScale")),
+    "ifbench.cohort": ("no captured page of a cohort configuration carries an IFBench result", _cohort_ifbench_absent),
+    "plan.repeats": ("no Plan route of a cohort configuration records repeated measurements", lambda data: not [route for route in _cohort_plan_routes(data) if (route.get("observedRuns") or 1) > 1]),
+    "plan.burnEvidence": ("no Plan route of a cohort configuration records category-specific meter burn evidence", lambda data: not [route for route in _cohort_plan_routes(data) if any(re.search(r"(?i)burn|meterWeight", key) for key in route)]),
+    "deepseek.plan": ("the registry holds no DeepSeek plan and the O71 search covered DeepSeek", _no_deepseek_plan),
+    "aa.fitRevision": ("AA's captured pages carry no rating fit revision or freeze status", _no_key("aa/aa_v432_snapshot.json", r"(?i)revision|freeze|frozen")),
     "aicd.error": ("AI Coding Daily rows carry no error", _no_key("research/2026-10-25-board-reread/aicd/leaderboard-allrows-parsed.json", r"(?i)error|stderr|interval|ci\b")),
     "livebench.taskCounts": ("the 2026-10-23 LiveBench release carries no task counts",
                              _no_key("research/2026-10-25-board-reread/livebench/categories-20261023.json", r"(?i)count|tasks|questions")),
@@ -619,8 +661,10 @@ ABSENCE_CLAIMS = {
     "aa.leafIntervals": ("AA's pages carry no interval for a ValueRank AA leaf other than GDPval-AA's",
                          lambda data: _leaf_interval_fields(data, AA_LEAF_FIELDS) == {"gdpvalInterval"}),
 }
-ABSENCE = re.compile(r"\bnot captured\b|\b(?:carries|carry|publishes|publish|published|captures|capture) (?:no|none)\b|"
-                     r"\bdoes not (?:carry|publish|capture)\b|\bnot published\b|\bpublish(?:es)? only\b", re.I)
+# I61 L6: the vocabulary of a statement that a source publishes, provides, states or sells nothing of a kind.
+ABSENCE = re.compile(r"\bnot captured\b|\b(?:carries|carry|publishes|publish|published|captures|capture|sells|sell) (?:no|none)\b|"
+                     r"\bdoes not (?:carry|publish|capture|state|provide|sell)\b|\bnot published\b|\bpublish(?:es)? only\b|"
+                     r"\bno (?:public |other )?(?:source|component|measurement|plan measurement)\b[^.;]{0,30}?\b(?:publishes|provides|states|sells)\b", re.I)
 
 
 def absence_problems(text: str, data: Path = DATA) -> list[str]:

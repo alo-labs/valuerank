@@ -1593,3 +1593,25 @@ Stage 1 (plain web search, seven provider agents), stage 2 (Claude's Deep Resear
 
 ## Owner decision O72 (2026-10-26): apply O71's outcome by keeping the authorised routes
 Asked how O71's outcome applies, the owner chose "Keep authorised routes": the SemiAnalysis selection with its O40/O45 assumptions and the O46 MiMo quota ceilings stay; providers without an authorised route (Google, Kimi K3.1 Pro, MiniMax) stay on API fallback; the per-cell O71 results are published in the research record; a route switches to user reports once two concordant reports exist for the exact model and tier (O11).
+
+## Owner decisions O73–O75 (2026-10-26), asked on I61's questions
+- O73 (precedence): two concordant user reports replace only an assumption-based or fallback route (O40/O45 shared multiples, O46 ceilings, API fallback); an exact controlled measurement (SemiAnalysis) keeps precedence, as the comparator's grade key ranks it. O72's wording is narrowed accordingly.
+- O74 (outliers): admission stays E107's strict all-eligible-reports concordance test; no robust-core figure is published.
+- O75 (cadence): every release runs all three O71 stages (plain web search, Claude's Deep Research, Silver Bullet's Deep Research) over every model × tier cell.
+
+## Editor decisions E269–E270 (2026-10-26)
+- E269 (E18 at this release): the change-detection stage is evaluated per provider at every release and recorded in the registry (`sourceEvidence.semianalysis.changeDetection`). Anthropic: triggered from 2026-10-17 by two or more independent end-user reports of an undocumented weekly-limit change (per-token measurements by NicoAica and kakki-1 on their own accounts in claude-code issue 102667; Randomblock1 on Reddit), with no Anthropic statement; the five SemiAnalysis Claude routes carry `changeDetectedOn` and their transfers inherit it (E144), so they are possibly superseded and flagged (E228) but stay selected. OpenAI: not triggered (announced Codex changes were not documentation changes to the measured plans' pricing or rate-limit sections; the Pro 200 → Pro 500 entitlement error was corrected on 2026-10-16; no two independent per-token measurements of a limit change on a measured plan outside an acknowledged accounting fault).
+- E270 (report eligibility profile, O71 v1): the reading of O11 the O71 research applied is written into the specification: API-priced consumption tied to a meter fraction or window exhaustion (no lower bounds; a fraction scales within its own window; weekly to monthly at 4.33); exact model and tier (an inferred tier counts provisionally); single-model usage; at least partly inside the report window; not on a provider-acknowledged accounting-fault day; observers only (aggregators and derived figures are cross-checks); one observer counts once but every value enters the range test; a range must pass across its whole range; provider speed modes converted at the published multiplier and flagged.
+
+## Internal review I61 (Claude Sonnet 5.5, effort xhigh, on r120) — adopted, modified or rejected
+- M1 (adopted; O73): the sentence that a route "switches to user reports" contradicted the comparator; the owner chose that an exact controlled measurement keeps precedence and reports replace only assumption or fallback routes. Draft, registry (`o72Application`) and AGENTS.md say so.
+- L1 (adopted; E269): the E18 outcome is evaluated and recorded per provider; the Claude routes are flagged from 2026-10-17; the draft states the outcome and that it is re-evaluated each release.
+- L2 (adopted, engine changed): every evidence-bundle artifact now carries an instant (frontier capture `captured_at`, manifest review date, roster from the frontier capture, Cognition from its capture record, re-reads from their dates, Plan registry from its latest search), and the build fails on a missing one.
+- L3 (adopted, engine and data changed): the O71 log entry records `providers` and `stages` (method, record, outcome; the Silver Bullet stage's degraded mode); the build fails when the cutoff-setting search lacks a stage or a cohort provider; the draft's stage count, stages and providers are generated; the cadence is O75.
+- L4 (adopted; E270): the eligibility profile is in the specification.
+- L5 (adopted): "no source admitted under E44 or E105 provides it", naming the two unevaluated end-user fits.
+- L6 (adopted, check changed): the absence vocabulary is widened (provides, states, sells, "no source … publishes"), six more statements are registered and tested (other cost boundaries, Elo scale factor, IFBench for the cohort, Plan repeats, Plan burn evidence, DeepSeek plan), and the revision history says the check tests each registered statement.
+- L7 (adopted, figures added): the limitations name the API-fallback plan rows with generated counts and names.
+- L8 (adopted): the stale "14 days in practice" sentence, the unproduced registry fields and the single-ranking z are corrected.
+- Owner questions Q1–Q3 (asked; O73–O75).
+- Round status (O56): not clean (one Medium). Draft r121.

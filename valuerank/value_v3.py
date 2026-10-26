@@ -589,6 +589,27 @@ def source_clocks(documents: dict) -> list[dict]:
     return clocks
 
 
+O71_STAGES = ("plain web search", "Claude's Deep Research", "Silver Bullet's Deep Research")
+O71_PROVIDERS = ("Anthropic", "OpenAI", "Google", "Xiaomi", "Kimi", "MiniMax", "DeepSeek")
+O71_FROM = "2026-10-25"
+
+
+def check_o71_search(policy: dict) -> None:
+    """O71, O75, I61 L3: from O71 on, the all-provider search that sets the cutoff ran all three stages over every cohort
+    provider's plans, and records each stage."""
+
+    entries = [entry for entry in policy.get("searchLog") or [] if entry.get("searchedOn") and not entry.get("singleProvider")]
+    latest = max(entries, key=lambda entry: entry["searchedOn"], default=None)
+    if latest is None or latest["searchedOn"] < O71_FROM:
+        return
+    stages = tuple(stage.get("stage") for stage in latest.get("stages") or [])
+    if stages != O71_STAGES or not all(stage.get("record") and stage.get("outcome") for stage in latest["stages"]):
+        raise ValueError(f"the all-provider search of {latest['searchedOn']} does not record the three O71 stages in order (O71, O75)")
+    missing = sorted(set(O71_PROVIDERS) - set(latest.get("providers") or []))
+    if missing:
+        raise ValueError(f"the all-provider search of {latest['searchedOn']} omits {', '.join(missing)} (O71)")
+
+
 def check_rereads(documents: dict) -> None:
     """I60 L6: an O68 re-read record must name, by hash, the pinned capture the build uses; a record left behind by a
     newer capture stops the build (the tests compare each 'unchanged' result with the re-read file, `reread_matches`)."""
@@ -776,6 +797,7 @@ def assemble(configurations: list[dict], documents: dict, *, release_day: date, 
     all_provider = [entry["searchedOn"] for entry in policy.get("searchLog") or [] if not entry.get("singleProvider")]
     if searched and searched != max(all_provider, default=None):
         raise ValueError(f"the search cutoff {searched} is not the date of the latest all-provider search in the search log (E218)")
+    check_o71_search(policy)
     # I51 L7: an O46 ceiling is recomputed from its recorded credits, rate and fee, so the stored multiple cannot drift.
     for route in documents["planRoutes"]["routes"]:
         if route.get("evidenceClass") == "provider_quota_ceiling":
@@ -3014,10 +3036,19 @@ EVIDENCE_FILES = {
 }
 CAPTURE_FIELDS = ("capturedAt", "observedAt", "snapshotDate", "asOf", "frozenAt")
 SOURCE_INSTANTS = {
-    "tb4": lambda document: (document.get("source") or {}).get("capturedAt"),
-    "bugHunt": lambda document: max((record["observedAt"] for record in document.get("models", []) if record.get("observedAt")), default=None),
-    "leafEvidence": lambda document: max((day for search in document.get("searches", [])
-                                          for day in (search.get("searchedOn"), (search.get("openWeb") or {}).get("searchedOn")) if day), default=None),
+    "tb4": lambda document, documents: (document.get("source") or {}).get("capturedAt"),
+    "bugHunt": lambda document, documents: max((record["observedAt"] for record in document.get("models", []) if record.get("observedAt")), default=None),
+    "leafEvidence": lambda document, documents: max((day for search in document.get("searches", [])
+                                                     for day in (search.get("searchedOn"), (search.get("openWeb") or {}).get("searchedOn")) if day), default=None),
+    # I61 L2: every artifact carries an instant: editorial files take their review or search date, derived files the
+    # instant of what they were derived from.
+    "codingAgentsManifest": lambda document, documents: document.get("reviewedOn"),
+    "frontierCapture": lambda document, documents: document.get("captured_at"),
+    "roster": lambda document, documents: (documents.get("frontierCapture") or {}).get("captured_at"),
+    "cognitionFrontierCode": lambda document, documents: ((documents.get("leafEvidence") or {}).get("cognitionCapture") or {}).get("capturedOn"),
+    "sourceRereads": lambda document, documents: max((item["reReadAt"] for item in document.get("rereads", [])), default=document.get("recordedOn")),
+    "planRoutes": lambda document, documents: max((entry["searchedOn"] for entry in (document.get("evidencePolicy") or {}).get("searchLog") or []),
+                                                  default=document.get("asOf")),
 }
 
 
@@ -3036,13 +3067,16 @@ def evidence_bundle(data: Path) -> dict:
     artifacts = []
     anchors = [(f"anchors:{track}" if track != q.DEFAULT_TRACK else "anchors", (track_file(FROZEN_FILE, track), "valuerank.value_v3 freeze"))
                for track in q.TRACKS if (data / track_file(FROZEN_FILE, track)).exists()]
+    loaded = {key: json.loads((data / relative).read_bytes()) for key, (relative, _extractor) in EVIDENCE_FILES.items()}
     for key, (relative, extractor) in [*EVIDENCE_FILES.items(), *anchors]:
         content = (data / relative).read_bytes()
         document = json.loads(content)
         # The roster is a bare list with no capture time of its own.
         captured = next((document[field] for field in CAPTURE_FIELDS if isinstance(document.get(field), str)), None) if isinstance(document, dict) else None
         # I60 L6: a derived or editorial artifact carries its source's own latest instant, not its build stamp.
-        captured = (SOURCE_INSTANTS[key](document) or captured) if key in SOURCE_INSTANTS else captured
+        captured = (SOURCE_INSTANTS[key](document, loaded) or captured) if key in SOURCE_INSTANTS else captured
+        if not captured:
+            raise ValueError(f"{key}: the evidence bundle has no capture instant for data/{relative} (I61 L2)")
         artifacts.append({"key": key, "artifact": f"data/{relative}", "sha256": hashlib.sha256(content).hexdigest(), "capturedAt": captured, "extractor": extractor})
     return {
         "artifacts": artifacts,

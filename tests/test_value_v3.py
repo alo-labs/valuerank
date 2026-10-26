@@ -636,12 +636,12 @@ def write_world(root: Path) -> Path:
         "leaf_evidence.json": documents()["leafEvidence"],
         "cognition_frontiercode.json": {"v1_1": {"data": {}}},
         "swe_tracks.json": {"capturedAt": "2026-10-19T00:00:00Z", "sources": {}, "records": []},
-        "aa_frontier_capture.json": {"points": []},
+        "aa_frontier_capture.json": {"captured_at": "2026-10-18T00:00:00Z", "points": []},
         # The roster is a bare JSON list; the Bug Hunt scoreboard is the O31 roster-check input.
         "aa_mapping.json": [{"id": item["id"], "displayName": item["name"]} for item in CONFIGURATIONS],
         "bug_hunt_scoreboard.json": {"capturedAt": "2026-10-21T06:30:00Z", "sourceUpdated": "2026-10-17", "rows": [{"model": "A (max effort)", "fixedOf105": 10.0}]},
         "aa/aa_previous_capture.json": {"capturedAt": "2026-10-12T00:00:00Z", "sha256": "0" * 64, "pages": []},
-        "source_rereads.json": {"rereads": []},
+        "source_rereads.json": {"recordedOn": "2026-10-19", "rereads": []},
         "scores.json": {
             "models": [{"id": item["id"], "name": item["name"], "aaVariant": item["effort"], "aaSlug": item["aaSlug"], "rankingEligible": True} for item in CONFIGURATIONS]
             + [{"id": "out", "name": "Out", "aaSlug": "out", "rankingEligible": False}],
@@ -649,6 +649,9 @@ def write_world(root: Path) -> Path:
     }.items():
         target = data / relative
         target.parent.mkdir(parents=True, exist_ok=True)
+        # I61 L2: every evidence artifact carries an instant; a fixture without one is stamped on the release day.
+        if isinstance(content, dict) and not any(isinstance(content.get(field), str) for field in (*v.CAPTURE_FIELDS, "captured_at", "reviewedOn", "recordedOn")):
+            content = {**content, "capturedAt": "2026-10-19T00:00:00Z"}
         target.write_text(json.dumps(content))
     return data
 
@@ -901,9 +904,10 @@ def test_evidence_bundle_hashes_every_input_artifact(tmp_path, monkeypatch):
     snapshot = bundle["artifacts"][0]
     import hashlib
     assert snapshot["sha256"] == hashlib.sha256((data / "aa/aa_v432_snapshot.json").read_bytes()).hexdigest()
-    assert snapshot["capturedAt"] is None and bundle["artifacts"][-1]["capturedAt"] == "2026-10-19"
+    assert snapshot["capturedAt"] == "2026-10-19T00:00:00Z" and bundle["artifacts"][-1]["capturedAt"] == "2026-10-19"
     by_key = {item["key"]: item for item in bundle["artifacts"]}
-    assert by_key["roster"]["artifact"] == "data/aa_mapping.json" and by_key["roster"]["capturedAt"] is None  # a list has no capture time
+    # I61 L2: the roster, a bare list, takes the instant of the frontier capture it is derived from.
+    assert by_key["roster"]["artifact"] == "data/aa_mapping.json" and by_key["roster"]["capturedAt"] == "2026-10-18T00:00:00Z"
     assert by_key["roster"]["sha256"] == hashlib.sha256((data / "aa_mapping.json").read_bytes()).hexdigest()
     assert by_key["bugHuntScoreboard"]["artifact"] == "data/bug_hunt_scoreboard.json" and by_key["bugHuntScoreboard"]["capturedAt"] == "2026-10-21T06:30:00Z"
     assert len(bundle["bundleHash"]) == 64
@@ -2015,7 +2019,41 @@ def test_bug_hunt_dates_follow_o69():
 def test_evidence_bundle_stamps_derived_files_with_their_sources_instants():
     """I60 L6: tb4 carries its scrape's instant, Bug Hunt its latest record capture, the leaf evidence its latest search."""
 
-    assert v.SOURCE_INSTANTS["tb4"]({"source": {"capturedAt": "s"}, "observedAt": "b"}) == "s"
-    assert v.SOURCE_INSTANTS["bugHunt"]({"models": [{"observedAt": "2026-10-18"}, {"observedAt": "2026-10-25"}, {}]}) == "2026-10-25"
-    assert v.SOURCE_INSTANTS["leafEvidence"]({"searches": [{"searchedOn": "2026-10-21", "openWeb": {"searchedOn": "2026-10-23"}}]}) == "2026-10-23"
-    assert v.SOURCE_INSTANTS["bugHunt"]({}) is None and v.SOURCE_INSTANTS["leafEvidence"]({}) is None
+    assert v.SOURCE_INSTANTS["tb4"]({"source": {"capturedAt": "s"}, "observedAt": "b"}, {}) == "s"
+    assert v.SOURCE_INSTANTS["bugHunt"]({"models": [{"observedAt": "2026-10-18"}, {"observedAt": "2026-10-25"}, {}]}, {}) == "2026-10-25"
+    assert v.SOURCE_INSTANTS["leafEvidence"]({"searches": [{"searchedOn": "2026-10-21", "openWeb": {"searchedOn": "2026-10-23"}}]}, {}) == "2026-10-23"
+    assert v.SOURCE_INSTANTS["bugHunt"]({}, {}) is None and v.SOURCE_INSTANTS["leafEvidence"]({}, {}) is None
+    # I61 L2: editorial and derived files take their review, search, re-read or source instant.
+    documents = {"frontierCapture": {"captured_at": "c"}, "leafEvidence": {"cognitionCapture": {"capturedOn": "d"}}}
+    assert v.SOURCE_INSTANTS["roster"]([], documents) == "c" and v.SOURCE_INSTANTS["cognitionFrontierCode"]({}, documents) == "d"
+    assert v.SOURCE_INSTANTS["sourceRereads"]({"rereads": [{"reReadAt": "a"}, {"reReadAt": "b"}]}, {}) == "b"
+    assert v.SOURCE_INSTANTS["sourceRereads"]({"recordedOn": "r", "rereads": []}, {}) == "r"
+    assert v.SOURCE_INSTANTS["planRoutes"]({"asOf": "x", "evidencePolicy": {"searchLog": [{"searchedOn": "2026-10-21"}]}}, {}) == "2026-10-21"
+    assert v.SOURCE_INSTANTS["planRoutes"]({"asOf": "x"}, {}) == "x"
+    assert all(item["capturedAt"] for item in v.evidence_bundle(v.DATA)["artifacts"])
+
+
+def test_an_evidence_artifact_without_an_instant_stops_the_bundle(tmp_path, monkeypatch):
+    data = write_world(tmp_path)
+    (data / "aa_frontier_capture.json").write_text(json.dumps({"points": []}))
+    with pytest.raises(ValueError, match="no capture instant for data/aa_frontier_capture.json"):
+        v.evidence_bundle(data)
+
+
+def test_the_o71_search_records_three_stages_over_every_provider():
+    """O71, O75, I61 L3."""
+
+    stages = [{"stage": name, "record": "r", "outcome": "o"} for name in v.O71_STAGES]
+    good = {"searchedOn": "2026-10-25", "providers": list(v.O71_PROVIDERS), "stages": stages}
+    v.check_o71_search({"searchLog": [{"searchedOn": "2026-10-21"}, good]})
+    v.check_o71_search({"searchLog": [{"searchedOn": "2026-10-21"}]})  # before O71
+    v.check_o71_search({})
+    v.check_o71_search({"searchLog": [{"searchedOn": None}]})
+    with pytest.raises(ValueError, match="does not record the three O71 stages"):
+        v.check_o71_search({"searchLog": [{**good, "stages": stages[:2]}]})
+    with pytest.raises(ValueError, match="does not record the three O71 stages"):
+        v.check_o71_search({"searchLog": [{**good, "stages": [*stages[:2], {"stage": v.O71_STAGES[2], "record": "r"}]}]})
+    with pytest.raises(ValueError, match="omits Kimi"):
+        v.check_o71_search({"searchLog": [{**good, "providers": [p for p in v.O71_PROVIDERS if p != "Kimi"]}]})
+    # A single-provider entry neither sets the cutoff nor needs stages.
+    v.check_o71_search({"searchLog": [good, {"searchedOn": "2026-10-26", "singleProvider": True}]})
