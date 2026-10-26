@@ -57,7 +57,8 @@ def post_change_ranks(candidates: list[dict]) -> list[dict]:
 
     def earliest_report(route: dict) -> date | None:
         # I63 L2: the pair's own report dates (E194), not the route record's date.
-        days = [report_date(report) for report in route.get("reports") or [route]]
+        # I64 L1: a pooled report route carries its reports as independentReports.
+        days = [report_date(report) for report in route.get("independentReports") or route.get("reports") or [route]]
         return None if None in days else min(days)
 
     marked = []

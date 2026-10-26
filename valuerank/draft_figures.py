@@ -160,6 +160,9 @@ def named_figures(scores: dict, data: Path = DATA) -> dict:
         fallback = [row for row in section["planRows"] if row["id"].endswith("@api")]
         figures[f"{track}.planRows"] = len(section["planRows"])
         figures[f"{track}.planFallbackRows"] = len(fallback)
+        # I64 L5: plan rows whose selected route carries a lifecycle flag, or whose valuation basis is unverified.
+        figures[f"{track}.planFlaggedRows"] = sum(bool({"possibly-superseded", "expired"} & set(row.get("flags", []))) for row in section["planRows"])
+        figures[f"{track}.planUnverifiedRows"] = sum("valuation basis unverified" in row.get("flags", []) for row in section["planRows"])
         names_of = display_names(scores)
         figures[f"{track}.planFallbackNames"] = series([names_of.get(row["id"].split("@")[0], row["id"].split("@")[0]) for row in fallback]) or "none"
         figures[f"{track}.listed"] = len(section["listedIndicative"])

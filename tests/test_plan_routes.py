@@ -579,10 +579,10 @@ def test_a_report_pair_after_a_detected_change_outranks_the_flagged_controlled_r
     assert "postChangeSuperseded" not in controlled  # the input candidates are not mutated
     # I63 L2: every report of the pair must postdate the change, and the pair must be for the same plan.
     straddling = candidate("reports-straddling", 50.0, "reports")
-    straddling["route"]["reports"] = [{"sourcePublicationDate": "2026-10-15"}, {"reportDate": "2026-10-20"}]
+    straddling["route"]["independentReports"] = [{"sourcePublicationDate": "2026-10-15"}, {"reportDate": "2026-10-20"}]
     assert pr.select_route([controlled, straddling])["route"]["id"] == "controlled"
     later_pair = candidate("reports-pair", 50.0, "reports")
-    later_pair["route"]["reports"] = [{"measurementWindow": {"end": "2026-10-19"}}, {"reportDate": "2026-10-20"}]
+    later_pair["route"]["independentReports"] = [{"measurementWindow": {"end": "2026-10-19"}}, {"reportDate": "2026-10-20"}]
     assert pr.select_route([controlled, later_pair])["route"]["id"] == "reports-pair"
     undated = candidate("reports-undated", 50.0, "reports")
     undated["route"]["reports"] = [{}, {"reportDate": "2026-10-20"}]

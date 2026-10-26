@@ -1645,3 +1645,17 @@ Asked how O71's outcome applies, the owner chose "Keep authorised routes": the S
 - L5 (adopted, engine changed): the lifecycle entry counts flagged plan rows; one entry lists the build-stopping gates (O64, E225, O69, O71/O75, E195/E204); the manifest sentence no longer claims to list every possible rule.
 - L6 (adopted): O76 is named as the second numerator exception beside O46 (draft and AGENTS.md).
 - Round status (O56): clean (no Medium or higher). With I62, two consecutive clean rounds: the Sonnet xhigh rung has converged. Draft r123; next rung: Sonnet max.
+
+## Owner decision O81 (2026-10-26): the build computes report admission
+Asked on I64 Q1 whether future O71 admissions should be executed by the build from a machine-readable report table or stay an editorial procedure, the owner chose that the build computes them. `data/plan_reports.json` holds every report the O71 research found (provider, plan, model, observer, measurement window, unit, value or range, and the E270 flags), transcribed from the stage-1 to stage-3 tables; `valuerank/plan_admission.py` applies E270 (exclusions, accounting-fault days, partition splits with whole-day dates, speed-mode conversion, O80) and O11's whole-range concordance test to every model × plan cell; the build publishes `planAllowanceCells` and stops when a report route for a cohort model has no passing cell. The committed table reproduces the O71 verdict (no cell passes); applied mechanically, the whole-day split rule also excludes three reports dated on a change day (Oleg-125 and Crystal4276 on OpenAI announcement days, waximabbax on Kimi's quota-increase day), which changes no verdict.
+
+## Internal review I64 (Claude Sonnet 5.5, effort max, on r123) — adopted, modified or rejected
+- L1 (adopted, comparator changed with fixtures): O78 dates a pooled report route from its `independentReports`.
+- L2 (adopted): the lifecycle table's trigger cell carries O77 and O79; line 143 names both numerator exceptions.
+- L3 (adopted, engine changed): a report on a split day, spanning a split or touching a fault day is excluded; the split comes first and the range test then covers every eligible report of the current partition, provisional ones included; the value is the median midpoint of the non-provisional reports; 5-hour pairs can never admit a route on today's capped plans (stated); the garbled O80 clause is fixed in the draft and AGENTS.md.
+- L4 (adopted; O81): the profile, fault days and splits are read by the build.
+- L5 (adopted, figures added): Output 1 and the limitations give generated counts of plan rows on a flagged route and on an unverified valuation basis.
+- L6 (adopted): the LiveBench/AI Coding Daily re-read wording names its boards; the MiMo effort statement is dated and sourced to E252.
+- Recommendation (Terminal-Bench and AA-LCR narrow noise readings): recorded for the scenario layer; not adopted in this round (a recommendation, not a finding).
+- Owner question (asked; O81).
+- Round status (O56): clean (no Medium or higher), the first clean round at Sonnet max. Draft r124.

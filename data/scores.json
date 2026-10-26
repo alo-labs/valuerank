@@ -14157,6 +14157,733 @@
         }
       }
     ],
+    "planAllowanceCells": [
+      {
+        "provider": "Anthropic",
+        "plan": "Claude Max 20x",
+        "modelId": null,
+        "unit": "week",
+        "region": "global",
+        "status": "fails: 0 non-provisional report(s) in the current partition",
+        "currentPartition": 1,
+        "partitionsWithReports": [],
+        "value": null,
+        "monthlyUsd": null,
+        "multiple": null,
+        "range": null,
+        "reports": [
+          {
+            "id": "randomblock1-max20x",
+            "observer": "Randomblock1",
+            "valueLower": 1395.0,
+            "valueUpper": 1395.0,
+            "partition": null,
+            "provisional": false,
+            "speedMode": null,
+            "excluded": "model not stated"
+          }
+        ]
+      },
+      {
+        "provider": "Anthropic",
+        "plan": "Claude Max 20x",
+        "modelId": "claude-opus-5-5",
+        "unit": "week",
+        "region": "global",
+        "status": "fails: 1 non-provisional report(s) in the current partition",
+        "currentPartition": 1,
+        "partitionsWithReports": [
+          0,
+          1
+        ],
+        "value": null,
+        "monthlyUsd": null,
+        "multiple": null,
+        "range": [
+          182.0,
+          212.0
+        ],
+        "reports": [
+          {
+            "id": "kanttz-max20x",
+            "observer": "Kanttz",
+            "valueLower": 2578.0,
+            "valueUpper": 2920.0,
+            "partition": 0,
+            "provisional": false,
+            "speedMode": null,
+            "excluded": null
+          },
+          {
+            "id": "theo-max20x",
+            "observer": "Theo (pingdotgg)",
+            "valueLower": 2446.0,
+            "valueUpper": 2600.0,
+            "partition": 0,
+            "provisional": false,
+            "speedMode": null,
+            "excluded": null
+          },
+          {
+            "id": "last-lab-max20x",
+            "observer": "Last_Lab_3627",
+            "valueLower": 2045.0,
+            "valueUpper": 2045.0,
+            "partition": 0,
+            "provisional": false,
+            "speedMode": null,
+            "excluded": null
+          },
+          {
+            "id": "delicious-shower-max20x",
+            "observer": "Delicious-Shower8401",
+            "valueLower": 2175.0,
+            "valueUpper": 2175.0,
+            "partition": 0,
+            "provisional": false,
+            "speedMode": null,
+            "excluded": null
+          },
+          {
+            "id": "nicoaica-max20x-before",
+            "observer": "NicoAica",
+            "valueLower": 1294.0,
+            "valueUpper": 1681.0,
+            "partition": 0,
+            "provisional": false,
+            "speedMode": null,
+            "excluded": null
+          },
+          {
+            "id": "nicoaica-max20x-after",
+            "observer": "NicoAica",
+            "valueLower": 182.0,
+            "valueUpper": 212.0,
+            "partition": 1,
+            "provisional": false,
+            "speedMode": null,
+            "excluded": null
+          },
+          {
+            "id": "leaflavaplanetmoss-max20x",
+            "observer": "leaflavaplanetmoss",
+            "valueLower": 1140.0,
+            "valueUpper": 1140.0,
+            "partition": null,
+            "provisional": false,
+            "speedMode": null,
+            "excluded": "challenged: does not reproduce from its own figures"
+          }
+        ]
+      },
+      {
+        "provider": "Anthropic",
+        "plan": "Claude Max 5x",
+        "modelId": null,
+        "unit": "week",
+        "region": "global",
+        "status": "fails: 0 non-provisional report(s) in the current partition",
+        "currentPartition": 1,
+        "partitionsWithReports": [],
+        "value": null,
+        "monthlyUsd": null,
+        "multiple": null,
+        "range": null,
+        "reports": [
+          {
+            "id": "fancy-leave-max5x",
+            "observer": "Fancy_Leave7798",
+            "valueLower": 1538.0,
+            "valueUpper": 1538.0,
+            "partition": null,
+            "provisional": false,
+            "speedMode": null,
+            "excluded": "model not stated"
+          }
+        ]
+      },
+      {
+        "provider": "Anthropic",
+        "plan": "Claude Max 5x",
+        "modelId": "claude-opus-5-5",
+        "unit": "week",
+        "region": "global",
+        "status": "fails: 0 non-provisional report(s) in the current partition",
+        "currentPartition": 1,
+        "partitionsWithReports": [
+          0
+        ],
+        "value": null,
+        "monthlyUsd": null,
+        "multiple": null,
+        "range": null,
+        "reports": [
+          {
+            "id": "muscgab-max5x",
+            "observer": "muscgab",
+            "valueLower": 750.0,
+            "valueUpper": 830.0,
+            "partition": 0,
+            "provisional": false,
+            "speedMode": null,
+            "excluded": null
+          },
+          {
+            "id": "usage-screenshot-max5x",
+            "observer": "unlabelled /usage screenshot (week of 2026-09-29)",
+            "valueLower": 1920.0,
+            "valueUpper": 1920.0,
+            "partition": 0,
+            "provisional": false,
+            "speedMode": null,
+            "excluded": null
+          }
+        ]
+      },
+      {
+        "provider": "Anthropic",
+        "plan": "Claude Pro",
+        "modelId": null,
+        "unit": "week",
+        "region": "global",
+        "status": "fails: 0 non-provisional report(s) in the current partition",
+        "currentPartition": 1,
+        "partitionsWithReports": [],
+        "value": null,
+        "monthlyUsd": null,
+        "multiple": null,
+        "range": null,
+        "reports": [
+          {
+            "id": "wokey-pro",
+            "observer": "wokey.ai",
+            "valueLower": 170.0,
+            "valueUpper": 170.0,
+            "partition": null,
+            "provisional": false,
+            "speedMode": null,
+            "excluded": "aggregator or derived figure (cross-check only)"
+          }
+        ]
+      },
+      {
+        "provider": "Anthropic",
+        "plan": "Claude Pro",
+        "modelId": "claude-opus-5-5",
+        "unit": "week",
+        "region": "global",
+        "status": "fails: 0 non-provisional report(s) in the current partition",
+        "currentPartition": 1,
+        "partitionsWithReports": [
+          0,
+          1
+        ],
+        "value": null,
+        "monthlyUsd": null,
+        "multiple": null,
+        "range": [
+          210.0,
+          300.0
+        ],
+        "reports": [
+          {
+            "id": "ntryourwaifu-pro",
+            "observer": "NTRYourWaifu",
+            "valueLower": 321.0,
+            "valueUpper": 321.0,
+            "partition": 0,
+            "provisional": false,
+            "speedMode": null,
+            "excluded": null
+          },
+          {
+            "id": "kanzakichiya-pro",
+            "observer": "kanzakichiya",
+            "valueLower": 302.0,
+            "valueUpper": 302.0,
+            "partition": 0,
+            "provisional": false,
+            "speedMode": null,
+            "excluded": null
+          },
+          {
+            "id": "ganpei777-pro",
+            "observer": "ganpei777",
+            "valueLower": 1266.0,
+            "valueUpper": 1266.0,
+            "partition": 0,
+            "provisional": false,
+            "speedMode": null,
+            "excluded": null
+          },
+          {
+            "id": "k45sle-pro",
+            "observer": "K45SLE",
+            "valueLower": 210.0,
+            "valueUpper": 300.0,
+            "partition": 1,
+            "provisional": true,
+            "speedMode": null,
+            "excluded": null
+          },
+          {
+            "id": "hakanavgin-pro",
+            "observer": "hakanavgin",
+            "valueLower": 261.0,
+            "valueUpper": 285.0,
+            "partition": null,
+            "provisional": false,
+            "speedMode": null,
+            "excluded": "mixed-model usage"
+          },
+          {
+            "id": "ok-cauliflower-pro",
+            "observer": "Ok-Cauliflower-7568",
+            "valueLower": 250.0,
+            "valueUpper": 316.0,
+            "partition": null,
+            "provisional": false,
+            "speedMode": null,
+            "excluded": "mixed-model usage"
+          },
+          {
+            "id": "issue47-pro",
+            "observer": "Fei2411 #47",
+            "valueLower": 112.0,
+            "valueUpper": 112.0,
+            "partition": null,
+            "provisional": false,
+            "speedMode": null,
+            "excluded": "lower bound: no meter fraction"
+          }
+        ]
+      },
+      {
+        "provider": "Google",
+        "plan": "Google AI Pro",
+        "modelId": "gemini-4-argon",
+        "unit": "week",
+        "region": "global",
+        "status": "fails: range 1.71× over the current partition",
+        "currentPartition": 0,
+        "partitionsWithReports": [
+          0
+        ],
+        "value": null,
+        "monthlyUsd": null,
+        "multiple": null,
+        "range": [
+          7.84,
+          13.4
+        ],
+        "reports": [
+          {
+            "id": "ansofteng-aipro",
+            "observer": "ansofteng",
+            "valueLower": 7.84,
+            "valueUpper": 9.04,
+            "partition": 0,
+            "provisional": true,
+            "speedMode": null,
+            "excluded": null
+          },
+          {
+            "id": "alpler-aipro",
+            "observer": "Muhammed_Alpler",
+            "valueLower": 8.47,
+            "valueUpper": 8.47,
+            "partition": 0,
+            "provisional": false,
+            "speedMode": null,
+            "excluded": null
+          },
+          {
+            "id": "faheem-aipro",
+            "observer": "Faheem_Anis1",
+            "valueLower": 11.4,
+            "valueUpper": 13.4,
+            "partition": 0,
+            "provisional": false,
+            "speedMode": null,
+            "excluded": null
+          }
+        ]
+      },
+      {
+        "provider": "Kimi",
+        "plan": "Kimi Allegretto (legacy, CN)",
+        "modelId": "kimi-k3-1-pro",
+        "unit": "week",
+        "region": "CN",
+        "status": "not a listed plan",
+        "currentPartition": 1,
+        "partitionsWithReports": [
+          1
+        ],
+        "value": null,
+        "monthlyUsd": null,
+        "multiple": null,
+        "range": [
+          48.6,
+          55.9
+        ],
+        "reports": [
+          {
+            "id": "astralyn-allegretto",
+            "observer": "Astralyn",
+            "valueLower": 55.9,
+            "valueUpper": 55.9,
+            "partition": 1,
+            "provisional": false,
+            "speedMode": null,
+            "excluded": null
+          },
+          {
+            "id": "moondrinker-allegretto",
+            "observer": "MoonDrinker",
+            "valueLower": 48.6,
+            "valueUpper": 48.6,
+            "partition": 1,
+            "provisional": false,
+            "speedMode": null,
+            "excluded": null
+          }
+        ]
+      },
+      {
+        "provider": "Kimi",
+        "plan": "Kimi Plus",
+        "modelId": "kimi-k3-1-pro",
+        "unit": "5h",
+        "region": "global",
+        "status": "fails: a 5-hour figure stays in its own unit (O80)",
+        "currentPartition": 1,
+        "partitionsWithReports": [],
+        "value": null,
+        "monthlyUsd": null,
+        "multiple": null,
+        "range": null,
+        "reports": [
+          {
+            "id": "waximabbax-plus",
+            "observer": "waximabbax",
+            "valueLower": 1.37,
+            "valueUpper": 1.37,
+            "partition": null,
+            "provisional": false,
+            "speedMode": null,
+            "excluded": "spans a partition split"
+          }
+        ]
+      },
+      {
+        "provider": "OpenAI",
+        "plan": "ChatGPT Plus",
+        "modelId": "gpt-6-astra",
+        "unit": "5h",
+        "region": "global",
+        "status": "fails: a 5-hour figure stays in its own unit (O80)",
+        "currentPartition": 4,
+        "partitionsWithReports": [],
+        "value": null,
+        "monthlyUsd": null,
+        "multiple": null,
+        "range": null,
+        "reports": [
+          {
+            "id": "crystal-plus",
+            "observer": "Crystal4276",
+            "valueLower": 2.5,
+            "valueUpper": 2.5,
+            "partition": null,
+            "provisional": false,
+            "speedMode": null,
+            "excluded": "spans a partition split"
+          }
+        ]
+      },
+      {
+        "provider": "OpenAI",
+        "plan": "ChatGPT Plus",
+        "modelId": "gpt-6-luna",
+        "unit": "5h",
+        "region": "global",
+        "status": "fails: a 5-hour figure stays in its own unit (O80)",
+        "currentPartition": 4,
+        "partitionsWithReports": [
+          0
+        ],
+        "value": null,
+        "monthlyUsd": null,
+        "multiple": null,
+        "range": null,
+        "reports": [
+          {
+            "id": "yoggypap-plus",
+            "observer": "yoggypap",
+            "valueLower": 6.5,
+            "valueUpper": 7.5,
+            "partition": 0,
+            "provisional": false,
+            "speedMode": null,
+            "excluded": null
+          }
+        ]
+      },
+      {
+        "provider": "OpenAI",
+        "plan": "ChatGPT Plus",
+        "modelId": "gpt-6.1-sol",
+        "unit": "5h",
+        "region": "global",
+        "status": "fails: a 5-hour figure stays in its own unit (O80)",
+        "currentPartition": 4,
+        "partitionsWithReports": [
+          0
+        ],
+        "value": null,
+        "monthlyUsd": null,
+        "multiple": null,
+        "range": null,
+        "reports": [
+          {
+            "id": "mehoney-plus",
+            "observer": "mehoney",
+            "valueLower": 8.3,
+            "valueUpper": 8.7,
+            "partition": 0,
+            "provisional": false,
+            "speedMode": null,
+            "excluded": null
+          },
+          {
+            "id": "oleg-plus",
+            "observer": "Oleg-125",
+            "valueLower": 3.6,
+            "valueUpper": 7.4,
+            "partition": null,
+            "provisional": false,
+            "speedMode": null,
+            "excluded": "spans a partition split"
+          }
+        ]
+      },
+      {
+        "provider": "OpenAI",
+        "plan": "ChatGPT Pro 100",
+        "modelId": "gpt-6-astra",
+        "unit": "week",
+        "region": "global",
+        "status": "fails: 1 non-provisional report(s) in the current partition",
+        "currentPartition": 4,
+        "partitionsWithReports": [
+          2,
+          4
+        ],
+        "value": null,
+        "monthlyUsd": null,
+        "multiple": null,
+        "range": [
+          318.0,
+          318.0
+        ],
+        "reports": [
+          {
+            "id": "sentrybottale-pro100",
+            "observer": "sentrybottale",
+            "valueLower": 330.0,
+            "valueUpper": 400.0,
+            "partition": 2,
+            "provisional": false,
+            "speedMode": null,
+            "excluded": null
+          },
+          {
+            "id": "mrak-pro100",
+            "observer": "mrak-",
+            "valueLower": 482.5,
+            "valueUpper": 482.5,
+            "partition": 2,
+            "provisional": false,
+            "speedMode": "fast",
+            "excluded": null
+          },
+          {
+            "id": "yiwenpang-pro100",
+            "observer": "YiwenPang",
+            "valueLower": 318.0,
+            "valueUpper": 318.0,
+            "partition": 4,
+            "provisional": false,
+            "speedMode": null,
+            "excluded": null
+          }
+        ]
+      },
+      {
+        "provider": "OpenAI",
+        "plan": "ChatGPT Pro 200 (grandfathered 20x)",
+        "modelId": "gpt-6.1-sol",
+        "unit": "week",
+        "region": "global",
+        "status": "fails: 0 non-provisional report(s) in the current partition",
+        "currentPartition": 4,
+        "partitionsWithReports": [
+          0,
+          3
+        ],
+        "value": null,
+        "monthlyUsd": null,
+        "multiple": null,
+        "range": null,
+        "reports": [
+          {
+            "id": "dhadaptive-pro200",
+            "observer": "DhAdaptive",
+            "valueLower": 1004.0,
+            "valueUpper": 1020.0,
+            "partition": 0,
+            "provisional": false,
+            "speedMode": "fast",
+            "excluded": null
+          },
+          {
+            "id": "sadiqmdasif-pro200",
+            "observer": "sadiqmdasif",
+            "valueLower": 105.0,
+            "valueUpper": 130.0,
+            "partition": 3,
+            "provisional": false,
+            "speedMode": null,
+            "excluded": null
+          },
+          {
+            "id": "janrysavy-pro200",
+            "observer": "janrysavy",
+            "valueLower": 323.0,
+            "valueUpper": 569.0,
+            "partition": null,
+            "provisional": false,
+            "speedMode": null,
+            "excluded": "mixed-model usage"
+          }
+        ]
+      },
+      {
+        "provider": "OpenAI",
+        "plan": "ChatGPT Pro 500",
+        "modelId": "gpt-6-astra",
+        "unit": "week",
+        "region": "global",
+        "status": "fails: 0 non-provisional report(s) in the current partition",
+        "currentPartition": 4,
+        "partitionsWithReports": [],
+        "value": null,
+        "monthlyUsd": null,
+        "multiple": null,
+        "range": null,
+        "reports": [
+          {
+            "id": "totorofly-pro500",
+            "observer": "totorofly",
+            "valueLower": 2550.0,
+            "valueUpper": 2550.0,
+            "partition": null,
+            "provisional": false,
+            "speedMode": "fast",
+            "excluded": "measured on a provider-acknowledged accounting-fault day"
+          }
+        ]
+      },
+      {
+        "provider": "OpenAI",
+        "plan": "ChatGPT Pro 500",
+        "modelId": "gpt-6.1-sol",
+        "unit": "week",
+        "region": "global",
+        "status": "fails: 0 non-provisional report(s) in the current partition",
+        "currentPartition": 4,
+        "partitionsWithReports": [],
+        "value": null,
+        "monthlyUsd": null,
+        "multiple": null,
+        "range": null,
+        "reports": [
+          {
+            "id": "dhadaptive-pro500",
+            "observer": "DhAdaptive",
+            "valueLower": 919.0,
+            "valueUpper": 964.0,
+            "partition": null,
+            "provisional": false,
+            "speedMode": "fast",
+            "excluded": "measured on a provider-acknowledged accounting-fault day"
+          }
+        ]
+      },
+      {
+        "provider": "Xiaomi",
+        "plan": "MiMo Token Plan Lite",
+        "modelId": "mimo-v2-6-pro",
+        "unit": "month",
+        "region": "global",
+        "status": "fails: 1 non-provisional report(s) in the current partition",
+        "currentPartition": 0,
+        "partitionsWithReports": [
+          0
+        ],
+        "value": null,
+        "monthlyUsd": null,
+        "multiple": null,
+        "range": [
+          4.6,
+          4.6
+        ],
+        "reports": [
+          {
+            "id": "applehuman-lite",
+            "observer": "AppleHuman8535",
+            "valueLower": 4.6,
+            "valueUpper": 4.6,
+            "partition": 0,
+            "provisional": false,
+            "speedMode": null,
+            "excluded": null
+          }
+        ]
+      },
+      {
+        "provider": "Xiaomi",
+        "plan": "MiMo Token Plan Max",
+        "modelId": "mimo-v2-6-pro",
+        "unit": "month",
+        "region": "global",
+        "status": "fails: 1 non-provisional report(s) in the current partition",
+        "currentPartition": 0,
+        "partitionsWithReports": [
+          0
+        ],
+        "value": null,
+        "monthlyUsd": null,
+        "multiple": null,
+        "range": [
+          80.0,
+          105.0
+        ],
+        "reports": [
+          {
+            "id": "thevoyant-max",
+            "observer": "TheVoyant",
+            "valueLower": 80.0,
+            "valueUpper": 105.0,
+            "partition": 0,
+            "provisional": false,
+            "speedMode": null,
+            "excluded": null
+          }
+        ]
+      }
+    ],
     "costInfluence": {
       "api": {
         "commonWorkload": {
@@ -29459,7 +30186,7 @@
         {
           "key": "planRoutes",
           "artifact": "data/plan_cost_routes.json",
-          "sha256": "94de571d89b412f67df067e2d85d386950df22bb93072a9b32988efb1f348f05",
+          "sha256": "8b4f9f959f7a7693b92fe9b71861a9afe4e967d8bb760c3439cda47297894f0f",
           "capturedAt": "2026-10-25",
           "extractor": "editorial Plan evidence registry"
         },
@@ -29492,6 +30219,13 @@
           "extractor": "research/2026-10-23-swe-benchmarks/build_swe_tracks.py from the verified coverage captures (O53-O55)"
         },
         {
+          "key": "planReports",
+          "artifact": "data/plan_reports.json",
+          "sha256": "996c3d029aac745a9838936422b95c027c15a7a7cc5ccc38924e6436cd4ec798",
+          "capturedAt": "2026-10-25",
+          "extractor": "editorial table of every O71 user report with the facts E270 needs; the build derives admission from it (O81)"
+        },
+        {
           "key": "aaPreviousCapture",
           "artifact": "data/aa/aa_previous_capture.json",
           "sha256": "89bef16d1be094feced8402bdac4d7e8981d86be303d5dbfda7368ce91fc0aed",
@@ -29520,7 +30254,7 @@
           "extractor": "valuerank.value_v3 freeze"
         }
       ],
-      "bundleHash": "0e5bbb572de7f78f400359334c635602dc613cfb883429ec75510178bb3178ce",
+      "bundleHash": "81e3536ec92a0e53a334a9aa6868503b8e99f197a6ce03a9f1cf12766552cb69",
       "rebuild": "every published output is rebuilt from these artifacts at the pinned publication clock (npm run verify:docs), never from live pages"
     },
     "track": {
@@ -35713,6 +36447,733 @@
             "file": "research/2026-10-25-board-reread/cognition/data.json",
             "lastModified": "2026-10-23T21:44:27Z"
           }
+        }
+      ],
+      "planAllowanceCells": [
+        {
+          "provider": "Anthropic",
+          "plan": "Claude Max 20x",
+          "modelId": null,
+          "unit": "week",
+          "region": "global",
+          "status": "fails: 0 non-provisional report(s) in the current partition",
+          "currentPartition": 1,
+          "partitionsWithReports": [],
+          "value": null,
+          "monthlyUsd": null,
+          "multiple": null,
+          "range": null,
+          "reports": [
+            {
+              "id": "randomblock1-max20x",
+              "observer": "Randomblock1",
+              "valueLower": 1395.0,
+              "valueUpper": 1395.0,
+              "partition": null,
+              "provisional": false,
+              "speedMode": null,
+              "excluded": "model not stated"
+            }
+          ]
+        },
+        {
+          "provider": "Anthropic",
+          "plan": "Claude Max 20x",
+          "modelId": "claude-opus-5-5",
+          "unit": "week",
+          "region": "global",
+          "status": "fails: 1 non-provisional report(s) in the current partition",
+          "currentPartition": 1,
+          "partitionsWithReports": [
+            0,
+            1
+          ],
+          "value": null,
+          "monthlyUsd": null,
+          "multiple": null,
+          "range": [
+            182.0,
+            212.0
+          ],
+          "reports": [
+            {
+              "id": "kanttz-max20x",
+              "observer": "Kanttz",
+              "valueLower": 2578.0,
+              "valueUpper": 2920.0,
+              "partition": 0,
+              "provisional": false,
+              "speedMode": null,
+              "excluded": null
+            },
+            {
+              "id": "theo-max20x",
+              "observer": "Theo (pingdotgg)",
+              "valueLower": 2446.0,
+              "valueUpper": 2600.0,
+              "partition": 0,
+              "provisional": false,
+              "speedMode": null,
+              "excluded": null
+            },
+            {
+              "id": "last-lab-max20x",
+              "observer": "Last_Lab_3627",
+              "valueLower": 2045.0,
+              "valueUpper": 2045.0,
+              "partition": 0,
+              "provisional": false,
+              "speedMode": null,
+              "excluded": null
+            },
+            {
+              "id": "delicious-shower-max20x",
+              "observer": "Delicious-Shower8401",
+              "valueLower": 2175.0,
+              "valueUpper": 2175.0,
+              "partition": 0,
+              "provisional": false,
+              "speedMode": null,
+              "excluded": null
+            },
+            {
+              "id": "nicoaica-max20x-before",
+              "observer": "NicoAica",
+              "valueLower": 1294.0,
+              "valueUpper": 1681.0,
+              "partition": 0,
+              "provisional": false,
+              "speedMode": null,
+              "excluded": null
+            },
+            {
+              "id": "nicoaica-max20x-after",
+              "observer": "NicoAica",
+              "valueLower": 182.0,
+              "valueUpper": 212.0,
+              "partition": 1,
+              "provisional": false,
+              "speedMode": null,
+              "excluded": null
+            },
+            {
+              "id": "leaflavaplanetmoss-max20x",
+              "observer": "leaflavaplanetmoss",
+              "valueLower": 1140.0,
+              "valueUpper": 1140.0,
+              "partition": null,
+              "provisional": false,
+              "speedMode": null,
+              "excluded": "challenged: does not reproduce from its own figures"
+            }
+          ]
+        },
+        {
+          "provider": "Anthropic",
+          "plan": "Claude Max 5x",
+          "modelId": null,
+          "unit": "week",
+          "region": "global",
+          "status": "fails: 0 non-provisional report(s) in the current partition",
+          "currentPartition": 1,
+          "partitionsWithReports": [],
+          "value": null,
+          "monthlyUsd": null,
+          "multiple": null,
+          "range": null,
+          "reports": [
+            {
+              "id": "fancy-leave-max5x",
+              "observer": "Fancy_Leave7798",
+              "valueLower": 1538.0,
+              "valueUpper": 1538.0,
+              "partition": null,
+              "provisional": false,
+              "speedMode": null,
+              "excluded": "model not stated"
+            }
+          ]
+        },
+        {
+          "provider": "Anthropic",
+          "plan": "Claude Max 5x",
+          "modelId": "claude-opus-5-5",
+          "unit": "week",
+          "region": "global",
+          "status": "fails: 0 non-provisional report(s) in the current partition",
+          "currentPartition": 1,
+          "partitionsWithReports": [
+            0
+          ],
+          "value": null,
+          "monthlyUsd": null,
+          "multiple": null,
+          "range": null,
+          "reports": [
+            {
+              "id": "muscgab-max5x",
+              "observer": "muscgab",
+              "valueLower": 750.0,
+              "valueUpper": 830.0,
+              "partition": 0,
+              "provisional": false,
+              "speedMode": null,
+              "excluded": null
+            },
+            {
+              "id": "usage-screenshot-max5x",
+              "observer": "unlabelled /usage screenshot (week of 2026-09-29)",
+              "valueLower": 1920.0,
+              "valueUpper": 1920.0,
+              "partition": 0,
+              "provisional": false,
+              "speedMode": null,
+              "excluded": null
+            }
+          ]
+        },
+        {
+          "provider": "Anthropic",
+          "plan": "Claude Pro",
+          "modelId": null,
+          "unit": "week",
+          "region": "global",
+          "status": "fails: 0 non-provisional report(s) in the current partition",
+          "currentPartition": 1,
+          "partitionsWithReports": [],
+          "value": null,
+          "monthlyUsd": null,
+          "multiple": null,
+          "range": null,
+          "reports": [
+            {
+              "id": "wokey-pro",
+              "observer": "wokey.ai",
+              "valueLower": 170.0,
+              "valueUpper": 170.0,
+              "partition": null,
+              "provisional": false,
+              "speedMode": null,
+              "excluded": "aggregator or derived figure (cross-check only)"
+            }
+          ]
+        },
+        {
+          "provider": "Anthropic",
+          "plan": "Claude Pro",
+          "modelId": "claude-opus-5-5",
+          "unit": "week",
+          "region": "global",
+          "status": "fails: 0 non-provisional report(s) in the current partition",
+          "currentPartition": 1,
+          "partitionsWithReports": [
+            0,
+            1
+          ],
+          "value": null,
+          "monthlyUsd": null,
+          "multiple": null,
+          "range": [
+            210.0,
+            300.0
+          ],
+          "reports": [
+            {
+              "id": "ntryourwaifu-pro",
+              "observer": "NTRYourWaifu",
+              "valueLower": 321.0,
+              "valueUpper": 321.0,
+              "partition": 0,
+              "provisional": false,
+              "speedMode": null,
+              "excluded": null
+            },
+            {
+              "id": "kanzakichiya-pro",
+              "observer": "kanzakichiya",
+              "valueLower": 302.0,
+              "valueUpper": 302.0,
+              "partition": 0,
+              "provisional": false,
+              "speedMode": null,
+              "excluded": null
+            },
+            {
+              "id": "ganpei777-pro",
+              "observer": "ganpei777",
+              "valueLower": 1266.0,
+              "valueUpper": 1266.0,
+              "partition": 0,
+              "provisional": false,
+              "speedMode": null,
+              "excluded": null
+            },
+            {
+              "id": "k45sle-pro",
+              "observer": "K45SLE",
+              "valueLower": 210.0,
+              "valueUpper": 300.0,
+              "partition": 1,
+              "provisional": true,
+              "speedMode": null,
+              "excluded": null
+            },
+            {
+              "id": "hakanavgin-pro",
+              "observer": "hakanavgin",
+              "valueLower": 261.0,
+              "valueUpper": 285.0,
+              "partition": null,
+              "provisional": false,
+              "speedMode": null,
+              "excluded": "mixed-model usage"
+            },
+            {
+              "id": "ok-cauliflower-pro",
+              "observer": "Ok-Cauliflower-7568",
+              "valueLower": 250.0,
+              "valueUpper": 316.0,
+              "partition": null,
+              "provisional": false,
+              "speedMode": null,
+              "excluded": "mixed-model usage"
+            },
+            {
+              "id": "issue47-pro",
+              "observer": "Fei2411 #47",
+              "valueLower": 112.0,
+              "valueUpper": 112.0,
+              "partition": null,
+              "provisional": false,
+              "speedMode": null,
+              "excluded": "lower bound: no meter fraction"
+            }
+          ]
+        },
+        {
+          "provider": "Google",
+          "plan": "Google AI Pro",
+          "modelId": "gemini-4-argon",
+          "unit": "week",
+          "region": "global",
+          "status": "fails: range 1.71× over the current partition",
+          "currentPartition": 0,
+          "partitionsWithReports": [
+            0
+          ],
+          "value": null,
+          "monthlyUsd": null,
+          "multiple": null,
+          "range": [
+            7.84,
+            13.4
+          ],
+          "reports": [
+            {
+              "id": "ansofteng-aipro",
+              "observer": "ansofteng",
+              "valueLower": 7.84,
+              "valueUpper": 9.04,
+              "partition": 0,
+              "provisional": true,
+              "speedMode": null,
+              "excluded": null
+            },
+            {
+              "id": "alpler-aipro",
+              "observer": "Muhammed_Alpler",
+              "valueLower": 8.47,
+              "valueUpper": 8.47,
+              "partition": 0,
+              "provisional": false,
+              "speedMode": null,
+              "excluded": null
+            },
+            {
+              "id": "faheem-aipro",
+              "observer": "Faheem_Anis1",
+              "valueLower": 11.4,
+              "valueUpper": 13.4,
+              "partition": 0,
+              "provisional": false,
+              "speedMode": null,
+              "excluded": null
+            }
+          ]
+        },
+        {
+          "provider": "Kimi",
+          "plan": "Kimi Allegretto (legacy, CN)",
+          "modelId": "kimi-k3-1-pro",
+          "unit": "week",
+          "region": "CN",
+          "status": "not a listed plan",
+          "currentPartition": 1,
+          "partitionsWithReports": [
+            1
+          ],
+          "value": null,
+          "monthlyUsd": null,
+          "multiple": null,
+          "range": [
+            48.6,
+            55.9
+          ],
+          "reports": [
+            {
+              "id": "astralyn-allegretto",
+              "observer": "Astralyn",
+              "valueLower": 55.9,
+              "valueUpper": 55.9,
+              "partition": 1,
+              "provisional": false,
+              "speedMode": null,
+              "excluded": null
+            },
+            {
+              "id": "moondrinker-allegretto",
+              "observer": "MoonDrinker",
+              "valueLower": 48.6,
+              "valueUpper": 48.6,
+              "partition": 1,
+              "provisional": false,
+              "speedMode": null,
+              "excluded": null
+            }
+          ]
+        },
+        {
+          "provider": "Kimi",
+          "plan": "Kimi Plus",
+          "modelId": "kimi-k3-1-pro",
+          "unit": "5h",
+          "region": "global",
+          "status": "fails: a 5-hour figure stays in its own unit (O80)",
+          "currentPartition": 1,
+          "partitionsWithReports": [],
+          "value": null,
+          "monthlyUsd": null,
+          "multiple": null,
+          "range": null,
+          "reports": [
+            {
+              "id": "waximabbax-plus",
+              "observer": "waximabbax",
+              "valueLower": 1.37,
+              "valueUpper": 1.37,
+              "partition": null,
+              "provisional": false,
+              "speedMode": null,
+              "excluded": "spans a partition split"
+            }
+          ]
+        },
+        {
+          "provider": "OpenAI",
+          "plan": "ChatGPT Plus",
+          "modelId": "gpt-6-astra",
+          "unit": "5h",
+          "region": "global",
+          "status": "fails: a 5-hour figure stays in its own unit (O80)",
+          "currentPartition": 4,
+          "partitionsWithReports": [],
+          "value": null,
+          "monthlyUsd": null,
+          "multiple": null,
+          "range": null,
+          "reports": [
+            {
+              "id": "crystal-plus",
+              "observer": "Crystal4276",
+              "valueLower": 2.5,
+              "valueUpper": 2.5,
+              "partition": null,
+              "provisional": false,
+              "speedMode": null,
+              "excluded": "spans a partition split"
+            }
+          ]
+        },
+        {
+          "provider": "OpenAI",
+          "plan": "ChatGPT Plus",
+          "modelId": "gpt-6-luna",
+          "unit": "5h",
+          "region": "global",
+          "status": "fails: a 5-hour figure stays in its own unit (O80)",
+          "currentPartition": 4,
+          "partitionsWithReports": [
+            0
+          ],
+          "value": null,
+          "monthlyUsd": null,
+          "multiple": null,
+          "range": null,
+          "reports": [
+            {
+              "id": "yoggypap-plus",
+              "observer": "yoggypap",
+              "valueLower": 6.5,
+              "valueUpper": 7.5,
+              "partition": 0,
+              "provisional": false,
+              "speedMode": null,
+              "excluded": null
+            }
+          ]
+        },
+        {
+          "provider": "OpenAI",
+          "plan": "ChatGPT Plus",
+          "modelId": "gpt-6.1-sol",
+          "unit": "5h",
+          "region": "global",
+          "status": "fails: a 5-hour figure stays in its own unit (O80)",
+          "currentPartition": 4,
+          "partitionsWithReports": [
+            0
+          ],
+          "value": null,
+          "monthlyUsd": null,
+          "multiple": null,
+          "range": null,
+          "reports": [
+            {
+              "id": "mehoney-plus",
+              "observer": "mehoney",
+              "valueLower": 8.3,
+              "valueUpper": 8.7,
+              "partition": 0,
+              "provisional": false,
+              "speedMode": null,
+              "excluded": null
+            },
+            {
+              "id": "oleg-plus",
+              "observer": "Oleg-125",
+              "valueLower": 3.6,
+              "valueUpper": 7.4,
+              "partition": null,
+              "provisional": false,
+              "speedMode": null,
+              "excluded": "spans a partition split"
+            }
+          ]
+        },
+        {
+          "provider": "OpenAI",
+          "plan": "ChatGPT Pro 100",
+          "modelId": "gpt-6-astra",
+          "unit": "week",
+          "region": "global",
+          "status": "fails: 1 non-provisional report(s) in the current partition",
+          "currentPartition": 4,
+          "partitionsWithReports": [
+            2,
+            4
+          ],
+          "value": null,
+          "monthlyUsd": null,
+          "multiple": null,
+          "range": [
+            318.0,
+            318.0
+          ],
+          "reports": [
+            {
+              "id": "sentrybottale-pro100",
+              "observer": "sentrybottale",
+              "valueLower": 330.0,
+              "valueUpper": 400.0,
+              "partition": 2,
+              "provisional": false,
+              "speedMode": null,
+              "excluded": null
+            },
+            {
+              "id": "mrak-pro100",
+              "observer": "mrak-",
+              "valueLower": 482.5,
+              "valueUpper": 482.5,
+              "partition": 2,
+              "provisional": false,
+              "speedMode": "fast",
+              "excluded": null
+            },
+            {
+              "id": "yiwenpang-pro100",
+              "observer": "YiwenPang",
+              "valueLower": 318.0,
+              "valueUpper": 318.0,
+              "partition": 4,
+              "provisional": false,
+              "speedMode": null,
+              "excluded": null
+            }
+          ]
+        },
+        {
+          "provider": "OpenAI",
+          "plan": "ChatGPT Pro 200 (grandfathered 20x)",
+          "modelId": "gpt-6.1-sol",
+          "unit": "week",
+          "region": "global",
+          "status": "fails: 0 non-provisional report(s) in the current partition",
+          "currentPartition": 4,
+          "partitionsWithReports": [
+            0,
+            3
+          ],
+          "value": null,
+          "monthlyUsd": null,
+          "multiple": null,
+          "range": null,
+          "reports": [
+            {
+              "id": "dhadaptive-pro200",
+              "observer": "DhAdaptive",
+              "valueLower": 1004.0,
+              "valueUpper": 1020.0,
+              "partition": 0,
+              "provisional": false,
+              "speedMode": "fast",
+              "excluded": null
+            },
+            {
+              "id": "sadiqmdasif-pro200",
+              "observer": "sadiqmdasif",
+              "valueLower": 105.0,
+              "valueUpper": 130.0,
+              "partition": 3,
+              "provisional": false,
+              "speedMode": null,
+              "excluded": null
+            },
+            {
+              "id": "janrysavy-pro200",
+              "observer": "janrysavy",
+              "valueLower": 323.0,
+              "valueUpper": 569.0,
+              "partition": null,
+              "provisional": false,
+              "speedMode": null,
+              "excluded": "mixed-model usage"
+            }
+          ]
+        },
+        {
+          "provider": "OpenAI",
+          "plan": "ChatGPT Pro 500",
+          "modelId": "gpt-6-astra",
+          "unit": "week",
+          "region": "global",
+          "status": "fails: 0 non-provisional report(s) in the current partition",
+          "currentPartition": 4,
+          "partitionsWithReports": [],
+          "value": null,
+          "monthlyUsd": null,
+          "multiple": null,
+          "range": null,
+          "reports": [
+            {
+              "id": "totorofly-pro500",
+              "observer": "totorofly",
+              "valueLower": 2550.0,
+              "valueUpper": 2550.0,
+              "partition": null,
+              "provisional": false,
+              "speedMode": "fast",
+              "excluded": "measured on a provider-acknowledged accounting-fault day"
+            }
+          ]
+        },
+        {
+          "provider": "OpenAI",
+          "plan": "ChatGPT Pro 500",
+          "modelId": "gpt-6.1-sol",
+          "unit": "week",
+          "region": "global",
+          "status": "fails: 0 non-provisional report(s) in the current partition",
+          "currentPartition": 4,
+          "partitionsWithReports": [],
+          "value": null,
+          "monthlyUsd": null,
+          "multiple": null,
+          "range": null,
+          "reports": [
+            {
+              "id": "dhadaptive-pro500",
+              "observer": "DhAdaptive",
+              "valueLower": 919.0,
+              "valueUpper": 964.0,
+              "partition": null,
+              "provisional": false,
+              "speedMode": "fast",
+              "excluded": "measured on a provider-acknowledged accounting-fault day"
+            }
+          ]
+        },
+        {
+          "provider": "Xiaomi",
+          "plan": "MiMo Token Plan Lite",
+          "modelId": "mimo-v2-6-pro",
+          "unit": "month",
+          "region": "global",
+          "status": "fails: 1 non-provisional report(s) in the current partition",
+          "currentPartition": 0,
+          "partitionsWithReports": [
+            0
+          ],
+          "value": null,
+          "monthlyUsd": null,
+          "multiple": null,
+          "range": [
+            4.6,
+            4.6
+          ],
+          "reports": [
+            {
+              "id": "applehuman-lite",
+              "observer": "AppleHuman8535",
+              "valueLower": 4.6,
+              "valueUpper": 4.6,
+              "partition": 0,
+              "provisional": false,
+              "speedMode": null,
+              "excluded": null
+            }
+          ]
+        },
+        {
+          "provider": "Xiaomi",
+          "plan": "MiMo Token Plan Max",
+          "modelId": "mimo-v2-6-pro",
+          "unit": "month",
+          "region": "global",
+          "status": "fails: 1 non-provisional report(s) in the current partition",
+          "currentPartition": 0,
+          "partitionsWithReports": [
+            0
+          ],
+          "value": null,
+          "monthlyUsd": null,
+          "multiple": null,
+          "range": [
+            80.0,
+            105.0
+          ],
+          "reports": [
+            {
+              "id": "thevoyant-max",
+              "observer": "TheVoyant",
+              "valueLower": 80.0,
+              "valueUpper": 105.0,
+              "partition": 0,
+              "provisional": false,
+              "speedMode": null,
+              "excluded": null
+            }
+          ]
         }
       ],
       "costInfluence": {
@@ -56532,7 +57993,7 @@
           {
             "key": "planRoutes",
             "artifact": "data/plan_cost_routes.json",
-            "sha256": "94de571d89b412f67df067e2d85d386950df22bb93072a9b32988efb1f348f05",
+            "sha256": "8b4f9f959f7a7693b92fe9b71861a9afe4e967d8bb760c3439cda47297894f0f",
             "capturedAt": "2026-10-25",
             "extractor": "editorial Plan evidence registry"
           },
@@ -56565,6 +58026,13 @@
             "extractor": "research/2026-10-23-swe-benchmarks/build_swe_tracks.py from the verified coverage captures (O53-O55)"
           },
           {
+            "key": "planReports",
+            "artifact": "data/plan_reports.json",
+            "sha256": "996c3d029aac745a9838936422b95c027c15a7a7cc5ccc38924e6436cd4ec798",
+            "capturedAt": "2026-10-25",
+            "extractor": "editorial table of every O71 user report with the facts E270 needs; the build derives admission from it (O81)"
+          },
+          {
             "key": "aaPreviousCapture",
             "artifact": "data/aa/aa_previous_capture.json",
             "sha256": "89bef16d1be094feced8402bdac4d7e8981d86be303d5dbfda7368ce91fc0aed",
@@ -56593,7 +58061,7 @@
             "extractor": "valuerank.value_v3 freeze"
           }
         ],
-        "bundleHash": "0e5bbb572de7f78f400359334c635602dc613cfb883429ec75510178bb3178ce",
+        "bundleHash": "81e3536ec92a0e53a334a9aa6868503b8e99f197a6ce03a9f1cf12766552cb69",
         "rebuild": "every published output is rebuilt from these artifacts at the pinned publication clock (npm run verify:docs), never from live pages"
       },
       "track": {

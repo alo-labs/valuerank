@@ -31,7 +31,7 @@ CLASSES = {
     # O64: the reviewed manifest describes the agent capture, so the two change together.
     "tokenUse": {"fields": TOKEN_FIELDS, "documents": ("codingAgents", "codingAgentsManifest", "costCharts")},
     "benchmarkRecord": {"fields": "*", "documents": ("bugHunt", "bugHuntScoreboard", "tb4", "leafEvidence", "cognitionFrontierCode", "sweTracks", "sourceRereads")},
-    "planEvidence": {"fields": (), "documents": ("planRoutes",)},
+    "planEvidence": {"fields": (), "documents": ("planRoutes", "planReports")},
     # I60: the replaced capture's digest feeds only the GDPval movement diagnostic, so it moves with the snapshot's cohort.
     "cohort": {"fields": (), "documents": ("configurationMap", "frontierCapture", "roster", "aaPreviousCapture")},
 }

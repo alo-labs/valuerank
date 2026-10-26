@@ -37,6 +37,7 @@ from valuerank import cost_diagnostics
 from valuerank import diagnostics
 from valuerank import exact_match
 from valuerank import intervals
+from valuerank import plan_admission
 from valuerank import plan_routes
 from valuerank import quality as q
 from valuerank import scenarios
@@ -803,6 +804,9 @@ def assemble(configurations: list[dict], documents: dict, *, release_day: date, 
     if searched and searched != max(all_provider, default=None):
         raise ValueError(f"the search cutoff {searched} is not the date of the latest all-provider search in the search log (E218)")
     check_o71_search(policy, cohort_providers(configurations))
+    # O81: the build decides every O71 cell's admission from the report table, and refuses an unsupported report route.
+    allowance_cells = plan_admission.evaluate(documents.get("planReports") or {"reports": []}, policy.get("reportEligibilityProfile") or {}, release_day)
+    plan_admission.check_routes(documents["planRoutes"]["routes"], allowance_cells, {item["id"] for item in configurations}, plan_routes.REPORT_KINDS)
     # I51 L7: an O46 ceiling is recomputed from its recorded credits, rate and fee, so the stored multiple cannot drift.
     for route in documents["planRoutes"]["routes"]:
         if route.get("evidenceClass") == "provider_quota_ceiling":
@@ -913,6 +917,7 @@ def assemble(configurations: list[dict], documents: dict, *, release_day: date, 
         "mainWorkload": main, "releaseDay": release_day.isoformat(), "tb4Rows": documents["tb4"]["rows"], "incomplete": incomplete, "listed": listed,
         "cognition": documents.get("cognitionFrontierCode") or {"v1_1": {"data": {}}},
         "sourceClocks": clocks,
+        "planAllowanceCells": allowance_cells,
         "gdpvalPrevious": documents.get("aaPreviousCapture"),
         "pages": documents["snapshot"]["pages"],
     }
@@ -2047,6 +2052,7 @@ def score(assembled: dict, frozen: dict) -> dict:
         "sourceIntervals": SOURCE_INTERVALS,
         "sourceDates": SOURCE_DATES,
         "sourceClocks": assembled.get("sourceClocks", []),
+        "planAllowanceCells": assembled.get("planAllowanceCells", []),
         "costInfluence": influence,
         "gates": {"clip": gates, "hold": hold, "listedBeyondAnchors": listed_beyond_anchors(assembled.get("listed", []), frozen),
                   "population": "ranked rows only; listed rows beyond the anchors are disclosed and never hold a release (O58)"},
@@ -3050,6 +3056,7 @@ EVIDENCE_FILES = {
     "leafEvidence": ("leaf_evidence.json", "editorial supplementary leaf evidence and the exhaustive-search log (O36)"),
     "cognitionFrontierCode": ("cognition_frontiercode.json", "Cognition's FrontierCode leaderboard data (https://cognition.com/data/frontiercode-leaderboard/data.json), captured unchanged (O37)"),
     "sweTracks": ("swe_tracks.json", "research/2026-10-23-swe-benchmarks/build_swe_tracks.py from the verified coverage captures (O53-O55)"),
+    "planReports": ("plan_reports.json", "editorial table of every O71 user report with the facts E270 needs; the build derives admission from it (O81)"),
     "aaPreviousCapture": ("aa/aa_previous_capture.json", "valuerank.capture_aa: digest of the model-page capture this one replaced (I60)"),
     "sourceRereads": ("source_rereads.json", "editorial record of the O68 re-reads, each 'unchanged' result verified against the re-read file"),
 }
@@ -3066,6 +3073,7 @@ SOURCE_INSTANTS = {
     "roster": lambda document, documents: (documents.get("frontierCapture") or {}).get("captured_at"),
     "cognitionFrontierCode": lambda document, documents: ((documents.get("leafEvidence") or {}).get("cognitionCapture") or {}).get("capturedOn"),
     "sourceRereads": lambda document, documents: max((item["reReadAt"] for item in document.get("rereads", [])), default=document.get("recordedOn")),
+    "planReports": lambda document, documents: max((report["windowEnd"][:10] for report in document.get("reports", [])), default=document.get("recordedOn")),
     "planRoutes": lambda document, documents: max((entry["searchedOn"] for entry in (document.get("evidencePolicy") or {}).get("searchLog") or []),
                                                   default=document.get("asOf")),
 }

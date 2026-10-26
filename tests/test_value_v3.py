@@ -642,6 +642,7 @@ def write_world(root: Path) -> Path:
         "bug_hunt_scoreboard.json": {"capturedAt": "2026-10-21T06:30:00Z", "sourceUpdated": "2026-10-17", "rows": [{"model": "A (max effort)", "fixedOf105": 10.0}]},
         "aa/aa_previous_capture.json": {"capturedAt": "2026-10-12T00:00:00Z", "sha256": "0" * 64, "pages": []},
         "source_rereads.json": {"recordedOn": "2026-10-19", "rereads": []},
+        "plan_reports.json": {"recordedOn": "2026-10-19", "reports": []},
         "scores.json": {
             "models": [{"id": item["id"], "name": item["name"], "aaVariant": item["effort"], "aaSlug": item["aaSlug"], "rankingEligible": True} for item in CONFIGURATIONS]
             + [{"id": "out", "name": "Out", "aaSlug": "out", "rankingEligible": False}],
