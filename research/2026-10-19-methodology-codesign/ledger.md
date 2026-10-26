@@ -1615,3 +1615,20 @@ Asked how O71's outcome applies, the owner chose "Keep authorised routes": the S
 - L8 (adopted): the stale "14 days in practice" sentence, the unproduced registry fields and the single-ranking z are corrected.
 - Owner questions Q1–Q3 (asked; O73–O75).
 - Round status (O56): not clean (one Medium). Draft r121.
+
+## Owner decisions O76–O78 (2026-10-26), asked on I62's questions
+- O76 (speed modes): a user report measured in a provider speed mode is converted to standard-equivalent at the provider's published multiplier (OpenAI Fast 2.5×, Ultrafast 8×) and flagged; an owner exception to the rule that provider figures never supply a numerator.
+- O77 (announcements): a provider's own announcement of a change to subscription usage metering triggers E18 change detection like a documentation change. OpenAI's announcements from 2026-10-11 (Day 7 on X) flag the SemiAnalysis GPT routes and their transfers as possibly superseded from that date.
+- O78 (after a change): O73's precedence holds only while the controlled measurement is not flagged by a later detected change; a concordant in-window report pair for the same model and tier dated after that change outranks the flagged controlled route (implemented in the comparator: `plan_routes.post_change_ranks`).
+
+## Internal review I62 (Claude Sonnet 5.5, effort xhigh, on r121) — adopted, modified or rejected
+- L1 (adopted): E139's no-saturation rule and E270's lower-bound rule are reconciled in the text (a meter-fraction report counts without exhausting its window; a figure with no meter fraction is a lower bound).
+- L2 (adopted): E270 now states that an observer's values are one report with their range, that a report on another region's or currency's tier counts only there, what "provisional" means (listed and in the range test, never one of the two admitting reports), and the partition-split criterion (a change E18 detected or a provider documented, split at its date); line 57 states that a meter fraction measures its own window's allowance and converts by the window count, never by extrapolating usage.
+- L3 (asked; O76).
+- L4 (adopted, data changed): change detection is judged per plan; Claude Max 5x and Max 20x are flagged from 2026-10-17, Claude Pro is not (no report concerns Pro); the support-bot denial and SemiAnalysis's 2026-10-22 A/B notice are recorded.
+- L5 (asked; O77, data changed): the GPT routes are flagged from 2026-10-11.
+- L6 (adopted, engine and data changed): the providers an O71 search must cover are derived from the cohort's developers; each stage records where its queries are listed and the sources reached and unreachable.
+- L7 (adopted, engine changed): the active-rules manifest adds the Plan evidence lifecycle and change detection, the valuation-basis gate, and the source-clock and freshness gates.
+- L8 (adopted): Output 1 names the API-fallback plan rows with generated counts.
+- Q3 (asked; O78, comparator changed with fixtures).
+- Round status (O56): clean (no Medium or higher), the first clean round at Sonnet xhigh. Draft r122.

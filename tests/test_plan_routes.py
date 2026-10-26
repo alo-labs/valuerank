@@ -556,3 +556,24 @@ def test_change_flagged_needs_a_detected_change_and_a_superseded_stage():
     assert pr.change_flagged({"route": route, "expiry": "possibly-superseded"}) and pr.change_flagged({"route": route, "expiry": "expired"})
     assert not pr.change_flagged({"route": {"id": "r"}, "expiry": "possibly-superseded"})
     assert not pr.change_flagged({"route": route, "expiry": "fresh"}) and not pr.change_flagged(None)
+
+
+def test_a_report_pair_after_a_detected_change_outranks_the_flagged_controlled_route():
+    """O73, O78: a controlled measurement keeps precedence unless a detected change flags it and a report pair dated after
+    the change exists; then the report pair wins."""
+
+    controlled = candidate("controlled", 58.9, "controlled", expiry="possibly-superseded")
+    controlled["route"].update(changeDetectedOn="2026-10-17", sourcePublicationDate="2026-10-06")
+    after = candidate("reports-after", 50.0, "reports")
+    after["route"]["sourcePublicationDate"] = "2026-10-20"
+    before = candidate("reports-before", 50.0, "reports")
+    before["route"]["sourcePublicationDate"] = "2026-10-15"
+    assert pr.select_route([controlled, after])["route"]["id"] == "reports-after"
+    selection = pr.route_selection([controlled, after])
+    assert selection["tuples"]["controlled"][1] == pr.POST_CHANGE_SUPERSEDED and selection["tuples"]["reports-after"][1] == pr.GRADE["reports"]
+    # A pair dated before the change, an unflagged controlled route, or no report pair: O73 holds.
+    assert pr.select_route([controlled, before])["route"]["id"] == "controlled"
+    unflagged = {**controlled, "expiry": "fresh"}
+    assert pr.select_route([unflagged, after])["route"]["id"] == "controlled"
+    assert pr.select_route([controlled, candidate("assumption", 60.0, "assumption")])["route"]["id"] == "controlled"
+    assert "postChangeSuperseded" not in controlled  # the input candidates are not mutated

@@ -198,6 +198,9 @@ Diagnostics are published beside the ranking and never change a score: Terminal-
 | partial component flag (E37) | vacuous | AA declined- or missing-task markers, or an Index reconstruction that misses AA's total (E209) |
 | route dominance filter (E88) | vacuous | certifiably dearer routes set aside |
 | Plan exploratory label (E61) | fired | fewer than half of Plan rows have an identified M_W |
+| Plan evidence lifecycle and change detection (E18, E151, E269, O77) | fired | rows whose selected route is possibly superseded or expired: gpt-6-astra, gpt-6-luna, gpt-6.1-sol |
+| valuation-basis gate (E170) | passed | every ranked row is compatible as captured or after evidenced revaluation |
+| source clocks and evidence freshness (O59, O60, O65, E211, E216, E217, E218) | passed | every capture is within its age gate and none after the cutoff unless its source predates the cutoff's day; the build stops otherwise |
 | score swing gate (E177) | vacuous | first v3 release: no previous v3 release to compare |
 | anchor migration (E184) | vacuous | no main-workload migration deferred |
 | configuration map coverage | passed | every cohort row has a configuration-map entry |

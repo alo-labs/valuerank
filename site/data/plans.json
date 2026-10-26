@@ -57,19 +57,28 @@
             "stage": "plain web search",
             "method": "seven provider agents (WebSearch, WebFetch, curl, Hacker News Algolia, Reddit mirrors)",
             "record": "research/2026-10-25-plan-allowances/stage1-*.md",
-            "outcome": "no model × tier passes O11 (stage1-assessment.md)"
+            "outcome": "no model × tier passes O11 (stage1-assessment.md)",
+            "queries": "one agent per provider; the queries are listed in each stage1-*.md",
+            "reached": "web search; Hacker News (Algolia); Reddit mirrors (pullpush, arctic-shift, RSS); GitHub issue pages; Google AI and OpenAI forums; LINUX DO topic JSON; V2EX; Weibo",
+            "unreachable": "reddit.com directly; X; GitHub search APIs; linux.do search; Zhihu"
           },
           {
             "stage": "Claude's Deep Research",
             "method": "anthropic-skills deep-research: five researchers and a report writer",
             "record": "research/2026-10-25-plan-allowances/research_notes/ and reports/",
-            "outcome": "no model × tier passes O11"
+            "outcome": "no model × tier passes O11",
+            "queries": "five researchers; the queries are listed in each research note",
+            "reached": "as stage 1, plus the locdd.com LINUX DO mirror, Bluesky and Qiita",
+            "unreachable": "reddit.com directly; X; GitHub search APIs; YouTube video pages"
           },
           {
             "stage": "Silver Bullet's Deep Research",
             "method": "silver-deep-research, deep mode, all nine phases and validations; run degraded: no search-cli (host search and fetch instead) and no helper agents (single retriever)",
             "record": "research/2026-10-25-plan-allowances-sb-deep-research/",
-            "outcome": "no model × tier passes O11"
+            "outcome": "no model × tier passes O11",
+            "queries": "listed in research-plan.md; sources in sources.jsonl",
+            "reached": "host search and fetch; Reddit via arctic-shift; Hacker News; Bluesky; GitHub issue pages; forums",
+            "unreachable": "YouTube video pages (bot check); X (402); Zhihu and LINUX DO search (403)"
           }
         ]
       }
@@ -2445,7 +2454,6 @@
       "flags": [
         "workload-unmatched",
         "owner-named transfer (assumption)",
-        "possibly-superseded",
         "valuation basis unverified"
       ],
       "measuredOnly": {
@@ -2465,7 +2473,6 @@
       "routeId": "claude-pro-opus55-semianalysis",
       "flags": [
         "workload-unmatched",
-        "possibly-superseded",
         "valuation basis unverified"
       ],
       "measuredOnly": {
@@ -2491,7 +2498,6 @@
       "flags": [
         "workload-unmatched",
         "owner-named transfer (assumption)",
-        "possibly-superseded",
         "valuation basis unverified"
       ],
       "measuredOnly": {
@@ -2549,6 +2555,7 @@
       "routeId": "chatgpt-pro500-gpt61sol-semianalysis",
       "flags": [
         "workload-unmatched",
+        "possibly-superseded",
         "valuation basis unverified"
       ],
       "measuredOnly": {
@@ -2573,6 +2580,7 @@
       "routeId": "chatgpt-pro200-gpt6astra-semianalysis",
       "flags": [
         "workload-unmatched",
+        "possibly-superseded",
         "valuation basis unverified"
       ],
       "measuredOnly": {
@@ -2598,6 +2606,7 @@
       "flags": [
         "workload-unmatched",
         "owner-named transfer (assumption)",
+        "possibly-superseded",
         "valuation basis unverified"
       ],
       "measuredOnly": {

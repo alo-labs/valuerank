@@ -590,11 +590,16 @@ def source_clocks(documents: dict) -> list[dict]:
 
 
 O71_STAGES = ("plain web search", "Claude's Deep Research", "Silver Bullet's Deep Research")
-O71_PROVIDERS = ("Anthropic", "OpenAI", "Google", "Xiaomi", "Kimi", "MiniMax", "DeepSeek")
+# I62 L6: the providers an O71 search must cover are derived from the cohort's developers (named as the plans' sellers).
+PLAN_PROVIDER = {"Google DeepMind": "Google", "Moonshot AI": "Kimi"}
 O71_FROM = "2026-10-25"
 
 
-def check_o71_search(policy: dict) -> None:
+def cohort_providers(configurations: list[dict]) -> set[str]:
+    return {PLAN_PROVIDER.get(item["developer"], item["developer"]) for item in configurations if item.get("developer")}
+
+
+def check_o71_search(policy: dict, providers: set[str] = frozenset()) -> None:
     """O71, O75, I61 L3: from O71 on, the all-provider search that sets the cutoff ran all three stages over every cohort
     provider's plans, and records each stage."""
 
@@ -605,7 +610,7 @@ def check_o71_search(policy: dict) -> None:
     stages = tuple(stage.get("stage") for stage in latest.get("stages") or [])
     if stages != O71_STAGES or not all(stage.get("record") and stage.get("outcome") for stage in latest["stages"]):
         raise ValueError(f"the all-provider search of {latest['searchedOn']} does not record the three O71 stages in order (O71, O75)")
-    missing = sorted(set(O71_PROVIDERS) - set(latest.get("providers") or []))
+    missing = sorted(set(providers) - set(latest.get("providers") or []))
     if missing:
         raise ValueError(f"the all-provider search of {latest['searchedOn']} omits {', '.join(missing)} (O71)")
 
@@ -797,7 +802,7 @@ def assemble(configurations: list[dict], documents: dict, *, release_day: date, 
     all_provider = [entry["searchedOn"] for entry in policy.get("searchLog") or [] if not entry.get("singleProvider")]
     if searched and searched != max(all_provider, default=None):
         raise ValueError(f"the search cutoff {searched} is not the date of the latest all-provider search in the search log (E218)")
-    check_o71_search(policy)
+    check_o71_search(policy, cohort_providers(configurations))
     # I51 L7: an O46 ceiling is recomputed from its recorded credits, rate and fee, so the stored multiple cannot drift.
     for route in documents["planRoutes"]["routes"]:
         if route.get("evidenceClass") == "provider_quota_ceiling":
@@ -1984,6 +1989,16 @@ def score(assembled: dict, frozen: dict) -> dict:
         _rule("partial component flag (E37)", "fired" if any(row["cost"]["partialComponents"] for row in rows) else "vacuous", "AA declined- or missing-task markers, or an Index reconstruction that misses AA's total (E209)"),
         _rule("route dominance filter (E88)", "fired" if any(row["routeSelection"]["dominated"] for row in rows) else "vacuous", "certifiably dearer routes set aside"),
         _rule("Plan exploratory label (E61)", "fired" if yield_["exploratory"] else "passed", "fewer than half of Plan rows have an identified M_W"),
+        # I62 L7: the evidence lifecycle, valuation and clock gates are rules too.
+        _rule("Plan evidence lifecycle and change detection (E18, E151, E269, O77)",
+              "fired" if any("possibly-superseded" in row["plan"].get("flags", []) or "expired" in row["plan"].get("flags", []) for row in rows) else "passed",
+              "rows whose selected route is possibly superseded or expired: " + ", ".join(sorted(row["id"] for row in rows if {"possibly-superseded", "expired"} & set(row["plan"].get("flags", []))))
+              if any({"possibly-superseded", "expired"} & set(row["plan"].get("flags", [])) for row in rows) else "every selected route is fresh"),
+        _rule("valuation-basis gate (E170)", "fired" if any(row["valuationGate"]["outcome"] not in GATE_SCORED for row in rows) else "passed",
+              "rows outside the scored valuation outcomes: " + ", ".join(sorted(row["id"] for row in rows if row["valuationGate"]["outcome"] not in GATE_SCORED))
+              if any(row["valuationGate"]["outcome"] not in GATE_SCORED for row in rows) else "every ranked row is compatible as captured or after evidenced revaluation"),
+        _rule("source clocks and evidence freshness (O59, O60, O65, E211, E216, E217, E218)", "passed",
+              "every capture is within its age gate and none after the cutoff unless its source predates the cutoff's day; the build stops otherwise"),
         _rule("score swing gate (E177)", "vacuous", "first v3 release: no previous v3 release to compare"),
         _rule("anchor migration (E184)", "fired" if assembled.get("deferred") else "vacuous",
               "deferred: " + ", ".join(item["component"] for item in assembled["deferred"]) if assembled.get("deferred") else "no main-workload migration deferred"),
@@ -3099,6 +3114,7 @@ def configuration(row: dict) -> dict:
         "familyPrimary": row.get("familyPrimary", True),
         # O58: whether AA plots the configuration on its rendered frontier or within the near gap.
         "aaTier": row.get("aaFrontierTier"),
+        "developer": row.get("developer"),
     }
 
 

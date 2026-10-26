@@ -40,6 +40,28 @@ CONTROLLED_KINDS = {"controlled_account_workload_projection", "controlled_measur
 ASSUMPTION_KINDS = {"user_assumption"}
 REPORT_KINDS = {"user_reported_projection", "end_user_report", "community_observed"}
 GRADE = {"controlled": 3, "reports": 2, "assumption": 1, "diagnostic": 0}
+# O78: a controlled route flagged by a detected change ranks just below a report pair measured after that change.
+POST_CHANGE_SUPERSEDED = 1.5
+
+
+def grade_rank(candidate: dict) -> float:
+    """The grade key of the comparator (O73, O78)."""
+
+    return POST_CHANGE_SUPERSEDED if candidate.get("postChangeSuperseded") else GRADE[candidate["grade"]]
+
+
+def post_change_ranks(candidates: list[dict]) -> list[dict]:
+    """O78: when a controlled route carries a detected change (E18) and a report-pair route of the same row is dated after
+    that change, the controlled route loses its precedence (O73) to it; the candidates are returned, marked, as copies."""
+
+    reports = [evidence_date(candidate["route"]) for candidate in candidates if candidate["grade"] == "reports"]
+    marked = []
+    for candidate in candidates:
+        changed = candidate["route"].get("changeDetectedOn")
+        superseded = (candidate["grade"] == "controlled" and changed and candidate.get("expiry") in {"possibly-superseded", "expired"}
+                      and any(day and day > date.fromisoformat(changed) for day in reports))
+        marked.append({**candidate, "postChangeSuperseded": True} if superseded else candidate)
+    return marked
 # E102: reports are pooled only when their public comparability records agree on all of these.
 COMPARABILITY_FIELDS = ("feePeriod", "grossCashAccounting", "limitSchema", "eligibleConsumption", "valuationBasis", "measurementWorkload")
 IDENTIFICATION = {"point-identified": 2, "set-identified": 1, "unidentified": 0}
@@ -448,7 +470,7 @@ def comparison_tuple(candidate: dict) -> tuple:
     route = candidate["route"]
     return (
         IDENTIFICATION.get(candidate["identification"], 0),
-        GRADE[candidate["grade"]],
+        grade_rank(candidate),
         comparison_multiple(route),
         -gross_cash(route),
     )
@@ -480,7 +502,7 @@ def dominance_filter(candidates: list[dict]) -> tuple[list[dict], dict]:
             winner_bounds = identified_bounds(winner)
             if winner is loser or loser_bounds is None or winner_bounds is None:
                 continue
-            if GRADE[winner["grade"]] >= GRADE[loser["grade"]] and winner_bounds[0] > loser_bounds[1]:
+            if grade_rank(winner) >= grade_rank(loser) and winner_bounds[0] > loser_bounds[1]:
                 dominated[loser["route"]["id"]] = winner["route"]["id"]
                 break
     return [candidate for candidate in candidates if candidate["route"]["id"] not in dominated], dominated
@@ -505,7 +527,7 @@ def comparator_key(candidate: dict) -> tuple:
 def route_selection(candidates: list[dict]) -> dict:
     """The official route with its published selection reason, dominated routes and comparison tuples (E85, E88, E93)."""
 
-    eligible = [candidate for candidate in candidates if candidate["grade"] != "diagnostic"]
+    eligible = post_change_ranks([candidate for candidate in candidates if candidate["grade"] != "diagnostic"])
     remaining, dominated = dominance_filter(eligible)
     ordered = sorted(remaining, key=_order)
     tuples = {candidate["route"]["id"]: comparison_tuple(candidate) for candidate in eligible}

@@ -1376,9 +1376,9 @@ def test_configuration_carries_identity_and_frontier_family_flag_for_any_row():
 
     frontier = {"id": "f", "name": "F", "aaVariant": "max", "aaSlug": "f-max", "aaFrontierFootnote": "note", "aaFrontierTier": "frontier",
                 "rankingInclusionReasons": ["Required AA Intelligence Index versus total-evaluation-cost frontier family"]}
-    assert v.configuration(frontier) == {"id": "f", "name": "F", "family": "F", "effort": "max", "aaSlug": "f-max", "aaNote": "note", "frontierFamily": True, "familyPrimary": True, "aaTier": "frontier"}
+    assert v.configuration(frontier) == {"id": "f", "name": "F", "family": "F", "effort": "max", "aaSlug": "f-max", "aaNote": "note", "frontierFamily": True, "familyPrimary": True, "aaTier": "frontier", "developer": None}
     retained = {"id": "r", "name": "R", "aaSlug": "r", "rankingInclusionReasons": [v.RETAINED_REASON], "familyPrimary": False}
-    assert v.configuration(retained) == {"id": "r", "name": "R", "family": "R", "effort": None, "aaSlug": "r", "aaNote": None, "frontierFamily": True, "familyPrimary": False, "aaTier": None}
+    assert v.configuration(retained) == {"id": "r", "name": "R", "family": "R", "effort": None, "aaSlug": "r", "aaNote": None, "frontierFamily": True, "familyPrimary": False, "aaTier": None, "developer": None}
     # O33: an evidenced sibling carries its AA family, which its display name no longer equals.
     sibling = {"id": "f-high", "name": "F (high)", "family": "F", "aaVariant": "high", "aaSlug": "f-high", "rankingInclusionReasons": [v.RETAINED_REASON]}
     assert v.configuration(sibling)["family"] == "F" and v.configuration(sibling)["frontierFamily"] is True
@@ -2044,8 +2044,10 @@ def test_the_o71_search_records_three_stages_over_every_provider():
     """O71, O75, I61 L3."""
 
     stages = [{"stage": name, "record": "r", "outcome": "o"} for name in v.O71_STAGES]
-    good = {"searchedOn": "2026-10-25", "providers": list(v.O71_PROVIDERS), "stages": stages}
-    v.check_o71_search({"searchLog": [{"searchedOn": "2026-10-21"}, good]})
+    providers = v.cohort_providers([{"developer": "Anthropic"}, {"developer": "Moonshot AI"}, {"developer": None}])
+    assert providers == {"Anthropic", "Kimi"}
+    good = {"searchedOn": "2026-10-25", "providers": sorted(providers), "stages": stages}
+    v.check_o71_search({"searchLog": [{"searchedOn": "2026-10-21"}, good]}, providers)
     v.check_o71_search({"searchLog": [{"searchedOn": "2026-10-21"}]})  # before O71
     v.check_o71_search({})
     v.check_o71_search({"searchLog": [{"searchedOn": None}]})
@@ -2054,6 +2056,6 @@ def test_the_o71_search_records_three_stages_over_every_provider():
     with pytest.raises(ValueError, match="does not record the three O71 stages"):
         v.check_o71_search({"searchLog": [{**good, "stages": [*stages[:2], {"stage": v.O71_STAGES[2], "record": "r"}]}]})
     with pytest.raises(ValueError, match="omits Kimi"):
-        v.check_o71_search({"searchLog": [{**good, "providers": [p for p in v.O71_PROVIDERS if p != "Kimi"]}]})
+        v.check_o71_search({"searchLog": [{**good, "providers": ["Anthropic"]}]}, providers)
     # A single-provider entry neither sets the cutoff nor needs stages.
     v.check_o71_search({"searchLog": [good, {"searchedOn": "2026-10-26", "singleProvider": True}]})
