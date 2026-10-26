@@ -5,7 +5,7 @@
       "start": "2026-09-25",
       "end": "2026-10-25"
     },
-    "searchCutoff": "2026-10-21",
+    "searchCutoff": "2026-10-25",
     "searchLog": [
       {
         "searchedOn": "2026-10-08",
@@ -34,6 +34,15 @@
         "qualifyingNewReports": 0,
         "singleProvider": true,
         "note": "A single-provider search; the all-provider search cutoff stays at the 2026-10-21 search."
+      },
+      {
+        "searchedOn": "2026-10-25",
+        "scope": "Owner decision O71: every cohort provider's first-party plans (Anthropic Claude Pro/Max 5x/Max 20x; OpenAI ChatGPT Plus/Pro $100/$200/$500 in Codex; Google AI Pro/Ultra in Antigravity; Xiaomi MiMo Token Plan; Kimi membership Plus/Pro/Max/Ultra; MiniMax M Plan; DeepSeek sells no first-party plan) for every cohort model, in three stages: plain web search, Claude's Deep Research, Silver Bullet's Deep Research (deep mode)",
+        "reached": "web search; Hacker News (Algolia); Reddit via the arctic-shift and pullpush mirrors and RSS; GitHub issue pages; Google AI developer forum; OpenAI community forum; LINUX DO topic JSON and the locdd.com mirror; V2EX; Weibo; Bluesky; Qiita; provider docs and help centres",
+        "unreachable": "reddit.com directly (403), X (402), Zhihu and LINUX DO search (403), GitHub search APIs, YouTube video pages (bot check)",
+        "record": "research/2026-10-25-plan-allowances/ and research/2026-10-25-plan-allowances-sb-deep-research/",
+        "qualifyingNewReports": 0,
+        "o71Result": "no model × tier has two independent concordant reports (O11) after all three stages; owner decision O72 keeps the owner-authorised routes and API fallback elsewhere"
       }
     ],
     "defaultNumerator": "Actual API-priced end-user-reported use or reported estimate anchored to measured use; exact model, tier and dates required.",
@@ -49,6 +58,7 @@
     },
     "gptApplication": "User authorizes the same ChatGPT plan multiples for every GPT model. Owner decision O45 (2026-10-23): GPT-6.1 Sol and GPT-6 Astra keep their own SemiAnalysis figures on every ChatGPT plan, bound to each model's unsuffixed (max) row because SemiAnalysis names the models without an effort; every other GPT row (other GPT models and GPT-6.1 Sol at xhigh, high, medium and low, ranked as their own rows under O33) takes, per plan, the lower of the two reported model-conditional figures as a labelled user assumption naming its donor route. Routes are one row per model and plan.",
     "routeGranularity": "Owner decision O45 (2026-10-23): every route row names exactly one model and one plan.",
+    "o72Application": "Owner decision O72 (2026-10-26): after the O71 search found no model × tier with two concordant user reports, the owner-authorised routes stay (the SemiAnalysis selection with its O40/O45 assumptions, the O46 MiMo quota ceilings) and providers without one (Google, Kimi, MiniMax) stay on API fallback; a route switches to user reports once two concordant reports exist for the exact model and tier (O11).",
     "mimoApplication": "Owner decision O46 (2026-10-23), an explicit exception to the end-user numerator rule: each MiMo-V2.6 model takes, per Token Plan tier, the quota-implied ceiling (the tier's monthly credits valued at Xiaomi's pay-as-you-go rate for that model, divided by the list fee), labelled provider-derived. It replaces the 2026-10-08 provisional 1.5x assumption. End-user measurements for the exact model and tier replace the ceiling once they meet the admission rule of any other provider's route (O11); one report alone does not (owner decision O62).",
     "unsupportedModels": "Use API fallback; do not transfer evidence across model versions, variants or thinking effort except for the explicit common GPT, Claude and MiMo assumptions.",
     "claudeApplication": "User authorizes (2026-10-18, Option 2) applying Opus 5.5's measured SemiAnalysis Claude plan multiples to every other Claude model. Opus 5.5 keeps its exact measured routes; the shared routes are labelled user assumptions, carry the recorded caution that allowances are model-specific (Fable 5.1 measured 12.4-12.7x on the same plans), and are superseded by any exact measurement for the listed model. Claude Fable 5.1 (retained 2026-10-21, owner decision O31) has exact SemiAnalysis measurements on Max 5x (12.73x) and Max 20x (12.425x), which replace the shared routes for it; it has no Pro route, because the source records Fable as unavailable on Pro, so there is no Pro allowance to measure or assume. Owner decision O33 (2026-10-21) ranks Claude Haiku 5.5 (max, high, medium, low) and Claude Sonnet 5.5 (xhigh, high, medium, low) as their own rows; as other Claude models in the roster they take the shared assumption routes."

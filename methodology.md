@@ -156,7 +156,7 @@ Plan cost = basket API cost ÷ a subscription route's Value Multiple, at full ut
 
 **Identification (E61).** A multiple is measured on its own workload; it identifies the basket's multiple only when the workloads match. Today 0 of 27 Plan rows are point-identified and 0 set-identified, so the Plan ranking is labelled exploratory. A measured-only Plan view (`3d83f7643d4a85b7`) re-runs the selection over exact-route measurement candidates of grade controlled or concordant reports (no transfers, no diagnostics), without transfers or fallbacks. Because the official Plan anchors include transfers and fallbacks, a calibration diagnostic rescores the measured-only rows on anchors built from measured evidence alone (E164), so an assumption's effect through the exchange rate is visible.
 
-**Subscription evidence policy** (as of 2026-10-08; reporting window 2026-09-25 to 2026-10-25; end-user reports were last searched on 2026-10-21, so reports dated in the 4 days after it were not searched):
+**Subscription evidence policy** (as of 2026-10-08; reporting window 2026-09-25 to 2026-10-25):
 
 - Default numerator: Actual API-priced end-user-reported use or reported estimate anchored to measured use; exact model, tier and dates required.
 - Selected source for Anthropic, OpenAI: [SemiAnalysis](https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x) (2026-10-06, owner-selected 2026-10-07): Controlled subscription-account measurements with agentic workload projections.
