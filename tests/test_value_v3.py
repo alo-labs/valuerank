@@ -1038,7 +1038,7 @@ def test_core_plan_streams_run_with_transfers_off():
     runs = {(run["stratum"], run["alternative"]): run for run in document["results"]["plan"]}
     assert runs[("S0", False)]["transfers"] == "on (the displayed record)" and runs[("S0", False)]["excluded"] == [] and "a@plan-a" in runs[("S0", False)]["rows"]
     for key in (("S1", False), ("S2", False), ("S1", True), ("S1M", False)):
-        assert runs[key]["transfers"] == "off" and runs[key]["excluded"] == [{"row": "a@plan-a", "reason": v.TRANSFER_EXCLUSION}]
+        assert runs[key]["transfers"] == "off" and runs[key]["excluded"] == [{"row": "a@plan-a", "reason": "owner-named transfer: unevaluable with owner assumptions off (never reselected or replaced by API cost)"}]
         assert list(runs[key]["rows"]) == ["b@plan-b"]
     assert all("transfers" not in run and "excluded" not in run for run in document["results"]["api"])
     assert document["inputHash"] != v.run_scenarios(*scored(), n=50, seed=3)["inputHash"]

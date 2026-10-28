@@ -511,7 +511,7 @@
         "stratum": "S1",
         "kernel": "primary",
         "targetProfile": "published-record reporting precision + conventional identification of missing leaves",
-        "unevaluable": "owner-named transfer: unevaluable with transfers off (never reselected or replaced by API cost)",
+        "unevaluable": "owner-named transfer: unevaluable with owner assumptions off (never reselected or replaced by API cost)",
         "top1": null,
         "top3": null,
         "frontier": null
@@ -520,7 +520,7 @@
         "stratum": "S2",
         "kernel": "primary",
         "targetProfile": "published-record reporting precision + conventional identification of missing leaves + weight-specification stress",
-        "unevaluable": "owner-named transfer: unevaluable with transfers off (never reselected or replaced by API cost)",
+        "unevaluable": "owner-named transfer: unevaluable with owner assumptions off (never reselected or replaced by API cost)",
         "top1": null,
         "top3": null,
         "frontier": null
@@ -529,7 +529,7 @@
         "stratum": "S1",
         "kernel": "endpoint-heavy",
         "targetProfile": "published-record reporting precision + conventional identification of missing leaves",
-        "unevaluable": "owner-named transfer: unevaluable with transfers off (never reselected or replaced by API cost)",
+        "unevaluable": "owner-named transfer: unevaluable with owner assumptions off (never reselected or replaced by API cost)",
         "top1": null,
         "top3": null,
         "frontier": null
@@ -538,7 +538,7 @@
         "stratum": "S1M",
         "kernel": "primary",
         "targetProfile": "published-record reporting precision + conventional identification of missing leaves + conventional range sensitivity inside published 95% confidence intervals (no tail model)",
-        "unevaluable": "owner-named transfer: unevaluable with transfers off (never reselected or replaced by API cost)",
+        "unevaluable": "owner-named transfer: unevaluable with owner assumptions off (never reselected or replaced by API cost)",
         "top1": null,
         "top3": null,
         "frontier": null
@@ -547,7 +547,7 @@
         "stratum": "S1T",
         "kernel": "primary",
         "targetProfile": "published-record leaf values redrawn with plug-in binomial task-sampling noise from each leaf's published task count (independent-task approximation; GDPval-AA from its displayed rating interval, an assumption) + conventional identification of missing leaves",
-        "unevaluable": "owner-named transfer: unevaluable with transfers off (never reselected or replaced by API cost)",
+        "unevaluable": "owner-named transfer: unevaluable with owner assumptions off (never reselected or replaced by API cost)",
         "top1": null,
         "top3": null,
         "frontier": null

@@ -188,7 +188,7 @@ AA footnote (Claude Haiku 5.5 (max), Claude Haiku 5.5 (high), Claude Haiku 5.5 (
 - [AA Coding Agent Index v2.0](https://artificialanalysis.ai/agents/coding-agents): the Coding Agent Index cost (FrontierCode, Terminal-Bench and SWE-Atlas-QnA-AA) for each exact configuration (O50); AA withdrew DeepSWE v1.1 in October 2026 and it is no longer a leaf (O49).
 - AA's own Terminal-Bench 4.0 run (the leaf; [tbench.ai](https://www.tbench.ai/leaderboard/terminal-bench/4.0) rows fill a gap and serve as a cross-check, O37), [Bug Hunt Bench](https://bughunt.productcompass.pm/) owner-published runs, [Cognition's FrontierCode leaderboard](https://cognition.com/data/frontiercode-leaderboard/data.json) and model-provider results for leaves AA has not run (O36).
 - [SemiAnalysis subscription measurements](https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x) (owner-selected 2026-10-07) for the Claude and ChatGPT plan Value Multiples; owner-named transfers are labelled as assumptions.
-- The evidence bundle in `data/scores.json` lists every input artifact with its SHA-256; bundle hash `24a735c860d533adc5dc935c1a4ba23a6095c3997145f69bb6c27954c7812648`.
+- The evidence bundle in `data/scores.json` lists every input artifact with its SHA-256; bundle hash `b1410ab7949b507bee667fa9bba79c32a1948ab986d08b89667e353889a03c53`.
 - [Methodology co-design record](research/2026-10-19-methodology-codesign/): the reviewed specification, every owner and editor decision, and each reviewer's findings.
 
 ## Files

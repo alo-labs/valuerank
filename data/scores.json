@@ -26625,7 +26625,7 @@
           "Vals boards (Vibe Code Bench v1.1, Code Migration v1.1): Vals' published standard error per record, read as the leaf's SD",
           "AI Coding Daily: judged points over its six graded projects read as a binomial share of 60 points (an assumption; the board publishes no error)"
         ],
-        "bias": "net direction not established: treating two rows' errors as independent overstates the threshold, because every row is scored on the same tasks and attempts are averaged within a task; sources it omits (run-to-run and harness variance, AA's single cost run and, on the Plan basis, owner-named transfer error) work the other way",
+        "bias": "net direction not established: treating two rows' errors as independent overstates the threshold, because every row is scored on the same tasks and attempts are averaged within a task; sources it omits (run-to-run and harness variance, AA's single cost run and, on the Plan basis, owner-assumption error) work the other way",
         "bandRule": "O42: rows in value order; a row joins the current band while its value is not separable from the band's first row at correlation 0 (1.96 x sqrt(SD_i^2 + SD_j^2), analytic quality-leaf SDs, cost not drawn), otherwise it starts a new band; every row is inseparable from its band's first row, and adjacent rows in different bands may also be inseparable. O48: on the Plan basis a plan row takes its configuration's SD; a row of the band's first configuration on another plan stays in the band, and adjacent plan rows of one configuration are counted apart from the separability pairs (E258)",
         "valueSd": {
           "claude-sonnet-5-5": 1.000442075648416,
@@ -31906,7 +31906,7 @@
         {
           "key": "planRoutes",
           "artifact": "data/plan_cost_routes.json",
-          "sha256": "8abf8b0f944380e9502173a74c3a25006ec049a92238d29283233f3e131f01bd",
+          "sha256": "5fad132bc951ff973287d79478d2d678b6e5489c0193ef4d5fa735bcc1a7d3d9",
           "capturedAt": "2026-10-25",
           "extractor": "editorial Plan evidence registry"
         },
@@ -31974,7 +31974,7 @@
           "extractor": "valuerank.value_v3 freeze"
         }
       ],
-      "bundleHash": "24a735c860d533adc5dc935c1a4ba23a6095c3997145f69bb6c27954c7812648",
+      "bundleHash": "b1410ab7949b507bee667fa9bba79c32a1948ab986d08b89667e353889a03c53",
       "rebuild": "every published output is rebuilt from these artifacts at the pinned publication clock (npm run verify:docs), never from live pages"
     },
     "track": {
@@ -34538,43 +34538,43 @@
             "excluded": [
               {
                 "row": "claude-haiku-5-5-max@claude-max-20x",
-                "reason": "owner-named transfer: unevaluable with transfers off (never reselected or replaced by API cost)"
+                "reason": "owner-named transfer: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
               },
               {
                 "row": "claude-haiku-5-5-max@claude-max-5x",
-                "reason": "owner-named transfer: unevaluable with transfers off (never reselected or replaced by API cost)"
+                "reason": "owner-named transfer: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
               },
               {
                 "row": "claude-haiku-5-5-max@claude-pro",
-                "reason": "owner-named transfer: unevaluable with transfers off (never reselected or replaced by API cost)"
+                "reason": "owner-named transfer: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
               },
               {
                 "row": "claude-sonnet-5-5@claude-max-20x",
-                "reason": "owner-named transfer: unevaluable with transfers off (never reselected or replaced by API cost)"
+                "reason": "owner-named transfer: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
               },
               {
                 "row": "claude-sonnet-5-5@claude-max-5x",
-                "reason": "owner-named transfer: unevaluable with transfers off (never reselected or replaced by API cost)"
+                "reason": "owner-named transfer: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
               },
               {
                 "row": "claude-sonnet-5-5@claude-pro",
-                "reason": "owner-named transfer: unevaluable with transfers off (never reselected or replaced by API cost)"
+                "reason": "owner-named transfer: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
               },
               {
                 "row": "gpt-6-luna@chatgpt-plus",
-                "reason": "owner-named transfer: unevaluable with transfers off (never reselected or replaced by API cost)"
+                "reason": "owner-named transfer: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
               },
               {
                 "row": "gpt-6-luna@chatgpt-pro-100",
-                "reason": "owner-named transfer: unevaluable with transfers off (never reselected or replaced by API cost)"
+                "reason": "owner-named transfer: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
               },
               {
                 "row": "gpt-6-luna@chatgpt-pro-200",
-                "reason": "owner-named transfer: unevaluable with transfers off (never reselected or replaced by API cost)"
+                "reason": "owner-named transfer: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
               },
               {
                 "row": "gpt-6-luna@chatgpt-pro-500",
-                "reason": "owner-named transfer: unevaluable with transfers off (never reselected or replaced by API cost)"
+                "reason": "owner-named transfer: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
               }
             ]
           },
@@ -34949,43 +34949,43 @@
             "excluded": [
               {
                 "row": "claude-haiku-5-5-max@claude-max-20x",
-                "reason": "owner-named transfer: unevaluable with transfers off (never reselected or replaced by API cost)"
+                "reason": "owner-named transfer: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
               },
               {
                 "row": "claude-haiku-5-5-max@claude-max-5x",
-                "reason": "owner-named transfer: unevaluable with transfers off (never reselected or replaced by API cost)"
+                "reason": "owner-named transfer: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
               },
               {
                 "row": "claude-haiku-5-5-max@claude-pro",
-                "reason": "owner-named transfer: unevaluable with transfers off (never reselected or replaced by API cost)"
+                "reason": "owner-named transfer: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
               },
               {
                 "row": "claude-sonnet-5-5@claude-max-20x",
-                "reason": "owner-named transfer: unevaluable with transfers off (never reselected or replaced by API cost)"
+                "reason": "owner-named transfer: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
               },
               {
                 "row": "claude-sonnet-5-5@claude-max-5x",
-                "reason": "owner-named transfer: unevaluable with transfers off (never reselected or replaced by API cost)"
+                "reason": "owner-named transfer: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
               },
               {
                 "row": "claude-sonnet-5-5@claude-pro",
-                "reason": "owner-named transfer: unevaluable with transfers off (never reselected or replaced by API cost)"
+                "reason": "owner-named transfer: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
               },
               {
                 "row": "gpt-6-luna@chatgpt-plus",
-                "reason": "owner-named transfer: unevaluable with transfers off (never reselected or replaced by API cost)"
+                "reason": "owner-named transfer: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
               },
               {
                 "row": "gpt-6-luna@chatgpt-pro-100",
-                "reason": "owner-named transfer: unevaluable with transfers off (never reselected or replaced by API cost)"
+                "reason": "owner-named transfer: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
               },
               {
                 "row": "gpt-6-luna@chatgpt-pro-200",
-                "reason": "owner-named transfer: unevaluable with transfers off (never reselected or replaced by API cost)"
+                "reason": "owner-named transfer: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
               },
               {
                 "row": "gpt-6-luna@chatgpt-pro-500",
-                "reason": "owner-named transfer: unevaluable with transfers off (never reselected or replaced by API cost)"
+                "reason": "owner-named transfer: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
               }
             ]
           },
@@ -35358,43 +35358,43 @@
             "excluded": [
               {
                 "row": "claude-haiku-5-5-max@claude-max-20x",
-                "reason": "owner-named transfer: unevaluable with transfers off (never reselected or replaced by API cost)"
+                "reason": "owner-named transfer: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
               },
               {
                 "row": "claude-haiku-5-5-max@claude-max-5x",
-                "reason": "owner-named transfer: unevaluable with transfers off (never reselected or replaced by API cost)"
+                "reason": "owner-named transfer: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
               },
               {
                 "row": "claude-haiku-5-5-max@claude-pro",
-                "reason": "owner-named transfer: unevaluable with transfers off (never reselected or replaced by API cost)"
+                "reason": "owner-named transfer: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
               },
               {
                 "row": "claude-sonnet-5-5@claude-max-20x",
-                "reason": "owner-named transfer: unevaluable with transfers off (never reselected or replaced by API cost)"
+                "reason": "owner-named transfer: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
               },
               {
                 "row": "claude-sonnet-5-5@claude-max-5x",
-                "reason": "owner-named transfer: unevaluable with transfers off (never reselected or replaced by API cost)"
+                "reason": "owner-named transfer: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
               },
               {
                 "row": "claude-sonnet-5-5@claude-pro",
-                "reason": "owner-named transfer: unevaluable with transfers off (never reselected or replaced by API cost)"
+                "reason": "owner-named transfer: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
               },
               {
                 "row": "gpt-6-luna@chatgpt-plus",
-                "reason": "owner-named transfer: unevaluable with transfers off (never reselected or replaced by API cost)"
+                "reason": "owner-named transfer: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
               },
               {
                 "row": "gpt-6-luna@chatgpt-pro-100",
-                "reason": "owner-named transfer: unevaluable with transfers off (never reselected or replaced by API cost)"
+                "reason": "owner-named transfer: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
               },
               {
                 "row": "gpt-6-luna@chatgpt-pro-200",
-                "reason": "owner-named transfer: unevaluable with transfers off (never reselected or replaced by API cost)"
+                "reason": "owner-named transfer: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
               },
               {
                 "row": "gpt-6-luna@chatgpt-pro-500",
-                "reason": "owner-named transfer: unevaluable with transfers off (never reselected or replaced by API cost)"
+                "reason": "owner-named transfer: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
               }
             ]
           },
@@ -35768,43 +35768,43 @@
             "excluded": [
               {
                 "row": "claude-haiku-5-5-max@claude-max-20x",
-                "reason": "owner-named transfer: unevaluable with transfers off (never reselected or replaced by API cost)"
+                "reason": "owner-named transfer: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
               },
               {
                 "row": "claude-haiku-5-5-max@claude-max-5x",
-                "reason": "owner-named transfer: unevaluable with transfers off (never reselected or replaced by API cost)"
+                "reason": "owner-named transfer: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
               },
               {
                 "row": "claude-haiku-5-5-max@claude-pro",
-                "reason": "owner-named transfer: unevaluable with transfers off (never reselected or replaced by API cost)"
+                "reason": "owner-named transfer: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
               },
               {
                 "row": "claude-sonnet-5-5@claude-max-20x",
-                "reason": "owner-named transfer: unevaluable with transfers off (never reselected or replaced by API cost)"
+                "reason": "owner-named transfer: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
               },
               {
                 "row": "claude-sonnet-5-5@claude-max-5x",
-                "reason": "owner-named transfer: unevaluable with transfers off (never reselected or replaced by API cost)"
+                "reason": "owner-named transfer: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
               },
               {
                 "row": "claude-sonnet-5-5@claude-pro",
-                "reason": "owner-named transfer: unevaluable with transfers off (never reselected or replaced by API cost)"
+                "reason": "owner-named transfer: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
               },
               {
                 "row": "gpt-6-luna@chatgpt-plus",
-                "reason": "owner-named transfer: unevaluable with transfers off (never reselected or replaced by API cost)"
+                "reason": "owner-named transfer: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
               },
               {
                 "row": "gpt-6-luna@chatgpt-pro-100",
-                "reason": "owner-named transfer: unevaluable with transfers off (never reselected or replaced by API cost)"
+                "reason": "owner-named transfer: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
               },
               {
                 "row": "gpt-6-luna@chatgpt-pro-200",
-                "reason": "owner-named transfer: unevaluable with transfers off (never reselected or replaced by API cost)"
+                "reason": "owner-named transfer: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
               },
               {
                 "row": "gpt-6-luna@chatgpt-pro-500",
-                "reason": "owner-named transfer: unevaluable with transfers off (never reselected or replaced by API cost)"
+                "reason": "owner-named transfer: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
               }
             ]
           },
@@ -36178,43 +36178,43 @@
             "excluded": [
               {
                 "row": "claude-haiku-5-5-max@claude-max-20x",
-                "reason": "owner-named transfer: unevaluable with transfers off (never reselected or replaced by API cost)"
+                "reason": "owner-named transfer: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
               },
               {
                 "row": "claude-haiku-5-5-max@claude-max-5x",
-                "reason": "owner-named transfer: unevaluable with transfers off (never reselected or replaced by API cost)"
+                "reason": "owner-named transfer: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
               },
               {
                 "row": "claude-haiku-5-5-max@claude-pro",
-                "reason": "owner-named transfer: unevaluable with transfers off (never reselected or replaced by API cost)"
+                "reason": "owner-named transfer: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
               },
               {
                 "row": "claude-sonnet-5-5@claude-max-20x",
-                "reason": "owner-named transfer: unevaluable with transfers off (never reselected or replaced by API cost)"
+                "reason": "owner-named transfer: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
               },
               {
                 "row": "claude-sonnet-5-5@claude-max-5x",
-                "reason": "owner-named transfer: unevaluable with transfers off (never reselected or replaced by API cost)"
+                "reason": "owner-named transfer: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
               },
               {
                 "row": "claude-sonnet-5-5@claude-pro",
-                "reason": "owner-named transfer: unevaluable with transfers off (never reselected or replaced by API cost)"
+                "reason": "owner-named transfer: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
               },
               {
                 "row": "gpt-6-luna@chatgpt-plus",
-                "reason": "owner-named transfer: unevaluable with transfers off (never reselected or replaced by API cost)"
+                "reason": "owner-named transfer: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
               },
               {
                 "row": "gpt-6-luna@chatgpt-pro-100",
-                "reason": "owner-named transfer: unevaluable with transfers off (never reselected or replaced by API cost)"
+                "reason": "owner-named transfer: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
               },
               {
                 "row": "gpt-6-luna@chatgpt-pro-200",
-                "reason": "owner-named transfer: unevaluable with transfers off (never reselected or replaced by API cost)"
+                "reason": "owner-named transfer: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
               },
               {
                 "row": "gpt-6-luna@chatgpt-pro-500",
-                "reason": "owner-named transfer: unevaluable with transfers off (never reselected or replaced by API cost)"
+                "reason": "owner-named transfer: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
               }
             ]
           }
@@ -43166,25 +43166,25 @@
             "comparisonTuples": {
               "chatgpt-plus-gpt-6.1-sol-high-common-gpt-assumption": [
                 0,
-                1,
+                3,
                 10.55,
                 -20.0
               ],
               "chatgpt-pro100-gpt-6.1-sol-high-common-gpt-assumption": [
                 0,
-                1,
+                3,
                 10.55,
                 -100.0
               ],
               "chatgpt-pro200-gpt-6.1-sol-high-common-gpt-assumption": [
                 0,
-                1,
+                3,
                 10.42,
                 -200.0
               ],
               "chatgpt-pro500-gpt-6.1-sol-high-common-gpt-assumption": [
                 0,
-                1,
+                3,
                 10.772,
                 -500.0
               ]
@@ -43225,7 +43225,7 @@
                   "displayedPlanValue": 55.5354801209504,
                   "comparisonTuple": [
                     0,
-                    1,
+                    3,
                     10.772,
                     -500.0
                   ],
@@ -43242,7 +43242,7 @@
                   "displayedPlanValue": 55.4799727401339,
                   "comparisonTuple": [
                     0,
-                    1,
+                    3,
                     10.55,
                     -20.0
                   ],
@@ -43259,7 +43259,7 @@
                   "displayedPlanValue": 55.4799727401339,
                   "comparisonTuple": [
                     0,
-                    1,
+                    3,
                     10.55,
                     -100.0
                   ],
@@ -43276,7 +43276,7 @@
                   "displayedPlanValue": 55.44692357514741,
                   "comparisonTuple": [
                     0,
-                    1,
+                    3,
                     10.42,
                     -200.0
                   ],
@@ -43903,19 +43903,19 @@
             "comparisonTuples": {
               "claude-pro-claude-opus-5-5-high-common-opus55-assumption": [
                 0,
-                1,
+                3,
                 58.9,
                 -20.0
               ],
               "claude-max5x-claude-opus-5-5-high-common-opus55-assumption": [
                 0,
-                1,
+                3,
                 57.25,
                 -100.0
               ],
               "claude-max20x-claude-opus-5-5-high-common-opus55-assumption": [
                 0,
-                1,
+                3,
                 58.63,
                 -200.0
               ]
@@ -43956,7 +43956,7 @@
                   "displayedPlanValue": 58.38673913553433,
                   "comparisonTuple": [
                     0,
-                    1,
+                    3,
                     58.9,
                     -20.0
                   ],
@@ -43973,7 +43973,7 @@
                   "displayedPlanValue": 58.37449224608159,
                   "comparisonTuple": [
                     0,
-                    1,
+                    3,
                     58.63,
                     -200.0
                   ],
@@ -43990,7 +43990,7 @@
                   "displayedPlanValue": 58.31100285855385,
                   "comparisonTuple": [
                     0,
-                    1,
+                    3,
                     57.25,
                     -100.0
                   ],
@@ -45341,19 +45341,19 @@
             "comparisonTuples": {
               "claude-pro-claude-opus-5-5-medium-common-opus55-assumption": [
                 0,
-                1,
+                3,
                 58.9,
                 -20.0
               ],
               "claude-max5x-claude-opus-5-5-medium-common-opus55-assumption": [
                 0,
-                1,
+                3,
                 57.25,
                 -100.0
               ],
               "claude-max20x-claude-opus-5-5-medium-common-opus55-assumption": [
                 0,
-                1,
+                3,
                 58.63,
                 -200.0
               ]
@@ -45394,7 +45394,7 @@
                   "displayedPlanValue": 58.25300118587574,
                   "comparisonTuple": [
                     0,
-                    1,
+                    3,
                     58.9,
                     -20.0
                   ],
@@ -45411,7 +45411,7 @@
                   "displayedPlanValue": 58.240754296423,
                   "comparisonTuple": [
                     0,
-                    1,
+                    3,
                     58.63,
                     -200.0
                   ],
@@ -45428,7 +45428,7 @@
                   "displayedPlanValue": 58.17726490889527,
                   "comparisonTuple": [
                     0,
-                    1,
+                    3,
                     57.25,
                     -100.0
                   ],
@@ -46044,25 +46044,25 @@
             "comparisonTuples": {
               "chatgpt-plus-gpt-6.1-sol-medium-common-gpt-assumption": [
                 0,
-                1,
+                3,
                 10.55,
                 -20.0
               ],
               "chatgpt-pro100-gpt-6.1-sol-medium-common-gpt-assumption": [
                 0,
-                1,
+                3,
                 10.55,
                 -100.0
               ],
               "chatgpt-pro200-gpt-6.1-sol-medium-common-gpt-assumption": [
                 0,
-                1,
+                3,
                 10.42,
                 -200.0
               ],
               "chatgpt-pro500-gpt-6.1-sol-medium-common-gpt-assumption": [
                 0,
-                1,
+                3,
                 10.772,
                 -500.0
               ]
@@ -46103,7 +46103,7 @@
                   "displayedPlanValue": 54.116398143155074,
                   "comparisonTuple": [
                     0,
-                    1,
+                    3,
                     10.772,
                     -500.0
                   ],
@@ -46120,7 +46120,7 @@
                   "displayedPlanValue": 54.06089076233858,
                   "comparisonTuple": [
                     0,
-                    1,
+                    3,
                     10.55,
                     -20.0
                   ],
@@ -46137,7 +46137,7 @@
                   "displayedPlanValue": 54.06089076233858,
                   "comparisonTuple": [
                     0,
-                    1,
+                    3,
                     10.55,
                     -100.0
                   ],
@@ -46154,7 +46154,7 @@
                   "displayedPlanValue": 54.02784159735208,
                   "comparisonTuple": [
                     0,
-                    1,
+                    3,
                     10.42,
                     -200.0
                   ],
@@ -46785,25 +46785,25 @@
             "comparisonTuples": {
               "chatgpt-plus-gpt-6-astra-high-common-gpt-assumption": [
                 0,
-                1,
+                3,
                 8.1,
                 -20.0
               ],
               "chatgpt-pro100-gpt-6-astra-high-common-gpt-assumption": [
                 0,
-                1,
+                3,
                 13.22,
                 -100.0
               ],
               "chatgpt-pro200-gpt-6-astra-high-common-gpt-assumption": [
                 0,
-                1,
+                3,
                 14.485,
                 -200.0
               ],
               "chatgpt-pro500-gpt-6-astra-high-common-gpt-assumption": [
                 0,
-                1,
+                3,
                 13.91,
                 -500.0
               ]
@@ -46844,7 +46844,7 @@
                   "displayedPlanValue": 52.84277812117194,
                   "comparisonTuple": [
                     0,
-                    1,
+                    3,
                     14.485,
                     -200.0
                   ],
@@ -46861,7 +46861,7 @@
                   "displayedPlanValue": 52.734810048031804,
                   "comparisonTuple": [
                     0,
-                    1,
+                    3,
                     13.91,
                     -500.0
                   ],
@@ -46878,7 +46878,7 @@
                   "displayedPlanValue": 52.59919653420083,
                   "comparisonTuple": [
                     0,
-                    1,
+                    3,
                     13.22,
                     -100.0
                   ],
@@ -46895,7 +46895,7 @@
                   "displayedPlanValue": 51.293452673310476,
                   "comparisonTuple": [
                     0,
-                    1,
+                    3,
                     8.1,
                     -20.0
                   ],
@@ -54816,7 +54816,7 @@
             "Vals boards (Vibe Code Bench v1.1, Code Migration v1.1): Vals' published standard error per record, read as the leaf's SD",
             "AI Coding Daily: judged points over its six graded projects read as a binomial share of 60 points (an assumption; the board publishes no error)"
           ],
-          "bias": "net direction not established: treating two rows' errors as independent overstates the threshold, because every row is scored on the same tasks and attempts are averaged within a task; sources it omits (run-to-run and harness variance, AA's single cost run and, on the Plan basis, owner-named transfer error) work the other way",
+          "bias": "net direction not established: treating two rows' errors as independent overstates the threshold, because every row is scored on the same tasks and attempts are averaged within a task; sources it omits (run-to-run and harness variance, AA's single cost run and, on the Plan basis, owner-assumption error) work the other way",
           "bandRule": "O42: rows in value order; a row joins the current band while its value is not separable from the band's first row at correlation 0 (1.96 x sqrt(SD_i^2 + SD_j^2), analytic quality-leaf SDs, cost not drawn), otherwise it starts a new band; every row is inseparable from its band's first row, and adjacent rows in different bands may also be inseparable. O48: on the Plan basis a plan row takes its configuration's SD; a row of the band's first configuration on another plan stays in the band, and adjacent plan rows of one configuration are counted apart from the separability pairs (E258)",
           "valueSd": {
             "deepseek-v4-1-flash-1017": 1.6721313029545655,
@@ -61463,7 +61463,7 @@
           {
             "key": "planRoutes",
             "artifact": "data/plan_cost_routes.json",
-            "sha256": "8abf8b0f944380e9502173a74c3a25006ec049a92238d29283233f3e131f01bd",
+            "sha256": "5fad132bc951ff973287d79478d2d678b6e5489c0193ef4d5fa735bcc1a7d3d9",
             "capturedAt": "2026-10-25",
             "extractor": "editorial Plan evidence registry"
           },
@@ -61531,7 +61531,7 @@
             "extractor": "valuerank.value_v3 freeze"
           }
         ],
-        "bundleHash": "24a735c860d533adc5dc935c1a4ba23a6095c3997145f69bb6c27954c7812648",
+        "bundleHash": "b1410ab7949b507bee667fa9bba79c32a1948ab986d08b89667e353889a03c53",
         "rebuild": "every published output is rebuilt from these artifacts at the pinned publication clock (npm run verify:docs), never from live pages"
       },
       "track": {
@@ -65797,195 +65797,195 @@
               "excluded": [
                 {
                   "row": "claude-haiku-5-5-high@claude-max-20x",
-                  "reason": "owner-named transfer: unevaluable with transfers off (never reselected or replaced by API cost)"
+                  "reason": "owner-named transfer: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
                 },
                 {
                   "row": "claude-haiku-5-5-high@claude-max-5x",
-                  "reason": "owner-named transfer: unevaluable with transfers off (never reselected or replaced by API cost)"
+                  "reason": "owner-named transfer: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
                 },
                 {
                   "row": "claude-haiku-5-5-high@claude-pro",
-                  "reason": "owner-named transfer: unevaluable with transfers off (never reselected or replaced by API cost)"
+                  "reason": "owner-named transfer: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
                 },
                 {
                   "row": "claude-haiku-5-5-medium@claude-max-20x",
-                  "reason": "owner-named transfer: unevaluable with transfers off (never reselected or replaced by API cost)"
+                  "reason": "owner-named transfer: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
                 },
                 {
                   "row": "claude-haiku-5-5-medium@claude-max-5x",
-                  "reason": "owner-named transfer: unevaluable with transfers off (never reselected or replaced by API cost)"
+                  "reason": "owner-named transfer: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
                 },
                 {
                   "row": "claude-haiku-5-5-medium@claude-pro",
-                  "reason": "owner-named transfer: unevaluable with transfers off (never reselected or replaced by API cost)"
+                  "reason": "owner-named transfer: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
                 },
                 {
                   "row": "claude-opus-5-5-high@claude-max-20x",
-                  "reason": "owner-named transfer: unevaluable with transfers off (never reselected or replaced by API cost)"
+                  "reason": "O88 same-model assumption across efforts: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
                 },
                 {
                   "row": "claude-opus-5-5-high@claude-max-5x",
-                  "reason": "owner-named transfer: unevaluable with transfers off (never reselected or replaced by API cost)"
+                  "reason": "O88 same-model assumption across efforts: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
                 },
                 {
                   "row": "claude-opus-5-5-high@claude-pro",
-                  "reason": "owner-named transfer: unevaluable with transfers off (never reselected or replaced by API cost)"
+                  "reason": "O88 same-model assumption across efforts: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
                 },
                 {
                   "row": "claude-opus-5-5-medium@claude-max-20x",
-                  "reason": "owner-named transfer: unevaluable with transfers off (never reselected or replaced by API cost)"
+                  "reason": "O88 same-model assumption across efforts: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
                 },
                 {
                   "row": "claude-opus-5-5-medium@claude-max-5x",
-                  "reason": "owner-named transfer: unevaluable with transfers off (never reselected or replaced by API cost)"
+                  "reason": "O88 same-model assumption across efforts: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
                 },
                 {
                   "row": "claude-opus-5-5-medium@claude-pro",
-                  "reason": "owner-named transfer: unevaluable with transfers off (never reselected or replaced by API cost)"
+                  "reason": "O88 same-model assumption across efforts: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
                 },
                 {
                   "row": "gpt-5.6-luna-low@chatgpt-plus",
-                  "reason": "owner-named transfer: unevaluable with transfers off (never reselected or replaced by API cost)"
+                  "reason": "owner-named transfer: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
                 },
                 {
                   "row": "gpt-5.6-luna-low@chatgpt-pro-100",
-                  "reason": "owner-named transfer: unevaluable with transfers off (never reselected or replaced by API cost)"
+                  "reason": "owner-named transfer: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
                 },
                 {
                   "row": "gpt-5.6-luna-low@chatgpt-pro-200",
-                  "reason": "owner-named transfer: unevaluable with transfers off (never reselected or replaced by API cost)"
+                  "reason": "owner-named transfer: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
                 },
                 {
                   "row": "gpt-5.6-luna-low@chatgpt-pro-500",
-                  "reason": "owner-named transfer: unevaluable with transfers off (never reselected or replaced by API cost)"
+                  "reason": "owner-named transfer: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
                 },
                 {
                   "row": "gpt-6-astra-high@chatgpt-plus",
-                  "reason": "owner-named transfer: unevaluable with transfers off (never reselected or replaced by API cost)"
+                  "reason": "O88 same-model assumption across efforts: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
                 },
                 {
                   "row": "gpt-6-astra-high@chatgpt-pro-100",
-                  "reason": "owner-named transfer: unevaluable with transfers off (never reselected or replaced by API cost)"
+                  "reason": "O88 same-model assumption across efforts: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
                 },
                 {
                   "row": "gpt-6-astra-high@chatgpt-pro-200",
-                  "reason": "owner-named transfer: unevaluable with transfers off (never reselected or replaced by API cost)"
+                  "reason": "O88 same-model assumption across efforts: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
                 },
                 {
                   "row": "gpt-6-astra-high@chatgpt-pro-500",
-                  "reason": "owner-named transfer: unevaluable with transfers off (never reselected or replaced by API cost)"
+                  "reason": "O88 same-model assumption across efforts: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
                 },
                 {
                   "row": "gpt-6-luna-high@chatgpt-plus",
-                  "reason": "owner-named transfer: unevaluable with transfers off (never reselected or replaced by API cost)"
+                  "reason": "owner-named transfer: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
                 },
                 {
                   "row": "gpt-6-luna-high@chatgpt-pro-100",
-                  "reason": "owner-named transfer: unevaluable with transfers off (never reselected or replaced by API cost)"
+                  "reason": "owner-named transfer: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
                 },
                 {
                   "row": "gpt-6-luna-high@chatgpt-pro-200",
-                  "reason": "owner-named transfer: unevaluable with transfers off (never reselected or replaced by API cost)"
+                  "reason": "owner-named transfer: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
                 },
                 {
                   "row": "gpt-6-luna-high@chatgpt-pro-500",
-                  "reason": "owner-named transfer: unevaluable with transfers off (never reselected or replaced by API cost)"
+                  "reason": "owner-named transfer: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
                 },
                 {
                   "row": "gpt-6-luna-medium@chatgpt-plus",
-                  "reason": "owner-named transfer: unevaluable with transfers off (never reselected or replaced by API cost)"
+                  "reason": "owner-named transfer: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
                 },
                 {
                   "row": "gpt-6-luna-medium@chatgpt-pro-100",
-                  "reason": "owner-named transfer: unevaluable with transfers off (never reselected or replaced by API cost)"
+                  "reason": "owner-named transfer: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
                 },
                 {
                   "row": "gpt-6-luna-medium@chatgpt-pro-200",
-                  "reason": "owner-named transfer: unevaluable with transfers off (never reselected or replaced by API cost)"
+                  "reason": "owner-named transfer: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
                 },
                 {
                   "row": "gpt-6-luna-medium@chatgpt-pro-500",
-                  "reason": "owner-named transfer: unevaluable with transfers off (never reselected or replaced by API cost)"
+                  "reason": "owner-named transfer: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
                 },
                 {
                   "row": "gpt-6-luna-xhigh@chatgpt-plus",
-                  "reason": "owner-named transfer: unevaluable with transfers off (never reselected or replaced by API cost)"
+                  "reason": "owner-named transfer: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
                 },
                 {
                   "row": "gpt-6-luna-xhigh@chatgpt-pro-100",
-                  "reason": "owner-named transfer: unevaluable with transfers off (never reselected or replaced by API cost)"
+                  "reason": "owner-named transfer: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
                 },
                 {
                   "row": "gpt-6-luna-xhigh@chatgpt-pro-200",
-                  "reason": "owner-named transfer: unevaluable with transfers off (never reselected or replaced by API cost)"
+                  "reason": "owner-named transfer: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
                 },
                 {
                   "row": "gpt-6-luna-xhigh@chatgpt-pro-500",
-                  "reason": "owner-named transfer: unevaluable with transfers off (never reselected or replaced by API cost)"
+                  "reason": "owner-named transfer: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
                 },
                 {
                   "row": "gpt-6-luna@chatgpt-plus",
-                  "reason": "owner-named transfer: unevaluable with transfers off (never reselected or replaced by API cost)"
+                  "reason": "owner-named transfer: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
                 },
                 {
                   "row": "gpt-6-luna@chatgpt-pro-100",
-                  "reason": "owner-named transfer: unevaluable with transfers off (never reselected or replaced by API cost)"
+                  "reason": "owner-named transfer: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
                 },
                 {
                   "row": "gpt-6-luna@chatgpt-pro-200",
-                  "reason": "owner-named transfer: unevaluable with transfers off (never reselected or replaced by API cost)"
+                  "reason": "owner-named transfer: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
                 },
                 {
                   "row": "gpt-6-luna@chatgpt-pro-500",
-                  "reason": "owner-named transfer: unevaluable with transfers off (never reselected or replaced by API cost)"
+                  "reason": "owner-named transfer: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
                 },
                 {
                   "row": "gpt-6.1-sol-high@chatgpt-plus",
-                  "reason": "owner-named transfer: unevaluable with transfers off (never reselected or replaced by API cost)"
+                  "reason": "O88 same-model assumption across efforts: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
                 },
                 {
                   "row": "gpt-6.1-sol-high@chatgpt-pro-100",
-                  "reason": "owner-named transfer: unevaluable with transfers off (never reselected or replaced by API cost)"
+                  "reason": "O88 same-model assumption across efforts: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
                 },
                 {
                   "row": "gpt-6.1-sol-high@chatgpt-pro-200",
-                  "reason": "owner-named transfer: unevaluable with transfers off (never reselected or replaced by API cost)"
+                  "reason": "O88 same-model assumption across efforts: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
                 },
                 {
                   "row": "gpt-6.1-sol-high@chatgpt-pro-500",
-                  "reason": "owner-named transfer: unevaluable with transfers off (never reselected or replaced by API cost)"
+                  "reason": "O88 same-model assumption across efforts: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
                 },
                 {
                   "row": "gpt-6.1-sol-medium@chatgpt-plus",
-                  "reason": "owner-named transfer: unevaluable with transfers off (never reselected or replaced by API cost)"
+                  "reason": "O88 same-model assumption across efforts: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
                 },
                 {
                   "row": "gpt-6.1-sol-medium@chatgpt-pro-100",
-                  "reason": "owner-named transfer: unevaluable with transfers off (never reselected or replaced by API cost)"
+                  "reason": "O88 same-model assumption across efforts: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
                 },
                 {
                   "row": "gpt-6.1-sol-medium@chatgpt-pro-200",
-                  "reason": "owner-named transfer: unevaluable with transfers off (never reselected or replaced by API cost)"
+                  "reason": "O88 same-model assumption across efforts: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
                 },
                 {
                   "row": "gpt-6.1-sol-medium@chatgpt-pro-500",
-                  "reason": "owner-named transfer: unevaluable with transfers off (never reselected or replaced by API cost)"
+                  "reason": "O88 same-model assumption across efforts: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
                 },
                 {
                   "row": "mimo-v2-6-pro@mimo-token-plan-lite",
-                  "reason": "owner-named transfer: unevaluable with transfers off (never reselected or replaced by API cost)"
+                  "reason": "O46 provider quota ceiling: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
                 },
                 {
                   "row": "mimo-v2-6-pro@mimo-token-plan-max",
-                  "reason": "owner-named transfer: unevaluable with transfers off (never reselected or replaced by API cost)"
+                  "reason": "O46 provider quota ceiling: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
                 },
                 {
                   "row": "mimo-v2-6-pro@mimo-token-plan-pro",
-                  "reason": "owner-named transfer: unevaluable with transfers off (never reselected or replaced by API cost)"
+                  "reason": "O46 provider quota ceiling: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
                 },
                 {
                   "row": "mimo-v2-6-pro@mimo-token-plan-standard",
-                  "reason": "owner-named transfer: unevaluable with transfers off (never reselected or replaced by API cost)"
+                  "reason": "O46 provider quota ceiling: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
                 }
               ]
             },
@@ -66100,195 +66100,195 @@
               "excluded": [
                 {
                   "row": "claude-haiku-5-5-high@claude-max-20x",
-                  "reason": "owner-named transfer: unevaluable with transfers off (never reselected or replaced by API cost)"
+                  "reason": "owner-named transfer: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
                 },
                 {
                   "row": "claude-haiku-5-5-high@claude-max-5x",
-                  "reason": "owner-named transfer: unevaluable with transfers off (never reselected or replaced by API cost)"
+                  "reason": "owner-named transfer: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
                 },
                 {
                   "row": "claude-haiku-5-5-high@claude-pro",
-                  "reason": "owner-named transfer: unevaluable with transfers off (never reselected or replaced by API cost)"
+                  "reason": "owner-named transfer: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
                 },
                 {
                   "row": "claude-haiku-5-5-medium@claude-max-20x",
-                  "reason": "owner-named transfer: unevaluable with transfers off (never reselected or replaced by API cost)"
+                  "reason": "owner-named transfer: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
                 },
                 {
                   "row": "claude-haiku-5-5-medium@claude-max-5x",
-                  "reason": "owner-named transfer: unevaluable with transfers off (never reselected or replaced by API cost)"
+                  "reason": "owner-named transfer: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
                 },
                 {
                   "row": "claude-haiku-5-5-medium@claude-pro",
-                  "reason": "owner-named transfer: unevaluable with transfers off (never reselected or replaced by API cost)"
+                  "reason": "owner-named transfer: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
                 },
                 {
                   "row": "claude-opus-5-5-high@claude-max-20x",
-                  "reason": "owner-named transfer: unevaluable with transfers off (never reselected or replaced by API cost)"
+                  "reason": "O88 same-model assumption across efforts: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
                 },
                 {
                   "row": "claude-opus-5-5-high@claude-max-5x",
-                  "reason": "owner-named transfer: unevaluable with transfers off (never reselected or replaced by API cost)"
+                  "reason": "O88 same-model assumption across efforts: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
                 },
                 {
                   "row": "claude-opus-5-5-high@claude-pro",
-                  "reason": "owner-named transfer: unevaluable with transfers off (never reselected or replaced by API cost)"
+                  "reason": "O88 same-model assumption across efforts: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
                 },
                 {
                   "row": "claude-opus-5-5-medium@claude-max-20x",
-                  "reason": "owner-named transfer: unevaluable with transfers off (never reselected or replaced by API cost)"
+                  "reason": "O88 same-model assumption across efforts: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
                 },
                 {
                   "row": "claude-opus-5-5-medium@claude-max-5x",
-                  "reason": "owner-named transfer: unevaluable with transfers off (never reselected or replaced by API cost)"
+                  "reason": "O88 same-model assumption across efforts: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
                 },
                 {
                   "row": "claude-opus-5-5-medium@claude-pro",
-                  "reason": "owner-named transfer: unevaluable with transfers off (never reselected or replaced by API cost)"
+                  "reason": "O88 same-model assumption across efforts: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
                 },
                 {
                   "row": "gpt-5.6-luna-low@chatgpt-plus",
-                  "reason": "owner-named transfer: unevaluable with transfers off (never reselected or replaced by API cost)"
+                  "reason": "owner-named transfer: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
                 },
                 {
                   "row": "gpt-5.6-luna-low@chatgpt-pro-100",
-                  "reason": "owner-named transfer: unevaluable with transfers off (never reselected or replaced by API cost)"
+                  "reason": "owner-named transfer: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
                 },
                 {
                   "row": "gpt-5.6-luna-low@chatgpt-pro-200",
-                  "reason": "owner-named transfer: unevaluable with transfers off (never reselected or replaced by API cost)"
+                  "reason": "owner-named transfer: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
                 },
                 {
                   "row": "gpt-5.6-luna-low@chatgpt-pro-500",
-                  "reason": "owner-named transfer: unevaluable with transfers off (never reselected or replaced by API cost)"
+                  "reason": "owner-named transfer: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
                 },
                 {
                   "row": "gpt-6-astra-high@chatgpt-plus",
-                  "reason": "owner-named transfer: unevaluable with transfers off (never reselected or replaced by API cost)"
+                  "reason": "O88 same-model assumption across efforts: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
                 },
                 {
                   "row": "gpt-6-astra-high@chatgpt-pro-100",
-                  "reason": "owner-named transfer: unevaluable with transfers off (never reselected or replaced by API cost)"
+                  "reason": "O88 same-model assumption across efforts: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
                 },
                 {
                   "row": "gpt-6-astra-high@chatgpt-pro-200",
-                  "reason": "owner-named transfer: unevaluable with transfers off (never reselected or replaced by API cost)"
+                  "reason": "O88 same-model assumption across efforts: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
                 },
                 {
                   "row": "gpt-6-astra-high@chatgpt-pro-500",
-                  "reason": "owner-named transfer: unevaluable with transfers off (never reselected or replaced by API cost)"
+                  "reason": "O88 same-model assumption across efforts: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
                 },
                 {
                   "row": "gpt-6-luna-high@chatgpt-plus",
-                  "reason": "owner-named transfer: unevaluable with transfers off (never reselected or replaced by API cost)"
+                  "reason": "owner-named transfer: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
                 },
                 {
                   "row": "gpt-6-luna-high@chatgpt-pro-100",
-                  "reason": "owner-named transfer: unevaluable with transfers off (never reselected or replaced by API cost)"
+                  "reason": "owner-named transfer: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
                 },
                 {
                   "row": "gpt-6-luna-high@chatgpt-pro-200",
-                  "reason": "owner-named transfer: unevaluable with transfers off (never reselected or replaced by API cost)"
+                  "reason": "owner-named transfer: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
                 },
                 {
                   "row": "gpt-6-luna-high@chatgpt-pro-500",
-                  "reason": "owner-named transfer: unevaluable with transfers off (never reselected or replaced by API cost)"
+                  "reason": "owner-named transfer: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
                 },
                 {
                   "row": "gpt-6-luna-medium@chatgpt-plus",
-                  "reason": "owner-named transfer: unevaluable with transfers off (never reselected or replaced by API cost)"
+                  "reason": "owner-named transfer: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
                 },
                 {
                   "row": "gpt-6-luna-medium@chatgpt-pro-100",
-                  "reason": "owner-named transfer: unevaluable with transfers off (never reselected or replaced by API cost)"
+                  "reason": "owner-named transfer: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
                 },
                 {
                   "row": "gpt-6-luna-medium@chatgpt-pro-200",
-                  "reason": "owner-named transfer: unevaluable with transfers off (never reselected or replaced by API cost)"
+                  "reason": "owner-named transfer: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
                 },
                 {
                   "row": "gpt-6-luna-medium@chatgpt-pro-500",
-                  "reason": "owner-named transfer: unevaluable with transfers off (never reselected or replaced by API cost)"
+                  "reason": "owner-named transfer: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
                 },
                 {
                   "row": "gpt-6-luna-xhigh@chatgpt-plus",
-                  "reason": "owner-named transfer: unevaluable with transfers off (never reselected or replaced by API cost)"
+                  "reason": "owner-named transfer: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
                 },
                 {
                   "row": "gpt-6-luna-xhigh@chatgpt-pro-100",
-                  "reason": "owner-named transfer: unevaluable with transfers off (never reselected or replaced by API cost)"
+                  "reason": "owner-named transfer: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
                 },
                 {
                   "row": "gpt-6-luna-xhigh@chatgpt-pro-200",
-                  "reason": "owner-named transfer: unevaluable with transfers off (never reselected or replaced by API cost)"
+                  "reason": "owner-named transfer: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
                 },
                 {
                   "row": "gpt-6-luna-xhigh@chatgpt-pro-500",
-                  "reason": "owner-named transfer: unevaluable with transfers off (never reselected or replaced by API cost)"
+                  "reason": "owner-named transfer: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
                 },
                 {
                   "row": "gpt-6-luna@chatgpt-plus",
-                  "reason": "owner-named transfer: unevaluable with transfers off (never reselected or replaced by API cost)"
+                  "reason": "owner-named transfer: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
                 },
                 {
                   "row": "gpt-6-luna@chatgpt-pro-100",
-                  "reason": "owner-named transfer: unevaluable with transfers off (never reselected or replaced by API cost)"
+                  "reason": "owner-named transfer: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
                 },
                 {
                   "row": "gpt-6-luna@chatgpt-pro-200",
-                  "reason": "owner-named transfer: unevaluable with transfers off (never reselected or replaced by API cost)"
+                  "reason": "owner-named transfer: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
                 },
                 {
                   "row": "gpt-6-luna@chatgpt-pro-500",
-                  "reason": "owner-named transfer: unevaluable with transfers off (never reselected or replaced by API cost)"
+                  "reason": "owner-named transfer: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
                 },
                 {
                   "row": "gpt-6.1-sol-high@chatgpt-plus",
-                  "reason": "owner-named transfer: unevaluable with transfers off (never reselected or replaced by API cost)"
+                  "reason": "O88 same-model assumption across efforts: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
                 },
                 {
                   "row": "gpt-6.1-sol-high@chatgpt-pro-100",
-                  "reason": "owner-named transfer: unevaluable with transfers off (never reselected or replaced by API cost)"
+                  "reason": "O88 same-model assumption across efforts: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
                 },
                 {
                   "row": "gpt-6.1-sol-high@chatgpt-pro-200",
-                  "reason": "owner-named transfer: unevaluable with transfers off (never reselected or replaced by API cost)"
+                  "reason": "O88 same-model assumption across efforts: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
                 },
                 {
                   "row": "gpt-6.1-sol-high@chatgpt-pro-500",
-                  "reason": "owner-named transfer: unevaluable with transfers off (never reselected or replaced by API cost)"
+                  "reason": "O88 same-model assumption across efforts: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
                 },
                 {
                   "row": "gpt-6.1-sol-medium@chatgpt-plus",
-                  "reason": "owner-named transfer: unevaluable with transfers off (never reselected or replaced by API cost)"
+                  "reason": "O88 same-model assumption across efforts: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
                 },
                 {
                   "row": "gpt-6.1-sol-medium@chatgpt-pro-100",
-                  "reason": "owner-named transfer: unevaluable with transfers off (never reselected or replaced by API cost)"
+                  "reason": "O88 same-model assumption across efforts: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
                 },
                 {
                   "row": "gpt-6.1-sol-medium@chatgpt-pro-200",
-                  "reason": "owner-named transfer: unevaluable with transfers off (never reselected or replaced by API cost)"
+                  "reason": "O88 same-model assumption across efforts: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
                 },
                 {
                   "row": "gpt-6.1-sol-medium@chatgpt-pro-500",
-                  "reason": "owner-named transfer: unevaluable with transfers off (never reselected or replaced by API cost)"
+                  "reason": "O88 same-model assumption across efforts: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
                 },
                 {
                   "row": "mimo-v2-6-pro@mimo-token-plan-lite",
-                  "reason": "owner-named transfer: unevaluable with transfers off (never reselected or replaced by API cost)"
+                  "reason": "O46 provider quota ceiling: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
                 },
                 {
                   "row": "mimo-v2-6-pro@mimo-token-plan-max",
-                  "reason": "owner-named transfer: unevaluable with transfers off (never reselected or replaced by API cost)"
+                  "reason": "O46 provider quota ceiling: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
                 },
                 {
                   "row": "mimo-v2-6-pro@mimo-token-plan-pro",
-                  "reason": "owner-named transfer: unevaluable with transfers off (never reselected or replaced by API cost)"
+                  "reason": "O46 provider quota ceiling: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
                 },
                 {
                   "row": "mimo-v2-6-pro@mimo-token-plan-standard",
-                  "reason": "owner-named transfer: unevaluable with transfers off (never reselected or replaced by API cost)"
+                  "reason": "O46 provider quota ceiling: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
                 }
               ]
             },
@@ -66401,195 +66401,195 @@
               "excluded": [
                 {
                   "row": "claude-haiku-5-5-high@claude-max-20x",
-                  "reason": "owner-named transfer: unevaluable with transfers off (never reselected or replaced by API cost)"
+                  "reason": "owner-named transfer: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
                 },
                 {
                   "row": "claude-haiku-5-5-high@claude-max-5x",
-                  "reason": "owner-named transfer: unevaluable with transfers off (never reselected or replaced by API cost)"
+                  "reason": "owner-named transfer: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
                 },
                 {
                   "row": "claude-haiku-5-5-high@claude-pro",
-                  "reason": "owner-named transfer: unevaluable with transfers off (never reselected or replaced by API cost)"
+                  "reason": "owner-named transfer: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
                 },
                 {
                   "row": "claude-haiku-5-5-medium@claude-max-20x",
-                  "reason": "owner-named transfer: unevaluable with transfers off (never reselected or replaced by API cost)"
+                  "reason": "owner-named transfer: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
                 },
                 {
                   "row": "claude-haiku-5-5-medium@claude-max-5x",
-                  "reason": "owner-named transfer: unevaluable with transfers off (never reselected or replaced by API cost)"
+                  "reason": "owner-named transfer: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
                 },
                 {
                   "row": "claude-haiku-5-5-medium@claude-pro",
-                  "reason": "owner-named transfer: unevaluable with transfers off (never reselected or replaced by API cost)"
+                  "reason": "owner-named transfer: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
                 },
                 {
                   "row": "claude-opus-5-5-high@claude-max-20x",
-                  "reason": "owner-named transfer: unevaluable with transfers off (never reselected or replaced by API cost)"
+                  "reason": "O88 same-model assumption across efforts: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
                 },
                 {
                   "row": "claude-opus-5-5-high@claude-max-5x",
-                  "reason": "owner-named transfer: unevaluable with transfers off (never reselected or replaced by API cost)"
+                  "reason": "O88 same-model assumption across efforts: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
                 },
                 {
                   "row": "claude-opus-5-5-high@claude-pro",
-                  "reason": "owner-named transfer: unevaluable with transfers off (never reselected or replaced by API cost)"
+                  "reason": "O88 same-model assumption across efforts: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
                 },
                 {
                   "row": "claude-opus-5-5-medium@claude-max-20x",
-                  "reason": "owner-named transfer: unevaluable with transfers off (never reselected or replaced by API cost)"
+                  "reason": "O88 same-model assumption across efforts: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
                 },
                 {
                   "row": "claude-opus-5-5-medium@claude-max-5x",
-                  "reason": "owner-named transfer: unevaluable with transfers off (never reselected or replaced by API cost)"
+                  "reason": "O88 same-model assumption across efforts: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
                 },
                 {
                   "row": "claude-opus-5-5-medium@claude-pro",
-                  "reason": "owner-named transfer: unevaluable with transfers off (never reselected or replaced by API cost)"
+                  "reason": "O88 same-model assumption across efforts: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
                 },
                 {
                   "row": "gpt-5.6-luna-low@chatgpt-plus",
-                  "reason": "owner-named transfer: unevaluable with transfers off (never reselected or replaced by API cost)"
+                  "reason": "owner-named transfer: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
                 },
                 {
                   "row": "gpt-5.6-luna-low@chatgpt-pro-100",
-                  "reason": "owner-named transfer: unevaluable with transfers off (never reselected or replaced by API cost)"
+                  "reason": "owner-named transfer: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
                 },
                 {
                   "row": "gpt-5.6-luna-low@chatgpt-pro-200",
-                  "reason": "owner-named transfer: unevaluable with transfers off (never reselected or replaced by API cost)"
+                  "reason": "owner-named transfer: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
                 },
                 {
                   "row": "gpt-5.6-luna-low@chatgpt-pro-500",
-                  "reason": "owner-named transfer: unevaluable with transfers off (never reselected or replaced by API cost)"
+                  "reason": "owner-named transfer: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
                 },
                 {
                   "row": "gpt-6-astra-high@chatgpt-plus",
-                  "reason": "owner-named transfer: unevaluable with transfers off (never reselected or replaced by API cost)"
+                  "reason": "O88 same-model assumption across efforts: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
                 },
                 {
                   "row": "gpt-6-astra-high@chatgpt-pro-100",
-                  "reason": "owner-named transfer: unevaluable with transfers off (never reselected or replaced by API cost)"
+                  "reason": "O88 same-model assumption across efforts: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
                 },
                 {
                   "row": "gpt-6-astra-high@chatgpt-pro-200",
-                  "reason": "owner-named transfer: unevaluable with transfers off (never reselected or replaced by API cost)"
+                  "reason": "O88 same-model assumption across efforts: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
                 },
                 {
                   "row": "gpt-6-astra-high@chatgpt-pro-500",
-                  "reason": "owner-named transfer: unevaluable with transfers off (never reselected or replaced by API cost)"
+                  "reason": "O88 same-model assumption across efforts: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
                 },
                 {
                   "row": "gpt-6-luna-high@chatgpt-plus",
-                  "reason": "owner-named transfer: unevaluable with transfers off (never reselected or replaced by API cost)"
+                  "reason": "owner-named transfer: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
                 },
                 {
                   "row": "gpt-6-luna-high@chatgpt-pro-100",
-                  "reason": "owner-named transfer: unevaluable with transfers off (never reselected or replaced by API cost)"
+                  "reason": "owner-named transfer: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
                 },
                 {
                   "row": "gpt-6-luna-high@chatgpt-pro-200",
-                  "reason": "owner-named transfer: unevaluable with transfers off (never reselected or replaced by API cost)"
+                  "reason": "owner-named transfer: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
                 },
                 {
                   "row": "gpt-6-luna-high@chatgpt-pro-500",
-                  "reason": "owner-named transfer: unevaluable with transfers off (never reselected or replaced by API cost)"
+                  "reason": "owner-named transfer: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
                 },
                 {
                   "row": "gpt-6-luna-medium@chatgpt-plus",
-                  "reason": "owner-named transfer: unevaluable with transfers off (never reselected or replaced by API cost)"
+                  "reason": "owner-named transfer: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
                 },
                 {
                   "row": "gpt-6-luna-medium@chatgpt-pro-100",
-                  "reason": "owner-named transfer: unevaluable with transfers off (never reselected or replaced by API cost)"
+                  "reason": "owner-named transfer: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
                 },
                 {
                   "row": "gpt-6-luna-medium@chatgpt-pro-200",
-                  "reason": "owner-named transfer: unevaluable with transfers off (never reselected or replaced by API cost)"
+                  "reason": "owner-named transfer: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
                 },
                 {
                   "row": "gpt-6-luna-medium@chatgpt-pro-500",
-                  "reason": "owner-named transfer: unevaluable with transfers off (never reselected or replaced by API cost)"
+                  "reason": "owner-named transfer: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
                 },
                 {
                   "row": "gpt-6-luna-xhigh@chatgpt-plus",
-                  "reason": "owner-named transfer: unevaluable with transfers off (never reselected or replaced by API cost)"
+                  "reason": "owner-named transfer: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
                 },
                 {
                   "row": "gpt-6-luna-xhigh@chatgpt-pro-100",
-                  "reason": "owner-named transfer: unevaluable with transfers off (never reselected or replaced by API cost)"
+                  "reason": "owner-named transfer: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
                 },
                 {
                   "row": "gpt-6-luna-xhigh@chatgpt-pro-200",
-                  "reason": "owner-named transfer: unevaluable with transfers off (never reselected or replaced by API cost)"
+                  "reason": "owner-named transfer: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
                 },
                 {
                   "row": "gpt-6-luna-xhigh@chatgpt-pro-500",
-                  "reason": "owner-named transfer: unevaluable with transfers off (never reselected or replaced by API cost)"
+                  "reason": "owner-named transfer: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
                 },
                 {
                   "row": "gpt-6-luna@chatgpt-plus",
-                  "reason": "owner-named transfer: unevaluable with transfers off (never reselected or replaced by API cost)"
+                  "reason": "owner-named transfer: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
                 },
                 {
                   "row": "gpt-6-luna@chatgpt-pro-100",
-                  "reason": "owner-named transfer: unevaluable with transfers off (never reselected or replaced by API cost)"
+                  "reason": "owner-named transfer: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
                 },
                 {
                   "row": "gpt-6-luna@chatgpt-pro-200",
-                  "reason": "owner-named transfer: unevaluable with transfers off (never reselected or replaced by API cost)"
+                  "reason": "owner-named transfer: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
                 },
                 {
                   "row": "gpt-6-luna@chatgpt-pro-500",
-                  "reason": "owner-named transfer: unevaluable with transfers off (never reselected or replaced by API cost)"
+                  "reason": "owner-named transfer: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
                 },
                 {
                   "row": "gpt-6.1-sol-high@chatgpt-plus",
-                  "reason": "owner-named transfer: unevaluable with transfers off (never reselected or replaced by API cost)"
+                  "reason": "O88 same-model assumption across efforts: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
                 },
                 {
                   "row": "gpt-6.1-sol-high@chatgpt-pro-100",
-                  "reason": "owner-named transfer: unevaluable with transfers off (never reselected or replaced by API cost)"
+                  "reason": "O88 same-model assumption across efforts: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
                 },
                 {
                   "row": "gpt-6.1-sol-high@chatgpt-pro-200",
-                  "reason": "owner-named transfer: unevaluable with transfers off (never reselected or replaced by API cost)"
+                  "reason": "O88 same-model assumption across efforts: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
                 },
                 {
                   "row": "gpt-6.1-sol-high@chatgpt-pro-500",
-                  "reason": "owner-named transfer: unevaluable with transfers off (never reselected or replaced by API cost)"
+                  "reason": "O88 same-model assumption across efforts: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
                 },
                 {
                   "row": "gpt-6.1-sol-medium@chatgpt-plus",
-                  "reason": "owner-named transfer: unevaluable with transfers off (never reselected or replaced by API cost)"
+                  "reason": "O88 same-model assumption across efforts: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
                 },
                 {
                   "row": "gpt-6.1-sol-medium@chatgpt-pro-100",
-                  "reason": "owner-named transfer: unevaluable with transfers off (never reselected or replaced by API cost)"
+                  "reason": "O88 same-model assumption across efforts: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
                 },
                 {
                   "row": "gpt-6.1-sol-medium@chatgpt-pro-200",
-                  "reason": "owner-named transfer: unevaluable with transfers off (never reselected or replaced by API cost)"
+                  "reason": "O88 same-model assumption across efforts: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
                 },
                 {
                   "row": "gpt-6.1-sol-medium@chatgpt-pro-500",
-                  "reason": "owner-named transfer: unevaluable with transfers off (never reselected or replaced by API cost)"
+                  "reason": "O88 same-model assumption across efforts: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
                 },
                 {
                   "row": "mimo-v2-6-pro@mimo-token-plan-lite",
-                  "reason": "owner-named transfer: unevaluable with transfers off (never reselected or replaced by API cost)"
+                  "reason": "O46 provider quota ceiling: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
                 },
                 {
                   "row": "mimo-v2-6-pro@mimo-token-plan-max",
-                  "reason": "owner-named transfer: unevaluable with transfers off (never reselected or replaced by API cost)"
+                  "reason": "O46 provider quota ceiling: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
                 },
                 {
                   "row": "mimo-v2-6-pro@mimo-token-plan-pro",
-                  "reason": "owner-named transfer: unevaluable with transfers off (never reselected or replaced by API cost)"
+                  "reason": "O46 provider quota ceiling: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
                 },
                 {
                   "row": "mimo-v2-6-pro@mimo-token-plan-standard",
-                  "reason": "owner-named transfer: unevaluable with transfers off (never reselected or replaced by API cost)"
+                  "reason": "O46 provider quota ceiling: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
                 }
               ]
             },
@@ -66703,195 +66703,195 @@
               "excluded": [
                 {
                   "row": "claude-haiku-5-5-high@claude-max-20x",
-                  "reason": "owner-named transfer: unevaluable with transfers off (never reselected or replaced by API cost)"
+                  "reason": "owner-named transfer: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
                 },
                 {
                   "row": "claude-haiku-5-5-high@claude-max-5x",
-                  "reason": "owner-named transfer: unevaluable with transfers off (never reselected or replaced by API cost)"
+                  "reason": "owner-named transfer: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
                 },
                 {
                   "row": "claude-haiku-5-5-high@claude-pro",
-                  "reason": "owner-named transfer: unevaluable with transfers off (never reselected or replaced by API cost)"
+                  "reason": "owner-named transfer: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
                 },
                 {
                   "row": "claude-haiku-5-5-medium@claude-max-20x",
-                  "reason": "owner-named transfer: unevaluable with transfers off (never reselected or replaced by API cost)"
+                  "reason": "owner-named transfer: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
                 },
                 {
                   "row": "claude-haiku-5-5-medium@claude-max-5x",
-                  "reason": "owner-named transfer: unevaluable with transfers off (never reselected or replaced by API cost)"
+                  "reason": "owner-named transfer: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
                 },
                 {
                   "row": "claude-haiku-5-5-medium@claude-pro",
-                  "reason": "owner-named transfer: unevaluable with transfers off (never reselected or replaced by API cost)"
+                  "reason": "owner-named transfer: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
                 },
                 {
                   "row": "claude-opus-5-5-high@claude-max-20x",
-                  "reason": "owner-named transfer: unevaluable with transfers off (never reselected or replaced by API cost)"
+                  "reason": "O88 same-model assumption across efforts: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
                 },
                 {
                   "row": "claude-opus-5-5-high@claude-max-5x",
-                  "reason": "owner-named transfer: unevaluable with transfers off (never reselected or replaced by API cost)"
+                  "reason": "O88 same-model assumption across efforts: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
                 },
                 {
                   "row": "claude-opus-5-5-high@claude-pro",
-                  "reason": "owner-named transfer: unevaluable with transfers off (never reselected or replaced by API cost)"
+                  "reason": "O88 same-model assumption across efforts: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
                 },
                 {
                   "row": "claude-opus-5-5-medium@claude-max-20x",
-                  "reason": "owner-named transfer: unevaluable with transfers off (never reselected or replaced by API cost)"
+                  "reason": "O88 same-model assumption across efforts: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
                 },
                 {
                   "row": "claude-opus-5-5-medium@claude-max-5x",
-                  "reason": "owner-named transfer: unevaluable with transfers off (never reselected or replaced by API cost)"
+                  "reason": "O88 same-model assumption across efforts: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
                 },
                 {
                   "row": "claude-opus-5-5-medium@claude-pro",
-                  "reason": "owner-named transfer: unevaluable with transfers off (never reselected or replaced by API cost)"
+                  "reason": "O88 same-model assumption across efforts: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
                 },
                 {
                   "row": "gpt-5.6-luna-low@chatgpt-plus",
-                  "reason": "owner-named transfer: unevaluable with transfers off (never reselected or replaced by API cost)"
+                  "reason": "owner-named transfer: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
                 },
                 {
                   "row": "gpt-5.6-luna-low@chatgpt-pro-100",
-                  "reason": "owner-named transfer: unevaluable with transfers off (never reselected or replaced by API cost)"
+                  "reason": "owner-named transfer: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
                 },
                 {
                   "row": "gpt-5.6-luna-low@chatgpt-pro-200",
-                  "reason": "owner-named transfer: unevaluable with transfers off (never reselected or replaced by API cost)"
+                  "reason": "owner-named transfer: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
                 },
                 {
                   "row": "gpt-5.6-luna-low@chatgpt-pro-500",
-                  "reason": "owner-named transfer: unevaluable with transfers off (never reselected or replaced by API cost)"
+                  "reason": "owner-named transfer: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
                 },
                 {
                   "row": "gpt-6-astra-high@chatgpt-plus",
-                  "reason": "owner-named transfer: unevaluable with transfers off (never reselected or replaced by API cost)"
+                  "reason": "O88 same-model assumption across efforts: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
                 },
                 {
                   "row": "gpt-6-astra-high@chatgpt-pro-100",
-                  "reason": "owner-named transfer: unevaluable with transfers off (never reselected or replaced by API cost)"
+                  "reason": "O88 same-model assumption across efforts: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
                 },
                 {
                   "row": "gpt-6-astra-high@chatgpt-pro-200",
-                  "reason": "owner-named transfer: unevaluable with transfers off (never reselected or replaced by API cost)"
+                  "reason": "O88 same-model assumption across efforts: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
                 },
                 {
                   "row": "gpt-6-astra-high@chatgpt-pro-500",
-                  "reason": "owner-named transfer: unevaluable with transfers off (never reselected or replaced by API cost)"
+                  "reason": "O88 same-model assumption across efforts: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
                 },
                 {
                   "row": "gpt-6-luna-high@chatgpt-plus",
-                  "reason": "owner-named transfer: unevaluable with transfers off (never reselected or replaced by API cost)"
+                  "reason": "owner-named transfer: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
                 },
                 {
                   "row": "gpt-6-luna-high@chatgpt-pro-100",
-                  "reason": "owner-named transfer: unevaluable with transfers off (never reselected or replaced by API cost)"
+                  "reason": "owner-named transfer: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
                 },
                 {
                   "row": "gpt-6-luna-high@chatgpt-pro-200",
-                  "reason": "owner-named transfer: unevaluable with transfers off (never reselected or replaced by API cost)"
+                  "reason": "owner-named transfer: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
                 },
                 {
                   "row": "gpt-6-luna-high@chatgpt-pro-500",
-                  "reason": "owner-named transfer: unevaluable with transfers off (never reselected or replaced by API cost)"
+                  "reason": "owner-named transfer: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
                 },
                 {
                   "row": "gpt-6-luna-medium@chatgpt-plus",
-                  "reason": "owner-named transfer: unevaluable with transfers off (never reselected or replaced by API cost)"
+                  "reason": "owner-named transfer: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
                 },
                 {
                   "row": "gpt-6-luna-medium@chatgpt-pro-100",
-                  "reason": "owner-named transfer: unevaluable with transfers off (never reselected or replaced by API cost)"
+                  "reason": "owner-named transfer: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
                 },
                 {
                   "row": "gpt-6-luna-medium@chatgpt-pro-200",
-                  "reason": "owner-named transfer: unevaluable with transfers off (never reselected or replaced by API cost)"
+                  "reason": "owner-named transfer: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
                 },
                 {
                   "row": "gpt-6-luna-medium@chatgpt-pro-500",
-                  "reason": "owner-named transfer: unevaluable with transfers off (never reselected or replaced by API cost)"
+                  "reason": "owner-named transfer: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
                 },
                 {
                   "row": "gpt-6-luna-xhigh@chatgpt-plus",
-                  "reason": "owner-named transfer: unevaluable with transfers off (never reselected or replaced by API cost)"
+                  "reason": "owner-named transfer: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
                 },
                 {
                   "row": "gpt-6-luna-xhigh@chatgpt-pro-100",
-                  "reason": "owner-named transfer: unevaluable with transfers off (never reselected or replaced by API cost)"
+                  "reason": "owner-named transfer: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
                 },
                 {
                   "row": "gpt-6-luna-xhigh@chatgpt-pro-200",
-                  "reason": "owner-named transfer: unevaluable with transfers off (never reselected or replaced by API cost)"
+                  "reason": "owner-named transfer: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
                 },
                 {
                   "row": "gpt-6-luna-xhigh@chatgpt-pro-500",
-                  "reason": "owner-named transfer: unevaluable with transfers off (never reselected or replaced by API cost)"
+                  "reason": "owner-named transfer: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
                 },
                 {
                   "row": "gpt-6-luna@chatgpt-plus",
-                  "reason": "owner-named transfer: unevaluable with transfers off (never reselected or replaced by API cost)"
+                  "reason": "owner-named transfer: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
                 },
                 {
                   "row": "gpt-6-luna@chatgpt-pro-100",
-                  "reason": "owner-named transfer: unevaluable with transfers off (never reselected or replaced by API cost)"
+                  "reason": "owner-named transfer: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
                 },
                 {
                   "row": "gpt-6-luna@chatgpt-pro-200",
-                  "reason": "owner-named transfer: unevaluable with transfers off (never reselected or replaced by API cost)"
+                  "reason": "owner-named transfer: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
                 },
                 {
                   "row": "gpt-6-luna@chatgpt-pro-500",
-                  "reason": "owner-named transfer: unevaluable with transfers off (never reselected or replaced by API cost)"
+                  "reason": "owner-named transfer: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
                 },
                 {
                   "row": "gpt-6.1-sol-high@chatgpt-plus",
-                  "reason": "owner-named transfer: unevaluable with transfers off (never reselected or replaced by API cost)"
+                  "reason": "O88 same-model assumption across efforts: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
                 },
                 {
                   "row": "gpt-6.1-sol-high@chatgpt-pro-100",
-                  "reason": "owner-named transfer: unevaluable with transfers off (never reselected or replaced by API cost)"
+                  "reason": "O88 same-model assumption across efforts: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
                 },
                 {
                   "row": "gpt-6.1-sol-high@chatgpt-pro-200",
-                  "reason": "owner-named transfer: unevaluable with transfers off (never reselected or replaced by API cost)"
+                  "reason": "O88 same-model assumption across efforts: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
                 },
                 {
                   "row": "gpt-6.1-sol-high@chatgpt-pro-500",
-                  "reason": "owner-named transfer: unevaluable with transfers off (never reselected or replaced by API cost)"
+                  "reason": "O88 same-model assumption across efforts: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
                 },
                 {
                   "row": "gpt-6.1-sol-medium@chatgpt-plus",
-                  "reason": "owner-named transfer: unevaluable with transfers off (never reselected or replaced by API cost)"
+                  "reason": "O88 same-model assumption across efforts: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
                 },
                 {
                   "row": "gpt-6.1-sol-medium@chatgpt-pro-100",
-                  "reason": "owner-named transfer: unevaluable with transfers off (never reselected or replaced by API cost)"
+                  "reason": "O88 same-model assumption across efforts: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
                 },
                 {
                   "row": "gpt-6.1-sol-medium@chatgpt-pro-200",
-                  "reason": "owner-named transfer: unevaluable with transfers off (never reselected or replaced by API cost)"
+                  "reason": "O88 same-model assumption across efforts: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
                 },
                 {
                   "row": "gpt-6.1-sol-medium@chatgpt-pro-500",
-                  "reason": "owner-named transfer: unevaluable with transfers off (never reselected or replaced by API cost)"
+                  "reason": "O88 same-model assumption across efforts: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
                 },
                 {
                   "row": "mimo-v2-6-pro@mimo-token-plan-lite",
-                  "reason": "owner-named transfer: unevaluable with transfers off (never reselected or replaced by API cost)"
+                  "reason": "O46 provider quota ceiling: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
                 },
                 {
                   "row": "mimo-v2-6-pro@mimo-token-plan-max",
-                  "reason": "owner-named transfer: unevaluable with transfers off (never reselected or replaced by API cost)"
+                  "reason": "O46 provider quota ceiling: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
                 },
                 {
                   "row": "mimo-v2-6-pro@mimo-token-plan-pro",
-                  "reason": "owner-named transfer: unevaluable with transfers off (never reselected or replaced by API cost)"
+                  "reason": "O46 provider quota ceiling: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
                 },
                 {
                   "row": "mimo-v2-6-pro@mimo-token-plan-standard",
-                  "reason": "owner-named transfer: unevaluable with transfers off (never reselected or replaced by API cost)"
+                  "reason": "O46 provider quota ceiling: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
                 }
               ]
             },
@@ -67005,195 +67005,195 @@
               "excluded": [
                 {
                   "row": "claude-haiku-5-5-high@claude-max-20x",
-                  "reason": "owner-named transfer: unevaluable with transfers off (never reselected or replaced by API cost)"
+                  "reason": "owner-named transfer: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
                 },
                 {
                   "row": "claude-haiku-5-5-high@claude-max-5x",
-                  "reason": "owner-named transfer: unevaluable with transfers off (never reselected or replaced by API cost)"
+                  "reason": "owner-named transfer: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
                 },
                 {
                   "row": "claude-haiku-5-5-high@claude-pro",
-                  "reason": "owner-named transfer: unevaluable with transfers off (never reselected or replaced by API cost)"
+                  "reason": "owner-named transfer: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
                 },
                 {
                   "row": "claude-haiku-5-5-medium@claude-max-20x",
-                  "reason": "owner-named transfer: unevaluable with transfers off (never reselected or replaced by API cost)"
+                  "reason": "owner-named transfer: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
                 },
                 {
                   "row": "claude-haiku-5-5-medium@claude-max-5x",
-                  "reason": "owner-named transfer: unevaluable with transfers off (never reselected or replaced by API cost)"
+                  "reason": "owner-named transfer: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
                 },
                 {
                   "row": "claude-haiku-5-5-medium@claude-pro",
-                  "reason": "owner-named transfer: unevaluable with transfers off (never reselected or replaced by API cost)"
+                  "reason": "owner-named transfer: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
                 },
                 {
                   "row": "claude-opus-5-5-high@claude-max-20x",
-                  "reason": "owner-named transfer: unevaluable with transfers off (never reselected or replaced by API cost)"
+                  "reason": "O88 same-model assumption across efforts: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
                 },
                 {
                   "row": "claude-opus-5-5-high@claude-max-5x",
-                  "reason": "owner-named transfer: unevaluable with transfers off (never reselected or replaced by API cost)"
+                  "reason": "O88 same-model assumption across efforts: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
                 },
                 {
                   "row": "claude-opus-5-5-high@claude-pro",
-                  "reason": "owner-named transfer: unevaluable with transfers off (never reselected or replaced by API cost)"
+                  "reason": "O88 same-model assumption across efforts: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
                 },
                 {
                   "row": "claude-opus-5-5-medium@claude-max-20x",
-                  "reason": "owner-named transfer: unevaluable with transfers off (never reselected or replaced by API cost)"
+                  "reason": "O88 same-model assumption across efforts: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
                 },
                 {
                   "row": "claude-opus-5-5-medium@claude-max-5x",
-                  "reason": "owner-named transfer: unevaluable with transfers off (never reselected or replaced by API cost)"
+                  "reason": "O88 same-model assumption across efforts: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
                 },
                 {
                   "row": "claude-opus-5-5-medium@claude-pro",
-                  "reason": "owner-named transfer: unevaluable with transfers off (never reselected or replaced by API cost)"
+                  "reason": "O88 same-model assumption across efforts: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
                 },
                 {
                   "row": "gpt-5.6-luna-low@chatgpt-plus",
-                  "reason": "owner-named transfer: unevaluable with transfers off (never reselected or replaced by API cost)"
+                  "reason": "owner-named transfer: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
                 },
                 {
                   "row": "gpt-5.6-luna-low@chatgpt-pro-100",
-                  "reason": "owner-named transfer: unevaluable with transfers off (never reselected or replaced by API cost)"
+                  "reason": "owner-named transfer: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
                 },
                 {
                   "row": "gpt-5.6-luna-low@chatgpt-pro-200",
-                  "reason": "owner-named transfer: unevaluable with transfers off (never reselected or replaced by API cost)"
+                  "reason": "owner-named transfer: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
                 },
                 {
                   "row": "gpt-5.6-luna-low@chatgpt-pro-500",
-                  "reason": "owner-named transfer: unevaluable with transfers off (never reselected or replaced by API cost)"
+                  "reason": "owner-named transfer: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
                 },
                 {
                   "row": "gpt-6-astra-high@chatgpt-plus",
-                  "reason": "owner-named transfer: unevaluable with transfers off (never reselected or replaced by API cost)"
+                  "reason": "O88 same-model assumption across efforts: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
                 },
                 {
                   "row": "gpt-6-astra-high@chatgpt-pro-100",
-                  "reason": "owner-named transfer: unevaluable with transfers off (never reselected or replaced by API cost)"
+                  "reason": "O88 same-model assumption across efforts: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
                 },
                 {
                   "row": "gpt-6-astra-high@chatgpt-pro-200",
-                  "reason": "owner-named transfer: unevaluable with transfers off (never reselected or replaced by API cost)"
+                  "reason": "O88 same-model assumption across efforts: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
                 },
                 {
                   "row": "gpt-6-astra-high@chatgpt-pro-500",
-                  "reason": "owner-named transfer: unevaluable with transfers off (never reselected or replaced by API cost)"
+                  "reason": "O88 same-model assumption across efforts: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
                 },
                 {
                   "row": "gpt-6-luna-high@chatgpt-plus",
-                  "reason": "owner-named transfer: unevaluable with transfers off (never reselected or replaced by API cost)"
+                  "reason": "owner-named transfer: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
                 },
                 {
                   "row": "gpt-6-luna-high@chatgpt-pro-100",
-                  "reason": "owner-named transfer: unevaluable with transfers off (never reselected or replaced by API cost)"
+                  "reason": "owner-named transfer: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
                 },
                 {
                   "row": "gpt-6-luna-high@chatgpt-pro-200",
-                  "reason": "owner-named transfer: unevaluable with transfers off (never reselected or replaced by API cost)"
+                  "reason": "owner-named transfer: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
                 },
                 {
                   "row": "gpt-6-luna-high@chatgpt-pro-500",
-                  "reason": "owner-named transfer: unevaluable with transfers off (never reselected or replaced by API cost)"
+                  "reason": "owner-named transfer: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
                 },
                 {
                   "row": "gpt-6-luna-medium@chatgpt-plus",
-                  "reason": "owner-named transfer: unevaluable with transfers off (never reselected or replaced by API cost)"
+                  "reason": "owner-named transfer: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
                 },
                 {
                   "row": "gpt-6-luna-medium@chatgpt-pro-100",
-                  "reason": "owner-named transfer: unevaluable with transfers off (never reselected or replaced by API cost)"
+                  "reason": "owner-named transfer: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
                 },
                 {
                   "row": "gpt-6-luna-medium@chatgpt-pro-200",
-                  "reason": "owner-named transfer: unevaluable with transfers off (never reselected or replaced by API cost)"
+                  "reason": "owner-named transfer: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
                 },
                 {
                   "row": "gpt-6-luna-medium@chatgpt-pro-500",
-                  "reason": "owner-named transfer: unevaluable with transfers off (never reselected or replaced by API cost)"
+                  "reason": "owner-named transfer: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
                 },
                 {
                   "row": "gpt-6-luna-xhigh@chatgpt-plus",
-                  "reason": "owner-named transfer: unevaluable with transfers off (never reselected or replaced by API cost)"
+                  "reason": "owner-named transfer: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
                 },
                 {
                   "row": "gpt-6-luna-xhigh@chatgpt-pro-100",
-                  "reason": "owner-named transfer: unevaluable with transfers off (never reselected or replaced by API cost)"
+                  "reason": "owner-named transfer: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
                 },
                 {
                   "row": "gpt-6-luna-xhigh@chatgpt-pro-200",
-                  "reason": "owner-named transfer: unevaluable with transfers off (never reselected or replaced by API cost)"
+                  "reason": "owner-named transfer: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
                 },
                 {
                   "row": "gpt-6-luna-xhigh@chatgpt-pro-500",
-                  "reason": "owner-named transfer: unevaluable with transfers off (never reselected or replaced by API cost)"
+                  "reason": "owner-named transfer: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
                 },
                 {
                   "row": "gpt-6-luna@chatgpt-plus",
-                  "reason": "owner-named transfer: unevaluable with transfers off (never reselected or replaced by API cost)"
+                  "reason": "owner-named transfer: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
                 },
                 {
                   "row": "gpt-6-luna@chatgpt-pro-100",
-                  "reason": "owner-named transfer: unevaluable with transfers off (never reselected or replaced by API cost)"
+                  "reason": "owner-named transfer: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
                 },
                 {
                   "row": "gpt-6-luna@chatgpt-pro-200",
-                  "reason": "owner-named transfer: unevaluable with transfers off (never reselected or replaced by API cost)"
+                  "reason": "owner-named transfer: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
                 },
                 {
                   "row": "gpt-6-luna@chatgpt-pro-500",
-                  "reason": "owner-named transfer: unevaluable with transfers off (never reselected or replaced by API cost)"
+                  "reason": "owner-named transfer: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
                 },
                 {
                   "row": "gpt-6.1-sol-high@chatgpt-plus",
-                  "reason": "owner-named transfer: unevaluable with transfers off (never reselected or replaced by API cost)"
+                  "reason": "O88 same-model assumption across efforts: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
                 },
                 {
                   "row": "gpt-6.1-sol-high@chatgpt-pro-100",
-                  "reason": "owner-named transfer: unevaluable with transfers off (never reselected or replaced by API cost)"
+                  "reason": "O88 same-model assumption across efforts: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
                 },
                 {
                   "row": "gpt-6.1-sol-high@chatgpt-pro-200",
-                  "reason": "owner-named transfer: unevaluable with transfers off (never reselected or replaced by API cost)"
+                  "reason": "O88 same-model assumption across efforts: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
                 },
                 {
                   "row": "gpt-6.1-sol-high@chatgpt-pro-500",
-                  "reason": "owner-named transfer: unevaluable with transfers off (never reselected or replaced by API cost)"
+                  "reason": "O88 same-model assumption across efforts: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
                 },
                 {
                   "row": "gpt-6.1-sol-medium@chatgpt-plus",
-                  "reason": "owner-named transfer: unevaluable with transfers off (never reselected or replaced by API cost)"
+                  "reason": "O88 same-model assumption across efforts: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
                 },
                 {
                   "row": "gpt-6.1-sol-medium@chatgpt-pro-100",
-                  "reason": "owner-named transfer: unevaluable with transfers off (never reselected or replaced by API cost)"
+                  "reason": "O88 same-model assumption across efforts: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
                 },
                 {
                   "row": "gpt-6.1-sol-medium@chatgpt-pro-200",
-                  "reason": "owner-named transfer: unevaluable with transfers off (never reselected or replaced by API cost)"
+                  "reason": "O88 same-model assumption across efforts: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
                 },
                 {
                   "row": "gpt-6.1-sol-medium@chatgpt-pro-500",
-                  "reason": "owner-named transfer: unevaluable with transfers off (never reselected or replaced by API cost)"
+                  "reason": "O88 same-model assumption across efforts: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
                 },
                 {
                   "row": "mimo-v2-6-pro@mimo-token-plan-lite",
-                  "reason": "owner-named transfer: unevaluable with transfers off (never reselected or replaced by API cost)"
+                  "reason": "O46 provider quota ceiling: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
                 },
                 {
                   "row": "mimo-v2-6-pro@mimo-token-plan-max",
-                  "reason": "owner-named transfer: unevaluable with transfers off (never reselected or replaced by API cost)"
+                  "reason": "O46 provider quota ceiling: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
                 },
                 {
                   "row": "mimo-v2-6-pro@mimo-token-plan-pro",
-                  "reason": "owner-named transfer: unevaluable with transfers off (never reselected or replaced by API cost)"
+                  "reason": "O46 provider quota ceiling: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
                 },
                 {
                   "row": "mimo-v2-6-pro@mimo-token-plan-standard",
-                  "reason": "owner-named transfer: unevaluable with transfers off (never reselected or replaced by API cost)"
+                  "reason": "O46 provider quota ceiling: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
                 }
               ]
             }

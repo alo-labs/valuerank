@@ -293,3 +293,14 @@ def test_absence_claim_helpers_read_nested_keys_and_registries(tmp_path):
     (data / "plan_cost_routes.json").write_text(json.dumps({"routes": [{"sourceEvidenceId": "semianalysis", "contentSha256": "x"}]}))
     assert not f._semianalysis_unhashed(data)
     assert f.fmt(-0.83, "signed.2", {}) == "−0.83" and f.fmt(4.1, "signed.2", {}) == "+4.10"
+
+
+def test_lint_flags_a_hand_typed_list_of_owner_assumptions():
+    """I72 L1: transfers listed beside fallbacks or ceilings must come with every owner-assumption kind."""
+
+    flagged = "The anchors include owner-named transfers and API-cost fallbacks alike."
+    assert any("owner-named transfers listed" in problem for problem in f.lint(flagged, []))
+    assert any("owner-named transfers listed" in problem for problem in f.lint("Ceilings, fallbacks and owner-named transfers count.", []))
+    for fine in ("The anchors include owner assumptions of every kind and API-cost fallbacks alike.",
+                 "Rows on {{fig:evidence.assumptionKinds}}, owner-named transfers and fallbacks.", "An owner-named transfer names its donor."):
+        assert not any("owner-named transfers listed" in problem for problem in f.lint(fine, []))

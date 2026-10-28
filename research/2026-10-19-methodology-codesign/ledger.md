@@ -1736,3 +1736,12 @@ Asked on I64 Q1 whether future O71 admissions should be executed by the build fr
 - L4 (adopted): E166 and E168 list the O88 amount type, the ceiling's full-quota target and both derivations.
 - Recommendation 1 adopted (the registry above); recommendation 2 adopted (counts by kind).
 - Round status (O56): clean (no Medium or higher), the first clean round at Opus medium. Draft r131.
+
+## Owner decision O89 (2026-10-28), asked on I72 Q1
+- O89 (O88 vs O73): an O88 same-model route shares its donor measurement's precedence against reports for the same model and plan (and its donor's detected-change flag under O78), so two concordant reports replace it only when they would replace the donor; every effort of a model keeps one multiple. The route stays graded and labelled an assumption (flags, E167 exclusions, † marks). Latent today: no report cell passes.
+
+## Internal review I72 (Claude Opus 5.5, effort medium, on r131) — adopted, modified or rejected
+- L1 (adopted, with a check so it cannot recur): the remaining hand-typed lists (comparator key (2), O73's replaceable routes, the GPT change-detection sentence, the E151 clocks, the measured-only view, E164/E160 anchor lists, the MiMo bullet, the headline score, E144 survival, E167's streams now including S1T) name every owner-assumption kind; the figure lint now fails a sentence that lists owner-named transfers beside fallbacks, ceilings or measured routes without naming the other kinds (it flags three such sentences in r131).
+- L2 (adopted, engine changed with tests): E167's exclusion reason names each row's assumption kind from the registry (`assumption_exclusion`), replacing the single transfer label that mislabelled 22 of the 48 AI Coding Daily exclusions; `anchorPolicy.planRule`, the separability bias string and methodology.md's two sentences say "owner assumptions".
+- L3 (asked; O89, comparator changed with a test).
+- Round status (O56): clean (no Medium or higher). With I71, two consecutive clean rounds: the Opus medium rung has converged. Draft r132; next rung: Opus high.

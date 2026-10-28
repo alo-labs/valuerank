@@ -1134,7 +1134,7 @@ ANCHOR_POLICY = {
     "policyId": "complete-evidence-panel",
     "version": 1,
     "populationRule": "ranked configurations with complete cost evidence (exact cost, no AA missing- or declined-task marker) on every component of the workload at the freeze cutoff; on the main workload this is the admission reference panel",
-    "planRule": "the same configurations at their displayed Plan cost: measured routes, owner-named transfers and API-cost fallbacks alike, since each is scored in the Plan table (O13, O16) and a narrower panel would clip them",
+    "planRule": "the same configurations at their displayed Plan cost: measured routes, owner assumptions of every kind and API-cost fallbacks alike, since each is scored in the Plan table (O13, O16) and a narrower panel would clip them",
     "minimumReferences": 2,
     "belowMinimum": "anchors unavailable: configurations on that workload get no cost score (the main workload must meet the minimum)",
     "lifetime": "reference IDs and costs are frozen; a population or rule change is a new anchor version with an old/new bridge, and evidence lost after freezing never rebuilds an anchor",
@@ -2665,7 +2665,7 @@ def rank_separability(assembled: dict, per_row: dict, exchange: dict | None = No
     configuration_of = {row["id"]: row.get("configurationId", row["id"]) for row in plan_rows}
     configuration_of.update({row_id: row_id for row_id in sd})
     plan_scores = per_plan if per_plan is not None else per_row
-    # I27: the Plan basis also carries owner-named transfer error, which this noise does not include.
+    # I27: the Plan basis also carries owner-assumption error, which this noise does not include.
     assumed = sorted(row["id"] for row in plan_rows if transfer_dependent(row))
     result = {"assumptions": list(SAMPLING_ASSUMPTIONS), "bias": SEPARABILITY_BIAS, "bandRule": BAND_RULE, "valueSd": sd,
               "qualityMargin": quality_margin(assembled), "planAssumedRouteRows": assumed,
@@ -2710,7 +2710,7 @@ AICD_NARROW_TASKS = 60  # E263: one trial per point of 60, the narrow reading of
 GDPVAL_WIDE_SD = 26.0  # I26, I60: AA's displayed +/-26 Elo for Claude Opus 5.5 read as one SD for every row, the wide reading of an interval whose level is unstated
 SEPARABILITY_BIAS = ("net direction not established: treating two rows' errors as independent overstates the threshold, because every row "
                      "is scored on the same tasks and attempts are averaged within a task; sources it omits (run-to-run and harness "
-                     "variance, AA's single cost run and, on the Plan basis, owner-named transfer error) work the other way")
+                     "variance, AA's single cost run and, on the Plan basis, owner-assumption error) work the other way")
 BAND_RULE = ("O42: rows in value order; a row joins the current band while its value is not separable from the band's first row at "
              "correlation 0 (1.96 x sqrt(SD_i^2 + SD_j^2), analytic quality-leaf SDs, cost not drawn), otherwise it starts a new band; "
              "every row is inseparable from its band's first row, and adjacent rows in different bands may also be inseparable. O48: on "
@@ -2801,7 +2801,11 @@ def _cost_kernel(row: dict, cost: float) -> scenarios.Kernel:
 # E167: the core scenario branches run with owner-named transfers off. On the Plan basis a row whose selected route is
 # a transfer is unevaluable there (selected-evidence removal: never reselected, never replaced by API cost; the
 # measured-only view answers reselection). S0 describes the displayed record, transfers included.
-TRANSFER_EXCLUSION = "owner-named transfer: unevaluable with transfers off (never reselected or replaced by API cost)"
+def assumption_exclusion(row: dict) -> str:
+    """E167, I72 L2: why a row is unevaluable with owner assumptions off, naming its assumption kind from the registry."""
+
+    name = plan_routes.OWNER_ASSUMPTIONS[row["plan"].get("assumptionKind") or "transfer"][0]
+    return f"{name}: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
 
 
 def transfers_on(stratum: str) -> bool:
@@ -2929,10 +2933,11 @@ def run_scenarios(assembled: dict, frozen: dict, *, n: int = SCENARIO_COUNT, see
     """Per-basis, per-stratum scenario shares with the published seed and the input hash."""
 
     results = {}
-    excluded = sorted(
-        row["id"] for row in plan_variants(assembled)["rows"]
+    reasons = {
+        row["id"]: assumption_exclusion(row) for row in plan_variants(assembled)["rows"]
         if row["cost"]["workload"] == assembled["mainWorkload"] and anchor_math.scoreable(_basis_cost(row, "plan")) and transfer_dependent(row)
-    )
+    }
+    excluded = sorted(reasons)
     for basis in BASES:
         anchors = frozen["workloads"][assembled["mainWorkload"]]["anchors"][basis]
         results[basis] = []
@@ -2941,7 +2946,7 @@ def run_scenarios(assembled: dict, frozen: dict, *, n: int = SCENARIO_COUNT, see
             run = scenarios.shares(panel, stratum, n, seed + index, anchors, BETA, alternative=alternative)
             if basis == "plan":
                 run["transfers"] = "on (the displayed record)" if transfers_on(stratum) else "off"
-                run["excluded"] = [] if transfers_on(stratum) else [{"row": row_id, "reason": TRANSFER_EXCLUSION} for row_id in excluded]
+                run["excluded"] = [] if transfers_on(stratum) else [{"row": row_id, "reason": reasons[row_id]} for row_id in excluded]
             results[basis].append(run)
     band = harness_band(assembled["tb4Rows"])
     if band["width"] is not None:
@@ -2950,7 +2955,7 @@ def run_scenarios(assembled: dict, frozen: dict, *, n: int = SCENARIO_COUNT, see
             anchors = frozen["workloads"][assembled["mainWorkload"]]["anchors"][basis]
             run = scenarios.shares(scenario_panel(assembled, basis, transfers=False, harness=band["width"]), "S2", n, seed + len(SCENARIO_RUNS), anchors, BETA)
             if basis == "plan":
-                run["transfers"], run["excluded"] = "off", [{"row": row_id, "reason": TRANSFER_EXCLUSION} for row_id in excluded]
+                run["transfers"], run["excluded"] = "off", [{"row": row_id, "reason": reasons[row_id]} for row_id in excluded]
             band["results"][basis] = run
     return {
         "schemaVersion": 1,

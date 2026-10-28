@@ -448,6 +448,11 @@ def dated(sentence: str, release_day: str | None) -> bool:
     return any(release_day is None or found < release_day for found in re.findall(r"\b\d{4}-\d{2}-\d{2}\b", text))
 
 
+# I72 L1: an enumeration of Plan evidence classes naming transfers beside fallbacks, ceilings or measured routes.
+ASSUMPTION_LIST = re.compile(r"owner-named transfers?(?:,| and| or| /)[^.;]{0,80}(?:fallback|ceiling|measured route)|(?:fallback|ceiling|measured routes?)[^.;]{0,80}(?:,| and| or| /) owner-named transfers?")
+ASSUMPTION_NAMED = re.compile(r"owner assumption|evidence\.assumptionKinds|O88")
+
+
 def lint(source: str, names: list[str], configurations: list[str] = (), release_day: str | None = None) -> list[str]:
     """Numbers and configuration names left unmarked in a sentence that speaks of today."""
 
@@ -456,6 +461,10 @@ def lint(source: str, names: list[str], configurations: list[str] = (), release_
         if line.startswith(HISTORY_HEADING):
             break  # the revision history records past drafts' figures as they were
         for sentence in _SENTENCE.split(line):
+            # I72 L1: a hand-typed list of Plan evidence that names owner-named transfers beside another evidence class
+            # must name every owner-assumption kind (generated, or as "owner assumptions"), so a new kind cannot be missed.
+            if ASSUMPTION_LIST.search(sentence) and not ASSUMPTION_NAMED.search(sentence):
+                problems.append(f"line {line_number}: owner-named transfers listed without the other owner-assumption kinds: {sentence[:160]}")
             # A count "N of M" states the current release unless the sentence dates it, whether or not it says today.
             if not dated(sentence, release_day):
                 routed = [name for name in configurations if re.search(re.escape(name) + r" on (?:[A-Z][\w$.]*(?: [\w$.]+){0,3}|API-cost fallback)", PLACEHOLDER.sub("", sentence))]

@@ -47,7 +47,13 @@ POST_CHANGE_SUPERSEDED = 1.5
 def grade_rank(candidate: dict) -> float:
     """The grade key of the comparator (O73, O78)."""
 
-    return POST_CHANGE_SUPERSEDED if candidate.get("postChangeSuperseded") else GRADE[candidate["grade"]]
+    if candidate.get("postChangeSuperseded"):
+        return POST_CHANGE_SUPERSEDED
+    # O89: an O88 same-model route shares its donor measurement's precedence against reports for the same model and plan,
+    # so every effort of a model keeps one multiple; it stays graded (and labelled) an assumption.
+    if candidate["grade"] == "assumption" and candidate["route"].get("sameModelAcrossEfforts"):
+        return GRADE["controlled"]
+    return GRADE[candidate["grade"]]
 
 
 def post_change_ranks(candidates: list[dict]) -> list[dict]:
@@ -63,12 +69,17 @@ def post_change_ranks(candidates: list[dict]) -> list[dict]:
 
     marked = []
     for candidate in candidates:
-        route, changed = candidate["route"], candidate["route"].get("changeDetectedOn")
-        superseded = (candidate["grade"] == "controlled" and changed and candidate.get("expiry") in {"possibly-superseded", "expired"}
+        route = candidate["route"]
+        # O89: an O88 route follows its donor's detected change, as it shares the donor's precedence.
+        shares_donor = candidate["grade"] == "assumption" and route.get("sameModelAcrossEfforts")
+        changed = route.get("changeDetectedOn") or (candidate.get("donorChangeDetectedOn") if shares_donor else None)
+        superseded = (candidate["grade"] == "controlled" or shares_donor) and bool(changed and candidate.get("expiry") in {"possibly-superseded", "expired"}
                       and any(other["grade"] == "reports" and other["route"].get("plan") == route.get("plan")
                               and (earliest_report(other["route"]) or date.min) > date.fromisoformat(changed) for other in candidates))
         marked.append({**candidate, "postChangeSuperseded": True} if superseded else candidate)
     return marked
+
+
 # E102: reports are pooled only when their public comparability records agree on all of these.
 COMPARABILITY_FIELDS = ("feePeriod", "grossCashAccounting", "limitSchema", "eligibleConsumption", "valuationBasis", "measurementWorkload")
 IDENTIFICATION = {"point-identified": 2, "set-identified": 1, "unidentified": 0}
@@ -408,6 +419,7 @@ def route_candidates(model_id: str, configuration_effort: str | None, routes: li
                 "identification": route.get("identification", "unidentified"),
                 "evidenceDate": stamp.isoformat() if stamp else None,
                 "donorRouteId": source["id"] if source is not None else None,
+                "donorChangeDetectedOn": source.get("changeDetectedOn") if source is not None else None,
                 # E144: valuation compatibility and capacity status are the donor measurement's for a transfer.
                 "valuation": "different" if "different" in {valuation_status(item) for item in checks} else valuation_status(provenance),
                 "measurementCapacityStatus": measurement_capacity_status(provenance),

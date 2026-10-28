@@ -612,3 +612,18 @@ def test_owner_assumption_kinds_are_named_from_one_registry():
     assert pr.assumption_kinds_text("and", plural=True).endswith("and O46 provider quota ceilings")
     assert pr.assumption_counts_text({"transfer": 2, "ceiling": 1}) == "2 owner-named transfers and 1 O46 provider quota ceiling"
     assert pr.assumption_counts_text({"sameModel": 3}) == "3 O88 same-model assumptions across efforts" and pr.assumption_counts_text({}) == "none"
+
+
+def test_a_same_model_route_shares_its_donors_precedence():
+    """O89: an O88 route outranks a report pair as its donor measurement would, and loses to a post-change pair the same way."""
+
+    same = candidate("same", 10.0, "assumption")
+    same["route"]["sameModelAcrossEfforts"] = True
+    after = candidate("reports-after", 12.0, "reports")
+    after["route"]["sourcePublicationDate"] = "2026-10-20"
+    assert pr.grade_rank(same) == pr.GRADE["controlled"] and pr.select_route([same, after])["route"]["id"] == "same"
+    flagged = {**same, "expiry": "possibly-superseded", "donorChangeDetectedOn": "2026-10-17"}
+    assert pr.select_route([flagged, after])["route"]["id"] == "reports-after"
+    plain = candidate("transfer", 10.0, "assumption")
+    assert pr.select_route([plain, after])["route"]["id"] == "reports-after"
+    assert pr.select_route([{**plain, "expiry": "possibly-superseded", "donorChangeDetectedOn": "2026-10-17"}, after])["route"]["id"] == "reports-after"
