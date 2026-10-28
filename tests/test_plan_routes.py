@@ -694,3 +694,18 @@ def test_change_flag_is_inherited_from_the_donor():
     # I77 L2: a change dated after the release cutoff does not count.
     assert not pr.change_flagged({**plain, "donorChangeDetectedOn": "2026-11-01"}, date(2026, 10, 25))
     assert pr.change_flagged({**plain, "donorChangeDetectedOn": "2026-10-11"}, date(2026, 10, 25))
+
+
+def test_a_change_dated_before_the_measurement_never_supersedes_it():
+    """I78 L1, L2: a change before the measurement is no E228 blocker and lets no report pair replace it; a fault-window
+    assumption keeps its grade key (it already ranks below reports)."""
+
+    measured = candidate("m", 10.0, "controlled", expiry="possibly-superseded")
+    measured.update(evidenceDate="2026-10-06")
+    measured["route"].update(changeDetectedOn="2026-10-01")
+    assert not pr.change_flagged(measured, date(2026, 10, 25))
+    after = candidate("reports-after", 5.0, "reports")
+    after["route"]["sourcePublicationDate"] = "2026-10-20"
+    assert pr.select_route([measured, after])["route"]["id"] == "m"
+    transfer = {**candidate("t", 10.0, "assumption"), "faultWindow": "acknowledged"}
+    assert pr.post_change_ranks([transfer, after])[0].get("postChangeSuperseded") is None

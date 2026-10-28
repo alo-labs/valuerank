@@ -748,6 +748,65 @@ Every admissible route-measurement pair in comparator order (E171) and the compa
 | GPT-6 Luna (max) | 4 | 4 | chatgpt-pro500-gpt-6-luna-common-gpt-assumption (10.772×, selected); chatgpt-pro100-gpt-6-luna-common-gpt-assumption (10.55×, not selected by the comparator); chatgpt-pro200-gpt-6-luna-common-gpt-assumption (10.42×, not selected by the comparator); chatgpt-plus-gpt-6-luna-common-gpt-assumption (8.1×, not selected by the comparator) | chatgpt-pro100-gpt-6-luna-common-gpt-assumption (10.55×, value 57.51) |
 | MiMo-V2.6-Pro | 4 | 4 | mimo-tokenplan-max-mimo-v2-6-pro-quota-ceiling (1.1808×, selected); mimo-tokenplan-pro-mimo-v2-6-pro-quota-ceiling (1.0944×, not selected by the comparator); mimo-tokenplan-standard-mimo-v2-6-pro-quota-ceiling (0.99×, not selected by the comparator); mimo-tokenplan-lite-mimo-v2-6-pro-quota-ceiling (0.984×, not selected by the comparator) | mimo-tokenplan-pro-mimo-v2-6-pro-quota-ceiling (1.0944×, value 50.93) |
 
+### Plan allowance report cells (O71, O81)
+
+52 cells; 0 pass. A cell on a plan the Plan ranking does not list is evidence only (O85).
+
+| Provider | Plan | Model | Unit | Region | Eligible reports | Verdict |
+|---|---|---|---|---|---|---|
+| Anthropic | Claude (plan redacted) (not listed) | Claude Opus 5.5 | week | global | 0 of 1 | fails: 0 non-provisional report(s) in the current partition |
+| Anthropic | Claude Max (tier unstated) (not listed) | Claude Opus 5.5 | week | global | 0 of 3 | fails: 0 non-provisional report(s) in the current partition |
+| Anthropic | Claude Max 20x | Claude Opus 5.5 | 5h | global | 1 of 2 | fails: a 5-hour figure never converts to a billing period (O82) |
+| Anthropic | Claude Max 20x | Claude Opus 5.5 | month | global | 0 of 1 | fails: 0 non-provisional report(s) in the current partition |
+| Anthropic | Claude Max 20x | Claude Opus 5.5 | week | global | 6 of 11 | fails: 1 non-provisional report(s) in the current partition |
+| Anthropic | Claude Max 20x | — | week | global | 0 of 6 | fails: 0 non-provisional report(s) in the current partition |
+| Anthropic | Claude Max 5x | Claude Opus 5.5 | month | global | 0 of 1 | fails: 0 non-provisional report(s) in the current partition |
+| Anthropic | Claude Max 5x | Claude Opus 5.5 | week | global | 2 of 2 | fails: 0 non-provisional report(s) in the current partition |
+| Anthropic | Claude Max 5x | — | week | global | 0 of 1 | fails: 0 non-provisional report(s) in the current partition |
+| Anthropic | Claude Pro | Claude Opus 5.5 | 5h | global | 1 of 4 | fails: a 5-hour figure never converts to a billing period (O82) |
+| Anthropic | Claude Pro | Claude Opus 5.5 | month | global | 0 of 1 | fails: 0 non-provisional report(s) in the current partition |
+| Anthropic | Claude Pro | Claude Opus 5.5 | week | global | 4 of 9 | fails: 0 non-provisional report(s) in the current partition |
+| Anthropic | Claude Pro | — | week | global | 0 of 1 | fails: 0 non-provisional report(s) in the current partition |
+| Anthropic | Claude Team Premium (not listed) | Claude Opus 5.5 | week | global | 0 of 1 | fails: 0 non-provisional report(s) in the current partition |
+| Google | Google AI (tier unstated) (not listed) | Gemini 4 Argon | week | global | 0 of 1 | fails: 0 non-provisional report(s) in the current partition |
+| Google | Google AI Pro | Gemini 4 Argon | week | global | 3 of 3 | fails: largest lower bound 1.35× the smallest upper bound (O86 allows 1.20×) in the current partition |
+| Kimi | Kimi Allegretto (legacy, CN) (not listed) | Kimi K3.1 Pro | 5h | CN | 2 of 4 | fails: a 5-hour figure never converts to a billing period (O82) |
+| Kimi | Kimi Allegretto (legacy, CN) (not listed) | Kimi K3.1 Pro | month | CN | 2 of 3 | fails: 1 non-provisional report(s) in the current partition |
+| Kimi | Kimi Allegretto (legacy, CN) (not listed) | Kimi K3.1 Pro | week | CN | 1 of 3 | fails: 0 non-provisional report(s) in the current partition |
+| Kimi | Kimi Allegro (legacy, CN) (not listed) | Kimi K3.1 Pro | 5h | CN | 1 of 5 | fails: a 5-hour figure never converts to a billing period (O82) |
+| Kimi | Kimi Allegro (legacy, CN) (not listed) | Kimi K3.1 Pro | month | CN | 0 of 1 | fails: 0 non-provisional report(s) in the current partition |
+| Kimi | Kimi Allegro (legacy, CN) (not listed) | Kimi K3.1 Pro | week | CN | 0 of 2 | fails: 0 non-provisional report(s) in the current partition |
+| Kimi | Kimi Max (new, CN) (not listed) | Kimi K3.1 Pro | 5h | CN | 0 of 2 | fails: a 5-hour figure never converts to a billing period (O82) |
+| Kimi | Kimi Max (new, CN) (not listed) | Kimi K3.1 Pro | month | CN | 0 of 1 | fails: 0 non-provisional report(s) in the current partition |
+| Kimi | Kimi Plus | Kimi K3.1 Pro | 5h | global | 0 of 1 | fails: a 5-hour figure never converts to a billing period (O82) |
+| Kimi | Kimi Plus (new, CN) (not listed) | Kimi K3.1 Pro | 5h | CN | 0 of 1 | fails: a 5-hour figure never converts to a billing period (O82) |
+| Kimi | Kimi Pro (new, CN) (not listed) | Kimi K3.1 Pro | 5h | CN | 0 of 1 | fails: a 5-hour figure never converts to a billing period (O82) |
+| Kimi | Kimi Ultra (new, CN) (not listed) | Kimi K3.1 Pro | 5h | CN | 0 of 1 | fails: a 5-hour figure never converts to a billing period (O82) |
+| Kimi | Kimi legacy plan (tier not stated, CN) (not listed) | Kimi K3.1 Pro | 5h | CN | 0 of 1 | fails: a 5-hour figure never converts to a billing period (O82) |
+| Kimi | Kimi ¥199 plan (legacy or new not stated, CN) (not listed) | Kimi K3.1 Pro | 5h | CN | 0 of 2 | fails: a 5-hour figure never converts to a billing period (O82) |
+| MiniMax | MiniMax M Plan (tier unstated) (not listed) | MiniMax-M3.1-Flash | week | global | 0 of 1 | fails: 0 non-provisional report(s) in the current partition |
+| MiniMax | MiniMax Token Plan Max (legacy) (not listed) | MiniMax-M3.1-Flash | 5h | global | 1 of 1 | fails: a 5-hour figure never converts to a billing period (O82) |
+| MiniMax | MiniMax Token Plan Max (legacy) (not listed) | MiniMax-M3.1-Flash | week | global | 1 of 1 | fails: 0 non-provisional report(s) in the current partition |
+| MiniMax | MiniMax Token Plan lowest tier (legacy) (not listed) | MiniMax-M3.1-Flash | 5h | global | 1 of 1 | fails: a 5-hour figure never converts to a billing period (O82) |
+| MiniMax | MiniMax lowest tier ("lite") (not listed) | — | week | global | 0 of 1 | fails: 0 non-provisional report(s) in the current partition |
+| OpenAI | ChatGPT (legacy account, tier unstated) (not listed) | GPT-6.1 Sol | week | global | 0 of 1 | fails: 0 non-provisional report(s) in the current partition |
+| OpenAI | ChatGPT Plus | GPT-5.6 Luna | 5h | global | 0 of 1 | fails: a 5-hour figure never converts to a billing period (O82) |
+| OpenAI | ChatGPT Plus | GPT-5.6 Luna | week | global | 0 of 1 | fails: 0 non-provisional report(s) in the current partition |
+| OpenAI | ChatGPT Plus | GPT-6 Astra | 5h | global | 0 of 2 | fails: a 5-hour figure never converts to a billing period (O82) |
+| OpenAI | ChatGPT Plus | GPT-6 Luna | 5h | global | 1 of 1 | fails: a 5-hour figure never converts to a billing period (O82) |
+| OpenAI | ChatGPT Plus | GPT-6 Luna | month | global | 0 of 1 | fails: 0 non-provisional report(s) in the current partition |
+| OpenAI | ChatGPT Plus | GPT-6.1 Sol | 5h | global | 1 of 3 | fails: a 5-hour figure never converts to a billing period (O82) |
+| OpenAI | ChatGPT Plus | GPT-6.1 Sol | week | global | 1 of 2 | fails: 0 non-provisional report(s) in the current partition |
+| OpenAI | ChatGPT Pro (tier unstated) (not listed) | GPT-6 Astra | week | global | 0 of 1 | fails: 0 non-provisional report(s) in the current partition |
+| OpenAI | ChatGPT Pro 100 | GPT-6 Astra | week | global | 2 of 4 | fails: 0 non-provisional report(s) in the current partition |
+| OpenAI | ChatGPT Pro 100 | GPT-6.1 Sol | week | global | 0 of 1 | fails: 0 non-provisional report(s) in the current partition |
+| OpenAI | ChatGPT Pro 200 (grandfathered 20x) | GPT-6 Astra | week | global | 0 of 1 | fails: 0 non-provisional report(s) in the current partition |
+| OpenAI | ChatGPT Pro 200 (grandfathered 20x) | GPT-6.1 Sol | week | global | 1 of 3 | fails: 0 non-provisional report(s) in the current partition |
+| OpenAI | ChatGPT Pro 500 | GPT-6 Astra | week | global | 0 of 1 | fails: 0 non-provisional report(s) in the current partition |
+| OpenAI | ChatGPT Pro 500 | GPT-6.1 Sol | week | global | 0 of 1 | fails: 0 non-provisional report(s) in the current partition |
+| Xiaomi | MiMo Token Plan Lite | MiMo-V2.6-Pro | month | global | 1 of 1 | fails: 1 non-provisional report(s) in the current partition |
+| Xiaomi | MiMo Token Plan Max | MiMo-V2.6-Pro | month | global | 1 of 1 | fails: 1 non-provisional report(s) in the current partition |
+
 ### Measured-only Plan view
 
 Admission: measurement candidates of grade controlled (exact effort, or the same model at another effort, O90) or concordant reports (no owner assumption of any kind, no diagnostics). Selection: the official selector (E111, E88, E85) rerun among the admitted candidates. Panel: rows with an admitted measured candidate; others listed as 'no measured route' (no API fallback).

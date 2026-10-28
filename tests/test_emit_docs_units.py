@@ -62,7 +62,12 @@ def test_short_flags_name_every_condition():
     assert sorted(flags) == sorted(["subset cost", "provider-claimed leaf", "provisional quality", "partial component", "valuation basis unverified", "AA cost caveat", "API-cost fallback"])
     assert [word for word, _text in ed.FLAG_LEGEND] == [
         "subset cost", "provider-claimed leaf", "provisional quality", "partial component", "valuation basis unverified", "no cost", "AA cost caveat", "API-cost fallback",
+        "route possibly superseded", "fault window",
     ]
+    # I78 L5: the selected Plan route's own lifecycle flags.
+    from valuerank import plan_routes
+    routed = {"plan": {"flags": ["possibly-superseded", plan_routes.FAULT_FLAG]}}
+    assert ed.short_flags(entry_with(), routed) == "route possibly superseded, fault window"
     assert ed.short_flags(entry_with(), {"valuationGate": {"outcome": "compatible as captured"}}) == "—"
     assert ed.short_flags(entry_with(), UNVERIFIED) == "valuation basis unverified"
 
@@ -469,3 +474,12 @@ def test_scenario_panel_note_names_subset_rows_only_when_there_are_some():
     facts = SimpleNamespace(v3={"rows": rows, "mainWorkload": "w"}, label=lambda model_id: model_id.upper())
     assert ed.scenario_panel_note(facts).startswith("The scenario panel is the 1 rows scored on the main workload (E96, E266); B (subset workload)")
     assert ed.scenario_panel_note(SimpleNamespace(v3={"rows": rows[:1], "mainWorkload": "w"}, label=str)) == "The scenario panel is the 1 rows scored on the main workload (E96, E266).\n\n"
+
+
+def test_report_cells_without_any_cell_say_so():
+    """I78 L5: a release with no report cell prints that it has none."""
+
+    class Facts:
+        v3 = {"planAllowanceCells": []}
+
+    assert ed.report_cells_markdown(Facts()) == "No report cell."

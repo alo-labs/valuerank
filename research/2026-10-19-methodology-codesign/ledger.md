@@ -1795,3 +1795,15 @@ Asked on I64 Q1 whether future O71 admissions should be executed by the build fr
 - L4 (moot: O92 replaces a recorded resolution by the O11 report pair).
 - L5 (adopted, with a build check): the registry's `asOf` is its search cutoff (2026-10-25), and the build refuses a different date; the admission-table docstring names O88 measurements in "identified"; the O91 ledger entry is superseded by O92.
 - Round status (O56): not clean (one Medium). Draft r137; the Opus xhigh count starts.
+
+## Owner decision O93 (2026-10-28), asked on I78 Q1
+- O93 (scope of a report pair under O92): an admitted report pair for one model on a plan replaces only that model's fault-flagged route; other models' routes on the plan (and the transfers and O88 routes resting on them) keep the fault flag until they get their own pair or their donor's route is replaced. This is what the build did (its candidates are one configuration's).
+
+## Internal review I78 (Claude Opus 5.5, effort xhigh, on r137) — adopted, modified or rejected
+- L1 (adopted, comparator changed with a test): comparator key (2) and the O73 sentence state O92/O93; a fault-window assumption keeps its grade key (only a controlled measurement drops below the pair), so the published comparison tuples no longer show 1.5 for a transfer.
+- L2 (adopted, engine changed with a test): a change dated before the measurement neither makes an E228 blocker nor lets a pair replace it (as `expiry_status` already held); the 30 undated days now end on and include the publication date (30 dates); the fault span ends on the same date the age and change clocks use. An undated measurement is still treated as inside a fault window (fail closed) while its age is unknown; this asymmetry is deliberate.
+- L3 (rejected, with reason): a user report's figure is a reading taken at its report date (E194), while a controlled measurement aggregates usage over an unstated period, so the two are dated differently on purpose; reading an unstated report window as 30 days would exclude reports on evidence they do not give. No verdict changes either way.
+- L4 (adopted): Output 1 and the limitations print the fault-window row counts from generated figures (`{track}.planFaultRows`); the manifest rule names the rows.
+- L5 (adopted, docs changed): README's Flags column (both rankings) shows "route possibly superseded" and "fault window", with legend entries; methodology.md renders the registry's post-O71 owner-decision text; scores.md tabulates every report cell's verdict.
+- L6 (adopted): the lifecycle table no longer lists the fault window as a stage; a sentence says it is a flag carried beside the age stage.
+- Round status (O56): clean (no Medium or higher), the first clean round at Opus xhigh. Draft r138.

@@ -78,12 +78,17 @@ def post_change_ranks(candidates: list[dict]) -> list[dict]:
         # O89: an O88 route follows its donor's detected change, as it shares the donor's precedence.
         shares_donor = candidate["grade"] == "controlled" and route.get("sameModelAcrossEfforts")
         changed = route.get("changeDetectedOn") or (candidate.get("donorChangeDetectedOn") if shares_donor else None)
+        # I78 L2: a change dated before the measurement does not supersede it.
+        if changed and candidate.get("evidenceDate") and changed < candidate["evidenceDate"]:
+            changed = None
         superseded = (candidate["grade"] == "controlled" or shares_donor) and bool(changed and candidate.get("expiry") in {"possibly-superseded", "expired"}
                       and any(other["grade"] == "reports" and other["route"].get("plan") == route.get("plan")
                               and (earliest_report(other["route"]) or date.min) > date.fromisoformat(changed) for other in candidates))
         # O92: a measurement in an acknowledged fault window (and every route resting on it) yields to a concordant report
         # pair for the same plan (whose reports E270 already keeps off fault days).
-        superseded = superseded or bool(candidate.get("faultWindow") and candidate["grade"] in {"controlled", "assumption"}
+        # O93: only the row's own model's pair (the candidates are one configuration's), and only a controlled measurement
+        # changes rank (an assumption already ranks below reports; I78 L1).
+        superseded = superseded or bool(candidate.get("faultWindow") and candidate["grade"] == "controlled"
                                         and any(other["grade"] == "reports" and other["route"].get("plan") == route.get("plan") for other in candidates))
         marked.append({**candidate, "postChangeSuperseded": True} if superseded else candidate)
     return marked
@@ -319,6 +324,9 @@ def change_flagged(candidate: dict | None, release_day: date | None = None) -> b
     changed = candidate and (candidate["route"].get("changeDetectedOn") or candidate.get("donorChangeDetectedOn"))
     if changed and release_day is not None and date.fromisoformat(changed) > release_day:
         return False
+    # I78 L2: a change dated before the measurement cannot have superseded it (as expiry_status already holds).
+    if changed and candidate.get("evidenceDate") and date.fromisoformat(changed) < date.fromisoformat(candidate["evidenceDate"]):
+        return False
     return bool(changed and candidate.get("expiry") in {"possibly-superseded", "expired"})
 
 
@@ -432,7 +440,8 @@ def in_fault_window(route: dict, faults: list[dict] | None) -> dict | None:
         return None
     window = route.get("measurementWindow") or {}
     published = route.get("sourcePublicationDate")
-    first = date.fromisoformat(window["start"]) if window.get("start") else (date.fromisoformat(published) - timedelta(days=FAULT_LOOKBACK_DAYS) if published else None)
+    # I78 L2: 30 dates ending on the publication date (inclusive), the same end date the age and change clocks use (E144).
+    first = date.fromisoformat(window["start"]) if window.get("start") else (date.fromisoformat(published) - timedelta(days=FAULT_LOOKBACK_DAYS - 1) if published else None)
     last = date.fromisoformat(window["end"]) if window.get("end") else (date.fromisoformat(published) if published else None)
     for fault in faults:
         if fault.get("provider") != route.get("provider") or (fault.get("plans") and route.get("plan") not in fault["plans"]):

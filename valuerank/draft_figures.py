@@ -162,6 +162,8 @@ def named_figures(scores: dict, data: Path = DATA) -> dict:
         figures[f"{track}.planFallbackRows"] = len(fallback)
         # I64 L5: plan rows whose selected route carries a lifecycle flag, or whose valuation basis is unverified.
         figures[f"{track}.planFlaggedRows"] = sum(bool({"possibly-superseded", "expired"} & set(row.get("flags", []))) for row in section["planRows"])
+        # I78 L4: plan rows resting on a measurement in an acknowledged fault window (O91, O92).
+        figures[f"{track}.planFaultRows"] = sum(pr.FAULT_FLAG in row.get("flags", []) for row in section["planRows"])
         figures[f"{track}.planUnverifiedRows"] = sum("valuation basis unverified" in row.get("flags", []) for row in section["planRows"])
         # I71: plan rows per owner-assumption kind, and every kind named from the one registry.
         kinds = {kind: sum(1 for row in section["planRows"] if row.get("grade") == "assumption" and (row.get("assumptionKind") or "transfer") == kind)

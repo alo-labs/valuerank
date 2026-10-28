@@ -71,8 +71,8 @@ def test_readme_flags_fallback_and_subset_rows(emitted):
     # O50/O17: the max-effort ranking admits the Coding Agent Index, which MiMo-V2.6-Pro lacks; O46: its quota-ceiling route.
     assert rows["MiMo-V2.6-Pro"][10] == "subset cost"
     assert rows["MiMo-V2.6-Pro"][9] == "MiMo Token Plan Max $100 · quota ceiling (provider-derived) (1.1808×, assumption)"
-    assert rows["GPT-6 Astra (max)"][6] == "100%" and rows["GPT-6 Astra (max)"][10] == "—"
-    assert rows["Claude Haiku 5.5 (max)"][10] == "AA cost caveat"
+    assert rows["GPT-6 Astra (max)"][6] == "100%" and rows["GPT-6 Astra (max)"][10] == "route possibly superseded"
+    assert rows["Claude Haiku 5.5 (max)"][10] == "AA cost caveat, route possibly superseded"
     assert rows["DeepSeek V4.1 Flash 1017 (max)"][10] == "API-cost fallback"  # I50: its exact Coding Agent Index record is pinned
     # O45: GPT-6.1 Sol keeps its own SemiAnalysis figure.
     assert rows["GPT-6.1 Sol (max)"][9] == "ChatGPT Pro 500 $500 · GPT-6.1 Sol (10.772×, measured)"

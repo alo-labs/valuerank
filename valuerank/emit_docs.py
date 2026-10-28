@@ -68,6 +68,8 @@ POLICY_APPLICATIONS = (
     ("claudeApplication", "Claude"),
     ("mimoApplication", "MiMo"),
     ("unsupportedModels", "Other models"),
+    # I78 L5: the registry's statement of owner decisions O72 onwards, rendered as it is recorded.
+    ("o72Application", "Plan evidence after the O71 search"),
 )
 CHARGE_LABELS = {
     "contestantModelTokens": "Contestant tokens",
@@ -86,6 +88,9 @@ FLAG_LEGEND = (
     ("no cost", "AA publishes no cost for the configuration, so it has no value score and no rank (AGENTS.md); its quality is shown"),
     ("AA cost caveat", "AA states that its published cost omits a pricing term"),
     ("API-cost fallback", "no admitted Plan route; the Plan ranking uses the API cost (O13)"),
+    # I78 L5: the selected Plan route's own lifecycle flags, so every human-readable ranking shows them.
+    ("route possibly superseded", "the selected Plan route's evidence (or its donor's) may be superseded by age or a detected change (E18, E151, O77-O79); it stays selected and earns no interval label (E228)"),
+    ("fault window", "the selected Plan route rests on a controlled measurement inside an acknowledged accounting-fault window; it stays selected until two concordant user reports for its plan replace it (O91, O92, O93)"),
 )
 
 
@@ -209,6 +214,8 @@ def short_flags(entry, row):
         "no cost": cost["apiUsd"] is None,
         "AA cost caveat": bool(row.get("aaCostCaveat")),
         "API-cost fallback": cost["fallback"] is not None,
+        "route possibly superseded": bool({"possibly-superseded", "expired"} & set((row.get("plan") or {}).get("flags", []))),
+        "fault window": plan_routes.FAULT_FLAG in (row.get("plan") or {}).get("flags", []),
     }
     return ", ".join(word for word, _text in FLAG_LEGEND if present[word]) or DASH
 
@@ -1139,6 +1146,10 @@ Every admissible route-measurement pair in comparator order (E171) and the compa
 
 {markdown_table(['Configuration', 'Admissible pairs', 'Unidentified', 'Pairs (multiple, status)', 'Leave-selected-out choice'], alternative_rows, numeric={1, 2})}
 
+### Plan allowance report cells (O71, O81)
+
+{report_cells_markdown(facts)}
+
 ### Measured-only Plan view
 
 Admission: {measured['specification']['admission']}. Selection: {measured['specification']['selection']}. Panel: {measured['specification']['panel']}.
@@ -1163,6 +1174,20 @@ Admission: {measured['specification']['admission']}. Selection: {measured['speci
 
 {markdown_table(['Rule', 'Status', 'Detail'], [[item['rule'], item['status'], item['detail']] for item in v3['manifest']])}
 """
+
+
+def report_cells_markdown(facts):
+    """I78 L5: every O71 report cell's verdict, as the build computed it (O81-O87, O93)."""
+
+    cells = facts.v3.get("planAllowanceCells") or []
+    if not cells:
+        return "No report cell."
+    passing = sum(cell["status"] == "passes" for cell in cells)
+    rows = [[cell["provider"], cell["plan"] + ("" if cell.get("listed", True) else " (not listed)"), cell["modelId"] or DASH, cell["unit"], cell["region"],
+             str(sum(1 for report in cell["reports"] if report["excluded"] is None)) + f" of {len(cell['reports'])}", cell["status"]]
+            for cell in sorted(cells, key=lambda item: (item["provider"], item["plan"], str(item["modelId"]), item["unit"], item["region"]))]
+    return (f"{len(cells)} cells; {passing} pass{'es' if passing == 1 else ''}. A cell on a plan the Plan ranking does not list is evidence only (O85).\n\n"
+            + markdown_table(["Provider", "Plan", "Model", "Unit", "Region", "Eligible reports", "Verdict"], rows))
 
 
 def scenario_panel_note(facts):
