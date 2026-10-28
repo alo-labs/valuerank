@@ -1709,3 +1709,14 @@ Asked on I64 Q1 whether future O71 admissions should be executed by the build fr
 - L5 (adopted): the duplicate `CONTROLLED_KINDS` in `plan_routes.py` is removed; the module keeps the wider set (no route uses `controlled_measurement`, so nothing changes).
 - Recommendations: effort-keyed cells superseded by O87; post-change reports beside flagged routes and generated "today" examples recorded, not adopted this round; ceiling flag types adopted (L2).
 - Round status (O56): not clean (one Medium). Draft r128; the Opus medium rung restarts its count.
+
+## Owner decision O88 (2026-10-28), asked on I69 Q2
+- O88 (SemiAnalysis across efforts): O87's premise also covers SemiAnalysis's controlled measurements: a figure measured for a model serves every effort of that model, as a labelled same-model assumption naming its donor route. The other efforts of GPT-6.1 Sol (low, medium, high, xhigh) and GPT-6 Astra (high, xhigh) now take their own model's figure per plan instead of O45's lower-of figure; O45's lower-of still applies to every other GPT model. Changed multiples: GPT-6.1 Sol's other efforts on ChatGPT Plus 8.1→10.55; GPT-6 Astra's other efforts on Pro 100 10.55→13.22, Pro 200 10.42→14.485, Pro 500 10.772→13.91 (24 routes in the registry). Effect today: GPT-6 Astra (high) in the AI Coding Daily ranking now selects ChatGPT Pro 200 at 14.485× (was Pro 500 at 10.772×), Plan value 52.05 → 52.84, rank unchanged (18th); the GPT-6.1 Sol rows keep their Pro 500 routes.
+
+## Internal review I69 (Claude Opus 5.5, effort medium, on r128) — adopted, modified or rejected
+- M1 (adopted, no owner question needed): O86 was answered on the formula itself (largest lower bound ≤ 1.20 × smallest upper bound), which the build and tests already use; the draft's "one value lies within 1.20× of every range" gloss and the same wording in AGENTS.md were wrong (that reading is a 1.44× band) and are replaced by the formula; E98 and E33 now say O86 amends them for range-valued reports (for point reports the tests coincide, so the 100/120.001 fixture stands).
+- L1 (adopted): E106 case (1), E107's report set and the route key say that plan-allowance evidence is effort-invariant (O87, O88) while a route keeps its configuration's effort.
+- L2 (adopted, engine changed with tests): cells are keyed by the configuration's AA family passed in by the build (no ID parsing, so "qwen3.8-max" stays a model); a cell publishes its family as `modelId` and the configurations and efforts it pools.
+- L3 (adopted, engine changed with tests): an O46 ceiling has its own E166 amount kind ("provider quota ceiling: the full quota at API rates") and derivation, and its selection reason reads "larger quota-ceiling multiple"; the draft's E139 and E166 lists include the ceiling.
+- L4 / Q2 (asked; O88, data changed).
+- Round status (O56): not clean (one Medium). Draft r129.

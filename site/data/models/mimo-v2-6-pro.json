@@ -351,12 +351,12 @@
       }
     ],
     "aaCostCaveat": null,
-    "selectionReason": "larger observed multiple (observed-workload multiple — target-workload ordering not identified)",
+    "selectionReason": "larger quota-ceiling multiple (O46: provider-derived, not observed)",
     "planAmount": {
-      "amountKind": "assumed API-equivalent consumption (owner-named transfer)",
-      "amountTarget": "assumed consumption",
+      "amountKind": "provider quota ceiling: the full quota at API rates (O46; full use assumed)",
+      "amountTarget": "full-quota consumption",
       "amountUsd": 118.08000000000001,
-      "derivation": "authorised assumption: the donor's multiple times this route's cash",
+      "derivation": "quota ceiling: the tier's credits at the provider's API rate (I69 L3)",
       "feePeriod": "month",
       "subscriptionCashUsd": 100,
       "additionalCashUsd": 0.0,
@@ -369,7 +369,7 @@
       "capacityStatus": "provider quota ceiling: full use of the quota assumed (O46)",
       "valuationStatus": "release",
       "donorRouteId": null,
-      "interpretationLabel": "assumed API-equivalent consumption (owner-named transfer), API-priced USD per month"
+      "interpretationLabel": "provider quota ceiling: the full quota at API rates (O46; full use assumed), API-priced USD per month"
     }
   },
   "plans": [

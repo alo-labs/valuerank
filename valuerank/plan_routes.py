@@ -546,7 +546,9 @@ def route_selection(candidates: list[dict]) -> dict:
         return {"selected": ordered[0], "reason": "only remaining eligible route", "dominated": dominated, "tuples": tuples}
     best, runner_up = (comparison_tuple(candidate) for candidate in ordered[:2])
     deciding = next((DECIDING_KEYS[index] for index, (a, b) in enumerate(zip(best, runner_up)) if a != b), "route ID tie-break")
-    if deciding == DECIDING_KEYS[2] and ordered[0]["identification"] == "unidentified":
+    if deciding == DECIDING_KEYS[2] and ordered[0]["route"].get("evidenceClass") == "provider_quota_ceiling":
+        deciding = "larger quota-ceiling multiple (O46: provider-derived, not observed)"
+    elif deciding == DECIDING_KEYS[2] and ordered[0]["identification"] == "unidentified":
         deciding = "larger observed multiple (observed-workload multiple — target-workload ordering not identified)"
     return {"selected": ordered[0], "reason": deciding, "dominated": dominated, "tuples": tuples}
 

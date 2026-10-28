@@ -63,8 +63,10 @@ def test_cells_pass_only_on_two_firm_concordant_reports_in_the_current_partition
     coarse = cells(report("a", start="2026-10-18", end="2026-10-18", low=7.84, high=9.04), report("b", start="2026-10-19", end="2026-10-19", low=8.40, high=9.68))
     assert coarse[("Pro", "week", "global")]["status"] == "passes"
     # O87: reports at different efforts pool for the model, keyed without the effort suffix.
-    pooled = cells(report("a", start="2026-10-18", end="2026-10-18", effort="high"), {**report("b", start="2026-10-19", end="2026-10-19", effort="low"), "modelId": "m-max"})
-    assert pooled[("Pro", "week", "global")]["status"] == "passes" and pooled[("Pro", "week", "global")]["efforts"] == ["high", "low"]
+    reports = [report("a", start="2026-10-18", end="2026-10-18", effort="high"), {**report("b", start="2026-10-19", end="2026-10-19", effort="low"), "modelId": "m-max"}]
+    pooled = pa.evaluate({**DOCUMENT, "reports": reports}, PROFILE, DAY, {"m": "M", "m-max": "M"})[0]
+    assert (pooled["modelId"], pooled["status"], pooled["efforts"], pooled["configurations"]) == ("M", "passes", ["high", "low"], ["m", "m-max"])
+    assert len(pa.evaluate({**DOCUMENT, "reports": reports}, PROFILE, DAY)) == 2  # I69 L2: an ID is never parsed for its effort
     assert cells(report("a", start="2026-10-18", end="2026-10-18"), report("p", start="2026-10-19", end="2026-10-19", provisional=True))[("Pro", "week", "global")]["status"].startswith("fails: 1 non-provisional")
     assert cells(report("h", unit="5h"))[("Pro", "5h", "global")]["status"] == "fails: a 5-hour figure never converts to a billing period (O82)"
     legacy = cells(report("r", start="2026-10-18", end="2026-10-18", plan="Legacy"), report("s", start="2026-10-19", end="2026-10-19", plan="Legacy"))
@@ -86,7 +88,7 @@ def test_a_report_route_needs_a_passing_cell_with_the_same_reports():
               {"id": "other", "plan": "Max", "modelIds": ["outside"], "valueMultipleKind": "end_user_report"},
               {"id": "controlled", "plan": "Max", "modelIds": ["m"], "valueMultipleKind": "controlled_account_workload_projection"}]
     pa.check_routes(routes, cells, {"m"}, {"end_user_report"})
-    pa.check_routes([{**routes[0], "modelIds": ["m-high"]}], cells, {"m-high"}, {"end_user_report"})  # O87
+    pa.check_routes([{**routes[0], "modelIds": ["m-high"]}], cells, {"m-high"}, {"end_user_report"}, {"m-high": "m"})  # O87
     with pytest.raises(ValueError, match="no passing O71 cell"):
         pa.check_routes(routes[:1], [{**cells[0], "listed": False}], {"m"}, {"end_user_report"})
     pa.check_routes([{**routes[0], "independentReports": [{"observer": "d"}, {"observer": "c"}]}], cells, {"m"}, {"end_user_report"})

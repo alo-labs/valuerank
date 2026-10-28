@@ -216,6 +216,9 @@ def test_route_selection_publishes_the_deciding_key():
     observed = pr.route_selection([candidate("pro", 8.0, "controlled"), candidate("max", 12.0, "controlled")])
     assert observed["selected"]["route"]["id"] == "max" and observed["reason"].startswith("larger observed multiple")
     assert observed["tuples"]["pro"] == (0, 3, 8.0, -20.0)
+    lite, top = candidate("lite", 1.0, "controlled"), candidate("top", 1.2, "controlled")
+    top["route"]["evidenceClass"] = "provider_quota_ceiling"
+    assert pr.route_selection([lite, top])["reason"].startswith("larger quota-ceiling multiple")
     points = pr.route_selection([candidate("a", 8.0, "controlled", identification="point-identified"), candidate("b", 12.0, "controlled", identification="point-identified")])
     assert points["reason"] == "only remaining eligible route" and points["dominated"] == {"a": "b"}
     overlapping = [

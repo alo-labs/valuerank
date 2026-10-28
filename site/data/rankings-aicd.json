@@ -590,7 +590,7 @@
         "fallback": null,
         "route": {
           "id": "chatgpt-pro500-gpt-6.1-sol-high-common-gpt-assumption",
-          "planLabel": "ChatGPT Pro 500 $500 · common GPT assumption",
+          "planLabel": "ChatGPT Pro 500 $500 · same-model assumption (O88)",
           "planFeeUsd": 500,
           "valueMultiple": 10.772,
           "grade": "assumption",
@@ -715,7 +715,7 @@
         "fallback": null,
         "route": {
           "id": "chatgpt-pro500-gpt-6.1-sol-medium-common-gpt-assumption",
-          "planLabel": "ChatGPT Pro 500 $500 · common GPT assumption",
+          "planLabel": "ChatGPT Pro 500 $500 · same-model assumption (O88)",
           "planFeeUsd": 500,
           "valueMultiple": 10.772,
           "grade": "assumption",
@@ -788,7 +788,7 @@
       "aaFrontierFootnote": "Claude Haiku 5.5 has 5x higher pricing on longer-context inputs which are not currently reflected; we are working to include this in cost figures across Artificial Analysis.",
       "rank": {
         "api": 9,
-        "plan": 14
+        "plan": 15
       },
       "overall": {
         "api": 48.75548360619415,
@@ -919,7 +919,7 @@
       },
       "overall": {
         "api": 46.781820375894775,
-        "plan": 52.05335202337786
+        "plan": 52.84277812117194
       },
       "quality": 58.607479521080364,
       "qualityRank": 5,
@@ -939,7 +939,7 @@
       },
       "costDims": {
         "api": 11.304842940338013,
-        "plan": 32.39096953027036
+        "plan": 35.54867392144667
       },
       "raw": {
         "frontierCode": 0.5094,
@@ -963,16 +963,16 @@
       },
       "cost": {
         "apiUsd": 2382.0949303383077,
-        "planUsd": 221.13766527462937,
+        "planUsd": 164.45253229812272,
         "fallback": null,
         "route": {
-          "id": "chatgpt-pro500-gpt-6-astra-high-common-gpt-assumption",
-          "planLabel": "ChatGPT Pro 500 $500 · common GPT assumption",
-          "planFeeUsd": 500,
-          "valueMultiple": 10.772,
+          "id": "chatgpt-pro200-gpt-6-astra-high-common-gpt-assumption",
+          "planLabel": "ChatGPT Pro 200 $200 · same-model assumption (O88)",
+          "planFeeUsd": 200,
+          "valueMultiple": 14.485,
           "grade": "assumption",
           "evidenceLabel": "Provisional assumption",
-          "sourceModel": "GPT-6.1 Sol",
+          "sourceModel": "GPT-6 Astra",
           "sourceUrl": "https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x",
           "sourceDate": "2026-10-06"
         },
@@ -8226,7 +8226,7 @@
         "fallback": null,
         "route": {
           "id": "chatgpt-pro500-gpt-6.1-sol-high-common-gpt-assumption",
-          "planLabel": "ChatGPT Pro 500 $500 · common GPT assumption",
+          "planLabel": "ChatGPT Pro 500 $500 · same-model assumption (O88)",
           "planFeeUsd": 500,
           "valueMultiple": 10.772,
           "grade": "assumption",
@@ -8284,6 +8284,138 @@
         "routeId": "chatgpt-pro500-gpt-6.1-sol-high-common-gpt-assumption",
         "multiple": 10.772,
         "representative": true
+      }
+    },
+    {
+      "slug": "gpt-6-1-sol-high",
+      "name": "GPT-6.1 Sol (high) · ChatGPT Plus",
+      "shortName": "GPT-6.1 Sol (high)",
+      "developer": "OpenAI",
+      "aaUrl": "https://artificialanalysis.ai/models/gpt-6-1-sol-high",
+      "aaVariant": "high",
+      "rankingEligible": true,
+      "exclusionReasons": [],
+      "intelligenceIndex": {
+        "value": 50.2377777519769,
+        "status": "measured"
+      },
+      "speed": 52.3005440465197,
+      "aaFrontierTier": "frontier",
+      "aaFrontierConfiguration": "GPT-6.1 Sol (high)",
+      "aaFrontierIntelligenceGap": 0,
+      "aaFrontierFootnote": null,
+      "rank": {
+        "api": 1,
+        "plan": 8
+      },
+      "overall": {
+        "api": 52.67745170115651,
+        "plan": 55.4799727401339
+      },
+      "quality": 57.17488127995559,
+      "qualityRank": 6,
+      "dims": {
+        "costComposite": null,
+        "frontierCode": 46.6056333333333,
+        "terminalBench": 51.5151515151515,
+        "bugHunt": 34.76190476190476,
+        "aiCodingDaily": 94.71666666666667,
+        "gdpval": 50.62050000000001,
+        "automationBench": 64.49523732184466,
+        "omniscience": 70.725,
+        "lcr": 82.3333333333333,
+        "hle": 51.390176088971295,
+        "scicode": 55.787037037037,
+        "critpt": 30.0
+      },
+      "costDims": {
+        "api": 39.18516296475926,
+        "plan": 50.39524712066884
+      },
+      "raw": {
+        "frontierCode": 0.466056333333333,
+        "terminalBench": 51.5151515151515,
+        "bugHunt": 36.5,
+        "aiCodingDaily": 56.83,
+        "gdpval": 1512.41,
+        "automationBench": 0.6449523732184466,
+        "omniscience": 41.45,
+        "lcr": 0.823333333333333,
+        "hle": 0.513901760889713,
+        "scicode": 0.55787037037037,
+        "critpt": 0.3
+      },
+      "coverage": {
+        "pct": 100.0,
+        "costAvailable": true,
+        "missing": [],
+        "provisional": false,
+        "provisionalReasons": []
+      },
+      "cost": {
+        "apiUsd": 431.0726459431111,
+        "planUsd": 40.85996644010532,
+        "fallback": null,
+        "route": {
+          "id": "chatgpt-plus-gpt-6.1-sol-high-common-gpt-assumption",
+          "planLabel": "ChatGPT Plus $20 · same-model assumption (O88)",
+          "planFeeUsd": 20,
+          "valueMultiple": 10.55,
+          "grade": "assumption",
+          "evidenceLabel": "Provisional assumption",
+          "sourceModel": "GPT-6.1 Sol",
+          "sourceUrl": "https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x",
+          "sourceDate": "2026-10-06"
+        },
+        "subset": false,
+        "partialComponents": [],
+        "workload": "1453a9a0576b02ea",
+        "planFlags": [
+          "workload-unmatched",
+          "owner-named transfer (assumption)",
+          "possibly-superseded",
+          "valuation basis unverified"
+        ]
+      },
+      "grade": "measured",
+      "pareto": {
+        "api": true,
+        "plan": false
+      },
+      "frontierStatus": {
+        "api": {
+          "definite": "certified",
+          "possible": "certified"
+        },
+        "plan": null
+      },
+      "scenario": {
+        "api": {
+          "top1": 1.0,
+          "top3": 1.0,
+          "frontier": 1.0
+        },
+        "plan": null
+      },
+      "flags": [],
+      "tier": "Premium",
+      "band": {
+        "api": [
+          1,
+          9
+        ],
+        "plan": [
+          1,
+          11
+        ]
+      },
+      "bandExcludesTransfer": true,
+      "key": "gpt-6-1-sol-high--chatgpt-plus",
+      "planRow": {
+        "plan": "ChatGPT Plus",
+        "routeId": "chatgpt-plus-gpt-6.1-sol-high-common-gpt-assumption",
+        "multiple": 10.55,
+        "representative": false
       }
     },
     {
@@ -8358,7 +8490,7 @@
         "fallback": null,
         "route": {
           "id": "chatgpt-pro100-gpt-6.1-sol-high-common-gpt-assumption",
-          "planLabel": "ChatGPT Pro 100 $100 · common GPT assumption",
+          "planLabel": "ChatGPT Pro 100 $100 · same-model assumption (O88)",
           "planFeeUsd": 100,
           "valueMultiple": 10.55,
           "grade": "assumption",
@@ -8438,7 +8570,7 @@
       "aaFrontierFootnote": null,
       "rank": {
         "api": 1,
-        "plan": 9
+        "plan": 10
       },
       "overall": {
         "api": 52.67745170115651,
@@ -8490,7 +8622,7 @@
         "fallback": null,
         "route": {
           "id": "chatgpt-pro200-gpt-6.1-sol-high-common-gpt-assumption",
-          "planLabel": "ChatGPT Pro 200 $200 · common GPT assumption",
+          "planLabel": "ChatGPT Pro 200 $200 · same-model assumption (O88)",
           "planFeeUsd": 200,
           "valueMultiple": 10.42,
           "grade": "assumption",
@@ -8547,138 +8679,6 @@
         "plan": "ChatGPT Pro 200",
         "routeId": "chatgpt-pro200-gpt-6.1-sol-high-common-gpt-assumption",
         "multiple": 10.42,
-        "representative": false
-      }
-    },
-    {
-      "slug": "gpt-6-1-sol-high",
-      "name": "GPT-6.1 Sol (high) · ChatGPT Plus",
-      "shortName": "GPT-6.1 Sol (high)",
-      "developer": "OpenAI",
-      "aaUrl": "https://artificialanalysis.ai/models/gpt-6-1-sol-high",
-      "aaVariant": "high",
-      "rankingEligible": true,
-      "exclusionReasons": [],
-      "intelligenceIndex": {
-        "value": 50.2377777519769,
-        "status": "measured"
-      },
-      "speed": 52.3005440465197,
-      "aaFrontierTier": "frontier",
-      "aaFrontierConfiguration": "GPT-6.1 Sol (high)",
-      "aaFrontierIntelligenceGap": 0,
-      "aaFrontierFootnote": null,
-      "rank": {
-        "api": 1,
-        "plan": 10
-      },
-      "overall": {
-        "api": 52.67745170115651,
-        "plan": 54.77558077088301
-      },
-      "quality": 57.17488127995559,
-      "qualityRank": 6,
-      "dims": {
-        "costComposite": null,
-        "frontierCode": 46.6056333333333,
-        "terminalBench": 51.5151515151515,
-        "bugHunt": 34.76190476190476,
-        "aiCodingDaily": 94.71666666666667,
-        "gdpval": 50.62050000000001,
-        "automationBench": 64.49523732184466,
-        "omniscience": 70.725,
-        "lcr": 82.3333333333333,
-        "hle": 51.390176088971295,
-        "scicode": 55.787037037037,
-        "critpt": 30.0
-      },
-      "costDims": {
-        "api": 39.18516296475926,
-        "plan": 47.57767924366529
-      },
-      "raw": {
-        "frontierCode": 0.466056333333333,
-        "terminalBench": 51.5151515151515,
-        "bugHunt": 36.5,
-        "aiCodingDaily": 56.83,
-        "gdpval": 1512.41,
-        "automationBench": 0.6449523732184466,
-        "omniscience": 41.45,
-        "lcr": 0.823333333333333,
-        "hle": 0.513901760889713,
-        "scicode": 0.55787037037037,
-        "critpt": 0.3
-      },
-      "coverage": {
-        "pct": 100.0,
-        "costAvailable": true,
-        "missing": [],
-        "provisional": false,
-        "provisionalReasons": []
-      },
-      "cost": {
-        "apiUsd": 431.0726459431111,
-        "planUsd": 53.21884517816187,
-        "fallback": null,
-        "route": {
-          "id": "chatgpt-plus-gpt-6.1-sol-high-common-gpt-assumption",
-          "planLabel": "ChatGPT Plus $20 · common GPT assumption",
-          "planFeeUsd": 20,
-          "valueMultiple": 8.1,
-          "grade": "assumption",
-          "evidenceLabel": "Provisional assumption",
-          "sourceModel": "GPT-6 Astra",
-          "sourceUrl": "https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x",
-          "sourceDate": "2026-10-06"
-        },
-        "subset": false,
-        "partialComponents": [],
-        "workload": "1453a9a0576b02ea",
-        "planFlags": [
-          "workload-unmatched",
-          "owner-named transfer (assumption)",
-          "possibly-superseded",
-          "valuation basis unverified"
-        ]
-      },
-      "grade": "measured",
-      "pareto": {
-        "api": true,
-        "plan": false
-      },
-      "frontierStatus": {
-        "api": {
-          "definite": "certified",
-          "possible": "certified"
-        },
-        "plan": null
-      },
-      "scenario": {
-        "api": {
-          "top1": 1.0,
-          "top3": 1.0,
-          "frontier": 1.0
-        },
-        "plan": null
-      },
-      "flags": [],
-      "tier": "Premium",
-      "band": {
-        "api": [
-          1,
-          9
-        ],
-        "plan": [
-          1,
-          11
-        ]
-      },
-      "bandExcludesTransfer": true,
-      "key": "gpt-6-1-sol-high--chatgpt-plus",
-      "planRow": {
-        "plan": "ChatGPT Plus",
-        "routeId": "chatgpt-plus-gpt-6.1-sol-high-common-gpt-assumption",
-        "multiple": 8.1,
         "representative": false
       }
     },
@@ -8754,7 +8754,7 @@
         "fallback": null,
         "route": {
           "id": "chatgpt-pro500-gpt-6.1-sol-medium-common-gpt-assumption",
-          "planLabel": "ChatGPT Pro 500 $500 · common GPT assumption",
+          "planLabel": "ChatGPT Pro 500 $500 · same-model assumption (O88)",
           "planFeeUsd": 500,
           "valueMultiple": 10.772,
           "grade": "assumption",
@@ -8812,6 +8812,138 @@
         "routeId": "chatgpt-pro500-gpt-6.1-sol-medium-common-gpt-assumption",
         "multiple": 10.772,
         "representative": true
+      }
+    },
+    {
+      "slug": "gpt-6-1-sol-medium",
+      "name": "GPT-6.1 Sol (medium) · ChatGPT Plus",
+      "shortName": "GPT-6.1 Sol (medium)",
+      "developer": "OpenAI",
+      "aaUrl": "https://artificialanalysis.ai/models/gpt-6-1-sol-medium",
+      "aaVariant": "medium",
+      "rankingEligible": true,
+      "exclusionReasons": [],
+      "intelligenceIndex": {
+        "value": 47.7833271274065,
+        "status": "measured"
+      },
+      "speed": 50.4244080636367,
+      "aaFrontierTier": "frontier",
+      "aaFrontierConfiguration": "GPT-6.1 Sol (medium)",
+      "aaFrontierIntelligenceGap": 0,
+      "aaFrontierFootnote": null,
+      "rank": {
+        "api": 2,
+        "plan": 12
+      },
+      "overall": {
+        "api": 51.68768777627585,
+        "plan": 54.06089076233858
+      },
+      "quality": 54.202063155389226,
+      "qualityRank": 7,
+      "dims": {
+        "costComposite": null,
+        "frontierCode": 43.333066666666696,
+        "terminalBench": 47.979797979798,
+        "bugHunt": 27.61904761904762,
+        "aiCodingDaily": 92.78333333333333,
+        "gdpval": 47.5115,
+        "automationBench": 62.573509704356866,
+        "omniscience": 69.975,
+        "lcr": 83.3333333333333,
+        "hle": 49.8609823911029,
+        "scicode": 53.2407407407407,
+        "critpt": 27.7142857142857
+      },
+      "costDims": {
+        "api": 44.14456163893573,
+        "plan": 53.63737358318664
+      },
+      "raw": {
+        "frontierCode": 0.433330666666667,
+        "terminalBench": 47.979797979798,
+        "bugHunt": 29.0,
+        "aiCodingDaily": 55.67,
+        "gdpval": 1450.23,
+        "automationBench": 0.6257350970435687,
+        "omniscience": 39.95,
+        "lcr": 0.833333333333333,
+        "hle": 0.498609823911029,
+        "scicode": 0.532407407407407,
+        "critpt": 0.277142857142857
+      },
+      "coverage": {
+        "pct": 100.0,
+        "costAvailable": true,
+        "missing": [],
+        "provisional": false,
+        "provisionalReasons": []
+      },
+      "cost": {
+        "apiUsd": 318.04572523681617,
+        "planUsd": 30.146514240456508,
+        "fallback": null,
+        "route": {
+          "id": "chatgpt-plus-gpt-6.1-sol-medium-common-gpt-assumption",
+          "planLabel": "ChatGPT Plus $20 · same-model assumption (O88)",
+          "planFeeUsd": 20,
+          "valueMultiple": 10.55,
+          "grade": "assumption",
+          "evidenceLabel": "Provisional assumption",
+          "sourceModel": "GPT-6.1 Sol",
+          "sourceUrl": "https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x",
+          "sourceDate": "2026-10-06"
+        },
+        "subset": false,
+        "partialComponents": [],
+        "workload": "1453a9a0576b02ea",
+        "planFlags": [
+          "workload-unmatched",
+          "owner-named transfer (assumption)",
+          "possibly-superseded",
+          "valuation basis unverified"
+        ]
+      },
+      "grade": "measured",
+      "pareto": {
+        "api": true,
+        "plan": false
+      },
+      "frontierStatus": {
+        "api": {
+          "definite": "certified",
+          "possible": "certified"
+        },
+        "plan": null
+      },
+      "scenario": {
+        "api": {
+          "top1": 0.0,
+          "top3": 1.0,
+          "frontier": 1.0
+        },
+        "plan": null
+      },
+      "flags": [],
+      "tier": "Premium",
+      "band": {
+        "api": [
+          1,
+          9
+        ],
+        "plan": [
+          12,
+          24
+        ]
+      },
+      "bandExcludesTransfer": true,
+      "key": "gpt-6-1-sol-medium--chatgpt-plus",
+      "planRow": {
+        "plan": "ChatGPT Plus",
+        "routeId": "chatgpt-plus-gpt-6.1-sol-medium-common-gpt-assumption",
+        "multiple": 10.55,
+        "representative": false
       }
     },
     {
@@ -8886,7 +9018,7 @@
         "fallback": null,
         "route": {
           "id": "chatgpt-pro100-gpt-6.1-sol-medium-common-gpt-assumption",
-          "planLabel": "ChatGPT Pro 100 $100 · common GPT assumption",
+          "planLabel": "ChatGPT Pro 100 $100 · same-model assumption (O88)",
           "planFeeUsd": 100,
           "valueMultiple": 10.55,
           "grade": "assumption",
@@ -8966,7 +9098,7 @@
       "aaFrontierFootnote": null,
       "rank": {
         "api": 2,
-        "plan": 13
+        "plan": 14
       },
       "overall": {
         "api": 51.68768777627585,
@@ -9018,7 +9150,7 @@
         "fallback": null,
         "route": {
           "id": "chatgpt-pro200-gpt-6.1-sol-medium-common-gpt-assumption",
-          "planLabel": "ChatGPT Pro 200 $200 · common GPT assumption",
+          "planLabel": "ChatGPT Pro 200 $200 · same-model assumption (O88)",
           "planFeeUsd": 200,
           "valueMultiple": 10.42,
           "grade": "assumption",
@@ -9098,7 +9230,7 @@
       "aaFrontierFootnote": "Claude Haiku 5.5 has 5x higher pricing on longer-context inputs which are not currently reflected; we are working to include this in cost figures across Artificial Analysis.",
       "rank": {
         "api": 9,
-        "plan": 14
+        "plan": 15
       },
       "overall": {
         "api": 48.75548360619415,
@@ -9232,7 +9364,7 @@
       "aaFrontierFootnote": "Claude Haiku 5.5 has 5x higher pricing on longer-context inputs which are not currently reflected; we are working to include this in cost figures across Artificial Analysis.",
       "rank": {
         "api": 9,
-        "plan": 15
+        "plan": 16
       },
       "overall": {
         "api": 48.75548360619415,
@@ -9366,7 +9498,7 @@
       "aaFrontierFootnote": "Claude Haiku 5.5 has 5x higher pricing on longer-context inputs which are not currently reflected; we are working to include this in cost figures across Artificial Analysis.",
       "rank": {
         "api": 9,
-        "plan": 16
+        "plan": 17
       },
       "overall": {
         "api": 48.75548360619415,
@@ -9481,140 +9613,8 @@
       }
     },
     {
-      "slug": "gpt-6-1-sol-medium",
-      "name": "GPT-6.1 Sol (medium) · ChatGPT Plus",
-      "shortName": "GPT-6.1 Sol (medium)",
-      "developer": "OpenAI",
-      "aaUrl": "https://artificialanalysis.ai/models/gpt-6-1-sol-medium",
-      "aaVariant": "medium",
-      "rankingEligible": true,
-      "exclusionReasons": [],
-      "intelligenceIndex": {
-        "value": 47.7833271274065,
-        "status": "measured"
-      },
-      "speed": 50.4244080636367,
-      "aaFrontierTier": "frontier",
-      "aaFrontierConfiguration": "GPT-6.1 Sol (medium)",
-      "aaFrontierIntelligenceGap": 0,
-      "aaFrontierFootnote": null,
-      "rank": {
-        "api": 2,
-        "plan": 17
-      },
-      "overall": {
-        "api": 51.68768777627585,
-        "plan": 53.35649879308769
-      },
-      "quality": 54.202063155389226,
-      "qualityRank": 7,
-      "dims": {
-        "costComposite": null,
-        "frontierCode": 43.333066666666696,
-        "terminalBench": 47.979797979798,
-        "bugHunt": 27.61904761904762,
-        "aiCodingDaily": 92.78333333333333,
-        "gdpval": 47.5115,
-        "automationBench": 62.573509704356866,
-        "omniscience": 69.975,
-        "lcr": 83.3333333333333,
-        "hle": 49.8609823911029,
-        "scicode": 53.2407407407407,
-        "critpt": 27.7142857142857
-      },
-      "costDims": {
-        "api": 44.14456163893573,
-        "plan": 50.819805706183075
-      },
-      "raw": {
-        "frontierCode": 0.433330666666667,
-        "terminalBench": 47.979797979798,
-        "bugHunt": 29.0,
-        "aiCodingDaily": 55.67,
-        "gdpval": 1450.23,
-        "automationBench": 0.6257350970435687,
-        "omniscience": 39.95,
-        "lcr": 0.833333333333333,
-        "hle": 0.498609823911029,
-        "scicode": 0.532407407407407,
-        "critpt": 0.277142857142857
-      },
-      "coverage": {
-        "pct": 100.0,
-        "costAvailable": true,
-        "missing": [],
-        "provisional": false,
-        "provisionalReasons": []
-      },
-      "cost": {
-        "apiUsd": 318.04572523681617,
-        "planUsd": 39.26490435022422,
-        "fallback": null,
-        "route": {
-          "id": "chatgpt-plus-gpt-6.1-sol-medium-common-gpt-assumption",
-          "planLabel": "ChatGPT Plus $20 · common GPT assumption",
-          "planFeeUsd": 20,
-          "valueMultiple": 8.1,
-          "grade": "assumption",
-          "evidenceLabel": "Provisional assumption",
-          "sourceModel": "GPT-6 Astra",
-          "sourceUrl": "https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x",
-          "sourceDate": "2026-10-06"
-        },
-        "subset": false,
-        "partialComponents": [],
-        "workload": "1453a9a0576b02ea",
-        "planFlags": [
-          "workload-unmatched",
-          "owner-named transfer (assumption)",
-          "possibly-superseded",
-          "valuation basis unverified"
-        ]
-      },
-      "grade": "measured",
-      "pareto": {
-        "api": true,
-        "plan": false
-      },
-      "frontierStatus": {
-        "api": {
-          "definite": "certified",
-          "possible": "certified"
-        },
-        "plan": null
-      },
-      "scenario": {
-        "api": {
-          "top1": 0.0,
-          "top3": 1.0,
-          "frontier": 1.0
-        },
-        "plan": null
-      },
-      "flags": [],
-      "tier": "Premium",
-      "band": {
-        "api": [
-          1,
-          9
-        ],
-        "plan": [
-          12,
-          24
-        ]
-      },
-      "bandExcludesTransfer": true,
-      "key": "gpt-6-1-sol-medium--chatgpt-plus",
-      "planRow": {
-        "plan": "ChatGPT Plus",
-        "routeId": "chatgpt-plus-gpt-6.1-sol-medium-common-gpt-assumption",
-        "multiple": 8.1,
-        "representative": false
-      }
-    },
-    {
       "slug": "gpt-6-astra-high",
-      "name": "GPT-6 Astra (high) · ChatGPT Pro 500",
+      "name": "GPT-6 Astra (high) · ChatGPT Pro 200",
       "shortName": "GPT-6 Astra (high)",
       "developer": "OpenAI",
       "aaUrl": "https://artificialanalysis.ai/models/gpt-6-astra-high",
@@ -9636,7 +9636,7 @@
       },
       "overall": {
         "api": 46.781820375894775,
-        "plan": 52.05335202337786
+        "plan": 52.84277812117194
       },
       "quality": 58.607479521080364,
       "qualityRank": 5,
@@ -9656,7 +9656,7 @@
       },
       "costDims": {
         "api": 11.304842940338013,
-        "plan": 32.39096953027036
+        "plan": 35.54867392144667
       },
       "raw": {
         "frontierCode": 0.5094,
@@ -9680,280 +9680,16 @@
       },
       "cost": {
         "apiUsd": 2382.0949303383077,
-        "planUsd": 221.13766527462937,
-        "fallback": null,
-        "route": {
-          "id": "chatgpt-pro500-gpt-6-astra-high-common-gpt-assumption",
-          "planLabel": "ChatGPT Pro 500 $500 · common GPT assumption",
-          "planFeeUsd": 500,
-          "valueMultiple": 10.772,
-          "grade": "assumption",
-          "evidenceLabel": "Provisional assumption",
-          "sourceModel": "GPT-6.1 Sol",
-          "sourceUrl": "https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x",
-          "sourceDate": "2026-10-06"
-        },
-        "subset": false,
-        "partialComponents": [],
-        "workload": "1453a9a0576b02ea",
-        "planFlags": [
-          "workload-unmatched",
-          "owner-named transfer (assumption)",
-          "possibly-superseded",
-          "valuation basis unverified"
-        ]
-      },
-      "grade": "measured",
-      "pareto": {
-        "api": false,
-        "plan": false
-      },
-      "frontierStatus": {
-        "api": {
-          "definite": "disproved",
-          "possible": "disproved"
-        },
-        "plan": null
-      },
-      "scenario": {
-        "api": {
-          "top1": 0.0,
-          "top3": 0.0,
-          "frontier": 0.0
-        },
-        "plan": null
-      },
-      "flags": [],
-      "tier": "Expensive",
-      "band": {
-        "api": [
-          10,
-          15
-        ],
-        "plan": [
-          12,
-          24
-        ]
-      },
-      "bandExcludesTransfer": true,
-      "key": "gpt-6-astra-high--chatgpt-pro-500",
-      "planRow": {
-        "plan": "ChatGPT Pro 500",
-        "routeId": "chatgpt-pro500-gpt-6-astra-high-common-gpt-assumption",
-        "multiple": 10.772,
-        "representative": true
-      }
-    },
-    {
-      "slug": "gpt-6-astra-high",
-      "name": "GPT-6 Astra (high) · ChatGPT Pro 100",
-      "shortName": "GPT-6 Astra (high)",
-      "developer": "OpenAI",
-      "aaUrl": "https://artificialanalysis.ai/models/gpt-6-astra-high",
-      "aaVariant": "high",
-      "rankingEligible": true,
-      "exclusionReasons": [],
-      "intelligenceIndex": {
-        "value": 50.9191471636152,
-        "status": "measured"
-      },
-      "speed": 56.6147429977635,
-      "aaFrontierTier": "near",
-      "aaFrontierConfiguration": "GPT-6 Astra (high)",
-      "aaFrontierIntelligenceGap": 3,
-      "aaFrontierFootnote": null,
-      "rank": {
-        "api": 13,
-        "plan": 19
-      },
-      "overall": {
-        "api": 46.781820375894775,
-        "plan": 51.99784464256137
-      },
-      "quality": 58.607479521080364,
-      "qualityRank": 5,
-      "dims": {
-        "costComposite": null,
-        "frontierCode": 50.94,
-        "terminalBench": 54.040404040404,
-        "bugHunt": 33.333333333333336,
-        "aiCodingDaily": 94.61666666666666,
-        "gdpval": 51.24400000000001,
-        "automationBench": 66.6122174975011,
-        "omniscience": 71.86666666666667,
-        "lcr": 80.0,
-        "hle": 53.058387395736794,
-        "scicode": 55.4398148148148,
-        "critpt": 28.857142857142897
-      },
-      "costDims": {
-        "api": 11.304842940338013,
-        "plan": 32.16894000700437
-      },
-      "raw": {
-        "frontierCode": 0.5094,
-        "terminalBench": 54.040404040404,
-        "bugHunt": 35.0,
-        "aiCodingDaily": 56.77,
-        "gdpval": 1524.88,
-        "automationBench": 0.666122174975011,
-        "omniscience": 43.733333333333334,
-        "lcr": 0.8,
-        "hle": 0.530583873957368,
-        "scicode": 0.554398148148148,
-        "critpt": 0.288571428571429
-      },
-      "coverage": {
-        "pct": 100.0,
-        "costAvailable": true,
-        "missing": [],
-        "provisional": false,
-        "provisionalReasons": []
-      },
-      "cost": {
-        "apiUsd": 2382.0949303383077,
-        "planUsd": 225.79098865765948,
-        "fallback": null,
-        "route": {
-          "id": "chatgpt-pro100-gpt-6-astra-high-common-gpt-assumption",
-          "planLabel": "ChatGPT Pro 100 $100 · common GPT assumption",
-          "planFeeUsd": 100,
-          "valueMultiple": 10.55,
-          "grade": "assumption",
-          "evidenceLabel": "Provisional assumption",
-          "sourceModel": "GPT-6.1 Sol",
-          "sourceUrl": "https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x",
-          "sourceDate": "2026-10-06"
-        },
-        "subset": false,
-        "partialComponents": [],
-        "workload": "1453a9a0576b02ea",
-        "planFlags": [
-          "workload-unmatched",
-          "owner-named transfer (assumption)",
-          "possibly-superseded",
-          "valuation basis unverified"
-        ]
-      },
-      "grade": "measured",
-      "pareto": {
-        "api": false,
-        "plan": false
-      },
-      "frontierStatus": {
-        "api": {
-          "definite": "disproved",
-          "possible": "disproved"
-        },
-        "plan": null
-      },
-      "scenario": {
-        "api": {
-          "top1": 0.0,
-          "top3": 0.0,
-          "frontier": 0.0
-        },
-        "plan": null
-      },
-      "flags": [],
-      "tier": "Expensive",
-      "band": {
-        "api": [
-          10,
-          15
-        ],
-        "plan": [
-          12,
-          24
-        ]
-      },
-      "bandExcludesTransfer": true,
-      "key": "gpt-6-astra-high--chatgpt-pro-100",
-      "planRow": {
-        "plan": "ChatGPT Pro 100",
-        "routeId": "chatgpt-pro100-gpt-6-astra-high-common-gpt-assumption",
-        "multiple": 10.55,
-        "representative": false
-      }
-    },
-    {
-      "slug": "gpt-6-astra-high",
-      "name": "GPT-6 Astra (high) · ChatGPT Pro 200",
-      "shortName": "GPT-6 Astra (high)",
-      "developer": "OpenAI",
-      "aaUrl": "https://artificialanalysis.ai/models/gpt-6-astra-high",
-      "aaVariant": "high",
-      "rankingEligible": true,
-      "exclusionReasons": [],
-      "intelligenceIndex": {
-        "value": 50.9191471636152,
-        "status": "measured"
-      },
-      "speed": 56.6147429977635,
-      "aaFrontierTier": "near",
-      "aaFrontierConfiguration": "GPT-6 Astra (high)",
-      "aaFrontierIntelligenceGap": 3,
-      "aaFrontierFootnote": null,
-      "rank": {
-        "api": 13,
-        "plan": 20
-      },
-      "overall": {
-        "api": 46.781820375894775,
-        "plan": 51.964795477574874
-      },
-      "quality": 58.607479521080364,
-      "qualityRank": 5,
-      "dims": {
-        "costComposite": null,
-        "frontierCode": 50.94,
-        "terminalBench": 54.040404040404,
-        "bugHunt": 33.333333333333336,
-        "aiCodingDaily": 94.61666666666666,
-        "gdpval": 51.24400000000001,
-        "automationBench": 66.6122174975011,
-        "omniscience": 71.86666666666667,
-        "lcr": 80.0,
-        "hle": 53.058387395736794,
-        "scicode": 55.4398148148148,
-        "critpt": 28.857142857142897
-      },
-      "costDims": {
-        "api": 11.304842940338013,
-        "plan": 32.0367433470584
-      },
-      "raw": {
-        "frontierCode": 0.5094,
-        "terminalBench": 54.040404040404,
-        "bugHunt": 35.0,
-        "aiCodingDaily": 56.77,
-        "gdpval": 1524.88,
-        "automationBench": 0.666122174975011,
-        "omniscience": 43.733333333333334,
-        "lcr": 0.8,
-        "hle": 0.530583873957368,
-        "scicode": 0.554398148148148,
-        "critpt": 0.288571428571429
-      },
-      "coverage": {
-        "pct": 100.0,
-        "costAvailable": true,
-        "missing": [],
-        "provisional": false,
-        "provisionalReasons": []
-      },
-      "cost": {
-        "apiUsd": 2382.0949303383077,
-        "planUsd": 228.60795876567252,
+        "planUsd": 164.45253229812272,
         "fallback": null,
         "route": {
           "id": "chatgpt-pro200-gpt-6-astra-high-common-gpt-assumption",
-          "planLabel": "ChatGPT Pro 200 $200 · common GPT assumption",
+          "planLabel": "ChatGPT Pro 200 $200 · same-model assumption (O88)",
           "planFeeUsd": 200,
-          "valueMultiple": 10.42,
+          "valueMultiple": 14.485,
           "grade": "assumption",
           "evidenceLabel": "Provisional assumption",
-          "sourceModel": "GPT-6.1 Sol",
+          "sourceModel": "GPT-6 Astra",
           "sourceUrl": "https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x",
           "sourceDate": "2026-10-06"
         },
@@ -10004,7 +9740,271 @@
       "planRow": {
         "plan": "ChatGPT Pro 200",
         "routeId": "chatgpt-pro200-gpt-6-astra-high-common-gpt-assumption",
-        "multiple": 10.42,
+        "multiple": 14.485,
+        "representative": true
+      }
+    },
+    {
+      "slug": "gpt-6-astra-high",
+      "name": "GPT-6 Astra (high) · ChatGPT Pro 500",
+      "shortName": "GPT-6 Astra (high)",
+      "developer": "OpenAI",
+      "aaUrl": "https://artificialanalysis.ai/models/gpt-6-astra-high",
+      "aaVariant": "high",
+      "rankingEligible": true,
+      "exclusionReasons": [],
+      "intelligenceIndex": {
+        "value": 50.9191471636152,
+        "status": "measured"
+      },
+      "speed": 56.6147429977635,
+      "aaFrontierTier": "near",
+      "aaFrontierConfiguration": "GPT-6 Astra (high)",
+      "aaFrontierIntelligenceGap": 3,
+      "aaFrontierFootnote": null,
+      "rank": {
+        "api": 13,
+        "plan": 19
+      },
+      "overall": {
+        "api": 46.781820375894775,
+        "plan": 52.734810048031804
+      },
+      "quality": 58.607479521080364,
+      "qualityRank": 5,
+      "dims": {
+        "costComposite": null,
+        "frontierCode": 50.94,
+        "terminalBench": 54.040404040404,
+        "bugHunt": 33.333333333333336,
+        "aiCodingDaily": 94.61666666666666,
+        "gdpval": 51.24400000000001,
+        "automationBench": 66.6122174975011,
+        "omniscience": 71.86666666666667,
+        "lcr": 80.0,
+        "hle": 53.058387395736794,
+        "scicode": 55.4398148148148,
+        "critpt": 28.857142857142897
+      },
+      "costDims": {
+        "api": 11.304842940338013,
+        "plan": 35.11680162888613
+      },
+      "raw": {
+        "frontierCode": 0.5094,
+        "terminalBench": 54.040404040404,
+        "bugHunt": 35.0,
+        "aiCodingDaily": 56.77,
+        "gdpval": 1524.88,
+        "automationBench": 0.666122174975011,
+        "omniscience": 43.733333333333334,
+        "lcr": 0.8,
+        "hle": 0.530583873957368,
+        "scicode": 0.554398148148148,
+        "critpt": 0.288571428571429
+      },
+      "coverage": {
+        "pct": 100.0,
+        "costAvailable": true,
+        "missing": [],
+        "provisional": false,
+        "provisionalReasons": []
+      },
+      "cost": {
+        "apiUsd": 2382.0949303383077,
+        "planUsd": 171.25053417241608,
+        "fallback": null,
+        "route": {
+          "id": "chatgpt-pro500-gpt-6-astra-high-common-gpt-assumption",
+          "planLabel": "ChatGPT Pro 500 $500 · same-model assumption (O88)",
+          "planFeeUsd": 500,
+          "valueMultiple": 13.91,
+          "grade": "assumption",
+          "evidenceLabel": "Provisional assumption",
+          "sourceModel": "GPT-6 Astra",
+          "sourceUrl": "https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x",
+          "sourceDate": "2026-10-06"
+        },
+        "subset": false,
+        "partialComponents": [],
+        "workload": "1453a9a0576b02ea",
+        "planFlags": [
+          "workload-unmatched",
+          "owner-named transfer (assumption)",
+          "possibly-superseded",
+          "valuation basis unverified"
+        ]
+      },
+      "grade": "measured",
+      "pareto": {
+        "api": false,
+        "plan": false
+      },
+      "frontierStatus": {
+        "api": {
+          "definite": "disproved",
+          "possible": "disproved"
+        },
+        "plan": null
+      },
+      "scenario": {
+        "api": {
+          "top1": 0.0,
+          "top3": 0.0,
+          "frontier": 0.0
+        },
+        "plan": null
+      },
+      "flags": [],
+      "tier": "Expensive",
+      "band": {
+        "api": [
+          10,
+          15
+        ],
+        "plan": [
+          12,
+          24
+        ]
+      },
+      "bandExcludesTransfer": true,
+      "key": "gpt-6-astra-high--chatgpt-pro-500",
+      "planRow": {
+        "plan": "ChatGPT Pro 500",
+        "routeId": "chatgpt-pro500-gpt-6-astra-high-common-gpt-assumption",
+        "multiple": 13.91,
+        "representative": false
+      }
+    },
+    {
+      "slug": "gpt-6-astra-high",
+      "name": "GPT-6 Astra (high) · ChatGPT Pro 100",
+      "shortName": "GPT-6 Astra (high)",
+      "developer": "OpenAI",
+      "aaUrl": "https://artificialanalysis.ai/models/gpt-6-astra-high",
+      "aaVariant": "high",
+      "rankingEligible": true,
+      "exclusionReasons": [],
+      "intelligenceIndex": {
+        "value": 50.9191471636152,
+        "status": "measured"
+      },
+      "speed": 56.6147429977635,
+      "aaFrontierTier": "near",
+      "aaFrontierConfiguration": "GPT-6 Astra (high)",
+      "aaFrontierIntelligenceGap": 3,
+      "aaFrontierFootnote": null,
+      "rank": {
+        "api": 13,
+        "plan": 20
+      },
+      "overall": {
+        "api": 46.781820375894775,
+        "plan": 52.59919653420083
+      },
+      "quality": 58.607479521080364,
+      "qualityRank": 5,
+      "dims": {
+        "costComposite": null,
+        "frontierCode": 50.94,
+        "terminalBench": 54.040404040404,
+        "bugHunt": 33.333333333333336,
+        "aiCodingDaily": 94.61666666666666,
+        "gdpval": 51.24400000000001,
+        "automationBench": 66.6122174975011,
+        "omniscience": 71.86666666666667,
+        "lcr": 80.0,
+        "hle": 53.058387395736794,
+        "scicode": 55.4398148148148,
+        "critpt": 28.857142857142897
+      },
+      "costDims": {
+        "api": 11.304842940338013,
+        "plan": 34.57434757356221
+      },
+      "raw": {
+        "frontierCode": 0.5094,
+        "terminalBench": 54.040404040404,
+        "bugHunt": 35.0,
+        "aiCodingDaily": 56.77,
+        "gdpval": 1524.88,
+        "automationBench": 0.666122174975011,
+        "omniscience": 43.733333333333334,
+        "lcr": 0.8,
+        "hle": 0.530583873957368,
+        "scicode": 0.554398148148148,
+        "critpt": 0.288571428571429
+      },
+      "coverage": {
+        "pct": 100.0,
+        "costAvailable": true,
+        "missing": [],
+        "provisional": false,
+        "provisionalReasons": []
+      },
+      "cost": {
+        "apiUsd": 2382.0949303383077,
+        "planUsd": 180.1887239287676,
+        "fallback": null,
+        "route": {
+          "id": "chatgpt-pro100-gpt-6-astra-high-common-gpt-assumption",
+          "planLabel": "ChatGPT Pro 100 $100 · same-model assumption (O88)",
+          "planFeeUsd": 100,
+          "valueMultiple": 13.22,
+          "grade": "assumption",
+          "evidenceLabel": "Provisional assumption",
+          "sourceModel": "GPT-6 Astra",
+          "sourceUrl": "https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x",
+          "sourceDate": "2026-10-06"
+        },
+        "subset": false,
+        "partialComponents": [],
+        "workload": "1453a9a0576b02ea",
+        "planFlags": [
+          "workload-unmatched",
+          "owner-named transfer (assumption)",
+          "possibly-superseded",
+          "valuation basis unverified"
+        ]
+      },
+      "grade": "measured",
+      "pareto": {
+        "api": false,
+        "plan": false
+      },
+      "frontierStatus": {
+        "api": {
+          "definite": "disproved",
+          "possible": "disproved"
+        },
+        "plan": null
+      },
+      "scenario": {
+        "api": {
+          "top1": 0.0,
+          "top3": 0.0,
+          "frontier": 0.0
+        },
+        "plan": null
+      },
+      "flags": [],
+      "tier": "Expensive",
+      "band": {
+        "api": [
+          10,
+          15
+        ],
+        "plan": [
+          12,
+          24
+        ]
+      },
+      "bandExcludesTransfer": true,
+      "key": "gpt-6-astra-high--chatgpt-pro-100",
+      "planRow": {
+        "plan": "ChatGPT Pro 100",
+        "routeId": "chatgpt-pro100-gpt-6-astra-high-common-gpt-assumption",
+        "multiple": 13.22,
         "representative": false
       }
     },
@@ -10482,7 +10482,7 @@
         "fallback": null,
         "route": {
           "id": "chatgpt-plus-gpt-6-astra-high-common-gpt-assumption",
-          "planLabel": "ChatGPT Plus $20 · common GPT assumption",
+          "planLabel": "ChatGPT Plus $20 · same-model assumption (O88)",
           "planFeeUsd": 20,
           "valueMultiple": 8.1,
           "grade": "assumption",

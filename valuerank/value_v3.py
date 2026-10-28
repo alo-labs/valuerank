@@ -805,8 +805,10 @@ def assemble(configurations: list[dict], documents: dict, *, release_day: date, 
         raise ValueError(f"the search cutoff {searched} is not the date of the latest all-provider search in the search log (E218)")
     check_o71_search(policy, cohort_providers(configurations))
     # O81: the build decides every O71 cell's admission from the report table, and refuses an unsupported report route.
-    allowance_cells = plan_admission.evaluate(documents.get("planReports") or {"reports": []}, policy.get("reportEligibilityProfile") or {}, release_day)
-    plan_admission.check_routes(documents["planRoutes"]["routes"], allowance_cells, {item["id"] for item in configurations}, plan_routes.REPORT_KINDS)
+    # O87: cells are keyed by the model (the configuration's AA family), so reports at any effort pool.
+    families = {item["id"]: configuration_family(item) for item in configurations}
+    allowance_cells = plan_admission.evaluate(documents.get("planReports") or {"reports": []}, policy.get("reportEligibilityProfile") or {}, release_day, families)
+    plan_admission.check_routes(documents["planRoutes"]["routes"], allowance_cells, set(families), plan_routes.REPORT_KINDS, families)
     # I51 L7: an O46 ceiling is recomputed from its recorded credits, rate and fee, so the stored multiple cannot drift.
     for route in documents["planRoutes"]["routes"]:
         if route.get("evidenceClass") == "provider_quota_ceiling":
@@ -2436,14 +2438,17 @@ AMOUNT_KINDS = {
     "identified": "identified target-workload capacity",
     "capacity": "measured-workload capacity",
     "observed": "observed eligible consumption (capacity not established)",
+    "ceiling": "provider quota ceiling: the full quota at API rates (O46; full use assumed)",
 }
-AMOUNT_TARGETS = {"transfer": "assumed consumption", "identified": "target-workload capacity", "capacity": "measured-workload capacity", "observed": "measured-workload consumption"}
+AMOUNT_TARGETS = {"ceiling": "full-quota consumption", "transfer": "assumed consumption", "identified": "target-workload capacity", "capacity": "measured-workload capacity", "observed": "measured-workload consumption"}
 NO_TARGET_LINEAGE = "not derivable: the target solution's cash lineage is not established"
 
 
 def _amount_derivation(kind: str, route: dict, multiple: float, gross: float) -> tuple[float | None, str]:
     """E168: an amount and how it was derived; M x F reproduces an amount only within one object."""
 
+    if kind == "ceiling":
+        return (multiple * gross if math.isfinite(gross) else None), "quota ceiling: the tier's credits at the provider's API rate (I69 L3)"
     if kind == "transfer":
         return (multiple * gross if math.isfinite(gross) else None), "authorised assumption: the donor's multiple times this route's cash"
     if kind == "identified":
@@ -2464,7 +2469,9 @@ def plan_amount(selected: dict | None, workload: str | None = None) -> dict | No
     if selected is None:
         return None
     route = selected["route"]
-    if selected["grade"] == "assumption":
+    if route.get("evidenceClass") == "provider_quota_ceiling":
+        kind = "ceiling"
+    elif selected["grade"] == "assumption":
         kind = "transfer"
     elif selected["identification"] in plan_routes.IDENTIFIED:
         kind = "identified"

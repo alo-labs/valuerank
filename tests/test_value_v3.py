@@ -1066,6 +1066,11 @@ def test_plan_amount_is_typed_by_what_the_measurement_establishes():
     transfer = v.plan_amount({**base, **established, "grade": "assumption", "donorRouteId": "donor"})
     assert transfer["amountKind"] == "assumed API-equivalent consumption (owner-named transfer)" and transfer["donorRouteId"] == "donor"
     assert transfer["amountUsd"] == pytest.approx(250.0) and transfer["derivation"].startswith("authorised assumption")
+    ceiling = v.plan_amount({**base, "grade": "assumption", "route": {**route, "evidenceClass": "provider_quota_ceiling"}})
+    assert ceiling["amountKind"].startswith("provider quota ceiling") and ceiling["amountTarget"] == "full-quota consumption"
+    assert ceiling["amountUsd"] == pytest.approx(250.0) and ceiling["derivation"].startswith("quota ceiling")
+    unpriced = v.plan_amount({**base, "grade": "assumption", "route": {**route, "evidenceClass": "provider_quota_ceiling", "planPriceUsd": None, "additionalCashUsd": None}})
+    assert unpriced["amountUsd"] is None
     identified = {**base, "identification": "point-identified"}
     fixed = v.plan_amount({**identified, "route": {**route, "paymentRule": "fixed", "feePeriod": "week", "capacitySolutionId": "s1"}}, "w-main")
     assert fixed["amountKind"] == "identified target-workload capacity" and fixed["workload"] == "scored workload w-main" and fixed["feePeriod"] == "week"

@@ -234,7 +234,7 @@
     "fallback": null,
     "route": {
       "id": "chatgpt-pro500-gpt-6.1-sol-high-common-gpt-assumption",
-      "planLabel": "ChatGPT Pro 500 $500 · common GPT assumption",
+      "planLabel": "ChatGPT Pro 500 $500 · same-model assumption (O88)",
       "planFeeUsd": 500,
       "valueMultiple": 10.772,
       "grade": "assumption",
@@ -339,7 +339,7 @@
   "plans": [
     {
       "id": "chatgpt-pro500-gpt-6.1-sol-high-common-gpt-assumption",
-      "planLabel": "ChatGPT Pro 500 $500 · common GPT assumption",
+      "planLabel": "ChatGPT Pro 500 $500 · same-model assumption (O88)",
       "planFeeUsd": 500,
       "valueMultiple": 10.772,
       "grade": "assumption",
@@ -355,8 +355,25 @@
       "planValue": 55.5354801209504
     },
     {
+      "id": "chatgpt-plus-gpt-6.1-sol-high-common-gpt-assumption",
+      "planLabel": "ChatGPT Plus $20 · same-model assumption (O88)",
+      "planFeeUsd": 20,
+      "valueMultiple": 10.55,
+      "grade": "assumption",
+      "evidenceLabel": "Provisional assumption",
+      "sourceUrl": "https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x",
+      "sourceDate": "2026-10-06",
+      "case": 2,
+      "officialDisplayEligible": true,
+      "planIntervalEligible": false,
+      "usdPerRun": 40.85996644010532,
+      "selected": false,
+      "planRank": 8,
+      "planValue": 55.4799727401339
+    },
+    {
       "id": "chatgpt-pro100-gpt-6.1-sol-high-common-gpt-assumption",
-      "planLabel": "ChatGPT Pro 100 $100 · common GPT assumption",
+      "planLabel": "ChatGPT Pro 100 $100 · same-model assumption (O88)",
       "planFeeUsd": 100,
       "valueMultiple": 10.55,
       "grade": "assumption",
@@ -373,7 +390,7 @@
     },
     {
       "id": "chatgpt-pro200-gpt-6.1-sol-high-common-gpt-assumption",
-      "planLabel": "ChatGPT Pro 200 $200 · common GPT assumption",
+      "planLabel": "ChatGPT Pro 200 $200 · same-model assumption (O88)",
       "planFeeUsd": 200,
       "valueMultiple": 10.42,
       "grade": "assumption",
@@ -385,25 +402,8 @@
       "planIntervalEligible": false,
       "usdPerRun": 41.36973569511623,
       "selected": false,
-      "planRank": 9,
-      "planValue": 55.44692357514741
-    },
-    {
-      "id": "chatgpt-plus-gpt-6.1-sol-high-common-gpt-assumption",
-      "planLabel": "ChatGPT Plus $20 · common GPT assumption",
-      "planFeeUsd": 20,
-      "valueMultiple": 8.1,
-      "grade": "assumption",
-      "evidenceLabel": "Provisional assumption",
-      "sourceUrl": "https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x",
-      "sourceDate": "2026-10-06",
-      "case": 2,
-      "officialDisplayEligible": true,
-      "planIntervalEligible": false,
-      "usdPerRun": 53.21884517816187,
-      "selected": false,
       "planRank": 10,
-      "planValue": 54.77558077088301
+      "planValue": 55.44692357514741
     }
   ],
   "scenarios": {

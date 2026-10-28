@@ -14161,13 +14161,16 @@
       {
         "provider": "Anthropic",
         "plan": "Claude (plan redacted)",
-        "modelId": "claude-opus-5-5",
+        "modelId": "Claude Opus 5.5",
         "unit": "week",
         "region": "global",
         "status": "fails: 0 non-provisional report(s) in the current partition",
         "listed": false,
         "currentPartition": 0,
         "partitionsWithReports": [],
+        "configurations": [
+          "claude-opus-5-5"
+        ],
         "efforts": [
           "unstated"
         ],
@@ -14192,13 +14195,16 @@
       {
         "provider": "Anthropic",
         "plan": "Claude Max (tier unstated)",
-        "modelId": "claude-opus-5-5",
+        "modelId": "Claude Opus 5.5",
         "unit": "week",
         "region": "global",
         "status": "fails: 0 non-provisional report(s) in the current partition",
         "listed": false,
         "currentPartition": 0,
         "partitionsWithReports": [],
+        "configurations": [
+          "claude-opus-5-5"
+        ],
         "efforts": [
           "unstated"
         ],
@@ -14243,88 +14249,7 @@
       {
         "provider": "Anthropic",
         "plan": "Claude Max 20x",
-        "modelId": null,
-        "unit": "week",
-        "region": "global",
-        "status": "fails: 0 non-provisional report(s) in the current partition",
-        "listed": true,
-        "currentPartition": 1,
-        "partitionsWithReports": [],
-        "efforts": [
-          "unstated"
-        ],
-        "value": null,
-        "monthlyUsd": null,
-        "multiple": null,
-        "range": null,
-        "reports": [
-          {
-            "id": "randomblock1-max20x",
-            "observer": "Randomblock1",
-            "valueLower": 1395.0,
-            "valueUpper": 1395.0,
-            "partition": null,
-            "provisional": false,
-            "speedMode": null,
-            "excluded": "model not stated"
-          },
-          {
-            "id": "fancy-leave-max20x",
-            "observer": "Fancy_Leave7798",
-            "valueLower": 1960.0,
-            "valueUpper": 1963.0,
-            "partition": null,
-            "provisional": false,
-            "speedMode": null,
-            "excluded": "model not stated"
-          },
-          {
-            "id": "omeganetrob-max20x",
-            "observer": "OmegaNetRob",
-            "valueLower": 4580.0,
-            "valueUpper": 4580.0,
-            "partition": null,
-            "provisional": false,
-            "speedMode": null,
-            "excluded": "model not stated"
-          },
-          {
-            "id": "bobothepirate-max20x",
-            "observer": "BoboThePirate",
-            "valueLower": 2000.0,
-            "valueUpper": 2000.0,
-            "partition": null,
-            "provisional": false,
-            "speedMode": null,
-            "excluded": "lower bound: no meter fraction"
-          },
-          {
-            "id": "cannonpalms-max20x",
-            "observer": "cannonpalms",
-            "valueLower": 2000.0,
-            "valueUpper": 2000.0,
-            "partition": null,
-            "provisional": false,
-            "speedMode": null,
-            "excluded": "lower bound: no meter fraction"
-          },
-          {
-            "id": "wokey-max20x",
-            "observer": "wokey.ai",
-            "valueLower": 1547.0,
-            "valueUpper": 1751.0,
-            "partition": null,
-            "provisional": false,
-            "speedMode": null,
-            "excluded": "mixed-model usage"
-          }
-        ],
-        "admittingObservers": []
-      },
-      {
-        "provider": "Anthropic",
-        "plan": "Claude Max 20x",
-        "modelId": "claude-opus-5-5",
+        "modelId": "Claude Opus 5.5",
         "unit": "5h",
         "region": "global",
         "status": "fails: a 5-hour figure never converts to a billing period (O82)",
@@ -14332,6 +14257,9 @@
         "currentPartition": 1,
         "partitionsWithReports": [
           0
+        ],
+        "configurations": [
+          "claude-opus-5-5"
         ],
         "efforts": [
           "unstated",
@@ -14368,13 +14296,16 @@
       {
         "provider": "Anthropic",
         "plan": "Claude Max 20x",
-        "modelId": "claude-opus-5-5",
+        "modelId": "Claude Opus 5.5",
         "unit": "month",
         "region": "global",
         "status": "fails: 0 non-provisional report(s) in the current partition",
         "listed": true,
         "currentPartition": 1,
         "partitionsWithReports": [],
+        "configurations": [
+          "claude-opus-5-5"
+        ],
         "efforts": [
           "unstated"
         ],
@@ -14399,7 +14330,7 @@
       {
         "provider": "Anthropic",
         "plan": "Claude Max 20x",
-        "modelId": "claude-opus-5-5",
+        "modelId": "Claude Opus 5.5",
         "unit": "week",
         "region": "global",
         "status": "fails: 1 non-provisional report(s) in the current partition",
@@ -14408,6 +14339,9 @@
         "partitionsWithReports": [
           0,
           1
+        ],
+        "configurations": [
+          "claude-opus-5-5"
         ],
         "efforts": [
           "high",
@@ -14537,7 +14471,7 @@
       },
       {
         "provider": "Anthropic",
-        "plan": "Claude Max 5x",
+        "plan": "Claude Max 20x",
         "modelId": null,
         "unit": "week",
         "region": "global",
@@ -14545,6 +14479,9 @@
         "listed": true,
         "currentPartition": 1,
         "partitionsWithReports": [],
+        "configurations": [
+          "None"
+        ],
         "efforts": [
           "unstated"
         ],
@@ -14554,14 +14491,64 @@
         "range": null,
         "reports": [
           {
-            "id": "fancy-leave-max5x",
-            "observer": "Fancy_Leave7798",
-            "valueLower": 1538.0,
-            "valueUpper": 1538.0,
+            "id": "randomblock1-max20x",
+            "observer": "Randomblock1",
+            "valueLower": 1395.0,
+            "valueUpper": 1395.0,
             "partition": null,
             "provisional": false,
             "speedMode": null,
             "excluded": "model not stated"
+          },
+          {
+            "id": "fancy-leave-max20x",
+            "observer": "Fancy_Leave7798",
+            "valueLower": 1960.0,
+            "valueUpper": 1963.0,
+            "partition": null,
+            "provisional": false,
+            "speedMode": null,
+            "excluded": "model not stated"
+          },
+          {
+            "id": "omeganetrob-max20x",
+            "observer": "OmegaNetRob",
+            "valueLower": 4580.0,
+            "valueUpper": 4580.0,
+            "partition": null,
+            "provisional": false,
+            "speedMode": null,
+            "excluded": "model not stated"
+          },
+          {
+            "id": "bobothepirate-max20x",
+            "observer": "BoboThePirate",
+            "valueLower": 2000.0,
+            "valueUpper": 2000.0,
+            "partition": null,
+            "provisional": false,
+            "speedMode": null,
+            "excluded": "lower bound: no meter fraction"
+          },
+          {
+            "id": "cannonpalms-max20x",
+            "observer": "cannonpalms",
+            "valueLower": 2000.0,
+            "valueUpper": 2000.0,
+            "partition": null,
+            "provisional": false,
+            "speedMode": null,
+            "excluded": "lower bound: no meter fraction"
+          },
+          {
+            "id": "wokey-max20x",
+            "observer": "wokey.ai",
+            "valueLower": 1547.0,
+            "valueUpper": 1751.0,
+            "partition": null,
+            "provisional": false,
+            "speedMode": null,
+            "excluded": "mixed-model usage"
           }
         ],
         "admittingObservers": []
@@ -14569,13 +14556,16 @@
       {
         "provider": "Anthropic",
         "plan": "Claude Max 5x",
-        "modelId": "claude-opus-5-5",
+        "modelId": "Claude Opus 5.5",
         "unit": "month",
         "region": "global",
         "status": "fails: 0 non-provisional report(s) in the current partition",
         "listed": true,
         "currentPartition": 1,
         "partitionsWithReports": [],
+        "configurations": [
+          "claude-opus-5-5"
+        ],
         "efforts": [
           "unstated"
         ],
@@ -14600,7 +14590,7 @@
       {
         "provider": "Anthropic",
         "plan": "Claude Max 5x",
-        "modelId": "claude-opus-5-5",
+        "modelId": "Claude Opus 5.5",
         "unit": "week",
         "region": "global",
         "status": "fails: 0 non-provisional report(s) in the current partition",
@@ -14608,6 +14598,9 @@
         "currentPartition": 1,
         "partitionsWithReports": [
           0
+        ],
+        "configurations": [
+          "claude-opus-5-5"
         ],
         "efforts": [
           "medium",
@@ -14643,7 +14636,7 @@
       },
       {
         "provider": "Anthropic",
-        "plan": "Claude Pro",
+        "plan": "Claude Max 5x",
         "modelId": null,
         "unit": "week",
         "region": "global",
@@ -14651,6 +14644,9 @@
         "listed": true,
         "currentPartition": 1,
         "partitionsWithReports": [],
+        "configurations": [
+          "None"
+        ],
         "efforts": [
           "unstated"
         ],
@@ -14660,14 +14656,14 @@
         "range": null,
         "reports": [
           {
-            "id": "wokey-pro",
-            "observer": "wokey.ai",
-            "valueLower": 158.0,
-            "valueUpper": 182.0,
+            "id": "fancy-leave-max5x",
+            "observer": "Fancy_Leave7798",
+            "valueLower": 1538.0,
+            "valueUpper": 1538.0,
             "partition": null,
             "provisional": false,
             "speedMode": null,
-            "excluded": "mixed-model usage"
+            "excluded": "model not stated"
           }
         ],
         "admittingObservers": []
@@ -14675,7 +14671,7 @@
       {
         "provider": "Anthropic",
         "plan": "Claude Pro",
-        "modelId": "claude-opus-5-5",
+        "modelId": "Claude Opus 5.5",
         "unit": "5h",
         "region": "global",
         "status": "fails: a 5-hour figure never converts to a billing period (O82)",
@@ -14683,6 +14679,9 @@
         "currentPartition": 1,
         "partitionsWithReports": [
           1
+        ],
+        "configurations": [
+          "claude-opus-5-5"
         ],
         "efforts": [
           "unstated",
@@ -14742,13 +14741,16 @@
       {
         "provider": "Anthropic",
         "plan": "Claude Pro",
-        "modelId": "claude-opus-5-5",
+        "modelId": "Claude Opus 5.5",
         "unit": "month",
         "region": "global",
         "status": "fails: 0 non-provisional report(s) in the current partition",
         "listed": true,
         "currentPartition": 1,
         "partitionsWithReports": [],
+        "configurations": [
+          "claude-opus-5-5"
+        ],
         "efforts": [
           "unstated"
         ],
@@ -14773,7 +14775,7 @@
       {
         "provider": "Anthropic",
         "plan": "Claude Pro",
-        "modelId": "claude-opus-5-5",
+        "modelId": "Claude Opus 5.5",
         "unit": "week",
         "region": "global",
         "status": "fails: 0 non-provisional report(s) in the current partition",
@@ -14782,6 +14784,9 @@
         "partitionsWithReports": [
           0,
           1
+        ],
+        "configurations": [
+          "claude-opus-5-5"
         ],
         "efforts": [
           "high/xhigh",
@@ -14892,14 +14897,51 @@
       },
       {
         "provider": "Anthropic",
+        "plan": "Claude Pro",
+        "modelId": null,
+        "unit": "week",
+        "region": "global",
+        "status": "fails: 0 non-provisional report(s) in the current partition",
+        "listed": true,
+        "currentPartition": 1,
+        "partitionsWithReports": [],
+        "configurations": [
+          "None"
+        ],
+        "efforts": [
+          "unstated"
+        ],
+        "value": null,
+        "monthlyUsd": null,
+        "multiple": null,
+        "range": null,
+        "reports": [
+          {
+            "id": "wokey-pro",
+            "observer": "wokey.ai",
+            "valueLower": 158.0,
+            "valueUpper": 182.0,
+            "partition": null,
+            "provisional": false,
+            "speedMode": null,
+            "excluded": "mixed-model usage"
+          }
+        ],
+        "admittingObservers": []
+      },
+      {
+        "provider": "Anthropic",
         "plan": "Claude Team Premium",
-        "modelId": "claude-opus-5-5",
+        "modelId": "Claude Opus 5.5",
         "unit": "week",
         "region": "global",
         "status": "fails: 0 non-provisional report(s) in the current partition",
         "listed": false,
         "currentPartition": 0,
         "partitionsWithReports": [],
+        "configurations": [
+          "claude-opus-5-5"
+        ],
         "efforts": [
           "unstated"
         ],
@@ -14924,13 +14966,16 @@
       {
         "provider": "Google",
         "plan": "Google AI (tier unstated)",
-        "modelId": "gemini-4-argon",
+        "modelId": "Gemini 4 Argon",
         "unit": "week",
         "region": "global",
         "status": "fails: 0 non-provisional report(s) in the current partition",
         "listed": false,
         "currentPartition": 0,
         "partitionsWithReports": [],
+        "configurations": [
+          "gemini-4-argon"
+        ],
         "efforts": [
           "unstated"
         ],
@@ -14955,7 +15000,7 @@
       {
         "provider": "Google",
         "plan": "Google AI Pro",
-        "modelId": "gemini-4-argon",
+        "modelId": "Gemini 4 Argon",
         "unit": "week",
         "region": "global",
         "status": "fails: no common value within 1.20× (1.35× apart) in the current partition",
@@ -14963,6 +15008,9 @@
         "currentPartition": 0,
         "partitionsWithReports": [
           0
+        ],
+        "configurations": [
+          "gemini-4-argon"
         ],
         "efforts": [
           "high",
@@ -15013,7 +15061,7 @@
       {
         "provider": "Kimi",
         "plan": "Kimi Allegretto (legacy, CN)",
-        "modelId": "kimi-k3-1-pro",
+        "modelId": "Kimi K3.1 Pro",
         "unit": "5h",
         "region": "CN",
         "status": "fails: a 5-hour figure never converts to a billing period (O82)",
@@ -15022,6 +15070,9 @@
         "partitionsWithReports": [
           0,
           1
+        ],
+        "configurations": [
+          "kimi-k3-1-pro"
         ],
         "efforts": [
           "max",
@@ -15081,7 +15132,7 @@
       {
         "provider": "Kimi",
         "plan": "Kimi Allegretto (legacy, CN)",
-        "modelId": "kimi-k3-1-pro",
+        "modelId": "Kimi K3.1 Pro",
         "unit": "month",
         "region": "CN",
         "status": "fails: 1 non-provisional report(s) in the current partition",
@@ -15090,6 +15141,9 @@
         "partitionsWithReports": [
           0,
           1
+        ],
+        "configurations": [
+          "kimi-k3-1-pro"
         ],
         "efforts": [
           "max",
@@ -15139,7 +15193,7 @@
       {
         "provider": "Kimi",
         "plan": "Kimi Allegretto (legacy, CN)",
-        "modelId": "kimi-k3-1-pro",
+        "modelId": "Kimi K3.1 Pro",
         "unit": "week",
         "region": "CN",
         "status": "fails: 0 non-provisional report(s) in the current partition",
@@ -15147,6 +15201,9 @@
         "currentPartition": 1,
         "partitionsWithReports": [
           0
+        ],
+        "configurations": [
+          "kimi-k3-1-pro"
         ],
         "efforts": [
           "max",
@@ -15193,7 +15250,7 @@
       {
         "provider": "Kimi",
         "plan": "Kimi Allegro (legacy, CN)",
-        "modelId": "kimi-k3-1-pro",
+        "modelId": "Kimi K3.1 Pro",
         "unit": "5h",
         "region": "CN",
         "status": "fails: a 5-hour figure never converts to a billing period (O82)",
@@ -15201,6 +15258,9 @@
         "currentPartition": 1,
         "partitionsWithReports": [
           0
+        ],
+        "configurations": [
+          "kimi-k3-1-pro"
         ],
         "efforts": [
           "unstated"
@@ -15266,13 +15326,16 @@
       {
         "provider": "Kimi",
         "plan": "Kimi Allegro (legacy, CN)",
-        "modelId": "kimi-k3-1-pro",
+        "modelId": "Kimi K3.1 Pro",
         "unit": "month",
         "region": "CN",
         "status": "fails: 0 non-provisional report(s) in the current partition",
         "listed": false,
         "currentPartition": 1,
         "partitionsWithReports": [],
+        "configurations": [
+          "kimi-k3-1-pro"
+        ],
         "efforts": [
           "unstated"
         ],
@@ -15297,13 +15360,16 @@
       {
         "provider": "Kimi",
         "plan": "Kimi Allegro (legacy, CN)",
-        "modelId": "kimi-k3-1-pro",
+        "modelId": "Kimi K3.1 Pro",
         "unit": "week",
         "region": "CN",
         "status": "fails: 0 non-provisional report(s) in the current partition",
         "listed": false,
         "currentPartition": 1,
         "partitionsWithReports": [],
+        "configurations": [
+          "kimi-k3-1-pro"
+        ],
         "efforts": [
           "unstated"
         ],
@@ -15338,13 +15404,16 @@
       {
         "provider": "Kimi",
         "plan": "Kimi Max (new, CN)",
-        "modelId": "kimi-k3-1-pro",
+        "modelId": "Kimi K3.1 Pro",
         "unit": "5h",
         "region": "CN",
         "status": "fails: a 5-hour figure never converts to a billing period (O82)",
         "listed": false,
         "currentPartition": 1,
         "partitionsWithReports": [],
+        "configurations": [
+          "kimi-k3-1-pro"
+        ],
         "efforts": [
           "unstated"
         ],
@@ -15379,13 +15448,16 @@
       {
         "provider": "Kimi",
         "plan": "Kimi Max (new, CN)",
-        "modelId": "kimi-k3-1-pro",
+        "modelId": "Kimi K3.1 Pro",
         "unit": "month",
         "region": "CN",
         "status": "fails: 0 non-provisional report(s) in the current partition",
         "listed": false,
         "currentPartition": 1,
         "partitionsWithReports": [],
+        "configurations": [
+          "kimi-k3-1-pro"
+        ],
         "efforts": [
           "unstated"
         ],
@@ -15410,13 +15482,16 @@
       {
         "provider": "Kimi",
         "plan": "Kimi Plus",
-        "modelId": "kimi-k3-1-pro",
+        "modelId": "Kimi K3.1 Pro",
         "unit": "5h",
         "region": "global",
         "status": "fails: a 5-hour figure never converts to a billing period (O82)",
         "listed": true,
         "currentPartition": 1,
         "partitionsWithReports": [],
+        "configurations": [
+          "kimi-k3-1-pro"
+        ],
         "efforts": [
           "unstated"
         ],
@@ -15441,13 +15516,16 @@
       {
         "provider": "Kimi",
         "plan": "Kimi Plus (new, CN)",
-        "modelId": "kimi-k3-1-pro",
+        "modelId": "Kimi K3.1 Pro",
         "unit": "5h",
         "region": "CN",
         "status": "fails: a 5-hour figure never converts to a billing period (O82)",
         "listed": false,
         "currentPartition": 1,
         "partitionsWithReports": [],
+        "configurations": [
+          "kimi-k3-1-pro"
+        ],
         "efforts": [
           "unstated"
         ],
@@ -15472,13 +15550,16 @@
       {
         "provider": "Kimi",
         "plan": "Kimi Pro (new, CN)",
-        "modelId": "kimi-k3-1-pro",
+        "modelId": "Kimi K3.1 Pro",
         "unit": "5h",
         "region": "CN",
         "status": "fails: a 5-hour figure never converts to a billing period (O82)",
         "listed": false,
         "currentPartition": 1,
         "partitionsWithReports": [],
+        "configurations": [
+          "kimi-k3-1-pro"
+        ],
         "efforts": [
           "unstated"
         ],
@@ -15503,13 +15584,16 @@
       {
         "provider": "Kimi",
         "plan": "Kimi Ultra (new, CN)",
-        "modelId": "kimi-k3-1-pro",
+        "modelId": "Kimi K3.1 Pro",
         "unit": "5h",
         "region": "CN",
         "status": "fails: a 5-hour figure never converts to a billing period (O82)",
         "listed": false,
         "currentPartition": 1,
         "partitionsWithReports": [],
+        "configurations": [
+          "kimi-k3-1-pro"
+        ],
         "efforts": [
           "unstated"
         ],
@@ -15534,13 +15618,16 @@
       {
         "provider": "Kimi",
         "plan": "Kimi legacy plan (tier not stated, CN)",
-        "modelId": "kimi-k3-1-pro",
+        "modelId": "Kimi K3.1 Pro",
         "unit": "5h",
         "region": "CN",
         "status": "fails: a 5-hour figure never converts to a billing period (O82)",
         "listed": false,
         "currentPartition": 1,
         "partitionsWithReports": [],
+        "configurations": [
+          "kimi-k3-1-pro"
+        ],
         "efforts": [
           "unstated"
         ],
@@ -15565,13 +15652,16 @@
       {
         "provider": "Kimi",
         "plan": "Kimi ¥199 plan (legacy or new not stated, CN)",
-        "modelId": "kimi-k3-1-pro",
+        "modelId": "Kimi K3.1 Pro",
         "unit": "5h",
         "region": "CN",
         "status": "fails: a 5-hour figure never converts to a billing period (O82)",
         "listed": false,
         "currentPartition": 1,
         "partitionsWithReports": [],
+        "configurations": [
+          "kimi-k3-1-pro"
+        ],
         "efforts": [
           "unstated"
         ],
@@ -15606,13 +15696,16 @@
       {
         "provider": "MiniMax",
         "plan": "MiniMax M Plan (tier unstated)",
-        "modelId": "minimax-m3-1-flash",
+        "modelId": "MiniMax-M3.1-Flash",
         "unit": "week",
         "region": "global",
         "status": "fails: 0 non-provisional report(s) in the current partition",
         "listed": false,
         "currentPartition": 0,
         "partitionsWithReports": [],
+        "configurations": [
+          "minimax-m3-1-flash"
+        ],
         "efforts": [
           "unstated"
         ],
@@ -15637,7 +15730,7 @@
       {
         "provider": "MiniMax",
         "plan": "MiniMax Token Plan Max (legacy)",
-        "modelId": "minimax-m3-1-flash",
+        "modelId": "MiniMax-M3.1-Flash",
         "unit": "5h",
         "region": "global",
         "status": "fails: a 5-hour figure never converts to a billing period (O82)",
@@ -15645,6 +15738,9 @@
         "currentPartition": 0,
         "partitionsWithReports": [
           0
+        ],
+        "configurations": [
+          "minimax-m3-1-flash"
         ],
         "efforts": [
           "unstated"
@@ -15673,7 +15769,7 @@
       {
         "provider": "MiniMax",
         "plan": "MiniMax Token Plan Max (legacy)",
-        "modelId": "minimax-m3-1-flash",
+        "modelId": "MiniMax-M3.1-Flash",
         "unit": "week",
         "region": "global",
         "status": "fails: 0 non-provisional report(s) in the current partition",
@@ -15681,6 +15777,9 @@
         "currentPartition": 0,
         "partitionsWithReports": [
           0
+        ],
+        "configurations": [
+          "minimax-m3-1-flash"
         ],
         "efforts": [
           "unstated"
@@ -15709,7 +15808,7 @@
       {
         "provider": "MiniMax",
         "plan": "MiniMax Token Plan lowest tier (legacy)",
-        "modelId": "minimax-m3-1-flash",
+        "modelId": "MiniMax-M3.1-Flash",
         "unit": "5h",
         "region": "global",
         "status": "fails: a 5-hour figure never converts to a billing period (O82)",
@@ -15717,6 +15816,9 @@
         "currentPartition": 0,
         "partitionsWithReports": [
           0
+        ],
+        "configurations": [
+          "minimax-m3-1-flash"
         ],
         "efforts": [
           "unstated"
@@ -15752,6 +15854,9 @@
         "listed": false,
         "currentPartition": 0,
         "partitionsWithReports": [],
+        "configurations": [
+          "None"
+        ],
         "efforts": [
           "unstated"
         ],
@@ -15776,13 +15881,16 @@
       {
         "provider": "OpenAI",
         "plan": "ChatGPT (legacy account, tier unstated)",
-        "modelId": "gpt-6.1-sol",
+        "modelId": "GPT-6.1 Sol",
         "unit": "week",
         "region": "global",
         "status": "fails: 0 non-provisional report(s) in the current partition",
         "listed": false,
         "currentPartition": 4,
         "partitionsWithReports": [],
+        "configurations": [
+          "gpt-6.1-sol"
+        ],
         "efforts": [
           "medium"
         ],
@@ -15807,13 +15915,16 @@
       {
         "provider": "OpenAI",
         "plan": "ChatGPT Plus",
-        "modelId": "gpt-5.6-luna",
+        "modelId": "GPT-5.6 Luna",
         "unit": "5h",
         "region": "global",
         "status": "fails: a 5-hour figure never converts to a billing period (O82)",
         "listed": true,
         "currentPartition": 4,
         "partitionsWithReports": [],
+        "configurations": [
+          "gpt-5.6-luna-low"
+        ],
         "efforts": [
           "max"
         ],
@@ -15838,13 +15949,16 @@
       {
         "provider": "OpenAI",
         "plan": "ChatGPT Plus",
-        "modelId": "gpt-5.6-luna",
+        "modelId": "GPT-5.6 Luna",
         "unit": "week",
         "region": "global",
         "status": "fails: 0 non-provisional report(s) in the current partition",
         "listed": true,
         "currentPartition": 4,
         "partitionsWithReports": [],
+        "configurations": [
+          "gpt-5.6-luna-low"
+        ],
         "efforts": [
           "unstated"
         ],
@@ -15869,13 +15983,16 @@
       {
         "provider": "OpenAI",
         "plan": "ChatGPT Plus",
-        "modelId": "gpt-6-astra",
+        "modelId": "GPT-6 Astra",
         "unit": "5h",
         "region": "global",
         "status": "fails: a 5-hour figure never converts to a billing period (O82)",
         "listed": true,
         "currentPartition": 4,
         "partitionsWithReports": [],
+        "configurations": [
+          "gpt-6-astra"
+        ],
         "efforts": [
           "high",
           "medium"
@@ -15911,7 +16028,7 @@
       {
         "provider": "OpenAI",
         "plan": "ChatGPT Plus",
-        "modelId": "gpt-6-luna",
+        "modelId": "GPT-6 Luna",
         "unit": "5h",
         "region": "global",
         "status": "fails: a 5-hour figure never converts to a billing period (O82)",
@@ -15919,6 +16036,9 @@
         "currentPartition": 4,
         "partitionsWithReports": [
           0
+        ],
+        "configurations": [
+          "gpt-6-luna"
         ],
         "efforts": [
           "max"
@@ -15944,13 +16064,16 @@
       {
         "provider": "OpenAI",
         "plan": "ChatGPT Plus",
-        "modelId": "gpt-6-luna",
+        "modelId": "GPT-6 Luna",
         "unit": "month",
         "region": "global",
         "status": "fails: 0 non-provisional report(s) in the current partition",
         "listed": true,
         "currentPartition": 4,
         "partitionsWithReports": [],
+        "configurations": [
+          "gpt-6-luna"
+        ],
         "efforts": [
           "unstated"
         ],
@@ -15975,7 +16098,7 @@
       {
         "provider": "OpenAI",
         "plan": "ChatGPT Plus",
-        "modelId": "gpt-6.1-sol",
+        "modelId": "GPT-6.1 Sol",
         "unit": "5h",
         "region": "global",
         "status": "fails: a 5-hour figure never converts to a billing period (O82)",
@@ -15983,6 +16106,9 @@
         "currentPartition": 4,
         "partitionsWithReports": [
           0
+        ],
+        "configurations": [
+          "gpt-6.1-sol"
         ],
         "efforts": [
           "high",
@@ -16030,7 +16156,7 @@
       {
         "provider": "OpenAI",
         "plan": "ChatGPT Plus",
-        "modelId": "gpt-6.1-sol",
+        "modelId": "GPT-6.1 Sol",
         "unit": "week",
         "region": "global",
         "status": "fails: 0 non-provisional report(s) in the current partition",
@@ -16038,6 +16164,9 @@
         "currentPartition": 4,
         "partitionsWithReports": [
           0
+        ],
+        "configurations": [
+          "gpt-6.1-sol"
         ],
         "efforts": [
           "high",
@@ -16074,13 +16203,16 @@
       {
         "provider": "OpenAI",
         "plan": "ChatGPT Pro (tier unstated)",
-        "modelId": "gpt-6-astra",
+        "modelId": "GPT-6 Astra",
         "unit": "week",
         "region": "global",
         "status": "fails: 0 non-provisional report(s) in the current partition",
         "listed": false,
         "currentPartition": 4,
         "partitionsWithReports": [],
+        "configurations": [
+          "gpt-6-astra"
+        ],
         "efforts": [
           "max+medium"
         ],
@@ -16105,7 +16237,7 @@
       {
         "provider": "OpenAI",
         "plan": "ChatGPT Pro 100",
-        "modelId": "gpt-6-astra",
+        "modelId": "GPT-6 Astra",
         "unit": "week",
         "region": "global",
         "status": "fails: 0 non-provisional report(s) in the current partition",
@@ -16113,6 +16245,9 @@
         "currentPartition": 4,
         "partitionsWithReports": [
           2
+        ],
+        "configurations": [
+          "gpt-6-astra"
         ],
         "efforts": [
           "high",
@@ -16170,13 +16305,16 @@
       {
         "provider": "OpenAI",
         "plan": "ChatGPT Pro 100",
-        "modelId": "gpt-6.1-sol",
+        "modelId": "GPT-6.1 Sol",
         "unit": "week",
         "region": "global",
         "status": "fails: 0 non-provisional report(s) in the current partition",
         "listed": true,
         "currentPartition": 4,
         "partitionsWithReports": [],
+        "configurations": [
+          "gpt-6.1-sol"
+        ],
         "efforts": [
           "low"
         ],
@@ -16201,13 +16339,16 @@
       {
         "provider": "OpenAI",
         "plan": "ChatGPT Pro 200 (grandfathered 20x)",
-        "modelId": "gpt-6-astra",
+        "modelId": "GPT-6 Astra",
         "unit": "week",
         "region": "global",
         "status": "fails: 0 non-provisional report(s) in the current partition",
         "listed": true,
         "currentPartition": 4,
         "partitionsWithReports": [],
+        "configurations": [
+          "gpt-6-astra"
+        ],
         "efforts": [
           "unstated"
         ],
@@ -16232,7 +16373,7 @@
       {
         "provider": "OpenAI",
         "plan": "ChatGPT Pro 200 (grandfathered 20x)",
-        "modelId": "gpt-6.1-sol",
+        "modelId": "GPT-6.1 Sol",
         "unit": "week",
         "region": "global",
         "status": "fails: 0 non-provisional report(s) in the current partition",
@@ -16240,6 +16381,9 @@
         "currentPartition": 4,
         "partitionsWithReports": [
           0
+        ],
+        "configurations": [
+          "gpt-6.1-sol"
         ],
         "efforts": [
           "high/xhigh",
@@ -16287,13 +16431,16 @@
       {
         "provider": "OpenAI",
         "plan": "ChatGPT Pro 500",
-        "modelId": "gpt-6-astra",
+        "modelId": "GPT-6 Astra",
         "unit": "week",
         "region": "global",
         "status": "fails: 0 non-provisional report(s) in the current partition",
         "listed": true,
         "currentPartition": 4,
         "partitionsWithReports": [],
+        "configurations": [
+          "gpt-6-astra"
+        ],
         "efforts": [
           "max"
         ],
@@ -16318,13 +16465,16 @@
       {
         "provider": "OpenAI",
         "plan": "ChatGPT Pro 500",
-        "modelId": "gpt-6.1-sol",
+        "modelId": "GPT-6.1 Sol",
         "unit": "week",
         "region": "global",
         "status": "fails: 0 non-provisional report(s) in the current partition",
         "listed": true,
         "currentPartition": 4,
         "partitionsWithReports": [],
+        "configurations": [
+          "gpt-6.1-sol"
+        ],
         "efforts": [
           "xhigh"
         ],
@@ -16349,7 +16499,7 @@
       {
         "provider": "Xiaomi",
         "plan": "MiMo Token Plan Lite",
-        "modelId": "mimo-v2-6-pro",
+        "modelId": "MiMo-V2.6-Pro",
         "unit": "month",
         "region": "global",
         "status": "fails: 1 non-provisional report(s) in the current partition",
@@ -16357,6 +16507,9 @@
         "currentPartition": 0,
         "partitionsWithReports": [
           0
+        ],
+        "configurations": [
+          "mimo-v2-6-pro"
         ],
         "efforts": [
           "unstated"
@@ -16385,7 +16538,7 @@
       {
         "provider": "Xiaomi",
         "plan": "MiMo Token Plan Max",
-        "modelId": "mimo-v2-6-pro",
+        "modelId": "MiMo-V2.6-Pro",
         "unit": "month",
         "region": "global",
         "status": "fails: 1 non-provisional report(s) in the current partition",
@@ -16393,6 +16546,9 @@
         "currentPartition": 0,
         "partitionsWithReports": [
           0
+        ],
+        "configurations": [
+          "mimo-v2-6-pro"
         ],
         "efforts": [
           "unstated"
@@ -22033,7 +22189,7 @@
             "workload-unmatched",
             "provider quota ceiling; full use assumed (O46)"
           ],
-          "selectionReason": "larger observed multiple (observed-workload multiple — target-workload ordering not identified)",
+          "selectionReason": "larger quota-ceiling multiple (O46: provider-derived, not observed)",
           "dominatedRoutes": {},
           "comparisonTuples": {
             "mimo-tokenplan-lite-mimo-v2-6-pro-quota-ceiling": [
@@ -22063,10 +22219,10 @@
           },
           "selectedIdentification": "unidentified",
           "amount": {
-            "amountKind": "assumed API-equivalent consumption (owner-named transfer)",
-            "amountTarget": "assumed consumption",
+            "amountKind": "provider quota ceiling: the full quota at API rates (O46; full use assumed)",
+            "amountTarget": "full-quota consumption",
             "amountUsd": 118.08000000000001,
-            "derivation": "authorised assumption: the donor's multiple times this route's cash",
+            "derivation": "quota ceiling: the tier's credits at the provider's API rate (I69 L3)",
             "feePeriod": "month",
             "subscriptionCashUsd": 100,
             "additionalCashUsd": 0.0,
@@ -22079,7 +22235,7 @@
             "capacityStatus": "provider quota ceiling: full use of the quota assumed (O46)",
             "valuationStatus": "release",
             "donorRouteId": null,
-            "interpretationLabel": "assumed API-equivalent consumption (owner-named transfer), API-priced USD per month"
+            "interpretationLabel": "provider quota ceiling: the full quota at API rates (O46; full use assumed), API-priced USD per month"
           },
           "workday": {
             "status": "not evaluated: no evidenced quota schema for this route",
@@ -25229,9 +25385,9 @@
           "value": 49.17532389386462
         },
         "plan": {
-          "costUsd": 221.13766527462937,
-          "costScore": 36.48048144926169,
-          "value": 51.19477098257501
+          "costUsd": 164.45253229812272,
+          "costScore": 40.30960358696445,
+          "value": 52.1520515170007
         }
       },
       {
@@ -25482,9 +25638,9 @@
           "value": 49.78111496461456
         },
         "plan": {
-          "costUsd": 269.16305377476226,
-          "costScore": 33.93950383668714,
-          "value": 52.02492480944473
+          "costUsd": 200.16737419825608,
+          "costScore": 37.768625974389906,
+          "value": 52.98220534387042
         }
       },
       {
@@ -31711,7 +31867,7 @@
         {
           "key": "planRoutes",
           "artifact": "data/plan_cost_routes.json",
-          "sha256": "398a6dfbf78c5615f1f7e6fbdcaf0206c57f7f7379f9a3056504a28da9af4787",
+          "sha256": "9c9e4228de6253bc843ff50b627119cc2654e0b82e573c22090c381249e5345d",
           "capturedAt": "2026-10-25",
           "extractor": "editorial Plan evidence registry"
         },
@@ -31779,7 +31935,7 @@
           "extractor": "valuerank.value_v3 freeze"
         }
       ],
-      "bundleHash": "5129093b646dd1eb828f5a09f4c46d962827275f052952a32b42aa31bd6a38ba",
+      "bundleHash": "5b63aa4d5dd7c291b90ad0f5a11ff8ea9238d31f06e2bbe8d141dd4881cfd951",
       "rebuild": "every published output is rebuilt from these artifacts at the pinned publication clock (npm run verify:docs), never from live pages"
     },
     "track": {
@@ -37978,13 +38134,16 @@
         {
           "provider": "Anthropic",
           "plan": "Claude (plan redacted)",
-          "modelId": "claude-opus-5-5",
+          "modelId": "Claude Opus 5.5",
           "unit": "week",
           "region": "global",
           "status": "fails: 0 non-provisional report(s) in the current partition",
           "listed": false,
           "currentPartition": 0,
           "partitionsWithReports": [],
+          "configurations": [
+            "claude-opus-5-5"
+          ],
           "efforts": [
             "unstated"
           ],
@@ -38009,13 +38168,16 @@
         {
           "provider": "Anthropic",
           "plan": "Claude Max (tier unstated)",
-          "modelId": "claude-opus-5-5",
+          "modelId": "Claude Opus 5.5",
           "unit": "week",
           "region": "global",
           "status": "fails: 0 non-provisional report(s) in the current partition",
           "listed": false,
           "currentPartition": 0,
           "partitionsWithReports": [],
+          "configurations": [
+            "claude-opus-5-5"
+          ],
           "efforts": [
             "unstated"
           ],
@@ -38060,88 +38222,7 @@
         {
           "provider": "Anthropic",
           "plan": "Claude Max 20x",
-          "modelId": null,
-          "unit": "week",
-          "region": "global",
-          "status": "fails: 0 non-provisional report(s) in the current partition",
-          "listed": true,
-          "currentPartition": 1,
-          "partitionsWithReports": [],
-          "efforts": [
-            "unstated"
-          ],
-          "value": null,
-          "monthlyUsd": null,
-          "multiple": null,
-          "range": null,
-          "reports": [
-            {
-              "id": "randomblock1-max20x",
-              "observer": "Randomblock1",
-              "valueLower": 1395.0,
-              "valueUpper": 1395.0,
-              "partition": null,
-              "provisional": false,
-              "speedMode": null,
-              "excluded": "model not stated"
-            },
-            {
-              "id": "fancy-leave-max20x",
-              "observer": "Fancy_Leave7798",
-              "valueLower": 1960.0,
-              "valueUpper": 1963.0,
-              "partition": null,
-              "provisional": false,
-              "speedMode": null,
-              "excluded": "model not stated"
-            },
-            {
-              "id": "omeganetrob-max20x",
-              "observer": "OmegaNetRob",
-              "valueLower": 4580.0,
-              "valueUpper": 4580.0,
-              "partition": null,
-              "provisional": false,
-              "speedMode": null,
-              "excluded": "model not stated"
-            },
-            {
-              "id": "bobothepirate-max20x",
-              "observer": "BoboThePirate",
-              "valueLower": 2000.0,
-              "valueUpper": 2000.0,
-              "partition": null,
-              "provisional": false,
-              "speedMode": null,
-              "excluded": "lower bound: no meter fraction"
-            },
-            {
-              "id": "cannonpalms-max20x",
-              "observer": "cannonpalms",
-              "valueLower": 2000.0,
-              "valueUpper": 2000.0,
-              "partition": null,
-              "provisional": false,
-              "speedMode": null,
-              "excluded": "lower bound: no meter fraction"
-            },
-            {
-              "id": "wokey-max20x",
-              "observer": "wokey.ai",
-              "valueLower": 1547.0,
-              "valueUpper": 1751.0,
-              "partition": null,
-              "provisional": false,
-              "speedMode": null,
-              "excluded": "mixed-model usage"
-            }
-          ],
-          "admittingObservers": []
-        },
-        {
-          "provider": "Anthropic",
-          "plan": "Claude Max 20x",
-          "modelId": "claude-opus-5-5",
+          "modelId": "Claude Opus 5.5",
           "unit": "5h",
           "region": "global",
           "status": "fails: a 5-hour figure never converts to a billing period (O82)",
@@ -38149,6 +38230,9 @@
           "currentPartition": 1,
           "partitionsWithReports": [
             0
+          ],
+          "configurations": [
+            "claude-opus-5-5"
           ],
           "efforts": [
             "unstated",
@@ -38185,13 +38269,16 @@
         {
           "provider": "Anthropic",
           "plan": "Claude Max 20x",
-          "modelId": "claude-opus-5-5",
+          "modelId": "Claude Opus 5.5",
           "unit": "month",
           "region": "global",
           "status": "fails: 0 non-provisional report(s) in the current partition",
           "listed": true,
           "currentPartition": 1,
           "partitionsWithReports": [],
+          "configurations": [
+            "claude-opus-5-5"
+          ],
           "efforts": [
             "unstated"
           ],
@@ -38216,7 +38303,7 @@
         {
           "provider": "Anthropic",
           "plan": "Claude Max 20x",
-          "modelId": "claude-opus-5-5",
+          "modelId": "Claude Opus 5.5",
           "unit": "week",
           "region": "global",
           "status": "fails: 1 non-provisional report(s) in the current partition",
@@ -38225,6 +38312,9 @@
           "partitionsWithReports": [
             0,
             1
+          ],
+          "configurations": [
+            "claude-opus-5-5"
           ],
           "efforts": [
             "high",
@@ -38354,7 +38444,7 @@
         },
         {
           "provider": "Anthropic",
-          "plan": "Claude Max 5x",
+          "plan": "Claude Max 20x",
           "modelId": null,
           "unit": "week",
           "region": "global",
@@ -38362,6 +38452,9 @@
           "listed": true,
           "currentPartition": 1,
           "partitionsWithReports": [],
+          "configurations": [
+            "None"
+          ],
           "efforts": [
             "unstated"
           ],
@@ -38371,14 +38464,64 @@
           "range": null,
           "reports": [
             {
-              "id": "fancy-leave-max5x",
-              "observer": "Fancy_Leave7798",
-              "valueLower": 1538.0,
-              "valueUpper": 1538.0,
+              "id": "randomblock1-max20x",
+              "observer": "Randomblock1",
+              "valueLower": 1395.0,
+              "valueUpper": 1395.0,
               "partition": null,
               "provisional": false,
               "speedMode": null,
               "excluded": "model not stated"
+            },
+            {
+              "id": "fancy-leave-max20x",
+              "observer": "Fancy_Leave7798",
+              "valueLower": 1960.0,
+              "valueUpper": 1963.0,
+              "partition": null,
+              "provisional": false,
+              "speedMode": null,
+              "excluded": "model not stated"
+            },
+            {
+              "id": "omeganetrob-max20x",
+              "observer": "OmegaNetRob",
+              "valueLower": 4580.0,
+              "valueUpper": 4580.0,
+              "partition": null,
+              "provisional": false,
+              "speedMode": null,
+              "excluded": "model not stated"
+            },
+            {
+              "id": "bobothepirate-max20x",
+              "observer": "BoboThePirate",
+              "valueLower": 2000.0,
+              "valueUpper": 2000.0,
+              "partition": null,
+              "provisional": false,
+              "speedMode": null,
+              "excluded": "lower bound: no meter fraction"
+            },
+            {
+              "id": "cannonpalms-max20x",
+              "observer": "cannonpalms",
+              "valueLower": 2000.0,
+              "valueUpper": 2000.0,
+              "partition": null,
+              "provisional": false,
+              "speedMode": null,
+              "excluded": "lower bound: no meter fraction"
+            },
+            {
+              "id": "wokey-max20x",
+              "observer": "wokey.ai",
+              "valueLower": 1547.0,
+              "valueUpper": 1751.0,
+              "partition": null,
+              "provisional": false,
+              "speedMode": null,
+              "excluded": "mixed-model usage"
             }
           ],
           "admittingObservers": []
@@ -38386,13 +38529,16 @@
         {
           "provider": "Anthropic",
           "plan": "Claude Max 5x",
-          "modelId": "claude-opus-5-5",
+          "modelId": "Claude Opus 5.5",
           "unit": "month",
           "region": "global",
           "status": "fails: 0 non-provisional report(s) in the current partition",
           "listed": true,
           "currentPartition": 1,
           "partitionsWithReports": [],
+          "configurations": [
+            "claude-opus-5-5"
+          ],
           "efforts": [
             "unstated"
           ],
@@ -38417,7 +38563,7 @@
         {
           "provider": "Anthropic",
           "plan": "Claude Max 5x",
-          "modelId": "claude-opus-5-5",
+          "modelId": "Claude Opus 5.5",
           "unit": "week",
           "region": "global",
           "status": "fails: 0 non-provisional report(s) in the current partition",
@@ -38425,6 +38571,9 @@
           "currentPartition": 1,
           "partitionsWithReports": [
             0
+          ],
+          "configurations": [
+            "claude-opus-5-5"
           ],
           "efforts": [
             "medium",
@@ -38460,7 +38609,7 @@
         },
         {
           "provider": "Anthropic",
-          "plan": "Claude Pro",
+          "plan": "Claude Max 5x",
           "modelId": null,
           "unit": "week",
           "region": "global",
@@ -38468,6 +38617,9 @@
           "listed": true,
           "currentPartition": 1,
           "partitionsWithReports": [],
+          "configurations": [
+            "None"
+          ],
           "efforts": [
             "unstated"
           ],
@@ -38477,14 +38629,14 @@
           "range": null,
           "reports": [
             {
-              "id": "wokey-pro",
-              "observer": "wokey.ai",
-              "valueLower": 158.0,
-              "valueUpper": 182.0,
+              "id": "fancy-leave-max5x",
+              "observer": "Fancy_Leave7798",
+              "valueLower": 1538.0,
+              "valueUpper": 1538.0,
               "partition": null,
               "provisional": false,
               "speedMode": null,
-              "excluded": "mixed-model usage"
+              "excluded": "model not stated"
             }
           ],
           "admittingObservers": []
@@ -38492,7 +38644,7 @@
         {
           "provider": "Anthropic",
           "plan": "Claude Pro",
-          "modelId": "claude-opus-5-5",
+          "modelId": "Claude Opus 5.5",
           "unit": "5h",
           "region": "global",
           "status": "fails: a 5-hour figure never converts to a billing period (O82)",
@@ -38500,6 +38652,9 @@
           "currentPartition": 1,
           "partitionsWithReports": [
             1
+          ],
+          "configurations": [
+            "claude-opus-5-5"
           ],
           "efforts": [
             "unstated",
@@ -38559,13 +38714,16 @@
         {
           "provider": "Anthropic",
           "plan": "Claude Pro",
-          "modelId": "claude-opus-5-5",
+          "modelId": "Claude Opus 5.5",
           "unit": "month",
           "region": "global",
           "status": "fails: 0 non-provisional report(s) in the current partition",
           "listed": true,
           "currentPartition": 1,
           "partitionsWithReports": [],
+          "configurations": [
+            "claude-opus-5-5"
+          ],
           "efforts": [
             "unstated"
           ],
@@ -38590,7 +38748,7 @@
         {
           "provider": "Anthropic",
           "plan": "Claude Pro",
-          "modelId": "claude-opus-5-5",
+          "modelId": "Claude Opus 5.5",
           "unit": "week",
           "region": "global",
           "status": "fails: 0 non-provisional report(s) in the current partition",
@@ -38599,6 +38757,9 @@
           "partitionsWithReports": [
             0,
             1
+          ],
+          "configurations": [
+            "claude-opus-5-5"
           ],
           "efforts": [
             "high/xhigh",
@@ -38709,14 +38870,51 @@
         },
         {
           "provider": "Anthropic",
+          "plan": "Claude Pro",
+          "modelId": null,
+          "unit": "week",
+          "region": "global",
+          "status": "fails: 0 non-provisional report(s) in the current partition",
+          "listed": true,
+          "currentPartition": 1,
+          "partitionsWithReports": [],
+          "configurations": [
+            "None"
+          ],
+          "efforts": [
+            "unstated"
+          ],
+          "value": null,
+          "monthlyUsd": null,
+          "multiple": null,
+          "range": null,
+          "reports": [
+            {
+              "id": "wokey-pro",
+              "observer": "wokey.ai",
+              "valueLower": 158.0,
+              "valueUpper": 182.0,
+              "partition": null,
+              "provisional": false,
+              "speedMode": null,
+              "excluded": "mixed-model usage"
+            }
+          ],
+          "admittingObservers": []
+        },
+        {
+          "provider": "Anthropic",
           "plan": "Claude Team Premium",
-          "modelId": "claude-opus-5-5",
+          "modelId": "Claude Opus 5.5",
           "unit": "week",
           "region": "global",
           "status": "fails: 0 non-provisional report(s) in the current partition",
           "listed": false,
           "currentPartition": 0,
           "partitionsWithReports": [],
+          "configurations": [
+            "claude-opus-5-5"
+          ],
           "efforts": [
             "unstated"
           ],
@@ -38741,13 +38939,16 @@
         {
           "provider": "Google",
           "plan": "Google AI (tier unstated)",
-          "modelId": "gemini-4-argon",
+          "modelId": "Gemini 4 Argon",
           "unit": "week",
           "region": "global",
           "status": "fails: 0 non-provisional report(s) in the current partition",
           "listed": false,
           "currentPartition": 0,
           "partitionsWithReports": [],
+          "configurations": [
+            "gemini-4-argon"
+          ],
           "efforts": [
             "unstated"
           ],
@@ -38772,7 +38973,7 @@
         {
           "provider": "Google",
           "plan": "Google AI Pro",
-          "modelId": "gemini-4-argon",
+          "modelId": "Gemini 4 Argon",
           "unit": "week",
           "region": "global",
           "status": "fails: no common value within 1.20× (1.35× apart) in the current partition",
@@ -38780,6 +38981,9 @@
           "currentPartition": 0,
           "partitionsWithReports": [
             0
+          ],
+          "configurations": [
+            "gemini-4-argon"
           ],
           "efforts": [
             "high",
@@ -38830,7 +39034,7 @@
         {
           "provider": "Kimi",
           "plan": "Kimi Allegretto (legacy, CN)",
-          "modelId": "kimi-k3-1-pro",
+          "modelId": "Kimi K3.1 Pro",
           "unit": "5h",
           "region": "CN",
           "status": "fails: a 5-hour figure never converts to a billing period (O82)",
@@ -38839,6 +39043,9 @@
           "partitionsWithReports": [
             0,
             1
+          ],
+          "configurations": [
+            "kimi-k3-1-pro"
           ],
           "efforts": [
             "max",
@@ -38898,7 +39105,7 @@
         {
           "provider": "Kimi",
           "plan": "Kimi Allegretto (legacy, CN)",
-          "modelId": "kimi-k3-1-pro",
+          "modelId": "Kimi K3.1 Pro",
           "unit": "month",
           "region": "CN",
           "status": "fails: 1 non-provisional report(s) in the current partition",
@@ -38907,6 +39114,9 @@
           "partitionsWithReports": [
             0,
             1
+          ],
+          "configurations": [
+            "kimi-k3-1-pro"
           ],
           "efforts": [
             "max",
@@ -38956,7 +39166,7 @@
         {
           "provider": "Kimi",
           "plan": "Kimi Allegretto (legacy, CN)",
-          "modelId": "kimi-k3-1-pro",
+          "modelId": "Kimi K3.1 Pro",
           "unit": "week",
           "region": "CN",
           "status": "fails: 0 non-provisional report(s) in the current partition",
@@ -38964,6 +39174,9 @@
           "currentPartition": 1,
           "partitionsWithReports": [
             0
+          ],
+          "configurations": [
+            "kimi-k3-1-pro"
           ],
           "efforts": [
             "max",
@@ -39010,7 +39223,7 @@
         {
           "provider": "Kimi",
           "plan": "Kimi Allegro (legacy, CN)",
-          "modelId": "kimi-k3-1-pro",
+          "modelId": "Kimi K3.1 Pro",
           "unit": "5h",
           "region": "CN",
           "status": "fails: a 5-hour figure never converts to a billing period (O82)",
@@ -39018,6 +39231,9 @@
           "currentPartition": 1,
           "partitionsWithReports": [
             0
+          ],
+          "configurations": [
+            "kimi-k3-1-pro"
           ],
           "efforts": [
             "unstated"
@@ -39083,13 +39299,16 @@
         {
           "provider": "Kimi",
           "plan": "Kimi Allegro (legacy, CN)",
-          "modelId": "kimi-k3-1-pro",
+          "modelId": "Kimi K3.1 Pro",
           "unit": "month",
           "region": "CN",
           "status": "fails: 0 non-provisional report(s) in the current partition",
           "listed": false,
           "currentPartition": 1,
           "partitionsWithReports": [],
+          "configurations": [
+            "kimi-k3-1-pro"
+          ],
           "efforts": [
             "unstated"
           ],
@@ -39114,13 +39333,16 @@
         {
           "provider": "Kimi",
           "plan": "Kimi Allegro (legacy, CN)",
-          "modelId": "kimi-k3-1-pro",
+          "modelId": "Kimi K3.1 Pro",
           "unit": "week",
           "region": "CN",
           "status": "fails: 0 non-provisional report(s) in the current partition",
           "listed": false,
           "currentPartition": 1,
           "partitionsWithReports": [],
+          "configurations": [
+            "kimi-k3-1-pro"
+          ],
           "efforts": [
             "unstated"
           ],
@@ -39155,13 +39377,16 @@
         {
           "provider": "Kimi",
           "plan": "Kimi Max (new, CN)",
-          "modelId": "kimi-k3-1-pro",
+          "modelId": "Kimi K3.1 Pro",
           "unit": "5h",
           "region": "CN",
           "status": "fails: a 5-hour figure never converts to a billing period (O82)",
           "listed": false,
           "currentPartition": 1,
           "partitionsWithReports": [],
+          "configurations": [
+            "kimi-k3-1-pro"
+          ],
           "efforts": [
             "unstated"
           ],
@@ -39196,13 +39421,16 @@
         {
           "provider": "Kimi",
           "plan": "Kimi Max (new, CN)",
-          "modelId": "kimi-k3-1-pro",
+          "modelId": "Kimi K3.1 Pro",
           "unit": "month",
           "region": "CN",
           "status": "fails: 0 non-provisional report(s) in the current partition",
           "listed": false,
           "currentPartition": 1,
           "partitionsWithReports": [],
+          "configurations": [
+            "kimi-k3-1-pro"
+          ],
           "efforts": [
             "unstated"
           ],
@@ -39227,13 +39455,16 @@
         {
           "provider": "Kimi",
           "plan": "Kimi Plus",
-          "modelId": "kimi-k3-1-pro",
+          "modelId": "Kimi K3.1 Pro",
           "unit": "5h",
           "region": "global",
           "status": "fails: a 5-hour figure never converts to a billing period (O82)",
           "listed": true,
           "currentPartition": 1,
           "partitionsWithReports": [],
+          "configurations": [
+            "kimi-k3-1-pro"
+          ],
           "efforts": [
             "unstated"
           ],
@@ -39258,13 +39489,16 @@
         {
           "provider": "Kimi",
           "plan": "Kimi Plus (new, CN)",
-          "modelId": "kimi-k3-1-pro",
+          "modelId": "Kimi K3.1 Pro",
           "unit": "5h",
           "region": "CN",
           "status": "fails: a 5-hour figure never converts to a billing period (O82)",
           "listed": false,
           "currentPartition": 1,
           "partitionsWithReports": [],
+          "configurations": [
+            "kimi-k3-1-pro"
+          ],
           "efforts": [
             "unstated"
           ],
@@ -39289,13 +39523,16 @@
         {
           "provider": "Kimi",
           "plan": "Kimi Pro (new, CN)",
-          "modelId": "kimi-k3-1-pro",
+          "modelId": "Kimi K3.1 Pro",
           "unit": "5h",
           "region": "CN",
           "status": "fails: a 5-hour figure never converts to a billing period (O82)",
           "listed": false,
           "currentPartition": 1,
           "partitionsWithReports": [],
+          "configurations": [
+            "kimi-k3-1-pro"
+          ],
           "efforts": [
             "unstated"
           ],
@@ -39320,13 +39557,16 @@
         {
           "provider": "Kimi",
           "plan": "Kimi Ultra (new, CN)",
-          "modelId": "kimi-k3-1-pro",
+          "modelId": "Kimi K3.1 Pro",
           "unit": "5h",
           "region": "CN",
           "status": "fails: a 5-hour figure never converts to a billing period (O82)",
           "listed": false,
           "currentPartition": 1,
           "partitionsWithReports": [],
+          "configurations": [
+            "kimi-k3-1-pro"
+          ],
           "efforts": [
             "unstated"
           ],
@@ -39351,13 +39591,16 @@
         {
           "provider": "Kimi",
           "plan": "Kimi legacy plan (tier not stated, CN)",
-          "modelId": "kimi-k3-1-pro",
+          "modelId": "Kimi K3.1 Pro",
           "unit": "5h",
           "region": "CN",
           "status": "fails: a 5-hour figure never converts to a billing period (O82)",
           "listed": false,
           "currentPartition": 1,
           "partitionsWithReports": [],
+          "configurations": [
+            "kimi-k3-1-pro"
+          ],
           "efforts": [
             "unstated"
           ],
@@ -39382,13 +39625,16 @@
         {
           "provider": "Kimi",
           "plan": "Kimi ¥199 plan (legacy or new not stated, CN)",
-          "modelId": "kimi-k3-1-pro",
+          "modelId": "Kimi K3.1 Pro",
           "unit": "5h",
           "region": "CN",
           "status": "fails: a 5-hour figure never converts to a billing period (O82)",
           "listed": false,
           "currentPartition": 1,
           "partitionsWithReports": [],
+          "configurations": [
+            "kimi-k3-1-pro"
+          ],
           "efforts": [
             "unstated"
           ],
@@ -39423,13 +39669,16 @@
         {
           "provider": "MiniMax",
           "plan": "MiniMax M Plan (tier unstated)",
-          "modelId": "minimax-m3-1-flash",
+          "modelId": "MiniMax-M3.1-Flash",
           "unit": "week",
           "region": "global",
           "status": "fails: 0 non-provisional report(s) in the current partition",
           "listed": false,
           "currentPartition": 0,
           "partitionsWithReports": [],
+          "configurations": [
+            "minimax-m3-1-flash"
+          ],
           "efforts": [
             "unstated"
           ],
@@ -39454,7 +39703,7 @@
         {
           "provider": "MiniMax",
           "plan": "MiniMax Token Plan Max (legacy)",
-          "modelId": "minimax-m3-1-flash",
+          "modelId": "MiniMax-M3.1-Flash",
           "unit": "5h",
           "region": "global",
           "status": "fails: a 5-hour figure never converts to a billing period (O82)",
@@ -39462,6 +39711,9 @@
           "currentPartition": 0,
           "partitionsWithReports": [
             0
+          ],
+          "configurations": [
+            "minimax-m3-1-flash"
           ],
           "efforts": [
             "unstated"
@@ -39490,7 +39742,7 @@
         {
           "provider": "MiniMax",
           "plan": "MiniMax Token Plan Max (legacy)",
-          "modelId": "minimax-m3-1-flash",
+          "modelId": "MiniMax-M3.1-Flash",
           "unit": "week",
           "region": "global",
           "status": "fails: 0 non-provisional report(s) in the current partition",
@@ -39498,6 +39750,9 @@
           "currentPartition": 0,
           "partitionsWithReports": [
             0
+          ],
+          "configurations": [
+            "minimax-m3-1-flash"
           ],
           "efforts": [
             "unstated"
@@ -39526,7 +39781,7 @@
         {
           "provider": "MiniMax",
           "plan": "MiniMax Token Plan lowest tier (legacy)",
-          "modelId": "minimax-m3-1-flash",
+          "modelId": "MiniMax-M3.1-Flash",
           "unit": "5h",
           "region": "global",
           "status": "fails: a 5-hour figure never converts to a billing period (O82)",
@@ -39534,6 +39789,9 @@
           "currentPartition": 0,
           "partitionsWithReports": [
             0
+          ],
+          "configurations": [
+            "minimax-m3-1-flash"
           ],
           "efforts": [
             "unstated"
@@ -39569,6 +39827,9 @@
           "listed": false,
           "currentPartition": 0,
           "partitionsWithReports": [],
+          "configurations": [
+            "None"
+          ],
           "efforts": [
             "unstated"
           ],
@@ -39593,13 +39854,16 @@
         {
           "provider": "OpenAI",
           "plan": "ChatGPT (legacy account, tier unstated)",
-          "modelId": "gpt-6.1-sol",
+          "modelId": "GPT-6.1 Sol",
           "unit": "week",
           "region": "global",
           "status": "fails: 0 non-provisional report(s) in the current partition",
           "listed": false,
           "currentPartition": 4,
           "partitionsWithReports": [],
+          "configurations": [
+            "gpt-6.1-sol"
+          ],
           "efforts": [
             "medium"
           ],
@@ -39624,13 +39888,16 @@
         {
           "provider": "OpenAI",
           "plan": "ChatGPT Plus",
-          "modelId": "gpt-5.6-luna",
+          "modelId": "GPT-5.6 Luna",
           "unit": "5h",
           "region": "global",
           "status": "fails: a 5-hour figure never converts to a billing period (O82)",
           "listed": true,
           "currentPartition": 4,
           "partitionsWithReports": [],
+          "configurations": [
+            "gpt-5.6-luna-low"
+          ],
           "efforts": [
             "max"
           ],
@@ -39655,13 +39922,16 @@
         {
           "provider": "OpenAI",
           "plan": "ChatGPT Plus",
-          "modelId": "gpt-5.6-luna",
+          "modelId": "GPT-5.6 Luna",
           "unit": "week",
           "region": "global",
           "status": "fails: 0 non-provisional report(s) in the current partition",
           "listed": true,
           "currentPartition": 4,
           "partitionsWithReports": [],
+          "configurations": [
+            "gpt-5.6-luna-low"
+          ],
           "efforts": [
             "unstated"
           ],
@@ -39686,13 +39956,16 @@
         {
           "provider": "OpenAI",
           "plan": "ChatGPT Plus",
-          "modelId": "gpt-6-astra",
+          "modelId": "GPT-6 Astra",
           "unit": "5h",
           "region": "global",
           "status": "fails: a 5-hour figure never converts to a billing period (O82)",
           "listed": true,
           "currentPartition": 4,
           "partitionsWithReports": [],
+          "configurations": [
+            "gpt-6-astra"
+          ],
           "efforts": [
             "high",
             "medium"
@@ -39728,7 +40001,7 @@
         {
           "provider": "OpenAI",
           "plan": "ChatGPT Plus",
-          "modelId": "gpt-6-luna",
+          "modelId": "GPT-6 Luna",
           "unit": "5h",
           "region": "global",
           "status": "fails: a 5-hour figure never converts to a billing period (O82)",
@@ -39736,6 +40009,9 @@
           "currentPartition": 4,
           "partitionsWithReports": [
             0
+          ],
+          "configurations": [
+            "gpt-6-luna"
           ],
           "efforts": [
             "max"
@@ -39761,13 +40037,16 @@
         {
           "provider": "OpenAI",
           "plan": "ChatGPT Plus",
-          "modelId": "gpt-6-luna",
+          "modelId": "GPT-6 Luna",
           "unit": "month",
           "region": "global",
           "status": "fails: 0 non-provisional report(s) in the current partition",
           "listed": true,
           "currentPartition": 4,
           "partitionsWithReports": [],
+          "configurations": [
+            "gpt-6-luna"
+          ],
           "efforts": [
             "unstated"
           ],
@@ -39792,7 +40071,7 @@
         {
           "provider": "OpenAI",
           "plan": "ChatGPT Plus",
-          "modelId": "gpt-6.1-sol",
+          "modelId": "GPT-6.1 Sol",
           "unit": "5h",
           "region": "global",
           "status": "fails: a 5-hour figure never converts to a billing period (O82)",
@@ -39800,6 +40079,9 @@
           "currentPartition": 4,
           "partitionsWithReports": [
             0
+          ],
+          "configurations": [
+            "gpt-6.1-sol"
           ],
           "efforts": [
             "high",
@@ -39847,7 +40129,7 @@
         {
           "provider": "OpenAI",
           "plan": "ChatGPT Plus",
-          "modelId": "gpt-6.1-sol",
+          "modelId": "GPT-6.1 Sol",
           "unit": "week",
           "region": "global",
           "status": "fails: 0 non-provisional report(s) in the current partition",
@@ -39855,6 +40137,9 @@
           "currentPartition": 4,
           "partitionsWithReports": [
             0
+          ],
+          "configurations": [
+            "gpt-6.1-sol"
           ],
           "efforts": [
             "high",
@@ -39891,13 +40176,16 @@
         {
           "provider": "OpenAI",
           "plan": "ChatGPT Pro (tier unstated)",
-          "modelId": "gpt-6-astra",
+          "modelId": "GPT-6 Astra",
           "unit": "week",
           "region": "global",
           "status": "fails: 0 non-provisional report(s) in the current partition",
           "listed": false,
           "currentPartition": 4,
           "partitionsWithReports": [],
+          "configurations": [
+            "gpt-6-astra"
+          ],
           "efforts": [
             "max+medium"
           ],
@@ -39922,7 +40210,7 @@
         {
           "provider": "OpenAI",
           "plan": "ChatGPT Pro 100",
-          "modelId": "gpt-6-astra",
+          "modelId": "GPT-6 Astra",
           "unit": "week",
           "region": "global",
           "status": "fails: 0 non-provisional report(s) in the current partition",
@@ -39930,6 +40218,9 @@
           "currentPartition": 4,
           "partitionsWithReports": [
             2
+          ],
+          "configurations": [
+            "gpt-6-astra"
           ],
           "efforts": [
             "high",
@@ -39987,13 +40278,16 @@
         {
           "provider": "OpenAI",
           "plan": "ChatGPT Pro 100",
-          "modelId": "gpt-6.1-sol",
+          "modelId": "GPT-6.1 Sol",
           "unit": "week",
           "region": "global",
           "status": "fails: 0 non-provisional report(s) in the current partition",
           "listed": true,
           "currentPartition": 4,
           "partitionsWithReports": [],
+          "configurations": [
+            "gpt-6.1-sol"
+          ],
           "efforts": [
             "low"
           ],
@@ -40018,13 +40312,16 @@
         {
           "provider": "OpenAI",
           "plan": "ChatGPT Pro 200 (grandfathered 20x)",
-          "modelId": "gpt-6-astra",
+          "modelId": "GPT-6 Astra",
           "unit": "week",
           "region": "global",
           "status": "fails: 0 non-provisional report(s) in the current partition",
           "listed": true,
           "currentPartition": 4,
           "partitionsWithReports": [],
+          "configurations": [
+            "gpt-6-astra"
+          ],
           "efforts": [
             "unstated"
           ],
@@ -40049,7 +40346,7 @@
         {
           "provider": "OpenAI",
           "plan": "ChatGPT Pro 200 (grandfathered 20x)",
-          "modelId": "gpt-6.1-sol",
+          "modelId": "GPT-6.1 Sol",
           "unit": "week",
           "region": "global",
           "status": "fails: 0 non-provisional report(s) in the current partition",
@@ -40057,6 +40354,9 @@
           "currentPartition": 4,
           "partitionsWithReports": [
             0
+          ],
+          "configurations": [
+            "gpt-6.1-sol"
           ],
           "efforts": [
             "high/xhigh",
@@ -40104,13 +40404,16 @@
         {
           "provider": "OpenAI",
           "plan": "ChatGPT Pro 500",
-          "modelId": "gpt-6-astra",
+          "modelId": "GPT-6 Astra",
           "unit": "week",
           "region": "global",
           "status": "fails: 0 non-provisional report(s) in the current partition",
           "listed": true,
           "currentPartition": 4,
           "partitionsWithReports": [],
+          "configurations": [
+            "gpt-6-astra"
+          ],
           "efforts": [
             "max"
           ],
@@ -40135,13 +40438,16 @@
         {
           "provider": "OpenAI",
           "plan": "ChatGPT Pro 500",
-          "modelId": "gpt-6.1-sol",
+          "modelId": "GPT-6.1 Sol",
           "unit": "week",
           "region": "global",
           "status": "fails: 0 non-provisional report(s) in the current partition",
           "listed": true,
           "currentPartition": 4,
           "partitionsWithReports": [],
+          "configurations": [
+            "gpt-6.1-sol"
+          ],
           "efforts": [
             "xhigh"
           ],
@@ -40166,7 +40472,7 @@
         {
           "provider": "Xiaomi",
           "plan": "MiMo Token Plan Lite",
-          "modelId": "mimo-v2-6-pro",
+          "modelId": "MiMo-V2.6-Pro",
           "unit": "month",
           "region": "global",
           "status": "fails: 1 non-provisional report(s) in the current partition",
@@ -40174,6 +40480,9 @@
           "currentPartition": 0,
           "partitionsWithReports": [
             0
+          ],
+          "configurations": [
+            "mimo-v2-6-pro"
           ],
           "efforts": [
             "unstated"
@@ -40202,7 +40511,7 @@
         {
           "provider": "Xiaomi",
           "plan": "MiMo Token Plan Max",
-          "modelId": "mimo-v2-6-pro",
+          "modelId": "MiMo-V2.6-Pro",
           "unit": "month",
           "region": "global",
           "status": "fails: 1 non-provisional report(s) in the current partition",
@@ -40210,6 +40519,9 @@
           "currentPartition": 0,
           "partitionsWithReports": [
             0
+          ],
+          "configurations": [
+            "mimo-v2-6-pro"
           ],
           "efforts": [
             "unstated"
@@ -40309,14 +40621,14 @@
         },
         "plan": {
           "commonWorkload": {
-            "costSd": 21.328567703881745,
+            "costSd": 21.052619909653572,
             "qualitySd": 11.816160583898741,
-            "costShare": 0.3756547391665552,
+            "costShare": 0.37260547654161674,
             "flag": false,
             "qualityFlag": false,
             "varianceAllocation": {
-              "cost": -0.25269259558718826,
-              "quality": 1.2526925955871884
+              "cost": -0.252260683366743,
+              "quality": 1.2522606833667433
             },
             "status": "defined",
             "panel": [
@@ -40376,14 +40688,14 @@
           },
           "subsetStrata": {},
           "displayedTableDispersion": {
-            "costSd": 21.328567703881745,
+            "costSd": 21.052619909653572,
             "qualitySd": 11.816160583898741,
-            "costShare": 0.3756547391665552,
+            "costShare": 0.37260547654161674,
             "flag": false,
             "qualityFlag": false,
             "varianceAllocation": {
-              "cost": -0.25269259558718826,
-              "quality": 1.2526925955871884
+              "cost": -0.252260683366743,
+              "quality": 1.2522606833667433
             },
             "status": "defined",
             "panel": [
@@ -40443,8 +40755,8 @@
           "flag": false,
           "qualityFlag": false,
           "orderingAgreement": {
-            "costVsValue": -0.20784313725490197,
-            "qualityVsValue": 0.6580423031356475
+            "costVsValue": -0.21916732128829536,
+            "qualityVsValue": 0.6633954415024687
           }
         }
       },
@@ -42815,7 +43127,7 @@
               "chatgpt-plus-gpt-6.1-sol-high-common-gpt-assumption": [
                 0,
                 1,
-                8.1,
+                10.55,
                 -20.0
               ],
               "chatgpt-pro100-gpt-6.1-sol-high-common-gpt-assumption": [
@@ -42881,6 +43193,23 @@
                   "comparisonWithSelected": "observed-workload arithmetic only (target-workload ordering not identified)"
                 },
                 {
+                  "routeId": "chatgpt-plus-gpt-6.1-sol-high-common-gpt-assumption",
+                  "identification": "unidentified",
+                  "grade": "assumption",
+                  "measurementWorkload": "the route's measurement workload",
+                  "valuationStatus": "unverified",
+                  "displayedMultiple": 10.55,
+                  "displayedPlanValue": 55.4799727401339,
+                  "comparisonTuple": [
+                    0,
+                    1,
+                    10.55,
+                    -20.0
+                  ],
+                  "status": "not selected by the comparator",
+                  "comparisonWithSelected": "observed-workload arithmetic only (target-workload ordering not identified)"
+                },
+                {
                   "routeId": "chatgpt-pro100-gpt-6.1-sol-high-common-gpt-assumption",
                   "identification": "unidentified",
                   "grade": "assumption",
@@ -42913,29 +43242,12 @@
                   ],
                   "status": "not selected by the comparator",
                   "comparisonWithSelected": "observed-workload arithmetic only (target-workload ordering not identified)"
-                },
-                {
-                  "routeId": "chatgpt-plus-gpt-6.1-sol-high-common-gpt-assumption",
-                  "identification": "unidentified",
-                  "grade": "assumption",
-                  "measurementWorkload": "the route's measurement workload",
-                  "valuationStatus": "unverified",
-                  "displayedMultiple": 8.1,
-                  "displayedPlanValue": 54.77558077088301,
-                  "comparisonTuple": [
-                    0,
-                    1,
-                    8.1,
-                    -20.0
-                  ],
-                  "status": "not selected by the comparator",
-                  "comparisonWithSelected": "observed-workload arithmetic only (target-workload ordering not identified)"
                 }
               ],
               "admissiblePairs": 4,
               "unidentifiedPairs": 4,
               "leaveSelectedOut": {
-                "routeId": "chatgpt-pro100-gpt-6.1-sol-high-common-gpt-assumption",
+                "routeId": "chatgpt-plus-gpt-6.1-sol-high-common-gpt-assumption",
                 "displayedMultiple": 10.55,
                 "displayedPlanValue": 55.4799727401339
               }
@@ -42948,7 +43260,7 @@
                 "planIntervalEligible": false,
                 "expiry": "possibly-superseded",
                 "evidenceDate": "2026-10-06",
-                "donorRouteId": "chatgpt-plus-gpt6astra-semianalysis",
+                "donorRouteId": "chatgpt-plus-gpt61sol-semianalysis",
                 "contributingReportIds": null,
                 "excludedReportIds": null
               },
@@ -44245,7 +44557,7 @@
               "workload-unmatched",
               "provider quota ceiling; full use assumed (O46)"
             ],
-            "selectionReason": "larger observed multiple (observed-workload multiple — target-workload ordering not identified)",
+            "selectionReason": "larger quota-ceiling multiple (O46: provider-derived, not observed)",
             "dominatedRoutes": {},
             "comparisonTuples": {
               "mimo-tokenplan-lite-mimo-v2-6-pro-quota-ceiling": [
@@ -44275,10 +44587,10 @@
             },
             "selectedIdentification": "unidentified",
             "amount": {
-              "amountKind": "assumed API-equivalent consumption (owner-named transfer)",
-              "amountTarget": "assumed consumption",
+              "amountKind": "provider quota ceiling: the full quota at API rates (O46; full use assumed)",
+              "amountTarget": "full-quota consumption",
               "amountUsd": 118.08000000000001,
-              "derivation": "authorised assumption: the donor's multiple times this route's cash",
+              "derivation": "quota ceiling: the tier's credits at the provider's API rate (I69 L3)",
               "feePeriod": "month",
               "subscriptionCashUsd": 100,
               "additionalCashUsd": 0.0,
@@ -44291,7 +44603,7 @@
               "capacityStatus": "provider quota ceiling: full use of the quota assumed (O46)",
               "valuationStatus": "release",
               "donorRouteId": null,
-              "interpretationLabel": "assumed API-equivalent consumption (owner-named transfer), API-priced USD per month"
+              "interpretationLabel": "provider quota ceiling: the full quota at API rates (O46; full use assumed), API-priced USD per month"
             },
             "workday": {
               "status": "not evaluated: no evidenced quota schema for this route",
@@ -45689,7 +46001,7 @@
               "chatgpt-plus-gpt-6.1-sol-medium-common-gpt-assumption": [
                 0,
                 1,
-                8.1,
+                10.55,
                 -20.0
               ],
               "chatgpt-pro100-gpt-6.1-sol-medium-common-gpt-assumption": [
@@ -45755,6 +46067,23 @@
                   "comparisonWithSelected": "observed-workload arithmetic only (target-workload ordering not identified)"
                 },
                 {
+                  "routeId": "chatgpt-plus-gpt-6.1-sol-medium-common-gpt-assumption",
+                  "identification": "unidentified",
+                  "grade": "assumption",
+                  "measurementWorkload": "the route's measurement workload",
+                  "valuationStatus": "unverified",
+                  "displayedMultiple": 10.55,
+                  "displayedPlanValue": 54.06089076233858,
+                  "comparisonTuple": [
+                    0,
+                    1,
+                    10.55,
+                    -20.0
+                  ],
+                  "status": "not selected by the comparator",
+                  "comparisonWithSelected": "observed-workload arithmetic only (target-workload ordering not identified)"
+                },
+                {
                   "routeId": "chatgpt-pro100-gpt-6.1-sol-medium-common-gpt-assumption",
                   "identification": "unidentified",
                   "grade": "assumption",
@@ -45787,29 +46116,12 @@
                   ],
                   "status": "not selected by the comparator",
                   "comparisonWithSelected": "observed-workload arithmetic only (target-workload ordering not identified)"
-                },
-                {
-                  "routeId": "chatgpt-plus-gpt-6.1-sol-medium-common-gpt-assumption",
-                  "identification": "unidentified",
-                  "grade": "assumption",
-                  "measurementWorkload": "the route's measurement workload",
-                  "valuationStatus": "unverified",
-                  "displayedMultiple": 8.1,
-                  "displayedPlanValue": 53.35649879308769,
-                  "comparisonTuple": [
-                    0,
-                    1,
-                    8.1,
-                    -20.0
-                  ],
-                  "status": "not selected by the comparator",
-                  "comparisonWithSelected": "observed-workload arithmetic only (target-workload ordering not identified)"
                 }
               ],
               "admissiblePairs": 4,
               "unidentifiedPairs": 4,
               "leaveSelectedOut": {
-                "routeId": "chatgpt-pro100-gpt-6.1-sol-medium-common-gpt-assumption",
+                "routeId": "chatgpt-plus-gpt-6.1-sol-medium-common-gpt-assumption",
                 "displayedMultiple": 10.55,
                 "displayedPlanValue": 54.06089076233858
               }
@@ -45822,7 +46134,7 @@
                 "planIntervalEligible": false,
                 "expiry": "possibly-superseded",
                 "evidenceDate": "2026-10-06",
-                "donorRouteId": "chatgpt-plus-gpt6astra-semianalysis",
+                "donorRouteId": "chatgpt-plus-gpt61sol-semianalysis",
                 "contributingReportIds": null,
                 "excludedReportIds": null
               },
@@ -46407,16 +46719,16 @@
             }
           },
           "plan": {
-            "costUsd": 221.13766527462937,
+            "costUsd": 164.45253229812272,
             "fallback": null,
-            "routeId": "chatgpt-pro500-gpt-6-astra-high-common-gpt-assumption",
-            "multiple": 10.772,
+            "routeId": "chatgpt-pro200-gpt-6-astra-high-common-gpt-assumption",
+            "multiple": 14.485,
             "grade": "assumption",
             "identification": "unidentified",
             "measurementCapacityStatus": "capacity established on the measurement workload",
             "mixCheck": "mix unidentified: the basket's token-category shares are set-identified only (E124), so the L1 test (above 0.30 flags mix-unmatched) is not computed",
             "evidenceDate": "2026-10-06",
-            "donorRouteId": "chatgpt-pro500-gpt61sol-semianalysis",
+            "donorRouteId": "chatgpt-pro200-gpt6astra-semianalysis",
             "flags": [
               "workload-unmatched",
               "owner-named transfer (assumption)",
@@ -46435,19 +46747,19 @@
               "chatgpt-pro100-gpt-6-astra-high-common-gpt-assumption": [
                 0,
                 1,
-                10.55,
+                13.22,
                 -100.0
               ],
               "chatgpt-pro200-gpt-6-astra-high-common-gpt-assumption": [
                 0,
                 1,
-                10.42,
+                14.485,
                 -200.0
               ],
               "chatgpt-pro500-gpt-6-astra-high-common-gpt-assumption": [
                 0,
                 1,
-                10.772,
+                13.91,
                 -500.0
               ]
             },
@@ -46455,20 +46767,20 @@
             "amount": {
               "amountKind": "assumed API-equivalent consumption (owner-named transfer)",
               "amountTarget": "assumed consumption",
-              "amountUsd": 5386.0,
+              "amountUsd": 2897.0,
               "derivation": "authorised assumption: the donor's multiple times this route's cash",
               "feePeriod": "month",
-              "subscriptionCashUsd": 500,
+              "subscriptionCashUsd": 200,
               "additionalCashUsd": 0.0,
-              "grossCashUsd": 500.0,
+              "grossCashUsd": 200.0,
               "workload": "the route's measurement workload",
-              "measurementObjectId": "chatgpt-pro500-gpt-6-astra-high-common-gpt-assumption",
+              "measurementObjectId": "chatgpt-pro200-gpt-6-astra-high-common-gpt-assumption",
               "capacitySolutionId": null,
-              "cashObjectId": "chatgpt-pro500-gpt-6-astra-high-common-gpt-assumption:month cash",
+              "cashObjectId": "chatgpt-pro200-gpt-6-astra-high-common-gpt-assumption:month cash",
               "purchasePolicyId": "subscription fee for the fee period, no additional cash declared",
               "capacityStatus": "capacity established on the measurement workload",
               "valuationStatus": "unverified",
-              "donorRouteId": "chatgpt-pro500-gpt61sol-semianalysis",
+              "donorRouteId": "chatgpt-pro200-gpt6astra-semianalysis",
               "interpretationLabel": "assumed API-equivalent consumption (owner-named transfer), API-priced USD per month"
             },
             "workday": {
@@ -46478,20 +46790,37 @@
             "routeAlternatives": {
               "pairs": [
                 {
+                  "routeId": "chatgpt-pro200-gpt-6-astra-high-common-gpt-assumption",
+                  "identification": "unidentified",
+                  "grade": "assumption",
+                  "measurementWorkload": "the route's measurement workload",
+                  "valuationStatus": "unverified",
+                  "displayedMultiple": 14.485,
+                  "displayedPlanValue": 52.84277812117194,
+                  "comparisonTuple": [
+                    0,
+                    1,
+                    14.485,
+                    -200.0
+                  ],
+                  "status": "selected",
+                  "comparisonWithSelected": "observed-workload arithmetic only (target-workload ordering not identified)"
+                },
+                {
                   "routeId": "chatgpt-pro500-gpt-6-astra-high-common-gpt-assumption",
                   "identification": "unidentified",
                   "grade": "assumption",
                   "measurementWorkload": "the route's measurement workload",
                   "valuationStatus": "unverified",
-                  "displayedMultiple": 10.772,
-                  "displayedPlanValue": 52.05335202337786,
+                  "displayedMultiple": 13.91,
+                  "displayedPlanValue": 52.734810048031804,
                   "comparisonTuple": [
                     0,
                     1,
-                    10.772,
+                    13.91,
                     -500.0
                   ],
-                  "status": "selected",
+                  "status": "not selected by the comparator",
                   "comparisonWithSelected": "observed-workload arithmetic only (target-workload ordering not identified)"
                 },
                 {
@@ -46500,30 +46829,13 @@
                   "grade": "assumption",
                   "measurementWorkload": "the route's measurement workload",
                   "valuationStatus": "unverified",
-                  "displayedMultiple": 10.55,
-                  "displayedPlanValue": 51.99784464256137,
+                  "displayedMultiple": 13.22,
+                  "displayedPlanValue": 52.59919653420083,
                   "comparisonTuple": [
                     0,
                     1,
-                    10.55,
+                    13.22,
                     -100.0
-                  ],
-                  "status": "not selected by the comparator",
-                  "comparisonWithSelected": "observed-workload arithmetic only (target-workload ordering not identified)"
-                },
-                {
-                  "routeId": "chatgpt-pro200-gpt-6-astra-high-common-gpt-assumption",
-                  "identification": "unidentified",
-                  "grade": "assumption",
-                  "measurementWorkload": "the route's measurement workload",
-                  "valuationStatus": "unverified",
-                  "displayedMultiple": 10.42,
-                  "displayedPlanValue": 51.964795477574874,
-                  "comparisonTuple": [
-                    0,
-                    1,
-                    10.42,
-                    -200.0
                   ],
                   "status": "not selected by the comparator",
                   "comparisonWithSelected": "observed-workload arithmetic only (target-workload ordering not identified)"
@@ -46549,9 +46861,9 @@
               "admissiblePairs": 4,
               "unidentifiedPairs": 4,
               "leaveSelectedOut": {
-                "routeId": "chatgpt-pro100-gpt-6-astra-high-common-gpt-assumption",
-                "displayedMultiple": 10.55,
-                "displayedPlanValue": 51.99784464256137
+                "routeId": "chatgpt-pro500-gpt-6-astra-high-common-gpt-assumption",
+                "displayedMultiple": 13.91,
+                "displayedPlanValue": 52.734810048031804
               }
             },
             "admission": [
@@ -46573,7 +46885,7 @@
                 "planIntervalEligible": false,
                 "expiry": "possibly-superseded",
                 "evidenceDate": "2026-10-06",
-                "donorRouteId": "chatgpt-pro100-gpt61sol-semianalysis",
+                "donorRouteId": "chatgpt-pro100-gpt6astra-semianalysis",
                 "contributingReportIds": null,
                 "excludedReportIds": null
               },
@@ -46584,7 +46896,7 @@
                 "planIntervalEligible": false,
                 "expiry": "possibly-superseded",
                 "evidenceDate": "2026-10-06",
-                "donorRouteId": "chatgpt-pro200-gpt61sol-semianalysis",
+                "donorRouteId": "chatgpt-pro200-gpt6astra-semianalysis",
                 "contributingReportIds": null,
                 "excludedReportIds": null
               },
@@ -46595,7 +46907,7 @@
                 "planIntervalEligible": false,
                 "expiry": "possibly-superseded",
                 "evidenceDate": "2026-10-06",
-                "donorRouteId": "chatgpt-pro500-gpt61sol-semianalysis",
+                "donorRouteId": "chatgpt-pro500-gpt6astra-semianalysis",
                 "contributingReportIds": null,
                 "excludedReportIds": null
               }
@@ -46608,12 +46920,12 @@
             "rank": 13
           },
           "planScore": {
-            "costUsd": 221.13766527462937,
-            "costScore": 32.39096953027036,
-            "value": 52.05335202337786,
+            "costUsd": 164.45253229812272,
+            "costScore": 35.54867392144667,
+            "value": 52.84277812117194,
             "rank": 18
           },
-          "planRowId": "gpt-6-astra-high@chatgpt-pro-500"
+          "planRowId": "gpt-6-astra-high@chatgpt-pro-200"
         },
         {
           "id": "gpt-6-luna",
@@ -48070,7 +48382,7 @@
             "costUsd": 1.2028627836080885,
             "costScore": 87.9836711496838,
             "value": 53.592494231710724,
-            "rank": 14
+            "rank": 15
           },
           "planRowId": "claude-haiku-5-5-high@claude-pro"
         },
@@ -51800,9 +52112,9 @@
           "plan": "ChatGPT Plus",
           "representative": false,
           "routeId": "chatgpt-plus-gpt-6.1-sol-high-common-gpt-assumption",
-          "planLabel": "ChatGPT Plus $20 · common GPT assumption",
+          "planLabel": "ChatGPT Plus $20 · same-model assumption (O88)",
           "grade": "assumption",
-          "multiple": 8.1,
+          "multiple": 10.55,
           "fallback": null,
           "flags": [
             "workload-unmatched",
@@ -51812,10 +52124,10 @@
           ],
           "selectionReason": "only remaining eligible route",
           "quality": 57.17488127995559,
-          "costUsd": 53.21884517816187,
-          "costScore": 47.57767924366529,
-          "value": 54.77558077088301,
-          "rank": 10
+          "costUsd": 40.85996644010532,
+          "costScore": 50.39524712066884,
+          "value": 55.4799727401339,
+          "rank": 8
         },
         {
           "id": "gpt-6.1-sol-high@chatgpt-pro-100",
@@ -51824,7 +52136,7 @@
           "plan": "ChatGPT Pro 100",
           "representative": false,
           "routeId": "chatgpt-pro100-gpt-6.1-sol-high-common-gpt-assumption",
-          "planLabel": "ChatGPT Pro 100 $100 · common GPT assumption",
+          "planLabel": "ChatGPT Pro 100 $100 · same-model assumption (O88)",
           "grade": "assumption",
           "multiple": 10.55,
           "fallback": null,
@@ -51848,7 +52160,7 @@
           "plan": "ChatGPT Pro 200",
           "representative": false,
           "routeId": "chatgpt-pro200-gpt-6.1-sol-high-common-gpt-assumption",
-          "planLabel": "ChatGPT Pro 200 $200 · common GPT assumption",
+          "planLabel": "ChatGPT Pro 200 $200 · same-model assumption (O88)",
           "grade": "assumption",
           "multiple": 10.42,
           "fallback": null,
@@ -51863,7 +52175,7 @@
           "costUsd": 41.36973569511623,
           "costScore": 50.26305046072287,
           "value": 55.44692357514741,
-          "rank": 9
+          "rank": 10
         },
         {
           "id": "gpt-6.1-sol-high@chatgpt-pro-500",
@@ -51872,7 +52184,7 @@
           "plan": "ChatGPT Pro 500",
           "representative": true,
           "routeId": "chatgpt-pro500-gpt-6.1-sol-high-common-gpt-assumption",
-          "planLabel": "ChatGPT Pro 500 $500 · common GPT assumption",
+          "planLabel": "ChatGPT Pro 500 $500 · same-model assumption (O88)",
           "grade": "assumption",
           "multiple": 10.772,
           "fallback": null,
@@ -52128,9 +52440,9 @@
           "plan": "ChatGPT Plus",
           "representative": false,
           "routeId": "chatgpt-plus-gpt-6.1-sol-medium-common-gpt-assumption",
-          "planLabel": "ChatGPT Plus $20 · common GPT assumption",
+          "planLabel": "ChatGPT Plus $20 · same-model assumption (O88)",
           "grade": "assumption",
-          "multiple": 8.1,
+          "multiple": 10.55,
           "fallback": null,
           "flags": [
             "workload-unmatched",
@@ -52140,10 +52452,10 @@
           ],
           "selectionReason": "only remaining eligible route",
           "quality": 54.202063155389226,
-          "costUsd": 39.26490435022422,
-          "costScore": 50.819805706183075,
-          "value": 53.35649879308769,
-          "rank": 17
+          "costUsd": 30.146514240456508,
+          "costScore": 53.63737358318664,
+          "value": 54.06089076233858,
+          "rank": 12
         },
         {
           "id": "gpt-6.1-sol-medium@chatgpt-pro-100",
@@ -52152,7 +52464,7 @@
           "plan": "ChatGPT Pro 100",
           "representative": false,
           "routeId": "chatgpt-pro100-gpt-6.1-sol-medium-common-gpt-assumption",
-          "planLabel": "ChatGPT Pro 100 $100 · common GPT assumption",
+          "planLabel": "ChatGPT Pro 100 $100 · same-model assumption (O88)",
           "grade": "assumption",
           "multiple": 10.55,
           "fallback": null,
@@ -52176,7 +52488,7 @@
           "plan": "ChatGPT Pro 200",
           "representative": false,
           "routeId": "chatgpt-pro200-gpt-6.1-sol-medium-common-gpt-assumption",
-          "planLabel": "ChatGPT Pro 200 $200 · common GPT assumption",
+          "planLabel": "ChatGPT Pro 200 $200 · same-model assumption (O88)",
           "grade": "assumption",
           "multiple": 10.42,
           "fallback": null,
@@ -52191,7 +52503,7 @@
           "costUsd": 30.52262238357161,
           "costScore": 53.505176923240654,
           "value": 54.02784159735208,
-          "rank": 13
+          "rank": 14
         },
         {
           "id": "gpt-6.1-sol-medium@chatgpt-pro-500",
@@ -52200,7 +52512,7 @@
           "plan": "ChatGPT Pro 500",
           "representative": true,
           "routeId": "chatgpt-pro500-gpt-6.1-sol-medium-common-gpt-assumption",
-          "planLabel": "ChatGPT Pro 500 $500 · common GPT assumption",
+          "planLabel": "ChatGPT Pro 500 $500 · same-model assumption (O88)",
           "grade": "assumption",
           "multiple": 10.772,
           "fallback": null,
@@ -52224,7 +52536,7 @@
           "plan": "ChatGPT Plus",
           "representative": false,
           "routeId": "chatgpt-plus-gpt-6-astra-high-common-gpt-assumption",
-          "planLabel": "ChatGPT Plus $20 · common GPT assumption",
+          "planLabel": "ChatGPT Plus $20 · same-model assumption (O88)",
           "grade": "assumption",
           "multiple": 8.1,
           "fallback": null,
@@ -52248,9 +52560,9 @@
           "plan": "ChatGPT Pro 100",
           "representative": false,
           "routeId": "chatgpt-pro100-gpt-6-astra-high-common-gpt-assumption",
-          "planLabel": "ChatGPT Pro 100 $100 · common GPT assumption",
+          "planLabel": "ChatGPT Pro 100 $100 · same-model assumption (O88)",
           "grade": "assumption",
-          "multiple": 10.55,
+          "multiple": 13.22,
           "fallback": null,
           "flags": [
             "workload-unmatched",
@@ -52260,21 +52572,21 @@
           ],
           "selectionReason": "only remaining eligible route",
           "quality": 58.607479521080364,
-          "costUsd": 225.79098865765948,
-          "costScore": 32.16894000700437,
-          "value": 51.99784464256137,
-          "rank": 19
+          "costUsd": 180.1887239287676,
+          "costScore": 34.57434757356221,
+          "value": 52.59919653420083,
+          "rank": 20
         },
         {
           "id": "gpt-6-astra-high@chatgpt-pro-200",
           "configurationId": "gpt-6-astra-high",
           "name": "GPT-6 Astra (high)",
           "plan": "ChatGPT Pro 200",
-          "representative": false,
+          "representative": true,
           "routeId": "chatgpt-pro200-gpt-6-astra-high-common-gpt-assumption",
-          "planLabel": "ChatGPT Pro 200 $200 · common GPT assumption",
+          "planLabel": "ChatGPT Pro 200 $200 · same-model assumption (O88)",
           "grade": "assumption",
-          "multiple": 10.42,
+          "multiple": 14.485,
           "fallback": null,
           "flags": [
             "workload-unmatched",
@@ -52284,21 +52596,21 @@
           ],
           "selectionReason": "only remaining eligible route",
           "quality": 58.607479521080364,
-          "costUsd": 228.60795876567252,
-          "costScore": 32.0367433470584,
-          "value": 51.964795477574874,
-          "rank": 20
+          "costUsd": 164.45253229812272,
+          "costScore": 35.54867392144667,
+          "value": 52.84277812117194,
+          "rank": 18
         },
         {
           "id": "gpt-6-astra-high@chatgpt-pro-500",
           "configurationId": "gpt-6-astra-high",
           "name": "GPT-6 Astra (high)",
           "plan": "ChatGPT Pro 500",
-          "representative": true,
+          "representative": false,
           "routeId": "chatgpt-pro500-gpt-6-astra-high-common-gpt-assumption",
-          "planLabel": "ChatGPT Pro 500 $500 · common GPT assumption",
+          "planLabel": "ChatGPT Pro 500 $500 · same-model assumption (O88)",
           "grade": "assumption",
-          "multiple": 10.772,
+          "multiple": 13.91,
           "fallback": null,
           "flags": [
             "workload-unmatched",
@@ -52308,10 +52620,10 @@
           ],
           "selectionReason": "only remaining eligible route",
           "quality": 58.607479521080364,
-          "costUsd": 221.13766527462937,
-          "costScore": 32.39096953027036,
-          "value": 52.05335202337786,
-          "rank": 18
+          "costUsd": 171.25053417241608,
+          "costScore": 35.11680162888613,
+          "value": 52.734810048031804,
+          "rank": 19
         },
         {
           "id": "gpt-6-luna@chatgpt-plus",
@@ -52431,7 +52743,7 @@
           "costUsd": 1.2084021482946685,
           "costScore": 87.93468359187283,
           "value": 53.58024734225798,
-          "rank": 15
+          "rank": 16
         },
         {
           "id": "claude-haiku-5-5-high@claude-max-5x",
@@ -52455,7 +52767,7 @@
           "costUsd": 1.237530444620374,
           "costScore": 87.68072604176189,
           "value": 53.516757954730245,
-          "rank": 16
+          "rank": 17
         },
         {
           "id": "claude-haiku-5-5-high@claude-pro",
@@ -52479,7 +52791,7 @@
           "costUsd": 1.2028627836080885,
           "costScore": 87.9836711496838,
           "value": 53.592494231710724,
-          "rank": 14
+          "rank": 15
         },
         {
           "id": "gpt-6-luna-xhigh@chatgpt-plus",
@@ -53913,9 +54225,9 @@
             "value": 44.700352384767086
           },
           "plan": {
-            "costUsd": 269.16305377476226,
-            "costScore": 30.295539853033418,
-            "value": 50.24935802947124
+            "costUsd": 200.16737419825608,
+            "costScore": 33.453244244209735,
+            "value": 51.038784127265316
           }
         },
         {
@@ -54559,10 +54871,10 @@
             "costTolerance": 2.964496933600684
           },
           "plan": {
-            "adjacentPairs": 20,
+            "adjacentPairs": 19,
             "separableAdjacentPairs": 1,
-            "medianSeparation": 4.424688225374206,
-            "sameConfigurationAdjacentPairs": 30,
+            "medianSeparation": 4.413451295576464,
+            "sameConfigurationAdjacentPairs": 31,
             "byCorrelation": {
               "0.0": 1,
               "0.3": 1,
@@ -54570,11 +54882,11 @@
             },
             "gdpvalWide": {
               "separableAdjacentPairs": 1,
-              "medianSeparation": 4.431344618949643
+              "medianSeparation": 4.420477179310007
             },
             "aicdNarrow": {
               "separableAdjacentPairs": 1,
-              "medianSeparation": 3.24517420074228
+              "medianSeparation": 3.2093747993730304
             },
             "bands": {
               "claude-opus-5-5-high@claude-pro": [
@@ -54609,11 +54921,11 @@
                 1,
                 11
               ],
-              "gpt-6.1-sol-high@chatgpt-pro-200": [
+              "gpt-6.1-sol-high@chatgpt-plus": [
                 1,
                 11
               ],
-              "gpt-6.1-sol-high@chatgpt-plus": [
+              "gpt-6.1-sol-high@chatgpt-pro-200": [
                 1,
                 11
               ],
@@ -54622,6 +54934,10 @@
                 11
               ],
               "gpt-6.1-sol-medium@chatgpt-pro-100": [
+                12,
+                24
+              ],
+              "gpt-6.1-sol-medium@chatgpt-plus": [
                 12,
                 24
               ],
@@ -54641,7 +54957,7 @@
                 12,
                 24
               ],
-              "gpt-6.1-sol-medium@chatgpt-plus": [
+              "gpt-6-astra-high@chatgpt-pro-200": [
                 12,
                 24
               ],
@@ -54650,10 +54966,6 @@
                 24
               ],
               "gpt-6-astra-high@chatgpt-pro-100": [
-                12,
-                24
-              ],
-              "gpt-6-astra-high@chatgpt-pro-200": [
                 12,
                 24
               ],
@@ -54782,7 +55094,7 @@
                 51
               ]
             },
-            "costTolerance": 5.25920182151222
+            "costTolerance": 5.237077376105175
           }
         },
         "costedBarLadder": {
@@ -54949,25 +55261,25 @@
                 ],
                 "excluded": [],
                 "changes": {
-                  "claude-haiku-5-5-high": 0,
+                  "claude-haiku-5-5-high": 1,
                   "claude-haiku-5-5-medium": 0,
                   "claude-opus-5-5-high": 0,
                   "claude-opus-5-5-medium": 0,
                   "deepseek-v4-1-flash-1017": 0,
                   "gemini-4-argon": 0,
                   "gpt-5.6-luna-low": 0,
-                  "gpt-6-astra-high": 0,
+                  "gpt-6-astra-high": -2,
                   "gpt-6-luna": 0,
                   "gpt-6-luna-high": 0,
                   "gpt-6-luna-medium": 0,
                   "gpt-6-luna-xhigh": 0,
                   "gpt-6.1-sol-high": 0,
-                  "gpt-6.1-sol-medium": 0,
+                  "gpt-6.1-sol-medium": 1,
                   "kimi-k3-1-pro": 0,
                   "mimo-v2-6-pro": 0
                 },
-                "maxAbsChange": 0,
-                "maxRow": "mimo-v2-6-pro"
+                "maxAbsChange": 2,
+                "maxRow": "gpt-6-astra-high"
               }
             }
           }
@@ -55353,10 +55665,10 @@
               "mimo-v2-6-pro"
             ],
             "excluded": [],
-            "tau": 0.75,
+            "tau": 0.7666666666666667,
             "interval": [
-              0.5315315315315315,
-              0.908256880733945
+              0.5398230088495575,
+              0.9272727272727272
             ],
             "status": "defined"
           }
@@ -55801,13 +56113,13 @@
                   "excluded": [],
                   "changes": {
                     "claude-haiku-5-5-high": 0,
-                    "claude-haiku-5-5-medium": -1,
+                    "claude-haiku-5-5-medium": 0,
                     "claude-opus-5-5-high": 0,
                     "claude-opus-5-5-medium": 0,
                     "deepseek-v4-1-flash-1017": 2,
                     "gemini-4-argon": 0,
                     "gpt-5.6-luna-low": 0,
-                    "gpt-6-astra-high": 1,
+                    "gpt-6-astra-high": 0,
                     "gpt-6-luna": 0,
                     "gpt-6-luna-high": -2,
                     "gpt-6-luna-medium": 0,
@@ -55820,7 +56132,7 @@
                   "maxAbsChange": 2,
                   "maxRow": "gpt-6-luna-high"
                 },
-                "kendallTauB": 0.9166666666666666
+                "kendallTauB": 0.9333333333333333
               }
             }
           },
@@ -56005,14 +56317,14 @@
                   ],
                   "excluded": [],
                   "changes": {
-                    "claude-haiku-5-5-high": 0,
+                    "claude-haiku-5-5-high": 1,
                     "claude-haiku-5-5-medium": 0,
                     "claude-opus-5-5-high": 1,
                     "claude-opus-5-5-medium": -1,
                     "deepseek-v4-1-flash-1017": 1,
                     "gemini-4-argon": -3,
                     "gpt-5.6-luna-low": 0,
-                    "gpt-6-astra-high": 0,
+                    "gpt-6-astra-high": -1,
                     "gpt-6-luna": 0,
                     "gpt-6-luna-high": 0,
                     "gpt-6-luna-medium": 0,
@@ -56025,7 +56337,7 @@
                   "maxAbsChange": 3,
                   "maxRow": "gemini-4-argon"
                 },
-                "kendallTauB": 0.9333333333333333
+                "kendallTauB": 0.9166666666666666
               }
             }
           },
@@ -57120,13 +57432,13 @@
                   "excluded": [],
                   "changes": {
                     "claude-haiku-5-5-high": -1,
-                    "claude-haiku-5-5-medium": -1,
+                    "claude-haiku-5-5-medium": 0,
                     "claude-opus-5-5-high": 0,
                     "claude-opus-5-5-medium": 0,
                     "deepseek-v4-1-flash-1017": 0,
                     "gemini-4-argon": 0,
                     "gpt-5.6-luna-low": 0,
-                    "gpt-6-astra-high": 1,
+                    "gpt-6-astra-high": 0,
                     "gpt-6-luna": 0,
                     "gpt-6-luna-high": 0,
                     "gpt-6-luna-medium": 0,
@@ -57191,13 +57503,13 @@
                   "excluded": [],
                   "changes": {
                     "claude-haiku-5-5-high": 0,
-                    "claude-haiku-5-5-medium": -1,
+                    "claude-haiku-5-5-medium": 0,
                     "claude-opus-5-5-high": 0,
                     "claude-opus-5-5-medium": 0,
                     "deepseek-v4-1-flash-1017": 1,
                     "gemini-4-argon": -1,
                     "gpt-5.6-luna-low": 0,
-                    "gpt-6-astra-high": 1,
+                    "gpt-6-astra-high": 0,
                     "gpt-6-luna": 0,
                     "gpt-6-luna-high": 0,
                     "gpt-6-luna-medium": 0,
@@ -57208,7 +57520,7 @@
                     "mimo-v2-6-pro": 0
                   },
                   "maxAbsChange": 1,
-                  "maxRow": "gpt-6-astra-high"
+                  "maxRow": "gemini-4-argon"
                 }
               }
             }
@@ -57376,13 +57688,13 @@
                     "excluded": [],
                     "changes": {
                       "claude-haiku-5-5-high": 0,
-                      "claude-haiku-5-5-medium": -1,
+                      "claude-haiku-5-5-medium": 0,
                       "claude-opus-5-5-high": 0,
                       "claude-opus-5-5-medium": 0,
                       "deepseek-v4-1-flash-1017": 1,
                       "gemini-4-argon": -1,
                       "gpt-5.6-luna-low": 0,
-                      "gpt-6-astra-high": 1,
+                      "gpt-6-astra-high": 0,
                       "gpt-6-luna": 0,
                       "gpt-6-luna-high": 0,
                       "gpt-6-luna-medium": 0,
@@ -57447,13 +57759,13 @@
                     "excluded": [],
                     "changes": {
                       "claude-haiku-5-5-high": -1,
-                      "claude-haiku-5-5-medium": -1,
+                      "claude-haiku-5-5-medium": 0,
                       "claude-opus-5-5-high": 0,
                       "claude-opus-5-5-medium": 0,
                       "deepseek-v4-1-flash-1017": 1,
                       "gemini-4-argon": -1,
                       "gpt-5.6-luna-low": 0,
-                      "gpt-6-astra-high": 1,
+                      "gpt-6-astra-high": 0,
                       "gpt-6-luna": 0,
                       "gpt-6-luna-high": 0,
                       "gpt-6-luna-medium": 0,
@@ -58396,13 +58708,13 @@
                     "excluded": [],
                     "changes": {
                       "claude-haiku-5-5-high": -1,
-                      "claude-haiku-5-5-medium": -1,
+                      "claude-haiku-5-5-medium": 0,
                       "claude-opus-5-5-high": 0,
                       "claude-opus-5-5-medium": 0,
                       "deepseek-v4-1-flash-1017": 0,
                       "gemini-4-argon": 0,
                       "gpt-5.6-luna-low": 0,
-                      "gpt-6-astra-high": 1,
+                      "gpt-6-astra-high": 0,
                       "gpt-6-luna": 0,
                       "gpt-6-luna-high": 0,
                       "gpt-6-luna-medium": 0,
@@ -58467,13 +58779,13 @@
                     "excluded": [],
                     "changes": {
                       "claude-haiku-5-5-high": 0,
-                      "claude-haiku-5-5-medium": -1,
+                      "claude-haiku-5-5-medium": 0,
                       "claude-opus-5-5-high": 0,
                       "claude-opus-5-5-medium": 0,
                       "deepseek-v4-1-flash-1017": 1,
                       "gemini-4-argon": -1,
                       "gpt-5.6-luna-low": 0,
-                      "gpt-6-astra-high": 1,
+                      "gpt-6-astra-high": 0,
                       "gpt-6-luna": 0,
                       "gpt-6-luna-high": 0,
                       "gpt-6-luna-medium": 0,
@@ -58484,7 +58796,7 @@
                       "mimo-v2-6-pro": 0
                     },
                     "maxAbsChange": 1,
-                    "maxRow": "gpt-6-astra-high"
+                    "maxRow": "gemini-4-argon"
                   }
                 }
               }
@@ -61043,7 +61355,7 @@
           {
             "key": "planRoutes",
             "artifact": "data/plan_cost_routes.json",
-            "sha256": "398a6dfbf78c5615f1f7e6fbdcaf0206c57f7f7379f9a3056504a28da9af4787",
+            "sha256": "9c9e4228de6253bc843ff50b627119cc2654e0b82e573c22090c381249e5345d",
             "capturedAt": "2026-10-25",
             "extractor": "editorial Plan evidence registry"
           },
@@ -61111,7 +61423,7 @@
             "extractor": "valuerank.value_v3 freeze"
           }
         ],
-        "bundleHash": "5129093b646dd1eb828f5a09f4c46d962827275f052952a32b42aa31bd6a38ba",
+        "bundleHash": "5b63aa4d5dd7c291b90ad0f5a11ff8ea9238d31f06e2bbe8d141dd4881cfd951",
         "rebuild": "every published output is rebuilt from these artifacts at the pinned publication clock (npm run verify:docs), never from live pages"
       },
       "track": {
@@ -61201,7 +61513,7 @@
       "scenarios": {
         "status": "current",
         "schemaVersion": 1,
-        "inputHash": "8f34d926508aa74334c449acbdaae2870c7460d54494f1c7f202b2b381f1baf0",
+        "inputHash": "394e759b389a22f485d92be6bda2c8e555a1ec0d08a4f144e680dbcf9c786b63",
         "seed": 20261025,
         "scenarios": 10000,
         "streamDescriptions": {

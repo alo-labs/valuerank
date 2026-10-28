@@ -96,7 +96,7 @@
     },
     "gptApplication": "User authorizes the same ChatGPT plan multiples for every GPT model. Owner decision O45 (2026-10-23): GPT-6.1 Sol and GPT-6 Astra keep their own SemiAnalysis figures on every ChatGPT plan, bound to each model's unsuffixed (max) row because SemiAnalysis names the models without an effort; every other GPT row (other GPT models and GPT-6.1 Sol at xhigh, high, medium and low, ranked as their own rows under O33) takes, per plan, the lower of the two reported model-conditional figures as a labelled user assumption naming its donor route. Routes are one row per model and plan.",
     "routeGranularity": "Owner decision O45 (2026-10-23): every route row names exactly one model and one plan.",
-    "o72Application": "Owner decisions O72-O87 (2026-10-26 to 2026-10-28): after the O71 search found no model × tier with two concordant user reports, the owner-authorised routes stay (the SemiAnalysis selection with its O40/O45 assumptions, the O46 MiMo quota ceilings) and providers without one (Google, Kimi, MiniMax) stay on API fallback. Two concordant user reports replace only an assumption-based or fallback route; an exact controlled measurement keeps precedence (O73) unless a detected change flags it and a concordant pair for the same plan is dated after that change (O78). Admission stays the strict all-reports concordance test (O74); every release runs all three O71 stages over every cell (O75); speed-mode reports convert at the provider's multiplier, flagged (O76); a provider's announcement of a metering change triggers E18 (O77); a change to a shared meter flags every plan on it (O79); a 5-hour figure stays in its own unit and never converts (O80, O82); a provider-documented change splits the partition too (O83); a change detected on any Kimi plan splits every Kimi plan (O84); every report cell is tested, and one on a plan the Plan ranking does not list is evidence only (O85).",
+    "o72Application": "Owner decisions O72-O88 (2026-10-26 to 2026-10-28): after the O71 search found no model × tier with two concordant user reports, the owner-authorised routes stay (the SemiAnalysis selection with its O40/O45 assumptions, the O46 MiMo quota ceilings) and providers without one (Google, Kimi, MiniMax) stay on API fallback. Two concordant user reports replace only an assumption-based or fallback route; an exact controlled measurement keeps precedence (O73) unless a detected change flags it and a concordant pair for the same plan is dated after that change (O78). Admission stays the strict all-reports concordance test (O74); every release runs all three O71 stages over every cell (O75); speed-mode reports convert at the provider's multiplier, flagged (O76); a provider's announcement of a metering change triggers E18 (O77); a change to a shared meter flags every plan on it (O79); a 5-hour figure stays in its own unit and never converts (O80, O82); a provider-documented change splits the partition too (O83); a change detected on any Kimi plan splits every Kimi plan (O84); every report cell is tested, and one on a plan the Plan ranking does not list is evidence only (O85).",
     "reportEligibilityProfile": {
       "version": "O71 v1 (E270), 2026-10-26",
       "rules": [
@@ -304,70 +304,70 @@
     {
       "id": "chatgpt-plus-gpt-6.1-sol-xhigh-common-gpt-assumption",
       "provider": "OpenAI",
-      "planLabel": "ChatGPT Plus $20 · common GPT assumption",
+      "planLabel": "ChatGPT Plus $20 · same-model assumption (O88)",
       "planFeeUsd": 20,
-      "valueMultiple": 8.1,
-      "apiEquivalentUsd": 162,
+      "valueMultiple": 10.55,
+      "apiEquivalentUsd": 211,
       "grade": "assumption",
       "evidenceLabel": "Provisional assumption",
-      "sourceModel": "GPT-6 Astra",
+      "sourceModel": "GPT-6.1 Sol",
       "sourceUrl": "https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x",
       "sourceDate": "2026-10-06",
       "modelSlugs": [
         "gpt-6-1-sol-xhigh"
       ],
-      "notes": "Common GPT assumption for gpt-6.1-sol-xhigh: the lower of the two SemiAnalysis model-conditional figures on ChatGPT Plus (GPT-6 Astra's 8.1x; the other donor measured 10.55x). The owner authorises the shared ChatGPT multiples for every GPT model; the lower-of selection applies only to GPT rows without their own figure (owner decision O45, 2026-10-23). It does not measure gpt-6.1-sol-xhigh. Original figures and workload are retained in sourceEvidence.semianalysis."
+      "notes": "Same-model assumption for gpt-6.1-sol-xhigh (owner decision O88, 2026-10-28): a plan's allowance is effort-invariant (O87), so GPT-6.1 Sol's own SemiAnalysis figure on ChatGPT Plus (10.55x, measured at the effort SemiAnalysis ran) serves every effort of GPT-6.1 Sol, replacing the O45 lower-of assumption for this row. It does not measure gpt-6.1-sol-xhigh. Original figures and workload are retained in sourceEvidence.semianalysis."
     },
     {
       "id": "chatgpt-plus-gpt-6.1-sol-high-common-gpt-assumption",
       "provider": "OpenAI",
-      "planLabel": "ChatGPT Plus $20 · common GPT assumption",
+      "planLabel": "ChatGPT Plus $20 · same-model assumption (O88)",
       "planFeeUsd": 20,
-      "valueMultiple": 8.1,
-      "apiEquivalentUsd": 162,
+      "valueMultiple": 10.55,
+      "apiEquivalentUsd": 211,
       "grade": "assumption",
       "evidenceLabel": "Provisional assumption",
-      "sourceModel": "GPT-6 Astra",
+      "sourceModel": "GPT-6.1 Sol",
       "sourceUrl": "https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x",
       "sourceDate": "2026-10-06",
       "modelSlugs": [
         "gpt-6-1-sol-high"
       ],
-      "notes": "Common GPT assumption for gpt-6.1-sol-high: the lower of the two SemiAnalysis model-conditional figures on ChatGPT Plus (GPT-6 Astra's 8.1x; the other donor measured 10.55x). The owner authorises the shared ChatGPT multiples for every GPT model; the lower-of selection applies only to GPT rows without their own figure (owner decision O45, 2026-10-23). It does not measure gpt-6.1-sol-high. Original figures and workload are retained in sourceEvidence.semianalysis."
+      "notes": "Same-model assumption for gpt-6.1-sol-high (owner decision O88, 2026-10-28): a plan's allowance is effort-invariant (O87), so GPT-6.1 Sol's own SemiAnalysis figure on ChatGPT Plus (10.55x, measured at the effort SemiAnalysis ran) serves every effort of GPT-6.1 Sol, replacing the O45 lower-of assumption for this row. It does not measure gpt-6.1-sol-high. Original figures and workload are retained in sourceEvidence.semianalysis."
     },
     {
       "id": "chatgpt-plus-gpt-6.1-sol-medium-common-gpt-assumption",
       "provider": "OpenAI",
-      "planLabel": "ChatGPT Plus $20 · common GPT assumption",
+      "planLabel": "ChatGPT Plus $20 · same-model assumption (O88)",
       "planFeeUsd": 20,
-      "valueMultiple": 8.1,
-      "apiEquivalentUsd": 162,
+      "valueMultiple": 10.55,
+      "apiEquivalentUsd": 211,
       "grade": "assumption",
       "evidenceLabel": "Provisional assumption",
-      "sourceModel": "GPT-6 Astra",
+      "sourceModel": "GPT-6.1 Sol",
       "sourceUrl": "https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x",
       "sourceDate": "2026-10-06",
       "modelSlugs": [
         "gpt-6-1-sol-medium"
       ],
-      "notes": "Common GPT assumption for gpt-6.1-sol-medium: the lower of the two SemiAnalysis model-conditional figures on ChatGPT Plus (GPT-6 Astra's 8.1x; the other donor measured 10.55x). The owner authorises the shared ChatGPT multiples for every GPT model; the lower-of selection applies only to GPT rows without their own figure (owner decision O45, 2026-10-23). It does not measure gpt-6.1-sol-medium. Original figures and workload are retained in sourceEvidence.semianalysis."
+      "notes": "Same-model assumption for gpt-6.1-sol-medium (owner decision O88, 2026-10-28): a plan's allowance is effort-invariant (O87), so GPT-6.1 Sol's own SemiAnalysis figure on ChatGPT Plus (10.55x, measured at the effort SemiAnalysis ran) serves every effort of GPT-6.1 Sol, replacing the O45 lower-of assumption for this row. It does not measure gpt-6.1-sol-medium. Original figures and workload are retained in sourceEvidence.semianalysis."
     },
     {
       "id": "chatgpt-plus-gpt-6.1-sol-low-common-gpt-assumption",
       "provider": "OpenAI",
-      "planLabel": "ChatGPT Plus $20 · common GPT assumption",
+      "planLabel": "ChatGPT Plus $20 · same-model assumption (O88)",
       "planFeeUsd": 20,
-      "valueMultiple": 8.1,
-      "apiEquivalentUsd": 162,
+      "valueMultiple": 10.55,
+      "apiEquivalentUsd": 211,
       "grade": "assumption",
       "evidenceLabel": "Provisional assumption",
-      "sourceModel": "GPT-6 Astra",
+      "sourceModel": "GPT-6.1 Sol",
       "sourceUrl": "https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x",
       "sourceDate": "2026-10-06",
       "modelSlugs": [
         "gpt-6-1-sol-low"
       ],
-      "notes": "Common GPT assumption for gpt-6.1-sol-low: the lower of the two SemiAnalysis model-conditional figures on ChatGPT Plus (GPT-6 Astra's 8.1x; the other donor measured 10.55x). The owner authorises the shared ChatGPT multiples for every GPT model; the lower-of selection applies only to GPT rows without their own figure (owner decision O45, 2026-10-23). It does not measure gpt-6.1-sol-low. Original figures and workload are retained in sourceEvidence.semianalysis."
+      "notes": "Same-model assumption for gpt-6.1-sol-low (owner decision O88, 2026-10-28): a plan's allowance is effort-invariant (O87), so GPT-6.1 Sol's own SemiAnalysis figure on ChatGPT Plus (10.55x, measured at the effort SemiAnalysis ran) serves every effort of GPT-6.1 Sol, replacing the O45 lower-of assumption for this row. It does not measure gpt-6.1-sol-low. Original figures and workload are retained in sourceEvidence.semianalysis."
     },
     {
       "id": "chatgpt-pro100-gpt61sol-semianalysis",
@@ -491,7 +491,7 @@
     {
       "id": "chatgpt-pro100-gpt-6.1-sol-xhigh-common-gpt-assumption",
       "provider": "OpenAI",
-      "planLabel": "ChatGPT Pro 100 $100 · common GPT assumption",
+      "planLabel": "ChatGPT Pro 100 $100 · same-model assumption (O88)",
       "planFeeUsd": 100,
       "valueMultiple": 10.55,
       "apiEquivalentUsd": 1055,
@@ -503,12 +503,12 @@
       "modelSlugs": [
         "gpt-6-1-sol-xhigh"
       ],
-      "notes": "Common GPT assumption for gpt-6.1-sol-xhigh: the lower of the two SemiAnalysis model-conditional figures on ChatGPT Pro 100 (GPT-6.1 Sol's 10.55x; the other donor measured 13.22x). The owner authorises the shared ChatGPT multiples for every GPT model; the lower-of selection applies only to GPT rows without their own figure (owner decision O45, 2026-10-23). It does not measure gpt-6.1-sol-xhigh. Original figures and workload are retained in sourceEvidence.semianalysis."
+      "notes": "Same-model assumption for gpt-6.1-sol-xhigh (owner decision O88, 2026-10-28): a plan's allowance is effort-invariant (O87), so GPT-6.1 Sol's own SemiAnalysis figure on ChatGPT Pro 100 (10.55x, measured at the effort SemiAnalysis ran) serves every effort of GPT-6.1 Sol, replacing the O45 lower-of assumption for this row. It does not measure gpt-6.1-sol-xhigh. Original figures and workload are retained in sourceEvidence.semianalysis."
     },
     {
       "id": "chatgpt-pro100-gpt-6.1-sol-high-common-gpt-assumption",
       "provider": "OpenAI",
-      "planLabel": "ChatGPT Pro 100 $100 · common GPT assumption",
+      "planLabel": "ChatGPT Pro 100 $100 · same-model assumption (O88)",
       "planFeeUsd": 100,
       "valueMultiple": 10.55,
       "apiEquivalentUsd": 1055,
@@ -520,12 +520,12 @@
       "modelSlugs": [
         "gpt-6-1-sol-high"
       ],
-      "notes": "Common GPT assumption for gpt-6.1-sol-high: the lower of the two SemiAnalysis model-conditional figures on ChatGPT Pro 100 (GPT-6.1 Sol's 10.55x; the other donor measured 13.22x). The owner authorises the shared ChatGPT multiples for every GPT model; the lower-of selection applies only to GPT rows without their own figure (owner decision O45, 2026-10-23). It does not measure gpt-6.1-sol-high. Original figures and workload are retained in sourceEvidence.semianalysis."
+      "notes": "Same-model assumption for gpt-6.1-sol-high (owner decision O88, 2026-10-28): a plan's allowance is effort-invariant (O87), so GPT-6.1 Sol's own SemiAnalysis figure on ChatGPT Pro 100 (10.55x, measured at the effort SemiAnalysis ran) serves every effort of GPT-6.1 Sol, replacing the O45 lower-of assumption for this row. It does not measure gpt-6.1-sol-high. Original figures and workload are retained in sourceEvidence.semianalysis."
     },
     {
       "id": "chatgpt-pro100-gpt-6.1-sol-medium-common-gpt-assumption",
       "provider": "OpenAI",
-      "planLabel": "ChatGPT Pro 100 $100 · common GPT assumption",
+      "planLabel": "ChatGPT Pro 100 $100 · same-model assumption (O88)",
       "planFeeUsd": 100,
       "valueMultiple": 10.55,
       "apiEquivalentUsd": 1055,
@@ -537,12 +537,12 @@
       "modelSlugs": [
         "gpt-6-1-sol-medium"
       ],
-      "notes": "Common GPT assumption for gpt-6.1-sol-medium: the lower of the two SemiAnalysis model-conditional figures on ChatGPT Pro 100 (GPT-6.1 Sol's 10.55x; the other donor measured 13.22x). The owner authorises the shared ChatGPT multiples for every GPT model; the lower-of selection applies only to GPT rows without their own figure (owner decision O45, 2026-10-23). It does not measure gpt-6.1-sol-medium. Original figures and workload are retained in sourceEvidence.semianalysis."
+      "notes": "Same-model assumption for gpt-6.1-sol-medium (owner decision O88, 2026-10-28): a plan's allowance is effort-invariant (O87), so GPT-6.1 Sol's own SemiAnalysis figure on ChatGPT Pro 100 (10.55x, measured at the effort SemiAnalysis ran) serves every effort of GPT-6.1 Sol, replacing the O45 lower-of assumption for this row. It does not measure gpt-6.1-sol-medium. Original figures and workload are retained in sourceEvidence.semianalysis."
     },
     {
       "id": "chatgpt-pro100-gpt-6.1-sol-low-common-gpt-assumption",
       "provider": "OpenAI",
-      "planLabel": "ChatGPT Pro 100 $100 · common GPT assumption",
+      "planLabel": "ChatGPT Pro 100 $100 · same-model assumption (O88)",
       "planFeeUsd": 100,
       "valueMultiple": 10.55,
       "apiEquivalentUsd": 1055,
@@ -554,7 +554,7 @@
       "modelSlugs": [
         "gpt-6-1-sol-low"
       ],
-      "notes": "Common GPT assumption for gpt-6.1-sol-low: the lower of the two SemiAnalysis model-conditional figures on ChatGPT Pro 100 (GPT-6.1 Sol's 10.55x; the other donor measured 13.22x). The owner authorises the shared ChatGPT multiples for every GPT model; the lower-of selection applies only to GPT rows without their own figure (owner decision O45, 2026-10-23). It does not measure gpt-6.1-sol-low. Original figures and workload are retained in sourceEvidence.semianalysis."
+      "notes": "Same-model assumption for gpt-6.1-sol-low (owner decision O88, 2026-10-28): a plan's allowance is effort-invariant (O87), so GPT-6.1 Sol's own SemiAnalysis figure on ChatGPT Pro 100 (10.55x, measured at the effort SemiAnalysis ran) serves every effort of GPT-6.1 Sol, replacing the O45 lower-of assumption for this row. It does not measure gpt-6.1-sol-low. Original figures and workload are retained in sourceEvidence.semianalysis."
     },
     {
       "id": "chatgpt-pro200-gpt61sol-semianalysis",
@@ -678,7 +678,7 @@
     {
       "id": "chatgpt-pro200-gpt-6.1-sol-xhigh-common-gpt-assumption",
       "provider": "OpenAI",
-      "planLabel": "ChatGPT Pro 200 $200 · common GPT assumption",
+      "planLabel": "ChatGPT Pro 200 $200 · same-model assumption (O88)",
       "planFeeUsd": 200,
       "valueMultiple": 10.42,
       "apiEquivalentUsd": 2084,
@@ -690,12 +690,12 @@
       "modelSlugs": [
         "gpt-6-1-sol-xhigh"
       ],
-      "notes": "Common GPT assumption for gpt-6.1-sol-xhigh: the lower of the two SemiAnalysis model-conditional figures on ChatGPT Pro 200 (GPT-6.1 Sol's 10.42x; the other donor measured 14.485x). The owner authorises the shared ChatGPT multiples for every GPT model; the lower-of selection applies only to GPT rows without their own figure (owner decision O45, 2026-10-23). It does not measure gpt-6.1-sol-xhigh. Original figures and workload are retained in sourceEvidence.semianalysis."
+      "notes": "Same-model assumption for gpt-6.1-sol-xhigh (owner decision O88, 2026-10-28): a plan's allowance is effort-invariant (O87), so GPT-6.1 Sol's own SemiAnalysis figure on ChatGPT Pro 200 (10.42x, measured at the effort SemiAnalysis ran) serves every effort of GPT-6.1 Sol, replacing the O45 lower-of assumption for this row. It does not measure gpt-6.1-sol-xhigh. Original figures and workload are retained in sourceEvidence.semianalysis."
     },
     {
       "id": "chatgpt-pro200-gpt-6.1-sol-high-common-gpt-assumption",
       "provider": "OpenAI",
-      "planLabel": "ChatGPT Pro 200 $200 · common GPT assumption",
+      "planLabel": "ChatGPT Pro 200 $200 · same-model assumption (O88)",
       "planFeeUsd": 200,
       "valueMultiple": 10.42,
       "apiEquivalentUsd": 2084,
@@ -707,12 +707,12 @@
       "modelSlugs": [
         "gpt-6-1-sol-high"
       ],
-      "notes": "Common GPT assumption for gpt-6.1-sol-high: the lower of the two SemiAnalysis model-conditional figures on ChatGPT Pro 200 (GPT-6.1 Sol's 10.42x; the other donor measured 14.485x). The owner authorises the shared ChatGPT multiples for every GPT model; the lower-of selection applies only to GPT rows without their own figure (owner decision O45, 2026-10-23). It does not measure gpt-6.1-sol-high. Original figures and workload are retained in sourceEvidence.semianalysis."
+      "notes": "Same-model assumption for gpt-6.1-sol-high (owner decision O88, 2026-10-28): a plan's allowance is effort-invariant (O87), so GPT-6.1 Sol's own SemiAnalysis figure on ChatGPT Pro 200 (10.42x, measured at the effort SemiAnalysis ran) serves every effort of GPT-6.1 Sol, replacing the O45 lower-of assumption for this row. It does not measure gpt-6.1-sol-high. Original figures and workload are retained in sourceEvidence.semianalysis."
     },
     {
       "id": "chatgpt-pro200-gpt-6.1-sol-medium-common-gpt-assumption",
       "provider": "OpenAI",
-      "planLabel": "ChatGPT Pro 200 $200 · common GPT assumption",
+      "planLabel": "ChatGPT Pro 200 $200 · same-model assumption (O88)",
       "planFeeUsd": 200,
       "valueMultiple": 10.42,
       "apiEquivalentUsd": 2084,
@@ -724,12 +724,12 @@
       "modelSlugs": [
         "gpt-6-1-sol-medium"
       ],
-      "notes": "Common GPT assumption for gpt-6.1-sol-medium: the lower of the two SemiAnalysis model-conditional figures on ChatGPT Pro 200 (GPT-6.1 Sol's 10.42x; the other donor measured 14.485x). The owner authorises the shared ChatGPT multiples for every GPT model; the lower-of selection applies only to GPT rows without their own figure (owner decision O45, 2026-10-23). It does not measure gpt-6.1-sol-medium. Original figures and workload are retained in sourceEvidence.semianalysis."
+      "notes": "Same-model assumption for gpt-6.1-sol-medium (owner decision O88, 2026-10-28): a plan's allowance is effort-invariant (O87), so GPT-6.1 Sol's own SemiAnalysis figure on ChatGPT Pro 200 (10.42x, measured at the effort SemiAnalysis ran) serves every effort of GPT-6.1 Sol, replacing the O45 lower-of assumption for this row. It does not measure gpt-6.1-sol-medium. Original figures and workload are retained in sourceEvidence.semianalysis."
     },
     {
       "id": "chatgpt-pro200-gpt-6.1-sol-low-common-gpt-assumption",
       "provider": "OpenAI",
-      "planLabel": "ChatGPT Pro 200 $200 · common GPT assumption",
+      "planLabel": "ChatGPT Pro 200 $200 · same-model assumption (O88)",
       "planFeeUsd": 200,
       "valueMultiple": 10.42,
       "apiEquivalentUsd": 2084,
@@ -741,7 +741,7 @@
       "modelSlugs": [
         "gpt-6-1-sol-low"
       ],
-      "notes": "Common GPT assumption for gpt-6.1-sol-low: the lower of the two SemiAnalysis model-conditional figures on ChatGPT Pro 200 (GPT-6.1 Sol's 10.42x; the other donor measured 14.485x). The owner authorises the shared ChatGPT multiples for every GPT model; the lower-of selection applies only to GPT rows without their own figure (owner decision O45, 2026-10-23). It does not measure gpt-6.1-sol-low. Original figures and workload are retained in sourceEvidence.semianalysis."
+      "notes": "Same-model assumption for gpt-6.1-sol-low (owner decision O88, 2026-10-28): a plan's allowance is effort-invariant (O87), so GPT-6.1 Sol's own SemiAnalysis figure on ChatGPT Pro 200 (10.42x, measured at the effort SemiAnalysis ran) serves every effort of GPT-6.1 Sol, replacing the O45 lower-of assumption for this row. It does not measure gpt-6.1-sol-low. Original figures and workload are retained in sourceEvidence.semianalysis."
     },
     {
       "id": "chatgpt-pro500-gpt61sol-semianalysis",
@@ -865,7 +865,7 @@
     {
       "id": "chatgpt-pro500-gpt-6.1-sol-xhigh-common-gpt-assumption",
       "provider": "OpenAI",
-      "planLabel": "ChatGPT Pro 500 $500 · common GPT assumption",
+      "planLabel": "ChatGPT Pro 500 $500 · same-model assumption (O88)",
       "planFeeUsd": 500,
       "valueMultiple": 10.772,
       "apiEquivalentUsd": 5386,
@@ -877,12 +877,12 @@
       "modelSlugs": [
         "gpt-6-1-sol-xhigh"
       ],
-      "notes": "Common GPT assumption for gpt-6.1-sol-xhigh: the lower of the two SemiAnalysis model-conditional figures on ChatGPT Pro 500 (GPT-6.1 Sol's 10.772x; the other donor measured 13.91x). The owner authorises the shared ChatGPT multiples for every GPT model; the lower-of selection applies only to GPT rows without their own figure (owner decision O45, 2026-10-23). It does not measure gpt-6.1-sol-xhigh. Original figures and workload are retained in sourceEvidence.semianalysis."
+      "notes": "Same-model assumption for gpt-6.1-sol-xhigh (owner decision O88, 2026-10-28): a plan's allowance is effort-invariant (O87), so GPT-6.1 Sol's own SemiAnalysis figure on ChatGPT Pro 500 (10.772x, measured at the effort SemiAnalysis ran) serves every effort of GPT-6.1 Sol, replacing the O45 lower-of assumption for this row. It does not measure gpt-6.1-sol-xhigh. Original figures and workload are retained in sourceEvidence.semianalysis."
     },
     {
       "id": "chatgpt-pro500-gpt-6.1-sol-high-common-gpt-assumption",
       "provider": "OpenAI",
-      "planLabel": "ChatGPT Pro 500 $500 · common GPT assumption",
+      "planLabel": "ChatGPT Pro 500 $500 · same-model assumption (O88)",
       "planFeeUsd": 500,
       "valueMultiple": 10.772,
       "apiEquivalentUsd": 5386,
@@ -894,12 +894,12 @@
       "modelSlugs": [
         "gpt-6-1-sol-high"
       ],
-      "notes": "Common GPT assumption for gpt-6.1-sol-high: the lower of the two SemiAnalysis model-conditional figures on ChatGPT Pro 500 (GPT-6.1 Sol's 10.772x; the other donor measured 13.91x). The owner authorises the shared ChatGPT multiples for every GPT model; the lower-of selection applies only to GPT rows without their own figure (owner decision O45, 2026-10-23). It does not measure gpt-6.1-sol-high. Original figures and workload are retained in sourceEvidence.semianalysis."
+      "notes": "Same-model assumption for gpt-6.1-sol-high (owner decision O88, 2026-10-28): a plan's allowance is effort-invariant (O87), so GPT-6.1 Sol's own SemiAnalysis figure on ChatGPT Pro 500 (10.772x, measured at the effort SemiAnalysis ran) serves every effort of GPT-6.1 Sol, replacing the O45 lower-of assumption for this row. It does not measure gpt-6.1-sol-high. Original figures and workload are retained in sourceEvidence.semianalysis."
     },
     {
       "id": "chatgpt-pro500-gpt-6.1-sol-medium-common-gpt-assumption",
       "provider": "OpenAI",
-      "planLabel": "ChatGPT Pro 500 $500 · common GPT assumption",
+      "planLabel": "ChatGPT Pro 500 $500 · same-model assumption (O88)",
       "planFeeUsd": 500,
       "valueMultiple": 10.772,
       "apiEquivalentUsd": 5386,
@@ -911,12 +911,12 @@
       "modelSlugs": [
         "gpt-6-1-sol-medium"
       ],
-      "notes": "Common GPT assumption for gpt-6.1-sol-medium: the lower of the two SemiAnalysis model-conditional figures on ChatGPT Pro 500 (GPT-6.1 Sol's 10.772x; the other donor measured 13.91x). The owner authorises the shared ChatGPT multiples for every GPT model; the lower-of selection applies only to GPT rows without their own figure (owner decision O45, 2026-10-23). It does not measure gpt-6.1-sol-medium. Original figures and workload are retained in sourceEvidence.semianalysis."
+      "notes": "Same-model assumption for gpt-6.1-sol-medium (owner decision O88, 2026-10-28): a plan's allowance is effort-invariant (O87), so GPT-6.1 Sol's own SemiAnalysis figure on ChatGPT Pro 500 (10.772x, measured at the effort SemiAnalysis ran) serves every effort of GPT-6.1 Sol, replacing the O45 lower-of assumption for this row. It does not measure gpt-6.1-sol-medium. Original figures and workload are retained in sourceEvidence.semianalysis."
     },
     {
       "id": "chatgpt-pro500-gpt-6.1-sol-low-common-gpt-assumption",
       "provider": "OpenAI",
-      "planLabel": "ChatGPT Pro 500 $500 · common GPT assumption",
+      "planLabel": "ChatGPT Pro 500 $500 · same-model assumption (O88)",
       "planFeeUsd": 500,
       "valueMultiple": 10.772,
       "apiEquivalentUsd": 5386,
@@ -928,7 +928,7 @@
       "modelSlugs": [
         "gpt-6-1-sol-low"
       ],
-      "notes": "Common GPT assumption for gpt-6.1-sol-low: the lower of the two SemiAnalysis model-conditional figures on ChatGPT Pro 500 (GPT-6.1 Sol's 10.772x; the other donor measured 13.91x). The owner authorises the shared ChatGPT multiples for every GPT model; the lower-of selection applies only to GPT rows without their own figure (owner decision O45, 2026-10-23). It does not measure gpt-6.1-sol-low. Original figures and workload are retained in sourceEvidence.semianalysis."
+      "notes": "Same-model assumption for gpt-6.1-sol-low (owner decision O88, 2026-10-28): a plan's allowance is effort-invariant (O87), so GPT-6.1 Sol's own SemiAnalysis figure on ChatGPT Pro 500 (10.772x, measured at the effort SemiAnalysis ran) serves every effort of GPT-6.1 Sol, replacing the O45 lower-of assumption for this row. It does not measure gpt-6.1-sol-low. Original figures and workload are retained in sourceEvidence.semianalysis."
     },
     {
       "id": "claude-pro-opus55-semianalysis",
@@ -2310,7 +2310,7 @@
     {
       "id": "chatgpt-plus-gpt-6-astra-high-common-gpt-assumption",
       "provider": "OpenAI",
-      "planLabel": "ChatGPT Plus $20 · common GPT assumption",
+      "planLabel": "ChatGPT Plus $20 · same-model assumption (O88)",
       "planFeeUsd": 20,
       "valueMultiple": 8.1,
       "apiEquivalentUsd": 162,
@@ -2322,63 +2322,63 @@
       "modelSlugs": [
         "gpt-6-astra-high"
       ],
-      "notes": "Common GPT assumption for gpt-6-astra-high: the lower of the two SemiAnalysis model-conditional figures on ChatGPT Plus (GPT-6 Astra's 8.1x; the other donor measured 10.55x). The owner authorises the shared ChatGPT multiples for every GPT model; the lower-of selection applies only to GPT rows without their own figure (owner decision O45, 2026-10-23). It does not measure gpt-6-astra-high. Original figures and workload are retained in sourceEvidence.semianalysis."
+      "notes": "Same-model assumption for gpt-6-astra-high (owner decision O88, 2026-10-28): a plan's allowance is effort-invariant (O87), so GPT-6 Astra's own SemiAnalysis figure on ChatGPT Plus (8.1x, measured at the effort SemiAnalysis ran) serves every effort of GPT-6 Astra, replacing the O45 lower-of assumption for this row. It does not measure gpt-6-astra-high. Original figures and workload are retained in sourceEvidence.semianalysis."
     },
     {
       "id": "chatgpt-pro100-gpt-6-astra-high-common-gpt-assumption",
       "provider": "OpenAI",
-      "planLabel": "ChatGPT Pro 100 $100 · common GPT assumption",
+      "planLabel": "ChatGPT Pro 100 $100 · same-model assumption (O88)",
       "planFeeUsd": 100,
-      "valueMultiple": 10.55,
-      "apiEquivalentUsd": 1055,
+      "valueMultiple": 13.22,
+      "apiEquivalentUsd": 1322,
       "grade": "assumption",
       "evidenceLabel": "Provisional assumption",
-      "sourceModel": "GPT-6.1 Sol",
+      "sourceModel": "GPT-6 Astra",
       "sourceUrl": "https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x",
       "sourceDate": "2026-10-06",
       "modelSlugs": [
         "gpt-6-astra-high"
       ],
-      "notes": "Common GPT assumption for gpt-6-astra-high: the lower of the two SemiAnalysis model-conditional figures on ChatGPT Pro 100 (GPT-6.1 Sol's 10.55x; the other donor measured 13.22x). The owner authorises the shared ChatGPT multiples for every GPT model; the lower-of selection applies only to GPT rows without their own figure (owner decision O45, 2026-10-23). It does not measure gpt-6-astra-high. Original figures and workload are retained in sourceEvidence.semianalysis."
+      "notes": "Same-model assumption for gpt-6-astra-high (owner decision O88, 2026-10-28): a plan's allowance is effort-invariant (O87), so GPT-6 Astra's own SemiAnalysis figure on ChatGPT Pro 100 (13.22x, measured at the effort SemiAnalysis ran) serves every effort of GPT-6 Astra, replacing the O45 lower-of assumption for this row. It does not measure gpt-6-astra-high. Original figures and workload are retained in sourceEvidence.semianalysis."
     },
     {
       "id": "chatgpt-pro200-gpt-6-astra-high-common-gpt-assumption",
       "provider": "OpenAI",
-      "planLabel": "ChatGPT Pro 200 $200 · common GPT assumption",
+      "planLabel": "ChatGPT Pro 200 $200 · same-model assumption (O88)",
       "planFeeUsd": 200,
-      "valueMultiple": 10.42,
-      "apiEquivalentUsd": 2084,
+      "valueMultiple": 14.485,
+      "apiEquivalentUsd": 2897,
       "grade": "assumption",
       "evidenceLabel": "Provisional assumption",
-      "sourceModel": "GPT-6.1 Sol",
+      "sourceModel": "GPT-6 Astra",
       "sourceUrl": "https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x",
       "sourceDate": "2026-10-06",
       "modelSlugs": [
         "gpt-6-astra-high"
       ],
-      "notes": "Common GPT assumption for gpt-6-astra-high: the lower of the two SemiAnalysis model-conditional figures on ChatGPT Pro 200 (GPT-6.1 Sol's 10.42x; the other donor measured 14.485x). The owner authorises the shared ChatGPT multiples for every GPT model; the lower-of selection applies only to GPT rows without their own figure (owner decision O45, 2026-10-23). It does not measure gpt-6-astra-high. Original figures and workload are retained in sourceEvidence.semianalysis."
+      "notes": "Same-model assumption for gpt-6-astra-high (owner decision O88, 2026-10-28): a plan's allowance is effort-invariant (O87), so GPT-6 Astra's own SemiAnalysis figure on ChatGPT Pro 200 (14.485x, measured at the effort SemiAnalysis ran) serves every effort of GPT-6 Astra, replacing the O45 lower-of assumption for this row. It does not measure gpt-6-astra-high. Original figures and workload are retained in sourceEvidence.semianalysis."
     },
     {
       "id": "chatgpt-pro500-gpt-6-astra-high-common-gpt-assumption",
       "provider": "OpenAI",
-      "planLabel": "ChatGPT Pro 500 $500 · common GPT assumption",
+      "planLabel": "ChatGPT Pro 500 $500 · same-model assumption (O88)",
       "planFeeUsd": 500,
-      "valueMultiple": 10.772,
-      "apiEquivalentUsd": 5386,
+      "valueMultiple": 13.91,
+      "apiEquivalentUsd": 6955,
       "grade": "assumption",
       "evidenceLabel": "Provisional assumption",
-      "sourceModel": "GPT-6.1 Sol",
+      "sourceModel": "GPT-6 Astra",
       "sourceUrl": "https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x",
       "sourceDate": "2026-10-06",
       "modelSlugs": [
         "gpt-6-astra-high"
       ],
-      "notes": "Common GPT assumption for gpt-6-astra-high: the lower of the two SemiAnalysis model-conditional figures on ChatGPT Pro 500 (GPT-6.1 Sol's 10.772x; the other donor measured 13.91x). The owner authorises the shared ChatGPT multiples for every GPT model; the lower-of selection applies only to GPT rows without their own figure (owner decision O45, 2026-10-23). It does not measure gpt-6-astra-high. Original figures and workload are retained in sourceEvidence.semianalysis."
+      "notes": "Same-model assumption for gpt-6-astra-high (owner decision O88, 2026-10-28): a plan's allowance is effort-invariant (O87), so GPT-6 Astra's own SemiAnalysis figure on ChatGPT Pro 500 (13.91x, measured at the effort SemiAnalysis ran) serves every effort of GPT-6 Astra, replacing the O45 lower-of assumption for this row. It does not measure gpt-6-astra-high. Original figures and workload are retained in sourceEvidence.semianalysis."
     },
     {
       "id": "chatgpt-plus-gpt-6-astra-xhigh-common-gpt-assumption",
       "provider": "OpenAI",
-      "planLabel": "ChatGPT Plus $20 · common GPT assumption",
+      "planLabel": "ChatGPT Plus $20 · same-model assumption (O88)",
       "planFeeUsd": 20,
       "valueMultiple": 8.1,
       "apiEquivalentUsd": 162,
@@ -2390,58 +2390,58 @@
       "modelSlugs": [
         "gpt-6-astra-xhigh"
       ],
-      "notes": "Common GPT assumption for gpt-6-astra-xhigh: the lower of the two SemiAnalysis model-conditional figures on ChatGPT Plus (GPT-6 Astra's 8.1x; the other donor measured 10.55x). The owner authorises the shared ChatGPT multiples for every GPT model; the lower-of selection applies only to GPT rows without their own figure (owner decision O45, 2026-10-23). It does not measure gpt-6-astra-xhigh. Original figures and workload are retained in sourceEvidence.semianalysis."
+      "notes": "Same-model assumption for gpt-6-astra-xhigh (owner decision O88, 2026-10-28): a plan's allowance is effort-invariant (O87), so GPT-6 Astra's own SemiAnalysis figure on ChatGPT Plus (8.1x, measured at the effort SemiAnalysis ran) serves every effort of GPT-6 Astra, replacing the O45 lower-of assumption for this row. It does not measure gpt-6-astra-xhigh. Original figures and workload are retained in sourceEvidence.semianalysis."
     },
     {
       "id": "chatgpt-pro100-gpt-6-astra-xhigh-common-gpt-assumption",
       "provider": "OpenAI",
-      "planLabel": "ChatGPT Pro 100 $100 · common GPT assumption",
+      "planLabel": "ChatGPT Pro 100 $100 · same-model assumption (O88)",
       "planFeeUsd": 100,
-      "valueMultiple": 10.55,
-      "apiEquivalentUsd": 1055,
+      "valueMultiple": 13.22,
+      "apiEquivalentUsd": 1322,
       "grade": "assumption",
       "evidenceLabel": "Provisional assumption",
-      "sourceModel": "GPT-6.1 Sol",
+      "sourceModel": "GPT-6 Astra",
       "sourceUrl": "https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x",
       "sourceDate": "2026-10-06",
       "modelSlugs": [
         "gpt-6-astra-xhigh"
       ],
-      "notes": "Common GPT assumption for gpt-6-astra-xhigh: the lower of the two SemiAnalysis model-conditional figures on ChatGPT Pro 100 (GPT-6.1 Sol's 10.55x; the other donor measured 13.22x). The owner authorises the shared ChatGPT multiples for every GPT model; the lower-of selection applies only to GPT rows without their own figure (owner decision O45, 2026-10-23). It does not measure gpt-6-astra-xhigh. Original figures and workload are retained in sourceEvidence.semianalysis."
+      "notes": "Same-model assumption for gpt-6-astra-xhigh (owner decision O88, 2026-10-28): a plan's allowance is effort-invariant (O87), so GPT-6 Astra's own SemiAnalysis figure on ChatGPT Pro 100 (13.22x, measured at the effort SemiAnalysis ran) serves every effort of GPT-6 Astra, replacing the O45 lower-of assumption for this row. It does not measure gpt-6-astra-xhigh. Original figures and workload are retained in sourceEvidence.semianalysis."
     },
     {
       "id": "chatgpt-pro200-gpt-6-astra-xhigh-common-gpt-assumption",
       "provider": "OpenAI",
-      "planLabel": "ChatGPT Pro 200 $200 · common GPT assumption",
+      "planLabel": "ChatGPT Pro 200 $200 · same-model assumption (O88)",
       "planFeeUsd": 200,
-      "valueMultiple": 10.42,
-      "apiEquivalentUsd": 2084,
+      "valueMultiple": 14.485,
+      "apiEquivalentUsd": 2897,
       "grade": "assumption",
       "evidenceLabel": "Provisional assumption",
-      "sourceModel": "GPT-6.1 Sol",
+      "sourceModel": "GPT-6 Astra",
       "sourceUrl": "https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x",
       "sourceDate": "2026-10-06",
       "modelSlugs": [
         "gpt-6-astra-xhigh"
       ],
-      "notes": "Common GPT assumption for gpt-6-astra-xhigh: the lower of the two SemiAnalysis model-conditional figures on ChatGPT Pro 200 (GPT-6.1 Sol's 10.42x; the other donor measured 14.485x). The owner authorises the shared ChatGPT multiples for every GPT model; the lower-of selection applies only to GPT rows without their own figure (owner decision O45, 2026-10-23). It does not measure gpt-6-astra-xhigh. Original figures and workload are retained in sourceEvidence.semianalysis."
+      "notes": "Same-model assumption for gpt-6-astra-xhigh (owner decision O88, 2026-10-28): a plan's allowance is effort-invariant (O87), so GPT-6 Astra's own SemiAnalysis figure on ChatGPT Pro 200 (14.485x, measured at the effort SemiAnalysis ran) serves every effort of GPT-6 Astra, replacing the O45 lower-of assumption for this row. It does not measure gpt-6-astra-xhigh. Original figures and workload are retained in sourceEvidence.semianalysis."
     },
     {
       "id": "chatgpt-pro500-gpt-6-astra-xhigh-common-gpt-assumption",
       "provider": "OpenAI",
-      "planLabel": "ChatGPT Pro 500 $500 · common GPT assumption",
+      "planLabel": "ChatGPT Pro 500 $500 · same-model assumption (O88)",
       "planFeeUsd": 500,
-      "valueMultiple": 10.772,
-      "apiEquivalentUsd": 5386,
+      "valueMultiple": 13.91,
+      "apiEquivalentUsd": 6955,
       "grade": "assumption",
       "evidenceLabel": "Provisional assumption",
-      "sourceModel": "GPT-6.1 Sol",
+      "sourceModel": "GPT-6 Astra",
       "sourceUrl": "https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x",
       "sourceDate": "2026-10-06",
       "modelSlugs": [
         "gpt-6-astra-xhigh"
       ],
-      "notes": "Common GPT assumption for gpt-6-astra-xhigh: the lower of the two SemiAnalysis model-conditional figures on ChatGPT Pro 500 (GPT-6.1 Sol's 10.772x; the other donor measured 13.91x). The owner authorises the shared ChatGPT multiples for every GPT model; the lower-of selection applies only to GPT rows without their own figure (owner decision O45, 2026-10-23). It does not measure gpt-6-astra-xhigh. Original figures and workload are retained in sourceEvidence.semianalysis."
+      "notes": "Same-model assumption for gpt-6-astra-xhigh (owner decision O88, 2026-10-28): a plan's allowance is effort-invariant (O87), so GPT-6 Astra's own SemiAnalysis figure on ChatGPT Pro 500 (13.91x, measured at the effort SemiAnalysis ran) serves every effort of GPT-6 Astra, replacing the O45 lower-of assumption for this row. It does not measure gpt-6-astra-xhigh. Original figures and workload are retained in sourceEvidence.semianalysis."
     },
     {
       "id": "chatgpt-plus-gpt-5.6-luna-low-common-gpt-assumption",

@@ -19,19 +19,18 @@ concordance test to every model × plan cell, and the build refuses a report rou
 from __future__ import annotations
 
 import math
-import re
 from datetime import date, datetime, time, timedelta, timezone
 
 CONCORDANCE = 1.20  # O11 / E98
 WEEKS_PER_MONTH = 4.33  # E270
 UNIT_TO_MONTH = {"month": 1.0, "week": WEEKS_PER_MONTH}
-EFFORT_SUFFIX = re.compile(r"-(low|medium|high|xhigh|max)$")
 
 
-def model_of(configuration_id: str | None) -> str | None:
-    """O87: a plan allowance is effort-invariant, so a cell is keyed by the model, not the configuration's effort."""
+def model_of(configuration_id: str | None, families: dict | None = None) -> str | None:
+    """O87, I69 L2: a plan allowance is effort-invariant, so a cell is keyed by the model (the configuration's AA family,
+    for example "GPT-6 Astra" for both its max and high rows), never by parsing the ID; an unknown ID keys itself."""
 
-    return EFFORT_SUFFIX.sub("", configuration_id) if configuration_id else configuration_id  # O82: a 5-hour figure never converts and never admits a route
+    return (families or {}).get(configuration_id, configuration_id)
 
 
 def _start(stamp: str) -> datetime:
@@ -120,17 +119,17 @@ def exclusion(report: dict, profile: dict, release_day: date) -> str | None:
     return None
 
 
-def cell_key(report: dict) -> tuple:
-    return report["provider"], report["plan"], model_of(report["modelId"]), report["unit"], report.get("region", "global")
+def cell_key(report: dict, families: dict | None = None) -> tuple:
+    return report["provider"], report["plan"], model_of(report["modelId"], families), report["unit"], report.get("region", "global")
 
 
-def evaluate(document: dict, profile: dict, release_day: date) -> list[dict]:
+def evaluate(document: dict, profile: dict, release_day: date, families: dict | None = None) -> list[dict]:
     """Every model × plan × unit cell's admission, with each report's role (E270, O11, O81, O82)."""
 
     multipliers, splits = document.get("speedModeMultipliers", {}), profile.get("partitionSplits", [])
     cells: dict[tuple, list[dict]] = {}
     for report in document["reports"]:
-        cells.setdefault(cell_key(report), []).append(report)
+        cells.setdefault(cell_key(report, families), []).append(report)
     results = []
     for key, reports in sorted(cells.items(), key=lambda item: tuple(str(part) for part in item[0])):
         provider, plan, model, unit, region = key
@@ -174,25 +173,25 @@ def evaluate(document: dict, profile: dict, release_day: date) -> list[dict]:
         fee = document.get("listedPlans", {}).get(plan) if listed else None
         results.append({"provider": provider, "plan": plan, "modelId": model, "unit": unit, "region": region, "status": status, "listed": listed,
                         "currentPartition": latest_split, "partitionsWithReports": sorted({row["partition"] for row in eligible}),
-                        "efforts": sorted({str(report.get("effort") or "unstated") for report in reports}), "value": value, "monthlyUsd": monthly, "multiple": monthly / fee if monthly is not None and fee else None,
+                        "configurations": sorted({str(report["modelId"]) for report in reports}), "efforts": sorted({str(report.get("effort") or "unstated") for report in reports}), "value": value, "monthlyUsd": monthly, "multiple": monthly / fee if monthly is not None and fee else None,
                         "range": None if lowest is None else [lowest, highest], "reports": rows,
                         "admittingObservers": sorted(row["observer"] for row in firm) if status == "passes" else []})
     return results
 
 
-def check_routes(routes: list[dict], cells: list[dict], cohort: set[str], report_kinds: set[str]) -> None:
+def check_routes(routes: list[dict], cells: list[dict], cohort: set[str], report_kinds: set[str], families: dict | None = None) -> None:
     """O81, I65 L3: a report-based route for a cohort model must rest on a passing cell for its plan and model, and its
     pooled reports must be that cell's admitting reports (the same observers), so the two paths cannot disagree."""
 
     passing: dict[tuple, list[dict]] = {}
     for cell in cells:
         if cell["status"] == "passes" and cell.get("listed", True):
-            passing.setdefault((cell["plan"], model_of(cell["modelId"])), []).append(cell)
+            passing.setdefault((cell["plan"], cell["modelId"]), []).append(cell)
     for route in routes:
         if route.get("valueMultipleKind") not in report_kinds:
             continue
         for model in set(route.get("modelIds") or []) & cohort:
-            supporting = passing.get((route.get("plan"), model_of(model)), [])
+            supporting = passing.get((route.get("plan"), model_of(model, families)), [])
             if not supporting:
                 raise ValueError(f"{route['id']}: no passing O71 cell supports a report route for {model} on {route.get('plan')} (O81)")
             # I66 L2: a plan and model can pass in more than one unit; the route's observers must be one cell's admitting set.
