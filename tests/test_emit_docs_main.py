@@ -236,7 +236,7 @@ def evaluated_plan_intervals(document):
     plan["bars"].append({**copy.deepcopy(bar), "confirmedCheapest": "deepseek-v4-1-flash-1017"})
     # E183: an O29 blocker competes without a label of its own.
     plan["blockers"] = ["gemini-4-argon"]
-    plan["frontier"]["gemini-4-argon"] = {"status": "no interval label"}
+    plan["frontier"]["gemini-4-argon"] = {"status": "no interval label: AA cost on a price not in force at V (O29); competes over its current-tariff hull"}
     bar["rows"]["gemini-4-argon"] = {"status": "no interval label"}
     v3["intervals"]["plan"] = plan
 
@@ -254,8 +254,8 @@ def test_plan_interval_outputs_and_unconfirmed_bars_are_described(repo_copy, pin
     assert "**Plan basis, main workload: frontier.** Not evaluable: none." in scores
     assert "Status certified; confirmed cheapest: none." in scores
     assert "Status unresolved." in scores
-    assert "Competing without a label (AA cost on a price not in force, O29): Gemini 4 Argon (high)." in plan_sentence
-    assert "Competing without a label (AA cost on a price not in force, O29, E183): Gemini 4 Argon (high)." in scores
+    assert "Competing without a label of its own (E183): Gemini 4 Argon (high): AA cost on a price not in force at V (O29); competes over its current-tariff hull." in plan_sentence
+    assert "Competing without a label of its own (E183): Gemini 4 Argon (high): AA cost on a price not in force at V (O29); competes over its current-tariff hull." in scores
 
 
 def test_unevaluable_rows_and_subset_workload_intervals_are_printed(repo_copy, pinned_clock):
@@ -341,3 +341,23 @@ def test_release_text_lint_blocks_a_sentence_that_puts_run_ranges_into_scenario_
     edit_json(repo_copy, "scores.json", lambda doc: doc["v3"]["scenarios"].__setitem__("notQuantified", ["benchmark run-to-run ranges enter the S2 scenario shares"]))
     with pytest.raises(ValueError, match=r"release-text lint \(E155\) rejects: methodology.md: - benchmark run-to-run ranges enter the S2 scenario shares"):
         emit(repo_copy)
+
+
+def test_a_basis_without_blockers_names_none(repo_copy, pinned_clock):
+    """I79: the blocker sentence appears only when some row competes without a label."""
+
+    def no_blockers(document):
+        for section in [document["v3"], *document["v3Tracks"].values()]:
+            api = section["intervals"]["api"]
+            for row_id in api.get("blockers", []):
+                api["frontier"].pop(row_id, None)
+                for bar in api.get("bars", []):
+                    bar.get("rows", {}).pop(row_id, None)
+            api["blockers"] = []
+
+    edit_json(repo_copy, "scores.json", no_blockers)
+    assert emit(repo_copy) == 0
+    readme = (repo_copy / "README.md").read_text()
+    api_sentence = next(line for line in readme.splitlines() if line.startswith("- API basis, main workload"))
+    assert "Competing without a label" not in api_sentence
+    assert "**API basis, main workload: frontier.** Not evaluable:" in (repo_copy / "scores.md").read_text()

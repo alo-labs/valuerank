@@ -704,8 +704,42 @@ def test_a_change_dated_before_the_measurement_never_supersedes_it():
     measured.update(evidenceDate="2026-10-06")
     measured["route"].update(changeDetectedOn="2026-10-01")
     assert not pr.change_flagged(measured, date(2026, 10, 25))
+    # I79 L1: an undated measurement published 2026-10-06 may have been taken from 2026-09-07, so a change on 2026-10-01 counts.
+    assert pr.change_flagged({**measured, "earliestEvidenceDate": "2026-09-07"}, date(2026, 10, 25))
+    assert pr.measurement_span({"sourcePublicationDate": "2026-10-06"}) == (date(2026, 9, 7), date(2026, 10, 6))
     after = candidate("reports-after", 5.0, "reports")
     after["route"]["sourcePublicationDate"] = "2026-10-20"
     assert pr.select_route([measured, after])["route"]["id"] == "m"
     transfer = {**candidate("t", 10.0, "assumption"), "faultWindow": "acknowledged"}
     assert pr.post_change_ranks([transfer, after])[0].get("postChangeSuperseded") is None
+
+
+def test_a_lower_of_transfer_follows_its_donor_to_a_replacing_report_pair():
+    """O95: when a report pair replaces a fault-window measurement of its model, a lower-of transfer re-takes the lower of
+    the plan's effective figures and names its new donor; the build refuses a stored transfer that is not the lowest."""
+
+    faults = [{"provider": "P", "plans": ["Pro"], "days": ["2026-09-29..2026-10-16"], "evidence": "acknowledged"}]
+    sol = dict(route("sol", 10.0, models=("sol",)), provider="P", plan="Pro", sourceEvidenceId="sa", sourcePublicationDate="2026-10-06")
+    astra = dict(route("astra", 14.0, models=("astra",)), provider="P", plan="Pro", sourceEvidenceId="sa", sourcePublicationDate="2026-10-06")
+    luna = dict(route("luna", 10.0, kind="user_assumption", models=("luna",)), provider="P", plan="Pro", sourceEvidenceId="sa", donorRouteId="sol",
+                donorRule="lower-of", sourceEvidenceClass="controlled_account_workload_projection")
+    day = date(2026, 10, 25)
+    registry = {item["id"]: item for item in (sol, astra, luna)}
+    assert pr.rebase_lower_of(luna, registry, day, None, faults) is luna  # no report pair: unchanged
+    reports = dict(route("sol-reports", 16.0, kind="user_reported_projection", models=("sol",)), plan="Pro",
+                   independentReports=[comparable_report("a", 16.0), comparable_report("b", 16.2)])
+    registry["sol-thin"] = dict(route("sol-thin", 30.0, kind="user_reported_projection", models=("sol",)), plan="Pro", independentReports=[comparable_report("a", 30.0)])
+    assert pr.effective_measurement(sol, registry, day, None, faults)["id"] == "sol"  # one report admits nothing
+    registry["sol-reports"] = reports
+    assert pr.effective_measurement(sol, registry, day, None, faults)["id"].startswith("sol-reports")  # its measurement object
+    assert pr.effective_measurement(sol, registry, day, None, None)["id"] == "sol"  # no fault, no change: Sol's own measurement stands
+    rebased = pr.rebase_lower_of(luna, registry, day, None, faults)
+    assert (rebased["donorRouteId"], rebased["valueMultiple"], rebased["rebasedFrom"]) == ("astra", 14.0, "sol")
+    assert pr.route_candidates("luna", None, [luna], day, registry=list(registry.values()), faults=faults)[0]["donorRouteId"] == "astra"
+    assert pr.rebase_lower_of({**luna, "provider": "Q"}, registry, day, None, faults)["donorRouteId"] == "sol"  # no measured figure on its plan
+    changed = {**sol, "changeDetectedOn": "2026-10-01"}
+    reports_dated = {**reports, "independentReports": [dict(comparable_report("a", 16.0), reportDate="2026-10-20"), dict(comparable_report("b", 16.2), reportDate="2026-10-21")]}
+    assert pr.effective_measurement(changed, {**registry, "sol-reports": reports_dated}, day, None, None)["id"].startswith("sol-reports")
+    pr.check_lower_of_routes({"routes": [sol, astra, luna]})
+    with pytest.raises(ValueError, match="lowest measured figure"):
+        pr.check_lower_of_routes({"routes": [sol, astra, {**luna, "donorRouteId": "astra", "valueMultiple": 14.0}]})

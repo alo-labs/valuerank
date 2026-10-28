@@ -79,7 +79,8 @@ def post_change_ranks(candidates: list[dict]) -> list[dict]:
         shares_donor = candidate["grade"] == "controlled" and route.get("sameModelAcrossEfforts")
         changed = route.get("changeDetectedOn") or (candidate.get("donorChangeDetectedOn") if shares_donor else None)
         # I78 L2: a change dated before the measurement does not supersede it.
-        if changed and candidate.get("evidenceDate") and changed < candidate["evidenceDate"]:
+        earliest = candidate.get("earliestEvidenceDate") or candidate.get("evidenceDate")
+        if changed and earliest and changed < earliest:
             changed = None
         superseded = (candidate["grade"] == "controlled" or shares_donor) and bool(changed and candidate.get("expiry") in {"possibly-superseded", "expired"}
                       and any(other["grade"] == "reports" and other["route"].get("plan") == route.get("plan")
@@ -324,8 +325,9 @@ def change_flagged(candidate: dict | None, release_day: date | None = None) -> b
     changed = candidate and (candidate["route"].get("changeDetectedOn") or candidate.get("donorChangeDetectedOn"))
     if changed and release_day is not None and date.fromisoformat(changed) > release_day:
         return False
-    # I78 L2: a change dated before the measurement cannot have superseded it (as expiry_status already holds).
-    if changed and candidate.get("evidenceDate") and date.fromisoformat(changed) < date.fromisoformat(candidate["evidenceDate"]):
+    # I78 L2, I79 L1: a change dated before the earliest date the measurement can have been taken cannot have superseded it.
+    earliest = candidate.get("earliestEvidenceDate") or candidate.get("evidenceDate") if candidate else None
+    if changed and earliest and date.fromisoformat(changed) < date.fromisoformat(earliest):
         return False
     return bool(changed and candidate.get("expiry") in {"possibly-superseded", "expired"})
 
@@ -350,6 +352,20 @@ def check_same_model_routes(document: dict, families: dict | None = None) -> Non
         # I75 L2: the route carries its donor's multiple and allocation regime unchanged (E220).
         if (route.get("valueMultiple"), route.get("allocationRegime"), route.get("planPriceUsd")) != (source.get("valueMultiple"), source.get("allocationRegime"), source.get("planPriceUsd")):
             raise ValueError(f"{route['id']}: a same-model route must carry its donor {source['id']}'s multiple and allocation regime (O88, E220)")
+
+
+def check_lower_of_routes(document: dict) -> None:
+    """O45, O95: a stored lower-of transfer names the lower of its plan's measured figures and carries that multiple."""
+
+    by_id = {route["id"]: route for route in document["routes"]}
+    for route in document["routes"]:
+        if route.get("donorRule") != "lower-of":
+            continue
+        measured = [item for item in by_id.values() if item.get("valueMultipleKind") in CONTROLLED_KINDS and item.get("provider") == route.get("provider")
+                    and item.get("plan") == route.get("plan") and item.get("sourceEvidenceId") == route.get("sourceEvidenceId")]
+        lowest = min(measured, key=lambda item: (comparison_multiple(item), item["id"]), default=None)
+        if lowest is None or lowest["id"] != route.get("donorRouteId") or lowest["valueMultiple"] != route.get("valueMultiple"):
+            raise ValueError(f"{route['id']}: a lower-of transfer must name and carry the lowest measured figure on {route.get('plan')} (O45, O95)")
 
 
 def check_allocation_regimes(document: dict) -> None:
@@ -431,6 +447,17 @@ def mix_check(measurement: dict) -> str:
 FAULT_LOOKBACK_DAYS = 30  # I77 L1: an undated measurement window is taken as the 30 days ending on publication
 
 
+def measurement_span(route: dict) -> tuple[date | None, date | None]:
+    """I77 L1, I79 L1: the earliest and latest dates a controlled measurement can have been taken: its stated window, else the
+    30 dates ending on its publication date."""
+
+    window = route.get("measurementWindow") or {}
+    published = route.get("sourcePublicationDate")
+    first = date.fromisoformat(window["start"]) if window.get("start") else (date.fromisoformat(published) - timedelta(days=FAULT_LOOKBACK_DAYS - 1) if published else None)
+    last = date.fromisoformat(window["end"]) if window.get("end") else (date.fromisoformat(published) if published else None)
+    return first, last
+
+
 def in_fault_window(route: dict, faults: list[dict] | None) -> dict | None:
     """O91, O92: the acknowledged accounting-fault entry a controlled measurement may fall in. The measurement is dated by its
     window, else conservatively by the 30 days ending on its publication date; an undated measurement on a plan with a fault
@@ -438,11 +465,8 @@ def in_fault_window(route: dict, faults: list[dict] | None) -> dict | None:
 
     if not faults or route.get("valueMultipleKind") not in CONTROLLED_KINDS:
         return None
-    window = route.get("measurementWindow") or {}
-    published = route.get("sourcePublicationDate")
     # I78 L2: 30 dates ending on the publication date (inclusive), the same end date the age and change clocks use (E144).
-    first = date.fromisoformat(window["start"]) if window.get("start") else (date.fromisoformat(published) - timedelta(days=FAULT_LOOKBACK_DAYS - 1) if published else None)
-    last = date.fromisoformat(window["end"]) if window.get("end") else (date.fromisoformat(published) if published else None)
+    first, last = measurement_span(route)
     for fault in faults:
         if fault.get("provider") != route.get("provider") or (fault.get("plans") and route.get("plan") not in fault["plans"]):
             continue
@@ -453,6 +477,42 @@ def in_fault_window(route: dict, faults: list[dict] | None) -> dict | None:
             if first <= date.fromisoformat(high or low) and last >= date.fromisoformat(low):
                 return fault
     return None
+
+
+def effective_measurement(route: dict, registry: dict, release_day: date, window: dict | None, faults: list[dict] | None) -> dict:
+    """O92, O93, O78: the measurement that stands for a controlled route's model on its plan: an admitted concordant report
+    pair for that model and plan when it replaces the controlled route (the route is in a fault window, or a detected
+    change predates every report of the pair), else the controlled route itself."""
+
+    model = (route.get("modelIds") or [None])[0]
+    changed = route.get("changeDetectedOn")
+    for other in registry.values():
+        if other.get("valueMultipleKind") not in REPORT_KINDS or other.get("plan") != route.get("plan") or model not in (other.get("modelIds") or []):
+            continue
+        objects = measurement_objects(other, release_day, window)
+        if not objects or evidence_grade(objects[0], model) != "reports":
+            continue
+        dates = [report_date(report) for report in other.get("independentReports") or other.get("reports") or [other]]
+        after_change = bool(changed) and None not in dates and min(dates) > date.fromisoformat(changed)
+        if in_fault_window(route, faults) or after_change:
+            return objects[0]
+    return route
+
+
+def rebase_lower_of(route: dict, registry: dict, release_day: date, window: dict | None, faults: list[dict] | None) -> dict:
+    """O95: a lower-of transfer (O45) takes, per plan, the lower of its plan's measured figures, each model's figure being
+    its effective measurement (a replacing report pair or the controlled route); the result names its donor."""
+
+    measured = [item for item in registry.values() if item.get("valueMultipleKind") in CONTROLLED_KINDS and item.get("provider") == route.get("provider")
+                and item.get("plan") == route.get("plan") and item.get("sourceEvidenceId") == route.get("sourceEvidenceId")]
+    if not measured:
+        return route
+    effective = [effective_measurement(item, registry, release_day, window, faults) for item in measured]
+    lowest = min(effective, key=lambda item: (comparison_multiple(item), item["id"]))
+    if lowest["id"] == route.get("donorRouteId"):
+        return route
+    return {**route, "donorRouteId": lowest["id"], "valueMultiple": lowest["valueMultiple"], "rebasedFrom": route.get("donorRouteId"),
+            "sourceModel": lowest.get("sourceModel", route.get("sourceModel"))}
 
 
 def route_candidates(model_id: str, configuration_effort: str | None, routes: list[dict], release_day: date, *, registry: list[dict] | None = None,
@@ -468,6 +528,8 @@ def route_candidates(model_id: str, configuration_effort: str | None, routes: li
     for route in [item for base in routes for item in measurement_objects(base, release_day, window)]:
         if model_id not in route.get("modelIds", []):
             continue
+        if route.get("donorRule") == "lower-of":
+            route = rebase_lower_of(route, by_id, release_day, window, faults)
         required = route.get("requiredVariant")
         if required is not None and (configuration_effort or "").casefold() != required.casefold():
             continue
@@ -494,6 +556,8 @@ def route_candidates(model_id: str, configuration_effort: str | None, routes: li
                 "expiry": expiry,
                 "identification": route.get("identification", "unidentified"),
                 "evidenceDate": stamp.isoformat() if stamp else None,
+                # I79 L1: the earliest date the (donor's) measurement can have been taken.
+                "earliestEvidenceDate": (lambda first: first.isoformat() if first else None)(measurement_span(provenance)[0]),
                 "donorRouteId": source["id"] if source is not None else None,
                 "donorChangeDetectedOn": source.get("changeDetectedOn") if source is not None else None,
                 "faultWindow": faulted["evidence"] if faulted else None,

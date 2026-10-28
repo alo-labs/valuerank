@@ -31,7 +31,11 @@ def test_partitions_follow_instant_and_whole_day_splits():
     assert pa.partition(report("d", provider="O", start="2026-10-10", end="2026-10-10"), splits) == 0
     assert pa.partition(report("e", provider="O", start="2026-10-11", end="2026-10-11"), splits) is None
     assert pa.partition(report("f", provider="O", start="2026-10-12", end="2026-10-12"), splits) == 1
-    assert pa.partition(report("g", start=None, end="2026-10-20"), splits) == 1  # a report without a start is its end day
+    # I79 L2: a weekly reading without a stated start covers the 7 days ending on its date, so one on 2026-10-20 spans the
+    # 2026-10-17 split; a 5-hour reading is its own day.
+    assert pa.partition(report("g", start=None, end="2026-10-20"), splits) is None
+    assert pa.partition(report("g", start=None, end="2026-10-25"), splits) == 1
+    assert pa.partition(report("g", start=None, end="2026-10-20", unit="5h"), splits) == 1
 
 
 def test_exclusions_follow_e270():

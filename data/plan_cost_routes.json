@@ -19,7 +19,7 @@
     "selectedSourceException": {"providers": ["Anthropic", "OpenAI"], "sourceUrl": "https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x", "publicationDate": "2026-10-06", "authorizedOn": "2026-10-07", "evidenceType": "Controlled subscription-account measurements with agentic workload projections."},
     "gptApplication": "User authorizes the same ChatGPT plan multiples for every GPT model. Owner decision O45 (2026-10-23), as amended by O88 (2026-10-28): GPT-6.1 Sol and GPT-6 Astra keep their own SemiAnalysis figures on every ChatGPT plan, bound to each model's unsuffixed (max) row because SemiAnalysis names the models without an effort; each of their other efforts (GPT-6.1 Sol at xhigh, high, medium and low, GPT-6 Astra at xhigh and high, ranked as their own rows under O33) takes its own model's figure per plan as a labelled same-model measurement from another effort (O88; measured evidence under O90; an allowance is effort-invariant, O87); every other GPT model takes, per plan, the lower of the two reported model-conditional figures as a labelled user assumption naming its donor route. Routes are one row per model and plan.",
     "routeGranularity": "Owner decision O45 (2026-10-23): every route row names exactly one model and one plan.",
-    "o72Application": "Owner decisions O72-O92 (2026-10-26 to 2026-10-28): after the O71 search found no model × tier with two concordant user reports, the owner-authorised routes stay (the SemiAnalysis selection with its O40/O45 assumptions, the O46 MiMo quota ceilings) and providers without one (Google, Kimi, MiniMax) stay on API fallback. Two concordant user reports replace only an assumption-based or fallback route; an exact controlled measurement keeps precedence (O73) unless a detected change flags it and a concordant pair for the same plan is dated after that change (O78). Admission stays the strict all-reports concordance test (O74); every release runs all three O71 stages over every cell (O75); speed-mode reports convert at the provider's multiplier, flagged (O76); a provider's announcement of a metering change triggers E18 (O77); a change to a shared meter flags every plan on it (O79); a 5-hour figure stays in its own unit and never converts (O80, O82); a provider-documented change splits the partition too (O83); a change detected on any Kimi plan splits every Kimi plan (O84); every report cell is tested, and one on a plan the Plan ranking does not list is evidence only (O85). O86: concordance is the largest lower bound at most 1.20x the smallest upper bound. O87: an allowance is effort-invariant, so reports pool across efforts of one model. O88: a SemiAnalysis figure for a model serves every effort of that model, labelled; O90 counts it as measured evidence. O89: an O88 same-model route shares its donor measurement's precedence and change flag against reports for the same model and plan. O91, O92: a controlled measurement inside an acknowledged accounting-fault window for its plan stays selected and flagged, with the routes resting on it, until two concordant user reports for that plan replace it.",
+    "o72Application": "Owner decisions O72-O95 (2026-10-26 to 2026-10-28): after the O71 search found no model × tier with two concordant user reports, the owner-authorised routes stay (the SemiAnalysis selection with its O40/O45 assumptions, the O46 MiMo quota ceilings) and providers without one (Google, Kimi, MiniMax) stay on API fallback. Two concordant user reports replace only an assumption-based or fallback route; an exact controlled measurement keeps precedence (O73) unless a detected change flags it and a concordant pair for the same plan is dated after that change (O78). Admission stays the strict all-reports concordance test (O74); every release runs all three O71 stages over every cell (O75); speed-mode reports convert at the provider's multiplier, flagged (O76); a provider's announcement of a metering change triggers E18 (O77); a change to a shared meter flags every plan on it (O79); a 5-hour figure stays in its own unit (O80) and never converts (O82); a provider-documented change splits the partition too (O83); a change detected on any Kimi plan splits every Kimi plan (O84); every report cell is tested, and one on a plan the Plan ranking does not list is evidence only (O85). O86: concordance is the largest lower bound at most 1.20x the smallest upper bound. O87: an allowance is effort-invariant, so reports pool across efforts of one model. O88: a SemiAnalysis figure for a model serves every effort of that model, labelled; O90 counts it as measured evidence. O89: an O88 same-model route shares its donor measurement's precedence and change flag against reports for the same model and plan. O91, O92: a controlled measurement inside an acknowledged accounting-fault window for its plan stays selected and flagged, with the routes resting on it, until two concordant user reports for that plan replace it. O93: a report pair replaces only its own model's fault-flagged route. O94: a row whose AA cost omits a pricing term competes over its published cost up to the stated factor and earns no label. O95: a lower-of transfer re-takes the lower of its plan's effective figures when a report pair replaces its donor.",
     "reportEligibilityProfile": {"version": "O71 v1 (E270), 2026-10-26", "rules": ["API-priced consumption tied to a meter fraction or to exhaustion of a window; a figure with no meter fraction is a lower bound and does not count", "a meter fraction measures its own window's allowance; a 5-hour figure pools only with 5-hour figures of the same plan and model and never converts to a billing period (O82, replacing O80's exception); a weekly allowance converts to a month at 4.33 weeks", "exact model and tier, at any reasoning effort (O87: an allowance is effort-invariant); a tier or model version the researcher infers counts provisionally: listed and in the range test, never one of the two admitting reports", "one model measured; a mixed-model week stays at plan level", "measured at least partly inside the report window", "not on a provider-acknowledged accounting-fault day (accountingFaultDays)", "an observer, not an aggregator or a derived figure (cross-checks only); one observer is one report, carrying the range of its values (valueMultipleLower / valueMultipleUpper)", "range-valued reports pass the margin when the largest lower bound is at most 1.20x the smallest upper bound (O86, replacing the whole-range test)", "a report on a tier of another region or currency counts only for that tier", "a provider speed mode is converted to standard-equivalent at the provider's published multiplier and flagged (O76)", "a partition splits only at a change E18 detected or a provider documented, at that change's date (partitionSplits)"], "accountingFaultDays": [{"provider": "OpenAI", "days": ["2026-10-16", "2026-10-17"], "evidence": "OpenAI e-mails quoted by users: an acknowledged allowance bug with $500 or 12,500-credit compensation"}, {"provider": "OpenAI", "plans": ["ChatGPT Pro 500"], "days": ["2026-09-29..2026-10-16"], "evidence": "OpenAI support e-mail quoted by Vanja Petreski: Pro 200 → Pro 500 upgrades kept the previous plan's allowance until corrected on 2026-10-16"}], "partitionSplits": [{"provider": "Anthropic", "plans": ["Claude Pro", "Claude Max 5x", "Claude Max 20x"], "date": "2026-10-17T13:00:00Z", "basis": "E18 change detected (O79); NicoAica's measurement places it at about 08:00 CDT"}, {"provider": "OpenAI", "date": "2026-10-11", "basis": "provider announcement, Day 7 (O77)"}, {"provider": "OpenAI", "date": "2026-10-16", "basis": "provider announcement, Day 12 (O77)"}, {"provider": "OpenAI", "date": "2026-10-20", "basis": "provider announcement, Day 16 (O77; date from the day count, Day 7 = 2026-10-11)"}, {"provider": "OpenAI", "date": "2026-10-23", "basis": "provider announcement, Day 19 (O77; date from the day count)"}, {"provider": "Kimi", "date": "2026-10-24", "basis": "E18 change detected: an ≈50% quota increase measured by kojimako and okarin (independent per-token fits) on CN plans; owner decision O84 (2026-10-28): it splits every Kimi plan"}]},
     "mimoApplication": "Owner decision O46 (2026-10-23), an explicit exception to the end-user numerator rule: each MiMo-V2.6 model takes, per Token Plan tier, the quota-implied ceiling (the tier's monthly credits valued at Xiaomi's pay-as-you-go rate for that model, divided by the list fee), labelled provider-derived. It replaces the 2026-10-08 provisional 1.5x assumption. End-user measurements for the exact model and tier replace the ceiling once they meet the admission rule of any other provider's route (O11); one report alone does not (owner decision O62).",
     "unsupportedModels": "Use API fallback; do not transfer evidence across model versions or variants except for the explicit common GPT, Claude and MiMo assumptions; across thinking effort, plan-allowance evidence for a model serves its other efforts (O87 for user reports, O88 for SemiAnalysis measurements, labelled and counted as measured evidence under O90).",
@@ -79,7 +79,7 @@
       "sourceUrls": ["https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x"], "modelIds": ["gpt-5.6-sol"], "assumptionScope": "user-authorized cross-model application",
       "allocationRegime": "Current post-September 29 Codex schedule",
       "notes": "Common GPT assumption for gpt-5.6-sol: the lower of the two SemiAnalysis model-conditional figures on ChatGPT Plus (GPT-6 Astra's 8.1x; the other donor measured 10.55x). The owner authorises the shared ChatGPT multiples for every GPT model; the lower-of selection applies only to GPT rows without their own figure (owner decision O45, 2026-10-23). It does not measure gpt-5.6-sol. Original figures and workload are retained in sourceEvidence.semianalysis.",
-      "donorRouteId": "chatgpt-plus-gpt6astra-semianalysis"
+      "donorRouteId": "chatgpt-plus-gpt6astra-semianalysis", "donorRule": "lower-of"
     },
     {
       "id": "chatgpt-plus-gpt-5.6-luna-common-gpt-assumption", "provider": "OpenAI", "plan": "ChatGPT Plus", "planLabel": "ChatGPT Plus $20 · common GPT assumption", "planPriceUsd": 20, "apiEquivalentUsd": 162, "valueMultiple": 8.1,
@@ -89,7 +89,7 @@
       "sourceUrls": ["https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x"], "modelIds": ["gpt-5.6-luna"], "assumptionScope": "user-authorized cross-model application",
       "allocationRegime": "Current post-September 29 Codex schedule",
       "notes": "Common GPT assumption for gpt-5.6-luna: the lower of the two SemiAnalysis model-conditional figures on ChatGPT Plus (GPT-6 Astra's 8.1x; the other donor measured 10.55x). The owner authorises the shared ChatGPT multiples for every GPT model; the lower-of selection applies only to GPT rows without their own figure (owner decision O45, 2026-10-23). It does not measure gpt-5.6-luna. Original figures and workload are retained in sourceEvidence.semianalysis.",
-      "donorRouteId": "chatgpt-plus-gpt6astra-semianalysis"
+      "donorRouteId": "chatgpt-plus-gpt6astra-semianalysis", "donorRule": "lower-of"
     },
     {
       "id": "chatgpt-plus-gpt-5.5-common-gpt-assumption", "provider": "OpenAI", "plan": "ChatGPT Plus", "planLabel": "ChatGPT Plus $20 · common GPT assumption", "planPriceUsd": 20, "apiEquivalentUsd": 162, "valueMultiple": 8.1,
@@ -98,7 +98,7 @@
       "sourcePolicyException": "User-selected SemiAnalysis October 7, 2026", "sourceUrl": "https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x",
       "sourceUrls": ["https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x"], "modelIds": ["gpt-5.5"], "assumptionScope": "user-authorized cross-model application", "allocationRegime": "Current post-September 29 Codex schedule",
       "notes": "Common GPT assumption for gpt-5.5: the lower of the two SemiAnalysis model-conditional figures on ChatGPT Plus (GPT-6 Astra's 8.1x; the other donor measured 10.55x). The owner authorises the shared ChatGPT multiples for every GPT model; the lower-of selection applies only to GPT rows without their own figure (owner decision O45, 2026-10-23). It does not measure gpt-5.5. Original figures and workload are retained in sourceEvidence.semianalysis.",
-      "donorRouteId": "chatgpt-plus-gpt6astra-semianalysis"
+      "donorRouteId": "chatgpt-plus-gpt6astra-semianalysis", "donorRule": "lower-of"
     },
     {
       "id": "chatgpt-plus-gpt-6-sol-common-gpt-assumption", "provider": "OpenAI", "plan": "ChatGPT Plus", "planLabel": "ChatGPT Plus $20 · common GPT assumption", "planPriceUsd": 20, "apiEquivalentUsd": 162, "valueMultiple": 8.1,
@@ -108,7 +108,7 @@
       "sourceUrls": ["https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x"], "modelIds": ["gpt-6-sol"], "assumptionScope": "user-authorized cross-model application",
       "allocationRegime": "Current post-September 29 Codex schedule",
       "notes": "Common GPT assumption for gpt-6-sol: the lower of the two SemiAnalysis model-conditional figures on ChatGPT Plus (GPT-6 Astra's 8.1x; the other donor measured 10.55x). The owner authorises the shared ChatGPT multiples for every GPT model; the lower-of selection applies only to GPT rows without their own figure (owner decision O45, 2026-10-23). It does not measure gpt-6-sol. Original figures and workload are retained in sourceEvidence.semianalysis.",
-      "donorRouteId": "chatgpt-plus-gpt6astra-semianalysis"
+      "donorRouteId": "chatgpt-plus-gpt6astra-semianalysis", "donorRule": "lower-of"
     },
     {
       "id": "chatgpt-plus-gpt-6-luna-common-gpt-assumption", "provider": "OpenAI", "plan": "ChatGPT Plus", "planLabel": "ChatGPT Plus $20 · common GPT assumption", "planPriceUsd": 20, "apiEquivalentUsd": 162, "valueMultiple": 8.1,
@@ -118,7 +118,7 @@
       "sourceUrls": ["https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x"], "modelIds": ["gpt-6-luna"], "assumptionScope": "user-authorized cross-model application",
       "allocationRegime": "Current post-September 29 Codex schedule",
       "notes": "Common GPT assumption for gpt-6-luna: the lower of the two SemiAnalysis model-conditional figures on ChatGPT Plus (GPT-6 Astra's 8.1x; the other donor measured 10.55x). The owner authorises the shared ChatGPT multiples for every GPT model; the lower-of selection applies only to GPT rows without their own figure (owner decision O45, 2026-10-23). It does not measure gpt-6-luna. Original figures and workload are retained in sourceEvidence.semianalysis.",
-      "donorRouteId": "chatgpt-plus-gpt6astra-semianalysis"
+      "donorRouteId": "chatgpt-plus-gpt6astra-semianalysis", "donorRule": "lower-of"
     },
     {
       "id": "chatgpt-plus-gpt-6.1-sol-xhigh-common-gpt-assumption", "provider": "OpenAI", "plan": "ChatGPT Plus", "planLabel": "ChatGPT Plus $20 · same-model measurement, another effort (O88, O90)", "planPriceUsd": 20, "apiEquivalentUsd": 211, "valueMultiple": 10.55,
@@ -184,7 +184,7 @@
       "sourceUrls": ["https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x"], "modelIds": ["gpt-5.6-sol"], "assumptionScope": "user-authorized cross-model application",
       "allocationRegime": "Current post-September 29 Codex schedule",
       "notes": "Common GPT assumption for gpt-5.6-sol: the lower of the two SemiAnalysis model-conditional figures on ChatGPT Pro 100 (GPT-6.1 Sol's 10.55x; the other donor measured 13.22x). The owner authorises the shared ChatGPT multiples for every GPT model; the lower-of selection applies only to GPT rows without their own figure (owner decision O45, 2026-10-23). It does not measure gpt-5.6-sol. Original figures and workload are retained in sourceEvidence.semianalysis.",
-      "donorRouteId": "chatgpt-pro100-gpt61sol-semianalysis"
+      "donorRouteId": "chatgpt-pro100-gpt61sol-semianalysis", "donorRule": "lower-of"
     },
     {
       "id": "chatgpt-pro100-gpt-5.6-luna-common-gpt-assumption", "provider": "OpenAI", "plan": "ChatGPT Pro 100", "planLabel": "ChatGPT Pro 100 $100 · common GPT assumption", "planPriceUsd": 100, "apiEquivalentUsd": 1055, "valueMultiple": 10.55,
@@ -194,7 +194,7 @@
       "sourceUrls": ["https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x"], "modelIds": ["gpt-5.6-luna"], "assumptionScope": "user-authorized cross-model application",
       "allocationRegime": "Current post-September 29 Codex schedule",
       "notes": "Common GPT assumption for gpt-5.6-luna: the lower of the two SemiAnalysis model-conditional figures on ChatGPT Pro 100 (GPT-6.1 Sol's 10.55x; the other donor measured 13.22x). The owner authorises the shared ChatGPT multiples for every GPT model; the lower-of selection applies only to GPT rows without their own figure (owner decision O45, 2026-10-23). It does not measure gpt-5.6-luna. Original figures and workload are retained in sourceEvidence.semianalysis.",
-      "donorRouteId": "chatgpt-pro100-gpt61sol-semianalysis"
+      "donorRouteId": "chatgpt-pro100-gpt61sol-semianalysis", "donorRule": "lower-of"
     },
     {
       "id": "chatgpt-pro100-gpt-5.5-common-gpt-assumption", "provider": "OpenAI", "plan": "ChatGPT Pro 100", "planLabel": "ChatGPT Pro 100 $100 · common GPT assumption", "planPriceUsd": 100, "apiEquivalentUsd": 1055, "valueMultiple": 10.55,
@@ -203,7 +203,7 @@
       "sourcePolicyException": "User-selected SemiAnalysis October 7, 2026", "sourceUrl": "https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x",
       "sourceUrls": ["https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x"], "modelIds": ["gpt-5.5"], "assumptionScope": "user-authorized cross-model application", "allocationRegime": "Current post-September 29 Codex schedule",
       "notes": "Common GPT assumption for gpt-5.5: the lower of the two SemiAnalysis model-conditional figures on ChatGPT Pro 100 (GPT-6.1 Sol's 10.55x; the other donor measured 13.22x). The owner authorises the shared ChatGPT multiples for every GPT model; the lower-of selection applies only to GPT rows without their own figure (owner decision O45, 2026-10-23). It does not measure gpt-5.5. Original figures and workload are retained in sourceEvidence.semianalysis.",
-      "donorRouteId": "chatgpt-pro100-gpt61sol-semianalysis"
+      "donorRouteId": "chatgpt-pro100-gpt61sol-semianalysis", "donorRule": "lower-of"
     },
     {
       "id": "chatgpt-pro100-gpt-6-sol-common-gpt-assumption", "provider": "OpenAI", "plan": "ChatGPT Pro 100", "planLabel": "ChatGPT Pro 100 $100 · common GPT assumption", "planPriceUsd": 100, "apiEquivalentUsd": 1055, "valueMultiple": 10.55,
@@ -213,7 +213,7 @@
       "sourceUrls": ["https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x"], "modelIds": ["gpt-6-sol"], "assumptionScope": "user-authorized cross-model application",
       "allocationRegime": "Current post-September 29 Codex schedule",
       "notes": "Common GPT assumption for gpt-6-sol: the lower of the two SemiAnalysis model-conditional figures on ChatGPT Pro 100 (GPT-6.1 Sol's 10.55x; the other donor measured 13.22x). The owner authorises the shared ChatGPT multiples for every GPT model; the lower-of selection applies only to GPT rows without their own figure (owner decision O45, 2026-10-23). It does not measure gpt-6-sol. Original figures and workload are retained in sourceEvidence.semianalysis.",
-      "donorRouteId": "chatgpt-pro100-gpt61sol-semianalysis"
+      "donorRouteId": "chatgpt-pro100-gpt61sol-semianalysis", "donorRule": "lower-of"
     },
     {
       "id": "chatgpt-pro100-gpt-6-luna-common-gpt-assumption", "provider": "OpenAI", "plan": "ChatGPT Pro 100", "planLabel": "ChatGPT Pro 100 $100 · common GPT assumption", "planPriceUsd": 100, "apiEquivalentUsd": 1055, "valueMultiple": 10.55,
@@ -223,7 +223,7 @@
       "sourceUrls": ["https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x"], "modelIds": ["gpt-6-luna"], "assumptionScope": "user-authorized cross-model application",
       "allocationRegime": "Current post-September 29 Codex schedule",
       "notes": "Common GPT assumption for gpt-6-luna: the lower of the two SemiAnalysis model-conditional figures on ChatGPT Pro 100 (GPT-6.1 Sol's 10.55x; the other donor measured 13.22x). The owner authorises the shared ChatGPT multiples for every GPT model; the lower-of selection applies only to GPT rows without their own figure (owner decision O45, 2026-10-23). It does not measure gpt-6-luna. Original figures and workload are retained in sourceEvidence.semianalysis.",
-      "donorRouteId": "chatgpt-pro100-gpt61sol-semianalysis"
+      "donorRouteId": "chatgpt-pro100-gpt61sol-semianalysis", "donorRule": "lower-of"
     },
     {
       "id": "chatgpt-pro100-gpt-6.1-sol-xhigh-common-gpt-assumption", "provider": "OpenAI", "plan": "ChatGPT Pro 100", "planLabel": "ChatGPT Pro 100 $100 · same-model measurement, another effort (O88, O90)", "planPriceUsd": 100, "apiEquivalentUsd": 1055,
@@ -289,7 +289,7 @@
       "sourceUrls": ["https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x"], "modelIds": ["gpt-5.6-sol"], "assumptionScope": "user-authorized cross-model application",
       "allocationRegime": "Current post-September 29 Codex schedule; eligible legacy Pro 200 allocation until October 29 excluded",
       "notes": "Common GPT assumption for gpt-5.6-sol: the lower of the two SemiAnalysis model-conditional figures on ChatGPT Pro 200 (GPT-6.1 Sol's 10.42x; the other donor measured 14.485x). The owner authorises the shared ChatGPT multiples for every GPT model; the lower-of selection applies only to GPT rows without their own figure (owner decision O45, 2026-10-23). It does not measure gpt-5.6-sol. Original figures and workload are retained in sourceEvidence.semianalysis.",
-      "donorRouteId": "chatgpt-pro200-gpt61sol-semianalysis"
+      "donorRouteId": "chatgpt-pro200-gpt61sol-semianalysis", "donorRule": "lower-of"
     },
     {
       "id": "chatgpt-pro200-gpt-5.6-luna-common-gpt-assumption", "provider": "OpenAI", "plan": "ChatGPT Pro 200", "planLabel": "ChatGPT Pro 200 $200 · common GPT assumption", "planPriceUsd": 200, "apiEquivalentUsd": 2084, "valueMultiple": 10.42,
@@ -299,7 +299,7 @@
       "sourceUrls": ["https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x"], "modelIds": ["gpt-5.6-luna"], "assumptionScope": "user-authorized cross-model application",
       "allocationRegime": "Current post-September 29 Codex schedule; eligible legacy Pro 200 allocation until October 29 excluded",
       "notes": "Common GPT assumption for gpt-5.6-luna: the lower of the two SemiAnalysis model-conditional figures on ChatGPT Pro 200 (GPT-6.1 Sol's 10.42x; the other donor measured 14.485x). The owner authorises the shared ChatGPT multiples for every GPT model; the lower-of selection applies only to GPT rows without their own figure (owner decision O45, 2026-10-23). It does not measure gpt-5.6-luna. Original figures and workload are retained in sourceEvidence.semianalysis.",
-      "donorRouteId": "chatgpt-pro200-gpt61sol-semianalysis"
+      "donorRouteId": "chatgpt-pro200-gpt61sol-semianalysis", "donorRule": "lower-of"
     },
     {
       "id": "chatgpt-pro200-gpt-5.5-common-gpt-assumption", "provider": "OpenAI", "plan": "ChatGPT Pro 200", "planLabel": "ChatGPT Pro 200 $200 · common GPT assumption", "planPriceUsd": 200, "apiEquivalentUsd": 2084, "valueMultiple": 10.42,
@@ -309,7 +309,7 @@
       "sourceUrls": ["https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x"], "modelIds": ["gpt-5.5"], "assumptionScope": "user-authorized cross-model application",
       "allocationRegime": "Current post-September 29 Codex schedule; eligible legacy Pro 200 allocation until October 29 excluded",
       "notes": "Common GPT assumption for gpt-5.5: the lower of the two SemiAnalysis model-conditional figures on ChatGPT Pro 200 (GPT-6.1 Sol's 10.42x; the other donor measured 14.485x). The owner authorises the shared ChatGPT multiples for every GPT model; the lower-of selection applies only to GPT rows without their own figure (owner decision O45, 2026-10-23). It does not measure gpt-5.5. Original figures and workload are retained in sourceEvidence.semianalysis.",
-      "donorRouteId": "chatgpt-pro200-gpt61sol-semianalysis"
+      "donorRouteId": "chatgpt-pro200-gpt61sol-semianalysis", "donorRule": "lower-of"
     },
     {
       "id": "chatgpt-pro200-gpt-6-sol-common-gpt-assumption", "provider": "OpenAI", "plan": "ChatGPT Pro 200", "planLabel": "ChatGPT Pro 200 $200 · common GPT assumption", "planPriceUsd": 200, "apiEquivalentUsd": 2084, "valueMultiple": 10.42,
@@ -319,7 +319,7 @@
       "sourceUrls": ["https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x"], "modelIds": ["gpt-6-sol"], "assumptionScope": "user-authorized cross-model application",
       "allocationRegime": "Current post-September 29 Codex schedule; eligible legacy Pro 200 allocation until October 29 excluded",
       "notes": "Common GPT assumption for gpt-6-sol: the lower of the two SemiAnalysis model-conditional figures on ChatGPT Pro 200 (GPT-6.1 Sol's 10.42x; the other donor measured 14.485x). The owner authorises the shared ChatGPT multiples for every GPT model; the lower-of selection applies only to GPT rows without their own figure (owner decision O45, 2026-10-23). It does not measure gpt-6-sol. Original figures and workload are retained in sourceEvidence.semianalysis.",
-      "donorRouteId": "chatgpt-pro200-gpt61sol-semianalysis"
+      "donorRouteId": "chatgpt-pro200-gpt61sol-semianalysis", "donorRule": "lower-of"
     },
     {
       "id": "chatgpt-pro200-gpt-6-luna-common-gpt-assumption", "provider": "OpenAI", "plan": "ChatGPT Pro 200", "planLabel": "ChatGPT Pro 200 $200 · common GPT assumption", "planPriceUsd": 200, "apiEquivalentUsd": 2084, "valueMultiple": 10.42,
@@ -329,7 +329,7 @@
       "sourceUrls": ["https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x"], "modelIds": ["gpt-6-luna"], "assumptionScope": "user-authorized cross-model application",
       "allocationRegime": "Current post-September 29 Codex schedule; eligible legacy Pro 200 allocation until October 29 excluded",
       "notes": "Common GPT assumption for gpt-6-luna: the lower of the two SemiAnalysis model-conditional figures on ChatGPT Pro 200 (GPT-6.1 Sol's 10.42x; the other donor measured 14.485x). The owner authorises the shared ChatGPT multiples for every GPT model; the lower-of selection applies only to GPT rows without their own figure (owner decision O45, 2026-10-23). It does not measure gpt-6-luna. Original figures and workload are retained in sourceEvidence.semianalysis.",
-      "donorRouteId": "chatgpt-pro200-gpt61sol-semianalysis"
+      "donorRouteId": "chatgpt-pro200-gpt61sol-semianalysis", "donorRule": "lower-of"
     },
     {
       "id": "chatgpt-pro200-gpt-6.1-sol-xhigh-common-gpt-assumption", "provider": "OpenAI", "plan": "ChatGPT Pro 200", "planLabel": "ChatGPT Pro 200 $200 · same-model measurement, another effort (O88, O90)", "planPriceUsd": 200, "apiEquivalentUsd": 2084,
@@ -395,7 +395,7 @@
       "sourceUrls": ["https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x"], "modelIds": ["gpt-5.6-sol"], "assumptionScope": "user-authorized cross-model application",
       "allocationRegime": "Current post-September 29 Codex schedule",
       "notes": "Common GPT assumption for gpt-5.6-sol: the lower of the two SemiAnalysis model-conditional figures on ChatGPT Pro 500 (GPT-6.1 Sol's 10.772x; the other donor measured 13.91x). The owner authorises the shared ChatGPT multiples for every GPT model; the lower-of selection applies only to GPT rows without their own figure (owner decision O45, 2026-10-23). It does not measure gpt-5.6-sol. Original figures and workload are retained in sourceEvidence.semianalysis.",
-      "donorRouteId": "chatgpt-pro500-gpt61sol-semianalysis"
+      "donorRouteId": "chatgpt-pro500-gpt61sol-semianalysis", "donorRule": "lower-of"
     },
     {
       "id": "chatgpt-pro500-gpt-5.6-luna-common-gpt-assumption", "provider": "OpenAI", "plan": "ChatGPT Pro 500", "planLabel": "ChatGPT Pro 500 $500 · common GPT assumption", "planPriceUsd": 500, "apiEquivalentUsd": 5386, "valueMultiple": 10.772,
@@ -405,7 +405,7 @@
       "sourceUrls": ["https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x"], "modelIds": ["gpt-5.6-luna"], "assumptionScope": "user-authorized cross-model application",
       "allocationRegime": "Current post-September 29 Codex schedule",
       "notes": "Common GPT assumption for gpt-5.6-luna: the lower of the two SemiAnalysis model-conditional figures on ChatGPT Pro 500 (GPT-6.1 Sol's 10.772x; the other donor measured 13.91x). The owner authorises the shared ChatGPT multiples for every GPT model; the lower-of selection applies only to GPT rows without their own figure (owner decision O45, 2026-10-23). It does not measure gpt-5.6-luna. Original figures and workload are retained in sourceEvidence.semianalysis.",
-      "donorRouteId": "chatgpt-pro500-gpt61sol-semianalysis"
+      "donorRouteId": "chatgpt-pro500-gpt61sol-semianalysis", "donorRule": "lower-of"
     },
     {
       "id": "chatgpt-pro500-gpt-5.5-common-gpt-assumption", "provider": "OpenAI", "plan": "ChatGPT Pro 500", "planLabel": "ChatGPT Pro 500 $500 · common GPT assumption", "planPriceUsd": 500, "apiEquivalentUsd": 5386, "valueMultiple": 10.772,
@@ -414,7 +414,7 @@
       "sourcePolicyException": "User-selected SemiAnalysis October 7, 2026", "sourceUrl": "https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x",
       "sourceUrls": ["https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x"], "modelIds": ["gpt-5.5"], "assumptionScope": "user-authorized cross-model application", "allocationRegime": "Current post-September 29 Codex schedule",
       "notes": "Common GPT assumption for gpt-5.5: the lower of the two SemiAnalysis model-conditional figures on ChatGPT Pro 500 (GPT-6.1 Sol's 10.772x; the other donor measured 13.91x). The owner authorises the shared ChatGPT multiples for every GPT model; the lower-of selection applies only to GPT rows without their own figure (owner decision O45, 2026-10-23). It does not measure gpt-5.5. Original figures and workload are retained in sourceEvidence.semianalysis.",
-      "donorRouteId": "chatgpt-pro500-gpt61sol-semianalysis"
+      "donorRouteId": "chatgpt-pro500-gpt61sol-semianalysis", "donorRule": "lower-of"
     },
     {
       "id": "chatgpt-pro500-gpt-6-sol-common-gpt-assumption", "provider": "OpenAI", "plan": "ChatGPT Pro 500", "planLabel": "ChatGPT Pro 500 $500 · common GPT assumption", "planPriceUsd": 500, "apiEquivalentUsd": 5386, "valueMultiple": 10.772,
@@ -424,7 +424,7 @@
       "sourceUrls": ["https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x"], "modelIds": ["gpt-6-sol"], "assumptionScope": "user-authorized cross-model application",
       "allocationRegime": "Current post-September 29 Codex schedule",
       "notes": "Common GPT assumption for gpt-6-sol: the lower of the two SemiAnalysis model-conditional figures on ChatGPT Pro 500 (GPT-6.1 Sol's 10.772x; the other donor measured 13.91x). The owner authorises the shared ChatGPT multiples for every GPT model; the lower-of selection applies only to GPT rows without their own figure (owner decision O45, 2026-10-23). It does not measure gpt-6-sol. Original figures and workload are retained in sourceEvidence.semianalysis.",
-      "donorRouteId": "chatgpt-pro500-gpt61sol-semianalysis"
+      "donorRouteId": "chatgpt-pro500-gpt61sol-semianalysis", "donorRule": "lower-of"
     },
     {
       "id": "chatgpt-pro500-gpt-6-luna-common-gpt-assumption", "provider": "OpenAI", "plan": "ChatGPT Pro 500", "planLabel": "ChatGPT Pro 500 $500 · common GPT assumption", "planPriceUsd": 500, "apiEquivalentUsd": 5386, "valueMultiple": 10.772,
@@ -434,7 +434,7 @@
       "sourceUrls": ["https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x"], "modelIds": ["gpt-6-luna"], "assumptionScope": "user-authorized cross-model application",
       "allocationRegime": "Current post-September 29 Codex schedule",
       "notes": "Common GPT assumption for gpt-6-luna: the lower of the two SemiAnalysis model-conditional figures on ChatGPT Pro 500 (GPT-6.1 Sol's 10.772x; the other donor measured 13.91x). The owner authorises the shared ChatGPT multiples for every GPT model; the lower-of selection applies only to GPT rows without their own figure (owner decision O45, 2026-10-23). It does not measure gpt-6-luna. Original figures and workload are retained in sourceEvidence.semianalysis.",
-      "donorRouteId": "chatgpt-pro500-gpt61sol-semianalysis"
+      "donorRouteId": "chatgpt-pro500-gpt61sol-semianalysis", "donorRule": "lower-of"
     },
     {
       "id": "chatgpt-pro500-gpt-6.1-sol-xhigh-common-gpt-assumption", "provider": "OpenAI", "plan": "ChatGPT Pro 500", "planLabel": "ChatGPT Pro 500 $500 · same-model measurement, another effort (O88, O90)", "planPriceUsd": 500, "apiEquivalentUsd": 5386,
@@ -1064,7 +1064,7 @@
       "sourceUrls": ["https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x"], "modelIds": ["gpt-6-luna-low"], "assumptionScope": "user-authorized cross-model application",
       "allocationRegime": "Current post-September 29 Codex schedule",
       "notes": "Common GPT assumption for gpt-6-luna-low: the lower of the two SemiAnalysis model-conditional figures on ChatGPT Plus (GPT-6 Astra's 8.1x; the other donor measured 10.55x). The owner authorises the shared ChatGPT multiples for every GPT model; the lower-of selection applies only to GPT rows without their own figure (owner decision O45, 2026-10-23). It does not measure gpt-6-luna-low. Original figures and workload are retained in sourceEvidence.semianalysis.",
-      "donorRouteId": "chatgpt-plus-gpt6astra-semianalysis"
+      "donorRouteId": "chatgpt-plus-gpt6astra-semianalysis", "donorRule": "lower-of"
     },
     {
       "id": "chatgpt-pro100-gpt-6-luna-low-common-gpt-assumption", "provider": "OpenAI", "plan": "ChatGPT Pro 100", "planLabel": "ChatGPT Pro 100 $100 · common GPT assumption", "planPriceUsd": 100, "apiEquivalentUsd": 1055, "valueMultiple": 10.55,
@@ -1074,7 +1074,7 @@
       "sourceUrls": ["https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x"], "modelIds": ["gpt-6-luna-low"], "assumptionScope": "user-authorized cross-model application",
       "allocationRegime": "Current post-September 29 Codex schedule",
       "notes": "Common GPT assumption for gpt-6-luna-low: the lower of the two SemiAnalysis model-conditional figures on ChatGPT Pro 100 (GPT-6.1 Sol's 10.55x; the other donor measured 13.22x). The owner authorises the shared ChatGPT multiples for every GPT model; the lower-of selection applies only to GPT rows without their own figure (owner decision O45, 2026-10-23). It does not measure gpt-6-luna-low. Original figures and workload are retained in sourceEvidence.semianalysis.",
-      "donorRouteId": "chatgpt-pro100-gpt61sol-semianalysis"
+      "donorRouteId": "chatgpt-pro100-gpt61sol-semianalysis", "donorRule": "lower-of"
     },
     {
       "id": "chatgpt-pro200-gpt-6-luna-low-common-gpt-assumption", "provider": "OpenAI", "plan": "ChatGPT Pro 200", "planLabel": "ChatGPT Pro 200 $200 · common GPT assumption", "planPriceUsd": 200, "apiEquivalentUsd": 2084, "valueMultiple": 10.42,
@@ -1084,7 +1084,7 @@
       "sourceUrls": ["https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x"], "modelIds": ["gpt-6-luna-low"], "assumptionScope": "user-authorized cross-model application",
       "allocationRegime": "Current post-September 29 Codex schedule; eligible legacy Pro 200 allocation until October 29 excluded",
       "notes": "Common GPT assumption for gpt-6-luna-low: the lower of the two SemiAnalysis model-conditional figures on ChatGPT Pro 200 (GPT-6.1 Sol's 10.42x; the other donor measured 14.485x). The owner authorises the shared ChatGPT multiples for every GPT model; the lower-of selection applies only to GPT rows without their own figure (owner decision O45, 2026-10-23). It does not measure gpt-6-luna-low. Original figures and workload are retained in sourceEvidence.semianalysis.",
-      "donorRouteId": "chatgpt-pro200-gpt61sol-semianalysis"
+      "donorRouteId": "chatgpt-pro200-gpt61sol-semianalysis", "donorRule": "lower-of"
     },
     {
       "id": "chatgpt-pro500-gpt-6-luna-low-common-gpt-assumption", "provider": "OpenAI", "plan": "ChatGPT Pro 500", "planLabel": "ChatGPT Pro 500 $500 · common GPT assumption", "planPriceUsd": 500, "apiEquivalentUsd": 5386,
@@ -1094,7 +1094,7 @@
       "sourceUrls": ["https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x"], "modelIds": ["gpt-6-luna-low"], "assumptionScope": "user-authorized cross-model application",
       "allocationRegime": "Current post-September 29 Codex schedule",
       "notes": "Common GPT assumption for gpt-6-luna-low: the lower of the two SemiAnalysis model-conditional figures on ChatGPT Pro 500 (GPT-6.1 Sol's 10.772x; the other donor measured 13.91x). The owner authorises the shared ChatGPT multiples for every GPT model; the lower-of selection applies only to GPT rows without their own figure (owner decision O45, 2026-10-23). It does not measure gpt-6-luna-low. Original figures and workload are retained in sourceEvidence.semianalysis.",
-      "donorRouteId": "chatgpt-pro500-gpt61sol-semianalysis"
+      "donorRouteId": "chatgpt-pro500-gpt61sol-semianalysis", "donorRule": "lower-of"
     },
     {
       "id": "chatgpt-plus-gpt-6-luna-medium-common-gpt-assumption", "provider": "OpenAI", "plan": "ChatGPT Plus", "planLabel": "ChatGPT Plus $20 · common GPT assumption", "planPriceUsd": 20, "apiEquivalentUsd": 162, "valueMultiple": 8.1,
@@ -1104,7 +1104,7 @@
       "sourceUrls": ["https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x"], "modelIds": ["gpt-6-luna-medium"], "assumptionScope": "user-authorized cross-model application",
       "allocationRegime": "Current post-September 29 Codex schedule",
       "notes": "Common GPT assumption for gpt-6-luna-medium: the lower of the two SemiAnalysis model-conditional figures on ChatGPT Plus (GPT-6 Astra's 8.1x; the other donor measured 10.55x). The owner authorises the shared ChatGPT multiples for every GPT model; the lower-of selection applies only to GPT rows without their own figure (owner decision O45, 2026-10-23). It does not measure gpt-6-luna-medium. Original figures and workload are retained in sourceEvidence.semianalysis.",
-      "donorRouteId": "chatgpt-plus-gpt6astra-semianalysis"
+      "donorRouteId": "chatgpt-plus-gpt6astra-semianalysis", "donorRule": "lower-of"
     },
     {
       "id": "chatgpt-pro100-gpt-6-luna-medium-common-gpt-assumption", "provider": "OpenAI", "plan": "ChatGPT Pro 100", "planLabel": "ChatGPT Pro 100 $100 · common GPT assumption", "planPriceUsd": 100, "apiEquivalentUsd": 1055,
@@ -1114,7 +1114,7 @@
       "sourceUrls": ["https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x"], "modelIds": ["gpt-6-luna-medium"], "assumptionScope": "user-authorized cross-model application",
       "allocationRegime": "Current post-September 29 Codex schedule",
       "notes": "Common GPT assumption for gpt-6-luna-medium: the lower of the two SemiAnalysis model-conditional figures on ChatGPT Pro 100 (GPT-6.1 Sol's 10.55x; the other donor measured 13.22x). The owner authorises the shared ChatGPT multiples for every GPT model; the lower-of selection applies only to GPT rows without their own figure (owner decision O45, 2026-10-23). It does not measure gpt-6-luna-medium. Original figures and workload are retained in sourceEvidence.semianalysis.",
-      "donorRouteId": "chatgpt-pro100-gpt61sol-semianalysis"
+      "donorRouteId": "chatgpt-pro100-gpt61sol-semianalysis", "donorRule": "lower-of"
     },
     {
       "id": "chatgpt-pro200-gpt-6-luna-medium-common-gpt-assumption", "provider": "OpenAI", "plan": "ChatGPT Pro 200", "planLabel": "ChatGPT Pro 200 $200 · common GPT assumption", "planPriceUsd": 200, "apiEquivalentUsd": 2084,
@@ -1124,7 +1124,7 @@
       "sourceUrls": ["https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x"], "modelIds": ["gpt-6-luna-medium"], "assumptionScope": "user-authorized cross-model application",
       "allocationRegime": "Current post-September 29 Codex schedule; eligible legacy Pro 200 allocation until October 29 excluded",
       "notes": "Common GPT assumption for gpt-6-luna-medium: the lower of the two SemiAnalysis model-conditional figures on ChatGPT Pro 200 (GPT-6.1 Sol's 10.42x; the other donor measured 14.485x). The owner authorises the shared ChatGPT multiples for every GPT model; the lower-of selection applies only to GPT rows without their own figure (owner decision O45, 2026-10-23). It does not measure gpt-6-luna-medium. Original figures and workload are retained in sourceEvidence.semianalysis.",
-      "donorRouteId": "chatgpt-pro200-gpt61sol-semianalysis"
+      "donorRouteId": "chatgpt-pro200-gpt61sol-semianalysis", "donorRule": "lower-of"
     },
     {
       "id": "chatgpt-pro500-gpt-6-luna-medium-common-gpt-assumption", "provider": "OpenAI", "plan": "ChatGPT Pro 500", "planLabel": "ChatGPT Pro 500 $500 · common GPT assumption", "planPriceUsd": 500, "apiEquivalentUsd": 5386,
@@ -1134,7 +1134,7 @@
       "sourceUrls": ["https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x"], "modelIds": ["gpt-6-luna-medium"], "assumptionScope": "user-authorized cross-model application",
       "allocationRegime": "Current post-September 29 Codex schedule",
       "notes": "Common GPT assumption for gpt-6-luna-medium: the lower of the two SemiAnalysis model-conditional figures on ChatGPT Pro 500 (GPT-6.1 Sol's 10.772x; the other donor measured 13.91x). The owner authorises the shared ChatGPT multiples for every GPT model; the lower-of selection applies only to GPT rows without their own figure (owner decision O45, 2026-10-23). It does not measure gpt-6-luna-medium. Original figures and workload are retained in sourceEvidence.semianalysis.",
-      "donorRouteId": "chatgpt-pro500-gpt61sol-semianalysis"
+      "donorRouteId": "chatgpt-pro500-gpt61sol-semianalysis", "donorRule": "lower-of"
     },
     {
       "id": "chatgpt-plus-gpt-6-luna-high-common-gpt-assumption", "provider": "OpenAI", "plan": "ChatGPT Plus", "planLabel": "ChatGPT Plus $20 · common GPT assumption", "planPriceUsd": 20, "apiEquivalentUsd": 162, "valueMultiple": 8.1,
@@ -1144,7 +1144,7 @@
       "sourceUrls": ["https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x"], "modelIds": ["gpt-6-luna-high"], "assumptionScope": "user-authorized cross-model application",
       "allocationRegime": "Current post-September 29 Codex schedule",
       "notes": "Common GPT assumption for gpt-6-luna-high: the lower of the two SemiAnalysis model-conditional figures on ChatGPT Plus (GPT-6 Astra's 8.1x; the other donor measured 10.55x). The owner authorises the shared ChatGPT multiples for every GPT model; the lower-of selection applies only to GPT rows without their own figure (owner decision O45, 2026-10-23). It does not measure gpt-6-luna-high. Original figures and workload are retained in sourceEvidence.semianalysis.",
-      "donorRouteId": "chatgpt-plus-gpt6astra-semianalysis"
+      "donorRouteId": "chatgpt-plus-gpt6astra-semianalysis", "donorRule": "lower-of"
     },
     {
       "id": "chatgpt-pro100-gpt-6-luna-high-common-gpt-assumption", "provider": "OpenAI", "plan": "ChatGPT Pro 100", "planLabel": "ChatGPT Pro 100 $100 · common GPT assumption", "planPriceUsd": 100, "apiEquivalentUsd": 1055,
@@ -1154,7 +1154,7 @@
       "sourceUrls": ["https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x"], "modelIds": ["gpt-6-luna-high"], "assumptionScope": "user-authorized cross-model application",
       "allocationRegime": "Current post-September 29 Codex schedule",
       "notes": "Common GPT assumption for gpt-6-luna-high: the lower of the two SemiAnalysis model-conditional figures on ChatGPT Pro 100 (GPT-6.1 Sol's 10.55x; the other donor measured 13.22x). The owner authorises the shared ChatGPT multiples for every GPT model; the lower-of selection applies only to GPT rows without their own figure (owner decision O45, 2026-10-23). It does not measure gpt-6-luna-high. Original figures and workload are retained in sourceEvidence.semianalysis.",
-      "donorRouteId": "chatgpt-pro100-gpt61sol-semianalysis"
+      "donorRouteId": "chatgpt-pro100-gpt61sol-semianalysis", "donorRule": "lower-of"
     },
     {
       "id": "chatgpt-pro200-gpt-6-luna-high-common-gpt-assumption", "provider": "OpenAI", "plan": "ChatGPT Pro 200", "planLabel": "ChatGPT Pro 200 $200 · common GPT assumption", "planPriceUsd": 200, "apiEquivalentUsd": 2084,
@@ -1164,7 +1164,7 @@
       "sourceUrls": ["https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x"], "modelIds": ["gpt-6-luna-high"], "assumptionScope": "user-authorized cross-model application",
       "allocationRegime": "Current post-September 29 Codex schedule; eligible legacy Pro 200 allocation until October 29 excluded",
       "notes": "Common GPT assumption for gpt-6-luna-high: the lower of the two SemiAnalysis model-conditional figures on ChatGPT Pro 200 (GPT-6.1 Sol's 10.42x; the other donor measured 14.485x). The owner authorises the shared ChatGPT multiples for every GPT model; the lower-of selection applies only to GPT rows without their own figure (owner decision O45, 2026-10-23). It does not measure gpt-6-luna-high. Original figures and workload are retained in sourceEvidence.semianalysis.",
-      "donorRouteId": "chatgpt-pro200-gpt61sol-semianalysis"
+      "donorRouteId": "chatgpt-pro200-gpt61sol-semianalysis", "donorRule": "lower-of"
     },
     {
       "id": "chatgpt-pro500-gpt-6-luna-high-common-gpt-assumption", "provider": "OpenAI", "plan": "ChatGPT Pro 500", "planLabel": "ChatGPT Pro 500 $500 · common GPT assumption", "planPriceUsd": 500, "apiEquivalentUsd": 5386,
@@ -1174,7 +1174,7 @@
       "sourceUrls": ["https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x"], "modelIds": ["gpt-6-luna-high"], "assumptionScope": "user-authorized cross-model application",
       "allocationRegime": "Current post-September 29 Codex schedule",
       "notes": "Common GPT assumption for gpt-6-luna-high: the lower of the two SemiAnalysis model-conditional figures on ChatGPT Pro 500 (GPT-6.1 Sol's 10.772x; the other donor measured 13.91x). The owner authorises the shared ChatGPT multiples for every GPT model; the lower-of selection applies only to GPT rows without their own figure (owner decision O45, 2026-10-23). It does not measure gpt-6-luna-high. Original figures and workload are retained in sourceEvidence.semianalysis.",
-      "donorRouteId": "chatgpt-pro500-gpt61sol-semianalysis"
+      "donorRouteId": "chatgpt-pro500-gpt61sol-semianalysis", "donorRule": "lower-of"
     },
     {
       "id": "chatgpt-plus-gpt-6-luna-xhigh-common-gpt-assumption", "provider": "OpenAI", "plan": "ChatGPT Plus", "planLabel": "ChatGPT Plus $20 · common GPT assumption", "planPriceUsd": 20, "apiEquivalentUsd": 162, "valueMultiple": 8.1,
@@ -1184,7 +1184,7 @@
       "sourceUrls": ["https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x"], "modelIds": ["gpt-6-luna-xhigh"], "assumptionScope": "user-authorized cross-model application",
       "allocationRegime": "Current post-September 29 Codex schedule",
       "notes": "Common GPT assumption for gpt-6-luna-xhigh: the lower of the two SemiAnalysis model-conditional figures on ChatGPT Plus (GPT-6 Astra's 8.1x; the other donor measured 10.55x). The owner authorises the shared ChatGPT multiples for every GPT model; the lower-of selection applies only to GPT rows without their own figure (owner decision O45, 2026-10-23). It does not measure gpt-6-luna-xhigh. Original figures and workload are retained in sourceEvidence.semianalysis.",
-      "donorRouteId": "chatgpt-plus-gpt6astra-semianalysis"
+      "donorRouteId": "chatgpt-plus-gpt6astra-semianalysis", "donorRule": "lower-of"
     },
     {
       "id": "chatgpt-pro100-gpt-6-luna-xhigh-common-gpt-assumption", "provider": "OpenAI", "plan": "ChatGPT Pro 100", "planLabel": "ChatGPT Pro 100 $100 · common GPT assumption", "planPriceUsd": 100, "apiEquivalentUsd": 1055,
@@ -1194,7 +1194,7 @@
       "sourceUrls": ["https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x"], "modelIds": ["gpt-6-luna-xhigh"], "assumptionScope": "user-authorized cross-model application",
       "allocationRegime": "Current post-September 29 Codex schedule",
       "notes": "Common GPT assumption for gpt-6-luna-xhigh: the lower of the two SemiAnalysis model-conditional figures on ChatGPT Pro 100 (GPT-6.1 Sol's 10.55x; the other donor measured 13.22x). The owner authorises the shared ChatGPT multiples for every GPT model; the lower-of selection applies only to GPT rows without their own figure (owner decision O45, 2026-10-23). It does not measure gpt-6-luna-xhigh. Original figures and workload are retained in sourceEvidence.semianalysis.",
-      "donorRouteId": "chatgpt-pro100-gpt61sol-semianalysis"
+      "donorRouteId": "chatgpt-pro100-gpt61sol-semianalysis", "donorRule": "lower-of"
     },
     {
       "id": "chatgpt-pro200-gpt-6-luna-xhigh-common-gpt-assumption", "provider": "OpenAI", "plan": "ChatGPT Pro 200", "planLabel": "ChatGPT Pro 200 $200 · common GPT assumption", "planPriceUsd": 200, "apiEquivalentUsd": 2084,
@@ -1204,7 +1204,7 @@
       "sourceUrls": ["https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x"], "modelIds": ["gpt-6-luna-xhigh"], "assumptionScope": "user-authorized cross-model application",
       "allocationRegime": "Current post-September 29 Codex schedule; eligible legacy Pro 200 allocation until October 29 excluded",
       "notes": "Common GPT assumption for gpt-6-luna-xhigh: the lower of the two SemiAnalysis model-conditional figures on ChatGPT Pro 200 (GPT-6.1 Sol's 10.42x; the other donor measured 14.485x). The owner authorises the shared ChatGPT multiples for every GPT model; the lower-of selection applies only to GPT rows without their own figure (owner decision O45, 2026-10-23). It does not measure gpt-6-luna-xhigh. Original figures and workload are retained in sourceEvidence.semianalysis.",
-      "donorRouteId": "chatgpt-pro200-gpt61sol-semianalysis"
+      "donorRouteId": "chatgpt-pro200-gpt61sol-semianalysis", "donorRule": "lower-of"
     },
     {
       "id": "chatgpt-pro500-gpt-6-luna-xhigh-common-gpt-assumption", "provider": "OpenAI", "plan": "ChatGPT Pro 500", "planLabel": "ChatGPT Pro 500 $500 · common GPT assumption", "planPriceUsd": 500, "apiEquivalentUsd": 5386,
@@ -1214,7 +1214,7 @@
       "sourceUrls": ["https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x"], "modelIds": ["gpt-6-luna-xhigh"], "assumptionScope": "user-authorized cross-model application",
       "allocationRegime": "Current post-September 29 Codex schedule",
       "notes": "Common GPT assumption for gpt-6-luna-xhigh: the lower of the two SemiAnalysis model-conditional figures on ChatGPT Pro 500 (GPT-6.1 Sol's 10.772x; the other donor measured 13.91x). The owner authorises the shared ChatGPT multiples for every GPT model; the lower-of selection applies only to GPT rows without their own figure (owner decision O45, 2026-10-23). It does not measure gpt-6-luna-xhigh. Original figures and workload are retained in sourceEvidence.semianalysis.",
-      "donorRouteId": "chatgpt-pro500-gpt61sol-semianalysis"
+      "donorRouteId": "chatgpt-pro500-gpt61sol-semianalysis", "donorRule": "lower-of"
     },
     {
       "id": "chatgpt-plus-gpt-6-astra-high-common-gpt-assumption", "provider": "OpenAI", "plan": "ChatGPT Plus", "planLabel": "ChatGPT Plus $20 · same-model measurement, another effort (O88, O90)", "planPriceUsd": 20, "apiEquivalentUsd": 162, "valueMultiple": 8.1,
@@ -1304,7 +1304,7 @@
       "sourceUrls": ["https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x"], "modelIds": ["gpt-5.6-luna-low"], "assumptionScope": "user-authorized cross-model application",
       "allocationRegime": "Current post-September 29 Codex schedule",
       "notes": "Common GPT assumption for gpt-5.6-luna-low: the lower of the two SemiAnalysis model-conditional figures on ChatGPT Plus (GPT-6 Astra's 8.1x; the other donor measured 10.55x). The owner authorises the shared ChatGPT multiples for every GPT model; the lower-of selection applies only to GPT rows without their own figure (owner decision O45, 2026-10-23). It does not measure gpt-5.6-luna-low. Original figures and workload are retained in sourceEvidence.semianalysis.",
-      "donorRouteId": "chatgpt-plus-gpt6astra-semianalysis"
+      "donorRouteId": "chatgpt-plus-gpt6astra-semianalysis", "donorRule": "lower-of"
     },
     {
       "id": "chatgpt-pro100-gpt-5.6-luna-low-common-gpt-assumption", "provider": "OpenAI", "plan": "ChatGPT Pro 100", "planLabel": "ChatGPT Pro 100 $100 · common GPT assumption", "planPriceUsd": 100, "apiEquivalentUsd": 1055,
@@ -1314,7 +1314,7 @@
       "sourceUrls": ["https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x"], "modelIds": ["gpt-5.6-luna-low"], "assumptionScope": "user-authorized cross-model application",
       "allocationRegime": "Current post-September 29 Codex schedule",
       "notes": "Common GPT assumption for gpt-5.6-luna-low: the lower of the two SemiAnalysis model-conditional figures on ChatGPT Pro 100 (GPT-6.1 Sol's 10.55x; the other donor measured 13.22x). The owner authorises the shared ChatGPT multiples for every GPT model; the lower-of selection applies only to GPT rows without their own figure (owner decision O45, 2026-10-23). It does not measure gpt-5.6-luna-low. Original figures and workload are retained in sourceEvidence.semianalysis.",
-      "donorRouteId": "chatgpt-pro100-gpt61sol-semianalysis"
+      "donorRouteId": "chatgpt-pro100-gpt61sol-semianalysis", "donorRule": "lower-of"
     },
     {
       "id": "chatgpt-pro200-gpt-5.6-luna-low-common-gpt-assumption", "provider": "OpenAI", "plan": "ChatGPT Pro 200", "planLabel": "ChatGPT Pro 200 $200 · common GPT assumption", "planPriceUsd": 200, "apiEquivalentUsd": 2084,
@@ -1324,7 +1324,7 @@
       "sourceUrls": ["https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x"], "modelIds": ["gpt-5.6-luna-low"], "assumptionScope": "user-authorized cross-model application",
       "allocationRegime": "Current post-September 29 Codex schedule; eligible legacy Pro 200 allocation until October 29 excluded",
       "notes": "Common GPT assumption for gpt-5.6-luna-low: the lower of the two SemiAnalysis model-conditional figures on ChatGPT Pro 200 (GPT-6.1 Sol's 10.42x; the other donor measured 14.485x). The owner authorises the shared ChatGPT multiples for every GPT model; the lower-of selection applies only to GPT rows without their own figure (owner decision O45, 2026-10-23). It does not measure gpt-5.6-luna-low. Original figures and workload are retained in sourceEvidence.semianalysis.",
-      "donorRouteId": "chatgpt-pro200-gpt61sol-semianalysis"
+      "donorRouteId": "chatgpt-pro200-gpt61sol-semianalysis", "donorRule": "lower-of"
     },
     {
       "id": "chatgpt-pro500-gpt-5.6-luna-low-common-gpt-assumption", "provider": "OpenAI", "plan": "ChatGPT Pro 500", "planLabel": "ChatGPT Pro 500 $500 · common GPT assumption", "planPriceUsd": 500, "apiEquivalentUsd": 5386,
@@ -1334,7 +1334,7 @@
       "sourceUrls": ["https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x"], "modelIds": ["gpt-5.6-luna-low"], "assumptionScope": "user-authorized cross-model application",
       "allocationRegime": "Current post-September 29 Codex schedule",
       "notes": "Common GPT assumption for gpt-5.6-luna-low: the lower of the two SemiAnalysis model-conditional figures on ChatGPT Pro 500 (GPT-6.1 Sol's 10.772x; the other donor measured 13.91x). The owner authorises the shared ChatGPT multiples for every GPT model; the lower-of selection applies only to GPT rows without their own figure (owner decision O45, 2026-10-23). It does not measure gpt-5.6-luna-low. Original figures and workload are retained in sourceEvidence.semianalysis.",
-      "donorRouteId": "chatgpt-pro500-gpt61sol-semianalysis"
+      "donorRouteId": "chatgpt-pro500-gpt61sol-semianalysis", "donorRule": "lower-of"
     }
   ],
   "providerLevelEvidence": [

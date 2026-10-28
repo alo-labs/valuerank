@@ -815,6 +815,7 @@ def assemble(configurations: list[dict], documents: dict, *, release_day: date, 
     allowance_cells = plan_admission.evaluate(documents.get("planReports") or {"reports": []}, policy.get("reportEligibilityProfile") or {}, release_day, families)
     plan_admission.check_routes(documents["planRoutes"]["routes"], allowance_cells, set(families), plan_routes.REPORT_KINDS, families)
     plan_routes.check_same_model_routes(documents["planRoutes"], families)
+    plan_routes.check_lower_of_routes(documents["planRoutes"])
     # I51 L7: an O46 ceiling is recomputed from its recorded credits, rate and fee, so the stored multiple cannot drift.
     for route in documents["planRoutes"]["routes"]:
         if route.get("evidenceClass") == "provider_quota_ceiling":
@@ -1031,11 +1032,39 @@ def _gated_box(row: dict, low: float, high: float, basis: str) -> intervals.Box 
     gate, summary = row["valuationGate"], row["summary"]
     if gate["outcome"] == GATE_NOT_IN_FORCE and blocker_domain(gate, basis) is None:
         return None
-    provisional = summary.provisional or gate["outcome"] == GATE_UNVERIFIED
+    # O94: a row whose AA cost omits a pricing term competes over [C, factor x C] and earns no label (like O29); a caveat
+    # without a stated factor cannot be bounded, so the row has no box (fail closed).
+    if aa_cost_caveat(row):
+        factor = caveat_factor(row)
+        if factor is None:
+            return None
+        high, gate_provisional = high * max(1.0, factor), True
+    else:
+        gate_provisional = False
+    provisional = summary.provisional or gate["outcome"] == GATE_UNVERIFIED or gate_provisional
     if gate["outcome"] == GATE_NOT_IN_FORCE:
         ratio_low, ratio_high = blocker_domain(gate, basis)
         low, high, provisional = low * min(1.0, ratio_low), high * max(1.0, ratio_high), True
     return intervals.Box(row["id"], low, high, summary.lower, summary.upper, provisional)
+
+
+AA_CAVEAT_FACTOR = re.compile(r"(\d+(?:\.\d+)?)\s*x higher pricing", re.IGNORECASE)
+
+
+def aa_cost_caveat(row: dict) -> str | None:
+    """E141: AA's own note on what its published cost omits (a pricing term), or None."""
+
+    note = row.get("aaNote")
+    return note if note and any(word in note.lower() for word in ("pricing", "cost", "price")) else None
+
+
+def caveat_factor(row: dict) -> float | None:
+    """O94: the most the omitted pricing term can multiply the row's cost by, read from AA's note (e.g. "5x higher
+    pricing"); None when the row has no caveat or the note states no factor (its box cannot then be constructed)."""
+
+    note = aa_cost_caveat(row)
+    match = AA_CAVEAT_FACTOR.search(note) if note else None
+    return float(match.group(1)) if match else None
 
 
 def provider_claimed(row: dict) -> bool:
@@ -1155,7 +1184,8 @@ def anchor_eligibility(assembled: dict, components: list[str]) -> list[dict]:
     for row in assembled["rows"]:
         complete = all((row["components"].get(component) or {}).get("completeness") == basket.COMPLETE for component in components)
         outcome = row["valuationGate"]["outcome"]
-        reason = None if complete and outcome in GATE_SCORED else "incomplete cost evidence" if not complete else f"valuation gate: {outcome}"
+        reason = (None if complete and outcome in GATE_SCORED and not aa_cost_caveat(row) else "incomplete cost evidence" if not complete
+                  else f"valuation gate: {outcome}" if outcome not in GATE_SCORED else "AA cost omits a pricing term (O94)")
         table.append({"row": row["id"], "completeEvidence": complete, "valuationGate": outcome, "eligible": reason is None, "reason": reason})
     return table
 
@@ -1245,7 +1275,7 @@ def interval_outputs(assembled: dict, frozen: dict, basis: str, components: list
     unconstructible = sorted(row["id"] for row in assembled["rows"] if row["id"] in not_in_force and blocker_domain(row["valuationGate"], basis) is None)
     # E222/E228/E233: an unverified basis, a provider-claimed leaf, or (Plan) a route whose evidence a detected change may
     # have superseded, competes but earns no label, exactly like an O29 blocker.
-    blocked = not_in_force | {row["id"] for row in assembled["rows"] if row["valuationGate"]["outcome"] == GATE_UNVERIFIED or provider_claimed(row)}
+    blocked = not_in_force | {row["id"] for row in assembled["rows"] if row["valuationGate"]["outcome"] == GATE_UNVERIFIED or provider_claimed(row) or aa_cost_caveat(row)}
     if basis == "plan":
         blocked |= {row["id"] for row in assembled["rows"] if plan_routes.change_flagged(row["routeSelection"]["selected"], date.fromisoformat(assembled["releaseDay"]) if assembled.get("releaseDay") else None)}
     universe = sorted(box.row for box in boxes if box.row not in blocked)
@@ -1259,12 +1289,14 @@ def interval_outputs(assembled: dict, frozen: dict, basis: str, components: list
         return {"universe": universe, "blockers": sorted(set(blockers) | set(unconstructible)), "unevaluable": unevaluable, "status": intervals.UNRESOLVED,
                 "reason": "a blocker's current-tariff domain cannot be constructed (E183, E185): " + ", ".join(unconstructible)}
     frontier, bars = intervals.frontier(boxes), _bar_results(boxes, assembled, frozen)
-    # E170/O29: a blocker competes over its hull but earns no interval label of its own.
+    # E170/O29: a blocker competes over its hull but earns no interval label of its own; I79: each says why.
+    by_id = {row["id"]: row for row in assembled["rows"]}
     for row_id in blockers:
-        frontier[row_id] = {"status": WITHHELD_LABEL}
+        status = withheld_label(by_id[row_id])
+        frontier[row_id] = {"status": status}
         for bar in bars:
             if "rows" in bar:
-                bar["rows"][row_id] = {"status": WITHHELD_LABEL}
+                bar["rows"][row_id] = {"status": status}
                 bar["possibleCheapest"] = [item for item in bar["possibleCheapest"] if item != row_id]
                 bar["uncheckedCheaperSiblings"].pop(row_id, None)
     for bar in bars:
@@ -1274,6 +1306,16 @@ def interval_outputs(assembled: dict, frozen: dict, basis: str, components: list
 
 
 WITHHELD_LABEL = "no interval label: AA cost on a price not in force at V (O29); competes over its current-tariff hull"
+WITHHELD_CAVEAT = "no interval label: AA's cost omits a pricing term (O94); competes over its published cost up to the stated factor"
+WITHHELD_OTHER = "no interval label: unverified valuation basis (E222), a provider-claimed leaf (E233) or a change-flagged Plan route (E228); competes at its published record"
+
+
+def withheld_label(row: dict) -> str:
+    """Why a blocker earns no interval label of its own (O29, O94, E222, E233, E228)."""
+
+    if row["valuationGate"]["outcome"] == GATE_NOT_IN_FORCE:
+        return WITHHELD_LABEL
+    return WITHHELD_CAVEAT if aa_cost_caveat(row) else WITHHELD_OTHER
 
 
 SUBSET_PLAN_INTERVALS = "unevaluable: no Plan multiple is identified for a subset workload (E149, E190)"
@@ -2145,6 +2187,7 @@ def _measured_only_view(rows: list[dict], frozen: dict, per_row: dict, plan_rows
         status = "measured, target-workload identified" if selected["identification"] in plan_routes.IDENTIFIED else "measured, target-workload unmatched"
         # I74 L2: a row measured on the same model at another effort (an O88 route, O90) says so.
         entries[row["id"]] = {"status": status, "routeId": selected["route"]["id"], "crossEffort": bool(selected["route"].get("sameModelAcrossEfforts")),
+                              "faultWindow": selected.get("faultWindow"),
                               "costUsd": cost, "costScore": score_value, "value": value}
         values[row["id"]] = value
     ranks = competition_ranks(values)
@@ -2530,7 +2573,7 @@ def plan_amount(selected: dict | None, workload: str | None = None) -> dict | No
 def _row_json(row: dict, scores: dict, ranks: dict, alternatives: list[dict]) -> dict:
     selection = row["routeSelection"]
     selected = selection["selected"]
-    caveat = row.get("aaNote") if row.get("aaNote") and any(word in row["aaNote"].lower() for word in ("pricing", "cost", "price")) else None
+    caveat = aa_cost_caveat(row)
     return {
         "id": row["id"],
         "name": row["name"],
@@ -3000,10 +3043,12 @@ def bar_labels(assembled: dict, frozen: dict, *, seed: int, batch: int) -> list[
     # E147: the compiled dependency graph must be the registered kernel-check object, or the build fails.
     if any(len(component) > 1 for component in scenarios.dependency_components(panel)):
         raise ValueError(f"compiled dependency graph differs from the registered kernel-check object ({REGISTERED_DEPENDENCY})")
-    blocked = {row["id"] for row in assembled["rows"] if row["valuationGate"]["outcome"] == GATE_NOT_IN_FORCE}
+    # O94: a row whose AA cost omits a pricing term is a blocker like an O29 row: scenario draws keep its published cost, so
+    # a label also needs BlockerSafe against its widened box.
+    blocked = {row["id"] for row in assembled["rows"] if row["valuationGate"]["outcome"] == GATE_NOT_IN_FORCE or aa_cost_caveat(row)}
     # E233: a provider-claimed row competes in every scenario but is never a candidate for a label; I76 L1, E92/E222: nor
     # is a row on an unverified valuation basis.
-    claimed = {row["id"] for row in assembled["rows"] if provider_claimed(row) or row["valuationGate"]["outcome"] == GATE_UNVERIFIED}
+    claimed = {row["id"] for row in assembled["rows"] if provider_claimed(row) or row["valuationGate"]["outcome"] == GATE_UNVERIFIED or aa_cost_caveat(row)}
     labels = []
     for reference in frozen["barReferences"]:
         bar = _bar_reference(reference)

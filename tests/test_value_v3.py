@@ -134,7 +134,7 @@ def fixture_manifest(capture: dict) -> dict:
 
 
 CONFIGURATIONS = [
-    {"id": "a", "name": "A", "effort": "max", "aaSlug": "a-max", "aaNote": "A has higher pricing on long inputs not reflected in cost figures."},
+    {"id": "a", "name": "A", "effort": "max", "aaSlug": "a-max", "aaNote": "A is plotted with a footnote."},
     {"id": "b", "name": "B", "effort": "max", "aaSlug": "b-max"},
     {"id": "c", "name": "C", "effort": "max", "aaSlug": "c-max"},
 ]
@@ -289,7 +289,7 @@ def test_score_ranks_gates_disclosures_and_intervals():
     rows = {row["id"]: row for row in output["rows"]}
     assert {row["api"]["rank"] for row in output["rows"]} == {1, 2, 3}
     assert rows["c"]["quality"]["status"] == "scored" and rows["a"]["plan"]["selectionReason"] == "only remaining eligible route"
-    assert rows["a"]["aaCostCaveat"].startswith("A has higher pricing") and rows["b"]["aaCostCaveat"] is None
+    assert rows["a"]["aaCostCaveat"] is None and rows["b"]["aaCostCaveat"] is None  # a footnote without a pricing term
     assert output["gates"]["hold"] is False and output["intervals"]["api"]["status"] == "evaluated"
     # O48: the Plan basis ranks plan rows, "<configuration>@<plan>".
     assert output["intervals"]["plan"]["universe"] == ["b@plan-b"]
@@ -891,7 +891,7 @@ def test_valuation_contract_and_cost_boundary():
     assert output["costBoundary"]["label"].startswith("contestant-model API token cost")
     assert set(output["costBoundary"]["components"]) == set(result["admitted"])
     rows = {row["id"]: row for row in output["rows"]}
-    assert rows["a"]["valuation"]["providerBillingRule"].startswith("banded") and rows["b"]["valuation"]["providerBillingRule"] == "not recorded"
+    assert rows["b"]["valuation"]["providerBillingRule"] == "not recorded"  # the caveated row is covered by the O94 test
 
 
 def test_evidence_bundle_hashes_every_input_artifact(tmp_path, monkeypatch):
@@ -1604,7 +1604,7 @@ def test_unverified_and_change_flagged_rows_compete_without_labels():
     row = next(item for item in result["rows"] if item["id"] == "a")
     row["valuationGate"] = {**row["valuationGate"], "outcome": v.GATE_UNVERIFIED}
     api = v.interval_outputs(result, frozen, "api")
-    assert "a" in api["blockers"] and api["frontier"]["a"] == {"status": v.WITHHELD_LABEL}
+    assert "a" in api["blockers"] and api["frontier"]["a"] == {"status": v.WITHHELD_OTHER}
     b = next(item for item in result["rows"] if item["id"] == "b")
     selected = b["routeSelection"]["selected"]
     b["routeSelection"] = {**b["routeSelection"], "selected": {**selected, "expiry": "possibly-superseded", "route": {**selected["route"], "changeDetectedOn": "2026-10-15"}}}
@@ -2080,3 +2080,24 @@ def test_plan_evidence_names_a_same_model_measurement():
     row = {"plan": {"fallback": None, "grade": "controlled", "flags": [plan_routes.CROSS_EFFORT_FLAG]}}
     assert v._plan_evidence(row) == "same-model measurement from another effort"
     assert v._plan_evidence({"plan": {"fallback": None, "grade": "controlled", "flags": []}}) == "controlled measurement"
+
+
+def test_a_row_whose_aa_cost_omits_a_pricing_term_competes_over_a_range_without_labels():
+    """O94: AA's note "5x higher pricing ..." widens the row's box to [C, 5C]; the row is a blocker, never an anchor
+    reference, never a label candidate; a note without a factor leaves the row without a box (fail closed)."""
+
+    result, frozen = scored()
+    row = next(item for item in result["rows"] if item["id"] == "a")
+    row["aaNote"] = "Model A has 5x higher pricing on longer-context inputs which are not currently reflected."
+    assert v.caveat_factor(row) == 5.0 and v.withheld_label(row) == v.WITHHELD_CAVEAT
+    box = next(item for item in v.api_boxes(result) if item.row == "a")
+    assert box.provisional and box.c_high == pytest.approx(row["cost"]["highUsd"] * 5) and box.c_low == pytest.approx(row["cost"]["lowUsd"])
+    api = v.interval_outputs(result, frozen, "api")
+    assert "a" in api["blockers"] and api["frontier"]["a"] == {"status": v.WITHHELD_CAVEAT}
+    published = {item["id"]: item for item in v.score(result, frozen)["rows"]}
+    assert published["a"]["aaCostCaveat"].startswith("Model A has 5x") and published["a"]["valuation"]["tariffCorrectedValuation"].startswith("unidentified")
+    assert next(item for item in v.anchor_eligibility(result, result["admitted"]) if item["row"] == "a")["reason"] == "AA cost omits a pricing term (O94)"
+    row["aaNote"] = "Model A's cost omits a pricing term."
+    assert v.caveat_factor(row) is None and all(item.row != "a" for item in v.api_boxes(result))
+    row["aaNote"] = "Unrelated note."
+    assert v.aa_cost_caveat(row) is None and v.caveat_factor(row) is None

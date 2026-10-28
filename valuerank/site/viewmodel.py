@@ -335,7 +335,9 @@ def _entry(source: dict, row: dict | None, quality_ranks: dict, frontier: dict, 
         # Every scored value is an owner or AA measurement (provider claims never enter); Plan routes grade separately.
         "grade": "measured" if leaves else "missing",
         "pareto": {basis: model_id in pareto[basis] for basis in BASES},
-        "frontierStatus": {"api": {"definite": api_frontier["definite"], "possible": api_frontier["possible"]} if api_frontier else None, "plan": None},
+        # O94/E183: a blocker carries only the reason it earns no interval label.
+        "frontierStatus": {"api": ({"definite": api_frontier["definite"], "possible": api_frontier["possible"]} if "possible" in api_frontier
+                                   else {"withheld": api_frontier.get("status")}) if api_frontier else None, "plan": None},
         # O48: the Plan shares are those of the configuration's own plan row (its selected route).
         "scenario": {"api": shares["api"].get(model_id), "plan": shares["plan"].get(row.get("planRowId"))},
         "flags": _row_flags(row),

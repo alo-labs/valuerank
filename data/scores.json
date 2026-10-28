@@ -16243,9 +16243,7 @@
         "status": "fails: 0 non-provisional report(s) in the current partition",
         "listed": true,
         "currentPartition": 4,
-        "partitionsWithReports": [
-          2
-        ],
+        "partitionsWithReports": [],
         "configurations": [
           "gpt-6-astra"
         ],
@@ -16274,20 +16272,20 @@
             "observer": "sentrybottale",
             "valueLower": 330.0,
             "valueUpper": 400.0,
-            "partition": 2,
+            "partition": null,
             "provisional": false,
             "speedMode": null,
-            "excluded": null
+            "excluded": "measured on a provider-acknowledged accounting-fault day"
           },
           {
             "id": "mrak-pro100",
             "observer": "mrak-",
             "valueLower": 482.5,
             "valueUpper": 482.5,
-            "partition": 2,
+            "partition": null,
             "provisional": false,
             "speedMode": "fast",
-            "excluded": null
+            "excluded": "measured on a provider-acknowledged accounting-fault day"
           },
           {
             "id": "yiwenpang-pro100",
@@ -24725,7 +24723,6 @@
     "intervals": {
       "api": {
         "universe": [
-          "claude-haiku-5-5-max",
           "claude-opus-5-5",
           "claude-sonnet-5-5",
           "deepseek-v4-1-flash-1017",
@@ -24734,7 +24731,9 @@
           "gpt-6-luna",
           "gpt-6.1-sol"
         ],
-        "blockers": [],
+        "blockers": [
+          "claude-haiku-5-5-max"
+        ],
         "unevaluable": [
           "mimo-v2-6-pro"
         ],
@@ -24800,13 +24799,7 @@
             "definiteCounterexample": null
           },
           "claude-haiku-5-5-max": {
-            "possible": "disproved",
-            "possibleWitness": null,
-            "possibleBlockedBy": [
-              "deepseek-v4-1-flash-1017"
-            ],
-            "definite": "disproved",
-            "definiteCounterexample": "deepseek-v4-1-flash-1017"
+            "status": "no interval label: AA's cost omits a pricing term (O94); competes over its published cost up to the stated factor"
           },
           "gpt-6-luna": {
             "possible": "certified",
@@ -24872,11 +24865,7 @@
                 "displayedMargin": 1.4010793963499069
               },
               "claude-haiku-5-5-max": {
-                "confirmed": "disproved",
-                "possible": "disproved",
-                "possibleCheapest": "disproved",
-                "witnessReferenceQuality": null,
-                "displayedMargin": -13.105093568845014
+                "status": "no interval label: AA's cost omits a pricing term (O94); competes over its published cost up to the stated factor"
               },
               "gpt-6-luna": {
                 "confirmed": "disproved",
@@ -24954,11 +24943,7 @@
                 "displayedMargin": 11.671817009342071
               },
               "claude-haiku-5-5-max": {
-                "confirmed": "disproved",
-                "possible": "disproved",
-                "possibleCheapest": "disproved",
-                "witnessReferenceQuality": null,
-                "displayedMargin": -2.8343559558528497
+                "status": "no interval label: AA's cost omits a pricing term (O94); competes over its published cost up to the stated factor"
               },
               "gpt-6-luna": {
                 "confirmed": "disproved",
@@ -25031,11 +25016,7 @@
                 "displayedMargin": 0.0
               },
               "claude-haiku-5-5-max": {
-                "confirmed": "disproved",
-                "possible": "disproved",
-                "possibleCheapest": "disproved",
-                "witnessReferenceQuality": null,
-                "displayedMargin": -14.50617296519492
+                "status": "no interval label: AA's cost omits a pricing term (O94); competes over its published cost up to the stated factor"
               },
               "gpt-6-luna": {
                 "confirmed": "disproved",
@@ -26089,7 +26070,6 @@
         ],
         "api": {
           "universe": [
-            "claude-haiku-5-5-max",
             "claude-opus-5-5",
             "claude-sonnet-5-5",
             "deepseek-v4-1-flash-1017",
@@ -26099,7 +26079,9 @@
             "gpt-6.1-sol",
             "mimo-v2-6-pro"
           ],
-          "blockers": [],
+          "blockers": [
+            "claude-haiku-5-5-max"
+          ],
           "unevaluable": [],
           "status": "evaluated",
           "frontier": {
@@ -26173,13 +26155,7 @@
               "definiteCounterexample": null
             },
             "claude-haiku-5-5-max": {
-              "possible": "disproved",
-              "possibleWitness": null,
-              "possibleBlockedBy": [
-                "mimo-v2-6-pro"
-              ],
-              "definite": "disproved",
-              "definiteCounterexample": "mimo-v2-6-pro"
+              "status": "no interval label: AA's cost omits a pricing term (O94); competes over its published cost up to the stated factor"
             },
             "gpt-6-luna": {
               "possible": "certified",
@@ -26252,11 +26228,7 @@
                   "displayedMargin": -10.270737612992164
                 },
                 "claude-haiku-5-5-max": {
-                  "confirmed": "disproved",
-                  "possible": "disproved",
-                  "possibleCheapest": "disproved",
-                  "witnessReferenceQuality": null,
-                  "displayedMargin": -13.105093568845014
+                  "status": "no interval label: AA's cost omits a pricing term (O94); competes over its published cost up to the stated factor"
                 },
                 "gpt-6-luna": {
                   "confirmed": "disproved",
@@ -26341,11 +26313,7 @@
                   "displayedMargin": 0.0
                 },
                 "claude-haiku-5-5-max": {
-                  "confirmed": "disproved",
-                  "possible": "disproved",
-                  "possibleCheapest": "disproved",
-                  "witnessReferenceQuality": null,
-                  "displayedMargin": -2.8343559558528497
+                  "status": "no interval label: AA's cost omits a pricing term (O94); competes over its published cost up to the stated factor"
                 },
                 "gpt-6-luna": {
                   "confirmed": "disproved",
@@ -26427,11 +26395,7 @@
                   "displayedMargin": -11.671817009342071
                 },
                 "claude-haiku-5-5-max": {
-                  "confirmed": "disproved",
-                  "possible": "disproved",
-                  "possibleCheapest": "disproved",
-                  "witnessReferenceQuality": null,
-                  "displayedMargin": -14.50617296519492
+                  "status": "no interval label: AA's cost omits a pricing term (O94); competes over its published cost up to the stated factor"
                 },
                 "gpt-6-luna": {
                   "confirmed": "disproved",
@@ -26488,6 +26452,7 @@
           "status": "measured, target-workload unmatched",
           "routeId": "claude-pro-opus55-semianalysis",
           "crossEffort": false,
+          "faultWindow": null,
           "costUsd": 158.77276952112044,
           "costScore": 53.511355528972736,
           "value": 64.16075927060695,
@@ -26500,6 +26465,7 @@
           "status": "measured, target-workload unmatched",
           "routeId": "chatgpt-pro500-gpt61sol-semianalysis",
           "crossEffort": false,
+          "faultWindow": "OpenAI support e-mail quoted by Vanja Petreski: Pro 200 → Pro 500 upgrades kept the previous plan's allowance until corrected on 2026-10-16",
           "costUsd": 114.47361271340715,
           "costScore": 58.11487226371908,
           "value": 62.61450682625437,
@@ -26512,6 +26478,7 @@
           "status": "measured, target-workload unmatched",
           "routeId": "chatgpt-pro200-gpt6astra-semianalysis",
           "crossEffort": false,
+          "faultWindow": null,
           "costUsd": 406.2854955570795,
           "costScore": 40.28913376965987,
           "value": 58.779159702551496,
@@ -30348,7 +30315,6 @@
         "label": "anchors from frontier and near-frontier configurations only (diagnostic; the frozen anchors stay primary)",
         "status": "evaluated",
         "references": [
-          "claude-haiku-5-5-max",
           "claude-opus-5-5",
           "claude-sonnet-5-5",
           "deepseek-v4-1-flash-1017",
@@ -30363,7 +30329,6 @@
               "low": 62.85953251074453,
               "high": 18703.432249587986,
               "referenceIds": [
-                "claude-haiku-5-5-max",
                 "claude-opus-5-5",
                 "claude-sonnet-5-5",
                 "deepseek-v4-1-flash-1017",
@@ -30414,7 +30379,6 @@
               "low": 5.83545604444342,
               "high": 7115.532636239274,
               "referenceIds": [
-                "claude-haiku-5-5-max",
                 "claude-opus-5-5",
                 "claude-sonnet-5-5",
                 "deepseek-v4-1-flash-1017",
@@ -30532,11 +30496,7 @@
                 "displayedMargin": 1.4010793963499069
               },
               "claude-haiku-5-5-max": {
-                "confirmed": "disproved",
-                "possible": "disproved",
-                "possibleCheapest": "disproved",
-                "witnessReferenceQuality": null,
-                "displayedMargin": -13.105093568845014
+                "status": "no interval label: AA's cost omits a pricing term (O94); competes over its published cost up to the stated factor"
               },
               "gpt-6-luna": {
                 "confirmed": "disproved",
@@ -31182,8 +31142,8 @@
           "row": "claude-haiku-5-5-max",
           "completeEvidence": true,
           "valuationGate": "compatible as captured",
-          "eligible": true,
-          "reason": null
+          "eligible": false,
+          "reason": "AA cost omits a pricing term (O94)"
         },
         {
           "row": "gpt-6-luna",
@@ -31943,7 +31903,7 @@
         {
           "key": "planRoutes",
           "artifact": "data/plan_cost_routes.json",
-          "sha256": "69cb60b91092139d1aab86e2fbe3d810ae11c8b7b24abd20dae39e1ca4623bb8",
+          "sha256": "6b2ff00ae4ace7958fd8f5990a327ba421f673a320c13521c13c0b4d62417565",
           "capturedAt": "2026-10-25",
           "extractor": "editorial Plan evidence registry"
         },
@@ -32011,7 +31971,7 @@
           "extractor": "valuerank.value_v3 freeze"
         }
       ],
-      "bundleHash": "7ef1b00e00c430f25af29bb77d62224a6ade1c39e02f5b1e95b1c207ae0dfc34",
+      "bundleHash": "d4216fb8b1ca3d45c63f55347e01be19a6b9ff2b7215b589c9ec4376c91ce3c4",
       "rebuild": "every published output is rebuilt from these artifacts at the pinned publication clock (npm run verify:docs), never from live pages"
     },
     "track": {
@@ -40292,9 +40252,7 @@
           "status": "fails: 0 non-provisional report(s) in the current partition",
           "listed": true,
           "currentPartition": 4,
-          "partitionsWithReports": [
-            2
-          ],
+          "partitionsWithReports": [],
           "configurations": [
             "gpt-6-astra"
           ],
@@ -40323,20 +40281,20 @@
               "observer": "sentrybottale",
               "valueLower": 330.0,
               "valueUpper": 400.0,
-              "partition": 2,
+              "partition": null,
               "provisional": false,
               "speedMode": null,
-              "excluded": null
+              "excluded": "measured on a provider-acknowledged accounting-fault day"
             },
             {
               "id": "mrak-pro100",
               "observer": "mrak-",
               "valueLower": 482.5,
               "valueUpper": 482.5,
-              "partition": 2,
+              "partition": null,
               "provisional": false,
               "speedMode": "fast",
-              "excluded": null
+              "excluded": "measured on a provider-acknowledged accounting-fault day"
             },
             {
               "id": "yiwenpang-pro100",
@@ -53456,8 +53414,6 @@
       "intervals": {
         "api": {
           "universe": [
-            "claude-haiku-5-5-high",
-            "claude-haiku-5-5-medium",
             "claude-opus-5-5-high",
             "claude-opus-5-5-medium",
             "deepseek-v4-1-flash-1017",
@@ -53473,7 +53429,10 @@
             "kimi-k3-1-pro",
             "mimo-v2-6-pro"
           ],
-          "blockers": [],
+          "blockers": [
+            "claude-haiku-5-5-high",
+            "claude-haiku-5-5-medium"
+          ],
           "unevaluable": [],
           "status": "evaluated",
           "frontier": {
@@ -53578,33 +53537,20 @@
               "definiteCounterexample": null
             },
             "claude-haiku-5-5-high": {
+              "status": "no interval label: AA's cost omits a pricing term (O94); competes over its published cost up to the stated factor"
+            },
+            "gpt-6-luna-xhigh": {
               "possible": "certified",
               "possibleWitness": {
                 "row": "best corner",
                 "others": "worst corners"
               },
               "possibleBlockedBy": [],
-              "definite": "certified",
-              "definiteCounterexample": null
-            },
-            "gpt-6-luna-xhigh": {
-              "possible": "disproved",
-              "possibleWitness": null,
-              "possibleBlockedBy": [
-                "claude-haiku-5-5-medium"
-              ],
               "definite": "disproved",
               "definiteCounterexample": "claude-haiku-5-5-medium"
             },
             "claude-haiku-5-5-medium": {
-              "possible": "certified",
-              "possibleWitness": {
-                "row": "best corner",
-                "others": "worst corners"
-              },
-              "possibleBlockedBy": [],
-              "definite": "certified",
-              "definiteCounterexample": null
+              "status": "no interval label: AA's cost omits a pricing term (O94); competes over its published cost up to the stated factor"
             },
             "gpt-6-luna-high": {
               "possible": "certified",
@@ -53718,11 +53664,7 @@
                   "displayedMargin": -6.474996483041856
                 },
                 "claude-haiku-5-5-high": {
-                  "confirmed": "disproved",
-                  "possible": "disproved",
-                  "possibleCheapest": "disproved",
-                  "witnessReferenceQuality": null,
-                  "displayedMargin": -7.109816121743634
+                  "status": "no interval label: AA's cost omits a pricing term (O94); competes over its published cost up to the stated factor"
                 },
                 "gpt-6-luna-xhigh": {
                   "confirmed": "disproved",
@@ -53732,11 +53674,7 @@
                   "displayedMargin": -11.235616131348088
                 },
                 "claude-haiku-5-5-medium": {
-                  "confirmed": "disproved",
-                  "possible": "disproved",
-                  "possibleCheapest": "disproved",
-                  "witnessReferenceQuality": null,
-                  "displayedMargin": -10.830595499639884
+                  "status": "no interval label: AA's cost omits a pricing term (O94); competes over its published cost up to the stated factor"
                 },
                 "gpt-6-luna-high": {
                   "confirmed": "disproved",
@@ -53850,30 +53788,22 @@
                 "gpt-6-luna": {
                   "confirmed": "certified",
                   "possible": "certified",
-                  "possibleCheapest": "disproved",
-                  "witnessReferenceQuality": null,
+                  "possibleCheapest": "certified",
+                  "witnessReferenceQuality": 38.00296858278191,
                   "displayedMargin": 4.760619648306232
                 },
                 "claude-haiku-5-5-high": {
-                  "confirmed": "certified",
-                  "possible": "certified",
-                  "possibleCheapest": "disproved",
-                  "witnessReferenceQuality": null,
-                  "displayedMargin": 4.125800009604454
+                  "status": "no interval label: AA's cost omits a pricing term (O94); competes over its published cost up to the stated factor"
                 },
                 "gpt-6-luna-xhigh": {
                   "confirmed": "disproved",
                   "possible": "certified",
-                  "possibleCheapest": "disproved",
-                  "witnessReferenceQuality": null,
+                  "possibleCheapest": "certified",
+                  "witnessReferenceQuality": 38.00296858278191,
                   "displayedMargin": 0.0
                 },
                 "claude-haiku-5-5-medium": {
-                  "confirmed": "certified",
-                  "possible": "certified",
-                  "possibleCheapest": "certified",
-                  "witnessReferenceQuality": 38.00296858278191,
-                  "displayedMargin": 0.40502063170820435
+                  "status": "no interval label: AA's cost omits a pricing term (O94); competes over its published cost up to the stated factor"
                 },
                 "gpt-6-luna-high": {
                   "confirmed": "disproved",
@@ -53898,17 +53828,23 @@
                 }
               },
               "possibleCheapest": [
-                "claude-haiku-5-5-medium"
+                "gpt-6-luna",
+                "gpt-6-luna-xhigh"
               ],
-              "confirmedCheapest": "claude-haiku-5-5-medium",
+              "confirmedCheapest": null,
               "uncheckedCheaperSiblings": {
-                "claude-haiku-5-5-medium": [
-                  "Claude Haiku 5.5 (low)"
+                "gpt-6-luna": [
+                  "GPT-6 Luna (low)",
+                  "GPT-6 Luna (non-reasoning)"
+                ],
+                "gpt-6-luna-xhigh": [
+                  "GPT-6 Luna (low)",
+                  "GPT-6 Luna (non-reasoning)"
                 ]
               },
-              "possibleQualifierN": 13,
-              "confirmedQualifierN": 12,
-              "comparison": "compares 13 configurations that can qualify"
+              "possibleQualifierN": 11,
+              "confirmedQualifierN": 10,
+              "comparison": "compares 11 configurations that can qualify"
             },
             {
               "reference": {
@@ -53990,11 +53926,7 @@
                   "displayedMargin": -15.843891289992222
                 },
                 "claude-haiku-5-5-high": {
-                  "confirmed": "disproved",
-                  "possible": "disproved",
-                  "possibleCheapest": "disproved",
-                  "witnessReferenceQuality": null,
-                  "displayedMargin": -16.478710928694
+                  "status": "no interval label: AA's cost omits a pricing term (O94); competes over its published cost up to the stated factor"
                 },
                 "gpt-6-luna-xhigh": {
                   "confirmed": "disproved",
@@ -54004,11 +53936,7 @@
                   "displayedMargin": -20.604510938298453
                 },
                 "claude-haiku-5-5-medium": {
-                  "confirmed": "disproved",
-                  "possible": "disproved",
-                  "possibleCheapest": "disproved",
-                  "witnessReferenceQuality": null,
-                  "displayedMargin": -20.19949030659025
+                  "status": "no interval label: AA's cost omits a pricing term (O94); competes over its published cost up to the stated factor"
                 },
                 "gpt-6-luna-high": {
                   "confirmed": "disproved",
@@ -54733,11 +54661,12 @@
           },
           {
             "status": "certified",
-            "possibleQualifierN": 13,
-            "confirmedQualifierN": 12,
-            "confirmedCheapest": "claude-haiku-5-5-medium",
+            "possibleQualifierN": 11,
+            "confirmedQualifierN": 10,
+            "confirmedCheapest": null,
             "possibleCheapest": [
-              "claude-haiku-5-5-medium"
+              "gpt-6-luna",
+              "gpt-6-luna-xhigh"
             ],
             "bar": "bar:lower-quartile-quality"
           },
@@ -54815,6 +54744,7 @@
             "status": "measured, target-workload unmatched",
             "routeId": "chatgpt-pro500-gpt-6.1-sol-high-common-gpt-assumption",
             "crossEffort": true,
+            "faultWindow": "OpenAI support e-mail quoted by Vanja Petreski: Pro 200 → Pro 500 upgrades kept the previous plan's allowance until corrected on 2026-10-16",
             "costUsd": 40.01788395312951,
             "costScore": 50.61727664393484,
             "value": 55.5354801209504,
@@ -54824,6 +54754,7 @@
             "status": "measured, target-workload unmatched",
             "routeId": "claude-pro-claude-opus-5-5-high-common-opus55-assumption",
             "crossEffort": true,
+            "faultWindow": null,
             "costUsd": 31.58180348427274,
             "costScore": 53.14146312153767,
             "value": 58.38673913553433,
@@ -54836,6 +54767,7 @@
             "status": "measured, target-workload unmatched",
             "routeId": "claude-pro-claude-opus-5-5-medium-common-opus55-assumption",
             "crossEffort": true,
+            "faultWindow": null,
             "costUsd": 24.171414285944287,
             "costScore": 55.99260158357388,
             "value": 58.25300118587574,
@@ -54845,6 +54777,7 @@
             "status": "measured, target-workload unmatched",
             "routeId": "chatgpt-pro500-gpt-6.1-sol-medium-common-gpt-assumption",
             "crossEffort": true,
+            "faultWindow": "OpenAI support e-mail quoted by Vanja Petreski: Pro 200 → Pro 500 upgrades kept the previous plan's allowance until corrected on 2026-10-16",
             "costUsd": 29.525225142667672,
             "costScore": 53.85940310645262,
             "value": 54.116398143155074,
@@ -54854,6 +54787,7 @@
             "status": "measured, target-workload unmatched",
             "routeId": "chatgpt-pro200-gpt-6-astra-high-common-gpt-assumption",
             "crossEffort": true,
+            "faultWindow": null,
             "costUsd": 164.45253229812272,
             "costScore": 35.54867392144667,
             "value": 52.84277812117194,
@@ -59614,8 +59548,6 @@
           "label": "anchors from frontier and near-frontier configurations only (diagnostic; the frozen anchors stay primary)",
           "status": "evaluated",
           "references": [
-            "claude-haiku-5-5-high",
-            "claude-haiku-5-5-medium",
             "claude-opus-5-5-high",
             "claude-opus-5-5-medium",
             "deepseek-v4-1-flash-1017",
@@ -59637,8 +59569,6 @@
                 "low": 10.354950690764687,
                 "high": 4764.189860676615,
                 "referenceIds": [
-                  "claude-haiku-5-5-high",
-                  "claude-haiku-5-5-medium",
                   "claude-opus-5-5-high",
                   "claude-opus-5-5-medium",
                   "deepseek-v4-1-flash-1017",
@@ -59709,11 +59639,9 @@
             },
             "plan": {
               "anchors": {
-                "low": 0.38972414899704105,
+                "low": 0.961283948270023,
                 "high": 4613.576656322625,
                 "referenceIds": [
-                  "claude-haiku-5-5-high",
-                  "claude-haiku-5-5-medium",
                   "claude-opus-5-5-high",
                   "claude-opus-5-5-medium",
                   "deepseek-v4-1-flash-1017",
@@ -59731,9 +59659,9 @@
                 ]
               },
               "exchangeRate": {
-                "valuePointsPerCostDoubling": 1.8475894387318745,
-                "qualityPointsPerCostDoubling": 2.463452584975833,
-                "anchorRatio": 11838.056913321154
+                "valuePointsPerCostDoubling": 2.044381834621736,
+                "qualityPointsPerCostDoubling": 2.7258424461623147,
+                "anchorRatio": 4799.390091372544
               },
               "frozenExchangeRate": {
                 "valuePointsPerCostDoubling": 1.8475894387318745,
@@ -59761,25 +59689,25 @@
                 ],
                 "excluded": [],
                 "changes": {
-                  "claude-haiku-5-5-high": 0,
-                  "claude-haiku-5-5-medium": 0,
+                  "claude-haiku-5-5-high": -1,
+                  "claude-haiku-5-5-medium": -1,
                   "claude-opus-5-5-high": 0,
                   "claude-opus-5-5-medium": 0,
-                  "deepseek-v4-1-flash-1017": 0,
-                  "gemini-4-argon": 0,
+                  "deepseek-v4-1-flash-1017": 1,
+                  "gemini-4-argon": 1,
                   "gpt-5.6-luna-low": 0,
-                  "gpt-6-astra-high": 0,
+                  "gpt-6-astra-high": 1,
                   "gpt-6-luna": 0,
-                  "gpt-6-luna-high": 0,
+                  "gpt-6-luna-high": -3,
                   "gpt-6-luna-medium": 0,
-                  "gpt-6-luna-xhigh": 0,
+                  "gpt-6-luna-xhigh": -1,
                   "gpt-6.1-sol-high": 0,
-                  "gpt-6.1-sol-medium": 0,
-                  "kimi-k3-1-pro": 0,
-                  "mimo-v2-6-pro": 0
+                  "gpt-6.1-sol-medium": 1,
+                  "kimi-k3-1-pro": 1,
+                  "mimo-v2-6-pro": 1
                 },
-                "maxAbsChange": 0,
-                "maxRow": "mimo-v2-6-pro"
+                "maxAbsChange": 3,
+                "maxRow": "gpt-6-luna-high"
               }
             }
           },
@@ -59889,11 +59817,7 @@
                   "displayedMargin": -6.474996483041856
                 },
                 "claude-haiku-5-5-high": {
-                  "confirmed": "disproved",
-                  "possible": "disproved",
-                  "possibleCheapest": "disproved",
-                  "witnessReferenceQuality": null,
-                  "displayedMargin": -7.109816121743634
+                  "status": "no interval label: AA's cost omits a pricing term (O94); competes over its published cost up to the stated factor"
                 },
                 "gpt-6-luna-xhigh": {
                   "confirmed": "disproved",
@@ -59903,11 +59827,7 @@
                   "displayedMargin": -11.235616131348088
                 },
                 "claude-haiku-5-5-medium": {
-                  "confirmed": "disproved",
-                  "possible": "disproved",
-                  "possibleCheapest": "disproved",
-                  "witnessReferenceQuality": null,
-                  "displayedMargin": -10.830595499639884
+                  "status": "no interval label: AA's cost omits a pricing term (O94); competes over its published cost up to the stated factor"
                 },
                 "gpt-6-luna-high": {
                   "confirmed": "disproved",
@@ -60529,8 +60449,8 @@
             "row": "claude-haiku-5-5-high",
             "completeEvidence": true,
             "valuationGate": "compatible as captured",
-            "eligible": true,
-            "reason": null
+            "eligible": false,
+            "reason": "AA cost omits a pricing term (O94)"
           },
           {
             "row": "gpt-6-luna-xhigh",
@@ -60543,8 +60463,8 @@
             "row": "claude-haiku-5-5-medium",
             "completeEvidence": true,
             "valuationGate": "compatible as captured",
-            "eligible": true,
-            "reason": null
+            "eligible": false,
+            "reason": "AA cost omits a pricing term (O94)"
           },
           {
             "row": "gpt-6-luna-high",
@@ -61657,7 +61577,7 @@
           {
             "key": "planRoutes",
             "artifact": "data/plan_cost_routes.json",
-            "sha256": "69cb60b91092139d1aab86e2fbe3d810ae11c8b7b24abd20dae39e1ca4623bb8",
+            "sha256": "6b2ff00ae4ace7958fd8f5990a327ba421f673a320c13521c13c0b4d62417565",
             "capturedAt": "2026-10-25",
             "extractor": "editorial Plan evidence registry"
           },
@@ -61725,7 +61645,7 @@
             "extractor": "valuerank.value_v3 freeze"
           }
         ],
-        "bundleHash": "7ef1b00e00c430f25af29bb77d62224a6ade1c39e02f5b1e95b1c207ae0dfc34",
+        "bundleHash": "d4216fb8b1ca3d45c63f55347e01be19a6b9ff2b7215b589c9ec4376c91ce3c4",
         "rebuild": "every published output is rebuilt from these artifacts at the pinned publication clock (npm run verify:docs), never from live pages"
       },
       "track": {
@@ -70021,16 +69941,16 @@
             "level": 38.00296858278191,
             "status": "evaluated",
             "candidates": {
-              "claude-haiku-5-5-medium": {
+              "gpt-6-luna": {
                 "assignments": {
                   "UU": {
-                    "status": "met",
-                    "share": 1.0,
-                    "successes": 10000,
+                    "status": "not met",
+                    "share": 0.0,
+                    "successes": 0,
                     "scenarios": 10000,
                     "interval": [
-                      0.9993540618902661,
-                      1.0
+                      0.0,
+                      0.0006459381097338457
                     ],
                     "perLookError": 0.003125,
                     "confidenceLevel": 0.996875,
@@ -70053,16 +69973,16 @@
                         "level": 38.00296858278191
                       }
                     },
-                    "label": true
+                    "label": false
                   },
                   "UH": {
-                    "status": "met",
-                    "share": 1.0,
-                    "successes": 10000,
+                    "status": "not met",
+                    "share": 0.0,
+                    "successes": 0,
                     "scenarios": 10000,
                     "interval": [
-                      0.9993540618902661,
-                      1.0
+                      0.0,
+                      0.0006459381097338457
                     ],
                     "perLookError": 0.003125,
                     "confidenceLevel": 0.996875,
@@ -70082,13 +70002,13 @@
                       "kernel": "block assignment",
                       "endpointHeavyRows": [
                         "claude-haiku-5-5-high",
+                        "claude-haiku-5-5-medium",
                         "claude-opus-5-5-high",
                         "claude-opus-5-5-medium",
                         "deepseek-v4-1-flash-1017",
                         "gemini-4-argon",
                         "gpt-5.6-luna-low",
                         "gpt-6-astra-high",
-                        "gpt-6-luna",
                         "gpt-6-luna-high",
                         "gpt-6-luna-medium",
                         "gpt-6-luna-xhigh",
@@ -70101,16 +70021,16 @@
                         "level": 38.00296858278191
                       }
                     },
-                    "label": true
+                    "label": false
                   },
                   "HU": {
-                    "status": "met",
-                    "share": 1.0,
-                    "successes": 10000,
+                    "status": "not met",
+                    "share": 0.0,
+                    "successes": 0,
                     "scenarios": 10000,
                     "interval": [
-                      0.9993540618902661,
-                      1.0
+                      0.0,
+                      0.0006459381097338457
                     ],
                     "perLookError": 0.003125,
                     "confidenceLevel": 0.996875,
@@ -70129,22 +70049,22 @@
                       "specificationBranch": "core",
                       "kernel": "block assignment",
                       "endpointHeavyRows": [
-                        "claude-haiku-5-5-medium"
+                        "gpt-6-luna"
                       ],
                       "referenceObjectId": {
                         "level": 38.00296858278191
                       }
                     },
-                    "label": true
+                    "label": false
                   },
                   "HH": {
-                    "status": "met",
-                    "share": 1.0,
-                    "successes": 10000,
+                    "status": "not met",
+                    "share": 0.0,
+                    "successes": 0,
                     "scenarios": 10000,
                     "interval": [
-                      0.9993540618902661,
-                      1.0
+                      0.0,
+                      0.0006459381097338457
                     ],
                     "perLookError": 0.003125,
                     "confidenceLevel": 0.996875,
@@ -70184,7 +70104,7 @@
                         "level": 38.00296858278191
                       }
                     },
-                    "label": true
+                    "label": false
                   }
                 },
                 "kernelCheck": {
@@ -70242,18 +70162,18 @@
                   "mergedBlocks": [],
                   "switchGroups": {
                     "candidate": [
-                      "claude-haiku-5-5-medium"
+                      "gpt-6-luna"
                     ],
                     "reference": [],
                     "competitors": [
                       "claude-haiku-5-5-high",
+                      "claude-haiku-5-5-medium",
                       "claude-opus-5-5-high",
                       "claude-opus-5-5-medium",
                       "deepseek-v4-1-flash-1017",
                       "gemini-4-argon",
                       "gpt-5.6-luna-low",
                       "gpt-6-astra-high",
-                      "gpt-6-luna",
                       "gpt-6-luna-high",
                       "gpt-6-luna-medium",
                       "gpt-6-luna-xhigh",
@@ -70272,13 +70192,13 @@
                       "id": "UH",
                       "endpointHeavyRows": [
                         "claude-haiku-5-5-high",
+                        "claude-haiku-5-5-medium",
                         "claude-opus-5-5-high",
                         "claude-opus-5-5-medium",
                         "deepseek-v4-1-flash-1017",
                         "gemini-4-argon",
                         "gpt-5.6-luna-low",
                         "gpt-6-astra-high",
-                        "gpt-6-luna",
                         "gpt-6-luna-high",
                         "gpt-6-luna-medium",
                         "gpt-6-luna-xhigh",
@@ -70291,7 +70211,7 @@
                     {
                       "id": "HU",
                       "endpointHeavyRows": [
-                        "claude-haiku-5-5-medium"
+                        "gpt-6-luna"
                       ]
                     },
                     {
@@ -70321,11 +70241,317 @@
                   "executionStatus": "completed"
                 },
                 "frequencyRange": [
-                  1.0,
-                  1.0
+                  0.0,
+                  0.0
                 ],
-                "label": true,
-                "reading": "supported under all registered role-group kernel checks"
+                "label": false,
+                "reading": "not scenario-supported"
+              },
+              "gpt-6-luna-xhigh": {
+                "assignments": {
+                  "UU": {
+                    "status": "not met",
+                    "share": 0.0,
+                    "successes": 0,
+                    "scenarios": 10000,
+                    "interval": [
+                      0.0,
+                      0.0006459381097338457
+                    ],
+                    "perLookError": 0.003125,
+                    "confidenceLevel": 0.996875,
+                    "tailAllocation": "equal (half the per-look error in each tail)",
+                    "looks": 1,
+                    "uniqueLabelEligible": true,
+                    "labelAuthorized": true,
+                    "decisionTarget": {
+                      "qualityEquation": "full composite, nominal weights",
+                      "scenarioStratum": "S1",
+                      "scenarioTargetProfileId": "published-record reporting precision + conventional identification of missing leaves",
+                      "variedTargets": [
+                        "identification convention",
+                        "reporting precision"
+                      ],
+                      "specificationBranch": "core",
+                      "kernel": "block assignment",
+                      "endpointHeavyRows": [],
+                      "referenceObjectId": {
+                        "level": 38.00296858278191
+                      }
+                    },
+                    "label": false
+                  },
+                  "UH": {
+                    "status": "not met",
+                    "share": 0.0,
+                    "successes": 0,
+                    "scenarios": 10000,
+                    "interval": [
+                      0.0,
+                      0.0006459381097338457
+                    ],
+                    "perLookError": 0.003125,
+                    "confidenceLevel": 0.996875,
+                    "tailAllocation": "equal (half the per-look error in each tail)",
+                    "looks": 1,
+                    "uniqueLabelEligible": true,
+                    "labelAuthorized": true,
+                    "decisionTarget": {
+                      "qualityEquation": "full composite, nominal weights",
+                      "scenarioStratum": "S1",
+                      "scenarioTargetProfileId": "published-record reporting precision + conventional identification of missing leaves",
+                      "variedTargets": [
+                        "identification convention",
+                        "reporting precision"
+                      ],
+                      "specificationBranch": "core",
+                      "kernel": "block assignment",
+                      "endpointHeavyRows": [
+                        "claude-haiku-5-5-high",
+                        "claude-haiku-5-5-medium",
+                        "claude-opus-5-5-high",
+                        "claude-opus-5-5-medium",
+                        "deepseek-v4-1-flash-1017",
+                        "gemini-4-argon",
+                        "gpt-5.6-luna-low",
+                        "gpt-6-astra-high",
+                        "gpt-6-luna",
+                        "gpt-6-luna-high",
+                        "gpt-6-luna-medium",
+                        "gpt-6.1-sol-high",
+                        "gpt-6.1-sol-medium",
+                        "kimi-k3-1-pro",
+                        "mimo-v2-6-pro"
+                      ],
+                      "referenceObjectId": {
+                        "level": 38.00296858278191
+                      }
+                    },
+                    "label": false
+                  },
+                  "HU": {
+                    "status": "not met",
+                    "share": 0.0,
+                    "successes": 0,
+                    "scenarios": 10000,
+                    "interval": [
+                      0.0,
+                      0.0006459381097338457
+                    ],
+                    "perLookError": 0.003125,
+                    "confidenceLevel": 0.996875,
+                    "tailAllocation": "equal (half the per-look error in each tail)",
+                    "looks": 1,
+                    "uniqueLabelEligible": true,
+                    "labelAuthorized": true,
+                    "decisionTarget": {
+                      "qualityEquation": "full composite, nominal weights",
+                      "scenarioStratum": "S1",
+                      "scenarioTargetProfileId": "published-record reporting precision + conventional identification of missing leaves",
+                      "variedTargets": [
+                        "identification convention",
+                        "reporting precision"
+                      ],
+                      "specificationBranch": "core",
+                      "kernel": "block assignment",
+                      "endpointHeavyRows": [
+                        "gpt-6-luna-xhigh"
+                      ],
+                      "referenceObjectId": {
+                        "level": 38.00296858278191
+                      }
+                    },
+                    "label": false
+                  },
+                  "HH": {
+                    "status": "not met",
+                    "share": 0.0,
+                    "successes": 0,
+                    "scenarios": 10000,
+                    "interval": [
+                      0.0,
+                      0.0006459381097338457
+                    ],
+                    "perLookError": 0.003125,
+                    "confidenceLevel": 0.996875,
+                    "tailAllocation": "equal (half the per-look error in each tail)",
+                    "looks": 1,
+                    "uniqueLabelEligible": true,
+                    "labelAuthorized": true,
+                    "decisionTarget": {
+                      "qualityEquation": "full composite, nominal weights",
+                      "scenarioStratum": "S1",
+                      "scenarioTargetProfileId": "published-record reporting precision + conventional identification of missing leaves",
+                      "variedTargets": [
+                        "identification convention",
+                        "reporting precision"
+                      ],
+                      "specificationBranch": "core",
+                      "kernel": "block assignment",
+                      "endpointHeavyRows": [
+                        "claude-haiku-5-5-high",
+                        "claude-haiku-5-5-medium",
+                        "claude-opus-5-5-high",
+                        "claude-opus-5-5-medium",
+                        "deepseek-v4-1-flash-1017",
+                        "gemini-4-argon",
+                        "gpt-5.6-luna-low",
+                        "gpt-6-astra-high",
+                        "gpt-6-luna",
+                        "gpt-6-luna-high",
+                        "gpt-6-luna-medium",
+                        "gpt-6-luna-xhigh",
+                        "gpt-6.1-sol-high",
+                        "gpt-6.1-sol-medium",
+                        "kimi-k3-1-pro",
+                        "mimo-v2-6-pro"
+                      ],
+                      "referenceObjectId": {
+                        "level": 38.00296858278191
+                      }
+                    },
+                    "label": false
+                  }
+                },
+                "kernelCheck": {
+                  "dependencyComponents": [
+                    [
+                      "claude-haiku-5-5-high"
+                    ],
+                    [
+                      "claude-haiku-5-5-medium"
+                    ],
+                    [
+                      "claude-opus-5-5-high"
+                    ],
+                    [
+                      "claude-opus-5-5-medium"
+                    ],
+                    [
+                      "deepseek-v4-1-flash-1017"
+                    ],
+                    [
+                      "gemini-4-argon"
+                    ],
+                    [
+                      "gpt-5.6-luna-low"
+                    ],
+                    [
+                      "gpt-6-astra-high"
+                    ],
+                    [
+                      "gpt-6-luna"
+                    ],
+                    [
+                      "gpt-6-luna-high"
+                    ],
+                    [
+                      "gpt-6-luna-medium"
+                    ],
+                    [
+                      "gpt-6-luna-xhigh"
+                    ],
+                    [
+                      "gpt-6.1-sol-high"
+                    ],
+                    [
+                      "gpt-6.1-sol-medium"
+                    ],
+                    [
+                      "kimi-k3-1-pro"
+                    ],
+                    [
+                      "mimo-v2-6-pro"
+                    ]
+                  ],
+                  "dependencyGraphHash": "beecc64f77e4bcb7",
+                  "mergedBlocks": [],
+                  "switchGroups": {
+                    "candidate": [
+                      "gpt-6-luna-xhigh"
+                    ],
+                    "reference": [],
+                    "competitors": [
+                      "claude-haiku-5-5-high",
+                      "claude-haiku-5-5-medium",
+                      "claude-opus-5-5-high",
+                      "claude-opus-5-5-medium",
+                      "deepseek-v4-1-flash-1017",
+                      "gemini-4-argon",
+                      "gpt-5.6-luna-low",
+                      "gpt-6-astra-high",
+                      "gpt-6-luna",
+                      "gpt-6-luna-high",
+                      "gpt-6-luna-medium",
+                      "gpt-6.1-sol-high",
+                      "gpt-6.1-sol-medium",
+                      "kimi-k3-1-pro",
+                      "mimo-v2-6-pro"
+                    ]
+                  },
+                  "assignments": [
+                    {
+                      "id": "UU",
+                      "endpointHeavyRows": []
+                    },
+                    {
+                      "id": "UH",
+                      "endpointHeavyRows": [
+                        "claude-haiku-5-5-high",
+                        "claude-haiku-5-5-medium",
+                        "claude-opus-5-5-high",
+                        "claude-opus-5-5-medium",
+                        "deepseek-v4-1-flash-1017",
+                        "gemini-4-argon",
+                        "gpt-5.6-luna-low",
+                        "gpt-6-astra-high",
+                        "gpt-6-luna",
+                        "gpt-6-luna-high",
+                        "gpt-6-luna-medium",
+                        "gpt-6.1-sol-high",
+                        "gpt-6.1-sol-medium",
+                        "kimi-k3-1-pro",
+                        "mimo-v2-6-pro"
+                      ]
+                    },
+                    {
+                      "id": "HU",
+                      "endpointHeavyRows": [
+                        "gpt-6-luna-xhigh"
+                      ]
+                    },
+                    {
+                      "id": "HH",
+                      "endpointHeavyRows": [
+                        "claude-haiku-5-5-high",
+                        "claude-haiku-5-5-medium",
+                        "claude-opus-5-5-high",
+                        "claude-opus-5-5-medium",
+                        "deepseek-v4-1-flash-1017",
+                        "gemini-4-argon",
+                        "gpt-5.6-luna-low",
+                        "gpt-6-astra-high",
+                        "gpt-6-luna",
+                        "gpt-6-luna-high",
+                        "gpt-6-luna-medium",
+                        "gpt-6-luna-xhigh",
+                        "gpt-6.1-sol-high",
+                        "gpt-6.1-sol-medium",
+                        "kimi-k3-1-pro",
+                        "mimo-v2-6-pro"
+                      ]
+                    }
+                  ],
+                  "assignmentSetHash": "3af3c99768eb3581",
+                  "coverage": "role-group (competitor components switch together; not exhaustive over dependency components)",
+                  "executionStatus": "completed"
+                },
+                "frequencyRange": [
+                  0.0,
+                  0.0
+                ],
+                "label": false,
+                "reading": "not scenario-supported"
               }
             }
           },

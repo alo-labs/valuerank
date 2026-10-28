@@ -89,8 +89,8 @@ FLAG_LEGEND = (
     ("AA cost caveat", "AA states that its published cost omits a pricing term"),
     ("API-cost fallback", "no admitted Plan route; the Plan ranking uses the API cost (O13)"),
     # I78 L5: the selected Plan route's own lifecycle flags, so every human-readable ranking shows them.
-    ("route possibly superseded", "the selected Plan route's evidence (or its donor's) may be superseded by age or a detected change (E18, E151, O77-O79); it stays selected and earns no interval label (E228)"),
-    ("fault window", "the selected Plan route rests on a controlled measurement inside an acknowledged accounting-fault window; it stays selected until two concordant user reports for its plan replace it (O91, O92, O93)"),
+    ("route possibly superseded", "the selected Plan route's evidence (or its donor's) may be superseded by age or a detected change (E18, E151, O77-O79); it stays selected, and earns no interval label when the trigger is a detected change rather than age alone (E228)"),
+    ("fault window", "the selected Plan route rests on a controlled measurement inside an acknowledged accounting-fault window; it stays selected until two concordant user reports for its own model and plan replace it, and a transfer resting on it then follows the replacing figure (O91-O95)"),
 )
 
 
@@ -337,7 +337,7 @@ def interval_sentences(facts):
         if result["unevaluable"]:
             text += f" Not evaluable on this workload: {facts.labels(result['unevaluable'])}."
         if result.get("blockers"):
-            text += f" Competing without a label (AA cost on a price not in force, O29): {facts.labels(result['blockers'])}."
+            text += f" Competing without a label of its own (E183): {blocker_reasons(facts, result)}."
         for bar in result.get("bars", []):
             reference = bar_name(bar["reference"])
             if bar["status"] != "certified":
@@ -605,6 +605,13 @@ def displayed_cheapest_sentences(facts):
                for row_id in sorted(cheapest) if flags.get(row_id, {}).get("status") == "flagged"]
     if flagged:
         sentences.append("Safety-refusal flags (O63; costs and scores unchanged) on these bars' cheapest rows: " + "; ".join(flagged) + ".")
+    # I79 L3: a Plan bar's cheapest plan row whose selected route carries a lifecycle or fault-window flag is marked too.
+    plan_flags = {row["id"]: row.get("flags", []) for row in facts.v3.get("planRows", [])}
+    routed = sorted({row_id for item in facts.v3["displayedCheapest"]["plan"]["bars"] for row_id in [*(item["cheapest"] or []), *((item.get("margin") or {}).get("cheapest") or [])]
+                     if {"possibly-superseded", "expired", plan_routes.FAULT_FLAG} & set(plan_flags.get(row_id, []))})
+    if routed:
+        sentences.append("Plan route flags on these bars' cheapest plan rows: " + "; ".join(
+            f"{facts.label(row_id)} ({', '.join(flag for flag in plan_flags[row_id] if flag in ('possibly-superseded', 'expired', plan_routes.FAULT_FLAG))})" for row_id in routed) + ".")
     sensitive = [f"{label} quality {entry['level']:.1f}" for basis, label in (("api", "API"), ("plan", "Plan"))
                  for entry in facts.v3["diagnostics"]["gapFillBars"]["bases"][basis] if not entry["survives"]]
     if sensitive:
@@ -1049,6 +1056,9 @@ def track_scores_markdown(facts):
                 + f"\n### {q.TRACK_LABELS[track]}: interval outputs\n\n{interval_tables(other)}\n"
                 + f"\n### {q.TRACK_LABELS[track]}: scenario shares\n\n{scenario_panel_note(other)}{scenario_tables(other)}\n"
                 + f"\n### {q.TRACK_LABELS[track]}: diagnostics\n\n{diagnostics_markdown(other)}\n"
+                # I79 L4: every ranking's release manifest.
+                + f"\n### {q.TRACK_LABELS[track]}: release gates\n\n"
+                + markdown_table(['Rule', 'Status', 'Detail'], [[item['rule'], item['status'], item['detail']] for item in other.v3['manifest']]) + "\n"
             )
     return "\n".join(sections)
 
@@ -1246,6 +1256,12 @@ def calibration_markdown(facts):
     return "\n".join(lines)
 
 
+def blocker_reasons(facts, result):
+    """I79: each blocker with the reason it earns no interval label (O29, O94, E222, E228, E233)."""
+
+    return "; ".join(f"{facts.label(row_id)}: {result['frontier'][row_id]['status'].removeprefix('no interval label: ')}" for row_id in result["blockers"])
+
+
 def interval_block(facts, result, label, workload_label):
     """One basis's frontier and bar tables on one workload (E21, E38, E183)."""
 
@@ -1259,7 +1275,7 @@ def interval_block(facts, result, label, workload_label):
     ]
     text = f"**{label} basis, {workload_label}: frontier.** Not evaluable: {facts.labels(result['unevaluable'])}."
     if result.get("blockers"):
-        text += f" Competing without a label (AA cost on a price not in force, O29, E183): {facts.labels(result['blockers'])}."
+        text += f" Competing without a label of its own (E183): {blocker_reasons(facts, result)}."
     text += "\n\n"
     text += markdown_table(["Configuration", "Possible frontier", "Definite frontier", "Definite counterexample", "Possible frontier blocked by"], rows)
     for bar in result.get("bars", []):

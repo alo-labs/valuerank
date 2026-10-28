@@ -41,9 +41,18 @@ def _end(stamp: str) -> datetime:
     return datetime.fromisoformat(stamp.replace("Z", "+00:00")) if "T" in stamp else datetime.combine(date.fromisoformat(stamp), time.max, timezone.utc)
 
 
+METER_DAYS = {"week": 7, "month": 30}  # I79 L2: the period a meter reading of each unit covers
+
+
 def window(report: dict) -> tuple[datetime, datetime]:
-    start = report.get("windowStart") or report["windowEnd"]
-    return _start(start), _end(report["windowEnd"])
+    """The report's measurement window; an unstated window is the meter's own period ending on the report date (a weekly
+    reading covers 7 days, a monthly one 30, a 5-hour one its day), so a reading never counts wholly after a split it spans."""
+
+    if report.get("windowStart"):
+        return _start(report["windowStart"]), _end(report["windowEnd"])
+    end = _end(report["windowEnd"])
+    days = METER_DAYS.get(report.get("unit"), 1)
+    return _start(report["windowEnd"]) - timedelta(days=days - 1), end
 
 
 def split_span(split: dict) -> tuple[datetime, datetime]:
