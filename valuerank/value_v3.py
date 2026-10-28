@@ -946,7 +946,7 @@ def assemble_for_release(configurations: list[dict], documents: dict, frozen: di
     assembled = assemble(configurations, documents, release_day=release_day)
     frozen_components = frozen["workloads"][frozen["mainWorkload"]]["components"]
     gained = set(assembled["admitted"]) > set(frozen_components)
-    if assembled["mainWorkload"] != frozen["mainWorkload"] and gained and len(anchor_population(assembled, assembled["admitted"])) < MIN_ANCHOR_REFERENCES:
+    if assembled["mainWorkload"] != frozen["mainWorkload"] and gained and len(anchor_population(assembled, assembled["admitted"], freezing=True)) < MIN_ANCHOR_REFERENCES:
         return assemble(configurations, documents, release_day=release_day, pinned=frozen_components)
     return assembled
 
@@ -1048,7 +1048,7 @@ def _gated_box(row: dict, low: float, high: float, basis: str) -> intervals.Box 
     return intervals.Box(row["id"], low, high, summary.lower, summary.upper, provisional)
 
 
-AA_CAVEAT_FACTOR = re.compile(r"(\d+(?:\.\d+)?)\s*x higher pricing", re.IGNORECASE)
+AA_CAVEAT_FACTOR = re.compile(r"(\d+(?:\.\d+)?)\s*(?:x|×|times)\s+(?:higher|more|the)\b", re.IGNORECASE)
 
 
 def aa_cost_caveat(row: dict) -> str | None:
@@ -1184,17 +1184,20 @@ def anchor_eligibility(assembled: dict, components: list[str]) -> list[dict]:
     for row in assembled["rows"]:
         complete = all((row["components"].get(component) or {}).get("completeness") == basket.COMPLETE for component in components)
         outcome = row["valuationGate"]["outcome"]
-        reason = (None if complete and outcome in GATE_SCORED and not aa_cost_caveat(row) else "incomplete cost evidence" if not complete
-                  else f"valuation gate: {outcome}" if outcome not in GATE_SCORED else "AA cost omits a pricing term (O94)")
-        table.append({"row": row["id"], "completeEvidence": complete, "valuationGate": outcome, "eligible": reason is None, "reason": reason})
+        reason = None if complete and outcome in GATE_SCORED else "incomplete cost evidence" if not complete else f"valuation gate: {outcome}"
+        # O94, I80 M1: a row whose AA cost omits a pricing term leaves the anchor population at the next re-freeze only; the
+        # current anchors and the diagnostics that rebuild them by the same rule keep it, so their effects stay separable.
+        table.append({"row": row["id"], "completeEvidence": complete, "valuationGate": outcome, "eligible": reason is None, "reason": reason,
+                      "leavesAtNextFreeze": "AA cost omits a pricing term (O94)" if reason is None and aa_cost_caveat(row) else None})
     return table
 
 
-def anchor_population(assembled: dict, components: list[str]) -> list[str]:
-    """E160: ranked configurations with complete cost evidence on every component of a workload."""
+def anchor_population(assembled: dict, components: list[str], *, freezing: bool = False) -> list[str]:
+    """E160: ranked configurations with complete cost evidence on every component of a workload; a new freeze also leaves
+    out rows whose AA cost omits a pricing term (O94)."""
 
     # E170/O29: a row whose AA cost is not on the price in force at V is never an anchor reference.
-    return sorted(item["row"] for item in anchor_eligibility(assembled, components) if item["eligible"])
+    return sorted(item["row"] for item in anchor_eligibility(assembled, components) if item["eligible"] and not (freezing and item["leavesAtNextFreeze"]))
 
 
 def freeze(assembled: dict, *, frozen_at: str) -> dict:
@@ -1204,7 +1207,7 @@ def freeze(assembled: dict, *, frozen_at: str) -> dict:
     by_id = {row["id"]: row for row in assembled["rows"]}
     for workload, entry in workload_catalog(assembled).items():
         components = entry["components"]
-        population = anchor_population(assembled, components)
+        population = anchor_population(assembled, components, freezing=True)
         if len(population) < MIN_ANCHOR_REFERENCES:
             if entry["role"] == "main":
                 raise ValueError(f"the main workload has {len(population)} complete-evidence anchor references; at least {MIN_ANCHOR_REFERENCES} are required")
@@ -1272,7 +1275,11 @@ def interval_outputs(assembled: dict, frozen: dict, basis: str, components: list
     boxes = api_boxes(assembled, components) if basis == "api" else plan_boxes(assembled)
     # E183: competitors range over U_W = R_W plus the O29 blockers B_W; labels go to R_W only.
     not_in_force = {row["id"] for row in assembled["rows"] if row["valuationGate"]["outcome"] == GATE_NOT_IN_FORCE}
-    unconstructible = sorted(row["id"] for row in assembled["rows"] if row["id"] in not_in_force and blocker_domain(row["valuationGate"], basis) is None)
+    # I80 L2: an O94 row whose note states no factor has no constructible domain either, so no other row is certified
+    # against it (E183): the outputs are unresolved, never silently computed without it.
+    unconstructible = sorted(row["id"] for row in assembled["rows"]
+                             if (row["id"] in not_in_force and blocker_domain(row["valuationGate"], basis) is None)
+                             or (aa_cost_caveat(row) and caveat_factor(row) is None and row["cost"]["fullCost"] and row["cost"]["workload"] == assembled["mainWorkload"]))
     # E222/E228/E233: an unverified basis, a provider-claimed leaf, or (Plan) a route whose evidence a detected change may
     # have superseded, competes but earns no label, exactly like an O29 blocker.
     blocked = not_in_force | {row["id"] for row in assembled["rows"] if row["valuationGate"]["outcome"] == GATE_UNVERIFIED or provider_claimed(row) or aa_cost_caveat(row)}
@@ -2039,6 +2046,7 @@ def score(assembled: dict, frozen: dict) -> dict:
     # I63 L5: the lifecycle entry counts plan rows, where the route flags sit.
     lifecycle_flagged = sorted(row["id"] for row in plan_rows if {"possibly-superseded", "expired"} & set((row.get("plan") or {}).get("flags", [])))
     fault_flagged = sorted(row["id"] for row in plan_rows if plan_routes.FAULT_FLAG in row["plan"].get("flags", []))
+    caveated = sorted((row for row in rows if aa_cost_caveat(row)), key=lambda row: row["id"])
     manifest = [
         _rule("clip gate (E20)", "fired" if hold else "passed", "release held" if hold else "no basis exceeds the clipping allowance"),
         _rule("cost influence flag (E91)", "fired" if influence["api"]["flag"] or influence["plan"]["flag"] else "passed", "cost not discriminating (< 10%); informational only; beta never changes (O2)"),
@@ -2053,9 +2061,15 @@ def score(assembled: dict, frozen: dict) -> dict:
               f"{len(lifecycle_flagged)} of {len(plan_rows)} plan rows carry a possibly-superseded or expired route: " + ", ".join(lifecycle_flagged)
               if lifecycle_flagged else "every selected route is fresh"),
         # I77 M1: O91/O92 fault windows, with the rows they flag.
-        _rule("acknowledged accounting-fault windows (O91, O92)", "fired" if fault_flagged else "passed",
+        _rule("acknowledged accounting-fault windows (O91, O92, O93, O95, O96)", "fired" if fault_flagged else "passed",
               f"{len(fault_flagged)} of {len(plan_rows)} plan rows rest on a measurement inside an acknowledged fault window; they stay selected and "
-              "yield to two concordant user reports for the plan: " + ", ".join(fault_flagged) if fault_flagged else "no selected route rests on a measurement in a fault window"),
+              "yield to two concordant user reports for their own model and plan, and the transfers resting on them follow: " + ", ".join(fault_flagged)
+              if fault_flagged else "no selected route rests on a measurement in a fault window"),
+        # I80 L5: O94 rows, with the factor each competes over.
+        _rule("AA cost omits a pricing term (O94)", "fired" if caveated else "passed",
+              "ranked at the published cost; compete in interval and scenario outputs over [C, factor × C] without a label, and leave the anchor "
+              "population at the next freeze: " + ", ".join(f"{row['id']} ({caveat_factor(row) or 'no factor: unresolved'}×)" for row in caveated)
+              if caveated else "no AA cost note names an omitted pricing term"),
         _rule("valuation-basis gate (E170)", "fired" if any(row["valuationGate"]["outcome"] not in GATE_SCORED for row in rows) else "passed",
               "rows outside the scored valuation outcomes: " + ", ".join(sorted(row["id"] for row in rows if row["valuationGate"]["outcome"] not in GATE_SCORED))
               if any(row["valuationGate"]["outcome"] not in GATE_SCORED for row in rows) else "every ranked row is compatible as captured or after evidenced revaluation"),
@@ -2583,6 +2597,9 @@ def _row_json(row: dict, scores: dict, ranks: dict, alternatives: list[dict]) ->
         "agentSafety": row.get("agentSafety"),
         # E141: AA's own note on what its cost omits (e.g. a long-context surcharge), shown as a cost caveat.
         "aaCostCaveat": caveat,
+        # O94, I80 L5: the most the omitted term multiplies the cost by, and the cost range the row competes over.
+        "aaCostCaveatFactor": caveat_factor(row) if caveat else None,
+        "aaCostCaveatRangeUsd": [row["cost"]["costUsd"], row["cost"]["costUsd"] * caveat_factor(row)] if caveat and caveat_factor(row) and row["cost"]["costUsd"] is not None else None,
         "valuation": valuation_contract(caveat),
         # E170: the valuation-basis gate's outcome for this row's AA cost (O29 governs a price not in force at V).
         "valuationGate": row["valuationGate"],

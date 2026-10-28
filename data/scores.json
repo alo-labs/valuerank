@@ -16921,6 +16921,8 @@
           ]
         },
         "aaCostCaveat": null,
+        "aaCostCaveatFactor": null,
+        "aaCostCaveatRangeUsd": null,
         "valuation": {
           "costSourceRule": "AA: provider-reported token counts priced per token category at AA's recorded prices, cache pricing included",
           "valuationSufficiency": "category totals sufficient for AA's published valuation",
@@ -17736,6 +17738,8 @@
           ]
         },
         "aaCostCaveat": null,
+        "aaCostCaveatFactor": null,
+        "aaCostCaveatRangeUsd": null,
         "valuation": {
           "costSourceRule": "AA: provider-reported token counts priced per token category at AA's recorded prices, cache pricing included",
           "valuationSufficiency": "category totals sufficient for AA's published valuation",
@@ -18557,6 +18561,8 @@
           "fallbackModels": []
         },
         "aaCostCaveat": null,
+        "aaCostCaveatFactor": null,
+        "aaCostCaveatRangeUsd": null,
         "valuation": {
           "costSourceRule": "AA: provider-reported token counts priced per token category at AA's recorded prices, cache pricing included",
           "valuationSufficiency": "category totals sufficient for AA's published valuation",
@@ -19228,6 +19234,8 @@
           "fallbackModels": []
         },
         "aaCostCaveat": null,
+        "aaCostCaveatFactor": null,
+        "aaCostCaveatRangeUsd": null,
         "valuation": {
           "costSourceRule": "AA: provider-reported token counts priced per token category at AA's recorded prices, cache pricing included",
           "valuationSufficiency": "category totals sufficient for AA's published valuation",
@@ -20073,6 +20081,8 @@
           "fallbackModels": []
         },
         "aaCostCaveat": null,
+        "aaCostCaveatFactor": null,
+        "aaCostCaveatRangeUsd": null,
         "valuation": {
           "costSourceRule": "AA: provider-reported token counts priced per token category at AA's recorded prices, cache pricing included",
           "valuationSufficiency": "category totals sufficient for AA's published valuation",
@@ -20742,6 +20752,8 @@
           "fallbackModels": []
         },
         "aaCostCaveat": null,
+        "aaCostCaveatFactor": null,
+        "aaCostCaveatRangeUsd": null,
         "valuation": {
           "costSourceRule": "AA: provider-reported token counts priced per token category at AA's recorded prices, cache pricing included",
           "valuationSufficiency": "category totals sufficient for AA's published valuation",
@@ -21590,6 +21602,8 @@
         "configurationMapped": true,
         "agentSafety": null,
         "aaCostCaveat": null,
+        "aaCostCaveatFactor": null,
+        "aaCostCaveatRangeUsd": null,
         "valuation": {
           "costSourceRule": "AA: provider-reported token counts priced per token category at AA's recorded prices, cache pricing included",
           "valuationSufficiency": "category totals sufficient for AA's published valuation",
@@ -22419,6 +22433,11 @@
           ]
         },
         "aaCostCaveat": "Claude Haiku 5.5 has 5x higher pricing on longer-context inputs which are not currently reflected; we are working to include this in cost figures across Artificial Analysis.",
+        "aaCostCaveatFactor": 5.0,
+        "aaCostCaveatRangeUsd": [
+          966.9203778594009,
+          4834.601889297004
+        ],
         "valuation": {
           "costSourceRule": "AA: provider-reported token counts priced per token category at AA's recorded prices, cache pricing included",
           "valuationSufficiency": "category totals sufficient for AA's published valuation",
@@ -23229,6 +23248,8 @@
           "fallbackModels": []
         },
         "aaCostCaveat": null,
+        "aaCostCaveatFactor": null,
+        "aaCostCaveatRangeUsd": null,
         "valuation": {
           "costSourceRule": "AA: provider-reported token counts priced per token category at AA's recorded prices, cache pricing included",
           "valuationSufficiency": "category totals sufficient for AA's published valuation",
@@ -30315,6 +30336,7 @@
         "label": "anchors from frontier and near-frontier configurations only (diagnostic; the frozen anchors stay primary)",
         "status": "evaluated",
         "references": [
+          "claude-haiku-5-5-max",
           "claude-opus-5-5",
           "claude-sonnet-5-5",
           "deepseek-v4-1-flash-1017",
@@ -30329,6 +30351,7 @@
               "low": 62.85953251074453,
               "high": 18703.432249587986,
               "referenceIds": [
+                "claude-haiku-5-5-max",
                 "claude-opus-5-5",
                 "claude-sonnet-5-5",
                 "deepseek-v4-1-flash-1017",
@@ -30379,6 +30402,7 @@
               "low": 5.83545604444342,
               "high": 7115.532636239274,
               "referenceIds": [
+                "claude-haiku-5-5-max",
                 "claude-opus-5-5",
                 "claude-sonnet-5-5",
                 "deepseek-v4-1-flash-1017",
@@ -31094,63 +31118,72 @@
           "completeEvidence": true,
           "valuationGate": "compatible as captured",
           "eligible": true,
-          "reason": null
+          "reason": null,
+          "leavesAtNextFreeze": null
         },
         {
           "row": "claude-opus-5-5",
           "completeEvidence": true,
           "valuationGate": "compatible as captured",
           "eligible": true,
-          "reason": null
+          "reason": null,
+          "leavesAtNextFreeze": null
         },
         {
           "row": "deepseek-v4-1-flash-1017",
           "completeEvidence": true,
           "valuationGate": "compatible as captured",
           "eligible": true,
-          "reason": null
+          "reason": null,
+          "leavesAtNextFreeze": null
         },
         {
           "row": "gpt-6.1-sol",
           "completeEvidence": true,
           "valuationGate": "compatible as captured",
           "eligible": true,
-          "reason": null
+          "reason": null,
+          "leavesAtNextFreeze": null
         },
         {
           "row": "gemini-4-argon",
           "completeEvidence": true,
           "valuationGate": "compatible as captured",
           "eligible": true,
-          "reason": null
+          "reason": null,
+          "leavesAtNextFreeze": null
         },
         {
           "row": "gpt-6-astra",
           "completeEvidence": true,
           "valuationGate": "compatible as captured",
           "eligible": true,
-          "reason": null
+          "reason": null,
+          "leavesAtNextFreeze": null
         },
         {
           "row": "mimo-v2-6-pro",
           "completeEvidence": false,
           "valuationGate": "compatible as captured",
           "eligible": false,
-          "reason": "incomplete cost evidence"
+          "reason": "incomplete cost evidence",
+          "leavesAtNextFreeze": null
         },
         {
           "row": "claude-haiku-5-5-max",
           "completeEvidence": true,
           "valuationGate": "compatible as captured",
-          "eligible": false,
-          "reason": "AA cost omits a pricing term (O94)"
+          "eligible": true,
+          "reason": null,
+          "leavesAtNextFreeze": "AA cost omits a pricing term (O94)"
         },
         {
           "row": "gpt-6-luna",
           "completeEvidence": true,
           "valuationGate": "compatible as captured",
           "eligible": true,
-          "reason": null
+          "reason": null,
+          "leavesAtNextFreeze": null
         }
       ],
       "sweCompanion": {
@@ -31763,9 +31796,14 @@
         "detail": "21 of 27 plan rows carry a possibly-superseded or expired route: claude-haiku-5-5-max@claude-max-20x, claude-haiku-5-5-max@claude-max-5x, claude-haiku-5-5-max@claude-pro, claude-opus-5-5@claude-max-20x, claude-opus-5-5@claude-max-5x, claude-opus-5-5@claude-pro, claude-sonnet-5-5@claude-max-20x, claude-sonnet-5-5@claude-max-5x, claude-sonnet-5-5@claude-pro, gpt-6-astra@chatgpt-plus, gpt-6-astra@chatgpt-pro-100, gpt-6-astra@chatgpt-pro-200, gpt-6-astra@chatgpt-pro-500, gpt-6-luna@chatgpt-plus, gpt-6-luna@chatgpt-pro-100, gpt-6-luna@chatgpt-pro-200, gpt-6-luna@chatgpt-pro-500, gpt-6.1-sol@chatgpt-plus, gpt-6.1-sol@chatgpt-pro-100, gpt-6.1-sol@chatgpt-pro-200, gpt-6.1-sol@chatgpt-pro-500"
       },
       {
-        "rule": "acknowledged accounting-fault windows (O91, O92)",
+        "rule": "acknowledged accounting-fault windows (O91, O92, O93, O95, O96)",
         "status": "fired",
-        "detail": "3 of 27 plan rows rest on a measurement inside an acknowledged fault window; they stay selected and yield to two concordant user reports for the plan: gpt-6-astra@chatgpt-pro-500, gpt-6-luna@chatgpt-pro-500, gpt-6.1-sol@chatgpt-pro-500"
+        "detail": "3 of 27 plan rows rest on a measurement inside an acknowledged fault window; they stay selected and yield to two concordant user reports for their own model and plan, and the transfers resting on them follow: gpt-6-astra@chatgpt-pro-500, gpt-6-luna@chatgpt-pro-500, gpt-6.1-sol@chatgpt-pro-500"
+      },
+      {
+        "rule": "AA cost omits a pricing term (O94)",
+        "status": "fired",
+        "detail": "ranked at the published cost; compete in interval and scenario outputs over [C, factor × C] without a label, and leave the anchor population at the next freeze: claude-haiku-5-5-max (5.0×)"
       },
       {
         "rule": "valuation-basis gate (E170)",
@@ -31903,7 +31941,7 @@
         {
           "key": "planRoutes",
           "artifact": "data/plan_cost_routes.json",
-          "sha256": "6b2ff00ae4ace7958fd8f5990a327ba421f673a320c13521c13c0b4d62417565",
+          "sha256": "e86b707890d2dab8ee03e952dd8db5e175d080d4086c9afbe97ea949bbd32188",
           "capturedAt": "2026-10-25",
           "extractor": "editorial Plan evidence registry"
         },
@@ -31971,7 +32009,7 @@
           "extractor": "valuerank.value_v3 freeze"
         }
       ],
-      "bundleHash": "d4216fb8b1ca3d45c63f55347e01be19a6b9ff2b7215b589c9ec4376c91ce3c4",
+      "bundleHash": "1ccb9c67e76ea1cc6abd8a51595ab86c639985e21c833347a8335ef8ee5e1a96",
       "rebuild": "every published output is rebuilt from these artifacts at the pinned publication clock (npm run verify:docs), never from live pages"
     },
     "track": {
@@ -40879,6 +40917,8 @@
             "fallbackModels": []
           },
           "aaCostCaveat": null,
+          "aaCostCaveatFactor": null,
+          "aaCostCaveatRangeUsd": null,
           "valuation": {
             "costSourceRule": "AA: provider-reported token counts priced per token category at AA's recorded prices, cache pricing included",
             "valuationSufficiency": "category totals sufficient for AA's published valuation",
@@ -41473,6 +41513,8 @@
             "fallbackModels": []
           },
           "aaCostCaveat": null,
+          "aaCostCaveatFactor": null,
+          "aaCostCaveatRangeUsd": null,
           "valuation": {
             "costSourceRule": "AA: provider-reported token counts priced per token category at AA's recorded prices, cache pricing included",
             "valuationSufficiency": "category totals sufficient for AA's published valuation",
@@ -42053,6 +42095,8 @@
           "configurationMapped": true,
           "agentSafety": null,
           "aaCostCaveat": null,
+          "aaCostCaveatFactor": null,
+          "aaCostCaveatRangeUsd": null,
           "valuation": {
             "costSourceRule": "AA: provider-reported token counts priced per token category at AA's recorded prices, cache pricing included",
             "valuationSufficiency": "category totals sufficient for AA's published valuation",
@@ -42619,6 +42663,8 @@
           "configurationMapped": true,
           "agentSafety": null,
           "aaCostCaveat": null,
+          "aaCostCaveatFactor": null,
+          "aaCostCaveatRangeUsd": null,
           "valuation": {
             "costSourceRule": "AA: provider-reported token counts priced per token category at AA's recorded prices, cache pricing included",
             "valuationSufficiency": "category totals sufficient for AA's published valuation",
@@ -43361,6 +43407,8 @@
           "configurationMapped": true,
           "agentSafety": null,
           "aaCostCaveat": null,
+          "aaCostCaveatFactor": null,
+          "aaCostCaveatRangeUsd": null,
           "valuation": {
             "costSourceRule": "AA: provider-reported token counts priced per token category at AA's recorded prices, cache pricing included",
             "valuationSufficiency": "category totals sufficient for AA's published valuation",
@@ -44067,6 +44115,8 @@
           "configurationMapped": true,
           "agentSafety": null,
           "aaCostCaveat": null,
+          "aaCostCaveatFactor": null,
+          "aaCostCaveatRangeUsd": null,
           "valuation": {
             "costSourceRule": "AA: provider-reported token counts priced per token category at AA's recorded prices, cache pricing included",
             "valuationSufficiency": "category totals sufficient for AA's published valuation",
@@ -44806,6 +44856,8 @@
           "configurationMapped": true,
           "agentSafety": null,
           "aaCostCaveat": null,
+          "aaCostCaveatFactor": null,
+          "aaCostCaveatRangeUsd": null,
           "valuation": {
             "costSourceRule": "AA: provider-reported token counts priced per token category at AA's recorded prices, cache pricing included",
             "valuationSufficiency": "category totals sufficient for AA's published valuation",
@@ -45512,6 +45564,8 @@
           "configurationMapped": true,
           "agentSafety": null,
           "aaCostCaveat": null,
+          "aaCostCaveatFactor": null,
+          "aaCostCaveatRangeUsd": null,
           "valuation": {
             "costSourceRule": "AA: provider-reported token counts priced per token category at AA's recorded prices, cache pricing included",
             "valuationSufficiency": "category totals sufficient for AA's published valuation",
@@ -46254,6 +46308,8 @@
           "configurationMapped": true,
           "agentSafety": null,
           "aaCostCaveat": null,
+          "aaCostCaveatFactor": null,
+          "aaCostCaveatRangeUsd": null,
           "valuation": {
             "costSourceRule": "AA: provider-reported token counts priced per token category at AA's recorded prices, cache pricing included",
             "valuationSufficiency": "category totals sufficient for AA's published valuation",
@@ -47005,6 +47061,8 @@
             "fallbackModels": []
           },
           "aaCostCaveat": null,
+          "aaCostCaveatFactor": null,
+          "aaCostCaveatRangeUsd": null,
           "valuation": {
             "costSourceRule": "AA: provider-reported token counts priced per token category at AA's recorded prices, cache pricing included",
             "valuationSufficiency": "category totals sufficient for AA's published valuation",
@@ -47762,6 +47820,11 @@
           "configurationMapped": true,
           "agentSafety": null,
           "aaCostCaveat": "Claude Haiku 5.5 has 5x higher pricing on longer-context inputs which are not currently reflected; we are working to include this in cost figures across Artificial Analysis.",
+          "aaCostCaveatFactor": 5.0,
+          "aaCostCaveatRangeUsd": [
+            70.84861795451641,
+            354.24308977258204
+          ],
           "valuation": {
             "costSourceRule": "AA: provider-reported token counts priced per token category at AA's recorded prices, cache pricing included",
             "valuationSufficiency": "category totals sufficient for AA's published valuation",
@@ -48468,6 +48531,8 @@
           "configurationMapped": true,
           "agentSafety": null,
           "aaCostCaveat": null,
+          "aaCostCaveatFactor": null,
+          "aaCostCaveatRangeUsd": null,
           "valuation": {
             "costSourceRule": "AA: provider-reported token counts priced per token category at AA's recorded prices, cache pricing included",
             "valuationSufficiency": "category totals sufficient for AA's published valuation",
@@ -49210,6 +49275,11 @@
           "configurationMapped": true,
           "agentSafety": null,
           "aaCostCaveat": "Claude Haiku 5.5 has 5x higher pricing on longer-context inputs which are not currently reflected; we are working to include this in cost figures across Artificial Analysis.",
+          "aaCostCaveatFactor": 5.0,
+          "aaCostCaveatRangeUsd": [
+            45.909504751851436,
+            229.5475237592572
+          ],
           "valuation": {
             "costSourceRule": "AA: provider-reported token counts priced per token category at AA's recorded prices, cache pricing included",
             "valuationSufficiency": "category totals sufficient for AA's published valuation",
@@ -49916,6 +49986,8 @@
           "configurationMapped": true,
           "agentSafety": null,
           "aaCostCaveat": null,
+          "aaCostCaveatFactor": null,
+          "aaCostCaveatRangeUsd": null,
           "valuation": {
             "costSourceRule": "AA: provider-reported token counts priced per token category at AA's recorded prices, cache pricing included",
             "valuationSufficiency": "category totals sufficient for AA's published valuation",
@@ -50658,6 +50730,8 @@
           "configurationMapped": true,
           "agentSafety": null,
           "aaCostCaveat": null,
+          "aaCostCaveatFactor": null,
+          "aaCostCaveatRangeUsd": null,
           "valuation": {
             "costSourceRule": "AA: provider-reported token counts priced per token category at AA's recorded prices, cache pricing included",
             "valuationSufficiency": "category totals sufficient for AA's published valuation",
@@ -51400,6 +51474,8 @@
           "configurationMapped": true,
           "agentSafety": null,
           "aaCostCaveat": null,
+          "aaCostCaveatFactor": null,
+          "aaCostCaveatRangeUsd": null,
           "valuation": {
             "costSourceRule": "AA: provider-reported token counts priced per token category at AA's recorded prices, cache pricing included",
             "valuationSufficiency": "category totals sufficient for AA's published valuation",
@@ -59548,6 +59624,8 @@
           "label": "anchors from frontier and near-frontier configurations only (diagnostic; the frozen anchors stay primary)",
           "status": "evaluated",
           "references": [
+            "claude-haiku-5-5-high",
+            "claude-haiku-5-5-medium",
             "claude-opus-5-5-high",
             "claude-opus-5-5-medium",
             "deepseek-v4-1-flash-1017",
@@ -59569,6 +59647,8 @@
                 "low": 10.354950690764687,
                 "high": 4764.189860676615,
                 "referenceIds": [
+                  "claude-haiku-5-5-high",
+                  "claude-haiku-5-5-medium",
                   "claude-opus-5-5-high",
                   "claude-opus-5-5-medium",
                   "deepseek-v4-1-flash-1017",
@@ -59639,9 +59719,11 @@
             },
             "plan": {
               "anchors": {
-                "low": 0.961283948270023,
+                "low": 0.38972414899704105,
                 "high": 4613.576656322625,
                 "referenceIds": [
+                  "claude-haiku-5-5-high",
+                  "claude-haiku-5-5-medium",
                   "claude-opus-5-5-high",
                   "claude-opus-5-5-medium",
                   "deepseek-v4-1-flash-1017",
@@ -59659,9 +59741,9 @@
                 ]
               },
               "exchangeRate": {
-                "valuePointsPerCostDoubling": 2.044381834621736,
-                "qualityPointsPerCostDoubling": 2.7258424461623147,
-                "anchorRatio": 4799.390091372544
+                "valuePointsPerCostDoubling": 1.8475894387318745,
+                "qualityPointsPerCostDoubling": 2.463452584975833,
+                "anchorRatio": 11838.056913321154
               },
               "frozenExchangeRate": {
                 "valuePointsPerCostDoubling": 1.8475894387318745,
@@ -59689,25 +59771,25 @@
                 ],
                 "excluded": [],
                 "changes": {
-                  "claude-haiku-5-5-high": -1,
-                  "claude-haiku-5-5-medium": -1,
+                  "claude-haiku-5-5-high": 0,
+                  "claude-haiku-5-5-medium": 0,
                   "claude-opus-5-5-high": 0,
                   "claude-opus-5-5-medium": 0,
-                  "deepseek-v4-1-flash-1017": 1,
-                  "gemini-4-argon": 1,
+                  "deepseek-v4-1-flash-1017": 0,
+                  "gemini-4-argon": 0,
                   "gpt-5.6-luna-low": 0,
-                  "gpt-6-astra-high": 1,
+                  "gpt-6-astra-high": 0,
                   "gpt-6-luna": 0,
-                  "gpt-6-luna-high": -3,
+                  "gpt-6-luna-high": 0,
                   "gpt-6-luna-medium": 0,
-                  "gpt-6-luna-xhigh": -1,
+                  "gpt-6-luna-xhigh": 0,
                   "gpt-6.1-sol-high": 0,
-                  "gpt-6.1-sol-medium": 1,
-                  "kimi-k3-1-pro": 1,
-                  "mimo-v2-6-pro": 1
+                  "gpt-6.1-sol-medium": 0,
+                  "kimi-k3-1-pro": 0,
+                  "mimo-v2-6-pro": 0
                 },
-                "maxAbsChange": 3,
-                "maxRow": "gpt-6-luna-high"
+                "maxAbsChange": 0,
+                "maxRow": "mimo-v2-6-pro"
               }
             }
           },
@@ -60380,112 +60462,128 @@
             "completeEvidence": true,
             "valuationGate": "compatible as captured",
             "eligible": true,
-            "reason": null
+            "reason": null,
+            "leavesAtNextFreeze": null
           },
           {
             "row": "gemini-4-argon",
             "completeEvidence": true,
             "valuationGate": "compatible as captured",
             "eligible": true,
-            "reason": null
+            "reason": null,
+            "leavesAtNextFreeze": null
           },
           {
             "row": "kimi-k3-1-pro",
             "completeEvidence": true,
             "valuationGate": "compatible as captured",
             "eligible": true,
-            "reason": null
+            "reason": null,
+            "leavesAtNextFreeze": null
           },
           {
             "row": "gpt-6.1-sol-high",
             "completeEvidence": true,
             "valuationGate": "compatible as captured",
             "eligible": true,
-            "reason": null
+            "reason": null,
+            "leavesAtNextFreeze": null
           },
           {
             "row": "claude-opus-5-5-high",
             "completeEvidence": true,
             "valuationGate": "compatible as captured",
             "eligible": true,
-            "reason": null
+            "reason": null,
+            "leavesAtNextFreeze": null
           },
           {
             "row": "mimo-v2-6-pro",
             "completeEvidence": true,
             "valuationGate": "compatible as captured",
             "eligible": true,
-            "reason": null
+            "reason": null,
+            "leavesAtNextFreeze": null
           },
           {
             "row": "claude-opus-5-5-medium",
             "completeEvidence": true,
             "valuationGate": "compatible as captured",
             "eligible": true,
-            "reason": null
+            "reason": null,
+            "leavesAtNextFreeze": null
           },
           {
             "row": "gpt-6.1-sol-medium",
             "completeEvidence": true,
             "valuationGate": "compatible as captured",
             "eligible": true,
-            "reason": null
+            "reason": null,
+            "leavesAtNextFreeze": null
           },
           {
             "row": "gpt-6-astra-high",
             "completeEvidence": true,
             "valuationGate": "compatible as captured",
             "eligible": true,
-            "reason": null
+            "reason": null,
+            "leavesAtNextFreeze": null
           },
           {
             "row": "gpt-6-luna",
             "completeEvidence": true,
             "valuationGate": "compatible as captured",
             "eligible": true,
-            "reason": null
+            "reason": null,
+            "leavesAtNextFreeze": null
           },
           {
             "row": "claude-haiku-5-5-high",
             "completeEvidence": true,
             "valuationGate": "compatible as captured",
-            "eligible": false,
-            "reason": "AA cost omits a pricing term (O94)"
+            "eligible": true,
+            "reason": null,
+            "leavesAtNextFreeze": "AA cost omits a pricing term (O94)"
           },
           {
             "row": "gpt-6-luna-xhigh",
             "completeEvidence": true,
             "valuationGate": "compatible as captured",
             "eligible": true,
-            "reason": null
+            "reason": null,
+            "leavesAtNextFreeze": null
           },
           {
             "row": "claude-haiku-5-5-medium",
             "completeEvidence": true,
             "valuationGate": "compatible as captured",
-            "eligible": false,
-            "reason": "AA cost omits a pricing term (O94)"
+            "eligible": true,
+            "reason": null,
+            "leavesAtNextFreeze": "AA cost omits a pricing term (O94)"
           },
           {
             "row": "gpt-6-luna-high",
             "completeEvidence": true,
             "valuationGate": "compatible as captured",
             "eligible": true,
-            "reason": null
+            "reason": null,
+            "leavesAtNextFreeze": null
           },
           {
             "row": "gpt-6-luna-medium",
             "completeEvidence": true,
             "valuationGate": "compatible as captured",
             "eligible": true,
-            "reason": null
+            "reason": null,
+            "leavesAtNextFreeze": null
           },
           {
             "row": "gpt-5.6-luna-low",
             "completeEvidence": true,
             "valuationGate": "compatible as captured",
             "eligible": true,
-            "reason": null
+            "reason": null,
+            "leavesAtNextFreeze": null
           }
         ],
         "sweCompanion": {
@@ -61437,9 +61535,14 @@
           "detail": "44 of 51 plan rows carry a possibly-superseded or expired route: claude-haiku-5-5-high@claude-max-20x, claude-haiku-5-5-high@claude-max-5x, claude-haiku-5-5-high@claude-pro, claude-haiku-5-5-medium@claude-max-20x, claude-haiku-5-5-medium@claude-max-5x, claude-haiku-5-5-medium@claude-pro, claude-opus-5-5-high@claude-max-20x, claude-opus-5-5-high@claude-max-5x, claude-opus-5-5-high@claude-pro, claude-opus-5-5-medium@claude-max-20x, claude-opus-5-5-medium@claude-max-5x, claude-opus-5-5-medium@claude-pro, gpt-5.6-luna-low@chatgpt-plus, gpt-5.6-luna-low@chatgpt-pro-100, gpt-5.6-luna-low@chatgpt-pro-200, gpt-5.6-luna-low@chatgpt-pro-500, gpt-6-astra-high@chatgpt-plus, gpt-6-astra-high@chatgpt-pro-100, gpt-6-astra-high@chatgpt-pro-200, gpt-6-astra-high@chatgpt-pro-500, gpt-6-luna-high@chatgpt-plus, gpt-6-luna-high@chatgpt-pro-100, gpt-6-luna-high@chatgpt-pro-200, gpt-6-luna-high@chatgpt-pro-500, gpt-6-luna-medium@chatgpt-plus, gpt-6-luna-medium@chatgpt-pro-100, gpt-6-luna-medium@chatgpt-pro-200, gpt-6-luna-medium@chatgpt-pro-500, gpt-6-luna-xhigh@chatgpt-plus, gpt-6-luna-xhigh@chatgpt-pro-100, gpt-6-luna-xhigh@chatgpt-pro-200, gpt-6-luna-xhigh@chatgpt-pro-500, gpt-6-luna@chatgpt-plus, gpt-6-luna@chatgpt-pro-100, gpt-6-luna@chatgpt-pro-200, gpt-6-luna@chatgpt-pro-500, gpt-6.1-sol-high@chatgpt-plus, gpt-6.1-sol-high@chatgpt-pro-100, gpt-6.1-sol-high@chatgpt-pro-200, gpt-6.1-sol-high@chatgpt-pro-500, gpt-6.1-sol-medium@chatgpt-plus, gpt-6.1-sol-medium@chatgpt-pro-100, gpt-6.1-sol-medium@chatgpt-pro-200, gpt-6.1-sol-medium@chatgpt-pro-500"
         },
         {
-          "rule": "acknowledged accounting-fault windows (O91, O92)",
+          "rule": "acknowledged accounting-fault windows (O91, O92, O93, O95, O96)",
           "status": "fired",
-          "detail": "8 of 51 plan rows rest on a measurement inside an acknowledged fault window; they stay selected and yield to two concordant user reports for the plan: gpt-5.6-luna-low@chatgpt-pro-500, gpt-6-astra-high@chatgpt-pro-500, gpt-6-luna-high@chatgpt-pro-500, gpt-6-luna-medium@chatgpt-pro-500, gpt-6-luna-xhigh@chatgpt-pro-500, gpt-6-luna@chatgpt-pro-500, gpt-6.1-sol-high@chatgpt-pro-500, gpt-6.1-sol-medium@chatgpt-pro-500"
+          "detail": "8 of 51 plan rows rest on a measurement inside an acknowledged fault window; they stay selected and yield to two concordant user reports for their own model and plan, and the transfers resting on them follow: gpt-5.6-luna-low@chatgpt-pro-500, gpt-6-astra-high@chatgpt-pro-500, gpt-6-luna-high@chatgpt-pro-500, gpt-6-luna-medium@chatgpt-pro-500, gpt-6-luna-xhigh@chatgpt-pro-500, gpt-6-luna@chatgpt-pro-500, gpt-6.1-sol-high@chatgpt-pro-500, gpt-6.1-sol-medium@chatgpt-pro-500"
+        },
+        {
+          "rule": "AA cost omits a pricing term (O94)",
+          "status": "fired",
+          "detail": "ranked at the published cost; compete in interval and scenario outputs over [C, factor × C] without a label, and leave the anchor population at the next freeze: claude-haiku-5-5-high (5.0×), claude-haiku-5-5-medium (5.0×)"
         },
         {
           "rule": "valuation-basis gate (E170)",
@@ -61577,7 +61680,7 @@
           {
             "key": "planRoutes",
             "artifact": "data/plan_cost_routes.json",
-            "sha256": "6b2ff00ae4ace7958fd8f5990a327ba421f673a320c13521c13c0b4d62417565",
+            "sha256": "e86b707890d2dab8ee03e952dd8db5e175d080d4086c9afbe97ea949bbd32188",
             "capturedAt": "2026-10-25",
             "extractor": "editorial Plan evidence registry"
           },
@@ -61645,7 +61748,7 @@
             "extractor": "valuerank.value_v3 freeze"
           }
         ],
-        "bundleHash": "d4216fb8b1ca3d45c63f55347e01be19a6b9ff2b7215b589c9ec4376c91ce3c4",
+        "bundleHash": "1ccb9c67e76ea1cc6abd8a51595ab86c639985e21c833347a8335ef8ee5e1a96",
         "rebuild": "every published output is rebuilt from these artifacts at the pinned publication clock (npm run verify:docs), never from live pages"
       },
       "track": {

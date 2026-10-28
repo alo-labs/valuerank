@@ -743,3 +743,27 @@ def test_a_lower_of_transfer_follows_its_donor_to_a_replacing_report_pair():
     pr.check_lower_of_routes({"routes": [sol, astra, luna]})
     with pytest.raises(ValueError, match="lowest measured figure"):
         pr.check_lower_of_routes({"routes": [sol, astra, {**luna, "donorRouteId": "astra", "valueMultiple": 14.0}]})
+
+
+def test_every_transfer_follows_its_donor_and_a_replacing_pair_can_be_the_lowest():
+    """O96: a single-donor transfer takes its donor's replacing report pair; I80 L4: when the pair is the plan's lowest
+    figure the lower-of transfer names the pair's base route, which donor lookup resolves."""
+
+    faults = [{"provider": "P", "plans": ["Pro"], "days": ["2026-09-29..2026-10-16"], "evidence": "acknowledged"}]
+    opus = dict(route("opus", 58.0, models=("opus",)), provider="P", plan="Pro", sourceEvidenceId="sa", sourcePublicationDate="2026-10-06")
+    sonnet = dict(route("sonnet", 58.0, kind="user_assumption", models=("sonnet",)), provider="P", plan="Pro", donorRouteId="opus",
+                  sourceEvidenceClass="controlled_account_workload_projection")
+    low = dict(route("opus-reports", 9.0, kind="user_reported_projection", models=("opus",)), plan="Pro",
+               independentReports=[comparable_report("a", 9.0), comparable_report("b", 9.1)])
+    day = date(2026, 10, 25)
+    registry = {item["id"]: item for item in (opus, sonnet, low)}
+    rebased = pr.rebase_transfer(sonnet, registry, day, None, faults)
+    assert rebased["donorRouteId"] == "opus-reports" and rebased["valueMultiple"] == pytest.approx(9.05, rel=0.01)
+    [candidate_] = pr.route_candidates("sonnet", None, [sonnet], day, registry=list(registry.values()), faults=faults)
+    assert candidate_["donorRouteId"] == "opus-reports"
+    assert pr.rebase_transfer(sonnet, registry, day, None, None) is sonnet  # no fault, no change: the measurement stands
+    assert pr.rebase_transfer({**sonnet, "donorRouteId": "missing"}, registry, day, None, faults)["donorRouteId"] == "missing"
+    luna = dict(route("luna", 58.0, kind="user_assumption", models=("luna",)), provider="P", plan="Pro", sourceEvidenceId="sa", donorRouteId="opus",
+                donorRule="lower-of", sourceEvidenceClass="controlled_account_workload_projection")
+    registry["luna"] = luna
+    assert pr.rebase_transfer(luna, registry, day, None, faults)["donorRouteId"] == "opus-reports"

@@ -211,7 +211,10 @@ def expiry_status(route: dict, release_day: date, registry: dict | None = None) 
     if age > HARD_EXPIRY_DAYS:
         return "expired"
     changed = source.get("changeDetectedOn")
-    if age > SOFT_EXPIRY_DAYS or (changed and evidence_date(source) <= date.fromisoformat(changed) <= release_day):
+    # I79 L1, I80 L3: a change can have superseded the measurement unless it predates the earliest date the measurement can
+    # have been taken (its window start, else 30 dates before publication).
+    earliest = measurement_span(source)[0] or evidence_date(source)
+    if age > SOFT_EXPIRY_DAYS or (changed and earliest is not None and earliest <= date.fromisoformat(changed) <= release_day):
         return "possibly-superseded"
     return "fresh"
 
@@ -495,7 +498,8 @@ def effective_measurement(route: dict, registry: dict, release_day: date, window
         dates = [report_date(report) for report in other.get("independentReports") or other.get("reports") or [other]]
         after_change = bool(changed) and None not in dates and min(dates) > date.fromisoformat(changed)
         if in_fault_window(route, faults) or after_change:
-            return objects[0]
+            # I80 L4: the replacing object names its base route, the id a transfer can name as its donor.
+            return {**objects[0], "baseRouteId": other["id"]}
     return route
 
 
@@ -509,10 +513,27 @@ def rebase_lower_of(route: dict, registry: dict, release_day: date, window: dict
         return route
     effective = [effective_measurement(item, registry, release_day, window, faults) for item in measured]
     lowest = min(effective, key=lambda item: (comparison_multiple(item), item["id"]))
-    if lowest["id"] == route.get("donorRouteId"):
+    return _rebased(route, lowest)
+
+
+def _rebased(route: dict, donor_object: dict) -> dict:
+    donor_id = donor_object.get("baseRouteId", donor_object["id"])
+    if donor_id == route.get("donorRouteId"):
         return route
-    return {**route, "donorRouteId": lowest["id"], "valueMultiple": lowest["valueMultiple"], "rebasedFrom": route.get("donorRouteId"),
-            "sourceModel": lowest.get("sourceModel", route.get("sourceModel"))}
+    return {**route, "donorRouteId": donor_id, "valueMultiple": comparison_multiple(donor_object), "rebasedFrom": route.get("donorRouteId"),
+            "sourceModel": donor_object.get("sourceModel", route.get("sourceModel"))}
+
+
+def rebase_transfer(route: dict, registry: dict, release_day: date, window: dict | None, faults: list[dict] | None) -> dict:
+    """O95, O96: every route resting on a donor measurement takes its donor's effective figure: a lower-of transfer the lower
+    of its plan's effective figures, any other transfer (or O88 route) its own donor's replacing report pair, if any."""
+
+    if route.get("donorRule") == "lower-of":
+        return rebase_lower_of(route, registry, release_day, window, faults)
+    source = registry.get(route.get("donorRouteId") or "")
+    if source is None or source.get("valueMultipleKind") not in CONTROLLED_KINDS:
+        return route
+    return _rebased(route, effective_measurement(source, registry, release_day, window, faults))
 
 
 def route_candidates(model_id: str, configuration_effort: str | None, routes: list[dict], release_day: date, *, registry: list[dict] | None = None,
@@ -528,8 +549,7 @@ def route_candidates(model_id: str, configuration_effort: str | None, routes: li
     for route in [item for base in routes for item in measurement_objects(base, release_day, window)]:
         if model_id not in route.get("modelIds", []):
             continue
-        if route.get("donorRule") == "lower-of":
-            route = rebase_lower_of(route, by_id, release_day, window, faults)
+        route = rebase_transfer(route, by_id, release_day, window, faults)
         required = route.get("requiredVariant")
         if required is not None and (configuration_effort or "").casefold() != required.casefold():
             continue

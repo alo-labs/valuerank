@@ -1820,3 +1820,15 @@ Asked on I64 Q1 whether future O71 admissions should be executed by the build fr
 - L4 (adopted): the README legend says a possibly-superseded route earns no label only when the trigger is a detected change; the fault-window legend names O93's per-model scope and O95; the registry cites O80 for staying in its own unit and O82 for never converting; scores.md prints every ranking's release gates.
 - L5 (adopted; O95 defines "or their donor's route is replaced").
 - Round status (O56): not clean (one Medium). Draft r139; the Opus xhigh count restarts.
+
+## Owner decision O96 (2026-10-28), asked on I80 Q1
+- O96 (every transfer follows its donor): any route resting on a donor measurement (an owner-named single-donor transfer such as the common Claude assumption, an O88 same-model route, or an O45 lower-of transfer under O95) takes its donor model's effective figure: the replacing report pair when one replaces the measurement under O78 or O92, else the measurement. No row keeps a superseded figure. Latent today: no report cell passes.
+
+## Internal review I80 (Claude Opus 5.5, effort xhigh, on r139) — adopted, modified or rejected
+- M1 (adopted, engine changed with a test): O94's anchor exclusion now applies only to a new freeze (`anchor_population(..., freezing=True)`), as O94 states ("from the next re-freeze"); the current population, E64's recalibrated anchors and the E187/E205 diagnostics keep the O94 rows, so the AI Coding Daily E187 diagnostic is again on all 16 references (r138's result) and attributes only the frontier-family restriction. `anchorEligibility` publishes `leavesAtNextFreeze`; the anchor-eligibility text (lines 47, 63) names O94.
+- L1 (adopted): E183's competitor universe and E186's BlockerSafe name O94 rows. possibleQualifierN leaves blockers out as it already did for O29 rows (unchanged rule).
+- L2 (adopted, engine changed with a test): an O94 note without a parsable factor makes the row's domain unconstructible, so the outputs are unresolved (as for an O29 row without a domain), never computed without it; the parser reads "x", "×" and "times".
+- L3 (adopted, engine changed): `expiry_status` also dates a change against the earliest day the measurement can have been taken; the draft states the rule in E228.
+- L4 (adopted, engine changed with a test): a replacing report pair's measurement object names its base route, so a transfer can name it as donor; a test covers the pair being the plan's lowest figure.
+- L5 (adopted): the displayed-record results and the anchor provenance mark O94 rows; each row publishes `aaCostCaveatFactor` and `aaCostCaveatRangeUsd`; the release manifest has an O94 rule; the fault-window rule and draft line 55 name O93's per-model scope and O95/O96.
+- Round status (O56): not clean (one Medium). Draft r140; the Opus xhigh count restarts.

@@ -605,6 +605,14 @@ def displayed_cheapest_sentences(facts):
                for row_id in sorted(cheapest) if flags.get(row_id, {}).get("status") == "flagged"]
     if flagged:
         sentences.append("Safety-refusal flags (O63; costs and scores unchanged) on these bars' cheapest rows: " + "; ".join(flagged) + ".")
+    # I80 L5: a bar's cheapest row whose AA cost omits a pricing term (O94) is marked, with the range it competes over.
+    caveats = {row["id"]: row for row in facts.v3.get("rows", []) if row.get("aaCostCaveat")}
+    caveated = sorted({row_id.split("@")[0] for basis in ("api", "plan") for item in facts.v3["displayedCheapest"][basis]["bars"]
+                       for row_id in [*(item["cheapest"] or []), *((item.get("margin") or {}).get("cheapest") or [])]} & set(caveats))
+    if caveated:
+        sentences.append("AA cost caveat (O94; ranked at the published cost, no label of its own) on these bars' cheapest rows: " + "; ".join(
+            f"{facts.label(row_id)} (AA's cost omits a pricing term; up to {caveats[row_id]['aaCostCaveatFactor']:g}× on its cost)"
+            if caveats[row_id].get("aaCostCaveatFactor") else f"{facts.label(row_id)} (AA's cost omits a pricing term; no factor stated)" for row_id in caveated) + ".")
     # I79 L3: a Plan bar's cheapest plan row whose selected route carries a lifecycle or fault-window flag is marked too.
     plan_flags = {row["id"]: row.get("flags", []) for row in facts.v3.get("planRows", [])}
     routed = sorted({row_id for item in facts.v3["displayedCheapest"]["plan"]["bars"] for row_id in [*(item["cheapest"] or []), *((item.get("margin") or {}).get("cheapest") or [])]
@@ -1213,10 +1221,13 @@ def scenario_panel_note(facts):
 
 
 def anchor_setter(facts, end):
-    """One official Plan anchor setter; an API-cost fallback plan row already names its evidence (O48)."""
+    """One official Plan anchor setter; an API-cost fallback plan row already names its evidence (O48); a setter whose AA cost
+    omits a pricing term says so (O94: it leaves the anchors at the next freeze)."""
 
     label = facts.label(end["row"])
-    return label if label.endswith(end["evidence"]) else f"{label} ({end['evidence']})"
+    row = next((item for item in facts.v3.get("rows", []) if item["id"] == end["row"].split("@")[0]), {})
+    notes = ([] if label.endswith(end["evidence"]) else [end["evidence"]]) + (["AA cost caveat: leaves the anchors at the next freeze, O94"] if row.get("aaCostCaveat") else [])
+    return f"{label} ({'; '.join(notes)})" if notes else label
 
 
 def calibration_markdown(facts):

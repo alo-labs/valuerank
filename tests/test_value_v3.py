@@ -245,8 +245,8 @@ def test_anchor_population_is_the_complete_evidence_panel_and_thin_subsets_have_
     assert v.anchor_population(unresolved, unresolved["admitted"]) == ["a"]
     original = v.anchor_population
 
-    def thin(assembled_, components):
-        population = original(assembled_, components)
+    def thin(assembled_, components, **kwargs):
+        population = original(assembled_, components, **kwargs)
         return population if basket.CODING_AGENT_INDEX in components else population[:1]
 
     monkeypatch.setattr(v, "anchor_population", thin)
@@ -1300,7 +1300,7 @@ def test_anchor_eligibility_table_names_each_exclusion():
     flagged = gated_world(priced_page("a-max", 1.0, PRICES, price1mOutputTokens=15.0), [record])
     table = {item["row"]: item for item in v.anchor_eligibility(flagged, flagged["admitted"])}
     assert table["a"]["eligible"] is False and table["a"]["reason"] == f"valuation gate: {v.GATE_NOT_IN_FORCE}"
-    assert table["c"]["reason"] == "incomplete cost evidence" and table["b"] == {"row": "b", "completeEvidence": True, "valuationGate": v.GATE_COMPATIBLE, "eligible": True, "reason": None}
+    assert table["c"]["reason"] == "incomplete cost evidence" and table["b"] == {"row": "b", "completeEvidence": True, "valuationGate": v.GATE_COMPATIBLE, "eligible": True, "reason": None, "leavesAtNextFreeze": None}
 
 
 def test_scenario_labels_never_go_to_or_past_an_unsafe_blocker(monkeypatch):
@@ -2096,8 +2096,16 @@ def test_a_row_whose_aa_cost_omits_a_pricing_term_competes_over_a_range_without_
     assert "a" in api["blockers"] and api["frontier"]["a"] == {"status": v.WITHHELD_CAVEAT}
     published = {item["id"]: item for item in v.score(result, frozen)["rows"]}
     assert published["a"]["aaCostCaveat"].startswith("Model A has 5x") and published["a"]["valuation"]["tariffCorrectedValuation"].startswith("unidentified")
-    assert next(item for item in v.anchor_eligibility(result, result["admitted"]) if item["row"] == "a")["reason"] == "AA cost omits a pricing term (O94)"
+    # I80 M1: the row leaves the anchor population at the next freeze only; the current population keeps it.
+    eligibility = next(item for item in v.anchor_eligibility(result, result["admitted"]) if item["row"] == "a")
+    assert eligibility["eligible"] and eligibility["leavesAtNextFreeze"] == "AA cost omits a pricing term (O94)"
+    assert "a" in v.anchor_population(result, result["admitted"]) and "a" not in v.anchor_population(result, result["admitted"], freezing=True)
+    assert v.caveat_factor({**row, "aaNote": "Model A has 5× higher pricing beyond 200k tokens."}) == 5.0
+    assert v.caveat_factor({**row, "aaNote": "Model A costs 2.5 times more on long inputs not reflected in its price."}) == 2.5
     row["aaNote"] = "Model A's cost omits a pricing term."
     assert v.caveat_factor(row) is None and all(item.row != "a" for item in v.api_boxes(result))
+    # I80 L2: without a factor the row's domain cannot be constructed, so nothing is certified against it.
+    unresolved = v.interval_outputs(result, frozen, "api")
+    assert unresolved["status"] == v.intervals.UNRESOLVED and "a" in unresolved["blockers"]
     row["aaNote"] = "Unrelated note."
     assert v.aa_cost_caveat(row) is None and v.caveat_factor(row) is None
