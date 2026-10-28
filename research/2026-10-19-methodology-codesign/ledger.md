@@ -1878,3 +1878,15 @@ Asked on I64 Q1 whether future O71 admissions should be executed by the build fr
 - L3 (adopted): line 55 and the O97 sentence say the O88 configuration selects the pair itself (the follower is dropped); E144's fixture list distinguishes a demoted donor with and without a pair (O102).
 - L4 (adopted): the manifest's build-stopping gates and E63 name O99–O101; AGENTS.md's capture step names the register; the register's bundle instant is the chart capture's (I60 L6).
 - Round status (O56): not clean (one Medium). Draft r144; the Opus max count stays at zero.
+
+## Owner decisions O104 and O105 (2026-10-28), asked on I85 Q1 and Q2
+- O104 (lower-of with a demoted co-donor): a lower-of transfer takes the lower of its plan's eligible effective figures; a demoted measurement no report pair replaced has left the selection (E142) and drops out of the minimum. With no eligible figure left, the transfer keeps its stored donor and is diagnostic with it (E144).
+- O105 (model availability): a documented change to which models a plan offers is recorded with type "availability"; it flags the plan's routes (E18) and splits no report partition, as the allowance itself did not change.
+
+## Internal review I85 (Claude Opus 5.5, effort max, on r144) — adopted, modified or rejected
+- L1 (adopted as O105, engine changed with a test): `check_change_flags` accepts limit, price and availability records; `splitting` leaves availability out; E18, the registry rule and line 55's O83 clause say so.
+- L2 (adopted, engine changed with tests): `check_surface_notes` stops the build on any AA capture dated after 2026-10-28 that records no per-row `notes` list on model pages, the Coding Agent Index or the cost charts, and every recorded note must be registered; the refresh document's capture step names O100 and O103; the swing bridge now treats the register as a method input (every replay state reads the union of both releases' registers), so notes in any class, in either replay order, are classified.
+- L3 (adopted, engine changed with a test): `check_capture_twins` requires each frontier and near-frontier entry to equal its point (same URL and circle) on every shared field but list position, the footnote included.
+- L4 (adopted): E63's second list names the new gates and lists the source clocks separately; the manifest rule names the inventory, duplicate-entry and post-O103 checks and O103/O105; the register's rule text states its full scope.
+- L5 (adopted as O104, engine changed with a test covering I85's two probes).
+- Round status (O56): clean (no Medium or higher). First clean round at Opus max; the second is needed (I86). Draft r145.

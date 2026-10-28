@@ -747,7 +747,7 @@ Each routed row's amount with what it measures, how it was derived and which obj
 
 ## Evidence bundle
 
-Bundle hash `dbfe9a5acdb9e9b234fa599aaafc64b28c72feb43e6b401531a02474659e8882`: every published output is rebuilt from these artifacts at the pinned publication clock (npm run verify:docs), never from live pages.
+Bundle hash `51583e25e10b015a82c07c1ed7be2004b6da5ebd41b994349a02aa7bffe6d931`: every published output is rebuilt from these artifacts at the pinned publication clock (npm run verify:docs), never from live pages.
 
 | Key | Artifact | SHA-256 | Captured | Extractor |
 |---|---|---|---|---|
@@ -761,7 +761,7 @@ Bundle hash `dbfe9a5acdb9e9b234fa599aaafc64b28c72feb43e6b401531a02474659e8882`: 
 | frontierCapture | `data/aa_frontier_capture.json` | `43d8587dbd42051070854f4bd96886779f3cb00f9324b6a39d88c84e3b7b8630` | 2026-10-25T09:53:28Z | browser capture of AA's Intelligence Index vs cost chart from public tooltips (frontier membership, E195; unevaluated cheaper siblings, E201) |
 | roster | `data/aa_mapping.json` | `871ff30c9613bbf5fe81d22b61cbd429ea7fe11587b77e0285765c817ee195d1` | 2026-10-25T09:53:28Z | editorial roster: every configuration AA plots on its rendered frontier or within 3 Index points of it (O51) |
 | bugHuntScoreboard | `data/bug_hunt_scoreboard.json` | `621695b6104795ce5810bb230d17422bb657010acc8a97e4d77b1fece10cd3a3` | 2026-10-25T10:44:11Z | the owner's combined scoreboard at the pinned commit (O31 roster check) |
-| planRoutes | `data/plan_cost_routes.json` | `e98840c371708ce79d5298f2049a73dd3c823cd787c732a8059717c09b5af6c4` | 2026-10-25 | editorial Plan evidence registry |
+| planRoutes | `data/plan_cost_routes.json` | `2a4f964922d4498dc20d27efc7c762fdb0e22108247a91aa91fb68643a241c18` | 2026-10-25 | editorial Plan evidence registry |
 | priceRecords | `data/price_records.json` | `9be099828d530cc4ad2294d6fdf6ff03a3d94cc5530e8d6ef3279133491930bd` | 2026-10-23T06:26:23Z | editorial E141 price-record registry (superseded and promotional tariffs) |
 | leafEvidence | `data/leaf_evidence.json` | `e7e31c0f4ae8bf333b61f24614f46470df7a62a9b6b48dfb7c090030a90ee853` | 2026-10-25 | editorial supplementary leaf evidence and the exhaustive-search log (O36) |
 | cognitionFrontierCode | `data/cognition_frontiercode.json` | `ff0040778b7bdf69c705ad7474f771fb5e53cfaf5cf8573b3a4614153543d75f` | 2026-10-23 | Cognition's FrontierCode leaderboard data (https://cognition.com/data/frontiercode-leaderboard/data.json), captured unchanged (O37) |
@@ -769,7 +769,7 @@ Bundle hash `dbfe9a5acdb9e9b234fa599aaafc64b28c72feb43e6b401531a02474659e8882`: 
 | planReports | `data/plan_reports.json` | `c017edb8177d638c98e5e3d55b7e94b2d14335f19283b6d90c331ee54550cfc6` | 2026-10-25 | editorial table of every O71 user report with the facts E270 needs; the build derives admission from it (O81) |
 | aaPreviousCapture | `data/aa/aa_previous_capture.json` | `89bef16d1be094feced8402bdac4d7e8981d86be303d5dbfda7368ce91fc0aed` | 2026-10-23T06:26:23Z | valuerank.capture_aa: digest of the model-page capture this one replaced (I60) |
 | sourceRereads | `data/source_rereads.json` | `a64ddcf196f61698b7babc18dd26dd2d1ed0762a9beb20bb8587c3eaebbd046b` | 2026-10-25T11:34:13Z | editorial record of the O68 re-reads, each 'unchanged' result verified against the re-read file |
-| aaFootnotes | `data/aa/aa_footnote_register.json` | `b1d19a48c5fab3d6b038549fae030e58b925badca9af87290553e657e865a3c3` | 2026-10-25T09:53:28Z | editorial register of AA chart footnotes by exact text, each classified once (O100) |
+| aaFootnotes | `data/aa/aa_footnote_register.json` | `58e09177fc2e84cc5ff163f6bc4d801a7e31f48da1b669c4131fe1ce2efa12ed` | 2026-10-25T09:53:28Z | editorial register of AA chart footnotes by exact text, each classified once (O100) |
 | anchors | `data/v3_frozen.json` | `d4f3bb4b769b2fcfc1b5c5847f67b396c6a386d7db4b17f99dffa9321e480cfc` | 2026-10-25 | valuerank.value_v3 freeze |
 | anchors:aicd | `data/v3_frozen_aicd.json` | `04a9d0fa638df44b005021793675bb333bc3aa40fd14dec9b706efbd7688bd41` | 2026-10-25 | valuerank.value_v3 freeze |
 

@@ -27,7 +27,7 @@ npm run build:aa           # AA model pages (HTTPS) -> data/aa/aa_v432_snapshot.
 npm run capture:basket     # AA Coding Agent Index (with safety-refusal counts, O63) and cost charts -> data/aa/coding_agents_capture.json, data/aa/cost_charts_capture.json
 ```
 
-`npm run refresh` runs all of these. The basket captures must be within 7 days of the model-page snapshot and not after the release cutoff (E217, O65); AA data read after the cutoff moves the cutoff and every AA source is re-captured. After each capture, review `data/aa/coding_agents_manifest.json` (O64): a new, relabelled or vanished Coding Agent Index row stops the build until it is registered.
+`npm run refresh` runs all of these. The basket captures must be within 7 days of the model-page snapshot and not after the release cutoff (E217, O65); AA data read after the cutoff moves the cutoff and every AA source is re-captured. After each capture, review `data/aa/coding_agents_manifest.json` (O64): a new, relabelled or vanished Coding Agent Index row stops the build until it is registered. Classify every note the captures record in `data/aa/aa_footnote_register.json` by its exact text (O100): the chart's footnotes, and from the first capture after 2026-10-28 the notes AA prints on model pages, the Coding Agent Index and the cost charts, which each capture must record verbatim in a per-row `notes` list (O103). An unregistered or changed note, a row whose inventory note differs from the chart capture, or a post-O103 capture without `notes` stops the build.
 
 The AA page capture decodes each model page's payload object keyed by the page slug. `capture:deepswe` records every configuration that has a DeepSWE evaluation at the owner's full precision.
 

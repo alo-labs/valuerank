@@ -2157,3 +2157,22 @@ def test_the_chart_capture_footnotes_are_registered_and_match_the_inventory():
         v.chart_footnote({**row, "aaNote": None}, points)
     with pytest.raises(ValueError, match="differs"):
         v.chart_footnote(row, points + [{"family": "A", "effort": "max", "footnote": "Other."}])
+
+
+def test_capture_twins_and_post_o103_surface_notes():
+    """I85 L3: a frontier-list entry must equal its point; I85 L2, O103: a capture after 2026-10-28 records registered notes."""
+
+    point = {"url": "u", "circle_id": "c", "order": 3, "total_cost_usd": 1.0, "footnote": None}
+    v.check_capture_twins({"points": [point], "frontier": [{**point, "order": 1}]})
+    v.check_capture_twins(None)
+    for entry in ({**point, "footnote": "x"}, {**point, "circle_id": "d"}):
+        with pytest.raises(ValueError, match="frontier list entry differs"):
+            v.check_capture_twins({"points": [point], "near_frontier": [entry]})
+    register = {"notes": [{"text": "Noted.", "kind": "not a pricing omission", "factor": None}]}
+    old = {"snapshot": {"capturedAt": "2026-10-25T00:00:00Z", "pages": [{"model": {}}]}}
+    v.check_surface_notes(old, register)
+    v.check_surface_notes({"codingAgents": {"capturedAt": "2026-11-01T00:00:00Z", "configurations": [{"notes": ["Noted."]}, {"notes": []}]}}, register)
+    with pytest.raises(ValueError, match="records no notes"):
+        v.check_surface_notes({"costCharts": {"capturedAt": "2026-11-01T00:00:00Z", "evaluations": [{"rows": [{}]}]}}, register)
+    with pytest.raises(ValueError, match="unregistered AA footnote"):
+        v.check_surface_notes({"snapshot": {"capturedAt": "2026-11-01T00:00:00Z", "pages": [{"model": {"notes": ["New."]}}]}}, register)

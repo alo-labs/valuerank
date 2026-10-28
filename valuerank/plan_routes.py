@@ -539,7 +539,12 @@ def rebase_lower_of(route: dict, registry: dict, release_day: date, window: dict
     if not measured:
         return route
     effective = [effective_measurement(item, registry, release_day, window, faults, families) for item in measured]
-    lowest = min(effective, key=lambda item: (comparison_multiple(item), item["id"]))
+    # O104: a demoted measurement no report pair replaced has left the selection (E142), so it drops out of the minimum;
+    # with no eligible figure left the transfer keeps its stored donor and is diagnostic with it (E144).
+    eligible = [item for item in effective if item.get("valueMultipleKind") in REPORT_KINDS or expiry_status(item, release_day, registry) != "demoted"]
+    if not eligible:
+        return route
+    lowest = min(eligible, key=lambda item: (comparison_multiple(item), item["id"]))
     return _rebased(route, lowest)
 
 

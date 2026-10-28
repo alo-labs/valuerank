@@ -120,3 +120,17 @@ def test_other_build_errors_propagate(monkeypatch):
     monkeypatch.setattr(sb, "replay_values", broken)
     with pytest.raises(ValueError, match="something else"):
         sb.bridge(previous, previous, frozen, DAY)
+
+
+def test_the_footnote_register_is_replayed_as_a_method_input():
+    """I84 L1, I85 L2: every replay state reads the union of both releases' registers, current entries first."""
+
+    old = {"configurations": [], "documents": {"aaFootnotes": {"notes": [{"text": "Old.", "kind": "not a pricing omission"}, {"text": "Both.", "kind": "pricing omission", "factor": 2.0}]}}}
+    new = {"configurations": [], "documents": {"aaFootnotes": {"notes": [{"text": "Both.", "kind": "pricing omission", "factor": 3.0}, {"text": "New.", "kind": "not a pricing omission"}]}}}
+    previous, current = sb._with_method(old, new)
+    assert previous["documents"]["aaFootnotes"] == current["documents"]["aaFootnotes"]
+    assert [(item["text"], item.get("factor")) for item in current["documents"]["aaFootnotes"]["notes"]] == [("Both.", 3.0), ("New.", None), ("Old.", None)]
+    bare = {"configurations": [], "documents": {}}
+    assert sb._with_method(bare, bare) == (bare, bare)
+    only_old, _ = sb._with_method(old, bare)
+    assert [item["text"] for item in only_old["documents"]["aaFootnotes"]["notes"]] == ["Old.", "Both."]

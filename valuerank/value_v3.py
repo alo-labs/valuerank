@@ -862,6 +862,8 @@ def assemble(configurations: list[dict], documents: dict, *, release_day: date, 
     points = (documents.get("frontierCapture") or {}).get("points", [])
     rows, supplements, tracks = [], leaf_supplements(documents), track_records(documents)
     check_captured_footnotes(documents.get("frontierCapture"), documents.get("aaFootnotes"))
+    check_capture_twins(documents.get("frontierCapture"))
+    check_surface_notes(documents, documents.get("aaFootnotes"))
     for configuration in configurations:
         model_id, effort = configuration["id"], configuration.get("effort")
         page = pages.get(configuration["aaSlug"])
@@ -1078,6 +1080,40 @@ def chart_footnote(configuration: dict, points: list[dict]) -> str | None:
     if len(notes) > 1 or (matched and next(iter(notes), None) != configuration.get("aaNote")):
         raise ValueError(f"{configuration['id']}: AA footnote differs between the reconciliation inventory and the chart capture (O100)")
     return configuration.get("aaNote")
+
+
+O103_DATE = "2026-10-28"
+NOTE_SURFACES = {
+    "snapshot": lambda document: [page["model"] for page in document.get("pages", [])],
+    "codingAgents": lambda document: document.get("configurations", []),
+    "costCharts": lambda document: [row for evaluation in document.get("evaluations", []) for row in evaluation.get("rows", [])],
+}
+
+
+def check_surface_notes(documents: dict, register: dict | None) -> None:
+    """O103, I85 L2: an AA capture taken after O103 must record, on every row, the verbatim notes AA prints (``notes``, an
+    empty list allowed), and every note must be registered (O100); the build stops otherwise."""
+
+    for key, rows_of in NOTE_SURFACES.items():
+        document = documents.get(key) or {}
+        if (document.get("capturedAt") or "")[:10] <= O103_DATE:
+            continue
+        for row in rows_of(document):
+            if not isinstance(row.get("notes"), list):
+                raise ValueError(f"{key}: a capture after O103 ({O103_DATE}) records no notes for a row; capture AA's notes verbatim (O103)")
+            for note in row["notes"]:
+                classify_footnote(note, register)
+
+
+def check_capture_twins(capture: dict | None) -> None:
+    """I85 L3: each frontier and near-frontier entry equals its twin in ``points`` (same page URL and circle) on every shared
+    field but its list position, the footnote included; the build stops otherwise."""
+
+    points = {(point.get("url"), point.get("circle_id")): point for point in (capture or {}).get("points", [])}
+    for entry in (capture or {}).get("frontier", []) + (capture or {}).get("near_frontier", []):
+        twin = points.get((entry.get("url"), entry.get("circle_id")))
+        if twin is None or any(entry[key] != twin[key] for key in set(entry) & set(twin) - {"order"}):
+            raise ValueError(f"{entry.get('model_name')}: the chart capture's frontier list entry differs from its point (I85 L3)")
 
 
 def check_captured_footnotes(capture: dict | None, register: dict | None) -> None:
@@ -2122,9 +2158,9 @@ def score(assembled: dict, frozen: dict) -> dict:
               if any(row["valuationGate"]["outcome"] not in GATE_SCORED for row in rows) else "every ranked row is compatible as captured or after evidenced revaluation"),
         _rule("source clocks and evidence freshness (O59, O60, O65, E211, E216, E217, E218)", "passed",
               "every capture is within its age gate and none after the cutoff unless its source predates the cutoff's day; the build stops otherwise"),
-        _rule("build-stopping evidence gates (O64, O69, O71, O75, O99, O100, O101, E195, E204, E225)", "passed",
+        _rule("build-stopping evidence gates (O64, O69, O71, O75, O99, O100, O101, O103, O105, E195, E204, E225)", "passed",
               "the Coding Agent Index manifest (O64), the Terminal-Bench agent list (E225), cutoff-day row dates (O69), the three-stage all-provider plan search (O71, O75), "
-              "the typed change records behind every route flag and partition split (O99, O101), the register of AA chart notes covering every captured one (O100) "
+              "the typed change records behind every route flag and partition split (O99, O101, O105), the register of AA notes covering every captured one, with the chart's inventory and duplicate-entry checks and the post-O103 capture notes (O100, O103) "
               "and the frontier path checks (E195, E204) hold; the build stops otherwise"),
         _rule("score swing gate (E177)", "vacuous", "first v3 release: no previous v3 release to compare"),
         _rule("anchor migration (E184)", "fired" if assembled.get("deferred") else "vacuous",

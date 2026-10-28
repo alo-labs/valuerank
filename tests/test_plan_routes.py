@@ -855,3 +855,23 @@ def test_a_transfer_on_a_report_route_without_a_partition_ages_by_its_own_clock(
     reports = dict(route("r", 5.0, kind="user_reported_projection", checked="2026-10-01"), plan="Pro")
     transfer = dict(route("t", 5.0, kind="user_assumption", models=("t",)), plan="Pro", donorRouteId="r")
     assert pr.expiry_status(transfer, date(2026, 10, 25), {"r": reports, "t": transfer}) == "fresh"
+
+
+def test_a_lower_of_transfer_takes_the_lower_of_the_eligible_figures():
+    """O104 (I85 L5): with both measured models demoted and a pair for one, the demoted unreplaced figure drops out of the
+    minimum, so the transfer follows the pair whether the pair is larger or smaller; with no eligible figure it stays put."""
+
+    families = {"sol": "Sol", "astra": "Astra", "luna": "Luna"}
+    sol = dict(route("sol", 10.0, models=("sol",)), provider="P", plan="Pro", sourceEvidenceId="sa", sourcePublicationDate="2026-10-06")
+    astra = dict(route("astra", 8.1, models=("astra",)), provider="P", plan="Pro", sourceEvidenceId="sa", sourcePublicationDate="2026-10-06")
+    luna = dict(route("luna", 8.1, kind="user_assumption", models=("luna",)), provider="P", plan="Pro", sourceEvidenceId="sa", donorRouteId="astra",
+                donorRule="lower-of", sourceEvidenceClass="controlled_account_workload_projection")
+    later = date(2027, 2, 10)
+    for multiple in (11.25, 6.24):
+        dated = [dict(comparable_report("a", multiple), reportDate="2027-02-05"), dict(comparable_report("b", multiple), reportDate="2027-02-06")]
+        pair = dict(route("sol-reports", multiple, kind="user_reported_projection", models=("sol",)), plan="Pro", independentReports=dated)
+        registry = {item["id"]: item for item in (sol, astra, luna, pair)}
+        rebased = pr.rebase_lower_of(luna, registry, later, None, None, families)
+        assert rebased["donorRouteId"] == "sol-reports" and rebased["valueMultiple"] == pytest.approx(multiple)
+    registry = {item["id"]: item for item in (sol, astra, luna)}
+    assert pr.rebase_lower_of(luna, registry, later, None, None, families) is luna  # every figure demoted, none replaced

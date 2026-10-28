@@ -136,5 +136,9 @@ def test_route_change_flags_rest_on_typed_limit_or_price_records():
                            {"id": "r2", "provider": "A", "plan": "Pro", "changeDetectedOn": "2026-10-17"}, {"id": "r3", "provider": "O", "plan": "Plus"}], records)
     for bad in ({"id": "m", "provider": "O", "plan": "Plus", "changeDetectedOn": "2026-10-20"},
                 {"id": "p", "provider": "A", "plan": "Max", "changeDetectedOn": "2026-10-17"}):
-        with pytest.raises(ValueError, match="no typed limit or price change record"):
+        with pytest.raises(ValueError, match="no typed limit, price or availability change record"):
             pa.check_change_flags([bad], records)
+    # O105: a model-availability record flags the plan's routes but splits nothing.
+    availability = [{"provider": "O", "date": "2026-10-22", "type": "availability"}]
+    pa.check_change_flags([{"id": "a", "provider": "O", "plan": "Plus", "changeDetectedOn": "2026-10-22"}], availability)
+    assert pa.splitting(availability) == []

@@ -33,9 +33,13 @@ CLASSES = {
     "benchmarkRecord": {"fields": "*", "documents": ("bugHunt", "bugHuntScoreboard", "tb4", "leafEvidence", "cognitionFrontierCode", "sweTracks", "sourceRereads")},
     "planEvidence": {"fields": (), "documents": ("planRoutes", "planReports")},
     # I60: the replaced capture's digest feeds only the GDPval movement diagnostic, so it moves with the snapshot's cohort.
-    # I84 L1: the O100 register classifies the chart capture's footnotes, so the two change together.
-    "cohort": {"fields": (), "documents": ("configurationMap", "frontierCapture", "roster", "aaPreviousCapture", "aaFootnotes")},
+    "cohort": {"fields": (), "documents": ("configurationMap", "frontierCapture", "roster", "aaPreviousCapture")},
 }
+# I84 L1, I85 L2: the O100 register classifies notes that sit in several classes (the chart in cohort and, under O103, the
+# Coding Agent Index and cost charts in tokenUse and model pages in benchmarkRecord), and the replay runs both class orders,
+# so it is a method input: every replay state reads the union of both releases' registers, which classifies every note
+# either release carries.
+METHOD_DOCUMENTS = ("aaFootnotes",)
 ORDER = tuple(CLASSES)
 METHOD_STEP = "method and clock"
 CACHE_RATE_LABEL = "AA cache-rate update"
@@ -45,9 +49,21 @@ MIGRATION = "versioned migration: the current anchors cannot score this replay; 
 def _classified(documents: dict) -> None:
     """Every evidence document belongs to exactly one class (the snapshot is split by field)."""
 
-    owned = {key for spec in CLASSES.values() for key in spec["documents"]} | {"snapshot"}
+    owned = {key for spec in CLASSES.values() for key in spec["documents"]} | {"snapshot", *METHOD_DOCUMENTS}
     if set(documents) - owned:
         raise ValueError(f"unclassified evidence documents: {sorted(set(documents) - owned)}")
+
+
+def _with_method(previous: dict, current: dict) -> tuple[dict, dict]:
+    """Both releases with the method documents replaced by their union (the footnote register's notes, current first)."""
+
+    old, new = previous["documents"].get("aaFootnotes"), current["documents"].get("aaFootnotes")
+    if old is None and new is None:
+        return previous, current
+    texts = {item["text"] for item in (new or {}).get("notes", [])}
+    merged = {**(new or old), "notes": [*(new or {}).get("notes", []), *(item for item in (old or {}).get("notes", []) if item["text"] not in texts)]}
+    return ({**previous, "documents": {**previous["documents"], "aaFootnotes": merged}},
+            {**current, "documents": {**current["documents"], "aaFootnotes": merged}})
 
 
 def _pages(documents: dict) -> dict:
@@ -145,6 +161,7 @@ def bridge(previous: dict, current: dict, frozen: dict, release_day: date) -> di
 
     _classified(previous["documents"])
     _classified(current["documents"])
+    previous, current = _with_method(previous, current)
     try:
         forward = _steps(previous, current, frozen, release_day, ORDER)
         reverse = _steps(previous, current, frozen, release_day, tuple(reversed(ORDER)))

@@ -1101,6 +1101,9 @@ def add_near_family(root: Path, *, family: str, model_id, slug: str, gap: int = 
     inventory["nearFrontierRows"].append(row)
     inventory["sourceUniverse"]["nearFrontierPointN"] += 1
     capture["near_frontier"].append(near_cap(row, fallback=None))
+    # I85 L3: a real capture holds every listed point among its plotted points too.
+    template = next(point for point in capture["points"] if point.get("tier") == "near")
+    capture["points"].append({**template, "circle_id": None, **capture["near_frontier"][-1]})
     capture["universe"]["near_frontier_points"] += 1
     inventory_path.write_text(json.dumps(inventory))
     capture_path.write_text(json.dumps(capture))
