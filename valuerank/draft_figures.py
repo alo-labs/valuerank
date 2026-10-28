@@ -163,10 +163,17 @@ def named_figures(scores: dict, data: Path = DATA) -> dict:
         # I64 L5: plan rows whose selected route carries a lifecycle flag, or whose valuation basis is unverified.
         figures[f"{track}.planFlaggedRows"] = sum(bool({"possibly-superseded", "expired"} & set(row.get("flags", []))) for row in section["planRows"])
         figures[f"{track}.planUnverifiedRows"] = sum("valuation basis unverified" in row.get("flags", []) for row in section["planRows"])
+        # I71: plan rows per owner-assumption kind, and every kind named from the one registry.
+        kinds = {kind: sum(1 for row in section["planRows"] if row.get("grade") == "assumption" and (row.get("assumptionKind") or "transfer") == kind)
+                 for kind in pr.OWNER_ASSUMPTIONS}
+        figures[f"{track}.planAssumedRows"] = sum(kinds.values())
+        figures[f"{track}.planAssumedKinds"] = pr.assumption_counts_text(kinds)
         names_of = display_names(scores)
         figures[f"{track}.planFallbackNames"] = series([names_of.get(row["id"].split("@")[0], row["id"].split("@")[0]) for row in fallback]) or "none"
         figures[f"{track}.listed"] = len(section["listedIndicative"])
         figures[f"{track}.planRows"] = len(section["planRows"])
+    figures["evidence.assumptionKinds"] = pr.assumption_kinds_text()
+    figures["evidence.assumptionKindsPlural"] = pr.assumption_kinds_text("and", plural=True)
     for leaf, source in tracks["sources"].items():
         figures[f"source.{leaf}.records"] = sum(1 for record in tracks["records"] if record["leaf"] == leaf)
         figures[f"source.{leaf}.capturedAt"] = source["capturedAt"]

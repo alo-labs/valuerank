@@ -553,6 +553,37 @@ def route_selection(candidates: list[dict]) -> dict:
     return {"selected": ordered[0], "reason": deciding, "dominated": dominated, "tuples": tuples}
 
 
+# I71: the one registry of owner-assumption kinds; every flag, amount type, count and enumeration is generated from it.
+OWNER_ASSUMPTIONS = {
+    "transfer": ("owner-named transfer", "owner-named transfers"),
+    "sameModel": ("O88 same-model assumption across efforts", "O88 same-model assumptions across efforts"),
+    "ceiling": ("O46 provider quota ceiling", "O46 provider quota ceilings"),
+}
+
+
+def assumption_kind(route: dict) -> str:
+    """Which owner assumption an assumption-graded route is (O45/2026-10-18 transfer, O88 same-model, O46 ceiling)."""
+
+    if route.get("evidenceClass") == "provider_quota_ceiling":
+        return "ceiling"
+    return "sameModel" if route.get("sameModelAcrossEfforts") else "transfer"
+
+
+def assumption_kinds_text(conjunction: str = "or", plural: bool = False) -> str:
+    """Every assumption kind, named once from the registry ("an owner-named transfer, ... or an O46 ...")."""
+
+    names = [plural_name if plural else (f"an {singular}" if singular[0] in "aeiouAEIOU" else f"a {singular}")
+             for singular, plural_name in OWNER_ASSUMPTIONS.values()]
+    return ", ".join(names[:-1]) + f" {conjunction} " + names[-1]
+
+
+def assumption_counts_text(counts: dict) -> str:
+    """Rows per assumption kind, in registry order ("26 owner-named transfers, 18 O88 ... and 4 O46 ...")."""
+
+    parts = [f"{counts[kind]} {plural if counts[kind] != 1 else singular}" for kind, (singular, plural) in OWNER_ASSUMPTIONS.items() if counts.get(kind)]
+    return ", ".join(parts[:-1]) + (" and " if len(parts) > 1 else "") + parts[-1] if parts else "none"
+
+
 MEASURED_GRADES = {"controlled", "reports"}
 
 
@@ -583,9 +614,10 @@ def plan_cost(api_cost: float | None, selected: dict | None) -> dict:
     flags = []
     if selected["identification"] not in {"point-identified", "set-identified"}:
         flags.append("workload-unmatched")
-    if route.get("sameModelAcrossEfforts"):
+    kind = assumption_kind(route) if selected["grade"] == "assumption" else None
+    if kind == "sameModel":
         flags.append("same-model assumption across efforts (O88)")
-    elif selected["grade"] == "assumption" and route.get("evidenceClass") != "provider_quota_ceiling":
+    elif kind == "transfer":
         flags.append("owner-named transfer (assumption)")
     if selected["expiry"] in {"possibly-superseded", "expired"}:
         flags.append(selected["expiry"])
@@ -604,6 +636,7 @@ def plan_cost(api_cost: float | None, selected: dict | None) -> dict:
         "routeId": route["id"],
         "multiple": comparison_multiple(route),
         "grade": selected["grade"],
+        "assumptionKind": kind,
         "identification": selected["identification"],
         "measurementCapacityStatus": capacity,
         "mixCheck": selected.get("mixCheck", mix_check(route)),

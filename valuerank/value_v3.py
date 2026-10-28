@@ -2154,13 +2154,15 @@ MEASURED_CALIBRATION_RULE = (
 
 
 def _plan_evidence(row: dict | None) -> str:
-    """How a row's displayed Plan cost is supported: measured route, owner-named transfer or API-cost fallback."""
+    """How a row's displayed Plan cost is supported: measured route, an owner assumption (by kind) or API-cost fallback."""
 
     if row is None:
         return "not in the current table"
     if row["plan"]["fallback"]:
         return "API-cost fallback"
-    return {"controlled": "controlled measurement", "reports": "concordant reports"}.get(row["plan"]["grade"], "owner-named transfer")
+    if row["plan"]["grade"] == "assumption":
+        return plan_routes.OWNER_ASSUMPTIONS[row["plan"].get("assumptionKind") or "transfer"][0]
+    return {"controlled": "controlled measurement", "reports": "concordant reports"}[row["plan"]["grade"]]
 
 
 def _reversals(baseline: dict, branch: dict) -> list[list[str]]:
@@ -2573,7 +2575,7 @@ def _plan_row_json(row: dict, scores: dict, rank: int | None) -> dict:
         "id": row["id"], "configurationId": row["configurationId"], "name": row["name"], "plan": row["planName"],
         "representative": row["representative"], "routeId": selected["route"]["id"] if selected else None,
         "planLabel": selected["route"].get("planLabel") if selected else None, "grade": row["plan"].get("grade"),
-        "multiple": row["plan"].get("multiple"), "fallback": row["plan"].get("fallback"), "flags": row["plan"].get("flags", []),
+        "assumptionKind": row["plan"].get("assumptionKind"), "multiple": row["plan"].get("multiple"), "fallback": row["plan"].get("fallback"), "flags": row["plan"].get("flags", []),
         "selectionReason": row["routeSelection"]["reason"], "quality": row["summary"].displayed, **scores, "rank": rank,
     }
 
@@ -2666,7 +2668,10 @@ def rank_separability(assembled: dict, per_row: dict, exchange: dict | None = No
     # I27: the Plan basis also carries owner-named transfer error, which this noise does not include.
     assumed = sorted(row["id"] for row in plan_rows if transfer_dependent(row))
     result = {"assumptions": list(SAMPLING_ASSUMPTIONS), "bias": SEPARABILITY_BIAS, "bandRule": BAND_RULE, "valueSd": sd,
-              "qualityMargin": quality_margin(assembled), "planAssumedRouteRows": assumed}
+              "qualityMargin": quality_margin(assembled), "planAssumedRouteRows": assumed,
+              # I71: rows per owner-assumption kind, so every published enumeration is generated.
+              "planAssumedRouteKinds": {kind: sum(1 for row in plan_rows if transfer_dependent(row) and (row["plan"].get("assumptionKind") or "transfer") == kind)
+                                        for kind in plan_routes.OWNER_ASSUMPTIONS}}
     for basis in BASES:
         ids, scores_of = (list(sd), per_row) if basis == "api" else ([row["id"] for row in plan_rows], plan_scores)
         ranked = sorted((scores_of[row_id][basis]["value"], row_id) for row_id in ids if scores_of[row_id][basis]["value"] is not None)
@@ -2806,7 +2811,7 @@ def transfers_on(stratum: str) -> bool:
 
 
 def transfer_dependent(row: dict) -> bool:
-    """A row whose selected Plan route is an owner-named transfer (API-fallback rows carry no grade)."""
+    """A row whose selected Plan route is an owner assumption of any kind (API-fallback rows carry no grade)."""
 
     return row["plan"].get("grade") == "assumption"
 

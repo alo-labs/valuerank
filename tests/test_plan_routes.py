@@ -601,3 +601,14 @@ def test_a_report_pair_after_a_detected_change_outranks_the_flagged_controlled_r
     other_plan = candidate("reports-other-plan", 50.0, "reports")
     other_plan["route"].update(sourcePublicationDate="2026-10-20", plan="Other plan")
     assert pr.select_route([controlled, other_plan])["route"]["id"] == "controlled"
+
+
+def test_owner_assumption_kinds_are_named_from_one_registry():
+    """I71: every enumeration and count of owner assumptions is generated from OWNER_ASSUMPTIONS."""
+
+    assert pr.assumption_kind({"evidenceClass": "provider_quota_ceiling"}) == "ceiling"
+    assert pr.assumption_kind({"sameModelAcrossEfforts": True}) == "sameModel" and pr.assumption_kind({}) == "transfer"
+    assert pr.assumption_kinds_text() == "an owner-named transfer, an O88 same-model assumption across efforts or an O46 provider quota ceiling"
+    assert pr.assumption_kinds_text("and", plural=True).endswith("and O46 provider quota ceilings")
+    assert pr.assumption_counts_text({"transfer": 2, "ceiling": 1}) == "2 owner-named transfers and 1 O46 provider quota ceiling"
+    assert pr.assumption_counts_text({"sameModel": 3}) == "3 O88 same-model assumptions across efforts" and pr.assumption_counts_text({}) == "none"

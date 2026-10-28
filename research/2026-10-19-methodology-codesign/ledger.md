@@ -1728,3 +1728,11 @@ Asked on I64 Q1 whether future O71 admissions should be executed by the build fr
 - L3 (adopted): the docstring, comment and published failure status state O86's formula ("largest lower bound 1.35× the smallest upper bound (O86 allows 1.20×)").
 - L4 (adopted): `o72Application` states O86–O88; the ceiling derivation no longer carries a review label.
 - Round status (O56): not clean (one Medium). Draft r130.
+
+## Internal review I71 (Claude Opus 5.5, effort medium, on r130) — adopted, modified or rejected
+- L1 (adopted at the source, engine changed with tests, per the owner's rule that a recurring low-yield finding is fixed where it arises): `plan_routes.OWNER_ASSUMPTIONS` registers the three owner-assumption kinds (owner-named transfer, O88 same-model assumption across efforts, O46 provider quota ceiling) once; `assumption_kind`, `assumption_kinds_text` and `assumption_counts_text` generate every flag, enumeration and count; each plan row and route view carries `assumptionKind`; the separability diagnostics publish `planAssumedRouteKinds`; README/scores.md (the separability sentence, the † legend, the E167 sentence, the leader caveat) and the site headline name the kind; the draft prints generated figures (`evidence.assumptionKinds`, `{track}.planAssumedRows`, `{track}.planAssumedKinds`) in Output 1, the separability item, the † rule, E106 case (2) and E167; the change-detection sentence names O88 rows; E164's provenance list names each kind. Today: max-effort 14 rows (10 transfers, 4 ceilings), AI Coding Daily 48 (26 transfers, 18 O88, 4 ceilings).
+- L2 (adopted, data changed): the route rule names Opus 5.5's other efforts as O88 same-model assumptions; the registry's Claude rule and the "Other models" rule state O87/O88 (multiples unchanged).
+- L3 (adopted): E106 case (2) admits every owner-assumption kind, so O88 routes no longer read as excluded under case (1).
+- L4 (adopted): E166 and E168 list the O88 amount type, the ceiling's full-quota target and both derivations.
+- Recommendation 1 adopted (the registry above); recommendation 2 adopted (counts by kind).
+- Round status (O56): clean (no Medium or higher), the first clean round at Opus medium. Draft r131.

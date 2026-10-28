@@ -197,6 +197,8 @@ def _route_view(route: dict | None, grade: str | None = None) -> dict | None:
         "planFeeUsd": route.get("planPriceUsd"),
         "valueMultiple": route["valueMultiple"],
         "grade": ROUTE_GRADES[grade] if grade else evidence.route_grade(route.get("evidenceClass")),
+        # I71: which owner assumption an assumption-graded route is, named from the one registry.
+        "assumptionKind": plan_routes.assumption_kind(route) if grade == "assumption" else None,
         "evidenceLabel": plan_evidence_label(route),
         "sourceModel": route.get("sourceModel"),
         "sourceUrl": route.get("sourceUrl"),
@@ -855,9 +857,11 @@ def index_page(bundle: Bundle) -> dict:
     for basis, picks in rankings["picks"].items():
         value = by_slug[picks["value"]["slug"]]
         # O17, the provisional rule and E167: a leader scored on a subset workload, with provisional quality or, on the
-        # Plan basis, through an owner-named transfer says so.
-        transfer = basis == "plan" and (value["cost"]["route"] or {}).get("grade") == "assumption"
-        caveats = [label for flag, label in ((value["cost"]["subset"], "subset cost"), (value["coverage"]["provisional"], "provisional quality"), (transfer, "owner-named transfer")) if flag]
+        # Plan basis, through an owner assumption (named by kind) says so.
+        route = value["cost"]["route"] or {}
+        transfer = basis == "plan" and route.get("grade") == "assumption"
+        assumption = plan_routes.OWNER_ASSUMPTIONS[route.get("assumptionKind") or "transfer"][0] if transfer else None
+        caveats = [label for flag, label in ((value["cost"]["subset"], "subset cost"), (value["coverage"]["provisional"], "provisional quality"), (transfer, assumption)) if flag]
         lead = f"{value['name']} leads the {rankings['bases'][basis]['label']} at {value['overall'][basis]:.1f}" + (f" ({', '.join(caveats)})" if caveats else "")
         headline[basis] = f"{lead} and also leads on quality." if value is quality else f"{lead}; {quality['name']} leads on quality."
     return {

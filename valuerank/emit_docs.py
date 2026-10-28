@@ -14,6 +14,7 @@ from datetime import date
 
 from valuerank import basket
 from valuerank import exact_match
+from valuerank import plan_routes
 from valuerank import quality as q
 from valuerank import scenarios
 from valuerank import value_v3
@@ -620,8 +621,10 @@ def leaders(facts):
     parts = []
     for basis, label in (("plan", "Plan"), ("api", "API")):
         leader = min((entry for entry in facts.ranked if entry["rank"][basis] is not None), key=lambda entry: (entry["rank"][basis], entry["name"]))
-        transfer = basis == "plan" and (leader["cost"]["route"] or {}).get("grade") == "assumption"
-        caveats = [word for word, present in (("subset cost", leader["cost"]["subset"]), ("provisional quality", leader["coverage"]["provisional"]), ("owner-named transfer", transfer)) if present]
+        route = leader["cost"]["route"] or {}
+        transfer = basis == "plan" and route.get("grade") == "assumption"
+        assumption = plan_routes.OWNER_ASSUMPTIONS[route.get("assumptionKind") or "transfer"][0] if transfer else None
+        caveats = [word for word, present in (("subset cost", leader["cost"]["subset"]), ("provisional quality", leader["coverage"]["provisional"]), (assumption, transfer)) if present]
         parts.append(f"{leader['name']} leads the {label} ranking at {leader['overall'][basis]:.1f}" + (f" ({', '.join(caveats)})" if caveats else ""))
     quality = min(facts.ranked, key=lambda entry: (entry["qualityRank"], entry["name"]))
     return "; ".join(parts) + f"; {quality['name']} leads on quality."
@@ -1264,8 +1267,8 @@ def scenario_tables(facts):
         if excluded:
             off = [run_label(run) for run in runs if run.get("excluded")]
             parts.append(
-                f"{label} streams {series(off)} run with owner assumptions off (owner-named transfers and O46 quota ceilings; E167): {facts.labels(sorted(excluded, key=facts.label))} "
-                "depend on a transfer and are unevaluable there (—), never reselected or replaced by API cost."
+                f"{label} streams {series(off)} run with owner assumptions off ({plan_routes.assumption_kinds_text("and", plural=True)}; E167): {facts.labels(sorted(excluded, key=facts.label))} "
+                "depend on an owner assumption and are unevaluable there (—), never reselected or replaced by API cost."
             )
         for event, event_label in (("top1", "rank 1"), ("top3", "rank 3 or better"), ("frontier", "on the frontier")):
             rows = [[facts.label(row_id)] + [share(run["rows"][row_id][event]["share"]) if row_id in run["rows"] else DASH for run in runs] for row_id in row_ids]
@@ -1395,9 +1398,9 @@ def separability_text(facts):
             f"{plan['adjacentPairs']} adjacent Plan ranks of different configurations do ({plan['sameConfigurationAdjacentPairs']} more adjacent Plan pairs are one "
             "configuration on two plans, ordered by the plans' multiples alone; E258). Its net direction is not established: every configuration is scored on the same tasks, which "
             f"correlates their errors and narrows the true threshold (API {grid(api)}; Plan {grid(plan)}), while sources it leaves out widen it (run-to-run and "
-            f"harness variance, AA's single cost run and, for the {len(result['planAssumedRouteRows'])} Plan rows on an owner assumption (an owner-named transfer or an O46 quota ceiling), that assumption's error). "
-            "The noise band column groups each row with the band's first row it cannot be told apart from (O42); a Plan band marked † rests on an owner assumption (owner-named "
-            f"transfer or O46 quota ceiling) and excludes its error: an assumed multiple can be wrong by a factor of about {plan['costTolerance']:.1f} before the row's value moves by the "
+            f"harness variance, AA's single cost run and, for the {len(result['planAssumedRouteRows'])} Plan rows on an owner assumption ({plan_routes.assumption_counts_text(result.get('planAssumedRouteKinds') or {})}), that assumption's error). "
+            "The noise band column groups each row with the band's first row it cannot be told apart from (O42); a Plan band marked † rests on an owner assumption "
+            f"({plan_routes.assumption_kinds_text()}) and excludes its error: an assumed multiple can be wrong by a factor of about {plan['costTolerance']:.1f} before the row's value moves by the "
             "median threshold (a tolerance, not an estimate of the assumption's error). The S1T scenario shares in [scores.md](scores.md) "
             "show each row's rank-1 and top-3 frequencies under that noise." + aicd_narrow_text(api, plan))
 
