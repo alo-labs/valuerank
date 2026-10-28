@@ -2140,3 +2140,20 @@ def test_the_aa_footnote_register_is_closed_world():
     before = v.scenario_hash(result, frozen, n=10, seed=1)
     caveat(next(item for item in result["rows"] if item["id"] == "b"), "B note.", None)
     assert v.scenario_hash(result, frozen, n=10, seed=1) != before
+
+
+def test_the_chart_capture_footnotes_are_registered_and_match_the_inventory():
+    """I84 M1: every chart-capture footnote must be registered, and a row's inventory note must equal its point's note."""
+
+    register = {"notes": [{"text": "Five times.", "kind": "pricing omission", "factor": 5.0}]}
+    v.check_captured_footnotes({"points": [{"footnote": "Five times."}, {"footnote": None}]}, register)
+    v.check_captured_footnotes(None, register)
+    with pytest.raises(ValueError, match="unregistered AA footnote"):
+        v.check_captured_footnotes({"near_frontier": [{"footnote": "New note."}]}, register)
+    row = {"id": "a", "name": "A", "family": "A", "effort": "max", "aaNote": "Five times."}
+    points = [{"family": "A", "effort": "max", "footnote": "Five times."}, {"family": "A", "effort": "low", "footnote": None}]
+    assert v.chart_footnote(row, points) == "Five times." and v.chart_footnote({**row, "aaNote": None, "effort": "high"}, points) is None
+    with pytest.raises(ValueError, match="differs between the reconciliation inventory and the chart capture"):
+        v.chart_footnote({**row, "aaNote": None}, points)
+    with pytest.raises(ValueError, match="differs"):
+        v.chart_footnote(row, points + [{"family": "A", "effort": "max", "footnote": "Other."}])

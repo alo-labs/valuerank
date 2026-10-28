@@ -31816,9 +31816,9 @@
         "detail": "every capture is within its age gate and none after the cutoff unless its source predates the cutoff's day; the build stops otherwise"
       },
       {
-        "rule": "build-stopping evidence gates (O64, O69, O71, O75, E195, E204, E225)",
+        "rule": "build-stopping evidence gates (O64, O69, O71, O75, O99, O100, O101, E195, E204, E225)",
         "status": "passed",
-        "detail": "the Coding Agent Index manifest (O64), the Terminal-Bench agent list (E225), cutoff-day row dates (O69), the three-stage all-provider plan search (O71, O75) and the frontier path checks (E195, E204) hold; the build stops otherwise"
+        "detail": "the Coding Agent Index manifest (O64), the Terminal-Bench agent list (E225), cutoff-day row dates (O69), the three-stage all-provider plan search (O71, O75), the typed change records behind every route flag and partition split (O99, O101), the register of AA chart notes covering every captured one (O100) and the frontier path checks (E195, E204) hold; the build stops otherwise"
       },
       {
         "rule": "score swing gate (E177)",
@@ -31941,7 +31941,7 @@
         {
           "key": "planRoutes",
           "artifact": "data/plan_cost_routes.json",
-          "sha256": "640418510403b750c465c630da087ac724ae1cd81fbec78f3cf2289eab506fa1",
+          "sha256": "e98840c371708ce79d5298f2049a73dd3c823cd787c732a8059717c09b5af6c4",
           "capturedAt": "2026-10-25",
           "extractor": "editorial Plan evidence registry"
         },
@@ -31998,7 +31998,7 @@
           "key": "aaFootnotes",
           "artifact": "data/aa/aa_footnote_register.json",
           "sha256": "b1d19a48c5fab3d6b038549fae030e58b925badca9af87290553e657e865a3c3",
-          "capturedAt": "2026-10-28",
+          "capturedAt": "2026-10-25T09:53:28Z",
           "extractor": "editorial register of AA chart footnotes by exact text, each classified once (O100)"
         },
         {
@@ -32016,7 +32016,7 @@
           "extractor": "valuerank.value_v3 freeze"
         }
       ],
-      "bundleHash": "b0a230e9bda20ea858bdae4e6057e4d55cec3653d2be2f9b2340c242670927eb",
+      "bundleHash": "dbfe9a5acdb9e9b234fa599aaafc64b28c72feb43e6b401531a02474659e8882",
       "rebuild": "every published output is rebuilt from these artifacts at the pinned publication clock (npm run verify:docs), never from live pages"
     },
     "track": {
@@ -61562,9 +61562,9 @@
           "detail": "every capture is within its age gate and none after the cutoff unless its source predates the cutoff's day; the build stops otherwise"
         },
         {
-          "rule": "build-stopping evidence gates (O64, O69, O71, O75, E195, E204, E225)",
+          "rule": "build-stopping evidence gates (O64, O69, O71, O75, O99, O100, O101, E195, E204, E225)",
           "status": "passed",
-          "detail": "the Coding Agent Index manifest (O64), the Terminal-Bench agent list (E225), cutoff-day row dates (O69), the three-stage all-provider plan search (O71, O75) and the frontier path checks (E195, E204) hold; the build stops otherwise"
+          "detail": "the Coding Agent Index manifest (O64), the Terminal-Bench agent list (E225), cutoff-day row dates (O69), the three-stage all-provider plan search (O71, O75), the typed change records behind every route flag and partition split (O99, O101), the register of AA chart notes covering every captured one (O100) and the frontier path checks (E195, E204) hold; the build stops otherwise"
         },
         {
           "rule": "score swing gate (E177)",
@@ -61687,7 +61687,7 @@
           {
             "key": "planRoutes",
             "artifact": "data/plan_cost_routes.json",
-            "sha256": "640418510403b750c465c630da087ac724ae1cd81fbec78f3cf2289eab506fa1",
+            "sha256": "e98840c371708ce79d5298f2049a73dd3c823cd787c732a8059717c09b5af6c4",
             "capturedAt": "2026-10-25",
             "extractor": "editorial Plan evidence registry"
           },
@@ -61744,7 +61744,7 @@
             "key": "aaFootnotes",
             "artifact": "data/aa/aa_footnote_register.json",
             "sha256": "b1d19a48c5fab3d6b038549fae030e58b925badca9af87290553e657e865a3c3",
-            "capturedAt": "2026-10-28",
+            "capturedAt": "2026-10-25T09:53:28Z",
             "extractor": "editorial register of AA chart footnotes by exact text, each classified once (O100)"
           },
           {
@@ -61762,7 +61762,7 @@
             "extractor": "valuerank.value_v3 freeze"
           }
         ],
-        "bundleHash": "b0a230e9bda20ea858bdae4e6057e4d55cec3653d2be2f9b2340c242670927eb",
+        "bundleHash": "dbfe9a5acdb9e9b234fa599aaafc64b28c72feb43e6b401531a02474659e8882",
         "rebuild": "every published output is rebuilt from these artifacts at the pinned publication clock (npm run verify:docs), never from live pages"
       },
       "track": {

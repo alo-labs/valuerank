@@ -1071,12 +1071,21 @@ def test_near_capture_must_match_inventory(world, mutation):
 
 
 def register_notes(root: Path, notes) -> None:
-    """O100: register synthetic AA footnotes (as not pricing omissions) so the build accepts them."""
+    """O100: register synthetic AA footnotes (as not pricing omissions) so the build accepts them, and (I84 M1) carry each
+    inventory note onto the chart-capture points of the same page, as a real capture records it."""
 
     path = root / "data" / "aa" / "aa_footnote_register.json"
     register = json.loads(path.read_text())
     register["notes"] += [{"text": note, "kind": "not a pricing omission", "factor": None, "reason": "test fixture"} for note in notes]
     path.write_text(json.dumps(register))
+    inventory = json.loads((root / FILES["inventory"]).read_text())
+    by_url = {row["sourceUrl"]: row.get("sourceFootnote") for row in inventory["rows"] + inventory["nearFrontierRows"] if row.get("sourceUrl")}
+    capture_path = root / FILES["capture"]
+    capture = json.loads(capture_path.read_text())
+    for point in capture["points"] + capture["frontier"] + capture["near_frontier"]:
+        if point.get("url") in by_url:
+            point["footnote"] = by_url[point["url"]]
+    capture_path.write_text(json.dumps(capture))
 
 
 def add_near_family(root: Path, *, family: str, model_id, slug: str, gap: int = 1) -> str:

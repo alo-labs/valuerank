@@ -77,6 +77,17 @@ def splitting(records: list[dict]) -> list[dict]:
     return [record for record in records if record["type"] in SPLIT_TYPES]
 
 
+def check_change_flags(routes: list[dict], records: list[dict]) -> None:
+    """O77 as amended by O101, I84 L2: a route's detected-change flag rests on a typed limit or price change record for its
+    provider and plan on that date; a flag no such record supports stops the build."""
+
+    supporting = splitting(records)
+    for route in routes:
+        changed = route.get("changeDetectedOn")
+        if changed and not any(item["date"][:10] == changed and applies(item, route) for item in supporting):
+            raise ValueError(f"route {route['id']}: change flag {changed} has no typed limit or price change record for its provider and plan (O101)")
+
+
 def applies(entry: dict, report: dict) -> bool:
     return entry["provider"] == report["provider"] and (not entry.get("plans") or report["plan"] in entry["plans"])
 

@@ -815,6 +815,7 @@ def assemble(configurations: list[dict], documents: dict, *, release_day: date, 
     allowance_cells = plan_admission.evaluate(documents.get("planReports") or {"reports": []}, policy.get("reportEligibilityProfile") or {}, release_day, families)
     plan_admission.check_routes(documents["planRoutes"]["routes"], allowance_cells, set(families), plan_routes.REPORT_KINDS, families)
     plan_routes.check_same_model_routes(documents["planRoutes"], families)
+    plan_admission.check_change_flags(documents["planRoutes"]["routes"], (policy.get("reportEligibilityProfile") or {}).get("partitionSplits") or [])
     plan_routes.check_lower_of_routes(documents["planRoutes"])
     # I51 L7: an O46 ceiling is recomputed from its recorded credits, rate and fee, so the stored multiple cannot drift.
     for route in documents["planRoutes"]["routes"]:
@@ -860,6 +861,7 @@ def assemble(configurations: list[dict], documents: dict, *, release_day: date, 
     price_records = documents["priceRecords"]["records"]
     points = (documents.get("frontierCapture") or {}).get("points", [])
     rows, supplements, tracks = [], leaf_supplements(documents), track_records(documents)
+    check_captured_footnotes(documents.get("frontierCapture"), documents.get("aaFootnotes"))
     for configuration in configurations:
         model_id, effort = configuration["id"], configuration.get("effort")
         page = pages.get(configuration["aaSlug"])
@@ -897,6 +899,7 @@ def assemble(configurations: list[dict], documents: dict, *, release_day: date, 
             "routeSelection": plan_routes.route_selection(candidates),
             # O100: the AA footnote's registered class (the build stops on an unregistered note).
             "aaNoteClass": classify_footnote(configuration.get("aaNote"), documents.get("aaFootnotes")),
+            "aaNote": chart_footnote(configuration, points),
             "admissionTable": plan_routes.admission_table(model_id, effort, routes, release_day, window, faults, families),
         })
     # O36: only configurations with every leaf are ranked; the rest stay listed with their missing leaves and searches.
@@ -1063,6 +1066,25 @@ def classify_footnote(note: str | None, register: dict | None) -> dict | None:
     if entry.get("kind") not in FOOTNOTE_KINDS or (entry.get("factor") is not None and not entry["factor"] >= 1.0):
         raise ValueError(f"AA footnote register entry needs a kind in {FOOTNOTE_KINDS} and a factor of at least 1 or null (O100): {note!r}")
     return entry
+
+
+def chart_footnote(configuration: dict, points: list[dict]) -> str | None:
+    """I84 M1: the footnote the chart capture itself records for the configuration's point (family and effort), which the
+    reconciliation inventory's note must equal; without a captured point the inventory's note stands."""
+
+    notes = {point["footnote"] for point in points if point.get("footnote") and point.get("family") == configuration_family(configuration)
+             and point.get("effort") == configuration.get("effort")}
+    matched = any(point.get("family") == configuration_family(configuration) and point.get("effort") == configuration.get("effort") for point in points)
+    if len(notes) > 1 or (matched and next(iter(notes), None) != configuration.get("aaNote")):
+        raise ValueError(f"{configuration['id']}: AA footnote differs between the reconciliation inventory and the chart capture (O100)")
+    return configuration.get("aaNote")
+
+
+def check_captured_footnotes(capture: dict | None, register: dict | None) -> None:
+    """O100, I84 M1: every footnote the chart capture records, on any point, is registered; the build stops otherwise."""
+
+    for point in (capture or {}).get("points", []) + (capture or {}).get("frontier", []) + (capture or {}).get("near_frontier", []):
+        classify_footnote(point.get("footnote"), register)
 
 
 def aa_cost_caveat(row: dict) -> str | None:
@@ -2100,8 +2122,10 @@ def score(assembled: dict, frozen: dict) -> dict:
               if any(row["valuationGate"]["outcome"] not in GATE_SCORED for row in rows) else "every ranked row is compatible as captured or after evidenced revaluation"),
         _rule("source clocks and evidence freshness (O59, O60, O65, E211, E216, E217, E218)", "passed",
               "every capture is within its age gate and none after the cutoff unless its source predates the cutoff's day; the build stops otherwise"),
-        _rule("build-stopping evidence gates (O64, O69, O71, O75, E195, E204, E225)", "passed",
-              "the Coding Agent Index manifest (O64), the Terminal-Bench agent list (E225), cutoff-day row dates (O69), the three-stage all-provider plan search (O71, O75) and the frontier path checks (E195, E204) hold; the build stops otherwise"),
+        _rule("build-stopping evidence gates (O64, O69, O71, O75, O99, O100, O101, E195, E204, E225)", "passed",
+              "the Coding Agent Index manifest (O64), the Terminal-Bench agent list (E225), cutoff-day row dates (O69), the three-stage all-provider plan search (O71, O75), "
+              "the typed change records behind every route flag and partition split (O99, O101), the register of AA chart notes covering every captured one (O100) "
+              "and the frontier path checks (E195, E204) hold; the build stops otherwise"),
         _rule("score swing gate (E177)", "vacuous", "first v3 release: no previous v3 release to compare"),
         _rule("anchor migration (E184)", "fired" if assembled.get("deferred") else "vacuous",
               "deferred: " + ", ".join(item["component"] for item in assembled["deferred"]) if assembled.get("deferred") else "no main-workload migration deferred"),
@@ -3206,7 +3230,8 @@ EVIDENCE_FILES = {
 }
 CAPTURE_FIELDS = ("capturedAt", "observedAt", "snapshotDate", "asOf", "frozenAt")
 SOURCE_INSTANTS = {
-    "aaFootnotes": lambda document, documents: document.get("reviewedOn"),
+    # I84 L4: the register classifies the chart capture's footnotes, so it carries the capture's instant (I60 L6).
+    "aaFootnotes": lambda document, documents: (documents.get("frontierCapture") or {}).get("captured_at"),
     "tb4": lambda document, documents: (document.get("source") or {}).get("capturedAt"),
     "bugHunt": lambda document, documents: max((record["observedAt"] for record in document.get("models", []) if record.get("observedAt")), default=None),
     "leafEvidence": lambda document, documents: max((day for search in document.get("searches", [])

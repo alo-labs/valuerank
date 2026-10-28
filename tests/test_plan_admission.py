@@ -125,3 +125,16 @@ def test_only_limit_and_price_changes_split_partitions():
         pa.splitting([{"provider": "O", "date": "2026-10-20"}])
     with pytest.raises(ValueError, match="needs a type"):
         pa.splitting([{"provider": "O", "date": "2026-10-20", "type": "rumour"}])
+
+
+def test_route_change_flags_rest_on_typed_limit_or_price_records():
+    """O101, I84 L2: a route's change flag needs a limit or price record for its provider and plan on that date."""
+
+    records = [{"provider": "O", "date": "2026-10-11", "type": "price"}, {"provider": "O", "date": "2026-10-20", "type": "metering"},
+               {"provider": "A", "plans": ["Pro"], "date": "2026-10-17T13:00:00Z", "type": "limit"}]
+    pa.check_change_flags([{"id": "r1", "provider": "O", "plan": "Plus", "changeDetectedOn": "2026-10-11"},
+                           {"id": "r2", "provider": "A", "plan": "Pro", "changeDetectedOn": "2026-10-17"}, {"id": "r3", "provider": "O", "plan": "Plus"}], records)
+    for bad in ({"id": "m", "provider": "O", "plan": "Plus", "changeDetectedOn": "2026-10-20"},
+                {"id": "p", "provider": "A", "plan": "Max", "changeDetectedOn": "2026-10-17"}):
+        with pytest.raises(ValueError, match="no typed limit or price change record"):
+            pa.check_change_flags([bad], records)

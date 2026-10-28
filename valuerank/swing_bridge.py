@@ -27,14 +27,14 @@ PRICE_FIELDS = ("price1mInputTokens", "price1mOutputTokens", "cacheHitPrice", "c
 TOKEN_FIELDS = ("intelligenceIndexEvaluations", "intelligenceIndexCost", "canonicalIntelligenceIndexTokenCount", "intelligenceIndexCostPerTask", "intelligenceIndexOutputTokensPerTask")
 # Each data class: the snapshot page fields it owns ("*" = every field no other class owns) and its whole documents.
 CLASSES = {
-    # O100: the footnote register classifies AA's pricing caveats, so it moves with the price records.
-    "price": {"fields": PRICE_FIELDS, "documents": ("priceRecords", "aaFootnotes")},
+    "price": {"fields": PRICE_FIELDS, "documents": ("priceRecords",)},
     # O64: the reviewed manifest describes the agent capture, so the two change together.
     "tokenUse": {"fields": TOKEN_FIELDS, "documents": ("codingAgents", "codingAgentsManifest", "costCharts")},
     "benchmarkRecord": {"fields": "*", "documents": ("bugHunt", "bugHuntScoreboard", "tb4", "leafEvidence", "cognitionFrontierCode", "sweTracks", "sourceRereads")},
     "planEvidence": {"fields": (), "documents": ("planRoutes", "planReports")},
     # I60: the replaced capture's digest feeds only the GDPval movement diagnostic, so it moves with the snapshot's cohort.
-    "cohort": {"fields": (), "documents": ("configurationMap", "frontierCapture", "roster", "aaPreviousCapture")},
+    # I84 L1: the O100 register classifies the chart capture's footnotes, so the two change together.
+    "cohort": {"fields": (), "documents": ("configurationMap", "frontierCapture", "roster", "aaPreviousCapture", "aaFootnotes")},
 }
 ORDER = tuple(CLASSES)
 METHOD_STEP = "method and clock"

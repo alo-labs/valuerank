@@ -1867,3 +1867,14 @@ Asked on I64 Q1 whether future O71 admissions should be executed by the build fr
 - L2 (adopted, engine changed with a test): an O97 follower is dropped where the pair itself is a candidate for the configuration (the same evidence twice); a pair's `requiredVariant` no longer carries over to a follower.
 - L3 (adopted): O83's split text, the registry's profile rule, the SemiAnalysis change-detection rule, `o72Application`, AGENTS.md and the draft's O77 passages now state the limit-or-price condition (O99, O101).
 - Round status (O56): not clean (one Medium). Draft r143; the Opus max count starts at zero.
+
+## Owner decision O103 (2026-10-28), asked on I84 Q1
+- O103 (register scope): the O100 register covers the footnotes the Intelligence Index chart capture records now; from the next AA capture, the capture scripts also record the notes AA prints on model pages, the Coding Agent Index and the cost charts, and those must be registered too. Until then the draft states the chart-only scope.
+
+## Internal review I84 (Claude Opus 5.5, effort max, on r143) — adopted, modified or rejected
+- M1 (adopted, engine changed with tests): every footnote the chart capture records, on any point, must be registered (`check_captured_footnotes`), and a ranked row whose inventory note differs from the capture's note for its point (family and effort) stops the build (`chart_footnote`), so a note added to the capture alone can no longer leave a label O94 forbids.
+- L1 (adopted): the register moves to the swing bridge's cohort class with the chart capture, whose footnote text it classifies.
+- L2 (adopted, engine changed with a test): `check_change_flags` requires every route's change flag to rest on a typed limit or price record for its provider and plan on that date (O101); the OpenAI change-detection evidence, the eight GPT routes' evidence strings and draft line 55 now cite the Day 7 price change and log the metering-only posts.
+- L3 (adopted): line 55 and the O97 sentence say the O88 configuration selects the pair itself (the follower is dropped); E144's fixture list distinguishes a demoted donor with and without a pair (O102).
+- L4 (adopted): the manifest's build-stopping gates and E63 name O99–O101; AGENTS.md's capture step names the register; the register's bundle instant is the chart capture's (I60 L6).
+- Round status (O56): not clean (one Medium). Draft r144; the Opus max count stays at zero.
