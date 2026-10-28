@@ -113,6 +113,9 @@ def documents(**overrides) -> dict:
             {"modelId": "c", "leaf": "bugHunt", "value": 30.0, "unit": "fixedOf105", "sourceType": "independent", **comparable("bugHunt")},
             {"modelId": "c", "leaf": "frontierCode", "value": 0.5, "unit": "fraction", "sourceType": "model_provider_claim", **comparable("frontierCode")},
         ], "searches": [], "sourceRegistry": REGISTRY},
+        # O100: the fixture's one AA footnote, registered as not a pricing omission.
+        "aaFootnotes": {"reviewedOn": "2026-10-18", "notes": [{"text": "A is plotted with a footnote.", "kind": "not a pricing omission", "factor": None,
+                                                                "reason": "fixture"}]},
     }
     base.update(overrides)
     if "codingAgentsManifest" not in overrides:
@@ -644,6 +647,7 @@ def write_world(root: Path) -> Path:
         "aa/aa_previous_capture.json": {"capturedAt": "2026-10-12T00:00:00Z", "sha256": "0" * 64, "pages": []},
         "source_rereads.json": {"recordedOn": "2026-10-19", "rereads": []},
         "plan_reports.json": {"recordedOn": "2026-10-19", "reports": []},
+        "aa/aa_footnote_register.json": documents()["aaFootnotes"],
         "scores.json": {
             "models": [{"id": item["id"], "name": item["name"], "aaVariant": item["effort"], "aaSlug": item["aaSlug"], "rankingEligible": True} for item in CONFIGURATIONS]
             + [{"id": "out", "name": "Out", "aaSlug": "out", "rankingEligible": False}],
@@ -2083,13 +2087,19 @@ def test_plan_evidence_names_a_same_model_measurement():
     assert v._plan_evidence({"plan": {"fallback": None, "grade": "controlled", "flags": []}}) == "controlled measurement"
 
 
+def caveat(row: dict, note: str, factor: float | None, kind: str = "pricing omission") -> dict:
+    """O100: a row's AA footnote as the register classifies it."""
+
+    row.update(aaNote=note, aaNoteClass={"text": note, "kind": kind, "factor": factor, "reason": "test"})
+    return row
+
+
 def test_a_row_whose_aa_cost_omits_a_pricing_term_competes_over_a_range_without_labels():
-    """O94: AA's note "5x higher pricing ..." widens the row's box to [C, 5C]; the row is a blocker, never an anchor
-    reference, never a label candidate; a note without a factor leaves the row without a box (fail closed)."""
+    """O94: a registered pricing omission with factor 5 widens the row's box to [C, 5C]; the row is a blocker, never an
+    anchor reference, never a label candidate; O98: without a factor it competes over [C, infinity)."""
 
     result, frozen = scored()
-    row = next(item for item in result["rows"] if item["id"] == "a")
-    row["aaNote"] = "Model A has 5x higher pricing on longer-context inputs which are not currently reflected."
+    row = caveat(next(item for item in result["rows"] if item["id"] == "a"), "Model A has 5x higher pricing on longer-context inputs which are not currently reflected.", 5.0)
     assert v.caveat_factor(row) == 5.0 and v.withheld_label(row) == v.WITHHELD_CAVEAT
     box = next(item for item in v.api_boxes(result) if item.row == "a")
     assert box.provisional and box.c_high == pytest.approx(row["cost"]["highUsd"] * 5) and box.c_low == pytest.approx(row["cost"]["lowUsd"])
@@ -2101,39 +2111,32 @@ def test_a_row_whose_aa_cost_omits_a_pricing_term_competes_over_a_range_without_
     eligibility = next(item for item in v.anchor_eligibility(result, result["admitted"]) if item["row"] == "a")
     assert eligibility["eligible"] and eligibility["leavesAtNextFreeze"] == "AA cost omits a pricing term (O94)"
     assert "a" in v.anchor_population(result, result["admitted"]) and "a" not in v.anchor_population(result, result["admitted"], freezing=True)
-    assert v.caveat_factor({**row, "aaNote": "Model A has 5× higher pricing beyond 200k tokens, not reflected here."}) == 5.0
-    assert v.aa_cost_caveat({**row, "aaNote": "Model A has 5× higher pricing beyond 200k tokens."}) is None  # no omission stated
-    assert v.caveat_factor({**row, "aaNote": "Model A costs 2.5 times more on long inputs not reflected in its price."}) == 2.5
-    row["aaNote"] = "Model A's cost omits a pricing term."
+    caveat(row, "Model A's cost omits a pricing term.", None)
     # O98: without a factor the row competes over [C, infinity); the outputs stay evaluated and the row is a blocker.
     unbounded = next(item for item in v.api_boxes(result) if item.row == "a")
     assert v.caveat_factor(row) is None and unbounded.c_high == math.inf and unbounded.c_low == pytest.approx(row["cost"]["lowUsd"])
     evaluated = v.interval_outputs(result, frozen, "api")
     assert evaluated["status"] != v.intervals.UNRESOLVED and "a" in evaluated["blockers"]
-    row["aaNote"] = "Unrelated note."
-    assert v.aa_cost_caveat(row) is None and v.caveat_factor(row) is None
-
-
-def test_the_aa_caveat_reading_and_unbounded_caveats_on_every_workload():
-    """I81 L3, I82 L3: only a sentence naming a price or cost AA does not reflect is a caveat; the largest stated factor
-    applies; a back-referring sentence takes the factor before it; a factor below 1 bounds nothing; an unbounded caveat
-    competes over [C, infinity) on a subset workload too (O98)."""
-
-    result, frozen = scored()
-    row = next(item for item in result["rows"] if item["id"] == "a")
-    for note in ("Model A used 3x more tokens than its predecessor; its cost figure reflects this.",
-                 "Pricing shown is for the batch API, which is 2x the speed of the standard API.",
-                 "Model A declined some tasks on safety grounds; cost is for completed tasks only."):
-        assert v.aa_cost_caveat({**row, "aaNote": note}) is None, note
-    assert v.caveat_factor({**row, "aaNote": "1.5x higher output pricing and 4x higher input pricing beyond 200k are not reflected."}) == 4.0
-    assert v.caveat_factor({**row, "aaNote": "Cached-input pricing is not reflected. Long inputs have 2x higher pricing, also not reflected."}) is None
-    for note in ("Model A has 5x higher pricing on longer-context inputs. These prices are not included in our cost figures.",
-                 "Long-context inputs are priced 5x higher; this pricing is not reflected.",
-                 "Model A has higher pricing (5x) on longer-context inputs which is not reflected."):
-        assert v.caveat_factor({**row, "aaNote": note}) == 5.0, note
-    assert v.caveat_factor({**row, "aaNote": "Batch pricing is 0.5x the standard price and is not reflected."}) is None
     components = sorted(row["components"])[:1]
-    row["aaNote"] = "Prices double beyond 200k tokens, which is not reflected."
     subset = v.interval_outputs(result, frozen, "api", components)
     assert subset["status"] != v.intervals.UNRESOLVED and "a" in subset["blockers"]
     assert next(item for item in v.api_boxes(result, components) if item.row == "a").c_high == math.inf
+    caveat(row, "Model A declined some tasks; cost is for completed tasks only.", None, kind="not a pricing omission")
+    assert v.aa_cost_caveat(row) is None and v.caveat_factor(row) is None
+
+
+def test_the_aa_footnote_register_is_closed_world():
+    """O100: a footnote is classified by its exact registered text; the build stops on an unregistered or changed note and
+    on a malformed entry; the scenario hash covers the label blockers, boxes and bars (I83 L1)."""
+
+    register = {"notes": [{"text": "Five times.", "kind": "pricing omission", "factor": 5.0}, {"text": "Declined.", "kind": "not a pricing omission", "factor": None}]}
+    assert v.classify_footnote(None, register) is None and v.classify_footnote("Five times.", register)["factor"] == 5.0
+    with pytest.raises(ValueError, match="unregistered AA footnote"):
+        v.classify_footnote("Five times!", register)
+    for bad in ({"text": "x", "kind": "maybe", "factor": None}, {"text": "x", "kind": "pricing omission", "factor": 0.5}):
+        with pytest.raises(ValueError, match="needs a kind"):
+            v.classify_footnote("x", {"notes": [bad]})
+    result, frozen = scored()
+    before = v.scenario_hash(result, frozen, n=10, seed=1)
+    caveat(next(item for item in result["rows"] if item["id"] == "b"), "B note.", None)
+    assert v.scenario_hash(result, frozen, n=10, seed=1) != before

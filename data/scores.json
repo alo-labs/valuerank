@@ -31941,7 +31941,7 @@
         {
           "key": "planRoutes",
           "artifact": "data/plan_cost_routes.json",
-          "sha256": "c74294bd6d6ba7f23a3d9a6bb193d42863f48b2cd8f670aa009548c169e06923",
+          "sha256": "640418510403b750c465c630da087ac724ae1cd81fbec78f3cf2289eab506fa1",
           "capturedAt": "2026-10-25",
           "extractor": "editorial Plan evidence registry"
         },
@@ -31995,6 +31995,13 @@
           "extractor": "editorial record of the O68 re-reads, each 'unchanged' result verified against the re-read file"
         },
         {
+          "key": "aaFootnotes",
+          "artifact": "data/aa/aa_footnote_register.json",
+          "sha256": "b1d19a48c5fab3d6b038549fae030e58b925badca9af87290553e657e865a3c3",
+          "capturedAt": "2026-10-28",
+          "extractor": "editorial register of AA chart footnotes by exact text, each classified once (O100)"
+        },
+        {
           "key": "anchors",
           "artifact": "data/v3_frozen.json",
           "sha256": "d4f3bb4b769b2fcfc1b5c5847f67b396c6a386d7db4b17f99dffa9321e480cfc",
@@ -32009,7 +32016,7 @@
           "extractor": "valuerank.value_v3 freeze"
         }
       ],
-      "bundleHash": "4fb87af4652d54f6e4da4da0b72c262224d4b538291ff00a2f036bc0d784c0bb",
+      "bundleHash": "b0a230e9bda20ea858bdae4e6057e4d55cec3653d2be2f9b2340c242670927eb",
       "rebuild": "every published output is rebuilt from these artifacts at the pinned publication clock (npm run verify:docs), never from live pages"
     },
     "track": {
@@ -32113,7 +32120,7 @@
     "scenarios": {
       "status": "current",
       "schemaVersion": 1,
-      "inputHash": "0741b785d6ccf93d19331fe309cfd8ac4aa847fe82ff8648b37bb8b52262f080",
+      "inputHash": "8d35acfc63770332fd7704f18cbdce08348ba63998a2b0eafbcd3dbe4cdadfb0",
       "seed": 20261025,
       "scenarios": 10000,
       "streamDescriptions": {
@@ -61680,7 +61687,7 @@
           {
             "key": "planRoutes",
             "artifact": "data/plan_cost_routes.json",
-            "sha256": "c74294bd6d6ba7f23a3d9a6bb193d42863f48b2cd8f670aa009548c169e06923",
+            "sha256": "640418510403b750c465c630da087ac724ae1cd81fbec78f3cf2289eab506fa1",
             "capturedAt": "2026-10-25",
             "extractor": "editorial Plan evidence registry"
           },
@@ -61734,6 +61741,13 @@
             "extractor": "editorial record of the O68 re-reads, each 'unchanged' result verified against the re-read file"
           },
           {
+            "key": "aaFootnotes",
+            "artifact": "data/aa/aa_footnote_register.json",
+            "sha256": "b1d19a48c5fab3d6b038549fae030e58b925badca9af87290553e657e865a3c3",
+            "capturedAt": "2026-10-28",
+            "extractor": "editorial register of AA chart footnotes by exact text, each classified once (O100)"
+          },
+          {
             "key": "anchors",
             "artifact": "data/v3_frozen.json",
             "sha256": "d4f3bb4b769b2fcfc1b5c5847f67b396c6a386d7db4b17f99dffa9321e480cfc",
@@ -61748,7 +61762,7 @@
             "extractor": "valuerank.value_v3 freeze"
           }
         ],
-        "bundleHash": "4fb87af4652d54f6e4da4da0b72c262224d4b538291ff00a2f036bc0d784c0bb",
+        "bundleHash": "b0a230e9bda20ea858bdae4e6057e4d55cec3653d2be2f9b2340c242670927eb",
         "rebuild": "every published output is rebuilt from these artifacts at the pinned publication clock (npm run verify:docs), never from live pages"
       },
       "track": {
@@ -61838,7 +61852,7 @@
       "scenarios": {
         "status": "current",
         "schemaVersion": 1,
-        "inputHash": "99ea197a35c14369caf9dae98c391a1ac51e609f58fb6f9bdec578d20f27bdfa",
+        "inputHash": "812823ca066071433ea01b3082c87902671dc89f3698f293a57f4a2232137df4",
         "seed": 20261025,
         "scenarios": 10000,
         "streamDescriptions": {

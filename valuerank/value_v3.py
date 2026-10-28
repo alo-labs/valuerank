@@ -895,6 +895,8 @@ def assemble(configurations: list[dict], documents: dict, *, release_day: date, 
             # O63: AA's safety-refusal outcomes on the row's Coding Agent Index record, disclosed and flagged only.
             "agentSafety": agent_safety(agent_records.get(agent_labels[model_id])),
             "routeSelection": plan_routes.route_selection(candidates),
+            # O100: the AA footnote's registered class (the build stops on an unregistered note).
+            "aaNoteClass": classify_footnote(configuration.get("aaNote"), documents.get("aaFootnotes")),
             "admissionTable": plan_routes.admission_table(model_id, effort, routes, release_day, window, faults, families),
         })
     # O36: only configurations with every leaf are ranked; the rest stay listed with their missing leaves and searches.
@@ -1046,52 +1048,34 @@ def _gated_box(row: dict, low: float, high: float, basis: str) -> intervals.Box 
     return intervals.Box(row["id"], low, high, summary.lower, summary.upper, provisional)
 
 
-AA_CAVEAT_FACTOR = re.compile(r"(\d+(?:\.\d+)?)\s*(?:x|×|times)\s+(?:higher|more|the)\b|\((\d+(?:\.\d+)?)\s*(?:x|×)\)", re.IGNORECASE)
-# I81 L3: a pricing caveat is a sentence about a price or cost figure that AA says its cost does not reflect.
-AA_PRICING_TERM = re.compile(r"\b(?:pric(?:e|es|ed|ing)|cost figures?|costs?)\b", re.IGNORECASE)
-AA_OMISSION = re.compile(r"\bnot (?:currently )?(?:reflected|included|counted)\b|\bexclud(?:es|ed|ing)\b|\bomit(?:s|ted)?\b", re.IGNORECASE)
-# I82 L3: a caveat sentence opening with a back-reference ("These prices are not included") takes the factor of the
-# sentence it refers to.
-AA_BACK_REFERENCE = re.compile(r"(?:this|these|that|those|it|they)\b", re.IGNORECASE)
+FOOTNOTE_KINDS = ("pricing omission", "not a pricing omission")
 
 
-def _sentences(row: dict) -> list[str]:
-    return re.split(r"(?<=[.;])\s+", row.get("aaNote") or "")
+def classify_footnote(note: str | None, register: dict | None) -> dict | None:
+    """O100: an AA chart footnote's registered class, looked up by its exact text; the build stops on an unregistered or
+    changed note (a closed-world register on the O64 pattern, never a keyword reading)."""
 
-
-def _is_caveat(sentence: str) -> bool:
-    return bool(AA_PRICING_TERM.search(sentence) and AA_OMISSION.search(sentence))
+    if not note:
+        return None
+    entry = next((item for item in (register or {}).get("notes", []) if item.get("text") == note), None)
+    if entry is None:
+        raise ValueError(f"unregistered AA footnote: {note!r}; classify it in data/aa/aa_footnote_register.json (O100)")
+    if entry.get("kind") not in FOOTNOTE_KINDS or (entry.get("factor") is not None and not entry["factor"] >= 1.0):
+        raise ValueError(f"AA footnote register entry needs a kind in {FOOTNOTE_KINDS} and a factor of at least 1 or null (O100): {note!r}")
+    return entry
 
 
 def aa_cost_caveat(row: dict) -> str | None:
-    """E141, O94: AA's own note when it says its published cost omits a pricing term (a sentence naming a price or cost
-    figure that is not reflected, included or counted, or is excluded or omitted), or None (a note about anything else, such
-    as declined tasks, is not a cost caveat)."""
+    """E141, O94, O100: AA's own note when its registered class is a pricing omission, else None."""
 
-    return row.get("aaNote") if any(_is_caveat(sentence) for sentence in _sentences(row)) else None
-
-
-def _factors(sentence: str) -> list[float]:
-    # I82 L3: a "factor" below 1 is no surcharge factor, so it bounds nothing.
-    return [value for match in AA_CAVEAT_FACTOR.finditer(sentence) if (value := float(match.group(1) or match.group(2))) >= 1.0]
+    return row.get("aaNote") if (row.get("aaNoteClass") or {}).get("kind") == "pricing omission" else None
 
 
 def caveat_factor(row: dict) -> float | None:
-    """O94: the most the omitted pricing terms can multiply the row's cost by, read from AA's note (e.g. "5x higher
-    pricing"; the largest when several are stated). Each caveat sentence is bounded by its own factor, or, when it opens
-    with a back-reference, by the factor of the sentence before it. None when the row has no caveat or a caveat sentence is
-    left unbounded (O98: the row then competes over [C, infinity))."""
+    """O94, O100: the registered factor of the omitted pricing term (the largest the note states); None when the row has no
+    caveat or the note states no factor (O98: the row then competes over [C, infinity))."""
 
-    sentences = _sentences(row)
-    bounds = []
-    for index, sentence in enumerate(sentences):
-        if not _is_caveat(sentence):
-            continue
-        found = _factors(sentence) or (_factors(sentences[index - 1]) if index and AA_BACK_REFERENCE.match(sentence) else [])
-        if not found:
-            return None
-        bounds.append(max(found))
-    return max(bounds) if bounds else None
+    return (row.get("aaNoteClass") or {}).get("factor") if aa_cost_caveat(row) else None
 
 
 def provider_claimed(row: dict) -> bool:
@@ -2981,9 +2965,15 @@ def scenario_panel(assembled: dict, basis: str, *, measurement: bool = False, tr
 
 
 def scenario_hash(assembled: dict, frozen: dict, *, n: int, seed: int) -> str:
-    """Identity of every scenario input: panels, kernels, anchors, beta, scenario count and seed."""
+    """Identity of every scenario input: panels, kernels, anchors, beta, scenario count and seed, and (I83 L1) what decides
+    the bar labels: the bar levels, the interval boxes and the blocker and non-candidate sets."""
 
+    blocked, claimed = label_exclusions(assembled)
+    finite = lambda value: value if math.isfinite(value) else None  # noqa: E731 - O98's unbounded box hashes as null
     payload = {
+        "bars": [[reference["id"], reference["level"]] for reference in frozen.get("barReferences", [])],
+        "boxes": [[box.row, box.c_low, finite(box.c_high), box.q_low, box.q_high, box.provisional] for box in api_boxes(assembled)],
+        "blocked": sorted(blocked), "claimed": sorted(claimed),
         "beta": BETA,
         "n": n,
         "seed": seed,
@@ -3093,6 +3083,18 @@ def run_scenarios(assembled: dict, frozen: dict, *, n: int = SCENARIO_COUNT, see
     }
 
 
+def label_exclusions(assembled: dict) -> tuple[set, set]:
+    """The scenario labels' blockers and non-candidates (E186, E233, E222, O94)."""
+
+    # O94: a row whose AA cost omits a pricing term is a blocker like an O29 row: scenario draws keep its published cost, so
+    # a label also needs BlockerSafe against its widened box.
+    blocked = {row["id"] for row in assembled["rows"] if row["valuationGate"]["outcome"] == GATE_NOT_IN_FORCE or aa_cost_caveat(row)}
+    # E233: a provider-claimed row competes in every scenario but is never a candidate for a label; I76 L1, E92/E222: nor
+    # is a row on an unverified valuation basis.
+    claimed = {row["id"] for row in assembled["rows"] if provider_claimed(row) or row["valuationGate"]["outcome"] == GATE_UNVERIFIED or aa_cost_caveat(row)}
+    return blocked, claimed
+
+
 def bar_labels(assembled: dict, frozen: dict, *, seed: int, batch: int) -> list[dict]:
     """E100/E112: kernel-robust scenario-supported cheapest labels for each pinned bar on the API basis."""
 
@@ -3101,12 +3103,7 @@ def bar_labels(assembled: dict, frozen: dict, *, seed: int, batch: int) -> list[
     # E147: the compiled dependency graph must be the registered kernel-check object, or the build fails.
     if any(len(component) > 1 for component in scenarios.dependency_components(panel)):
         raise ValueError(f"compiled dependency graph differs from the registered kernel-check object ({REGISTERED_DEPENDENCY})")
-    # O94: a row whose AA cost omits a pricing term is a blocker like an O29 row: scenario draws keep its published cost, so
-    # a label also needs BlockerSafe against its widened box.
-    blocked = {row["id"] for row in assembled["rows"] if row["valuationGate"]["outcome"] == GATE_NOT_IN_FORCE or aa_cost_caveat(row)}
-    # E233: a provider-claimed row competes in every scenario but is never a candidate for a label; I76 L1, E92/E222: nor
-    # is a row on an unverified valuation basis.
-    claimed = {row["id"] for row in assembled["rows"] if provider_claimed(row) or row["valuationGate"]["outcome"] == GATE_UNVERIFIED or aa_cost_caveat(row)}
+    blocked, claimed = label_exclusions(assembled)
     labels = []
     for reference in frozen["barReferences"]:
         bar = _bar_reference(reference)
@@ -3205,9 +3202,11 @@ EVIDENCE_FILES = {
     "planReports": ("plan_reports.json", "editorial table of every O71 user report with the facts E270 needs; the build derives admission from it (O81)"),
     "aaPreviousCapture": ("aa/aa_previous_capture.json", "valuerank.capture_aa: digest of the model-page capture this one replaced (I60)"),
     "sourceRereads": ("source_rereads.json", "editorial record of the O68 re-reads, each 'unchanged' result verified against the re-read file"),
+    "aaFootnotes": ("aa/aa_footnote_register.json", "editorial register of AA chart footnotes by exact text, each classified once (O100)"),
 }
 CAPTURE_FIELDS = ("capturedAt", "observedAt", "snapshotDate", "asOf", "frozenAt")
 SOURCE_INSTANTS = {
+    "aaFootnotes": lambda document, documents: document.get("reviewedOn"),
     "tb4": lambda document, documents: (document.get("source") or {}).get("capturedAt"),
     "bugHunt": lambda document, documents: max((record["observedAt"] for record in document.get("models", []) if record.get("observedAt")), default=None),
     "leafEvidence": lambda document, documents: max((day for search in document.get("searches", [])

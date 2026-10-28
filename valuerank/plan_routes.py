@@ -554,7 +554,8 @@ def _rebased(route: dict, donor_object: dict) -> dict:
     if route.get("sameModelAcrossEfforts") and donor_object.get("valueMultipleKind") in REPORT_KINDS:
         # O97, I82 L2: an O88 route that follows its donor to a replacing report pair is no longer a measurement of another
         # effort: it takes the pair's whole measurement object (grade, amount, workload, window, dates, statuses).
-        pair = {key: value for key, value in donor_object.items() if key not in {"baseRouteId", "routeId"}}
+        # I83 L2: the pair's own variant restriction never carries over to the follower.
+        pair = {key: value for key, value in donor_object.items() if key not in {"baseRouteId", "routeId", "requiredVariant"}}
         return {**pair, **{key: route[key] for key in FOLLOWER_IDENTITY if key in route}, "donorRouteId": donor_id,
                 "rebasedFrom": route.get("donorRouteId"), "followsReportPair": donor_id, "sameModelAcrossEfforts": False}
     return {**route, "donorRouteId": donor_id, "valueMultiple": comparison_multiple(donor_object), "rebasedFrom": route.get("donorRouteId"),
@@ -628,7 +629,9 @@ def route_candidates(model_id: str, configuration_effort: str | None, routes: li
                 "mixCheck": mix_check(provenance),
             }
         )
-    return candidates
+    # I83 L2: an O88 follower of a report pair that is itself a candidate here is the same evidence twice; the pair stands.
+    present = {item["route"].get("routeId") for item in candidates if item["route"].get("valueMultipleKind") in REPORT_KINDS}
+    return [item for item in candidates if item["route"].get("followsReportPair") not in present or not item["route"].get("followsReportPair")]
 
 
 IDENTIFIED = {"point-identified", "set-identified"}

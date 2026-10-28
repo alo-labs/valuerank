@@ -27,7 +27,8 @@ PRICE_FIELDS = ("price1mInputTokens", "price1mOutputTokens", "cacheHitPrice", "c
 TOKEN_FIELDS = ("intelligenceIndexEvaluations", "intelligenceIndexCost", "canonicalIntelligenceIndexTokenCount", "intelligenceIndexCostPerTask", "intelligenceIndexOutputTokensPerTask")
 # Each data class: the snapshot page fields it owns ("*" = every field no other class owns) and its whole documents.
 CLASSES = {
-    "price": {"fields": PRICE_FIELDS, "documents": ("priceRecords",)},
+    # O100: the footnote register classifies AA's pricing caveats, so it moves with the price records.
+    "price": {"fields": PRICE_FIELDS, "documents": ("priceRecords", "aaFootnotes")},
     # O64: the reviewed manifest describes the agent capture, so the two change together.
     "tokenUse": {"fields": TOKEN_FIELDS, "documents": ("codingAgents", "codingAgentsManifest", "costCharts")},
     "benchmarkRecord": {"fields": "*", "documents": ("bugHunt", "bugHuntScoreboard", "tb4", "leafEvidence", "cognitionFrontierCode", "sweTracks", "sourceRereads")},

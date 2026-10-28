@@ -840,6 +840,13 @@ def test_an_o88_route_following_a_report_pair_takes_the_pairs_grade():
     assert following["route"]["valueMultipleKind"] == pair["valueMultipleKind"] and following["route"]["independentReports"] == pair["independentReports"]
     [entry] = [item for item in pr.admission_table("opus-high", None, registry, day, None, faults) if item["route"]["id"] == "opus-high-same"]
     assert entry["crossEffort"] is False
+    # I83 L2: where the pair itself covers the configuration (O87), the follower is the same evidence twice and is dropped;
+    # a pair's variant restriction never carries over to a follower.
+    families = {"opus": "Opus", "opus-high": "Opus"}
+    both = pr.route_candidates("opus-high", "high", registry, day, faults=faults, families=families)
+    assert [item["route"].get("routeId", item["route"]["id"]) for item in both if item["grade"] != "controlled"] == ["opus-reports"]
+    restricted = pr._rebased(high, {**pair, "requiredVariant": "max", "baseRouteId": "opus-reports"})
+    assert "requiredVariant" not in restricted
 
 
 def test_a_transfer_on_a_report_route_without_a_partition_ages_by_its_own_clock():

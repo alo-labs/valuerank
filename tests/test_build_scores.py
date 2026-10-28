@@ -1070,6 +1070,15 @@ def test_near_capture_must_match_inventory(world, mutation):
         run_main(world)
 
 
+def register_notes(root: Path, notes) -> None:
+    """O100: register synthetic AA footnotes (as not pricing omissions) so the build accepts them."""
+
+    path = root / "data" / "aa" / "aa_footnote_register.json"
+    register = json.loads(path.read_text())
+    register["notes"] += [{"text": note, "kind": "not a pricing omission", "factor": None, "reason": "test fixture"} for note in notes]
+    path.write_text(json.dumps(register))
+
+
 def add_near_family(root: Path, *, family: str, model_id, slug: str, gap: int = 1) -> str:
     """Append a consistent synthetic near-frontier row for ``family`` to the copied inventory and capture."""
 
@@ -1086,6 +1095,7 @@ def add_near_family(root: Path, *, family: str, model_id, slug: str, gap: int = 
     capture["universe"]["near_frontier_points"] += 1
     inventory_path.write_text(json.dumps(inventory))
     capture_path.write_text(json.dumps(capture))
+    register_notes(root, [row["sourceFootnote"]])
     return url
 
 
@@ -1142,6 +1152,7 @@ def test_footnote_of_the_best_configuration_is_passed_through(world):
         for row in document["rows"]:
             row["sourceFootnote"] = "note " + row["aaId"]
     edit(world, "inventory", notes)
+    register_notes(world, ["note " + row["aaId"] for row in json.loads((world / FILES["inventory"]).read_text())["rows"]])
     run_main(world)
     inventory = json.loads((world / FILES["inventory"]).read_text())
     luna = [r for r in inventory["rows"] if r["family"] == "GPT-6 Luna"]

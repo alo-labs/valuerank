@@ -1855,3 +1855,15 @@ Asked on I64 Q1 whether future O71 admissions should be executed by the build fr
 - L4 (adopted): line 35 separates the main-workload rows with FullCost from R_W, printed from the interval universe; E64(b) says the anchors are rebuilt with the ln 2 padding from every row with a cost on W∖TB.
 - Recommendation 4 (earliest admissible report per provider): partly superseded by O99, which removes three of OpenAI's four splits; not adopted as a separate figure.
 - Round status (O56): clean (no Medium or higher). With I81, the Opus xhigh rung has converged. Draft r142; the next rung is Opus max.
+
+## Owner decisions O100–O102 (2026-10-28), asked on I83 Q1–Q3
+- O100 (AA footnote register): every AA chart footnote on a ranked configuration is classified once, by exact text, in `data/aa/aa_footnote_register.json` ("pricing omission" with the largest stated factor of at least 1 or null, or "not a pricing omission" with a reason). The build stops on an unregistered or changed footnote until an editor classifies it (closed world, the O64 pattern). The keyword reader is removed.
+- O101 (announcement flags): O77 is amended to match O99: only a provider announcement of a change to a plan's limits or price triggers E18; a metering-only announcement is logged and flags nothing. OpenAI's Day 7 post (price) keeps its 2026-10-11 flag, so no flag changes today.
+- O102 (demoted donor): routes resting on a demoted donor measurement follow that model's admitted report pair on the same plan (the comparator selects it, the measurement being ineligible), as r142 already does.
+
+## Internal review I83 (Claude Opus 5.5, effort max, on r142) — adopted, modified or rejected
+- M1 (adopted as O100, engine changed with tests): the register replaces the keyword reader, so no rewording can fail open; a changed note stops the build. The register is an evidence artifact (E159) in the swing bridge's price class.
+- L1 (adopted, engine changed with a test): the scenario input hash also covers the bar levels, the API interval boxes (an O98 unbounded box as null) and the label blocker and non-candidate sets, so a change in what decides a scenario label makes the scenarios stale.
+- L2 (adopted, engine changed with a test): an O97 follower is dropped where the pair itself is a candidate for the configuration (the same evidence twice); a pair's `requiredVariant` no longer carries over to a follower.
+- L3 (adopted): O83's split text, the registry's profile rule, the SemiAnalysis change-detection rule, `o72Application`, AGENTS.md and the draft's O77 passages now state the limit-or-price condition (O99, O101).
+- Round status (O56): not clean (one Medium). Draft r143; the Opus max count starts at zero.
