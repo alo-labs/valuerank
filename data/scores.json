@@ -14160,6 +14160,80 @@
     "planAllowanceCells": [
       {
         "provider": "Anthropic",
+        "plan": "Claude (plan redacted)",
+        "modelId": "claude-opus-5-5",
+        "unit": "week",
+        "region": "global",
+        "status": "not a listed plan",
+        "currentPartition": 0,
+        "partitionsWithReports": [],
+        "value": null,
+        "monthlyUsd": null,
+        "multiple": null,
+        "range": null,
+        "reports": [
+          {
+            "id": "leolim031-opus",
+            "observer": "leolim031",
+            "valueLower": 1200.0,
+            "valueUpper": 1200.0,
+            "partition": null,
+            "provisional": false,
+            "speedMode": null,
+            "excluded": "tier not stated"
+          }
+        ],
+        "admittingObservers": []
+      },
+      {
+        "provider": "Anthropic",
+        "plan": "Claude Max (tier unstated)",
+        "modelId": "claude-opus-5-5",
+        "unit": "week",
+        "region": "global",
+        "status": "not a listed plan",
+        "currentPartition": 0,
+        "partitionsWithReports": [],
+        "value": null,
+        "monthlyUsd": null,
+        "multiple": null,
+        "range": null,
+        "reports": [
+          {
+            "id": "kakki-1-max-0927",
+            "observer": "kakki-1",
+            "valueLower": 1028.0,
+            "valueUpper": 1286.0,
+            "partition": null,
+            "provisional": false,
+            "speedMode": null,
+            "excluded": "mixed-model usage"
+          },
+          {
+            "id": "kakki-1-max-1016",
+            "observer": "kakki-1",
+            "valueLower": 1082.0,
+            "valueUpper": 1306.0,
+            "partition": null,
+            "provisional": false,
+            "speedMode": null,
+            "excluded": "lower bound: no meter fraction"
+          },
+          {
+            "id": "kakki-1-max-1024",
+            "observer": "kakki-1",
+            "valueLower": 660.0,
+            "valueUpper": 1080.0,
+            "partition": null,
+            "provisional": false,
+            "speedMode": null,
+            "excluded": "mixed-model usage"
+          }
+        ],
+        "admittingObservers": []
+      },
+      {
+        "provider": "Anthropic",
         "plan": "Claude Max 20x",
         "modelId": null,
         "unit": "week",
@@ -14181,8 +14255,125 @@
             "provisional": false,
             "speedMode": null,
             "excluded": "model not stated"
+          },
+          {
+            "id": "fancy-leave-max20x",
+            "observer": "Fancy_Leave7798",
+            "valueLower": 1960.0,
+            "valueUpper": 1963.0,
+            "partition": null,
+            "provisional": false,
+            "speedMode": null,
+            "excluded": "model not stated"
+          },
+          {
+            "id": "omeganetrob-max20x",
+            "observer": "OmegaNetRob",
+            "valueLower": 4580.0,
+            "valueUpper": 4580.0,
+            "partition": null,
+            "provisional": false,
+            "speedMode": null,
+            "excluded": "model not stated"
+          },
+          {
+            "id": "bobothepirate-max20x",
+            "observer": "BoboThePirate",
+            "valueLower": 2000.0,
+            "valueUpper": 2000.0,
+            "partition": null,
+            "provisional": false,
+            "speedMode": null,
+            "excluded": "lower bound: no meter fraction"
+          },
+          {
+            "id": "cannonpalms-max20x",
+            "observer": "cannonpalms",
+            "valueLower": 2000.0,
+            "valueUpper": 2000.0,
+            "partition": null,
+            "provisional": false,
+            "speedMode": null,
+            "excluded": "lower bound: no meter fraction"
+          },
+          {
+            "id": "wokey-max20x",
+            "observer": "wokey.ai",
+            "valueLower": 1547.0,
+            "valueUpper": 1751.0,
+            "partition": null,
+            "provisional": false,
+            "speedMode": null,
+            "excluded": "mixed-model usage"
           }
-        ]
+        ],
+        "admittingObservers": []
+      },
+      {
+        "provider": "Anthropic",
+        "plan": "Claude Max 20x",
+        "modelId": "claude-opus-5-5",
+        "unit": "5h",
+        "region": "global",
+        "status": "fails: a 5-hour figure never converts to a billing period (O82)",
+        "currentPartition": 1,
+        "partitionsWithReports": [
+          0
+        ],
+        "value": null,
+        "monthlyUsd": null,
+        "multiple": null,
+        "range": null,
+        "reports": [
+          {
+            "id": "kanttz-max20x-5h",
+            "observer": "Kanttz",
+            "valueLower": 662.0,
+            "valueUpper": 754.0,
+            "partition": 0,
+            "provisional": false,
+            "speedMode": null,
+            "excluded": null
+          },
+          {
+            "id": "miaai-max20x-5h",
+            "observer": "MiaAI_lab",
+            "valueLower": 630.0,
+            "valueUpper": 645.0,
+            "partition": null,
+            "provisional": true,
+            "speedMode": null,
+            "excluded": "measured outside the report window"
+          }
+        ],
+        "admittingObservers": []
+      },
+      {
+        "provider": "Anthropic",
+        "plan": "Claude Max 20x",
+        "modelId": "claude-opus-5-5",
+        "unit": "month",
+        "region": "global",
+        "status": "fails: 0 non-provisional report(s) in the current partition",
+        "currentPartition": 1,
+        "partitionsWithReports": [],
+        "value": null,
+        "monthlyUsd": null,
+        "multiple": null,
+        "range": null,
+        "reports": [
+          {
+            "id": "semianalysis-max20x",
+            "observer": "SemiAnalysis",
+            "valueLower": 9385.0,
+            "valueUpper": 11726.0,
+            "partition": null,
+            "provisional": false,
+            "speedMode": null,
+            "excluded": "aggregator or derived figure (cross-check only)"
+          }
+        ],
+        "admittingObservers": []
       },
       {
         "provider": "Anthropic",
@@ -14207,7 +14398,7 @@
           {
             "id": "kanttz-max20x",
             "observer": "Kanttz",
-            "valueLower": 2578.0,
+            "valueLower": 2484.0,
             "valueUpper": 2920.0,
             "partition": 0,
             "provisional": false,
@@ -14227,7 +14418,7 @@
           {
             "id": "last-lab-max20x",
             "observer": "Last_Lab_3627",
-            "valueLower": 2045.0,
+            "valueLower": 2000.0,
             "valueUpper": 2045.0,
             "partition": 0,
             "provisional": false,
@@ -14273,8 +14464,49 @@
             "provisional": false,
             "speedMode": null,
             "excluded": "challenged: does not reproduce from its own figures"
+          },
+          {
+            "id": "tomm3hshipp-max20x",
+            "observer": "tomm3hshipp",
+            "valueLower": 2330.0,
+            "valueUpper": 2639.0,
+            "partition": null,
+            "provisional": false,
+            "speedMode": null,
+            "excluded": "mixed-model usage"
+          },
+          {
+            "id": "pelora-max20x",
+            "observer": "PELORA-MARKETING",
+            "valueLower": 2857.0,
+            "valueUpper": 2857.0,
+            "partition": null,
+            "provisional": false,
+            "speedMode": null,
+            "excluded": "mixed-model usage"
+          },
+          {
+            "id": "daakkast-max20x",
+            "observer": "daakkast",
+            "valueLower": 1077.0,
+            "valueUpper": 1077.0,
+            "partition": null,
+            "provisional": false,
+            "speedMode": null,
+            "excluded": "mixed-model usage"
+          },
+          {
+            "id": "daakkast-max20x-launch-week",
+            "observer": "daakkast",
+            "valueLower": 4000.0,
+            "valueUpper": 4000.0,
+            "partition": null,
+            "provisional": false,
+            "speedMode": null,
+            "excluded": "lower bound: no meter fraction"
           }
-        ]
+        ],
+        "admittingObservers": []
       },
       {
         "provider": "Anthropic",
@@ -14300,7 +14532,35 @@
             "speedMode": null,
             "excluded": "model not stated"
           }
-        ]
+        ],
+        "admittingObservers": []
+      },
+      {
+        "provider": "Anthropic",
+        "plan": "Claude Max 5x",
+        "modelId": "claude-opus-5-5",
+        "unit": "month",
+        "region": "global",
+        "status": "fails: 0 non-provisional report(s) in the current partition",
+        "currentPartition": 1,
+        "partitionsWithReports": [],
+        "value": null,
+        "monthlyUsd": null,
+        "multiple": null,
+        "range": null,
+        "reports": [
+          {
+            "id": "emarkosov-max5x",
+            "observer": "emarkosov",
+            "valueLower": 1900.0,
+            "valueUpper": 1900.0,
+            "partition": null,
+            "provisional": false,
+            "speedMode": null,
+            "excluded": "lower bound: no meter fraction"
+          }
+        ],
+        "admittingObservers": []
       },
       {
         "provider": "Anthropic",
@@ -14330,7 +14590,7 @@
           },
           {
             "id": "usage-screenshot-max5x",
-            "observer": "unlabelled /usage screenshot (week of 2026-09-29)",
+            "observer": "unlabelled /usage screenshot",
             "valueLower": 1920.0,
             "valueUpper": 1920.0,
             "partition": 0,
@@ -14338,7 +14598,8 @@
             "speedMode": null,
             "excluded": null
           }
-        ]
+        ],
+        "admittingObservers": []
       },
       {
         "provider": "Anthropic",
@@ -14357,14 +14618,104 @@
           {
             "id": "wokey-pro",
             "observer": "wokey.ai",
-            "valueLower": 170.0,
-            "valueUpper": 170.0,
+            "valueLower": 158.0,
+            "valueUpper": 182.0,
             "partition": null,
             "provisional": false,
             "speedMode": null,
-            "excluded": "aggregator or derived figure (cross-check only)"
+            "excluded": "mixed-model usage"
           }
-        ]
+        ],
+        "admittingObservers": []
+      },
+      {
+        "provider": "Anthropic",
+        "plan": "Claude Pro",
+        "modelId": "claude-opus-5-5",
+        "unit": "5h",
+        "region": "global",
+        "status": "fails: a 5-hour figure never converts to a billing period (O82)",
+        "currentPartition": 1,
+        "partitionsWithReports": [
+          1
+        ],
+        "value": null,
+        "monthlyUsd": null,
+        "multiple": null,
+        "range": [
+          42.0,
+          42.0
+        ],
+        "reports": [
+          {
+            "id": "k45sle-pro-5h",
+            "observer": "K45SLE",
+            "valueLower": 42.0,
+            "valueUpper": 42.0,
+            "partition": 1,
+            "provisional": true,
+            "speedMode": null,
+            "excluded": null
+          },
+          {
+            "id": "ok-cauliflower-pro-5h",
+            "observer": "Ok-Cauliflower-7568",
+            "valueLower": 32.97,
+            "valueUpper": 32.97,
+            "partition": null,
+            "provisional": false,
+            "speedMode": null,
+            "excluded": "mixed-model usage"
+          },
+          {
+            "id": "reddit-claudecode-pro-5h",
+            "observer": "Reddit r/ClaudeCode (≈2026-09-24; URL not recovered)",
+            "valueLower": 40.48,
+            "valueUpper": 40.48,
+            "partition": null,
+            "provisional": false,
+            "speedMode": null,
+            "excluded": "measured outside the report window"
+          },
+          {
+            "id": "planyy-pro-5h",
+            "observer": "Planyy",
+            "valueLower": 40.0,
+            "valueUpper": 50.0,
+            "partition": null,
+            "provisional": false,
+            "speedMode": null,
+            "excluded": "mixed-model usage"
+          }
+        ],
+        "admittingObservers": []
+      },
+      {
+        "provider": "Anthropic",
+        "plan": "Claude Pro",
+        "modelId": "claude-opus-5-5",
+        "unit": "month",
+        "region": "global",
+        "status": "fails: 0 non-provisional report(s) in the current partition",
+        "currentPartition": 1,
+        "partitionsWithReports": [],
+        "value": null,
+        "monthlyUsd": null,
+        "multiple": null,
+        "range": null,
+        "reports": [
+          {
+            "id": "hakanavgin-pro-month",
+            "observer": "hakanavgin",
+            "valueLower": 1150.0,
+            "valueUpper": 1150.0,
+            "partition": null,
+            "provisional": false,
+            "speedMode": null,
+            "excluded": "mixed-model usage"
+          }
+        ],
+        "admittingObservers": []
       },
       {
         "provider": "Anthropic",
@@ -14409,8 +14760,8 @@
           {
             "id": "ganpei777-pro",
             "observer": "ganpei777",
-            "valueLower": 1266.0,
-            "valueUpper": 1266.0,
+            "valueLower": 1266.15,
+            "valueUpper": 1266.15,
             "partition": 0,
             "provisional": false,
             "speedMode": null,
@@ -14448,15 +14799,90 @@
           },
           {
             "id": "issue47-pro",
-            "observer": "Fei2411 #47",
+            "observer": "devin-ai-integration (bot) for a user",
             "valueLower": 112.0,
             "valueUpper": 112.0,
             "partition": null,
             "provisional": false,
             "speedMode": null,
             "excluded": "lower bound: no meter fraction"
+          },
+          {
+            "id": "reddit-claudecode-pro",
+            "observer": "Reddit r/ClaudeCode (≈2026-09-24; URL not recovered)",
+            "valueLower": 304.0,
+            "valueUpper": 304.0,
+            "partition": null,
+            "provisional": false,
+            "speedMode": null,
+            "excluded": "measured outside the report window"
+          },
+          {
+            "id": "planyy-pro",
+            "observer": "Planyy",
+            "valueLower": 400.0,
+            "valueUpper": 500.0,
+            "partition": null,
+            "provisional": false,
+            "speedMode": null,
+            "excluded": "mixed-model usage"
           }
-        ]
+        ],
+        "admittingObservers": []
+      },
+      {
+        "provider": "Anthropic",
+        "plan": "Claude Team Premium",
+        "modelId": "claude-opus-5-5",
+        "unit": "week",
+        "region": "global",
+        "status": "not a listed plan",
+        "currentPartition": 0,
+        "partitionsWithReports": [],
+        "value": null,
+        "monthlyUsd": null,
+        "multiple": null,
+        "range": null,
+        "reports": [
+          {
+            "id": "leo114119-team-premium",
+            "observer": "leo114119",
+            "valueLower": 1320.38,
+            "valueUpper": 1320.38,
+            "partition": null,
+            "provisional": false,
+            "speedMode": null,
+            "excluded": "lower bound: no meter fraction"
+          }
+        ],
+        "admittingObservers": []
+      },
+      {
+        "provider": "Google",
+        "plan": "Google AI (tier unstated)",
+        "modelId": "gemini-4-argon",
+        "unit": "week",
+        "region": "global",
+        "status": "not a listed plan",
+        "currentPartition": 0,
+        "partitionsWithReports": [],
+        "value": null,
+        "monthlyUsd": null,
+        "multiple": null,
+        "range": null,
+        "reports": [
+          {
+            "id": "spin-pyokosmeme-argon",
+            "observer": "@spin.pyokosmeme.group",
+            "valueLower": 50.0,
+            "valueUpper": 50.0,
+            "partition": null,
+            "provisional": false,
+            "speedMode": null,
+            "excluded": "tier not stated"
+          }
+        ],
+        "admittingObservers": []
       },
       {
         "provider": "Google",
@@ -14507,7 +14933,124 @@
             "speedMode": null,
             "excluded": null
           }
-        ]
+        ],
+        "admittingObservers": []
+      },
+      {
+        "provider": "Kimi",
+        "plan": "Kimi Allegretto (legacy, CN)",
+        "modelId": "kimi-k3-1-pro",
+        "unit": "5h",
+        "region": "CN",
+        "status": "not a listed plan",
+        "currentPartition": 1,
+        "partitionsWithReports": [
+          0,
+          1
+        ],
+        "value": null,
+        "monthlyUsd": null,
+        "multiple": null,
+        "range": [
+          9.59,
+          9.59
+        ],
+        "reports": [
+          {
+            "id": "fcten-allegretto-5h-t1",
+            "observer": "fcten",
+            "valueLower": 6.39,
+            "valueUpper": 6.39,
+            "partition": 0,
+            "provisional": false,
+            "speedMode": null,
+            "excluded": null
+          },
+          {
+            "id": "fcten-allegretto-5h-t2",
+            "observer": "fcten",
+            "valueLower": 9.59,
+            "valueUpper": 9.59,
+            "partition": 1,
+            "provisional": false,
+            "speedMode": null,
+            "excluded": null
+          },
+          {
+            "id": "astralyn-allegretto-5h",
+            "observer": "Astralyn",
+            "valueLower": 11.18,
+            "valueUpper": 11.18,
+            "partition": null,
+            "provisional": false,
+            "speedMode": null,
+            "excluded": "the research's own arithmetic, not a figure the observer reported"
+          },
+          {
+            "id": "weibo-allegretto",
+            "observer": "贾凡-失落的大蒜",
+            "valueLower": 10.0,
+            "valueUpper": 10.0,
+            "partition": null,
+            "provisional": false,
+            "speedMode": null,
+            "excluded": "spans a partition split"
+          }
+        ],
+        "admittingObservers": []
+      },
+      {
+        "provider": "Kimi",
+        "plan": "Kimi Allegretto (legacy, CN)",
+        "modelId": "kimi-k3-1-pro",
+        "unit": "month",
+        "region": "CN",
+        "status": "not a listed plan",
+        "currentPartition": 1,
+        "partitionsWithReports": [
+          0,
+          1
+        ],
+        "value": null,
+        "monthlyUsd": null,
+        "multiple": null,
+        "range": [
+          240.0,
+          240.0
+        ],
+        "reports": [
+          {
+            "id": "fcten-allegretto-month-t1",
+            "observer": "fcten",
+            "valueLower": 159.0,
+            "valueUpper": 159.0,
+            "partition": 0,
+            "provisional": false,
+            "speedMode": null,
+            "excluded": null
+          },
+          {
+            "id": "fcten-allegretto-month-t2",
+            "observer": "fcten",
+            "valueLower": 240.0,
+            "valueUpper": 240.0,
+            "partition": 1,
+            "provisional": false,
+            "speedMode": null,
+            "excluded": null
+          },
+          {
+            "id": "astralyn-allegretto-month",
+            "observer": "Astralyn",
+            "valueLower": 279.0,
+            "valueUpper": 279.0,
+            "partition": null,
+            "provisional": false,
+            "speedMode": null,
+            "excluded": "the research's own arithmetic, not a figure the observer reported"
+          }
+        ],
+        "admittingObservers": []
       },
       {
         "provider": "Kimi",
@@ -14518,37 +15061,242 @@
         "status": "not a listed plan",
         "currentPartition": 1,
         "partitionsWithReports": [
-          1
+          0
         ],
         "value": null,
         "monthlyUsd": null,
         "multiple": null,
-        "range": [
-          48.6,
-          55.9
-        ],
+        "range": null,
         "reports": [
+          {
+            "id": "fcten-allegretto-week-t1",
+            "observer": "fcten",
+            "valueLower": 31.8,
+            "valueUpper": 31.8,
+            "partition": 0,
+            "provisional": false,
+            "speedMode": null,
+            "excluded": null
+          },
           {
             "id": "astralyn-allegretto",
             "observer": "Astralyn",
             "valueLower": 55.9,
             "valueUpper": 55.9,
-            "partition": 1,
+            "partition": null,
             "provisional": false,
             "speedMode": null,
-            "excluded": null
+            "excluded": "the research's own arithmetic, not a figure the observer reported"
           },
           {
             "id": "moondrinker-allegretto",
             "observer": "MoonDrinker",
             "valueLower": 48.6,
             "valueUpper": 48.6,
-            "partition": 1,
+            "partition": null,
+            "provisional": false,
+            "speedMode": null,
+            "excluded": "the research's own arithmetic, not a figure the observer reported"
+          }
+        ],
+        "admittingObservers": []
+      },
+      {
+        "provider": "Kimi",
+        "plan": "Kimi Allegro (legacy, CN)",
+        "modelId": "kimi-k3-1-pro",
+        "unit": "5h",
+        "region": "CN",
+        "status": "not a listed plan",
+        "currentPartition": 1,
+        "partitionsWithReports": [
+          0
+        ],
+        "value": null,
+        "monthlyUsd": null,
+        "multiple": null,
+        "range": null,
+        "reports": [
+          {
+            "id": "kojimako-allegro-5h-1024",
+            "observer": "kojimako",
+            "valueLower": 21.7,
+            "valueUpper": 21.7,
+            "partition": null,
+            "provisional": false,
+            "speedMode": null,
+            "excluded": "the research's own arithmetic, not a figure the observer reported"
+          },
+          {
+            "id": "kojimako-allegro-5h-1025",
+            "observer": "kojimako",
+            "valueLower": 33.5,
+            "valueUpper": 33.5,
+            "partition": null,
+            "provisional": false,
+            "speedMode": null,
+            "excluded": "the research's own arithmetic, not a figure the observer reported"
+          },
+          {
+            "id": "raymondchau-allegro",
+            "observer": "raymondchau",
+            "valueLower": 12.4,
+            "valueUpper": 12.4,
+            "partition": 0,
             "provisional": false,
             "speedMode": null,
             "excluded": null
+          },
+          {
+            "id": "okarin-allegro-5h",
+            "observer": "okarin",
+            "valueLower": 25.8,
+            "valueUpper": 25.8,
+            "partition": null,
+            "provisional": false,
+            "speedMode": null,
+            "excluded": "the research's own arithmetic, not a figure the observer reported"
+          },
+          {
+            "id": "weibo-allegro",
+            "observer": "贾凡-失落的大蒜",
+            "valueLower": 25.0,
+            "valueUpper": 25.0,
+            "partition": null,
+            "provisional": false,
+            "speedMode": null,
+            "excluded": "spans a partition split"
           }
-        ]
+        ],
+        "admittingObservers": []
+      },
+      {
+        "provider": "Kimi",
+        "plan": "Kimi Allegro (legacy, CN)",
+        "modelId": "kimi-k3-1-pro",
+        "unit": "month",
+        "region": "CN",
+        "status": "not a listed plan",
+        "currentPartition": 1,
+        "partitionsWithReports": [],
+        "value": null,
+        "monthlyUsd": null,
+        "multiple": null,
+        "range": null,
+        "reports": [
+          {
+            "id": "okarin-allegro-month",
+            "observer": "okarin",
+            "valueLower": 646.0,
+            "valueUpper": 646.0,
+            "partition": null,
+            "provisional": false,
+            "speedMode": null,
+            "excluded": "the research's own arithmetic, not a figure the observer reported"
+          }
+        ],
+        "admittingObservers": []
+      },
+      {
+        "provider": "Kimi",
+        "plan": "Kimi Allegro (legacy, CN)",
+        "modelId": "kimi-k3-1-pro",
+        "unit": "week",
+        "region": "CN",
+        "status": "not a listed plan",
+        "currentPartition": 1,
+        "partitionsWithReports": [],
+        "value": null,
+        "monthlyUsd": null,
+        "multiple": null,
+        "range": null,
+        "reports": [
+          {
+            "id": "kojimako-allegro-week-1024",
+            "observer": "kojimako",
+            "valueLower": 108.6,
+            "valueUpper": 108.6,
+            "partition": null,
+            "provisional": false,
+            "speedMode": null,
+            "excluded": "the research's own arithmetic, not a figure the observer reported"
+          },
+          {
+            "id": "kojimako-allegro-week-1025",
+            "observer": "kojimako",
+            "valueLower": 167.0,
+            "valueUpper": 167.0,
+            "partition": null,
+            "provisional": false,
+            "speedMode": null,
+            "excluded": "the research's own arithmetic, not a figure the observer reported"
+          }
+        ],
+        "admittingObservers": []
+      },
+      {
+        "provider": "Kimi",
+        "plan": "Kimi Max (new, CN)",
+        "modelId": "kimi-k3-1-pro",
+        "unit": "5h",
+        "region": "CN",
+        "status": "not a listed plan",
+        "currentPartition": 1,
+        "partitionsWithReports": [],
+        "value": null,
+        "monthlyUsd": null,
+        "multiple": null,
+        "range": null,
+        "reports": [
+          {
+            "id": "okarin-max-new-5h",
+            "observer": "okarin",
+            "valueLower": 13.42,
+            "valueUpper": 13.42,
+            "partition": null,
+            "provisional": false,
+            "speedMode": null,
+            "excluded": "the research's own arithmetic, not a figure the observer reported"
+          },
+          {
+            "id": "weibo-max",
+            "observer": "贾凡-失落的大蒜",
+            "valueLower": 13.9,
+            "valueUpper": 13.9,
+            "partition": null,
+            "provisional": false,
+            "speedMode": null,
+            "excluded": "spans a partition split"
+          }
+        ],
+        "admittingObservers": []
+      },
+      {
+        "provider": "Kimi",
+        "plan": "Kimi Max (new, CN)",
+        "modelId": "kimi-k3-1-pro",
+        "unit": "month",
+        "region": "CN",
+        "status": "not a listed plan",
+        "currentPartition": 1,
+        "partitionsWithReports": [],
+        "value": null,
+        "monthlyUsd": null,
+        "multiple": null,
+        "range": null,
+        "reports": [
+          {
+            "id": "okarin-max-new-month",
+            "observer": "okarin",
+            "valueLower": 333.0,
+            "valueUpper": 333.0,
+            "partition": null,
+            "provisional": false,
+            "speedMode": null,
+            "excluded": "the research's own arithmetic, not a figure the observer reported"
+          }
+        ],
+        "admittingObservers": []
       },
       {
         "provider": "Kimi",
@@ -14556,7 +15304,7 @@
         "modelId": "kimi-k3-1-pro",
         "unit": "5h",
         "region": "global",
-        "status": "fails: a 5-hour figure stays in its own unit (O80)",
+        "status": "fails: a 5-hour figure never converts to a billing period (O82)",
         "currentPartition": 1,
         "partitionsWithReports": [],
         "value": null,
@@ -14574,7 +15322,384 @@
             "speedMode": null,
             "excluded": "spans a partition split"
           }
-        ]
+        ],
+        "admittingObservers": []
+      },
+      {
+        "provider": "Kimi",
+        "plan": "Kimi Plus (new, CN)",
+        "modelId": "kimi-k3-1-pro",
+        "unit": "5h",
+        "region": "CN",
+        "status": "not a listed plan",
+        "currentPartition": 1,
+        "partitionsWithReports": [],
+        "value": null,
+        "monthlyUsd": null,
+        "multiple": null,
+        "range": null,
+        "reports": [
+          {
+            "id": "weibo-plus",
+            "observer": "贾凡-失落的大蒜",
+            "valueLower": 0.9,
+            "valueUpper": 0.9,
+            "partition": null,
+            "provisional": false,
+            "speedMode": null,
+            "excluded": "spans a partition split"
+          }
+        ],
+        "admittingObservers": []
+      },
+      {
+        "provider": "Kimi",
+        "plan": "Kimi Pro (new, CN)",
+        "modelId": "kimi-k3-1-pro",
+        "unit": "5h",
+        "region": "CN",
+        "status": "not a listed plan",
+        "currentPartition": 1,
+        "partitionsWithReports": [],
+        "value": null,
+        "monthlyUsd": null,
+        "multiple": null,
+        "range": null,
+        "reports": [
+          {
+            "id": "weibo-pro",
+            "observer": "贾凡-失落的大蒜",
+            "valueLower": 4.3,
+            "valueUpper": 4.3,
+            "partition": null,
+            "provisional": false,
+            "speedMode": null,
+            "excluded": "spans a partition split"
+          }
+        ],
+        "admittingObservers": []
+      },
+      {
+        "provider": "Kimi",
+        "plan": "Kimi Ultra (new, CN)",
+        "modelId": "kimi-k3-1-pro",
+        "unit": "5h",
+        "region": "CN",
+        "status": "not a listed plan",
+        "currentPartition": 1,
+        "partitionsWithReports": [],
+        "value": null,
+        "monthlyUsd": null,
+        "multiple": null,
+        "range": null,
+        "reports": [
+          {
+            "id": "weibo-ultra",
+            "observer": "贾凡-失落的大蒜",
+            "valueLower": 27.8,
+            "valueUpper": 27.8,
+            "partition": null,
+            "provisional": false,
+            "speedMode": null,
+            "excluded": "spans a partition split"
+          }
+        ],
+        "admittingObservers": []
+      },
+      {
+        "provider": "Kimi",
+        "plan": "Kimi legacy plan (tier not stated, CN)",
+        "modelId": "kimi-k3-1-pro",
+        "unit": "5h",
+        "region": "CN",
+        "status": "not a listed plan",
+        "currentPartition": 1,
+        "partitionsWithReports": [],
+        "value": null,
+        "monthlyUsd": null,
+        "multiple": null,
+        "range": null,
+        "reports": [
+          {
+            "id": "choulei-legacy",
+            "observer": "choulei",
+            "valueLower": 10.0,
+            "valueUpper": 10.09,
+            "partition": null,
+            "provisional": false,
+            "speedMode": null,
+            "excluded": "tier not stated"
+          }
+        ],
+        "admittingObservers": []
+      },
+      {
+        "provider": "Kimi",
+        "plan": "Kimi ¥199 plan (legacy or new not stated, CN)",
+        "modelId": "kimi-k3-1-pro",
+        "unit": "5h",
+        "region": "CN",
+        "status": "not a listed plan",
+        "currentPartition": 1,
+        "partitionsWithReports": [],
+        "value": null,
+        "monthlyUsd": null,
+        "multiple": null,
+        "range": null,
+        "reports": [
+          {
+            "id": "hanashiro-199-1024",
+            "observer": "hanashiro",
+            "valueLower": 2.9,
+            "valueUpper": 48.6,
+            "partition": null,
+            "provisional": false,
+            "speedMode": null,
+            "excluded": "tier not stated"
+          },
+          {
+            "id": "hanashiro-199-1025",
+            "observer": "hanashiro",
+            "valueLower": 4.5,
+            "valueUpper": 36.0,
+            "partition": null,
+            "provisional": false,
+            "speedMode": null,
+            "excluded": "tier not stated"
+          }
+        ],
+        "admittingObservers": []
+      },
+      {
+        "provider": "MiniMax",
+        "plan": "MiniMax M Plan (tier unstated)",
+        "modelId": "minimax-m3-1-flash",
+        "unit": "week",
+        "region": "global",
+        "status": "not a listed plan",
+        "currentPartition": 0,
+        "partitionsWithReports": [],
+        "value": null,
+        "monthlyUsd": null,
+        "multiple": null,
+        "range": null,
+        "reports": [
+          {
+            "id": "nnayrdev-mplan",
+            "observer": "nnayrdev",
+            "valueLower": 3.9,
+            "valueUpper": 15.5,
+            "partition": null,
+            "provisional": true,
+            "speedMode": null,
+            "excluded": "tier not stated"
+          }
+        ],
+        "admittingObservers": []
+      },
+      {
+        "provider": "MiniMax",
+        "plan": "MiniMax Token Plan Max (legacy)",
+        "modelId": "minimax-m3-1-flash",
+        "unit": "5h",
+        "region": "global",
+        "status": "not a listed plan",
+        "currentPartition": 0,
+        "partitionsWithReports": [
+          0
+        ],
+        "value": null,
+        "monthlyUsd": null,
+        "multiple": null,
+        "range": [
+          5.7,
+          9.8
+        ],
+        "reports": [
+          {
+            "id": "illustrious-tokenplan-max",
+            "observer": "Illustrious-Many-782",
+            "valueLower": 5.7,
+            "valueUpper": 9.8,
+            "partition": 0,
+            "provisional": true,
+            "speedMode": null,
+            "excluded": null
+          }
+        ],
+        "admittingObservers": []
+      },
+      {
+        "provider": "MiniMax",
+        "plan": "MiniMax Token Plan Max (legacy)",
+        "modelId": "minimax-m3-1-flash",
+        "unit": "week",
+        "region": "global",
+        "status": "not a listed plan",
+        "currentPartition": 0,
+        "partitionsWithReports": [
+          0
+        ],
+        "value": null,
+        "monthlyUsd": null,
+        "multiple": null,
+        "range": [
+          60.0,
+          127.0
+        ],
+        "reports": [
+          {
+            "id": "money-string-tokenplan-max",
+            "observer": "Money-String4165",
+            "valueLower": 60.0,
+            "valueUpper": 127.0,
+            "partition": 0,
+            "provisional": true,
+            "speedMode": null,
+            "excluded": null
+          }
+        ],
+        "admittingObservers": []
+      },
+      {
+        "provider": "MiniMax",
+        "plan": "MiniMax Token Plan lowest tier (legacy)",
+        "modelId": "minimax-m3-1-flash",
+        "unit": "5h",
+        "region": "global",
+        "status": "not a listed plan",
+        "currentPartition": 0,
+        "partitionsWithReports": [
+          0
+        ],
+        "value": null,
+        "monthlyUsd": null,
+        "multiple": null,
+        "range": [
+          3.5,
+          13.5
+        ],
+        "reports": [
+          {
+            "id": "awayteamredshirt-tokenplan-lowest",
+            "observer": "AwayTeamRedShirt",
+            "valueLower": 3.5,
+            "valueUpper": 13.5,
+            "partition": 0,
+            "provisional": true,
+            "speedMode": null,
+            "excluded": null
+          }
+        ],
+        "admittingObservers": []
+      },
+      {
+        "provider": "MiniMax",
+        "plan": "MiniMax lowest tier (\"lite\")",
+        "modelId": null,
+        "unit": "week",
+        "region": "global",
+        "status": "not a listed plan",
+        "currentPartition": 0,
+        "partitionsWithReports": [],
+        "value": null,
+        "monthlyUsd": null,
+        "multiple": null,
+        "range": null,
+        "reports": [
+          {
+            "id": "considerationno9952-minimax",
+            "observer": "ConsiderationNo9952",
+            "valueLower": 21.0,
+            "valueUpper": 33.0,
+            "partition": null,
+            "provisional": false,
+            "speedMode": null,
+            "excluded": "lower bound: no meter fraction"
+          }
+        ],
+        "admittingObservers": []
+      },
+      {
+        "provider": "OpenAI",
+        "plan": "ChatGPT (legacy account, tier unstated)",
+        "modelId": "gpt-6.1-sol",
+        "unit": "week",
+        "region": "global",
+        "status": "not a listed plan",
+        "currentPartition": 4,
+        "partitionsWithReports": [],
+        "value": null,
+        "monthlyUsd": null,
+        "multiple": null,
+        "range": null,
+        "reports": [
+          {
+            "id": "danikk-sol",
+            "observer": "Danikk",
+            "valueLower": 46.0,
+            "valueUpper": 46.0,
+            "partition": null,
+            "provisional": false,
+            "speedMode": null,
+            "excluded": "tier not stated"
+          }
+        ],
+        "admittingObservers": []
+      },
+      {
+        "provider": "OpenAI",
+        "plan": "ChatGPT Plus",
+        "modelId": "gpt-5.6-luna-low",
+        "unit": "5h",
+        "region": "global",
+        "status": "fails: a 5-hour figure never converts to a billing period (O82)",
+        "currentPartition": 4,
+        "partitionsWithReports": [],
+        "value": null,
+        "monthlyUsd": null,
+        "multiple": null,
+        "range": null,
+        "reports": [
+          {
+            "id": "tagorr-plus",
+            "observer": "tagorr",
+            "valueLower": 4.9,
+            "valueUpper": 4.9,
+            "partition": null,
+            "provisional": false,
+            "speedMode": null,
+            "excluded": "an anomaly or legacy-account report"
+          }
+        ],
+        "admittingObservers": []
+      },
+      {
+        "provider": "OpenAI",
+        "plan": "ChatGPT Plus",
+        "modelId": "gpt-5.6-luna-low",
+        "unit": "week",
+        "region": "global",
+        "status": "fails: 0 non-provisional report(s) in the current partition",
+        "currentPartition": 4,
+        "partitionsWithReports": [],
+        "value": null,
+        "monthlyUsd": null,
+        "multiple": null,
+        "range": null,
+        "reports": [
+          {
+            "id": "shekelphile-plus",
+            "observer": "Shekelphile",
+            "valueLower": 150.0,
+            "valueUpper": 150.0,
+            "partition": null,
+            "provisional": false,
+            "speedMode": null,
+            "excluded": "measured outside the report window"
+          }
+        ],
+        "admittingObservers": []
       },
       {
         "provider": "OpenAI",
@@ -14582,7 +15707,7 @@
         "modelId": "gpt-6-astra",
         "unit": "5h",
         "region": "global",
-        "status": "fails: a 5-hour figure stays in its own unit (O80)",
+        "status": "fails: a 5-hour figure never converts to a billing period (O82)",
         "currentPartition": 4,
         "partitionsWithReports": [],
         "value": null,
@@ -14598,9 +15723,20 @@
             "partition": null,
             "provisional": false,
             "speedMode": null,
-            "excluded": "spans a partition split"
+            "excluded": "an anomaly or legacy-account report"
+          },
+          {
+            "id": "kamo-k-plus",
+            "observer": "kamo-k",
+            "valueLower": 15.5,
+            "valueUpper": 15.5,
+            "partition": null,
+            "provisional": false,
+            "speedMode": null,
+            "excluded": "an anomaly or legacy-account report"
           }
-        ]
+        ],
+        "admittingObservers": []
       },
       {
         "provider": "OpenAI",
@@ -14608,7 +15744,7 @@
         "modelId": "gpt-6-luna",
         "unit": "5h",
         "region": "global",
-        "status": "fails: a 5-hour figure stays in its own unit (O80)",
+        "status": "fails: a 5-hour figure never converts to a billing period (O82)",
         "currentPartition": 4,
         "partitionsWithReports": [
           0
@@ -14621,14 +15757,42 @@
           {
             "id": "yoggypap-plus",
             "observer": "yoggypap",
-            "valueLower": 6.5,
+            "valueLower": 5.0,
             "valueUpper": 7.5,
             "partition": 0,
             "provisional": false,
             "speedMode": null,
             "excluded": null
           }
-        ]
+        ],
+        "admittingObservers": []
+      },
+      {
+        "provider": "OpenAI",
+        "plan": "ChatGPT Plus",
+        "modelId": "gpt-6-luna",
+        "unit": "month",
+        "region": "global",
+        "status": "fails: 0 non-provisional report(s) in the current partition",
+        "currentPartition": 4,
+        "partitionsWithReports": [],
+        "value": null,
+        "monthlyUsd": null,
+        "multiple": null,
+        "range": null,
+        "reports": [
+          {
+            "id": "mekpro-plus",
+            "observer": "mekpro",
+            "valueLower": 100.0,
+            "valueUpper": 100.0,
+            "partition": null,
+            "provisional": false,
+            "speedMode": null,
+            "excluded": "lower bound: no meter fraction"
+          }
+        ],
+        "admittingObservers": []
       },
       {
         "provider": "OpenAI",
@@ -14636,7 +15800,7 @@
         "modelId": "gpt-6.1-sol",
         "unit": "5h",
         "region": "global",
-        "status": "fails: a 5-hour figure stays in its own unit (O80)",
+        "status": "fails: a 5-hour figure never converts to a billing period (O82)",
         "currentPartition": 4,
         "partitionsWithReports": [
           0
@@ -14665,8 +15829,85 @@
             "provisional": false,
             "speedMode": null,
             "excluded": "spans a partition split"
+          },
+          {
+            "id": "pasto-shouwa-plus-5h",
+            "observer": "Pasto_Shouwa",
+            "valueLower": 11.81,
+            "valueUpper": 11.81,
+            "partition": null,
+            "provisional": false,
+            "speedMode": null,
+            "excluded": "lower bound: no meter fraction"
           }
-        ]
+        ],
+        "admittingObservers": []
+      },
+      {
+        "provider": "OpenAI",
+        "plan": "ChatGPT Plus",
+        "modelId": "gpt-6.1-sol",
+        "unit": "week",
+        "region": "global",
+        "status": "fails: 0 non-provisional report(s) in the current partition",
+        "currentPartition": 4,
+        "partitionsWithReports": [
+          0
+        ],
+        "value": null,
+        "monthlyUsd": null,
+        "multiple": null,
+        "range": null,
+        "reports": [
+          {
+            "id": "mehoney-plus-week",
+            "observer": "mehoney",
+            "valueLower": 57.0,
+            "valueUpper": 57.0,
+            "partition": 0,
+            "provisional": false,
+            "speedMode": null,
+            "excluded": null
+          },
+          {
+            "id": "pasto-shouwa-plus-week",
+            "observer": "Pasto_Shouwa",
+            "valueLower": 65.6,
+            "valueUpper": 65.6,
+            "partition": null,
+            "provisional": false,
+            "speedMode": null,
+            "excluded": "lower bound: no meter fraction"
+          }
+        ],
+        "admittingObservers": []
+      },
+      {
+        "provider": "OpenAI",
+        "plan": "ChatGPT Pro (tier unstated)",
+        "modelId": "gpt-6-astra",
+        "unit": "week",
+        "region": "global",
+        "status": "not a listed plan",
+        "currentPartition": 4,
+        "partitionsWithReports": [],
+        "value": null,
+        "monthlyUsd": null,
+        "multiple": null,
+        "range": null,
+        "reports": [
+          {
+            "id": "ppgnox-pro",
+            "observer": "ppgnox",
+            "valueLower": 1700.0,
+            "valueUpper": 1700.0,
+            "partition": null,
+            "provisional": false,
+            "speedMode": null,
+            "excluded": "tier not stated"
+          }
+        ],
+        "admittingObservers": []
       },
       {
         "provider": "OpenAI",
@@ -14674,20 +15915,26 @@
         "modelId": "gpt-6-astra",
         "unit": "week",
         "region": "global",
-        "status": "fails: 1 non-provisional report(s) in the current partition",
+        "status": "fails: 0 non-provisional report(s) in the current partition",
         "currentPartition": 4,
         "partitionsWithReports": [
-          2,
-          4
+          2
         ],
         "value": null,
         "monthlyUsd": null,
         "multiple": null,
-        "range": [
-          318.0,
-          318.0
-        ],
+        "range": null,
         "reports": [
+          {
+            "id": "muscgab97-pro100-astra",
+            "observer": "muscgab",
+            "valueLower": 313.0,
+            "valueUpper": 313.0,
+            "partition": null,
+            "provisional": false,
+            "speedMode": null,
+            "excluded": "mixed-model usage"
+          },
           {
             "id": "sentrybottale-pro100",
             "observer": "sentrybottale",
@@ -14713,12 +15960,67 @@
             "observer": "YiwenPang",
             "valueLower": 318.0,
             "valueUpper": 318.0,
-            "partition": 4,
+            "partition": null,
             "provisional": false,
             "speedMode": null,
-            "excluded": null
+            "excluded": "an anomaly or legacy-account report"
           }
-        ]
+        ],
+        "admittingObservers": []
+      },
+      {
+        "provider": "OpenAI",
+        "plan": "ChatGPT Pro 100",
+        "modelId": "gpt-6.1-sol",
+        "unit": "week",
+        "region": "global",
+        "status": "fails: 0 non-provisional report(s) in the current partition",
+        "currentPartition": 4,
+        "partitionsWithReports": [],
+        "value": null,
+        "monthlyUsd": null,
+        "multiple": null,
+        "range": null,
+        "reports": [
+          {
+            "id": "muscgab97-pro100-sol",
+            "observer": "muscgab",
+            "valueLower": 234.0,
+            "valueUpper": 234.0,
+            "partition": null,
+            "provisional": false,
+            "speedMode": null,
+            "excluded": "mixed-model usage"
+          }
+        ],
+        "admittingObservers": []
+      },
+      {
+        "provider": "OpenAI",
+        "plan": "ChatGPT Pro 200 (grandfathered 20x)",
+        "modelId": "gpt-6-astra",
+        "unit": "week",
+        "region": "global",
+        "status": "fails: 0 non-provisional report(s) in the current partition",
+        "currentPartition": 4,
+        "partitionsWithReports": [],
+        "value": null,
+        "monthlyUsd": null,
+        "multiple": null,
+        "range": null,
+        "reports": [
+          {
+            "id": "genellect-pro200",
+            "observer": "genellect",
+            "valueLower": 2000.0,
+            "valueUpper": 2000.0,
+            "partition": null,
+            "provisional": false,
+            "speedMode": "fast",
+            "excluded": "mixed-model usage"
+          }
+        ],
+        "admittingObservers": []
       },
       {
         "provider": "OpenAI",
@@ -14729,34 +16031,13 @@
         "status": "fails: 0 non-provisional report(s) in the current partition",
         "currentPartition": 4,
         "partitionsWithReports": [
-          0,
-          3
+          0
         ],
         "value": null,
         "monthlyUsd": null,
         "multiple": null,
         "range": null,
         "reports": [
-          {
-            "id": "dhadaptive-pro200",
-            "observer": "DhAdaptive",
-            "valueLower": 1004.0,
-            "valueUpper": 1020.0,
-            "partition": 0,
-            "provisional": false,
-            "speedMode": "fast",
-            "excluded": null
-          },
-          {
-            "id": "sadiqmdasif-pro200",
-            "observer": "sadiqmdasif",
-            "valueLower": 105.0,
-            "valueUpper": 130.0,
-            "partition": 3,
-            "provisional": false,
-            "speedMode": null,
-            "excluded": null
-          },
           {
             "id": "janrysavy-pro200",
             "observer": "janrysavy",
@@ -14766,8 +16047,29 @@
             "provisional": false,
             "speedMode": null,
             "excluded": "mixed-model usage"
+          },
+          {
+            "id": "sadiqmdasif-pro200",
+            "observer": "sadiqmdasif",
+            "valueLower": 105.0,
+            "valueUpper": 130.0,
+            "partition": null,
+            "provisional": false,
+            "speedMode": null,
+            "excluded": "an anomaly or legacy-account report"
+          },
+          {
+            "id": "dhadaptive-pro200",
+            "observer": "DhAdaptive",
+            "valueLower": 1003.75,
+            "valueUpper": 1019.75,
+            "partition": 0,
+            "provisional": false,
+            "speedMode": "fast",
+            "excluded": null
           }
-        ]
+        ],
+        "admittingObservers": []
       },
       {
         "provider": "OpenAI",
@@ -14793,7 +16095,8 @@
             "speedMode": "fast",
             "excluded": "measured on a provider-acknowledged accounting-fault day"
           }
-        ]
+        ],
+        "admittingObservers": []
       },
       {
         "provider": "OpenAI",
@@ -14812,14 +16115,15 @@
           {
             "id": "dhadaptive-pro500",
             "observer": "DhAdaptive",
-            "valueLower": 919.0,
-            "valueUpper": 964.0,
+            "valueLower": 963.75,
+            "valueUpper": 963.75,
             "partition": null,
             "provisional": false,
             "speedMode": "fast",
             "excluded": "measured on a provider-acknowledged accounting-fault day"
           }
-        ]
+        ],
+        "admittingObservers": []
       },
       {
         "provider": "Xiaomi",
@@ -14850,7 +16154,8 @@
             "speedMode": null,
             "excluded": null
           }
-        ]
+        ],
+        "admittingObservers": []
       },
       {
         "provider": "Xiaomi",
@@ -14881,7 +16186,8 @@
             "speedMode": null,
             "excluded": null
           }
-        ]
+        ],
+        "admittingObservers": []
       }
     ],
     "costInfluence": {
@@ -30186,7 +31492,7 @@
         {
           "key": "planRoutes",
           "artifact": "data/plan_cost_routes.json",
-          "sha256": "8b4f9f959f7a7693b92fe9b71861a9afe4e967d8bb760c3439cda47297894f0f",
+          "sha256": "db7d3a0addde78a2cb495e4d34931050192c75a604a51bcc720cc81779bc9582",
           "capturedAt": "2026-10-25",
           "extractor": "editorial Plan evidence registry"
         },
@@ -30221,7 +31527,7 @@
         {
           "key": "planReports",
           "artifact": "data/plan_reports.json",
-          "sha256": "996c3d029aac745a9838936422b95c027c15a7a7cc5ccc38924e6436cd4ec798",
+          "sha256": "c017edb8177d638c98e5e3d55b7e94b2d14335f19283b6d90c331ee54550cfc6",
           "capturedAt": "2026-10-25",
           "extractor": "editorial table of every O71 user report with the facts E270 needs; the build derives admission from it (O81)"
         },
@@ -30254,7 +31560,7 @@
           "extractor": "valuerank.value_v3 freeze"
         }
       ],
-      "bundleHash": "81e3536ec92a0e53a334a9aa6868503b8e99f197a6ce03a9f1cf12766552cb69",
+      "bundleHash": "f45dff0781c9720605f9fd1816d387d380fc469dba0aad858b2c25b5e182d71d",
       "rebuild": "every published output is rebuilt from these artifacts at the pinned publication clock (npm run verify:docs), never from live pages"
     },
     "track": {
@@ -36452,6 +37758,80 @@
       "planAllowanceCells": [
         {
           "provider": "Anthropic",
+          "plan": "Claude (plan redacted)",
+          "modelId": "claude-opus-5-5",
+          "unit": "week",
+          "region": "global",
+          "status": "not a listed plan",
+          "currentPartition": 0,
+          "partitionsWithReports": [],
+          "value": null,
+          "monthlyUsd": null,
+          "multiple": null,
+          "range": null,
+          "reports": [
+            {
+              "id": "leolim031-opus",
+              "observer": "leolim031",
+              "valueLower": 1200.0,
+              "valueUpper": 1200.0,
+              "partition": null,
+              "provisional": false,
+              "speedMode": null,
+              "excluded": "tier not stated"
+            }
+          ],
+          "admittingObservers": []
+        },
+        {
+          "provider": "Anthropic",
+          "plan": "Claude Max (tier unstated)",
+          "modelId": "claude-opus-5-5",
+          "unit": "week",
+          "region": "global",
+          "status": "not a listed plan",
+          "currentPartition": 0,
+          "partitionsWithReports": [],
+          "value": null,
+          "monthlyUsd": null,
+          "multiple": null,
+          "range": null,
+          "reports": [
+            {
+              "id": "kakki-1-max-0927",
+              "observer": "kakki-1",
+              "valueLower": 1028.0,
+              "valueUpper": 1286.0,
+              "partition": null,
+              "provisional": false,
+              "speedMode": null,
+              "excluded": "mixed-model usage"
+            },
+            {
+              "id": "kakki-1-max-1016",
+              "observer": "kakki-1",
+              "valueLower": 1082.0,
+              "valueUpper": 1306.0,
+              "partition": null,
+              "provisional": false,
+              "speedMode": null,
+              "excluded": "lower bound: no meter fraction"
+            },
+            {
+              "id": "kakki-1-max-1024",
+              "observer": "kakki-1",
+              "valueLower": 660.0,
+              "valueUpper": 1080.0,
+              "partition": null,
+              "provisional": false,
+              "speedMode": null,
+              "excluded": "mixed-model usage"
+            }
+          ],
+          "admittingObservers": []
+        },
+        {
+          "provider": "Anthropic",
           "plan": "Claude Max 20x",
           "modelId": null,
           "unit": "week",
@@ -36473,8 +37853,125 @@
               "provisional": false,
               "speedMode": null,
               "excluded": "model not stated"
+            },
+            {
+              "id": "fancy-leave-max20x",
+              "observer": "Fancy_Leave7798",
+              "valueLower": 1960.0,
+              "valueUpper": 1963.0,
+              "partition": null,
+              "provisional": false,
+              "speedMode": null,
+              "excluded": "model not stated"
+            },
+            {
+              "id": "omeganetrob-max20x",
+              "observer": "OmegaNetRob",
+              "valueLower": 4580.0,
+              "valueUpper": 4580.0,
+              "partition": null,
+              "provisional": false,
+              "speedMode": null,
+              "excluded": "model not stated"
+            },
+            {
+              "id": "bobothepirate-max20x",
+              "observer": "BoboThePirate",
+              "valueLower": 2000.0,
+              "valueUpper": 2000.0,
+              "partition": null,
+              "provisional": false,
+              "speedMode": null,
+              "excluded": "lower bound: no meter fraction"
+            },
+            {
+              "id": "cannonpalms-max20x",
+              "observer": "cannonpalms",
+              "valueLower": 2000.0,
+              "valueUpper": 2000.0,
+              "partition": null,
+              "provisional": false,
+              "speedMode": null,
+              "excluded": "lower bound: no meter fraction"
+            },
+            {
+              "id": "wokey-max20x",
+              "observer": "wokey.ai",
+              "valueLower": 1547.0,
+              "valueUpper": 1751.0,
+              "partition": null,
+              "provisional": false,
+              "speedMode": null,
+              "excluded": "mixed-model usage"
             }
-          ]
+          ],
+          "admittingObservers": []
+        },
+        {
+          "provider": "Anthropic",
+          "plan": "Claude Max 20x",
+          "modelId": "claude-opus-5-5",
+          "unit": "5h",
+          "region": "global",
+          "status": "fails: a 5-hour figure never converts to a billing period (O82)",
+          "currentPartition": 1,
+          "partitionsWithReports": [
+            0
+          ],
+          "value": null,
+          "monthlyUsd": null,
+          "multiple": null,
+          "range": null,
+          "reports": [
+            {
+              "id": "kanttz-max20x-5h",
+              "observer": "Kanttz",
+              "valueLower": 662.0,
+              "valueUpper": 754.0,
+              "partition": 0,
+              "provisional": false,
+              "speedMode": null,
+              "excluded": null
+            },
+            {
+              "id": "miaai-max20x-5h",
+              "observer": "MiaAI_lab",
+              "valueLower": 630.0,
+              "valueUpper": 645.0,
+              "partition": null,
+              "provisional": true,
+              "speedMode": null,
+              "excluded": "measured outside the report window"
+            }
+          ],
+          "admittingObservers": []
+        },
+        {
+          "provider": "Anthropic",
+          "plan": "Claude Max 20x",
+          "modelId": "claude-opus-5-5",
+          "unit": "month",
+          "region": "global",
+          "status": "fails: 0 non-provisional report(s) in the current partition",
+          "currentPartition": 1,
+          "partitionsWithReports": [],
+          "value": null,
+          "monthlyUsd": null,
+          "multiple": null,
+          "range": null,
+          "reports": [
+            {
+              "id": "semianalysis-max20x",
+              "observer": "SemiAnalysis",
+              "valueLower": 9385.0,
+              "valueUpper": 11726.0,
+              "partition": null,
+              "provisional": false,
+              "speedMode": null,
+              "excluded": "aggregator or derived figure (cross-check only)"
+            }
+          ],
+          "admittingObservers": []
         },
         {
           "provider": "Anthropic",
@@ -36499,7 +37996,7 @@
             {
               "id": "kanttz-max20x",
               "observer": "Kanttz",
-              "valueLower": 2578.0,
+              "valueLower": 2484.0,
               "valueUpper": 2920.0,
               "partition": 0,
               "provisional": false,
@@ -36519,7 +38016,7 @@
             {
               "id": "last-lab-max20x",
               "observer": "Last_Lab_3627",
-              "valueLower": 2045.0,
+              "valueLower": 2000.0,
               "valueUpper": 2045.0,
               "partition": 0,
               "provisional": false,
@@ -36565,8 +38062,49 @@
               "provisional": false,
               "speedMode": null,
               "excluded": "challenged: does not reproduce from its own figures"
+            },
+            {
+              "id": "tomm3hshipp-max20x",
+              "observer": "tomm3hshipp",
+              "valueLower": 2330.0,
+              "valueUpper": 2639.0,
+              "partition": null,
+              "provisional": false,
+              "speedMode": null,
+              "excluded": "mixed-model usage"
+            },
+            {
+              "id": "pelora-max20x",
+              "observer": "PELORA-MARKETING",
+              "valueLower": 2857.0,
+              "valueUpper": 2857.0,
+              "partition": null,
+              "provisional": false,
+              "speedMode": null,
+              "excluded": "mixed-model usage"
+            },
+            {
+              "id": "daakkast-max20x",
+              "observer": "daakkast",
+              "valueLower": 1077.0,
+              "valueUpper": 1077.0,
+              "partition": null,
+              "provisional": false,
+              "speedMode": null,
+              "excluded": "mixed-model usage"
+            },
+            {
+              "id": "daakkast-max20x-launch-week",
+              "observer": "daakkast",
+              "valueLower": 4000.0,
+              "valueUpper": 4000.0,
+              "partition": null,
+              "provisional": false,
+              "speedMode": null,
+              "excluded": "lower bound: no meter fraction"
             }
-          ]
+          ],
+          "admittingObservers": []
         },
         {
           "provider": "Anthropic",
@@ -36592,7 +38130,35 @@
               "speedMode": null,
               "excluded": "model not stated"
             }
-          ]
+          ],
+          "admittingObservers": []
+        },
+        {
+          "provider": "Anthropic",
+          "plan": "Claude Max 5x",
+          "modelId": "claude-opus-5-5",
+          "unit": "month",
+          "region": "global",
+          "status": "fails: 0 non-provisional report(s) in the current partition",
+          "currentPartition": 1,
+          "partitionsWithReports": [],
+          "value": null,
+          "monthlyUsd": null,
+          "multiple": null,
+          "range": null,
+          "reports": [
+            {
+              "id": "emarkosov-max5x",
+              "observer": "emarkosov",
+              "valueLower": 1900.0,
+              "valueUpper": 1900.0,
+              "partition": null,
+              "provisional": false,
+              "speedMode": null,
+              "excluded": "lower bound: no meter fraction"
+            }
+          ],
+          "admittingObservers": []
         },
         {
           "provider": "Anthropic",
@@ -36622,7 +38188,7 @@
             },
             {
               "id": "usage-screenshot-max5x",
-              "observer": "unlabelled /usage screenshot (week of 2026-09-29)",
+              "observer": "unlabelled /usage screenshot",
               "valueLower": 1920.0,
               "valueUpper": 1920.0,
               "partition": 0,
@@ -36630,7 +38196,8 @@
               "speedMode": null,
               "excluded": null
             }
-          ]
+          ],
+          "admittingObservers": []
         },
         {
           "provider": "Anthropic",
@@ -36649,14 +38216,104 @@
             {
               "id": "wokey-pro",
               "observer": "wokey.ai",
-              "valueLower": 170.0,
-              "valueUpper": 170.0,
+              "valueLower": 158.0,
+              "valueUpper": 182.0,
               "partition": null,
               "provisional": false,
               "speedMode": null,
-              "excluded": "aggregator or derived figure (cross-check only)"
+              "excluded": "mixed-model usage"
             }
-          ]
+          ],
+          "admittingObservers": []
+        },
+        {
+          "provider": "Anthropic",
+          "plan": "Claude Pro",
+          "modelId": "claude-opus-5-5",
+          "unit": "5h",
+          "region": "global",
+          "status": "fails: a 5-hour figure never converts to a billing period (O82)",
+          "currentPartition": 1,
+          "partitionsWithReports": [
+            1
+          ],
+          "value": null,
+          "monthlyUsd": null,
+          "multiple": null,
+          "range": [
+            42.0,
+            42.0
+          ],
+          "reports": [
+            {
+              "id": "k45sle-pro-5h",
+              "observer": "K45SLE",
+              "valueLower": 42.0,
+              "valueUpper": 42.0,
+              "partition": 1,
+              "provisional": true,
+              "speedMode": null,
+              "excluded": null
+            },
+            {
+              "id": "ok-cauliflower-pro-5h",
+              "observer": "Ok-Cauliflower-7568",
+              "valueLower": 32.97,
+              "valueUpper": 32.97,
+              "partition": null,
+              "provisional": false,
+              "speedMode": null,
+              "excluded": "mixed-model usage"
+            },
+            {
+              "id": "reddit-claudecode-pro-5h",
+              "observer": "Reddit r/ClaudeCode (≈2026-09-24; URL not recovered)",
+              "valueLower": 40.48,
+              "valueUpper": 40.48,
+              "partition": null,
+              "provisional": false,
+              "speedMode": null,
+              "excluded": "measured outside the report window"
+            },
+            {
+              "id": "planyy-pro-5h",
+              "observer": "Planyy",
+              "valueLower": 40.0,
+              "valueUpper": 50.0,
+              "partition": null,
+              "provisional": false,
+              "speedMode": null,
+              "excluded": "mixed-model usage"
+            }
+          ],
+          "admittingObservers": []
+        },
+        {
+          "provider": "Anthropic",
+          "plan": "Claude Pro",
+          "modelId": "claude-opus-5-5",
+          "unit": "month",
+          "region": "global",
+          "status": "fails: 0 non-provisional report(s) in the current partition",
+          "currentPartition": 1,
+          "partitionsWithReports": [],
+          "value": null,
+          "monthlyUsd": null,
+          "multiple": null,
+          "range": null,
+          "reports": [
+            {
+              "id": "hakanavgin-pro-month",
+              "observer": "hakanavgin",
+              "valueLower": 1150.0,
+              "valueUpper": 1150.0,
+              "partition": null,
+              "provisional": false,
+              "speedMode": null,
+              "excluded": "mixed-model usage"
+            }
+          ],
+          "admittingObservers": []
         },
         {
           "provider": "Anthropic",
@@ -36701,8 +38358,8 @@
             {
               "id": "ganpei777-pro",
               "observer": "ganpei777",
-              "valueLower": 1266.0,
-              "valueUpper": 1266.0,
+              "valueLower": 1266.15,
+              "valueUpper": 1266.15,
               "partition": 0,
               "provisional": false,
               "speedMode": null,
@@ -36740,15 +38397,90 @@
             },
             {
               "id": "issue47-pro",
-              "observer": "Fei2411 #47",
+              "observer": "devin-ai-integration (bot) for a user",
               "valueLower": 112.0,
               "valueUpper": 112.0,
               "partition": null,
               "provisional": false,
               "speedMode": null,
               "excluded": "lower bound: no meter fraction"
+            },
+            {
+              "id": "reddit-claudecode-pro",
+              "observer": "Reddit r/ClaudeCode (≈2026-09-24; URL not recovered)",
+              "valueLower": 304.0,
+              "valueUpper": 304.0,
+              "partition": null,
+              "provisional": false,
+              "speedMode": null,
+              "excluded": "measured outside the report window"
+            },
+            {
+              "id": "planyy-pro",
+              "observer": "Planyy",
+              "valueLower": 400.0,
+              "valueUpper": 500.0,
+              "partition": null,
+              "provisional": false,
+              "speedMode": null,
+              "excluded": "mixed-model usage"
             }
-          ]
+          ],
+          "admittingObservers": []
+        },
+        {
+          "provider": "Anthropic",
+          "plan": "Claude Team Premium",
+          "modelId": "claude-opus-5-5",
+          "unit": "week",
+          "region": "global",
+          "status": "not a listed plan",
+          "currentPartition": 0,
+          "partitionsWithReports": [],
+          "value": null,
+          "monthlyUsd": null,
+          "multiple": null,
+          "range": null,
+          "reports": [
+            {
+              "id": "leo114119-team-premium",
+              "observer": "leo114119",
+              "valueLower": 1320.38,
+              "valueUpper": 1320.38,
+              "partition": null,
+              "provisional": false,
+              "speedMode": null,
+              "excluded": "lower bound: no meter fraction"
+            }
+          ],
+          "admittingObservers": []
+        },
+        {
+          "provider": "Google",
+          "plan": "Google AI (tier unstated)",
+          "modelId": "gemini-4-argon",
+          "unit": "week",
+          "region": "global",
+          "status": "not a listed plan",
+          "currentPartition": 0,
+          "partitionsWithReports": [],
+          "value": null,
+          "monthlyUsd": null,
+          "multiple": null,
+          "range": null,
+          "reports": [
+            {
+              "id": "spin-pyokosmeme-argon",
+              "observer": "@spin.pyokosmeme.group",
+              "valueLower": 50.0,
+              "valueUpper": 50.0,
+              "partition": null,
+              "provisional": false,
+              "speedMode": null,
+              "excluded": "tier not stated"
+            }
+          ],
+          "admittingObservers": []
         },
         {
           "provider": "Google",
@@ -36799,7 +38531,124 @@
               "speedMode": null,
               "excluded": null
             }
-          ]
+          ],
+          "admittingObservers": []
+        },
+        {
+          "provider": "Kimi",
+          "plan": "Kimi Allegretto (legacy, CN)",
+          "modelId": "kimi-k3-1-pro",
+          "unit": "5h",
+          "region": "CN",
+          "status": "not a listed plan",
+          "currentPartition": 1,
+          "partitionsWithReports": [
+            0,
+            1
+          ],
+          "value": null,
+          "monthlyUsd": null,
+          "multiple": null,
+          "range": [
+            9.59,
+            9.59
+          ],
+          "reports": [
+            {
+              "id": "fcten-allegretto-5h-t1",
+              "observer": "fcten",
+              "valueLower": 6.39,
+              "valueUpper": 6.39,
+              "partition": 0,
+              "provisional": false,
+              "speedMode": null,
+              "excluded": null
+            },
+            {
+              "id": "fcten-allegretto-5h-t2",
+              "observer": "fcten",
+              "valueLower": 9.59,
+              "valueUpper": 9.59,
+              "partition": 1,
+              "provisional": false,
+              "speedMode": null,
+              "excluded": null
+            },
+            {
+              "id": "astralyn-allegretto-5h",
+              "observer": "Astralyn",
+              "valueLower": 11.18,
+              "valueUpper": 11.18,
+              "partition": null,
+              "provisional": false,
+              "speedMode": null,
+              "excluded": "the research's own arithmetic, not a figure the observer reported"
+            },
+            {
+              "id": "weibo-allegretto",
+              "observer": "贾凡-失落的大蒜",
+              "valueLower": 10.0,
+              "valueUpper": 10.0,
+              "partition": null,
+              "provisional": false,
+              "speedMode": null,
+              "excluded": "spans a partition split"
+            }
+          ],
+          "admittingObservers": []
+        },
+        {
+          "provider": "Kimi",
+          "plan": "Kimi Allegretto (legacy, CN)",
+          "modelId": "kimi-k3-1-pro",
+          "unit": "month",
+          "region": "CN",
+          "status": "not a listed plan",
+          "currentPartition": 1,
+          "partitionsWithReports": [
+            0,
+            1
+          ],
+          "value": null,
+          "monthlyUsd": null,
+          "multiple": null,
+          "range": [
+            240.0,
+            240.0
+          ],
+          "reports": [
+            {
+              "id": "fcten-allegretto-month-t1",
+              "observer": "fcten",
+              "valueLower": 159.0,
+              "valueUpper": 159.0,
+              "partition": 0,
+              "provisional": false,
+              "speedMode": null,
+              "excluded": null
+            },
+            {
+              "id": "fcten-allegretto-month-t2",
+              "observer": "fcten",
+              "valueLower": 240.0,
+              "valueUpper": 240.0,
+              "partition": 1,
+              "provisional": false,
+              "speedMode": null,
+              "excluded": null
+            },
+            {
+              "id": "astralyn-allegretto-month",
+              "observer": "Astralyn",
+              "valueLower": 279.0,
+              "valueUpper": 279.0,
+              "partition": null,
+              "provisional": false,
+              "speedMode": null,
+              "excluded": "the research's own arithmetic, not a figure the observer reported"
+            }
+          ],
+          "admittingObservers": []
         },
         {
           "provider": "Kimi",
@@ -36810,37 +38659,242 @@
           "status": "not a listed plan",
           "currentPartition": 1,
           "partitionsWithReports": [
-            1
+            0
           ],
           "value": null,
           "monthlyUsd": null,
           "multiple": null,
-          "range": [
-            48.6,
-            55.9
-          ],
+          "range": null,
           "reports": [
+            {
+              "id": "fcten-allegretto-week-t1",
+              "observer": "fcten",
+              "valueLower": 31.8,
+              "valueUpper": 31.8,
+              "partition": 0,
+              "provisional": false,
+              "speedMode": null,
+              "excluded": null
+            },
             {
               "id": "astralyn-allegretto",
               "observer": "Astralyn",
               "valueLower": 55.9,
               "valueUpper": 55.9,
-              "partition": 1,
+              "partition": null,
               "provisional": false,
               "speedMode": null,
-              "excluded": null
+              "excluded": "the research's own arithmetic, not a figure the observer reported"
             },
             {
               "id": "moondrinker-allegretto",
               "observer": "MoonDrinker",
               "valueLower": 48.6,
               "valueUpper": 48.6,
-              "partition": 1,
+              "partition": null,
+              "provisional": false,
+              "speedMode": null,
+              "excluded": "the research's own arithmetic, not a figure the observer reported"
+            }
+          ],
+          "admittingObservers": []
+        },
+        {
+          "provider": "Kimi",
+          "plan": "Kimi Allegro (legacy, CN)",
+          "modelId": "kimi-k3-1-pro",
+          "unit": "5h",
+          "region": "CN",
+          "status": "not a listed plan",
+          "currentPartition": 1,
+          "partitionsWithReports": [
+            0
+          ],
+          "value": null,
+          "monthlyUsd": null,
+          "multiple": null,
+          "range": null,
+          "reports": [
+            {
+              "id": "kojimako-allegro-5h-1024",
+              "observer": "kojimako",
+              "valueLower": 21.7,
+              "valueUpper": 21.7,
+              "partition": null,
+              "provisional": false,
+              "speedMode": null,
+              "excluded": "the research's own arithmetic, not a figure the observer reported"
+            },
+            {
+              "id": "kojimako-allegro-5h-1025",
+              "observer": "kojimako",
+              "valueLower": 33.5,
+              "valueUpper": 33.5,
+              "partition": null,
+              "provisional": false,
+              "speedMode": null,
+              "excluded": "the research's own arithmetic, not a figure the observer reported"
+            },
+            {
+              "id": "raymondchau-allegro",
+              "observer": "raymondchau",
+              "valueLower": 12.4,
+              "valueUpper": 12.4,
+              "partition": 0,
               "provisional": false,
               "speedMode": null,
               "excluded": null
+            },
+            {
+              "id": "okarin-allegro-5h",
+              "observer": "okarin",
+              "valueLower": 25.8,
+              "valueUpper": 25.8,
+              "partition": null,
+              "provisional": false,
+              "speedMode": null,
+              "excluded": "the research's own arithmetic, not a figure the observer reported"
+            },
+            {
+              "id": "weibo-allegro",
+              "observer": "贾凡-失落的大蒜",
+              "valueLower": 25.0,
+              "valueUpper": 25.0,
+              "partition": null,
+              "provisional": false,
+              "speedMode": null,
+              "excluded": "spans a partition split"
             }
-          ]
+          ],
+          "admittingObservers": []
+        },
+        {
+          "provider": "Kimi",
+          "plan": "Kimi Allegro (legacy, CN)",
+          "modelId": "kimi-k3-1-pro",
+          "unit": "month",
+          "region": "CN",
+          "status": "not a listed plan",
+          "currentPartition": 1,
+          "partitionsWithReports": [],
+          "value": null,
+          "monthlyUsd": null,
+          "multiple": null,
+          "range": null,
+          "reports": [
+            {
+              "id": "okarin-allegro-month",
+              "observer": "okarin",
+              "valueLower": 646.0,
+              "valueUpper": 646.0,
+              "partition": null,
+              "provisional": false,
+              "speedMode": null,
+              "excluded": "the research's own arithmetic, not a figure the observer reported"
+            }
+          ],
+          "admittingObservers": []
+        },
+        {
+          "provider": "Kimi",
+          "plan": "Kimi Allegro (legacy, CN)",
+          "modelId": "kimi-k3-1-pro",
+          "unit": "week",
+          "region": "CN",
+          "status": "not a listed plan",
+          "currentPartition": 1,
+          "partitionsWithReports": [],
+          "value": null,
+          "monthlyUsd": null,
+          "multiple": null,
+          "range": null,
+          "reports": [
+            {
+              "id": "kojimako-allegro-week-1024",
+              "observer": "kojimako",
+              "valueLower": 108.6,
+              "valueUpper": 108.6,
+              "partition": null,
+              "provisional": false,
+              "speedMode": null,
+              "excluded": "the research's own arithmetic, not a figure the observer reported"
+            },
+            {
+              "id": "kojimako-allegro-week-1025",
+              "observer": "kojimako",
+              "valueLower": 167.0,
+              "valueUpper": 167.0,
+              "partition": null,
+              "provisional": false,
+              "speedMode": null,
+              "excluded": "the research's own arithmetic, not a figure the observer reported"
+            }
+          ],
+          "admittingObservers": []
+        },
+        {
+          "provider": "Kimi",
+          "plan": "Kimi Max (new, CN)",
+          "modelId": "kimi-k3-1-pro",
+          "unit": "5h",
+          "region": "CN",
+          "status": "not a listed plan",
+          "currentPartition": 1,
+          "partitionsWithReports": [],
+          "value": null,
+          "monthlyUsd": null,
+          "multiple": null,
+          "range": null,
+          "reports": [
+            {
+              "id": "okarin-max-new-5h",
+              "observer": "okarin",
+              "valueLower": 13.42,
+              "valueUpper": 13.42,
+              "partition": null,
+              "provisional": false,
+              "speedMode": null,
+              "excluded": "the research's own arithmetic, not a figure the observer reported"
+            },
+            {
+              "id": "weibo-max",
+              "observer": "贾凡-失落的大蒜",
+              "valueLower": 13.9,
+              "valueUpper": 13.9,
+              "partition": null,
+              "provisional": false,
+              "speedMode": null,
+              "excluded": "spans a partition split"
+            }
+          ],
+          "admittingObservers": []
+        },
+        {
+          "provider": "Kimi",
+          "plan": "Kimi Max (new, CN)",
+          "modelId": "kimi-k3-1-pro",
+          "unit": "month",
+          "region": "CN",
+          "status": "not a listed plan",
+          "currentPartition": 1,
+          "partitionsWithReports": [],
+          "value": null,
+          "monthlyUsd": null,
+          "multiple": null,
+          "range": null,
+          "reports": [
+            {
+              "id": "okarin-max-new-month",
+              "observer": "okarin",
+              "valueLower": 333.0,
+              "valueUpper": 333.0,
+              "partition": null,
+              "provisional": false,
+              "speedMode": null,
+              "excluded": "the research's own arithmetic, not a figure the observer reported"
+            }
+          ],
+          "admittingObservers": []
         },
         {
           "provider": "Kimi",
@@ -36848,7 +38902,7 @@
           "modelId": "kimi-k3-1-pro",
           "unit": "5h",
           "region": "global",
-          "status": "fails: a 5-hour figure stays in its own unit (O80)",
+          "status": "fails: a 5-hour figure never converts to a billing period (O82)",
           "currentPartition": 1,
           "partitionsWithReports": [],
           "value": null,
@@ -36866,7 +38920,384 @@
               "speedMode": null,
               "excluded": "spans a partition split"
             }
-          ]
+          ],
+          "admittingObservers": []
+        },
+        {
+          "provider": "Kimi",
+          "plan": "Kimi Plus (new, CN)",
+          "modelId": "kimi-k3-1-pro",
+          "unit": "5h",
+          "region": "CN",
+          "status": "not a listed plan",
+          "currentPartition": 1,
+          "partitionsWithReports": [],
+          "value": null,
+          "monthlyUsd": null,
+          "multiple": null,
+          "range": null,
+          "reports": [
+            {
+              "id": "weibo-plus",
+              "observer": "贾凡-失落的大蒜",
+              "valueLower": 0.9,
+              "valueUpper": 0.9,
+              "partition": null,
+              "provisional": false,
+              "speedMode": null,
+              "excluded": "spans a partition split"
+            }
+          ],
+          "admittingObservers": []
+        },
+        {
+          "provider": "Kimi",
+          "plan": "Kimi Pro (new, CN)",
+          "modelId": "kimi-k3-1-pro",
+          "unit": "5h",
+          "region": "CN",
+          "status": "not a listed plan",
+          "currentPartition": 1,
+          "partitionsWithReports": [],
+          "value": null,
+          "monthlyUsd": null,
+          "multiple": null,
+          "range": null,
+          "reports": [
+            {
+              "id": "weibo-pro",
+              "observer": "贾凡-失落的大蒜",
+              "valueLower": 4.3,
+              "valueUpper": 4.3,
+              "partition": null,
+              "provisional": false,
+              "speedMode": null,
+              "excluded": "spans a partition split"
+            }
+          ],
+          "admittingObservers": []
+        },
+        {
+          "provider": "Kimi",
+          "plan": "Kimi Ultra (new, CN)",
+          "modelId": "kimi-k3-1-pro",
+          "unit": "5h",
+          "region": "CN",
+          "status": "not a listed plan",
+          "currentPartition": 1,
+          "partitionsWithReports": [],
+          "value": null,
+          "monthlyUsd": null,
+          "multiple": null,
+          "range": null,
+          "reports": [
+            {
+              "id": "weibo-ultra",
+              "observer": "贾凡-失落的大蒜",
+              "valueLower": 27.8,
+              "valueUpper": 27.8,
+              "partition": null,
+              "provisional": false,
+              "speedMode": null,
+              "excluded": "spans a partition split"
+            }
+          ],
+          "admittingObservers": []
+        },
+        {
+          "provider": "Kimi",
+          "plan": "Kimi legacy plan (tier not stated, CN)",
+          "modelId": "kimi-k3-1-pro",
+          "unit": "5h",
+          "region": "CN",
+          "status": "not a listed plan",
+          "currentPartition": 1,
+          "partitionsWithReports": [],
+          "value": null,
+          "monthlyUsd": null,
+          "multiple": null,
+          "range": null,
+          "reports": [
+            {
+              "id": "choulei-legacy",
+              "observer": "choulei",
+              "valueLower": 10.0,
+              "valueUpper": 10.09,
+              "partition": null,
+              "provisional": false,
+              "speedMode": null,
+              "excluded": "tier not stated"
+            }
+          ],
+          "admittingObservers": []
+        },
+        {
+          "provider": "Kimi",
+          "plan": "Kimi ¥199 plan (legacy or new not stated, CN)",
+          "modelId": "kimi-k3-1-pro",
+          "unit": "5h",
+          "region": "CN",
+          "status": "not a listed plan",
+          "currentPartition": 1,
+          "partitionsWithReports": [],
+          "value": null,
+          "monthlyUsd": null,
+          "multiple": null,
+          "range": null,
+          "reports": [
+            {
+              "id": "hanashiro-199-1024",
+              "observer": "hanashiro",
+              "valueLower": 2.9,
+              "valueUpper": 48.6,
+              "partition": null,
+              "provisional": false,
+              "speedMode": null,
+              "excluded": "tier not stated"
+            },
+            {
+              "id": "hanashiro-199-1025",
+              "observer": "hanashiro",
+              "valueLower": 4.5,
+              "valueUpper": 36.0,
+              "partition": null,
+              "provisional": false,
+              "speedMode": null,
+              "excluded": "tier not stated"
+            }
+          ],
+          "admittingObservers": []
+        },
+        {
+          "provider": "MiniMax",
+          "plan": "MiniMax M Plan (tier unstated)",
+          "modelId": "minimax-m3-1-flash",
+          "unit": "week",
+          "region": "global",
+          "status": "not a listed plan",
+          "currentPartition": 0,
+          "partitionsWithReports": [],
+          "value": null,
+          "monthlyUsd": null,
+          "multiple": null,
+          "range": null,
+          "reports": [
+            {
+              "id": "nnayrdev-mplan",
+              "observer": "nnayrdev",
+              "valueLower": 3.9,
+              "valueUpper": 15.5,
+              "partition": null,
+              "provisional": true,
+              "speedMode": null,
+              "excluded": "tier not stated"
+            }
+          ],
+          "admittingObservers": []
+        },
+        {
+          "provider": "MiniMax",
+          "plan": "MiniMax Token Plan Max (legacy)",
+          "modelId": "minimax-m3-1-flash",
+          "unit": "5h",
+          "region": "global",
+          "status": "not a listed plan",
+          "currentPartition": 0,
+          "partitionsWithReports": [
+            0
+          ],
+          "value": null,
+          "monthlyUsd": null,
+          "multiple": null,
+          "range": [
+            5.7,
+            9.8
+          ],
+          "reports": [
+            {
+              "id": "illustrious-tokenplan-max",
+              "observer": "Illustrious-Many-782",
+              "valueLower": 5.7,
+              "valueUpper": 9.8,
+              "partition": 0,
+              "provisional": true,
+              "speedMode": null,
+              "excluded": null
+            }
+          ],
+          "admittingObservers": []
+        },
+        {
+          "provider": "MiniMax",
+          "plan": "MiniMax Token Plan Max (legacy)",
+          "modelId": "minimax-m3-1-flash",
+          "unit": "week",
+          "region": "global",
+          "status": "not a listed plan",
+          "currentPartition": 0,
+          "partitionsWithReports": [
+            0
+          ],
+          "value": null,
+          "monthlyUsd": null,
+          "multiple": null,
+          "range": [
+            60.0,
+            127.0
+          ],
+          "reports": [
+            {
+              "id": "money-string-tokenplan-max",
+              "observer": "Money-String4165",
+              "valueLower": 60.0,
+              "valueUpper": 127.0,
+              "partition": 0,
+              "provisional": true,
+              "speedMode": null,
+              "excluded": null
+            }
+          ],
+          "admittingObservers": []
+        },
+        {
+          "provider": "MiniMax",
+          "plan": "MiniMax Token Plan lowest tier (legacy)",
+          "modelId": "minimax-m3-1-flash",
+          "unit": "5h",
+          "region": "global",
+          "status": "not a listed plan",
+          "currentPartition": 0,
+          "partitionsWithReports": [
+            0
+          ],
+          "value": null,
+          "monthlyUsd": null,
+          "multiple": null,
+          "range": [
+            3.5,
+            13.5
+          ],
+          "reports": [
+            {
+              "id": "awayteamredshirt-tokenplan-lowest",
+              "observer": "AwayTeamRedShirt",
+              "valueLower": 3.5,
+              "valueUpper": 13.5,
+              "partition": 0,
+              "provisional": true,
+              "speedMode": null,
+              "excluded": null
+            }
+          ],
+          "admittingObservers": []
+        },
+        {
+          "provider": "MiniMax",
+          "plan": "MiniMax lowest tier (\"lite\")",
+          "modelId": null,
+          "unit": "week",
+          "region": "global",
+          "status": "not a listed plan",
+          "currentPartition": 0,
+          "partitionsWithReports": [],
+          "value": null,
+          "monthlyUsd": null,
+          "multiple": null,
+          "range": null,
+          "reports": [
+            {
+              "id": "considerationno9952-minimax",
+              "observer": "ConsiderationNo9952",
+              "valueLower": 21.0,
+              "valueUpper": 33.0,
+              "partition": null,
+              "provisional": false,
+              "speedMode": null,
+              "excluded": "lower bound: no meter fraction"
+            }
+          ],
+          "admittingObservers": []
+        },
+        {
+          "provider": "OpenAI",
+          "plan": "ChatGPT (legacy account, tier unstated)",
+          "modelId": "gpt-6.1-sol",
+          "unit": "week",
+          "region": "global",
+          "status": "not a listed plan",
+          "currentPartition": 4,
+          "partitionsWithReports": [],
+          "value": null,
+          "monthlyUsd": null,
+          "multiple": null,
+          "range": null,
+          "reports": [
+            {
+              "id": "danikk-sol",
+              "observer": "Danikk",
+              "valueLower": 46.0,
+              "valueUpper": 46.0,
+              "partition": null,
+              "provisional": false,
+              "speedMode": null,
+              "excluded": "tier not stated"
+            }
+          ],
+          "admittingObservers": []
+        },
+        {
+          "provider": "OpenAI",
+          "plan": "ChatGPT Plus",
+          "modelId": "gpt-5.6-luna-low",
+          "unit": "5h",
+          "region": "global",
+          "status": "fails: a 5-hour figure never converts to a billing period (O82)",
+          "currentPartition": 4,
+          "partitionsWithReports": [],
+          "value": null,
+          "monthlyUsd": null,
+          "multiple": null,
+          "range": null,
+          "reports": [
+            {
+              "id": "tagorr-plus",
+              "observer": "tagorr",
+              "valueLower": 4.9,
+              "valueUpper": 4.9,
+              "partition": null,
+              "provisional": false,
+              "speedMode": null,
+              "excluded": "an anomaly or legacy-account report"
+            }
+          ],
+          "admittingObservers": []
+        },
+        {
+          "provider": "OpenAI",
+          "plan": "ChatGPT Plus",
+          "modelId": "gpt-5.6-luna-low",
+          "unit": "week",
+          "region": "global",
+          "status": "fails: 0 non-provisional report(s) in the current partition",
+          "currentPartition": 4,
+          "partitionsWithReports": [],
+          "value": null,
+          "monthlyUsd": null,
+          "multiple": null,
+          "range": null,
+          "reports": [
+            {
+              "id": "shekelphile-plus",
+              "observer": "Shekelphile",
+              "valueLower": 150.0,
+              "valueUpper": 150.0,
+              "partition": null,
+              "provisional": false,
+              "speedMode": null,
+              "excluded": "measured outside the report window"
+            }
+          ],
+          "admittingObservers": []
         },
         {
           "provider": "OpenAI",
@@ -36874,7 +39305,7 @@
           "modelId": "gpt-6-astra",
           "unit": "5h",
           "region": "global",
-          "status": "fails: a 5-hour figure stays in its own unit (O80)",
+          "status": "fails: a 5-hour figure never converts to a billing period (O82)",
           "currentPartition": 4,
           "partitionsWithReports": [],
           "value": null,
@@ -36890,9 +39321,20 @@
               "partition": null,
               "provisional": false,
               "speedMode": null,
-              "excluded": "spans a partition split"
+              "excluded": "an anomaly or legacy-account report"
+            },
+            {
+              "id": "kamo-k-plus",
+              "observer": "kamo-k",
+              "valueLower": 15.5,
+              "valueUpper": 15.5,
+              "partition": null,
+              "provisional": false,
+              "speedMode": null,
+              "excluded": "an anomaly or legacy-account report"
             }
-          ]
+          ],
+          "admittingObservers": []
         },
         {
           "provider": "OpenAI",
@@ -36900,7 +39342,7 @@
           "modelId": "gpt-6-luna",
           "unit": "5h",
           "region": "global",
-          "status": "fails: a 5-hour figure stays in its own unit (O80)",
+          "status": "fails: a 5-hour figure never converts to a billing period (O82)",
           "currentPartition": 4,
           "partitionsWithReports": [
             0
@@ -36913,14 +39355,42 @@
             {
               "id": "yoggypap-plus",
               "observer": "yoggypap",
-              "valueLower": 6.5,
+              "valueLower": 5.0,
               "valueUpper": 7.5,
               "partition": 0,
               "provisional": false,
               "speedMode": null,
               "excluded": null
             }
-          ]
+          ],
+          "admittingObservers": []
+        },
+        {
+          "provider": "OpenAI",
+          "plan": "ChatGPT Plus",
+          "modelId": "gpt-6-luna",
+          "unit": "month",
+          "region": "global",
+          "status": "fails: 0 non-provisional report(s) in the current partition",
+          "currentPartition": 4,
+          "partitionsWithReports": [],
+          "value": null,
+          "monthlyUsd": null,
+          "multiple": null,
+          "range": null,
+          "reports": [
+            {
+              "id": "mekpro-plus",
+              "observer": "mekpro",
+              "valueLower": 100.0,
+              "valueUpper": 100.0,
+              "partition": null,
+              "provisional": false,
+              "speedMode": null,
+              "excluded": "lower bound: no meter fraction"
+            }
+          ],
+          "admittingObservers": []
         },
         {
           "provider": "OpenAI",
@@ -36928,7 +39398,7 @@
           "modelId": "gpt-6.1-sol",
           "unit": "5h",
           "region": "global",
-          "status": "fails: a 5-hour figure stays in its own unit (O80)",
+          "status": "fails: a 5-hour figure never converts to a billing period (O82)",
           "currentPartition": 4,
           "partitionsWithReports": [
             0
@@ -36957,8 +39427,85 @@
               "provisional": false,
               "speedMode": null,
               "excluded": "spans a partition split"
+            },
+            {
+              "id": "pasto-shouwa-plus-5h",
+              "observer": "Pasto_Shouwa",
+              "valueLower": 11.81,
+              "valueUpper": 11.81,
+              "partition": null,
+              "provisional": false,
+              "speedMode": null,
+              "excluded": "lower bound: no meter fraction"
             }
-          ]
+          ],
+          "admittingObservers": []
+        },
+        {
+          "provider": "OpenAI",
+          "plan": "ChatGPT Plus",
+          "modelId": "gpt-6.1-sol",
+          "unit": "week",
+          "region": "global",
+          "status": "fails: 0 non-provisional report(s) in the current partition",
+          "currentPartition": 4,
+          "partitionsWithReports": [
+            0
+          ],
+          "value": null,
+          "monthlyUsd": null,
+          "multiple": null,
+          "range": null,
+          "reports": [
+            {
+              "id": "mehoney-plus-week",
+              "observer": "mehoney",
+              "valueLower": 57.0,
+              "valueUpper": 57.0,
+              "partition": 0,
+              "provisional": false,
+              "speedMode": null,
+              "excluded": null
+            },
+            {
+              "id": "pasto-shouwa-plus-week",
+              "observer": "Pasto_Shouwa",
+              "valueLower": 65.6,
+              "valueUpper": 65.6,
+              "partition": null,
+              "provisional": false,
+              "speedMode": null,
+              "excluded": "lower bound: no meter fraction"
+            }
+          ],
+          "admittingObservers": []
+        },
+        {
+          "provider": "OpenAI",
+          "plan": "ChatGPT Pro (tier unstated)",
+          "modelId": "gpt-6-astra",
+          "unit": "week",
+          "region": "global",
+          "status": "not a listed plan",
+          "currentPartition": 4,
+          "partitionsWithReports": [],
+          "value": null,
+          "monthlyUsd": null,
+          "multiple": null,
+          "range": null,
+          "reports": [
+            {
+              "id": "ppgnox-pro",
+              "observer": "ppgnox",
+              "valueLower": 1700.0,
+              "valueUpper": 1700.0,
+              "partition": null,
+              "provisional": false,
+              "speedMode": null,
+              "excluded": "tier not stated"
+            }
+          ],
+          "admittingObservers": []
         },
         {
           "provider": "OpenAI",
@@ -36966,20 +39513,26 @@
           "modelId": "gpt-6-astra",
           "unit": "week",
           "region": "global",
-          "status": "fails: 1 non-provisional report(s) in the current partition",
+          "status": "fails: 0 non-provisional report(s) in the current partition",
           "currentPartition": 4,
           "partitionsWithReports": [
-            2,
-            4
+            2
           ],
           "value": null,
           "monthlyUsd": null,
           "multiple": null,
-          "range": [
-            318.0,
-            318.0
-          ],
+          "range": null,
           "reports": [
+            {
+              "id": "muscgab97-pro100-astra",
+              "observer": "muscgab",
+              "valueLower": 313.0,
+              "valueUpper": 313.0,
+              "partition": null,
+              "provisional": false,
+              "speedMode": null,
+              "excluded": "mixed-model usage"
+            },
             {
               "id": "sentrybottale-pro100",
               "observer": "sentrybottale",
@@ -37005,12 +39558,67 @@
               "observer": "YiwenPang",
               "valueLower": 318.0,
               "valueUpper": 318.0,
-              "partition": 4,
+              "partition": null,
               "provisional": false,
               "speedMode": null,
-              "excluded": null
+              "excluded": "an anomaly or legacy-account report"
             }
-          ]
+          ],
+          "admittingObservers": []
+        },
+        {
+          "provider": "OpenAI",
+          "plan": "ChatGPT Pro 100",
+          "modelId": "gpt-6.1-sol",
+          "unit": "week",
+          "region": "global",
+          "status": "fails: 0 non-provisional report(s) in the current partition",
+          "currentPartition": 4,
+          "partitionsWithReports": [],
+          "value": null,
+          "monthlyUsd": null,
+          "multiple": null,
+          "range": null,
+          "reports": [
+            {
+              "id": "muscgab97-pro100-sol",
+              "observer": "muscgab",
+              "valueLower": 234.0,
+              "valueUpper": 234.0,
+              "partition": null,
+              "provisional": false,
+              "speedMode": null,
+              "excluded": "mixed-model usage"
+            }
+          ],
+          "admittingObservers": []
+        },
+        {
+          "provider": "OpenAI",
+          "plan": "ChatGPT Pro 200 (grandfathered 20x)",
+          "modelId": "gpt-6-astra",
+          "unit": "week",
+          "region": "global",
+          "status": "fails: 0 non-provisional report(s) in the current partition",
+          "currentPartition": 4,
+          "partitionsWithReports": [],
+          "value": null,
+          "monthlyUsd": null,
+          "multiple": null,
+          "range": null,
+          "reports": [
+            {
+              "id": "genellect-pro200",
+              "observer": "genellect",
+              "valueLower": 2000.0,
+              "valueUpper": 2000.0,
+              "partition": null,
+              "provisional": false,
+              "speedMode": "fast",
+              "excluded": "mixed-model usage"
+            }
+          ],
+          "admittingObservers": []
         },
         {
           "provider": "OpenAI",
@@ -37021,34 +39629,13 @@
           "status": "fails: 0 non-provisional report(s) in the current partition",
           "currentPartition": 4,
           "partitionsWithReports": [
-            0,
-            3
+            0
           ],
           "value": null,
           "monthlyUsd": null,
           "multiple": null,
           "range": null,
           "reports": [
-            {
-              "id": "dhadaptive-pro200",
-              "observer": "DhAdaptive",
-              "valueLower": 1004.0,
-              "valueUpper": 1020.0,
-              "partition": 0,
-              "provisional": false,
-              "speedMode": "fast",
-              "excluded": null
-            },
-            {
-              "id": "sadiqmdasif-pro200",
-              "observer": "sadiqmdasif",
-              "valueLower": 105.0,
-              "valueUpper": 130.0,
-              "partition": 3,
-              "provisional": false,
-              "speedMode": null,
-              "excluded": null
-            },
             {
               "id": "janrysavy-pro200",
               "observer": "janrysavy",
@@ -37058,8 +39645,29 @@
               "provisional": false,
               "speedMode": null,
               "excluded": "mixed-model usage"
+            },
+            {
+              "id": "sadiqmdasif-pro200",
+              "observer": "sadiqmdasif",
+              "valueLower": 105.0,
+              "valueUpper": 130.0,
+              "partition": null,
+              "provisional": false,
+              "speedMode": null,
+              "excluded": "an anomaly or legacy-account report"
+            },
+            {
+              "id": "dhadaptive-pro200",
+              "observer": "DhAdaptive",
+              "valueLower": 1003.75,
+              "valueUpper": 1019.75,
+              "partition": 0,
+              "provisional": false,
+              "speedMode": "fast",
+              "excluded": null
             }
-          ]
+          ],
+          "admittingObservers": []
         },
         {
           "provider": "OpenAI",
@@ -37085,7 +39693,8 @@
               "speedMode": "fast",
               "excluded": "measured on a provider-acknowledged accounting-fault day"
             }
-          ]
+          ],
+          "admittingObservers": []
         },
         {
           "provider": "OpenAI",
@@ -37104,14 +39713,15 @@
             {
               "id": "dhadaptive-pro500",
               "observer": "DhAdaptive",
-              "valueLower": 919.0,
-              "valueUpper": 964.0,
+              "valueLower": 963.75,
+              "valueUpper": 963.75,
               "partition": null,
               "provisional": false,
               "speedMode": "fast",
               "excluded": "measured on a provider-acknowledged accounting-fault day"
             }
-          ]
+          ],
+          "admittingObservers": []
         },
         {
           "provider": "Xiaomi",
@@ -37142,7 +39752,8 @@
               "speedMode": null,
               "excluded": null
             }
-          ]
+          ],
+          "admittingObservers": []
         },
         {
           "provider": "Xiaomi",
@@ -37173,7 +39784,8 @@
               "speedMode": null,
               "excluded": null
             }
-          ]
+          ],
+          "admittingObservers": []
         }
       ],
       "costInfluence": {
@@ -57993,7 +60605,7 @@
           {
             "key": "planRoutes",
             "artifact": "data/plan_cost_routes.json",
-            "sha256": "8b4f9f959f7a7693b92fe9b71861a9afe4e967d8bb760c3439cda47297894f0f",
+            "sha256": "db7d3a0addde78a2cb495e4d34931050192c75a604a51bcc720cc81779bc9582",
             "capturedAt": "2026-10-25",
             "extractor": "editorial Plan evidence registry"
           },
@@ -58028,7 +60640,7 @@
           {
             "key": "planReports",
             "artifact": "data/plan_reports.json",
-            "sha256": "996c3d029aac745a9838936422b95c027c15a7a7cc5ccc38924e6436cd4ec798",
+            "sha256": "c017edb8177d638c98e5e3d55b7e94b2d14335f19283b6d90c331ee54550cfc6",
             "capturedAt": "2026-10-25",
             "extractor": "editorial table of every O71 user report with the facts E270 needs; the build derives admission from it (O81)"
           },
@@ -58061,7 +60673,7 @@
             "extractor": "valuerank.value_v3 freeze"
           }
         ],
-        "bundleHash": "81e3536ec92a0e53a334a9aa6868503b8e99f197a6ce03a9f1cf12766552cb69",
+        "bundleHash": "f45dff0781c9720605f9fd1816d387d380fc469dba0aad858b2c25b5e182d71d",
         "rebuild": "every published output is rebuilt from these artifacts at the pinned publication clock (npm run verify:docs), never from live pages"
       },
       "track": {

@@ -272,6 +272,9 @@ def registry_figures(capture: dict, plan_document: dict, release: str) -> dict:
     window, cutoff = policy["reportingWindow"], policy["searchCutoff"]
     figures = {"evidence.windowStart": window["start"], "evidence.windowEnd": window["end"], "evidence.searchCutoff": cutoff,
                "evidence.searchGapDays": (date.fromisoformat(release) - date.fromisoformat(cutoff)).days}
+    # I65 L4: the partition splits the build applies (O83), from the registry.
+    splits = (policy.get("reportEligibilityProfile") or {}).get("partitionSplits") or []
+    figures["evidence.partitionSplits"] = series([f"{item['provider']} at {item['date']}" for item in splits]) or "none"
     # I61 L3: the stages and providers of the search that sets the cutoff, from its log entry.
     latest = max((entry for entry in policy.get("searchLog") or [] if entry.get("searchedOn") == cutoff and not entry.get("singleProvider")),
                  key=lambda entry: len(entry.get("stages") or []), default={})

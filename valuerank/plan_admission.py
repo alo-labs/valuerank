@@ -8,20 +8,20 @@ concordance test to every model × plan cell, and the build refuses a report rou
   model (a challenged report is excluded), measured at least partly inside the report window, clear of a
   provider-acknowledged accounting-fault day, and inside one partition (a report spanning a split is excluded);
 - a speed-mode value is converted at the provider's published multiplier and flagged (O76);
-- a partition splits at each recorded change (E18 or provider-documented); the partition current at the cutoff decides;
+- a partition splits at each recorded change (E18 or provider-documented, O83); the partition current at the cutoff decides;
 - the cell passes when it has at least two non-provisional reports, every report's whole range lies within 1.20× of the
-  smallest lower bound (E98, E107: every eligible report together), the unit converts to a month (O80: a 5-hour figure
-  never does here), and the plan is one ValueRank lists; the value is the median of the reports' midpoints.
+  smallest lower bound (E98, E107: every eligible report together), the unit converts to a month (O82: a 5-hour figure
+  never does), and the plan is one ValueRank lists; the value is the geometric mean of the firm reports' midpoints.
 """
 
 from __future__ import annotations
 
-import statistics
+import math
 from datetime import date, datetime, time, timedelta, timezone
 
 CONCORDANCE = 1.20  # O11 / E98
 WEEKS_PER_MONTH = 4.33  # E270
-UNIT_TO_MONTH = {"month": 1.0, "week": WEEKS_PER_MONTH}  # O80: a 5-hour figure stays in its own unit
+UNIT_TO_MONTH = {"month": 1.0, "week": WEEKS_PER_MONTH}  # O82: a 5-hour figure never converts and never admits a route
 
 
 def _start(stamp: str) -> datetime:
@@ -92,6 +92,12 @@ def exclusion(report: dict, profile: dict, release_day: date) -> str | None:
         return "aggregator or derived figure (cross-check only)"
     if report.get("modelUnstated") or not report.get("modelId"):
         return "model not stated"
+    if report.get("tierUnstated"):
+        return "tier not stated"
+    if report.get("derived"):
+        return "the research's own arithmetic, not a figure the observer reported"
+    if report.get("anomaly"):
+        return "an anomaly or legacy-account report"
     if report.get("challenged"):
         return "challenged: does not reproduce from its own figures"
     start, end = window(report)
@@ -109,7 +115,7 @@ def cell_key(report: dict) -> tuple:
 
 
 def evaluate(document: dict, profile: dict, release_day: date) -> list[dict]:
-    """Every model × plan × unit cell's admission, with each report's role (E270, O11, O80, O81)."""
+    """Every model × plan × unit cell's admission, with each report's role (E270, O11, O81, O82)."""
 
     multipliers, splits = document.get("speedModeMultipliers", {}), profile.get("partitionSplits", [])
     cells: dict[tuple, list[dict]] = {}
@@ -136,7 +142,7 @@ def evaluate(document: dict, profile: dict, release_day: date) -> list[dict]:
         if plan not in document.get("listedPlans", {}) or region != "global":
             status = "not a listed plan"
         elif unit not in UNIT_TO_MONTH:
-            status = "fails: a 5-hour figure stays in its own unit (O80)"
+            status = "fails: a 5-hour figure never converts to a billing period (O82)"
         elif len(set(observers)) < len(observers):
             raise ValueError(f"{key}: one observer reports twice in one partition; record it once with its range (E270)")
         elif len(firm) < 2:
@@ -146,24 +152,33 @@ def evaluate(document: dict, profile: dict, release_day: date) -> list[dict]:
         else:
             status = "passes"
         # I64 L3: the split comes first, then the range test over every eligible report of the current partition (provisional
-        # ones included); the value is the median midpoint of the non-provisional reports only.
-        value = statistics.median((row["valueLower"] + row["valueUpper"]) / 2 for row in firm) if status == "passes" else None
+        # ones included); the value is the geometric mean of the non-provisional reports' midpoints, the E33 pool the
+        # route's own multiple uses (I65 L3).
+        value = (math.exp(sum(math.log((row["valueLower"] + row["valueUpper"]) / 2) for row in firm) / len(firm))
+                 if status == "passes" else None)
         monthly = value * UNIT_TO_MONTH[unit] if value is not None else None
         fee = document.get("listedPlans", {}).get(plan)
         results.append({"provider": provider, "plan": plan, "modelId": model, "unit": unit, "region": region, "status": status,
                         "currentPartition": latest_split, "partitionsWithReports": sorted({row["partition"] for row in eligible}),
                         "value": value, "monthlyUsd": monthly, "multiple": monthly / fee if monthly is not None and fee else None,
-                        "range": None if lowest is None else [lowest, highest], "reports": rows})
+                        "range": None if lowest is None else [lowest, highest], "reports": rows,
+                        "admittingObservers": sorted(row["observer"] for row in firm) if status == "passes" else []})
     return results
 
 
 def check_routes(routes: list[dict], cells: list[dict], cohort: set[str], report_kinds: set[str]) -> None:
-    """O81: a report-based route for a cohort model must rest on a passing cell for its plan and model."""
+    """O81, I65 L3: a report-based route for a cohort model must rest on a passing cell for its plan and model, and its
+    pooled reports must be that cell's admitting reports (the same observers), so the two paths cannot disagree."""
 
-    passing = {(cell["plan"], cell["modelId"]) for cell in cells if cell["status"] == "passes"}
+    passing = {(cell["plan"], cell["modelId"]): cell for cell in cells if cell["status"] == "passes"}
     for route in routes:
         if route.get("valueMultipleKind") not in report_kinds:
             continue
         for model in set(route.get("modelIds") or []) & cohort:
-            if (route.get("plan"), model) not in passing:
+            cell = passing.get((route.get("plan"), model))
+            if cell is None:
                 raise ValueError(f"{route['id']}: no passing O71 cell supports a report route for {model} on {route.get('plan')} (O81)")
+            observers = sorted(str(report.get("observer") or "") for report in route.get("independentReports") or [])
+            if observers != cell["admittingObservers"]:
+                raise ValueError(f"{route['id']}: its reports ({', '.join(observers)}) are not the cell's admitting reports "
+                                 f"({', '.join(cell['admittingObservers'])}) (O81)")
