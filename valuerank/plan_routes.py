@@ -191,7 +191,8 @@ def expiry_status(route: dict, release_day: date, registry: dict | None = None) 
 CAPACITY_ESTABLISHED = "capacity established on the measurement workload"
 CAPACITY_OBSERVED = "observed usage; capacity not established"
 CAPACITY_UNVERIFIED = "saturation unverified"
-CAPACITY_STATUSES = (CAPACITY_ESTABLISHED, CAPACITY_OBSERVED, CAPACITY_UNVERIFIED)
+CAPACITY_CEILING = "provider quota ceiling: full use of the quota assumed (O46)"
+CAPACITY_STATUSES = (CAPACITY_ESTABLISHED, CAPACITY_OBSERVED, CAPACITY_UNVERIFIED, CAPACITY_CEILING)
 
 
 def measurement_capacity_status(route: dict) -> str:
@@ -204,6 +205,9 @@ def measurement_capacity_status(route: dict) -> str:
     recorded = route.get("measurementCapacityStatus")
     if recorded in CAPACITY_STATUSES:
         return recorded
+    if route.get("evidenceClass") == "provider_quota_ceiling":
+        # I68 L2: an O46 ceiling observes nothing; it is the whole quota by construction.
+        return CAPACITY_CEILING
     kind, source_kind = route.get("valueMultipleKind"), route.get("sourceEvidenceClass")
     if kind in CONTROLLED_KINDS or (kind in ASSUMPTION_KINDS and source_kind in CONTROLLED_KINDS):
         return CAPACITY_ESTABLISHED
@@ -290,8 +294,6 @@ def change_flagged(candidate: dict | None) -> bool:
 
     return bool(candidate and candidate["route"].get("changeDetectedOn") and candidate.get("expiry") in {"possibly-superseded", "expired"})
 
-
-CONTROLLED_KINDS = {"controlled_account_workload_projection"}
 
 
 def check_allocation_regimes(document: dict) -> None:
@@ -579,7 +581,7 @@ def plan_cost(api_cost: float | None, selected: dict | None) -> dict:
     flags = []
     if selected["identification"] not in {"point-identified", "set-identified"}:
         flags.append("workload-unmatched")
-    if selected["grade"] == "assumption":
+    if selected["grade"] == "assumption" and route.get("evidenceClass") != "provider_quota_ceiling":
         flags.append("owner-named transfer (assumption)")
     if selected["expiry"] in {"possibly-superseded", "expired"}:
         flags.append(selected["expiry"])
@@ -588,7 +590,9 @@ def plan_cost(api_cost: float | None, selected: dict | None) -> dict:
     capacity = selected.get("measurementCapacityStatus", measurement_capacity_status(route))
     if valuation == "unverified":
         flags.append("valuation basis unverified")
-    if capacity != CAPACITY_ESTABLISHED:
+    if capacity == CAPACITY_CEILING:
+        flags.append("provider quota ceiling; full use assumed (O46)")
+    elif capacity != CAPACITY_ESTABLISHED:
         flags.append("observed-usage multiple; full utilisation not established")
     return {
         "costUsd": api_cost / comparison_multiple(route),

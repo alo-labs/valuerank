@@ -1695,3 +1695,17 @@ Asked on I64 Q1 whether future O71 admissions should be executed by the build fr
 - Recommendations 1 (two statuses per cell) adopted through O85's `listed` flag; 2 (rule IDs on plan-row flags) and 3 (explicit `plans` on the OpenAI splits, which today cover every OpenAI plan) recorded, not adopted this round.
 - Owner question (asked; O85).
 - Round status (O56): clean (no Medium or higher). With I66, two consecutive clean rounds: the Opus low rung has converged. Draft r127; next rung: Opus medium.
+
+## Owner decisions O86–O87 (2026-10-28)
+- O86 (concordance, asked on I65 recommendation 4): O11's 1.20× margin is tested as a common value: a set of reports concords when the largest lower bound is at most 1.20× the smallest upper bound, replacing the whole-range test (max upper ≤ 1.20 × min lower), so coarse meter readings are not mistaken for disagreement. Today it changes no verdict: the only cell with two firm reports (Google AI Pro, Gemini 4 Argon) fails at 1.35× (1.71× under the old test).
+- O87 (effort, asked on I68 Q1): a plan allowance is the same dollars at any reasoning effort, so reports at any effort pool in one cell per model and plan (cells are keyed by the model without its effort suffix) and a passing cell supports a report route of any configuration of that model. This amends E107's report set and the route key for report evidence only; controlled measurements and benchmark leaves keep exact-variant identity.
+
+## Internal review I68 (Claude Opus 5.5, effort medium, on r127) — adopted, modified or rejected
+- M1 (asked; O87, engine changed with tests): cells are keyed by model, publish the efforts they pool, and `check_routes` maps a route's configuration to its model; the draft and the registry rule say so.
+- L1 (adopted): the O85 sentence is split so the build, not a cell, refuses a route; "listed" is defined as a plan with a registered fee.
+- L2 (adopted, engine and data changed with a test): an O46 ceiling has its own capacity status and flag ("provider quota ceiling; full use assumed (O46)") instead of "observed-usage multiple"; the eight ceiling routes record a release valuation basis (Xiaomi's pay-as-you-go rates are the price records in force at V that AA displays), so they no longer carry "valuation basis unverified" or the "owner-named transfer" flag (they are owner-authorised ceilings, not transfers).
+- L3 (adopted): the E196 "today" clause prints both rankings' cost allocations from generated figures.
+- L4 (adopted): LiveBench 2.0 Overall is "the weighted mean" on line 98.
+- L5 (adopted): the duplicate `CONTROLLED_KINDS` in `plan_routes.py` is removed; the module keeps the wider set (no route uses `controlled_measurement`, so nothing changes).
+- Recommendations: effort-keyed cells superseded by O87; post-change reports beside flagged routes and generated "today" examples recorded, not adopted this round; ceiling flag types adopted (L2).
+- Round status (O56): not clean (one Medium). Draft r128; the Opus medium rung restarts its count.

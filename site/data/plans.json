@@ -96,18 +96,18 @@
     },
     "gptApplication": "User authorizes the same ChatGPT plan multiples for every GPT model. Owner decision O45 (2026-10-23): GPT-6.1 Sol and GPT-6 Astra keep their own SemiAnalysis figures on every ChatGPT plan, bound to each model's unsuffixed (max) row because SemiAnalysis names the models without an effort; every other GPT row (other GPT models and GPT-6.1 Sol at xhigh, high, medium and low, ranked as their own rows under O33) takes, per plan, the lower of the two reported model-conditional figures as a labelled user assumption naming its donor route. Routes are one row per model and plan.",
     "routeGranularity": "Owner decision O45 (2026-10-23): every route row names exactly one model and one plan.",
-    "o72Application": "Owner decisions O72-O85 (2026-10-26 to 2026-10-28): after the O71 search found no model × tier with two concordant user reports, the owner-authorised routes stay (the SemiAnalysis selection with its O40/O45 assumptions, the O46 MiMo quota ceilings) and providers without one (Google, Kimi, MiniMax) stay on API fallback. Two concordant user reports replace only an assumption-based or fallback route; an exact controlled measurement keeps precedence (O73) unless a detected change flags it and a concordant pair for the same plan is dated after that change (O78). Admission stays the strict all-reports concordance test (O74); every release runs all three O71 stages over every cell (O75); speed-mode reports convert at the provider's multiplier, flagged (O76); a provider's announcement of a metering change triggers E18 (O77); a change to a shared meter flags every plan on it (O79); a 5-hour figure stays in its own unit and never converts (O80, O82); a provider-documented change splits the partition too (O83); a change detected on any Kimi plan splits every Kimi plan (O84); every report cell is tested, and one on a plan the Plan ranking does not list is evidence only (O85).",
+    "o72Application": "Owner decisions O72-O87 (2026-10-26 to 2026-10-28): after the O71 search found no model × tier with two concordant user reports, the owner-authorised routes stay (the SemiAnalysis selection with its O40/O45 assumptions, the O46 MiMo quota ceilings) and providers without one (Google, Kimi, MiniMax) stay on API fallback. Two concordant user reports replace only an assumption-based or fallback route; an exact controlled measurement keeps precedence (O73) unless a detected change flags it and a concordant pair for the same plan is dated after that change (O78). Admission stays the strict all-reports concordance test (O74); every release runs all three O71 stages over every cell (O75); speed-mode reports convert at the provider's multiplier, flagged (O76); a provider's announcement of a metering change triggers E18 (O77); a change to a shared meter flags every plan on it (O79); a 5-hour figure stays in its own unit and never converts (O80, O82); a provider-documented change splits the partition too (O83); a change detected on any Kimi plan splits every Kimi plan (O84); every report cell is tested, and one on a plan the Plan ranking does not list is evidence only (O85).",
     "reportEligibilityProfile": {
       "version": "O71 v1 (E270), 2026-10-26",
       "rules": [
         "API-priced consumption tied to a meter fraction or to exhaustion of a window; a figure with no meter fraction is a lower bound and does not count",
         "a meter fraction measures its own window's allowance; a 5-hour figure pools only with 5-hour figures of the same plan and model and never converts to a billing period (O82, replacing O80's exception); a weekly allowance converts to a month at 4.33 weeks",
-        "exact model and tier; a tier or model version the researcher infers counts provisionally: listed and in the range test, never one of the two admitting reports",
+        "exact model and tier, at any reasoning effort (O87: an allowance is effort-invariant); a tier or model version the researcher infers counts provisionally: listed and in the range test, never one of the two admitting reports",
         "one model measured; a mixed-model week stays at plan level",
         "measured at least partly inside the report window",
         "not on a provider-acknowledged accounting-fault day (accountingFaultDays)",
         "an observer, not an aggregator or a derived figure (cross-checks only); one observer is one report, carrying the range of its values (valueMultipleLower / valueMultipleUpper)",
-        "a range-valued report passes the margin across its whole range",
+        "range-valued reports pass the margin when the largest lower bound is at most 1.20x the smallest upper bound (O86, replacing the whole-range test)",
         "a report on a tier of another region or currency counts only for that tier",
         "a provider speed mode is converted to standard-equivalent at the provider's published multiplier and flagged (O76)",
         "a partition splits only at a change E18 detected or a provider documented, at that change's date (partitionSplits)"
@@ -2702,9 +2702,7 @@
       "routeId": "mimo-tokenplan-max-mimo-v2-6-pro-quota-ceiling",
       "flags": [
         "workload-unmatched",
-        "owner-named transfer (assumption)",
-        "valuation basis unverified",
-        "observed-usage multiple; full utilisation not established"
+        "provider quota ceiling; full use assumed (O46)"
       ],
       "measuredOnly": {
         "status": "no measured route"

@@ -286,9 +286,7 @@
     "workload": "1453a9a0576b02ea",
     "planFlags": [
       "workload-unmatched",
-      "owner-named transfer (assumption)",
-      "valuation basis unverified",
-      "observed-usage multiple; full utilisation not established"
+      "provider quota ceiling; full use assumed (O46)"
     ],
     "costScore": {
       "api": 78.47746235764602,
@@ -368,8 +366,8 @@
       "capacitySolutionId": null,
       "cashObjectId": "mimo-tokenplan-max-mimo-v2-6-pro-quota-ceiling:month cash",
       "purchasePolicyId": "subscription fee for the fee period, no additional cash declared",
-      "capacityStatus": "saturation unverified",
-      "valuationStatus": "unverified",
+      "capacityStatus": "provider quota ceiling: full use of the quota assumed (O46)",
+      "valuationStatus": "release",
       "donorRouteId": null,
       "interpretationLabel": "assumed API-equivalent consumption (owner-named transfer), API-priced USD per month"
     }

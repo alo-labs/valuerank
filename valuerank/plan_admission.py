@@ -9,8 +9,9 @@ concordance test to every model × plan cell, and the build refuses a report rou
   provider-acknowledged accounting-fault day, and inside one partition (a report spanning a split is excluded);
 - a speed-mode value is converted at the provider's published multiplier and flagged (O76);
 - a partition splits at each recorded change (E18 or provider-documented, O83); the partition current at the cutoff decides;
-- the cell passes when it has at least two non-provisional reports, every report's whole range lies within 1.20× of the
-  smallest lower bound (E98, E107: every eligible report together), the unit converts to a month (O82: a 5-hour figure
+- the cell passes when it has at least two non-provisional reports, one value lies within 1.20× of every report's
+  range (O86: the largest lower bound is at most 1.20× the smallest upper bound; E98, E107: every eligible report together),
+  reports at any effort pool for the model (O87), the unit converts to a month (O82: a 5-hour figure
   never does), and every cell is tested (O85: a cell on a plan the Plan ranking does not list is published as evidence
   only and supports no route); the value is the geometric mean of the firm reports' midpoints.
 """
@@ -18,11 +19,19 @@ concordance test to every model × plan cell, and the build refuses a report rou
 from __future__ import annotations
 
 import math
+import re
 from datetime import date, datetime, time, timedelta, timezone
 
 CONCORDANCE = 1.20  # O11 / E98
 WEEKS_PER_MONTH = 4.33  # E270
-UNIT_TO_MONTH = {"month": 1.0, "week": WEEKS_PER_MONTH}  # O82: a 5-hour figure never converts and never admits a route
+UNIT_TO_MONTH = {"month": 1.0, "week": WEEKS_PER_MONTH}
+EFFORT_SUFFIX = re.compile(r"-(low|medium|high|xhigh|max)$")
+
+
+def model_of(configuration_id: str | None) -> str | None:
+    """O87: a plan allowance is effort-invariant, so a cell is keyed by the model, not the configuration's effort."""
+
+    return EFFORT_SUFFIX.sub("", configuration_id) if configuration_id else configuration_id  # O82: a 5-hour figure never converts and never admits a route
 
 
 def _start(stamp: str) -> datetime:
@@ -112,7 +121,7 @@ def exclusion(report: dict, profile: dict, release_day: date) -> str | None:
 
 
 def cell_key(report: dict) -> tuple:
-    return report["provider"], report["plan"], report["modelId"], report["unit"], report.get("region", "global")
+    return report["provider"], report["plan"], model_of(report["modelId"]), report["unit"], report.get("region", "global")
 
 
 def evaluate(document: dict, profile: dict, release_day: date) -> list[dict]:
@@ -139,6 +148,10 @@ def evaluate(document: dict, profile: dict, release_day: date) -> list[dict]:
         observers = [row["observer"] for row in pool]
         lowest = min((row["valueLower"] for row in pool), default=None)
         highest = max((row["valueUpper"] for row in pool), default=None)
+        # O86: the reports concord when one value lies within 1.20x of every report's range (the largest lower bound is at
+        # most 1.20x the smallest upper bound), so a coarse meter reading is not mistaken for disagreement.
+        largest_lower = max((row["valueLower"] for row in pool), default=None)
+        smallest_upper = min((row["valueUpper"] for row in pool), default=None)
         firm = [row for row in pool if not row["provisional"]]
         # O85: every cell is tested; a cell on a plan the Plan ranking does not list is published as evidence only.
         listed = plan in document.get("listedPlans", {}) and region == "global"
@@ -148,8 +161,8 @@ def evaluate(document: dict, profile: dict, release_day: date) -> list[dict]:
             raise ValueError(f"{key}: one observer reports twice in one partition; record it once with its range (E270)")
         elif len(firm) < 2:
             status = f"fails: {len(firm)} non-provisional report(s) in the current partition"
-        elif highest > CONCORDANCE * lowest:
-            status = f"fails: range {highest / lowest:.2f}× over the current partition"
+        elif largest_lower > CONCORDANCE * smallest_upper:
+            status = f"fails: no common value within 1.20× ({largest_lower / smallest_upper:.2f}× apart) in the current partition"
         else:
             status = "passes"
         # I64 L3: the split comes first, then the range test over every eligible report of the current partition (provisional
@@ -161,7 +174,7 @@ def evaluate(document: dict, profile: dict, release_day: date) -> list[dict]:
         fee = document.get("listedPlans", {}).get(plan) if listed else None
         results.append({"provider": provider, "plan": plan, "modelId": model, "unit": unit, "region": region, "status": status, "listed": listed,
                         "currentPartition": latest_split, "partitionsWithReports": sorted({row["partition"] for row in eligible}),
-                        "value": value, "monthlyUsd": monthly, "multiple": monthly / fee if monthly is not None and fee else None,
+                        "efforts": sorted({str(report.get("effort") or "unstated") for report in reports}), "value": value, "monthlyUsd": monthly, "multiple": monthly / fee if monthly is not None and fee else None,
                         "range": None if lowest is None else [lowest, highest], "reports": rows,
                         "admittingObservers": sorted(row["observer"] for row in firm) if status == "passes" else []})
     return results
@@ -174,12 +187,12 @@ def check_routes(routes: list[dict], cells: list[dict], cohort: set[str], report
     passing: dict[tuple, list[dict]] = {}
     for cell in cells:
         if cell["status"] == "passes" and cell.get("listed", True):
-            passing.setdefault((cell["plan"], cell["modelId"]), []).append(cell)
+            passing.setdefault((cell["plan"], model_of(cell["modelId"])), []).append(cell)
     for route in routes:
         if route.get("valueMultipleKind") not in report_kinds:
             continue
         for model in set(route.get("modelIds") or []) & cohort:
-            supporting = passing.get((route.get("plan"), model), [])
+            supporting = passing.get((route.get("plan"), model_of(model)), [])
             if not supporting:
                 raise ValueError(f"{route['id']}: no passing O71 cell supports a report route for {model} on {route.get('plan')} (O81)")
             # I66 L2: a plan and model can pass in more than one unit; the route's observers must be one cell's admitting set.

@@ -421,6 +421,12 @@ def test_measurement_capacity_status():
     flagged = pr.plan_cost(100.0, {"route": reports, "grade": "reports", "identification": "unidentified", "expiry": "fresh"})
     assert "observed-usage multiple; full utilisation not established" in flagged["flags"]
     assert flagged["measurementCapacityStatus"] == pr.CAPACITY_UNVERIFIED
+    ceiling = dict(route("q", 1.18, kind="user_assumption"), evidenceClass="provider_quota_ceiling", valuationBasis="release")
+    assert pr.measurement_capacity_status(ceiling) == pr.CAPACITY_CEILING
+    capped = pr.plan_cost(100.0, {"route": ceiling, "grade": "assumption", "identification": "unidentified", "expiry": "fresh"})
+    assert "provider quota ceiling; full use assumed (O46)" in capped["flags"] and "valuation basis unverified" not in capped["flags"]
+    assert not any(flag.startswith("observed-usage") for flag in capped["flags"])
+    assert "owner-named transfer (assumption)" not in capped["flags"]
 
 
 def test_expired_routes_leave_selection_before_any_fallback():
