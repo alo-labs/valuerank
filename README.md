@@ -103,8 +103,8 @@ The configurations AI Coding Daily has tested, mostly at high and medium effort,
 
 | Plan rank | API rank | Configuration | Plan value | API value | Quality | Quality coverage | API cost (USD per basket run) | Plan cost (USD per basket run) | Plan route | Flags | Noise band (Plan / API) |
 |---:|---:|---|---:|---:|---:|---:|---:|---:|---|---|---|
-| 1 | 7 | [Claude Opus 5.5 (high)](https://valuerank.alolabs.dev/models/claude-opus-5-5-high/) | 58.4 | 48.9 | 60.1 | 100% | $1,860.17 | $31.58 | Claude Pro $20 · common Claude assumption (58.9×, assumption) | — | 1–11† / 1–9 |
-| 4 | 6 | [Claude Opus 5.5 (medium)](https://valuerank.alolabs.dev/models/claude-opus-5-5-medium/) | 58.3 | 49.2 | 59.0 | 100% | $1,423.70 | $24.17 | Claude Pro $20 · common Claude assumption (58.9×, assumption) | — | 1–11† / 1–9 |
+| 1 | 7 | [Claude Opus 5.5 (high)](https://valuerank.alolabs.dev/models/claude-opus-5-5-high/) | 58.4 | 48.9 | 60.1 | 100% | $1,860.17 | $31.58 | Claude Pro $20 · same-model assumption (O88) (58.9×, assumption) | — | 1–11† / 1–9 |
+| 4 | 6 | [Claude Opus 5.5 (medium)](https://valuerank.alolabs.dev/models/claude-opus-5-5-medium/) | 58.3 | 49.2 | 59.0 | 100% | $1,423.70 | $24.17 | Claude Pro $20 · same-model assumption (O88) (58.9×, assumption) | — | 1–11† / 1–9 |
 | 7 | 1 | [GPT-6.1 Sol (high)](https://valuerank.alolabs.dev/models/gpt-6-1-sol-high/) | 55.5 | 52.7 | 57.2 | 100% | $431.07 | $40.02 | ChatGPT Pro 500 $500 · same-model assumption (O88) (10.772×, assumption) | — | 1–11† / 1–9 |
 | 11 | 2 | [GPT-6.1 Sol (medium)](https://valuerank.alolabs.dev/models/gpt-6-1-sol-medium/) | 54.1 | 51.7 | 54.2 | 100% | $318.05 | $29.53 | ChatGPT Pro 500 $500 · same-model assumption (O88) (10.772×, assumption) | — | 1–11† / 1–9 |
 | 15 | 9 | [Claude Haiku 5.5 (high)](https://valuerank.alolabs.dev/models/claude-haiku-5-5-high/) | 53.6 | 48.8 | 42.1 | 100% | $70.85 | $1.20 | Claude Pro $20 · common Claude assumption (58.9×, assumption) | AA cost caveat | 12–24† / 1–9 |
@@ -188,7 +188,7 @@ AA footnote (Claude Haiku 5.5 (max), Claude Haiku 5.5 (high), Claude Haiku 5.5 (
 - [AA Coding Agent Index v2.0](https://artificialanalysis.ai/agents/coding-agents): the Coding Agent Index cost (FrontierCode, Terminal-Bench and SWE-Atlas-QnA-AA) for each exact configuration (O50); AA withdrew DeepSWE v1.1 in October 2026 and it is no longer a leaf (O49).
 - AA's own Terminal-Bench 4.0 run (the leaf; [tbench.ai](https://www.tbench.ai/leaderboard/terminal-bench/4.0) rows fill a gap and serve as a cross-check, O37), [Bug Hunt Bench](https://bughunt.productcompass.pm/) owner-published runs, [Cognition's FrontierCode leaderboard](https://cognition.com/data/frontiercode-leaderboard/data.json) and model-provider results for leaves AA has not run (O36).
 - [SemiAnalysis subscription measurements](https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x) (owner-selected 2026-10-07) for the Claude and ChatGPT plan Value Multiples; owner-named transfers are labelled as assumptions.
-- The evidence bundle in `data/scores.json` lists every input artifact with its SHA-256; bundle hash `5b63aa4d5dd7c291b90ad0f5a11ff8ea9238d31f06e2bbe8d141dd4881cfd951`.
+- The evidence bundle in `data/scores.json` lists every input artifact with its SHA-256; bundle hash `b3738400aadadac39df08bde28b3e691c105270641d77d3d68559c2c7b9e3d26`.
 - [Methodology co-design record](research/2026-10-19-methodology-codesign/): the reviewed specification, every owner and editor decision, and each reviewer's findings.
 
 ## Files

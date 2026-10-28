@@ -430,6 +430,8 @@ def test_measurement_capacity_status():
     assert "provider quota ceiling; full use assumed (O46)" in capped["flags"] and "valuation basis unverified" not in capped["flags"]
     assert not any(flag.startswith("observed-usage") for flag in capped["flags"])
     assert "owner-named transfer (assumption)" not in capped["flags"]
+    same = pr.plan_cost(100.0, {"route": dict(route("s", 10.0, kind="user_assumption"), sameModelAcrossEfforts=True), "grade": "assumption", "identification": "unidentified", "expiry": "fresh"})
+    assert "same-model assumption across efforts (O88)" in same["flags"] and "owner-named transfer (assumption)" not in same["flags"]
 
 
 def test_expired_routes_leave_selection_before_any_fallback():

@@ -234,7 +234,7 @@
     "fallback": null,
     "route": {
       "id": "claude-pro-claude-opus-5-5-medium-common-opus55-assumption",
-      "planLabel": "Claude Pro $20 · common Claude assumption",
+      "planLabel": "Claude Pro $20 · same-model assumption (O88)",
       "planFeeUsd": 20,
       "valueMultiple": 58.9,
       "grade": "assumption",
@@ -248,7 +248,7 @@
     "workload": "1453a9a0576b02ea",
     "planFlags": [
       "workload-unmatched",
-      "owner-named transfer (assumption)",
+      "same-model assumption across efforts (O88)",
       "possibly-superseded",
       "valuation basis unverified"
     ],
@@ -317,10 +317,10 @@
     "aaCostCaveat": null,
     "selectionReason": "larger observed multiple (observed-workload multiple — target-workload ordering not identified)",
     "planAmount": {
-      "amountKind": "assumed API-equivalent consumption (owner-named transfer)",
+      "amountKind": "assumed API-equivalent consumption (same-model assumption across efforts, O88)",
       "amountTarget": "assumed consumption",
       "amountUsd": 1178.0,
-      "derivation": "authorised assumption: the donor's multiple times this route's cash",
+      "derivation": "authorised assumption: the same model's measured multiple (another effort) times this route's cash",
       "feePeriod": "month",
       "subscriptionCashUsd": 20,
       "additionalCashUsd": 0.0,
@@ -333,13 +333,13 @@
       "capacityStatus": "capacity established on the measurement workload",
       "valuationStatus": "unverified",
       "donorRouteId": "claude-pro-opus55-semianalysis",
-      "interpretationLabel": "assumed API-equivalent consumption (owner-named transfer), API-priced USD per month"
+      "interpretationLabel": "assumed API-equivalent consumption (same-model assumption across efforts, O88), API-priced USD per month"
     }
   },
   "plans": [
     {
       "id": "claude-pro-claude-opus-5-5-medium-common-opus55-assumption",
-      "planLabel": "Claude Pro $20 · common Claude assumption",
+      "planLabel": "Claude Pro $20 · same-model assumption (O88)",
       "planFeeUsd": 20,
       "valueMultiple": 58.9,
       "grade": "assumption",
@@ -356,7 +356,7 @@
     },
     {
       "id": "claude-max20x-claude-opus-5-5-medium-common-opus55-assumption",
-      "planLabel": "Claude Max 20x $200 · common Claude assumption",
+      "planLabel": "Claude Max 20x $200 · same-model assumption (O88)",
       "planFeeUsd": 200,
       "valueMultiple": 58.63,
       "grade": "assumption",
@@ -373,7 +373,7 @@
     },
     {
       "id": "claude-max5x-claude-opus-5-5-medium-common-opus55-assumption",
-      "planLabel": "Claude Max 5x $100 · common Claude assumption",
+      "planLabel": "Claude Max 5x $100 · same-model assumption (O88)",
       "planFeeUsd": 100,
       "valueMultiple": 57.25,
       "grade": "assumption",

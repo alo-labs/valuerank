@@ -15003,7 +15003,7 @@
         "modelId": "Gemini 4 Argon",
         "unit": "week",
         "region": "global",
-        "status": "fails: no common value within 1.20× (1.35× apart) in the current partition",
+        "status": "fails: largest lower bound 1.35× the smallest upper bound (O86 allows 1.20×) in the current partition",
         "listed": true,
         "currentPartition": 0,
         "partitionsWithReports": [
@@ -22222,7 +22222,7 @@
             "amountKind": "provider quota ceiling: the full quota at API rates (O46; full use assumed)",
             "amountTarget": "full-quota consumption",
             "amountUsd": 118.08000000000001,
-            "derivation": "quota ceiling: the tier's credits at the provider's API rate (I69 L3)",
+            "derivation": "quota ceiling: the tier's credits at the provider's API rate",
             "feePeriod": "month",
             "subscriptionCashUsd": 100,
             "additionalCashUsd": 0.0,
@@ -31867,7 +31867,7 @@
         {
           "key": "planRoutes",
           "artifact": "data/plan_cost_routes.json",
-          "sha256": "9c9e4228de6253bc843ff50b627119cc2654e0b82e573c22090c381249e5345d",
+          "sha256": "830face81dadffa28dd9d86912bce9660c1078df2b9a7a9772e1fa922e201efa",
           "capturedAt": "2026-10-25",
           "extractor": "editorial Plan evidence registry"
         },
@@ -31935,7 +31935,7 @@
           "extractor": "valuerank.value_v3 freeze"
         }
       ],
-      "bundleHash": "5b63aa4d5dd7c291b90ad0f5a11ff8ea9238d31f06e2bbe8d141dd4881cfd951",
+      "bundleHash": "b3738400aadadac39df08bde28b3e691c105270641d77d3d68559c2c7b9e3d26",
       "rebuild": "every published output is rebuilt from these artifacts at the pinned publication clock (npm run verify:docs), never from live pages"
     },
     "track": {
@@ -38976,7 +38976,7 @@
           "modelId": "Gemini 4 Argon",
           "unit": "week",
           "region": "global",
-          "status": "fails: no common value within 1.20× (1.35× apart) in the current partition",
+          "status": "fails: largest lower bound 1.35× the smallest upper bound (O86 allows 1.20×) in the current partition",
           "listed": true,
           "currentPartition": 0,
           "partitionsWithReports": [
@@ -43117,7 +43117,7 @@
             "donorRouteId": "chatgpt-pro500-gpt61sol-semianalysis",
             "flags": [
               "workload-unmatched",
-              "owner-named transfer (assumption)",
+              "same-model assumption across efforts (O88)",
               "possibly-superseded",
               "valuation basis unverified"
             ],
@@ -43151,10 +43151,10 @@
             },
             "selectedIdentification": "unidentified",
             "amount": {
-              "amountKind": "assumed API-equivalent consumption (owner-named transfer)",
+              "amountKind": "assumed API-equivalent consumption (same-model assumption across efforts, O88)",
               "amountTarget": "assumed consumption",
               "amountUsd": 5386.0,
-              "derivation": "authorised assumption: the donor's multiple times this route's cash",
+              "derivation": "authorised assumption: the same model's measured multiple (another effort) times this route's cash",
               "feePeriod": "month",
               "subscriptionCashUsd": 500,
               "additionalCashUsd": 0.0,
@@ -43167,7 +43167,7 @@
               "capacityStatus": "capacity established on the measurement workload",
               "valuationStatus": "unverified",
               "donorRouteId": "chatgpt-pro500-gpt61sol-semianalysis",
-              "interpretationLabel": "assumed API-equivalent consumption (owner-named transfer), API-priced USD per month"
+              "interpretationLabel": "assumed API-equivalent consumption (same-model assumption across efforts, O88), API-priced USD per month"
             },
             "workday": {
               "status": "not evaluated: no evidenced quota schema for this route",
@@ -43853,7 +43853,7 @@
             "donorRouteId": "claude-pro-opus55-semianalysis",
             "flags": [
               "workload-unmatched",
-              "owner-named transfer (assumption)",
+              "same-model assumption across efforts (O88)",
               "possibly-superseded",
               "valuation basis unverified"
             ],
@@ -43881,10 +43881,10 @@
             },
             "selectedIdentification": "unidentified",
             "amount": {
-              "amountKind": "assumed API-equivalent consumption (owner-named transfer)",
+              "amountKind": "assumed API-equivalent consumption (same-model assumption across efforts, O88)",
               "amountTarget": "assumed consumption",
               "amountUsd": 1178.0,
-              "derivation": "authorised assumption: the donor's multiple times this route's cash",
+              "derivation": "authorised assumption: the same model's measured multiple (another effort) times this route's cash",
               "feePeriod": "month",
               "subscriptionCashUsd": 20,
               "additionalCashUsd": 0.0,
@@ -43897,7 +43897,7 @@
               "capacityStatus": "capacity established on the measurement workload",
               "valuationStatus": "unverified",
               "donorRouteId": "claude-pro-opus55-semianalysis",
-              "interpretationLabel": "assumed API-equivalent consumption (owner-named transfer), API-priced USD per month"
+              "interpretationLabel": "assumed API-equivalent consumption (same-model assumption across efforts, O88), API-priced USD per month"
             },
             "workday": {
               "status": "not evaluated: no evidenced quota schema for this route",
@@ -44590,7 +44590,7 @@
               "amountKind": "provider quota ceiling: the full quota at API rates (O46; full use assumed)",
               "amountTarget": "full-quota consumption",
               "amountUsd": 118.08000000000001,
-              "derivation": "quota ceiling: the tier's credits at the provider's API rate (I69 L3)",
+              "derivation": "quota ceiling: the tier's credits at the provider's API rate",
               "feePeriod": "month",
               "subscriptionCashUsd": 100,
               "additionalCashUsd": 0.0,
@@ -45289,7 +45289,7 @@
             "donorRouteId": "claude-pro-opus55-semianalysis",
             "flags": [
               "workload-unmatched",
-              "owner-named transfer (assumption)",
+              "same-model assumption across efforts (O88)",
               "possibly-superseded",
               "valuation basis unverified"
             ],
@@ -45317,10 +45317,10 @@
             },
             "selectedIdentification": "unidentified",
             "amount": {
-              "amountKind": "assumed API-equivalent consumption (owner-named transfer)",
+              "amountKind": "assumed API-equivalent consumption (same-model assumption across efforts, O88)",
               "amountTarget": "assumed consumption",
               "amountUsd": 1178.0,
-              "derivation": "authorised assumption: the donor's multiple times this route's cash",
+              "derivation": "authorised assumption: the same model's measured multiple (another effort) times this route's cash",
               "feePeriod": "month",
               "subscriptionCashUsd": 20,
               "additionalCashUsd": 0.0,
@@ -45333,7 +45333,7 @@
               "capacityStatus": "capacity established on the measurement workload",
               "valuationStatus": "unverified",
               "donorRouteId": "claude-pro-opus55-semianalysis",
-              "interpretationLabel": "assumed API-equivalent consumption (owner-named transfer), API-priced USD per month"
+              "interpretationLabel": "assumed API-equivalent consumption (same-model assumption across efforts, O88), API-priced USD per month"
             },
             "workday": {
               "status": "not evaluated: no evidenced quota schema for this route",
@@ -45991,7 +45991,7 @@
             "donorRouteId": "chatgpt-pro500-gpt61sol-semianalysis",
             "flags": [
               "workload-unmatched",
-              "owner-named transfer (assumption)",
+              "same-model assumption across efforts (O88)",
               "possibly-superseded",
               "valuation basis unverified"
             ],
@@ -46025,10 +46025,10 @@
             },
             "selectedIdentification": "unidentified",
             "amount": {
-              "amountKind": "assumed API-equivalent consumption (owner-named transfer)",
+              "amountKind": "assumed API-equivalent consumption (same-model assumption across efforts, O88)",
               "amountTarget": "assumed consumption",
               "amountUsd": 5386.0,
-              "derivation": "authorised assumption: the donor's multiple times this route's cash",
+              "derivation": "authorised assumption: the same model's measured multiple (another effort) times this route's cash",
               "feePeriod": "month",
               "subscriptionCashUsd": 500,
               "additionalCashUsd": 0.0,
@@ -46041,7 +46041,7 @@
               "capacityStatus": "capacity established on the measurement workload",
               "valuationStatus": "unverified",
               "donorRouteId": "chatgpt-pro500-gpt61sol-semianalysis",
-              "interpretationLabel": "assumed API-equivalent consumption (owner-named transfer), API-priced USD per month"
+              "interpretationLabel": "assumed API-equivalent consumption (same-model assumption across efforts, O88), API-priced USD per month"
             },
             "workday": {
               "status": "not evaluated: no evidenced quota schema for this route",
@@ -46731,7 +46731,7 @@
             "donorRouteId": "chatgpt-pro200-gpt6astra-semianalysis",
             "flags": [
               "workload-unmatched",
-              "owner-named transfer (assumption)",
+              "same-model assumption across efforts (O88)",
               "possibly-superseded",
               "valuation basis unverified"
             ],
@@ -46765,10 +46765,10 @@
             },
             "selectedIdentification": "unidentified",
             "amount": {
-              "amountKind": "assumed API-equivalent consumption (owner-named transfer)",
+              "amountKind": "assumed API-equivalent consumption (same-model assumption across efforts, O88)",
               "amountTarget": "assumed consumption",
               "amountUsd": 2897.0,
-              "derivation": "authorised assumption: the donor's multiple times this route's cash",
+              "derivation": "authorised assumption: the same model's measured multiple (another effort) times this route's cash",
               "feePeriod": "month",
               "subscriptionCashUsd": 200,
               "additionalCashUsd": 0.0,
@@ -46781,7 +46781,7 @@
               "capacityStatus": "capacity established on the measurement workload",
               "valuationStatus": "unverified",
               "donorRouteId": "chatgpt-pro200-gpt6astra-semianalysis",
-              "interpretationLabel": "assumed API-equivalent consumption (owner-named transfer), API-priced USD per month"
+              "interpretationLabel": "assumed API-equivalent consumption (same-model assumption across efforts, O88), API-priced USD per month"
             },
             "workday": {
               "status": "not evaluated: no evidenced quota schema for this route",
@@ -52118,7 +52118,7 @@
           "fallback": null,
           "flags": [
             "workload-unmatched",
-            "owner-named transfer (assumption)",
+            "same-model assumption across efforts (O88)",
             "possibly-superseded",
             "valuation basis unverified"
           ],
@@ -52142,7 +52142,7 @@
           "fallback": null,
           "flags": [
             "workload-unmatched",
-            "owner-named transfer (assumption)",
+            "same-model assumption across efforts (O88)",
             "possibly-superseded",
             "valuation basis unverified"
           ],
@@ -52166,7 +52166,7 @@
           "fallback": null,
           "flags": [
             "workload-unmatched",
-            "owner-named transfer (assumption)",
+            "same-model assumption across efforts (O88)",
             "possibly-superseded",
             "valuation basis unverified"
           ],
@@ -52190,7 +52190,7 @@
           "fallback": null,
           "flags": [
             "workload-unmatched",
-            "owner-named transfer (assumption)",
+            "same-model assumption across efforts (O88)",
             "possibly-superseded",
             "valuation basis unverified"
           ],
@@ -52208,13 +52208,13 @@
           "plan": "Claude Max 20x",
           "representative": false,
           "routeId": "claude-max20x-claude-opus-5-5-high-common-opus55-assumption",
-          "planLabel": "Claude Max 20x $200 · common Claude assumption",
+          "planLabel": "Claude Max 20x $200 · same-model assumption (O88)",
           "grade": "assumption",
           "multiple": 58.63,
           "fallback": null,
           "flags": [
             "workload-unmatched",
-            "owner-named transfer (assumption)",
+            "same-model assumption across efforts (O88)",
             "possibly-superseded",
             "valuation basis unverified"
           ],
@@ -52232,13 +52232,13 @@
           "plan": "Claude Max 5x",
           "representative": false,
           "routeId": "claude-max5x-claude-opus-5-5-high-common-opus55-assumption",
-          "planLabel": "Claude Max 5x $100 · common Claude assumption",
+          "planLabel": "Claude Max 5x $100 · same-model assumption (O88)",
           "grade": "assumption",
           "multiple": 57.25,
           "fallback": null,
           "flags": [
             "workload-unmatched",
-            "owner-named transfer (assumption)",
+            "same-model assumption across efforts (O88)",
             "possibly-superseded",
             "valuation basis unverified"
           ],
@@ -52256,13 +52256,13 @@
           "plan": "Claude Pro",
           "representative": true,
           "routeId": "claude-pro-claude-opus-5-5-high-common-opus55-assumption",
-          "planLabel": "Claude Pro $20 · common Claude assumption",
+          "planLabel": "Claude Pro $20 · same-model assumption (O88)",
           "grade": "assumption",
           "multiple": 58.9,
           "fallback": null,
           "flags": [
             "workload-unmatched",
-            "owner-named transfer (assumption)",
+            "same-model assumption across efforts (O88)",
             "possibly-superseded",
             "valuation basis unverified"
           ],
@@ -52368,13 +52368,13 @@
           "plan": "Claude Max 20x",
           "representative": false,
           "routeId": "claude-max20x-claude-opus-5-5-medium-common-opus55-assumption",
-          "planLabel": "Claude Max 20x $200 · common Claude assumption",
+          "planLabel": "Claude Max 20x $200 · same-model assumption (O88)",
           "grade": "assumption",
           "multiple": 58.63,
           "fallback": null,
           "flags": [
             "workload-unmatched",
-            "owner-named transfer (assumption)",
+            "same-model assumption across efforts (O88)",
             "possibly-superseded",
             "valuation basis unverified"
           ],
@@ -52392,13 +52392,13 @@
           "plan": "Claude Max 5x",
           "representative": false,
           "routeId": "claude-max5x-claude-opus-5-5-medium-common-opus55-assumption",
-          "planLabel": "Claude Max 5x $100 · common Claude assumption",
+          "planLabel": "Claude Max 5x $100 · same-model assumption (O88)",
           "grade": "assumption",
           "multiple": 57.25,
           "fallback": null,
           "flags": [
             "workload-unmatched",
-            "owner-named transfer (assumption)",
+            "same-model assumption across efforts (O88)",
             "possibly-superseded",
             "valuation basis unverified"
           ],
@@ -52416,13 +52416,13 @@
           "plan": "Claude Pro",
           "representative": true,
           "routeId": "claude-pro-claude-opus-5-5-medium-common-opus55-assumption",
-          "planLabel": "Claude Pro $20 · common Claude assumption",
+          "planLabel": "Claude Pro $20 · same-model assumption (O88)",
           "grade": "assumption",
           "multiple": 58.9,
           "fallback": null,
           "flags": [
             "workload-unmatched",
-            "owner-named transfer (assumption)",
+            "same-model assumption across efforts (O88)",
             "possibly-superseded",
             "valuation basis unverified"
           ],
@@ -52446,7 +52446,7 @@
           "fallback": null,
           "flags": [
             "workload-unmatched",
-            "owner-named transfer (assumption)",
+            "same-model assumption across efforts (O88)",
             "possibly-superseded",
             "valuation basis unverified"
           ],
@@ -52470,7 +52470,7 @@
           "fallback": null,
           "flags": [
             "workload-unmatched",
-            "owner-named transfer (assumption)",
+            "same-model assumption across efforts (O88)",
             "possibly-superseded",
             "valuation basis unverified"
           ],
@@ -52494,7 +52494,7 @@
           "fallback": null,
           "flags": [
             "workload-unmatched",
-            "owner-named transfer (assumption)",
+            "same-model assumption across efforts (O88)",
             "possibly-superseded",
             "valuation basis unverified"
           ],
@@ -52518,7 +52518,7 @@
           "fallback": null,
           "flags": [
             "workload-unmatched",
-            "owner-named transfer (assumption)",
+            "same-model assumption across efforts (O88)",
             "possibly-superseded",
             "valuation basis unverified"
           ],
@@ -52542,7 +52542,7 @@
           "fallback": null,
           "flags": [
             "workload-unmatched",
-            "owner-named transfer (assumption)",
+            "same-model assumption across efforts (O88)",
             "possibly-superseded",
             "valuation basis unverified"
           ],
@@ -52566,7 +52566,7 @@
           "fallback": null,
           "flags": [
             "workload-unmatched",
-            "owner-named transfer (assumption)",
+            "same-model assumption across efforts (O88)",
             "possibly-superseded",
             "valuation basis unverified"
           ],
@@ -52590,7 +52590,7 @@
           "fallback": null,
           "flags": [
             "workload-unmatched",
-            "owner-named transfer (assumption)",
+            "same-model assumption across efforts (O88)",
             "possibly-superseded",
             "valuation basis unverified"
           ],
@@ -52614,7 +52614,7 @@
           "fallback": null,
           "flags": [
             "workload-unmatched",
-            "owner-named transfer (assumption)",
+            "same-model assumption across efforts (O88)",
             "possibly-superseded",
             "valuation basis unverified"
           ],
@@ -61355,7 +61355,7 @@
           {
             "key": "planRoutes",
             "artifact": "data/plan_cost_routes.json",
-            "sha256": "9c9e4228de6253bc843ff50b627119cc2654e0b82e573c22090c381249e5345d",
+            "sha256": "830face81dadffa28dd9d86912bce9660c1078df2b9a7a9772e1fa922e201efa",
             "capturedAt": "2026-10-25",
             "extractor": "editorial Plan evidence registry"
           },
@@ -61423,7 +61423,7 @@
             "extractor": "valuerank.value_v3 freeze"
           }
         ],
-        "bundleHash": "5b63aa4d5dd7c291b90ad0f5a11ff8ea9238d31f06e2bbe8d141dd4881cfd951",
+        "bundleHash": "b3738400aadadac39df08bde28b3e691c105270641d77d3d68559c2c7b9e3d26",
         "rebuild": "every published output is rebuilt from these artifacts at the pinned publication clock (npm run verify:docs), never from live pages"
       },
       "track": {

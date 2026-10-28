@@ -583,7 +583,9 @@ def plan_cost(api_cost: float | None, selected: dict | None) -> dict:
     flags = []
     if selected["identification"] not in {"point-identified", "set-identified"}:
         flags.append("workload-unmatched")
-    if selected["grade"] == "assumption" and route.get("evidenceClass") != "provider_quota_ceiling":
+    if route.get("sameModelAcrossEfforts"):
+        flags.append("same-model assumption across efforts (O88)")
+    elif selected["grade"] == "assumption" and route.get("evidenceClass") != "provider_quota_ceiling":
         flags.append("owner-named transfer (assumption)")
     if selected["expiry"] in {"possibly-superseded", "expired"}:
         flags.append(selected["expiry"])

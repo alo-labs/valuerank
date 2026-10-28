@@ -58,7 +58,7 @@ def test_cells_pass_only_on_two_firm_concordant_reports_in_the_current_partition
     assert passing["status"] == "passes" and passing["value"] == pytest.approx(105) and passing["range"] == [100, 110]
     assert passing["admittingObservers"] == ["a", "b"]
     assert passing["monthlyUsd"] == pytest.approx(105 * 4.33) and passing["multiple"] == pytest.approx(105 * 4.33 / 20)
-    assert cells(report("a", start="2026-10-18", end="2026-10-18", low=100), report("b", start="2026-10-19", end="2026-10-19", low=125))[("Pro", "week", "global")]["status"] == "fails: no common value within 1.20× (1.25× apart) in the current partition"
+    assert cells(report("a", start="2026-10-18", end="2026-10-18", low=100), report("b", start="2026-10-19", end="2026-10-19", low=125))[("Pro", "week", "global")]["status"] == "fails: largest lower bound 1.25× the smallest upper bound (O86 allows 1.20×) in the current partition"
     # O86: coarse whole-percent readings 7% apart share a value, though their whole span is 1.23x.
     coarse = cells(report("a", start="2026-10-18", end="2026-10-18", low=7.84, high=9.04), report("b", start="2026-10-19", end="2026-10-19", low=8.40, high=9.68))
     assert coarse[("Pro", "week", "global")]["status"] == "passes"
@@ -107,4 +107,4 @@ def test_the_committed_report_table_admits_no_cell_today():
     cells = pa.evaluate(document, profile, DAY)
     assert cells and not [cell for cell in cells if cell["status"] == "passes"]
     by = {(cell["plan"], cell["modelId"]): cell for cell in cells}
-    assert by[("Google AI Pro", "gemini-4-argon")]["status"] == "fails: no common value within 1.20× (1.35× apart) in the current partition"
+    assert by[("Google AI Pro", "gemini-4-argon")]["status"] == "fails: largest lower bound 1.35× the smallest upper bound (O86 allows 1.20×) in the current partition"

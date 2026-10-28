@@ -9,8 +9,8 @@ concordance test to every model × plan cell, and the build refuses a report rou
   provider-acknowledged accounting-fault day, and inside one partition (a report spanning a split is excluded);
 - a speed-mode value is converted at the provider's published multiplier and flagged (O76);
 - a partition splits at each recorded change (E18 or provider-documented, O83); the partition current at the cutoff decides;
-- the cell passes when it has at least two non-provisional reports, one value lies within 1.20× of every report's
-  range (O86: the largest lower bound is at most 1.20× the smallest upper bound; E98, E107: every eligible report together),
+- the cell passes when it has at least two non-provisional reports, the largest lower bound is at most 1.20× the smallest
+  upper bound (O86; E98, E107: every eligible report together),
   reports at any effort pool for the model (O87), the unit converts to a month (O82: a 5-hour figure
   never does), and every cell is tested (O85: a cell on a plan the Plan ranking does not list is published as evidence
   only and supports no route); the value is the geometric mean of the firm reports' midpoints.
@@ -147,8 +147,8 @@ def evaluate(document: dict, profile: dict, release_day: date, families: dict | 
         observers = [row["observer"] for row in pool]
         lowest = min((row["valueLower"] for row in pool), default=None)
         highest = max((row["valueUpper"] for row in pool), default=None)
-        # O86: the reports concord when one value lies within 1.20x of every report's range (the largest lower bound is at
-        # most 1.20x the smallest upper bound), so a coarse meter reading is not mistaken for disagreement.
+        # O86: the reports concord when the largest lower bound is at most 1.20x the smallest upper bound, so a coarse meter
+        # reading is not mistaken for disagreement.
         largest_lower = max((row["valueLower"] for row in pool), default=None)
         smallest_upper = min((row["valueUpper"] for row in pool), default=None)
         firm = [row for row in pool if not row["provisional"]]
@@ -161,7 +161,7 @@ def evaluate(document: dict, profile: dict, release_day: date, families: dict | 
         elif len(firm) < 2:
             status = f"fails: {len(firm)} non-provisional report(s) in the current partition"
         elif largest_lower > CONCORDANCE * smallest_upper:
-            status = f"fails: no common value within 1.20× ({largest_lower / smallest_upper:.2f}× apart) in the current partition"
+            status = f"fails: largest lower bound {largest_lower / smallest_upper:.2f}× the smallest upper bound (O86 allows 1.20×) in the current partition"
         else:
             status = "passes"
         # I64 L3: the split comes first, then the range test over every eligible report of the current partition (provisional

@@ -2439,8 +2439,9 @@ AMOUNT_KINDS = {
     "capacity": "measured-workload capacity",
     "observed": "observed eligible consumption (capacity not established)",
     "ceiling": "provider quota ceiling: the full quota at API rates (O46; full use assumed)",
+    "sameModel": "assumed API-equivalent consumption (same-model assumption across efforts, O88)",
 }
-AMOUNT_TARGETS = {"ceiling": "full-quota consumption", "transfer": "assumed consumption", "identified": "target-workload capacity", "capacity": "measured-workload capacity", "observed": "measured-workload consumption"}
+AMOUNT_TARGETS = {"ceiling": "full-quota consumption", "sameModel": "assumed consumption", "transfer": "assumed consumption", "identified": "target-workload capacity", "capacity": "measured-workload capacity", "observed": "measured-workload consumption"}
 NO_TARGET_LINEAGE = "not derivable: the target solution's cash lineage is not established"
 
 
@@ -2448,7 +2449,9 @@ def _amount_derivation(kind: str, route: dict, multiple: float, gross: float) ->
     """E168: an amount and how it was derived; M x F reproduces an amount only within one object."""
 
     if kind == "ceiling":
-        return (multiple * gross if math.isfinite(gross) else None), "quota ceiling: the tier's credits at the provider's API rate (I69 L3)"
+        return (multiple * gross if math.isfinite(gross) else None), "quota ceiling: the tier's credits at the provider's API rate"
+    if kind == "sameModel":
+        return (multiple * gross if math.isfinite(gross) else None), "authorised assumption: the same model's measured multiple (another effort) times this route's cash"
     if kind == "transfer":
         return (multiple * gross if math.isfinite(gross) else None), "authorised assumption: the donor's multiple times this route's cash"
     if kind == "identified":
@@ -2471,6 +2474,8 @@ def plan_amount(selected: dict | None, workload: str | None = None) -> dict | No
     route = selected["route"]
     if route.get("evidenceClass") == "provider_quota_ceiling":
         kind = "ceiling"
+    elif route.get("sameModelAcrossEfforts"):
+        kind = "sameModel"
     elif selected["grade"] == "assumption":
         kind = "transfer"
     elif selected["identification"] in plan_routes.IDENTIFIED:

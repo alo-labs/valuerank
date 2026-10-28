@@ -1720,3 +1720,11 @@ Asked on I64 Q1 whether future O71 admissions should be executed by the build fr
 - L3 (adopted, engine changed with tests): an O46 ceiling has its own E166 amount kind ("provider quota ceiling: the full quota at API rates") and derivation, and its selection reason reads "larger quota-ceiling multiple"; the draft's E139 and E166 lists include the ceiling.
 - L4 / Q2 (asked; O88, data changed).
 - Round status (O56): not clean (one Medium). Draft r129.
+
+## Internal review I70 (Claude Opus 5.5, effort medium, on r129) — adopted, modified or rejected
+- M1 (adopted, data changed): the registry's `gptApplication` (which renders into methodology.md and the site) and AGENTS.md's GPT bullet now state O88: GPT-6.1 Sol's and GPT-6 Astra's other efforts take their own model's figure; the lower-of rule applies to every other GPT model.
+- L1 (adopted): E106 case (1) says a controlled measurement serves its model's other efforts only as an O88 same-model assumption graded "assumption", never exact-route evidence; the Assumptions bullet, E167 and E242 name O88 rows.
+- L2 (adopted, engine and data changed with tests; Q1 answered by O88's own wording, no new decision): the 33 same-model routes (GPT-6.1 Sol and GPT-6 Astra's other efforts, and Opus 5.5 at xhigh, high and medium, whose figure was already Opus 5.5's own) record `sameModelAcrossEfforts`, are labelled "same-model assumption (O88)", carry the flag "same-model assumption across efforts (O88)" instead of "owner-named transfer", and have their own E166 amount kind; "those two models" names them.
+- L3 (adopted): the docstring, comment and published failure status state O86's formula ("largest lower bound 1.35× the smallest upper bound (O86 allows 1.20×)").
+- L4 (adopted): `o72Application` states O86–O88; the ceiling derivation no longer carries a review label.
+- Round status (O56): not clean (one Medium). Draft r130.

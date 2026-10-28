@@ -248,7 +248,7 @@
     "workload": "1453a9a0576b02ea",
     "planFlags": [
       "workload-unmatched",
-      "owner-named transfer (assumption)",
+      "same-model assumption across efforts (O88)",
       "possibly-superseded",
       "valuation basis unverified"
     ],
@@ -317,10 +317,10 @@
     "aaCostCaveat": null,
     "selectionReason": "larger observed multiple (observed-workload multiple — target-workload ordering not identified)",
     "planAmount": {
-      "amountKind": "assumed API-equivalent consumption (owner-named transfer)",
+      "amountKind": "assumed API-equivalent consumption (same-model assumption across efforts, O88)",
       "amountTarget": "assumed consumption",
       "amountUsd": 5386.0,
-      "derivation": "authorised assumption: the donor's multiple times this route's cash",
+      "derivation": "authorised assumption: the same model's measured multiple (another effort) times this route's cash",
       "feePeriod": "month",
       "subscriptionCashUsd": 500,
       "additionalCashUsd": 0.0,
@@ -333,7 +333,7 @@
       "capacityStatus": "capacity established on the measurement workload",
       "valuationStatus": "unverified",
       "donorRouteId": "chatgpt-pro500-gpt61sol-semianalysis",
-      "interpretationLabel": "assumed API-equivalent consumption (owner-named transfer), API-priced USD per month"
+      "interpretationLabel": "assumed API-equivalent consumption (same-model assumption across efforts, O88), API-priced USD per month"
     }
   },
   "plans": [
