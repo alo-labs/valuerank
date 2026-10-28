@@ -2109,3 +2109,22 @@ def test_a_row_whose_aa_cost_omits_a_pricing_term_competes_over_a_range_without_
     assert unresolved["status"] == v.intervals.UNRESOLVED and "a" in unresolved["blockers"]
     row["aaNote"] = "Unrelated note."
     assert v.aa_cost_caveat(row) is None and v.caveat_factor(row) is None
+
+
+def test_the_aa_caveat_reading_fails_closed_and_applies_on_subset_workloads():
+    """I81 L3: only a sentence naming a price or cost AA does not reflect is a caveat; the largest stated factor applies;
+    any caveat sentence without a factor leaves the row unboundable; that makes subset-workload outputs unresolved too."""
+
+    result, frozen = scored()
+    row = next(item for item in result["rows"] if item["id"] == "a")
+    for note in ("Model A used 3x more tokens than its predecessor; its cost figure reflects this.",
+                 "Pricing shown is for the batch API, which is 2x the speed of the standard API.",
+                 "Model A declined some tasks on safety grounds; cost is for completed tasks only."):
+        assert v.aa_cost_caveat({**row, "aaNote": note}) is None, note
+    assert v.caveat_factor({**row, "aaNote": "1.5x higher output pricing and 4x higher input pricing beyond 200k are not reflected."}) == 4.0
+    assert v.caveat_factor({**row, "aaNote": "Cached-input pricing is not reflected. Long inputs have 2x higher pricing."}) is None
+    components = sorted(row["components"])[:1]
+    assert v.interval_outputs(result, frozen, "api", components)["status"] != v.intervals.UNRESOLVED
+    row["aaNote"] = "Prices double beyond 200k tokens, which is not reflected."
+    subset = v.interval_outputs(result, frozen, "api", components)
+    assert subset["status"] == v.intervals.UNRESOLVED and "a" in subset["blockers"]

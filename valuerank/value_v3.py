@@ -1049,22 +1049,31 @@ def _gated_box(row: dict, low: float, high: float, basis: str) -> intervals.Box 
 
 
 AA_CAVEAT_FACTOR = re.compile(r"(\d+(?:\.\d+)?)\s*(?:x|×|times)\s+(?:higher|more|the)\b", re.IGNORECASE)
+# I81 L3: a pricing caveat is a sentence about a price or cost figure that AA says its cost does not reflect.
+AA_PRICING_TERM = re.compile(r"\b(?:pric(?:e|es|ed|ing)|cost figures?|costs?)\b", re.IGNORECASE)
+AA_OMISSION = re.compile(r"\bnot (?:currently )?(?:reflected|included|counted)\b|\bexclud(?:es|ed|ing)\b|\bomit(?:s|ted)?\b|\bhigher pricing\b", re.IGNORECASE)
+
+
+def _caveat_sentences(row: dict) -> list[str]:
+    note = row.get("aaNote") or ""
+    return [sentence for sentence in re.split(r"(?<=[.;])\s+", note) if AA_PRICING_TERM.search(sentence) and AA_OMISSION.search(sentence)]
 
 
 def aa_cost_caveat(row: dict) -> str | None:
-    """E141: AA's own note on what its published cost omits (a pricing term), or None."""
+    """E141, O94: AA's own note when it says its published cost omits a pricing term, or None (a note about anything else,
+    such as declined tasks, is not a cost caveat)."""
 
-    note = row.get("aaNote")
-    return note if note and any(word in note.lower() for word in ("pricing", "cost", "price")) else None
+    return row.get("aaNote") if _caveat_sentences(row) else None
 
 
 def caveat_factor(row: dict) -> float | None:
     """O94: the most the omitted pricing term can multiply the row's cost by, read from AA's note (e.g. "5x higher
-    pricing"); None when the row has no caveat or the note states no factor (its box cannot then be constructed)."""
+    pricing"; the largest when several are stated); None when the row has no caveat or a caveat sentence states no factor (its box
+    cannot then be constructed)."""
 
-    note = aa_cost_caveat(row)
-    match = AA_CAVEAT_FACTOR.search(note) if note else None
-    return float(match.group(1)) if match else None
+    per_sentence = [[float(match.group(1)) for match in AA_CAVEAT_FACTOR.finditer(sentence)] for sentence in _caveat_sentences(row)]
+    # A caveat sentence that states no factor leaves its term unbounded, whatever the others state.
+    return max(max(factors) for factors in per_sentence) if per_sentence and all(per_sentence) else None
 
 
 def provider_claimed(row: dict) -> bool:
@@ -1083,25 +1092,24 @@ def blocker_domain(gate: dict, basis: str) -> tuple[float, float] | None:
     return (low, high) if high is not None and low > 0 else None
 
 
-def api_boxes(assembled: dict, components: list[str] | None = None) -> list[intervals.Box]:
-    """R_W on the API basis: ranked rows with FullCost on the main workload (E37), or on the subset workload of
-    ``components`` (E190), as admissible boxes."""
+def api_candidates(assembled: dict, components: list[str] | None = None) -> list[tuple[dict, float, float]]:
+    """The rows (with their cost range) R_W admits on the API basis before the valuation gate: ranked rows with FullCost on
+    the main workload (E37), or on the subset workload of ``components`` (E190)."""
 
-    boxes = []
+    found = []
     for row in assembled["rows"]:
         cost = row["cost"] if components is None else basket.row_cost(row["components"], components)
         on_workload = components is not None or cost["workload"] == assembled["mainWorkload"]
         if cost["fullCost"] and on_workload and anchor_math.scoreable(cost["lowUsd"]):
-            box = _gated_box(row, cost["lowUsd"], cost["highUsd"], "api")
-            if box is not None:
-                boxes.append(box)
-    return boxes
+            found.append((row, cost["lowUsd"], cost["highUsd"]))
+    return found
 
 
-def plan_boxes(assembled: dict) -> list[intervals.Box]:
-    """R_W on the Plan basis: FullCost on the main workload and an identified, finite M_W (E106 PlanIntervalEligible)."""
+def plan_candidates(assembled: dict) -> list[tuple[dict, float, float]]:
+    """The rows R_W admits on the Plan basis before the valuation gate: FullCost on the main workload and an identified,
+    finite M_W (E106 PlanIntervalEligible)."""
 
-    boxes = []
+    found = []
     for row in assembled["rows"]:
         selected = row["routeSelection"]["selected"]
         cost = row["cost"]
@@ -1111,10 +1119,24 @@ def plan_boxes(assembled: dict) -> list[intervals.Box]:
         # E138: an unrecorded or different valuation basis is never interval-eligible.
         if bounds is None or not anchor_math.scoreable(bounds[1]) or selected["valuation"] not in {"release", "revalued"}:
             continue
-        box = _gated_box(row, cost["lowUsd"] / bounds[1], cost["highUsd"] / bounds[0], "plan")
-        if box is not None:
-            boxes.append(box)
-    return boxes
+        found.append((row, cost["lowUsd"] / bounds[1], cost["highUsd"] / bounds[0]))
+    return found
+
+
+def _boxes(candidates: list[tuple[dict, float, float]], basis: str) -> list[intervals.Box]:
+    return [box for row, low, high in candidates if (box := _gated_box(row, low, high, basis)) is not None]
+
+
+def api_boxes(assembled: dict, components: list[str] | None = None) -> list[intervals.Box]:
+    """R_W on the API basis as admissible boxes."""
+
+    return _boxes(api_candidates(assembled, components), "api")
+
+
+def plan_boxes(assembled: dict) -> list[intervals.Box]:
+    """R_W on the Plan basis as admissible boxes."""
+
+    return _boxes(plan_candidates(assembled), "plan")
 
 
 # E192: the bar is a quality level. A configuration on the frontier it tests can never be beaten there, so a
@@ -1272,14 +1294,16 @@ def interval_outputs(assembled: dict, frozen: dict, basis: str, components: list
     identified for a subset workload).
     """
 
-    boxes = api_boxes(assembled, components) if basis == "api" else plan_boxes(assembled)
+    candidates = api_candidates(assembled, components) if basis == "api" else plan_candidates(assembled)
+    boxes = _boxes(candidates, basis)
     # E183: competitors range over U_W = R_W plus the O29 blockers B_W; labels go to R_W only.
     not_in_force = {row["id"] for row in assembled["rows"] if row["valuationGate"]["outcome"] == GATE_NOT_IN_FORCE}
     # I80 L2: an O94 row whose note states no factor has no constructible domain either, so no other row is certified
     # against it (E183): the outputs are unresolved, never silently computed without it.
+    # I81 L3: on every workload (a subset's too) and basis, among the rows R_W would otherwise admit.
     unconstructible = sorted(row["id"] for row in assembled["rows"]
                              if (row["id"] in not_in_force and blocker_domain(row["valuationGate"], basis) is None)
-                             or (aa_cost_caveat(row) and caveat_factor(row) is None and row["cost"]["fullCost"] and row["cost"]["workload"] == assembled["mainWorkload"]))
+                             or (aa_cost_caveat(row) and caveat_factor(row) is None and any(item is row for item, _, _ in candidates)))
     # E222/E228/E233: an unverified basis, a provider-claimed leaf, or (Plan) a route whose evidence a detected change may
     # have superseded, competes but earns no label, exactly like an O29 blocker.
     blocked = not_in_force | {row["id"] for row in assembled["rows"] if row["valuationGate"]["outcome"] == GATE_UNVERIFIED or provider_claimed(row) or aa_cost_caveat(row)}
@@ -3081,7 +3105,8 @@ def bar_labels(assembled: dict, frozen: dict, *, seed: int, batch: int) -> list[
     return labels
 
 
-BLOCKER_UNRESOLVED = "scenario frequency passes; superseded-price blocker unresolved"
+# I81 L4: an O29, E222, E228, E233 or O94 blocker alike.
+BLOCKER_UNRESOLVED = "scenario frequency passes; blocker unresolved"
 
 DUAL_RUN_FILE = "v3_dual_run.json"
 

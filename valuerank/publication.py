@@ -41,6 +41,9 @@ BENCHMARK_URLS = {
 
 
 def plan_evidence_label(route):
+    if route.get("followsReportPair"):
+        # O96, O97: the same-model route now carries its donor's replacing report pair.
+        return f"Concordant user reports ({route['followsReportPair']}), followed from the same model's replaced measurement (owner decisions O96, O97)"
     if route.get("sameModelAcrossEfforts"):
         # O88, O90 (I74 L1): the same model's controlled measurement serving another effort is measured evidence.
         return "Same-model measurement from another effort (owner decisions O88, O90)"

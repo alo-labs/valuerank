@@ -28,6 +28,8 @@ def test_evidence_labels():
     # O40: an exact measurement added to the selected article after selection is labelled as such.
     assert pub.plan_evidence_label({"evidenceClass": "controlled_account_workload_projection", "addedAfterSelection": "2026-11-02"}).endswith("(added after selection, 2026-11-02)")
     assert pub.plan_evidence_label({}) == "Unclassified"
+    # O97: a same-model route following a replacing report pair is labelled as that pair.
+    assert pub.plan_evidence_label({"followsReportPair": "pair", "sameModelAcrossEfforts": False}).startswith("Concordant user reports (pair)")
 
 
 def test_benchmark_urls_share_the_source_constants():

@@ -196,7 +196,9 @@ def _route_view(route: dict | None, grade: str | None = None) -> dict | None:
         "planLabel": route.get("planLabel"),
         "planFeeUsd": route.get("planPriceUsd"),
         "valueMultiple": route["valueMultiple"],
-        "grade": ROUTE_GRADES[grade] if grade else evidence.route_grade(route.get("evidenceClass"), bool(route.get("sameModelAcrossEfforts"))),
+        # O97: a same-model route following its donor's replacing report pair is graded as that pair.
+        "grade": ROUTE_GRADES[grade] if grade else evidence.route_grade("user_reported_projection" if route.get("followsReportPair") else route.get("evidenceClass"),
+                                                                       bool(route.get("sameModelAcrossEfforts"))),
         # I71: which owner assumption an assumption-graded route is, named from the one registry.
         "assumptionKind": plan_routes.assumption_kind(route) if grade == "assumption" else None,
         "evidenceLabel": plan_evidence_label(route),

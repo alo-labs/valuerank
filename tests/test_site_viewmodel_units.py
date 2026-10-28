@@ -54,6 +54,7 @@ def test_route_view_grades_selected_routes_by_engine_grade_and_others_by_class()
     assert viewmodel._route_view(route)["grade"] == "assumption"
     assert viewmodel._route_view(route, "controlled")["grade"] == "measured"
     assert viewmodel._route_view(route, "reports")["grade"] == "estimate"
+    assert viewmodel._route_view({**route, "followsReportPair": "pair"})["grade"] == "estimate"  # O97
     assert viewmodel._route_view(route)["planFeeUsd"] == 20 and viewmodel._route_view(route)["sourceDate"] == "2026-10-06"
 
 

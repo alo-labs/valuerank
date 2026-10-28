@@ -767,3 +767,58 @@ def test_every_transfer_follows_its_donor_and_a_replacing_pair_can_be_the_lowest
                 donorRule="lower-of", sourceEvidenceClass="controlled_account_workload_projection")
     registry["luna"] = luna
     assert pr.rebase_transfer(luna, registry, day, None, faults)["donorRouteId"] == "opus-reports"
+
+
+def test_donor_following_uses_the_comparators_replacement_test():
+    """I81 L1: (a) a change dated before the measurement replaces nothing, for the donor's row and its followers alike; (b) a
+    report route listing another configuration of the donor model covers it (O87); (c) several replacing pairs are taken
+    in comparator order, not registry order."""
+
+    opus = dict(route("opus", 10.0, models=("opus",)), provider="P", plan="Pro", sourceEvidenceId="sa", sourcePublicationDate="2026-10-06",
+                changeDetectedOn="2026-09-01")
+    sonnet = dict(route("sonnet", 10.0, kind="user_assumption", models=("sonnet",)), provider="P", plan="Pro", donorRouteId="opus",
+                  sourceEvidenceClass="controlled_account_workload_projection")
+    dated = [dict(comparable_report("a", 5.0), reportDate="2026-10-20"), dict(comparable_report("b", 5.1), reportDate="2026-10-21")]
+    pair = dict(route("opus-reports", 5.0, kind="user_reported_projection", models=("opus-high",)), plan="Pro", independentReports=dated)
+    day = date(2026, 10, 25)
+    registry = {item["id"]: item for item in (opus, sonnet, pair)}
+    # (a) earliest day 2026-09-07: the 2026-09-01 change cannot have superseded the measurement.
+    assert pr.effective_measurement(opus, registry, day, None, None) is opus
+    assert pr.rebase_transfer(sonnet, registry, day, None, None) is sonnet
+    # (b) a change inside the span: the pair registered for opus-high covers opus, its own row and its follower alike.
+    changed = {**opus, "changeDetectedOn": "2026-10-01"}
+    registry["opus"] = changed
+    assert pr.report_covers(pair, "opus") == "opus-high" and pr.report_covers(pair, "sonnet") is None
+    assert pr.report_covers(sonnet, "sonnet-high") is None  # only a report route covers other configurations
+    assert pr.effective_measurement(changed, registry, day, None, None)["baseRouteId"] == "opus-reports"
+    [own] = [item for item in pr.route_candidates("opus", None, list(registry.values()), day) if item["grade"] == "reports"]
+    assert own["route"]["id"].startswith("opus-reports")
+    assert pr.rebase_transfer(sonnet, registry, day, None, None)["donorRouteId"] == "opus-reports"
+    # (c) a second, larger pair listed first in the registry wins on the comparator's multiple key whichever comes first.
+    larger = {**pair, "id": "opus-reports-2", "independentReports": [dict(item, multiple=item["multiple"] * 2) for item in dated]}
+    for order in ((larger, pair), (pair, larger)):
+        ordered = {"opus": changed, **{item["id"]: item for item in order}}
+        assert pr.effective_measurement(changed, ordered, day, None, None)["baseRouteId"] == "opus-reports-2"
+        assert pr.select_route(pr.route_candidates("opus", None, list(ordered.values()), day))["route"]["id"].startswith("opus-reports-2")
+    assert pr.model_base("opus-high") == "opus" and pr.model_base("opus") == "opus" and pr.model_base(None) is None
+
+
+def test_an_o88_route_following_a_report_pair_takes_the_pairs_grade():
+    """O97 (I81 L2): an O88 route rebased onto a replacing report pair is graded "reports", loses the O88 flag and names the
+    pair; while its donor measurement stands it keeps O90's measured grade."""
+
+    faults = [{"provider": "P", "plans": ["Pro"], "days": ["2026-09-29..2026-10-16"], "evidence": "acknowledged"}]
+    opus = dict(route("opus", 58.0, models=("opus",)), provider="P", plan="Pro", sourceEvidenceId="sa", sourcePublicationDate="2026-10-06")
+    high = dict(route("opus-high-same", 58.0, kind="user_assumption", models=("opus-high",)), provider="P", plan="Pro", donorRouteId="opus",
+                sameModelAcrossEfforts=True, sourceEvidenceClass="controlled_account_workload_projection", sourceModel=opus.get("sourceModel"))
+    pair = dict(route("opus-reports", 30.0, kind="user_reported_projection", models=("opus",)), plan="Pro",
+                independentReports=[comparable_report("a", 30.0), comparable_report("b", 31.0)])
+    day = date(2026, 10, 25)
+    registry = [opus, high, pair]
+    [standing] = pr.route_candidates("opus-high", None, [high], day, registry=registry)
+    assert standing["grade"] == "controlled" and pr.grade_rank(standing) == pr.CROSS_EFFORT
+    [following] = pr.route_candidates("opus-high", None, [high], day, registry=registry, faults=faults)
+    assert following["grade"] == "reports" and pr.grade_rank(following) == pr.GRADE["reports"]
+    assert following["route"]["followsReportPair"] == "opus-reports" and not following["route"]["sameModelAcrossEfforts"]
+    flags = pr.plan_cost(100.0, following)["flags"]
+    assert pr.REPORT_PAIR_FLAG in flags and pr.CROSS_EFFORT_FLAG not in flags
