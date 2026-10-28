@@ -15886,7 +15886,7 @@
         "region": "global",
         "status": "fails: 0 non-provisional report(s) in the current partition",
         "listed": false,
-        "currentPartition": 4,
+        "currentPartition": 1,
         "partitionsWithReports": [],
         "configurations": [
           "gpt-6.1-sol"
@@ -15920,7 +15920,7 @@
         "region": "global",
         "status": "fails: a 5-hour figure never converts to a billing period (O82)",
         "listed": true,
-        "currentPartition": 4,
+        "currentPartition": 1,
         "partitionsWithReports": [],
         "configurations": [
           "gpt-5.6-luna-low"
@@ -15954,7 +15954,7 @@
         "region": "global",
         "status": "fails: 0 non-provisional report(s) in the current partition",
         "listed": true,
-        "currentPartition": 4,
+        "currentPartition": 1,
         "partitionsWithReports": [],
         "configurations": [
           "gpt-5.6-luna-low"
@@ -15988,7 +15988,7 @@
         "region": "global",
         "status": "fails: a 5-hour figure never converts to a billing period (O82)",
         "listed": true,
-        "currentPartition": 4,
+        "currentPartition": 1,
         "partitionsWithReports": [],
         "configurations": [
           "gpt-6-astra"
@@ -16033,7 +16033,7 @@
         "region": "global",
         "status": "fails: a 5-hour figure never converts to a billing period (O82)",
         "listed": true,
-        "currentPartition": 4,
+        "currentPartition": 1,
         "partitionsWithReports": [
           0
         ],
@@ -16069,7 +16069,7 @@
         "region": "global",
         "status": "fails: 0 non-provisional report(s) in the current partition",
         "listed": true,
-        "currentPartition": 4,
+        "currentPartition": 1,
         "partitionsWithReports": [],
         "configurations": [
           "gpt-6-luna"
@@ -16103,7 +16103,7 @@
         "region": "global",
         "status": "fails: a 5-hour figure never converts to a billing period (O82)",
         "listed": true,
-        "currentPartition": 4,
+        "currentPartition": 1,
         "partitionsWithReports": [
           0
         ],
@@ -16161,7 +16161,7 @@
         "region": "global",
         "status": "fails: 0 non-provisional report(s) in the current partition",
         "listed": true,
-        "currentPartition": 4,
+        "currentPartition": 1,
         "partitionsWithReports": [
           0
         ],
@@ -16208,7 +16208,7 @@
         "region": "global",
         "status": "fails: 0 non-provisional report(s) in the current partition",
         "listed": false,
-        "currentPartition": 4,
+        "currentPartition": 1,
         "partitionsWithReports": [],
         "configurations": [
           "gpt-6-astra"
@@ -16242,7 +16242,7 @@
         "region": "global",
         "status": "fails: 0 non-provisional report(s) in the current partition",
         "listed": true,
-        "currentPartition": 4,
+        "currentPartition": 1,
         "partitionsWithReports": [],
         "configurations": [
           "gpt-6-astra"
@@ -16308,7 +16308,7 @@
         "region": "global",
         "status": "fails: 0 non-provisional report(s) in the current partition",
         "listed": true,
-        "currentPartition": 4,
+        "currentPartition": 1,
         "partitionsWithReports": [],
         "configurations": [
           "gpt-6.1-sol"
@@ -16342,7 +16342,7 @@
         "region": "global",
         "status": "fails: 0 non-provisional report(s) in the current partition",
         "listed": true,
-        "currentPartition": 4,
+        "currentPartition": 1,
         "partitionsWithReports": [],
         "configurations": [
           "gpt-6-astra"
@@ -16376,7 +16376,7 @@
         "region": "global",
         "status": "fails: 0 non-provisional report(s) in the current partition",
         "listed": true,
-        "currentPartition": 4,
+        "currentPartition": 1,
         "partitionsWithReports": [
           0
         ],
@@ -16434,7 +16434,7 @@
         "region": "global",
         "status": "fails: 0 non-provisional report(s) in the current partition",
         "listed": true,
-        "currentPartition": 4,
+        "currentPartition": 1,
         "partitionsWithReports": [],
         "configurations": [
           "gpt-6-astra"
@@ -16468,7 +16468,7 @@
         "region": "global",
         "status": "fails: 0 non-provisional report(s) in the current partition",
         "listed": true,
-        "currentPartition": 4,
+        "currentPartition": 1,
         "partitionsWithReports": [],
         "configurations": [
           "gpt-6.1-sol"
@@ -31801,9 +31801,9 @@
         "detail": "3 of 27 plan rows rest on a measurement inside an acknowledged fault window; they stay selected and yield to two concordant user reports for their own model and plan, and the transfers resting on them follow: gpt-6-astra@chatgpt-pro-500, gpt-6-luna@chatgpt-pro-500, gpt-6.1-sol@chatgpt-pro-500"
       },
       {
-        "rule": "AA cost omits a pricing term (O94)",
+        "rule": "AA cost omits a pricing term (O94, O98)",
         "status": "fired",
-        "detail": "ranked at the published cost; compete in interval and scenario outputs over [C, factor × C] without a label, and leave the anchor population at the next freeze: claude-haiku-5-5-max (5.0×)"
+        "detail": "ranked at the published cost; compete in interval and scenario outputs over [C, factor × C] ([C, ∞) without a stated factor, O98) without a label, and leave the anchor population at the next freeze: claude-haiku-5-5-max (up to 5×)"
       },
       {
         "rule": "valuation-basis gate (E170)",
@@ -31941,7 +31941,7 @@
         {
           "key": "planRoutes",
           "artifact": "data/plan_cost_routes.json",
-          "sha256": "e86b707890d2dab8ee03e952dd8db5e175d080d4086c9afbe97ea949bbd32188",
+          "sha256": "c74294bd6d6ba7f23a3d9a6bb193d42863f48b2cd8f670aa009548c169e06923",
           "capturedAt": "2026-10-25",
           "extractor": "editorial Plan evidence registry"
         },
@@ -32009,7 +32009,7 @@
           "extractor": "valuerank.value_v3 freeze"
         }
       ],
-      "bundleHash": "1ccb9c67e76ea1cc6abd8a51595ab86c639985e21c833347a8335ef8ee5e1a96",
+      "bundleHash": "4fb87af4652d54f6e4da4da0b72c262224d4b538291ff00a2f036bc0d784c0bb",
       "rebuild": "every published output is rebuilt from these artifacts at the pinned publication clock (npm run verify:docs), never from live pages"
     },
     "track": {
@@ -39933,7 +39933,7 @@
           "region": "global",
           "status": "fails: 0 non-provisional report(s) in the current partition",
           "listed": false,
-          "currentPartition": 4,
+          "currentPartition": 1,
           "partitionsWithReports": [],
           "configurations": [
             "gpt-6.1-sol"
@@ -39967,7 +39967,7 @@
           "region": "global",
           "status": "fails: a 5-hour figure never converts to a billing period (O82)",
           "listed": true,
-          "currentPartition": 4,
+          "currentPartition": 1,
           "partitionsWithReports": [],
           "configurations": [
             "gpt-5.6-luna-low"
@@ -40001,7 +40001,7 @@
           "region": "global",
           "status": "fails: 0 non-provisional report(s) in the current partition",
           "listed": true,
-          "currentPartition": 4,
+          "currentPartition": 1,
           "partitionsWithReports": [],
           "configurations": [
             "gpt-5.6-luna-low"
@@ -40035,7 +40035,7 @@
           "region": "global",
           "status": "fails: a 5-hour figure never converts to a billing period (O82)",
           "listed": true,
-          "currentPartition": 4,
+          "currentPartition": 1,
           "partitionsWithReports": [],
           "configurations": [
             "gpt-6-astra"
@@ -40080,7 +40080,7 @@
           "region": "global",
           "status": "fails: a 5-hour figure never converts to a billing period (O82)",
           "listed": true,
-          "currentPartition": 4,
+          "currentPartition": 1,
           "partitionsWithReports": [
             0
           ],
@@ -40116,7 +40116,7 @@
           "region": "global",
           "status": "fails: 0 non-provisional report(s) in the current partition",
           "listed": true,
-          "currentPartition": 4,
+          "currentPartition": 1,
           "partitionsWithReports": [],
           "configurations": [
             "gpt-6-luna"
@@ -40150,7 +40150,7 @@
           "region": "global",
           "status": "fails: a 5-hour figure never converts to a billing period (O82)",
           "listed": true,
-          "currentPartition": 4,
+          "currentPartition": 1,
           "partitionsWithReports": [
             0
           ],
@@ -40208,7 +40208,7 @@
           "region": "global",
           "status": "fails: 0 non-provisional report(s) in the current partition",
           "listed": true,
-          "currentPartition": 4,
+          "currentPartition": 1,
           "partitionsWithReports": [
             0
           ],
@@ -40255,7 +40255,7 @@
           "region": "global",
           "status": "fails: 0 non-provisional report(s) in the current partition",
           "listed": false,
-          "currentPartition": 4,
+          "currentPartition": 1,
           "partitionsWithReports": [],
           "configurations": [
             "gpt-6-astra"
@@ -40289,7 +40289,7 @@
           "region": "global",
           "status": "fails: 0 non-provisional report(s) in the current partition",
           "listed": true,
-          "currentPartition": 4,
+          "currentPartition": 1,
           "partitionsWithReports": [],
           "configurations": [
             "gpt-6-astra"
@@ -40355,7 +40355,7 @@
           "region": "global",
           "status": "fails: 0 non-provisional report(s) in the current partition",
           "listed": true,
-          "currentPartition": 4,
+          "currentPartition": 1,
           "partitionsWithReports": [],
           "configurations": [
             "gpt-6.1-sol"
@@ -40389,7 +40389,7 @@
           "region": "global",
           "status": "fails: 0 non-provisional report(s) in the current partition",
           "listed": true,
-          "currentPartition": 4,
+          "currentPartition": 1,
           "partitionsWithReports": [],
           "configurations": [
             "gpt-6-astra"
@@ -40423,7 +40423,7 @@
           "region": "global",
           "status": "fails: 0 non-provisional report(s) in the current partition",
           "listed": true,
-          "currentPartition": 4,
+          "currentPartition": 1,
           "partitionsWithReports": [
             0
           ],
@@ -40481,7 +40481,7 @@
           "region": "global",
           "status": "fails: 0 non-provisional report(s) in the current partition",
           "listed": true,
-          "currentPartition": 4,
+          "currentPartition": 1,
           "partitionsWithReports": [],
           "configurations": [
             "gpt-6-astra"
@@ -40515,7 +40515,7 @@
           "region": "global",
           "status": "fails: 0 non-provisional report(s) in the current partition",
           "listed": true,
-          "currentPartition": 4,
+          "currentPartition": 1,
           "partitionsWithReports": [],
           "configurations": [
             "gpt-6.1-sol"
@@ -61540,9 +61540,9 @@
           "detail": "8 of 51 plan rows rest on a measurement inside an acknowledged fault window; they stay selected and yield to two concordant user reports for their own model and plan, and the transfers resting on them follow: gpt-5.6-luna-low@chatgpt-pro-500, gpt-6-astra-high@chatgpt-pro-500, gpt-6-luna-high@chatgpt-pro-500, gpt-6-luna-medium@chatgpt-pro-500, gpt-6-luna-xhigh@chatgpt-pro-500, gpt-6-luna@chatgpt-pro-500, gpt-6.1-sol-high@chatgpt-pro-500, gpt-6.1-sol-medium@chatgpt-pro-500"
         },
         {
-          "rule": "AA cost omits a pricing term (O94)",
+          "rule": "AA cost omits a pricing term (O94, O98)",
           "status": "fired",
-          "detail": "ranked at the published cost; compete in interval and scenario outputs over [C, factor × C] without a label, and leave the anchor population at the next freeze: claude-haiku-5-5-high (5.0×), claude-haiku-5-5-medium (5.0×)"
+          "detail": "ranked at the published cost; compete in interval and scenario outputs over [C, factor × C] ([C, ∞) without a stated factor, O98) without a label, and leave the anchor population at the next freeze: claude-haiku-5-5-high (up to 5×), claude-haiku-5-5-medium (up to 5×)"
         },
         {
           "rule": "valuation-basis gate (E170)",
@@ -61680,7 +61680,7 @@
           {
             "key": "planRoutes",
             "artifact": "data/plan_cost_routes.json",
-            "sha256": "e86b707890d2dab8ee03e952dd8db5e175d080d4086c9afbe97ea949bbd32188",
+            "sha256": "c74294bd6d6ba7f23a3d9a6bb193d42863f48b2cd8f670aa009548c169e06923",
             "capturedAt": "2026-10-25",
             "extractor": "editorial Plan evidence registry"
           },
@@ -61748,7 +61748,7 @@
             "extractor": "valuerank.value_v3 freeze"
           }
         ],
-        "bundleHash": "1ccb9c67e76ea1cc6abd8a51595ab86c639985e21c833347a8335ef8ee5e1a96",
+        "bundleHash": "4fb87af4652d54f6e4da4da0b72c262224d4b538291ff00a2f036bc0d784c0bb",
         "rebuild": "every published output is rebuilt from these artifacts at the pinned publication clock (npm run verify:docs), never from live pages"
       },
       "track": {

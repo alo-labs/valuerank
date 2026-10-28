@@ -876,7 +876,7 @@ def assemble(configurations: list[dict], documents: dict, *, release_day: date, 
         gate = valuation_gate(page, [item for item in price_records if item["aaSlug"] == configuration["aaSlug"]], documents["snapshot"].get("capturedAt"))
         if gate["outcome"] == GATE_REVALUED:
             components = revalue(components, gate["factor"])
-        candidates = plan_routes.route_candidates(model_id, effort, routes, release_day, window=window, faults=faults)
+        candidates = plan_routes.route_candidates(model_id, effort, routes, release_day, window=window, faults=faults, families=families)
         if gate["outcome"] == GATE_NOT_IN_FORCE:
             # O29: the Plan cost divides only by a multiple valued on the row's own (superseded) price record.
             for candidate in candidates:
@@ -895,7 +895,7 @@ def assemble(configurations: list[dict], documents: dict, *, release_day: date, 
             # O63: AA's safety-refusal outcomes on the row's Coding Agent Index record, disclosed and flagged only.
             "agentSafety": agent_safety(agent_records.get(agent_labels[model_id])),
             "routeSelection": plan_routes.route_selection(candidates),
-            "admissionTable": plan_routes.admission_table(model_id, effort, routes, release_day, window, faults),
+            "admissionTable": plan_routes.admission_table(model_id, effort, routes, release_day, window, faults, families),
         })
     # O36: only configurations with every leaf are ranked; the rest stay listed with their missing leaves and searches.
     incomplete = [entry for entry in (incomplete_entry(row, row["evidence"]) for row in rows) if entry is not None]
@@ -1032,13 +1032,11 @@ def _gated_box(row: dict, low: float, high: float, basis: str) -> intervals.Box 
     gate, summary = row["valuationGate"], row["summary"]
     if gate["outcome"] == GATE_NOT_IN_FORCE and blocker_domain(gate, basis) is None:
         return None
-    # O94: a row whose AA cost omits a pricing term competes over [C, factor x C] and earns no label (like O29); a caveat
-    # without a stated factor cannot be bounded, so the row has no box (fail closed).
+    # O94: a row whose AA cost omits a pricing term competes over [C, factor x C] and earns no label (like O29); O98: a
+    # caveat without a stated factor competes over [C, infinity) (every label test reads a competitor's lower cost, C).
     if aa_cost_caveat(row):
         factor = caveat_factor(row)
-        if factor is None:
-            return None
-        high, gate_provisional = high * max(1.0, factor), True
+        high, gate_provisional = (math.inf if factor is None else high * factor), True
     else:
         gate_provisional = False
     provisional = summary.provisional or gate["outcome"] == GATE_UNVERIFIED or gate_provisional
@@ -1048,32 +1046,52 @@ def _gated_box(row: dict, low: float, high: float, basis: str) -> intervals.Box 
     return intervals.Box(row["id"], low, high, summary.lower, summary.upper, provisional)
 
 
-AA_CAVEAT_FACTOR = re.compile(r"(\d+(?:\.\d+)?)\s*(?:x|×|times)\s+(?:higher|more|the)\b", re.IGNORECASE)
+AA_CAVEAT_FACTOR = re.compile(r"(\d+(?:\.\d+)?)\s*(?:x|×|times)\s+(?:higher|more|the)\b|\((\d+(?:\.\d+)?)\s*(?:x|×)\)", re.IGNORECASE)
 # I81 L3: a pricing caveat is a sentence about a price or cost figure that AA says its cost does not reflect.
 AA_PRICING_TERM = re.compile(r"\b(?:pric(?:e|es|ed|ing)|cost figures?|costs?)\b", re.IGNORECASE)
-AA_OMISSION = re.compile(r"\bnot (?:currently )?(?:reflected|included|counted)\b|\bexclud(?:es|ed|ing)\b|\bomit(?:s|ted)?\b|\bhigher pricing\b", re.IGNORECASE)
+AA_OMISSION = re.compile(r"\bnot (?:currently )?(?:reflected|included|counted)\b|\bexclud(?:es|ed|ing)\b|\bomit(?:s|ted)?\b", re.IGNORECASE)
+# I82 L3: a caveat sentence opening with a back-reference ("These prices are not included") takes the factor of the
+# sentence it refers to.
+AA_BACK_REFERENCE = re.compile(r"(?:this|these|that|those|it|they)\b", re.IGNORECASE)
 
 
-def _caveat_sentences(row: dict) -> list[str]:
-    note = row.get("aaNote") or ""
-    return [sentence for sentence in re.split(r"(?<=[.;])\s+", note) if AA_PRICING_TERM.search(sentence) and AA_OMISSION.search(sentence)]
+def _sentences(row: dict) -> list[str]:
+    return re.split(r"(?<=[.;])\s+", row.get("aaNote") or "")
+
+
+def _is_caveat(sentence: str) -> bool:
+    return bool(AA_PRICING_TERM.search(sentence) and AA_OMISSION.search(sentence))
 
 
 def aa_cost_caveat(row: dict) -> str | None:
-    """E141, O94: AA's own note when it says its published cost omits a pricing term, or None (a note about anything else,
-    such as declined tasks, is not a cost caveat)."""
+    """E141, O94: AA's own note when it says its published cost omits a pricing term (a sentence naming a price or cost
+    figure that is not reflected, included or counted, or is excluded or omitted), or None (a note about anything else, such
+    as declined tasks, is not a cost caveat)."""
 
-    return row.get("aaNote") if _caveat_sentences(row) else None
+    return row.get("aaNote") if any(_is_caveat(sentence) for sentence in _sentences(row)) else None
+
+
+def _factors(sentence: str) -> list[float]:
+    # I82 L3: a "factor" below 1 is no surcharge factor, so it bounds nothing.
+    return [value for match in AA_CAVEAT_FACTOR.finditer(sentence) if (value := float(match.group(1) or match.group(2))) >= 1.0]
 
 
 def caveat_factor(row: dict) -> float | None:
-    """O94: the most the omitted pricing term can multiply the row's cost by, read from AA's note (e.g. "5x higher
-    pricing"; the largest when several are stated); None when the row has no caveat or a caveat sentence states no factor (its box
-    cannot then be constructed)."""
+    """O94: the most the omitted pricing terms can multiply the row's cost by, read from AA's note (e.g. "5x higher
+    pricing"; the largest when several are stated). Each caveat sentence is bounded by its own factor, or, when it opens
+    with a back-reference, by the factor of the sentence before it. None when the row has no caveat or a caveat sentence is
+    left unbounded (O98: the row then competes over [C, infinity))."""
 
-    per_sentence = [[float(match.group(1)) for match in AA_CAVEAT_FACTOR.finditer(sentence)] for sentence in _caveat_sentences(row)]
-    # A caveat sentence that states no factor leaves its term unbounded, whatever the others state.
-    return max(max(factors) for factors in per_sentence) if per_sentence and all(per_sentence) else None
+    sentences = _sentences(row)
+    bounds = []
+    for index, sentence in enumerate(sentences):
+        if not _is_caveat(sentence):
+            continue
+        found = _factors(sentence) or (_factors(sentences[index - 1]) if index and AA_BACK_REFERENCE.match(sentence) else [])
+        if not found:
+            return None
+        bounds.append(max(found))
+    return max(bounds) if bounds else None
 
 
 def provider_claimed(row: dict) -> bool:
@@ -1298,12 +1316,11 @@ def interval_outputs(assembled: dict, frozen: dict, basis: str, components: list
     boxes = _boxes(candidates, basis)
     # E183: competitors range over U_W = R_W plus the O29 blockers B_W; labels go to R_W only.
     not_in_force = {row["id"] for row in assembled["rows"] if row["valuationGate"]["outcome"] == GATE_NOT_IN_FORCE}
-    # I80 L2: an O94 row whose note states no factor has no constructible domain either, so no other row is certified
-    # against it (E183): the outputs are unresolved, never silently computed without it.
-    # I81 L3: on every workload (a subset's too) and basis, among the rows R_W would otherwise admit.
-    unconstructible = sorted(row["id"] for row in assembled["rows"]
-                             if (row["id"] in not_in_force and blocker_domain(row["valuationGate"], basis) is None)
-                             or (aa_cost_caveat(row) and caveat_factor(row) is None and any(item is row for item, _, _ in candidates)))
+    # E183: an O29 blocker without a constructible domain leaves the outputs unresolved, never silently computed without it;
+    # I82 L3: only where the row would compete (the rows R_W would otherwise admit on this workload and basis). O98: an O94
+    # row is always constructible (a factorless caveat competes over [C, infinity)).
+    unconstructible = sorted(row["id"] for row, _, _ in candidates
+                             if row["id"] in not_in_force and blocker_domain(row["valuationGate"], basis) is None)
     # E222/E228/E233: an unverified basis, a provider-claimed leaf, or (Plan) a route whose evidence a detected change may
     # have superseded, competes but earns no label, exactly like an O29 blocker.
     blocked = not_in_force | {row["id"] for row in assembled["rows"] if row["valuationGate"]["outcome"] == GATE_UNVERIFIED or provider_claimed(row) or aa_cost_caveat(row)}
@@ -2090,9 +2107,9 @@ def score(assembled: dict, frozen: dict) -> dict:
               "yield to two concordant user reports for their own model and plan, and the transfers resting on them follow: " + ", ".join(fault_flagged)
               if fault_flagged else "no selected route rests on a measurement in a fault window"),
         # I80 L5: O94 rows, with the factor each competes over.
-        _rule("AA cost omits a pricing term (O94)", "fired" if caveated else "passed",
-              "ranked at the published cost; compete in interval and scenario outputs over [C, factor × C] without a label, and leave the anchor "
-              "population at the next freeze: " + ", ".join(f"{row['id']} ({caveat_factor(row) or 'no factor: unresolved'}×)" for row in caveated)
+        _rule("AA cost omits a pricing term (O94, O98)", "fired" if caveated else "passed",
+              "ranked at the published cost; compete in interval and scenario outputs over [C, factor × C] ([C, ∞) without a stated factor, O98) without a label, and leave the anchor "
+              "population at the next freeze: " + ", ".join(f"{row['id']} (up to {caveat_factor(row):g}×)" if caveat_factor(row) else f"{row['id']} (no factor stated: [C, ∞), O98)" for row in caveated)
               if caveated else "no AA cost note names an omitted pricing term"),
         _rule("valuation-basis gate (E170)", "fired" if any(row["valuationGate"]["outcome"] not in GATE_SCORED for row in rows) else "passed",
               "rows outside the scored valuation outcomes: " + ", ".join(sorted(row["id"] for row in rows if row["valuationGate"]["outcome"] not in GATE_SCORED))

@@ -96,7 +96,7 @@
     },
     "gptApplication": "User authorizes the same ChatGPT plan multiples for every GPT model. Owner decision O45 (2026-10-23), as amended by O88 (2026-10-28): GPT-6.1 Sol and GPT-6 Astra keep their own SemiAnalysis figures on every ChatGPT plan, bound to each model's unsuffixed (max) row because SemiAnalysis names the models without an effort; each of their other efforts (GPT-6.1 Sol at xhigh, high, medium and low, GPT-6 Astra at xhigh and high, ranked as their own rows under O33) takes its own model's figure per plan as a labelled same-model measurement from another effort (O88; measured evidence under O90; an allowance is effort-invariant, O87); every other GPT model takes, per plan, the lower of the two reported model-conditional figures as a labelled user assumption naming its donor route. Routes are one row per model and plan.",
     "routeGranularity": "Owner decision O45 (2026-10-23): every route row names exactly one model and one plan.",
-    "o72Application": "Owner decisions O72-O96 (2026-10-26 to 2026-10-28): after the O71 search found no model × tier with two concordant user reports, the owner-authorised routes stay (the SemiAnalysis selection with its O40/O45 assumptions, the O46 MiMo quota ceilings) and providers without one (Google, Kimi, MiniMax) stay on API fallback. Two concordant user reports replace only an assumption-based or fallback route; an exact controlled measurement keeps precedence (O73) unless a detected change flags it and a concordant pair for the same plan is dated after that change (O78). Admission stays the strict all-reports concordance test (O74); every release runs all three O71 stages over every cell (O75); speed-mode reports convert at the provider's multiplier, flagged (O76); a provider's announcement of a metering change triggers E18 (O77); a change to a shared meter flags every plan on it (O79); a 5-hour figure stays in its own unit (O80) and never converts (O82); a provider-documented change splits the partition too (O83); a change detected on any Kimi plan splits every Kimi plan (O84); every report cell is tested, and one on a plan the Plan ranking does not list is evidence only (O85). O86: concordance is the largest lower bound at most 1.20x the smallest upper bound. O87: an allowance is effort-invariant, so reports pool across efforts of one model. O88: a SemiAnalysis figure for a model serves every effort of that model, labelled; O90 counts it as measured evidence. O89: an O88 same-model route shares its donor measurement's precedence and change flag against reports for the same model and plan. O91, O92: a controlled measurement inside an acknowledged accounting-fault window for its plan stays selected and flagged, with the routes resting on it, until two concordant user reports for that plan replace it. O93: a report pair replaces only its own model's fault-flagged route. O94: a row whose AA cost omits a pricing term competes over its published cost up to the stated factor and earns no label. O95: a lower-of transfer re-takes the lower of its plan's effective figures when a report pair replaces its donor. O96: every other transfer and O88 route takes its own donor's replacing figure.",
+    "o72Application": "Owner decisions O72-O99 (2026-10-26 to 2026-10-28): after the O71 search found no model × tier with two concordant user reports, the owner-authorised routes stay (the SemiAnalysis selection with its O40/O45 assumptions, the O46 MiMo quota ceilings) and providers without one (Google, Kimi, MiniMax) stay on API fallback. Two concordant user reports replace only an assumption-based or fallback route; an exact controlled measurement keeps precedence (O73) unless a detected change flags it and a concordant pair for the same plan is dated after that change (O78). Admission stays the strict all-reports concordance test (O74); every release runs all three O71 stages over every cell (O75); speed-mode reports convert at the provider's multiplier, flagged (O76); a provider's announcement of a metering change triggers E18 (O77); a change to a shared meter flags every plan on it (O79); a 5-hour figure stays in its own unit (O80) and never converts (O82); a provider-documented change splits the partition too (O83); a change detected on any Kimi plan splits every Kimi plan (O84); every report cell is tested, and one on a plan the Plan ranking does not list is evidence only (O85). O86: concordance is the largest lower bound at most 1.20x the smallest upper bound. O87: an allowance is effort-invariant, so reports pool across efforts of one model. O88: a SemiAnalysis figure for a model serves every effort of that model, labelled; O90 counts it as measured evidence. O89: an O88 same-model route shares its donor measurement's precedence and change flag against reports for the same model and plan. O91, O92: a controlled measurement inside an acknowledged accounting-fault window for its plan stays selected and flagged, with the routes resting on it, until two concordant user reports for that plan replace it. O93: a report pair replaces only its own model's fault-flagged route. O94: a row whose AA cost omits a pricing term competes over its published cost up to the stated factor and earns no label. O95: a lower-of transfer re-takes the lower of its plan's effective figures when a report pair replaces its donor. O96: every other transfer and O88 route takes its own donor's replacing figure. O97: an O88 route that follows its donor to a report pair takes the pair's whole measurement record and its grade. O98: a factorless AA cost caveat competes over [C, ∞) instead of leaving outputs unresolved. O99: only a change to a plan's limits or price splits the report partition; a metering-only announcement is logged.",
     "reportEligibilityProfile": {
       "version": "O71 v1 (E270), 2026-10-26",
       "rules": [
@@ -141,31 +141,37 @@
             "Claude Max 20x"
           ],
           "date": "2026-10-17T13:00:00Z",
+          "type": "limit",
           "basis": "E18 change detected (O79); NicoAica's measurement places it at about 08:00 CDT"
         },
         {
           "provider": "OpenAI",
           "date": "2026-10-11",
-          "basis": "provider announcement, Day 7 (O77)"
+          "type": "price",
+          "basis": "provider announcement, Day 7 (O77): long-context fees removed on subscriptions"
         },
         {
           "provider": "OpenAI",
           "date": "2026-10-16",
-          "basis": "provider announcement, Day 12 (O77)"
+          "type": "metering",
+          "basis": "provider announcement, Day 12 (O77): context reuse across subagents, longer caching and routing; no limit or price change, so it does not split (O99)"
         },
         {
           "provider": "OpenAI",
           "date": "2026-10-20",
-          "basis": "provider announcement, Day 16 (O77; date from the day count, Day 7 = 2026-10-11)"
+          "type": "metering",
+          "basis": "provider announcement, Day 16 (O77; date from the day count, Day 7 = 2026-10-11): cached context kept indefinitely; no limit or price change, so it does not split (O99)"
         },
         {
           "provider": "OpenAI",
           "date": "2026-10-23",
-          "basis": "provider announcement, Day 19 (O77; date from the day count)"
+          "type": "metering",
+          "basis": "provider announcement, Day 19 (O77; date from the day count): a reasoning change no longer invalidates the cache; no limit or price change, so it does not split (O99)"
         },
         {
           "provider": "Kimi",
           "date": "2026-10-24",
+          "type": "limit",
           "basis": "E18 change detected: an ≈50% quota increase measured by kojimako and okarin (independent per-token fits) on CN plans; owner decision O84 (2026-10-28): it splits every Kimi plan"
         }
       ]

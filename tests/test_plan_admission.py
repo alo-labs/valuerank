@@ -12,7 +12,8 @@ from valuerank.paths import DATA
 
 DAY = date(2026, 10, 25)
 PROFILE = {
-    "partitionSplits": [{"provider": "A", "date": "2026-10-17T13:00:00Z"}, {"provider": "O", "date": "2026-10-11"}],
+    "partitionSplits": [{"provider": "A", "date": "2026-10-17T13:00:00Z", "type": "limit"}, {"provider": "O", "date": "2026-10-11", "type": "price"},
+                        {"provider": "O", "date": "2026-10-20", "type": "metering"}],
     "accountingFaultDays": [{"provider": "O", "days": ["2026-10-16"]}, {"provider": "O", "plans": ["P500"], "days": ["2026-09-29..2026-10-14"]}],
 }
 DOCUMENT = {"listedPlans": {"Pro": 20, "P500": 500, "Plus": 20}, "speedModeMultipliers": {"O": {"fast": 2.5}}}
@@ -112,3 +113,15 @@ def test_the_committed_report_table_admits_no_cell_today():
     assert cells and not [cell for cell in cells if cell["status"] == "passes"]
     by = {(cell["plan"], cell["modelId"]): cell for cell in cells}
     assert by[("Google AI Pro", "gemini-4-argon")]["status"] == "fails: largest lower bound 1.35× the smallest upper bound (O86 allows 1.20×) in the current partition"
+
+
+def test_only_limit_and_price_changes_split_partitions():
+    """O99: a metering-only announcement is logged and splits nothing; an untyped or unknown record stops the build."""
+
+    splits = pa.splitting(PROFILE["partitionSplits"])
+    assert [item["date"] for item in splits] == ["2026-10-17T13:00:00Z", "2026-10-11"]
+    assert pa.partition(report("h", provider="O", start="2026-10-20", end="2026-10-20"), splits) == 1  # no split on the 20th
+    with pytest.raises(ValueError, match="needs a type"):
+        pa.splitting([{"provider": "O", "date": "2026-10-20"}])
+    with pytest.raises(ValueError, match="needs a type"):
+        pa.splitting([{"provider": "O", "date": "2026-10-20", "type": "rumour"}])

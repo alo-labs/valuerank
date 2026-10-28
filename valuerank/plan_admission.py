@@ -8,7 +8,8 @@ concordance test to every model × plan cell, and the build refuses a report rou
   model (a challenged report is excluded), measured at least partly inside the report window, clear of a
   provider-acknowledged accounting-fault day, and inside one partition (a report spanning a split is excluded);
 - a speed-mode value is converted at the provider's published multiplier and flagged (O76);
-- a partition splits at each recorded change (E18 or provider-documented, O83); the partition current at the cutoff decides;
+- a partition splits at each recorded change (E18 or provider-documented, O83) to the plan's limits or price (O99: a record
+  typed "metering", which changes neither, is logged and does not split); the partition current at the cutoff decides;
 - the cell passes when it has at least two non-provisional reports, the largest lower bound is at most 1.20× the smallest
   upper bound (O86; E98, E107: every eligible report together),
   reports at any effort pool for the model (O87), the unit converts to a month (O82: a 5-hour figure
@@ -59,6 +60,21 @@ def split_span(split: dict) -> tuple[datetime, datetime]:
     """A split given as an instant is a point; a split given as a date covers that whole day (its hour is unknown)."""
 
     return _start(split["date"]), _end(split["date"])
+
+
+# O99 (2026-10-28): only a change to a plan's limits or price splits the report partition; a metering-only announcement is
+# logged. Every record is typed, and the build refuses an untyped or unknown one.
+SPLIT_TYPES = {"limit", "price"}
+LOGGED_TYPES = {"metering"}
+
+
+def splitting(records: list[dict]) -> list[dict]:
+    """O83, O99: the recorded changes that split the report partition."""
+
+    for record in records:
+        if record.get("type") not in SPLIT_TYPES | LOGGED_TYPES:
+            raise ValueError(f"partition record {record.get('provider')} {record.get('date')} needs a type: one of {sorted(SPLIT_TYPES | LOGGED_TYPES)} (O99)")
+    return [record for record in records if record["type"] in SPLIT_TYPES]
 
 
 def applies(entry: dict, report: dict) -> bool:
@@ -135,7 +151,7 @@ def cell_key(report: dict, families: dict | None = None) -> tuple:
 def evaluate(document: dict, profile: dict, release_day: date, families: dict | None = None) -> list[dict]:
     """Every model × plan × unit cell's admission, with each report's role (E270, O11, O81, O82)."""
 
-    multipliers, splits = document.get("speedModeMultipliers", {}), profile.get("partitionSplits", [])
+    multipliers, splits = document.get("speedModeMultipliers", {}), splitting(profile.get("partitionSplits", []))
     cells: dict[tuple, list[dict]] = {}
     for report in document["reports"]:
         cells.setdefault(cell_key(report, families), []).append(report)

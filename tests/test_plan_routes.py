@@ -770,37 +770,49 @@ def test_every_transfer_follows_its_donor_and_a_replacing_pair_can_be_the_lowest
 
 
 def test_donor_following_uses_the_comparators_replacement_test():
-    """I81 L1: (a) a change dated before the measurement replaces nothing, for the donor's row and its followers alike; (b) a
-    report route listing another configuration of the donor model covers it (O87); (c) several replacing pairs are taken
-    in comparator order, not registry order."""
+    """I81 L1, I82 L1: the effective figure is the comparator's own selection for the donor model: (a) a change dated before
+    the measurement replaces nothing; (b) a report route covers every configuration of the AA family it lists (O87), keyed by
+    the families map, whatever its requiredVariant; (c) several replacing pairs are taken in comparator order; (d) a demoted
+    measurement is replaced by the only eligible route, the pair, for the donor's row and its followers alike."""
 
+    families = {"opus": "Opus", "opus-high": "Opus", "sonnet": "Sonnet"}
     opus = dict(route("opus", 10.0, models=("opus",)), provider="P", plan="Pro", sourceEvidenceId="sa", sourcePublicationDate="2026-10-06",
                 changeDetectedOn="2026-09-01")
     sonnet = dict(route("sonnet", 10.0, kind="user_assumption", models=("sonnet",)), provider="P", plan="Pro", donorRouteId="opus",
                   sourceEvidenceClass="controlled_account_workload_projection")
     dated = [dict(comparable_report("a", 5.0), reportDate="2026-10-20"), dict(comparable_report("b", 5.1), reportDate="2026-10-21")]
-    pair = dict(route("opus-reports", 5.0, kind="user_reported_projection", models=("opus-high",)), plan="Pro", independentReports=dated)
+    pair = dict(route("opus-reports", 5.0, kind="user_reported_projection", models=("opus-high",)), plan="Pro", independentReports=dated,
+                requiredVariant="high")
     day = date(2026, 10, 25)
     registry = {item["id"]: item for item in (opus, sonnet, pair)}
     # (a) earliest day 2026-09-07: the 2026-09-01 change cannot have superseded the measurement.
-    assert pr.effective_measurement(opus, registry, day, None, None) is opus
-    assert pr.rebase_transfer(sonnet, registry, day, None, None) is sonnet
-    # (b) a change inside the span: the pair registered for opus-high covers opus, its own row and its follower alike.
+    assert pr.effective_measurement(opus, registry, day, None, None, families) is opus
+    assert pr.rebase_transfer(sonnet, registry, day, None, None, families) is sonnet
+    # (b) a change inside the span: the pair registered for opus-high (requiredVariant "high") covers opus, its own row and
+    # its follower alike; without the families map it covers only its own configuration (never by parsing IDs).
     changed = {**opus, "changeDetectedOn": "2026-10-01"}
     registry["opus"] = changed
-    assert pr.report_covers(pair, "opus") == "opus-high" and pr.report_covers(pair, "sonnet") is None
-    assert pr.report_covers(sonnet, "sonnet-high") is None  # only a report route covers other configurations
-    assert pr.effective_measurement(changed, registry, day, None, None)["baseRouteId"] == "opus-reports"
-    [own] = [item for item in pr.route_candidates("opus", None, list(registry.values()), day) if item["grade"] == "reports"]
-    assert own["route"]["id"].startswith("opus-reports")
-    assert pr.rebase_transfer(sonnet, registry, day, None, None)["donorRouteId"] == "opus-reports"
-    # (c) a second, larger pair listed first in the registry wins on the comparator's multiple key whichever comes first.
+    assert pr.report_covers(pair, "opus", families) == "opus-high" and pr.report_covers(pair, "sonnet", families) is None
+    assert pr.report_covers(pair, "opus") is None and pr.report_covers(sonnet, "opus", families) is None
+    assert pr.effective_measurement(changed, registry, day, None, None, families)["baseRouteId"] == "opus-reports"
+    own = pr.select_route(pr.route_candidates("opus", "max", list(registry.values()), day, families=families))
+    assert own["grade"] == "reports" and own["route"]["routeId"] == "opus-reports"
+    assert pr.rebase_transfer(sonnet, registry, day, None, None, families)["donorRouteId"] == "opus-reports"
+    # (c) a second, larger pair wins on the comparator's multiple key whichever comes first in the registry.
     larger = {**pair, "id": "opus-reports-2", "independentReports": [dict(item, multiple=item["multiple"] * 2) for item in dated]}
     for order in ((larger, pair), (pair, larger)):
         ordered = {"opus": changed, **{item["id"]: item for item in order}}
-        assert pr.effective_measurement(changed, ordered, day, None, None)["baseRouteId"] == "opus-reports-2"
-        assert pr.select_route(pr.route_candidates("opus", None, list(ordered.values()), day))["route"]["id"].startswith("opus-reports-2")
-    assert pr.model_base("opus-high") == "opus" and pr.model_base("opus") == "opus" and pr.model_base(None) is None
+        assert pr.effective_measurement(changed, ordered, day, None, None, families)["baseRouteId"] == "opus-reports-2"
+        assert pr.select_route(pr.route_candidates("opus", None, list(ordered.values()), day, families=families))["route"]["routeId"] == "opus-reports-2"
+    # (d) the unchanged measurement once demoted (past grace): the pair is the only eligible route, so every row follows it.
+    later = date(2027, 2, 10)
+    fresh_pair = {**pair, "independentReports": [dict(item, reportDate="2027-02-05") for item in dated]}
+    aged = {"opus": opus, "sonnet": sonnet, "opus-reports": fresh_pair}
+    assert pr.route_candidates("opus", None, [opus], later)[0]["grade"] == "diagnostic"
+    assert pr.effective_measurement(opus, aged, later, None, None, families)["baseRouteId"] == "opus-reports"
+    [follower] = pr.route_candidates("sonnet", None, [sonnet], later, registry=list(aged.values()), families=families)
+    assert follower["donorRouteId"] == "opus-reports" and follower["grade"] != "diagnostic"
+    assert pr.effective_measurement({**opus, "plan": "Max"}, aged, day, None, None, families)["id"] == "opus"  # no pair on its plan
 
 
 def test_an_o88_route_following_a_report_pair_takes_the_pairs_grade():
@@ -820,5 +832,19 @@ def test_an_o88_route_following_a_report_pair_takes_the_pairs_grade():
     [following] = pr.route_candidates("opus-high", None, [high], day, registry=registry, faults=faults)
     assert following["grade"] == "reports" and pr.grade_rank(following) == pr.GRADE["reports"]
     assert following["route"]["followsReportPair"] == "opus-reports" and not following["route"]["sameModelAcrossEfforts"]
-    flags = pr.plan_cost(100.0, following)["flags"]
-    assert pr.REPORT_PAIR_FLAG in flags and pr.CROSS_EFFORT_FLAG not in flags
+    cost = pr.plan_cost(100.0, following)
+    assert pr.REPORT_PAIR_FLAG in cost["flags"] and pr.CROSS_EFFORT_FLAG not in cost["flags"] and cost["rebasedFrom"] == "opus"
+    assert "rebasedFrom" not in pr.plan_cost(100.0, standing)
+    # I82 L2: the follower is the pair's whole measurement object under its own identity, not SemiAnalysis's record.
+    assert following["route"]["id"] == "opus-high-same" and following["route"]["modelIds"] == ["opus-high"]
+    assert following["route"]["valueMultipleKind"] == pair["valueMultipleKind"] and following["route"]["independentReports"] == pair["independentReports"]
+    [entry] = [item for item in pr.admission_table("opus-high", None, registry, day, None, faults) if item["route"]["id"] == "opus-high-same"]
+    assert entry["crossEffort"] is False
+
+
+def test_a_transfer_on_a_report_route_without_a_partition_ages_by_its_own_clock():
+    """E151: a donor report route with no surviving partition carries no partition stage, so the age clock decides."""
+
+    reports = dict(route("r", 5.0, kind="user_reported_projection", checked="2026-10-01"), plan="Pro")
+    transfer = dict(route("t", 5.0, kind="user_assumption", models=("t",)), plan="Pro", donorRouteId="r")
+    assert pr.expiry_status(transfer, date(2026, 10, 25), {"r": reports, "t": transfer}) == "fresh"

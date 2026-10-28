@@ -142,8 +142,6 @@ def evidence_grade(route: dict, model_id: str) -> str:
     same_model = SOURCE_MODEL_IDS.get(route.get("sourceModel")) == model_id
     if kind in CONTROLLED_KINDS:
         return "controlled" if same_model or len(route.get("modelIds", [])) == 1 else "assumption"
-    if kind in ASSUMPTION_KINDS and route.get("followsReportPair") and source_kind in REPORT_KINDS:
-        return "reports"  # O97
     if kind in ASSUMPTION_KINDS:
         # The donor model's own route is its measurement; other models carry the owner-named transfer. O90: an O88 route
         # (the same model's measurement at another effort) is measured evidence too.
@@ -197,6 +195,11 @@ def expiry_status(route: dict, release_day: date, registry: dict | None = None) 
     expiry, in grace) / demoted (past grace); a transfer takes its donor's stage (E144)."""
 
     source = donor(route, registry) or route
+    if source is not route and source.get("valueMultipleKind") in REPORT_KINDS:
+        # E151, E144, I82 L1: a transfer resting on a report pair ages with the pair's contributors.
+        stage = measurement_objects(source, release_day)[0].get("partitionStage")
+        if stage:
+            return stage
     age = age_days(source, release_day)
     if age is None:
         return "fresh"
@@ -476,27 +479,16 @@ def in_fault_window(route: dict, faults: list[dict] | None) -> dict | None:
     return None
 
 
-EFFORT_SUFFIXES = ("low", "medium", "high", "xhigh", "max")
-
-
-def model_base(configuration: str | None) -> str | None:
-    """O87, I81 L1: the model a configuration ID names, without its effort suffix."""
-
-    for effort in EFFORT_SUFFIXES:
-        if configuration and configuration.endswith(f"-{effort}"):
-            return configuration[: -len(effort) - 1]
-    return configuration
-
-
-def report_covers(route: dict, model_id: str) -> str | None:
-    """O87 (allowance is effort-invariant), I81 L1: the configuration ID through which a report route covers a
-    configuration: its own, else any configuration of the same model the route lists."""
+def report_covers(route: dict, model_id: str, families: dict | None = None) -> str | None:
+    """O87 (allowance is effort-invariant), I81 L1, I82 L1: the configuration ID through which a route covers a
+    configuration: its own; for a report route, also any configuration of the same AA family (keyed by the families map,
+    never by parsing the ID, I69 L2)."""
 
     listed = route.get("modelIds") or []
     if model_id in listed:
         return model_id
-    if route.get("valueMultipleKind") in REPORT_KINDS:
-        return next((item for item in listed if model_base(item) == model_base(model_id)), None)
+    if route.get("valueMultipleKind") in REPORT_KINDS and families and model_id in families:
+        return next((item for item in listed if families.get(item) == families[model_id]), None)
     return None
 
 
@@ -517,36 +509,28 @@ def pair_replaces(report_route: dict, *, changed: str | None, earliest: date | N
     return None not in dates and min(dates) > change
 
 
-def effective_measurement(route: dict, registry: dict, release_day: date, window: dict | None, faults: list[dict] | None) -> dict:
-    """O92, O93, O78, O96: the measurement that stands for a controlled route's model on its plan: the most recent admitted
-    concordant report pair, for any configuration of that model on that plan (O87), that replaces it under the comparator's
-    own test (I81 L1: a flagged change, or a fault window), else the controlled route."""
+def effective_measurement(route: dict, registry: dict, release_day: date, window: dict | None, faults: list[dict] | None,
+                          families: dict | None = None) -> dict:
+    """O92, O93, O78, O96, I82 L1: the measurement that stands for a controlled route's model on its plan is whatever the
+    comparator selects for that model from the measurement and the report routes covering the model on that plan (O87):
+    the replacing report pair, else the measurement itself (also when no route remains eligible)."""
 
     model = (route.get("modelIds") or [None])[0]
-    flagged = expiry_status(route, release_day, registry) in {"possibly-superseded", "expired"}
-    replacing = []
-    for other in registry.values():
-        if other.get("valueMultipleKind") not in REPORT_KINDS or other.get("plan") != route.get("plan"):
-            continue
-        configuration = report_covers(other, model) if model else None
-        if configuration is None:
-            continue
-        objects = measurement_objects(other, release_day, window)
-        if not objects or not pair_replaces(
-                other, changed=route.get("changeDetectedOn") if flagged else None, earliest=measurement_span(route)[0], faulted=bool(in_fault_window(route, faults)), release_day=release_day):
-            continue
-        # I81 L1: several replacing pairs are ordered as the comparator orders them (O73 keys, route-ID tie-break).
-        replacing += [(candidate, other["id"]) for candidate in route_candidates(
-            configuration, other.get("requiredVariant"), [other], release_day, registry=list(registry.values()), window=window, faults=faults)
-            if candidate["grade"] == "reports"]
-    if not replacing:
+    reports = [other for other in registry.values() if other.get("valueMultipleKind") in REPORT_KINDS and other.get("plan") == route.get("plan")
+               and model is not None and report_covers(other, model, families) is not None]
+    if not reports:
         return route
-    best, base_id = min(replacing, key=lambda item: _order(item[0]))
+    candidates = route_candidates(model, route.get("requiredVariant"), [route, *reports], release_day, registry=list(registry.values()),
+                                  window=window, faults=faults, families=families)
+    selected = route_selection(candidates)["selected"]
+    if selected is None or selected["grade"] != "reports":
+        return route
     # I80 L4: the replacing object names its base route, the id a transfer can name as its donor.
-    return {**best["route"], "baseRouteId": base_id}
+    return {**selected["route"], "baseRouteId": selected["route"].get("routeId", selected["route"]["id"])}
 
 
-def rebase_lower_of(route: dict, registry: dict, release_day: date, window: dict | None, faults: list[dict] | None) -> dict:
+def rebase_lower_of(route: dict, registry: dict, release_day: date, window: dict | None, faults: list[dict] | None,
+                    families: dict | None = None) -> dict:
     """O95: a lower-of transfer (O45) takes, per plan, the lower of its plan's measured figures, each model's figure being
     its effective measurement (a replacing report pair or the controlled route); the result names its donor."""
 
@@ -554,52 +538,61 @@ def rebase_lower_of(route: dict, registry: dict, release_day: date, window: dict
                 and item.get("plan") == route.get("plan") and item.get("sourceEvidenceId") == route.get("sourceEvidenceId")]
     if not measured:
         return route
-    effective = [effective_measurement(item, registry, release_day, window, faults) for item in measured]
+    effective = [effective_measurement(item, registry, release_day, window, faults, families) for item in measured]
     lowest = min(effective, key=lambda item: (comparison_multiple(item), item["id"]))
     return _rebased(route, lowest)
+
+
+# I82 L2: the fields that identify a following route; everything else is the measurement it now rests on.
+FOLLOWER_IDENTITY = ("id", "modelIds", "requiredVariant", "donorRule")
 
 
 def _rebased(route: dict, donor_object: dict) -> dict:
     donor_id = donor_object.get("baseRouteId", donor_object["id"])
     if donor_id == route.get("donorRouteId"):
         return route
-    rebased = {**route, "donorRouteId": donor_id, "valueMultiple": comparison_multiple(donor_object), "rebasedFrom": route.get("donorRouteId"),
-               "sourceModel": donor_object.get("sourceModel", route.get("sourceModel"))}
     if route.get("sameModelAcrossEfforts") and donor_object.get("valueMultipleKind") in REPORT_KINDS:
-        # O97: an O88 route that follows its donor to a replacing report pair is no longer a measurement of another effort;
-        # it takes the pair's grade and provenance.
-        rebased = {**rebased, "sameModelAcrossEfforts": False, "followsReportPair": donor_id, "sourceEvidenceClass": donor_object["valueMultipleKind"]}
-    return rebased
+        # O97, I82 L2: an O88 route that follows its donor to a replacing report pair is no longer a measurement of another
+        # effort: it takes the pair's whole measurement object (grade, amount, workload, window, dates, statuses).
+        pair = {key: value for key, value in donor_object.items() if key not in {"baseRouteId", "routeId"}}
+        return {**pair, **{key: route[key] for key in FOLLOWER_IDENTITY if key in route}, "donorRouteId": donor_id,
+                "rebasedFrom": route.get("donorRouteId"), "followsReportPair": donor_id, "sameModelAcrossEfforts": False}
+    return {**route, "donorRouteId": donor_id, "valueMultiple": comparison_multiple(donor_object), "rebasedFrom": route.get("donorRouteId"),
+            "sourceModel": donor_object.get("sourceModel", route.get("sourceModel"))}
 
 
-def rebase_transfer(route: dict, registry: dict, release_day: date, window: dict | None, faults: list[dict] | None) -> dict:
+def rebase_transfer(route: dict, registry: dict, release_day: date, window: dict | None, faults: list[dict] | None,
+                    families: dict | None = None) -> dict:
     """O95, O96: every route resting on a donor measurement takes its donor's effective figure: a lower-of transfer the lower
     of its plan's effective figures, any other transfer (or O88 route) its own donor's replacing report pair, if any."""
 
     if route.get("donorRule") == "lower-of":
-        return rebase_lower_of(route, registry, release_day, window, faults)
+        return rebase_lower_of(route, registry, release_day, window, faults, families)
     source = registry.get(route.get("donorRouteId") or "")
     if source is None or source.get("valueMultipleKind") not in CONTROLLED_KINDS:
         return route
-    return _rebased(route, effective_measurement(source, registry, release_day, window, faults))
+    return _rebased(route, effective_measurement(source, registry, release_day, window, faults, families))
 
 
 def route_candidates(model_id: str, configuration_effort: str | None, routes: list[dict], release_day: date, *, registry: list[dict] | None = None,
-                     window: dict | None = None, faults: list[dict] | None = None) -> list[dict]:
-    """Every route-measurement pair for this model, classified; variant-restricted routes need an exact effort match.
+                     window: dict | None = None, faults: list[dict] | None = None, families: dict | None = None) -> list[dict]:
+    """Every route-measurement pair for this model, classified; variant-restricted routes need an exact effort match,
+    except report routes, whose allowance evidence covers every configuration of the model (O87, I82 L1).
 
     ``registry`` is the full route list donors are resolved in (default: ``routes``); ``window`` is the
-    release's report window (O32); ``faults`` are the acknowledged accounting-fault windows (O91).
+    release's report window (O32); ``faults`` are the acknowledged accounting-fault windows (O91); ``families`` maps
+    configuration IDs to AA families (O87).
     """
 
     by_id = {item["id"]: item for item in (registry if registry is not None else routes)}
     candidates = []
     for route in [item for base in routes for item in measurement_objects(base, release_day, window)]:
-        if report_covers(route, model_id) is None:
+        if report_covers(route, model_id, families) is None:
             continue
-        route = rebase_transfer(route, by_id, release_day, window, faults)
+        reported = route.get("valueMultipleKind") in REPORT_KINDS
+        route = rebase_transfer(route, by_id, release_day, window, faults, families)
         required = route.get("requiredVariant")
-        if required is not None and (configuration_effort or "").casefold() != required.casefold():
+        if required is not None and not reported and (configuration_effort or "").casefold() != required.casefold():
             continue
         grade = evidence_grade(route, model_id)
         # E151: a pooled partition ages with its contributors; any other object with its own (or its donor's) clock.
@@ -642,7 +635,7 @@ IDENTIFIED = {"point-identified", "set-identified"}
 
 
 def admission_table(model_id: str, configuration_effort: str | None, routes: list[dict], release_day: date, window: dict | None = None,
-                    faults: list[dict] | None = None) -> list[dict]:
+                    faults: list[dict] | None = None, families: dict | None = None) -> list[dict]:
     """E106/E123: every route-measurement pair naming the model, classified once by case and the three predicates.
 
     1 execution-identity incompatibility (excluded); 2 owner assumption: an
@@ -657,9 +650,9 @@ def admission_table(model_id: str, configuration_effort: str | None, routes: lis
 
     table = []
     for route in routes:
-        if report_covers(route, model_id) is None:
+        if report_covers(route, model_id, families) is None:
             continue
-        candidates = route_candidates(model_id, configuration_effort, [route], release_day, registry=routes, window=window, faults=faults)
+        candidates = route_candidates(model_id, configuration_effort, [route], release_day, registry=routes, window=window, faults=faults, families=families)
         if not candidates:
             table.append({"route": route, "case": 1, "officialDisplayEligible": False, "targetTransportIdentified": False, "planIntervalEligible": False})
             continue
@@ -676,7 +669,8 @@ def admission_table(model_id: str, configuration_effort: str | None, routes: lis
             transport = case == "identified"
             valued = candidate["valuation"] in {"release", "revalued"}
             table.append({
-                **candidate, "case": case, "crossEffort": bool(route.get("sameModelAcrossEfforts")), "officialDisplayEligible": case not in (4, 5),
+                # I82 L2: crossEffort reads the (possibly rebased) candidate route.
+                **candidate, "case": case, "crossEffort": bool(candidate["route"].get("sameModelAcrossEfforts")), "officialDisplayEligible": case not in (4, 5),
                 "targetTransportIdentified": transport, "planIntervalEligible": transport and valued,
             })
     return table
@@ -868,6 +862,8 @@ def plan_cost(api_cost: float | None, selected: dict | None) -> dict:
         "mixCheck": selected.get("mixCheck", mix_check(route)),
         "evidenceDate": selected.get("evidenceDate"),
         "donorRouteId": selected.get("donorRouteId"),
+        # E144, I82 L2: the donor a release rebased the route from (O95, O96), published only when it was rebased.
+        **({"rebasedFrom": route["rebasedFrom"]} if route.get("rebasedFrom") else {}),
         "flags": flags,
     }
 

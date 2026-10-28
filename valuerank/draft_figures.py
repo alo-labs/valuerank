@@ -26,6 +26,7 @@ from datetime import date, timedelta
 from pathlib import Path
 
 from valuerank import exact_match
+from valuerank import plan_admission
 from valuerank import plan_routes as pr
 from valuerank import quality as q
 from valuerank import value_v3
@@ -287,8 +288,11 @@ def registry_figures(capture: dict, plan_document: dict, release: str) -> dict:
     figures = {"evidence.windowStart": window["start"], "evidence.windowEnd": window["end"], "evidence.searchCutoff": cutoff,
                "evidence.searchGapDays": (date.fromisoformat(release) - date.fromisoformat(cutoff)).days}
     # I65 L4: the partition splits the build applies (O83), from the registry.
-    splits = (policy.get("reportEligibilityProfile") or {}).get("partitionSplits") or []
+    records = (policy.get("reportEligibilityProfile") or {}).get("partitionSplits") or []
+    splits = plan_admission.splitting(records)
     figures["evidence.partitionSplits"] = series([f"{item['provider']} at {item['date']}" for item in splits]) or "none"
+    # O99: metering-only announcements are logged but split nothing.
+    figures["evidence.meteringAnnouncements"] = series([f"{item['provider']} at {item['date']}" for item in records if item not in splits]) or "none"
     # I61 L3: the stages and providers of the search that sets the cutoff, from its log entry.
     latest = max((entry for entry in policy.get("searchLog") or [] if entry.get("searchedOn") == cutoff and not entry.get("singleProvider")),
                  key=lambda entry: len(entry.get("stages") or []), default={})
