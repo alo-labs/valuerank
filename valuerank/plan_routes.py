@@ -329,6 +329,9 @@ def check_same_model_routes(document: dict, families: dict | None = None) -> Non
             else str(mine).startswith(f"{theirs}-")
         if source.get("plan") != route.get("plan") or mine == theirs or not same_model or source.get("sourceModel") != route.get("sourceModel"):
             raise ValueError(f"{route['id']}: its donor {source['id']} is not the same model's measurement on {route.get('plan')} at another configuration (O88, O90)")
+        # I75 L2: the route carries its donor's multiple and allocation regime unchanged (E220).
+        if route.get("valueMultiple") != source.get("valueMultiple") or route.get("allocationRegime") != source.get("allocationRegime"):
+            raise ValueError(f"{route['id']}: a same-model route must carry its donor {source['id']}'s multiple and allocation regime (O88, E220)")
 
 
 def check_allocation_regimes(document: dict) -> None:

@@ -2067,3 +2067,12 @@ def test_the_o71_search_records_three_stages_over_every_provider():
         v.check_o71_search({"searchLog": [{**good, "providers": ["Anthropic"]}]}, providers)
     # A single-provider entry neither sets the cutoff nor needs stages.
     v.check_o71_search({"searchLog": [good, {"searchedOn": "2026-10-26", "singleProvider": True}]})
+
+
+def test_plan_evidence_names_a_same_model_measurement():
+    """I75 L3: an anchor setter on an O88 route is named a same-model measurement from another effort."""
+
+    from valuerank import plan_routes
+    row = {"plan": {"fallback": None, "grade": "controlled", "flags": [plan_routes.CROSS_EFFORT_FLAG]}}
+    assert v._plan_evidence(row) == "same-model measurement from another effort"
+    assert v._plan_evidence({"plan": {"fallback": None, "grade": "controlled", "flags": []}}) == "controlled measurement"

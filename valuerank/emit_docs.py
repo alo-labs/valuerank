@@ -1088,7 +1088,8 @@ def scores_markdown(facts):
     intervals_text = "; ".join(f"{item['leaf']}: {item['status']}, level {item['level']}" for item in v3["sourceIntervals"])
     measured = v3["measuredOnlyPlanView"]
     measured_rows = [
-        [facts.label(model_id), item["status"], item.get("routeId") or DASH, usd(item.get("costUsd")), fnum(item.get("value"), 2), item.get("rank") or DASH]
+        # I75 L1: a row measured on the same model at another effort (an O88 route, O90) says so.
+        [facts.label(model_id), item["status"] + ("; measured at another effort (O88, O90)" if item.get("crossEffort") else ""), item.get("routeId") or DASH, usd(item.get("costUsd")), fnum(item.get("value"), 2), item.get("rank") or DASH]
         for model_id, item in sorted(measured["rows"].items(), key=lambda pair: (pair[1].get("rank") is None, pair[1].get("rank") or 0, facts.label(pair[0])))
     ]
     unranked_rows = [[entry["name"], "; ".join(entry["exclusionReasons"]) or DASH] for entry in facts.unranked]
@@ -1204,13 +1205,17 @@ def calibration_markdown(facts):
             f"anchor ratio {item['exchangeRate']['anchorRatio']:.1f} against the official {official_ratio}.{extremes}"
         )
     rows = [
-        [facts.label(row_id), fnum(measured["rows"][row_id]["value"], 2), fnum(value, 2), calibration["rankChange"]["changes"].get(row_id, DASH)]
+        # I75 L1: a reference measured on the same model at another effort (an O88 route, O90) is marked.
+        [facts.label(row_id) + (" ‡" if measured["rows"][row_id].get("crossEffort") else ""), fnum(measured["rows"][row_id]["value"], 2), fnum(value, 2),
+         calibration["rankChange"]["changes"].get(row_id, DASH)]
         for row_id, value in sorted(calibration["values"].items(), key=lambda pair: facts.label(pair[0]))
     ]
     if rows:
         lines.append("\n" + markdown_table(["Configuration", "Value on official Plan anchors", "Value on measured anchors", "Rank change"], rows, numeric={1, 2, 3}))
         reversals = "; ".join(f"{facts.label(a)} and {facts.label(b)}" for a, b in calibration["reversals"]) or "none"
         lines.append(f"\nPairwise reversals: {reversals}. Largest value change: {fnum(calibration['maxAbsValueChange'], 2)} points.")
+        if any(measured["rows"][row_id].get("crossEffort") for row_id in calibration["values"]):
+            lines.append("\n‡ measured on the same model at another effort (an O88 route; measured evidence under O90).")
     return "\n".join(lines)
 
 

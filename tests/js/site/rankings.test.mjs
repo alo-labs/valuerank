@@ -52,7 +52,7 @@ test('each row carries a numbered evidence marker linking to its note, and each 
   assert.equal(note.querySelector('.fn-back').getAttribute('aria-label'), 'Back to Alpha in the table');
   const badge = note.querySelector('.badge');
   assert.equal(badge.className, 'badge badge-measured');
-  assert.equal(badge.textContent, 'User-measured');
+  assert.equal(badge.textContent, 'Measured');
   assert.equal(badge.getAttribute('title'), 'Measured by the benchmark owner or in a controlled account measurement.');
   assert.match(note.querySelector('.fn-text').textContent, /^Weakest grade of any value inside the score\. Measured by/);
   assert.equal(notes(p)[1].querySelector('.badge').textContent, 'Modelled');

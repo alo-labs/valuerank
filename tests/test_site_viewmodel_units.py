@@ -18,6 +18,8 @@ from valuerank.site import changelog, evidence, picks, viewmodel
 )
 def test_route_grade_maps_evidence_class(evidence_class, expected):
     assert evidence.route_grade(evidence_class) == expected
+    # I75 L1, O90: an O88 same-model route is measured whatever its legacy evidence class.
+    assert evidence.route_grade(evidence_class, True) == "measured"
 
 
 def test_slugify_replaces_dots_with_hyphens():

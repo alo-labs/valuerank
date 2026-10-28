@@ -25,7 +25,7 @@ test('fmtPct, fmtScore and fmtMultiple', () => {
 
 test('grade labels and short badge text follow the contract enum', () => {
   assert.deepEqual(GRADES, ['measured', 'claim', 'estimate', 'assumption', 'missing']);
-  assert.equal(gradeLabel('measured'), 'User-measured');
+  assert.equal(gradeLabel('measured'), 'Measured');
   assert.equal(gradeLabel('claim'), 'Provider claim');
   assert.equal(gradeLabel('estimate'), 'Modelled');
   assert.equal(gradeLabel('assumption'), 'Assumption');

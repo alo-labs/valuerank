@@ -651,7 +651,8 @@ def test_every_route_kind_maps_to_one_admission_case_and_same_model_flags_are_ch
     assert pr.admission_table("m", None, [donor], day)[0]["case"] == 3
     pr.check_same_model_routes({"routes": [donor, same]})
     pr.check_same_model_routes({"routes": [donor, same]}, {"m": "M", "m-high": "M"})
-    for bad in ({**same, "donorRouteId": "missing"}, {**same, "plan": "Max"}, {**same, "modelIds": ["other-high"]}):
+    for bad in ({**same, "donorRouteId": "missing"}, {**same, "plan": "Max"}, {**same, "modelIds": ["other-high"]},
+                {**same, "valueMultiple": 99.0}, {**same, "allocationRegime": "another regime"}):
         with pytest.raises(ValueError):
             pr.check_same_model_routes({"routes": [donor, bad]})
     with pytest.raises(ValueError):

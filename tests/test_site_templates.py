@@ -512,7 +512,7 @@ def test_plans_and_tb4_footnotes(pages):
     assert dom.one("section", **{"aria-labelledby": "legend-title"})  # the grade legend stays
     _, dom, page = pages["benchmark_tb4"]
     official = dom.one("li", id="ev-tb4-official")
-    assert "User-measured" in official.all_text()
+    assert "Measured" in official.all_text()
     refs = [n for n in dom.one("section", id="official-rows").walk() if n.tag == "a" and n.attrs.get("href") == "#ev-tb4-official"]
     assert len(refs) == len(page["tb4Json"]["rows"]) and len({r.attrs["id"] for r in refs}) == len(refs)
     claims = [n for n in dom.find_all("li", **{"class": "fn-item"}) if n.attrs["id"].startswith("ev-tb4-claim-")]
@@ -521,5 +521,5 @@ def test_plans_and_tb4_footnotes(pages):
 
 def test_badge_label_reads_user_measured(env):
     macros = env.get_template("partials/badge.html").module
-    assert ">User-measured<" in str(macros.badge("measured")) and "Owner-measured" not in str(macros.legend())
+    assert ">Measured<" in str(macros.badge("measured")) and "Owner-measured" not in str(macros.legend())
     assert str(macros.describe("bogus")) == str(macros.describe("missing"))

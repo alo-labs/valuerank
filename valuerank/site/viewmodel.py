@@ -196,7 +196,7 @@ def _route_view(route: dict | None, grade: str | None = None) -> dict | None:
         "planLabel": route.get("planLabel"),
         "planFeeUsd": route.get("planPriceUsd"),
         "valueMultiple": route["valueMultiple"],
-        "grade": ROUTE_GRADES[grade] if grade else evidence.route_grade(route.get("evidenceClass")),
+        "grade": ROUTE_GRADES[grade] if grade else evidence.route_grade(route.get("evidenceClass"), bool(route.get("sameModelAcrossEfforts"))),
         # I71: which owner assumption an assumption-graded route is, named from the one registry.
         "assumptionKind": plan_routes.assumption_kind(route) if grade == "assumption" else None,
         "evidenceLabel": plan_evidence_label(route),
@@ -699,7 +699,7 @@ def _plans(inputs: dict, entries: dict, v3: dict) -> dict:
                 "planFeeUsd": route.get("planPriceUsd"),
                 "valueMultiple": route["valueMultiple"],
                 "apiEquivalentUsd": route.get("apiEquivalentUsd"),
-                "grade": evidence.route_grade(route.get("evidenceClass")),
+                "grade": evidence.route_grade(route.get("evidenceClass"), bool(route.get("sameModelAcrossEfforts"))),
                 "evidenceLabel": plan_evidence_label(route),
                 "sourceModel": route.get("sourceModel"),
                 "sourceUrl": route.get("sourceUrl"),

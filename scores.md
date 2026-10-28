@@ -176,13 +176,15 @@ References: each workload's measured-only rows with complete cost evidence are t
 
 | Configuration | Value on official Plan anchors | Value on measured anchors | Rank change |
 |---|---:|---:|---:|
-| Claude Opus 5.5 (high) | 58.39 | 62.83 | 1 |
-| Claude Opus 5.5 (medium) | 58.25 | 64.01 | -1 |
-| GPT-6 Astra (high) | 52.84 | 49.20 | 0 |
-| GPT-6.1 Sol (high) | 55.54 | 58.82 | 1 |
-| GPT-6.1 Sol (medium) | 54.12 | 58.89 | -1 |
+| Claude Opus 5.5 (high) ‡ | 58.39 | 62.83 | 1 |
+| Claude Opus 5.5 (medium) ‡ | 58.25 | 64.01 | -1 |
+| GPT-6 Astra (high) ‡ | 52.84 | 49.20 | 0 |
+| GPT-6.1 Sol (high) ‡ | 55.54 | 58.82 | 1 |
+| GPT-6.1 Sol (medium) ‡ | 54.12 | 58.89 | -1 |
 
 Pairwise reversals: Claude Opus 5.5 (high) and Claude Opus 5.5 (medium); GPT-6.1 Sol (high) and GPT-6.1 Sol (medium). Largest value change: 5.76 points.
+
+‡ measured on the same model at another effort (an O88 route; measured evidence under O90).
 
 ### AI Coding Daily ranking: interval outputs
 

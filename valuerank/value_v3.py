@@ -2166,6 +2166,9 @@ def _plan_evidence(row: dict | None) -> str:
         return "API-cost fallback"
     if row["plan"]["grade"] == "assumption":
         return plan_routes.OWNER_ASSUMPTIONS[row["plan"].get("assumptionKind") or "transfer"][0]
+    # I75 L3: an O88 route is a controlled measurement of the same model at another effort, named as such.
+    if plan_routes.CROSS_EFFORT_FLAG in row["plan"].get("flags", []):
+        return "same-model measurement from another effort"
     return {"controlled": "controlled measurement", "reports": "concordant reports"}[row["plan"]["grade"]]
 
 

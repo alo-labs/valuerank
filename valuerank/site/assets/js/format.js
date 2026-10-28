@@ -3,7 +3,7 @@
 export const GRADES = ['measured', 'claim', 'estimate', 'assumption', 'missing'];
 
 const LABELS = {
-  measured: 'User-measured',
+  measured: 'Measured',
   claim: 'Provider claim',
   estimate: 'Modelled',
   assumption: 'Assumption',

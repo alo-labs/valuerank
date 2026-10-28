@@ -27,7 +27,8 @@ _ROUTE_GRADES = {
 }
 
 
-def route_grade(evidence_class: str | None) -> str:
-    """Grade a subscription route; unknown evidence classes are conservatively ``assumption``."""
+def route_grade(evidence_class: str | None, same_model_across_efforts: bool = False) -> str:
+    """Grade a subscription route; unknown evidence classes are conservatively ``assumption``. I75 L1: an O88 route (the
+    same model's controlled measurement at another effort) is measured evidence under O90, whatever its legacy class."""
 
-    return _ROUTE_GRADES.get(evidence_class, "assumption")
+    return "measured" if same_model_across_efforts else _ROUTE_GRADES.get(evidence_class, "assumption")

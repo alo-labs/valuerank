@@ -1764,3 +1764,11 @@ Asked on I64 Q1 whether future O71 admissions should be executed by the build fr
 - L3 (adopted, build check with a test): `check_same_model_routes` refuses a `sameModelAcrossEfforts` flag unless the route names a controlled donor measurement of the same model (AA family where both configurations are known), on the same plan, at another configuration, with the same source model.
 - L4 (adopted): the draft says "another effort" means another configuration than the max row the figure binds to, since SemiAnalysis states no effort and E246 binds an unstated effort to the max row.
 - Round status (O56): not clean (one Medium). Draft r134; the Opus high count restarts.
+
+## Internal review I75 (Claude Opus 5.5, effort high, on r134) — adopted, modified or rejected
+- L1 (adopted, site and docs changed with tests): the site grades routes with `evidence.route_grade(evidenceClass, sameModelAcrossEfforts)`, so the 33 O88 routes show the "Measured" badge (not "Assumption"); the "measured" badge reads "Measured" instead of "User-measured", which mislabelled SemiAnalysis's controlled measurements; scores.md marks each row measured at another effort (the measured-only table's status, and ‡ in the AI Coding Daily calibration table, whose five references are all O88 routes).
+- L2 (adopted, build check with tests): `check_same_model_routes` also requires the donor's multiple and allocation regime (E220) unchanged.
+- L3 (adopted): E106 case (4) covers every route kind whose (or whose donor's) valuation basis cannot be reconciled; the displayed multiple names the O88 figure and the O46 ceiling; E164's anchor provenance names "same-model measurement from another effort" (also in the build's `_plan_evidence`).
+- L4 (adopted): comparator key (2) separates "the exact configuration (model and effort)" from the same model at another effort.
+- Recommendations (one grade function for every surface; generate O88 routes from their donor; an E106 coverage table): the first is adopted for route badges; the second and third are recorded, not adopted this round (the build check of L2 and the case-mapping test of I74 cover the drift they target).
+- Round status (O56): clean (no Medium or higher), the first clean round at Opus high since the restart. Draft r135.
