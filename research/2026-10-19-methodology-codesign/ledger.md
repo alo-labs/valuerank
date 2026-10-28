@@ -1684,3 +1684,14 @@ Asked on I64 Q1 whether future O71 admissions should be executed by the build fr
 - L4 (adopted): the limitations sentence says "most plan rows" (its totals include API-fallback rows) and "possibly superseded or expired"; line 55 says "every priced and dated report", matching the table's rule and its `notTabulated` list.
 - Owner question (asked; O84).
 - Round status (O56): clean (no Medium or higher), the first clean round at Opus low. Draft r126.
+
+## Owner decision O85 (2026-10-28), asked on I67's question
+- O85 (unlisted plans): O71 covers every first-party plan. The build tests every report cell, including cells on plans the Plan ranking does not list (Kimi's China-region tiers, Claude Team Premium, legacy and tier-unstated plans), and publishes each verdict with a `listed` flag; a passing cell on an unlisted plan is evidence only and supports no route or Plan row until its fee is registered and the plan is listed. Today no cell passes either way (24 of the 52 cells are on unlisted plans).
+
+## Internal review I67 (Claude Opus 5.5, effort low, on r126) — adopted, modified or rejected
+- L1 (asked; O85, engine changed with tests): unlisted-plan cells are tested and published with `listed: false`; `check_routes` uses listed passing cells only; the draft says so.
+- L2 (adopted): Output 1 cites E138 for the Plan measurement's unrecorded valuation basis, and the E170 sentence says it is about each row's AA cost.
+- L3 (adopted): the registry rule text states O84 and O85.
+- Recommendations 1 (two statuses per cell) adopted through O85's `listed` flag; 2 (rule IDs on plan-row flags) and 3 (explicit `plans` on the OpenAI splits, which today cover every OpenAI plan) recorded, not adopted this round.
+- Owner question (asked; O85).
+- Round status (O56): clean (no Medium or higher). With I66, two consecutive clean rounds: the Opus low rung has converged. Draft r127; next rung: Opus medium.

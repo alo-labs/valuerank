@@ -61,8 +61,11 @@ def test_cells_pass_only_on_two_firm_concordant_reports_in_the_current_partition
     assert cells(report("a", start="2026-10-18", end="2026-10-18", low=100), report("b", start="2026-10-19", end="2026-10-19", low=125))[("Pro", "week", "global")]["status"] == "fails: range 1.25× over the current partition"
     assert cells(report("a", start="2026-10-18", end="2026-10-18"), report("p", start="2026-10-19", end="2026-10-19", provisional=True))[("Pro", "week", "global")]["status"].startswith("fails: 1 non-provisional")
     assert cells(report("h", unit="5h"))[("Pro", "5h", "global")]["status"] == "fails: a 5-hour figure never converts to a billing period (O82)"
-    assert cells(report("r", plan="Legacy"))[("Legacy", "week", "global")]["status"] == "not a listed plan"
-    assert cells(report("cn", region="CN"))[("Pro", "week", "CN")]["status"] == "not a listed plan"
+    legacy = cells(report("r", start="2026-10-18", end="2026-10-18", plan="Legacy"), report("s", start="2026-10-19", end="2026-10-19", plan="Legacy"))
+    assert legacy[("Legacy", "week", "global")]["status"] == "passes" and legacy[("Legacy", "week", "global")]["listed"] is False
+    assert legacy[("Legacy", "week", "global")]["multiple"] is None
+    cn = cells(report("cn", region="CN"))[("Pro", "week", "CN")]
+    assert cn["status"].startswith("fails: ") and cn["listed"] is False
     monthly = cells(report("m1", start="2026-10-18", end="2026-10-18", unit="month"), report("m2", start="2026-10-19", end="2026-10-19", unit="month"))[("Pro", "month", "global")]
     assert monthly["monthlyUsd"] == pytest.approx(100) and monthly["multiple"] == pytest.approx(5)
     with pytest.raises(ValueError, match="one observer reports twice"):
@@ -77,6 +80,8 @@ def test_a_report_route_needs_a_passing_cell_with_the_same_reports():
               {"id": "other", "plan": "Max", "modelIds": ["outside"], "valueMultipleKind": "end_user_report"},
               {"id": "controlled", "plan": "Max", "modelIds": ["m"], "valueMultipleKind": "controlled_account_workload_projection"}]
     pa.check_routes(routes, cells, {"m"}, {"end_user_report"})
+    with pytest.raises(ValueError, match="no passing O71 cell"):
+        pa.check_routes(routes[:1], [{**cells[0], "listed": False}], {"m"}, {"end_user_report"})
     pa.check_routes([{**routes[0], "independentReports": [{"observer": "d"}, {"observer": "c"}]}], cells, {"m"}, {"end_user_report"})
     with pytest.raises(ValueError, match="no passing O71 cell supports a report route for m on Max"):
         pa.check_routes([{"id": "bad", "plan": "Max", "modelIds": ["m"], "valueMultipleKind": "end_user_report"}], cells, {"m"}, {"end_user_report"})

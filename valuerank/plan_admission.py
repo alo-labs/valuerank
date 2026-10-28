@@ -11,7 +11,8 @@ concordance test to every model × plan cell, and the build refuses a report rou
 - a partition splits at each recorded change (E18 or provider-documented, O83); the partition current at the cutoff decides;
 - the cell passes when it has at least two non-provisional reports, every report's whole range lies within 1.20× of the
   smallest lower bound (E98, E107: every eligible report together), the unit converts to a month (O82: a 5-hour figure
-  never does), and the plan is one ValueRank lists; the value is the geometric mean of the firm reports' midpoints.
+  never does), and every cell is tested (O85: a cell on a plan the Plan ranking does not list is published as evidence
+  only and supports no route); the value is the geometric mean of the firm reports' midpoints.
 """
 
 from __future__ import annotations
@@ -139,9 +140,9 @@ def evaluate(document: dict, profile: dict, release_day: date) -> list[dict]:
         lowest = min((row["valueLower"] for row in pool), default=None)
         highest = max((row["valueUpper"] for row in pool), default=None)
         firm = [row for row in pool if not row["provisional"]]
-        if plan not in document.get("listedPlans", {}) or region != "global":
-            status = "not a listed plan"
-        elif unit not in UNIT_TO_MONTH:
+        # O85: every cell is tested; a cell on a plan the Plan ranking does not list is published as evidence only.
+        listed = plan in document.get("listedPlans", {}) and region == "global"
+        if unit not in UNIT_TO_MONTH:
             status = "fails: a 5-hour figure never converts to a billing period (O82)"
         elif len(set(observers)) < len(observers):
             raise ValueError(f"{key}: one observer reports twice in one partition; record it once with its range (E270)")
@@ -157,8 +158,8 @@ def evaluate(document: dict, profile: dict, release_day: date) -> list[dict]:
         value = (math.exp(sum(math.log((row["valueLower"] + row["valueUpper"]) / 2) for row in firm) / len(firm))
                  if status == "passes" else None)
         monthly = value * UNIT_TO_MONTH[unit] if value is not None else None
-        fee = document.get("listedPlans", {}).get(plan)
-        results.append({"provider": provider, "plan": plan, "modelId": model, "unit": unit, "region": region, "status": status,
+        fee = document.get("listedPlans", {}).get(plan) if listed else None
+        results.append({"provider": provider, "plan": plan, "modelId": model, "unit": unit, "region": region, "status": status, "listed": listed,
                         "currentPartition": latest_split, "partitionsWithReports": sorted({row["partition"] for row in eligible}),
                         "value": value, "monthlyUsd": monthly, "multiple": monthly / fee if monthly is not None and fee else None,
                         "range": None if lowest is None else [lowest, highest], "reports": rows,
@@ -172,7 +173,7 @@ def check_routes(routes: list[dict], cells: list[dict], cohort: set[str], report
 
     passing: dict[tuple, list[dict]] = {}
     for cell in cells:
-        if cell["status"] == "passes":
+        if cell["status"] == "passes" and cell.get("listed", True):
             passing.setdefault((cell["plan"], cell["modelId"]), []).append(cell)
     for route in routes:
         if route.get("valueMultipleKind") not in report_kinds:
