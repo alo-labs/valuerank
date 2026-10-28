@@ -93,27 +93,35 @@ def check_change_flags(routes: list[dict], records: list[dict]) -> None:
 
 
 def check_change_records(routes: list[dict], records: list[dict], release_day: date) -> None:
-    """I86 L3, O107: every typed limit, price or availability record produces its route flags: a controlled measurement on
-    a plan a record covers carries the earliest such record dated on or after the earliest day it can have been taken and
-    by the cutoff, and (O107) is marked ``changeKind: "availability"`` exactly when only availability records fall on
-    that date; the build stops otherwise."""
+    """I86 L3, O107, I87 M1 and L1: the typed records produce every route's two change dates. A controlled measurement on a
+    plan a record covers carries ``changeDetectedOn``, the earliest limit, price or availability record dated on or after the
+    earliest day it can have been taken and by the cutoff (the label); every flagged route (an O46 ceiling or a report route
+    flagged by hand included) carries ``blockingChangeOn`` exactly when the earliest limit or price record from its label
+    date on differs from the label date (null when none: an availability-only flag blocks nothing). The build stops
+    otherwise."""
 
     from valuerank import plan_routes  # local: plan_routes does not depend on this module
 
     splitting(records)
-    flagging = [record for record in records if record["type"] in SPLIT_TYPES | FLAG_ONLY_TYPES]
+    dated = [(date.fromisoformat(record["date"][:10]), record) for record in records if record["type"] in SPLIT_TYPES | FLAG_ONLY_TYPES]
     for route in routes:
-        if route.get("valueMultipleKind") not in plan_routes.CONTROLLED_KINDS:
+        applicable = sorted((day, record["type"]) for day, record in dated if applies(record, route) and day <= release_day)
+        if route.get("valueMultipleKind") in plan_routes.CONTROLLED_KINDS:
+            earliest = plan_routes.measurement_span(route)[0]
+            derived = next((day for day, _ in applicable if earliest is None or day >= earliest), None)
+            if (derived.isoformat() if derived else None) != route.get("changeDetectedOn"):
+                raise ValueError(f"route {route['id']}: its change flag must be {derived} from the typed change records (I86 L3)")
+        label = route.get("changeDetectedOn")
+        if label is None:
+            if "blockingChangeOn" in route:
+                raise ValueError(f"route {route['id']}: blockingChangeOn without a change flag (I87 M1)")
             continue
-        earliest = plan_routes.measurement_span(route)[0]
-        dated = [(date.fromisoformat(record["date"][:10]), record["type"]) for record in flagging if applies(record, route)]
-        applicable = [(day, kind) for day, kind in dated if (earliest is None or day >= earliest) and day <= release_day]
-        derived = min((day for day, _ in applicable), default=None)
-        if (derived.isoformat() if derived else None) != route.get("changeDetectedOn"):
-            raise ValueError(f"route {route['id']}: its change flag must be {derived} from the typed change records (I86 L3)")
-        availability_only = derived is not None and all(kind in FLAG_ONLY_TYPES for day, kind in applicable if day == derived)
-        if availability_only != (route.get("changeKind") == "availability"):
-            raise ValueError(f"route {route['id']}: changeKind must be 'availability' exactly when only an availability record flags it (O107)")
+        blocking = next((day.isoformat() for day, kind in applicable if kind in SPLIT_TYPES and day.isoformat() >= label), None)
+        if blocking == label:
+            if "blockingChangeOn" in route:
+                raise ValueError(f"route {route['id']}: blockingChangeOn must be omitted when it equals the change flag (I87 M1)")
+        elif route.get("blockingChangeOn", "absent") != blocking:
+            raise ValueError(f"route {route['id']}: blockingChangeOn must be {blocking} from the typed change records (O107, I87 M1)")
 
 
 def applies(entry: dict, report: dict) -> bool:

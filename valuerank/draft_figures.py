@@ -292,7 +292,7 @@ def registry_figures(capture: dict, plan_document: dict, release: str) -> dict:
     splits = plan_admission.splitting(records)
     figures["evidence.partitionSplits"] = series([f"{item['provider']} at {item['date']}" for item in splits]) or "none"
     # O99: metering-only announcements are logged but split nothing.
-    figures["evidence.meteringAnnouncements"] = series([f"{item['provider']} at {item['date']}" for item in records if item not in splits]) or "none"
+    figures["evidence.meteringAnnouncements"] = series([f"{item['provider']} at {item['date']}" for item in records if item.get("type") == "metering"]) or "none"
     # I61 L3: the stages and providers of the search that sets the cutoff, from its log entry.
     latest = max((entry for entry in policy.get("searchLog") or [] if entry.get("searchedOn") == cutoff and not entry.get("singleProvider")),
                  key=lambda entry: len(entry.get("stages") or []), default={})

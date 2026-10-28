@@ -89,7 +89,7 @@ FLAG_LEGEND = (
     ("AA cost caveat", "AA states that its published cost omits a pricing term"),
     ("API-cost fallback", "no admitted Plan route; the Plan ranking uses the API cost (O13)"),
     # I78 L5: the selected Plan route's own lifecycle flags, so every human-readable ranking shows them.
-    ("route possibly superseded", "the selected Plan route's evidence (or its donor's) may be superseded by age or a detected change (E18, E151, O77-O79); it stays selected, and earns no interval label when the trigger is a detected change rather than age alone (E228)"),
+    ("route possibly superseded", "the selected Plan route's evidence (or its donor's) may be superseded by age or a detected change (E18, E151, O77-O79); it stays selected, and earns no interval label when the trigger is a detected limit or price change rather than age alone or a model-availability change (E228, O107)"),
     ("fault window", "the selected Plan route rests on a controlled measurement inside an acknowledged accounting-fault window; it stays selected until two concordant user reports for its own model and plan replace it, and a transfer resting on it then follows the replacing figure (O91-O95)"),
 )
 

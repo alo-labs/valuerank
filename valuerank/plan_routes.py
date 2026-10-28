@@ -51,10 +51,12 @@ POST_CHANGE_SUPERSEDED = 1.5
 
 
 def blocking_change(route: dict) -> str | None:
-    """O107 (2026-10-28): the detected change that can block labels (E228) and let a later report pair outrank the
-    measurement (O78); a model-availability change (O105) only prints the "possibly superseded" label."""
+    """O107 (2026-10-28), I87 M1: the detected limit or price change that can block labels (E228) and let a later report pair
+    outrank the measurement (O78). A route keeps two dates: ``changeDetectedOn``, the earliest change of any flagging type,
+    which prints the "possibly superseded" label, and, when it differs, ``blockingChangeOn``, the earliest limit or price
+    change (null when only a model-availability change, O105, flags it)."""
 
-    return None if route.get("changeKind") == "availability" else route.get("changeDetectedOn")
+    return route["blockingChangeOn"] if "blockingChangeOn" in route else route.get("changeDetectedOn")
 
 
 def grade_rank(candidate: dict) -> float:

@@ -902,8 +902,11 @@ def assemble(configurations: list[dict], documents: dict, *, release_day: date, 
             "routeSelection": plan_routes.route_selection(candidates),
             # O100, O106: the registered class of every AA note on the row's chart point, model page, Coding Agent Index record
             # and cost-chart rows (and their charts), combined (the build stops on an unregistered note).
-            "aaNoteClass": combined_note_class([configuration.get("aaNote"), *page_notes(page), *record_notes(agent_records.get(agent_labels[model_id]), documents["codingAgents"]),
-                                                *chart_notes(documents["costCharts"], labels)], documents.get("aaFootnotes")),
+            "aaNoteClass": combined_note_class(
+                [configuration.get("aaNote"), *page_notes(page), *((agent_records.get(agent_labels[model_id]) or {}).get("notes") or []),
+                 *chart_notes(documents["costCharts"], labels)],
+                [*(documents["codingAgents"].get("notes") or [] if agent_records.get(agent_labels[model_id]) else []), *chart_level_notes(documents["costCharts"], labels)],
+                documents.get("aaFootnotes"), model_id),
             "aaNote": chart_footnote(configuration, points),
             "admissionTable": plan_routes.admission_table(model_id, effort, routes, release_day, window, faults, families),
         })
@@ -1139,29 +1142,48 @@ def page_notes(page: dict | None) -> list[str]:
     return list((page or {}).get("notes") or [])
 
 
-def record_notes(record: dict | None, capture: dict | None) -> list[str]:
-    """O106: a Coding Agent Index record's notes, with the index's own chart-level notes when the row has a record."""
+def basket_label(capture: dict | None, labels: dict, slug: str) -> str | None:
+    """I87 L4: a row's mapped label on a basket cost chart, which must name a row the chart holds (the build stops otherwise)."""
 
-    return [*((record or {}).get("notes") or []), *((capture or {}).get("notes") or [])] if record else []
+    label = labels.get(slug)
+    evaluation = next((item for item in (capture or {}).get("evaluations", []) if item.get("slug") == slug), None)
+    if label is not None and evaluation is not None and not any(row.get("model") == label for row in evaluation.get("rows", [])):
+        raise ValueError(f"{slug}: the configuration map's label {label!r} names no row on the captured chart (I87 L4)")
+    return label
 
 
 def chart_notes(capture: dict | None, labels: dict) -> list[str]:
-    """O106: the notes on the row's cost-chart rows (through the configuration map) and on those charts themselves."""
+    """O106, O108: the notes on the row's own rows of the basket cost charts (charts outside the cost workload never count)."""
 
     found = []
-    for evaluation in (capture or {}).get("evaluations", []):
-        label = labels.get(evaluation.get("slug"))
-        row = next((item for item in evaluation.get("rows", []) if label is not None and item.get("model") == label), None)
-        if row is not None:
-            found += [*(row.get("notes") or []), *(evaluation.get("notes") or [])]
+    for slug in basket.CHART_COMPONENTS:
+        label = basket_label(capture, labels, slug)
+        evaluation = next((item for item in (capture or {}).get("evaluations", []) if item.get("slug") == slug), {})
+        found += [note for row in evaluation.get("rows", []) if label is not None and row.get("model") == label for note in row.get("notes") or []]
     return found
 
 
-def combined_note_class(notes: list[str | None], register: dict | None) -> dict | None:
+def chart_level_notes(capture: dict | None, labels: dict) -> list[str]:
+    """O106, O108, I87 L3: the notes printed on a basket cost chart that holds the row (they name no row themselves)."""
+
+    return [note for evaluation in (capture or {}).get("evaluations", []) if evaluation.get("slug") in basket.CHART_COMPONENTS
+            and labels.get(evaluation["slug"]) is not None for note in evaluation.get("notes") or []]
+
+
+def combined_note_class(notes: list[str | None], shared: list[str], register: dict | None, model_id: str | None = None) -> dict | None:
     """O106: every registered note on the row's AA surfaces; a pricing omission anywhere makes the row an O94 row, with the
-    largest stated factor, or none when any omission states none (O98)."""
+    largest stated factor, or none when any omission states none (O98). I87 L3: a note printed for a whole chart or index
+    (``shared``) names no row, so as a pricing omission it applies only to the configurations its register entry lists in
+    ``appliesTo``, and the build stops on one that lists none."""
 
     classes = [entry for note in dict.fromkeys(note for note in notes if note) if (entry := classify_footnote(note, register))]
+    for note in dict.fromkeys(shared):
+        entry = classify_footnote(note, register)
+        if entry["kind"] == "pricing omission":
+            if not entry.get("appliesTo"):
+                raise ValueError(f"chart-level AA pricing note {note!r} must list the configurations it applies to (appliesTo, I87 L3)")
+            if model_id in entry["appliesTo"]:
+                classes.append(entry)
     omissions = [entry for entry in classes if entry["kind"] == "pricing omission"]
     if not omissions:
         return classes[0] if classes else None
@@ -2206,9 +2228,9 @@ def score(assembled: dict, frozen: dict) -> dict:
               if any(row["valuationGate"]["outcome"] not in GATE_SCORED for row in rows) else "every ranked row is compatible as captured or after evidenced revaluation"),
         _rule("source clocks and evidence freshness (O59, O60, O65, E211, E216, E217, E218)", "passed",
               "every capture is within its age gate and none after the cutoff unless its source predates the cutoff's day; the build stops otherwise"),
-        _rule("build-stopping evidence gates (O64, O69, O71, O75, O99, O100, O101, O103, O105, E195, E204, E225)", "passed",
+        _rule("build-stopping evidence gates (O64, O69, O71, O75, O99, O100, O101, O103, O105, O106, O107, O108, E195, E204, E225)", "passed",
               "the Coding Agent Index manifest (O64), the Terminal-Bench agent list (E225), cutoff-day row dates (O69), the three-stage all-provider plan search (O71, O75), "
-              "the typed change records behind every route flag and partition split (O99, O101, O105), the register of AA notes covering every captured one, with the chart's inventory and duplicate-entry checks and the post-O103 capture notes (O100, O103) "
+              "the typed change records behind every route flag and partition split, which also produce each route's label and blocking dates (O99, O101, O105, O107), the register of AA notes covering every captured one, with the chart's inventory and duplicate-entry checks, the post-O103 capture notes, the basket-chart labels and chart-level notes' named rows (O100, O103, O106, O108) "
               "and the frontier path checks (E195, E204) hold; the build stops otherwise"),
         _rule("score swing gate (E177)", "vacuous", "first v3 release: no previous v3 release to compare"),
         _rule("anchor migration (E184)", "fired" if assembled.get("deferred") else "vacuous",

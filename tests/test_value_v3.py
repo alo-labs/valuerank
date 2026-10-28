@@ -2183,19 +2183,29 @@ def test_capture_twins_and_post_o103_surface_notes():
 
 
 def test_a_pricing_omission_on_any_ai_surface_makes_an_o94_row():
-    """O106: notes from the chart, the model page, the Coding Agent Index (row or chart) and the cost charts (row or chart)
-    are combined; a pricing omission anywhere makes the row an O94 row with the largest factor, none when any states none."""
+    """O106: notes from the chart, the model page, the Coding Agent Index and the basket cost charts are combined; a pricing
+    omission anywhere makes the row an O94 row with the largest factor, none when any states none. O108: charts outside the
+    basket never count. I87 L3: a chart-level pricing note applies only to the configurations it lists; I87 L4: a mapped
+    basket label must name a chart row."""
 
     register = {"notes": [{"text": "Chart.", "kind": "not a pricing omission", "factor": None}, {"text": "Twice.", "kind": "pricing omission", "factor": 2.0},
-                          {"text": "Thrice.", "kind": "pricing omission", "factor": 3.0}, {"text": "Open.", "kind": "pricing omission", "factor": None}]}
-    assert v.combined_note_class([None], register) is None and v.combined_note_class(["Chart.", "Chart."], register)["kind"] == "not a pricing omission"
-    combined = v.combined_note_class(["Chart.", "Twice.", "Thrice."], register)
+                          {"text": "Thrice.", "kind": "pricing omission", "factor": 3.0}, {"text": "Open.", "kind": "pricing omission", "factor": None},
+                          {"text": "Shared.", "kind": "pricing omission", "factor": 4.0, "appliesTo": ["a"]}]}
+    assert v.combined_note_class([None], [], register) is None and v.combined_note_class(["Chart.", "Chart."], ["Chart."], register)["kind"] == "not a pricing omission"
+    combined = v.combined_note_class(["Chart.", "Twice.", "Thrice."], [], register)
     assert combined == {"kind": "pricing omission", "text": "Twice. Thrice.", "factor": 3.0}
-    assert v.combined_note_class(["Twice.", "Open."], register)["factor"] is None
+    assert v.combined_note_class(["Twice.", "Open."], [], register)["factor"] is None
+    assert v.combined_note_class([], ["Shared."], register, "a")["factor"] == 4.0 and v.combined_note_class([], ["Shared."], register, "b") is None
+    with pytest.raises(ValueError, match="must list the configurations"):
+        v.combined_note_class([], ["Twice."], register, "a")
     assert v.page_notes(None) == [] and v.page_notes({"notes": ["Twice."]}) == ["Twice."]
-    assert v.record_notes(None, {"notes": ["Open."]}) == [] and v.record_notes({"notes": ["Twice."]}, {"notes": ["Open."]}) == ["Twice.", "Open."]
-    charts = {"evaluations": [{"slug": "x", "notes": ["Open."], "rows": [{"model": "A (max)", "notes": ["Twice."]}]}, {"slug": "y", "rows": [{"model": "B"}]}]}
-    assert v.chart_notes(charts, {"x": "A (max)", "y": None}) == ["Twice.", "Open."] and v.chart_notes(None, {}) == []
+    charts = {"evaluations": [{"slug": "itbench-aa", "notes": ["Shared."], "rows": [{"model": "A (max)", "notes": ["Twice."]}]},
+                              {"slug": "frontiercode", "notes": ["Open."], "rows": [{"model": "A (max)", "notes": ["Open."]}]}]}
+    assert v.chart_notes(charts, {"itbench-aa": "A (max)", "frontiercode": "A (max)"}) == ["Twice."]
+    assert v.chart_level_notes(charts, {"itbench-aa": "A (max)"}) == ["Shared."] and v.chart_level_notes(charts, {}) == []
+    assert v.chart_notes(None, {}) == [] and v.chart_notes(charts, {"itbench-aa": None}) == []
+    with pytest.raises(ValueError, match="names no row on the captured chart"):
+        v.chart_notes(charts, {"itbench-aa": "Renamed (max)"})
     result, frozen = scored()
     row = next(item for item in result["rows"] if item["id"] == "a")
     row["aaNoteClass"] = combined

@@ -1903,3 +1903,16 @@ Asked on I64 Q1 whether future O71 admissions should be executed by the build fr
 - L4 (adopted, engine changed with tests): the twin check compares the union of fields except the list-only ones; the O103 gate is keyed to the 2026-10-25 release captures' instant.
 - L5 (adopted): E63's first list names O103, O105–O107; O104's condition and fallback are stated in lines 55 and 59 and `o72Application`; the evidence bundle describes the register's full scope.
 - Round status (O56): not clean (one Medium). Draft r146; the Opus max count returns to zero.
+
+## Owner decision O108 (2026-10-28), asked on I87 Q1
+- O108 (basket charts only): O106 counts notes only on the cost charts and the index whose cost is in the ranking's cost workload C_W (today the Coding Agent Index and ITBench-AA); notes on other charts (FrontierCode since O50) are registered and disclosed but change no row.
+
+## Internal review I87 (Claude Opus 5.5, effort max, on r146) — adopted, modified or rejected
+- M1 (adopted, engine changed with tests): each flagged route carries two dates derived from the typed records: `changeDetectedOn`, the earliest flagging record (the label), and, when it differs, `blockingChangeOn`, the earliest limit or price record from that date on (null when only an availability record flags it). `blocking_change` reads the blocking date, so an earlier availability record no longer cancels a later limit or price change; I87's probe is a fixture.
+- L1 (adopted, engine changed with a test): the blocking-date consistency check applies to every flagged route (O46 ceilings and report routes flagged by hand included).
+- L2 (adopted): comparator key (2), the O73 sentence, E92/E228 and the E212 table name a "limit or price" change and O107; the README flag legend says an availability change blocks no label.
+- L3 (adopted, engine changed with a test): a chart- or index-level pricing note must list the configurations it applies to (`appliesTo`); the build stops on one that lists none.
+- L4 (adopted with O108, engine changed with a test): only basket charts count, and a configuration's mapped basket-chart label must name a row of the captured chart.
+- L5 (adopted): the metering-announcements figure lists only metering records; profile rule 10 names the availability type.
+- L6 (adopted): the manifest names O106–O108 and the reverse record check; the register rule and refresh document state the O103 instant.
+- Round status (O56): not clean (one Medium). Draft r147; the Opus max count stays at zero.

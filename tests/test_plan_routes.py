@@ -883,13 +883,14 @@ def test_an_availability_change_only_prints_the_label():
     precedence."""
 
     measured = candidate("m", 10.0, "controlled", expiry="possibly-superseded")
-    measured["route"].update(changeDetectedOn="2026-10-11", changeKind="availability")
+    measured["route"].update(changeDetectedOn="2026-10-11", blockingChangeOn=None)
     measured.update(earliestEvidenceDate="2026-09-07")
     assert pr.blocking_change(measured["route"]) is None and not pr.change_flagged(measured, date(2026, 10, 25))
     after = candidate("reports-after", 5.0, "reports")
     after["route"]["independentReports"] = [dict(comparable_report("a", 5.0), reportDate="2026-10-20")]
     assert pr.post_change_ranks([measured, after])[0].get("postChangeSuperseded") is None
     assert pr.blocking_change({"changeDetectedOn": "2026-10-11"}) == "2026-10-11"
+    assert pr.blocking_change({"changeDetectedOn": "2026-10-07", "blockingChangeOn": "2026-10-17"}) == "2026-10-17"  # I87 M1
 
 
 def test_a_lower_of_transfer_skips_a_co_donor_the_comparator_excludes():

@@ -148,18 +148,25 @@ def test_route_change_flags_rest_on_typed_limit_or_price_records():
 
 
 def test_change_records_produce_their_route_flags():
-    """I86 L3, O107: a controlled route carries the earliest applicable record's date, marked availability-only when only an
-    availability record falls on it; a missing, wrong or unmarked flag stops the build."""
+    """I86 L3, O107, I87 M1 and L1: a controlled route carries the earliest applicable record as its label date, and a
+    separate blocking date when the earliest limit or price record from there on differs (null when none); a later limit
+    change after an earlier availability record still blocks."""
 
     records = [{"provider": "O", "date": "2026-10-11", "type": "price"}, {"provider": "O", "date": "2026-10-20", "type": "metering"},
-               {"provider": "K", "date": "2026-10-22", "type": "availability"}, {"provider": "O", "date": "2027-01-01", "type": "limit"}]
+               {"provider": "K", "date": "2026-10-22", "type": "availability"}, {"provider": "O", "date": "2027-01-01", "type": "limit"},
+               {"provider": "A", "date": "2026-10-07", "type": "availability"}, {"provider": "A", "date": "2026-10-17T13:00:00Z", "type": "limit"}]
     measured = {"valueMultipleKind": "controlled_account_workload_projection", "sourcePublicationDate": "2026-10-06"}
     day = date(2026, 10, 25)
     good = [{**measured, "id": "o", "provider": "O", "plan": "Plus", "changeDetectedOn": "2026-10-11"},
-            {**measured, "id": "k", "provider": "K", "plan": "Pro", "changeDetectedOn": "2026-10-22", "changeKind": "availability"},
-            {**measured, "id": "n", "provider": "N", "plan": "Pro"}, {"id": "t", "valueMultipleKind": "user_assumption", "provider": "O", "plan": "Plus"}]
+            {**measured, "id": "k", "provider": "K", "plan": "Pro", "changeDetectedOn": "2026-10-22", "blockingChangeOn": None},
+            {**measured, "id": "a", "provider": "A", "plan": "Pro", "changeDetectedOn": "2026-10-07", "blockingChangeOn": "2026-10-17"},
+            {**measured, "id": "n", "provider": "N", "plan": "Pro"},
+            {"id": "c", "valueMultipleKind": "user_assumption", "provider": "K", "plan": "Pro", "changeDetectedOn": "2026-10-22", "blockingChangeOn": None},
+            {"id": "t", "valueMultipleKind": "user_assumption", "provider": "O", "plan": "Plus"}]
     pa.check_change_records(good, records, day)
-    for bad, message in (({**good[0], "changeDetectedOn": None}, "must be 2026-10-11"), ({**good[1], "changeKind": None}, "changeKind"),
-                         ({**good[0], "changeKind": "availability"}, "changeKind"), ({**good[0], "sourcePublicationDate": "2026-11-20"}, "must be None")):
+    for bad, message in (({**good[0], "changeDetectedOn": None}, "must be 2026-10-11"), ({**good[1], "blockingChangeOn": "2026-10-22"}, "must be None"),
+                         ({**good[0], "blockingChangeOn": "2026-10-11"}, "must be omitted"), ({**good[2], "blockingChangeOn": None}, "must be 2026-10-17"),
+                         ({**good[4], "blockingChangeOn": "x"}, "must be None"), ({**good[5], "blockingChangeOn": None}, "without a change flag"),
+                         ({**good[0], "sourcePublicationDate": "2026-11-20"}, "must be None")):
         with pytest.raises(ValueError, match=message):
             pa.check_change_records([bad], records, day)

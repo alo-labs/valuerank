@@ -31816,9 +31816,9 @@
         "detail": "every capture is within its age gate and none after the cutoff unless its source predates the cutoff's day; the build stops otherwise"
       },
       {
-        "rule": "build-stopping evidence gates (O64, O69, O71, O75, O99, O100, O101, O103, O105, E195, E204, E225)",
+        "rule": "build-stopping evidence gates (O64, O69, O71, O75, O99, O100, O101, O103, O105, O106, O107, O108, E195, E204, E225)",
         "status": "passed",
-        "detail": "the Coding Agent Index manifest (O64), the Terminal-Bench agent list (E225), cutoff-day row dates (O69), the three-stage all-provider plan search (O71, O75), the typed change records behind every route flag and partition split (O99, O101, O105), the register of AA notes covering every captured one, with the chart's inventory and duplicate-entry checks and the post-O103 capture notes (O100, O103) and the frontier path checks (E195, E204) hold; the build stops otherwise"
+        "detail": "the Coding Agent Index manifest (O64), the Terminal-Bench agent list (E225), cutoff-day row dates (O69), the three-stage all-provider plan search (O71, O75), the typed change records behind every route flag and partition split, which also produce each route's label and blocking dates (O99, O101, O105, O107), the register of AA notes covering every captured one, with the chart's inventory and duplicate-entry checks, the post-O103 capture notes, the basket-chart labels and chart-level notes' named rows (O100, O103, O106, O108) and the frontier path checks (E195, E204) hold; the build stops otherwise"
       },
       {
         "rule": "score swing gate (E177)",
@@ -31941,7 +31941,7 @@
         {
           "key": "planRoutes",
           "artifact": "data/plan_cost_routes.json",
-          "sha256": "23830dcb3349c5dca757991e756ca9223b8bb97fd2d5cac6800a21eb73d5adf7",
+          "sha256": "88b5c50359d1a6a6cb065d160505c7f9d16eadd18a8d369574174da42e2335d3",
           "capturedAt": "2026-10-25",
           "extractor": "editorial Plan evidence registry"
         },
@@ -31997,7 +31997,7 @@
         {
           "key": "aaFootnotes",
           "artifact": "data/aa/aa_footnote_register.json",
-          "sha256": "58e09177fc2e84cc5ff163f6bc4d801a7e31f48da1b669c4131fe1ce2efa12ed",
+          "sha256": "e23485e95abee13d2b833c589de756f78a1196b1ff5c62a017ca955c27a981d8",
           "capturedAt": "2026-10-25T09:53:28Z",
           "extractor": "editorial register of every AA note the captures record (the chart's footnotes, and from O103 the model pages, Coding Agent Index and cost charts), by exact text, each classified once (O100, O103)"
         },
@@ -32016,7 +32016,7 @@
           "extractor": "valuerank.value_v3 freeze"
         }
       ],
-      "bundleHash": "89334b8e7ba49f202cdfe9afe2c26b0163510117c6bd1b5e705edf358b8565f8",
+      "bundleHash": "c581a26a100fa42e07b08f348e740258706d00667c616a1b693fd34bfd1d445c",
       "rebuild": "every published output is rebuilt from these artifacts at the pinned publication clock (npm run verify:docs), never from live pages"
     },
     "track": {
@@ -61562,9 +61562,9 @@
           "detail": "every capture is within its age gate and none after the cutoff unless its source predates the cutoff's day; the build stops otherwise"
         },
         {
-          "rule": "build-stopping evidence gates (O64, O69, O71, O75, O99, O100, O101, O103, O105, E195, E204, E225)",
+          "rule": "build-stopping evidence gates (O64, O69, O71, O75, O99, O100, O101, O103, O105, O106, O107, O108, E195, E204, E225)",
           "status": "passed",
-          "detail": "the Coding Agent Index manifest (O64), the Terminal-Bench agent list (E225), cutoff-day row dates (O69), the three-stage all-provider plan search (O71, O75), the typed change records behind every route flag and partition split (O99, O101, O105), the register of AA notes covering every captured one, with the chart's inventory and duplicate-entry checks and the post-O103 capture notes (O100, O103) and the frontier path checks (E195, E204) hold; the build stops otherwise"
+          "detail": "the Coding Agent Index manifest (O64), the Terminal-Bench agent list (E225), cutoff-day row dates (O69), the three-stage all-provider plan search (O71, O75), the typed change records behind every route flag and partition split, which also produce each route's label and blocking dates (O99, O101, O105, O107), the register of AA notes covering every captured one, with the chart's inventory and duplicate-entry checks, the post-O103 capture notes, the basket-chart labels and chart-level notes' named rows (O100, O103, O106, O108) and the frontier path checks (E195, E204) hold; the build stops otherwise"
         },
         {
           "rule": "score swing gate (E177)",
@@ -61687,7 +61687,7 @@
           {
             "key": "planRoutes",
             "artifact": "data/plan_cost_routes.json",
-            "sha256": "23830dcb3349c5dca757991e756ca9223b8bb97fd2d5cac6800a21eb73d5adf7",
+            "sha256": "88b5c50359d1a6a6cb065d160505c7f9d16eadd18a8d369574174da42e2335d3",
             "capturedAt": "2026-10-25",
             "extractor": "editorial Plan evidence registry"
           },
@@ -61743,7 +61743,7 @@
           {
             "key": "aaFootnotes",
             "artifact": "data/aa/aa_footnote_register.json",
-            "sha256": "58e09177fc2e84cc5ff163f6bc4d801a7e31f48da1b669c4131fe1ce2efa12ed",
+            "sha256": "e23485e95abee13d2b833c589de756f78a1196b1ff5c62a017ca955c27a981d8",
             "capturedAt": "2026-10-25T09:53:28Z",
             "extractor": "editorial register of every AA note the captures record (the chart's footnotes, and from O103 the model pages, Coding Agent Index and cost charts), by exact text, each classified once (O100, O103)"
           },
@@ -61762,7 +61762,7 @@
             "extractor": "valuerank.value_v3 freeze"
           }
         ],
-        "bundleHash": "89334b8e7ba49f202cdfe9afe2c26b0163510117c6bd1b5e705edf358b8565f8",
+        "bundleHash": "c581a26a100fa42e07b08f348e740258706d00667c616a1b693fd34bfd1d445c",
         "rebuild": "every published output is rebuilt from these artifacts at the pinned publication clock (npm run verify:docs), never from live pages"
       },
       "track": {
