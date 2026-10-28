@@ -1890,3 +1890,16 @@ Asked on I64 Q1 whether future O71 admissions should be executed by the build fr
 - L4 (adopted): E63's second list names the new gates and lists the source clocks separately; the manifest rule names the inventory, duplicate-entry and post-O103 checks and O103/O105; the register's rule text states its full scope.
 - L5 (adopted as O104, engine changed with a test covering I85's two probes).
 - Round status (O56): clean (no Medium or higher). First clean round at Opus max; the second is needed (I86). Draft r145.
+
+## Owner decisions O106 and O107 (2026-10-28), asked on I86 Q1 and Q2
+- O106 (off-chart pricing notes): a registered pricing omission on a model page, a Coding Agent Index record or chart, or a cost-chart row or chart holding the row makes the row an O94 row exactly as a chart footnote does, with the largest factor stated across them, or none when any states none (O98).
+- O107 (availability flags): a model-availability flag (O105) only prints the "possibly superseded" label; it is no E228 blocker and gives a later report pair no O78 precedence.
+
+## Internal review I86 (Claude Opus 5.5, effort max, on r145) — adopted, modified or rejected
+- M1 (adopted, engine changed with a test): `exclusion` passes only the splitting records to `partition`, so a report on or across a metering-only or availability day is no longer excluded as spanning a split.
+- L1 (adopted as O106, engine changed with tests): `combined_note_class` classifies the chart footnote, the model page's notes, the Coding Agent Index record's and index's notes and the row's cost-chart rows' and charts' notes; the O103 gate also requires document- and chart-level `notes`. Extending the three capture scripts (and recording the cost-chart legend verbatim) is recorded in the refresh document as a precondition of the next refresh; until done the build stops on a new capture (fail closed).
+- L2 (adopted, engine changed with a test): `measurement_eligible` is the comparator's own exclusion (demoted, invalid divisor, unreconcilable basis) and the lower-of rebase uses it.
+- L3 (adopted, engine changed with a test): `check_change_records` derives each controlled measurement's flag from the typed records (the earliest applicable record on or after its earliest possible day, by the cutoff) and stops on a missing, wrong or unmarked flag; O107's `changeKind: "availability"` marks an availability-only flag, which `blocking_change` keeps out of E228 and O78.
+- L4 (adopted, engine changed with tests): the twin check compares the union of fields except the list-only ones; the O103 gate is keyed to the 2026-10-25 release captures' instant.
+- L5 (adopted): E63's first list names O103, O105–O107; O104's condition and fallback are stated in lines 55 and 59 and `o72Application`; the evidence bundle describes the register's full scope.
+- Round status (O56): not clean (one Medium). Draft r146; the Opus max count returns to zero.

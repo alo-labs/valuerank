@@ -121,6 +121,8 @@ def test_only_limit_and_price_changes_split_partitions():
     splits = pa.splitting(PROFILE["partitionSplits"])
     assert [item["date"] for item in splits] == ["2026-10-17T13:00:00Z", "2026-10-11"]
     assert pa.partition(report("h", provider="O", start="2026-10-20", end="2026-10-20"), splits) == 1  # no split on the 20th
+    # I86 M1: a report measured on a metering-only day is not excluded as spanning a split.
+    assert pa.exclusion(report("h", provider="O", start="2026-10-20", end="2026-10-20"), PROFILE, date(2026, 10, 25)) is None
     with pytest.raises(ValueError, match="needs a type"):
         pa.splitting([{"provider": "O", "date": "2026-10-20"}])
     with pytest.raises(ValueError, match="needs a type"):
@@ -142,3 +144,22 @@ def test_route_change_flags_rest_on_typed_limit_or_price_records():
     availability = [{"provider": "O", "date": "2026-10-22", "type": "availability"}]
     pa.check_change_flags([{"id": "a", "provider": "O", "plan": "Plus", "changeDetectedOn": "2026-10-22"}], availability)
     assert pa.splitting(availability) == []
+
+
+
+def test_change_records_produce_their_route_flags():
+    """I86 L3, O107: a controlled route carries the earliest applicable record's date, marked availability-only when only an
+    availability record falls on it; a missing, wrong or unmarked flag stops the build."""
+
+    records = [{"provider": "O", "date": "2026-10-11", "type": "price"}, {"provider": "O", "date": "2026-10-20", "type": "metering"},
+               {"provider": "K", "date": "2026-10-22", "type": "availability"}, {"provider": "O", "date": "2027-01-01", "type": "limit"}]
+    measured = {"valueMultipleKind": "controlled_account_workload_projection", "sourcePublicationDate": "2026-10-06"}
+    day = date(2026, 10, 25)
+    good = [{**measured, "id": "o", "provider": "O", "plan": "Plus", "changeDetectedOn": "2026-10-11"},
+            {**measured, "id": "k", "provider": "K", "plan": "Pro", "changeDetectedOn": "2026-10-22", "changeKind": "availability"},
+            {**measured, "id": "n", "provider": "N", "plan": "Pro"}, {"id": "t", "valueMultipleKind": "user_assumption", "provider": "O", "plan": "Plus"}]
+    pa.check_change_records(good, records, day)
+    for bad, message in (({**good[0], "changeDetectedOn": None}, "must be 2026-10-11"), ({**good[1], "changeKind": None}, "changeKind"),
+                         ({**good[0], "changeKind": "availability"}, "changeKind"), ({**good[0], "sourcePublicationDate": "2026-11-20"}, "must be None")):
+        with pytest.raises(ValueError, match=message):
+            pa.check_change_records([bad], records, day)

@@ -92,6 +92,30 @@ def check_change_flags(routes: list[dict], records: list[dict]) -> None:
             raise ValueError(f"route {route['id']}: change flag {changed} has no typed limit, price or availability change record for its provider and plan (O101, O105)")
 
 
+def check_change_records(routes: list[dict], records: list[dict], release_day: date) -> None:
+    """I86 L3, O107: every typed limit, price or availability record produces its route flags: a controlled measurement on
+    a plan a record covers carries the earliest such record dated on or after the earliest day it can have been taken and
+    by the cutoff, and (O107) is marked ``changeKind: "availability"`` exactly when only availability records fall on
+    that date; the build stops otherwise."""
+
+    from valuerank import plan_routes  # local: plan_routes does not depend on this module
+
+    splitting(records)
+    flagging = [record for record in records if record["type"] in SPLIT_TYPES | FLAG_ONLY_TYPES]
+    for route in routes:
+        if route.get("valueMultipleKind") not in plan_routes.CONTROLLED_KINDS:
+            continue
+        earliest = plan_routes.measurement_span(route)[0]
+        dated = [(date.fromisoformat(record["date"][:10]), record["type"]) for record in flagging if applies(record, route)]
+        applicable = [(day, kind) for day, kind in dated if (earliest is None or day >= earliest) and day <= release_day]
+        derived = min((day for day, _ in applicable), default=None)
+        if (derived.isoformat() if derived else None) != route.get("changeDetectedOn"):
+            raise ValueError(f"route {route['id']}: its change flag must be {derived} from the typed change records (I86 L3)")
+        availability_only = derived is not None and all(kind in FLAG_ONLY_TYPES for day, kind in applicable if day == derived)
+        if availability_only != (route.get("changeKind") == "availability"):
+            raise ValueError(f"route {route['id']}: changeKind must be 'availability' exactly when only an availability record flags it (O107)")
+
+
 def applies(entry: dict, report: dict) -> bool:
     return entry["provider"] == report["provider"] and (not entry.get("plans") or report["plan"] in entry["plans"])
 
@@ -154,7 +178,8 @@ def exclusion(report: dict, profile: dict, release_day: date) -> str | None:
         return "measured outside the report window"
     if on_fault_day(report, profile.get("accountingFaultDays", [])):
         return "measured on a provider-acknowledged accounting-fault day"
-    if partition(report, profile.get("partitionSplits", [])) is None:
+    # I86 M1: only the records that split (O99, O105) can exclude a report as spanning a split.
+    if partition(report, splitting(profile.get("partitionSplits", []))) is None:
         return "spans a partition split"
     return None
 

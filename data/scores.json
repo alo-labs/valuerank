@@ -31941,7 +31941,7 @@
         {
           "key": "planRoutes",
           "artifact": "data/plan_cost_routes.json",
-          "sha256": "2a4f964922d4498dc20d27efc7c762fdb0e22108247a91aa91fb68643a241c18",
+          "sha256": "23830dcb3349c5dca757991e756ca9223b8bb97fd2d5cac6800a21eb73d5adf7",
           "capturedAt": "2026-10-25",
           "extractor": "editorial Plan evidence registry"
         },
@@ -31999,7 +31999,7 @@
           "artifact": "data/aa/aa_footnote_register.json",
           "sha256": "58e09177fc2e84cc5ff163f6bc4d801a7e31f48da1b669c4131fe1ce2efa12ed",
           "capturedAt": "2026-10-25T09:53:28Z",
-          "extractor": "editorial register of AA chart footnotes by exact text, each classified once (O100)"
+          "extractor": "editorial register of every AA note the captures record (the chart's footnotes, and from O103 the model pages, Coding Agent Index and cost charts), by exact text, each classified once (O100, O103)"
         },
         {
           "key": "anchors",
@@ -32016,7 +32016,7 @@
           "extractor": "valuerank.value_v3 freeze"
         }
       ],
-      "bundleHash": "51583e25e10b015a82c07c1ed7be2004b6da5ebd41b994349a02aa7bffe6d931",
+      "bundleHash": "89334b8e7ba49f202cdfe9afe2c26b0163510117c6bd1b5e705edf358b8565f8",
       "rebuild": "every published output is rebuilt from these artifacts at the pinned publication clock (npm run verify:docs), never from live pages"
     },
     "track": {
@@ -61687,7 +61687,7 @@
           {
             "key": "planRoutes",
             "artifact": "data/plan_cost_routes.json",
-            "sha256": "2a4f964922d4498dc20d27efc7c762fdb0e22108247a91aa91fb68643a241c18",
+            "sha256": "23830dcb3349c5dca757991e756ca9223b8bb97fd2d5cac6800a21eb73d5adf7",
             "capturedAt": "2026-10-25",
             "extractor": "editorial Plan evidence registry"
           },
@@ -61745,7 +61745,7 @@
             "artifact": "data/aa/aa_footnote_register.json",
             "sha256": "58e09177fc2e84cc5ff163f6bc4d801a7e31f48da1b669c4131fe1ce2efa12ed",
             "capturedAt": "2026-10-25T09:53:28Z",
-            "extractor": "editorial register of AA chart footnotes by exact text, each classified once (O100)"
+            "extractor": "editorial register of every AA note the captures record (the chart's footnotes, and from O103 the model pages, Coding Agent Index and cost charts), by exact text, each classified once (O100, O103)"
           },
           {
             "key": "anchors",
@@ -61762,7 +61762,7 @@
             "extractor": "valuerank.value_v3 freeze"
           }
         ],
-        "bundleHash": "51583e25e10b015a82c07c1ed7be2004b6da5ebd41b994349a02aa7bffe6d931",
+        "bundleHash": "89334b8e7ba49f202cdfe9afe2c26b0163510117c6bd1b5e705edf358b8565f8",
         "rebuild": "every published output is rebuilt from these artifacts at the pinned publication clock (npm run verify:docs), never from live pages"
       },
       "track": {

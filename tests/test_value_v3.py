@@ -2171,8 +2171,32 @@ def test_capture_twins_and_post_o103_surface_notes():
     register = {"notes": [{"text": "Noted.", "kind": "not a pricing omission", "factor": None}]}
     old = {"snapshot": {"capturedAt": "2026-10-25T00:00:00Z", "pages": [{"model": {}}]}}
     v.check_surface_notes(old, register)
-    v.check_surface_notes({"codingAgents": {"capturedAt": "2026-11-01T00:00:00Z", "configurations": [{"notes": ["Noted."]}, {"notes": []}]}}, register)
+    v.check_surface_notes({"codingAgents": {"capturedAt": "2026-11-01T00:00:00Z", "notes": [], "configurations": [{"notes": ["Noted."]}, {"notes": []}]}}, register)
+    # I86 L1: chart-level notes are gated too; I86 L4: the gate is keyed to an instant, so a later capture the same day counts.
     with pytest.raises(ValueError, match="records no notes"):
-        v.check_surface_notes({"costCharts": {"capturedAt": "2026-11-01T00:00:00Z", "evaluations": [{"rows": [{}]}]}}, register)
+        v.check_surface_notes({"costCharts": {"capturedAt": "2026-11-01T00:00:00Z", "evaluations": [{"rows": [{"notes": []}]}]}}, register)
+    with pytest.raises(ValueError, match="records no notes"):
+        v.check_surface_notes({"codingAgents": {"capturedAt": "2026-10-25T10:00:00Z", "notes": [], "configurations": [{}]}}, register)
     with pytest.raises(ValueError, match="unregistered AA footnote"):
         v.check_surface_notes({"snapshot": {"capturedAt": "2026-11-01T00:00:00Z", "pages": [{"model": {"notes": ["New."]}}]}}, register)
+
+
+
+def test_a_pricing_omission_on_any_ai_surface_makes_an_o94_row():
+    """O106: notes from the chart, the model page, the Coding Agent Index (row or chart) and the cost charts (row or chart)
+    are combined; a pricing omission anywhere makes the row an O94 row with the largest factor, none when any states none."""
+
+    register = {"notes": [{"text": "Chart.", "kind": "not a pricing omission", "factor": None}, {"text": "Twice.", "kind": "pricing omission", "factor": 2.0},
+                          {"text": "Thrice.", "kind": "pricing omission", "factor": 3.0}, {"text": "Open.", "kind": "pricing omission", "factor": None}]}
+    assert v.combined_note_class([None], register) is None and v.combined_note_class(["Chart.", "Chart."], register)["kind"] == "not a pricing omission"
+    combined = v.combined_note_class(["Chart.", "Twice.", "Thrice."], register)
+    assert combined == {"kind": "pricing omission", "text": "Twice. Thrice.", "factor": 3.0}
+    assert v.combined_note_class(["Twice.", "Open."], register)["factor"] is None
+    assert v.page_notes(None) == [] and v.page_notes({"notes": ["Twice."]}) == ["Twice."]
+    assert v.record_notes(None, {"notes": ["Open."]}) == [] and v.record_notes({"notes": ["Twice."]}, {"notes": ["Open."]}) == ["Twice.", "Open."]
+    charts = {"evaluations": [{"slug": "x", "notes": ["Open."], "rows": [{"model": "A (max)", "notes": ["Twice."]}]}, {"slug": "y", "rows": [{"model": "B"}]}]}
+    assert v.chart_notes(charts, {"x": "A (max)", "y": None}) == ["Twice.", "Open."] and v.chart_notes(None, {}) == []
+    result, frozen = scored()
+    row = next(item for item in result["rows"] if item["id"] == "a")
+    row["aaNoteClass"] = combined
+    assert v.aa_cost_caveat(row) == "Twice. Thrice." and v.caveat_factor(row) == 3.0

@@ -50,6 +50,13 @@ FAULT_FLAG = "measured inside an acknowledged accounting-fault window (O91, O92)
 POST_CHANGE_SUPERSEDED = 1.5
 
 
+def blocking_change(route: dict) -> str | None:
+    """O107 (2026-10-28): the detected change that can block labels (E228) and let a later report pair outrank the
+    measurement (O78); a model-availability change (O105) only prints the "possibly superseded" label."""
+
+    return None if route.get("changeKind") == "availability" else route.get("changeDetectedOn")
+
+
 def grade_rank(candidate: dict) -> float:
     """The grade key of the comparator (O73, O78)."""
 
@@ -72,7 +79,7 @@ def post_change_ranks(candidates: list[dict]) -> list[dict]:
         route = candidate["route"]
         # O89: an O88 route follows its donor's detected change, as it shares the donor's precedence.
         shares_donor = candidate["grade"] == "controlled" and route.get("sameModelAcrossEfforts")
-        changed = route.get("changeDetectedOn") or (candidate.get("donorChangeDetectedOn") if shares_donor else None)
+        changed = blocking_change(route) or (candidate.get("donorChangeDetectedOn") if shares_donor else None)
         earliest = candidate.get("earliestEvidenceDate") or candidate.get("evidenceDate")
         # O78: only a flagged change supersedes; O92, O93: a controlled measurement in an acknowledged fault window (and every
         # route resting on it) yields to a concordant report pair for the same plan (whose reports E270 keeps off fault
@@ -322,7 +329,7 @@ def change_flagged(candidate: dict | None, release_day: date | None = None) -> b
 
     # I76 L2: a transfer or O88 route inherits its donor's detected change (E144, O89). I77 L2: a change dated after the
     # release cutoff does not count (age alone never makes a blocker).
-    changed = candidate and (candidate["route"].get("changeDetectedOn") or candidate.get("donorChangeDetectedOn"))
+    changed = candidate and (blocking_change(candidate["route"]) or candidate.get("donorChangeDetectedOn"))
     if changed and release_day is not None and date.fromisoformat(changed) > release_day:
         return False
     # I78 L2, I79 L1: a change dated before the earliest date the measurement can have been taken cannot have superseded it.
@@ -529,6 +536,13 @@ def effective_measurement(route: dict, registry: dict, release_day: date, window
     return {**selected["route"], "baseRouteId": selected["route"].get("routeId", selected["route"]["id"])}
 
 
+def measurement_eligible(route: dict, release_day: date, registry: dict | None) -> bool:
+    """The comparator's own exclusions for a controlled measurement (route_candidates): demoted, an invalid divisor (E109) or
+    an unreconcilable valuation basis (O7, E123)."""
+
+    return expiry_status(route, release_day, registry) != "demoted" and _divisor_eligible(route) and valuation_status(route) != "different"
+
+
 def rebase_lower_of(route: dict, registry: dict, release_day: date, window: dict | None, faults: list[dict] | None,
                     families: dict | None = None) -> dict:
     """O95: a lower-of transfer (O45) takes, per plan, the lower of its plan's measured figures, each model's figure being
@@ -539,9 +553,10 @@ def rebase_lower_of(route: dict, registry: dict, release_day: date, window: dict
     if not measured:
         return route
     effective = [effective_measurement(item, registry, release_day, window, faults, families) for item in measured]
-    # O104: a demoted measurement no report pair replaced has left the selection (E142), so it drops out of the minimum;
-    # with no eligible figure left the transfer keeps its stored donor and is diagnostic with it (E144).
-    eligible = [item for item in effective if item.get("valueMultipleKind") in REPORT_KINDS or expiry_status(item, release_day, registry) != "demoted"]
+    # O104, I86 L2: a measurement the comparator would grade diagnostic (demoted, an invalid divisor or an unreconcilable
+    # valuation basis) and no report pair replaced has left the selection (E142), so it drops out of the minimum; with no
+    # eligible figure left the transfer keeps its stored donor and is diagnostic with it (E144).
+    eligible = [item for item in effective if item.get("valueMultipleKind") in REPORT_KINDS or measurement_eligible(item, release_day, registry)]
     if not eligible:
         return route
     lowest = min(eligible, key=lambda item: (comparison_multiple(item), item["id"]))
@@ -626,7 +641,7 @@ def route_candidates(model_id: str, configuration_effort: str | None, routes: li
                 # I79 L1: the earliest date the (donor's) measurement can have been taken.
                 "earliestEvidenceDate": (lambda first: first.isoformat() if first else None)(measurement_span(provenance)[0]),
                 "donorRouteId": source["id"] if source is not None else None,
-                "donorChangeDetectedOn": source.get("changeDetectedOn") if source is not None else None,
+                "donorChangeDetectedOn": blocking_change(source) if source is not None else None,
                 "faultWindow": faulted["evidence"] if faulted else None,
                 # E144: valuation compatibility and capacity status are the donor measurement's for a transfer.
                 "valuation": "different" if "different" in {valuation_status(item) for item in checks} else valuation_status(provenance),

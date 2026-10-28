@@ -816,6 +816,7 @@ def assemble(configurations: list[dict], documents: dict, *, release_day: date, 
     plan_admission.check_routes(documents["planRoutes"]["routes"], allowance_cells, set(families), plan_routes.REPORT_KINDS, families)
     plan_routes.check_same_model_routes(documents["planRoutes"], families)
     plan_admission.check_change_flags(documents["planRoutes"]["routes"], (policy.get("reportEligibilityProfile") or {}).get("partitionSplits") or [])
+    plan_admission.check_change_records(documents["planRoutes"]["routes"], (policy.get("reportEligibilityProfile") or {}).get("partitionSplits") or [], release_day)
     plan_routes.check_lower_of_routes(documents["planRoutes"])
     # I51 L7: an O46 ceiling is recomputed from its recorded credits, rate and fee, so the stored multiple cannot drift.
     for route in documents["planRoutes"]["routes"]:
@@ -899,8 +900,10 @@ def assemble(configurations: list[dict], documents: dict, *, release_day: date, 
             # O63: AA's safety-refusal outcomes on the row's Coding Agent Index record, disclosed and flagged only.
             "agentSafety": agent_safety(agent_records.get(agent_labels[model_id])),
             "routeSelection": plan_routes.route_selection(candidates),
-            # O100: the AA footnote's registered class (the build stops on an unregistered note).
-            "aaNoteClass": classify_footnote(configuration.get("aaNote"), documents.get("aaFootnotes")),
+            # O100, O106: the registered class of every AA note on the row's chart point, model page, Coding Agent Index record
+            # and cost-chart rows (and their charts), combined (the build stops on an unregistered note).
+            "aaNoteClass": combined_note_class([configuration.get("aaNote"), *page_notes(page), *record_notes(agent_records.get(agent_labels[model_id]), documents["codingAgents"]),
+                                                *chart_notes(documents["costCharts"], labels)], documents.get("aaFootnotes")),
             "aaNote": chart_footnote(configuration, points),
             "admissionTable": plan_routes.admission_table(model_id, effort, routes, release_day, window, faults, families),
         })
@@ -1082,27 +1085,33 @@ def chart_footnote(configuration: dict, points: list[dict]) -> str | None:
     return configuration.get("aaNote")
 
 
-O103_DATE = "2026-10-28"
+# I86 L4: O103 binds every AA capture later than the captures it was decided on (the 2026-10-25 release captures).
+O103_AFTER = "2026-10-25T09:56:47Z"
 NOTE_SURFACES = {
     "snapshot": lambda document: [page["model"] for page in document.get("pages", [])],
-    "codingAgents": lambda document: document.get("configurations", []),
-    "costCharts": lambda document: [row for evaluation in document.get("evaluations", []) for row in evaluation.get("rows", [])],
+    "codingAgents": lambda document: [document, *document.get("configurations", [])],
+    "costCharts": lambda document: [item for evaluation in document.get("evaluations", []) for item in (evaluation, *evaluation.get("rows", []))],
 }
 
 
 def check_surface_notes(documents: dict, register: dict | None) -> None:
-    """O103, I85 L2: an AA capture taken after O103 must record, on every row, the verbatim notes AA prints (``notes``, an
-    empty list allowed), and every note must be registered (O100); the build stops otherwise."""
+    """O103, I85 L2, I86 L1: an AA capture taken after O103 must record the verbatim notes AA prints (``notes``, an empty
+    list allowed) on every row, page and chart (the Coding Agent Index and each cost chart included), and every note must
+    be registered (O100); the build stops otherwise."""
 
-    for key, rows_of in NOTE_SURFACES.items():
+    for key, items_of in NOTE_SURFACES.items():
         document = documents.get(key) or {}
-        if (document.get("capturedAt") or "")[:10] <= O103_DATE:
+        if not document.get("capturedAt") or _instant(document["capturedAt"]) <= _instant(O103_AFTER):
             continue
-        for row in rows_of(document):
-            if not isinstance(row.get("notes"), list):
-                raise ValueError(f"{key}: a capture after O103 ({O103_DATE}) records no notes for a row; capture AA's notes verbatim (O103)")
-            for note in row["notes"]:
+        for item in items_of(document):
+            if not isinstance(item.get("notes"), list):
+                raise ValueError(f"{key}: a capture after O103 records no notes for a row or chart; capture AA's notes verbatim (O103)")
+            for note in item["notes"]:
                 classify_footnote(note, register)
+
+
+# I86 L4: the fields only a frontier list carries (its position and the near-gap arithmetic) are not compared.
+TWIN_LIST_FIELDS = {"order", "tier", "intelligence_gap", "cost_ratio"}
 
 
 def check_capture_twins(capture: dict | None) -> None:
@@ -1112,7 +1121,8 @@ def check_capture_twins(capture: dict | None) -> None:
     points = {(point.get("url"), point.get("circle_id")): point for point in (capture or {}).get("points", [])}
     for entry in (capture or {}).get("frontier", []) + (capture or {}).get("near_frontier", []):
         twin = points.get((entry.get("url"), entry.get("circle_id")))
-        if twin is None or any(entry[key] != twin[key] for key in set(entry) & set(twin) - {"order"}):
+        if twin is None or any(entry.get(key) != twin.get(key) for key in (set(entry) | set(twin)) - TWIN_LIST_FIELDS
+                               if not key.startswith("nearest_frontier")):
             raise ValueError(f"{entry.get('model_name')}: the chart capture's frontier list entry differs from its point (I85 L3)")
 
 
@@ -1123,10 +1133,48 @@ def check_captured_footnotes(capture: dict | None, register: dict | None) -> Non
         classify_footnote(point.get("footnote"), register)
 
 
-def aa_cost_caveat(row: dict) -> str | None:
-    """E141, O94, O100: AA's own note when its registered class is a pricing omission, else None."""
+def page_notes(page: dict | None) -> list[str]:
+    """O103, O106: the notes a post-O103 capture records on a model page."""
 
-    return row.get("aaNote") if (row.get("aaNoteClass") or {}).get("kind") == "pricing omission" else None
+    return list((page or {}).get("notes") or [])
+
+
+def record_notes(record: dict | None, capture: dict | None) -> list[str]:
+    """O106: a Coding Agent Index record's notes, with the index's own chart-level notes when the row has a record."""
+
+    return [*((record or {}).get("notes") or []), *((capture or {}).get("notes") or [])] if record else []
+
+
+def chart_notes(capture: dict | None, labels: dict) -> list[str]:
+    """O106: the notes on the row's cost-chart rows (through the configuration map) and on those charts themselves."""
+
+    found = []
+    for evaluation in (capture or {}).get("evaluations", []):
+        label = labels.get(evaluation.get("slug"))
+        row = next((item for item in evaluation.get("rows", []) if label is not None and item.get("model") == label), None)
+        if row is not None:
+            found += [*(row.get("notes") or []), *(evaluation.get("notes") or [])]
+    return found
+
+
+def combined_note_class(notes: list[str | None], register: dict | None) -> dict | None:
+    """O106: every registered note on the row's AA surfaces; a pricing omission anywhere makes the row an O94 row, with the
+    largest stated factor, or none when any omission states none (O98)."""
+
+    classes = [entry for note in dict.fromkeys(note for note in notes if note) if (entry := classify_footnote(note, register))]
+    omissions = [entry for entry in classes if entry["kind"] == "pricing omission"]
+    if not omissions:
+        return classes[0] if classes else None
+    factors = [entry.get("factor") for entry in omissions]
+    return {"kind": "pricing omission", "text": " ".join(entry["text"] for entry in omissions),
+            "factor": None if None in factors else max(factors)}
+
+
+def aa_cost_caveat(row: dict) -> str | None:
+    """E141, O94, O100, O106: AA's own notes when their registered class is a pricing omission, else None."""
+
+    entry = row.get("aaNoteClass") or {}
+    return entry.get("text") if entry.get("kind") == "pricing omission" else None
 
 
 def caveat_factor(row: dict) -> float | None:
@@ -3262,7 +3310,7 @@ EVIDENCE_FILES = {
     "planReports": ("plan_reports.json", "editorial table of every O71 user report with the facts E270 needs; the build derives admission from it (O81)"),
     "aaPreviousCapture": ("aa/aa_previous_capture.json", "valuerank.capture_aa: digest of the model-page capture this one replaced (I60)"),
     "sourceRereads": ("source_rereads.json", "editorial record of the O68 re-reads, each 'unchanged' result verified against the re-read file"),
-    "aaFootnotes": ("aa/aa_footnote_register.json", "editorial register of AA chart footnotes by exact text, each classified once (O100)"),
+    "aaFootnotes": ("aa/aa_footnote_register.json", "editorial register of every AA note the captures record (the chart's footnotes, and from O103 the model pages, Coding Agent Index and cost charts), by exact text, each classified once (O100, O103)"),
 }
 CAPTURE_FIELDS = ("capturedAt", "observedAt", "snapshotDate", "asOf", "frozenAt")
 SOURCE_INSTANTS = {
