@@ -793,6 +793,8 @@ def assemble(configurations: list[dict], documents: dict, *, release_day: date, 
     ]
     # O32: only end-user reports dated in the release's report window count toward admission.
     window = (documents["planRoutes"].get("evidencePolicy") or {}).get("reportingWindow")
+    # O91: acknowledged accounting-fault windows apply to controlled measurements as well as to user reports.
+    faults = ((documents["planRoutes"].get("evidencePolicy") or {}).get("reportEligibilityProfile") or {}).get("accountingFaultDays") or []
     # E213: one release cutoff; the report window is the 30 days ending on it (the evidence search cutoff is recorded apart).
     if window and window["end"] != release_day.isoformat():
         raise ValueError(f"the report window must end on the release cutoff {release_day} (E213), not {window['end']}")
@@ -870,7 +872,7 @@ def assemble(configurations: list[dict], documents: dict, *, release_day: date, 
         gate = valuation_gate(page, [item for item in price_records if item["aaSlug"] == configuration["aaSlug"]], documents["snapshot"].get("capturedAt"))
         if gate["outcome"] == GATE_REVALUED:
             components = revalue(components, gate["factor"])
-        candidates = plan_routes.route_candidates(model_id, effort, routes, release_day, window=window)
+        candidates = plan_routes.route_candidates(model_id, effort, routes, release_day, window=window, faults=faults)
         if gate["outcome"] == GATE_NOT_IN_FORCE:
             # O29: the Plan cost divides only by a multiple valued on the row's own (superseded) price record.
             for candidate in candidates:
@@ -889,7 +891,7 @@ def assemble(configurations: list[dict], documents: dict, *, release_day: date, 
             # O63: AA's safety-refusal outcomes on the row's Coding Agent Index record, disclosed and flagged only.
             "agentSafety": agent_safety(agent_records.get(agent_labels[model_id])),
             "routeSelection": plan_routes.route_selection(candidates),
-            "admissionTable": plan_routes.admission_table(model_id, effort, routes, release_day, window),
+            "admissionTable": plan_routes.admission_table(model_id, effort, routes, release_day, window, faults),
         })
     # O36: only configurations with every leaf are ranked; the rest stay listed with their missing leaves and searches.
     incomplete = [entry for entry in (incomplete_entry(row, row["evidence"]) for row in rows) if entry is not None]
@@ -2989,8 +2991,9 @@ def bar_labels(assembled: dict, frozen: dict, *, seed: int, batch: int) -> list[
     if any(len(component) > 1 for component in scenarios.dependency_components(panel)):
         raise ValueError(f"compiled dependency graph differs from the registered kernel-check object ({REGISTERED_DEPENDENCY})")
     blocked = {row["id"] for row in assembled["rows"] if row["valuationGate"]["outcome"] == GATE_NOT_IN_FORCE}
-    # E233: a provider-claimed row competes in every scenario but is never a candidate for a label.
-    claimed = {row["id"] for row in assembled["rows"] if provider_claimed(row)}
+    # E233: a provider-claimed row competes in every scenario but is never a candidate for a label; I76 L1, E92/E222: nor
+    # is a row on an unverified valuation basis.
+    claimed = {row["id"] for row in assembled["rows"] if provider_claimed(row) or row["valuationGate"]["outcome"] == GATE_UNVERIFIED}
     labels = []
     for reference in frozen["barReferences"]:
         bar = _bar_reference(reference)

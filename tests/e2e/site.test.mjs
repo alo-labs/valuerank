@@ -153,13 +153,14 @@ describe('evidence footnotes', () => {
 describe('rankings instrument', () => {
   test('filters, sorting, columns and comparison all live in the URL', async () => {
     const { page, context, errors } = await open('/rankings/');
-    // O48/O53: the max-effort ranking's Plan basis has one row per configuration and plan (27), then every roster model it does not rank (53).
-    assert.equal(await page.locator('#rankings-body tr').count(), 80);
+    // O48/O53: the max-effort ranking's Plan basis has one row per configuration and plan (24 since O91 removed the faulted
+    // ChatGPT Pro 500 rows), then every roster model it does not rank (53).
+    assert.equal(await page.locator('#rankings-body tr').count(), 77);
 
     await page.locator('#filters input[name="provider"][value="OpenAI"]').check();
     assert.match(await query(page), /provider=OpenAI/);
     const openAiRows = await page.locator('#rankings-body tr[data-slug]').count();
-    assert.ok(openAiRows > 0 && openAiRows < 80);
+    assert.ok(openAiRows > 0 && openAiRows < 77);
 
     await page.locator('#filters input[name="q"]').fill('sol');
     await page.locator('#filters input[name="q"]').dispatchEvent('input');

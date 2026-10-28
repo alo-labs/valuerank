@@ -199,7 +199,9 @@ def test_model_document_leaves_components_routes_and_scenarios(bundle, v3_rows):
     selected = [plan for plan in doc["plans"] if plan["selected"]]
     assert len(selected) == 1 and selected[0]["id"] == doc["cost"]["route"]["id"] and doc["plans"][0] is selected[0]
     for plan in doc["plans"]:
-        assert plan["usdPerRun"] == pytest.approx(doc["cost"]["apiUsd"] / plan["valueMultiple"]) and plan["case"] in (2, 3, "identified")
+        # O91: the Pro 500 measurement in OpenAI's acknowledged fault window is listed as a diagnostic (case 5).
+        assert plan["usdPerRun"] == pytest.approx(doc["cost"]["apiUsd"] / plan["valueMultiple"])
+        assert plan["case"] in (2, 3, "identified") or (plan["case"] == 5 and "pro500" in plan["id"])
     assert doc["scenarios"]["status"] == "current" and {run["stratum"] for run in doc["scenarios"]["api"]} == {"S0", "S1", "S2", "S1M", "S1T"}
     assert doc["intervals"]["api"] == {"definite": "certified", "possible": "certified"}
 

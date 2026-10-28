@@ -416,7 +416,7 @@
         ],
         "plan": [
           1,
-          10
+          9
         ]
       },
       "bandExcludesTransfer": false
@@ -546,7 +546,7 @@
         ],
         "plan": [
           1,
-          10
+          9
         ]
       },
       "bandExcludesTransfer": true
@@ -575,7 +575,7 @@
       },
       "overall": {
         "api": 60.02126104410708,
-        "plan": 62.61450682625437
+        "plan": 62.541244541055555
       },
       "quality": 64.11438501376614,
       "qualityRank": 4,
@@ -597,7 +597,7 @@
       },
       "costDims": {
         "api": 47.741889135129895,
-        "plan": 58.11487226371908
+        "plan": 57.8218231229238
       },
       "raw": {
         "frontierCode": 0.491209333333333,
@@ -623,13 +623,13 @@
       },
       "cost": {
         "apiUsd": 1233.1097561488218,
-        "planUsd": 114.47361271340715,
+        "planUsd": 116.88244134112054,
         "fallback": null,
         "route": {
-          "id": "chatgpt-pro500-gpt61sol-semianalysis",
-          "planLabel": "ChatGPT Pro 500 $500 · GPT-6.1 Sol",
-          "planFeeUsd": 500,
-          "valueMultiple": 10.772,
+          "id": "chatgpt-plus-gpt61sol-semianalysis",
+          "planLabel": "ChatGPT Plus $20 · GPT-6.1 Sol",
+          "planFeeUsd": 20,
+          "valueMultiple": 10.55,
           "grade": "measured",
           "assumptionKind": null,
           "evidenceLabel": "Controlled account measurement / workload projection",
@@ -679,7 +679,7 @@
         ],
         "plan": [
           1,
-          10
+          9
         ]
       },
       "bandExcludesTransfer": false
@@ -704,7 +704,7 @@
       "aaFrontierFootnote": "Claude Haiku 5.5 has 5x higher pricing on longer-context inputs which are not currently reflected; we are working to include this in cost figures across Artificial Analysis.",
       "rank": {
         "api": 9,
-        "plan": 11
+        "plan": 10
       },
       "overall": {
         "api": 50.83012208391714,
@@ -810,8 +810,8 @@
           9
         ],
         "plan": [
-          11,
-          21
+          10,
+          18
         ]
       },
       "bandExcludesTransfer": true
@@ -836,7 +836,7 @@
       "aaFrontierFootnote": null,
       "rank": {
         "api": 7,
-        "plan": 14
+        "plan": 13
       },
       "overall": {
         "api": 53.782288721560526,
@@ -943,8 +943,8 @@
           8
         ],
         "plan": [
-          11,
-          21
+          10,
+          18
         ]
       },
       "bandExcludesTransfer": false
@@ -969,11 +969,11 @@
       "aaFrontierFootnote": null,
       "rank": {
         "api": 4,
-        "plan": 17
+        "plan": 15
       },
       "overall": {
         "api": 56.98201691850143,
-        "plan": 57.58593637886723
+        "plan": 57.512674093668416
       },
       "quality": 46.69934161636953,
       "qualityRank": 9,
@@ -995,7 +995,7 @@
       },
       "costDims": {
         "api": 87.83004282489713,
-        "plan": 90.24572066636036
+        "plan": 89.95267152556508
       },
       "raw": {
         "frontierCode": 0.419269666666667,
@@ -1021,13 +1021,13 @@
       },
       "cost": {
         "apiUsd": 125.71906502148906,
-        "planUsd": 11.67091208888684,
+        "planUsd": 11.916499054169579,
         "fallback": null,
         "route": {
-          "id": "chatgpt-pro500-gpt-6-luna-common-gpt-assumption",
-          "planLabel": "ChatGPT Pro 500 $500 · common GPT assumption",
-          "planFeeUsd": 500,
-          "valueMultiple": 10.772,
+          "id": "chatgpt-pro100-gpt-6-luna-common-gpt-assumption",
+          "planLabel": "ChatGPT Pro 100 $100 · common GPT assumption",
+          "planFeeUsd": 100,
+          "valueMultiple": 10.55,
           "grade": "assumption",
           "assumptionKind": "transfer",
           "evidenceLabel": "Provisional assumption",
@@ -1073,8 +1073,8 @@
           5
         ],
         "plan": [
-          11,
-          21
+          10,
+          18
         ]
       },
       "bandExcludesTransfer": true
@@ -1099,7 +1099,7 @@
       "aaFrontierFootnote": null,
       "rank": {
         "api": 2,
-        "plan": 22
+        "plan": 19
       },
       "overall": {
         "api": 59.80387179090506,
@@ -1194,8 +1194,8 @@
           3
         ],
         "plan": [
-          22,
-          26
+          19,
+          23
         ]
       },
       "bandExcludesTransfer": false
@@ -1220,7 +1220,7 @@
       "aaFrontierFootnote": null,
       "rank": {
         "api": 3,
-        "plan": 23
+        "plan": 20
       },
       "overall": {
         "api": 59.57237909254148,
@@ -1317,8 +1317,8 @@
           3
         ],
         "plan": [
-          22,
-          26
+          19,
+          23
         ]
       },
       "bandExcludesTransfer": true
@@ -1343,7 +1343,7 @@
       "aaFrontierFootnote": null,
       "rank": {
         "api": 5,
-        "plan": 27
+        "plan": 24
       },
       "overall": {
         "api": 54.94057525090185,
@@ -1438,8 +1438,8 @@
           5
         ],
         "plan": [
-          27,
-          27
+          24,
+          24
         ]
       },
       "bandExcludesTransfer": false
@@ -7783,7 +7783,7 @@
         ],
         "plan": [
           1,
-          10
+          9
         ]
       },
       "bandExcludesTransfer": false,
@@ -7923,7 +7923,7 @@
         ],
         "plan": [
           1,
-          10
+          9
         ]
       },
       "bandExcludesTransfer": false,
@@ -8063,7 +8063,7 @@
         ],
         "plan": [
           1,
-          10
+          9
         ]
       },
       "bandExcludesTransfer": false,
@@ -8200,7 +8200,7 @@
         ],
         "plan": [
           1,
-          10
+          9
         ]
       },
       "bandExcludesTransfer": true,
@@ -8337,7 +8337,7 @@
         ],
         "plan": [
           1,
-          10
+          9
         ]
       },
       "bandExcludesTransfer": true,
@@ -8474,7 +8474,7 @@
         ],
         "plan": [
           1,
-          10
+          9
         ]
       },
       "bandExcludesTransfer": true,
@@ -8484,146 +8484,6 @@
         "routeId": "claude-max5x-claude-sonnet-5-5-common-opus55-assumption",
         "multiple": 57.25,
         "representative": false
-      }
-    },
-    {
-      "slug": "gpt-6-1-sol",
-      "name": "GPT-6.1 Sol · ChatGPT Pro 500",
-      "shortName": "GPT-6.1 Sol",
-      "developer": "OpenAI",
-      "aaUrl": "https://artificialanalysis.ai/models/gpt-6-1-sol",
-      "aaVariant": "max",
-      "rankingEligible": true,
-      "exclusionReasons": [],
-      "intelligenceIndex": {
-        "value": 51.8332597011541,
-        "status": "measured"
-      },
-      "speed": 58.8206752736493,
-      "aaFrontierTier": "frontier",
-      "aaFrontierConfiguration": "GPT-6.1 Sol (max)",
-      "aaFrontierIntelligenceGap": 0,
-      "aaFrontierFootnote": null,
-      "rank": {
-        "api": 1,
-        "plan": 7
-      },
-      "overall": {
-        "api": 60.02126104410708,
-        "plan": 62.61450682625437
-      },
-      "quality": 64.11438501376614,
-      "qualityRank": 4,
-      "dims": {
-        "costComposite": null,
-        "frontierCode": 49.1209333333333,
-        "terminalBench": 56.0606060606061,
-        "bugHunt": 42.19047619047619,
-        "vibeCode": 88.931,
-        "codeMigration": 77.324,
-        "livebench2Overall": 84.07,
-        "gdpval": 54.81,
-        "automationBench": 64.86844882398171,
-        "omniscience": 70.76666666666667,
-        "lcr": 83.0,
-        "hle": 52.919369786839695,
-        "scicode": 54.1666666666667,
-        "critpt": 31.7142857142857
-      },
-      "costDims": {
-        "api": 47.741889135129895,
-        "plan": 58.11487226371908
-      },
-      "raw": {
-        "frontierCode": 0.491209333333333,
-        "terminalBench": 56.0606060606061,
-        "bugHunt": 44.3,
-        "vibeCode": 88.931,
-        "codeMigration": 77.324,
-        "livebench2Overall": 84.07,
-        "gdpval": 1596.2,
-        "automationBench": 0.6486844882398171,
-        "omniscience": 41.53333333333333,
-        "lcr": 0.83,
-        "hle": 0.529193697868397,
-        "scicode": 0.541666666666667,
-        "critpt": 0.317142857142857
-      },
-      "coverage": {
-        "pct": 100.0,
-        "costAvailable": true,
-        "missing": [],
-        "provisional": false,
-        "provisionalReasons": []
-      },
-      "cost": {
-        "apiUsd": 1233.1097561488218,
-        "planUsd": 114.47361271340715,
-        "fallback": null,
-        "route": {
-          "id": "chatgpt-pro500-gpt61sol-semianalysis",
-          "planLabel": "ChatGPT Pro 500 $500 · GPT-6.1 Sol",
-          "planFeeUsd": 500,
-          "valueMultiple": 10.772,
-          "grade": "measured",
-          "assumptionKind": null,
-          "evidenceLabel": "Controlled account measurement / workload projection",
-          "sourceModel": "GPT-6.1 Sol",
-          "sourceUrl": "https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x",
-          "sourceDate": "2026-10-06"
-        },
-        "subset": false,
-        "partialComponents": [],
-        "workload": "9a0d376cc6080f3c",
-        "planFlags": [
-          "workload-unmatched",
-          "possibly-superseded",
-          "valuation basis unverified"
-        ]
-      },
-      "grade": "measured",
-      "pareto": {
-        "api": true,
-        "plan": true
-      },
-      "frontierStatus": {
-        "api": {
-          "definite": "certified",
-          "possible": "certified"
-        },
-        "plan": null
-      },
-      "scenario": {
-        "api": {
-          "top1": 1.0,
-          "top3": 1.0,
-          "frontier": 1.0
-        },
-        "plan": {
-          "top1": 0.0,
-          "top3": 0.0,
-          "frontier": 1.0
-        }
-      },
-      "flags": [],
-      "tier": "Premium",
-      "band": {
-        "api": [
-          1,
-          3
-        ],
-        "plan": [
-          1,
-          10
-        ]
-      },
-      "bandExcludesTransfer": false,
-      "key": "gpt-6-1-sol--chatgpt-pro-500",
-      "planRow": {
-        "plan": "ChatGPT Pro 500",
-        "routeId": "chatgpt-pro500-gpt61sol-semianalysis",
-        "multiple": 10.772,
-        "representative": true
       }
     },
     {
@@ -8646,7 +8506,7 @@
       "aaFrontierFootnote": null,
       "rank": {
         "api": 1,
-        "plan": 8
+        "plan": 7
       },
       "overall": {
         "api": 60.02126104410708,
@@ -8742,7 +8602,7 @@
         "plan": {
           "top1": 0.0,
           "top3": 0.0,
-          "frontier": 0.0
+          "frontier": 1.0
         }
       },
       "flags": [],
@@ -8754,7 +8614,7 @@
         ],
         "plan": [
           1,
-          10
+          9
         ]
       },
       "bandExcludesTransfer": false,
@@ -8763,7 +8623,7 @@
         "plan": "ChatGPT Plus",
         "routeId": "chatgpt-plus-gpt61sol-semianalysis",
         "multiple": 10.55,
-        "representative": false
+        "representative": true
       }
     },
     {
@@ -8786,7 +8646,7 @@
       "aaFrontierFootnote": null,
       "rank": {
         "api": 1,
-        "plan": 8
+        "plan": 7
       },
       "overall": {
         "api": 60.02126104410708,
@@ -8882,7 +8742,7 @@
         "plan": {
           "top1": 0.0,
           "top3": 0.0,
-          "frontier": 0.0
+          "frontier": 1.0
         }
       },
       "flags": [],
@@ -8894,7 +8754,7 @@
         ],
         "plan": [
           1,
-          10
+          9
         ]
       },
       "bandExcludesTransfer": false,
@@ -8926,7 +8786,7 @@
       "aaFrontierFootnote": null,
       "rank": {
         "api": 1,
-        "plan": 10
+        "plan": 9
       },
       "overall": {
         "api": 60.02126104410708,
@@ -9034,7 +8894,7 @@
         ],
         "plan": [
           1,
-          10
+          9
         ]
       },
       "bandExcludesTransfer": false,
@@ -9066,7 +8926,7 @@
       "aaFrontierFootnote": "Claude Haiku 5.5 has 5x higher pricing on longer-context inputs which are not currently reflected; we are working to include this in cost figures across Artificial Analysis.",
       "rank": {
         "api": 9,
-        "plan": 11
+        "plan": 10
       },
       "overall": {
         "api": 50.83012208391714,
@@ -9172,8 +9032,8 @@
           9
         ],
         "plan": [
-          11,
-          21
+          10,
+          18
         ]
       },
       "bandExcludesTransfer": true,
@@ -9205,7 +9065,7 @@
       "aaFrontierFootnote": "Claude Haiku 5.5 has 5x higher pricing on longer-context inputs which are not currently reflected; we are working to include this in cost figures across Artificial Analysis.",
       "rank": {
         "api": 9,
-        "plan": 12
+        "plan": 11
       },
       "overall": {
         "api": 50.83012208391714,
@@ -9311,8 +9171,8 @@
           9
         ],
         "plan": [
-          11,
-          21
+          10,
+          18
         ]
       },
       "bandExcludesTransfer": true,
@@ -9344,7 +9204,7 @@
       "aaFrontierFootnote": "Claude Haiku 5.5 has 5x higher pricing on longer-context inputs which are not currently reflected; we are working to include this in cost figures across Artificial Analysis.",
       "rank": {
         "api": 9,
-        "plan": 13
+        "plan": 12
       },
       "overall": {
         "api": 50.83012208391714,
@@ -9450,8 +9310,8 @@
           9
         ],
         "plan": [
-          11,
-          21
+          10,
+          18
         ]
       },
       "bandExcludesTransfer": true,
@@ -9483,7 +9343,7 @@
       "aaFrontierFootnote": null,
       "rank": {
         "api": 7,
-        "plan": 14
+        "plan": 13
       },
       "overall": {
         "api": 53.782288721560526,
@@ -9590,8 +9450,8 @@
           8
         ],
         "plan": [
-          11,
-          21
+          10,
+          18
         ]
       },
       "bandExcludesTransfer": false,
@@ -9601,146 +9461,6 @@
         "routeId": "chatgpt-pro200-gpt6astra-semianalysis",
         "multiple": 14.485,
         "representative": true
-      }
-    },
-    {
-      "slug": "gpt-6-astra",
-      "name": "GPT-6 Astra · ChatGPT Pro 500",
-      "shortName": "GPT-6 Astra",
-      "developer": "OpenAI",
-      "aaUrl": "https://artificialanalysis.ai/models/gpt-6-astra",
-      "aaVariant": "max",
-      "rankingEligible": true,
-      "exclusionReasons": [],
-      "intelligenceIndex": {
-        "value": 52.673669395513,
-        "status": "measured"
-      },
-      "speed": 67.7769430044794,
-      "aaFrontierTier": "near",
-      "aaFrontierConfiguration": "GPT-6 Astra (max)",
-      "aaFrontierIntelligenceGap": 3,
-      "aaFrontierFootnote": null,
-      "rank": {
-        "api": 7,
-        "plan": 15
-      },
-      "overall": {
-        "api": 53.782288721560526,
-        "plan": 58.63665635163841
-      },
-      "quality": 64.94250168018203,
-      "qualityRank": 3,
-      "dims": {
-        "costComposite": null,
-        "frontierCode": 46.9827666666667,
-        "terminalBench": 59.09090909090911,
-        "bugHunt": 42.857142857142854,
-        "vibeCode": 89.594,
-        "codeMigration": 80.579,
-        "livebench2Overall": 85.64,
-        "gdpval": 53.723,
-        "automationBench": 68.49174806688876,
-        "omniscience": 71.7,
-        "lcr": 80.6666666666667,
-        "hle": 54.6802594995366,
-        "scicode": 56.4814814814815,
-        "critpt": 31.7142857142857
-      },
-      "costDims": {
-        "api": 20.301649845696005,
-        "plan": 39.719120366007516
-      },
-      "raw": {
-        "frontierCode": 0.469827666666667,
-        "terminalBench": 59.09090909090911,
-        "bugHunt": 45.0,
-        "vibeCode": 89.594,
-        "codeMigration": 80.579,
-        "livebench2Overall": 85.64,
-        "gdpval": 1574.46,
-        "automationBench": 0.6849174806688876,
-        "omniscience": 43.4,
-        "lcr": 0.806666666666667,
-        "hle": 0.546802594995366,
-        "scicode": 0.564814814814815,
-        "critpt": 0.317142857142857
-      },
-      "coverage": {
-        "pct": 100.0,
-        "costAvailable": true,
-        "missing": [],
-        "provisional": false,
-        "provisionalReasons": []
-      },
-      "cost": {
-        "apiUsd": 5885.045403144297,
-        "planUsd": 423.0801871419336,
-        "fallback": null,
-        "route": {
-          "id": "chatgpt-pro500-gpt6astra-semianalysis",
-          "planLabel": "ChatGPT Pro 500 $500 · GPT-6 Astra",
-          "planFeeUsd": 500,
-          "valueMultiple": 13.91,
-          "grade": "measured",
-          "assumptionKind": null,
-          "evidenceLabel": "Controlled account measurement / workload projection",
-          "sourceModel": "GPT-6 Astra",
-          "sourceUrl": "https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x",
-          "sourceDate": "2026-10-06"
-        },
-        "subset": false,
-        "partialComponents": [],
-        "workload": "9a0d376cc6080f3c",
-        "planFlags": [
-          "workload-unmatched",
-          "possibly-superseded",
-          "valuation basis unverified"
-        ]
-      },
-      "grade": "measured",
-      "pareto": {
-        "api": true,
-        "plan": false
-      },
-      "frontierStatus": {
-        "api": {
-          "definite": "certified",
-          "possible": "certified"
-        },
-        "plan": null
-      },
-      "scenario": {
-        "api": {
-          "top1": 0.0,
-          "top3": 0.0,
-          "frontier": 1.0
-        },
-        "plan": {
-          "top1": 0.0,
-          "top3": 0.0,
-          "frontier": 0.0
-        }
-      },
-      "flags": [],
-      "tier": "Expensive",
-      "band": {
-        "api": [
-          6,
-          8
-        ],
-        "plan": [
-          11,
-          21
-        ]
-      },
-      "bandExcludesTransfer": false,
-      "key": "gpt-6-astra--chatgpt-pro-500",
-      "planRow": {
-        "plan": "ChatGPT Pro 500",
-        "routeId": "chatgpt-pro500-gpt6astra-semianalysis",
-        "multiple": 13.91,
-        "representative": false
       }
     },
     {
@@ -9763,7 +9483,7 @@
       "aaFrontierFootnote": null,
       "rank": {
         "api": 7,
-        "plan": 16
+        "plan": 14
       },
       "overall": {
         "api": 53.782288721560526,
@@ -9870,8 +9590,8 @@
           8
         ],
         "plan": [
-          11,
-          21
+          10,
+          18
         ]
       },
       "bandExcludesTransfer": false,
@@ -9881,143 +9601,6 @@
         "routeId": "chatgpt-pro100-gpt6astra-semianalysis",
         "multiple": 13.22,
         "representative": false
-      }
-    },
-    {
-      "slug": "gpt-6-luna",
-      "name": "GPT-6 Luna · ChatGPT Pro 500",
-      "shortName": "GPT-6 Luna",
-      "developer": "OpenAI",
-      "aaUrl": "https://artificialanalysis.ai/models/gpt-6-luna",
-      "aaVariant": "max",
-      "rankingEligible": true,
-      "exclusionReasons": [],
-      "intelligenceIndex": {
-        "value": 38.1245186869738,
-        "status": "measured"
-      },
-      "speed": 138.462831485269,
-      "aaFrontierTier": "frontier",
-      "aaFrontierConfiguration": "GPT-6 Luna (max)",
-      "aaFrontierIntelligenceGap": 0,
-      "aaFrontierFootnote": null,
-      "rank": {
-        "api": 4,
-        "plan": 17
-      },
-      "overall": {
-        "api": 56.98201691850143,
-        "plan": 57.58593637886723
-      },
-      "quality": 46.69934161636953,
-      "qualityRank": 9,
-      "dims": {
-        "costComposite": null,
-        "frontierCode": 41.9269666666667,
-        "terminalBench": 12.6262626262626,
-        "bugHunt": 17.428571428571427,
-        "vibeCode": 81.649,
-        "codeMigration": 46.669,
-        "livebench2Overall": 64.59,
-        "gdpval": 46.6395,
-        "automationBench": 53.16814034483175,
-        "omniscience": 50.325,
-        "lcr": 83.3333333333333,
-        "hle": 38.5078776645042,
-        "scicode": 54.6296296296296,
-        "critpt": 19.428571428571402
-      },
-      "costDims": {
-        "api": 87.83004282489713,
-        "plan": 90.24572066636036
-      },
-      "raw": {
-        "frontierCode": 0.419269666666667,
-        "terminalBench": 12.6262626262626,
-        "bugHunt": 18.3,
-        "vibeCode": 81.649,
-        "codeMigration": 46.669,
-        "livebench2Overall": 64.59,
-        "gdpval": 1432.79,
-        "automationBench": 0.5316814034483175,
-        "omniscience": 0.65,
-        "lcr": 0.833333333333333,
-        "hle": 0.385078776645042,
-        "scicode": 0.546296296296296,
-        "critpt": 0.194285714285714
-      },
-      "coverage": {
-        "pct": 100.0,
-        "costAvailable": true,
-        "missing": [],
-        "provisional": false,
-        "provisionalReasons": []
-      },
-      "cost": {
-        "apiUsd": 125.71906502148906,
-        "planUsd": 11.67091208888684,
-        "fallback": null,
-        "route": {
-          "id": "chatgpt-pro500-gpt-6-luna-common-gpt-assumption",
-          "planLabel": "ChatGPT Pro 500 $500 · common GPT assumption",
-          "planFeeUsd": 500,
-          "valueMultiple": 10.772,
-          "grade": "assumption",
-          "assumptionKind": "transfer",
-          "evidenceLabel": "Provisional assumption",
-          "sourceModel": "GPT-6.1 Sol",
-          "sourceUrl": "https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x",
-          "sourceDate": "2026-10-06"
-        },
-        "subset": false,
-        "partialComponents": [],
-        "workload": "9a0d376cc6080f3c",
-        "planFlags": [
-          "workload-unmatched",
-          "owner-named transfer (assumption)",
-          "possibly-superseded",
-          "valuation basis unverified"
-        ]
-      },
-      "grade": "measured",
-      "pareto": {
-        "api": true,
-        "plan": true
-      },
-      "frontierStatus": {
-        "api": {
-          "definite": "certified",
-          "possible": "certified"
-        },
-        "plan": null
-      },
-      "scenario": {
-        "api": {
-          "top1": 0.0,
-          "top3": 1.0,
-          "frontier": 1.0
-        },
-        "plan": null
-      },
-      "flags": [],
-      "tier": "Budget",
-      "band": {
-        "api": [
-          4,
-          5
-        ],
-        "plan": [
-          11,
-          21
-        ]
-      },
-      "bandExcludesTransfer": true,
-      "key": "gpt-6-luna--chatgpt-pro-500",
-      "planRow": {
-        "plan": "ChatGPT Pro 500",
-        "routeId": "chatgpt-pro500-gpt-6-luna-common-gpt-assumption",
-        "multiple": 10.772,
-        "representative": true
       }
     },
     {
@@ -10040,7 +9623,7 @@
       "aaFrontierFootnote": null,
       "rank": {
         "api": 4,
-        "plan": 18
+        "plan": 15
       },
       "overall": {
         "api": 56.98201691850143,
@@ -10144,8 +9727,8 @@
           5
         ],
         "plan": [
-          11,
-          21
+          10,
+          18
         ]
       },
       "bandExcludesTransfer": true,
@@ -10154,7 +9737,7 @@
         "plan": "ChatGPT Pro 100",
         "routeId": "chatgpt-pro100-gpt-6-luna-common-gpt-assumption",
         "multiple": 10.55,
-        "representative": false
+        "representative": true
       }
     },
     {
@@ -10177,7 +9760,7 @@
       "aaFrontierFootnote": null,
       "rank": {
         "api": 4,
-        "plan": 19
+        "plan": 16
       },
       "overall": {
         "api": 56.98201691850143,
@@ -10281,8 +9864,8 @@
           5
         ],
         "plan": [
-          11,
-          21
+          10,
+          18
         ]
       },
       "bandExcludesTransfer": true,
@@ -10314,7 +9897,7 @@
       "aaFrontierFootnote": null,
       "rank": {
         "api": 7,
-        "plan": 20
+        "plan": 17
       },
       "overall": {
         "api": 53.782288721560526,
@@ -10421,8 +10004,8 @@
           8
         ],
         "plan": [
-          11,
-          21
+          10,
+          18
         ]
       },
       "bandExcludesTransfer": false,
@@ -10454,7 +10037,7 @@
       "aaFrontierFootnote": null,
       "rank": {
         "api": 4,
-        "plan": 21
+        "plan": 18
       },
       "overall": {
         "api": 56.98201691850143,
@@ -10558,8 +10141,8 @@
           5
         ],
         "plan": [
-          11,
-          21
+          10,
+          18
         ]
       },
       "bandExcludesTransfer": true,
@@ -10591,7 +10174,7 @@
       "aaFrontierFootnote": null,
       "rank": {
         "api": 2,
-        "plan": 22
+        "plan": 19
       },
       "overall": {
         "api": 59.80387179090506,
@@ -10686,8 +10269,8 @@
           3
         ],
         "plan": [
-          22,
-          26
+          19,
+          23
         ]
       },
       "bandExcludesTransfer": false,
@@ -10719,7 +10302,7 @@
       "aaFrontierFootnote": null,
       "rank": {
         "api": 3,
-        "plan": 23
+        "plan": 20
       },
       "overall": {
         "api": 59.57237909254148,
@@ -10816,8 +10399,8 @@
           3
         ],
         "plan": [
-          22,
-          26
+          19,
+          23
         ]
       },
       "bandExcludesTransfer": true,
@@ -10849,7 +10432,7 @@
       "aaFrontierFootnote": null,
       "rank": {
         "api": 3,
-        "plan": 24
+        "plan": 21
       },
       "overall": {
         "api": 59.57237909254148,
@@ -10946,8 +10529,8 @@
           3
         ],
         "plan": [
-          22,
-          26
+          19,
+          23
         ]
       },
       "bandExcludesTransfer": true,
@@ -10979,7 +10562,7 @@
       "aaFrontierFootnote": null,
       "rank": {
         "api": 3,
-        "plan": 25
+        "plan": 22
       },
       "overall": {
         "api": 59.57237909254148,
@@ -11076,8 +10659,8 @@
           3
         ],
         "plan": [
-          22,
-          26
+          19,
+          23
         ]
       },
       "bandExcludesTransfer": true,
@@ -11109,7 +10692,7 @@
       "aaFrontierFootnote": null,
       "rank": {
         "api": 3,
-        "plan": 26
+        "plan": 23
       },
       "overall": {
         "api": 59.57237909254148,
@@ -11206,8 +10789,8 @@
           3
         ],
         "plan": [
-          22,
-          26
+          19,
+          23
         ]
       },
       "bandExcludesTransfer": true,
@@ -11239,7 +10822,7 @@
       "aaFrontierFootnote": null,
       "rank": {
         "api": 5,
-        "plan": 27
+        "plan": 24
       },
       "overall": {
         "api": 54.94057525090185,
@@ -11334,8 +10917,8 @@
           5
         ],
         "plan": [
-          27,
-          27
+          24,
+          24
         ]
       },
       "bandExcludesTransfer": false,

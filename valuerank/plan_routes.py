@@ -309,7 +309,9 @@ def check_report_independence(document: dict) -> None:
 def change_flagged(candidate: dict | None) -> bool:
     """E228: a selected route whose evidence a scoped change (or two reports of a limit change) may have superseded."""
 
-    return bool(candidate and candidate["route"].get("changeDetectedOn") and candidate.get("expiry") in {"possibly-superseded", "expired"})
+    # I76 L2: a transfer or O88 route inherits its donor's detected change (E144, O89).
+    changed = candidate and (candidate["route"].get("changeDetectedOn") or candidate.get("donorChangeDetectedOn"))
+    return bool(changed and candidate.get("expiry") in {"possibly-superseded", "expired"})
 
 
 
@@ -330,7 +332,7 @@ def check_same_model_routes(document: dict, families: dict | None = None) -> Non
         if source.get("plan") != route.get("plan") or mine == theirs or not same_model or source.get("sourceModel") != route.get("sourceModel"):
             raise ValueError(f"{route['id']}: its donor {source['id']} is not the same model's measurement on {route.get('plan')} at another configuration (O88, O90)")
         # I75 L2: the route carries its donor's multiple and allocation regime unchanged (E220).
-        if route.get("valueMultiple") != source.get("valueMultiple") or route.get("allocationRegime") != source.get("allocationRegime"):
+        if (route.get("valueMultiple"), route.get("allocationRegime"), route.get("planPriceUsd")) != (source.get("valueMultiple"), source.get("allocationRegime"), source.get("planPriceUsd")):
             raise ValueError(f"{route['id']}: a same-model route must carry its donor {source['id']}'s multiple and allocation regime (O88, E220)")
 
 
@@ -410,11 +412,33 @@ def mix_check(measurement: dict) -> str:
     return MIX_UNIDENTIFIED if measurement.get("workloadMix") else MIX_NOT_REPORTED
 
 
-def route_candidates(model_id: str, configuration_effort: str | None, routes: list[dict], release_day: date, *, registry: list[dict] | None = None, window: dict | None = None) -> list[dict]:
+def in_fault_window(route: dict, faults: list[dict] | None) -> dict | None:
+    """O91: the acknowledged accounting-fault entry a controlled measurement falls in, unless a recorded resolution shows it
+    unaffected. The measurement is dated by its window, else by its publication date (the latest it can have been taken)."""
+
+    if not faults or route.get("valueMultipleKind") not in CONTROLLED_KINDS or route.get("faultResolution"):
+        return None
+    window = route.get("measurementWindow") or {}
+    first = window.get("start") or route.get("sourcePublicationDate")
+    last = window.get("end") or route.get("sourcePublicationDate")
+    if not first or not last:
+        return None
+    for fault in faults:
+        if fault.get("provider") != route.get("provider") or (fault.get("plans") and route.get("plan") not in fault["plans"]):
+            continue
+        for day in fault["days"]:
+            low, _, high = day.partition("..")
+            if first <= (high or low) and last >= low:
+                return fault
+    return None
+
+
+def route_candidates(model_id: str, configuration_effort: str | None, routes: list[dict], release_day: date, *, registry: list[dict] | None = None,
+                     window: dict | None = None, faults: list[dict] | None = None) -> list[dict]:
     """Every route-measurement pair for this model, classified; variant-restricted routes need an exact effort match.
 
     ``registry`` is the full route list donors are resolved in (default: ``routes``); ``window`` is the
-    release's report window (O32).
+    release's report window (O32); ``faults`` are the acknowledged accounting-fault windows (O91).
     """
 
     by_id = {item["id"]: item for item in (registry if registry is not None else routes)}
@@ -434,7 +458,10 @@ def route_candidates(model_id: str, configuration_effort: str | None, routes: li
         checks = [route] + ([source] if source is not None else [])
         # O32: a transfer whose donor is an end-user report partition follows the donor's window status.
         lapsed_donor = source is not None and source.get("valueMultipleKind") in REPORT_KINDS and evidence_grade(measurement_objects(source, release_day, window)[0], model_id) == "diagnostic"
-        if lapsed_donor or expiry == "demoted" or any(not _divisor_eligible(item) or valuation_status(item) == "different" for item in checks):
+        # O91: a controlled measurement taken in an acknowledged fault window (or a transfer or O88 route resting on one)
+        # leaves the official selection until a recorded resolution shows it unaffected.
+        faulted = next((fault for item in checks if (fault := in_fault_window(item, faults))), None)
+        if faulted or lapsed_donor or expiry == "demoted" or any(not _divisor_eligible(item) or valuation_status(item) == "different" for item in checks):
             grade = "diagnostic"
         stamp = evidence_date(route, by_id)
         provenance = source if source is not None else route
@@ -447,6 +474,7 @@ def route_candidates(model_id: str, configuration_effort: str | None, routes: li
                 "evidenceDate": stamp.isoformat() if stamp else None,
                 "donorRouteId": source["id"] if source is not None else None,
                 "donorChangeDetectedOn": source.get("changeDetectedOn") if source is not None else None,
+                "faultWindow": faulted["evidence"] if faulted else None,
                 # E144: valuation compatibility and capacity status are the donor measurement's for a transfer.
                 "valuation": "different" if "different" in {valuation_status(item) for item in checks} else valuation_status(provenance),
                 "measurementCapacityStatus": measurement_capacity_status(provenance),
@@ -459,16 +487,16 @@ def route_candidates(model_id: str, configuration_effort: str | None, routes: li
 IDENTIFIED = {"point-identified", "set-identified"}
 
 
-def admission_table(model_id: str, configuration_effort: str | None, routes: list[dict], release_day: date, window: dict | None = None) -> list[dict]:
+def admission_table(model_id: str, configuration_effort: str | None, routes: list[dict], release_day: date, window: dict | None = None,
+                    faults: list[dict] | None = None) -> list[dict]:
     """E106/E123: every route-measurement pair naming the model, classified once by case and the three predicates.
 
     1 execution-identity incompatibility (excluded); 2 owner assumption: an
     owner-named transfer or an O46 ceiling (display only, never identifies
     M_W); 3 measurement with unidentified transport, exact-route or, under
     O90, an O88 route measured on the same model at another effort
-    (displayed, interval-ineligible); 4 exact-route
-    measurement on an unreconciled price basis (unmatched under O7: diagnostic
-    only); 5 evidence failing admission (diagnostic only); and "identified" for
+    (displayed, interval-ineligible); 4 any route (or its donor) on an
+    unreconciled price basis (unmatched under O7: diagnostic only); 5 evidence failing admission (diagnostic only); and "identified" for
     exact-route measurements with an identified M_W.
     """
 
@@ -476,7 +504,7 @@ def admission_table(model_id: str, configuration_effort: str | None, routes: lis
     for route in routes:
         if model_id not in route.get("modelIds", []):
             continue
-        candidates = route_candidates(model_id, configuration_effort, [route], release_day, registry=routes, window=window)
+        candidates = route_candidates(model_id, configuration_effort, [route], release_day, registry=routes, window=window, faults=faults)
         if not candidates:
             table.append({"route": route, "case": 1, "officialDisplayEligible": False, "targetTransportIdentified": False, "planIntervalEligible": False})
             continue

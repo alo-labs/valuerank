@@ -289,9 +289,11 @@ class Facts:
     def label(self, model_id):
         if model_id not in self.rows and "@" in model_id:
             # O48: a Plan row "<configuration>@<plan>" reads as the configuration on its plan.
-            configuration, _plan = model_id.split("@", 1)
-            plan = next((row["plan"] for row in self.v3.get("planRows", []) if row["id"] == model_id), None)
-            return f"{self.label(configuration)} on {plan or 'API-cost fallback'}"
+            configuration, slug = model_id.split("@", 1)
+            # O91: a frozen anchor setter may be a plan row no longer in the table; its plan is named from the route registry,
+            # and only the API-fallback slug reads as an API-cost fallback.
+            plans = {value_v3.plan_slug(route["plan"]): route["plan"] for route in self.routes_document["routes"] if route.get("plan")}
+            return f"{self.label(configuration)} on {'API-cost fallback' if slug == value_v3.API_FALLBACK_PLAN else plans.get(slug, slug)}"
         return configuration_label(self.rows[model_id], self.names) if model_id in self.rows else self.names.get(model_id, model_id)
 
     def labels(self, model_ids):

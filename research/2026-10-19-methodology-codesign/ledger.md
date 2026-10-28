@@ -1772,3 +1772,14 @@ Asked on I64 Q1 whether future O71 admissions should be executed by the build fr
 - L4 (adopted): comparator key (2) separates "the exact configuration (model and effort)" from the same model at another effort.
 - Recommendations (one grade function for every surface; generate O88 routes from their donor; an E106 coverage table): the first is adopted for route badges; the second and third are recorded, not adopted this round (the build check of L2 and the case-mapping test of I74 cover the drift they target).
 - Round status (O56): clean (no Medium or higher), the first clean round at Opus high since the restart. Draft r135.
+
+## Owner decision O91 (2026-10-28), asked on I76 Q1
+- O91 (fault windows bind controlled measurements): a controlled measurement dated (by its measurement window, else by its publication date, the latest it can have been taken) inside an acknowledged accounting-fault window for its provider and plan leaves the official selection, as diagnostic, together with every transfer and O88 route resting on it, until the registry records a resolution (`faultResolution`) showing it unaffected. Today it removes SemiAnalysis's two ChatGPT Pro 500 measurements (published 2026-10-06, inside OpenAI's acknowledged Pro 500 upgrade-allowance fault of 2026-09-29 to 2026-10-16) and the Pro 500 routes resting on them: the Pro 500 plan rows leave both Plan rankings (27 → 24 max-effort rows, 51 → 43 AI Coding Daily rows); GPT-6.1 Sol (max) is now represented by its Plus and Pro 100 rows (62.54); no other row's value changes, and ranks below the removed rows move up.
+
+## Internal review I76 (Claude Opus 5.5, effort high, on r135) — adopted, modified or rejected
+- L1 (adopted, engine changed): a row on an unverified AA valuation basis (E222) is never a scenario label candidate in `bar_labels`, matching the interval path (E92).
+- L2 (adopted, engine changed with a test): `change_flagged` (E228) inherits the donor's detected change for a transfer or O88 route, as `post_change_ranks` already did.
+- L3 (asked; O91, engine changed with a test; the draft prints the faulted routes from a generated figure).
+- L4 (adopted): the Plan headline multiple names the O88 figure; the admission-table docstring's case 4 covers every route kind; the two docs files say "Measured"; the same-model check also compares the fee.
+- Recommendations (one label-denial function; one place deriving donor-inherited fields; fault windows on every measurement object): the third is adopted by O91; the first two are recorded, not adopted this round.
+- Round status (O56): clean (no Medium or higher). With I75, two consecutive clean rounds: the Opus high rung has converged. Draft r136; next rung: Opus xhigh.

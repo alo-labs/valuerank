@@ -12,7 +12,7 @@
     },
     "overall": {
       "api": 60.02126104410708,
-      "plan": 62.61450682625437
+      "plan": 62.541244541055555
     },
     "quality": 64.11438501376614,
     "qualityRank": 4,
@@ -266,13 +266,13 @@
   ],
   "cost": {
     "apiUsd": 1233.1097561488218,
-    "planUsd": 114.47361271340715,
+    "planUsd": 116.88244134112054,
     "fallback": null,
     "route": {
-      "id": "chatgpt-pro500-gpt61sol-semianalysis",
-      "planLabel": "ChatGPT Pro 500 $500 · GPT-6.1 Sol",
-      "planFeeUsd": 500,
-      "valueMultiple": 10.772,
+      "id": "chatgpt-plus-gpt61sol-semianalysis",
+      "planLabel": "ChatGPT Plus $20 · GPT-6.1 Sol",
+      "planFeeUsd": 20,
+      "valueMultiple": 10.55,
       "grade": "measured",
       "assumptionKind": null,
       "evidenceLabel": "Controlled account measurement / workload projection",
@@ -290,7 +290,7 @@
     ],
     "costScore": {
       "api": 47.741889135129895,
-      "plan": 58.11487226371908
+      "plan": 57.8218231229238
     },
     "components": [
       {
@@ -359,20 +359,20 @@
       }
     ],
     "aaCostCaveat": null,
-    "selectionReason": "larger observed multiple (observed-workload multiple — target-workload ordering not identified)",
+    "selectionReason": "lower gross cash",
     "planAmount": {
       "amountKind": "measured-workload capacity",
       "amountTarget": "measured-workload capacity",
-      "amountUsd": 5386.0,
+      "amountUsd": 211.0,
       "derivation": "measurement record: its recorded numerator U_obs = M_obs x F_obs (workload capacity projection)",
       "feePeriod": "month",
-      "subscriptionCashUsd": 500,
+      "subscriptionCashUsd": 20,
       "additionalCashUsd": 0.0,
-      "grossCashUsd": 500.0,
+      "grossCashUsd": 20.0,
       "workload": "the route's measurement workload",
-      "measurementObjectId": "chatgpt-pro500-gpt61sol-semianalysis",
+      "measurementObjectId": "chatgpt-plus-gpt61sol-semianalysis",
       "capacitySolutionId": null,
-      "cashObjectId": "chatgpt-pro500-gpt61sol-semianalysis:month cash",
+      "cashObjectId": "chatgpt-plus-gpt61sol-semianalysis:month cash",
       "purchasePolicyId": "subscription fee for the fee period, no additional cash declared",
       "capacityStatus": "capacity established on the measurement workload",
       "valuationStatus": "unverified",
@@ -381,24 +381,6 @@
     }
   },
   "plans": [
-    {
-      "id": "chatgpt-pro500-gpt61sol-semianalysis",
-      "planLabel": "ChatGPT Pro 500 $500 · GPT-6.1 Sol",
-      "planFeeUsd": 500,
-      "valueMultiple": 10.772,
-      "grade": "measured",
-      "assumptionKind": null,
-      "evidenceLabel": "Controlled account measurement / workload projection",
-      "sourceUrl": "https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x",
-      "sourceDate": "2026-10-06",
-      "case": 3,
-      "officialDisplayEligible": true,
-      "planIntervalEligible": false,
-      "usdPerRun": 114.47361271340715,
-      "selected": true,
-      "planRank": 7,
-      "planValue": 62.61450682625437
-    },
     {
       "id": "chatgpt-plus-gpt61sol-semianalysis",
       "planLabel": "ChatGPT Plus $20 · GPT-6.1 Sol",
@@ -413,9 +395,27 @@
       "officialDisplayEligible": true,
       "planIntervalEligible": false,
       "usdPerRun": 116.88244134112054,
-      "selected": false,
-      "planRank": 8,
+      "selected": true,
+      "planRank": 7,
       "planValue": 62.541244541055555
+    },
+    {
+      "id": "chatgpt-pro500-gpt61sol-semianalysis",
+      "planLabel": "ChatGPT Pro 500 $500 · GPT-6.1 Sol",
+      "planFeeUsd": 500,
+      "valueMultiple": 10.772,
+      "grade": "measured",
+      "assumptionKind": null,
+      "evidenceLabel": "Controlled account measurement / workload projection",
+      "sourceUrl": "https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x",
+      "sourceDate": "2026-10-06",
+      "case": 5,
+      "officialDisplayEligible": false,
+      "planIntervalEligible": false,
+      "usdPerRun": 114.47361271340715,
+      "selected": false,
+      "planRank": null,
+      "planValue": null
     },
     {
       "id": "chatgpt-pro100-gpt61sol-semianalysis",
@@ -432,7 +432,7 @@
       "planIntervalEligible": false,
       "usdPerRun": 116.88244134112054,
       "selected": false,
-      "planRank": 8,
+      "planRank": 7,
       "planValue": 62.541244541055555
     },
     {
@@ -450,7 +450,7 @@
       "planIntervalEligible": false,
       "usdPerRun": 118.34066757666237,
       "selected": false,
-      "planRank": 10,
+      "planRank": 9,
       "planValue": 62.497624083465816
     }
   ],
@@ -563,8 +563,8 @@
         "kernel": "primary",
         "targetProfile": "published-record leaf values redrawn with plug-in binomial task-sampling noise from each leaf's published task count (independent-task approximation; GDPval-AA from its displayed rating interval, an assumption) + conventional identification of missing leaves",
         "unevaluable": null,
-        "top1": 0.139,
-        "top3": 0.1541,
+        "top1": 0.1282,
+        "top3": 0.1435,
         "frontier": 1.0
       }
     ]
@@ -639,7 +639,7 @@
       },
       "overall": {
         "api": 60.02126104410708,
-        "plan": 62.61450682625437
+        "plan": 62.541244541055555
       }
     },
     {

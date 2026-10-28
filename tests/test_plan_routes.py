@@ -657,3 +657,30 @@ def test_every_route_kind_maps_to_one_admission_case_and_same_model_flags_are_ch
             pr.check_same_model_routes({"routes": [donor, bad]})
     with pytest.raises(ValueError):
         pr.check_same_model_routes({"routes": [donor, same]}, {"m": "M", "m-high": "Not M"})
+
+
+def test_a_controlled_measurement_in_a_fault_window_leaves_the_selection():
+    """O91: a controlled measurement dated inside an acknowledged fault window for its plan (and every route resting on it)
+    is diagnostic until a recorded resolution shows it unaffected; other plans and other providers are untouched."""
+
+    faults = [{"provider": "P", "plans": ["Pro"], "days": ["2026-09-29..2026-10-16"], "evidence": "acknowledged"}, {"provider": "P", "days": ["2026-10-20"], "evidence": "day"}]
+    measured = dict(route("m", 10.0), provider="P", plan="Pro", sourcePublicationDate="2026-10-06")
+    assert pr.in_fault_window(measured, faults)["evidence"] == "acknowledged"
+    assert pr.in_fault_window({**measured, "faultResolution": "scales with the fee"}, faults) is None
+    assert pr.in_fault_window({**measured, "plan": "Plus"}, faults) is None and pr.in_fault_window({**measured, "provider": "Q"}, faults) is None
+    assert pr.in_fault_window({**measured, "measurementWindow": {"start": "2026-10-19", "end": "2026-10-21"}}, faults)["evidence"] == "day"
+    assert pr.in_fault_window({**measured, "sourcePublicationDate": None}, faults) is None and pr.in_fault_window(measured, None) is None
+    assert pr.in_fault_window(dict(measured, valueMultipleKind="user_assumption"), faults) is None
+    day = date(2026, 10, 25)
+    [candidate] = pr.route_candidates("m", None, [measured], day, faults=faults)
+    assert candidate["grade"] == "diagnostic" and candidate["faultWindow"] == "acknowledged"
+    transfer = dict(route("t", 10.0, kind="user_assumption", models=("n",)), provider="P", plan="Pro", donorRouteId="m", sourceEvidenceClass="controlled_account_workload_projection")
+    assert pr.route_candidates("n", None, [transfer], day, registry=[measured, transfer], faults=faults)[0]["grade"] == "diagnostic"
+    assert pr.route_candidates("m", None, [measured], day)[0]["grade"] == "controlled"
+
+
+def test_change_flag_is_inherited_from_the_donor():
+    """I76 L2: a transfer or O88 route whose donor carries a detected change is an E228 blocker like its donor."""
+
+    plain = candidate("t", 10.0, "assumption", expiry="possibly-superseded")
+    assert not pr.change_flagged(plain) and pr.change_flagged({**plain, "donorChangeDetectedOn": "2026-10-11"})

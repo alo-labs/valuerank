@@ -75,7 +75,7 @@ def test_readme_flags_fallback_and_subset_rows(emitted):
     assert rows["Claude Haiku 5.5 (max)"][10] == "AA cost caveat"
     assert rows["DeepSeek V4.1 Flash 1017 (max)"][10] == "API-cost fallback"  # I50: its exact Coding Agent Index record is pinned
     # O45: GPT-6.1 Sol keeps its own SemiAnalysis figure.
-    assert rows["GPT-6.1 Sol (max)"][9] == "ChatGPT Pro 500 $500 · GPT-6.1 Sol (10.772×, measured)"
+    assert rows["GPT-6.1 Sol (max)"][9] == "ChatGPT Plus $20 · GPT-6.1 Sol (10.55×, measured)"  # O91
 
 
 def test_readme_states_what_the_interval_outputs_support(emitted):
@@ -85,7 +85,7 @@ def test_readme_states_what_the_interval_outputs_support(emitted):
     # E192: the bar is a quality level, so the output compares alternatives instead of returning the bar setter.
     assert "Cheapest at or above quality 53.3: DeepSeek V4.1 Flash 1017 (max) (confirmed)." in readme
     # E196: the nominal cost weight is printed with cost's share of the variance in value.
-    assert "value is a 25% cost score (nominal weight; 106% of API and 21% of Plan value variance)" in readme
+    assert "value is a 25% cost score (nominal weight; 106% of API and 27% of Plan value variance)" in readme
     assert "Plan basis: interval outputs not evaluated (no row has FullCost and an identified M_W (E61/E67))." in readme
     assert "so the Plan ranking is labelled exploratory" in readme
     assert "Claude Opus 5.5 leads the Plan ranking at 64.2; GPT-6.1 Sol leads the API ranking at 60.0; Claude Opus 5.5 leads on quality." in readme
@@ -331,8 +331,8 @@ def test_calibration_without_official_anchors_or_values_says_so(repo_copy, pinne
 
 def test_calibration_reports_reversals_and_the_official_anchor_extremes(emitted):
     section = (emitted / "scores.md").read_text().split("#### Measured-evidence calibration (diagnostic)", 1)[1].split("## Interval outputs", 1)[0]
-    assert "Official Plan anchors are set by GPT-6 Luna (max) on ChatGPT Pro 500 (owner-named transfer) at the low end and Gemini 4 Argon (high) on API-cost fallback at the high end." in section
-    assert "Pairwise reversals: Claude Opus 5.5 (max) and GPT-6.1 Sol (max). Largest value change: 3.94 points." in section
+    assert "Official Plan anchors are set by GPT-6 Luna (max) on ChatGPT Pro 500 (not in the current table) at the low end and Gemini 4 Argon (high) on API-cost fallback at the high end." in section
+    assert "Pairwise reversals: Claude Opus 5.5 (max) and GPT-6.1 Sol (max). Largest value change: 3.96 points." in section  # O91: Sol is measured on Plus
     methodology = (emitted / "methodology.md").read_text()
     assert "labelled conventional CI-range sensitivity (endpoint-conditioned; no tail model) under its interpretation contract (E165" in methodology
 

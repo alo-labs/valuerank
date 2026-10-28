@@ -6,7 +6,7 @@ All numbers are JSON numbers or `null`; no value is ever filled in. Identifiers 
 
 ## Evidence grades
 
-Every value that reaches a page carries a grade. One enum, rendered by one component (`badge`). The `measured` badge reads "User-measured". Tables have no Evidence column: grades are footnoted (see "Evidence footnotes" below).
+Every value that reaches a page carries a grade. One enum, rendered by one component (`badge`). The `measured` badge reads "Measured" (benchmark-owner or controlled account measurements, including O88 same-model routes under O90). Tables have no Evidence column: grades are footnoted (see "Evidence footnotes" below).
 
 | Grade | Meaning | Examples |
 |---|---|---|

@@ -8,11 +8,11 @@
   "summary": {
     "rank": {
       "api": 4,
-      "plan": 17
+      "plan": 15
     },
     "overall": {
       "api": 56.98201691850143,
-      "plan": 57.58593637886723
+      "plan": 57.512674093668416
     },
     "quality": 46.69934161636953,
     "qualityRank": 9,
@@ -266,13 +266,13 @@
   ],
   "cost": {
     "apiUsd": 125.71906502148906,
-    "planUsd": 11.67091208888684,
+    "planUsd": 11.916499054169579,
     "fallback": null,
     "route": {
-      "id": "chatgpt-pro500-gpt-6-luna-common-gpt-assumption",
-      "planLabel": "ChatGPT Pro 500 $500 · common GPT assumption",
-      "planFeeUsd": 500,
-      "valueMultiple": 10.772,
+      "id": "chatgpt-pro100-gpt-6-luna-common-gpt-assumption",
+      "planLabel": "ChatGPT Pro 100 $100 · common GPT assumption",
+      "planFeeUsd": 100,
+      "valueMultiple": 10.55,
       "grade": "assumption",
       "assumptionKind": "transfer",
       "evidenceLabel": "Provisional assumption",
@@ -291,7 +291,7 @@
     ],
     "costScore": {
       "api": 87.83004282489713,
-      "plan": 90.24572066636036
+      "plan": 89.95267152556508
     },
     "components": [
       {
@@ -364,42 +364,24 @@
     "planAmount": {
       "amountKind": "assumed API-equivalent consumption (owner-named transfer)",
       "amountTarget": "assumed consumption",
-      "amountUsd": 5386.0,
+      "amountUsd": 1055.0,
       "derivation": "authorised assumption: the donor's multiple times this route's cash",
       "feePeriod": "month",
-      "subscriptionCashUsd": 500,
+      "subscriptionCashUsd": 100,
       "additionalCashUsd": 0.0,
-      "grossCashUsd": 500.0,
+      "grossCashUsd": 100.0,
       "workload": "the route's measurement workload",
-      "measurementObjectId": "chatgpt-pro500-gpt-6-luna-common-gpt-assumption",
+      "measurementObjectId": "chatgpt-pro100-gpt-6-luna-common-gpt-assumption",
       "capacitySolutionId": null,
-      "cashObjectId": "chatgpt-pro500-gpt-6-luna-common-gpt-assumption:month cash",
+      "cashObjectId": "chatgpt-pro100-gpt-6-luna-common-gpt-assumption:month cash",
       "purchasePolicyId": "subscription fee for the fee period, no additional cash declared",
       "capacityStatus": "capacity established on the measurement workload",
       "valuationStatus": "unverified",
-      "donorRouteId": "chatgpt-pro500-gpt61sol-semianalysis",
+      "donorRouteId": "chatgpt-pro100-gpt61sol-semianalysis",
       "interpretationLabel": "assumed API-equivalent consumption (owner-named transfer), API-priced USD per month"
     }
   },
   "plans": [
-    {
-      "id": "chatgpt-pro500-gpt-6-luna-common-gpt-assumption",
-      "planLabel": "ChatGPT Pro 500 $500 · common GPT assumption",
-      "planFeeUsd": 500,
-      "valueMultiple": 10.772,
-      "grade": "assumption",
-      "assumptionKind": null,
-      "evidenceLabel": "Provisional assumption",
-      "sourceUrl": "https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x",
-      "sourceDate": "2026-10-06",
-      "case": 2,
-      "officialDisplayEligible": true,
-      "planIntervalEligible": false,
-      "usdPerRun": 11.67091208888684,
-      "selected": true,
-      "planRank": 17,
-      "planValue": 57.58593637886723
-    },
     {
       "id": "chatgpt-pro100-gpt-6-luna-common-gpt-assumption",
       "planLabel": "ChatGPT Pro 100 $100 · common GPT assumption",
@@ -414,9 +396,27 @@
       "officialDisplayEligible": true,
       "planIntervalEligible": false,
       "usdPerRun": 11.916499054169579,
-      "selected": false,
-      "planRank": 18,
+      "selected": true,
+      "planRank": 15,
       "planValue": 57.512674093668416
+    },
+    {
+      "id": "chatgpt-pro500-gpt-6-luna-common-gpt-assumption",
+      "planLabel": "ChatGPT Pro 500 $500 · common GPT assumption",
+      "planFeeUsd": 500,
+      "valueMultiple": 10.772,
+      "grade": "assumption",
+      "assumptionKind": null,
+      "evidenceLabel": "Provisional assumption",
+      "sourceUrl": "https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x",
+      "sourceDate": "2026-10-06",
+      "case": 5,
+      "officialDisplayEligible": false,
+      "planIntervalEligible": false,
+      "usdPerRun": 11.67091208888684,
+      "selected": false,
+      "planRank": null,
+      "planValue": null
     },
     {
       "id": "chatgpt-pro200-gpt-6-luna-common-gpt-assumption",
@@ -433,7 +433,7 @@
       "planIntervalEligible": false,
       "usdPerRun": 12.065169387858834,
       "selected": false,
-      "planRank": 19,
+      "planRank": 16,
       "planValue": 57.46905363607867
     },
     {
@@ -451,7 +451,7 @@
       "planIntervalEligible": false,
       "usdPerRun": 15.520872224875193,
       "selected": false,
-      "planRank": 21,
+      "planRank": 18,
       "planValue": 56.58297133010943
     }
   ],
@@ -639,7 +639,7 @@
       "date": "2026-10-19",
       "rank": {
         "api": 4,
-        "plan": 17
+        "plan": 15
       }
     }
   ],
@@ -660,11 +660,11 @@
       "rankingEligible": true,
       "rank": {
         "api": 4,
-        "plan": 17
+        "plan": 15
       },
       "overall": {
         "api": 56.98201691850143,
-        "plan": 57.58593637886723
+        "plan": 57.512674093668416
       }
     },
     {
@@ -675,11 +675,11 @@
       "rankingEligible": true,
       "rank": {
         "api": 8,
-        "plan": 25
+        "plan": 22
       },
       "overall": {
         "api": 48.75856062662677,
-        "plan": 49.23096069716823
+        "plan": 49.17545331635173
       }
     }
   ]
