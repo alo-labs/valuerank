@@ -170,15 +170,19 @@ def check_routes(routes: list[dict], cells: list[dict], cohort: set[str], report
     """O81, I65 L3: a report-based route for a cohort model must rest on a passing cell for its plan and model, and its
     pooled reports must be that cell's admitting reports (the same observers), so the two paths cannot disagree."""
 
-    passing = {(cell["plan"], cell["modelId"]): cell for cell in cells if cell["status"] == "passes"}
+    passing: dict[tuple, list[dict]] = {}
+    for cell in cells:
+        if cell["status"] == "passes":
+            passing.setdefault((cell["plan"], cell["modelId"]), []).append(cell)
     for route in routes:
         if route.get("valueMultipleKind") not in report_kinds:
             continue
         for model in set(route.get("modelIds") or []) & cohort:
-            cell = passing.get((route.get("plan"), model))
-            if cell is None:
+            supporting = passing.get((route.get("plan"), model), [])
+            if not supporting:
                 raise ValueError(f"{route['id']}: no passing O71 cell supports a report route for {model} on {route.get('plan')} (O81)")
+            # I66 L2: a plan and model can pass in more than one unit; the route's observers must be one cell's admitting set.
             observers = sorted(str(report.get("observer") or "") for report in route.get("independentReports") or [])
-            if observers != cell["admittingObservers"]:
-                raise ValueError(f"{route['id']}: its reports ({', '.join(observers)}) are not the cell's admitting reports "
-                                 f"({', '.join(cell['admittingObservers'])}) (O81)")
+            if all(observers != cell["admittingObservers"] for cell in supporting):
+                raise ValueError(f"{route['id']}: its reports ({', '.join(observers)}) are not a passing cell's admitting reports "
+                                 f"({'; '.join(', '.join(cell['admittingObservers']) for cell in supporting)}) (O81)")

@@ -1660,7 +1660,7 @@ Asked on I64 Q1 whether future O71 admissions should be executed by the build fr
 - Owner question (asked; O81).
 - Round status (O56): clean (no Medium or higher), the first clean round at Sonnet max. Draft r124.
 
-## Owner decisions O82–O83 (2026-10-26), asked on I65's questions
+## Owner decisions O82–O83 (2026-10-28), asked on I65's questions
 - O82 (5-hour figures, replacing O80's exception): a 5-hour figure pools only with 5-hour figures of the same plan and model and never converts to a billing period, so it can never admit a route. The build already did this; the draft, AGENTS.md, the registry rule and the printed status now cite O82.
 - O83 (partitions): a provider announcement under O77 and a detected change under E18 (including one a shared meter carries to every plan on it, O79) each split the report partition for the plans it covers, so a report from before the split never counts after it. An instant split (Anthropic, 2026-10-17T13:00Z, from NicoAica's straddling measurement) is a point; a split given as a date covers that whole day. OpenAI's Day 12, 16 and 19 dates come from the day count (±1 day); no verdict changes under any of the alternatives.
 
@@ -1673,3 +1673,14 @@ Asked on I64 Q1 whether future O71 admissions should be executed by the build fr
 - Recommendations 2 and 5 are adopted through L1 and L5; recommendations 3 (per-cell partition audit) and 4 (rounding-aware concordance) are recorded and not adopted this round (recommendations, not findings; 4 would change O11 and needs an owner decision).
 - Owner questions Q1 (O82) and Q2 (O83) asked and answered.
 - Round status (O56): clean (no Medium or higher). With I64, two consecutive clean rounds: the Sonnet max rung has converged. Draft r125; next rung: Opus 5.5 at low.
+
+## Owner decision O84 (2026-10-28), asked on I66's question
+- O84 (Kimi split): a limit change detected on any Kimi plan (the ≈50% quota increase of 2026-10-24, measured by kojimako and okarin on two CN plans) splits the report partition for every Kimi plan, global ones included, as a shared meter would under O79. This is what the build already applied; it excludes waximabbax's Kimi Plus report dated on the split day and changes no verdict.
+
+## Internal review I66 (Claude Opus 5.5, effort low, on r125) — adopted, modified or rejected
+- L1 (asked; O84): the Kimi split stays on every Kimi plan; the registry's split basis and change-detection entry cite O84.
+- L2 (adopted, engine changed with a test): the draft says the route-to-cell check compares observers, not report values; `check_routes` now accepts a route whose observers are the admitting set of any passing cell for its plan and model, so two passing units for one plan cannot shadow each other.
+- L3 (adopted): O82 and O83 are dated 2026-10-28 (the day they were answered) in the ledger and the registry, matching the draft.
+- L4 (adopted): the limitations sentence says "most plan rows" (its totals include API-fallback rows) and "possibly superseded or expired"; line 55 says "every priced and dated report", matching the table's rule and its `notTabulated` list.
+- Owner question (asked; O84).
+- Round status (O56): clean (no Medium or higher), the first clean round at Opus low. Draft r126.

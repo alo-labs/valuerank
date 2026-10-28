@@ -70,15 +70,17 @@ def test_cells_pass_only_on_two_firm_concordant_reports_in_the_current_partition
 
 
 def test_a_report_route_needs_a_passing_cell_with_the_same_reports():
-    cells = [{"plan": "Pro", "modelId": "m", "status": "passes", "admittingObservers": ["a", "b"]}, {"plan": "Max", "modelId": "m", "status": "fails: x"}]
+    cells = [{"plan": "Pro", "modelId": "m", "status": "passes", "admittingObservers": ["a", "b"]},
+             {"plan": "Pro", "modelId": "m", "status": "passes", "admittingObservers": ["c", "d"]}, {"plan": "Max", "modelId": "m", "status": "fails: x"}]
     pair = [{"observer": "b"}, {"observer": "a"}]
     routes = [{"id": "ok", "plan": "Pro", "modelIds": ["m"], "valueMultipleKind": "end_user_report", "independentReports": pair},
               {"id": "other", "plan": "Max", "modelIds": ["outside"], "valueMultipleKind": "end_user_report"},
               {"id": "controlled", "plan": "Max", "modelIds": ["m"], "valueMultipleKind": "controlled_account_workload_projection"}]
     pa.check_routes(routes, cells, {"m"}, {"end_user_report"})
+    pa.check_routes([{**routes[0], "independentReports": [{"observer": "d"}, {"observer": "c"}]}], cells, {"m"}, {"end_user_report"})
     with pytest.raises(ValueError, match="no passing O71 cell supports a report route for m on Max"):
         pa.check_routes([{"id": "bad", "plan": "Max", "modelIds": ["m"], "valueMultipleKind": "end_user_report"}], cells, {"m"}, {"end_user_report"})
-    with pytest.raises(ValueError, match="are not the cell's admitting reports"):
+    with pytest.raises(ValueError, match="are not a passing cell's admitting reports"):
         pa.check_routes([{"id": "odd", "plan": "Pro", "modelIds": ["m"], "valueMultipleKind": "end_user_report", "independentReports": [{"observer": "c"}, {}]}],
                         cells, {"m"}, {"end_user_report"})
 
