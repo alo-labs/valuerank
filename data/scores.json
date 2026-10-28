@@ -26457,6 +26457,7 @@
         "claude-opus-5-5": {
           "status": "measured, target-workload unmatched",
           "routeId": "claude-pro-opus55-semianalysis",
+          "crossEffort": false,
           "costUsd": 158.77276952112044,
           "costScore": 53.511355528972736,
           "value": 64.16075927060695,
@@ -26468,6 +26469,7 @@
         "gpt-6.1-sol": {
           "status": "measured, target-workload unmatched",
           "routeId": "chatgpt-pro500-gpt61sol-semianalysis",
+          "crossEffort": false,
           "costUsd": 114.47361271340715,
           "costScore": 58.11487226371908,
           "value": 62.61450682625437,
@@ -26479,6 +26481,7 @@
         "gpt-6-astra": {
           "status": "measured, target-workload unmatched",
           "routeId": "chatgpt-pro200-gpt6astra-semianalysis",
+          "crossEffort": false,
           "costUsd": 406.2854955570795,
           "costScore": 40.28913376965987,
           "value": 58.779159702551496,
@@ -54713,6 +54716,7 @@
           "gpt-6.1-sol-high": {
             "status": "measured, target-workload unmatched",
             "routeId": "chatgpt-pro500-gpt-6.1-sol-high-common-gpt-assumption",
+            "crossEffort": true,
             "costUsd": 40.01788395312951,
             "costScore": 50.61727664393484,
             "value": 55.5354801209504,
@@ -54721,6 +54725,7 @@
           "claude-opus-5-5-high": {
             "status": "measured, target-workload unmatched",
             "routeId": "claude-pro-claude-opus-5-5-high-common-opus55-assumption",
+            "crossEffort": true,
             "costUsd": 31.58180348427274,
             "costScore": 53.14146312153767,
             "value": 58.38673913553433,
@@ -54732,6 +54737,7 @@
           "claude-opus-5-5-medium": {
             "status": "measured, target-workload unmatched",
             "routeId": "claude-pro-claude-opus-5-5-medium-common-opus55-assumption",
+            "crossEffort": true,
             "costUsd": 24.171414285944287,
             "costScore": 55.99260158357388,
             "value": 58.25300118587574,
@@ -54740,6 +54746,7 @@
           "gpt-6.1-sol-medium": {
             "status": "measured, target-workload unmatched",
             "routeId": "chatgpt-pro500-gpt-6.1-sol-medium-common-gpt-assumption",
+            "crossEffort": true,
             "costUsd": 29.525225142667672,
             "costScore": 53.85940310645262,
             "value": 54.116398143155074,
@@ -54748,6 +54755,7 @@
           "gpt-6-astra-high": {
             "status": "measured, target-workload unmatched",
             "routeId": "chatgpt-pro200-gpt-6-astra-high-common-gpt-assumption",
+            "crossEffort": true,
             "costUsd": 164.45253229812272,
             "costScore": 35.54867392144667,
             "value": 52.84277812117194,

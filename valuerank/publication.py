@@ -41,6 +41,9 @@ BENCHMARK_URLS = {
 
 
 def plan_evidence_label(route):
+    if route.get("sameModelAcrossEfforts"):
+        # O88, O90 (I74 L1): the same model's controlled measurement serving another effort is measured evidence.
+        return "Same-model measurement from another effort (owner decisions O88, O90)"
     if route.get("evidenceClass") == "user_assumption":
         return "Provisional assumption"
     if route.get("evidenceClass") == "provider_quota_ceiling":

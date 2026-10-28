@@ -634,3 +634,25 @@ def test_a_same_model_route_shares_its_donors_precedence():
     assert pr.select_route([same_model("bigger", 20.0), exact])["route"]["id"] == "exact"
     plain = candidate("transfer", 10.0, "assumption")
     assert pr.select_route([plain, after])["route"]["id"] == "reports-after"
+
+
+def test_every_route_kind_maps_to_one_admission_case_and_same_model_flags_are_checked():
+    """I74 M1, L3: an O88 route is case 3 (measured), a transfer case 2, an exact measurement case 3; the build refuses a
+    same-model flag without a controlled donor of the same model on the same plan at another configuration."""
+
+    day = date(2026, 10, 25)
+    donor = dict(route("donor", 10.0, models=("m",)), plan="Pro", sourceModel="M")
+    same = dict(route("same", 10.0, kind="user_assumption", models=("m-high",)), plan="Pro", sourceModel="M", donorRouteId="donor",
+                sameModelAcrossEfforts=True, sourceEvidenceClass="controlled_account_workload_projection")
+    transfer = dict(route("transfer", 10.0, kind="user_assumption", models=("m-high",)), plan="Pro", sourceModel="Other", donorRouteId="donor",
+                    sourceEvidenceClass="controlled_account_workload_projection")
+    table = {row["route"]["id"]: row for row in pr.admission_table("m-high", None, [donor, same, transfer], day)}
+    assert (table["same"]["case"], table["same"]["crossEffort"]) == (3, True) and table["transfer"]["case"] == 2
+    assert pr.admission_table("m", None, [donor], day)[0]["case"] == 3
+    pr.check_same_model_routes({"routes": [donor, same]})
+    pr.check_same_model_routes({"routes": [donor, same]}, {"m": "M", "m-high": "M"})
+    for bad in ({**same, "donorRouteId": "missing"}, {**same, "plan": "Max"}, {**same, "modelIds": ["other-high"]}):
+        with pytest.raises(ValueError):
+            pr.check_same_model_routes({"routes": [donor, bad]})
+    with pytest.raises(ValueError):
+        pr.check_same_model_routes({"routes": [donor, same]}, {"m": "M", "m-high": "Not M"})

@@ -313,6 +313,24 @@ def change_flagged(candidate: dict | None) -> bool:
 
 
 
+def check_same_model_routes(document: dict, families: dict | None = None) -> None:
+    """I74 L3: a route flagged ``sameModelAcrossEfforts`` (which O90 grades as measured) must name a controlled donor
+    measurement of the same model on the same plan, at another configuration of that model."""
+
+    by_id = {route["id"]: route for route in document["routes"]}
+    for route in document["routes"]:
+        if not route.get("sameModelAcrossEfforts"):
+            continue
+        source = by_id.get(route.get("donorRouteId") or "")
+        if source is None or source.get("valueMultipleKind") not in CONTROLLED_KINDS:
+            raise ValueError(f"{route['id']}: a same-model route needs a controlled donor measurement (O88, O90)")
+        mine, theirs = (route.get("modelIds") or [None])[0], (source.get("modelIds") or [None])[0]
+        same_model = (families or {}).get(mine, mine) == (families or {}).get(theirs, theirs) if mine in (families or {}) and theirs in (families or {}) \
+            else str(mine).startswith(f"{theirs}-")
+        if source.get("plan") != route.get("plan") or mine == theirs or not same_model or source.get("sourceModel") != route.get("sourceModel"):
+            raise ValueError(f"{route['id']}: its donor {source['id']} is not the same model's measurement on {route.get('plan')} at another configuration (O88, O90)")
+
+
 def check_allocation_regimes(document: dict) -> None:
     """E220: a controlled subscription-account measurement keeps the allocation regime it was measured under (AGENTS.md),
     so measurements under different regimes are never compared or pooled as one."""
@@ -441,9 +459,11 @@ IDENTIFIED = {"point-identified", "set-identified"}
 def admission_table(model_id: str, configuration_effort: str | None, routes: list[dict], release_day: date, window: dict | None = None) -> list[dict]:
     """E106/E123: every route-measurement pair naming the model, classified once by case and the three predicates.
 
-    1 execution-identity incompatibility (excluded); 2 owner-named transfer
-    (display only, never identifies M_W); 3 exact-route measurement with
-    unidentified transport (displayed, interval-ineligible); 4 exact-route
+    1 execution-identity incompatibility (excluded); 2 owner assumption: an
+    owner-named transfer or an O46 ceiling (display only, never identifies
+    M_W); 3 measurement with unidentified transport, exact-route or, under
+    O90, an O88 route measured on the same model at another effort
+    (displayed, interval-ineligible); 4 exact-route
     measurement on an unreconciled price basis (unmatched under O7: diagnostic
     only); 5 evidence failing admission (diagnostic only); and "identified" for
     exact-route measurements with an identified M_W.
@@ -470,7 +490,7 @@ def admission_table(model_id: str, configuration_effort: str | None, routes: lis
             transport = case == "identified"
             valued = candidate["valuation"] in {"release", "revalued"}
             table.append({
-                **candidate, "case": case, "officialDisplayEligible": case not in (4, 5),
+                **candidate, "case": case, "crossEffort": bool(route.get("sameModelAcrossEfforts")), "officialDisplayEligible": case not in (4, 5),
                 "targetTransportIdentified": transport, "planIntervalEligible": transport and valued,
             })
     return table

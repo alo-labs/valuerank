@@ -809,6 +809,7 @@ def assemble(configurations: list[dict], documents: dict, *, release_day: date, 
     families = {item["id"]: configuration_family(item) for item in configurations}
     allowance_cells = plan_admission.evaluate(documents.get("planReports") or {"reports": []}, policy.get("reportEligibilityProfile") or {}, release_day, families)
     plan_admission.check_routes(documents["planRoutes"]["routes"], allowance_cells, set(families), plan_routes.REPORT_KINDS, families)
+    plan_routes.check_same_model_routes(documents["planRoutes"], families)
     # I51 L7: an O46 ceiling is recomputed from its recorded credits, rate and fee, so the stored multiple cannot drift.
     for route in documents["planRoutes"]["routes"]:
         if route.get("evidenceClass") == "provider_quota_ceiling":
@@ -2132,7 +2133,9 @@ def _measured_only_view(rows: list[dict], frozen: dict, per_row: dict, plan_rows
         score_value = anchor_math.cost_score(cost, anchors) if anchors else None
         value = anchor_math.value_score(score_value, row["summary"].displayed, BETA)
         status = "measured, target-workload identified" if selected["identification"] in plan_routes.IDENTIFIED else "measured, target-workload unmatched"
-        entries[row["id"]] = {"status": status, "routeId": selected["route"]["id"], "costUsd": cost, "costScore": score_value, "value": value}
+        # I74 L2: a row measured on the same model at another effort (an O88 route, O90) says so.
+        entries[row["id"]] = {"status": status, "routeId": selected["route"]["id"], "crossEffort": bool(selected["route"].get("sameModelAcrossEfforts")),
+                              "costUsd": cost, "costScore": score_value, "value": value}
         values[row["id"]] = value
     ranks = competition_ranks(values)
     for row_id, rank in ranks.items():

@@ -1756,3 +1756,11 @@ Asked on I64 Q1 whether future O71 admissions should be executed by the build fr
 - L3 (adopted, comparator changed with a test): see O90's second bullet.
 - L4 / Q2 (asked; O90, engine changed with tests).
 - Round status (O56): clean (no Medium or higher), the first clean round at Opus high. Draft r133.
+
+## Internal review I74 (Claude Opus 5.5, effort high, on r133) — adopted, modified or rejected
+- M1 (adopted, engine changed with a test): E106 case (3) now names an O88 route (measured on the same model at another effort, O90) beside exact-route measurements, case (1)'s parenthesis points to case (3), and E113's admission text matches the build's published string; the admission table publishes `crossEffort`, and a test maps a transfer to case 2 and an exact measurement and an O88 route to case 3.
+- L1 (adopted): `plan_evidence_label` labels an O88 route "Same-model measurement from another effort (owner decisions O88, O90)" in raw-data.md and on the site (it no longer keys on the legacy `evidenceClass`); methodology.md's grade sentence and E166 amount list name the O88 measurement and the O46 ceiling.
+- L2 (adopted): each measured-only view entry publishes `crossEffort`, and E113 says rows mark it.
+- L3 (adopted, build check with a test): `check_same_model_routes` refuses a `sameModelAcrossEfforts` flag unless the route names a controlled donor measurement of the same model (AA family where both configurations are known), on the same plan, at another configuration, with the same source model.
+- L4 (adopted): the draft says "another effort" means another configuration than the max row the figure binds to, since SemiAnalysis states no effort and E246 binds an unstated effort to the max row.
+- Round status (O56): not clean (one Medium). Draft r134; the Opus high count restarts.
