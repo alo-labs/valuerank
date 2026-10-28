@@ -864,6 +864,7 @@ def assemble(configurations: list[dict], documents: dict, *, release_day: date, 
     rows, supplements, tracks = [], leaf_supplements(documents), track_records(documents)
     check_captured_footnotes(documents.get("frontierCapture"), documents.get("aaFootnotes"))
     check_capture_twins(documents.get("frontierCapture"))
+    check_register_subjects(documents.get("aaFootnotes"), set(mapping) | {item["id"] for item in configurations})
     check_surface_notes(documents, documents.get("aaFootnotes"))
     for configuration in configurations:
         model_id, effort = configuration["id"], configuration.get("effort")
@@ -902,11 +903,8 @@ def assemble(configurations: list[dict], documents: dict, *, release_day: date, 
             "routeSelection": plan_routes.route_selection(candidates),
             # O100, O106: the registered class of every AA note on the row's chart point, model page, Coding Agent Index record
             # and cost-chart rows (and their charts), combined (the build stops on an unregistered note).
-            "aaNoteClass": combined_note_class(
-                [configuration.get("aaNote"), *page_notes(page), *((agent_records.get(agent_labels[model_id]) or {}).get("notes") or []),
-                 *chart_notes(documents["costCharts"], labels)],
-                [*(documents["codingAgents"].get("notes") or [] if agent_records.get(agent_labels[model_id]) else []), *chart_level_notes(documents["costCharts"], labels)],
-                documents.get("aaFootnotes"), model_id),
+            # O109: the notes by surface; the class is combined after admission, from the admitted components only.
+            "aaNoteSources": note_sources(configuration, page, agent_records.get(agent_labels[model_id]), documents, labels),
             "aaNote": chart_footnote(configuration, points),
             "admissionTable": plan_routes.admission_table(model_id, effort, routes, release_day, window, faults, families),
         })
@@ -931,6 +929,7 @@ def assemble(configurations: list[dict], documents: dict, *, release_day: date, 
     admitted = [component for component in admitted if component not in deferred]
     main = basket.workload_hash(admitted)
     for row in rows + listed:
+        row["aaNoteClass"] = admitted_note_class(row, admitted, documents.get("aaFootnotes"))
         row["cost"] = basket.row_cost(row["components"], admitted)
         selected = row["routeSelection"]["selected"]
         row["plan"] = plan_routes.plan_cost(row["cost"]["costUsd"], selected)
@@ -1117,6 +1116,16 @@ def check_surface_notes(documents: dict, register: dict | None) -> None:
 TWIN_LIST_FIELDS = {"order", "tier", "intelligence_gap", "cost_ratio"}
 
 
+def check_register_subjects(register: dict | None, known: set) -> None:
+    """I88 L1: every configuration a chart-level note's ``appliesTo`` names is a known configuration (the build stops on a
+    typo, a family name or any other ID that would silently match no row)."""
+
+    for entry in (register or {}).get("notes", []):
+        unknown = sorted(set(entry.get("appliesTo") or []) - known)
+        if unknown:
+            raise ValueError(f"AA note register entry {entry.get('text')!r} applies to unknown configurations {unknown} (I88 L1)")
+
+
 def check_capture_twins(capture: dict | None) -> None:
     """I85 L3: each frontier and near-frontier entry equals its twin in ``points`` (same page URL and circle) on every shared
     field but its list position, the footnote included; the build stops otherwise."""
@@ -1142,32 +1151,56 @@ def page_notes(page: dict | None) -> list[str]:
     return list((page or {}).get("notes") or [])
 
 
-def basket_label(capture: dict | None, labels: dict, slug: str) -> str | None:
-    """I87 L4: a row's mapped label on a basket cost chart, which must name a row the chart holds (the build stops otherwise)."""
+def basket_label(capture: dict | None, labels: dict, slug: str, configuration: dict | None = None) -> str | None:
+    """I87 L4: a row's mapped label on a basket cost chart, which must name a row the chart holds; I88 L3: a null label while
+    the chart holds a row named as the configuration ("Name (effort)") would silently drop its cost and notes. The build
+    stops on either."""
 
     label = labels.get(slug)
     evaluation = next((item for item in (capture or {}).get("evaluations", []) if item.get("slug") == slug), None)
-    if label is not None and evaluation is not None and not any(row.get("model") == label for row in evaluation.get("rows", [])):
+    models = {row.get("model") for row in (evaluation or {}).get("rows", [])}
+    if label is not None and evaluation is not None and label not in models:
         raise ValueError(f"{slug}: the configuration map's label {label!r} names no row on the captured chart (I87 L4)")
+    if label is None and configuration and f"{configuration.get('name')} ({configuration.get('effort')})" in models:
+        raise ValueError(f"{slug}: the chart holds a row for {configuration['id']} but the configuration map gives it no label (I88 L3)")
     return label
 
 
-def chart_notes(capture: dict | None, labels: dict) -> list[str]:
-    """O106, O108: the notes on the row's own rows of the basket cost charts (charts outside the cost workload never count)."""
+def chart_notes(capture: dict | None, labels: dict, slug: str, configuration: dict | None = None) -> list[str]:
+    """O106: the notes on the row's own row of one basket cost chart."""
 
-    found = []
-    for slug in basket.CHART_COMPONENTS:
-        label = basket_label(capture, labels, slug)
-        evaluation = next((item for item in (capture or {}).get("evaluations", []) if item.get("slug") == slug), {})
-        found += [note for row in evaluation.get("rows", []) if label is not None and row.get("model") == label for note in row.get("notes") or []]
-    return found
+    label = basket_label(capture, labels, slug, configuration)
+    evaluation = next((item for item in (capture or {}).get("evaluations", []) if item.get("slug") == slug), {})
+    return [note for row in evaluation.get("rows", []) if label is not None and row.get("model") == label for note in row.get("notes") or []]
 
 
-def chart_level_notes(capture: dict | None, labels: dict) -> list[str]:
-    """O106, O108, I87 L3: the notes printed on a basket cost chart that holds the row (they name no row themselves)."""
+def chart_level_notes(capture: dict | None, labels: dict, slug: str) -> list[str]:
+    """O106, I87 L3: the notes printed on one basket cost chart that holds the row (they name no row themselves)."""
 
-    return [note for evaluation in (capture or {}).get("evaluations", []) if evaluation.get("slug") in basket.CHART_COMPONENTS
-            and labels.get(evaluation["slug"]) is not None for note in evaluation.get("notes") or []]
+    evaluation = next((item for item in (capture or {}).get("evaluations", []) if item.get("slug") == slug), {})
+    return list(evaluation.get("notes") or []) if labels.get(slug) is not None else []
+
+
+def note_sources(configuration: dict, page: dict | None, record: dict | None, documents: dict, labels: dict) -> dict:
+    """O106, O108, O109: a row's AA notes by surface: always (the chart footnote and the model page), and per basket component
+    its own row's notes and the notes printed for that whole chart or index."""
+
+    charts = documents.get("costCharts") or {}
+    agents = documents.get("codingAgents") or {}
+    return {
+        "always": [configuration.get("aaNote"), *page_notes(page)],
+        "rows": {basket.CODING_AGENT_INDEX: list((record or {}).get("notes") or []), **{slug: chart_notes(charts, labels, slug, configuration) for slug in basket.CHART_COMPONENTS}},
+        "shared": {basket.CODING_AGENT_INDEX: list(agents.get("notes") or []) if record else [], **{slug: chart_level_notes(charts, labels, slug) for slug in basket.CHART_COMPONENTS}},
+    }
+
+
+def admitted_note_class(row: dict, admitted: list[str], register: dict | None) -> dict | None:
+    """O109 (2026-10-28): the row's note class from its chart footnote, its model page and the components admitted to this
+    ranking's cost workload; a pending component's notes change nothing until it is admitted."""
+
+    sources = row.get("aaNoteSources") or {"always": [row.get("aaNote")], "rows": {}, "shared": {}}
+    return combined_note_class([*sources["always"], *(note for slug in admitted for note in sources["rows"].get(slug, []))],
+                               [note for slug in admitted for note in sources["shared"].get(slug, [])], register, row["id"])
 
 
 def combined_note_class(notes: list[str | None], shared: list[str], register: dict | None, model_id: str | None = None) -> dict | None:
@@ -2219,7 +2252,7 @@ def score(assembled: dict, frozen: dict) -> dict:
               "yield to two concordant user reports for their own model and plan, and the transfers resting on them follow: " + ", ".join(fault_flagged)
               if fault_flagged else "no selected route rests on a measurement in a fault window"),
         # I80 L5: O94 rows, with the factor each competes over.
-        _rule("AA cost omits a pricing term (O94, O98)", "fired" if caveated else "passed",
+        _rule("AA cost omits a pricing term (O94, O98, O106, O108, O109)", "fired" if caveated else "passed",
               "ranked at the published cost; compete in interval and scenario outputs over [C, factor × C] ([C, ∞) without a stated factor, O98) without a label, and leave the anchor "
               "population at the next freeze: " + ", ".join(f"{row['id']} (up to {caveat_factor(row):g}×)" if caveat_factor(row) else f"{row['id']} (no factor stated: [C, ∞), O98)" for row in caveated)
               if caveated else "no AA cost note names an omitted pricing term"),

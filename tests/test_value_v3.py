@@ -2184,9 +2184,10 @@ def test_capture_twins_and_post_o103_surface_notes():
 
 def test_a_pricing_omission_on_any_ai_surface_makes_an_o94_row():
     """O106: notes from the chart, the model page, the Coding Agent Index and the basket cost charts are combined; a pricing
-    omission anywhere makes the row an O94 row with the largest factor, none when any states none. O108: charts outside the
-    basket never count. I87 L3: a chart-level pricing note applies only to the configurations it lists; I87 L4: a mapped
-    basket label must name a chart row."""
+    omission anywhere makes the row an O94 row with the largest factor, none when any states none. O108, O109: only basket
+    components admitted to the ranking's workload count. I87 L3, I88 L1: a chart-level pricing note applies only to the known
+    configurations it lists; I87 L4, I88 L3: a basket label must name a chart row, and a chart row named as the
+    configuration needs a label."""
 
     register = {"notes": [{"text": "Chart.", "kind": "not a pricing omission", "factor": None}, {"text": "Twice.", "kind": "pricing omission", "factor": 2.0},
                           {"text": "Thrice.", "kind": "pricing omission", "factor": 3.0}, {"text": "Open.", "kind": "pricing omission", "factor": None},
@@ -2198,14 +2199,28 @@ def test_a_pricing_omission_on_any_ai_surface_makes_an_o94_row():
     assert v.combined_note_class([], ["Shared."], register, "a")["factor"] == 4.0 and v.combined_note_class([], ["Shared."], register, "b") is None
     with pytest.raises(ValueError, match="must list the configurations"):
         v.combined_note_class([], ["Twice."], register, "a")
+    v.check_register_subjects(register, {"a"})
+    with pytest.raises(ValueError, match="applies to unknown configurations"):
+        v.check_register_subjects(register, {"b"})
     assert v.page_notes(None) == [] and v.page_notes({"notes": ["Twice."]}) == ["Twice."]
     charts = {"evaluations": [{"slug": "itbench-aa", "notes": ["Shared."], "rows": [{"model": "A (max)", "notes": ["Twice."]}]},
                               {"slug": "frontiercode", "notes": ["Open."], "rows": [{"model": "A (max)", "notes": ["Open."]}]}]}
-    assert v.chart_notes(charts, {"itbench-aa": "A (max)", "frontiercode": "A (max)"}) == ["Twice."]
-    assert v.chart_level_notes(charts, {"itbench-aa": "A (max)"}) == ["Shared."] and v.chart_level_notes(charts, {}) == []
-    assert v.chart_notes(None, {}) == [] and v.chart_notes(charts, {"itbench-aa": None}) == []
+    labels = {"itbench-aa": "A (max)", "frontiercode": "A (max)"}
+    assert v.chart_notes(charts, labels, "itbench-aa") == ["Twice."] and v.chart_level_notes(charts, labels, "itbench-aa") == ["Shared."]
+    assert v.chart_level_notes(charts, {}, "itbench-aa") == [] and v.chart_notes(None, {}, "itbench-aa") == []
     with pytest.raises(ValueError, match="names no row on the captured chart"):
-        v.chart_notes(charts, {"itbench-aa": "Renamed (max)"})
+        v.chart_notes(charts, {"itbench-aa": "Renamed (max)"}, "itbench-aa")
+    with pytest.raises(ValueError, match="gives it no label"):
+        v.chart_notes(charts, {"itbench-aa": None}, "itbench-aa", {"id": "a", "name": "A", "effort": "max"})
+    configuration = {"id": "a", "name": "A", "effort": "max", "aaNote": "Chart."}
+    documents = {"costCharts": charts, "codingAgents": {"notes": ["Shared."]}}
+    sources = v.note_sources(configuration, {"notes": ["Thrice."]}, {"notes": ["Open."]}, documents, labels)
+    row = {"id": "a", "aaNoteSources": sources}
+    assert v.admitted_note_class(row, [], register)["factor"] == 3.0  # pending components change nothing (O109)
+    assert v.admitted_note_class(row, ["itbench-aa"], register)["factor"] == 4.0
+    assert v.admitted_note_class(row, ["itbench-aa", "coding-agent-index"], register)["factor"] is None
+    assert v.note_sources(configuration, None, None, {}, {})["shared"]["coding-agent-index"] == []
+    assert v.admitted_note_class({"id": "a", "aaNote": "Twice."}, [], register)["factor"] == 2.0
     result, frozen = scored()
     row = next(item for item in result["rows"] if item["id"] == "a")
     row["aaNoteClass"] = combined

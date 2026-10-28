@@ -1201,6 +1201,11 @@ def test_near_family_without_overlap_coverage_still_ranks(world):
     base_frontier_n = base["scores.json"]["cohort"]["frontierRequiredModelN"]
     base_cohort_n = base["scores.json"]["cohort"]["n"]
     add_near_family(world, family="GPT-5.5", model_id="gpt-5.5", slug="gpt-5-5")
+    # I88 L3: a configuration the ITBench-AA chart holds needs its map label before the build accepts it.
+    map_path = world / "data" / "v3_configuration_map.json"
+    configuration_map = json.loads(map_path.read_text())
+    configuration_map["rows"]["gpt-5.5"] = {"coding-agent-index": None, "itbench-aa": "GPT-5.5 (xhigh)"}
+    map_path.write_text(json.dumps(configuration_map))
     # O36: without Bug Hunt the near family enters the cohort but is listed, not ranked, once its search is logged.
     with pytest.raises(ValueError, match=r"gpt-5.5: no exhaustive search for (bugHunt|frontierCode|vibeCode|aiCodingDaily)"):
         run_main(world)

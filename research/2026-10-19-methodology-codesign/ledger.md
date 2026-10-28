@@ -1916,3 +1916,14 @@ Asked on I64 Q1 whether future O71 admissions should be executed by the build fr
 - L5 (adopted): the metering-announcements figure lists only metering records; profile rule 10 names the availability type.
 - L6 (adopted): the manifest names O106–O108 and the reverse record check; the register rule and refresh document state the O103 instant.
 - Round status (O56): not clean (one Medium). Draft r147; the Opus max count stays at zero.
+
+## Owner decision O109 (2026-10-28), asked on I88 Q1
+- O109 (admitted workload only): O108's basket means, per ranking, the cost charts and index admitted to that ranking's cost workload; a pending component's notes (ITBench-AA in both rankings, the Coding Agent Index in AI Coding Daily today) change nothing until it is admitted. The build keeps each row's notes by surface and combines them after admission.
+
+## Internal review I88 (Claude Opus 5.5, effort max, on r147) — adopted, modified or rejected
+- M1 (adopted as O109, engine changed with tests): `note_sources` keeps the notes by surface and `admitted_note_class` combines the chart footnote, the model page and only the admitted components' row and chart-level notes.
+- L1 (adopted, engine changed with a test): `check_register_subjects` stops the build on an `appliesTo` entry naming an unknown configuration.
+- L2 (adopted): the E212 interval cell names a limit or price change (O107); E18's two dates and E92/E228 say "by the release cutoff"; E63 and the manifest's O94 rule cite O106, O108, O109; the revision history counts I86 and I87 as the fourth and fifth Opus-max rounds; `o72Application`'s duplicate "O104:" label is removed.
+- L3 (adopted, engine changed with a test): `basket_label` also stops the build when a basket chart holds a row named as a cohort configuration ("Name (effort)") whose map label is null.
+- L4 (adopted, data changed): E269 is re-evaluated on 2026-10-28 under O105: the Haiku 5.5 launch (2026-10-07) is recorded as an availability change on the three Claude plans and the Max plans' monthly API credits (2026-10-07 Agent SDK help update) as a limit change on Max 5x and Max 20x (the conservative typing). The Claude routes' label date moves to 2026-10-07; the blocking date is 2026-10-07 on the Max plans and 2026-10-17 on Pro. No score, label or report-cell verdict changes.
+- Round status (O56): not clean (one Medium). Draft r148; the Opus max count stays at zero.

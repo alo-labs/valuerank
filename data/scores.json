@@ -14254,7 +14254,7 @@
         "region": "global",
         "status": "fails: a 5-hour figure never converts to a billing period (O82)",
         "listed": true,
-        "currentPartition": 1,
+        "currentPartition": 2,
         "partitionsWithReports": [
           0
         ],
@@ -14301,7 +14301,7 @@
         "region": "global",
         "status": "fails: 0 non-provisional report(s) in the current partition",
         "listed": true,
-        "currentPartition": 1,
+        "currentPartition": 2,
         "partitionsWithReports": [],
         "configurations": [
           "claude-opus-5-5"
@@ -14335,10 +14335,11 @@
         "region": "global",
         "status": "fails: 1 non-provisional report(s) in the current partition",
         "listed": true,
-        "currentPartition": 1,
+        "currentPartition": 2,
         "partitionsWithReports": [
           0,
-          1
+          1,
+          2
         ],
         "configurations": [
           "claude-opus-5-5"
@@ -14371,10 +14372,10 @@
             "observer": "Theo (pingdotgg)",
             "valueLower": 2446.0,
             "valueUpper": 2600.0,
-            "partition": 0,
+            "partition": null,
             "provisional": false,
             "speedMode": null,
-            "excluded": null
+            "excluded": "spans a partition split"
           },
           {
             "id": "last-lab-max20x",
@@ -14401,7 +14402,7 @@
             "observer": "NicoAica",
             "valueLower": 1294.0,
             "valueUpper": 1681.0,
-            "partition": 0,
+            "partition": 1,
             "provisional": false,
             "speedMode": null,
             "excluded": null
@@ -14411,7 +14412,7 @@
             "observer": "NicoAica",
             "valueLower": 182.0,
             "valueUpper": 212.0,
-            "partition": 1,
+            "partition": 2,
             "provisional": false,
             "speedMode": null,
             "excluded": null
@@ -14477,7 +14478,7 @@
         "region": "global",
         "status": "fails: 0 non-provisional report(s) in the current partition",
         "listed": true,
-        "currentPartition": 1,
+        "currentPartition": 2,
         "partitionsWithReports": [],
         "configurations": [
           "None"
@@ -14561,7 +14562,7 @@
         "region": "global",
         "status": "fails: 0 non-provisional report(s) in the current partition",
         "listed": true,
-        "currentPartition": 1,
+        "currentPartition": 2,
         "partitionsWithReports": [],
         "configurations": [
           "claude-opus-5-5"
@@ -14595,7 +14596,7 @@
         "region": "global",
         "status": "fails: 0 non-provisional report(s) in the current partition",
         "listed": true,
-        "currentPartition": 1,
+        "currentPartition": 2,
         "partitionsWithReports": [
           0
         ],
@@ -14642,7 +14643,7 @@
         "region": "global",
         "status": "fails: 0 non-provisional report(s) in the current partition",
         "listed": true,
-        "currentPartition": 1,
+        "currentPartition": 2,
         "partitionsWithReports": [],
         "configurations": [
           "None"
@@ -31801,7 +31802,7 @@
         "detail": "3 of 27 plan rows rest on a measurement inside an acknowledged fault window; they stay selected and yield to two concordant user reports for their own model and plan, and the transfers resting on them follow: gpt-6-astra@chatgpt-pro-500, gpt-6-luna@chatgpt-pro-500, gpt-6.1-sol@chatgpt-pro-500"
       },
       {
-        "rule": "AA cost omits a pricing term (O94, O98)",
+        "rule": "AA cost omits a pricing term (O94, O98, O106, O108, O109)",
         "status": "fired",
         "detail": "ranked at the published cost; compete in interval and scenario outputs over [C, factor × C] ([C, ∞) without a stated factor, O98) without a label, and leave the anchor population at the next freeze: claude-haiku-5-5-max (up to 5×)"
       },
@@ -31941,7 +31942,7 @@
         {
           "key": "planRoutes",
           "artifact": "data/plan_cost_routes.json",
-          "sha256": "88b5c50359d1a6a6cb065d160505c7f9d16eadd18a8d369574174da42e2335d3",
+          "sha256": "abc0e3b45f7dca48795111b680f7fd8f3cdd53b1bed9f6fd4293493d3952c723",
           "capturedAt": "2026-10-25",
           "extractor": "editorial Plan evidence registry"
         },
@@ -32016,7 +32017,7 @@
           "extractor": "valuerank.value_v3 freeze"
         }
       ],
-      "bundleHash": "c581a26a100fa42e07b08f348e740258706d00667c616a1b693fd34bfd1d445c",
+      "bundleHash": "b09d62e413000977396bad88bc21f2fc37cffc71a84d4441179c88663a8a9f4c",
       "rebuild": "every published output is rebuilt from these artifacts at the pinned publication clock (npm run verify:docs), never from live pages"
     },
     "track": {
@@ -38308,7 +38309,7 @@
           "region": "global",
           "status": "fails: a 5-hour figure never converts to a billing period (O82)",
           "listed": true,
-          "currentPartition": 1,
+          "currentPartition": 2,
           "partitionsWithReports": [
             0
           ],
@@ -38355,7 +38356,7 @@
           "region": "global",
           "status": "fails: 0 non-provisional report(s) in the current partition",
           "listed": true,
-          "currentPartition": 1,
+          "currentPartition": 2,
           "partitionsWithReports": [],
           "configurations": [
             "claude-opus-5-5"
@@ -38389,10 +38390,11 @@
           "region": "global",
           "status": "fails: 1 non-provisional report(s) in the current partition",
           "listed": true,
-          "currentPartition": 1,
+          "currentPartition": 2,
           "partitionsWithReports": [
             0,
-            1
+            1,
+            2
           ],
           "configurations": [
             "claude-opus-5-5"
@@ -38425,10 +38427,10 @@
               "observer": "Theo (pingdotgg)",
               "valueLower": 2446.0,
               "valueUpper": 2600.0,
-              "partition": 0,
+              "partition": null,
               "provisional": false,
               "speedMode": null,
-              "excluded": null
+              "excluded": "spans a partition split"
             },
             {
               "id": "last-lab-max20x",
@@ -38455,7 +38457,7 @@
               "observer": "NicoAica",
               "valueLower": 1294.0,
               "valueUpper": 1681.0,
-              "partition": 0,
+              "partition": 1,
               "provisional": false,
               "speedMode": null,
               "excluded": null
@@ -38465,7 +38467,7 @@
               "observer": "NicoAica",
               "valueLower": 182.0,
               "valueUpper": 212.0,
-              "partition": 1,
+              "partition": 2,
               "provisional": false,
               "speedMode": null,
               "excluded": null
@@ -38531,7 +38533,7 @@
           "region": "global",
           "status": "fails: 0 non-provisional report(s) in the current partition",
           "listed": true,
-          "currentPartition": 1,
+          "currentPartition": 2,
           "partitionsWithReports": [],
           "configurations": [
             "None"
@@ -38615,7 +38617,7 @@
           "region": "global",
           "status": "fails: 0 non-provisional report(s) in the current partition",
           "listed": true,
-          "currentPartition": 1,
+          "currentPartition": 2,
           "partitionsWithReports": [],
           "configurations": [
             "claude-opus-5-5"
@@ -38649,7 +38651,7 @@
           "region": "global",
           "status": "fails: 0 non-provisional report(s) in the current partition",
           "listed": true,
-          "currentPartition": 1,
+          "currentPartition": 2,
           "partitionsWithReports": [
             0
           ],
@@ -38696,7 +38698,7 @@
           "region": "global",
           "status": "fails: 0 non-provisional report(s) in the current partition",
           "listed": true,
-          "currentPartition": 1,
+          "currentPartition": 2,
           "partitionsWithReports": [],
           "configurations": [
             "None"
@@ -61547,7 +61549,7 @@
           "detail": "8 of 51 plan rows rest on a measurement inside an acknowledged fault window; they stay selected and yield to two concordant user reports for their own model and plan, and the transfers resting on them follow: gpt-5.6-luna-low@chatgpt-pro-500, gpt-6-astra-high@chatgpt-pro-500, gpt-6-luna-high@chatgpt-pro-500, gpt-6-luna-medium@chatgpt-pro-500, gpt-6-luna-xhigh@chatgpt-pro-500, gpt-6-luna@chatgpt-pro-500, gpt-6.1-sol-high@chatgpt-pro-500, gpt-6.1-sol-medium@chatgpt-pro-500"
         },
         {
-          "rule": "AA cost omits a pricing term (O94, O98)",
+          "rule": "AA cost omits a pricing term (O94, O98, O106, O108, O109)",
           "status": "fired",
           "detail": "ranked at the published cost; compete in interval and scenario outputs over [C, factor × C] ([C, ∞) without a stated factor, O98) without a label, and leave the anchor population at the next freeze: claude-haiku-5-5-high (up to 5×), claude-haiku-5-5-medium (up to 5×)"
         },
@@ -61687,7 +61689,7 @@
           {
             "key": "planRoutes",
             "artifact": "data/plan_cost_routes.json",
-            "sha256": "88b5c50359d1a6a6cb065d160505c7f9d16eadd18a8d369574174da42e2335d3",
+            "sha256": "abc0e3b45f7dca48795111b680f7fd8f3cdd53b1bed9f6fd4293493d3952c723",
             "capturedAt": "2026-10-25",
             "extractor": "editorial Plan evidence registry"
           },
@@ -61762,7 +61764,7 @@
             "extractor": "valuerank.value_v3 freeze"
           }
         ],
-        "bundleHash": "c581a26a100fa42e07b08f348e740258706d00667c616a1b693fd34bfd1d445c",
+        "bundleHash": "b09d62e413000977396bad88bc21f2fc37cffc71a84d4441179c88663a8a9f4c",
         "rebuild": "every published output is rebuilt from these artifacts at the pinned publication clock (npm run verify:docs), never from live pages"
       },
       "track": {
