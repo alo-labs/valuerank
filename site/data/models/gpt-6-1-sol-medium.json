@@ -234,11 +234,11 @@
     "fallback": null,
     "route": {
       "id": "chatgpt-pro500-gpt-6.1-sol-medium-common-gpt-assumption",
-      "planLabel": "ChatGPT Pro 500 $500 · same-model assumption (O88)",
+      "planLabel": "ChatGPT Pro 500 $500 · same-model measurement, another effort (O88, O90)",
       "planFeeUsd": 500,
       "valueMultiple": 10.772,
-      "grade": "assumption",
-      "assumptionKind": "sameModel",
+      "grade": "measured",
+      "assumptionKind": null,
       "evidenceLabel": "Provisional assumption",
       "sourceModel": "GPT-6.1 Sol",
       "sourceUrl": "https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x",
@@ -249,7 +249,7 @@
     "workload": "1453a9a0576b02ea",
     "planFlags": [
       "workload-unmatched",
-      "same-model assumption across efforts (O88)",
+      "same-model measurement from another effort (O88, O90)",
       "possibly-superseded",
       "valuation basis unverified"
     ],
@@ -318,10 +318,10 @@
     "aaCostCaveat": null,
     "selectionReason": "larger observed multiple (observed-workload multiple — target-workload ordering not identified)",
     "planAmount": {
-      "amountKind": "assumed API-equivalent consumption (same-model assumption across efforts, O88)",
-      "amountTarget": "assumed consumption",
+      "amountKind": "API-equivalent consumption measured on the same model at another effort (O88, O90)",
+      "amountTarget": "measured-workload consumption (another effort)",
       "amountUsd": 5386.0,
-      "derivation": "authorised assumption: the same model's measured multiple (another effort) times this route's cash",
+      "derivation": "same-model measurement: the multiple measured at another effort times this route's cash (O88, O90)",
       "feePeriod": "month",
       "subscriptionCashUsd": 500,
       "additionalCashUsd": 0.0,
@@ -334,13 +334,13 @@
       "capacityStatus": "capacity established on the measurement workload",
       "valuationStatus": "unverified",
       "donorRouteId": "chatgpt-pro500-gpt61sol-semianalysis",
-      "interpretationLabel": "assumed API-equivalent consumption (same-model assumption across efforts, O88), API-priced USD per month"
+      "interpretationLabel": "API-equivalent consumption measured on the same model at another effort (O88, O90), API-priced USD per month"
     }
   },
   "plans": [
     {
       "id": "chatgpt-pro500-gpt-6.1-sol-medium-common-gpt-assumption",
-      "planLabel": "ChatGPT Pro 500 $500 · same-model assumption (O88)",
+      "planLabel": "ChatGPT Pro 500 $500 · same-model measurement, another effort (O88, O90)",
       "planFeeUsd": 500,
       "valueMultiple": 10.772,
       "grade": "assumption",
@@ -348,7 +348,7 @@
       "evidenceLabel": "Provisional assumption",
       "sourceUrl": "https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x",
       "sourceDate": "2026-10-06",
-      "case": 2,
+      "case": 3,
       "officialDisplayEligible": true,
       "planIntervalEligible": false,
       "usdPerRun": 29.525225142667672,
@@ -358,7 +358,7 @@
     },
     {
       "id": "chatgpt-plus-gpt-6.1-sol-medium-common-gpt-assumption",
-      "planLabel": "ChatGPT Plus $20 · same-model assumption (O88)",
+      "planLabel": "ChatGPT Plus $20 · same-model measurement, another effort (O88, O90)",
       "planFeeUsd": 20,
       "valueMultiple": 10.55,
       "grade": "assumption",
@@ -366,7 +366,7 @@
       "evidenceLabel": "Provisional assumption",
       "sourceUrl": "https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x",
       "sourceDate": "2026-10-06",
-      "case": 2,
+      "case": 3,
       "officialDisplayEligible": true,
       "planIntervalEligible": false,
       "usdPerRun": 30.146514240456508,
@@ -376,7 +376,7 @@
     },
     {
       "id": "chatgpt-pro100-gpt-6.1-sol-medium-common-gpt-assumption",
-      "planLabel": "ChatGPT Pro 100 $100 · same-model assumption (O88)",
+      "planLabel": "ChatGPT Pro 100 $100 · same-model measurement, another effort (O88, O90)",
       "planFeeUsd": 100,
       "valueMultiple": 10.55,
       "grade": "assumption",
@@ -384,7 +384,7 @@
       "evidenceLabel": "Provisional assumption",
       "sourceUrl": "https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x",
       "sourceDate": "2026-10-06",
-      "case": 2,
+      "case": 3,
       "officialDisplayEligible": true,
       "planIntervalEligible": false,
       "usdPerRun": 30.146514240456508,
@@ -394,7 +394,7 @@
     },
     {
       "id": "chatgpt-pro200-gpt-6.1-sol-medium-common-gpt-assumption",
-      "planLabel": "ChatGPT Pro 200 $200 · same-model assumption (O88)",
+      "planLabel": "ChatGPT Pro 200 $200 · same-model measurement, another effort (O88, O90)",
       "planFeeUsd": 200,
       "valueMultiple": 10.42,
       "grade": "assumption",
@@ -402,7 +402,7 @@
       "evidenceLabel": "Provisional assumption",
       "sourceUrl": "https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x",
       "sourceDate": "2026-10-06",
-      "case": 2,
+      "case": 3,
       "officialDisplayEligible": true,
       "planIntervalEligible": false,
       "usdPerRun": 30.52262238357161,
@@ -483,46 +483,46 @@
         "stratum": "S1",
         "kernel": "primary",
         "targetProfile": "published-record reporting precision + conventional identification of missing leaves",
-        "unevaluable": "O88 same-model assumption across efforts: unevaluable with owner assumptions off (never reselected or replaced by API cost)",
-        "top1": null,
-        "top3": null,
-        "frontier": null
+        "unevaluable": null,
+        "top1": 0.0,
+        "top3": 0.0,
+        "frontier": 0.0
       },
       {
         "stratum": "S2",
         "kernel": "primary",
         "targetProfile": "published-record reporting precision + conventional identification of missing leaves + weight-specification stress",
-        "unevaluable": "O88 same-model assumption across efforts: unevaluable with owner assumptions off (never reselected or replaced by API cost)",
-        "top1": null,
-        "top3": null,
-        "frontier": null
+        "unevaluable": null,
+        "top1": 0.0,
+        "top3": 0.0,
+        "frontier": 0.0
       },
       {
         "stratum": "S1",
         "kernel": "endpoint-heavy",
         "targetProfile": "published-record reporting precision + conventional identification of missing leaves",
-        "unevaluable": "O88 same-model assumption across efforts: unevaluable with owner assumptions off (never reselected or replaced by API cost)",
-        "top1": null,
-        "top3": null,
-        "frontier": null
+        "unevaluable": null,
+        "top1": 0.0,
+        "top3": 0.0,
+        "frontier": 0.0
       },
       {
         "stratum": "S1M",
         "kernel": "primary",
         "targetProfile": "published-record reporting precision + conventional identification of missing leaves + conventional range sensitivity inside published 95% confidence intervals (no tail model)",
-        "unevaluable": "O88 same-model assumption across efforts: unevaluable with owner assumptions off (never reselected or replaced by API cost)",
-        "top1": null,
-        "top3": null,
-        "frontier": null
+        "unevaluable": null,
+        "top1": 0.0,
+        "top3": 0.0,
+        "frontier": 0.0
       },
       {
         "stratum": "S1T",
         "kernel": "primary",
         "targetProfile": "published-record leaf values redrawn with plug-in binomial task-sampling noise from each leaf's published task count (independent-task approximation; GDPval-AA from its displayed rating interval, an assumption) + conventional identification of missing leaves",
-        "unevaluable": "O88 same-model assumption across efforts: unevaluable with owner assumptions off (never reselected or replaced by API cost)",
-        "top1": null,
-        "top3": null,
-        "frontier": null
+        "unevaluable": null,
+        "top1": 0.0028,
+        "top3": 0.0033,
+        "frontier": 0.0367
       }
     ]
   },

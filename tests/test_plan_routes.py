@@ -431,7 +431,7 @@ def test_measurement_capacity_status():
     assert not any(flag.startswith("observed-usage") for flag in capped["flags"])
     assert "owner-named transfer (assumption)" not in capped["flags"]
     same = pr.plan_cost(100.0, {"route": dict(route("s", 10.0, kind="user_assumption"), sameModelAcrossEfforts=True), "grade": "assumption", "identification": "unidentified", "expiry": "fresh"})
-    assert "same-model assumption across efforts (O88)" in same["flags"] and "owner-named transfer (assumption)" not in same["flags"]
+    assert pr.CROSS_EFFORT_FLAG in same["flags"] and "owner-named transfer (assumption)" not in same["flags"]
 
 
 def test_expired_routes_leave_selection_before_any_fallback():
@@ -607,23 +607,30 @@ def test_owner_assumption_kinds_are_named_from_one_registry():
     """I71: every enumeration and count of owner assumptions is generated from OWNER_ASSUMPTIONS."""
 
     assert pr.assumption_kind({"evidenceClass": "provider_quota_ceiling"}) == "ceiling"
-    assert pr.assumption_kind({"sameModelAcrossEfforts": True}) == "sameModel" and pr.assumption_kind({}) == "transfer"
-    assert pr.assumption_kinds_text() == "an owner-named transfer, an O88 same-model assumption across efforts or an O46 provider quota ceiling"
+    assert pr.assumption_kind({"sameModelAcrossEfforts": True}) == "transfer" and pr.assumption_kind({}) == "transfer"  # O90: O88 routes are measured
+    assert pr.assumption_kinds_text() == "an owner-named transfer or an O46 provider quota ceiling"
     assert pr.assumption_kinds_text("and", plural=True).endswith("and O46 provider quota ceilings")
     assert pr.assumption_counts_text({"transfer": 2, "ceiling": 1}) == "2 owner-named transfers and 1 O46 provider quota ceiling"
-    assert pr.assumption_counts_text({"sameModel": 3}) == "3 O88 same-model assumptions across efforts" and pr.assumption_counts_text({}) == "none"
+    assert pr.assumption_counts_text({"transfer": 1}) == "1 owner-named transfer" and pr.assumption_counts_text({}) == "none"
 
 
 def test_a_same_model_route_shares_its_donors_precedence():
-    """O89: an O88 route outranks a report pair as its donor measurement would, and loses to a post-change pair the same way."""
+    """O89, O90, I73 L3: an O88 route is measured evidence ranked between an exact-effort measurement and reports; it outranks
+    a report pair, loses to a post-change pair as its donor would, and never outranks an exact-effort measurement."""
 
-    same = candidate("same", 10.0, "assumption")
-    same["route"]["sameModelAcrossEfforts"] = True
+    def same_model(identifier, multiple, **extra):
+        item = candidate(identifier, multiple, "controlled", **extra)
+        item["route"].update(sameModelAcrossEfforts=True, valueMultipleKind="user_assumption", sourceEvidenceClass="controlled_account_workload_projection", sourceModel="Elsewhere")
+        return item
+
+    same = same_model("same", 10.0)
+    assert pr.evidence_grade(same["route"], "m") == "controlled" and pr.grade_rank(same) == pr.CROSS_EFFORT
     after = candidate("reports-after", 12.0, "reports")
     after["route"]["sourcePublicationDate"] = "2026-10-20"
-    assert pr.grade_rank(same) == pr.GRADE["controlled"] and pr.select_route([same, after])["route"]["id"] == "same"
+    assert pr.select_route([same, after])["route"]["id"] == "same"
     flagged = {**same, "expiry": "possibly-superseded", "donorChangeDetectedOn": "2026-10-17"}
     assert pr.select_route([flagged, after])["route"]["id"] == "reports-after"
+    exact = candidate("exact", 8.0, "controlled")
+    assert pr.select_route([same_model("bigger", 20.0), exact])["route"]["id"] == "exact"
     plain = candidate("transfer", 10.0, "assumption")
     assert pr.select_route([plain, after])["route"]["id"] == "reports-after"
-    assert pr.select_route([{**plain, "expiry": "possibly-superseded", "donorChangeDetectedOn": "2026-10-17"}, after])["route"]["id"] == "reports-after"

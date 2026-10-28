@@ -449,7 +449,8 @@ def dated(sentence: str, release_day: str | None) -> bool:
 
 
 # I72 L1: an enumeration of Plan evidence classes naming transfers beside fallbacks, ceilings or measured routes.
-ASSUMPTION_LIST = re.compile(r"owner-named transfers?(?:,| and| or| /)[^.;]{0,80}(?:fallback|ceiling|measured route)|(?:fallback|ceiling|measured routes?)[^.;]{0,80}(?:,| and| or| /) owner-named transfers?")
+ASSUMPTION_LIST = re.compile(r"owner-named transfers?(?:,| and| or| /)[^.;]{0,80}(?:fallback|ceiling|measured route)|(?:fallback|ceiling|measured routes?)[^.;]{0,80}(?:,| and| or| /) owner-named transfers?"
+                             r"|\btransfers (?:and|or) (?:API[- ]?(?:cost )?)?fallbacks")
 ASSUMPTION_NAMED = re.compile(r"owner assumption|evidence\.assumptionKinds|O88")
 
 
@@ -704,6 +705,24 @@ def absence_problems(text: str, data: Path = DATA) -> list[str]:
     return problems
 
 
+GENERATED_DOCS = ("README.md", "methodology.md", "scores.md")
+
+
+def assumption_list_problems(root: Path) -> list[str]:
+    """I73 L1: a generated doc that lists owner-named transfers beside fallbacks, ceilings or measured routes names every kind."""
+
+    problems = []
+    for name in GENERATED_DOCS:
+        path = root / name
+        if not path.exists():
+            continue
+        for line_number, line in enumerate(path.read_text().splitlines(), 1):
+            for sentence in _SENTENCE.split(line):
+                if ASSUMPTION_LIST.search(sentence) and not ASSUMPTION_NAMED.search(sentence):
+                    problems.append(f"{name}: line {line_number}: owner-named transfers listed without the other owner-assumption kinds: {sentence[:160]}")
+    return problems
+
+
 def check(spec_dir: Path = SPEC_DIR, data: Path = DATA) -> list[str]:
     """Every problem with the newest draft: rendering, staleness against its source, and unmarked 'today' figures."""
 
@@ -719,6 +738,8 @@ def check(spec_dir: Path = SPEC_DIR, data: Path = DATA) -> list[str]:
     problems += [f"{source.name}: {problem}" for problem in pointer_problems(text, scores)]
     problems += [f"{source.name}: {problem}" for problem in registry_problems(text, manifest)]
     problems += [f"{source.name}: {problem}" for problem in absence_problems(text, data)]
+    # I73 L1: the generated docs carry the same lists, so the assumption-list rule reads them too.
+    problems += assumption_list_problems(data.parent if data == DATA else data)
     target = published(source)
     if not target.exists() or target.read_text() != rendered:
         problems.append(f"{target.name} is not the rendering of {source.name} against the current data (run `python3 -m valuerank.draft_figures render`)")

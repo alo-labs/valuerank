@@ -2033,7 +2033,8 @@ def score(assembled: dict, frozen: dict) -> dict:
         "beta": BETA,
         "anchorVersion": frozen["anchorVersion"],
         "barPolicy": frozen["barPolicy"],
-        "anchorPolicy": frozen["anchorPolicy"],
+        # I73 L1: the frozen anchor policy with the current wording of its Plan panel rule (the rule itself is unchanged).
+        "anchorPolicy": {**frozen["anchorPolicy"], "planRule": ANCHOR_POLICY["planRule"]},
         "costBoundary": {
             "label": COST_LABEL,
             "source": COST_BOUNDARY_SOURCE,
@@ -2109,7 +2110,7 @@ def score(assembled: dict, frozen: dict) -> dict:
 
 
 MEASURED_VIEW_SPEC = {
-    "admission": "exact-route measurement candidates of grade controlled or concordant reports (no transfers, no diagnostics)",
+    "admission": "measurement candidates of grade controlled (exact effort, or the same model at another effort, O90) or concordant reports (no owner assumption of any kind, no diagnostics)",
     "selection": "the official selector (E111, E88, E85) rerun among the admitted candidates",
     "anchors": "the official Plan anchor object of the row's workload",
     "panel": "rows with an admitted measured candidate; others listed as 'no measured route' (no API fallback)",
@@ -2180,7 +2181,7 @@ def _reversals(baseline: dict, branch: dict) -> list[list[str]]:
 def _measured_calibration(rows: list[dict], frozen: dict, entries: dict, plan_rows: list[dict] = ()) -> dict:
     """E164: the measured-only rows rescored on anchors built from measured evidence alone.
 
-    The official Plan anchors include owner-named transfers and API-cost fallbacks (E160), so an
+    The official Plan anchors include owner assumptions of every kind and API-cost fallbacks (E160), so an
     assumption can move measured-only ranks through the exchange rate even though no assumed route
     is in the view. Holding rows, routes, costs and quality fixed, this reports what calibration alone does.
     """
@@ -2441,9 +2442,9 @@ AMOUNT_KINDS = {
     "capacity": "measured-workload capacity",
     "observed": "observed eligible consumption (capacity not established)",
     "ceiling": "provider quota ceiling: the full quota at API rates (O46; full use assumed)",
-    "sameModel": "assumed API-equivalent consumption (same-model assumption across efforts, O88)",
+    "sameModel": "API-equivalent consumption measured on the same model at another effort (O88, O90)",
 }
-AMOUNT_TARGETS = {"ceiling": "full-quota consumption", "sameModel": "assumed consumption", "transfer": "assumed consumption", "identified": "target-workload capacity", "capacity": "measured-workload capacity", "observed": "measured-workload consumption"}
+AMOUNT_TARGETS = {"ceiling": "full-quota consumption", "sameModel": "measured-workload consumption (another effort)", "transfer": "assumed consumption", "identified": "target-workload capacity", "capacity": "measured-workload capacity", "observed": "measured-workload consumption"}
 NO_TARGET_LINEAGE = "not derivable: the target solution's cash lineage is not established"
 
 
@@ -2453,7 +2454,7 @@ def _amount_derivation(kind: str, route: dict, multiple: float, gross: float) ->
     if kind == "ceiling":
         return (multiple * gross if math.isfinite(gross) else None), "quota ceiling: the tier's credits at the provider's API rate"
     if kind == "sameModel":
-        return (multiple * gross if math.isfinite(gross) else None), "authorised assumption: the same model's measured multiple (another effort) times this route's cash"
+        return (multiple * gross if math.isfinite(gross) else None), "same-model measurement: the multiple measured at another effort times this route's cash (O88, O90)"
     if kind == "transfer":
         return (multiple * gross if math.isfinite(gross) else None), "authorised assumption: the donor's multiple times this route's cash"
     if kind == "identified":

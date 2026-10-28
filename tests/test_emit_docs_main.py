@@ -134,7 +134,7 @@ def test_scores_md_ranking_matches_scores_json(emitted):
     assert len(table_rows(text, "| Model | Reasons")) == 53
     assert "### API basis: rank 1" in text and "### Plan basis: on the frontier" in text
     # O48: the Plan streams exclude transfer-dependent plan rows, each named as a configuration on its plan.
-    assert "Plan streams S1, S2, S1 endpoint-heavy, S1M and S1T run with owner assumptions off (owner-named transfers, O88 same-model assumptions across efforts and O46 provider quota ceilings; E167): Claude Haiku 5.5 (max) on Claude Max 20x," in text
+    assert "Plan streams S1, S2, S1 endpoint-heavy, S1M and S1T run with owner assumptions off (owner-named transfers and O46 provider quota ceilings; E167): Claude Haiku 5.5 (max) on Claude Max 20x," in text
     assert "| $1,178 per month: assumed API-equivalent consumption (owner-named transfer) from claude-pro-opus55-semianalysis |" in text
     assert "| Gemini 4 Argon (high) | — | — | — |" in text
     assert "| quality 64.9 | Claude Sonnet 5.5 (max) | not scenario-supported |" in text
@@ -310,19 +310,22 @@ def test_terminal_bench_harness_diagnostic_reports_tau_when_defined(repo_copy, p
 
 def test_calibration_without_official_anchors_or_values_says_so(repo_copy, pinned_clock):
     def no_calibration(document):
-        calibration = document["v3"]["measuredOnlyPlanView"]["calibration"]
-        for item in calibration["workloads"].values():
-            item["officialAnchorProvenance"] = None
-            item["status"] = "measured-evidence calibration unavailable (fewer than two measured references)"
-        calibration.update(status="measured-evidence calibration unavailable", values={}, reversals=[], maxAbsValueChange=None)
+        # O90: the AI Coding Daily ranking now has measured references too, so both rankings lose their calibration here.
+        for section in [document["v3"], *document.get("v3Tracks", {}).values()]:
+            calibration = section["measuredOnlyPlanView"]["calibration"]
+            for item in calibration["workloads"].values():
+                item["officialAnchorProvenance"] = None
+                item["status"] = "measured-evidence calibration unavailable (fewer than two measured references)"
+            calibration.update(status="measured-evidence calibration unavailable", values={}, reversals=[], maxAbsValueChange=None)
 
     edit_json(repo_copy, "scores.json", no_calibration)
     assert emit(repo_copy) == 0
     text = (repo_copy / "scores.md").read_text()
     section = text.split("#### Measured-evidence calibration (diagnostic)", 1)[1].split("## Interval outputs", 1)[0]
     assert "Status: measured-evidence calibration unavailable." in section
-    # The max-effort ranking has a main and a subset workload (O17), each with its own anchors.
-    assert section.count("The workload has no official Plan anchors.") == 2
+    # The max-effort ranking has a main and a subset workload (O17), each with its own anchors; the AI Coding Daily
+    # ranking's calibration (measured references since O90) has one workload.
+    assert section.count("The workload has no official Plan anchors.") == 3
     assert "Value on measured anchors" not in section and "Pairwise reversals" not in section
 
 

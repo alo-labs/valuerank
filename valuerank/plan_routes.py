@@ -40,6 +40,10 @@ CONTROLLED_KINDS = {"controlled_account_workload_projection", "controlled_measur
 ASSUMPTION_KINDS = {"user_assumption"}
 REPORT_KINDS = {"user_reported_projection", "end_user_report", "community_observed"}
 GRADE = {"controlled": 3, "reports": 2, "assumption": 1, "diagnostic": 0}
+# O89, O90: a measurement of the same model at another effort (an O88 route) is measured evidence that ranks below an
+# exact-effort measurement and above concordant reports, so it keeps its donor's precedence against reports only.
+CROSS_EFFORT = 2.75
+CROSS_EFFORT_FLAG = "same-model measurement from another effort (O88, O90)"
 # O78: a controlled route flagged by a detected change ranks just below a report pair measured after that change.
 POST_CHANGE_SUPERSEDED = 1.5
 
@@ -49,10 +53,10 @@ def grade_rank(candidate: dict) -> float:
 
     if candidate.get("postChangeSuperseded"):
         return POST_CHANGE_SUPERSEDED
-    # O89: an O88 same-model route shares its donor measurement's precedence against reports for the same model and plan,
-    # so every effort of a model keeps one multiple; it stays graded (and labelled) an assumption.
-    if candidate["grade"] == "assumption" and candidate["route"].get("sameModelAcrossEfforts"):
-        return GRADE["controlled"]
+    # O89, O90, I73 L3: an O88 same-model route is a measurement of another effort; it outranks reports (one multiple per
+    # model) but never an exact-effort measurement.
+    if candidate["grade"] == "controlled" and candidate["route"].get("sameModelAcrossEfforts"):
+        return CROSS_EFFORT
     return GRADE[candidate["grade"]]
 
 
@@ -71,7 +75,7 @@ def post_change_ranks(candidates: list[dict]) -> list[dict]:
     for candidate in candidates:
         route = candidate["route"]
         # O89: an O88 route follows its donor's detected change, as it shares the donor's precedence.
-        shares_donor = candidate["grade"] == "assumption" and route.get("sameModelAcrossEfforts")
+        shares_donor = candidate["grade"] == "controlled" and route.get("sameModelAcrossEfforts")
         changed = route.get("changeDetectedOn") or (candidate.get("donorChangeDetectedOn") if shares_donor else None)
         superseded = (candidate["grade"] == "controlled" or shares_donor) and bool(changed and candidate.get("expiry") in {"possibly-superseded", "expired"}
                       and any(other["grade"] == "reports" and other["route"].get("plan") == route.get("plan")
@@ -136,8 +140,10 @@ def evidence_grade(route: dict, model_id: str) -> str:
     if kind in CONTROLLED_KINDS:
         return "controlled" if same_model or len(route.get("modelIds", [])) == 1 else "assumption"
     if kind in ASSUMPTION_KINDS:
-        # The donor model's own route is its measurement; other models carry the owner-named transfer.
-        return "controlled" if same_model and source_kind in CONTROLLED_KINDS else "assumption"
+        # The donor model's own route is its measurement; other models carry the owner-named transfer. O90: an O88 route
+        # (the same model's measurement at another effort) is measured evidence too.
+        cross_effort = route.get("sameModelAcrossEfforts") and source_kind in CONTROLLED_KINDS
+        return "controlled" if (same_model or cross_effort) and source_kind in CONTROLLED_KINDS else "assumption"
     if kind in REPORT_KINDS and pooled_reports(route.get("independentReports") or []) is not None:
         return "reports"
     return "diagnostic"
@@ -568,17 +574,15 @@ def route_selection(candidates: list[dict]) -> dict:
 # I71: the one registry of owner-assumption kinds; every flag, amount type, count and enumeration is generated from it.
 OWNER_ASSUMPTIONS = {
     "transfer": ("owner-named transfer", "owner-named transfers"),
-    "sameModel": ("O88 same-model assumption across efforts", "O88 same-model assumptions across efforts"),
     "ceiling": ("O46 provider quota ceiling", "O46 provider quota ceilings"),
 }
 
 
 def assumption_kind(route: dict) -> str:
-    """Which owner assumption an assumption-graded route is (O45/2026-10-18 transfer, O88 same-model, O46 ceiling)."""
+    """Which owner assumption an assumption-graded route is (O45/2026-10-18 transfer or O46 ceiling; an O88 route is
+    measured evidence under O90, not an assumption)."""
 
-    if route.get("evidenceClass") == "provider_quota_ceiling":
-        return "ceiling"
-    return "sameModel" if route.get("sameModelAcrossEfforts") else "transfer"
+    return "ceiling" if route.get("evidenceClass") == "provider_quota_ceiling" else "transfer"
 
 
 def assumption_kinds_text(conjunction: str = "or", plural: bool = False) -> str:
@@ -600,7 +604,7 @@ MEASURED_GRADES = {"controlled", "reports"}
 
 
 def measured_only_selection(candidates: list[dict]) -> dict:
-    """E113: the measured-only view reruns the same selector among exact-route measurements (no transfers)."""
+    """E113: the measured-only view reruns the same selector among measurements (no owner assumption of any kind)."""
 
     return route_selection([candidate for candidate in candidates if candidate["grade"] in MEASURED_GRADES])
 
@@ -627,8 +631,8 @@ def plan_cost(api_cost: float | None, selected: dict | None) -> dict:
     if selected["identification"] not in {"point-identified", "set-identified"}:
         flags.append("workload-unmatched")
     kind = assumption_kind(route) if selected["grade"] == "assumption" else None
-    if kind == "sameModel":
-        flags.append("same-model assumption across efforts (O88)")
+    if route.get("sameModelAcrossEfforts"):
+        flags.append(CROSS_EFFORT_FLAG)
     elif kind == "transfer":
         flags.append("owner-named transfer (assumption)")
     if selected["expiry"] in {"possibly-superseded", "expired"}:

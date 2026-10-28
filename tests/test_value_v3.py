@@ -1069,8 +1069,8 @@ def test_plan_amount_is_typed_by_what_the_measurement_establishes():
     ceiling = v.plan_amount({**base, "grade": "assumption", "route": {**route, "evidenceClass": "provider_quota_ceiling"}})
     assert ceiling["amountKind"].startswith("provider quota ceiling") and ceiling["amountTarget"] == "full-quota consumption"
     assert ceiling["amountUsd"] == pytest.approx(250.0) and ceiling["derivation"].startswith("quota ceiling")
-    same = v.plan_amount({**base, "grade": "assumption", "route": {**route, "sameModelAcrossEfforts": True}})
-    assert same["amountKind"].endswith("(same-model assumption across efforts, O88)") and same["derivation"].startswith("authorised assumption: the same model")
+    same = v.plan_amount({**base, "route": {**route, "sameModelAcrossEfforts": True}})
+    assert same["amountKind"].endswith("at another effort (O88, O90)") and same["derivation"].startswith("same-model measurement")
     unpriced = v.plan_amount({**base, "grade": "assumption", "route": {**route, "evidenceClass": "provider_quota_ceiling", "planPriceUsd": None, "additionalCashUsd": None}})
     assert unpriced["amountUsd"] is None
     identified = {**base, "identification": "point-identified"}

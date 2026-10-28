@@ -94,9 +94,9 @@
       "authorizedOn": "2026-10-07",
       "evidenceType": "Controlled subscription-account measurements with agentic workload projections."
     },
-    "gptApplication": "User authorizes the same ChatGPT plan multiples for every GPT model. Owner decision O45 (2026-10-23), as amended by O88 (2026-10-28): GPT-6.1 Sol and GPT-6 Astra keep their own SemiAnalysis figures on every ChatGPT plan, bound to each model's unsuffixed (max) row because SemiAnalysis names the models without an effort; each of their other efforts (GPT-6.1 Sol at xhigh, high, medium and low, GPT-6 Astra at xhigh and high, ranked as their own rows under O33) takes its own model's figure per plan as a labelled same-model assumption (O88: an allowance is effort-invariant, O87); every other GPT model takes, per plan, the lower of the two reported model-conditional figures as a labelled user assumption naming its donor route. Routes are one row per model and plan.",
+    "gptApplication": "User authorizes the same ChatGPT plan multiples for every GPT model. Owner decision O45 (2026-10-23), as amended by O88 (2026-10-28): GPT-6.1 Sol and GPT-6 Astra keep their own SemiAnalysis figures on every ChatGPT plan, bound to each model's unsuffixed (max) row because SemiAnalysis names the models without an effort; each of their other efforts (GPT-6.1 Sol at xhigh, high, medium and low, GPT-6 Astra at xhigh and high, ranked as their own rows under O33) takes its own model's figure per plan as a labelled same-model measurement from another effort (O88; measured evidence under O90; an allowance is effort-invariant, O87); every other GPT model takes, per plan, the lower of the two reported model-conditional figures as a labelled user assumption naming its donor route. Routes are one row per model and plan.",
     "routeGranularity": "Owner decision O45 (2026-10-23): every route row names exactly one model and one plan.",
-    "o72Application": "Owner decisions O72-O89 (2026-10-26 to 2026-10-28): after the O71 search found no model × tier with two concordant user reports, the owner-authorised routes stay (the SemiAnalysis selection with its O40/O45 assumptions, the O46 MiMo quota ceilings) and providers without one (Google, Kimi, MiniMax) stay on API fallback. Two concordant user reports replace only an assumption-based or fallback route; an exact controlled measurement keeps precedence (O73) unless a detected change flags it and a concordant pair for the same plan is dated after that change (O78). Admission stays the strict all-reports concordance test (O74); every release runs all three O71 stages over every cell (O75); speed-mode reports convert at the provider's multiplier, flagged (O76); a provider's announcement of a metering change triggers E18 (O77); a change to a shared meter flags every plan on it (O79); a 5-hour figure stays in its own unit and never converts (O80, O82); a provider-documented change splits the partition too (O83); a change detected on any Kimi plan splits every Kimi plan (O84); every report cell is tested, and one on a plan the Plan ranking does not list is evidence only (O85). O86: concordance is the largest lower bound at most 1.20x the smallest upper bound. O87: an allowance is effort-invariant, so reports pool across efforts of one model. O88: a SemiAnalysis figure for a model serves every effort of that model as a labelled same-model assumption. O89: an O88 same-model route shares its donor measurement's precedence and change flag against reports for the same model and plan.",
+    "o72Application": "Owner decisions O72-O90 (2026-10-26 to 2026-10-28): after the O71 search found no model × tier with two concordant user reports, the owner-authorised routes stay (the SemiAnalysis selection with its O40/O45 assumptions, the O46 MiMo quota ceilings) and providers without one (Google, Kimi, MiniMax) stay on API fallback. Two concordant user reports replace only an assumption-based or fallback route; an exact controlled measurement keeps precedence (O73) unless a detected change flags it and a concordant pair for the same plan is dated after that change (O78). Admission stays the strict all-reports concordance test (O74); every release runs all three O71 stages over every cell (O75); speed-mode reports convert at the provider's multiplier, flagged (O76); a provider's announcement of a metering change triggers E18 (O77); a change to a shared meter flags every plan on it (O79); a 5-hour figure stays in its own unit and never converts (O80, O82); a provider-documented change splits the partition too (O83); a change detected on any Kimi plan splits every Kimi plan (O84); every report cell is tested, and one on a plan the Plan ranking does not list is evidence only (O85). O86: concordance is the largest lower bound at most 1.20x the smallest upper bound. O87: an allowance is effort-invariant, so reports pool across efforts of one model. O88: a SemiAnalysis figure for a model serves every effort of that model, labelled; O90 counts it as measured evidence. O89: an O88 same-model route shares its donor measurement's precedence and change flag against reports for the same model and plan.",
     "reportEligibilityProfile": {
       "version": "O71 v1 (E270), 2026-10-26",
       "rules": [
@@ -171,8 +171,8 @@
       ]
     },
     "mimoApplication": "Owner decision O46 (2026-10-23), an explicit exception to the end-user numerator rule: each MiMo-V2.6 model takes, per Token Plan tier, the quota-implied ceiling (the tier's monthly credits valued at Xiaomi's pay-as-you-go rate for that model, divided by the list fee), labelled provider-derived. It replaces the 2026-10-08 provisional 1.5x assumption. End-user measurements for the exact model and tier replace the ceiling once they meet the admission rule of any other provider's route (O11); one report alone does not (owner decision O62).",
-    "unsupportedModels": "Use API fallback; do not transfer evidence across model versions or variants except for the explicit common GPT, Claude and MiMo assumptions; across thinking effort, plan-allowance evidence for a model serves its other efforts (O87 for user reports, O88 for SemiAnalysis measurements, as labelled same-model assumptions).",
-    "claudeApplication": "User authorizes (2026-10-18, Option 2) applying Opus 5.5's measured SemiAnalysis Claude plan multiples to every other Claude model. Opus 5.5 keeps its exact measured routes; the shared routes are labelled user assumptions, carry the recorded caution that allowances are model-specific (Fable 5.1 measured 12.4-12.7x on the same plans), and are superseded by any exact measurement for the listed model. Claude Fable 5.1 (retained 2026-10-21, owner decision O31) has exact SemiAnalysis measurements on Max 5x (12.73x) and Max 20x (12.425x), which replace the shared routes for it; it has no Pro route, because the source records Fable as unavailable on Pro, so there is no Pro allowance to measure or assume. Owner decision O33 (2026-10-21) ranks Claude Haiku 5.5 (max, high, medium, low) and Claude Sonnet 5.5 (xhigh, high, medium, low) as their own rows; as other Claude models in the roster they take the shared assumption routes. Owner decision O88 (2026-10-28): Opus 5.5's other efforts (xhigh, high, medium) take its figure as a same-model assumption across efforts, not as the shared assumption; the multiple is the same."
+    "unsupportedModels": "Use API fallback; do not transfer evidence across model versions or variants except for the explicit common GPT, Claude and MiMo assumptions; across thinking effort, plan-allowance evidence for a model serves its other efforts (O87 for user reports, O88 for SemiAnalysis measurements, labelled and counted as measured evidence under O90).",
+    "claudeApplication": "User authorizes (2026-10-18, Option 2) applying Opus 5.5's measured SemiAnalysis Claude plan multiples to every other Claude model. Opus 5.5 keeps its exact measured routes; the shared routes are labelled user assumptions, carry the recorded caution that allowances are model-specific (Fable 5.1 measured 12.4-12.7x on the same plans), and are superseded by any exact measurement for the listed model. Claude Fable 5.1 (retained 2026-10-21, owner decision O31) has exact SemiAnalysis measurements on Max 5x (12.73x) and Max 20x (12.425x), which replace the shared routes for it; it has no Pro route, because the source records Fable as unavailable on Pro, so there is no Pro allowance to measure or assume. Owner decision O33 (2026-10-21) ranks Claude Haiku 5.5 (max, high, medium, low) and Claude Sonnet 5.5 (xhigh, high, medium, low) as their own rows; as other Claude models in the roster they take the shared assumption routes. Owner decision O88 (2026-10-28): Opus 5.5's other efforts (xhigh, high, medium) take its figure as a same-model measurement from another effort (measured evidence under O90), not as the shared assumption; the multiple is the same."
   },
   "identificationYield": {
     "rows": 27,
@@ -304,7 +304,7 @@
     {
       "id": "chatgpt-plus-gpt-6.1-sol-xhigh-common-gpt-assumption",
       "provider": "OpenAI",
-      "planLabel": "ChatGPT Plus $20 · same-model assumption (O88)",
+      "planLabel": "ChatGPT Plus $20 · same-model measurement, another effort (O88, O90)",
       "planFeeUsd": 20,
       "valueMultiple": 10.55,
       "apiEquivalentUsd": 211,
@@ -316,12 +316,12 @@
       "modelSlugs": [
         "gpt-6-1-sol-xhigh"
       ],
-      "notes": "Same-model assumption for gpt-6.1-sol-xhigh (owner decision O88, 2026-10-28): a plan's allowance is effort-invariant (O87), so GPT-6.1 Sol's own SemiAnalysis figure on ChatGPT Plus (10.55x, measured at the effort SemiAnalysis ran) serves every effort of GPT-6.1 Sol, replacing the O45 lower-of assumption for this row. It does not measure gpt-6.1-sol-xhigh. Original figures and workload are retained in sourceEvidence.semianalysis."
+      "notes": "Same-model measurement from another effort for gpt-6.1-sol-xhigh (owner decision O88, 2026-10-28): a plan's allowance is effort-invariant (O87), so GPT-6.1 Sol's own SemiAnalysis figure on ChatGPT Plus (10.55x, measured at the effort SemiAnalysis ran) serves every effort of GPT-6.1 Sol, replacing the O45 lower-of assumption for this row. It does not measure gpt-6.1-sol-xhigh. Original figures and workload are retained in sourceEvidence.semianalysis."
     },
     {
       "id": "chatgpt-plus-gpt-6.1-sol-high-common-gpt-assumption",
       "provider": "OpenAI",
-      "planLabel": "ChatGPT Plus $20 · same-model assumption (O88)",
+      "planLabel": "ChatGPT Plus $20 · same-model measurement, another effort (O88, O90)",
       "planFeeUsd": 20,
       "valueMultiple": 10.55,
       "apiEquivalentUsd": 211,
@@ -333,12 +333,12 @@
       "modelSlugs": [
         "gpt-6-1-sol-high"
       ],
-      "notes": "Same-model assumption for gpt-6.1-sol-high (owner decision O88, 2026-10-28): a plan's allowance is effort-invariant (O87), so GPT-6.1 Sol's own SemiAnalysis figure on ChatGPT Plus (10.55x, measured at the effort SemiAnalysis ran) serves every effort of GPT-6.1 Sol, replacing the O45 lower-of assumption for this row. It does not measure gpt-6.1-sol-high. Original figures and workload are retained in sourceEvidence.semianalysis."
+      "notes": "Same-model measurement from another effort for gpt-6.1-sol-high (owner decision O88, 2026-10-28): a plan's allowance is effort-invariant (O87), so GPT-6.1 Sol's own SemiAnalysis figure on ChatGPT Plus (10.55x, measured at the effort SemiAnalysis ran) serves every effort of GPT-6.1 Sol, replacing the O45 lower-of assumption for this row. It does not measure gpt-6.1-sol-high. Original figures and workload are retained in sourceEvidence.semianalysis."
     },
     {
       "id": "chatgpt-plus-gpt-6.1-sol-medium-common-gpt-assumption",
       "provider": "OpenAI",
-      "planLabel": "ChatGPT Plus $20 · same-model assumption (O88)",
+      "planLabel": "ChatGPT Plus $20 · same-model measurement, another effort (O88, O90)",
       "planFeeUsd": 20,
       "valueMultiple": 10.55,
       "apiEquivalentUsd": 211,
@@ -350,12 +350,12 @@
       "modelSlugs": [
         "gpt-6-1-sol-medium"
       ],
-      "notes": "Same-model assumption for gpt-6.1-sol-medium (owner decision O88, 2026-10-28): a plan's allowance is effort-invariant (O87), so GPT-6.1 Sol's own SemiAnalysis figure on ChatGPT Plus (10.55x, measured at the effort SemiAnalysis ran) serves every effort of GPT-6.1 Sol, replacing the O45 lower-of assumption for this row. It does not measure gpt-6.1-sol-medium. Original figures and workload are retained in sourceEvidence.semianalysis."
+      "notes": "Same-model measurement from another effort for gpt-6.1-sol-medium (owner decision O88, 2026-10-28): a plan's allowance is effort-invariant (O87), so GPT-6.1 Sol's own SemiAnalysis figure on ChatGPT Plus (10.55x, measured at the effort SemiAnalysis ran) serves every effort of GPT-6.1 Sol, replacing the O45 lower-of assumption for this row. It does not measure gpt-6.1-sol-medium. Original figures and workload are retained in sourceEvidence.semianalysis."
     },
     {
       "id": "chatgpt-plus-gpt-6.1-sol-low-common-gpt-assumption",
       "provider": "OpenAI",
-      "planLabel": "ChatGPT Plus $20 · same-model assumption (O88)",
+      "planLabel": "ChatGPT Plus $20 · same-model measurement, another effort (O88, O90)",
       "planFeeUsd": 20,
       "valueMultiple": 10.55,
       "apiEquivalentUsd": 211,
@@ -367,7 +367,7 @@
       "modelSlugs": [
         "gpt-6-1-sol-low"
       ],
-      "notes": "Same-model assumption for gpt-6.1-sol-low (owner decision O88, 2026-10-28): a plan's allowance is effort-invariant (O87), so GPT-6.1 Sol's own SemiAnalysis figure on ChatGPT Plus (10.55x, measured at the effort SemiAnalysis ran) serves every effort of GPT-6.1 Sol, replacing the O45 lower-of assumption for this row. It does not measure gpt-6.1-sol-low. Original figures and workload are retained in sourceEvidence.semianalysis."
+      "notes": "Same-model measurement from another effort for gpt-6.1-sol-low (owner decision O88, 2026-10-28): a plan's allowance is effort-invariant (O87), so GPT-6.1 Sol's own SemiAnalysis figure on ChatGPT Plus (10.55x, measured at the effort SemiAnalysis ran) serves every effort of GPT-6.1 Sol, replacing the O45 lower-of assumption for this row. It does not measure gpt-6.1-sol-low. Original figures and workload are retained in sourceEvidence.semianalysis."
     },
     {
       "id": "chatgpt-pro100-gpt61sol-semianalysis",
@@ -491,7 +491,7 @@
     {
       "id": "chatgpt-pro100-gpt-6.1-sol-xhigh-common-gpt-assumption",
       "provider": "OpenAI",
-      "planLabel": "ChatGPT Pro 100 $100 · same-model assumption (O88)",
+      "planLabel": "ChatGPT Pro 100 $100 · same-model measurement, another effort (O88, O90)",
       "planFeeUsd": 100,
       "valueMultiple": 10.55,
       "apiEquivalentUsd": 1055,
@@ -503,12 +503,12 @@
       "modelSlugs": [
         "gpt-6-1-sol-xhigh"
       ],
-      "notes": "Same-model assumption for gpt-6.1-sol-xhigh (owner decision O88, 2026-10-28): a plan's allowance is effort-invariant (O87), so GPT-6.1 Sol's own SemiAnalysis figure on ChatGPT Pro 100 (10.55x, measured at the effort SemiAnalysis ran) serves every effort of GPT-6.1 Sol, replacing the O45 lower-of assumption for this row. It does not measure gpt-6.1-sol-xhigh. Original figures and workload are retained in sourceEvidence.semianalysis."
+      "notes": "Same-model measurement from another effort for gpt-6.1-sol-xhigh (owner decision O88, 2026-10-28): a plan's allowance is effort-invariant (O87), so GPT-6.1 Sol's own SemiAnalysis figure on ChatGPT Pro 100 (10.55x, measured at the effort SemiAnalysis ran) serves every effort of GPT-6.1 Sol, replacing the O45 lower-of assumption for this row. It does not measure gpt-6.1-sol-xhigh. Original figures and workload are retained in sourceEvidence.semianalysis."
     },
     {
       "id": "chatgpt-pro100-gpt-6.1-sol-high-common-gpt-assumption",
       "provider": "OpenAI",
-      "planLabel": "ChatGPT Pro 100 $100 · same-model assumption (O88)",
+      "planLabel": "ChatGPT Pro 100 $100 · same-model measurement, another effort (O88, O90)",
       "planFeeUsd": 100,
       "valueMultiple": 10.55,
       "apiEquivalentUsd": 1055,
@@ -520,12 +520,12 @@
       "modelSlugs": [
         "gpt-6-1-sol-high"
       ],
-      "notes": "Same-model assumption for gpt-6.1-sol-high (owner decision O88, 2026-10-28): a plan's allowance is effort-invariant (O87), so GPT-6.1 Sol's own SemiAnalysis figure on ChatGPT Pro 100 (10.55x, measured at the effort SemiAnalysis ran) serves every effort of GPT-6.1 Sol, replacing the O45 lower-of assumption for this row. It does not measure gpt-6.1-sol-high. Original figures and workload are retained in sourceEvidence.semianalysis."
+      "notes": "Same-model measurement from another effort for gpt-6.1-sol-high (owner decision O88, 2026-10-28): a plan's allowance is effort-invariant (O87), so GPT-6.1 Sol's own SemiAnalysis figure on ChatGPT Pro 100 (10.55x, measured at the effort SemiAnalysis ran) serves every effort of GPT-6.1 Sol, replacing the O45 lower-of assumption for this row. It does not measure gpt-6.1-sol-high. Original figures and workload are retained in sourceEvidence.semianalysis."
     },
     {
       "id": "chatgpt-pro100-gpt-6.1-sol-medium-common-gpt-assumption",
       "provider": "OpenAI",
-      "planLabel": "ChatGPT Pro 100 $100 · same-model assumption (O88)",
+      "planLabel": "ChatGPT Pro 100 $100 · same-model measurement, another effort (O88, O90)",
       "planFeeUsd": 100,
       "valueMultiple": 10.55,
       "apiEquivalentUsd": 1055,
@@ -537,12 +537,12 @@
       "modelSlugs": [
         "gpt-6-1-sol-medium"
       ],
-      "notes": "Same-model assumption for gpt-6.1-sol-medium (owner decision O88, 2026-10-28): a plan's allowance is effort-invariant (O87), so GPT-6.1 Sol's own SemiAnalysis figure on ChatGPT Pro 100 (10.55x, measured at the effort SemiAnalysis ran) serves every effort of GPT-6.1 Sol, replacing the O45 lower-of assumption for this row. It does not measure gpt-6.1-sol-medium. Original figures and workload are retained in sourceEvidence.semianalysis."
+      "notes": "Same-model measurement from another effort for gpt-6.1-sol-medium (owner decision O88, 2026-10-28): a plan's allowance is effort-invariant (O87), so GPT-6.1 Sol's own SemiAnalysis figure on ChatGPT Pro 100 (10.55x, measured at the effort SemiAnalysis ran) serves every effort of GPT-6.1 Sol, replacing the O45 lower-of assumption for this row. It does not measure gpt-6.1-sol-medium. Original figures and workload are retained in sourceEvidence.semianalysis."
     },
     {
       "id": "chatgpt-pro100-gpt-6.1-sol-low-common-gpt-assumption",
       "provider": "OpenAI",
-      "planLabel": "ChatGPT Pro 100 $100 · same-model assumption (O88)",
+      "planLabel": "ChatGPT Pro 100 $100 · same-model measurement, another effort (O88, O90)",
       "planFeeUsd": 100,
       "valueMultiple": 10.55,
       "apiEquivalentUsd": 1055,
@@ -554,7 +554,7 @@
       "modelSlugs": [
         "gpt-6-1-sol-low"
       ],
-      "notes": "Same-model assumption for gpt-6.1-sol-low (owner decision O88, 2026-10-28): a plan's allowance is effort-invariant (O87), so GPT-6.1 Sol's own SemiAnalysis figure on ChatGPT Pro 100 (10.55x, measured at the effort SemiAnalysis ran) serves every effort of GPT-6.1 Sol, replacing the O45 lower-of assumption for this row. It does not measure gpt-6.1-sol-low. Original figures and workload are retained in sourceEvidence.semianalysis."
+      "notes": "Same-model measurement from another effort for gpt-6.1-sol-low (owner decision O88, 2026-10-28): a plan's allowance is effort-invariant (O87), so GPT-6.1 Sol's own SemiAnalysis figure on ChatGPT Pro 100 (10.55x, measured at the effort SemiAnalysis ran) serves every effort of GPT-6.1 Sol, replacing the O45 lower-of assumption for this row. It does not measure gpt-6.1-sol-low. Original figures and workload are retained in sourceEvidence.semianalysis."
     },
     {
       "id": "chatgpt-pro200-gpt61sol-semianalysis",
@@ -678,7 +678,7 @@
     {
       "id": "chatgpt-pro200-gpt-6.1-sol-xhigh-common-gpt-assumption",
       "provider": "OpenAI",
-      "planLabel": "ChatGPT Pro 200 $200 · same-model assumption (O88)",
+      "planLabel": "ChatGPT Pro 200 $200 · same-model measurement, another effort (O88, O90)",
       "planFeeUsd": 200,
       "valueMultiple": 10.42,
       "apiEquivalentUsd": 2084,
@@ -690,12 +690,12 @@
       "modelSlugs": [
         "gpt-6-1-sol-xhigh"
       ],
-      "notes": "Same-model assumption for gpt-6.1-sol-xhigh (owner decision O88, 2026-10-28): a plan's allowance is effort-invariant (O87), so GPT-6.1 Sol's own SemiAnalysis figure on ChatGPT Pro 200 (10.42x, measured at the effort SemiAnalysis ran) serves every effort of GPT-6.1 Sol, replacing the O45 lower-of assumption for this row. It does not measure gpt-6.1-sol-xhigh. Original figures and workload are retained in sourceEvidence.semianalysis."
+      "notes": "Same-model measurement from another effort for gpt-6.1-sol-xhigh (owner decision O88, 2026-10-28): a plan's allowance is effort-invariant (O87), so GPT-6.1 Sol's own SemiAnalysis figure on ChatGPT Pro 200 (10.42x, measured at the effort SemiAnalysis ran) serves every effort of GPT-6.1 Sol, replacing the O45 lower-of assumption for this row. It does not measure gpt-6.1-sol-xhigh. Original figures and workload are retained in sourceEvidence.semianalysis."
     },
     {
       "id": "chatgpt-pro200-gpt-6.1-sol-high-common-gpt-assumption",
       "provider": "OpenAI",
-      "planLabel": "ChatGPT Pro 200 $200 · same-model assumption (O88)",
+      "planLabel": "ChatGPT Pro 200 $200 · same-model measurement, another effort (O88, O90)",
       "planFeeUsd": 200,
       "valueMultiple": 10.42,
       "apiEquivalentUsd": 2084,
@@ -707,12 +707,12 @@
       "modelSlugs": [
         "gpt-6-1-sol-high"
       ],
-      "notes": "Same-model assumption for gpt-6.1-sol-high (owner decision O88, 2026-10-28): a plan's allowance is effort-invariant (O87), so GPT-6.1 Sol's own SemiAnalysis figure on ChatGPT Pro 200 (10.42x, measured at the effort SemiAnalysis ran) serves every effort of GPT-6.1 Sol, replacing the O45 lower-of assumption for this row. It does not measure gpt-6.1-sol-high. Original figures and workload are retained in sourceEvidence.semianalysis."
+      "notes": "Same-model measurement from another effort for gpt-6.1-sol-high (owner decision O88, 2026-10-28): a plan's allowance is effort-invariant (O87), so GPT-6.1 Sol's own SemiAnalysis figure on ChatGPT Pro 200 (10.42x, measured at the effort SemiAnalysis ran) serves every effort of GPT-6.1 Sol, replacing the O45 lower-of assumption for this row. It does not measure gpt-6.1-sol-high. Original figures and workload are retained in sourceEvidence.semianalysis."
     },
     {
       "id": "chatgpt-pro200-gpt-6.1-sol-medium-common-gpt-assumption",
       "provider": "OpenAI",
-      "planLabel": "ChatGPT Pro 200 $200 · same-model assumption (O88)",
+      "planLabel": "ChatGPT Pro 200 $200 · same-model measurement, another effort (O88, O90)",
       "planFeeUsd": 200,
       "valueMultiple": 10.42,
       "apiEquivalentUsd": 2084,
@@ -724,12 +724,12 @@
       "modelSlugs": [
         "gpt-6-1-sol-medium"
       ],
-      "notes": "Same-model assumption for gpt-6.1-sol-medium (owner decision O88, 2026-10-28): a plan's allowance is effort-invariant (O87), so GPT-6.1 Sol's own SemiAnalysis figure on ChatGPT Pro 200 (10.42x, measured at the effort SemiAnalysis ran) serves every effort of GPT-6.1 Sol, replacing the O45 lower-of assumption for this row. It does not measure gpt-6.1-sol-medium. Original figures and workload are retained in sourceEvidence.semianalysis."
+      "notes": "Same-model measurement from another effort for gpt-6.1-sol-medium (owner decision O88, 2026-10-28): a plan's allowance is effort-invariant (O87), so GPT-6.1 Sol's own SemiAnalysis figure on ChatGPT Pro 200 (10.42x, measured at the effort SemiAnalysis ran) serves every effort of GPT-6.1 Sol, replacing the O45 lower-of assumption for this row. It does not measure gpt-6.1-sol-medium. Original figures and workload are retained in sourceEvidence.semianalysis."
     },
     {
       "id": "chatgpt-pro200-gpt-6.1-sol-low-common-gpt-assumption",
       "provider": "OpenAI",
-      "planLabel": "ChatGPT Pro 200 $200 · same-model assumption (O88)",
+      "planLabel": "ChatGPT Pro 200 $200 · same-model measurement, another effort (O88, O90)",
       "planFeeUsd": 200,
       "valueMultiple": 10.42,
       "apiEquivalentUsd": 2084,
@@ -741,7 +741,7 @@
       "modelSlugs": [
         "gpt-6-1-sol-low"
       ],
-      "notes": "Same-model assumption for gpt-6.1-sol-low (owner decision O88, 2026-10-28): a plan's allowance is effort-invariant (O87), so GPT-6.1 Sol's own SemiAnalysis figure on ChatGPT Pro 200 (10.42x, measured at the effort SemiAnalysis ran) serves every effort of GPT-6.1 Sol, replacing the O45 lower-of assumption for this row. It does not measure gpt-6.1-sol-low. Original figures and workload are retained in sourceEvidence.semianalysis."
+      "notes": "Same-model measurement from another effort for gpt-6.1-sol-low (owner decision O88, 2026-10-28): a plan's allowance is effort-invariant (O87), so GPT-6.1 Sol's own SemiAnalysis figure on ChatGPT Pro 200 (10.42x, measured at the effort SemiAnalysis ran) serves every effort of GPT-6.1 Sol, replacing the O45 lower-of assumption for this row. It does not measure gpt-6.1-sol-low. Original figures and workload are retained in sourceEvidence.semianalysis."
     },
     {
       "id": "chatgpt-pro500-gpt61sol-semianalysis",
@@ -865,7 +865,7 @@
     {
       "id": "chatgpt-pro500-gpt-6.1-sol-xhigh-common-gpt-assumption",
       "provider": "OpenAI",
-      "planLabel": "ChatGPT Pro 500 $500 · same-model assumption (O88)",
+      "planLabel": "ChatGPT Pro 500 $500 · same-model measurement, another effort (O88, O90)",
       "planFeeUsd": 500,
       "valueMultiple": 10.772,
       "apiEquivalentUsd": 5386,
@@ -877,12 +877,12 @@
       "modelSlugs": [
         "gpt-6-1-sol-xhigh"
       ],
-      "notes": "Same-model assumption for gpt-6.1-sol-xhigh (owner decision O88, 2026-10-28): a plan's allowance is effort-invariant (O87), so GPT-6.1 Sol's own SemiAnalysis figure on ChatGPT Pro 500 (10.772x, measured at the effort SemiAnalysis ran) serves every effort of GPT-6.1 Sol, replacing the O45 lower-of assumption for this row. It does not measure gpt-6.1-sol-xhigh. Original figures and workload are retained in sourceEvidence.semianalysis."
+      "notes": "Same-model measurement from another effort for gpt-6.1-sol-xhigh (owner decision O88, 2026-10-28): a plan's allowance is effort-invariant (O87), so GPT-6.1 Sol's own SemiAnalysis figure on ChatGPT Pro 500 (10.772x, measured at the effort SemiAnalysis ran) serves every effort of GPT-6.1 Sol, replacing the O45 lower-of assumption for this row. It does not measure gpt-6.1-sol-xhigh. Original figures and workload are retained in sourceEvidence.semianalysis."
     },
     {
       "id": "chatgpt-pro500-gpt-6.1-sol-high-common-gpt-assumption",
       "provider": "OpenAI",
-      "planLabel": "ChatGPT Pro 500 $500 · same-model assumption (O88)",
+      "planLabel": "ChatGPT Pro 500 $500 · same-model measurement, another effort (O88, O90)",
       "planFeeUsd": 500,
       "valueMultiple": 10.772,
       "apiEquivalentUsd": 5386,
@@ -894,12 +894,12 @@
       "modelSlugs": [
         "gpt-6-1-sol-high"
       ],
-      "notes": "Same-model assumption for gpt-6.1-sol-high (owner decision O88, 2026-10-28): a plan's allowance is effort-invariant (O87), so GPT-6.1 Sol's own SemiAnalysis figure on ChatGPT Pro 500 (10.772x, measured at the effort SemiAnalysis ran) serves every effort of GPT-6.1 Sol, replacing the O45 lower-of assumption for this row. It does not measure gpt-6.1-sol-high. Original figures and workload are retained in sourceEvidence.semianalysis."
+      "notes": "Same-model measurement from another effort for gpt-6.1-sol-high (owner decision O88, 2026-10-28): a plan's allowance is effort-invariant (O87), so GPT-6.1 Sol's own SemiAnalysis figure on ChatGPT Pro 500 (10.772x, measured at the effort SemiAnalysis ran) serves every effort of GPT-6.1 Sol, replacing the O45 lower-of assumption for this row. It does not measure gpt-6.1-sol-high. Original figures and workload are retained in sourceEvidence.semianalysis."
     },
     {
       "id": "chatgpt-pro500-gpt-6.1-sol-medium-common-gpt-assumption",
       "provider": "OpenAI",
-      "planLabel": "ChatGPT Pro 500 $500 · same-model assumption (O88)",
+      "planLabel": "ChatGPT Pro 500 $500 · same-model measurement, another effort (O88, O90)",
       "planFeeUsd": 500,
       "valueMultiple": 10.772,
       "apiEquivalentUsd": 5386,
@@ -911,12 +911,12 @@
       "modelSlugs": [
         "gpt-6-1-sol-medium"
       ],
-      "notes": "Same-model assumption for gpt-6.1-sol-medium (owner decision O88, 2026-10-28): a plan's allowance is effort-invariant (O87), so GPT-6.1 Sol's own SemiAnalysis figure on ChatGPT Pro 500 (10.772x, measured at the effort SemiAnalysis ran) serves every effort of GPT-6.1 Sol, replacing the O45 lower-of assumption for this row. It does not measure gpt-6.1-sol-medium. Original figures and workload are retained in sourceEvidence.semianalysis."
+      "notes": "Same-model measurement from another effort for gpt-6.1-sol-medium (owner decision O88, 2026-10-28): a plan's allowance is effort-invariant (O87), so GPT-6.1 Sol's own SemiAnalysis figure on ChatGPT Pro 500 (10.772x, measured at the effort SemiAnalysis ran) serves every effort of GPT-6.1 Sol, replacing the O45 lower-of assumption for this row. It does not measure gpt-6.1-sol-medium. Original figures and workload are retained in sourceEvidence.semianalysis."
     },
     {
       "id": "chatgpt-pro500-gpt-6.1-sol-low-common-gpt-assumption",
       "provider": "OpenAI",
-      "planLabel": "ChatGPT Pro 500 $500 · same-model assumption (O88)",
+      "planLabel": "ChatGPT Pro 500 $500 · same-model measurement, another effort (O88, O90)",
       "planFeeUsd": 500,
       "valueMultiple": 10.772,
       "apiEquivalentUsd": 5386,
@@ -928,7 +928,7 @@
       "modelSlugs": [
         "gpt-6-1-sol-low"
       ],
-      "notes": "Same-model assumption for gpt-6.1-sol-low (owner decision O88, 2026-10-28): a plan's allowance is effort-invariant (O87), so GPT-6.1 Sol's own SemiAnalysis figure on ChatGPT Pro 500 (10.772x, measured at the effort SemiAnalysis ran) serves every effort of GPT-6.1 Sol, replacing the O45 lower-of assumption for this row. It does not measure gpt-6.1-sol-low. Original figures and workload are retained in sourceEvidence.semianalysis."
+      "notes": "Same-model measurement from another effort for gpt-6.1-sol-low (owner decision O88, 2026-10-28): a plan's allowance is effort-invariant (O87), so GPT-6.1 Sol's own SemiAnalysis figure on ChatGPT Pro 500 (10.772x, measured at the effort SemiAnalysis ran) serves every effort of GPT-6.1 Sol, replacing the O45 lower-of assumption for this row. It does not measure gpt-6.1-sol-low. Original figures and workload are retained in sourceEvidence.semianalysis."
     },
     {
       "id": "claude-pro-opus55-semianalysis",
@@ -1885,7 +1885,7 @@
     {
       "id": "claude-pro-claude-opus-5-5-high-common-opus55-assumption",
       "provider": "Anthropic",
-      "planLabel": "Claude Pro $20 · same-model assumption (O88)",
+      "planLabel": "Claude Pro $20 · same-model measurement, another effort (O88, O90)",
       "planFeeUsd": 20,
       "valueMultiple": 58.9,
       "apiEquivalentUsd": 1178,
@@ -1897,12 +1897,12 @@
       "modelSlugs": [
         "claude-opus-5-5-high"
       ],
-      "notes": "Same-model assumption for claude-opus-5-5-high (owner decision O88, 2026-10-28): a plan's allowance is effort-invariant (O87), so Opus 5.5's own SemiAnalysis figure on Claude Pro (58.9x) serves every effort of Opus 5.5 (the same figure the common Claude assumption, owner-authorised on 2026-10-18, gave it before O88). It does not measure claude-opus-5-5-high. Original figures and workload are retained in sourceEvidence.semianalysis."
+      "notes": "Same-model measurement from another effort for claude-opus-5-5-high (owner decision O88, 2026-10-28): a plan's allowance is effort-invariant (O87), so Opus 5.5's own SemiAnalysis figure on Claude Pro (58.9x) serves every effort of Opus 5.5 (the same figure the common Claude assumption, owner-authorised on 2026-10-18, gave it before O88). It does not measure claude-opus-5-5-high. Original figures and workload are retained in sourceEvidence.semianalysis."
     },
     {
       "id": "claude-max5x-claude-opus-5-5-high-common-opus55-assumption",
       "provider": "Anthropic",
-      "planLabel": "Claude Max 5x $100 · same-model assumption (O88)",
+      "planLabel": "Claude Max 5x $100 · same-model measurement, another effort (O88, O90)",
       "planFeeUsd": 100,
       "valueMultiple": 57.25,
       "apiEquivalentUsd": 5725,
@@ -1914,12 +1914,12 @@
       "modelSlugs": [
         "claude-opus-5-5-high"
       ],
-      "notes": "Same-model assumption for claude-opus-5-5-high (owner decision O88, 2026-10-28): a plan's allowance is effort-invariant (O87), so Opus 5.5's own SemiAnalysis figure on Claude Max 5x (57.25x) serves every effort of Opus 5.5 (the same figure the common Claude assumption, owner-authorised on 2026-10-18, gave it before O88). It does not measure claude-opus-5-5-high. Original figures and workload are retained in sourceEvidence.semianalysis."
+      "notes": "Same-model measurement from another effort for claude-opus-5-5-high (owner decision O88, 2026-10-28): a plan's allowance is effort-invariant (O87), so Opus 5.5's own SemiAnalysis figure on Claude Max 5x (57.25x) serves every effort of Opus 5.5 (the same figure the common Claude assumption, owner-authorised on 2026-10-18, gave it before O88). It does not measure claude-opus-5-5-high. Original figures and workload are retained in sourceEvidence.semianalysis."
     },
     {
       "id": "claude-max20x-claude-opus-5-5-high-common-opus55-assumption",
       "provider": "Anthropic",
-      "planLabel": "Claude Max 20x $200 · same-model assumption (O88)",
+      "planLabel": "Claude Max 20x $200 · same-model measurement, another effort (O88, O90)",
       "planFeeUsd": 200,
       "valueMultiple": 58.63,
       "apiEquivalentUsd": 11726,
@@ -1931,12 +1931,12 @@
       "modelSlugs": [
         "claude-opus-5-5-high"
       ],
-      "notes": "Same-model assumption for claude-opus-5-5-high (owner decision O88, 2026-10-28): a plan's allowance is effort-invariant (O87), so Opus 5.5's own SemiAnalysis figure on Claude Max 20x (58.63x) serves every effort of Opus 5.5 (the same figure the common Claude assumption, owner-authorised on 2026-10-18, gave it before O88). It does not measure claude-opus-5-5-high. Original figures and workload are retained in sourceEvidence.semianalysis."
+      "notes": "Same-model measurement from another effort for claude-opus-5-5-high (owner decision O88, 2026-10-28): a plan's allowance is effort-invariant (O87), so Opus 5.5's own SemiAnalysis figure on Claude Max 20x (58.63x) serves every effort of Opus 5.5 (the same figure the common Claude assumption, owner-authorised on 2026-10-18, gave it before O88). It does not measure claude-opus-5-5-high. Original figures and workload are retained in sourceEvidence.semianalysis."
     },
     {
       "id": "claude-pro-claude-opus-5-5-xhigh-common-opus55-assumption",
       "provider": "Anthropic",
-      "planLabel": "Claude Pro $20 · same-model assumption (O88)",
+      "planLabel": "Claude Pro $20 · same-model measurement, another effort (O88, O90)",
       "planFeeUsd": 20,
       "valueMultiple": 58.9,
       "apiEquivalentUsd": 1178,
@@ -1948,12 +1948,12 @@
       "modelSlugs": [
         "claude-opus-5-5-xhigh"
       ],
-      "notes": "Same-model assumption for claude-opus-5-5-xhigh (owner decision O88, 2026-10-28): a plan's allowance is effort-invariant (O87), so Opus 5.5's own SemiAnalysis figure on Claude Pro (58.9x) serves every effort of Opus 5.5 (the same figure the common Claude assumption, owner-authorised on 2026-10-18, gave it before O88). It does not measure claude-opus-5-5-xhigh. Original figures and workload are retained in sourceEvidence.semianalysis."
+      "notes": "Same-model measurement from another effort for claude-opus-5-5-xhigh (owner decision O88, 2026-10-28): a plan's allowance is effort-invariant (O87), so Opus 5.5's own SemiAnalysis figure on Claude Pro (58.9x) serves every effort of Opus 5.5 (the same figure the common Claude assumption, owner-authorised on 2026-10-18, gave it before O88). It does not measure claude-opus-5-5-xhigh. Original figures and workload are retained in sourceEvidence.semianalysis."
     },
     {
       "id": "claude-max5x-claude-opus-5-5-xhigh-common-opus55-assumption",
       "provider": "Anthropic",
-      "planLabel": "Claude Max 5x $100 · same-model assumption (O88)",
+      "planLabel": "Claude Max 5x $100 · same-model measurement, another effort (O88, O90)",
       "planFeeUsd": 100,
       "valueMultiple": 57.25,
       "apiEquivalentUsd": 5725,
@@ -1965,12 +1965,12 @@
       "modelSlugs": [
         "claude-opus-5-5-xhigh"
       ],
-      "notes": "Same-model assumption for claude-opus-5-5-xhigh (owner decision O88, 2026-10-28): a plan's allowance is effort-invariant (O87), so Opus 5.5's own SemiAnalysis figure on Claude Max 5x (57.25x) serves every effort of Opus 5.5 (the same figure the common Claude assumption, owner-authorised on 2026-10-18, gave it before O88). It does not measure claude-opus-5-5-xhigh. Original figures and workload are retained in sourceEvidence.semianalysis."
+      "notes": "Same-model measurement from another effort for claude-opus-5-5-xhigh (owner decision O88, 2026-10-28): a plan's allowance is effort-invariant (O87), so Opus 5.5's own SemiAnalysis figure on Claude Max 5x (57.25x) serves every effort of Opus 5.5 (the same figure the common Claude assumption, owner-authorised on 2026-10-18, gave it before O88). It does not measure claude-opus-5-5-xhigh. Original figures and workload are retained in sourceEvidence.semianalysis."
     },
     {
       "id": "claude-max20x-claude-opus-5-5-xhigh-common-opus55-assumption",
       "provider": "Anthropic",
-      "planLabel": "Claude Max 20x $200 · same-model assumption (O88)",
+      "planLabel": "Claude Max 20x $200 · same-model measurement, another effort (O88, O90)",
       "planFeeUsd": 200,
       "valueMultiple": 58.63,
       "apiEquivalentUsd": 11726,
@@ -1982,12 +1982,12 @@
       "modelSlugs": [
         "claude-opus-5-5-xhigh"
       ],
-      "notes": "Same-model assumption for claude-opus-5-5-xhigh (owner decision O88, 2026-10-28): a plan's allowance is effort-invariant (O87), so Opus 5.5's own SemiAnalysis figure on Claude Max 20x (58.63x) serves every effort of Opus 5.5 (the same figure the common Claude assumption, owner-authorised on 2026-10-18, gave it before O88). It does not measure claude-opus-5-5-xhigh. Original figures and workload are retained in sourceEvidence.semianalysis."
+      "notes": "Same-model measurement from another effort for claude-opus-5-5-xhigh (owner decision O88, 2026-10-28): a plan's allowance is effort-invariant (O87), so Opus 5.5's own SemiAnalysis figure on Claude Max 20x (58.63x) serves every effort of Opus 5.5 (the same figure the common Claude assumption, owner-authorised on 2026-10-18, gave it before O88). It does not measure claude-opus-5-5-xhigh. Original figures and workload are retained in sourceEvidence.semianalysis."
     },
     {
       "id": "claude-pro-claude-opus-5-5-medium-common-opus55-assumption",
       "provider": "Anthropic",
-      "planLabel": "Claude Pro $20 · same-model assumption (O88)",
+      "planLabel": "Claude Pro $20 · same-model measurement, another effort (O88, O90)",
       "planFeeUsd": 20,
       "valueMultiple": 58.9,
       "apiEquivalentUsd": 1178,
@@ -1999,12 +1999,12 @@
       "modelSlugs": [
         "claude-opus-5-5-medium"
       ],
-      "notes": "Same-model assumption for claude-opus-5-5-medium (owner decision O88, 2026-10-28): a plan's allowance is effort-invariant (O87), so Opus 5.5's own SemiAnalysis figure on Claude Pro (58.9x) serves every effort of Opus 5.5 (the same figure the common Claude assumption, owner-authorised on 2026-10-18, gave it before O88). It does not measure claude-opus-5-5-medium. Original figures and workload are retained in sourceEvidence.semianalysis."
+      "notes": "Same-model measurement from another effort for claude-opus-5-5-medium (owner decision O88, 2026-10-28): a plan's allowance is effort-invariant (O87), so Opus 5.5's own SemiAnalysis figure on Claude Pro (58.9x) serves every effort of Opus 5.5 (the same figure the common Claude assumption, owner-authorised on 2026-10-18, gave it before O88). It does not measure claude-opus-5-5-medium. Original figures and workload are retained in sourceEvidence.semianalysis."
     },
     {
       "id": "claude-max5x-claude-opus-5-5-medium-common-opus55-assumption",
       "provider": "Anthropic",
-      "planLabel": "Claude Max 5x $100 · same-model assumption (O88)",
+      "planLabel": "Claude Max 5x $100 · same-model measurement, another effort (O88, O90)",
       "planFeeUsd": 100,
       "valueMultiple": 57.25,
       "apiEquivalentUsd": 5725,
@@ -2016,12 +2016,12 @@
       "modelSlugs": [
         "claude-opus-5-5-medium"
       ],
-      "notes": "Same-model assumption for claude-opus-5-5-medium (owner decision O88, 2026-10-28): a plan's allowance is effort-invariant (O87), so Opus 5.5's own SemiAnalysis figure on Claude Max 5x (57.25x) serves every effort of Opus 5.5 (the same figure the common Claude assumption, owner-authorised on 2026-10-18, gave it before O88). It does not measure claude-opus-5-5-medium. Original figures and workload are retained in sourceEvidence.semianalysis."
+      "notes": "Same-model measurement from another effort for claude-opus-5-5-medium (owner decision O88, 2026-10-28): a plan's allowance is effort-invariant (O87), so Opus 5.5's own SemiAnalysis figure on Claude Max 5x (57.25x) serves every effort of Opus 5.5 (the same figure the common Claude assumption, owner-authorised on 2026-10-18, gave it before O88). It does not measure claude-opus-5-5-medium. Original figures and workload are retained in sourceEvidence.semianalysis."
     },
     {
       "id": "claude-max20x-claude-opus-5-5-medium-common-opus55-assumption",
       "provider": "Anthropic",
-      "planLabel": "Claude Max 20x $200 · same-model assumption (O88)",
+      "planLabel": "Claude Max 20x $200 · same-model measurement, another effort (O88, O90)",
       "planFeeUsd": 200,
       "valueMultiple": 58.63,
       "apiEquivalentUsd": 11726,
@@ -2033,7 +2033,7 @@
       "modelSlugs": [
         "claude-opus-5-5-medium"
       ],
-      "notes": "Same-model assumption for claude-opus-5-5-medium (owner decision O88, 2026-10-28): a plan's allowance is effort-invariant (O87), so Opus 5.5's own SemiAnalysis figure on Claude Max 20x (58.63x) serves every effort of Opus 5.5 (the same figure the common Claude assumption, owner-authorised on 2026-10-18, gave it before O88). It does not measure claude-opus-5-5-medium. Original figures and workload are retained in sourceEvidence.semianalysis."
+      "notes": "Same-model measurement from another effort for claude-opus-5-5-medium (owner decision O88, 2026-10-28): a plan's allowance is effort-invariant (O87), so Opus 5.5's own SemiAnalysis figure on Claude Max 20x (58.63x) serves every effort of Opus 5.5 (the same figure the common Claude assumption, owner-authorised on 2026-10-18, gave it before O88). It does not measure claude-opus-5-5-medium. Original figures and workload are retained in sourceEvidence.semianalysis."
     },
     {
       "id": "chatgpt-plus-gpt-6-luna-low-common-gpt-assumption",
@@ -2310,7 +2310,7 @@
     {
       "id": "chatgpt-plus-gpt-6-astra-high-common-gpt-assumption",
       "provider": "OpenAI",
-      "planLabel": "ChatGPT Plus $20 · same-model assumption (O88)",
+      "planLabel": "ChatGPT Plus $20 · same-model measurement, another effort (O88, O90)",
       "planFeeUsd": 20,
       "valueMultiple": 8.1,
       "apiEquivalentUsd": 162,
@@ -2322,12 +2322,12 @@
       "modelSlugs": [
         "gpt-6-astra-high"
       ],
-      "notes": "Same-model assumption for gpt-6-astra-high (owner decision O88, 2026-10-28): a plan's allowance is effort-invariant (O87), so GPT-6 Astra's own SemiAnalysis figure on ChatGPT Plus (8.1x, measured at the effort SemiAnalysis ran) serves every effort of GPT-6 Astra, replacing the O45 lower-of assumption for this row. It does not measure gpt-6-astra-high. Original figures and workload are retained in sourceEvidence.semianalysis."
+      "notes": "Same-model measurement from another effort for gpt-6-astra-high (owner decision O88, 2026-10-28): a plan's allowance is effort-invariant (O87), so GPT-6 Astra's own SemiAnalysis figure on ChatGPT Plus (8.1x, measured at the effort SemiAnalysis ran) serves every effort of GPT-6 Astra, replacing the O45 lower-of assumption for this row. It does not measure gpt-6-astra-high. Original figures and workload are retained in sourceEvidence.semianalysis."
     },
     {
       "id": "chatgpt-pro100-gpt-6-astra-high-common-gpt-assumption",
       "provider": "OpenAI",
-      "planLabel": "ChatGPT Pro 100 $100 · same-model assumption (O88)",
+      "planLabel": "ChatGPT Pro 100 $100 · same-model measurement, another effort (O88, O90)",
       "planFeeUsd": 100,
       "valueMultiple": 13.22,
       "apiEquivalentUsd": 1322,
@@ -2339,12 +2339,12 @@
       "modelSlugs": [
         "gpt-6-astra-high"
       ],
-      "notes": "Same-model assumption for gpt-6-astra-high (owner decision O88, 2026-10-28): a plan's allowance is effort-invariant (O87), so GPT-6 Astra's own SemiAnalysis figure on ChatGPT Pro 100 (13.22x, measured at the effort SemiAnalysis ran) serves every effort of GPT-6 Astra, replacing the O45 lower-of assumption for this row. It does not measure gpt-6-astra-high. Original figures and workload are retained in sourceEvidence.semianalysis."
+      "notes": "Same-model measurement from another effort for gpt-6-astra-high (owner decision O88, 2026-10-28): a plan's allowance is effort-invariant (O87), so GPT-6 Astra's own SemiAnalysis figure on ChatGPT Pro 100 (13.22x, measured at the effort SemiAnalysis ran) serves every effort of GPT-6 Astra, replacing the O45 lower-of assumption for this row. It does not measure gpt-6-astra-high. Original figures and workload are retained in sourceEvidence.semianalysis."
     },
     {
       "id": "chatgpt-pro200-gpt-6-astra-high-common-gpt-assumption",
       "provider": "OpenAI",
-      "planLabel": "ChatGPT Pro 200 $200 · same-model assumption (O88)",
+      "planLabel": "ChatGPT Pro 200 $200 · same-model measurement, another effort (O88, O90)",
       "planFeeUsd": 200,
       "valueMultiple": 14.485,
       "apiEquivalentUsd": 2897,
@@ -2356,12 +2356,12 @@
       "modelSlugs": [
         "gpt-6-astra-high"
       ],
-      "notes": "Same-model assumption for gpt-6-astra-high (owner decision O88, 2026-10-28): a plan's allowance is effort-invariant (O87), so GPT-6 Astra's own SemiAnalysis figure on ChatGPT Pro 200 (14.485x, measured at the effort SemiAnalysis ran) serves every effort of GPT-6 Astra, replacing the O45 lower-of assumption for this row. It does not measure gpt-6-astra-high. Original figures and workload are retained in sourceEvidence.semianalysis."
+      "notes": "Same-model measurement from another effort for gpt-6-astra-high (owner decision O88, 2026-10-28): a plan's allowance is effort-invariant (O87), so GPT-6 Astra's own SemiAnalysis figure on ChatGPT Pro 200 (14.485x, measured at the effort SemiAnalysis ran) serves every effort of GPT-6 Astra, replacing the O45 lower-of assumption for this row. It does not measure gpt-6-astra-high. Original figures and workload are retained in sourceEvidence.semianalysis."
     },
     {
       "id": "chatgpt-pro500-gpt-6-astra-high-common-gpt-assumption",
       "provider": "OpenAI",
-      "planLabel": "ChatGPT Pro 500 $500 · same-model assumption (O88)",
+      "planLabel": "ChatGPT Pro 500 $500 · same-model measurement, another effort (O88, O90)",
       "planFeeUsd": 500,
       "valueMultiple": 13.91,
       "apiEquivalentUsd": 6955,
@@ -2373,12 +2373,12 @@
       "modelSlugs": [
         "gpt-6-astra-high"
       ],
-      "notes": "Same-model assumption for gpt-6-astra-high (owner decision O88, 2026-10-28): a plan's allowance is effort-invariant (O87), so GPT-6 Astra's own SemiAnalysis figure on ChatGPT Pro 500 (13.91x, measured at the effort SemiAnalysis ran) serves every effort of GPT-6 Astra, replacing the O45 lower-of assumption for this row. It does not measure gpt-6-astra-high. Original figures and workload are retained in sourceEvidence.semianalysis."
+      "notes": "Same-model measurement from another effort for gpt-6-astra-high (owner decision O88, 2026-10-28): a plan's allowance is effort-invariant (O87), so GPT-6 Astra's own SemiAnalysis figure on ChatGPT Pro 500 (13.91x, measured at the effort SemiAnalysis ran) serves every effort of GPT-6 Astra, replacing the O45 lower-of assumption for this row. It does not measure gpt-6-astra-high. Original figures and workload are retained in sourceEvidence.semianalysis."
     },
     {
       "id": "chatgpt-plus-gpt-6-astra-xhigh-common-gpt-assumption",
       "provider": "OpenAI",
-      "planLabel": "ChatGPT Plus $20 · same-model assumption (O88)",
+      "planLabel": "ChatGPT Plus $20 · same-model measurement, another effort (O88, O90)",
       "planFeeUsd": 20,
       "valueMultiple": 8.1,
       "apiEquivalentUsd": 162,
@@ -2390,12 +2390,12 @@
       "modelSlugs": [
         "gpt-6-astra-xhigh"
       ],
-      "notes": "Same-model assumption for gpt-6-astra-xhigh (owner decision O88, 2026-10-28): a plan's allowance is effort-invariant (O87), so GPT-6 Astra's own SemiAnalysis figure on ChatGPT Plus (8.1x, measured at the effort SemiAnalysis ran) serves every effort of GPT-6 Astra, replacing the O45 lower-of assumption for this row. It does not measure gpt-6-astra-xhigh. Original figures and workload are retained in sourceEvidence.semianalysis."
+      "notes": "Same-model measurement from another effort for gpt-6-astra-xhigh (owner decision O88, 2026-10-28): a plan's allowance is effort-invariant (O87), so GPT-6 Astra's own SemiAnalysis figure on ChatGPT Plus (8.1x, measured at the effort SemiAnalysis ran) serves every effort of GPT-6 Astra, replacing the O45 lower-of assumption for this row. It does not measure gpt-6-astra-xhigh. Original figures and workload are retained in sourceEvidence.semianalysis."
     },
     {
       "id": "chatgpt-pro100-gpt-6-astra-xhigh-common-gpt-assumption",
       "provider": "OpenAI",
-      "planLabel": "ChatGPT Pro 100 $100 · same-model assumption (O88)",
+      "planLabel": "ChatGPT Pro 100 $100 · same-model measurement, another effort (O88, O90)",
       "planFeeUsd": 100,
       "valueMultiple": 13.22,
       "apiEquivalentUsd": 1322,
@@ -2407,12 +2407,12 @@
       "modelSlugs": [
         "gpt-6-astra-xhigh"
       ],
-      "notes": "Same-model assumption for gpt-6-astra-xhigh (owner decision O88, 2026-10-28): a plan's allowance is effort-invariant (O87), so GPT-6 Astra's own SemiAnalysis figure on ChatGPT Pro 100 (13.22x, measured at the effort SemiAnalysis ran) serves every effort of GPT-6 Astra, replacing the O45 lower-of assumption for this row. It does not measure gpt-6-astra-xhigh. Original figures and workload are retained in sourceEvidence.semianalysis."
+      "notes": "Same-model measurement from another effort for gpt-6-astra-xhigh (owner decision O88, 2026-10-28): a plan's allowance is effort-invariant (O87), so GPT-6 Astra's own SemiAnalysis figure on ChatGPT Pro 100 (13.22x, measured at the effort SemiAnalysis ran) serves every effort of GPT-6 Astra, replacing the O45 lower-of assumption for this row. It does not measure gpt-6-astra-xhigh. Original figures and workload are retained in sourceEvidence.semianalysis."
     },
     {
       "id": "chatgpt-pro200-gpt-6-astra-xhigh-common-gpt-assumption",
       "provider": "OpenAI",
-      "planLabel": "ChatGPT Pro 200 $200 · same-model assumption (O88)",
+      "planLabel": "ChatGPT Pro 200 $200 · same-model measurement, another effort (O88, O90)",
       "planFeeUsd": 200,
       "valueMultiple": 14.485,
       "apiEquivalentUsd": 2897,
@@ -2424,12 +2424,12 @@
       "modelSlugs": [
         "gpt-6-astra-xhigh"
       ],
-      "notes": "Same-model assumption for gpt-6-astra-xhigh (owner decision O88, 2026-10-28): a plan's allowance is effort-invariant (O87), so GPT-6 Astra's own SemiAnalysis figure on ChatGPT Pro 200 (14.485x, measured at the effort SemiAnalysis ran) serves every effort of GPT-6 Astra, replacing the O45 lower-of assumption for this row. It does not measure gpt-6-astra-xhigh. Original figures and workload are retained in sourceEvidence.semianalysis."
+      "notes": "Same-model measurement from another effort for gpt-6-astra-xhigh (owner decision O88, 2026-10-28): a plan's allowance is effort-invariant (O87), so GPT-6 Astra's own SemiAnalysis figure on ChatGPT Pro 200 (14.485x, measured at the effort SemiAnalysis ran) serves every effort of GPT-6 Astra, replacing the O45 lower-of assumption for this row. It does not measure gpt-6-astra-xhigh. Original figures and workload are retained in sourceEvidence.semianalysis."
     },
     {
       "id": "chatgpt-pro500-gpt-6-astra-xhigh-common-gpt-assumption",
       "provider": "OpenAI",
-      "planLabel": "ChatGPT Pro 500 $500 · same-model assumption (O88)",
+      "planLabel": "ChatGPT Pro 500 $500 · same-model measurement, another effort (O88, O90)",
       "planFeeUsd": 500,
       "valueMultiple": 13.91,
       "apiEquivalentUsd": 6955,
@@ -2441,7 +2441,7 @@
       "modelSlugs": [
         "gpt-6-astra-xhigh"
       ],
-      "notes": "Same-model assumption for gpt-6-astra-xhigh (owner decision O88, 2026-10-28): a plan's allowance is effort-invariant (O87), so GPT-6 Astra's own SemiAnalysis figure on ChatGPT Pro 500 (13.91x, measured at the effort SemiAnalysis ran) serves every effort of GPT-6 Astra, replacing the O45 lower-of assumption for this row. It does not measure gpt-6-astra-xhigh. Original figures and workload are retained in sourceEvidence.semianalysis."
+      "notes": "Same-model measurement from another effort for gpt-6-astra-xhigh (owner decision O88, 2026-10-28): a plan's allowance is effort-invariant (O87), so GPT-6 Astra's own SemiAnalysis figure on ChatGPT Pro 500 (13.91x, measured at the effort SemiAnalysis ran) serves every effort of GPT-6 Astra, replacing the O45 lower-of assumption for this row. It does not measure gpt-6-astra-xhigh. Original figures and workload are retained in sourceEvidence.semianalysis."
     },
     {
       "id": "chatgpt-plus-gpt-5.6-luna-low-common-gpt-assumption",

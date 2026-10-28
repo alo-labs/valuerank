@@ -304,3 +304,12 @@ def test_lint_flags_a_hand_typed_list_of_owner_assumptions():
     for fine in ("The anchors include owner assumptions of every kind and API-cost fallbacks alike.",
                  "Rows on {{fig:evidence.assumptionKinds}}, owner-named transfers and fallbacks.", "An owner-named transfer names its donor."):
         assert not any("owner-named transfers listed" in problem for problem in f.lint(fine, []))
+
+
+def test_the_generated_docs_are_held_to_the_assumption_list_rule(tmp_path):
+    """I73 L1: README, methodology and scores are scanned too; a missing doc is skipped."""
+
+    (tmp_path / "methodology.md").write_text("The Plan anchors include transfers and fallbacks.\nThey include owner assumptions and API fallbacks.\n")
+    problems = f.assumption_list_problems(tmp_path)
+    assert len(problems) == 1 and problems[0].startswith("methodology.md: line 1:")
+    assert f.assumption_list_problems(ROOT) == []

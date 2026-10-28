@@ -1745,3 +1745,14 @@ Asked on I64 Q1 whether future O71 admissions should be executed by the build fr
 - L2 (adopted, engine changed with tests): E167's exclusion reason names each row's assumption kind from the registry (`assumption_exclusion`), replacing the single transfer label that mislabelled 22 of the 48 AI Coding Daily exclusions; `anchorPolicy.planRule`, the separability bias string and methodology.md's two sentences say "owner assumptions".
 - L3 (asked; O89, comparator changed with a test).
 - Round status (O56): clean (no Medium or higher). With I71, two consecutive clean rounds: the Opus medium rung has converged. Draft r132; next rung: Opus high.
+
+## Owner decision O90 (2026-10-28), asked on I73 Q2
+- O90 (cross-effort evidence is measured): both kinds of cross-effort plan evidence count as measured: a report cell pooled across efforts (O87) and an O88 route that reuses SemiAnalysis's measurement of the same model at another effort. An O88 route is graded "controlled", flagged "same-model measurement from another effort (O88, O90)", enters the measured-only view (E113) and stays evaluable in the owner-assumptions-off streams (E167); it is no longer an owner-assumption kind (the registry now holds owner-named transfers and O46 quota ceilings). Effect today: the 18 AI Coding Daily O88 rows change grade only; no value, rank or route changes; the AI Coding Daily rows on an owner assumption fall from 48 to 30.
+- With O89 (I73 L3, no new decision): an O88 route ranks between an exact-effort controlled measurement and concordant reports (`CROSS_EFFORT` = 2.75 in the grade key), so it keeps its donor's precedence against reports but never outranks an exact-effort measurement; a test covers both.
+
+## Internal review I73 (Claude Opus 5.5, effort high, on r132) — adopted, modified or rejected
+- L1 (adopted at the source): the published `anchorPolicy.planRule` now carries the current wording of the (unchanged) frozen rule; the measured-only view's admission text and methodology.md's anchor sentence say "owner assumptions"; the assumption-list rule now also scans README.md, methodology.md and scores.md in `draft_figures check` and also catches "transfers and fallbacks" (it flags methodology.md lines 108 and 157 of the previous build).
+- L2 (adopted): the remaining draft lists (lines 105, 106, 114; E170 outcome 3's donor-pricing rule; the lifecycle table and its age-rows sentence, now naming O88 routes and O89's extension of O78) are fixed.
+- L3 (adopted, comparator changed with a test): see O90's second bullet.
+- L4 / Q2 (asked; O90, engine changed with tests).
+- Round status (O56): clean (no Medium or higher), the first clean round at Opus high. Draft r133.
