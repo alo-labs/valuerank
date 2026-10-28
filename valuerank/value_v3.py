@@ -805,6 +805,9 @@ def assemble(configurations: list[dict], documents: dict, *, release_day: date, 
     all_provider = [entry["searchedOn"] for entry in policy.get("searchLog") or [] if not entry.get("singleProvider")]
     if searched and searched != max(all_provider, default=None):
         raise ValueError(f"the search cutoff {searched} is not the date of the latest all-provider search in the search log (E218)")
+    # I77 L5: the registry's "as of" date is the evidence search cutoff it was last brought up to, never a stale stamp.
+    if searched and documents["planRoutes"].get("asOf") and documents["planRoutes"]["asOf"] != searched:
+        raise ValueError(f"the route registry is dated {documents['planRoutes']['asOf']}, not its search cutoff {searched} (E218)")
     check_o71_search(policy, cohort_providers(configurations))
     # O81: the build decides every O71 cell's admission from the report table, and refuses an unsupported report route.
     # O87: cells are keyed by the model (the configuration's AA family), so reports at any effort pool.
@@ -1244,7 +1247,7 @@ def interval_outputs(assembled: dict, frozen: dict, basis: str, components: list
     # have superseded, competes but earns no label, exactly like an O29 blocker.
     blocked = not_in_force | {row["id"] for row in assembled["rows"] if row["valuationGate"]["outcome"] == GATE_UNVERIFIED or provider_claimed(row)}
     if basis == "plan":
-        blocked |= {row["id"] for row in assembled["rows"] if plan_routes.change_flagged(row["routeSelection"]["selected"])}
+        blocked |= {row["id"] for row in assembled["rows"] if plan_routes.change_flagged(row["routeSelection"]["selected"], date.fromisoformat(assembled["releaseDay"]) if assembled.get("releaseDay") else None)}
     universe = sorted(box.row for box in boxes if box.row not in blocked)
     blockers = sorted(box.row for box in boxes if box.row in blocked)
     unevaluable = sorted(row["id"] for row in assembled["rows"] if row["id"] not in universe and row["id"] not in blockers)
@@ -1993,6 +1996,7 @@ def score(assembled: dict, frozen: dict) -> dict:
     interval_rows = sorted(row["id"] for row in rows if (row["evidence"]["provenance"].get("terminalBench") or {}).get("ci95HalfWidthPct"))
     # I63 L5: the lifecycle entry counts plan rows, where the route flags sit.
     lifecycle_flagged = sorted(row["id"] for row in plan_rows if {"possibly-superseded", "expired"} & set((row.get("plan") or {}).get("flags", [])))
+    fault_flagged = sorted(row["id"] for row in plan_rows if plan_routes.FAULT_FLAG in row["plan"].get("flags", []))
     manifest = [
         _rule("clip gate (E20)", "fired" if hold else "passed", "release held" if hold else "no basis exceeds the clipping allowance"),
         _rule("cost influence flag (E91)", "fired" if influence["api"]["flag"] or influence["plan"]["flag"] else "passed", "cost not discriminating (< 10%); informational only; beta never changes (O2)"),
@@ -2006,6 +2010,10 @@ def score(assembled: dict, frozen: dict) -> dict:
               "fired" if lifecycle_flagged else "passed",
               f"{len(lifecycle_flagged)} of {len(plan_rows)} plan rows carry a possibly-superseded or expired route: " + ", ".join(lifecycle_flagged)
               if lifecycle_flagged else "every selected route is fresh"),
+        # I77 M1: O91/O92 fault windows, with the rows they flag.
+        _rule("acknowledged accounting-fault windows (O91, O92)", "fired" if fault_flagged else "passed",
+              f"{len(fault_flagged)} of {len(plan_rows)} plan rows rest on a measurement inside an acknowledged fault window; they stay selected and "
+              "yield to two concordant user reports for the plan: " + ", ".join(fault_flagged) if fault_flagged else "no selected route rests on a measurement in a fault window"),
         _rule("valuation-basis gate (E170)", "fired" if any(row["valuationGate"]["outcome"] not in GATE_SCORED for row in rows) else "passed",
               "rows outside the scored valuation outcomes: " + ", ".join(sorted(row["id"] for row in rows if row["valuationGate"]["outcome"] not in GATE_SCORED))
               if any(row["valuationGate"]["outcome"] not in GATE_SCORED for row in rows) else "every ranked row is compatible as captured or after evidenced revaluation"),
@@ -2566,6 +2574,8 @@ def _row_json(row: dict, scores: dict, ranks: dict, alternatives: list[dict]) ->
                     "planIntervalEligible": item["planIntervalEligible"],
                     # E144/E151: the evidence clock behind the classification.
                     "expiry": item.get("expiry"), "evidenceDate": item.get("evidenceDate"), "donorRouteId": item.get("donorRouteId"),
+                    # I77 M1: the acknowledged fault window a measurement (or its donor) falls in (O91, O92).
+                    "faultWindow": item.get("faultWindow"),
                     "contributingReportIds": item["route"].get("reportIds"), "excludedReportIds": item["route"].get("excludedReportIds"),
                 }
                 for item in row["admissionTable"]

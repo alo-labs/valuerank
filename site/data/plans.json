@@ -1,5 +1,5 @@
 {
-  "asOf": "2026-10-08",
+  "asOf": "2026-10-25",
   "policy": {
     "reportingWindow": {
       "start": "2026-09-25",
@@ -96,7 +96,7 @@
     },
     "gptApplication": "User authorizes the same ChatGPT plan multiples for every GPT model. Owner decision O45 (2026-10-23), as amended by O88 (2026-10-28): GPT-6.1 Sol and GPT-6 Astra keep their own SemiAnalysis figures on every ChatGPT plan, bound to each model's unsuffixed (max) row because SemiAnalysis names the models without an effort; each of their other efforts (GPT-6.1 Sol at xhigh, high, medium and low, GPT-6 Astra at xhigh and high, ranked as their own rows under O33) takes its own model's figure per plan as a labelled same-model measurement from another effort (O88; measured evidence under O90; an allowance is effort-invariant, O87); every other GPT model takes, per plan, the lower of the two reported model-conditional figures as a labelled user assumption naming its donor route. Routes are one row per model and plan.",
     "routeGranularity": "Owner decision O45 (2026-10-23): every route row names exactly one model and one plan.",
-    "o72Application": "Owner decisions O72-O91 (2026-10-26 to 2026-10-28): after the O71 search found no model × tier with two concordant user reports, the owner-authorised routes stay (the SemiAnalysis selection with its O40/O45 assumptions, the O46 MiMo quota ceilings) and providers without one (Google, Kimi, MiniMax) stay on API fallback. Two concordant user reports replace only an assumption-based or fallback route; an exact controlled measurement keeps precedence (O73) unless a detected change flags it and a concordant pair for the same plan is dated after that change (O78). Admission stays the strict all-reports concordance test (O74); every release runs all three O71 stages over every cell (O75); speed-mode reports convert at the provider's multiplier, flagged (O76); a provider's announcement of a metering change triggers E18 (O77); a change to a shared meter flags every plan on it (O79); a 5-hour figure stays in its own unit and never converts (O80, O82); a provider-documented change splits the partition too (O83); a change detected on any Kimi plan splits every Kimi plan (O84); every report cell is tested, and one on a plan the Plan ranking does not list is evidence only (O85). O86: concordance is the largest lower bound at most 1.20x the smallest upper bound. O87: an allowance is effort-invariant, so reports pool across efforts of one model. O88: a SemiAnalysis figure for a model serves every effort of that model, labelled; O90 counts it as measured evidence. O89: an O88 same-model route shares its donor measurement's precedence and change flag against reports for the same model and plan. O91: a controlled measurement inside an acknowledged accounting-fault window for its plan leaves the official selection, with the routes resting on it, until a recorded resolution shows it unaffected.",
+    "o72Application": "Owner decisions O72-O92 (2026-10-26 to 2026-10-28): after the O71 search found no model × tier with two concordant user reports, the owner-authorised routes stay (the SemiAnalysis selection with its O40/O45 assumptions, the O46 MiMo quota ceilings) and providers without one (Google, Kimi, MiniMax) stay on API fallback. Two concordant user reports replace only an assumption-based or fallback route; an exact controlled measurement keeps precedence (O73) unless a detected change flags it and a concordant pair for the same plan is dated after that change (O78). Admission stays the strict all-reports concordance test (O74); every release runs all three O71 stages over every cell (O75); speed-mode reports convert at the provider's multiplier, flagged (O76); a provider's announcement of a metering change triggers E18 (O77); a change to a shared meter flags every plan on it (O79); a 5-hour figure stays in its own unit and never converts (O80, O82); a provider-documented change splits the partition too (O83); a change detected on any Kimi plan splits every Kimi plan (O84); every report cell is tested, and one on a plan the Plan ranking does not list is evidence only (O85). O86: concordance is the largest lower bound at most 1.20x the smallest upper bound. O87: an allowance is effort-invariant, so reports pool across efforts of one model. O88: a SemiAnalysis figure for a model serves every effort of that model, labelled; O90 counts it as measured evidence. O89: an O88 same-model route shares its donor measurement's precedence and change flag against reports for the same model and plan. O91, O92: a controlled measurement inside an acknowledged accounting-fault window for its plan stays selected and flagged, with the routes resting on it, until two concordant user reports for that plan replace it.",
     "reportEligibilityProfile": {
       "version": "O71 v1 (E270), 2026-10-26",
       "rules": [
@@ -175,10 +175,10 @@
     "claudeApplication": "User authorizes (2026-10-18, Option 2) applying Opus 5.5's measured SemiAnalysis Claude plan multiples to every other Claude model. Opus 5.5 keeps its exact measured routes; the shared routes are labelled user assumptions, carry the recorded caution that allowances are model-specific (Fable 5.1 measured 12.4-12.7x on the same plans), and are superseded by any exact measurement for the listed model. Claude Fable 5.1 (retained 2026-10-21, owner decision O31) has exact SemiAnalysis measurements on Max 5x (12.73x) and Max 20x (12.425x), which replace the shared routes for it; it has no Pro route, because the source records Fable as unavailable on Pro, so there is no Pro allowance to measure or assume. Owner decision O33 (2026-10-21) ranks Claude Haiku 5.5 (max, high, medium, low) and Claude Sonnet 5.5 (xhigh, high, medium, low) as their own rows; as other Claude models in the roster they take the shared assumption routes. Owner decision O88 (2026-10-28): Opus 5.5's other efforts (xhigh, high, medium) take its figure as a same-model measurement from another effort (measured evidence under O90), not as the shared assumption; the multiple is the same."
   },
   "identificationYield": {
-    "rows": 24,
+    "rows": 27,
     "pointIdentified": 0,
     "setIdentified": 0,
-    "unidentified": 24,
+    "unidentified": 27,
     "exploratory": true
   },
   "routes": [
@@ -2518,7 +2518,7 @@
       "name": "Claude Haiku 5.5 (max)",
       "rank": {
         "api": 9,
-        "plan": 10
+        "plan": 11
       },
       "apiUsd": 966.9203778594009,
       "planUsd": 16.416305226814956,
@@ -2586,7 +2586,7 @@
       "name": "DeepSeek V4.1 Flash 1017",
       "rank": {
         "api": 2,
-        "plan": 19
+        "plan": 22
       },
       "apiUsd": 410.04054222171686,
       "planUsd": 410.04054222171686,
@@ -2605,7 +2605,7 @@
       "name": "Gemini 4 Argon",
       "rank": {
         "api": 5,
-        "plan": 24
+        "plan": 27
       },
       "apiUsd": 3557.766318119637,
       "planUsd": 3557.766318119637,
@@ -2627,21 +2627,22 @@
         "plan": 7
       },
       "apiUsd": 1233.1097561488218,
-      "planUsd": 116.88244134112054,
+      "planUsd": 114.47361271340715,
       "fallback": null,
-      "routeId": "chatgpt-plus-gpt61sol-semianalysis",
+      "routeId": "chatgpt-pro500-gpt61sol-semianalysis",
       "flags": [
         "workload-unmatched",
         "possibly-superseded",
+        "measured inside an acknowledged accounting-fault window (O91, O92)",
         "valuation basis unverified"
       ],
       "measuredOnly": {
         "status": "measured, target-workload unmatched",
-        "routeId": "chatgpt-plus-gpt61sol-semianalysis",
+        "routeId": "chatgpt-pro500-gpt61sol-semianalysis",
         "crossEffort": false,
-        "costUsd": 116.88244134112054,
-        "costScore": 57.8218231229238,
-        "value": 62.541244541055555,
+        "costUsd": 114.47361271340715,
+        "costScore": 58.11487226371908,
+        "value": 62.61450682625437,
         "rank": 2
       }
     },
@@ -2650,7 +2651,7 @@
       "name": "GPT-6 Astra",
       "rank": {
         "api": 7,
-        "plan": 13
+        "plan": 14
       },
       "apiUsd": 5885.045403144297,
       "planUsd": 406.2854955570795,
@@ -2676,16 +2677,17 @@
       "name": "GPT-6 Luna",
       "rank": {
         "api": 4,
-        "plan": 15
+        "plan": 17
       },
       "apiUsd": 125.71906502148906,
-      "planUsd": 11.916499054169579,
+      "planUsd": 11.67091208888684,
       "fallback": null,
-      "routeId": "chatgpt-pro100-gpt-6-luna-common-gpt-assumption",
+      "routeId": "chatgpt-pro500-gpt-6-luna-common-gpt-assumption",
       "flags": [
         "workload-unmatched",
         "owner-named transfer (assumption)",
         "possibly-superseded",
+        "measured inside an acknowledged accounting-fault window (O91, O92)",
         "valuation basis unverified"
       ],
       "measuredOnly": {
@@ -2697,7 +2699,7 @@
       "name": "MiMo-V2.6-Pro",
       "rank": {
         "api": 3,
-        "plan": 20
+        "plan": 23
       },
       "apiUsd": 136.12695920883297,
       "planUsd": 115.28367141669459,

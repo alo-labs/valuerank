@@ -659,24 +659,31 @@ def test_every_route_kind_maps_to_one_admission_case_and_same_model_flags_are_ch
         pr.check_same_model_routes({"routes": [donor, same]}, {"m": "M", "m-high": "Not M"})
 
 
-def test_a_controlled_measurement_in_a_fault_window_leaves_the_selection():
-    """O91: a controlled measurement dated inside an acknowledged fault window for its plan (and every route resting on it)
-    is diagnostic until a recorded resolution shows it unaffected; other plans and other providers are untouched."""
+def test_a_controlled_measurement_in_a_fault_window_is_kept_flagged_until_reports_replace_it():
+    """O91, O92: a controlled measurement dated inside an acknowledged fault window for its plan (and every route resting on
+    it) stays selected and flagged, and yields to a concordant report pair for the same plan; dating fails closed."""
 
     faults = [{"provider": "P", "plans": ["Pro"], "days": ["2026-09-29..2026-10-16"], "evidence": "acknowledged"}, {"provider": "P", "days": ["2026-10-20"], "evidence": "day"}]
     measured = dict(route("m", 10.0), provider="P", plan="Pro", sourcePublicationDate="2026-10-06")
     assert pr.in_fault_window(measured, faults)["evidence"] == "acknowledged"
-    assert pr.in_fault_window({**measured, "faultResolution": "scales with the fee"}, faults) is None
-    assert pr.in_fault_window({**measured, "plan": "Plus"}, faults) is None and pr.in_fault_window({**measured, "provider": "Q"}, faults) is None
-    assert pr.in_fault_window({**measured, "measurementWindow": {"start": "2026-10-19", "end": "2026-10-21"}}, faults)["evidence"] == "day"
-    assert pr.in_fault_window({**measured, "sourcePublicationDate": None}, faults) is None and pr.in_fault_window(measured, None) is None
-    assert pr.in_fault_window(dict(measured, valueMultipleKind="user_assumption"), faults) is None
+    # Published after the window, but its 30 undated days reach back into it.
+    assert pr.in_fault_window({**measured, "sourcePublicationDate": "2026-11-01"}, faults)["evidence"] == "acknowledged"
+    assert pr.in_fault_window({**measured, "sourcePublicationDate": "2026-12-31"}, faults) is None
+    assert pr.in_fault_window({**measured, "plan": "Plus", "sourcePublicationDate": "2026-12-31"}, faults) is None and pr.in_fault_window({**measured, "provider": "Q"}, faults) is None
+    assert pr.in_fault_window({**measured, "measurementWindow": {"start": "2026-10-01", "end": "2026-10-03"}}, faults)["evidence"] == "acknowledged"
+    assert pr.in_fault_window({**measured, "plan": "Plus", "measurementWindow": {"start": "2026-10-19", "end": "2026-10-21"}}, faults)["evidence"] == "day"
+    assert pr.in_fault_window({**measured, "sourcePublicationDate": None}, faults)["evidence"] == "acknowledged"  # undated: fail closed
+    assert pr.in_fault_window(measured, None) is None and pr.in_fault_window(dict(measured, valueMultipleKind="user_assumption"), faults) is None
     day = date(2026, 10, 25)
-    [candidate] = pr.route_candidates("m", None, [measured], day, faults=faults)
-    assert candidate["grade"] == "diagnostic" and candidate["faultWindow"] == "acknowledged"
+    [kept] = pr.route_candidates("m", None, [measured], day, faults=faults)
+    assert kept["grade"] == "controlled" and kept["faultWindow"] == "acknowledged"
+    assert pr.FAULT_FLAG in pr.plan_cost(100.0, kept)["flags"]
     transfer = dict(route("t", 10.0, kind="user_assumption", models=("n",)), provider="P", plan="Pro", donorRouteId="m", sourceEvidenceClass="controlled_account_workload_projection")
-    assert pr.route_candidates("n", None, [transfer], day, registry=[measured, transfer], faults=faults)[0]["grade"] == "diagnostic"
-    assert pr.route_candidates("m", None, [measured], day)[0]["grade"] == "controlled"
+    assert pr.route_candidates("n", None, [transfer], day, registry=[measured, transfer], faults=faults)[0]["faultWindow"] == "acknowledged"
+    reports = candidate("reports", 5.0, "reports")
+    reports["route"]["plan"] = "Pro"
+    assert pr.select_route([kept, reports])["route"]["id"] == "reports"
+    assert pr.select_route([{**kept, "faultWindow": None}, reports])["route"]["id"] == "m"
 
 
 def test_change_flag_is_inherited_from_the_donor():
@@ -684,3 +691,6 @@ def test_change_flag_is_inherited_from_the_donor():
 
     plain = candidate("t", 10.0, "assumption", expiry="possibly-superseded")
     assert not pr.change_flagged(plain) and pr.change_flagged({**plain, "donorChangeDetectedOn": "2026-10-11"})
+    # I77 L2: a change dated after the release cutoff does not count.
+    assert not pr.change_flagged({**plain, "donorChangeDetectedOn": "2026-11-01"}, date(2026, 10, 25))
+    assert pr.change_flagged({**plain, "donorChangeDetectedOn": "2026-10-11"}, date(2026, 10, 25))

@@ -199,9 +199,7 @@ def test_model_document_leaves_components_routes_and_scenarios(bundle, v3_rows):
     selected = [plan for plan in doc["plans"] if plan["selected"]]
     assert len(selected) == 1 and selected[0]["id"] == doc["cost"]["route"]["id"] and doc["plans"][0] is selected[0]
     for plan in doc["plans"]:
-        # O91: the Pro 500 measurement in OpenAI's acknowledged fault window is listed as a diagnostic (case 5).
-        assert plan["usdPerRun"] == pytest.approx(doc["cost"]["apiUsd"] / plan["valueMultiple"])
-        assert plan["case"] in (2, 3, "identified") or (plan["case"] == 5 and "pro500" in plan["id"])
+        assert plan["usdPerRun"] == pytest.approx(doc["cost"]["apiUsd"] / plan["valueMultiple"]) and plan["case"] in (2, 3, "identified")
     assert doc["scenarios"]["status"] == "current" and {run["stratum"] for run in doc["scenarios"]["api"]} == {"S0", "S1", "S2", "S1M", "S1T"}
     assert doc["intervals"]["api"] == {"definite": "certified", "possible": "certified"}
 
@@ -247,7 +245,7 @@ def test_model_history_and_frontier_notes(bundle):
 def test_plans_document(bundle, v3):
     plans = bundle.plans
     # O45/O46: one route record per model and plan.
-    assert plans["asOf"] == "2026-10-08" and len(plans["routes"]) == 137 and len(plans["candidates"]) == 9
+    assert plans["asOf"] == "2026-10-25" and len(plans["routes"]) == 137 and len(plans["candidates"]) == 9
     assert plans["identificationYield"] == v3["identificationYield"]
     route = next(r for r in plans["routes"] if r["id"] == "claude-pro-opus55-semianalysis")
     assert route["grade"] == "measured" and route["modelSlugs"] == ["claude-opus-5-5"] and route["valueMultiple"] == 58.9

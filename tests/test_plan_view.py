@@ -34,10 +34,10 @@ def test_public_models_carry_basket_run_plan_costs(repo_copy, tmp_path):
     rows = {row["id"]: row for row in json.loads((repo_copy / "data" / "scores.json").read_text())["v3"]["rows"]}
 
     assert sol["apiUsd"] == rows["gpt-6.1-sol"]["api"]["costUsd"]
-    # O91: Sol's Pro 500 measurement fell in OpenAI's acknowledged Pro 500 fault window, so its Plus figure is selected.
-    assert sol["planUsd"] == pytest.approx(rows["gpt-6.1-sol"]["api"]["costUsd"] / 10.55)
+    # O92: Sol's Pro 500 measurement is kept (flagged) until two user reports for Pro 500 replace it.
+    assert sol["planUsd"] == pytest.approx(rows["gpt-6.1-sol"]["api"]["costUsd"] / 10.772)
     assert opus["planUsd"] > sol["planUsd"]
-    assert sol["fallback"] is None and sol["route"]["id"] == "chatgpt-plus-gpt61sol-semianalysis"  # O45: Sol keeps its own figure
+    assert sol["fallback"] is None and sol["route"]["id"] == "chatgpt-pro500-gpt61sol-semianalysis"  # O45: Sol keeps its own figure
 
 
 def test_readme_prices_each_configuration_per_basket_run_on_both_bases(repo_copy, pinned_clock):
@@ -46,5 +46,5 @@ def test_readme_prices_each_configuration_per_basket_run_on_both_bases(repo_copy
 
     assert "| Plan rank | API rank | Configuration | Plan value | API value | Quality | Quality coverage | API cost (USD per basket run) | Plan cost (USD per basket run) | Plan route | Flags |" in readme
     sol_row = next(line for line in readme.splitlines() if line.startswith("| ") and "| [GPT-6.1 Sol (max)](" in line)
-    assert f"| ${rows['gpt-6.1-sol']['api']['costUsd']:,.2f} | ${rows['gpt-6.1-sol']['api']['costUsd'] / 10.55:,.2f} |" in sol_row
+    assert f"| ${rows['gpt-6.1-sol']['api']['costUsd']:,.2f} | ${rows['gpt-6.1-sol']['api']['costUsd'] / 10.772:,.2f} |" in sol_row
     assert "divides the basket's API cost by a subscription route's Value Multiple" in readme

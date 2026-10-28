@@ -1504,6 +1504,10 @@ def test_reports_are_searched_within_7_days_of_the_cutoff():
     single = policy("2026-10-12")
     single["evidencePolicy"]["searchLog"].append({"searchedOn": "2026-10-14", "singleProvider": True})
     assert v.assemble(CONFIGURATIONS, documents(planRoutes=single), release_day=DAY)["rows"]
+    # I77 L5: the registry's "as of" date is its search cutoff.
+    assert v.assemble(CONFIGURATIONS, documents(planRoutes={**policy("2026-10-12"), "asOf": "2026-10-12"}), release_day=DAY)["rows"]
+    with pytest.raises(ValueError, match=r"the route registry is dated 2026-10-08, not its search cutoff 2026-10-12"):
+        v.assemble(CONFIGURATIONS, documents(planRoutes={**policy("2026-10-12"), "asOf": "2026-10-08"}), release_day=DAY)
 
 
 def test_an_o46_ceiling_is_recomputed_from_its_credits_rate_and_fee():

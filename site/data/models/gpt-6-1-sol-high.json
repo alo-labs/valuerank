@@ -12,7 +12,7 @@
     },
     "overall": {
       "api": 52.67745170115651,
-      "plan": 55.4799727401339
+      "plan": 55.5354801209504
     },
     "quality": 57.17488127995559,
     "qualityRank": 6,
@@ -230,13 +230,13 @@
   ],
   "cost": {
     "apiUsd": 431.0726459431111,
-    "planUsd": 40.85996644010532,
+    "planUsd": 40.01788395312951,
     "fallback": null,
     "route": {
-      "id": "chatgpt-plus-gpt-6.1-sol-high-common-gpt-assumption",
-      "planLabel": "ChatGPT Plus $20 · same-model measurement, another effort (O88, O90)",
-      "planFeeUsd": 20,
-      "valueMultiple": 10.55,
+      "id": "chatgpt-pro500-gpt-6.1-sol-high-common-gpt-assumption",
+      "planLabel": "ChatGPT Pro 500 $500 · same-model measurement, another effort (O88, O90)",
+      "planFeeUsd": 500,
+      "valueMultiple": 10.772,
       "grade": "measured",
       "assumptionKind": null,
       "evidenceLabel": "Same-model measurement from another effort (owner decisions O88, O90)",
@@ -251,11 +251,12 @@
       "workload-unmatched",
       "same-model measurement from another effort (O88, O90)",
       "possibly-superseded",
+      "measured inside an acknowledged accounting-fault window (O91, O92)",
       "valuation basis unverified"
     ],
     "costScore": {
       "api": 39.18516296475926,
-      "plan": 50.39524712066884
+      "plan": 50.61727664393484
     },
     "components": [
       {
@@ -316,28 +317,46 @@
       }
     ],
     "aaCostCaveat": null,
-    "selectionReason": "lower gross cash",
+    "selectionReason": "larger observed multiple (observed-workload multiple — target-workload ordering not identified)",
     "planAmount": {
       "amountKind": "API-equivalent consumption measured on the same model at another effort (O88, O90)",
       "amountTarget": "measured-workload consumption (another effort)",
-      "amountUsd": 211.0,
+      "amountUsd": 5386.0,
       "derivation": "same-model measurement: the multiple measured at another effort times this route's cash (O88, O90)",
       "feePeriod": "month",
-      "subscriptionCashUsd": 20,
+      "subscriptionCashUsd": 500,
       "additionalCashUsd": 0.0,
-      "grossCashUsd": 20.0,
+      "grossCashUsd": 500.0,
       "workload": "the route's measurement workload",
-      "measurementObjectId": "chatgpt-plus-gpt-6.1-sol-high-common-gpt-assumption",
+      "measurementObjectId": "chatgpt-pro500-gpt-6.1-sol-high-common-gpt-assumption",
       "capacitySolutionId": null,
-      "cashObjectId": "chatgpt-plus-gpt-6.1-sol-high-common-gpt-assumption:month cash",
+      "cashObjectId": "chatgpt-pro500-gpt-6.1-sol-high-common-gpt-assumption:month cash",
       "purchasePolicyId": "subscription fee for the fee period, no additional cash declared",
       "capacityStatus": "capacity established on the measurement workload",
       "valuationStatus": "unverified",
-      "donorRouteId": "chatgpt-plus-gpt61sol-semianalysis",
+      "donorRouteId": "chatgpt-pro500-gpt61sol-semianalysis",
       "interpretationLabel": "API-equivalent consumption measured on the same model at another effort (O88, O90), API-priced USD per month"
     }
   },
   "plans": [
+    {
+      "id": "chatgpt-pro500-gpt-6.1-sol-high-common-gpt-assumption",
+      "planLabel": "ChatGPT Pro 500 $500 · same-model measurement, another effort (O88, O90)",
+      "planFeeUsd": 500,
+      "valueMultiple": 10.772,
+      "grade": "measured",
+      "assumptionKind": null,
+      "evidenceLabel": "Same-model measurement from another effort (owner decisions O88, O90)",
+      "sourceUrl": "https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x",
+      "sourceDate": "2026-10-06",
+      "case": 3,
+      "officialDisplayEligible": true,
+      "planIntervalEligible": false,
+      "usdPerRun": 40.01788395312951,
+      "selected": true,
+      "planRank": 7,
+      "planValue": 55.5354801209504
+    },
     {
       "id": "chatgpt-plus-gpt-6.1-sol-high-common-gpt-assumption",
       "planLabel": "ChatGPT Plus $20 · same-model measurement, another effort (O88, O90)",
@@ -352,27 +371,9 @@
       "officialDisplayEligible": true,
       "planIntervalEligible": false,
       "usdPerRun": 40.85996644010532,
-      "selected": true,
-      "planRank": 7,
-      "planValue": 55.4799727401339
-    },
-    {
-      "id": "chatgpt-pro500-gpt-6.1-sol-high-common-gpt-assumption",
-      "planLabel": "ChatGPT Pro 500 $500 · same-model measurement, another effort (O88, O90)",
-      "planFeeUsd": 500,
-      "valueMultiple": 10.772,
-      "grade": "measured",
-      "assumptionKind": null,
-      "evidenceLabel": "Same-model measurement from another effort (owner decisions O88, O90)",
-      "sourceUrl": "https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x",
-      "sourceDate": "2026-10-06",
-      "case": 5,
-      "officialDisplayEligible": false,
-      "planIntervalEligible": false,
-      "usdPerRun": 40.01788395312951,
       "selected": false,
-      "planRank": null,
-      "planValue": null
+      "planRank": 8,
+      "planValue": 55.4799727401339
     },
     {
       "id": "chatgpt-pro100-gpt-6.1-sol-high-common-gpt-assumption",
@@ -389,7 +390,7 @@
       "planIntervalEligible": false,
       "usdPerRun": 40.85996644010532,
       "selected": false,
-      "planRank": 7,
+      "planRank": 8,
       "planValue": 55.4799727401339
     },
     {
@@ -407,7 +408,7 @@
       "planIntervalEligible": false,
       "usdPerRun": 41.36973569511623,
       "selected": false,
-      "planRank": 9,
+      "planRank": 10,
       "planValue": 55.44692357514741
     }
   ],
@@ -520,8 +521,8 @@
         "kernel": "primary",
         "targetProfile": "published-record leaf values redrawn with plug-in binomial task-sampling noise from each leaf's published task count (independent-task approximation; GDPval-AA from its displayed rating interval, an assumption) + conventional identification of missing leaves",
         "unevaluable": null,
-        "top1": 0.0195,
-        "top3": 0.0219,
+        "top1": 0.0214,
+        "top3": 0.024,
         "frontier": 0.0696
       }
     ]
@@ -579,7 +580,7 @@
       },
       "overall": {
         "api": 52.67745170115651,
-        "plan": 55.4799727401339
+        "plan": 55.5354801209504
       }
     }
   ]

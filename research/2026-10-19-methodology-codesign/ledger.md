@@ -1783,3 +1783,15 @@ Asked on I64 Q1 whether future O71 admissions should be executed by the build fr
 - L4 (adopted): the Plan headline multiple names the O88 figure; the admission-table docstring's case 4 covers every route kind; the two docs files say "Measured"; the same-model check also compares the fee.
 - Recommendations (one label-denial function; one place deriving donor-inherited fields; fault windows on every measurement object): the third is adopted by O91; the first two are recorded, not adopted this round.
 - Round status (O56): clean (no Medium or higher). With I75, two consecutive clean rounds: the Opus high rung has converged. Draft r136; next rung: Opus xhigh.
+
+## Owner decision O92 (2026-10-28), asked on I77 Q1–Q2 (amends O91)
+- O92 (keep the measurement until reports replace it): asked whether the per-dollar consistency of SemiAnalysis's Pro 500 figures with its Pro 100 and Pro 200 figures resolves the fault window, the owner answered that until two user measurements of Pro 500 exist, SemiAnalysis's measurement is kept. A controlled measurement inside an acknowledged fault window (and every transfer and O88 route resting on it) therefore stays selected, flagged "measured inside an acknowledged accounting-fault window (O91, O92)", and yields to a concordant report pair for the same plan when one is admitted (as O78's post-change pair does); the `faultResolution` mechanism is withdrawn. Effect: the Pro 500 rows return (27 max-effort and 51 AI Coding Daily plan rows); values, ranks and routes are exactly r135's; 3 max-effort plan rows carry the flag. I77 Q2 (re-freezing the Plan anchors) is moot: the anchor setter is back in the table.
+
+## Internal review I77 (Claude Opus 5.5, effort xhigh, on r136) — adopted, modified or rejected
+- M1 (adopted with O92, engine changed): the rule is in E106 case (3) (a fault-window measurement keeps its case, flagged), the E212 lifecycle table (its own row), the release manifest (a rule listing the flagged rows), each admission entry (`faultWindow`) and every row's flags; with the Pro 500 rows back, line 59, the O72 sentence and the limitations are whole again.
+- L1 (adopted, engine changed): dates are compared as dates; a measurement without a window is dated by the 30 days ending on its publication; an undated measurement on a plan with a fault is treated as inside it (fail closed).
+- L2 (adopted, engine changed): `change_flagged` ignores a change dated after the release cutoff, so age alone never makes an E228 blocker.
+- L3 (moot under O92).
+- L4 (moot: O92 replaces a recorded resolution by the O11 report pair).
+- L5 (adopted, with a build check): the registry's `asOf` is its search cutoff (2026-10-25), and the build refuses a different date; the admission-table docstring names O88 measurements in "identified"; the O91 ledger entry is superseded by O92.
+- Round status (O56): not clean (one Medium). Draft r137; the Opus xhigh count starts.

@@ -30,7 +30,7 @@ route ID. Plan cost is the API basket cost divided by the comparison multiple
 from __future__ import annotations
 
 import math
-from datetime import date
+from datetime import date, timedelta
 
 SOFT_EXPIRY_DAYS = 30
 HARD_EXPIRY_DAYS = 90
@@ -44,6 +44,7 @@ GRADE = {"controlled": 3, "reports": 2, "assumption": 1, "diagnostic": 0}
 # exact-effort measurement and above concordant reports, so it keeps its donor's precedence against reports only.
 CROSS_EFFORT = 2.75
 CROSS_EFFORT_FLAG = "same-model measurement from another effort (O88, O90)"
+FAULT_FLAG = "measured inside an acknowledged accounting-fault window (O91, O92)"
 # O78: a controlled route flagged by a detected change ranks just below a report pair measured after that change.
 POST_CHANGE_SUPERSEDED = 1.5
 
@@ -80,6 +81,10 @@ def post_change_ranks(candidates: list[dict]) -> list[dict]:
         superseded = (candidate["grade"] == "controlled" or shares_donor) and bool(changed and candidate.get("expiry") in {"possibly-superseded", "expired"}
                       and any(other["grade"] == "reports" and other["route"].get("plan") == route.get("plan")
                               and (earliest_report(other["route"]) or date.min) > date.fromisoformat(changed) for other in candidates))
+        # O92: a measurement in an acknowledged fault window (and every route resting on it) yields to a concordant report
+        # pair for the same plan (whose reports E270 already keeps off fault days).
+        superseded = superseded or bool(candidate.get("faultWindow") and candidate["grade"] in {"controlled", "assumption"}
+                                        and any(other["grade"] == "reports" and other["route"].get("plan") == route.get("plan") for other in candidates))
         marked.append({**candidate, "postChangeSuperseded": True} if superseded else candidate)
     return marked
 
@@ -306,11 +311,14 @@ def check_report_independence(document: dict) -> None:
             raise ValueError(f"{route['id']}: pooled reports must name distinct observers and share no upstream source (E223)")
 
 
-def change_flagged(candidate: dict | None) -> bool:
+def change_flagged(candidate: dict | None, release_day: date | None = None) -> bool:
     """E228: a selected route whose evidence a scoped change (or two reports of a limit change) may have superseded."""
 
-    # I76 L2: a transfer or O88 route inherits its donor's detected change (E144, O89).
+    # I76 L2: a transfer or O88 route inherits its donor's detected change (E144, O89). I77 L2: a change dated after the
+    # release cutoff does not count (age alone never makes a blocker).
     changed = candidate and (candidate["route"].get("changeDetectedOn") or candidate.get("donorChangeDetectedOn"))
+    if changed and release_day is not None and date.fromisoformat(changed) > release_day:
+        return False
     return bool(changed and candidate.get("expiry") in {"possibly-superseded", "expired"})
 
 
@@ -412,23 +420,28 @@ def mix_check(measurement: dict) -> str:
     return MIX_UNIDENTIFIED if measurement.get("workloadMix") else MIX_NOT_REPORTED
 
 
-def in_fault_window(route: dict, faults: list[dict] | None) -> dict | None:
-    """O91: the acknowledged accounting-fault entry a controlled measurement falls in, unless a recorded resolution shows it
-    unaffected. The measurement is dated by its window, else by its publication date (the latest it can have been taken)."""
+FAULT_LOOKBACK_DAYS = 30  # I77 L1: an undated measurement window is taken as the 30 days ending on publication
 
-    if not faults or route.get("valueMultipleKind") not in CONTROLLED_KINDS or route.get("faultResolution"):
+
+def in_fault_window(route: dict, faults: list[dict] | None) -> dict | None:
+    """O91, O92: the acknowledged accounting-fault entry a controlled measurement may fall in. The measurement is dated by its
+    window, else conservatively by the 30 days ending on its publication date; an undated measurement on a plan with a fault
+    is treated as inside it (fail closed)."""
+
+    if not faults or route.get("valueMultipleKind") not in CONTROLLED_KINDS:
         return None
     window = route.get("measurementWindow") or {}
-    first = window.get("start") or route.get("sourcePublicationDate")
-    last = window.get("end") or route.get("sourcePublicationDate")
-    if not first or not last:
-        return None
+    published = route.get("sourcePublicationDate")
+    first = date.fromisoformat(window["start"]) if window.get("start") else (date.fromisoformat(published) - timedelta(days=FAULT_LOOKBACK_DAYS) if published else None)
+    last = date.fromisoformat(window["end"]) if window.get("end") else (date.fromisoformat(published) if published else None)
     for fault in faults:
         if fault.get("provider") != route.get("provider") or (fault.get("plans") and route.get("plan") not in fault["plans"]):
             continue
+        if first is None or last is None:
+            return fault
         for day in fault["days"]:
             low, _, high = day.partition("..")
-            if first <= (high or low) and last >= low:
+            if first <= date.fromisoformat(high or low) and last >= date.fromisoformat(low):
                 return fault
     return None
 
@@ -458,10 +471,10 @@ def route_candidates(model_id: str, configuration_effort: str | None, routes: li
         checks = [route] + ([source] if source is not None else [])
         # O32: a transfer whose donor is an end-user report partition follows the donor's window status.
         lapsed_donor = source is not None and source.get("valueMultipleKind") in REPORT_KINDS and evidence_grade(measurement_objects(source, release_day, window)[0], model_id) == "diagnostic"
-        # O91: a controlled measurement taken in an acknowledged fault window (or a transfer or O88 route resting on one)
-        # leaves the official selection until a recorded resolution shows it unaffected.
+        # O91 as amended by O92: a controlled measurement taken in an acknowledged fault window (or a transfer or O88 route
+        # resting on one) stays selected and flagged until two concordant user reports for the plan replace it.
         faulted = next((fault for item in checks if (fault := in_fault_window(item, faults))), None)
-        if faulted or lapsed_donor or expiry == "demoted" or any(not _divisor_eligible(item) or valuation_status(item) == "different" for item in checks):
+        if lapsed_donor or expiry == "demoted" or any(not _divisor_eligible(item) or valuation_status(item) == "different" for item in checks):
             grade = "diagnostic"
         stamp = evidence_date(route, by_id)
         provenance = source if source is not None else route
@@ -497,7 +510,8 @@ def admission_table(model_id: str, configuration_effort: str | None, routes: lis
     O90, an O88 route measured on the same model at another effort
     (displayed, interval-ineligible); 4 any route (or its donor) on an
     unreconciled price basis (unmatched under O7: diagnostic only); 5 evidence failing admission (diagnostic only); and "identified" for
-    exact-route measurements with an identified M_W.
+    measurements (exact-route or O88) with an identified M_W. A measurement in an acknowledged fault window keeps its case
+    and is flagged (O91, O92).
     """
 
     table = []
@@ -688,6 +702,8 @@ def plan_cost(api_cost: float | None, selected: dict | None) -> dict:
         flags.append("owner-named transfer (assumption)")
     if selected["expiry"] in {"possibly-superseded", "expired"}:
         flags.append(selected["expiry"])
+    if selected.get("faultWindow"):
+        flags.append(FAULT_FLAG)
     # E144: a candidate carries its provenance's (the donor's, for a transfer) valuation and capacity status.
     valuation = selected.get("valuation", valuation_status(route))
     capacity = selected.get("measurementCapacityStatus", measurement_capacity_status(route))

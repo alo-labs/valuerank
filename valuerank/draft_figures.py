@@ -172,7 +172,7 @@ def named_figures(scores: dict, data: Path = DATA) -> dict:
         figures[f"{track}.planFallbackNames"] = series([names_of.get(row["id"].split("@")[0], row["id"].split("@")[0]) for row in fallback]) or "none"
         figures[f"{track}.listed"] = len(section["listedIndicative"])
         figures[f"{track}.planRows"] = len(section["planRows"])
-    # O91: the controlled measurements an acknowledged fault window removes from the selection, named.
+    # O91, O92: the controlled measurements an acknowledged fault window flags, named.
     registry = json.loads((data / "plan_cost_routes.json").read_text()) if (data / "plan_cost_routes.json").exists() else {"routes": []}
     faults = ((registry.get("evidencePolicy") or {}).get("reportEligibilityProfile") or {}).get("accountingFaultDays") or []
     faulted = sorted(route["id"] for route in registry["routes"] if pr.in_fault_window(route, faults))
