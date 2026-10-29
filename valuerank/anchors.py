@@ -70,8 +70,13 @@ def beyond_factor(cost: float, anchors: dict) -> float:
     return 1.0
 
 
+# O120: anchors stay over the ranked rows; a held gate (e.g. a newly ranked row beyond the anchors) is cleared only by the
+# O12 versioned re-freeze, published with its dual run.
+CLIP_REMEDY = "O12 versioned re-freeze of the anchors with a dual run (O120)"
+
+
 def clip_gate(costs: dict, anchors: dict) -> dict:
-    """The single clip predicate for one basis: clipped rows, the allowance and whether the release holds."""
+    """The single clip predicate for one basis: clipped rows, the allowance, whether the release holds and its remedy."""
 
     known = {key: value for key, value in costs.items() if value is not None and value > 0}
     clipped = sorted(key for key, value in known.items() if beyond_factor(value, anchors) > 1.0)
@@ -84,6 +89,7 @@ def clip_gate(costs: dict, anchors: dict) -> dict:
         "allowance": allowance,
         "beyondFactorLimit": far,
         "hold": len(clipped) > allowance or bool(far),
+        "remedy": CLIP_REMEDY if len(clipped) > allowance or far else None,
     }
 
 

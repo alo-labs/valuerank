@@ -121,6 +121,21 @@ def test_admitted_components_require_two_thirds_of_ranked_rows():
     assert set(admitted) == set(b.TARGET_COMPONENTS)
 
 
+def test_frontiercode_stands_in_only_while_the_coding_agent_index_is_not_admitted():
+    """O116: FrontierCode's chart total is a unit only in a ranking that has not admitted the Coding Agent Index (never both)."""
+
+    ranked = ["a", "b", "c"]
+    pending = {row: {b.FRONTIERCODE: FULL, "scicode": FULL} for row in ranked}
+    pending["a"][b.CODING_AGENT_INDEX] = FULL
+    panel = b.admission_panel(pending, ranked)
+    assert panel["admitted"] == [b.FRONTIERCODE, "scicode"]
+    assert panel["components"][b.FRONTIERCODE]["standsInFor"] == b.CODING_AGENT_INDEX and panel["components"][b.FRONTIERCODE]["eligible"]
+    both = {row: {b.FRONTIERCODE: FULL, b.CODING_AGENT_INDEX: FULL, "scicode": FULL} for row in ranked}
+    panel = b.admission_panel(both, ranked)
+    assert panel["admitted"] == [b.CODING_AGENT_INDEX, "scicode"] and not panel["components"][b.FRONTIERCODE]["eligible"]
+    assert b.admission_panel({}, [])["components"][b.FRONTIERCODE]["eligible"]
+
+
 def test_admission_panel_is_joint_and_deterministic():
     """E95: components that pass alone but not together are admitted in coverage order."""
 

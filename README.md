@@ -178,7 +178,7 @@ AA footnote (Claude Haiku 5.5 (max), Claude Haiku 5.5 (high), Claude Haiku 5.5 (
 
 ## How v3 scores value
 
-- **Cost is the SDLC basket.** SDLC basket v1: AA's published cost of running the Coding Agent Index, AA-Briefcase, GDPval-AA, GDP.pdf, AutomationBench-AA, Terminal-Bench 4.0 (AA Index run), SciCode and AA-LCR once at API rates, in USD per basket run. Pending capture: ITBench-AA. v2 used AA's cost to run the whole Intelligence Index per Index point.
+- **Cost is the SDLC basket.** SDLC basket v1: AA's published cost of running the Coding Agent Index, AA-Briefcase, GDPval-AA, GDP.pdf, AutomationBench-AA, Terminal-Bench 4.0 (AA Index run), SciCode and AA-LCR once at API rates, in USD per basket run. Pending capture: FrontierCode 1.1, ITBench-AA. v2 used AA's cost to run the whole Intelligence Index per Index point.
 - **Cost keeps its magnitude.** The cost score is 100 × (ln c_H − ln c) / (ln c_H − ln c_L), clipped to 0–100, against anchors frozen with anchor version `v3-2026-10-25`. A model entering or leaving the cohort does not move another model's score. At the API anchors, doubling cost costs 3.04 value points, which 4.06 quality points offset.
 - **Quality is measured, not ranked.** Each leaf (13 in the max-effort ranking) is placed on fixed 0–100 anchors from its raw value, so quality no longer depends on which other models are ranked. Only configurations with every leaf are ranked (O36), so all ranked rows are scored on the same benchmarks; each leaf filled from another party or a provider is listed in [raw-data.md](raw-data.md#leaf-gap-fills-and-searches-o36).
 - **Plan value is route evidence.** Each subscription route carries its Value Multiple, evidence grade (controlled measurement, concordant reports, owner-named assumption) and identification status; the Plan ranking is labelled exploratory until multiples are identified on the basket.
@@ -191,7 +191,7 @@ AA footnote (Claude Haiku 5.5 (max), Claude Haiku 5.5 (high), Claude Haiku 5.5 (
 - [AA Coding Agent Index v2.0](https://artificialanalysis.ai/agents/coding-agents): the Coding Agent Index cost (FrontierCode, Terminal-Bench and SWE-Atlas-QnA-AA) for each exact configuration (O50); AA withdrew DeepSWE v1.1 in October 2026 and it is no longer a leaf (O49).
 - AA's own Terminal-Bench 4.0 run (the leaf; [tbench.ai](https://www.tbench.ai/leaderboard/terminal-bench/4.0) rows fill a gap and serve as a cross-check, O37), [Bug Hunt Bench](https://bughunt.productcompass.pm/) owner-published runs, [Cognition's FrontierCode leaderboard](https://cognition.com/data/frontiercode-leaderboard/data.json) and model-provider results for leaves AA has not run (O36).
 - [SemiAnalysis subscription measurements](https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x) (owner-selected 2026-10-07) for the Claude and ChatGPT plan Value Multiples; owner-named transfers are labelled as assumptions.
-- The evidence bundle in `data/scores.json` lists every input artifact with its SHA-256; bundle hash `acdb75e6c11842e8cc3b758363fe3a2468a98017a9eb8f1b29579e582c91f4ef`.
+- The evidence bundle in `data/scores.json` lists every input artifact with its SHA-256; bundle hash `34c2df486f9bf2e7947391a6bfa7d15a2216ef2e6bd0473b8f1b18dc3a869bcd`.
 - [Methodology co-design record](research/2026-10-19-methodology-codesign/): the reviewed specification, every owner and editor decision, and each reviewer's findings.
 
 ## Files

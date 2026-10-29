@@ -365,6 +365,7 @@ Exhaustive searches for the leaves a cohort configuration still lacks (each with
 | Claude Opus 5.5 (max) | SciCode | $135.11 | confirmed-complete | 288 | $0.4691 | AA Intelligence Index evaluation cost (cost per task x task count) |
 | Claude Opus 5.5 (max) | AA-LCR | $67.66 | confirmed-complete | 100 | $0.6766 | AA Intelligence Index evaluation cost (cost per task x task count) |
 | Claude Opus 5.5 (max) | Coding Agent Index | $3,312.59 | confirmed-complete | — | — | AA Coding Agent Index v2.0 cost to run (mean API cost per task) x 290 tasks |
+| Claude Opus 5.5 (max) | FrontierCode 1.1 | $1,015.00 | confirmed-complete | — | — | AA FrontierCode 1.1 total cost chart (labels rounded to USD 1) |
 | Claude Opus 5.5 (max) | ITBench-AA | $146.00 | confirmed-complete | — | — | AA ITBench-AA total cost chart (labels rounded to USD 1) |
 | Claude Sonnet 5.5 (max) | AA-Briefcase | $1,863.13 | confirmed-complete | 91 | $20.4739 | AA Intelligence Index evaluation cost (cost per task x task count) |
 | Claude Sonnet 5.5 (max) | GDPval-AA | $1,504.30 | confirmed-complete | 220 | $6.8377 | AA Intelligence Index evaluation cost (cost per task x task count) |
@@ -374,6 +375,7 @@ Exhaustive searches for the leaves a cohort configuration still lacks (each with
 | Claude Sonnet 5.5 (max) | SciCode | $80.07 | confirmed-complete | 288 | $0.2780 | AA Intelligence Index evaluation cost (cost per task x task count) |
 | Claude Sonnet 5.5 (max) | AA-LCR | $33.93 | confirmed-complete | 100 | $0.3393 | AA Intelligence Index evaluation cost (cost per task x task count) |
 | Claude Sonnet 5.5 (max) | Coding Agent Index | $3,857.44 | confirmed-complete | — | — | AA Coding Agent Index v2.0 cost to run (mean API cost per task) x 290 tasks |
+| Claude Sonnet 5.5 (max) | FrontierCode 1.1 | $826.00 | confirmed-complete | — | — | AA FrontierCode 1.1 total cost chart (labels rounded to USD 1) |
 | GPT-6.1 Sol (max) | AA-Briefcase | $210.45 | confirmed-complete | 91 | $2.3126 | AA Intelligence Index evaluation cost (cost per task x task count) |
 | GPT-6.1 Sol (max) | GDPval-AA | $196.57 | confirmed-complete | 220 | $0.8935 | AA Intelligence Index evaluation cost (cost per task x task count) |
 | GPT-6.1 Sol (max) | GDP.pdf | $41.99 | confirmed-complete | 100 | $0.4199 | AA Intelligence Index evaluation cost (cost per task x task count) |
@@ -382,6 +384,7 @@ Exhaustive searches for the leaves a cohort configuration still lacks (each with
 | GPT-6.1 Sol (max) | SciCode | $12.50 | confirmed-complete | 288 | $0.0434 | AA Intelligence Index evaluation cost (cost per task x task count) |
 | GPT-6.1 Sol (max) | AA-LCR | $19.94 | confirmed-complete | 100 | $0.1994 | AA Intelligence Index evaluation cost (cost per task x task count) |
 | GPT-6.1 Sol (max) | Coding Agent Index | $436.35 | confirmed-complete | — | — | AA Coding Agent Index v2.0 cost to run (mean API cost per task) x 290 tasks |
+| GPT-6.1 Sol (max) | FrontierCode 1.1 | $81.00 | confirmed-complete | — | — | AA FrontierCode 1.1 total cost chart (labels rounded to USD 1) |
 | Claude Haiku 5.5 (max) | AA-Briefcase | $61.41 | confirmed-complete | 91 | $0.6749 | AA Intelligence Index evaluation cost (cost per task x task count) |
 | Claude Haiku 5.5 (max) | GDPval-AA | $48.90 | confirmed-complete | 220 | $0.2223 | AA Intelligence Index evaluation cost (cost per task x task count) |
 | Claude Haiku 5.5 (max) | GDP.pdf | $5.27 | confirmed-complete | 100 | $0.0527 | AA Intelligence Index evaluation cost (cost per task x task count) |
@@ -390,6 +393,7 @@ Exhaustive searches for the leaves a cohort configuration still lacks (each with
 | Claude Haiku 5.5 (max) | SciCode | $3.15 | confirmed-complete | 288 | $0.0109 | AA Intelligence Index evaluation cost (cost per task x task count) |
 | Claude Haiku 5.5 (max) | AA-LCR | $1.93 | confirmed-complete | 100 | $0.0193 | AA Intelligence Index evaluation cost (cost per task x task count) |
 | Claude Haiku 5.5 (max) | Coding Agent Index | $775.43 | confirmed-complete | — | — | AA Coding Agent Index v2.0 cost to run (mean API cost per task) x 290 tasks |
+| Claude Haiku 5.5 (max) | FrontierCode 1.1 | $33.00 | confirmed-incomplete | — | — | AA FrontierCode 1.1 total cost chart (labels rounded to USD 1) |
 | GPT-6 Astra (max) | AA-Briefcase | $864.69 | confirmed-complete | 91 | $9.5021 | AA Intelligence Index evaluation cost (cost per task x task count) |
 | GPT-6 Astra (max) | GDPval-AA | $996.49 | confirmed-complete | 220 | $4.5295 | AA Intelligence Index evaluation cost (cost per task x task count) |
 | GPT-6 Astra (max) | GDP.pdf | $207.58 | confirmed-complete | 100 | $2.0758 | AA Intelligence Index evaluation cost (cost per task x task count) |
@@ -398,6 +402,7 @@ Exhaustive searches for the leaves a cohort configuration still lacks (each with
 | GPT-6 Astra (max) | SciCode | $66.89 | confirmed-complete | 288 | $0.2323 | AA Intelligence Index evaluation cost (cost per task x task count) |
 | GPT-6 Astra (max) | AA-LCR | $99.73 | confirmed-complete | 100 | $0.9973 | AA Intelligence Index evaluation cost (cost per task x task count) |
 | GPT-6 Astra (max) | Coding Agent Index | $2,040.49 | confirmed-complete | — | — | AA Coding Agent Index v2.0 cost to run (mean API cost per task) x 290 tasks |
+| GPT-6 Astra (max) | FrontierCode 1.1 | $422.00 | confirmed-complete | — | — | AA FrontierCode 1.1 total cost chart (labels rounded to USD 1) |
 | GPT-6 Astra (max) | ITBench-AA | $133.00 | confirmed-complete | — | — | AA ITBench-AA total cost chart (labels rounded to USD 1) |
 | GPT-6 Luna (max) | AA-Briefcase | $15.47 | confirmed-complete | 91 | $0.1700 | AA Intelligence Index evaluation cost (cost per task x task count) |
 | GPT-6 Luna (max) | GDPval-AA | $19.66 | confirmed-complete | 220 | $0.0894 | AA Intelligence Index evaluation cost (cost per task x task count) |
@@ -407,6 +412,7 @@ Exhaustive searches for the leaves a cohort configuration still lacks (each with
 | GPT-6 Luna (max) | SciCode | $1.06 | confirmed-complete | 288 | $0.0037 | AA Intelligence Index evaluation cost (cost per task x task count) |
 | GPT-6 Luna (max) | AA-LCR | $1.02 | confirmed-complete | 100 | $0.0102 | AA Intelligence Index evaluation cost (cost per task x task count) |
 | GPT-6 Luna (max) | Coding Agent Index | $46.16 | confirmed-complete | — | — | AA Coding Agent Index v2.0 cost to run (mean API cost per task) x 290 tasks |
+| GPT-6 Luna (max) | FrontierCode 1.1 | $9.00 | confirmed-complete | — | — | AA FrontierCode 1.1 total cost chart (labels rounded to USD 1) |
 | DeepSeek V4.1 Flash 1017 (max) | AA-Briefcase | $61.72 | confirmed-complete | 91 | $0.6783 | AA Intelligence Index evaluation cost (cost per task x task count) |
 | DeepSeek V4.1 Flash 1017 (max) | GDPval-AA | $77.91 | confirmed-complete | 220 | $0.3541 | AA Intelligence Index evaluation cost (cost per task x task count) |
 | DeepSeek V4.1 Flash 1017 (max) | GDP.pdf | $4.23 | confirmed-complete | 100 | $0.0423 | AA Intelligence Index evaluation cost (cost per task x task count) |
@@ -415,6 +421,7 @@ Exhaustive searches for the leaves a cohort configuration still lacks (each with
 | DeepSeek V4.1 Flash 1017 (max) | SciCode | $4.65 | confirmed-complete | 288 | $0.0161 | AA Intelligence Index evaluation cost (cost per task x task count) |
 | DeepSeek V4.1 Flash 1017 (max) | AA-LCR | $3.26 | confirmed-complete | 100 | $0.0326 | AA Intelligence Index evaluation cost (cost per task x task count) |
 | DeepSeek V4.1 Flash 1017 (max) | Coding Agent Index | $85.92 | confirmed-complete | — | — | AA Coding Agent Index v2.0 cost to run (mean API cost per task) x 290 tasks |
+| DeepSeek V4.1 Flash 1017 (max) | FrontierCode 1.1 | $35.00 | confirmed-complete | — | — | AA FrontierCode 1.1 total cost chart (labels rounded to USD 1) |
 | MiMo-V2.6-Pro | AA-Briefcase | $34.60 | confirmed-complete | 91 | $0.3802 | AA Intelligence Index evaluation cost (cost per task x task count) |
 | MiMo-V2.6-Pro | GDPval-AA | $35.47 | confirmed-complete | 220 | $0.1612 | AA Intelligence Index evaluation cost (cost per task x task count) |
 | MiMo-V2.6-Pro | GDP.pdf | $2.40 | confirmed-complete | 100 | $0.0240 | AA Intelligence Index evaluation cost (cost per task x task count) |
@@ -422,6 +429,7 @@ Exhaustive searches for the leaves a cohort configuration still lacks (each with
 | MiMo-V2.6-Pro | Terminal-Bench 4.0 (AA Index run) | $28.91 | confirmed-complete | 66 | $0.4381 | AA Intelligence Index evaluation cost (cost per task x task count) |
 | MiMo-V2.6-Pro | SciCode | $2.25 | confirmed-complete | 288 | $0.0078 | AA Intelligence Index evaluation cost (cost per task x task count) |
 | MiMo-V2.6-Pro | AA-LCR | $4.74 | confirmed-complete | 100 | $0.0474 | AA Intelligence Index evaluation cost (cost per task x task count) |
+| MiMo-V2.6-Pro | FrontierCode 1.1 | $18.00 | confirmed-complete | — | — | AA FrontierCode 1.1 total cost chart (labels rounded to USD 1) |
 | Gemini 4 Argon (high) | AA-Briefcase | $530.33 | confirmed-complete | 91 | $5.8277 | AA Intelligence Index evaluation cost (cost per task x task count) |
 | Gemini 4 Argon (high) | GDPval-AA | $400.23 | confirmed-complete | 220 | $1.8192 | AA Intelligence Index evaluation cost (cost per task x task count) |
 | Gemini 4 Argon (high) | GDP.pdf | $25.93 | confirmed-complete | 100 | $0.2593 | AA Intelligence Index evaluation cost (cost per task x task count) |
@@ -430,6 +438,7 @@ Exhaustive searches for the leaves a cohort configuration still lacks (each with
 | Gemini 4 Argon (high) | SciCode | $30.44 | confirmed-complete | 288 | $0.1057 | AA Intelligence Index evaluation cost (cost per task x task count) |
 | Gemini 4 Argon (high) | AA-LCR | $23.64 | confirmed-complete | 100 | $0.2364 | AA Intelligence Index evaluation cost (cost per task x task count) |
 | Gemini 4 Argon (high) | Coding Agent Index | $1,699.83 | confirmed-complete | — | — | AA Coding Agent Index v2.0 cost to run (mean API cost per task) x 290 tasks |
+| Gemini 4 Argon (high) | FrontierCode 1.1 | $670.00 | confirmed-complete | — | — | AA FrontierCode 1.1 total cost chart (labels rounded to USD 1) |
 
 ### AA Index total reconciliation
 
@@ -747,7 +756,7 @@ Each routed row's amount with what it measures, how it was derived and which obj
 
 ## Evidence bundle
 
-Bundle hash `acdb75e6c11842e8cc3b758363fe3a2468a98017a9eb8f1b29579e582c91f4ef`: every published output is rebuilt from these artifacts at the pinned publication clock (npm run verify:docs), never from live pages.
+Bundle hash `34c2df486f9bf2e7947391a6bfa7d15a2216ef2e6bd0473b8f1b18dc3a869bcd`: every published output is rebuilt from these artifacts at the pinned publication clock (npm run verify:docs), never from live pages.
 
 | Key | Artifact | SHA-256 | Captured | Extractor |
 |---|---|---|---|---|
@@ -756,12 +765,12 @@ Bundle hash `acdb75e6c11842e8cc3b758363fe3a2468a98017a9eb8f1b29579e582c91f4ef`: 
 | tb4 | `data/tb4.json` | `303c4a4a08e33589e9f5c77ef17684d85d8cc25919e86528fcc23b07928cfd50` | 2026-10-23T05:35:48.623Z | scripts/scrape-tb4.js, then valuerank.build_tb4 |
 | codingAgents | `data/aa/coding_agents_capture.json` | `3eea1192ad6fb075c32723f114f9c3146003bdcc370d5a1fc90da1794658f522` | 2026-10-25T09:55:06Z | valuerank.capture_coding_agents |
 | costCharts | `data/aa/cost_charts_capture.json` | `32ffe791efffe4eb918f786bbbf62ecd8055aa2ccd34e8a9cbf0588b9ac1132e` | 2026-10-25T09:55:32.879Z | scripts/capture-aa-cost-charts.js |
-| configurationMap | `data/v3_configuration_map.json` | `554cb718f93d417df82ee3b8dcf0e827c41d49db504bf157334ad3cae57de0ea` | 2026-10-25 | editorial pinning from the research capture |
+| configurationMap | `data/v3_configuration_map.json` | `95479db087ce6b5763e747379d1955740176758a46161e052073dc28c7ba1cc6` | 2026-10-25 | editorial pinning from the research capture |
 | codingAgentsManifest | `data/aa/coding_agents_manifest.json` | `928fb02367ab79ab23cd6685f498e7a5e1cc5f9065a8e03f743e14d4240d366c` | 2026-10-25 | editorial manifest of every AA Coding Agent Index row, reviewed at each capture (O64) |
 | frontierCapture | `data/aa_frontier_capture.json` | `43d8587dbd42051070854f4bd96886779f3cb00f9324b6a39d88c84e3b7b8630` | 2026-10-25T09:53:28Z | browser capture of AA's Intelligence Index vs cost chart from public tooltips (frontier membership, E195; unevaluated cheaper siblings, E201) |
 | roster | `data/aa_mapping.json` | `871ff30c9613bbf5fe81d22b61cbd429ea7fe11587b77e0285765c817ee195d1` | 2026-10-25T09:53:28Z | editorial roster: every configuration AA plots on its rendered frontier or within 3 Index points of it (O51) |
 | bugHuntScoreboard | `data/bug_hunt_scoreboard.json` | `621695b6104795ce5810bb230d17422bb657010acc8a97e4d77b1fece10cd3a3` | 2026-10-25T10:44:11Z | the owner's combined scoreboard at the pinned commit (O31 roster check) |
-| planRoutes | `data/plan_cost_routes.json` | `31111d216d35397d1191766f883852af2d71f6398642631c10ad95803d2a4779` | 2026-10-25 | editorial Plan evidence registry |
+| planRoutes | `data/plan_cost_routes.json` | `e1276157e1ce35ee33aa5830436d633ef9f4a3d922881ecd86606c407e84d934` | 2026-10-25 | editorial Plan evidence registry |
 | priceRecords | `data/price_records.json` | `9be099828d530cc4ad2294d6fdf6ff03a3d94cc5530e8d6ef3279133491930bd` | 2026-10-23T06:26:23Z | editorial E141 price-record registry (superseded and promotional tariffs) |
 | leafEvidence | `data/leaf_evidence.json` | `e7e31c0f4ae8bf333b61f24614f46470df7a62a9b6b48dfb7c090030a90ee853` | 2026-10-25 | editorial supplementary leaf evidence and the exhaustive-search log (O36) |
 | cognitionFrontierCode | `data/cognition_frontiercode.json` | `ff0040778b7bdf69c705ad7474f771fb5e53cfaf5cf8573b3a4614153543d75f` | 2026-10-23 | Cognition's FrontierCode leaderboard data (https://cognition.com/data/frontiercode-leaderboard/data.json), captured unchanged (O37) |

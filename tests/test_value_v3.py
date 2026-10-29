@@ -2204,8 +2204,8 @@ def test_a_pricing_omission_on_any_ai_surface_makes_an_o94_row():
         v.check_register_subjects(register, {"b"})
     assert v.page_notes(None) == [] and v.page_notes({"notes": ["Twice."]}) == ["Twice."]
     charts = {"evaluations": [{"slug": "itbench-aa", "notes": ["Shared."], "rows": [{"model": "A (max)", "notes": ["Twice."]}]},
-                              {"slug": "frontiercode", "notes": ["Open."], "rows": [{"model": "A (max)", "notes": ["Open."]}]}]}
-    labels = {"itbench-aa": "A (max)", "frontiercode": "A (max)"}
+                              {"slug": "outside-chart", "notes": ["Open."], "rows": [{"model": "A (max)", "notes": ["Open."]}]}]}
+    labels = {"itbench-aa": "A (max)", "outside-chart": "A (max)"}
     assert v.chart_notes(charts, labels, "itbench-aa") == ["Twice."] and v.chart_level_notes(charts, labels, "itbench-aa") == ["Shared."]
     assert v.chart_level_notes(charts, {}, "itbench-aa") == [] and v.chart_notes(None, {}, "itbench-aa") == []
     with pytest.raises(ValueError, match="names no row on the captured chart"):
@@ -2231,7 +2231,7 @@ def test_a_pricing_omission_on_any_ai_surface_makes_an_o94_row():
     sources = v.note_sources(configuration, None, {"notes": ["Open."]}, documents, labels)
     disclosed = v.uncounted_notes({"aaNoteSources": sources}, ["coding-agent-index"], register)
     surfaces = {(item["surface"], item["note"]): item for item in disclosed}
-    assert surfaces[("itbench-aa", "Twice.")]["factor"] == 2.0 and surfaces[("frontiercode", "Open.")]["reason"] == "chart outside the cost basket (O108)"
+    assert surfaces[("itbench-aa", "Twice.")]["factor"] == 2.0 and surfaces[("outside-chart", "Open.")]["reason"] == "chart outside the cost basket (O108)"
     assert ("coding-agent-index", "Open.") not in surfaces and v.uncounted_notes({}, []) == []
     # I90 L6: a chart-level note attaches only where the chart holds the row's label.
     assert v.chart_level_notes(charts, {"itbench-aa": "Nobody (max)"}, "itbench-aa") == []

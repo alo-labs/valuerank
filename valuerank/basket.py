@@ -8,7 +8,8 @@ CritPt are excluded from C_W; together with the seven they reconcile to AA's
 published total Index cost, which stays a diagnostic.
 
 A component is admitted to the workload when exact-configuration cost exists for
-at least two-thirds of the ranked rows (the reference panel). A row missing an
+at least two-thirds of the ranked rows (the reference panel). FrontierCode's chart
+total is a stand-in unit, admissible only while the Coding Agent Index is not (O116). A row missing an
 admitted component is scored on the subset it has (owner decision O17); a row is
 eligible for the interval outputs only when no admitted component is marked
 incomplete by AA (FullCost, owner decision O27).
@@ -37,11 +38,16 @@ INDEX_RESIDUAL_TASKS = {"humanitys-last-exam": 2158, "critpt": 70, "omniscience"
 CODING_AGENT_TASKS = {"frontiercode-v1.1-main": 100, "swe-atlas-qna": 124, "terminal-bench-v4": 66}
 CODING_AGENT_REPETITIONS = 3
 CODING_AGENT_INDEX = "coding-agent-index"
-# FrontierCode's cost is counted inside the Coding Agent Index v2.0 (O50), so it is no longer a separate chart component.
-CHART_COMPONENTS = ("itbench-aa",)
+FRONTIERCODE = "frontiercode"
+# FrontierCode's cost is counted inside the Coding Agent Index v2.0 (O50). O116: while a ranking has not admitted the
+# Coding Agent Index, FrontierCode's own chart total stands in for it as a unit of its own (never both, which would count
+# FrontierCode twice); it leaves when the Coding Agent Index is admitted (a versioned migration, E184).
+STAND_INS = {FRONTIERCODE: CODING_AGENT_INDEX}
+CHART_COMPONENTS = (FRONTIERCODE, "itbench-aa")
 TARGET_COMPONENTS = (CODING_AGENT_INDEX, *CHART_COMPONENTS, *INDEX_SDLC_TASKS)
 COMPONENT_LABELS = {
     CODING_AGENT_INDEX: "Coding Agent Index",
+    FRONTIERCODE: "FrontierCode 1.1",
     "itbench-aa": "ITBench-AA",
     "aa-briefcase": "AA-Briefcase",
     "gdpval-aa": "GDPval-AA",
@@ -171,8 +177,8 @@ def admission_panel(costs_by_row: dict, ranked_ids: list[str]) -> dict:
     panel on the same components, is published beside it.
     """
 
-    # E148: the admission units are nine named targets of O15 (since O50), whatever their accounting representation;
-    # an accounting child (e.g. one Coding Agent Index sub-benchmark) never counts as a unit of its own.
+    # E148: the admission units are the named targets of O15 (since O50) and the O116 stand-in, whatever their accounting
+    # representation; an accounting child (e.g. one Coding Agent Index sub-benchmark) never counts as a unit of its own.
     unknown = sorted({component for costs in costs_by_row.values() for component in (costs or {})} - set(TARGET_COMPONENTS))
     if unknown:
         raise ValueError("admission units are the named basket targets (O15); not a unit: " + ", ".join(unknown))
@@ -185,15 +191,27 @@ def admission_panel(costs_by_row: dict, ranked_ids: list[str]) -> dict:
 
     required = math.ceil(ADMISSION_SHARE * len(ranked_ids))
     complete_rows = {component: {row_id for row_id in ranked_ids if complete(row_id, component)} for component in TARGET_COMPONENTS}
-    best, feasible = None, 0
-    for size in range(len(TARGET_COMPONENTS), 0, -1):
-        # combinations() yields subsets in target order, so the first best key is the earliest one.
-        for subset in itertools.combinations(TARGET_COMPONENTS, size):
-            panel = set(ranked_ids).intersection(*(complete_rows[component] for component in subset))
-            if ranked_ids and len(panel) >= required:
-                feasible += 1
-                if best is None or (size, len(panel)) > best[0]:
-                    best = ((size, len(panel)), subset, panel)
+
+    def select(units: tuple) -> tuple:
+        best, feasible = None, 0
+        for size in range(len(units), 0, -1):
+            # combinations() yields subsets in target order, so the first best key is the earliest one.
+            for subset in itertools.combinations(units, size):
+                panel = set(ranked_ids).intersection(*(complete_rows[component] for component in subset))
+                if ranked_ids and len(panel) >= required:
+                    feasible += 1
+                    if best is None or (size, len(panel)) > best[0]:
+                        best = ((size, len(panel)), subset, panel)
+        return best, feasible
+
+    # O116: the selection runs without the stand-ins; a stand-in then replaces its parent only when the parent was not admitted.
+    units = tuple(component for component in TARGET_COMPONENTS if component not in STAND_INS)
+    best, feasible = select(units)
+    standing_in = [stand_in for stand_in, parent in STAND_INS.items() if not (best and parent in best[1])]
+    if standing_in:
+        units = tuple(component for component in TARGET_COMPONENTS
+                      if (component not in STAND_INS or component in standing_in) and component not in {STAND_INS[item] for item in standing_in})
+        best, feasible = select(units)
     admitted = [component for component in TARGET_COMPONENTS if best and component in best[1]]
     panel = [row_id for row_id in ranked_ids if best and row_id in best[2]]
     return {
@@ -203,10 +221,12 @@ def admission_panel(costs_by_row: dict, ranked_ids: list[str]) -> dict:
                 "covered": len(complete_rows[component]),
                 "available": sum(1 for row_id in ranked_ids if available(row_id, component)),
                 "ranked": len(ranked_ids),
+                **({"standsInFor": STAND_INS[component], "eligible": component in standing_in} if component in STAND_INS else {}),
             }
             for component in TARGET_COMPONENTS
         },
-        "selectionRule": "maximise components, then panel size, then target order, over subsets with a complete-evidence panel of at least two-thirds",
+        "selectionRule": "maximise components, then panel size, then target order, over subsets with a complete-evidence panel of at least two-thirds;"
+                         " FrontierCode stands in for the Coding Agent Index only while that index is not admitted (O116)",
         "objective": list(best[0]) if best else None,
         "feasibleAlternatives": feasible,
         "admitted": admitted,

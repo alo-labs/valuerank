@@ -632,7 +632,7 @@ The 90% rule's error bound holds per published event (candidate and kernel assig
 - **GDPval-AA logistic sensitivity** (z = 100 / (1 + 10^((1600 - E) / 400)) against AA's pinned anchor; every other input fixed): API 11 rows move; largest move 2 (Gemini 4 Argon (high), GPT-6 Astra (high), GPT-6.1 Sol (medium)); Plan 5 rows move; largest move 3 (GPT-6 Luna (xhigh)).
 - **Anchor stability:** trimmed anchors (P10 / 2 and P90 x 2 (diagnostic only)) give $15.66 to $4,166.96; 13 rows move; largest move 4 (Claude Haiku 5.5 (high), Kimi K3.1 Pro).
 
-- **Basket readiness (E22):** priced leaves cover 44% of nominal quality weight (AutomationBench-AA, GDPval-AA v2.1, AA-LCR v1.1, SciCode, Terminal-Bench 4.0 (AA run)); pending components: Coding Agent Index, ITBench-AA.
+- **Basket readiness (E22):** priced leaves cover 44% of nominal quality weight (AutomationBench-AA, GDPval-AA v2.1, AA-LCR v1.1, SciCode, Terminal-Bench 4.0 (AA run)); pending components: Coding Agent Index, FrontierCode 1.1, ITBench-AA.
 - **SWE cost companion (O14, diagnostic):** 3 rows evaluated; flagged far from the median ratio: none.
 - **Matched-cost diagnostic (E55):** evaluated at 57% priced quality weight; basket/matched cost-order reversals with separated intervals: 2; rank-gap warnings: 0.
 - **Frontier-families anchors (E187, diagnostic):** anchors rebuilt from the 16 frontier and near-frontier references move API no rank changes (value points per cost doubling 2.83 vs 2.83 frozen); Plan no rank changes (value points per cost doubling 1.85 vs 1.85 frozen).
@@ -724,17 +724,17 @@ No row is scored on a subset workload.
 
 USD at API rates for the exact configuration; "—" marks a component without an exact cost.
 
-| Configuration | Coding Agent Index | ITBench-AA | AA-Briefcase | GDPval-AA | GDP.pdf | AutomationBench-AA | Terminal-Bench 4.0 (AA Index run) | SciCode | AA-LCR | Basket cost | Missing admitted components |
-|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---|
-| Claude Opus 5.5 (max) | $3,312.59 | $146.00 | $1,915.18 | $1,962.05 | $155.23 | $938.69 | $865.21 | $135.11 | $67.66 | $9,351.72 | none |
-| Claude Sonnet 5.5 (max) | $3,857.44 | — | $1,863.13 | $1,504.30 | $79.43 | $678.32 | $834.67 | $80.07 | $33.93 | $8,931.28 | none |
-| GPT-6.1 Sol (max) | $436.35 | — | $210.45 | $196.57 | $41.99 | $195.01 | $120.30 | $12.50 | $19.94 | $1,233.11 | none |
-| Claude Haiku 5.5 (max) | $775.43 | — | $61.41 | $48.90 | $5.27 | $27.80 | $43.02 | $3.15 | $1.93 | $966.92 | none |
-| GPT-6 Astra (max) | $2,040.49 | $133.00 | $864.69 | $996.49 | $207.58 | $1,048.30 | $560.88 | $66.89 | $99.73 | $5,885.05 | none |
-| GPT-6 Luna (max) | $46.16 | — | $15.47 | $19.66 | $2.85 | $23.91 | $15.59 | $1.06 | $1.02 | $125.72 | none |
-| DeepSeek V4.1 Flash 1017 (max) | $85.92 | — | $61.72 | $77.91 | $4.23 | $114.26 | $58.09 | $4.65 | $3.26 | $410.04 | none |
-| MiMo-V2.6-Pro | — | — | $34.60 | $35.47 | $2.40 | $27.77 | $28.91 | $2.25 | $4.74 | $136.13 | Coding Agent Index |
-| Gemini 4 Argon (high) | $1,699.83 | — | $530.33 | $400.23 | $25.93 | $399.89 | $447.49 | $30.44 | $23.64 | $3,557.77 | none |
+| Configuration | Coding Agent Index | FrontierCode 1.1 | ITBench-AA | AA-Briefcase | GDPval-AA | GDP.pdf | AutomationBench-AA | Terminal-Bench 4.0 (AA Index run) | SciCode | AA-LCR | Basket cost | Missing admitted components |
+|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---|
+| Claude Opus 5.5 (max) | $3,312.59 | $1,015.00 | $146.00 | $1,915.18 | $1,962.05 | $155.23 | $938.69 | $865.21 | $135.11 | $67.66 | $9,351.72 | none |
+| Claude Sonnet 5.5 (max) | $3,857.44 | $826.00 | — | $1,863.13 | $1,504.30 | $79.43 | $678.32 | $834.67 | $80.07 | $33.93 | $8,931.28 | none |
+| GPT-6.1 Sol (max) | $436.35 | $81.00 | — | $210.45 | $196.57 | $41.99 | $195.01 | $120.30 | $12.50 | $19.94 | $1,233.11 | none |
+| Claude Haiku 5.5 (max) | $775.43 | $33.00 | — | $61.41 | $48.90 | $5.27 | $27.80 | $43.02 | $3.15 | $1.93 | $966.92 | none |
+| GPT-6 Astra (max) | $2,040.49 | $422.00 | $133.00 | $864.69 | $996.49 | $207.58 | $1,048.30 | $560.88 | $66.89 | $99.73 | $5,885.05 | none |
+| GPT-6 Luna (max) | $46.16 | $9.00 | — | $15.47 | $19.66 | $2.85 | $23.91 | $15.59 | $1.06 | $1.02 | $125.72 | none |
+| DeepSeek V4.1 Flash 1017 (max) | $85.92 | $35.00 | — | $61.72 | $77.91 | $4.23 | $114.26 | $58.09 | $4.65 | $3.26 | $410.04 | none |
+| MiMo-V2.6-Pro | — | $18.00 | — | $34.60 | $35.47 | $2.40 | $27.77 | $28.91 | $2.25 | $4.74 | $136.13 | Coding Agent Index |
+| Gemini 4 Argon (high) | $1,699.83 | $670.00 | — | $530.33 | $400.23 | $25.93 | $399.89 | $447.49 | $30.44 | $23.64 | $3,557.77 | none |
 
 ### Valuation basis
 
@@ -1197,7 +1197,7 @@ The 90% rule's error bound holds per published event (candidate and kernel assig
 - **GDPval-AA logistic sensitivity** (z = 100 / (1 + 10^((1600 - E) / 400)) against AA's pinned anchor; every other input fixed): API 7 rows move; largest move 2 (GPT-6.1 Sol (max)); Plan no rank changes.
 - **Anchor stability:** trimmed anchors (P10 / 2 and P90 x 2 (diagnostic only)) give $162.37 to $18,114.82; 4 rows move; largest move 1 (Claude Opus 5.5 (max), DeepSeek V4.1 Flash 1017 (max), GPT-6 Astra (max), GPT-6.1 Sol (max)).
 
-- **Basket readiness (E22):** priced leaves cover 53% of nominal quality weight (AutomationBench-AA, FrontierCode 1.1, GDPval-AA v2.1, AA-LCR v1.1, SciCode, Terminal-Bench 4.0 (AA run)); pending components: ITBench-AA.
+- **Basket readiness (E22):** priced leaves cover 53% of nominal quality weight (AutomationBench-AA, FrontierCode 1.1, GDPval-AA v2.1, AA-LCR v1.1, SciCode, Terminal-Bench 4.0 (AA run)); pending components: FrontierCode 1.1, ITBench-AA.
 - **SWE cost companion (O14, diagnostic):** 8 rows evaluated; flagged far from the median ratio: Claude Haiku 5.5 (max).
 - **Matched-cost diagnostic (E55):** evaluated at 51% priced quality weight; basket/matched cost-order reversals with separated intervals: 1; rank-gap warnings: 0.
 - **Frontier-families anchors (E187, diagnostic):** anchors rebuilt from the 8 frontier and near-frontier references move API no rank changes (value points per cost doubling 3.04 vs 3.04 frozen); Plan no rank changes (value points per cost doubling 2.44 vs 2.44 frozen).

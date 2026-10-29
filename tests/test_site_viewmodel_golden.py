@@ -192,8 +192,8 @@ def test_model_document_leaves_components_routes_and_scenarios(bundle, v3_rows):
     assert leaves["bugHunt"]["value"] == 44.3 and "GPT-6.1 Sol" in leaves["bugHunt"]["evaluatedVariant"]
     assert leaves["omniscience"]["unit"].startswith("AA Omniscience Index")
     components = {c["key"]: c for c in doc["cost"]["components"]}
-    # O50: the max-effort ranking admits the Coding Agent Index v2.0; FrontierCode is no longer a chart component.
-    assert components["coding-agent-index"]["admitted"] is True and "frontiercode" not in components
+    # O50: the max-effort ranking admits the Coding Agent Index v2.0, so FrontierCode's O116 stand-in is not admitted.
+    assert components["coding-agent-index"]["admitted"] is True and components["frontiercode"]["admitted"] is False
     assert sum(c["costUsd"] for c in components.values() if c["admitted"]) == pytest.approx(doc["cost"]["apiUsd"])
     assert doc["cost"]["costScore"] == by_slug(bundle.rankings)["gpt-6-1-sol"]["costDims"]
     selected = [plan for plan in doc["plans"] if plan["selected"]]
@@ -267,7 +267,8 @@ def test_benchmarks_document(bundle, v3):
     assert terminal["execution"] == "AA-run" and terminal["owner"] == "Artificial Analysis" and terminal["notes"].startswith("AA's own run")
     assert next(s for s in doc["sources"] if s["id"] == "omniscience")["notes"].startswith("Scored as AA's Omniscience Index")
     assert [c["key"] for c in doc["basket"]["admitted"]] == v3["admission"]["admitted"]
-    assert {c["key"] for c in doc["basket"]["pending"]} == {"itbench-aa"}  # O50: v2.0 prices 7 of the max-effort ranking's 9 rows
+    # O50: v2.0 prices 7 of the max-effort ranking's 9 rows; O116: the FrontierCode stand-in is idle beside the admitted index.
+    assert {c["key"] for c in doc["basket"]["pending"]} == {"itbench-aa", "frontiercode"}
     assert doc["basket"]["referencePanelSize"] >= doc["basket"]["requiredPanelSize"]
     frontier = doc["frontier"]
     assert frontier["status"] == "complete" and len(frontier["rows"]) == 19

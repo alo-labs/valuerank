@@ -569,6 +569,15 @@ def test_change_flagged_needs_a_detected_change_and_a_superseded_stage():
     assert not pr.change_flagged({"route": route, "expiry": "fresh"}) and not pr.change_flagged(None)
 
 
+def test_label_denied_adds_hard_expiry_and_fault_windows_to_change_flags():
+    """O118, O119: a hard-expired route (in grace) or one measured in a fault window competes but earns no label."""
+
+    route = {"id": "r"}
+    assert pr.label_denied({"route": route, "expiry": "expired"}) and pr.label_denied({"route": route, "expiry": "fresh", "faultWindow": {"id": "f"}})
+    assert pr.label_denied({"route": {"id": "r", "changeDetectedOn": "2026-10-15"}, "expiry": "possibly-superseded"})
+    assert not pr.label_denied({"route": route, "expiry": "possibly-superseded", "faultWindow": None}) and not pr.label_denied(None)
+
+
 def test_a_report_pair_after_a_detected_change_outranks_the_flagged_controlled_route():
     """O73, O78: a controlled measurement keeps precedence unless a detected change flags it and a report pair dated after
     the change exists; then the report pair wins."""

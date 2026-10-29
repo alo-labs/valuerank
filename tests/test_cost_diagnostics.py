@@ -33,7 +33,9 @@ def make_row(row_id: str, *, cai=100.0, tb=50.0, index_cost=1.0, workload=MAIN, 
 
 
 def admission(rows):
-    components = {component: {"admitted": component not in basket.CHART_COMPONENTS, "available": len(rows), "covered": len(rows)} for component in basket.TARGET_COMPONENTS}
+    components = {component: {"admitted": component not in basket.CHART_COMPONENTS, "available": len(rows), "covered": len(rows),
+                              **({"standsInFor": basket.STAND_INS[component], "eligible": False} if component in basket.STAND_INS else {})}
+                  for component in basket.TARGET_COMPONENTS}
     return {"components": components, "admitted": [key for key, item in components.items() if item["admitted"]]}
 
 
@@ -54,7 +56,8 @@ def test_basket_readiness_prices_leaves_by_family_and_reports_concentration():
     assert agents["status"] == "admitted" and agents["tasks"] == 290 and agents["missingConfigurations"] == ["b"]
     # O50: FrontierCode (15% in the max-effort ranking, O61) and Terminal-Bench (11%) run inside the Coding Agent Index v2.0.
     assert agents["pricedQualityWeight"] == pytest.approx(0.26)
-    assert "frontiercode" not in result["components"]
+    # O116: FrontierCode stands in only while the Coding Agent Index is not admitted.
+    assert result["components"]["frontiercode"]["status"] == cd.STAND_IN_IDLE or "standsInFor" not in admission(rows)["components"]["frontiercode"]
     assert result["components"]["itbench-aa"]["tasks"] == "chart total (no task count)"
     assert result["components"]["itbench-aa"]["missingConfigurations"] == ["a", "b", "s", "z"]
     assert result["components"]["scicode"]["tasks"] == 288 and result["components"]["aa-briefcase"]["pricedQualityWeight"] == 0.0
@@ -64,7 +67,9 @@ def test_basket_readiness_prices_leaves_by_family_and_reports_concentration():
     assert set(result["expenditure"]) == {"a", "b"}  # main workload with a positive cost only
     shares = result["expenditure"]["a"]["shares"]
     assert sum(shares.values()) == pytest.approx(1.0) and result["expenditure"]["a"]["hhi"] == pytest.approx(sum(s * s for s in shares.values()))
-    assert result["overlap"] == {"terminal-bench-v4": [basket.CODING_AGENT_INDEX, "terminalbench-4-0"]}
+    # O116: FrontierCode's family sits in the index and in its stand-in, which are never admitted together.
+    assert result["overlap"] == {"terminal-bench-v4": [basket.CODING_AGENT_INDEX, "terminalbench-4-0"],
+                                 "frontiercode-v1.1-main": [basket.CODING_AGENT_INDEX, "frontiercode"]}
     assert result["familyConcentration"] == {basket.CODING_AGENT_INDEX: cd.POOLED}
 
 

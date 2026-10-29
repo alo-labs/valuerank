@@ -341,6 +341,15 @@ def change_flagged(candidate: dict | None, release_day: date | None = None) -> b
     return bool(changed and candidate.get("expiry") in {"possibly-superseded", "expired"})
 
 
+def label_denied(candidate: dict | None, release_day: date | None = None) -> bool:
+    """E228, O118, O119: a selected Plan route that competes but earns no label: change-flagged, hard-expired (in grace) or
+    measured inside an acknowledged accounting-fault window."""
+
+    if candidate is None:
+        return False
+    return change_flagged(candidate, release_day) or candidate.get("expiry") == "expired" or bool(candidate.get("faultWindow"))
+
+
 
 def check_same_model_routes(document: dict, families: dict | None = None) -> None:
     """I74 L3: a route flagged ``sameModelAcrossEfforts`` (which O90 grades as measured) must name a controlled donor

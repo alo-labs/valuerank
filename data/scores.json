@@ -13497,6 +13497,14 @@
           "available": 8,
           "ranked": 9
         },
+        "frontiercode": {
+          "admitted": false,
+          "covered": 8,
+          "available": 9,
+          "ranked": 9,
+          "standsInFor": "coding-agent-index",
+          "eligible": false
+        },
         "itbench-aa": {
           "admitted": false,
           "covered": 2,
@@ -13546,7 +13554,7 @@
           "ranked": 9
         }
       },
-      "selectionRule": "maximise components, then panel size, then target order, over subsets with a complete-evidence panel of at least two-thirds",
+      "selectionRule": "maximise components, then panel size, then target order, over subsets with a complete-evidence panel of at least two-thirds; FrontierCode stands in for the Coding Agent Index only while that index is not admitted (O116)",
       "objective": [
         8,
         8
@@ -13591,6 +13599,7 @@
       "exactCostAvailable": {
         "claude-sonnet-5-5": {
           "coding-agent-index": true,
+          "frontiercode": true,
           "itbench-aa": false,
           "aa-briefcase": true,
           "gdpval-aa": true,
@@ -13602,6 +13611,7 @@
         },
         "claude-opus-5-5": {
           "coding-agent-index": true,
+          "frontiercode": true,
           "itbench-aa": true,
           "aa-briefcase": true,
           "gdpval-aa": true,
@@ -13613,6 +13623,7 @@
         },
         "deepseek-v4-1-flash-1017": {
           "coding-agent-index": true,
+          "frontiercode": true,
           "itbench-aa": false,
           "aa-briefcase": true,
           "gdpval-aa": true,
@@ -13624,6 +13635,7 @@
         },
         "gpt-6.1-sol": {
           "coding-agent-index": true,
+          "frontiercode": true,
           "itbench-aa": false,
           "aa-briefcase": true,
           "gdpval-aa": true,
@@ -13635,6 +13647,7 @@
         },
         "gemini-4-argon": {
           "coding-agent-index": true,
+          "frontiercode": true,
           "itbench-aa": false,
           "aa-briefcase": true,
           "gdpval-aa": true,
@@ -13646,6 +13659,7 @@
         },
         "gpt-6-astra": {
           "coding-agent-index": true,
+          "frontiercode": true,
           "itbench-aa": true,
           "aa-briefcase": true,
           "gdpval-aa": true,
@@ -13657,6 +13671,7 @@
         },
         "mimo-v2-6-pro": {
           "coding-agent-index": false,
+          "frontiercode": true,
           "itbench-aa": false,
           "aa-briefcase": true,
           "gdpval-aa": true,
@@ -13668,6 +13683,7 @@
         },
         "claude-haiku-5-5-max": {
           "coding-agent-index": true,
+          "frontiercode": true,
           "itbench-aa": false,
           "aa-briefcase": true,
           "gdpval-aa": true,
@@ -13679,6 +13695,7 @@
         },
         "gpt-6-luna": {
           "coding-agent-index": true,
+          "frontiercode": true,
           "itbench-aa": false,
           "aa-briefcase": true,
           "gdpval-aa": true,
@@ -13692,6 +13709,7 @@
       "completeCostEvidence": {
         "claude-sonnet-5-5": {
           "coding-agent-index": true,
+          "frontiercode": true,
           "itbench-aa": false,
           "aa-briefcase": true,
           "gdpval-aa": true,
@@ -13703,6 +13721,7 @@
         },
         "claude-opus-5-5": {
           "coding-agent-index": true,
+          "frontiercode": true,
           "itbench-aa": true,
           "aa-briefcase": true,
           "gdpval-aa": true,
@@ -13714,6 +13733,7 @@
         },
         "deepseek-v4-1-flash-1017": {
           "coding-agent-index": true,
+          "frontiercode": true,
           "itbench-aa": false,
           "aa-briefcase": true,
           "gdpval-aa": true,
@@ -13725,6 +13745,7 @@
         },
         "gpt-6.1-sol": {
           "coding-agent-index": true,
+          "frontiercode": true,
           "itbench-aa": false,
           "aa-briefcase": true,
           "gdpval-aa": true,
@@ -13736,6 +13757,7 @@
         },
         "gemini-4-argon": {
           "coding-agent-index": true,
+          "frontiercode": true,
           "itbench-aa": false,
           "aa-briefcase": true,
           "gdpval-aa": true,
@@ -13747,6 +13769,7 @@
         },
         "gpt-6-astra": {
           "coding-agent-index": true,
+          "frontiercode": true,
           "itbench-aa": true,
           "aa-briefcase": true,
           "gdpval-aa": true,
@@ -13758,6 +13781,7 @@
         },
         "mimo-v2-6-pro": {
           "coding-agent-index": false,
+          "frontiercode": true,
           "itbench-aa": false,
           "aa-briefcase": true,
           "gdpval-aa": true,
@@ -13769,6 +13793,7 @@
         },
         "claude-haiku-5-5-max": {
           "coding-agent-index": true,
+          "frontiercode": false,
           "itbench-aa": false,
           "aa-briefcase": true,
           "gdpval-aa": true,
@@ -13780,6 +13805,7 @@
         },
         "gpt-6-luna": {
           "coding-agent-index": true,
+          "frontiercode": true,
           "itbench-aa": false,
           "aa-briefcase": true,
           "gdpval-aa": true,
@@ -16809,7 +16835,8 @@
             "clipped": [],
             "allowance": 1.0,
             "beyondFactorLimit": [],
-            "hold": false
+            "hold": false,
+            "remedy": null
           },
           {
             "workload": "1453a9a0576b02ea",
@@ -16818,7 +16845,8 @@
             "clipped": [],
             "allowance": 1.0,
             "beyondFactorLimit": [],
-            "hold": false
+            "hold": false,
+            "remedy": null
           }
         ],
         "plan": [
@@ -16829,7 +16857,8 @@
             "clipped": [],
             "allowance": 2.3000000000000003,
             "beyondFactorLimit": [],
-            "hold": false
+            "hold": false,
+            "remedy": null
           },
           {
             "workload": "1453a9a0576b02ea",
@@ -16838,7 +16867,8 @@
             "clipped": [],
             "allowance": 1.0,
             "beyondFactorLimit": [],
-            "hold": false
+            "hold": false,
+            "remedy": null
           }
         ]
       },
@@ -17580,6 +17610,16 @@
                 "sumTaskEquivalent": 292.70961246704644,
                 "attempts": 870,
                 "requiredAttempts": 870
+              }
+            },
+            "frontiercode": {
+              "costUsd": 826.0,
+              "halfWidthUsd": 0.5,
+              "completeness": "confirmed-complete",
+              "source": "AA FrontierCode 1.1 total cost chart (labels rounded to USD 1)",
+              "configuration": "Claude Sonnet 5.5 (max with fallback)",
+              "detail": {
+                "label": "$826"
               }
             }
           },
@@ -18398,6 +18438,16 @@
                 "sumTaskEquivalent": 272.4324666280051,
                 "attempts": 870,
                 "requiredAttempts": 870
+              }
+            },
+            "frontiercode": {
+              "costUsd": 1015.0,
+              "halfWidthUsd": 0.5,
+              "completeness": "confirmed-complete",
+              "source": "AA FrontierCode 1.1 total cost chart (labels rounded to USD 1)",
+              "configuration": "Claude Opus 5.5 (max with fallback)",
+              "detail": {
+                "label": "$1,015"
               }
             },
             "itbench-aa": {
@@ -19223,6 +19273,16 @@
                 "attempts": 870,
                 "requiredAttempts": 870
               }
+            },
+            "frontiercode": {
+              "costUsd": 35.0,
+              "halfWidthUsd": 0.5,
+              "completeness": "confirmed-complete",
+              "source": "AA FrontierCode 1.1 total cost chart (labels rounded to USD 1)",
+              "configuration": "DeepSeek V4.1 Flash 1017 (max)",
+              "detail": {
+                "label": "$35"
+              }
             }
           },
           "indexReconciliation": {
@@ -19894,6 +19954,16 @@
                 "sumTaskEquivalent": 260.2604970625821,
                 "attempts": 870,
                 "requiredAttempts": 870
+              }
+            },
+            "frontiercode": {
+              "costUsd": 81.0,
+              "halfWidthUsd": 0.5,
+              "completeness": "confirmed-complete",
+              "source": "AA FrontierCode 1.1 total cost chart (labels rounded to USD 1)",
+              "configuration": "GPT-6.1 Sol (max)",
+              "detail": {
+                "label": "$81"
               }
             }
           },
@@ -20743,6 +20813,16 @@
                 "attempts": 869,
                 "requiredAttempts": 870
               }
+            },
+            "frontiercode": {
+              "costUsd": 670.0,
+              "halfWidthUsd": 0.5,
+              "completeness": "confirmed-complete",
+              "source": "AA FrontierCode 1.1 total cost chart (labels rounded to USD 1)",
+              "configuration": "Gemini 4 Argon (high)",
+              "detail": {
+                "label": "$670"
+              }
             }
           },
           "indexReconciliation": {
@@ -21414,6 +21494,16 @@
                 "sumTaskEquivalent": 268.6073128901462,
                 "attempts": 870,
                 "requiredAttempts": 870
+              }
+            },
+            "frontiercode": {
+              "costUsd": 422.0,
+              "halfWidthUsd": 0.5,
+              "completeness": "confirmed-complete",
+              "source": "AA FrontierCode 1.1 total cost chart (labels rounded to USD 1)",
+              "configuration": "GPT-6 Astra (max)",
+              "detail": {
+                "label": "$422"
               }
             },
             "itbench-aa": {
@@ -22249,6 +22339,16 @@
               "detail": {
                 "tasks": 100,
                 "costPerTaskUsd": 0.047379438749999996
+              }
+            },
+            "frontiercode": {
+              "costUsd": 18.0,
+              "halfWidthUsd": 0.5,
+              "completeness": "confirmed-complete",
+              "source": "AA FrontierCode 1.1 total cost chart (labels rounded to USD 1)",
+              "configuration": "MiMo-V2.6-Pro",
+              "detail": {
+                "label": "$18"
               }
             }
           },
@@ -23101,6 +23201,16 @@
                 "attempts": 870,
                 "requiredAttempts": 870
               }
+            },
+            "frontiercode": {
+              "costUsd": 33.0,
+              "halfWidthUsd": 0.5,
+              "completeness": "confirmed-incomplete",
+              "source": "AA FrontierCode 1.1 total cost chart (labels rounded to USD 1)",
+              "configuration": "Claude Haiku 5.5 (max)",
+              "detail": {
+                "label": "$33*"
+              }
             }
           },
           "indexReconciliation": {
@@ -23913,6 +24023,16 @@
                 "sumTaskEquivalent": 258.94298057064805,
                 "attempts": 870,
                 "requiredAttempts": 870
+              }
+            },
+            "frontiercode": {
+              "costUsd": 9.0,
+              "halfWidthUsd": 0.5,
+              "completeness": "confirmed-complete",
+              "source": "AA FrontierCode 1.1 total cost chart (labels rounded to USD 1)",
+              "configuration": "GPT-6 Luna (max)",
+              "detail": {
+                "label": "$9"
               }
             }
           },
@@ -30972,6 +31092,16 @@
             "costComplete": 8,
             "pricedQualityWeight": 0.26
           },
+          "frontiercode": {
+            "status": "not needed: the Coding Agent Index it stands in for is admitted (O116)",
+            "missingConfigurations": [
+              "claude-haiku-5-5-max"
+            ],
+            "tasks": "chart total (no task count)",
+            "costAvailable": 9,
+            "costComplete": 8,
+            "pricedQualityWeight": 0.15
+          },
           "itbench-aa": {
             "status": "pending capture",
             "missingConfigurations": [
@@ -31161,6 +31291,10 @@
           }
         },
         "overlap": {
+          "frontiercode-v1.1-main": [
+            "coding-agent-index",
+            "frontiercode"
+          ],
           "terminal-bench-v4": [
             "coding-agent-index",
             "terminalbench-4-0"
@@ -31964,7 +32098,7 @@
         {
           "key": "configurationMap",
           "artifact": "data/v3_configuration_map.json",
-          "sha256": "554cb718f93d417df82ee3b8dcf0e827c41d49db504bf157334ad3cae57de0ea",
+          "sha256": "95479db087ce6b5763e747379d1955740176758a46161e052073dc28c7ba1cc6",
           "capturedAt": "2026-10-25",
           "extractor": "editorial pinning from the research capture"
         },
@@ -31999,7 +32133,7 @@
         {
           "key": "planRoutes",
           "artifact": "data/plan_cost_routes.json",
-          "sha256": "31111d216d35397d1191766f883852af2d71f6398642631c10ad95803d2a4779",
+          "sha256": "e1276157e1ce35ee33aa5830436d633ef9f4a3d922881ecd86606c407e84d934",
           "capturedAt": "2026-10-25",
           "extractor": "editorial Plan evidence registry"
         },
@@ -32074,7 +32208,7 @@
           "extractor": "valuerank.value_v3 freeze"
         }
       ],
-      "bundleHash": "acdb75e6c11842e8cc3b758363fe3a2468a98017a9eb8f1b29579e582c91f4ef",
+      "bundleHash": "34c2df486f9bf2e7947391a6bfa7d15a2216ef2e6bd0473b8f1b18dc3a869bcd",
       "rebuild": "every published output is rebuilt from these artifacts at the pinned publication clock (npm run verify:docs), never from live pages"
     },
     "track": {
@@ -37480,6 +37614,14 @@
             "available": 3,
             "ranked": 16
           },
+          "frontiercode": {
+            "admitted": false,
+            "covered": 5,
+            "available": 5,
+            "ranked": 16,
+            "standsInFor": "coding-agent-index",
+            "eligible": true
+          },
           "itbench-aa": {
             "admitted": false,
             "covered": 0,
@@ -37529,7 +37671,7 @@
             "ranked": 16
           }
         },
-        "selectionRule": "maximise components, then panel size, then target order, over subsets with a complete-evidence panel of at least two-thirds",
+        "selectionRule": "maximise components, then panel size, then target order, over subsets with a complete-evidence panel of at least two-thirds; FrontierCode stands in for the Coding Agent Index only while that index is not admitted (O116)",
         "objective": [
           7,
           16
@@ -37589,6 +37731,7 @@
         "exactCostAvailable": {
           "deepseek-v4-1-flash-1017": {
             "coding-agent-index": true,
+            "frontiercode": true,
             "itbench-aa": false,
             "aa-briefcase": true,
             "gdpval-aa": true,
@@ -37600,6 +37743,7 @@
           },
           "gemini-4-argon": {
             "coding-agent-index": true,
+            "frontiercode": true,
             "itbench-aa": false,
             "aa-briefcase": true,
             "gdpval-aa": true,
@@ -37611,6 +37755,7 @@
           },
           "kimi-k3-1-pro": {
             "coding-agent-index": false,
+            "frontiercode": true,
             "itbench-aa": false,
             "aa-briefcase": true,
             "gdpval-aa": true,
@@ -37622,6 +37767,7 @@
           },
           "gpt-6.1-sol-high": {
             "coding-agent-index": false,
+            "frontiercode": false,
             "itbench-aa": false,
             "aa-briefcase": true,
             "gdpval-aa": true,
@@ -37633,6 +37779,7 @@
           },
           "claude-opus-5-5-high": {
             "coding-agent-index": false,
+            "frontiercode": false,
             "itbench-aa": false,
             "aa-briefcase": true,
             "gdpval-aa": true,
@@ -37644,6 +37791,7 @@
           },
           "mimo-v2-6-pro": {
             "coding-agent-index": false,
+            "frontiercode": true,
             "itbench-aa": false,
             "aa-briefcase": true,
             "gdpval-aa": true,
@@ -37655,6 +37803,7 @@
           },
           "claude-opus-5-5-medium": {
             "coding-agent-index": false,
+            "frontiercode": false,
             "itbench-aa": false,
             "aa-briefcase": true,
             "gdpval-aa": true,
@@ -37666,6 +37815,7 @@
           },
           "gpt-6.1-sol-medium": {
             "coding-agent-index": false,
+            "frontiercode": false,
             "itbench-aa": false,
             "aa-briefcase": true,
             "gdpval-aa": true,
@@ -37677,6 +37827,7 @@
           },
           "gpt-6-astra-high": {
             "coding-agent-index": false,
+            "frontiercode": false,
             "itbench-aa": false,
             "aa-briefcase": true,
             "gdpval-aa": true,
@@ -37688,6 +37839,7 @@
           },
           "gpt-6-luna": {
             "coding-agent-index": true,
+            "frontiercode": true,
             "itbench-aa": false,
             "aa-briefcase": true,
             "gdpval-aa": true,
@@ -37699,6 +37851,7 @@
           },
           "claude-haiku-5-5-high": {
             "coding-agent-index": false,
+            "frontiercode": false,
             "itbench-aa": false,
             "aa-briefcase": true,
             "gdpval-aa": true,
@@ -37710,6 +37863,7 @@
           },
           "gpt-6-luna-xhigh": {
             "coding-agent-index": false,
+            "frontiercode": false,
             "itbench-aa": false,
             "aa-briefcase": true,
             "gdpval-aa": true,
@@ -37721,6 +37875,7 @@
           },
           "claude-haiku-5-5-medium": {
             "coding-agent-index": false,
+            "frontiercode": false,
             "itbench-aa": false,
             "aa-briefcase": true,
             "gdpval-aa": true,
@@ -37732,6 +37887,7 @@
           },
           "gpt-6-luna-high": {
             "coding-agent-index": false,
+            "frontiercode": false,
             "itbench-aa": false,
             "aa-briefcase": true,
             "gdpval-aa": true,
@@ -37743,6 +37899,7 @@
           },
           "gpt-6-luna-medium": {
             "coding-agent-index": false,
+            "frontiercode": false,
             "itbench-aa": false,
             "aa-briefcase": true,
             "gdpval-aa": true,
@@ -37754,6 +37911,7 @@
           },
           "gpt-5.6-luna-low": {
             "coding-agent-index": false,
+            "frontiercode": false,
             "itbench-aa": false,
             "aa-briefcase": true,
             "gdpval-aa": true,
@@ -37767,6 +37925,7 @@
         "completeCostEvidence": {
           "deepseek-v4-1-flash-1017": {
             "coding-agent-index": true,
+            "frontiercode": true,
             "itbench-aa": false,
             "aa-briefcase": true,
             "gdpval-aa": true,
@@ -37778,6 +37937,7 @@
           },
           "gemini-4-argon": {
             "coding-agent-index": true,
+            "frontiercode": true,
             "itbench-aa": false,
             "aa-briefcase": true,
             "gdpval-aa": true,
@@ -37789,6 +37949,7 @@
           },
           "kimi-k3-1-pro": {
             "coding-agent-index": false,
+            "frontiercode": true,
             "itbench-aa": false,
             "aa-briefcase": true,
             "gdpval-aa": true,
@@ -37800,6 +37961,7 @@
           },
           "gpt-6.1-sol-high": {
             "coding-agent-index": false,
+            "frontiercode": false,
             "itbench-aa": false,
             "aa-briefcase": true,
             "gdpval-aa": true,
@@ -37811,6 +37973,7 @@
           },
           "claude-opus-5-5-high": {
             "coding-agent-index": false,
+            "frontiercode": false,
             "itbench-aa": false,
             "aa-briefcase": true,
             "gdpval-aa": true,
@@ -37822,6 +37985,7 @@
           },
           "mimo-v2-6-pro": {
             "coding-agent-index": false,
+            "frontiercode": true,
             "itbench-aa": false,
             "aa-briefcase": true,
             "gdpval-aa": true,
@@ -37833,6 +37997,7 @@
           },
           "claude-opus-5-5-medium": {
             "coding-agent-index": false,
+            "frontiercode": false,
             "itbench-aa": false,
             "aa-briefcase": true,
             "gdpval-aa": true,
@@ -37844,6 +38009,7 @@
           },
           "gpt-6.1-sol-medium": {
             "coding-agent-index": false,
+            "frontiercode": false,
             "itbench-aa": false,
             "aa-briefcase": true,
             "gdpval-aa": true,
@@ -37855,6 +38021,7 @@
           },
           "gpt-6-astra-high": {
             "coding-agent-index": false,
+            "frontiercode": false,
             "itbench-aa": false,
             "aa-briefcase": true,
             "gdpval-aa": true,
@@ -37866,6 +38033,7 @@
           },
           "gpt-6-luna": {
             "coding-agent-index": true,
+            "frontiercode": true,
             "itbench-aa": false,
             "aa-briefcase": true,
             "gdpval-aa": true,
@@ -37877,6 +38045,7 @@
           },
           "claude-haiku-5-5-high": {
             "coding-agent-index": false,
+            "frontiercode": false,
             "itbench-aa": false,
             "aa-briefcase": true,
             "gdpval-aa": true,
@@ -37888,6 +38057,7 @@
           },
           "gpt-6-luna-xhigh": {
             "coding-agent-index": false,
+            "frontiercode": false,
             "itbench-aa": false,
             "aa-briefcase": true,
             "gdpval-aa": true,
@@ -37899,6 +38069,7 @@
           },
           "claude-haiku-5-5-medium": {
             "coding-agent-index": false,
+            "frontiercode": false,
             "itbench-aa": false,
             "aa-briefcase": true,
             "gdpval-aa": true,
@@ -37910,6 +38081,7 @@
           },
           "gpt-6-luna-high": {
             "coding-agent-index": false,
+            "frontiercode": false,
             "itbench-aa": false,
             "aa-briefcase": true,
             "gdpval-aa": true,
@@ -37921,6 +38093,7 @@
           },
           "gpt-6-luna-medium": {
             "coding-agent-index": false,
+            "frontiercode": false,
             "itbench-aa": false,
             "aa-briefcase": true,
             "gdpval-aa": true,
@@ -37932,6 +38105,7 @@
           },
           "gpt-5.6-luna-low": {
             "coding-agent-index": false,
+            "frontiercode": false,
             "itbench-aa": false,
             "aa-briefcase": true,
             "gdpval-aa": true,
@@ -40956,7 +41130,8 @@
               "clipped": [],
               "allowance": 1.6,
               "beyondFactorLimit": [],
-              "hold": false
+              "hold": false,
+              "remedy": null
             }
           ],
           "plan": [
@@ -40967,7 +41142,8 @@
               "clipped": [],
               "allowance": 5.1000000000000005,
               "beyondFactorLimit": [],
-              "hold": false
+              "hold": false,
+              "remedy": null
             }
           ]
         },
@@ -41565,6 +41741,16 @@
                   "attempts": 870,
                   "requiredAttempts": 870
                 }
+              },
+              "frontiercode": {
+                "costUsd": 35.0,
+                "halfWidthUsd": 0.5,
+                "completeness": "confirmed-complete",
+                "source": "AA FrontierCode 1.1 total cost chart (labels rounded to USD 1)",
+                "configuration": "DeepSeek V4.1 Flash 1017 (max)",
+                "detail": {
+                  "label": "$35"
+                }
               }
             },
             "indexReconciliation": {
@@ -42154,6 +42340,16 @@
                   "attempts": 869,
                   "requiredAttempts": 870
                 }
+              },
+              "frontiercode": {
+                "costUsd": 670.0,
+                "halfWidthUsd": 0.5,
+                "completeness": "confirmed-complete",
+                "source": "AA FrontierCode 1.1 total cost chart (labels rounded to USD 1)",
+                "configuration": "Gemini 4 Argon (high)",
+                "detail": {
+                  "label": "$670"
+                }
               }
             },
             "indexReconciliation": {
@@ -42722,6 +42918,16 @@
                 "detail": {
                   "tasks": 100,
                   "costPerTaskUsd": 0.21399322
+                }
+              },
+              "frontiercode": {
+                "costUsd": 179.0,
+                "halfWidthUsd": 0.5,
+                "completeness": "confirmed-complete",
+                "source": "AA FrontierCode 1.1 total cost chart (labels rounded to USD 1)",
+                "configuration": "Kimi K3.1 Pro",
+                "detail": {
+                  "label": "$179"
                 }
               }
             },
@@ -44744,6 +44950,16 @@
                 "detail": {
                   "tasks": 100,
                   "costPerTaskUsd": 0.047379438749999996
+                }
+              },
+              "frontiercode": {
+                "costUsd": 18.0,
+                "halfWidthUsd": 0.5,
+                "completeness": "confirmed-complete",
+                "source": "AA FrontierCode 1.1 total cost chart (labels rounded to USD 1)",
+                "configuration": "MiMo-V2.6-Pro",
+                "detail": {
+                  "label": "$18"
                 }
               }
             },
@@ -47709,6 +47925,16 @@
                   "sumTaskEquivalent": 258.94298057064805,
                   "attempts": 870,
                   "requiredAttempts": 870
+                }
+              },
+              "frontiercode": {
+                "costUsd": 9.0,
+                "halfWidthUsd": 0.5,
+                "completeness": "confirmed-complete",
+                "source": "AA FrontierCode 1.1 total cost chart (labels rounded to USD 1)",
+                "configuration": "GPT-6 Luna (max)",
+                "detail": {
+                  "label": "$9"
                 }
               }
             },
@@ -60292,6 +60518,26 @@
               "costComplete": 3,
               "pricedQualityWeight": 0.38
             },
+            "frontiercode": {
+              "status": "pending capture",
+              "missingConfigurations": [
+                "claude-haiku-5-5-high",
+                "claude-haiku-5-5-medium",
+                "claude-opus-5-5-high",
+                "claude-opus-5-5-medium",
+                "gpt-5.6-luna-low",
+                "gpt-6-astra-high",
+                "gpt-6-luna-high",
+                "gpt-6-luna-medium",
+                "gpt-6-luna-xhigh",
+                "gpt-6.1-sol-high",
+                "gpt-6.1-sol-medium"
+              ],
+              "tasks": "chart total (no task count)",
+              "costAvailable": 5,
+              "costComplete": 5,
+              "pricedQualityWeight": 0.21
+            },
             "itbench-aa": {
               "status": "pending capture",
               "missingConfigurations": [
@@ -60577,6 +60823,10 @@
             }
           },
           "overlap": {
+            "frontiercode-v1.1-main": [
+              "coding-agent-index",
+              "frontiercode"
+            ],
             "terminal-bench-v4": [
               "coding-agent-index",
               "terminalbench-4-0"
@@ -61775,7 +62025,7 @@
           {
             "key": "configurationMap",
             "artifact": "data/v3_configuration_map.json",
-            "sha256": "554cb718f93d417df82ee3b8dcf0e827c41d49db504bf157334ad3cae57de0ea",
+            "sha256": "95479db087ce6b5763e747379d1955740176758a46161e052073dc28c7ba1cc6",
             "capturedAt": "2026-10-25",
             "extractor": "editorial pinning from the research capture"
           },
@@ -61810,7 +62060,7 @@
           {
             "key": "planRoutes",
             "artifact": "data/plan_cost_routes.json",
-            "sha256": "31111d216d35397d1191766f883852af2d71f6398642631c10ad95803d2a4779",
+            "sha256": "e1276157e1ce35ee33aa5830436d633ef9f4a3d922881ecd86606c407e84d934",
             "capturedAt": "2026-10-25",
             "extractor": "editorial Plan evidence registry"
           },
@@ -61885,7 +62135,7 @@
             "extractor": "valuerank.value_v3 freeze"
           }
         ],
-        "bundleHash": "acdb75e6c11842e8cc3b758363fe3a2468a98017a9eb8f1b29579e582c91f4ef",
+        "bundleHash": "34c2df486f9bf2e7947391a6bfa7d15a2216ef2e6bd0473b8f1b18dc3a869bcd",
         "rebuild": "every published output is rebuilt from these artifacts at the pinned publication clock (npm run verify:docs), never from live pages"
       },
       "track": {

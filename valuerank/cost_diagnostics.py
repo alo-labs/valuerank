@@ -44,10 +44,12 @@ LEAF_FAMILIES = {
 # Task families inside each target component (E42); the Coding Agent Index pools three families.
 COMPONENT_FAMILIES = {
     basket.CODING_AGENT_INDEX: tuple(basket.CODING_AGENT_TASKS),
+    basket.FRONTIERCODE: ("frontiercode-v1.1-main",),  # O116: the stand-in while the Coding Agent Index is pending
     "itbench-aa": ("itbench-aa",),
     **{component: (component,) for component in basket.INDEX_SDLC_TASKS},
 }
 COMPONENT_FAMILIES["terminalbench-4-0"] = ("terminal-bench-v4",)
+STAND_IN_IDLE = "not needed: the Coding Agent Index it stands in for is admitted (O116)"
 POOLED = "unidentified: the component publishes one pooled cost across its families"
 
 # Matched-cost families (E103): leaves whose execution family has an exact AA per-evaluation cost per task for
@@ -112,7 +114,7 @@ def basket_readiness(rows: list[dict], admission: dict, main_workload: str) -> d
         item = admission["components"][component]
         missing = sorted(row["id"] for row in rows if (row["components"].get(component) or {}).get("completeness") != basket.COMPLETE)
         components[component] = {
-            "status": "admitted" if item["admitted"] else "pending capture",
+            "status": "admitted" if item["admitted"] else STAND_IN_IDLE if item.get("standsInFor") and not item.get("eligible") else "pending capture",
             "missingConfigurations": missing,
             "tasks": _tasks(component),
             "costAvailable": item["available"],

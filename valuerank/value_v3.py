@@ -881,7 +881,7 @@ def assemble(configurations: list[dict], documents: dict, *, release_day: date, 
         components, reconciliation = row_components(
             page,
             agent_records.get(agent_labels[model_id]),
-            {slug: chart_rows[slug].get(labels.get(slug)) for slug in basket.CHART_COMPONENTS},
+            {slug: chart_rows.get(slug, {}).get(labels.get(slug)) for slug in basket.CHART_COMPONENTS},
         )
         gate = valuation_gate(page, [item for item in price_records if item["aaSlug"] == configuration["aaSlug"]], documents["snapshot"].get("capturedAt"))
         if gate["outcome"] == GATE_REVALUED:
@@ -1524,10 +1524,11 @@ def interval_outputs(assembled: dict, frozen: dict, basis: str, components: list
     unconstructible = sorted(row["id"] for row, _, _ in candidates
                              if row["id"] in not_in_force and blocker_domain(row["valuationGate"], basis) is None)
     # E222/E228/E233: an unverified basis, a provider-claimed leaf, or (Plan) a route whose evidence a detected change may
-    # have superseded, competes but earns no label, exactly like an O29 blocker.
+    # have superseded, competes but earns no label, exactly like an O29 blocker; O118, O119: so does a hard-expired route
+    # (in grace) and one measured inside an acknowledged accounting-fault window.
     blocked = not_in_force | {row["id"] for row in assembled["rows"] if row["valuationGate"]["outcome"] == GATE_UNVERIFIED or provider_claimed(row) or aa_cost_caveat(row)}
     if basis == "plan":
-        blocked |= {row["id"] for row in assembled["rows"] if plan_routes.change_flagged(row["routeSelection"]["selected"], date.fromisoformat(assembled["releaseDay"]) if assembled.get("releaseDay") else None)}
+        blocked |= {row["id"] for row in assembled["rows"] if plan_routes.label_denied(row["routeSelection"]["selected"], date.fromisoformat(assembled["releaseDay"]) if assembled.get("releaseDay") else None)}
     universe = sorted(box.row for box in boxes if box.row not in blocked)
     blockers = sorted(box.row for box in boxes if box.row in blocked)
     unevaluable = sorted(row["id"] for row in assembled["rows"] if row["id"] not in universe and row["id"] not in blockers)
@@ -1557,11 +1558,12 @@ def interval_outputs(assembled: dict, frozen: dict, basis: str, components: list
 
 WITHHELD_LABEL = "no interval label: AA cost on a price not in force at V (O29); competes over its current-tariff hull"
 WITHHELD_CAVEAT = "no interval label: AA's cost omits a pricing term (O94); competes over its published cost up to the stated factor"
-WITHHELD_OTHER = "no interval label: unverified valuation basis (E222), a provider-claimed leaf (E233) or a change-flagged Plan route (E228); competes at its published record"
+WITHHELD_OTHER = ("no interval label: unverified valuation basis (E222), a provider-claimed leaf (E233), or a change-flagged (E228),"
+                  " hard-expired (O118) or fault-window (O119) Plan route; competes at its published record")
 
 
 def withheld_label(row: dict) -> str:
-    """Why a blocker earns no interval label of its own (O29, O94, E222, E233, E228)."""
+    """Why a blocker earns no interval label of its own (O29, O94, E222, E233, E228, O118, O119)."""
 
     if row["valuationGate"]["outcome"] == GATE_NOT_IN_FORCE:
         return WITHHELD_LABEL
@@ -2291,7 +2293,7 @@ def score(assembled: dict, frozen: dict) -> dict:
     fault_flagged = sorted(row["id"] for row in plan_rows if plan_routes.FAULT_FLAG in row["plan"].get("flags", []))
     caveated = sorted((row for row in rows if aa_cost_caveat(row)), key=lambda row: row["id"])
     manifest = [
-        _rule("clip gate (E20)", "fired" if hold else "passed", "release held" if hold else "no basis exceeds the clipping allowance"),
+        _rule("clip gate (E20)", "fired" if hold else "passed", f"release held; remedy: {anchor_math.CLIP_REMEDY}" if hold else "no basis exceeds the clipping allowance"),
         _rule("cost influence flag (E91)", "fired" if influence["api"]["flag"] or influence["plan"]["flag"] else "passed", "cost not discriminating (< 10%); informational only; beta never changes (O2)"),
         _rule("quality influence flag (E126)", "fired" if influence["api"]["qualityFlag"] or influence["plan"]["qualityFlag"] else "passed", "quality not discriminating (cost share > 90%); informational only"),
         _rule("subset scoring (O17)", "fired" if any(row["cost"]["subset"] for row in rows) else "vacuous", "subset rows scored on their own workload and anchors"),

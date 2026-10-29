@@ -62,9 +62,9 @@ def test_clip_gate_allowance_and_far_rows():
     inside = {f"r{index}": 500.0 for index in range(20)}
     gate = a.clip_gate(dict(inside, one=40.0, two=12000.0, missing=None), anchors)
     assert gate["clipped"] == ["one", "two"] and gate["allowance"] == pytest.approx(2.2)
-    assert gate["beyondFactorLimit"] == [] and gate["hold"] is False
+    assert gate["beyondFactorLimit"] == [] and gate["hold"] is False and gate["remedy"] is None
     gate = a.clip_gate(dict(inside, one=40.0, two=12000.0, three=45.0), anchors)
-    assert gate["hold"] is True  # three clipped rows exceed max(1, 2.3)
+    assert gate["hold"] is True and gate["remedy"] == a.CLIP_REMEDY  # O120; three clipped rows exceed max(1, 2.3)
     gate = a.clip_gate({"far": 20.0}, anchors)
     assert gate["beyondFactorLimit"] == ["far"] and gate["hold"] is True and gate["allowance"] == 1.0
 
