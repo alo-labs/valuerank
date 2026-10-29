@@ -1968,3 +1968,6 @@ Asked on I64 Q1 whether future O71 admissions should be executed by the build fr
 - M2 (adopted as O115 with E271): the midpoint pool constrained to the concordance band; counterexample fixture.
 - L1 (adopted): AI Coding Daily's primary sampling unit (six graded projects, E263) stated consistently.
 - Recommendation 1 (bounds-only scenario envelopes): declined by the owner (O114). Recommendation 3 (a sampling-unit registry): not adopted; the one inconsistent sentence is fixed and the E265 figure check already guards the numbers.
+
+## Panel note (round 12, reviewer 69)
+- Gemini 3.8 Flash's first send on r151 stopped after parts 1–3: its answers allow five tool calls, two of which go to GitHub tool discovery, so it cannot read 13 parts in one answer. From reviewer 69 Gemini reviews each revision in five sectional sends (parts 1–3, 4–6, 7–9, 10–11, 12–13), each with the full header and condensed ledger and a read check of its parts; its round is clean only when every section is (O56). The other models keep the single 13-part send while they can read it whole.
