@@ -2309,8 +2309,8 @@ def score(assembled: dict, frozen: dict) -> dict:
               "yield to two concordant user reports for their own model and plan, and the transfers resting on them follow: " + ", ".join(fault_flagged)
               if fault_flagged else "no selected route rests on a measurement in a fault window"),
         # I80 L5: O94 rows, with the factor each competes over.
-        _rule("AA cost omits a pricing term (O94, O98, O100, O106, O108, O109)", "fired" if caveated else "passed",
-              "ranked at the published cost; compete in interval and scenario outputs over [C, factor × C] ([C, ∞) without a stated factor, O98) without a label, and leave the anchor "
+        _rule("AA cost omits a pricing term (O94, O98, O100, O106, O108, O109, O114)", "fired" if caveated else "passed",
+              "ranked at the published cost; compete in interval outputs and the scenario labels' BlockerSafe test over [C, factor × C] ([C, ∞) without a stated factor, O98) without a label (scenario frequencies draw them at the published cost, O114), and leave the anchor "
               "population at the next freeze: " + ", ".join(f"{row['id']} (up to {caveat_factor(row):g}×)" if caveat_factor(row) else f"{row['id']} (no factor stated: [C, ∞), O98)" for row in caveated)
               if caveated else "no AA cost note names an omitted pricing term"),
         _rule("valuation-basis gate (E170)", "fired" if any(row["valuationGate"]["outcome"] not in GATE_SCORED for row in rows) else "passed",

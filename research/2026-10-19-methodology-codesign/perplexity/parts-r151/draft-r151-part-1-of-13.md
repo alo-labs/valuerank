@@ -1,4 +1,4 @@
-# ValueRank methodology — draft r150
+# ValueRank methodology — draft r151
 
 *Where prose and the Normative definitions differ, the Normative definitions govern. Every rule tagged with an owner (O) or editor (E) number is normative wherever it appears; between two tagged rules an owner decision governs an editor decision, and a rule that amends another governs it (E191); an editor record never amends or overrides an owner decision; between two editor rules where neither amends the other, the later-numbered record governs, and finding such a conflict is a defect corrected in the next revision. Each E number names one decision record; a record that holds several rules labels them, and an amendment cites the record it amends. The valuation outcome (4) once tagged E198 is E202.*
 

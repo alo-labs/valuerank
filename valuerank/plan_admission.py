@@ -276,14 +276,18 @@ def evaluate(document: dict, profile: dict, release_day: date, families: dict | 
         # I64 L3: the split comes first, then the range test over every eligible report of the current partition (provisional
         # ones included); the value is the geometric mean of the non-provisional reports' midpoints, the E33 pool the
         # route's own multiple uses (I65 L3).
-        value = (math.exp(sum(math.log((row["valueLower"] + row["valueUpper"]) / 2) for row in firm) / len(firm))
+        # O115 (2026-10-29), E271: each midpoint is first clipped to the concordance band [largest lower bound / 1.20, 1.20x
+        # the smallest upper bound], so a wide report cannot pull the pool beyond what the concordance test admitted, while
+        # concordant point reports keep their own values (the symmetric band adds no upward pull); every report still counts.
+        feasible = [largest_lower / CONCORDANCE, CONCORDANCE * smallest_upper] if status == "passes" else None
+        value = (math.exp(sum(math.log(min(max((row["valueLower"] + row["valueUpper"]) / 2, feasible[0]), feasible[1])) for row in firm) / len(firm))
                  if status == "passes" else None)
         monthly = value * UNIT_TO_MONTH[unit] if value is not None else None
         fee = document.get("listedPlans", {}).get(plan) if listed else None
         results.append({"provider": provider, "plan": plan, "modelId": model, "unit": unit, "region": region, "status": status, "listed": listed,
                         "currentPartition": latest_split, "partitionsWithReports": sorted({row["partition"] for row in eligible}),
                         "configurations": sorted({str(report["modelId"]) for report in reports}), "efforts": sorted({str(report.get("effort") or "unstated") for report in reports}), "value": value, "monthlyUsd": monthly, "multiple": monthly / fee if monthly is not None and fee else None,
-                        "range": None if lowest is None else [lowest, highest], "reports": rows,
+                        "range": None if lowest is None else [lowest, highest], "feasibleRange": feasible, "reports": rows,
                         "admittingObservers": sorted(row["observer"] for row in firm) if status == "passes" else []})
     return results
 

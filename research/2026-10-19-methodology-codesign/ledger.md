@@ -1951,3 +1951,20 @@ Asked on I64 Q1 whether future O71 admissions should be executed by the build fr
 - L5 (adopted, engine changed with tests): a basket label must name the configuration's own row when the chart holds it, and no two configurations may share a label.
 - L6 (adopted, engine changed with tests): `appliesTo` is checked against the editorial roster (the same in every command); `aaUncountedNotes` carries each note's class, factor and reason; a chart-level note attaches only where the chart holds the row's label.
 - Round status (O56): clean (no Medium or higher). With I89, the Opus max rung has two consecutive clean rounds: the internal Claude ladder (Sonnet low→max, Opus low→max) has converged. Draft r150 goes to the Perplexity panel.
+
+## Panel (round 12, 2026-10-29)
+- Six Perplexity models, Search mode, Thinking verified on: GPT-6.1 Sol, Gemini 3.8 Flash, Claude Sonnet 5.5, Kimi K3, GLM 5.3, Grok 4.7 ("Nemotron 3.5 Super VL" is newly selectable but not on the panel). The draft is read from a review copy (`perplexity/draft-rNNN.md`, the non-normative revision history omitted, paragraphs over 20,000 characters folded at clause boundaries) in parts of at most 26,500 characters (the connector truncates near 27,900; 13 parts for r150, which reviewer 68 read in full). The condensed ledger (`ledger-brief.md`) now covers O63–O113 and the internal ladder.
+
+## Owner decisions O114 and O115 (2026-10-29), asked on reviewer 68 M1 and M2
+- O114 (O94 rows in scenario frequencies): scenario frequencies (rank, top-k, frontier shares) draw an O94 row at its published cost (the published record, O25) and say so; only the interval outputs and the scenario labels' BlockerSafe test read its cost range. O94's wording is narrowed accordingly.
+- O115 (pooling ranges, an O81/O86 challenge): a passing cell's pooled value clips each non-provisional report's midpoint to the concordance band before the geometric mean; every report still counts and admission is unchanged; the band is published (`feasibleRange`).
+
+## Editor decisions after reviewer 68 (owner may override)
+- E271. O115's band is [largest lower bound ÷ 1.20, 1.20 × smallest upper bound]. The owner's option text named [largest lower bound, 1.20 × smallest upper bound]; that one-sided band pulls concordant point reports up to the largest one (points 105 and 108 would pool at 108), so the symmetric band is used. It gives the owner's example value (≈118 for [100,110] and [100,1000]) and leaves concordant points unchanged.
+
+## Reviewer 68 (GPT-6.1 Sol, round 12, Thinking) — adopted
+- Read check: all 13 parts read to their ends at commit 82cd769.
+- M1 (adopted as O114): O94's scenario wording against the fixed-record frequencies.
+- M2 (adopted as O115 with E271): the midpoint pool constrained to the concordance band; counterexample fixture.
+- L1 (adopted): AI Coding Daily's primary sampling unit (six graded projects, E263) stated consistently.
+- Recommendation 1 (bounds-only scenario envelopes): declined by the owner (O114). Recommendation 3 (a sampling-unit registry): not adopted; the one inconsistent sentence is fixed and the E265 figure check already guards the numbers.

@@ -17,4 +17,4 @@ Full-utilisation Plan cost overstates value for light users (workday diagnostic 
 
 ## Revision history
 
-Revision history: omitted from this review copy (not normative); it is in draft-r150.md in the same folder of the repository.
+Revision history: omitted from this review copy (not normative); it is in draft-r151.md in the same folder of the repository.
