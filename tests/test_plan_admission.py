@@ -182,3 +182,21 @@ def test_a_credit_grant_flags_and_blocks_without_splitting():
     measured = {"valueMultipleKind": "controlled_account_workload_projection", "sourcePublicationDate": "2026-10-06", "modelLaunchedOn": "2026-09-22"}
     pa.check_change_records([{**measured, "id": "m", "provider": "A", "plan": "Max", "changeDetectedOn": "2026-10-07"}], records, date(2026, 10, 25))
     pa.check_change_flags([{"id": "m", "provider": "A", "plan": "Max", "changeDetectedOn": "2026-10-07"}], records)
+
+
+def test_meter_families_and_resets():
+    """O113: a record naming a meter family reaches every plan on it, and an unknown family stops the build; O112: a reading
+    spanning a reset day is excluded, and a reset flags and splits nothing."""
+
+    profile = {"meterFamilies": {"C": ["Pro", "Max (tier unstated)"]},
+               "partitionSplits": [{"provider": "A", "meterFamily": "C", "date": "2026-10-17", "type": "limit"},
+                                   {"provider": "O", "date": "2026-10-07", "type": "reset"}]}
+    records = pa.profile_records(profile)
+    assert records[0]["plans"] == ["Pro", "Max (tier unstated)"] and pa.splitting(records) == [records[0]]
+    assert pa.applies(records[0], {"provider": "A", "plan": "Max (tier unstated)"})
+    with pytest.raises(ValueError, match="unknown meter family"):
+        pa.profile_records({"partitionSplits": [{"provider": "A", "meterFamily": "X", "date": "2026-10-17", "type": "limit"}]})
+    day = date(2026, 10, 25)
+    assert pa.exclusion(report("r", provider="O", start="2026-10-06", end="2026-10-07"), profile, day) == "spans a provider meter reset (O112)"
+    assert pa.exclusion(report("s", provider="O", start="2026-10-08", end="2026-10-09"), profile, day) is None
+    assert pa.spans_reset(report("t", provider="A", start="2026-10-06", end="2026-10-07"), records) is False

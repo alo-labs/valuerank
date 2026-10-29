@@ -74,15 +74,43 @@ CREDIT_TYPES = {"credit"}
 BLOCKING_TYPES = SPLIT_TYPES | CREDIT_TYPES
 FLAGGING_TYPES = BLOCKING_TYPES | FLAG_ONLY_TYPES
 LOGGED_TYPES = {"metering"}
+# O112 (2026-10-29): a provider's global meter reset flags nothing and splits nothing, but a reading spanning a reset day is
+# not a fraction of one window's allowance, so it is excluded like a reading on an accounting-fault day.
+RESET_TYPES = {"reset"}
 
 
 def splitting(records: list[dict]) -> list[dict]:
     """O83, O99: the recorded changes that split the report partition."""
 
     for record in records:
-        if record.get("type") not in FLAGGING_TYPES | LOGGED_TYPES:
-            raise ValueError(f"partition record {record.get('provider')} {record.get('date')} needs a type: one of {sorted(FLAGGING_TYPES | LOGGED_TYPES)} (O99, O105, O111)")
+        if record.get("type") not in FLAGGING_TYPES | LOGGED_TYPES | RESET_TYPES:
+            raise ValueError(f"partition record {record.get('provider')} {record.get('date')} needs a type: one of {sorted(FLAGGING_TYPES | LOGGED_TYPES | RESET_TYPES)} (O99, O105, O111, O112)")
     return [record for record in records if record["type"] in SPLIT_TYPES]
+
+
+def profile_records(profile: dict) -> list[dict]:
+    """O113 (2026-10-29): the profile's typed change records, each record naming a meter family (``meterFamily``) applying
+    to every plan on that meter (``meterFamilies``), listed, tier-unstated and redacted plans alike; the build stops on an
+    unknown family."""
+
+    families = profile.get("meterFamilies") or {}
+    records = []
+    for record in profile.get("partitionSplits", []):
+        family = record.get("meterFamily")
+        if family is not None:
+            if family not in families:
+                raise ValueError(f"change record {record.get('provider')} {record.get('date')} names an unknown meter family {family!r} (O113)")
+            record = {**record, "plans": list(families[family])}
+        records.append(record)
+    return records
+
+
+def spans_reset(report: dict, records: list[dict]) -> bool:
+    """O112: whether a reading's window touches a day on which its provider reset every meter."""
+
+    start, end = window(report)
+    return any(record.get("type") in RESET_TYPES and applies(record, report)
+               and start <= _end(record["date"][:10]) and end >= _start(record["date"][:10]) for record in records)
 
 
 def check_change_flags(routes: list[dict], records: list[dict]) -> None:
@@ -191,8 +219,11 @@ def exclusion(report: dict, profile: dict, release_day: date) -> str | None:
         return "measured outside the report window"
     if on_fault_day(report, profile.get("accountingFaultDays", [])):
         return "measured on a provider-acknowledged accounting-fault day"
+    records = profile_records(profile)
+    if spans_reset(report, records):
+        return "spans a provider meter reset (O112)"
     # I86 M1: only the records that split (O99, O105) can exclude a report as spanning a split.
-    if partition(report, splitting(profile.get("partitionSplits", []))) is None:
+    if partition(report, splitting(records)) is None:
         return "spans a partition split"
     return None
 
@@ -204,7 +235,7 @@ def cell_key(report: dict, families: dict | None = None) -> tuple:
 def evaluate(document: dict, profile: dict, release_day: date, families: dict | None = None) -> list[dict]:
     """Every model × plan × unit cell's admission, with each report's role (E270, O11, O81, O82)."""
 
-    multipliers, splits = document.get("speedModeMultipliers", {}), splitting(profile.get("partitionSplits", []))
+    multipliers, splits = document.get("speedModeMultipliers", {}), splitting(profile_records(profile))
     cells: dict[tuple, list[dict]] = {}
     for report in document["reports"]:
         cells.setdefault(cell_key(report, families), []).append(report)

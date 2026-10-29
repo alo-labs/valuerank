@@ -787,7 +787,7 @@ Every admissible route-measurement pair in comparator order (E171) and the compa
 | Anthropic | Claude Max 5x | — | week | global | 0 of 1 | fails: 0 non-provisional report(s) in the current partition |
 | Anthropic | Claude Pro | Claude Opus 5.5 | 5h | global | 1 of 4 | fails: a 5-hour figure never converts to a billing period (O82) |
 | Anthropic | Claude Pro | Claude Opus 5.5 | month | global | 0 of 1 | fails: 0 non-provisional report(s) in the current partition |
-| Anthropic | Claude Pro | Claude Opus 5.5 | week | global | 3 of 9 | fails: 0 non-provisional report(s) in the current partition |
+| Anthropic | Claude Pro | Claude Opus 5.5 | week | global | 2 of 9 | fails: 0 non-provisional report(s) in the current partition |
 | Anthropic | Claude Pro | — | week | global | 0 of 1 | fails: 0 non-provisional report(s) in the current partition |
 | Anthropic | Claude Team Premium (not listed) | Claude Opus 5.5 | week | global | 0 of 1 | fails: 0 non-provisional report(s) in the current partition |
 | Google | Google AI (tier unstated) (not listed) | Gemini 4 Argon | week | global | 0 of 1 | fails: 0 non-provisional report(s) in the current partition |
@@ -817,8 +817,8 @@ Every admissible route-measurement pair in comparator order (E171) and the compa
 | OpenAI | ChatGPT Plus | GPT-6 Astra | 5h | global | 0 of 2 | fails: a 5-hour figure never converts to a billing period (O82) |
 | OpenAI | ChatGPT Plus | GPT-6 Luna | 5h | global | 1 of 1 | fails: a 5-hour figure never converts to a billing period (O82) |
 | OpenAI | ChatGPT Plus | GPT-6 Luna | month | global | 0 of 1 | fails: 0 non-provisional report(s) in the current partition |
-| OpenAI | ChatGPT Plus | GPT-6.1 Sol | 5h | global | 1 of 3 | fails: a 5-hour figure never converts to a billing period (O82) |
-| OpenAI | ChatGPT Plus | GPT-6.1 Sol | week | global | 1 of 2 | fails: 0 non-provisional report(s) in the current partition |
+| OpenAI | ChatGPT Plus | GPT-6.1 Sol | 5h | global | 0 of 3 | fails: a 5-hour figure never converts to a billing period (O82) |
+| OpenAI | ChatGPT Plus | GPT-6.1 Sol | week | global | 0 of 2 | fails: 0 non-provisional report(s) in the current partition |
 | OpenAI | ChatGPT Pro (tier unstated) (not listed) | GPT-6 Astra | week | global | 0 of 1 | fails: 0 non-provisional report(s) in the current partition |
 | OpenAI | ChatGPT Pro 100 | GPT-6 Astra | week | global | 0 of 4 | fails: 0 non-provisional report(s) in the current partition |
 | OpenAI | ChatGPT Pro 100 | GPT-6.1 Sol | week | global | 0 of 1 | fails: 0 non-provisional report(s) in the current partition |

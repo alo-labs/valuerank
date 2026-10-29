@@ -14166,7 +14166,7 @@
         "region": "global",
         "status": "fails: 0 non-provisional report(s) in the current partition",
         "listed": false,
-        "currentPartition": 0,
+        "currentPartition": 4,
         "partitionsWithReports": [],
         "configurations": [
           "claude-opus-5-5"
@@ -14200,7 +14200,7 @@
         "region": "global",
         "status": "fails: 0 non-provisional report(s) in the current partition",
         "listed": false,
-        "currentPartition": 0,
+        "currentPartition": 4,
         "partitionsWithReports": [],
         "configurations": [
           "claude-opus-5-5"
@@ -14254,7 +14254,7 @@
         "region": "global",
         "status": "fails: a 5-hour figure never converts to a billing period (O82)",
         "listed": true,
-        "currentPartition": 3,
+        "currentPartition": 4,
         "partitionsWithReports": [
           2
         ],
@@ -14301,7 +14301,7 @@
         "region": "global",
         "status": "fails: 0 non-provisional report(s) in the current partition",
         "listed": true,
-        "currentPartition": 3,
+        "currentPartition": 4,
         "partitionsWithReports": [],
         "configurations": [
           "claude-opus-5-5"
@@ -14335,10 +14335,11 @@
         "region": "global",
         "status": "fails: 1 non-provisional report(s) in the current partition",
         "listed": true,
-        "currentPartition": 3,
+        "currentPartition": 4,
         "partitionsWithReports": [
           2,
-          3
+          3,
+          4
         ],
         "configurations": [
           "claude-opus-5-5"
@@ -14401,7 +14402,7 @@
             "observer": "NicoAica",
             "valueLower": 1294.0,
             "valueUpper": 1681.0,
-            "partition": 2,
+            "partition": 3,
             "provisional": false,
             "speedMode": null,
             "excluded": null
@@ -14411,7 +14412,7 @@
             "observer": "NicoAica",
             "valueLower": 182.0,
             "valueUpper": 212.0,
-            "partition": 3,
+            "partition": 4,
             "provisional": false,
             "speedMode": null,
             "excluded": null
@@ -14477,7 +14478,7 @@
         "region": "global",
         "status": "fails: 0 non-provisional report(s) in the current partition",
         "listed": true,
-        "currentPartition": 3,
+        "currentPartition": 4,
         "partitionsWithReports": [],
         "configurations": [
           "None"
@@ -14561,7 +14562,7 @@
         "region": "global",
         "status": "fails: 0 non-provisional report(s) in the current partition",
         "listed": true,
-        "currentPartition": 3,
+        "currentPartition": 4,
         "partitionsWithReports": [],
         "configurations": [
           "claude-opus-5-5"
@@ -14595,7 +14596,7 @@
         "region": "global",
         "status": "fails: 0 non-provisional report(s) in the current partition",
         "listed": true,
-        "currentPartition": 3,
+        "currentPartition": 4,
         "partitionsWithReports": [
           2
         ],
@@ -14642,7 +14643,7 @@
         "region": "global",
         "status": "fails: 0 non-provisional report(s) in the current partition",
         "listed": true,
-        "currentPartition": 3,
+        "currentPartition": 4,
         "partitionsWithReports": [],
         "configurations": [
           "None"
@@ -14676,9 +14677,9 @@
         "region": "global",
         "status": "fails: a 5-hour figure never converts to a billing period (O82)",
         "listed": true,
-        "currentPartition": 3,
+        "currentPartition": 4,
         "partitionsWithReports": [
-          3
+          4
         ],
         "configurations": [
           "claude-opus-5-5"
@@ -14700,7 +14701,7 @@
             "observer": "K45SLE",
             "valueLower": 42.0,
             "valueUpper": 42.0,
-            "partition": 3,
+            "partition": 4,
             "provisional": true,
             "speedMode": null,
             "excluded": null
@@ -14746,7 +14747,7 @@
         "region": "global",
         "status": "fails: 0 non-provisional report(s) in the current partition",
         "listed": true,
-        "currentPartition": 3,
+        "currentPartition": 4,
         "partitionsWithReports": [],
         "configurations": [
           "claude-opus-5-5"
@@ -14780,10 +14781,10 @@
         "region": "global",
         "status": "fails: 0 non-provisional report(s) in the current partition",
         "listed": true,
-        "currentPartition": 3,
+        "currentPartition": 4,
         "partitionsWithReports": [
           2,
-          3
+          4
         ],
         "configurations": [
           "claude-opus-5-5"
@@ -14827,17 +14828,17 @@
             "observer": "ganpei777",
             "valueLower": 1266.15,
             "valueUpper": 1266.15,
-            "partition": 2,
+            "partition": null,
             "provisional": false,
             "speedMode": null,
-            "excluded": null
+            "excluded": "spans a partition split"
           },
           {
             "id": "k45sle-pro",
             "observer": "K45SLE",
             "valueLower": 210.0,
             "valueUpper": 300.0,
-            "partition": 3,
+            "partition": 4,
             "provisional": true,
             "speedMode": null,
             "excluded": null
@@ -14903,7 +14904,7 @@
         "region": "global",
         "status": "fails: 0 non-provisional report(s) in the current partition",
         "listed": true,
-        "currentPartition": 3,
+        "currentPartition": 4,
         "partitionsWithReports": [],
         "configurations": [
           "None"
@@ -14937,7 +14938,7 @@
         "region": "global",
         "status": "fails: 0 non-provisional report(s) in the current partition",
         "listed": false,
-        "currentPartition": 0,
+        "currentPartition": 4,
         "partitionsWithReports": [],
         "configurations": [
           "claude-opus-5-5"
@@ -16104,9 +16105,7 @@
         "status": "fails: a 5-hour figure never converts to a billing period (O82)",
         "listed": true,
         "currentPartition": 1,
-        "partitionsWithReports": [
-          0
-        ],
+        "partitionsWithReports": [],
         "configurations": [
           "gpt-6.1-sol"
         ],
@@ -16125,10 +16124,10 @@
             "observer": "mehoney",
             "valueLower": 8.3,
             "valueUpper": 8.7,
-            "partition": 0,
+            "partition": null,
             "provisional": false,
             "speedMode": null,
-            "excluded": null
+            "excluded": "spans a provider meter reset (O112)"
           },
           {
             "id": "oleg-plus",
@@ -16162,9 +16161,7 @@
         "status": "fails: 0 non-provisional report(s) in the current partition",
         "listed": true,
         "currentPartition": 1,
-        "partitionsWithReports": [
-          0
-        ],
+        "partitionsWithReports": [],
         "configurations": [
           "gpt-6.1-sol"
         ],
@@ -16182,10 +16179,10 @@
             "observer": "mehoney",
             "valueLower": 57.0,
             "valueUpper": 57.0,
-            "partition": 0,
+            "partition": null,
             "provisional": false,
             "speedMode": null,
-            "excluded": null
+            "excluded": "spans a provider meter reset (O112)"
           },
           {
             "id": "pasto-shouwa-plus-week",
@@ -31950,7 +31947,7 @@
         {
           "key": "planRoutes",
           "artifact": "data/plan_cost_routes.json",
-          "sha256": "8cb6e444a3ecb2d2a2db0b538fdbda8540a5e50a966ea962127522f40b434c89",
+          "sha256": "c9e807d8eb59ef793484865e1e9098bab41de6875800c0b0e4c2a51c38da08ce",
           "capturedAt": "2026-10-25",
           "extractor": "editorial Plan evidence registry"
         },
@@ -32025,7 +32022,7 @@
           "extractor": "valuerank.value_v3 freeze"
         }
       ],
-      "bundleHash": "0a7f3cfea6382fb95c81f84ce600f6c5c89a43d9d9866c281bee77ddd9ce3bc4",
+      "bundleHash": "685e57006ecd249eb5a5825f9ab1aacb4050e2624c83cb3140083afdd798beb0",
       "rebuild": "every published output is rebuilt from these artifacts at the pinned publication clock (npm run verify:docs), never from live pages"
     },
     "track": {
@@ -38229,7 +38226,7 @@
           "region": "global",
           "status": "fails: 0 non-provisional report(s) in the current partition",
           "listed": false,
-          "currentPartition": 0,
+          "currentPartition": 4,
           "partitionsWithReports": [],
           "configurations": [
             "claude-opus-5-5"
@@ -38263,7 +38260,7 @@
           "region": "global",
           "status": "fails: 0 non-provisional report(s) in the current partition",
           "listed": false,
-          "currentPartition": 0,
+          "currentPartition": 4,
           "partitionsWithReports": [],
           "configurations": [
             "claude-opus-5-5"
@@ -38317,7 +38314,7 @@
           "region": "global",
           "status": "fails: a 5-hour figure never converts to a billing period (O82)",
           "listed": true,
-          "currentPartition": 3,
+          "currentPartition": 4,
           "partitionsWithReports": [
             2
           ],
@@ -38364,7 +38361,7 @@
           "region": "global",
           "status": "fails: 0 non-provisional report(s) in the current partition",
           "listed": true,
-          "currentPartition": 3,
+          "currentPartition": 4,
           "partitionsWithReports": [],
           "configurations": [
             "claude-opus-5-5"
@@ -38398,10 +38395,11 @@
           "region": "global",
           "status": "fails: 1 non-provisional report(s) in the current partition",
           "listed": true,
-          "currentPartition": 3,
+          "currentPartition": 4,
           "partitionsWithReports": [
             2,
-            3
+            3,
+            4
           ],
           "configurations": [
             "claude-opus-5-5"
@@ -38464,7 +38462,7 @@
               "observer": "NicoAica",
               "valueLower": 1294.0,
               "valueUpper": 1681.0,
-              "partition": 2,
+              "partition": 3,
               "provisional": false,
               "speedMode": null,
               "excluded": null
@@ -38474,7 +38472,7 @@
               "observer": "NicoAica",
               "valueLower": 182.0,
               "valueUpper": 212.0,
-              "partition": 3,
+              "partition": 4,
               "provisional": false,
               "speedMode": null,
               "excluded": null
@@ -38540,7 +38538,7 @@
           "region": "global",
           "status": "fails: 0 non-provisional report(s) in the current partition",
           "listed": true,
-          "currentPartition": 3,
+          "currentPartition": 4,
           "partitionsWithReports": [],
           "configurations": [
             "None"
@@ -38624,7 +38622,7 @@
           "region": "global",
           "status": "fails: 0 non-provisional report(s) in the current partition",
           "listed": true,
-          "currentPartition": 3,
+          "currentPartition": 4,
           "partitionsWithReports": [],
           "configurations": [
             "claude-opus-5-5"
@@ -38658,7 +38656,7 @@
           "region": "global",
           "status": "fails: 0 non-provisional report(s) in the current partition",
           "listed": true,
-          "currentPartition": 3,
+          "currentPartition": 4,
           "partitionsWithReports": [
             2
           ],
@@ -38705,7 +38703,7 @@
           "region": "global",
           "status": "fails: 0 non-provisional report(s) in the current partition",
           "listed": true,
-          "currentPartition": 3,
+          "currentPartition": 4,
           "partitionsWithReports": [],
           "configurations": [
             "None"
@@ -38739,9 +38737,9 @@
           "region": "global",
           "status": "fails: a 5-hour figure never converts to a billing period (O82)",
           "listed": true,
-          "currentPartition": 3,
+          "currentPartition": 4,
           "partitionsWithReports": [
-            3
+            4
           ],
           "configurations": [
             "claude-opus-5-5"
@@ -38763,7 +38761,7 @@
               "observer": "K45SLE",
               "valueLower": 42.0,
               "valueUpper": 42.0,
-              "partition": 3,
+              "partition": 4,
               "provisional": true,
               "speedMode": null,
               "excluded": null
@@ -38809,7 +38807,7 @@
           "region": "global",
           "status": "fails: 0 non-provisional report(s) in the current partition",
           "listed": true,
-          "currentPartition": 3,
+          "currentPartition": 4,
           "partitionsWithReports": [],
           "configurations": [
             "claude-opus-5-5"
@@ -38843,10 +38841,10 @@
           "region": "global",
           "status": "fails: 0 non-provisional report(s) in the current partition",
           "listed": true,
-          "currentPartition": 3,
+          "currentPartition": 4,
           "partitionsWithReports": [
             2,
-            3
+            4
           ],
           "configurations": [
             "claude-opus-5-5"
@@ -38890,17 +38888,17 @@
               "observer": "ganpei777",
               "valueLower": 1266.15,
               "valueUpper": 1266.15,
-              "partition": 2,
+              "partition": null,
               "provisional": false,
               "speedMode": null,
-              "excluded": null
+              "excluded": "spans a partition split"
             },
             {
               "id": "k45sle-pro",
               "observer": "K45SLE",
               "valueLower": 210.0,
               "valueUpper": 300.0,
-              "partition": 3,
+              "partition": 4,
               "provisional": true,
               "speedMode": null,
               "excluded": null
@@ -38966,7 +38964,7 @@
           "region": "global",
           "status": "fails: 0 non-provisional report(s) in the current partition",
           "listed": true,
-          "currentPartition": 3,
+          "currentPartition": 4,
           "partitionsWithReports": [],
           "configurations": [
             "None"
@@ -39000,7 +38998,7 @@
           "region": "global",
           "status": "fails: 0 non-provisional report(s) in the current partition",
           "listed": false,
-          "currentPartition": 0,
+          "currentPartition": 4,
           "partitionsWithReports": [],
           "configurations": [
             "claude-opus-5-5"
@@ -40167,9 +40165,7 @@
           "status": "fails: a 5-hour figure never converts to a billing period (O82)",
           "listed": true,
           "currentPartition": 1,
-          "partitionsWithReports": [
-            0
-          ],
+          "partitionsWithReports": [],
           "configurations": [
             "gpt-6.1-sol"
           ],
@@ -40188,10 +40184,10 @@
               "observer": "mehoney",
               "valueLower": 8.3,
               "valueUpper": 8.7,
-              "partition": 0,
+              "partition": null,
               "provisional": false,
               "speedMode": null,
-              "excluded": null
+              "excluded": "spans a provider meter reset (O112)"
             },
             {
               "id": "oleg-plus",
@@ -40225,9 +40221,7 @@
           "status": "fails: 0 non-provisional report(s) in the current partition",
           "listed": true,
           "currentPartition": 1,
-          "partitionsWithReports": [
-            0
-          ],
+          "partitionsWithReports": [],
           "configurations": [
             "gpt-6.1-sol"
           ],
@@ -40245,10 +40239,10 @@
               "observer": "mehoney",
               "valueLower": 57.0,
               "valueUpper": 57.0,
-              "partition": 0,
+              "partition": null,
               "provisional": false,
               "speedMode": null,
-              "excluded": null
+              "excluded": "spans a provider meter reset (O112)"
             },
             {
               "id": "pasto-shouwa-plus-week",
@@ -61712,7 +61706,7 @@
           {
             "key": "planRoutes",
             "artifact": "data/plan_cost_routes.json",
-            "sha256": "8cb6e444a3ecb2d2a2db0b538fdbda8540a5e50a966ea962127522f40b434c89",
+            "sha256": "c9e807d8eb59ef793484865e1e9098bab41de6875800c0b0e4c2a51c38da08ce",
             "capturedAt": "2026-10-25",
             "extractor": "editorial Plan evidence registry"
           },
@@ -61787,7 +61781,7 @@
             "extractor": "valuerank.value_v3 freeze"
           }
         ],
-        "bundleHash": "0a7f3cfea6382fb95c81f84ce600f6c5c89a43d9d9866c281bee77ddd9ce3bc4",
+        "bundleHash": "685e57006ecd249eb5a5825f9ab1aacb4050e2624c83cb3140083afdd798beb0",
         "rebuild": "every published output is rebuilt from these artifacts at the pinned publication clock (npm run verify:docs), never from live pages"
       },
       "track": {

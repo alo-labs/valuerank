@@ -815,8 +815,9 @@ def assemble(configurations: list[dict], documents: dict, *, release_day: date, 
     allowance_cells = plan_admission.evaluate(documents.get("planReports") or {"reports": []}, policy.get("reportEligibilityProfile") or {}, release_day, families)
     plan_admission.check_routes(documents["planRoutes"]["routes"], allowance_cells, set(families), plan_routes.REPORT_KINDS, families)
     plan_routes.check_same_model_routes(documents["planRoutes"], families)
-    plan_admission.check_change_flags(documents["planRoutes"]["routes"], (policy.get("reportEligibilityProfile") or {}).get("partitionSplits") or [])
-    plan_admission.check_change_records(documents["planRoutes"]["routes"], (policy.get("reportEligibilityProfile") or {}).get("partitionSplits") or [], release_day)
+    change_records = plan_admission.profile_records(policy.get("reportEligibilityProfile") or {})
+    plan_admission.check_change_flags(documents["planRoutes"]["routes"], change_records)
+    plan_admission.check_change_records(documents["planRoutes"]["routes"], change_records, release_day)
     plan_routes.check_lower_of_routes(documents["planRoutes"])
     # I51 L7: an O46 ceiling is recomputed from its recorded credits, rate and fee, so the stored multiple cannot drift.
     for route in documents["planRoutes"]["routes"]:
@@ -864,8 +865,10 @@ def assemble(configurations: list[dict], documents: dict, *, release_day: date, 
     rows, supplements, tracks = [], leaf_supplements(documents), track_records(documents)
     check_captured_footnotes(documents.get("frontierCapture"), documents.get("aaFootnotes"))
     check_capture_twins(documents.get("frontierCapture"))
-    # I89 L4: only the cohort's configurations (not every configuration-map row, retired ones included).
-    check_register_subjects(documents.get("aaFootnotes"), {item["id"] for item in configurations})
+    # I89 L4, I90 L6: the editorial roster (the cohort roster O51, the same in every command), not every configuration-map row.
+    check_register_subjects(documents.get("aaFootnotes"), {item["id"] for item in documents.get("roster") or []} | {item["id"] for item in configurations})
+    check_shared_labels(mapping)
+    check_regime_bounds(documents["planRoutes"]["routes"], {item["id"]: pages.get(item["aaSlug"]) for item in configurations}, change_records)
     check_surface_notes(documents, documents.get("aaFootnotes"))
     for configuration in configurations:
         model_id, effort = configuration["id"], configuration.get("effort")
@@ -931,7 +934,7 @@ def assemble(configurations: list[dict], documents: dict, *, release_day: date, 
     main = basket.workload_hash(admitted)
     for row in rows + listed:
         row["aaNoteClass"] = admitted_note_class(row, admitted, documents.get("aaFootnotes"))
-        row["aaUncountedNotes"] = uncounted_notes(row, admitted)
+        row["aaUncountedNotes"] = uncounted_notes(row, admitted, documents.get("aaFootnotes"))
         row["cost"] = basket.row_cost(row["components"], admitted)
         selected = row["routeSelection"]["selected"]
         row["plan"] = plan_routes.plan_cost(row["cost"]["costUsd"], selected)
@@ -1118,6 +1121,33 @@ def check_surface_notes(documents: dict, register: dict | None) -> None:
 TWIN_LIST_FIELDS = {"order", "tier", "intelligence_gap", "cost_ratio"}
 
 
+def check_shared_labels(mapping: dict) -> None:
+    """I90 L5: no two configurations share one basket-chart label (a shared label prices both from one row)."""
+
+    for slug in basket.CHART_COMPONENTS:
+        seen: dict[str, str] = {}
+        for model_id, labels in sorted(mapping.items()):
+            label = (labels or {}).get(slug)
+            if label is not None and seen.setdefault(label, model_id) != model_id:
+                raise ValueError(f"{slug}: {seen[label]} and {model_id} share the label {label!r} (I90 L5)")
+
+
+def check_regime_bounds(routes: list[dict], pages: dict, records: list[dict]) -> None:  # pages keyed by configuration ID
+    """O110, I90 L1: a route's ``modelLaunchedOn`` equals AA's release date for its model, and its ``scheduleFrom`` is the
+    date of a recorded change for its provider (the schedule's start); the build stops otherwise."""
+
+    for route in routes:
+        launched = route.get("modelLaunchedOn")
+        model = (route.get("modelIds") or [None])[0]
+        if launched is not None and model in pages:
+            page = pages[model]
+            if page is None or page.get("releaseDate") != launched:
+                raise ValueError(f"route {route['id']}: modelLaunchedOn {launched} is not AA's release date {(page or {}).get('releaseDate')} (I90 L1)")
+        schedule = route.get("scheduleFrom")
+        if schedule is not None and not any(record["date"][:10] == schedule and record.get("provider") == route.get("provider") for record in records):
+            raise ValueError(f"route {route['id']}: scheduleFrom {schedule} is no recorded change for its provider (I90 L1)")
+
+
 def check_register_subjects(register: dict | None, known: set) -> None:
     """I88 L1: every configuration a chart-level note's ``appliesTo`` names is a known configuration (the build stops on a
     typo, a family name or any other ID that would silently match no row)."""
@@ -1168,6 +1198,9 @@ def basket_label(capture: dict | None, labels: dict, slug: str, configuration: d
                 if point.get("family") == configuration_family(configuration) and point.get("effort") == configuration.get("effort")} if configuration else set()
     if label is None and configuration and expected & models:
         raise ValueError(f"{slug}: the chart holds a row for {configuration['id']} but the configuration map gives it no label (I88 L3)")
+    # I90 L5: when the chart holds the configuration's own row, the label must name it, not another configuration's row.
+    if label is not None and configuration and expected & models and label not in expected:
+        raise ValueError(f"{slug}: {configuration['id']}'s label {label!r} names another row than its own ({sorted(expected & models)}) (I90 L5)")
     return label
 
 
@@ -1183,7 +1216,9 @@ def chart_level_notes(capture: dict | None, labels: dict, slug: str) -> list[str
     """O106, I87 L3: the notes printed on one basket cost chart that holds the row (they name no row themselves)."""
 
     evaluation = next((item for item in (capture or {}).get("evaluations", []) if item.get("slug") == slug), {})
-    return list(evaluation.get("notes") or []) if labels.get(slug) is not None else []
+    # I90 L6: only on a chart that actually holds the row's label.
+    holds = labels.get(slug) is not None and any(row.get("model") == labels[slug] for row in evaluation.get("rows", []))
+    return list(evaluation.get("notes") or []) if holds else []
 
 
 def note_sources(configuration: dict, page: dict | None, record: dict | None, documents: dict, labels: dict) -> dict:
@@ -1198,18 +1233,22 @@ def note_sources(configuration: dict, page: dict | None, record: dict | None, do
         "shared": {basket.CODING_AGENT_INDEX: list(agents.get("notes") or []) if record else [], **{slug: chart_level_notes(charts, labels, slug) for slug in basket.CHART_COMPONENTS}},
         # O108, I89 L3: notes on charts outside the basket, disclosed only.
         "other": {evaluation["slug"]: [*(note for row in evaluation.get("rows", []) if row.get("model") == labels.get(evaluation["slug"]) for note in row.get("notes") or []),
-                                      *(evaluation.get("notes") or [])]
+                                      *chart_level_notes(charts, labels, evaluation["slug"])]
                   for evaluation in charts.get("evaluations", []) if evaluation.get("slug") not in basket.CHART_COMPONENTS and labels.get(evaluation.get("slug")) is not None},
     }
 
 
-def uncounted_notes(row: dict, admitted: list[str]) -> list[dict]:
+def uncounted_notes(row: dict, admitted: list[str], register: dict | None = None) -> list[dict]:
     """O108, O109, I89 L3: the row's notes that change nothing (a pending component's, or a chart outside the basket's),
     published as disclosures with their surface."""
 
     sources = row.get("aaNoteSources") or {}
-    pending = [{"surface": slug, "note": note} for kind in ("rows", "shared") for slug, notes in (sources.get(kind) or {}).items() if slug not in admitted for note in notes]
-    return pending + [{"surface": slug, "note": note} for slug, notes in (sources.get("other") or {}).items() for note in notes]
+    pending = [{"surface": slug, "note": note, "reason": "component not admitted to this ranking's cost workload (O109)"}
+               for kind in ("rows", "shared") for slug, notes in (sources.get(kind) or {}).items() if slug not in admitted for note in notes]
+    other = [{"surface": slug, "note": note, "reason": "chart outside the cost basket (O108)"} for slug, notes in (sources.get("other") or {}).items() for note in notes]
+    # I90 L6: each disclosure carries its registered class and factor.
+    return [{**item, **{key: entry.get(key) for key in ("kind", "factor")}} for item in pending + other
+            if (entry := classify_footnote(item["note"], register)) is not None]
 
 
 def admitted_note_class(row: dict, admitted: list[str], register: dict | None) -> dict | None:

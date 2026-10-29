@@ -297,9 +297,11 @@ def registry_figures(capture: dict, plan_document: dict, release: str) -> dict:
         f"{series(sorted(set(names)))} possibly superseded from {label}" + (f", blocking from {blocking}" if blocking and blocking != label else "" if blocking else ", blocking nothing")
         for (label, blocking), names in sorted(groups.items())]) or "none"  # groups joined by semicolons, names within by series
     # I65 L4: the partition splits the build applies (O83), from the registry.
-    records = (policy.get("reportEligibilityProfile") or {}).get("partitionSplits") or []
+    records = plan_admission.profile_records(policy.get("reportEligibilityProfile") or {})
     splits = plan_admission.splitting(records)
-    figures["evidence.partitionSplits"] = series([f"{item['provider']} at {item['date']}" for item in splits]) or "none"
+    # I90 L3: in date order.
+    figures["evidence.partitionSplits"] = series([f"{item['provider']} at {item['date']}" for item in sorted(splits, key=lambda item: item["date"])]) or "none"
+    figures["evidence.meterResets"] = series([f"{item['provider']} at {item['date']}" for item in sorted(records, key=lambda item: item["date"]) if item.get("type") == "reset"]) or "none"
     # O99: metering-only announcements are logged but split nothing.
     figures["evidence.meteringAnnouncements"] = series([f"{item['provider']} at {item['date']}" for item in records if item.get("type") == "metering"]) or "none"
     # I61 L3: the stages and providers of the search that sets the cutoff, from its log entry.
@@ -728,6 +730,17 @@ def absence_problems(text: str, data: Path = DATA) -> list[str]:
 GENERATED_DOCS = ("README.md", "methodology.md", "scores.md")
 
 
+CHANGE_DATE = re.compile(r"\b(?:possibly superseded|flagged|blocked|blocking)(?: [a-z]+)? from \d{4}-\d{2}-\d{2}")
+
+
+def change_date_problems(text: str) -> list[str]:
+    """I90 L4: a route's change dates are generated from the registry ({{fig:evidence.changeDates}}); a literal one in the body
+    (the revision history aside) could drift from the stored records, as r148's did."""
+
+    body = "\n".join(line for line in text.splitlines() if not line.startswith("Revision history"))
+    return [f"literal change date \"{match.group(0)}\": generate it from the registry (I90 L4)" for match in CHANGE_DATE.finditer(body)]
+
+
 def assumption_list_problems(root: Path) -> list[str]:
     """I73 L1: a generated doc that lists owner-named transfers beside fallbacks, ceilings or measured routes names every kind."""
 
@@ -758,6 +771,7 @@ def check(spec_dir: Path = SPEC_DIR, data: Path = DATA) -> list[str]:
     problems += [f"{source.name}: {problem}" for problem in pointer_problems(text, scores)]
     problems += [f"{source.name}: {problem}" for problem in registry_problems(text, manifest)]
     problems += [f"{source.name}: {problem}" for problem in absence_problems(text, data)]
+    problems += [f"{source.name}: {problem}" for problem in change_date_problems(text)]
     # I73 L1: the generated docs carry the same lists, so the assumption-list rule reads them too.
     problems += assumption_list_problems(data.parent if data == DATA else data)
     target = published(source)

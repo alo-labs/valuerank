@@ -2229,10 +2229,36 @@ def test_a_pricing_omission_on_any_ai_surface_makes_an_o94_row():
     # I89 L3: notes that count for nothing are disclosed with their surface.
     documents["costCharts"] = charts
     sources = v.note_sources(configuration, None, {"notes": ["Open."]}, documents, labels)
-    disclosed = v.uncounted_notes({"aaNoteSources": sources}, ["coding-agent-index"])
-    assert {"surface": "itbench-aa", "note": "Twice."} in disclosed and {"surface": "frontiercode", "note": "Open."} in disclosed
-    assert {"surface": "coding-agent-index", "note": "Open."} not in disclosed and v.uncounted_notes({}, []) == []
+    disclosed = v.uncounted_notes({"aaNoteSources": sources}, ["coding-agent-index"], register)
+    surfaces = {(item["surface"], item["note"]): item for item in disclosed}
+    assert surfaces[("itbench-aa", "Twice.")]["factor"] == 2.0 and surfaces[("frontiercode", "Open.")]["reason"] == "chart outside the cost basket (O108)"
+    assert ("coding-agent-index", "Open.") not in surfaces and v.uncounted_notes({}, []) == []
+    # I90 L6: a chart-level note attaches only where the chart holds the row's label.
+    assert v.chart_level_notes(charts, {"itbench-aa": "Nobody (max)"}, "itbench-aa") == []
     result, frozen = scored()
     row = next(item for item in result["rows"] if item["id"] == "a")
     row["aaNoteClass"] = combined
     assert v.aa_cost_caveat(row) == "Twice. Thrice." and v.caveat_factor(row) == 3.0
+
+
+def test_regime_bounds_shared_labels_and_change_date_lint():
+    """I90 L1: launch dates match AA's release dates and schedule starts are recorded changes; I90 L5: no two configurations
+    share a basket label; I90 L4: a literal change date in the draft body is refused."""
+
+    pages = {"a": {"releaseDate": "2026-09-22"}}
+    records = [{"provider": "P", "date": "2026-09-29", "type": "limit"}]
+    v.check_regime_bounds([{"id": "r", "modelIds": ["a"], "modelLaunchedOn": "2026-09-22", "provider": "P", "scheduleFrom": "2026-09-29"},
+                           {"id": "s", "modelIds": ["z"], "modelLaunchedOn": "2026-01-01"}], pages, records)
+    with pytest.raises(ValueError, match="is not AA's release date"):
+        v.check_regime_bounds([{"id": "r", "modelIds": ["a"], "modelLaunchedOn": "2026-09-21"}], pages, records)
+    with pytest.raises(ValueError, match="is no recorded change"):
+        v.check_regime_bounds([{"id": "r", "modelIds": ["a"], "provider": "P", "scheduleFrom": "2026-09-30"}], pages, records)
+    v.check_shared_labels({"a": {"itbench-aa": "A (max)"}, "b": {"itbench-aa": "B (max)"}, "c": None})
+    with pytest.raises(ValueError, match="share the label"):
+        v.check_shared_labels({"a": {"itbench-aa": "A (max)"}, "b": {"itbench-aa": "A (max)"}})
+    charts = {"evaluations": [{"slug": "itbench-aa", "rows": [{"model": "A (max)"}, {"model": "B (max)"}]}]}
+    with pytest.raises(ValueError, match="names another row than its own"):
+        v.chart_notes(charts, {"itbench-aa": "B (max)"}, "itbench-aa", {"id": "a", "name": "A", "effort": "max"})
+    from valuerank import draft_figures
+    assert draft_figures.change_date_problems("Revision history: flagged from 2026-10-17.\nbody {{fig:x}}") == []
+    assert draft_figures.change_date_problems("the routes are possibly superseded from 2026-10-11.") != []
