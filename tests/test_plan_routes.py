@@ -905,3 +905,18 @@ def test_a_lower_of_transfer_skips_a_co_donor_the_comparator_excludes():
         rebased = pr.rebase_lower_of(luna, {"sol": sol, "astra": excluded, "luna": luna}, day, None, None)
         assert rebased["donorRouteId"] == "sol" and rebased["valueMultiple"] == pytest.approx(10.55)
     assert pr.rebase_lower_of(luna, {"sol": sol, "astra": astra, "luna": luna}, day, None, None) is luna  # Astra stays the lowest
+
+
+def test_a_measurement_span_is_bounded_by_launch_and_schedule():
+    """O110: the span starts no earlier than the model's launch or the stated schedule; a change on that day is part of the
+    measured regime, so the change floor is the day after."""
+
+    measured = {"sourcePublicationDate": "2026-10-06"}
+    assert pr.measurement_span(measured) == (date(2026, 9, 7), date(2026, 10, 6)) and pr.change_floor(measured) == date(2026, 9, 7)
+    launched = {**measured, "modelLaunchedOn": "2026-09-22"}
+    assert pr.measurement_span(launched)[0] == date(2026, 9, 22) and pr.change_floor(launched) == date(2026, 9, 23)
+    scheduled = {**launched, "scheduleFrom": "2026-09-29"}
+    assert pr.change_floor(scheduled) == date(2026, 9, 30)
+    early = {**measured, "modelLaunchedOn": "2026-09-01"}
+    assert pr.change_floor(early) == date(2026, 9, 7)  # launch before the 30-day span bounds nothing
+    assert pr.change_floor({}) is None

@@ -219,7 +219,7 @@ def expiry_status(route: dict, release_day: date, registry: dict | None = None) 
     changed = source.get("changeDetectedOn")
     # I79 L1, I80 L3: a change can have superseded the measurement unless it predates the earliest date the measurement can
     # have been taken (its window start, else 30 dates before publication).
-    earliest = measurement_span(source)[0] or evidence_date(source)
+    earliest = change_floor(source) or evidence_date(source)
     if age > SOFT_EXPIRY_DAYS or (changed and earliest is not None and earliest <= date.fromisoformat(changed) <= release_day):
         return "possibly-superseded"
     return "fresh"
@@ -456,15 +456,35 @@ def mix_check(measurement: dict) -> str:
 FAULT_LOOKBACK_DAYS = 30  # I77 L1: an undated measurement window is taken as the 30 days ending on publication
 
 
+def _regime_start(route: dict) -> date | None:
+    """O110: the later of the measured model's launch on the plan and the start of the plan schedule the measurement says it
+    ran under, when recorded."""
+
+    bounds = [date.fromisoformat(route[key]) for key in ("modelLaunchedOn", "scheduleFrom") if route.get(key)]
+    return max(bounds) if bounds else None
+
+
 def measurement_span(route: dict) -> tuple[date | None, date | None]:
-    """I77 L1, I79 L1: the earliest and latest dates a controlled measurement can have been taken: its stated window, else the
-    30 dates ending on its publication date."""
+    """I77 L1, I79 L1, O110: the earliest and latest dates a controlled measurement can have been taken: its stated window,
+    else the 30 dates ending on its publication date, never before its model's launch or its stated schedule's start."""
 
     window = route.get("measurementWindow") or {}
     published = route.get("sourcePublicationDate")
     first = date.fromisoformat(window["start"]) if window.get("start") else (date.fromisoformat(published) - timedelta(days=FAULT_LOOKBACK_DAYS - 1) if published else None)
     last = date.fromisoformat(window["end"]) if window.get("end") else (date.fromisoformat(published) if published else None)
+    regime = _regime_start(route)
+    if regime is not None and (first is None or regime > first):
+        first = regime
     return first, last
+
+
+def change_floor(route: dict) -> date | None:
+    """O110: the earliest date a change can postdate the measurement. A change dated on the launch or schedule start that
+    bounds the span is part of the measured regime (for example a limit raised at the model's launch), so it must be later."""
+
+    first = measurement_span(route)[0]
+    regime = _regime_start(route)
+    return first + timedelta(days=1) if first is not None and regime is not None and first == regime else first
 
 
 def in_fault_window(route: dict, faults: list[dict] | None) -> dict | None:
@@ -641,7 +661,7 @@ def route_candidates(model_id: str, configuration_effort: str | None, routes: li
                 "identification": route.get("identification", "unidentified"),
                 "evidenceDate": stamp.isoformat() if stamp else None,
                 # I79 L1: the earliest date the (donor's) measurement can have been taken.
-                "earliestEvidenceDate": (lambda first: first.isoformat() if first else None)(measurement_span(provenance)[0]),
+                "earliestEvidenceDate": (lambda first: first.isoformat() if first else None)(change_floor(provenance)),
                 "donorRouteId": source["id"] if source is not None else None,
                 "donorChangeDetectedOn": blocking_change(source) if source is not None else None,
                 "faultWindow": faulted["evidence"] if faulted else None,

@@ -287,6 +287,15 @@ def registry_figures(capture: dict, plan_document: dict, release: str) -> dict:
     window, cutoff = policy["reportingWindow"], policy["searchCutoff"]
     figures = {"evidence.windowStart": window["start"], "evidence.windowEnd": window["end"], "evidence.searchCutoff": cutoff,
                "evidence.searchGapDays": (date.fromisoformat(release) - date.fromisoformat(cutoff)).days}
+    # I89 L1: each flagged measurement's label and blocking dates (O107, O110, O111), from the registry, grouped by date pair.
+    groups: dict[tuple, list[str]] = {}
+    for route in plan_document["routes"]:
+        if route.get("changeDetectedOn") and route.get("valueMultipleKind") in pr.CONTROLLED_KINDS:
+            blocking = route["blockingChangeOn"] if "blockingChangeOn" in route else route["changeDetectedOn"]
+            groups.setdefault((route["changeDetectedOn"], blocking), []).append(f"{route['plan']} ({route.get('sourceModel')})")
+    figures["evidence.changeDates"] = "; ".join([
+        f"{series(sorted(set(names)))} possibly superseded from {label}" + (f", blocking from {blocking}" if blocking and blocking != label else "" if blocking else ", blocking nothing")
+        for (label, blocking), names in sorted(groups.items())]) or "none"  # groups joined by semicolons, names within by series
     # I65 L4: the partition splits the build applies (O83), from the registry.
     records = (policy.get("reportEligibilityProfile") or {}).get("partitionSplits") or []
     splits = plan_admission.splitting(records)

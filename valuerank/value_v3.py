@@ -864,7 +864,8 @@ def assemble(configurations: list[dict], documents: dict, *, release_day: date, 
     rows, supplements, tracks = [], leaf_supplements(documents), track_records(documents)
     check_captured_footnotes(documents.get("frontierCapture"), documents.get("aaFootnotes"))
     check_capture_twins(documents.get("frontierCapture"))
-    check_register_subjects(documents.get("aaFootnotes"), set(mapping) | {item["id"] for item in configurations})
+    # I89 L4: only the cohort's configurations (not every configuration-map row, retired ones included).
+    check_register_subjects(documents.get("aaFootnotes"), {item["id"] for item in configurations})
     check_surface_notes(documents, documents.get("aaFootnotes"))
     for configuration in configurations:
         model_id, effort = configuration["id"], configuration.get("effort")
@@ -930,6 +931,7 @@ def assemble(configurations: list[dict], documents: dict, *, release_day: date, 
     main = basket.workload_hash(admitted)
     for row in rows + listed:
         row["aaNoteClass"] = admitted_note_class(row, admitted, documents.get("aaFootnotes"))
+        row["aaUncountedNotes"] = uncounted_notes(row, admitted)
         row["cost"] = basket.row_cost(row["components"], admitted)
         selected = row["routeSelection"]["selected"]
         row["plan"] = plan_routes.plan_cost(row["cost"]["costUsd"], selected)
@@ -1151,25 +1153,28 @@ def page_notes(page: dict | None) -> list[str]:
     return list((page or {}).get("notes") or [])
 
 
-def basket_label(capture: dict | None, labels: dict, slug: str, configuration: dict | None = None) -> str | None:
+def basket_label(capture: dict | None, labels: dict, slug: str, configuration: dict | None = None, points: list[dict] | tuple = ()) -> str | None:
     """I87 L4: a row's mapped label on a basket cost chart, which must name a row the chart holds; I88 L3: a null label while
     the chart holds a row named as the configuration ("Name (effort)") would silently drop its cost and notes. The build
-    stops on either."""
+    stops on either. I89 L2: the configuration's name on AA's charts is its point's name in the chart capture (same family
+    and effort), with "Name (effort)" as a fallback."""
 
     label = labels.get(slug)
     evaluation = next((item for item in (capture or {}).get("evaluations", []) if item.get("slug") == slug), None)
     models = {row.get("model") for row in (evaluation or {}).get("rows", [])}
     if label is not None and evaluation is not None and label not in models:
         raise ValueError(f"{slug}: the configuration map's label {label!r} names no row on the captured chart (I87 L4)")
-    if label is None and configuration and f"{configuration.get('name')} ({configuration.get('effort')})" in models:
+    expected = {f"{configuration.get('name')} ({configuration.get('effort')})"} | {point.get("model_name") for point in points
+                if point.get("family") == configuration_family(configuration) and point.get("effort") == configuration.get("effort")} if configuration else set()
+    if label is None and configuration and expected & models:
         raise ValueError(f"{slug}: the chart holds a row for {configuration['id']} but the configuration map gives it no label (I88 L3)")
     return label
 
 
-def chart_notes(capture: dict | None, labels: dict, slug: str, configuration: dict | None = None) -> list[str]:
+def chart_notes(capture: dict | None, labels: dict, slug: str, configuration: dict | None = None, points: list[dict] | tuple = ()) -> list[str]:
     """O106: the notes on the row's own row of one basket cost chart."""
 
-    label = basket_label(capture, labels, slug, configuration)
+    label = basket_label(capture, labels, slug, configuration, points)
     evaluation = next((item for item in (capture or {}).get("evaluations", []) if item.get("slug") == slug), {})
     return [note for row in evaluation.get("rows", []) if label is not None and row.get("model") == label for note in row.get("notes") or []]
 
@@ -1189,9 +1194,22 @@ def note_sources(configuration: dict, page: dict | None, record: dict | None, do
     agents = documents.get("codingAgents") or {}
     return {
         "always": [configuration.get("aaNote"), *page_notes(page)],
-        "rows": {basket.CODING_AGENT_INDEX: list((record or {}).get("notes") or []), **{slug: chart_notes(charts, labels, slug, configuration) for slug in basket.CHART_COMPONENTS}},
+        "rows": {basket.CODING_AGENT_INDEX: list((record or {}).get("notes") or []), **{slug: chart_notes(charts, labels, slug, configuration, (documents.get("frontierCapture") or {}).get("points", [])) for slug in basket.CHART_COMPONENTS}},
         "shared": {basket.CODING_AGENT_INDEX: list(agents.get("notes") or []) if record else [], **{slug: chart_level_notes(charts, labels, slug) for slug in basket.CHART_COMPONENTS}},
+        # O108, I89 L3: notes on charts outside the basket, disclosed only.
+        "other": {evaluation["slug"]: [*(note for row in evaluation.get("rows", []) if row.get("model") == labels.get(evaluation["slug"]) for note in row.get("notes") or []),
+                                      *(evaluation.get("notes") or [])]
+                  for evaluation in charts.get("evaluations", []) if evaluation.get("slug") not in basket.CHART_COMPONENTS and labels.get(evaluation.get("slug")) is not None},
     }
+
+
+def uncounted_notes(row: dict, admitted: list[str]) -> list[dict]:
+    """O108, O109, I89 L3: the row's notes that change nothing (a pending component's, or a chart outside the basket's),
+    published as disclosures with their surface."""
+
+    sources = row.get("aaNoteSources") or {}
+    pending = [{"surface": slug, "note": note} for kind in ("rows", "shared") for slug, notes in (sources.get(kind) or {}).items() if slug not in admitted for note in notes]
+    return pending + [{"surface": slug, "note": note} for slug, notes in (sources.get("other") or {}).items() for note in notes]
 
 
 def admitted_note_class(row: dict, admitted: list[str], register: dict | None) -> dict | None:
@@ -2252,7 +2270,7 @@ def score(assembled: dict, frozen: dict) -> dict:
               "yield to two concordant user reports for their own model and plan, and the transfers resting on them follow: " + ", ".join(fault_flagged)
               if fault_flagged else "no selected route rests on a measurement in a fault window"),
         # I80 L5: O94 rows, with the factor each competes over.
-        _rule("AA cost omits a pricing term (O94, O98, O106, O108, O109)", "fired" if caveated else "passed",
+        _rule("AA cost omits a pricing term (O94, O98, O100, O106, O108, O109)", "fired" if caveated else "passed",
               "ranked at the published cost; compete in interval and scenario outputs over [C, factor × C] ([C, ∞) without a stated factor, O98) without a label, and leave the anchor "
               "population at the next freeze: " + ", ".join(f"{row['id']} (up to {caveat_factor(row):g}×)" if caveat_factor(row) else f"{row['id']} (no factor stated: [C, ∞), O98)" for row in caveated)
               if caveated else "no AA cost note names an omitted pricing term"),
@@ -2261,9 +2279,9 @@ def score(assembled: dict, frozen: dict) -> dict:
               if any(row["valuationGate"]["outcome"] not in GATE_SCORED for row in rows) else "every ranked row is compatible as captured or after evidenced revaluation"),
         _rule("source clocks and evidence freshness (O59, O60, O65, E211, E216, E217, E218)", "passed",
               "every capture is within its age gate and none after the cutoff unless its source predates the cutoff's day; the build stops otherwise"),
-        _rule("build-stopping evidence gates (O64, O69, O71, O75, O99, O100, O101, O103, O105, O106, O107, O108, E195, E204, E225)", "passed",
+        _rule("build-stopping evidence gates (O64, O69, O71, O75, O99, O100, O101, O103, O105-O111, E195, E204, E225)", "passed",
               "the Coding Agent Index manifest (O64), the Terminal-Bench agent list (E225), cutoff-day row dates (O69), the three-stage all-provider plan search (O71, O75), "
-              "the typed change records behind every route flag and partition split, which also produce each route's label and blocking dates (O99, O101, O105, O107), the register of AA notes covering every captured one, with the chart's inventory and duplicate-entry checks, the post-O103 capture notes, the basket-chart labels and chart-level notes' named rows (O100, O103, O106, O108) "
+              "the typed change records behind every route flag and partition split, which also produce each route's label and blocking dates within its launch- and schedule-bounded span (O99, O101, O105, O107, O110, O111), the register of AA notes covering every captured one, with the chart's inventory and duplicate-entry checks, the post-O103 capture notes, the basket-chart labels and chart-level notes' named rows (O100, O103, O106, O108) "
               "and the frontier path checks (E195, E204) hold; the build stops otherwise"),
         _rule("score swing gate (E177)", "vacuous", "first v3 release: no previous v3 release to compare"),
         _rule("anchor migration (E184)", "fired" if assembled.get("deferred") else "vacuous",
@@ -2787,6 +2805,7 @@ def _row_json(row: dict, scores: dict, ranks: dict, alternatives: list[dict]) ->
         "aaCostCaveat": caveat,
         # O94, I80 L5: the most the omitted term multiplies the cost by, and the cost range the row competes over.
         "aaCostCaveatFactor": caveat_factor(row) if caveat else None,
+        "aaUncountedNotes": row.get("aaUncountedNotes", []),
         "aaCostCaveatRangeUsd": [row["cost"]["costUsd"], row["cost"]["costUsd"] * caveat_factor(row)] if caveat and caveat_factor(row) and row["cost"]["costUsd"] is not None else None,
         "valuation": valuation_contract(caveat),
         # E170: the valuation-basis gate's outcome for this row's AA cost (O29 governs a price not in force at V).

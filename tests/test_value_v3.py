@@ -2212,6 +2212,11 @@ def test_a_pricing_omission_on_any_ai_surface_makes_an_o94_row():
         v.chart_notes(charts, {"itbench-aa": "Renamed (max)"}, "itbench-aa")
     with pytest.raises(ValueError, match="gives it no label"):
         v.chart_notes(charts, {"itbench-aa": None}, "itbench-aa", {"id": "a", "name": "A", "effort": "max"})
+    # I89 L2: the configuration's AA point name (from the chart capture) is matched too.
+    points = [{"family": "Fam", "effort": "max", "model_name": "A (max)"}]
+    with pytest.raises(ValueError, match="gives it no label"):
+        v.chart_notes(charts, {}, "itbench-aa", {"id": "z", "name": "Zed", "family": "Fam", "effort": "max"}, points)
+    assert v.chart_notes(charts, {}, "itbench-aa", {"id": "z", "name": "Zed", "family": "Fam", "effort": "low"}, points) == []
     configuration = {"id": "a", "name": "A", "effort": "max", "aaNote": "Chart."}
     documents = {"costCharts": charts, "codingAgents": {"notes": ["Shared."]}}
     sources = v.note_sources(configuration, {"notes": ["Thrice."]}, {"notes": ["Open."]}, documents, labels)
@@ -2221,6 +2226,12 @@ def test_a_pricing_omission_on_any_ai_surface_makes_an_o94_row():
     assert v.admitted_note_class(row, ["itbench-aa", "coding-agent-index"], register)["factor"] is None
     assert v.note_sources(configuration, None, None, {}, {})["shared"]["coding-agent-index"] == []
     assert v.admitted_note_class({"id": "a", "aaNote": "Twice."}, [], register)["factor"] == 2.0
+    # I89 L3: notes that count for nothing are disclosed with their surface.
+    documents["costCharts"] = charts
+    sources = v.note_sources(configuration, None, {"notes": ["Open."]}, documents, labels)
+    disclosed = v.uncounted_notes({"aaNoteSources": sources}, ["coding-agent-index"])
+    assert {"surface": "itbench-aa", "note": "Twice."} in disclosed and {"surface": "frontiercode", "note": "Open."} in disclosed
+    assert {"surface": "coding-agent-index", "note": "Open."} not in disclosed and v.uncounted_notes({}, []) == []
     result, frozen = scored()
     row = next(item for item in result["rows"] if item["id"] == "a")
     row["aaNoteClass"] = combined

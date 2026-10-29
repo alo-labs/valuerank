@@ -68,6 +68,11 @@ SPLIT_TYPES = {"limit", "price"}
 # O105 (2026-10-28): a documented change to which models a plan offers flags the plan's routes but splits nothing, as the
 # allowance itself did not change.
 FLAG_ONLY_TYPES = {"availability"}
+# O111 (2026-10-29): a bundled credit grant (e.g. API credits added to a plan) flags and blocks like a limit change but
+# leaves the meter-reading partitions whole, as the meter users read did not change.
+CREDIT_TYPES = {"credit"}
+BLOCKING_TYPES = SPLIT_TYPES | CREDIT_TYPES
+FLAGGING_TYPES = BLOCKING_TYPES | FLAG_ONLY_TYPES
 LOGGED_TYPES = {"metering"}
 
 
@@ -75,8 +80,8 @@ def splitting(records: list[dict]) -> list[dict]:
     """O83, O99: the recorded changes that split the report partition."""
 
     for record in records:
-        if record.get("type") not in SPLIT_TYPES | FLAG_ONLY_TYPES | LOGGED_TYPES:
-            raise ValueError(f"partition record {record.get('provider')} {record.get('date')} needs a type: one of {sorted(SPLIT_TYPES | FLAG_ONLY_TYPES | LOGGED_TYPES)} (O99, O105)")
+        if record.get("type") not in FLAGGING_TYPES | LOGGED_TYPES:
+            raise ValueError(f"partition record {record.get('provider')} {record.get('date')} needs a type: one of {sorted(FLAGGING_TYPES | LOGGED_TYPES)} (O99, O105, O111)")
     return [record for record in records if record["type"] in SPLIT_TYPES]
 
 
@@ -85,11 +90,11 @@ def check_change_flags(routes: list[dict], records: list[dict]) -> None:
     change record for its provider and plan on that date; a flag no such record supports stops the build."""
 
     splitting(records)
-    supporting = [record for record in records if record["type"] in SPLIT_TYPES | FLAG_ONLY_TYPES]
+    supporting = [record for record in records if record["type"] in FLAGGING_TYPES]
     for route in routes:
         changed = route.get("changeDetectedOn")
         if changed and not any(item["date"][:10] == changed and applies(item, route) for item in supporting):
-            raise ValueError(f"route {route['id']}: change flag {changed} has no typed limit, price or availability change record for its provider and plan (O101, O105)")
+            raise ValueError(f"route {route['id']}: change flag {changed} has no typed limit, price, credit or availability change record for its provider and plan (O101, O105, O111)")
 
 
 def check_change_records(routes: list[dict], records: list[dict], release_day: date) -> None:
@@ -103,11 +108,11 @@ def check_change_records(routes: list[dict], records: list[dict], release_day: d
     from valuerank import plan_routes  # local: plan_routes does not depend on this module
 
     splitting(records)
-    dated = [(date.fromisoformat(record["date"][:10]), record) for record in records if record["type"] in SPLIT_TYPES | FLAG_ONLY_TYPES]
+    dated = [(date.fromisoformat(record["date"][:10]), record) for record in records if record["type"] in FLAGGING_TYPES]
     for route in routes:
         applicable = sorted((day, record["type"]) for day, record in dated if applies(record, route) and day <= release_day)
         if route.get("valueMultipleKind") in plan_routes.CONTROLLED_KINDS:
-            earliest = plan_routes.measurement_span(route)[0]
+            earliest = plan_routes.change_floor(route)
             derived = next((day for day, _ in applicable if earliest is None or day >= earliest), None)
             if (derived.isoformat() if derived else None) != route.get("changeDetectedOn"):
                 raise ValueError(f"route {route['id']}: its change flag must be {derived} from the typed change records (I86 L3)")
@@ -116,7 +121,7 @@ def check_change_records(routes: list[dict], records: list[dict], release_day: d
             if "blockingChangeOn" in route:
                 raise ValueError(f"route {route['id']}: blockingChangeOn without a change flag (I87 M1)")
             continue
-        blocking = next((day.isoformat() for day, kind in applicable if kind in SPLIT_TYPES and day.isoformat() >= label), None)
+        blocking = next((day.isoformat() for day, kind in applicable if kind in BLOCKING_TYPES and day.isoformat() >= label), None)
         if blocking == label:
             if "blockingChangeOn" in route:
                 raise ValueError(f"route {route['id']}: blockingChangeOn must be omitted when it equals the change flag (I87 M1)")

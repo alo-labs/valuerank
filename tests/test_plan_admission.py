@@ -138,7 +138,7 @@ def test_route_change_flags_rest_on_typed_limit_or_price_records():
                            {"id": "r2", "provider": "A", "plan": "Pro", "changeDetectedOn": "2026-10-17"}, {"id": "r3", "provider": "O", "plan": "Plus"}], records)
     for bad in ({"id": "m", "provider": "O", "plan": "Plus", "changeDetectedOn": "2026-10-20"},
                 {"id": "p", "provider": "A", "plan": "Max", "changeDetectedOn": "2026-10-17"}):
-        with pytest.raises(ValueError, match="no typed limit, price or availability change record"):
+        with pytest.raises(ValueError, match="no typed limit, price, credit or availability change record"):
             pa.check_change_flags([bad], records)
     # O105: a model-availability record flags the plan's routes but splits nothing.
     availability = [{"provider": "O", "date": "2026-10-22", "type": "availability"}]
@@ -170,3 +170,15 @@ def test_change_records_produce_their_route_flags():
                          ({**good[0], "sourcePublicationDate": "2026-11-20"}, "must be None")):
         with pytest.raises(ValueError, match=message):
             pa.check_change_records([bad], records, day)
+
+
+def test_a_credit_grant_flags_and_blocks_without_splitting():
+    """O111: a credit record supports and blocks a flag but splits no partition; O110: a change on the launch day does not
+    flag the launched model's measurement."""
+
+    records = [{"provider": "A", "plans": ["Max"], "date": "2026-10-07", "type": "credit"},
+               {"provider": "A", "plans": ["Max"], "date": "2026-09-22", "type": "limit"}]
+    assert pa.splitting(records) == [records[1]]
+    measured = {"valueMultipleKind": "controlled_account_workload_projection", "sourcePublicationDate": "2026-10-06", "modelLaunchedOn": "2026-09-22"}
+    pa.check_change_records([{**measured, "id": "m", "provider": "A", "plan": "Max", "changeDetectedOn": "2026-10-07"}], records, date(2026, 10, 25))
+    pa.check_change_flags([{"id": "m", "provider": "A", "plan": "Max", "changeDetectedOn": "2026-10-07"}], records)

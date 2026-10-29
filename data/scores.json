@@ -14254,9 +14254,9 @@
         "region": "global",
         "status": "fails: a 5-hour figure never converts to a billing period (O82)",
         "listed": true,
-        "currentPartition": 2,
+        "currentPartition": 3,
         "partitionsWithReports": [
-          0
+          2
         ],
         "configurations": [
           "claude-opus-5-5"
@@ -14275,7 +14275,7 @@
             "observer": "Kanttz",
             "valueLower": 662.0,
             "valueUpper": 754.0,
-            "partition": 0,
+            "partition": 2,
             "provisional": false,
             "speedMode": null,
             "excluded": null
@@ -14301,7 +14301,7 @@
         "region": "global",
         "status": "fails: 0 non-provisional report(s) in the current partition",
         "listed": true,
-        "currentPartition": 2,
+        "currentPartition": 3,
         "partitionsWithReports": [],
         "configurations": [
           "claude-opus-5-5"
@@ -14335,11 +14335,10 @@
         "region": "global",
         "status": "fails: 1 non-provisional report(s) in the current partition",
         "listed": true,
-        "currentPartition": 2,
+        "currentPartition": 3,
         "partitionsWithReports": [
-          0,
-          1,
-          2
+          2,
+          3
         ],
         "configurations": [
           "claude-opus-5-5"
@@ -14362,7 +14361,7 @@
             "observer": "Kanttz",
             "valueLower": 2484.0,
             "valueUpper": 2920.0,
-            "partition": 0,
+            "partition": 2,
             "provisional": false,
             "speedMode": null,
             "excluded": null
@@ -14372,37 +14371,37 @@
             "observer": "Theo (pingdotgg)",
             "valueLower": 2446.0,
             "valueUpper": 2600.0,
-            "partition": null,
+            "partition": 2,
             "provisional": false,
             "speedMode": null,
-            "excluded": "spans a partition split"
+            "excluded": null
           },
           {
             "id": "last-lab-max20x",
             "observer": "Last_Lab_3627",
             "valueLower": 2000.0,
             "valueUpper": 2045.0,
-            "partition": 0,
+            "partition": null,
             "provisional": false,
             "speedMode": null,
-            "excluded": null
+            "excluded": "spans a partition split"
           },
           {
             "id": "delicious-shower-max20x",
             "observer": "Delicious-Shower8401",
             "valueLower": 2175.0,
             "valueUpper": 2175.0,
-            "partition": 0,
+            "partition": null,
             "provisional": false,
             "speedMode": null,
-            "excluded": null
+            "excluded": "spans a partition split"
           },
           {
             "id": "nicoaica-max20x-before",
             "observer": "NicoAica",
             "valueLower": 1294.0,
             "valueUpper": 1681.0,
-            "partition": 1,
+            "partition": 2,
             "provisional": false,
             "speedMode": null,
             "excluded": null
@@ -14412,7 +14411,7 @@
             "observer": "NicoAica",
             "valueLower": 182.0,
             "valueUpper": 212.0,
-            "partition": 2,
+            "partition": 3,
             "provisional": false,
             "speedMode": null,
             "excluded": null
@@ -14478,7 +14477,7 @@
         "region": "global",
         "status": "fails: 0 non-provisional report(s) in the current partition",
         "listed": true,
-        "currentPartition": 2,
+        "currentPartition": 3,
         "partitionsWithReports": [],
         "configurations": [
           "None"
@@ -14562,7 +14561,7 @@
         "region": "global",
         "status": "fails: 0 non-provisional report(s) in the current partition",
         "listed": true,
-        "currentPartition": 2,
+        "currentPartition": 3,
         "partitionsWithReports": [],
         "configurations": [
           "claude-opus-5-5"
@@ -14596,9 +14595,9 @@
         "region": "global",
         "status": "fails: 0 non-provisional report(s) in the current partition",
         "listed": true,
-        "currentPartition": 2,
+        "currentPartition": 3,
         "partitionsWithReports": [
-          0
+          2
         ],
         "configurations": [
           "claude-opus-5-5"
@@ -14617,7 +14616,7 @@
             "observer": "muscgab",
             "valueLower": 750.0,
             "valueUpper": 830.0,
-            "partition": 0,
+            "partition": 2,
             "provisional": false,
             "speedMode": null,
             "excluded": null
@@ -14627,7 +14626,7 @@
             "observer": "unlabelled /usage screenshot",
             "valueLower": 1920.0,
             "valueUpper": 1920.0,
-            "partition": 0,
+            "partition": 2,
             "provisional": false,
             "speedMode": null,
             "excluded": null
@@ -14643,7 +14642,7 @@
         "region": "global",
         "status": "fails: 0 non-provisional report(s) in the current partition",
         "listed": true,
-        "currentPartition": 2,
+        "currentPartition": 3,
         "partitionsWithReports": [],
         "configurations": [
           "None"
@@ -14677,9 +14676,9 @@
         "region": "global",
         "status": "fails: a 5-hour figure never converts to a billing period (O82)",
         "listed": true,
-        "currentPartition": 1,
+        "currentPartition": 3,
         "partitionsWithReports": [
-          1
+          3
         ],
         "configurations": [
           "claude-opus-5-5"
@@ -14701,7 +14700,7 @@
             "observer": "K45SLE",
             "valueLower": 42.0,
             "valueUpper": 42.0,
-            "partition": 1,
+            "partition": 3,
             "provisional": true,
             "speedMode": null,
             "excluded": null
@@ -14747,7 +14746,7 @@
         "region": "global",
         "status": "fails: 0 non-provisional report(s) in the current partition",
         "listed": true,
-        "currentPartition": 1,
+        "currentPartition": 3,
         "partitionsWithReports": [],
         "configurations": [
           "claude-opus-5-5"
@@ -14781,10 +14780,10 @@
         "region": "global",
         "status": "fails: 0 non-provisional report(s) in the current partition",
         "listed": true,
-        "currentPartition": 1,
+        "currentPartition": 3,
         "partitionsWithReports": [
-          0,
-          1
+          2,
+          3
         ],
         "configurations": [
           "claude-opus-5-5"
@@ -14808,17 +14807,17 @@
             "observer": "NTRYourWaifu",
             "valueLower": 321.0,
             "valueUpper": 321.0,
-            "partition": 0,
+            "partition": null,
             "provisional": false,
             "speedMode": null,
-            "excluded": null
+            "excluded": "spans a partition split"
           },
           {
             "id": "kanzakichiya-pro",
             "observer": "kanzakichiya",
             "valueLower": 302.0,
             "valueUpper": 302.0,
-            "partition": 0,
+            "partition": 2,
             "provisional": false,
             "speedMode": null,
             "excluded": null
@@ -14828,7 +14827,7 @@
             "observer": "ganpei777",
             "valueLower": 1266.15,
             "valueUpper": 1266.15,
-            "partition": 0,
+            "partition": 2,
             "provisional": false,
             "speedMode": null,
             "excluded": null
@@ -14838,7 +14837,7 @@
             "observer": "K45SLE",
             "valueLower": 210.0,
             "valueUpper": 300.0,
-            "partition": 1,
+            "partition": 3,
             "provisional": true,
             "speedMode": null,
             "excluded": null
@@ -14904,7 +14903,7 @@
         "region": "global",
         "status": "fails: 0 non-provisional report(s) in the current partition",
         "listed": true,
-        "currentPartition": 1,
+        "currentPartition": 3,
         "partitionsWithReports": [],
         "configurations": [
           "None"
@@ -16923,6 +16922,7 @@
         },
         "aaCostCaveat": null,
         "aaCostCaveatFactor": null,
+        "aaUncountedNotes": [],
         "aaCostCaveatRangeUsd": null,
         "valuation": {
           "costSourceRule": "AA: provider-reported token counts priced per token category at AA's recorded prices, cache pricing included",
@@ -17740,6 +17740,7 @@
         },
         "aaCostCaveat": null,
         "aaCostCaveatFactor": null,
+        "aaUncountedNotes": [],
         "aaCostCaveatRangeUsd": null,
         "valuation": {
           "costSourceRule": "AA: provider-reported token counts priced per token category at AA's recorded prices, cache pricing included",
@@ -18563,6 +18564,7 @@
         },
         "aaCostCaveat": null,
         "aaCostCaveatFactor": null,
+        "aaUncountedNotes": [],
         "aaCostCaveatRangeUsd": null,
         "valuation": {
           "costSourceRule": "AA: provider-reported token counts priced per token category at AA's recorded prices, cache pricing included",
@@ -19236,6 +19238,7 @@
         },
         "aaCostCaveat": null,
         "aaCostCaveatFactor": null,
+        "aaUncountedNotes": [],
         "aaCostCaveatRangeUsd": null,
         "valuation": {
           "costSourceRule": "AA: provider-reported token counts priced per token category at AA's recorded prices, cache pricing included",
@@ -20083,6 +20086,7 @@
         },
         "aaCostCaveat": null,
         "aaCostCaveatFactor": null,
+        "aaUncountedNotes": [],
         "aaCostCaveatRangeUsd": null,
         "valuation": {
           "costSourceRule": "AA: provider-reported token counts priced per token category at AA's recorded prices, cache pricing included",
@@ -20754,6 +20758,7 @@
         },
         "aaCostCaveat": null,
         "aaCostCaveatFactor": null,
+        "aaUncountedNotes": [],
         "aaCostCaveatRangeUsd": null,
         "valuation": {
           "costSourceRule": "AA: provider-reported token counts priced per token category at AA's recorded prices, cache pricing included",
@@ -21604,6 +21609,7 @@
         "agentSafety": null,
         "aaCostCaveat": null,
         "aaCostCaveatFactor": null,
+        "aaUncountedNotes": [],
         "aaCostCaveatRangeUsd": null,
         "valuation": {
           "costSourceRule": "AA: provider-reported token counts priced per token category at AA's recorded prices, cache pricing included",
@@ -22435,6 +22441,7 @@
         },
         "aaCostCaveat": "Claude Haiku 5.5 has 5x higher pricing on longer-context inputs which are not currently reflected; we are working to include this in cost figures across Artificial Analysis.",
         "aaCostCaveatFactor": 5.0,
+        "aaUncountedNotes": [],
         "aaCostCaveatRangeUsd": [
           966.9203778594009,
           4834.601889297004
@@ -23250,6 +23257,7 @@
         },
         "aaCostCaveat": null,
         "aaCostCaveatFactor": null,
+        "aaUncountedNotes": [],
         "aaCostCaveatRangeUsd": null,
         "valuation": {
           "costSourceRule": "AA: provider-reported token counts priced per token category at AA's recorded prices, cache pricing included",
@@ -31802,7 +31810,7 @@
         "detail": "3 of 27 plan rows rest on a measurement inside an acknowledged fault window; they stay selected and yield to two concordant user reports for their own model and plan, and the transfers resting on them follow: gpt-6-astra@chatgpt-pro-500, gpt-6-luna@chatgpt-pro-500, gpt-6.1-sol@chatgpt-pro-500"
       },
       {
-        "rule": "AA cost omits a pricing term (O94, O98, O106, O108, O109)",
+        "rule": "AA cost omits a pricing term (O94, O98, O100, O106, O108, O109)",
         "status": "fired",
         "detail": "ranked at the published cost; compete in interval and scenario outputs over [C, factor × C] ([C, ∞) without a stated factor, O98) without a label, and leave the anchor population at the next freeze: claude-haiku-5-5-max (up to 5×)"
       },
@@ -31817,9 +31825,9 @@
         "detail": "every capture is within its age gate and none after the cutoff unless its source predates the cutoff's day; the build stops otherwise"
       },
       {
-        "rule": "build-stopping evidence gates (O64, O69, O71, O75, O99, O100, O101, O103, O105, O106, O107, O108, E195, E204, E225)",
+        "rule": "build-stopping evidence gates (O64, O69, O71, O75, O99, O100, O101, O103, O105-O111, E195, E204, E225)",
         "status": "passed",
-        "detail": "the Coding Agent Index manifest (O64), the Terminal-Bench agent list (E225), cutoff-day row dates (O69), the three-stage all-provider plan search (O71, O75), the typed change records behind every route flag and partition split, which also produce each route's label and blocking dates (O99, O101, O105, O107), the register of AA notes covering every captured one, with the chart's inventory and duplicate-entry checks, the post-O103 capture notes, the basket-chart labels and chart-level notes' named rows (O100, O103, O106, O108) and the frontier path checks (E195, E204) hold; the build stops otherwise"
+        "detail": "the Coding Agent Index manifest (O64), the Terminal-Bench agent list (E225), cutoff-day row dates (O69), the three-stage all-provider plan search (O71, O75), the typed change records behind every route flag and partition split, which also produce each route's label and blocking dates within its launch- and schedule-bounded span (O99, O101, O105, O107, O110, O111), the register of AA notes covering every captured one, with the chart's inventory and duplicate-entry checks, the post-O103 capture notes, the basket-chart labels and chart-level notes' named rows (O100, O103, O106, O108) and the frontier path checks (E195, E204) hold; the build stops otherwise"
       },
       {
         "rule": "score swing gate (E177)",
@@ -31942,7 +31950,7 @@
         {
           "key": "planRoutes",
           "artifact": "data/plan_cost_routes.json",
-          "sha256": "abc0e3b45f7dca48795111b680f7fd8f3cdd53b1bed9f6fd4293493d3952c723",
+          "sha256": "8cb6e444a3ecb2d2a2db0b538fdbda8540a5e50a966ea962127522f40b434c89",
           "capturedAt": "2026-10-25",
           "extractor": "editorial Plan evidence registry"
         },
@@ -31998,7 +32006,7 @@
         {
           "key": "aaFootnotes",
           "artifact": "data/aa/aa_footnote_register.json",
-          "sha256": "e23485e95abee13d2b833c589de756f78a1196b1ff5c62a017ca955c27a981d8",
+          "sha256": "77615a4369c2f6211bb8cc09a95bf073fb555792137764618df2093906dc58b5",
           "capturedAt": "2026-10-25T09:53:28Z",
           "extractor": "editorial register of every AA note the captures record (the chart's footnotes, and from O103 the model pages, Coding Agent Index and cost charts), by exact text, each classified once (O100, O103)"
         },
@@ -32017,7 +32025,7 @@
           "extractor": "valuerank.value_v3 freeze"
         }
       ],
-      "bundleHash": "b09d62e413000977396bad88bc21f2fc37cffc71a84d4441179c88663a8a9f4c",
+      "bundleHash": "0a7f3cfea6382fb95c81f84ce600f6c5c89a43d9d9866c281bee77ddd9ce3bc4",
       "rebuild": "every published output is rebuilt from these artifacts at the pinned publication clock (npm run verify:docs), never from live pages"
     },
     "track": {
@@ -38309,9 +38317,9 @@
           "region": "global",
           "status": "fails: a 5-hour figure never converts to a billing period (O82)",
           "listed": true,
-          "currentPartition": 2,
+          "currentPartition": 3,
           "partitionsWithReports": [
-            0
+            2
           ],
           "configurations": [
             "claude-opus-5-5"
@@ -38330,7 +38338,7 @@
               "observer": "Kanttz",
               "valueLower": 662.0,
               "valueUpper": 754.0,
-              "partition": 0,
+              "partition": 2,
               "provisional": false,
               "speedMode": null,
               "excluded": null
@@ -38356,7 +38364,7 @@
           "region": "global",
           "status": "fails: 0 non-provisional report(s) in the current partition",
           "listed": true,
-          "currentPartition": 2,
+          "currentPartition": 3,
           "partitionsWithReports": [],
           "configurations": [
             "claude-opus-5-5"
@@ -38390,11 +38398,10 @@
           "region": "global",
           "status": "fails: 1 non-provisional report(s) in the current partition",
           "listed": true,
-          "currentPartition": 2,
+          "currentPartition": 3,
           "partitionsWithReports": [
-            0,
-            1,
-            2
+            2,
+            3
           ],
           "configurations": [
             "claude-opus-5-5"
@@ -38417,7 +38424,7 @@
               "observer": "Kanttz",
               "valueLower": 2484.0,
               "valueUpper": 2920.0,
-              "partition": 0,
+              "partition": 2,
               "provisional": false,
               "speedMode": null,
               "excluded": null
@@ -38427,37 +38434,37 @@
               "observer": "Theo (pingdotgg)",
               "valueLower": 2446.0,
               "valueUpper": 2600.0,
-              "partition": null,
+              "partition": 2,
               "provisional": false,
               "speedMode": null,
-              "excluded": "spans a partition split"
+              "excluded": null
             },
             {
               "id": "last-lab-max20x",
               "observer": "Last_Lab_3627",
               "valueLower": 2000.0,
               "valueUpper": 2045.0,
-              "partition": 0,
+              "partition": null,
               "provisional": false,
               "speedMode": null,
-              "excluded": null
+              "excluded": "spans a partition split"
             },
             {
               "id": "delicious-shower-max20x",
               "observer": "Delicious-Shower8401",
               "valueLower": 2175.0,
               "valueUpper": 2175.0,
-              "partition": 0,
+              "partition": null,
               "provisional": false,
               "speedMode": null,
-              "excluded": null
+              "excluded": "spans a partition split"
             },
             {
               "id": "nicoaica-max20x-before",
               "observer": "NicoAica",
               "valueLower": 1294.0,
               "valueUpper": 1681.0,
-              "partition": 1,
+              "partition": 2,
               "provisional": false,
               "speedMode": null,
               "excluded": null
@@ -38467,7 +38474,7 @@
               "observer": "NicoAica",
               "valueLower": 182.0,
               "valueUpper": 212.0,
-              "partition": 2,
+              "partition": 3,
               "provisional": false,
               "speedMode": null,
               "excluded": null
@@ -38533,7 +38540,7 @@
           "region": "global",
           "status": "fails: 0 non-provisional report(s) in the current partition",
           "listed": true,
-          "currentPartition": 2,
+          "currentPartition": 3,
           "partitionsWithReports": [],
           "configurations": [
             "None"
@@ -38617,7 +38624,7 @@
           "region": "global",
           "status": "fails: 0 non-provisional report(s) in the current partition",
           "listed": true,
-          "currentPartition": 2,
+          "currentPartition": 3,
           "partitionsWithReports": [],
           "configurations": [
             "claude-opus-5-5"
@@ -38651,9 +38658,9 @@
           "region": "global",
           "status": "fails: 0 non-provisional report(s) in the current partition",
           "listed": true,
-          "currentPartition": 2,
+          "currentPartition": 3,
           "partitionsWithReports": [
-            0
+            2
           ],
           "configurations": [
             "claude-opus-5-5"
@@ -38672,7 +38679,7 @@
               "observer": "muscgab",
               "valueLower": 750.0,
               "valueUpper": 830.0,
-              "partition": 0,
+              "partition": 2,
               "provisional": false,
               "speedMode": null,
               "excluded": null
@@ -38682,7 +38689,7 @@
               "observer": "unlabelled /usage screenshot",
               "valueLower": 1920.0,
               "valueUpper": 1920.0,
-              "partition": 0,
+              "partition": 2,
               "provisional": false,
               "speedMode": null,
               "excluded": null
@@ -38698,7 +38705,7 @@
           "region": "global",
           "status": "fails: 0 non-provisional report(s) in the current partition",
           "listed": true,
-          "currentPartition": 2,
+          "currentPartition": 3,
           "partitionsWithReports": [],
           "configurations": [
             "None"
@@ -38732,9 +38739,9 @@
           "region": "global",
           "status": "fails: a 5-hour figure never converts to a billing period (O82)",
           "listed": true,
-          "currentPartition": 1,
+          "currentPartition": 3,
           "partitionsWithReports": [
-            1
+            3
           ],
           "configurations": [
             "claude-opus-5-5"
@@ -38756,7 +38763,7 @@
               "observer": "K45SLE",
               "valueLower": 42.0,
               "valueUpper": 42.0,
-              "partition": 1,
+              "partition": 3,
               "provisional": true,
               "speedMode": null,
               "excluded": null
@@ -38802,7 +38809,7 @@
           "region": "global",
           "status": "fails: 0 non-provisional report(s) in the current partition",
           "listed": true,
-          "currentPartition": 1,
+          "currentPartition": 3,
           "partitionsWithReports": [],
           "configurations": [
             "claude-opus-5-5"
@@ -38836,10 +38843,10 @@
           "region": "global",
           "status": "fails: 0 non-provisional report(s) in the current partition",
           "listed": true,
-          "currentPartition": 1,
+          "currentPartition": 3,
           "partitionsWithReports": [
-            0,
-            1
+            2,
+            3
           ],
           "configurations": [
             "claude-opus-5-5"
@@ -38863,17 +38870,17 @@
               "observer": "NTRYourWaifu",
               "valueLower": 321.0,
               "valueUpper": 321.0,
-              "partition": 0,
+              "partition": null,
               "provisional": false,
               "speedMode": null,
-              "excluded": null
+              "excluded": "spans a partition split"
             },
             {
               "id": "kanzakichiya-pro",
               "observer": "kanzakichiya",
               "valueLower": 302.0,
               "valueUpper": 302.0,
-              "partition": 0,
+              "partition": 2,
               "provisional": false,
               "speedMode": null,
               "excluded": null
@@ -38883,7 +38890,7 @@
               "observer": "ganpei777",
               "valueLower": 1266.15,
               "valueUpper": 1266.15,
-              "partition": 0,
+              "partition": 2,
               "provisional": false,
               "speedMode": null,
               "excluded": null
@@ -38893,7 +38900,7 @@
               "observer": "K45SLE",
               "valueLower": 210.0,
               "valueUpper": 300.0,
-              "partition": 1,
+              "partition": 3,
               "provisional": true,
               "speedMode": null,
               "excluded": null
@@ -38959,7 +38966,7 @@
           "region": "global",
           "status": "fails: 0 non-provisional report(s) in the current partition",
           "listed": true,
-          "currentPartition": 1,
+          "currentPartition": 3,
           "partitionsWithReports": [],
           "configurations": [
             "None"
@@ -40927,6 +40934,7 @@
           },
           "aaCostCaveat": null,
           "aaCostCaveatFactor": null,
+          "aaUncountedNotes": [],
           "aaCostCaveatRangeUsd": null,
           "valuation": {
             "costSourceRule": "AA: provider-reported token counts priced per token category at AA's recorded prices, cache pricing included",
@@ -41523,6 +41531,7 @@
           },
           "aaCostCaveat": null,
           "aaCostCaveatFactor": null,
+          "aaUncountedNotes": [],
           "aaCostCaveatRangeUsd": null,
           "valuation": {
             "costSourceRule": "AA: provider-reported token counts priced per token category at AA's recorded prices, cache pricing included",
@@ -42105,6 +42114,7 @@
           "agentSafety": null,
           "aaCostCaveat": null,
           "aaCostCaveatFactor": null,
+          "aaUncountedNotes": [],
           "aaCostCaveatRangeUsd": null,
           "valuation": {
             "costSourceRule": "AA: provider-reported token counts priced per token category at AA's recorded prices, cache pricing included",
@@ -42673,6 +42683,7 @@
           "agentSafety": null,
           "aaCostCaveat": null,
           "aaCostCaveatFactor": null,
+          "aaUncountedNotes": [],
           "aaCostCaveatRangeUsd": null,
           "valuation": {
             "costSourceRule": "AA: provider-reported token counts priced per token category at AA's recorded prices, cache pricing included",
@@ -43417,6 +43428,7 @@
           "agentSafety": null,
           "aaCostCaveat": null,
           "aaCostCaveatFactor": null,
+          "aaUncountedNotes": [],
           "aaCostCaveatRangeUsd": null,
           "valuation": {
             "costSourceRule": "AA: provider-reported token counts priced per token category at AA's recorded prices, cache pricing included",
@@ -44125,6 +44137,7 @@
           "agentSafety": null,
           "aaCostCaveat": null,
           "aaCostCaveatFactor": null,
+          "aaUncountedNotes": [],
           "aaCostCaveatRangeUsd": null,
           "valuation": {
             "costSourceRule": "AA: provider-reported token counts priced per token category at AA's recorded prices, cache pricing included",
@@ -44866,6 +44879,7 @@
           "agentSafety": null,
           "aaCostCaveat": null,
           "aaCostCaveatFactor": null,
+          "aaUncountedNotes": [],
           "aaCostCaveatRangeUsd": null,
           "valuation": {
             "costSourceRule": "AA: provider-reported token counts priced per token category at AA's recorded prices, cache pricing included",
@@ -45574,6 +45588,7 @@
           "agentSafety": null,
           "aaCostCaveat": null,
           "aaCostCaveatFactor": null,
+          "aaUncountedNotes": [],
           "aaCostCaveatRangeUsd": null,
           "valuation": {
             "costSourceRule": "AA: provider-reported token counts priced per token category at AA's recorded prices, cache pricing included",
@@ -46318,6 +46333,7 @@
           "agentSafety": null,
           "aaCostCaveat": null,
           "aaCostCaveatFactor": null,
+          "aaUncountedNotes": [],
           "aaCostCaveatRangeUsd": null,
           "valuation": {
             "costSourceRule": "AA: provider-reported token counts priced per token category at AA's recorded prices, cache pricing included",
@@ -47071,6 +47087,7 @@
           },
           "aaCostCaveat": null,
           "aaCostCaveatFactor": null,
+          "aaUncountedNotes": [],
           "aaCostCaveatRangeUsd": null,
           "valuation": {
             "costSourceRule": "AA: provider-reported token counts priced per token category at AA's recorded prices, cache pricing included",
@@ -47830,6 +47847,7 @@
           "agentSafety": null,
           "aaCostCaveat": "Claude Haiku 5.5 has 5x higher pricing on longer-context inputs which are not currently reflected; we are working to include this in cost figures across Artificial Analysis.",
           "aaCostCaveatFactor": 5.0,
+          "aaUncountedNotes": [],
           "aaCostCaveatRangeUsd": [
             70.84861795451641,
             354.24308977258204
@@ -48541,6 +48559,7 @@
           "agentSafety": null,
           "aaCostCaveat": null,
           "aaCostCaveatFactor": null,
+          "aaUncountedNotes": [],
           "aaCostCaveatRangeUsd": null,
           "valuation": {
             "costSourceRule": "AA: provider-reported token counts priced per token category at AA's recorded prices, cache pricing included",
@@ -49285,6 +49304,7 @@
           "agentSafety": null,
           "aaCostCaveat": "Claude Haiku 5.5 has 5x higher pricing on longer-context inputs which are not currently reflected; we are working to include this in cost figures across Artificial Analysis.",
           "aaCostCaveatFactor": 5.0,
+          "aaUncountedNotes": [],
           "aaCostCaveatRangeUsd": [
             45.909504751851436,
             229.5475237592572
@@ -49996,6 +50016,7 @@
           "agentSafety": null,
           "aaCostCaveat": null,
           "aaCostCaveatFactor": null,
+          "aaUncountedNotes": [],
           "aaCostCaveatRangeUsd": null,
           "valuation": {
             "costSourceRule": "AA: provider-reported token counts priced per token category at AA's recorded prices, cache pricing included",
@@ -50740,6 +50761,7 @@
           "agentSafety": null,
           "aaCostCaveat": null,
           "aaCostCaveatFactor": null,
+          "aaUncountedNotes": [],
           "aaCostCaveatRangeUsd": null,
           "valuation": {
             "costSourceRule": "AA: provider-reported token counts priced per token category at AA's recorded prices, cache pricing included",
@@ -51484,6 +51506,7 @@
           "agentSafety": null,
           "aaCostCaveat": null,
           "aaCostCaveatFactor": null,
+          "aaUncountedNotes": [],
           "aaCostCaveatRangeUsd": null,
           "valuation": {
             "costSourceRule": "AA: provider-reported token counts priced per token category at AA's recorded prices, cache pricing included",
@@ -61549,7 +61572,7 @@
           "detail": "8 of 51 plan rows rest on a measurement inside an acknowledged fault window; they stay selected and yield to two concordant user reports for their own model and plan, and the transfers resting on them follow: gpt-5.6-luna-low@chatgpt-pro-500, gpt-6-astra-high@chatgpt-pro-500, gpt-6-luna-high@chatgpt-pro-500, gpt-6-luna-medium@chatgpt-pro-500, gpt-6-luna-xhigh@chatgpt-pro-500, gpt-6-luna@chatgpt-pro-500, gpt-6.1-sol-high@chatgpt-pro-500, gpt-6.1-sol-medium@chatgpt-pro-500"
         },
         {
-          "rule": "AA cost omits a pricing term (O94, O98, O106, O108, O109)",
+          "rule": "AA cost omits a pricing term (O94, O98, O100, O106, O108, O109)",
           "status": "fired",
           "detail": "ranked at the published cost; compete in interval and scenario outputs over [C, factor × C] ([C, ∞) without a stated factor, O98) without a label, and leave the anchor population at the next freeze: claude-haiku-5-5-high (up to 5×), claude-haiku-5-5-medium (up to 5×)"
         },
@@ -61564,9 +61587,9 @@
           "detail": "every capture is within its age gate and none after the cutoff unless its source predates the cutoff's day; the build stops otherwise"
         },
         {
-          "rule": "build-stopping evidence gates (O64, O69, O71, O75, O99, O100, O101, O103, O105, O106, O107, O108, E195, E204, E225)",
+          "rule": "build-stopping evidence gates (O64, O69, O71, O75, O99, O100, O101, O103, O105-O111, E195, E204, E225)",
           "status": "passed",
-          "detail": "the Coding Agent Index manifest (O64), the Terminal-Bench agent list (E225), cutoff-day row dates (O69), the three-stage all-provider plan search (O71, O75), the typed change records behind every route flag and partition split, which also produce each route's label and blocking dates (O99, O101, O105, O107), the register of AA notes covering every captured one, with the chart's inventory and duplicate-entry checks, the post-O103 capture notes, the basket-chart labels and chart-level notes' named rows (O100, O103, O106, O108) and the frontier path checks (E195, E204) hold; the build stops otherwise"
+          "detail": "the Coding Agent Index manifest (O64), the Terminal-Bench agent list (E225), cutoff-day row dates (O69), the three-stage all-provider plan search (O71, O75), the typed change records behind every route flag and partition split, which also produce each route's label and blocking dates within its launch- and schedule-bounded span (O99, O101, O105, O107, O110, O111), the register of AA notes covering every captured one, with the chart's inventory and duplicate-entry checks, the post-O103 capture notes, the basket-chart labels and chart-level notes' named rows (O100, O103, O106, O108) and the frontier path checks (E195, E204) hold; the build stops otherwise"
         },
         {
           "rule": "score swing gate (E177)",
@@ -61689,7 +61712,7 @@
           {
             "key": "planRoutes",
             "artifact": "data/plan_cost_routes.json",
-            "sha256": "abc0e3b45f7dca48795111b680f7fd8f3cdd53b1bed9f6fd4293493d3952c723",
+            "sha256": "8cb6e444a3ecb2d2a2db0b538fdbda8540a5e50a966ea962127522f40b434c89",
             "capturedAt": "2026-10-25",
             "extractor": "editorial Plan evidence registry"
           },
@@ -61745,7 +61768,7 @@
           {
             "key": "aaFootnotes",
             "artifact": "data/aa/aa_footnote_register.json",
-            "sha256": "e23485e95abee13d2b833c589de756f78a1196b1ff5c62a017ca955c27a981d8",
+            "sha256": "77615a4369c2f6211bb8cc09a95bf073fb555792137764618df2093906dc58b5",
             "capturedAt": "2026-10-25T09:53:28Z",
             "extractor": "editorial register of every AA note the captures record (the chart's footnotes, and from O103 the model pages, Coding Agent Index and cost charts), by exact text, each classified once (O100, O103)"
           },
@@ -61764,7 +61787,7 @@
             "extractor": "valuerank.value_v3 freeze"
           }
         ],
-        "bundleHash": "b09d62e413000977396bad88bc21f2fc37cffc71a84d4441179c88663a8a9f4c",
+        "bundleHash": "0a7f3cfea6382fb95c81f84ce600f6c5c89a43d9d9866c281bee77ddd9ce3bc4",
         "rebuild": "every published output is rebuilt from these artifacts at the pinned publication clock (npm run verify:docs), never from live pages"
       },
       "track": {
