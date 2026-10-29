@@ -34,7 +34,7 @@ from valuerank.paths import DATA, ROOT
 
 SPEC_DIR = ROOT / "research" / "2026-10-19-methodology-codesign"
 MANIFEST = "figures.json"
-PLACEHOLDER = re.compile(r"\{\{(?P<scope>max|aicd|top|fig|name|absent):(?P<path>[^|}]+)(?:\|(?P<fmt>[^}]+))?\}\}")
+PLACEHOLDER = re.compile(r"\{\{(?P<scope>max|aicd|common|top|fig|name|absent):(?P<path>[^|}]+)(?:\|(?P<fmt>[^}]+))?\}\}")
 _TOKEN = re.compile(r'\[(?P<bracket>[^\]]+)\]|(?P<key>[^.\[\]]+)')
 DRAFT = re.compile(r"draft-r(?P<number>\d+)\.src\.md$")
 
@@ -157,6 +157,7 @@ def named_figures(scores: dict, data: Path = DATA) -> dict:
             figures[f"{track}.share.independent"] = f"{shares['independent'] * 100:.0f}%"
         figures.update(plan_band_figures(track, section, display_names(scores)))
         figures[f"{track}.ranked"] = len(section["rows"])
+        figures[f"{track}.codingShare"] = f"{q.coding_specific_share(q.TRACKS[track]):.0f}"  # O122
         # I61 L7, O72: plan rows priced at API cost because their provider has no authorised or admitted route.
         fallback = [row for row in section["planRows"] if row["id"].endswith("@api")]
         figures[f"{track}.planRows"] = len(section["planRows"])
@@ -251,7 +252,7 @@ def named_figures(scores: dict, data: Path = DATA) -> dict:
                                        f"({record['harness']} chosen over {series([item['harness'] for item in record['alternates']])} by "
                                        f"{record['selection'].split('chosen by ')[1].split(' (')[0]})" for record in tracks_records]) or "none"
     # I53 M2: each subset-workload stratum's panel and the status its cost-influence statistics read.
-    labels = {"max": "the max-effort ranking", "aicd": "the AI Coding Daily ranking"}
+    labels = {"max": "the max-effort ranking", "aicd": "the AI Coding Daily ranking", "common": "the common-leaf diagnostic ranking"}
     strata = [f"{labels.get(track, track)}'s {len(item['panel'])}-row {basis.upper() if basis == 'api' else 'Plan'} subset stratum reads \"{item['status']}\""
               for track, section in sections.items() for basis in ("api", "plan")
               for item in section["costInfluence"][basis].get("subsetStrata", {}).values()]
@@ -259,13 +260,16 @@ def named_figures(scores: dict, data: Path = DATA) -> dict:
     # E234: whether every frozen bar keeps its displayed-record row with the fills published, removed and lowered.
     changed = [f"{track} {basis} {item['bar'].removeprefix('bar:')}" for track, section in sections.items()
                for basis, items in section["diagnostics"]["gapFillBars"]["bases"].items() for item in items if not item["survives"]]
-    figures["gapFillBars"] = ("every bar of both rankings keeps its row in all three" if not changed
+    figures["gapFillBars"] = ("every bar of every ranking keeps its row in all three" if not changed
                               else "a bar's row changes at " + series(changed))
     both = set(ranked["max"]) & set(ranked["aicd"])
     figures["both.names"], figures["both.count"] = order(both), len(both)
     figures["rankedAny"] = len(set(ranked["max"]) | set(ranked["aicd"]))
     excluded = {item["id"] for item in sections["max"]["incompleteEvidence"]} & {item["id"] for item in sections["aicd"]["incompleteEvidence"]}
     figures["excluded"], figures["excluded.names"] = len(excluded), order(excluded)
+    # O121: how many configurations neither leading ranking ranks that the diagnostic ranking does.
+    common_only = set(ranked["common"]) - set(ranked["max"]) - set(ranked["aicd"])
+    figures["commonOnly"], figures["commonOnly.names"] = len(common_only), order(common_only)
     # I53 L3: the leaves outside both rankings' added sets that excluded configurations lack, grouped by leaf set.
     added = {leaf.key for track in q.TRACKS for leaf in q.TRACKS[track]} - {leaf.key for leaf in q.COMMON_LEAVES} - {"frontierCode", "terminalBench", "bugHunt"}
     missing = {item["id"]: tuple(sorted(set(item["missing"]) - added)) for item in sections["max"]["incompleteEvidence"] if item["id"] in excluded}
@@ -397,7 +401,7 @@ def render(text: str, scores: dict, manifest: dict) -> str:
     """Replace every placeholder; a placeholder that does not resolve raises FigureError."""
 
     names = display_names(scores)
-    scopes = {"max": scores["v3"], "aicd": scores["v3Tracks"]["aicd"], "top": scores}
+    scopes = {"max": scores["v3"], "aicd": scores["v3Tracks"]["aicd"], "common": scores["v3Tracks"]["common"], "top": scores}
 
     def replace(match: re.Match) -> str:
         scope, path, spec = match.group("scope"), match.group("path").strip(), match.group("fmt")

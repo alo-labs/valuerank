@@ -220,7 +220,7 @@ def test_gap_fill_bars_figure_names_a_changed_bar():
     changed = json.loads(json.dumps(SCORES))
     changed["v3"]["diagnostics"]["gapFillBars"]["bases"]["api"][0]["survives"] = False
     assert f.named_figures(changed)["gapFillBars"].startswith("a bar's row changes at max api ")
-    assert f.named_figures(SCORES)["gapFillBars"] == "every bar of both rankings keeps its row in all three"
+    assert f.named_figures(SCORES)["gapFillBars"] == "every bar of every ranking keeps its row in all three"
 
 
 def test_subset_strata_and_excluded_missing_leaves_render_from_the_build():

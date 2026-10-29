@@ -140,6 +140,7 @@ def coding_agent_component(record: dict | None) -> dict | None:
         source=f"AA Coding Agent Index v2.0 cost to run (mean API cost per task) x {required_tasks} tasks",
         configuration=record["label"],
         detail={
+            "agent": record.get("agent"),  # O123: the vendor agent is part of the costed configuration
             "meanCostPerTaskUsd": mean,
             "requiredTasks": required_tasks,
             "publishedSumUsd": total,

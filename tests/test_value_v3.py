@@ -2262,3 +2262,71 @@ def test_regime_bounds_shared_labels_and_change_date_lint():
     from valuerank import draft_figures
     assert draft_figures.change_date_problems("Revision history: flagged from 2026-10-17.\nbody {{fig:x}}") == []
     assert draft_figures.change_date_problems("the routes are possibly superseded from 2026-10-11.") != []
+
+
+def test_agent_effects_are_identified_only_by_models_under_two_agents():
+    """O123: log C(m, a) = alpha_m + h_a over models AA lists under two or more agents, centred per connected agent group."""
+
+    assert v.agent_effects([]) == {} and v.agent_effects([{"model": "M", "agent": "A", "meanCostPerTaskUsd": 1.0}]) == {}
+    rows = [
+        {"model": "M", "agent": "A", "meanCostPerTaskUsd": math.exp(1.0)}, {"model": "M", "agent": "B", "meanCostPerTaskUsd": math.exp(2.0)},
+        {"model": "P", "agent": "C", "meanCostPerTaskUsd": 1.0}, {"model": "P", "agent": "D", "meanCostPerTaskUsd": math.exp(1.0)},
+        {"model": "Q", "agent": "E", "meanCostPerTaskUsd": 2.0}, {"model": "R", "agent": "F"},
+    ]
+    effects = v.agent_effects(rows)
+    assert set(effects) == {"A", "B", "C", "D"}
+    assert effects["B"] - effects["A"] == pytest.approx(1.0) and effects["A"] + effects["B"] == pytest.approx(0.0)
+    assert effects["D"] - effects["C"] == pytest.approx(1.0) and effects["C"] + effects["D"] == pytest.approx(0.0)
+
+
+def test_harness_cost_stress_removes_each_agents_effect_and_reranks(monkeypatch):
+    """O123: the named S2 stress takes C x exp(-h_a) off each row's Coding Agent Index cost; unidentified agents stay put."""
+
+    result, frozen = scored()
+    assert v.harness_cost_stress(result, frozen) == {"id": "harness cost (O123)", "stratum": "S2", "status": "unevaluable", "reason": v.HARNESS_UNEVALUABLE}
+    row = next(item for item in result["rows"] if basket.CODING_AGENT_INDEX in item["cost"]["components"])
+    row["components"][basket.CODING_AGENT_INDEX]["detail"]["agent"] = "Hungry"
+    monkeypatch.setattr(v, "agent_effects", lambda configurations: {"Hungry": math.log(2.0)})
+    stress = v.harness_cost_stress(result, frozen)
+    component = row["components"][basket.CODING_AGENT_INDEX]["costUsd"]
+    assert stress["status"] == "evaluated" and stress["agentEffects"] == {"Hungry": math.log(2.0)}
+    assert stress["rows"][row["id"]]["adjustedCostUsd"] == pytest.approx(row["cost"]["costUsd"] - component / 2)
+    assert all(item["rank"] >= 1 for item in stress["rows"].values())
+    assert v.coding_agent_execution({}) is None
+    assert v.coding_agent_execution(row["components"]) == {"agent": "Hungry", "configuration": row["components"][basket.CODING_AGENT_INDEX]["configuration"],
+                                                          "sameExecutionAsQuality": False, "reason": v.AGENT_EXECUTION}
+
+
+def test_a_diagnostic_ranking_withholds_labels_and_never_holds_the_release():
+    """O121: outputs stay as comparisons; labels and the release hold are withheld, and bars are set beside the leading ones."""
+
+    result, frozen = scored()
+    output = v.score(result, frozen)
+    output["scenarios"] = {"barLabels": [{"reference": "bar:median-quality", "level": 50.0, "candidates": {"a": {"label": True}}}]}
+    withheld = v.withhold_labels(output)
+    assert withheld["gates"]["holdsRelease"] is False and withheld["diagnosticRanking"]["rule"] == v.DIAGNOSTIC_RANKING
+    assert withheld["scenarios"]["barLabels"] == [{"reference": "bar:median-quality", "level": 50.0, "status": "withheld", "reason": v.DIAGNOSTIC_RANKING}]
+    assert all(basis["labelsWithheld"] == v.DIAGNOSTIC_RANKING for basis in withheld["intervals"].values())
+    bare = v.score(result, frozen)
+    bare["scenarios"] = {"status": "missing"}
+    assert v.withhold_labels(bare)["scenarios"] == {"status": "missing"}
+
+    def cheapest(row_id):
+        return {basis: {"bars": [{"bar": "bar:median-quality", "cheapest": [row_id]}]} for basis in v.BASES}
+
+    sections = {"max": {"displayedCheapest": cheapest("a")}, "aicd": {"displayedCheapest": cheapest("b")}, "common": {"displayedCheapest": cheapest("a")}}
+    comparison = v.leading_comparison(sections)["common"]["api"][0]
+    assert comparison == {"bar": "bar:median-quality", "cheapest": ["a"], "leading": {"max": ["a"], "aicd": ["b"]}, "differs": {"max": False, "aicd": True}}
+    assert v.leading_comparison({"max": sections["max"]}) == {}
+
+
+def test_livebench_records_must_carry_the_release_weights():
+    """O122: the coding-specific share reads LiveBench's release weights, so a record on other weights stops the build."""
+
+    good = {"modelId": "m", "leaf": q.LIVEBENCH, "weights": dict(q.LIVEBENCH_CATEGORY_WEIGHTS)}
+    sources = {q.LIVEBENCH: {"publisher": "LiveBench"}}
+    assert ("m", q.LIVEBENCH) in v.track_records({"sweTracks": {"sources": sources, "records": [good]}})
+    with pytest.raises(ValueError, match="differ from the release"):
+        v.track_records({"sweTracks": {"sources": sources, "records": [{**good, "weights": {"coding": 1.0}}]}})
+    leaves = (q.Leaf("swe", "SWE", "swe", 45.0, "aa"), q.Leaf(q.LIVEBENCH, "LiveBench", "swe", 15.0, "independent"), q.Leaf("g", "G", "professional", 40.0, "aa"))
+    assert q.coding_specific_share(leaves) == pytest.approx(45 + 15 * 3.5 / 9) and q.coding_specific_share(leaves[:1]) == 45.0

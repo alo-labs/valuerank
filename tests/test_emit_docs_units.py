@@ -483,3 +483,19 @@ def test_report_cells_without_any_cell_say_so():
         v3 = {"planAllowanceCells": []}
 
     assert ed.report_cells_markdown(Facts()) == "No report cell."
+
+
+def test_harness_cost_text_lists_agents_and_the_stress():
+    """O123: the agents behind each row's Coding Agent Index cost, and the stress's effects and ranks when evaluated."""
+
+    class Facts:
+        v3 = {"rows": [{"id": "a", "codingAgent": {"agent": "Codex"}}, {"id": "b", "codingAgent": None}]}
+
+        def label(self, row_id):
+            return row_id.upper()
+
+    evaluated = {"status": "evaluated", "agentEffects": {"Codex": 0.25}, "rows": {"a": {"rank": 2}, "b": {"rank": None}}}
+    text = ed.harness_cost_text(evaluated, Facts())
+    assert "Codex +0.25" in text and "A 2; B None" in text and "A: Codex" in text
+    quiet = ed.harness_cost_text({"status": "unevaluable", "reason": "no pair"}, type("F", (), {"v3": {"rows": []}, "label": lambda self, i: i})())
+    assert quiet == "- **Harness cost (O123, S2 stress):** unevaluable: no pair."

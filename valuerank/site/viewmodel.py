@@ -348,10 +348,12 @@ def _entry(source: dict, row: dict | None, quality_ranks: dict, frontier: dict, 
 
 
 # O53/O54: the site path of each ranking; the max-effort ranking leads at /rankings/.
-TRACK_PATHS = {"max": "/rankings/", "aicd": "/rankings/ai-coding-daily/"}
+TRACK_PATHS = {"max": "/rankings/", "aicd": "/rankings/ai-coding-daily/", "common": "/rankings/common-leaves/"}
 TRACK_LEADS = {
     "max": "One configuration per model family at its top effort, scored on the AA leaves plus LiveBench 2.0 Overall and two Vals AI boards.",
     "aicd": "The configurations AI Coding Daily has tested, mostly at high and medium effort, scored on the AA leaves plus AI Coding Daily.",
+    "common": ("Diagnostic only (O121): every configuration with AA's leaves and Bug Hunt, at any effort, scored on the ten leaves the"
+               " two leading rankings share; it earns no label and never holds a release."),
 }
 
 
@@ -368,7 +370,8 @@ def build_bundle(data: Path = DATA, track: str | None = None) -> Bundle:
     for slug, doc in primary.models.items():
         home = q.DEFAULT_TRACK
         if not doc["summary"]["rankingEligible"]:
-            home = next((other for other, bundle in others.items() if bundle.models[slug]["summary"]["rankingEligible"]), q.DEFAULT_TRACK)
+            # O121: a model page never makes the diagnostic ranking its home.
+            home = next((other for other, bundle in others.items() if other in q.LEADING_TRACKS and bundle.models[slug]["summary"]["rankingEligible"]), q.DEFAULT_TRACK)
         if home != q.DEFAULT_TRACK:
             primary.models[slug] = others[home].models[slug]
         bundles = {q.DEFAULT_TRACK: primary, **others}
@@ -395,6 +398,9 @@ def _track_bundle(data: Path, track: str) -> Bundle:
     quality_ranks = competition_ranks({row_id: row["quality"]["displayed"] for row_id, row in rows.items()})
     api_intervals = v3["intervals"]["api"]
     frontier = api_intervals.get("frontier") or {}
+    if "diagnosticRanking" in v3:
+        # O121: a diagnostic ranking shows no interval label; each row carries the reason instead.
+        frontier = {row_id: {"status": v3["diagnosticRanking"]["rule"]} for row_id in frontier}
     shares = _scenario_view(v3)
     routes = {route["id"]: route for route in inputs["routes"]["routes"]}
     ranks = {basis: {row_id: row[key]["rank"] for row_id, row in rows.items()} for basis, key in (("api", "api"), ("plan", "planScore"))}

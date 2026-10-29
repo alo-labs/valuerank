@@ -1987,3 +1987,22 @@ Asked on I64 Q1 whether future O71 admissions should be executed by the build fr
 - O118 (hard expiry): a Plan route more than 90 days old, in grace, competes in the Plan interval outputs as a blocker that earns no label (`plan_routes.label_denied`).
 - O119 (fault windows): a Plan route measured inside an acknowledged accounting-fault window competes the same way.
 - O120 (anchor panels): anchors stay over a ranking's ranked rows; a newly ranked row beyond them that holds the clip gate is cleared only by the O12 versioned re-freeze with its dual run, and the gate output names that remedy (`anchors.CLIP_REMEDY`).
+
+## Panel note (round 12, reviewer 70)
+- Claude Sonnet 5.5's first two sends on r152 stopped at Perplexity's Cloudflare "verify you are human" interstitial (the driver's load-fail screenshots show it); the editor did not automate the check and retried after 30 minutes, when the page loaded normally.
+
+## Reviewer 70 (Claude Sonnet 5.5, round 12, Thinking, on r152) — adopted, modified or rejected
+- Read check: all 13 parts read to their ends at commit 41c554b.
+- M1 (an O52/O53 challenge: the leading max-effort ranking cannot see the cheap efforts): put to the owner; adopted as O121, a full diagnostic third ranking (the reviewer's recommendation 1).
+- M2 (the "software engineering 60%" label counts all of LiveBench 2.0 Overall): put to the owner; adopted as O122 (the label stays; the coding-specific share is printed: 51% in the max-effort ranking).
+- M3 (the Coding Agent Index's vendor agent is costed while the quality leaves come from AA's own runs): put to the owner; adopted as O123 (the agent is part of the configuration; disclosure and a named S2 stress).
+- L4 (OpenAI's resets nearly rule out report evidence): adopted as a disclosure in Known limitations; a reading wholly between two resets already counts (O112). Separate pre- and post-reset values in one report are not adopted: no such report exists, and E201a's straddling rule governs if one appears.
+- L5 (classification gates stop the release, an O64/O100/O103 challenge): rejected; the owner chose to stop on any unregistered row or note, and the previous release stays live meanwhile.
+- L6 (S1T's direction for non-binary leaves): adopted; for a per-task score in [0, 1] the plug-in binomial SD is an upper bound, stated in the S1T definition. LiveBench's 2026-10-14 task counts were already disclosed (E264).
+- L7 (label vocabulary, an O25 challenge): rejected; O25's claim contract scopes every label to reporting precision, and the O44 noise-margin companion is printed beside each bar.
+- Round status (O56): not clean (three Mediums).
+
+## Owner decisions O121–O123 (2026-10-29), asked on reviewer 70 M1–M3
+- O121 (coverage): a full diagnostic third ranking, the common-leaf ranking: every cohort configuration with AA's leaves and Bug Hunt, at any effort, on the ten leaves the leading rankings share, at the O55 weights (FrontierCode 25, Terminal-Bench 20, Bug Hunt 15, the seven others as before). It has its own frozen anchors (`data/v3_frozen_common.json`, anchor version v3-2026-10-25-common), bars, basket admission and scenario run; it earns no interval or scenario label, its gates never hold the release (`releaseHold.diagnosticGates`), a configuration ranked only there stays listed in ValueRank, and model pages never make it their home. Each bar position's displayed-record cheapest row is published beside each leading ranking's (`v3Tracks.common.leadingComparison`). Today it ranks 28 configurations, 7 of them in neither leading ranking; its clip gate would hold on its own.
+- O122 (software-engineering label): the group keeps its 60% with LiveBench 2.0 Overall in it (O61); each ranking prints its coding-specific share (LiveBench decomposed by its own Coding and Long Agentic weights, 3.5 of 9): 51% max-effort, 60% AI Coding Daily, 60% common-leaf. The build stops on a LiveBench record with other category weights.
+- O123 (coding agent): the vendor agent is part of the configuration being costed. Each row publishes its Coding Agent Index agent and that the agent run is not the quality leaves' run (`rows[].codingAgent`); a named S2 stress fits log C = α_m + h_a over models AA lists under two or more agents and publishes the API ranks with each agent's effect removed. Today no model is listed under two agents, so the stress is unevaluable.

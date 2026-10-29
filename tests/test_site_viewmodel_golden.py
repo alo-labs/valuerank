@@ -355,7 +355,7 @@ def test_methodology_page(bundle, v3):
 def test_data_page(bundle):
     page = viewmodel.data_page(bundle)
     assert [f["path"] for f in page["files"]] == [
-        "/data/rankings.json", "/data/rankings-aicd.json", "/data/models/<slug>.json", "/data/plans.json",
+        "/data/rankings.json", "/data/rankings-aicd.json", "/data/rankings-common.json", "/data/models/<slug>.json", "/data/plans.json",
         "/data/benchmarks.json", "/data/benchmarks/terminal-bench-4.json", "/data/changelog.json", "/data/livebench.json",
     ]
     assert all(f["description"] and f["schema"] for f in page["files"])
@@ -368,7 +368,7 @@ def test_export_writes_every_public_file_deterministically(data, tmp_path):
     first = export.export_public_data(data, tmp_path / "one")
     second = export.export_public_data(data, tmp_path / "two")
     relative = sorted(p.relative_to(tmp_path / "one").as_posix() for p in first)
-    assert len(first) == 69 and "plans.json" in relative and "rankings-aicd.json" in relative  # 7 site documents and 62 model documents
+    assert len(first) == 70 and "plans.json" in relative and "rankings-common.json" in relative  # 8 site documents and 62 model documents
     for left, right in zip(sorted(first), sorted(second)):
         assert left.read_bytes() == right.read_bytes()
     text = (tmp_path / "one" / "rankings.json").read_text()
@@ -393,17 +393,17 @@ def test_the_ai_coding_daily_ranking_is_a_bundle_of_its_own(bundle, scores):
     other = bundle.extras["tracks"]["aicd"]
     rankings = other.rankings
     assert rankings["track"] == {"key": "aicd", "label": "AI Coding Daily ranking", "href": "/rankings/ai-coding-daily/"}
-    assert bundle.rankings["track"]["key"] == "max" and set(bundle.extras["tracks"]) == {"aicd"}
+    assert bundle.rankings["track"]["key"] == "max" and set(bundle.extras["tracks"]) == {"aicd", "common"}
     ranked = {m["slug"] for m in rankings["models"] if m["rankingEligible"]}
     assert len(ranked) == len(scores["v3Tracks"]["aicd"]["rows"]) == 16
     assert "aiCodingDaily" in {d["key"] for d in rankings["dimensions"]} and "vibeCode" not in {d["key"] for d in rankings["dimensions"]}
     # A configuration ranked only there takes its model page from that ranking, and every page lists both rankings.
     opus_high = bundle.models["claude-opus-5-5-high"]
     assert opus_high["summary"]["rankingEligible"] is True and "aiCodingDaily" in {d["key"] for d in opus_high["dimensions"]}
-    assert [(r["track"], r["shown"], r["rankingEligible"]) for r in opus_high["rankings"]] == [("max", False, False), ("aicd", True, True)]
+    assert [(r["track"], r["shown"], r["rankingEligible"]) for r in opus_high["rankings"]] == [("max", False, False), ("aicd", True, True), ("common", False, True)]
     sol = bundle.models["gpt-6-1-sol"]
-    assert [(r["track"], r["shown"], r["rankingEligible"]) for r in sol["rankings"]] == [("max", True, True), ("aicd", False, False)]
+    assert [(r["track"], r["shown"], r["rankingEligible"]) for r in sol["rankings"]] == [("max", True, True), ("aicd", False, False), ("common", False, True)]
     page = viewmodel.rankings_page(other)
     assert page["heading"] == "AI Coding Daily ranking" and page["action"] == "/rankings/ai-coding-daily/"
-    assert [link["current"] for link in page["trackLinks"]] == [False, True]
+    assert [link["current"] for link in page["trackLinks"]] == [False, True, False]
     assert viewmodel.rankings_page(bundle)["heading"] == "Rankings"

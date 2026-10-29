@@ -324,8 +324,8 @@ def test_calibration_without_official_anchors_or_values_says_so(repo_copy, pinne
     section = text.split("#### Measured-evidence calibration (diagnostic)", 1)[1].split("## Interval outputs", 1)[0]
     assert "Status: measured-evidence calibration unavailable." in section
     # The max-effort ranking has a main and a subset workload (O17), each with its own anchors; the AI Coding Daily
-    # ranking's calibration (measured references since O90) has one workload.
-    assert section.count("The workload has no official Plan anchors.") == 3
+    # ranking's calibration (measured references since O90) has one workload, and so has the O121 diagnostic ranking's.
+    assert section.count("The workload has no official Plan anchors.") == 4
     assert "Value on measured anchors" not in section and "Pairwise reversals" not in section
 
 

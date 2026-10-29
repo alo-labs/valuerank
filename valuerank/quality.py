@@ -75,10 +75,36 @@ TRACKS = {
         Leaf("aiCodingDaily", "AI Coding Daily (excl. bug finding)", "swe", 10.0, "independent"),
         *COMMON_LEAVES,
     ),
+    # O121 (2026-10-29): a diagnostic third ranking on the ten leaves AA's runs (and Bug Hunt) share across efforts, at the
+    # O55 weights, so the cheap efforts the two leading rankings cannot rank are compared too. It has its own anchors, bars
+    # and scenario run, but it earns no label and never holds a release; it is not a headline ranking.
+    "common": (
+        Leaf("frontierCode", "FrontierCode 1.1", "swe", 25.0, "aa"),
+        Leaf("terminalBench", "Terminal-Bench 4.0 (AA run)", "swe", 20.0, "aa"),
+        Leaf("bugHunt", "Bug Hunt Bench", "swe", 15.0, "independent"),
+        *COMMON_LEAVES,
+    ),
 }
-TRACK_LABELS = {"max": "Max-effort ranking", "aicd": "AI Coding Daily ranking"}
-TRACK_NAMES = {"max": "max-effort ranking", "aicd": "AI Coding Daily ranking"}  # in a sentence
+TRACK_LABELS = {"max": "Max-effort ranking", "aicd": "AI Coding Daily ranking", "common": "Common-leaf ranking (diagnostic)"}
+TRACK_NAMES = {"max": "max-effort ranking", "aicd": "AI Coding Daily ranking", "common": "common-leaf diagnostic ranking"}  # in a sentence
 DEFAULT_TRACK = "max"  # O54: the max-effort ranking leads
+# O122 (2026-10-29): the software-engineering group keeps its 60% (LiveBench 2.0 Overall counts as SDLC work, O61), and
+# each ranking prints its coding-specific share beside it: every software-engineering leaf except LiveBench, plus
+# LiveBench's weight times the share its Coding and Long Agentic categories carry in its own Overall (release weights, O67).
+LIVEBENCH = "livebench2Overall"
+LIVEBENCH_CATEGORY_WEIGHTS = {"long_agentic": 2.0, "reasoning": 1.0, "coding": 1.5, "browser": 1.0, "data_analysis": 1.0, "research": 1.0, "design": 1.5}
+LIVEBENCH_CODING_CATEGORIES = ("long_agentic", "coding")
+
+
+def coding_specific_share(leaves) -> float:
+    """O122: the percent of quality on coding-specific evidence (LiveBench decomposed by its own category weights)."""
+
+    coding = sum(LIVEBENCH_CATEGORY_WEIGHTS[key] for key in LIVEBENCH_CODING_CATEGORIES) / sum(LIVEBENCH_CATEGORY_WEIGHTS.values())
+    return sum(leaf.weight * (coding if leaf.key == LIVEBENCH else 1.0) for leaf in leaves if leaf.group == "swe")
+
+
+DIAGNOSTIC_TRACKS = frozenset({"common"})  # O121: no labels, no release hold
+LEADING_TRACKS = tuple(track for track in TRACKS if track not in DIAGNOSTIC_TRACKS)
 # Every leaf of every ranking, for labels and domains.
 ALL_LEAVES = {leaf.key: leaf for track in TRACKS.values() for leaf in track}
 

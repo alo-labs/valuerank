@@ -1108,8 +1108,9 @@ def main(*, root: Path = ROOT, data: Path = DATA) -> int:
     for row in primary_rows:
         row["rankings"] = {track: row["id"] not in items for track, items in by_track.items()}
     incomplete = {
-        row["id"]: {"id": row["id"], "missing": sorted({leaf for items in by_track.values() for leaf in items[row["id"]]["missing"]})}
-        for row in primary_rows if not any(row["rankings"].values())
+        row["id"]: {"id": row["id"], "missing": sorted({leaf for track in q.LEADING_TRACKS for leaf in by_track[track][row["id"]]["missing"]})}
+        # O121: a configuration ranked only in a diagnostic ranking is still listed, not ranked.
+        for row in primary_rows if not any(row["rankings"][track] for track in q.LEADING_TRACKS)
     }
     for weight in weights:
         key = weight["key"]
@@ -1167,8 +1168,8 @@ def main(*, root: Path = ROOT, data: Path = DATA) -> int:
             if weight["key"] in row["dims"]
         }
         if row["id"] in incomplete:
-            missing = "; ".join(f"{q.TRACK_LABELS[track]}: no " + ", ".join(value_v3.LEAF_LABELS[key] for key in items[row["id"]]["missing"])
-                                for track, items in by_track.items())
+            missing = "; ".join(f"{q.TRACK_LABELS[track]}: no " + ", ".join(value_v3.LEAF_LABELS[key] for key in by_track[track][row["id"]]["missing"])
+                                for track in q.LEADING_TRACKS)
             row["rankingEligible"] = False
             row["costComposite"] = None
             row["rankingExclusionReasons"].append(f"Incomplete benchmark evidence after an exhaustive search (O36, O53): {missing}")
@@ -1598,9 +1599,10 @@ def main(*, root: Path = ROOT, data: Path = DATA) -> int:
                 "v3": v3_sections[q.DEFAULT_TRACK],
                 "v3Tracks": {track: section for track, section in v3_sections.items() if track != q.DEFAULT_TRACK},
                 # E262: gates run per ranking on its own anchor objects; the rankings publish together, so a hold in
-                # either holds the release.
-                "releaseHold": {"hold": any(section["gates"]["hold"] for section in v3_sections.values()),
-                                "heldRankings": [track for track, section in v3_sections.items() if section["gates"]["hold"]]},
+                # either leading ranking holds the release. O121: a diagnostic ranking's gate is disclosed, never holding.
+                "releaseHold": {"hold": any(v3_sections[track]["gates"]["hold"] for track in q.LEADING_TRACKS if track in v3_sections),
+                                "heldRankings": [track for track in q.LEADING_TRACKS if track in v3_sections and v3_sections[track]["gates"]["hold"]],
+                                "diagnosticGates": {track: v3_sections[track]["gates"]["hold"] for track in q.DIAGNOSTIC_TRACKS if track in v3_sections}},
             },
             indent=2,
             ensure_ascii=False,

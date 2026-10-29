@@ -341,17 +341,18 @@ def test_ranked_order_and_exclusions(built):
     # O36: a cohort configuration without the full benchmark set after the logged search is listed, not ranked.
     # O53: it is excluded only when it lacks every ranking's set; each ranking lists the configurations it cannot rank.
     incomplete = [m for m in scores["models"] if m["rankingStatus"] == "excluded_incomplete_benchmarks"]
-    listed = [{item["id"] for item in section["incompleteEvidence"]} for section in [scores["v3"], *scores["v3Tracks"].values()]]
+    # O121: the diagnostic ranking never makes a configuration ranked.
+    listed = [{item["id"] for item in section["incompleteEvidence"]} for section in [scores["v3"], *(scores["v3Tracks"][track] for track in quality.LEADING_TRACKS if track != quality.DEFAULT_TRACK)]]
     # E262: a hold in either ranking holds the release.
     assert scores["releaseHold"]["hold"] is bool(scores["releaseHold"]["heldRankings"])
     assert {m["id"] for m in incomplete} == set.intersection(*listed)
     for m in incomplete:
         assert not m["rankingEligible"] and m["rank"] is None and m["overallScore"] is None and m["costComposite"] is None
-        assert not any(m["rankings"].values())
+        assert not any(m["rankings"][track] for track in quality.LEADING_TRACKS)  # O121: the diagnostic ranking never ranks
         assert m["rankingInclusionReasons"] and m["rankingExclusionReasons"][-1].startswith(
             "Incomplete benchmark evidence after an exhaustive search (O36, O53): Max-effort ranking: no ")
         assert "; AI Coding Daily ranking: no " in m["rankingExclusionReasons"][-1]
-    ranked_somewhere = [m for m in scores["models"] if m.get("rankings") and any(m["rankings"].values())]
+    ranked_somewhere = [m for m in scores["models"] if m.get("rankings") and any(m["rankings"][track] for track in quality.LEADING_TRACKS)]
     assert ranked_somewhere and all(m["rankingEligible"] for m in ranked_somewhere)
     excluded = [m for m in scores["models"] if not m["rankingEligible"] and m not in incomplete]
     assert excluded
@@ -1291,8 +1292,8 @@ def test_the_cohort_is_every_plotted_frontier_and_near_configuration(world):
     rows = model_rows(world)
     assert rows["muse-spark-1-3"]["rankingStatus"] == "excluded_from_primary_cohort"
     # O53: a cohort row is ranked in each ranking whose full set it has, and listed when it has none.
-    assert rows["claude-opus-5-5-high"]["rankingEligible"] is True and rows["claude-opus-5-5-high"]["rankings"] == {"max": False, "aicd": True}
-    assert rows["gpt-6.1-sol"]["rankings"] == {"max": True, "aicd": False}
+    assert rows["claude-opus-5-5-high"]["rankingEligible"] is True and rows["claude-opus-5-5-high"]["rankings"] == {"max": False, "aicd": True, "common": True}
+    assert rows["gpt-6.1-sol"]["rankings"] == {"max": True, "aicd": False, "common": True}
     assert rows["gpt-6-luna-low"]["rankingInclusionReasons"] and rows["gpt-6-luna-low"]["rankingStatus"] == "excluded_incomplete_benchmarks"
 
 

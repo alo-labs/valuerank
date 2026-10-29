@@ -717,12 +717,40 @@ RANKING_HEADERS = ['Plan rank', 'API rank', 'Configuration', 'Plan value', 'API 
                    'Plan cost (USD per basket run)', 'Plan route', 'Flags', 'Noise band (Plan / API)']
 
 
+def coding_share_note(leaves):
+    """O122: where LiveBench 2.0 Overall sits in the group, the coding-specific part of the software-engineering share."""
+
+    if not any(leaf.key == q.LIVEBENCH for leaf in leaves):
+        return ""
+    return (f", of which {fnum(q.coding_specific_share(leaves), 0)}% is coding-specific: LiveBench 2.0 Overall counts as SDLC work (O61), "
+            "but only its Coding and Long Agentic categories are coding tasks (O122)")
+
+
 def leaf_set_text(leaves):
     """A ranking's software-engineering leaves and weights, then the rest (O53-O55)."""
 
     swe = [leaf for leaf in leaves if leaf.group == "swe"]
     return (", ".join(f"{leaf.label} {fnum(leaf.weight, 0)}%" for leaf in swe)
-            + f" (software engineering {fnum(sum(leaf.weight for leaf in swe), 0)}%), plus the {len(leaves) - len(swe)} leaves outside software engineering every ranking shares")
+            + f" (software engineering {fnum(sum(leaf.weight for leaf in swe), 0)}%{coding_share_note(leaves)}), plus the {len(leaves) - len(swe)} leaves outside software engineering every ranking shares")
+
+
+def diagnostic_note(other, facts):
+    """O121: a diagnostic ranking's status and its bar answers beside the leading rankings' (each ranking's bars are its own)."""
+
+    v3 = other.v3
+    if "diagnosticRanking" not in v3:
+        return ""
+    gate = "would hold" if v3["diagnosticRanking"]["gateWouldHold"] else "passes"
+    rows = []
+    for basis, bars in v3.get("leadingComparison", {}).items():
+        for item in bars:
+            rows.append([basis.upper() if basis == "api" else basis.capitalize(), item["bar"].removeprefix("bar:").removesuffix("-quality").replace("-", " "), facts.labels(item["cheapest"]) or DASH]
+                        + [(facts.labels(item["leading"][track]) or DASH) + (" (differs)" if item["differs"][track] else "") if item["leading"][track] is not None else DASH
+                           for track in q.LEADING_TRACKS])
+    table = markdown_table(["Basis", "Bar position", "Cheapest here"] + [f"Cheapest, {q.TRACK_NAMES[track]}" for track in q.LEADING_TRACKS], rows) if rows else ""
+    return (f"\n\n**Diagnostic ranking (O121).** It earns no interval or scenario label and its clip gate ({gate} on its own) never holds the release. "
+            "Its bars sit at the same ladder positions as the leading rankings' but at its own levels, so the comparison below asks whether a configuration "
+            "the leading rankings cannot rank would answer the same question.\n\n" + table)
 
 
 def track_rankings_markdown(facts):
@@ -739,6 +767,7 @@ def track_rankings_markdown(facts):
                 f"The interactive table is at [valuerank.alolabs.dev{viewmodel.TRACK_PATHS[track]}](https://valuerank.alolabs.dev{viewmodel.TRACK_PATHS[track]}).\n\n"
                 + markdown_table(RANKING_HEADERS, ranking_rows(other), numeric={0, 1, 3, 4, 5, 6, 7, 8})
                 + f"\n\n{separability_text(other).strip()}"
+                + diagnostic_note(other, facts)
                 + f"\n\nCohort configurations without this ranking's full set ({len(listed)}): {names([entry['name'] for entry in listed])}.\n"
             )
     return "\n".join(sections)
@@ -947,7 +976,7 @@ Cost score S_C = 100 × (ln c_H − ln c) / (ln c_H − ln c_L), clipped to 0–
 
 Quality is the weighted mean of the leaves observed for the exact configuration, each placed on fixed 0–100 anchors from its raw value (clipped, with saturation disclosed). Group shares of quality: {', '.join(f"{q.GROUP_LABELS[group]} {share_value:.0f}%" for group, share_value in q.GROUPS.items())}.
 
-**Two rankings (owner decisions O52–O55, O61).** ValueRank picks each ranking's benchmark set and ranks the configurations that have all of it, balancing the number of benchmarks against the number of configurations ranked. Outside AA, independent software-engineering benchmarks run few efforts per model, so no single set covers the cohort: LiveBench 2.0 and Vals AI run each model once at its top effort, and AI Coding Daily mostly at high and medium effort. The **{q.TRACK_NAMES['max']}** (leading, O54) adds LiveBench 2.0 Overall, LiveBench's weighted mean of its seven categories (Long Agentic, Reasoning, Coding, Browser, Data Analysis, Research, Design; release 2026-10-23, O67; O61: all are needed in the SDLC, and as an uncontaminated benchmark it carries no less weight than any single AA leaf), Vals Vibe Code Bench v1.1 and Vals Code Migration v1.1; the **{q.TRACK_NAMES['aicd']}** adds AI Coding Daily (its bug-finding column excluded because it overlaps Bug Hunt). Each ranking has its own frozen anchors, quality bars, scenario run and diagnostics, so values are comparable within a ranking, not across. Surge's Complex Constraints (instruction following, IFBench's successor) is dropped for now and CursorBench 4.0 and Surge sudo L7 are excluded by the owner; Epoch MirrorCode, SWE-bench-Live and SWE-PolyBench each cover too few cohort configurations at their exact effort (O53, O54; [research record](research/2026-10-23-swe-benchmarks/reports/SWE%20benchmark%20candidates.md)). MiMo-V2.6-Pro's results are taken at high, its AA configuration (O54); Vals records its run without a level, read as the same single reasoning mode (E252). Kimi K3.1 Pro's results are taken at max, its maximum and default effort (O66).
+**Two leading rankings and a diagnostic one (owner decisions O52–O55, O61, O121).** ValueRank picks each ranking's benchmark set and ranks the configurations that have all of it, balancing the number of benchmarks against the number of configurations ranked. Outside AA, independent software-engineering benchmarks run few efforts per model, so no single set covers the cohort: LiveBench 2.0 and Vals AI run each model once at its top effort, and AI Coding Daily mostly at high and medium effort. The **{q.TRACK_NAMES['max']}** (leading, O54) adds LiveBench 2.0 Overall, LiveBench's weighted mean of its seven categories (Long Agentic, Reasoning, Coding, Browser, Data Analysis, Research, Design; release 2026-10-23, O67; O61: all are needed in the SDLC, and as an uncontaminated benchmark it carries no less weight than any single AA leaf), Vals Vibe Code Bench v1.1 and Vals Code Migration v1.1; the **{q.TRACK_NAMES['aicd']}** adds AI Coding Daily (its bug-finding column excluded because it overlaps Bug Hunt). Each ranking has its own frozen anchors, quality bars, scenario run and diagnostics, so values are comparable within a ranking, not across. A third, the **{q.TRACK_NAMES['common']}** (owner decision O121), scores every configuration with AA's leaves and Bug Hunt, at any effort, on the ten leaves the two leading rankings share, at the O55 weights ({leaf_set_text(q.TRACKS['common'])}); it has its own anchors, bars and scenario run but earns no label and never holds a release, and its bar answers are printed beside the leading rankings' so that a cheap effort they cannot rank is still compared. Surge's Complex Constraints (instruction following, IFBench's successor) is dropped for now and CursorBench 4.0 and Surge sudo L7 are excluded by the owner; Epoch MirrorCode, SWE-bench-Live and SWE-PolyBench each cover too few cohort configurations at their exact effort (O53, O54; [research record](research/2026-10-23-swe-benchmarks/reports/SWE%20benchmark%20candidates.md)). MiMo-V2.6-Pro's results are taken at high, its AA configuration (O54); Vals records its run without a level, read as the same single reasoning mode (E252). Kimi K3.1 Pro's results are taken at max, its maximum and default effort (O66).
 
 {markdown_table(['Leaf', 'Group'] + [f"Weight, {q.TRACK_NAMES[track]}" for track in q.TRACKS] + ['Raw unit', 'Score', 'Run by'], leaf_rows, numeric={2, 3})}
 
@@ -1052,7 +1081,7 @@ def track_scores_markdown(facts):
     for track, other in facts.tracks.items():
         with q.active_track(track):
             sections.append(
-                f"## {q.TRACK_LABELS[track]}\n\n{viewmodel.TRACK_LEADS[track]} Anchor version `{other.v3['anchorVersion']}`; leaves: {leaf_set_text(q.LEAVES)}.\n\n"
+                f"## {q.TRACK_LABELS[track]}\n\n{viewmodel.TRACK_LEADS[track]} Anchor version `{other.v3['anchorVersion']}`; leaves: {leaf_set_text(q.LEAVES)}.{diagnostic_note(other, facts)}\n\n"
                 + markdown_table(SCORE_HEADERS, score_rows(other), numeric={1, 2, 3, 4, 5, 6, 7, 8})
                 + f"\n\n### {q.TRACK_LABELS[track]}: quality leaf scores\n\n" + leaf_table(other) + "\n"
                 # I47 M1: the per-ranking disclosures the specification points to are printed for every ranking.
@@ -1568,6 +1597,20 @@ def cost_diagnostics_markdown(facts):
     ) + "\n\n### Subset rows: paired bridge and missing spend (E10, E173)\n\n" + ("\n".join(bridge_lines) or "No row is scored on a subset workload.")
 
 
+def harness_cost_text(stress, facts):
+    """O123: each row's Coding Agent Index agent and the harness-cost stress (S2; scores unchanged)."""
+
+    agents = [f"{facts.label(row['id'])}: {row['codingAgent']['agent']}" for row in facts.v3["rows"] if row.get("codingAgent")]
+    listing = (" Coding Agent Index agents (each part of its costed configuration; none is the run behind the FrontierCode or Terminal-Bench leaf): "
+               + "; ".join(agents) + ".") if agents else ""
+    if stress["status"] != "evaluated":
+        return f"- **Harness cost (O123, S2 stress):** {stress['status']}: {stress['reason']}.{listing}"
+    moved = {row_id: item["rank"] for row_id, item in stress["rows"].items()}
+    effects = ", ".join(f"{agent} {effect:+.2f}" for agent, effect in sorted(stress["agentEffects"].items()))
+    return (f"- **Harness cost (O123, S2 stress):** agent effects on log cost ({effects}); API ranks with each agent's effect removed: "
+            + "; ".join(f"{facts.label(row_id)} {rank}" for row_id, rank in sorted(moved.items(), key=lambda item: (item[1] is None, item[1]))) + f".{listing}")
+
+
 def diagnostics_markdown(facts):
     diagnostics = facts.v3["diagnostics"]
     harness = diagnostics["terminalBenchSameHarness"]
@@ -1587,6 +1630,7 @@ def diagnostics_markdown(facts):
            if diagnostics["frontierCodeCrossSource"]["tau"] is not None else ""),
         gap_fill_text(diagnostics["gapFillSensitivity"], facts),
         gap_fill_bars_text(diagnostics["gapFillBars"], facts),
+        harness_cost_text(diagnostics["harnessCostStress"], facts),
         f"- **Quality agreement:** {agreement_text(agreement)}",
         *(f"- **Quality-substitution value agreement ({label}):** {agreement_text(diagnostics['qualitySubstitutionAgreement'][basis])}" for basis, label in (("api", "API"), ("plan", "Plan"))),
         f"- **Disjoint-evidence agreement:** {agreement_text(diagnostics['disjointEvidenceAgreement'])}",

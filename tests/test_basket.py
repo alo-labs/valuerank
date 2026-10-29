@@ -64,6 +64,7 @@ def test_coding_agent_component_prices_the_per_task_metric_over_290_tasks():
     assert component["costUsd"] == pytest.approx(290.0) and component["completeness"] == b.COMPLETE
     assert component["configuration"] == "Codex - GPT (max)"
     assert component["detail"] == {
+        "agent": None,
         "meanCostPerTaskUsd": 1.0,
         "requiredTasks": 290,
         "publishedSumUsd": 288.6,

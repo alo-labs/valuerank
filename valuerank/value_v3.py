@@ -171,6 +171,10 @@ def track_records(documents: dict) -> dict:
     """O53-O55: the added software-engineering leaves' exact-configuration records, keyed (model, leaf)."""
 
     tracks = documents.get("sweTracks") or {"sources": {}, "records": []}
+    # O122: the coding-specific share reads LiveBench's release weights, so a record on other weights stops the build.
+    for record in tracks["records"]:
+        if record["leaf"] == q.LIVEBENCH and record.get("weights") and record["weights"] != q.LIVEBENCH_CATEGORY_WEIGHTS:
+            raise ValueError(f"{record['modelId']}: LiveBench category weights {record['weights']} differ from the release's (O67, O122)")
     return {(record["modelId"], record["leaf"]): {**record, "sourceMeta": tracks["sources"][record["leaf"]]} for record in tracks["records"]}
 
 
@@ -945,6 +949,7 @@ def assemble(configurations: list[dict], documents: dict, *, release_day: date, 
         "sourceClocks": clocks,
         "planAllowanceCells": allowance_cells,
         "gdpvalPrevious": documents.get("aaPreviousCapture"),
+        "codingAgents": documents.get("codingAgents"),
         "pages": documents["snapshot"]["pages"],
     }
 
@@ -2395,6 +2400,7 @@ def score(assembled: dict, frozen: dict) -> dict:
             # ranking), so both rankings estimate one offset from one panel.
             "frontierCodeCrossSource": frontiercode_cross_source(cohort_rows, assembled["cognition"]),
             "gapFillSensitivity": gap_fill_sensitivity(rows, per_row),
+            "harnessCostStress": harness_cost_stress(assembled, frozen),
             "gapFillBars": gap_fill_bars(assembled, frozen, frontiercode_cross_source(cohort_rows, assembled["cognition"])["meanOffset"]),
             "anchorStability": _anchor_stability(rows, frozen, main, per_row),
             "omniscienceAbstentionSensitivity": _abstention_sensitivity(rows, per_row),
@@ -2831,6 +2837,78 @@ def plan_amount(selected: dict | None, workload: str | None = None) -> dict | No
     }
 
 
+AGENT_EXECUTION = ("the Coding Agent Index runs the model in this vendor agent, while the FrontierCode and Terminal-Bench leaves come from"
+                   " AA's own model runs, so the agent's token use is charged to the configuration but not measured on the quality side (O123)")
+
+
+def coding_agent_execution(components: dict) -> dict | None:
+    """O123: the agent behind a row's Coding Agent Index cost, with the execution-match flag."""
+
+    component = components.get(basket.CODING_AGENT_INDEX)
+    if component is None:
+        return None
+    return {"agent": component["detail"].get("agent"), "configuration": component["configuration"], "sameExecutionAsQuality": False, "reason": AGENT_EXECUTION}
+
+
+def agent_effects(configurations: list[dict]) -> dict:
+    """O123: per-agent cost effects h_a from log C(m, a) = alpha_m + h_a, fitted over AA's Coding Agent Index rows of the models
+    it lists under two or more agents (centred within each connected group of agents); other agents are unidentified."""
+
+    costs = [(item["model"], item["agent"], math.log(item["meanCostPerTaskUsd"])) for item in configurations if item.get("meanCostPerTaskUsd") and item.get("model") and item.get("agent")]
+    agents_of: dict[str, set] = {}
+    for model, agent, _ in costs:
+        agents_of.setdefault(model, set()).add(agent)
+    shared = {model for model, agents in agents_of.items() if len(agents) > 1}
+    if not shared:
+        return {}
+    data = [item for item in costs if item[0] in shared]
+    effects = {agent: 0.0 for _, agent, _ in data}
+    for _ in range(500):  # backfitting converges for this two-way layout
+        alpha = {model: statistics.fmean(cost - effects[agent] for m, agent, cost in data if m == model) for model in shared}
+        effects = {agent: statistics.fmean(cost - alpha[model] for model, a, cost in data if a == agent) for agent in effects}
+    groups, seen = [], set()
+    for agent in sorted(effects):
+        if agent in seen:
+            continue
+        group, frontier = set(), [agent]
+        while frontier:
+            current = frontier.pop()
+            if current not in group:
+                group.add(current)
+                frontier.extend(a for model in shared if current in agents_of[model] for a in agents_of[model])
+        seen |= group
+        groups.append(group)
+    return {agent: effects[agent] - statistics.fmean(effects[item] for item in group) for group in groups for agent in group}
+
+
+HARNESS_UNEVALUABLE = "no model is listed under two or more agents in AA's Coding Agent Index capture, so no agent effect is identified (O123)"
+
+
+def harness_cost_stress(assembled: dict, frozen: dict) -> dict:
+    """O123: a named S2 stress: each row's Coding Agent Index cost with its agent's effect removed (C x exp(-h_a)), and the API
+    ranks that follow; it never changes a score."""
+
+    effects = agent_effects(((assembled.get("codingAgents") or {}).get("configurations")) or [])
+    if not effects:
+        return {"id": "harness cost (O123)", "stratum": "S2", "status": "unevaluable", "reason": HARNESS_UNEVALUABLE}
+    anchors = frozen["workloads"][assembled["mainWorkload"]]["anchors"]["api"]
+    values, adjusted = {}, {}
+    for row in assembled["rows"]:
+        cost = row["cost"]
+        if cost["workload"] != assembled["mainWorkload"] or cost["costUsd"] is None or row["summary"].displayed is None:
+            continue
+        agent = (coding_agent_execution(row["components"]) or {}).get("agent")
+        shift = 0.0
+        if basket.CODING_AGENT_INDEX in cost["components"] and agent in effects:
+            component = row["components"][basket.CODING_AGENT_INDEX]["costUsd"]
+            shift = component * (math.exp(-effects[agent]) - 1.0)
+        adjusted[row["id"]] = cost["costUsd"] + shift
+        values[row["id"]] = anchor_math.value_score(anchor_math.cost_score(adjusted[row["id"]], anchors), row["summary"].displayed, BETA)
+    ranks = competition_ranks(values)
+    return {"id": "harness cost (O123)", "stratum": "S2", "status": "evaluated", "agentEffects": effects,
+            "rows": {row_id: {"adjustedCostUsd": adjusted[row_id], "value": values[row_id], "rank": ranks.get(row_id)} for row_id in sorted(values)}}
+
+
 def _row_json(row: dict, scores: dict, ranks: dict, alternatives: list[dict]) -> dict:
     selection = row["routeSelection"]
     selected = selection["selected"]
@@ -2842,6 +2920,8 @@ def _row_json(row: dict, scores: dict, ranks: dict, alternatives: list[dict]) ->
         "aaSlug": row["aaSlug"],
         "configurationMapped": row["configurationMapped"],
         "agentSafety": row.get("agentSafety"),
+        # O123: the Coding Agent Index's agent, part of the costed configuration, and whether its run is the quality leaves' run.
+        "codingAgent": coding_agent_execution(row["components"]),
         # E141: AA's own note on what its cost omits (e.g. a long-context surcharge), shown as a cost caveat.
         "aaCostCaveat": caveat,
         # O94, I80 L5: the most the omitted term multiplies the cost by, and the cost range the row competes over.
@@ -3512,7 +3592,10 @@ def scenario_seed(release_day: date) -> int:
 def track_summary(track: str) -> dict:
     """O53: which ranking a v3 section is, with its leaves and weights."""
 
-    return {"key": track, "label": q.TRACK_LABELS[track], "default": track == q.DEFAULT_TRACK,
+    return {"key": track, "label": q.TRACK_LABELS[track], "default": track == q.DEFAULT_TRACK, "diagnostic": track in q.DIAGNOSTIC_TRACKS,
+            # O122: the software-engineering group's nominal share and its coding-specific part.
+            "softwareEngineeringShare": sum(leaf.weight for leaf in q.TRACKS[track] if leaf.group == "swe"),
+            "codingSpecificShare": q.coding_specific_share(q.TRACKS[track]),
             "leaves": [{"key": leaf.key, "label": leaf.label, "group": leaf.group, "weight": leaf.weight, "source": leaf.source} for leaf in q.TRACKS[track]]}
 
 
@@ -3523,6 +3606,8 @@ def build_tracks(configurations: list[dict], data: Path, *, release_day: date) -
     for track in q.TRACKS:
         with q.active_track(track):
             sections[track] = build(configurations, data, release_day=release_day)
+    for track, comparison in leading_comparison(sections).items():
+        sections[track]["leadingComparison"] = comparison
     return sections
 
 
@@ -3539,7 +3624,48 @@ def build(configurations: list[dict], data: Path, *, release_day: date) -> dict:
     document = json.loads(scenario_path.read_text()) if scenario_path.exists() else None
     seed = document["seed"] if document else scenario_seed(release_day)
     count = document["scenarios"] if document else SCENARIO_COUNT
-    return attach_scenarios(scored, document, scenario_hash(assembled, frozen, n=count, seed=seed))
+    scored = attach_scenarios(scored, document, scenario_hash(assembled, frozen, n=count, seed=seed))
+    return withhold_labels(scored) if track in q.DIAGNOSTIC_TRACKS else scored
+
+
+DIAGNOSTIC_RANKING = ("diagnostic ranking (O121): computed like the leading rankings for comparison, but it earns no interval or"
+                      " scenario label and its gates never hold the release")
+
+
+def withhold_labels(scored: dict) -> dict:
+    """O121: a diagnostic ranking keeps its outputs as comparisons; every label and the release hold are withheld."""
+
+    scored["diagnosticRanking"] = {"rule": DIAGNOSTIC_RANKING, "gateWouldHold": scored["gates"]["hold"]}
+    scored["gates"]["holdsRelease"] = False
+    for basis in scored["intervals"].values():
+        basis["labelsWithheld"] = DIAGNOSTIC_RANKING
+    scenarios = scored.get("scenarios") or {}
+    if scenarios.get("barLabels"):
+        scenarios["barLabels"] = [{"reference": item["reference"], "level": item["level"], "status": "withheld", "reason": DIAGNOSTIC_RANKING}
+                                  for item in scenarios["barLabels"]]
+    scored["manifest"].append(_rule("diagnostic ranking (O121)", "fired", "no label is issued and the gates are disclosed without holding the release"))
+    return scored
+
+
+def leading_comparison(sections: dict) -> dict:
+    """O121: per bar position and basis, the diagnostic ranking's displayed-record cheapest row beside each leading ranking's
+    answer for the bar at the same ladder position (each ranking's bar levels are its own), and whether they differ."""
+
+    comparison = {}
+    for track in q.DIAGNOSTIC_TRACKS & set(sections):
+        own = sections[track]["displayedCheapest"]
+        comparison[track] = {
+            basis: [
+                {"bar": bar["bar"], "cheapest": bar["cheapest"],
+                 "leading": {other: next((item["cheapest"] for item in sections[other]["displayedCheapest"][basis]["bars"] if item["bar"] == bar["bar"]), None)
+                             for other in q.LEADING_TRACKS if other in sections},
+                 "differs": {other: next((item["cheapest"] for item in sections[other]["displayedCheapest"][basis]["bars"] if item["bar"] == bar["bar"]), None) != bar["cheapest"]
+                             for other in q.LEADING_TRACKS if other in sections}}
+                for bar in own[basis]["bars"]
+            ]
+            for basis in own if basis in BASES
+        }
+    return comparison
 
 
 def main(argv: list[str] | None = None, *, data: Path = DATA) -> int:

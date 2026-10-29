@@ -16,6 +16,7 @@ CORE_CARD_KEYS = {
     "/": "index",
     "/rankings/": "rankings",
     "/rankings/ai-coding-daily/": "rankings",  # O53: every ranking's page shares the rankings card
+    "/rankings/common-leaves/": "rankings",  # O121: the diagnostic ranking's page too
     "/models/": "models",
     "/plans/": "plans",
     "/benchmarks/": "benchmarks",
@@ -90,7 +91,7 @@ def test_catalogue_gives_every_page_a_key_and_its_boot_module(generated):
     from valuerank.site import viewmodel
 
     pages = {path: page for path, _template, page in build.pages(viewmodel.build_bundle())}
-    assert len(pages) == 72 and "/models/" in pages and "/rankings/ai-coding-daily/" in pages
+    assert len(pages) == 73 and "/models/" in pages and "/rankings/ai-coding-daily/" in pages
     assert pages["/rankings/ai-coding-daily/"]["scripts"] == ["/assets/js/pages/rankings.js"] and pages["/rankings/ai-coding-daily/"]["heading"] == "AI Coding Daily ranking"
     assert pages["/"]["scripts"] == ["/assets/js/pages/index.js"]
     assert pages["/rankings/"]["scripts"] == ["/assets/js/pages/rankings.js"]
@@ -145,7 +146,7 @@ def test_module_entry_point_generates_into_a_copy(repo_copy, monkeypatch, capsys
         runpy.run_module("valuerank.site.build", run_name="__main__", alter_sys=True)
 
     assert exit_info.value.code == 0
-    assert json.loads(capsys.readouterr().out)["pages"] == 72
+    assert json.loads(capsys.readouterr().out)["pages"] == 73
     assert (repo_copy / "site" / "rankings" / "index.html").is_file()
 
 
@@ -157,7 +158,7 @@ def test_og_image_meta_points_each_generated_page_at_its_share_card(generated):
         assert meta_content(html, 'property="og:image"') == build.BASE_URL + card, path
         assert meta_content(html, 'name="twitter:image"') == build.BASE_URL + card, path
         cards.add(card)
-    # 9 core pages, one card per roster model (61) and the archive page.
+    # 10 core pages (the three rankings share one card), one card per roster model (61) and the archive page.
     assert len(cards) == 72
 
 

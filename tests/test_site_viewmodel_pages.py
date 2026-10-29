@@ -103,7 +103,7 @@ def test_methodology_worked_example_lists_steps_and_priorities(bundle):
 def test_data_page_links_are_absolute_and_include_livebench(bundle):
     paths = [f["path"] for f in viewmodel.data_page(bundle)["files"]]
     assert paths == [
-        "/data/rankings.json", "/data/rankings-aicd.json", "/data/models/<slug>.json", "/data/plans.json", "/data/benchmarks.json",
+        "/data/rankings.json", "/data/rankings-aicd.json", "/data/rankings-common.json", "/data/models/<slug>.json", "/data/plans.json", "/data/benchmarks.json",
         "/data/benchmarks/terminal-bench-4.json", "/data/changelog.json", "/data/livebench.json",
     ]
 
