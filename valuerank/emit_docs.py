@@ -317,6 +317,16 @@ class Facts:
 # --- interval and scenario summaries ----------------------------------------------------------
 
 
+def label_safety_note(facts, row_ids):
+    """Reviewer 72: an O63 safety-refusal flag is printed beside every interval or scenario label its row earns, not only
+    beside the displayed-record results."""
+
+    flags = {row["id"]: row.get("agentSafety") or {} for row in facts.v3.get("rows", [])}
+    flagged = [f"{facts.labels([row_id])} ({flags[row_id]['blocked']} blocked and {flags[row_id]['fallback']} fallback attempts of {flags[row_id]['attempts']})"
+               for row_id in sorted({row_id.split("@")[0] for row_id in row_ids}) if flags.get(row_id, {}).get("status") == "flagged"]
+    return (" Safety-refusal flags (O63; costs and scores unchanged) on these labelled rows: " + "; ".join(flagged) + ".") if flagged else ""
+
+
 def interval_sentences(facts):
     """Plain sentences for the interval outputs of both bases (E21, E38)."""
 
@@ -348,6 +358,8 @@ def interval_sentences(facts):
                 text += f" Cheapest at or above {reference}: not unique; possibly {facts.labels(bar['possibleCheapest'])}."
             if bar["status"] == "certified":
                 text += f" (Bar comparison: {bar['comparison']}.)"
+        confirmed = [bar["confirmedCheapest"] for bar in result.get("bars", []) if bar["status"] == "certified" and bar["confirmedCheapest"]]
+        text += label_safety_note(facts, definite + possible + confirmed)
         sentences.append(text)
     return sentences
 
@@ -668,9 +680,21 @@ def plan_rows_table(facts):
         rows.append([rank_text(item["rank"]), facts.label(item["configurationId"]), item["plan"] or "API-cost fallback (no admitted plan)",
                      DASH if item["multiple"] is None else f"{item['multiple']:g}×", usd(item["costUsd"]), fnum(item["value"], 1), fnum(item["quality"], 1),
                      item["grade"] or "fallback", band_label])
-    return ("\n\n### Plan ranking: every plan (O48)\n\n" + PLAN_ROW_TEXT + "\n\n"
+    return ("\n\n### Plan ranking: every plan (O48)\n\n" + PLAN_ROW_TEXT + " " + plan_evidence_line(facts.v3["planRows"]) + "\n\n"
             + markdown_table(["Plan rank", "Configuration", "Plan", "Value Multiple", "Plan cost (USD per basket run)", "Plan value", "Quality", "Route evidence", "Noise band"],
                              rows, numeric={0, 3, 4, 5, 6}))
+
+
+def plan_evidence_line(plan_rows):
+    """Reviewer 72: the Plan ranking's route evidence, counted over its ranked rows, printed where the table is read (E212)."""
+
+    ranked = [item for item in plan_rows if item["rank"] is not None]
+    stale = {"possibly-superseded", "expired", plan_routes.FAULT_FLAG}
+    count = lambda flag: sum(1 for item in ranked if flag in item.get("flags", []))
+    fallback = sum(1 for item in ranked if item.get("fallback"))
+    current = sum(1 for item in ranked if not item.get("fallback") and not stale & set(item.get("flags", [])))
+    return (f"Route evidence over its {len(ranked)} ranked rows: {current} on a current route; {count('possibly-superseded')} possibly superseded, "
+            f"{count('expired')} expired and {count(plan_routes.FAULT_FLAG)} in a fault window (a row can carry several flags); {fallback} on the API-cost fallback.")
 
 
 PLAN_ROW_TEXT = ("The Plan ranking has one row per configuration and subscription plan (owner decision O48): each plan on which the configuration "
@@ -750,7 +774,8 @@ def diagnostic_note(other, facts):
     table = markdown_table(["Basis", "Bar position", "Cheapest here"] + [f"Cheapest, {q.TRACK_NAMES[track]}" for track in q.LEADING_TRACKS], rows) if rows else ""
     return (f"\n\n**Diagnostic ranking (O121).** It earns no interval or scenario label and its clip gate ({gate} on its own) never holds the release. "
             "Its bars sit at the same ladder positions as the leading rankings' but at its own levels, so the comparison below asks whether a configuration "
-            "the leading rankings cannot rank would answer the same question.\n\n" + table)
+            "the leading rankings cannot rank would answer the same question. The answers are displayed records, not claims: a difference "
+            f"smaller than this ranking's quality noise margin ({v3['diagnostics']['rankSeparability']['qualityMargin']:.1f} points, O44) is not evidence.\n\n" + table)
 
 
 def track_rankings_markdown(facts):
@@ -1318,6 +1343,8 @@ def interval_block(facts, result, label, workload_label):
         text += f" Competing without a label of its own (E183): {blocker_reasons(facts, result)}."
     text += "\n\n"
     text += markdown_table(["Configuration", "Possible frontier", "Definite frontier", "Definite counterexample", "Possible frontier blocked by"], rows)
+    text += label_safety_note(facts, [row_id for row_id, item in result["frontier"].items() if "certified" in (item.get("possible"), item.get("definite"))]
+                              + [bar["confirmedCheapest"] for bar in result.get("bars", []) if bar["status"] == "certified" and bar["confirmedCheapest"]])
     for bar in result.get("bars", []):
         reference = bar_name(bar["reference"])
         text += f"\n\n**{label} basis, {workload_label}: cheapest at or above {reference}** ({bar['reference']['rule']}). Status {bar['status']}"
@@ -1376,7 +1403,8 @@ def scenario_tables(facts):
             ])
     if labels:
         parts.append("### Cheapest-above-the-bar labels (API basis)\n\nThe 90% rule's error bound holds per published event (candidate and kernel assignment); it is not corrected across the listed candidates (E198). Each kernel assignment code gives the kernel used for the candidate and the competitors, in that order (U uniform, H endpoint-heavy; a quality-level bar has no reference rows, so it takes no letter); the label needs every assignment met.\n\n"
-                     + markdown_table(["Bar", "Candidate", "Reading", "Frequency range", "Kernel assignments", "Label"], labels))
+                     + markdown_table(["Bar", "Candidate", "Reading", "Frequency range", "Kernel assignments", "Label"], labels)
+                     + label_safety_note(facts, [candidate for item in scenarios["barLabels"] for candidate, result in item.get("candidates", {}).items() if result["label"]]))
     return "\n\n".join(parts)
 
 

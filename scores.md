@@ -725,7 +725,7 @@ No row is scored on a subset workload.
 
 Diagnostic only (O121): every configuration with AA's leaves and Bug Hunt, at any effort, scored on the ten leaves the two leading rankings share; it earns no label and never holds a release. Anchor version `v3-2026-10-25-common`; leaves: FrontierCode 1.1 25%, Terminal-Bench 4.0 (AA run) 20%, Bug Hunt Bench 15% (software engineering 60%), plus the 7 leaves outside software engineering every ranking shares.
 
-**Diagnostic ranking (O121).** It earns no interval or scenario label and its clip gate (would hold on its own) never holds the release. Its bars sit at the same ladder positions as the leading rankings' but at its own levels, so the comparison below asks whether a configuration the leading rankings cannot rank would answer the same question.
+**Diagnostic ranking (O121).** It earns no interval or scenario label and its clip gate (would hold on its own) never holds the release. Its bars sit at the same ladder positions as the leading rankings' but at its own levels, so the comparison below asks whether a configuration the leading rankings cannot rank would answer the same question. The answers are displayed records, not claims: a difference smaller than this ranking's quality noise margin (5.2 points, O44) is not evidence.
 
 | Basis | Bar position | Cheapest here | Cheapest, max-effort ranking | Cheapest, AI Coding Daily ranking |
 |---|---|---|---|---|
@@ -875,7 +875,7 @@ Pairwise reversals: Claude Opus 5.5 (max) and GPT-6.1 Sol (high); Claude Opus 5.
 | Claude Sonnet 5.5 (xhigh) | disproved | disproved | GPT-6.1 Sol (max) | GPT-6.1 Sol (max), Claude Opus 5.5 (medium), GPT-6.1 Sol (xhigh) |
 | GPT-6 Astra (xhigh) | disproved | disproved | Kimi K3.1 Pro | Kimi K3.1 Pro |
 | GPT-6 Luna (low) | certified | certified | — | — |
-| GPT-6.1 Sol (xhigh) | certified | certified | — | — |
+| GPT-6.1 Sol (xhigh) | certified | certified | — | — | Safety-refusal flags (O63; costs and scores unchanged) on these labelled rows: Claude Opus 5.5 (max) (0 blocked and 76 fallback attempts of 870); Claude Sonnet 5.5 (max) (0 blocked and 45 fallback attempts of 870); GPT-6.1 Sol (max) (15 blocked and 0 fallback attempts of 870).
 
 **API basis, main workload: cheapest at or above quality 48.9** (lower-median displayed quality of the non-provisional cohort configurations at freeze (E192; headline bar)). Status certified; confirmed cheapest: none.
 
@@ -1122,7 +1122,7 @@ The Plan amount is the selected multiple times the cash paid for the fee period 
 | GPT-6 Astra (max) | ChatGPT Pro 200 $200 · GPT-6 Astra (14.485×, measured) | $2,897 per month: measured-workload capacity | 0.49 per month | unidentified | $406.29 | workload-unmatched; possibly-superseded; valuation basis unverified | larger observed multiple (observed-workload multiple — target-workload ordering not identified) |
 | GPT-6 Luna (max) | ChatGPT Pro 500 $500 · common GPT assumption (10.772×, assumption) | $5,386 per month: assumed API-equivalent consumption (owner-named transfer) from chatgpt-pro500-gpt61sol-semianalysis | 42.84 per month | unidentified | $11.67 | workload-unmatched; owner-named transfer (assumption); possibly-superseded; measured inside an acknowledged accounting-fault window (O91, O92); valuation basis unverified | larger observed multiple (observed-workload multiple — target-workload ordering not identified) |
 | DeepSeek V4.1 Flash 1017 (max) | — | — | — | — | $410.04 | API-cost fallback: no admitted Plan route; cross-estimand ordering not identified | no eligible route |
-| MiMo-V2.6-Pro | MiMo Token Plan Max $100 · quota ceiling (provider-derived) (1.1808×, assumption) | $118 per month: provider quota ceiling: the full quota at API rates (O46; full use assumed) | 0.87 per month | unidentified | $115.28 | workload-unmatched; provider quota ceiling; full use assumed, the most the plan can give (O46, O125) | larger quota-ceiling multiple (O46: provider-derived, not observed) |
+| MiMo-V2.6-Pro | MiMo Token Plan Max $100 · quota ceiling (provider-derived) (1.1808×, assumption) | $118 per month: provider quota ceiling: the full quota at API rates (O46; full use assumed) | 0.87 per month | unidentified | $115.28 | workload-unmatched; provider quota ceiling; full use assumed, the optimistic end on use; credits valued at the recorded API rate, not the highest (O46, O125) | larger quota-ceiling multiple (O46: provider-derived, not observed) |
 | Gemini 4 Argon (high) | — | — | — | — | $3,557.77 | API-cost fallback: no admitted Plan route; cross-estimand ordering not identified | no eligible route |
 
 ### Route alternatives
@@ -1241,7 +1241,7 @@ Pairwise reversals: Claude Opus 5.5 (max) and GPT-6.1 Sol (max). Largest value c
 | GPT-6.1 Sol (max) | certified | certified | — | — |
 | Gemini 4 Argon (high) | disproved | disproved | GPT-6.1 Sol (max) | GPT-6.1 Sol (max) |
 | GPT-6 Astra (max) | certified | certified | — | — |
-| GPT-6 Luna (max) | certified | certified | — | — |
+| GPT-6 Luna (max) | certified | certified | — | — | Safety-refusal flags (O63; costs and scores unchanged) on these labelled rows: Claude Opus 5.5 (max) (0 blocked and 76 fallback attempts of 870); Claude Sonnet 5.5 (max) (0 blocked and 45 fallback attempts of 870); GPT-6 Astra (max) (13 blocked and 0 fallback attempts of 870); GPT-6.1 Sol (max) (15 blocked and 0 fallback attempts of 870).
 
 **API basis, main workload: cheapest at or above quality 63.5** (lower-median displayed quality of the non-provisional cohort configurations at freeze (E192; headline bar)). Status certified; confirmed cheapest: GPT-6.1 Sol (max).
 
@@ -1304,7 +1304,7 @@ Bar comparison: compares 3 configurations that can qualify. The bar is a display
 | Gemini 4 Argon (high) | disproved | disproved | GPT-6.1 Sol (max) | GPT-6.1 Sol (max) |
 | GPT-6 Astra (max) | certified | certified | — | — |
 | MiMo-V2.6-Pro | certified | certified | — | — |
-| GPT-6 Luna (max) | certified | certified | — | — |
+| GPT-6 Luna (max) | certified | certified | — | — | Safety-refusal flags (O63; costs and scores unchanged) on these labelled rows: Claude Opus 5.5 (max) (0 blocked and 76 fallback attempts of 870); Claude Sonnet 5.5 (max) (0 blocked and 45 fallback attempts of 870); GPT-6 Astra (max) (13 blocked and 0 fallback attempts of 870); GPT-6.1 Sol (max) (15 blocked and 0 fallback attempts of 870).
 
 **API basis, subset workload (AA-Briefcase, GDPval-AA, GDP.pdf, AutomationBench-AA, Terminal-Bench 4.0 (AA Index run), SciCode, AA-LCR; orderings across workloads not identified): cheapest at or above quality 63.5** (lower-median displayed quality of the non-provisional cohort configurations at freeze (E192; headline bar)). Status certified; confirmed cheapest: GPT-6.1 Sol (max).
 
@@ -1546,7 +1546,7 @@ The 90% rule's error bound holds per published event (candidate and kernel assig
 | quality 63.5 | GPT-6.1 Sol (max) | supported under all registered role-group kernel checks | 100.0% to 100.0% | UU met, UH met, HU met, HH met | yes |
 | quality 53.3 | DeepSeek V4.1 Flash 1017 (max) | supported under all registered role-group kernel checks | 100.0% to 100.0% | UU met, UH met, HU met, HH met | yes |
 | quality 64.9 | Claude Sonnet 5.5 (max) | not scenario-supported | 49.4% to 50.2% | UU not met, UH not met, HU not met, HH not met | no |
-| quality 64.9 | GPT-6 Astra (max) | not scenario-supported | 49.9% to 50.3% | UU not met, UH not met, HU not met, HH not met | no |
+| quality 64.9 | GPT-6 Astra (max) | not scenario-supported | 49.9% to 50.3% | UU not met, UH not met, HU not met, HH not met | no | Safety-refusal flags (O63; costs and scores unchanged) on these labelled rows: GPT-6.1 Sol (max) (15 blocked and 0 fallback attempts of 870).
 
 ## Diagnostics
 

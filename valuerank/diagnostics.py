@@ -67,7 +67,7 @@ def agreement(first: dict, second: dict, *, label: str, min_rows: int = 3) -> di
     panel = sorted(row for row in first if row in second and first[row] is not None and second[row] is not None)
     excluded = sorted((set(first) | set(second)) - set(panel))
     if len(panel) < min_rows:
-        return {"label": label, "panel": panel, "excluded": excluded, "tau": None, "interval": None, "status": "undefined (panel too small)"}
+        return {"label": label, "panel": panel, "excluded": excluded, "tau": None, "interval": None, "meanOffset": None, "status": "undefined (panel too small)"}
     xs, ys = [first[row] for row in panel], [second[row] for row in panel]
     tau = kendall_tau_b(xs, ys)
     return {
@@ -76,6 +76,8 @@ def agreement(first: dict, second: dict, *, label: str, min_rows: int = 3) -> di
         "excluded": excluded,
         "tau": tau,
         "interval": bootstrap_tau(xs, ys) if tau is not None else None,
+        # Reviewer 72: a rank correlation cannot see a uniform level shift, so the mean offset (second minus first) is published beside it.
+        "meanOffset": sum(y - x for x, y in zip(xs, ys)) / len(panel),
         "status": "defined" if tau is not None else "undefined (no rank variation)",
     }
 

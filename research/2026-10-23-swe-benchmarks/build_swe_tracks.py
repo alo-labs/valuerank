@@ -97,7 +97,8 @@ def select_aicd(model_id: str, label: str, board: dict[str, list[dict]]) -> dict
 # the board's relative age, before the cutoff, and it is disclosed. A row dated after the cutoff's day never counts.
 # O69, I60 L2: AI Coding Daily dates a row by day and shows its age ("10 hours ago") at the read. A cutoff-day row is
 # placed by the bound the archived read supports: shown "N hours ago" at the read instant, it was tested no later than
-# the read minus N - 1/2 hours (the age is rounded), and not before the day's UTC midnight. No minute is claimed.
+# the read minus N - 1 hours (reviewer 72: valid whether the board rounds, truncates or ceils the age; I60 L2's N - 1/2
+# assumed rounding), and not before the day's UTC midnight. No minute is claimed.
 AICD_READ = ("research/2026-10-25-board-reread/aicd/leaderboard-allrows-parsed.json", "2026-10-25T10:44:11Z")
 _AGE = re.compile(r"\b(\d+) (minute|hour)s? ago\b")
 
@@ -118,7 +119,7 @@ def check_row_date(row: dict, cutoff: str, read: tuple[str, str] = AICD_READ) ->
     if shown is None:
         raise ValueError(f"{row['model']} ({row['harness']}) is dated on the cutoff's day without a recorded instant before the cutoff (O69)")
     amount, unit = int(shown.group(1)), shown.group(2)
-    hours = amount - 0.5 if unit == "hour" else (amount - 0.5) / 60.0
+    hours = amount - 1 if unit == "hour" else (amount - 1) / 60.0
     latest = datetime.fromisoformat(read[1].replace("Z", "+00:00")) - timedelta(hours=hours)
     if latest >= datetime.fromisoformat(cutoff.replace("Z", "+00:00")):
         raise ValueError(f"{row['model']} ({row['harness']}) is dated on the cutoff's day without a recorded instant before the cutoff (O69)")

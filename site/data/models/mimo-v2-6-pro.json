@@ -287,7 +287,7 @@
     "workload": "1453a9a0576b02ea",
     "planFlags": [
       "workload-unmatched",
-      "provider quota ceiling; full use assumed, the most the plan can give (O46, O125)"
+      "provider quota ceiling; full use assumed, the optimistic end on use; credits valued at the recorded API rate, not the highest (O46, O125)"
     ],
     "costScore": {
       "api": 78.47746235764602,
@@ -300,6 +300,7 @@
         "costUsd": 18.0,
         "completeness": "confirmed-complete",
         "source": "AA FrontierCode 1.1 total cost chart (labels rounded to USD 1)",
+        "agent": null,
         "admitted": false
       },
       {
@@ -308,6 +309,7 @@
         "costUsd": 34.596611763440706,
         "completeness": "confirmed-complete",
         "source": "AA Intelligence Index evaluation cost (cost per task x task count)",
+        "agent": null,
         "admitted": true
       },
       {
@@ -316,6 +318,7 @@
         "costUsd": 35.467746449717595,
         "completeness": "confirmed-complete",
         "source": "AA Intelligence Index evaluation cost (cost per task x task count)",
+        "agent": null,
         "admitted": true
       },
       {
@@ -324,6 +327,7 @@
         "costUsd": 2.402207025,
         "completeness": "confirmed-complete",
         "source": "AA Intelligence Index evaluation cost (cost per task x task count)",
+        "agent": null,
         "admitted": true
       },
       {
@@ -332,6 +336,7 @@
         "costUsd": 27.765931976685117,
         "completeness": "confirmed-complete",
         "source": "AA Intelligence Index evaluation cost (cost per task x task count)",
+        "agent": null,
         "admitted": true
       },
       {
@@ -340,6 +345,7 @@
         "costUsd": 28.911314773989552,
         "completeness": "confirmed-complete",
         "source": "AA Intelligence Index evaluation cost (cost per task x task count)",
+        "agent": null,
         "admitted": true
       },
       {
@@ -348,6 +354,7 @@
         "costUsd": 2.245203345,
         "completeness": "confirmed-complete",
         "source": "AA Intelligence Index evaluation cost (cost per task x task count)",
+        "agent": null,
         "admitted": true
       },
       {
@@ -356,6 +363,7 @@
         "costUsd": 4.737943874999999,
         "completeness": "confirmed-complete",
         "source": "AA Intelligence Index evaluation cost (cost per task x task count)",
+        "agent": null,
         "admitted": true
       }
     ],

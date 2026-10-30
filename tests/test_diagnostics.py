@@ -31,8 +31,11 @@ def test_agreement_reports_panel_and_status():
     result = dg.agreement(first, second, label="quality agreement")
     assert result["panel"] == ["a", "b", "c"] and result["excluded"] == ["d", "only-first"]
     assert result["tau"] == pytest.approx(1.0) and result["status"] == "defined"
+    # Reviewer 72: the mean offset (second minus first) is published beside tau-b, which cannot see a level shift.
+    shifted = dg.agreement({"a": 1, "b": 2, "c": 3}, {"a": 3, "b": 4, "c": 5}, label="x")
+    assert shifted["tau"] == pytest.approx(1.0) and shifted["meanOffset"] == pytest.approx(2.0)
     small = dg.agreement({"a": 1}, {"a": 1}, label="x")
-    assert small["status"] == "undefined (panel too small)" and small["tau"] is None
+    assert small["status"] == "undefined (panel too small)" and small["tau"] is None and small["meanOffset"] is None
     flat = dg.agreement({"a": 1, "b": 1, "c": 1}, {"a": 1, "b": 2, "c": 3}, label="x")
     assert flat["status"] == "undefined (no rank variation)" and flat["interval"] is None
 

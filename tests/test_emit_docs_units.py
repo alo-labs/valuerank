@@ -499,3 +499,38 @@ def test_harness_cost_text_lists_agents_and_the_stress():
     assert "Codex +0.25" in text and "A 2; B None" in text and "A: Codex" in text
     quiet = ed.harness_cost_text({"status": "unevaluable", "reason": "no pair"}, type("F", (), {"v3": {"rows": []}, "label": lambda self, i: i})())
     assert quiet == "- **Harness cost (O123, S2 stress):** unevaluable: no pair."
+
+
+def test_safety_flags_follow_every_label_their_row_earns():
+    """Reviewer 72 (O63): a flagged row's safety refusals are printed beside its interval and scenario labels."""
+
+    from types import SimpleNamespace
+
+    rows = [{"id": "a", "agentSafety": {"status": "flagged", "blocked": 0, "fallback": 76, "attempts": 870}},
+            {"id": "b", "agentSafety": {"status": "clear"}}, {"id": "c"}]
+    facts = SimpleNamespace(v3={"rows": rows}, labels=lambda ids: ", ".join(item.upper() for item in ids))
+    assert ed.label_safety_note(facts, ["a@plan", "b", "c"]) == (
+        " Safety-refusal flags (O63; costs and scores unchanged) on these labelled rows: A (0 blocked and 76 fallback attempts of 870).")
+    assert ed.label_safety_note(facts, ["b", "c"]) == ""
+
+
+def test_plan_evidence_line_counts_ranked_rows_by_route_state():
+    """Reviewer 72: the Plan ranking's route evidence is counted where its table is read."""
+
+    from valuerank import plan_routes
+
+    rows = [{"rank": 1, "flags": []}, {"rank": 2, "flags": ["possibly-superseded", "expired"]}, {"rank": 3, "flags": [plan_routes.FAULT_FLAG]},
+            {"rank": 4, "flags": [], "fallback": "api"}, {"rank": None, "flags": ["expired"]}]
+    assert ed.plan_evidence_line(rows) == ("Route evidence over its 4 ranked rows: 1 on a current route; 1 possibly superseded, 1 expired and 1 in a fault "
+                                           "window (a row can carry several flags); 1 on the API-cost fallback.")
+
+
+def test_diagnostic_note_states_its_noise_margin():
+    """O121, reviewer 72: the diagnostic ranking's bar answers are displayed records read against its own noise margin."""
+
+    from types import SimpleNamespace
+
+    assert ed.diagnostic_note(SimpleNamespace(v3={}), None) == ""
+    v3 = {"diagnosticRanking": {"gateWouldHold": False}, "leadingComparison": {}, "diagnostics": {"rankSeparability": {"qualityMargin": 5.21}}}
+    note = ed.diagnostic_note(SimpleNamespace(v3=v3), None)
+    assert "passes on its own" in note and "quality noise margin (5.2 points, O44) is not evidence" in note

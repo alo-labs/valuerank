@@ -823,6 +823,7 @@ def assemble(configurations: list[dict], documents: dict, *, release_day: date, 
     plan_admission.check_change_flags(documents["planRoutes"]["routes"], change_records)
     plan_admission.check_change_records(documents["planRoutes"]["routes"], change_records, release_day)
     plan_routes.check_lower_of_routes(documents["planRoutes"])
+    plan_routes.check_source_rereads(documents["planRoutes"], release_day)
     # I51 L7: an O46 ceiling is recomputed from its recorded credits, rate and fee, so the stored multiple cannot drift.
     for route in documents["planRoutes"]["routes"]:
         if route.get("evidenceClass") == "provider_quota_ceiling":

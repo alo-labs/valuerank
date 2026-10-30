@@ -427,7 +427,7 @@ def test_measurement_capacity_status():
     ceiling = dict(route("q", 1.18, kind="user_assumption"), evidenceClass="provider_quota_ceiling", valuationBasis="release")
     assert pr.measurement_capacity_status(ceiling) == pr.CAPACITY_CEILING
     capped = pr.plan_cost(100.0, {"route": ceiling, "grade": "assumption", "identification": "unidentified", "expiry": "fresh"})
-    assert "provider quota ceiling; full use assumed, the most the plan can give (O46, O125)" in capped["flags"] and "valuation basis unverified" not in capped["flags"]
+    assert "provider quota ceiling; full use assumed, the optimistic end on use; credits valued at the recorded API rate, not the highest (O46, O125)" in capped["flags"] and "valuation basis unverified" not in capped["flags"]
     assert not any(flag.startswith("observed-usage") for flag in capped["flags"])
     assert "owner-named transfer (assumption)" not in capped["flags"]
     same = pr.plan_cost(100.0, {"route": dict(route("s", 10.0, kind="user_assumption"), sameModelAcrossEfforts=True), "grade": "assumption", "identification": "unidentified", "expiry": "fresh"})
@@ -941,3 +941,16 @@ def test_a_measurement_span_is_bounded_by_launch_and_schedule():
     early = {**measured, "modelLaunchedOn": "2026-09-01"}
     assert pr.change_floor(early) == date(2026, 9, 7)  # launch before the 30-day span bounds nothing
     assert pr.change_floor({}) is None
+
+
+def test_a_paywalled_article_needs_a_recent_reread():
+    """O130: the selected paywalled article's figure table is re-read each release (within 30 days of it, never after)."""
+
+    day = date(2026, 10, 25)
+    assert pr.check_source_rereads({"sourceEvidence": {"open": {}}}, day) is None
+    reads = {"paywalled": True, "rereads": [{"readOn": "2026-09-01"}, {"readOn": "2026-10-07"}, {"readOn": "2026-11-01"}]}
+    assert pr.check_source_rereads({"sourceEvidence": {"sa": reads}}, day) == "2026-10-07"
+    for stale in ({"paywalled": True}, {"paywalled": True, "rereads": [{"readOn": "2026-09-24"}]}, {"paywalled": True, "rereads": [{"readOn": "2026-10-26"}]}):
+        with pytest.raises(ValueError, match="O130"):
+            pr.check_source_rereads({"sourceEvidence": {"sa": stale}}, day)
+    assert pr.check_source_rereads({"sourceEvidence": {"sa": {"paywalled": True, "rereads": [{"readOn": "2026-09-25"}]}}}, day) == "2026-09-25"

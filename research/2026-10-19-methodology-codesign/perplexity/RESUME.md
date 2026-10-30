@@ -1,7 +1,7 @@
 # Resuming the Perplexity panel (round 12)
 
-State on 2026-10-30: draft r154 is committed with its review copy in `perplexity/parts-r154/` (13 parts). The ledger
-(`ledger.md`) and the condensed brief (`ledger-brief.md`) run through owner decision O127 and reviewer 71.
+State on 2026-10-30: draft r155 is committed with its review copy in `perplexity/parts-r155/` (13 parts). The ledger
+(`ledger.md`) and the condensed brief (`ledger-brief.md`) run through owner decision O131 and reviewer 72.
 
 Panel order and status for round 12 (O56: a model's round is clean with no Medium-or-higher finding; each model needs
 two consecutive clean rounds and the panel ends when every model says NO FURTHER FEEDBACK on the same revision):
@@ -12,8 +12,8 @@ two consecutive clean rounds and the panel ends when every model says NO FURTHER
 | 69 | Gemini 3.8 Flash (five sectional sends) | r151 | findings, folded into r152 |
 | 70 | Claude Sonnet 5.5 | r152 | findings, folded into r153 (O121–O123) |
 | 71 | Kimi K3 (four sectional sends) | r153 | findings, folded into r154 (O124–O127) |
-| 72 | GLM 5.3 | r154 | next |
-| 73 | Grok 4.7 | — | after GLM |
+| 72 | GLM 5.3 (six smaller sectional sends plus parts 8–10) | r154 | findings, folded into r155 (O128–O131) |
+| 73 | Grok 4.7 | r155 | next |
 
 The panel stalled on Perplexity's Cloudflare "verify you are human" page. To resume after the session is refreshed:
 
@@ -22,4 +22,4 @@ The panel stalled on Perplexity's Cloudflare "verify you are human" page. To res
    owner, implement adopted items with tests (100% coverage), regenerate, and write the ledger entry.
 3. Build the next review copy and prompt: `tools/review_copy.py`, `tools/split_draft_26k.py` (26,500-character parts) (or `tools/build_section_prompt.py` for Gemini's five sectional sends) and the skill's
    `build_linked_prompt.py` with `reviewer-prompt.md` and `ledger-brief.md`, after pushing so the commit SHA resolves.
-4. Send GLM 5.3, then Grok 4.7, then start the next round.
+4. Send Grok 4.7, then start the next round (GLM needs sections of at most two parts).

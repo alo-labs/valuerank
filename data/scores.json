@@ -22555,7 +22555,7 @@
           "donorRouteId": null,
           "flags": [
             "workload-unmatched",
-            "provider quota ceiling; full use assumed, the most the plan can give (O46, O125)"
+            "provider quota ceiling; full use assumed, the optimistic end on use; credits valued at the recorded API rate, not the highest (O46, O125)"
           ],
           "selectionReason": "larger quota-ceiling multiple (O46: provider-derived, not observed)",
           "dominatedRoutes": {},
@@ -24858,7 +24858,7 @@
         "fallback": null,
         "flags": [
           "workload-unmatched",
-          "provider quota ceiling; full use assumed, the most the plan can give (O46, O125)"
+          "provider quota ceiling; full use assumed, the optimistic end on use; credits valued at the recorded API rate, not the highest (O46, O125)"
         ],
         "selectionReason": "only remaining eligible route",
         "quality": 53.27068467083996,
@@ -24881,7 +24881,7 @@
         "fallback": null,
         "flags": [
           "workload-unmatched",
-          "provider quota ceiling; full use assumed, the most the plan can give (O46, O125)"
+          "provider quota ceiling; full use assumed, the optimistic end on use; credits valued at the recorded API rate, not the highest (O46, O125)"
         ],
         "selectionReason": "only remaining eligible route",
         "quality": 53.27068467083996,
@@ -24904,7 +24904,7 @@
         "fallback": null,
         "flags": [
           "workload-unmatched",
-          "provider quota ceiling; full use assumed, the most the plan can give (O46, O125)"
+          "provider quota ceiling; full use assumed, the optimistic end on use; credits valued at the recorded API rate, not the highest (O46, O125)"
         ],
         "selectionReason": "only remaining eligible route",
         "quality": 53.27068467083996,
@@ -24927,7 +24927,7 @@
         "fallback": null,
         "flags": [
           "workload-unmatched",
-          "provider quota ceiling; full use assumed, the most the plan can give (O46, O125)"
+          "provider quota ceiling; full use assumed, the optimistic end on use; credits valued at the recorded API rate, not the highest (O46, O125)"
         ],
         "selectionReason": "only remaining eligible route",
         "quality": 53.27068467083996,
@@ -27274,6 +27274,7 @@
             0.0,
             1.0
           ],
+          "meanOffset": 1.677979797979798,
           "status": "defined"
         }
       },
@@ -27318,8 +27319,8 @@
           0.5818181818181818,
           0.9095022624434389
         ],
-        "status": "defined",
         "meanOffset": 2.600753030303032,
+        "status": "defined",
         "maxAbsOffset": 11.603866666666699,
         "scale": "tested"
       },
@@ -27657,6 +27658,7 @@
           0.4838709677419355,
           1.0
         ],
+        "meanOffset": 7.504518451588246,
         "status": "defined"
       },
       "qualitySubstitutionAgreement": {
@@ -27679,6 +27681,7 @@
             0.03225806451612903,
             0.9393939393939394
           ],
+          "meanOffset": 5.628388838691183,
           "status": "defined"
         },
         "plan": {
@@ -27700,6 +27703,7 @@
             0.4375,
             1.0
           ],
+          "meanOffset": 5.628388838691186,
           "status": "defined"
         }
       },
@@ -27722,6 +27726,7 @@
           0.3125,
           1.0
         ],
+        "meanOffset": 11.39559088784815,
         "status": "defined",
         "retainedLeaves": {
           "aaExecuted": {
@@ -32340,7 +32345,7 @@
         {
           "key": "planRoutes",
           "artifact": "data/plan_cost_routes.json",
-          "sha256": "ef3d81834a2e3c1a73d7d5b88f171e6aa8f46294432c2cd14e2c0b218794117d",
+          "sha256": "ffd578b6f1b8563ec9c19e73910e22fd293c50ee621589fb9911b75d89855f63",
           "capturedAt": "2026-10-25",
           "extractor": "editorial Plan evidence registry"
         },
@@ -32368,7 +32373,7 @@
         {
           "key": "sweTracks",
           "artifact": "data/swe_tracks.json",
-          "sha256": "85db0f4c375f6473679d495b28a4b45dd989505b49aa63c9efa75aba424e6ed2",
+          "sha256": "238906af22deeecfb93cf10610763e502eecc2c218ae1f7e6202a82d955936d1",
           "capturedAt": "2026-10-25T10:44:11Z",
           "extractor": "research/2026-10-23-swe-benchmarks/build_swe_tracks.py from the verified coverage captures (O53-O55)"
         },
@@ -32422,7 +32427,7 @@
           "extractor": "valuerank.value_v3 freeze"
         }
       ],
-      "bundleHash": "4d48ed204b46dd1cd5c7a686afecec69aa5cfe59c01c6042e5f9b1b73d2bd18a",
+      "bundleHash": "b528078db26972b4dca1ca7acbf7ab0b3fab6d537fdf5f5aad73bc11f4abdaf9",
       "rebuild": "every published output is rebuilt from these artifacts at the pinned publication clock (npm run verify:docs), never from live pages"
     },
     "track": {
@@ -37718,6 +37723,7 @@
         -1.0,
         1.0
       ],
+      "meanOffset": -8.168230091317831,
       "status": "defined"
     }
   },
@@ -43065,7 +43071,7 @@
                 "stderr": null,
                 "match": null,
                 "note": "Tested 2026-10-25 with OpenCode; cost/prompt $0.74. Owner decision O66 (2026-10-25): AA plots Kimi K3.1 Pro without an effort; Moonshot's API documents reasoning_effort low / high / max with max the default, so its configuration is taken at max, its maximum effort. The Kimi K3.1 Pro (High) row is another effort and is not used.",
-                "cutoffDayRow": "dated on the cutoff's day; tested between 2026-10-25T00:00:00Z and 2026-10-25T01:14:11Z (shown '10 hours ago' in research/2026-10-25-board-reread/aicd/leaderboard-allrows-parsed.json, read at 2026-10-25T10:44:11Z), before the cutoff 2026-10-25T09:56:47Z (O69)",
+                "cutoffDayRow": "dated on the cutoff's day; tested between 2026-10-25T00:00:00Z and 2026-10-25T01:44:11Z (shown '10 hours ago' in research/2026-10-25-board-reread/aicd/leaderboard-allrows-parsed.json, read at 2026-10-25T10:44:11Z), before the cutoff 2026-10-25T09:56:47Z (O69)",
                 "evidence": {
                   "artifact": "data/swe_tracks.json",
                   "locator": "records[modelId=kimi-k3-1-pro, leaf=aiCodingDaily].value",
@@ -45362,7 +45368,7 @@
             "donorRouteId": null,
             "flags": [
               "workload-unmatched",
-              "provider quota ceiling; full use assumed, the most the plan can give (O46, O125)"
+              "provider quota ceiling; full use assumed, the optimistic end on use; credits valued at the recorded API rate, not the highest (O46, O125)"
             ],
             "selectionReason": "larger quota-ceiling multiple (O46: provider-derived, not observed)",
             "dominatedRoutes": {},
@@ -53224,7 +53230,7 @@
           "fallback": null,
           "flags": [
             "workload-unmatched",
-            "provider quota ceiling; full use assumed, the most the plan can give (O46, O125)"
+            "provider quota ceiling; full use assumed, the optimistic end on use; credits valued at the recorded API rate, not the highest (O46, O125)"
           ],
           "selectionReason": "only remaining eligible route",
           "quality": 49.23858471413,
@@ -53247,7 +53253,7 @@
           "fallback": null,
           "flags": [
             "workload-unmatched",
-            "provider quota ceiling; full use assumed, the most the plan can give (O46, O125)"
+            "provider quota ceiling; full use assumed, the optimistic end on use; credits valued at the recorded API rate, not the highest (O46, O125)"
           ],
           "selectionReason": "only remaining eligible route",
           "quality": 49.23858471413,
@@ -53270,7 +53276,7 @@
           "fallback": null,
           "flags": [
             "workload-unmatched",
-            "provider quota ceiling; full use assumed, the most the plan can give (O46, O125)"
+            "provider quota ceiling; full use assumed, the optimistic end on use; credits valued at the recorded API rate, not the highest (O46, O125)"
           ],
           "selectionReason": "only remaining eligible route",
           "quality": 49.23858471413,
@@ -53293,7 +53299,7 @@
           "fallback": null,
           "flags": [
             "workload-unmatched",
-            "provider quota ceiling; full use assumed, the most the plan can give (O46, O125)"
+            "provider quota ceiling; full use assumed, the optimistic end on use; credits valued at the recorded API rate, not the highest (O46, O125)"
           ],
           "selectionReason": "only remaining eligible route",
           "quality": 49.23858471413,
@@ -56193,6 +56199,7 @@
             ],
             "tau": null,
             "interval": null,
+            "meanOffset": null,
             "status": "undefined (panel too small)"
           }
         },
@@ -56237,8 +56244,8 @@
             0.5818181818181818,
             0.9095022624434389
           ],
-          "status": "defined",
           "meanOffset": 2.600753030303032,
+          "status": "defined",
           "maxAbsOffset": 11.603866666666699,
           "scale": "tested"
         },
@@ -56676,6 +56683,7 @@
             0.38596491228070173,
             0.9183673469387755
           ],
+          "meanOffset": 5.847476721826763,
           "status": "defined"
         },
         "qualitySubstitutionAgreement": {
@@ -56705,6 +56713,7 @@
               -0.02702702702702703,
               0.7543859649122807
             ],
+            "meanOffset": 4.385607541370071,
             "status": "defined"
           },
           "plan": {
@@ -56733,6 +56742,7 @@
               0.5398230088495575,
               0.9272727272727272
             ],
+            "meanOffset": 4.385607541370073,
             "status": "defined"
           }
         },
@@ -56762,6 +56772,7 @@
             0.3684210526315789,
             0.9183673469387755
           ],
+          "meanOffset": 6.7009221555776595,
           "status": "defined",
           "retainedLeaves": {
             "aaExecuted": {
@@ -62465,7 +62476,7 @@
           {
             "key": "planRoutes",
             "artifact": "data/plan_cost_routes.json",
-            "sha256": "ef3d81834a2e3c1a73d7d5b88f171e6aa8f46294432c2cd14e2c0b218794117d",
+            "sha256": "ffd578b6f1b8563ec9c19e73910e22fd293c50ee621589fb9911b75d89855f63",
             "capturedAt": "2026-10-25",
             "extractor": "editorial Plan evidence registry"
           },
@@ -62493,7 +62504,7 @@
           {
             "key": "sweTracks",
             "artifact": "data/swe_tracks.json",
-            "sha256": "85db0f4c375f6473679d495b28a4b45dd989505b49aa63c9efa75aba424e6ed2",
+            "sha256": "238906af22deeecfb93cf10610763e502eecc2c218ae1f7e6202a82d955936d1",
             "capturedAt": "2026-10-25T10:44:11Z",
             "extractor": "research/2026-10-23-swe-benchmarks/build_swe_tracks.py from the verified coverage captures (O53-O55)"
           },
@@ -62547,7 +62558,7 @@
             "extractor": "valuerank.value_v3 freeze"
           }
         ],
-        "bundleHash": "4d48ed204b46dd1cd5c7a686afecec69aa5cfe59c01c6042e5f9b1b73d2bd18a",
+        "bundleHash": "b528078db26972b4dca1ca7acbf7ab0b3fab6d537fdf5f5aad73bc11f4abdaf9",
         "rebuild": "every published output is rebuilt from these artifacts at the pinned publication clock (npm run verify:docs), never from live pages"
       },
       "track": {
@@ -82603,7 +82614,7 @@
             "donorRouteId": null,
             "flags": [
               "workload-unmatched",
-              "provider quota ceiling; full use assumed, the most the plan can give (O46, O125)"
+              "provider quota ceiling; full use assumed, the optimistic end on use; credits valued at the recorded API rate, not the highest (O46, O125)"
             ],
             "selectionReason": "larger quota-ceiling multiple (O46: provider-derived, not observed)",
             "dominatedRoutes": {},
@@ -96087,7 +96098,7 @@
           "fallback": null,
           "flags": [
             "workload-unmatched",
-            "provider quota ceiling; full use assumed, the most the plan can give (O46, O125)"
+            "provider quota ceiling; full use assumed, the optimistic end on use; credits valued at the recorded API rate, not the highest (O46, O125)"
           ],
           "selectionReason": "only remaining eligible route",
           "quality": 44.68827164053693,
@@ -96110,7 +96121,7 @@
           "fallback": null,
           "flags": [
             "workload-unmatched",
-            "provider quota ceiling; full use assumed, the most the plan can give (O46, O125)"
+            "provider quota ceiling; full use assumed, the optimistic end on use; credits valued at the recorded API rate, not the highest (O46, O125)"
           ],
           "selectionReason": "only remaining eligible route",
           "quality": 44.68827164053693,
@@ -96133,7 +96144,7 @@
           "fallback": null,
           "flags": [
             "workload-unmatched",
-            "provider quota ceiling; full use assumed, the most the plan can give (O46, O125)"
+            "provider quota ceiling; full use assumed, the optimistic end on use; credits valued at the recorded API rate, not the highest (O46, O125)"
           ],
           "selectionReason": "only remaining eligible route",
           "quality": 44.68827164053693,
@@ -96156,7 +96167,7 @@
           "fallback": null,
           "flags": [
             "workload-unmatched",
-            "provider quota ceiling; full use assumed, the most the plan can give (O46, O125)"
+            "provider quota ceiling; full use assumed, the optimistic end on use; credits valued at the recorded API rate, not the highest (O46, O125)"
           ],
           "selectionReason": "only remaining eligible route",
           "quality": 44.68827164053693,
@@ -100154,6 +100165,7 @@
               0.0,
               1.0
             ],
+            "meanOffset": 1.677979797979798,
             "status": "defined"
           }
         },
@@ -100198,8 +100210,8 @@
             0.5818181818181818,
             0.9095022624434389
           ],
-          "status": "defined",
           "meanOffset": 2.600753030303032,
+          "status": "defined",
           "maxAbsOffset": 11.603866666666699,
           "scale": "tested"
         },
@@ -100796,6 +100808,7 @@
             0.5317127232575183,
             0.863170447467933
           ],
+          "meanOffset": -18.544483374920816,
           "status": "defined"
         },
         "qualitySubstitutionAgreement": {
@@ -100837,6 +100850,7 @@
               0.21643835616438356,
               0.7275204359673024
             ],
+            "meanOffset": -13.908362531190614,
             "status": "defined"
           },
           "plan": {
@@ -100877,6 +100891,7 @@
               0.42318059299191374,
               0.8011049723756906
             ],
+            "meanOffset": -13.908362531190615,
             "status": "defined"
           }
         },
@@ -100918,6 +100933,7 @@
             0.44445130331377736,
             0.8229699383012165
           ],
+          "meanOffset": -21.817039264612728,
           "status": "defined",
           "retainedLeaves": {
             "aaExecuted": {
@@ -109248,7 +109264,7 @@
           {
             "key": "planRoutes",
             "artifact": "data/plan_cost_routes.json",
-            "sha256": "ef3d81834a2e3c1a73d7d5b88f171e6aa8f46294432c2cd14e2c0b218794117d",
+            "sha256": "ffd578b6f1b8563ec9c19e73910e22fd293c50ee621589fb9911b75d89855f63",
             "capturedAt": "2026-10-25",
             "extractor": "editorial Plan evidence registry"
           },
@@ -109276,7 +109292,7 @@
           {
             "key": "sweTracks",
             "artifact": "data/swe_tracks.json",
-            "sha256": "85db0f4c375f6473679d495b28a4b45dd989505b49aa63c9efa75aba424e6ed2",
+            "sha256": "238906af22deeecfb93cf10610763e502eecc2c218ae1f7e6202a82d955936d1",
             "capturedAt": "2026-10-25T10:44:11Z",
             "extractor": "research/2026-10-23-swe-benchmarks/build_swe_tracks.py from the verified coverage captures (O53-O55)"
           },
@@ -109330,7 +109346,7 @@
             "extractor": "valuerank.value_v3 freeze"
           }
         ],
-        "bundleHash": "4d48ed204b46dd1cd5c7a686afecec69aa5cfe59c01c6042e5f9b1b73d2bd18a",
+        "bundleHash": "b528078db26972b4dca1ca7acbf7ab0b3fab6d537fdf5f5aad73bc11f4abdaf9",
         "rebuild": "every published output is rebuilt from these artifacts at the pinned publication clock (npm run verify:docs), never from live pages"
       },
       "track": {

@@ -173,7 +173,7 @@
   <h3 class="subhead">Basket components</h3>
   <ol class="footnotes" start="{{ n_dims + 1 }}">
     {%- for c in page.cost.components %}
-    {% call fn_item("cost-" ~ loop.index, c.label) %}<span class="fn-text">{{ c.completeness }}</span> <span class="muted">{{ c.source }}</span>{% endcall %}
+    {% call fn_item("cost-" ~ loop.index, c.label) %}<span class="fn-text">{{ c.completeness }}</span>{% if c.get('agent') %} <span class="fn-text">run in {{ c.agent }}</span>{% endif %} <span class="muted">{{ c.source }}</span>{% endcall %}
     {%- endfor %}
   </ol>
   {%- endif %}

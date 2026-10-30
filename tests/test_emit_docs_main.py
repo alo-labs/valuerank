@@ -249,7 +249,9 @@ def test_plan_interval_outputs_and_unconfirmed_bars_are_described(repo_copy, pin
     assert "Not evaluable" not in plan_sentence
     assert "Cheapest at or above quality 63.5: not unique; possibly GPT-6 Luna (max), DeepSeek V4.1 Flash 1017 (max)." in plan_sentence
     assert "Cheapest at or above quality 63.5: unresolved." in plan_sentence
-    assert plan_sentence.endswith("Cheapest at or above quality 63.5: DeepSeek V4.1 Flash 1017 (max) (confirmed). (Bar comparison: compares 5 configurations that can qualify.)")
+    assert "Cheapest at or above quality 63.5: DeepSeek V4.1 Flash 1017 (max) (confirmed). (Bar comparison: compares 5 configurations that can qualify.)" in plan_sentence
+    # Reviewer 72 (O63): the labelled rows' safety-refusal flags follow the labels.
+    assert plan_sentence.endswith("GPT-6.1 Sol (max) (15 blocked and 0 fallback attempts of 870).")
     scores = (repo_copy / "scores.md").read_text()
     assert "**Plan basis, main workload: frontier.** Not evaluable: none." in scores
     assert "Status certified; confirmed cheapest: none." in scores

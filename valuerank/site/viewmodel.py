@@ -586,6 +586,8 @@ def _component_docs(row: dict | None) -> list[dict]:
             "costUsd": detail[key]["costUsd"],
             "completeness": detail[key]["completeness"],
             "source": detail[key]["source"],
+            # Reviewer 72 (O123): the agent a component's cost was run in is printed beside that cost.
+            "agent": (detail[key].get("detail") or {}).get("agent"),
             "admitted": key in row["cost"]["components"],
         }
         for key in basket.TARGET_COMPONENTS

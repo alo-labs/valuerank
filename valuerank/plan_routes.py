@@ -386,6 +386,25 @@ def check_same_model_routes(document: dict, families: dict | None = None) -> Non
             raise ValueError(f"{route['id']}: a same-model route must carry its donor {source['id']}'s multiple and allocation regime (O88, E220)")
 
 
+REREAD_MAX_AGE_DAYS = 30
+
+
+def check_source_rereads(document: dict, release_day: date) -> str | None:
+    """O130: a paywalled selected article is not captured, so each release re-reads its figure table against the transcription
+    made at selection; the latest read (``rereads``) must be dated on or before the release day and at most 30 days before
+    it. Returns the latest read's date (None when no source is paywalled)."""
+
+    latest = None
+    for key, source in (document.get("sourceEvidence") or {}).items():
+        if not source.get("paywalled"):
+            continue
+        reads = sorted(item["readOn"] for item in source.get("rereads") or [] if date.fromisoformat(item["readOn"]) <= release_day)
+        if not reads or (release_day - date.fromisoformat(reads[-1])).days > REREAD_MAX_AGE_DAYS:
+            raise ValueError(f"{key}: the selected article has no re-read of its figure table within {REREAD_MAX_AGE_DAYS} days of the release (O130)")
+        latest = max(latest or reads[-1], reads[-1])
+    return latest
+
+
 def check_lower_of_routes(document: dict) -> None:
     """O45, O95: a stored lower-of transfer names the lower of its plan's measured figures and carries that multiple."""
 
@@ -917,7 +936,7 @@ def plan_cost(api_cost: float | None, selected: dict | None) -> dict:
     if valuation == "unverified":
         flags.append("valuation basis unverified")
     if capacity == CAPACITY_CEILING:
-        flags.append("provider quota ceiling; full use assumed, the most the plan can give (O46, O125)")
+        flags.append("provider quota ceiling; full use assumed, the optimistic end on use; credits valued at the recorded API rate, not the highest (O46, O125)")
     elif capacity != CAPACITY_ESTABLISHED:
         flags.append("observed-usage multiple; full utilisation not established")
     return {
