@@ -27053,14 +27053,15 @@
           "ceiling": 4
         },
         "api": {
-          "adjacentPairs": 8,
+          "adjacentPairs": 6,
           "separableAdjacentPairs": 0,
           "medianSeparation": 2.7617322282433103,
           "sameConfigurationAdjacentPairs": 0,
+          "crossWorkloadAdjacentPairs": 2,
           "byCorrelation": {
             "0.0": 0,
-            "0.3": 2,
-            "0.6": 3
+            "0.3": 1,
+            "0.6": 2
           },
           "gdpvalWide": {
             "separableAdjacentPairs": 0,
@@ -27069,15 +27070,11 @@
           "bands": {
             "gpt-6.1-sol": [
               1,
-              3
+              2
             ],
             "deepseek-v4-1-flash-1017": [
               1,
-              3
-            ],
-            "mimo-v2-6-pro": [
-              1,
-              3
+              2
             ],
             "gpt-6-luna": [
               4,
@@ -27108,18 +27105,19 @@
           "toleranceUnbounded": []
         },
         "plan": {
-          "adjacentPairs": 10,
+          "adjacentPairs": 8,
           "separableAdjacentPairs": 2,
-          "medianSeparation": 2.7625889747432044,
+          "medianSeparation": 2.73247763585616,
           "sameConfigurationAdjacentPairs": 16,
+          "crossWorkloadAdjacentPairs": 2,
           "byCorrelation": {
             "0.0": 2,
             "0.3": 2,
-            "0.6": 3
+            "0.6": 2
           },
           "gdpvalWide": {
             "separableAdjacentPairs": 2,
-            "medianSeparation": 2.773096881831374
+            "medianSeparation": 2.7431127450899426
           },
           "bands": {
             "claude-opus-5-5@claude-pro": [
@@ -27208,30 +27206,14 @@
             ],
             "deepseek-v4-1-flash-1017@api": [
               22,
-              26
-            ],
-            "mimo-v2-6-pro@mimo-token-plan-max": [
-              22,
-              26
-            ],
-            "mimo-v2-6-pro@mimo-token-plan-pro": [
-              22,
-              26
-            ],
-            "mimo-v2-6-pro@mimo-token-plan-standard": [
-              22,
-              26
-            ],
-            "mimo-v2-6-pro@mimo-token-plan-lite": [
-              22,
-              26
+              22
             ],
             "gemini-4-argon@api": [
               27,
               27
             ]
           },
-          "costTolerance": 2.1929495329486395,
+          "costTolerance": 2.174260288614483,
           "toleranceUnbounded": []
         }
       },
@@ -55850,6 +55832,7 @@
             "separableAdjacentPairs": 1,
             "medianSeparation": 4.430897310142818,
             "sameConfigurationAdjacentPairs": 0,
+            "crossWorkloadAdjacentPairs": 0,
             "byCorrelation": {
               "0.0": 1,
               "0.3": 1,
@@ -55937,6 +55920,7 @@
             "separableAdjacentPairs": 1,
             "medianSeparation": 4.413451295576464,
             "sameConfigurationAdjacentPairs": 31,
+            "crossWorkloadAdjacentPairs": 0,
             "byCorrelation": {
               "0.0": 1,
               "0.3": 1,
@@ -99583,6 +99567,7 @@
             "separableAdjacentPairs": 2,
             "medianSeparation": 3.85781475793023,
             "sameConfigurationAdjacentPairs": 0,
+            "crossWorkloadAdjacentPairs": 0,
             "byCorrelation": {
               "0.0": 2,
               "0.3": 2,
@@ -99714,6 +99699,7 @@
             "separableAdjacentPairs": 2,
             "medianSeparation": 3.9270058655878683,
             "sameConfigurationAdjacentPairs": 43,
+            "crossWorkloadAdjacentPairs": 0,
             "byCorrelation": {
               "0.0": 2,
               "0.3": 2,

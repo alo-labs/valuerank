@@ -2052,3 +2052,12 @@ Asked on I64 Q1 whether future O71 admissions should be executed by the build fr
 
 ## Editor decisions after reviewer 72 (owner may override)
 - E276. Shared price factors: a row carrying a shared tariff or pricing-omission factor is a blocker; with the corner tests' common extremes, per-row boxes decide as the joint constraint does.
+
+## Owner decisions O132–O138 (2026-10-30), asked on reviewer 73 (Grok 4.7, r155)
+- O132 (AA Intelligence Index v5): AA published v5 around 2026-10-27, after the 2026-10-25 cutoff. The owner chose to re-capture under v5 now: the cutoff moves (O65) and every AA source is re-captured, with the leaf set and basket re-decided (O136, O137).
+- O133 (AI Coding Daily labels): the ranking keeps its interval and scenario labels while its basket has no admitted coding-agent unit; the summary discloses the admitted basket and both pending units with coverage.
+- O134 (fallback cost, an O63 challenge): O63 stands; a row whose Coding Agent Index attempts include fallback or blocked attempts keeps its published cost and its labels, flagged beside each (r155).
+- O135 (MiMo-V2.6-Flash and MiniMax-M3.1-Flash on AI Coding Daily): each provider's documented effort levels and default are researched as for Kimi K3.1 Pro (O66), and AA's plotted configuration is taken at the documented default; the model is ranked in AI Coding Daily if that row matches and every other leaf is present.
+- O136 (v5 leaves): FrontierCode 1.1 → FrontierCode 2.0, HLE → HLE-Diamond, CritPt → CritPt v2 (hard subset), SciCode → Terminal-Bench-Science, each at the leaf's current weight; GDPval-AA and AA-LCR stay (AA still publishes them standalone); Cognition's FrontierCode 1.1 fills end. A re-freeze follows.
+- O137 (v5 basket): Coding Agent Index, ITBench-AA, AA-Briefcase, AutomationBench-AA, Terminal-Bench 4.0, FrontierCode 2.0, GDP.pdf and Terminal-Bench-Science; GDPval-AA, SciCode and AA-LCR leave the basket (v5 pages no longer publish their costs) and FrontierCode's chart stand-in (O116) retires; HLE-Diamond, Omniscience and CritPt v2 stay excluded.
+- O138 (LiveBench, an O61/O122 challenge): O122 stands; LiveBench 2.0 Overall stays whole in software engineering and each ranking prints its coding-specific share.

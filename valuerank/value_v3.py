@@ -3110,7 +3110,14 @@ def rank_separability(assembled: dict, per_row: dict, exchange: dict | None = No
         # pairs are counted apart, and the threshold, its median and the separable count range over pairs of different
         # configurations (E258), so the median is not pulled to zero by a configuration's many plan rows.
         pairs = list(zip(ranked, ranked[1:]))
-        cross = [((high, first), (low, second)) for (high, first), (low, second) in pairs if configuration_of[first] != configuration_of[second]]
+        # Reviewer 73 (O17, O117): a subset-workload row stays ranked, but its order against a row on another workload is not
+        # identified, so such adjacent pairs are counted apart and never tested, and the row joins no noise band.
+        workload_of = {row["id"]: row["cost"]["workload"] for row in assembled["rows"]}
+        main = assembled.get("mainWorkload")
+        off = {row_id for _, row_id in ranked if main is not None and workload_of.get(configuration_of[row_id], main) != main}
+        across = [pair for pair in pairs if (pair[0][1] in off) != (pair[1][1] in off)]
+        cross = [((high, first), (low, second)) for (high, first), (low, second) in pairs
+                 if configuration_of[first] != configuration_of[second] and ((high, first), (low, second)) not in across]
 
         def adjacent(sds: dict, rho: float) -> tuple[int, float | None]:
             thresholds = [separation(sds[configuration_of[first]], sds[configuration_of[second]], rho) for (_, first), (_, second) in cross]
@@ -3120,12 +3127,13 @@ def rank_separability(assembled: dict, per_row: dict, exchange: dict | None = No
         separable, median = adjacent(sd, 0.0)
         result[basis] = {
             "adjacentPairs": len(cross), "separableAdjacentPairs": separable, "medianSeparation": median,
-            "sameConfigurationAdjacentPairs": len(pairs) - len(cross),
+            "sameConfigurationAdjacentPairs": sum(1 for (_, first), (_, second) in pairs if configuration_of[first] == configuration_of[second]),
+            "crossWorkloadAdjacentPairs": len(across),
             # I26: a shared task set correlates two rows' errors, which narrows the true threshold; the grid shows how far.
             "byCorrelation": {f"{rho:.1f}": adjacent(sd, rho)[0] for rho in SEPARABILITY_CORRELATIONS},
             "gdpvalWide": dict(zip(("separableAdjacentPairs", "medianSeparation"), adjacent(wide, 0.0))),
             **({"aicdNarrow": dict(zip(("separableAdjacentPairs", "medianSeparation"), adjacent(narrow, 0.0)))} if "aiCodingDaily" in q.LEAF_BY_KEY else {}),
-            "bands": rank_bands(ranked, sd, configuration_of),
+            "bands": _bands_on_workload(ranked, off, sd, configuration_of),
         }
         doubling = ((exchange or {}).get(basis) or {}).get("valuePointsPerCostDoubling")
         # I28: the factor by which a cost (on the Plan basis, a transferred multiple) can be wrong before the value moves
@@ -3163,6 +3171,15 @@ def separation(first: float, second: float, rho: float) -> float:
     """O39: the 95% separation threshold for two value SDs whose errors correlate at rho."""
 
     return 1.96 * math.sqrt(max(0.0, first ** 2 + second ** 2 - 2.0 * rho * first * second))
+
+
+def _bands_on_workload(ranked: list[tuple[float, str]], off: set, sd: dict, configuration_of: dict) -> dict:
+    """Reviewer 73: the O42 bands over the main-workload rows only, with each band's positions read in the full value order."""
+
+    kept = [item for item in ranked if item[1] not in off]
+    position = {row_id: index for index, (_, row_id) in enumerate(ranked, 1)}
+    at = [position[row_id] for _, row_id in kept]
+    return {row_id: [at[first - 1], at[last - 1]] for row_id, (first, last) in rank_bands(kept, sd, configuration_of).items()}
 
 
 def rank_bands(ranked: list[tuple[float, str]], sd: dict, configuration_of: dict | None = None) -> dict:

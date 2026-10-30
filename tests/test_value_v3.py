@@ -1697,11 +1697,24 @@ def test_sampling_noise_per_leaf_and_rank_separability():
     result, frozen = scored()
     output = v.score(result, frozen)
     separability = output["diagnostics"]["rankSeparability"]
-    assert set(separability["valueSd"]) == {"a", "b", "c"} and separability["api"]["adjacentPairs"] == 2
-    assert separability["api"]["medianSeparation"] > 0 and len(separability["assumptions"]) == len(v.SAMPLING_ASSUMPTIONS) == 5
+    # The fixture's c is a subset-workload row ranked between a and b, so both adjacent pairs cross workloads (reviewer 73).
+    assert set(separability["valueSd"]) == {"a", "b", "c"} and separability["api"]["adjacentPairs"] == 0
+    assert separability["api"]["crossWorkloadAdjacentPairs"] == 2 and separability["api"]["medianSeparation"] is None
+    assert len(separability["assumptions"]) == len(v.SAMPLING_ASSUMPTIONS) == 5
     lone = v.rank_separability({"rows": result["rows"][:1]}, {"a": {basis: {"value": 1.0} for basis in v.BASES}})
     assert {key: lone["api"][key] for key in ("adjacentPairs", "separableAdjacentPairs", "medianSeparation")} == {"adjacentPairs": 0, "separableAdjacentPairs": 0, "medianSeparation": None}
     assert lone["api"]["bands"] == {"a": [1, 1]}
+
+
+def test_a_subset_workload_row_is_never_tested_or_banded_against_the_main_workload():
+    """Reviewer 73 (O17, O117): adjacent pairs across workloads are counted apart and the subset row joins no band."""
+
+    rows = [{"id": name, "cost": {"workload": "sub" if name == "b" else "main"}, "plan": {}, "evidence": {"observations": {}, "provenance": {}}} for name in "abc"]
+    values = {"a": 60.0, "b": 59.0, "c": 58.5}
+    result = v.rank_separability({"rows": rows, "mainWorkload": "main"}, {name: {basis: {"value": values[name]} for basis in v.BASES} for name in "abc"})
+    assert result["api"]["crossWorkloadAdjacentPairs"] == 2 and result["api"]["adjacentPairs"] == 0
+    # The bands keep each row's position in the full value order (c is third), and b has none.
+    assert result["api"]["bands"] == {"a": [1, 1], "c": [3, 3]}
 
 
 
@@ -1725,7 +1738,7 @@ def test_rank_bands_correlation_grid_and_listed_indicative_values():
     output = v.score(result, frozen)
     separability = output["diagnostics"]["rankSeparability"]
     assert set(separability["api"]["byCorrelation"]) == {"0.0", "0.3", "0.6"} and separability["bias"].startswith("net direction not established")
-    assert set(separability["api"]["gdpvalWide"]) == {"separableAdjacentPairs", "medianSeparation"} and set(separability["api"]["bands"]) == {"a", "b", "c"}
+    assert set(separability["api"]["gdpvalWide"]) == {"separableAdjacentPairs", "medianSeparation"} and set(separability["api"]["bands"]) == {"a", "b"}
     assert output["listedIndicative"] == []
     # O41: a frontier-family configuration listed for a missing leaf keeps an indicative value apart from the ranking.
     configurations = [dict(item, frontierFamily=True) for item in CONFIGURATIONS]
@@ -1827,7 +1840,9 @@ def test_plan_rows_rank_every_plan_and_share_their_configuration():
     ordered = [row_id for row_id, _ in sorted(((row_id, row["value"]) for row_id, row in plan_rows.items() if row["value"] is not None), key=lambda item: -item[1])]
     same = sum(1 for first, second in zip(ordered, ordered[1:]) if first.split("@")[0] == second.split("@")[0])
     assert separability["sameConfigurationAdjacentPairs"] == same
-    assert separability["adjacentPairs"] + same == len(ordered) - 1 and separability["medianSeparation"] > 0
+    # Reviewer 73: pairs across workloads (the fixture's c is a subset row) are counted apart too.
+    assert separability["adjacentPairs"] + same + separability["crossWorkloadAdjacentPairs"] == len(ordered) - 1
+    assert separability["crossWorkloadAdjacentPairs"] >= 1
 
 
 def test_costed_bar_ladder_drops_rows_without_a_cost():
