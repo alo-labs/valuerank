@@ -298,8 +298,8 @@ def straddles(report: dict, window: dict | None) -> bool:
 def check_report_window(document: dict) -> None:
     """E194: every newly admitted end-user report is dated inside the release's report window.
 
-    A report admitted at an earlier release records ``admittedOn``; it stays published as a
-    diagnostic until it expires (E151/O13) but no longer counts once it leaves the window (O32).
+    A report admitted at an earlier release records ``admittedOn``; under O127 it keeps counting after it leaves
+    the window, ageing on its own clock (E151/O13) until demotion.
     """
 
     window = document["evidencePolicy"]["reportingWindow"]
@@ -446,7 +446,9 @@ def measurement_objects(route: dict, release_day: date | None = None, window: di
     if route.get("valueMultipleKind") not in REPORT_KINDS or not reports:
         return [route]
     stages = {report["id"]: report_stage(report, route, release_day) if release_day else "fresh" for report in reports}
-    counted = {report["id"] for report in reports if stages[report["id"]] != "demoted" and in_window(report, window)}
+    # O127 (2026-10-30): a report admitted at an earlier release (``admittedOn``) keeps counting after it leaves the window,
+    # ageing on its own clock like a measurement until demotion; only newly admitted reports must be in the window (O32).
+    counted = {report["id"] for report in reports if stages[report["id"]] != "demoted" and (in_window(report, window) or report.get("admittedOn"))}
     excluded = sorted(report["id"] for report in reports if report["id"] not in counted)
     groups, _separate = comparable_groups(reports)
     objects = []

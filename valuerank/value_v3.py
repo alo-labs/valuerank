@@ -1512,6 +1512,18 @@ def _anchors_for(frozen: dict, workload: str | None, basis: str) -> dict | None:
     return entry["anchors"][basis]
 
 
+def shared_uncertain_donors(candidates: list[tuple[dict, float, float]]) -> list[str]:
+    """E273: donor routes whose set-identified (non-point) multiple is used by more than one interval candidate."""
+
+    users: dict[str, set] = {}
+    for row, _, _ in candidates:
+        selected = row["routeSelection"]["selected"]
+        bounds = plan_routes.identified_bounds(selected)
+        if bounds is not None and bounds[0] != bounds[1]:
+            users.setdefault(selected.get("donorRouteId") or selected["route"]["id"], set()).add(row.get("configurationId", row["id"]))
+    return sorted(donor for donor, rows in users.items() if len(rows) > 1)
+
+
 def interval_outputs(assembled: dict, frozen: dict, basis: str, components: list[str] | None = None) -> dict:
     """Frontier and bar results over R_W for one basis, with the universe and the unevaluable rows (E38).
 
@@ -1520,6 +1532,12 @@ def interval_outputs(assembled: dict, frozen: dict, basis: str, components: list
     """
 
     candidates = api_candidates(assembled, components) if basis == "api" else plan_candidates(assembled)
+    # E273 (reviewer 71): E89's separability needs every row's cost to rest on its own primitives; two Plan rows sharing one
+    # donor multiple known only as a range share an uncertain factor, so the outputs are unresolved, never computed by corners.
+    shared = shared_uncertain_donors(candidates) if basis == "plan" else []
+    if shared:
+        return {"universe": sorted(row["id"] for row, _, _ in candidates), "unevaluable": [], "status": intervals.UNRESOLVED,
+                "reason": "rows share an uncertain donor multiple, so the separability condition (E89) fails (E273): " + ", ".join(shared)}
     boxes = _boxes(candidates, basis)
     # E183: competitors range over U_W = R_W plus the O29 blockers B_W; labels go to R_W only.
     not_in_force = {row["id"] for row in assembled["rows"] if row["valuationGate"]["outcome"] == GATE_NOT_IN_FORCE}
@@ -3615,7 +3633,16 @@ def build_tracks(configurations: list[dict], data: Path, *, release_day: date) -
             sections[track] = build(configurations, data, release_day=release_day)
     for track, comparison in leading_comparison(sections).items():
         sections[track]["leadingComparison"] = comparison
+    sections[q.DEFAULT_TRACK]["rankingAgreement"] = ranking_agreement(*(sections[track] for track in q.LEADING_TRACKS))
     return sections
+
+
+def ranking_agreement(first: dict, second: dict) -> dict:
+    """E274 (reviewer 71): descriptive tau-b of the two leading rankings' API values on the configurations ranked in both;
+    the values are not comparable across rankings, so only their order is compared."""
+
+    values = [{row["id"]: row["api"]["value"] for row in section["rows"]} for section in (first, second)]
+    return diagnostics.agreement(*values, label="API value order on configurations ranked in both leading rankings (descriptive)")
 
 
 def build(configurations: list[dict], data: Path, *, release_day: date) -> dict:

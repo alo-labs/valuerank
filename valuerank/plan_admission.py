@@ -315,6 +315,11 @@ def check_routes(routes: list[dict], cells: list[dict], cohort: set[str], report
             continue
         for model in set(route.get("modelIds") or []) & cohort:
             supporting = passing.get((route.get("plan"), model_of(model, families)), [])
+            reports = route.get("independentReports") or []
+            # O127: a pair admitted at an earlier release ages like a measurement once its reports leave the window, so it
+            # needs no passing cell now; a passing cell with other reports still forces the route to be revised.
+            if not supporting and reports and all(report.get("admittedOn") for report in reports):
+                continue
             if not supporting:
                 raise ValueError(f"{route['id']}: no passing O71 cell supports a report route for {model} on {route.get('plan')} (O81)")
             # I66 L2: a plan and model can pass in more than one unit; the route's observers must be one cell's admitting set.

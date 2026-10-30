@@ -99,6 +99,9 @@ def test_a_report_route_needs_a_passing_cell_with_the_same_reports():
     pa.check_routes([{**routes[0], "modelIds": ["m-high"]}], cells, {"m-high"}, {"end_user_report"}, {"m-high": "m"})  # O87
     with pytest.raises(ValueError, match="no passing O71 cell"):
         pa.check_routes(routes[:1], [{**cells[0], "listed": False}], {"m"}, {"end_user_report"})
+    # O127: a pair admitted at an earlier release needs no passing cell now; it ages like a measurement.
+    aged = [{**report, "admittedOn": "2026-09-20"} for report in pair]
+    pa.check_routes([{**routes[0], "independentReports": aged}], [], {"m"}, {"end_user_report"})
     pa.check_routes([{**routes[0], "independentReports": [{"observer": "d"}, {"observer": "c"}]}], cells, {"m"}, {"end_user_report"})
     with pytest.raises(ValueError, match="no passing O71 cell supports a report route for m on Max"):
         pa.check_routes([{"id": "bad", "plan": "Max", "modelIds": ["m"], "valueMultipleKind": "end_user_report"}], cells, {"m"}, {"end_user_report"})

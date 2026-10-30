@@ -481,6 +481,11 @@ def test_only_reports_in_the_current_window_count(monkeypatch):
     assert left["grade"] == "diagnostic" and left["route"]["excludedReportIds"] == ["old"]
     assert pr.in_window({"id": "x"}, window) is False and pr.in_window({"id": "x"}, None) is True
     assert pr.admission_table("m", "max", [base], TODAY, window)[0]["case"] == 5
+    # O127: a pair admitted at an earlier release keeps counting after it leaves the window, ageing on its own clock.
+    admitted = route("r", 1.0, kind="user_reported_projection", models=("m",), checked="2026-10-15",
+                     independentReports=[{**report, "admittedOn": "2026-10-12"} for report in pair])
+    (kept,) = pr.measurement_objects(admitted, TODAY, window)
+    assert kept["reportIds"] == ["new", "old"] and kept["excludedReportIds"] == []
 
 
 def test_a_transfer_from_a_report_donor_follows_the_donors_window_status():

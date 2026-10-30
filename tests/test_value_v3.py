@@ -2340,3 +2340,21 @@ def test_offsetting_names_a_cost_allocation_outside_zero_to_one():
 
     assert v.offsetting(influence(0.3, 0.9)) == [] and v.offsetting({}) == []
     assert v.offsetting(influence(-0.5, 1.2)) == ["API: cost term offsetting (-50% of value variance)", "Plan: quality term offsetting (cost 120% of value variance)"]
+
+
+def test_rows_sharing_an_uncertain_donor_multiple_leave_the_plan_intervals_unresolved(monkeypatch):
+    """E273: two configurations on one set-identified donor multiple share a factor, so E89's separability fails."""
+
+    def row(row_id, configuration, identification="set-identified", donor="d"):
+        route = {"id": f"r-{row_id}", "valueMultiple": 10.0, "valueMultipleLower": 8.0, "valueMultipleUpper": 12.0}
+        return ({"id": row_id, "configurationId": configuration,
+                 "routeSelection": {"selected": {"route": route, "identification": identification, "donorRouteId": donor}}}, 1.0, 2.0)
+
+    assert v.shared_uncertain_donors([row("a@p", "a"), row("b@p", "b")]) == ["d"]
+    assert v.shared_uncertain_donors([row("a@p", "a"), row("a@q", "a")]) == []  # one configuration on two plans
+    assert v.shared_uncertain_donors([row("a@p", "a", "point-identified"), row("b@p", "b", "point-identified")]) == []
+    assert v.shared_uncertain_donors([row("a@p", "a", "unidentified"), row("b@p", "b", donor=None)]) == []
+    result, frozen = scored()
+    monkeypatch.setattr(v, "plan_candidates", lambda assembled: [row("a@p", "a"), row("b@p", "b")])
+    plan = v.interval_outputs(result, frozen, "plan")
+    assert plan["status"] == "unresolved" and plan["reason"].endswith(": d") and plan["universe"] == ["a@p", "b@p"]

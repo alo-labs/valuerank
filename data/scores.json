@@ -32340,7 +32340,7 @@
         {
           "key": "planRoutes",
           "artifact": "data/plan_cost_routes.json",
-          "sha256": "3dab798aa13f1df6b2deb4492f6caae736db52c93c787787a60dc9545e2083d1",
+          "sha256": "ef3d81834a2e3c1a73d7d5b88f171e6aa8f46294432c2cd14e2c0b218794117d",
           "capturedAt": "2026-10-25",
           "extractor": "editorial Plan evidence registry"
         },
@@ -32422,7 +32422,7 @@
           "extractor": "valuerank.value_v3 freeze"
         }
       ],
-      "bundleHash": "5707053f2c3f888a4d3d3b9d8b9349af14d99e4433060874d3d0d36d2b84a77f",
+      "bundleHash": "4d48ed204b46dd1cd5c7a686afecec69aa5cfe59c01c6042e5f9b1b73d2bd18a",
       "rebuild": "every published output is rebuilt from these artifacts at the pinned publication clock (npm run verify:docs), never from live pages"
     },
     "track": {
@@ -37685,6 +37685,40 @@
           }
         }
       ]
+    },
+    "rankingAgreement": {
+      "label": "API value order on configurations ranked in both leading rankings (descriptive)",
+      "panel": [
+        "deepseek-v4-1-flash-1017",
+        "gemini-4-argon",
+        "gpt-6-luna",
+        "mimo-v2-6-pro"
+      ],
+      "excluded": [
+        "claude-haiku-5-5-high",
+        "claude-haiku-5-5-max",
+        "claude-haiku-5-5-medium",
+        "claude-opus-5-5",
+        "claude-opus-5-5-high",
+        "claude-opus-5-5-medium",
+        "claude-sonnet-5-5",
+        "gpt-5.6-luna-low",
+        "gpt-6-astra",
+        "gpt-6-astra-high",
+        "gpt-6-luna-high",
+        "gpt-6-luna-medium",
+        "gpt-6-luna-xhigh",
+        "gpt-6.1-sol",
+        "gpt-6.1-sol-high",
+        "gpt-6.1-sol-medium",
+        "kimi-k3-1-pro"
+      ],
+      "tau": 0.6666666666666666,
+      "interval": [
+        -1.0,
+        1.0
+      ],
+      "status": "defined"
     }
   },
   "v3Tracks": {
@@ -62431,7 +62465,7 @@
           {
             "key": "planRoutes",
             "artifact": "data/plan_cost_routes.json",
-            "sha256": "3dab798aa13f1df6b2deb4492f6caae736db52c93c787787a60dc9545e2083d1",
+            "sha256": "ef3d81834a2e3c1a73d7d5b88f171e6aa8f46294432c2cd14e2c0b218794117d",
             "capturedAt": "2026-10-25",
             "extractor": "editorial Plan evidence registry"
           },
@@ -62513,7 +62547,7 @@
             "extractor": "valuerank.value_v3 freeze"
           }
         ],
-        "bundleHash": "5707053f2c3f888a4d3d3b9d8b9349af14d99e4433060874d3d0d36d2b84a77f",
+        "bundleHash": "4d48ed204b46dd1cd5c7a686afecec69aa5cfe59c01c6042e5f9b1b73d2bd18a",
         "rebuild": "every published output is rebuilt from these artifacts at the pinned publication clock (npm run verify:docs), never from live pages"
       },
       "track": {
@@ -109214,7 +109248,7 @@
           {
             "key": "planRoutes",
             "artifact": "data/plan_cost_routes.json",
-            "sha256": "3dab798aa13f1df6b2deb4492f6caae736db52c93c787787a60dc9545e2083d1",
+            "sha256": "ef3d81834a2e3c1a73d7d5b88f171e6aa8f46294432c2cd14e2c0b218794117d",
             "capturedAt": "2026-10-25",
             "extractor": "editorial Plan evidence registry"
           },
@@ -109296,7 +109330,7 @@
             "extractor": "valuerank.value_v3 freeze"
           }
         ],
-        "bundleHash": "5707053f2c3f888a4d3d3b9d8b9349af14d99e4433060874d3d0d36d2b84a77f",
+        "bundleHash": "4d48ed204b46dd1cd5c7a686afecec69aa5cfe59c01c6042e5f9b1b73d2bd18a",
         "rebuild": "every published output is rebuilt from these artifacts at the pinned publication clock (npm run verify:docs), never from live pages"
       },
       "track": {

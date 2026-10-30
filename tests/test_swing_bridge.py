@@ -134,3 +134,12 @@ def test_the_footnote_register_is_replayed_as_a_method_input():
     assert sb._with_method(bare, bare) == (bare, bare)
     only_old, _ = sb._with_method(old, bare)
     assert [item["text"] for item in only_old["documents"]["aaFootnotes"]["notes"]] == ["Old.", "Both."]
+
+
+def test_a_swing_built_from_small_steps_must_name_the_steps_that_carry_it():
+    """E275: three steps of 2.4, 2.4 and 2.2 make a 7-point swing; the largest steps covering 80% of it must be named."""
+
+    steps = {sb.METHOD_STEP: 0.0, "price": -2.4, "tokenUse": -2.4, "benchmarkRecord": -2.2, "cohort": None}
+    assert sb.covering_steps(steps, -7.0) == ["price", "tokenUse", "benchmarkRecord"]
+    assert sb.covering_steps(steps, -4.0) == [] and sb.covering_steps(steps, None) == []
+    assert sb.covering_steps({"price": -6.0, "tokenUse": -1.0}, -7.0) == ["price"]

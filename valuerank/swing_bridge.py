@@ -138,6 +138,23 @@ def _difference(after, before):
     return None if after is None or before is None else after - before
 
 
+COVERAGE_SHARE = 0.8
+
+
+def covering_steps(steps: dict, swing: float | None) -> list[str]:
+    """E275: for a swing over the limit, the largest steps (by size) whose cumulative size first reaches 80% of it."""
+
+    if swing is None or abs(swing) <= SWING_LIMIT:
+        return []
+    chosen, total = [], 0.0
+    for name, step in sorted(((name, step) for name, step in steps.items() if step), key=lambda item: -abs(item[1])):
+        if total >= COVERAGE_SHARE * abs(swing):
+            break
+        chosen.append(name)
+        total += abs(step)
+    return chosen
+
+
 def _cache_rate_rows(previous: dict, current: dict) -> set:
     """Rows whose token-use change is AA's cache rate alone: the cache-read cost moved with token totals and prices fixed."""
 
@@ -188,7 +205,10 @@ def bridge(previous: dict, current: dict, frozen: dict, release_day: date) -> di
             residual = _difference(forward[-1][row_id][basis], published_new)
             swing = _difference(published_new, published_old)
             carriers = [name for name in ORDER if steps[name] is not None and abs(steps[name]) > SWING_LIMIT]
-            named = all(fields[name] for name in carriers)
+            # E275 (reviewer 71): a swing over the limit made of several smaller steps must still be explained, so the
+            # largest steps that together carry 80% of it name their changed fields too.
+            carriers += [name for name in covering_steps(steps, swing) if name not in carriers]
+            named = all(fields.get(name) for name in carriers if name != METHOD_STEP)
             attributed = residual is not None and abs(residual) <= RESIDUAL_TOLERANCE and named
             entry[basis] = {
                 "swing": swing,
