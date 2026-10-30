@@ -1,0 +1,1 @@
+I'll start by identifying the GitHub connector's file-reading tool, then read all 13 parts in order.
