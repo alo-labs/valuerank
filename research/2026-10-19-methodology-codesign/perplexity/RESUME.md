@@ -21,6 +21,6 @@ The panel stalled on Perplexity's Cloudflare "verify you are human" page. To res
    (the `fetch` command re-reads a thread; the driver now waits three minutes on a short answer before saving it).
 2. Triage it as for reviewers 68–70: verify each claim against the draft and code, put owner-decision challenges to the
    owner, implement adopted items with tests (100% coverage), regenerate, and write the ledger entry.
-3. Build the next review copy and prompt: `review_copy.py`, `split_draft_26k.py` (26,500-character parts) and the skill's
+3. Build the next review copy and prompt: `tools/review_copy.py`, `tools/split_draft_26k.py` (26,500-character parts) (or `tools/build_section_prompt.py` for Gemini's five sectional sends) and the skill's
    `build_linked_prompt.py` with `reviewer-prompt.md` and `ledger-brief.md`, after pushing so the commit SHA resolves.
 4. Send GLM 5.3, then Grok 4.7, then start the next round.
