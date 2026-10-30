@@ -1,6 +1,6 @@
 # Resuming the Perplexity panel (round 12)
 
-State on 2026-10-30: draft r153 is committed with its review copy in `perplexity/parts-r153/` (13 parts). The ledger
+State on 2026-10-30: draft r154 is committed with its review copy in `perplexity/parts-r154/` (13 parts). The ledger
 (`ledger.md`) and the condensed brief (`ledger-brief.md`) run through owner decision O123 and reviewer 70.
 
 Panel order and status for round 12 (O56: a model's round is clean with no Medium-or-higher finding; each model needs
@@ -10,8 +10,8 @@ two consecutive clean rounds and the panel ends when every model says NO FURTHER
 |---|---|---|---|
 | 68 | GPT-6.1 Sol | r150 | findings, folded into r151 |
 | 69 | Gemini 3.8 Flash (five sectional sends) | r151 | findings, folded into r152 |
-| 70 | Claude Sonnet 5.5 | r152 | findings, folded into r153 (O121–O123) |
-| 71 | Kimi K3 | r153 | sent; answer on its thread, not yet read: https://www.perplexity.ai/search/80d62899-30d2-4349-9b85-7ae001247d80 |
+| 70 | Claude Sonnet 5.5 | r152 | findings, folded into r154 (O121–O123) |
+| 71 | Kimi K3 | r154 | sent; answer on its thread, not yet read: https://www.perplexity.ai/search/80d62899-30d2-4349-9b85-7ae001247d80 |
 | 72 | GLM 5.3 | — | next |
 | 73 | Grok 4.7 | — | after GLM |
 
