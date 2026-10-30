@@ -2300,6 +2300,9 @@ def score(assembled: dict, frozen: dict) -> dict:
     manifest = [
         _rule("clip gate (E20)", "fired" if hold else "passed", f"release held; remedy: {anchor_math.CLIP_REMEDY}" if hold else "no basis exceeds the clipping allowance"),
         _rule("cost influence flag (E91)", "fired" if influence["api"]["flag"] or influence["plan"]["flag"] else "passed", "cost not discriminating (< 10%); informational only; beta never changes (O2)"),
+        _rule("realised influence (E272)", "fired" if offsetting(influence) else "passed",
+              "; ".join(offsetting(influence)) + "; informational only, beta never changes (O2)" if offsetting(influence)
+              else "cost's value-variance allocation lies within 0-100% on both bases"),
         _rule("quality influence flag (E126)", "fired" if influence["api"]["qualityFlag"] or influence["plan"]["qualityFlag"] else "passed", "quality not discriminating (cost share > 90%); informational only"),
         _rule("subset scoring (O17)", "fired" if any(row["cost"]["subset"] for row in rows) else "vacuous", "subset rows scored on their own workload and anchors"),
         _rule("partial component flag (E37)", "fired" if any(row["cost"]["partialComponents"] for row in rows) else "vacuous", "AA declined- or missing-task markers, or an Index reconstruction that misses AA's total (E209)"),
@@ -3109,6 +3112,10 @@ def rank_separability(assembled: dict, per_row: dict, exchange: dict | None = No
         # I28: the factor by which a cost (on the Plan basis, a transferred multiple) can be wrong before the value moves
         # by the median separation threshold; a tolerance, not an estimate of any transfer's error.
         result[basis]["costTolerance"] = None if median is None or not doubling else 2.0 ** (median / doubling)
+        # E272: the tolerance uses the unclipped slope; an assumption row whose cost score is clipped at an anchor has slope 0
+        # there, so its multiple can be wrong by any factor until the row re-enters the scale.
+        result[basis]["toleranceUnbounded"] = sorted(row_id for row_id in (assumed if basis == "plan" else [])
+                                                     if (plan_scores.get(row_id) or {}).get(basis, {}).get("costScore") in (0.0, 100.0))
     return result
 
 
@@ -3630,6 +3637,20 @@ def build(configurations: list[dict], data: Path, *, release_day: date) -> dict:
 
 DIAGNOSTIC_RANKING = ("diagnostic ranking (O121): computed like the leading rankings for comparison, but it earns no interval or"
                       " scenario label and its gates never hold the release")
+
+
+def offsetting(influence: dict) -> list[str]:
+    """E272: a basis whose cost value-variance allocation (E189) leaves [0, 1]: below 0 the cost term offsets quality
+    differences, above 1 the quality term offsets cost differences. The E126 SD ratio cannot show either, as it lies in (0, 1)."""
+
+    found = []
+    for basis in BASES:
+        share = (((influence.get(basis) or {}).get("commonWorkload") or {}).get("varianceAllocation") or {}).get("cost")
+        if share is not None and share < 0.0:
+            found.append(f"{basis.upper() if basis == 'api' else 'Plan'}: cost term offsetting ({share:.0%} of value variance)")
+        elif share is not None and share > 1.0:
+            found.append(f"{basis.upper() if basis == 'api' else 'Plan'}: quality term offsetting (cost {share:.0%} of value variance)")
+    return found
 
 
 def withhold_labels(scored: dict) -> dict:

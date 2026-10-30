@@ -2330,3 +2330,13 @@ def test_livebench_records_must_carry_the_release_weights():
         v.track_records({"sweTracks": {"sources": sources, "records": [{**good, "weights": {"coding": 1.0}}]}})
     leaves = (q.Leaf("swe", "SWE", "swe", 45.0, "aa"), q.Leaf(q.LIVEBENCH, "LiveBench", "swe", 15.0, "independent"), q.Leaf("g", "G", "professional", 40.0, "aa"))
     assert q.coding_specific_share(leaves) == pytest.approx(45 + 15 * 3.5 / 9) and q.coding_specific_share(leaves[:1]) == 45.0
+
+
+def test_offsetting_names_a_cost_allocation_outside_zero_to_one():
+    """E272: the realised cost allocation (E189) below 0 or above 1 is named; inside it, or undefined, nothing is."""
+
+    def influence(api, plan):
+        return {basis: {"commonWorkload": {"varianceAllocation": {"cost": share}}} for basis, share in (("api", api), ("plan", plan))}
+
+    assert v.offsetting(influence(0.3, 0.9)) == [] and v.offsetting({}) == []
+    assert v.offsetting(influence(-0.5, 1.2)) == ["API: cost term offsetting (-50% of value variance)", "Plan: quality term offsetting (cost 120% of value variance)"]

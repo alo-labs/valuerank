@@ -46,8 +46,10 @@ body:
   - type: textarea
     id: evidence
     attributes:
-      label: Supporting evidence (optional)
-      description: Links or screenshots of usage logs or dashboards, with personal identifiers removed.
+      label: Supporting evidence (required for the report to count)
+      description: A screenshot of the plan's usage meter or an excerpt of the provider's usage ledger covering the window, with personal identifiers removed. ValueRank keeps a hash of it in the release's evidence bundle. A submitted report counts only with this evidence, and a route is admitted only when at least one of its two reports was also found by ValueRank's own search (owner decision O124).
+    validations:
+      required: true
   - type: input
     id: report_date
     attributes:

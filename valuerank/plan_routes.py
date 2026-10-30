@@ -351,14 +351,28 @@ def label_denied(candidate: dict | None, release_day: date | None = None) -> boo
 
 
 
+# O126 (2026-10-30): an allowance is effort-invariant only on a meter that counts tokens or credits; on a meter that
+# counts messages, requests or time, a higher effort spends more tokens per unit, so the multiple differs by effort.
+EFFORT_INVARIANT_METERS = {"tokens", "credits"}
+METER_DENOMINATIONS = EFFORT_INVARIANT_METERS | {"messages", "requests", "time window", "not documented"}
+
+
 def check_same_model_routes(document: dict, families: dict | None = None) -> None:
     """I74 L3: a route flagged ``sameModelAcrossEfforts`` (which O90 grades as measured) must name a controlled donor
-    measurement of the same model on the same plan, at another configuration of that model."""
+    measurement of the same model on the same plan, at another configuration of that model. O126: its plan's recorded
+    meter must count tokens or credits; any other meter needs the route recorded as a donor assumption instead."""
 
     by_id = {route["id"]: route for route in document["routes"]}
+    meters = (document.get("evidencePolicy") or {}).get("meterDenominations")
     for route in document["routes"]:
         if not route.get("sameModelAcrossEfforts"):
             continue
+        if meters is not None:
+            meter = (meters.get(route.get("plan")) or {}).get("denomination")
+            if meter not in METER_DENOMINATIONS:
+                raise ValueError(f"{route['id']}: plan {route.get('plan')!r} has no recorded meter denomination (O126)")
+            if meter not in EFFORT_INVARIANT_METERS:
+                raise ValueError(f"{route['id']}: plan {route.get('plan')!r} meters {meter}, so a cross-effort figure is a donor assumption, not measured (O126)")
         source = by_id.get(route.get("donorRouteId") or "")
         if source is None or source.get("valueMultipleKind") not in CONTROLLED_KINDS:
             raise ValueError(f"{route['id']}: a same-model route needs a controlled donor measurement (O88, O90)")
@@ -901,7 +915,7 @@ def plan_cost(api_cost: float | None, selected: dict | None) -> dict:
     if valuation == "unverified":
         flags.append("valuation basis unverified")
     if capacity == CAPACITY_CEILING:
-        flags.append("provider quota ceiling; full use assumed (O46)")
+        flags.append("provider quota ceiling; full use assumed, the most the plan can give (O46, O125)")
     elif capacity != CAPACITY_ESTABLISHED:
         flags.append("observed-usage multiple; full utilisation not established")
     return {

@@ -203,3 +203,18 @@ def test_meter_families_and_resets():
     assert pa.exclusion(report("r", provider="O", start="2026-10-06", end="2026-10-07"), profile, day) == "spans a provider meter reset (O112)"
     assert pa.exclusion(report("s", provider="O", start="2026-10-08", end="2026-10-09"), profile, day) is None
     assert pa.spans_reset(report("t", provider="A", start="2026-10-06", end="2026-10-07"), records) is False
+
+
+def test_form_submissions_need_evidence_and_a_searched_partner():
+    """O124: a form-submitted report counts only with a hashed evidence artifact, and two submissions alone never admit."""
+
+    def cell(*reports):
+        return pa.evaluate({**DOCUMENT, "reports": list(reports)}, PROFILE, DAY)[0]
+
+    bare = report("f", start="2026-10-18", end="2026-10-18", stage=pa.FORM_STAGE)
+    assert pa.exclusion(bare, PROFILE, DAY) == "form submission without an evidence artifact (O124)"
+    first = {**bare, "evidenceArtifactSha256": "ab"}
+    second = report("g", start="2026-10-19", end="2026-10-19", stage=pa.FORM_STAGE, evidenceArtifactSha256="cd")
+    assert pa.exclusion(first, PROFILE, DAY) is None
+    assert cell(first, second)["status"].startswith("fails: every counting report was submitted through the intake form")
+    assert cell(first, report("s", start="2026-10-19", end="2026-10-19", stage="S1"))["status"] == "passes"

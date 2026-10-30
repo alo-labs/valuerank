@@ -699,6 +699,7 @@ No row is scored on a subset workload.
 |---|---|---|
 | clip gate (E20) | passed | no basis exceeds the clipping allowance |
 | cost influence flag (E91) | passed | cost not discriminating (< 10%); informational only; beta never changes (O2) |
+| realised influence (E272) | fired | API: cost term offsetting (-96% of value variance); Plan: cost term offsetting (-25% of value variance); informational only, beta never changes (O2) |
 | quality influence flag (E126) | passed | quality not discriminating (cost share > 90%); informational only |
 | subset scoring (O17) | vacuous | subset rows scored on their own workload and anchors |
 | partial component flag (E37) | vacuous | AA declined- or missing-task markers, or an Index reconstruction that misses AA's total (E209) |
@@ -1064,6 +1065,7 @@ No row is scored on a subset workload.
 |---|---|---|
 | clip gate (E20) | fired | release held; remedy: O12 versioned re-freeze of the anchors with a dual run (O120) |
 | cost influence flag (E91) | passed | cost not discriminating (< 10%); informational only; beta never changes (O2) |
+| realised influence (E272) | fired | API: cost term offsetting (-121% of value variance); Plan: cost term offsetting (-44% of value variance); informational only, beta never changes (O2) |
 | quality influence flag (E126) | passed | quality not discriminating (cost share > 90%); informational only |
 | subset scoring (O17) | vacuous | subset rows scored on their own workload and anchors |
 | partial component flag (E37) | vacuous | AA declined- or missing-task markers, or an Index reconstruction that misses AA's total (E209) |
@@ -1120,7 +1122,7 @@ The Plan amount is the selected multiple times the cash paid for the fee period 
 | GPT-6 Astra (max) | ChatGPT Pro 200 $200 · GPT-6 Astra (14.485×, measured) | $2,897 per month: measured-workload capacity | 0.49 per month | unidentified | $406.29 | workload-unmatched; possibly-superseded; valuation basis unverified | larger observed multiple (observed-workload multiple — target-workload ordering not identified) |
 | GPT-6 Luna (max) | ChatGPT Pro 500 $500 · common GPT assumption (10.772×, assumption) | $5,386 per month: assumed API-equivalent consumption (owner-named transfer) from chatgpt-pro500-gpt61sol-semianalysis | 42.84 per month | unidentified | $11.67 | workload-unmatched; owner-named transfer (assumption); possibly-superseded; measured inside an acknowledged accounting-fault window (O91, O92); valuation basis unverified | larger observed multiple (observed-workload multiple — target-workload ordering not identified) |
 | DeepSeek V4.1 Flash 1017 (max) | — | — | — | — | $410.04 | API-cost fallback: no admitted Plan route; cross-estimand ordering not identified | no eligible route |
-| MiMo-V2.6-Pro | MiMo Token Plan Max $100 · quota ceiling (provider-derived) (1.1808×, assumption) | $118 per month: provider quota ceiling: the full quota at API rates (O46; full use assumed) | 0.87 per month | unidentified | $115.28 | workload-unmatched; provider quota ceiling; full use assumed (O46) | larger quota-ceiling multiple (O46: provider-derived, not observed) |
+| MiMo-V2.6-Pro | MiMo Token Plan Max $100 · quota ceiling (provider-derived) (1.1808×, assumption) | $118 per month: provider quota ceiling: the full quota at API rates (O46; full use assumed) | 0.87 per month | unidentified | $115.28 | workload-unmatched; provider quota ceiling; full use assumed, the most the plan can give (O46, O125) | larger quota-ceiling multiple (O46: provider-derived, not observed) |
 | Gemini 4 Argon (high) | — | — | — | — | $3,557.77 | API-cost fallback: no admitted Plan route; cross-estimand ordering not identified | no eligible route |
 
 ### Route alternatives
@@ -1635,6 +1637,7 @@ Each admitted basket unit removed in turn, scored on anchors rebuilt by the free
 |---|---|---|
 | clip gate (E20) | passed | no basis exceeds the clipping allowance |
 | cost influence flag (E91) | passed | cost not discriminating (< 10%); informational only; beta never changes (O2) |
+| realised influence (E272) | fired | API: quality term offsetting (cost 106% of value variance); informational only, beta never changes (O2) |
 | quality influence flag (E126) | passed | quality not discriminating (cost share > 90%); informational only |
 | subset scoring (O17) | fired | subset rows scored on their own workload and anchors |
 | partial component flag (E37) | vacuous | AA declined- or missing-task markers, or an Index reconstruction that misses AA's total (E209) |

@@ -195,6 +195,7 @@ Diagnostics are published beside the ranking and never change a score: Terminal-
 |---|---|---|
 | clip gate (E20) | passed | no basis exceeds the clipping allowance |
 | cost influence flag (E91) | passed | cost not discriminating (< 10%); informational only; beta never changes (O2) |
+| realised influence (E272) | fired | API: quality term offsetting (cost 106% of value variance); informational only, beta never changes (O2) |
 | quality influence flag (E126) | passed | quality not discriminating (cost share > 90%); informational only |
 | subset scoring (O17) | fired | subset rows scored on their own workload and anchors |
 | partial component flag (E37) | vacuous | AA declined- or missing-task markers, or an Index reconstruction that misses AA's total (E209) |

@@ -427,7 +427,7 @@ def test_measurement_capacity_status():
     ceiling = dict(route("q", 1.18, kind="user_assumption"), evidenceClass="provider_quota_ceiling", valuationBasis="release")
     assert pr.measurement_capacity_status(ceiling) == pr.CAPACITY_CEILING
     capped = pr.plan_cost(100.0, {"route": ceiling, "grade": "assumption", "identification": "unidentified", "expiry": "fresh"})
-    assert "provider quota ceiling; full use assumed (O46)" in capped["flags"] and "valuation basis unverified" not in capped["flags"]
+    assert "provider quota ceiling; full use assumed, the most the plan can give (O46, O125)" in capped["flags"] and "valuation basis unverified" not in capped["flags"]
     assert not any(flag.startswith("observed-usage") for flag in capped["flags"])
     assert "owner-named transfer (assumption)" not in capped["flags"]
     same = pr.plan_cost(100.0, {"route": dict(route("s", 10.0, kind="user_assumption"), sameModelAcrossEfforts=True), "grade": "assumption", "identification": "unidentified", "expiry": "fresh"})
@@ -666,6 +666,13 @@ def test_every_route_kind_maps_to_one_admission_case_and_same_model_flags_are_ch
             pr.check_same_model_routes({"routes": [donor, bad]})
     with pytest.raises(ValueError):
         pr.check_same_model_routes({"routes": [donor, same]}, {"m": "M", "m-high": "Not M"})
+    # O126: with meters recorded, a cross-effort route needs a tokens or credits meter on its plan.
+    tokens = {"evidencePolicy": {"meterDenominations": {"Pro": {"denomination": "tokens"}}}}
+    pr.check_same_model_routes({"routes": [donor, same], **tokens})
+    with pytest.raises(ValueError, match="no recorded meter denomination"):
+        pr.check_same_model_routes({"routes": [donor, same], "evidencePolicy": {"meterDenominations": {}}})
+    with pytest.raises(ValueError, match="meters messages"):
+        pr.check_same_model_routes({"routes": [donor, same], "evidencePolicy": {"meterDenominations": {"Pro": {"denomination": "messages"}}}})
 
 
 def test_a_controlled_measurement_in_a_fault_window_is_kept_flagged_until_reports_replace_it():

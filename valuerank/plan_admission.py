@@ -195,9 +195,16 @@ def converted(report: dict, multipliers: dict) -> tuple[float, float]:
     return report["valueLower"] * factor, report["valueUpper"] * factor
 
 
+FORM_STAGE = "form"  # E244: a report submitted through the GitHub intake form, not found by the staged O71 search
+
+
 def exclusion(report: dict, profile: dict, release_day: date) -> str | None:
     """Why a report does not count (E270), or None."""
 
+    # O124 (2026-10-30): a report submitted through the intake form counts only with an evidence artifact (a meter screenshot
+    # or usage-ledger excerpt) hashed into the evidence bundle.
+    if report.get("stage") == FORM_STAGE and not report.get("evidenceArtifactSha256"):
+        return "form submission without an evidence artifact (O124)"
     if report.get("lowerBound"):
         return "lower bound: no meter fraction"
     if report.get("mixedModel"):
@@ -248,7 +255,7 @@ def evaluate(document: dict, profile: dict, release_day: date, families: dict | 
             low, high = converted(report, multipliers)
             part = partition(report, splits) if reason is None else None
             rows.append({"id": report["id"], "observer": report["observer"], "valueLower": low, "valueUpper": high, "partition": part,
-                         "provisional": bool(report.get("provisional")), "speedMode": report.get("speedMode"), "excluded": reason})
+                         "provisional": bool(report.get("provisional")), "speedMode": report.get("speedMode"), "stage": report.get("stage"), "excluded": reason})
             if reason is None:
                 eligible.append(rows[-1])
         latest_split = sum(applies(item, reports[0]) for item in splits)
@@ -269,6 +276,9 @@ def evaluate(document: dict, profile: dict, release_day: date, families: dict | 
             raise ValueError(f"{key}: one observer reports twice in one partition; record it once with its range (E270)")
         elif len(firm) < 2:
             status = f"fails: {len(firm)} non-provisional report(s) in the current partition"
+        elif all(row["stage"] == FORM_STAGE for row in firm):
+            # O124: an admitted pair needs at least one report the staged search found, so submissions alone never admit.
+            status = "fails: every counting report was submitted through the intake form; one must be found by the staged search (O124)"
         elif largest_lower > CONCORDANCE * smallest_upper:
             status = f"fails: largest lower bound {largest_lower / smallest_upper:.2f}× the smallest upper bound (O86 allows 1.20×) in the current partition"
         else:
