@@ -222,6 +222,9 @@ def named_figures(scores: dict, data: Path = DATA) -> dict:
         main = [row["id"] for row in section["rows"] if row["cost"]["workload"] == section["mainWorkload"]]
         figures[f"{track}.mainWorkloadRows"] = len(main)
         figures[f"{track}.subsetRows"] = order(item for item in ids if item not in main)
+        # E209 (reviewer 74 M2): scored main-workload rows outside the admission reference panel are in the influence panel only.
+        reference = set(section["admission"]["referencePanel"])
+        figures[f"{track}.influenceOnlyRows"] = order(item for item in main if item not in reference) or "none"
         figures[f"{track}.admissionThreshold"] = -(-2 * len(ids) // 3)  # E140: ceil(2N/3)
         components = section["admission"]["components"]
         figures[f"{track}.basket.admitted"] = sum(1 for item in components.values() if item["admitted"])

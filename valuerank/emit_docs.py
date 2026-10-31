@@ -467,6 +467,16 @@ def search_gap_text(policy):
     return f"; end-user reports were last searched on {searched}, so reports dated in the {gap} days after it were not searched"
 
 
+def research_coverage_text(v3):
+    """O71, O75 (reviewer 74 M1): the model × plan cells the staged search covers; the build stops on an uncovered one."""
+
+    coverage = v3.get("planResearchCoverage")
+    if not coverage:
+        return ""
+    return (f"\n- Plan-allowance research coverage (O71, O75): all {coverage['cells']} cohort model × first-party plan cells have a three-stage search "
+            "that names the model (efforts pool, O87); a provider-level search does not cover a model it did not name, and the build stops on an uncovered cell.")
+
+
 def cross_harness_text(facts):
     """E224: configurations Bug Hunt reports on two or more harnesses at the same effort (a diagnostic, no score change)."""
 
@@ -1021,7 +1031,7 @@ Plan cost = basket API cost ÷ a subscription route's Value Multiple, at full ut
 
 - Default numerator: {routes_policy['defaultNumerator']}
 - Selected source for {', '.join(exception['providers'])}: [SemiAnalysis]({exception['sourceUrl']}) ({exception['publicationDate']}, owner-selected {exception['authorizedOn']}): {exception['evidenceType']}
-{policy_lines}
+{policy_lines}{research_coverage_text(v3)}
 - Provider allowance, quota and marketing figures never supply the measured numerator; a provider's published price can be the fee denominator only when the tier mapping is supported.
 
 ## Uncertainty outputs

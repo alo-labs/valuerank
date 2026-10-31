@@ -544,3 +544,11 @@ def test_diagnostic_note_states_its_noise_margin():
     v3 = {"diagnosticRanking": {"gateWouldHold": False}, "leadingComparison": {}, "diagnostics": {"rankSeparability": {"qualityMargin": 5.21}}}
     note = ed.diagnostic_note(SimpleNamespace(v3=v3), None)
     assert "passes on its own" in note and "quality noise margin (5.2 points, O44) is not evidence" in note
+
+
+def test_research_coverage_text_states_the_covered_cells_only_when_recorded():
+    """O71, O75 (reviewer 74 M1): the methodology states the model × plan research coverage the build checked."""
+
+    assert ed.research_coverage_text({}) == ""
+    assert ed.research_coverage_text({"planResearchCoverage": None}) == ""
+    assert "all 31 cohort model × first-party plan cells have a three-stage search" in ed.research_coverage_text({"planResearchCoverage": {"cells": 31, "uncovered": []}})
