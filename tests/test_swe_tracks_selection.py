@@ -43,11 +43,12 @@ def test_row_dates_follow_o69():
     assert tracks.check_row_date({"model": "M", "harness": "H", "tested": "2026-10-24"}, cutoff) is None
     kimi = {"model": "Kimi K3.1 Pro (Max)", "harness": "OpenCode", "tested": "2026-10-25", "rawCells": ["8", "10 hours ago OpenCode"]}
     # I60 L2, reviewer 72: the bound the archived read supports (read at 10:44:11Z, shown "10 hours ago": at least 9 hours), not a typed minute.
-    assert "tested between 2026-10-25T00:00:00Z and 2026-10-25T01:44:11Z" in tracks.check_row_date(kimi, cutoff)
-    assert "and 2026-10-25T10:15:11Z" in tracks.check_row_date({**kimi, "rawCells": ["30 minutes ago"]}, "2026-10-25T10:30:00Z")
+    read = ("research/2026-10-25-board-reread/aicd/leaderboard-allrows-parsed.json", "2026-10-25T10:44:11Z")  # the 2026-10-25 read
+    assert "tested between 2026-10-25T00:00:00Z and 2026-10-25T01:44:11Z" in tracks.check_row_date(kimi, cutoff, read)
+    assert "and 2026-10-25T10:15:11Z" in tracks.check_row_date({**kimi, "rawCells": ["30 minutes ago"]}, "2026-10-25T10:30:00Z", read)
     for row, message in (({"model": "M", "harness": "H", "tested": "2026-10-26"}, "after the cutoff's day"),
                          ({"model": "M", "harness": "H", "tested": "2026-10-25"}, "without a recorded instant")):
         with pytest.raises(ValueError, match=message):
             tracks.check_row_date(row, cutoff)
     with pytest.raises(ValueError, match="without a recorded instant"):
-        tracks.check_row_date(kimi, "2026-10-25T00:30:00Z")
+        tracks.check_row_date(kimi, "2026-10-25T00:30:00Z", read)

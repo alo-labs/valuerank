@@ -33,8 +33,7 @@ def make_row(row_id: str, *, cai=100.0, tb=50.0, index_cost=1.0, workload=MAIN, 
 
 
 def admission(rows):
-    components = {component: {"admitted": component not in basket.CHART_COMPONENTS, "available": len(rows), "covered": len(rows),
-                              **({"standsInFor": basket.STAND_INS[component], "eligible": False} if component in basket.STAND_INS else {})}
+    components = {component: {"admitted": component not in basket.CHART_COMPONENTS, "available": len(rows), "covered": len(rows)}
                   for component in basket.TARGET_COMPONENTS}
     return {"components": components, "admitted": [key for key, item in components.items() if item["admitted"]]}
 
@@ -54,22 +53,18 @@ def test_basket_readiness_prices_leaves_by_family_and_reports_concentration():
     result = cd.basket_readiness(rows, admission(rows), MAIN)
     agents = result["components"][basket.CODING_AGENT_INDEX]
     assert agents["status"] == "admitted" and agents["tasks"] == 290 and agents["missingConfigurations"] == ["b"]
-    # O50: FrontierCode (15% in the max-effort ranking, O61) and Terminal-Bench (11%) run inside the Coding Agent Index v2.0.
-    assert agents["pricedQualityWeight"] == pytest.approx(0.26)
-    # O116: FrontierCode stands in only while the Coding Agent Index is not admitted.
-    assert result["components"]["frontiercode"]["status"] == cd.STAND_IN_IDLE or "standsInFor" not in admission(rows)["components"]["frontiercode"]
+    # O50: Terminal-Bench (11%) runs inside the Coding Agent Index v2.0; its FrontierCode is version 1.1, not the leaf's 2.0 (O136).
+    assert agents["pricedQualityWeight"] == pytest.approx(0.11)
     assert result["components"]["itbench-aa"]["tasks"] == "chart total (no task count)"
     assert result["components"]["itbench-aa"]["missingConfigurations"] == ["a", "b", "s", "z"]
-    assert result["components"]["scicode"]["tasks"] == 288 and result["components"]["aa-briefcase"]["pricedQualityWeight"] == 0.0
-    assert result["pricedLeaves"] == ["automationBench", "frontierCode", "gdpval", "lcr", "scicode", "terminalBench"]
-    # FrontierCode 15, Terminal-Bench 11, GDPval 10, AutomationBench 10, AA-LCR 5 and SciCode 5/3 percent of quality (O61).
-    assert result["pricedMixCoverage"] == pytest.approx((15 + 11 + 10 + 10 + 5 + 5 / 3) / 100)
+    assert result["components"]["terminal-bench-science"]["tasks"] == 70 and result["components"]["aa-briefcase"]["pricedQualityWeight"] == 0.0
+    assert result["pricedLeaves"] == ["automationBench", "frontierCode", "tbScience", "terminalBench"]
+    # FrontierCode 2.0 15, Terminal-Bench 11, AutomationBench 10 and Terminal-Bench-Science 5/3 percent of quality (O61, O136, O137).
+    assert result["pricedMixCoverage"] == pytest.approx((15 + 11 + 10 + 5 / 3) / 100)
     assert set(result["expenditure"]) == {"a", "b"}  # main workload with a positive cost only
     shares = result["expenditure"]["a"]["shares"]
     assert sum(shares.values()) == pytest.approx(1.0) and result["expenditure"]["a"]["hhi"] == pytest.approx(sum(s * s for s in shares.values()))
-    # O116: FrontierCode's family sits in the index and in its stand-in, which are never admitted together.
-    assert result["overlap"] == {"terminal-bench-v4": [basket.CODING_AGENT_INDEX, "terminalbench-4-0"],
-                                 "frontiercode-v1.1-main": [basket.CODING_AGENT_INDEX, "frontiercode"]}
+    assert result["overlap"] == {"terminal-bench-v4": [basket.CODING_AGENT_INDEX, "terminalbench-4-0"]}
     assert result["familyConcentration"] == {basket.CODING_AGENT_INDEX: cd.POOLED}
 
 
@@ -85,13 +80,13 @@ def test_swe_companion_flags_a_ratio_far_from_the_median():
 def test_matched_cost_reversals_need_separated_basket_intervals_and_warnings_need_a_rank_gap():
     rows = [make_row(f"r{i}", index_cost=1.0 + i, cai=100.0 * (8 - i)) for i in range(8)]
     rows.append(make_row("overlap", index_cost=1.0, cai=100.0, half=1000.0))
-    rows.append(make_row("gap", skip=("critpt",)))
+    rows.append(make_row("gap", skip=("critpt-v2-hard",)))
     rows.append(make_row("subset", workload="w-subset"))
     rows.append(make_row("unsolved", index_cost=2.0, z=0.0))
     result = cd.matched_cost(rows, MAIN)
     assert result["status"] == "evaluated" and result["pricedQualityWeight"] == pytest.approx(0.51)
-    # O55, O61: LiveBench 2.0 Overall and the Vals leaves run outside every AA cost component.
-    assert set(result["unpricedLeaves"]) == {"bugHunt", "frontierCode", "vibeCode", "codeMigration", "livebench2Overall"}
+    # O55, O61: LiveBench 2.0 Overall and the Vals leaves run outside every AA cost component; O137: so do GDPval-AA and AA-LCR.
+    assert set(result["unpricedLeaves"]) == {"bugHunt", "gdpval", "lcr", "vibeCode", "codeMigration", "livebench2Overall"}
     assert result["unidentified"] == ["gap", "subset"]
     assert sum(result["definition"]["weights"].values()) == pytest.approx(1.0) and len(result["definition"]["id"]) == 16
     # The r-rows price in opposite orders on C^match and C_W; the wide 'overlap' row never forms a reversal.
@@ -99,12 +94,12 @@ def test_matched_cost_reversals_need_separated_basket_intervals_and_warnings_nee
     assert result["warnings"] and all(abs(result["rows"][row]["matchRank"] - result["rows"][row]["basketRank"]) > 3 for row in result["warnings"])
     feasibility = result["feasibility"]
     assert feasibility["r0"]["terminalBench"]["costPerSolvedTaskUsd"] == pytest.approx(66.0 / (66 * 0.5))
-    assert feasibility["r0"]["gdpval"]["costPerSolvedTaskUsd"] is None  # an Elo score is not a solved fraction
-    assert feasibility["unsolved"]["lcr"]["costPerSolvedTaskUsd"] is None and feasibility["gap"]["critpt"]["passCostUsd"] is None
+    assert feasibility["r0"]["omniscience"]["costPerSolvedTaskUsd"] is None  # an index score is not a solved fraction
+    assert feasibility["unsolved"]["hle"]["costPerSolvedTaskUsd"] is None and feasibility["gap"]["critpt"]["passCostUsd"] is None
 
 
 def test_matched_cost_is_unidentified_below_forty_percent_priced_weight(monkeypatch):
-    monkeypatch.setattr(cd, "MATCHED_FAMILIES", {"lcr": cd.MATCHED_FAMILIES["lcr"]})
+    monkeypatch.setattr(cd, "MATCHED_FAMILIES", {"hle": cd.MATCHED_FAMILIES["hle"]})
     result = cd.matched_cost([make_row("a")], MAIN)
     assert result["status"] == "unidentified (priced quality weight below 40%)" and result["rows"] == {} and result["warnings"] == []
 

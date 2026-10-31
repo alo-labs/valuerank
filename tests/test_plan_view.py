@@ -29,8 +29,8 @@ def test_public_rankings_open_on_the_plan_basis(repo_copy, tmp_path):
 
 def test_public_models_carry_basket_run_plan_costs(repo_copy, tmp_path):
     models = {model["name"]: model for model in public_rankings(repo_copy, tmp_path)["models"]}
-    sol = models["GPT-6.1 Sol"]["cost"]
-    opus = models["Claude Opus 5.5"]["cost"]
+    sol = models["GPT-6.1 Sol (max)"]["cost"]
+    opus = models["Claude Opus 5.5 (max)"]["cost"]
     rows = {row["id"]: row for row in json.loads((repo_copy / "data" / "scores.json").read_text())["v3"]["rows"]}
 
     assert sol["apiUsd"] == rows["gpt-6.1-sol"]["api"]["costUsd"]

@@ -240,9 +240,6 @@ def named_figures(scores: dict, data: Path = DATA) -> dict:
         figures[f"{track}.driftFlags"] = series([f"the {group_labels[key]} group (spread share {group['spreadShare'] * 100:.1f}% against a nominal "
                                                  f"{group['nominalShare'] * 100:.1f}%)" for key, group in drift.get("groups", {}).items() if group["flag"]])
         figures[f"{track}.nonDiscriminating"] = series([q.ALL_LEAVES[key].label for key in section["diagnostics"]["nonDiscriminatingLeaves"]])
-        cross = section["diagnostics"]["frontierCodeCrossSource"]
-        figures[f"{track}.fillEffect.mean"] = f"{weights['frontierCode'] / 100 * cross['meanOffset']:.2f}"
-        figures[f"{track}.fillEffect.max"] = f"{weights['frontierCode'] / 100 * cross['maxAbsOffset']:.2f}"
     # O69: rows dated on the cutoff's day, placed before the cutoff by the board's relative age, disclosed.
     figures["cutoffDayRows"] = series([f"{names.get(record['modelId'], record['modelId'])} on {tracks['sources'][record['leaf']]['publisher'].split(' (')[0]}"
                                        for record in tracks["records"] if record.get("cutoffDayRow")]) or "none"

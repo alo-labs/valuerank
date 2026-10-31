@@ -238,7 +238,7 @@ def test_cost_diagnostics_markdown_covers_readiness_family_and_subset_bridges():
             "quality 56.7: 17 can qualify, 5 confirmed; possibly cheapest a, b; quality 60.9: 3 can qualify, 3 confirmed; a confirmed cheapest.") in text
     assert ed.observed_range_text({"status": "unavailable: no bar"}, StubFacts({})).endswith("unavailable: no bar.")
     assert ("- **What would settle the headline bar (E221, not a claim):** rows that can but need not reach quality 56.7, with the mean score their missing leaves would need: "
-            "a 27.3 (FrontierCode 1.1, Terminal-Bench 4.0 (AA run)); b (no missing leaf; reporting precision only).") in text
+            "a 27.3 (FrontierCode 2.0, Terminal-Bench 4.0 (AA run)); b (no missing leaf; reporting precision only).") in text
     assert ed.required_scores_text({"status": "evaluated", "bars": [{"bar": "x", "level": 50.0, "rows": []}]}, StubFacts({})).endswith("no row is open at quality 50.0.")
     assert ed.required_scores_text({"status": "evaluated", "bars": []}, StubFacts({})).endswith("no bar.")
     assert ed.required_scores_text({"status": "unavailable: x", "bars": []}, StubFacts({})).endswith("unavailable: x.")
@@ -271,7 +271,7 @@ def test_coding_share_text_reports_the_median_coding_share():
         return {"cost": {"fullCost": full, "costUsd": sum(costs.values()), "components": list(costs),
                          "componentsDetail": {key: {"costUsd": value} for key, value in costs.items()}}}
 
-    rows = [row({"coding-agent-index": 40.0, "gdpval-aa": 60.0}), row({"coding-agent-index": 10.0, "scicode": 10.0, "gdpval-aa": 80.0}), row({"gdpval-aa": 5.0}, full=False)]
+    rows = [row({"coding-agent-index": 40.0, "gdpval-aa": 60.0}), row({"coding-agent-index": 10.0, "frontiercode-2-0": 10.0, "gdpval-aa": 80.0}), row({"gdpval-aa": 5.0}, full=False)]
     text = ed.coding_share_text({"rows": rows, "admission": {"admitted": ["gdpval-aa"]}})
     assert "make up 30% of the basket's cost (median over 2 configurations with the full basket; 20% to 40%)" in text and "SWE-Atlas" not in text
     # O50: SWE-Atlas QnA's share is stated only while the Coding Agent Index is in the basket.
@@ -352,7 +352,7 @@ def test_common_leaf_and_harness_texts():
                   "bases": {basis: {"rankChanges": {"changes": {"a": 2, "b": -2}}} for basis in ("api", "plan")},
                   "rows": {"a": {"effect": -5.04}}, "flagged": ["a"]}
     text = ed.common_leaf_text(diagnostic, Facts)
-    assert "(FrontierCode 1.1), API 2 rows move; largest move 2 (A, B)" in text and "quality 56.7: 18 → 20" in text and text.endswith("A -5.0.")
+    assert "(FrontierCode 2.0), API 2 rows move; largest move 2 (A, B)" in text and "quality 56.7: 18 → 20" in text and text.endswith("A -5.0.")
     assert ed.common_leaf_text({**diagnostic, "sparseLeaves": [], "flagged": []}, Facts).endswith("one cost doubling's worth: none.")
     assert ed.harness_by_leaf_text(Facts) == "- **Harness by leaf (E227):** Terminal-Bench: mini-SWE-agent 1; Bug Hunt: Claude Code 1."
     Facts.scores = {"models": []}
@@ -371,7 +371,7 @@ def test_gap_fill_and_incomplete_texts_without_rows():
     assert ed.gap_fill_text({"rows": {}, "bases": {}}, Facts).endswith("no ranked row has a leaf from another party or the provider.")
     filled = {"rows": {"claude-opus-5-5": ["frontierCode"]}, "bases": {basis: {"rankChanges": {"changes": {"claude-opus-5-5": -1}}} for basis in ("api", "plan")}}
     assert ed.gap_fill_text(filled, Facts) == ("- **Gap-fill removal (E234, diagnostic; scores unchanged):** with these leaves removed and the rest renormalised — "
-                                               "CLAUDE-OPUS-5-5 (FrontierCode 1.1) — API 1 row moves; largest move 1 (CLAUDE-OPUS-5-5); Plan 1 row moves; largest move 1 (CLAUDE-OPUS-5-5).")
+                                               "CLAUDE-OPUS-5-5 (FrontierCode 2.0) — API 1 row moves; largest move 1 (CLAUDE-OPUS-5-5); Plan 1 row moves; largest move 1 (CLAUDE-OPUS-5-5).")
     assert ed.incomplete_text(Facts) == ""
     Facts.v3 = {"incompleteEvidence": [{"id": "x", "name": "X", "missing": ["bugHunt"]}]}
     Facts.scores = {"models": [{"id": "x", "rankingInclusionReasons": ["Required AA Intelligence Index versus total-evaluation-cost frontier family"]}]}

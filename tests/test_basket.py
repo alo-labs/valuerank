@@ -22,8 +22,8 @@ def test_index_components_reconcile_to_the_published_total():
     assert set(components) == set(b.INDEX_SDLC_TASKS)
     assert components["aa-briefcase"]["costUsd"] == pytest.approx(0.5 * 91)
     assert components["aa-briefcase"]["completeness"] == b.COMPLETE
-    assert components["scicode"]["detail"] == {"tasks": 288, "costPerTaskUsd": 0.5}
-    assert reconciliation["sdlcSevenUsd"] == pytest.approx(0.5 * sum(b.INDEX_SDLC_TASKS.values()))
+    assert components["terminal-bench-science"]["detail"] == {"tasks": 70, "costPerTaskUsd": 0.5}
+    assert reconciliation["sdlcUsd"] == pytest.approx(0.5 * sum(b.INDEX_SDLC_TASKS.values()))
     assert reconciliation["residualUsd"] == pytest.approx(0.5 * sum(b.INDEX_RESIDUAL_TASKS.values()))
     assert reconciliation["reconciled"] is True and reconciliation["relativeError"] == pytest.approx(0.0)
 
@@ -36,15 +36,15 @@ def test_index_components_unresolved_when_totals_disagree():
 
 
 def test_index_components_without_a_full_set_or_published_total_cannot_reconcile():
-    components, reconciliation = b.index_components(evaluations(skip="critpt"), published_total())
+    components, reconciliation = b.index_components(evaluations(skip="critpt-v2-hard"), published_total())
     assert reconciliation["relativeError"] is None and reconciliation["reconciled"] is False
-    assert len(components) == 7
-    components, reconciliation = b.index_components(evaluations(skip="scicode"), None)
-    assert "scicode" not in components and reconciliation["publishedTotalUsd"] is None
+    assert len(components) == 6
+    components, reconciliation = b.index_components(evaluations(skip="terminal-bench-science"), None)
+    assert "terminal-bench-science" not in components and reconciliation["publishedTotalUsd"] is None
     _components, reconciliation = b.index_components(evaluations(), 0)
     assert reconciliation["relativeError"] is None
     _components, reconciliation = b.index_components([{"slug": "aa-briefcase", "costPerTask": None}], 10.0)
-    assert reconciliation["sdlcSevenUsd"] == 0
+    assert reconciliation["sdlcUsd"] == 0
 
 
 def cai_record(total=290.0, mean=1.0, attempts=(300, 372, 198)):
@@ -110,38 +110,23 @@ DECLINED = b.component_cost(1.0, completeness=b.INCOMPLETE, source="s")
 def test_admitted_components_require_two_thirds_of_ranked_rows():
     ranked = ["a", "b", "c"]
     costs = {
-        "a": {b.CODING_AGENT_INDEX: FULL, "aa-briefcase": FULL, "scicode": FULL},
-        "b": {b.CODING_AGENT_INDEX: FULL, "scicode": FULL},
-        "c": {"scicode": FULL},
+        "a": {b.CODING_AGENT_INDEX: FULL, "aa-briefcase": FULL, "terminal-bench-science": FULL},
+        "b": {b.CODING_AGENT_INDEX: FULL, "terminal-bench-science": FULL},
+        "c": {"terminal-bench-science": FULL},
     }
     admitted = b.admitted_components(costs, ranked)
     assert admitted[b.CODING_AGENT_INDEX] == {"admitted": True, "covered": 2, "available": 2, "ranked": 3}
     assert admitted["aa-briefcase"]["admitted"] is False
-    assert admitted["scicode"]["admitted"] is True
+    assert admitted["terminal-bench-science"]["admitted"] is True
     assert admitted["itbench-aa"]["covered"] == 0
     assert set(admitted) == set(b.TARGET_COMPONENTS)
-
-
-def test_frontiercode_stands_in_only_while_the_coding_agent_index_is_not_admitted():
-    """O116: FrontierCode's chart total is a unit only in a ranking that has not admitted the Coding Agent Index (never both)."""
-
-    ranked = ["a", "b", "c"]
-    pending = {row: {b.FRONTIERCODE: FULL, "scicode": FULL} for row in ranked}
-    pending["a"][b.CODING_AGENT_INDEX] = FULL
-    panel = b.admission_panel(pending, ranked)
-    assert panel["admitted"] == [b.FRONTIERCODE, "scicode"]
-    assert panel["components"][b.FRONTIERCODE]["standsInFor"] == b.CODING_AGENT_INDEX and panel["components"][b.FRONTIERCODE]["eligible"]
-    both = {row: {b.FRONTIERCODE: FULL, b.CODING_AGENT_INDEX: FULL, "scicode": FULL} for row in ranked}
-    panel = b.admission_panel(both, ranked)
-    assert panel["admitted"] == [b.CODING_AGENT_INDEX, "scicode"] and not panel["components"][b.FRONTIERCODE]["eligible"]
-    assert b.admission_panel({}, [])["components"][b.FRONTIERCODE]["eligible"]
 
 
 def test_admission_panel_is_joint_and_deterministic():
     """E95: components that pass alone but not together are admitted in coverage order."""
 
     ranked = ["a", "b", "c", "d", "e", "f"]
-    costs = {row: {"scicode": FULL} for row in ranked}
+    costs = {row: {"terminal-bench-science": FULL} for row in ranked}
     for row in ("a", "b", "c", "d", "e"):
         costs[row][b.CODING_AGENT_INDEX] = FULL
     for row in ("b", "c", "d", "e", "f"):
@@ -163,13 +148,13 @@ def test_admission_counts_complete_evidence_not_mere_availability():
     """E101 fixture: exact costs for two-thirds of rows, some carrying AA's declined-task marker."""
 
     ranked = ["a", "b", "c"]
-    costs = {"a": {"aa-briefcase": FULL, "scicode": FULL}, "b": {"aa-briefcase": DECLINED, "scicode": FULL}, "c": {"scicode": FULL}}
+    costs = {"a": {"aa-briefcase": FULL, "terminal-bench-science": FULL}, "b": {"aa-briefcase": DECLINED, "terminal-bench-science": FULL}, "c": {"terminal-bench-science": FULL}}
     panel = b.admission_panel(costs, ranked)
     briefcase = panel["components"]["aa-briefcase"]
     assert briefcase["available"] == 2 and briefcase["covered"] == 1 and briefcase["admitted"] is False
     assert panel["matrices"]["exactCostAvailable"]["b"]["aa-briefcase"] is True
     assert panel["matrices"]["completeCostEvidence"]["b"]["aa-briefcase"] is False
-    assert panel["admitted"] == ["scicode"] and panel["exactCostPanel"] == ["a", "b", "c"]
+    assert panel["admitted"] == ["terminal-bench-science"] and panel["exactCostPanel"] == ["a", "b", "c"]
 
 
 def test_admitted_components_with_no_ranked_rows():

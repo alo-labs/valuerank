@@ -127,7 +127,7 @@ def test_provisional_rule_reports_every_failed_condition():
         "coverage 22% below 70%",
         "1 SWE leaves observed (need 2)",
         "observed SWE weight 12% below 40%",
-        "FrontierCode 1.1 missing",
+        "FrontierCode 2.0 missing",
     )
 
 
@@ -138,7 +138,7 @@ def test_provisional_when_only_frontiercode_is_missing():
         summary = q.summarize(observations)
     assert summary.coverage == pytest.approx(0.79)
     # Coverage clears 70%, but the other SWE leaves carry only 39% of quality, and FrontierCode weighs 21% (O55).
-    assert summary.provisional_reasons == ("observed SWE weight 39% below 40%", "FrontierCode 1.1 missing")
+    assert summary.provisional_reasons == ("observed SWE weight 39% below 40%", "FrontierCode 2.0 missing")
 
 
 def test_summarize_with_no_observations_has_no_displayed_quality():
@@ -172,6 +172,6 @@ def test_clip_audit_discloses_saturation_and_rejects_domain_violations():
     assert q.clip_audit("hle", 0.5)["unclippedZ"] == 50.0
     omni = q.clip_audit("omniscience", 43.4)
     assert omni["raw"] == 43.4 and omni["unclippedZ"] == pytest.approx(71.7)
-    for key, raw in (("terminalBench", 101.0), ("scicode", -0.1), ("omniscience", 120.0), ("gdpval", float("nan")), ("lcr", True), ("hle", None)):
+    for key, raw in (("terminalBench", 101.0), ("tbScience", -0.1), ("omniscience", 120.0), ("gdpval", float("nan")), ("lcr", True), ("hle", None)):
         bad = q.clip_audit(key, raw)
         assert bad["domainValid"] is False and bad["action"].startswith("reject") and bad["unclippedZ"] is None

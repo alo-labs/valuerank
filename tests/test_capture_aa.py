@@ -14,7 +14,15 @@ import pytest
 
 from valuerank import capture_aa as ca
 
-NOW = "2026-10-25T09:56:47Z"  # pinned_clock instant
+NOW = "2026-10-25T09:56:47Z"  # this module's pinned instant: the fixture captures are dated relative to it
+
+
+@pytest.fixture
+def pinned_clock(monkeypatch: pytest.MonkeyPatch) -> str:
+    """The capture fixtures are dated around the 2026-10-25 release, so this module keeps that instant."""
+
+    monkeypatch.setenv("VALUERANK_NOW", NOW)
+    return NOW
 
 
 def _shifted(delta: timedelta) -> str:
@@ -166,7 +174,7 @@ def test_capture_fetches_and_decodes_page(net):
     result = ca.capture(entry(), {})
     assert result == {
         "id": "m", "requestedName": "M", "url": "https://artificialanalysis.ai/models/m",
-        "model": {"slug": "m", "intelligenceIndex": 50},
+        "model": {"slug": "m", "intelligenceIndex": 50, "notes": []},
         "capture": {"status": 200, "contentType": "text/html; charset=utf-8", "responseBytes": len(body),
                     "responseSha256": hashlib.sha256(body).hexdigest()},
     }
@@ -264,11 +272,11 @@ def test_main_writes_snapshot_with_expected_shape(world, net, capsys):
     assert ca.main() == 0
     document = json.loads((world / "aa_v432_snapshot.json").read_text())
     assert document["schemaVersion"] == "valuerank-aa-page-snapshot/v2"
-    assert document["benchmarkVersion"] == "Artificial Analysis Intelligence Index v4.3.2"
+    assert document["benchmarkVersion"] == "Artificial Analysis Intelligence Index v5.0"
     assert document["capturedAt"] == NOW and document["concurrency"] == 4
     assert document["source"].endswith("/evaluations/artificial-analysis-intelligence-index")
     assert [page["id"] for page in document["pages"]] == ["a", "b"]  # input order preserved
-    assert document["pages"][0]["model"] == {"slug": "a"}
+    assert document["pages"][0]["model"] == {"slug": "a", "notes": []}
     printed = json.loads(capsys.readouterr().out)
     assert printed == {"models": 2, "uniqueIds": 2, "benchmarkVersion": document["benchmarkVersion"],
                        "capturedAt": NOW, "output": "data/aa/aa_v432_snapshot.json"}
@@ -344,4 +352,13 @@ def test_module_guard_exits_with_main_status(tmp_path, monkeypatch, pinned_clock
     with pytest.warns(RuntimeWarning), pytest.raises(SystemExit) as exit_info:
         runpy.run_module("valuerank.capture_aa", run_name="__main__", alter_sys=True)
     assert exit_info.value.code == 0
-    assert json.loads((aa / "aa_v432_snapshot.json").read_text())["pages"][0]["model"] == {"slug": "a"}
+    assert json.loads((aa / "aa_v432_snapshot.json").read_text())["pages"][0]["model"] == {"slug": "a", "notes": []}
+
+
+def test_capture_records_the_notes_aa_prints_verbatim(net):
+    """O103: the "* <text>" notes AA prints on a page are recorded beside its model object, once each."""
+
+    note = "Claude Haiku 5.5 has 5x higher pricing on longer-context inputs which are not currently reflected"
+    body = (page_html({"slug": "m"}) + f'<script>self.x("* {note}")</script><p>"* {note}"</p>').encode()
+    net.pages["https://artificialanalysis.ai/models/m"] = FakeResponse(body)
+    assert ca.capture(entry(), {})["model"]["notes"] == [note]

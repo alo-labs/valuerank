@@ -27,7 +27,7 @@ ALL_TASKS = {**basket.INDEX_SDLC_TASKS, **basket.INDEX_RESIDUAL_TASKS}
 # The engine's fixtures predate the two rankings (O53): they are scored on one ten-leaf ranking with the O49 weights.
 # The engine is the same for every leaf table; the rankings' own leaf sets are tested in test_tracks.py.
 FIXTURE_LEAVES = (
-    q.Leaf("frontierCode", "FrontierCode 1.1", "swe", 25.0, "aa"),
+    q.Leaf("frontierCode", "FrontierCode 2.0", "swe", 25.0, "aa"),
     q.Leaf("terminalBench", "Terminal-Bench 4.0 (AA run)", "swe", 20.0, "aa"),
     q.Leaf("bugHunt", "Bug Hunt Bench", "swe", 15.0, "independent"),
     *q.COMMON_LEAVES,
@@ -54,12 +54,12 @@ def page(slug: str, cost_per_task: float, **fields) -> dict:
         "intelligenceIndexCost": {"total": cost_per_task * sum(ALL_TASKS.values())},
         "gdpval": 1500.0,
         "automationBenchPartialScore": 0.5,
-        "frontierCode": 0.45,
+        "frontierCode20": 0.45,
         "terminalBench40": 0.5,
         "lcr": 0.8,
-        "hle": 0.3,
-        "scicode": 0.4,
-        "critpt": 0.2,
+        "hleDiamond": 0.3,
+        "terminalBenchScience": 0.4,
+        "critptAgenticHard": 0.2,
         "omniscience": 30.0,
         "omniscienceAccuracy": 0.5,
         "omniscienceHallucinationRate": 0.4,
@@ -82,7 +82,7 @@ REGISTRY = {leaf.key: ["Registered party"] for leaf in FIXTURE_LEAVES}
 
 def documents(**overrides) -> dict:
     base = {
-        "snapshot": {"pages": [page("a-max", 1.0), page("b-max", 4.0, gdpval=2000.0), page("c-max", 0.5, frontierCode=None)]},
+        "snapshot": {"pages": [page("a-max", 1.0), page("b-max", 4.0, gdpval=2000.0), page("c-max", 0.5, frontierCode20=None)]},
         "bugHunt": {"models": [
             {"modelId": "a", "matched": True, "effort": "max", "fixedOf105": 52.0, "sampleN": 3},
             {"modelId": "b", "matched": False, "fixedOf105": None},
@@ -184,14 +184,14 @@ def test_leaf_evidence_uses_exact_configurations_only():
     index_only = v.leaf_evidence("x", "max", {"omniscience": -20.0}, [], None)
     assert index_only["observations"]["omniscience"].z == 40.0 and index_only["provenance"]["omniscience"]["indexFromRates"] is None
     with pytest.raises(ValueError, match="outside its documented domain"):
-        v.leaf_evidence("x", "max", {"hle": 1.5}, [], None)
+        v.leaf_evidence("x", "max", {"hleDiamond": 1.5}, [], None)
 
 
 def test_components_and_restricted_cost():
     components, reconciliation = v.row_components(page("a-max", 1.0)["model"], None, {"itbench-aa": None})
     assert set(components) == set(basket.INDEX_SDLC_TASKS) and reconciliation["reconciled"] is True
-    assert v.restricted_cost(components, ["scicode"]) == 288.0
-    assert v.restricted_cost(components, ["scicode", basket.CODING_AGENT_INDEX]) is None
+    assert v.restricted_cost(components, ["terminal-bench-science"]) == 70.0
+    assert v.restricted_cost(components, ["terminal-bench-science", basket.CODING_AGENT_INDEX]) is None
 
 
 def test_assemble_admission_subset_rows_and_plan_costs():
@@ -245,7 +245,7 @@ def test_anchor_population_is_the_complete_evidence_panel_and_thin_subsets_have_
     assert v.freeze(reordered, frozen_at="d")["workloads"] == v.freeze(result, frozen_at="d")["workloads"]
     unresolved = assembled()
     row_b = next(row for row in unresolved["rows"] if row["id"] == "b")
-    row_b["components"]["scicode"] = dict(row_b["components"]["scicode"], completeness=basket.UNRESOLVED)
+    row_b["components"]["terminal-bench-science"] = dict(row_b["components"]["terminal-bench-science"], completeness=basket.UNRESOLVED)
     assert v.anchor_population(unresolved, unresolved["admitted"]) == ["a"]
     original = v.anchor_population
 
@@ -376,7 +376,8 @@ def test_partial_component_rows_are_flagged():
 
 
 def test_cost_influence_flag_fires_when_quality_dominates():
-    pages = [page("a-max", 1.0, hle=0.0, scicode=0.0, critpt=0.0, lcr=0.0), page("b-max", 1.0001, hle=1.0, scicode=1.0, critpt=1.0, lcr=1.0), page("c-max", 0.5)]
+    pages = [page("a-max", 1.0, hleDiamond=0.0, terminalBenchScience=0.0, critptAgenticHard=0.0, lcr=0.0),
+             page("b-max", 1.0001, hleDiamond=1.0, terminalBenchScience=1.0, critptAgenticHard=1.0, lcr=1.0), page("c-max", 0.5)]
     agents = documents()["codingAgents"]
     agents["configurations"][1]["meanCostPerTaskUsd"] = 2.0
     result, frozen = scored(snapshot={"pages": pages}, codingAgents=agents)
@@ -764,13 +765,14 @@ def test_abstention_sensitivity_and_demand_registry():
     stability = output["diagnostics"]["anchorStability"]
     assert stability["exchangeRateSeries"][0]["anchorVersion"] == frozen["anchorVersion"]
     tokens = v.demand_registry(
-        {"intelligenceIndexEvaluations": [{"slug": "scicode", "outputTokensPerTask": 10.0}, {"slug": "critpt", "outputTokensPerTask": 1.0}],
+        {"intelligenceIndexEvaluations": [{"slug": "terminal-bench-science", "outputTokensPerTask": 10.0}, {"slug": "critpt-v2-hard", "outputTokensPerTask": 1.0}],
          "canonicalIntelligenceIndexTokenCount": {"input": 9, "output": 5, "reasoning": 3, "answer": 2}},
-        ["scicode", "gdp-pdf"],
+        ["terminal-bench-science", "gdp-pdf"],
     )
     population = tokens["populations"]["intelligence-index"]
     # Residual (excluded) evaluations keep their demand outside W; the Coding Agent Index is not admitted here.
-    assert population["componentOutputTokens"] == {"scicode": 2880.0, "critpt": 70.0} and population["scoredComponents"] == ["gdp-pdf", "scicode"]
+    assert population["componentOutputTokens"] == {"terminal-bench-science": 700.0, "critpt-v2-hard": 40.0}
+    assert population["scoredComponents"] == ["gdp-pdf", "terminal-bench-science"]
     assert population["outputEqualsReasoningPlusAnswer"] is True and set(tokens["populations"]) == {"intelligence-index"}
     assert tokens["tokenOntology"]["canonicalIntelligenceIndexTokenCount.output"]["mapping"] == "inclusive"
 
@@ -1182,7 +1184,7 @@ def gated_world(gate_page, records):
 
 def gated_world_documents(gate_page, records):
     # O49: b's FrontierCode (25%) keeps it the highest-quality row, as its DeepSWE did before.
-    pages = [gate_page, page("b-max", 4.0, frontierCode=0.75), page("c-max", 0.5), page("d-max", 2.0)]
+    pages = [gate_page, page("b-max", 4.0, frontierCode20=0.75), page("c-max", 0.5), page("d-max", 2.0)]
     agents = documents()["codingAgents"]
     agents["configurations"].append({"label": "Agent - D (max)", "meanCostPerTaskUsd": 3.0, "totalCostUsd": 900.0, "components": []})
     mapping = documents()["configurationMap"]
@@ -1686,20 +1688,22 @@ def test_sampling_noise_per_leaf_and_rank_separability():
     """O39: plug-in binomial noise from each leaf's task count, GDPval-AA from its assumed rating interval, Omniscience
     from its +1/0/-1 question shares; the separability diagnostic counts adjacent ranks apart by more than that noise."""
 
-    assert v.sampling_sd("frontierCode", q.Observation(50.0), {}) == pytest.approx(100 * (0.25 / 100) ** 0.5)
+    assert v.sampling_sd("frontierCode", q.Observation(50.0), {}) == pytest.approx(100 * (0.25 / 132) ** 0.5)  # FrontierCode 2.0's 132 tasks (O136)
     assert v.sampling_sd("gdpval", q.Observation(55.0), {}) == pytest.approx(26.0 / 1.96 / 20.0)
     ternary = v.sampling_sd("omniscience", q.Observation(60.0), {"accuracy": 0.5, "hallucinationRate": 0.4})
-    assert ternary == pytest.approx(100 * ((0.5 + 0.2 - 0.3 ** 2) / 6000) ** 0.5 / 2)
-    jeffreys = 3600.5 / 6001
-    assert v.sampling_sd("omniscience", q.Observation(60.0), {}) == pytest.approx(100 * (jeffreys * (1 - jeffreys) / 6000) ** 0.5)
+    # O136: AA-Omniscience v1.1 has 3,000 questions.
+    assert ternary == pytest.approx(100 * ((0.5 + 0.2 - 0.3 ** 2) / 3000) ** 0.5 / 2)
+    jeffreys = 1800.5 / 3001
+    assert v.sampling_sd("omniscience", q.Observation(60.0), {}) == pytest.approx(100 * (jeffreys * (1 - jeffreys) / 3000) ** 0.5)
     # I28: a 0% or 100% score keeps a positive spread under the (k + 1/2) / (n + 1) proportion.
-    assert v.sampling_sd("critpt", q.Observation(0.0), {}) == pytest.approx(100 * ((0.5 / 71) * (70.5 / 71) / 70) ** 0.5)
+    assert v.sampling_sd("critpt", q.Observation(0.0), {}) == pytest.approx(100 * ((0.5 / 41) * (40.5 / 41) / 40) ** 0.5)  # CritPt v2's 40 problems
     result, frozen = scored()
     output = v.score(result, frozen)
     separability = output["diagnostics"]["rankSeparability"]
-    # The fixture's c is a subset-workload row ranked between a and b, so both adjacent pairs cross workloads (reviewer 73).
-    assert set(separability["valueSd"]) == {"a", "b", "c"} and separability["api"]["adjacentPairs"] == 0
-    assert separability["api"]["crossWorkloadAdjacentPairs"] == 2 and separability["api"]["medianSeparation"] is None
+    # The fixture's c is a subset-workload row, so its adjacent pairs cross workloads and are counted apart (reviewer 73).
+    api = separability["api"]
+    assert set(separability["valueSd"]) == {"a", "b", "c"} and api["adjacentPairs"] + api["crossWorkloadAdjacentPairs"] == 2
+    assert api["crossWorkloadAdjacentPairs"] >= 1 and (api["medianSeparation"] is None) == (api["adjacentPairs"] == 0)
     assert len(separability["assumptions"]) == len(v.SAMPLING_ASSUMPTIONS) == 5
     lone = v.rank_separability({"rows": result["rows"][:1]}, {"a": {basis: {"value": 1.0} for basis in v.BASES}})
     assert {key: lone["api"][key] for key in ("adjacentPairs", "separableAdjacentPairs", "medianSeparation")} == {"adjacentPairs": 0, "separableAdjacentPairs": 0, "medianSeparation": None}
@@ -1742,7 +1746,7 @@ def test_rank_bands_correlation_grid_and_listed_indicative_values():
     assert output["listedIndicative"] == []
     # O41: a frontier-family configuration listed for a missing leaf keeps an indicative value apart from the ranking.
     configurations = [dict(item, frontierFamily=True) for item in CONFIGURATIONS]
-    pages = [page("a-max", 1.0), page("b-max", 4.0), page("c-max", 0.5, hle=None)]
+    pages = [page("a-max", 1.0), page("b-max", 4.0), page("c-max", 0.5, hleDiamond=None)]
     listed = v.assemble(configurations, documents(snapshot={"pages": pages}, leafEvidence=searched("c")), release_day=DAY)
     (entry,) = v.listed_indicative(listed, frozen)
     assert entry["id"] == "c" and entry["missing"] == ["hle"] and entry["label"].startswith("not ranked, not comparable")
@@ -1872,18 +1876,19 @@ def test_an_agent_pin_must_be_the_exact_record_when_one_exists():
     assert v.parse_agent_label("Claude Code - Fable 5.1 (max) (with fallback)") == {"agent": "Claude Code", "model": "Fable 5.1", "effort": "max"}
     assert v.exact_agent_records(luna, records) == [] and v.exact_agent_records(odd, records) == []  # mixed or self-contradicting labels
     assert v.exact_agent_records(fable, records) == ["Claude Code - Fable 5.1 (max) (with fallback)"]
-    assert v.exact_agent_records(mimo, records) == ["Claude Code - MiMo-V2.6-Pro"] and v.exact_agent_records(flash, records) == []
+    # O140: MiMo-V2.6-Flash's one reasoning mode (thinking on, default) is the "high" record.
+    assert v.exact_agent_records(mimo, records) == ["Claude Code - MiMo-V2.6-Pro"] and v.exact_agent_records(flash, records) == ["Kimi Code CLI - MiMo-V2.6-Flash (high)"]
     pins = {"ds": {basket.CODING_AGENT_INDEX: "DeepSeek Harness - DeepSeek V4.1 Flash 1017 ({'reasoning_effort': 'max'})"},
             "fable": {basket.CODING_AGENT_INDEX: "Claude Code - Fable 5.1 (max) (with fallback)"},
             "mimo-v2-6-pro": {basket.CODING_AGENT_INDEX: "Claude Code - MiMo-V2.6-Pro"}}
     # E267 (I52 M1): the record is derived; a pin is only a choice among several exact records, and any other pin stops.
     assert [v.agent_record_for(row, pins, records) for row in (ds, luna, fable, mimo, flash)] == [
         "DeepSeek Harness - DeepSeek V4.1 Flash 1017 ({'reasoning_effort': 'max'})", None, "Claude Code - Fable 5.1 (max) (with fallback)",
-        "Claude Code - MiMo-V2.6-Pro", None]
+        "Claude Code - MiMo-V2.6-Pro", "Kimi Code CLI - MiMo-V2.6-Flash (high)"]
     assert v.parse_agent_label("Odd - X (max) ({'reasoning_effort': 'low'})") is None  # a disagreeing pair never reads
     assert v.agent_record_for(ds, {}, records) == "DeepSeek Harness - DeepSeek V4.1 Flash 1017 ({'reasoning_effort': 'max'})"
     for row, pin in ((ds, "DeepSeek Harness - DeepSeek V4.1 Flash 1017 (max)"), (luna, "Codex - GPT-6 Luna (max) + GPT-6 Sol (max)"),
-                     (flash, "Kimi Code CLI - MiMo-V2.6-Flash (high)")):
+                     (flash, "Claude Code - MiMo-V2.6-Pro")):
         with pytest.raises(ValueError, match=f"{row['id']}: its Coding Agent Index pin .* is not an exact record"):
             v.agent_record_for(row, {row["id"]: {basket.CODING_AGENT_INDEX: pin}}, records)
     twice = {**records, "Other Agent - DeepSeek V4.1 Flash 1017 (max)": {}}
@@ -1898,20 +1903,11 @@ def test_an_agent_pin_must_be_the_exact_record_when_one_exists():
     assert v.exact_agent_records(mimo, {"A - MiMo-V2.6-Pro (high)": {}}) == ["A - MiMo-V2.6-Pro (high)"]
 
 
-def test_frontiercode_cross_source_joins_cognition_on_family_and_effort():
-    """I53 M3, I54 L3: Cognition's board is keyed by family then effort; effort-qualified names must still join."""
+def test_frontiercode_cross_source_is_retired_across_versions():
+    """O136: the leaf is FrontierCode 2.0 and Cognition's board 1.1, so the comparison is retired and says why."""
 
-    def row(row_id, family, effort, z):
-        return {"id": row_id, "name": f"{family} ({effort})", "family": family, "effort": effort,
-                "evidence": {"provenance": {}, "observations": {"frontierCode": SimpleNamespace(z=z)}}}
-
-    rows = [row("a", "Fam A", "high", 40.0), row("b", "Fam A", "max", 50.0), row("c", "Fam B", "max", 30.0), row("d", "Fam C", "max", 20.0)]
-    board = {"v1_1": {"data": {"Fam A": {"high": {"main": {"new_score": 0.42}}, "max": {"main": {"new_score": 0.53}}},
-                               "Fam B": {"max": {"main": {"new_score": 0.31}}}}}}
-    result = v.frontiercode_cross_source(rows, board)
-    assert result["panel"] == ["a", "b", "c"] and result["meanOffset"] == pytest.approx(2.0) and result["maxAbsOffset"] == pytest.approx(3.0)
-
-
+    result = v.frontiercode_cross_source([], {"v1_1": {"data": {}}})
+    assert result["status"] == v.FRONTIERCODE_CROSS_SOURCE_RETIRED and result["panel"] == [] and result["meanOffset"] is None
 
 def test_the_manifest_registers_every_aa_row_and_matches_the_grammar():
     """O64 (I56 M1): the real manifest covers every captured row and agrees with the E267 grammar for every cohort row."""

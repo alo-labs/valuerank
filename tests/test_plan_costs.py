@@ -498,7 +498,7 @@ def test_every_claude_model_resolves_to_a_claude_plan_route_at_opus_55_multiples
     routes = plan_costs.load_plan_routes(repo_copy / "data" / "plan_cost_routes.json")
     mapping = json.loads((repo_copy / "data" / "aa_mapping.json").read_text(encoding="utf-8"))
     claude_ids = [entry["id"] for entry in mapping if entry["id"].startswith("claude-")]
-    assert "claude-haiku-5-5" in claude_ids and "claude-sonnet-5-5" in claude_ids and "claude-fable-5-1" in claude_ids
+    assert "claude-haiku-5-5-high" in claude_ids and "claude-sonnet-5-5" in claude_ids and "claude-opus-5-5" in claude_ids
     opus = plan_costs.select_best_route("claude-opus-5-5", routes)
     assert opus["provider"] == "Anthropic" and opus["evidenceClass"] == "controlled_account_workload_projection"
     for model_id in claude_ids:
