@@ -58,7 +58,8 @@ def test_offline_stages_regenerate_the_committed_publication(repo_copy, pinned_c
 
 @pytest.mark.integration
 def test_reconciliation_gate_blocks_a_stale_inventory(repo_copy, monkeypatch):
-    monkeypatch.setenv("VALUERANK_NOW", "2026-11-03T00:00:00Z")
+    # The committed AA inventory was observed 2026-10-30T22:15:18Z; more than MAX_AGE_DAYS (7) later it is stale.
+    monkeypatch.setenv("VALUERANK_NOW", "2026-11-10T00:00:00Z")
 
     completed = subprocess.run(
         [sys.executable, "-m", "valuerank.aa_reconciliation"], cwd=repo_copy, capture_output=True, text=True

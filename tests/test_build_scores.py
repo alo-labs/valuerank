@@ -65,8 +65,8 @@ def log_searches(*model_ids):
     """O36: an exhaustive search logged on the cutoff for every leaf of the named configurations, with its open-web step (I28)."""
 
     def fn(document):
-        document["searches"] += [{"modelId": model_id, "leaf": leaf.key, "searchedOn": "2026-10-21", "result": "not found", "sources": [],
-                                  "openWeb": {"searchedOn": "2026-10-21", "queries": [f"{model_id} {leaf.key}"], "candidates": []}}
+        document["searches"] += [{"modelId": model_id, "leaf": leaf.key, "searchedOn": "2026-10-30", "result": "not found", "sources": [],
+                                  "openWeb": {"searchedOn": "2026-10-30", "queries": [f"{model_id} {leaf.key}"], "candidates": []}}
                                  for model_id in model_ids for leaf in quality.ALL_LEAVES.values()]
     return fn
 
@@ -683,14 +683,6 @@ def unmatch_all_bug_hunt(document):
         model["matched"] = False
 
 
-def defer_near_family(family):
-    def fn(document):
-        for row in document["nearFrontierRows"]:
-            if row["family"] == family:
-                row["requiredFamilyModelId"] = None
-    return fn
-
-
 def test_without_bug_hunt_every_configuration_needs_a_logged_search(world):
     """O36: Bug Hunt is a required leaf, so with no match anywhere the build refuses until each gap's search is logged."""
 
@@ -1259,9 +1251,10 @@ def test_near_family_without_overlap_coverage_still_ranks(world):
     assert model["rankingEligible"] is False and model["rank"] is None and model["rankingStatus"] == "excluded_incomplete_benchmarks"
     assert model["rankingInclusionReasons"] == [
         "Near-frontier AA family (within 3 Index points of the rendered frontier)"]
+    # O136: FrontierCode 2.0 is read from the AA page (cloned for the fixture), so only the non-AA leaves are missing.
     assert model["rankingExclusionReasons"] == [
-        "Incomplete benchmark evidence after an exhaustive search (O36, O53): Max-effort ranking: no FrontierCode 1.1, Bug Hunt Bench, Vibe Code Bench v1.1 (Vals), "
-        "Code Migration v1.1 (Vals), LiveBench 2.0 Overall; AI Coding Daily ranking: no FrontierCode 1.1, Bug Hunt Bench, "
+        "Incomplete benchmark evidence after an exhaustive search (O36, O53): Max-effort ranking: no Bug Hunt Bench, Vibe Code Bench v1.1 (Vals), "
+        "Code Migration v1.1 (Vals), LiveBench 2.0 Overall; AI Coding Daily ranking: no Bug Hunt Bench, "
         "AI Coding Daily (excl. bug finding)"]
     assert (model["aaFrontierTier"], model["aaFrontierConfiguration"], model["aaFrontierIntelligenceGap"]) == ("near", "GPT-5.5 (medium)", 1)
     assert model["aaFrontierFootnote"] == "note for gpt-5-5"

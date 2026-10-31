@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import json
+import re
 import runpy
 import shutil
 import sys
@@ -86,8 +87,8 @@ def test_lint_flags_unmarked_today_figures_names_and_undated_counts():
     assert [problem.split(" in an")[0] for problem in widened] == [
         "line 1: unmarked count(s) 14 leaves", "line 2: unmarked count(s) 29 configurations, $10.63", "line 4: unmarked count(s) 4 against 5"]
     # I44 L1: a configuration named with its plan or fallback states a current route.
-    routed = f.lint("Low end: GPT-6 Luna (max) on ChatGPT Pro 500 and Gemini 4 Argon (high) on API-cost fallback.", names, configurations, "2026-10-23")
-    assert routed[0].startswith("line 1: unmarked configuration route(s) Gemini 4 Argon (high), GPT-6 Luna (max)")
+    routed = f.lint("Low end: GPT-6.1 Terra (max) on API-cost fallback and GPT-6 Luna (max) on ChatGPT Pro 500.", names, configurations, "2026-10-23")
+    assert routed[0].startswith("line 1: unmarked configuration route(s) GPT-6.1 Terra (max), GPT-6 Luna (max)")
     assert f.dated("**Rule (O1, 2026-10-01)**: text", "2026-10-23") is False and f.dated("Seen on 2026-10-23.", "2026-10-23") is False
     assert f.dated("Seen on 2026-10-01.", None) is True
 
@@ -198,10 +199,20 @@ def test_registry_figures_name_changes_and_refuse_two_semianalysis_dates():
     assert f.registry_figures(capture, plan, "2026-10-23")["evidence.reportRoutes"] == "none"
 
 
-def test_duplicate_rows_name_the_chosen_harness():
-    """I50 M2: a configuration a board lists twice is named with the row the selection rule chose."""
+def test_duplicate_rows_name_the_chosen_harness(tmp_path):
+    """I50 M2: a configuration a board lists twice is named with the row the selection rule chose (no board lists a v5
+    configuration twice, so one AI Coding Daily record is given a second row)."""
 
-    assert "DeepSeek Harness chosen over OpenCode by the harness of its Bug Hunt record" in f.named_figures(SCORES)["duplicateRows"]
+    assert f.named_figures(SCORES)["duplicateRows"] == "none"
+    data = tmp_path / "data"
+    shutil.copytree(DATA, data, ignore=shutil.ignore_patterns("site", "*.html"))
+    tracks = json.loads((data / "swe_tracks.json").read_text())
+    record = next(record for record in tracks["records"] if record["leaf"] == "aiCodingDaily" and record["modelId"] == "gpt-6.1-sol-high")
+    record.update(harness="Codex CLI", selection="one of 2 rows for this configuration, chosen by the harness of its Bug Hunt record (I50 M2)",
+                  alternates=[{"harness": "OpenCode", "tested": "2026-10-17", "value": record["value"] - 1}])
+    (data / "swe_tracks.json").write_text(json.dumps(tracks))
+    assert f.named_figures(SCORES, data)["duplicateRows"] == (
+        f"{f.display_names(SCORES)['gpt-6.1-sol-high']} on AI Coding Daily (Codex CLI chosen over OpenCode by the harness of its Bug Hunt record)")
 
 
 def test_names_render_from_ids_and_names_in_undated_sentences_are_flagged():
@@ -245,7 +256,9 @@ def test_excluded_configurations_partition_into_five_classes():
     order = lambda ids: f.series([names[item] for item in sorted(ids)])
     excluded = {item["id"] for item in SCORES["v3"]["incompleteEvidence"]} & {item["id"] for item in SCORES["v3Tracks"]["aicd"]["incompleteEvidence"]}
     figures = f.family_figures(SCORES, excluded, order)
-    assert figures["excluded.nearFamilyPoints"] == "GPT-6 Astra (xhigh)"
+    assert figures["excluded.frontierPrimaries"] == "Claude Opus 5.5 (xhigh), Gemini 4 Carbon (high), GPT-6 Astra (xhigh) and MiMo-V2.6-Flash"
+    assert figures["excluded.frontierPoints"] == "Claude Haiku 5.5 (low), GPT-6 Luna (low), GPT-6.1 Sol (xhigh) and GPT-6.1 Terra (low)"
+    assert figures["excluded.nearPrimaries"] == figures["excluded.nearPoints"] == figures["excluded.nearFamilyPoints"] == "none"
     with pytest.raises(f.FigureError, match="do not partition"):
         f.family_figures(SCORES, excluded | {"not-in-the-cohort"}, order)
 
@@ -260,7 +273,11 @@ def test_absence_statements_carry_a_marker_whose_claim_holds(tmp_path):
     """I60 M2: a sentence saying a source publishes or carries no field carries an {{absent:KEY}} marker, and the claim
     is tested against the pinned data, so a field that appears forces the sentence to change."""
 
-    assert all(test(DATA) for _, test in f.ABSENCE_CLAIMS.values())
+    # Every claim the published draft cites holds against the pinned data. (bughunt.minimaxFlash names MiniMax-M3.1-Flash,
+    # which left the cohort at v5 and has no Bug Hunt search record any more; the draft no longer cites it.)
+    cited = set(re.findall(r"\{\{absent:([^}|]+)\}\}", f.latest_source().read_text()))
+    assert cited and cited <= set(f.ABSENCE_CLAIMS)
+    assert all(f.ABSENCE_CLAIMS[key][1](DATA) for key in cited)
     text = "\n".join([
         "AA publishes no interval for that leaf.",
         "AA's run publishes no interval{{absent:aa.terminalBenchInterval}}.",
