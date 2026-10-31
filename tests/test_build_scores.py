@@ -57,6 +57,7 @@ FILES = {
     "bughunt": "data/bug_hunt.json",
     "scoreboard": "data/bug_hunt_scoreboard.json",
     "leaves": "data/leaf_evidence.json",
+    "snapshot": "data/aa/aa_v432_snapshot.json",
 }
 
 
@@ -99,15 +100,19 @@ def add_off_cohort(root: Path, *, model_id: str = OFF_COHORT_ID, display: str = 
     Since the v5 re-capture (O132) the roster is exactly the plotted cohort, so an off-frontier roster entry exists only
     as a fixture: by default Claude Sonnet 5.5 (xhigh), which left the cohort with v5, with no Bug Hunt owner result."""
 
+    source_slug = json.loads((root / FILES["aa"]).read_text())["models"][source_id]["aaSlug"]
     def aa(document):
         document["models"][model_id] = {**document["models"][source_id], "id": model_id, "displayName": display,
                                         "family": family, "aaSlug": slug, "aaUrl": AA_URL + slug, "aaVariant": variant}
+    def snapshot(document):
+        page = next(page for page in document["pages"] if page["model"]["slug"] == source_slug)
+        document["pages"].append({**page, "id": slug, "url": AA_URL + slug, "model": {**page["model"], "slug": slug, "name": display}})
     def bughunt(document):
         source = next(m for m in document["models"] if m["modelId"] == source_id)
         document["models"].append({**source, "modelId": model_id, "matched": False, "matchStatus": "no_exact_owner_result"})
     def livebench(document):
         document["models"][model_id] = {**document["models"][source_id], "modelId": model_id, "name": display}
-    for name, fn in (("aa", aa), ("bughunt", bughunt), ("livebench", livebench)):
+    for name, fn in (("aa", aa), ("snapshot", snapshot), ("bughunt", bughunt), ("livebench", livebench)):
         edit(root, name, fn)
     return model_id
 
@@ -1295,9 +1300,11 @@ def test_a_frontier_family_must_rank_its_highest_rendered_frontier_point(world):
 def test_a_near_family_must_rank_its_smallest_gap_near_point(world):
     """E193/O51: a near family's primary configuration is its smallest-gap near point, not another tracked configuration."""
 
-    # Claude Sonnet 5.5 is a near-only family; a synthetic closer near point makes its tracked configuration the wrong one.
-    add_near_family(world, family="Claude Sonnet 5.5", model_id="claude-sonnet-5-5", slug="synthetic-claude-sonnet-5-5", gap=1)
-    with pytest.raises(ValueError, match=r"must rank its smallest-gap near point as its primary configuration \(E193, O51\): Claude Sonnet 5.5"):
+    # A synthetic GPT-5.5 family whose rostered configuration (gpt-5-5) is not the family's near point (synthetic-gpt-5-5).
+    add_off_cohort(world, model_id="gpt-5.5", display="GPT-5.5", family="GPT-5.5", slug="gpt-5-5", variant="medium",
+                   source_id="gpt-6.1-sol-low")
+    add_near_family(world, family="GPT-5.5", model_id="gpt-5.5", slug="synthetic-gpt-5-5")
+    with pytest.raises(ValueError, match=r"must rank its smallest-gap near point as its primary configuration \(E193, O51\): GPT-5.5"):
         run_main(world)
 
 

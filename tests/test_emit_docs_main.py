@@ -369,16 +369,18 @@ def test_calibration_without_official_anchors_or_values_says_so(repo_copy, pinne
     text = (repo_copy / "scores.md").read_text()
     section = text.split("#### Measured-evidence calibration (diagnostic)", 1)[1].split("## Interval outputs", 1)[0]
     assert "Status: measured-evidence calibration unavailable." in section
-    # The max-effort ranking has a main and a subset workload (O17), each with its own anchors; the AI Coding Daily
+    # The max-effort ranking now has only its main workload (no row is on a subset workload, O17); the AI Coding Daily
     # ranking's calibration (measured references since O90) has one workload, and so has the O121 diagnostic ranking's.
-    assert section.count("The workload has no official Plan anchors.") == 4
+    assert section.count("The workload has no official Plan anchors.") == 3
     assert "Value on measured anchors" not in section and "Pairwise reversals" not in section
 
 
 def test_calibration_reports_reversals_and_the_official_anchor_extremes(emitted):
     section = (emitted / "scores.md").read_text().split("#### Measured-evidence calibration (diagnostic)", 1)[1].split("## Interval outputs", 1)[0]
-    assert "Official Plan anchors are set by GPT-6 Luna (max) on ChatGPT Pro 500 (owner-named transfer) at the low end and Gemini 4 Argon (high) on API-cost fallback at the high end." in section
-    assert "Pairwise reversals: Claude Opus 5.5 (max) and GPT-6.1 Sol (max). Largest value change: 3.94 points." in section
+    assert "Official Plan anchors are set by GPT-6 Luna (max) on ChatGPT Pro 500 (owner-named transfer) at the low end and GPT-6 Astra (max) on ChatGPT Plus (controlled measurement) at the high end." in section
+    # An anchor setter on the API-cost fallback is named as such; O91: a frozen setter no longer in the table says so.
+    assert "Official Plan anchors are set by GPT-6 Luna (medium) on ChatGPT Pro 500 (owner-named transfer) at the low end and GPT-6.1 Terra (max) on API-cost fallback (not in the current table) at the high end." in section
+    assert "Pairwise reversals: Claude Opus 5.5 (max) and GPT-6.1 Sol (max). Largest value change: 6.70 points." in section
     methodology = (emitted / "methodology.md").read_text()
     assert "labelled conventional CI-range sensitivity (endpoint-conditioned; no tail model) under its interpretation contract (E165" in methodology
 
