@@ -1,8 +1,7 @@
 # Resuming the Perplexity panel (round 13)
 
-State on 2026-10-31: draft r156 (AA Intelligence Index v5 re-capture, O132–O140, E277) is committed with its review copy
-in `perplexity/parts-r156/` (14 parts). The ledger (`ledger.md`) and the condensed brief (`ledger-brief.md`) run through
-owner decision O140 and reviewer 73. Round 12 was not clean; round 13 starts with GPT-6.1 Sol on r156.
+State on 2026-10-31: draft r157 (reviewer 74 folded in, E278) is committed with its review copy in `perplexity/parts-r157/`. The ledger (`ledger.md`) and the condensed brief (`ledger-brief.md`) run through
+owner decision O140 and reviewer 74 (E278). Round 13 continues with Gemini 3.8 Flash on r157.
 
 Panel order and status for round 13 (O56: a model's round is clean with no Medium-or-higher finding; each model needs
 two consecutive clean rounds and the panel ends when every model says NO FURTHER FEEDBACK on the same revision):
@@ -10,8 +9,8 @@ two consecutive clean rounds and the panel ends when every model says NO FURTHER
 | Reviewer | Model | Revision | Status |
 |---|---|---|---|
 | 73 | Grok 4.7 (round 12) | r155 | findings, folded into r156 (O132–O140, E277) |
-| 74 | GPT-6.1 Sol | r156 | next |
-| 75 | Gemini 3.8 Flash (sectional) | | |
+| 74 | GPT-6.1 Sol | r156 | findings (two Mediums, one Low), folded into r157 (E278) |
+| 75 | Gemini 3.8 Flash (sectional) | r157 | next |
 | 76 | Claude Sonnet 5.5 | | |
 | 77 | Kimi K3 (sectional) | | |
 | 78 | GLM 5.3 (sections of at most two parts) | | |

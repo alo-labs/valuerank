@@ -58,6 +58,7 @@ FILES = {
     "scoreboard": "data/bug_hunt_scoreboard.json",
     "leaves": "data/leaf_evidence.json",
     "snapshot": "data/aa/aa_v432_snapshot.json",
+    "routes": "data/plan_cost_routes.json",
 }
 
 
@@ -1241,6 +1242,10 @@ def test_near_family_without_overlap_coverage_still_ranks(world):
     configuration_map = json.loads(map_path.read_text())
     configuration_map["rows"]["gpt-5.5"] = {"coding-agent-index": None, "itbench-aa": "GPT-5.5 (xhigh)"}
     map_path.write_text(json.dumps(configuration_map))
+    # E278 (reviewer 74 M1): a new cohort family needs a three-stage O71 search that names it on its seller's plans.
+    with pytest.raises(ValueError, match=r"no three-stage O71 search names these cohort model and plan cells \(O71, O75\): GPT-5.5 on ChatGPT Plus"):
+        run_main(world)
+    edit(world, "routes", lambda document: next(entry for entry in document["evidencePolicy"]["searchLog"] if entry["searchedOn"] == "2026-10-31")["models"].append("GPT-5.5"))
     # O36: without Bug Hunt the near family enters the cohort but is listed, not ranked, once its search is logged.
     with pytest.raises(ValueError, match=r"gpt-5.5: no exhaustive search for (bugHunt|frontierCode|vibeCode|aiCodingDaily)"):
         run_main(world)

@@ -21,6 +21,7 @@ ROWS = TABLE["reports"]
 STAGE1 = ROOT / "research" / "2026-10-25-plan-allowances"
 STAGE3 = ROOT / "research" / "2026-10-25-plan-allowances-sb-deep-research"
 MIMO = ROOT / "research" / "2026-10-23-mimo-token-plans"
+ENTRANTS = ROOT / "research" / "2026-10-31-plan-allowances-v5-entrants"
 
 
 def record_files() -> list[Path]:
@@ -29,6 +30,9 @@ def record_files() -> list[Path]:
     files += [STAGE1 / "reports" / "Plan allowance user reports.md"]
     files += [STAGE3 / name for name in ("research_report.md", "evidence.jsonl", "sources.jsonl", "decision-record.md")]
     files += sorted(MIMO.rglob("*.md"))
+    # Reviewer 74 M1 (E278): the 2026-10-31 search for the v5 entrants, all three stages.
+    files += sorted(ENTRANTS.glob("stage1-*.md")) + [ENTRANTS / "stage2" / "report.md"] + sorted((ENTRANTS / "stage2" / "research_notes").glob("*.md"))
+    files += [ENTRANTS / "stage3-sb-deep-research" / name for name in ("research_report.md", "evidence.jsonl", "sources.jsonl", "decision-record.md")]
     return files
 
 

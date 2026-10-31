@@ -8892,6 +8892,70 @@
       {
         "provider": "OpenAI",
         "plan": "ChatGPT Plus",
+        "modelId": "GPT-6.1 Terra",
+        "unit": "5h",
+        "region": "global",
+        "status": "fails: a 5-hour figure never converts to a billing period (O82)",
+        "listed": true,
+        "currentPartition": 1,
+        "partitionsWithReports": [
+          1
+        ],
+        "configurations": [
+          "gpt-6.1-terra"
+        ],
+        "efforts": [
+          "unstated",
+          "xhigh"
+        ],
+        "value": null,
+        "monthlyUsd": null,
+        "multiple": null,
+        "range": [
+          5.33,
+          5.33
+        ],
+        "feasibleRange": null,
+        "reports": [
+          {
+            "id": "pensuke89-plus-terra",
+            "observer": "pensuke89",
+            "valueLower": 5.28,
+            "valueUpper": 5.51,
+            "partition": null,
+            "provisional": false,
+            "speedMode": null,
+            "stage": "S1",
+            "excluded": "spans a provider meter reset (O112)"
+          },
+          {
+            "id": "individualplus2011-plus-terra",
+            "observer": "IndividualPlus2011",
+            "valueLower": 5.33,
+            "valueUpper": 5.33,
+            "partition": 1,
+            "provisional": false,
+            "speedMode": null,
+            "stage": "S1",
+            "excluded": null
+          },
+          {
+            "id": "southwindknows-plus-terra",
+            "observer": "SouthWindKnows",
+            "valueLower": 6.06,
+            "valueUpper": 6.15,
+            "partition": null,
+            "provisional": false,
+            "speedMode": null,
+            "stage": "S3",
+            "excluded": "spans a provider meter reset (O112)"
+          }
+        ],
+        "admittingObservers": []
+      },
+      {
+        "provider": "OpenAI",
+        "plan": "ChatGPT Plus",
         "modelId": "gpt-5.6-luna-low",
         "unit": "5h",
         "region": "global",
@@ -9357,6 +9421,10 @@
         "admittingObservers": []
       }
     ],
+    "planResearchCoverage": {
+      "cells": 31,
+      "uncovered": []
+    },
     "costInfluence": {
       "api": {
         "commonWorkload": {
@@ -19463,8 +19531,8 @@
         {
           "key": "planRoutes",
           "artifact": "data/plan_cost_routes.json",
-          "sha256": "119d48ccc597cf4d2724a323380aac8c3584ba069f506431635477be47b74859",
-          "capturedAt": "2026-10-25",
+          "sha256": "445a101e972eaa519c75fcc1c9be73f0618adbb39ef2bd8c2ba0401a96a0cc9d",
+          "capturedAt": "2026-10-31",
           "extractor": "editorial Plan evidence registry"
         },
         {
@@ -19498,8 +19566,8 @@
         {
           "key": "planReports",
           "artifact": "data/plan_reports.json",
-          "sha256": "c017edb8177d638c98e5e3d55b7e94b2d14335f19283b6d90c331ee54550cfc6",
-          "capturedAt": "2026-10-25",
+          "sha256": "3d3ce37c8a4a0b374c04649f62369272a9079b910bb74defcb8a3d727bcdb98d",
+          "capturedAt": "2026-10-28",
           "extractor": "editorial table of every O71 user report with the facts E270 needs; the build derives admission from it (O81)"
         },
         {
@@ -19545,7 +19613,7 @@
           "extractor": "valuerank.value_v3 freeze"
         }
       ],
-      "bundleHash": "3a7a9b882f374aee3fbcd937b07419dc1124361405051918745c9075e24ac99f",
+      "bundleHash": "214072259fc7b5ceb301625d86875f1e5568d1e688a77a5aa494f36e3342b023",
       "rebuild": "every published output is rebuilt from these artifacts at the pinned publication clock (npm run verify:docs), never from live pages"
     },
     "track": {
@@ -26982,6 +27050,70 @@
         {
           "provider": "OpenAI",
           "plan": "ChatGPT Plus",
+          "modelId": "GPT-6.1 Terra",
+          "unit": "5h",
+          "region": "global",
+          "status": "fails: a 5-hour figure never converts to a billing period (O82)",
+          "listed": true,
+          "currentPartition": 1,
+          "partitionsWithReports": [
+            1
+          ],
+          "configurations": [
+            "gpt-6.1-terra"
+          ],
+          "efforts": [
+            "unstated",
+            "xhigh"
+          ],
+          "value": null,
+          "monthlyUsd": null,
+          "multiple": null,
+          "range": [
+            5.33,
+            5.33
+          ],
+          "feasibleRange": null,
+          "reports": [
+            {
+              "id": "pensuke89-plus-terra",
+              "observer": "pensuke89",
+              "valueLower": 5.28,
+              "valueUpper": 5.51,
+              "partition": null,
+              "provisional": false,
+              "speedMode": null,
+              "stage": "S1",
+              "excluded": "spans a provider meter reset (O112)"
+            },
+            {
+              "id": "individualplus2011-plus-terra",
+              "observer": "IndividualPlus2011",
+              "valueLower": 5.33,
+              "valueUpper": 5.33,
+              "partition": 1,
+              "provisional": false,
+              "speedMode": null,
+              "stage": "S1",
+              "excluded": null
+            },
+            {
+              "id": "southwindknows-plus-terra",
+              "observer": "SouthWindKnows",
+              "valueLower": 6.06,
+              "valueUpper": 6.15,
+              "partition": null,
+              "provisional": false,
+              "speedMode": null,
+              "stage": "S3",
+              "excluded": "spans a provider meter reset (O112)"
+            }
+          ],
+          "admittingObservers": []
+        },
+        {
+          "provider": "OpenAI",
+          "plan": "ChatGPT Plus",
           "modelId": "gpt-5.6-luna-low",
           "unit": "5h",
           "region": "global",
@@ -27447,6 +27579,10 @@
           "admittingObservers": []
         }
       ],
+      "planResearchCoverage": {
+        "cells": 31,
+        "uncovered": []
+      },
       "costInfluence": {
         "api": {
           "commonWorkload": {
@@ -47708,8 +47844,8 @@
           {
             "key": "planRoutes",
             "artifact": "data/plan_cost_routes.json",
-            "sha256": "119d48ccc597cf4d2724a323380aac8c3584ba069f506431635477be47b74859",
-            "capturedAt": "2026-10-25",
+            "sha256": "445a101e972eaa519c75fcc1c9be73f0618adbb39ef2bd8c2ba0401a96a0cc9d",
+            "capturedAt": "2026-10-31",
             "extractor": "editorial Plan evidence registry"
           },
           {
@@ -47743,8 +47879,8 @@
           {
             "key": "planReports",
             "artifact": "data/plan_reports.json",
-            "sha256": "c017edb8177d638c98e5e3d55b7e94b2d14335f19283b6d90c331ee54550cfc6",
-            "capturedAt": "2026-10-25",
+            "sha256": "3d3ce37c8a4a0b374c04649f62369272a9079b910bb74defcb8a3d727bcdb98d",
+            "capturedAt": "2026-10-28",
             "extractor": "editorial table of every O71 user report with the facts E270 needs; the build derives admission from it (O81)"
           },
           {
@@ -47790,7 +47926,7 @@
             "extractor": "valuerank.value_v3 freeze"
           }
         ],
-        "bundleHash": "3a7a9b882f374aee3fbcd937b07419dc1124361405051918745c9075e24ac99f",
+        "bundleHash": "214072259fc7b5ceb301625d86875f1e5568d1e688a77a5aa494f36e3342b023",
         "rebuild": "every published output is rebuilt from these artifacts at the pinned publication clock (npm run verify:docs), never from live pages"
       },
       "track": {
@@ -60410,6 +60546,70 @@
         {
           "provider": "OpenAI",
           "plan": "ChatGPT Plus",
+          "modelId": "GPT-6.1 Terra",
+          "unit": "5h",
+          "region": "global",
+          "status": "fails: a 5-hour figure never converts to a billing period (O82)",
+          "listed": true,
+          "currentPartition": 1,
+          "partitionsWithReports": [
+            1
+          ],
+          "configurations": [
+            "gpt-6.1-terra"
+          ],
+          "efforts": [
+            "unstated",
+            "xhigh"
+          ],
+          "value": null,
+          "monthlyUsd": null,
+          "multiple": null,
+          "range": [
+            5.33,
+            5.33
+          ],
+          "feasibleRange": null,
+          "reports": [
+            {
+              "id": "pensuke89-plus-terra",
+              "observer": "pensuke89",
+              "valueLower": 5.28,
+              "valueUpper": 5.51,
+              "partition": null,
+              "provisional": false,
+              "speedMode": null,
+              "stage": "S1",
+              "excluded": "spans a provider meter reset (O112)"
+            },
+            {
+              "id": "individualplus2011-plus-terra",
+              "observer": "IndividualPlus2011",
+              "valueLower": 5.33,
+              "valueUpper": 5.33,
+              "partition": 1,
+              "provisional": false,
+              "speedMode": null,
+              "stage": "S1",
+              "excluded": null
+            },
+            {
+              "id": "southwindknows-plus-terra",
+              "observer": "SouthWindKnows",
+              "valueLower": 6.06,
+              "valueUpper": 6.15,
+              "partition": null,
+              "provisional": false,
+              "speedMode": null,
+              "stage": "S3",
+              "excluded": "spans a provider meter reset (O112)"
+            }
+          ],
+          "admittingObservers": []
+        },
+        {
+          "provider": "OpenAI",
+          "plan": "ChatGPT Plus",
           "modelId": "gpt-5.6-luna-low",
           "unit": "5h",
           "region": "global",
@@ -60875,6 +61075,10 @@
           "admittingObservers": []
         }
       ],
+      "planResearchCoverage": {
+        "cells": 31,
+        "uncovered": []
+      },
       "costInfluence": {
         "api": {
           "commonWorkload": {
@@ -91209,8 +91413,8 @@
           {
             "key": "planRoutes",
             "artifact": "data/plan_cost_routes.json",
-            "sha256": "119d48ccc597cf4d2724a323380aac8c3584ba069f506431635477be47b74859",
-            "capturedAt": "2026-10-25",
+            "sha256": "445a101e972eaa519c75fcc1c9be73f0618adbb39ef2bd8c2ba0401a96a0cc9d",
+            "capturedAt": "2026-10-31",
             "extractor": "editorial Plan evidence registry"
           },
           {
@@ -91244,8 +91448,8 @@
           {
             "key": "planReports",
             "artifact": "data/plan_reports.json",
-            "sha256": "c017edb8177d638c98e5e3d55b7e94b2d14335f19283b6d90c331ee54550cfc6",
-            "capturedAt": "2026-10-25",
+            "sha256": "3d3ce37c8a4a0b374c04649f62369272a9079b910bb74defcb8a3d727bcdb98d",
+            "capturedAt": "2026-10-28",
             "extractor": "editorial table of every O71 user report with the facts E270 needs; the build derives admission from it (O81)"
           },
           {
@@ -91291,7 +91495,7 @@
             "extractor": "valuerank.value_v3 freeze"
           }
         ],
-        "bundleHash": "3a7a9b882f374aee3fbcd937b07419dc1124361405051918745c9075e24ac99f",
+        "bundleHash": "214072259fc7b5ceb301625d86875f1e5568d1e688a77a5aa494f36e3342b023",
         "rebuild": "every published output is rebuilt from these artifacts at the pinned publication clock (npm run verify:docs), never from live pages"
       },
       "track": {

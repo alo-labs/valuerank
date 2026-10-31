@@ -1077,7 +1077,7 @@ Every admissible route-measurement pair in comparator order (E171) and the compa
 
 ### Plan allowance report cells (O71, O81)
 
-52 cells; 0 pass. A cell on a plan the Plan ranking does not list is evidence only (O85).
+53 cells; 0 pass. A cell on a plan the Plan ranking does not list is evidence only (O85).
 
 | Provider | Plan | Model | Unit | Region | Eligible reports | Verdict |
 |---|---|---|---|---|---|---|
@@ -1122,6 +1122,7 @@ Every admissible route-measurement pair in comparator order (E171) and the compa
 | OpenAI | ChatGPT Plus | GPT-6 Luna | month | global | 0 of 1 | fails: 0 non-provisional report(s) in the current partition |
 | OpenAI | ChatGPT Plus | GPT-6.1 Sol | 5h | global | 0 of 3 | fails: a 5-hour figure never converts to a billing period (O82) |
 | OpenAI | ChatGPT Plus | GPT-6.1 Sol | week | global | 0 of 2 | fails: 0 non-provisional report(s) in the current partition |
+| OpenAI | ChatGPT Plus | GPT-6.1 Terra | 5h | global | 1 of 3 | fails: a 5-hour figure never converts to a billing period (O82) |
 | OpenAI | ChatGPT Plus | gpt-5.6-luna-low | 5h | global | 0 of 1 | fails: a 5-hour figure never converts to a billing period (O82) |
 | OpenAI | ChatGPT Plus | gpt-5.6-luna-low | week | global | 0 of 1 | fails: 0 non-provisional report(s) in the current partition |
 | OpenAI | ChatGPT Pro (tier unstated) (not listed) | GPT-6 Astra | week | global | 0 of 1 | fails: 0 non-provisional report(s) in the current partition |

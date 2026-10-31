@@ -622,6 +622,41 @@ def check_o71_search(policy: dict, providers: set[str] = frozenset()) -> None:
         raise ValueError(f"the all-provider search of {latest['searchedOn']} omits {', '.join(missing)} (O71)")
 
 
+# Reviewer 74 M1: each first-party plan's seller, by the plan's name in plan_reports.json's listed plans.
+PLAN_SELLER = {"Claude": "Anthropic", "ChatGPT": "OpenAI", "Google AI": "Google", "MiMo": "Xiaomi", "Kimi": "Kimi", "MiniMax": "MiniMax"}
+
+
+def plan_seller(plan: str) -> str | None:
+    return next((seller for prefix, seller in PLAN_SELLER.items() if plan.startswith(prefix + " ")), None)
+
+
+def o71_coverage(policy: dict, configurations: list[dict], listed_plans) -> dict:
+    """O71, O75 (reviewer 74 M1): research coverage is keyed by model and plan, not provider. A cell (model, plan) is
+    covered by an O71-era search log entry that ran all three stages, names the plan's seller and names the model (efforts
+    pool, O87). Returns {"cells": n, "uncovered": [(model, plan)]} over every cohort model's sellers' current plans."""
+
+    plans = [plan for plan in listed_plans if "(" not in plan]
+    entries = [entry for entry in policy.get("searchLog") or [] if (entry.get("searchedOn") or "") >= O71_FROM
+               and tuple(stage.get("stage") for stage in entry.get("stages") or []) == O71_STAGES]
+    cells, uncovered = 0, []
+    for model, provider in sorted({(configuration_family(item), PLAN_PROVIDER.get(item["developer"], item["developer"]))
+                                   for item in configurations if item.get("developer")}):
+        for plan in (plan for plan in plans if plan_seller(plan) == provider):
+            cells += 1
+            if not any(model in (entry.get("models") or []) and provider in (entry.get("providers") or [])
+                       and plan in (entry.get("plans") or plans) for entry in entries):
+                uncovered.append((model, plan))
+    return {"cells": cells, "uncovered": uncovered}
+
+
+def check_o71_coverage(policy: dict, configurations: list[dict], listed_plans) -> dict:
+    coverage = o71_coverage(policy, configurations, listed_plans)
+    if coverage["uncovered"]:
+        cells = "; ".join(f"{model} on {plan}" for model, plan in coverage["uncovered"])
+        raise ValueError(f"no three-stage O71 search names these cohort model and plan cells (O71, O75): {cells}")
+    return coverage
+
+
 def check_rereads(documents: dict) -> None:
     """I60 L6: an O68 re-read record must name, by hash, the pinned capture the build uses; a record left behind by a
     newer capture stops the build (the tests compare each 'unchanged' result with the re-read file, `reread_matches`)."""
@@ -817,6 +852,9 @@ def assemble(configurations: list[dict], documents: dict, *, release_day: date, 
     if searched and documents["planRoutes"].get("asOf") and documents["planRoutes"]["asOf"] != searched:
         raise ValueError(f"the route registry is dated {documents['planRoutes']['asOf']}, not its search cutoff {searched} (E218)")
     check_o71_search(policy, cohort_providers(configurations))
+    research_coverage = None
+    if any((entry.get("searchedOn") or "") >= O71_FROM for entry in policy.get("searchLog") or []):
+        research_coverage = check_o71_coverage(policy, configurations, (documents.get("planReports") or {}).get("listedPlans") or {})
     # O81: the build decides every O71 cell's admission from the report table, and refuses an unsupported report route.
     # O87: cells are keyed by the model (the configuration's AA family), so reports at any effort pool.
     families = {item["id"]: configuration_family(item) for item in configurations}
@@ -953,6 +991,7 @@ def assemble(configurations: list[dict], documents: dict, *, release_day: date, 
         "cognition": documents.get("cognitionFrontierCode") or {"v1_1": {"data": {}}},
         "sourceClocks": clocks,
         "planAllowanceCells": allowance_cells,
+        "planResearchCoverage": research_coverage,
         "gdpvalPrevious": documents.get("aaPreviousCapture"),
         "codingAgents": documents.get("codingAgents"),
         "pages": documents["snapshot"]["pages"],
@@ -2392,6 +2431,7 @@ def score(assembled: dict, frozen: dict) -> dict:
         "sourceDates": SOURCE_DATES,
         "sourceClocks": assembled.get("sourceClocks", []),
         "planAllowanceCells": assembled.get("planAllowanceCells", []),
+        "planResearchCoverage": assembled.get("planResearchCoverage"),
         "costInfluence": influence,
         "gates": {"clip": gates, "hold": hold, "listedBeyondAnchors": listed_beyond_anchors(assembled.get("listed", []), frozen),
                   "population": "ranked rows only; listed rows beyond the anchors are disclosed and never hold a release (O58)"},

@@ -55,6 +55,23 @@
         "record": "research/2026-10-25-plan-allowances/ and research/2026-10-25-plan-allowances-sb-deep-research/",
         "qualifyingNewReports": 0,
         "o71Result": "no model × tier has two independent concordant reports (O11) after all three stages; owner decision O72 keeps the owner-authorised routes and API fallback elsewhere",
+        "models": [
+          "Claude Opus 5.5",
+          "Claude Sonnet 5.5",
+          "Claude Haiku 5.5",
+          "GPT-6.1 Sol",
+          "GPT-6 Astra",
+          "GPT-6 Luna",
+          "GPT-5.6 Luna",
+          "Gemini 4 Argon",
+          "Gemini 3.8 Flash",
+          "MiMo-V2.6-Pro",
+          "MiMo-V2.6-Flash",
+          "Kimi K3.1 Pro",
+          "MiniMax-M3.1-Flash",
+          "DeepSeek V4.1 Flash 1017"
+        ],
+        "modelsNote": "The models the three stages searched by name (research/2026-10-25-plan-allowances/README.md); GPT-6.1 Terra and Gemini 4 Carbon entered the cohort later (O132) and are not among them (reviewer 74 M1).",
         "providers": [
           "Anthropic",
           "OpenAI",
@@ -91,6 +108,66 @@
             "queries": "listed in research-plan.md; sources in sources.jsonl",
             "reached": "host search and fetch; Reddit via arctic-shift; Hacker News; Bluesky; GitHub issue pages; forums",
             "unreachable": "YouTube video pages (bot check); X (402); Zhihu and LINUX DO search (403)"
+          }
+        ]
+      },
+      {
+        "searchedOn": "2026-10-31",
+        "singleProvider": true,
+        "scope": "O71/O75 for the cohort's v5 entrants (reviewer 74 M1): GPT-6.1 Terra on ChatGPT Plus and Pro $100/$200/$500 in Codex, and Gemini 4 Carbon on Google AI Pro/Ultra, in the three O71 stages; the 2026-10-25 all-provider search predates their entry (O132) and never named them",
+        "record": "research/2026-10-31-plan-allowances-v5-entrants/",
+        "qualifyingNewReports": 3,
+        "o71Result": "GPT-6.1 Terra on ChatGPT Plus passes O11 on three five-hour reports (about $5.3-6.1 per five hours), which admit no route because a five-hour figure never converts to a billing period (O82); every weekly and Pro cell has no qualifying report; Gemini 4 Carbon is offered on no Google consumer plan at the cutoff (limited release to selected cyber defenders and partners, announced 2026-10-28), so its cells have no reports. Terra keeps its O45 transfers and Carbon its API-cost fallback (O72).",
+        "providers": [
+          "OpenAI",
+          "Google"
+        ],
+        "models": [
+          "GPT-6.1 Terra",
+          "Gemini 4 Carbon"
+        ],
+        "plans": [
+          "ChatGPT Plus",
+          "ChatGPT Pro 100",
+          "ChatGPT Pro 200",
+          "ChatGPT Pro 500",
+          "Google AI Pro",
+          "Google AI Ultra"
+        ],
+        "notOffered": {
+          "Gemini 4 Carbon": [
+            "Google AI Pro",
+            "Google AI Ultra"
+          ]
+        },
+        "note": "A supplementary search for two models: the all-provider search cutoff stays at 2026-10-25. It also found OpenAI's Day 23 reset (2026-10-27) and Day 25 Pro limit doubling (2026-10-29), recorded in partitionSplits.",
+        "stages": [
+          {
+            "stage": "plain web search",
+            "method": "two model agents (WebSearch, WebFetch, curl, Hacker News Algolia, Reddit mirrors)",
+            "record": "research/2026-10-31-plan-allowances-v5-entrants/stage1-*.md",
+            "outcome": "Terra x Plus x 5h passes O11 on two reports (pensuke89, IndividualPlus2011); no other cell has a qualifying report; Carbon is on no consumer plan",
+            "queries": "listed in each stage1 file (Terra: 52 queries and fetches; Carbon: 43)",
+            "reached": "web search; Hacker News (Algolia); Reddit via arctic-shift and pullpush; GitHub issue pages; OpenAI and Google AI forums; V2EX; Qiita; Zenn",
+            "unreachable": "GitHub search APIs; LINUX DO (403); Bluesky API (403); X"
+          },
+          {
+            "stage": "Claude's Deep Research",
+            "method": "anthropic-skills deep-research; run degraded: no helper agents could be started, so one researcher ran the plan sequentially",
+            "record": "research/2026-10-31-plan-allowances-v5-entrants/stage2/",
+            "outcome": "no new qualifying report; Carbon's unavailability confirmed",
+            "queries": "listed in stage2/research_notes/queries-and-sources.md",
+            "reached": "as stage 1, plus Google's plan, Antigravity and Gemini app pages",
+            "unreachable": "LINUX DO (403); Bluesky (403); X"
+          },
+          {
+            "stage": "Silver Bullet's Deep Research",
+            "method": "silver-deep-research, deep mode, all nine phases and validations, two critique cycles; run degraded as on 2026-10-25: no search-cli (host search and fetch) and no helper agents (single retriever)",
+            "record": "research/2026-10-31-plan-allowances-v5-entrants/stage3-sb-deep-research/",
+            "outcome": "a third Plus five-hour report (SouthWindKnows, LINUX DO via the locdd.com mirror); no weekly or Pro report; Carbon unavailable",
+            "queries": "listed in research-plan.md; sources in sources.jsonl",
+            "reached": "Reddit via arctic-shift; the locdd.com LINUX DO mirror; Bluesky via api.bsky.app; X posts via Yahoo Japan real-time search; Hacker News; GitHub issue pages; OpenAI forum; V2EX; Google changelogs",
+            "unreachable": "linux.do directly; X directly; YouTube video pages; Zhihu; Xiaohongshu; Bilibili; note.com"
           }
         ]
       }

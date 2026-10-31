@@ -2096,6 +2096,27 @@ def test_the_o71_search_records_three_stages_over_every_provider():
     v.check_o71_search({"searchLog": [good, {"searchedOn": "2026-10-26", "singleProvider": True}]})
 
 
+def test_o71_coverage_is_keyed_by_model_and_plan_not_provider():
+    """O71, O75 (reviewer 74 M1): a provider-level search does not cover a model it never named."""
+
+    stages = [{"stage": name, "record": "r", "outcome": "o"} for name in v.O71_STAGES]
+    plans = {"ChatGPT Plus": 20, "ChatGPT Pro 200": 200, "ChatGPT Pro 200 (grandfathered 20x)": 200, "Google AI Pro": 19.99, "Kimi Plus": 19}
+    assert (v.plan_seller("ChatGPT Plus"), v.plan_seller("Google AI Pro"), v.plan_seller("Other Plan")) == ("OpenAI", "Google", None)
+    configurations = [{"family": "GPT-6.1 Sol", "developer": "OpenAI"}, {"name": "GPT-6.1 Terra (max)", "family": "GPT-6.1 Terra", "developer": "OpenAI"},
+                      {"name": "Gemini 4 Carbon", "developer": "Google DeepMind"}, {"name": "No developer"}, {"name": "Seller-less", "developer": "DeepSeek"}]
+    earlier = {"searchedOn": "2026-10-25", "providers": ["OpenAI", "Google"], "models": ["GPT-6.1 Sol"], "stages": stages}
+    coverage = v.o71_coverage({"searchLog": [{"searchedOn": "2026-10-21", "models": ["GPT-6.1 Terra"]}, earlier]}, configurations, plans)
+    assert coverage == {"cells": 5, "uncovered": [("GPT-6.1 Terra", "ChatGPT Plus"), ("GPT-6.1 Terra", "ChatGPT Pro 200"), ("Gemini 4 Carbon", "Google AI Pro")]}
+    with pytest.raises(ValueError, match="names these cohort model and plan cells .*: GPT-6.1 Terra on ChatGPT Plus; GPT-6.1 Terra on ChatGPT Pro 200; Gemini 4 Carbon on Google AI Pro"):
+        v.check_o71_coverage({"searchLog": [earlier]}, configurations, plans)
+    # A supplementary entry may restrict itself to some plans; one missing a stage covers nothing.
+    partial = {"searchedOn": "2026-10-31", "singleProvider": True, "providers": ["OpenAI", "Google"], "models": ["GPT-6.1 Terra", "Gemini 4 Carbon"],
+               "plans": ["ChatGPT Plus", "Google AI Pro"], "stages": stages}
+    assert v.o71_coverage({"searchLog": [earlier, partial]}, configurations, plans)["uncovered"] == [("GPT-6.1 Terra", "ChatGPT Pro 200")]
+    assert len(v.o71_coverage({"searchLog": [earlier, {**partial, "plans": None, "stages": stages[:2]}]}, configurations, plans)["uncovered"]) == 3
+    assert v.check_o71_coverage({"searchLog": [earlier, {**partial, "plans": None}]}, configurations, plans) == {"cells": 5, "uncovered": []}
+
+
 def test_plan_evidence_names_a_same_model_measurement():
     """I75 L3: an anchor setter on an O88 route is named a same-model measurement from another effort."""
 
