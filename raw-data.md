@@ -719,7 +719,7 @@ Each routed row's amount with what it measures, how it was derived and which obj
 
 ## Evidence bundle
 
-Bundle hash `2bc2d0f2c28d7dbd817d6c2cb42bf10a04c4079940b6894fe35e51b794342fff`: every published output is rebuilt from these artifacts at the pinned publication clock (npm run verify:docs), never from live pages.
+Bundle hash `3a7a9b882f374aee3fbcd937b07419dc1124361405051918745c9075e24ac99f`: every published output is rebuilt from these artifacts at the pinned publication clock (npm run verify:docs), never from live pages.
 
 | Key | Artifact | SHA-256 | Captured | Extractor |
 |---|---|---|---|---|
@@ -733,7 +733,7 @@ Bundle hash `2bc2d0f2c28d7dbd817d6c2cb42bf10a04c4079940b6894fe35e51b794342fff`: 
 | frontierCapture | `data/aa_frontier_capture.json` | `a71eec4d45a450704511cea0b240cc7bae7609b29107276fb770c590707e405f` | 2026-10-30T22:15:18Z | browser capture of AA's Intelligence Index vs cost chart from public tooltips (frontier membership, E195; unevaluated cheaper siblings, E201) |
 | roster | `data/aa_mapping.json` | `0cbc840a7a37fc12596b3189b3ecc0b1abff86eb4996ac25c61174b0a4a7641a` | 2026-10-30T22:15:18Z | editorial roster: every configuration AA plots on its rendered frontier or within 3 Index points of it (O51) |
 | bugHuntScoreboard | `data/bug_hunt_scoreboard.json` | `2e0f1eab15f219ba491af8c4ca694197c9bed96546b4157c06ca1414f9d6e8dc` | 2026-10-30T22:19:18Z | the owner's combined scoreboard at the pinned commit (O31 roster check) |
-| planRoutes | `data/plan_cost_routes.json` | `2c900a3cd64db7483685c8de4e8b157dd217bbe4a418f32f68274f0534234476` | 2026-10-25 | editorial Plan evidence registry |
+| planRoutes | `data/plan_cost_routes.json` | `119d48ccc597cf4d2724a323380aac8c3584ba069f506431635477be47b74859` | 2026-10-25 | editorial Plan evidence registry |
 | priceRecords | `data/price_records.json` | `fe550f7770759a6219e671838f28b42d3b7d7db0fa5f7ab489e08a75605421f8` | 2026-10-31T04:10:00Z | editorial E141 price-record registry (superseded and promotional tariffs) |
 | leafEvidence | `data/leaf_evidence.json` | `b1cd6ea2e7d8d7c4f631a3f3bc384482f87cf76dc78d4ad723c5c12ffd052668` | 2026-10-30 | editorial supplementary leaf evidence and the exhaustive-search log (O36) |
 | cognitionFrontierCode | `data/cognition_frontiercode.json` | `ff0040778b7bdf69c705ad7474f771fb5e53cfaf5cf8573b3a4614153543d75f` | 2026-10-23 | Cognition's FrontierCode leaderboard data (https://cognition.com/data/frontiercode-leaderboard/data.json), captured unchanged (O37) |

@@ -231,6 +231,23 @@
       },
       "partitionSplits": [
         {
+          "provider": "OpenAI",
+          "plans": [
+            "ChatGPT Pro 100",
+            "ChatGPT Pro 200",
+            "ChatGPT Pro 500"
+          ],
+          "date": "2026-10-29",
+          "type": "limit",
+          "basis": "provider announcement, Day 25 (O77 as amended by O101): \"We are doubling all usage limits for all Pro 100/200/500 tiers and Business Premium, effective today\" (Tibo, X, 2026-10-29, quoted in OpenAI community topic 1403525 #117); the same post keeps Pro 200's limits unreduced. Found by the O71 search for GPT-6.1 Terra (research/2026-10-31-plan-allowances-v5-entrants/stage1-openai-terra.md); the Pro routes were already flagged from 2026-10-11 (reviewer 74 M1)"
+        },
+        {
+          "provider": "OpenAI",
+          "date": "2026-10-27",
+          "type": "reset",
+          "basis": "28 days of shipping, Day 23: global reset (Tibo, X, quoted in OpenAI community topic 1403525 #110; date from the day count, Day 7 = 2026-10-11); a reading spanning it is excluded (O112)"
+        },
+        {
           "provider": "Anthropic",
           "plans": [
             "Claude Max 20x"
