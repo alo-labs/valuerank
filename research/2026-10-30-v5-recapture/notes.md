@@ -32,9 +32,10 @@ GPT-5.6 Luna (low).
 ## Progress
 
 - [x] Chart captured and cohort derived.
-- [ ] Model pages captured (v5 fields).
-- [ ] Coding Agent Index page and ITBench-AA cost chart re-captured.
+- [x] Model pages captured (v5 fields), 2026-10-30T22:23:33Z; every page has the v5 successor fields. Task counts from AA's methodology: Briefcase 91, AutomationBench 657, GDP.pdf 100, FrontierCode 2.0 132, Terminal-Bench 4.0 66, Terminal-Bench-Science 70, CritPt v2 hard 40, Omniscience v1.1 3,000, HLE-Diamond 1,000. 24 of 27 pages reconstruct AA's total to 1e-6; the three Claude Opus 5.5 rows miss by 0.03-0.04% (E209: partial component).
+- [x] Coding Agent Index page (`npm run capture:basket`) and the cost charts with every model selected (`capture_cost_charts_all.js`: FrontierCode 78 of 78 models, 73 bars; ITBench-AA 45 of 45, 43 bars).
 - [ ] Engine: leaf map (O136), basket (O137), nine-evaluation cost identity.
-- [ ] Third-party leaves for new configurations (GPT-6.1 Terra, Gemini 4 Carbon), O36 searches; O135 Flash efforts.
+- [x] Third-party boards re-read 2026-10-30 (`third-party/`); LiveBench release 2026-10-25 pinned (O139); MiMo-V2.6-Flash matched on AI Coding Daily only (O140).
+- [ ] Third-party data files rebuilt for the cohort (bug_hunt.json, swe_tracks.json, tb4.json); O36 search logs.
 - [ ] Plan routes: Anthropic Max/Ultra rename (2026-10-30), report window at the new cutoff.
 - [ ] Re-freeze anchors and bars; draft r156.

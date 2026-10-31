@@ -51,13 +51,14 @@ BETA = COST_WEIGHT_PCT / 100.0
 BASES = ("api", "plan")
 TB4_HALF_WIDTH_PCT = 0.05  # tbench.ai resolution rates are published to 0.1 percentage point
 BUG_HUNT_HALF_WIDTH = 0.05  # owner means of bugs fixed are published to 0.1 bug
+# O136: the v5 successors' page fields (FrontierCode 2.0, HLE-Diamond, CritPt v2 hard subset, Terminal-Bench-Science).
 FRACTION_LEAVES = {
-    "frontierCode": "frontierCode",
+    "frontierCode": "frontierCode20",
     "automationBench": "automationBenchPartialScore",
     "lcr": "lcr",
-    "hle": "hle",
-    "scicode": "scicode",
-    "critpt": "critpt",
+    "hle": "hleDiamond",
+    "tbScience": "terminalBenchScience",
+    "critpt": "critptAgenticHard",
 }
 CHART_SOURCES = {slug: f"AA {basket.COMPONENT_LABELS[slug]} total cost chart (labels rounded to USD 1)" for slug in basket.CHART_COMPONENTS}
 DEFAULT_TB_HARNESS = "mini-SWE-agent"  # E125/O37: AA's Terminal-Bench harness; a leaf on any other agent is a gap fill
@@ -66,11 +67,12 @@ SCENARIO_RUNS = (("S0", False), ("S1", False), ("S2", False), ("S1", True), ("S1
 SAMPLING_STREAM = "S1T"  # O39: benchmark sampling noise, independent-task approximation (never a label)
 # O39: each leaf's sampling unit, the published task count of the run the leaf reads (AA's evaluation pages and
 # methodology; FrontierCode 1.1 Main's 100 tasks; Bug Hunt's 105 planted bugs).
+LCR_TASKS = 100  # AA-LCR v1.1's documents; v5 runs it outside the Index, so it is no longer a basket component (O137)
 SAMPLING_TASKS = {
-    "frontierCode": 100, "terminalBench": basket.INDEX_SDLC_TASKS["terminalbench-4-0"],
-    "bugHunt": 105, "automationBench": basket.INDEX_SDLC_TASKS["automationbench-aa"], "lcr": basket.INDEX_SDLC_TASKS["artificial-analysis-long-context-reasoning"],
-    "scicode": basket.INDEX_SDLC_TASKS["scicode"], "hle": basket.INDEX_RESIDUAL_TASKS["humanitys-last-exam"], "critpt": basket.INDEX_RESIDUAL_TASKS["critpt"],
-    "omniscience": basket.INDEX_RESIDUAL_TASKS["omniscience"],
+    "frontierCode": basket.INDEX_SDLC_TASKS["frontiercode-2-0"], "terminalBench": basket.INDEX_SDLC_TASKS["terminalbench-4-0"],
+    "bugHunt": 105, "automationBench": basket.INDEX_SDLC_TASKS["automationbench-aa"], "lcr": LCR_TASKS,
+    "tbScience": basket.INDEX_SDLC_TASKS["terminal-bench-science"], "hle": basket.INDEX_RESIDUAL_TASKS["hle-diamond"],
+    "critpt": basket.INDEX_RESIDUAL_TASKS["critpt-v2-hard"], "omniscience": basket.INDEX_RESIDUAL_TASKS["omniscience"],
     # O53-O55: AI Coding Daily's six graded projects (judged points read as a binomial share, an assumption). Vals
     # publishes a standard error per record, which the stream reads instead; LiveBench 2.0 Overall is read per category.
     "aiCodingDaily": 6,

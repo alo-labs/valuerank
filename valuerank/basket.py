@@ -1,15 +1,16 @@
 """The SDLC cost basket (owner decision O15): component costs, completeness, admission and the workload.
 
 C_W, the scored API cost, is the sum of AA's published costs for the admitted
-basket components of an exact configuration: the seven SDLC evaluations of the
-AA Intelligence Index, the Coding Agent Index total (v2.0 counts FrontierCode's
-cost inside it, O50) and, once admitted, the chart-captured ITBench-AA total. HLE, AA-Omniscience and
-CritPt are excluded from C_W; together with the seven they reconcile to AA's
-published total Index cost, which stays a diagnostic.
+basket components of an exact configuration: the six SDLC evaluations of the
+AA Intelligence Index v5 (owner decision O137: AA-Briefcase, AutomationBench-AA,
+GDP.pdf, FrontierCode 2.0, Terminal-Bench 4.0 and Terminal-Bench-Science), the
+Coding Agent Index total (O50) and, once admitted, the chart-captured ITBench-AA
+total. HLE-Diamond, AA-Omniscience and CritPt v2 are excluded from C_W; together
+with the six they reconcile to AA's published total Index cost, which stays a
+diagnostic.
 
 A component is admitted to the workload when exact-configuration cost exists for
-at least two-thirds of the ranked rows (the reference panel). FrontierCode's chart
-total is a stand-in unit, admissible only while the Coding Agent Index is not (O116). A row missing an
+at least two-thirds of the ranked rows (the reference panel). A row missing an
 admitted component is scored on the subset it has (owner decision O17); a row is
 eligible for the interval outputs only when no admitted component is marked
 incomplete by AA (FullCost, owner decision O27).
@@ -23,39 +24,33 @@ import json
 import math
 from fractions import Fraction
 
-# Fixed task counts of the AA Intelligence Index v4.3.2 evaluations (AA total = sum of cost per task x count).
+# Fixed task counts of the AA Intelligence Index v5.0 evaluations (AA total = sum of cost per task x count; AA's
+# Intelligence Benchmarking methodology, read 2026-10-30). O137: v5 no longer prices GDPval-AA, SciCode or AA-LCR.
 INDEX_SDLC_TASKS = {
     "aa-briefcase": 91,
-    "gdpval-aa": 220,
     "gdp-pdf": 100,
     "automationbench-aa": 657,
     "terminalbench-4-0": 66,
-    "scicode": 288,
-    "artificial-analysis-long-context-reasoning": 100,
+    "frontiercode-2-0": 132,
+    "terminal-bench-science": 70,
 }
-INDEX_RESIDUAL_TASKS = {"humanitys-last-exam": 2158, "critpt": 70, "omniscience": 6000}
+INDEX_RESIDUAL_TASKS = {"hle-diamond": 1000, "critpt-v2-hard": 40, "omniscience": 3000}
 # Owner decision O50 (2026-10-23): AA's Coding Agent Index v2.0 replaced DeepSWE v1.1 with FrontierCode v1.1 Main.
 CODING_AGENT_TASKS = {"frontiercode-v1.1-main": 100, "swe-atlas-qna": 124, "terminal-bench-v4": 66}
 CODING_AGENT_REPETITIONS = 3
 CODING_AGENT_INDEX = "coding-agent-index"
-FRONTIERCODE = "frontiercode"
-# FrontierCode's cost is counted inside the Coding Agent Index v2.0 (O50). O116: while a ranking has not admitted the
-# Coding Agent Index, FrontierCode's own chart total stands in for it as a unit of its own (never both, which would count
-# FrontierCode twice); it leaves when the Coding Agent Index is admitted (a versioned migration, E184).
-STAND_INS = {FRONTIERCODE: CODING_AGENT_INDEX}
-CHART_COMPONENTS = (FRONTIERCODE, "itbench-aa")
+# O137: FrontierCode 2.0 is priced inside the v5 Index, so FrontierCode's chart stand-in (O116) retired.
+CHART_COMPONENTS = ("itbench-aa",)
 TARGET_COMPONENTS = (CODING_AGENT_INDEX, *CHART_COMPONENTS, *INDEX_SDLC_TASKS)
 COMPONENT_LABELS = {
     CODING_AGENT_INDEX: "Coding Agent Index",
-    FRONTIERCODE: "FrontierCode 1.1",
     "itbench-aa": "ITBench-AA",
     "aa-briefcase": "AA-Briefcase",
-    "gdpval-aa": "GDPval-AA",
     "gdp-pdf": "GDP.pdf",
     "automationbench-aa": "AutomationBench-AA",
     "terminalbench-4-0": "Terminal-Bench 4.0 (AA Index run)",
-    "scicode": "SciCode",
-    "artificial-analysis-long-context-reasoning": "AA-LCR",
+    "frontiercode-2-0": "FrontierCode 2.0",
+    "terminal-bench-science": "Terminal-Bench-Science",
 }
 ADMISSION_SHARE = Fraction(2, 3)
 CHART_HALF_WIDTH_USD = 0.5  # chart labels are rounded to USD 1
@@ -77,10 +72,10 @@ def component_cost(cost_usd, *, half_width=0.0, completeness=COMPLETE, source, c
 
 
 def index_components(evaluations: list[dict], published_total: float | None) -> tuple[dict, dict]:
-    """The seven SDLC component costs and the Index reconciliation for one AA model page.
+    """The six SDLC component costs and the Index reconciliation for one AA model page.
 
     Each evaluation's cost is its published cost per task times its fixed task
-    count. When the ten evaluations reproduce AA's published total at source
+    count. When the nine evaluations reproduce AA's published total at source
     precision, the components are confirmed complete; otherwise unresolved.
     """
 
@@ -88,9 +83,9 @@ def index_components(evaluations: list[dict], published_total: float | None) -> 
     all_tasks = {**INDEX_SDLC_TASKS, **INDEX_RESIDUAL_TASKS}
     costs = {slug: by_slug[slug] * tasks for slug, tasks in all_tasks.items() if isinstance(by_slug.get(slug), (int, float))}
     complete_set = len(costs) == len(all_tasks)
-    seven = sum(costs[slug] for slug in INDEX_SDLC_TASKS if slug in costs)
+    sdlc = sum(costs[slug] for slug in INDEX_SDLC_TASKS if slug in costs)
     residual = sum(costs[slug] for slug in INDEX_RESIDUAL_TASKS if slug in costs)
-    reconstructed = seven + residual
+    reconstructed = sdlc + residual
     relative_error = (
         abs(reconstructed - published_total) / published_total
         if complete_set and isinstance(published_total, (int, float)) and published_total > 0
@@ -109,7 +104,7 @@ def index_components(evaluations: list[dict], published_total: float | None) -> 
         if slug in costs
     }
     reconciliation = {
-        "sdlcSevenUsd": seven,
+        "sdlcUsd": sdlc,
         "residualUsd": residual,
         "reconstructedTotalUsd": reconstructed,
         "publishedTotalUsd": published_total,
@@ -178,7 +173,7 @@ def admission_panel(costs_by_row: dict, ranked_ids: list[str]) -> dict:
     panel on the same components, is published beside it.
     """
 
-    # E148: the admission units are the named targets of O15 (since O50) and the O116 stand-in, whatever their accounting
+    # E148: the admission units are the named targets of O15 (since O50, as O137 sets them for v5), whatever their accounting
     # representation; an accounting child (e.g. one Coding Agent Index sub-benchmark) never counts as a unit of its own.
     unknown = sorted({component for costs in costs_by_row.values() for component in (costs or {})} - set(TARGET_COMPONENTS))
     if unknown:
@@ -193,26 +188,15 @@ def admission_panel(costs_by_row: dict, ranked_ids: list[str]) -> dict:
     required = math.ceil(ADMISSION_SHARE * len(ranked_ids))
     complete_rows = {component: {row_id for row_id in ranked_ids if complete(row_id, component)} for component in TARGET_COMPONENTS}
 
-    def select(units: tuple) -> tuple:
-        best, feasible = None, 0
-        for size in range(len(units), 0, -1):
-            # combinations() yields subsets in target order, so the first best key is the earliest one.
-            for subset in itertools.combinations(units, size):
-                panel = set(ranked_ids).intersection(*(complete_rows[component] for component in subset))
-                if ranked_ids and len(panel) >= required:
-                    feasible += 1
-                    if best is None or (size, len(panel)) > best[0]:
-                        best = ((size, len(panel)), subset, panel)
-        return best, feasible
-
-    # O116: the selection runs without the stand-ins; a stand-in then replaces its parent only when the parent was not admitted.
-    units = tuple(component for component in TARGET_COMPONENTS if component not in STAND_INS)
-    best, feasible = select(units)
-    standing_in = [stand_in for stand_in, parent in STAND_INS.items() if not (best and parent in best[1])]
-    if standing_in:
-        units = tuple(component for component in TARGET_COMPONENTS
-                      if (component not in STAND_INS or component in standing_in) and component not in {STAND_INS[item] for item in standing_in})
-        best, feasible = select(units)
+    best, feasible = None, 0
+    for size in range(len(TARGET_COMPONENTS), 0, -1):
+        # combinations() yields subsets in target order, so the first best key is the earliest one.
+        for subset in itertools.combinations(TARGET_COMPONENTS, size):
+            panel = set(ranked_ids).intersection(*(complete_rows[component] for component in subset))
+            if ranked_ids and len(panel) >= required:
+                feasible += 1
+                if best is None or (size, len(panel)) > best[0]:
+                    best = ((size, len(panel)), subset, panel)
     admitted = [component for component in TARGET_COMPONENTS if best and component in best[1]]
     panel = [row_id for row_id in ranked_ids if best and row_id in best[2]]
     return {
@@ -222,12 +206,10 @@ def admission_panel(costs_by_row: dict, ranked_ids: list[str]) -> dict:
                 "covered": len(complete_rows[component]),
                 "available": sum(1 for row_id in ranked_ids if available(row_id, component)),
                 "ranked": len(ranked_ids),
-                **({"standsInFor": STAND_INS[component], "eligible": component in standing_in} if component in STAND_INS else {}),
             }
             for component in TARGET_COMPONENTS
         },
-        "selectionRule": "maximise components, then panel size, then target order, over subsets with a complete-evidence panel of at least two-thirds;"
-                         " FrontierCode stands in for the Coding Agent Index only while that index is not admitted (O116)",
+        "selectionRule": "maximise components, then panel size, then target order, over subsets with a complete-evidence panel of at least two-thirds",
         "objective": list(best[0]) if best else None,
         "feasibleAlternatives": feasible,
         "admitted": admitted,

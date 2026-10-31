@@ -26,15 +26,15 @@ from valuerank import quality as q
 # prices the leaf when the family runs inside it (Terminal-Bench runs in AA's Index and in the Coding Agent Index).
 LEAF_FAMILIES = {
     "bugHunt": "bug-hunt",
-    "frontierCode": "frontiercode-v1.1-main",
+    "frontierCode": "frontiercode-2-0",
     "terminalBench": "terminal-bench-v4",
     "gdpval": "gdpval-aa",
     "automationBench": "automationbench-aa",
     "omniscience": "omniscience",
     "lcr": "artificial-analysis-long-context-reasoning",
-    "hle": "humanitys-last-exam",
-    "scicode": "scicode",
-    "critpt": "critpt",
+    "hle": "hle-diamond",
+    "tbScience": "terminal-bench-science",
+    "critpt": "critpt-v2-hard",
     # O53-O55: leaves run outside AA, whose task families no AA cost component prices.
     "vibeCode": "vals-vibe-code-bench",
     "codeMigration": "vals-code-migration",
@@ -44,36 +44,35 @@ LEAF_FAMILIES = {
 # Task families inside each target component (E42); the Coding Agent Index pools three families.
 COMPONENT_FAMILIES = {
     basket.CODING_AGENT_INDEX: tuple(basket.CODING_AGENT_TASKS),
-    basket.FRONTIERCODE: ("frontiercode-v1.1-main",),  # O116: the stand-in while the Coding Agent Index is pending
     "itbench-aa": ("itbench-aa",),
     **{component: (component,) for component in basket.INDEX_SDLC_TASKS},
 }
 COMPONENT_FAMILIES["terminalbench-4-0"] = ("terminal-bench-v4",)
-STAND_IN_IDLE = "not needed: the Coding Agent Index it stands in for is admitted (O116)"
 POOLED = "unidentified: the component publishes one pooled cost across its families"
 
 # Matched-cost families (E103): leaves whose execution family has an exact AA per-evaluation cost per task for
 # every configuration (task count x mean cost per task); the AA Index evaluation slug and its task count.
 MATCHED_FAMILIES = {
     "terminalBench": ("terminalbench-4-0", basket.INDEX_SDLC_TASKS["terminalbench-4-0"]),
-    "gdpval": ("gdpval-aa", basket.INDEX_SDLC_TASKS["gdpval-aa"]),
+    "frontierCode": ("frontiercode-2-0", basket.INDEX_SDLC_TASKS["frontiercode-2-0"]),
     "automationBench": ("automationbench-aa", basket.INDEX_SDLC_TASKS["automationbench-aa"]),
-    "lcr": ("artificial-analysis-long-context-reasoning", basket.INDEX_SDLC_TASKS["artificial-analysis-long-context-reasoning"]),
-    "scicode": ("scicode", basket.INDEX_SDLC_TASKS["scicode"]),
-    "hle": ("humanitys-last-exam", basket.INDEX_RESIDUAL_TASKS["humanitys-last-exam"]),
-    "critpt": ("critpt", basket.INDEX_RESIDUAL_TASKS["critpt"]),
+    "tbScience": ("terminal-bench-science", basket.INDEX_SDLC_TASKS["terminal-bench-science"]),
+    "hle": ("hle-diamond", basket.INDEX_RESIDUAL_TASKS["hle-diamond"]),
+    "critpt": ("critpt-v2-hard", basket.INDEX_RESIDUAL_TASKS["critpt-v2-hard"]),
     "omniscience": ("omniscience", basket.INDEX_RESIDUAL_TASKS["omniscience"]),
 }
 UNPRICED_REASONS = {
     "bugHunt": "the owner's runs publish no cost",
-    "frontierCode": "the Coding Agent Index v2.0 publishes one pooled cost for FrontierCode, SWE-Atlas-QnA-AA and Terminal-Bench (O50)",
+    # O137: AA runs GDPval-AA and AA-LCR outside the v5 Index and publishes no cost for them.
+    "gdpval": "run by AA outside the Intelligence Index v5, which publishes no cost for it (O137)",
+    "lcr": "run by AA outside the Intelligence Index v5, which publishes no cost for it (O137)",
     "vibeCode": "run by Vals AI, outside every AA cost component",
     "codeMigration": "run by Vals AI, outside every AA cost component",
     "livebench2Overall": "run by LiveBench, outside every AA cost component",
     "aiCodingDaily": "run by AI Coding Daily, outside every AA cost component",
 }
 # Leaves whose score is a solved fraction, so a cost per solved task is defined (not GDPval's Elo or the Omniscience index).
-SOLVED_FRACTION_LEAVES = {"terminalBench", "lcr", "hle", "scicode", "critpt"}
+SOLVED_FRACTION_LEAVES = {"frontierCode", "terminalBench", "lcr", "hle", "tbScience", "critpt"}
 MATCHED_MIN_PRICED_WEIGHT = 0.40
 MATCHED_RATIO_LIMIT = 1.5
 MATCHED_RANK_LIMIT = 3
@@ -114,7 +113,7 @@ def basket_readiness(rows: list[dict], admission: dict, main_workload: str) -> d
         item = admission["components"][component]
         missing = sorted(row["id"] for row in rows if (row["components"].get(component) or {}).get("completeness") != basket.COMPLETE)
         components[component] = {
-            "status": "admitted" if item["admitted"] else STAND_IN_IDLE if item.get("standsInFor") and not item.get("eligible") else "pending capture",
+            "status": "admitted" if item["admitted"] else "pending capture",
             "missingConfigurations": missing,
             "tasks": _tasks(component),
             "costAvailable": item["available"],

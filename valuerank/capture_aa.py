@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Capture compact first-party model payloads for AA Intelligence Index v4.3.2."""
+"""Capture compact first-party model payloads for AA Intelligence Index v5.0 (owner decision O132)."""
 
 from __future__ import annotations
 
@@ -115,7 +115,7 @@ def main() -> int:
         pages = list(pool.map(lambda entry: capture(entry, preserved_pages), entries))
     document = {
         "schemaVersion": "valuerank-aa-page-snapshot/v2",
-        "benchmarkVersion": "Artificial Analysis Intelligence Index v4.3.2",
+        "benchmarkVersion": "Artificial Analysis Intelligence Index v5.0",
         "capturedAt": iso_z(),
         "source": "https://artificialanalysis.ai/evaluations/artificial-analysis-intelligence-index",
         "concurrency": MAX_WORKERS,
