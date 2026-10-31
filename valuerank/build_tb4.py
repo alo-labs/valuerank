@@ -16,18 +16,16 @@ from valuerank.paths import DATA, ROOT
 TARGET_URL = "https://www.tbench.ai/leaderboard/terminal-bench/4.0"
 HOMEPAGE_URL = "https://www.tbench.ai/"
 
-COHORT_ALIAS = {
-    "GPT-6 Astra": "gpt-6-astra",
-    "Opus 5": "claude-opus-5",
-    "Fable 5": "claude-fable-5",
-    "GLM-5.3": "glm-5.3",
-    "GPT-5.6 Sol": "gpt-5.6-sol",
-    "Opus 4.8": "claude-opus-4.8",
-    "Grok 4.6": "grok-4.6",
-    "Gemini 3.8 Flash": "gemini-3.8-flash",
-    "GPT-5.6 Luna": "gpt-5.6-luna",
-    "Sonnet 5": "claude-sonnet-5",
-    "Gemini 3.7 Flash": "gemini-3.7-flash",
+# O132 (2026-10-30): the AA Intelligence Index v5 cohort. tbench.ai shows one row per model (its best effort), so every
+# cohort configuration is aliased by the exact displayed model and effort (O33), never by base name.
+COHORT_ALIAS: dict[str, str] = {}
+
+EXACT_ALIAS = {
+    "Opus 5.5 (max)": "claude-opus-5-5",
+    "Sonnet 5.5 (max)": "claude-sonnet-5-5",
+    "GPT-6 Astra (max)": "gpt-6-astra",
+    "GPT-6.1 Sol (max)": "gpt-6.1-sol",
+    "GPT-6 Luna (max)": "gpt-6-luna",
 }
 
 
@@ -79,7 +77,7 @@ def main(argv: list[str] | None = None, *, data: Path = DATA) -> int:
             "releaseDate": release_date,
             "tokens": tokens,
             "costUsd": parse_cost(cost),
-            "cohortModelId": COHORT_ALIAS.get(base_model),
+            "cohortModelId": EXACT_ALIAS.get(model) or COHORT_ALIAS.get(base_model),
         })
     aa_models = json.loads((data / "aa_metrics.json").read_text())["models"]
     cohort = [{"slug": model_id, "displayName": item["displayName"]} for model_id, item in aa_models.items()]

@@ -1,0 +1,599 @@
+{
+  "slug": "gpt-6-astra-high",
+  "name": "GPT-6 Astra (high)",
+  "developer": "OpenAI",
+  "aaUrl": "https://artificialanalysis.ai/models/gpt-6-astra-high",
+  "aaVariant": "high",
+  "selectedPage": "https://artificialanalysis.ai/models/gpt-6-astra-high",
+  "summary": {
+    "rank": {
+      "api": 9,
+      "plan": 28
+    },
+    "overall": {
+      "api": 46.00912825832105,
+      "plan": 48.27883639195342
+    },
+    "quality": 57.31873574686409,
+    "qualityRank": 1,
+    "coverage": {
+      "pct": 100.0,
+      "costAvailable": true,
+      "missing": [],
+      "provisional": false,
+      "provisionalReasons": []
+    },
+    "grade": "measured",
+    "rankingEligible": true,
+    "exclusionReasons": [],
+    "flags": []
+  },
+  "dimensions": [
+    {
+      "key": "frontierCode",
+      "label": "FrontierCode 2.0",
+      "category": "Software engineering",
+      "weightPct": 15.75,
+      "value": 0.401351515151515,
+      "decimals": 3,
+      "unit": "AA score (0-1)",
+      "normalized": 40.1351515151515,
+      "source": {
+        "name": "Artificial Analysis model page (Intelligence Index v5.0)",
+        "url": "https://artificialanalysis.ai/evaluations/frontiercode-2-0"
+      },
+      "observedAt": "2026-10-31",
+      "evaluatedVariant": null,
+      "note": null,
+      "grade": "measured"
+    },
+    {
+      "key": "terminalBench",
+      "label": "Terminal-Bench 4.0 (AA run)",
+      "category": "Software engineering",
+      "weightPct": 12.75,
+      "value": 54.040404040404,
+      "decimals": 1,
+      "unit": "% resolved",
+      "normalized": 54.040404040404,
+      "source": {
+        "name": "Artificial Analysis Terminal-Bench 4.0 run (mini-SWE-agent)",
+        "url": "https://www.tbench.ai/leaderboard/terminal-bench/4.0"
+      },
+      "observedAt": "2026-10-31",
+      "evaluatedVariant": "mini-SWE-agent",
+      "note": null,
+      "grade": "measured"
+    },
+    {
+      "key": "bugHunt",
+      "label": "Bug Hunt Bench",
+      "category": "Software engineering",
+      "weightPct": 9.0,
+      "value": 35.0,
+      "decimals": 1,
+      "unit": "bugs fixed of 105",
+      "normalized": 33.333333333333336,
+      "source": {
+        "name": "Bug Hunt Bench published runs",
+        "url": "https://bughunt.productcompass.pm/"
+      },
+      "observedAt": "2026-10-27",
+      "evaluatedVariant": "GPT-6 Astra (high effort) / Codex CLI",
+      "note": null,
+      "grade": "measured"
+    },
+    {
+      "key": "aiCodingDaily",
+      "label": "AI Coding Daily (excl. bug finding)",
+      "category": "Software engineering",
+      "weightPct": 7.5,
+      "value": 56.77,
+      "decimals": 1,
+      "unit": "points of 60",
+      "normalized": 94.61666666666666,
+      "source": {
+        "name": "Artificial Analysis model page (Intelligence Index v5.0)",
+        "url": "https://aicodingdaily.com/leaderboard"
+      },
+      "observedAt": "2026-10-31",
+      "evaluatedVariant": "GPT-6-Astra (High) / Codex CLI",
+      "note": null,
+      "grade": "measured"
+    },
+    {
+      "key": "gdpval",
+      "label": "GDPval-AA v2.1",
+      "category": "Professional work",
+      "weightPct": 7.5,
+      "value": 1536.04,
+      "decimals": 1,
+      "unit": "Elo",
+      "normalized": 51.802,
+      "source": {
+        "name": "Artificial Analysis model page (Intelligence Index v5.0)",
+        "url": "https://artificialanalysis.ai/evaluations/gdpval-aa"
+      },
+      "observedAt": "2026-10-31",
+      "evaluatedVariant": null,
+      "note": null,
+      "grade": "measured"
+    },
+    {
+      "key": "automationBench",
+      "label": "AutomationBench-AA",
+      "category": "Professional work",
+      "weightPct": 7.5,
+      "value": 0.666122174975011,
+      "decimals": 3,
+      "unit": "AA score (0-1)",
+      "normalized": 66.6122174975011,
+      "source": {
+        "name": "Artificial Analysis model page (Intelligence Index v5.0)",
+        "url": "https://artificialanalysis.ai/evaluations/automationbench-aa"
+      },
+      "observedAt": "2026-10-31",
+      "evaluatedVariant": null,
+      "note": null,
+      "grade": "measured"
+    },
+    {
+      "key": "omniscience",
+      "label": "AA-Omniscience v1.1",
+      "category": "Reliability",
+      "weightPct": 7.5,
+      "value": 44.56666666666667,
+      "decimals": 1,
+      "unit": "AA Omniscience Index (-100 to 100)",
+      "normalized": 72.28333333333333,
+      "source": {
+        "name": "Artificial Analysis model page (Intelligence Index v5.0)",
+        "url": "https://artificialanalysis.ai/evaluations/omniscience"
+      },
+      "observedAt": "2026-10-31",
+      "evaluatedVariant": null,
+      "note": null,
+      "grade": "measured"
+    },
+    {
+      "key": "lcr",
+      "label": "AA-LCR v1.1",
+      "category": "Knowledge and science",
+      "weightPct": 3.75,
+      "value": 0.8,
+      "decimals": 3,
+      "unit": "accuracy (0-1)",
+      "normalized": 80.0,
+      "source": {
+        "name": "Artificial Analysis model page (Intelligence Index v5.0)",
+        "url": "https://artificialanalysis.ai/evaluations/artificial-analysis-long-context-reasoning"
+      },
+      "observedAt": "2026-10-31",
+      "evaluatedVariant": null,
+      "note": null,
+      "grade": "measured"
+    },
+    {
+      "key": "hle",
+      "label": "HLE-Diamond",
+      "category": "Knowledge and science",
+      "weightPct": 1.25,
+      "value": 0.593,
+      "decimals": 3,
+      "unit": "accuracy (0-1)",
+      "normalized": 59.3,
+      "source": {
+        "name": "Artificial Analysis model page (Intelligence Index v5.0)",
+        "url": "https://artificialanalysis.ai/evaluations/hle-diamond"
+      },
+      "observedAt": "2026-10-31",
+      "evaluatedVariant": null,
+      "note": null,
+      "grade": "measured"
+    },
+    {
+      "key": "tbScience",
+      "label": "Terminal-Bench-Science 0.1",
+      "category": "Knowledge and science",
+      "weightPct": 1.25,
+      "value": 0.595238095238095,
+      "decimals": 3,
+      "unit": "% resolved (0-1)",
+      "normalized": 59.523809523809504,
+      "source": {
+        "name": "Artificial Analysis model page (Intelligence Index v5.0)",
+        "url": "https://artificialanalysis.ai/evaluations/terminal-bench-science"
+      },
+      "observedAt": "2026-10-31",
+      "evaluatedVariant": null,
+      "note": null,
+      "grade": "measured"
+    },
+    {
+      "key": "critpt",
+      "label": "CritPt v2 (hard subset)",
+      "category": "Knowledge and science",
+      "weightPct": 1.25,
+      "value": 0.715,
+      "decimals": 3,
+      "unit": "score (0-1)",
+      "normalized": 71.5,
+      "source": {
+        "name": "Artificial Analysis model page (Intelligence Index v5.0)",
+        "url": "https://artificialanalysis.ai/evaluations/critpt-v2"
+      },
+      "observedAt": "2026-10-31",
+      "evaluatedVariant": null,
+      "note": null,
+      "grade": "measured"
+    }
+  ],
+  "cost": {
+    "apiUsd": 2834.1008457247967,
+    "planUsd": 195.65763518983755,
+    "fallback": null,
+    "route": {
+      "id": "chatgpt-pro200-gpt-6-astra-high-common-gpt-assumption",
+      "planLabel": "ChatGPT Pro 200 $200 · same-model measurement, another effort (O88, O90)",
+      "planFeeUsd": 200,
+      "valueMultiple": 14.485,
+      "grade": "measured",
+      "assumptionKind": null,
+      "evidenceLabel": "Same-model measurement from another effort (owner decisions O88, O90)",
+      "sourceModel": "GPT-6 Astra",
+      "sourceUrl": "https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x",
+      "sourceDate": "2026-10-06"
+    },
+    "subset": false,
+    "partialComponents": [],
+    "workload": "835a9baf594a1251",
+    "planFlags": [
+      "workload-unmatched",
+      "same-model measurement from another effort (O88, O90)",
+      "possibly-superseded",
+      "valuation basis unverified"
+    ],
+    "costScore": {
+      "api": 12.080305792691924,
+      "plan": 21.159138327221388
+    },
+    "components": [
+      {
+        "key": "aa-briefcase",
+        "label": "AA-Briefcase",
+        "costUsd": 433.48084724166887,
+        "completeness": "confirmed-complete",
+        "source": "AA Intelligence Index evaluation cost (cost per task x task count)",
+        "agent": null,
+        "admitted": true
+      },
+      {
+        "key": "gdp-pdf",
+        "label": "GDP.pdf",
+        "costUsd": 179.48241,
+        "completeness": "confirmed-complete",
+        "source": "AA Intelligence Index evaluation cost (cost per task x task count)",
+        "agent": null,
+        "admitted": true
+      },
+      {
+        "key": "automationbench-aa",
+        "label": "AutomationBench-AA",
+        "costUsd": 850.9363937303979,
+        "completeness": "confirmed-complete",
+        "source": "AA Intelligence Index evaluation cost (cost per task x task count)",
+        "agent": null,
+        "admitted": true
+      },
+      {
+        "key": "terminalbench-4-0",
+        "label": "Terminal-Bench 4.0 (AA Index run)",
+        "costUsd": 267.1015130354963,
+        "completeness": "confirmed-complete",
+        "source": "AA Intelligence Index evaluation cost (cost per task x task count)",
+        "agent": null,
+        "admitted": true
+      },
+      {
+        "key": "frontiercode-2-0",
+        "label": "FrontierCode 2.0",
+        "costUsd": 497.07067323296735,
+        "completeness": "confirmed-complete",
+        "source": "AA Intelligence Index evaluation cost (cost per task x task count)",
+        "agent": null,
+        "admitted": true
+      },
+      {
+        "key": "terminal-bench-science",
+        "label": "Terminal-Bench-Science",
+        "costUsd": 606.0290084842666,
+        "completeness": "confirmed-complete",
+        "source": "AA Intelligence Index evaluation cost (cost per task x task count)",
+        "agent": null,
+        "admitted": true
+      }
+    ],
+    "aaCostCaveat": null,
+    "selectionReason": "larger observed multiple (observed-workload multiple — target-workload ordering not identified)",
+    "planAmount": {
+      "amountKind": "API-equivalent consumption measured on the same model at another effort (O88, O90)",
+      "amountTarget": "measured-workload consumption (another effort)",
+      "amountUsd": 2897.0,
+      "derivation": "same-model measurement: the multiple measured at another effort times this route's cash (O88, O90)",
+      "feePeriod": "month",
+      "subscriptionCashUsd": 200,
+      "additionalCashUsd": 0.0,
+      "grossCashUsd": 200.0,
+      "workload": "the route's measurement workload",
+      "measurementObjectId": "chatgpt-pro200-gpt-6-astra-high-common-gpt-assumption",
+      "capacitySolutionId": null,
+      "cashObjectId": "chatgpt-pro200-gpt-6-astra-high-common-gpt-assumption:month cash",
+      "purchasePolicyId": "subscription fee for the fee period, no additional cash declared",
+      "capacityStatus": "capacity established on the measurement workload",
+      "valuationStatus": "unverified",
+      "donorRouteId": "chatgpt-pro200-gpt6astra-semianalysis",
+      "interpretationLabel": "API-equivalent consumption measured on the same model at another effort (O88, O90), API-priced USD per month"
+    }
+  },
+  "plans": [
+    {
+      "id": "chatgpt-pro200-gpt-6-astra-high-common-gpt-assumption",
+      "planLabel": "ChatGPT Pro 200 $200 · same-model measurement, another effort (O88, O90)",
+      "planFeeUsd": 200,
+      "valueMultiple": 14.485,
+      "grade": "measured",
+      "assumptionKind": null,
+      "evidenceLabel": "Same-model measurement from another effort (owner decisions O88, O90)",
+      "sourceUrl": "https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x",
+      "sourceDate": "2026-10-06",
+      "case": 3,
+      "officialDisplayEligible": true,
+      "planIntervalEligible": false,
+      "usdPerRun": 195.65763518983755,
+      "selected": true,
+      "planRank": 28,
+      "planValue": 48.27883639195342
+    },
+    {
+      "id": "chatgpt-pro500-gpt-6-astra-high-common-gpt-assumption",
+      "planLabel": "ChatGPT Pro 500 $500 · same-model measurement, another effort (O88, O90)",
+      "planFeeUsd": 500,
+      "valueMultiple": 13.91,
+      "grade": "measured",
+      "assumptionKind": null,
+      "evidenceLabel": "Same-model measurement from another effort (owner decisions O88, O90)",
+      "sourceUrl": "https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x",
+      "sourceDate": "2026-10-06",
+      "case": 3,
+      "officialDisplayEligible": true,
+      "planIntervalEligible": false,
+      "usdPerRun": 203.7455676293887,
+      "selected": false,
+      "planRank": 33,
+      "planValue": 48.11070505287336
+    },
+    {
+      "id": "chatgpt-pro100-gpt-6-astra-high-common-gpt-assumption",
+      "planLabel": "ChatGPT Pro 100 $100 · same-model measurement, another effort (O88, O90)",
+      "planFeeUsd": 100,
+      "valueMultiple": 13.22,
+      "grade": "measured",
+      "assumptionKind": null,
+      "evidenceLabel": "Same-model measurement from another effort (owner decisions O88, O90)",
+      "sourceUrl": "https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x",
+      "sourceDate": "2026-10-06",
+      "case": 3,
+      "officialDisplayEligible": true,
+      "planIntervalEligible": false,
+      "usdPerRun": 214.37979165845664,
+      "selected": false,
+      "planRank": 35,
+      "planValue": 47.899523348739756
+    },
+    {
+      "id": "chatgpt-plus-gpt-6-astra-high-common-gpt-assumption",
+      "planLabel": "ChatGPT Plus $20 · same-model measurement, another effort (O88, O90)",
+      "planFeeUsd": 20,
+      "valueMultiple": 8.1,
+      "grade": "measured",
+      "assumptionKind": null,
+      "evidenceLabel": "Same-model measurement from another effort (owner decisions O88, O90)",
+      "sourceUrl": "https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x",
+      "sourceDate": "2026-10-06",
+      "case": 3,
+      "officialDisplayEligible": true,
+      "planIntervalEligible": false,
+      "usdPerRun": 349.88899329935765,
+      "selected": false,
+      "planRank": 44,
+      "planValue": 45.86617721740596
+    }
+  ],
+  "scenarios": {
+    "status": "current",
+    "api": [
+      {
+        "stratum": "S0",
+        "kernel": "primary",
+        "targetProfile": "published-record reporting precision",
+        "unevaluable": null,
+        "top1": 0.0,
+        "top3": 0.0,
+        "frontier": 1.0
+      },
+      {
+        "stratum": "S1",
+        "kernel": "primary",
+        "targetProfile": "published-record reporting precision + conventional identification of missing leaves",
+        "unevaluable": null,
+        "top1": 0.0,
+        "top3": 0.0,
+        "frontier": 1.0
+      },
+      {
+        "stratum": "S2",
+        "kernel": "primary",
+        "targetProfile": "published-record reporting precision + conventional identification of missing leaves + weight-specification stress",
+        "unevaluable": null,
+        "top1": 0.0,
+        "top3": 0.0,
+        "frontier": 0.9317
+      },
+      {
+        "stratum": "S1",
+        "kernel": "endpoint-heavy",
+        "targetProfile": "published-record reporting precision + conventional identification of missing leaves",
+        "unevaluable": null,
+        "top1": 0.0,
+        "top3": 0.0,
+        "frontier": 1.0
+      },
+      {
+        "stratum": "S1M",
+        "kernel": "primary",
+        "targetProfile": "published-record reporting precision + conventional identification of missing leaves + conventional range sensitivity inside published 95% confidence intervals (no tail model)",
+        "unevaluable": null,
+        "top1": 0.0,
+        "top3": 0.0,
+        "frontier": 1.0
+      },
+      {
+        "stratum": "S1T",
+        "kernel": "primary",
+        "targetProfile": "published-record leaf values redrawn with plug-in binomial task-sampling noise from each leaf's published task count (independent-task approximation; GDPval-AA from its displayed rating interval, an assumption) + conventional identification of missing leaves",
+        "unevaluable": null,
+        "top1": 0.0,
+        "top3": 0.0018,
+        "frontier": 0.4189
+      }
+    ],
+    "plan": [
+      {
+        "stratum": "S0",
+        "kernel": "primary",
+        "targetProfile": "published-record reporting precision",
+        "unevaluable": null,
+        "top1": 0.0,
+        "top3": 0.0,
+        "frontier": 1.0
+      },
+      {
+        "stratum": "S1",
+        "kernel": "primary",
+        "targetProfile": "published-record reporting precision + conventional identification of missing leaves",
+        "unevaluable": null,
+        "top1": 0.0,
+        "top3": 0.0,
+        "frontier": 1.0
+      },
+      {
+        "stratum": "S2",
+        "kernel": "primary",
+        "targetProfile": "published-record reporting precision + conventional identification of missing leaves + weight-specification stress",
+        "unevaluable": null,
+        "top1": 0.0,
+        "top3": 0.0,
+        "frontier": 0.9416
+      },
+      {
+        "stratum": "S1",
+        "kernel": "endpoint-heavy",
+        "targetProfile": "published-record reporting precision + conventional identification of missing leaves",
+        "unevaluable": null,
+        "top1": 0.0,
+        "top3": 0.0,
+        "frontier": 1.0
+      },
+      {
+        "stratum": "S1M",
+        "kernel": "primary",
+        "targetProfile": "published-record reporting precision + conventional identification of missing leaves + conventional range sensitivity inside published 95% confidence intervals (no tail model)",
+        "unevaluable": null,
+        "top1": 0.0,
+        "top3": 0.0,
+        "frontier": 1.0
+      },
+      {
+        "stratum": "S1T",
+        "kernel": "primary",
+        "targetProfile": "published-record leaf values redrawn with plug-in binomial task-sampling noise from each leaf's published task count (independent-task approximation; GDPval-AA from its displayed rating interval, an assumption) + conventional identification of missing leaves",
+        "unevaluable": null,
+        "top1": 0.0002,
+        "top3": 0.0002,
+        "frontier": 0.5267
+      }
+    ]
+  },
+  "intervals": {
+    "api": {
+      "definite": "certified",
+      "possible": "certified"
+    },
+    "plan": null
+  },
+  "history": [
+    {
+      "version": "v3.0.0",
+      "date": "2026-10-19",
+      "rank": {
+        "api": 9,
+        "plan": 28
+      }
+    }
+  ],
+  "frontier": {
+    "onAaFrontier": true,
+    "aaFrontierNote": "On the observed Artificial Analysis Intelligence Index versus total cost frontier as GPT-6 Astra (high).",
+    "tier": "frontier",
+    "configuration": "GPT-6 Astra (high)",
+    "intelligenceGap": 0,
+    "footnote": null
+  },
+  "rankings": [
+    {
+      "track": "max",
+      "label": "Max-effort ranking",
+      "href": "/rankings/",
+      "shown": false,
+      "rankingEligible": false,
+      "rank": {
+        "api": null,
+        "plan": null
+      },
+      "overall": {
+        "api": null,
+        "plan": null
+      }
+    },
+    {
+      "track": "aicd",
+      "label": "AI Coding Daily ranking",
+      "href": "/rankings/ai-coding-daily/",
+      "shown": true,
+      "rankingEligible": true,
+      "rank": {
+        "api": 9,
+        "plan": 28
+      },
+      "overall": {
+        "api": 46.00912825832105,
+        "plan": 48.27883639195342
+      }
+    },
+    {
+      "track": "common",
+      "label": "Common-leaf ranking (diagnostic)",
+      "href": "/rankings/common-leaves/",
+      "shown": false,
+      "rankingEligible": true,
+      "rank": {
+        "api": 13,
+        "plan": 39
+      },
+      "overall": {
+        "api": 43.8230691601119,
+        "plan": 44.623407504276265
+      }
+    }
+  ]
+}

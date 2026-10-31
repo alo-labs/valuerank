@@ -1,0 +1,14 @@
+Model version,mean_score,Best score (across scorers),Release date,Organization,Country,Training compute (FLOP),Training compute notes,stderr,Log viewer,Logs,Started at,id
+gemini-4-argon_high,0.5888888888888889,0.5888888888888889,2026-09-30,Google DeepMind,United States of America,,,0.1171381252539371,,,2026-10-14T10:00:34.000Z,h7xMzFUTMGSGqUSKUpxkUW
+claude-opus-5-5_max,0.774,0.774,2026-09-22,Anthropic,United States of America,,,0.0831,,,2026-09-22T16:42:00.000Z,mirrorcode-ml-2l-claude-opus-5-5
+claude-fable-5-1_high,0.733,0.733,2026-09-01,Anthropic,United States of America,,,0.0917,,,2026-09-10T13:19:30.449Z,mirrorcode-ml-2l-claude-fable-5-1
+gpt-6-astra_high,0.467,0.467,2026-09-03,OpenAI,United States of America,9.4e+26,"per OpenAI and affiliates (e.g. Nvidia), 6 Astra was trained on at least 100,000 GB200s in Abilene, Texas (so 100,000 in ""Hardware quantity"" is a lower bound/underestimate).
+
+This suggests around 9e26 FLOP (corresponding to ~100k GB200s over 90 days at 25% FP8 MFU). See more detailed estimate in this notebook, yielding a CI of ~[5e26, 2e27] FLOP.
+https://colab.research.google.com/drive/1DRlugIQs-_zoV66AJT1gQg6I1-NX7NqN ",0.1186,,,2026-08-30T16:51:09.000Z,mirrorcode-ml-2l-gpt-6-astra
+claude-opus-4-7_high,0.3111111111111111,0.3111111111111111,2026-04-16,Anthropic,United States of America,,,0.09036473223803354,,,2026-08-12T11:43:31.000Z,mirrorcode-ml-2l-claude-opus-4-7
+gemini-3.1-pro-preview_high,0.08888888888888888,0.08888888888888888,2026-02-19,Google DeepMind,United States of America,,,0.04561939004190448,,,2026-08-10T16:12:46.343Z,mirrorcode-ml-2l-gemini-3-1-pro-preview
+gpt-5.5_high,0.1,0.1,2026-04-23,OpenAI,United States of America,,,0.06042179781166438,,,2026-08-10T16:12:45.865Z,mirrorcode-ml-2l-gpt-5-5
+gpt-5.4-2026-03-05_high,0.15555555555555556,0.15555555555555556,2026-03-05,OpenAI,United States of America,,,0.0770945044100374,,,2026-08-10T16:12:45.299Z,mirrorcode-ml-2l-gpt-5-4
+gpt-5.6-sol_high,0.2,0.2,2026-07-09,OpenAI,United States of America,,,0.09229582069908972,,,2026-08-10T16:12:44.772Z,mirrorcode-ml-2l-gpt-5-6-sol
+claude-fable-5_high,0.638888888888889,0.638888888888889,2026-06-09,Anthropic,United States of America,,,0.10404092940368063,,,2026-08-10T16:12:44.227Z,mirrorcode-ml-2l-claude-fable-5

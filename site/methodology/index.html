@@ -3,18 +3,18 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Methodology · ValueRank v2.0.0</title>
+  <title>Methodology · ValueRank v3.0.0</title>
   <meta name="description" content="How ValueRank scores models: dimensions, weights, renormalisation, evidence grades and limitations, with a worked example.">
   <link rel="canonical" href="https://valuerank.alolabs.dev/methodology/">
   <meta name="theme-color" content="#4f46e5">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="ValueRank">
-  <meta property="og:title" content="Methodology · ValueRank v2.0.0">
+  <meta property="og:title" content="Methodology · ValueRank v3.0.0">
   <meta property="og:description" content="How ValueRank scores models: dimensions, weights, renormalisation, evidence grades and limitations, with a worked example.">
   <meta property="og:url" content="https://valuerank.alolabs.dev/methodology/">
   <meta property="og:image" content="https://valuerank.alolabs.dev/og/methodology.png">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Methodology · ValueRank v2.0.0">
+  <meta name="twitter:title" content="Methodology · ValueRank v3.0.0">
   <meta name="twitter:description" content="How ValueRank scores models: dimensions, weights, renormalisation, evidence grades and limitations, with a worked example.">
   <meta name="twitter:image" content="https://valuerank.alolabs.dev/og/methodology.png">
   <link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
@@ -50,24 +50,31 @@
   </header>
   <main id="main" class="wrap main" tabindex="-1">
 <header class="page-head">
-  <p class="eyebrow">Methodology</p>
+  <p class="eyebrow">Methodology 3.0.0</p>
   <h1 id="page-title">How ValueRank scores a model</h1>
-  <p class="lead">A model's score is its value: cost per Intelligence Index point carries a fixed 25% of the score and benchmark quality the other 75%. The quality part is a weighted average of 0&ndash;100 dimension scores. If a quality dimension has no eligible value for a model it is left out and the remaining quality weights are scaled up, so a gap never counts as zero and never gets filled in.</p>
+  <p class="lead">A configuration's score is its value: a cost score carries a fixed 25% and benchmark quality the other 75%. That weight is nominal: on the current panel, cost accounts for 94% of the spread in API value and -37% in Plan value, because cost scores vary more across configurations than quality scores do. Cost is what it costs to run the SDLC basket once, scored on a log scale so cost ratios keep their size. Quality is the weighted mean of the benchmark leaves observed for that exact configuration: a missing leaf is left out and never filled in, and a configuration without a cost gets no value score.</p>
 </header>
 
 <nav class="toc" aria-label="On this page">
   <ul>
-    <li><a href="#weights">Dimensions and weights</a></li>
+    <li><a href="#cost">Cost: the SDLC basket</a></li>
+    <li><a href="#weights">Quality leaves and weights</a></li>
+    <li><a href="#uncertainty">What the uncertainty outputs cover</a></li>
     <li><a href="#model-inclusion">Model inclusion</a></li>
     <li><a href="#worked-example">Worked example</a></li>
     <li><a href="#evidence-grades">Evidence grades</a></li>
     <li><a href="#limitations">Limitations</a></li>
     <li><a href="#faq">Questions</a></li>
   </ul>
-</nav>
+</nav><section class="block" id="cost" aria-labelledby="cost-title">
+  <h2 id="cost-title" class="section-title">Cost: the SDLC basket</h2>
+  <p>The cost figure is the <strong>contestant-model API token cost for the SDLC basket (not total agent or workflow operating cost)</strong>: Artificial Analysis' published cost of running Coding Agent Index, AA-Briefcase, GDP.pdf, AutomationBench-AA, Terminal-Bench 4.0 (AA Index run), FrontierCode 2.0, Terminal-Bench-Science once at API rates (SDLC basket v1). Pending capture: ITBench-AA. A configuration missing a component is scored on its own subset of the basket, flagged, and never compared as if it had run the whole basket.</p>
+  <p>The cost score is 100 &times; (ln c<sub>H</sub> &minus; ln c) / (ln c<sub>H</sub> &minus; ln c<sub>L</sub>), clipped to 0&ndash;100, against anchors frozen with anchor version <span class="mono">v3-2026-10-31</span>: API anchors $79.50 to $21,003.64 per basket run. At these anchors, doubling the cost costs 3.11 value points, which 4.14 quality points offset.</p>
+  <p>On the Plan basis the basket's API cost is divided by the selected subscription route's Value Multiple at full utilisation; a configuration without an admitted route falls back to its API cost, flagged. No Value Multiple is yet identified on the basket itself, so the Plan ranking is labelled exploratory.</p>
+</section>
 
 <section class="block" id="weights" aria-labelledby="weights-title">
-  <h2 id="weights-title" class="section-title">Dimensions and weights</h2>
+  <h2 id="weights-title" class="section-title">Quality leaves and weights</h2>
   <div class="table-wrap" tabindex="0" role="region" aria-label="Dimensions and weights table">
     <table class="data-table">
       <thead><tr><th scope="col" class="col-model">Dimension</th><th scope="col">Category</th><th scope="col" class="col-num">Weight</th><th scope="col">Better when</th></tr></thead>
@@ -75,138 +82,133 @@
           <th scope="row" class="cell-model"><span class="model-id"><span class="model-name">Cost (selected basis)</span></span></th>
           <td>cost</td>
           <td class="cell-num">25.00%</td>
-          <td>lower</td>
-        </tr>        <tr>
-          <th scope="row" class="cell-model"><span class="model-id"><a class="model-name" href="https://artificialanalysis.ai/evaluations/omniscience" rel="noopener">Non-Hallucination</a></span></th>
-          <td>rely</td>
-          <td class="cell-num">4.21%</td>
           <td>higher</td>
         </tr>        <tr>
-          <th scope="row" class="cell-model"><span class="model-id"><a class="model-name" href="https://www.tbench.ai/leaderboard/terminal-bench/4.0" rel="noopener">Terminal-Bench 4.0</a></span></th>
+          <th scope="row" class="cell-model"><span class="model-id"><a class="model-name" href="https://artificialanalysis.ai/evaluations/frontiercode-2-0" rel="noopener">FrontierCode 2.0</a></span></th>
           <td>code</td>
-          <td class="cell-num">4.21%</td>
+          <td class="cell-num">11.25%</td>
           <td>higher</td>
         </tr>        <tr>
-          <th scope="row" class="cell-model"><span class="model-id"><a class="model-name" href="https://livebench.ai/" rel="noopener">Instruction Following (LiveBench)</a></span></th>
-          <td>language</td>
-          <td class="cell-num">3.50%</td>
-          <td>higher</td>
-        </tr>        <tr>
-          <th scope="row" class="cell-model"><span class="model-id"><a class="model-name" href="https://artificialanalysis.ai/agents/coding-agents?coding-agents-performance-chart=deep-swe-v1.1" rel="noopener">DeepSWE v1.1</a></span></th>
+          <th scope="row" class="cell-model"><span class="model-id"><a class="model-name" href="https://www.tbench.ai/leaderboard/terminal-bench/4.0" rel="noopener">Terminal-Bench 4.0 (AA run)</a></span></th>
           <td>code</td>
-          <td class="cell-num">17.52%</td>
-          <td>higher</td>
-        </tr>        <tr>
-          <th scope="row" class="cell-model"><span class="model-id"><a class="model-name" href="https://artificialanalysis.ai/evaluations/gdpval-aa" rel="noopener">GDPval-AA v2.1</a></span></th>
-          <td>prod</td>
-          <td class="cell-num">4.21%</td>
-          <td>higher</td>
-        </tr>        <tr>
-          <th scope="row" class="cell-model"><span class="model-id"><a class="model-name" href="https://artificialanalysis.ai/evaluations/automationbench-aa" rel="noopener">AutomationBench-AA</a></span></th>
-          <td>prod</td>
-          <td class="cell-num">3.50%</td>
-          <td>higher</td>
-        </tr>        <tr>
-          <th scope="row" class="cell-model"><span class="model-id"><a class="model-name" href="https://artificialanalysis.ai/evaluations/artificial-analysis-long-context-reasoning" rel="noopener">AA-LCR v1.1</a></span></th>
-          <td>language</td>
-          <td class="cell-num">2.80%</td>
-          <td>higher</td>
-        </tr>        <tr>
-          <th scope="row" class="cell-model"><span class="model-id"><a class="model-name" href="https://artificialanalysis.ai/evaluations/omniscience" rel="noopener">AA-Omniscience Accuracy</a></span></th>
-          <td>rely</td>
-          <td class="cell-num">2.80%</td>
-          <td>higher</td>
-        </tr>        <tr>
-          <th scope="row" class="cell-model"><span class="model-id"><a class="model-name" href="https://artificialanalysis.ai/evaluations/humanitys-last-exam" rel="noopener">HLE</a></span></th>
-          <td>intel</td>
-          <td class="cell-num">2.80%</td>
-          <td>higher</td>
-        </tr>        <tr>
-          <th scope="row" class="cell-model"><span class="model-id"><a class="model-name" href="https://artificialanalysis.ai/evaluations/gpqa-diamond" rel="noopener">GPQA Diamond (legacy)</a></span></th>
-          <td>intel</td>
-          <td class="cell-num">2.80%</td>
-          <td>higher</td>
-        </tr>        <tr>
-          <th scope="row" class="cell-model"><span class="model-id"><a class="model-name" href="https://artificialanalysis.ai/evaluations/scicode" rel="noopener">SciCode</a></span></th>
-          <td>intel</td>
-          <td class="cell-num">2.80%</td>
-          <td>higher</td>
-        </tr>        <tr>
-          <th scope="row" class="cell-model"><span class="model-id"><a class="model-name" href="https://artificialanalysis.ai/evaluations/critpt" rel="noopener">CritPt</a></span></th>
-          <td>intel</td>
-          <td class="cell-num">2.10%</td>
-          <td>higher</td>
-        </tr>        <tr>
-          <th scope="row" class="cell-model"><span class="model-id"><a class="model-name" href="https://artificialanalysis.ai/evaluations/artificial-analysis-intelligence-index" rel="noopener">AA Intelligence Index</a></span></th>
-          <td>intel</td>
-          <td class="cell-num">4.21%</td>
-          <td>higher</td>
-        </tr>        <tr>
-          <th scope="row" class="cell-model"><span class="model-id"><a class="model-name" href="https://artificialanalysis.ai/methodology/intelligence-benchmarking" rel="noopener">Speed</a></span></th>
-          <td>prod</td>
-          <td class="cell-num">3.50%</td>
+          <td class="cell-num">8.25%</td>
           <td>higher</td>
         </tr>        <tr>
           <th scope="row" class="cell-model"><span class="model-id"><a class="model-name" href="https://bughunt.productcompass.pm/" rel="noopener">Bug Hunt Bench</a></span></th>
           <td>code</td>
-          <td class="cell-num">14.02%</td>
+          <td class="cell-num">6.00%</td>
+          <td>higher</td>
+        </tr>        <tr>
+          <th scope="row" class="cell-model"><span class="model-id"><a class="model-name" href="https://www.vals.ai/benchmarks/vibe-code" rel="noopener">Vibe Code Bench v1.1 (Vals)</a></span></th>
+          <td>code</td>
+          <td class="cell-num">3.75%</td>
+          <td>higher</td>
+        </tr>        <tr>
+          <th scope="row" class="cell-model"><span class="model-id"><a class="model-name" href="https://www.vals.ai/benchmarks/code-migration-v1-1" rel="noopener">Code Migration v1.1 (Vals)</a></span></th>
+          <td>code</td>
+          <td class="cell-num">4.50%</td>
+          <td>higher</td>
+        </tr>        <tr>
+          <th scope="row" class="cell-model"><span class="model-id"><a class="model-name" href="https://livebench.ai/new" rel="noopener">LiveBench 2.0 Overall</a></span></th>
+          <td>code</td>
+          <td class="cell-num">11.25%</td>
+          <td>higher</td>
+        </tr>        <tr>
+          <th scope="row" class="cell-model"><span class="model-id"><a class="model-name" href="https://artificialanalysis.ai/evaluations/gdpval-aa" rel="noopener">GDPval-AA v2.1</a></span></th>
+          <td>prod</td>
+          <td class="cell-num">7.50%</td>
+          <td>higher</td>
+        </tr>        <tr>
+          <th scope="row" class="cell-model"><span class="model-id"><a class="model-name" href="https://artificialanalysis.ai/evaluations/automationbench-aa" rel="noopener">AutomationBench-AA</a></span></th>
+          <td>prod</td>
+          <td class="cell-num">7.50%</td>
+          <td>higher</td>
+        </tr>        <tr>
+          <th scope="row" class="cell-model"><span class="model-id"><a class="model-name" href="https://artificialanalysis.ai/evaluations/omniscience" rel="noopener">AA-Omniscience v1.1</a></span></th>
+          <td>rely</td>
+          <td class="cell-num">7.50%</td>
+          <td>higher</td>
+        </tr>        <tr>
+          <th scope="row" class="cell-model"><span class="model-id"><a class="model-name" href="https://artificialanalysis.ai/evaluations/artificial-analysis-long-context-reasoning" rel="noopener">AA-LCR v1.1</a></span></th>
+          <td>intel</td>
+          <td class="cell-num">3.75%</td>
+          <td>higher</td>
+        </tr>        <tr>
+          <th scope="row" class="cell-model"><span class="model-id"><a class="model-name" href="https://artificialanalysis.ai/evaluations/hle-diamond" rel="noopener">HLE-Diamond</a></span></th>
+          <td>intel</td>
+          <td class="cell-num">1.25%</td>
+          <td>higher</td>
+        </tr>        <tr>
+          <th scope="row" class="cell-model"><span class="model-id"><a class="model-name" href="https://artificialanalysis.ai/evaluations/terminal-bench-science" rel="noopener">Terminal-Bench-Science 0.1</a></span></th>
+          <td>intel</td>
+          <td class="cell-num">1.25%</td>
+          <td>higher</td>
+        </tr>        <tr>
+          <th scope="row" class="cell-model"><span class="model-id"><a class="model-name" href="https://artificialanalysis.ai/evaluations/critpt-v2" rel="noopener">CritPt v2 (hard subset)</a></span></th>
+          <td>intel</td>
+          <td class="cell-num">1.25%</td>
           <td>higher</td>
         </tr>      </tbody>
     </table>
   </div>
 </section><section class="block" id="model-inclusion" aria-labelledby="inclusion-title">
   <h2 id="inclusion-title" class="section-title">Model inclusion</h2>
-  <p><strong>Frontier rule.</strong> Every model family on the Pareto frontier that Artificial Analysis (AA) renders on its Intelligence Index versus total cost to run chart is ranked, with the exact configuration AA selects on that line. Frontier membership is AA&#39;s rendered line as observed; ValueRank never recomputes it from rounded values.</p>
-  <p><strong>Near-frontier rule.</strong> A plotted configuration is near-frontier when its public (rounded integer) Intelligence Index is within 3 points of the rendered frontier&#39;s Index at its cost, meaning the highest Index among rendered-frontier points that cost no more. Every near-frontier family is ranked (its selected configuration may differ from the near configuration) or is explicitly deferred by a dated, reasoned roster decision. The cost ratio to the frontier is reported for information only.</p><p class="muted">Policy as recorded: A plotted configuration is near-frontier when it lies within 3 Intelligence Index points of the rendered frontier at its cost. Every near-frontier model family must be in the primary ranking, with its own selected configuration, or be explicitly deferred with a dated, reasoned roster decision. The cost ratio to the cheapest frontier point of equal or higher intelligence is reported for information only.</p><p>Chart observed 2026-10-17T18:48:27Z (Intelligence Index v4.3.2): 694 catalog models selected, 189 plotted points and 18 rendered Pareto vertices across 7 families. 9 plotted points across 6 families are near-frontier.</p><p>Near-frontier models: 6 required, 0 deferred by roster decision.</p>  <h3 class="sub-title">Frontier families</h3>
-  <ul class="plain-list"><li><strong>Claude Haiku 5.5</strong>: Claude Haiku 5.5 (xhigh)</li><li><strong>Claude Opus 5.5</strong>: Claude Opus 5.5 (max with fallback)</li><li><strong>Claude Sonnet 5.5</strong>: Claude Sonnet 5.5 (max with fallback)</li><li><strong>GPT-6 Luna</strong>: GPT-6 Luna (max)</li><li><strong>GPT-6.1 Sol</strong>: GPT-6.1 Sol (max)</li><li><strong>MiMo-V2.6-Flash</strong>: MiMo-V2.6-Flash</li><li><strong>MiMo-V2.6-Pro</strong>: MiMo-V2.6-Pro</li>  </ul>  <h3 class="sub-title">Near-frontier families</h3>
-  <ul class="plain-list"><li><strong>Claude Haiku 5.5</strong>: Claude Haiku 5.5 (low), 1 Index points below the frontier</li><li><strong>Claude Opus 5.5</strong>: Claude Opus 5.5 (medium with fallback), 1 Index points below the frontier</li><li><strong>Claude Sonnet 5.5</strong>: Claude Sonnet 5.5 (xhigh with fallback), 2 Index points below the frontier</li><li><strong>GPT-5.6 Luna</strong>: GPT-5.6 Luna (low), 1 Index points below the frontier</li><li><strong>GPT-6 Astra</strong>: GPT-6 Astra (xhigh), 2 Index points below the frontier</li><li><strong>Gemini 4 Argon</strong>: Gemini 4 Argon (high), 1 Index points below the frontier</li>  </ul>  <p class="note"><strong>AA footnote</strong> (Claude Haiku 5.5): Claude Haiku 5.5 has 5x higher pricing on longer-context inputs which are not currently reflected; we are working to include this in cost figures across Artificial Analysis.</p></section>
+  <p><strong>Frontier rule.</strong> Every model family on the Pareto frontier that Artificial Analysis (AA) renders on its Intelligence Index versus total cost to run chart is ranked at its highest point on that line (along the strictly rising line also its dearest). Frontier membership is AA&#39;s rendered line as observed; ValueRank never recomputes it from rounded values.</p>
+  <p><strong>Near-frontier rule.</strong> A plotted configuration is near-frontier when its public (rounded integer) Intelligence Index is within 3 points of the rendered frontier&#39;s Index at its cost, meaning the highest Index among rendered-frontier points that cost no more. Every near-frontier family is ranked or is explicitly deferred by a dated, reasoned roster decision. Every configuration AA plots on the frontier or within the gap is a cohort row (O51); a near family&#39;s primary configuration is its near point with the smallest Index gap. The cost ratio to the frontier is reported for information only.</p><p class="muted">Policy as recorded: A plotted configuration is near-frontier when it lies within 3 Intelligence Index points of the rendered frontier at its cost. Every near-frontier model family must be in the primary ranking, with its own selected configuration, or be explicitly deferred with a dated, reasoned roster decision. The cost ratio to the cheapest frontier point of equal or higher intelligence is reported for information only.</p><p>Chart observed 2026-10-30T22:15:18Z (Intelligence Index v5.0): 89 catalog models selected, 82 plotted points and 18 rendered Pareto vertices across 8 families. 9 plotted points across 6 families are near-frontier.</p><p>Near-frontier models: 6 required, 0 deferred by roster decision.</p>  <h3 class="sub-title">Frontier families</h3>
+  <ul class="plain-list"><li><strong>Claude Haiku 5.5</strong>: Claude Haiku 5.5 (high)</li><li><strong>Claude Opus 5.5</strong>: Claude Opus 5.5 (xhigh with fallback)</li><li><strong>GPT-6 Astra</strong>: GPT-6 Astra (xhigh)</li><li><strong>GPT-6 Luna</strong>: GPT-6 Luna (high)</li><li><strong>GPT-6.1 Sol</strong>: GPT-6.1 Sol (max)</li><li><strong>GPT-6.1 Terra</strong>: GPT-6.1 Terra (high)</li><li><strong>Gemini 4 Carbon</strong>: Gemini 4 Carbon (high)</li><li><strong>MiMo-V2.6-Flash</strong>: MiMo-V2.6-Flash</li>  </ul>  <h3 class="sub-title">Near-frontier families</h3>
+  <ul class="plain-list"><li><strong>Claude Opus 5.5</strong>: Claude Opus 5.5 (max with fallback), 1 Index point below the frontier</li><li><strong>Claude Sonnet 5.5</strong>: Claude Sonnet 5.5 (max with fallback), 3 Index points below the frontier</li><li><strong>GPT-6 Astra</strong>: GPT-6 Astra (max), 0 Index points below the frontier</li><li><strong>GPT-6 Luna</strong>: GPT-6 Luna (xhigh), 2 Index points below the frontier</li><li><strong>GPT-6.1 Sol</strong>: GPT-6.1 Sol (low), 3 Index points below the frontier</li><li><strong>GPT-6.1 Terra</strong>: GPT-6.1 Terra (xhigh), 1 Index point below the frontier</li>  </ul>  <p class="note"><strong>AA footnote</strong> (Claude Haiku 5.5 (high), Claude Haiku 5.5 (medium), Claude Haiku 5.5 (low)): Claude Haiku 5.5 has 5x higher pricing on longer-context inputs which are not currently reflected; we are working to include this in cost figures across Artificial Analysis.</p></section>
 
 <section class="block" id="worked-example" aria-labelledby="example-title">
-  <h2 id="example-title" class="section-title">Worked example: Claude Sonnet 5.5</h2>
-  <p>Cost takes its fixed 25% share. Each quality score is multiplied by its weight, the products are added, and the sum is divided by the quality weight that actually had data (92 of 107 priority points), which fills the remaining 75%.</p>
-  <div class="table-wrap" tabindex="0" role="region" aria-label="Worked example: Claude Sonnet 5.5 table">
+  <h2 id="example-title" class="section-title">Worked example: Claude Opus 5.5 (max)</h2>
+  <p>Cost takes its fixed 25% share. Each observed quality leaf is multiplied by its weight, the products are added, and the sum is divided by the quality weight that has data (100% of the total), which fills the remaining 75%.</p>
+  <div class="table-wrap" tabindex="0" role="region" aria-label="Worked example: Claude Opus 5.5 (max) table">
     <table class="data-table">
       <thead><tr><th scope="col" class="col-model">Dimension</th><th scope="col" class="col-num">Weight</th><th scope="col" class="col-num">Effective weight</th><th scope="col" class="col-num">Score (0&ndash;100)</th><th scope="col" class="col-num">Contribution</th></tr></thead>
-      <tbody>        <tr><th scope="row" class="cell-model"><span class="model-name">Cost</span></th><td class="cell-num">25.00%</td><td class="cell-num">25.00%</td><td class="cell-num">52.5</td><td class="cell-num">13.12</td></tr>        <tr><th scope="row" class="cell-model"><span class="model-name">Non-Hallucination</span></th><td class="cell-num">4.21%</td><td class="cell-num">4.89%</td><td class="cell-num">66.7</td><td class="cell-num">3.26</td></tr>        <tr><th scope="row" class="cell-model"><span class="model-name">Terminal-Bench 4.0</span></th><td class="cell-num">4.21%</td><td class="cell-num">0.00%</td><td class="cell-num"><span class="na" title="No value">&ndash;</span></td><td class="cell-num">0.00</td></tr>        <tr><th scope="row" class="cell-model"><span class="model-name">Instruction Following (LiveBench)</span></th><td class="cell-num">3.50%</td><td class="cell-num">0.00%</td><td class="cell-num"><span class="na" title="No value">&ndash;</span></td><td class="cell-num">0.00</td></tr>        <tr><th scope="row" class="cell-model"><span class="model-name">DeepSWE v1.1</span></th><td class="cell-num">17.52%</td><td class="cell-num">20.38%</td><td class="cell-num">80.0</td><td class="cell-num">16.30</td></tr>        <tr><th scope="row" class="cell-model"><span class="model-name">GDPval-AA v2.1</span></th><td class="cell-num">4.21%</td><td class="cell-num">4.89%</td><td class="cell-num">94.4</td><td class="cell-num">4.62</td></tr>        <tr><th scope="row" class="cell-model"><span class="model-name">AutomationBench-AA</span></th><td class="cell-num">3.50%</td><td class="cell-num">4.08%</td><td class="cell-num">94.4</td><td class="cell-num">3.85</td></tr>        <tr><th scope="row" class="cell-model"><span class="model-name">AA-LCR v1.1</span></th><td class="cell-num">2.80%</td><td class="cell-num">3.26%</td><td class="cell-num">61.1</td><td class="cell-num">1.99</td></tr>        <tr><th scope="row" class="cell-model"><span class="model-name">AA-Omniscience Accuracy</span></th><td class="cell-num">2.80%</td><td class="cell-num">3.26%</td><td class="cell-num">61.1</td><td class="cell-num">1.99</td></tr>        <tr><th scope="row" class="cell-model"><span class="model-name">HLE</span></th><td class="cell-num">2.80%</td><td class="cell-num">3.26%</td><td class="cell-num">88.9</td><td class="cell-num">2.90</td></tr>        <tr><th scope="row" class="cell-model"><span class="model-name">GPQA Diamond (legacy)</span></th><td class="cell-num">2.80%</td><td class="cell-num">0.00%</td><td class="cell-num"><span class="na" title="No value">&ndash;</span></td><td class="cell-num">0.00</td></tr>        <tr><th scope="row" class="cell-model"><span class="model-name">SciCode</span></th><td class="cell-num">2.80%</td><td class="cell-num">3.26%</td><td class="cell-num">88.9</td><td class="cell-num">2.90</td></tr>        <tr><th scope="row" class="cell-model"><span class="model-name">CritPt</span></th><td class="cell-num">2.10%</td><td class="cell-num">2.45%</td><td class="cell-num">80.6</td><td class="cell-num">1.97</td></tr>        <tr><th scope="row" class="cell-model"><span class="model-name">AA Intelligence Index</span></th><td class="cell-num">4.21%</td><td class="cell-num">4.89%</td><td class="cell-num">94.4</td><td class="cell-num">4.62</td></tr>        <tr><th scope="row" class="cell-model"><span class="model-name">Speed</span></th><td class="cell-num">3.50%</td><td class="cell-num">4.08%</td><td class="cell-num">82.4</td><td class="cell-num">3.36</td></tr>        <tr><th scope="row" class="cell-model"><span class="model-name">Bug Hunt Bench</span></th><td class="cell-num">14.02%</td><td class="cell-num">16.30%</td><td class="cell-num">100.0</td><td class="cell-num">16.30</td></tr>      </tbody>
-      <tfoot><tr><th scope="row" colspan="4">Overall score</th><td class="cell-num"><strong>77.2</strong></td></tr></tfoot>
+      <tbody>        <tr><th scope="row" class="cell-model"><span class="model-name">Cost</span></th><td class="cell-num">25.00%</td><td class="cell-num">25.00%</td><td class="cell-num">41.6</td><td class="cell-num">10.39</td></tr>        <tr><th scope="row" class="cell-model"><span class="model-name">FrontierCode 2.0</span></th><td class="cell-num">11.25%</td><td class="cell-num">11.25%</td><td class="cell-num">46.4</td><td class="cell-num">5.22</td></tr>        <tr><th scope="row" class="cell-model"><span class="model-name">Terminal-Bench 4.0 (AA run)</span></th><td class="cell-num">8.25%</td><td class="cell-num">8.25%</td><td class="cell-num">59.6</td><td class="cell-num">4.92</td></tr>        <tr><th scope="row" class="cell-model"><span class="model-name">Bug Hunt Bench</span></th><td class="cell-num">6.00%</td><td class="cell-num">6.00%</td><td class="cell-num">39.7</td><td class="cell-num">2.38</td></tr>        <tr><th scope="row" class="cell-model"><span class="model-name">Vibe Code Bench v1.1 (Vals)</span></th><td class="cell-num">3.75%</td><td class="cell-num">3.75%</td><td class="cell-num">90.3</td><td class="cell-num">3.39</td></tr>        <tr><th scope="row" class="cell-model"><span class="model-name">Code Migration v1.1 (Vals)</span></th><td class="cell-num">4.50%</td><td class="cell-num">4.50%</td><td class="cell-num">81.0</td><td class="cell-num">3.65</td></tr>        <tr><th scope="row" class="cell-model"><span class="model-name">LiveBench 2.0 Overall</span></th><td class="cell-num">11.25%</td><td class="cell-num">11.25%</td><td class="cell-num">85.1</td><td class="cell-num">9.58</td></tr>        <tr><th scope="row" class="cell-model"><span class="model-name">GDPval-AA v2.1</span></th><td class="cell-num">7.50%</td><td class="cell-num">7.50%</td><td class="cell-num">68.3</td><td class="cell-num">5.12</td></tr>        <tr><th scope="row" class="cell-model"><span class="model-name">AutomationBench-AA</span></th><td class="cell-num">7.50%</td><td class="cell-num">7.50%</td><td class="cell-num">69.5</td><td class="cell-num">5.21</td></tr>        <tr><th scope="row" class="cell-model"><span class="model-name">AA-Omniscience v1.1</span></th><td class="cell-num">7.50%</td><td class="cell-num">7.50%</td><td class="cell-num">74.1</td><td class="cell-num">5.55</td></tr>        <tr><th scope="row" class="cell-model"><span class="model-name">AA-LCR v1.1</span></th><td class="cell-num">3.75%</td><td class="cell-num">3.75%</td><td class="cell-num">84.7</td><td class="cell-num">3.17</td></tr>        <tr><th scope="row" class="cell-model"><span class="model-name">HLE-Diamond</span></th><td class="cell-num">1.25%</td><td class="cell-num">1.25%</td><td class="cell-num">67.9</td><td class="cell-num">0.85</td></tr>        <tr><th scope="row" class="cell-model"><span class="model-name">Terminal-Bench-Science 0.1</span></th><td class="cell-num">1.25%</td><td class="cell-num">1.25%</td><td class="cell-num">59.0</td><td class="cell-num">0.74</td></tr>        <tr><th scope="row" class="cell-model"><span class="model-name">CritPt v2 (hard subset)</span></th><td class="cell-num">1.25%</td><td class="cell-num">1.25%</td><td class="cell-num">61.0</td><td class="cell-num">0.76</td></tr>      </tbody>
+      <tfoot><tr><th scope="row" colspan="4">Overall score</th><td class="cell-num"><strong>60.9</strong></td></tr></tfoot>
     </table>
   </div>
 </section>
 
+<section class="block" id="uncertainty" aria-labelledby="uncertainty-title">
+  <h2 id="uncertainty-title" class="section-title">What the uncertainty outputs cover</h2>
+  <p>Frontier and cheapest-above-a-bar labels come from interval calculations that protect the published record against its reporting precision and against missing evidence. Scenario shares are frequencies over declared streams, never probabilities:</p>
+  <ul class="plain-list"><li><strong>S0</strong>: published-record reporting precision</li><li><strong>S1</strong>: published-record reporting precision + conventional identification of missing leaves</li><li><strong>S2</strong>: published-record reporting precision + conventional identification of missing leaves + weight-specification stress</li><li><strong>S1M</strong>: published-record reporting precision + conventional identification of missing leaves + conventional range sensitivity inside published 95% confidence intervals (no tail model)</li><li><strong>S1T</strong>: published-record leaf values redrawn with plug-in binomial task-sampling noise from each leaf&#39;s published task count (independent-task approximation; GDPval-AA from its displayed rating interval, an assumption) + conventional identification of missing leaves</li><li>benchmark repeatability beyond S1T&#39;s independent-task approximation (correlated tasks, harness and attempt effects): not quantified in v1 scenario shares</li><li>fitted-parameter uncertainty beyond S1T&#39;s assumed GDPval-AA rating interval: not quantified in v1 scenario shares</li>  </ul><p>The headline quality bar is a fixed quality level: quality 65.2 (the displayed quality of GPT-6 Astra (max) at freeze), the lower median of non-provisional ranked configurations with a displayed quality. The ladder adds the lower and upper quartiles, quality 63.7 and quality 66.2, so the cheapest model is shown at three quality levels. The levels stay fixed for the anchor version.</p></section>
+
 <section class="block" id="evidence-grades" aria-labelledby="grades-title">
   <h2 id="grades-title" class="section-title">Evidence grades</h2>
   <p class="muted">A model's grade is the weakest grade among the values inside its score.</p>
-  <ul class="badge-legend">  <li><span class="badge badge-measured" title="Measured by the benchmark owner or in a controlled account measurement.">Owner-measured</span> <span>Measured by the benchmark owner or in a controlled account measurement.</span></li>  <li><span class="badge badge-claim" title="Published by the model provider for the exact benchmark version and evaluated variant.">Provider claim</span> <span>Published by the model provider for the exact benchmark version and evaluated variant.</span></li>  <li><span class="badge badge-estimate" title="Owner estimate or projection anchored to a measurement.">Modelled</span> <span>Owner estimate or projection anchored to a measurement.</span></li>  <li><span class="badge badge-assumption" title="Explicitly authorised assumption with no measurement.">Assumption</span> <span>Explicitly authorised assumption with no measurement.</span></li>  <li><span class="badge badge-missing" title="No eligible value; excluded from the score and the score is renormalised.">Missing</span> <span>No eligible value; excluded from the score and the score is renormalised.</span></li></ul>
+  <ul class="badge-legend">  <li><span class="badge badge-measured" title="Measured by the benchmark owner or in a controlled account measurement.">Measured</span> <span>Measured by the benchmark owner or in a controlled account measurement.</span></li>  <li><span class="badge badge-claim" title="Published by the model provider for the exact benchmark version and evaluated variant.">Provider claim</span> <span>Published by the model provider for the exact benchmark version and evaluated variant.</span></li>  <li><span class="badge badge-estimate" title="Owner estimate or projection anchored to a measurement.">Modelled</span> <span>Owner estimate or projection anchored to a measurement.</span></li>  <li><span class="badge badge-assumption" title="Explicitly authorised assumption with no measurement.">Assumption</span> <span>Explicitly authorised assumption with no measurement.</span></li>  <li><span class="badge badge-missing" title="No eligible value; excluded from the score and the score is renormalised.">Missing</span> <span>No eligible value; excluded from the score and the score is renormalised.</span></li></ul>
 </section>
 
 <section class="block" id="limitations" aria-labelledby="limits-title">
   <h2 id="limits-title" class="section-title">Limitations</h2>
-  <ul class="plain-list"><li>Rank and cost scores are relative to the ranked cohort and change when the cohort changes.</li><li>Public benchmark displays are rounded, so small differences between models are not meaningful.</li><li>Subscription value multiples are projections or assumptions, not guarantees of what a plan delivers.</li><li>Results are never transferred between model versions or reasoning efforts; missing coverage lowers confidence.</li><li>Cost per Index point assumes the Artificial Analysis token mix, not your own workload.</li>  </ul>
+  <ul class="plain-list"><li>Cost is the contestant-model API token cost of AA&#39;s runs, not total agent or workflow operating cost.</li><li>Cost scores use frozen anchors; a new anchor version is a published migration, never a silent change.</li><li>The basket is AA&#39;s SDLC-relevant evaluations at AA&#39;s token mix, not your own workload.</li><li>Results are never transferred between model versions or reasoning efforts; missing evidence stays missing.</li><li>Published values are rounded; interval outputs and scenario shares show which differences the evidence supports. Benchmark sampling noise is approximated in one scenario stream (S1T) that treats tasks as independent, so adjacent ranks often lie within that noise.</li><li>Subscription Value Multiples are measured on their own workloads; none is yet identified on the basket, so the Plan ranking is exploratory.</li>  </ul>
 </section>
 
 <section class="block" id="faq" aria-labelledby="faq-title">
   <h2 id="faq-title" class="section-title">Questions</h2>  <details class="faq">
-    <summary>How is the overall score calculated?</summary>
-    <p>Cost carries a fixed 25% of the score and quality the rest. The cost score compares USD per Intelligence Index point on a log scale, so the cheapest model scores 100, the dearest 0, and equal cost ratios count equally. Each quality dimension is rank-normalised to 0-100 across the ranked cohort, multiplied by its weight and divided by the quality weights that are available for that model.</p>
+    <summary>How is the value score calculated?</summary>
+    <p>Cost carries a fixed 25% of the value score and quality the rest. The cost score compares what each configuration costs to run the SDLC cost basket once, on a log scale against frozen anchors, so equal cost ratios count equally. Quality is the weighted mean of the ranking&#39;s benchmark leaves (13 in the max-effort ranking) on fixed 0-100 anchors.</p>
   </details>  <details class="faq">
     <summary>What happens when a benchmark has no result for a model?</summary>
-    <p>The dimension is dropped for that model and the remaining quality weights are renormalised; cost keeps its fixed share. Nothing is filled in, and the gap is shown on the model page.</p>
+    <p>ValueRank publishes two rankings, each over the configurations with its full benchmark set: the max-effort ranking (one configuration per family at its top effort, adding LiveBench 2.0 and two Vals AI boards) and the AI Coding Daily ranking (mostly high and medium efforts, adding AI Coding Daily). Within a ranking every model is scored on the same benchmarks. A result Artificial Analysis has not run comes from another party&#39;s run of the same benchmark on the exact configuration, then from the model provider&#39;s published result. A configuration still missing one after a logged exhaustive search is listed with the gap, not ranked. A configuration without a cost gets no value score.</p>
   </details>  <details class="faq">
     <summary>What is the difference between the API ranking and the Plan ranking?</summary>
-    <p>Both rank on token efficiency: what it costs to run the Artificial Analysis Intelligence Index, per Index point. The API ranking prices the run at API rates. The Plan ranking also divides by the best eligible subscription Value Multiple, the API-priced usage a plan delivers per dollar of fee.</p>
+    <p>Both price the same SDLC basket. The API ranking uses Artificial Analysis&#39; cost at API rates. The Plan ranking divides it by a subscription route&#39;s Value Multiple, the API-priced usage a plan delivers per dollar of fee at full utilisation, and lists one row per configuration and plan; a model without an admitted route falls back to API cost, flagged.</p>
   </details>  <details class="faq">
     <summary>What do the evidence grades mean?</summary>
-    <p>Measured values come from the benchmark owner or a controlled account measurement. Claims come from the model provider, estimates are owner estimates or user-reported projections, and assumptions are explicitly authorised stand-ins.</p>
+    <p>Measured values come from the benchmark owner or a controlled account measurement. Estimates are concordant end-user reports, and assumptions are owner-authorised transfers of one model&#39;s measured multiple to another.</p>
   </details>  <details class="faq">
     <summary>Why is a model not ranked?</summary>
-    <p>Ranked models need an exact-variant DeepSWE and Bug Hunt result or a required place on the Artificial Analysis frontier. Unranked models still have pages with every value we hold.</p>
+    <p>The ranked cohort is fixed policy: every configuration Artificial Analysis plots on its Intelligence-versus-cost frontier or within 3 Index points of it, each effort as its own row. A cohort configuration missing a benchmark of both rankings after an exhaustive search is listed with the gap, not ranked; one ranked in only one ranking appears there. Other models still have pages with what we hold.</p>
   </details></section>
   </main>
 <footer class="site-footer">
   <div class="wrap footer-grid">
     <div>
-      <p class="footer-brand">ValueRank <span class="mono">v2.0.0</span></p>
-      <p class="muted">Published October 19, 2026. Data observed 2026-10-17. Every score is traceable to a source, a date and an evidence grade.</p>
+      <p class="footer-brand">ValueRank <span class="mono">v3.0.0</span></p>
+      <p class="muted">Published October 19, 2026. Data observed 2026-10-31. Every score is traceable to a source, a date and an evidence grade.</p>
     </div>
     <nav aria-label="Footer">
       <ul class="footer-links">        <li><a href="/rankings/">Rankings</a></li>        <li><a href="/models/">Models</a></li>        <li><a href="/plans/">Plans</a></li>        <li><a href="/benchmarks/">Benchmarks</a></li>        <li><a href="/methodology/">Methodology</a></li>        <li><a href="/changelog/">Changelog</a></li>        <li><a href="/data/">Data</a></li>        <li><a href="/archive/coding-agents-v0.3/">Archive</a></li>

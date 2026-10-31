@@ -1,0 +1,328 @@
+{
+  "slug": "gpt-6-astra-xhigh",
+  "name": "GPT-6 Astra (xhigh)",
+  "developer": "OpenAI",
+  "aaUrl": "https://artificialanalysis.ai/models/gpt-6-astra-xhigh",
+  "aaVariant": "xhigh",
+  "selectedPage": "https://artificialanalysis.ai/models/gpt-6-astra-xhigh",
+  "summary": {
+    "rank": {
+      "api": null,
+      "plan": null
+    },
+    "overall": {
+      "api": null,
+      "plan": null
+    },
+    "quality": null,
+    "qualityRank": null,
+    "coverage": {
+      "pct": 0.0,
+      "costAvailable": false,
+      "missing": [
+        "FrontierCode 2.0",
+        "Terminal-Bench 4.0 (AA run)",
+        "Bug Hunt Bench",
+        "Vibe Code Bench v1.1 (Vals)",
+        "Code Migration v1.1 (Vals)",
+        "LiveBench 2.0 Overall",
+        "GDPval-AA v2.1",
+        "AutomationBench-AA",
+        "AA-Omniscience v1.1",
+        "AA-LCR v1.1",
+        "HLE-Diamond",
+        "Terminal-Bench-Science 0.1",
+        "CritPt v2 (hard subset)"
+      ],
+      "provisional": null,
+      "provisionalReasons": []
+    },
+    "grade": "missing",
+    "rankingEligible": false,
+    "exclusionReasons": [
+      "Incomplete benchmark evidence after an exhaustive search (O36, O53): Max-effort ranking: no Vibe Code Bench v1.1 (Vals), Code Migration v1.1 (Vals), LiveBench 2.0 Overall; AI Coding Daily ranking: no AI Coding Daily (excl. bug finding)"
+    ],
+    "flags": []
+  },
+  "dimensions": [
+    {
+      "key": "frontierCode",
+      "label": "FrontierCode 2.0",
+      "category": "Software engineering",
+      "weightPct": 11.25,
+      "value": null,
+      "decimals": 3,
+      "unit": "AA score (0-1)",
+      "normalized": null,
+      "source": null,
+      "observedAt": null,
+      "evaluatedVariant": null,
+      "note": null,
+      "grade": "missing"
+    },
+    {
+      "key": "livebench2Overall",
+      "label": "LiveBench 2.0 Overall",
+      "category": "Software engineering",
+      "weightPct": 11.25,
+      "value": null,
+      "decimals": 1,
+      "unit": "LiveBench's weighted Overall of seven category scores (0-100)",
+      "normalized": null,
+      "source": null,
+      "observedAt": null,
+      "evaluatedVariant": null,
+      "note": null,
+      "grade": "missing"
+    },
+    {
+      "key": "terminalBench",
+      "label": "Terminal-Bench 4.0 (AA run)",
+      "category": "Software engineering",
+      "weightPct": 8.25,
+      "value": null,
+      "decimals": 1,
+      "unit": "% resolved",
+      "normalized": null,
+      "source": null,
+      "observedAt": null,
+      "evaluatedVariant": null,
+      "note": null,
+      "grade": "missing"
+    },
+    {
+      "key": "gdpval",
+      "label": "GDPval-AA v2.1",
+      "category": "Professional work",
+      "weightPct": 7.5,
+      "value": null,
+      "decimals": 1,
+      "unit": "Elo",
+      "normalized": null,
+      "source": null,
+      "observedAt": null,
+      "evaluatedVariant": null,
+      "note": null,
+      "grade": "missing"
+    },
+    {
+      "key": "automationBench",
+      "label": "AutomationBench-AA",
+      "category": "Professional work",
+      "weightPct": 7.5,
+      "value": null,
+      "decimals": 3,
+      "unit": "AA score (0-1)",
+      "normalized": null,
+      "source": null,
+      "observedAt": null,
+      "evaluatedVariant": null,
+      "note": null,
+      "grade": "missing"
+    },
+    {
+      "key": "omniscience",
+      "label": "AA-Omniscience v1.1",
+      "category": "Reliability",
+      "weightPct": 7.5,
+      "value": null,
+      "decimals": 1,
+      "unit": "AA Omniscience Index (-100 to 100)",
+      "normalized": null,
+      "source": null,
+      "observedAt": null,
+      "evaluatedVariant": null,
+      "note": null,
+      "grade": "missing"
+    },
+    {
+      "key": "bugHunt",
+      "label": "Bug Hunt Bench",
+      "category": "Software engineering",
+      "weightPct": 6.0,
+      "value": null,
+      "decimals": 1,
+      "unit": "bugs fixed of 105",
+      "normalized": null,
+      "source": null,
+      "observedAt": null,
+      "evaluatedVariant": null,
+      "note": null,
+      "grade": "missing"
+    },
+    {
+      "key": "codeMigration",
+      "label": "Code Migration v1.1 (Vals)",
+      "category": "Software engineering",
+      "weightPct": 4.5,
+      "value": null,
+      "decimals": 1,
+      "unit": "% of hidden tests passed",
+      "normalized": null,
+      "source": null,
+      "observedAt": null,
+      "evaluatedVariant": null,
+      "note": null,
+      "grade": "missing"
+    },
+    {
+      "key": "vibeCode",
+      "label": "Vibe Code Bench v1.1 (Vals)",
+      "category": "Software engineering",
+      "weightPct": 3.75,
+      "value": null,
+      "decimals": 1,
+      "unit": "% of test workflows passed",
+      "normalized": null,
+      "source": null,
+      "observedAt": null,
+      "evaluatedVariant": null,
+      "note": null,
+      "grade": "missing"
+    },
+    {
+      "key": "lcr",
+      "label": "AA-LCR v1.1",
+      "category": "Knowledge and science",
+      "weightPct": 3.75,
+      "value": null,
+      "decimals": 3,
+      "unit": "accuracy (0-1)",
+      "normalized": null,
+      "source": null,
+      "observedAt": null,
+      "evaluatedVariant": null,
+      "note": null,
+      "grade": "missing"
+    },
+    {
+      "key": "hle",
+      "label": "HLE-Diamond",
+      "category": "Knowledge and science",
+      "weightPct": 1.25,
+      "value": null,
+      "decimals": 3,
+      "unit": "accuracy (0-1)",
+      "normalized": null,
+      "source": null,
+      "observedAt": null,
+      "evaluatedVariant": null,
+      "note": null,
+      "grade": "missing"
+    },
+    {
+      "key": "tbScience",
+      "label": "Terminal-Bench-Science 0.1",
+      "category": "Knowledge and science",
+      "weightPct": 1.25,
+      "value": null,
+      "decimals": 3,
+      "unit": "% resolved (0-1)",
+      "normalized": null,
+      "source": null,
+      "observedAt": null,
+      "evaluatedVariant": null,
+      "note": null,
+      "grade": "missing"
+    },
+    {
+      "key": "critpt",
+      "label": "CritPt v2 (hard subset)",
+      "category": "Knowledge and science",
+      "weightPct": 1.25,
+      "value": null,
+      "decimals": 3,
+      "unit": "score (0-1)",
+      "normalized": null,
+      "source": null,
+      "observedAt": null,
+      "evaluatedVariant": null,
+      "note": null,
+      "grade": "missing"
+    }
+  ],
+  "cost": {
+    "apiUsd": null,
+    "planUsd": null,
+    "fallback": null,
+    "route": null,
+    "subset": null,
+    "partialComponents": [],
+    "workload": null,
+    "planFlags": [],
+    "costScore": {
+      "api": null,
+      "plan": null
+    },
+    "components": [],
+    "aaCostCaveat": null,
+    "selectionReason": null,
+    "planAmount": null
+  },
+  "plans": [],
+  "scenarios": {
+    "status": "current",
+    "api": [],
+    "plan": []
+  },
+  "intervals": {
+    "api": null,
+    "plan": null
+  },
+  "history": [],
+  "frontier": {
+    "onAaFrontier": true,
+    "aaFrontierNote": "On the observed Artificial Analysis Intelligence Index versus total cost frontier as GPT-6 Astra (xhigh).",
+    "tier": "frontier",
+    "configuration": "GPT-6 Astra (xhigh)",
+    "intelligenceGap": 0,
+    "footnote": null
+  },
+  "rankings": [
+    {
+      "track": "max",
+      "label": "Max-effort ranking",
+      "href": "/rankings/",
+      "shown": true,
+      "rankingEligible": false,
+      "rank": {
+        "api": null,
+        "plan": null
+      },
+      "overall": {
+        "api": null,
+        "plan": null
+      }
+    },
+    {
+      "track": "aicd",
+      "label": "AI Coding Daily ranking",
+      "href": "/rankings/ai-coding-daily/",
+      "shown": false,
+      "rankingEligible": false,
+      "rank": {
+        "api": null,
+        "plan": null
+      },
+      "overall": {
+        "api": null,
+        "plan": null
+      }
+    },
+    {
+      "track": "common",
+      "label": "Common-leaf ranking (diagnostic)",
+      "href": "/rankings/common-leaves/",
+      "shown": false,
+      "rankingEligible": true,
+      "rank": {
+        "api": 7,
+        "plan": 29
+      },
+      "overall": {
+        "api": 45.4793117613645,
+        "plan": 46.277556842945835
+      }
+    }
+  ]
+}

@@ -1,0 +1,506 @@
+{
+  "schemaVersion": 1,
+  "capturedAt": "2026-10-30T22:22:49.248Z",
+  "rule": "Owner decisions O53-O55: leaves added by the max-effort and AI Coding Daily rankings; exact configuration only (O36), MiMo-V2.6-Pro matched at high by owner statement (O54, E252)",
+  "sources": {
+    "vibeCode": {
+      "benchmark": "Vibe Code Bench v1.1",
+      "publisher": "Vals AI",
+      "updated": "2026-10-29",
+      "url": "https://www.vals.ai/benchmarks/vibe-code",
+      "harness": "OpenHands, the same for every model",
+      "metric": "test-workflow pass rate (percent), with Vals' published standard error",
+      "unit": "percent",
+      "sampling": {
+        "kind": "publishedStandardError"
+      },
+      "capturedAt": "2026-10-30T22:19:55Z"
+    },
+    "codeMigration": {
+      "benchmark": "Code Migration v1.1",
+      "publisher": "Vals AI",
+      "updated": "2026-10-28",
+      "url": "https://www.vals.ai/benchmarks/code-migration-v1-1",
+      "harness": "Pi agent harness, the same for every model",
+      "metric": "hidden-test pass rate (percent), with Vals' published standard error",
+      "unit": "percent",
+      "sampling": {
+        "kind": "publishedStandardError",
+        "tasks": 130
+      },
+      "capturedAt": "2026-10-30T22:19:55Z"
+    },
+    "livebench2Overall": {
+      "benchmark": "LiveBench 2.0 Overall (release 2026-10-25)",
+      "publisher": "LiveBench",
+      "updated": "2026-10-25",
+      "updatedBasis": "the site's displayed release date ('25 October 2026'); the release files' HTTP Last-Modified is 2026-10-30",
+      "url": "https://livebench.ai/data/20261025/table.csv",
+      "harness": "LiveBench's own, one run per model at its top effort",
+      "metric": "LiveBench's weighted Overall of the seven category scores (Long Agentic 2, Coding 1.5, Design 1.5, Reasoning, Browser, Data Analysis and Research 1; O67), 0-100",
+      "unit": "percent",
+      "sampling": {
+        "kind": "categories",
+        "tasks": {
+          "long_agentic": 18,
+          "reasoning": 4,
+          "coding": 29,
+          "browser": 25,
+          "data_analysis": 3,
+          "research": 22,
+          "design": 25
+        }
+      },
+      "capturedAt": "2026-10-30T22:22:49.248Z"
+    },
+    "aiCodingDaily": {
+      "benchmark": "AI Coding Daily LLM Coding Leaderboard (Laravel quality + React-TS quality + edge-case testing, max 60)",
+      "publisher": "AI Coding Daily (Povilas Korop)",
+      "updated": "2026-10-27",
+      "url": "https://aicodingdaily.com/leaderboard",
+      "harness": "varies by model: Claude Code, Codex CLI, OpenCode, Devin, DeepSeek's harness (named on each record)",
+      "metric": "judged points out of 60 (the 10-point bug-finding column is excluded: it overlaps Bug Hunt)",
+      "unit": "points of 60",
+      "sampling": {
+        "kind": "tasks",
+        "tasks": 6,
+        "unit": "graded projects (Laravel, React-TS and 4 edge-case projects)"
+      },
+      "capturedAt": "2026-10-30T22:22:49.248Z"
+    }
+  },
+  "records": [
+    {
+      "modelId": "gpt-6.1-sol",
+      "leaf": "vibeCode",
+      "value": 88.931,
+      "sourceLabel": "openai/gpt-6.1-sol",
+      "effort": "max",
+      "locator": "research/2026-10-30-v5-recapture/third-party/vals-catalogue-2026-10-30.json benchmarks[slug=vibe-code].coverage[gpt-6.1-sol]",
+      "stderr": 1.893
+    },
+    {
+      "modelId": "gemini-4-carbon",
+      "leaf": "vibeCode",
+      "value": 89.06,
+      "sourceLabel": "google/gemini-4-carbon",
+      "effort": "high",
+      "locator": "research/2026-10-30-v5-recapture/third-party/vals-catalogue-2026-10-30.json benchmarks[slug=vibe-code].coverage[gemini-4-carbon]",
+      "stderr": 2.294
+    },
+    {
+      "modelId": "gpt-6-luna",
+      "leaf": "vibeCode",
+      "value": 81.649,
+      "sourceLabel": "openai/gpt-6-luna",
+      "effort": "max",
+      "locator": "research/2026-10-30-v5-recapture/third-party/vals-catalogue-2026-10-30.json benchmarks[slug=vibe-code].coverage[gpt-6-luna]",
+      "stderr": 3.377
+    },
+    {
+      "modelId": "gpt-6.1-terra",
+      "leaf": "vibeCode",
+      "value": 83.997,
+      "sourceLabel": "openai/gpt-6.1-terra",
+      "effort": "max",
+      "locator": "research/2026-10-30-v5-recapture/third-party/vals-catalogue-2026-10-30.json benchmarks[slug=vibe-code].coverage[gpt-6.1-terra]",
+      "stderr": 2.865
+    },
+    {
+      "modelId": "gpt-6-astra",
+      "leaf": "vibeCode",
+      "value": 89.594,
+      "sourceLabel": "openai/gpt-6-astra",
+      "effort": "max",
+      "locator": "research/2026-10-30-v5-recapture/third-party/vals-catalogue-2026-10-30.json benchmarks[slug=vibe-code].coverage[gpt-6-astra]",
+      "stderr": 2.174
+    },
+    {
+      "modelId": "claude-sonnet-5-5",
+      "leaf": "vibeCode",
+      "value": 92.392,
+      "sourceLabel": "anthropic/claude-sonnet-5-5",
+      "effort": "max",
+      "locator": "research/2026-10-30-v5-recapture/third-party/vals-catalogue-2026-10-30.json benchmarks[slug=vibe-code].coverage[claude-sonnet-5-5]",
+      "stderr": 1.26,
+      "note": "AA labels this configuration '... with default fallback'; the source has no fallback qualifier (as on 2026-10-25)."
+    },
+    {
+      "modelId": "claude-opus-5-5",
+      "leaf": "vibeCode",
+      "value": 90.294,
+      "sourceLabel": "anthropic/claude-opus-5-5",
+      "effort": "max",
+      "locator": "research/2026-10-30-v5-recapture/third-party/vals-catalogue-2026-10-30.json benchmarks[slug=vibe-code].coverage[claude-opus-5-5]",
+      "stderr": 1.526,
+      "note": "AA labels this configuration '... with default fallback'; the source has no fallback qualifier (as on 2026-10-25)."
+    },
+    {
+      "modelId": "gpt-6.1-sol",
+      "leaf": "codeMigration",
+      "value": 77.324,
+      "sourceLabel": "openai/gpt-6.1-sol",
+      "effort": "max",
+      "locator": "research/2026-10-30-v5-recapture/third-party/vals-catalogue-2026-10-30.json benchmarks[slug=code-migration-v1-1].coverage[gpt-6.1-sol]",
+      "stderr": 2.976
+    },
+    {
+      "modelId": "gpt-6-luna",
+      "leaf": "codeMigration",
+      "value": 46.669,
+      "sourceLabel": "openai/gpt-6-luna",
+      "effort": "max",
+      "locator": "research/2026-10-30-v5-recapture/third-party/vals-catalogue-2026-10-30.json benchmarks[slug=code-migration-v1-1].coverage[gpt-6-luna]",
+      "stderr": 3.613
+    },
+    {
+      "modelId": "gpt-6-astra",
+      "leaf": "codeMigration",
+      "value": 80.579,
+      "sourceLabel": "openai/gpt-6-astra",
+      "effort": "max",
+      "locator": "research/2026-10-30-v5-recapture/third-party/vals-catalogue-2026-10-30.json benchmarks[slug=code-migration-v1-1].coverage[gpt-6-astra]",
+      "stderr": 2.336
+    },
+    {
+      "modelId": "claude-sonnet-5-5",
+      "leaf": "codeMigration",
+      "value": 86.875,
+      "sourceLabel": "anthropic/claude-sonnet-5-5",
+      "effort": "max",
+      "locator": "research/2026-10-30-v5-recapture/third-party/vals-catalogue-2026-10-30.json benchmarks[slug=code-migration-v1-1].coverage[claude-sonnet-5-5]",
+      "stderr": 1.521,
+      "note": "AA labels this configuration '... with default fallback'; the source has no fallback qualifier (as on 2026-10-25)."
+    },
+    {
+      "modelId": "claude-opus-5-5",
+      "leaf": "codeMigration",
+      "value": 81.012,
+      "sourceLabel": "anthropic/claude-opus-5-5",
+      "effort": "max",
+      "locator": "research/2026-10-30-v5-recapture/third-party/vals-catalogue-2026-10-30.json benchmarks[slug=code-migration-v1-1].coverage[claude-opus-5-5]",
+      "stderr": 3.207,
+      "note": "AA labels this configuration '... with default fallback'; the source has no fallback qualifier (as on 2026-10-25)."
+    },
+    {
+      "modelId": "gpt-6.1-sol",
+      "leaf": "livebench2Overall",
+      "value": 84.07,
+      "sourceLabel": "gpt-6.1-sol",
+      "effort": "max",
+      "locator": "research/2026-10-30-v5-recapture/third-party/coverage-2026-10-30.json benchmarks[key=livebench2-overall].coverage[gpt-6.1-sol]",
+      "categories": {
+        "long_agentic": 68.7,
+        "reasoning": 92.6,
+        "coding": 96.0,
+        "browser": 93.3,
+        "data_analysis": 82.7,
+        "research": 83.5,
+        "design": 82.1
+      },
+      "weights": {
+        "long_agentic": 2.0,
+        "reasoning": 1.0,
+        "coding": 1.5,
+        "browser": 1.0,
+        "data_analysis": 1.0,
+        "research": 1.0,
+        "design": 1.5
+      }
+    },
+    {
+      "modelId": "gpt-6-luna",
+      "leaf": "livebench2Overall",
+      "value": 64.59,
+      "sourceLabel": "gpt-6-luna",
+      "effort": "max",
+      "locator": "research/2026-10-30-v5-recapture/third-party/coverage-2026-10-30.json benchmarks[key=livebench2-overall].coverage[gpt-6-luna]",
+      "categories": {
+        "long_agentic": 30.9,
+        "reasoning": 81.8,
+        "coding": 84.5,
+        "browser": 70.3,
+        "data_analysis": 73.4,
+        "research": 43.5,
+        "design": 82.5
+      },
+      "weights": {
+        "long_agentic": 2.0,
+        "reasoning": 1.0,
+        "coding": 1.5,
+        "browser": 1.0,
+        "data_analysis": 1.0,
+        "research": 1.0,
+        "design": 1.5
+      }
+    },
+    {
+      "modelId": "gpt-6.1-terra",
+      "leaf": "livebench2Overall",
+      "value": 77.79,
+      "sourceLabel": "gpt-6.1-terra",
+      "effort": "max",
+      "locator": "research/2026-10-30-v5-recapture/third-party/coverage-2026-10-30.json benchmarks[key=livebench2-overall].coverage[gpt-6.1-terra]",
+      "categories": {
+        "long_agentic": 48.6,
+        "reasoning": 88.7,
+        "coding": 94.3,
+        "browser": 93.1,
+        "data_analysis": 82.3,
+        "research": 73.9,
+        "design": 82.3
+      },
+      "weights": {
+        "long_agentic": 2.0,
+        "reasoning": 1.0,
+        "coding": 1.5,
+        "browser": 1.0,
+        "data_analysis": 1.0,
+        "research": 1.0,
+        "design": 1.5
+      }
+    },
+    {
+      "modelId": "gpt-6-astra",
+      "leaf": "livebench2Overall",
+      "value": 85.64,
+      "sourceLabel": "gpt-6-astra",
+      "effort": "max",
+      "locator": "research/2026-10-30-v5-recapture/third-party/coverage-2026-10-30.json benchmarks[key=livebench2-overall].coverage[gpt-6-astra]",
+      "categories": {
+        "long_agentic": 77.5,
+        "reasoning": 92.7,
+        "coding": 93.7,
+        "browser": 91.3,
+        "data_analysis": 83.0,
+        "research": 85.2,
+        "design": 82.0
+      },
+      "weights": {
+        "long_agentic": 2.0,
+        "reasoning": 1.0,
+        "coding": 1.5,
+        "browser": 1.0,
+        "data_analysis": 1.0,
+        "research": 1.0,
+        "design": 1.5
+      }
+    },
+    {
+      "modelId": "claude-sonnet-5-5",
+      "leaf": "livebench2Overall",
+      "value": 80.04,
+      "sourceLabel": "claude-sonnet-5.5",
+      "effort": "max",
+      "locator": "research/2026-10-30-v5-recapture/third-party/coverage-2026-10-30.json benchmarks[key=livebench2-overall].coverage[claude-sonnet-5-5]",
+      "categories": {
+        "long_agentic": 63.4,
+        "reasoning": 91.6,
+        "coding": 94.7,
+        "browser": 89.3,
+        "data_analysis": 59.5,
+        "research": 83.6,
+        "design": 85.0
+      },
+      "weights": {
+        "long_agentic": 2.0,
+        "reasoning": 1.0,
+        "coding": 1.5,
+        "browser": 1.0,
+        "data_analysis": 1.0,
+        "research": 1.0,
+        "design": 1.5
+      },
+      "note": "AA labels this configuration '... with default fallback'; the source has no fallback qualifier (as on 2026-10-25)."
+    },
+    {
+      "modelId": "claude-opus-5-5",
+      "leaf": "livebench2Overall",
+      "value": 85.14,
+      "sourceLabel": "claude-opus-5.5",
+      "effort": "max",
+      "locator": "research/2026-10-30-v5-recapture/third-party/coverage-2026-10-30.json benchmarks[key=livebench2-overall].coverage[claude-opus-5-5]",
+      "categories": {
+        "long_agentic": 72.8,
+        "reasoning": 92.2,
+        "coding": 96.3,
+        "browser": 88.4,
+        "data_analysis": 80.3,
+        "research": 85.0,
+        "design": 86.9
+      },
+      "weights": {
+        "long_agentic": 2.0,
+        "reasoning": 1.0,
+        "coding": 1.5,
+        "browser": 1.0,
+        "data_analysis": 1.0,
+        "research": 1.0,
+        "design": 1.5
+      },
+      "note": "AA labels this configuration '... with default fallback'; the source has no fallback qualifier (as on 2026-10-25)."
+    },
+    {
+      "modelId": "gpt-6-luna-medium",
+      "leaf": "aiCodingDaily",
+      "value": 40.2,
+      "sourceLabel": "GPT-6-Luna (Medium)",
+      "effort": "medium",
+      "locator": "research/2026-10-30-v5-recapture/third-party/coverage-2026-10-30.json benchmarks[key=aicd].coverage[gpt-6-luna-medium]",
+      "harness": "Codex CLI",
+      "tested": "2026-09-30"
+    },
+    {
+      "modelId": "gpt-6-luna-high",
+      "leaf": "aiCodingDaily",
+      "value": 47.73,
+      "sourceLabel": "GPT-6-Luna (High)",
+      "effort": "high",
+      "locator": "research/2026-10-30-v5-recapture/third-party/coverage-2026-10-30.json benchmarks[key=aicd].coverage[gpt-6-luna-high]",
+      "harness": "Codex CLI",
+      "tested": "2026-10-01"
+    },
+    {
+      "modelId": "claude-haiku-5-5-medium",
+      "leaf": "aiCodingDaily",
+      "value": 51.32,
+      "sourceLabel": "Haiku 5.5 (Medium)",
+      "effort": "medium",
+      "locator": "research/2026-10-30-v5-recapture/third-party/coverage-2026-10-30.json benchmarks[key=aicd].coverage[claude-haiku-5-5-medium]",
+      "harness": "Claude Code",
+      "tested": "2026-10-08"
+    },
+    {
+      "modelId": "mimo-v2-6-flash",
+      "leaf": "aiCodingDaily",
+      "value": 45.48,
+      "sourceLabel": "MiMo-V2.6 Flash (High)",
+      "effort": "high",
+      "locator": "research/2026-10-30-v5-recapture/third-party/coverage-2026-10-30.json benchmarks[key=aicd].coverage[mimo-v2-6-flash]",
+      "note": "Owner decision O135 (2026-10-30): AA plots MiMo-V2.6-Flash without an effort; Xiaomi's API documents a single thinking mode (thinking.type enabled/disabled, default enabled; on the Responses API every reasoning.effort other than none enables the same, undifferentiated reasoning), so the configuration is thinking enabled, the default (mimo-flash-effort.md). The board's only MiMo-V2.6-Flash row is labelled High; Xiaomi documents every enabled level as the same reasoning ('Values xhigh, max and ultra are mapped to high'), so the High row is the documented default configuration (thinking enabled). The row does not name the provider route behind OpenCode.",
+      "harness": "OpenCode",
+      "tested": "2026-10-02"
+    },
+    {
+      "modelId": "claude-haiku-5-5-high",
+      "leaf": "aiCodingDaily",
+      "value": 51.55,
+      "sourceLabel": "Haiku 5.5 (High)",
+      "effort": "high",
+      "locator": "research/2026-10-30-v5-recapture/third-party/coverage-2026-10-30.json benchmarks[key=aicd].coverage[claude-haiku-5-5-high]",
+      "harness": "Claude Code",
+      "tested": "2026-10-08"
+    },
+    {
+      "modelId": "gpt-6.1-terra-medium",
+      "leaf": "aiCodingDaily",
+      "value": 46.9,
+      "sourceLabel": "GPT-6.1-Terra (Medium)",
+      "effort": "medium",
+      "locator": "research/2026-10-30-v5-recapture/third-party/coverage-2026-10-30.json benchmarks[key=aicd].coverage[gpt-6.1-terra-medium]",
+      "harness": "Codex CLI",
+      "tested": "2026-10-26"
+    },
+    {
+      "modelId": "gpt-6.1-terra-high",
+      "leaf": "aiCodingDaily",
+      "value": 46.69,
+      "sourceLabel": "GPT-6.1-Terra (High)",
+      "effort": "high",
+      "locator": "research/2026-10-30-v5-recapture/third-party/coverage-2026-10-30.json benchmarks[key=aicd].coverage[gpt-6.1-terra-high]",
+      "harness": "Codex CLI",
+      "tested": "2026-10-26"
+    },
+    {
+      "modelId": "gpt-6.1-sol-medium",
+      "leaf": "aiCodingDaily",
+      "value": 55.67,
+      "sourceLabel": "GPT-6.1-Sol (Medium)",
+      "effort": "medium",
+      "locator": "research/2026-10-30-v5-recapture/third-party/coverage-2026-10-30.json benchmarks[key=aicd].coverage[gpt-6.1-sol-medium]",
+      "harness": "Codex CLI",
+      "tested": "2026-10-19"
+    },
+    {
+      "modelId": "gpt-6.1-sol-high",
+      "leaf": "aiCodingDaily",
+      "value": 56.83,
+      "sourceLabel": "GPT-6.1-Sol (High)",
+      "effort": "high",
+      "locator": "research/2026-10-30-v5-recapture/third-party/coverage-2026-10-30.json benchmarks[key=aicd].coverage[gpt-6.1-sol-high]",
+      "harness": "Codex CLI",
+      "tested": "2026-10-19"
+    },
+    {
+      "modelId": "gpt-6-astra-high",
+      "leaf": "aiCodingDaily",
+      "value": 56.77,
+      "sourceLabel": "GPT-6-Astra (High)",
+      "effort": "high",
+      "locator": "research/2026-10-30-v5-recapture/third-party/coverage-2026-10-30.json benchmarks[key=aicd].coverage[gpt-6-astra-high]",
+      "harness": "Codex CLI",
+      "tested": "2026-10-01"
+    },
+    {
+      "modelId": "gpt-6-luna-xhigh",
+      "leaf": "aiCodingDaily",
+      "value": 49.94,
+      "sourceLabel": "GPT-6-Luna (Xhigh)",
+      "effort": "xhigh",
+      "locator": "research/2026-10-30-v5-recapture/third-party/coverage-2026-10-30.json benchmarks[key=aicd].coverage[gpt-6-luna-xhigh]",
+      "harness": "Codex CLI",
+      "tested": "2026-10-01"
+    },
+    {
+      "modelId": "gpt-6-luna",
+      "leaf": "aiCodingDaily",
+      "value": 51.99,
+      "sourceLabel": "GPT-6-Luna (Max)",
+      "effort": "max",
+      "locator": "research/2026-10-30-v5-recapture/third-party/coverage-2026-10-30.json benchmarks[key=aicd].coverage[gpt-6-luna]",
+      "harness": "Codex CLI",
+      "tested": "2026-10-01"
+    },
+    {
+      "modelId": "gpt-6.1-sol-low",
+      "leaf": "aiCodingDaily",
+      "value": 52.7,
+      "sourceLabel": "GPT-6.1-Sol (Low)",
+      "effort": "low",
+      "locator": "research/2026-10-30-v5-recapture/third-party/coverage-2026-10-30.json benchmarks[key=aicd].coverage[gpt-6.1-sol-low]",
+      "harness": "Codex CLI",
+      "tested": "2026-10-19"
+    },
+    {
+      "modelId": "gpt-6.1-terra-xhigh",
+      "leaf": "aiCodingDaily",
+      "value": 48.13,
+      "sourceLabel": "GPT-6.1-Terra (Xhigh)",
+      "effort": "xhigh",
+      "locator": "research/2026-10-30-v5-recapture/third-party/coverage-2026-10-30.json benchmarks[key=aicd].coverage[gpt-6.1-terra-xhigh]",
+      "harness": "Codex CLI",
+      "tested": "2026-10-27"
+    },
+    {
+      "modelId": "gpt-6.1-terra",
+      "leaf": "aiCodingDaily",
+      "value": 52.49,
+      "sourceLabel": "GPT-6.1-Terra (Max)",
+      "effort": "max",
+      "locator": "research/2026-10-30-v5-recapture/third-party/coverage-2026-10-30.json benchmarks[key=aicd].coverage[gpt-6.1-terra]",
+      "harness": "Codex CLI",
+      "tested": "2026-10-27"
+    },
+    {
+      "modelId": "claude-opus-5-5-high",
+      "leaf": "aiCodingDaily",
+      "value": 57.68,
+      "sourceLabel": "Opus 5.5 (High)",
+      "effort": "high",
+      "locator": "research/2026-10-30-v5-recapture/third-party/coverage-2026-10-30.json benchmarks[key=aicd].coverage[claude-opus-5-5-high]",
+      "note": "AA labels this configuration '... with default fallback'; the source has no fallback qualifier (as on 2026-10-25).",
+      "harness": "Claude Code",
+      "tested": "2026-10-20"
+    }
+  ]
+}

@@ -1,5 +1,6 @@
 {% extends "base.html" %}
-{%- from "partials/badge.html" import badge -%}
+{%- from "partials/badge.html" import badge, describe -%}
+{%- from "partials/footnotes.html" import fn_name, fn_item, fn_section -%}
 {%- from "partials/fmt.html" import num, rank -%}
 {%- from "partials/coverage_bar.html" import coverage_bar -%}
 {% block content %}
@@ -13,15 +14,14 @@
   <h2 id="models-title" class="section-title">All models</h2>
   <div class="table-wrap" tabindex="0" role="region" aria-label="All models table">
     <table id="models-table" class="data-table">
-      <thead><tr><th scope="col" class="col-model">Model</th><th scope="col" class="col-num">Plan rank</th><th scope="col" class="col-num">API rank</th><th scope="col" class="col-num">Plan score</th><th scope="col">Evidence</th><th scope="col">Coverage</th></tr></thead>
+      <thead><tr><th scope="col" class="col-model">Model</th><th scope="col" class="col-num">Plan rank</th><th scope="col" class="col-num">API rank</th><th scope="col" class="col-num">Plan score</th><th scope="col">Coverage</th></tr></thead>
       <tbody>
         {%- for m in page.models %}
         <tr data-slug="{{ m.slug }}"{% if not m.rankingEligible %} class="row-missing"{% endif %}>
-          <th scope="row" class="cell-model"><span class="model-id"><a class="model-name" href="/models/{{ m.slug }}/">{{ m.name }}</a><span class="model-dev">{{ m.developer }}{% if not m.rankingEligible %} &middot; not ranked{% endif %}</span></span></th>
+          <th scope="row" class="cell-model"><span class="model-id">{% call fn_name(m.slug, loop.index, m.name) %}<a class="model-name" href="/models/{{ m.slug }}/">{{ m.name }}</a>{% endcall %}<span class="model-dev">{{ m.developer }}{% if not m.rankingEligible %} &middot; not ranked{% endif %}</span></span></th>
           <td class="cell-num">{{ rank(m.rank.plan) }}</td>
           <td class="cell-num">{{ rank(m.rank.api) }}</td>
           <td class="cell-num">{{ num(m.overall.plan) }}</td>
-          <td>{{ badge(m.grade) }}</td>
           <td>{{ coverage_bar({"pct": m.coveragePct, "missing": []}) }}</td>
         </tr>
         {%- endfor %}
@@ -29,4 +29,12 @@
     </table>
   </div>
 </section>
+
+{% call fn_section("Each note gives the weakest evidence grade of any value inside that model's score.") %}
+  <ol class="footnotes">
+    {%- for m in page.models %}
+    {% call fn_item(m.slug, m.name) %}{{ badge(m.grade) }} <span class="fn-text">Weakest grade of any value inside the score{% if not m.rankingEligible %} (not ranked){% endif %}. {{ describe(m.grade) }}</span>{% endcall %}
+    {%- endfor %}
+  </ol>
+{% endcall %}
 {% endblock %}

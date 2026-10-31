@@ -12,7 +12,7 @@ from valuerank import build_aa_metrics as bam
 
 FIXTURES = Path(__file__).parent / "fixtures" / "aa"
 PAGE_FIXTURES = Path(__file__).parent / "fixtures" / "aa_pages"
-VERSION = "Artificial Analysis Intelligence Index v4.3.2"
+VERSION = "Artificial Analysis Intelligence Index v5.0"
 
 
 def escaped_payload(model: dict) -> str:
@@ -340,7 +340,7 @@ def test_main_decodes_html_pages_into_metrics_with_units_and_nulls(world, capsys
     output, coverage = world.run()
     model = output["models"]["full"]
     metrics = model["metrics"]
-    assert model["displayName"] == "Mapped Full"
+    assert model["displayName"] == "Mapped Full" and model["family"] == "Mapped Full"  # family defaults to the name
     assert (model["aaSlug"], model["aaName"], model["aaShortName"], model["aaVariant"]) == ("full", "Full (Max)", "Full", "max")
     assert model["release"] == "2026-07" and model["isReasoning"] is True
     assert metrics["intelligenceIndex"] == 61.0
@@ -367,18 +367,18 @@ def test_main_decodes_html_pages_into_metrics_with_units_and_nulls(world, capsys
     assert extraction["textSnapshot"] == "data/aa/full__full.txt"
     assert extraction["sourceSnapshot"] is None and extraction["captureMode"] == "html"
     assert extraction["method"] == "decoded currentModel object from first-party page payload"
-    assert output["sourceSnapshot"] is None and output["observedAt"] == "2026-10-17T20:23:57Z"
+    assert output["sourceSnapshot"] is None and output["observedAt"] == "2026-10-31T04:10:00Z"
     assert output["benchmarkVersion"] == VERSION and output["providerClaimPolicy"] == "policy-text"
     assert coverage["cohortN"] == 1 and coverage["cohort"].endswith("1-model ValueRank comparison roster")
     assert coverage["sourceSnapshot"] is None
     printed = json.loads(capsys.readouterr().out)
-    assert printed["models"] == 1 and printed["primaryFields"] == 14 and printed["additionalFields"] == 3
+    assert printed["models"] == 1 and printed["primaryFields"] == 13 and printed["additionalFields"] == 5
     assert printed["outputs"] == ["data/aa_metrics.json", "data/coverage_matrix.json"]
 
 
 def test_main_decodes_markerless_html_page_through_its_slug_keyed_object(world):
     world.write(
-        mapping=[{"id": "haiku", "displayName": "Haiku", "aaSlug": "claude-haiku-5-5-xhigh", "aaVariant": "xhigh"}],
+        mapping=[{"id": "haiku", "displayName": "Haiku (xhigh)", "family": "Claude Haiku 5.5", "aaSlug": "claude-haiku-5-5-xhigh", "aaVariant": "xhigh"}],
         extract=[entry("haiku", slug="claude-haiku-5-5-xhigh")],
     )
     slug = "claude-haiku-5-5-xhigh"
@@ -389,6 +389,7 @@ def test_main_decodes_markerless_html_page_through_its_slug_keyed_object(world):
     model = output["models"]["haiku"]
     metrics = model["metrics"]
     assert (model["aaSlug"], model["aaName"], model["aaVariant"]) == (slug, "Claude Haiku 5.5 (Xhigh)", "xhigh")
+    assert (model["displayName"], model["family"]) == ("Haiku (xhigh)", "Claude Haiku 5.5")  # O33: a sibling's AA family
     assert model["release"] == {"slug": "claude-haiku-5-5", "name": "Claude Haiku 5.5", "deprecatedTo": None}
     assert metrics["intelligenceIndex"] == pytest.approx(41.2489304677024)
     assert metrics["aaEvalCost"] == pytest.approx(157.5758646895501)
@@ -399,8 +400,9 @@ def test_main_decodes_markerless_html_page_through_its_slug_keyed_object(world):
     assert metrics["gdpvalV21"] == 1513.05 and metrics["gdpvalV21Normalized"] == 0.506525
     assert metrics["automationBenchAA"] == pytest.approx(0.35953889773428194)
     assert metrics["terminalBenchV40"] == pytest.approx(0.292929292929293)
-    assert metrics["scicode"] == pytest.approx(0.517361111111111) and metrics["hle"] == pytest.approx(0.42678405931418)
-    assert metrics["gdpPdfAllPass"] == 0.182 and metrics["critpt"] == pytest.approx(0.225714285714286)
+    # O136: the v5 successor fields this (pre-v5) page already carries are read; the ones it lacks stay missing.
+    assert metrics["terminalBenchScience"] == pytest.approx(0.180952380952381) and metrics["hleDiamond"] is None
+    assert metrics["gdpPdfAllPass"] == 0.182 and metrics["critptV2Hard"] is None
     assert metrics["omniAccuracy"] == 0.3495
     assert metrics["omniNonHallucination"] == pytest.approx(1 - 0.44427363566487316)
     assert metrics["aaLcr"] == pytest.approx(0.783333333333333)
@@ -467,7 +469,7 @@ def test_main_hallucination_rate_fallbacks_and_missing_values(world):
     field = coverage["fields"]["omniNonHallucination"]
     assert (field["availableN"], field["cohortN"], field["coveragePct"]) == (2, 3, 66.67)
     assert field["missingModels"] == ["none"] and field["includedInPrimaryScore"] is False
-    assert coverage["fields"]["hle"]["group"] == "primary"
+    assert coverage["fields"]["hleDiamond"]["group"] == "primary"
     assert coverage["fields"]["gpqaDiamond"]["group"] == "additional"
     assert coverage["fields"]["mmmuPro"]["group"] == "supplemental"
     assert coverage["fields"]["speed"]["availableN"] == 3  # summary text speed present for every html page
@@ -475,13 +477,13 @@ def test_main_hallucination_rate_fallbacks_and_missing_values(world):
 
 def test_main_primary_field_included_only_when_every_model_has_it(world):
     world.write(extract=[entry("a"), entry("b")])
-    world.page("a", "a", {"slug": "a", "hle": 0.2, "scicode": 0.1})
-    world.page("b", "b", {"slug": "b", "hle": 0.3})
+    world.page("a", "a", {"slug": "a", "hleDiamond": 0.2, "terminalBenchScience": 0.1})
+    world.page("b", "b", {"slug": "b", "hleDiamond": 0.3})
     _, coverage = world.run()
-    assert coverage["fields"]["hle"]["includedInPrimaryScore"] is True
-    assert coverage["fields"]["hle"]["coveragePct"] == 100.0
-    assert coverage["fields"]["scicode"]["includedInPrimaryScore"] is False
-    assert coverage["fields"]["scicode"]["missingModels"] == ["b"]
+    assert coverage["fields"]["hleDiamond"]["includedInPrimaryScore"] is True
+    assert coverage["fields"]["hleDiamond"]["coveragePct"] == 100.0
+    assert coverage["fields"]["terminalBenchScience"]["includedInPrimaryScore"] is False
+    assert coverage["fields"]["terminalBenchScience"]["missingModels"] == ["b"]
 
 
 def claim(key, value=0.5, **overrides):
@@ -494,9 +496,9 @@ def claim(key, value=0.5, **overrides):
 
 def test_main_provider_claims_fill_only_exactly_eligible_missing_metrics(world):
     claims = [
-        claim("hle", 0.77),
-        {**claim("critpt", 0.4), "componentKey": None, "component": "critpt"},
-        claim("scicode", 0.3, benchmarkVersion="Artificial Analysis Intelligence Index v4.2"),
+        claim("hleDiamond", 0.77),
+        {**claim("critptV2Hard", 0.4), "componentKey": None, "component": "critptV2Hard"},
+        claim("terminalBenchScience", 0.3, benchmarkVersion="Artificial Analysis Intelligence Index v4.3.2"),
         claim("aaLcr", 0.3, providerVariant="high"),
         claim("gdpvalV21", 0.3, eligibleForRanking=False),
         claim("gpqaDiamond", "0.3"),
@@ -509,16 +511,16 @@ def test_main_provider_claims_fill_only_exactly_eligible_missing_metrics(world):
     output, coverage = world.run()
     model = output["models"]["m"]
     metrics = model["metrics"]
-    assert metrics["hle"] == 0.77 and metrics["critpt"] == 0.4
-    assert model["metricSources"]["hle"] == {"sourceType": "model_provider_claim",
-                                              "sourceUrl": "https://provider.example/claim", "claimId": "c-hle"}
-    for rejected in ("scicode", "aaLcr", "gdpvalV21", "gpqaDiamond", "terminalBenchV40"):
+    assert metrics["hleDiamond"] == 0.77 and metrics["critptV2Hard"] == 0.4
+    assert model["metricSources"]["hleDiamond"] == {"sourceType": "model_provider_claim",
+                                                     "sourceUrl": "https://provider.example/claim", "claimId": "c-hleDiamond"}
+    for rejected in ("terminalBenchScience", "aaLcr", "gdpvalV21", "gpqaDiamond", "terminalBenchV40"):
         assert metrics[rejected] is None, rejected
     assert metrics["intelligenceIndex"] == 55.0
     assert model["metricSources"]["intelligenceIndex"]["sourceType"] == "benchmark_owner"
     assert len(model["providerClaims"]) == 8  # every claim for this model is retained, eligible or not
-    assert coverage["fields"]["hle"]["providerClaimN"] == 1
-    assert coverage["fields"]["scicode"]["providerClaimN"] == 0
+    assert coverage["fields"]["hleDiamond"]["providerClaimN"] == 1
+    assert coverage["fields"]["terminalBenchScience"]["providerClaimN"] == 0
 
 
 def test_main_rejects_raw_page_whose_payload_belongs_to_another_slug(world):

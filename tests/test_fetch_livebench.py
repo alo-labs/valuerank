@@ -433,7 +433,7 @@ def test_main_writes_the_release_document_with_the_pinned_observation_instant(sm
     document = read_document(small_world)
     assert document["schemaVersion"] == "valuerank-livebench-v1"
     assert document["release"] == "2026_06_25"
-    assert document["observedAt"] == "2026-10-17T20:23:57Z"
+    assert document["observedAt"] == "2026-10-31T04:10:00Z"
     assert document["categories"]["Instruction Following"] == ["ifeval"]
     assert "IF" not in document["categories"]
     assert document["cohortN"] == 4
@@ -663,5 +663,7 @@ def test_module_entrypoint_writes_the_release_and_exits_zero(monkeypatch, tmp_pa
     document = read_document(data)
     assert document["release"] == "2026_06_25"
     assert document["cohortN"] == len(stage.COHORT_MAP)
-    assert document["matchedN"] == 2
+    # O132: of the v5 cohort, only GPT-6 Astra's verified row is in the fixture release.
+    assert document["matchedN"] == 1
+    assert document["supplementalN"] == 0
     assert real_document.read_bytes() == before

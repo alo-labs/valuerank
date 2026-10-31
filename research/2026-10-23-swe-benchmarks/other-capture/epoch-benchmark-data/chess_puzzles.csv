@@ -1,0 +1,189 @@
+Model version,mean_score,Best score (across scorers),Release date,Organization,Country,Training compute (FLOP),Training compute notes,stderr,Log viewer,Logs,Started at,id
+deepseek-v4.1-flash-1017_max,0.46,0.46,2026-10-17,DeepSeek,China,,,0.05009082659620331,,,2026-10-19T22:39:00.000Z,4sRo7TxavQAsjaEALPZdDy
+mistral-large-4-0_high,0.33,0.33,2026-10-06,Mistral AI,France,,,0.04725815626252608,,,2026-10-15T22:52:59.000Z,eNdDCt2u6A8mPisK56SApU
+gpt-6-astra_promax,0.76,0.76,2026-09-03,OpenAI,United States of America,9.4e+26,"per OpenAI and affiliates (e.g. Nvidia), 6 Astra was trained on at least 100,000 GB200s in Abilene, Texas (so 100,000 in ""Hardware quantity"" is a lower bound/underestimate).
+
+This suggests around 9e26 FLOP (corresponding to ~100k GB200s over 90 days at 25% FP8 MFU). See more detailed estimate in this notebook, yielding a CI of ~[5e26, 2e27] FLOP.
+https://colab.research.google.com/drive/1DRlugIQs-_zoV66AJT1gQg6I1-NX7NqN ",0.04292346959909278,,,2026-10-15T16:14:15.000Z,76P4iR5BFFPS5jtR3VRWDE
+gpt-5.4-nano-2026-03-17_xhigh,0.45,0.45,2026-03-17,OpenAI,United States of America,,,0.05,,,2026-10-14T18:22:26.000Z,MeFyTsrHFWVrQJ8QHRjnRw
+gpt-5.2-2025-12-11_xhigh,0.48,0.48,2025-12-11,OpenAI,United States of America,,,0.05021167315686782,,,2026-10-14T16:16:30.000Z,YGX23vJ7GJBaYUVLvHnXn5
+gpt-5-pro-2025-10-06_high,0.48,0.48,2025-10-07,OpenAI,United States of America,,,0.05021167315686782,,,2026-10-14T09:56:39.000Z,RwHkGk6Qhd4NVTtRLDwLmc
+gpt-5.2-pro-2025-12-11_xhigh,0.6,0.6,2025-12-11,OpenAI,United States of America,,,0.0492365963917331,,,2026-10-14T09:56:34.000Z,LgRDo2HcNECAGiD8UnHYjx
+gpt-5.4-pro-2026-03-05_xhigh,0.59,0.59,2026-03-05,OpenAI,United States of America,,,0.049431107042371025,,,2026-10-14T09:56:24.000Z,5yc9mNtsSiFQ5PducfGZGT
+gpt-5.5-pro_xhigh,0.62,0.62,2026-04-23,OpenAI,United States of America,,,0.04878317312145634,,,2026-10-14T09:56:16.000Z,5u4XrDnQSRnuXSK6oXKAth
+gpt-5.6-sol_promax,0.68,0.68,2026-07-09,OpenAI,United States of America,,,0.04688261722621507,,,2026-10-14T09:56:09.000Z,WAavFdihYDHwjGsDNh9toF
+glm-4.7,0.21,0.21,2025-12-22,Z.ai (Zhipu AI),China,4.42e+24,"Training tokens not disclosed.
+
+Presuming this is a post-training update from GLM-4.5 (23T tokens) with minor additional compute, training compute is at least:
+
+6 FLOP/parameter/token * 32B active parameters * 23T tokens = 4.42e24 FLOP",0.040936018074033236,,,2026-10-14T09:36:09.000Z,9rDLegdh3zmBfFzTj3fkCc
+glm-5.1,0.2,0.2,2026-04-07,Z.ai (Zhipu AI),China,,,0.04020151261036849,,,2026-10-14T06:28:37.000Z,R7XgJMi2R9sv7tZdx5SZTv
+glm-5.2_max,0.22,0.22,2026-06-16,Z.ai (Zhipu AI),China,,,0.041633319989322654,,,2026-10-14T05:10:27.000Z,Hui8iZgjwKPxz7DkRU8sJX
+glm-5.2_low,0.18,0.18,2026-06-16,Z.ai (Zhipu AI),China,,,0.03861229196653691,,,2026-10-14T04:18:44.000Z,6gYpimjqJm3CL6mvKEN9qs
+glm-5.2_none,0.19,0.19,2026-06-16,Z.ai (Zhipu AI),China,,,0.039427724440366255,,,2026-10-14T03:42:13.000Z,Xi45sLZGyn5sutf7nKRHTk
+glm-5.3_max,0.37,0.37,2026-08-14,Z.ai (Zhipu AI),China,,,0.048523658709390974,,,2026-10-13T21:22:18.000Z,kG3hbd8qLEd6fLAJHyQTiN
+kimi-k2.6,0.2,0.2,2026-04-20,Moonshot,China,,,0.04020151261036849,,,2026-10-13T17:16:43.000Z,ehqiuEDETZTqJ8zt6Mc7Ja
+gemini-4-argon_high,0.59,0.59,2026-09-30,Google DeepMind,United States of America,,,0.04943110704237103,,,2026-10-13T17:15:18.000Z,GJtYeC7ZV4fYgN3wu4rRvq
+kimi-k2.7-code,0.14,0.14,2026-06-12,Moonshot,China,,,0.0348735088019777,,,2026-10-13T17:13:43.000Z,bSyTSKD8RiRNZCGNu6MnFp
+kimi-k3_max,0.36,0.36,2026-07-16,Moonshot,China,2.0001e+25,"Based on peer models such as Kimi K2.6 and DeepSeek V4 Pro, plausibly was trained on roughly 30T tokens (likely between 15T and 60T). Using the heuristic that C = 6ND, 30T pretraining tokens would imply ~1.9e25 FLOP. This is a somewhat uncertain estimate (more uncertain than estimates based on disclosed active params and token counts, but comparable to estimates based on disclosed GPU-hours).
+
+K3 was likely pretrained on over 1e25 FLOP. Speculatively, K3's relatively large size compared to other Chinese models may have reduced the training token budget vs smaller models.",0.048241815132442176,,,2026-10-13T17:13:35.000Z,nzQV9YvictnDF2EwxqTJQs
+kimi-k3_high,0.37,0.37,2026-07-16,Moonshot,China,2.0001e+25,"Based on peer models such as Kimi K2.6 and DeepSeek V4 Pro, plausibly was trained on roughly 30T tokens (likely between 15T and 60T). Using the heuristic that C = 6ND, 30T pretraining tokens would imply ~1.9e25 FLOP. This is a somewhat uncertain estimate (more uncertain than estimates based on disclosed active params and token counts, but comparable to estimates based on disclosed GPU-hours).
+
+K3 was likely pretrained on over 1e25 FLOP. Speculatively, K3's relatively large size compared to other Chinese models may have reduced the training token budget vs smaller models.",0.048523658709390974,,,2026-10-13T17:10:13.000Z,X2QNPHFXuWosA6AiuvVtDv
+kimi-k3_low,0.18,0.18,2026-07-16,Moonshot,China,2.0001e+25,"Based on peer models such as Kimi K2.6 and DeepSeek V4 Pro, plausibly was trained on roughly 30T tokens (likely between 15T and 60T). Using the heuristic that C = 6ND, 30T pretraining tokens would imply ~1.9e25 FLOP. This is a somewhat uncertain estimate (more uncertain than estimates based on disclosed active params and token counts, but comparable to estimates based on disclosed GPU-hours).
+
+K3 was likely pretrained on over 1e25 FLOP. Speculatively, K3's relatively large size compared to other Chinese models may have reduced the training token budget vs smaller models.",0.03861229196653691,,,2026-10-13T17:06:54.000Z,VPSX7EnwWuBrCPnpYGMUEM
+glm-5.3-flash_max,0.21,0.21,2026-08-20,Z.ai (Zhipu AI),China,3.24e+24,"6 * 18e9 active parameters * 30e12 tokens = 3.24e24 FLOP. 
+
+https://docs.z.ai/guides/vlm/glm-5.3-flash says ""Combined with our latest 30T-token multimodal pre-training corpus, these changes let GLM-5.3-Flash produce more intelligence with less compute."", which is not definitive in saying that all 30T tokens were used exactly once; likely confidence.",0.040936018074033236,,,2026-10-13T15:54:34.000Z,fWNxmiSUC7BX8whqvzssY8
+gpt-4o-mini-2024-07-18,0.03,0.03,2024-07-18,OpenAI,United States of America,,"Training compute estimated to be 7.36001e+24 from benchmark scores. https://colab.research.google.com/drive/1r3pUMhB7Kh0Gls9eG-v_XefWrye9fVQR?usp=sharing
+
+90% CI [3.23e+24, 2.05e+25]",0.01714466079977653,,,2026-10-13T14:12:48.000Z,QGrgPmo24qW4h9SAvELP3Y
+o1-2024-12-17_high,0.1,0.1,2024-12-17,OpenAI,United States of America,,,0.03015113445777636,,,2026-10-13T14:12:19.000Z,UtRhB562A5f4SuFsg5MPrJ
+o1-2024-12-17_medium,0.08,0.08,2024-12-17,OpenAI,United States of America,,,0.027265992434429075,,,2026-10-13T14:12:16.000Z,8hGkBXjvgrhMoviNRydRTy
+gpt-4.1-2025-04-14,0.03,0.03,2025-04-14,OpenAI,United States of America,,Flagship model from a leading developer in mid-2025; very likely it used >1e25 FLOP.,0.01714466079977653,,,2026-10-13T14:12:01.000Z,TzdbTbqAFB73Tfet8GFzQQ
+gpt-4o-2024-08-06,0.06,0.06,2024-08-06,OpenAI,United States of America,,Training compute estimated to be 3.8e25 FLOP from benchmark scores. https://colab.research.google.com/drive/1r3pUMhB7Kh0Gls9eG-v_XefWrye9fVQR?usp=sharing,0.023868325657594204,,,2026-10-13T14:12:01.000Z,Cjt9Xa7iPVBf9dN5cfJ88q
+o1-2024-12-17_low,0.09,0.09,2024-12-17,OpenAI,United States of America,,,0.028762349126466143,,,2026-10-13T14:12:00.000Z,GX3T3cWkC6n2Dc6ufeQN6y
+o3-mini-2025-01-31_medium,0.11,0.11,2025-01-31,OpenAI,United States of America,,"We can’t make a precise estimate, but seems unlikely to exceed 10^25 FLOP. We think active parameter count is 10-30B. This would require >55T tokens to reach 10^25 FLOP at the large size, i.e. well beyond 10x overtraining relative to Chinchilla.",0.031446603773522014,,,2026-10-13T14:11:33.000Z,KX6LwuDrXwKvJ6RXod52j4
+gpt-4.1-nano-2025-04-14,0.0,0.0,2025-04-14,OpenAI,United States of America,,,0.0,,,2026-10-13T14:11:28.000Z,FLJ6bNrtaJQGCU2dP3CvWH
+o3-mini-2025-01-31_high,0.15,0.15,2025-01-31,OpenAI,United States of America,,"We can’t make a precise estimate, but seems unlikely to exceed 10^25 FLOP. We think active parameter count is 10-30B. This would require >55T tokens to reach 10^25 FLOP at the large size, i.e. well beyond 10x overtraining relative to Chinchilla.",0.03588702812826367,,,2026-10-13T14:11:18.000Z,65oGRSHSEY6edS9mqbsCfE
+o3-mini-2025-01-31_low,0.06,0.06,2025-01-31,OpenAI,United States of America,,"We can’t make a precise estimate, but seems unlikely to exceed 10^25 FLOP. We think active parameter count is 10-30B. This would require >55T tokens to reach 10^25 FLOP at the large size, i.e. well beyond 10x overtraining relative to Chinchilla.",0.023868325657594204,,,2026-10-13T14:11:15.000Z,gE8uyjscAzcjpuZZNow3d8
+o4-mini-2025-04-16_high,0.13,0.13,2025-04-16,OpenAI,United States of America,,"We can’t make a precise estimate, but seems unlikely to exceed 10^25 FLOP. We think active parameter count is 10-30B. This would require >55T tokens to reach 10^25 FLOP at the large size, i.e. well beyond 10x overtraining relative to Chinchilla.",0.03379976689896311,,,2026-10-13T14:10:35.000Z,4MyKFuqZDpWQCFpKuHbMyD
+gpt-4.1-mini-2025-04-14,0.01,0.01,2025-04-14,OpenAI,United States of America,,,0.009999999999999998,,,2026-10-13T14:10:21.000Z,ZyRri9YZ8CNz6CrUWXFjBA
+o4-mini-2025-04-16_medium,0.22,0.22,2025-04-16,OpenAI,United States of America,,"We can’t make a precise estimate, but seems unlikely to exceed 10^25 FLOP. We think active parameter count is 10-30B. This would require >55T tokens to reach 10^25 FLOP at the large size, i.e. well beyond 10x overtraining relative to Chinchilla.",0.041633319989322654,,,2026-10-13T14:10:20.000Z,dfonReEmxqpRWn5kxGSSES
+o4-mini-2025-04-16_low,0.15,0.15,2025-04-16,OpenAI,United States of America,,"We can’t make a precise estimate, but seems unlikely to exceed 10^25 FLOP. We think active parameter count is 10-30B. This would require >55T tokens to reach 10^25 FLOP at the large size, i.e. well beyond 10x overtraining relative to Chinchilla.",0.03588702812826367,,,2026-10-13T14:10:10.000Z,EjErEBJsumLKEs2LByVSst
+gpt-5-mini-2025-08-07_low,0.16,0.16,2025-08-07,OpenAI,United States of America,,,0.036845294917747066,,,2026-10-13T14:09:58.000Z,Wk25aTN6ZVjg5BwRUdcYKo
+o3-2025-04-16_low,0.36,0.36,2025-04-16,OpenAI,United States of America,,,0.048241815132442176,,,2026-10-13T14:09:51.000Z,mjrcPbSQbMApmXPnqhoawd
+gpt-5-mini-2025-08-07_high,0.24,0.24,2025-08-07,OpenAI,United States of America,,,0.04292346959909278,,,2026-10-13T14:09:48.000Z,5tdGvpe8Ahh8xsUnSwhdAF
+o3-2025-04-16_high,0.36,0.36,2025-04-16,OpenAI,United States of America,,,0.048241815132442176,,,2026-10-13T14:09:35.000Z,RBFypLgCtFRyC4gsCewHfj
+o3-2025-04-16_medium,0.37,0.37,2025-04-16,OpenAI,United States of America,,,0.048523658709390974,,,2026-10-13T14:09:29.000Z,MiKNm9AZG7MxP6hibnYN8a
+gpt-5-nano-2025-08-07_high,0.22,0.22,2025-08-07,OpenAI,United States of America,,,0.041633319989322654,,,2026-10-13T14:09:27.000Z,gQHCk4faPpTNupNZ3xmr4c
+gpt-5-nano-2025-08-07_low,0.15,0.15,2025-08-07,OpenAI,United States of America,,,0.03588702812826367,,,2026-10-13T14:09:19.000Z,kdPFdnbdEGaSw4krPzeJtY
+gpt-5-nano-2025-08-07_minimal,0.02,0.02,2025-08-07,OpenAI,United States of America,,,0.014070529413628966,,,2026-10-13T14:08:37.000Z,BdrAtxC8wKnKiaEgedzdYY
+gpt-5-mini-2025-08-07_minimal,0.0,0.0,2025-08-07,OpenAI,United States of America,,,0.0,,,2026-10-13T14:08:10.000Z,ELe4PgXXEJQ8TDtUCQRKae
+gpt-5-2025-08-07_high,0.36,0.36,2025-08-07,OpenAI,United States of America,6.6e+25,"Fairly speculative, possibly around 6e25 [CI: 2e25 to 2e26] FLOP. See document below for details
+
+https://docs.google.com/document/d/1V2jIk365LnhH4WDoCw5dYJjZr1Htw8IHaK1noMf5Y48/edit?tab=t.z871imftkus",0.04824181513244218,,,2026-10-13T14:07:43.000Z,CxCwksDLsyrgTJ5ievyAoq
+gpt-5-2025-08-07_medium,0.32,0.32,2025-08-07,OpenAI,United States of America,6.6e+25,"Fairly speculative, possibly around 6e25 [CI: 2e25 to 2e26] FLOP. See document below for details
+
+https://docs.google.com/document/d/1V2jIk365LnhH4WDoCw5dYJjZr1Htw8IHaK1noMf5Y48/edit?tab=t.z871imftkus",0.04688261722621506,,,2026-10-13T14:07:34.000Z,4QRM7D5HeCwCvWVZqhJKRS
+gpt-5-2025-08-07_low,0.26,0.26,2025-08-07,OpenAI,United States of America,6.6e+25,"Fairly speculative, possibly around 6e25 [CI: 2e25 to 2e26] FLOP. See document below for details
+
+https://docs.google.com/document/d/1V2jIk365LnhH4WDoCw5dYJjZr1Htw8IHaK1noMf5Y48/edit?tab=t.z871imftkus",0.0440844002276808,,,2026-10-13T14:07:24.000Z,iygB8rn4Xogj5N5x9W7ifT
+gpt-5-2025-08-07_minimal,0.1,0.1,2025-08-07,OpenAI,United States of America,6.6e+25,"Fairly speculative, possibly around 6e25 [CI: 2e25 to 2e26] FLOP. See document below for details
+
+https://docs.google.com/document/d/1V2jIk365LnhH4WDoCw5dYJjZr1Htw8IHaK1noMf5Y48/edit?tab=t.z871imftkus",0.03015113445777636,,,2026-10-13T14:06:12.000Z,gz54krKiBUPt4BfJASJZqi
+gpt-5.1-2025-11-13_none,0.04,0.04,2025-11-13,OpenAI,United States of America,,"Almost certainly > 1e25
+",0.019694638556693237,,,2026-10-13T14:05:48.000Z,5HoXvfpXgnMT3mZ2a8ezkC
+gpt-5.2-2025-12-11_medium,0.36,0.36,2025-12-11,OpenAI,United States of America,,,0.04824181513244218,,,2026-10-13T14:05:35.000Z,WpdE2FAG4gvAbvgemVXgPA
+gpt-5.1-2025-11-13_high,0.42,0.42,2025-11-13,OpenAI,United States of America,,"Almost certainly > 1e25
+",0.04960449637488583,,,2026-10-13T14:05:29.000Z,HKQxqBGokn83tHr5wGJiZX
+gpt-5.1-2025-11-13_low,0.22,0.22,2025-11-13,OpenAI,United States of America,,"Almost certainly > 1e25
+",0.041633319989322654,,,2026-10-13T14:05:25.000Z,LfDm9pJ9Uttcjcacy9DGv3
+gpt-5.2-2025-12-11_high,0.45,0.45,2025-12-11,OpenAI,United States of America,,,0.05,,,2026-10-13T14:05:16.000Z,Y9hzf2ioQTW9ezDvCGzTCu
+gpt-5.2-2025-12-11_low,0.26,0.26,2025-12-11,OpenAI,United States of America,,,0.04408440022768081,,,2026-10-13T14:04:39.000Z,gajcfzsiUXo8AyTudT22bP
+gpt-5.2-2025-12-11_none,0.02,0.02,2025-12-11,OpenAI,United States of America,,,0.014070529413628968,,,2026-10-13T14:04:13.000Z,MuBMyrNUmTRebT8AA8AY8g
+gpt-5.4-2026-03-05_xhigh,0.48,0.48,2026-03-05,OpenAI,United States of America,,,0.05021167315686782,,,2026-10-13T14:04:04.000Z,92ZBraB6bB98s8raSiPgUw
+gpt-5.4-2026-03-05_high,0.42,0.42,2026-03-05,OpenAI,United States of America,,,0.04960449637488583,,,2026-10-13T14:04:01.000Z,QxrNbLxE4V9iHrUVmVPFHk
+gpt-5.4-2026-03-05_medium,0.37,0.37,2026-03-05,OpenAI,United States of America,,,0.048523658709390974,,,2026-10-13T14:03:43.000Z,YA6uTqem8RwiNreRbaarAz
+gpt-5.4-2026-03-05_low,0.19,0.19,2026-03-05,OpenAI,United States of America,,,0.039427724440366255,,,2026-10-13T14:03:36.000Z,8fpUqaaFFUfWWNZskndSpp
+gpt-5.4-2026-03-05_none,0.03,0.03,2026-03-05,OpenAI,United States of America,,,0.017144660799776525,,,2026-10-13T14:03:23.000Z,TfUnmjxgDbgUvDAo6JrD9a
+gpt-5.4-nano-2026-03-17_high,0.36,0.36,2026-03-17,OpenAI,United States of America,,,0.048241815132442176,,,2026-10-13T14:02:58.000Z,N5YuEXtrXeXuhDN2qRssSK
+gpt-5.4-nano-2026-03-17_low,0.2,0.2,2026-03-17,OpenAI,United States of America,,,0.04020151261036849,,,2026-10-13T14:02:49.000Z,isrAz3SUJUJHGUxsk3sG6V
+gpt-5.4-nano-2026-03-17_none,0.02,0.02,2026-03-17,OpenAI,United States of America,,,0.014070529413628968,,,2026-10-13T14:02:42.000Z,at7F8ntqX3M6rXA38mKkWr
+gpt-5.4-mini-2026-03-17_xhigh,0.17,0.17,2026-03-17,OpenAI,United States of America,,,0.03775251680686369,,,2026-10-13T14:02:26.000Z,8Wf3UWZzc4nxwzzPv9ckvF
+gpt-5.4-mini-2026-03-17_high,0.23,0.23,2026-03-17,OpenAI,United States of America,,,0.04229525846816507,,,2026-10-13T13:56:43.000Z,fzgzPmgay5wxMGHjevRjrm
+gpt-5.5_xhigh,0.63,0.63,2026-04-23,OpenAI,United States of America,,,0.048523658709390974,,,2026-10-13T13:54:48.000Z,DFWQcrbMegFAcEWZKWoJxC
+gpt-5.4-mini-2026-03-17_none,0.02,0.02,2026-03-17,OpenAI,United States of America,,,0.014070529413628966,,,2026-10-13T13:54:47.000Z,Jpv6S8xWEHQQTzNHD35dcw
+gpt-5.5_low,0.3,0.3,2026-04-23,OpenAI,United States of America,,,0.04605661864718382,,,2026-10-13T13:54:20.000Z,4EayGByBV2xodNBkrZMcFb
+gpt-5.5_none,0.09,0.09,2026-04-23,OpenAI,United States of America,,,0.028762349126466143,,,2026-10-13T13:53:55.000Z,QfS2PrjUFMNnceRZmCmewP
+gpt-5.6-luna_max,0.43,0.43,2026-07-09,OpenAI,United States of America,,,0.0497569851956243,,,2026-10-13T13:53:45.000Z,LUfGWqWQim7rdBPgSpbrXS
+gpt-5.6-luna_low,0.17,0.17,2026-07-09,OpenAI,United States of America,,,0.03775251680686369,,,2026-10-13T13:53:37.000Z,FagAUZ7m5PJHseDATvp2vf
+gpt-5.6-luna_none,0.03,0.03,2026-07-09,OpenAI,United States of America,,,0.01714466079977653,,,2026-10-13T13:53:29.000Z,5Q7zWYmoRik8mhABL4wpVR
+gpt-5.6-terra_max,0.47,0.47,2026-07-09,OpenAI,United States of America,,,0.05016135580465918,,,2026-10-13T13:53:13.000Z,J2ZgtxyaQZfyDMPTPxS8nm
+gpt-5.6-terra_low,0.27,0.27,2026-07-09,OpenAI,United States of America,,,0.044619604333847374,,,2026-10-13T13:51:29.000Z,bA5j9K2shzZVFGTMQ5g6EU
+gpt-5.6-terra_none,0.05,0.05,2026-07-09,OpenAI,United States of America,,,0.02190429135575903,,,2026-10-13T13:50:17.000Z,HzNnNaRmyNExSVaMjmFCHe
+gpt-5.6-sol_max,0.59,0.59,2026-07-09,OpenAI,United States of America,,,0.049431107042371025,,,2026-10-13T13:50:12.000Z,oWqwMmwEd7LU3eU5Ftak64
+gpt-5.6-sol_low,0.31,0.31,2026-07-09,OpenAI,United States of America,,,0.04648231987117317,,,2026-10-13T13:49:48.000Z,V6aVGtn9gAmRep2oBGsqVN
+gpt-5.6-sol_none,0.07,0.07,2026-07-09,OpenAI,United States of America,,,0.02564323999762428,,,2026-10-13T13:49:41.000Z,WvV6QREDDXeDEGdrKztDsy
+claude-sonnet-4-5-20250929_59K,0.1,0.1,2025-09-29,Anthropic,United States of America,,,0.03015113445777636,,,2026-10-13T13:46:15.000Z,RuQX7KA7owzqzf8Le9veeM
+claude-3-opus-20240229,0.03,0.03,2024-02-29,Anthropic,United States of America,,Training compute estimated to be 1.64e25 FLOP from benchmark scores. https://colab.research.google.com/drive/1r3pUMhB7Kh0Gls9eG-v_XefWrye9fVQR?usp=sharing,0.01714466079977653,,,2026-10-13T13:45:40.000Z,WAbi8sZpyNAZoNN3Gmg22y
+claude-sonnet-4-5-20250929_32K,0.1,0.1,2025-09-29,Anthropic,United States of America,,,0.03015113445777636,,,2026-10-13T13:45:23.000Z,gJizntrYwhnbpCviv9mNBN
+MiniMax-M3_none,0.07,0.07,2026-06-01,MiniMax,China,,,0.02564323999762428,,,2026-10-13T13:44:41.000Z,Ws3g7xtto2fZ7AhuXJfecf
+claude-sonnet-4-6_max,0.23,0.23,2026-02-17,Anthropic,United States of America,,,0.04229525846816507,,,2026-10-13T13:44:15.000Z,6P9AJQmBzaPmE7ossbqLjz
+claude-sonnet-4-5-20250929,0.06,0.06,2025-09-29,Anthropic,United States of America,,,0.023868325657594204,,,2026-10-13T13:43:54.000Z,VajBDnUCyX7uqAfMTbi63j
+claude-haiku-4-5-20251001_59K,0.08,0.08,2025-10-15,Anthropic,United States of America,,,0.027265992434429072,,,2026-10-13T13:43:41.000Z,6bmTzBjpMySeHn65gc5Hu5
+claude-opus-4-6_max,0.21,0.21,2026-02-05,Anthropic,United States of America,,,0.040936018074033236,,,2026-10-13T13:43:19.000Z,aKc2rzsA6YPYwCkE7nhvvB
+claude-haiku-4-5-20251001_32K,0.04,0.04,2025-10-15,Anthropic,United States of America,,,0.019694638556693237,,,2026-10-13T13:43:11.000Z,BLgwhLGGofDBzxoc34YFHK
+claude-opus-4-5-20251101_59K,0.14,0.14,2025-11-24,Anthropic,United States of America,,Flagship model from a leading developer in mid-2025; very likely it used >1e25 FLOP.,0.0348735088019777,,,2026-10-13T13:42:53.000Z,DPuTDKvupUqKgkdVj7Awsp
+claude-opus-4-5-20251101_32K,0.05,0.05,2025-11-24,Anthropic,United States of America,,Flagship model from a leading developer in mid-2025; very likely it used >1e25 FLOP.,0.02190429135575903,,,2026-10-13T13:42:41.000Z,V7seJ9yeHu4LYjrkomhEQm
+gpt-6-astra_max,0.74,0.74,2026-09-03,OpenAI,United States of America,9.4e+26,"per OpenAI and affiliates (e.g. Nvidia), 6 Astra was trained on at least 100,000 GB200s in Abilene, Texas (so 100,000 in ""Hardware quantity"" is a lower bound/underestimate).
+
+This suggests around 9e26 FLOP (corresponding to ~100k GB200s over 90 days at 25% FP8 MFU). See more detailed estimate in this notebook, yielding a CI of ~[5e26, 2e27] FLOP.
+https://colab.research.google.com/drive/1DRlugIQs-_zoV66AJT1gQg6I1-NX7NqN ",0.0440844002276808,,,2026-10-13T13:42:38.000Z,KaEir82ukWPm2Fq4FanY2M
+claude-opus-4-5-20251101,0.05,0.05,2025-11-24,Anthropic,United States of America,,Flagship model from a leading developer in mid-2025; very likely it used >1e25 FLOP.,0.021904291355759033,,,2026-10-13T13:42:24.000Z,4afZ2hjLiJnPy5pD7TfE3K
+gemini-3-flash-preview_high,0.39,0.39,2025-12-17,Google DeepMind,United States of America,,,0.04902071300001973,,,2026-10-13T13:42:10.000Z,UUNZJtgib9XbCjLEdhtGaT
+gpt-6-sol_max,0.56,0.56,2026-09-22,OpenAI,United States of America,,,0.049888765156985884,,,2026-10-13T13:41:42.000Z,N9uFn7EZFsvHNcHEwEy3J6
+qwen3.5-plus,0.08,0.08,2026-02-16,Alibaba,China,,,0.027265992434429072,,,2026-10-13T13:39:53.000Z,XEaDaqM3oaPcrtQ6XH5fGS
+qwen3.5-flash,0.14,0.14,2026-02-25,Alibaba,China,,,0.034873508801977704,,,2026-10-13T13:39:44.000Z,fEgRyzyFYZraNnkkbRVSSg
+qwen3.6-plus,0.14,0.14,2026-03-31,Alibaba,China,,,0.0348735088019777,,,2026-10-13T13:38:57.000Z,SP9UFPzxVnsbzs2kExP2bh
+deepseek-v4-pro_max,0.19,0.19,2026-04-24,DeepSeek,China,9.702e+24,6 * 49e9 active parameters * 33e12 tokens = 9.702E24 for pre-training,0.039427724440366255,,,2026-10-13T13:38:19.000Z,DSyqeLiA9LLZF4iaxsTVHL
+deepseek-v4-pro_high,0.15,0.15,2026-04-24,DeepSeek,China,9.702e+24,6 * 49e9 active parameters * 33e12 tokens = 9.702E24 for pre-training,0.03588702812826367,,,2026-10-13T13:38:10.000Z,duoDEpEXouGJfYrjd5DbvN
+gpt-6-luna_max,0.36,0.36,2026-09-22,OpenAI,United States of America,,,0.04824181513244218,,,2026-10-13T13:37:06.000Z,Jevnk9hi9oRBbGcFu2JxBC
+claude-sonnet-4-6_high,0.19,0.19,2026-02-17,Anthropic,United States of America,,,0.039427724440366255,,,2026-10-13T13:36:50.000Z,Atc4F5iuMZu3vNBWVGCBnv
+claude-sonnet-4-6_medium,0.16,0.16,2026-02-17,Anthropic,United States of America,,,0.03684529491774706,,,2026-10-13T13:36:47.000Z,htvM9QKQJ8TfBxTzDxfZfp
+claude-opus-4-7_max,0.41,0.41,2026-04-16,Anthropic,United States of America,,,0.04943110704237103,,,2026-10-13T13:36:23.000Z,XXPqVNR7WCFFA2Rnzjcbk6
+claude-opus-4-7_xhigh,0.36,0.36,2026-04-16,Anthropic,United States of America,,,0.04824181513244218,,,2026-10-13T13:35:58.000Z,RHbNnWqK6x8f6pR2AZ8VAq
+claude-opus-4-7_low,0.26,0.26,2026-04-16,Anthropic,United States of America,,,0.0440844002276808,,,2026-10-13T13:35:50.000Z,NyAvSf73nUe84HuY6Vpjkh
+claude-opus-4-8_max,0.52,0.52,2026-05-28,Anthropic,United States of America,,,0.05021167315686782,,,2026-10-13T13:35:27.000Z,PEZpuEuU65bu3ZtvjLytHq
+claude-opus-4-8_low,0.29,0.29,2026-05-28,Anthropic,United States of America,,,0.045604802157206865,,,2026-10-13T13:35:16.000Z,icTHLT2S2egxYtgbjQHUng
+claude-opus-4-8_none,0.19,0.19,2026-05-28,Anthropic,United States of America,,,0.039427724440366255,,,2026-10-13T13:34:59.000Z,jDWEviMweCdzGxLfz8sdBm
+grok-4.20-0309-reasoning,0.29,0.29,2026-02-17,xAI,United States of America,,,0.045604802157206865,,,2026-10-13T13:34:38.000Z,ETNzxNbPKwj4qxkdo3VVgT
+claude-fable-5_max,0.47,0.47,2026-06-09,Anthropic,United States of America,,,0.05016135580465918,,,2026-10-13T13:34:37.000Z,bxS76CJuVws8iwWU2Wr2PM
+grok-4.3_high,0.18,0.18,2026-04-17,xAI,United States of America,,,0.03861229196653691,,,2026-10-13T13:34:31.000Z,m4WQuAN88hKsqbT9zXbg7z
+gemini-3.1-pro-preview_high,0.51,0.51,2026-02-19,Google DeepMind,United States of America,,,0.05024183937956913,,,2026-10-13T13:34:13.000Z,FTDFCpXzDTgfgWBNdHLHGc
+gemini-3.5-flash_high,0.45,0.45,2026-05-19,Google DeepMind,United States of America,,,0.05,,,2026-10-13T13:33:53.000Z,XUDdWKUZBhdWPPQBRgx8Pw
+gemini-3.5-flash_low,0.42,0.42,2026-05-19,Google DeepMind,United States of America,,,0.04960449637488583,,,2026-10-13T13:33:40.000Z,68KxyCJbfMSq8JBL3LRJfr
+deepseek-v4-pro_none,0.04,0.04,2026-04-24,DeepSeek,China,9.702e+24,6 * 49e9 active parameters * 33e12 tokens = 9.702E24 for pre-training,0.019694638556693237,,,2026-10-13T13:33:35.000Z,iKiaFJXjdHdUnbMXdKnq4Q
+gemini-3.5-flash_minimal,0.27,0.27,2026-05-19,Google DeepMind,United States of America,,,0.04461960433384737,,,2026-10-13T13:33:29.000Z,H8CebpQyV2qEE8SQzjBrWe
+qwen3.6-flash,0.12,0.12,2026-04-27,Alibaba,China,,,0.032659863237109045,,,2026-10-13T13:33:28.000Z,j99TDv5LAYUSvTUcR47T75
+qwen3.7-max,0.26,0.26,2026-05-19,Alibaba,China,,,0.04408440022768081,,,2026-10-13T13:33:00.000Z,cbQnfsMSA3aQaBtjm3aFx2
+deepseek-v4-flash-0731_max,0.32,0.32,2026-07-31,DeepSeek,China,2.496e+24,"From https://api-docs.deepseek.com/updates/: ""DeepSeek-V4-Flash-0731 keeps the same model architecture and size as DeepSeek-V4-Flash-Preview, and was only re-post-trained.""
+
+6 * 13e9 active parameters * 32e12 tokens = 2.496E24 for pre-training",0.04688261722621506,,,2026-10-13T13:32:51.000Z,Azz52eFkXwVJiRCGpaUBwB
+gemini-3.5-flash-lite_high,0.16,0.16,2026-07-21,Google DeepMind,United States of America,,,0.036845294917747066,,,2026-10-13T13:26:52.000Z,JJyzHWKJUA3iTZDU8iYefz
+gemini-3.5-flash-lite_low,0.21,0.21,2026-07-21,Google DeepMind,United States of America,,,0.040936018074033236,,,2026-10-13T13:25:11.000Z,d5QCJNq9uLtxjhiMhqXLmg
+claude-fable-5_high,0.45,0.45,2026-06-09,Anthropic,United States of America,,,0.05,,,2026-10-13T13:24:08.000Z,9ZFhnyMNCKZ8XdR58WGD3D
+claude-fable-5_low,0.31,0.31,2026-06-09,Anthropic,United States of America,,,0.04648231987117317,,,2026-10-13T13:23:41.000Z,2jKf4iEfVQnHkgAwEtD9Nn
+claude-sonnet-5_max,0.45,0.45,2026-06-30,Anthropic,United States of America,,,0.05,,,2026-10-13T13:23:26.000Z,PN9exWpeJGXJB8tZGX32e4
+claude-sonnet-5_xhigh,0.34,0.34,2026-06-30,Anthropic,United States of America,,,0.04760952285695234,,,2026-10-13T13:23:17.000Z,DFzqUCfxnQPUdK8b8D7aYu
+MiniMax-M3,0.13,0.13,2026-06-01,MiniMax,China,,,0.03379976689896311,,,2026-10-13T13:23:06.000Z,CtmxkTPbFRofQWTkEw5aSe
+gemini-3.5-flash-lite_minimal,0.07,0.07,2026-07-21,Google DeepMind,United States of America,,,0.02564323999762428,,,2026-10-13T13:19:48.000Z,gzQH7StUXaxAtXgxkTgyxJ
+claude-opus-5_max,0.43,0.43,2026-07-24,Anthropic,United States of America,,,0.0497569851956243,,,2026-10-13T13:19:00.000Z,RLN98bmQSMnc5Zv39BF4M2
+gemini-3.6-flash_high,0.4,0.4,2026-07-21,Google DeepMind,United States of America,,,0.0492365963917331,,,2026-10-13T13:14:52.000Z,ZDeGG5QYkdgVqzGPmmnbfx
+grok-4.5_high,0.35,0.35,2026-07-08,xAI,United States of America,,,0.047937248544110224,,,2026-10-13T13:14:23.000Z,jTuYE8VJTos73Kw77UFevq
+grok-4.6_xhigh,0.33,0.33,2026-08-12,xAI,United States of America,,,0.04725815626252608,,,2026-10-13T13:14:03.000Z,NiuExVccWkWbWqi6ex6vvf
+qwen3.8-max_xhigh,0.46,0.46,2026-08-02,Alibaba,China,,,0.05009082659620331,,,2026-10-13T13:13:49.000Z,bq5y6Tp83KLtxC58UDfpyN
+deepseek-v4-pro-0813_max,0.46,0.46,2026-08-13,DeepSeek,China,9.702e+24,From https://api-docs.deepseek.com/news/news260813/: built on the DeepSeek-V4-Pro (Preview) model structure with a DSpark speculative-decoding module; agent-focused post-training upgrades. Pre-training compute carried over from DeepSeek-V4-Pro (6 * 49e9 active parameters * 33e12 tokens = 9.702E24).,0.05009082659620331,,,2026-10-13T13:13:34.000Z,C56VHYLMeww2wXebeJh3gg
+muse-spark-1.1_xhigh,0.34,0.34,2026-07-09,Meta AI,United States of America,,,0.04760952285695234,,,2026-10-13T13:13:33.000Z,4pbEvTxsbzNRCh9kU9Xhun
+claude-opus-5_low,0.27,0.27,2026-07-24,Anthropic,United States of America,,,0.044619604333847374,,,2026-10-13T13:13:14.000Z,XTW92PMsypptnTGBFuLCxe
+claude-fable-5-1_max,0.48,0.48,2026-09-01,Anthropic,United States of America,,,0.05021167315686782,,,2026-10-13T13:13:06.000Z,aLrHd8RCiNo3Yb4GqSawM7
+gemini-3.6-flash_low,0.42,0.42,2026-07-21,Google DeepMind,United States of America,,,0.04960449637488583,,,2026-10-13T13:12:52.000Z,hJ6XXLBm9yfXtSbbhWuwpw
+gemini-3.6-flash_minimal,0.29,0.29,2026-07-21,Google DeepMind,United States of America,,,0.04560480215720686,,,2026-10-13T13:12:45.000Z,beSbPHiiWcwJBSzYRh7Kh4
+muse-spark-1.2_xhigh,0.27,0.27,2026-08-05,Meta AI,United States of America,,,0.044619604333847374,,,2026-10-13T13:05:03.000Z,FueK5bFAzGbkUao9JAibms
+claude-opus-5-5_max,0.67,0.67,2026-09-22,Anthropic,United States of America,,,0.04725815626252609,,,2026-10-13T13:01:31.000Z,F2tuCm5VmNDAaYYh6qYdRy
+claude-sonnet-5-5_max,0.59,0.59,2026-09-28,Anthropic,United States of America,,,0.04943110704237103,,,2026-10-13T13:00:38.000Z,kXU32N6tFkQLx5ei6nRJFS
+muse-spark-1.3_max,0.37,0.37,2026-09-02,Meta AI,United States of America,,,0.048523658709390974,,,2026-10-13T13:00:28.000Z,XkHyFXCWYDv2nAB5vmmWrU
+gemini-3.7-flash_high,0.66,0.66,2026-08-13,Google DeepMind,United States of America,,,0.04760952285695234,,,2026-10-13T13:00:23.000Z,Xu34dKTAdpBWL6advf6DMg
+qwen3.8-max-0902_xhigh,0.37,0.37,2026-09-01,Alibaba,China,,,0.048523658709390974,,,2026-10-13T13:00:11.000Z,Ut4d4rvkUygdLTRomFb5rh
+grok-4.6_high,0.33,0.33,2026-08-12,xAI,United States of America,,,0.04725815626252608,,,2026-10-13T13:00:07.000Z,YoAJyC3j8dZ6ZpDZ5rSDLw
+Inkling_xhigh,0.21,0.21,2026-07-15,Thinking Machines,United States of America,1.1e+25,6ND = 6 * 41e9 active parameters * 45e12 tokens = 1.1e25 FLOP,0.040936018074033236,,,2026-10-13T12:49:23.000Z,UZ9LtVBCjHPMN9SKFUo7Wa
+gpt-6.1-sol_max,0.68,0.68,2026-09-29,OpenAI,United States of America,,,0.04688261722621507,,,2026-10-13T12:40:12.000Z,KkGEgrjYDnofMoUJBCykcH
+claude-haiku-5-5_max,0.55,0.55,2026-10-07,Anthropic,United States of America,,,0.049999999999999996,,,2026-10-13T12:40:01.000Z,KEyuvehfRGtcdgNfNavy62
+deepseek-v4.1-flash_max,0.48,0.48,2026-09-09,DeepSeek,China,4.32e+24,"(Pre-training) - 6 * 16e9 active parameters * 45e12 tokens = 4.32e+24 FLOP
+",0.05021167315686782,,,2026-10-13T12:39:44.000Z,ACpDTbhRPwce2BWQTWD8iC
+muse-spark-1.3_xhigh,0.34,0.34,2026-09-02,Meta AI,United States of America,,,0.04760952285695234,,,2026-10-13T12:39:26.000Z,Hi6xJczgqR4zfCXCXSF6rz
+grok-4.7_xhigh,0.41,0.41,2026-09-21,xAI,United States of America,,,0.04943110704237103,,,2026-10-13T12:39:21.000Z,L5Ck7pMy8bVmVMMLwxJN7f
+gemini-3.8-flash_high,0.58,0.58,2026-09-02,Google DeepMind,United States of America,,,0.04960449637488583,,,2026-10-13T12:39:05.000Z,Hpyy6CpmXmd5q7Zbdq63CR
+claude-haiku-5-5_low,0.24,0.24,2026-10-07,Anthropic,United States of America,,,0.04292346959909278,,,2026-10-13T07:50:03.000Z,KSXLphjiiXtuGdqv9f7ENL

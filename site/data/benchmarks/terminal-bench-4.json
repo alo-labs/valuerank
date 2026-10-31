@@ -1,65 +1,70 @@
 {
   "schemaVersion": "valuerank-terminal-bench-v1",
   "version": "4.0",
-  "observedAt": "2026-10-17T19:25:15Z",
+  "observedAt": "2026-10-31T04:10:00Z",
   "source": {
     "publisher": "Terminal-Bench / Harbor",
     "targetUrl": "https://www.tbench.ai/leaderboard/terminal-bench/4.0",
     "renderedUrl": "https://www.tbench.ai/",
     "homepage": "https://www.tbench.ai/",
     "tasksUrl": "https://hub.harborframework.com/datasets/terminal-bench/terminal-bench/4?tab=tasks",
-    "captureSha256": "0333da6cf85bfaca737b08c53fb3bf3207affeae43e69b4a4ee2a38583f17581",
-    "capturePath": "data/tb4-scrape.json",
+    "captureSha256": "ce5c9b249d2fc22774710df66da819512d565c64dbf77398735b485ad6d2f1c8",
+    "capturePath": "research/2026-10-30-v5-recapture/third-party/tbench/tb4-scrape-2026-10-30.json",
     "captureMethod": "rendered leaderboard snapshot",
-    "capturedAt": "2026-10-17T19:17:55.033Z"
+    "capturedAt": "2026-10-30T22:22:49.248Z"
   },
   "rowN": 23,
   "rowsWithoutCostN": 1,
-  "cohortN": 31,
-  "matchedN": 11,
+  "cohortN": 27,
+  "matchedN": 5,
   "missingModels": [
-    "Kimi K3",
-    "GPT-5.5",
-    "GLM-5.3 Flash",
-    "DeepSeek V4 Pro",
-    "Qwen3.8 Max",
-    "Muse Spark 1.2",
-    "DeepSeek V4 Flash",
-    "Gemini 3.6 Flash",
-    "GLM-5.2",
-    "Gemini 3.5 Flash",
-    "Claude Opus 5.5",
-    "GPT-6 Sol",
-    "GPT-6.1 Sol",
-    "GPT-6 Luna",
-    "Grok 4.7",
-    "MiMo-V2.6-Pro",
+    "GPT-6 Luna (low)",
+    "GPT-6 Luna (medium)",
+    "Claude Haiku 5.5 (low)",
+    "GPT-6 Luna (high)",
+    "Claude Haiku 5.5 (medium)",
     "MiMo-V2.6-Flash",
-    "Claude Haiku 5.5",
-    "Claude Sonnet 5.5",
-    "Gemini 4 Argon"
+    "GPT-6.1 Terra (low)",
+    "Claude Haiku 5.5 (high)",
+    "GPT-6.1 Terra (medium)",
+    "GPT-6.1 Terra (high)",
+    "GPT-6.1 Sol (medium)",
+    "GPT-6.1 Sol (high)",
+    "GPT-6.1 Sol (xhigh)",
+    "GPT-6 Astra (high)",
+    "GPT-6 Astra (xhigh)",
+    "Claude Opus 5.5 (xhigh)",
+    "Gemini 4 Carbon",
+    "GPT-6 Luna (xhigh)",
+    "GPT-6.1 Sol (low)",
+    "GPT-6.1 Terra (xhigh)",
+    "GPT-6.1 Terra (max)",
+    "Claude Opus 5.5 (high)"
   ],
-  "rankingAvailableN": 12,
+  "rankingAvailableN": 6,
   "rankingMissingModels": [
-    "Kimi K3",
-    "GPT-5.5",
-    "GLM-5.3 Flash",
-    "DeepSeek V4 Pro",
-    "Qwen3.8 Max",
-    "Muse Spark 1.2",
-    "Gemini 3.6 Flash",
-    "GLM-5.2",
-    "Gemini 3.5 Flash",
-    "Claude Opus 5.5",
-    "GPT-6 Sol",
-    "GPT-6.1 Sol",
-    "GPT-6 Luna",
-    "Grok 4.7",
-    "MiMo-V2.6-Pro",
+    "GPT-6 Luna (low)",
+    "GPT-6 Luna (medium)",
+    "Claude Haiku 5.5 (low)",
+    "GPT-6 Luna (high)",
+    "Claude Haiku 5.5 (medium)",
     "MiMo-V2.6-Flash",
-    "Claude Haiku 5.5",
-    "Claude Sonnet 5.5",
-    "Gemini 4 Argon"
+    "GPT-6.1 Terra (low)",
+    "Claude Haiku 5.5 (high)",
+    "GPT-6.1 Terra (medium)",
+    "GPT-6.1 Terra (high)",
+    "GPT-6.1 Sol (medium)",
+    "GPT-6.1 Sol (high)",
+    "GPT-6.1 Sol (xhigh)",
+    "GPT-6 Astra (high)",
+    "GPT-6 Astra (xhigh)",
+    "Claude Opus 5.5 (xhigh)",
+    "Gemini 4 Carbon",
+    "GPT-6 Luna (xhigh)",
+    "GPT-6.1 Sol (low)",
+    "GPT-6.1 Terra (xhigh)",
+    "GPT-6.1 Terra (max)",
+    "Claude Opus 5.5 (high)"
   ],
   "providerClaimN": 1,
   "providerClaims": [
@@ -97,7 +102,7 @@
       "releaseDate": "Sep 22, 2026",
       "tokens": "8.0B",
       "costUsd": 4700.0,
-      "cohortModelId": null
+      "cohortModelId": "claude-opus-5-5"
     },
     {
       "rank": 2,
@@ -111,7 +116,7 @@
       "releaseDate": "Sep 28, 2026",
       "tokens": "19.4B",
       "costUsd": 7300.0,
-      "cohortModelId": null
+      "cohortModelId": "claude-sonnet-5-5"
     },
     {
       "rank": 3,
@@ -139,7 +144,7 @@
       "releaseDate": "Sep 29, 2026",
       "tokens": "1.5B",
       "costUsd": 600.0,
-      "cohortModelId": null
+      "cohortModelId": "gpt-6.1-sol"
     },
     {
       "rank": 5,
@@ -167,7 +172,7 @@
       "releaseDate": "Jul 24, 2026",
       "tokens": "6.9B",
       "costUsd": 6100.0,
-      "cohortModelId": "claude-opus-5"
+      "cohortModelId": null
     },
     {
       "rank": 7,
@@ -195,7 +200,7 @@
       "releaseDate": "Jun 9, 2026",
       "tokens": "3.8B",
       "costUsd": 7300.0,
-      "cohortModelId": "claude-fable-5"
+      "cohortModelId": null
     },
     {
       "rank": 9,
@@ -209,7 +214,7 @@
       "releaseDate": "Aug 14, 2026",
       "tokens": "8.7B",
       "costUsd": 2700.0,
-      "cohortModelId": "glm-5.3"
+      "cohortModelId": null
     },
     {
       "rank": 10,
@@ -237,7 +242,7 @@
       "releaseDate": "Jun 26, 2026",
       "tokens": "4.4B",
       "costUsd": 2500.0,
-      "cohortModelId": "gpt-5.6-sol"
+      "cohortModelId": null
     },
     {
       "rank": 12,
@@ -250,7 +255,7 @@
       "uncertaintyPct": 3.5,
       "releaseDate": "Aug 26, 2026",
       "tokens": "2.9B",
-      "costUsd": 2900.0,
+      "costUsd": 100.0,
       "cohortModelId": null
     },
     {
@@ -279,7 +284,7 @@
       "releaseDate": "May 28, 2026",
       "tokens": "6.4B",
       "costUsd": 6500.0,
-      "cohortModelId": "claude-opus-4.8"
+      "cohortModelId": null
     },
     {
       "rank": 15,
@@ -307,7 +312,7 @@
       "releaseDate": "Aug 12, 2026",
       "tokens": "4.0B",
       "costUsd": 3600.0,
-      "cohortModelId": "grok-4.6"
+      "cohortModelId": null
     },
     {
       "rank": 17,
@@ -321,7 +326,7 @@
       "releaseDate": "Sep 2, 2026",
       "tokens": "17.2B",
       "costUsd": 1800.0,
-      "cohortModelId": "gemini-3.8-flash"
+      "cohortModelId": null
     },
     {
       "rank": 18,
@@ -335,7 +340,7 @@
       "releaseDate": "Jun 26, 2026",
       "tokens": "11.6B",
       "costUsd": 300.0,
-      "cohortModelId": "gpt-5.6-luna"
+      "cohortModelId": null
     },
     {
       "rank": 19,
@@ -349,7 +354,7 @@
       "releaseDate": "Sep 22, 2026",
       "tokens": "3.9B",
       "costUsd": 100.0,
-      "cohortModelId": null
+      "cohortModelId": "gpt-6-luna"
     },
     {
       "rank": 20,
@@ -391,7 +396,7 @@
       "releaseDate": "Jun 30, 2026",
       "tokens": "21.6B",
       "costUsd": 9600.0,
-      "cohortModelId": "claude-sonnet-5"
+      "cohortModelId": null
     },
     {
       "rank": 23,
@@ -405,10 +410,38 @@
       "releaseDate": "Aug 13, 2026",
       "tokens": "11.1B",
       "costUsd": 1300.0,
-      "cohortModelId": "gemini-3.7-flash"
+      "cohortModelId": null
     }
   ],
   "cohortRows": {
+    "gpt-6.1-sol": {
+      "rank": 3,
+      "rankLabel": "3",
+      "model": "GPT-6.1 Sol (max)",
+      "baseModel": "GPT-6.1 Sol",
+      "agent": "Codex",
+      "resolutionRate": 0.582,
+      "resolutionRatePct": 58.2,
+      "uncertaintyPct": 3.1,
+      "releaseDate": "Sep 29, 2026",
+      "tokens": "1.5B",
+      "costUsd": 600.0,
+      "cohortModelId": "gpt-6.1-sol"
+    },
+    "gpt-6-luna": {
+      "rank": 19,
+      "rankLabel": "19",
+      "model": "GPT-6 Luna (max)",
+      "baseModel": "GPT-6 Luna",
+      "agent": "Codex",
+      "resolutionRate": 0.164,
+      "resolutionRatePct": 16.4,
+      "uncertaintyPct": 2.7,
+      "releaseDate": "Sep 22, 2026",
+      "tokens": "3.9B",
+      "costUsd": 100.0,
+      "cohortModelId": "gpt-6-luna"
+    },
     "gpt-6-astra": {
       "rank": 3,
       "rankLabel": "3",
@@ -423,166 +456,66 @@
       "costUsd": 3300.0,
       "cohortModelId": "gpt-6-astra"
     },
-    "gemini-3.8-flash": {
-      "rank": 17,
-      "rankLabel": "17",
-      "model": "Gemini 3.8 Flash (high)",
-      "baseModel": "Gemini 3.8 Flash",
-      "agent": "mini-SWE-agent",
-      "resolutionRate": 0.191,
-      "resolutionRatePct": 19.1,
-      "uncertaintyPct": 3.4,
-      "releaseDate": "Sep 2, 2026",
-      "tokens": "17.2B",
-      "costUsd": 1800.0,
-      "cohortModelId": "gemini-3.8-flash"
-    },
-    "claude-opus-5": {
-      "rank": 6,
-      "rankLabel": "6",
-      "model": "Opus 5 (xhigh)",
-      "baseModel": "Opus 5",
+    "claude-sonnet-5-5": {
+      "rank": 2,
+      "rankLabel": "2",
+      "model": "Sonnet 5.5 (max)",
+      "baseModel": "Sonnet 5.5",
       "agent": "Claude Code",
-      "resolutionRate": 0.539,
-      "resolutionRatePct": 53.9,
-      "uncertaintyPct": 3.2,
-      "releaseDate": "Jul 24, 2026",
-      "tokens": "6.9B",
-      "costUsd": 6100.0,
-      "cohortModelId": "claude-opus-5"
-    },
-    "gpt-5.6-sol": {
-      "rank": 11,
-      "rankLabel": "11",
-      "model": "GPT-5.6 Sol (max)",
-      "baseModel": "GPT-5.6 Sol",
-      "agent": "Codex",
-      "resolutionRate": 0.373,
-      "resolutionRatePct": 37.3,
-      "uncertaintyPct": 3.8,
-      "releaseDate": "Jun 26, 2026",
-      "tokens": "4.4B",
-      "costUsd": 2500.0,
-      "cohortModelId": "gpt-5.6-sol"
-    },
-    "claude-fable-5": {
-      "rank": 8,
-      "rankLabel": "8",
-      "model": "Fable 5 (max)",
-      "baseModel": "Fable 5",
-      "agent": "Claude Code",
-      "resolutionRate": 0.445,
-      "resolutionRatePct": 44.5,
-      "uncertaintyPct": 3.8,
-      "releaseDate": "Jun 9, 2026",
-      "tokens": "3.8B",
+      "resolutionRate": 0.618,
+      "resolutionRatePct": 61.8,
+      "uncertaintyPct": 2.9,
+      "releaseDate": "Sep 28, 2026",
+      "tokens": "19.4B",
       "costUsd": 7300.0,
-      "cohortModelId": "claude-fable-5"
+      "cohortModelId": "claude-sonnet-5-5"
     },
-    "glm-5.3": {
-      "rank": 9,
-      "rankLabel": "9",
-      "model": "GLM-5.3 (max)",
-      "baseModel": "GLM-5.3",
+    "claude-opus-5-5": {
+      "rank": 1,
+      "rankLabel": "1",
+      "model": "Opus 5.5 (max)",
+      "baseModel": "Opus 5.5",
       "agent": "Claude Code",
-      "resolutionRate": 0.418,
-      "resolutionRatePct": 41.8,
-      "uncertaintyPct": 3.2,
-      "releaseDate": "Aug 14, 2026",
-      "tokens": "8.7B",
-      "costUsd": 2700.0,
-      "cohortModelId": "glm-5.3"
-    },
-    "grok-4.6": {
-      "rank": 16,
-      "rankLabel": "16",
-      "model": "Grok 4.6 (high)",
-      "baseModel": "Grok 4.6",
-      "agent": "Grok Build",
-      "resolutionRate": 0.203,
-      "resolutionRatePct": 20.3,
+      "resolutionRate": 0.648,
+      "resolutionRatePct": 64.8,
       "uncertaintyPct": 3.1,
-      "releaseDate": "Aug 12, 2026",
-      "tokens": "4.0B",
-      "costUsd": 3600.0,
-      "cohortModelId": "grok-4.6"
-    },
-    "gpt-5.6-luna": {
-      "rank": 18,
-      "rankLabel": "18",
-      "model": "GPT-5.6 Luna (max)",
-      "baseModel": "GPT-5.6 Luna",
-      "agent": "Codex",
-      "resolutionRate": 0.173,
-      "resolutionRatePct": 17.3,
-      "uncertaintyPct": 2.8,
-      "releaseDate": "Jun 26, 2026",
-      "tokens": "11.6B",
-      "costUsd": 300.0,
-      "cohortModelId": "gpt-5.6-luna"
-    },
-    "gemini-3.7-flash": {
-      "rank": 23,
-      "rankLabel": "23",
-      "model": "Gemini 3.7 Flash (high)",
-      "baseModel": "Gemini 3.7 Flash",
-      "agent": "mini-SWE-agent",
-      "resolutionRate": 0.112,
-      "resolutionRatePct": 11.2,
-      "uncertaintyPct": 2.4,
-      "releaseDate": "Aug 13, 2026",
-      "tokens": "11.1B",
-      "costUsd": 1300.0,
-      "cohortModelId": "gemini-3.7-flash"
-    },
-    "claude-opus-4.8": {
-      "rank": 14,
-      "rankLabel": "14",
-      "model": "Opus 4.8 (max)",
-      "baseModel": "Opus 4.8",
-      "agent": "Claude Code",
-      "resolutionRate": 0.236,
-      "resolutionRatePct": 23.6,
-      "uncertaintyPct": 3.6,
-      "releaseDate": "May 28, 2026",
-      "tokens": "6.4B",
-      "costUsd": 6500.0,
-      "cohortModelId": "claude-opus-4.8"
-    },
-    "claude-sonnet-5": {
-      "rank": 21,
-      "rankLabel": "21",
-      "model": "Sonnet 5 (max)",
-      "baseModel": "Sonnet 5",
-      "agent": "Claude Code",
-      "resolutionRate": 0.124,
-      "resolutionRatePct": 12.4,
-      "uncertaintyPct": 3.1,
-      "releaseDate": "Jun 30, 2026",
-      "tokens": "21.6B",
-      "costUsd": 9600.0,
-      "cohortModelId": "claude-sonnet-5"
+      "releaseDate": "Sep 22, 2026",
+      "tokens": "8.0B",
+      "costUsd": 4700.0,
+      "cohortModelId": "claude-opus-5-5"
     }
   },
-  "frontierCount": 4,
+  "frontierCount": 3,
   "cohortMapping": {
-    "gemini-4-argon": {
+    "gpt-6-1-sol": {
+      "status": "official",
+      "rank": 3,
+      "resolutionRatePct": 58.2,
+      "evaluatedModel": "GPT-6.1 Sol (max)"
+    },
+    "gpt-6-1-terra": {
       "status": "missing",
       "rank": null,
       "resolutionRatePct": null,
       "evaluatedModel": null
     },
-    "gpt-6-1-sol": {
+    "claude-opus-5-5": {
+      "status": "official",
+      "rank": 1,
+      "resolutionRatePct": 64.8,
+      "evaluatedModel": "Opus 5.5 (max)"
+    },
+    "gpt-6-1-sol-high": {
       "status": "missing",
       "rank": null,
       "resolutionRatePct": null,
       "evaluatedModel": null
     },
     "claude-sonnet-5-5": {
-      "status": "missing",
-      "rank": null,
-      "resolutionRatePct": null,
-      "evaluatedModel": null
+      "status": "official",
+      "rank": 2,
+      "resolutionRatePct": 61.8,
+      "evaluatedModel": "Sonnet 5.5 (max)"
     },
     "gpt-6-astra": {
       "status": "official",
@@ -590,163 +523,127 @@
       "resolutionRatePct": 58.2,
       "evaluatedModel": "GPT-6 Astra (max)"
     },
-    "claude-opus-5-5": {
+    "gpt-6-1-sol-medium": {
       "status": "missing",
       "rank": null,
       "resolutionRatePct": null,
       "evaluatedModel": null
     },
-    "gpt-5-6-sol": {
-      "status": "official",
-      "rank": 11,
-      "resolutionRatePct": 37.3,
-      "evaluatedModel": "GPT-5.6 Sol (max)"
-    },
-    "mimo-v2-6-pro": {
+    "gpt-6-astra-high": {
       "status": "missing",
       "rank": null,
       "resolutionRatePct": null,
       "evaluatedModel": null
     },
-    "gpt-6-sol": {
+    "claude-opus-5-5-high": {
       "status": "missing",
       "rank": null,
       "resolutionRatePct": null,
       "evaluatedModel": null
     },
-    "grok-4-7": {
+    "gpt-6-1-terra-xhigh": {
       "status": "missing",
       "rank": null,
       "resolutionRatePct": null,
       "evaluatedModel": null
     },
-    "gpt-5-6-luna": {
-      "status": "official",
-      "rank": 18,
-      "resolutionRatePct": 17.3,
-      "evaluatedModel": "GPT-5.6 Luna (max)"
+    "claude-haiku-5-5-high": {
+      "status": "missing",
+      "rank": null,
+      "resolutionRatePct": null,
+      "evaluatedModel": null
+    },
+    "gpt-6-1-sol-low": {
+      "status": "missing",
+      "rank": null,
+      "resolutionRatePct": null,
+      "evaluatedModel": null
+    },
+    "gpt-6-1-terra-high": {
+      "status": "missing",
+      "rank": null,
+      "resolutionRatePct": null,
+      "evaluatedModel": null
     },
     "gpt-6-luna": {
+      "status": "official",
+      "rank": 19,
+      "resolutionRatePct": 16.4,
+      "evaluatedModel": "GPT-6 Luna (max)"
+    },
+    "gpt-6-1-terra-medium": {
+      "status": "missing",
+      "rank": null,
+      "resolutionRatePct": null,
+      "evaluatedModel": null
+    },
+    "claude-haiku-5-5-medium": {
+      "status": "missing",
+      "rank": null,
+      "resolutionRatePct": null,
+      "evaluatedModel": null
+    },
+    "gpt-6-luna-xhigh": {
+      "status": "missing",
+      "rank": null,
+      "resolutionRatePct": null,
+      "evaluatedModel": null
+    },
+    "gpt-6-luna-high": {
+      "status": "missing",
+      "rank": null,
+      "resolutionRatePct": null,
+      "evaluatedModel": null
+    },
+    "gpt-6-luna-medium": {
+      "status": "missing",
+      "rank": null,
+      "resolutionRatePct": null,
+      "evaluatedModel": null
+    },
+    "claude-haiku-5-5-low": {
+      "status": "missing",
+      "rank": null,
+      "resolutionRatePct": null,
+      "evaluatedModel": null
+    },
+    "claude-opus-5-5-xhigh": {
+      "status": "missing",
+      "rank": null,
+      "resolutionRatePct": null,
+      "evaluatedModel": null
+    },
+    "gpt-6-astra-xhigh": {
+      "status": "missing",
+      "rank": null,
+      "resolutionRatePct": null,
+      "evaluatedModel": null
+    },
+    "gpt-6-luna-low": {
+      "status": "missing",
+      "rank": null,
+      "resolutionRatePct": null,
+      "evaluatedModel": null
+    },
+    "gpt-6-1-sol-xhigh": {
+      "status": "missing",
+      "rank": null,
+      "resolutionRatePct": null,
+      "evaluatedModel": null
+    },
+    "gpt-6-1-terra-low": {
+      "status": "missing",
+      "rank": null,
+      "resolutionRatePct": null,
+      "evaluatedModel": null
+    },
+    "gemini-4-carbon": {
       "status": "missing",
       "rank": null,
       "resolutionRatePct": null,
       "evaluatedModel": null
     },
     "mimo-v2-6-flash": {
-      "status": "missing",
-      "rank": null,
-      "resolutionRatePct": null,
-      "evaluatedModel": null
-    },
-    "claude-haiku-5-5": {
-      "status": "missing",
-      "rank": null,
-      "resolutionRatePct": null,
-      "evaluatedModel": null
-    },
-    "gemini-3-8-flash": {
-      "status": "official",
-      "rank": 17,
-      "resolutionRatePct": 19.1,
-      "evaluatedModel": "Gemini 3.8 Flash (high)"
-    },
-    "claude-opus-5": {
-      "status": "official",
-      "rank": 6,
-      "resolutionRatePct": 53.9,
-      "evaluatedModel": "Opus 5 (xhigh)"
-    },
-    "glm-5-3": {
-      "status": "official",
-      "rank": 9,
-      "resolutionRatePct": 41.8,
-      "evaluatedModel": "GLM-5.3 (max)"
-    },
-    "deepseek-v4-flash": {
-      "status": "provider_claim",
-      "rank": null,
-      "resolutionRatePct": 31.2,
-      "evaluatedModel": "DeepSeek V4.1-Flash"
-    },
-    "qwen3-8-max": {
-      "status": "missing",
-      "rank": null,
-      "resolutionRatePct": null,
-      "evaluatedModel": null
-    },
-    "deepseek-v4-pro": {
-      "status": "missing",
-      "rank": null,
-      "resolutionRatePct": null,
-      "evaluatedModel": null
-    },
-    "claude-fable-5": {
-      "status": "official",
-      "rank": 8,
-      "resolutionRatePct": 44.5,
-      "evaluatedModel": "Fable 5 (max)"
-    },
-    "claude-opus-4-8": {
-      "status": "official",
-      "rank": 14,
-      "resolutionRatePct": 23.6,
-      "evaluatedModel": "Opus 4.8 (max)"
-    },
-    "claude-sonnet-5": {
-      "status": "official",
-      "rank": 21,
-      "resolutionRatePct": 12.4,
-      "evaluatedModel": "Sonnet 5 (max)"
-    },
-    "glm-5-2": {
-      "status": "missing",
-      "rank": null,
-      "resolutionRatePct": null,
-      "evaluatedModel": null
-    },
-    "glm-5-3-flash": {
-      "status": "missing",
-      "rank": null,
-      "resolutionRatePct": null,
-      "evaluatedModel": null
-    },
-    "gpt-5-5": {
-      "status": "missing",
-      "rank": null,
-      "resolutionRatePct": null,
-      "evaluatedModel": null
-    },
-    "gemini-3-5-flash": {
-      "status": "missing",
-      "rank": null,
-      "resolutionRatePct": null,
-      "evaluatedModel": null
-    },
-    "gemini-3-6-flash": {
-      "status": "missing",
-      "rank": null,
-      "resolutionRatePct": null,
-      "evaluatedModel": null
-    },
-    "gemini-3-7-flash": {
-      "status": "official",
-      "rank": 23,
-      "resolutionRatePct": 11.2,
-      "evaluatedModel": "Gemini 3.7 Flash (high)"
-    },
-    "grok-4-6": {
-      "status": "official",
-      "rank": 16,
-      "resolutionRatePct": 20.3,
-      "evaluatedModel": "Grok 4.6 (high)"
-    },
-    "kimi-k3": {
-      "status": "missing",
-      "rank": null,
-      "resolutionRatePct": null,
-      "evaluatedModel": null
-    },
-    "muse-spark-1-2": {
       "status": "missing",
       "rank": null,
       "resolutionRatePct": null,

@@ -1,0 +1,853 @@
+{
+  "schemaVersion": "valuerank-aa-cost-charts/v1",
+  "capturedAt": "2026-10-31T04:07:51.285Z",
+  "precision": "chart labels rounded to USD 1",
+  "declinedTasksMarker": {
+    "marker": "*",
+    "meaning": "The model or provider declined some tasks on safety grounds"
+  },
+  "evaluations": [
+    {
+      "slug": "frontiercode",
+      "url": "https://artificialanalysis.ai/evaluations/frontiercode",
+      "finalUrl": "https://artificialanalysis.ai/evaluations/frontiercode?eval-cost=total-cost&models=claude-opus-5-5%2Cclaude-opus-5-5-xhigh%2Cclaude-sonnet-5-5%2Cclaude-opus-5-5-high%2Cclaude-sonnet-5-5-xhigh%2Cclaude-fable-5-1%2Cclaude-opus-5-5-medium%2Cclaude-sonnet-5-5-high%2Cclaude-haiku-5-5%2Cclaude-opus-5-5-low%2Cclaude-haiku-5-5-xhigh%2Cclaude-sonnet-5-5-medium%2Cclaude-haiku-5-5-high%2Cclaude-sonnet-5-5-low%2Cclaude-haiku-5-5-medium%2Cclaude-haiku-5-5-low%2Cgpt-6-astra%2Cgpt-6-1-sol%2Cgpt-6-1-sol-xhigh%2Cgpt-6-1-terra%2Cgpt-6-1-sol-high%2Cgpt-6-1-sol-medium%2Cgpt-6-1-terra-xhigh%2Cgpt-6-1-terra-high%2Cgpt-6-1-terra-medium%2Cgpt-6-1-sol-low%2Cgpt-6-1-terra-non-reasoning%2Cgpt-6-1-terra-low%2Cgpt-6-luna%2Cgpt-6-luna-xhigh%2Cgpt-6-luna-high%2Cgpt-6-luna-medium%2Cgpt-6-luna-low%2Cgpt-6-luna-non-reasoning%2Cgpt-oss-120b%2Cgemini-4-argon%2Cgemini-3-8-flash%2Cgemini-3-8-flash-medium%2Cgemini-3-8-flash-low%2Cmuse-wonder-full%2Cmuse-wonder%2Cmuse-spark-1-3%2Cmuse-spark-open%2Cmuse-glimmer%2Cmuse-spark-1-3-xhigh%2Ckimi-k3-1-pro%2Ckimi-k3-low%2Ckimi-k3%2Cgrok-4-7-high%2Cgrok-4-7%2Cgrok-4-7-low%2Cqwen3-8-max%2Cqwen3-8-27b%2Cqwen3-8-27b-medium%2Cqwen3-8-27b-low%2Cqwen3-8-27b-non-reasoning%2Cdeepseek-v4-1-flash-1017%2Cdeepseek-v4-pro%2Cdeepseek-v4-1-flash-non-reasoning%2Cdeepseek-v4-1-flash%2Cglm-5-3%2Cglm-5-3-flash%2Cglm-5-3-low%2Cmimo-v2-6-pro%2Cmimo-v2-6-flash%2Cminimax-m3-1-flash%2Cminimax-m3%2Cstep-5%2Cmistral-large-4-preview%2Cmistral-large-4-medium%2Ck2-horizon-375b-a23b%2Creflection-beam%2Cnemotron-3-5-super-vl%2Cnvidia-nemotron-3-ultra-550b-a55b%2Cnvidia-nemotron-3-nano-4b%2Cinkling-small%2Cinkling%2Ccommand-a-plus",
+      "chartTitle": "FrontierCode 1.1: Total Cost to Run",
+      "selection": {
+        "before": "27 of 78 models",
+        "after": "78 of 78 models"
+      },
+      "notes": [
+        "The model or provider declined some tasks on safety grounds"
+      ],
+      "rows": [
+        {
+          "model": "GPT-6 Luna (low)",
+          "totalUsdLabel": "$1",
+          "totalUsd": 1,
+          "declinedTasks": false,
+          "notes": []
+        },
+        {
+          "model": "Claude Haiku 5.5 (low)",
+          "totalUsdLabel": "$2*",
+          "totalUsd": 2,
+          "declinedTasks": true,
+          "notes": []
+        },
+        {
+          "model": "GPT-6 Luna (medium)",
+          "totalUsdLabel": "$3",
+          "totalUsd": 3,
+          "declinedTasks": false,
+          "notes": []
+        },
+        {
+          "model": "Claude Haiku 5.5 (medium)",
+          "totalUsdLabel": "$4*",
+          "totalUsd": 4,
+          "declinedTasks": true,
+          "notes": []
+        },
+        {
+          "model": "GPT-6 Luna (high)",
+          "totalUsdLabel": "$4",
+          "totalUsd": 4,
+          "declinedTasks": false,
+          "notes": []
+        },
+        {
+          "model": "GPT-6 Luna (non-reasoning)",
+          "totalUsdLabel": "$4",
+          "totalUsd": 4,
+          "declinedTasks": false,
+          "notes": []
+        },
+        {
+          "model": "GPT-6 Luna (xhigh)",
+          "totalUsdLabel": "$5",
+          "totalUsd": 5,
+          "declinedTasks": false,
+          "notes": []
+        },
+        {
+          "model": "GPT-6.1 Terra (low)",
+          "totalUsdLabel": "$8",
+          "totalUsd": 8,
+          "declinedTasks": false,
+          "notes": []
+        },
+        {
+          "model": "Claude Haiku 5.5 (high)",
+          "totalUsdLabel": "$8*",
+          "totalUsd": 8,
+          "declinedTasks": true,
+          "notes": []
+        },
+        {
+          "model": "MiMo-V2.6-Flash",
+          "totalUsdLabel": "$8",
+          "totalUsd": 8,
+          "declinedTasks": false,
+          "notes": []
+        },
+        {
+          "model": "GPT-6.1 Sol (low)",
+          "totalUsdLabel": "$8",
+          "totalUsd": 8,
+          "declinedTasks": false,
+          "notes": []
+        },
+        {
+          "model": "GPT-6 Luna (max)",
+          "totalUsdLabel": "$9",
+          "totalUsd": 9,
+          "declinedTasks": false,
+          "notes": []
+        },
+        {
+          "model": "Claude Sonnet 5.5 (low with fallback)",
+          "totalUsdLabel": "$13",
+          "totalUsd": 13,
+          "declinedTasks": false,
+          "notes": []
+        },
+        {
+          "model": "Claude Sonnet 5.5 (medium with fallback)",
+          "totalUsdLabel": "$16",
+          "totalUsd": 16,
+          "declinedTasks": false,
+          "notes": []
+        },
+        {
+          "model": "Claude Haiku 5.5 (xhigh)",
+          "totalUsdLabel": "$16*",
+          "totalUsd": 16,
+          "declinedTasks": true,
+          "notes": []
+        },
+        {
+          "model": "MiMo-V2.6-Pro",
+          "totalUsdLabel": "$18",
+          "totalUsd": 18,
+          "declinedTasks": false,
+          "notes": []
+        },
+        {
+          "model": "Beam 1.0",
+          "totalUsdLabel": "$19",
+          "totalUsd": 19,
+          "declinedTasks": false,
+          "notes": []
+        },
+        {
+          "model": "GPT-6.1 Sol (medium)",
+          "totalUsdLabel": "$19",
+          "totalUsd": 19,
+          "declinedTasks": false,
+          "notes": []
+        },
+        {
+          "model": "GPT-6.1 Terra (medium)",
+          "totalUsdLabel": "$20",
+          "totalUsd": 20,
+          "declinedTasks": false,
+          "notes": []
+        },
+        {
+          "model": "DeepSeek V4.1 Flash (non-reasoning)",
+          "totalUsdLabel": "$27",
+          "totalUsd": 27,
+          "declinedTasks": false,
+          "notes": []
+        },
+        {
+          "model": "Claude Opus 5.5 (low with fallback)",
+          "totalUsdLabel": "$30",
+          "totalUsd": 30,
+          "declinedTasks": false,
+          "notes": []
+        },
+        {
+          "model": "GPT-6.1 Terra (non-reasoning)",
+          "totalUsdLabel": "$30",
+          "totalUsd": 30,
+          "declinedTasks": false,
+          "notes": []
+        },
+        {
+          "model": "Claude Sonnet 5.5 (high with fallback)",
+          "totalUsdLabel": "$30",
+          "totalUsd": 30,
+          "declinedTasks": false,
+          "notes": []
+        },
+        {
+          "model": "GPT-6.1 Terra (high)",
+          "totalUsdLabel": "$31",
+          "totalUsd": 31,
+          "declinedTasks": false,
+          "notes": []
+        },
+        {
+          "model": "Muse Glimmer (high)",
+          "totalUsdLabel": "$31",
+          "totalUsd": 31,
+          "declinedTasks": false,
+          "notes": []
+        },
+        {
+          "model": "Claude Haiku 5.5 (max)",
+          "totalUsdLabel": "$33*",
+          "totalUsd": 33,
+          "declinedTasks": true,
+          "notes": []
+        },
+        {
+          "model": "MiniMax-M3.1-Flash",
+          "totalUsdLabel": "$35",
+          "totalUsd": 35,
+          "declinedTasks": false,
+          "notes": []
+        },
+        {
+          "model": "DeepSeek V4.1 Flash 1017 (max)",
+          "totalUsdLabel": "$35",
+          "totalUsd": 35,
+          "declinedTasks": false,
+          "notes": []
+        },
+        {
+          "model": "GLM-5.3-Flash",
+          "totalUsdLabel": "$36",
+          "totalUsd": 36,
+          "declinedTasks": false,
+          "notes": []
+        },
+        {
+          "model": "Inkling Small",
+          "totalUsdLabel": "$37",
+          "totalUsd": 37,
+          "declinedTasks": false,
+          "notes": []
+        },
+        {
+          "model": "GPT-6.1 Sol (high)",
+          "totalUsdLabel": "$42",
+          "totalUsd": 42,
+          "declinedTasks": false,
+          "notes": []
+        },
+        {
+          "model": "GPT-6.1 Terra (xhigh)",
+          "totalUsdLabel": "$50",
+          "totalUsd": 50,
+          "declinedTasks": false,
+          "notes": []
+        },
+        {
+          "model": "gpt-oss-120b (high)",
+          "totalUsdLabel": "$50",
+          "totalUsd": 50,
+          "declinedTasks": false,
+          "notes": []
+        },
+        {
+          "model": "Mistral Large 4 (medium)",
+          "totalUsdLabel": "$51",
+          "totalUsd": 51,
+          "declinedTasks": false,
+          "notes": []
+        },
+        {
+          "model": "DeepSeek V4.1 Flash (max)",
+          "totalUsdLabel": "$60",
+          "totalUsd": 60,
+          "declinedTasks": false,
+          "notes": []
+        },
+        {
+          "model": "GPT-6.1 Sol (xhigh)",
+          "totalUsdLabel": "$60",
+          "totalUsd": 60,
+          "declinedTasks": false,
+          "notes": []
+        },
+        {
+          "model": "Nemotron 3.5 Super VL",
+          "totalUsdLabel": "$66",
+          "totalUsd": 66,
+          "declinedTasks": false,
+          "notes": []
+        },
+        {
+          "model": "Kimi K3 (low)",
+          "totalUsdLabel": "$76",
+          "totalUsd": 76,
+          "declinedTasks": false,
+          "notes": []
+        },
+        {
+          "model": "GLM-5.3 (low)",
+          "totalUsdLabel": "$77",
+          "totalUsd": 77,
+          "declinedTasks": false,
+          "notes": []
+        },
+        {
+          "model": "Claude Opus 5.5 (medium with fallback)",
+          "totalUsdLabel": "$78",
+          "totalUsd": 78,
+          "declinedTasks": false,
+          "notes": []
+        },
+        {
+          "model": "GPT-6.1 Sol (max)",
+          "totalUsdLabel": "$81",
+          "totalUsd": 81,
+          "declinedTasks": false,
+          "notes": []
+        },
+        {
+          "model": "MiniMax-M3",
+          "totalUsdLabel": "$101",
+          "totalUsd": 101,
+          "declinedTasks": false,
+          "notes": []
+        },
+        {
+          "model": "GPT-6.1 Terra (max)",
+          "totalUsdLabel": "$103",
+          "totalUsd": 103,
+          "declinedTasks": false,
+          "notes": []
+        },
+        {
+          "model": "DeepSeek V4 Pro 0813 (max)",
+          "totalUsdLabel": "$117",
+          "totalUsd": 117,
+          "declinedTasks": false,
+          "notes": []
+        },
+        {
+          "model": "Claude Sonnet 5.5 (xhigh with fallback)",
+          "totalUsdLabel": "$120",
+          "totalUsd": 120,
+          "declinedTasks": false,
+          "notes": []
+        },
+        {
+          "model": "Claude Opus 5.5 (high with fallback)",
+          "totalUsdLabel": "$125",
+          "totalUsd": 125,
+          "declinedTasks": false,
+          "notes": []
+        },
+        {
+          "model": "Qwen3.8 27B (low)",
+          "totalUsdLabel": "$142",
+          "totalUsd": 142,
+          "declinedTasks": false,
+          "notes": []
+        },
+        {
+          "model": "Kimi K3.1 Pro",
+          "totalUsdLabel": "$179",
+          "totalUsd": 179,
+          "declinedTasks": false,
+          "notes": []
+        },
+        {
+          "model": "Muse Spark 1.3 (xhigh)",
+          "totalUsdLabel": "$188",
+          "totalUsd": 188,
+          "declinedTasks": false,
+          "notes": []
+        },
+        {
+          "model": "Qwen3.8 27B (medium)",
+          "totalUsdLabel": "$190",
+          "totalUsd": 190,
+          "declinedTasks": false,
+          "notes": []
+        },
+        {
+          "model": "Muse Spark Open (xhigh)",
+          "totalUsdLabel": "$194",
+          "totalUsd": 194,
+          "declinedTasks": false,
+          "notes": []
+        },
+        {
+          "model": "Step 5 Preview",
+          "totalUsdLabel": "$196",
+          "totalUsd": 196,
+          "declinedTasks": false,
+          "notes": []
+        },
+        {
+          "model": "Qwen3.8 27B (non-reasoning)",
+          "totalUsdLabel": "$212",
+          "totalUsd": 212,
+          "declinedTasks": false,
+          "notes": []
+        },
+        {
+          "model": "Muse Spark 1.3 (max)",
+          "totalUsdLabel": "$225",
+          "totalUsd": 225,
+          "declinedTasks": false,
+          "notes": []
+        },
+        {
+          "model": "Inkling (xhigh)",
+          "totalUsdLabel": "$227",
+          "totalUsd": 227,
+          "declinedTasks": false,
+          "notes": []
+        },
+        {
+          "model": "Grok 4.7 (low)",
+          "totalUsdLabel": "$247",
+          "totalUsd": 247,
+          "declinedTasks": false,
+          "notes": []
+        },
+        {
+          "model": "Qwen3.8 27B (xhigh)",
+          "totalUsdLabel": "$286",
+          "totalUsd": 286,
+          "declinedTasks": false,
+          "notes": []
+        },
+        {
+          "model": "Nemotron 3 Ultra",
+          "totalUsdLabel": "$301",
+          "totalUsd": 301,
+          "declinedTasks": false,
+          "notes": []
+        },
+        {
+          "model": "Mistral Large 4 Preview",
+          "totalUsdLabel": "$304",
+          "totalUsd": 304,
+          "declinedTasks": false,
+          "notes": []
+        },
+        {
+          "model": "Muse Wonder (max)",
+          "totalUsdLabel": "$351",
+          "totalUsd": 351,
+          "declinedTasks": false,
+          "notes": []
+        },
+        {
+          "model": "Kimi K3 (max)",
+          "totalUsdLabel": "$389",
+          "totalUsd": 389,
+          "declinedTasks": false,
+          "notes": []
+        },
+        {
+          "model": "Claude Opus 5.5 (xhigh with fallback)",
+          "totalUsdLabel": "$398",
+          "totalUsd": 398,
+          "declinedTasks": false,
+          "notes": []
+        },
+        {
+          "model": "GPT-6 Astra (max)",
+          "totalUsdLabel": "$422",
+          "totalUsd": 422,
+          "declinedTasks": false,
+          "notes": []
+        },
+        {
+          "model": "GLM-5.3 (max)",
+          "totalUsdLabel": "$432",
+          "totalUsd": 432,
+          "declinedTasks": false,
+          "notes": []
+        },
+        {
+          "model": "Qwen3.8 Max (0902)",
+          "totalUsdLabel": "$675",
+          "totalUsd": 675,
+          "declinedTasks": false,
+          "notes": []
+        },
+        {
+          "model": "Grok 4.7 (high)",
+          "totalUsdLabel": "$788",
+          "totalUsd": 788,
+          "declinedTasks": false,
+          "notes": []
+        },
+        {
+          "model": "Claude Sonnet 5.5 (max with fallback)",
+          "totalUsdLabel": "$826",
+          "totalUsd": 826,
+          "declinedTasks": false,
+          "notes": []
+        },
+        {
+          "model": "Gemini 3.8 Flash (medium)",
+          "totalUsdLabel": "$896",
+          "totalUsd": 896,
+          "declinedTasks": false,
+          "notes": []
+        },
+        {
+          "model": "Grok 4.7 (xhigh)",
+          "totalUsdLabel": "$961",
+          "totalUsd": 961,
+          "declinedTasks": false,
+          "notes": []
+        },
+        {
+          "model": "Gemini 4 Argon (high)",
+          "totalUsdLabel": "$1,004",
+          "totalUsd": 1004,
+          "declinedTasks": false,
+          "notes": []
+        },
+        {
+          "model": "Claude Opus 5.5 (max with fallback)",
+          "totalUsdLabel": "$1,015",
+          "totalUsd": 1015,
+          "declinedTasks": false,
+          "notes": []
+        },
+        {
+          "model": "Gemini 3.8 Flash (high)",
+          "totalUsdLabel": "$1,161",
+          "totalUsd": 1161,
+          "declinedTasks": false,
+          "notes": []
+        },
+        {
+          "model": "Claude Fable 5.1 (max with fallback)",
+          "totalUsdLabel": "$1,200",
+          "totalUsd": 1200,
+          "declinedTasks": false,
+          "notes": []
+        }
+      ]
+    },
+    {
+      "slug": "itbench-aa",
+      "url": "https://artificialanalysis.ai/evaluations/itbench-aa",
+      "finalUrl": "https://artificialanalysis.ai/evaluations/itbench-aa?eval-cost=total-cost&models=claude-opus-5-5%2Cclaude-fable-5-1%2Cclaude-4-5-haiku-reasoning%2Cclaude-sonnet-4-6-adaptive%2Cclaude-opus-4-7%2Cgpt-6-astra%2Cgpt-5-5%2Cgpt-5-6-luna%2Cgpt-5-4-mini-non-reasoning%2Cgpt-5-4-mini%2Cgpt-5-6-terra%2Cgpt-5-4-nano-non-reasoning%2Cgpt-6-sol%2Cgpt-5-4-nano%2Cgpt-5-6-sol%2Cgpt-oss-120b%2Cmuse-spark-1-3%2Cllama-3-3-instruct-70b%2Cgrok-4-7%2Cgrok-4-1-fast%2Cgrok-4-3%2Cqwen3-8-max%2Cqwen3-5-397b-a17b%2Cqwen3-5-27b%2Cqwen3-5-35b-a3b%2Cqwen3-7-max%2Cglm-5-3%2Cglm-5-3-flash%2Cglm-5-1%2Cglm-5-2%2Cgemini-3-8-flash%2Cgemini-3-5-flash%2Cgemma-4-26b-a4b%2Cgemini-3-1-pro-preview%2Cgemma-4-31b%2Cstep-5%2Cstep-3-7-flash%2Cmimo-v2-5-pro%2Ckimi-k2-6%2Ckimi-k3%2Cminimax-m2-7%2Cnvidia-nemotron-3-super-120b-a12b%2Cdeepseek-v4-pro-0424%2Cdeepseek-v4-flash-0420%2Cdeepseek-v4-1-flash",
+      "chartTitle": "ITBench-AA: Total Cost to Run",
+      "selection": {
+        "before": "27 of 45 models",
+        "after": "45 of 45 models"
+      },
+      "notes": [
+        "The model or provider declined some tasks on safety grounds"
+      ],
+      "rows": [
+        {
+          "model": "GPT-5.4 nano (non-reasoning)",
+          "totalUsdLabel": "$2",
+          "totalUsd": 2,
+          "declinedTasks": false,
+          "notes": []
+        },
+        {
+          "model": "GPT-5.4 mini (non-reasoning)",
+          "totalUsdLabel": "$3",
+          "totalUsd": 3,
+          "declinedTasks": false,
+          "notes": []
+        },
+        {
+          "model": "GPT-5.4 nano (xhigh)",
+          "totalUsdLabel": "$5",
+          "totalUsd": 5,
+          "declinedTasks": false,
+          "notes": []
+        },
+        {
+          "model": "DeepSeek V4 Flash (max)",
+          "totalUsdLabel": "$9",
+          "totalUsd": 9,
+          "declinedTasks": false,
+          "notes": []
+        },
+        {
+          "model": "GLM-5.3-Flash",
+          "totalUsdLabel": "$9",
+          "totalUsd": 9,
+          "declinedTasks": false,
+          "notes": []
+        },
+        {
+          "model": "GPT-5.6 Luna (max)",
+          "totalUsdLabel": "$12",
+          "totalUsd": 12,
+          "declinedTasks": false,
+          "notes": []
+        },
+        {
+          "model": "MiMo-V2.5-Pro",
+          "totalUsdLabel": "$16",
+          "totalUsd": 16,
+          "declinedTasks": false,
+          "notes": []
+        },
+        {
+          "model": "GPT-5.4 mini (xhigh)",
+          "totalUsdLabel": "$16",
+          "totalUsd": 16,
+          "declinedTasks": false,
+          "notes": []
+        },
+        {
+          "model": "DeepSeek V4.1 Flash (max)",
+          "totalUsdLabel": "$18",
+          "totalUsd": 18,
+          "declinedTasks": false,
+          "notes": []
+        },
+        {
+          "model": "MiniMax-M2.7",
+          "totalUsdLabel": "$20",
+          "totalUsd": 20,
+          "declinedTasks": false,
+          "notes": []
+        },
+        {
+          "model": "Gemma 4 26B A4B",
+          "totalUsdLabel": "$21",
+          "totalUsd": 21,
+          "declinedTasks": false,
+          "notes": []
+        },
+        {
+          "model": "Qwen3.5 35B A3B",
+          "totalUsdLabel": "$26",
+          "totalUsd": 26,
+          "declinedTasks": false,
+          "notes": []
+        },
+        {
+          "model": "Claude 4.5 Haiku",
+          "totalUsdLabel": "$26",
+          "totalUsd": 26,
+          "declinedTasks": false,
+          "notes": []
+        },
+        {
+          "model": "gpt-oss-120b (high)",
+          "totalUsdLabel": "$27",
+          "totalUsd": 27,
+          "declinedTasks": false,
+          "notes": []
+        },
+        {
+          "model": "Llama 3.3 70B",
+          "totalUsdLabel": "$28",
+          "totalUsd": 28,
+          "declinedTasks": false,
+          "notes": []
+        },
+        {
+          "model": "Grok 4.3 (high)",
+          "totalUsdLabel": "$28",
+          "totalUsd": 28,
+          "declinedTasks": false,
+          "notes": []
+        },
+        {
+          "model": "Step 5 Preview",
+          "totalUsdLabel": "$32",
+          "totalUsd": 32,
+          "declinedTasks": false,
+          "notes": []
+        },
+        {
+          "model": "GPT-6 Sol (max)",
+          "totalUsdLabel": "$38",
+          "totalUsd": 38,
+          "declinedTasks": false,
+          "notes": []
+        },
+        {
+          "model": "Step 3.7 Flash",
+          "totalUsdLabel": "$41",
+          "totalUsd": 41,
+          "declinedTasks": false,
+          "notes": []
+        },
+        {
+          "model": "Qwen3.5 27B",
+          "totalUsdLabel": "$44",
+          "totalUsd": 44,
+          "declinedTasks": false,
+          "notes": []
+        },
+        {
+          "model": "Nemotron 3 Super",
+          "totalUsdLabel": "$51",
+          "totalUsd": 51,
+          "declinedTasks": false,
+          "notes": []
+        },
+        {
+          "model": "GLM-5.1",
+          "totalUsdLabel": "$61",
+          "totalUsd": 61,
+          "declinedTasks": false,
+          "notes": []
+        },
+        {
+          "model": "Qwen3.5 397B A17B",
+          "totalUsdLabel": "$70",
+          "totalUsd": 70,
+          "declinedTasks": false,
+          "notes": []
+        },
+        {
+          "model": "Muse Spark 1.3 (max)",
+          "totalUsdLabel": "$70",
+          "totalUsd": 70,
+          "declinedTasks": false,
+          "notes": []
+        },
+        {
+          "model": "GPT-5.6 Terra (max)",
+          "totalUsdLabel": "$80",
+          "totalUsd": 80,
+          "declinedTasks": false,
+          "notes": []
+        },
+        {
+          "model": "Kimi K3 (max)",
+          "totalUsdLabel": "$83",
+          "totalUsd": 83,
+          "declinedTasks": false,
+          "notes": []
+        },
+        {
+          "model": "GLM-5.3 (max)",
+          "totalUsdLabel": "$91",
+          "totalUsd": 91,
+          "declinedTasks": false,
+          "notes": []
+        },
+        {
+          "model": "Kimi K2.6",
+          "totalUsdLabel": "$93",
+          "totalUsd": 93,
+          "declinedTasks": false,
+          "notes": []
+        },
+        {
+          "model": "Qwen3.7 Max",
+          "totalUsdLabel": "$106",
+          "totalUsd": 106,
+          "declinedTasks": false,
+          "notes": []
+        },
+        {
+          "model": "GPT-5.6 Sol (max)",
+          "totalUsdLabel": "$106",
+          "totalUsd": 106,
+          "declinedTasks": false,
+          "notes": []
+        },
+        {
+          "model": "DeepSeek V4 Pro (max)",
+          "totalUsdLabel": "$133",
+          "totalUsd": 133,
+          "declinedTasks": false,
+          "notes": []
+        },
+        {
+          "model": "GPT-6 Astra (max)",
+          "totalUsdLabel": "$133",
+          "totalUsd": 133,
+          "declinedTasks": false,
+          "notes": []
+        },
+        {
+          "model": "Claude Opus 5.5 (max with fallback)",
+          "totalUsdLabel": "$146",
+          "totalUsd": 146,
+          "declinedTasks": false,
+          "notes": []
+        },
+        {
+          "model": "GPT-5.5 (xhigh)",
+          "totalUsdLabel": "$158",
+          "totalUsd": 158,
+          "declinedTasks": false,
+          "notes": []
+        },
+        {
+          "model": "Claude Sonnet 4.6 (max)",
+          "totalUsdLabel": "$164",
+          "totalUsd": 164,
+          "declinedTasks": false,
+          "notes": []
+        },
+        {
+          "model": "Grok 4.7 (xhigh)",
+          "totalUsdLabel": "$174",
+          "totalUsd": 174,
+          "declinedTasks": false,
+          "notes": []
+        },
+        {
+          "model": "GLM-5.2 (max)",
+          "totalUsdLabel": "$181",
+          "totalUsd": 181,
+          "declinedTasks": false,
+          "notes": []
+        },
+        {
+          "model": "Gemini 3.5 Flash (high)",
+          "totalUsdLabel": "$224",
+          "totalUsd": 224,
+          "declinedTasks": false,
+          "notes": []
+        },
+        {
+          "model": "Claude Fable 5.1 (max with fallback)",
+          "totalUsdLabel": "$237",
+          "totalUsd": 237,
+          "declinedTasks": false,
+          "notes": []
+        },
+        {
+          "model": "Gemini 3.8 Flash (high)",
+          "totalUsdLabel": "$252",
+          "totalUsd": 252,
+          "declinedTasks": false,
+          "notes": []
+        },
+        {
+          "model": "Gemini 3.1 Pro Preview",
+          "totalUsdLabel": "$267",
+          "totalUsd": 267,
+          "declinedTasks": false,
+          "notes": []
+        },
+        {
+          "model": "Qwen3.8 Max (0902)",
+          "totalUsdLabel": "$327",
+          "totalUsd": 327,
+          "declinedTasks": false,
+          "notes": []
+        },
+        {
+          "model": "Claude Opus 4.7 (max)",
+          "totalUsdLabel": "$338",
+          "totalUsd": 338,
+          "declinedTasks": false,
+          "notes": []
+        }
+      ]
+    }
+  ]
+}

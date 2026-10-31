@@ -5,7 +5,7 @@ The public model pages contain the current model record in an escaped JSON
 payload.  The older v1.3 extractor searched visible labels and consequently
 mistook benchmark versions (for example, ``v2.1``) for scores.  This script
 decodes the page's own full model object (see ``decode_page_model``) and keeps
-the v4.3.2 source components separate from ValueRank's own score dimensions.
+the v5.0 source components separate from ValueRank's own score dimensions.
 """
 
 from __future__ import annotations
@@ -27,34 +27,37 @@ SNAPSHOT_PATH = AA_DIR / "aa_v432_snapshot.json"
 OUTPUT_PATH = DATA / "aa_metrics.json"
 COVERAGE_PATH = DATA / "coverage_matrix.json"
 
+# AA Intelligence Index v5.0's evaluations and weights (AA's Intelligence Benchmarking methodology, read 2026-10-30; O132).
 PRIMARY_EVALUATIONS = [
     {"key": "briefcaseElo", "label": "AA-Briefcase", "aaKey": "briefcaseBreakdown.overall.elo", "weightPct": 15},
-    {"key": "gdpvalV21", "label": "GDPval-AA v2.1 Elo", "aaKey": "gdpval", "weightPct": 10},
     {"key": "automationBenchAA", "label": "AutomationBench-AA", "aaKey": "automationBenchPartialScore", "weightPct": 5},
+    {"key": "gdpPdfAllPass", "label": "GDP.pdf", "aaKey": "gdpPdfAllPass", "weightPct": 5},
+    {"key": "frontierCode20", "label": "FrontierCode 2.0", "aaKey": "frontierCode20", "weightPct": 15},
     {"key": "terminalBenchV40", "label": "Terminal-Bench 4.0 (AA evaluation)", "aaKey": "terminalBench40", "weightPct": 10},
-    {"key": "scicode", "label": "SciCode", "aaKey": "scicode", "weightPct": 10},
-    {"key": "hle", "label": "Humanity's Last Exam", "aaKey": "hle", "weightPct": 10},
-    {"key": "gdpPdfAllPass", "label": "GDP.pdf", "aaKey": "gdpPdfAllPass", "weightPct": 10},
-    {"key": "critpt", "label": "CritPt", "aaKey": "critpt", "weightPct": 10},
-    {"key": "omniAccuracy", "label": "AA-Omniscience Accuracy", "aaKey": "omniscienceBreakdown.accuracy", "weightPct": 10},
+    {"key": "terminalBenchScience", "label": "Terminal-Bench-Science 0.1", "aaKey": "terminalBenchScience", "weightPct": 15},
+    {"key": "critptV2Hard", "label": "CritPt v2 (hard subset)", "aaKey": "critptAgenticHard", "weightPct": 10},
+    {"key": "omniAccuracy", "label": "AA-Omniscience v1.1 Accuracy", "aaKey": "omniscienceBreakdown.accuracy", "weightPct": 10},
     {
         "key": "omniNonHallucination",
-        "label": "AA-Omniscience Non-Hallucination Rate",
+        "label": "AA-Omniscience v1.1 Non-Hallucination Rate",
         "aaKey": "omniscienceBreakdown.hallucinationRate",
         "weightPct": 5,
         "transform": "oneMinus",
     },
-    {"key": "aaLcr", "label": "AA-LCR v1.1", "aaKey": "lcr", "weightPct": 5},
+    {"key": "hleDiamond", "label": "HLE-Diamond", "aaKey": "hleDiamond", "weightPct": 10},
 ]
 
 ADDITIONAL_FIELDS = [
     {"key": "gpqaDiamond", "label": "GPQA Diamond (legacy)", "aaKey": "gpqa"},
     {"key": "briefcaseNormalized", "label": "AA-Briefcase normalized (Elo-500)/2000", "aaKey": "briefcaseNormalizedDisplay"},
     {"key": "gdpvalV21Normalized", "label": "GDPval-AA v2.1 normalized (Elo-500)/2000", "aaKey": "gdpvalNormalizedDisplay"},
+    # O136: run by AA outside the v5 Index and still published on its model pages; quality leaves of ValueRank's own.
+    {"key": "gdpvalV21", "label": "GDPval-AA v2.1 Elo", "aaKey": "gdpval"},
+    {"key": "aaLcr", "label": "AA-LCR v1.1", "aaKey": "lcr"},
 ]
 
 # These fields are exposed by the page when available, but are not part of the
-# current v4.3.2 weighted index. They are retained for auditability/coverage.
+# current v5.0 weighted index. They are retained for auditability/coverage.
 SUPPLEMENTAL_FIELDS = [
     "mlcrOverall",
     "harveyLab",
@@ -190,6 +193,16 @@ def decode_page_model(html: str, slug: str) -> dict:
     return candidates[0]
 
 
+# O103: AA prints its notes as "* <text>" strings in a page's payload (e.g. Claude Haiku 5.5's longer-context pricing note).
+_PRINTED_NOTE = re.compile(r'"\* ([A-Z][^"\\]{15,400})')
+
+
+def printed_notes(html: str) -> list[str]:
+    """O103: the notes AA prints on a page, verbatim and once each, in page order (an empty list when it prints none)."""
+
+    return list(dict.fromkeys(match.group(1).strip() for match in _PRINTED_NOTE.finditer(html)))
+
+
 def page_slug(url: str) -> str:
     """The model slug named by a model-page URL: its last path segment."""
 
@@ -288,12 +301,13 @@ def main() -> int:
             "gdpvalV21": clean_number(current.get("gdpval")),
             "automationBenchAA": clean_number(current.get("automationBenchPartialScore")),
             "terminalBenchV40": clean_number(current.get("terminalBench40", current.get("terminalbench40"))),
-            "scicode": clean_number(current.get("scicode")),
+            "frontierCode20": clean_number(current.get("frontierCode20")),
+            "terminalBenchScience": clean_number(current.get("terminalBenchScience")),
             "gdpPdfAllPass": clean_number(current.get("gdpPdfAllPass")),
             "aaLcr": clean_number(current.get("lcr")),
-            "hle": clean_number(current.get("hle")),
+            "hleDiamond": clean_number(current.get("hleDiamond")),
             "gpqaDiamond": clean_number(current.get("gpqa")),
-            "critpt": clean_number(current.get("critpt")),
+            "critptV2Hard": clean_number(current.get("critptAgenticHard")),
             "omniAccuracy": clean_number(
                 current.get("omniscienceAccuracy", breakdown.get("accuracy"))
             ),
@@ -344,7 +358,7 @@ def main() -> int:
         ]
         for claim in model_claims:
             key = claim.get("componentKey") or claim.get("component")
-            exact_version = claim.get("benchmarkVersion") == "Artificial Analysis Intelligence Index v4.3.2"
+            exact_version = claim.get("benchmarkVersion") == "Artificial Analysis Intelligence Index v5.0"
             exact_variant = claim.get("providerVariant") == selected_variant
             if (
                 key in metrics
@@ -374,9 +388,12 @@ def main() -> int:
             current.get("terminalBenchV21", current.get("terminalbenchV21"))
         )
 
+        display_name = mapping.get(model_id, {}).get("displayName", entry["displayName"])
         models[model_id] = {
             "id": model_id,
-            "displayName": mapping.get(model_id, {}).get("displayName", entry["displayName"]),
+            "displayName": display_name,
+            # O33: several efforts of one AA family can be ranked; each carries the family its chart points use.
+            "family": mapping.get(model_id, {}).get("family", display_name),
             "aaSlug": current.get("slug", slug),
             "aaName": current.get("name"),
             "aaShortName": current.get("shortName"),
@@ -456,7 +473,7 @@ def main() -> int:
         "schemaVersion": "v1.6",
         "source": "https://artificialanalysis.ai/methodology/intelligence-benchmarking",
         "observedAt": observed_at,
-        "benchmarkVersion": "Artificial Analysis Intelligence Index v4.3.2",
+        "benchmarkVersion": "Artificial Analysis Intelligence Index v5.0",
         "sourceSnapshot": str(SNAPSHOT_PATH.relative_to(ROOT)) if snapshot else None,
         "primaryEvaluations": PRIMARY_EVALUATIONS,
         "additionalFields": ADDITIONAL_FIELDS,
@@ -473,7 +490,7 @@ def main() -> int:
         "providerClaimPolicy": claim_document.get("policy"),
         "fields": coverage,
         "sourceSnapshot": str(SNAPSHOT_PATH.relative_to(ROOT)) if snapshot else None,
-        "note": "Missing values are preserved as null. Provider claims are separately source-typed and only eligible when benchmark version and evaluated model variant match; no legacy-version value is substituted into v4.3.2 components.",
+        "note": "Missing values are preserved as null. Provider claims are separately source-typed and only eligible when benchmark version and evaluated model variant match; no legacy-version value is substituted into v5.0 components.",
     }
     OUTPUT_PATH.write_text(json.dumps(output, indent=2, ensure_ascii=False) + "\n")
     COVERAGE_PATH.write_text(json.dumps(coverage_output, indent=2, ensure_ascii=False) + "\n")

@@ -1,0 +1,1958 @@
+{
+  "schemaVersion": 1,
+  "observedAt": "2026-10-23",
+  "rule": "Owner decisions O36/O37 (2026-10-21): every ranked configuration has all eleven quality leaves. A leaf the primary source lacks comes, in order, from a newer capture of the same primary source (aa_recapture), from another party that ran the same benchmark version on the exact configuration (independent; Cognition counts for FrontierCode), or from the model provider's own published result (model_provider_claim). Each leaf a cohort configuration still lacks has an exhaustive search logged here within 7 days of the release cutoff.",
+  "sourceRegistry": {
+    "bugHunt": [
+      "Bug Hunt Bench owner (Product Compass)"
+    ],
+    "frontierCode": [
+      "Artificial Analysis",
+      "Cognition (FrontierCode's author)"
+    ],
+    "terminalBench": [
+      "Artificial Analysis",
+      "tbench.ai"
+    ],
+    "_note": "E239 (2026-10-21): the closed per-leaf list of parties whose run of the same benchmark version may fill a leaf (O36/O37); a provider claim is the model provider's own document. A new source enters by a dated registry update recorded in the ledger. DeepSWE removed 2026-10-23 (O49)."
+  },
+  "supplements": [],
+  "searches": [
+    {
+      "modelId": "mimo-v2-6-flash",
+      "leaf": "bugHunt",
+      "searchedOn": "2026-10-30",
+      "result": "not found",
+      "searchKind": "O53 track leaf search",
+      "sources": [
+        "https://bughunt.productcompass.pm/data/benchmark.json and the owner's results at commit 12497971 (updated 2026-10-27, read 2026-10-30)"
+      ],
+      "notes": "Owner decision O135 (2026-10-30): AA plots MiMo-V2.6-Flash without an effort; Xiaomi's API documents a single thinking mode (thinking.type enabled/disabled, default enabled; on the Responses API every reasoning.effort other than none enables the same, undifferentiated reasoning), so the configuration is thinking enabled, the default (mimo-flash-effort.md). Bug Hunt ran the provider default through OpenRouter without asserting a reasoning state ('effort is `default` ... for this model the dial is untested rather than known-inert', run notes). Whether this route's default equals Xiaomi's documented default (thinking enabled) is not shown by the board: owner to confirm before it counts as exact.",
+      "openWeb": {
+        "searchedOn": "2026-10-30",
+        "record": "research/2026-10-23-swe-benchmarks/reports/SWE benchmark candidates.md",
+        "queries": [
+          "Claude deep research, three researchers: research/2026-10-23-swe-benchmarks/research_notes/SWE benchmark candidates/ (owner-named sources, Vals AI, other agentic benchmarks)",
+          "Perplexity Search with Thinking on research/2026-10-23-swe-benchmarks/brief.md: GPT-6.1 Sol, Grok 4.7, Gemini 3.8 Flash (pplx-*.md)",
+          "Coverage capture of every cohort configuration: research/2026-10-23-swe-benchmarks/vals-catalogue-2026-10-23.json and other-coverage-2026-10-23.json (raw pages and JSON in vals-capture/ and other-capture/)",
+          "Check of Epoch MirrorCode, SWE-bench-Live and SWE-PolyBench (report addendum)",
+          "Board re-read of 2026-10-25 (owner decision O68): research/2026-10-25-board-reread/ (Vals, AI Coding Daily with hidden rows, Bug Hunt at 9089dc5, LiveBench 2.0 release 2026-10-23)",
+          "Kimi K3.1 Pro exhaustive search with open-web queries, 2026-10-25: research/2026-10-25-board-reread/kimi-search.md and kimi-search.json",
+          "Board re-read of 2026-10-30 for the AA Intelligence Index v5 cohort (O132): research/2026-10-30-v5-recapture/third-party/ (Bug Hunt at 1249797, Vals, LiveBench 2.0 release 2026-10-25 (O139), AI Coding Daily with hidden rows, tbench.ai), with Xiaomi's MiMo-V2.6-Flash effort documentation (O140)"
+        ],
+        "candidates": [
+          {
+            "url": "https://bughunt.productcompass.pm/data/benchmark.json",
+            "publisher": "bughunt.productcompass.pm",
+            "published": "2026-10-30",
+            "reports": "MiMo-V2.6-Flash - mean of 3: 23.3 at effort default",
+            "resolution": "reject",
+            "reason": "not the exact configuration: AA plots this model without an effort label and the source's effort is not established as AA's"
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "gemini-4-carbon",
+      "leaf": "bugHunt",
+      "searchedOn": "2026-10-30",
+      "result": "not found",
+      "searchKind": "O53 track leaf search",
+      "sources": [
+        "https://bughunt.productcompass.pm/data/benchmark.json and the owner's results at commit 12497971 (updated 2026-10-27, read 2026-10-30)"
+      ],
+      "notes": "No Bug Hunt row for this model at any effort.",
+      "openWeb": {
+        "searchedOn": "2026-10-30",
+        "record": "research/2026-10-23-swe-benchmarks/reports/SWE benchmark candidates.md",
+        "queries": [
+          "Claude deep research, three researchers: research/2026-10-23-swe-benchmarks/research_notes/SWE benchmark candidates/ (owner-named sources, Vals AI, other agentic benchmarks)",
+          "Perplexity Search with Thinking on research/2026-10-23-swe-benchmarks/brief.md: GPT-6.1 Sol, Grok 4.7, Gemini 3.8 Flash (pplx-*.md)",
+          "Coverage capture of every cohort configuration: research/2026-10-23-swe-benchmarks/vals-catalogue-2026-10-23.json and other-coverage-2026-10-23.json (raw pages and JSON in vals-capture/ and other-capture/)",
+          "Check of Epoch MirrorCode, SWE-bench-Live and SWE-PolyBench (report addendum)",
+          "Board re-read of 2026-10-25 (owner decision O68): research/2026-10-25-board-reread/ (Vals, AI Coding Daily with hidden rows, Bug Hunt at 9089dc5, LiveBench 2.0 release 2026-10-23)",
+          "Kimi K3.1 Pro exhaustive search with open-web queries, 2026-10-25: research/2026-10-25-board-reread/kimi-search.md and kimi-search.json",
+          "Board re-read of 2026-10-30 for the AA Intelligence Index v5 cohort (O132): research/2026-10-30-v5-recapture/third-party/ (Bug Hunt at 1249797, Vals, LiveBench 2.0 release 2026-10-25 (O139), AI Coding Daily with hidden rows, tbench.ai), with Xiaomi's MiMo-V2.6-Flash effort documentation (O140)"
+        ],
+        "candidates": []
+      }
+    },
+    {
+      "modelId": "gpt-6-luna-low",
+      "leaf": "vibeCode",
+      "searchedOn": "2026-10-30",
+      "result": "not found",
+      "searchKind": "O53 track leaf search",
+      "sources": [
+        "https://www.vals.ai/benchmarks/vibe-code (benchmark_view JSON, updated 2026-10-29, read 2026-10-30)"
+      ],
+      "notes": "Vals ran this model only at max (81.649), not low; not transferred.",
+      "openWeb": {
+        "searchedOn": "2026-10-30",
+        "record": "research/2026-10-23-swe-benchmarks/reports/SWE benchmark candidates.md",
+        "queries": [
+          "Claude deep research, three researchers: research/2026-10-23-swe-benchmarks/research_notes/SWE benchmark candidates/ (owner-named sources, Vals AI, other agentic benchmarks)",
+          "Perplexity Search with Thinking on research/2026-10-23-swe-benchmarks/brief.md: GPT-6.1 Sol, Grok 4.7, Gemini 3.8 Flash (pplx-*.md)",
+          "Coverage capture of every cohort configuration: research/2026-10-23-swe-benchmarks/vals-catalogue-2026-10-23.json and other-coverage-2026-10-23.json (raw pages and JSON in vals-capture/ and other-capture/)",
+          "Check of Epoch MirrorCode, SWE-bench-Live and SWE-PolyBench (report addendum)",
+          "Board re-read of 2026-10-25 (owner decision O68): research/2026-10-25-board-reread/ (Vals, AI Coding Daily with hidden rows, Bug Hunt at 9089dc5, LiveBench 2.0 release 2026-10-23)",
+          "Kimi K3.1 Pro exhaustive search with open-web queries, 2026-10-25: research/2026-10-25-board-reread/kimi-search.md and kimi-search.json",
+          "Board re-read of 2026-10-30 for the AA Intelligence Index v5 cohort (O132): research/2026-10-30-v5-recapture/third-party/ (Bug Hunt at 1249797, Vals, LiveBench 2.0 release 2026-10-25 (O139), AI Coding Daily with hidden rows, tbench.ai), with Xiaomi's MiMo-V2.6-Flash effort documentation (O140)"
+        ],
+        "candidates": []
+      }
+    },
+    {
+      "modelId": "gpt-6-luna-medium",
+      "leaf": "vibeCode",
+      "searchedOn": "2026-10-30",
+      "result": "not found",
+      "searchKind": "O53 track leaf search",
+      "sources": [
+        "https://www.vals.ai/benchmarks/vibe-code (benchmark_view JSON, updated 2026-10-29, read 2026-10-30)"
+      ],
+      "notes": "Vals ran this model only at max (81.649), not medium; not transferred.",
+      "openWeb": {
+        "searchedOn": "2026-10-30",
+        "record": "research/2026-10-23-swe-benchmarks/reports/SWE benchmark candidates.md",
+        "queries": [
+          "Claude deep research, three researchers: research/2026-10-23-swe-benchmarks/research_notes/SWE benchmark candidates/ (owner-named sources, Vals AI, other agentic benchmarks)",
+          "Perplexity Search with Thinking on research/2026-10-23-swe-benchmarks/brief.md: GPT-6.1 Sol, Grok 4.7, Gemini 3.8 Flash (pplx-*.md)",
+          "Coverage capture of every cohort configuration: research/2026-10-23-swe-benchmarks/vals-catalogue-2026-10-23.json and other-coverage-2026-10-23.json (raw pages and JSON in vals-capture/ and other-capture/)",
+          "Check of Epoch MirrorCode, SWE-bench-Live and SWE-PolyBench (report addendum)",
+          "Board re-read of 2026-10-25 (owner decision O68): research/2026-10-25-board-reread/ (Vals, AI Coding Daily with hidden rows, Bug Hunt at 9089dc5, LiveBench 2.0 release 2026-10-23)",
+          "Kimi K3.1 Pro exhaustive search with open-web queries, 2026-10-25: research/2026-10-25-board-reread/kimi-search.md and kimi-search.json",
+          "Board re-read of 2026-10-30 for the AA Intelligence Index v5 cohort (O132): research/2026-10-30-v5-recapture/third-party/ (Bug Hunt at 1249797, Vals, LiveBench 2.0 release 2026-10-25 (O139), AI Coding Daily with hidden rows, tbench.ai), with Xiaomi's MiMo-V2.6-Flash effort documentation (O140)"
+        ],
+        "candidates": []
+      }
+    },
+    {
+      "modelId": "claude-haiku-5-5-low",
+      "leaf": "vibeCode",
+      "searchedOn": "2026-10-30",
+      "result": "not found",
+      "searchKind": "O53 track leaf search",
+      "sources": [
+        "https://www.vals.ai/benchmarks/vibe-code (benchmark_view JSON, updated 2026-10-29, read 2026-10-30)"
+      ],
+      "notes": "Vals ran this model only at max (90.444), not low; not transferred.",
+      "openWeb": {
+        "searchedOn": "2026-10-30",
+        "record": "research/2026-10-23-swe-benchmarks/reports/SWE benchmark candidates.md",
+        "queries": [
+          "Claude deep research, three researchers: research/2026-10-23-swe-benchmarks/research_notes/SWE benchmark candidates/ (owner-named sources, Vals AI, other agentic benchmarks)",
+          "Perplexity Search with Thinking on research/2026-10-23-swe-benchmarks/brief.md: GPT-6.1 Sol, Grok 4.7, Gemini 3.8 Flash (pplx-*.md)",
+          "Coverage capture of every cohort configuration: research/2026-10-23-swe-benchmarks/vals-catalogue-2026-10-23.json and other-coverage-2026-10-23.json (raw pages and JSON in vals-capture/ and other-capture/)",
+          "Check of Epoch MirrorCode, SWE-bench-Live and SWE-PolyBench (report addendum)",
+          "Board re-read of 2026-10-25 (owner decision O68): research/2026-10-25-board-reread/ (Vals, AI Coding Daily with hidden rows, Bug Hunt at 9089dc5, LiveBench 2.0 release 2026-10-23)",
+          "Kimi K3.1 Pro exhaustive search with open-web queries, 2026-10-25: research/2026-10-25-board-reread/kimi-search.md and kimi-search.json",
+          "Board re-read of 2026-10-30 for the AA Intelligence Index v5 cohort (O132): research/2026-10-30-v5-recapture/third-party/ (Bug Hunt at 1249797, Vals, LiveBench 2.0 release 2026-10-25 (O139), AI Coding Daily with hidden rows, tbench.ai), with Xiaomi's MiMo-V2.6-Flash effort documentation (O140)"
+        ],
+        "candidates": []
+      }
+    },
+    {
+      "modelId": "gpt-6-luna-high",
+      "leaf": "vibeCode",
+      "searchedOn": "2026-10-30",
+      "result": "not found",
+      "searchKind": "O53 track leaf search",
+      "sources": [
+        "https://www.vals.ai/benchmarks/vibe-code (benchmark_view JSON, updated 2026-10-29, read 2026-10-30)"
+      ],
+      "notes": "Vals ran this model only at max (81.649), not high; not transferred.",
+      "openWeb": {
+        "searchedOn": "2026-10-30",
+        "record": "research/2026-10-23-swe-benchmarks/reports/SWE benchmark candidates.md",
+        "queries": [
+          "Claude deep research, three researchers: research/2026-10-23-swe-benchmarks/research_notes/SWE benchmark candidates/ (owner-named sources, Vals AI, other agentic benchmarks)",
+          "Perplexity Search with Thinking on research/2026-10-23-swe-benchmarks/brief.md: GPT-6.1 Sol, Grok 4.7, Gemini 3.8 Flash (pplx-*.md)",
+          "Coverage capture of every cohort configuration: research/2026-10-23-swe-benchmarks/vals-catalogue-2026-10-23.json and other-coverage-2026-10-23.json (raw pages and JSON in vals-capture/ and other-capture/)",
+          "Check of Epoch MirrorCode, SWE-bench-Live and SWE-PolyBench (report addendum)",
+          "Board re-read of 2026-10-25 (owner decision O68): research/2026-10-25-board-reread/ (Vals, AI Coding Daily with hidden rows, Bug Hunt at 9089dc5, LiveBench 2.0 release 2026-10-23)",
+          "Kimi K3.1 Pro exhaustive search with open-web queries, 2026-10-25: research/2026-10-25-board-reread/kimi-search.md and kimi-search.json",
+          "Board re-read of 2026-10-30 for the AA Intelligence Index v5 cohort (O132): research/2026-10-30-v5-recapture/third-party/ (Bug Hunt at 1249797, Vals, LiveBench 2.0 release 2026-10-25 (O139), AI Coding Daily with hidden rows, tbench.ai), with Xiaomi's MiMo-V2.6-Flash effort documentation (O140)"
+        ],
+        "candidates": []
+      }
+    },
+    {
+      "modelId": "claude-haiku-5-5-medium",
+      "leaf": "vibeCode",
+      "searchedOn": "2026-10-30",
+      "result": "not found",
+      "searchKind": "O53 track leaf search",
+      "sources": [
+        "https://www.vals.ai/benchmarks/vibe-code (benchmark_view JSON, updated 2026-10-29, read 2026-10-30)"
+      ],
+      "notes": "Vals ran this model only at max (90.444), not medium; not transferred.",
+      "openWeb": {
+        "searchedOn": "2026-10-30",
+        "record": "research/2026-10-23-swe-benchmarks/reports/SWE benchmark candidates.md",
+        "queries": [
+          "Claude deep research, three researchers: research/2026-10-23-swe-benchmarks/research_notes/SWE benchmark candidates/ (owner-named sources, Vals AI, other agentic benchmarks)",
+          "Perplexity Search with Thinking on research/2026-10-23-swe-benchmarks/brief.md: GPT-6.1 Sol, Grok 4.7, Gemini 3.8 Flash (pplx-*.md)",
+          "Coverage capture of every cohort configuration: research/2026-10-23-swe-benchmarks/vals-catalogue-2026-10-23.json and other-coverage-2026-10-23.json (raw pages and JSON in vals-capture/ and other-capture/)",
+          "Check of Epoch MirrorCode, SWE-bench-Live and SWE-PolyBench (report addendum)",
+          "Board re-read of 2026-10-25 (owner decision O68): research/2026-10-25-board-reread/ (Vals, AI Coding Daily with hidden rows, Bug Hunt at 9089dc5, LiveBench 2.0 release 2026-10-23)",
+          "Kimi K3.1 Pro exhaustive search with open-web queries, 2026-10-25: research/2026-10-25-board-reread/kimi-search.md and kimi-search.json",
+          "Board re-read of 2026-10-30 for the AA Intelligence Index v5 cohort (O132): research/2026-10-30-v5-recapture/third-party/ (Bug Hunt at 1249797, Vals, LiveBench 2.0 release 2026-10-25 (O139), AI Coding Daily with hidden rows, tbench.ai), with Xiaomi's MiMo-V2.6-Flash effort documentation (O140)"
+        ],
+        "candidates": []
+      }
+    },
+    {
+      "modelId": "mimo-v2-6-flash",
+      "leaf": "vibeCode",
+      "searchedOn": "2026-10-30",
+      "result": "not found",
+      "searchKind": "O53 track leaf search",
+      "sources": [
+        "https://www.vals.ai/benchmarks/vibe-code (benchmark_view JSON, updated 2026-10-29, read 2026-10-30)"
+      ],
+      "notes": "Owner decision O135 (2026-10-30): AA plots MiMo-V2.6-Flash without an effort; Xiaomi's API documents a single thinking mode (thinking.type enabled/disabled, default enabled; on the Responses API every reasoning.effort other than none enables the same, undifferentiated reasoning), so the configuration is thinking enabled, the default (mimo-flash-effort.md). Vals records reasoning, reasoning_effort and compute_effort as null and its model page (read 2026-10-30) states no reasoning setting; Xiaomi's API has thinking on by default, so a run that set nothing ran thinking enabled only if Vals did not disable it: owner to confirm (as 2026-10-25: plausible).",
+      "openWeb": {
+        "searchedOn": "2026-10-30",
+        "record": "research/2026-10-23-swe-benchmarks/reports/SWE benchmark candidates.md",
+        "queries": [
+          "Claude deep research, three researchers: research/2026-10-23-swe-benchmarks/research_notes/SWE benchmark candidates/ (owner-named sources, Vals AI, other agentic benchmarks)",
+          "Perplexity Search with Thinking on research/2026-10-23-swe-benchmarks/brief.md: GPT-6.1 Sol, Grok 4.7, Gemini 3.8 Flash (pplx-*.md)",
+          "Coverage capture of every cohort configuration: research/2026-10-23-swe-benchmarks/vals-catalogue-2026-10-23.json and other-coverage-2026-10-23.json (raw pages and JSON in vals-capture/ and other-capture/)",
+          "Check of Epoch MirrorCode, SWE-bench-Live and SWE-PolyBench (report addendum)",
+          "Board re-read of 2026-10-25 (owner decision O68): research/2026-10-25-board-reread/ (Vals, AI Coding Daily with hidden rows, Bug Hunt at 9089dc5, LiveBench 2.0 release 2026-10-23)",
+          "Kimi K3.1 Pro exhaustive search with open-web queries, 2026-10-25: research/2026-10-25-board-reread/kimi-search.md and kimi-search.json",
+          "Board re-read of 2026-10-30 for the AA Intelligence Index v5 cohort (O132): research/2026-10-30-v5-recapture/third-party/ (Bug Hunt at 1249797, Vals, LiveBench 2.0 release 2026-10-25 (O139), AI Coding Daily with hidden rows, tbench.ai), with Xiaomi's MiMo-V2.6-Flash effort documentation (O140)"
+        ],
+        "candidates": [
+          {
+            "url": "https://www.vals.ai/benchmarks/vibe-code",
+            "publisher": "www.vals.ai",
+            "published": "2026-10-30",
+            "reports": "xiaomi/mimo-v2.6-flash: 78.96 at effort not stated",
+            "resolution": "reject",
+            "reason": "not the exact configuration: AA plots this model without an effort label and the source's effort is not established as AA's"
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "gpt-6.1-terra-low",
+      "leaf": "vibeCode",
+      "searchedOn": "2026-10-30",
+      "result": "not found",
+      "searchKind": "O53 track leaf search",
+      "sources": [
+        "https://www.vals.ai/benchmarks/vibe-code (benchmark_view JSON, updated 2026-10-29, read 2026-10-30)"
+      ],
+      "notes": "Vals ran this model only at max (83.997), not low; not transferred.",
+      "openWeb": {
+        "searchedOn": "2026-10-30",
+        "record": "research/2026-10-23-swe-benchmarks/reports/SWE benchmark candidates.md",
+        "queries": [
+          "Claude deep research, three researchers: research/2026-10-23-swe-benchmarks/research_notes/SWE benchmark candidates/ (owner-named sources, Vals AI, other agentic benchmarks)",
+          "Perplexity Search with Thinking on research/2026-10-23-swe-benchmarks/brief.md: GPT-6.1 Sol, Grok 4.7, Gemini 3.8 Flash (pplx-*.md)",
+          "Coverage capture of every cohort configuration: research/2026-10-23-swe-benchmarks/vals-catalogue-2026-10-23.json and other-coverage-2026-10-23.json (raw pages and JSON in vals-capture/ and other-capture/)",
+          "Check of Epoch MirrorCode, SWE-bench-Live and SWE-PolyBench (report addendum)",
+          "Board re-read of 2026-10-25 (owner decision O68): research/2026-10-25-board-reread/ (Vals, AI Coding Daily with hidden rows, Bug Hunt at 9089dc5, LiveBench 2.0 release 2026-10-23)",
+          "Kimi K3.1 Pro exhaustive search with open-web queries, 2026-10-25: research/2026-10-25-board-reread/kimi-search.md and kimi-search.json",
+          "Board re-read of 2026-10-30 for the AA Intelligence Index v5 cohort (O132): research/2026-10-30-v5-recapture/third-party/ (Bug Hunt at 1249797, Vals, LiveBench 2.0 release 2026-10-25 (O139), AI Coding Daily with hidden rows, tbench.ai), with Xiaomi's MiMo-V2.6-Flash effort documentation (O140)"
+        ],
+        "candidates": []
+      }
+    },
+    {
+      "modelId": "claude-haiku-5-5-high",
+      "leaf": "vibeCode",
+      "searchedOn": "2026-10-30",
+      "result": "not found",
+      "searchKind": "O53 track leaf search",
+      "sources": [
+        "https://www.vals.ai/benchmarks/vibe-code (benchmark_view JSON, updated 2026-10-29, read 2026-10-30)"
+      ],
+      "notes": "Vals ran this model only at max (90.444), not high; not transferred.",
+      "openWeb": {
+        "searchedOn": "2026-10-30",
+        "record": "research/2026-10-23-swe-benchmarks/reports/SWE benchmark candidates.md",
+        "queries": [
+          "Claude deep research, three researchers: research/2026-10-23-swe-benchmarks/research_notes/SWE benchmark candidates/ (owner-named sources, Vals AI, other agentic benchmarks)",
+          "Perplexity Search with Thinking on research/2026-10-23-swe-benchmarks/brief.md: GPT-6.1 Sol, Grok 4.7, Gemini 3.8 Flash (pplx-*.md)",
+          "Coverage capture of every cohort configuration: research/2026-10-23-swe-benchmarks/vals-catalogue-2026-10-23.json and other-coverage-2026-10-23.json (raw pages and JSON in vals-capture/ and other-capture/)",
+          "Check of Epoch MirrorCode, SWE-bench-Live and SWE-PolyBench (report addendum)",
+          "Board re-read of 2026-10-25 (owner decision O68): research/2026-10-25-board-reread/ (Vals, AI Coding Daily with hidden rows, Bug Hunt at 9089dc5, LiveBench 2.0 release 2026-10-23)",
+          "Kimi K3.1 Pro exhaustive search with open-web queries, 2026-10-25: research/2026-10-25-board-reread/kimi-search.md and kimi-search.json",
+          "Board re-read of 2026-10-30 for the AA Intelligence Index v5 cohort (O132): research/2026-10-30-v5-recapture/third-party/ (Bug Hunt at 1249797, Vals, LiveBench 2.0 release 2026-10-25 (O139), AI Coding Daily with hidden rows, tbench.ai), with Xiaomi's MiMo-V2.6-Flash effort documentation (O140)"
+        ],
+        "candidates": []
+      }
+    },
+    {
+      "modelId": "gpt-6.1-terra-medium",
+      "leaf": "vibeCode",
+      "searchedOn": "2026-10-30",
+      "result": "not found",
+      "searchKind": "O53 track leaf search",
+      "sources": [
+        "https://www.vals.ai/benchmarks/vibe-code (benchmark_view JSON, updated 2026-10-29, read 2026-10-30)"
+      ],
+      "notes": "Vals ran this model only at max (83.997), not medium; not transferred.",
+      "openWeb": {
+        "searchedOn": "2026-10-30",
+        "record": "research/2026-10-23-swe-benchmarks/reports/SWE benchmark candidates.md",
+        "queries": [
+          "Claude deep research, three researchers: research/2026-10-23-swe-benchmarks/research_notes/SWE benchmark candidates/ (owner-named sources, Vals AI, other agentic benchmarks)",
+          "Perplexity Search with Thinking on research/2026-10-23-swe-benchmarks/brief.md: GPT-6.1 Sol, Grok 4.7, Gemini 3.8 Flash (pplx-*.md)",
+          "Coverage capture of every cohort configuration: research/2026-10-23-swe-benchmarks/vals-catalogue-2026-10-23.json and other-coverage-2026-10-23.json (raw pages and JSON in vals-capture/ and other-capture/)",
+          "Check of Epoch MirrorCode, SWE-bench-Live and SWE-PolyBench (report addendum)",
+          "Board re-read of 2026-10-25 (owner decision O68): research/2026-10-25-board-reread/ (Vals, AI Coding Daily with hidden rows, Bug Hunt at 9089dc5, LiveBench 2.0 release 2026-10-23)",
+          "Kimi K3.1 Pro exhaustive search with open-web queries, 2026-10-25: research/2026-10-25-board-reread/kimi-search.md and kimi-search.json",
+          "Board re-read of 2026-10-30 for the AA Intelligence Index v5 cohort (O132): research/2026-10-30-v5-recapture/third-party/ (Bug Hunt at 1249797, Vals, LiveBench 2.0 release 2026-10-25 (O139), AI Coding Daily with hidden rows, tbench.ai), with Xiaomi's MiMo-V2.6-Flash effort documentation (O140)"
+        ],
+        "candidates": []
+      }
+    },
+    {
+      "modelId": "gpt-6.1-terra-high",
+      "leaf": "vibeCode",
+      "searchedOn": "2026-10-30",
+      "result": "not found",
+      "searchKind": "O53 track leaf search",
+      "sources": [
+        "https://www.vals.ai/benchmarks/vibe-code (benchmark_view JSON, updated 2026-10-29, read 2026-10-30)"
+      ],
+      "notes": "Vals ran this model only at max (83.997), not high; not transferred.",
+      "openWeb": {
+        "searchedOn": "2026-10-30",
+        "record": "research/2026-10-23-swe-benchmarks/reports/SWE benchmark candidates.md",
+        "queries": [
+          "Claude deep research, three researchers: research/2026-10-23-swe-benchmarks/research_notes/SWE benchmark candidates/ (owner-named sources, Vals AI, other agentic benchmarks)",
+          "Perplexity Search with Thinking on research/2026-10-23-swe-benchmarks/brief.md: GPT-6.1 Sol, Grok 4.7, Gemini 3.8 Flash (pplx-*.md)",
+          "Coverage capture of every cohort configuration: research/2026-10-23-swe-benchmarks/vals-catalogue-2026-10-23.json and other-coverage-2026-10-23.json (raw pages and JSON in vals-capture/ and other-capture/)",
+          "Check of Epoch MirrorCode, SWE-bench-Live and SWE-PolyBench (report addendum)",
+          "Board re-read of 2026-10-25 (owner decision O68): research/2026-10-25-board-reread/ (Vals, AI Coding Daily with hidden rows, Bug Hunt at 9089dc5, LiveBench 2.0 release 2026-10-23)",
+          "Kimi K3.1 Pro exhaustive search with open-web queries, 2026-10-25: research/2026-10-25-board-reread/kimi-search.md and kimi-search.json",
+          "Board re-read of 2026-10-30 for the AA Intelligence Index v5 cohort (O132): research/2026-10-30-v5-recapture/third-party/ (Bug Hunt at 1249797, Vals, LiveBench 2.0 release 2026-10-25 (O139), AI Coding Daily with hidden rows, tbench.ai), with Xiaomi's MiMo-V2.6-Flash effort documentation (O140)"
+        ],
+        "candidates": []
+      }
+    },
+    {
+      "modelId": "gpt-6.1-sol-medium",
+      "leaf": "vibeCode",
+      "searchedOn": "2026-10-30",
+      "result": "not found",
+      "searchKind": "O53 track leaf search",
+      "sources": [
+        "https://www.vals.ai/benchmarks/vibe-code (benchmark_view JSON, updated 2026-10-29, read 2026-10-30)"
+      ],
+      "notes": "Vals ran this model only at max (88.931), not medium; not transferred.",
+      "openWeb": {
+        "searchedOn": "2026-10-30",
+        "record": "research/2026-10-23-swe-benchmarks/reports/SWE benchmark candidates.md",
+        "queries": [
+          "Claude deep research, three researchers: research/2026-10-23-swe-benchmarks/research_notes/SWE benchmark candidates/ (owner-named sources, Vals AI, other agentic benchmarks)",
+          "Perplexity Search with Thinking on research/2026-10-23-swe-benchmarks/brief.md: GPT-6.1 Sol, Grok 4.7, Gemini 3.8 Flash (pplx-*.md)",
+          "Coverage capture of every cohort configuration: research/2026-10-23-swe-benchmarks/vals-catalogue-2026-10-23.json and other-coverage-2026-10-23.json (raw pages and JSON in vals-capture/ and other-capture/)",
+          "Check of Epoch MirrorCode, SWE-bench-Live and SWE-PolyBench (report addendum)",
+          "Board re-read of 2026-10-25 (owner decision O68): research/2026-10-25-board-reread/ (Vals, AI Coding Daily with hidden rows, Bug Hunt at 9089dc5, LiveBench 2.0 release 2026-10-23)",
+          "Kimi K3.1 Pro exhaustive search with open-web queries, 2026-10-25: research/2026-10-25-board-reread/kimi-search.md and kimi-search.json",
+          "Board re-read of 2026-10-30 for the AA Intelligence Index v5 cohort (O132): research/2026-10-30-v5-recapture/third-party/ (Bug Hunt at 1249797, Vals, LiveBench 2.0 release 2026-10-25 (O139), AI Coding Daily with hidden rows, tbench.ai), with Xiaomi's MiMo-V2.6-Flash effort documentation (O140)"
+        ],
+        "candidates": []
+      }
+    },
+    {
+      "modelId": "gpt-6.1-sol-high",
+      "leaf": "vibeCode",
+      "searchedOn": "2026-10-30",
+      "result": "not found",
+      "searchKind": "O53 track leaf search",
+      "sources": [
+        "https://www.vals.ai/benchmarks/vibe-code (benchmark_view JSON, updated 2026-10-29, read 2026-10-30)"
+      ],
+      "notes": "Vals ran this model only at max (88.931), not high; not transferred.",
+      "openWeb": {
+        "searchedOn": "2026-10-30",
+        "record": "research/2026-10-23-swe-benchmarks/reports/SWE benchmark candidates.md",
+        "queries": [
+          "Claude deep research, three researchers: research/2026-10-23-swe-benchmarks/research_notes/SWE benchmark candidates/ (owner-named sources, Vals AI, other agentic benchmarks)",
+          "Perplexity Search with Thinking on research/2026-10-23-swe-benchmarks/brief.md: GPT-6.1 Sol, Grok 4.7, Gemini 3.8 Flash (pplx-*.md)",
+          "Coverage capture of every cohort configuration: research/2026-10-23-swe-benchmarks/vals-catalogue-2026-10-23.json and other-coverage-2026-10-23.json (raw pages and JSON in vals-capture/ and other-capture/)",
+          "Check of Epoch MirrorCode, SWE-bench-Live and SWE-PolyBench (report addendum)",
+          "Board re-read of 2026-10-25 (owner decision O68): research/2026-10-25-board-reread/ (Vals, AI Coding Daily with hidden rows, Bug Hunt at 9089dc5, LiveBench 2.0 release 2026-10-23)",
+          "Kimi K3.1 Pro exhaustive search with open-web queries, 2026-10-25: research/2026-10-25-board-reread/kimi-search.md and kimi-search.json",
+          "Board re-read of 2026-10-30 for the AA Intelligence Index v5 cohort (O132): research/2026-10-30-v5-recapture/third-party/ (Bug Hunt at 1249797, Vals, LiveBench 2.0 release 2026-10-25 (O139), AI Coding Daily with hidden rows, tbench.ai), with Xiaomi's MiMo-V2.6-Flash effort documentation (O140)"
+        ],
+        "candidates": []
+      }
+    },
+    {
+      "modelId": "gpt-6.1-sol-xhigh",
+      "leaf": "vibeCode",
+      "searchedOn": "2026-10-30",
+      "result": "not found",
+      "searchKind": "O53 track leaf search",
+      "sources": [
+        "https://www.vals.ai/benchmarks/vibe-code (benchmark_view JSON, updated 2026-10-29, read 2026-10-30)"
+      ],
+      "notes": "Vals ran this model only at max (88.931), not xhigh; not transferred.",
+      "openWeb": {
+        "searchedOn": "2026-10-30",
+        "record": "research/2026-10-23-swe-benchmarks/reports/SWE benchmark candidates.md",
+        "queries": [
+          "Claude deep research, three researchers: research/2026-10-23-swe-benchmarks/research_notes/SWE benchmark candidates/ (owner-named sources, Vals AI, other agentic benchmarks)",
+          "Perplexity Search with Thinking on research/2026-10-23-swe-benchmarks/brief.md: GPT-6.1 Sol, Grok 4.7, Gemini 3.8 Flash (pplx-*.md)",
+          "Coverage capture of every cohort configuration: research/2026-10-23-swe-benchmarks/vals-catalogue-2026-10-23.json and other-coverage-2026-10-23.json (raw pages and JSON in vals-capture/ and other-capture/)",
+          "Check of Epoch MirrorCode, SWE-bench-Live and SWE-PolyBench (report addendum)",
+          "Board re-read of 2026-10-25 (owner decision O68): research/2026-10-25-board-reread/ (Vals, AI Coding Daily with hidden rows, Bug Hunt at 9089dc5, LiveBench 2.0 release 2026-10-23)",
+          "Kimi K3.1 Pro exhaustive search with open-web queries, 2026-10-25: research/2026-10-25-board-reread/kimi-search.md and kimi-search.json",
+          "Board re-read of 2026-10-30 for the AA Intelligence Index v5 cohort (O132): research/2026-10-30-v5-recapture/third-party/ (Bug Hunt at 1249797, Vals, LiveBench 2.0 release 2026-10-25 (O139), AI Coding Daily with hidden rows, tbench.ai), with Xiaomi's MiMo-V2.6-Flash effort documentation (O140)"
+        ],
+        "candidates": []
+      }
+    },
+    {
+      "modelId": "gpt-6-astra-high",
+      "leaf": "vibeCode",
+      "searchedOn": "2026-10-30",
+      "result": "not found",
+      "searchKind": "O53 track leaf search",
+      "sources": [
+        "https://www.vals.ai/benchmarks/vibe-code (benchmark_view JSON, updated 2026-10-29, read 2026-10-30)"
+      ],
+      "notes": "Vals ran this model only at max (89.594), not high; not transferred.",
+      "openWeb": {
+        "searchedOn": "2026-10-30",
+        "record": "research/2026-10-23-swe-benchmarks/reports/SWE benchmark candidates.md",
+        "queries": [
+          "Claude deep research, three researchers: research/2026-10-23-swe-benchmarks/research_notes/SWE benchmark candidates/ (owner-named sources, Vals AI, other agentic benchmarks)",
+          "Perplexity Search with Thinking on research/2026-10-23-swe-benchmarks/brief.md: GPT-6.1 Sol, Grok 4.7, Gemini 3.8 Flash (pplx-*.md)",
+          "Coverage capture of every cohort configuration: research/2026-10-23-swe-benchmarks/vals-catalogue-2026-10-23.json and other-coverage-2026-10-23.json (raw pages and JSON in vals-capture/ and other-capture/)",
+          "Check of Epoch MirrorCode, SWE-bench-Live and SWE-PolyBench (report addendum)",
+          "Board re-read of 2026-10-25 (owner decision O68): research/2026-10-25-board-reread/ (Vals, AI Coding Daily with hidden rows, Bug Hunt at 9089dc5, LiveBench 2.0 release 2026-10-23)",
+          "Kimi K3.1 Pro exhaustive search with open-web queries, 2026-10-25: research/2026-10-25-board-reread/kimi-search.md and kimi-search.json",
+          "Board re-read of 2026-10-30 for the AA Intelligence Index v5 cohort (O132): research/2026-10-30-v5-recapture/third-party/ (Bug Hunt at 1249797, Vals, LiveBench 2.0 release 2026-10-25 (O139), AI Coding Daily with hidden rows, tbench.ai), with Xiaomi's MiMo-V2.6-Flash effort documentation (O140)"
+        ],
+        "candidates": []
+      }
+    },
+    {
+      "modelId": "gpt-6-astra-xhigh",
+      "leaf": "vibeCode",
+      "searchedOn": "2026-10-30",
+      "result": "not found",
+      "searchKind": "O53 track leaf search",
+      "sources": [
+        "https://www.vals.ai/benchmarks/vibe-code (benchmark_view JSON, updated 2026-10-29, read 2026-10-30)"
+      ],
+      "notes": "Vals ran this model only at max (89.594), not xhigh; not transferred.",
+      "openWeb": {
+        "searchedOn": "2026-10-30",
+        "record": "research/2026-10-23-swe-benchmarks/reports/SWE benchmark candidates.md",
+        "queries": [
+          "Claude deep research, three researchers: research/2026-10-23-swe-benchmarks/research_notes/SWE benchmark candidates/ (owner-named sources, Vals AI, other agentic benchmarks)",
+          "Perplexity Search with Thinking on research/2026-10-23-swe-benchmarks/brief.md: GPT-6.1 Sol, Grok 4.7, Gemini 3.8 Flash (pplx-*.md)",
+          "Coverage capture of every cohort configuration: research/2026-10-23-swe-benchmarks/vals-catalogue-2026-10-23.json and other-coverage-2026-10-23.json (raw pages and JSON in vals-capture/ and other-capture/)",
+          "Check of Epoch MirrorCode, SWE-bench-Live and SWE-PolyBench (report addendum)",
+          "Board re-read of 2026-10-25 (owner decision O68): research/2026-10-25-board-reread/ (Vals, AI Coding Daily with hidden rows, Bug Hunt at 9089dc5, LiveBench 2.0 release 2026-10-23)",
+          "Kimi K3.1 Pro exhaustive search with open-web queries, 2026-10-25: research/2026-10-25-board-reread/kimi-search.md and kimi-search.json",
+          "Board re-read of 2026-10-30 for the AA Intelligence Index v5 cohort (O132): research/2026-10-30-v5-recapture/third-party/ (Bug Hunt at 1249797, Vals, LiveBench 2.0 release 2026-10-25 (O139), AI Coding Daily with hidden rows, tbench.ai), with Xiaomi's MiMo-V2.6-Flash effort documentation (O140)"
+        ],
+        "candidates": []
+      }
+    },
+    {
+      "modelId": "claude-opus-5-5-xhigh",
+      "leaf": "vibeCode",
+      "searchedOn": "2026-10-30",
+      "result": "not found",
+      "searchKind": "O53 track leaf search",
+      "sources": [
+        "https://www.vals.ai/benchmarks/vibe-code (benchmark_view JSON, updated 2026-10-29, read 2026-10-30)"
+      ],
+      "notes": "Vals ran this model only at max (90.294), not xhigh; not transferred.",
+      "openWeb": {
+        "searchedOn": "2026-10-30",
+        "record": "research/2026-10-23-swe-benchmarks/reports/SWE benchmark candidates.md",
+        "queries": [
+          "Claude deep research, three researchers: research/2026-10-23-swe-benchmarks/research_notes/SWE benchmark candidates/ (owner-named sources, Vals AI, other agentic benchmarks)",
+          "Perplexity Search with Thinking on research/2026-10-23-swe-benchmarks/brief.md: GPT-6.1 Sol, Grok 4.7, Gemini 3.8 Flash (pplx-*.md)",
+          "Coverage capture of every cohort configuration: research/2026-10-23-swe-benchmarks/vals-catalogue-2026-10-23.json and other-coverage-2026-10-23.json (raw pages and JSON in vals-capture/ and other-capture/)",
+          "Check of Epoch MirrorCode, SWE-bench-Live and SWE-PolyBench (report addendum)",
+          "Board re-read of 2026-10-25 (owner decision O68): research/2026-10-25-board-reread/ (Vals, AI Coding Daily with hidden rows, Bug Hunt at 9089dc5, LiveBench 2.0 release 2026-10-23)",
+          "Kimi K3.1 Pro exhaustive search with open-web queries, 2026-10-25: research/2026-10-25-board-reread/kimi-search.md and kimi-search.json",
+          "Board re-read of 2026-10-30 for the AA Intelligence Index v5 cohort (O132): research/2026-10-30-v5-recapture/third-party/ (Bug Hunt at 1249797, Vals, LiveBench 2.0 release 2026-10-25 (O139), AI Coding Daily with hidden rows, tbench.ai), with Xiaomi's MiMo-V2.6-Flash effort documentation (O140)"
+        ],
+        "candidates": []
+      }
+    },
+    {
+      "modelId": "gpt-6-luna-xhigh",
+      "leaf": "vibeCode",
+      "searchedOn": "2026-10-30",
+      "result": "not found",
+      "searchKind": "O53 track leaf search",
+      "sources": [
+        "https://www.vals.ai/benchmarks/vibe-code (benchmark_view JSON, updated 2026-10-29, read 2026-10-30)"
+      ],
+      "notes": "Vals ran this model only at max (81.649), not xhigh; not transferred.",
+      "openWeb": {
+        "searchedOn": "2026-10-30",
+        "record": "research/2026-10-23-swe-benchmarks/reports/SWE benchmark candidates.md",
+        "queries": [
+          "Claude deep research, three researchers: research/2026-10-23-swe-benchmarks/research_notes/SWE benchmark candidates/ (owner-named sources, Vals AI, other agentic benchmarks)",
+          "Perplexity Search with Thinking on research/2026-10-23-swe-benchmarks/brief.md: GPT-6.1 Sol, Grok 4.7, Gemini 3.8 Flash (pplx-*.md)",
+          "Coverage capture of every cohort configuration: research/2026-10-23-swe-benchmarks/vals-catalogue-2026-10-23.json and other-coverage-2026-10-23.json (raw pages and JSON in vals-capture/ and other-capture/)",
+          "Check of Epoch MirrorCode, SWE-bench-Live and SWE-PolyBench (report addendum)",
+          "Board re-read of 2026-10-25 (owner decision O68): research/2026-10-25-board-reread/ (Vals, AI Coding Daily with hidden rows, Bug Hunt at 9089dc5, LiveBench 2.0 release 2026-10-23)",
+          "Kimi K3.1 Pro exhaustive search with open-web queries, 2026-10-25: research/2026-10-25-board-reread/kimi-search.md and kimi-search.json",
+          "Board re-read of 2026-10-30 for the AA Intelligence Index v5 cohort (O132): research/2026-10-30-v5-recapture/third-party/ (Bug Hunt at 1249797, Vals, LiveBench 2.0 release 2026-10-25 (O139), AI Coding Daily with hidden rows, tbench.ai), with Xiaomi's MiMo-V2.6-Flash effort documentation (O140)"
+        ],
+        "candidates": []
+      }
+    },
+    {
+      "modelId": "gpt-6.1-sol-low",
+      "leaf": "vibeCode",
+      "searchedOn": "2026-10-30",
+      "result": "not found",
+      "searchKind": "O53 track leaf search",
+      "sources": [
+        "https://www.vals.ai/benchmarks/vibe-code (benchmark_view JSON, updated 2026-10-29, read 2026-10-30)"
+      ],
+      "notes": "Vals ran this model only at max (88.931), not low; not transferred.",
+      "openWeb": {
+        "searchedOn": "2026-10-30",
+        "record": "research/2026-10-23-swe-benchmarks/reports/SWE benchmark candidates.md",
+        "queries": [
+          "Claude deep research, three researchers: research/2026-10-23-swe-benchmarks/research_notes/SWE benchmark candidates/ (owner-named sources, Vals AI, other agentic benchmarks)",
+          "Perplexity Search with Thinking on research/2026-10-23-swe-benchmarks/brief.md: GPT-6.1 Sol, Grok 4.7, Gemini 3.8 Flash (pplx-*.md)",
+          "Coverage capture of every cohort configuration: research/2026-10-23-swe-benchmarks/vals-catalogue-2026-10-23.json and other-coverage-2026-10-23.json (raw pages and JSON in vals-capture/ and other-capture/)",
+          "Check of Epoch MirrorCode, SWE-bench-Live and SWE-PolyBench (report addendum)",
+          "Board re-read of 2026-10-25 (owner decision O68): research/2026-10-25-board-reread/ (Vals, AI Coding Daily with hidden rows, Bug Hunt at 9089dc5, LiveBench 2.0 release 2026-10-23)",
+          "Kimi K3.1 Pro exhaustive search with open-web queries, 2026-10-25: research/2026-10-25-board-reread/kimi-search.md and kimi-search.json",
+          "Board re-read of 2026-10-30 for the AA Intelligence Index v5 cohort (O132): research/2026-10-30-v5-recapture/third-party/ (Bug Hunt at 1249797, Vals, LiveBench 2.0 release 2026-10-25 (O139), AI Coding Daily with hidden rows, tbench.ai), with Xiaomi's MiMo-V2.6-Flash effort documentation (O140)"
+        ],
+        "candidates": []
+      }
+    },
+    {
+      "modelId": "gpt-6.1-terra-xhigh",
+      "leaf": "vibeCode",
+      "searchedOn": "2026-10-30",
+      "result": "not found",
+      "searchKind": "O53 track leaf search",
+      "sources": [
+        "https://www.vals.ai/benchmarks/vibe-code (benchmark_view JSON, updated 2026-10-29, read 2026-10-30)"
+      ],
+      "notes": "Vals ran this model only at max (83.997), not xhigh; not transferred.",
+      "openWeb": {
+        "searchedOn": "2026-10-30",
+        "record": "research/2026-10-23-swe-benchmarks/reports/SWE benchmark candidates.md",
+        "queries": [
+          "Claude deep research, three researchers: research/2026-10-23-swe-benchmarks/research_notes/SWE benchmark candidates/ (owner-named sources, Vals AI, other agentic benchmarks)",
+          "Perplexity Search with Thinking on research/2026-10-23-swe-benchmarks/brief.md: GPT-6.1 Sol, Grok 4.7, Gemini 3.8 Flash (pplx-*.md)",
+          "Coverage capture of every cohort configuration: research/2026-10-23-swe-benchmarks/vals-catalogue-2026-10-23.json and other-coverage-2026-10-23.json (raw pages and JSON in vals-capture/ and other-capture/)",
+          "Check of Epoch MirrorCode, SWE-bench-Live and SWE-PolyBench (report addendum)",
+          "Board re-read of 2026-10-25 (owner decision O68): research/2026-10-25-board-reread/ (Vals, AI Coding Daily with hidden rows, Bug Hunt at 9089dc5, LiveBench 2.0 release 2026-10-23)",
+          "Kimi K3.1 Pro exhaustive search with open-web queries, 2026-10-25: research/2026-10-25-board-reread/kimi-search.md and kimi-search.json",
+          "Board re-read of 2026-10-30 for the AA Intelligence Index v5 cohort (O132): research/2026-10-30-v5-recapture/third-party/ (Bug Hunt at 1249797, Vals, LiveBench 2.0 release 2026-10-25 (O139), AI Coding Daily with hidden rows, tbench.ai), with Xiaomi's MiMo-V2.6-Flash effort documentation (O140)"
+        ],
+        "candidates": []
+      }
+    },
+    {
+      "modelId": "claude-opus-5-5-high",
+      "leaf": "vibeCode",
+      "searchedOn": "2026-10-30",
+      "result": "not found",
+      "searchKind": "O53 track leaf search",
+      "sources": [
+        "https://www.vals.ai/benchmarks/vibe-code (benchmark_view JSON, updated 2026-10-29, read 2026-10-30)"
+      ],
+      "notes": "Vals ran this model only at max (90.294), not high; not transferred.",
+      "openWeb": {
+        "searchedOn": "2026-10-30",
+        "record": "research/2026-10-23-swe-benchmarks/reports/SWE benchmark candidates.md",
+        "queries": [
+          "Claude deep research, three researchers: research/2026-10-23-swe-benchmarks/research_notes/SWE benchmark candidates/ (owner-named sources, Vals AI, other agentic benchmarks)",
+          "Perplexity Search with Thinking on research/2026-10-23-swe-benchmarks/brief.md: GPT-6.1 Sol, Grok 4.7, Gemini 3.8 Flash (pplx-*.md)",
+          "Coverage capture of every cohort configuration: research/2026-10-23-swe-benchmarks/vals-catalogue-2026-10-23.json and other-coverage-2026-10-23.json (raw pages and JSON in vals-capture/ and other-capture/)",
+          "Check of Epoch MirrorCode, SWE-bench-Live and SWE-PolyBench (report addendum)",
+          "Board re-read of 2026-10-25 (owner decision O68): research/2026-10-25-board-reread/ (Vals, AI Coding Daily with hidden rows, Bug Hunt at 9089dc5, LiveBench 2.0 release 2026-10-23)",
+          "Kimi K3.1 Pro exhaustive search with open-web queries, 2026-10-25: research/2026-10-25-board-reread/kimi-search.md and kimi-search.json",
+          "Board re-read of 2026-10-30 for the AA Intelligence Index v5 cohort (O132): research/2026-10-30-v5-recapture/third-party/ (Bug Hunt at 1249797, Vals, LiveBench 2.0 release 2026-10-25 (O139), AI Coding Daily with hidden rows, tbench.ai), with Xiaomi's MiMo-V2.6-Flash effort documentation (O140)"
+        ],
+        "candidates": []
+      }
+    },
+    {
+      "modelId": "gpt-6-luna-low",
+      "leaf": "codeMigration",
+      "searchedOn": "2026-10-30",
+      "result": "not found",
+      "searchKind": "O53 track leaf search",
+      "sources": [
+        "https://www.vals.ai/benchmarks/code-migration-v1-1 (benchmark_view JSON, updated 2026-10-28, read 2026-10-30)"
+      ],
+      "notes": "Vals ran this model only at max (46.669), not low; not transferred.",
+      "openWeb": {
+        "searchedOn": "2026-10-30",
+        "record": "research/2026-10-23-swe-benchmarks/reports/SWE benchmark candidates.md",
+        "queries": [
+          "Claude deep research, three researchers: research/2026-10-23-swe-benchmarks/research_notes/SWE benchmark candidates/ (owner-named sources, Vals AI, other agentic benchmarks)",
+          "Perplexity Search with Thinking on research/2026-10-23-swe-benchmarks/brief.md: GPT-6.1 Sol, Grok 4.7, Gemini 3.8 Flash (pplx-*.md)",
+          "Coverage capture of every cohort configuration: research/2026-10-23-swe-benchmarks/vals-catalogue-2026-10-23.json and other-coverage-2026-10-23.json (raw pages and JSON in vals-capture/ and other-capture/)",
+          "Check of Epoch MirrorCode, SWE-bench-Live and SWE-PolyBench (report addendum)",
+          "Board re-read of 2026-10-25 (owner decision O68): research/2026-10-25-board-reread/ (Vals, AI Coding Daily with hidden rows, Bug Hunt at 9089dc5, LiveBench 2.0 release 2026-10-23)",
+          "Kimi K3.1 Pro exhaustive search with open-web queries, 2026-10-25: research/2026-10-25-board-reread/kimi-search.md and kimi-search.json",
+          "Board re-read of 2026-10-30 for the AA Intelligence Index v5 cohort (O132): research/2026-10-30-v5-recapture/third-party/ (Bug Hunt at 1249797, Vals, LiveBench 2.0 release 2026-10-25 (O139), AI Coding Daily with hidden rows, tbench.ai), with Xiaomi's MiMo-V2.6-Flash effort documentation (O140)"
+        ],
+        "candidates": []
+      }
+    },
+    {
+      "modelId": "gpt-6-luna-medium",
+      "leaf": "codeMigration",
+      "searchedOn": "2026-10-30",
+      "result": "not found",
+      "searchKind": "O53 track leaf search",
+      "sources": [
+        "https://www.vals.ai/benchmarks/code-migration-v1-1 (benchmark_view JSON, updated 2026-10-28, read 2026-10-30)"
+      ],
+      "notes": "Vals ran this model only at max (46.669), not medium; not transferred.",
+      "openWeb": {
+        "searchedOn": "2026-10-30",
+        "record": "research/2026-10-23-swe-benchmarks/reports/SWE benchmark candidates.md",
+        "queries": [
+          "Claude deep research, three researchers: research/2026-10-23-swe-benchmarks/research_notes/SWE benchmark candidates/ (owner-named sources, Vals AI, other agentic benchmarks)",
+          "Perplexity Search with Thinking on research/2026-10-23-swe-benchmarks/brief.md: GPT-6.1 Sol, Grok 4.7, Gemini 3.8 Flash (pplx-*.md)",
+          "Coverage capture of every cohort configuration: research/2026-10-23-swe-benchmarks/vals-catalogue-2026-10-23.json and other-coverage-2026-10-23.json (raw pages and JSON in vals-capture/ and other-capture/)",
+          "Check of Epoch MirrorCode, SWE-bench-Live and SWE-PolyBench (report addendum)",
+          "Board re-read of 2026-10-25 (owner decision O68): research/2026-10-25-board-reread/ (Vals, AI Coding Daily with hidden rows, Bug Hunt at 9089dc5, LiveBench 2.0 release 2026-10-23)",
+          "Kimi K3.1 Pro exhaustive search with open-web queries, 2026-10-25: research/2026-10-25-board-reread/kimi-search.md and kimi-search.json",
+          "Board re-read of 2026-10-30 for the AA Intelligence Index v5 cohort (O132): research/2026-10-30-v5-recapture/third-party/ (Bug Hunt at 1249797, Vals, LiveBench 2.0 release 2026-10-25 (O139), AI Coding Daily with hidden rows, tbench.ai), with Xiaomi's MiMo-V2.6-Flash effort documentation (O140)"
+        ],
+        "candidates": []
+      }
+    },
+    {
+      "modelId": "claude-haiku-5-5-low",
+      "leaf": "codeMigration",
+      "searchedOn": "2026-10-30",
+      "result": "not found",
+      "searchKind": "O53 track leaf search",
+      "sources": [
+        "https://www.vals.ai/benchmarks/code-migration-v1-1 (benchmark_view JSON, updated 2026-10-28, read 2026-10-30)"
+      ],
+      "notes": "Vals ran this model only at max (52.36), not low; not transferred.",
+      "openWeb": {
+        "searchedOn": "2026-10-30",
+        "record": "research/2026-10-23-swe-benchmarks/reports/SWE benchmark candidates.md",
+        "queries": [
+          "Claude deep research, three researchers: research/2026-10-23-swe-benchmarks/research_notes/SWE benchmark candidates/ (owner-named sources, Vals AI, other agentic benchmarks)",
+          "Perplexity Search with Thinking on research/2026-10-23-swe-benchmarks/brief.md: GPT-6.1 Sol, Grok 4.7, Gemini 3.8 Flash (pplx-*.md)",
+          "Coverage capture of every cohort configuration: research/2026-10-23-swe-benchmarks/vals-catalogue-2026-10-23.json and other-coverage-2026-10-23.json (raw pages and JSON in vals-capture/ and other-capture/)",
+          "Check of Epoch MirrorCode, SWE-bench-Live and SWE-PolyBench (report addendum)",
+          "Board re-read of 2026-10-25 (owner decision O68): research/2026-10-25-board-reread/ (Vals, AI Coding Daily with hidden rows, Bug Hunt at 9089dc5, LiveBench 2.0 release 2026-10-23)",
+          "Kimi K3.1 Pro exhaustive search with open-web queries, 2026-10-25: research/2026-10-25-board-reread/kimi-search.md and kimi-search.json",
+          "Board re-read of 2026-10-30 for the AA Intelligence Index v5 cohort (O132): research/2026-10-30-v5-recapture/third-party/ (Bug Hunt at 1249797, Vals, LiveBench 2.0 release 2026-10-25 (O139), AI Coding Daily with hidden rows, tbench.ai), with Xiaomi's MiMo-V2.6-Flash effort documentation (O140)"
+        ],
+        "candidates": []
+      }
+    },
+    {
+      "modelId": "gpt-6-luna-high",
+      "leaf": "codeMigration",
+      "searchedOn": "2026-10-30",
+      "result": "not found",
+      "searchKind": "O53 track leaf search",
+      "sources": [
+        "https://www.vals.ai/benchmarks/code-migration-v1-1 (benchmark_view JSON, updated 2026-10-28, read 2026-10-30)"
+      ],
+      "notes": "Vals ran this model only at max (46.669), not high; not transferred.",
+      "openWeb": {
+        "searchedOn": "2026-10-30",
+        "record": "research/2026-10-23-swe-benchmarks/reports/SWE benchmark candidates.md",
+        "queries": [
+          "Claude deep research, three researchers: research/2026-10-23-swe-benchmarks/research_notes/SWE benchmark candidates/ (owner-named sources, Vals AI, other agentic benchmarks)",
+          "Perplexity Search with Thinking on research/2026-10-23-swe-benchmarks/brief.md: GPT-6.1 Sol, Grok 4.7, Gemini 3.8 Flash (pplx-*.md)",
+          "Coverage capture of every cohort configuration: research/2026-10-23-swe-benchmarks/vals-catalogue-2026-10-23.json and other-coverage-2026-10-23.json (raw pages and JSON in vals-capture/ and other-capture/)",
+          "Check of Epoch MirrorCode, SWE-bench-Live and SWE-PolyBench (report addendum)",
+          "Board re-read of 2026-10-25 (owner decision O68): research/2026-10-25-board-reread/ (Vals, AI Coding Daily with hidden rows, Bug Hunt at 9089dc5, LiveBench 2.0 release 2026-10-23)",
+          "Kimi K3.1 Pro exhaustive search with open-web queries, 2026-10-25: research/2026-10-25-board-reread/kimi-search.md and kimi-search.json",
+          "Board re-read of 2026-10-30 for the AA Intelligence Index v5 cohort (O132): research/2026-10-30-v5-recapture/third-party/ (Bug Hunt at 1249797, Vals, LiveBench 2.0 release 2026-10-25 (O139), AI Coding Daily with hidden rows, tbench.ai), with Xiaomi's MiMo-V2.6-Flash effort documentation (O140)"
+        ],
+        "candidates": []
+      }
+    },
+    {
+      "modelId": "claude-haiku-5-5-medium",
+      "leaf": "codeMigration",
+      "searchedOn": "2026-10-30",
+      "result": "not found",
+      "searchKind": "O53 track leaf search",
+      "sources": [
+        "https://www.vals.ai/benchmarks/code-migration-v1-1 (benchmark_view JSON, updated 2026-10-28, read 2026-10-30)"
+      ],
+      "notes": "Vals ran this model only at max (52.36), not medium; not transferred.",
+      "openWeb": {
+        "searchedOn": "2026-10-30",
+        "record": "research/2026-10-23-swe-benchmarks/reports/SWE benchmark candidates.md",
+        "queries": [
+          "Claude deep research, three researchers: research/2026-10-23-swe-benchmarks/research_notes/SWE benchmark candidates/ (owner-named sources, Vals AI, other agentic benchmarks)",
+          "Perplexity Search with Thinking on research/2026-10-23-swe-benchmarks/brief.md: GPT-6.1 Sol, Grok 4.7, Gemini 3.8 Flash (pplx-*.md)",
+          "Coverage capture of every cohort configuration: research/2026-10-23-swe-benchmarks/vals-catalogue-2026-10-23.json and other-coverage-2026-10-23.json (raw pages and JSON in vals-capture/ and other-capture/)",
+          "Check of Epoch MirrorCode, SWE-bench-Live and SWE-PolyBench (report addendum)",
+          "Board re-read of 2026-10-25 (owner decision O68): research/2026-10-25-board-reread/ (Vals, AI Coding Daily with hidden rows, Bug Hunt at 9089dc5, LiveBench 2.0 release 2026-10-23)",
+          "Kimi K3.1 Pro exhaustive search with open-web queries, 2026-10-25: research/2026-10-25-board-reread/kimi-search.md and kimi-search.json",
+          "Board re-read of 2026-10-30 for the AA Intelligence Index v5 cohort (O132): research/2026-10-30-v5-recapture/third-party/ (Bug Hunt at 1249797, Vals, LiveBench 2.0 release 2026-10-25 (O139), AI Coding Daily with hidden rows, tbench.ai), with Xiaomi's MiMo-V2.6-Flash effort documentation (O140)"
+        ],
+        "candidates": []
+      }
+    },
+    {
+      "modelId": "mimo-v2-6-flash",
+      "leaf": "codeMigration",
+      "searchedOn": "2026-10-30",
+      "result": "not found",
+      "searchKind": "O53 track leaf search",
+      "sources": [
+        "https://www.vals.ai/benchmarks/code-migration-v1-1 (benchmark_view JSON, updated 2026-10-28, read 2026-10-30)"
+      ],
+      "notes": "Owner decision O135 (2026-10-30): AA plots MiMo-V2.6-Flash without an effort; Xiaomi's API documents a single thinking mode (thinking.type enabled/disabled, default enabled; on the Responses API every reasoning.effort other than none enables the same, undifferentiated reasoning), so the configuration is thinking enabled, the default (mimo-flash-effort.md). Vals records reasoning, reasoning_effort and compute_effort as null and its model page (read 2026-10-30) states no reasoning setting; Xiaomi's API has thinking on by default, so a run that set nothing ran thinking enabled only if Vals did not disable it: owner to confirm (as 2026-10-25: plausible).",
+      "openWeb": {
+        "searchedOn": "2026-10-30",
+        "record": "research/2026-10-23-swe-benchmarks/reports/SWE benchmark candidates.md",
+        "queries": [
+          "Claude deep research, three researchers: research/2026-10-23-swe-benchmarks/research_notes/SWE benchmark candidates/ (owner-named sources, Vals AI, other agentic benchmarks)",
+          "Perplexity Search with Thinking on research/2026-10-23-swe-benchmarks/brief.md: GPT-6.1 Sol, Grok 4.7, Gemini 3.8 Flash (pplx-*.md)",
+          "Coverage capture of every cohort configuration: research/2026-10-23-swe-benchmarks/vals-catalogue-2026-10-23.json and other-coverage-2026-10-23.json (raw pages and JSON in vals-capture/ and other-capture/)",
+          "Check of Epoch MirrorCode, SWE-bench-Live and SWE-PolyBench (report addendum)",
+          "Board re-read of 2026-10-25 (owner decision O68): research/2026-10-25-board-reread/ (Vals, AI Coding Daily with hidden rows, Bug Hunt at 9089dc5, LiveBench 2.0 release 2026-10-23)",
+          "Kimi K3.1 Pro exhaustive search with open-web queries, 2026-10-25: research/2026-10-25-board-reread/kimi-search.md and kimi-search.json",
+          "Board re-read of 2026-10-30 for the AA Intelligence Index v5 cohort (O132): research/2026-10-30-v5-recapture/third-party/ (Bug Hunt at 1249797, Vals, LiveBench 2.0 release 2026-10-25 (O139), AI Coding Daily with hidden rows, tbench.ai), with Xiaomi's MiMo-V2.6-Flash effort documentation (O140)"
+        ],
+        "candidates": [
+          {
+            "url": "https://www.vals.ai/benchmarks/code-migration-v1-1",
+            "publisher": "www.vals.ai",
+            "published": "2026-10-30",
+            "reports": "xiaomi/mimo-v2.6-flash: 39.552 at effort not stated",
+            "resolution": "reject",
+            "reason": "not the exact configuration: AA plots this model without an effort label and the source's effort is not established as AA's"
+          }
+        ]
+      }
+    },
+    {
+      "modelId": "gpt-6.1-terra-low",
+      "leaf": "codeMigration",
+      "searchedOn": "2026-10-30",
+      "result": "not found",
+      "searchKind": "O53 track leaf search",
+      "sources": [
+        "https://www.vals.ai/benchmarks/code-migration-v1-1 (benchmark_view JSON, updated 2026-10-28, read 2026-10-30)"
+      ],
+      "notes": "No openai/gpt-6.1-terra row on this board.",
+      "openWeb": {
+        "searchedOn": "2026-10-30",
+        "record": "research/2026-10-23-swe-benchmarks/reports/SWE benchmark candidates.md",
+        "queries": [
+          "Claude deep research, three researchers: research/2026-10-23-swe-benchmarks/research_notes/SWE benchmark candidates/ (owner-named sources, Vals AI, other agentic benchmarks)",
+          "Perplexity Search with Thinking on research/2026-10-23-swe-benchmarks/brief.md: GPT-6.1 Sol, Grok 4.7, Gemini 3.8 Flash (pplx-*.md)",
+          "Coverage capture of every cohort configuration: research/2026-10-23-swe-benchmarks/vals-catalogue-2026-10-23.json and other-coverage-2026-10-23.json (raw pages and JSON in vals-capture/ and other-capture/)",
+          "Check of Epoch MirrorCode, SWE-bench-Live and SWE-PolyBench (report addendum)",
+          "Board re-read of 2026-10-25 (owner decision O68): research/2026-10-25-board-reread/ (Vals, AI Coding Daily with hidden rows, Bug Hunt at 9089dc5, LiveBench 2.0 release 2026-10-23)",
+          "Kimi K3.1 Pro exhaustive search with open-web queries, 2026-10-25: research/2026-10-25-board-reread/kimi-search.md and kimi-search.json",
+          "Board re-read of 2026-10-30 for the AA Intelligence Index v5 cohort (O132): research/2026-10-30-v5-recapture/third-party/ (Bug Hunt at 1249797, Vals, LiveBench 2.0 release 2026-10-25 (O139), AI Coding Daily with hidden rows, tbench.ai), with Xiaomi's MiMo-V2.6-Flash effort documentation (O140)"
+        ],
+        "candidates": []
+      }
+    },
+    {
+      "modelId": "claude-haiku-5-5-high",
+      "leaf": "codeMigration",
+      "searchedOn": "2026-10-30",
+      "result": "not found",
+      "searchKind": "O53 track leaf search",
+      "sources": [
+        "https://www.vals.ai/benchmarks/code-migration-v1-1 (benchmark_view JSON, updated 2026-10-28, read 2026-10-30)"
+      ],
+      "notes": "Vals ran this model only at max (52.36), not high; not transferred.",
+      "openWeb": {
+        "searchedOn": "2026-10-30",
+        "record": "research/2026-10-23-swe-benchmarks/reports/SWE benchmark candidates.md",
+        "queries": [
+          "Claude deep research, three researchers: research/2026-10-23-swe-benchmarks/research_notes/SWE benchmark candidates/ (owner-named sources, Vals AI, other agentic benchmarks)",
+          "Perplexity Search with Thinking on research/2026-10-23-swe-benchmarks/brief.md: GPT-6.1 Sol, Grok 4.7, Gemini 3.8 Flash (pplx-*.md)",
+          "Coverage capture of every cohort configuration: research/2026-10-23-swe-benchmarks/vals-catalogue-2026-10-23.json and other-coverage-2026-10-23.json (raw pages and JSON in vals-capture/ and other-capture/)",
+          "Check of Epoch MirrorCode, SWE-bench-Live and SWE-PolyBench (report addendum)",
+          "Board re-read of 2026-10-25 (owner decision O68): research/2026-10-25-board-reread/ (Vals, AI Coding Daily with hidden rows, Bug Hunt at 9089dc5, LiveBench 2.0 release 2026-10-23)",
+          "Kimi K3.1 Pro exhaustive search with open-web queries, 2026-10-25: research/2026-10-25-board-reread/kimi-search.md and kimi-search.json",
+          "Board re-read of 2026-10-30 for the AA Intelligence Index v5 cohort (O132): research/2026-10-30-v5-recapture/third-party/ (Bug Hunt at 1249797, Vals, LiveBench 2.0 release 2026-10-25 (O139), AI Coding Daily with hidden rows, tbench.ai), with Xiaomi's MiMo-V2.6-Flash effort documentation (O140)"
+        ],
+        "candidates": []
+      }
+    },
+    {
+      "modelId": "gpt-6.1-terra-medium",
+      "leaf": "codeMigration",
+      "searchedOn": "2026-10-30",
+      "result": "not found",
+      "searchKind": "O53 track leaf search",
+      "sources": [
+        "https://www.vals.ai/benchmarks/code-migration-v1-1 (benchmark_view JSON, updated 2026-10-28, read 2026-10-30)"
+      ],
+      "notes": "No openai/gpt-6.1-terra row on this board.",
+      "openWeb": {
+        "searchedOn": "2026-10-30",
+        "record": "research/2026-10-23-swe-benchmarks/reports/SWE benchmark candidates.md",
+        "queries": [
+          "Claude deep research, three researchers: research/2026-10-23-swe-benchmarks/research_notes/SWE benchmark candidates/ (owner-named sources, Vals AI, other agentic benchmarks)",
+          "Perplexity Search with Thinking on research/2026-10-23-swe-benchmarks/brief.md: GPT-6.1 Sol, Grok 4.7, Gemini 3.8 Flash (pplx-*.md)",
+          "Coverage capture of every cohort configuration: research/2026-10-23-swe-benchmarks/vals-catalogue-2026-10-23.json and other-coverage-2026-10-23.json (raw pages and JSON in vals-capture/ and other-capture/)",
+          "Check of Epoch MirrorCode, SWE-bench-Live and SWE-PolyBench (report addendum)",
+          "Board re-read of 2026-10-25 (owner decision O68): research/2026-10-25-board-reread/ (Vals, AI Coding Daily with hidden rows, Bug Hunt at 9089dc5, LiveBench 2.0 release 2026-10-23)",
+          "Kimi K3.1 Pro exhaustive search with open-web queries, 2026-10-25: research/2026-10-25-board-reread/kimi-search.md and kimi-search.json",
+          "Board re-read of 2026-10-30 for the AA Intelligence Index v5 cohort (O132): research/2026-10-30-v5-recapture/third-party/ (Bug Hunt at 1249797, Vals, LiveBench 2.0 release 2026-10-25 (O139), AI Coding Daily with hidden rows, tbench.ai), with Xiaomi's MiMo-V2.6-Flash effort documentation (O140)"
+        ],
+        "candidates": []
+      }
+    },
+    {
+      "modelId": "gpt-6.1-terra-high",
+      "leaf": "codeMigration",
+      "searchedOn": "2026-10-30",
+      "result": "not found",
+      "searchKind": "O53 track leaf search",
+      "sources": [
+        "https://www.vals.ai/benchmarks/code-migration-v1-1 (benchmark_view JSON, updated 2026-10-28, read 2026-10-30)"
+      ],
+      "notes": "No openai/gpt-6.1-terra row on this board.",
+      "openWeb": {
+        "searchedOn": "2026-10-30",
+        "record": "research/2026-10-23-swe-benchmarks/reports/SWE benchmark candidates.md",
+        "queries": [
+          "Claude deep research, three researchers: research/2026-10-23-swe-benchmarks/research_notes/SWE benchmark candidates/ (owner-named sources, Vals AI, other agentic benchmarks)",
+          "Perplexity Search with Thinking on research/2026-10-23-swe-benchmarks/brief.md: GPT-6.1 Sol, Grok 4.7, Gemini 3.8 Flash (pplx-*.md)",
+          "Coverage capture of every cohort configuration: research/2026-10-23-swe-benchmarks/vals-catalogue-2026-10-23.json and other-coverage-2026-10-23.json (raw pages and JSON in vals-capture/ and other-capture/)",
+          "Check of Epoch MirrorCode, SWE-bench-Live and SWE-PolyBench (report addendum)",
+          "Board re-read of 2026-10-25 (owner decision O68): research/2026-10-25-board-reread/ (Vals, AI Coding Daily with hidden rows, Bug Hunt at 9089dc5, LiveBench 2.0 release 2026-10-23)",
+          "Kimi K3.1 Pro exhaustive search with open-web queries, 2026-10-25: research/2026-10-25-board-reread/kimi-search.md and kimi-search.json",
+          "Board re-read of 2026-10-30 for the AA Intelligence Index v5 cohort (O132): research/2026-10-30-v5-recapture/third-party/ (Bug Hunt at 1249797, Vals, LiveBench 2.0 release 2026-10-25 (O139), AI Coding Daily with hidden rows, tbench.ai), with Xiaomi's MiMo-V2.6-Flash effort documentation (O140)"
+        ],
+        "candidates": []
+      }
+    },
+    {
+      "modelId": "gpt-6.1-sol-medium",
+      "leaf": "codeMigration",
+      "searchedOn": "2026-10-30",
+      "result": "not found",
+      "searchKind": "O53 track leaf search",
+      "sources": [
+        "https://www.vals.ai/benchmarks/code-migration-v1-1 (benchmark_view JSON, updated 2026-10-28, read 2026-10-30)"
+      ],
+      "notes": "Vals ran this model only at max (77.324), not medium; not transferred.",
+      "openWeb": {
+        "searchedOn": "2026-10-30",
+        "record": "research/2026-10-23-swe-benchmarks/reports/SWE benchmark candidates.md",
+        "queries": [
+          "Claude deep research, three researchers: research/2026-10-23-swe-benchmarks/research_notes/SWE benchmark candidates/ (owner-named sources, Vals AI, other agentic benchmarks)",
+          "Perplexity Search with Thinking on research/2026-10-23-swe-benchmarks/brief.md: GPT-6.1 Sol, Grok 4.7, Gemini 3.8 Flash (pplx-*.md)",
+          "Coverage capture of every cohort configuration: research/2026-10-23-swe-benchmarks/vals-catalogue-2026-10-23.json and other-coverage-2026-10-23.json (raw pages and JSON in vals-capture/ and other-capture/)",
+          "Check of Epoch MirrorCode, SWE-bench-Live and SWE-PolyBench (report addendum)",
+          "Board re-read of 2026-10-25 (owner decision O68): research/2026-10-25-board-reread/ (Vals, AI Coding Daily with hidden rows, Bug Hunt at 9089dc5, LiveBench 2.0 release 2026-10-23)",
+          "Kimi K3.1 Pro exhaustive search with open-web queries, 2026-10-25: research/2026-10-25-board-reread/kimi-search.md and kimi-search.json",
+          "Board re-read of 2026-10-30 for the AA Intelligence Index v5 cohort (O132): research/2026-10-30-v5-recapture/third-party/ (Bug Hunt at 1249797, Vals, LiveBench 2.0 release 2026-10-25 (O139), AI Coding Daily with hidden rows, tbench.ai), with Xiaomi's MiMo-V2.6-Flash effort documentation (O140)"
+        ],
+        "candidates": []
+      }
+    },
+    {
+      "modelId": "gpt-6.1-sol-high",
+      "leaf": "codeMigration",
+      "searchedOn": "2026-10-30",
+      "result": "not found",
+      "searchKind": "O53 track leaf search",
+      "sources": [
+        "https://www.vals.ai/benchmarks/code-migration-v1-1 (benchmark_view JSON, updated 2026-10-28, read 2026-10-30)"
+      ],
+      "notes": "Vals ran this model only at max (77.324), not high; not transferred.",
+      "openWeb": {
+        "searchedOn": "2026-10-30",
+        "record": "research/2026-10-23-swe-benchmarks/reports/SWE benchmark candidates.md",
+        "queries": [
+          "Claude deep research, three researchers: research/2026-10-23-swe-benchmarks/research_notes/SWE benchmark candidates/ (owner-named sources, Vals AI, other agentic benchmarks)",
+          "Perplexity Search with Thinking on research/2026-10-23-swe-benchmarks/brief.md: GPT-6.1 Sol, Grok 4.7, Gemini 3.8 Flash (pplx-*.md)",
+          "Coverage capture of every cohort configuration: research/2026-10-23-swe-benchmarks/vals-catalogue-2026-10-23.json and other-coverage-2026-10-23.json (raw pages and JSON in vals-capture/ and other-capture/)",
+          "Check of Epoch MirrorCode, SWE-bench-Live and SWE-PolyBench (report addendum)",
+          "Board re-read of 2026-10-25 (owner decision O68): research/2026-10-25-board-reread/ (Vals, AI Coding Daily with hidden rows, Bug Hunt at 9089dc5, LiveBench 2.0 release 2026-10-23)",
+          "Kimi K3.1 Pro exhaustive search with open-web queries, 2026-10-25: research/2026-10-25-board-reread/kimi-search.md and kimi-search.json",
+          "Board re-read of 2026-10-30 for the AA Intelligence Index v5 cohort (O132): research/2026-10-30-v5-recapture/third-party/ (Bug Hunt at 1249797, Vals, LiveBench 2.0 release 2026-10-25 (O139), AI Coding Daily with hidden rows, tbench.ai), with Xiaomi's MiMo-V2.6-Flash effort documentation (O140)"
+        ],
+        "candidates": []
+      }
+    },
+    {
+      "modelId": "gpt-6.1-sol-xhigh",
+      "leaf": "codeMigration",
+      "searchedOn": "2026-10-30",
+      "result": "not found",
+      "searchKind": "O53 track leaf search",
+      "sources": [
+        "https://www.vals.ai/benchmarks/code-migration-v1-1 (benchmark_view JSON, updated 2026-10-28, read 2026-10-30)"
+      ],
+      "notes": "Vals ran this model only at max (77.324), not xhigh; not transferred.",
+      "openWeb": {
+        "searchedOn": "2026-10-30",
+        "record": "research/2026-10-23-swe-benchmarks/reports/SWE benchmark candidates.md",
+        "queries": [
+          "Claude deep research, three researchers: research/2026-10-23-swe-benchmarks/research_notes/SWE benchmark candidates/ (owner-named sources, Vals AI, other agentic benchmarks)",
+          "Perplexity Search with Thinking on research/2026-10-23-swe-benchmarks/brief.md: GPT-6.1 Sol, Grok 4.7, Gemini 3.8 Flash (pplx-*.md)",
+          "Coverage capture of every cohort configuration: research/2026-10-23-swe-benchmarks/vals-catalogue-2026-10-23.json and other-coverage-2026-10-23.json (raw pages and JSON in vals-capture/ and other-capture/)",
+          "Check of Epoch MirrorCode, SWE-bench-Live and SWE-PolyBench (report addendum)",
+          "Board re-read of 2026-10-25 (owner decision O68): research/2026-10-25-board-reread/ (Vals, AI Coding Daily with hidden rows, Bug Hunt at 9089dc5, LiveBench 2.0 release 2026-10-23)",
+          "Kimi K3.1 Pro exhaustive search with open-web queries, 2026-10-25: research/2026-10-25-board-reread/kimi-search.md and kimi-search.json",
+          "Board re-read of 2026-10-30 for the AA Intelligence Index v5 cohort (O132): research/2026-10-30-v5-recapture/third-party/ (Bug Hunt at 1249797, Vals, LiveBench 2.0 release 2026-10-25 (O139), AI Coding Daily with hidden rows, tbench.ai), with Xiaomi's MiMo-V2.6-Flash effort documentation (O140)"
+        ],
+        "candidates": []
+      }
+    },
+    {
+      "modelId": "gpt-6-astra-high",
+      "leaf": "codeMigration",
+      "searchedOn": "2026-10-30",
+      "result": "not found",
+      "searchKind": "O53 track leaf search",
+      "sources": [
+        "https://www.vals.ai/benchmarks/code-migration-v1-1 (benchmark_view JSON, updated 2026-10-28, read 2026-10-30)"
+      ],
+      "notes": "Vals ran this model only at max (80.579), not high; not transferred.",
+      "openWeb": {
+        "searchedOn": "2026-10-30",
+        "record": "research/2026-10-23-swe-benchmarks/reports/SWE benchmark candidates.md",
+        "queries": [
+          "Claude deep research, three researchers: research/2026-10-23-swe-benchmarks/research_notes/SWE benchmark candidates/ (owner-named sources, Vals AI, other agentic benchmarks)",
+          "Perplexity Search with Thinking on research/2026-10-23-swe-benchmarks/brief.md: GPT-6.1 Sol, Grok 4.7, Gemini 3.8 Flash (pplx-*.md)",
+          "Coverage capture of every cohort configuration: research/2026-10-23-swe-benchmarks/vals-catalogue-2026-10-23.json and other-coverage-2026-10-23.json (raw pages and JSON in vals-capture/ and other-capture/)",
+          "Check of Epoch MirrorCode, SWE-bench-Live and SWE-PolyBench (report addendum)",
+          "Board re-read of 2026-10-25 (owner decision O68): research/2026-10-25-board-reread/ (Vals, AI Coding Daily with hidden rows, Bug Hunt at 9089dc5, LiveBench 2.0 release 2026-10-23)",
+          "Kimi K3.1 Pro exhaustive search with open-web queries, 2026-10-25: research/2026-10-25-board-reread/kimi-search.md and kimi-search.json",
+          "Board re-read of 2026-10-30 for the AA Intelligence Index v5 cohort (O132): research/2026-10-30-v5-recapture/third-party/ (Bug Hunt at 1249797, Vals, LiveBench 2.0 release 2026-10-25 (O139), AI Coding Daily with hidden rows, tbench.ai), with Xiaomi's MiMo-V2.6-Flash effort documentation (O140)"
+        ],
+        "candidates": []
+      }
+    },
+    {
+      "modelId": "gpt-6-astra-xhigh",
+      "leaf": "codeMigration",
+      "searchedOn": "2026-10-30",
+      "result": "not found",
+      "searchKind": "O53 track leaf search",
+      "sources": [
+        "https://www.vals.ai/benchmarks/code-migration-v1-1 (benchmark_view JSON, updated 2026-10-28, read 2026-10-30)"
+      ],
+      "notes": "Vals ran this model only at max (80.579), not xhigh; not transferred.",
+      "openWeb": {
+        "searchedOn": "2026-10-30",
+        "record": "research/2026-10-23-swe-benchmarks/reports/SWE benchmark candidates.md",
+        "queries": [
+          "Claude deep research, three researchers: research/2026-10-23-swe-benchmarks/research_notes/SWE benchmark candidates/ (owner-named sources, Vals AI, other agentic benchmarks)",
+          "Perplexity Search with Thinking on research/2026-10-23-swe-benchmarks/brief.md: GPT-6.1 Sol, Grok 4.7, Gemini 3.8 Flash (pplx-*.md)",
+          "Coverage capture of every cohort configuration: research/2026-10-23-swe-benchmarks/vals-catalogue-2026-10-23.json and other-coverage-2026-10-23.json (raw pages and JSON in vals-capture/ and other-capture/)",
+          "Check of Epoch MirrorCode, SWE-bench-Live and SWE-PolyBench (report addendum)",
+          "Board re-read of 2026-10-25 (owner decision O68): research/2026-10-25-board-reread/ (Vals, AI Coding Daily with hidden rows, Bug Hunt at 9089dc5, LiveBench 2.0 release 2026-10-23)",
+          "Kimi K3.1 Pro exhaustive search with open-web queries, 2026-10-25: research/2026-10-25-board-reread/kimi-search.md and kimi-search.json",
+          "Board re-read of 2026-10-30 for the AA Intelligence Index v5 cohort (O132): research/2026-10-30-v5-recapture/third-party/ (Bug Hunt at 1249797, Vals, LiveBench 2.0 release 2026-10-25 (O139), AI Coding Daily with hidden rows, tbench.ai), with Xiaomi's MiMo-V2.6-Flash effort documentation (O140)"
+        ],
+        "candidates": []
+      }
+    },
+    {
+      "modelId": "claude-opus-5-5-xhigh",
+      "leaf": "codeMigration",
+      "searchedOn": "2026-10-30",
+      "result": "not found",
+      "searchKind": "O53 track leaf search",
+      "sources": [
+        "https://www.vals.ai/benchmarks/code-migration-v1-1 (benchmark_view JSON, updated 2026-10-28, read 2026-10-30)"
+      ],
+      "notes": "Vals ran this model only at max (81.012), not xhigh; not transferred.",
+      "openWeb": {
+        "searchedOn": "2026-10-30",
+        "record": "research/2026-10-23-swe-benchmarks/reports/SWE benchmark candidates.md",
+        "queries": [
+          "Claude deep research, three researchers: research/2026-10-23-swe-benchmarks/research_notes/SWE benchmark candidates/ (owner-named sources, Vals AI, other agentic benchmarks)",
+          "Perplexity Search with Thinking on research/2026-10-23-swe-benchmarks/brief.md: GPT-6.1 Sol, Grok 4.7, Gemini 3.8 Flash (pplx-*.md)",
+          "Coverage capture of every cohort configuration: research/2026-10-23-swe-benchmarks/vals-catalogue-2026-10-23.json and other-coverage-2026-10-23.json (raw pages and JSON in vals-capture/ and other-capture/)",
+          "Check of Epoch MirrorCode, SWE-bench-Live and SWE-PolyBench (report addendum)",
+          "Board re-read of 2026-10-25 (owner decision O68): research/2026-10-25-board-reread/ (Vals, AI Coding Daily with hidden rows, Bug Hunt at 9089dc5, LiveBench 2.0 release 2026-10-23)",
+          "Kimi K3.1 Pro exhaustive search with open-web queries, 2026-10-25: research/2026-10-25-board-reread/kimi-search.md and kimi-search.json",
+          "Board re-read of 2026-10-30 for the AA Intelligence Index v5 cohort (O132): research/2026-10-30-v5-recapture/third-party/ (Bug Hunt at 1249797, Vals, LiveBench 2.0 release 2026-10-25 (O139), AI Coding Daily with hidden rows, tbench.ai), with Xiaomi's MiMo-V2.6-Flash effort documentation (O140)"
+        ],
+        "candidates": []
+      }
+    },
+    {
+      "modelId": "gemini-4-carbon",
+      "leaf": "codeMigration",
+      "searchedOn": "2026-10-30",
+      "result": "not found",
+      "searchKind": "O53 track leaf search",
+      "sources": [
+        "https://www.vals.ai/benchmarks/code-migration-v1-1 (benchmark_view JSON, updated 2026-10-28, read 2026-10-30)"
+      ],
+      "notes": "No google/gemini-4-carbon row on this board.",
+      "openWeb": {
+        "searchedOn": "2026-10-30",
+        "record": "research/2026-10-23-swe-benchmarks/reports/SWE benchmark candidates.md",
+        "queries": [
+          "Claude deep research, three researchers: research/2026-10-23-swe-benchmarks/research_notes/SWE benchmark candidates/ (owner-named sources, Vals AI, other agentic benchmarks)",
+          "Perplexity Search with Thinking on research/2026-10-23-swe-benchmarks/brief.md: GPT-6.1 Sol, Grok 4.7, Gemini 3.8 Flash (pplx-*.md)",
+          "Coverage capture of every cohort configuration: research/2026-10-23-swe-benchmarks/vals-catalogue-2026-10-23.json and other-coverage-2026-10-23.json (raw pages and JSON in vals-capture/ and other-capture/)",
+          "Check of Epoch MirrorCode, SWE-bench-Live and SWE-PolyBench (report addendum)",
+          "Board re-read of 2026-10-25 (owner decision O68): research/2026-10-25-board-reread/ (Vals, AI Coding Daily with hidden rows, Bug Hunt at 9089dc5, LiveBench 2.0 release 2026-10-23)",
+          "Kimi K3.1 Pro exhaustive search with open-web queries, 2026-10-25: research/2026-10-25-board-reread/kimi-search.md and kimi-search.json",
+          "Board re-read of 2026-10-30 for the AA Intelligence Index v5 cohort (O132): research/2026-10-30-v5-recapture/third-party/ (Bug Hunt at 1249797, Vals, LiveBench 2.0 release 2026-10-25 (O139), AI Coding Daily with hidden rows, tbench.ai), with Xiaomi's MiMo-V2.6-Flash effort documentation (O140)"
+        ],
+        "candidates": []
+      }
+    },
+    {
+      "modelId": "gpt-6-luna-xhigh",
+      "leaf": "codeMigration",
+      "searchedOn": "2026-10-30",
+      "result": "not found",
+      "searchKind": "O53 track leaf search",
+      "sources": [
+        "https://www.vals.ai/benchmarks/code-migration-v1-1 (benchmark_view JSON, updated 2026-10-28, read 2026-10-30)"
+      ],
+      "notes": "Vals ran this model only at max (46.669), not xhigh; not transferred.",
+      "openWeb": {
+        "searchedOn": "2026-10-30",
+        "record": "research/2026-10-23-swe-benchmarks/reports/SWE benchmark candidates.md",
+        "queries": [
+          "Claude deep research, three researchers: research/2026-10-23-swe-benchmarks/research_notes/SWE benchmark candidates/ (owner-named sources, Vals AI, other agentic benchmarks)",
+          "Perplexity Search with Thinking on research/2026-10-23-swe-benchmarks/brief.md: GPT-6.1 Sol, Grok 4.7, Gemini 3.8 Flash (pplx-*.md)",
+          "Coverage capture of every cohort configuration: research/2026-10-23-swe-benchmarks/vals-catalogue-2026-10-23.json and other-coverage-2026-10-23.json (raw pages and JSON in vals-capture/ and other-capture/)",
+          "Check of Epoch MirrorCode, SWE-bench-Live and SWE-PolyBench (report addendum)",
+          "Board re-read of 2026-10-25 (owner decision O68): research/2026-10-25-board-reread/ (Vals, AI Coding Daily with hidden rows, Bug Hunt at 9089dc5, LiveBench 2.0 release 2026-10-23)",
+          "Kimi K3.1 Pro exhaustive search with open-web queries, 2026-10-25: research/2026-10-25-board-reread/kimi-search.md and kimi-search.json",
+          "Board re-read of 2026-10-30 for the AA Intelligence Index v5 cohort (O132): research/2026-10-30-v5-recapture/third-party/ (Bug Hunt at 1249797, Vals, LiveBench 2.0 release 2026-10-25 (O139), AI Coding Daily with hidden rows, tbench.ai), with Xiaomi's MiMo-V2.6-Flash effort documentation (O140)"
+        ],
+        "candidates": []
+      }
+    },
+    {
+      "modelId": "gpt-6.1-sol-low",
+      "leaf": "codeMigration",
+      "searchedOn": "2026-10-30",
+      "result": "not found",
+      "searchKind": "O53 track leaf search",
+      "sources": [
+        "https://www.vals.ai/benchmarks/code-migration-v1-1 (benchmark_view JSON, updated 2026-10-28, read 2026-10-30)"
+      ],
+      "notes": "Vals ran this model only at max (77.324), not low; not transferred.",
+      "openWeb": {
+        "searchedOn": "2026-10-30",
+        "record": "research/2026-10-23-swe-benchmarks/reports/SWE benchmark candidates.md",
+        "queries": [
+          "Claude deep research, three researchers: research/2026-10-23-swe-benchmarks/research_notes/SWE benchmark candidates/ (owner-named sources, Vals AI, other agentic benchmarks)",
+          "Perplexity Search with Thinking on research/2026-10-23-swe-benchmarks/brief.md: GPT-6.1 Sol, Grok 4.7, Gemini 3.8 Flash (pplx-*.md)",
+          "Coverage capture of every cohort configuration: research/2026-10-23-swe-benchmarks/vals-catalogue-2026-10-23.json and other-coverage-2026-10-23.json (raw pages and JSON in vals-capture/ and other-capture/)",
+          "Check of Epoch MirrorCode, SWE-bench-Live and SWE-PolyBench (report addendum)",
+          "Board re-read of 2026-10-25 (owner decision O68): research/2026-10-25-board-reread/ (Vals, AI Coding Daily with hidden rows, Bug Hunt at 9089dc5, LiveBench 2.0 release 2026-10-23)",
+          "Kimi K3.1 Pro exhaustive search with open-web queries, 2026-10-25: research/2026-10-25-board-reread/kimi-search.md and kimi-search.json",
+          "Board re-read of 2026-10-30 for the AA Intelligence Index v5 cohort (O132): research/2026-10-30-v5-recapture/third-party/ (Bug Hunt at 1249797, Vals, LiveBench 2.0 release 2026-10-25 (O139), AI Coding Daily with hidden rows, tbench.ai), with Xiaomi's MiMo-V2.6-Flash effort documentation (O140)"
+        ],
+        "candidates": []
+      }
+    },
+    {
+      "modelId": "gpt-6.1-terra-xhigh",
+      "leaf": "codeMigration",
+      "searchedOn": "2026-10-30",
+      "result": "not found",
+      "searchKind": "O53 track leaf search",
+      "sources": [
+        "https://www.vals.ai/benchmarks/code-migration-v1-1 (benchmark_view JSON, updated 2026-10-28, read 2026-10-30)"
+      ],
+      "notes": "No openai/gpt-6.1-terra row on this board.",
+      "openWeb": {
+        "searchedOn": "2026-10-30",
+        "record": "research/2026-10-23-swe-benchmarks/reports/SWE benchmark candidates.md",
+        "queries": [
+          "Claude deep research, three researchers: research/2026-10-23-swe-benchmarks/research_notes/SWE benchmark candidates/ (owner-named sources, Vals AI, other agentic benchmarks)",
+          "Perplexity Search with Thinking on research/2026-10-23-swe-benchmarks/brief.md: GPT-6.1 Sol, Grok 4.7, Gemini 3.8 Flash (pplx-*.md)",
+          "Coverage capture of every cohort configuration: research/2026-10-23-swe-benchmarks/vals-catalogue-2026-10-23.json and other-coverage-2026-10-23.json (raw pages and JSON in vals-capture/ and other-capture/)",
+          "Check of Epoch MirrorCode, SWE-bench-Live and SWE-PolyBench (report addendum)",
+          "Board re-read of 2026-10-25 (owner decision O68): research/2026-10-25-board-reread/ (Vals, AI Coding Daily with hidden rows, Bug Hunt at 9089dc5, LiveBench 2.0 release 2026-10-23)",
+          "Kimi K3.1 Pro exhaustive search with open-web queries, 2026-10-25: research/2026-10-25-board-reread/kimi-search.md and kimi-search.json",
+          "Board re-read of 2026-10-30 for the AA Intelligence Index v5 cohort (O132): research/2026-10-30-v5-recapture/third-party/ (Bug Hunt at 1249797, Vals, LiveBench 2.0 release 2026-10-25 (O139), AI Coding Daily with hidden rows, tbench.ai), with Xiaomi's MiMo-V2.6-Flash effort documentation (O140)"
+        ],
+        "candidates": []
+      }
+    },
+    {
+      "modelId": "gpt-6.1-terra",
+      "leaf": "codeMigration",
+      "searchedOn": "2026-10-30",
+      "result": "not found",
+      "searchKind": "O53 track leaf search",
+      "sources": [
+        "https://www.vals.ai/benchmarks/code-migration-v1-1 (benchmark_view JSON, updated 2026-10-28, read 2026-10-30)"
+      ],
+      "notes": "No openai/gpt-6.1-terra row on this board.",
+      "openWeb": {
+        "searchedOn": "2026-10-30",
+        "record": "research/2026-10-23-swe-benchmarks/reports/SWE benchmark candidates.md",
+        "queries": [
+          "Claude deep research, three researchers: research/2026-10-23-swe-benchmarks/research_notes/SWE benchmark candidates/ (owner-named sources, Vals AI, other agentic benchmarks)",
+          "Perplexity Search with Thinking on research/2026-10-23-swe-benchmarks/brief.md: GPT-6.1 Sol, Grok 4.7, Gemini 3.8 Flash (pplx-*.md)",
+          "Coverage capture of every cohort configuration: research/2026-10-23-swe-benchmarks/vals-catalogue-2026-10-23.json and other-coverage-2026-10-23.json (raw pages and JSON in vals-capture/ and other-capture/)",
+          "Check of Epoch MirrorCode, SWE-bench-Live and SWE-PolyBench (report addendum)",
+          "Board re-read of 2026-10-25 (owner decision O68): research/2026-10-25-board-reread/ (Vals, AI Coding Daily with hidden rows, Bug Hunt at 9089dc5, LiveBench 2.0 release 2026-10-23)",
+          "Kimi K3.1 Pro exhaustive search with open-web queries, 2026-10-25: research/2026-10-25-board-reread/kimi-search.md and kimi-search.json",
+          "Board re-read of 2026-10-30 for the AA Intelligence Index v5 cohort (O132): research/2026-10-30-v5-recapture/third-party/ (Bug Hunt at 1249797, Vals, LiveBench 2.0 release 2026-10-25 (O139), AI Coding Daily with hidden rows, tbench.ai), with Xiaomi's MiMo-V2.6-Flash effort documentation (O140)"
+        ],
+        "candidates": []
+      }
+    },
+    {
+      "modelId": "claude-opus-5-5-high",
+      "leaf": "codeMigration",
+      "searchedOn": "2026-10-30",
+      "result": "not found",
+      "searchKind": "O53 track leaf search",
+      "sources": [
+        "https://www.vals.ai/benchmarks/code-migration-v1-1 (benchmark_view JSON, updated 2026-10-28, read 2026-10-30)"
+      ],
+      "notes": "Vals ran this model only at max (81.012), not high; not transferred.",
+      "openWeb": {
+        "searchedOn": "2026-10-30",
+        "record": "research/2026-10-23-swe-benchmarks/reports/SWE benchmark candidates.md",
+        "queries": [
+          "Claude deep research, three researchers: research/2026-10-23-swe-benchmarks/research_notes/SWE benchmark candidates/ (owner-named sources, Vals AI, other agentic benchmarks)",
+          "Perplexity Search with Thinking on research/2026-10-23-swe-benchmarks/brief.md: GPT-6.1 Sol, Grok 4.7, Gemini 3.8 Flash (pplx-*.md)",
+          "Coverage capture of every cohort configuration: research/2026-10-23-swe-benchmarks/vals-catalogue-2026-10-23.json and other-coverage-2026-10-23.json (raw pages and JSON in vals-capture/ and other-capture/)",
+          "Check of Epoch MirrorCode, SWE-bench-Live and SWE-PolyBench (report addendum)",
+          "Board re-read of 2026-10-25 (owner decision O68): research/2026-10-25-board-reread/ (Vals, AI Coding Daily with hidden rows, Bug Hunt at 9089dc5, LiveBench 2.0 release 2026-10-23)",
+          "Kimi K3.1 Pro exhaustive search with open-web queries, 2026-10-25: research/2026-10-25-board-reread/kimi-search.md and kimi-search.json",
+          "Board re-read of 2026-10-30 for the AA Intelligence Index v5 cohort (O132): research/2026-10-30-v5-recapture/third-party/ (Bug Hunt at 1249797, Vals, LiveBench 2.0 release 2026-10-25 (O139), AI Coding Daily with hidden rows, tbench.ai), with Xiaomi's MiMo-V2.6-Flash effort documentation (O140)"
+        ],
+        "candidates": []
+      }
+    },
+    {
+      "modelId": "gpt-6-luna-low",
+      "leaf": "livebench2Overall",
+      "searchedOn": "2026-10-30",
+      "result": "not found",
+      "searchKind": "O53 track leaf search",
+      "sources": [
+        "https://livebench.ai/data/20261025/table.csv and the site bundle's model metadata (release 2026-10-25, read 2026-10-30; O67, O139)"
+      ],
+      "notes": "LiveBench 2.0 has gpt-6-luna at max only (Overall 64.59); not transferred.",
+      "openWeb": {
+        "searchedOn": "2026-10-30",
+        "record": "research/2026-10-23-swe-benchmarks/reports/SWE benchmark candidates.md",
+        "queries": [
+          "Claude deep research, three researchers: research/2026-10-23-swe-benchmarks/research_notes/SWE benchmark candidates/ (owner-named sources, Vals AI, other agentic benchmarks)",
+          "Perplexity Search with Thinking on research/2026-10-23-swe-benchmarks/brief.md: GPT-6.1 Sol, Grok 4.7, Gemini 3.8 Flash (pplx-*.md)",
+          "Coverage capture of every cohort configuration: research/2026-10-23-swe-benchmarks/vals-catalogue-2026-10-23.json and other-coverage-2026-10-23.json (raw pages and JSON in vals-capture/ and other-capture/)",
+          "Check of Epoch MirrorCode, SWE-bench-Live and SWE-PolyBench (report addendum)",
+          "Board re-read of 2026-10-25 (owner decision O68): research/2026-10-25-board-reread/ (Vals, AI Coding Daily with hidden rows, Bug Hunt at 9089dc5, LiveBench 2.0 release 2026-10-23)",
+          "Kimi K3.1 Pro exhaustive search with open-web queries, 2026-10-25: research/2026-10-25-board-reread/kimi-search.md and kimi-search.json",
+          "Board re-read of 2026-10-30 for the AA Intelligence Index v5 cohort (O132): research/2026-10-30-v5-recapture/third-party/ (Bug Hunt at 1249797, Vals, LiveBench 2.0 release 2026-10-25 (O139), AI Coding Daily with hidden rows, tbench.ai), with Xiaomi's MiMo-V2.6-Flash effort documentation (O140)"
+        ],
+        "candidates": []
+      }
+    },
+    {
+      "modelId": "gpt-6-luna-medium",
+      "leaf": "livebench2Overall",
+      "searchedOn": "2026-10-30",
+      "result": "not found",
+      "searchKind": "O53 track leaf search",
+      "sources": [
+        "https://livebench.ai/data/20261025/table.csv and the site bundle's model metadata (release 2026-10-25, read 2026-10-30; O67, O139)"
+      ],
+      "notes": "LiveBench 2.0 has gpt-6-luna at max only (Overall 64.59); not transferred.",
+      "openWeb": {
+        "searchedOn": "2026-10-30",
+        "record": "research/2026-10-23-swe-benchmarks/reports/SWE benchmark candidates.md",
+        "queries": [
+          "Claude deep research, three researchers: research/2026-10-23-swe-benchmarks/research_notes/SWE benchmark candidates/ (owner-named sources, Vals AI, other agentic benchmarks)",
+          "Perplexity Search with Thinking on research/2026-10-23-swe-benchmarks/brief.md: GPT-6.1 Sol, Grok 4.7, Gemini 3.8 Flash (pplx-*.md)",
+          "Coverage capture of every cohort configuration: research/2026-10-23-swe-benchmarks/vals-catalogue-2026-10-23.json and other-coverage-2026-10-23.json (raw pages and JSON in vals-capture/ and other-capture/)",
+          "Check of Epoch MirrorCode, SWE-bench-Live and SWE-PolyBench (report addendum)",
+          "Board re-read of 2026-10-25 (owner decision O68): research/2026-10-25-board-reread/ (Vals, AI Coding Daily with hidden rows, Bug Hunt at 9089dc5, LiveBench 2.0 release 2026-10-23)",
+          "Kimi K3.1 Pro exhaustive search with open-web queries, 2026-10-25: research/2026-10-25-board-reread/kimi-search.md and kimi-search.json",
+          "Board re-read of 2026-10-30 for the AA Intelligence Index v5 cohort (O132): research/2026-10-30-v5-recapture/third-party/ (Bug Hunt at 1249797, Vals, LiveBench 2.0 release 2026-10-25 (O139), AI Coding Daily with hidden rows, tbench.ai), with Xiaomi's MiMo-V2.6-Flash effort documentation (O140)"
+        ],
+        "candidates": []
+      }
+    },
+    {
+      "modelId": "claude-haiku-5-5-low",
+      "leaf": "livebench2Overall",
+      "searchedOn": "2026-10-30",
+      "result": "not found",
+      "searchKind": "O53 track leaf search",
+      "sources": [
+        "https://livebench.ai/data/20261025/table.csv and the site bundle's model metadata (release 2026-10-25, read 2026-10-30; O67, O139)"
+      ],
+      "notes": "LiveBench 2.0 has claude-haiku-5.5 at max only (Overall 69.85); not transferred.",
+      "openWeb": {
+        "searchedOn": "2026-10-30",
+        "record": "research/2026-10-23-swe-benchmarks/reports/SWE benchmark candidates.md",
+        "queries": [
+          "Claude deep research, three researchers: research/2026-10-23-swe-benchmarks/research_notes/SWE benchmark candidates/ (owner-named sources, Vals AI, other agentic benchmarks)",
+          "Perplexity Search with Thinking on research/2026-10-23-swe-benchmarks/brief.md: GPT-6.1 Sol, Grok 4.7, Gemini 3.8 Flash (pplx-*.md)",
+          "Coverage capture of every cohort configuration: research/2026-10-23-swe-benchmarks/vals-catalogue-2026-10-23.json and other-coverage-2026-10-23.json (raw pages and JSON in vals-capture/ and other-capture/)",
+          "Check of Epoch MirrorCode, SWE-bench-Live and SWE-PolyBench (report addendum)",
+          "Board re-read of 2026-10-25 (owner decision O68): research/2026-10-25-board-reread/ (Vals, AI Coding Daily with hidden rows, Bug Hunt at 9089dc5, LiveBench 2.0 release 2026-10-23)",
+          "Kimi K3.1 Pro exhaustive search with open-web queries, 2026-10-25: research/2026-10-25-board-reread/kimi-search.md and kimi-search.json",
+          "Board re-read of 2026-10-30 for the AA Intelligence Index v5 cohort (O132): research/2026-10-30-v5-recapture/third-party/ (Bug Hunt at 1249797, Vals, LiveBench 2.0 release 2026-10-25 (O139), AI Coding Daily with hidden rows, tbench.ai), with Xiaomi's MiMo-V2.6-Flash effort documentation (O140)"
+        ],
+        "candidates": []
+      }
+    },
+    {
+      "modelId": "gpt-6-luna-high",
+      "leaf": "livebench2Overall",
+      "searchedOn": "2026-10-30",
+      "result": "not found",
+      "searchKind": "O53 track leaf search",
+      "sources": [
+        "https://livebench.ai/data/20261025/table.csv and the site bundle's model metadata (release 2026-10-25, read 2026-10-30; O67, O139)"
+      ],
+      "notes": "LiveBench 2.0 has gpt-6-luna at max only (Overall 64.59); not transferred.",
+      "openWeb": {
+        "searchedOn": "2026-10-30",
+        "record": "research/2026-10-23-swe-benchmarks/reports/SWE benchmark candidates.md",
+        "queries": [
+          "Claude deep research, three researchers: research/2026-10-23-swe-benchmarks/research_notes/SWE benchmark candidates/ (owner-named sources, Vals AI, other agentic benchmarks)",
+          "Perplexity Search with Thinking on research/2026-10-23-swe-benchmarks/brief.md: GPT-6.1 Sol, Grok 4.7, Gemini 3.8 Flash (pplx-*.md)",
+          "Coverage capture of every cohort configuration: research/2026-10-23-swe-benchmarks/vals-catalogue-2026-10-23.json and other-coverage-2026-10-23.json (raw pages and JSON in vals-capture/ and other-capture/)",
+          "Check of Epoch MirrorCode, SWE-bench-Live and SWE-PolyBench (report addendum)",
+          "Board re-read of 2026-10-25 (owner decision O68): research/2026-10-25-board-reread/ (Vals, AI Coding Daily with hidden rows, Bug Hunt at 9089dc5, LiveBench 2.0 release 2026-10-23)",
+          "Kimi K3.1 Pro exhaustive search with open-web queries, 2026-10-25: research/2026-10-25-board-reread/kimi-search.md and kimi-search.json",
+          "Board re-read of 2026-10-30 for the AA Intelligence Index v5 cohort (O132): research/2026-10-30-v5-recapture/third-party/ (Bug Hunt at 1249797, Vals, LiveBench 2.0 release 2026-10-25 (O139), AI Coding Daily with hidden rows, tbench.ai), with Xiaomi's MiMo-V2.6-Flash effort documentation (O140)"
+        ],
+        "candidates": []
+      }
+    },
+    {
+      "modelId": "claude-haiku-5-5-medium",
+      "leaf": "livebench2Overall",
+      "searchedOn": "2026-10-30",
+      "result": "not found",
+      "searchKind": "O53 track leaf search",
+      "sources": [
+        "https://livebench.ai/data/20261025/table.csv and the site bundle's model metadata (release 2026-10-25, read 2026-10-30; O67, O139)"
+      ],
+      "notes": "LiveBench 2.0 has claude-haiku-5.5 at max only (Overall 69.85); not transferred.",
+      "openWeb": {
+        "searchedOn": "2026-10-30",
+        "record": "research/2026-10-23-swe-benchmarks/reports/SWE benchmark candidates.md",
+        "queries": [
+          "Claude deep research, three researchers: research/2026-10-23-swe-benchmarks/research_notes/SWE benchmark candidates/ (owner-named sources, Vals AI, other agentic benchmarks)",
+          "Perplexity Search with Thinking on research/2026-10-23-swe-benchmarks/brief.md: GPT-6.1 Sol, Grok 4.7, Gemini 3.8 Flash (pplx-*.md)",
+          "Coverage capture of every cohort configuration: research/2026-10-23-swe-benchmarks/vals-catalogue-2026-10-23.json and other-coverage-2026-10-23.json (raw pages and JSON in vals-capture/ and other-capture/)",
+          "Check of Epoch MirrorCode, SWE-bench-Live and SWE-PolyBench (report addendum)",
+          "Board re-read of 2026-10-25 (owner decision O68): research/2026-10-25-board-reread/ (Vals, AI Coding Daily with hidden rows, Bug Hunt at 9089dc5, LiveBench 2.0 release 2026-10-23)",
+          "Kimi K3.1 Pro exhaustive search with open-web queries, 2026-10-25: research/2026-10-25-board-reread/kimi-search.md and kimi-search.json",
+          "Board re-read of 2026-10-30 for the AA Intelligence Index v5 cohort (O132): research/2026-10-30-v5-recapture/third-party/ (Bug Hunt at 1249797, Vals, LiveBench 2.0 release 2026-10-25 (O139), AI Coding Daily with hidden rows, tbench.ai), with Xiaomi's MiMo-V2.6-Flash effort documentation (O140)"
+        ],
+        "candidates": []
+      }
+    },
+    {
+      "modelId": "mimo-v2-6-flash",
+      "leaf": "livebench2Overall",
+      "searchedOn": "2026-10-30",
+      "result": "not found",
+      "searchKind": "O53 track leaf search",
+      "sources": [
+        "https://livebench.ai/data/20261025/table.csv and the site bundle's model metadata (release 2026-10-25, read 2026-10-30; O67, O139)"
+      ],
+      "notes": "No mimo-v2.6-flash row in release 20261025 (nor in the site's model metadata).",
+      "openWeb": {
+        "searchedOn": "2026-10-30",
+        "record": "research/2026-10-23-swe-benchmarks/reports/SWE benchmark candidates.md",
+        "queries": [
+          "Claude deep research, three researchers: research/2026-10-23-swe-benchmarks/research_notes/SWE benchmark candidates/ (owner-named sources, Vals AI, other agentic benchmarks)",
+          "Perplexity Search with Thinking on research/2026-10-23-swe-benchmarks/brief.md: GPT-6.1 Sol, Grok 4.7, Gemini 3.8 Flash (pplx-*.md)",
+          "Coverage capture of every cohort configuration: research/2026-10-23-swe-benchmarks/vals-catalogue-2026-10-23.json and other-coverage-2026-10-23.json (raw pages and JSON in vals-capture/ and other-capture/)",
+          "Check of Epoch MirrorCode, SWE-bench-Live and SWE-PolyBench (report addendum)",
+          "Board re-read of 2026-10-25 (owner decision O68): research/2026-10-25-board-reread/ (Vals, AI Coding Daily with hidden rows, Bug Hunt at 9089dc5, LiveBench 2.0 release 2026-10-23)",
+          "Kimi K3.1 Pro exhaustive search with open-web queries, 2026-10-25: research/2026-10-25-board-reread/kimi-search.md and kimi-search.json",
+          "Board re-read of 2026-10-30 for the AA Intelligence Index v5 cohort (O132): research/2026-10-30-v5-recapture/third-party/ (Bug Hunt at 1249797, Vals, LiveBench 2.0 release 2026-10-25 (O139), AI Coding Daily with hidden rows, tbench.ai), with Xiaomi's MiMo-V2.6-Flash effort documentation (O140)"
+        ],
+        "candidates": []
+      }
+    },
+    {
+      "modelId": "gpt-6.1-terra-low",
+      "leaf": "livebench2Overall",
+      "searchedOn": "2026-10-30",
+      "result": "not found",
+      "searchKind": "O53 track leaf search",
+      "sources": [
+        "https://livebench.ai/data/20261025/table.csv and the site bundle's model metadata (release 2026-10-25, read 2026-10-30; O67, O139)"
+      ],
+      "notes": "LiveBench 2.0 has gpt-6.1-terra at max only (Overall 77.79); not transferred.",
+      "openWeb": {
+        "searchedOn": "2026-10-30",
+        "record": "research/2026-10-23-swe-benchmarks/reports/SWE benchmark candidates.md",
+        "queries": [
+          "Claude deep research, three researchers: research/2026-10-23-swe-benchmarks/research_notes/SWE benchmark candidates/ (owner-named sources, Vals AI, other agentic benchmarks)",
+          "Perplexity Search with Thinking on research/2026-10-23-swe-benchmarks/brief.md: GPT-6.1 Sol, Grok 4.7, Gemini 3.8 Flash (pplx-*.md)",
+          "Coverage capture of every cohort configuration: research/2026-10-23-swe-benchmarks/vals-catalogue-2026-10-23.json and other-coverage-2026-10-23.json (raw pages and JSON in vals-capture/ and other-capture/)",
+          "Check of Epoch MirrorCode, SWE-bench-Live and SWE-PolyBench (report addendum)",
+          "Board re-read of 2026-10-25 (owner decision O68): research/2026-10-25-board-reread/ (Vals, AI Coding Daily with hidden rows, Bug Hunt at 9089dc5, LiveBench 2.0 release 2026-10-23)",
+          "Kimi K3.1 Pro exhaustive search with open-web queries, 2026-10-25: research/2026-10-25-board-reread/kimi-search.md and kimi-search.json",
+          "Board re-read of 2026-10-30 for the AA Intelligence Index v5 cohort (O132): research/2026-10-30-v5-recapture/third-party/ (Bug Hunt at 1249797, Vals, LiveBench 2.0 release 2026-10-25 (O139), AI Coding Daily with hidden rows, tbench.ai), with Xiaomi's MiMo-V2.6-Flash effort documentation (O140)"
+        ],
+        "candidates": []
+      }
+    },
+    {
+      "modelId": "claude-haiku-5-5-high",
+      "leaf": "livebench2Overall",
+      "searchedOn": "2026-10-30",
+      "result": "not found",
+      "searchKind": "O53 track leaf search",
+      "sources": [
+        "https://livebench.ai/data/20261025/table.csv and the site bundle's model metadata (release 2026-10-25, read 2026-10-30; O67, O139)"
+      ],
+      "notes": "LiveBench 2.0 has claude-haiku-5.5 at max only (Overall 69.85); not transferred.",
+      "openWeb": {
+        "searchedOn": "2026-10-30",
+        "record": "research/2026-10-23-swe-benchmarks/reports/SWE benchmark candidates.md",
+        "queries": [
+          "Claude deep research, three researchers: research/2026-10-23-swe-benchmarks/research_notes/SWE benchmark candidates/ (owner-named sources, Vals AI, other agentic benchmarks)",
+          "Perplexity Search with Thinking on research/2026-10-23-swe-benchmarks/brief.md: GPT-6.1 Sol, Grok 4.7, Gemini 3.8 Flash (pplx-*.md)",
+          "Coverage capture of every cohort configuration: research/2026-10-23-swe-benchmarks/vals-catalogue-2026-10-23.json and other-coverage-2026-10-23.json (raw pages and JSON in vals-capture/ and other-capture/)",
+          "Check of Epoch MirrorCode, SWE-bench-Live and SWE-PolyBench (report addendum)",
+          "Board re-read of 2026-10-25 (owner decision O68): research/2026-10-25-board-reread/ (Vals, AI Coding Daily with hidden rows, Bug Hunt at 9089dc5, LiveBench 2.0 release 2026-10-23)",
+          "Kimi K3.1 Pro exhaustive search with open-web queries, 2026-10-25: research/2026-10-25-board-reread/kimi-search.md and kimi-search.json",
+          "Board re-read of 2026-10-30 for the AA Intelligence Index v5 cohort (O132): research/2026-10-30-v5-recapture/third-party/ (Bug Hunt at 1249797, Vals, LiveBench 2.0 release 2026-10-25 (O139), AI Coding Daily with hidden rows, tbench.ai), with Xiaomi's MiMo-V2.6-Flash effort documentation (O140)"
+        ],
+        "candidates": []
+      }
+    },
+    {
+      "modelId": "gpt-6.1-terra-medium",
+      "leaf": "livebench2Overall",
+      "searchedOn": "2026-10-30",
+      "result": "not found",
+      "searchKind": "O53 track leaf search",
+      "sources": [
+        "https://livebench.ai/data/20261025/table.csv and the site bundle's model metadata (release 2026-10-25, read 2026-10-30; O67, O139)"
+      ],
+      "notes": "LiveBench 2.0 has gpt-6.1-terra at max only (Overall 77.79); not transferred.",
+      "openWeb": {
+        "searchedOn": "2026-10-30",
+        "record": "research/2026-10-23-swe-benchmarks/reports/SWE benchmark candidates.md",
+        "queries": [
+          "Claude deep research, three researchers: research/2026-10-23-swe-benchmarks/research_notes/SWE benchmark candidates/ (owner-named sources, Vals AI, other agentic benchmarks)",
+          "Perplexity Search with Thinking on research/2026-10-23-swe-benchmarks/brief.md: GPT-6.1 Sol, Grok 4.7, Gemini 3.8 Flash (pplx-*.md)",
+          "Coverage capture of every cohort configuration: research/2026-10-23-swe-benchmarks/vals-catalogue-2026-10-23.json and other-coverage-2026-10-23.json (raw pages and JSON in vals-capture/ and other-capture/)",
+          "Check of Epoch MirrorCode, SWE-bench-Live and SWE-PolyBench (report addendum)",
+          "Board re-read of 2026-10-25 (owner decision O68): research/2026-10-25-board-reread/ (Vals, AI Coding Daily with hidden rows, Bug Hunt at 9089dc5, LiveBench 2.0 release 2026-10-23)",
+          "Kimi K3.1 Pro exhaustive search with open-web queries, 2026-10-25: research/2026-10-25-board-reread/kimi-search.md and kimi-search.json",
+          "Board re-read of 2026-10-30 for the AA Intelligence Index v5 cohort (O132): research/2026-10-30-v5-recapture/third-party/ (Bug Hunt at 1249797, Vals, LiveBench 2.0 release 2026-10-25 (O139), AI Coding Daily with hidden rows, tbench.ai), with Xiaomi's MiMo-V2.6-Flash effort documentation (O140)"
+        ],
+        "candidates": []
+      }
+    },
+    {
+      "modelId": "gpt-6.1-terra-high",
+      "leaf": "livebench2Overall",
+      "searchedOn": "2026-10-30",
+      "result": "not found",
+      "searchKind": "O53 track leaf search",
+      "sources": [
+        "https://livebench.ai/data/20261025/table.csv and the site bundle's model metadata (release 2026-10-25, read 2026-10-30; O67, O139)"
+      ],
+      "notes": "LiveBench 2.0 has gpt-6.1-terra at max only (Overall 77.79); not transferred.",
+      "openWeb": {
+        "searchedOn": "2026-10-30",
+        "record": "research/2026-10-23-swe-benchmarks/reports/SWE benchmark candidates.md",
+        "queries": [
+          "Claude deep research, three researchers: research/2026-10-23-swe-benchmarks/research_notes/SWE benchmark candidates/ (owner-named sources, Vals AI, other agentic benchmarks)",
+          "Perplexity Search with Thinking on research/2026-10-23-swe-benchmarks/brief.md: GPT-6.1 Sol, Grok 4.7, Gemini 3.8 Flash (pplx-*.md)",
+          "Coverage capture of every cohort configuration: research/2026-10-23-swe-benchmarks/vals-catalogue-2026-10-23.json and other-coverage-2026-10-23.json (raw pages and JSON in vals-capture/ and other-capture/)",
+          "Check of Epoch MirrorCode, SWE-bench-Live and SWE-PolyBench (report addendum)",
+          "Board re-read of 2026-10-25 (owner decision O68): research/2026-10-25-board-reread/ (Vals, AI Coding Daily with hidden rows, Bug Hunt at 9089dc5, LiveBench 2.0 release 2026-10-23)",
+          "Kimi K3.1 Pro exhaustive search with open-web queries, 2026-10-25: research/2026-10-25-board-reread/kimi-search.md and kimi-search.json",
+          "Board re-read of 2026-10-30 for the AA Intelligence Index v5 cohort (O132): research/2026-10-30-v5-recapture/third-party/ (Bug Hunt at 1249797, Vals, LiveBench 2.0 release 2026-10-25 (O139), AI Coding Daily with hidden rows, tbench.ai), with Xiaomi's MiMo-V2.6-Flash effort documentation (O140)"
+        ],
+        "candidates": []
+      }
+    },
+    {
+      "modelId": "gpt-6.1-sol-medium",
+      "leaf": "livebench2Overall",
+      "searchedOn": "2026-10-30",
+      "result": "not found",
+      "searchKind": "O53 track leaf search",
+      "sources": [
+        "https://livebench.ai/data/20261025/table.csv and the site bundle's model metadata (release 2026-10-25, read 2026-10-30; O67, O139)"
+      ],
+      "notes": "LiveBench 2.0 has gpt-6.1-sol at max only (Overall 84.07); not transferred.",
+      "openWeb": {
+        "searchedOn": "2026-10-30",
+        "record": "research/2026-10-23-swe-benchmarks/reports/SWE benchmark candidates.md",
+        "queries": [
+          "Claude deep research, three researchers: research/2026-10-23-swe-benchmarks/research_notes/SWE benchmark candidates/ (owner-named sources, Vals AI, other agentic benchmarks)",
+          "Perplexity Search with Thinking on research/2026-10-23-swe-benchmarks/brief.md: GPT-6.1 Sol, Grok 4.7, Gemini 3.8 Flash (pplx-*.md)",
+          "Coverage capture of every cohort configuration: research/2026-10-23-swe-benchmarks/vals-catalogue-2026-10-23.json and other-coverage-2026-10-23.json (raw pages and JSON in vals-capture/ and other-capture/)",
+          "Check of Epoch MirrorCode, SWE-bench-Live and SWE-PolyBench (report addendum)",
+          "Board re-read of 2026-10-25 (owner decision O68): research/2026-10-25-board-reread/ (Vals, AI Coding Daily with hidden rows, Bug Hunt at 9089dc5, LiveBench 2.0 release 2026-10-23)",
+          "Kimi K3.1 Pro exhaustive search with open-web queries, 2026-10-25: research/2026-10-25-board-reread/kimi-search.md and kimi-search.json",
+          "Board re-read of 2026-10-30 for the AA Intelligence Index v5 cohort (O132): research/2026-10-30-v5-recapture/third-party/ (Bug Hunt at 1249797, Vals, LiveBench 2.0 release 2026-10-25 (O139), AI Coding Daily with hidden rows, tbench.ai), with Xiaomi's MiMo-V2.6-Flash effort documentation (O140)"
+        ],
+        "candidates": []
+      }
+    },
+    {
+      "modelId": "gpt-6.1-sol-high",
+      "leaf": "livebench2Overall",
+      "searchedOn": "2026-10-30",
+      "result": "not found",
+      "searchKind": "O53 track leaf search",
+      "sources": [
+        "https://livebench.ai/data/20261025/table.csv and the site bundle's model metadata (release 2026-10-25, read 2026-10-30; O67, O139)"
+      ],
+      "notes": "LiveBench 2.0 has gpt-6.1-sol at max only (Overall 84.07); not transferred.",
+      "openWeb": {
+        "searchedOn": "2026-10-30",
+        "record": "research/2026-10-23-swe-benchmarks/reports/SWE benchmark candidates.md",
+        "queries": [
+          "Claude deep research, three researchers: research/2026-10-23-swe-benchmarks/research_notes/SWE benchmark candidates/ (owner-named sources, Vals AI, other agentic benchmarks)",
+          "Perplexity Search with Thinking on research/2026-10-23-swe-benchmarks/brief.md: GPT-6.1 Sol, Grok 4.7, Gemini 3.8 Flash (pplx-*.md)",
+          "Coverage capture of every cohort configuration: research/2026-10-23-swe-benchmarks/vals-catalogue-2026-10-23.json and other-coverage-2026-10-23.json (raw pages and JSON in vals-capture/ and other-capture/)",
+          "Check of Epoch MirrorCode, SWE-bench-Live and SWE-PolyBench (report addendum)",
+          "Board re-read of 2026-10-25 (owner decision O68): research/2026-10-25-board-reread/ (Vals, AI Coding Daily with hidden rows, Bug Hunt at 9089dc5, LiveBench 2.0 release 2026-10-23)",
+          "Kimi K3.1 Pro exhaustive search with open-web queries, 2026-10-25: research/2026-10-25-board-reread/kimi-search.md and kimi-search.json",
+          "Board re-read of 2026-10-30 for the AA Intelligence Index v5 cohort (O132): research/2026-10-30-v5-recapture/third-party/ (Bug Hunt at 1249797, Vals, LiveBench 2.0 release 2026-10-25 (O139), AI Coding Daily with hidden rows, tbench.ai), with Xiaomi's MiMo-V2.6-Flash effort documentation (O140)"
+        ],
+        "candidates": []
+      }
+    },
+    {
+      "modelId": "gpt-6.1-sol-xhigh",
+      "leaf": "livebench2Overall",
+      "searchedOn": "2026-10-30",
+      "result": "not found",
+      "searchKind": "O53 track leaf search",
+      "sources": [
+        "https://livebench.ai/data/20261025/table.csv and the site bundle's model metadata (release 2026-10-25, read 2026-10-30; O67, O139)"
+      ],
+      "notes": "LiveBench 2.0 has gpt-6.1-sol at max only (Overall 84.07); not transferred.",
+      "openWeb": {
+        "searchedOn": "2026-10-30",
+        "record": "research/2026-10-23-swe-benchmarks/reports/SWE benchmark candidates.md",
+        "queries": [
+          "Claude deep research, three researchers: research/2026-10-23-swe-benchmarks/research_notes/SWE benchmark candidates/ (owner-named sources, Vals AI, other agentic benchmarks)",
+          "Perplexity Search with Thinking on research/2026-10-23-swe-benchmarks/brief.md: GPT-6.1 Sol, Grok 4.7, Gemini 3.8 Flash (pplx-*.md)",
+          "Coverage capture of every cohort configuration: research/2026-10-23-swe-benchmarks/vals-catalogue-2026-10-23.json and other-coverage-2026-10-23.json (raw pages and JSON in vals-capture/ and other-capture/)",
+          "Check of Epoch MirrorCode, SWE-bench-Live and SWE-PolyBench (report addendum)",
+          "Board re-read of 2026-10-25 (owner decision O68): research/2026-10-25-board-reread/ (Vals, AI Coding Daily with hidden rows, Bug Hunt at 9089dc5, LiveBench 2.0 release 2026-10-23)",
+          "Kimi K3.1 Pro exhaustive search with open-web queries, 2026-10-25: research/2026-10-25-board-reread/kimi-search.md and kimi-search.json",
+          "Board re-read of 2026-10-30 for the AA Intelligence Index v5 cohort (O132): research/2026-10-30-v5-recapture/third-party/ (Bug Hunt at 1249797, Vals, LiveBench 2.0 release 2026-10-25 (O139), AI Coding Daily with hidden rows, tbench.ai), with Xiaomi's MiMo-V2.6-Flash effort documentation (O140)"
+        ],
+        "candidates": []
+      }
+    },
+    {
+      "modelId": "gpt-6-astra-high",
+      "leaf": "livebench2Overall",
+      "searchedOn": "2026-10-30",
+      "result": "not found",
+      "searchKind": "O53 track leaf search",
+      "sources": [
+        "https://livebench.ai/data/20261025/table.csv and the site bundle's model metadata (release 2026-10-25, read 2026-10-30; O67, O139)"
+      ],
+      "notes": "LiveBench 2.0 has gpt-6-astra at max only (Overall 85.64); not transferred.",
+      "openWeb": {
+        "searchedOn": "2026-10-30",
+        "record": "research/2026-10-23-swe-benchmarks/reports/SWE benchmark candidates.md",
+        "queries": [
+          "Claude deep research, three researchers: research/2026-10-23-swe-benchmarks/research_notes/SWE benchmark candidates/ (owner-named sources, Vals AI, other agentic benchmarks)",
+          "Perplexity Search with Thinking on research/2026-10-23-swe-benchmarks/brief.md: GPT-6.1 Sol, Grok 4.7, Gemini 3.8 Flash (pplx-*.md)",
+          "Coverage capture of every cohort configuration: research/2026-10-23-swe-benchmarks/vals-catalogue-2026-10-23.json and other-coverage-2026-10-23.json (raw pages and JSON in vals-capture/ and other-capture/)",
+          "Check of Epoch MirrorCode, SWE-bench-Live and SWE-PolyBench (report addendum)",
+          "Board re-read of 2026-10-25 (owner decision O68): research/2026-10-25-board-reread/ (Vals, AI Coding Daily with hidden rows, Bug Hunt at 9089dc5, LiveBench 2.0 release 2026-10-23)",
+          "Kimi K3.1 Pro exhaustive search with open-web queries, 2026-10-25: research/2026-10-25-board-reread/kimi-search.md and kimi-search.json",
+          "Board re-read of 2026-10-30 for the AA Intelligence Index v5 cohort (O132): research/2026-10-30-v5-recapture/third-party/ (Bug Hunt at 1249797, Vals, LiveBench 2.0 release 2026-10-25 (O139), AI Coding Daily with hidden rows, tbench.ai), with Xiaomi's MiMo-V2.6-Flash effort documentation (O140)"
+        ],
+        "candidates": []
+      }
+    },
+    {
+      "modelId": "gpt-6-astra-xhigh",
+      "leaf": "livebench2Overall",
+      "searchedOn": "2026-10-30",
+      "result": "not found",
+      "searchKind": "O53 track leaf search",
+      "sources": [
+        "https://livebench.ai/data/20261025/table.csv and the site bundle's model metadata (release 2026-10-25, read 2026-10-30; O67, O139)"
+      ],
+      "notes": "LiveBench 2.0 has gpt-6-astra at max only (Overall 85.64); not transferred.",
+      "openWeb": {
+        "searchedOn": "2026-10-30",
+        "record": "research/2026-10-23-swe-benchmarks/reports/SWE benchmark candidates.md",
+        "queries": [
+          "Claude deep research, three researchers: research/2026-10-23-swe-benchmarks/research_notes/SWE benchmark candidates/ (owner-named sources, Vals AI, other agentic benchmarks)",
+          "Perplexity Search with Thinking on research/2026-10-23-swe-benchmarks/brief.md: GPT-6.1 Sol, Grok 4.7, Gemini 3.8 Flash (pplx-*.md)",
+          "Coverage capture of every cohort configuration: research/2026-10-23-swe-benchmarks/vals-catalogue-2026-10-23.json and other-coverage-2026-10-23.json (raw pages and JSON in vals-capture/ and other-capture/)",
+          "Check of Epoch MirrorCode, SWE-bench-Live and SWE-PolyBench (report addendum)",
+          "Board re-read of 2026-10-25 (owner decision O68): research/2026-10-25-board-reread/ (Vals, AI Coding Daily with hidden rows, Bug Hunt at 9089dc5, LiveBench 2.0 release 2026-10-23)",
+          "Kimi K3.1 Pro exhaustive search with open-web queries, 2026-10-25: research/2026-10-25-board-reread/kimi-search.md and kimi-search.json",
+          "Board re-read of 2026-10-30 for the AA Intelligence Index v5 cohort (O132): research/2026-10-30-v5-recapture/third-party/ (Bug Hunt at 1249797, Vals, LiveBench 2.0 release 2026-10-25 (O139), AI Coding Daily with hidden rows, tbench.ai), with Xiaomi's MiMo-V2.6-Flash effort documentation (O140)"
+        ],
+        "candidates": []
+      }
+    },
+    {
+      "modelId": "claude-opus-5-5-xhigh",
+      "leaf": "livebench2Overall",
+      "searchedOn": "2026-10-30",
+      "result": "not found",
+      "searchKind": "O53 track leaf search",
+      "sources": [
+        "https://livebench.ai/data/20261025/table.csv and the site bundle's model metadata (release 2026-10-25, read 2026-10-30; O67, O139)"
+      ],
+      "notes": "LiveBench 2.0 has claude-opus-5.5 at max only (Overall 85.14); not transferred.",
+      "openWeb": {
+        "searchedOn": "2026-10-30",
+        "record": "research/2026-10-23-swe-benchmarks/reports/SWE benchmark candidates.md",
+        "queries": [
+          "Claude deep research, three researchers: research/2026-10-23-swe-benchmarks/research_notes/SWE benchmark candidates/ (owner-named sources, Vals AI, other agentic benchmarks)",
+          "Perplexity Search with Thinking on research/2026-10-23-swe-benchmarks/brief.md: GPT-6.1 Sol, Grok 4.7, Gemini 3.8 Flash (pplx-*.md)",
+          "Coverage capture of every cohort configuration: research/2026-10-23-swe-benchmarks/vals-catalogue-2026-10-23.json and other-coverage-2026-10-23.json (raw pages and JSON in vals-capture/ and other-capture/)",
+          "Check of Epoch MirrorCode, SWE-bench-Live and SWE-PolyBench (report addendum)",
+          "Board re-read of 2026-10-25 (owner decision O68): research/2026-10-25-board-reread/ (Vals, AI Coding Daily with hidden rows, Bug Hunt at 9089dc5, LiveBench 2.0 release 2026-10-23)",
+          "Kimi K3.1 Pro exhaustive search with open-web queries, 2026-10-25: research/2026-10-25-board-reread/kimi-search.md and kimi-search.json",
+          "Board re-read of 2026-10-30 for the AA Intelligence Index v5 cohort (O132): research/2026-10-30-v5-recapture/third-party/ (Bug Hunt at 1249797, Vals, LiveBench 2.0 release 2026-10-25 (O139), AI Coding Daily with hidden rows, tbench.ai), with Xiaomi's MiMo-V2.6-Flash effort documentation (O140)"
+        ],
+        "candidates": []
+      }
+    },
+    {
+      "modelId": "gemini-4-carbon",
+      "leaf": "livebench2Overall",
+      "searchedOn": "2026-10-30",
+      "result": "not found",
+      "searchKind": "O53 track leaf search",
+      "sources": [
+        "https://livebench.ai/data/20261025/table.csv and the site bundle's model metadata (release 2026-10-25, read 2026-10-30; O67, O139)"
+      ],
+      "notes": "No gemini-4-carbon row in release 20261025 (nor in the site's model metadata).",
+      "openWeb": {
+        "searchedOn": "2026-10-30",
+        "record": "research/2026-10-23-swe-benchmarks/reports/SWE benchmark candidates.md",
+        "queries": [
+          "Claude deep research, three researchers: research/2026-10-23-swe-benchmarks/research_notes/SWE benchmark candidates/ (owner-named sources, Vals AI, other agentic benchmarks)",
+          "Perplexity Search with Thinking on research/2026-10-23-swe-benchmarks/brief.md: GPT-6.1 Sol, Grok 4.7, Gemini 3.8 Flash (pplx-*.md)",
+          "Coverage capture of every cohort configuration: research/2026-10-23-swe-benchmarks/vals-catalogue-2026-10-23.json and other-coverage-2026-10-23.json (raw pages and JSON in vals-capture/ and other-capture/)",
+          "Check of Epoch MirrorCode, SWE-bench-Live and SWE-PolyBench (report addendum)",
+          "Board re-read of 2026-10-25 (owner decision O68): research/2026-10-25-board-reread/ (Vals, AI Coding Daily with hidden rows, Bug Hunt at 9089dc5, LiveBench 2.0 release 2026-10-23)",
+          "Kimi K3.1 Pro exhaustive search with open-web queries, 2026-10-25: research/2026-10-25-board-reread/kimi-search.md and kimi-search.json",
+          "Board re-read of 2026-10-30 for the AA Intelligence Index v5 cohort (O132): research/2026-10-30-v5-recapture/third-party/ (Bug Hunt at 1249797, Vals, LiveBench 2.0 release 2026-10-25 (O139), AI Coding Daily with hidden rows, tbench.ai), with Xiaomi's MiMo-V2.6-Flash effort documentation (O140)"
+        ],
+        "candidates": []
+      }
+    },
+    {
+      "modelId": "gpt-6-luna-xhigh",
+      "leaf": "livebench2Overall",
+      "searchedOn": "2026-10-30",
+      "result": "not found",
+      "searchKind": "O53 track leaf search",
+      "sources": [
+        "https://livebench.ai/data/20261025/table.csv and the site bundle's model metadata (release 2026-10-25, read 2026-10-30; O67, O139)"
+      ],
+      "notes": "LiveBench 2.0 has gpt-6-luna at max only (Overall 64.59); not transferred.",
+      "openWeb": {
+        "searchedOn": "2026-10-30",
+        "record": "research/2026-10-23-swe-benchmarks/reports/SWE benchmark candidates.md",
+        "queries": [
+          "Claude deep research, three researchers: research/2026-10-23-swe-benchmarks/research_notes/SWE benchmark candidates/ (owner-named sources, Vals AI, other agentic benchmarks)",
+          "Perplexity Search with Thinking on research/2026-10-23-swe-benchmarks/brief.md: GPT-6.1 Sol, Grok 4.7, Gemini 3.8 Flash (pplx-*.md)",
+          "Coverage capture of every cohort configuration: research/2026-10-23-swe-benchmarks/vals-catalogue-2026-10-23.json and other-coverage-2026-10-23.json (raw pages and JSON in vals-capture/ and other-capture/)",
+          "Check of Epoch MirrorCode, SWE-bench-Live and SWE-PolyBench (report addendum)",
+          "Board re-read of 2026-10-25 (owner decision O68): research/2026-10-25-board-reread/ (Vals, AI Coding Daily with hidden rows, Bug Hunt at 9089dc5, LiveBench 2.0 release 2026-10-23)",
+          "Kimi K3.1 Pro exhaustive search with open-web queries, 2026-10-25: research/2026-10-25-board-reread/kimi-search.md and kimi-search.json",
+          "Board re-read of 2026-10-30 for the AA Intelligence Index v5 cohort (O132): research/2026-10-30-v5-recapture/third-party/ (Bug Hunt at 1249797, Vals, LiveBench 2.0 release 2026-10-25 (O139), AI Coding Daily with hidden rows, tbench.ai), with Xiaomi's MiMo-V2.6-Flash effort documentation (O140)"
+        ],
+        "candidates": []
+      }
+    },
+    {
+      "modelId": "gpt-6.1-sol-low",
+      "leaf": "livebench2Overall",
+      "searchedOn": "2026-10-30",
+      "result": "not found",
+      "searchKind": "O53 track leaf search",
+      "sources": [
+        "https://livebench.ai/data/20261025/table.csv and the site bundle's model metadata (release 2026-10-25, read 2026-10-30; O67, O139)"
+      ],
+      "notes": "LiveBench 2.0 has gpt-6.1-sol at max only (Overall 84.07); not transferred.",
+      "openWeb": {
+        "searchedOn": "2026-10-30",
+        "record": "research/2026-10-23-swe-benchmarks/reports/SWE benchmark candidates.md",
+        "queries": [
+          "Claude deep research, three researchers: research/2026-10-23-swe-benchmarks/research_notes/SWE benchmark candidates/ (owner-named sources, Vals AI, other agentic benchmarks)",
+          "Perplexity Search with Thinking on research/2026-10-23-swe-benchmarks/brief.md: GPT-6.1 Sol, Grok 4.7, Gemini 3.8 Flash (pplx-*.md)",
+          "Coverage capture of every cohort configuration: research/2026-10-23-swe-benchmarks/vals-catalogue-2026-10-23.json and other-coverage-2026-10-23.json (raw pages and JSON in vals-capture/ and other-capture/)",
+          "Check of Epoch MirrorCode, SWE-bench-Live and SWE-PolyBench (report addendum)",
+          "Board re-read of 2026-10-25 (owner decision O68): research/2026-10-25-board-reread/ (Vals, AI Coding Daily with hidden rows, Bug Hunt at 9089dc5, LiveBench 2.0 release 2026-10-23)",
+          "Kimi K3.1 Pro exhaustive search with open-web queries, 2026-10-25: research/2026-10-25-board-reread/kimi-search.md and kimi-search.json",
+          "Board re-read of 2026-10-30 for the AA Intelligence Index v5 cohort (O132): research/2026-10-30-v5-recapture/third-party/ (Bug Hunt at 1249797, Vals, LiveBench 2.0 release 2026-10-25 (O139), AI Coding Daily with hidden rows, tbench.ai), with Xiaomi's MiMo-V2.6-Flash effort documentation (O140)"
+        ],
+        "candidates": []
+      }
+    },
+    {
+      "modelId": "gpt-6.1-terra-xhigh",
+      "leaf": "livebench2Overall",
+      "searchedOn": "2026-10-30",
+      "result": "not found",
+      "searchKind": "O53 track leaf search",
+      "sources": [
+        "https://livebench.ai/data/20261025/table.csv and the site bundle's model metadata (release 2026-10-25, read 2026-10-30; O67, O139)"
+      ],
+      "notes": "LiveBench 2.0 has gpt-6.1-terra at max only (Overall 77.79); not transferred.",
+      "openWeb": {
+        "searchedOn": "2026-10-30",
+        "record": "research/2026-10-23-swe-benchmarks/reports/SWE benchmark candidates.md",
+        "queries": [
+          "Claude deep research, three researchers: research/2026-10-23-swe-benchmarks/research_notes/SWE benchmark candidates/ (owner-named sources, Vals AI, other agentic benchmarks)",
+          "Perplexity Search with Thinking on research/2026-10-23-swe-benchmarks/brief.md: GPT-6.1 Sol, Grok 4.7, Gemini 3.8 Flash (pplx-*.md)",
+          "Coverage capture of every cohort configuration: research/2026-10-23-swe-benchmarks/vals-catalogue-2026-10-23.json and other-coverage-2026-10-23.json (raw pages and JSON in vals-capture/ and other-capture/)",
+          "Check of Epoch MirrorCode, SWE-bench-Live and SWE-PolyBench (report addendum)",
+          "Board re-read of 2026-10-25 (owner decision O68): research/2026-10-25-board-reread/ (Vals, AI Coding Daily with hidden rows, Bug Hunt at 9089dc5, LiveBench 2.0 release 2026-10-23)",
+          "Kimi K3.1 Pro exhaustive search with open-web queries, 2026-10-25: research/2026-10-25-board-reread/kimi-search.md and kimi-search.json",
+          "Board re-read of 2026-10-30 for the AA Intelligence Index v5 cohort (O132): research/2026-10-30-v5-recapture/third-party/ (Bug Hunt at 1249797, Vals, LiveBench 2.0 release 2026-10-25 (O139), AI Coding Daily with hidden rows, tbench.ai), with Xiaomi's MiMo-V2.6-Flash effort documentation (O140)"
+        ],
+        "candidates": []
+      }
+    },
+    {
+      "modelId": "claude-opus-5-5-high",
+      "leaf": "livebench2Overall",
+      "searchedOn": "2026-10-30",
+      "result": "not found",
+      "searchKind": "O53 track leaf search",
+      "sources": [
+        "https://livebench.ai/data/20261025/table.csv and the site bundle's model metadata (release 2026-10-25, read 2026-10-30; O67, O139)"
+      ],
+      "notes": "LiveBench 2.0 has claude-opus-5.5 at max only (Overall 85.14); not transferred.",
+      "openWeb": {
+        "searchedOn": "2026-10-30",
+        "record": "research/2026-10-23-swe-benchmarks/reports/SWE benchmark candidates.md",
+        "queries": [
+          "Claude deep research, three researchers: research/2026-10-23-swe-benchmarks/research_notes/SWE benchmark candidates/ (owner-named sources, Vals AI, other agentic benchmarks)",
+          "Perplexity Search with Thinking on research/2026-10-23-swe-benchmarks/brief.md: GPT-6.1 Sol, Grok 4.7, Gemini 3.8 Flash (pplx-*.md)",
+          "Coverage capture of every cohort configuration: research/2026-10-23-swe-benchmarks/vals-catalogue-2026-10-23.json and other-coverage-2026-10-23.json (raw pages and JSON in vals-capture/ and other-capture/)",
+          "Check of Epoch MirrorCode, SWE-bench-Live and SWE-PolyBench (report addendum)",
+          "Board re-read of 2026-10-25 (owner decision O68): research/2026-10-25-board-reread/ (Vals, AI Coding Daily with hidden rows, Bug Hunt at 9089dc5, LiveBench 2.0 release 2026-10-23)",
+          "Kimi K3.1 Pro exhaustive search with open-web queries, 2026-10-25: research/2026-10-25-board-reread/kimi-search.md and kimi-search.json",
+          "Board re-read of 2026-10-30 for the AA Intelligence Index v5 cohort (O132): research/2026-10-30-v5-recapture/third-party/ (Bug Hunt at 1249797, Vals, LiveBench 2.0 release 2026-10-25 (O139), AI Coding Daily with hidden rows, tbench.ai), with Xiaomi's MiMo-V2.6-Flash effort documentation (O140)"
+        ],
+        "candidates": []
+      }
+    },
+    {
+      "modelId": "gpt-6-luna-low",
+      "leaf": "aiCodingDaily",
+      "searchedOn": "2026-10-30",
+      "result": "not found",
+      "searchKind": "O53 track leaf search",
+      "sources": [
+        "https://aicodingdaily.com/leaderboard, every row including hidden older models (updated 2026-10-27, read 2026-10-30)"
+      ],
+      "notes": "Non-matching rows at other efforts: GPT-6-Luna (Max) [Codex CLI, 2026-10-01] = 59.07; GPT-6-Luna (Xhigh) [Codex CLI, 2026-10-01] = 56.4; GPT-6-Luna (High) [Codex CLI, 2026-10-01] = 53.04; GPT-6-Luna (Medium) [Codex CLI, 2026-09-30] = 43.74.",
+      "openWeb": {
+        "searchedOn": "2026-10-30",
+        "record": "research/2026-10-23-swe-benchmarks/reports/SWE benchmark candidates.md",
+        "queries": [
+          "Claude deep research, three researchers: research/2026-10-23-swe-benchmarks/research_notes/SWE benchmark candidates/ (owner-named sources, Vals AI, other agentic benchmarks)",
+          "Perplexity Search with Thinking on research/2026-10-23-swe-benchmarks/brief.md: GPT-6.1 Sol, Grok 4.7, Gemini 3.8 Flash (pplx-*.md)",
+          "Coverage capture of every cohort configuration: research/2026-10-23-swe-benchmarks/vals-catalogue-2026-10-23.json and other-coverage-2026-10-23.json (raw pages and JSON in vals-capture/ and other-capture/)",
+          "Check of Epoch MirrorCode, SWE-bench-Live and SWE-PolyBench (report addendum)",
+          "Board re-read of 2026-10-25 (owner decision O68): research/2026-10-25-board-reread/ (Vals, AI Coding Daily with hidden rows, Bug Hunt at 9089dc5, LiveBench 2.0 release 2026-10-23)",
+          "Kimi K3.1 Pro exhaustive search with open-web queries, 2026-10-25: research/2026-10-25-board-reread/kimi-search.md and kimi-search.json",
+          "Board re-read of 2026-10-30 for the AA Intelligence Index v5 cohort (O132): research/2026-10-30-v5-recapture/third-party/ (Bug Hunt at 1249797, Vals, LiveBench 2.0 release 2026-10-25 (O139), AI Coding Daily with hidden rows, tbench.ai), with Xiaomi's MiMo-V2.6-Flash effort documentation (O140)"
+        ],
+        "candidates": []
+      }
+    },
+    {
+      "modelId": "claude-haiku-5-5-low",
+      "leaf": "aiCodingDaily",
+      "searchedOn": "2026-10-30",
+      "result": "not found",
+      "searchKind": "O53 track leaf search",
+      "sources": [
+        "https://aicodingdaily.com/leaderboard, every row including hidden older models (updated 2026-10-27, read 2026-10-30)"
+      ],
+      "notes": "Non-matching rows at other efforts: Haiku 5.5 (High) [Claude Code, 2026-10-08] = 58.63; Haiku 5.5 (Medium) [Claude Code, 2026-10-08] = 58.2.",
+      "openWeb": {
+        "searchedOn": "2026-10-30",
+        "record": "research/2026-10-23-swe-benchmarks/reports/SWE benchmark candidates.md",
+        "queries": [
+          "Claude deep research, three researchers: research/2026-10-23-swe-benchmarks/research_notes/SWE benchmark candidates/ (owner-named sources, Vals AI, other agentic benchmarks)",
+          "Perplexity Search with Thinking on research/2026-10-23-swe-benchmarks/brief.md: GPT-6.1 Sol, Grok 4.7, Gemini 3.8 Flash (pplx-*.md)",
+          "Coverage capture of every cohort configuration: research/2026-10-23-swe-benchmarks/vals-catalogue-2026-10-23.json and other-coverage-2026-10-23.json (raw pages and JSON in vals-capture/ and other-capture/)",
+          "Check of Epoch MirrorCode, SWE-bench-Live and SWE-PolyBench (report addendum)",
+          "Board re-read of 2026-10-25 (owner decision O68): research/2026-10-25-board-reread/ (Vals, AI Coding Daily with hidden rows, Bug Hunt at 9089dc5, LiveBench 2.0 release 2026-10-23)",
+          "Kimi K3.1 Pro exhaustive search with open-web queries, 2026-10-25: research/2026-10-25-board-reread/kimi-search.md and kimi-search.json",
+          "Board re-read of 2026-10-30 for the AA Intelligence Index v5 cohort (O132): research/2026-10-30-v5-recapture/third-party/ (Bug Hunt at 1249797, Vals, LiveBench 2.0 release 2026-10-25 (O139), AI Coding Daily with hidden rows, tbench.ai), with Xiaomi's MiMo-V2.6-Flash effort documentation (O140)"
+        ],
+        "candidates": []
+      }
+    },
+    {
+      "modelId": "gpt-6.1-terra-low",
+      "leaf": "aiCodingDaily",
+      "searchedOn": "2026-10-30",
+      "result": "not found",
+      "searchKind": "O53 track leaf search",
+      "sources": [
+        "https://aicodingdaily.com/leaderboard, every row including hidden older models (updated 2026-10-27, read 2026-10-30)"
+      ],
+      "notes": "Non-matching rows at other efforts: GPT-6.1-Terra (Max) [Codex CLI, 2026-10-27] = 60.41; GPT-6.1-Terra (Xhigh) [Codex CLI, 2026-10-27] = 57.09; GPT-6.1-Terra (High) [Codex CLI, 2026-10-26] = 54.82; GPT-6.1-Terra (Medium) [Codex CLI, 2026-10-26] = 54.61.",
+      "openWeb": {
+        "searchedOn": "2026-10-30",
+        "record": "research/2026-10-23-swe-benchmarks/reports/SWE benchmark candidates.md",
+        "queries": [
+          "Claude deep research, three researchers: research/2026-10-23-swe-benchmarks/research_notes/SWE benchmark candidates/ (owner-named sources, Vals AI, other agentic benchmarks)",
+          "Perplexity Search with Thinking on research/2026-10-23-swe-benchmarks/brief.md: GPT-6.1 Sol, Grok 4.7, Gemini 3.8 Flash (pplx-*.md)",
+          "Coverage capture of every cohort configuration: research/2026-10-23-swe-benchmarks/vals-catalogue-2026-10-23.json and other-coverage-2026-10-23.json (raw pages and JSON in vals-capture/ and other-capture/)",
+          "Check of Epoch MirrorCode, SWE-bench-Live and SWE-PolyBench (report addendum)",
+          "Board re-read of 2026-10-25 (owner decision O68): research/2026-10-25-board-reread/ (Vals, AI Coding Daily with hidden rows, Bug Hunt at 9089dc5, LiveBench 2.0 release 2026-10-23)",
+          "Kimi K3.1 Pro exhaustive search with open-web queries, 2026-10-25: research/2026-10-25-board-reread/kimi-search.md and kimi-search.json",
+          "Board re-read of 2026-10-30 for the AA Intelligence Index v5 cohort (O132): research/2026-10-30-v5-recapture/third-party/ (Bug Hunt at 1249797, Vals, LiveBench 2.0 release 2026-10-25 (O139), AI Coding Daily with hidden rows, tbench.ai), with Xiaomi's MiMo-V2.6-Flash effort documentation (O140)"
+        ],
+        "candidates": []
+      }
+    },
+    {
+      "modelId": "gpt-6.1-sol-xhigh",
+      "leaf": "aiCodingDaily",
+      "searchedOn": "2026-10-30",
+      "result": "not found",
+      "searchKind": "O53 track leaf search",
+      "sources": [
+        "https://aicodingdaily.com/leaderboard, every row including hidden older models (updated 2026-10-27, read 2026-10-30)"
+      ],
+      "notes": "Non-matching rows at other efforts: GPT-6.1-Sol (High) [Codex CLI, 2026-10-19] = 66; GPT-6.1-Sol (Medium) [Codex CLI, 2026-10-19] = 65.05; GPT-6.1-Sol (Low) [Codex CLI, 2026-10-19] = 61.45.",
+      "openWeb": {
+        "searchedOn": "2026-10-30",
+        "record": "research/2026-10-23-swe-benchmarks/reports/SWE benchmark candidates.md",
+        "queries": [
+          "Claude deep research, three researchers: research/2026-10-23-swe-benchmarks/research_notes/SWE benchmark candidates/ (owner-named sources, Vals AI, other agentic benchmarks)",
+          "Perplexity Search with Thinking on research/2026-10-23-swe-benchmarks/brief.md: GPT-6.1 Sol, Grok 4.7, Gemini 3.8 Flash (pplx-*.md)",
+          "Coverage capture of every cohort configuration: research/2026-10-23-swe-benchmarks/vals-catalogue-2026-10-23.json and other-coverage-2026-10-23.json (raw pages and JSON in vals-capture/ and other-capture/)",
+          "Check of Epoch MirrorCode, SWE-bench-Live and SWE-PolyBench (report addendum)",
+          "Board re-read of 2026-10-25 (owner decision O68): research/2026-10-25-board-reread/ (Vals, AI Coding Daily with hidden rows, Bug Hunt at 9089dc5, LiveBench 2.0 release 2026-10-23)",
+          "Kimi K3.1 Pro exhaustive search with open-web queries, 2026-10-25: research/2026-10-25-board-reread/kimi-search.md and kimi-search.json",
+          "Board re-read of 2026-10-30 for the AA Intelligence Index v5 cohort (O132): research/2026-10-30-v5-recapture/third-party/ (Bug Hunt at 1249797, Vals, LiveBench 2.0 release 2026-10-25 (O139), AI Coding Daily with hidden rows, tbench.ai), with Xiaomi's MiMo-V2.6-Flash effort documentation (O140)"
+        ],
+        "candidates": []
+      }
+    },
+    {
+      "modelId": "gpt-6.1-sol",
+      "leaf": "aiCodingDaily",
+      "searchedOn": "2026-10-30",
+      "result": "not found",
+      "searchKind": "O53 track leaf search",
+      "sources": [
+        "https://aicodingdaily.com/leaderboard, every row including hidden older models (updated 2026-10-27, read 2026-10-30)"
+      ],
+      "notes": "Non-matching rows at other efforts: GPT-6.1-Sol (High) [Codex CLI, 2026-10-19] = 66; GPT-6.1-Sol (Medium) [Codex CLI, 2026-10-19] = 65.05; GPT-6.1-Sol (Low) [Codex CLI, 2026-10-19] = 61.45.",
+      "openWeb": {
+        "searchedOn": "2026-10-30",
+        "record": "research/2026-10-23-swe-benchmarks/reports/SWE benchmark candidates.md",
+        "queries": [
+          "Claude deep research, three researchers: research/2026-10-23-swe-benchmarks/research_notes/SWE benchmark candidates/ (owner-named sources, Vals AI, other agentic benchmarks)",
+          "Perplexity Search with Thinking on research/2026-10-23-swe-benchmarks/brief.md: GPT-6.1 Sol, Grok 4.7, Gemini 3.8 Flash (pplx-*.md)",
+          "Coverage capture of every cohort configuration: research/2026-10-23-swe-benchmarks/vals-catalogue-2026-10-23.json and other-coverage-2026-10-23.json (raw pages and JSON in vals-capture/ and other-capture/)",
+          "Check of Epoch MirrorCode, SWE-bench-Live and SWE-PolyBench (report addendum)",
+          "Board re-read of 2026-10-25 (owner decision O68): research/2026-10-25-board-reread/ (Vals, AI Coding Daily with hidden rows, Bug Hunt at 9089dc5, LiveBench 2.0 release 2026-10-23)",
+          "Kimi K3.1 Pro exhaustive search with open-web queries, 2026-10-25: research/2026-10-25-board-reread/kimi-search.md and kimi-search.json",
+          "Board re-read of 2026-10-30 for the AA Intelligence Index v5 cohort (O132): research/2026-10-30-v5-recapture/third-party/ (Bug Hunt at 1249797, Vals, LiveBench 2.0 release 2026-10-25 (O139), AI Coding Daily with hidden rows, tbench.ai), with Xiaomi's MiMo-V2.6-Flash effort documentation (O140)"
+        ],
+        "candidates": []
+      }
+    },
+    {
+      "modelId": "gpt-6-astra-xhigh",
+      "leaf": "aiCodingDaily",
+      "searchedOn": "2026-10-30",
+      "result": "not found",
+      "searchKind": "O53 track leaf search",
+      "sources": [
+        "https://aicodingdaily.com/leaderboard, every row including hidden older models (updated 2026-10-27, read 2026-10-30)"
+      ],
+      "notes": "Non-matching rows at other efforts: GPT-6-Astra (High) [Codex CLI, 2026-10-01] = 66.35; GPT-6-Astra (Medium) [Codex CLI, 2026-09-30] = 66.03.",
+      "openWeb": {
+        "searchedOn": "2026-10-30",
+        "record": "research/2026-10-23-swe-benchmarks/reports/SWE benchmark candidates.md",
+        "queries": [
+          "Claude deep research, three researchers: research/2026-10-23-swe-benchmarks/research_notes/SWE benchmark candidates/ (owner-named sources, Vals AI, other agentic benchmarks)",
+          "Perplexity Search with Thinking on research/2026-10-23-swe-benchmarks/brief.md: GPT-6.1 Sol, Grok 4.7, Gemini 3.8 Flash (pplx-*.md)",
+          "Coverage capture of every cohort configuration: research/2026-10-23-swe-benchmarks/vals-catalogue-2026-10-23.json and other-coverage-2026-10-23.json (raw pages and JSON in vals-capture/ and other-capture/)",
+          "Check of Epoch MirrorCode, SWE-bench-Live and SWE-PolyBench (report addendum)",
+          "Board re-read of 2026-10-25 (owner decision O68): research/2026-10-25-board-reread/ (Vals, AI Coding Daily with hidden rows, Bug Hunt at 9089dc5, LiveBench 2.0 release 2026-10-23)",
+          "Kimi K3.1 Pro exhaustive search with open-web queries, 2026-10-25: research/2026-10-25-board-reread/kimi-search.md and kimi-search.json",
+          "Board re-read of 2026-10-30 for the AA Intelligence Index v5 cohort (O132): research/2026-10-30-v5-recapture/third-party/ (Bug Hunt at 1249797, Vals, LiveBench 2.0 release 2026-10-25 (O139), AI Coding Daily with hidden rows, tbench.ai), with Xiaomi's MiMo-V2.6-Flash effort documentation (O140)"
+        ],
+        "candidates": []
+      }
+    },
+    {
+      "modelId": "claude-opus-5-5-xhigh",
+      "leaf": "aiCodingDaily",
+      "searchedOn": "2026-10-30",
+      "result": "not found",
+      "searchKind": "O53 track leaf search",
+      "sources": [
+        "https://aicodingdaily.com/leaderboard, every row including hidden older models (updated 2026-10-27, read 2026-10-30)"
+      ],
+      "notes": "Non-matching rows at other efforts: Opus 5.5 (High) [Claude Code, 2026-10-20] = 67.26; Opus 5.5 (Medium) [Claude Code, 2026-10-19] = 65.28; Opus 5.5 (Low) [Claude Code, 2026-10-19] = 60.5.",
+      "openWeb": {
+        "searchedOn": "2026-10-30",
+        "record": "research/2026-10-23-swe-benchmarks/reports/SWE benchmark candidates.md",
+        "queries": [
+          "Claude deep research, three researchers: research/2026-10-23-swe-benchmarks/research_notes/SWE benchmark candidates/ (owner-named sources, Vals AI, other agentic benchmarks)",
+          "Perplexity Search with Thinking on research/2026-10-23-swe-benchmarks/brief.md: GPT-6.1 Sol, Grok 4.7, Gemini 3.8 Flash (pplx-*.md)",
+          "Coverage capture of every cohort configuration: research/2026-10-23-swe-benchmarks/vals-catalogue-2026-10-23.json and other-coverage-2026-10-23.json (raw pages and JSON in vals-capture/ and other-capture/)",
+          "Check of Epoch MirrorCode, SWE-bench-Live and SWE-PolyBench (report addendum)",
+          "Board re-read of 2026-10-25 (owner decision O68): research/2026-10-25-board-reread/ (Vals, AI Coding Daily with hidden rows, Bug Hunt at 9089dc5, LiveBench 2.0 release 2026-10-23)",
+          "Kimi K3.1 Pro exhaustive search with open-web queries, 2026-10-25: research/2026-10-25-board-reread/kimi-search.md and kimi-search.json",
+          "Board re-read of 2026-10-30 for the AA Intelligence Index v5 cohort (O132): research/2026-10-30-v5-recapture/third-party/ (Bug Hunt at 1249797, Vals, LiveBench 2.0 release 2026-10-25 (O139), AI Coding Daily with hidden rows, tbench.ai), with Xiaomi's MiMo-V2.6-Flash effort documentation (O140)"
+        ],
+        "candidates": []
+      }
+    },
+    {
+      "modelId": "gemini-4-carbon",
+      "leaf": "aiCodingDaily",
+      "searchedOn": "2026-10-30",
+      "result": "not found",
+      "searchKind": "O53 track leaf search",
+      "sources": [
+        "https://aicodingdaily.com/leaderboard, every row including hidden older models (updated 2026-10-27, read 2026-10-30)"
+      ],
+      "notes": "No AI Coding Daily row for this model at any effort.",
+      "openWeb": {
+        "searchedOn": "2026-10-30",
+        "record": "research/2026-10-23-swe-benchmarks/reports/SWE benchmark candidates.md",
+        "queries": [
+          "Claude deep research, three researchers: research/2026-10-23-swe-benchmarks/research_notes/SWE benchmark candidates/ (owner-named sources, Vals AI, other agentic benchmarks)",
+          "Perplexity Search with Thinking on research/2026-10-23-swe-benchmarks/brief.md: GPT-6.1 Sol, Grok 4.7, Gemini 3.8 Flash (pplx-*.md)",
+          "Coverage capture of every cohort configuration: research/2026-10-23-swe-benchmarks/vals-catalogue-2026-10-23.json and other-coverage-2026-10-23.json (raw pages and JSON in vals-capture/ and other-capture/)",
+          "Check of Epoch MirrorCode, SWE-bench-Live and SWE-PolyBench (report addendum)",
+          "Board re-read of 2026-10-25 (owner decision O68): research/2026-10-25-board-reread/ (Vals, AI Coding Daily with hidden rows, Bug Hunt at 9089dc5, LiveBench 2.0 release 2026-10-23)",
+          "Kimi K3.1 Pro exhaustive search with open-web queries, 2026-10-25: research/2026-10-25-board-reread/kimi-search.md and kimi-search.json",
+          "Board re-read of 2026-10-30 for the AA Intelligence Index v5 cohort (O132): research/2026-10-30-v5-recapture/third-party/ (Bug Hunt at 1249797, Vals, LiveBench 2.0 release 2026-10-25 (O139), AI Coding Daily with hidden rows, tbench.ai), with Xiaomi's MiMo-V2.6-Flash effort documentation (O140)"
+        ],
+        "candidates": []
+      }
+    },
+    {
+      "modelId": "gpt-6-astra",
+      "leaf": "aiCodingDaily",
+      "searchedOn": "2026-10-30",
+      "result": "not found",
+      "searchKind": "O53 track leaf search",
+      "sources": [
+        "https://aicodingdaily.com/leaderboard, every row including hidden older models (updated 2026-10-27, read 2026-10-30)"
+      ],
+      "notes": "Non-matching rows at other efforts: GPT-6-Astra (High) [Codex CLI, 2026-10-01] = 66.35; GPT-6-Astra (Medium) [Codex CLI, 2026-09-30] = 66.03.",
+      "openWeb": {
+        "searchedOn": "2026-10-30",
+        "record": "research/2026-10-23-swe-benchmarks/reports/SWE benchmark candidates.md",
+        "queries": [
+          "Claude deep research, three researchers: research/2026-10-23-swe-benchmarks/research_notes/SWE benchmark candidates/ (owner-named sources, Vals AI, other agentic benchmarks)",
+          "Perplexity Search with Thinking on research/2026-10-23-swe-benchmarks/brief.md: GPT-6.1 Sol, Grok 4.7, Gemini 3.8 Flash (pplx-*.md)",
+          "Coverage capture of every cohort configuration: research/2026-10-23-swe-benchmarks/vals-catalogue-2026-10-23.json and other-coverage-2026-10-23.json (raw pages and JSON in vals-capture/ and other-capture/)",
+          "Check of Epoch MirrorCode, SWE-bench-Live and SWE-PolyBench (report addendum)",
+          "Board re-read of 2026-10-25 (owner decision O68): research/2026-10-25-board-reread/ (Vals, AI Coding Daily with hidden rows, Bug Hunt at 9089dc5, LiveBench 2.0 release 2026-10-23)",
+          "Kimi K3.1 Pro exhaustive search with open-web queries, 2026-10-25: research/2026-10-25-board-reread/kimi-search.md and kimi-search.json",
+          "Board re-read of 2026-10-30 for the AA Intelligence Index v5 cohort (O132): research/2026-10-30-v5-recapture/third-party/ (Bug Hunt at 1249797, Vals, LiveBench 2.0 release 2026-10-25 (O139), AI Coding Daily with hidden rows, tbench.ai), with Xiaomi's MiMo-V2.6-Flash effort documentation (O140)"
+        ],
+        "candidates": []
+      }
+    },
+    {
+      "modelId": "claude-sonnet-5-5",
+      "leaf": "aiCodingDaily",
+      "searchedOn": "2026-10-30",
+      "result": "not found",
+      "searchKind": "O53 track leaf search",
+      "sources": [
+        "https://aicodingdaily.com/leaderboard, every row including hidden older models (updated 2026-10-27, read 2026-10-30)"
+      ],
+      "notes": "Non-matching rows at other efforts: Sonnet 5.5 (High) [Claude Code, 2026-09-30] = 64.31; Sonnet 5.5 (Medium) [Claude Code, 2026-09-29] = 60.54.",
+      "openWeb": {
+        "searchedOn": "2026-10-30",
+        "record": "research/2026-10-23-swe-benchmarks/reports/SWE benchmark candidates.md",
+        "queries": [
+          "Claude deep research, three researchers: research/2026-10-23-swe-benchmarks/research_notes/SWE benchmark candidates/ (owner-named sources, Vals AI, other agentic benchmarks)",
+          "Perplexity Search with Thinking on research/2026-10-23-swe-benchmarks/brief.md: GPT-6.1 Sol, Grok 4.7, Gemini 3.8 Flash (pplx-*.md)",
+          "Coverage capture of every cohort configuration: research/2026-10-23-swe-benchmarks/vals-catalogue-2026-10-23.json and other-coverage-2026-10-23.json (raw pages and JSON in vals-capture/ and other-capture/)",
+          "Check of Epoch MirrorCode, SWE-bench-Live and SWE-PolyBench (report addendum)",
+          "Board re-read of 2026-10-25 (owner decision O68): research/2026-10-25-board-reread/ (Vals, AI Coding Daily with hidden rows, Bug Hunt at 9089dc5, LiveBench 2.0 release 2026-10-23)",
+          "Kimi K3.1 Pro exhaustive search with open-web queries, 2026-10-25: research/2026-10-25-board-reread/kimi-search.md and kimi-search.json",
+          "Board re-read of 2026-10-30 for the AA Intelligence Index v5 cohort (O132): research/2026-10-30-v5-recapture/third-party/ (Bug Hunt at 1249797, Vals, LiveBench 2.0 release 2026-10-25 (O139), AI Coding Daily with hidden rows, tbench.ai), with Xiaomi's MiMo-V2.6-Flash effort documentation (O140)"
+        ],
+        "candidates": []
+      }
+    },
+    {
+      "modelId": "claude-opus-5-5",
+      "leaf": "aiCodingDaily",
+      "searchedOn": "2026-10-30",
+      "result": "not found",
+      "searchKind": "O53 track leaf search",
+      "sources": [
+        "https://aicodingdaily.com/leaderboard, every row including hidden older models (updated 2026-10-27, read 2026-10-30)"
+      ],
+      "notes": "Non-matching rows at other efforts: Opus 5.5 (High) [Claude Code, 2026-10-20] = 67.26; Opus 5.5 (Medium) [Claude Code, 2026-10-19] = 65.28; Opus 5.5 (Low) [Claude Code, 2026-10-19] = 60.5.",
+      "openWeb": {
+        "searchedOn": "2026-10-30",
+        "record": "research/2026-10-23-swe-benchmarks/reports/SWE benchmark candidates.md",
+        "queries": [
+          "Claude deep research, three researchers: research/2026-10-23-swe-benchmarks/research_notes/SWE benchmark candidates/ (owner-named sources, Vals AI, other agentic benchmarks)",
+          "Perplexity Search with Thinking on research/2026-10-23-swe-benchmarks/brief.md: GPT-6.1 Sol, Grok 4.7, Gemini 3.8 Flash (pplx-*.md)",
+          "Coverage capture of every cohort configuration: research/2026-10-23-swe-benchmarks/vals-catalogue-2026-10-23.json and other-coverage-2026-10-23.json (raw pages and JSON in vals-capture/ and other-capture/)",
+          "Check of Epoch MirrorCode, SWE-bench-Live and SWE-PolyBench (report addendum)",
+          "Board re-read of 2026-10-25 (owner decision O68): research/2026-10-25-board-reread/ (Vals, AI Coding Daily with hidden rows, Bug Hunt at 9089dc5, LiveBench 2.0 release 2026-10-23)",
+          "Kimi K3.1 Pro exhaustive search with open-web queries, 2026-10-25: research/2026-10-25-board-reread/kimi-search.md and kimi-search.json",
+          "Board re-read of 2026-10-30 for the AA Intelligence Index v5 cohort (O132): research/2026-10-30-v5-recapture/third-party/ (Bug Hunt at 1249797, Vals, LiveBench 2.0 release 2026-10-25 (O139), AI Coding Daily with hidden rows, tbench.ai), with Xiaomi's MiMo-V2.6-Flash effort documentation (O140)"
+        ],
+        "candidates": []
+      }
+    }
+  ],
+  "cognitionCapture": {
+    "url": "https://cognition.com/data/frontiercode-leaderboard/data.json",
+    "lastModified": "2026-10-22T22:28:12Z",
+    "capturedOn": "2026-10-23",
+    "sha256": "ff0040778b7bdf69c705ad7474f771fb5e53cfaf5cf8573b3a4614153543d75f",
+    "file": "data/cognition_frontiercode.json"
+  },
+  "openWebRule": "I28 (2026-10-23): each search for a listed frontier or near-frontier family also logs an open-web discovery step: the queries and every candidate found, each resolved by a dated registry addition ('register') or a dated rejection with a reason ('reject'); the build fails on a missing step or an unresolved candidate.",
+  "supplementsNote": "O136 (2026-10-30): Cognition's FrontierCode 1.1 fills ended; the FrontierCode leaf is AA's FrontierCode 2.0, which AA runs for every cohort configuration."
+}

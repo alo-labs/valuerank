@@ -16,15 +16,26 @@ like frontier rows.  Every model row reports ``aaFrontierTier`` ("frontier",
 configuration, or its smallest-gap near configuration), ``aaFrontierIntelligenceGap``
 and ``aaFrontierFootnote``; ``frontierSelection`` summarises frontier and near
 families.  Near families that are also frontier families keep the frontier tier.
+
+Owner decision O33: every evidenced effort (an exact AA DeepSWE result and a
+matched exact Bug Hunt result) is ranked as its own row, so a family can have
+several roster configurations.  The family annotations above and the frontier
+or near inclusion reason belong to the family's primary configuration only; an
+evidenced sibling is ranked through the overlap reason and reports its own tier
+(the tier of its exact plotted configuration, or null).
 """
 
 from __future__ import annotations
 
 import json
 import math
+import re
 from pathlib import Path
 
-from valuerank.clock import iso_z
+from valuerank import exact_match, value_v3
+from valuerank import quality as q
+from valuerank.fetch_deepswe import normalise_name, roster_names
+from valuerank.clock import iso_z, utcnow
 
 
 from valuerank.paths import DATA, ROOT
@@ -32,9 +43,19 @@ from valuerank.plan_costs import COST_WEIGHT_PCT, blend, cost_per_index_point, c
 from valuerank.release import DATE as PUBLISH_DATE, VERSION
 BUG_HUNT_PRIORITY = 20
 BUG_HUNT_EMPHASIS_PRIORITY = 30
-DEEPSWE_PRIORITY = 25
 
 DEVELOPER = {
+    # O132 (AA Intelligence Index v5 cohort): every effort of a multi-effort family is named.
+    "GPT-6.1 Terra (low)": "OpenAI",
+    "GPT-6.1 Terra (medium)": "OpenAI",
+    "GPT-6.1 Terra (high)": "OpenAI",
+    "GPT-6.1 Terra (xhigh)": "OpenAI",
+    "GPT-6.1 Terra (max)": "OpenAI",
+    "GPT-6.1 Sol (max)": "OpenAI",
+    "GPT-6 Luna (max)": "OpenAI",
+    "GPT-6 Astra (max)": "OpenAI",
+    "Claude Opus 5.5 (max)": "Anthropic",
+    "Gemini 4 Carbon": "Google DeepMind",
     "GPT-6 Astra": "OpenAI",
     "Gemini 3.8 Flash": "Google DeepMind",
     "Claude Opus 5": "Anthropic",
@@ -65,10 +86,53 @@ DEVELOPER = {
     "GPT-6 Luna": "OpenAI",
     "Grok 4.7": "xAI",
     "MiMo-V2.6-Pro": "Xiaomi",
+    "Kimi K3.1 Pro": "Moonshot AI",
     "MiMo-V2.6-Flash": "Xiaomi",
+    "Claude Fable 5.1": "Anthropic",
+    "Muse Spark 1.3": "Meta",
+    "Muse Wonder": "Meta",
+    "Muse Wonder Full": "Meta",
+    # O33: other evidenced efforts of a family, ranked as their own rows.
+    "GPT-6.1 Sol (xhigh)": "OpenAI",
+    "GPT-6.1 Sol (high)": "OpenAI",
+    "GPT-6.1 Sol (medium)": "OpenAI",
+    "GPT-6.1 Sol (low)": "OpenAI",
+    "DeepSeek V4.1 Flash 1017": "DeepSeek",
+    "MiniMax-M3.1-Flash": "MiniMax",
+    "GPT-6 Luna (low)": "OpenAI",
+    "GPT-6 Luna (medium)": "OpenAI",
+    "GPT-6 Luna (high)": "OpenAI",
+    "GPT-6 Luna (xhigh)": "OpenAI",
+    "Claude Opus 5.5 (high)": "Anthropic",
+    "Claude Opus 5.5 (xhigh)": "Anthropic",
+    "Claude Opus 5.5 (medium)": "Anthropic",
+    "GPT-5.6 Luna (low)": "OpenAI",
+    "GPT-6 Astra (high)": "OpenAI",
+    "GPT-6 Astra (xhigh)": "OpenAI",
+    "Claude Haiku 5.5 (max)": "Anthropic",
+    "Claude Haiku 5.5 (high)": "Anthropic",
+    "Claude Haiku 5.5 (medium)": "Anthropic",
+    "Claude Haiku 5.5 (low)": "Anthropic",
+    "Claude Sonnet 5.5 (xhigh)": "Anthropic",
+    "Claude Sonnet 5.5 (high)": "Anthropic",
+    "Claude Sonnet 5.5 (medium)": "Anthropic",
+    "Claude Sonnet 5.5 (low)": "Anthropic",
+    "Muse Spark 1.3 (xhigh)": "Meta",
+    "Grok 4.6 (xhigh)": "xAI",
 }
 
 SHORT = {
+    # O132 (AA Intelligence Index v5 cohort).
+    "GPT-6.1 Terra (low)": "GPT-6.1 Terra (low)",
+    "GPT-6.1 Terra (medium)": "GPT-6.1 Terra (medium)",
+    "GPT-6.1 Terra (high)": "GPT-6.1 Terra (high)",
+    "GPT-6.1 Terra (xhigh)": "GPT-6.1 Terra (xhigh)",
+    "GPT-6.1 Terra (max)": "GPT-6.1 Terra (max)",
+    "GPT-6.1 Sol (max)": "GPT-6.1 Sol (max)",
+    "GPT-6 Luna (max)": "GPT-6 Luna (max)",
+    "GPT-6 Astra (max)": "GPT-6 Astra (max)",
+    "Claude Opus 5.5 (max)": "Opus 5.5 (max)",
+    "Gemini 4 Carbon": "Gem 4 Carbon",
     "GPT-6 Astra": "GPT-6 Astra",
     "Gemini 3.8 Flash": "Gem 3.8 Flash",
     "Claude Opus 5": "Opus 5",
@@ -99,7 +163,38 @@ SHORT = {
     "GPT-6 Luna": "GPT-6 Luna",
     "Grok 4.7": "Grok 4.7",
     "MiMo-V2.6-Pro": "MiMo V2.6 Pro",
+    "Kimi K3.1 Pro": "Kimi K3.1 Pro",
     "MiMo-V2.6-Flash": "MiMo V2.6 Flash",
+    "Claude Fable 5.1": "Fable 5.1",
+    "Muse Spark 1.3": "Muse Spark 1.3",
+    "Muse Wonder": "Muse Wonder",
+    "Muse Wonder Full": "Muse Wonder Full",
+    "GPT-6.1 Sol (xhigh)": "GPT-6.1 Sol (xhigh)",
+    "GPT-6.1 Sol (high)": "GPT-6.1 Sol (high)",
+    "GPT-6.1 Sol (medium)": "GPT-6.1 Sol (medium)",
+    "GPT-6.1 Sol (low)": "GPT-6.1 Sol (low)",
+    "DeepSeek V4.1 Flash 1017": "DeepSeek V4.1 Flash 1017",
+    "MiniMax-M3.1-Flash": "MiniMax-M3.1-Flash",
+    "GPT-6 Luna (low)": "GPT-6 Luna (low)",
+    "GPT-6 Luna (medium)": "GPT-6 Luna (medium)",
+    "GPT-6 Luna (high)": "GPT-6 Luna (high)",
+    "GPT-6 Luna (xhigh)": "GPT-6 Luna (xhigh)",
+    "Claude Opus 5.5 (high)": "Opus 5.5 (high)",
+    "Claude Opus 5.5 (xhigh)": "Opus 5.5 (xhigh)",
+    "Claude Opus 5.5 (medium)": "Opus 5.5 (medium)",
+    "GPT-5.6 Luna (low)": "GPT-5.6 Luna (low)",
+    "GPT-6 Astra (high)": "GPT-6 Astra (high)",
+    "GPT-6 Astra (xhigh)": "GPT-6 Astra (xhigh)",
+    "Claude Haiku 5.5 (max)": "Haiku 5.5 (max)",
+    "Claude Haiku 5.5 (high)": "Haiku 5.5 (high)",
+    "Claude Haiku 5.5 (medium)": "Haiku 5.5 (medium)",
+    "Claude Haiku 5.5 (low)": "Haiku 5.5 (low)",
+    "Claude Sonnet 5.5 (xhigh)": "Sonnet 5.5 (xhigh)",
+    "Claude Sonnet 5.5 (high)": "Sonnet 5.5 (high)",
+    "Claude Sonnet 5.5 (medium)": "Sonnet 5.5 (medium)",
+    "Claude Sonnet 5.5 (low)": "Sonnet 5.5 (low)",
+    "Muse Spark 1.3 (xhigh)": "Muse Spark 1.3 (xhigh)",
+    "Grok 4.6 (xhigh)": "Grok 4.6 (xhigh)",
 }
 
 # The priority values are ValueRank's quality priorities, not the Artificial
@@ -114,15 +209,15 @@ CANDIDATES = [
     ("omniNonHallucination", "Non-Hallucination", True, 6),
     ("terminalBenchV4", "Terminal-Bench 4.0", True, 6),
     ("livebenchInstructionFollowing", "Instruction Following (LiveBench)", True, 5),
-    ("deepswePassAt1", "DeepSWE v1.1", True, DEEPSWE_PRIORITY),
     ("gdpvalV21", "GDPval-AA v2.1", True, 6),
     ("automationBenchAA", "AutomationBench-AA", True, 5),
     ("aaLcr", "AA-LCR v1.1", True, 4),
     ("omniAccuracy", "AA-Omniscience Accuracy", True, 4),
-    ("hle", "HLE", True, 4),
+    # O136: the AA Intelligence Index v5 successors (HLE-Diamond, Terminal-Bench-Science for SciCode, CritPt v2).
+    ("hle", "HLE-Diamond", True, 4),
     ("gpqaDiamond", "GPQA Diamond (legacy)", True, 4),
-    ("scicode", "SciCode", True, 4),
-    ("critpt", "CritPt", True, 3),
+    ("terminalBenchScience", "Terminal-Bench-Science", True, 4),
+    ("critpt", "CritPt v2 (hard subset)", True, 3),
     ("intelligenceIndex", "AA Intelligence Index", True, 6),
     ("speed", "Speed", True, 5),
 ]
@@ -188,6 +283,148 @@ def frontier_effort(variant):
 
 
 NO_FRONTIER_TIER = {"tier": None, "configuration": None, "intelligenceGap": None, "footnote": None}
+
+# E195: frontier membership is AA's rendered Pareto path as observed. Each frontier point must sit on a path vertex
+# (one point per vertex) and the path must rise strictly in chart coordinates; rounded tooltip values tie (GPT-6 Luna
+# (max) and MiMo-V2.6-Flash both display 38) and are never used to recompute or check membership.
+PATH_TOLERANCE_PX = 0.5
+_PATH_NUMBER = r"-?\d+(?:\.\d+)?"
+_PATH = re.compile(rf"M {_PATH_NUMBER} {_PATH_NUMBER}(?: L {_PATH_NUMBER} {_PATH_NUMBER})*")
+
+
+def plotted_name_state(capture: dict) -> dict:
+    """E214, O54: which cohort families AA plots "with fallback", without it, or with no effort, read from the capture."""
+
+    points = capture.get("frontier", []) + capture.get("near_frontier", [])
+    return {
+        "withFallback": sorted({item["family"] for item in points if item.get("fallback")}),
+        "withoutFallback": sorted({item["family"] for item in points if not item.get("fallback")}),
+        "noEffort": sorted({item["family"] for item in points if not item.get("effort")}),
+    }
+
+
+def check_rendered_path(capture):
+    """E195: the captured frontier points are exactly the vertices of the rendered Pareto path, which rises strictly."""
+
+    path = capture.get("rendered_pareto_svg_path")
+    if not isinstance(path, str) or not _PATH.fullmatch(path):
+        raise ValueError("AA frontier capture must carry the rendered Pareto path as M/L coordinate pairs")
+    numbers = [float(token) for token in re.findall(_PATH_NUMBER, path)]
+    vertices = list(zip(numbers[0::2], numbers[1::2]))
+    points = sorted((require_number(item.get("svg_x"), "svg_x"), require_number(item.get("svg_y"), "svg_y")) for item in capture.get("frontier", []))
+    if len(vertices) != len(points) or any(
+        abs(vx - px) > PATH_TOLERANCE_PX or abs(vy - py) > PATH_TOLERANCE_PX for (vx, vy), (px, py) in zip(vertices, points)
+    ):
+        raise ValueError("AA frontier capture points do not match the rendered Pareto path vertices")
+    # Chart y grows downward, so a rising path has x strictly increasing and y strictly decreasing.
+    if any(x2 <= x1 or y2 >= y1 for (x1, y1), (x2, y2) in zip(vertices, vertices[1:])):
+        raise ValueError("AA rendered Pareto path does not rise strictly in chart coordinates")
+    # E204: a plotted point left of the path's first vertex is neither frontier nor near (no F(c) there), so it would
+    # drop out silently; the build stops until the owner records a decision for it.
+    left = sorted(item["model_name"] for item in capture.get("points", []) if require_number(item.get("svg_x"), "svg_x") < vertices[0][0] - PATH_TOLERANCE_PX)
+    if left:
+        raise ValueError("AA plotted points lie left of the rendered Pareto path (an owner decision is required, E204): " + "; ".join(left))
+    # E214: the "with fallback" qualifier names AA's serving setting, not a second configuration, so a third-party record
+    # matches by model and effort. Were AA to plot one model and effort in both states, that match would be ambiguous.
+    states = {}
+    for item in capture.get("points", []):
+        states.setdefault((item.get("family"), item.get("effort")), set()).add(bool(item.get("fallback")))
+    twins = sorted(f"{family} ({effort})" for (family, effort), seen in states.items() if len(seen) > 1)
+    if twins:
+        raise ValueError("AA plots configurations both with and without fallback (a matching decision is required, E214): " + "; ".join(twins))
+
+
+def frontier_order(row):
+    """E193: a family's highest rendered-frontier point first; along the strictly rising line that is also its dearest."""
+
+    return (-row["intelligenceIndex"], -row["totalCostUsd"], row["name"])
+
+
+# O31: a Bug Hunt scoreboard name may add only a version number to AA's model name ("Muse Wonder 1.0").
+VERSION_SUFFIX = r"( v?\d+(\.\d+)*)?"
+# O33: the effort follows the name as "(<effort> effort, ...)", or on some rows as a bare known effort ("Grok 4.6 (xhigh) seq").
+SCOREBOARD_EFFORT = re.compile(r"(\w+) effort|(minimal|low|medium|high|xhigh|max)(?=[),;])")
+# DeepSWE statuses that place a chart configuration on a roster entry (a duplicate row of a mapped configuration included).
+
+
+def scoreboard_matches(names, scoreboard_rows):
+    """Bug Hunt scoreboard rows for a model answering to one of ``names``, as (effort, row name) pairs."""
+
+    matches = []
+    for row in scoreboard_rows:
+        base, _, rest = row["model"].partition(" (")
+        effort = SCOREBOARD_EFFORT.match(rest)
+        if effort and any(re.fullmatch(re.escape(name) + VERSION_SUFFIX, normalise_name(base)) for name in names):
+            matches.append((effort.group(1) or effort.group(2), row["model"]))
+    return matches
+
+
+MEAN_OF = re.compile(r"mean of (\d+)")
+
+
+def scoreboard_sample(name):
+    """The run count a scoreboard row reports ("... - mean of 3"); a row without one is a single run."""
+
+    match = MEAN_OF.search(name)
+    return int(match.group(1)) if match else 1
+
+
+def check_bug_hunt_selection(model_id, aa_model, record, scoreboard_rows):
+    """E206: a matched record is the owner's largest-sample published result for the model at the configuration's exact
+    effort, over every harness and route, unless the record states its selection reason.
+
+    Effort tokens match exactly (xhigh is not max) or by a documented single-mode equivalent; a record read from the
+    run notes under a name the scoreboard does not parse has no candidates here and keeps its recorded effort status.
+    """
+
+    if record.get("matched") is not True or record.get("selectionReason"):
+        return
+    names = roster_names(aa_model)
+    candidates = [
+        row for row in scoreboard_rows for effort, _name in scoreboard_matches(names, [row])
+        if exact_match.efforts_match(model_id, aa_model.get("aaVariant"), effort)
+    ]
+    if not candidates:
+        return
+    largest = max(scoreboard_sample(row["model"]) for row in candidates)
+    values = {row["fixedOf105"] for row in candidates if scoreboard_sample(row["model"]) == largest}
+    if record.get("sampleN") != largest or values != {record.get("fixedOf105")}:
+        raise ValueError(f"Bug Hunt record for {model_id} is not the owner's largest-sample result at its effort and carries no selection reason (E206)")
+
+
+def bug_hunt_cross_harness(model_id, aa_model, scoreboard_rows):
+    """E224: the owner's largest-sample result on each harness for the configuration's exact effort, when Bug Hunt
+    reports it on two or more harnesses; None otherwise (a diagnostic of how much the harness moves the leaf)."""
+
+    best = {}
+    for row in scoreboard_rows:
+        for effort, _name in scoreboard_matches(roster_names(aa_model), [row]):
+            if exact_match.efforts_match(model_id, aa_model.get("aaVariant"), effort):
+                current = best.get(row["harness"])
+                if current is None or scoreboard_sample(row["model"]) > current["runs"]:
+                    best[row["harness"]] = {"harness": row["harness"], "fixedOf105": row["fixedOf105"], "runs": scoreboard_sample(row["model"])}
+    return sorted(best.values(), key=lambda item: item["harness"]) if len(best) > 1 else None
+
+
+def exact_bug_hunt(model_id, effort, record):
+    """The Bug Hunt record as it applies to the ranked configuration: an owner match at another effort is not used."""
+
+    if record.get("matched") is True and not exact_match.efforts_match(model_id, effort, record.get("effort")):
+        return {**record, "matched": False, "matchStatus": "effort_mismatch",
+                "note": f"The owner's result is for effort {record.get('effort')}; the ranked configuration is {effort}. No result is transferred between efforts."}
+    return record
+
+
+def model_family(aa_model):
+    """The AA family a roster configuration belongs to (its chart points' family); the display name when not recorded."""
+
+    return aa_model.get("family") or aa_model["displayName"]
+
+
+def near_order(row):
+    """E193: smallest Index gap to the rendered frontier, then the lower total cost, then the name."""
+
+    return (row["intelligenceGap"], row["totalCostUsd"], row["name"])
 
 
 def capture_row_matches(item, capture_item):
@@ -265,10 +502,27 @@ def near_frontier_selection(inventory, capture, frontier_urls, frontier_family_i
             aa_model = aa_models.get(model_id)
             if aa_model is None:
                 raise ValueError(f"AA near-frontier family model is absent from the selected AA metrics roster: {model_id}")
-            if aa_model.get("displayName") != family:
+            # O51: a near family's primary may be one of its effort rows ("GPT-6 Astra (xhigh)"), so the family is compared.
+            if model_family(aa_model) != family:
                 raise ValueError(f"AA near-frontier family does not match selected catalog identity for {model_id}")
         selection[family] = {"modelId": model_id, "rows": family_rows}
     return selection
+
+
+def configuration_tiers(frontier_rows, near_rows):
+    """O33: each plotted frontier or near configuration's own tier annotation, keyed by its AA owner URL.
+
+    A ranked sibling of a family reports the tier of its own exact configuration, never the family's.
+    """
+
+    tiers = {}
+    for item in near_rows:
+        tiers[item["sourceUrl"]] = {"tier": "near", "configuration": item["name"],
+                                    "intelligenceGap": item["intelligenceGap"], "footnote": item.get("sourceFootnote")}
+    for item in frontier_rows:
+        tiers[item["sourceUrl"]] = {"tier": "frontier", "configuration": item["name"],
+                                    "intelligenceGap": 0, "footnote": item.get("sourceFootnote")}
+    return tiers
 
 
 def frontier_tiers(frontier_families, near_families):
@@ -276,13 +530,13 @@ def frontier_tiers(frontier_families, near_families):
 
     annotations, frontier_list, near_list = {}, [], []
     for family, group in near_families.items():
-        best = min(group["rows"], key=lambda row: (row["intelligenceGap"], row["totalCostUsd"], row["name"]))
+        best = min(group["rows"], key=near_order)
         annotations[family] = {"tier": "near", "configuration": best["name"],
                                "intelligenceGap": best["intelligenceGap"], "footnote": best.get("sourceFootnote")}
         near_list.append({"family": family, "modelId": group["modelId"], "configuration": best["name"],
                           "intelligenceGap": best["intelligenceGap"]})
     for family, family_rows in frontier_families.items():
-        best = min(family_rows, key=lambda row: (-row["intelligenceIndex"], row["totalCostUsd"], row["name"]))
+        best = min(family_rows, key=frontier_order)
         annotations[family] = {"tier": "frontier", "configuration": best["name"],
                                "intelligenceGap": 0, "footnote": best.get("sourceFootnote")}
         frontier_list.append({"family": family, "modelId": best["requiredFamilyModelId"], "configuration": best["name"]})
@@ -313,8 +567,7 @@ def build_bug_hunt_emphasis(rows, weights, document):
     matched_rows = [
         row for row in rows
         if row.get("bugHunt", {}).get("matched") is True
-        and row.get("deepswePassAt1Pct") is not None
-    ]
+    ]  # O49: DeepSWE is withdrawn, so a matched Bug Hunt result alone qualifies a row for the emphasis view
     if len(matched_rows) < 2:
         emphasis_weights = [{
             "key": "bugHuntFixedOf105",
@@ -395,8 +648,11 @@ def build_bug_hunt_emphasis(rows, weights, document):
             row["bugHuntEmphasisDims"].get(COST_KEY),
             quality_score(row["bugHuntEmphasisDims"], emphasis_weights),
         )
+    # A row without a cost gets no score and no emphasis rank (AGENTS.md); it keeps its normalised Bug Hunt value.
+    for row in matched_rows:
+        row["bugHuntEmphasisRank"] = None
     ranked_rows = sorted(
-        matched_rows,
+        [row for row in matched_rows if row["bugHuntEmphasisScore"] is not None],
         key=lambda row: (
             -row["bugHuntEmphasisScore"],
             row["costComposite"] if row["costComposite"] is not None else math.inf,
@@ -441,6 +697,9 @@ def build_bug_hunt_emphasis(rows, weights, document):
 def main(*, root: Path = ROOT, data: Path = DATA) -> int:
     deepswe_chart = json.loads((data / "aa_deepswe.json").read_text())
     aa_document = json.loads((data / "aa_metrics.json").read_text())
+    # O51 (2026-10-23): the cohort is the configurations AA plots on or near its rendered frontier; the O31/O33 retention
+    # of off-frontier configurations with exact DeepSWE and Bug Hunt results is withdrawn (AA withdrew DeepSWE, O49).
+    scoreboard_rows = json.loads((data / "bug_hunt_scoreboard.json").read_text())["rows"]
     frontier_inventory = json.loads((data / "aa_reconciliation_inventory.json").read_text())
     livebench_document = json.loads((data / "livebench.json").read_text())
     tb4_document = json.loads((data / "tb4.json").read_text())
@@ -456,32 +715,6 @@ def main(*, root: Path = ROOT, data: Path = DATA) -> int:
     coverage_document = json.loads((data / "coverage_matrix.json").read_text())
     if not aa_models:
         raise ValueError("AA metrics snapshot must contain a non-empty comparison roster")
-    observed_configuration_n = deepswe_chart.get("observedConfigurationN")
-    configurations = deepswe_chart.get("configurations", [])
-    if (
-        isinstance(observed_configuration_n, bool)
-        or not isinstance(observed_configuration_n, int)
-        or observed_configuration_n < 1
-        or len(configurations) != observed_configuration_n
-        or deepswe_chart.get("benchmarkTasks") != 113
-    ):
-        raise ValueError(
-            "AA Coding Agent Index DeepSWE chart must match its capture-backed configuration count and 113-task source"
-        )
-    deepswe_by_id = {}
-    for config in configurations:
-        model_id = config.get("valueRankModelId")
-        if model_id is None:
-            continue
-        if config.get("matchStatus") != "exact_variant" or model_id in deepswe_by_id:
-            raise ValueError(f"invalid or duplicate exact AA DeepSWE mapping for {model_id}")
-        score_pct = require_number(config.get("scorePct"), f"{model_id}.DeepSWE scorePct")
-        if not 0 <= score_pct <= 100:
-            raise ValueError(f"invalid AA DeepSWE score for {model_id}")
-        deepswe_by_id[model_id] = config
-    if not set(deepswe_by_id).issubset(aa_models):
-        raise ValueError("AA DeepSWE mapped model IDs must belong to the current ValueRank roster")
-
     frontier_rows = frontier_inventory.get("rows", [])
     frontier_universe = frontier_inventory.get("sourceUniverse", {})
     if (
@@ -506,6 +739,7 @@ def main(*, root: Path = ROOT, data: Path = DATA) -> int:
         or capture_universe.get("plotted_models_with_both_coordinates") != frontier_universe.get("plottedPointN")
     ):
         raise ValueError("AA reconciliation inventory no longer matches its complete direct-observation capture")
+    check_rendered_path(frontier_capture)
     frontier_families = {}
     frontier_urls = set()
     for item in frontier_rows:
@@ -537,9 +771,12 @@ def main(*, root: Path = ROOT, data: Path = DATA) -> int:
         if len(selected_rows) != 1:
             raise ValueError(f"AA frontier family must identify one exact selected source URL: {family}")
         frontier_item = selected_rows[0]
+        if frontier_item is not min(family_rows, key=frontier_order):
+            raise ValueError(f"AA frontier family must rank its highest rendered-frontier point (E193): {family}")
         if aa_model.get("aaSlug") != frontier_item.get("aaId"):
             raise ValueError(f"AA frontier source slug does not match selected catalog identity for {model_id}")
-        if aa_model.get("displayName") != family:
+        # O132: a configuration of a multi-effort family names its effort ("GPT-6 Luna (high)").
+        if aa_model.get("displayName") != family and not str(aa_model.get("displayName")).startswith(f"{family} ("):
             raise ValueError(f"AA frontier family does not match selected catalog identity for {model_id}")
         inventory_effort = str(frontier_item.get("evaluatedVariant") or "").casefold()
         selected_effort = aa_model.get("aaVariant")
@@ -575,6 +812,10 @@ def main(*, root: Path = ROOT, data: Path = DATA) -> int:
     )
     near_policy = frontier_inventory["nearFrontierPolicy"]
     aa_tiers, frontier_family_list, near_family_list = frontier_tiers(frontier_families, near_families)
+    own_tiers = configuration_tiers(frontier_rows, frontier_inventory["nearFrontierRows"])
+    # O33: the family annotations go to each family's primary configuration only.
+    family_primary_ids = {family: group["modelId"] for family, group in near_families.items()}
+    family_primary_ids.update({selection["family"]: model_id for model_id, selection in frontier_selection_by_id.items()})
     near_frontier_primary_ids = {group["modelId"] for group in near_families.values() if group["modelId"]}
     frontier_selection = {
         "sourceUrl": frontier_inventory["sourceUrl"],
@@ -606,6 +847,9 @@ def main(*, root: Path = ROOT, data: Path = DATA) -> int:
         ],
     }
     cohort_ids = set(aa_models)
+    display_names = [item["displayName"] for item in aa_models.values()]
+    if len(set(display_names)) != len(display_names):
+        raise ValueError("Roster display names must be unique: several efforts of one family need distinct names (O33)")
     if set(livebench_models) != cohort_ids:
         raise ValueError("LiveBench snapshot must contain exactly the current AA model cohort")
     bug_hunt_by_id = {item["modelId"]: item for item in bug_hunt_document["models"]}
@@ -626,19 +870,29 @@ def main(*, root: Path = ROOT, data: Path = DATA) -> int:
 
     rows = []
     for model_id, aa_model in aa_models.items():
-        deepswe_model = deepswe_by_id.get(model_id)
+        deepswe_model = None  # O49: AA withdrew DeepSWE v1.1; it is no longer a leaf or a legacy dimension
         aa_metrics = aa_model["metrics"]
         supplemental = aa_model.get("supplemental", {})
         livebench = livebench_models[model_id]
         tb4 = tb4_models.get(model_id)
+        # The legacy composite takes a Terminal-Bench row only at the configuration's own effort (AGENTS.md: no transfer).
+        if tb4 is not None and not exact_match.efforts_match(model_id, aa_model.get("aaVariant"), exact_match.split_effort(tb4["model"])[1]):
+            tb4 = None
         tb4_claim = tb4_provider_claims.get(model_id) if not tb4 else None
         display_name = aa_model["displayName"]
         if display_name not in DEVELOPER or display_name not in SHORT:
             raise ValueError(f"identity mapping missing: {display_name}")
-        tier = aa_tiers.get(display_name, NO_FRONTIER_TIER)
+        family = model_family(aa_model)
+        bug_hunt = exact_bug_hunt(model_id, aa_model.get("aaVariant"), bug_hunt_by_id[model_id])
+        check_bug_hunt_selection(model_id, aa_model, bug_hunt, scoreboard_rows)
+        if family_primary_ids.get(family) == model_id:
+            tier = aa_tiers[family]
+        else:
+            tier = own_tiers.get(aa_model["aaUrl"], NO_FRONTIER_TIER)
         row = {
             "id": model_id,
             "name": display_name,
+            "family": family,
             "shortName": SHORT[display_name],
             "developer": DEVELOPER[display_name],
             "frontierSelection": frontier_selection_by_id.get(model_id),
@@ -646,7 +900,8 @@ def main(*, root: Path = ROOT, data: Path = DATA) -> int:
             "aaFrontierConfiguration": tier["configuration"],
             "aaFrontierIntelligenceGap": tier["intelligenceGap"],
             "aaFrontierFootnote": tier["footnote"],
-            "bugHunt": bug_hunt_by_id[model_id],
+            "bugHunt": bug_hunt,
+            "bugHuntCrossHarness": bug_hunt_cross_harness(model_id, aa_model, scoreboard_rows),
             "rankDeepSWE": deepswe_model.get("sourceOrder") if deepswe_model else None,
             "deepsweEffort": deepswe_model.get("effort") if deepswe_model else None,
             "deepswePassAt1": (require_number(deepswe_model["scorePct"], f"{model_id}.DeepSWE scorePct") / 100) if deepswe_model else None,
@@ -688,12 +943,12 @@ def main(*, root: Path = ROOT, data: Path = DATA) -> int:
             "terminalBenchV4Effort": tb4.get("model") if tb4 else (tb4_claim.get("evaluatedModel") if tb4_claim else None),
             "terminalBenchV4ReleaseDate": tb4.get("releaseDate") if tb4 else (tb4_claim.get("publishedOn") if tb4_claim else None),
             "terminalBenchV4Model": tb4.get("baseModel") if tb4 else (tb4_claim.get("evaluatedModel") if tb4_claim else None),
-            "scicode": aa_metrics.get("scicode"),
+            "terminalBenchScience": aa_metrics.get("terminalBenchScience"),
             "gdpPdfAllPass": aa_metrics.get("gdpPdfAllPass"),
             "aaLcr": aa_metrics.get("aaLcr"),
-            "hle": aa_metrics.get("hle"),
+            "hle": aa_metrics.get("hleDiamond"),
             "gpqaDiamond": aa_metrics.get("gpqaDiamond"),
-            "critpt": aa_metrics.get("critpt"),
+            "critpt": aa_metrics.get("critptV2Hard"),
             "omniAccuracy": aa_metrics.get("omniAccuracy"),
             "omniNonHallucination": aa_metrics.get("omniNonHallucination"),
             "speed": aa_metrics.get("speed"),
@@ -702,14 +957,22 @@ def main(*, root: Path = ROOT, data: Path = DATA) -> int:
         }
         rows.append(row)
 
-    overlap_primary_ids = {
-        row["id"] for row in rows
-        if row["bugHunt"].get("matched") is True
-        and row.get("deepswePassAt1Pct") is not None
-    }
+    # O51: every rostered configuration AA plots on its rendered frontier or within the near gap is a cohort row (its
+    # own tier); a family's primary configuration carries the family's frontier or near inclusion reason.
+    plotted_ids = {row["id"] for row in rows if own_tiers.get(row["aaUrl"], NO_FRONTIER_TIER)["tier"] is not None}
+    overlap_primary_ids = plotted_ids - set(frontier_selection_by_id) - near_frontier_primary_ids
     frontier_primary_ids = set(frontier_selection_by_id)
     near_only_primary_ids = near_frontier_primary_ids - frontier_primary_ids
     primary_ids = overlap_primary_ids | frontier_primary_ids | near_frontier_primary_ids
+    # O51: every plotted frontier or near configuration is a cohort row. A family's primary configuration carries its
+    # inclusion reason: a frontier family's highest rendered point (checked above); a near family's smallest-gap near
+    # point (E193; the O30 evidence-first choice is withdrawn with the DeepSWE retention route).
+    for family, group in sorted(near_families.items()):
+        model_id = group["modelId"]
+        if model_id is None or model_id in frontier_primary_ids:
+            continue
+        if aa_models[model_id].get("aaUrl") != min(group["rows"], key=near_order)["sourceUrl"]:
+            raise ValueError(f"AA near-frontier family must rank its smallest-gap near point as its primary configuration (E193, O51): {family}")
     primary_rows = [row for row in rows if row["id"] in primary_ids]
     unranked_rows = [row for row in rows if row["id"] not in primary_ids]
 
@@ -807,7 +1070,7 @@ def main(*, root: Path = ROOT, data: Path = DATA) -> int:
         row["rankingEligible"] = row["id"] in primary_ids
         row["rankingInclusionReasons"] = []
         if row["id"] in overlap_primary_ids:
-            row["rankingInclusionReasons"].append("Exact AA DeepSWE and eligible Bug Hunt overlap")
+            row["rankingInclusionReasons"].append("Plotted on or within the near gap of AA's rendered frontier (O51)")
         if row["id"] in frontier_primary_ids:
             row["rankingInclusionReasons"].append(
                 "Required AA Intelligence Index versus total-evaluation-cost frontier family"
@@ -819,6 +1082,7 @@ def main(*, root: Path = ROOT, data: Path = DATA) -> int:
             )
         row["missingFields"] = [key for key, _label, _higher, _priority in CANDIDATES if row.get(key) is None]
         row["rankingExclusionReasons"] = []
+        row["familyPrimary"] = False
         if row["bugHunt"].get("matched") is not True and row["rankingEligible"]:
             row["missingFields"].append("bugHuntFixedOf105")
         if not row["rankingEligible"] and row["bugHunt"].get("matched") is not True:
@@ -841,10 +1105,8 @@ def main(*, root: Path = ROOT, data: Path = DATA) -> int:
                 )
             else:
                 row["rankingExclusionReasons"].append("No eligible exact-model Bug Hunt result in the selected source snapshot")
-        if not row["rankingEligible"] and row.get("deepswePassAt1Pct") is None:
-            row["rankingExclusionReasons"].append("No exact-variant AA DeepSWE result in the selected source snapshot")
         if not row["rankingEligible"]:
-            row["rankingExclusionReasons"].append("Not a required AA frontier or near-frontier family model")
+            row["rankingExclusionReasons"].append("Not plotted on or within the near gap of AA's rendered frontier (O51)")
             row["rank"] = None
             row["qualityRank"] = None
             row["overallScore"] = None
@@ -853,11 +1115,34 @@ def main(*, root: Path = ROOT, data: Path = DATA) -> int:
             row["pareto"] = None
             row["isMissing"] = True
             row["rankingStatus"] = "excluded_from_primary_cohort"
+    # E205: each family's primary row (its frontier or near configuration, O51), for the one-row-per-family diagnostic.
+    for row in primary_rows:
+        row["familyPrimary"] = row["id"] in frontier_primary_ids | near_only_primary_ids
+    # O36: a configuration without the full benchmark set after the exhaustive search is listed, never ranked or normalised.
+    # O53: each ranking has its own leaf set; a configuration is ranked in every ranking whose set it has, and listed when
+    # it has none of them.
+    documents = value_v3.load_documents(data)
+    by_track = {}
+    for track in q.TRACKS:
+        with q.active_track(track):
+            by_track[track] = {
+                item["id"]: item
+                for item in value_v3.incomplete_configurations([value_v3.configuration(row) for row in primary_rows], documents)
+            }
+    for row in primary_rows:
+        row["rankings"] = {track: row["id"] not in items for track, items in by_track.items()}
+    incomplete = {
+        row["id"]: {"id": row["id"], "missing": sorted({leaf for track in q.LEADING_TRACKS for leaf in by_track[track][row["id"]]["missing"]})}
+        # O121: a configuration ranked only in a diagnostic ranking is still listed, not ranked.
+        for row in primary_rows if not any(row["rankings"][track] for track in q.LEADING_TRACKS)
+    }
     for weight in weights:
         key = weight["key"]
         available_rows = []
         values = []
         for row in primary_rows:
+            if row["id"] in incomplete:
+                continue
             if key == "bugHuntFixedOf105":
                 value = row["bugHunt"].get("fixedOf105") if row["bugHunt"].get("matched") is True else None
             else:
@@ -896,14 +1181,22 @@ def main(*, root: Path = ROOT, data: Path = DATA) -> int:
         row["qualityRank"] = None
         row["pareto"] = None
         row["rankingStatus"] = (
-            "rankable" if row["qualityScore"] is not None
-            else "unranked_no_quality_dimension"
+            "excluded_incomplete_benchmarks" if row["id"] in incomplete
+            else "unranked_no_quality_dimension" if row["qualityScore"] is None
+            else "unranked_no_cost" if row["overallScore"] is None
+            else "rankable"
         )
         row["vRanks"] = {
             weight["key"]: row["dims"][weight["key"]]
             for weight in weights
             if weight["key"] in row["dims"]
         }
+        if row["id"] in incomplete:
+            missing = "; ".join(f"{q.TRACK_LABELS[track]}: no " + ", ".join(value_v3.LEAF_LABELS[key] for key in by_track[track][row["id"]]["missing"])
+                                for track in q.LEADING_TRACKS)
+            row["rankingEligible"] = False
+            row["costComposite"] = None
+            row["rankingExclusionReasons"].append(f"Incomplete benchmark evidence after an exhaustive search (O36, O53): {missing}")
 
     by_overall = sorted(
         [
@@ -953,21 +1246,6 @@ def main(*, root: Path = ROOT, data: Path = DATA) -> int:
         row["pareto"] = not dominated
         if row["pareto"]:
             pareto.append(row["name"])
-
-    frontier_rows_without_quality = [
-        row["id"]
-        for row in primary_rows
-        if row["id"] in frontier_primary_ids | near_frontier_primary_ids
-        and (
-            row["qualityScore"] is None
-            or not math.isfinite(row["qualityScore"])
-        )
-    ]
-    if frontier_rows_without_quality:
-        raise ValueError(
-            "Every required AA frontier or near-frontier model must have a finite non-cost quality score: "
-            f"{frontier_rows_without_quality}"
-        )
 
     # Retain a stronger Bug Hunt emphasis view as an optional companion to the primary rank.
     bug_hunt_emphasis, bug_hunt_ranked_rows, bug_hunt_weights = build_bug_hunt_emphasis(
@@ -1117,7 +1395,7 @@ def main(*, root: Path = ROOT, data: Path = DATA) -> int:
     coverage_document["cohortN"] = len(rows)
     coverage_document["deepSweSource"] = deepswe_chart["source"]
     coverage_document["deepSweConfigurationsN"] = len(deepswe_chart["configurations"])
-    coverage_document["deepSweObservedConfigurationN"] = observed_configuration_n
+    coverage_document["deepSweObservedConfigurationN"] = deepswe_chart.get("observedConfigurationN")
     coverage_document["frontierSelection"] = frontier_selection
     source_fields = dict(coverage_document.get("fields", {}))
     source_fields.update(external_coverage)
@@ -1156,7 +1434,7 @@ def main(*, root: Path = ROOT, data: Path = DATA) -> int:
         "version": VERSION,
         "cohortN": len(primary_rows),
         "scoredN": len(by_overall),
-        "exactBenchmarkOverlapN": len(overlap_primary_ids),
+        "otherPlottedEffortN": len(overlap_primary_ids),
         "frontierRequiredModelN": len(frontier_primary_ids),
         "frontierRequiredModelIds": sorted(frontier_primary_ids),
         "frontierSelection": frontier_selection,
@@ -1209,7 +1487,7 @@ def main(*, root: Path = ROOT, data: Path = DATA) -> int:
         "observedAt": observed_at,
         "cohortN": len(primary_rows),
         "scoredN": len(by_overall),
-        "exactBenchmarkOverlapN": len(overlap_primary_ids),
+        "otherPlottedEffortN": len(overlap_primary_ids),
         "frontierRequiredModelN": len(frontier_primary_ids),
         "frontierSelection": frontier_selection,
         "sourceCohortN": len(rows),
@@ -1266,6 +1544,13 @@ def main(*, root: Path = ROOT, data: Path = DATA) -> int:
         for row in primary_rows if row.get("terminalBenchV4Claim")
     ]
 
+    v3_sections = value_v3.build_tracks(
+        # E187: the frontier-family flag rides with each configuration, so the frontier-families diagnostics exclude retained rows.
+        [value_v3.configuration(row) for row in by_overall + unscored_primary_rows],
+        data,
+        release_day=utcnow().date(),
+    )
+
     (data / "scores.json").write_text(
         json.dumps(
             {
@@ -1274,19 +1559,23 @@ def main(*, root: Path = ROOT, data: Path = DATA) -> int:
                 "observedAt": observed_at,
                 "benchmarkVersion": aa_document.get("benchmarkVersion"),
                 "deepsweBenchmarkVersion": deepswe_chart["benchmark"],
+                "deepsweStatus": "withdrawn by AA (O49), kept as raw data, not scored (E250)",
                 "deepsweSource": deepswe_chart["source"],
                 "deepsweConfigurationsN": len(deepswe_chart["configurations"]),
-                "deepsweObservedConfigurationN": observed_configuration_n,
+                "deepsweObservedConfigurationN": deepswe_chart.get("observedConfigurationN"),
                 "cohort": {
                     "n": len(primary_rows),
                     "scoredN": len(by_overall),
-                    "sourceN": len(rows),
-                    "exactBenchmarkOverlapN": len(overlap_primary_ids),
+                    "rosterN": len(rows),
+                    "otherPlottedEffortN": len(overlap_primary_ids),
                     "frontierRequiredModelN": len(frontier_primary_ids),
-                    "source": "Artificial Analysis Coding Agent Index v1.5 DeepSWE v1.1 chart",
-                    "sourceUpdatedOn": deepswe_chart["observedAt"],
+                    # O51/E250: the cohort is defined by AA's rendered frontier capture; the DeepSWE chart fields
+                    # elsewhere in this file are withdrawn by AA and not scored.
+                    "source": "Artificial Analysis Intelligence Index vs. total cost chart: rendered frontier and near-frontier points (O51)",
+                    "sourceUpdatedOn": frontier_capture["captured_at"],
                 },
                 "frontierSelection": frontier_selection,
+                "aaPlottedNames": plotted_name_state(frontier_capture),
                 "weights": weights,
                 "bugHuntEmphasisRanking": bug_hunt_emphasis,
                 "costMode": cost_mode,
@@ -1330,6 +1619,14 @@ def main(*, root: Path = ROOT, data: Path = DATA) -> int:
                     }
                     for row in unranked_rows
                 ],
+                # O53/O54: the max-effort ranking leads; every other ranking has its own section.
+                "v3": v3_sections[q.DEFAULT_TRACK],
+                "v3Tracks": {track: section for track, section in v3_sections.items() if track != q.DEFAULT_TRACK},
+                # E262: gates run per ranking on its own anchor objects; the rankings publish together, so a hold in
+                # either leading ranking holds the release. O121: a diagnostic ranking's gate is disclosed, never holding.
+                "releaseHold": {"hold": any(v3_sections[track]["gates"]["hold"] for track in q.LEADING_TRACKS if track in v3_sections),
+                                "heldRankings": [track for track in q.LEADING_TRACKS if track in v3_sections and v3_sections[track]["gates"]["hold"]],
+                                "diagnosticGates": {track: v3_sections[track]["gates"]["hold"] for track in q.DIAGNOSTIC_TRACKS if track in v3_sections}},
             },
             indent=2,
             ensure_ascii=False,

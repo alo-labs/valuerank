@@ -1,0 +1,72 @@
+Model version,Pass@1 score,Release date,Organization,Country,Training compute (FLOP),Training compute notes,Name,Pass@1 Standard Error,Mean score,Mean Standard Error,Notes,id
+gemini-4-argon_unknown,0.8240000000000001,2026-09-30,Google DeepMind,United States of America,,,Gemini 4 Argon,4.3,0.8740000000000001,3.3,,recythOL2ifqR8nCk
+claude-sonnet-5-5_max,0.755,2026-09-28,Anthropic,United States of America,,,Sonnet 5.5 [claude-sonnet-5-5],4.7,0.8370000000000001,3.6,,recwsmBXqLEgJjkrE
+claude-opus-5-5_max,0.735,2026-09-22,Anthropic,United States of America,,,Opus 5.5 [claude-opus-5-5],4.9,0.813,4.0,,rec6TErVzXnuNRUoV
+claude-fable-5-1_unknown,0.6859999999999999,2026-09-01,Anthropic,United States of America,,,Fable 5.1 [claude-fable-5.1],4.9,0.7709999999999999,4.3,,reciHu2R0cgIa9tz3
+gemini-3.7-flash_unknown,0.6779999999999999,2026-08-13,Google DeepMind,United States of America,,,Gemini 3.7 Flash,5.1,0.794,3.8,,recW38cKLjAptrWAQ
+claude-opus-5_max,0.658,2026-07-24,Anthropic,United States of America,,,Opus 5,5.1,0.77,4.0,,rec1AxRjtBjTtTCHM
+grok-4.6_unknown,0.653,2026-08-12,xAI,United States of America,,,Grok 4.6,5.2,0.773,4.1,,recqbm6QR4O0FYZGg
+gpt-6-astra_unknown,0.647,2026-09-03,OpenAI,United States of America,9.4e+26,"per OpenAI and affiliates (e.g. Nvidia), 6 Astra was trained on at least 100,000 GB200s in Abilene, Texas (so 100,000 in ""Hardware quantity"" is a lower bound/underestimate).
+
+This suggests around 9e26 FLOP (corresponding to ~100k GB200s over 90 days at 25% FP8 MFU). See more detailed estimate in this notebook, yielding a CI of ~[5e26, 2e27] FLOP.
+https://colab.research.google.com/drive/1DRlugIQs-_zoV66AJT1gQg6I1-NX7NqN ",GPT-6 Astra,5.6,0.751,4.6,,rec8tVCWwIBymY5yY
+gemini-3.8-flash_unknown,0.643,2026-09-02,Google DeepMind,United States of America,,,Gemini 3.8 Flash,5.2,0.7290000000000001,4.4,,recsEbJSODxwEhWql
+claude-fable-5,0.636,2026-06-09,Anthropic,United States of America,,,Fable 5,5.3,0.745,4.3,,reckaD0wz9XOvArFA
+qwen3.8-max_unknown,0.633,2026-08-02,Alibaba,China,,,Qwen3.8-Max,4.9,0.743,4.0,,reclUBETu0CNAWUZa
+gpt-6.1-sol_max,0.6,2026-09-29,OpenAI,United States of America,,,GPT-6.1 Sol,5.6,0.7320000000000001,4.6,,reciOAOiuYHbbtCcU
+claude-fable-5-1_high,0.5970000000000001,2026-09-01,Anthropic,United States of America,,,Fable 5.1 (High),5.6,0.718,4.6,,recNL6V1sB2zRy2vL
+muse-spark-1.3_unknown,0.5860000000000001,2026-09-02,Meta AI,United States of America,,,Muse Spark 1.3 [muse-spark-1-3],5.5,0.7040000000000001,4.4,,reczj4OgICoiocuwT
+gpt-5.6-terra_max,0.5820000000000001,2026-07-09,OpenAI,United States of America,,,GPT-5.6 Terra,5.3,0.718,4.2,,recIl7G6eKw5AFuMv
+glm-5.3_unknown,0.5660000000000001,2026-08-14,Z.ai (Zhipu AI),China,,,GLM-5.3,5.1,0.662,4.3,,recXcmZluX6NVmdiN
+grok-4.5_unknown,0.562,2026-07-08,xAI,United States of America,,,Grok 4.5,5.4,0.705,4.3,,rececsj9bbRs6VG4W
+claude-haiku-5-5_max,0.561,2026-10-07,Anthropic,United States of America,,,Haiku 5.5,5.2,0.6829999999999999,4.4,,recuIVFmW80Eh5kgM
+gpt-5.5_unknown,0.551,2026-04-23,OpenAI,United States of America,,,GPT-5.5,5.5,0.703,4.4,,recAtyT31eNSS0yck
+grok-4.7_unknown,0.546,2026-09-21,xAI,United States of America,,,Grok 4.7,5.1,0.687,4.2,,recMu2uHBeJH8IVe8
+claude-sonnet-5_unknown,0.545,2026-06-30,Anthropic,United States of America,,,Sonnet 5,5.5,0.674,4.5,,recDITjv4rt440qU6
+mimo-v2.6-pro,0.544,2026-09-21,Xiaomi Corp,China,,,MiMo V2.6 Pro,5.2,0.653,4.6,,recXC689WvlAiyNVG
+gpt-6-sol_max,0.543,2026-09-22,OpenAI,United States of America,,,GPT-6 Sol,5.6,0.687,4.7,,recLBjIuBBmwMbz6o
+glm-5.3-flash_unknown,0.528,2026-08-20,Z.ai (Zhipu AI),China,3.24e+24,"6 * 18e9 active parameters * 30e12 tokens = 3.24e24 FLOP. 
+
+https://docs.z.ai/guides/vlm/glm-5.3-flash says ""Combined with our latest 30T-token multimodal pre-training corpus, these changes let GLM-5.3-Flash produce more intelligence with less compute."", which is not definitive in saying that all 30T tokens were used exactly once; likely confidence.",GLM-5.3-Flash,5.3,0.668,4.4,,recoUnuvNXMuPUypv
+claude-opus-5-5_medium,0.525,2026-09-22,Anthropic,United States of America,,,Opus 5.5 [opus-5.5],5.6,0.657,4.9,,recjdN7zdajrdYE2h
+gpt-5.4-2026-03-05_unknown,0.524,2026-03-05,OpenAI,United States of America,,,GPT-5.4,5.3,0.682,4.4,,recRf8ng4aMSZ2eaV
+gpt-5.6-sol_promax,0.514,2026-07-09,OpenAI,United States of America,,,GPT-5.6 Sol,5.5,0.652,4.8,,recG6d1VEmPidhR3T
+claude-opus-4-7_max,0.49200000000000005,2026-04-16,Anthropic,United States of America,,,Opus 4.7,5.4,0.631,4.8,,recDYoVbtdEHFX5Vv
+claude-opus-4-8_max,0.489,2026-05-28,Anthropic,United States of America,,,Opus 4.8,5.5,0.644,4.6,,reckFRpJRQsQ8Z4Sm
+kimi-k3_unknown,0.478,2026-07-16,Moonshot,China,2.0001e+25,"Based on peer models such as Kimi K2.6 and DeepSeek V4 Pro, plausibly was trained on roughly 30T tokens (likely between 15T and 60T). Using the heuristic that C = 6ND, 30T pretraining tokens would imply ~1.9e25 FLOP. This is a somewhat uncertain estimate (more uncertain than estimates based on disclosed active params and token counts, but comparable to estimates based on disclosed GPU-hours).
+
+K3 was likely pretrained on over 1e25 FLOP. Speculatively, K3's relatively large size compared to other Chinese models may have reduced the training token budget vs smaller models.",Kimi K3,5.2,0.622,4.4,,rec69p8O5WoeewHzP
+muse-spark-1.3_max,0.47600000000000003,2026-09-02,Meta AI,United States of America,,,Muse Spark 1.3 (Max),5.7,0.613,5.0,,recXul8NIwqqTNIrA
+qwen3.8-27b,0.47500000000000003,2026-08-14,Alibaba,China,,,Qwen 3.8 27B,4.9,0.622,4.3,,recfGdLMX8buaQjoL
+deepseek-v4-pro-0813_unknown,0.473,2026-08-13,DeepSeek,China,9.702e+24,From https://api-docs.deepseek.com/news/news260813/: built on the DeepSeek-V4-Pro (Preview) model structure with a DSpark speculative-decoding module; agent-focused post-training upgrades. Pre-training compute carried over from DeepSeek-V4-Pro (6 * 49e9 active parameters * 33e12 tokens = 9.702E24).,DeepSeek-V4-Pro-0813,5.6,0.623,4.9,,recZWJ893wBDvmzR7
+gemini-3.6-flash_unknown,0.469,2026-07-21,Google DeepMind,United States of America,,,Gemini 3.6 Flash,5.2,0.634,4.4,,recrKr7XmbXXZO8qD
+claude-opus-4-6_max,0.46299999999999997,2026-02-05,Anthropic,United States of America,,,Opus 4.6,5.5,0.618,4.8,,recfKa2RdTGFZh3gQ
+muse-spark-1.2,0.454,2026-08-05,Meta AI,United States of America,,,Muse Spark 1.2,5.0,0.598,4.5,,recu1kljfh6r4IOhx
+glm-5.2_unknown,0.452,2026-06-16,Z.ai (Zhipu AI),China,,,GLM-5.2,5.7,0.611,4.9,,rec7GciBovlZrZmaF
+claude-sonnet-5-5_medium,0.446,2026-09-28,Anthropic,United States of America,,,Sonnet 5.5 (Medium),5.6,0.594,4.9,,recWY8vFxRRaVvJK3
+gpt-6-luna_max,0.443,2026-09-22,OpenAI,United States of America,,,GPT-6 Luna,5.5,0.59,4.9,,rec1U23OkfwoEOepV
+claude-sonnet-4-6_high,0.43,2026-02-17,Anthropic,United States of America,,,Sonnet 4.6,5.5,0.5760000000000001,4.9,,recNKXGqIBBG6Q12j
+gpt-5.6-luna_unknown,0.43,2026-07-09,OpenAI,United States of America,,,GPT-5.6 Luna,5.4,0.578,4.9,,recjiuLSNycx2dtn8
+glm-5.1,0.409,2026-04-07,Z.ai (Zhipu AI),China,,,GLM-5.1,5.4,0.568,4.6,,recB78P8U9128Kwmw
+deepseek-v4.1-flash_unknown,0.395,2026-09-09,DeepSeek,China,4.32e+24,"(Pre-training) - 6 * 16e9 active parameters * 45e12 tokens = 4.32e+24 FLOP
+",DeepSeek-V4.1-Flash,4.9,0.505,4.7,,recnwdMkLlog5SyR5
+MiniMax-M3,0.37700000000000006,2026-06-01,MiniMax,China,,,MiniMax-M3,4.9,0.535,4.5,,recddMEKJx52F4GnA
+kimi-k2.7-code,0.376,2026-06-12,Moonshot,China,,,Kimi K2.7 Code,4.8,0.534,4.4,,recc9OBbGet6i61HC
+gemini-3.1-pro-preview,0.35100000000000003,2026-02-19,Google DeepMind,United States of America,,,Gemini 3.1 Pro,5.0,0.522,4.7,,recPuGr6uc4AJrsxK
+Inkling,0.33799999999999997,2026-07-15,Thinking Machines,United States of America,1.1e+25,6ND = 6 * 41e9 active parameters * 45e12 tokens = 1.1e25 FLOP,Inkling,4.9,0.488,4.8,,recc5ZC9fNHvAvhao
+Muse-Spark-Open-816B-A42B_unknown,0.334,2026-10-15,Meta AI,United States of America,,,Muse Spark Open,5.3,0.48700000000000004,5.1,,recMOZJL02wkyStrJ
+muse-spark-1.1,0.318,2026-07-09,Meta AI,United States of America,,,Muse Spark 1.1,5.1,0.462,5.0,,recf1h0VzvdEIHDhj
+gemini-3.5-flash-lite,0.29300000000000004,2026-07-21,Google DeepMind,United States of America,,,Gemini 3.5 Flash Lite,4.9,0.461,4.7,,recWGYASTIVksDKsa
+gemini-3.5-flash_unknown,0.275,2026-05-19,Google DeepMind,United States of America,,,Gemini 3.5 Flash,5.0,0.443,4.9,,rec1aJTfBd33EL5vQ
+qwen3.5-397b-a17b,0.249,2026-02-13,Alibaba,China,,,Qwen3.5,4.7,0.40299999999999997,4.6,,recooiGyFYUY9K58B
+nemotron-3-ultra,0.227,2026-06-04,Nvidia,United States of America,6.6e+24,"55 billion active parameters, ~20T tokens",Nemotron 3 Ultra,4.5,0.383,4.6,,recHN2QJQtb3Ee8Ir
+deepseek/deepseek-v3.2,0.21300000000000002,2025-12-01,DeepSeek,China,4.2e+24,"Pre-trained base was DeepSeek-V3.1-Terminus
+3.594058e+24 FLOP [base model] + 2.095014e+23 FLOP = 3.8035594e+24 FLOP for pre-training plus continued pre-training
+
+Then, ""this framework allocates a
+post-training computational budget exceeding 10% of the pre-training cost"", so 4.18e24",DeepSeek-V3.2,4.1,0.35100000000000003,4.5,,rec38Wcf41rxdUK44
+gpt-oss-120b,0.044000000000000004,2025-08-05,OpenAI,United States of America,4.94e+24,"""The training run for gpt-oss-120b required 2.1 million H100-hours to complete""
+(2.1e6 hours)*(1,979 H100 FLOP/s)*(30% utilization)*(60*60) = 4.49e24
+They also do post training similar to o3, which we assume adds at least 10% as much compute, so we multiply this estimate by 1.1 to get 4.94e24
+
+",GPT-OSS-120B,2.0,0.083,2.7,,rec9zkde8jhxtGWhs

@@ -39,7 +39,9 @@ describe('print', () => {
       }
       assert.equal(await visible(page, '#answer-table'), 1);
       assert.equal(await visible(page, '#answer-table tbody tr'), 16);
-      assert.equal(await visible(page, '#answer-table thead th'), 7);
+      assert.equal(await visible(page, '#answer-table thead th'), 6); // no Evidence column: evidence is footnoted
+      assert.equal(await visible(page, '#index-evidence li'), 16);
+      assert.equal(await visible(page, '.fn-back'), 0); // back-links are screen-only
       assert.equal(await page.locator('.table-wrap').first().evaluate((node) => getComputedStyle(node).overflowX), 'visible');
       const ink = await page.evaluate(() => ({ background: getComputedStyle(document.body).backgroundColor, color: getComputedStyle(document.body).color }));
       assert.deepEqual(ink, { background: 'rgb(255, 255, 255)', color: 'rgb(0, 0, 0)' });
@@ -52,7 +54,7 @@ describe('print', () => {
       for (const hidden of ['.site-header', '.nav-links', '[data-theme-toggle]', '.footer-links']) {
         assert.equal(await visible(page, hidden), 0, `${hidden} should not print`);
       }
-      assert.ok(await visible(page, '#dimension-table tbody tr') > 10);
+      assert.equal(await visible(page, '#dimension-table tbody tr'), 13); // the max-effort ranking's thirteen leaves (O55, O61)
       assert.equal(await visible(page, 'h1'), 1);
       assert.equal(await page.evaluate(() => getComputedStyle(document.body).backgroundColor), 'rgb(255, 255, 255)');
       await context.close();

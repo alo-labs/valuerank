@@ -49,48 +49,25 @@ CATEGORY_LABELS = {
 }
 
 COHORT_MAP = {
+    # O132 (2026-10-30): the AA Intelligence Index v5 cohort. Two configurations keep their verified exact rows in the
+    # pinned release; every other one is unmatched there (released after it, or no exact effort row verified).
     "gpt-6-astra": "gpt-6-astra-max",
-    "gemini-3.8-flash": "gemini-3.8-flash-high",
-    "claude-opus-5": "claude-opus-5-max-effort",
-    # The retained pinned-release snapshot declares no exact evaluated row.
-    "claude-opus-5-5": None,
-    "gpt-5.6-sol": "gpt-5.6-sol-max",
-    "claude-fable-5": "claude-fable-5-max-effort",
-    "glm-5.3": "glm-5.3",
-    "kimi-k3": "kimi-k3",
-    "grok-4.6": "grok-4.6",
-    "gpt-5.6-luna": "gpt-5.6-luna-max",
-    "gpt-5.5": "gpt-5.5-xhigh",
-    "gemini-3.7-flash": "gemini-3.7-flash-high",
-    "glm-5.3-flash": "glm-5.3-flash",
-    "deepseek-v4-pro": "deepseek-v4-pro",
-    "claude-opus-4.8": "claude-opus-4-8-max-effort",
-    "qwen3.8-max": "qwen3.8-max",
-    "muse-spark-1.2": "muse-spark-1.2-xhigh",
-    "claude-sonnet-5": "claude-sonnet-5-xhigh-effort",
-    "deepseek-v4-flash": "deepseek-v4-flash",
-    "gemini-3.6-flash": "gemini-3.6-flash-high",
-    "glm-5.2": "glm-5.2",
-    "gemini-3.5-flash": "gemini-3.5-flash-high",
-    "gpt-6-sol": "gpt-6-sol-max",
-    # No verified exact GPT-6.1 Sol max identity in the pinned release.
-    "gpt-6.1-sol": None,
     "gpt-6-luna": "gpt-6-luna-max",
-    "grok-4.7": "grok-4.7-xhigh",
-    # No verified exact identity in the pinned release; keep missing rows.
-    "mimo-v2-6-pro": None,
-    "mimo-v2-6-flash": None,
-    # Added to the roster 2026-10-18; released after the pinned June 25 release.
-    "claude-haiku-5-5": None,
-    "claude-sonnet-5-5": None,
-    "gemini-4-argon": None,
+    **{model_id: None for model_id in (
+        "gpt-6-luna-low", "gpt-6-luna-medium", "gpt-6-luna-high", "gpt-6-luna-xhigh",
+        "claude-haiku-5-5-low", "claude-haiku-5-5-medium", "claude-haiku-5-5-high", "mimo-v2-6-flash",
+        "gpt-6.1-terra-low", "gpt-6.1-terra-medium", "gpt-6.1-terra-high", "gpt-6.1-terra-xhigh", "gpt-6.1-terra",
+        "gpt-6.1-sol-low", "gpt-6.1-sol-medium", "gpt-6.1-sol-high", "gpt-6.1-sol-xhigh", "gpt-6.1-sol",
+        "gpt-6-astra-high", "gpt-6-astra-xhigh", "claude-opus-5-5-high", "claude-opus-5-5-xhigh", "claude-opus-5-5",
+        "claude-sonnet-5-5", "gemini-4-carbon",
+    )},
 }
 
 # Keep officially evaluated models outside the ranked DeepSWE cohort visible in
 # the benchmark-specific views without silently changing the primary ranking
 # population.  These rows are stored separately as `supplementalModels`.
-SUPPLEMENTAL_MAP = {
-    "claude-fable-5-1": ("Claude Fable 5.1", "claude-fable-5-1-max-effort"),
+SUPPLEMENTAL_MAP: dict[str, tuple[str, str]] = {
+    # Claude Fable 5.1 moved into the cohort on 2026-10-21 (owner decision O31).
 }
 
 

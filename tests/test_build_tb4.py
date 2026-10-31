@@ -36,6 +36,34 @@ def data_dir(tmp_path, pinned_clock) -> Path:
     return data
 
 
+# The synthetic fixtures name a past cohort, so the tests pin that cohort's aliases; the live maps are checked below.
+FIXTURE_COHORT_ALIAS = {
+    "GPT-6 Astra": "gpt-6-astra",
+    "Opus 5": "claude-opus-5",
+    "Grok 4.6": "grok-4.6",
+    "Gemini 3.7 Flash": "gemini-3.7-flash",
+    "Sonnet 5": "claude-sonnet-5",
+    "Fable 5.1": "claude-fable-5-1",
+}
+FIXTURE_EXACT_ALIAS = {"Muse Spark 1.3 (xhigh)": "muse-spark-1-3-xhigh"}
+
+
+@pytest.fixture(autouse=True)
+def fixture_aliases(monkeypatch):
+    monkeypatch.setattr(build_tb4, "COHORT_ALIAS", FIXTURE_COHORT_ALIAS)
+    monkeypatch.setattr(build_tb4, "EXACT_ALIAS", FIXTURE_EXACT_ALIAS)
+
+
+def test_the_live_aliases_name_only_exact_max_effort_rows_of_the_cohort():
+    """O33: under the v5 cohort every alias is an exact model-and-effort label; no family is aliased by base name."""
+
+    live = runpy.run_path(str(ROOT / "valuerank" / "build_tb4.py"))
+    assert live["COHORT_ALIAS"] == {}
+    cohort = json.loads((ROOT / "data" / "aa_metrics.json").read_text())["models"]
+    assert set(live["EXACT_ALIAS"].values()) <= set(cohort)
+    assert all(label.endswith("(max)") for label in live["EXACT_ALIAS"])
+
+
 def synthetic_scrape() -> dict:
     return json.loads((FIXTURES / "scrape.json").read_text(encoding="utf-8"))
 
@@ -122,9 +150,19 @@ def test_main_keeps_a_row_without_a_published_cost_and_counts_it(data_dir, capsy
     assert document["rowN"] == 5
     assert document["rowsWithoutCostN"] == 1
     assert document["rows"][4]["costUsd"] is None
-    assert document["rows"][4]["cohortModelId"] is None
+    assert document["rows"][4]["cohortModelId"] == "muse-spark-1-3-xhigh"  # O33: exact model and effort alias
     assert document["rows"][0]["costUsd"] == 3300.0
     assert json.loads(capsys.readouterr().out)["rowsWithoutCostN"] == 1
+
+
+def test_an_exact_alias_names_one_effort_and_never_its_family(data_dir):
+    """O33: a family ranked at several efforts is aliased by the exact displayed model and effort only."""
+
+    scrape_document = synthetic_scrape()
+    scrape_document["rows"].append(["21", "Muse Spark 1.3 (high)", "Muse Code", "12.0% ± 2.9%", "Sep 2, 2026", "9.0B", "—"])
+    output = data_dir / "tb4.json"
+    assert build_tb4.main([str(write_json(data_dir / "scrape.json", scrape_document)), str(output)], data=data_dir) == 0
+    assert read_document(output)["rows"][4]["cohortModelId"] is None
 
 
 def test_parse_cost_refuses_a_malformed_decimal_rather_than_guessing():
@@ -147,7 +185,7 @@ def test_main_normalises_rows_matches_the_cohort_and_records_capture_provenance(
     document = read_document(output)
     assert document["schemaVersion"] == "valuerank-terminal-bench-v1"
     assert document["version"] == "4.0"
-    assert document["observedAt"] == "2026-10-17T20:23:57Z"
+    assert document["observedAt"] == "2026-10-31T04:10:00Z"
     assert document["source"] == {
         "publisher": "Terminal-Bench / Harbor",
         "targetUrl": "https://www.tbench.ai/leaderboard/terminal-bench/4.0",
@@ -161,10 +199,10 @@ def test_main_normalises_rows_matches_the_cohort_and_records_capture_provenance(
     }
     assert document["rowN"] == 4
     assert document["rowsWithoutCostN"] == 0
-    assert document["cohortN"] == 5
-    assert document["matchedN"] == 3
+    assert document["cohortN"] == 6
+    assert document["matchedN"] == 4
     assert document["missingModels"] == ["Gemini 3.7 Flash", "Claude Sonnet 5"]
-    assert document["rankingAvailableN"] == 4
+    assert document["rankingAvailableN"] == 5
     assert document["rankingMissingModels"] == ["Claude Sonnet 5"]
     assert document["providerClaimN"] == 2
     assert [claim["claimId"] for claim in document["providerClaims"]] == [
@@ -185,11 +223,11 @@ def test_main_normalises_rows_matches_the_cohort_and_records_capture_provenance(
         "costUsd": 3300.0,
         "cohortModelId": "gpt-6-astra",
     }
-    assert document["rows"][1]["cohortModelId"] is None, "an alias-less model keeps no cohort id"
+    assert document["rows"][1]["cohortModelId"] == "claude-fable-5-1", "Fable 5.1 joined the cohort (O31)"
     assert document["rows"][1]["baseModel"] == "Fable 5.1"
     assert document["rows"][3]["baseModel"] == "Grok 4.6", "a name without a parenthetical is its own base"
     assert document["rows"][3]["costUsd"] == 450.0
-    assert list(document["cohortRows"]) == ["gpt-6-astra", "claude-opus-5", "grok-4.6"]
+    assert list(document["cohortRows"]) == ["gpt-6-astra", "claude-opus-5", "grok-4.6", "claude-fable-5-1"]
     assert document["cohortRows"]["claude-opus-5"]["model"] == "Opus 5 (max)"
     assert document["cohortRows"]["claude-opus-5"]["costUsd"] == 6000.0
     assert "providerClaimPolicy" in document
@@ -206,9 +244,9 @@ def test_main_summary_reports_counts_missing_models_and_the_output_path(data_dir
         "version": "4.0",
         "rows": 4,
         "rowsWithoutCostN": 0,
-        "cohortN": 5,
-        "matchedN": 3,
-        "rankingAvailableN": 4,
+        "cohortN": 6,
+        "matchedN": 4,
+        "rankingAvailableN": 5,
         "providerClaimN": 2,
         "missingModels": ["Gemini 3.7 Flash", "Claude Sonnet 5"],
         "rankingMissingModels": ["Claude Sonnet 5"],
@@ -266,7 +304,7 @@ def test_main_treats_a_claims_file_without_a_claims_list_as_having_no_claims(dat
     document = read_document(output)
     assert document["providerClaimN"] == 0
     assert document["providerClaims"] == []
-    assert document["rankingAvailableN"] == 3
+    assert document["rankingAvailableN"] == 4
     assert document["rankingMissingModels"] == ["Gemini 3.7 Flash", "Claude Sonnet 5"]
 
 

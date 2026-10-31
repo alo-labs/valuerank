@@ -10,12 +10,15 @@ const CORE = [
   { key: 'overall', label: 'Overall', defaultDir: 'desc' },
   { key: 'quality', label: 'Quality', defaultDir: 'desc' },
   { key: 'cost', label: 'Cost', defaultDir: 'asc' },
-  { key: 'grade', label: 'Evidence', defaultDir: 'asc' },
+  // Data only: kept in the view state, URL, sort and export, but never drawn as a table column (evidence is footnoted).
+  { key: 'grade', label: 'Evidence', defaultDir: 'asc', dataOnly: true },
   { key: 'coverage', label: 'Coverage', defaultDir: 'desc' },
   { key: 'developer', label: 'Developer', defaultDir: 'asc' },
   { key: 'qualityRank', label: 'Quality rank', defaultDir: 'asc' },
   { key: 'speed', label: 'Speed', defaultDir: 'desc' },
   { key: 'ii', label: 'Intelligence Index', defaultDir: 'desc' },
+  // O42: the rank positions a row cannot be told apart from under benchmark sampling noise; sorts by its first position.
+  { key: 'band', label: 'Noise band', defaultDir: 'asc' },
 ];
 
 export function columnCatalog(dimensions) {
@@ -34,6 +37,7 @@ export function columnValue(model, key, basis) {
     case 'cost': return costValue(model, basis);
     case 'coverage': return model.coverage ? model.coverage.pct : null;
     case 'ii': return model.intelligenceIndex.value;
+    case 'band': return model.band && model.band[basis] ? model.band[basis][0] : null;
     case 'name': case 'developer': case 'grade': case 'quality': case 'qualityRank': case 'speed':
       return model[key];
     default: return model.dims[key] ?? null;
@@ -45,7 +49,7 @@ export function applyFilters(models, state) {
   return models.filter((m) => {
     if (state.provider.length && !state.provider.includes(m.developer)) return false;
     if (state.grade.length && !state.grade.includes(m.grade)) return false;
-    if (state.route === 'eligible' && !m.rankingEligible) return false;
+    if (state.route === 'eligible' && !m.cost.route) return false;
     if (state.route === 'fallback' && !m.cost.fallback) return false;
     if (state.cov > 0 && !(m.coverage && m.coverage.pct >= state.cov)) return false;
     if (q && !`${m.name} ${m.developer}`.toLowerCase().includes(q)) return false;

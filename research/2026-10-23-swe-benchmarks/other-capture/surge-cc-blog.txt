@@ -1,0 +1,294 @@
+ComplexConstraints: A Benchmark for Entangled Instruction Following
+New
+Frontier data and RL environments, off the shelf
+Blog
+benchmarks
+Off-the-Shelf
+Training
+experts
+Products
+Enterprise
+Research
+Careers
+Contact
+Login
+Menu
+Close
+THE SURGE AI BLOG
+ComplexConstraints: A Benchmark for Entangled Instruction Following
+October 21, 2026
+June 3, 2026
+No items found.
+TL;DR
+Real instructions aren’t lists of independent rules – they're entangled.
+Introducing
+ComplexConstraints
+: our new IF benchmark where instructions depend on each other, fire conditionally, and must be inferred from context.
+We also show how training a Qwen3-4B model on ComplexConstraints data generalizes to other benchmarks, improving AdvancedIF performance from 28% to 37% and MultiChallenge performance from 41% to 51%.
+LEADERBOARD
+RESEARCH PAPER
+GITHUB
+Table of contents
+Case Study Llama
+Analysis of Individual writings
+Appendix
+Most instruction-following benchmarks test constraints that are simple and explicit: keep it under 300 characters, use a professional tone, format in Markdown.
+Real work isn't like that. The instructions people give come in tangles. Constraints depend on each other, fire only when conditions set by other constraints are met, and sometimes go unstated entirely. The real world contains:
+Conditional constraints.
+A customer gets automatic refunds
+if
+their balance is below a threshold –
+unless
+their fraud score is too high.
+Planning constraints.
+A film shoot schedule has to fit the availability of 5 actors, sufficient daylight for outdoor scenes, travel times, and equipment rental windows.
+Multistep constraints.
+A reimbursement requires checking the expense category, converting currency at the right exchange rate, applying the company’s per-diem cap, and formatting the result in a quarterly report.
+Implicit constraints.
+When a restaurant manager asks for a schedule and some staff observe religious dietary restrictions, no one has to spell out that those employees shouldn't be assigned to pork prep.
+Negative constraints.
+An SEC disclosure has to convey material developments – but can
+not
+include forward-looking statements without safe-harbor language or reveal anything that hasn't been publicly filed.
+We wanted a benchmark that captures this.
+Today we're releasing
+ComplexConstraints
+: 75 expert-crafted prompts with 1,559 evaluation rubrics, measuring whether models can do the constraint-heavy work professionals do every day.
+Where existing benchmarks fall short
+IFEval tests things like avoiding commas or hitting an exact word count. Frontier models score above 80% on it. That's a long way from following the kind of instruction a human professional gives.
+AdvancedIF
+, which we helped the Meta Superintelligence team build, was a step forward: human-written prompts, LLM-as-judge evaluation, rubrics that capture what people care about. But the frontier has largely now mastered the kinds of simple, independent, and explicit constraints that AdvancedIF is composed of.
+How ComplexConstraints prompts are built
+ComplexConstraints introduces a new level of realistic complexity. Most prompts contain dozens of multi-dependency constraints spanning the following taxonomy:
+Conditional constraints
+fire only under specific circumstances.
+Planning constraints
+require finding an arrangement that satisfies multiple constraints at once.
+Multistep constraints
+require sequential reasoning where each step's output feeds the next; an early error corrupts everything downstream.
+Negative constraints
+are defined by what the model must not do.
+Implicit constraints
+are requirements a competent professional would understand without being spelled out.
+It also includes standard
+explicit constraints
+(e.g., a specific budget cap, a required exchange rate, a named employee's day off, a specific format).
+Every prompt comes from day-to-day work: line producers, restaurant managers, teachers, business administrators. Three examples:
+Film production crisis.
+You're on week 2 of a 5-week feature shoot and four crew members test positive for COVID. Draft a crew memo (2–3 paragraphs, most important info first). Build a contact tracing list using specific exposure criteria (indoor close contact, 60+ minutes). Revise the shooting schedule to move interior scenes to later in the week. Write a formal letter to the bond company. Keep sick crew members' names out of the memo, hold a calm tone, and don't violate union turnaround rules. 33 rubric items.
+Restaurant staff scheduling.
+An Indian restaurant owner with a diverse staff needs a weekly schedule covering FOH/BOH language requirements, religious restrictions on pork preparation, dishwasher coverage every night shift, extra FOH staffing when training new employees, specific days off per employee, and minimum coverage that varies by shift. 18 interlocking constraints, many of which only matter in combination.
+Office procurement.
+A team of six needs to outfit a new office on a £3,000 budget: £500 per-person cap (except the boss), standing desks prioritized, one employee with a medical accommodation, desk plants outside individual budgets, output formatted as a draft email to the boss with prices and totals. 30 rubric items spanning budget math, prioritization, and communication.
+How frontier models perform
+Each prompt has 15-40 rubric items, graded by an LLM judge. Top models score under 40%. View the leaderboard
+here
+.
+Training on ComplexConstraints companion data
+To check whether ComplexConstraints measures something worth optimizing for, we built a companion training set of 1,000 examples, and trained Qwen3-4B using RLVR with a judge model.
+On a held-out set, rubric pass rate rose from 57.9% to 73.4% – a 15.5-point gain. The trained 4B model landed at near-parity with Qwen3-235B-A22B-Instruct (73.9%), a model roughly 60x its size.
+The bigger question is whether those gains transfer.
+Do ComplexConstraints gains generalize to other benchmarks?
+They do.
+On AdvancedIF, overall task pass rate rose from 28.15% to 36.60% (+8.45pp). System Steerability – following behavioral directives in system prompts – jumped 12.42pp. Carried Context, which tests multi-turn instruction retention, improved 7.07pp.
+On MultiChallenge, overall task pass rate rose from 41.1% to 51.2% (+10.1pp). Instruction Retention gained 22.1pp, from 23.6% to 45.7%. Self Coherence improved 10.5pp.
+Training on ComplexConstraints
+Benchmark
+Category
+Baseline
+Trained
+Delta
+Meta AdvancedIF
+Overall Task Pass Rate
+(all criteria pass)
+28.15%
+36.60%
++8.45pp
+Meta AdvancedIF
+Single Turn
+34.08%
+40.05%
++5.97pp
+Meta AdvancedIF
+System Steerability
+22.49%
+34.91%
++12.42pp
+Meta AdvancedIF
+Carried Context
+(multi-turn)
+28.80%
+35.87%
++7.07pp
+MultiChallenge
+Overall Task Pass Rate
+(all criteria pass)
+41.1%
+51.2%
++10.1pp
+MultiChallenge
+Inference Memory
+59.5%
+65.3%
++5.8pp
+MultiChallenge
+Self Coherence
+33.5%
+44.0%
++10.5pp
+MultiChallenge
+Instruction Retention
+23.6%
+45.7%
++22.1pp
+Single-turn training, multi-turn gains
+One of the most interesting findings: training on single-turn ComplexConstraints data produced consistent improvements on multi-turn evaluation dimensions in both AdvancedIF and MultiChallenge.
+The multi-turn transfer makes sense once you look at the underlying skill. Tracking many simultaneous requirements without dropping the lower-priority ones is the same skill multi-turn IF tests – the difference is just where the requirements come from. In single-turn ComplexConstraints data, they come from earlier in the prompt; in a multi-turn conversation they come from earlier turns. Training on complex single-turn rubrics carries over.
+Behavior changes in the ComplexConstraints-trained model
+We compared paired runs of the baseline and trained models on the same tasks to understand how the trained model learned to behave differently. A few patterns:
+It stopped dropping hard constraints.
+On a camp counselor task with 30+ campers and strict rules about sibling separation and medical needs, the baseline ignored the hardest constraints. The trained model processed them systematically: identifying strict limits first, grouping by specialization, and validating group sizes.
+It stopped giving up.
+On a restaurant scheduling task involving minor labor laws and tight availability, the baseline output "NEED COVERAGE" for every shift. The trained model produced a complete schedule and only flagged shifts where full staffing was mathematically impossible.
+It handled rule-based transformations cleanly.
+On a sales table task involving unit conversions and conditional formatting, the baseline made errors at nearly every step. The trained model didn't.
+It remembered stated preferences.
+In multi-turn evaluations, the trained model carried user preferences across intervening turns. The baseline would reason about a preference internally and then fail to surface it in the final answer.
+What we want to measure
+What a benchmark measures is what models eventually get good at. IFEval rewards letter-counting and formatting tricks, and that's what models learn. ComplexConstraints rewards holding many entangled constraints in mind at once – and the 4B results show that the skill transfers to settings the model has never seen.
+That's the kind of complex instruction following that professional work demands.
+The full ComplexConstraints benchmark is on HuggingFace
+here
+. Leaderboard results are
+here
+.
+Benchmark
+ComplexConstraints
+VIEW LEADERBOARD
+RESEARCH PAPER
+GITHUB
+/surge-ai
+@hellosurgeai
+sudo L7: Can Coding Agents Act Like Staff Engineers?
+GDP.xlsx: Can Agents Understand the Spreadsheets That Run the World?
+What Does GDP.pdf Teach — Beyond PDFs?
+DAYJOB: Can Agents Survive a 9 to 5?
+Helping Anthropic Build Automated Alignment Researchers
+Hill-Climbing a SWE Agent: What 1,700 Coding Tasks Taught Kimi K2.7
+Fable 5.1, Muse Spark 1.3, and Gemini 3.8 Flash on the Tuesday Work Index
+DeepSeek V4 Pro Scores 59.7 on the Tuesday Work Index
+Qwen 3.8 Max Scores 58.7 on the Tuesday Work Index
+Introducing the Tuesday Work Index: Can AI Get Through an Ordinary Day?
+We Trained a Model on Office Work. It Also Got Better at Coding.
+Chartography: A Benchmark for Professional Chart Understanding
+OpenAI cites GDP.pdf in its GPT-5.6 release
+Training on ComplexConstraints: +10.1 on MultiChallenge, +8.5 on AdvancedIF
+HANDBOOK.md Benchmark: Can Agents Follow 100-Page Company Policies?
+Anthropic cited GDP.pdf and Riemann-bench in their Fable 5 and Mythos 5 system card
+ComplexConstraints: A Benchmark for Entangled Instruction Following
+Microsoft used Surge human evaluations to benchmark MAI-Thinking-1
+Training on Long-Horizon Agent Tasks: +9.6 on Toolathlon, +5.3 on τ²-Bench
+Antidote Leaderboard: Optimizing for You
+GDP.pdf Benchmark: Can Frontier Models Master the Documents that Run the World?
+Riemann-bench: A Benchmark for Moonshot Mathematics
+EnterpriseBench: CoreCraft – Measuring AI Agents in Chaotic, Enterprise RL Environments
+Hemingway-bench: The AI Writing Leaderboard Judged by Expert Writers
+Building AdvancedIF: Evolving Instruction Following Beyond IFEval and “Avoid the Letter C”
+LMArena is a cancer on AI
+RL Environments and the Hierarchy of Agentic Capabilities
+How do frontier models perform on real-world finance problems?
+A Product Take on Sonnet 4.5
+Is Sonnet 4.5 the best coding model in the world?
+The Human/AI Frontier: A Conversation with Bogdan Grechuk
+SWE-Bench Failures: When Coding Agents Spiral Into 693 Lines of Hallucinations
+Benchmarks are broken
+Unsexy AI Failures: The PDF That Broke ChatGPT
+Bringing light to the GPT-4o vs. GPT-5 personality controversy
+DALL·E 3 and Midjourney Fail Astral Codex Ten's Image Generation Bet
+How Anthropic uses Surge AI to Train and Evaluate Claude
+We Evaluated ChatGPT vs. Google on 500 Search Queries
+AI Red Teams for Adversarial Training: How to Make ChatGPT and LLMs Adversarially Robust
+HellaSwag or HellaBad? 36% of this popular LLM benchmark contains errors
+How TikTok is Evolving the Next Generation of Search
+Evaluating Generative AI: Did Astral Codex Ten Win His Bet on AI Progress?
+Why Instagram is Losing Gen Z: We Asked 100 Users to Compare TikTok vs. Reels
+The $250K Inverse Scaling Prize and Human-AI Alignment
+Search Behind-the-Scenes: How Neeva Uses Human Evaluation to Measure Search Quality
+Human Evaluation of Large Language Models: How Good is Hugging Face’s BLOOM?
+30% of Google's Emotions Dataset is Mislabeled
+AI Red Teams and Adversarial Data Labeling with Redwood Research
+Humans vs. Gary Marcus vs. Slate Star Codex: When is an AI failure actually a failure?
+How Surge AI Built OpenAI's GSM8K Dataset of 8,500 Math Problems
+We asked 100 humans to draw the DALL·E prompts
+Google Search is Falling Behind
+Moving Beyond Engagement: Optimizing Facebook's Algorithms for Human Values
+Holy $#!t: Are popular toxicity models simply profanity detectors?
+Is Google Search Deteriorating? Measuring Google's Search Quality in 2022
+5 Examples of the Importance of Context-Sensitivity in Data-Centric AI
+More Posts
+sudo L7: Can Coding Agents Act Like Staff Engineers?
+Introducing sudo L7, a coding benchmark testing whether AI agents can go beyond correct code and exercise staff-level engineering judgment.
+read post
+October 8, 2026
+GDP.xlsx: Can Agents Understand the Spreadsheets That Run the World?
+GDP.xlsx tests whether frontier agents can read the professional spreadsheets that run the world. It spans 70 tasks across 12 knowledge-work domains: finance, healthcare, engineering, manufacturing, insurance, real estate, legal, human resources, agriculture, energy, logistics, and public sector.
+read post
+September 30, 2026
+What Does GDP.pdf Teach — Beyond PDFs?
+Post-training on GDP.pdf improved Kimi K2.7 on GDPval, including tasks without PDFs, and changed how it gathered information and used tools before building deliverables.
+read post
+September 29, 2026
+DAYJOB: Can Agents Survive a 9 to 5?
+Introducing DAYJOB, Surge AI’s benchmark family for economically valuable agents: realistic requests in complex environments, requiring end-to-end professional judgment.
+read post
+September 23, 2026
+Helping Anthropic Build Automated Alignment Researchers
+Anthropic recently published new work on automated alignment researchers. Surge contributed to the research by building the human baseline, including researcher recruitment, structured submissions, quality control, and expert review.
+read post
+September 15, 2026
+Hill-Climbing a SWE Agent: What 1,700 Coding Tasks Taught Kimi K2.7
+We post-trained Kimi K2.7 on 1,700 Surge agentic coding tasks. The trained model improved on all external benchmarks we tested, including +20.0pp on SWE-Marathon, +12.4pp on DeepSWE, and +7.6pp on Terminal-Bench 4.
+read post
+September 11, 2026
+Appendix
+Smart ≠ Useful
+Raise AGI with the richness of human intelligence.
+Platform
+Products
+Off-the-Shelf
+Post-Training Runs
+Expert Workforce
+Enterprise
+Enterprise Guides
+Login
+Company
+Research
+Blog
+Contact
+Work with us
+Careers
+SWE
+Consultant Network
+Benchmarks
+Tuesday Work Index
+sudo L7
+NEW
+GDP.xlsx
+NEW
+DAYJOB: Healthcare
+DAYJOB: Finance
+Chartography
+HANDBOOK.md
+ComplexConstraints
+GDP.pdf
+Riemann-bench
+EnterpriseBench: CoreCraft
+Antidote
+Hemingway-bench
+© 2026 Surge AI
+X
+Linkedin
+Cookie Settings
+Cookie Policy
+Privacy Policy
+Terms of Service

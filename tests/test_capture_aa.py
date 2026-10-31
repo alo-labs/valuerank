@@ -14,7 +14,15 @@ import pytest
 
 from valuerank import capture_aa as ca
 
-NOW = "2026-10-17T20:23:57Z"  # pinned_clock instant
+NOW = "2026-10-25T09:56:47Z"  # this module's pinned instant: the fixture captures are dated relative to it
+
+
+@pytest.fixture
+def pinned_clock(monkeypatch: pytest.MonkeyPatch) -> str:
+    """The capture fixtures are dated around the 2026-10-25 release, so this module keeps that instant."""
+
+    monkeypatch.setenv("VALUERANK_NOW", NOW)
+    return NOW
 
 
 def _shifted(delta: timedelta) -> str:
@@ -77,6 +85,7 @@ def world(tmp_path, monkeypatch, pinned_clock):
     monkeypatch.setattr(ca, "AA_DIR", aa)
     monkeypatch.setattr(ca, "EXTRACT_PATH", aa / "aa_extract.json")
     monkeypatch.setattr(ca, "OUTPUT_PATH", aa / "aa_v432_snapshot.json")
+    monkeypatch.setattr(ca, "PREVIOUS_PATH", aa / "aa_previous_capture.json")
     return aa
 
 
@@ -86,7 +95,7 @@ def entry(model_id="m", **extra):
 
 def preserved(model_id="m", capture=None, **overrides):
     page = {"id": model_id, "url": f"https://artificialanalysis.ai/models/{model_id}", "model": {"slug": model_id},
-            "capture": {"observedAt": "2026-10-15T00:00:00Z", "precision": "rounded", "method": "browser"}}
+            "capture": {"observedAt": "2026-10-19T00:00:00Z", "precision": "rounded", "method": "browser"}}
     if capture is not None:
         page["capture"] = capture
     page.update(overrides)
@@ -102,7 +111,7 @@ def test_fresh_preserved_capture_is_reused_unchanged(pinned_clock):
 
 
 def test_preserved_capture_accepts_captured_at_when_no_observed_at(pinned_clock):
-    existing = preserved(capture={"capturedAt": "2026-10-16T12:00:00+00:00", "precision": "p", "method": "m"})
+    existing = preserved(capture={"capturedAt": "2026-10-19T12:00:00+00:00", "precision": "p", "method": "m"})
     assert ca.preserved_public_capture(entry(), {"m": existing}) is existing
 
 
@@ -165,7 +174,7 @@ def test_capture_fetches_and_decodes_page(net):
     result = ca.capture(entry(), {})
     assert result == {
         "id": "m", "requestedName": "M", "url": "https://artificialanalysis.ai/models/m",
-        "model": {"slug": "m", "intelligenceIndex": 50},
+        "model": {"slug": "m", "intelligenceIndex": 50, "notes": []},
         "capture": {"status": 200, "contentType": "text/html; charset=utf-8", "responseBytes": len(body),
                     "responseSha256": hashlib.sha256(body).hexdigest()},
     }
@@ -263,11 +272,11 @@ def test_main_writes_snapshot_with_expected_shape(world, net, capsys):
     assert ca.main() == 0
     document = json.loads((world / "aa_v432_snapshot.json").read_text())
     assert document["schemaVersion"] == "valuerank-aa-page-snapshot/v2"
-    assert document["benchmarkVersion"] == "Artificial Analysis Intelligence Index v4.3.2"
+    assert document["benchmarkVersion"] == "Artificial Analysis Intelligence Index v5.0"
     assert document["capturedAt"] == NOW and document["concurrency"] == 4
     assert document["source"].endswith("/evaluations/artificial-analysis-intelligence-index")
     assert [page["id"] for page in document["pages"]] == ["a", "b"]  # input order preserved
-    assert document["pages"][0]["model"] == {"slug": "a"}
+    assert document["pages"][0]["model"] == {"slug": "a", "notes": []}
     printed = json.loads(capsys.readouterr().out)
     assert printed == {"models": 2, "uniqueIds": 2, "benchmarkVersion": document["benchmarkVersion"],
                        "capturedAt": NOW, "output": "data/aa/aa_v432_snapshot.json"}
@@ -282,6 +291,17 @@ def test_main_keeps_fresh_public_record_from_stored_snapshot(world, net):
     pages = json.loads((world / "aa_v432_snapshot.json").read_text())["pages"]
     assert pages[1] == existing
     assert [call[0] for call in net.calls] == ["https://artificialanalysis.ai/models/a"]
+    # I60 M1: the replaced capture leaves a digest for the next release's movement figures.
+    previous = json.loads((world / "aa_previous_capture.json").read_text())
+    assert previous["pages"] == [{"id": "p", "gdpval": None, "gdpvalEvaluation": None, "intelligenceIndex": None}]
+
+
+def test_previous_capture_digest_reads_gdpval_fields():
+    document = {"capturedAt": "t", "pages": [{"id": "x", "model": {"gdpval": 1600.5, "intelligenceIndex": 50.1,
+                "intelligenceIndexEvaluations": [{"slug": "aa-briefcase", "score": 1}, {"slug": "gdpval-aa", "score": 1601.0}]}}]}
+    digest = ca.previous_capture_digest(document, b"abc")
+    assert digest["capturedAt"] == "t" and digest["sha256"] == hashlib.sha256(b"abc").hexdigest()
+    assert digest["pages"] == [{"id": "x", "gdpval": 1600.5, "gdpvalEvaluation": 1601.0, "intelligenceIndex": 50.1}]
 
 
 def test_main_stale_public_record_fails_before_any_network_request(world, net):
@@ -332,4 +352,13 @@ def test_module_guard_exits_with_main_status(tmp_path, monkeypatch, pinned_clock
     with pytest.warns(RuntimeWarning), pytest.raises(SystemExit) as exit_info:
         runpy.run_module("valuerank.capture_aa", run_name="__main__", alter_sys=True)
     assert exit_info.value.code == 0
-    assert json.loads((aa / "aa_v432_snapshot.json").read_text())["pages"][0]["model"] == {"slug": "a"}
+    assert json.loads((aa / "aa_v432_snapshot.json").read_text())["pages"][0]["model"] == {"slug": "a", "notes": []}
+
+
+def test_capture_records_the_notes_aa_prints_verbatim(net):
+    """O103: the "* <text>" notes AA prints on a page are recorded beside its model object, once each."""
+
+    note = "Claude Haiku 5.5 has 5x higher pricing on longer-context inputs which are not currently reflected"
+    body = (page_html({"slug": "m"}) + f'<script>self.x("* {note}")</script><p>"* {note}"</p>').encode()
+    net.pages["https://artificialanalysis.ai/models/m"] = FakeResponse(body)
+    assert ca.capture(entry(), {})["model"]["notes"] == [note]

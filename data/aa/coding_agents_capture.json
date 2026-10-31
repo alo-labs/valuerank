@@ -1,0 +1,1913 @@
+{
+  "schemaVersion": "valuerank-aa-coding-agents/v1",
+  "source": "https://artificialanalysis.ai/agents/coding-agents",
+  "capturedAt": "2026-10-31T04:07:05Z",
+  "costFields": {
+    "total": "sums.costUsd (AA 'Total Cost Across the Artificial Analysis Coding Agent Index')",
+    "perTask": "mean.costUsd (AA average pay-per-token API cost per task)"
+  },
+  "responseSha256": "2b0a16014990f2fe93bc0520654e8982ce01f56e51bb44e86ef211419f577a47",
+  "notes": [],
+  "configurations": [
+    {
+      "id": "ee454ece0aab8dacb7127770643dcb6b",
+      "label": "Antigravity CLI - Gemini 4 Argon (High)",
+      "agent": "Antigravity CLI",
+      "model": "Gemini 4 Argon (High)",
+      "isDefault": true,
+      "isUnavailable": false,
+      "isRouter": false,
+      "indexScore": 0.532462665363311,
+      "totalCostUsd": 3189.822337724,
+      "meanCostPerTaskUsd": 11.7318632341125,
+      "pricedTaskCount": 271.893925,
+      "components": [
+        {
+          "name": "frontiercode-v1.1-main",
+          "dataset": "frontiercode-v1.1",
+          "weight": 0.333333333333333,
+          "attempts": 300,
+          "reward": 0.485706666666667,
+          "safety": {
+            "refused": 0,
+            "blocked": 0,
+            "fallback": 0,
+            "fallbackModels": []
+          }
+        },
+        {
+          "name": "swe-atlas-qna",
+          "dataset": "datasets/swe-atlas-qna",
+          "weight": 0.333333333333333,
+          "attempts": 371,
+          "reward": 0.551075268817204,
+          "safety": {
+            "refused": 0,
+            "blocked": 0,
+            "fallback": 0,
+            "fallbackModels": []
+          }
+        },
+        {
+          "name": "terminal-bench-v4",
+          "dataset": "terminal-bench/terminal-bench@sha256:39d9f44b40420cde8fdcc087579c0d72a7e14fa3656d603c3f0d22fb35e27732",
+          "weight": 0.333333333333333,
+          "attempts": 198,
+          "reward": 0.560606060606061,
+          "safety": {
+            "refused": 0,
+            "blocked": 0,
+            "fallback": 0,
+            "fallbackModels": []
+          }
+        }
+      ],
+      "notes": []
+    },
+    {
+      "id": "615aa2e21916e4843210a552131d95b7",
+      "label": "Antigravity CLI - Gemini 4 Carbon (High)",
+      "agent": "Antigravity CLI",
+      "model": "Gemini 4 Carbon (High)",
+      "isDefault": true,
+      "isUnavailable": true,
+      "isRouter": false,
+      "indexScore": 0.594049025741284,
+      "totalCostUsd": 2114.56552926667,
+      "meanCostPerTaskUsd": 7.7432202900257,
+      "pricedTaskCount": 273.086061,
+      "components": [
+        {
+          "name": "frontiercode-v1.1-main",
+          "dataset": "frontiercode-v1.1",
+          "weight": 0.333333333333333,
+          "attempts": 295,
+          "reward": 0.508686666666667,
+          "safety": {
+            "refused": 0,
+            "blocked": 0,
+            "fallback": 0,
+            "fallbackModels": []
+          }
+        },
+        {
+          "name": "swe-atlas-qna",
+          "dataset": "datasets/swe-atlas-qna",
+          "weight": 0.333333333333333,
+          "attempts": 372,
+          "reward": 0.637096774193548,
+          "safety": {
+            "refused": 0,
+            "blocked": 0,
+            "fallback": 0,
+            "fallbackModels": []
+          }
+        },
+        {
+          "name": "terminal-bench-v4",
+          "dataset": "terminal-bench/terminal-bench@sha256:39d9f44b40420cde8fdcc087579c0d72a7e14fa3656d603c3f0d22fb35e27732",
+          "weight": 0.333333333333333,
+          "attempts": 198,
+          "reward": 0.636363636363636,
+          "safety": {
+            "refused": 0,
+            "blocked": 0,
+            "fallback": 0,
+            "fallbackModels": []
+          }
+        }
+      ],
+      "notes": []
+    },
+    {
+      "id": "e17ee3a79eab160154a92f31c6c2b1fa",
+      "label": "Antigravity SDK - Gemini 3.8 Flash (High)",
+      "agent": "Antigravity SDK",
+      "model": "Gemini 3.8 Flash (High)",
+      "isDefault": false,
+      "isUnavailable": false,
+      "isRouter": false,
+      "indexScore": 0.33272301118714,
+      "totalCostUsd": 686.634277225,
+      "meanCostPerTaskUsd": 2.51071545979138,
+      "pricedTaskCount": 273.481519,
+      "components": [
+        {
+          "name": "frontiercode-v1.1-main",
+          "dataset": "frontiercode-v1.1",
+          "weight": 0.333333333333333,
+          "attempts": 300,
+          "reward": 0.408156,
+          "safety": {
+            "refused": 0,
+            "blocked": 0,
+            "fallback": 0,
+            "fallbackModels": []
+          }
+        },
+        {
+          "name": "swe-atlas-qna",
+          "dataset": "datasets/swe-atlas-qna",
+          "weight": 0.333333333333333,
+          "attempts": 372,
+          "reward": 0.443548387096774,
+          "safety": {
+            "refused": 0,
+            "blocked": 0,
+            "fallback": 0,
+            "fallbackModels": []
+          }
+        },
+        {
+          "name": "terminal-bench-v4",
+          "dataset": "terminal-bench/terminal-bench@sha256:39d9f44b40420cde8fdcc087579c0d72a7e14fa3656d603c3f0d22fb35e27732",
+          "weight": 0.333333333333333,
+          "attempts": 198,
+          "reward": 0.146464646464646,
+          "safety": {
+            "refused": 0,
+            "blocked": 0,
+            "fallback": 0,
+            "fallbackModels": []
+          }
+        }
+      ],
+      "notes": []
+    },
+    {
+      "id": "5c82a7985b08f35190cc0db574fd1773",
+      "label": "Claude Code - Claude Fable 5.1 (Max, Default Fallback)",
+      "agent": "Claude Code",
+      "model": "Claude Fable 5.1 (Max, Default Fallback)",
+      "isDefault": true,
+      "isUnavailable": false,
+      "isRouter": false,
+      "indexScore": 0.576200245682633,
+      "totalCostUsd": 3042.60256466666,
+      "meanCostPerTaskUsd": 11.5301045391259,
+      "pricedTaskCount": 263.883346,
+      "components": [
+        {
+          "name": "frontiercode-v1.1-main",
+          "dataset": "frontiercode-v1.1",
+          "weight": 0.333333333333333,
+          "attempts": 300,
+          "reward": 0.488864666666667,
+          "safety": {
+            "refused": 2,
+            "blocked": 0,
+            "fallback": 2,
+            "fallbackModels": [
+              "Claude Opus 4.8"
+            ]
+          }
+        },
+        {
+          "name": "swe-atlas-qna",
+          "dataset": "datasets/swe-atlas-qna",
+          "weight": 0.333333333333333,
+          "attempts": 372,
+          "reward": 0.663978494623656,
+          "safety": {
+            "refused": 46,
+            "blocked": 0,
+            "fallback": 46,
+            "fallbackModels": [
+              "Claude Opus 4.8",
+              "Claude Opus 5"
+            ]
+          }
+        },
+        {
+          "name": "terminal-bench-v4",
+          "dataset": "terminal-bench/terminal-bench@sha256:39d9f44b40420cde8fdcc087579c0d72a7e14fa3656d603c3f0d22fb35e27732",
+          "weight": 0.333333333333333,
+          "attempts": 198,
+          "reward": 0.575757575757576,
+          "safety": {
+            "refused": 28,
+            "blocked": 0,
+            "fallback": 28,
+            "fallbackModels": [
+              "Claude Opus 4.8",
+              "Claude Opus 5"
+            ]
+          }
+        }
+      ],
+      "notes": []
+    },
+    {
+      "id": "2a2fed494e0d1343b14efe96e6bc3669",
+      "label": "Claude Code - Claude Haiku 5.5 (Max)",
+      "agent": "Claude Code",
+      "model": "Claude Haiku 5.5 (Max)",
+      "isDefault": false,
+      "isUnavailable": false,
+      "isRouter": false,
+      "indexScore": 0.373496050722277,
+      "totalCostUsd": 794.65870438,
+      "meanCostPerTaskUsd": 2.67388407176395,
+      "pricedTaskCount": 297.192654,
+      "components": [
+        {
+          "name": "frontiercode-v1.1-main",
+          "dataset": "frontiercode-v1.1",
+          "weight": 0.333333333333333,
+          "attempts": 300,
+          "reward": 0.473697666666667,
+          "safety": {
+            "refused": 0,
+            "blocked": 0,
+            "fallback": 0,
+            "fallbackModels": []
+          }
+        },
+        {
+          "name": "swe-atlas-qna",
+          "dataset": "datasets/swe-atlas-qna",
+          "weight": 0.333333333333333,
+          "attempts": 372,
+          "reward": 0.338709677419355,
+          "safety": {
+            "refused": 0,
+            "blocked": 0,
+            "fallback": 0,
+            "fallbackModels": []
+          }
+        },
+        {
+          "name": "terminal-bench-v4",
+          "dataset": "terminal-bench/terminal-bench@sha256:39d9f44b40420cde8fdcc087579c0d72a7e14fa3656d603c3f0d22fb35e27732",
+          "weight": 0.333333333333333,
+          "attempts": 198,
+          "reward": 0.308080808080808,
+          "safety": {
+            "refused": 3,
+            "blocked": 0,
+            "fallback": 3,
+            "fallbackModels": [
+              "Claude Opus 5"
+            ]
+          }
+        }
+      ],
+      "notes": []
+    },
+    {
+      "id": "f8b3c23615b8b60e23364c27e8494d6d",
+      "label": "Claude Code - Claude Opus 5.5 (Max, Default Fallback)",
+      "agent": "Claude Code",
+      "model": "Claude Opus 5.5 (Max, Default Fallback)",
+      "isDefault": true,
+      "isUnavailable": false,
+      "isRouter": false,
+      "indexScore": 0.616528649505811,
+      "totalCostUsd": 3111.91984361667,
+      "meanCostPerTaskUsd": 11.4227202144224,
+      "pricedTaskCount": 272.432467,
+      "components": [
+        {
+          "name": "frontiercode-v1.1-main",
+          "dataset": "frontiercode-v1.1",
+          "weight": 0.333333333333333,
+          "attempts": 300,
+          "reward": 0.559670666666667,
+          "safety": {
+            "refused": 0,
+            "blocked": 0,
+            "fallback": 0,
+            "fallbackModels": []
+          }
+        },
+        {
+          "name": "swe-atlas-qna",
+          "dataset": "datasets/swe-atlas-qna",
+          "weight": 0.333333333333333,
+          "attempts": 372,
+          "reward": 0.658602150537634,
+          "safety": {
+            "refused": 52,
+            "blocked": 0,
+            "fallback": 52,
+            "fallbackModels": [
+              "Claude Opus 4.8"
+            ]
+          }
+        },
+        {
+          "name": "terminal-bench-v4",
+          "dataset": "terminal-bench/terminal-bench@sha256:39d9f44b40420cde8fdcc087579c0d72a7e14fa3656d603c3f0d22fb35e27732",
+          "weight": 0.333333333333333,
+          "attempts": 198,
+          "reward": 0.631313131313131,
+          "safety": {
+            "refused": 24,
+            "blocked": 0,
+            "fallback": 24,
+            "fallbackModels": [
+              "Claude Opus 4.8",
+              "Claude Opus 5"
+            ]
+          }
+        }
+      ],
+      "notes": []
+    },
+    {
+      "id": "9983e10d68576074ad63407d0ca81e4b",
+      "label": "Claude Code - Claude Sonnet 5.5 (Max, Default Fallback)",
+      "agent": "Claude Code",
+      "model": "Claude Sonnet 5.5 (Max, Default Fallback)",
+      "isDefault": true,
+      "isUnavailable": false,
+      "isRouter": false,
+      "indexScore": 0.593374426631911,
+      "totalCostUsd": 3893.47932905,
+      "meanCostPerTaskUsd": 13.3015082635468,
+      "pricedTaskCount": 292.709612,
+      "components": [
+        {
+          "name": "frontiercode-v1.1-main",
+          "dataset": "frontiercode-v1.1",
+          "weight": 0.333333333333333,
+          "attempts": 300,
+          "reward": 0.476034,
+          "safety": {
+            "refused": 0,
+            "blocked": 0,
+            "fallback": 0,
+            "fallbackModels": []
+          }
+        },
+        {
+          "name": "swe-atlas-qna",
+          "dataset": "datasets/swe-atlas-qna",
+          "weight": 0.333333333333333,
+          "attempts": 372,
+          "reward": 0.64247311827957,
+          "safety": {
+            "refused": 39,
+            "blocked": 0,
+            "fallback": 39,
+            "fallbackModels": [
+              "Claude Opus 4.8"
+            ]
+          }
+        },
+        {
+          "name": "terminal-bench-v4",
+          "dataset": "terminal-bench/terminal-bench@sha256:39d9f44b40420cde8fdcc087579c0d72a7e14fa3656d603c3f0d22fb35e27732",
+          "weight": 0.333333333333333,
+          "attempts": 198,
+          "reward": 0.661616161616162,
+          "safety": {
+            "refused": 6,
+            "blocked": 0,
+            "fallback": 6,
+            "fallbackModels": [
+              "Claude Opus 4.8"
+            ]
+          }
+        }
+      ],
+      "notes": []
+    },
+    {
+      "id": "1630d319b5e4dc5183cb88a2b2af1646",
+      "label": "Claude Code - Qwen3.8 Max",
+      "agent": "Claude Code",
+      "model": "Qwen3.8 Max",
+      "isDefault": false,
+      "isUnavailable": false,
+      "isRouter": false,
+      "indexScore": 0.392199207885305,
+      "totalCostUsd": 978.07253625,
+      "meanCostPerTaskUsd": 3.79584401482699,
+      "pricedTaskCount": 257.669317,
+      "components": [
+        {
+          "name": "frontiercode-v1.1-main",
+          "dataset": "frontiercode-v1.1",
+          "weight": 0.333333333333333,
+          "attempts": 300,
+          "reward": 0.448103,
+          "safety": {
+            "refused": 0,
+            "blocked": 0,
+            "fallback": 0,
+            "fallbackModels": []
+          }
+        },
+        {
+          "name": "swe-atlas-qna",
+          "dataset": "datasets/swe-atlas-qna",
+          "weight": 0.333333333333333,
+          "attempts": 372,
+          "reward": 0.561827956989248,
+          "safety": {
+            "refused": 0,
+            "blocked": 0,
+            "fallback": 0,
+            "fallbackModels": []
+          }
+        },
+        {
+          "name": "terminal-bench-v4",
+          "dataset": "terminal-bench/terminal-bench@sha256:39d9f44b40420cde8fdcc087579c0d72a7e14fa3656d603c3f0d22fb35e27732",
+          "weight": 0.333333333333333,
+          "attempts": 198,
+          "reward": 0.166666666666667,
+          "safety": {
+            "refused": 0,
+            "blocked": 0,
+            "fallback": 0,
+            "fallbackModels": []
+          }
+        }
+      ],
+      "notes": []
+    },
+    {
+      "id": "06c2cfad6e3aba9000f2dd5e429d4407",
+      "label": "Claude Code - Step 5 Preview",
+      "agent": "Claude Code",
+      "model": "Step 5 Preview",
+      "isDefault": false,
+      "isUnavailable": false,
+      "isRouter": false,
+      "indexScore": 0.431274491691105,
+      "totalCostUsd": 453.9377269,
+      "meanCostPerTaskUsd": 1.84006320525524,
+      "pricedTaskCount": 246.696812,
+      "components": [
+        {
+          "name": "frontiercode-v1.1-main",
+          "dataset": "frontiercode-v1.1",
+          "weight": 0.333333333333333,
+          "attempts": 300,
+          "reward": 0.404771666666667,
+          "safety": {
+            "refused": 0,
+            "blocked": 0,
+            "fallback": 0,
+            "fallbackModels": []
+          }
+        },
+        {
+          "name": "swe-atlas-qna",
+          "dataset": "datasets/swe-atlas-qna",
+          "weight": 0.333333333333333,
+          "attempts": 372,
+          "reward": 0.586021505376344,
+          "safety": {
+            "refused": 0,
+            "blocked": 0,
+            "fallback": 0,
+            "fallbackModels": []
+          }
+        },
+        {
+          "name": "terminal-bench-v4",
+          "dataset": "terminal-bench/terminal-bench@sha256:39d9f44b40420cde8fdcc087579c0d72a7e14fa3656d603c3f0d22fb35e27732",
+          "weight": 0.333333333333333,
+          "attempts": 198,
+          "reward": 0.303030303030303,
+          "safety": {
+            "refused": 0,
+            "blocked": 0,
+            "fallback": 0,
+            "fallbackModels": []
+          }
+        }
+      ],
+      "notes": []
+    },
+    {
+      "id": "ef847aa89b4f0471ffe5275ba2f11771",
+      "label": "Codex - DeepSeek V4.1 Flash (Max)",
+      "agent": "Codex",
+      "model": "DeepSeek V4.1 Flash (Max)",
+      "isDefault": false,
+      "isUnavailable": false,
+      "isRouter": false,
+      "indexScore": 0.473001334419464,
+      "totalCostUsd": 94.5823191093334,
+      "meanCostPerTaskUsd": 0.38619359563592,
+      "pricedTaskCount": 244.909082,
+      "components": [
+        {
+          "name": "frontiercode-v1.1-main",
+          "dataset": "frontiercode-v1.1",
+          "weight": 0.333333333333333,
+          "attempts": 300,
+          "reward": 0.525960666666667,
+          "safety": {
+            "refused": 0,
+            "blocked": 0,
+            "fallback": 0,
+            "fallbackModels": []
+          }
+        },
+        {
+          "name": "swe-atlas-qna",
+          "dataset": "datasets/swe-atlas-qna",
+          "weight": 0.333333333333333,
+          "attempts": 372,
+          "reward": 0.610215053763441,
+          "safety": {
+            "refused": 0,
+            "blocked": 0,
+            "fallback": 0,
+            "fallbackModels": []
+          }
+        },
+        {
+          "name": "terminal-bench-v4",
+          "dataset": "terminal-bench/terminal-bench@sha256:39d9f44b40420cde8fdcc087579c0d72a7e14fa3656d603c3f0d22fb35e27732",
+          "weight": 0.333333333333333,
+          "attempts": 197,
+          "reward": 0.282828282828283,
+          "safety": {
+            "refused": 0,
+            "blocked": 0,
+            "fallback": 0,
+            "fallbackModels": []
+          }
+        }
+      ],
+      "notes": []
+    },
+    {
+      "id": "34e0f78892fac8fd39aff6595d04610e",
+      "label": "Codex - GPT-6 Astra (Max)",
+      "agent": "Codex",
+      "model": "GPT-6 Astra (Max)",
+      "isDefault": true,
+      "isUnavailable": false,
+      "isRouter": false,
+      "indexScore": 0.546635690561529,
+      "totalCostUsd": 1889.96355383333,
+      "meanCostPerTaskUsd": 7.03615822479963,
+      "pricedTaskCount": 268.607313,
+      "components": [
+        {
+          "name": "frontiercode-v1.1-main",
+          "dataset": "frontiercode-v1.1",
+          "weight": 0.333333333333333,
+          "attempts": 300,
+          "reward": 0.492953666666667,
+          "safety": {
+            "refused": 0,
+            "blocked": 0,
+            "fallback": 0,
+            "fallbackModels": []
+          }
+        },
+        {
+          "name": "swe-atlas-qna",
+          "dataset": "datasets/swe-atlas-qna",
+          "weight": 0.333333333333333,
+          "attempts": 372,
+          "reward": 0.591397849462366,
+          "safety": {
+            "refused": 13,
+            "blocked": 13,
+            "fallback": 0,
+            "fallbackModels": []
+          }
+        },
+        {
+          "name": "terminal-bench-v4",
+          "dataset": "terminal-bench/terminal-bench@sha256:39d9f44b40420cde8fdcc087579c0d72a7e14fa3656d603c3f0d22fb35e27732",
+          "weight": 0.333333333333333,
+          "attempts": 198,
+          "reward": 0.555555555555555,
+          "safety": {
+            "refused": 0,
+            "blocked": 0,
+            "fallback": 0,
+            "fallbackModels": []
+          }
+        }
+      ],
+      "notes": []
+    },
+    {
+      "id": "c54a3c8e7e89d5a784e98211605eaa53",
+      "label": "Codex - GPT-6 Luna (Max)",
+      "agent": "Codex",
+      "model": "GPT-6 Luna (Max)",
+      "isDefault": false,
+      "isUnavailable": false,
+      "isRouter": false,
+      "indexScore": 0.311260251113284,
+      "totalCostUsd": 41.2122148441667,
+      "meanCostPerTaskUsd": 0.159155559086193,
+      "pricedTaskCount": 258.942981,
+      "components": [
+        {
+          "name": "frontiercode-v1.1-main",
+          "dataset": "frontiercode-v1.1",
+          "weight": 0.333333333333333,
+          "attempts": 300,
+          "reward": 0.395494666666667,
+          "safety": {
+            "refused": 0,
+            "blocked": 0,
+            "fallback": 0,
+            "fallbackModels": []
+          }
+        },
+        {
+          "name": "swe-atlas-qna",
+          "dataset": "datasets/swe-atlas-qna",
+          "weight": 0.333333333333333,
+          "attempts": 372,
+          "reward": 0.381720430107527,
+          "safety": {
+            "refused": 0,
+            "blocked": 0,
+            "fallback": 0,
+            "fallbackModels": []
+          }
+        },
+        {
+          "name": "terminal-bench-v4",
+          "dataset": "terminal-bench/terminal-bench@sha256:39d9f44b40420cde8fdcc087579c0d72a7e14fa3656d603c3f0d22fb35e27732",
+          "weight": 0.333333333333333,
+          "attempts": 198,
+          "reward": 0.156565656565657,
+          "safety": {
+            "refused": 0,
+            "blocked": 0,
+            "fallback": 0,
+            "fallbackModels": []
+          }
+        }
+      ],
+      "notes": []
+    },
+    {
+      "id": "3897d72a57138fd2e2353367570b4b37",
+      "label": "Codex - GPT-6.1 Sol (Max)",
+      "agent": "Codex",
+      "model": "GPT-6.1 Sol (Max)",
+      "isDefault": true,
+      "isUnavailable": false,
+      "isRouter": false,
+      "indexScore": 0.541279798631476,
+      "totalCostUsd": 391.598093616667,
+      "meanCostPerTaskUsd": 1.5046389983744,
+      "pricedTaskCount": 260.260497,
+      "components": [
+        {
+          "name": "frontiercode-v1.1-main",
+          "dataset": "frontiercode-v1.1",
+          "weight": 0.333333333333333,
+          "attempts": 300,
+          "reward": 0.494074,
+          "safety": {
+            "refused": 0,
+            "blocked": 0,
+            "fallback": 0,
+            "fallbackModels": []
+          }
+        },
+        {
+          "name": "swe-atlas-qna",
+          "dataset": "datasets/swe-atlas-qna",
+          "weight": 0.333333333333333,
+          "attempts": 372,
+          "reward": 0.599462365591398,
+          "safety": {
+            "refused": 15,
+            "blocked": 15,
+            "fallback": 0,
+            "fallbackModels": []
+          }
+        },
+        {
+          "name": "terminal-bench-v4",
+          "dataset": "terminal-bench/terminal-bench@sha256:39d9f44b40420cde8fdcc087579c0d72a7e14fa3656d603c3f0d22fb35e27732",
+          "weight": 0.333333333333333,
+          "attempts": 198,
+          "reward": 0.53030303030303,
+          "safety": {
+            "refused": 0,
+            "blocked": 0,
+            "fallback": 0,
+            "fallbackModels": []
+          }
+        }
+      ],
+      "notes": []
+    },
+    {
+      "id": "41bcc9881ff1465f62e417e5a7535e20",
+      "label": "Codex - GPT-6.1 Terra (High)",
+      "agent": "Codex",
+      "model": "GPT-6.1 Terra (High)",
+      "isDefault": false,
+      "isUnavailable": false,
+      "isRouter": false,
+      "indexScore": 0.462787772238514,
+      "totalCostUsd": 139.9897168,
+      "meanCostPerTaskUsd": 0.544031579042956,
+      "pricedTaskCount": 257.319101,
+      "components": [
+        {
+          "name": "frontiercode-v1.1-main",
+          "dataset": "frontiercode-v1.1",
+          "weight": 0.333333333333333,
+          "attempts": 300,
+          "reward": 0.434551,
+          "safety": {
+            "refused": 0,
+            "blocked": 0,
+            "fallback": 0,
+            "fallbackModels": []
+          }
+        },
+        {
+          "name": "swe-atlas-qna",
+          "dataset": "datasets/swe-atlas-qna",
+          "weight": 0.333333333333333,
+          "attempts": 372,
+          "reward": 0.529569892473118,
+          "safety": {
+            "refused": 0,
+            "blocked": 0,
+            "fallback": 0,
+            "fallbackModels": []
+          }
+        },
+        {
+          "name": "terminal-bench-v4",
+          "dataset": "terminal-bench/terminal-bench@sha256:39d9f44b40420cde8fdcc087579c0d72a7e14fa3656d603c3f0d22fb35e27732",
+          "weight": 0.333333333333333,
+          "attempts": 198,
+          "reward": 0.424242424242424,
+          "safety": {
+            "refused": 0,
+            "blocked": 0,
+            "fallback": 0,
+            "fallbackModels": []
+          }
+        }
+      ],
+      "notes": []
+    },
+    {
+      "id": "b54e883be1cff7a6a43a737ee106011c",
+      "label": "Codex - GPT-6.1 Terra (Low)",
+      "agent": "Codex",
+      "model": "GPT-6.1 Terra (Low)",
+      "isDefault": false,
+      "isUnavailable": false,
+      "isRouter": false,
+      "indexScore": 0.3485683422396,
+      "totalCostUsd": 53.3256242,
+      "meanCostPerTaskUsd": 0.198820047696481,
+      "pricedTaskCount": 268.210499,
+      "components": [
+        {
+          "name": "frontiercode-v1.1-main",
+          "dataset": "frontiercode-v1.1",
+          "weight": 0.333333333333333,
+          "attempts": 300,
+          "reward": 0.406083,
+          "safety": {
+            "refused": 0,
+            "blocked": 0,
+            "fallback": 0,
+            "fallbackModels": []
+          }
+        },
+        {
+          "name": "swe-atlas-qna",
+          "dataset": "datasets/swe-atlas-qna",
+          "weight": 0.333333333333333,
+          "attempts": 372,
+          "reward": 0.387096774193548,
+          "safety": {
+            "refused": 0,
+            "blocked": 0,
+            "fallback": 0,
+            "fallbackModels": []
+          }
+        },
+        {
+          "name": "terminal-bench-v4",
+          "dataset": "terminal-bench/terminal-bench@sha256:39d9f44b40420cde8fdcc087579c0d72a7e14fa3656d603c3f0d22fb35e27732",
+          "weight": 0.333333333333333,
+          "attempts": 198,
+          "reward": 0.252525252525253,
+          "safety": {
+            "refused": 1,
+            "blocked": 1,
+            "fallback": 0,
+            "fallbackModels": []
+          }
+        }
+      ],
+      "notes": []
+    },
+    {
+      "id": "5bc9ed9064c8cd589bfd3aaad4bbebf8",
+      "label": "Codex - GPT-6.1 Terra (Max)",
+      "agent": "Codex",
+      "model": "GPT-6.1 Terra (Max)",
+      "isDefault": false,
+      "isUnavailable": false,
+      "isRouter": false,
+      "indexScore": 0.481004244053438,
+      "totalCostUsd": 330.194036983333,
+      "meanCostPerTaskUsd": 1.24038465572461,
+      "pricedTaskCount": 266.202936,
+      "components": [
+        {
+          "name": "frontiercode-v1.1-main",
+          "dataset": "frontiercode-v1.1",
+          "weight": 0.333333333333333,
+          "attempts": 300,
+          "reward": 0.417841666666667,
+          "safety": {
+            "refused": 0,
+            "blocked": 0,
+            "fallback": 0,
+            "fallbackModels": []
+          }
+        },
+        {
+          "name": "swe-atlas-qna",
+          "dataset": "datasets/swe-atlas-qna",
+          "weight": 0.333333333333333,
+          "attempts": 372,
+          "reward": 0.540322580645161,
+          "safety": {
+            "refused": 0,
+            "blocked": 0,
+            "fallback": 0,
+            "fallbackModels": []
+          }
+        },
+        {
+          "name": "terminal-bench-v4",
+          "dataset": "terminal-bench/terminal-bench@sha256:39d9f44b40420cde8fdcc087579c0d72a7e14fa3656d603c3f0d22fb35e27732",
+          "weight": 0.333333333333333,
+          "attempts": 198,
+          "reward": 0.484848484848485,
+          "safety": {
+            "refused": 0,
+            "blocked": 0,
+            "fallback": 0,
+            "fallbackModels": []
+          }
+        }
+      ],
+      "notes": []
+    },
+    {
+      "id": "a3eeef492929228973b8da75e051291d",
+      "label": "Codex - GPT-6.1 Terra (Medium)",
+      "agent": "Codex",
+      "model": "GPT-6.1 Terra (Medium)",
+      "isDefault": false,
+      "isUnavailable": false,
+      "isRouter": false,
+      "indexScore": 0.420492375909634,
+      "totalCostUsd": 101.219502666667,
+      "meanCostPerTaskUsd": 0.394994482142174,
+      "pricedTaskCount": 256.255485,
+      "components": [
+        {
+          "name": "frontiercode-v1.1-main",
+          "dataset": "frontiercode-v1.1",
+          "weight": 0.333333333333333,
+          "attempts": 300,
+          "reward": 0.437511666666667,
+          "safety": {
+            "refused": 0,
+            "blocked": 0,
+            "fallback": 0,
+            "fallbackModels": []
+          }
+        },
+        {
+          "name": "swe-atlas-qna",
+          "dataset": "datasets/swe-atlas-qna",
+          "weight": 0.333333333333333,
+          "attempts": 372,
+          "reward": 0.470430107526882,
+          "safety": {
+            "refused": 0,
+            "blocked": 0,
+            "fallback": 0,
+            "fallbackModels": []
+          }
+        },
+        {
+          "name": "terminal-bench-v4",
+          "dataset": "terminal-bench/terminal-bench@sha256:39d9f44b40420cde8fdcc087579c0d72a7e14fa3656d603c3f0d22fb35e27732",
+          "weight": 0.333333333333333,
+          "attempts": 198,
+          "reward": 0.353535353535354,
+          "safety": {
+            "refused": 0,
+            "blocked": 0,
+            "fallback": 0,
+            "fallbackModels": []
+          }
+        }
+      ],
+      "notes": []
+    },
+    {
+      "id": "ee13e548b65eeee544cd5b0c6068a4f5",
+      "label": "Codex - GPT-6.1 Terra (Non-reasoning)",
+      "agent": "Codex",
+      "model": "GPT-6.1 Terra (Non-reasoning)",
+      "isDefault": false,
+      "isUnavailable": false,
+      "isRouter": false,
+      "indexScore": 0.392151614641034,
+      "totalCostUsd": 114.244986216667,
+      "meanCostPerTaskUsd": 0.454255643441512,
+      "pricedTaskCount": 251.499322,
+      "components": [
+        {
+          "name": "frontiercode-v1.1-main",
+          "dataset": "frontiercode-v1.1",
+          "weight": 0.333333333333333,
+          "attempts": 300,
+          "reward": 0.461564,
+          "safety": {
+            "refused": 0,
+            "blocked": 0,
+            "fallback": 0,
+            "fallbackModels": []
+          }
+        },
+        {
+          "name": "swe-atlas-qna",
+          "dataset": "datasets/swe-atlas-qna",
+          "weight": 0.333333333333333,
+          "attempts": 372,
+          "reward": 0.462365591397849,
+          "safety": {
+            "refused": 0,
+            "blocked": 0,
+            "fallback": 0,
+            "fallbackModels": []
+          }
+        },
+        {
+          "name": "terminal-bench-v4",
+          "dataset": "terminal-bench/terminal-bench@sha256:39d9f44b40420cde8fdcc087579c0d72a7e14fa3656d603c3f0d22fb35e27732",
+          "weight": 0.333333333333333,
+          "attempts": 198,
+          "reward": 0.252525252525252,
+          "safety": {
+            "refused": 0,
+            "blocked": 0,
+            "fallback": 0,
+            "fallbackModels": []
+          }
+        }
+      ],
+      "notes": []
+    },
+    {
+      "id": "9b52f0eb016964fb4421a352b9c9518c",
+      "label": "Codex - GPT-6.1 Terra (Xhigh)",
+      "agent": "Codex",
+      "model": "GPT-6.1 Terra (Xhigh)",
+      "isDefault": true,
+      "isUnavailable": false,
+      "isRouter": false,
+      "indexScore": 0.482238344954925,
+      "totalCostUsd": 180.319600975,
+      "meanCostPerTaskUsd": 0.690844449567775,
+      "pricedTaskCount": 261.013317,
+      "components": [
+        {
+          "name": "frontiercode-v1.1-main",
+          "dataset": "frontiercode-v1.1",
+          "weight": 0.333333333333333,
+          "attempts": 300,
+          "reward": 0.449484666666666,
+          "safety": {
+            "refused": 0,
+            "blocked": 0,
+            "fallback": 0,
+            "fallbackModels": []
+          }
+        },
+        {
+          "name": "swe-atlas-qna",
+          "dataset": "datasets/swe-atlas-qna",
+          "weight": 0.333333333333333,
+          "attempts": 372,
+          "reward": 0.53763440860215,
+          "safety": {
+            "refused": 0,
+            "blocked": 0,
+            "fallback": 0,
+            "fallbackModels": []
+          }
+        },
+        {
+          "name": "terminal-bench-v4",
+          "dataset": "terminal-bench/terminal-bench@sha256:39d9f44b40420cde8fdcc087579c0d72a7e14fa3656d603c3f0d22fb35e27732",
+          "weight": 0.333333333333333,
+          "attempts": 197,
+          "reward": 0.45959595959596,
+          "safety": {
+            "refused": 0,
+            "blocked": 0,
+            "fallback": 0,
+            "fallbackModels": []
+          }
+        }
+      ],
+      "notes": []
+    },
+    {
+      "id": "24c98f188d41522a849006ac453fdebe",
+      "label": "DeepSeek Harness - DeepSeek V4.1 Flash 1017 (Max)",
+      "agent": "DeepSeek Harness",
+      "model": "DeepSeek V4.1 Flash 1017 (Max)",
+      "isDefault": true,
+      "isUnavailable": false,
+      "isRouter": false,
+      "indexScore": 0.463051957532312,
+      "totalCostUsd": 76.176064894,
+      "meanCostPerTaskUsd": 0.29627468390668,
+      "pricedTaskCount": 257.112973,
+      "components": [
+        {
+          "name": "frontiercode-v1.1-main",
+          "dataset": "frontiercode-v1.1",
+          "weight": 0.333333333333333,
+          "attempts": 300,
+          "reward": 0.465483666666667,
+          "safety": {
+            "refused": 0,
+            "blocked": 0,
+            "fallback": 0,
+            "fallbackModels": []
+          }
+        },
+        {
+          "name": "swe-atlas-qna",
+          "dataset": "datasets/swe-atlas-qna",
+          "weight": 0.333333333333333,
+          "attempts": 372,
+          "reward": 0.615591397849462,
+          "safety": {
+            "refused": 0,
+            "blocked": 0,
+            "fallback": 0,
+            "fallbackModels": []
+          }
+        },
+        {
+          "name": "terminal-bench-v4",
+          "dataset": "terminal-bench/terminal-bench@sha256:39d9f44b40420cde8fdcc087579c0d72a7e14fa3656d603c3f0d22fb35e27732",
+          "weight": 0.333333333333333,
+          "attempts": 198,
+          "reward": 0.308080808080808,
+          "safety": {
+            "refused": 0,
+            "blocked": 0,
+            "fallback": 0,
+            "fallbackModels": []
+          }
+        }
+      ],
+      "notes": []
+    },
+    {
+      "id": "fe6df4d0f0b5360790e73d6d8830d7a0",
+      "label": "Devin Fusion CLI - Claude Fable 5.1 XHigh + SWE-2 Medium",
+      "agent": "Devin Fusion CLI",
+      "model": "Claude Fable 5.1 XHigh + SWE-2 Medium",
+      "isDefault": false,
+      "isUnavailable": false,
+      "isRouter": true,
+      "indexScore": 0.586619030954708,
+      "totalCostUsd": 2124.39869355,
+      "meanCostPerTaskUsd": 8.19825160322711,
+      "pricedTaskCount": 259.128263,
+      "components": [
+        {
+          "name": "frontiercode-v1.1-main",
+          "dataset": "frontiercode-v1.1",
+          "weight": 0.333333333333333,
+          "attempts": 300,
+          "reward": 0.516455333333333,
+          "safety": {
+            "refused": 2,
+            "blocked": 0,
+            "fallback": 2,
+            "fallbackModels": [
+              "Claude Opus 5"
+            ]
+          }
+        },
+        {
+          "name": "swe-atlas-qna",
+          "dataset": "datasets/swe-atlas-qna",
+          "weight": 0.333333333333333,
+          "attempts": 372,
+          "reward": 0.682795698924731,
+          "safety": {
+            "refused": 42,
+            "blocked": 0,
+            "fallback": 42,
+            "fallbackModels": [
+              "Claude Opus 4.8",
+              "Claude Opus 5"
+            ]
+          }
+        },
+        {
+          "name": "terminal-bench-v4",
+          "dataset": "terminal-bench/terminal-bench@sha256:39d9f44b40420cde8fdcc087579c0d72a7e14fa3656d603c3f0d22fb35e27732",
+          "weight": 0.333333333333333,
+          "attempts": 197,
+          "reward": 0.560606060606061,
+          "safety": {
+            "refused": 19,
+            "blocked": 0,
+            "fallback": 19,
+            "fallbackModels": [
+              "Claude Opus 4.8",
+              "Claude Opus 5"
+            ]
+          }
+        }
+      ],
+      "notes": []
+    },
+    {
+      "id": "736e1c6006fd243c9cc384b61c478e97",
+      "label": "Devin Fusion CLI - Claude Opus 5.5 Max + GPT-6 Luna High",
+      "agent": "Devin Fusion CLI",
+      "model": "Claude Opus 5.5 Max + GPT-6 Luna High",
+      "isDefault": true,
+      "isUnavailable": false,
+      "isRouter": true,
+      "indexScore": 0.615117219506897,
+      "totalCostUsd": 2236.37703522834,
+      "meanCostPerTaskUsd": 7.99768820548534,
+      "pricedTaskCount": 279.627935,
+      "components": [
+        {
+          "name": "frontiercode-v1.1-main",
+          "dataset": "frontiercode-v1.1",
+          "weight": 0.333333333333333,
+          "attempts": 300,
+          "reward": 0.536293333333333,
+          "safety": {
+            "refused": 0,
+            "blocked": 0,
+            "fallback": 0,
+            "fallbackModels": []
+          }
+        },
+        {
+          "name": "swe-atlas-qna",
+          "dataset": "datasets/swe-atlas-qna",
+          "weight": 0.333333333333333,
+          "attempts": 372,
+          "reward": 0.682795698924731,
+          "safety": {
+            "refused": 0,
+            "blocked": 0,
+            "fallback": 0,
+            "fallbackModels": []
+          }
+        },
+        {
+          "name": "terminal-bench-v4",
+          "dataset": "terminal-bench/terminal-bench@sha256:39d9f44b40420cde8fdcc087579c0d72a7e14fa3656d603c3f0d22fb35e27732",
+          "weight": 0.333333333333333,
+          "attempts": 198,
+          "reward": 0.626262626262626,
+          "safety": {
+            "refused": 0,
+            "blocked": 0,
+            "fallback": 0,
+            "fallbackModels": []
+          }
+        }
+      ],
+      "notes": []
+    },
+    {
+      "id": "dabb064c01568bc018ba730cc39c4a96",
+      "label": "Devin Fusion CLI - GPT-6 Astra XHigh + SWE-2 Medium",
+      "agent": "Devin Fusion CLI",
+      "model": "GPT-6 Astra XHigh + SWE-2 Medium",
+      "isDefault": false,
+      "isUnavailable": false,
+      "isRouter": true,
+      "indexScore": 0.530769734767025,
+      "totalCostUsd": 1181.72610203667,
+      "meanCostPerTaskUsd": 4.33822148437056,
+      "pricedTaskCount": 272.398748,
+      "components": [
+        {
+          "name": "frontiercode-v1.1-main",
+          "dataset": "frontiercode-v1.1",
+          "weight": 0.333333333333333,
+          "attempts": 300,
+          "reward": 0.490158666666667,
+          "safety": {
+            "refused": 0,
+            "blocked": 0,
+            "fallback": 0,
+            "fallbackModels": []
+          }
+        },
+        {
+          "name": "swe-atlas-qna",
+          "dataset": "datasets/swe-atlas-qna",
+          "weight": 0.333333333333333,
+          "attempts": 372,
+          "reward": 0.602150537634409,
+          "safety": {
+            "refused": 25,
+            "blocked": 0,
+            "fallback": 25,
+            "fallbackModels": [
+              "Claude Opus 4.8",
+              "GPT-5.6 Sol"
+            ]
+          }
+        },
+        {
+          "name": "terminal-bench-v4",
+          "dataset": "terminal-bench/terminal-bench@sha256:39d9f44b40420cde8fdcc087579c0d72a7e14fa3656d603c3f0d22fb35e27732",
+          "weight": 0.333333333333333,
+          "attempts": 198,
+          "reward": 0.5,
+          "safety": {
+            "refused": 0,
+            "blocked": 0,
+            "fallback": 0,
+            "fallbackModels": []
+          }
+        }
+      ],
+      "notes": []
+    },
+    {
+      "id": "24cd2ab21d1cf5161ddd831f0949bff4",
+      "label": "GitHub Copilot - Copilot Fusion (max)",
+      "agent": "GitHub Copilot",
+      "model": "Copilot Fusion (max)",
+      "isDefault": true,
+      "isUnavailable": false,
+      "isRouter": true,
+      "indexScore": 0.598570672857608,
+      "totalCostUsd": 1484.48217116667,
+      "meanCostPerTaskUsd": 5.58738499550885,
+      "pricedTaskCount": 265.684604,
+      "components": [
+        {
+          "name": "frontiercode-v1.1-main",
+          "dataset": "frontiercode-v1.1",
+          "weight": 0.333333333333333,
+          "attempts": 300,
+          "reward": 0.513698333333333,
+          "safety": {
+            "refused": 0,
+            "blocked": 0,
+            "fallback": 0,
+            "fallbackModels": []
+          }
+        },
+        {
+          "name": "swe-atlas-qna",
+          "dataset": "datasets/swe-atlas-qna",
+          "weight": 0.333333333333333,
+          "attempts": 372,
+          "reward": 0.56989247311828,
+          "safety": {
+            "refused": 0,
+            "blocked": 0,
+            "fallback": 0,
+            "fallbackModels": []
+          }
+        },
+        {
+          "name": "terminal-bench-v4",
+          "dataset": "terminal-bench/terminal-bench@sha256:39d9f44b40420cde8fdcc087579c0d72a7e14fa3656d603c3f0d22fb35e27732",
+          "weight": 0.333333333333333,
+          "attempts": 198,
+          "reward": 0.712121212121212,
+          "safety": {
+            "refused": 0,
+            "blocked": 0,
+            "fallback": 0,
+            "fallbackModels": []
+          }
+        }
+      ],
+      "notes": []
+    },
+    {
+      "id": "a92c8b68f37df782f0e978e0e302b023",
+      "label": "Grok Build - Grok 4.7 (Xhigh)",
+      "agent": "Grok Build",
+      "model": "Grok 4.7 (Xhigh)",
+      "isDefault": true,
+      "isUnavailable": false,
+      "isRouter": false,
+      "indexScore": 0.465968752688172,
+      "totalCostUsd": 2448.113394,
+      "meanCostPerTaskUsd": 9.47935653344195,
+      "pricedTaskCount": 258.257339,
+      "components": [
+        {
+          "name": "frontiercode-v1.1-main",
+          "dataset": "frontiercode-v1.1",
+          "weight": 0.333333333333333,
+          "attempts": 300,
+          "reward": 0.435540666666667,
+          "safety": {
+            "refused": 0,
+            "blocked": 0,
+            "fallback": 0,
+            "fallbackModels": []
+          }
+        },
+        {
+          "name": "swe-atlas-qna",
+          "dataset": "datasets/swe-atlas-qna",
+          "weight": 0.333333333333333,
+          "attempts": 372,
+          "reward": 0.629032258064516,
+          "safety": {
+            "refused": 0,
+            "blocked": 0,
+            "fallback": 0,
+            "fallbackModels": []
+          }
+        },
+        {
+          "name": "terminal-bench-v4",
+          "dataset": "terminal-bench/terminal-bench@sha256:39d9f44b40420cde8fdcc087579c0d72a7e14fa3656d603c3f0d22fb35e27732",
+          "weight": 0.333333333333333,
+          "attempts": 198,
+          "reward": 0.333333333333333,
+          "safety": {
+            "refused": 0,
+            "blocked": 0,
+            "fallback": 0,
+            "fallbackModels": []
+          }
+        }
+      ],
+      "notes": []
+    },
+    {
+      "id": "88c83705811535bca8ee000bfd3a256c",
+      "label": "Kimi Code CLI - Kimi K3 (Max)",
+      "agent": "Kimi Code CLI",
+      "model": "Kimi K3 (Max)",
+      "isDefault": true,
+      "isUnavailable": false,
+      "isRouter": false,
+      "indexScore": 0.41417319257087,
+      "totalCostUsd": 1290.673628555,
+      "meanCostPerTaskUsd": 5.16526976917945,
+      "pricedTaskCount": 249.875357,
+      "components": [
+        {
+          "name": "frontiercode-v1.1-main",
+          "dataset": "frontiercode-v1.1",
+          "weight": 0.333333333333333,
+          "attempts": 300,
+          "reward": 0.430936,
+          "safety": {
+            "refused": 0,
+            "blocked": 0,
+            "fallback": 0,
+            "fallbackModels": []
+          }
+        },
+        {
+          "name": "swe-atlas-qna",
+          "dataset": "datasets/swe-atlas-qna",
+          "weight": 0.333333333333333,
+          "attempts": 372,
+          "reward": 0.599462365591398,
+          "safety": {
+            "refused": 0,
+            "blocked": 0,
+            "fallback": 0,
+            "fallbackModels": []
+          }
+        },
+        {
+          "name": "terminal-bench-v4",
+          "dataset": "terminal-bench/terminal-bench@sha256:39d9f44b40420cde8fdcc087579c0d72a7e14fa3656d603c3f0d22fb35e27732",
+          "weight": 0.333333333333333,
+          "attempts": 198,
+          "reward": 0.212121212121212,
+          "safety": {
+            "refused": 0,
+            "blocked": 0,
+            "fallback": 0,
+            "fallbackModels": []
+          }
+        }
+      ],
+      "notes": []
+    },
+    {
+      "id": "accfbb12d349c0f2c93547ce814534b2",
+      "label": "Mirror - Beam 1.0",
+      "agent": "Mirror",
+      "model": "Beam 1.0",
+      "isDefault": true,
+      "isUnavailable": false,
+      "isRouter": false,
+      "indexScore": 0.20478987379168,
+      "totalCostUsd": 80.8392363993334,
+      "meanCostPerTaskUsd": 0.319490234063365,
+      "pricedTaskCount": 253.025688,
+      "components": [
+        {
+          "name": "frontiercode-v1.1-main",
+          "dataset": "frontiercode-v1.1",
+          "weight": 0.333333333333333,
+          "attempts": 300,
+          "reward": 0.202672,
+          "safety": {
+            "refused": 0,
+            "blocked": 0,
+            "fallback": 0,
+            "fallbackModels": []
+          }
+        },
+        {
+          "name": "swe-atlas-qna",
+          "dataset": "datasets/swe-atlas-qna",
+          "weight": 0.333333333333333,
+          "attempts": 372,
+          "reward": 0.376344086021506,
+          "safety": {
+            "refused": 0,
+            "blocked": 0,
+            "fallback": 0,
+            "fallbackModels": []
+          }
+        },
+        {
+          "name": "terminal-bench-v4",
+          "dataset": "terminal-bench/terminal-bench@sha256:39d9f44b40420cde8fdcc087579c0d72a7e14fa3656d603c3f0d22fb35e27732",
+          "weight": 0.333333333333333,
+          "attempts": 198,
+          "reward": 0.0353535353535354,
+          "safety": {
+            "refused": 0,
+            "blocked": 0,
+            "fallback": 0,
+            "fallbackModels": []
+          }
+        }
+      ],
+      "notes": []
+    },
+    {
+      "id": "9fcf1e000a8ac75cca614977bcac25da",
+      "label": "Mistral Vibe - Mistral Large 4 (High)",
+      "agent": "Mistral Vibe",
+      "model": "Mistral Large 4 (High)",
+      "isDefault": true,
+      "isUnavailable": false,
+      "isRouter": false,
+      "indexScore": 0.482774919409145,
+      "totalCostUsd": 299.228063866667,
+      "meanCostPerTaskUsd": 1.25944220793442,
+      "pricedTaskCount": 237.587769,
+      "components": [
+        {
+          "name": "frontiercode-v1.1-main",
+          "dataset": "frontiercode-v1.1",
+          "weight": 0.333333333333333,
+          "attempts": 300,
+          "reward": 0.445473666666667,
+          "safety": {
+            "refused": 0,
+            "blocked": 0,
+            "fallback": 0,
+            "fallbackModels": []
+          }
+        },
+        {
+          "name": "swe-atlas-qna",
+          "dataset": "datasets/swe-atlas-qna",
+          "weight": 0.333333333333333,
+          "attempts": 372,
+          "reward": 0.588709677419355,
+          "safety": {
+            "refused": 0,
+            "blocked": 0,
+            "fallback": 0,
+            "fallbackModels": []
+          }
+        },
+        {
+          "name": "terminal-bench-v4",
+          "dataset": "terminal-bench/terminal-bench@sha256:39d9f44b40420cde8fdcc087579c0d72a7e14fa3656d603c3f0d22fb35e27732",
+          "weight": 0.333333333333333,
+          "attempts": 198,
+          "reward": 0.414141414141414,
+          "safety": {
+            "refused": 0,
+            "blocked": 0,
+            "fallback": 0,
+            "fallbackModels": []
+          }
+        }
+      ],
+      "notes": []
+    },
+    {
+      "id": "730b8ffd93e83875305984c999467c69",
+      "label": "Mistral Vibe - Mistral Large 4 (Medium)",
+      "agent": "Mistral Vibe",
+      "model": "Mistral Large 4 (Medium)",
+      "isDefault": false,
+      "isUnavailable": false,
+      "isRouter": false,
+      "indexScore": 0.354072051699794,
+      "totalCostUsd": 180.464104706667,
+      "meanCostPerTaskUsd": 0.782666187098099,
+      "pricedTaskCount": 230.576084,
+      "components": [
+        {
+          "name": "frontiercode-v1.1-main",
+          "dataset": "frontiercode-v1.1",
+          "weight": 0.333333333333333,
+          "attempts": 300,
+          "reward": 0.353353333333333,
+          "safety": {
+            "refused": 0,
+            "blocked": 0,
+            "fallback": 0,
+            "fallbackModels": []
+          }
+        },
+        {
+          "name": "swe-atlas-qna",
+          "dataset": "datasets/swe-atlas-qna",
+          "weight": 0.333333333333333,
+          "attempts": 372,
+          "reward": 0.446236559139785,
+          "safety": {
+            "refused": 0,
+            "blocked": 0,
+            "fallback": 0,
+            "fallbackModels": []
+          }
+        },
+        {
+          "name": "terminal-bench-v4",
+          "dataset": "terminal-bench/terminal-bench@sha256:39d9f44b40420cde8fdcc087579c0d72a7e14fa3656d603c3f0d22fb35e27732",
+          "weight": 0.333333333333333,
+          "attempts": 198,
+          "reward": 0.262626262626263,
+          "safety": {
+            "refused": 0,
+            "blocked": 0,
+            "fallback": 0,
+            "fallbackModels": []
+          }
+        }
+      ],
+      "notes": []
+    },
+    {
+      "id": "f09fd629724ff1b103982a6158d00183",
+      "label": "Muse Code - Muse Spark 1.3 (Max)",
+      "agent": "Muse Code",
+      "model": "Muse Spark 1.3 (Max)",
+      "isDefault": false,
+      "isUnavailable": false,
+      "isRouter": false,
+      "indexScore": 0.457077885630498,
+      "totalCostUsd": 903.532221575,
+      "meanCostPerTaskUsd": 3.91029139020419,
+      "pricedTaskCount": 231.06519,
+      "components": [
+        {
+          "name": "frontiercode-v1.1-main",
+          "dataset": "frontiercode-v1.1",
+          "weight": 0.333333333333333,
+          "attempts": 300,
+          "reward": 0.467030333333333,
+          "safety": {
+            "refused": 0,
+            "blocked": 0,
+            "fallback": 0,
+            "fallbackModels": []
+          }
+        },
+        {
+          "name": "swe-atlas-qna",
+          "dataset": "datasets/swe-atlas-qna",
+          "weight": 0.333333333333333,
+          "attempts": 372,
+          "reward": 0.586021505376344,
+          "safety": {
+            "refused": 0,
+            "blocked": 0,
+            "fallback": 0,
+            "fallbackModels": []
+          }
+        },
+        {
+          "name": "terminal-bench-v4",
+          "dataset": "terminal-bench/terminal-bench@sha256:39d9f44b40420cde8fdcc087579c0d72a7e14fa3656d603c3f0d22fb35e27732",
+          "weight": 0.333333333333333,
+          "attempts": 198,
+          "reward": 0.318181818181818,
+          "safety": {
+            "refused": 0,
+            "blocked": 0,
+            "fallback": 0,
+            "fallbackModels": []
+          }
+        }
+      ],
+      "notes": []
+    },
+    {
+      "id": "d843fce803ff4f84ababc47040306116",
+      "label": "Muse Code - Muse Spark Open (Xhigh)",
+      "agent": "Muse Code",
+      "model": "Muse Spark Open (Xhigh)",
+      "isDefault": false,
+      "isUnavailable": false,
+      "isRouter": false,
+      "indexScore": 0.263007023894863,
+      "totalCostUsd": 552.135411283333,
+      "meanCostPerTaskUsd": 3.54324946048794,
+      "pricedTaskCount": 155.827417,
+      "components": [
+        {
+          "name": "frontiercode-v1.1-main",
+          "dataset": "frontiercode-v1.1",
+          "weight": 0.333333333333333,
+          "attempts": 299,
+          "reward": 0.225401,
+          "safety": {
+            "refused": 0,
+            "blocked": 0,
+            "fallback": 0,
+            "fallbackModels": []
+          }
+        },
+        {
+          "name": "swe-atlas-qna",
+          "dataset": "datasets/swe-atlas-qna",
+          "weight": 0.333333333333333,
+          "attempts": 372,
+          "reward": 0.508064516129032,
+          "safety": {
+            "refused": 0,
+            "blocked": 0,
+            "fallback": 0,
+            "fallbackModels": []
+          }
+        },
+        {
+          "name": "terminal-bench-v4",
+          "dataset": "terminal-bench/terminal-bench@sha256:39d9f44b40420cde8fdcc087579c0d72a7e14fa3656d603c3f0d22fb35e27732",
+          "weight": 0.333333333333333,
+          "attempts": 198,
+          "reward": 0.0555555555555556,
+          "safety": {
+            "refused": 0,
+            "blocked": 0,
+            "fallback": 0,
+            "fallbackModels": []
+          }
+        }
+      ],
+      "notes": []
+    },
+    {
+      "id": "52f72f7f3393c5edf92b32326e7a678d",
+      "label": "Muse Code - Muse Wonder (Max)",
+      "agent": "Muse Code",
+      "model": "Muse Wonder (Max)",
+      "isDefault": true,
+      "isUnavailable": false,
+      "isRouter": false,
+      "indexScore": 0.519768236993592,
+      "totalCostUsd": 1969.91115066667,
+      "meanCostPerTaskUsd": 8.04811220428196,
+      "pricedTaskCount": 244.76686,
+      "components": [
+        {
+          "name": "frontiercode-v1.1-main",
+          "dataset": "frontiercode-v1.1",
+          "weight": 0.333333333333333,
+          "attempts": 300,
+          "reward": 0.463915333333333,
+          "safety": {
+            "refused": 0,
+            "blocked": 0,
+            "fallback": 0,
+            "fallbackModels": []
+          }
+        },
+        {
+          "name": "swe-atlas-qna",
+          "dataset": "datasets/swe-atlas-qna",
+          "weight": 0.333333333333333,
+          "attempts": 372,
+          "reward": 0.615591397849462,
+          "safety": {
+            "refused": 0,
+            "blocked": 0,
+            "fallback": 0,
+            "fallbackModels": []
+          }
+        },
+        {
+          "name": "terminal-bench-v4",
+          "dataset": "terminal-bench/terminal-bench@sha256:39d9f44b40420cde8fdcc087579c0d72a7e14fa3656d603c3f0d22fb35e27732",
+          "weight": 0.333333333333333,
+          "attempts": 198,
+          "reward": 0.47979797979798,
+          "safety": {
+            "refused": 0,
+            "blocked": 0,
+            "fallback": 0,
+            "fallbackModels": []
+          }
+        }
+      ],
+      "notes": []
+    },
+    {
+      "id": "047ef12b001416f72e30e1ad633988e2",
+      "label": "Muse Code - Muse Wonder Full (Max)",
+      "agent": "Muse Code",
+      "model": "Muse Wonder Full (Max)",
+      "isDefault": true,
+      "isUnavailable": false,
+      "isRouter": false,
+      "indexScore": 0.588804489084392,
+      "totalCostUsd": null,
+      "meanCostPerTaskUsd": null,
+      "pricedTaskCount": null,
+      "components": [
+        {
+          "name": "frontiercode-v1.1-main",
+          "dataset": "frontiercode-v1.1",
+          "weight": 0.333333333333333,
+          "attempts": 300,
+          "reward": 0.487332333333333,
+          "safety": {
+            "refused": 0,
+            "blocked": 0,
+            "fallback": 0,
+            "fallbackModels": []
+          }
+        },
+        {
+          "name": "swe-atlas-qna",
+          "dataset": "datasets/swe-atlas-qna",
+          "weight": 0.333333333333333,
+          "attempts": 372,
+          "reward": 0.688172043010753,
+          "safety": {
+            "refused": 0,
+            "blocked": 0,
+            "fallback": 0,
+            "fallbackModels": []
+          }
+        },
+        {
+          "name": "terminal-bench-v4",
+          "dataset": "terminal-bench/terminal-bench@sha256:39d9f44b40420cde8fdcc087579c0d72a7e14fa3656d603c3f0d22fb35e27732",
+          "weight": 0.333333333333333,
+          "attempts": 198,
+          "reward": 0.590909090909091,
+          "safety": {
+            "refused": 0,
+            "blocked": 0,
+            "fallback": 0,
+            "fallbackModels": []
+          }
+        }
+      ],
+      "notes": []
+    },
+    {
+      "id": "96d7404e06194027474a6cc3bb31c068",
+      "label": "Opencode - GLM-5.3 (Max)",
+      "agent": "Opencode",
+      "model": "GLM-5.3 (Max)",
+      "isDefault": true,
+      "isUnavailable": false,
+      "isRouter": false,
+      "indexScore": 0.489161690344303,
+      "totalCostUsd": 1348.18484175333,
+      "meanCostPerTaskUsd": 5.23102713863476,
+      "pricedTaskCount": 257.728512,
+      "components": [
+        {
+          "name": "frontiercode-v1.1-main",
+          "dataset": "frontiercode-v1.1",
+          "weight": 0.333333333333333,
+          "attempts": 300,
+          "reward": 0.482473666666667,
+          "safety": {
+            "refused": 0,
+            "blocked": 0,
+            "fallback": 0,
+            "fallbackModels": []
+          }
+        },
+        {
+          "name": "swe-atlas-qna",
+          "dataset": "datasets/swe-atlas-qna",
+          "weight": 0.333333333333333,
+          "attempts": 372,
+          "reward": 0.586021505376344,
+          "safety": {
+            "refused": 0,
+            "blocked": 0,
+            "fallback": 0,
+            "fallbackModels": []
+          }
+        },
+        {
+          "name": "terminal-bench-v4",
+          "dataset": "terminal-bench/terminal-bench@sha256:39d9f44b40420cde8fdcc087579c0d72a7e14fa3656d603c3f0d22fb35e27732",
+          "weight": 0.333333333333333,
+          "attempts": 198,
+          "reward": 0.398989898989899,
+          "safety": {
+            "refused": 0,
+            "blocked": 0,
+            "fallback": 0,
+            "fallbackModels": []
+          }
+        }
+      ],
+      "notes": []
+    }
+  ]
+}

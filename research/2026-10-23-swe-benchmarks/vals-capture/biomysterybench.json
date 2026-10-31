@@ -1,0 +1,2743 @@
+{
+    "metadata": {
+        "benchmark": "BioMysteryBench",
+        "slug": "biomysterybench",
+        "description": "Anthropic's benchmark of whether AI agents can solve real-world bioinformatics mysteries from raw data",
+        "benchmark_id": "biomysterybench",
+        "family": "biomysterybench",
+        "version": "1",
+        "updated": "2026-10-20",
+        "dataset_type": "public",
+        "industry": "science",
+        "tasks": {
+            "overall": "Overall",
+            "human_solvable": "Human-solvable",
+            "human_difficult": "Hard"
+        },
+        "models": [
+            "anthropic/claude-haiku-5-5",
+            "anthropic/claude-opus-5",
+            "anthropic/claude-opus-5-5",
+            "anthropic/claude-sonnet-5-5",
+            "deepseek/deepseek-v4-flash-0731",
+            "deepseek/deepseek-v4.1-flash",
+            "fireworks/ember-1",
+            "google/gemini-3.1-pro-preview",
+            "google/gemini-3.6-flash",
+            "google/gemini-3.8-flash",
+            "google/gemini-4-argon",
+            "grok/grok-4.6",
+            "grok/grok-4.7",
+            "kimi/kimi-k3",
+            "meta/muse-wonder",
+            "meta/muse-wonder-full",
+            "meta/muse_spark_1_2",
+            "mistralai/mistral-large-4",
+            "openai/gpt-5.6-luna",
+            "openai/gpt-5.6-sol",
+            "openai/gpt-6-astra",
+            "openai/gpt-6-luna",
+            "openai/gpt-6-sol",
+            "openai/gpt-6.1-sol",
+            "reflection/Beam-1.0",
+            "stepfun/step-5-preview",
+            "tencent/hy4-preview",
+            "xiaomi/mimo-v2.6-flash"
+        ],
+        "partners": [
+            {
+                "name": "Anthropic",
+                "url": "https://www.anthropic.com/research/Evaluating-Claude-For-Bioinformatics-With-BioMysteryBench"
+            }
+        ],
+        "showBadge": false,
+        "visible": true,
+        "use_cost_per_test": true,
+        "runner": "external",
+        "mode": "agentic",
+        "archived": false,
+        "partner": true,
+        "total_models": 28
+    },
+    "tasks": {
+        "overall": {
+            "anthropic/claude-sonnet-5-5": {
+                "accuracy": 81.111,
+                "latency": 1086.061,
+                "stderr": 0.642,
+                "cost_per_test": 3.736494,
+                "token_totals": {
+                    "input_tokens": 732589448,
+                    "output_tokens": 14342557,
+                    "reasoning_tokens": 7945289,
+                    "cache_read_tokens": 712471480,
+                    "cache_write_tokens": 20094500
+                },
+                "temperature": 1.0,
+                "top_p": null,
+                "max_output_tokens": 128000,
+                "reasoning": null,
+                "reasoning_effort": null,
+                "verbosity": null,
+                "compute_effort": "max",
+                "provider": "Anthropic",
+                "harness": "Terminus 2",
+                "usage": {
+                    "trials": 3,
+                    "task_opportunities": 270,
+                    "outcomes": {
+                        "solved": 219,
+                        "incorrect_evaluated_answer": 42,
+                        "content_filter_or_bio_policy_failure": 9,
+                        "provider_refusal": 0,
+                        "protocol_or_model_output_failure": 0
+                    }
+                }
+            },
+            "openai/gpt-6.1-sol": {
+                "accuracy": 79.63,
+                "latency": 530.7,
+                "stderr": 0.741,
+                "cost_per_test": 0.372147,
+                "token_totals": {
+                    "input_tokens": 49187181,
+                    "output_tokens": 1921230,
+                    "reasoning_tokens": 1213195,
+                    "cache_read_tokens": 45054185,
+                    "cache_write_tokens": 4050774
+                },
+                "temperature": null,
+                "top_p": null,
+                "max_output_tokens": 128000,
+                "reasoning": null,
+                "reasoning_effort": "max",
+                "verbosity": null,
+                "compute_effort": null,
+                "provider": "OpenAI",
+                "harness": "Terminus 2",
+                "usage": {
+                    "trials": 3,
+                    "task_opportunities": 270,
+                    "outcomes": {
+                        "solved": 215,
+                        "incorrect_evaluated_answer": 51,
+                        "content_filter_or_bio_policy_failure": 4,
+                        "provider_refusal": 0,
+                        "protocol_or_model_output_failure": 0
+                    }
+                }
+            },
+            "openai/gpt-6-astra": {
+                "accuracy": 79.259,
+                "latency": 286.147,
+                "stderr": 0.98,
+                "cost_per_test": 1.719326,
+                "token_totals": {
+                    "input_tokens": 39863504,
+                    "output_tokens": 1463159,
+                    "reasoning_tokens": 815272,
+                    "cache_read_tokens": 35228179,
+                    "cache_write_tokens": 0
+                },
+                "temperature": null,
+                "top_p": null,
+                "max_output_tokens": 128000,
+                "reasoning": null,
+                "reasoning_effort": "max",
+                "verbosity": null,
+                "compute_effort": null,
+                "provider": "OpenAI",
+                "harness": "Terminus 2",
+                "usage": {
+                    "trials": 3,
+                    "task_opportunities": 270,
+                    "outcomes": {
+                        "solved": 214,
+                        "incorrect_evaluated_answer": 56,
+                        "content_filter_or_bio_policy_failure": 0,
+                        "provider_refusal": 0,
+                        "protocol_or_model_output_failure": 0
+                    }
+                }
+            },
+            "anthropic/claude-opus-5-5": {
+                "accuracy": 79.259,
+                "latency": 739.252,
+                "stderr": 0.98,
+                "cost_per_test": 3.642341,
+                "token_totals": {
+                    "input_tokens": 359126168,
+                    "output_tokens": 6342038,
+                    "reasoning_tokens": 4159050,
+                    "cache_read_tokens": 348450323,
+                    "cache_write_tokens": 10652845
+                },
+                "temperature": 1.0,
+                "top_p": null,
+                "max_output_tokens": 128000,
+                "reasoning": null,
+                "reasoning_effort": null,
+                "verbosity": null,
+                "compute_effort": "max",
+                "provider": "Anthropic",
+                "harness": "Terminus 2",
+                "usage": {
+                    "trials": 3,
+                    "task_opportunities": 270,
+                    "outcomes": {
+                        "solved": 214,
+                        "incorrect_evaluated_answer": 50,
+                        "content_filter_or_bio_policy_failure": 6,
+                        "provider_refusal": 0,
+                        "protocol_or_model_output_failure": 0
+                    }
+                }
+            },
+            "anthropic/claude-opus-5": {
+                "accuracy": 79.259,
+                "latency": 2195.964,
+                "stderr": 2.062,
+                "cost_per_test": 3.292774,
+                "temperature": 1.0,
+                "top_p": null,
+                "max_output_tokens": 128000,
+                "reasoning": null,
+                "reasoning_effort": null,
+                "verbosity": null,
+                "compute_effort": "max",
+                "provider": "Anthropic",
+                "harness": "Terminus 2",
+                "usage": {
+                    "trials": 3,
+                    "task_opportunities": 270,
+                    "outcomes": {
+                        "solved": 214,
+                        "incorrect_evaluated_answer": 51,
+                        "content_filter_or_bio_policy_failure": 5,
+                        "provider_refusal": 0,
+                        "protocol_or_model_output_failure": 0
+                    }
+                }
+            },
+            "google/gemini-4-argon": {
+                "accuracy": 76.296,
+                "latency": 2396.816,
+                "stderr": 0.37,
+                "cost_per_test": 5.707134,
+                "token_totals": {
+                    "input_tokens": 187578219,
+                    "output_tokens": 16476596,
+                    "reasoning_tokens": 11274521,
+                    "cache_read_tokens": 149000710,
+                    "cache_write_tokens": 0
+                },
+                "temperature": 1.0,
+                "top_p": null,
+                "max_output_tokens": 262144,
+                "reasoning": null,
+                "reasoning_effort": "high",
+                "verbosity": null,
+                "compute_effort": null,
+                "provider": "Google",
+                "harness": "Terminus 2",
+                "usage": {
+                    "trials": 3,
+                    "task_opportunities": 270,
+                    "outcomes": {
+                        "solved": 206,
+                        "incorrect_evaluated_answer": 54,
+                        "content_filter_or_bio_policy_failure": 0,
+                        "provider_refusal": 0,
+                        "protocol_or_model_output_failure": 0,
+                        "provider_error": 10
+                    }
+                }
+            },
+            "openai/gpt-6-sol": {
+                "accuracy": 74.815,
+                "latency": 324.465,
+                "stderr": 2.429,
+                "cost_per_test": 0.662358,
+                "token_totals": {
+                    "input_tokens": 129632435,
+                    "output_tokens": 2217483,
+                    "reasoning_tokens": 1401831,
+                    "cache_read_tokens": 124856548,
+                    "cache_write_tokens": 4671549
+                },
+                "temperature": null,
+                "top_p": null,
+                "max_output_tokens": 128000,
+                "reasoning": null,
+                "reasoning_effort": "max",
+                "verbosity": null,
+                "compute_effort": null,
+                "provider": "OpenAI",
+                "harness": "Terminus 2",
+                "usage": {
+                    "trials": 3,
+                    "task_opportunities": 270,
+                    "outcomes": {
+                        "solved": 202,
+                        "incorrect_evaluated_answer": 66,
+                        "content_filter_or_bio_policy_failure": 2,
+                        "provider_refusal": 0,
+                        "protocol_or_model_output_failure": 0
+                    }
+                }
+            },
+            "meta/muse-wonder-full": {
+                "accuracy": 73.333,
+                "latency": 1574.165,
+                "stderr": 0.642,
+                "cost_per_test": 3.473154,
+                "token_totals": {
+                    "input_tokens": 712304421,
+                    "output_tokens": 5992307,
+                    "reasoning_tokens": 3536726,
+                    "cache_read_tokens": 696010395,
+                    "cache_write_tokens": 0
+                },
+                "temperature": 1.0,
+                "top_p": null,
+                "max_output_tokens": 131072,
+                "reasoning": null,
+                "reasoning_effort": "max",
+                "verbosity": null,
+                "compute_effort": null,
+                "provider": "Meta",
+                "harness": "Terminus 2",
+                "usage": {
+                    "trials": 3,
+                    "task_opportunities": 270,
+                    "outcomes": {
+                        "solved": 198,
+                        "incorrect_evaluated_answer": 72,
+                        "content_filter_or_bio_policy_failure": 0,
+                        "provider_refusal": 0,
+                        "protocol_or_model_output_failure": 0,
+                        "provider_error": 0
+                    }
+                }
+            },
+            "kimi/kimi-k3": {
+                "accuracy": 72.593,
+                "latency": 295.415,
+                "stderr": 1.614,
+                "cost_per_test": 1.060934,
+                "token_totals": {
+                    "input_tokens": 141481976,
+                    "output_tokens": 2699922,
+                    "reasoning_tokens": 1694304,
+                    "cache_read_tokens": 136837289,
+                    "cache_write_tokens": 0
+                },
+                "temperature": 1.0,
+                "top_p": 0.95,
+                "max_output_tokens": 262144,
+                "reasoning": null,
+                "reasoning_effort": "max",
+                "verbosity": null,
+                "compute_effort": null,
+                "provider": "Moonshot AI",
+                "harness": "Terminus 2",
+                "usage": {
+                    "trials": 3,
+                    "task_opportunities": 270,
+                    "outcomes": {
+                        "solved": 196,
+                        "incorrect_evaluated_answer": 74,
+                        "content_filter_or_bio_policy_failure": 0,
+                        "provider_refusal": 0,
+                        "protocol_or_model_output_failure": 0,
+                        "provider_error": 0
+                    }
+                }
+            },
+            "grok/grok-4.6": {
+                "accuracy": 72.222,
+                "latency": 858.019,
+                "stderr": 0.0,
+                "cost_per_test": 1.226606,
+                "token_totals": {
+                    "input_tokens": 104073191,
+                    "output_tokens": 4208045,
+                    "reasoning_tokens": 2899195,
+                    "cache_read_tokens": 82000085,
+                    "cache_write_tokens": 0
+                },
+                "temperature": 0.7,
+                "top_p": 0.95,
+                "max_output_tokens": null,
+                "reasoning": null,
+                "reasoning_effort": "high",
+                "verbosity": null,
+                "compute_effort": null,
+                "provider": "SpaceXAI",
+                "harness": "Terminus 2",
+                "usage": {
+                    "trials": 3,
+                    "task_opportunities": 270,
+                    "outcomes": {
+                        "solved": 195,
+                        "incorrect_evaluated_answer": 75,
+                        "content_filter_or_bio_policy_failure": 0,
+                        "provider_refusal": 0,
+                        "protocol_or_model_output_failure": 0
+                    }
+                }
+            },
+            "openai/gpt-5.6-sol": {
+                "accuracy": 71.111,
+                "latency": 1098.261,
+                "stderr": 0.642,
+                "cost_per_test": 1.925036,
+                "temperature": null,
+                "top_p": null,
+                "max_output_tokens": 128000,
+                "reasoning": null,
+                "reasoning_effort": "max",
+                "verbosity": null,
+                "compute_effort": null,
+                "provider": "OpenAI",
+                "harness": "Terminus 2",
+                "usage": {
+                    "trials": 3,
+                    "task_opportunities": 270,
+                    "outcomes": {
+                        "solved": 192,
+                        "incorrect_evaluated_answer": 75,
+                        "content_filter_or_bio_policy_failure": 3,
+                        "provider_refusal": 0,
+                        "protocol_or_model_output_failure": 0
+                    }
+                }
+            },
+            "anthropic/claude-haiku-5-5": {
+                "accuracy": 70.37,
+                "latency": 752.457,
+                "stderr": 1.335,
+                "cost_per_test": 0.512756,
+                "token_totals": {
+                    "input_tokens": 241182764,
+                    "output_tokens": 16695865,
+                    "reasoning_tokens": 14393004,
+                    "cache_read_tokens": 217680976,
+                    "cache_write_tokens": 23494403
+                },
+                "temperature": null,
+                "top_p": null,
+                "max_output_tokens": 128000,
+                "reasoning": null,
+                "reasoning_effort": null,
+                "verbosity": null,
+                "compute_effort": "max",
+                "provider": "Anthropic",
+                "harness": "Terminus 2",
+                "usage": {
+                    "trials": 3,
+                    "task_opportunities": 270,
+                    "outcomes": {
+                        "solved": 190,
+                        "incorrect_evaluated_answer": 72,
+                        "content_filter_or_bio_policy_failure": 8,
+                        "provider_refusal": 0,
+                        "protocol_or_model_output_failure": 0,
+                        "provider_error": 0
+                    }
+                }
+            },
+            "grok/grok-4.7": {
+                "accuracy": 69.259,
+                "latency": 696.818,
+                "stderr": 1.335,
+                "cost_per_test": 2.487742,
+                "token_totals": {
+                    "input_tokens": 254511912,
+                    "output_tokens": 3699044,
+                    "reasoning_tokens": 2064454,
+                    "cache_read_tokens": 215793109,
+                    "cache_write_tokens": 0
+                },
+                "temperature": 0.7,
+                "top_p": 0.95,
+                "max_output_tokens": null,
+                "reasoning": null,
+                "reasoning_effort": "xhigh",
+                "verbosity": null,
+                "compute_effort": null,
+                "provider": "SpaceXAI",
+                "harness": "Terminus 2",
+                "usage": {
+                    "trials": 3,
+                    "task_opportunities": 270,
+                    "outcomes": {
+                        "solved": 187,
+                        "incorrect_evaluated_answer": 83,
+                        "content_filter_or_bio_policy_failure": 0,
+                        "provider_refusal": 0,
+                        "protocol_or_model_output_failure": 0
+                    }
+                }
+            },
+            "tencent/hy4-preview": {
+                "accuracy": 69.259,
+                "latency": 1410.317,
+                "stderr": 2.593,
+                "cost_per_test": 0.361814,
+                "token_totals": {
+                    "input_tokens": 235074596,
+                    "output_tokens": 6126050,
+                    "reasoning_tokens": 3797660,
+                    "cache_read_tokens": 225770496,
+                    "cache_write_tokens": 0
+                },
+                "temperature": 0.9,
+                "top_p": 1.0,
+                "max_output_tokens": 64000,
+                "reasoning": null,
+                "reasoning_effort": null,
+                "verbosity": null,
+                "compute_effort": null,
+                "provider": "Tencent",
+                "harness": "Terminus 2",
+                "usage": {
+                    "trials": 3,
+                    "task_opportunities": 270,
+                    "outcomes": {
+                        "solved": 187,
+                        "incorrect_evaluated_answer": 83,
+                        "content_filter_or_bio_policy_failure": 0,
+                        "provider_refusal": 0,
+                        "protocol_or_model_output_failure": 0
+                    }
+                }
+            },
+            "xiaomi/mimo-v2.6-flash": {
+                "accuracy": 69.259,
+                "latency": 1707.953,
+                "stderr": 0.98,
+                "cost_per_test": 0.050119,
+                "token_totals": {
+                    "input_tokens": 363783190,
+                    "output_tokens": 6591713,
+                    "reasoning_tokens": 4865655,
+                    "cache_read_tokens": 351782592,
+                    "cache_write_tokens": 0
+                },
+                "temperature": 1.0,
+                "top_p": 0.95,
+                "max_output_tokens": 128000,
+                "reasoning": null,
+                "reasoning_effort": null,
+                "verbosity": null,
+                "compute_effort": null,
+                "provider": "Xiaomi",
+                "harness": "Terminus 2",
+                "usage": {
+                    "trials": 3,
+                    "task_opportunities": 270,
+                    "outcomes": {
+                        "solved": 187,
+                        "incorrect_evaluated_answer": 83,
+                        "content_filter_or_bio_policy_failure": 0,
+                        "provider_refusal": 0,
+                        "protocol_or_model_output_failure": 0
+                    }
+                }
+            },
+            "deepseek/deepseek-v4.1-flash": {
+                "accuracy": 67.778,
+                "latency": 890.067,
+                "stderr": 1.111,
+                "cost_per_test": 0.233183,
+                "token_totals": {
+                    "input_tokens": 268679692,
+                    "output_tokens": 14743987,
+                    "reasoning_tokens": 13033344,
+                    "cache_read_tokens": 262450176,
+                    "cache_write_tokens": 0
+                },
+                "temperature": null,
+                "top_p": null,
+                "max_output_tokens": 384000,
+                "reasoning": null,
+                "reasoning_effort": "high",
+                "verbosity": null,
+                "compute_effort": null,
+                "provider": "DeepSeek",
+                "harness": "Terminus 2",
+                "usage": {
+                    "trials": 3,
+                    "task_opportunities": 270,
+                    "outcomes": {
+                        "solved": 183,
+                        "incorrect_evaluated_answer": 87,
+                        "content_filter_or_bio_policy_failure": 0,
+                        "provider_refusal": 0,
+                        "protocol_or_model_output_failure": 0
+                    }
+                }
+            },
+            "stepfun/step-5-preview": {
+                "accuracy": 67.407,
+                "latency": 1294.751,
+                "stderr": 0.37,
+                "cost_per_test": 0.494625,
+                "token_totals": {
+                    "input_tokens": 270017689,
+                    "output_tokens": 7012589,
+                    "reasoning_tokens": 0,
+                    "cache_read_tokens": 257300480,
+                    "cache_write_tokens": 0
+                },
+                "temperature": 1.0,
+                "top_p": 0.95,
+                "max_output_tokens": 1024000,
+                "reasoning": null,
+                "reasoning_effort": null,
+                "verbosity": null,
+                "compute_effort": null,
+                "provider": "Stepfun",
+                "harness": "Terminus 2",
+                "usage": {
+                    "trials": 3,
+                    "task_opportunities": 270,
+                    "outcomes": {
+                        "solved": 182,
+                        "incorrect_evaluated_answer": 88,
+                        "content_filter_or_bio_policy_failure": 0,
+                        "provider_refusal": 0,
+                        "protocol_or_model_output_failure": 0,
+                        "provider_error": 0
+                    }
+                }
+            },
+            "fireworks/ember-1": {
+                "accuracy": 67.037,
+                "latency": 566.167,
+                "stderr": 3.032,
+                "cost_per_test": 0.907066,
+                "token_totals": {
+                    "input_tokens": 127490411,
+                    "output_tokens": 1806362,
+                    "reasoning_tokens": 999895,
+                    "cache_read_tokens": 121455841,
+                    "cache_write_tokens": 0
+                },
+                "temperature": null,
+                "top_p": null,
+                "max_output_tokens": 131072,
+                "reasoning": null,
+                "reasoning_effort": null,
+                "verbosity": null,
+                "compute_effort": null,
+                "provider": "Fireworks AI",
+                "harness": "Terminus 2",
+                "usage": {
+                    "trials": 3,
+                    "task_opportunities": 270,
+                    "outcomes": {
+                        "solved": 181,
+                        "incorrect_evaluated_answer": 89,
+                        "content_filter_or_bio_policy_failure": 0,
+                        "provider_refusal": 0,
+                        "protocol_or_model_output_failure": 0,
+                        "provider_error": 0
+                    }
+                }
+            },
+            "meta/muse-wonder": {
+                "accuracy": 67.037,
+                "latency": 1081.905,
+                "stderr": 0.37,
+                "cost_per_test": 3.228928,
+                "token_totals": {
+                    "input_tokens": 656406298,
+                    "output_tokens": 4876338,
+                    "reasoning_tokens": 2954517,
+                    "cache_read_tokens": 638118607,
+                    "cache_write_tokens": 0
+                },
+                "temperature": 1.0,
+                "top_p": null,
+                "max_output_tokens": 131072,
+                "reasoning": null,
+                "reasoning_effort": "max",
+                "verbosity": null,
+                "compute_effort": null,
+                "provider": "Meta",
+                "harness": "Terminus 2",
+                "usage": {
+                    "trials": 3,
+                    "task_opportunities": 270,
+                    "outcomes": {
+                        "solved": 181,
+                        "incorrect_evaluated_answer": 89,
+                        "content_filter_or_bio_policy_failure": 0,
+                        "provider_refusal": 0,
+                        "protocol_or_model_output_failure": 0,
+                        "provider_error": 0
+                    }
+                }
+            },
+            "mistralai/mistral-large-4": {
+                "accuracy": 67.037,
+                "latency": 1532.221,
+                "stderr": 2.671,
+                "cost_per_test": 2.067705,
+                "token_totals": {
+                    "input_tokens": 465753316,
+                    "output_tokens": 14490127,
+                    "reasoning_tokens": 0,
+                    "cache_read_tokens": 416311296,
+                    "cache_write_tokens": 0
+                },
+                "temperature": 1.0,
+                "top_p": 0.95,
+                "max_output_tokens": 256000,
+                "reasoning": null,
+                "reasoning_effort": "high",
+                "verbosity": null,
+                "compute_effort": null,
+                "provider": "Mistral AI",
+                "harness": "Terminus 2",
+                "usage": {
+                    "trials": 3,
+                    "task_opportunities": 270,
+                    "outcomes": {
+                        "solved": 181,
+                        "incorrect_evaluated_answer": 72,
+                        "content_filter_or_bio_policy_failure": 0,
+                        "provider_refusal": 0,
+                        "protocol_or_model_output_failure": 0,
+                        "provider_error": 17
+                    }
+                }
+            },
+            "meta/muse_spark_1_2": {
+                "accuracy": 64.815,
+                "latency": 1417.288,
+                "stderr": 1.335,
+                "cost_per_test": 0.994513,
+                "temperature": 1.0,
+                "top_p": null,
+                "max_output_tokens": 131072,
+                "reasoning": null,
+                "reasoning_effort": "xhigh",
+                "verbosity": null,
+                "compute_effort": null,
+                "provider": "Meta",
+                "harness": "Terminus 2",
+                "usage": {
+                    "trials": 3,
+                    "task_opportunities": 270,
+                    "outcomes": {
+                        "solved": 175,
+                        "incorrect_evaluated_answer": 93,
+                        "content_filter_or_bio_policy_failure": 0,
+                        "provider_refusal": 0,
+                        "protocol_or_model_output_failure": 2
+                    }
+                }
+            },
+            "deepseek/deepseek-v4-flash-0731": {
+                "accuracy": 64.444,
+                "latency": 1622.715,
+                "stderr": 1.283,
+                "cost_per_test": 0.038768,
+                "temperature": null,
+                "top_p": null,
+                "max_output_tokens": 384000,
+                "reasoning": null,
+                "reasoning_effort": "high",
+                "verbosity": null,
+                "compute_effort": null,
+                "provider": "DeepSeek",
+                "harness": "Terminus 2",
+                "usage": {
+                    "trials": 3,
+                    "task_opportunities": 270,
+                    "outcomes": {
+                        "solved": 174,
+                        "incorrect_evaluated_answer": 92,
+                        "content_filter_or_bio_policy_failure": 0,
+                        "provider_refusal": 0,
+                        "protocol_or_model_output_failure": 4
+                    }
+                }
+            },
+            "google/gemini-3.8-flash": {
+                "accuracy": 62.222,
+                "latency": 326.755,
+                "stderr": 1.697,
+                "cost_per_test": 1.5539,
+                "token_totals": {
+                    "input_tokens": 391907840,
+                    "output_tokens": 3890918,
+                    "reasoning_tokens": 1948190,
+                    "cache_read_tokens": 355089274,
+                    "cache_write_tokens": 0
+                },
+                "temperature": 1.0,
+                "top_p": null,
+                "max_output_tokens": 65536,
+                "reasoning": null,
+                "reasoning_effort": "high",
+                "verbosity": null,
+                "compute_effort": null,
+                "provider": "Google",
+                "harness": "Terminus 2",
+                "usage": {
+                    "trials": 3,
+                    "task_opportunities": 270,
+                    "outcomes": {
+                        "solved": 168,
+                        "incorrect_evaluated_answer": 97,
+                        "content_filter_or_bio_policy_failure": 0,
+                        "provider_refusal": 0,
+                        "protocol_or_model_output_failure": 5
+                    }
+                }
+            },
+            "openai/gpt-6-luna": {
+                "accuracy": 61.481,
+                "latency": 523.805,
+                "stderr": 2.593,
+                "cost_per_test": 0.053236,
+                "token_totals": {
+                    "input_tokens": 157508494,
+                    "output_tokens": 4482770,
+                    "reasoning_tokens": 3258485,
+                    "cache_read_tokens": 149567191,
+                    "cache_write_tokens": 7787108
+                },
+                "temperature": null,
+                "top_p": null,
+                "max_output_tokens": 128000,
+                "reasoning": null,
+                "reasoning_effort": "max",
+                "verbosity": null,
+                "compute_effort": null,
+                "provider": "OpenAI",
+                "harness": "Terminus 2",
+                "usage": {
+                    "trials": 3,
+                    "task_opportunities": 270,
+                    "outcomes": {
+                        "solved": 166,
+                        "incorrect_evaluated_answer": 96,
+                        "content_filter_or_bio_policy_failure": 8,
+                        "provider_refusal": 0,
+                        "protocol_or_model_output_failure": 0
+                    }
+                }
+            },
+            "openai/gpt-5.6-luna": {
+                "accuracy": 61.481,
+                "latency": 1111.274,
+                "stderr": 0.741,
+                "cost_per_test": 0.088859,
+                "temperature": null,
+                "top_p": null,
+                "max_output_tokens": 128000,
+                "reasoning": null,
+                "reasoning_effort": "max",
+                "verbosity": null,
+                "compute_effort": null,
+                "provider": "OpenAI",
+                "harness": "Terminus 2",
+                "usage": {
+                    "trials": 3,
+                    "task_opportunities": 270,
+                    "outcomes": {
+                        "solved": 166,
+                        "incorrect_evaluated_answer": 101,
+                        "content_filter_or_bio_policy_failure": 3,
+                        "provider_refusal": 0,
+                        "protocol_or_model_output_failure": 0
+                    }
+                }
+            },
+            "google/gemini-3.1-pro-preview": {
+                "accuracy": 60.0,
+                "latency": 251.867,
+                "stderr": 2.94,
+                "cost_per_test": 0.713378,
+                "token_totals": {
+                    "input_tokens": 74631111,
+                    "output_tokens": 2138194,
+                    "reasoning_tokens": 1319799,
+                    "cache_read_tokens": 62626251,
+                    "cache_write_tokens": 0
+                },
+                "temperature": 1.0,
+                "top_p": null,
+                "max_output_tokens": 65536,
+                "reasoning": null,
+                "reasoning_effort": "high",
+                "verbosity": null,
+                "compute_effort": null,
+                "provider": "Google",
+                "harness": "Terminus 2",
+                "usage": {
+                    "trials": 3,
+                    "task_opportunities": 270,
+                    "outcomes": {
+                        "solved": 162,
+                        "incorrect_evaluated_answer": 94,
+                        "content_filter_or_bio_policy_failure": 14,
+                        "provider_refusal": 0,
+                        "protocol_or_model_output_failure": 0
+                    }
+                }
+            },
+            "google/gemini-3.6-flash": {
+                "accuracy": 58.519,
+                "latency": 761.958,
+                "stderr": 1.614,
+                "cost_per_test": 1.252177,
+                "temperature": 1.0,
+                "top_p": null,
+                "max_output_tokens": 65536,
+                "reasoning": null,
+                "reasoning_effort": "high",
+                "verbosity": null,
+                "compute_effort": null,
+                "provider": "Google",
+                "harness": "Terminus 2",
+                "usage": {
+                    "trials": 3,
+                    "task_opportunities": 270,
+                    "outcomes": {
+                        "solved": 158,
+                        "incorrect_evaluated_answer": 104,
+                        "content_filter_or_bio_policy_failure": 0,
+                        "provider_refusal": 0,
+                        "protocol_or_model_output_failure": 8
+                    }
+                }
+            },
+            "reflection/Beam-1.0": {
+                "accuracy": 42.593,
+                "latency": 440.046,
+                "stderr": 1.614,
+                "cost_per_test": null,
+                "token_totals": {
+                    "input_tokens": 548005346,
+                    "output_tokens": 15353470,
+                    "reasoning_tokens": 13675718,
+                    "cache_read_tokens": 524174592,
+                    "cache_write_tokens": 0
+                },
+                "temperature": 0.7,
+                "top_p": 0.99,
+                "max_output_tokens": 131072,
+                "reasoning": null,
+                "reasoning_effort": null,
+                "verbosity": null,
+                "compute_effort": null,
+                "provider": "Reflection",
+                "harness": "Terminus 2",
+                "usage": {
+                    "trials": 3,
+                    "task_opportunities": 270,
+                    "outcomes": {
+                        "solved": 115,
+                        "incorrect_evaluated_answer": 120,
+                        "content_filter_or_bio_policy_failure": 0,
+                        "provider_refusal": 0,
+                        "protocol_or_model_output_failure": 0,
+                        "provider_error": 35
+                    }
+                }
+            }
+        },
+        "human_solvable": {
+            "anthropic/claude-sonnet-5-5": {
+                "accuracy": 89.498,
+                "latency": 934.789,
+                "stderr": 0.913,
+                "cost_per_test": 3.105711,
+                "token_totals": {
+                    "input_tokens": 461376064,
+                    "output_tokens": 10237282,
+                    "reasoning_tokens": 5175967,
+                    "cache_read_tokens": 447464711,
+                    "cache_write_tokens": 13893997
+                },
+                "temperature": 1.0,
+                "top_p": null,
+                "max_output_tokens": 128000,
+                "reasoning": null,
+                "reasoning_effort": null,
+                "verbosity": null,
+                "compute_effort": "max",
+                "provider": "Anthropic",
+                "harness": "Terminus 2",
+                "usage": {
+                    "trials": 3,
+                    "task_opportunities": 219,
+                    "outcomes": {
+                        "solved": 196,
+                        "incorrect_evaluated_answer": 14,
+                        "content_filter_or_bio_policy_failure": 9,
+                        "provider_refusal": 0,
+                        "protocol_or_model_output_failure": 0
+                    }
+                }
+            },
+            "openai/gpt-6-astra": {
+                "accuracy": 89.041,
+                "latency": 232.435,
+                "stderr": 0.791,
+                "cost_per_test": 1.376628,
+                "token_totals": {
+                    "input_tokens": 23660606,
+                    "output_tokens": 979880,
+                    "reasoning_tokens": 517139,
+                    "cache_read_tokens": 20567359,
+                    "cache_write_tokens": 0
+                },
+                "temperature": null,
+                "top_p": null,
+                "max_output_tokens": 128000,
+                "reasoning": null,
+                "reasoning_effort": "max",
+                "verbosity": null,
+                "compute_effort": null,
+                "provider": "OpenAI",
+                "harness": "Terminus 2",
+                "usage": {
+                    "trials": 3,
+                    "task_opportunities": 219,
+                    "outcomes": {
+                        "solved": 195,
+                        "incorrect_evaluated_answer": 24,
+                        "content_filter_or_bio_policy_failure": 0,
+                        "provider_refusal": 0,
+                        "protocol_or_model_output_failure": 0
+                    }
+                }
+            },
+            "openai/gpt-6.1-sol": {
+                "accuracy": 89.041,
+                "latency": 382.443,
+                "stderr": 0.791,
+                "cost_per_test": 0.284254,
+                "token_totals": {
+                    "input_tokens": 28004721,
+                    "output_tokens": 1166557,
+                    "reasoning_tokens": 675518,
+                    "cache_read_tokens": 25299984,
+                    "cache_write_tokens": 2638527
+                },
+                "temperature": null,
+                "top_p": null,
+                "max_output_tokens": 128000,
+                "reasoning": null,
+                "reasoning_effort": "max",
+                "verbosity": null,
+                "compute_effort": null,
+                "provider": "OpenAI",
+                "harness": "Terminus 2",
+                "usage": {
+                    "trials": 3,
+                    "task_opportunities": 219,
+                    "outcomes": {
+                        "solved": 195,
+                        "incorrect_evaluated_answer": 20,
+                        "content_filter_or_bio_policy_failure": 4,
+                        "provider_refusal": 0,
+                        "protocol_or_model_output_failure": 0
+                    }
+                }
+            },
+            "anthropic/claude-opus-5": {
+                "accuracy": 87.671,
+                "latency": 2195.964,
+                "stderr": 2.093,
+                "cost_per_test": 2.64447,
+                "temperature": 1.0,
+                "top_p": null,
+                "max_output_tokens": 128000,
+                "reasoning": null,
+                "reasoning_effort": null,
+                "verbosity": null,
+                "compute_effort": "max",
+                "provider": "Anthropic",
+                "harness": "Terminus 2",
+                "usage": {
+                    "trials": 3,
+                    "task_opportunities": 219,
+                    "outcomes": {
+                        "solved": 192,
+                        "incorrect_evaluated_answer": 22,
+                        "content_filter_or_bio_policy_failure": 5,
+                        "provider_refusal": 0,
+                        "protocol_or_model_output_failure": 0
+                    }
+                }
+            },
+            "anthropic/claude-opus-5-5": {
+                "accuracy": 86.758,
+                "latency": 574.671,
+                "stderr": 0.457,
+                "cost_per_test": 2.623963,
+                "token_totals": {
+                    "input_tokens": 184201501,
+                    "output_tokens": 4107152,
+                    "reasoning_tokens": 2610193,
+                    "cache_read_tokens": 177013135,
+                    "cache_write_tokens": 7171338
+                },
+                "temperature": 1.0,
+                "top_p": null,
+                "max_output_tokens": 128000,
+                "reasoning": null,
+                "reasoning_effort": null,
+                "verbosity": null,
+                "compute_effort": "max",
+                "provider": "Anthropic",
+                "harness": "Terminus 2",
+                "usage": {
+                    "trials": 3,
+                    "task_opportunities": 219,
+                    "outcomes": {
+                        "solved": 190,
+                        "incorrect_evaluated_answer": 23,
+                        "content_filter_or_bio_policy_failure": 6,
+                        "provider_refusal": 0,
+                        "protocol_or_model_output_failure": 0
+                    }
+                }
+            },
+            "google/gemini-4-argon": {
+                "accuracy": 84.932,
+                "latency": 1872.022,
+                "stderr": 0.0,
+                "cost_per_test": 4.473675,
+                "token_totals": {
+                    "input_tokens": 137220080,
+                    "output_tokens": 10286624,
+                    "reasoning_tokens": 7222447,
+                    "cache_read_tokens": 112640662,
+                    "cache_write_tokens": 0
+                },
+                "temperature": 1.0,
+                "top_p": null,
+                "max_output_tokens": 262144,
+                "reasoning": null,
+                "reasoning_effort": "high",
+                "verbosity": null,
+                "compute_effort": null,
+                "provider": "Google",
+                "harness": "Terminus 2",
+                "usage": {
+                    "trials": 3,
+                    "task_opportunities": 219,
+                    "outcomes": {
+                        "solved": 186,
+                        "incorrect_evaluated_answer": 28,
+                        "content_filter_or_bio_policy_failure": 0,
+                        "provider_refusal": 0,
+                        "protocol_or_model_output_failure": 0,
+                        "provider_error": 5
+                    }
+                }
+            },
+            "openai/gpt-6-sol": {
+                "accuracy": 84.018,
+                "latency": 283.024,
+                "stderr": 2.994,
+                "cost_per_test": 0.557233,
+                "token_totals": {
+                    "input_tokens": 82158058,
+                    "output_tokens": 1577361,
+                    "reasoning_tokens": 975147,
+                    "cache_read_tokens": 78706757,
+                    "cache_write_tokens": 3363768
+                },
+                "temperature": null,
+                "top_p": null,
+                "max_output_tokens": 128000,
+                "reasoning": null,
+                "reasoning_effort": "max",
+                "verbosity": null,
+                "compute_effort": null,
+                "provider": "OpenAI",
+                "harness": "Terminus 2",
+                "usage": {
+                    "trials": 3,
+                    "task_opportunities": 219,
+                    "outcomes": {
+                        "solved": 184,
+                        "incorrect_evaluated_answer": 33,
+                        "content_filter_or_bio_policy_failure": 2,
+                        "provider_refusal": 0,
+                        "protocol_or_model_output_failure": 0
+                    }
+                }
+            },
+            "meta/muse-wonder-full": {
+                "accuracy": 82.648,
+                "latency": 1374.45,
+                "stderr": 0.457,
+                "cost_per_test": 2.930854,
+                "token_totals": {
+                    "input_tokens": 454512686,
+                    "output_tokens": 4250284,
+                    "reasoning_tokens": 2513531,
+                    "cache_read_tokens": 442568736,
+                    "cache_write_tokens": 0
+                },
+                "temperature": 1.0,
+                "top_p": null,
+                "max_output_tokens": 131072,
+                "reasoning": null,
+                "reasoning_effort": "max",
+                "verbosity": null,
+                "compute_effort": null,
+                "provider": "Meta",
+                "harness": "Terminus 2",
+                "usage": {
+                    "trials": 3,
+                    "task_opportunities": 219,
+                    "outcomes": {
+                        "solved": 181,
+                        "incorrect_evaluated_answer": 38,
+                        "content_filter_or_bio_policy_failure": 0,
+                        "provider_refusal": 0,
+                        "protocol_or_model_output_failure": 0,
+                        "provider_error": 0
+                    }
+                }
+            },
+            "grok/grok-4.6": {
+                "accuracy": 82.192,
+                "latency": 657.966,
+                "stderr": 1.37,
+                "cost_per_test": 0.921494,
+                "token_totals": {
+                    "input_tokens": 61157861,
+                    "output_tokens": 2633156,
+                    "reasoning_tokens": 1731045,
+                    "cache_read_tokens": 47230421,
+                    "cache_write_tokens": 0
+                },
+                "temperature": 0.7,
+                "top_p": 0.95,
+                "max_output_tokens": null,
+                "reasoning": null,
+                "reasoning_effort": "high",
+                "verbosity": null,
+                "compute_effort": null,
+                "provider": "SpaceXAI",
+                "harness": "Terminus 2",
+                "usage": {
+                    "trials": 3,
+                    "task_opportunities": 219,
+                    "outcomes": {
+                        "solved": 180,
+                        "incorrect_evaluated_answer": 39,
+                        "content_filter_or_bio_policy_failure": 0,
+                        "provider_refusal": 0,
+                        "protocol_or_model_output_failure": 0
+                    }
+                }
+            },
+            "openai/gpt-5.6-sol": {
+                "accuracy": 80.822,
+                "latency": 1098.261,
+                "stderr": 0.791,
+                "cost_per_test": 1.564513,
+                "temperature": null,
+                "top_p": null,
+                "max_output_tokens": 128000,
+                "reasoning": null,
+                "reasoning_effort": "max",
+                "verbosity": null,
+                "compute_effort": null,
+                "provider": "OpenAI",
+                "harness": "Terminus 2",
+                "usage": {
+                    "trials": 3,
+                    "task_opportunities": 219,
+                    "outcomes": {
+                        "solved": 177,
+                        "incorrect_evaluated_answer": 39,
+                        "content_filter_or_bio_policy_failure": 3,
+                        "provider_refusal": 0,
+                        "protocol_or_model_output_failure": 0
+                    }
+                }
+            },
+            "kimi/kimi-k3": {
+                "accuracy": 79.909,
+                "latency": 254.27,
+                "stderr": 1.826,
+                "cost_per_test": 0.889827,
+                "token_totals": {
+                    "input_tokens": 94580386,
+                    "output_tokens": 1859860,
+                    "reasoning_tokens": 1137478,
+                    "cache_read_tokens": 91363583,
+                    "cache_write_tokens": 0
+                },
+                "temperature": 1.0,
+                "top_p": 0.95,
+                "max_output_tokens": 262144,
+                "reasoning": null,
+                "reasoning_effort": "max",
+                "verbosity": null,
+                "compute_effort": null,
+                "provider": "Moonshot AI",
+                "harness": "Terminus 2",
+                "usage": {
+                    "trials": 3,
+                    "task_opportunities": 219,
+                    "outcomes": {
+                        "solved": 175,
+                        "incorrect_evaluated_answer": 44,
+                        "content_filter_or_bio_policy_failure": 0,
+                        "provider_refusal": 0,
+                        "protocol_or_model_output_failure": 0,
+                        "provider_error": 0
+                    }
+                }
+            },
+            "anthropic/claude-haiku-5-5": {
+                "accuracy": 79.909,
+                "latency": 705.599,
+                "stderr": 0.913,
+                "cost_per_test": 0.462501,
+                "token_totals": {
+                    "input_tokens": 165820569,
+                    "output_tokens": 12720789,
+                    "reasoning_tokens": 10977149,
+                    "cache_read_tokens": 147492161,
+                    "cache_write_tokens": 18322925
+                },
+                "temperature": null,
+                "top_p": null,
+                "max_output_tokens": 128000,
+                "reasoning": null,
+                "reasoning_effort": null,
+                "verbosity": null,
+                "compute_effort": "max",
+                "provider": "Anthropic",
+                "harness": "Terminus 2",
+                "usage": {
+                    "trials": 3,
+                    "task_opportunities": 219,
+                    "outcomes": {
+                        "solved": 175,
+                        "incorrect_evaluated_answer": 36,
+                        "content_filter_or_bio_policy_failure": 8,
+                        "provider_refusal": 0,
+                        "protocol_or_model_output_failure": 0,
+                        "provider_error": 0
+                    }
+                }
+            },
+            "grok/grok-4.7": {
+                "accuracy": 78.539,
+                "latency": 574.508,
+                "stderr": 0.913,
+                "cost_per_test": 1.800428,
+                "token_totals": {
+                    "input_tokens": 145138433,
+                    "output_tokens": 2451011,
+                    "reasoning_tokens": 1351352,
+                    "cache_read_tokens": 119707051,
+                    "cache_write_tokens": 0
+                },
+                "temperature": 0.7,
+                "top_p": 0.95,
+                "max_output_tokens": null,
+                "reasoning": null,
+                "reasoning_effort": "xhigh",
+                "verbosity": null,
+                "compute_effort": null,
+                "provider": "SpaceXAI",
+                "harness": "Terminus 2",
+                "usage": {
+                    "trials": 3,
+                    "task_opportunities": 219,
+                    "outcomes": {
+                        "solved": 172,
+                        "incorrect_evaluated_answer": 47,
+                        "content_filter_or_bio_policy_failure": 0,
+                        "provider_refusal": 0,
+                        "protocol_or_model_output_failure": 0
+                    }
+                }
+            },
+            "deepseek/deepseek-v4.1-flash": {
+                "accuracy": 78.539,
+                "latency": 717.964,
+                "stderr": 1.646,
+                "cost_per_test": 0.186621,
+                "token_totals": {
+                    "input_tokens": 162242773,
+                    "output_tokens": 9568004,
+                    "reasoning_tokens": 8419882,
+                    "cache_read_tokens": 158101632,
+                    "cache_write_tokens": 0
+                },
+                "temperature": null,
+                "top_p": null,
+                "max_output_tokens": 384000,
+                "reasoning": null,
+                "reasoning_effort": "high",
+                "verbosity": null,
+                "compute_effort": null,
+                "provider": "DeepSeek",
+                "harness": "Terminus 2",
+                "usage": {
+                    "trials": 3,
+                    "task_opportunities": 219,
+                    "outcomes": {
+                        "solved": 172,
+                        "incorrect_evaluated_answer": 47,
+                        "content_filter_or_bio_policy_failure": 0,
+                        "provider_refusal": 0,
+                        "protocol_or_model_output_failure": 0
+                    }
+                }
+            },
+            "xiaomi/mimo-v2.6-flash": {
+                "accuracy": 78.539,
+                "latency": 1514.228,
+                "stderr": 0.457,
+                "cost_per_test": 0.044257,
+                "token_totals": {
+                    "input_tokens": 261706898,
+                    "output_tokens": 4692201,
+                    "reasoning_tokens": 3398918,
+                    "cache_read_tokens": 253075819,
+                    "cache_write_tokens": 0
+                },
+                "temperature": 1.0,
+                "top_p": 0.95,
+                "max_output_tokens": 128000,
+                "reasoning": null,
+                "reasoning_effort": null,
+                "verbosity": null,
+                "compute_effort": null,
+                "provider": "Xiaomi",
+                "harness": "Terminus 2",
+                "usage": {
+                    "trials": 3,
+                    "task_opportunities": 219,
+                    "outcomes": {
+                        "solved": 172,
+                        "incorrect_evaluated_answer": 47,
+                        "content_filter_or_bio_policy_failure": 0,
+                        "provider_refusal": 0,
+                        "protocol_or_model_output_failure": 0
+                    }
+                }
+            },
+            "tencent/hy4-preview": {
+                "accuracy": 76.256,
+                "latency": 1168.673,
+                "stderr": 2.416,
+                "cost_per_test": 0.306974,
+                "token_totals": {
+                    "input_tokens": 164667935,
+                    "output_tokens": 4067791,
+                    "reasoning_tokens": 2335412,
+                    "cache_read_tokens": 157951381,
+                    "cache_write_tokens": 0
+                },
+                "temperature": 0.9,
+                "top_p": 1.0,
+                "max_output_tokens": 64000,
+                "reasoning": null,
+                "reasoning_effort": null,
+                "verbosity": null,
+                "compute_effort": null,
+                "provider": "Tencent",
+                "harness": "Terminus 2",
+                "usage": {
+                    "trials": 3,
+                    "task_opportunities": 219,
+                    "outcomes": {
+                        "solved": 167,
+                        "incorrect_evaluated_answer": 52,
+                        "content_filter_or_bio_policy_failure": 0,
+                        "provider_refusal": 0,
+                        "protocol_or_model_output_failure": 0
+                    }
+                }
+            },
+            "stepfun/step-5-preview": {
+                "accuracy": 76.256,
+                "latency": 1188.162,
+                "stderr": 1.208,
+                "cost_per_test": 0.45417,
+                "token_totals": {
+                    "input_tokens": 196645857,
+                    "output_tokens": 5241921,
+                    "reasoning_tokens": 0,
+                    "cache_read_tokens": 186994347,
+                    "cache_write_tokens": 0
+                },
+                "temperature": 1.0,
+                "top_p": 0.95,
+                "max_output_tokens": 1024000,
+                "reasoning": null,
+                "reasoning_effort": null,
+                "verbosity": null,
+                "compute_effort": null,
+                "provider": "Stepfun",
+                "harness": "Terminus 2",
+                "usage": {
+                    "trials": 3,
+                    "task_opportunities": 219,
+                    "outcomes": {
+                        "solved": 167,
+                        "incorrect_evaluated_answer": 52,
+                        "content_filter_or_bio_policy_failure": 0,
+                        "provider_refusal": 0,
+                        "protocol_or_model_output_failure": 0,
+                        "provider_error": 0
+                    }
+                }
+            },
+            "fireworks/ember-1": {
+                "accuracy": 75.799,
+                "latency": 512.907,
+                "stderr": 2.283,
+                "cost_per_test": 0.801772,
+                "token_totals": {
+                    "input_tokens": 88241896,
+                    "output_tokens": 1335609,
+                    "reasoning_tokens": 739145,
+                    "cache_read_tokens": 83789058,
+                    "cache_write_tokens": 0
+                },
+                "temperature": null,
+                "top_p": null,
+                "max_output_tokens": 131072,
+                "reasoning": null,
+                "reasoning_effort": null,
+                "verbosity": null,
+                "compute_effort": null,
+                "provider": "Fireworks AI",
+                "harness": "Terminus 2",
+                "usage": {
+                    "trials": 3,
+                    "task_opportunities": 219,
+                    "outcomes": {
+                        "solved": 166,
+                        "incorrect_evaluated_answer": 53,
+                        "content_filter_or_bio_policy_failure": 0,
+                        "provider_refusal": 0,
+                        "protocol_or_model_output_failure": 0,
+                        "provider_error": 0
+                    }
+                }
+            },
+            "meta/muse-wonder": {
+                "accuracy": 75.799,
+                "latency": 964.474,
+                "stderr": 0.913,
+                "cost_per_test": 2.687938,
+                "token_totals": {
+                    "input_tokens": 419946758,
+                    "output_tokens": 3436092,
+                    "reasoning_tokens": 2081417,
+                    "cache_read_tokens": 407177113,
+                    "cache_write_tokens": 0
+                },
+                "temperature": 1.0,
+                "top_p": null,
+                "max_output_tokens": 131072,
+                "reasoning": null,
+                "reasoning_effort": "max",
+                "verbosity": null,
+                "compute_effort": null,
+                "provider": "Meta",
+                "harness": "Terminus 2",
+                "usage": {
+                    "trials": 3,
+                    "task_opportunities": 219,
+                    "outcomes": {
+                        "solved": 166,
+                        "incorrect_evaluated_answer": 53,
+                        "content_filter_or_bio_policy_failure": 0,
+                        "provider_refusal": 0,
+                        "protocol_or_model_output_failure": 0,
+                        "provider_error": 0
+                    }
+                }
+            },
+            "mistralai/mistral-large-4": {
+                "accuracy": 75.799,
+                "latency": 1458.13,
+                "stderr": 2.778,
+                "cost_per_test": 1.90455,
+                "token_totals": {
+                    "input_tokens": 341382740,
+                    "output_tokens": 11142004,
+                    "reasoning_tokens": 0,
+                    "cache_read_tokens": 304772096,
+                    "cache_write_tokens": 0
+                },
+                "temperature": 1.0,
+                "top_p": 0.95,
+                "max_output_tokens": 256000,
+                "reasoning": null,
+                "reasoning_effort": "high",
+                "verbosity": null,
+                "compute_effort": null,
+                "provider": "Mistral AI",
+                "harness": "Terminus 2",
+                "usage": {
+                    "trials": 3,
+                    "task_opportunities": 219,
+                    "outcomes": {
+                        "solved": 166,
+                        "incorrect_evaluated_answer": 40,
+                        "content_filter_or_bio_policy_failure": 0,
+                        "provider_refusal": 0,
+                        "protocol_or_model_output_failure": 0,
+                        "provider_error": 13
+                    }
+                }
+            },
+            "meta/muse_spark_1_2": {
+                "accuracy": 73.973,
+                "latency": 1417.288,
+                "stderr": 1.37,
+                "cost_per_test": 0.889936,
+                "temperature": 1.0,
+                "top_p": null,
+                "max_output_tokens": 131072,
+                "reasoning": null,
+                "reasoning_effort": "xhigh",
+                "verbosity": null,
+                "compute_effort": null,
+                "provider": "Meta",
+                "harness": "Terminus 2",
+                "usage": {
+                    "trials": 3,
+                    "task_opportunities": 219,
+                    "outcomes": {
+                        "solved": 162,
+                        "incorrect_evaluated_answer": 55,
+                        "content_filter_or_bio_policy_failure": 0,
+                        "provider_refusal": 0,
+                        "protocol_or_model_output_failure": 2
+                    }
+                }
+            },
+            "deepseek/deepseek-v4-flash-0731": {
+                "accuracy": 73.973,
+                "latency": 1622.715,
+                "stderr": 1.37,
+                "cost_per_test": 0.033211,
+                "temperature": null,
+                "top_p": null,
+                "max_output_tokens": 384000,
+                "reasoning": null,
+                "reasoning_effort": "high",
+                "verbosity": null,
+                "compute_effort": null,
+                "provider": "DeepSeek",
+                "harness": "Terminus 2",
+                "usage": {
+                    "trials": 3,
+                    "task_opportunities": 219,
+                    "outcomes": {
+                        "solved": 162,
+                        "incorrect_evaluated_answer": 53,
+                        "content_filter_or_bio_policy_failure": 0,
+                        "provider_refusal": 0,
+                        "protocol_or_model_output_failure": 4
+                    }
+                }
+            },
+            "google/gemini-3.8-flash": {
+                "accuracy": 71.689,
+                "latency": 267.243,
+                "stderr": 1.826,
+                "cost_per_test": 1.233913,
+                "token_totals": {
+                    "input_tokens": 228290259,
+                    "output_tokens": 2626201,
+                    "reasoning_tokens": 1325930,
+                    "cache_read_tokens": 203046480,
+                    "cache_write_tokens": 0
+                },
+                "temperature": 1.0,
+                "top_p": null,
+                "max_output_tokens": 65536,
+                "reasoning": null,
+                "reasoning_effort": "high",
+                "verbosity": null,
+                "compute_effort": null,
+                "provider": "Google",
+                "harness": "Terminus 2",
+                "usage": {
+                    "trials": 3,
+                    "task_opportunities": 219,
+                    "outcomes": {
+                        "solved": 157,
+                        "incorrect_evaluated_answer": 57,
+                        "content_filter_or_bio_policy_failure": 0,
+                        "provider_refusal": 0,
+                        "protocol_or_model_output_failure": 5
+                    }
+                }
+            },
+            "openai/gpt-6-luna": {
+                "accuracy": 71.689,
+                "latency": 513.89,
+                "stderr": 2.416,
+                "cost_per_test": 0.051939,
+                "token_totals": {
+                    "input_tokens": 122362295,
+                    "output_tokens": 3549136,
+                    "reasoning_tokens": 2504994,
+                    "cache_read_tokens": 116053692,
+                    "cache_write_tokens": 6170923
+                },
+                "temperature": null,
+                "top_p": null,
+                "max_output_tokens": 128000,
+                "reasoning": null,
+                "reasoning_effort": "max",
+                "verbosity": null,
+                "compute_effort": null,
+                "provider": "OpenAI",
+                "harness": "Terminus 2",
+                "usage": {
+                    "trials": 3,
+                    "task_opportunities": 219,
+                    "outcomes": {
+                        "solved": 157,
+                        "incorrect_evaluated_answer": 57,
+                        "content_filter_or_bio_policy_failure": 5,
+                        "provider_refusal": 0,
+                        "protocol_or_model_output_failure": 0
+                    }
+                }
+            },
+            "openai/gpt-5.6-luna": {
+                "accuracy": 69.406,
+                "latency": 1111.274,
+                "stderr": 1.99,
+                "cost_per_test": 0.077816,
+                "temperature": null,
+                "top_p": null,
+                "max_output_tokens": 128000,
+                "reasoning": null,
+                "reasoning_effort": "max",
+                "verbosity": null,
+                "compute_effort": null,
+                "provider": "OpenAI",
+                "harness": "Terminus 2",
+                "usage": {
+                    "trials": 3,
+                    "task_opportunities": 219,
+                    "outcomes": {
+                        "solved": 152,
+                        "incorrect_evaluated_answer": 64,
+                        "content_filter_or_bio_policy_failure": 3,
+                        "provider_refusal": 0,
+                        "protocol_or_model_output_failure": 0
+                    }
+                }
+            },
+            "google/gemini-3.1-pro-preview": {
+                "accuracy": 67.58,
+                "latency": 234.501,
+                "stderr": 2.416,
+                "cost_per_test": 0.650575,
+                "token_totals": {
+                    "input_tokens": 53571907,
+                    "output_tokens": 1627137,
+                    "reasoning_tokens": 1024131,
+                    "cache_read_tokens": 44628391,
+                    "cache_write_tokens": 0
+                },
+                "temperature": 1.0,
+                "top_p": null,
+                "max_output_tokens": 65536,
+                "reasoning": null,
+                "reasoning_effort": "high",
+                "verbosity": null,
+                "compute_effort": null,
+                "provider": "Google",
+                "harness": "Terminus 2",
+                "usage": {
+                    "trials": 3,
+                    "task_opportunities": 219,
+                    "outcomes": {
+                        "solved": 148,
+                        "incorrect_evaluated_answer": 58,
+                        "content_filter_or_bio_policy_failure": 13,
+                        "provider_refusal": 0,
+                        "protocol_or_model_output_failure": 0
+                    }
+                }
+            },
+            "google/gemini-3.6-flash": {
+                "accuracy": 67.123,
+                "latency": 761.958,
+                "stderr": 2.852,
+                "cost_per_test": 1.130257,
+                "temperature": 1.0,
+                "top_p": null,
+                "max_output_tokens": 65536,
+                "reasoning": null,
+                "reasoning_effort": "high",
+                "verbosity": null,
+                "compute_effort": null,
+                "provider": "Google",
+                "harness": "Terminus 2",
+                "usage": {
+                    "trials": 3,
+                    "task_opportunities": 219,
+                    "outcomes": {
+                        "solved": 147,
+                        "incorrect_evaluated_answer": 65,
+                        "content_filter_or_bio_policy_failure": 0,
+                        "provider_refusal": 0,
+                        "protocol_or_model_output_failure": 7
+                    }
+                }
+            },
+            "reflection/Beam-1.0": {
+                "accuracy": 48.858,
+                "latency": 407.507,
+                "stderr": 1.646,
+                "cost_per_test": null,
+                "token_totals": {
+                    "input_tokens": 368515564,
+                    "output_tokens": 12084747,
+                    "reasoning_tokens": 10740470,
+                    "cache_read_tokens": 350622955,
+                    "cache_write_tokens": 0
+                },
+                "temperature": 0.7,
+                "top_p": 0.99,
+                "max_output_tokens": 131072,
+                "reasoning": null,
+                "reasoning_effort": null,
+                "verbosity": null,
+                "compute_effort": null,
+                "provider": "Reflection",
+                "harness": "Terminus 2",
+                "usage": {
+                    "trials": 3,
+                    "task_opportunities": 219,
+                    "outcomes": {
+                        "solved": 107,
+                        "incorrect_evaluated_answer": 84,
+                        "content_filter_or_bio_policy_failure": 0,
+                        "provider_refusal": 0,
+                        "protocol_or_model_output_failure": 0,
+                        "provider_error": 28
+                    }
+                }
+            }
+        },
+        "human_difficult": {
+            "anthropic/claude-opus-5-5": {
+                "accuracy": 47.059,
+                "latency": 1445.982,
+                "stderr": 3.396,
+                "cost_per_test": 8.015376,
+                "token_totals": {
+                    "input_tokens": 174924667,
+                    "output_tokens": 2234886,
+                    "reasoning_tokens": 1548857,
+                    "cache_read_tokens": 171437188,
+                    "cache_write_tokens": 3481507
+                },
+                "temperature": 1.0,
+                "top_p": null,
+                "max_output_tokens": 128000,
+                "reasoning": null,
+                "reasoning_effort": null,
+                "verbosity": null,
+                "compute_effort": "max",
+                "provider": "Anthropic",
+                "harness": "Terminus 2",
+                "usage": {
+                    "trials": 3,
+                    "task_opportunities": 51,
+                    "outcomes": {
+                        "solved": 24,
+                        "incorrect_evaluated_answer": 27,
+                        "content_filter_or_bio_policy_failure": 0,
+                        "provider_refusal": 0,
+                        "protocol_or_model_output_failure": 0
+                    }
+                }
+            },
+            "anthropic/claude-sonnet-5-5": {
+                "accuracy": 45.098,
+                "latency": 1735.639,
+                "stderr": 1.961,
+                "cost_per_test": 6.445152,
+                "token_totals": {
+                    "input_tokens": 271213384,
+                    "output_tokens": 4105275,
+                    "reasoning_tokens": 2769322,
+                    "cache_read_tokens": 265006770,
+                    "cache_write_tokens": 6200503
+                },
+                "temperature": 1.0,
+                "top_p": null,
+                "max_output_tokens": 128000,
+                "reasoning": null,
+                "reasoning_effort": null,
+                "verbosity": null,
+                "compute_effort": "max",
+                "provider": "Anthropic",
+                "harness": "Terminus 2",
+                "usage": {
+                    "trials": 3,
+                    "task_opportunities": 51,
+                    "outcomes": {
+                        "solved": 23,
+                        "incorrect_evaluated_answer": 28,
+                        "content_filter_or_bio_policy_failure": 0,
+                        "provider_refusal": 0,
+                        "protocol_or_model_output_failure": 0
+                    }
+                }
+            },
+            "anthropic/claude-opus-5": {
+                "accuracy": 43.137,
+                "latency": 2195.964,
+                "stderr": 1.961,
+                "cost_per_test": 6.01311,
+                "temperature": 1.0,
+                "top_p": null,
+                "max_output_tokens": 128000,
+                "reasoning": null,
+                "reasoning_effort": null,
+                "verbosity": null,
+                "compute_effort": "max",
+                "provider": "Anthropic",
+                "harness": "Terminus 2",
+                "usage": {
+                    "trials": 3,
+                    "task_opportunities": 51,
+                    "outcomes": {
+                        "solved": 22,
+                        "incorrect_evaluated_answer": 29,
+                        "content_filter_or_bio_policy_failure": 0,
+                        "provider_refusal": 0,
+                        "protocol_or_model_output_failure": 0
+                    }
+                }
+            },
+            "kimi/kimi-k3": {
+                "accuracy": 41.176,
+                "latency": 472.097,
+                "stderr": 3.396,
+                "cost_per_test": 1.795688,
+                "token_totals": {
+                    "input_tokens": 46901590,
+                    "output_tokens": 840062,
+                    "reasoning_tokens": 556826,
+                    "cache_read_tokens": 45473706,
+                    "cache_write_tokens": 0
+                },
+                "temperature": 1.0,
+                "top_p": 0.95,
+                "max_output_tokens": 262144,
+                "reasoning": null,
+                "reasoning_effort": "max",
+                "verbosity": null,
+                "compute_effort": null,
+                "provider": "Moonshot AI",
+                "harness": "Terminus 2",
+                "usage": {
+                    "trials": 3,
+                    "task_opportunities": 51,
+                    "outcomes": {
+                        "solved": 21,
+                        "incorrect_evaluated_answer": 30,
+                        "content_filter_or_bio_policy_failure": 0,
+                        "provider_refusal": 0,
+                        "protocol_or_model_output_failure": 0,
+                        "provider_error": 0
+                    }
+                }
+            },
+            "openai/gpt-6.1-sol": {
+                "accuracy": 39.216,
+                "latency": 1167.336,
+                "stderr": 1.961,
+                "cost_per_test": 0.749569,
+                "token_totals": {
+                    "input_tokens": 21182460,
+                    "output_tokens": 754673,
+                    "reasoning_tokens": 537677,
+                    "cache_read_tokens": 19754201,
+                    "cache_write_tokens": 1412248
+                },
+                "temperature": null,
+                "top_p": null,
+                "max_output_tokens": 128000,
+                "reasoning": null,
+                "reasoning_effort": "max",
+                "verbosity": null,
+                "compute_effort": null,
+                "provider": "OpenAI",
+                "harness": "Terminus 2",
+                "usage": {
+                    "trials": 3,
+                    "task_opportunities": 51,
+                    "outcomes": {
+                        "solved": 20,
+                        "incorrect_evaluated_answer": 31,
+                        "content_filter_or_bio_policy_failure": 0,
+                        "provider_refusal": 0,
+                        "protocol_or_model_output_failure": 0
+                    }
+                }
+            },
+            "tencent/hy4-preview": {
+                "accuracy": 39.216,
+                "latency": 2447.966,
+                "stderr": 5.188,
+                "cost_per_test": 0.597301,
+                "token_totals": {
+                    "input_tokens": 70406661,
+                    "output_tokens": 2058258,
+                    "reasoning_tokens": 1462248,
+                    "cache_read_tokens": 67819115,
+                    "cache_write_tokens": 0
+                },
+                "temperature": 0.9,
+                "top_p": 1.0,
+                "max_output_tokens": 64000,
+                "reasoning": null,
+                "reasoning_effort": null,
+                "verbosity": null,
+                "compute_effort": null,
+                "provider": "Tencent",
+                "harness": "Terminus 2",
+                "usage": {
+                    "trials": 3,
+                    "task_opportunities": 51,
+                    "outcomes": {
+                        "solved": 20,
+                        "incorrect_evaluated_answer": 31,
+                        "content_filter_or_bio_policy_failure": 0,
+                        "provider_refusal": 0,
+                        "protocol_or_model_output_failure": 0
+                    }
+                }
+            },
+            "google/gemini-4-argon": {
+                "accuracy": 39.216,
+                "latency": 4650.344,
+                "stderr": 1.961,
+                "cost_per_test": 11.003753,
+                "token_totals": {
+                    "input_tokens": 50358139,
+                    "output_tokens": 6189971,
+                    "reasoning_tokens": 4052074,
+                    "cache_read_tokens": 36360048,
+                    "cache_write_tokens": 0
+                },
+                "temperature": 1.0,
+                "top_p": null,
+                "max_output_tokens": 262144,
+                "reasoning": null,
+                "reasoning_effort": "high",
+                "verbosity": null,
+                "compute_effort": null,
+                "provider": "Google",
+                "harness": "Terminus 2",
+                "usage": {
+                    "trials": 3,
+                    "task_opportunities": 51,
+                    "outcomes": {
+                        "solved": 20,
+                        "incorrect_evaluated_answer": 26,
+                        "content_filter_or_bio_policy_failure": 0,
+                        "provider_refusal": 0,
+                        "protocol_or_model_output_failure": 0,
+                        "provider_error": 5
+                    }
+                }
+            },
+            "openai/gpt-6-astra": {
+                "accuracy": 37.255,
+                "latency": 516.792,
+                "stderr": 1.961,
+                "cost_per_test": 3.190914,
+                "token_totals": {
+                    "input_tokens": 16202898,
+                    "output_tokens": 483279,
+                    "reasoning_tokens": 298133,
+                    "cache_read_tokens": 14660820,
+                    "cache_write_tokens": 0
+                },
+                "temperature": null,
+                "top_p": null,
+                "max_output_tokens": 128000,
+                "reasoning": null,
+                "reasoning_effort": "max",
+                "verbosity": null,
+                "compute_effort": null,
+                "provider": "OpenAI",
+                "harness": "Terminus 2",
+                "usage": {
+                    "trials": 3,
+                    "task_opportunities": 51,
+                    "outcomes": {
+                        "solved": 19,
+                        "incorrect_evaluated_answer": 32,
+                        "content_filter_or_bio_policy_failure": 0,
+                        "provider_refusal": 0,
+                        "protocol_or_model_output_failure": 0
+                    }
+                }
+            },
+            "openai/gpt-6-sol": {
+                "accuracy": 35.294,
+                "latency": 502.413,
+                "stderr": 0.0,
+                "cost_per_test": 1.113779,
+                "token_totals": {
+                    "input_tokens": 47474377,
+                    "output_tokens": 640123,
+                    "reasoning_tokens": 426683,
+                    "cache_read_tokens": 46149792,
+                    "cache_write_tokens": 1307781
+                },
+                "temperature": null,
+                "top_p": null,
+                "max_output_tokens": 128000,
+                "reasoning": null,
+                "reasoning_effort": "max",
+                "verbosity": null,
+                "compute_effort": null,
+                "provider": "OpenAI",
+                "harness": "Terminus 2",
+                "usage": {
+                    "trials": 3,
+                    "task_opportunities": 51,
+                    "outcomes": {
+                        "solved": 18,
+                        "incorrect_evaluated_answer": 33,
+                        "content_filter_or_bio_policy_failure": 0,
+                        "provider_refusal": 0,
+                        "protocol_or_model_output_failure": 0
+                    }
+                }
+            },
+            "meta/muse-wonder-full": {
+                "accuracy": 33.333,
+                "latency": 2431.763,
+                "stderr": 1.961,
+                "cost_per_test": 5.801855,
+                "token_totals": {
+                    "input_tokens": 257791736,
+                    "output_tokens": 1742022,
+                    "reasoning_tokens": 1023196,
+                    "cache_read_tokens": 253441659,
+                    "cache_write_tokens": 0
+                },
+                "temperature": 1.0,
+                "top_p": null,
+                "max_output_tokens": 131072,
+                "reasoning": null,
+                "reasoning_effort": "max",
+                "verbosity": null,
+                "compute_effort": null,
+                "provider": "Meta",
+                "harness": "Terminus 2",
+                "usage": {
+                    "trials": 3,
+                    "task_opportunities": 51,
+                    "outcomes": {
+                        "solved": 17,
+                        "incorrect_evaluated_answer": 34,
+                        "content_filter_or_bio_policy_failure": 0,
+                        "provider_refusal": 0,
+                        "protocol_or_model_output_failure": 0,
+                        "provider_error": 0
+                    }
+                }
+            },
+            "fireworks/ember-1": {
+                "accuracy": 29.412,
+                "latency": 794.874,
+                "stderr": 6.792,
+                "cost_per_test": 1.359207,
+                "token_totals": {
+                    "input_tokens": 39248515,
+                    "output_tokens": 470753,
+                    "reasoning_tokens": 260750,
+                    "cache_read_tokens": 37666784,
+                    "cache_write_tokens": 0
+                },
+                "temperature": null,
+                "top_p": null,
+                "max_output_tokens": 131072,
+                "reasoning": null,
+                "reasoning_effort": null,
+                "verbosity": null,
+                "compute_effort": null,
+                "provider": "Fireworks AI",
+                "harness": "Terminus 2",
+                "usage": {
+                    "trials": 3,
+                    "task_opportunities": 51,
+                    "outcomes": {
+                        "solved": 15,
+                        "incorrect_evaluated_answer": 36,
+                        "content_filter_or_bio_policy_failure": 0,
+                        "provider_refusal": 0,
+                        "protocol_or_model_output_failure": 0,
+                        "provider_error": 0
+                    }
+                }
+            },
+            "anthropic/claude-haiku-5-5": {
+                "accuracy": 29.412,
+                "latency": 953.669,
+                "stderr": 3.396,
+                "cost_per_test": 0.72856,
+                "token_totals": {
+                    "input_tokens": 75362195,
+                    "output_tokens": 3975076,
+                    "reasoning_tokens": 3415856,
+                    "cache_read_tokens": 70188815,
+                    "cache_write_tokens": 5171477
+                },
+                "temperature": null,
+                "top_p": null,
+                "max_output_tokens": 128000,
+                "reasoning": null,
+                "reasoning_effort": null,
+                "verbosity": null,
+                "compute_effort": "max",
+                "provider": "Anthropic",
+                "harness": "Terminus 2",
+                "usage": {
+                    "trials": 3,
+                    "task_opportunities": 51,
+                    "outcomes": {
+                        "solved": 15,
+                        "incorrect_evaluated_answer": 36,
+                        "content_filter_or_bio_policy_failure": 0,
+                        "provider_refusal": 0,
+                        "protocol_or_model_output_failure": 0,
+                        "provider_error": 0
+                    }
+                }
+            },
+            "openai/gpt-5.6-sol": {
+                "accuracy": 29.412,
+                "latency": 1098.261,
+                "stderr": 3.396,
+                "cost_per_test": 3.451958,
+                "temperature": null,
+                "top_p": null,
+                "max_output_tokens": 128000,
+                "reasoning": null,
+                "reasoning_effort": "max",
+                "verbosity": null,
+                "compute_effort": null,
+                "provider": "OpenAI",
+                "harness": "Terminus 2",
+                "usage": {
+                    "trials": 3,
+                    "task_opportunities": 51,
+                    "outcomes": {
+                        "solved": 15,
+                        "incorrect_evaluated_answer": 36,
+                        "content_filter_or_bio_policy_failure": 0,
+                        "provider_refusal": 0,
+                        "protocol_or_model_output_failure": 0
+                    }
+                }
+            },
+            "grok/grok-4.7": {
+                "accuracy": 29.412,
+                "latency": 1222.033,
+                "stderr": 3.396,
+                "cost_per_test": 5.43915,
+                "token_totals": {
+                    "input_tokens": 109373479,
+                    "output_tokens": 1248034,
+                    "reasoning_tokens": 713102,
+                    "cache_read_tokens": 96086059,
+                    "cache_write_tokens": 0
+                },
+                "temperature": 0.7,
+                "top_p": 0.95,
+                "max_output_tokens": null,
+                "reasoning": null,
+                "reasoning_effort": "xhigh",
+                "verbosity": null,
+                "compute_effort": null,
+                "provider": "SpaceXAI",
+                "harness": "Terminus 2",
+                "usage": {
+                    "trials": 3,
+                    "task_opportunities": 51,
+                    "outcomes": {
+                        "solved": 15,
+                        "incorrect_evaluated_answer": 36,
+                        "content_filter_or_bio_policy_failure": 0,
+                        "provider_refusal": 0,
+                        "protocol_or_model_output_failure": 0
+                    }
+                }
+            },
+            "meta/muse-wonder": {
+                "accuracy": 29.412,
+                "latency": 1586.171,
+                "stderr": 3.396,
+                "cost_per_test": 5.552005,
+                "token_totals": {
+                    "input_tokens": 236459539,
+                    "output_tokens": 1440246,
+                    "reasoning_tokens": 873100,
+                    "cache_read_tokens": 230941494,
+                    "cache_write_tokens": 0
+                },
+                "temperature": 1.0,
+                "top_p": null,
+                "max_output_tokens": 131072,
+                "reasoning": null,
+                "reasoning_effort": "max",
+                "verbosity": null,
+                "compute_effort": null,
+                "provider": "Meta",
+                "harness": "Terminus 2",
+                "usage": {
+                    "trials": 3,
+                    "task_opportunities": 51,
+                    "outcomes": {
+                        "solved": 15,
+                        "incorrect_evaluated_answer": 36,
+                        "content_filter_or_bio_policy_failure": 0,
+                        "provider_refusal": 0,
+                        "protocol_or_model_output_failure": 0,
+                        "provider_error": 0
+                    }
+                }
+            },
+            "grok/grok-4.6": {
+                "accuracy": 29.412,
+                "latency": 1717.071,
+                "stderr": 5.882,
+                "cost_per_test": 2.536794,
+                "token_totals": {
+                    "input_tokens": 42915330,
+                    "output_tokens": 1574889,
+                    "reasoning_tokens": 1168150,
+                    "cache_read_tokens": 34769664,
+                    "cache_write_tokens": 0
+                },
+                "temperature": 0.7,
+                "top_p": 0.95,
+                "max_output_tokens": null,
+                "reasoning": null,
+                "reasoning_effort": "high",
+                "verbosity": null,
+                "compute_effort": null,
+                "provider": "SpaceXAI",
+                "harness": "Terminus 2",
+                "usage": {
+                    "trials": 3,
+                    "task_opportunities": 51,
+                    "outcomes": {
+                        "solved": 15,
+                        "incorrect_evaluated_answer": 36,
+                        "content_filter_or_bio_policy_failure": 0,
+                        "provider_refusal": 0,
+                        "protocol_or_model_output_failure": 0
+                    }
+                }
+            },
+            "stepfun/step-5-preview": {
+                "accuracy": 29.412,
+                "latency": 1752.46,
+                "stderr": 3.396,
+                "cost_per_test": 0.668342,
+                "token_totals": {
+                    "input_tokens": 73371832,
+                    "output_tokens": 1770668,
+                    "reasoning_tokens": 0,
+                    "cache_read_tokens": 70306133,
+                    "cache_write_tokens": 0
+                },
+                "temperature": 1.0,
+                "top_p": 0.95,
+                "max_output_tokens": 1024000,
+                "reasoning": null,
+                "reasoning_effort": null,
+                "verbosity": null,
+                "compute_effort": null,
+                "provider": "Stepfun",
+                "harness": "Terminus 2",
+                "usage": {
+                    "trials": 3,
+                    "task_opportunities": 51,
+                    "outcomes": {
+                        "solved": 15,
+                        "incorrect_evaluated_answer": 36,
+                        "content_filter_or_bio_policy_failure": 0,
+                        "provider_refusal": 0,
+                        "protocol_or_model_output_failure": 0,
+                        "provider_error": 0
+                    }
+                }
+            },
+            "mistralai/mistral-large-4": {
+                "accuracy": 29.412,
+                "latency": 1850.377,
+                "stderr": 3.396,
+                "cost_per_test": 2.768312,
+                "token_totals": {
+                    "input_tokens": 124370576,
+                    "output_tokens": 3348122,
+                    "reasoning_tokens": 0,
+                    "cache_read_tokens": 111539200,
+                    "cache_write_tokens": 0
+                },
+                "temperature": 1.0,
+                "top_p": 0.95,
+                "max_output_tokens": 256000,
+                "reasoning": null,
+                "reasoning_effort": "high",
+                "verbosity": null,
+                "compute_effort": null,
+                "provider": "Mistral AI",
+                "harness": "Terminus 2",
+                "usage": {
+                    "trials": 3,
+                    "task_opportunities": 51,
+                    "outcomes": {
+                        "solved": 15,
+                        "incorrect_evaluated_answer": 32,
+                        "content_filter_or_bio_policy_failure": 0,
+                        "provider_refusal": 0,
+                        "protocol_or_model_output_failure": 0,
+                        "provider_error": 4
+                    }
+                }
+            },
+            "xiaomi/mimo-v2.6-flash": {
+                "accuracy": 29.412,
+                "latency": 2539.83,
+                "stderr": 3.396,
+                "cost_per_test": 0.075293,
+                "token_totals": {
+                    "input_tokens": 102076292,
+                    "output_tokens": 1899512,
+                    "reasoning_tokens": 1466737,
+                    "cache_read_tokens": 98706773,
+                    "cache_write_tokens": 0
+                },
+                "temperature": 1.0,
+                "top_p": 0.95,
+                "max_output_tokens": 128000,
+                "reasoning": null,
+                "reasoning_effort": null,
+                "verbosity": null,
+                "compute_effort": null,
+                "provider": "Xiaomi",
+                "harness": "Terminus 2",
+                "usage": {
+                    "trials": 3,
+                    "task_opportunities": 51,
+                    "outcomes": {
+                        "solved": 15,
+                        "incorrect_evaluated_answer": 36,
+                        "content_filter_or_bio_policy_failure": 0,
+                        "provider_refusal": 0,
+                        "protocol_or_model_output_failure": 0
+                    }
+                }
+            },
+            "google/gemini-3.1-pro-preview": {
+                "accuracy": 27.451,
+                "latency": 329.012,
+                "stderr": 5.188,
+                "cost_per_test": 0.987196,
+                "token_totals": {
+                    "input_tokens": 21059204,
+                    "output_tokens": 511057,
+                    "reasoning_tokens": 295668,
+                    "cache_read_tokens": 17997859,
+                    "cache_write_tokens": 0
+                },
+                "temperature": 1.0,
+                "top_p": null,
+                "max_output_tokens": 65536,
+                "reasoning": null,
+                "reasoning_effort": "high",
+                "verbosity": null,
+                "compute_effort": null,
+                "provider": "Google",
+                "harness": "Terminus 2",
+                "usage": {
+                    "trials": 3,
+                    "task_opportunities": 51,
+                    "outcomes": {
+                        "solved": 14,
+                        "incorrect_evaluated_answer": 36,
+                        "content_filter_or_bio_policy_failure": 1,
+                        "provider_refusal": 0,
+                        "protocol_or_model_output_failure": 0
+                    }
+                }
+            },
+            "openai/gpt-5.6-luna": {
+                "accuracy": 27.451,
+                "latency": 1111.274,
+                "stderr": 5.188,
+                "cost_per_test": 0.13563,
+                "temperature": null,
+                "top_p": null,
+                "max_output_tokens": 128000,
+                "reasoning": null,
+                "reasoning_effort": "max",
+                "verbosity": null,
+                "compute_effort": null,
+                "provider": "OpenAI",
+                "harness": "Terminus 2",
+                "usage": {
+                    "trials": 3,
+                    "task_opportunities": 51,
+                    "outcomes": {
+                        "solved": 14,
+                        "incorrect_evaluated_answer": 37,
+                        "content_filter_or_bio_policy_failure": 0,
+                        "provider_refusal": 0,
+                        "protocol_or_model_output_failure": 0
+                    }
+                }
+            },
+            "meta/muse_spark_1_2": {
+                "accuracy": 25.49,
+                "latency": 1417.288,
+                "stderr": 1.961,
+                "cost_per_test": 1.439477,
+                "temperature": 1.0,
+                "top_p": null,
+                "max_output_tokens": 131072,
+                "reasoning": null,
+                "reasoning_effort": "xhigh",
+                "verbosity": null,
+                "compute_effort": null,
+                "provider": "Meta",
+                "harness": "Terminus 2",
+                "usage": {
+                    "trials": 3,
+                    "task_opportunities": 51,
+                    "outcomes": {
+                        "solved": 13,
+                        "incorrect_evaluated_answer": 38,
+                        "content_filter_or_bio_policy_failure": 0,
+                        "provider_refusal": 0,
+                        "protocol_or_model_output_failure": 0
+                    }
+                }
+            },
+            "deepseek/deepseek-v4-flash-0731": {
+                "accuracy": 23.529,
+                "latency": 1622.715,
+                "stderr": 3.396,
+                "cost_per_test": 0.062194,
+                "temperature": null,
+                "top_p": null,
+                "max_output_tokens": 384000,
+                "reasoning": null,
+                "reasoning_effort": "high",
+                "verbosity": null,
+                "compute_effort": null,
+                "provider": "DeepSeek",
+                "harness": "Terminus 2",
+                "usage": {
+                    "trials": 3,
+                    "task_opportunities": 51,
+                    "outcomes": {
+                        "solved": 12,
+                        "incorrect_evaluated_answer": 39,
+                        "content_filter_or_bio_policy_failure": 0,
+                        "provider_refusal": 0,
+                        "protocol_or_model_output_failure": 0
+                    }
+                }
+            },
+            "google/gemini-3.8-flash": {
+                "accuracy": 21.569,
+                "latency": 576.331,
+                "stderr": 7.07,
+                "cost_per_test": 2.896591,
+                "token_totals": {
+                    "input_tokens": 163617580,
+                    "output_tokens": 1264718,
+                    "reasoning_tokens": 622260,
+                    "cache_read_tokens": 152042794,
+                    "cache_write_tokens": 0
+                },
+                "temperature": 1.0,
+                "top_p": null,
+                "max_output_tokens": 65536,
+                "reasoning": null,
+                "reasoning_effort": "high",
+                "verbosity": null,
+                "compute_effort": null,
+                "provider": "Google",
+                "harness": "Terminus 2",
+                "usage": {
+                    "trials": 3,
+                    "task_opportunities": 51,
+                    "outcomes": {
+                        "solved": 11,
+                        "incorrect_evaluated_answer": 40,
+                        "content_filter_or_bio_policy_failure": 0,
+                        "provider_refusal": 0,
+                        "protocol_or_model_output_failure": 0
+                    }
+                }
+            },
+            "google/gemini-3.6-flash": {
+                "accuracy": 21.569,
+                "latency": 761.958,
+                "stderr": 3.922,
+                "cost_per_test": 1.769118,
+                "temperature": 1.0,
+                "top_p": null,
+                "max_output_tokens": 65536,
+                "reasoning": null,
+                "reasoning_effort": "high",
+                "verbosity": null,
+                "compute_effort": null,
+                "provider": "Google",
+                "harness": "Terminus 2",
+                "usage": {
+                    "trials": 3,
+                    "task_opportunities": 51,
+                    "outcomes": {
+                        "solved": 11,
+                        "incorrect_evaluated_answer": 39,
+                        "content_filter_or_bio_policy_failure": 0,
+                        "provider_refusal": 0,
+                        "protocol_or_model_output_failure": 1
+                    }
+                }
+            },
+            "deepseek/deepseek-v4.1-flash": {
+                "accuracy": 21.569,
+                "latency": 1629.099,
+                "stderr": 1.961,
+                "cost_per_test": 0.433129,
+                "token_totals": {
+                    "input_tokens": 106436919,
+                    "output_tokens": 5175983,
+                    "reasoning_tokens": 4613462,
+                    "cache_read_tokens": 104348544,
+                    "cache_write_tokens": 0
+                },
+                "temperature": null,
+                "top_p": null,
+                "max_output_tokens": 384000,
+                "reasoning": null,
+                "reasoning_effort": "high",
+                "verbosity": null,
+                "compute_effort": null,
+                "provider": "DeepSeek",
+                "harness": "Terminus 2",
+                "usage": {
+                    "trials": 3,
+                    "task_opportunities": 51,
+                    "outcomes": {
+                        "solved": 11,
+                        "incorrect_evaluated_answer": 40,
+                        "content_filter_or_bio_policy_failure": 0,
+                        "provider_refusal": 0,
+                        "protocol_or_model_output_failure": 0
+                    }
+                }
+            },
+            "openai/gpt-6-luna": {
+                "accuracy": 17.647,
+                "latency": 566.382,
+                "stderr": 3.396,
+                "cost_per_test": 0.058804,
+                "token_totals": {
+                    "input_tokens": 35146199,
+                    "output_tokens": 933635,
+                    "reasoning_tokens": 753491,
+                    "cache_read_tokens": 33513499,
+                    "cache_write_tokens": 1616184
+                },
+                "temperature": null,
+                "top_p": null,
+                "max_output_tokens": 128000,
+                "reasoning": null,
+                "reasoning_effort": "max",
+                "verbosity": null,
+                "compute_effort": null,
+                "provider": "OpenAI",
+                "harness": "Terminus 2",
+                "usage": {
+                    "trials": 3,
+                    "task_opportunities": 51,
+                    "outcomes": {
+                        "solved": 9,
+                        "incorrect_evaluated_answer": 39,
+                        "content_filter_or_bio_policy_failure": 3,
+                        "provider_refusal": 0,
+                        "protocol_or_model_output_failure": 0
+                    }
+                }
+            },
+            "reflection/Beam-1.0": {
+                "accuracy": 15.686,
+                "latency": 579.771,
+                "stderr": 5.188,
+                "cost_per_test": null,
+                "token_totals": {
+                    "input_tokens": 179489782,
+                    "output_tokens": 3268723,
+                    "reasoning_tokens": 2935248,
+                    "cache_read_tokens": 173551637,
+                    "cache_write_tokens": 0
+                },
+                "temperature": 0.7,
+                "top_p": 0.99,
+                "max_output_tokens": 131072,
+                "reasoning": null,
+                "reasoning_effort": null,
+                "verbosity": null,
+                "compute_effort": null,
+                "provider": "Reflection",
+                "harness": "Terminus 2",
+                "usage": {
+                    "trials": 3,
+                    "task_opportunities": 51,
+                    "outcomes": {
+                        "solved": 8,
+                        "incorrect_evaluated_answer": 36,
+                        "content_filter_or_bio_policy_failure": 0,
+                        "provider_refusal": 0,
+                        "protocol_or_model_output_failure": 0,
+                        "provider_error": 7
+                    }
+                }
+            }
+        }
+    }
+}

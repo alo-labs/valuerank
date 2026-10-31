@@ -1,0 +1,19 @@
+Model version,mean_score,Best score (across scorers),Release date,Organization,Country,Training compute (FLOP),Training compute notes,stderr,Log viewer,Logs,Started at,id
+claude-sonnet-5-5_max,0.029,0.029,2026-09-28,Anthropic,United States of America,,,0.021,,,2026-10-08T13:40:19.965Z,bloom68-0ov6a268920re3sz
+gpt-6.1-sol_max,0.04411764705882353,0.04411764705882353,2026-09-29,OpenAI,United States of America,,,0.02508828598537234,,,2026-10-01T20:26:05.000Z,bloom68-alv3junt54xqrybd
+gpt-6-sol_max,0.014705882352941176,0.014705882352941176,2026-09-22,OpenAI,United States of America,,,0.014705882352941176,,,2026-09-30T09:15:20.000Z,bloom68-gpt6sol-jw3kuj7ihascfke9
+claude-opus-5-5_max,0.0294,0.0294,2026-09-22,Anthropic,United States of America,,,0.0206,,,2026-09-24T13:30:00.000Z,bloom68-opus55-m1pc5wbymin28jdj
+grok-4.7_xhigh,0.0,0.0,2026-09-21,xAI,United States of America,,,0.0,,,2026-09-21T23:18:50.000Z,bloom68-grok47-c934xdlxd6komspn
+gemini-3.8-flash_high,0.0,0.0,2026-09-02,Google DeepMind,United States of America,,,0.0,,,2026-09-02T17:31:10.000Z,bloom68-gemini38f-aojsg6oyu5hcva8s
+claude-fable-5-1_max,0.0,0.0,2026-09-01,Anthropic,United States of America,,,0.0,,,2026-09-01T18:56:31.000Z,bloom68-fable51-8t9up8nw9358oyrl
+gpt-5.5_xhigh,0.0,0.0,2026-04-23,OpenAI,United States of America,,,0.0,,,2026-08-28T18:05:03.000Z,bloom68-gpt55-4nh07xafb8lf7jqp
+kimi-k3_max,0.0,0.0,2026-07-16,Moonshot,China,2.0001e+25,"Based on peer models such as Kimi K2.6 and DeepSeek V4 Pro, plausibly was trained on roughly 30T tokens (likely between 15T and 60T). Using the heuristic that C = 6ND, 30T pretraining tokens would imply ~1.9e25 FLOP. This is a somewhat uncertain estimate (more uncertain than estimates based on disclosed active params and token counts, but comparable to estimates based on disclosed GPU-hours).
+
+K3 was likely pretrained on over 1e25 FLOP. Speculatively, K3's relatively large size compared to other Chinese models may have reduced the training token budget vs smaller models.",0.0,,,2026-08-28T18:03:48.000Z,bloom68-kimi-u2zxwufo24l8te4u
+claude-opus-5_max,0.0,0.0,2026-07-24,Anthropic,United States of America,,,0.0,,,2026-08-28T18:03:28.000Z,bloom68-opus5-2joaoeymbc8dk6j4
+gpt-6-astra_max,0.029411764705882353,0.029411764705882353,2026-09-03,OpenAI,United States of America,9.4e+26,"per OpenAI and affiliates (e.g. Nvidia), 6 Astra was trained on at least 100,000 GB200s in Abilene, Texas (so 100,000 in ""Hardware quantity"" is a lower bound/underestimate).
+
+This suggests around 9e26 FLOP (corresponding to ~100k GB200s over 90 days at 25% FP8 MFU). See more detailed estimate in this notebook, yielding a CI of ~[5e26, 2e27] FLOP.
+https://colab.research.google.com/drive/1DRlugIQs-_zoV66AJT1gQg6I1-NX7NqN ",0.0206414713705158,,,2026-08-28T16:33:49.000Z,bloom68-ultima-e1dhs43ykrmakree
+claude-fable-5_max,0.0,0.0,2026-06-09,Anthropic,United States of America,,,0.0,,,2026-08-28T16:33:06.000Z,bloom68-fable-vn2l2xoe9902k9rt
+gpt-5.6-sol_max,0.0,0.0,2026-07-09,OpenAI,United States of America,,,0.0,,,2026-08-28T15:05:09.000Z,bloom68-sol-jx4yy8n4naukwwge
