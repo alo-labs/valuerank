@@ -273,11 +273,10 @@ def test_absence_statements_carry_a_marker_whose_claim_holds(tmp_path):
     """I60 M2: a sentence saying a source publishes or carries no field carries an {{absent:KEY}} marker, and the claim
     is tested against the pinned data, so a field that appears forces the sentence to change."""
 
-    # Every claim the published draft cites holds against the pinned data. (bughunt.minimaxFlash names MiniMax-M3.1-Flash,
-    # which left the cohort at v5 and has no Bug Hunt search record any more; the draft no longer cites it.)
+    # Every registered claim holds against the pinned data, and the published draft cites only registered claims.
     cited = set(re.findall(r"\{\{absent:([^}|]+)\}\}", f.latest_source().read_text()))
     assert cited and cited <= set(f.ABSENCE_CLAIMS)
-    assert all(f.ABSENCE_CLAIMS[key][1](DATA) for key in cited)
+    assert all(check(DATA) for _, check in f.ABSENCE_CLAIMS.values())
     text = "\n".join([
         "AA publishes no interval for that leaf.",
         "AA's run publishes no interval{{absent:aa.terminalBenchInterval}}.",

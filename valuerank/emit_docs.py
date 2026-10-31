@@ -960,7 +960,7 @@ ValueRank asks which frontier AI model configuration is lowest cost for the valu
 
 {cohort_lines}{incomplete_line} {plotted_names_text(facts)}{" A listed frontier or near-frontier family also shows, apart from the ranking, an indicative value on the leaves it has, labelled not ranked and not comparable (O41)." if v3["listedIndicative"] else ""}
 
-The remaining {len(facts.unranked) - len(incomplete)} roster models are not ranked; each keeps a page with the evidence held for it.
+{outside_roster_text(len(facts.unranked) - len(incomplete))}
 
 {model_inclusion_markdown(facts.inclusion)}
 ## Value
@@ -1623,6 +1623,14 @@ def cost_diagnostics_markdown(facts):
     return "\n".join(lines) + "\n\n### Leave-one-component-out cost family (E172)\n\nEach admitted basket unit removed in turn, scored on anchors rebuilt by the freeze rule (rank changes against the primary ranking; quality held fixed).\n\n" + markdown_table(
         ["Removed component", "API rank changes", "Plan rank changes", "API value points per cost doubling"], family_rows, numeric={3}
     ) + "\n\n### Subset rows: paired bridge and missing spend (E10, E173)\n\n" + ("\n".join(bridge_lines) or "No row is scored on a subset workload.")
+
+
+def outside_roster_text(count):
+    """Roster models outside the cohort keep a page; with none (the roster is the cohort, O132), the sentence says so."""
+
+    if count:
+        return f"The remaining {count} roster models are not ranked; each keeps a page with the evidence held for it."
+    return "Every roster model is a cohort configuration; none sits outside the cohort."
 
 
 def harness_cost_text(stress, facts):

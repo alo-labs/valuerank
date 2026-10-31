@@ -684,7 +684,6 @@ def _semianalysis_unhashed(data: Path) -> bool:
 # is registered here with its test; a sentence making one carries its {{absent:KEY}} marker, and a claim that no longer
 # holds fails the check until the sentence is rewritten.
 ABSENCE_CLAIMS = {
-    "bughunt.minimaxFlash": ("no Bug Hunt run of MiniMax-M3.1-Flash, owner's or provider's", _bug_hunt_search_empty("minimax-m3-1-flash")),
     "aa.meteringBasis": ("AA's pages carry no per-configuration token-metering basis",
                          lambda data: _no_key("aa/aa_v432_snapshot.json", r"(?i)metering|tokeni[sz]er|countBasis")(data)
                          and _no_key("aa/coding_agents_capture.json", r"(?i)metering|tokeni[sz]er|countBasis")(data)),
