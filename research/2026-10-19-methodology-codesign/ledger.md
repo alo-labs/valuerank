@@ -2053,6 +2053,19 @@ Asked on I64 Q1 whether future O71 admissions should be executed by the build fr
 ## Editor decisions after reviewer 72 (owner may override)
 - E276. Shared price factors: a row carrying a shared tariff or pricing-omission factor is a blocker; with the corner tests' common extremes, per-row boxes decide as the joint constraint does.
 
+## Reviewer 73 (Grok 4.7, round 12, Thinking, whole draft r155) — adopted, modified or rejected
+- Read check: all 13 parts read to their ends at commit f2a182a (two earlier sends failed before sending: a cookie-policy banner covered the model menu; the driver now declines optional cookies).
+- H1 (separability pairs and noise bands cross anchor objects): adopted as E277; the ranking itself stays one order (O117).
+- H2 (AI Coding Daily labels on a basket without a coding-agent unit, an O57×O116 challenge): put to the owner, kept as O133.
+- H3 (fallback-model tokens inside the Coding Agent Index cost, an O63 challenge): put to the owner, kept as O134 (r155 already prints the flag beside every label).
+- M1 (no successor map for Intelligence Index v5): verified (AA published v5 around 2026-10-27, after the 2026-10-25 cutoff); put to the owner, who chose to re-capture under v5 now (O132) with the leaf map O136 and basket O137. Grok's question is answered by the capture: v5 model pages still publish GDPval-AA and AA-LCR, but new models carry no FrontierCode 1.1, SciCode, HLE or CritPt.
+- M2 (O44's √2 against a constant bar): rejected; O128 confirmed the margin, and the bar is a configuration's own displayed quality (O34), a noisy measurement.
+- M3 (split LiveBench across groups, an O61/O122 challenge): put to the owner, kept as O138.
+- M4 (Anthropic renamed Max 5x and Max 20x on 2026-10-30): verified and adopted: the registry records dated plan aliases (`evidencePolicy.planAliases`) and a limit-change record for Max 20x (Ultra's five-hour limit removed for verified accounts; O77 as amended by O101); route keys keep their measured names.
+- L1 (listed rows' clipped cost scores): not adopted (Low; listed rows are outside every claim, O43, and their pages print the dollar cost).
+- Question on MiMo-V2.6-Flash and MiniMax-M3.1-Flash efforts: put to the owner as O135 and resolved by research as O140; MiniMax-M3.1-Flash left the cohort with v5.
+- Round status (O56): not clean (three Highs and four Mediums).
+
 ## Owner decisions O132–O138 (2026-10-30), asked on reviewer 73 (Grok 4.7, r155)
 - O132 (AA Intelligence Index v5): AA published v5 around 2026-10-27, after the 2026-10-25 cutoff. The owner chose to re-capture under v5 now: the cutoff moves (O65) and every AA source is re-captured, with the leaf set and basket re-decided (O136, O137).
 - O133 (AI Coding Daily labels): the ranking keeps its interval and scenario labels while its basket has no admitted coding-agent unit; the summary discloses the admitted basket and both pending units with coverage.
@@ -2063,3 +2076,6 @@ Asked on I64 Q1 whether future O71 admissions should be executed by the build fr
 - O138 (LiveBench, an O61/O122 challenge): O122 stands; LiveBench 2.0 Overall stays whole in software engineering and each ranking prints its coding-specific share.
 - O139 (LiveBench release): LiveBench withdrew the 2026-10-23 release pinned under O67 (its files return 404). The owner pinned release 2026-10-25, LiveBench's own weighted Overall, read 2026-10-30; no cohort value changed between the two, and it adds GPT-6.1 Terra (max).
 - O140 (MiMo-V2.6-Flash, under O135): Xiaomi documents one reasoning mode (thinking on or off, on by default), so the configuration is thinking enabled. AI Coding Daily's "MiMo-V2.6 Flash (High)" row is that configuration; Bug Hunt's OpenRouter-default run and Vals' records, which state no reasoning setting, stay unmatched.
+
+## Editor decisions after reviewer 73 (owner may override)
+- E277. Separability adjacent pairs and noise bands stay within one workload: a subset-workload row (O17, O117) keeps its rank, its adjacent pairs with main-workload rows are counted apart (`crossWorkloadAdjacentPairs`) and never tested, and it joins no band (reviewer 73 H1).

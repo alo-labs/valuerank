@@ -163,6 +163,10 @@ function scriptedPage(outcomes, calls) {
       calls.push(['evaluate', fn.name]);
       return fn.name === 'clickTotalCostTab' ? current.tab : current.chart;
     },
+    async content() {
+      calls.push(['content']);
+      return current.content || '';
+    },
   };
 }
 
@@ -182,7 +186,16 @@ function fakeChromium(page, calls) {
   };
 }
 
-const GOOD = { tab: true, chart: { title: 'X: Total Cost to Run', html: CHART_HTML, finalUrl: 'https://final' } };
+const NOTE = 'The model or provider declined some tasks on safety grounds';
+const GOOD = { tab: true, chart: { title: 'X: Total Cost to Run', html: CHART_HTML, finalUrl: 'https://final' }, content: `x "* ${NOTE}" y "* ${NOTE}"` };
+
+describe('printedNotes', () => {
+  test('reads each "* <text>" note AA prints once, in page order, and nothing else', () => {
+    assert.deepEqual(charts.printedNotes(`a "* ${NOTE}" b "* Second note on the page here" "* ${NOTE}" "* short" "* lower case is not a note"`),
+      [NOTE, 'Second note on the page here']);
+    assert.deepEqual(charts.printedNotes('<html>no notes</html>'), []);
+  });
+});
 
 describe('captureEvaluation and run', () => {
   test('captureEvaluation retries transient failures and reports each one', async () => {
@@ -196,6 +209,9 @@ describe('captureEvaluation and run', () => {
     assert.equal(result.slug, 'fc');
     assert.equal(result.chartTitle, 'X: Total Cost to Run');
     assert.equal(result.rows.length, 3);
+    // O103: the page's printed notes on the chart, and none on a bar.
+    assert.deepEqual(result.notes, [NOTE]);
+    assert.ok(result.rows.every((row) => Array.isArray(row.notes) && row.notes.length === 0));
     assert.deepEqual(logs, [
       'attempt 1 for fc failed: upstream request failed',
       'attempt 2 for fc failed: no "Total Cost to Run" tab on https://fc',

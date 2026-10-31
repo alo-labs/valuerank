@@ -34,8 +34,12 @@ GPT-5.6 Luna (low).
 - [x] Chart captured and cohort derived.
 - [x] Model pages captured (v5 fields), 2026-10-30T22:23:33Z; every page has the v5 successor fields. Task counts from AA's methodology: Briefcase 91, AutomationBench 657, GDP.pdf 100, FrontierCode 2.0 132, Terminal-Bench 4.0 66, Terminal-Bench-Science 70, CritPt v2 hard 40, Omniscience v1.1 3,000, HLE-Diamond 1,000. 24 of 27 pages reconstruct AA's total to 1e-6; the three Claude Opus 5.5 rows miss by 0.03-0.04% (E209: partial component).
 - [x] Coding Agent Index page (`npm run capture:basket`) and the cost charts with every model selected (`capture_cost_charts_all.js`: FrontierCode 78 of 78 models, 73 bars; ITBench-AA 45 of 45, 43 bars).
-- [ ] Engine: leaf map (O136), basket (O137), nine-evaluation cost identity.
+- [x] Engine: leaf map (O136), basket (O137), nine-evaluation cost identity; O103 notes captured on every AA surface; the Coding Agent Index manifest re-registered (AA's new label grammar); FrontierCode cross-source and Cognition fills retired.
 - [x] Third-party boards re-read 2026-10-30 (`third-party/`); LiveBench release 2026-10-25 pinned (O139); MiMo-V2.6-Flash matched on AI Coding Daily only (O140).
-- [ ] Third-party data files rebuilt for the cohort (bug_hunt.json, swe_tracks.json, tb4.json); O36 search logs.
-- [ ] Plan routes: Anthropic Max/Ultra rename (2026-10-30), report window at the new cutoff.
-- [ ] Re-freeze anchors and bars; draft r156.
+- [x] Third-party data files rebuilt (`build_third_party.py`, `build_swe_tracks.py`, `add_track_searches.py`); O36 search logs dated 2026-10-30.
+- [x] Plan routes: GPT-6.1 Terra's O45 routes, Anthropic Max/Ultra aliases and limit record, report window 2026-10-01 to 2026-10-31, the stale Grok report route excluded (E194); price records re-dated.
+- [x] Anchors re-frozen (`refreeze.py`); release cutoff 2026-10-31T04:10:00Z (`regen.sh`); draft r156 written.
+- [ ] Tests updated; review copy; push.
+
+## Dual run (O12)
+`python3 -m valuerank.value_v3 dual-run --previous previous-anchors/v3_frozen.json --track max` at the cutoff stops with "the admitted main workload changed since the anchors were frozen; this is a workload migration": the v4.3.2 anchors price a different workload (GDPval-AA, SciCode, AA-LCR in; FrontierCode 2.0, Terminal-Bench-Science out), so no dual run is computable. The anchors were re-frozen on the v5 cohort (`refreeze.py`); the previous anchor objects are kept in `previous-anchors/`.

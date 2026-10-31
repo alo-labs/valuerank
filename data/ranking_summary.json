@@ -216,7 +216,7 @@
   "deepsweBenchmarkVersion": "DeepSWE v1.1",
   "deepsweConfigurationsN": 42,
   "aaBenchmarkVersion": "Artificial Analysis Intelligence Index v5.0",
-  "retainedDimensionN": 11,
+  "retainedDimensionN": 14,
   "retainedDimensions": [
     "Cost",
     "Non-Hallucination",
@@ -225,7 +225,10 @@
     "AutomationBench-AA",
     "AA-LCR v1.1",
     "AA-Omniscience Accuracy",
+    "HLE-Diamond",
     "GPQA Diamond (legacy)",
+    "Terminal-Bench-Science",
+    "CritPt v2 (hard subset)",
     "AA Intelligence Index",
     "Speed",
     "Bug Hunt Bench"
@@ -292,198 +295,6 @@
       ],
       "availableN": 1,
       "reason": "fewer than two primary models have observed values; no comparative percentile is assigned"
-    },
-    {
-      "key": "hle",
-      "label": "HLE",
-      "missing": [
-        "GPT-6 Luna (low)",
-        "GPT-6 Luna (medium)",
-        "Claude Haiku 5.5 (low)",
-        "GPT-6 Luna (high)",
-        "Claude Haiku 5.5 (medium)",
-        "MiMo-V2.6-Flash",
-        "GPT-6.1 Terra (low)",
-        "Claude Haiku 5.5 (high)",
-        "GPT-6.1 Terra (medium)",
-        "GPT-6.1 Terra (high)",
-        "GPT-6.1 Sol (medium)",
-        "GPT-6.1 Sol (high)",
-        "GPT-6.1 Sol (xhigh)",
-        "GPT-6.1 Sol (max)",
-        "GPT-6 Astra (high)",
-        "GPT-6 Astra (xhigh)",
-        "Claude Opus 5.5 (xhigh)",
-        "Gemini 4 Carbon",
-        "GPT-6 Luna (xhigh)",
-        "GPT-6 Luna (max)",
-        "GPT-6.1 Sol (low)",
-        "GPT-6.1 Terra (xhigh)",
-        "GPT-6.1 Terra (max)",
-        "Claude Opus 5.5 (high)",
-        "GPT-6 Astra (max)",
-        "Claude Sonnet 5.5",
-        "Claude Opus 5.5 (max)"
-      ],
-      "sourceMissing": [
-        "GPT-6 Luna (low)",
-        "GPT-6 Luna (medium)",
-        "Claude Haiku 5.5 (low)",
-        "GPT-6 Luna (high)",
-        "Claude Haiku 5.5 (medium)",
-        "MiMo-V2.6-Flash",
-        "GPT-6.1 Terra (low)",
-        "Claude Haiku 5.5 (high)",
-        "GPT-6.1 Terra (medium)",
-        "GPT-6.1 Terra (high)",
-        "GPT-6.1 Sol (medium)",
-        "GPT-6.1 Sol (high)",
-        "GPT-6.1 Sol (xhigh)",
-        "GPT-6.1 Sol (max)",
-        "GPT-6 Astra (high)",
-        "GPT-6 Astra (xhigh)",
-        "Claude Opus 5.5 (xhigh)",
-        "Gemini 4 Carbon",
-        "GPT-6 Luna (xhigh)",
-        "GPT-6 Luna (max)",
-        "GPT-6.1 Sol (low)",
-        "GPT-6.1 Terra (xhigh)",
-        "GPT-6.1 Terra (max)",
-        "Claude Opus 5.5 (high)",
-        "GPT-6 Astra (max)",
-        "Claude Sonnet 5.5",
-        "Claude Opus 5.5 (max)"
-      ],
-      "availableN": 0,
-      "reason": "fewer than two primary models have observed values; no comparative percentile is assigned"
-    },
-    {
-      "key": "scicode",
-      "label": "SciCode",
-      "missing": [
-        "GPT-6 Luna (low)",
-        "GPT-6 Luna (medium)",
-        "Claude Haiku 5.5 (low)",
-        "GPT-6 Luna (high)",
-        "Claude Haiku 5.5 (medium)",
-        "MiMo-V2.6-Flash",
-        "GPT-6.1 Terra (low)",
-        "Claude Haiku 5.5 (high)",
-        "GPT-6.1 Terra (medium)",
-        "GPT-6.1 Terra (high)",
-        "GPT-6.1 Sol (medium)",
-        "GPT-6.1 Sol (high)",
-        "GPT-6.1 Sol (xhigh)",
-        "GPT-6.1 Sol (max)",
-        "GPT-6 Astra (high)",
-        "GPT-6 Astra (xhigh)",
-        "Claude Opus 5.5 (xhigh)",
-        "Gemini 4 Carbon",
-        "GPT-6 Luna (xhigh)",
-        "GPT-6 Luna (max)",
-        "GPT-6.1 Sol (low)",
-        "GPT-6.1 Terra (xhigh)",
-        "GPT-6.1 Terra (max)",
-        "Claude Opus 5.5 (high)",
-        "GPT-6 Astra (max)",
-        "Claude Sonnet 5.5",
-        "Claude Opus 5.5 (max)"
-      ],
-      "sourceMissing": [
-        "GPT-6 Luna (low)",
-        "GPT-6 Luna (medium)",
-        "Claude Haiku 5.5 (low)",
-        "GPT-6 Luna (high)",
-        "Claude Haiku 5.5 (medium)",
-        "MiMo-V2.6-Flash",
-        "GPT-6.1 Terra (low)",
-        "Claude Haiku 5.5 (high)",
-        "GPT-6.1 Terra (medium)",
-        "GPT-6.1 Terra (high)",
-        "GPT-6.1 Sol (medium)",
-        "GPT-6.1 Sol (high)",
-        "GPT-6.1 Sol (xhigh)",
-        "GPT-6.1 Sol (max)",
-        "GPT-6 Astra (high)",
-        "GPT-6 Astra (xhigh)",
-        "Claude Opus 5.5 (xhigh)",
-        "Gemini 4 Carbon",
-        "GPT-6 Luna (xhigh)",
-        "GPT-6 Luna (max)",
-        "GPT-6.1 Sol (low)",
-        "GPT-6.1 Terra (xhigh)",
-        "GPT-6.1 Terra (max)",
-        "Claude Opus 5.5 (high)",
-        "GPT-6 Astra (max)",
-        "Claude Sonnet 5.5",
-        "Claude Opus 5.5 (max)"
-      ],
-      "availableN": 0,
-      "reason": "fewer than two primary models have observed values; no comparative percentile is assigned"
-    },
-    {
-      "key": "critpt",
-      "label": "CritPt",
-      "missing": [
-        "GPT-6 Luna (low)",
-        "GPT-6 Luna (medium)",
-        "Claude Haiku 5.5 (low)",
-        "GPT-6 Luna (high)",
-        "Claude Haiku 5.5 (medium)",
-        "MiMo-V2.6-Flash",
-        "GPT-6.1 Terra (low)",
-        "Claude Haiku 5.5 (high)",
-        "GPT-6.1 Terra (medium)",
-        "GPT-6.1 Terra (high)",
-        "GPT-6.1 Sol (medium)",
-        "GPT-6.1 Sol (high)",
-        "GPT-6.1 Sol (xhigh)",
-        "GPT-6.1 Sol (max)",
-        "GPT-6 Astra (high)",
-        "GPT-6 Astra (xhigh)",
-        "Claude Opus 5.5 (xhigh)",
-        "Gemini 4 Carbon",
-        "GPT-6 Luna (xhigh)",
-        "GPT-6 Luna (max)",
-        "GPT-6.1 Sol (low)",
-        "GPT-6.1 Terra (xhigh)",
-        "GPT-6.1 Terra (max)",
-        "Claude Opus 5.5 (high)",
-        "GPT-6 Astra (max)",
-        "Claude Sonnet 5.5",
-        "Claude Opus 5.5 (max)"
-      ],
-      "sourceMissing": [
-        "GPT-6 Luna (low)",
-        "GPT-6 Luna (medium)",
-        "Claude Haiku 5.5 (low)",
-        "GPT-6 Luna (high)",
-        "Claude Haiku 5.5 (medium)",
-        "MiMo-V2.6-Flash",
-        "GPT-6.1 Terra (low)",
-        "Claude Haiku 5.5 (high)",
-        "GPT-6.1 Terra (medium)",
-        "GPT-6.1 Terra (high)",
-        "GPT-6.1 Sol (medium)",
-        "GPT-6.1 Sol (high)",
-        "GPT-6.1 Sol (xhigh)",
-        "GPT-6.1 Sol (max)",
-        "GPT-6 Astra (high)",
-        "GPT-6 Astra (xhigh)",
-        "Claude Opus 5.5 (xhigh)",
-        "Gemini 4 Carbon",
-        "GPT-6 Luna (xhigh)",
-        "GPT-6 Luna (max)",
-        "GPT-6.1 Sol (low)",
-        "GPT-6.1 Terra (xhigh)",
-        "GPT-6.1 Terra (max)",
-        "Claude Opus 5.5 (high)",
-        "GPT-6 Astra (max)",
-        "Claude Sonnet 5.5",
-        "Claude Opus 5.5 (max)"
-      ],
-      "availableN": 0,
-      "reason": "fewer than two primary models have observed values; no comparative percentile is assigned"
     }
   ],
   "zeroGap": false,
@@ -502,80 +313,83 @@
     "GPT-6 Luna (high)",
     "Claude Haiku 5.5 (medium)",
     "Claude Haiku 5.5 (high)",
+    "GPT-6.1 Terra (high)",
     "GPT-6.1 Sol (medium)",
     "GPT-6.1 Sol (high)",
     "GPT-6.1 Sol (max)",
+    "GPT-6 Luna (xhigh)",
     "GPT-6.1 Sol (low)",
     "GPT-6.1 Terra (max)",
     "GPT-6 Astra (max)",
-    "Claude Sonnet 5.5"
+    "Claude Sonnet 5.5",
+    "Claude Opus 5.5 (max)"
   ],
   "topFive": [
     {
       "rank": 1,
       "name": "GPT-6.1 Sol (max)",
-      "overallScore": 67.9,
-      "qualityScore": 74.9
+      "overallScore": 69.1,
+      "qualityScore": 76.5
     },
     {
       "rank": 2,
-      "name": "Claude Sonnet 5.5",
-      "overallScore": 64.9,
-      "qualityScore": 86.2
+      "name": "GPT-6.1 Terra (max)",
+      "overallScore": 64.6,
+      "qualityScore": 69.9
     },
     {
       "rank": 3,
-      "name": "GPT-6.1 Terra (max)",
-      "overallScore": 64.6,
-      "qualityScore": 69.8
+      "name": "GPT-6 Astra (max)",
+      "overallScore": 63.9,
+      "qualityScore": 81.8
     },
     {
       "rank": 4,
       "name": "Claude Opus 5.5 (max)",
-      "overallScore": 62.4,
-      "qualityScore": 83.2
+      "overallScore": 62.9,
+      "qualityScore": 83.8
     },
     {
       "rank": 5,
-      "name": "GPT-6 Astra (max)",
-      "overallScore": 62.0,
-      "qualityScore": 79.3
+      "name": "GPT-6.1 Sol (high)",
+      "overallScore": 62.5,
+      "qualityScore": 63.0
     }
   ],
   "bugHuntEmphasis": {
     "matchedN": 19,
     "cohortN": 27,
-    "benchmarkWeightPct": 30.0,
+    "benchmarkWeightPct": 26.1628,
     "sourceCommit": "12497971d928cc5ad97a184755734720388bc07f",
     "topFive": [
       {
         "rank": 1,
         "name": "GPT-6.1 Sol (max)",
-        "score": 69.9,
+        "score": 70.5,
         "fixedOf105": 44.3
       },
       {
         "rank": 2,
-        "name": "Claude Sonnet 5.5",
-        "score": 66.5,
-        "fixedOf105": 51.3
-      },
-      {
-        "rank": 3,
         "name": "GPT-6.1 Terra (max)",
         "score": 64.4,
         "fixedOf105": 40.7
       },
       {
-        "rank": 4,
+        "rank": 3,
         "name": "GPT-6 Astra (max)",
-        "score": 62.3,
+        "score": 63.8,
         "fixedOf105": 45.0
+      },
+      {
+        "rank": 4,
+        "name": "Claude Sonnet 5.5",
+        "score": 63.5,
+        "fixedOf105": 51.3
       },
       {
         "rank": 5,
         "name": "GPT-6.1 Sol (high)",
-        "score": 61.0,
+        "score": 61.5,
         "fixedOf105": 36.5
       }
     ]
@@ -600,70 +414,91 @@
       "label": "Non-Hallucination",
       "higherBetter": true,
       "priority": 6,
-      "weightPct": 6.9231
+      "weightPct": 5.9211
     },
     {
       "key": "livebenchInstructionFollowing",
       "label": "Instruction Following (LiveBench)",
       "higherBetter": true,
       "priority": 5,
-      "weightPct": 5.7692
+      "weightPct": 4.9342
     },
     {
       "key": "gdpvalV21",
       "label": "GDPval-AA v2.1",
       "higherBetter": true,
       "priority": 6,
-      "weightPct": 6.9231
+      "weightPct": 5.9211
     },
     {
       "key": "automationBenchAA",
       "label": "AutomationBench-AA",
       "higherBetter": true,
       "priority": 5,
-      "weightPct": 5.7692
+      "weightPct": 4.9342
     },
     {
       "key": "aaLcr",
       "label": "AA-LCR v1.1",
       "higherBetter": true,
       "priority": 4,
-      "weightPct": 4.6154
+      "weightPct": 3.9474
     },
     {
       "key": "omniAccuracy",
       "label": "AA-Omniscience Accuracy",
       "higherBetter": true,
       "priority": 4,
-      "weightPct": 4.6154
+      "weightPct": 3.9474
+    },
+    {
+      "key": "hle",
+      "label": "HLE-Diamond",
+      "higherBetter": true,
+      "priority": 4,
+      "weightPct": 3.9474
     },
     {
       "key": "gpqaDiamond",
       "label": "GPQA Diamond (legacy)",
       "higherBetter": true,
       "priority": 4,
-      "weightPct": 4.6154
+      "weightPct": 3.9474
+    },
+    {
+      "key": "terminalBenchScience",
+      "label": "Terminal-Bench-Science",
+      "higherBetter": true,
+      "priority": 4,
+      "weightPct": 3.9474
+    },
+    {
+      "key": "critpt",
+      "label": "CritPt v2 (hard subset)",
+      "higherBetter": true,
+      "priority": 3,
+      "weightPct": 2.9605
     },
     {
       "key": "intelligenceIndex",
       "label": "AA Intelligence Index",
       "higherBetter": true,
       "priority": 6,
-      "weightPct": 6.9231
+      "weightPct": 5.9211
     },
     {
       "key": "speed",
       "label": "Speed",
       "higherBetter": true,
       "priority": 5,
-      "weightPct": 5.7692
+      "weightPct": 4.9342
     },
     {
       "key": "bugHuntFixedOf105",
       "label": "Bug Hunt Bench",
       "higherBetter": true,
       "priority": 20,
-      "weightPct": 23.0769
+      "weightPct": 19.7368
     }
   ],
   "bugHuntEmphasisRanking": {
@@ -678,10 +513,10 @@
     "matchedN": 19,
     "cohortN": 27,
     "coveragePct": 70.37,
-    "basePrioritySum": 45,
+    "basePrioritySum": 56,
     "benchmarkPriority": 30,
-    "totalPriority": 75,
-    "benchmarkWeightPct": 30.0,
+    "totalPriority": 86,
+    "benchmarkWeightPct": 26.1628,
     "weights": [
       {
         "key": "costComposite",
@@ -695,70 +530,91 @@
         "label": "Non-Hallucination",
         "higherBetter": true,
         "priority": 6,
-        "weightPct": 6.0
+        "weightPct": 5.2326
       },
       {
         "key": "livebenchInstructionFollowing",
         "label": "Instruction Following (LiveBench)",
         "higherBetter": true,
         "priority": 5,
-        "weightPct": 5.0
+        "weightPct": 4.3605
       },
       {
         "key": "gdpvalV21",
         "label": "GDPval-AA v2.1",
         "higherBetter": true,
         "priority": 6,
-        "weightPct": 6.0
+        "weightPct": 5.2326
       },
       {
         "key": "automationBenchAA",
         "label": "AutomationBench-AA",
         "higherBetter": true,
         "priority": 5,
-        "weightPct": 5.0
+        "weightPct": 4.3605
       },
       {
         "key": "aaLcr",
         "label": "AA-LCR v1.1",
         "higherBetter": true,
         "priority": 4,
-        "weightPct": 4.0
+        "weightPct": 3.4884
       },
       {
         "key": "omniAccuracy",
         "label": "AA-Omniscience Accuracy",
         "higherBetter": true,
         "priority": 4,
-        "weightPct": 4.0
+        "weightPct": 3.4884
+      },
+      {
+        "key": "hle",
+        "label": "HLE-Diamond",
+        "higherBetter": true,
+        "priority": 4,
+        "weightPct": 3.4884
       },
       {
         "key": "gpqaDiamond",
         "label": "GPQA Diamond (legacy)",
         "higherBetter": true,
         "priority": 4,
-        "weightPct": 4.0
+        "weightPct": 3.4884
+      },
+      {
+        "key": "terminalBenchScience",
+        "label": "Terminal-Bench-Science",
+        "higherBetter": true,
+        "priority": 4,
+        "weightPct": 3.4884
+      },
+      {
+        "key": "critpt",
+        "label": "CritPt v2 (hard subset)",
+        "higherBetter": true,
+        "priority": 3,
+        "weightPct": 2.6163
       },
       {
         "key": "intelligenceIndex",
         "label": "AA Intelligence Index",
         "higherBetter": true,
         "priority": 6,
-        "weightPct": 6.0
+        "weightPct": 5.2326
       },
       {
         "key": "speed",
         "label": "Speed",
         "higherBetter": true,
         "priority": 5,
-        "weightPct": 5.0
+        "weightPct": 4.3605
       },
       {
         "key": "bugHuntFixedOf105",
         "label": "Bug Hunt Bench",
         "higherBetter": true,
         "priority": 30,
-        "weightPct": 30.0
+        "weightPct": 26.1628
       }
     ],
     "missingModels": [
@@ -1039,47 +895,47 @@
         "modelId": "gpt-6.1-sol",
         "name": "GPT-6.1 Sol (max)",
         "fixedOf105": 44.3,
-        "emphasisScore": 69.9,
+        "emphasisScore": 70.5,
         "primaryRank": 1
       },
       {
         "rank": 2,
-        "modelId": "claude-sonnet-5-5",
-        "name": "Claude Sonnet 5.5",
-        "fixedOf105": 51.3,
-        "emphasisScore": 66.5,
-        "primaryRank": 2
-      },
-      {
-        "rank": 3,
         "modelId": "gpt-6.1-terra",
         "name": "GPT-6.1 Terra (max)",
         "fixedOf105": 40.7,
         "emphasisScore": 64.4,
+        "primaryRank": 2
+      },
+      {
+        "rank": 3,
+        "modelId": "gpt-6-astra",
+        "name": "GPT-6 Astra (max)",
+        "fixedOf105": 45.0,
+        "emphasisScore": 63.8,
         "primaryRank": 3
       },
       {
         "rank": 4,
-        "modelId": "gpt-6-astra",
-        "name": "GPT-6 Astra (max)",
-        "fixedOf105": 45.0,
-        "emphasisScore": 62.3,
-        "primaryRank": 5
+        "modelId": "claude-sonnet-5-5",
+        "name": "Claude Sonnet 5.5",
+        "fixedOf105": 51.3,
+        "emphasisScore": 63.5,
+        "primaryRank": 6
       },
       {
         "rank": 5,
         "modelId": "gpt-6.1-sol-high",
         "name": "GPT-6.1 Sol (high)",
         "fixedOf105": 36.5,
-        "emphasisScore": 61.0,
-        "primaryRank": 6
+        "emphasisScore": 61.5,
+        "primaryRank": 5
       },
       {
         "rank": 6,
         "modelId": "claude-opus-5-5",
         "name": "Claude Opus 5.5 (max)",
         "fixedOf105": 41.7,
-        "emphasisScore": 60.9,
+        "emphasisScore": 61.3,
         "primaryRank": 4
       },
       {
@@ -1087,7 +943,7 @@
         "modelId": "gpt-6.1-sol-medium",
         "name": "GPT-6.1 Sol (medium)",
         "fixedOf105": 29.0,
-        "emphasisScore": 56.3,
+        "emphasisScore": 56.9,
         "primaryRank": 7
       },
       {
@@ -1095,87 +951,87 @@
         "modelId": "claude-haiku-5-5-high",
         "name": "Claude Haiku 5.5 (high)",
         "fixedOf105": 16.0,
-        "emphasisScore": 54.1,
-        "primaryRank": 9
+        "emphasisScore": 52.7,
+        "primaryRank": 11
       },
       {
         "rank": 9,
-        "modelId": "gpt-6-luna",
-        "name": "GPT-6 Luna (max)",
-        "fixedOf105": 18.3,
-        "emphasisScore": 51.5,
-        "primaryRank": 10
+        "modelId": "gpt-6-astra-high",
+        "name": "GPT-6 Astra (high)",
+        "fixedOf105": 35.0,
+        "emphasisScore": 52.7,
+        "primaryRank": 8
       },
       {
         "rank": 10,
         "modelId": "claude-opus-5-5-high",
         "name": "Claude Opus 5.5 (high)",
         "fixedOf105": 31.7,
-        "emphasisScore": 50.9,
-        "primaryRank": 8
+        "emphasisScore": 51.2,
+        "primaryRank": 9
       },
       {
         "rank": 11,
-        "modelId": "gpt-6.1-sol-low",
-        "name": "GPT-6.1 Sol (low)",
-        "fixedOf105": 22.5,
-        "emphasisScore": 50.5,
-        "primaryRank": 13
-      },
-      {
-        "rank": 12,
         "modelId": "gpt-6.1-terra-xhigh",
         "name": "GPT-6.1 Terra (xhigh)",
         "fixedOf105": 11.3,
-        "emphasisScore": 50.5,
+        "emphasisScore": 51.0,
+        "primaryRank": 10
+      },
+      {
+        "rank": 12,
+        "modelId": "gpt-6.1-sol-low",
+        "name": "GPT-6.1 Sol (low)",
+        "fixedOf105": 22.5,
+        "emphasisScore": 50.7,
         "primaryRank": 12
       },
       {
         "rank": 13,
-        "modelId": "gpt-6-astra-high",
-        "name": "GPT-6 Astra (high)",
-        "fixedOf105": 35.0,
-        "emphasisScore": 49.4,
-        "primaryRank": 11
+        "modelId": "gpt-6-luna",
+        "name": "GPT-6 Luna (max)",
+        "fixedOf105": 18.3,
+        "emphasisScore": 50.0,
+        "primaryRank": 13
       },
       {
         "rank": 14,
-        "modelId": "claude-haiku-5-5-medium",
-        "name": "Claude Haiku 5.5 (medium)",
-        "fixedOf105": 12.0,
-        "emphasisScore": 49.0,
-        "primaryRank": 15
+        "modelId": "gpt-6.1-terra-high",
+        "name": "GPT-6.1 Terra (high)",
+        "fixedOf105": 9.7,
+        "emphasisScore": 48.1,
+        "primaryRank": 14
       },
       {
         "rank": 15,
-        "modelId": "gpt-6-luna-xhigh",
-        "name": "GPT-6 Luna (xhigh)",
-        "fixedOf105": 14.0,
-        "emphasisScore": 47.1,
+        "modelId": "claude-haiku-5-5-medium",
+        "name": "Claude Haiku 5.5 (medium)",
+        "fixedOf105": 12.0,
+        "emphasisScore": 47.2,
         "primaryRank": 16
       },
       {
         "rank": 16,
-        "modelId": "gpt-6.1-terra-high",
-        "name": "GPT-6.1 Terra (high)",
-        "fixedOf105": 9.7,
-        "emphasisScore": 47.0,
-        "primaryRank": 14
+        "modelId": "gpt-6-luna-xhigh",
+        "name": "GPT-6 Luna (xhigh)",
+        "fixedOf105": 14.0,
+        "emphasisScore": 45.6,
+        "primaryRank": 17
       },
       {
         "rank": 17,
         "modelId": "gpt-6.1-terra-medium",
         "name": "GPT-6.1 Terra (medium)",
         "fixedOf105": 7.3,
-        "emphasisScore": 43.5,
-        "primaryRank": 17
+        "emphasisScore": 44.4,
+        "primaryRank": 15
       },
       {
         "rank": 18,
         "modelId": "gpt-6-luna-high",
         "name": "GPT-6 Luna (high)",
         "fixedOf105": 9.0,
-        "emphasisScore": 39.5,
+        "emphasisScore": 38.6,
         "primaryRank": 18
       },
       {
@@ -1244,35 +1100,6 @@
       "Claude Sonnet 5.5",
       "Claude Opus 5.5 (max)"
     ],
-    "hle": [
-      "GPT-6 Luna (low)",
-      "GPT-6 Luna (medium)",
-      "Claude Haiku 5.5 (low)",
-      "GPT-6 Luna (high)",
-      "Claude Haiku 5.5 (medium)",
-      "MiMo-V2.6-Flash",
-      "GPT-6.1 Terra (low)",
-      "Claude Haiku 5.5 (high)",
-      "GPT-6.1 Terra (medium)",
-      "GPT-6.1 Terra (high)",
-      "GPT-6.1 Sol (medium)",
-      "GPT-6.1 Sol (high)",
-      "GPT-6.1 Sol (xhigh)",
-      "GPT-6.1 Sol (max)",
-      "GPT-6 Astra (high)",
-      "GPT-6 Astra (xhigh)",
-      "Claude Opus 5.5 (xhigh)",
-      "Gemini 4 Carbon",
-      "GPT-6 Luna (xhigh)",
-      "GPT-6 Luna (max)",
-      "GPT-6.1 Sol (low)",
-      "GPT-6.1 Terra (xhigh)",
-      "GPT-6.1 Terra (max)",
-      "Claude Opus 5.5 (high)",
-      "GPT-6 Astra (max)",
-      "Claude Sonnet 5.5",
-      "Claude Opus 5.5 (max)"
-    ],
     "gpqaDiamond": [
       "GPT-6 Luna (low)",
       "GPT-6 Luna (medium)",
@@ -1296,64 +1123,6 @@
       "GPT-6.1 Terra (xhigh)",
       "GPT-6.1 Terra (max)",
       "Claude Opus 5.5 (high)",
-      "Claude Sonnet 5.5",
-      "Claude Opus 5.5 (max)"
-    ],
-    "scicode": [
-      "GPT-6 Luna (low)",
-      "GPT-6 Luna (medium)",
-      "Claude Haiku 5.5 (low)",
-      "GPT-6 Luna (high)",
-      "Claude Haiku 5.5 (medium)",
-      "MiMo-V2.6-Flash",
-      "GPT-6.1 Terra (low)",
-      "Claude Haiku 5.5 (high)",
-      "GPT-6.1 Terra (medium)",
-      "GPT-6.1 Terra (high)",
-      "GPT-6.1 Sol (medium)",
-      "GPT-6.1 Sol (high)",
-      "GPT-6.1 Sol (xhigh)",
-      "GPT-6.1 Sol (max)",
-      "GPT-6 Astra (high)",
-      "GPT-6 Astra (xhigh)",
-      "Claude Opus 5.5 (xhigh)",
-      "Gemini 4 Carbon",
-      "GPT-6 Luna (xhigh)",
-      "GPT-6 Luna (max)",
-      "GPT-6.1 Sol (low)",
-      "GPT-6.1 Terra (xhigh)",
-      "GPT-6.1 Terra (max)",
-      "Claude Opus 5.5 (high)",
-      "GPT-6 Astra (max)",
-      "Claude Sonnet 5.5",
-      "Claude Opus 5.5 (max)"
-    ],
-    "critpt": [
-      "GPT-6 Luna (low)",
-      "GPT-6 Luna (medium)",
-      "Claude Haiku 5.5 (low)",
-      "GPT-6 Luna (high)",
-      "Claude Haiku 5.5 (medium)",
-      "MiMo-V2.6-Flash",
-      "GPT-6.1 Terra (low)",
-      "Claude Haiku 5.5 (high)",
-      "GPT-6.1 Terra (medium)",
-      "GPT-6.1 Terra (high)",
-      "GPT-6.1 Sol (medium)",
-      "GPT-6.1 Sol (high)",
-      "GPT-6.1 Sol (xhigh)",
-      "GPT-6.1 Sol (max)",
-      "GPT-6 Astra (high)",
-      "GPT-6 Astra (xhigh)",
-      "Claude Opus 5.5 (xhigh)",
-      "Gemini 4 Carbon",
-      "GPT-6 Luna (xhigh)",
-      "GPT-6 Luna (max)",
-      "GPT-6.1 Sol (low)",
-      "GPT-6.1 Terra (xhigh)",
-      "GPT-6.1 Terra (max)",
-      "Claude Opus 5.5 (high)",
-      "GPT-6 Astra (max)",
       "Claude Sonnet 5.5",
       "Claude Opus 5.5 (max)"
     ],
