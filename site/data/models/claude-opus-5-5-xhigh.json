@@ -20,7 +20,7 @@
       "pct": 0.0,
       "costAvailable": false,
       "missing": [
-        "FrontierCode 1.1",
+        "FrontierCode 2.0",
         "Terminal-Bench 4.0 (AA run)",
         "Bug Hunt Bench",
         "Vibe Code Bench v1.1 (Vals)",
@@ -28,11 +28,11 @@
         "LiveBench 2.0 Overall",
         "GDPval-AA v2.1",
         "AutomationBench-AA",
-        "AA-Omniscience",
+        "AA-Omniscience v1.1",
         "AA-LCR v1.1",
-        "Humanity's Last Exam",
-        "SciCode",
-        "CritPt"
+        "HLE-Diamond",
+        "Terminal-Bench-Science 0.1",
+        "CritPt v2 (hard subset)"
       ],
       "provisional": null,
       "provisionalReasons": []
@@ -47,7 +47,7 @@
   "dimensions": [
     {
       "key": "frontierCode",
-      "label": "FrontierCode 1.1",
+      "label": "FrontierCode 2.0",
       "category": "Software engineering",
       "weightPct": 11.25,
       "value": null,
@@ -122,7 +122,7 @@
     },
     {
       "key": "omniscience",
-      "label": "AA-Omniscience",
+      "label": "AA-Omniscience v1.1",
       "category": "Reliability",
       "weightPct": 7.5,
       "value": null,
@@ -197,7 +197,7 @@
     },
     {
       "key": "hle",
-      "label": "Humanity's Last Exam",
+      "label": "HLE-Diamond",
       "category": "Knowledge and science",
       "weightPct": 1.25,
       "value": null,
@@ -211,13 +211,13 @@
       "grade": "missing"
     },
     {
-      "key": "scicode",
-      "label": "SciCode",
+      "key": "tbScience",
+      "label": "Terminal-Bench-Science 0.1",
       "category": "Knowledge and science",
       "weightPct": 1.25,
       "value": null,
       "decimals": 3,
-      "unit": "score (0-1)",
+      "unit": "% resolved (0-1)",
       "normalized": null,
       "source": null,
       "observedAt": null,
@@ -227,7 +227,7 @@
     },
     {
       "key": "critpt",
-      "label": "CritPt",
+      "label": "CritPt v2 (hard subset)",
       "category": "Knowledge and science",
       "weightPct": 1.25,
       "value": null,
@@ -316,12 +316,12 @@
       "shown": false,
       "rankingEligible": true,
       "rank": {
-        "api": 11,
-        "plan": 5
+        "api": 9,
+        "plan": 7
       },
       "overall": {
-        "api": 47.658526785092434,
-        "plan": 56.088042555273134
+        "api": 45.320243735233355,
+        "plan": 50.77030118098989
       }
     }
   ]

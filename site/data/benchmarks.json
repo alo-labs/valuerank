@@ -2,15 +2,15 @@
   "sources": [
     {
       "id": "frontierCode",
-      "name": "FrontierCode 1.1",
+      "name": "FrontierCode 2.0",
       "owner": "Artificial Analysis",
-      "url": "https://artificialanalysis.ai/evaluations/frontiercode",
-      "observedAt": "2026-10-25",
+      "url": "https://artificialanalysis.ai/evaluations/frontiercode-2-0",
+      "observedAt": "2026-10-31",
       "role": "quality leaf (Software engineering)",
       "weightPct": 11.25,
       "coverage": {
-        "available": 9,
-        "cohort": 9
+        "available": 5,
+        "cohort": 5
       },
       "unit": "AA score (0-1)",
       "execution": "AA-run",
@@ -21,12 +21,12 @@
       "name": "Terminal-Bench 4.0 (AA run)",
       "owner": "Artificial Analysis",
       "url": "https://www.tbench.ai/leaderboard/terminal-bench/4.0",
-      "observedAt": "2026-10-25",
+      "observedAt": "2026-10-31",
       "role": "quality leaf (Software engineering)",
       "weightPct": 8.25,
       "coverage": {
-        "available": 9,
-        "cohort": 9
+        "available": 5,
+        "cohort": 5
       },
       "unit": "% resolved",
       "execution": "AA-run",
@@ -37,12 +37,12 @@
       "name": "Bug Hunt Bench",
       "owner": "Bug Hunt Bench benchmark owner",
       "url": "https://bughunt.productcompass.pm/",
-      "observedAt": "2026-10-23",
+      "observedAt": "2026-10-27",
       "role": "quality leaf (Software engineering)",
       "weightPct": 6.0,
       "coverage": {
-        "available": 9,
-        "cohort": 9
+        "available": 5,
+        "cohort": 5
       },
       "unit": "bugs fixed of 105",
       "execution": "independent",
@@ -53,12 +53,12 @@
       "name": "Vibe Code Bench v1.1 (Vals)",
       "owner": "Artificial Analysis",
       "url": "https://www.vals.ai/benchmarks/vibe-code",
-      "observedAt": "2026-10-25",
+      "observedAt": "2026-10-31",
       "role": "quality leaf (Software engineering)",
       "weightPct": 3.75,
       "coverage": {
-        "available": 9,
-        "cohort": 9
+        "available": 5,
+        "cohort": 5
       },
       "unit": "% of test workflows passed",
       "execution": "independent",
@@ -69,12 +69,12 @@
       "name": "Code Migration v1.1 (Vals)",
       "owner": "Artificial Analysis",
       "url": "https://www.vals.ai/benchmarks/code-migration-v1-1",
-      "observedAt": "2026-10-25",
+      "observedAt": "2026-10-31",
       "role": "quality leaf (Software engineering)",
       "weightPct": 4.5,
       "coverage": {
-        "available": 9,
-        "cohort": 9
+        "available": 5,
+        "cohort": 5
       },
       "unit": "% of hidden tests passed",
       "execution": "independent",
@@ -85,28 +85,28 @@
       "name": "LiveBench 2.0 Overall",
       "owner": "Artificial Analysis",
       "url": "https://livebench.ai/new",
-      "observedAt": "2026-10-25",
+      "observedAt": "2026-10-31",
       "role": "quality leaf (Software engineering)",
       "weightPct": 11.25,
       "coverage": {
-        "available": 9,
-        "cohort": 9
+        "available": 5,
+        "cohort": 5
       },
       "unit": "LiveBench's weighted Overall of seven category scores (0-100)",
       "execution": "independent",
-      "notes": "LiveBench 2.0's own run at each model's top effort (release 2026-10-23, served at livebench.ai/new); Overall is LiveBench's weighted mean of its seven categories (Long Agentic 2, Coding 1.5, Design 1.5, the others 1), as LiveBench computes it."
+      "notes": "LiveBench 2.0's own run at each model's top effort (release 2026-10-25, served at livebench.ai/new); Overall is LiveBench's weighted mean of its seven categories (Long Agentic 2, Coding 1.5, Design 1.5, the others 1), as LiveBench computes it."
     },
     {
       "id": "gdpval",
       "name": "GDPval-AA v2.1",
       "owner": "Artificial Analysis",
       "url": "https://artificialanalysis.ai/evaluations/gdpval-aa",
-      "observedAt": "2026-10-25",
+      "observedAt": "2026-10-31",
       "role": "quality leaf (Professional work)",
       "weightPct": 7.5,
       "coverage": {
-        "available": 9,
-        "cohort": 9
+        "available": 5,
+        "cohort": 5
       },
       "unit": "Elo",
       "execution": "AA-run",
@@ -117,12 +117,12 @@
       "name": "AutomationBench-AA",
       "owner": "Artificial Analysis",
       "url": "https://artificialanalysis.ai/evaluations/automationbench-aa",
-      "observedAt": "2026-10-25",
+      "observedAt": "2026-10-31",
       "role": "quality leaf (Professional work)",
       "weightPct": 7.5,
       "coverage": {
-        "available": 9,
-        "cohort": 9
+        "available": 5,
+        "cohort": 5
       },
       "unit": "AA score (0-1)",
       "execution": "AA-run",
@@ -130,15 +130,15 @@
     },
     {
       "id": "omniscience",
-      "name": "AA-Omniscience",
+      "name": "AA-Omniscience v1.1",
       "owner": "Artificial Analysis",
       "url": "https://artificialanalysis.ai/evaluations/omniscience",
-      "observedAt": "2026-10-25",
+      "observedAt": "2026-10-31",
       "role": "quality leaf (Reliability)",
       "weightPct": 7.5,
       "coverage": {
-        "available": 9,
-        "cohort": 9
+        "available": 5,
+        "cohort": 5
       },
       "unit": "AA Omniscience Index (-100 to 100)",
       "execution": "AA-run",
@@ -149,12 +149,12 @@
       "name": "AA-LCR v1.1",
       "owner": "Artificial Analysis",
       "url": "https://artificialanalysis.ai/evaluations/artificial-analysis-long-context-reasoning",
-      "observedAt": "2026-10-25",
+      "observedAt": "2026-10-31",
       "role": "quality leaf (Knowledge and science)",
       "weightPct": 3.75,
       "coverage": {
-        "available": 9,
-        "cohort": 9
+        "available": 5,
+        "cohort": 5
       },
       "unit": "accuracy (0-1)",
       "execution": "AA-run",
@@ -162,47 +162,47 @@
     },
     {
       "id": "hle",
-      "name": "Humanity's Last Exam",
+      "name": "HLE-Diamond",
       "owner": "Artificial Analysis",
-      "url": "https://artificialanalysis.ai/evaluations/humanitys-last-exam",
-      "observedAt": "2026-10-25",
+      "url": "https://artificialanalysis.ai/evaluations/hle-diamond",
+      "observedAt": "2026-10-31",
       "role": "quality leaf (Knowledge and science)",
       "weightPct": 1.25,
       "coverage": {
-        "available": 9,
-        "cohort": 9
+        "available": 5,
+        "cohort": 5
       },
       "unit": "accuracy (0-1)",
       "execution": "AA-run",
       "notes": null
     },
     {
-      "id": "scicode",
-      "name": "SciCode",
+      "id": "tbScience",
+      "name": "Terminal-Bench-Science 0.1",
       "owner": "Artificial Analysis",
-      "url": "https://artificialanalysis.ai/evaluations/scicode",
-      "observedAt": "2026-10-25",
+      "url": "https://artificialanalysis.ai/evaluations/terminal-bench-science",
+      "observedAt": "2026-10-31",
       "role": "quality leaf (Knowledge and science)",
       "weightPct": 1.25,
       "coverage": {
-        "available": 9,
-        "cohort": 9
+        "available": 5,
+        "cohort": 5
       },
-      "unit": "score (0-1)",
+      "unit": "% resolved (0-1)",
       "execution": "AA-run",
       "notes": null
     },
     {
       "id": "critpt",
-      "name": "CritPt",
+      "name": "CritPt v2 (hard subset)",
       "owner": "Artificial Analysis",
-      "url": "https://artificialanalysis.ai/evaluations/critpt",
-      "observedAt": "2026-10-25",
+      "url": "https://artificialanalysis.ai/evaluations/critpt-v2",
+      "observedAt": "2026-10-31",
       "role": "quality leaf (Knowledge and science)",
       "weightPct": 1.25,
       "coverage": {
-        "available": 9,
-        "cohort": 9
+        "available": 5,
+        "cohort": 5
       },
       "unit": "score (0-1)",
       "execution": "AA-run",
@@ -221,10 +221,6 @@
         "label": "AA-Briefcase"
       },
       {
-        "key": "gdpval-aa",
-        "label": "GDPval-AA"
-      },
-      {
         "key": "gdp-pdf",
         "label": "GDP.pdf"
       },
@@ -237,30 +233,24 @@
         "label": "Terminal-Bench 4.0 (AA Index run)"
       },
       {
-        "key": "scicode",
-        "label": "SciCode"
+        "key": "frontiercode-2-0",
+        "label": "FrontierCode 2.0"
       },
       {
-        "key": "artificial-analysis-long-context-reasoning",
-        "label": "AA-LCR"
+        "key": "terminal-bench-science",
+        "label": "Terminal-Bench-Science"
       }
     ],
     "pending": [
       {
-        "key": "frontiercode",
-        "label": "FrontierCode 1.1",
-        "covered": 8,
-        "ranked": 9
-      },
-      {
         "key": "itbench-aa",
         "label": "ITBench-AA",
         "covered": 2,
-        "ranked": 9
+        "ranked": 5
       }
     ],
-    "referencePanelSize": 8,
-    "requiredPanelSize": 6
+    "referencePanelSize": 4,
+    "requiredPanelSize": 4
   },
   "qualitySourceShares": {
     "aa": 0.6600000000000001,
@@ -268,19 +258,19 @@
   },
   "frontier": {
     "status": "complete",
-    "checkedAt": "2026-10-25T09:56:47+00:00",
-    "observedAt": "2026-10-25T09:53:28Z",
+    "checkedAt": "2026-10-31T04:10:00+00:00",
+    "observedAt": "2026-10-30T22:15:18Z",
     "sourceUrl": "https://artificialanalysis.ai/evaluations/artificial-analysis-intelligence-index?eval-cost=intelligence-vs-total-cost",
-    "benchmarkVersion": "Artificial Analysis Intelligence Index v4.3.2",
+    "benchmarkVersion": "Artificial Analysis Intelligence Index v5.0",
     "definition": "Directly observed AA displayed intelligence-versus-total-cost frontier; not recomputed from a subset.",
-    "note": "All 698 catalog models selected; all 190 plotted points and all 19 Pareto path vertices captured from public tooltips (rounded integer Intelligence Index, two-decimal USD total cost) with Playwright on 2026-10-25. Every hover returned a distinct tooltip, so no overlapped-circle resolution was needed. No hidden state or paid export used.",
+    "note": "All 89 catalog models selected; all 82 plotted points and all 18 Pareto path vertices captured from public tooltips (rounded integer Intelligence Index, two-decimal USD total cost) with Playwright on 2026-10-30. Every hover returned a distinct tooltip, so no overlapped-circle resolution was needed. No hidden state or paid export used.",
     "rows": [
       {
         "aaId": "gpt-6-luna-low",
         "name": "GPT-6 Luna (low)",
         "evaluatedVariant": "low",
-        "intelligenceIndex": 22,
-        "totalCostUsd": 10.63,
+        "intelligenceIndex": 10,
+        "totalCostUsd": 9.09,
         "family": "GPT-6 Luna",
         "slug": "gpt-6-luna-low",
         "sourceUrl": "https://artificialanalysis.ai/models/gpt-6-luna-low"
@@ -289,18 +279,28 @@
         "aaId": "gpt-6-luna-medium",
         "name": "GPT-6 Luna (medium)",
         "evaluatedVariant": "medium",
-        "intelligenceIndex": 30,
-        "totalCostUsd": 31.17,
+        "intelligenceIndex": 18,
+        "totalCostUsd": 39.55,
         "family": "GPT-6 Luna",
         "slug": "gpt-6-luna-medium",
         "sourceUrl": "https://artificialanalysis.ai/models/gpt-6-luna-medium"
       },
       {
+        "aaId": "claude-haiku-5-5-low",
+        "name": "Claude Haiku 5.5 (low)",
+        "evaluatedVariant": "low",
+        "intelligenceIndex": 19,
+        "totalCostUsd": 39.6,
+        "family": "Claude Haiku 5.5",
+        "slug": "claude-haiku-5-5-low",
+        "sourceUrl": "https://artificialanalysis.ai/models/claude-haiku-5-5-low"
+      },
+      {
         "aaId": "gpt-6-luna-high",
         "name": "GPT-6 Luna (high)",
         "evaluatedVariant": "high",
-        "intelligenceIndex": 33,
-        "totalCostUsd": 47.85,
+        "intelligenceIndex": 21,
+        "totalCostUsd": 62.58,
         "family": "GPT-6 Luna",
         "slug": "gpt-6-luna-high",
         "sourceUrl": "https://artificialanalysis.ai/models/gpt-6-luna-high"
@@ -309,78 +309,68 @@
         "aaId": "claude-haiku-5-5-medium",
         "name": "Claude Haiku 5.5 (medium)",
         "evaluatedVariant": "medium",
-        "intelligenceIndex": 34,
-        "totalCostUsd": 56.36,
+        "intelligenceIndex": 25,
+        "totalCostUsd": 72.7,
         "family": "Claude Haiku 5.5",
         "slug": "claude-haiku-5-5-medium",
         "sourceUrl": "https://artificialanalysis.ai/models/claude-haiku-5-5-medium"
       },
       {
-        "aaId": "gpt-6-luna-xhigh",
-        "name": "GPT-6 Luna (xhigh)",
-        "evaluatedVariant": "xhigh",
-        "intelligenceIndex": 35,
-        "totalCostUsd": 66.81,
-        "family": "GPT-6 Luna",
-        "slug": "gpt-6-luna-xhigh",
-        "sourceUrl": "https://artificialanalysis.ai/models/gpt-6-luna-xhigh"
-      },
-      {
-        "aaId": "claude-haiku-5-5-high",
-        "name": "Claude Haiku 5.5 (high)",
-        "evaluatedVariant": "high",
-        "intelligenceIndex": 38,
-        "totalCostUsd": 94.07,
-        "family": "Claude Haiku 5.5",
-        "slug": "claude-haiku-5-5-high",
-        "sourceUrl": "https://artificialanalysis.ai/models/claude-haiku-5-5-high"
-      },
-      {
         "aaId": "mimo-v2-6-flash",
         "name": "MiMo-V2.6-Flash",
         "evaluatedVariant": "reasoning",
-        "intelligenceIndex": 38,
-        "totalCostUsd": 109.55,
+        "intelligenceIndex": 27,
+        "totalCostUsd": 106.14,
         "family": "MiMo-V2.6-Flash",
         "slug": "mimo-v2-6-flash",
         "sourceUrl": "https://artificialanalysis.ai/models/mimo-v2-6-flash"
       },
       {
-        "aaId": "gpt-6-luna",
-        "name": "GPT-6 Luna (max)",
-        "evaluatedVariant": "max",
-        "intelligenceIndex": 38,
-        "totalCostUsd": 122.05,
-        "family": "GPT-6 Luna",
-        "slug": "gpt-6-luna",
-        "sourceUrl": "https://artificialanalysis.ai/models/gpt-6-luna"
+        "aaId": "gpt-6-1-terra-low",
+        "name": "GPT-6.1 Terra (low)",
+        "evaluatedVariant": "low",
+        "intelligenceIndex": 29,
+        "totalCostUsd": 111.16,
+        "family": "GPT-6.1 Terra",
+        "slug": "gpt-6-1-terra-low",
+        "sourceUrl": "https://artificialanalysis.ai/models/gpt-6-1-terra-low"
       },
       {
-        "aaId": "claude-haiku-5-5-xhigh",
-        "name": "Claude Haiku 5.5 (xhigh)",
-        "evaluatedVariant": "xhigh",
-        "intelligenceIndex": 41,
-        "totalCostUsd": 157.58,
+        "aaId": "claude-haiku-5-5-high",
+        "name": "Claude Haiku 5.5 (high)",
+        "evaluatedVariant": "high",
+        "intelligenceIndex": 30,
+        "totalCostUsd": 121.41,
         "family": "Claude Haiku 5.5",
-        "slug": "claude-haiku-5-5",
-        "sourceUrl": "https://artificialanalysis.ai/models/claude-haiku-5-5-xhigh"
+        "slug": "claude-haiku-5-5-high",
+        "sourceUrl": "https://artificialanalysis.ai/models/claude-haiku-5-5-high"
       },
       {
-        "aaId": "mimo-v2-6-pro",
-        "name": "MiMo-V2.6-Pro",
-        "evaluatedVariant": "reasoning",
-        "intelligenceIndex": 46,
-        "totalCostUsd": 206.66,
-        "family": "MiMo-V2.6-Pro",
-        "slug": "mimo-v2-6-pro",
-        "sourceUrl": "https://artificialanalysis.ai/models/mimo-v2-6-pro"
+        "aaId": "gpt-6-1-terra-medium",
+        "name": "GPT-6.1 Terra (medium)",
+        "evaluatedVariant": "medium",
+        "intelligenceIndex": 38,
+        "totalCostUsd": 190.36,
+        "family": "GPT-6.1 Terra",
+        "slug": "gpt-6-1-terra-medium",
+        "sourceUrl": "https://artificialanalysis.ai/models/gpt-6-1-terra-medium"
+      },
+      {
+        "aaId": "gpt-6-1-terra-high",
+        "name": "GPT-6.1 Terra (high)",
+        "evaluatedVariant": "high",
+        "intelligenceIndex": 42,
+        "totalCostUsd": 266.79,
+        "family": "GPT-6.1 Terra",
+        "slug": "gpt-6-1-terra-high",
+        "sourceUrl": "https://artificialanalysis.ai/models/gpt-6-1-terra-high"
       },
       {
         "aaId": "gpt-6-1-sol-medium",
         "name": "GPT-6.1 Sol (medium)",
         "evaluatedVariant": "medium",
-        "intelligenceIndex": 48,
-        "totalCostUsd": 361.37,
+        "intelligenceIndex": 46,
+        "totalCostUsd": 388.57,
         "family": "GPT-6.1 Sol",
         "slug": "gpt-6-1-sol-medium",
         "sourceUrl": "https://artificialanalysis.ai/models/gpt-6-1-sol-medium"
@@ -390,7 +380,7 @@
         "name": "GPT-6.1 Sol (high)",
         "evaluatedVariant": "high",
         "intelligenceIndex": 50,
-        "totalCostUsd": 521.32,
+        "totalCostUsd": 573.17,
         "family": "GPT-6.1 Sol",
         "slug": "gpt-6-1-sol-high",
         "sourceUrl": "https://artificialanalysis.ai/models/gpt-6-1-sol-high"
@@ -399,8 +389,8 @@
         "aaId": "gpt-6-1-sol-xhigh",
         "name": "GPT-6.1 Sol (xhigh)",
         "evaluatedVariant": "xhigh",
-        "intelligenceIndex": 51,
-        "totalCostUsd": 662.28,
+        "intelligenceIndex": 52,
+        "totalCostUsd": 717.71,
         "family": "GPT-6.1 Sol",
         "slug": "gpt-6-1-sol-xhigh",
         "sourceUrl": "https://artificialanalysis.ai/models/gpt-6-1-sol-xhigh"
@@ -409,61 +399,51 @@
         "aaId": "gpt-6-1-sol",
         "name": "GPT-6.1 Sol (max)",
         "evaluatedVariant": "max",
-        "intelligenceIndex": 52,
-        "totalCostUsd": 1081.55,
+        "intelligenceIndex": 55,
+        "totalCostUsd": 1123.97,
         "family": "GPT-6.1 Sol",
         "slug": "gpt-6-1-sol",
         "sourceUrl": "https://artificialanalysis.ai/models/gpt-6-1-sol"
       },
       {
-        "aaId": "claude-opus-5-5-high",
-        "name": "Claude Opus 5.5 (high with fallback)",
-        "evaluatedVariant": "high with fallback",
-        "intelligenceIndex": 54,
-        "totalCostUsd": 2172.43,
-        "family": "Claude Opus 5.5",
-        "slug": "claude-opus-5-5-high",
-        "sourceUrl": "https://artificialanalysis.ai/models/claude-opus-5-5-high"
+        "aaId": "gpt-6-astra-high",
+        "name": "GPT-6 Astra (high)",
+        "evaluatedVariant": "high",
+        "intelligenceIndex": 55,
+        "totalCostUsd": 3204.0,
+        "family": "GPT-6 Astra",
+        "slug": "gpt-6-astra-high",
+        "sourceUrl": "https://artificialanalysis.ai/models/gpt-6-astra-high"
       },
       {
-        "aaId": "kimi-k3-1-pro",
-        "name": "Kimi K3.1 Pro",
-        "evaluatedVariant": "reasoning",
+        "aaId": "gpt-6-astra-xhigh",
+        "name": "GPT-6 Astra (xhigh)",
+        "evaluatedVariant": "xhigh",
         "intelligenceIndex": 55,
-        "totalCostUsd": 3117.31,
-        "family": "Kimi K3.1 Pro",
-        "slug": "kimi-k3-1-pro",
-        "sourceUrl": "https://artificialanalysis.ai/models/kimi-k3-1-pro"
+        "totalCostUsd": 3746.22,
+        "family": "GPT-6 Astra",
+        "slug": "gpt-6-astra-xhigh",
+        "sourceUrl": "https://artificialanalysis.ai/models/gpt-6-astra-xhigh"
       },
       {
         "aaId": "claude-opus-5-5-xhigh",
         "name": "Claude Opus 5.5 (xhigh with fallback)",
         "evaluatedVariant": "xhigh with fallback",
-        "intelligenceIndex": 56,
-        "totalCostUsd": 4056.65,
+        "intelligenceIndex": 57,
+        "totalCostUsd": 4765.91,
         "family": "Claude Opus 5.5",
         "slug": "claude-opus-5-5-xhigh",
         "sourceUrl": "https://artificialanalysis.ai/models/claude-opus-5-5-xhigh"
       },
       {
-        "aaId": "claude-sonnet-5-5",
-        "name": "Claude Sonnet 5.5 (max with fallback)",
-        "evaluatedVariant": "max with fallback",
-        "intelligenceIndex": 56,
-        "totalCostUsd": 7259.5,
-        "family": "Claude Sonnet 5.5",
-        "slug": "claude-sonnet-5-5",
-        "sourceUrl": "https://artificialanalysis.ai/models/claude-sonnet-5-5"
-      },
-      {
-        "aaId": "claude-opus-5-5",
-        "name": "Claude Opus 5.5 (max with fallback)",
-        "evaluatedVariant": "max with fallback",
-        "intelligenceIndex": 58,
-        "totalCostUsd": 8708.2,
-        "family": "Claude Opus 5.5",
-        "slug": "claude-opus-5-5",
-        "sourceUrl": "https://artificialanalysis.ai/models/claude-opus-5-5"
+        "aaId": "gemini-4-carbon",
+        "name": "Gemini 4 Carbon (high)",
+        "evaluatedVariant": "high",
+        "intelligenceIndex": 59,
+        "totalCostUsd": 8239.69,
+        "family": "Gemini 4 Carbon",
+        "slug": "gemini-4-carbon",
+        "sourceUrl": "https://artificialanalysis.ai/models/gemini-4-carbon"
       }
     ]
   }

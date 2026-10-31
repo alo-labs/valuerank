@@ -95,6 +95,17 @@ Every input behind the published scores, with the artifact and locator that hold
 | GPT-6.1 Sol (high) | HLE-Diamond | 0.519 | fraction | 51.90 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=gpt-6-1-sol-high].model.hleDiamond` |
 | GPT-6.1 Sol (high) | Terminal-Bench-Science 0.1 | 0.461904761904762 | fraction | 46.19 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=gpt-6-1-sol-high].model.terminalBenchScience` |
 | GPT-6.1 Sol (high) | CritPt v2 (hard subset) | 0.675 | fraction | 67.50 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=gpt-6-1-sol-high].model.critptAgenticHard` |
+| GPT-6.1 Terra (max) | FrontierCode 2.0 | 0.423200505050505 | fraction | 42.32 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=gpt-6-1-terra].model.frontierCode20` |
+| GPT-6.1 Terra (max) | Terminal-Bench 4.0 (AA run) | 55.5555555555556 | percent | 55.56 | mini-SWE-agent | `data/aa/aa_v432_snapshot.json` `pages[model.slug=gpt-6-1-terra].model.terminalBench40` |
+| GPT-6.1 Terra (max) | Bug Hunt Bench | 40.7 | bugs fixed of 105 | 38.76 | GPT-6.1 Terra (max effort) - mean of 3 | `data/bug_hunt.json` `models[modelId=gpt-6.1-terra].fixedOf105` |
+| GPT-6.1 Terra (max) | AI Coding Daily (excl. bug finding) | 52.49 | points of 60 | 87.48 | GPT-6.1-Terra (Max) | `data/swe_tracks.json` `records[modelId=gpt-6.1-terra, leaf=aiCodingDaily].value` |
+| GPT-6.1 Terra (max) | GDPval-AA v2.1 | 1475.63 | Elo | 48.78 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=gpt-6-1-terra].model.gdpval` |
+| GPT-6.1 Terra (max) | AutomationBench-AA | 0.6016762327257726 | fraction | 60.17 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=gpt-6-1-terra].model.automationBenchPartialScore` |
+| GPT-6.1 Terra (max) | AA-Omniscience v1.1 | 29.566666666666666 | AA Omniscience Index | 64.78 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=gpt-6-1-terra].model.omniscience` |
+| GPT-6.1 Terra (max) | AA-LCR v1.1 | 0.826666666666667 | fraction | 82.67 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=gpt-6-1-terra].model.lcr` |
+| GPT-6.1 Terra (max) | HLE-Diamond | 0.473 | fraction | 47.30 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=gpt-6-1-terra].model.hleDiamond` |
+| GPT-6.1 Terra (max) | Terminal-Bench-Science 0.1 | 0.576190476190476 | fraction | 57.62 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=gpt-6-1-terra].model.terminalBenchScience` |
+| GPT-6.1 Terra (max) | CritPt v2 (hard subset) | 0.645 | fraction | 64.50 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=gpt-6-1-terra].model.critptAgenticHard` |
 | GPT-6.1 Sol (medium) | FrontierCode 2.0 | 0.333875757575758 | fraction | 33.39 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=gpt-6-1-sol-medium].model.frontierCode20` |
 | GPT-6.1 Sol (medium) | Terminal-Bench 4.0 (AA run) | 47.979797979798 | percent | 47.98 | mini-SWE-agent | `data/aa/aa_v432_snapshot.json` `pages[model.slug=gpt-6-1-sol-medium].model.terminalBench40` |
 | GPT-6.1 Sol (medium) | Bug Hunt Bench | 29.0 | bugs fixed of 105 | 27.62 | GPT-6.1 Sol (medium effort) - mean of 2 | `data/bug_hunt.json` `models[modelId=gpt-6.1-sol-medium].fixedOf105` |
@@ -117,6 +128,28 @@ Every input behind the published scores, with the artifact and locator that hold
 | Claude Haiku 5.5 (high) | HLE-Diamond | 0.237 | fraction | 23.70 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=claude-haiku-5-5-high].model.hleDiamond` |
 | Claude Haiku 5.5 (high) | Terminal-Bench-Science 0.1 | 0.1 | fraction | 10.00 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=claude-haiku-5-5-high].model.terminalBenchScience` |
 | Claude Haiku 5.5 (high) | CritPt v2 (hard subset) | 0.425 | fraction | 42.50 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=claude-haiku-5-5-high].model.critptAgenticHard` |
+| GPT-6.1 Terra (xhigh) | FrontierCode 2.0 | 0.368595202020202 | fraction | 36.86 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=gpt-6-1-terra-xhigh].model.frontierCode20` |
+| GPT-6.1 Terra (xhigh) | Terminal-Bench 4.0 (AA run) | 46.4646464646465 | percent | 46.46 | mini-SWE-agent | `data/aa/aa_v432_snapshot.json` `pages[model.slug=gpt-6-1-terra-xhigh].model.terminalBench40` |
+| GPT-6.1 Terra (xhigh) | Bug Hunt Bench | 11.3 | bugs fixed of 105 | 10.76 | GPT-6.1 Terra (xhigh effort) - mean of 3 | `data/bug_hunt.json` `models[modelId=gpt-6.1-terra-xhigh].fixedOf105` |
+| GPT-6.1 Terra (xhigh) | AI Coding Daily (excl. bug finding) | 48.13 | points of 60 | 80.22 | GPT-6.1-Terra (Xhigh) | `data/swe_tracks.json` `records[modelId=gpt-6.1-terra-xhigh, leaf=aiCodingDaily].value` |
+| GPT-6.1 Terra (xhigh) | GDPval-AA v2.1 | 1414.87 | Elo | 45.74 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=gpt-6-1-terra-xhigh].model.gdpval` |
+| GPT-6.1 Terra (xhigh) | AutomationBench-AA | 0.5992855956353923 | fraction | 59.93 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=gpt-6-1-terra-xhigh].model.automationBenchPartialScore` |
+| GPT-6.1 Terra (xhigh) | AA-Omniscience v1.1 | 28.933333333333334 | AA Omniscience Index | 64.47 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=gpt-6-1-terra-xhigh].model.omniscience` |
+| GPT-6.1 Terra (xhigh) | AA-LCR v1.1 | 0.816666666666667 | fraction | 81.67 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=gpt-6-1-terra-xhigh].model.lcr` |
+| GPT-6.1 Terra (xhigh) | HLE-Diamond | 0.423 | fraction | 42.30 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=gpt-6-1-terra-xhigh].model.hleDiamond` |
+| GPT-6.1 Terra (xhigh) | Terminal-Bench-Science 0.1 | 0.419047619047619 | fraction | 41.90 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=gpt-6-1-terra-xhigh].model.terminalBenchScience` |
+| GPT-6.1 Terra (xhigh) | CritPt v2 (hard subset) | 0.575 | fraction | 57.50 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=gpt-6-1-terra-xhigh].model.critptAgenticHard` |
+| GPT-6.1 Terra (high) | FrontierCode 2.0 | 0.37457904040404 | fraction | 37.46 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=gpt-6-1-terra-high].model.frontierCode20` |
+| GPT-6.1 Terra (high) | Terminal-Bench 4.0 (AA run) | 41.9191919191919 | percent | 41.92 | mini-SWE-agent | `data/aa/aa_v432_snapshot.json` `pages[model.slug=gpt-6-1-terra-high].model.terminalBench40` |
+| GPT-6.1 Terra (high) | Bug Hunt Bench | 9.7 | bugs fixed of 105 | 9.24 | GPT-6.1 Terra (high effort) - mean of 3 | `data/bug_hunt.json` `models[modelId=gpt-6.1-terra-high].fixedOf105` |
+| GPT-6.1 Terra (high) | AI Coding Daily (excl. bug finding) | 46.69 | points of 60 | 77.82 | GPT-6.1-Terra (High) | `data/swe_tracks.json` `records[modelId=gpt-6.1-terra-high, leaf=aiCodingDaily].value` |
+| GPT-6.1 Terra (high) | GDPval-AA v2.1 | 1352.74 | Elo | 42.64 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=gpt-6-1-terra-high].model.gdpval` |
+| GPT-6.1 Terra (high) | AutomationBench-AA | 0.584605963496433 | fraction | 58.46 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=gpt-6-1-terra-high].model.automationBenchPartialScore` |
+| GPT-6.1 Terra (high) | AA-Omniscience v1.1 | 27.766666666666666 | AA Omniscience Index | 63.88 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=gpt-6-1-terra-high].model.omniscience` |
+| GPT-6.1 Terra (high) | AA-LCR v1.1 | 0.823333333333333 | fraction | 82.33 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=gpt-6-1-terra-high].model.lcr` |
+| GPT-6.1 Terra (high) | HLE-Diamond | 0.354 | fraction | 35.40 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=gpt-6-1-terra-high].model.hleDiamond` |
+| GPT-6.1 Terra (high) | Terminal-Bench-Science 0.1 | 0.333333333333333 | fraction | 33.33 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=gpt-6-1-terra-high].model.terminalBenchScience` |
+| GPT-6.1 Terra (high) | CritPt v2 (hard subset) | 0.605 | fraction | 60.50 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=gpt-6-1-terra-high].model.critptAgenticHard` |
 | GPT-6 Astra (high) | FrontierCode 2.0 | 0.401351515151515 | fraction | 40.14 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=gpt-6-astra-high].model.frontierCode20` |
 | GPT-6 Astra (high) | Terminal-Bench 4.0 (AA run) | 54.040404040404 | percent | 54.04 | mini-SWE-agent | `data/aa/aa_v432_snapshot.json` `pages[model.slug=gpt-6-astra-high].model.terminalBench40` |
 | GPT-6 Astra (high) | Bug Hunt Bench | 35.0 | bugs fixed of 105 | 33.33 | GPT-6 Astra (high effort) | `data/bug_hunt.json` `models[modelId=gpt-6-astra-high].fixedOf105` |
@@ -139,6 +172,17 @@ Every input behind the published scores, with the artifact and locator that hold
 | Claude Haiku 5.5 (medium) | HLE-Diamond | 0.168 | fraction | 16.80 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=claude-haiku-5-5-medium].model.hleDiamond` |
 | Claude Haiku 5.5 (medium) | Terminal-Bench-Science 0.1 | 0.0714285714285714 | fraction | 7.14 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=claude-haiku-5-5-medium].model.terminalBenchScience` |
 | Claude Haiku 5.5 (medium) | CritPt v2 (hard subset) | 0.3 | fraction | 30.00 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=claude-haiku-5-5-medium].model.critptAgenticHard` |
+| GPT-6.1 Terra (medium) | FrontierCode 2.0 | 0.345359343434343 | fraction | 34.54 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=gpt-6-1-terra-medium].model.frontierCode20` |
+| GPT-6.1 Terra (medium) | Terminal-Bench 4.0 (AA run) | 32.3232323232323 | percent | 32.32 | mini-SWE-agent | `data/aa/aa_v432_snapshot.json` `pages[model.slug=gpt-6-1-terra-medium].model.terminalBench40` |
+| GPT-6.1 Terra (medium) | Bug Hunt Bench | 7.3 | bugs fixed of 105 | 6.95 | GPT-6.1 Terra (medium effort) - mean of 3 | `data/bug_hunt.json` `models[modelId=gpt-6.1-terra-medium].fixedOf105` |
+| GPT-6.1 Terra (medium) | AI Coding Daily (excl. bug finding) | 46.9 | points of 60 | 78.17 | GPT-6.1-Terra (Medium) | `data/swe_tracks.json` `records[modelId=gpt-6.1-terra-medium, leaf=aiCodingDaily].value` |
+| GPT-6.1 Terra (medium) | GDPval-AA v2.1 | 1324.7 | Elo | 41.23 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=gpt-6-1-terra-medium].model.gdpval` |
+| GPT-6.1 Terra (medium) | AutomationBench-AA | 0.5780171778957812 | fraction | 57.80 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=gpt-6-1-terra-medium].model.automationBenchPartialScore` |
+| GPT-6.1 Terra (medium) | AA-Omniscience v1.1 | 26.6 | AA Omniscience Index | 63.30 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=gpt-6-1-terra-medium].model.omniscience` |
+| GPT-6.1 Terra (medium) | AA-LCR v1.1 | 0.806666666666667 | fraction | 80.67 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=gpt-6-1-terra-medium].model.lcr` |
+| GPT-6.1 Terra (medium) | HLE-Diamond | 0.313 | fraction | 31.30 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=gpt-6-1-terra-medium].model.hleDiamond` |
+| GPT-6.1 Terra (medium) | Terminal-Bench-Science 0.1 | 0.247619047619048 | fraction | 24.76 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=gpt-6-1-terra-medium].model.terminalBenchScience` |
+| GPT-6.1 Terra (medium) | CritPt v2 (hard subset) | 0.56 | fraction | 56.00 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=gpt-6-1-terra-medium].model.critptAgenticHard` |
 | GPT-6.1 Sol (low) | FrontierCode 2.0 | 0.201560858585859 | fraction | 20.16 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=gpt-6-1-sol-low].model.frontierCode20` |
 | GPT-6.1 Sol (low) | Terminal-Bench 4.0 (AA run) | 30.808080808080803 | percent | 30.81 | mini-SWE-agent | `data/aa/aa_v432_snapshot.json` `pages[model.slug=gpt-6-1-sol-low].model.terminalBench40` |
 | GPT-6.1 Sol (low) | Bug Hunt Bench | 22.5 | bugs fixed of 105 | 21.43 | GPT-6.1 Sol (low effort) - mean of 2 | `data/bug_hunt.json` `models[modelId=gpt-6.1-sol-low].fixedOf105` |
@@ -173,17 +217,6 @@ Every input behind the published scores, with the artifact and locator that hold
 | GPT-6 Luna (high) | HLE-Diamond | 0.156 | fraction | 15.60 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=gpt-6-luna-high].model.hleDiamond` |
 | GPT-6 Luna (high) | Terminal-Bench-Science 0.1 | 0.0285714285714286 | fraction | 2.86 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=gpt-6-luna-high].model.terminalBenchScience` |
 | GPT-6 Luna (high) | CritPt v2 (hard subset) | 0.305 | fraction | 30.50 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=gpt-6-luna-high].model.critptAgenticHard` |
-| GPT-6.1 Terra (max) | FrontierCode 2.0 | 0.423200505050505 | fraction | 42.32 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=gpt-6-1-terra].model.frontierCode20` |
-| GPT-6.1 Terra (max) | Terminal-Bench 4.0 (AA run) | 55.5555555555556 | percent | 55.56 | mini-SWE-agent | `data/aa/aa_v432_snapshot.json` `pages[model.slug=gpt-6-1-terra].model.terminalBench40` |
-| GPT-6.1 Terra (max) | Bug Hunt Bench | 40.7 | bugs fixed of 105 | 38.76 | GPT-6.1 Terra (max effort) - mean of 3 | `data/bug_hunt.json` `models[modelId=gpt-6.1-terra].fixedOf105` |
-| GPT-6.1 Terra (max) | AI Coding Daily (excl. bug finding) | 52.49 | points of 60 | 87.48 | GPT-6.1-Terra (Max) | `data/swe_tracks.json` `records[modelId=gpt-6.1-terra, leaf=aiCodingDaily].value` |
-| GPT-6.1 Terra (max) | GDPval-AA v2.1 | 1475.63 | Elo | 48.78 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=gpt-6-1-terra].model.gdpval` |
-| GPT-6.1 Terra (max) | AutomationBench-AA | 0.6016762327257726 | fraction | 60.17 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=gpt-6-1-terra].model.automationBenchPartialScore` |
-| GPT-6.1 Terra (max) | AA-Omniscience v1.1 | 29.566666666666666 | AA Omniscience Index | 64.78 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=gpt-6-1-terra].model.omniscience` |
-| GPT-6.1 Terra (max) | AA-LCR v1.1 | 0.826666666666667 | fraction | 82.67 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=gpt-6-1-terra].model.lcr` |
-| GPT-6.1 Terra (max) | HLE-Diamond | 0.473 | fraction | 47.30 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=gpt-6-1-terra].model.hleDiamond` |
-| GPT-6.1 Terra (max) | Terminal-Bench-Science 0.1 | 0.576190476190476 | fraction | 57.62 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=gpt-6-1-terra].model.terminalBenchScience` |
-| GPT-6.1 Terra (max) | CritPt v2 (hard subset) | 0.645 | fraction | 64.50 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=gpt-6-1-terra].model.critptAgenticHard` |
 | GPT-6 Luna (medium) | FrontierCode 2.0 | 0.127693181818182 | fraction | 12.77 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=gpt-6-luna-medium].model.frontierCode20` |
 | GPT-6 Luna (medium) | Terminal-Bench 4.0 (AA run) | 2.52525252525253 | percent | 2.53 | mini-SWE-agent | `data/aa/aa_v432_snapshot.json` `pages[model.slug=gpt-6-luna-medium].model.terminalBench40` |
 | GPT-6 Luna (medium) | Bug Hunt Bench | 4.0 | bugs fixed of 105 | 3.81 | GPT-6 Luna (medium effort) | `data/bug_hunt.json` `models[modelId=gpt-6-luna-medium].fixedOf105` |
@@ -195,39 +228,6 @@ Every input behind the published scores, with the artifact and locator that hold
 | GPT-6 Luna (medium) | HLE-Diamond | 0.151 | fraction | 15.10 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=gpt-6-luna-medium].model.hleDiamond` |
 | GPT-6 Luna (medium) | Terminal-Bench-Science 0.1 | 0.0142857142857143 | fraction | 1.43 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=gpt-6-luna-medium].model.terminalBenchScience` |
 | GPT-6 Luna (medium) | CritPt v2 (hard subset) | 0.26 | fraction | 26.00 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=gpt-6-luna-medium].model.critptAgenticHard` |
-| GPT-6.1 Terra (xhigh) | FrontierCode 2.0 | 0.368595202020202 | fraction | 36.86 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=gpt-6-1-terra-xhigh].model.frontierCode20` |
-| GPT-6.1 Terra (xhigh) | Terminal-Bench 4.0 (AA run) | 46.4646464646465 | percent | 46.46 | mini-SWE-agent | `data/aa/aa_v432_snapshot.json` `pages[model.slug=gpt-6-1-terra-xhigh].model.terminalBench40` |
-| GPT-6.1 Terra (xhigh) | Bug Hunt Bench | 11.3 | bugs fixed of 105 | 10.76 | GPT-6.1 Terra (xhigh effort) - mean of 3 | `data/bug_hunt.json` `models[modelId=gpt-6.1-terra-xhigh].fixedOf105` |
-| GPT-6.1 Terra (xhigh) | AI Coding Daily (excl. bug finding) | 48.13 | points of 60 | 80.22 | GPT-6.1-Terra (Xhigh) | `data/swe_tracks.json` `records[modelId=gpt-6.1-terra-xhigh, leaf=aiCodingDaily].value` |
-| GPT-6.1 Terra (xhigh) | GDPval-AA v2.1 | 1414.87 | Elo | 45.74 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=gpt-6-1-terra-xhigh].model.gdpval` |
-| GPT-6.1 Terra (xhigh) | AutomationBench-AA | 0.5992855956353923 | fraction | 59.93 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=gpt-6-1-terra-xhigh].model.automationBenchPartialScore` |
-| GPT-6.1 Terra (xhigh) | AA-Omniscience v1.1 | 28.933333333333334 | AA Omniscience Index | 64.47 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=gpt-6-1-terra-xhigh].model.omniscience` |
-| GPT-6.1 Terra (xhigh) | AA-LCR v1.1 | 0.816666666666667 | fraction | 81.67 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=gpt-6-1-terra-xhigh].model.lcr` |
-| GPT-6.1 Terra (xhigh) | HLE-Diamond | 0.423 | fraction | 42.30 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=gpt-6-1-terra-xhigh].model.hleDiamond` |
-| GPT-6.1 Terra (xhigh) | Terminal-Bench-Science 0.1 | 0.419047619047619 | fraction | 41.90 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=gpt-6-1-terra-xhigh].model.terminalBenchScience` |
-| GPT-6.1 Terra (xhigh) | CritPt v2 (hard subset) | 0.575 | fraction | 57.50 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=gpt-6-1-terra-xhigh].model.critptAgenticHard` |
-| GPT-6.1 Terra (high) | FrontierCode 2.0 | 0.37457904040404 | fraction | 37.46 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=gpt-6-1-terra-high].model.frontierCode20` |
-| GPT-6.1 Terra (high) | Terminal-Bench 4.0 (AA run) | 41.9191919191919 | percent | 41.92 | mini-SWE-agent | `data/aa/aa_v432_snapshot.json` `pages[model.slug=gpt-6-1-terra-high].model.terminalBench40` |
-| GPT-6.1 Terra (high) | Bug Hunt Bench | 9.7 | bugs fixed of 105 | 9.24 | GPT-6.1 Terra (high effort) - mean of 3 | `data/bug_hunt.json` `models[modelId=gpt-6.1-terra-high].fixedOf105` |
-| GPT-6.1 Terra (high) | AI Coding Daily (excl. bug finding) | 46.69 | points of 60 | 77.82 | GPT-6.1-Terra (High) | `data/swe_tracks.json` `records[modelId=gpt-6.1-terra-high, leaf=aiCodingDaily].value` |
-| GPT-6.1 Terra (high) | GDPval-AA v2.1 | 1352.74 | Elo | 42.64 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=gpt-6-1-terra-high].model.gdpval` |
-| GPT-6.1 Terra (high) | AutomationBench-AA | 0.584605963496433 | fraction | 58.46 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=gpt-6-1-terra-high].model.automationBenchPartialScore` |
-| GPT-6.1 Terra (high) | AA-Omniscience v1.1 | 27.766666666666666 | AA Omniscience Index | 63.88 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=gpt-6-1-terra-high].model.omniscience` |
-| GPT-6.1 Terra (high) | AA-LCR v1.1 | 0.823333333333333 | fraction | 82.33 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=gpt-6-1-terra-high].model.lcr` |
-| GPT-6.1 Terra (high) | HLE-Diamond | 0.354 | fraction | 35.40 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=gpt-6-1-terra-high].model.hleDiamond` |
-| GPT-6.1 Terra (high) | Terminal-Bench-Science 0.1 | 0.333333333333333 | fraction | 33.33 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=gpt-6-1-terra-high].model.terminalBenchScience` |
-| GPT-6.1 Terra (high) | CritPt v2 (hard subset) | 0.605 | fraction | 60.50 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=gpt-6-1-terra-high].model.critptAgenticHard` |
-| GPT-6.1 Terra (medium) | FrontierCode 2.0 | 0.345359343434343 | fraction | 34.54 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=gpt-6-1-terra-medium].model.frontierCode20` |
-| GPT-6.1 Terra (medium) | Terminal-Bench 4.0 (AA run) | 32.3232323232323 | percent | 32.32 | mini-SWE-agent | `data/aa/aa_v432_snapshot.json` `pages[model.slug=gpt-6-1-terra-medium].model.terminalBench40` |
-| GPT-6.1 Terra (medium) | Bug Hunt Bench | 7.3 | bugs fixed of 105 | 6.95 | GPT-6.1 Terra (medium effort) - mean of 3 | `data/bug_hunt.json` `models[modelId=gpt-6.1-terra-medium].fixedOf105` |
-| GPT-6.1 Terra (medium) | AI Coding Daily (excl. bug finding) | 46.9 | points of 60 | 78.17 | GPT-6.1-Terra (Medium) | `data/swe_tracks.json` `records[modelId=gpt-6.1-terra-medium, leaf=aiCodingDaily].value` |
-| GPT-6.1 Terra (medium) | GDPval-AA v2.1 | 1324.7 | Elo | 41.23 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=gpt-6-1-terra-medium].model.gdpval` |
-| GPT-6.1 Terra (medium) | AutomationBench-AA | 0.5780171778957812 | fraction | 57.80 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=gpt-6-1-terra-medium].model.automationBenchPartialScore` |
-| GPT-6.1 Terra (medium) | AA-Omniscience v1.1 | 26.6 | AA Omniscience Index | 63.30 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=gpt-6-1-terra-medium].model.omniscience` |
-| GPT-6.1 Terra (medium) | AA-LCR v1.1 | 0.806666666666667 | fraction | 80.67 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=gpt-6-1-terra-medium].model.lcr` |
-| GPT-6.1 Terra (medium) | HLE-Diamond | 0.313 | fraction | 31.30 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=gpt-6-1-terra-medium].model.hleDiamond` |
-| GPT-6.1 Terra (medium) | Terminal-Bench-Science 0.1 | 0.247619047619048 | fraction | 24.76 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=gpt-6-1-terra-medium].model.terminalBenchScience` |
-| GPT-6.1 Terra (medium) | CritPt v2 (hard subset) | 0.56 | fraction | 56.00 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=gpt-6-1-terra-medium].model.critptAgenticHard` |
 | Claude Opus 5.5 (xhigh) | FrontierCode 2.0 | 0.437547474747475 | fraction | 43.75 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=claude-opus-5-5-xhigh].model.frontierCode20` |
 | Claude Opus 5.5 (xhigh) | Terminal-Bench 4.0 (AA run) | 59.5959595959596 | percent | 59.60 | mini-SWE-agent | `data/aa/aa_v432_snapshot.json` `pages[model.slug=claude-opus-5-5-xhigh].model.terminalBench40` |
 | Claude Opus 5.5 (xhigh) | Bug Hunt Bench | 36.0 | bugs fixed of 105 | 34.29 | Opus 5.5 (xhigh effort) - mean of 3 | `data/bug_hunt.json` `models[modelId=claude-opus-5-5-xhigh].fixedOf105` |
@@ -268,16 +268,6 @@ Every input behind the published scores, with the artifact and locator that hold
 | Claude Haiku 5.5 (low) | HLE-Diamond | 0.141 | fraction | 14.10 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=claude-haiku-5-5-low].model.hleDiamond` |
 | Claude Haiku 5.5 (low) | Terminal-Bench-Science 0.1 | 0.019047619047619 | fraction | 1.90 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=claude-haiku-5-5-low].model.terminalBenchScience` |
 | Claude Haiku 5.5 (low) | CritPt v2 (hard subset) | 0.215 | fraction | 21.50 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=claude-haiku-5-5-low].model.critptAgenticHard` |
-| GPT-6 Luna (low) | FrontierCode 2.0 | 0.0219545454545455 | fraction | 2.20 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=gpt-6-luna-low].model.frontierCode20` |
-| GPT-6 Luna (low) | Terminal-Bench 4.0 (AA run) | 0.0 | percent | 0.00 | mini-SWE-agent | `data/aa/aa_v432_snapshot.json` `pages[model.slug=gpt-6-luna-low].model.terminalBench40` |
-| GPT-6 Luna (low) | Bug Hunt Bench | 4.0 | bugs fixed of 105 | 3.81 | GPT-6 Luna (low effort) | `data/bug_hunt.json` `models[modelId=gpt-6-luna-low].fixedOf105` |
-| GPT-6 Luna (low) | GDPval-AA v2.1 | 1040.48 | Elo | 27.02 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=gpt-6-luna-low].model.gdpval` |
-| GPT-6 Luna (low) | AutomationBench-AA | 0.12049187272690505 | fraction | 12.05 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=gpt-6-luna-low].model.automationBenchPartialScore` |
-| GPT-6 Luna (low) | AA-Omniscience v1.1 | -18.1 | AA Omniscience Index | 40.95 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=gpt-6-luna-low].model.omniscience` |
-| GPT-6 Luna (low) | AA-LCR v1.1 | 0.74 | fraction | 74.00 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=gpt-6-luna-low].model.lcr` |
-| GPT-6 Luna (low) | HLE-Diamond | 0.102 | fraction | 10.20 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=gpt-6-luna-low].model.hleDiamond` |
-| GPT-6 Luna (low) | Terminal-Bench-Science 0.1 | 0.00952380952380952 | fraction | 0.95 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=gpt-6-luna-low].model.terminalBenchScience` |
-| GPT-6 Luna (low) | CritPt v2 (hard subset) | 0.095 | fraction | 9.50 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=gpt-6-luna-low].model.critptAgenticHard` |
 | GPT-6.1 Terra (low) | FrontierCode 2.0 | 0.244852272727273 | fraction | 24.49 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=gpt-6-1-terra-low].model.frontierCode20` |
 | GPT-6.1 Terra (low) | Terminal-Bench 4.0 (AA run) | 15.151515151515198 | percent | 15.15 | mini-SWE-agent | `data/aa/aa_v432_snapshot.json` `pages[model.slug=gpt-6-1-terra-low].model.terminalBench40` |
 | GPT-6.1 Terra (low) | Bug Hunt Bench | 6 | bugs fixed of 105 | 5.71 | GPT-6.1 Terra (low effort) - mean of 3 | `data/bug_hunt.json` `models[modelId=gpt-6.1-terra-low].fixedOf105` |
@@ -288,6 +278,16 @@ Every input behind the published scores, with the artifact and locator that hold
 | GPT-6.1 Terra (low) | HLE-Diamond | 0.249 | fraction | 24.90 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=gpt-6-1-terra-low].model.hleDiamond` |
 | GPT-6.1 Terra (low) | Terminal-Bench-Science 0.1 | 0.0761904761904762 | fraction | 7.62 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=gpt-6-1-terra-low].model.terminalBenchScience` |
 | GPT-6.1 Terra (low) | CritPt v2 (hard subset) | 0.485 | fraction | 48.50 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=gpt-6-1-terra-low].model.critptAgenticHard` |
+| GPT-6 Luna (low) | FrontierCode 2.0 | 0.0219545454545455 | fraction | 2.20 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=gpt-6-luna-low].model.frontierCode20` |
+| GPT-6 Luna (low) | Terminal-Bench 4.0 (AA run) | 0.0 | percent | 0.00 | mini-SWE-agent | `data/aa/aa_v432_snapshot.json` `pages[model.slug=gpt-6-luna-low].model.terminalBench40` |
+| GPT-6 Luna (low) | Bug Hunt Bench | 4.0 | bugs fixed of 105 | 3.81 | GPT-6 Luna (low effort) | `data/bug_hunt.json` `models[modelId=gpt-6-luna-low].fixedOf105` |
+| GPT-6 Luna (low) | GDPval-AA v2.1 | 1040.48 | Elo | 27.02 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=gpt-6-luna-low].model.gdpval` |
+| GPT-6 Luna (low) | AutomationBench-AA | 0.12049187272690505 | fraction | 12.05 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=gpt-6-luna-low].model.automationBenchPartialScore` |
+| GPT-6 Luna (low) | AA-Omniscience v1.1 | -18.1 | AA Omniscience Index | 40.95 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=gpt-6-luna-low].model.omniscience` |
+| GPT-6 Luna (low) | AA-LCR v1.1 | 0.74 | fraction | 74.00 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=gpt-6-luna-low].model.lcr` |
+| GPT-6 Luna (low) | HLE-Diamond | 0.102 | fraction | 10.20 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=gpt-6-luna-low].model.hleDiamond` |
+| GPT-6 Luna (low) | Terminal-Bench-Science 0.1 | 0.00952380952380952 | fraction | 0.95 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=gpt-6-luna-low].model.terminalBenchScience` |
+| GPT-6 Luna (low) | CritPt v2 (hard subset) | 0.095 | fraction | 9.50 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=gpt-6-luna-low].model.critptAgenticHard` |
 
 ## Leaf gap fills and searches (O36)
 
@@ -668,6 +668,26 @@ Route evidence as of 2026-10-25. Full allocation regimes, workloads and notes ar
 | ChatGPT Pro 100 $100 · common GPT assumption | GPT-6 Luna (high) | $100.00 | 10.55× | Provisional assumption | GPT-6.1 Sol | 2026-10-06 | [Source](https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x) |
 | ChatGPT Pro 200 $200 · common GPT assumption | GPT-6 Luna (high) | $200.00 | 10.42× | Provisional assumption | GPT-6.1 Sol | 2026-10-06 | [Source](https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x) |
 | ChatGPT Pro 500 $500 · common GPT assumption | GPT-6 Luna (high) | $500.00 | 10.772× | Provisional assumption | GPT-6.1 Sol | 2026-10-06 | [Source](https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x) |
+| ChatGPT Plus $20 · common GPT assumption | GPT-6.1 Terra (low) | $20.00 | 8.1× | Provisional assumption | GPT-6 Astra | 2026-10-06 | [Source](https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x) |
+| ChatGPT Pro 100 $100 · common GPT assumption | GPT-6.1 Terra (low) | $100.00 | 10.55× | Provisional assumption | GPT-6.1 Sol | 2026-10-06 | [Source](https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x) |
+| ChatGPT Pro 200 $200 · common GPT assumption | GPT-6.1 Terra (low) | $200.00 | 10.42× | Provisional assumption | GPT-6.1 Sol | 2026-10-06 | [Source](https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x) |
+| ChatGPT Pro 500 $500 · common GPT assumption | GPT-6.1 Terra (low) | $500.00 | 10.772× | Provisional assumption | GPT-6.1 Sol | 2026-10-06 | [Source](https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x) |
+| ChatGPT Plus $20 · common GPT assumption | GPT-6.1 Terra (medium) | $20.00 | 8.1× | Provisional assumption | GPT-6 Astra | 2026-10-06 | [Source](https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x) |
+| ChatGPT Pro 100 $100 · common GPT assumption | GPT-6.1 Terra (medium) | $100.00 | 10.55× | Provisional assumption | GPT-6.1 Sol | 2026-10-06 | [Source](https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x) |
+| ChatGPT Pro 200 $200 · common GPT assumption | GPT-6.1 Terra (medium) | $200.00 | 10.42× | Provisional assumption | GPT-6.1 Sol | 2026-10-06 | [Source](https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x) |
+| ChatGPT Pro 500 $500 · common GPT assumption | GPT-6.1 Terra (medium) | $500.00 | 10.772× | Provisional assumption | GPT-6.1 Sol | 2026-10-06 | [Source](https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x) |
+| ChatGPT Plus $20 · common GPT assumption | GPT-6.1 Terra (high) | $20.00 | 8.1× | Provisional assumption | GPT-6 Astra | 2026-10-06 | [Source](https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x) |
+| ChatGPT Pro 100 $100 · common GPT assumption | GPT-6.1 Terra (high) | $100.00 | 10.55× | Provisional assumption | GPT-6.1 Sol | 2026-10-06 | [Source](https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x) |
+| ChatGPT Pro 200 $200 · common GPT assumption | GPT-6.1 Terra (high) | $200.00 | 10.42× | Provisional assumption | GPT-6.1 Sol | 2026-10-06 | [Source](https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x) |
+| ChatGPT Pro 500 $500 · common GPT assumption | GPT-6.1 Terra (high) | $500.00 | 10.772× | Provisional assumption | GPT-6.1 Sol | 2026-10-06 | [Source](https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x) |
+| ChatGPT Plus $20 · common GPT assumption | GPT-6.1 Terra (xhigh) | $20.00 | 8.1× | Provisional assumption | GPT-6 Astra | 2026-10-06 | [Source](https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x) |
+| ChatGPT Pro 100 $100 · common GPT assumption | GPT-6.1 Terra (xhigh) | $100.00 | 10.55× | Provisional assumption | GPT-6.1 Sol | 2026-10-06 | [Source](https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x) |
+| ChatGPT Pro 200 $200 · common GPT assumption | GPT-6.1 Terra (xhigh) | $200.00 | 10.42× | Provisional assumption | GPT-6.1 Sol | 2026-10-06 | [Source](https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x) |
+| ChatGPT Pro 500 $500 · common GPT assumption | GPT-6.1 Terra (xhigh) | $500.00 | 10.772× | Provisional assumption | GPT-6.1 Sol | 2026-10-06 | [Source](https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x) |
+| ChatGPT Plus $20 · common GPT assumption | GPT-6.1 Terra (max) | $20.00 | 8.1× | Provisional assumption | GPT-6 Astra | 2026-10-06 | [Source](https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x) |
+| ChatGPT Pro 100 $100 · common GPT assumption | GPT-6.1 Terra (max) | $100.00 | 10.55× | Provisional assumption | GPT-6.1 Sol | 2026-10-06 | [Source](https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x) |
+| ChatGPT Pro 200 $200 · common GPT assumption | GPT-6.1 Terra (max) | $200.00 | 10.42× | Provisional assumption | GPT-6.1 Sol | 2026-10-06 | [Source](https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x) |
+| ChatGPT Pro 500 $500 · common GPT assumption | GPT-6.1 Terra (max) | $500.00 | 10.772× | Provisional assumption | GPT-6.1 Sol | 2026-10-06 | [Source](https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x) |
 | ChatGPT Plus $20 · common GPT assumption | GPT-6 Luna (xhigh) | $20.00 | 8.1× | Provisional assumption | GPT-6 Astra | 2026-10-06 | [Source](https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x) |
 | ChatGPT Pro 100 $100 · common GPT assumption | GPT-6 Luna (xhigh) | $100.00 | 10.55× | Provisional assumption | GPT-6.1 Sol | 2026-10-06 | [Source](https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x) |
 | ChatGPT Pro 200 $200 · common GPT assumption | GPT-6 Luna (xhigh) | $200.00 | 10.42× | Provisional assumption | GPT-6.1 Sol | 2026-10-06 | [Source](https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x) |
@@ -699,7 +719,7 @@ Each routed row's amount with what it measures, how it was derived and which obj
 
 ## Evidence bundle
 
-Bundle hash `60681df81a0088404215536cad21f4a3be6bfd56375b756112c305319e325c61`: every published output is rebuilt from these artifacts at the pinned publication clock (npm run verify:docs), never from live pages.
+Bundle hash `f8df34276e3bec8b99d6cec6c0433f2e64ed7afaddfe364f1e0c3796831c7854`: every published output is rebuilt from these artifacts at the pinned publication clock (npm run verify:docs), never from live pages.
 
 | Key | Artifact | SHA-256 | Captured | Extractor |
 |---|---|---|---|---|
@@ -710,12 +730,12 @@ Bundle hash `60681df81a0088404215536cad21f4a3be6bfd56375b756112c305319e325c61`: 
 | costCharts | `data/aa/cost_charts_capture.json` | `bc388a1fd7a8b6bcb511df340377fa956142e632dfd4638b6fc8c548556458ec` | 2026-10-31T04:07:51.285Z | scripts/capture-aa-cost-charts.js |
 | configurationMap | `data/v3_configuration_map.json` | `95479db087ce6b5763e747379d1955740176758a46161e052073dc28c7ba1cc6` | 2026-10-25 | editorial pinning from the research capture |
 | codingAgentsManifest | `data/aa/coding_agents_manifest.json` | `08ca9d896577ca79e038817204322aeb55d7b5a2d2978b8fc6dc381da356fe95` | 2026-10-30 | editorial manifest of every AA Coding Agent Index row, reviewed at each capture (O64) |
-| frontierCapture | `data/aa_frontier_capture.json` | `5949430918f3a6e9e9d73af3c38a34aac9a00d96d9cd9b6c1436ae491f894b56` | 2026-10-30T22:15:18Z | browser capture of AA's Intelligence Index vs cost chart from public tooltips (frontier membership, E195; unevaluated cheaper siblings, E201) |
+| frontierCapture | `data/aa_frontier_capture.json` | `a71eec4d45a450704511cea0b240cc7bae7609b29107276fb770c590707e405f` | 2026-10-30T22:15:18Z | browser capture of AA's Intelligence Index vs cost chart from public tooltips (frontier membership, E195; unevaluated cheaper siblings, E201) |
 | roster | `data/aa_mapping.json` | `0cbc840a7a37fc12596b3189b3ecc0b1abff86eb4996ac25c61174b0a4a7641a` | 2026-10-30T22:15:18Z | editorial roster: every configuration AA plots on its rendered frontier or within 3 Index points of it (O51) |
 | bugHuntScoreboard | `data/bug_hunt_scoreboard.json` | `2e0f1eab15f219ba491af8c4ca694197c9bed96546b4157c06ca1414f9d6e8dc` | 2026-10-30T22:19:18Z | the owner's combined scoreboard at the pinned commit (O31 roster check) |
-| planRoutes | `data/plan_cost_routes.json` | `4650cac3c57f51a71bec491ceedbd10729eca0c43f65eb4ce05d9070e5fff4b9` | 2026-10-25 | editorial Plan evidence registry |
+| planRoutes | `data/plan_cost_routes.json` | `21a958779afbc7ce5fc14ae7e009a39dbc7191bf8f8459b790fdc26308a868bb` | 2026-10-25 | editorial Plan evidence registry |
 | priceRecords | `data/price_records.json` | `fe550f7770759a6219e671838f28b42d3b7d7db0fa5f7ab489e08a75605421f8` | 2026-10-31T04:10:00Z | editorial E141 price-record registry (superseded and promotional tariffs) |
-| leafEvidence | `data/leaf_evidence.json` | `a38617377bfb3245cd604d27d4fbc7d2d74dd51c3c8b2dc3d17028d570cac3ea` | 2026-10-30 | editorial supplementary leaf evidence and the exhaustive-search log (O36) |
+| leafEvidence | `data/leaf_evidence.json` | `b1cd6ea2e7d8d7c4f631a3f3bc384482f87cf76dc78d4ad723c5c12ffd052668` | 2026-10-30 | editorial supplementary leaf evidence and the exhaustive-search log (O36) |
 | cognitionFrontierCode | `data/cognition_frontiercode.json` | `ff0040778b7bdf69c705ad7474f771fb5e53cfaf5cf8573b3a4614153543d75f` | 2026-10-23 | Cognition's FrontierCode leaderboard data (https://cognition.com/data/frontiercode-leaderboard/data.json), captured unchanged (O37) |
 | sweTracks | `data/swe_tracks.json` | `8b65fb2afbceb90e42de2c90df921294dc234f5d8db7d52a2e7d2ecc879bfde5` | 2026-10-30T22:22:49.248Z | research/2026-10-23-swe-benchmarks/build_swe_tracks.py from the verified coverage captures (O53-O55) |
 | planReports | `data/plan_reports.json` | `c017edb8177d638c98e5e3d55b7e94b2d14335f19283b6d90c331ee54550cfc6` | 2026-10-25 | editorial table of every O71 user report with the facts E270 needs; the build derives admission from it (O81) |

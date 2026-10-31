@@ -26,7 +26,30 @@
   "duplicate_resolution": "None needed: every circle-centre hover returned a distinct tooltip (82 distinct for 82 circles).",
   "comparison_to_previous_capture": {
     "previous_inventory": "data/aa_frontier_capture.json captured 2026-10-25T09:53:28Z (Intelligence Index v4.3.2)",
-    "basis": "AA replaced Intelligence Index v4.3.2 with v5.0 (owner decision O132): the Index, its evaluations and the chart's universe changed, so the frontier is re-read rather than compared vertex by vertex."
+    "previous_capture_date": "2026-10-25",
+    "previous_vertex_count": 19,
+    "current_vertex_count": 18,
+    "frontier_membership_changed": true,
+    "added": [
+      "Claude Haiku 5.5 (low)",
+      "GPT-6.1 Terra (low)",
+      "GPT-6.1 Terra (medium)",
+      "GPT-6.1 Terra (high)",
+      "GPT-6 Astra (high)",
+      "GPT-6 Astra (xhigh)",
+      "Gemini 4 Carbon (high)"
+    ],
+    "removed": [
+      "GPT-6 Luna (xhigh)",
+      "GPT-6 Luna (max)",
+      "Claude Haiku 5.5 (xhigh)",
+      "MiMo-V2.6-Pro",
+      "Claude Opus 5.5 (high with fallback)",
+      "Kimi K3.1 Pro",
+      "Claude Sonnet 5.5 (max with fallback)",
+      "Claude Opus 5.5 (max with fallback)"
+    ],
+    "basis": "AA replaced Intelligence Index v4.3.2 with v5.0 (owner decision O132), so the Index, its evaluations, the costs and the chart's universe all changed; vertices are compared by name (the frozen v4.3.2 copy is previous-frontier-capture.json)."
   },
   "family_groups": [
     {

@@ -61,6 +61,20 @@ def catalog_url(point: dict, names: dict) -> str | None:
     return f"https://artificialanalysis.ai/models/{slug}" if slug else None
 
 
+def comparison(frontier: list[dict]) -> dict:
+    """The rendered frontier against the 2026-10-25 capture (Intelligence Index v4.3.2), by vertex name."""
+
+    previous = json.loads((HERE / "previous-frontier-capture.json").read_text())
+    before = [item["model_name"] for item in previous["frontier"]]
+    now = [item["model_name"] for item in frontier]
+    return {"previous_inventory": f"data/aa_frontier_capture.json captured {previous['captured_at']} (Intelligence Index v{previous['index_version']})",
+            "previous_capture_date": previous["captured_at"][:10], "previous_vertex_count": len(before), "current_vertex_count": len(now),
+            "frontier_membership_changed": before != now,
+            "added": [name for name in now if name not in before], "removed": [name for name in before if name not in now],
+            "basis": "AA replaced Intelligence Index v4.3.2 with v5.0 (owner decision O132), so the Index, its evaluations, the costs and the "
+                     "chart's universe all changed; vertices are compared by name (the frozen v4.3.2 copy is previous-frontier-capture.json)."}
+
+
 def main() -> None:
     capture = json.loads(CAPTURE.read_text())
     cohort = json.loads(COHORT.read_text())["configurations"]
@@ -124,9 +138,7 @@ def main() -> None:
         "precision": {"intelligence_index": "Rounded integer displayed by public tooltip; raw precision is not recovered from SVG coordinates.",
                       "total_cost_usd": "Two decimal places displayed by public tooltip."},
         "duplicate_resolution": f"None needed: every circle-centre hover returned a distinct tooltip ({len(points)} distinct for {len(points)} circles).",
-        "comparison_to_previous_capture": {"previous_inventory": "data/aa_frontier_capture.json captured 2026-10-25T09:53:28Z (Intelligence Index v4.3.2)",
-                                           "basis": "AA replaced Intelligence Index v4.3.2 with v5.0 (owner decision O132): the Index, its evaluations and the chart's "
-                                                    "universe changed, so the frontier is re-read rather than compared vertex by vertex."},
+        "comparison_to_previous_capture": comparison(frontier),
         "family_groups": [{"family": family, "efforts": [point["effort"] or "none" for point in frontier if point["family"] == family],
                            "frontier_configurations": sum(1 for point in frontier if point["family"] == family),
                            **({"fallback": "with fallback"} if any(point["fallback"] for point in frontier if point["family"] == family) else {})}

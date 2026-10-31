@@ -3,80 +3,63 @@
     {
       "version": "v3.0.0",
       "date": "October 19, 2026",
-      "models": 9,
+      "models": 5,
       "dimensions": 14,
-      "summary": "9 models ranked on 14 dimensions; GPT-6.1 Sol is first on the API basis.",
+      "summary": "5 models ranked on 14 dimensions; GPT-6.1 Sol (max) is first on the API basis.",
       "rankChanges": [
         {
           "slug": "gpt-6-1-sol",
-          "name": "GPT-6.1 Sol",
+          "name": "GPT-6.1 Sol (max)",
           "from": 2,
           "to": 1
         },
         {
-          "slug": "mimo-v2-6-pro",
-          "name": "MiMo-V2.6-Pro",
-          "from": 7,
-          "to": 3
-        },
-        {
           "slug": "gpt-6-luna",
-          "name": "GPT-6 Luna",
+          "name": "GPT-6 Luna (max)",
           "from": 11,
-          "to": 4
-        },
-        {
-          "slug": "gemini-4-argon",
-          "name": "Gemini 4 Argon",
-          "from": 1,
-          "to": 5
-        },
-        {
-          "slug": "claude-opus-5-5",
-          "name": "Claude Opus 5.5",
-          "from": 5,
-          "to": 6
+          "to": 2
         },
         {
           "slug": "gpt-6-astra",
-          "name": "GPT-6 Astra",
+          "name": "GPT-6 Astra (max)",
           "from": 4,
-          "to": 7
+          "to": 3
+        },
+        {
+          "slug": "claude-opus-5-5",
+          "name": "Claude Opus 5.5 (max)",
+          "from": 5,
+          "to": 4
         },
         {
           "slug": "claude-sonnet-5-5",
           "name": "Claude Sonnet 5.5",
           "from": 3,
-          "to": 8
+          "to": 5
         }
       ],
       "ranks": {
-        "claude-haiku-5-5-max": 9,
-        "claude-opus-5-5": 6,
-        "claude-sonnet-5-5": 8,
-        "deepseek-v4-1-flash-1017": 2,
-        "gemini-4-argon": 5,
-        "gpt-6-astra": 7,
-        "gpt-6-luna": 4,
-        "gpt-6-1-sol": 1,
-        "mimo-v2-6-pro": 3
+        "claude-opus-5-5": 4,
+        "claude-sonnet-5-5": 5,
+        "gpt-6-astra": 3,
+        "gpt-6-luna": 2,
+        "gpt-6-1-sol": 1
       },
-      "added": [
-        "claude-haiku-5-5-max",
-        "deepseek-v4-1-flash-1017"
-      ],
+      "added": [],
       "removed": [
         "claude-haiku-5-5",
         "claude-opus-5",
         "deepseek-v4-flash",
         "deepseek-v4-pro",
         "gemini-3-8-flash",
+        "gemini-4-argon",
         "glm-5-3",
         "gpt-5-6-luna",
         "gpt-5-6-sol",
         "gpt-6-sol",
         "grok-4-7",
         "mimo-v2-6-flash",
+        "mimo-v2-6-pro",
         "qwen3-8-max"
       ]
     },
@@ -85,47 +68,47 @@
       "date": "October 19, 2026",
       "models": 19,
       "dimensions": null,
-      "summary": "19 models ranked; Gemini 4 Argon first.",
+      "summary": "19 models ranked; gemini-4-argon first.",
       "rankChanges": [
         {
           "slug": "claude-opus-5-5",
-          "name": "Claude Opus 5.5",
+          "name": "Claude Opus 5.5 (max)",
           "from": 6,
           "to": 5
         },
         {
           "slug": "gpt-5-6-sol",
-          "name": "GPT-5.6 Sol",
+          "name": "gpt-5.6-sol",
           "from": 5,
           "to": 6
         },
         {
           "slug": "mimo-v2-6-pro",
-          "name": "MiMo-V2.6-Pro",
+          "name": "mimo-v2-6-pro",
           "from": 9,
           "to": 7
         },
         {
           "slug": "gpt-6-sol",
-          "name": "GPT-6 Sol",
+          "name": "gpt-6-sol",
           "from": 7,
           "to": 8
         },
         {
           "slug": "grok-4-7",
-          "name": "Grok 4.7",
+          "name": "grok-4.7",
           "from": 8,
           "to": 9
         },
         {
           "slug": "gpt-5-6-luna",
-          "name": "GPT-5.6 Luna",
+          "name": "gpt-5.6-luna",
           "from": 11,
           "to": 10
         },
         {
           "slug": "gpt-6-luna",
-          "name": "GPT-6 Luna",
+          "name": "GPT-6 Luna (max)",
           "from": 13,
           "to": 11
         },
@@ -137,25 +120,25 @@
         },
         {
           "slug": "claude-haiku-5-5",
-          "name": "Claude Haiku 5.5",
+          "name": "claude-haiku-5-5",
           "from": 16,
           "to": 13
         },
         {
           "slug": "gemini-3-8-flash",
-          "name": "Gemini 3.8 Flash",
+          "name": "gemini-3.8-flash",
           "from": 12,
           "to": 14
         },
         {
           "slug": "claude-opus-5",
-          "name": "Claude Opus 5",
+          "name": "claude-opus-5",
           "from": 14,
           "to": 15
         },
         {
           "slug": "glm-5-3",
-          "name": "GLM-5.3",
+          "name": "glm-5.3",
           "from": 15,
           "to": 16
         }
@@ -189,7 +172,7 @@
       "date": null,
       "models": 19,
       "dimensions": null,
-      "summary": "19 models ranked; Gemini 4 Argon first.",
+      "summary": "19 models ranked; gemini-4-argon first.",
       "rankChanges": [],
       "ranks": {
         "claude-haiku-5-5": 16,
@@ -220,47 +203,47 @@
       "date": null,
       "models": 19,
       "dimensions": null,
-      "summary": "19 models ranked; Gemini 4 Argon first.",
+      "summary": "19 models ranked; gemini-4-argon first.",
       "rankChanges": [
         {
           "slug": "gpt-6-1-sol",
-          "name": "GPT-6.1 Sol",
+          "name": "GPT-6.1 Sol (max)",
           "from": 1,
           "to": 2
         },
         {
           "slug": "gpt-6-astra",
-          "name": "GPT-6 Astra",
+          "name": "GPT-6 Astra (max)",
           "from": 3,
           "to": 4
         },
         {
           "slug": "gpt-5-6-sol",
-          "name": "GPT-5.6 Sol",
+          "name": "gpt-5.6-sol",
           "from": 2,
           "to": 5
         },
         {
           "slug": "claude-opus-5-5",
-          "name": "Claude Opus 5.5",
+          "name": "Claude Opus 5.5 (max)",
           "from": 5,
           "to": 6
         },
         {
           "slug": "gpt-6-sol",
-          "name": "GPT-6 Sol",
+          "name": "gpt-6-sol",
           "from": 4,
           "to": 7
         },
         {
           "slug": "grok-4-7",
-          "name": "Grok 4.7",
+          "name": "grok-4.7",
           "from": 6,
           "to": 8
         },
         {
           "slug": "mimo-v2-6-pro",
-          "name": "MiMo-V2.6-Pro",
+          "name": "mimo-v2-6-pro",
           "from": 7,
           "to": 9
         },
@@ -272,25 +255,25 @@
         },
         {
           "slug": "gpt-6-luna",
-          "name": "GPT-6 Luna",
+          "name": "GPT-6 Luna (max)",
           "from": 14,
           "to": 13
         },
         {
           "slug": "claude-opus-5",
-          "name": "Claude Opus 5",
+          "name": "claude-opus-5",
           "from": 15,
           "to": 14
         },
         {
           "slug": "glm-5-3",
-          "name": "GLM-5.3",
+          "name": "glm-5.3",
           "from": 13,
           "to": 15
         },
         {
           "slug": "qwen3-8-max",
-          "name": "Qwen3.8 Max",
+          "name": "qwen3.8-max",
           "from": 16,
           "to": 18
         }
@@ -333,71 +316,71 @@
       "date": null,
       "models": 16,
       "dimensions": null,
-      "summary": "16 models ranked; GPT-6.1 Sol first.",
+      "summary": "16 models ranked; GPT-6.1 Sol (max) first.",
       "rankChanges": [
         {
           "slug": "gpt-6-sol",
-          "name": "GPT-6 Sol",
+          "name": "gpt-6-sol",
           "from": 1,
           "to": 4
         },
         {
           "slug": "claude-opus-5-5",
-          "name": "Claude Opus 5.5",
+          "name": "Claude Opus 5.5 (max)",
           "from": 4,
           "to": 5
         },
         {
           "slug": "grok-4-7",
-          "name": "Grok 4.7",
+          "name": "grok-4.7",
           "from": 5,
           "to": 6
         },
         {
           "slug": "kimi-k3",
-          "name": "Kimi K3",
+          "name": "kimi-k3",
           "from": 7,
           "to": 9
         },
         {
           "slug": "grok-4-6",
-          "name": "Grok 4.6",
+          "name": "grok-4.6",
           "from": 8,
           "to": 10
         },
         {
           "slug": "gpt-5-6-luna",
-          "name": "GPT-5.6 Luna",
+          "name": "gpt-5.6-luna",
           "from": 6,
           "to": 11
         },
         {
           "slug": "gemini-3-8-flash",
-          "name": "Gemini 3.8 Flash",
+          "name": "gemini-3.8-flash",
           "from": 9,
           "to": 12
         },
         {
           "slug": "glm-5-3",
-          "name": "GLM-5.3",
+          "name": "glm-5.3",
           "from": 10,
           "to": 13
         },
         {
           "slug": "gpt-6-luna",
-          "name": "GPT-6 Luna",
+          "name": "GPT-6 Luna (max)",
           "from": 11,
           "to": 14
         },
         {
           "slug": "claude-opus-5",
-          "name": "Claude Opus 5",
+          "name": "claude-opus-5",
           "from": 12,
           "to": 15
         },
         {
           "slug": "qwen3-8-max",
-          "name": "Qwen3.8 Max",
+          "name": "qwen3.8-max",
           "from": 13,
           "to": 16
         }
@@ -432,7 +415,7 @@
       "date": null,
       "models": 13,
       "dimensions": null,
-      "summary": "13 models ranked; GPT-6 Sol first.",
+      "summary": "13 models ranked; gpt-6-sol first.",
       "rankChanges": [],
       "ranks": {
         "claude-opus-5": 12,
@@ -457,7 +440,7 @@
       "date": null,
       "models": 13,
       "dimensions": null,
-      "summary": "13 models ranked; GPT-6 Sol first.",
+      "summary": "13 models ranked; gpt-6-sol first.",
       "rankChanges": [],
       "ranks": {
         "claude-opus-5": 12,
@@ -482,65 +465,65 @@
       "date": null,
       "models": 13,
       "dimensions": null,
-      "summary": "13 models ranked; GPT-6 Sol first.",
+      "summary": "13 models ranked; gpt-6-sol first.",
       "rankChanges": [
         {
           "slug": "gpt-5-6-sol",
-          "name": "GPT-5.6 Sol",
+          "name": "gpt-5.6-sol",
           "from": 1,
           "to": 2
         },
         {
           "slug": "gpt-6-astra",
-          "name": "GPT-6 Astra",
+          "name": "GPT-6 Astra (max)",
           "from": 2,
           "to": 3
         },
         {
           "slug": "claude-opus-5-5",
-          "name": "Claude Opus 5.5",
+          "name": "Claude Opus 5.5 (max)",
           "from": 3,
           "to": 4
         },
         {
           "slug": "gpt-5-6-luna",
-          "name": "GPT-5.6 Luna",
+          "name": "gpt-5.6-luna",
           "from": 5,
           "to": 6
         },
         {
           "slug": "kimi-k3",
-          "name": "Kimi K3",
+          "name": "kimi-k3",
           "from": 6,
           "to": 7
         },
         {
           "slug": "grok-4-6",
-          "name": "Grok 4.6",
+          "name": "grok-4.6",
           "from": 4,
           "to": 8
         },
         {
           "slug": "gemini-3-8-flash",
-          "name": "Gemini 3.8 Flash",
+          "name": "gemini-3.8-flash",
           "from": 7,
           "to": 9
         },
         {
           "slug": "glm-5-3",
-          "name": "GLM-5.3",
+          "name": "glm-5.3",
           "from": 8,
           "to": 10
         },
         {
           "slug": "claude-opus-5",
-          "name": "Claude Opus 5",
+          "name": "claude-opus-5",
           "from": 9,
           "to": 12
         },
         {
           "slug": "qwen3-8-max",
-          "name": "Qwen3.8 Max",
+          "name": "qwen3.8-max",
           "from": 10,
           "to": 13
         }
@@ -572,7 +555,7 @@
       "date": null,
       "models": 10,
       "dimensions": null,
-      "summary": "10 models ranked; GPT-5.6 Sol first.",
+      "summary": "10 models ranked; gpt-5.6-sol first.",
       "rankChanges": [],
       "ranks": {
         "claude-opus-5": 9,
@@ -594,41 +577,41 @@
       "date": null,
       "models": 10,
       "dimensions": null,
-      "summary": "10 models ranked; GPT-5.6 Sol first.",
+      "summary": "10 models ranked; gpt-5.6-sol first.",
       "rankChanges": [
         {
           "slug": "grok-4-6",
-          "name": "Grok 4.6",
+          "name": "grok-4.6",
           "from": 3,
           "to": 4
         },
         {
           "slug": "kimi-k3",
-          "name": "Kimi K3",
+          "name": "kimi-k3",
           "from": 4,
           "to": 6
         },
         {
           "slug": "gemini-3-8-flash",
-          "name": "Gemini 3.8 Flash",
+          "name": "gemini-3.8-flash",
           "from": 6,
           "to": 7
         },
         {
           "slug": "glm-5-3",
-          "name": "GLM-5.3",
+          "name": "glm-5.3",
           "from": 7,
           "to": 8
         },
         {
           "slug": "claude-opus-5",
-          "name": "Claude Opus 5",
+          "name": "claude-opus-5",
           "from": 8,
           "to": 9
         },
         {
           "slug": "qwen3-8-max",
-          "name": "Qwen3.8 Max",
+          "name": "qwen3.8-max",
           "from": 9,
           "to": 10
         }
@@ -655,53 +638,53 @@
       "date": null,
       "models": 9,
       "dimensions": null,
-      "summary": "9 models ranked; GPT-5.6 Sol first.",
+      "summary": "9 models ranked; gpt-5.6-sol first.",
       "rankChanges": [
         {
           "slug": "gpt-5-6-sol",
-          "name": "GPT-5.6 Sol",
+          "name": "gpt-5.6-sol",
           "from": 5,
           "to": 1
         },
         {
           "slug": "gpt-6-astra",
-          "name": "GPT-6 Astra",
+          "name": "GPT-6 Astra (max)",
           "from": 4,
           "to": 2
         },
         {
           "slug": "grok-4-6",
-          "name": "Grok 4.6",
+          "name": "grok-4.6",
           "from": 2,
           "to": 3
         },
         {
           "slug": "kimi-k3",
-          "name": "Kimi K3",
+          "name": "kimi-k3",
           "from": 8,
           "to": 4
         },
         {
           "slug": "gpt-5-6-luna",
-          "name": "GPT-5.6 Luna",
+          "name": "gpt-5.6-luna",
           "from": 9,
           "to": 5
         },
         {
           "slug": "gemini-3-8-flash",
-          "name": "Gemini 3.8 Flash",
+          "name": "gemini-3.8-flash",
           "from": 1,
           "to": 6
         },
         {
           "slug": "claude-opus-5",
-          "name": "Claude Opus 5",
+          "name": "claude-opus-5",
           "from": 10,
           "to": 8
         },
         {
           "slug": "qwen3-8-max",
-          "name": "Qwen3.8 Max",
+          "name": "qwen3.8-max",
           "from": 14,
           "to": 9
         }
@@ -738,7 +721,7 @@
       "date": "September 6, 2026",
       "models": 21,
       "dimensions": null,
-      "summary": "21 models ranked; Gemini 3.8 Flash first.",
+      "summary": "21 models ranked; gemini-3.8-flash first.",
       "rankChanges": [],
       "ranks": {
         "claude-fable-5": 13,

@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "inputHash": "6f63db1bd9a70b48b88d3039f503591b6c1889c2eff24d57b2bc1e4d98a5d673",
+  "inputHash": "2b51c94671caf549470074eac90b69d5941cba5b79c958c43bca61d66e224d6a",
   "seed": 20261031,
   "scenarios": 10000,
   "streamDescriptions": {
@@ -2618,14 +2618,101 @@
           "gpt-6.1-sol-medium@chatgpt-pro-100",
           "gpt-6.1-sol-medium@chatgpt-pro-200",
           "gpt-6.1-sol-medium@chatgpt-pro-500",
-          "gpt-6.1-terra-high@api",
-          "gpt-6.1-terra-medium@api",
-          "gpt-6.1-terra-xhigh@api",
-          "gpt-6.1-terra@api"
+          "gpt-6.1-terra-high@chatgpt-plus",
+          "gpt-6.1-terra-high@chatgpt-pro-100",
+          "gpt-6.1-terra-high@chatgpt-pro-200",
+          "gpt-6.1-terra-high@chatgpt-pro-500",
+          "gpt-6.1-terra-medium@chatgpt-plus",
+          "gpt-6.1-terra-medium@chatgpt-pro-100",
+          "gpt-6.1-terra-medium@chatgpt-pro-200",
+          "gpt-6.1-terra-medium@chatgpt-pro-500",
+          "gpt-6.1-terra-xhigh@chatgpt-plus",
+          "gpt-6.1-terra-xhigh@chatgpt-pro-100",
+          "gpt-6.1-terra-xhigh@chatgpt-pro-200",
+          "gpt-6.1-terra-xhigh@chatgpt-pro-500",
+          "gpt-6.1-terra@chatgpt-plus",
+          "gpt-6.1-terra@chatgpt-pro-100",
+          "gpt-6.1-terra@chatgpt-pro-200",
+          "gpt-6.1-terra@chatgpt-pro-500"
         ],
-        "panelSize": 45,
+        "panelSize": 57,
         "rows": {
-          "gpt-6.1-terra@api": {
+          "gpt-6.1-terra@chatgpt-plus": {
+            "top3": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "top1": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "frontier": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "qualifies": {},
+            "dispersion": {
+              "status": "defined",
+              "label": "scenario dispersion under the declared kernels",
+              "scenarios": 10000,
+              "valueVariance": 6.161184828717729e-06,
+              "valueSd": 0.002482173408268997,
+              "costTerm": 0.0,
+              "qualityTerm": 6.161184828717729e-06,
+              "covarianceTerm": 0.0
+            }
+          },
+          "gpt-6.1-terra@chatgpt-pro-100": {
+            "top3": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "top1": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "frontier": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "qualifies": {},
+            "dispersion": {
+              "status": "defined",
+              "label": "scenario dispersion under the declared kernels",
+              "scenarios": 10000,
+              "valueVariance": 6.161184828717729e-06,
+              "valueSd": 0.002482173408268997,
+              "costTerm": 0.0,
+              "qualityTerm": 6.161184828717729e-06,
+              "covarianceTerm": 0.0
+            }
+          },
+          "gpt-6.1-terra@chatgpt-pro-200": {
+            "top3": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "top1": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "frontier": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "qualifies": {},
+            "dispersion": {
+              "status": "defined",
+              "label": "scenario dispersion under the declared kernels",
+              "scenarios": 10000,
+              "valueVariance": 6.161184828717729e-06,
+              "valueSd": 0.002482173408268997,
+              "costTerm": 0.0,
+              "qualityTerm": 6.161184828717729e-06,
+              "covarianceTerm": 0.0
+            }
+          },
+          "gpt-6.1-terra@chatgpt-pro-500": {
             "top3": {
               "share": 0.0,
               "monteCarloSe": 0.0
@@ -3200,7 +3287,7 @@
               "covarianceTerm": 0.0
             }
           },
-          "gpt-6.1-terra-xhigh@api": {
+          "gpt-6.1-terra-xhigh@chatgpt-plus": {
             "top3": {
               "share": 0.0,
               "monteCarloSe": 0.0
@@ -3211,6 +3298,81 @@
             },
             "frontier": {
               "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "qualifies": {},
+            "dispersion": {
+              "status": "defined",
+              "label": "scenario dispersion under the declared kernels",
+              "scenarios": 10000,
+              "valueVariance": 6.122413244142257e-06,
+              "valueSd": 0.0024743510753614285,
+              "costTerm": 0.0,
+              "qualityTerm": 6.122413244142257e-06,
+              "covarianceTerm": 0.0
+            }
+          },
+          "gpt-6.1-terra-xhigh@chatgpt-pro-100": {
+            "top3": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "top1": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "frontier": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "qualifies": {},
+            "dispersion": {
+              "status": "defined",
+              "label": "scenario dispersion under the declared kernels",
+              "scenarios": 10000,
+              "valueVariance": 6.122413244142257e-06,
+              "valueSd": 0.0024743510753614285,
+              "costTerm": 0.0,
+              "qualityTerm": 6.122413244142257e-06,
+              "covarianceTerm": 0.0
+            }
+          },
+          "gpt-6.1-terra-xhigh@chatgpt-pro-200": {
+            "top3": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "top1": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "frontier": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "qualifies": {},
+            "dispersion": {
+              "status": "defined",
+              "label": "scenario dispersion under the declared kernels",
+              "scenarios": 10000,
+              "valueVariance": 6.122413244142257e-06,
+              "valueSd": 0.0024743510753614285,
+              "costTerm": 0.0,
+              "qualityTerm": 6.122413244142257e-06,
+              "covarianceTerm": 0.0
+            }
+          },
+          "gpt-6.1-terra-xhigh@chatgpt-pro-500": {
+            "top3": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "top1": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "frontier": {
+              "share": 1.0,
               "monteCarloSe": 0.0
             },
             "qualifies": {},
@@ -3310,7 +3472,7 @@
               "monteCarloSe": 0.0
             },
             "frontier": {
-              "share": 1.0,
+              "share": 0.0,
               "monteCarloSe": 0.0
             },
             "qualifies": {},
@@ -3325,7 +3487,7 @@
               "covarianceTerm": 0.0
             }
           },
-          "gpt-6.1-terra-high@api": {
+          "gpt-6.1-terra-high@chatgpt-plus": {
             "top3": {
               "share": 0.0,
               "monteCarloSe": 0.0
@@ -3336,6 +3498,81 @@
             },
             "frontier": {
               "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "qualifies": {},
+            "dispersion": {
+              "status": "defined",
+              "label": "scenario dispersion under the declared kernels",
+              "scenarios": 10000,
+              "valueVariance": 6.017477267024153e-06,
+              "valueSd": 0.002453054680805985,
+              "costTerm": 0.0,
+              "qualityTerm": 6.017477267024153e-06,
+              "covarianceTerm": 0.0
+            }
+          },
+          "gpt-6.1-terra-high@chatgpt-pro-100": {
+            "top3": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "top1": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "frontier": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "qualifies": {},
+            "dispersion": {
+              "status": "defined",
+              "label": "scenario dispersion under the declared kernels",
+              "scenarios": 10000,
+              "valueVariance": 6.017477267024153e-06,
+              "valueSd": 0.002453054680805985,
+              "costTerm": 0.0,
+              "qualityTerm": 6.017477267024153e-06,
+              "covarianceTerm": 0.0
+            }
+          },
+          "gpt-6.1-terra-high@chatgpt-pro-200": {
+            "top3": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "top1": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "frontier": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "qualifies": {},
+            "dispersion": {
+              "status": "defined",
+              "label": "scenario dispersion under the declared kernels",
+              "scenarios": 10000,
+              "valueVariance": 6.017477267024153e-06,
+              "valueSd": 0.002453054680805985,
+              "costTerm": 0.0,
+              "qualityTerm": 6.017477267024153e-06,
+              "covarianceTerm": 0.0
+            }
+          },
+          "gpt-6.1-terra-high@chatgpt-pro-500": {
+            "top3": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "top1": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "frontier": {
+              "share": 1.0,
               "monteCarloSe": 0.0
             },
             "qualifies": {},
@@ -3525,7 +3762,7 @@
               "covarianceTerm": 0.0
             }
           },
-          "gpt-6.1-terra-medium@api": {
+          "gpt-6.1-terra-medium@chatgpt-plus": {
             "top3": {
               "share": 0.0,
               "monteCarloSe": 0.0
@@ -3536,6 +3773,81 @@
             },
             "frontier": {
               "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "qualifies": {},
+            "dispersion": {
+              "status": "defined",
+              "label": "scenario dispersion under the declared kernels",
+              "scenarios": 10000,
+              "valueVariance": 6.105122277421523e-06,
+              "valueSd": 0.002470854564198695,
+              "costTerm": 0.0,
+              "qualityTerm": 6.105122277421523e-06,
+              "covarianceTerm": 0.0
+            }
+          },
+          "gpt-6.1-terra-medium@chatgpt-pro-100": {
+            "top3": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "top1": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "frontier": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "qualifies": {},
+            "dispersion": {
+              "status": "defined",
+              "label": "scenario dispersion under the declared kernels",
+              "scenarios": 10000,
+              "valueVariance": 6.105122277421523e-06,
+              "valueSd": 0.002470854564198695,
+              "costTerm": 0.0,
+              "qualityTerm": 6.105122277421523e-06,
+              "covarianceTerm": 0.0
+            }
+          },
+          "gpt-6.1-terra-medium@chatgpt-pro-200": {
+            "top3": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "top1": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "frontier": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "qualifies": {},
+            "dispersion": {
+              "status": "defined",
+              "label": "scenario dispersion under the declared kernels",
+              "scenarios": 10000,
+              "valueVariance": 6.105122277421523e-06,
+              "valueSd": 0.002470854564198695,
+              "costTerm": 0.0,
+              "qualityTerm": 6.105122277421523e-06,
+              "covarianceTerm": 0.0
+            }
+          },
+          "gpt-6.1-terra-medium@chatgpt-pro-500": {
+            "top3": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "top1": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "frontier": {
+              "share": 1.0,
               "monteCarloSe": 0.0
             },
             "qualifies": {},
@@ -3795,39 +4107,10 @@
           "gpt-6.1-sol-medium@chatgpt-plus",
           "gpt-6.1-sol-medium@chatgpt-pro-100",
           "gpt-6.1-sol-medium@chatgpt-pro-200",
-          "gpt-6.1-sol-medium@chatgpt-pro-500",
-          "gpt-6.1-terra-high@api",
-          "gpt-6.1-terra-medium@api",
-          "gpt-6.1-terra-xhigh@api",
-          "gpt-6.1-terra@api"
+          "gpt-6.1-sol-medium@chatgpt-pro-500"
         ],
-        "panelSize": 23,
+        "panelSize": 19,
         "rows": {
-          "gpt-6.1-terra@api": {
-            "top3": {
-              "share": 0.0,
-              "monteCarloSe": 0.0
-            },
-            "top1": {
-              "share": 0.0,
-              "monteCarloSe": 0.0
-            },
-            "frontier": {
-              "share": 0.0,
-              "monteCarloSe": 0.0
-            },
-            "qualifies": {},
-            "dispersion": {
-              "status": "defined",
-              "label": "scenario dispersion under the declared kernels",
-              "scenarios": 10000,
-              "valueVariance": 6.139788574746974e-06,
-              "valueSd": 0.00247785967616146,
-              "costTerm": 0.0,
-              "qualityTerm": 6.139788574746974e-06,
-              "covarianceTerm": 0.0
-            }
-          },
           "gpt-6.1-sol-high@chatgpt-plus": {
             "top3": {
               "share": 0.0,
@@ -3846,10 +4129,10 @@
               "status": "defined",
               "label": "scenario dispersion under the declared kernels",
               "scenarios": 10000,
-              "valueVariance": 6.122320371471071e-06,
-              "valueSd": 0.002474332308213889,
+              "valueVariance": 6.164041341922033e-06,
+              "valueSd": 0.0024827487472400493,
               "costTerm": 0.0,
-              "qualityTerm": 6.122320371471071e-06,
+              "qualityTerm": 6.164041341922033e-06,
               "covarianceTerm": 0.0
             }
           },
@@ -3871,10 +4154,10 @@
               "status": "defined",
               "label": "scenario dispersion under the declared kernels",
               "scenarios": 10000,
-              "valueVariance": 6.122320371471071e-06,
-              "valueSd": 0.002474332308213889,
+              "valueVariance": 6.164041341922033e-06,
+              "valueSd": 0.0024827487472400493,
               "costTerm": 0.0,
-              "qualityTerm": 6.122320371471071e-06,
+              "qualityTerm": 6.164041341922033e-06,
               "covarianceTerm": 0.0
             }
           },
@@ -3896,10 +4179,10 @@
               "status": "defined",
               "label": "scenario dispersion under the declared kernels",
               "scenarios": 10000,
-              "valueVariance": 6.122320371471071e-06,
-              "valueSd": 0.002474332308213889,
+              "valueVariance": 6.164041341922033e-06,
+              "valueSd": 0.0024827487472400493,
               "costTerm": 0.0,
-              "qualityTerm": 6.122320371471071e-06,
+              "qualityTerm": 6.164041341922033e-06,
               "covarianceTerm": 0.0
             }
           },
@@ -3921,10 +4204,10 @@
               "status": "defined",
               "label": "scenario dispersion under the declared kernels",
               "scenarios": 10000,
-              "valueVariance": 6.122320371471071e-06,
-              "valueSd": 0.002474332308213889,
+              "valueVariance": 6.164041341922033e-06,
+              "valueSd": 0.0024827487472400493,
               "costTerm": 0.0,
-              "qualityTerm": 6.122320371471071e-06,
+              "qualityTerm": 6.164041341922033e-06,
               "covarianceTerm": 0.0
             }
           },
@@ -3946,10 +4229,10 @@
               "status": "defined",
               "label": "scenario dispersion under the declared kernels",
               "scenarios": 10000,
-              "valueVariance": 6.225448954894124e-06,
-              "valueSd": 0.002495084959454111,
+              "valueVariance": 6.055468621602356e-06,
+              "valueSd": 0.002460786179578054,
               "costTerm": 0.0,
-              "qualityTerm": 6.225448954894124e-06,
+              "qualityTerm": 6.055468621602356e-06,
               "covarianceTerm": 0.0
             }
           },
@@ -3971,10 +4254,10 @@
               "status": "defined",
               "label": "scenario dispersion under the declared kernels",
               "scenarios": 10000,
-              "valueVariance": 6.225448954894124e-06,
-              "valueSd": 0.002495084959454111,
+              "valueVariance": 6.055468621602356e-06,
+              "valueSd": 0.002460786179578054,
               "costTerm": 0.0,
-              "qualityTerm": 6.225448954894124e-06,
+              "qualityTerm": 6.055468621602356e-06,
               "covarianceTerm": 0.0
             }
           },
@@ -3996,10 +4279,10 @@
               "status": "defined",
               "label": "scenario dispersion under the declared kernels",
               "scenarios": 10000,
-              "valueVariance": 6.225448954894124e-06,
-              "valueSd": 0.002495084959454111,
+              "valueVariance": 6.055468621602356e-06,
+              "valueSd": 0.002460786179578054,
               "costTerm": 0.0,
-              "qualityTerm": 6.225448954894124e-06,
+              "qualityTerm": 6.055468621602356e-06,
               "covarianceTerm": 0.0
             }
           },
@@ -4021,10 +4304,10 @@
               "status": "defined",
               "label": "scenario dispersion under the declared kernels",
               "scenarios": 10000,
-              "valueVariance": 6.225448954894124e-06,
-              "valueSd": 0.002495084959454111,
+              "valueVariance": 6.055468621602356e-06,
+              "valueSd": 0.002460786179578054,
               "costTerm": 0.0,
-              "qualityTerm": 6.225448954894124e-06,
+              "qualityTerm": 6.055468621602356e-06,
               "covarianceTerm": 0.0
             }
           },
@@ -4046,10 +4329,10 @@
               "status": "defined",
               "label": "scenario dispersion under the declared kernels",
               "scenarios": 10000,
-              "valueVariance": 6.03761239363403e-06,
-              "valueSd": 0.0024571553458489414,
+              "valueVariance": 6.110502903647673e-06,
+              "valueSd": 0.002471943143287821,
               "costTerm": 0.0,
-              "qualityTerm": 6.03761239363403e-06,
+              "qualityTerm": 6.110502903647673e-06,
               "covarianceTerm": 0.0
             }
           },
@@ -4071,10 +4354,10 @@
               "status": "defined",
               "label": "scenario dispersion under the declared kernels",
               "scenarios": 10000,
-              "valueVariance": 6.03761239363403e-06,
-              "valueSd": 0.0024571553458489414,
+              "valueVariance": 6.110502903647673e-06,
+              "valueSd": 0.002471943143287821,
               "costTerm": 0.0,
-              "qualityTerm": 6.03761239363403e-06,
+              "qualityTerm": 6.110502903647673e-06,
               "covarianceTerm": 0.0
             }
           },
@@ -4096,10 +4379,10 @@
               "status": "defined",
               "label": "scenario dispersion under the declared kernels",
               "scenarios": 10000,
-              "valueVariance": 6.03761239363403e-06,
-              "valueSd": 0.0024571553458489414,
+              "valueVariance": 6.110502903647673e-06,
+              "valueSd": 0.002471943143287821,
               "costTerm": 0.0,
-              "qualityTerm": 6.03761239363403e-06,
+              "qualityTerm": 6.110502903647673e-06,
               "covarianceTerm": 0.0
             }
           },
@@ -4121,10 +4404,10 @@
               "status": "defined",
               "label": "scenario dispersion under the declared kernels",
               "scenarios": 10000,
-              "valueVariance": 6.137882991478415e-06,
-              "valueSd": 0.0024774751242905377,
+              "valueVariance": 6.247141362683257e-06,
+              "valueSd": 0.0024994282071472383,
               "costTerm": 0.0,
-              "qualityTerm": 6.137882991478415e-06,
+              "qualityTerm": 6.247141362683257e-06,
               "covarianceTerm": 0.0
             }
           },
@@ -4146,10 +4429,10 @@
               "status": "defined",
               "label": "scenario dispersion under the declared kernels",
               "scenarios": 10000,
-              "valueVariance": 6.137882991478415e-06,
-              "valueSd": 0.0024774751242905377,
+              "valueVariance": 6.247141362683257e-06,
+              "valueSd": 0.0024994282071472383,
               "costTerm": 0.0,
-              "qualityTerm": 6.137882991478415e-06,
+              "qualityTerm": 6.247141362683257e-06,
               "covarianceTerm": 0.0
             }
           },
@@ -4171,10 +4454,10 @@
               "status": "defined",
               "label": "scenario dispersion under the declared kernels",
               "scenarios": 10000,
-              "valueVariance": 6.137882991478415e-06,
-              "valueSd": 0.0024774751242905377,
+              "valueVariance": 6.247141362683257e-06,
+              "valueSd": 0.0024994282071472383,
               "costTerm": 0.0,
-              "qualityTerm": 6.137882991478415e-06,
+              "qualityTerm": 6.247141362683257e-06,
               "covarianceTerm": 0.0
             }
           },
@@ -4196,35 +4479,10 @@
               "status": "defined",
               "label": "scenario dispersion under the declared kernels",
               "scenarios": 10000,
-              "valueVariance": 6.137882991478415e-06,
-              "valueSd": 0.0024774751242905377,
+              "valueVariance": 6.247141362683257e-06,
+              "valueSd": 0.0024994282071472383,
               "costTerm": 0.0,
-              "qualityTerm": 6.137882991478415e-06,
-              "covarianceTerm": 0.0
-            }
-          },
-          "gpt-6.1-terra-xhigh@api": {
-            "top3": {
-              "share": 0.0,
-              "monteCarloSe": 0.0
-            },
-            "top1": {
-              "share": 0.0,
-              "monteCarloSe": 0.0
-            },
-            "frontier": {
-              "share": 0.0,
-              "monteCarloSe": 0.0
-            },
-            "qualifies": {},
-            "dispersion": {
-              "status": "defined",
-              "label": "scenario dispersion under the declared kernels",
-              "scenarios": 10000,
-              "valueVariance": 6.086081228238723e-06,
-              "valueSd": 0.002466998424855339,
-              "costTerm": 0.0,
-              "qualityTerm": 6.086081228238723e-06,
+              "qualityTerm": 6.247141362683257e-06,
               "covarianceTerm": 0.0
             }
           },
@@ -4246,10 +4504,10 @@
               "status": "defined",
               "label": "scenario dispersion under the declared kernels",
               "scenarios": 10000,
-              "valueVariance": 6.040316677745732e-06,
-              "valueSd": 0.0024577055718180995,
+              "valueVariance": 6.129365472939913e-06,
+              "valueSd": 0.002475755535778909,
               "costTerm": 0.0,
-              "qualityTerm": 6.040316677745732e-06,
+              "qualityTerm": 6.129365472939913e-06,
               "covarianceTerm": 0.0
             }
           },
@@ -4271,10 +4529,10 @@
               "status": "defined",
               "label": "scenario dispersion under the declared kernels",
               "scenarios": 10000,
-              "valueVariance": 6.040316677745732e-06,
-              "valueSd": 0.0024577055718180995,
+              "valueVariance": 6.129365472939913e-06,
+              "valueSd": 0.002475755535778909,
               "costTerm": 0.0,
-              "qualityTerm": 6.040316677745732e-06,
+              "qualityTerm": 6.129365472939913e-06,
               "covarianceTerm": 0.0
             }
           },
@@ -4296,10 +4554,10 @@
               "status": "defined",
               "label": "scenario dispersion under the declared kernels",
               "scenarios": 10000,
-              "valueVariance": 6.040316677745732e-06,
-              "valueSd": 0.0024577055718180995,
+              "valueVariance": 6.129365472939913e-06,
+              "valueSd": 0.002475755535778909,
               "costTerm": 0.0,
-              "qualityTerm": 6.040316677745732e-06,
+              "qualityTerm": 6.129365472939913e-06,
               "covarianceTerm": 0.0
             }
           },
@@ -4321,60 +4579,10 @@
               "status": "defined",
               "label": "scenario dispersion under the declared kernels",
               "scenarios": 10000,
-              "valueVariance": 6.040316677745732e-06,
-              "valueSd": 0.0024577055718180995,
+              "valueVariance": 6.129365472939913e-06,
+              "valueSd": 0.002475755535778909,
               "costTerm": 0.0,
-              "qualityTerm": 6.040316677745732e-06,
-              "covarianceTerm": 0.0
-            }
-          },
-          "gpt-6.1-terra-high@api": {
-            "top3": {
-              "share": 0.0,
-              "monteCarloSe": 0.0
-            },
-            "top1": {
-              "share": 0.0,
-              "monteCarloSe": 0.0
-            },
-            "frontier": {
-              "share": 0.0,
-              "monteCarloSe": 0.0
-            },
-            "qualifies": {},
-            "dispersion": {
-              "status": "defined",
-              "label": "scenario dispersion under the declared kernels",
-              "scenarios": 10000,
-              "valueVariance": 6.166095709245021e-06,
-              "valueSd": 0.002483162441171544,
-              "costTerm": 0.0,
-              "qualityTerm": 6.166095709245021e-06,
-              "covarianceTerm": 0.0
-            }
-          },
-          "gpt-6.1-terra-medium@api": {
-            "top3": {
-              "share": 0.0,
-              "monteCarloSe": 0.0
-            },
-            "top1": {
-              "share": 0.0,
-              "monteCarloSe": 0.0
-            },
-            "frontier": {
-              "share": 0.0,
-              "monteCarloSe": 0.0
-            },
-            "qualifies": {},
-            "dispersion": {
-              "status": "defined",
-              "label": "scenario dispersion under the declared kernels",
-              "scenarios": 10000,
-              "valueVariance": 6.201419144745657e-06,
-              "valueSd": 0.0024902648744151005,
-              "costTerm": 0.0,
-              "qualityTerm": 6.201419144745657e-06,
+              "qualityTerm": 6.129365472939913e-06,
               "covarianceTerm": 0.0
             }
           }
@@ -4468,6 +4676,70 @@
           },
           {
             "row": "gpt-6-luna@chatgpt-pro-500",
+            "reason": "owner-named transfer: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
+          },
+          {
+            "row": "gpt-6.1-terra-high@chatgpt-plus",
+            "reason": "owner-named transfer: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
+          },
+          {
+            "row": "gpt-6.1-terra-high@chatgpt-pro-100",
+            "reason": "owner-named transfer: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
+          },
+          {
+            "row": "gpt-6.1-terra-high@chatgpt-pro-200",
+            "reason": "owner-named transfer: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
+          },
+          {
+            "row": "gpt-6.1-terra-high@chatgpt-pro-500",
+            "reason": "owner-named transfer: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
+          },
+          {
+            "row": "gpt-6.1-terra-medium@chatgpt-plus",
+            "reason": "owner-named transfer: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
+          },
+          {
+            "row": "gpt-6.1-terra-medium@chatgpt-pro-100",
+            "reason": "owner-named transfer: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
+          },
+          {
+            "row": "gpt-6.1-terra-medium@chatgpt-pro-200",
+            "reason": "owner-named transfer: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
+          },
+          {
+            "row": "gpt-6.1-terra-medium@chatgpt-pro-500",
+            "reason": "owner-named transfer: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
+          },
+          {
+            "row": "gpt-6.1-terra-xhigh@chatgpt-plus",
+            "reason": "owner-named transfer: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
+          },
+          {
+            "row": "gpt-6.1-terra-xhigh@chatgpt-pro-100",
+            "reason": "owner-named transfer: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
+          },
+          {
+            "row": "gpt-6.1-terra-xhigh@chatgpt-pro-200",
+            "reason": "owner-named transfer: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
+          },
+          {
+            "row": "gpt-6.1-terra-xhigh@chatgpt-pro-500",
+            "reason": "owner-named transfer: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
+          },
+          {
+            "row": "gpt-6.1-terra@chatgpt-plus",
+            "reason": "owner-named transfer: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
+          },
+          {
+            "row": "gpt-6.1-terra@chatgpt-pro-100",
+            "reason": "owner-named transfer: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
+          },
+          {
+            "row": "gpt-6.1-terra@chatgpt-pro-200",
+            "reason": "owner-named transfer: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
+          },
+          {
+            "row": "gpt-6.1-terra@chatgpt-pro-500",
             "reason": "owner-named transfer: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
           }
         ]
@@ -4514,39 +4786,10 @@
           "gpt-6.1-sol-medium@chatgpt-plus",
           "gpt-6.1-sol-medium@chatgpt-pro-100",
           "gpt-6.1-sol-medium@chatgpt-pro-200",
-          "gpt-6.1-sol-medium@chatgpt-pro-500",
-          "gpt-6.1-terra-high@api",
-          "gpt-6.1-terra-medium@api",
-          "gpt-6.1-terra-xhigh@api",
-          "gpt-6.1-terra@api"
+          "gpt-6.1-sol-medium@chatgpt-pro-500"
         ],
-        "panelSize": 23,
+        "panelSize": 19,
         "rows": {
-          "gpt-6.1-terra@api": {
-            "top3": {
-              "share": 0.0,
-              "monteCarloSe": 0.0
-            },
-            "top1": {
-              "share": 0.0,
-              "monteCarloSe": 0.0
-            },
-            "frontier": {
-              "share": 0.0035,
-              "monteCarloSe": 0.0005905717568594015
-            },
-            "qualifies": {},
-            "dispersion": {
-              "status": "defined",
-              "label": "scenario dispersion under the declared kernels",
-              "scenarios": 10000,
-              "valueVariance": 1.33200812935037,
-              "valueSd": 1.1541265655682527,
-              "costTerm": 0.0,
-              "qualityTerm": 1.33200812935037,
-              "covarianceTerm": 0.0
-            }
-          },
           "gpt-6.1-sol-high@chatgpt-plus": {
             "top3": {
               "share": 0.0,
@@ -4565,10 +4808,10 @@
               "status": "defined",
               "label": "scenario dispersion under the declared kernels",
               "scenarios": 10000,
-              "valueVariance": 2.118426061762875,
-              "valueSd": 1.4554813848905368,
+              "valueVariance": 2.1797293719071016,
+              "valueSd": 1.4763906569424983,
               "costTerm": 0.0,
-              "qualityTerm": 2.118426061762875,
+              "qualityTerm": 2.1797293719071016,
               "covarianceTerm": 0.0
             }
           },
@@ -4590,10 +4833,10 @@
               "status": "defined",
               "label": "scenario dispersion under the declared kernels",
               "scenarios": 10000,
-              "valueVariance": 2.118426061762875,
-              "valueSd": 1.4554813848905368,
+              "valueVariance": 2.1797293719071016,
+              "valueSd": 1.4763906569424983,
               "costTerm": 0.0,
-              "qualityTerm": 2.118426061762875,
+              "qualityTerm": 2.1797293719071016,
               "covarianceTerm": 0.0
             }
           },
@@ -4615,10 +4858,10 @@
               "status": "defined",
               "label": "scenario dispersion under the declared kernels",
               "scenarios": 10000,
-              "valueVariance": 2.118426061762875,
-              "valueSd": 1.4554813848905368,
+              "valueVariance": 2.1797293719071016,
+              "valueSd": 1.4763906569424983,
               "costTerm": 0.0,
-              "qualityTerm": 2.118426061762875,
+              "qualityTerm": 2.1797293719071016,
               "covarianceTerm": 0.0
             }
           },
@@ -4632,18 +4875,18 @@
               "monteCarloSe": 0.0
             },
             "frontier": {
-              "share": 0.0004,
-              "monteCarloSe": 0.0001999599959991998
+              "share": 0.0011,
+              "monteCarloSe": 0.00033148001448051134
             },
             "qualifies": {},
             "dispersion": {
               "status": "defined",
               "label": "scenario dispersion under the declared kernels",
               "scenarios": 10000,
-              "valueVariance": 2.118426061762875,
-              "valueSd": 1.4554813848905368,
+              "valueVariance": 2.1797293719071016,
+              "valueSd": 1.4763906569424983,
               "costTerm": 0.0,
-              "qualityTerm": 2.118426061762875,
+              "qualityTerm": 2.1797293719071016,
               "covarianceTerm": 0.0
             }
           },
@@ -4665,10 +4908,10 @@
               "status": "defined",
               "label": "scenario dispersion under the declared kernels",
               "scenarios": 10000,
-              "valueVariance": 2.417348171958331,
-              "valueSd": 1.5547823551733313,
+              "valueVariance": 2.4830661355894184,
+              "valueSd": 1.5757747731162022,
               "costTerm": 0.0,
-              "qualityTerm": 2.417348171958331,
+              "qualityTerm": 2.4830661355894184,
               "covarianceTerm": 0.0
             }
           },
@@ -4690,10 +4933,10 @@
               "status": "defined",
               "label": "scenario dispersion under the declared kernels",
               "scenarios": 10000,
-              "valueVariance": 2.417348171958331,
-              "valueSd": 1.5547823551733313,
+              "valueVariance": 2.4830661355894184,
+              "valueSd": 1.5757747731162022,
               "costTerm": 0.0,
-              "qualityTerm": 2.417348171958331,
+              "qualityTerm": 2.4830661355894184,
               "covarianceTerm": 0.0
             }
           },
@@ -4715,10 +4958,10 @@
               "status": "defined",
               "label": "scenario dispersion under the declared kernels",
               "scenarios": 10000,
-              "valueVariance": 2.417348171958331,
-              "valueSd": 1.5547823551733313,
+              "valueVariance": 2.4830661355894184,
+              "valueSd": 1.5757747731162022,
               "costTerm": 0.0,
-              "qualityTerm": 2.417348171958331,
+              "qualityTerm": 2.4830661355894184,
               "covarianceTerm": 0.0
             }
           },
@@ -4740,10 +4983,10 @@
               "status": "defined",
               "label": "scenario dispersion under the declared kernels",
               "scenarios": 10000,
-              "valueVariance": 2.417348171958331,
-              "valueSd": 1.5547823551733313,
+              "valueVariance": 2.4830661355894184,
+              "valueSd": 1.5757747731162022,
               "costTerm": 0.0,
-              "qualityTerm": 2.417348171958331,
+              "qualityTerm": 2.4830661355894184,
               "covarianceTerm": 0.0
             }
           },
@@ -4765,10 +5008,10 @@
               "status": "defined",
               "label": "scenario dispersion under the declared kernels",
               "scenarios": 10000,
-              "valueVariance": 2.41339765774512,
-              "valueSd": 1.5535113960782907,
+              "valueVariance": 2.467939688856343,
+              "valueSd": 1.5709677555113417,
               "costTerm": 0.0,
-              "qualityTerm": 2.41339765774512,
+              "qualityTerm": 2.467939688856343,
               "covarianceTerm": 0.0
             }
           },
@@ -4790,10 +5033,10 @@
               "status": "defined",
               "label": "scenario dispersion under the declared kernels",
               "scenarios": 10000,
-              "valueVariance": 2.41339765774512,
-              "valueSd": 1.5535113960782907,
+              "valueVariance": 2.467939688856343,
+              "valueSd": 1.5709677555113417,
               "costTerm": 0.0,
-              "qualityTerm": 2.41339765774512,
+              "qualityTerm": 2.467939688856343,
               "covarianceTerm": 0.0
             }
           },
@@ -4815,10 +5058,10 @@
               "status": "defined",
               "label": "scenario dispersion under the declared kernels",
               "scenarios": 10000,
-              "valueVariance": 2.41339765774512,
-              "valueSd": 1.5535113960782907,
+              "valueVariance": 2.467939688856343,
+              "valueSd": 1.5709677555113417,
               "costTerm": 0.0,
-              "qualityTerm": 2.41339765774512,
+              "qualityTerm": 2.467939688856343,
               "covarianceTerm": 0.0
             }
           },
@@ -4840,10 +5083,10 @@
               "status": "defined",
               "label": "scenario dispersion under the declared kernels",
               "scenarios": 10000,
-              "valueVariance": 2.0530794775878305,
-              "valueSd": 1.4328571029896284,
+              "valueVariance": 2.109902866292149,
+              "valueSd": 1.4525504694474989,
               "costTerm": 0.0,
-              "qualityTerm": 2.0530794775878305,
+              "qualityTerm": 2.109902866292149,
               "covarianceTerm": 0.0
             }
           },
@@ -4865,10 +5108,10 @@
               "status": "defined",
               "label": "scenario dispersion under the declared kernels",
               "scenarios": 10000,
-              "valueVariance": 2.0530794775878305,
-              "valueSd": 1.4328571029896284,
+              "valueVariance": 2.109902866292149,
+              "valueSd": 1.4525504694474989,
               "costTerm": 0.0,
-              "qualityTerm": 2.0530794775878305,
+              "qualityTerm": 2.109902866292149,
               "covarianceTerm": 0.0
             }
           },
@@ -4882,18 +5125,18 @@
               "monteCarloSe": 0.0
             },
             "frontier": {
-              "share": 0.9394,
-              "monteCarloSe": 0.0023859513825725785
+              "share": 0.9415,
+              "monteCarloSe": 0.002346864930071605
             },
             "qualifies": {},
             "dispersion": {
               "status": "defined",
               "label": "scenario dispersion under the declared kernels",
               "scenarios": 10000,
-              "valueVariance": 2.0530794775878305,
-              "valueSd": 1.4328571029896284,
+              "valueVariance": 2.109902866292149,
+              "valueSd": 1.4525504694474989,
               "costTerm": 0.0,
-              "qualityTerm": 2.0530794775878305,
+              "qualityTerm": 2.109902866292149,
               "covarianceTerm": 0.0
             }
           },
@@ -4915,35 +5158,10 @@
               "status": "defined",
               "label": "scenario dispersion under the declared kernels",
               "scenarios": 10000,
-              "valueVariance": 2.0530794775878305,
-              "valueSd": 1.4328571029896284,
+              "valueVariance": 2.109902866292149,
+              "valueSd": 1.4525504694474989,
               "costTerm": 0.0,
-              "qualityTerm": 2.0530794775878305,
-              "covarianceTerm": 0.0
-            }
-          },
-          "gpt-6.1-terra-xhigh@api": {
-            "top3": {
-              "share": 0.0,
-              "monteCarloSe": 0.0
-            },
-            "top1": {
-              "share": 0.0,
-              "monteCarloSe": 0.0
-            },
-            "frontier": {
-              "share": 0.0,
-              "monteCarloSe": 0.0
-            },
-            "qualifies": {},
-            "dispersion": {
-              "status": "defined",
-              "label": "scenario dispersion under the declared kernels",
-              "scenarios": 10000,
-              "valueVariance": 2.321556186298341,
-              "valueSd": 1.523665378716187,
-              "costTerm": 0.0,
-              "qualityTerm": 2.321556186298341,
+              "qualityTerm": 2.109902866292149,
               "covarianceTerm": 0.0
             }
           },
@@ -4965,10 +5183,10 @@
               "status": "defined",
               "label": "scenario dispersion under the declared kernels",
               "scenarios": 10000,
-              "valueVariance": 3.1855377814185433,
-              "valueSd": 1.7848074914170837,
+              "valueVariance": 3.2948143316279808,
+              "valueSd": 1.8151623430503347,
               "costTerm": 0.0,
-              "qualityTerm": 3.1855377814185433,
+              "qualityTerm": 3.2948143316279808,
               "covarianceTerm": 0.0
             }
           },
@@ -4990,10 +5208,10 @@
               "status": "defined",
               "label": "scenario dispersion under the declared kernels",
               "scenarios": 10000,
-              "valueVariance": 3.1855377814185433,
-              "valueSd": 1.7848074914170837,
+              "valueVariance": 3.2948143316279808,
+              "valueSd": 1.8151623430503347,
               "costTerm": 0.0,
-              "qualityTerm": 3.1855377814185433,
+              "qualityTerm": 3.2948143316279808,
               "covarianceTerm": 0.0
             }
           },
@@ -5015,10 +5233,10 @@
               "status": "defined",
               "label": "scenario dispersion under the declared kernels",
               "scenarios": 10000,
-              "valueVariance": 3.1855377814185433,
-              "valueSd": 1.7848074914170837,
+              "valueVariance": 3.2948143316279808,
+              "valueSd": 1.8151623430503347,
               "costTerm": 0.0,
-              "qualityTerm": 3.1855377814185433,
+              "qualityTerm": 3.2948143316279808,
               "covarianceTerm": 0.0
             }
           },
@@ -5040,60 +5258,10 @@
               "status": "defined",
               "label": "scenario dispersion under the declared kernels",
               "scenarios": 10000,
-              "valueVariance": 3.1855377814185433,
-              "valueSd": 1.7848074914170837,
+              "valueVariance": 3.2948143316279808,
+              "valueSd": 1.8151623430503347,
               "costTerm": 0.0,
-              "qualityTerm": 3.1855377814185433,
-              "covarianceTerm": 0.0
-            }
-          },
-          "gpt-6.1-terra-high@api": {
-            "top3": {
-              "share": 0.0,
-              "monteCarloSe": 0.0
-            },
-            "top1": {
-              "share": 0.0,
-              "monteCarloSe": 0.0
-            },
-            "frontier": {
-              "share": 0.0,
-              "monteCarloSe": 0.0
-            },
-            "qualifies": {},
-            "dispersion": {
-              "status": "defined",
-              "label": "scenario dispersion under the declared kernels",
-              "scenarios": 10000,
-              "valueVariance": 2.2686142557406392,
-              "valueSd": 1.5061919717421943,
-              "costTerm": 0.0,
-              "qualityTerm": 2.2686142557406392,
-              "covarianceTerm": 0.0
-            }
-          },
-          "gpt-6.1-terra-medium@api": {
-            "top3": {
-              "share": 0.0,
-              "monteCarloSe": 0.0
-            },
-            "top1": {
-              "share": 0.0,
-              "monteCarloSe": 0.0
-            },
-            "frontier": {
-              "share": 0.0,
-              "monteCarloSe": 0.0
-            },
-            "qualifies": {},
-            "dispersion": {
-              "status": "defined",
-              "label": "scenario dispersion under the declared kernels",
-              "scenarios": 10000,
-              "valueVariance": 2.5423607566545887,
-              "valueSd": 1.5944782082720945,
-              "costTerm": 0.0,
-              "qualityTerm": 2.5423607566545887,
+              "qualityTerm": 3.2948143316279808,
               "covarianceTerm": 0.0
             }
           }
@@ -5187,6 +5355,70 @@
           },
           {
             "row": "gpt-6-luna@chatgpt-pro-500",
+            "reason": "owner-named transfer: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
+          },
+          {
+            "row": "gpt-6.1-terra-high@chatgpt-plus",
+            "reason": "owner-named transfer: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
+          },
+          {
+            "row": "gpt-6.1-terra-high@chatgpt-pro-100",
+            "reason": "owner-named transfer: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
+          },
+          {
+            "row": "gpt-6.1-terra-high@chatgpt-pro-200",
+            "reason": "owner-named transfer: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
+          },
+          {
+            "row": "gpt-6.1-terra-high@chatgpt-pro-500",
+            "reason": "owner-named transfer: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
+          },
+          {
+            "row": "gpt-6.1-terra-medium@chatgpt-plus",
+            "reason": "owner-named transfer: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
+          },
+          {
+            "row": "gpt-6.1-terra-medium@chatgpt-pro-100",
+            "reason": "owner-named transfer: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
+          },
+          {
+            "row": "gpt-6.1-terra-medium@chatgpt-pro-200",
+            "reason": "owner-named transfer: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
+          },
+          {
+            "row": "gpt-6.1-terra-medium@chatgpt-pro-500",
+            "reason": "owner-named transfer: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
+          },
+          {
+            "row": "gpt-6.1-terra-xhigh@chatgpt-plus",
+            "reason": "owner-named transfer: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
+          },
+          {
+            "row": "gpt-6.1-terra-xhigh@chatgpt-pro-100",
+            "reason": "owner-named transfer: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
+          },
+          {
+            "row": "gpt-6.1-terra-xhigh@chatgpt-pro-200",
+            "reason": "owner-named transfer: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
+          },
+          {
+            "row": "gpt-6.1-terra-xhigh@chatgpt-pro-500",
+            "reason": "owner-named transfer: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
+          },
+          {
+            "row": "gpt-6.1-terra@chatgpt-plus",
+            "reason": "owner-named transfer: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
+          },
+          {
+            "row": "gpt-6.1-terra@chatgpt-pro-100",
+            "reason": "owner-named transfer: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
+          },
+          {
+            "row": "gpt-6.1-terra@chatgpt-pro-200",
+            "reason": "owner-named transfer: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
+          },
+          {
+            "row": "gpt-6.1-terra@chatgpt-pro-500",
             "reason": "owner-named transfer: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
           }
         ]
@@ -5231,39 +5463,10 @@
           "gpt-6.1-sol-medium@chatgpt-plus",
           "gpt-6.1-sol-medium@chatgpt-pro-100",
           "gpt-6.1-sol-medium@chatgpt-pro-200",
-          "gpt-6.1-sol-medium@chatgpt-pro-500",
-          "gpt-6.1-terra-high@api",
-          "gpt-6.1-terra-medium@api",
-          "gpt-6.1-terra-xhigh@api",
-          "gpt-6.1-terra@api"
+          "gpt-6.1-sol-medium@chatgpt-pro-500"
         ],
-        "panelSize": 23,
+        "panelSize": 19,
         "rows": {
-          "gpt-6.1-terra@api": {
-            "top3": {
-              "share": 0.0,
-              "monteCarloSe": 0.0
-            },
-            "top1": {
-              "share": 0.0,
-              "monteCarloSe": 0.0
-            },
-            "frontier": {
-              "share": 0.0,
-              "monteCarloSe": 0.0
-            },
-            "qualifies": {},
-            "dispersion": {
-              "status": "defined",
-              "label": "scenario dispersion under the declared kernels",
-              "scenarios": 10000,
-              "valueVariance": 9.214472058621453e-06,
-              "valueSd": 0.003035534888388116,
-              "costTerm": 0.0,
-              "qualityTerm": 9.214472058621453e-06,
-              "covarianceTerm": 0.0
-            }
-          },
           "gpt-6.1-sol-high@chatgpt-plus": {
             "top3": {
               "share": 0.0,
@@ -5282,10 +5485,10 @@
               "status": "defined",
               "label": "scenario dispersion under the declared kernels",
               "scenarios": 10000,
-              "valueVariance": 9.17314952262783e-06,
-              "valueSd": 0.003028720773301466,
+              "valueVariance": 9.179886010876145e-06,
+              "valueSd": 0.0030298326704417435,
               "costTerm": 0.0,
-              "qualityTerm": 9.17314952262783e-06,
+              "qualityTerm": 9.179886010876145e-06,
               "covarianceTerm": 0.0
             }
           },
@@ -5307,10 +5510,10 @@
               "status": "defined",
               "label": "scenario dispersion under the declared kernels",
               "scenarios": 10000,
-              "valueVariance": 9.17314952262783e-06,
-              "valueSd": 0.003028720773301466,
+              "valueVariance": 9.179886010876145e-06,
+              "valueSd": 0.0030298326704417435,
               "costTerm": 0.0,
-              "qualityTerm": 9.17314952262783e-06,
+              "qualityTerm": 9.179886010876145e-06,
               "covarianceTerm": 0.0
             }
           },
@@ -5332,10 +5535,10 @@
               "status": "defined",
               "label": "scenario dispersion under the declared kernels",
               "scenarios": 10000,
-              "valueVariance": 9.17314952262783e-06,
-              "valueSd": 0.003028720773301466,
+              "valueVariance": 9.179886010876145e-06,
+              "valueSd": 0.0030298326704417435,
               "costTerm": 0.0,
-              "qualityTerm": 9.17314952262783e-06,
+              "qualityTerm": 9.179886010876145e-06,
               "covarianceTerm": 0.0
             }
           },
@@ -5357,10 +5560,10 @@
               "status": "defined",
               "label": "scenario dispersion under the declared kernels",
               "scenarios": 10000,
-              "valueVariance": 9.17314952262783e-06,
-              "valueSd": 0.003028720773301466,
+              "valueVariance": 9.179886010876145e-06,
+              "valueSd": 0.0030298326704417435,
               "costTerm": 0.0,
-              "qualityTerm": 9.17314952262783e-06,
+              "qualityTerm": 9.179886010876145e-06,
               "covarianceTerm": 0.0
             }
           },
@@ -5382,10 +5585,10 @@
               "status": "defined",
               "label": "scenario dispersion under the declared kernels",
               "scenarios": 10000,
-              "valueVariance": 9.160996209131078e-06,
-              "valueSd": 0.003026713763990754,
+              "valueVariance": 9.150992929610974e-06,
+              "valueSd": 0.003025060814200431,
               "costTerm": 0.0,
-              "qualityTerm": 9.160996209131078e-06,
+              "qualityTerm": 9.150992929610974e-06,
               "covarianceTerm": 0.0
             }
           },
@@ -5407,10 +5610,10 @@
               "status": "defined",
               "label": "scenario dispersion under the declared kernels",
               "scenarios": 10000,
-              "valueVariance": 9.160996209131078e-06,
-              "valueSd": 0.003026713763990754,
+              "valueVariance": 9.150992929610974e-06,
+              "valueSd": 0.003025060814200431,
               "costTerm": 0.0,
-              "qualityTerm": 9.160996209131078e-06,
+              "qualityTerm": 9.150992929610974e-06,
               "covarianceTerm": 0.0
             }
           },
@@ -5432,10 +5635,10 @@
               "status": "defined",
               "label": "scenario dispersion under the declared kernels",
               "scenarios": 10000,
-              "valueVariance": 9.160996209131078e-06,
-              "valueSd": 0.003026713763990754,
+              "valueVariance": 9.150992929610974e-06,
+              "valueSd": 0.003025060814200431,
               "costTerm": 0.0,
-              "qualityTerm": 9.160996209131078e-06,
+              "qualityTerm": 9.150992929610974e-06,
               "covarianceTerm": 0.0
             }
           },
@@ -5457,10 +5660,10 @@
               "status": "defined",
               "label": "scenario dispersion under the declared kernels",
               "scenarios": 10000,
-              "valueVariance": 9.160996209131078e-06,
-              "valueSd": 0.003026713763990754,
+              "valueVariance": 9.150992929610974e-06,
+              "valueSd": 0.003025060814200431,
               "costTerm": 0.0,
-              "qualityTerm": 9.160996209131078e-06,
+              "qualityTerm": 9.150992929610974e-06,
               "covarianceTerm": 0.0
             }
           },
@@ -5482,10 +5685,10 @@
               "status": "defined",
               "label": "scenario dispersion under the declared kernels",
               "scenarios": 10000,
-              "valueVariance": 9.161994918542896e-06,
-              "valueSd": 0.003026878741962237,
+              "valueVariance": 9.160395259314982e-06,
+              "valueSd": 0.0030266144880567434,
               "costTerm": 0.0,
-              "qualityTerm": 9.161994918542896e-06,
+              "qualityTerm": 9.160395259314982e-06,
               "covarianceTerm": 0.0
             }
           },
@@ -5507,10 +5710,10 @@
               "status": "defined",
               "label": "scenario dispersion under the declared kernels",
               "scenarios": 10000,
-              "valueVariance": 9.161994918542896e-06,
-              "valueSd": 0.003026878741962237,
+              "valueVariance": 9.160395259314982e-06,
+              "valueSd": 0.0030266144880567434,
               "costTerm": 0.0,
-              "qualityTerm": 9.161994918542896e-06,
+              "qualityTerm": 9.160395259314982e-06,
               "covarianceTerm": 0.0
             }
           },
@@ -5532,10 +5735,10 @@
               "status": "defined",
               "label": "scenario dispersion under the declared kernels",
               "scenarios": 10000,
-              "valueVariance": 9.161994918542896e-06,
-              "valueSd": 0.003026878741962237,
+              "valueVariance": 9.160395259314982e-06,
+              "valueSd": 0.0030266144880567434,
               "costTerm": 0.0,
-              "qualityTerm": 9.161994918542896e-06,
+              "qualityTerm": 9.160395259314982e-06,
               "covarianceTerm": 0.0
             }
           },
@@ -5557,10 +5760,10 @@
               "status": "defined",
               "label": "scenario dispersion under the declared kernels",
               "scenarios": 10000,
-              "valueVariance": 9.05544124416679e-06,
-              "valueSd": 0.0030092260207845454,
+              "valueVariance": 9.155720292731765e-06,
+              "valueSd": 0.003025842079939362,
               "costTerm": 0.0,
-              "qualityTerm": 9.05544124416679e-06,
+              "qualityTerm": 9.155720292731765e-06,
               "covarianceTerm": 0.0
             }
           },
@@ -5582,10 +5785,10 @@
               "status": "defined",
               "label": "scenario dispersion under the declared kernels",
               "scenarios": 10000,
-              "valueVariance": 9.05544124416679e-06,
-              "valueSd": 0.0030092260207845454,
+              "valueVariance": 9.155720292731765e-06,
+              "valueSd": 0.003025842079939362,
               "costTerm": 0.0,
-              "qualityTerm": 9.05544124416679e-06,
+              "qualityTerm": 9.155720292731765e-06,
               "covarianceTerm": 0.0
             }
           },
@@ -5607,10 +5810,10 @@
               "status": "defined",
               "label": "scenario dispersion under the declared kernels",
               "scenarios": 10000,
-              "valueVariance": 9.05544124416679e-06,
-              "valueSd": 0.0030092260207845454,
+              "valueVariance": 9.155720292731765e-06,
+              "valueSd": 0.003025842079939362,
               "costTerm": 0.0,
-              "qualityTerm": 9.05544124416679e-06,
+              "qualityTerm": 9.155720292731765e-06,
               "covarianceTerm": 0.0
             }
           },
@@ -5632,35 +5835,10 @@
               "status": "defined",
               "label": "scenario dispersion under the declared kernels",
               "scenarios": 10000,
-              "valueVariance": 9.05544124416679e-06,
-              "valueSd": 0.0030092260207845454,
+              "valueVariance": 9.155720292731765e-06,
+              "valueSd": 0.003025842079939362,
               "costTerm": 0.0,
-              "qualityTerm": 9.05544124416679e-06,
-              "covarianceTerm": 0.0
-            }
-          },
-          "gpt-6.1-terra-xhigh@api": {
-            "top3": {
-              "share": 0.0,
-              "monteCarloSe": 0.0
-            },
-            "top1": {
-              "share": 0.0,
-              "monteCarloSe": 0.0
-            },
-            "frontier": {
-              "share": 0.0,
-              "monteCarloSe": 0.0
-            },
-            "qualifies": {},
-            "dispersion": {
-              "status": "defined",
-              "label": "scenario dispersion under the declared kernels",
-              "scenarios": 10000,
-              "valueVariance": 9.14975960079389e-06,
-              "valueSd": 0.0030248569554268,
-              "costTerm": 0.0,
-              "qualityTerm": 9.14975960079389e-06,
+              "qualityTerm": 9.155720292731765e-06,
               "covarianceTerm": 0.0
             }
           },
@@ -5682,10 +5860,10 @@
               "status": "defined",
               "label": "scenario dispersion under the declared kernels",
               "scenarios": 10000,
-              "valueVariance": 9.212093387911132e-06,
-              "valueSd": 0.0030351430588871973,
+              "valueVariance": 9.209869893622341e-06,
+              "valueSd": 0.0030347767452684788,
               "costTerm": 0.0,
-              "qualityTerm": 9.212093387911132e-06,
+              "qualityTerm": 9.209869893622341e-06,
               "covarianceTerm": 0.0
             }
           },
@@ -5707,10 +5885,10 @@
               "status": "defined",
               "label": "scenario dispersion under the declared kernels",
               "scenarios": 10000,
-              "valueVariance": 9.212093387911132e-06,
-              "valueSd": 0.0030351430588871973,
+              "valueVariance": 9.209869893622341e-06,
+              "valueSd": 0.0030347767452684788,
               "costTerm": 0.0,
-              "qualityTerm": 9.212093387911132e-06,
+              "qualityTerm": 9.209869893622341e-06,
               "covarianceTerm": 0.0
             }
           },
@@ -5732,10 +5910,10 @@
               "status": "defined",
               "label": "scenario dispersion under the declared kernels",
               "scenarios": 10000,
-              "valueVariance": 9.212093387911132e-06,
-              "valueSd": 0.0030351430588871973,
+              "valueVariance": 9.209869893622341e-06,
+              "valueSd": 0.0030347767452684788,
               "costTerm": 0.0,
-              "qualityTerm": 9.212093387911132e-06,
+              "qualityTerm": 9.209869893622341e-06,
               "covarianceTerm": 0.0
             }
           },
@@ -5757,60 +5935,10 @@
               "status": "defined",
               "label": "scenario dispersion under the declared kernels",
               "scenarios": 10000,
-              "valueVariance": 9.212093387911132e-06,
-              "valueSd": 0.0030351430588871973,
+              "valueVariance": 9.209869893622341e-06,
+              "valueSd": 0.0030347767452684788,
               "costTerm": 0.0,
-              "qualityTerm": 9.212093387911132e-06,
-              "covarianceTerm": 0.0
-            }
-          },
-          "gpt-6.1-terra-high@api": {
-            "top3": {
-              "share": 0.0,
-              "monteCarloSe": 0.0
-            },
-            "top1": {
-              "share": 0.0,
-              "monteCarloSe": 0.0
-            },
-            "frontier": {
-              "share": 0.0,
-              "monteCarloSe": 0.0
-            },
-            "qualifies": {},
-            "dispersion": {
-              "status": "defined",
-              "label": "scenario dispersion under the declared kernels",
-              "scenarios": 10000,
-              "valueVariance": 9.158838909451e-06,
-              "valueSd": 0.003026357366447492,
-              "costTerm": 0.0,
-              "qualityTerm": 9.158838909451e-06,
-              "covarianceTerm": 0.0
-            }
-          },
-          "gpt-6.1-terra-medium@api": {
-            "top3": {
-              "share": 0.0,
-              "monteCarloSe": 0.0
-            },
-            "top1": {
-              "share": 0.0,
-              "monteCarloSe": 0.0
-            },
-            "frontier": {
-              "share": 0.0,
-              "monteCarloSe": 0.0
-            },
-            "qualifies": {},
-            "dispersion": {
-              "status": "defined",
-              "label": "scenario dispersion under the declared kernels",
-              "scenarios": 10000,
-              "valueVariance": 9.212570841931224e-06,
-              "valueSd": 0.003035221712154027,
-              "costTerm": 0.0,
-              "qualityTerm": 9.212570841931224e-06,
+              "qualityTerm": 9.209869893622341e-06,
               "covarianceTerm": 0.0
             }
           }
@@ -5904,6 +6032,70 @@
           },
           {
             "row": "gpt-6-luna@chatgpt-pro-500",
+            "reason": "owner-named transfer: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
+          },
+          {
+            "row": "gpt-6.1-terra-high@chatgpt-plus",
+            "reason": "owner-named transfer: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
+          },
+          {
+            "row": "gpt-6.1-terra-high@chatgpt-pro-100",
+            "reason": "owner-named transfer: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
+          },
+          {
+            "row": "gpt-6.1-terra-high@chatgpt-pro-200",
+            "reason": "owner-named transfer: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
+          },
+          {
+            "row": "gpt-6.1-terra-high@chatgpt-pro-500",
+            "reason": "owner-named transfer: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
+          },
+          {
+            "row": "gpt-6.1-terra-medium@chatgpt-plus",
+            "reason": "owner-named transfer: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
+          },
+          {
+            "row": "gpt-6.1-terra-medium@chatgpt-pro-100",
+            "reason": "owner-named transfer: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
+          },
+          {
+            "row": "gpt-6.1-terra-medium@chatgpt-pro-200",
+            "reason": "owner-named transfer: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
+          },
+          {
+            "row": "gpt-6.1-terra-medium@chatgpt-pro-500",
+            "reason": "owner-named transfer: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
+          },
+          {
+            "row": "gpt-6.1-terra-xhigh@chatgpt-plus",
+            "reason": "owner-named transfer: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
+          },
+          {
+            "row": "gpt-6.1-terra-xhigh@chatgpt-pro-100",
+            "reason": "owner-named transfer: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
+          },
+          {
+            "row": "gpt-6.1-terra-xhigh@chatgpt-pro-200",
+            "reason": "owner-named transfer: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
+          },
+          {
+            "row": "gpt-6.1-terra-xhigh@chatgpt-pro-500",
+            "reason": "owner-named transfer: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
+          },
+          {
+            "row": "gpt-6.1-terra@chatgpt-plus",
+            "reason": "owner-named transfer: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
+          },
+          {
+            "row": "gpt-6.1-terra@chatgpt-pro-100",
+            "reason": "owner-named transfer: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
+          },
+          {
+            "row": "gpt-6.1-terra@chatgpt-pro-200",
+            "reason": "owner-named transfer: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
+          },
+          {
+            "row": "gpt-6.1-terra@chatgpt-pro-500",
             "reason": "owner-named transfer: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
           }
         ]
@@ -5949,39 +6141,10 @@
           "gpt-6.1-sol-medium@chatgpt-plus",
           "gpt-6.1-sol-medium@chatgpt-pro-100",
           "gpt-6.1-sol-medium@chatgpt-pro-200",
-          "gpt-6.1-sol-medium@chatgpt-pro-500",
-          "gpt-6.1-terra-high@api",
-          "gpt-6.1-terra-medium@api",
-          "gpt-6.1-terra-xhigh@api",
-          "gpt-6.1-terra@api"
+          "gpt-6.1-sol-medium@chatgpt-pro-500"
         ],
-        "panelSize": 23,
+        "panelSize": 19,
         "rows": {
-          "gpt-6.1-terra@api": {
-            "top3": {
-              "share": 0.0,
-              "monteCarloSe": 0.0
-            },
-            "top1": {
-              "share": 0.0,
-              "monteCarloSe": 0.0
-            },
-            "frontier": {
-              "share": 0.0,
-              "monteCarloSe": 0.0
-            },
-            "qualifies": {},
-            "dispersion": {
-              "status": "defined",
-              "label": "scenario dispersion under the declared kernels",
-              "scenarios": 10000,
-              "valueVariance": 6.18428474061566e-06,
-              "valueSd": 0.0024868222173319225,
-              "costTerm": 0.0,
-              "qualityTerm": 6.18428474061566e-06,
-              "covarianceTerm": 0.0
-            }
-          },
           "gpt-6.1-sol-high@chatgpt-plus": {
             "top3": {
               "share": 0.0,
@@ -6000,10 +6163,10 @@
               "status": "defined",
               "label": "scenario dispersion under the declared kernels",
               "scenarios": 10000,
-              "valueVariance": 6.167103945522537e-06,
-              "valueSd": 0.0024833654474367113,
+              "valueVariance": 6.139359450715368e-06,
+              "valueSd": 0.002477773082974986,
               "costTerm": 0.0,
-              "qualityTerm": 6.167103945522537e-06,
+              "qualityTerm": 6.139359450715368e-06,
               "covarianceTerm": 0.0
             }
           },
@@ -6025,10 +6188,10 @@
               "status": "defined",
               "label": "scenario dispersion under the declared kernels",
               "scenarios": 10000,
-              "valueVariance": 6.167103945522537e-06,
-              "valueSd": 0.0024833654474367113,
+              "valueVariance": 6.139359450715368e-06,
+              "valueSd": 0.002477773082974986,
               "costTerm": 0.0,
-              "qualityTerm": 6.167103945522537e-06,
+              "qualityTerm": 6.139359450715368e-06,
               "covarianceTerm": 0.0
             }
           },
@@ -6050,10 +6213,10 @@
               "status": "defined",
               "label": "scenario dispersion under the declared kernels",
               "scenarios": 10000,
-              "valueVariance": 6.167103945522537e-06,
-              "valueSd": 0.0024833654474367113,
+              "valueVariance": 6.139359450715368e-06,
+              "valueSd": 0.002477773082974986,
               "costTerm": 0.0,
-              "qualityTerm": 6.167103945522537e-06,
+              "qualityTerm": 6.139359450715368e-06,
               "covarianceTerm": 0.0
             }
           },
@@ -6075,10 +6238,10 @@
               "status": "defined",
               "label": "scenario dispersion under the declared kernels",
               "scenarios": 10000,
-              "valueVariance": 6.167103945522537e-06,
-              "valueSd": 0.0024833654474367113,
+              "valueVariance": 6.139359450715368e-06,
+              "valueSd": 0.002477773082974986,
               "costTerm": 0.0,
-              "qualityTerm": 6.167103945522537e-06,
+              "qualityTerm": 6.139359450715368e-06,
               "covarianceTerm": 0.0
             }
           },
@@ -6100,10 +6263,10 @@
               "status": "defined",
               "label": "scenario dispersion under the declared kernels",
               "scenarios": 10000,
-              "valueVariance": 6.147136071697033e-06,
-              "valueSd": 0.0024793418626113325,
+              "valueVariance": 6.13355393591914e-06,
+              "valueSd": 0.002476601287231988,
               "costTerm": 0.0,
-              "qualityTerm": 6.147136071697033e-06,
+              "qualityTerm": 6.13355393591914e-06,
               "covarianceTerm": 0.0
             }
           },
@@ -6125,10 +6288,10 @@
               "status": "defined",
               "label": "scenario dispersion under the declared kernels",
               "scenarios": 10000,
-              "valueVariance": 6.147136071697033e-06,
-              "valueSd": 0.0024793418626113325,
+              "valueVariance": 6.13355393591914e-06,
+              "valueSd": 0.002476601287231988,
               "costTerm": 0.0,
-              "qualityTerm": 6.147136071697033e-06,
+              "qualityTerm": 6.13355393591914e-06,
               "covarianceTerm": 0.0
             }
           },
@@ -6150,10 +6313,10 @@
               "status": "defined",
               "label": "scenario dispersion under the declared kernels",
               "scenarios": 10000,
-              "valueVariance": 6.147136071697033e-06,
-              "valueSd": 0.0024793418626113325,
+              "valueVariance": 6.13355393591914e-06,
+              "valueSd": 0.002476601287231988,
               "costTerm": 0.0,
-              "qualityTerm": 6.147136071697033e-06,
+              "qualityTerm": 6.13355393591914e-06,
               "covarianceTerm": 0.0
             }
           },
@@ -6175,10 +6338,10 @@
               "status": "defined",
               "label": "scenario dispersion under the declared kernels",
               "scenarios": 10000,
-              "valueVariance": 6.147136071697033e-06,
-              "valueSd": 0.0024793418626113325,
+              "valueVariance": 6.13355393591914e-06,
+              "valueSd": 0.002476601287231988,
               "costTerm": 0.0,
-              "qualityTerm": 6.147136071697033e-06,
+              "qualityTerm": 6.13355393591914e-06,
               "covarianceTerm": 0.0
             }
           },
@@ -6200,10 +6363,10 @@
               "status": "defined",
               "label": "scenario dispersion under the declared kernels",
               "scenarios": 10000,
-              "valueVariance": 6.146337059429149e-06,
-              "valueSd": 0.002479180723430454,
+              "valueVariance": 6.07616361645748e-06,
+              "valueSd": 0.0024649875489457305,
               "costTerm": 0.0,
-              "qualityTerm": 6.146337059429149e-06,
+              "qualityTerm": 6.07616361645748e-06,
               "covarianceTerm": 0.0
             }
           },
@@ -6225,10 +6388,10 @@
               "status": "defined",
               "label": "scenario dispersion under the declared kernels",
               "scenarios": 10000,
-              "valueVariance": 6.146337059429149e-06,
-              "valueSd": 0.002479180723430454,
+              "valueVariance": 6.07616361645748e-06,
+              "valueSd": 0.0024649875489457305,
               "costTerm": 0.0,
-              "qualityTerm": 6.146337059429149e-06,
+              "qualityTerm": 6.07616361645748e-06,
               "covarianceTerm": 0.0
             }
           },
@@ -6250,10 +6413,10 @@
               "status": "defined",
               "label": "scenario dispersion under the declared kernels",
               "scenarios": 10000,
-              "valueVariance": 6.146337059429149e-06,
-              "valueSd": 0.002479180723430454,
+              "valueVariance": 6.07616361645748e-06,
+              "valueSd": 0.0024649875489457305,
               "costTerm": 0.0,
-              "qualityTerm": 6.146337059429149e-06,
+              "qualityTerm": 6.07616361645748e-06,
               "covarianceTerm": 0.0
             }
           },
@@ -6275,10 +6438,10 @@
               "status": "defined",
               "label": "scenario dispersion under the declared kernels",
               "scenarios": 10000,
-              "valueVariance": 6.056797773732487e-06,
-              "valueSd": 0.0024610562313227397,
+              "valueVariance": 6.110644183609366e-06,
+              "valueSd": 0.0024719717198239477,
               "costTerm": 0.0,
-              "qualityTerm": 6.056797773732487e-06,
+              "qualityTerm": 6.110644183609366e-06,
               "covarianceTerm": 0.0
             }
           },
@@ -6300,10 +6463,10 @@
               "status": "defined",
               "label": "scenario dispersion under the declared kernels",
               "scenarios": 10000,
-              "valueVariance": 6.056797773732487e-06,
-              "valueSd": 0.0024610562313227397,
+              "valueVariance": 6.110644183609366e-06,
+              "valueSd": 0.0024719717198239477,
               "costTerm": 0.0,
-              "qualityTerm": 6.056797773732487e-06,
+              "qualityTerm": 6.110644183609366e-06,
               "covarianceTerm": 0.0
             }
           },
@@ -6325,10 +6488,10 @@
               "status": "defined",
               "label": "scenario dispersion under the declared kernels",
               "scenarios": 10000,
-              "valueVariance": 6.056797773732487e-06,
-              "valueSd": 0.0024610562313227397,
+              "valueVariance": 6.110644183609366e-06,
+              "valueSd": 0.0024719717198239477,
               "costTerm": 0.0,
-              "qualityTerm": 6.056797773732487e-06,
+              "qualityTerm": 6.110644183609366e-06,
               "covarianceTerm": 0.0
             }
           },
@@ -6350,35 +6513,10 @@
               "status": "defined",
               "label": "scenario dispersion under the declared kernels",
               "scenarios": 10000,
-              "valueVariance": 6.056797773732487e-06,
-              "valueSd": 0.0024610562313227397,
+              "valueVariance": 6.110644183609366e-06,
+              "valueSd": 0.0024719717198239477,
               "costTerm": 0.0,
-              "qualityTerm": 6.056797773732487e-06,
-              "covarianceTerm": 0.0
-            }
-          },
-          "gpt-6.1-terra-xhigh@api": {
-            "top3": {
-              "share": 0.0,
-              "monteCarloSe": 0.0
-            },
-            "top1": {
-              "share": 0.0,
-              "monteCarloSe": 0.0
-            },
-            "frontier": {
-              "share": 0.0,
-              "monteCarloSe": 0.0
-            },
-            "qualifies": {},
-            "dispersion": {
-              "status": "defined",
-              "label": "scenario dispersion under the declared kernels",
-              "scenarios": 10000,
-              "valueVariance": 6.192060372329496e-06,
-              "valueSd": 0.002488385093254156,
-              "costTerm": 0.0,
-              "qualityTerm": 6.192060372329496e-06,
+              "qualityTerm": 6.110644183609366e-06,
               "covarianceTerm": 0.0
             }
           },
@@ -6400,10 +6538,10 @@
               "status": "defined",
               "label": "scenario dispersion under the declared kernels",
               "scenarios": 10000,
-              "valueVariance": 6.241346625784868e-06,
-              "valueSd": 0.00249826872569483,
+              "valueVariance": 6.1878830557975956e-06,
+              "valueSd": 0.0024875455886872897,
               "costTerm": 0.0,
-              "qualityTerm": 6.241346625784868e-06,
+              "qualityTerm": 6.1878830557975956e-06,
               "covarianceTerm": 0.0
             }
           },
@@ -6425,10 +6563,10 @@
               "status": "defined",
               "label": "scenario dispersion under the declared kernels",
               "scenarios": 10000,
-              "valueVariance": 6.241346625784868e-06,
-              "valueSd": 0.00249826872569483,
+              "valueVariance": 6.1878830557975956e-06,
+              "valueSd": 0.0024875455886872897,
               "costTerm": 0.0,
-              "qualityTerm": 6.241346625784868e-06,
+              "qualityTerm": 6.1878830557975956e-06,
               "covarianceTerm": 0.0
             }
           },
@@ -6450,10 +6588,10 @@
               "status": "defined",
               "label": "scenario dispersion under the declared kernels",
               "scenarios": 10000,
-              "valueVariance": 6.241346625784868e-06,
-              "valueSd": 0.00249826872569483,
+              "valueVariance": 6.1878830557975956e-06,
+              "valueSd": 0.0024875455886872897,
               "costTerm": 0.0,
-              "qualityTerm": 6.241346625784868e-06,
+              "qualityTerm": 6.1878830557975956e-06,
               "covarianceTerm": 0.0
             }
           },
@@ -6475,60 +6613,10 @@
               "status": "defined",
               "label": "scenario dispersion under the declared kernels",
               "scenarios": 10000,
-              "valueVariance": 6.241346625784868e-06,
-              "valueSd": 0.00249826872569483,
+              "valueVariance": 6.1878830557975956e-06,
+              "valueSd": 0.0024875455886872897,
               "costTerm": 0.0,
-              "qualityTerm": 6.241346625784868e-06,
-              "covarianceTerm": 0.0
-            }
-          },
-          "gpt-6.1-terra-high@api": {
-            "top3": {
-              "share": 0.0,
-              "monteCarloSe": 0.0
-            },
-            "top1": {
-              "share": 0.0,
-              "monteCarloSe": 0.0
-            },
-            "frontier": {
-              "share": 0.0,
-              "monteCarloSe": 0.0
-            },
-            "qualifies": {},
-            "dispersion": {
-              "status": "defined",
-              "label": "scenario dispersion under the declared kernels",
-              "scenarios": 10000,
-              "valueVariance": 6.0812655000698755e-06,
-              "valueSd": 0.002466022201860696,
-              "costTerm": 0.0,
-              "qualityTerm": 6.0812655000698755e-06,
-              "covarianceTerm": 0.0
-            }
-          },
-          "gpt-6.1-terra-medium@api": {
-            "top3": {
-              "share": 0.0,
-              "monteCarloSe": 0.0
-            },
-            "top1": {
-              "share": 0.0,
-              "monteCarloSe": 0.0
-            },
-            "frontier": {
-              "share": 0.0,
-              "monteCarloSe": 0.0
-            },
-            "qualifies": {},
-            "dispersion": {
-              "status": "defined",
-              "label": "scenario dispersion under the declared kernels",
-              "scenarios": 10000,
-              "valueVariance": 6.151603200895733e-06,
-              "valueSd": 0.0024802425689629095,
-              "costTerm": 0.0,
-              "qualityTerm": 6.151603200895733e-06,
+              "qualityTerm": 6.1878830557975956e-06,
               "covarianceTerm": 0.0
             }
           }
@@ -6622,6 +6710,70 @@
           },
           {
             "row": "gpt-6-luna@chatgpt-pro-500",
+            "reason": "owner-named transfer: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
+          },
+          {
+            "row": "gpt-6.1-terra-high@chatgpt-plus",
+            "reason": "owner-named transfer: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
+          },
+          {
+            "row": "gpt-6.1-terra-high@chatgpt-pro-100",
+            "reason": "owner-named transfer: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
+          },
+          {
+            "row": "gpt-6.1-terra-high@chatgpt-pro-200",
+            "reason": "owner-named transfer: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
+          },
+          {
+            "row": "gpt-6.1-terra-high@chatgpt-pro-500",
+            "reason": "owner-named transfer: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
+          },
+          {
+            "row": "gpt-6.1-terra-medium@chatgpt-plus",
+            "reason": "owner-named transfer: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
+          },
+          {
+            "row": "gpt-6.1-terra-medium@chatgpt-pro-100",
+            "reason": "owner-named transfer: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
+          },
+          {
+            "row": "gpt-6.1-terra-medium@chatgpt-pro-200",
+            "reason": "owner-named transfer: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
+          },
+          {
+            "row": "gpt-6.1-terra-medium@chatgpt-pro-500",
+            "reason": "owner-named transfer: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
+          },
+          {
+            "row": "gpt-6.1-terra-xhigh@chatgpt-plus",
+            "reason": "owner-named transfer: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
+          },
+          {
+            "row": "gpt-6.1-terra-xhigh@chatgpt-pro-100",
+            "reason": "owner-named transfer: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
+          },
+          {
+            "row": "gpt-6.1-terra-xhigh@chatgpt-pro-200",
+            "reason": "owner-named transfer: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
+          },
+          {
+            "row": "gpt-6.1-terra-xhigh@chatgpt-pro-500",
+            "reason": "owner-named transfer: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
+          },
+          {
+            "row": "gpt-6.1-terra@chatgpt-plus",
+            "reason": "owner-named transfer: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
+          },
+          {
+            "row": "gpt-6.1-terra@chatgpt-pro-100",
+            "reason": "owner-named transfer: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
+          },
+          {
+            "row": "gpt-6.1-terra@chatgpt-pro-200",
+            "reason": "owner-named transfer: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
+          },
+          {
+            "row": "gpt-6.1-terra@chatgpt-pro-500",
             "reason": "owner-named transfer: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
           }
         ]
@@ -6667,43 +6819,14 @@
           "gpt-6.1-sol-medium@chatgpt-plus",
           "gpt-6.1-sol-medium@chatgpt-pro-100",
           "gpt-6.1-sol-medium@chatgpt-pro-200",
-          "gpt-6.1-sol-medium@chatgpt-pro-500",
-          "gpt-6.1-terra-high@api",
-          "gpt-6.1-terra-medium@api",
-          "gpt-6.1-terra-xhigh@api",
-          "gpt-6.1-terra@api"
+          "gpt-6.1-sol-medium@chatgpt-pro-500"
         ],
-        "panelSize": 23,
+        "panelSize": 19,
         "rows": {
-          "gpt-6.1-terra@api": {
-            "top3": {
-              "share": 0.0,
-              "monteCarloSe": 0.0
-            },
-            "top1": {
-              "share": 0.0,
-              "monteCarloSe": 0.0
-            },
-            "frontier": {
-              "share": 0.1978,
-              "monteCarloSe": 0.003983405076062438
-            },
-            "qualifies": {},
-            "dispersion": {
-              "status": "defined",
-              "label": "scenario dispersion under the declared kernels",
-              "scenarios": 10000,
-              "valueVariance": 2.2705405495883593,
-              "valueSd": 1.5068312943353543,
-              "costTerm": 0.0,
-              "qualityTerm": 2.2705405495883593,
-              "covarianceTerm": 0.0
-            }
-          },
           "gpt-6.1-sol-high@chatgpt-plus": {
             "top3": {
-              "share": 0.2127,
-              "monteCarloSe": 0.004092171917209736
+              "share": 0.207,
+              "monteCarloSe": 0.004051555256935292
             },
             "top1": {
               "share": 0.0,
@@ -6718,17 +6841,17 @@
               "status": "defined",
               "label": "scenario dispersion under the declared kernels",
               "scenarios": 10000,
-              "valueVariance": 1.7609923988672322,
-              "valueSd": 1.3270238878284115,
+              "valueVariance": 1.7783586181399849,
+              "valueSd": 1.3335511306807792,
               "costTerm": 0.0,
-              "qualityTerm": 1.7609923988672322,
+              "qualityTerm": 1.7783586181399849,
               "covarianceTerm": 0.0
             }
           },
           "gpt-6.1-sol-high@chatgpt-pro-100": {
             "top3": {
-              "share": 0.2127,
-              "monteCarloSe": 0.004092171917209736
+              "share": 0.207,
+              "monteCarloSe": 0.004051555256935292
             },
             "top1": {
               "share": 0.0,
@@ -6743,10 +6866,10 @@
               "status": "defined",
               "label": "scenario dispersion under the declared kernels",
               "scenarios": 10000,
-              "valueVariance": 1.7609923988672322,
-              "valueSd": 1.3270238878284115,
+              "valueVariance": 1.7783586181399849,
+              "valueSd": 1.3335511306807792,
               "costTerm": 0.0,
-              "qualityTerm": 1.7609923988672322,
+              "qualityTerm": 1.7783586181399849,
               "covarianceTerm": 0.0
             }
           },
@@ -6768,42 +6891,42 @@
               "status": "defined",
               "label": "scenario dispersion under the declared kernels",
               "scenarios": 10000,
-              "valueVariance": 1.7609923988672322,
-              "valueSd": 1.3270238878284115,
+              "valueVariance": 1.7783586181399849,
+              "valueSd": 1.3335511306807792,
               "costTerm": 0.0,
-              "qualityTerm": 1.7609923988672322,
+              "qualityTerm": 1.7783586181399849,
               "covarianceTerm": 0.0
             }
           },
           "gpt-6.1-sol-high@chatgpt-pro-500": {
             "top3": {
-              "share": 0.2416,
-              "monteCarloSe": 0.004280530808205917
+              "share": 0.2352,
+              "monteCarloSe": 0.004241237555242573
             },
             "top1": {
-              "share": 0.2223,
-              "monteCarloSe": 0.00415791666583158
+              "share": 0.2161,
+              "monteCarloSe": 0.004115832722548379
             },
             "frontier": {
-              "share": 0.3202,
-              "monteCarloSe": 0.004665532767005286
+              "share": 0.3102,
+              "monteCarloSe": 0.004625753560232105
             },
             "qualifies": {},
             "dispersion": {
               "status": "defined",
               "label": "scenario dispersion under the declared kernels",
               "scenarios": 10000,
-              "valueVariance": 1.7609923988672322,
-              "valueSd": 1.3270238878284115,
+              "valueVariance": 1.7783586181399849,
+              "valueSd": 1.3335511306807792,
               "costTerm": 0.0,
-              "qualityTerm": 1.7609923988672322,
+              "qualityTerm": 1.7783586181399849,
               "covarianceTerm": 0.0
             }
           },
           "gpt-6.1-sol-medium@chatgpt-plus": {
             "top3": {
-              "share": 0.0635,
-              "monteCarloSe": 0.0024386010333795893
+              "share": 0.0653,
+              "monteCarloSe": 0.002470544676786882
             },
             "top1": {
               "share": 0.0,
@@ -6818,17 +6941,17 @@
               "status": "defined",
               "label": "scenario dispersion under the declared kernels",
               "scenarios": 10000,
-              "valueVariance": 1.8496651729088154,
-              "valueSd": 1.3600239604171742,
+              "valueVariance": 1.8373573548243447,
+              "valueSd": 1.3554915546857327,
               "costTerm": 0.0,
-              "qualityTerm": 1.8496651729088154,
+              "qualityTerm": 1.8373573548243447,
               "covarianceTerm": 0.0
             }
           },
           "gpt-6.1-sol-medium@chatgpt-pro-100": {
             "top3": {
-              "share": 0.0635,
-              "monteCarloSe": 0.0024386010333795893
+              "share": 0.0653,
+              "monteCarloSe": 0.002470544676786882
             },
             "top1": {
               "share": 0.0,
@@ -6843,10 +6966,10 @@
               "status": "defined",
               "label": "scenario dispersion under the declared kernels",
               "scenarios": 10000,
-              "valueVariance": 1.8496651729088154,
-              "valueSd": 1.3600239604171742,
+              "valueVariance": 1.8373573548243447,
+              "valueSd": 1.3554915546857327,
               "costTerm": 0.0,
-              "qualityTerm": 1.8496651729088154,
+              "qualityTerm": 1.8373573548243447,
               "covarianceTerm": 0.0
             }
           },
@@ -6868,42 +6991,42 @@
               "status": "defined",
               "label": "scenario dispersion under the declared kernels",
               "scenarios": 10000,
-              "valueVariance": 1.8496651729088154,
-              "valueSd": 1.3600239604171742,
+              "valueVariance": 1.8373573548243447,
+              "valueSd": 1.3554915546857327,
               "costTerm": 0.0,
-              "qualityTerm": 1.8496651729088154,
+              "qualityTerm": 1.8373573548243447,
               "covarianceTerm": 0.0
             }
           },
           "gpt-6.1-sol-medium@chatgpt-pro-500": {
             "top3": {
-              "share": 0.0756,
-              "monteCarloSe": 0.0026435703130425715
+              "share": 0.0733,
+              "monteCarloSe": 0.0026062829854027747
             },
             "top1": {
-              "share": 0.0672,
-              "monteCarloSe": 0.0025036804907974976
+              "share": 0.0679,
+              "monteCarloSe": 0.0025157422363986342
             },
             "frontier": {
-              "share": 0.9998,
-              "monteCarloSe": 0.0001414072133945005
+              "share": 0.9999,
+              "monteCarloSe": 9.999499987498824e-05
             },
             "qualifies": {},
             "dispersion": {
               "status": "defined",
               "label": "scenario dispersion under the declared kernels",
               "scenarios": 10000,
-              "valueVariance": 1.8496651729088154,
-              "valueSd": 1.3600239604171742,
+              "valueVariance": 1.8373573548243447,
+              "valueSd": 1.3554915546857327,
               "costTerm": 0.0,
-              "qualityTerm": 1.8496651729088154,
+              "qualityTerm": 1.8373573548243447,
               "covarianceTerm": 0.0
             }
           },
           "claude-opus-5-5-high@claude-max-20x": {
             "top3": {
-              "share": 0.7233,
-              "monteCarloSe": 0.004473668628765434
+              "share": 0.7273,
+              "monteCarloSe": 0.004453478528072186
             },
             "top1": {
               "share": 0.0,
@@ -6918,17 +7041,17 @@
               "status": "defined",
               "label": "scenario dispersion under the declared kernels",
               "scenarios": 10000,
-              "valueVariance": 1.6920418238248254,
-              "valueSd": 1.3007850797978986,
+              "valueVariance": 1.703773478685032,
+              "valueSd": 1.305286741940265,
               "costTerm": 0.0,
-              "qualityTerm": 1.6920418238248254,
+              "qualityTerm": 1.703773478685032,
               "covarianceTerm": 0.0
             }
           },
           "claude-opus-5-5-high@claude-max-5x": {
             "top3": {
-              "share": 0.6887,
-              "monteCarloSe": 0.004630251721019064
+              "share": 0.6939,
+              "monteCarloSe": 0.004608717717543569
             },
             "top1": {
               "share": 0.0,
@@ -6943,35 +7066,35 @@
               "status": "defined",
               "label": "scenario dispersion under the declared kernels",
               "scenarios": 10000,
-              "valueVariance": 1.6920418238248254,
-              "valueSd": 1.3007850797978986,
+              "valueVariance": 1.703773478685032,
+              "valueSd": 1.305286741940265,
               "costTerm": 0.0,
-              "qualityTerm": 1.6920418238248254,
+              "qualityTerm": 1.703773478685032,
               "covarianceTerm": 0.0
             }
           },
           "claude-opus-5-5-high@claude-pro": {
             "top3": {
-              "share": 0.7259,
-              "monteCarloSe": 0.004460596260591178
+              "share": 0.7307,
+              "monteCarloSe": 0.004435961113445428
             },
             "top1": {
-              "share": 0.7102,
-              "monteCarloSe": 0.0045366943912941715
+              "share": 0.7157,
+              "monteCarloSe": 0.004510803808635441
             },
             "frontier": {
-              "share": 0.9558,
-              "monteCarloSe": 0.0020553919334277836
+              "share": 0.9532,
+              "monteCarloSe": 0.0021121022702511342
             },
             "qualifies": {},
             "dispersion": {
               "status": "defined",
               "label": "scenario dispersion under the declared kernels",
               "scenarios": 10000,
-              "valueVariance": 1.6920418238248254,
-              "valueSd": 1.3007850797978986,
+              "valueVariance": 1.703773478685032,
+              "valueSd": 1.305286741940265,
               "costTerm": 0.0,
-              "qualityTerm": 1.6920418238248254,
+              "qualityTerm": 1.703773478685032,
               "covarianceTerm": 0.0
             }
           },
@@ -6993,17 +7116,17 @@
               "status": "defined",
               "label": "scenario dispersion under the declared kernels",
               "scenarios": 10000,
-              "valueVariance": 1.8106984071140992,
-              "valueSd": 1.3456219406334378,
+              "valueVariance": 1.8027363032071604,
+              "valueSd": 1.3426601592388003,
               "costTerm": 0.0,
-              "qualityTerm": 1.8106984071140992,
+              "qualityTerm": 1.8027363032071604,
               "covarianceTerm": 0.0
             }
           },
           "gpt-6-astra-high@chatgpt-pro-100": {
             "top3": {
-              "share": 0.0002,
-              "monteCarloSe": 0.00014140721339450828
+              "share": 0.0,
+              "monteCarloSe": 0.0
             },
             "top1": {
               "share": 0.0,
@@ -7018,10 +7141,10 @@
               "status": "defined",
               "label": "scenario dispersion under the declared kernels",
               "scenarios": 10000,
-              "valueVariance": 1.8106984071140992,
-              "valueSd": 1.3456219406334378,
+              "valueVariance": 1.8027363032071604,
+              "valueSd": 1.3426601592388003,
               "costTerm": 0.0,
-              "qualityTerm": 1.8106984071140992,
+              "qualityTerm": 1.8027363032071604,
               "covarianceTerm": 0.0
             }
           },
@@ -7035,18 +7158,18 @@
               "monteCarloSe": 0.00017317909804592468
             },
             "frontier": {
-              "share": 0.5163,
-              "monteCarloSe": 0.004997342393712882
+              "share": 0.5182,
+              "monteCarloSe": 0.004996686502073149
             },
             "qualifies": {},
             "dispersion": {
               "status": "defined",
               "label": "scenario dispersion under the declared kernels",
               "scenarios": 10000,
-              "valueVariance": 1.8106984071140992,
-              "valueSd": 1.3456219406334378,
+              "valueVariance": 1.8027363032071604,
+              "valueSd": 1.3426601592388003,
               "costTerm": 0.0,
-              "qualityTerm": 1.8106984071140992,
+              "qualityTerm": 1.8027363032071604,
               "covarianceTerm": 0.0
             }
           },
@@ -7068,35 +7191,10 @@
               "status": "defined",
               "label": "scenario dispersion under the declared kernels",
               "scenarios": 10000,
-              "valueVariance": 1.8106984071140992,
-              "valueSd": 1.3456219406334378,
+              "valueVariance": 1.8027363032071604,
+              "valueSd": 1.3426601592388003,
               "costTerm": 0.0,
-              "qualityTerm": 1.8106984071140992,
-              "covarianceTerm": 0.0
-            }
-          },
-          "gpt-6.1-terra-xhigh@api": {
-            "top3": {
-              "share": 0.0,
-              "monteCarloSe": 0.0
-            },
-            "top1": {
-              "share": 0.0,
-              "monteCarloSe": 0.0
-            },
-            "frontier": {
-              "share": 0.0,
-              "monteCarloSe": 0.0
-            },
-            "qualifies": {},
-            "dispersion": {
-              "status": "defined",
-              "label": "scenario dispersion under the declared kernels",
-              "scenarios": 10000,
-              "valueVariance": 2.5519811693150043,
-              "valueSd": 1.5974921500010584,
-              "costTerm": 0.0,
-              "qualityTerm": 2.5519811693150043,
+              "qualityTerm": 1.8027363032071604,
               "covarianceTerm": 0.0
             }
           },
@@ -7118,10 +7216,10 @@
               "status": "defined",
               "label": "scenario dispersion under the declared kernels",
               "scenarios": 10000,
-              "valueVariance": 1.9797480676273056,
-              "valueSd": 1.4070352048286872,
+              "valueVariance": 1.995992727960929,
+              "valueSd": 1.4127960673646176,
               "costTerm": 0.0,
-              "qualityTerm": 1.9797480676273056,
+              "qualityTerm": 1.995992727960929,
               "covarianceTerm": 0.0
             }
           },
@@ -7143,10 +7241,10 @@
               "status": "defined",
               "label": "scenario dispersion under the declared kernels",
               "scenarios": 10000,
-              "valueVariance": 1.9797480676273056,
-              "valueSd": 1.4070352048286872,
+              "valueVariance": 1.995992727960929,
+              "valueSd": 1.4127960673646176,
               "costTerm": 0.0,
-              "qualityTerm": 1.9797480676273056,
+              "qualityTerm": 1.995992727960929,
               "covarianceTerm": 0.0
             }
           },
@@ -7168,10 +7266,10 @@
               "status": "defined",
               "label": "scenario dispersion under the declared kernels",
               "scenarios": 10000,
-              "valueVariance": 1.9797480676273056,
-              "valueSd": 1.4070352048286872,
+              "valueVariance": 1.995992727960929,
+              "valueSd": 1.4127960673646176,
               "costTerm": 0.0,
-              "qualityTerm": 1.9797480676273056,
+              "qualityTerm": 1.995992727960929,
               "covarianceTerm": 0.0
             }
           },
@@ -7193,60 +7291,10 @@
               "status": "defined",
               "label": "scenario dispersion under the declared kernels",
               "scenarios": 10000,
-              "valueVariance": 1.9797480676273056,
-              "valueSd": 1.4070352048286872,
+              "valueVariance": 1.995992727960929,
+              "valueSd": 1.4127960673646176,
               "costTerm": 0.0,
-              "qualityTerm": 1.9797480676273056,
-              "covarianceTerm": 0.0
-            }
-          },
-          "gpt-6.1-terra-high@api": {
-            "top3": {
-              "share": 0.0,
-              "monteCarloSe": 0.0
-            },
-            "top1": {
-              "share": 0.0,
-              "monteCarloSe": 0.0
-            },
-            "frontier": {
-              "share": 0.0,
-              "monteCarloSe": 0.0
-            },
-            "qualifies": {},
-            "dispersion": {
-              "status": "defined",
-              "label": "scenario dispersion under the declared kernels",
-              "scenarios": 10000,
-              "valueVariance": 2.6451517386256036,
-              "valueSd": 1.6263922462387737,
-              "costTerm": 0.0,
-              "qualityTerm": 2.6451517386256036,
-              "covarianceTerm": 0.0
-            }
-          },
-          "gpt-6.1-terra-medium@api": {
-            "top3": {
-              "share": 0.0,
-              "monteCarloSe": 0.0
-            },
-            "top1": {
-              "share": 0.0,
-              "monteCarloSe": 0.0
-            },
-            "frontier": {
-              "share": 0.0,
-              "monteCarloSe": 0.0
-            },
-            "qualifies": {},
-            "dispersion": {
-              "status": "defined",
-              "label": "scenario dispersion under the declared kernels",
-              "scenarios": 10000,
-              "valueVariance": 2.540328747982238,
-              "valueSd": 1.5938408791288539,
-              "costTerm": 0.0,
-              "qualityTerm": 2.540328747982238,
+              "qualityTerm": 1.995992727960929,
               "covarianceTerm": 0.0
             }
           }
@@ -7340,6 +7388,70 @@
           },
           {
             "row": "gpt-6-luna@chatgpt-pro-500",
+            "reason": "owner-named transfer: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
+          },
+          {
+            "row": "gpt-6.1-terra-high@chatgpt-plus",
+            "reason": "owner-named transfer: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
+          },
+          {
+            "row": "gpt-6.1-terra-high@chatgpt-pro-100",
+            "reason": "owner-named transfer: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
+          },
+          {
+            "row": "gpt-6.1-terra-high@chatgpt-pro-200",
+            "reason": "owner-named transfer: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
+          },
+          {
+            "row": "gpt-6.1-terra-high@chatgpt-pro-500",
+            "reason": "owner-named transfer: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
+          },
+          {
+            "row": "gpt-6.1-terra-medium@chatgpt-plus",
+            "reason": "owner-named transfer: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
+          },
+          {
+            "row": "gpt-6.1-terra-medium@chatgpt-pro-100",
+            "reason": "owner-named transfer: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
+          },
+          {
+            "row": "gpt-6.1-terra-medium@chatgpt-pro-200",
+            "reason": "owner-named transfer: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
+          },
+          {
+            "row": "gpt-6.1-terra-medium@chatgpt-pro-500",
+            "reason": "owner-named transfer: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
+          },
+          {
+            "row": "gpt-6.1-terra-xhigh@chatgpt-plus",
+            "reason": "owner-named transfer: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
+          },
+          {
+            "row": "gpt-6.1-terra-xhigh@chatgpt-pro-100",
+            "reason": "owner-named transfer: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
+          },
+          {
+            "row": "gpt-6.1-terra-xhigh@chatgpt-pro-200",
+            "reason": "owner-named transfer: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
+          },
+          {
+            "row": "gpt-6.1-terra-xhigh@chatgpt-pro-500",
+            "reason": "owner-named transfer: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
+          },
+          {
+            "row": "gpt-6.1-terra@chatgpt-plus",
+            "reason": "owner-named transfer: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
+          },
+          {
+            "row": "gpt-6.1-terra@chatgpt-pro-100",
+            "reason": "owner-named transfer: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
+          },
+          {
+            "row": "gpt-6.1-terra@chatgpt-pro-200",
+            "reason": "owner-named transfer: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
+          },
+          {
+            "row": "gpt-6.1-terra@chatgpt-pro-500",
             "reason": "owner-named transfer: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
           }
         ]

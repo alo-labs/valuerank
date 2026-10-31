@@ -1823,25 +1823,16 @@ def gap_fill_bars(assembled: dict, frozen: dict, offset: float | None) -> dict:
     return result
 
 
-def frontiercode_cross_source(rows: list[dict], cognition: dict) -> dict:
-    """E234: AA's FrontierCode against Cognition's main score for the same family and effort, where both exist."""
+FRONTIERCODE_CROSS_SOURCE_RETIRED = ("retired (O136): the leaf is AA's FrontierCode 2.0 and Cognition's board publishes FrontierCode 1.1, "
+                                     "so no fill or comparison is made across the two versions")
 
-    data = cognition["v1_1"]["data"]
-    aa, other = {}, {}
-    for row in rows:
-        source = row["evidence"]["provenance"].get("frontierCode") or {}
-        if source.get("sourceType") in (None, "aa_recapture") and "frontierCode" in row["evidence"]["observations"]:
-            aa[row["id"]] = row["evidence"]["observations"]["frontierCode"].z
-        # I53 M3: Cognition's board is keyed by family, then effort; the row's name carries the effort for most rows.
-        score = (((data.get(row.get("family") or row["name"]) or {}).get(row.get("effort")) or {}).get("main") or {}).get("new_score")
-        if score is not None:
-            other[row["id"]] = 100.0 * score
-    result = diagnostics.agreement(aa, other, label="FrontierCode cross-source agreement (AA against Cognition, same name and effort; E234)")
-    offsets = [other[row_id] - aa[row_id] for row_id in result["panel"]]
-    result["meanOffset"] = statistics.fmean(offsets) if offsets else None
-    result["maxAbsOffset"] = max((abs(value) for value in offsets), default=None)
-    result["scale"] = "tested" if result["tau"] is not None else "scale equivalence not tested"
-    return result
+
+def frontiercode_cross_source(rows: list[dict], cognition: dict) -> dict:
+    """E234: AA's FrontierCode against Cognition's main score for the same family and effort. Retired by O136 (the leaf is
+    FrontierCode 2.0, Cognition's board 1.1); the object stays so the published diagnostic says why it is empty."""
+
+    return {"label": "FrontierCode cross-source agreement (AA against Cognition; E234)", "panel": [], "excluded": [], "tau": None,
+            "interval": None, "meanOffset": None, "maxAbsOffset": None, "status": FRONTIERCODE_CROSS_SOURCE_RETIRED, "scale": "not applicable"}
 
 
 # E226: renormalising over each row's own leaves is not neutral when the sparse leaves are the hard ones. The common-leaf
