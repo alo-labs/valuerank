@@ -180,11 +180,12 @@ def main() -> None:
                 "note": f"AA Intelligence Index v5 cohort (O51, O132): {item['chartTier']} point on the 2026-10-30 chart."} for item in cohort]
     (DATA / "aa" / "aa_extract.json").write_text(json.dumps(extract, indent=2, ensure_ascii=False) + "\n")
     mapping = []
-    primaries = {required(point) for point in cohort_points}
     for item in cohort:
         point = point_by_url[item["url"]]
-        # A family's required configuration carries the family's name (the score build checks it); other efforts their own.
-        name = point["family"] if item["id"] in primaries else item["displayName"]
+        # Every configuration of a multi-effort family names its effort ("GPT-6 Luna (max)"); a single-configuration family
+        # keeps its bare name. The fallback note is a route detail, so it stays out of the name.
+        siblings = sum(1 for other in cohort_points if other["family"] == point["family"])
+        name = point["family"] if siblings == 1 or not point["effort"] else f"{point['family']} ({point['effort']})"
         mapping.append({"id": item["id"], "displayName": name, "urls": [item["url"]], "aaSlug": item["url"].rsplit("/", 1)[1],
                         "aaVariant": point["effort"], "family": point["family"]})
     (DATA / "aa_mapping.json").write_text(json.dumps(mapping, indent=2, ensure_ascii=False) + "\n")

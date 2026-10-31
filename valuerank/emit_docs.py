@@ -52,11 +52,11 @@ LEAF_TRANSFORMS = {
     "omniscience": "z = (I + 100) / 2 on AA's Omniscience Index I (O28)",
     "lcr": "z = 100 × accuracy",
     "hle": "z = 100 × accuracy",
-    "scicode": "z = 100 × score",
+    "tbScience": "z = 100 × resolution rate",
     "critpt": "z = 100 × score",
     "vibeCode": "z = pass rate %",
     "codeMigration": "z = pass rate %",
-    "livebench2Overall": "z = LiveBench's weighted Overall of the seven category scores (release 2026-10-23, O67)",
+    "livebench2Overall": "z = LiveBench's weighted Overall of the seven category scores (release 2026-10-25, O67, O139)",
     "aiCodingDaily": "z = 100 × points / 60",
 }
 SOURCE_LABELS = {"aa": "AA-run", "independent": "independent"}
@@ -364,7 +364,7 @@ def interval_sentences(facts):
     return sentences
 
 
-CODING_COMPONENTS = ("coding-agent-index", "terminalbench-4-0", "scicode")
+CODING_COMPONENTS = ("coding-agent-index", "terminalbench-4-0", "frontiercode-2-0")
 # Basket components priced in the cost but with no quality leaf of their own (E203 disclosure; O6 and O15 stand).
 UNREWARDED_COMPONENTS = ("aa-briefcase", "gdp-pdf")
 

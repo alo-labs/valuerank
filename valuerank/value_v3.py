@@ -682,12 +682,14 @@ def check_source_clocks(clocks: list[dict], release_day: date, cutoff: datetime)
                              f"({updated or 'not recorded'}) does not predate the cutoff's day (O60)")
 
 
-# E267: the effort names AA prints, lower case; any other parenthesis after a model name is not a recognised form.
+# E267: the effort names AA prints; any other parenthesis after a model name is not a recognised form. Since the
+# 2026-10-30 capture AA capitalises them and writes the fallback inside the parenthesis ("(Max, Default Fallback)").
 AGENT_EFFORTS = "minimal|low|medium|high|xhigh|max"
 _KEYED_EFFORT = re.compile(rf" \(\{{'reasoning_effort': '(?P<effort>{AGENT_EFFORTS})'\}}\)\Z")
-_PLAIN_EFFORT = re.compile(rf" \((?P<effort>{AGENT_EFFORTS})\)\Z")
+_PLAIN_EFFORT = re.compile(rf" \((?P<effort>{AGENT_EFFORTS})(?:, default fallback)?\)\Z", re.IGNORECASE)
 # O54: the owner stated that AA's effort-less MiMo-V2.6-Pro configuration is high, so a record at high is exact too.
-OWNER_STATED_EFFORT = {"mimo-v2-6-pro": "high", "kimi-k3-1-pro": "max"}  # O66: Kimi K3.1 Pro at max
+# O140: MiMo-V2.6-Flash has one documented reasoning mode, thinking on by default, which AI Coding Daily's "High" row is.
+OWNER_STATED_EFFORT = {"mimo-v2-6-pro": "high", "kimi-k3-1-pro": "max", "mimo-v2-6-flash": "high"}  # O66: Kimi K3.1 Pro at max
 
 
 def parse_agent_label(label: str) -> dict | None:
@@ -701,7 +703,7 @@ def parse_agent_label(label: str) -> dict | None:
     efforts = []
     for pattern in (_KEYED_EFFORT, _PLAIN_EFFORT):
         if match := pattern.search(rest):
-            efforts.append(match["effort"])
+            efforts.append(match["effort"].lower())
             rest = rest[:match.start()]
     if len(set(efforts)) > 1:
         return None

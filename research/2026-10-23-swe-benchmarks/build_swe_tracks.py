@@ -14,41 +14,45 @@ from datetime import datetime, timedelta, timezone
 from pathlib import Path
 
 HERE = Path(__file__).parent
-# O68 (2026-10-25): every added-leaf board re-read in full on 2026-10-25.
-READ = HERE.parent / "2026-10-25-board-reread"
+# O68 (2026-10-25): every added-leaf board re-read in full on 2026-10-25; O132 (2026-10-30): re-read again for the AA
+# Intelligence Index v5 cohort, with LiveBench's release 2026-10-25 (O139).
+READ = HERE.parent / "2026-10-30-v5-recapture" / "third-party"
+READ_DATE = "2026-10-30"
+COHORT_FILE = HERE.parent / "2026-10-30-v5-recapture" / "cohort.json"
+LIVEBENCH_RELEASE = "20261025"
 ROOT = HERE.parent.parent
 OWNER_MATCHED = {"mimo-v2-6-pro"}  # O54, E252
 
 LEAVES = {
     # leaf key: (coverage key, coverage file, source metadata)
     "vibeCode": ("vibe-code", "vals", {
-        "benchmark": "Vibe Code Bench v1.1", "publisher": "Vals AI", "updated": "2026-10-24",
+        "benchmark": "Vibe Code Bench v1.1", "publisher": "Vals AI", "updated": "2026-10-29",
         "url": "https://www.vals.ai/benchmarks/vibe-code", "harness": "OpenHands, the same for every model",
         "metric": "test-workflow pass rate (percent), with Vals' published standard error", "unit": "percent",
         "sampling": {"kind": "publishedStandardError"},
     }),
     "codeMigration": ("code-migration-v1-1", "vals", {
-        "benchmark": "Code Migration v1.1", "publisher": "Vals AI", "updated": "2026-10-20",
+        "benchmark": "Code Migration v1.1", "publisher": "Vals AI", "updated": "2026-10-28",
         "url": "https://www.vals.ai/benchmarks/code-migration-v1-1", "harness": "Pi agent harness, the same for every model",
         "metric": "hidden-test pass rate (percent), with Vals' published standard error", "unit": "percent",
         "sampling": {"kind": "publishedStandardError", "tasks": 130},
     }),
-    # O61 (2026-10-23): LiveBench 2.0 Overall replaces the Long Agentic and Coding categories. O67 (2026-10-25): the
-    # 2026-10-23 release, whose Overall is LiveBench's weighted mean of its seven categories (the release's
-    # _overall_weights), to two decimals. The configuration match is the coverage capture's (one LiveBench row per model,
-    # at its top effort); the categories come from the release table.
-    "livebench2Overall": ("livebench2-coding", "other", {
-        "benchmark": "LiveBench 2.0 Overall (release 2026-10-23)", "publisher": "LiveBench", "updated": "2026-10-23",
-        "updatedBasis": "the site's displayed release date ('23 October 2026'); the release CSV's HTTP Last-Modified is 2026-10-24",
-        "url": "https://livebench.ai/data/20261023/table.csv", "harness": "LiveBench's own, one run per model at its top effort",
+    # O61 (2026-10-23): LiveBench 2.0 Overall replaces the Long Agentic and Coding categories. O67 (2026-10-25), O139
+    # (2026-10-30): the 2026-10-25 release (the 2026-10-23 release was withdrawn), whose Overall is LiveBench's weighted
+    # mean of its seven categories (the release's _overall_weights), to two decimals. The configuration match is the
+    # coverage capture's (one LiveBench row per model, at its top effort); the categories come from the release table.
+    "livebench2Overall": ("livebench2-overall", "other", {
+        "benchmark": "LiveBench 2.0 Overall (release 2026-10-25)", "publisher": "LiveBench", "updated": "2026-10-25",
+        "updatedBasis": "the site's displayed release date ('25 October 2026'); the release files' HTTP Last-Modified is 2026-10-30",
+        "url": "https://livebench.ai/data/20261025/table.csv", "harness": "LiveBench's own, one run per model at its top effort",
         "metric": "LiveBench's weighted Overall of the seven category scores (Long Agentic 2, Coding 1.5, Design 1.5, Reasoning, Browser, Data Analysis and Research 1; O67), 0-100",
         "unit": "percent",
         "sampling": {"kind": "categories", "tasks": {"long_agentic": 18, "reasoning": 4, "coding": 29, "browser": 25, "data_analysis": 3,
                                                      "research": 22, "design": 25}},
     }),
-    "aiCodingDaily": ("aicd-non-bug", "other", {
+    "aiCodingDaily": ("aicd", "other", {
         "benchmark": "AI Coding Daily LLM Coding Leaderboard (Laravel quality + React-TS quality + edge-case testing, max 60)",
-        "publisher": "AI Coding Daily (Povilas Korop)", "updated": "2026-10-24", "url": "https://aicodingdaily.com/leaderboard",
+        "publisher": "AI Coding Daily (Povilas Korop)", "updated": "2026-10-27", "url": "https://aicodingdaily.com/leaderboard",
         "harness": "varies by model: Claude Code, Codex CLI, OpenCode, Devin, DeepSeek's harness (named on each record)",
         "metric": "judged points out of 60 (the 10-point bug-finding column is excluded: it overlaps Bug Hunt)", "unit": "points of 60",
         "sampling": {"kind": "tasks", "tasks": 6, "unit": "graded projects (Laravel, React-TS and 4 edge-case projects)"},
@@ -99,7 +103,7 @@ def select_aicd(model_id: str, label: str, board: dict[str, list[dict]]) -> dict
 # placed by the bound the archived read supports: shown "N hours ago" at the read instant, it was tested no later than
 # the read minus N - 1 hours (reviewer 72: valid whether the board rounds, truncates or ceils the age; I60 L2's N - 1/2
 # assumed rounding), and not before the day's UTC midnight. No minute is claimed.
-AICD_READ = ("research/2026-10-25-board-reread/aicd/leaderboard-allrows-parsed.json", "2026-10-25T10:44:11Z")
+AICD_READ = ("research/2026-10-30-v5-recapture/third-party/aicd/leaderboard-allrows-parsed.json", "2026-10-30T22:21:52Z")
 _AGE = re.compile(r"\b(\d+) (minute|hour)s? ago\b")
 
 
@@ -132,15 +136,15 @@ def aicd_points(row: dict) -> float:
 
 
 def main() -> None:
-    vals_document = json.loads((READ / "vals-catalogue-2026-10-25.json").read_text())
-    other_document = json.loads((READ / "other-coverage-2026-10-25.json").read_text())
+    vals_document = json.loads((READ / f"vals-catalogue-{READ_DATE}.json").read_text())
+    other_document = json.loads((READ / f"coverage-{READ_DATE}.json").read_text())
     vals = {item["slug"]: item for item in vals_document["benchmarks"]}
     other = {item["key"]: item for item in other_document["benchmarks"]}
     # O59/O60: each source carries the instant its coverage was captured.
     captured = {"vals": vals_document["capturedAt"], "other": other_document["capturedAt"]}
-    cohort = [row["id"] for row in json.loads((READ / "cohort-2026-10-25.json").read_text())["configurations"]]
-    table = {row["model"]: row for row in csv.DictReader((READ / "livebench" / "table-20261023.csv").open())}
-    weights = json.loads((READ / "livebench" / "weights-20261023.json").read_text())
+    cohort = [row["id"] for row in json.loads(COHORT_FILE.read_text())["configurations"]]
+    table = {row["model"]: row for row in csv.DictReader((READ / "livebench" / f"table-{LIVEBENCH_RELEASE}.csv").open())}
+    weights = json.loads((READ / "livebench" / f"weights-{LIVEBENCH_RELEASE}.json").read_text())
     board = aicd_rows()
     cutoff = json.loads((ROOT / "data" / "aa" / "aa_v432_snapshot.json").read_text())["capturedAt"]  # the release cutoff (O65)
     records, sources = [], {}
@@ -153,7 +157,7 @@ def main() -> None:
                 record = {
                     "modelId": model_id, "leaf": leaf, "value": cell["value"],
                     "sourceLabel": cell.get("valsKey") or cell.get("sourceLabel"), "effort": cell.get("effort"),
-                    "locator": f"research/2026-10-25-board-reread/{'vals-catalogue' if origin == 'vals' else 'other-coverage'}-2026-10-25.json"
+                    "locator": f"{READ.relative_to(ROOT)}/{'vals-catalogue' if origin == 'vals' else 'coverage'}-{READ_DATE}.json"
                                f" benchmarks[{'slug' if origin == 'vals' else 'key'}={key}].coverage[{model_id}]",
                 }
                 if leaf == "livebench2Overall":

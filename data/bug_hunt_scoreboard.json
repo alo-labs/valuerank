@@ -1,11 +1,11 @@
 {
   "schemaVersion": 1,
   "benchmark": "Bug Hunt Bench",
-  "sourceCommit": "9089dc552a2b4eb94749c4da34d2cb872c7e0b43",
-  "sourceUrl": "https://github.com/phuryn/bug-hunt-bench/blob/9089dc552a2b4eb94749c4da34d2cb872c7e0b43/results/combined-scoreboard.csv",
-  "capturedAt": "2026-10-25T10:44:11Z",
-  "sourceUpdated": "2026-10-23",
-  "sha256": "ed39128a222d286997b987e0e40116496bae803221a2d3d056de04cd98e05e94",
+  "sourceCommit": "12497971d928cc5ad97a184755734720388bc07f",
+  "sourceUrl": "https://github.com/phuryn/bug-hunt-bench/blob/12497971d928cc5ad97a184755734720388bc07f/results/combined-scoreboard.csv",
+  "capturedAt": "2026-10-30T22:19:18Z",
+  "sourceUpdated": "2026-10-27",
+  "sha256": "260a1d2c056180d6dbe9dce07a0ca97f120aa85e600073925df03530745dffdd",
   "purpose": "Every row of the owner's combined scoreboard at the pinned commit, so the build can check that every configuration with an exact AA DeepSWE result and a Bug Hunt result is in the roster (owner decision O31).",
   "rows": [
     {
@@ -1022,6 +1022,31 @@
       "model": "Kimi K3.1 Pro (max effort, Moonshot API) - mean of 3",
       "harness": "Claude Code / Moonshot API",
       "fixedOf105": 36.0
+    },
+    {
+      "model": "GPT-6.1 Terra (max effort) - mean of 3",
+      "harness": "Codex CLI",
+      "fixedOf105": 40.7
+    },
+    {
+      "model": "GPT-6.1 Terra (xhigh effort) - mean of 3",
+      "harness": "Codex CLI",
+      "fixedOf105": 11.3
+    },
+    {
+      "model": "GPT-6.1 Terra (high effort) - mean of 3",
+      "harness": "Codex CLI",
+      "fixedOf105": 9.7
+    },
+    {
+      "model": "GPT-6.1 Terra (medium effort) - mean of 3",
+      "harness": "Codex CLI",
+      "fixedOf105": 7.3
+    },
+    {
+      "model": "GPT-6.1 Terra (low effort) - mean of 3",
+      "harness": "Codex CLI",
+      "fixedOf105": 6.0
     }
   ]
 }

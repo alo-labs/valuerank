@@ -45,6 +45,17 @@ BUG_HUNT_PRIORITY = 20
 BUG_HUNT_EMPHASIS_PRIORITY = 30
 
 DEVELOPER = {
+    # O132 (AA Intelligence Index v5 cohort): every effort of a multi-effort family is named.
+    "GPT-6.1 Terra (low)": "OpenAI",
+    "GPT-6.1 Terra (medium)": "OpenAI",
+    "GPT-6.1 Terra (high)": "OpenAI",
+    "GPT-6.1 Terra (xhigh)": "OpenAI",
+    "GPT-6.1 Terra (max)": "OpenAI",
+    "GPT-6.1 Sol (max)": "OpenAI",
+    "GPT-6 Luna (max)": "OpenAI",
+    "GPT-6 Astra (max)": "OpenAI",
+    "Claude Opus 5.5 (max)": "Anthropic",
+    "Gemini 4 Carbon": "Google DeepMind",
     "GPT-6 Astra": "OpenAI",
     "Gemini 3.8 Flash": "Google DeepMind",
     "Claude Opus 5": "Anthropic",
@@ -111,6 +122,17 @@ DEVELOPER = {
 }
 
 SHORT = {
+    # O132 (AA Intelligence Index v5 cohort).
+    "GPT-6.1 Terra (low)": "GPT-6.1 Terra (low)",
+    "GPT-6.1 Terra (medium)": "GPT-6.1 Terra (medium)",
+    "GPT-6.1 Terra (high)": "GPT-6.1 Terra (high)",
+    "GPT-6.1 Terra (xhigh)": "GPT-6.1 Terra (xhigh)",
+    "GPT-6.1 Terra (max)": "GPT-6.1 Terra (max)",
+    "GPT-6.1 Sol (max)": "GPT-6.1 Sol (max)",
+    "GPT-6 Luna (max)": "GPT-6 Luna (max)",
+    "GPT-6 Astra (max)": "GPT-6 Astra (max)",
+    "Claude Opus 5.5 (max)": "Opus 5.5 (max)",
+    "Gemini 4 Carbon": "Gem 4 Carbon",
     "GPT-6 Astra": "GPT-6 Astra",
     "Gemini 3.8 Flash": "Gem 3.8 Flash",
     "Claude Opus 5": "Opus 5",
@@ -752,7 +774,8 @@ def main(*, root: Path = ROOT, data: Path = DATA) -> int:
             raise ValueError(f"AA frontier family must rank its highest rendered-frontier point (E193): {family}")
         if aa_model.get("aaSlug") != frontier_item.get("aaId"):
             raise ValueError(f"AA frontier source slug does not match selected catalog identity for {model_id}")
-        if aa_model.get("displayName") != family:
+        # O132: a configuration of a multi-effort family names its effort ("GPT-6 Luna (high)").
+        if aa_model.get("displayName") != family and not str(aa_model.get("displayName")).startswith(f"{family} ("):
             raise ValueError(f"AA frontier family does not match selected catalog identity for {model_id}")
         inventory_effort = str(frontier_item.get("evaluatedVariant") or "").casefold()
         selected_effort = aa_model.get("aaVariant")

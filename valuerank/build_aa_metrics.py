@@ -193,6 +193,16 @@ def decode_page_model(html: str, slug: str) -> dict:
     return candidates[0]
 
 
+# O103: AA prints its notes as "* <text>" strings in a page's payload (e.g. Claude Haiku 5.5's longer-context pricing note).
+_PRINTED_NOTE = re.compile(r'"\* ([A-Z][^"\\]{15,400})')
+
+
+def printed_notes(html: str) -> list[str]:
+    """O103: the notes AA prints on a page, verbatim and once each, in page order (an empty list when it prints none)."""
+
+    return list(dict.fromkeys(match.group(1).strip() for match in _PRINTED_NOTE.finditer(html)))
+
+
 def page_slug(url: str) -> str:
     """The model slug named by a model-page URL: its last path segment."""
 

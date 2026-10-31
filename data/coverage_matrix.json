@@ -1,8 +1,8 @@
 {
   "schemaVersion": "v1.6",
   "observedAt": "2026-10-25T09:56:47Z",
-  "cohort": "Artificial Analysis v4.3.2 mapped 62-model ValueRank comparison roster",
-  "cohortN": 62,
+  "cohort": "Artificial Analysis v4.3.2 mapped 27-model ValueRank comparison roster",
+  "cohortN": 27,
   "primaryEvaluations": [
     {
       "key": "briefcaseElo",
@@ -1045,67 +1045,63 @@
       "group": "supplemental",
       "label": "LiveBench Overall Score",
       "availableN": 2,
-      "cohortN": 30,
-      "coveragePct": 6.67,
+      "cohortN": 27,
+      "coveragePct": 7.41,
       "missingModels": [
-        "Claude Opus 5.5",
-        "GPT-6.1 Sol",
-        "MiMo-V2.6-Pro",
-        "MiMo-V2.6-Flash",
-        "Claude Haiku 5.5",
-        "Claude Sonnet 5.5",
-        "Gemini 4 Argon",
-        "GPT-6.1 Sol (xhigh)",
-        "GPT-6.1 Sol (high)",
-        "GPT-6.1 Sol (medium)",
-        "Claude Haiku 5.5 (max)",
-        "Claude Haiku 5.5 (high)",
-        "Claude Haiku 5.5 (medium)",
-        "Claude Haiku 5.5 (low)",
-        "Claude Sonnet 5.5 (xhigh)",
-        "DeepSeek V4.1 Flash 1017",
-        "MiniMax-M3.1-Flash",
         "GPT-6 Luna (low)",
         "GPT-6 Luna (medium)",
+        "Claude Haiku 5.5 (low)",
         "GPT-6 Luna (high)",
-        "GPT-6 Luna (xhigh)",
-        "Claude Opus 5.5 (high)",
-        "Claude Opus 5.5 (xhigh)",
-        "Claude Opus 5.5 (medium)",
-        "GPT-5.6 Luna (low)",
+        "Claude Haiku 5.5 (medium)",
+        "MiMo-V2.6-Flash",
+        "GPT-6.1 Terra (low)",
+        "Claude Haiku 5.5 (high)",
+        "GPT-6.1 Terra (medium)",
+        "GPT-6.1 Terra (high)",
+        "GPT-6.1 Sol (medium)",
+        "GPT-6.1 Sol (high)",
+        "GPT-6.1 Sol (xhigh)",
+        "GPT-6.1 Sol (max)",
         "GPT-6 Astra (high)",
         "GPT-6 Astra (xhigh)",
-        "Kimi K3.1 Pro"
-      ],
-      "sourceAvailableN": 25,
-      "sourceCohortN": 62,
-      "sourceMissingModels": [
-        "Claude Opus 5.5",
-        "GPT-6.1 Sol",
-        "MiMo-V2.6-Pro",
-        "MiMo-V2.6-Flash",
-        "Claude Haiku 5.5",
-        "Claude Sonnet 5.5",
-        "Gemini 4 Argon",
-        "Muse Spark 1.3",
-        "Muse Wonder",
-        "Muse Wonder Full",
-        "GPT-6.1 Sol (xhigh)",
-        "GPT-6.1 Sol (high)",
-        "GPT-6.1 Sol (medium)",
+        "Claude Opus 5.5 (xhigh)",
+        "Gemini 4 Carbon",
+        "GPT-6 Luna (xhigh)",
         "GPT-6.1 Sol (low)",
-        "Claude Haiku 5.5 (max)",
-        "Claude Haiku 5.5 (high)",
-        "Claude Haiku 5.5 (medium)",
+        "GPT-6.1 Terra (xhigh)",
+        "GPT-6.1 Terra (max)",
+        "Claude Opus 5.5 (high)",
+        "Claude Sonnet 5.5",
+        "Claude Opus 5.5 (max)"
+      ],
+      "sourceAvailableN": 2,
+      "sourceCohortN": 27,
+      "sourceMissingModels": [
+        "GPT-6 Luna (low)",
+        "GPT-6 Luna (medium)",
         "Claude Haiku 5.5 (low)",
-        "Claude Sonnet 5.5 (xhigh)",
-        "Claude Sonnet 5.5 (high)",
-        "Claude Sonnet 5.5 (medium)",
-        "Claude Sonnet 5.5 (low)",
-        "Muse Spark 1.3 (xhigh)",
-        "Grok 4.6 (xhigh)",
-        "DeepSeek V4.1 Flash 1017",
-        "MiniMax-M3.1-Flash"
+        "GPT-6 Luna",
+        "Claude Haiku 5.5 (medium)",
+        "MiMo-V2.6-Flash",
+        "GPT-6.1 Terra (low)",
+        "Claude Haiku 5.5",
+        "GPT-6.1 Terra (medium)",
+        "GPT-6.1 Terra",
+        "GPT-6.1 Sol (medium)",
+        "GPT-6.1 Sol (high)",
+        "GPT-6.1 Sol (xhigh)",
+        "GPT-6.1 Sol",
+        "GPT-6 Astra (high)",
+        "GPT-6 Astra",
+        "Claude Opus 5.5",
+        "Gemini 4 Carbon",
+        "GPT-6 Luna (xhigh)",
+        "GPT-6.1 Sol (low)",
+        "GPT-6.1 Terra (xhigh)",
+        "GPT-6.1 Terra (max)",
+        "Claude Opus 5.5 (high with fallback)",
+        "Claude Sonnet 5.5",
+        "Claude Opus 5.5 (max with fallback)"
       ],
       "includedInPrimaryScore": false,
       "sourceRelease": "2026_06_25",
@@ -1117,67 +1113,63 @@
       "group": "primary",
       "label": "Instruction Following (LiveBench)",
       "availableN": 2,
-      "cohortN": 30,
-      "coveragePct": 6.67,
+      "cohortN": 27,
+      "coveragePct": 7.41,
       "missingModels": [
-        "Claude Opus 5.5",
-        "GPT-6.1 Sol",
-        "MiMo-V2.6-Pro",
-        "MiMo-V2.6-Flash",
-        "Claude Haiku 5.5",
-        "Claude Sonnet 5.5",
-        "Gemini 4 Argon",
-        "GPT-6.1 Sol (xhigh)",
-        "GPT-6.1 Sol (high)",
-        "GPT-6.1 Sol (medium)",
-        "Claude Haiku 5.5 (max)",
-        "Claude Haiku 5.5 (high)",
-        "Claude Haiku 5.5 (medium)",
-        "Claude Haiku 5.5 (low)",
-        "Claude Sonnet 5.5 (xhigh)",
-        "DeepSeek V4.1 Flash 1017",
-        "MiniMax-M3.1-Flash",
         "GPT-6 Luna (low)",
         "GPT-6 Luna (medium)",
+        "Claude Haiku 5.5 (low)",
         "GPT-6 Luna (high)",
-        "GPT-6 Luna (xhigh)",
-        "Claude Opus 5.5 (high)",
-        "Claude Opus 5.5 (xhigh)",
-        "Claude Opus 5.5 (medium)",
-        "GPT-5.6 Luna (low)",
+        "Claude Haiku 5.5 (medium)",
+        "MiMo-V2.6-Flash",
+        "GPT-6.1 Terra (low)",
+        "Claude Haiku 5.5 (high)",
+        "GPT-6.1 Terra (medium)",
+        "GPT-6.1 Terra (high)",
+        "GPT-6.1 Sol (medium)",
+        "GPT-6.1 Sol (high)",
+        "GPT-6.1 Sol (xhigh)",
+        "GPT-6.1 Sol (max)",
         "GPT-6 Astra (high)",
         "GPT-6 Astra (xhigh)",
-        "Kimi K3.1 Pro"
-      ],
-      "sourceAvailableN": 25,
-      "sourceCohortN": 62,
-      "sourceMissingModels": [
-        "Claude Opus 5.5",
-        "GPT-6.1 Sol",
-        "MiMo-V2.6-Pro",
-        "MiMo-V2.6-Flash",
-        "Claude Haiku 5.5",
-        "Claude Sonnet 5.5",
-        "Gemini 4 Argon",
-        "Muse Spark 1.3",
-        "Muse Wonder",
-        "Muse Wonder Full",
-        "GPT-6.1 Sol (xhigh)",
-        "GPT-6.1 Sol (high)",
-        "GPT-6.1 Sol (medium)",
+        "Claude Opus 5.5 (xhigh)",
+        "Gemini 4 Carbon",
+        "GPT-6 Luna (xhigh)",
         "GPT-6.1 Sol (low)",
-        "Claude Haiku 5.5 (max)",
-        "Claude Haiku 5.5 (high)",
-        "Claude Haiku 5.5 (medium)",
+        "GPT-6.1 Terra (xhigh)",
+        "GPT-6.1 Terra (max)",
+        "Claude Opus 5.5 (high)",
+        "Claude Sonnet 5.5",
+        "Claude Opus 5.5 (max)"
+      ],
+      "sourceAvailableN": 2,
+      "sourceCohortN": 27,
+      "sourceMissingModels": [
+        "GPT-6 Luna (low)",
+        "GPT-6 Luna (medium)",
         "Claude Haiku 5.5 (low)",
-        "Claude Sonnet 5.5 (xhigh)",
-        "Claude Sonnet 5.5 (high)",
-        "Claude Sonnet 5.5 (medium)",
-        "Claude Sonnet 5.5 (low)",
-        "Muse Spark 1.3 (xhigh)",
-        "Grok 4.6 (xhigh)",
-        "DeepSeek V4.1 Flash 1017",
-        "MiniMax-M3.1-Flash"
+        "GPT-6 Luna",
+        "Claude Haiku 5.5 (medium)",
+        "MiMo-V2.6-Flash",
+        "GPT-6.1 Terra (low)",
+        "Claude Haiku 5.5",
+        "GPT-6.1 Terra (medium)",
+        "GPT-6.1 Terra",
+        "GPT-6.1 Sol (medium)",
+        "GPT-6.1 Sol (high)",
+        "GPT-6.1 Sol (xhigh)",
+        "GPT-6.1 Sol",
+        "GPT-6 Astra (high)",
+        "GPT-6 Astra",
+        "Claude Opus 5.5",
+        "Gemini 4 Carbon",
+        "GPT-6 Luna (xhigh)",
+        "GPT-6.1 Sol (low)",
+        "GPT-6.1 Terra (xhigh)",
+        "GPT-6.1 Terra (max)",
+        "Claude Opus 5.5 (high with fallback)",
+        "Claude Sonnet 5.5",
+        "Claude Opus 5.5 (max with fallback)"
       ],
       "includedInPrimaryScore": true,
       "sourceRelease": "2026_06_25",
@@ -1189,67 +1181,63 @@
       "group": "supplemental",
       "label": "LiveBench Cost Per Successful Task",
       "availableN": 2,
-      "cohortN": 30,
-      "coveragePct": 6.67,
+      "cohortN": 27,
+      "coveragePct": 7.41,
       "missingModels": [
-        "Claude Opus 5.5",
-        "GPT-6.1 Sol",
-        "MiMo-V2.6-Pro",
-        "MiMo-V2.6-Flash",
-        "Claude Haiku 5.5",
-        "Claude Sonnet 5.5",
-        "Gemini 4 Argon",
-        "GPT-6.1 Sol (xhigh)",
-        "GPT-6.1 Sol (high)",
-        "GPT-6.1 Sol (medium)",
-        "Claude Haiku 5.5 (max)",
-        "Claude Haiku 5.5 (high)",
-        "Claude Haiku 5.5 (medium)",
-        "Claude Haiku 5.5 (low)",
-        "Claude Sonnet 5.5 (xhigh)",
-        "DeepSeek V4.1 Flash 1017",
-        "MiniMax-M3.1-Flash",
         "GPT-6 Luna (low)",
         "GPT-6 Luna (medium)",
+        "Claude Haiku 5.5 (low)",
         "GPT-6 Luna (high)",
-        "GPT-6 Luna (xhigh)",
-        "Claude Opus 5.5 (high)",
-        "Claude Opus 5.5 (xhigh)",
-        "Claude Opus 5.5 (medium)",
-        "GPT-5.6 Luna (low)",
+        "Claude Haiku 5.5 (medium)",
+        "MiMo-V2.6-Flash",
+        "GPT-6.1 Terra (low)",
+        "Claude Haiku 5.5 (high)",
+        "GPT-6.1 Terra (medium)",
+        "GPT-6.1 Terra (high)",
+        "GPT-6.1 Sol (medium)",
+        "GPT-6.1 Sol (high)",
+        "GPT-6.1 Sol (xhigh)",
+        "GPT-6.1 Sol (max)",
         "GPT-6 Astra (high)",
         "GPT-6 Astra (xhigh)",
-        "Kimi K3.1 Pro"
-      ],
-      "sourceAvailableN": 25,
-      "sourceCohortN": 62,
-      "sourceMissingModels": [
-        "Claude Opus 5.5",
-        "GPT-6.1 Sol",
-        "MiMo-V2.6-Pro",
-        "MiMo-V2.6-Flash",
-        "Claude Haiku 5.5",
-        "Claude Sonnet 5.5",
-        "Gemini 4 Argon",
-        "Muse Spark 1.3",
-        "Muse Wonder",
-        "Muse Wonder Full",
-        "GPT-6.1 Sol (xhigh)",
-        "GPT-6.1 Sol (high)",
-        "GPT-6.1 Sol (medium)",
+        "Claude Opus 5.5 (xhigh)",
+        "Gemini 4 Carbon",
+        "GPT-6 Luna (xhigh)",
         "GPT-6.1 Sol (low)",
-        "Claude Haiku 5.5 (max)",
-        "Claude Haiku 5.5 (high)",
-        "Claude Haiku 5.5 (medium)",
+        "GPT-6.1 Terra (xhigh)",
+        "GPT-6.1 Terra (max)",
+        "Claude Opus 5.5 (high)",
+        "Claude Sonnet 5.5",
+        "Claude Opus 5.5 (max)"
+      ],
+      "sourceAvailableN": 2,
+      "sourceCohortN": 27,
+      "sourceMissingModels": [
+        "GPT-6 Luna (low)",
+        "GPT-6 Luna (medium)",
         "Claude Haiku 5.5 (low)",
-        "Claude Sonnet 5.5 (xhigh)",
-        "Claude Sonnet 5.5 (high)",
-        "Claude Sonnet 5.5 (medium)",
-        "Claude Sonnet 5.5 (low)",
-        "Muse Spark 1.3 (xhigh)",
-        "Grok 4.6 (xhigh)",
-        "DeepSeek V4.1 Flash 1017",
-        "MiniMax-M3.1-Flash"
+        "GPT-6 Luna",
+        "Claude Haiku 5.5 (medium)",
+        "MiMo-V2.6-Flash",
+        "GPT-6.1 Terra (low)",
+        "Claude Haiku 5.5",
+        "GPT-6.1 Terra (medium)",
+        "GPT-6.1 Terra",
+        "GPT-6.1 Sol (medium)",
+        "GPT-6.1 Sol (high)",
+        "GPT-6.1 Sol (xhigh)",
+        "GPT-6.1 Sol",
+        "GPT-6 Astra (high)",
+        "GPT-6 Astra",
+        "Claude Opus 5.5",
+        "Gemini 4 Carbon",
+        "GPT-6 Luna (xhigh)",
+        "GPT-6.1 Sol (low)",
+        "GPT-6.1 Terra (xhigh)",
+        "GPT-6.1 Terra (max)",
+        "Claude Opus 5.5 (high with fallback)",
+        "Claude Sonnet 5.5",
+        "Claude Opus 5.5 (max with fallback)"
       ],
       "includedInPrimaryScore": false,
       "sourceRelease": "2026_06_25",
@@ -1261,42 +1249,39 @@
       "group": "supplemental",
       "label": "Terminal-Bench 4.0",
       "availableN": 1,
-      "cohortN": 30,
-      "coveragePct": 3.33,
+      "cohortN": 27,
+      "coveragePct": 3.7,
       "sourceAvailableN": 14,
-      "sourceCohortN": 62,
+      "sourceCohortN": 27,
       "officialMatchedN": 13,
       "providerClaimMatchedN": 1,
       "missingModels": [
-        "Claude Opus 5.5",
-        "GPT-6.1 Sol",
-        "GPT-6 Luna",
-        "MiMo-V2.6-Pro",
-        "MiMo-V2.6-Flash",
-        "Claude Haiku 5.5",
-        "Claude Sonnet 5.5",
-        "Gemini 4 Argon",
-        "GPT-6.1 Sol (xhigh)",
-        "GPT-6.1 Sol (high)",
-        "GPT-6.1 Sol (medium)",
-        "Claude Haiku 5.5 (max)",
-        "Claude Haiku 5.5 (high)",
-        "Claude Haiku 5.5 (medium)",
-        "Claude Haiku 5.5 (low)",
-        "Claude Sonnet 5.5 (xhigh)",
-        "DeepSeek V4.1 Flash 1017",
-        "MiniMax-M3.1-Flash",
         "GPT-6 Luna (low)",
         "GPT-6 Luna (medium)",
+        "Claude Haiku 5.5 (low)",
         "GPT-6 Luna (high)",
-        "GPT-6 Luna (xhigh)",
-        "Claude Opus 5.5 (high)",
-        "Claude Opus 5.5 (xhigh)",
-        "Claude Opus 5.5 (medium)",
-        "GPT-5.6 Luna (low)",
+        "Claude Haiku 5.5 (medium)",
+        "MiMo-V2.6-Flash",
+        "GPT-6.1 Terra (low)",
+        "Claude Haiku 5.5 (high)",
+        "GPT-6.1 Terra (medium)",
+        "GPT-6.1 Terra (high)",
+        "GPT-6.1 Sol (medium)",
+        "GPT-6.1 Sol (high)",
+        "GPT-6.1 Sol (xhigh)",
+        "GPT-6.1 Sol (max)",
         "GPT-6 Astra (high)",
         "GPT-6 Astra (xhigh)",
-        "Kimi K3.1 Pro"
+        "Claude Opus 5.5 (xhigh)",
+        "Gemini 4 Carbon",
+        "GPT-6 Luna (xhigh)",
+        "GPT-6 Luna (max)",
+        "GPT-6.1 Sol (low)",
+        "GPT-6.1 Terra (xhigh)",
+        "GPT-6.1 Terra (max)",
+        "Claude Opus 5.5 (high)",
+        "Claude Sonnet 5.5",
+        "Claude Opus 5.5 (max)"
       ],
       "sourceMissingModels": [
         "Kimi K3",
@@ -1354,30 +1339,24 @@
     "bugHuntFixedOf105": {
       "group": "primary",
       "label": "Bug Hunt Bench bugs fixed out of 105",
-      "availableN": 28,
-      "cohortN": 30,
-      "coveragePct": 93.33,
+      "availableN": 25,
+      "cohortN": 27,
+      "coveragePct": 92.59,
       "missingModels": [
         "MiMo-V2.6-Flash",
-        "MiniMax-M3.1-Flash"
+        "Gemini 4 Carbon"
       ],
-      "sourceAvailableN": 54,
-      "sourceCohortN": 62,
-      "sourceCoveragePct": 87.1,
+      "sourceAvailableN": 25,
+      "sourceCohortN": 27,
+      "sourceCoveragePct": 92.59,
       "sourceMissingModels": [
-        "Grok 4.6",
-        "GPT-5.5",
-        "Gemini 3.7 Flash",
-        "Gemini 3.6 Flash",
-        "GLM-5.2",
-        "Gemini 3.5 Flash",
         "MiMo-V2.6-Flash",
-        "MiniMax-M3.1-Flash"
+        "Gemini 4 Carbon"
       ],
       "includedInPrimaryScore": true,
       "includedInBugHuntEmphasisRanking": true,
       "sourceRelease": "105 planted bugs across two repositories; rolling public results snapshot",
-      "sourceCommit": "9089dc552a2b4eb94749c4da34d2cb872c7e0b43"
+      "sourceCommit": "12497971d928cc5ad97a184755734720388bc07f"
     }
   },
   "sourceSnapshot": "data/aa/aa_v432_snapshot.json",
@@ -1399,42 +1378,42 @@
   "frontierSelection": {
     "sourceUrl": "https://artificialanalysis.ai/evaluations/artificial-analysis-intelligence-index?eval-cost=intelligence-vs-total-cost",
     "captureArtifact": "data/aa_frontier_capture.json",
-    "capturedAt": "2026-10-25T09:53:28Z",
-    "indexVersion": "4.3.2",
+    "capturedAt": "2026-10-30T22:15:18Z",
+    "indexVersion": "5.0",
     "chartTitle": "Intelligence Index vs. Cost to Run Artificial Analysis Intelligence Index",
     "costUnit": "USD to run all Intelligence Index evaluations",
     "completeness": {
       "status": "complete",
-      "note": "All 698 catalog models selected; all 190 plotted points and all 19 Pareto path vertices captured from public tooltips (rounded integer Intelligence Index, two-decimal USD total cost) with Playwright on 2026-10-25. Every hover returned a distinct tooltip, so no overlapped-circle resolution was needed. No hidden state or paid export used."
+      "note": "All 89 catalog models selected; all 82 plotted points and all 18 Pareto path vertices captured from public tooltips (rounded integer Intelligence Index, two-decimal USD total cost) with Playwright on 2026-10-30. Every hover returned a distinct tooltip, so no overlapped-circle resolution was needed. No hidden state or paid export used."
     },
     "sourceUniverse": {
-      "selectedModelN": 698,
-      "plottedPointN": 190,
-      "observedFrontierPointN": 19,
-      "nearFrontierPointN": 11
+      "selectedModelN": 89,
+      "plottedPointN": 82,
+      "observedFrontierPointN": 18,
+      "nearFrontierPointN": 9
     },
-    "configurationN": 19,
+    "configurationN": 18,
     "familyN": 8,
     "frontierFamilies": [
       {
         "family": "Claude Haiku 5.5",
-        "modelId": "claude-haiku-5-5",
-        "configuration": "Claude Haiku 5.5 (xhigh)"
+        "modelId": "claude-haiku-5-5-high",
+        "configuration": "Claude Haiku 5.5 (high)"
       },
       {
         "family": "Claude Opus 5.5",
-        "modelId": "claude-opus-5-5",
-        "configuration": "Claude Opus 5.5 (max with fallback)"
+        "modelId": "claude-opus-5-5-xhigh",
+        "configuration": "Claude Opus 5.5 (xhigh with fallback)"
       },
       {
-        "family": "Claude Sonnet 5.5",
-        "modelId": "claude-sonnet-5-5",
-        "configuration": "Claude Sonnet 5.5 (max with fallback)"
+        "family": "GPT-6 Astra",
+        "modelId": "gpt-6-astra-xhigh",
+        "configuration": "GPT-6 Astra (xhigh)"
       },
       {
         "family": "GPT-6 Luna",
-        "modelId": "gpt-6-luna",
-        "configuration": "GPT-6 Luna (max)"
+        "modelId": "gpt-6-luna-high",
+        "configuration": "GPT-6 Luna (high)"
       },
       {
         "family": "GPT-6.1 Sol",
@@ -1442,19 +1421,19 @@
         "configuration": "GPT-6.1 Sol (max)"
       },
       {
-        "family": "Kimi K3.1 Pro",
-        "modelId": "kimi-k3-1-pro",
-        "configuration": "Kimi K3.1 Pro"
+        "family": "GPT-6.1 Terra",
+        "modelId": "gpt-6.1-terra-high",
+        "configuration": "GPT-6.1 Terra (high)"
+      },
+      {
+        "family": "Gemini 4 Carbon",
+        "modelId": "gemini-4-carbon",
+        "configuration": "Gemini 4 Carbon (high)"
       },
       {
         "family": "MiMo-V2.6-Flash",
         "modelId": "mimo-v2-6-flash",
         "configuration": "MiMo-V2.6-Flash"
-      },
-      {
-        "family": "MiMo-V2.6-Pro",
-        "modelId": "mimo-v2-6-pro",
-        "configuration": "MiMo-V2.6-Pro"
       }
     ],
     "nearFrontierPolicy": {
@@ -1462,100 +1441,88 @@
       "basis": "Public rounded integer Intelligence Index and two-decimal USD total cost from the chart tooltips. The frontier's intelligence at a point's cost is the highest intelligence among rendered-frontier points whose cost is at or below that cost; a point cheaper than every frontier point has no gap.",
       "text": "A plotted configuration is near-frontier when it lies within 3 Intelligence Index points of the rendered frontier at its cost. Every near-frontier model family must be in the primary ranking, with its own selected configuration, or be explicitly deferred with a dated, reasoned roster decision. The cost ratio to the cheapest frontier point of equal or higher intelligence is reported for information only."
     },
-    "nearFrontierPointN": 11,
-    "nearFrontierFamilyN": 8,
-    "nearFrontierRequiredModelN": 8,
+    "nearFrontierPointN": 9,
+    "nearFrontierFamilyN": 6,
+    "nearFrontierRequiredModelN": 6,
     "nearFrontierDeferredN": 0,
     "nearFrontierFamilies": [
       {
-        "family": "Claude Haiku 5.5",
-        "modelId": "claude-haiku-5-5",
-        "configuration": "Claude Haiku 5.5 (low)",
-        "intelligenceGap": 1
-      },
-      {
         "family": "Claude Opus 5.5",
-        "modelId": "claude-opus-5-5",
-        "configuration": "Claude Opus 5.5 (medium with fallback)",
+        "modelId": "claude-opus-5-5-xhigh",
+        "configuration": "Claude Opus 5.5 (max with fallback)",
         "intelligenceGap": 1
       },
       {
         "family": "Claude Sonnet 5.5",
         "modelId": "claude-sonnet-5-5",
-        "configuration": "Claude Sonnet 5.5 (xhigh with fallback)",
-        "intelligenceGap": 2
-      },
-      {
-        "family": "DeepSeek V4.1 Flash 1017",
-        "modelId": "deepseek-v4-1-flash-1017",
-        "configuration": "DeepSeek V4.1 Flash 1017 (max)",
+        "configuration": "Claude Sonnet 5.5 (max with fallback)",
         "intelligenceGap": 3
-      },
-      {
-        "family": "GPT-5.6 Luna",
-        "modelId": "gpt-5.6-luna-low",
-        "configuration": "GPT-5.6 Luna (low)",
-        "intelligenceGap": 1
       },
       {
         "family": "GPT-6 Astra",
-        "modelId": "gpt-6-astra-high",
-        "configuration": "GPT-6 Astra (high)",
+        "modelId": "gpt-6-astra-xhigh",
+        "configuration": "GPT-6 Astra (max)",
+        "intelligenceGap": 0
+      },
+      {
+        "family": "GPT-6 Luna",
+        "modelId": "gpt-6-luna-high",
+        "configuration": "GPT-6 Luna (xhigh)",
+        "intelligenceGap": 2
+      },
+      {
+        "family": "GPT-6.1 Sol",
+        "modelId": "gpt-6.1-sol",
+        "configuration": "GPT-6.1 Sol (low)",
         "intelligenceGap": 3
       },
       {
-        "family": "Gemini 4 Argon",
-        "modelId": "gemini-4-argon",
-        "configuration": "Gemini 4 Argon (high)",
+        "family": "GPT-6.1 Terra",
+        "modelId": "gpt-6.1-terra-high",
+        "configuration": "GPT-6.1 Terra (xhigh)",
         "intelligenceGap": 1
-      },
-      {
-        "family": "MiniMax-M3.1-Flash",
-        "modelId": "minimax-m3-1-flash",
-        "configuration": "MiniMax-M3.1-Flash",
-        "intelligenceGap": 3
       }
     ],
     "selectedFamilyModelIds": [
       {
-        "modelId": "claude-haiku-5-5",
+        "modelId": "claude-haiku-5-5-high",
         "family": "Claude Haiku 5.5",
-        "modelName": "Claude Haiku 5.5 (xhigh)",
+        "modelName": "Claude Haiku 5.5 (high)",
+        "effort": "high",
+        "fallback": null,
+        "url": "https://artificialanalysis.ai/models/claude-haiku-5-5-high",
+        "intelligenceIndexDisplay": 30,
+        "totalCostUsd": 121.41
+      },
+      {
+        "modelId": "claude-opus-5-5-xhigh",
+        "family": "Claude Opus 5.5",
+        "modelName": "Claude Opus 5.5 (xhigh with fallback)",
+        "effort": "xhigh with fallback",
+        "fallback": "with fallback",
+        "url": "https://artificialanalysis.ai/models/claude-opus-5-5-xhigh",
+        "intelligenceIndexDisplay": 57,
+        "totalCostUsd": 4765.91
+      },
+      {
+        "modelId": "gpt-6-astra-xhigh",
+        "family": "GPT-6 Astra",
+        "modelName": "GPT-6 Astra (xhigh)",
         "effort": "xhigh",
         "fallback": null,
-        "url": "https://artificialanalysis.ai/models/claude-haiku-5-5-xhigh",
-        "intelligenceIndexDisplay": 41,
-        "totalCostUsd": 157.58
+        "url": "https://artificialanalysis.ai/models/gpt-6-astra-xhigh",
+        "intelligenceIndexDisplay": 55,
+        "totalCostUsd": 3746.22
       },
       {
-        "modelId": "claude-opus-5-5",
-        "family": "Claude Opus 5.5",
-        "modelName": "Claude Opus 5.5 (max with fallback)",
-        "effort": "max with fallback",
-        "fallback": "with fallback",
-        "url": "https://artificialanalysis.ai/models/claude-opus-5-5",
-        "intelligenceIndexDisplay": 58,
-        "totalCostUsd": 8708.2
-      },
-      {
-        "modelId": "claude-sonnet-5-5",
-        "family": "Claude Sonnet 5.5",
-        "modelName": "Claude Sonnet 5.5 (max with fallback)",
-        "effort": "max with fallback",
-        "fallback": "with fallback",
-        "url": "https://artificialanalysis.ai/models/claude-sonnet-5-5",
-        "intelligenceIndexDisplay": 56,
-        "totalCostUsd": 7259.5
-      },
-      {
-        "modelId": "gpt-6-luna",
+        "modelId": "gpt-6-luna-high",
         "family": "GPT-6 Luna",
-        "modelName": "GPT-6 Luna (max)",
-        "effort": "max",
+        "modelName": "GPT-6 Luna (high)",
+        "effort": "high",
         "fallback": null,
-        "url": "https://artificialanalysis.ai/models/gpt-6-luna",
-        "intelligenceIndexDisplay": 38,
-        "totalCostUsd": 122.05
+        "url": "https://artificialanalysis.ai/models/gpt-6-luna-high",
+        "intelligenceIndexDisplay": 21,
+        "totalCostUsd": 62.58
       },
       {
         "modelId": "gpt-6.1-sol",
@@ -1564,18 +1531,28 @@
         "effort": "max",
         "fallback": null,
         "url": "https://artificialanalysis.ai/models/gpt-6-1-sol",
-        "intelligenceIndexDisplay": 52,
-        "totalCostUsd": 1081.55
+        "intelligenceIndexDisplay": 55,
+        "totalCostUsd": 1123.97
       },
       {
-        "modelId": "kimi-k3-1-pro",
-        "family": "Kimi K3.1 Pro",
-        "modelName": "Kimi K3.1 Pro",
-        "effort": "reasoning",
+        "modelId": "gpt-6.1-terra-high",
+        "family": "GPT-6.1 Terra",
+        "modelName": "GPT-6.1 Terra (high)",
+        "effort": "high",
         "fallback": null,
-        "url": "https://artificialanalysis.ai/models/kimi-k3-1-pro",
-        "intelligenceIndexDisplay": 55,
-        "totalCostUsd": 3117.31
+        "url": "https://artificialanalysis.ai/models/gpt-6-1-terra-high",
+        "intelligenceIndexDisplay": 42,
+        "totalCostUsd": 266.79
+      },
+      {
+        "modelId": "gemini-4-carbon",
+        "family": "Gemini 4 Carbon",
+        "modelName": "Gemini 4 Carbon (high)",
+        "effort": "high",
+        "fallback": null,
+        "url": "https://artificialanalysis.ai/models/gemini-4-carbon",
+        "intelligenceIndexDisplay": 59,
+        "totalCostUsd": 8239.69
       },
       {
         "modelId": "mimo-v2-6-flash",
@@ -1584,26 +1561,16 @@
         "effort": "reasoning",
         "fallback": null,
         "url": "https://artificialanalysis.ai/models/mimo-v2-6-flash",
-        "intelligenceIndexDisplay": 38,
-        "totalCostUsd": 109.55
-      },
-      {
-        "modelId": "mimo-v2-6-pro",
-        "family": "MiMo-V2.6-Pro",
-        "modelName": "MiMo-V2.6-Pro",
-        "effort": "reasoning",
-        "fallback": null,
-        "url": "https://artificialanalysis.ai/models/mimo-v2-6-pro",
-        "intelligenceIndexDisplay": 46,
-        "totalCostUsd": 206.66
+        "intelligenceIndexDisplay": 27,
+        "totalCostUsd": 106.14
       }
     ]
   },
   "externalBenchmarks": {
     "livebench": {
       "release": "2026_06_25",
-      "matchedN": 25,
-      "cohortN": 51,
+      "matchedN": 2,
+      "cohortN": 27,
       "publishedN": 64,
       "supplementalMatchedN": 0,
       "supplementalModels": [],
@@ -1627,72 +1594,72 @@
     },
     "bugHunt": {
       "version": "105 planted bugs across two repositories; rolling public results snapshot",
-      "sourceCommit": "9089dc552a2b4eb94749c4da34d2cb872c7e0b43",
-      "matchedN": 54,
-      "rankableOverlapN": 17,
-      "sourceCohortN": 62,
-      "primaryCohortN": 30,
-      "sourceCoveragePct": 87.1,
-      "primaryCoveragePct": 93.33,
-      "primaryWeightPct": 19.7368,
-      "emphasisWeightPct": 26.1628
+      "sourceCommit": "12497971d928cc5ad97a184755734720388bc07f",
+      "matchedN": 25,
+      "rankableOverlapN": 18,
+      "sourceCohortN": 27,
+      "primaryCohortN": 27,
+      "sourceCoveragePct": 92.59,
+      "primaryCoveragePct": 92.59,
+      "primaryWeightPct": 23.0769,
+      "emphasisWeightPct": 30.0
     }
   },
   "scoring": {
     "version": "v3.0.0",
-    "cohortN": 30,
-    "scoredN": 21,
-    "otherPlottedEffortN": 17,
+    "cohortN": 27,
+    "scoredN": 19,
+    "otherPlottedEffortN": 18,
     "frontierRequiredModelN": 8,
     "frontierRequiredModelIds": [
-      "claude-haiku-5-5",
-      "claude-opus-5-5",
-      "claude-sonnet-5-5",
-      "gpt-6-luna",
+      "claude-haiku-5-5-high",
+      "claude-opus-5-5-xhigh",
+      "gemini-4-carbon",
+      "gpt-6-astra-xhigh",
+      "gpt-6-luna-high",
       "gpt-6.1-sol",
-      "kimi-k3-1-pro",
-      "mimo-v2-6-flash",
-      "mimo-v2-6-pro"
+      "gpt-6.1-terra-high",
+      "mimo-v2-6-flash"
     ],
     "frontierSelection": {
       "sourceUrl": "https://artificialanalysis.ai/evaluations/artificial-analysis-intelligence-index?eval-cost=intelligence-vs-total-cost",
       "captureArtifact": "data/aa_frontier_capture.json",
-      "capturedAt": "2026-10-25T09:53:28Z",
-      "indexVersion": "4.3.2",
+      "capturedAt": "2026-10-30T22:15:18Z",
+      "indexVersion": "5.0",
       "chartTitle": "Intelligence Index vs. Cost to Run Artificial Analysis Intelligence Index",
       "costUnit": "USD to run all Intelligence Index evaluations",
       "completeness": {
         "status": "complete",
-        "note": "All 698 catalog models selected; all 190 plotted points and all 19 Pareto path vertices captured from public tooltips (rounded integer Intelligence Index, two-decimal USD total cost) with Playwright on 2026-10-25. Every hover returned a distinct tooltip, so no overlapped-circle resolution was needed. No hidden state or paid export used."
+        "note": "All 89 catalog models selected; all 82 plotted points and all 18 Pareto path vertices captured from public tooltips (rounded integer Intelligence Index, two-decimal USD total cost) with Playwright on 2026-10-30. Every hover returned a distinct tooltip, so no overlapped-circle resolution was needed. No hidden state or paid export used."
       },
       "sourceUniverse": {
-        "selectedModelN": 698,
-        "plottedPointN": 190,
-        "observedFrontierPointN": 19,
-        "nearFrontierPointN": 11
+        "selectedModelN": 89,
+        "plottedPointN": 82,
+        "observedFrontierPointN": 18,
+        "nearFrontierPointN": 9
       },
-      "configurationN": 19,
+      "configurationN": 18,
       "familyN": 8,
       "frontierFamilies": [
         {
           "family": "Claude Haiku 5.5",
-          "modelId": "claude-haiku-5-5",
-          "configuration": "Claude Haiku 5.5 (xhigh)"
+          "modelId": "claude-haiku-5-5-high",
+          "configuration": "Claude Haiku 5.5 (high)"
         },
         {
           "family": "Claude Opus 5.5",
-          "modelId": "claude-opus-5-5",
-          "configuration": "Claude Opus 5.5 (max with fallback)"
+          "modelId": "claude-opus-5-5-xhigh",
+          "configuration": "Claude Opus 5.5 (xhigh with fallback)"
         },
         {
-          "family": "Claude Sonnet 5.5",
-          "modelId": "claude-sonnet-5-5",
-          "configuration": "Claude Sonnet 5.5 (max with fallback)"
+          "family": "GPT-6 Astra",
+          "modelId": "gpt-6-astra-xhigh",
+          "configuration": "GPT-6 Astra (xhigh)"
         },
         {
           "family": "GPT-6 Luna",
-          "modelId": "gpt-6-luna",
-          "configuration": "GPT-6 Luna (max)"
+          "modelId": "gpt-6-luna-high",
+          "configuration": "GPT-6 Luna (high)"
         },
         {
           "family": "GPT-6.1 Sol",
@@ -1700,19 +1667,19 @@
           "configuration": "GPT-6.1 Sol (max)"
         },
         {
-          "family": "Kimi K3.1 Pro",
-          "modelId": "kimi-k3-1-pro",
-          "configuration": "Kimi K3.1 Pro"
+          "family": "GPT-6.1 Terra",
+          "modelId": "gpt-6.1-terra-high",
+          "configuration": "GPT-6.1 Terra (high)"
+        },
+        {
+          "family": "Gemini 4 Carbon",
+          "modelId": "gemini-4-carbon",
+          "configuration": "Gemini 4 Carbon (high)"
         },
         {
           "family": "MiMo-V2.6-Flash",
           "modelId": "mimo-v2-6-flash",
           "configuration": "MiMo-V2.6-Flash"
-        },
-        {
-          "family": "MiMo-V2.6-Pro",
-          "modelId": "mimo-v2-6-pro",
-          "configuration": "MiMo-V2.6-Pro"
         }
       ],
       "nearFrontierPolicy": {
@@ -1720,100 +1687,88 @@
         "basis": "Public rounded integer Intelligence Index and two-decimal USD total cost from the chart tooltips. The frontier's intelligence at a point's cost is the highest intelligence among rendered-frontier points whose cost is at or below that cost; a point cheaper than every frontier point has no gap.",
         "text": "A plotted configuration is near-frontier when it lies within 3 Intelligence Index points of the rendered frontier at its cost. Every near-frontier model family must be in the primary ranking, with its own selected configuration, or be explicitly deferred with a dated, reasoned roster decision. The cost ratio to the cheapest frontier point of equal or higher intelligence is reported for information only."
       },
-      "nearFrontierPointN": 11,
-      "nearFrontierFamilyN": 8,
-      "nearFrontierRequiredModelN": 8,
+      "nearFrontierPointN": 9,
+      "nearFrontierFamilyN": 6,
+      "nearFrontierRequiredModelN": 6,
       "nearFrontierDeferredN": 0,
       "nearFrontierFamilies": [
         {
-          "family": "Claude Haiku 5.5",
-          "modelId": "claude-haiku-5-5",
-          "configuration": "Claude Haiku 5.5 (low)",
-          "intelligenceGap": 1
-        },
-        {
           "family": "Claude Opus 5.5",
-          "modelId": "claude-opus-5-5",
-          "configuration": "Claude Opus 5.5 (medium with fallback)",
+          "modelId": "claude-opus-5-5-xhigh",
+          "configuration": "Claude Opus 5.5 (max with fallback)",
           "intelligenceGap": 1
         },
         {
           "family": "Claude Sonnet 5.5",
           "modelId": "claude-sonnet-5-5",
-          "configuration": "Claude Sonnet 5.5 (xhigh with fallback)",
-          "intelligenceGap": 2
-        },
-        {
-          "family": "DeepSeek V4.1 Flash 1017",
-          "modelId": "deepseek-v4-1-flash-1017",
-          "configuration": "DeepSeek V4.1 Flash 1017 (max)",
+          "configuration": "Claude Sonnet 5.5 (max with fallback)",
           "intelligenceGap": 3
-        },
-        {
-          "family": "GPT-5.6 Luna",
-          "modelId": "gpt-5.6-luna-low",
-          "configuration": "GPT-5.6 Luna (low)",
-          "intelligenceGap": 1
         },
         {
           "family": "GPT-6 Astra",
-          "modelId": "gpt-6-astra-high",
-          "configuration": "GPT-6 Astra (high)",
+          "modelId": "gpt-6-astra-xhigh",
+          "configuration": "GPT-6 Astra (max)",
+          "intelligenceGap": 0
+        },
+        {
+          "family": "GPT-6 Luna",
+          "modelId": "gpt-6-luna-high",
+          "configuration": "GPT-6 Luna (xhigh)",
+          "intelligenceGap": 2
+        },
+        {
+          "family": "GPT-6.1 Sol",
+          "modelId": "gpt-6.1-sol",
+          "configuration": "GPT-6.1 Sol (low)",
           "intelligenceGap": 3
         },
         {
-          "family": "Gemini 4 Argon",
-          "modelId": "gemini-4-argon",
-          "configuration": "Gemini 4 Argon (high)",
+          "family": "GPT-6.1 Terra",
+          "modelId": "gpt-6.1-terra-high",
+          "configuration": "GPT-6.1 Terra (xhigh)",
           "intelligenceGap": 1
-        },
-        {
-          "family": "MiniMax-M3.1-Flash",
-          "modelId": "minimax-m3-1-flash",
-          "configuration": "MiniMax-M3.1-Flash",
-          "intelligenceGap": 3
         }
       ],
       "selectedFamilyModelIds": [
         {
-          "modelId": "claude-haiku-5-5",
+          "modelId": "claude-haiku-5-5-high",
           "family": "Claude Haiku 5.5",
-          "modelName": "Claude Haiku 5.5 (xhigh)",
+          "modelName": "Claude Haiku 5.5 (high)",
+          "effort": "high",
+          "fallback": null,
+          "url": "https://artificialanalysis.ai/models/claude-haiku-5-5-high",
+          "intelligenceIndexDisplay": 30,
+          "totalCostUsd": 121.41
+        },
+        {
+          "modelId": "claude-opus-5-5-xhigh",
+          "family": "Claude Opus 5.5",
+          "modelName": "Claude Opus 5.5 (xhigh with fallback)",
+          "effort": "xhigh with fallback",
+          "fallback": "with fallback",
+          "url": "https://artificialanalysis.ai/models/claude-opus-5-5-xhigh",
+          "intelligenceIndexDisplay": 57,
+          "totalCostUsd": 4765.91
+        },
+        {
+          "modelId": "gpt-6-astra-xhigh",
+          "family": "GPT-6 Astra",
+          "modelName": "GPT-6 Astra (xhigh)",
           "effort": "xhigh",
           "fallback": null,
-          "url": "https://artificialanalysis.ai/models/claude-haiku-5-5-xhigh",
-          "intelligenceIndexDisplay": 41,
-          "totalCostUsd": 157.58
+          "url": "https://artificialanalysis.ai/models/gpt-6-astra-xhigh",
+          "intelligenceIndexDisplay": 55,
+          "totalCostUsd": 3746.22
         },
         {
-          "modelId": "claude-opus-5-5",
-          "family": "Claude Opus 5.5",
-          "modelName": "Claude Opus 5.5 (max with fallback)",
-          "effort": "max with fallback",
-          "fallback": "with fallback",
-          "url": "https://artificialanalysis.ai/models/claude-opus-5-5",
-          "intelligenceIndexDisplay": 58,
-          "totalCostUsd": 8708.2
-        },
-        {
-          "modelId": "claude-sonnet-5-5",
-          "family": "Claude Sonnet 5.5",
-          "modelName": "Claude Sonnet 5.5 (max with fallback)",
-          "effort": "max with fallback",
-          "fallback": "with fallback",
-          "url": "https://artificialanalysis.ai/models/claude-sonnet-5-5",
-          "intelligenceIndexDisplay": 56,
-          "totalCostUsd": 7259.5
-        },
-        {
-          "modelId": "gpt-6-luna",
+          "modelId": "gpt-6-luna-high",
           "family": "GPT-6 Luna",
-          "modelName": "GPT-6 Luna (max)",
-          "effort": "max",
+          "modelName": "GPT-6 Luna (high)",
+          "effort": "high",
           "fallback": null,
-          "url": "https://artificialanalysis.ai/models/gpt-6-luna",
-          "intelligenceIndexDisplay": 38,
-          "totalCostUsd": 122.05
+          "url": "https://artificialanalysis.ai/models/gpt-6-luna-high",
+          "intelligenceIndexDisplay": 21,
+          "totalCostUsd": 62.58
         },
         {
           "modelId": "gpt-6.1-sol",
@@ -1822,18 +1777,28 @@
           "effort": "max",
           "fallback": null,
           "url": "https://artificialanalysis.ai/models/gpt-6-1-sol",
-          "intelligenceIndexDisplay": 52,
-          "totalCostUsd": 1081.55
+          "intelligenceIndexDisplay": 55,
+          "totalCostUsd": 1123.97
         },
         {
-          "modelId": "kimi-k3-1-pro",
-          "family": "Kimi K3.1 Pro",
-          "modelName": "Kimi K3.1 Pro",
-          "effort": "reasoning",
+          "modelId": "gpt-6.1-terra-high",
+          "family": "GPT-6.1 Terra",
+          "modelName": "GPT-6.1 Terra (high)",
+          "effort": "high",
           "fallback": null,
-          "url": "https://artificialanalysis.ai/models/kimi-k3-1-pro",
-          "intelligenceIndexDisplay": 55,
-          "totalCostUsd": 3117.31
+          "url": "https://artificialanalysis.ai/models/gpt-6-1-terra-high",
+          "intelligenceIndexDisplay": 42,
+          "totalCostUsd": 266.79
+        },
+        {
+          "modelId": "gemini-4-carbon",
+          "family": "Gemini 4 Carbon",
+          "modelName": "Gemini 4 Carbon (high)",
+          "effort": "high",
+          "fallback": null,
+          "url": "https://artificialanalysis.ai/models/gemini-4-carbon",
+          "intelligenceIndexDisplay": 59,
+          "totalCostUsd": 8239.69
         },
         {
           "modelId": "mimo-v2-6-flash",
@@ -1842,301 +1807,22 @@
           "effort": "reasoning",
           "fallback": null,
           "url": "https://artificialanalysis.ai/models/mimo-v2-6-flash",
-          "intelligenceIndexDisplay": 38,
-          "totalCostUsd": 109.55
-        },
-        {
-          "modelId": "mimo-v2-6-pro",
-          "family": "MiMo-V2.6-Pro",
-          "modelName": "MiMo-V2.6-Pro",
-          "effort": "reasoning",
-          "fallback": null,
-          "url": "https://artificialanalysis.ai/models/mimo-v2-6-pro",
-          "intelligenceIndexDisplay": 46,
-          "totalCostUsd": 206.66
+          "intelligenceIndexDisplay": 27,
+          "totalCostUsd": 106.14
         }
       ]
     },
-    "sourceCohortN": 62,
-    "rankingExcludedModels": [
-      "Gemini 3.8 Flash",
-      "Claude Opus 5",
-      "GPT-5.6 Sol",
-      "Claude Fable 5",
-      "GLM-5.3",
-      "Kimi K3",
-      "Grok 4.6",
-      "GPT-5.6 Luna",
-      "GPT-5.5",
-      "Gemini 3.7 Flash",
-      "GLM-5.3 Flash",
-      "DeepSeek V4 Pro",
-      "Claude Opus 4.8",
-      "Qwen3.8 Max",
-      "Muse Spark 1.2",
-      "Claude Sonnet 5",
-      "DeepSeek V4 Flash",
-      "Gemini 3.6 Flash",
-      "GLM-5.2",
-      "Gemini 3.5 Flash",
-      "GPT-6 Sol",
-      "Grok 4.7",
-      "Claude Fable 5.1",
-      "Muse Spark 1.3",
-      "Muse Wonder",
-      "Muse Wonder Full",
-      "GPT-6.1 Sol (low)",
-      "Claude Sonnet 5.5 (high)",
-      "Claude Sonnet 5.5 (medium)",
-      "Claude Sonnet 5.5 (low)",
-      "Muse Spark 1.3 (xhigh)",
-      "Grok 4.6 (xhigh)"
-    ],
-    "rankingExclusions": [
-      {
-        "modelId": "gemini-3.8-flash",
-        "name": "Gemini 3.8 Flash",
-        "reasons": [
-          "Not plotted on or within the near gap of AA's rendered frontier (O51)"
-        ]
-      },
-      {
-        "modelId": "claude-opus-5",
-        "name": "Claude Opus 5",
-        "reasons": [
-          "Not plotted on or within the near gap of AA's rendered frontier (O51)"
-        ]
-      },
-      {
-        "modelId": "gpt-5.6-sol",
-        "name": "GPT-5.6 Sol",
-        "reasons": [
-          "Not plotted on or within the near gap of AA's rendered frontier (O51)"
-        ]
-      },
-      {
-        "modelId": "claude-fable-5",
-        "name": "Claude Fable 5",
-        "reasons": [
-          "Not plotted on or within the near gap of AA's rendered frontier (O51)"
-        ]
-      },
-      {
-        "modelId": "glm-5.3",
-        "name": "GLM-5.3",
-        "reasons": [
-          "Not plotted on or within the near gap of AA's rendered frontier (O51)"
-        ]
-      },
-      {
-        "modelId": "kimi-k3",
-        "name": "Kimi K3",
-        "reasons": [
-          "No eligible exact-model Bug Hunt result in the selected source snapshot",
-          "Not plotted on or within the near gap of AA's rendered frontier (O51)"
-        ]
-      },
-      {
-        "modelId": "grok-4.6",
-        "name": "Grok 4.6",
-        "reasons": [
-          "No eligible exact-model Bug Hunt result in the selected source snapshot",
-          "Not plotted on or within the near gap of AA's rendered frontier (O51)"
-        ]
-      },
-      {
-        "modelId": "gpt-5.6-luna",
-        "name": "GPT-5.6 Luna",
-        "reasons": [
-          "Not plotted on or within the near gap of AA's rendered frontier (O51)"
-        ]
-      },
-      {
-        "modelId": "gpt-5.5",
-        "name": "GPT-5.5",
-        "reasons": [
-          "No eligible exact-model Bug Hunt result in the selected source snapshot",
-          "Not plotted on or within the near gap of AA's rendered frontier (O51)"
-        ]
-      },
-      {
-        "modelId": "gemini-3.7-flash",
-        "name": "Gemini 3.7 Flash",
-        "reasons": [
-          "No eligible exact-model Bug Hunt result in the selected source snapshot",
-          "Not plotted on or within the near gap of AA's rendered frontier (O51)"
-        ]
-      },
-      {
-        "modelId": "glm-5.3-flash",
-        "name": "GLM-5.3 Flash",
-        "reasons": [
-          "Not plotted on or within the near gap of AA's rendered frontier (O51)"
-        ]
-      },
-      {
-        "modelId": "deepseek-v4-pro",
-        "name": "DeepSeek V4 Pro",
-        "reasons": [
-          "Not plotted on or within the near gap of AA's rendered frontier (O51)"
-        ]
-      },
-      {
-        "modelId": "claude-opus-4.8",
-        "name": "Claude Opus 4.8",
-        "reasons": [
-          "Not plotted on or within the near gap of AA's rendered frontier (O51)"
-        ]
-      },
-      {
-        "modelId": "qwen3.8-max",
-        "name": "Qwen3.8 Max",
-        "reasons": [
-          "Not plotted on or within the near gap of AA's rendered frontier (O51)"
-        ]
-      },
-      {
-        "modelId": "muse-spark-1.2",
-        "name": "Muse Spark 1.2",
-        "reasons": [
-          "No eligible exact-model Bug Hunt result in the selected source snapshot",
-          "Not plotted on or within the near gap of AA's rendered frontier (O51)"
-        ]
-      },
-      {
-        "modelId": "claude-sonnet-5",
-        "name": "Claude Sonnet 5",
-        "reasons": [
-          "Not plotted on or within the near gap of AA's rendered frontier (O51)"
-        ]
-      },
-      {
-        "modelId": "deepseek-v4-flash",
-        "name": "DeepSeek V4 Flash",
-        "reasons": [
-          "Not plotted on or within the near gap of AA's rendered frontier (O51)"
-        ]
-      },
-      {
-        "modelId": "gemini-3.6-flash",
-        "name": "Gemini 3.6 Flash",
-        "reasons": [
-          "No eligible exact-model Bug Hunt result in the selected source snapshot",
-          "Not plotted on or within the near gap of AA's rendered frontier (O51)"
-        ]
-      },
-      {
-        "modelId": "glm-5.2",
-        "name": "GLM-5.2",
-        "reasons": [
-          "No eligible exact-model Bug Hunt result in the selected source snapshot",
-          "Not plotted on or within the near gap of AA's rendered frontier (O51)"
-        ]
-      },
-      {
-        "modelId": "gemini-3.5-flash",
-        "name": "Gemini 3.5 Flash",
-        "reasons": [
-          "No eligible exact-model Bug Hunt result in the selected source snapshot",
-          "Not plotted on or within the near gap of AA's rendered frontier (O51)"
-        ]
-      },
-      {
-        "modelId": "gpt-6-sol",
-        "name": "GPT-6 Sol",
-        "reasons": [
-          "Not plotted on or within the near gap of AA's rendered frontier (O51)"
-        ]
-      },
-      {
-        "modelId": "grok-4.7",
-        "name": "Grok 4.7",
-        "reasons": [
-          "Not plotted on or within the near gap of AA's rendered frontier (O51)"
-        ]
-      },
-      {
-        "modelId": "claude-fable-5-1",
-        "name": "Claude Fable 5.1",
-        "reasons": [
-          "Not plotted on or within the near gap of AA's rendered frontier (O51)"
-        ]
-      },
-      {
-        "modelId": "muse-spark-1-3",
-        "name": "Muse Spark 1.3",
-        "reasons": [
-          "Not plotted on or within the near gap of AA's rendered frontier (O51)"
-        ]
-      },
-      {
-        "modelId": "muse-wonder",
-        "name": "Muse Wonder",
-        "reasons": [
-          "Not plotted on or within the near gap of AA's rendered frontier (O51)"
-        ]
-      },
-      {
-        "modelId": "muse-wonder-full",
-        "name": "Muse Wonder Full",
-        "reasons": [
-          "Not plotted on or within the near gap of AA's rendered frontier (O51)"
-        ]
-      },
-      {
-        "modelId": "gpt-6.1-sol-low",
-        "name": "GPT-6.1 Sol (low)",
-        "reasons": [
-          "Not plotted on or within the near gap of AA's rendered frontier (O51)"
-        ]
-      },
-      {
-        "modelId": "claude-sonnet-5-5-high",
-        "name": "Claude Sonnet 5.5 (high)",
-        "reasons": [
-          "Not plotted on or within the near gap of AA's rendered frontier (O51)"
-        ]
-      },
-      {
-        "modelId": "claude-sonnet-5-5-medium",
-        "name": "Claude Sonnet 5.5 (medium)",
-        "reasons": [
-          "Not plotted on or within the near gap of AA's rendered frontier (O51)"
-        ]
-      },
-      {
-        "modelId": "claude-sonnet-5-5-low",
-        "name": "Claude Sonnet 5.5 (low)",
-        "reasons": [
-          "Not plotted on or within the near gap of AA's rendered frontier (O51)"
-        ]
-      },
-      {
-        "modelId": "muse-spark-1-3-xhigh",
-        "name": "Muse Spark 1.3 (xhigh)",
-        "reasons": [
-          "Not plotted on or within the near gap of AA's rendered frontier (O51)"
-        ]
-      },
-      {
-        "modelId": "grok-4.6-xhigh",
-        "name": "Grok 4.6 (xhigh)",
-        "reasons": [
-          "Not plotted on or within the near gap of AA's rendered frontier (O51)"
-        ]
-      }
-    ],
+    "sourceCohortN": 27,
+    "rankingExcludedModels": [],
+    "rankingExclusions": [],
     "costMode": "aa-per-index-point",
     "costCoverage": {
-      "availableN": 30,
-      "cohortN": 30,
-      "sourceAvailableN": 60,
-      "sourceCohortN": 62,
+      "availableN": 27,
+      "cohortN": 27,
+      "sourceAvailableN": 27,
+      "sourceCohortN": 27,
       "missingModels": [],
-      "sourceMissingModels": [
-        "Gemini 3.7 Flash",
-        "Muse Wonder Full"
-      ],
+      "sourceMissingModels": [],
       "selectiveSubstitution": false
     },
     "retainedDimensions": [
@@ -2147,10 +1833,7 @@
       "automationBenchAA",
       "aaLcr",
       "omniAccuracy",
-      "hle",
       "gpqaDiamond",
-      "scicode",
-      "critpt",
       "intelligenceIndex",
       "speed",
       "bugHuntFixedOf105"
@@ -2160,90 +1843,254 @@
         "key": "terminalBenchV4",
         "label": "Terminal-Bench 4.0",
         "missing": [
-          "Claude Opus 5.5",
-          "GPT-6.1 Sol",
-          "GPT-6 Luna",
-          "MiMo-V2.6-Pro",
-          "MiMo-V2.6-Flash",
-          "Claude Haiku 5.5",
-          "Claude Sonnet 5.5",
-          "Gemini 4 Argon",
-          "GPT-6.1 Sol (xhigh)",
-          "GPT-6.1 Sol (high)",
-          "GPT-6.1 Sol (medium)",
-          "Claude Haiku 5.5 (max)",
-          "Claude Haiku 5.5 (high)",
-          "Claude Haiku 5.5 (medium)",
-          "Claude Haiku 5.5 (low)",
-          "Claude Sonnet 5.5 (xhigh)",
-          "DeepSeek V4.1 Flash 1017",
-          "MiniMax-M3.1-Flash",
           "GPT-6 Luna (low)",
           "GPT-6 Luna (medium)",
+          "Claude Haiku 5.5 (low)",
           "GPT-6 Luna (high)",
-          "GPT-6 Luna (xhigh)",
-          "Claude Opus 5.5 (high)",
-          "Claude Opus 5.5 (xhigh)",
-          "Claude Opus 5.5 (medium)",
-          "GPT-5.6 Luna (low)",
+          "Claude Haiku 5.5 (medium)",
+          "MiMo-V2.6-Flash",
+          "GPT-6.1 Terra (low)",
+          "Claude Haiku 5.5 (high)",
+          "GPT-6.1 Terra (medium)",
+          "GPT-6.1 Terra (high)",
+          "GPT-6.1 Sol (medium)",
+          "GPT-6.1 Sol (high)",
+          "GPT-6.1 Sol (xhigh)",
+          "GPT-6.1 Sol (max)",
           "GPT-6 Astra (high)",
           "GPT-6 Astra (xhigh)",
-          "Kimi K3.1 Pro"
+          "Claude Opus 5.5 (xhigh)",
+          "Gemini 4 Carbon",
+          "GPT-6 Luna (xhigh)",
+          "GPT-6 Luna (max)",
+          "GPT-6.1 Sol (low)",
+          "GPT-6.1 Terra (xhigh)",
+          "GPT-6.1 Terra (max)",
+          "Claude Opus 5.5 (high)",
+          "Claude Sonnet 5.5",
+          "Claude Opus 5.5 (max)"
         ],
         "sourceMissing": [
-          "Claude Opus 5",
-          "Kimi K3",
-          "Grok 4.6",
-          "GPT-5.5",
-          "Gemini 3.7 Flash",
-          "GLM-5.3 Flash",
-          "DeepSeek V4 Pro",
-          "Qwen3.8 Max",
-          "Muse Spark 1.2",
-          "Gemini 3.6 Flash",
-          "GLM-5.2",
-          "Gemini 3.5 Flash",
-          "Claude Opus 5.5",
-          "GPT-6 Sol",
-          "GPT-6.1 Sol",
-          "GPT-6 Luna",
-          "Grok 4.7",
-          "MiMo-V2.6-Pro",
-          "MiMo-V2.6-Flash",
-          "Claude Haiku 5.5",
-          "Claude Sonnet 5.5",
-          "Gemini 4 Argon",
-          "Muse Spark 1.3",
-          "Muse Wonder",
-          "Muse Wonder Full",
-          "GPT-6.1 Sol (xhigh)",
-          "GPT-6.1 Sol (high)",
-          "GPT-6.1 Sol (medium)",
-          "GPT-6.1 Sol (low)",
-          "Claude Haiku 5.5 (max)",
-          "Claude Haiku 5.5 (high)",
-          "Claude Haiku 5.5 (medium)",
-          "Claude Haiku 5.5 (low)",
-          "Claude Sonnet 5.5 (xhigh)",
-          "Claude Sonnet 5.5 (high)",
-          "Claude Sonnet 5.5 (medium)",
-          "Claude Sonnet 5.5 (low)",
-          "Grok 4.6 (xhigh)",
-          "DeepSeek V4.1 Flash 1017",
-          "MiniMax-M3.1-Flash",
           "GPT-6 Luna (low)",
           "GPT-6 Luna (medium)",
+          "Claude Haiku 5.5 (low)",
           "GPT-6 Luna (high)",
-          "GPT-6 Luna (xhigh)",
-          "Claude Opus 5.5 (high)",
-          "Claude Opus 5.5 (xhigh)",
-          "Claude Opus 5.5 (medium)",
-          "GPT-5.6 Luna (low)",
+          "Claude Haiku 5.5 (medium)",
+          "MiMo-V2.6-Flash",
+          "GPT-6.1 Terra (low)",
+          "Claude Haiku 5.5 (high)",
+          "GPT-6.1 Terra (medium)",
+          "GPT-6.1 Terra (high)",
+          "GPT-6.1 Sol (medium)",
+          "GPT-6.1 Sol (high)",
+          "GPT-6.1 Sol (xhigh)",
+          "GPT-6.1 Sol (max)",
           "GPT-6 Astra (high)",
           "GPT-6 Astra (xhigh)",
-          "Kimi K3.1 Pro"
+          "Claude Opus 5.5 (xhigh)",
+          "Gemini 4 Carbon",
+          "GPT-6 Luna (xhigh)",
+          "GPT-6 Luna (max)",
+          "GPT-6.1 Sol (low)",
+          "GPT-6.1 Terra (xhigh)",
+          "GPT-6.1 Terra (max)",
+          "Claude Opus 5.5 (high)",
+          "Claude Sonnet 5.5",
+          "Claude Opus 5.5 (max)"
         ],
         "availableN": 1,
+        "reason": "fewer than two primary models have observed values; no comparative percentile is assigned"
+      },
+      {
+        "key": "hle",
+        "label": "HLE",
+        "missing": [
+          "GPT-6 Luna (low)",
+          "GPT-6 Luna (medium)",
+          "Claude Haiku 5.5 (low)",
+          "GPT-6 Luna (high)",
+          "Claude Haiku 5.5 (medium)",
+          "MiMo-V2.6-Flash",
+          "GPT-6.1 Terra (low)",
+          "Claude Haiku 5.5 (high)",
+          "GPT-6.1 Terra (medium)",
+          "GPT-6.1 Terra (high)",
+          "GPT-6.1 Sol (medium)",
+          "GPT-6.1 Sol (high)",
+          "GPT-6.1 Sol (xhigh)",
+          "GPT-6.1 Sol (max)",
+          "GPT-6 Astra (high)",
+          "GPT-6 Astra (xhigh)",
+          "Claude Opus 5.5 (xhigh)",
+          "Gemini 4 Carbon",
+          "GPT-6 Luna (xhigh)",
+          "GPT-6 Luna (max)",
+          "GPT-6.1 Sol (low)",
+          "GPT-6.1 Terra (xhigh)",
+          "GPT-6.1 Terra (max)",
+          "Claude Opus 5.5 (high)",
+          "GPT-6 Astra (max)",
+          "Claude Sonnet 5.5",
+          "Claude Opus 5.5 (max)"
+        ],
+        "sourceMissing": [
+          "GPT-6 Luna (low)",
+          "GPT-6 Luna (medium)",
+          "Claude Haiku 5.5 (low)",
+          "GPT-6 Luna (high)",
+          "Claude Haiku 5.5 (medium)",
+          "MiMo-V2.6-Flash",
+          "GPT-6.1 Terra (low)",
+          "Claude Haiku 5.5 (high)",
+          "GPT-6.1 Terra (medium)",
+          "GPT-6.1 Terra (high)",
+          "GPT-6.1 Sol (medium)",
+          "GPT-6.1 Sol (high)",
+          "GPT-6.1 Sol (xhigh)",
+          "GPT-6.1 Sol (max)",
+          "GPT-6 Astra (high)",
+          "GPT-6 Astra (xhigh)",
+          "Claude Opus 5.5 (xhigh)",
+          "Gemini 4 Carbon",
+          "GPT-6 Luna (xhigh)",
+          "GPT-6 Luna (max)",
+          "GPT-6.1 Sol (low)",
+          "GPT-6.1 Terra (xhigh)",
+          "GPT-6.1 Terra (max)",
+          "Claude Opus 5.5 (high)",
+          "GPT-6 Astra (max)",
+          "Claude Sonnet 5.5",
+          "Claude Opus 5.5 (max)"
+        ],
+        "availableN": 0,
+        "reason": "fewer than two primary models have observed values; no comparative percentile is assigned"
+      },
+      {
+        "key": "scicode",
+        "label": "SciCode",
+        "missing": [
+          "GPT-6 Luna (low)",
+          "GPT-6 Luna (medium)",
+          "Claude Haiku 5.5 (low)",
+          "GPT-6 Luna (high)",
+          "Claude Haiku 5.5 (medium)",
+          "MiMo-V2.6-Flash",
+          "GPT-6.1 Terra (low)",
+          "Claude Haiku 5.5 (high)",
+          "GPT-6.1 Terra (medium)",
+          "GPT-6.1 Terra (high)",
+          "GPT-6.1 Sol (medium)",
+          "GPT-6.1 Sol (high)",
+          "GPT-6.1 Sol (xhigh)",
+          "GPT-6.1 Sol (max)",
+          "GPT-6 Astra (high)",
+          "GPT-6 Astra (xhigh)",
+          "Claude Opus 5.5 (xhigh)",
+          "Gemini 4 Carbon",
+          "GPT-6 Luna (xhigh)",
+          "GPT-6 Luna (max)",
+          "GPT-6.1 Sol (low)",
+          "GPT-6.1 Terra (xhigh)",
+          "GPT-6.1 Terra (max)",
+          "Claude Opus 5.5 (high)",
+          "GPT-6 Astra (max)",
+          "Claude Sonnet 5.5",
+          "Claude Opus 5.5 (max)"
+        ],
+        "sourceMissing": [
+          "GPT-6 Luna (low)",
+          "GPT-6 Luna (medium)",
+          "Claude Haiku 5.5 (low)",
+          "GPT-6 Luna (high)",
+          "Claude Haiku 5.5 (medium)",
+          "MiMo-V2.6-Flash",
+          "GPT-6.1 Terra (low)",
+          "Claude Haiku 5.5 (high)",
+          "GPT-6.1 Terra (medium)",
+          "GPT-6.1 Terra (high)",
+          "GPT-6.1 Sol (medium)",
+          "GPT-6.1 Sol (high)",
+          "GPT-6.1 Sol (xhigh)",
+          "GPT-6.1 Sol (max)",
+          "GPT-6 Astra (high)",
+          "GPT-6 Astra (xhigh)",
+          "Claude Opus 5.5 (xhigh)",
+          "Gemini 4 Carbon",
+          "GPT-6 Luna (xhigh)",
+          "GPT-6 Luna (max)",
+          "GPT-6.1 Sol (low)",
+          "GPT-6.1 Terra (xhigh)",
+          "GPT-6.1 Terra (max)",
+          "Claude Opus 5.5 (high)",
+          "GPT-6 Astra (max)",
+          "Claude Sonnet 5.5",
+          "Claude Opus 5.5 (max)"
+        ],
+        "availableN": 0,
+        "reason": "fewer than two primary models have observed values; no comparative percentile is assigned"
+      },
+      {
+        "key": "critpt",
+        "label": "CritPt",
+        "missing": [
+          "GPT-6 Luna (low)",
+          "GPT-6 Luna (medium)",
+          "Claude Haiku 5.5 (low)",
+          "GPT-6 Luna (high)",
+          "Claude Haiku 5.5 (medium)",
+          "MiMo-V2.6-Flash",
+          "GPT-6.1 Terra (low)",
+          "Claude Haiku 5.5 (high)",
+          "GPT-6.1 Terra (medium)",
+          "GPT-6.1 Terra (high)",
+          "GPT-6.1 Sol (medium)",
+          "GPT-6.1 Sol (high)",
+          "GPT-6.1 Sol (xhigh)",
+          "GPT-6.1 Sol (max)",
+          "GPT-6 Astra (high)",
+          "GPT-6 Astra (xhigh)",
+          "Claude Opus 5.5 (xhigh)",
+          "Gemini 4 Carbon",
+          "GPT-6 Luna (xhigh)",
+          "GPT-6 Luna (max)",
+          "GPT-6.1 Sol (low)",
+          "GPT-6.1 Terra (xhigh)",
+          "GPT-6.1 Terra (max)",
+          "Claude Opus 5.5 (high)",
+          "GPT-6 Astra (max)",
+          "Claude Sonnet 5.5",
+          "Claude Opus 5.5 (max)"
+        ],
+        "sourceMissing": [
+          "GPT-6 Luna (low)",
+          "GPT-6 Luna (medium)",
+          "Claude Haiku 5.5 (low)",
+          "GPT-6 Luna (high)",
+          "Claude Haiku 5.5 (medium)",
+          "MiMo-V2.6-Flash",
+          "GPT-6.1 Terra (low)",
+          "Claude Haiku 5.5 (high)",
+          "GPT-6.1 Terra (medium)",
+          "GPT-6.1 Terra (high)",
+          "GPT-6.1 Sol (medium)",
+          "GPT-6.1 Sol (high)",
+          "GPT-6.1 Sol (xhigh)",
+          "GPT-6.1 Sol (max)",
+          "GPT-6 Astra (high)",
+          "GPT-6 Astra (xhigh)",
+          "Claude Opus 5.5 (xhigh)",
+          "Gemini 4 Carbon",
+          "GPT-6 Luna (xhigh)",
+          "GPT-6 Luna (max)",
+          "GPT-6.1 Sol (low)",
+          "GPT-6.1 Terra (xhigh)",
+          "GPT-6.1 Terra (max)",
+          "Claude Opus 5.5 (high)",
+          "GPT-6 Astra (max)",
+          "Claude Sonnet 5.5",
+          "Claude Opus 5.5 (max)"
+        ],
+        "availableN": 0,
         "reason": "fewer than two primary models have observed values; no comparative percentile is assigned"
       }
     ],
@@ -2252,558 +2099,621 @@
     "fields": {
       "costComposite": {
         "label": "Cost",
-        "availableN": 30,
-        "cohortN": 30,
+        "availableN": 27,
+        "cohortN": 27,
         "coveragePct": 100.0,
-        "normalizableN": 30,
+        "normalizableN": 27,
         "missingModels": [],
-        "sourceAvailableN": 30,
-        "sourceCohortN": 62,
-        "sourceMissingModels": [
-          "Gemini 3.8 Flash",
-          "Claude Opus 5",
-          "GPT-5.6 Sol",
-          "Claude Fable 5",
-          "GLM-5.3",
-          "Kimi K3",
-          "Grok 4.6",
-          "GPT-5.6 Luna",
-          "GPT-5.5",
-          "Gemini 3.7 Flash",
-          "GLM-5.3 Flash",
-          "DeepSeek V4 Pro",
-          "Claude Opus 4.8",
-          "Qwen3.8 Max",
-          "Muse Spark 1.2",
-          "Claude Sonnet 5",
-          "DeepSeek V4 Flash",
-          "Gemini 3.6 Flash",
-          "GLM-5.2",
-          "Gemini 3.5 Flash",
-          "GPT-6 Sol",
-          "Grok 4.7",
-          "Claude Fable 5.1",
-          "Muse Spark 1.3",
-          "Muse Wonder",
-          "Muse Wonder Full",
-          "GPT-6.1 Sol (low)",
-          "Claude Sonnet 5.5 (high)",
-          "Claude Sonnet 5.5 (medium)",
-          "Claude Sonnet 5.5 (low)",
-          "Muse Spark 1.3 (xhigh)",
-          "Grok 4.6 (xhigh)"
-        ],
+        "sourceAvailableN": 27,
+        "sourceCohortN": 27,
+        "sourceMissingModels": [],
         "includedInPrimaryScore": true
       },
       "omniNonHallucination": {
         "label": "Non-Hallucination",
-        "availableN": 30,
-        "cohortN": 30,
+        "availableN": 27,
+        "cohortN": 27,
         "coveragePct": 100.0,
-        "normalizableN": 30,
+        "normalizableN": 27,
         "missingModels": [],
-        "sourceAvailableN": 62,
-        "sourceCohortN": 62,
+        "sourceAvailableN": 27,
+        "sourceCohortN": 27,
         "sourceMissingModels": [],
         "includedInPrimaryScore": true
       },
       "terminalBenchV4": {
         "label": "Terminal-Bench 4.0",
         "availableN": 1,
-        "cohortN": 30,
-        "coveragePct": 3.33,
+        "cohortN": 27,
+        "coveragePct": 3.7,
         "normalizableN": 0,
         "missingModels": [
-          "Claude Opus 5.5",
-          "GPT-6.1 Sol",
-          "GPT-6 Luna",
-          "MiMo-V2.6-Pro",
-          "MiMo-V2.6-Flash",
-          "Claude Haiku 5.5",
-          "Claude Sonnet 5.5",
-          "Gemini 4 Argon",
-          "GPT-6.1 Sol (xhigh)",
-          "GPT-6.1 Sol (high)",
-          "GPT-6.1 Sol (medium)",
-          "Claude Haiku 5.5 (max)",
-          "Claude Haiku 5.5 (high)",
-          "Claude Haiku 5.5 (medium)",
-          "Claude Haiku 5.5 (low)",
-          "Claude Sonnet 5.5 (xhigh)",
-          "DeepSeek V4.1 Flash 1017",
-          "MiniMax-M3.1-Flash",
           "GPT-6 Luna (low)",
           "GPT-6 Luna (medium)",
+          "Claude Haiku 5.5 (low)",
           "GPT-6 Luna (high)",
-          "GPT-6 Luna (xhigh)",
-          "Claude Opus 5.5 (high)",
-          "Claude Opus 5.5 (xhigh)",
-          "Claude Opus 5.5 (medium)",
-          "GPT-5.6 Luna (low)",
+          "Claude Haiku 5.5 (medium)",
+          "MiMo-V2.6-Flash",
+          "GPT-6.1 Terra (low)",
+          "Claude Haiku 5.5 (high)",
+          "GPT-6.1 Terra (medium)",
+          "GPT-6.1 Terra (high)",
+          "GPT-6.1 Sol (medium)",
+          "GPT-6.1 Sol (high)",
+          "GPT-6.1 Sol (xhigh)",
+          "GPT-6.1 Sol (max)",
           "GPT-6 Astra (high)",
           "GPT-6 Astra (xhigh)",
-          "Kimi K3.1 Pro"
-        ],
-        "sourceAvailableN": 11,
-        "sourceCohortN": 62,
-        "sourceMissingModels": [
-          "Claude Opus 5",
-          "Kimi K3",
-          "Grok 4.6",
-          "GPT-5.5",
-          "Gemini 3.7 Flash",
-          "GLM-5.3 Flash",
-          "DeepSeek V4 Pro",
-          "Qwen3.8 Max",
-          "Muse Spark 1.2",
-          "Gemini 3.6 Flash",
-          "GLM-5.2",
-          "Gemini 3.5 Flash",
-          "Claude Opus 5.5",
-          "GPT-6 Sol",
-          "GPT-6.1 Sol",
-          "GPT-6 Luna",
-          "Grok 4.7",
-          "MiMo-V2.6-Pro",
-          "MiMo-V2.6-Flash",
-          "Claude Haiku 5.5",
-          "Claude Sonnet 5.5",
-          "Gemini 4 Argon",
-          "Muse Spark 1.3",
-          "Muse Wonder",
-          "Muse Wonder Full",
-          "GPT-6.1 Sol (xhigh)",
-          "GPT-6.1 Sol (high)",
-          "GPT-6.1 Sol (medium)",
+          "Claude Opus 5.5 (xhigh)",
+          "Gemini 4 Carbon",
+          "GPT-6 Luna (xhigh)",
+          "GPT-6 Luna (max)",
           "GPT-6.1 Sol (low)",
-          "Claude Haiku 5.5 (max)",
-          "Claude Haiku 5.5 (high)",
-          "Claude Haiku 5.5 (medium)",
-          "Claude Haiku 5.5 (low)",
-          "Claude Sonnet 5.5 (xhigh)",
-          "Claude Sonnet 5.5 (high)",
-          "Claude Sonnet 5.5 (medium)",
-          "Claude Sonnet 5.5 (low)",
-          "Grok 4.6 (xhigh)",
-          "DeepSeek V4.1 Flash 1017",
-          "MiniMax-M3.1-Flash",
+          "GPT-6.1 Terra (xhigh)",
+          "GPT-6.1 Terra (max)",
+          "Claude Opus 5.5 (high)",
+          "Claude Sonnet 5.5",
+          "Claude Opus 5.5 (max)"
+        ],
+        "sourceAvailableN": 1,
+        "sourceCohortN": 27,
+        "sourceMissingModels": [
           "GPT-6 Luna (low)",
           "GPT-6 Luna (medium)",
+          "Claude Haiku 5.5 (low)",
           "GPT-6 Luna (high)",
-          "GPT-6 Luna (xhigh)",
-          "Claude Opus 5.5 (high)",
-          "Claude Opus 5.5 (xhigh)",
-          "Claude Opus 5.5 (medium)",
-          "GPT-5.6 Luna (low)",
+          "Claude Haiku 5.5 (medium)",
+          "MiMo-V2.6-Flash",
+          "GPT-6.1 Terra (low)",
+          "Claude Haiku 5.5 (high)",
+          "GPT-6.1 Terra (medium)",
+          "GPT-6.1 Terra (high)",
+          "GPT-6.1 Sol (medium)",
+          "GPT-6.1 Sol (high)",
+          "GPT-6.1 Sol (xhigh)",
+          "GPT-6.1 Sol (max)",
           "GPT-6 Astra (high)",
           "GPT-6 Astra (xhigh)",
-          "Kimi K3.1 Pro"
+          "Claude Opus 5.5 (xhigh)",
+          "Gemini 4 Carbon",
+          "GPT-6 Luna (xhigh)",
+          "GPT-6 Luna (max)",
+          "GPT-6.1 Sol (low)",
+          "GPT-6.1 Terra (xhigh)",
+          "GPT-6.1 Terra (max)",
+          "Claude Opus 5.5 (high)",
+          "Claude Sonnet 5.5",
+          "Claude Opus 5.5 (max)"
         ],
         "includedInPrimaryScore": false
       },
       "livebenchInstructionFollowing": {
         "label": "Instruction Following (LiveBench)",
         "availableN": 2,
-        "cohortN": 30,
-        "coveragePct": 6.67,
+        "cohortN": 27,
+        "coveragePct": 7.41,
         "normalizableN": 2,
         "missingModels": [
-          "Claude Opus 5.5",
-          "GPT-6.1 Sol",
-          "MiMo-V2.6-Pro",
-          "MiMo-V2.6-Flash",
-          "Claude Haiku 5.5",
-          "Claude Sonnet 5.5",
-          "Gemini 4 Argon",
-          "GPT-6.1 Sol (xhigh)",
-          "GPT-6.1 Sol (high)",
-          "GPT-6.1 Sol (medium)",
-          "Claude Haiku 5.5 (max)",
-          "Claude Haiku 5.5 (high)",
-          "Claude Haiku 5.5 (medium)",
-          "Claude Haiku 5.5 (low)",
-          "Claude Sonnet 5.5 (xhigh)",
-          "DeepSeek V4.1 Flash 1017",
-          "MiniMax-M3.1-Flash",
           "GPT-6 Luna (low)",
           "GPT-6 Luna (medium)",
+          "Claude Haiku 5.5 (low)",
           "GPT-6 Luna (high)",
-          "GPT-6 Luna (xhigh)",
-          "Claude Opus 5.5 (high)",
-          "Claude Opus 5.5 (xhigh)",
-          "Claude Opus 5.5 (medium)",
-          "GPT-5.6 Luna (low)",
+          "Claude Haiku 5.5 (medium)",
+          "MiMo-V2.6-Flash",
+          "GPT-6.1 Terra (low)",
+          "Claude Haiku 5.5 (high)",
+          "GPT-6.1 Terra (medium)",
+          "GPT-6.1 Terra (high)",
+          "GPT-6.1 Sol (medium)",
+          "GPT-6.1 Sol (high)",
+          "GPT-6.1 Sol (xhigh)",
+          "GPT-6.1 Sol (max)",
           "GPT-6 Astra (high)",
           "GPT-6 Astra (xhigh)",
-          "Kimi K3.1 Pro"
-        ],
-        "sourceAvailableN": 25,
-        "sourceCohortN": 62,
-        "sourceMissingModels": [
-          "Claude Opus 5.5",
-          "GPT-6.1 Sol",
-          "MiMo-V2.6-Pro",
-          "MiMo-V2.6-Flash",
-          "Claude Haiku 5.5",
-          "Claude Sonnet 5.5",
-          "Gemini 4 Argon",
-          "Muse Spark 1.3",
-          "Muse Wonder",
-          "Muse Wonder Full",
-          "GPT-6.1 Sol (xhigh)",
-          "GPT-6.1 Sol (high)",
-          "GPT-6.1 Sol (medium)",
+          "Claude Opus 5.5 (xhigh)",
+          "Gemini 4 Carbon",
+          "GPT-6 Luna (xhigh)",
           "GPT-6.1 Sol (low)",
-          "Claude Haiku 5.5 (max)",
-          "Claude Haiku 5.5 (high)",
-          "Claude Haiku 5.5 (medium)",
-          "Claude Haiku 5.5 (low)",
-          "Claude Sonnet 5.5 (xhigh)",
-          "Claude Sonnet 5.5 (high)",
-          "Claude Sonnet 5.5 (medium)",
-          "Claude Sonnet 5.5 (low)",
-          "Muse Spark 1.3 (xhigh)",
-          "Grok 4.6 (xhigh)",
-          "DeepSeek V4.1 Flash 1017",
-          "MiniMax-M3.1-Flash",
+          "GPT-6.1 Terra (xhigh)",
+          "GPT-6.1 Terra (max)",
+          "Claude Opus 5.5 (high)",
+          "Claude Sonnet 5.5",
+          "Claude Opus 5.5 (max)"
+        ],
+        "sourceAvailableN": 2,
+        "sourceCohortN": 27,
+        "sourceMissingModels": [
           "GPT-6 Luna (low)",
           "GPT-6 Luna (medium)",
+          "Claude Haiku 5.5 (low)",
           "GPT-6 Luna (high)",
-          "GPT-6 Luna (xhigh)",
-          "Claude Opus 5.5 (high)",
-          "Claude Opus 5.5 (xhigh)",
-          "Claude Opus 5.5 (medium)",
-          "GPT-5.6 Luna (low)",
+          "Claude Haiku 5.5 (medium)",
+          "MiMo-V2.6-Flash",
+          "GPT-6.1 Terra (low)",
+          "Claude Haiku 5.5 (high)",
+          "GPT-6.1 Terra (medium)",
+          "GPT-6.1 Terra (high)",
+          "GPT-6.1 Sol (medium)",
+          "GPT-6.1 Sol (high)",
+          "GPT-6.1 Sol (xhigh)",
+          "GPT-6.1 Sol (max)",
           "GPT-6 Astra (high)",
           "GPT-6 Astra (xhigh)",
-          "Kimi K3.1 Pro"
+          "Claude Opus 5.5 (xhigh)",
+          "Gemini 4 Carbon",
+          "GPT-6 Luna (xhigh)",
+          "GPT-6.1 Sol (low)",
+          "GPT-6.1 Terra (xhigh)",
+          "GPT-6.1 Terra (max)",
+          "Claude Opus 5.5 (high)",
+          "Claude Sonnet 5.5",
+          "Claude Opus 5.5 (max)"
         ],
         "includedInPrimaryScore": true
       },
       "gdpvalV21": {
         "label": "GDPval-AA v2.1",
-        "availableN": 30,
-        "cohortN": 30,
+        "availableN": 27,
+        "cohortN": 27,
         "coveragePct": 100.0,
-        "normalizableN": 30,
+        "normalizableN": 27,
         "missingModels": [],
-        "sourceAvailableN": 62,
-        "sourceCohortN": 62,
+        "sourceAvailableN": 27,
+        "sourceCohortN": 27,
         "sourceMissingModels": [],
         "includedInPrimaryScore": true
       },
       "automationBenchAA": {
         "label": "AutomationBench-AA",
-        "availableN": 30,
-        "cohortN": 30,
+        "availableN": 27,
+        "cohortN": 27,
         "coveragePct": 100.0,
-        "normalizableN": 30,
+        "normalizableN": 27,
         "missingModels": [],
-        "sourceAvailableN": 61,
-        "sourceCohortN": 62,
-        "sourceMissingModels": [
-          "Gemini 3.7 Flash"
-        ],
+        "sourceAvailableN": 27,
+        "sourceCohortN": 27,
+        "sourceMissingModels": [],
         "includedInPrimaryScore": true
       },
       "aaLcr": {
         "label": "AA-LCR v1.1",
-        "availableN": 30,
-        "cohortN": 30,
+        "availableN": 27,
+        "cohortN": 27,
         "coveragePct": 100.0,
-        "normalizableN": 30,
+        "normalizableN": 27,
         "missingModels": [],
-        "sourceAvailableN": 62,
-        "sourceCohortN": 62,
+        "sourceAvailableN": 27,
+        "sourceCohortN": 27,
         "sourceMissingModels": [],
         "includedInPrimaryScore": true
       },
       "omniAccuracy": {
         "label": "AA-Omniscience Accuracy",
-        "availableN": 30,
-        "cohortN": 30,
+        "availableN": 27,
+        "cohortN": 27,
         "coveragePct": 100.0,
-        "normalizableN": 30,
+        "normalizableN": 27,
         "missingModels": [],
-        "sourceAvailableN": 62,
-        "sourceCohortN": 62,
+        "sourceAvailableN": 27,
+        "sourceCohortN": 27,
         "sourceMissingModels": [],
         "includedInPrimaryScore": true
       },
       "hle": {
         "label": "HLE",
-        "availableN": 30,
-        "cohortN": 30,
-        "coveragePct": 100.0,
-        "normalizableN": 30,
-        "missingModels": [],
-        "sourceAvailableN": 62,
-        "sourceCohortN": 62,
-        "sourceMissingModels": [],
-        "includedInPrimaryScore": true
+        "availableN": 0,
+        "cohortN": 27,
+        "coveragePct": 0.0,
+        "normalizableN": 0,
+        "missingModels": [
+          "GPT-6 Luna (low)",
+          "GPT-6 Luna (medium)",
+          "Claude Haiku 5.5 (low)",
+          "GPT-6 Luna (high)",
+          "Claude Haiku 5.5 (medium)",
+          "MiMo-V2.6-Flash",
+          "GPT-6.1 Terra (low)",
+          "Claude Haiku 5.5 (high)",
+          "GPT-6.1 Terra (medium)",
+          "GPT-6.1 Terra (high)",
+          "GPT-6.1 Sol (medium)",
+          "GPT-6.1 Sol (high)",
+          "GPT-6.1 Sol (xhigh)",
+          "GPT-6.1 Sol (max)",
+          "GPT-6 Astra (high)",
+          "GPT-6 Astra (xhigh)",
+          "Claude Opus 5.5 (xhigh)",
+          "Gemini 4 Carbon",
+          "GPT-6 Luna (xhigh)",
+          "GPT-6 Luna (max)",
+          "GPT-6.1 Sol (low)",
+          "GPT-6.1 Terra (xhigh)",
+          "GPT-6.1 Terra (max)",
+          "Claude Opus 5.5 (high)",
+          "GPT-6 Astra (max)",
+          "Claude Sonnet 5.5",
+          "Claude Opus 5.5 (max)"
+        ],
+        "sourceAvailableN": 0,
+        "sourceCohortN": 27,
+        "sourceMissingModels": [
+          "GPT-6 Luna (low)",
+          "GPT-6 Luna (medium)",
+          "Claude Haiku 5.5 (low)",
+          "GPT-6 Luna (high)",
+          "Claude Haiku 5.5 (medium)",
+          "MiMo-V2.6-Flash",
+          "GPT-6.1 Terra (low)",
+          "Claude Haiku 5.5 (high)",
+          "GPT-6.1 Terra (medium)",
+          "GPT-6.1 Terra (high)",
+          "GPT-6.1 Sol (medium)",
+          "GPT-6.1 Sol (high)",
+          "GPT-6.1 Sol (xhigh)",
+          "GPT-6.1 Sol (max)",
+          "GPT-6 Astra (high)",
+          "GPT-6 Astra (xhigh)",
+          "Claude Opus 5.5 (xhigh)",
+          "Gemini 4 Carbon",
+          "GPT-6 Luna (xhigh)",
+          "GPT-6 Luna (max)",
+          "GPT-6.1 Sol (low)",
+          "GPT-6.1 Terra (xhigh)",
+          "GPT-6.1 Terra (max)",
+          "Claude Opus 5.5 (high)",
+          "GPT-6 Astra (max)",
+          "Claude Sonnet 5.5",
+          "Claude Opus 5.5 (max)"
+        ],
+        "includedInPrimaryScore": false
       },
       "gpqaDiamond": {
         "label": "GPQA Diamond (legacy)",
-        "availableN": 4,
-        "cohortN": 30,
-        "coveragePct": 13.33,
-        "normalizableN": 4,
+        "availableN": 3,
+        "cohortN": 27,
+        "coveragePct": 11.11,
+        "normalizableN": 3,
         "missingModels": [
-          "Claude Opus 5.5",
-          "GPT-6.1 Sol",
-          "GPT-6 Luna",
-          "MiMo-V2.6-Pro",
-          "MiMo-V2.6-Flash",
-          "Claude Haiku 5.5",
-          "Claude Sonnet 5.5",
-          "Gemini 4 Argon",
-          "GPT-6.1 Sol (xhigh)",
-          "GPT-6.1 Sol (high)",
-          "GPT-6.1 Sol (medium)",
-          "Claude Haiku 5.5 (max)",
-          "Claude Haiku 5.5 (high)",
-          "Claude Haiku 5.5 (medium)",
-          "Claude Haiku 5.5 (low)",
-          "Claude Sonnet 5.5 (xhigh)",
-          "DeepSeek V4.1 Flash 1017",
-          "MiniMax-M3.1-Flash",
           "GPT-6 Luna (low)",
           "GPT-6 Luna (medium)",
+          "Claude Haiku 5.5 (low)",
           "GPT-6 Luna (high)",
-          "GPT-6 Luna (xhigh)",
-          "Claude Opus 5.5 (high)",
-          "Claude Opus 5.5 (xhigh)",
-          "Claude Opus 5.5 (medium)",
-          "Kimi K3.1 Pro"
-        ],
-        "sourceAvailableN": 28,
-        "sourceCohortN": 62,
-        "sourceMissingModels": [
-          "Claude Opus 5.5",
-          "GPT-6 Sol",
-          "GPT-6.1 Sol",
-          "GPT-6 Luna",
-          "Grok 4.7",
-          "MiMo-V2.6-Pro",
+          "Claude Haiku 5.5 (medium)",
           "MiMo-V2.6-Flash",
-          "Claude Haiku 5.5",
-          "Claude Sonnet 5.5",
-          "Gemini 4 Argon",
-          "Muse Wonder",
-          "Muse Wonder Full",
-          "GPT-6.1 Sol (xhigh)",
-          "GPT-6.1 Sol (high)",
+          "GPT-6.1 Terra (low)",
+          "Claude Haiku 5.5 (high)",
+          "GPT-6.1 Terra (medium)",
+          "GPT-6.1 Terra (high)",
           "GPT-6.1 Sol (medium)",
+          "GPT-6.1 Sol (high)",
+          "GPT-6.1 Sol (xhigh)",
+          "GPT-6.1 Sol (max)",
+          "Claude Opus 5.5 (xhigh)",
+          "Gemini 4 Carbon",
+          "GPT-6 Luna (xhigh)",
+          "GPT-6 Luna (max)",
           "GPT-6.1 Sol (low)",
-          "Claude Haiku 5.5 (max)",
-          "Claude Haiku 5.5 (high)",
-          "Claude Haiku 5.5 (medium)",
-          "Claude Haiku 5.5 (low)",
-          "Claude Sonnet 5.5 (xhigh)",
-          "Claude Sonnet 5.5 (high)",
-          "Claude Sonnet 5.5 (medium)",
-          "Claude Sonnet 5.5 (low)",
-          "DeepSeek V4.1 Flash 1017",
-          "MiniMax-M3.1-Flash",
+          "GPT-6.1 Terra (xhigh)",
+          "GPT-6.1 Terra (max)",
+          "Claude Opus 5.5 (high)",
+          "Claude Sonnet 5.5",
+          "Claude Opus 5.5 (max)"
+        ],
+        "sourceAvailableN": 3,
+        "sourceCohortN": 27,
+        "sourceMissingModels": [
           "GPT-6 Luna (low)",
           "GPT-6 Luna (medium)",
+          "Claude Haiku 5.5 (low)",
           "GPT-6 Luna (high)",
-          "GPT-6 Luna (xhigh)",
-          "Claude Opus 5.5 (high)",
+          "Claude Haiku 5.5 (medium)",
+          "MiMo-V2.6-Flash",
+          "GPT-6.1 Terra (low)",
+          "Claude Haiku 5.5 (high)",
+          "GPT-6.1 Terra (medium)",
+          "GPT-6.1 Terra (high)",
+          "GPT-6.1 Sol (medium)",
+          "GPT-6.1 Sol (high)",
+          "GPT-6.1 Sol (xhigh)",
+          "GPT-6.1 Sol (max)",
           "Claude Opus 5.5 (xhigh)",
-          "Claude Opus 5.5 (medium)",
-          "Kimi K3.1 Pro"
+          "Gemini 4 Carbon",
+          "GPT-6 Luna (xhigh)",
+          "GPT-6 Luna (max)",
+          "GPT-6.1 Sol (low)",
+          "GPT-6.1 Terra (xhigh)",
+          "GPT-6.1 Terra (max)",
+          "Claude Opus 5.5 (high)",
+          "Claude Sonnet 5.5",
+          "Claude Opus 5.5 (max)"
         ],
         "includedInPrimaryScore": true
       },
       "scicode": {
         "label": "SciCode",
-        "availableN": 30,
-        "cohortN": 30,
-        "coveragePct": 100.0,
-        "normalizableN": 30,
-        "missingModels": [],
-        "sourceAvailableN": 62,
-        "sourceCohortN": 62,
-        "sourceMissingModels": [],
-        "includedInPrimaryScore": true
+        "availableN": 0,
+        "cohortN": 27,
+        "coveragePct": 0.0,
+        "normalizableN": 0,
+        "missingModels": [
+          "GPT-6 Luna (low)",
+          "GPT-6 Luna (medium)",
+          "Claude Haiku 5.5 (low)",
+          "GPT-6 Luna (high)",
+          "Claude Haiku 5.5 (medium)",
+          "MiMo-V2.6-Flash",
+          "GPT-6.1 Terra (low)",
+          "Claude Haiku 5.5 (high)",
+          "GPT-6.1 Terra (medium)",
+          "GPT-6.1 Terra (high)",
+          "GPT-6.1 Sol (medium)",
+          "GPT-6.1 Sol (high)",
+          "GPT-6.1 Sol (xhigh)",
+          "GPT-6.1 Sol (max)",
+          "GPT-6 Astra (high)",
+          "GPT-6 Astra (xhigh)",
+          "Claude Opus 5.5 (xhigh)",
+          "Gemini 4 Carbon",
+          "GPT-6 Luna (xhigh)",
+          "GPT-6 Luna (max)",
+          "GPT-6.1 Sol (low)",
+          "GPT-6.1 Terra (xhigh)",
+          "GPT-6.1 Terra (max)",
+          "Claude Opus 5.5 (high)",
+          "GPT-6 Astra (max)",
+          "Claude Sonnet 5.5",
+          "Claude Opus 5.5 (max)"
+        ],
+        "sourceAvailableN": 0,
+        "sourceCohortN": 27,
+        "sourceMissingModels": [
+          "GPT-6 Luna (low)",
+          "GPT-6 Luna (medium)",
+          "Claude Haiku 5.5 (low)",
+          "GPT-6 Luna (high)",
+          "Claude Haiku 5.5 (medium)",
+          "MiMo-V2.6-Flash",
+          "GPT-6.1 Terra (low)",
+          "Claude Haiku 5.5 (high)",
+          "GPT-6.1 Terra (medium)",
+          "GPT-6.1 Terra (high)",
+          "GPT-6.1 Sol (medium)",
+          "GPT-6.1 Sol (high)",
+          "GPT-6.1 Sol (xhigh)",
+          "GPT-6.1 Sol (max)",
+          "GPT-6 Astra (high)",
+          "GPT-6 Astra (xhigh)",
+          "Claude Opus 5.5 (xhigh)",
+          "Gemini 4 Carbon",
+          "GPT-6 Luna (xhigh)",
+          "GPT-6 Luna (max)",
+          "GPT-6.1 Sol (low)",
+          "GPT-6.1 Terra (xhigh)",
+          "GPT-6.1 Terra (max)",
+          "Claude Opus 5.5 (high)",
+          "GPT-6 Astra (max)",
+          "Claude Sonnet 5.5",
+          "Claude Opus 5.5 (max)"
+        ],
+        "includedInPrimaryScore": false
       },
       "critpt": {
         "label": "CritPt",
-        "availableN": 30,
-        "cohortN": 30,
-        "coveragePct": 100.0,
-        "normalizableN": 30,
-        "missingModels": [],
-        "sourceAvailableN": 62,
-        "sourceCohortN": 62,
-        "sourceMissingModels": [],
-        "includedInPrimaryScore": true
+        "availableN": 0,
+        "cohortN": 27,
+        "coveragePct": 0.0,
+        "normalizableN": 0,
+        "missingModels": [
+          "GPT-6 Luna (low)",
+          "GPT-6 Luna (medium)",
+          "Claude Haiku 5.5 (low)",
+          "GPT-6 Luna (high)",
+          "Claude Haiku 5.5 (medium)",
+          "MiMo-V2.6-Flash",
+          "GPT-6.1 Terra (low)",
+          "Claude Haiku 5.5 (high)",
+          "GPT-6.1 Terra (medium)",
+          "GPT-6.1 Terra (high)",
+          "GPT-6.1 Sol (medium)",
+          "GPT-6.1 Sol (high)",
+          "GPT-6.1 Sol (xhigh)",
+          "GPT-6.1 Sol (max)",
+          "GPT-6 Astra (high)",
+          "GPT-6 Astra (xhigh)",
+          "Claude Opus 5.5 (xhigh)",
+          "Gemini 4 Carbon",
+          "GPT-6 Luna (xhigh)",
+          "GPT-6 Luna (max)",
+          "GPT-6.1 Sol (low)",
+          "GPT-6.1 Terra (xhigh)",
+          "GPT-6.1 Terra (max)",
+          "Claude Opus 5.5 (high)",
+          "GPT-6 Astra (max)",
+          "Claude Sonnet 5.5",
+          "Claude Opus 5.5 (max)"
+        ],
+        "sourceAvailableN": 0,
+        "sourceCohortN": 27,
+        "sourceMissingModels": [
+          "GPT-6 Luna (low)",
+          "GPT-6 Luna (medium)",
+          "Claude Haiku 5.5 (low)",
+          "GPT-6 Luna (high)",
+          "Claude Haiku 5.5 (medium)",
+          "MiMo-V2.6-Flash",
+          "GPT-6.1 Terra (low)",
+          "Claude Haiku 5.5 (high)",
+          "GPT-6.1 Terra (medium)",
+          "GPT-6.1 Terra (high)",
+          "GPT-6.1 Sol (medium)",
+          "GPT-6.1 Sol (high)",
+          "GPT-6.1 Sol (xhigh)",
+          "GPT-6.1 Sol (max)",
+          "GPT-6 Astra (high)",
+          "GPT-6 Astra (xhigh)",
+          "Claude Opus 5.5 (xhigh)",
+          "Gemini 4 Carbon",
+          "GPT-6 Luna (xhigh)",
+          "GPT-6 Luna (max)",
+          "GPT-6.1 Sol (low)",
+          "GPT-6.1 Terra (xhigh)",
+          "GPT-6.1 Terra (max)",
+          "Claude Opus 5.5 (high)",
+          "GPT-6 Astra (max)",
+          "Claude Sonnet 5.5",
+          "Claude Opus 5.5 (max)"
+        ],
+        "includedInPrimaryScore": false
       },
       "intelligenceIndex": {
         "label": "AA Intelligence Index",
-        "availableN": 30,
-        "cohortN": 30,
+        "availableN": 27,
+        "cohortN": 27,
         "coveragePct": 100.0,
-        "normalizableN": 30,
+        "normalizableN": 27,
         "missingModels": [],
-        "sourceAvailableN": 62,
-        "sourceCohortN": 62,
+        "sourceAvailableN": 27,
+        "sourceCohortN": 27,
         "sourceMissingModels": [],
         "includedInPrimaryScore": true
       },
       "speed": {
         "label": "Speed",
-        "availableN": 30,
-        "cohortN": 30,
-        "coveragePct": 100.0,
-        "normalizableN": 30,
-        "missingModels": [],
-        "sourceAvailableN": 60,
-        "sourceCohortN": 62,
+        "availableN": 26,
+        "cohortN": 27,
+        "coveragePct": 96.3,
+        "normalizableN": 26,
+        "missingModels": [
+          "GPT-6 Luna (medium)"
+        ],
+        "sourceAvailableN": 26,
+        "sourceCohortN": 27,
         "sourceMissingModels": [
-          "Gemini 3.7 Flash",
-          "Muse Wonder Full"
+          "GPT-6 Luna (medium)"
         ],
         "includedInPrimaryScore": true
       },
       "bugHuntFixedOf105": {
         "label": "Bug Hunt Bench bugs fixed out of 105",
-        "availableN": 28,
-        "cohortN": 30,
-        "coveragePct": 93.33,
-        "normalizableN": 28,
+        "availableN": 25,
+        "cohortN": 27,
+        "coveragePct": 92.59,
+        "normalizableN": 25,
         "missingModels": [
           "MiMo-V2.6-Flash",
-          "MiniMax-M3.1-Flash"
+          "Gemini 4 Carbon"
         ],
-        "sourceAvailableN": 54,
-        "sourceCohortN": 62,
+        "sourceAvailableN": 25,
+        "sourceCohortN": 27,
         "sourceMissingModels": [
-          "Grok 4.6",
-          "GPT-5.5",
-          "Gemini 3.7 Flash",
-          "Gemini 3.6 Flash",
-          "GLM-5.2",
-          "Gemini 3.5 Flash",
           "MiMo-V2.6-Flash",
-          "MiniMax-M3.1-Flash"
+          "Gemini 4 Carbon"
         ],
-        "rankableOverlapN": 17,
+        "rankableOverlapN": 18,
         "includedInPrimaryScore": true
       }
     },
     "alternateRankings": {
       "bugHuntEmphasis": {
-        "matchedN": 21,
-        "cohortN": 62,
-        "benchmarkWeightPct": 26.1628,
-        "sourceCommit": "9089dc552a2b4eb94749c4da34d2cb872c7e0b43",
+        "matchedN": 19,
+        "cohortN": 27,
+        "benchmarkWeightPct": 30.0,
+        "sourceCommit": "12497971d928cc5ad97a184755734720388bc07f",
         "ranking": [
           {
             "rank": 1,
-            "modelId": "claude-sonnet-5-5",
-            "score": 67.5
+            "modelId": "gpt-6.1-sol",
+            "score": 69.9
           },
           {
             "rank": 2,
-            "modelId": "gpt-6.1-sol",
-            "score": 66.0
+            "modelId": "claude-sonnet-5-5",
+            "score": 66.5
           },
           {
             "rank": 3,
-            "modelId": "deepseek-v4-1-flash-1017",
-            "score": 65.7
+            "modelId": "gpt-6.1-terra",
+            "score": 64.4
           },
           {
             "rank": 4,
-            "modelId": "claude-opus-5-5",
-            "score": 63.0
+            "modelId": "gpt-6-astra",
+            "score": 62.3
           },
           {
             "rank": 5,
-            "modelId": "gemini-4-argon",
-            "score": 62.9
+            "modelId": "gpt-6.1-sol-high",
+            "score": 61.0
           },
           {
             "rank": 6,
-            "modelId": "gpt-6.1-sol-high",
-            "score": 61.9
+            "modelId": "claude-opus-5-5",
+            "score": 60.9
           },
           {
             "rank": 7,
-            "modelId": "gpt-6-astra",
-            "score": 61.8
+            "modelId": "gpt-6.1-sol-medium",
+            "score": 56.3
           },
           {
             "rank": 8,
-            "modelId": "kimi-k3-1-pro",
-            "score": 61.1
+            "modelId": "claude-haiku-5-5-high",
+            "score": 54.1
           },
           {
             "rank": 9,
-            "modelId": "claude-opus-5-5-high",
-            "score": 56.7
+            "modelId": "gpt-6-luna",
+            "score": 51.5
           },
           {
             "rank": 10,
-            "modelId": "claude-opus-5-5-medium",
-            "score": 53.6
+            "modelId": "claude-opus-5-5-high",
+            "score": 50.9
           },
           {
             "rank": 11,
-            "modelId": "gpt-6.1-sol-medium",
-            "score": 53.2
+            "modelId": "gpt-6.1-sol-low",
+            "score": 50.5
           },
           {
             "rank": 12,
-            "modelId": "gpt-6-astra-high",
-            "score": 53.1
+            "modelId": "gpt-6.1-terra-xhigh",
+            "score": 50.5
           },
           {
             "rank": 13,
-            "modelId": "mimo-v2-6-pro",
-            "score": 51.4
+            "modelId": "gpt-6-astra-high",
+            "score": 49.4
           },
           {
             "rank": 14,
-            "modelId": "claude-haiku-5-5-max",
-            "score": 49.1
+            "modelId": "claude-haiku-5-5-medium",
+            "score": 49.0
           },
           {
             "rank": 15,
-            "modelId": "gpt-6-luna",
-            "score": 43.6
+            "modelId": "gpt-6-luna-xhigh",
+            "score": 47.1
           },
           {
             "rank": 16,
-            "modelId": "claude-haiku-5-5-high",
-            "score": 40.1
+            "modelId": "gpt-6.1-terra-high",
+            "score": 47.0
           },
           {
             "rank": 17,
-            "modelId": "gpt-6-luna-xhigh",
-            "score": 38.4
+            "modelId": "gpt-6.1-terra-medium",
+            "score": 43.5
           },
           {
             "rank": 18,
-            "modelId": "claude-haiku-5-5-medium",
-            "score": 37.6
+            "modelId": "gpt-6-luna-high",
+            "score": 39.5
           },
           {
             "rank": 19,
-            "modelId": "gpt-6-luna-high",
-            "score": 35.2
-          },
-          {
-            "rank": 20,
             "modelId": "gpt-6-luna-medium",
-            "score": 33.2
-          },
-          {
-            "rank": 21,
-            "modelId": "gpt-5.6-luna-low",
-            "score": 28.7
+            "score": 29.9
           }
         ]
       }

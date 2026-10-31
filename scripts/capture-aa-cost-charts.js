@@ -114,6 +114,11 @@ function readTotalCostChart(titleSuffix) {
   return node ? { title: titles[0].textContent.trim(), html: node.outerHTML, finalUrl: location.href } : null;
 }
 
+/** O103: the notes AA prints on a page ("* <text>" strings in its payload), verbatim and once each. */
+function printedNotes(html) {
+  return [...new Set(Array.from(html.matchAll(/"\* ([A-Z][^"\\]{15,400})/g), (match) => match[1].trim()))];
+}
+
 /** Loads one evaluation page and returns its parsed chart, retrying transient failures. */
 async function captureEvaluation(page, evaluation, { attempts = MAX_ATTEMPTS, log = () => {} } = {}) {
   let lastError = 'no attempt made';
@@ -133,7 +138,9 @@ async function captureEvaluation(page, evaluation, { attempts = MAX_ATTEMPTS, lo
       if (!rows.length) {
         throw new Error(`no bars in the cost chart on ${evaluation.url}`);
       }
-      return { slug: evaluation.slug, url: evaluation.url, finalUrl: chart.finalUrl, chartTitle: chart.title, rows };
+      // O103: the page's printed notes on the chart; a bar carries no note of its own (its "*" marker is parsed apart).
+      const notes = printedNotes(await page.content());
+      return { slug: evaluation.slug, url: evaluation.url, finalUrl: chart.finalUrl, chartTitle: chart.title, notes, rows: rows.map((row) => ({ ...row, notes: [] })) };
     } catch (failure) {
       lastError = failure.message;
       log(`attempt ${attempt} for ${evaluation.slug} failed: ${lastError}`);
@@ -201,6 +208,7 @@ if (require.main === module) {
 
 module.exports = {
   EVALUATIONS,
+  printedNotes,
   resolveOutputPath,
   decodeEntities,
   parseUsd,

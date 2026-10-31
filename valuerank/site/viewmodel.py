@@ -77,19 +77,19 @@ CATEGORIES = {
 }
 COST_KEY = "costComposite"
 TIERS = ((15, "Budget"), (22, "Near-Budget"), (35, "Mid-Range"), (55, "Premium"))
-FRONTIERCODE_URL = "https://artificialanalysis.ai/evaluations/frontiercode"
 LEAF_INFO = {
     "deepswe": {"unit": "% pass@1", "url": BENCHMARK_URLS["DeepSWE pass@1"]},
     "bugHunt": {"unit": "bugs fixed of 105", "url": BENCHMARK_URLS["Bug Hunt Bench"]},
-    "frontierCode": {"unit": "AA score (0-1)", "url": FRONTIERCODE_URL},
+    "frontierCode": {"unit": "AA score (0-1)", "url": BENCHMARK_URLS["FrontierCode 2.0"]},
     "terminalBench": {"unit": "% resolved", "url": BENCHMARK_URLS["Terminal-Bench 4.0"]},
     "gdpval": {"unit": "Elo", "url": BENCHMARK_URLS["GDPval-AA v2.1"]},
     "automationBench": {"unit": "AA score (0-1)", "url": BENCHMARK_URLS["AutomationBench-AA"]},
     "omniscience": {"unit": "AA Omniscience Index (-100 to 100)", "url": BENCHMARK_URLS["AA-Omniscience Accuracy"]},
     "lcr": {"unit": "accuracy (0-1)", "url": BENCHMARK_URLS["AA-LCR v1.1"]},
-    "hle": {"unit": "accuracy (0-1)", "url": BENCHMARK_URLS["HLE"]},
-    "scicode": {"unit": "score (0-1)", "url": BENCHMARK_URLS["SciCode"]},
-    "critpt": {"unit": "score (0-1)", "url": BENCHMARK_URLS["CritPt"]},
+    # O136: the AA Intelligence Index v5 successors.
+    "hle": {"unit": "accuracy (0-1)", "url": BENCHMARK_URLS["HLE-Diamond"]},
+    "tbScience": {"unit": "% resolved (0-1)", "url": BENCHMARK_URLS["Terminal-Bench-Science"]},
+    "critpt": {"unit": "score (0-1)", "url": BENCHMARK_URLS["CritPt v2"]},
     # O53-O55: the leaves the two rankings add.
     "vibeCode": {"unit": "% of test workflows passed", "url": "https://www.vals.ai/benchmarks/vibe-code"},
     "codeMigration": {"unit": "% of hidden tests passed", "url": "https://www.vals.ai/benchmarks/code-migration-v1-1"},
@@ -97,7 +97,7 @@ LEAF_INFO = {
     "aiCodingDaily": {"unit": "points of 60", "url": "https://aicodingdaily.com/leaderboard"},
 }
 # Public source names (the engine's provenance strings are internal and stay in scores.json).
-AA_SOURCE = "Artificial Analysis model page (Intelligence Index v4.3.2)"
+AA_SOURCE = "Artificial Analysis model page (Intelligence Index v5.0)"
 SOURCE_NAMES = {
     "deepswe": "AA Coding Agent Index (DeepSWE v1.1)",
     "bugHunt": "Bug Hunt Bench published runs",
@@ -111,7 +111,7 @@ LEAF_NOTES = {
     "terminalBench": "AA's own run on one harness (mini-SWE-agent) since O37; tbench.ai rows fill a gap and are compared with it as a diagnostic.",
     "vibeCode": "Vals AI's run on one harness (OpenHands) at each vendor's top effort; Vals' published standard error is the sampling noise.",
     "codeMigration": "Vals AI's run on one harness (Pi) at each vendor's top effort; Vals' published standard error is the sampling noise.",
-    "livebench2Overall": "LiveBench 2.0's own run at each model's top effort (release 2026-10-23, served at livebench.ai/new); Overall is LiveBench's weighted mean of its seven categories (Long Agentic 2, Coding 1.5, Design 1.5, the others 1), as LiveBench computes it.",
+    "livebench2Overall": "LiveBench 2.0's own run at each model's top effort (release 2026-10-25, served at livebench.ai/new); Overall is LiveBench's weighted mean of its seven categories (Long Agentic 2, Coding 1.5, Design 1.5, the others 1), as LiveBench computes it.",
     "aiCodingDaily": "Laravel quality, React-TS quality and edge-case testing (max 60); the bug-finding column is left out because it overlaps Bug Hunt. The harness is chosen per model by AI Coding Daily.",
 }
 # v3 Plan evidence grades shown with the site's grade vocabulary (controlled measurements are measured).

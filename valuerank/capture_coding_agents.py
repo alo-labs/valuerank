@@ -20,6 +20,7 @@ import json
 import re
 import urllib.request
 
+from valuerank.build_aa_metrics import printed_notes
 from valuerank.clock import iso_z
 from valuerank.paths import DATA, ROOT
 
@@ -115,6 +116,8 @@ def configuration_record(row: dict) -> dict:
         "meanCostPerTaskUsd": mean,
         "pricedTaskCount": round(total / mean, 6) if total is not None and mean else None,
         "components": components,
+        # O103: AA's payload prints no note on a row; the page's notes are recorded on the document.
+        "notes": [],
     }
 
 
@@ -132,6 +135,7 @@ def capture_document(html: str, *, captured_at: str, response_bytes: bytes) -> d
             "perTask": "mean.costUsd (AA average pay-per-token API cost per task)",
         },
         "responseSha256": hashlib.sha256(response_bytes).hexdigest(),
+        "notes": printed_notes(html),
         "configurations": records,
     }
 

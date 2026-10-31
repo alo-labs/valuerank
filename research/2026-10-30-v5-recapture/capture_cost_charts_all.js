@@ -50,7 +50,8 @@ async function selectAll(page) {
     const selection = await selectAll(page);
     const chart = await page.evaluate(charts.readTotalCostChart, ': Total Cost to Run');
     const rows = charts.parseChartRows(chart.html);
-    captured.push({ slug: evaluation.slug, url: evaluation.url, finalUrl: chart.finalUrl, chartTitle: chart.title, selection, rows });
+    captured.push({ slug: evaluation.slug, url: evaluation.url, finalUrl: chart.finalUrl, chartTitle: chart.title, selection,
+      notes: charts.printedNotes(await page.content()), rows: rows.map((row) => ({ ...row, notes: [] })) });
   }
   const capture = charts.buildCaptureDocument({ capturedAt: new Date().toISOString(), evaluations: captured });
   fs.writeFileSync(out, charts.serializeCapture(capture));

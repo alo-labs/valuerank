@@ -1,379 +1,169 @@
 {
  "schemaVersion": "valuerank-aa-previous-capture/v1",
- "capturedAt": "2026-10-25T09:56:47Z",
- "sha256": "c97b402550f8bd35b31c9dc78e16e3db05e66a09ae4ec568eaab1d34bb56c749",
+ "capturedAt": "2026-10-30T22:23:33Z",
+ "sha256": "72ab60606495e2afda2e0512796592332987df08ee69aee77ab8a17053248663",
  "pages": [
   {
-   "id": "gpt-6-astra",
-   "gdpval": 1574.46,
-   "gdpvalEvaluation": 1574.46,
-   "intelligenceIndex": 52.673669395513
-  },
-  {
-   "id": "gemini-3.8-flash",
-   "gdpval": 1436.35,
-   "gdpvalEvaluation": 1436.35,
-   "intelligenceIndex": 40.9262321765904
-  },
-  {
-   "id": "claude-opus-5",
-   "gdpval": 1721.67,
-   "gdpvalEvaluation": 1721.67,
-   "intelligenceIndex": 50.7771115797629
-  },
-  {
-   "id": "gpt-5.6-sol",
-   "gdpval": 1609.27,
-   "gdpvalEvaluation": 1609.27,
-   "intelligenceIndex": 46.9727068915036
-  },
-  {
-   "id": "claude-fable-5",
-   "gdpval": 1609.85,
-   "gdpvalEvaluation": 1609.85,
-   "intelligenceIndex": 49.6258202733378
-  },
-  {
-   "id": "glm-5.3",
-   "gdpval": 1649.45,
-   "gdpvalEvaluation": 1649.45,
-   "intelligenceIndex": 44.777392385614
-  },
-  {
-   "id": "kimi-k3",
-   "gdpval": 1534.14,
-   "gdpvalEvaluation": 1534.14,
-   "intelligenceIndex": 43.5938229518782
-  },
-  {
-   "id": "grok-4.6",
-   "gdpval": 1613.09,
-   "gdpvalEvaluation": 1613.09,
-   "intelligenceIndex": 42.836322654063
-  },
-  {
-   "id": "gpt-5.6-luna",
-   "gdpval": 1460.3,
-   "gdpvalEvaluation": 1460.3,
-   "intelligenceIndex": 37.3244239690841
-  },
-  {
-   "id": "gpt-5.5",
-   "gdpval": 1351.1,
-   "gdpvalEvaluation": 1351.1,
-   "intelligenceIndex": 38.3556437590607
-  },
-  {
-   "id": "gemini-3.7-flash",
-   "gdpval": 1359.69,
+   "id": "gpt-6-luna-low",
+   "gdpval": 1040.48,
    "gdpvalEvaluation": null,
-   "intelligenceIndex": 39.617751842555
+   "intelligenceIndex": 9.66610812336462
   },
   {
-   "id": "glm-5.3-flash",
-   "gdpval": 1642.16,
-   "gdpvalEvaluation": 1642.16,
-   "intelligenceIndex": 41.807466113455
+   "id": "gpt-6-luna-medium",
+   "gdpval": 1270.45,
+   "gdpvalEvaluation": null,
+   "intelligenceIndex": 18.3042156192416
   },
   {
-   "id": "deepseek-v4-pro",
-   "gdpval": 1448.92,
-   "gdpvalEvaluation": 1448.92,
-   "intelligenceIndex": 35.9967791278402
+   "id": "claude-haiku-5-5-low",
+   "gdpval": 1130.36,
+   "gdpvalEvaluation": null,
+   "intelligenceIndex": 18.6180055310996
   },
   {
-   "id": "claude-opus-4.8",
-   "gdpval": 1453.7,
-   "gdpvalEvaluation": 1453.7,
-   "intelligenceIndex": 41.7899103794639
+   "id": "gpt-6-luna-high",
+   "gdpval": 1352.1,
+   "gdpvalEvaluation": null,
+   "intelligenceIndex": 21.3790170864582
   },
   {
-   "id": "qwen3.8-max",
-   "gdpval": 1666.26,
-   "gdpvalEvaluation": 1666.26,
-   "intelligenceIndex": 45.4152084980521
-  },
-  {
-   "id": "muse-spark-1.2",
-   "gdpval": 1474.64,
-   "gdpvalEvaluation": 1474.64,
-   "intelligenceIndex": 39.5758607970943
-  },
-  {
-   "id": "claude-sonnet-5",
-   "gdpval": 1463.86,
-   "gdpvalEvaluation": 1463.86,
-   "intelligenceIndex": 38.1638712882576
-  },
-  {
-   "id": "deepseek-v4-flash",
-   "gdpval": 1433.47,
-   "gdpvalEvaluation": 1433.47,
-   "intelligenceIndex": 34.3305129347816
-  },
-  {
-   "id": "gemini-3.6-flash",
-   "gdpval": 1285.75,
-   "gdpvalEvaluation": 1285.75,
-   "intelligenceIndex": 33.9785928920714
-  },
-  {
-   "id": "glm-5.2",
-   "gdpval": 1373.04,
-   "gdpvalEvaluation": 1373.04,
-   "intelligenceIndex": 33.7054572377545
-  },
-  {
-   "id": "gemini-3.5-flash",
-   "gdpval": 1202.46,
-   "gdpvalEvaluation": 1202.46,
-   "intelligenceIndex": 32.5983283695905
-  },
-  {
-   "id": "claude-opus-5-5",
-   "gdpval": 1866.27,
-   "gdpvalEvaluation": 1866.27,
-   "intelligenceIndex": 57.6223698102963
-  },
-  {
-   "id": "gpt-6-sol",
-   "gdpval": 1508.58,
-   "gdpvalEvaluation": 1508.58,
-   "intelligenceIndex": 47.6305176437724
-  },
-  {
-   "id": "gpt-6.1-sol",
-   "gdpval": 1596.2,
-   "gdpvalEvaluation": 1596.2,
-   "intelligenceIndex": 51.8332597011541
-  },
-  {
-   "id": "gpt-6-luna",
-   "gdpval": 1432.79,
-   "gdpvalEvaluation": 1432.79,
-   "intelligenceIndex": 38.1245186869738
-  },
-  {
-   "id": "grok-4.7",
-   "gdpval": 1713.96,
-   "gdpvalEvaluation": 1713.96,
-   "intelligenceIndex": 46.4465506302286
-  },
-  {
-   "id": "mimo-v2-6-pro",
-   "gdpval": 1683.02,
-   "gdpvalEvaluation": 1683.02,
-   "intelligenceIndex": 46.3242065310383
+   "id": "claude-haiku-5-5-medium",
+   "gdpval": 1282.5,
+   "gdpvalEvaluation": null,
+   "intelligenceIndex": 24.5513254343023
   },
   {
    "id": "mimo-v2-6-flash",
-   "gdpval": 1608.7,
-   "gdpvalEvaluation": 1608.7,
-   "intelligenceIndex": 37.8843590141754
+   "gdpval": 1613.56,
+   "gdpvalEvaluation": null,
+   "intelligenceIndex": 26.7276981444568
   },
   {
-   "id": "claude-haiku-5-5",
-   "gdpval": 1513.19,
-   "gdpvalEvaluation": 1513.19,
-   "intelligenceIndex": 41.2489304677024
+   "id": "gpt-6.1-terra-low",
+   "gdpval": 1203.75,
+   "gdpvalEvaluation": null,
+   "intelligenceIndex": 29.2169280792131
+  },
+  {
+   "id": "claude-haiku-5-5-high",
+   "gdpval": 1424.29,
+   "gdpvalEvaluation": null,
+   "intelligenceIndex": 29.624315467743
+  },
+  {
+   "id": "gpt-6.1-terra-medium",
+   "gdpval": 1324.7,
+   "gdpvalEvaluation": null,
+   "intelligenceIndex": 38.1152076677975
+  },
+  {
+   "id": "gpt-6.1-terra-high",
+   "gdpval": 1352.74,
+   "gdpvalEvaluation": null,
+   "intelligenceIndex": 42.3344508712563
+  },
+  {
+   "id": "gpt-6.1-sol-medium",
+   "gdpval": 1459.05,
+   "gdpvalEvaluation": null,
+   "intelligenceIndex": 46.1468797067114
+  },
+  {
+   "id": "gpt-6.1-sol-high",
+   "gdpval": 1520.45,
+   "gdpvalEvaluation": null,
+   "intelligenceIndex": 50.2291231936536
+  },
+  {
+   "id": "gpt-6.1-sol-xhigh",
+   "gdpval": 1554.8,
+   "gdpvalEvaluation": null,
+   "intelligenceIndex": 52.308219253291
+  },
+  {
+   "id": "gpt-6.1-sol",
+   "gdpval": 1608.89,
+   "gdpvalEvaluation": null,
+   "intelligenceIndex": 54.5087338138148
+  },
+  {
+   "id": "gpt-6-astra-high",
+   "gdpval": 1536.04,
+   "gdpvalEvaluation": null,
+   "intelligenceIndex": 54.849838322506
+  },
+  {
+   "id": "gpt-6-astra-xhigh",
+   "gdpval": 1569.36,
+   "gdpvalEvaluation": null,
+   "intelligenceIndex": 55.2557468569681
+  },
+  {
+   "id": "claude-opus-5-5-xhigh",
+   "gdpval": 1835.03,
+   "gdpvalEvaluation": null,
+   "intelligenceIndex": 56.9947060170507
+  },
+  {
+   "id": "gemini-4-carbon",
+   "gdpval": 1732.68,
+   "gdpvalEvaluation": null,
+   "intelligenceIndex": 59.425738829526
+  },
+  {
+   "id": "gpt-6-luna-xhigh",
+   "gdpval": 1372.52,
+   "gdpvalEvaluation": null,
+   "intelligenceIndex": 23.3008728089378
+  },
+  {
+   "id": "gpt-6-luna",
+   "gdpval": 1444.46,
+   "gdpvalEvaluation": null,
+   "intelligenceIndex": 27.7552004938153
+  },
+  {
+   "id": "gpt-6.1-sol-low",
+   "gdpval": 1321.98,
+   "gdpvalEvaluation": null,
+   "intelligenceIndex": 34.502924431456
+  },
+  {
+   "id": "gpt-6.1-terra-xhigh",
+   "gdpval": 1414.87,
+   "gdpvalEvaluation": null,
+   "intelligenceIndex": 44.950051789066
+  },
+  {
+   "id": "gpt-6.1-terra",
+   "gdpval": 1475.63,
+   "gdpvalEvaluation": null,
+   "intelligenceIndex": 50.9765188577015
+  },
+  {
+   "id": "claude-opus-5-5-high",
+   "gdpval": 1713.6,
+   "gdpvalEvaluation": null,
+   "intelligenceIndex": 51.6859958227294
+  },
+  {
+   "id": "gpt-6-astra",
+   "gdpval": 1583.69,
+   "gdpvalEvaluation": null,
+   "intelligenceIndex": 56.8538559596797
   },
   {
    "id": "claude-sonnet-5-5",
    "gdpval": 1837.82,
-   "gdpvalEvaluation": 1837.82,
-   "intelligenceIndex": 56.0001286580794
+   "gdpvalEvaluation": null,
+   "intelligenceIndex": 54.24133407109
   },
   {
-   "id": "gemini-4-argon",
-   "gdpval": 1624.1,
-   "gdpvalEvaluation": 1624.1,
-   "intelligenceIndex": 52.5605655745982
-  },
-  {
-   "id": "claude-fable-5-1",
-   "gdpval": 1754.56,
-   "gdpvalEvaluation": 1754.56,
-   "intelligenceIndex": 53.3549259623252
-  },
-  {
-   "id": "muse-spark-1-3",
-   "gdpval": 1680.99,
-   "gdpvalEvaluation": 1680.99,
-   "intelligenceIndex": 48.0923107719685
-  },
-  {
-   "id": "muse-wonder",
-   "gdpval": 1770.34,
-   "gdpvalEvaluation": 1770.34,
-   "intelligenceIndex": 52.393894697293
-  },
-  {
-   "id": "muse-wonder-full",
-   "gdpval": 1857.09,
-   "gdpvalEvaluation": 1857.09,
-   "intelligenceIndex": 55.8021199855616
-  },
-  {
-   "id": "gpt-6.1-sol-xhigh",
-   "gdpval": 1539.11,
-   "gdpvalEvaluation": 1539.11,
-   "intelligenceIndex": 51.0377679093761
-  },
-  {
-   "id": "gpt-6.1-sol-high",
-   "gdpval": 1512.41,
-   "gdpvalEvaluation": 1512.41,
-   "intelligenceIndex": 50.2377777519769
-  },
-  {
-   "id": "gpt-6.1-sol-medium",
-   "gdpval": 1450.23,
-   "gdpvalEvaluation": 1450.23,
-   "intelligenceIndex": 47.7833271274065
-  },
-  {
-   "id": "gpt-6.1-sol-low",
-   "gdpval": 1316.07,
-   "gdpvalEvaluation": 1316.07,
-   "intelligenceIndex": 42.0835618555848
-  },
-  {
-   "id": "claude-haiku-5-5-max",
-   "gdpval": 1619.32,
-   "gdpvalEvaluation": 1619.32,
-   "intelligenceIndex": 43.3950199670746
-  },
-  {
-   "id": "claude-haiku-5-5-high",
-   "gdpval": 1416.46,
-   "gdpvalEvaluation": 1416.46,
-   "intelligenceIndex": 37.8240211671094
-  },
-  {
-   "id": "claude-haiku-5-5-medium",
-   "gdpval": 1275.13,
-   "gdpvalEvaluation": 1275.13,
-   "intelligenceIndex": 34.4646519474657
-  },
-  {
-   "id": "claude-haiku-5-5-low",
-   "gdpval": 1122.64,
-   "gdpvalEvaluation": 1122.64,
-   "intelligenceIndex": 29.4523685891139
-  },
-  {
-   "id": "claude-sonnet-5-5-xhigh",
-   "gdpval": 1727.35,
-   "gdpvalEvaluation": 1727.35,
-   "intelligenceIndex": 51.8955544183089
-  },
-  {
-   "id": "claude-sonnet-5-5-high",
-   "gdpval": 1547.58,
-   "gdpvalEvaluation": 1547.58,
-   "intelligenceIndex": 46.7533528066958
-  },
-  {
-   "id": "claude-sonnet-5-5-medium",
-   "gdpval": 1322.35,
-   "gdpvalEvaluation": 1322.35,
-   "intelligenceIndex": 40.838652287929
-  },
-  {
-   "id": "claude-sonnet-5-5-low",
-   "gdpval": 1177.4,
-   "gdpvalEvaluation": 1177.4,
-   "intelligenceIndex": 35.8681594577587
-  },
-  {
-   "id": "muse-spark-1-3-xhigh",
-   "gdpval": 1626.65,
-   "gdpvalEvaluation": 1626.65,
-   "intelligenceIndex": 45.0732966922226
-  },
-  {
-   "id": "grok-4.6-xhigh",
-   "gdpval": 1646.96,
-   "gdpvalEvaluation": 1646.96,
-   "intelligenceIndex": 44.199810436996
-  },
-  {
-   "id": "deepseek-v4-1-flash-1017",
-   "gdpval": 1745.77,
-   "gdpvalEvaluation": 1745.77,
-   "intelligenceIndex": 45.0965048681912
-  },
-  {
-   "id": "minimax-m3-1-flash",
-   "gdpval": 1457.57,
-   "gdpvalEvaluation": 1457.57,
-   "intelligenceIndex": 42.7057475126235
-  },
-  {
-   "id": "gpt-6-luna-low",
-   "gdpval": 1031.95,
-   "gdpvalEvaluation": 1031.95,
-   "intelligenceIndex": 21.5261980080866
-  },
-  {
-   "id": "gpt-6-luna-medium",
-   "gdpval": 1262.61,
-   "gdpvalEvaluation": 1262.61,
-   "intelligenceIndex": 29.9251773515762
-  },
-  {
-   "id": "gpt-6-luna-high",
-   "gdpval": 1342.92,
-   "gdpvalEvaluation": 1342.92,
-   "intelligenceIndex": 32.9282054150837
-  },
-  {
-   "id": "gpt-6-luna-xhigh",
-   "gdpval": 1363.44,
-   "gdpvalEvaluation": 1363.44,
-   "intelligenceIndex": 34.5587320217785
-  },
-  {
-   "id": "claude-opus-5-5-high",
-   "gdpval": 1703.59,
-   "gdpvalEvaluation": 1703.59,
-   "intelligenceIndex": 53.5831959822067
-  },
-  {
-   "id": "claude-opus-5-5-xhigh",
-   "gdpval": 1829.46,
-   "gdpvalEvaluation": 1829.46,
-   "intelligenceIndex": 55.9873505840139
-  },
-  {
-   "id": "claude-opus-5-5-medium",
-   "gdpval": 1585.07,
-   "gdpvalEvaluation": 1585.07,
-   "intelligenceIndex": 51.2434931792768
-  },
-  {
-   "id": "gpt-5.6-luna-low",
-   "gdpval": 994.2,
-   "gdpvalEvaluation": 994.2,
-   "intelligenceIndex": 21.0124783424265
-  },
-  {
-   "id": "gpt-6-astra-high",
-   "gdpval": 1524.88,
-   "gdpvalEvaluation": 1524.88,
-   "intelligenceIndex": 50.9191471636152
-  },
-  {
-   "id": "gpt-6-astra-xhigh",
-   "gdpval": 1556.94,
-   "gdpvalEvaluation": 1556.94,
-   "intelligenceIndex": 52.3863277108782
-  },
-  {
-   "id": "kimi-k3-1-pro",
-   "gdpval": 1845.72,
-   "gdpvalEvaluation": 1845.72,
-   "intelligenceIndex": 55.0869210959395
+   "id": "claude-opus-5-5",
+   "gdpval": 1866.27,
+   "gdpvalEvaluation": null,
+   "intelligenceIndex": 58.4060336078904
   }
  ]
 }

@@ -24,6 +24,11 @@ BENCHMARK_URLS = {
     "Terminal-Bench v2.1 (legacy)": "https://artificialanalysis.ai/evaluations/terminalbench-2-1",
     "Terminal-Bench 4.0": TERMINAL_BENCH_URL,
     "SciCode": "https://artificialanalysis.ai/evaluations/scicode",
+    # O136: the AA Intelligence Index v5 successors.
+    "FrontierCode 2.0": "https://artificialanalysis.ai/evaluations/frontiercode-2-0",
+    "HLE-Diamond": "https://artificialanalysis.ai/evaluations/hle-diamond",
+    "CritPt v2": "https://artificialanalysis.ai/evaluations/critpt-v2",
+    "Terminal-Bench-Science": "https://artificialanalysis.ai/evaluations/terminal-bench-science",
     "Humanity's Last Exam": "https://artificialanalysis.ai/evaluations/humanitys-last-exam",
     "HLE": "https://artificialanalysis.ai/evaluations/humanitys-last-exam",
     "GDP.pdf": "https://artificialanalysis.ai/evaluations/gdp-pdf",
