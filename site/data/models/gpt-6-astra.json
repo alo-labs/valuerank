@@ -78,7 +78,7 @@
         "name": "Artificial Analysis Terminal-Bench 4.0 run (mini-SWE-agent)",
         "url": "https://www.tbench.ai/leaderboard/terminal-bench/4.0"
       },
-      "observedAt": "2026-10-25",
+      "observedAt": "2026-10-31",
       "evaluatedVariant": "mini-SWE-agent",
       "note": null,
       "grade": "measured"
@@ -489,7 +489,7 @@
         "targetProfile": "published-record reporting precision + conventional identification of missing leaves + weight-specification stress",
         "unevaluable": null,
         "top1": 0.0,
-        "top3": 0.792,
+        "top3": 0.7924,
         "frontier": 1.0
       },
       {
@@ -515,9 +515,9 @@
         "kernel": "primary",
         "targetProfile": "published-record leaf values redrawn with plug-in binomial task-sampling noise from each leaf's published task count (independent-task approximation; GDPval-AA from its displayed rating interval, an assumption) + conventional identification of missing leaves",
         "unevaluable": null,
-        "top1": 0.0,
-        "top3": 0.5969,
-        "frontier": 0.7848
+        "top1": 0.0001,
+        "top3": 0.5933,
+        "frontier": 0.7893
       }
     ],
     "plan": [
@@ -573,7 +573,7 @@
         "unevaluable": null,
         "top1": 0.0,
         "top3": 0.0,
-        "frontier": 0.1067
+        "frontier": 0.1071
       }
     ]
   },
@@ -733,7 +733,7 @@
       },
       "overall": {
         "api": 44.82549490624819,
-        "plan": 46.01680248916865
+        "plan": 45.616541971813234
       }
     }
   ]

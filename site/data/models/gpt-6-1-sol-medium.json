@@ -8,11 +8,11 @@
   "summary": {
     "rank": {
       "api": 2,
-      "plan": 11
+      "plan": 12
     },
     "overall": {
       "api": 51.34463301627567,
-      "plan": 53.210417331674755
+      "plan": 51.959888431878426
     },
     "quality": 52.45722420275892,
     "qualityRank": 5,
@@ -60,7 +60,7 @@
         "name": "Artificial Analysis Terminal-Bench 4.0 run (mini-SWE-agent)",
         "url": "https://www.tbench.ai/leaderboard/terminal-bench/4.0"
       },
-      "observedAt": "2026-10-25",
+      "observedAt": "2026-10-31",
       "evaluatedVariant": "mini-SWE-agent",
       "note": null,
       "grade": "measured"
@@ -256,7 +256,7 @@
     ],
     "costScore": {
       "api": 48.00685945682594,
-      "plan": 55.46999671842227
+      "plan": 50.467881119236964
     },
     "components": [
       {
@@ -352,8 +352,8 @@
       "planIntervalEligible": false,
       "usdPerRun": 33.48594962739886,
       "selected": true,
-      "planRank": 11,
-      "planValue": 53.210417331674755
+      "planRank": 12,
+      "planValue": 51.959888431878426
     },
     {
       "id": "chatgpt-plus-gpt-6.1-sol-medium-common-gpt-assumption",
@@ -370,8 +370,8 @@
       "planIntervalEligible": false,
       "usdPerRun": 34.190582880221854,
       "selected": false,
-      "planRank": 12,
-      "planValue": 53.132708589957765
+      "planRank": 14,
+      "planValue": 51.87345056192227
     },
     {
       "id": "chatgpt-pro100-gpt-6.1-sol-medium-common-gpt-assumption",
@@ -388,8 +388,8 @@
       "planIntervalEligible": false,
       "usdPerRun": 34.190582880221854,
       "selected": false,
-      "planRank": 12,
-      "planValue": 53.132708589957765
+      "planRank": 14,
+      "planValue": 51.87345056192227
     },
     {
       "id": "chatgpt-pro200-gpt-6.1-sol-medium-common-gpt-assumption",
@@ -406,8 +406,8 @@
       "planIntervalEligible": false,
       "usdPerRun": 34.61714485473518,
       "selected": false,
-      "planRank": 14,
-      "planValue": 53.0864407065138
+      "planRank": 17,
+      "planValue": 51.82198534444594
     }
   ],
   "scenarios": {
@@ -463,9 +463,9 @@
         "kernel": "primary",
         "targetProfile": "published-record leaf values redrawn with plug-in binomial task-sampling noise from each leaf's published task count (independent-task approximation; GDPval-AA from its displayed rating interval, an assumption) + conventional identification of missing leaves",
         "unevaluable": null,
-        "top1": 0.2323,
-        "top3": 0.8362,
-        "frontier": 0.9037
+        "top1": 0.2334,
+        "top3": 0.8351,
+        "frontier": 0.9073
       }
     ],
     "plan": [
@@ -519,8 +519,8 @@
         "kernel": "primary",
         "targetProfile": "published-record leaf values redrawn with plug-in binomial task-sampling noise from each leaf's published task count (independent-task approximation; GDPval-AA from its displayed rating interval, an assumption) + conventional identification of missing leaves",
         "unevaluable": null,
-        "top1": 0.0653,
-        "top3": 0.0732,
+        "top1": 0.0735,
+        "top3": 0.0852,
         "frontier": 0.9999
       }
     ]
@@ -538,7 +538,7 @@
       "date": "2026-10-19",
       "rank": {
         "api": 2,
-        "plan": 11
+        "plan": 12
       }
     }
   ],
@@ -574,11 +574,11 @@
       "rankingEligible": true,
       "rank": {
         "api": 2,
-        "plan": 11
+        "plan": 12
       },
       "overall": {
         "api": 51.34463301627567,
-        "plan": 53.210417331674755
+        "plan": 51.959888431878426
       }
     },
     {
@@ -593,7 +593,7 @@
       },
       "overall": {
         "api": 46.19767302038005,
-        "plan": 46.38275986582971
+        "plan": 46.11714587163012
       }
     }
   ]

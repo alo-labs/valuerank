@@ -449,6 +449,16 @@ def test_influence_text_explains_a_negative_cost_allocation_and_workload_dash():
     assert "covariance allocation of value variance is -12% on the API basis and 30% on the Plan basis" in negative
     assert "cost accounts for 40% of the variance in API value and 30% in Plan value" in ed.influence_text(v3(0.4, 0.3))
     assert ed.workload_text({"cost": {"apiUsd": None}}) == ed.DASH
+    assert ed.influence_text(v3(0.4, 0.3), short=True) == "; 40% of API and 30% of Plan value variance"
+    above = ed.influence_text(v3(1.2, 0.3))
+    assert "is 120% on the API basis and 30% on the Plan basis; an allocation above 100% means quality's is negative" in above
+
+
+def test_outside_roster_text_counts_roster_models_outside_the_cohort():
+    """O132: with roster models outside the cohort the sentence counts them; with none it says so."""
+
+    assert ed.outside_roster_text(3) == "The remaining 3 roster models are not ranked; each keeps a page with the evidence held for it."
+    assert ed.outside_roster_text(0).startswith("Every roster model is a cohort configuration")
 
 
 def test_listed_beyond_text_names_each_ranking_and_a_frontier_point():

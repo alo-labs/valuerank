@@ -26,7 +26,7 @@ async function open(path, options) {
 
 const PAGES = [
   '/', '/rankings/', '/models/', '/plans/', '/benchmarks/', '/benchmarks/terminal-bench-4/', '/methodology/', '/changelog/', '/data/',
-  '/models/gpt-6-1-sol/', '/models/mimo-v2-6-pro/',
+  '/models/gpt-6-1-sol/', '/models/mimo-v2-6-flash/',
 ];
 
 function query(page) {
@@ -153,8 +153,9 @@ describe('evidence footnotes', () => {
 describe('rankings instrument', () => {
   test('filters, sorting, columns and comparison all live in the URL', async () => {
     const { page, context, errors } = await open('/rankings/');
-    // O48/O53: the max-effort ranking's Plan basis has one row per configuration and plan (27), then every roster model it does not rank (53).
-    assert.equal(await page.locator('#rankings-body tr').count(), 80);
+    // O48/O53: the max-effort ranking's Plan basis has one row per configuration and plan, then every roster model it does not
+    // rank; under v5 the roster is the 27-configuration cohort (O132).
+    assert.equal(await page.locator('#rankings-body tr').count(), 40);
 
     await page.locator('#filters input[name="provider"][value="OpenAI"]').check();
     assert.match(await query(page), /provider=OpenAI/);
@@ -281,14 +282,14 @@ describe('charts, model, plans and listing pages', () => {
     await context.close();
   });
 
-  test('the models index lists all 62 models and links to their pages', async () => {
+  test('the models index lists all 27 models and links to their pages', async () => {
     const { page, context } = await open('/models/');
-    assert.equal(await page.locator('#models-table tbody tr').count(), 62);
+    assert.equal(await page.locator('#models-table tbody tr').count(), 27);
     // O33: each ranked effort of a family has its own row and page.
     assert.equal(await page.locator('#models-table a.model-name[href$="/models/gpt-6-1-sol-xhigh/"]').innerText(), 'GPT-6.1 Sol (xhigh)');
-    await page.locator('#models-table a.model-name', { hasText: /^GPT-6\.1 Sol$/ }).click();
+    await page.locator('#models-table a.model-name', { hasText: /^GPT-6\.1 Sol \(max\)$/ }).click();
     await page.waitForURL(/\/models\/gpt-6-1-sol\/$/);
-    assert.equal(await page.locator('h1').innerText(), 'GPT-6.1 Sol');
+    assert.equal(await page.locator('h1').innerText(), 'GPT-6.1 Sol (max)');
     assert.equal(await page.locator('#dimension-table tbody tr').count(), 13); // the max-effort ranking's thirteen leaves (O55, O61)
     assert.equal(await page.locator('nav[aria-label="Primary"] a[aria-current="page"]').innerText(), 'Models');
     await context.close();

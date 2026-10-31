@@ -8,11 +8,11 @@
   "summary": {
     "rank": {
       "api": 3,
-      "plan": 8
+      "plan": 11
     },
     "overall": {
       "api": 51.23285188764349,
-      "plan": 53.50271764168671
+      "plan": 51.98135598125177
     },
     "quality": 56.06164674284215,
     "qualityRank": 3,
@@ -60,7 +60,7 @@
         "name": "Artificial Analysis Terminal-Bench 4.0 run (mini-SWE-agent)",
         "url": "https://www.tbench.ai/leaderboard/terminal-bench/4.0"
       },
-      "observedAt": "2026-10-25",
+      "observedAt": "2026-10-31",
       "evaluatedVariant": "mini-SWE-agent",
       "note": null,
       "grade": "measured"
@@ -256,7 +256,7 @@
     ],
     "costScore": {
       "api": 36.746467322047515,
-      "plan": 45.825930338220395
+      "plan": 39.74048369648062
     },
     "components": [
       {
@@ -361,8 +361,8 @@
       "planIntervalEligible": false,
       "usdPerRun": 63.894154672800205,
       "selected": true,
-      "planRank": 8,
-      "planValue": 53.50271764168671
+      "planRank": 11,
+      "planValue": 51.98135598125177
     },
     {
       "id": "chatgpt-pro100-gpt-6.1-terra-common-gpt-assumption",
@@ -379,8 +379,8 @@
       "planIntervalEligible": false,
       "usdPerRun": 65.23865726401932,
       "selected": false,
-      "planRank": 9,
-      "planValue": 53.425008899969725
+      "planRank": 13,
+      "planValue": 51.89491811129561
     },
     {
       "id": "chatgpt-pro200-gpt-6.1-terra-common-gpt-assumption",
@@ -397,8 +397,8 @@
       "planIntervalEligible": false,
       "usdPerRun": 66.05257525291783,
       "selected": false,
-      "planRank": 10,
-      "planValue": 53.37874101652575
+      "planRank": 16,
+      "planValue": 51.843452893819276
     },
     {
       "id": "chatgpt-plus-gpt-6.1-terra-common-gpt-assumption",
@@ -416,7 +416,7 @@
       "usdPerRun": 84.97133754758073,
       "selected": false,
       "planRank": 18,
-      "planValue": 52.43888033831057
+      "planValue": 50.798016392269126
     }
   ],
   "scenarios": {
@@ -472,8 +472,8 @@
         "kernel": "primary",
         "targetProfile": "published-record leaf values redrawn with plug-in binomial task-sampling noise from each leaf's published task count (independent-task approximation; GDPval-AA from its displayed rating interval, an assumption) + conventional identification of missing leaves",
         "unevaluable": null,
-        "top1": 0.2316,
-        "top3": 0.7945,
+        "top1": 0.2324,
+        "top3": 0.7961,
         "frontier": 0.5695
       }
     ],
@@ -547,7 +547,7 @@
       "date": "2026-10-19",
       "rank": {
         "api": 3,
-        "plan": 8
+        "plan": 11
       }
     }
   ],
@@ -583,11 +583,11 @@
       "rankingEligible": true,
       "rank": {
         "api": 3,
-        "plan": 8
+        "plan": 11
       },
       "overall": {
         "api": 51.23285188764349,
-        "plan": 53.50271764168671
+        "plan": 51.98135598125177
       }
     },
     {
@@ -602,7 +602,7 @@
       },
       "overall": {
         "api": 47.99717643205561,
-        "plan": 48.20878820868659
+        "plan": 47.905108878726246
       }
     }
   ]

@@ -1,32 +1,18 @@
 {
- "schemaVersion": "valuerank-source-rereads/v1",
- "rule": "O68 (2026-10-25): when the cutoff moves every board a ranking uses is re-read. A board found unchanged keeps its pinned capture; the build checks that each record names the pinned capture it was compared with (by hash), the tests check each 'unchanged' result against the re-read file, and the re-read is printed beside the source's clock.",
- "rereads": [
-  {
-   "source": "tbench.ai Terminal-Bench 4.0 leaderboard",
-   "pinned": "data/tb4-scrape.json",
-   "file": "research/2026-10-25-board-reread/tbench/tb4-scrape-2026-10-25.json",
-   "reReadAt": "2026-10-25T11:34:13Z",
-   "result": "unchanged",
-   "compare": [
-    "text",
-    "rows",
-    "links"
-   ],
-   "pinnedSha256": "e824ab89ed8a4173e5002af2d442e17703e5e065ec883d810358b068ebf0317d",
-   "pinnedKey": "tb4.source.captureSha256",
-   "comparedSha256": "d019897db3d1d358eae1651e7a4173a3e76f6190b0202054bd71bf2dde27e21a"
-  },
-  {
-   "source": "Cognition: FrontierCode leaderboard",
-   "pinned": "data/cognition_frontiercode.json",
-   "file": "research/2026-10-25-board-reread/cognition/data.json",
-   "reReadAt": "2026-10-25T11:33:58Z",
-   "result": "unchanged",
-   "compare": "sha256",
-   "lastModified": "2026-10-23T21:44:27Z",
-   "pinnedSha256": "ff0040778b7bdf69c705ad7474f771fb5e53cfaf5cf8573b3a4614153543d75f",
-   "pinnedKey": "leafEvidence.cognitionCapture.sha256"
-  }
- ]
+  "schemaVersion": "valuerank-source-rereads/v1",
+  "rule": "O68 (2026-10-25): when the cutoff moves every board a ranking uses is re-read. A board found unchanged keeps its pinned capture; the build checks that each record names the pinned capture it was compared with (by hash), the tests check each 'unchanged' result against the re-read file, and the re-read is printed beside the source's clock.",
+  "rereads": [
+    {
+      "source": "Cognition: FrontierCode leaderboard",
+      "pinned": "data/cognition_frontiercode.json",
+      "file": "research/2026-10-25-board-reread/cognition/data.json",
+      "reReadAt": "2026-10-25T11:33:58Z",
+      "result": "unchanged",
+      "compare": "sha256",
+      "lastModified": "2026-10-23T21:44:27Z",
+      "pinnedSha256": "ff0040778b7bdf69c705ad7474f771fb5e53cfaf5cf8573b3a4614153543d75f",
+      "pinnedKey": "leafEvidence.cognitionCapture.sha256"
+    }
+  ],
+  "note": "O132 (2026-10-30): tbench.ai was captured afresh for the v5 release (research/2026-10-30-v5-recapture/third-party/tbench/), so its 2026-10-25 re-read record no longer applies and was removed."
 }

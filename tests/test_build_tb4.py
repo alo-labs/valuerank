@@ -36,6 +36,34 @@ def data_dir(tmp_path, pinned_clock) -> Path:
     return data
 
 
+# The synthetic fixtures name a past cohort, so the tests pin that cohort's aliases; the live maps are checked below.
+FIXTURE_COHORT_ALIAS = {
+    "GPT-6 Astra": "gpt-6-astra",
+    "Opus 5": "claude-opus-5",
+    "Grok 4.6": "grok-4.6",
+    "Gemini 3.7 Flash": "gemini-3.7-flash",
+    "Sonnet 5": "claude-sonnet-5",
+    "Fable 5.1": "claude-fable-5-1",
+}
+FIXTURE_EXACT_ALIAS = {"Muse Spark 1.3 (xhigh)": "muse-spark-1-3-xhigh"}
+
+
+@pytest.fixture(autouse=True)
+def fixture_aliases(monkeypatch):
+    monkeypatch.setattr(build_tb4, "COHORT_ALIAS", FIXTURE_COHORT_ALIAS)
+    monkeypatch.setattr(build_tb4, "EXACT_ALIAS", FIXTURE_EXACT_ALIAS)
+
+
+def test_the_live_aliases_name_only_exact_max_effort_rows_of_the_cohort():
+    """O33: under the v5 cohort every alias is an exact model-and-effort label; no family is aliased by base name."""
+
+    live = runpy.run_path(str(ROOT / "valuerank" / "build_tb4.py"))
+    assert live["COHORT_ALIAS"] == {}
+    cohort = json.loads((ROOT / "data" / "aa_metrics.json").read_text())["models"]
+    assert set(live["EXACT_ALIAS"].values()) <= set(cohort)
+    assert all(label.endswith("(max)") for label in live["EXACT_ALIAS"])
+
+
 def synthetic_scrape() -> dict:
     return json.loads((FIXTURES / "scrape.json").read_text(encoding="utf-8"))
 

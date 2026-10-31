@@ -8,11 +8,11 @@
   "summary": {
     "rank": {
       "api": 11,
-      "plan": 15
+      "plan": 8
     },
     "overall": {
       "api": 45.29922747921766,
-      "plan": 52.749263966007064
+      "plan": 52.717169388453634
     },
     "quality": 37.379969871651795,
     "qualityRank": 11,
@@ -62,7 +62,7 @@
         "name": "Artificial Analysis Terminal-Bench 4.0 run (mini-SWE-agent)",
         "url": "https://www.tbench.ai/leaderboard/terminal-bench/4.0"
       },
-      "observedAt": "2026-10-25",
+      "observedAt": "2026-10-31",
       "evaluatedVariant": "mini-SWE-agent",
       "note": null,
       "grade": "measured"
@@ -257,7 +257,7 @@
     ],
     "costScore": {
       "api": 69.05700030191528,
-      "plan": 98.85714624907287
+      "plan": 98.72876793885915
     },
     "components": [
       {
@@ -353,8 +353,8 @@
       "planIntervalEligible": false,
       "usdPerRun": 1.8301796366737215,
       "selected": true,
-      "planRank": 15,
-      "planValue": 52.749263966007064
+      "planRank": 8,
+      "planValue": 52.717169388453634
     },
     {
       "id": "claude-max20x-claude-haiku-5-5-high-common-opus55-assumption",
@@ -371,8 +371,8 @@
       "planIntervalEligible": false,
       "usdPerRun": 1.8386078901600238,
       "selected": false,
-      "planRank": 16,
-      "planValue": 52.73211867189805
+      "planRank": 9,
+      "planValue": 52.69809814022841
     },
     {
       "id": "claude-max5x-claude-haiku-5-5-high-common-opus55-assumption",
@@ -389,8 +389,8 @@
       "planIntervalEligible": false,
       "usdPerRun": 1.8829271720538376,
       "selected": false,
-      "planRank": 17,
-      "planValue": 52.643235349633706
+      "planRank": 10,
+      "planValue": 52.59923043395235
     }
   ],
   "scenarios": {
@@ -447,7 +447,7 @@
         "targetProfile": "published-record leaf values redrawn with plug-in binomial task-sampling noise from each leaf's published task count (independent-task approximation; GDPval-AA from its displayed rating interval, an assumption) + conventional identification of missing leaves",
         "unevaluable": null,
         "top1": 0.0,
-        "top3": 0.0001,
+        "top3": 0.0002,
         "frontier": 0.8992
       }
     ],
@@ -520,7 +520,7 @@
       "date": "2026-10-19",
       "rank": {
         "api": 11,
-        "plan": 15
+        "plan": 8
       }
     }
   ],
@@ -556,11 +556,11 @@
       "rankingEligible": true,
       "rank": {
         "api": 11,
-        "plan": 15
+        "plan": 8
       },
       "overall": {
         "api": 45.29922747921766,
-        "plan": 52.749263966007064
+        "plan": 52.717169388453634
       }
     },
     {
@@ -571,11 +571,11 @@
       "rankingEligible": true,
       "rank": {
         "api": 18,
-        "plan": 51
+        "plan": 50
       },
       "overall": {
         "api": 37.950579100307756,
-        "plan": 43.25013476633265
+        "plan": 43.15577077700413
       }
     }
   ]

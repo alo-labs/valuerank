@@ -39,7 +39,8 @@ GPT-5.6 Luna (low).
 - [x] Third-party data files rebuilt (`build_third_party.py`, `build_swe_tracks.py`, `add_track_searches.py`); O36 search logs dated 2026-10-30.
 - [x] Plan routes: GPT-6.1 Terra's O45 routes, Anthropic Max/Ultra aliases and limit record, report window 2026-10-01 to 2026-10-31, the stale Grok report route excluded (E194); price records re-dated.
 - [x] Anchors re-frozen (`refreeze.py`); release cutoff 2026-10-31T04:10:00Z (`regen.sh`); draft r156 written.
-- [ ] Tests updated; review copy; push.
+- [x] Tests updated (100% coverage, JS, e2e, verify:docs); pushed.
+- [ ] Review copy r156; panel round 13.
 
 ## Dual run (O12)
 `python3 -m valuerank.value_v3 dual-run --previous previous-anchors/v3_frozen.json --track max` at the cutoff stops with "the admitted main workload changed since the anchors were frozen; this is a workload migration": the v4.3.2 anchors price a different workload (GDPval-AA, SciCode, AA-LCR in; FrontierCode 2.0, Terminal-Bench-Science out), so no dual run is computable. The anchors were re-frozen on the v5 cohort (`refreeze.py`); the previous anchor objects are kept in `previous-anchors/`.

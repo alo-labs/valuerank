@@ -2015,22 +2015,29 @@ def test_gdpval_movement_compares_the_replaced_capture():
     assert movement["rankedLargestAbsDeltaValue"] == pytest.approx((1 - v.BETA) * q.LEAF_BY_KEY["gdpval"].weight / 100 * 0.2)
 
 
-def test_rereads_name_the_pinned_capture_and_match_their_files():
+def test_rereads_name_the_pinned_capture_and_match_their_files(tmp_path):
     """I60 L6: an O68 re-read record names the pinned capture by hash, and each 'unchanged' result holds."""
 
     documents = v.load_documents(v.DATA)
     v.check_rereads(documents)
     assert all(v.reread_matches(item) for item in documents["sourceRereads"]["rereads"])
-    stale = {**documents, "sourceRereads": {"rereads": [{**documents["sourceRereads"]["rereads"][0], "pinnedSha256": "0" * 64}]}}
+    record = documents["sourceRereads"]["rereads"][0]
+    stale = {**documents, "sourceRereads": {"rereads": [{**record, "pinnedSha256": "0" * 64}]}}
     with pytest.raises(ValueError, match="not the pinned one"):
         v.check_rereads(stale)
-    assert not v.reread_matches({**documents["sourceRereads"]["rereads"][1], "pinnedSha256": "0" * 64})
-    scrape = documents["sourceRereads"]["rereads"][0]
-    assert not v.reread_matches({**scrape, "comparedSha256": "0" * 64})
-    assert not v.reread_matches({**scrape, "pinned": "data/tb4.json"})  # a committed pinned file is checked too
-    assert not v.reread_matches({**scrape, "pinned": scrape["file"], "file": "data/tb4.json"})
+    assert not v.reread_matches({**record, "pinnedSha256": "0" * 64})
+    # A scrape is compared on named fields; a committed pinned file is checked too.
+    fields = ["rows"]
+    (tmp_path / "reread.json").write_text(json.dumps({"rows": [1], "capturedAt": "later"}))
+    (tmp_path / "pinned.json").write_text(json.dumps({"rows": [1], "capturedAt": "earlier"}))
+    (tmp_path / "other.json").write_text(json.dumps({"rows": [2]}))
+    scrape = {"file": "reread.json", "pinned": "absent.json", "compare": fields, "comparedSha256": v._compared_hash({"rows": [1]}, fields)}
+    assert v.reread_matches(scrape, tmp_path)
+    assert v.reread_matches({**scrape, "pinned": "pinned.json"}, tmp_path)
+    assert not v.reread_matches({**scrape, "comparedSha256": "0" * 64}, tmp_path)
+    assert not v.reread_matches({**scrape, "pinned": "other.json"}, tmp_path)
+    assert not v.reread_matches({**scrape, "file": "other.json"}, tmp_path)
     clocks = {clock["source"]: clock for clock in v.source_clocks(documents)}
-    assert clocks["tbench.ai Terminal-Bench 4.0 leaderboard"]["reRead"]["result"] == "unchanged"
     assert clocks["Cognition: FrontierCode leaderboard"]["reRead"]["lastModified"] == "2026-10-23T21:44:27Z"
 
 

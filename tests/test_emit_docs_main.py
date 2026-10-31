@@ -148,8 +148,8 @@ def test_methodology_leaf_weights_fill_the_quality_share(emitted):
     assert "Value on a basis = **25%** × cost score + **75%** × quality score" in text
     cohort = text.split("## Cohort\n", 1)[1].split("\n## ", 1)[0]
     assert "- On AA's rendered frontier (1): GPT-6.1 Sol (max)" in cohort and "- Near-frontier family (1): Claude Sonnet 5.5 (max)" in cohort
-    assert ("- Plotted on or near AA's rendered frontier, another effort of a frontier or near family (O51) (3): GPT-6 Astra (max), "
-            "Claude Opus 5.5 (max), GPT-6 Luna (max)") in cohort
+    assert ("- Plotted on or near AA's rendered frontier, another effort of a frontier or near family (O51) (3): Claude Opus 5.5 (max), "
+            "GPT-6 Astra (max), GPT-6 Luna (max)") in cohort
     # O36/O38: configurations still missing a benchmark after the logged search are listed with the gap, not ranked; O53 names
     # those the AI Coding Daily ranking ranks.
     assert ("22 more cohort configurations are listed, not ranked, because a quality benchmark is still missing after an exhaustive search logged within 7 days "
@@ -326,6 +326,20 @@ def test_an_undefined_variance_allocation_prints_only_the_nominal_weight(repo_co
     assert "value is a 25% cost score (nominal weight) plus 75% quality" in readme and "That weight is nominal" not in readme
 
 
+def test_a_ranked_row_without_route_pairs_has_no_alternatives_row(repo_copy, pinned_clock):
+    """E171/E179: a ranked row with no admissible route-measurement pair is left out of the route-alternatives table."""
+
+    def drop_pairs(doc):
+        row = next(item for item in doc["v3"]["rows"] if item["plan"]["routeAlternatives"]["pairs"])
+        row["plan"]["routeAlternatives"]["pairs"] = []
+
+    assert emit(repo_copy) == 0
+    before = (repo_copy / "scores.md").read_text()
+    edit_json(repo_copy, "scores.json", drop_pairs)
+    assert emit(repo_copy) == 0
+    assert (repo_copy / "scores.md").read_text() != before
+
+
 def test_policy_applications_are_printed_only_when_recorded(repo_copy, pinned_clock):
     edit_json(repo_copy, "plan_cost_routes.json", lambda doc: doc["evidencePolicy"].pop("mimoApplication"))
     assert emit(repo_copy) == 0
@@ -378,8 +392,8 @@ def test_calibration_without_official_anchors_or_values_says_so(repo_copy, pinne
 def test_calibration_reports_reversals_and_the_official_anchor_extremes(emitted):
     section = (emitted / "scores.md").read_text().split("#### Measured-evidence calibration (diagnostic)", 1)[1].split("## Interval outputs", 1)[0]
     assert "Official Plan anchors are set by GPT-6 Luna (max) on ChatGPT Pro 500 (owner-named transfer) at the low end and GPT-6 Astra (max) on ChatGPT Plus (controlled measurement) at the high end." in section
-    # An anchor setter on the API-cost fallback is named as such; O91: a frozen setter no longer in the table says so.
-    assert "Official Plan anchors are set by GPT-6 Luna (medium) on ChatGPT Pro 500 (owner-named transfer) at the low end and GPT-6.1 Terra (max) on API-cost fallback (not in the current table) at the high end." in section
+    # A setter measured at another effort of the same model is named as such (O91: a frozen setter no longer in the table says so).
+    assert "Official Plan anchors are set by GPT-6 Luna (medium) on ChatGPT Pro 500 (owner-named transfer) at the low end and GPT-6 Astra (high) on ChatGPT Plus (same-model measurement from another effort) at the high end." in section
     assert "Pairwise reversals: Claude Opus 5.5 (max) and GPT-6.1 Sol (max). Largest value change: 6.70 points." in section
     methodology = (emitted / "methodology.md").read_text()
     assert "labelled conventional CI-range sensitivity (endpoint-conditioned; no tail model) under its interpretation contract (E165" in methodology

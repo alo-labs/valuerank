@@ -8,11 +8,11 @@
   "summary": {
     "rank": {
       "api": 9,
-      "plan": 25
+      "plan": 28
     },
     "overall": {
       "api": 46.00912825832105,
-      "plan": 50.26931808816337
+      "plan": 48.27883639195342
     },
     "quality": 57.31873574686409,
     "qualityRank": 1,
@@ -60,7 +60,7 @@
         "name": "Artificial Analysis Terminal-Bench 4.0 run (mini-SWE-agent)",
         "url": "https://www.tbench.ai/leaderboard/terminal-bench/4.0"
       },
-      "observedAt": "2026-10-25",
+      "observedAt": "2026-10-31",
       "evaluatedVariant": "mini-SWE-agent",
       "note": null,
       "grade": "measured"
@@ -255,7 +255,7 @@
     ],
     "costScore": {
       "api": 12.080305792691924,
-      "plan": 29.121065112061185
+      "plan": 21.159138327221388
     },
     "components": [
       {
@@ -351,8 +351,8 @@
       "planIntervalEligible": false,
       "usdPerRun": 195.65763518983755,
       "selected": true,
-      "planRank": 25,
-      "planValue": 50.26931808816337
+      "planRank": 28,
+      "planValue": 48.27883639195342
     },
     {
       "id": "chatgpt-pro500-gpt-6-astra-high-common-gpt-assumption",
@@ -369,8 +369,8 @@
       "planIntervalEligible": false,
       "usdPerRun": 203.7455676293887,
       "selected": false,
-      "planRank": 26,
-      "planValue": 50.11816588126921
+      "planRank": 33,
+      "planValue": 48.11070505287336
     },
     {
       "id": "chatgpt-pro100-gpt-6-astra-high-common-gpt-assumption",
@@ -387,8 +387,8 @@
       "planIntervalEligible": false,
       "usdPerRun": 214.37979165845664,
       "selected": false,
-      "planRank": 27,
-      "planValue": 49.92831085001734
+      "planRank": 35,
+      "planValue": 47.899523348739756
     },
     {
       "id": "chatgpt-plus-gpt-6-astra-high-common-gpt-assumption",
@@ -405,8 +405,8 @@
       "planIntervalEligible": false,
       "usdPerRun": 349.88899329935765,
       "selected": false,
-      "planRank": 37,
-      "planValue": 48.10030688114125
+      "planRank": 44,
+      "planValue": 45.86617721740596
     }
   ],
   "scenarios": {
@@ -463,7 +463,7 @@
         "targetProfile": "published-record leaf values redrawn with plug-in binomial task-sampling noise from each leaf's published task count (independent-task approximation; GDPval-AA from its displayed rating interval, an assumption) + conventional identification of missing leaves",
         "unevaluable": null,
         "top1": 0.0,
-        "top3": 0.0011,
+        "top3": 0.0018,
         "frontier": 0.4189
       }
     ],
@@ -518,8 +518,8 @@
         "kernel": "primary",
         "targetProfile": "published-record leaf values redrawn with plug-in binomial task-sampling noise from each leaf's published task count (independent-task approximation; GDPval-AA from its displayed rating interval, an assumption) + conventional identification of missing leaves",
         "unevaluable": null,
-        "top1": 0.0005,
-        "top3": 0.0005,
+        "top1": 0.0002,
+        "top3": 0.0002,
         "frontier": 0.5267
       }
     ]
@@ -537,7 +537,7 @@
       "date": "2026-10-19",
       "rank": {
         "api": 9,
-        "plan": 25
+        "plan": 28
       }
     }
   ],
@@ -573,11 +573,11 @@
       "rankingEligible": true,
       "rank": {
         "api": 9,
-        "plan": 25
+        "plan": 28
       },
       "overall": {
         "api": 46.00912825832105,
-        "plan": 50.26931808816337
+        "plan": 48.27883639195342
       }
     },
     {
@@ -592,7 +592,7 @@
       },
       "overall": {
         "api": 43.8230691601119,
-        "plan": 44.99302129368593
+        "plan": 44.623407504276265
       }
     }
   ]

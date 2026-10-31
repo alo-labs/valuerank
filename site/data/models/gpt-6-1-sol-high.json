@@ -12,7 +12,7 @@
     },
     "overall": {
       "api": 52.19106102359238,
-      "plan": 54.27301675401513
+      "plan": 52.87760047384701
     },
     "quality": 55.59378524012098,
     "qualityRank": 4,
@@ -60,7 +60,7 @@
         "name": "Artificial Analysis Terminal-Bench 4.0 run (mini-SWE-agent)",
         "url": "https://www.tbench.ai/leaderboard/terminal-bench/4.0"
       },
-      "observedAt": "2026-10-25",
+      "observedAt": "2026-10-31",
       "evaluatedVariant": "mini-SWE-agent",
       "note": null,
       "grade": "measured"
@@ -256,7 +256,7 @@
     ],
     "costScore": {
       "api": 41.982888374006606,
-      "plan": 50.31071129569758
+      "plan": 44.729046175025104
     },
     "components": [
       {
@@ -353,7 +353,7 @@
       "usdPerRun": 47.31233493564381,
       "selected": true,
       "planRank": 4,
-      "planValue": 54.27301675401513
+      "planValue": 52.87760047384701
     },
     {
       "id": "chatgpt-plus-gpt-6.1-sol-high-common-gpt-assumption",
@@ -371,7 +371,7 @@
       "usdPerRun": 48.30791203097205,
       "selected": false,
       "planRank": 5,
-      "planValue": 54.19530801229814
+      "planValue": 52.791162603890854
     },
     {
       "id": "chatgpt-pro100-gpt-6.1-sol-high-common-gpt-assumption",
@@ -389,7 +389,7 @@
       "usdPerRun": 48.30791203097205,
       "selected": false,
       "planRank": 5,
-      "planValue": 54.19530801229814
+      "planValue": 52.791162603890854
     },
     {
       "id": "chatgpt-pro200-gpt-6.1-sol-high-common-gpt-assumption",
@@ -407,7 +407,7 @@
       "usdPerRun": 48.91060191235654,
       "selected": false,
       "planRank": 7,
-      "planValue": 54.14904012885417
+      "planValue": 52.73969738641453
     }
   ],
   "scenarios": {
@@ -463,9 +463,9 @@
         "kernel": "primary",
         "targetProfile": "published-record leaf values redrawn with plug-in binomial task-sampling noise from each leaf's published task count (independent-task approximation; GDPval-AA from its displayed rating interval, an assumption) + conventional identification of missing leaves",
         "unevaluable": null,
-        "top1": 0.505,
-        "top3": 0.9377,
-        "frontier": 0.8876
+        "top1": 0.5054,
+        "top3": 0.9365,
+        "frontier": 0.8875
       }
     ],
     "plan": [
@@ -519,8 +519,8 @@
         "kernel": "primary",
         "targetProfile": "published-record leaf values redrawn with plug-in binomial task-sampling noise from each leaf's published task count (independent-task approximation; GDPval-AA from its displayed rating interval, an assumption) + conventional identification of missing leaves",
         "unevaluable": null,
-        "top1": 0.215,
-        "top3": 0.2342,
+        "top1": 0.2063,
+        "top3": 0.223,
         "frontier": 0.3114
       }
     ]
@@ -578,7 +578,7 @@
       },
       "overall": {
         "api": 52.19106102359238,
-        "plan": 54.27301675401513
+        "plan": 52.87760047384701
       }
     },
     {
@@ -593,7 +593,7 @@
       },
       "overall": {
         "api": 47.681010814342464,
-        "plan": 47.880287700112
+        "plan": 47.594309896274524
       }
     }
   ]

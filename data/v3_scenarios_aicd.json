@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "inputHash": "ce78e8f2d5766b16a401dd18f91e5b27acf99e12c27579dbd1ff2fe33ad05944",
+  "inputHash": "770d1d6ba2ae49fbc4121cc0a1b51a0dd9cb8524daeccd26f8b89aeed246fc67",
   "seed": 20261031,
   "scenarios": 10000,
   "streamDescriptions": {
@@ -283,7 +283,7 @@
               "covarianceTerm": 0.0
             }
           },
-          "gpt-6-luna": {
+          "gpt-6.1-terra-high": {
             "top3": {
               "share": 0.0,
               "monteCarloSe": 0.0
@@ -301,14 +301,14 @@
               "status": "defined",
               "label": "scenario dispersion under the declared kernels",
               "scenarios": 10000,
-              "valueVariance": 6.029869480919459e-06,
-              "valueSd": 0.00245557925567868,
+              "valueVariance": 6.029869480919624e-06,
+              "valueSd": 0.0024555792556787133,
               "costTerm": 0.0,
-              "qualityTerm": 6.029869480919459e-06,
+              "qualityTerm": 6.029869480919624e-06,
               "covarianceTerm": 0.0
             }
           },
-          "gpt-6.1-terra-high": {
+          "gpt-6-luna": {
             "top3": {
               "share": 0.0,
               "monteCarloSe": 0.0
@@ -701,31 +701,6 @@
               "covarianceTerm": 0.0
             }
           },
-          "gpt-6-luna": {
-            "top3": {
-              "share": 0.0,
-              "monteCarloSe": 0.0
-            },
-            "top1": {
-              "share": 0.0,
-              "monteCarloSe": 0.0
-            },
-            "frontier": {
-              "share": 1.0,
-              "monteCarloSe": 0.0
-            },
-            "qualifies": {},
-            "dispersion": {
-              "status": "defined",
-              "label": "scenario dispersion under the declared kernels",
-              "scenarios": 10000,
-              "valueVariance": 6.258401901002675e-06,
-              "valueSd": 0.0025016798158442807,
-              "costTerm": 0.0,
-              "qualityTerm": 6.258401901002675e-06,
-              "covarianceTerm": 0.0
-            }
-          },
           "gpt-6.1-terra-high": {
             "top3": {
               "share": 0.0,
@@ -744,10 +719,35 @@
               "status": "defined",
               "label": "scenario dispersion under the declared kernels",
               "scenarios": 10000,
-              "valueVariance": 6.074743186392677e-06,
-              "valueSd": 0.002464699410961239,
+              "valueVariance": 6.258401901002393e-06,
+              "valueSd": 0.0025016798158442244,
               "costTerm": 0.0,
-              "qualityTerm": 6.074743186392677e-06,
+              "qualityTerm": 6.258401901002393e-06,
+              "covarianceTerm": 0.0
+            }
+          },
+          "gpt-6-luna": {
+            "top3": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "top1": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "frontier": {
+              "share": 1.0,
+              "monteCarloSe": 0.0
+            },
+            "qualifies": {},
+            "dispersion": {
+              "status": "defined",
+              "label": "scenario dispersion under the declared kernels",
+              "scenarios": 10000,
+              "valueVariance": 6.074743186393177e-06,
+              "valueSd": 0.00246469941096134,
+              "costTerm": 0.0,
+              "qualityTerm": 6.074743186393177e-06,
               "covarianceTerm": 0.0
             }
           },
@@ -1121,31 +1121,6 @@
               "covarianceTerm": 0.0
             }
           },
-          "gpt-6-luna": {
-            "top3": {
-              "share": 0.0,
-              "monteCarloSe": 0.0
-            },
-            "top1": {
-              "share": 0.0,
-              "monteCarloSe": 0.0
-            },
-            "frontier": {
-              "share": 0.877,
-              "monteCarloSe": 0.0032843720861071755
-            },
-            "qualifies": {},
-            "dispersion": {
-              "status": "defined",
-              "label": "scenario dispersion under the declared kernels",
-              "scenarios": 10000,
-              "valueVariance": 3.305809176651713,
-              "valueSd": 1.8181884326580986,
-              "costTerm": 0.0,
-              "qualityTerm": 3.305809176651713,
-              "covarianceTerm": 0.0
-            }
-          },
           "gpt-6.1-terra-high": {
             "top3": {
               "share": 0.0,
@@ -1156,18 +1131,43 @@
               "monteCarloSe": 0.0
             },
             "frontier": {
-              "share": 0.9991,
-              "monteCarloSe": 0.00029986496961132553
+              "share": 0.9992,
+              "monteCarloSe": 0.00028272955275316074
             },
             "qualifies": {},
             "dispersion": {
               "status": "defined",
               "label": "scenario dispersion under the declared kernels",
               "scenarios": 10000,
-              "valueVariance": 2.322120172497562,
-              "valueSd": 1.5238504429561197,
+              "valueVariance": 2.32203415522465,
+              "valueSd": 1.5238222190349666,
               "costTerm": 0.0,
-              "qualityTerm": 2.322120172497562,
+              "qualityTerm": 2.32203415522465,
+              "covarianceTerm": 0.0
+            }
+          },
+          "gpt-6-luna": {
+            "top3": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "top1": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "frontier": {
+              "share": 0.8766,
+              "monteCarloSe": 0.003288957889666573
+            },
+            "qualifies": {},
+            "dispersion": {
+              "status": "defined",
+              "label": "scenario dispersion under the declared kernels",
+              "scenarios": 10000,
+              "valueVariance": 3.305815565011688,
+              "valueSd": 1.8181901894498518,
+              "costTerm": 0.0,
+              "qualityTerm": 3.305815565011688,
               "covarianceTerm": 0.0
             }
           },
@@ -1539,31 +1539,6 @@
               "covarianceTerm": 0.0
             }
           },
-          "gpt-6-luna": {
-            "top3": {
-              "share": 0.0,
-              "monteCarloSe": 0.0
-            },
-            "top1": {
-              "share": 0.0,
-              "monteCarloSe": 0.0
-            },
-            "frontier": {
-              "share": 1.0,
-              "monteCarloSe": 0.0
-            },
-            "qualifies": {},
-            "dispersion": {
-              "status": "defined",
-              "label": "scenario dispersion under the declared kernels",
-              "scenarios": 10000,
-              "valueVariance": 9.140542983271366e-06,
-              "valueSd": 0.003023333091683972,
-              "costTerm": 0.0,
-              "qualityTerm": 9.140542983271366e-06,
-              "covarianceTerm": 0.0
-            }
-          },
           "gpt-6.1-terra-high": {
             "top3": {
               "share": 0.0,
@@ -1582,10 +1557,35 @@
               "status": "defined",
               "label": "scenario dispersion under the declared kernels",
               "scenarios": 10000,
-              "valueVariance": 9.183913231011796e-06,
-              "valueSd": 0.003030497192048162,
+              "valueVariance": 9.140542983270999e-06,
+              "valueSd": 0.0030233330916839113,
               "costTerm": 0.0,
-              "qualityTerm": 9.183913231011796e-06,
+              "qualityTerm": 9.140542983270999e-06,
+              "covarianceTerm": 0.0
+            }
+          },
+          "gpt-6-luna": {
+            "top3": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "top1": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "frontier": {
+              "share": 1.0,
+              "monteCarloSe": 0.0
+            },
+            "qualifies": {},
+            "dispersion": {
+              "status": "defined",
+              "label": "scenario dispersion under the declared kernels",
+              "scenarios": 10000,
+              "valueVariance": 9.183913231011305e-06,
+              "valueSd": 0.003030497192048081,
+              "costTerm": 0.0,
+              "qualityTerm": 9.183913231011305e-06,
               "covarianceTerm": 0.0
             }
           },
@@ -1958,31 +1958,6 @@
               "covarianceTerm": 0.0
             }
           },
-          "gpt-6-luna": {
-            "top3": {
-              "share": 0.0,
-              "monteCarloSe": 0.0
-            },
-            "top1": {
-              "share": 0.0,
-              "monteCarloSe": 0.0
-            },
-            "frontier": {
-              "share": 1.0,
-              "monteCarloSe": 0.0
-            },
-            "qualifies": {},
-            "dispersion": {
-              "status": "defined",
-              "label": "scenario dispersion under the declared kernels",
-              "scenarios": 10000,
-              "valueVariance": 6.11603552330829e-06,
-              "valueSd": 0.002473061973204127,
-              "costTerm": 0.0,
-              "qualityTerm": 6.11603552330829e-06,
-              "covarianceTerm": 0.0
-            }
-          },
           "gpt-6.1-terra-high": {
             "top3": {
               "share": 0.0,
@@ -2001,10 +1976,35 @@
               "status": "defined",
               "label": "scenario dispersion under the declared kernels",
               "scenarios": 10000,
-              "valueVariance": 6.201207057883746e-06,
-              "valueSd": 0.0024902222908575345,
+              "valueVariance": 6.116035523308368e-06,
+              "valueSd": 0.0024730619732041426,
               "costTerm": 0.0,
-              "qualityTerm": 6.201207057883746e-06,
+              "qualityTerm": 6.116035523308368e-06,
+              "covarianceTerm": 0.0
+            }
+          },
+          "gpt-6-luna": {
+            "top3": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "top1": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "frontier": {
+              "share": 1.0,
+              "monteCarloSe": 0.0
+            },
+            "qualifies": {},
+            "dispersion": {
+              "status": "defined",
+              "label": "scenario dispersion under the declared kernels",
+              "scenarios": 10000,
+              "valueVariance": 6.201207057883718e-06,
+              "valueSd": 0.0024902222908575284,
+              "costTerm": 0.0,
+              "qualityTerm": 6.201207057883718e-06,
               "covarianceTerm": 0.0
             }
           },
@@ -2179,12 +2179,12 @@
         "rows": {
           "gpt-6.1-terra": {
             "top3": {
-              "share": 0.7945,
-              "monteCarloSe": 0.004040665168013801
+              "share": 0.7961,
+              "monteCarloSe": 0.0040289550754507054
             },
             "top1": {
-              "share": 0.2316,
-              "monteCarloSe": 0.004218547617367854
+              "share": 0.2324,
+              "monteCarloSe": 0.004223626877459703
             },
             "frontier": {
               "share": 0.5695,
@@ -2204,16 +2204,16 @@
           },
           "gpt-6.1-sol-high": {
             "top3": {
-              "share": 0.9377,
-              "monteCarloSe": 0.0024169962763728047
+              "share": 0.9365,
+              "monteCarloSe": 0.0024386010333795893
             },
             "top1": {
-              "share": 0.505,
-              "monteCarloSe": 0.004999749993749687
+              "share": 0.5054,
+              "monteCarloSe": 0.004999708391496448
             },
             "frontier": {
-              "share": 0.8876,
-              "monteCarloSe": 0.0031585794275275085
+              "share": 0.8875,
+              "monteCarloSe": 0.003159806164941135
             },
             "qualifies": {},
             "dispersion": {
@@ -2229,16 +2229,16 @@
           },
           "gpt-6.1-sol-medium": {
             "top3": {
-              "share": 0.8362,
-              "monteCarloSe": 0.0037009398806249197
+              "share": 0.8351,
+              "monteCarloSe": 0.0037109027203633353
             },
             "top1": {
-              "share": 0.2323,
-              "monteCarloSe": 0.004222993132838367
+              "share": 0.2334,
+              "monteCarloSe": 0.004229946098947361
             },
             "frontier": {
-              "share": 0.9037,
-              "monteCarloSe": 0.0029500222033062742
+              "share": 0.9073,
+              "monteCarloSe": 0.0029001156873476614
             },
             "qualifies": {},
             "dispersion": {
@@ -2254,8 +2254,8 @@
           },
           "gpt-6-astra-high": {
             "top3": {
-              "share": 0.0011,
-              "monteCarloSe": 0.00033148001448051134
+              "share": 0.0018,
+              "monteCarloSe": 0.0004238820590683215
             },
             "top1": {
               "share": 0.0,
@@ -2279,8 +2279,8 @@
           },
           "claude-opus-5-5-high": {
             "top3": {
-              "share": 0.001,
-              "monteCarloSe": 0.0003160696125855822
+              "share": 0.0011,
+              "monteCarloSe": 0.00033148001448051134
             },
             "top1": {
               "share": 0.0,
@@ -2304,16 +2304,16 @@
           },
           "gpt-6.1-terra-xhigh": {
             "top3": {
-              "share": 0.167,
-              "monteCarloSe": 0.003729758705332022
+              "share": 0.1674,
+              "monteCarloSe": 0.0037333261309454332
             },
             "top1": {
-              "share": 0.0112,
-              "monteCarloSe": 0.0010523573537539422
+              "share": 0.0113,
+              "monteCarloSe": 0.0010569914853015608
             },
             "frontier": {
-              "share": 0.695,
-              "monteCarloSe": 0.004604074282632721
+              "share": 0.6985,
+              "monteCarloSe": 0.004589093047651137
             },
             "qualifies": {},
             "dispersion": {
@@ -2329,8 +2329,8 @@
           },
           "claude-haiku-5-5-high": {
             "top3": {
-              "share": 0.0001,
-              "monteCarloSe": 9.999499987499375e-05
+              "share": 0.0002,
+              "monteCarloSe": 0.00014140721339450828
             },
             "top1": {
               "share": 0.0,
@@ -2354,16 +2354,16 @@
           },
           "gpt-6.1-sol-low": {
             "top3": {
-              "share": 0.0032,
-              "monteCarloSe": 0.0005647796030311293
+              "share": 0.0036,
+              "monteCarloSe": 0.0005989190262464534
             },
             "top1": {
               "share": 0.0,
               "monteCarloSe": 0.0
             },
             "frontier": {
-              "share": 0.4337,
-              "monteCarloSe": 0.004955848161515846
+              "share": 0.4334,
+              "monteCarloSe": 0.004955445893156336
             },
             "qualifies": {},
             "dispersion": {
@@ -2377,68 +2377,68 @@
               "covarianceTerm": 0.0
             }
           },
+          "gpt-6.1-terra-high": {
+            "top3": {
+              "share": 0.1961,
+              "monteCarloSe": 0.003970450730080906
+            },
+            "top1": {
+              "share": 0.0156,
+              "monteCarloSe": 0.001239219108955313
+            },
+            "frontier": {
+              "share": 0.7983,
+              "monteCarloSe": 0.004012693733640782
+            },
+            "qualifies": {},
+            "dispersion": {
+              "status": "defined",
+              "label": "scenario dispersion under the declared kernels",
+              "scenarios": 10000,
+              "valueVariance": 2.665020832501406,
+              "valueSd": 1.6324891523380503,
+              "costTerm": 0.0,
+              "qualityTerm": 2.665020832501406,
+              "covarianceTerm": 0.0
+            }
+          },
           "gpt-6-luna": {
             "top3": {
-              "share": 0.0007,
-              "monteCarloSe": 0.00026448251359967073
+              "share": 0.0006,
+              "monteCarloSe": 0.0002448754785600224
             },
             "top1": {
               "share": 0.0,
               "monteCarloSe": 0.0
             },
             "frontier": {
-              "share": 0.619,
-              "monteCarloSe": 0.004856325771609643
+              "share": 0.6196,
+              "monteCarloSe": 0.00485485159402427
             },
             "qualifies": {},
             "dispersion": {
               "status": "defined",
               "label": "scenario dispersion under the declared kernels",
               "scenarios": 10000,
-              "valueVariance": 1.7849280089392374,
-              "valueSd": 1.3360119793397203,
+              "valueVariance": 1.8051015158371455,
+              "valueSd": 1.3435406640057999,
               "costTerm": 0.0,
-              "qualityTerm": 1.7849280089392374,
-              "covarianceTerm": 0.0
-            }
-          },
-          "gpt-6.1-terra-high": {
-            "top3": {
-              "share": 0.1976,
-              "monteCarloSe": 0.0039818869898579495
-            },
-            "top1": {
-              "share": 0.018,
-              "monteCarloSe": 0.0013295111883696203
-            },
-            "frontier": {
-              "share": 0.7996,
-              "monteCarloSe": 0.0040029968773407755
-            },
-            "qualifies": {},
-            "dispersion": {
-              "status": "defined",
-              "label": "scenario dispersion under the declared kernels",
-              "scenarios": 10000,
-              "valueVariance": 2.6871225589504864,
-              "valueSd": 1.639244508592445,
-              "costTerm": 0.0,
-              "qualityTerm": 2.6871225589504864,
+              "qualityTerm": 1.8051015158371455,
               "covarianceTerm": 0.0
             }
           },
           "gpt-6.1-terra-medium": {
             "top3": {
-              "share": 0.0609,
-              "monteCarloSe": 0.002391467959225045
+              "share": 0.0615,
+              "monteCarloSe": 0.002402451872566857
             },
             "top1": {
               "share": 0.0019,
               "monteCarloSe": 0.0004354756020720334
             },
             "frontier": {
-              "share": 0.9672,
-              "monteCarloSe": 0.0017811277326458103
+              "share": 0.9655,
+              "monteCarloSe": 0.0018250958878919205
             },
             "qualifies": {},
             "dispersion": {
@@ -3387,106 +3387,6 @@
               "covarianceTerm": 0.0
             }
           },
-          "gpt-6-luna@chatgpt-plus": {
-            "top3": {
-              "share": 0.0,
-              "monteCarloSe": 0.0
-            },
-            "top1": {
-              "share": 0.0,
-              "monteCarloSe": 0.0
-            },
-            "frontier": {
-              "share": 0.0,
-              "monteCarloSe": 0.0
-            },
-            "qualifies": {},
-            "dispersion": {
-              "status": "defined",
-              "label": "scenario dispersion under the declared kernels",
-              "scenarios": 10000,
-              "valueVariance": 6.029869480919459e-06,
-              "valueSd": 0.00245557925567868,
-              "costTerm": 0.0,
-              "qualityTerm": 6.029869480919459e-06,
-              "covarianceTerm": 0.0
-            }
-          },
-          "gpt-6-luna@chatgpt-pro-100": {
-            "top3": {
-              "share": 0.0,
-              "monteCarloSe": 0.0
-            },
-            "top1": {
-              "share": 0.0,
-              "monteCarloSe": 0.0
-            },
-            "frontier": {
-              "share": 0.0,
-              "monteCarloSe": 0.0
-            },
-            "qualifies": {},
-            "dispersion": {
-              "status": "defined",
-              "label": "scenario dispersion under the declared kernels",
-              "scenarios": 10000,
-              "valueVariance": 6.029869480919459e-06,
-              "valueSd": 0.00245557925567868,
-              "costTerm": 0.0,
-              "qualityTerm": 6.029869480919459e-06,
-              "covarianceTerm": 0.0
-            }
-          },
-          "gpt-6-luna@chatgpt-pro-200": {
-            "top3": {
-              "share": 0.0,
-              "monteCarloSe": 0.0
-            },
-            "top1": {
-              "share": 0.0,
-              "monteCarloSe": 0.0
-            },
-            "frontier": {
-              "share": 0.0,
-              "monteCarloSe": 0.0
-            },
-            "qualifies": {},
-            "dispersion": {
-              "status": "defined",
-              "label": "scenario dispersion under the declared kernels",
-              "scenarios": 10000,
-              "valueVariance": 6.029869480919459e-06,
-              "valueSd": 0.00245557925567868,
-              "costTerm": 0.0,
-              "qualityTerm": 6.029869480919459e-06,
-              "covarianceTerm": 0.0
-            }
-          },
-          "gpt-6-luna@chatgpt-pro-500": {
-            "top3": {
-              "share": 0.0,
-              "monteCarloSe": 0.0
-            },
-            "top1": {
-              "share": 0.0,
-              "monteCarloSe": 0.0
-            },
-            "frontier": {
-              "share": 1.0,
-              "monteCarloSe": 0.0
-            },
-            "qualifies": {},
-            "dispersion": {
-              "status": "defined",
-              "label": "scenario dispersion under the declared kernels",
-              "scenarios": 10000,
-              "valueVariance": 6.029869480919459e-06,
-              "valueSd": 0.00245557925567868,
-              "costTerm": 0.0,
-              "qualityTerm": 6.029869480919459e-06,
-              "covarianceTerm": 0.0
-            }
-          },
           "gpt-6.1-terra-high@chatgpt-plus": {
             "top3": {
               "share": 0.0,
@@ -3505,10 +3405,10 @@
               "status": "defined",
               "label": "scenario dispersion under the declared kernels",
               "scenarios": 10000,
-              "valueVariance": 6.017477267024153e-06,
-              "valueSd": 0.002453054680805985,
+              "valueVariance": 6.029869480919624e-06,
+              "valueSd": 0.0024555792556787133,
               "costTerm": 0.0,
-              "qualityTerm": 6.017477267024153e-06,
+              "qualityTerm": 6.029869480919624e-06,
               "covarianceTerm": 0.0
             }
           },
@@ -3530,14 +3430,64 @@
               "status": "defined",
               "label": "scenario dispersion under the declared kernels",
               "scenarios": 10000,
-              "valueVariance": 6.017477267024153e-06,
-              "valueSd": 0.002453054680805985,
+              "valueVariance": 6.029869480919624e-06,
+              "valueSd": 0.0024555792556787133,
               "costTerm": 0.0,
-              "qualityTerm": 6.017477267024153e-06,
+              "qualityTerm": 6.029869480919624e-06,
               "covarianceTerm": 0.0
             }
           },
           "gpt-6.1-terra-high@chatgpt-pro-200": {
+            "top3": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "top1": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "frontier": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "qualifies": {},
+            "dispersion": {
+              "status": "defined",
+              "label": "scenario dispersion under the declared kernels",
+              "scenarios": 10000,
+              "valueVariance": 6.029869480919624e-06,
+              "valueSd": 0.0024555792556787133,
+              "costTerm": 0.0,
+              "qualityTerm": 6.029869480919624e-06,
+              "covarianceTerm": 0.0
+            }
+          },
+          "gpt-6.1-terra-high@chatgpt-pro-500": {
+            "top3": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "top1": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "frontier": {
+              "share": 1.0,
+              "monteCarloSe": 0.0
+            },
+            "qualifies": {},
+            "dispersion": {
+              "status": "defined",
+              "label": "scenario dispersion under the declared kernels",
+              "scenarios": 10000,
+              "valueVariance": 6.029869480919624e-06,
+              "valueSd": 0.0024555792556787133,
+              "costTerm": 0.0,
+              "qualityTerm": 6.029869480919624e-06,
+              "covarianceTerm": 0.0
+            }
+          },
+          "gpt-6-luna@chatgpt-plus": {
             "top3": {
               "share": 0.0,
               "monteCarloSe": 0.0
@@ -3562,7 +3512,57 @@
               "covarianceTerm": 0.0
             }
           },
-          "gpt-6.1-terra-high@chatgpt-pro-500": {
+          "gpt-6-luna@chatgpt-pro-100": {
+            "top3": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "top1": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "frontier": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "qualifies": {},
+            "dispersion": {
+              "status": "defined",
+              "label": "scenario dispersion under the declared kernels",
+              "scenarios": 10000,
+              "valueVariance": 6.017477267024153e-06,
+              "valueSd": 0.002453054680805985,
+              "costTerm": 0.0,
+              "qualityTerm": 6.017477267024153e-06,
+              "covarianceTerm": 0.0
+            }
+          },
+          "gpt-6-luna@chatgpt-pro-200": {
+            "top3": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "top1": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "frontier": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "qualifies": {},
+            "dispersion": {
+              "status": "defined",
+              "label": "scenario dispersion under the declared kernels",
+              "scenarios": 10000,
+              "valueVariance": 6.017477267024153e-06,
+              "valueSd": 0.002453054680805985,
+              "costTerm": 0.0,
+              "qualityTerm": 6.017477267024153e-06,
+              "covarianceTerm": 0.0
+            }
+          },
+          "gpt-6-luna@chatgpt-pro-500": {
             "top3": {
               "share": 0.0,
               "monteCarloSe": 0.0
@@ -6825,8 +6825,8 @@
         "rows": {
           "gpt-6.1-sol-high@chatgpt-plus": {
             "top3": {
-              "share": 0.2079,
-              "monteCarloSe": 0.004058048669003367
+              "share": 0.1961,
+              "monteCarloSe": 0.003970450730080906
             },
             "top1": {
               "share": 0.0,
@@ -6850,8 +6850,8 @@
           },
           "gpt-6.1-sol-high@chatgpt-pro-100": {
             "top3": {
-              "share": 0.2079,
-              "monteCarloSe": 0.004058048669003367
+              "share": 0.1961,
+              "monteCarloSe": 0.003970450730080906
             },
             "top1": {
               "share": 0.0,
@@ -6900,12 +6900,12 @@
           },
           "gpt-6.1-sol-high@chatgpt-pro-500": {
             "top3": {
-              "share": 0.2342,
-              "monteCarloSe": 0.004234977685891627
+              "share": 0.223,
+              "monteCarloSe": 0.004162583332499183
             },
             "top1": {
-              "share": 0.215,
-              "monteCarloSe": 0.004108223460329295
+              "share": 0.2063,
+              "monteCarloSe": 0.004046483782248485
             },
             "frontier": {
               "share": 0.3114,
@@ -6925,8 +6925,8 @@
           },
           "gpt-6.1-sol-medium@chatgpt-plus": {
             "top3": {
-              "share": 0.0634,
-              "monteCarloSe": 0.002436810210090232
+              "share": 0.0697,
+              "monteCarloSe": 0.0025464074693575655
             },
             "top1": {
               "share": 0.0,
@@ -6950,8 +6950,8 @@
           },
           "gpt-6.1-sol-medium@chatgpt-pro-100": {
             "top3": {
-              "share": 0.0634,
-              "monteCarloSe": 0.002436810210090232
+              "share": 0.0697,
+              "monteCarloSe": 0.0025464074693575655
             },
             "top1": {
               "share": 0.0,
@@ -7000,12 +7000,12 @@
           },
           "gpt-6.1-sol-medium@chatgpt-pro-500": {
             "top3": {
-              "share": 0.0732,
-              "monteCarloSe": 0.0026046450813882495
+              "share": 0.0852,
+              "monteCarloSe": 0.002791790823109783
             },
             "top1": {
-              "share": 0.0653,
-              "monteCarloSe": 0.002470544676786882
+              "share": 0.0735,
+              "monteCarloSe": 0.0026095545596902165
             },
             "frontier": {
               "share": 0.9999,
@@ -7050,8 +7050,8 @@
           },
           "gpt-6-astra-high@chatgpt-pro-100": {
             "top3": {
-              "share": 0.0003,
-              "monteCarloSe": 0.00017317909804592468
+              "share": 0.0001,
+              "monteCarloSe": 9.999499987499375e-05
             },
             "top1": {
               "share": 0.0,
@@ -7075,12 +7075,12 @@
           },
           "gpt-6-astra-high@chatgpt-pro-200": {
             "top3": {
-              "share": 0.0005,
-              "monteCarloSe": 0.0002235508890610816
+              "share": 0.0002,
+              "monteCarloSe": 0.00014140721339450828
             },
             "top1": {
-              "share": 0.0005,
-              "monteCarloSe": 0.0002235508890610816
+              "share": 0.0002,
+              "monteCarloSe": 0.00014140721339450828
             },
             "frontier": {
               "share": 0.5267,
@@ -7100,8 +7100,8 @@
           },
           "gpt-6-astra-high@chatgpt-pro-500": {
             "top3": {
-              "share": 0.0005,
-              "monteCarloSe": 0.0002235508890610816
+              "share": 0.0002,
+              "monteCarloSe": 0.00014140721339450828
             },
             "top1": {
               "share": 0.0,
@@ -7125,8 +7125,8 @@
           },
           "claude-opus-5-5-high@claude-max-20x": {
             "top3": {
-              "share": 0.7281,
-              "monteCarloSe": 0.00444938636218524
+              "share": 0.7338,
+              "monteCarloSe": 0.0044197008948570265
             },
             "top1": {
               "share": 0.0,
@@ -7150,8 +7150,8 @@
           },
           "claude-opus-5-5-high@claude-max-5x": {
             "top3": {
-              "share": 0.6969,
-              "monteCarloSe": 0.0045959807440849884
+              "share": 0.6965,
+              "monteCarloSe": 0.004597692355954234
             },
             "top1": {
               "share": 0.0,
@@ -7175,12 +7175,12 @@
           },
           "claude-opus-5-5-high@claude-pro": {
             "top3": {
-              "share": 0.732,
-              "monteCarloSe": 0.004429175995600085
+              "share": 0.7372,
+              "monteCarloSe": 0.004401547000771434
             },
             "top1": {
-              "share": 0.7192,
-              "monteCarloSe": 0.00449389986537306
+              "share": 0.72,
+              "monteCarloSe": 0.00448998886412873
             },
             "frontier": {
               "share": 0.9553,
@@ -7523,12 +7523,12 @@
             },
             "UH": {
               "status": "not met",
-              "share": 0.5052,
-              "successes": 5052,
+              "share": 0.4992,
+              "successes": 4992,
               "scenarios": 10000,
               "interval": [
-                0.4903753747086753,
-                0.5200181950192408
+                0.4843783046711162,
+                0.514022684601261
               ],
               "perLookError": 0.003125,
               "confidenceLevel": 0.996875,
@@ -7570,12 +7570,12 @@
             },
             "HU": {
               "status": "not met",
-              "share": 0.4917,
-              "successes": 4917,
+              "share": 0.5059,
+              "successes": 5059,
               "scenarios": 10000,
               "interval": [
-                0.47688495795864183,
-                0.506525305748923
+                0.4910751714216893,
+                0.5207175326921485
               ],
               "perLookError": 0.003125,
               "confidenceLevel": 0.996875,
@@ -7779,7 +7779,7 @@
             "executionStatus": "completed"
           },
           "frequencyRange": [
-            0.4917,
+            0.4992,
             0.5068
           ],
           "label": false,
