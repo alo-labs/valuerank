@@ -88,6 +88,30 @@ def first_mapped(document):
     return next(c for c in document["configurations"] if c["valueRankModelId"])
 
 
+OFF_COHORT_ID = "claude-sonnet-5-5-xhigh"
+
+
+def add_off_cohort(root: Path, *, model_id: str = OFF_COHORT_ID, display: str = "Claude Sonnet 5.5 (xhigh)",
+                   family: str = "Claude Sonnet 5.5", slug: str = "claude-sonnet-5-5-xhigh", variant: str = "xhigh",
+                   source_id: str = "claude-sonnet-5-5") -> str:
+    """Roster a synthetic configuration AA does not plot on or near its rendered frontier (O51).
+
+    Since the v5 re-capture (O132) the roster is exactly the plotted cohort, so an off-frontier roster entry exists only
+    as a fixture: by default Claude Sonnet 5.5 (xhigh), which left the cohort with v5, with no Bug Hunt owner result."""
+
+    def aa(document):
+        document["models"][model_id] = {**document["models"][source_id], "id": model_id, "displayName": display,
+                                        "family": family, "aaSlug": slug, "aaUrl": AA_URL + slug, "aaVariant": variant}
+    def bughunt(document):
+        source = next(m for m in document["models"] if m["modelId"] == source_id)
+        document["models"].append({**source, "modelId": model_id, "matched": False, "matchStatus": "no_exact_owner_result"})
+    def livebench(document):
+        document["models"][model_id] = {**document["models"][source_id], "modelId": model_id, "name": display}
+    for name, fn in (("aa", aa), ("bughunt", bughunt), ("livebench", livebench)):
+        edit(root, name, fn)
+    return model_id
+
+
 def inv_row(document, family=None, index=0):
     rows = [r for r in document["rows"] if family is None or r["family"] == family]
     return rows[index]
@@ -330,8 +354,11 @@ def test_metric_coverage_percentage_and_renormalized_priority(built):
     assert no_cost == 0  # O51: Muse Wonder Full, the one configuration AA published no cost for, is off the frontier
 
 
-def test_ranked_order_and_exclusions(built):
-    scores = built["scores.json"]
+def test_ranked_order_and_exclusions(world):
+    # O51: an off-frontier roster entry is listed in the appendix, never ranked (synthetic since O132, see add_off_cohort).
+    add_off_cohort(world)
+    run_main(world)
+    scores = outputs(world)["scores.json"]
     ranked = [m for m in scores["models"] if m["rank"] is not None]
     assert [m["id"] for m in ranked] == scores["rankedModelIds"]
     assert [m["rank"] for m in ranked] == list(range(1, len(ranked) + 1))
@@ -355,7 +382,7 @@ def test_ranked_order_and_exclusions(built):
     ranked_somewhere = [m for m in scores["models"] if m.get("rankings") and any(m["rankings"][track] for track in quality.LEADING_TRACKS)]
     assert ranked_somewhere and all(m["rankingEligible"] for m in ranked_somewhere)
     excluded = [m for m in scores["models"] if not m["rankingEligible"] and m not in incomplete]
-    assert excluded
+    assert [m["id"] for m in excluded] == [OFF_COHORT_ID]
     for m in excluded:
         assert m["rank"] is None and m["overallScore"] is None and m["vRanks"] == {}
         assert m["rankingStatus"] == "excluded_from_primary_cohort"
@@ -576,12 +603,12 @@ def aa_edit(model_id, **changes):
 
 
 AA_IDENTITY_CASES = [
-    (aa_edit("gpt-6-luna", aaUrl="https://artificialanalysis.ai/models/not-a-row"), "must identify one exact selected source URL"),
+    (aa_edit("gpt-6-luna-high", aaUrl="https://artificialanalysis.ai/models/not-a-row"), "must identify one exact selected source URL"),
     (aa_edit("gpt-6.1-sol", aaSlug="other-slug"), "source slug does not match"),
     (aa_edit("gpt-6.1-sol", displayName="GPT-6 Astra"), "family does not match selected catalog identity"),
-    (aa_edit("mimo-v2-6-pro", aaVariant="high"), "unexpected selected effort"),
+    (aa_edit("mimo-v2-6-flash", aaVariant="high"), "unexpected selected effort"),
     (aa_edit("gpt-6.1-sol", aaVariant="min"), "effort does not match selected catalog variant"),
-    (aa_edit("claude-opus-5-5", aaName="Claude Opus 5.5", aaShortName="Opus"), "fallback does not match"),
+    (aa_edit("claude-opus-5-5-xhigh", aaName="Claude Opus 5.5 (Xhigh)", aaShortName="Opus 5.5 (xhigh)"), "fallback does not match"),
 ]
 
 
@@ -593,7 +620,7 @@ def test_frontier_family_must_match_selected_catalog(world, mutation, message):
 
 
 def test_cohort_files_must_cover_the_exact_aa_roster(world):
-    edit(world, "livebench", lambda d: d["models"].pop("gpt-5.5"))
+    edit(world, "livebench", lambda d: d["models"].pop("gpt-6.1-sol-low"))
     with pytest.raises(ValueError, match="LiveBench snapshot must contain exactly"):
         run_main(world)
 
@@ -630,7 +657,7 @@ def test_bug_hunt_score_must_be_numeric(world):
 
 
 def test_unknown_display_name_is_rejected(world):
-    edit(world, "aa", aa_edit("gpt-5.5", displayName="Mystery Model"))
+    edit(world, "aa", aa_edit("gpt-6.1-sol-low", displayName="Mystery Model"))
     with pytest.raises(ValueError, match="identity mapping missing: Mystery Model"):
         run_main(world)
 
@@ -664,27 +691,26 @@ def test_without_bug_hunt_every_configuration_needs_a_logged_search(world):
 
     edit(world, "bughunt", unmatch_all_bug_hunt)
     edit(world, "scoreboard", lambda d: d["rows"].clear())
-    edit(world, "inventory", defer_near_family("GPT-5.6 Luna"))
-    edit(world, "inventory", defer_near_family("GPT-6 Astra"))
     with pytest.raises(ValueError, match=r"no exhaustive search for bugHunt logged within 7 days of the cutoff \(O36\)"):
         run_main(world)
 
 
 def unverified(configs):
     def fn(document):
-        record = next(m for m in document["models"] if m["modelId"] == "gpt-5.5")
+        record = next(m for m in document["models"] if m["modelId"] == OFF_COHORT_ID)
         record["matchStatus"] = "reasoning_variant_unverified"
         if configs is not None:
             record["availableOwnerConfigurations"] = configs
     return fn
 
 
-def exclusion_reasons(root, model_id="gpt-5.5"):
+def exclusion_reasons(root, model_id=OFF_COHORT_ID):
     scores = json.loads((root / "data/scores.json").read_text())
     return next(m for m in scores["models"] if m["id"] == model_id)["rankingExclusionReasons"]
 
 
 def test_unverified_reasoning_variant_reports_owner_default_scores(world):
+    add_off_cohort(world)
     edit(world, "bughunt", unverified([{"fixedOf105": 40}, {"fixedOf105": True}, {"fixedOf105": "n/a"}, {}, {"fixedOf105": 12.5}]))
     run_main(world)
     assert exclusion_reasons(world)[0] == (
@@ -694,6 +720,7 @@ def test_unverified_reasoning_variant_reports_owner_default_scores(world):
 
 
 def test_unverified_reasoning_variant_without_numeric_scores(world):
+    add_off_cohort(world)
     edit(world, "bughunt", unverified(None))
     run_main(world)
     reasons = exclusion_reasons(world)
@@ -702,6 +729,7 @@ def test_unverified_reasoning_variant_without_numeric_scores(world):
 
 
 def test_missing_owner_result_has_plain_exclusion_reason(world):
+    add_off_cohort(world)
     run_main(world)
     assert exclusion_reasons(world)[:2] == [
         "No eligible exact-model Bug Hunt result in the selected source snapshot",
@@ -1118,6 +1146,7 @@ def model_rows(root: Path) -> dict:
 
 
 def test_every_model_row_reports_its_aa_frontier_tier(world):
+    add_off_cohort(world)  # O132: the roster is the plotted cohort, so the unplotted sibling is a fixture
     run_main(world)
     inventory = json.loads((world / FILES["inventory"]).read_text())
     best_near = {}
@@ -1153,12 +1182,14 @@ def test_every_model_row_reports_its_aa_frontier_tier(world):
         seen_tiers.add(want[0])
         assert "frontierSelection" in model  # existing field untouched
     assert seen_tiers == {"frontier", "near", None}
-    assert sibling_tiers == {"frontier", "near", None}  # e.g. GPT-6.1 Sol (xhigh), Claude Haiku 5.5 (max), GPT-6.1 Sol (low)
+    assert sibling_tiers == {"frontier", "near", None}  # e.g. GPT-6.1 Sol (xhigh), GPT-6.1 Sol (low), Claude Sonnet 5.5 (xhigh)
     rows = model_rows(world)
-    # O51: a plotted sibling enters the cohort on its own point; an unplotted one (GPT-6.1 Sol (low)) does not.
+    # O51: a plotted sibling enters the cohort on its own point; an unplotted one (Claude Sonnet 5.5 (xhigh)) does not.
     assert rows["claude-haiku-5-5-low"]["rankingInclusionReasons"] == ["Plotted on or within the near gap of AA's rendered frontier (O51)"]
     assert rows["claude-haiku-5-5-low"]["frontierSelection"] is None and rows["claude-haiku-5-5-low"]["family"] == "Claude Haiku 5.5"
-    assert rows["gpt-6.1-sol-low"]["rankingInclusionReasons"] == [] and rows["gpt-6.1-sol-low"]["rankingEligible"] is False
+    assert rows["gpt-6.1-sol-low"]["rankingInclusionReasons"] == ["Plotted on or within the near gap of AA's rendered frontier (O51)"]
+    assert rows[OFF_COHORT_ID]["rankingInclusionReasons"] == [] and rows[OFF_COHORT_ID]["rankingEligible"] is False
+    assert rows[OFF_COHORT_ID]["aaFrontierTier"] is None and rows[OFF_COHORT_ID]["family"] == "Claude Sonnet 5.5"
 
 
 def test_footnote_of_the_best_configuration_is_passed_through(world):
@@ -1171,8 +1202,11 @@ def test_footnote_of_the_best_configuration_is_passed_through(world):
     inventory = json.loads((world / FILES["inventory"]).read_text())
     luna = [r for r in inventory["rows"] if r["family"] == "GPT-6 Luna"]
     best = max(luna, key=lambda r: (r["intelligenceIndex"], -r["totalCostUsd"]))
-    assert model_rows(world)["gpt-6-luna"]["aaFrontierFootnote"] == "note " + best["aaId"]
-    assert model_rows(world)["gpt-6-luna"]["aaFrontierConfiguration"] == best["name"]
+    # O33: the family's primary configuration (GPT-6 Luna (high)) carries its best frontier point's footnote.
+    primary = inv_row(inventory, "GPT-6 Luna")["requiredFamilyModelId"]
+    assert primary == "gpt-6-luna-high"
+    assert model_rows(world)[primary]["aaFrontierFootnote"] == "note " + best["aaId"]
+    assert model_rows(world)[primary]["aaFrontierConfiguration"] == best["name"]
 
 
 def test_frontier_selection_summarises_near_families(world):
@@ -1195,6 +1229,9 @@ def test_frontier_selection_summarises_near_families(world):
 
 
 def test_near_family_without_overlap_coverage_still_ranks(world):
+    # A synthetic single-configuration family (GPT-5.5, as before v5) rostered but not plotted on or near the frontier.
+    add_off_cohort(world, model_id="gpt-5.5", display="GPT-5.5", family="GPT-5.5", slug="gpt-5-5", variant="medium",
+                   source_id="gpt-6.1-sol-low")
     run_main(world)
     base = outputs(world)
     # gpt-5.5 is not plotted on or near the frontier: excluded until it becomes a near family (O51).
@@ -1235,9 +1272,11 @@ def test_frontier_family_that_is_also_near_keeps_only_the_frontier_inclusion_rea
     inventory = json.loads((world / FILES["inventory"]).read_text())
     both = {r["family"] for r in inventory["rows"]} & {r["family"] for r in inventory["nearFrontierRows"]}
     assert both
-    names = {m["name"]: m for m in model_rows(world).values()}
+    # O132: a multi-effort family's primary row is named with its effort, so it is found by the family's required model ID.
+    primary = {r["family"]: r["requiredFamilyModelId"] for r in inventory["rows"]}
+    rows = model_rows(world)
     for family in both:
-        reasons = names[family]["rankingInclusionReasons"]
+        reasons = rows[primary[family]]["rankingInclusionReasons"]
         assert "Required AA Intelligence Index versus total-evaluation-cost frontier family" in reasons
         assert not any(reason.startswith("Near-frontier AA family") for reason in reasons)
 
@@ -1246,8 +1285,8 @@ def test_a_frontier_family_must_rank_its_highest_rendered_frontier_point(world):
     """E193: a catalog that tracks a lower frontier point of a frontier family fails the build."""
 
     def fn(document):
-        document["models"]["claude-haiku-5-5"].update(
-            aaUrl=AA_URL + "claude-haiku-5-5-high", aaSlug="claude-haiku-5-5-high", aaVariant="high")
+        document["models"]["claude-haiku-5-5-high"].update(
+            aaUrl=AA_URL + "claude-haiku-5-5-medium", aaSlug="claude-haiku-5-5-medium", aaVariant="medium")
     edit(world, "aa", fn)
     with pytest.raises(ValueError, match=r"must rank its highest rendered-frontier point \(E193\): Claude Haiku 5.5"):
         run_main(world)
@@ -1256,8 +1295,9 @@ def test_a_frontier_family_must_rank_its_highest_rendered_frontier_point(world):
 def test_a_near_family_must_rank_its_smallest_gap_near_point(world):
     """E193/O51: a near family's primary configuration is its smallest-gap near point, not another tracked configuration."""
 
-    add_near_family(world, family="GPT-5.5", model_id="gpt-5.5", slug="synthetic-gpt-5-5")
-    with pytest.raises(ValueError, match=r"must rank its smallest-gap near point as its primary configuration \(E193, O51\): GPT-5.5"):
+    # Claude Sonnet 5.5 is a near-only family; a synthetic closer near point makes its tracked configuration the wrong one.
+    add_near_family(world, family="Claude Sonnet 5.5", model_id="claude-sonnet-5-5", slug="synthetic-claude-sonnet-5-5", gap=1)
+    with pytest.raises(ValueError, match=r"must rank its smallest-gap near point as its primary configuration \(E193, O51\): Claude Sonnet 5.5"):
         run_main(world)
 
 
@@ -1282,15 +1322,16 @@ def add_sibling(root: Path, monkeypatch, source_id: str, new_id: str, display: s
 
 def test_the_cohort_is_every_plotted_frontier_and_near_configuration(world):
     """O51: every rostered configuration AA plots on its rendered frontier or within the near gap is a cohort row, each
-    effort its own row; an off-frontier roster entry (Muse Spark 1.3, formerly retained under O31/O33) is not."""
+    effort its own row; an off-frontier roster entry (formerly Muse Spark 1.3 under O31/O33; since O132 a fixture) is not."""
 
+    add_off_cohort(world)
     run_main(world)
     inventory = json.loads((world / FILES["inventory"]).read_text())
     plotted = {row["sourceUrl"] for row in inventory["rows"] + inventory["nearFrontierRows"]}
     for model in model_rows(world).values():
         assert bool(model["rankingInclusionReasons"]) is (model["aaUrl"] in plotted), model["id"]
     rows = model_rows(world)
-    assert rows["muse-spark-1-3"]["rankingStatus"] == "excluded_from_primary_cohort"
+    assert rows[OFF_COHORT_ID]["rankingStatus"] == "excluded_from_primary_cohort"
     # O53: a cohort row is ranked in each ranking whose full set it has, and listed when it has none.
     assert rows["claude-opus-5-5-high"]["rankingEligible"] is True and rows["claude-opus-5-5-high"]["rankings"] == {"max": False, "aicd": True, "common": True}
     assert rows["gpt-6.1-sol"]["rankings"] == {"max": True, "aicd": False, "common": True}
@@ -1405,9 +1446,19 @@ def test_frontier_family_diagnostics_use_only_frontier_and_near_frontier_rows():
 
 
 def test_the_legacy_composite_takes_terminal_bench_only_at_the_configurations_effort(world):
-    """AGENTS.md: Claude Opus 5 is ranked at max, but tbench.ai lists Opus 5 at xhigh, so it gets no legacy value."""
+    """AGENTS.md: tbench.ai lists Opus 5.5 at max only, so Claude Opus 5.5 (xhigh) gets no legacy value from that row.
 
+    Since O132 no cohort row carries a Terminal-Bench row at another effort, so tbench.ai's own Opus 5.5 (max) row is
+    attached to both Opus 5.5 configurations: the max configuration takes it, the xhigh one does not."""
+
+    def fn(document):
+        opus_max = next(row for row in document["rows"] if row["model"] == "Opus 5.5 (max)")
+        for model_id in ("claude-opus-5-5", "claude-opus-5-5-xhigh"):
+            document["cohortRows"][model_id] = {**opus_max, "cohortModelId": model_id}
+    edit(world, "tb4", fn)
     run_main(world)
     rows = model_rows(world)
-    assert rows["claude-opus-5"]["terminalBenchV4"] is None and rows["claude-opus-5"]["terminalBenchV4Effort"] is None
+    assert rows["claude-opus-5-5-xhigh"]["terminalBenchV4"] is None and rows["claude-opus-5-5-xhigh"]["terminalBenchV4Effort"] is None
+    assert rows["claude-opus-5-5"]["terminalBenchV4"] == pytest.approx(0.648)  # Opus 5.5 (max) is exact
+    assert rows["claude-opus-5-5"]["terminalBenchV4Effort"] == "Opus 5.5 (max)"
     assert rows["gpt-6-astra"]["terminalBenchV4"] == pytest.approx(0.582)  # GPT-6 Astra (max) is exact

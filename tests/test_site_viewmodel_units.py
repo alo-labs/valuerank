@@ -76,7 +76,7 @@ def test_row_flags_name_subset_provisional_partial_and_caveat_in_order():
     # E233: a provider-claimed leaf is named on the row.
     claimed = _v3_row("a", 1.0, 50.0)
     claimed["quality"]["leaves"] = {"frontierCode": {"sourceType": "model_provider_claim"}, "hle": {"sourceType": None}}
-    assert viewmodel._row_flags(claimed) == ["Provider-claimed leaf: FrontierCode 1.1 is the model provider's own result; competes but earns no interval label"]
+    assert viewmodel._row_flags(claimed) == ["Provider-claimed leaf: FrontierCode 2.0 is the model provider's own result; competes but earns no interval label"]
     # A row without a cost says so instead of claiming a subset workload (AGENTS.md: no cost, no value score).
     assert viewmodel._row_flags(_v3_row("a", None, 50.0, subset=True))[0].startswith("No cost: AA publishes no cost")
 

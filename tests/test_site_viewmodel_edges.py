@@ -90,18 +90,20 @@ def test_route_costs_need_an_api_cost_and_a_positive_multiple(data):
 
 def test_the_plans_worked_example_needs_routed_models(data):
     bundle = viewmodel.build_bundle(data)
-    bundle.plans["workedExample"]["slugs"] = ["glm-5-3"]
-    with pytest.raises(ValueError, match="glm-5-3 has no plan route"):
+    bundle.plans["workedExample"]["slugs"] = ["gemini-4-carbon"]  # on the roster, ranked nowhere, so no plan route
+    with pytest.raises(ValueError, match="gemini-4-carbon has no plan route"):
         viewmodel.plans_page(bundle)
 
 
 def test_terminal_bench_mapping_marks_models_without_rows_or_claims_missing(data):
+    assert viewmodel.build_bundle(data).tb4["cohortMapping"]["gpt-6-astra"]["status"] == "official"
+
     def change(tb4):
-        tb4["rows"] = [r for r in tb4["rows"] if r.get("cohortModelId") != "claude-opus-5"]
-        tb4["cohortRows"].pop("claude-opus-5")
+        tb4["rows"] = [r for r in tb4["rows"] if r.get("cohortModelId") != "gpt-6-astra"]
+        tb4["cohortRows"].pop("gpt-6-astra")
     edit(data, "tb4.json", change)
     bundle = viewmodel.build_bundle(data)
-    assert bundle.tb4["cohortMapping"]["claude-opus-5"] == {"status": "missing", "rank": None, "resolutionRatePct": None, "evaluatedModel": None}
+    assert bundle.tb4["cohortMapping"]["gpt-6-astra"] == {"status": "missing", "rank": None, "resolutionRatePct": None, "evaluatedModel": None}
 
 
 def test_history_with_an_empty_version_is_summarised_as_no_model(data):
