@@ -812,6 +812,11 @@ def test_abstention_sensitivity_and_demand_registry():
     assert population["scoredComponents"] == ["gdp-pdf", "terminal-bench-science"]
     assert population["outputEqualsReasoningPlusAnswer"] is True and set(tokens["populations"]) == {"intelligence-index"}
     assert tokens["tokenOntology"]["canonicalIntelligenceIndexTokenCount.output"]["mapping"] == "inclusive"
+    # E307: each admitted component outside the Index is its own population; the registry covers exactly the admitted set.
+    wider = v.demand_registry({}, ["gdp-pdf", "coding-agent-index", "itbench-aa"])
+    assert set(wider["populations"]) == {"intelligence-index", "coding-agent-index", "itbench-aa"}
+    with pytest.raises(ValueError, match="E307"):
+        v.demand_registry({}, ["gdp-pdf", "not-a-component"])
 
 
 def test_unknown_fees_are_written_as_null():
@@ -2670,3 +2675,16 @@ def test_bug_hunt_harness_sensitivity_moves_values_and_flags_labels():
     assert summed["bases"]["api"]["largestValueMove"] > result["bases"]["api"]["largestValueMove"]
     quiet = v.bug_hunt_harness_sensitivity(rows[1:], per_row)
     assert quiet["rows"] == {} and quiet["bases"]["api"]["largestValueMove"] is None and quiet["labelFlags"] == []
+
+
+def test_clipped_tolerance_is_directional_and_finite():
+    """E305: a clipped row's multiple can move its value in one direction only, by a finite factor."""
+
+    exchange = {"anchorLow": 10.0, "anchorHigh": 1000.0}
+    high = v.clipped_tolerance({"costUsd": 2000.0, "costScore": 0.0}, exchange, 2.0, 4.0)
+    assert high["direction"] == "multiple larger" and high["factor"] == pytest.approx(2.0 * 2.0 ** 0.5) and high["otherDirection"] == "cannot move the value"
+    low = v.clipped_tolerance({"costUsd": 5.0, "costScore": 100.0}, exchange, 2.0, 4.0)
+    assert low["direction"] == "multiple smaller" and low["factor"] == pytest.approx(2.0 * 2.0 ** 0.5)
+    assert v.clipped_tolerance({"costUsd": 5.0, "costScore": 100.0}, exchange, 40.0, 4.0)["status"].startswith("unreachable")
+    assert v.clipped_tolerance({"costUsd": 5.0, "costScore": 100.0}, exchange, None, 4.0) == {"status": "unavailable"}
+    assert v.clipped_tolerance({"costUsd": 5.0, "costScore": 100.0}, {}, 2.0, 4.0) == {"status": "unavailable"}

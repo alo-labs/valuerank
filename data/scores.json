@@ -8852,7 +8852,9 @@
             "valuePointsPerCostDoubling": 2.5,
             "qualityPointsPerCostDoubling": 3.3333333333333335
           }
-        ]
+        ],
+        "anchorLow": 79.4956795491256,
+        "anchorHigh": 21003.636516217204
       },
       "plan": {
         "valuePointsPerCostDoubling": 5.3116785330605065,
@@ -8884,7 +8886,9 @@
             "valuePointsPerCostDoubling": 2.5,
             "qualityPointsPerCostDoubling": 3.3333333333333335
           }
-        ]
+        ],
+        "anchorLow": 64.38113218531683,
+        "anchorHigh": 1681.084087512101
       }
     },
     "meteringMix": {
@@ -12764,7 +12768,7 @@
               "status": "no public category telemetry; demand unconstrained beyond its cost identity"
             }
           },
-          "scoredVector": "d_iW = sum of the admitted Index components' d_ie + d_iA (Coding Agent Index)",
+          "scoredVector": "d_iW = sum over the admitted execution manifest: the admitted Index components' d_ie plus each separately admitted component's own demand (E307)",
           "tokenOntology": {
             "intelligenceIndexEvaluations[].outputTokensPerTask": {
               "canonical": [
@@ -13624,7 +13628,7 @@
               "status": "no public category telemetry; demand unconstrained beyond its cost identity"
             }
           },
-          "scoredVector": "d_iW = sum of the admitted Index components' d_ie + d_iA (Coding Agent Index)",
+          "scoredVector": "d_iW = sum over the admitted execution manifest: the admitted Index components' d_ie plus each separately admitted component's own demand (E307)",
           "tokenOntology": {
             "intelligenceIndexEvaluations[].outputTokensPerTask": {
               "canonical": [
@@ -14460,7 +14464,7 @@
               "status": "no public category telemetry; demand unconstrained beyond its cost identity"
             }
           },
-          "scoredVector": "d_iW = sum of the admitted Index components' d_ie + d_iA (Coding Agent Index)",
+          "scoredVector": "d_iW = sum over the admitted execution manifest: the admitted Index components' d_ie plus each separately admitted component's own demand (E307)",
           "tokenOntology": {
             "intelligenceIndexEvaluations[].outputTokensPerTask": {
               "canonical": [
@@ -15285,7 +15289,7 @@
               "status": "no public category telemetry; demand unconstrained beyond its cost identity"
             }
           },
-          "scoredVector": "d_iW = sum of the admitted Index components' d_ie + d_iA (Coding Agent Index)",
+          "scoredVector": "d_iW = sum over the admitted execution manifest: the admitted Index components' d_ie plus each separately admitted component's own demand (E307)",
           "tokenOntology": {
             "intelligenceIndexEvaluations[].outputTokensPerTask": {
               "canonical": [
@@ -16144,7 +16148,7 @@
               "status": "no public category telemetry; demand unconstrained beyond its cost identity"
             }
           },
-          "scoredVector": "d_iW = sum of the admitted Index components' d_ie + d_iA (Coding Agent Index)",
+          "scoredVector": "d_iW = sum over the admitted execution manifest: the admitted Index components' d_ie plus each separately admitted component's own demand (E307)",
           "tokenOntology": {
             "intelligenceIndexEvaluations[].outputTokensPerTask": {
               "canonical": [
@@ -16819,7 +16823,7 @@
               "status": "no public category telemetry; demand unconstrained beyond its cost identity"
             }
           },
-          "scoredVector": "d_iW = sum of the admitted Index components' d_ie + d_iA (Coding Agent Index)",
+          "scoredVector": "d_iW = sum over the admitted execution manifest: the admitted Index components' d_ie plus each separately admitted component's own demand (E307)",
           "tokenOntology": {
             "intelligenceIndexEvaluations[].outputTokensPerTask": {
               "canonical": [
@@ -17498,7 +17502,7 @@
               "status": "no public category telemetry; demand unconstrained beyond its cost identity"
             }
           },
-          "scoredVector": "d_iW = sum of the admitted Index components' d_ie + d_iA (Coding Agent Index)",
+          "scoredVector": "d_iW = sum over the admitted execution manifest: the admitted Index components' d_ie plus each separately admitted component's own demand (E307)",
           "tokenOntology": {
             "intelligenceIndexEvaluations[].outputTokensPerTask": {
               "canonical": [
@@ -18313,7 +18317,7 @@
               "status": "no public category telemetry; demand unconstrained beyond its cost identity"
             }
           },
-          "scoredVector": "d_iW = sum of the admitted Index components' d_ie + d_iA (Coding Agent Index)",
+          "scoredVector": "d_iW = sum over the admitted execution manifest: the admitted Index components' d_ie plus each separately admitted component's own demand (E307)",
           "tokenOntology": {
             "intelligenceIndexEvaluations[].outputTokensPerTask": {
               "canonical": [
@@ -19149,7 +19153,7 @@
               "outputEqualsReasoningPlusAnswer": true
             }
           },
-          "scoredVector": "d_iW = sum of the admitted Index components' d_ie + d_iA (Coding Agent Index)",
+          "scoredVector": "d_iW = sum over the admitted execution manifest: the admitted Index components' d_ie plus each separately admitted component's own demand (E307)",
           "tokenOntology": {
             "intelligenceIndexEvaluations[].outputTokensPerTask": {
               "canonical": [
@@ -22708,7 +22712,7 @@
             ]
           },
           "costTolerance": 1.8443471854952709,
-          "toleranceUnbounded": []
+          "clippedTolerance": {}
         },
         "plan": {
           "adjacentPairs": 8,
@@ -22820,15 +22824,50 @@
             ]
           },
           "costTolerance": 1.4348357357167214,
-          "toleranceUnbounded": [
-            "claude-haiku-5-5-max@claude-max-20x",
-            "claude-haiku-5-5-max@claude-max-5x",
-            "claude-haiku-5-5-max@claude-pro",
-            "gpt-6-luna@chatgpt-plus",
-            "gpt-6-luna@chatgpt-pro-100",
-            "gpt-6-luna@chatgpt-pro-200",
-            "gpt-6-luna@chatgpt-pro-500"
-          ]
+          "clippedTolerance": {
+            "claude-haiku-5-5-max@claude-max-20x": {
+              "status": "evaluated",
+              "direction": "multiple smaller",
+              "factor": 5.177447990419782,
+              "otherDirection": "cannot move the value"
+            },
+            "claude-haiku-5-5-max@claude-max-5x": {
+              "status": "evaluated",
+              "direction": "multiple smaller",
+              "factor": 5.0555841284586815,
+              "otherDirection": "cannot move the value"
+            },
+            "claude-haiku-5-5-max@claude-pro": {
+              "status": "evaluated",
+              "direction": "multiple smaller",
+              "factor": 5.20129091993391,
+              "otherDirection": "cannot move the value"
+            },
+            "gpt-6-luna@chatgpt-plus": {
+              "status": "evaluated",
+              "direction": "multiple smaller",
+              "factor": 4.706220718431019,
+              "otherDirection": "cannot move the value"
+            },
+            "gpt-6-luna@chatgpt-pro-100": {
+              "status": "evaluated",
+              "direction": "multiple smaller",
+              "factor": 6.129707232030526,
+              "otherDirection": "cannot move the value"
+            },
+            "gpt-6-luna@chatgpt-pro-200": {
+              "status": "evaluated",
+              "direction": "multiple smaller",
+              "factor": 6.054175294574224,
+              "otherDirection": "cannot move the value"
+            },
+            "gpt-6-luna@chatgpt-pro-500": {
+              "status": "evaluated",
+              "direction": "multiple smaller",
+              "factor": 6.258692540609745,
+              "otherDirection": "cannot move the value"
+            }
+          }
         }
       },
       "costedBarLadder": {
@@ -34626,7 +34665,9 @@
               "valuePointsPerCostDoubling": 2.5,
               "qualityPointsPerCostDoubling": 3.3333333333333335
             }
-          ]
+          ],
+          "anchorLow": 18.261574215300808,
+          "anchorHigh": 10957.36378067045
         },
         "plan": {
           "valuePointsPerCostDoubling": 4.112753932191586,
@@ -34658,7 +34699,9 @@
               "valuePointsPerCostDoubling": 2.5,
               "qualityPointsPerCostDoubling": 3.3333333333333335
             }
-          ]
+          ],
+          "anchorLow": 10.353893298399077,
+          "anchorHigh": 699.7779865987153
         }
       },
       "meteringMix": {
@@ -38582,7 +38625,7 @@
                 "outputEqualsReasoningPlusAnswer": true
               }
             },
-            "scoredVector": "d_iW = sum of the admitted Index components' d_ie + d_iA (Coding Agent Index)",
+            "scoredVector": "d_iW = sum over the admitted execution manifest: the admitted Index components' d_ie plus each separately admitted component's own demand (E307)",
             "tokenOntology": {
               "intelligenceIndexEvaluations[].outputTokensPerTask": {
                 "canonical": [
@@ -39331,7 +39374,7 @@
                 "outputEqualsReasoningPlusAnswer": true
               }
             },
-            "scoredVector": "d_iW = sum of the admitted Index components' d_ie + d_iA (Coding Agent Index)",
+            "scoredVector": "d_iW = sum over the admitted execution manifest: the admitted Index components' d_ie plus each separately admitted component's own demand (E307)",
             "tokenOntology": {
               "intelligenceIndexEvaluations[].outputTokensPerTask": {
                 "canonical": [
@@ -40083,7 +40126,7 @@
                 "outputEqualsReasoningPlusAnswer": true
               }
             },
-            "scoredVector": "d_iW = sum of the admitted Index components' d_ie + d_iA (Coding Agent Index)",
+            "scoredVector": "d_iW = sum over the admitted execution manifest: the admitted Index components' d_ie plus each separately admitted component's own demand (E307)",
             "tokenOntology": {
               "intelligenceIndexEvaluations[].outputTokensPerTask": {
                 "canonical": [
@@ -40664,7 +40707,7 @@
                 "outputEqualsReasoningPlusAnswer": true
               }
             },
-            "scoredVector": "d_iW = sum of the admitted Index components' d_ie + d_iA (Coding Agent Index)",
+            "scoredVector": "d_iW = sum over the admitted execution manifest: the admitted Index components' d_ie plus each separately admitted component's own demand (E307)",
             "tokenOntology": {
               "intelligenceIndexEvaluations[].outputTokensPerTask": {
                 "canonical": [
@@ -41416,7 +41459,7 @@
                 "outputEqualsReasoningPlusAnswer": true
               }
             },
-            "scoredVector": "d_iW = sum of the admitted Index components' d_ie + d_iA (Coding Agent Index)",
+            "scoredVector": "d_iW = sum over the admitted execution manifest: the admitted Index components' d_ie plus each separately admitted component's own demand (E307)",
             "tokenOntology": {
               "intelligenceIndexEvaluations[].outputTokensPerTask": {
                 "canonical": [
@@ -41988,7 +42031,7 @@
                 "outputEqualsReasoningPlusAnswer": true
               }
             },
-            "scoredVector": "d_iW = sum of the admitted Index components' d_ie + d_iA (Coding Agent Index)",
+            "scoredVector": "d_iW = sum over the admitted execution manifest: the admitted Index components' d_ie plus each separately admitted component's own demand (E307)",
             "tokenOntology": {
               "intelligenceIndexEvaluations[].outputTokensPerTask": {
                 "canonical": [
@@ -42701,7 +42744,7 @@
                 "outputEqualsReasoningPlusAnswer": true
               }
             },
-            "scoredVector": "d_iW = sum of the admitted Index components' d_ie + d_iA (Coding Agent Index)",
+            "scoredVector": "d_iW = sum over the admitted execution manifest: the admitted Index components' d_ie plus each separately admitted component's own demand (E307)",
             "tokenOntology": {
               "intelligenceIndexEvaluations[].outputTokensPerTask": {
                 "canonical": [
@@ -43258,7 +43301,7 @@
                 "outputEqualsReasoningPlusAnswer": true
               }
             },
-            "scoredVector": "d_iW = sum of the admitted Index components' d_ie + d_iA (Coding Agent Index)",
+            "scoredVector": "d_iW = sum over the admitted execution manifest: the admitted Index components' d_ie plus each separately admitted component's own demand (E307)",
             "tokenOntology": {
               "intelligenceIndexEvaluations[].outputTokensPerTask": {
                 "canonical": [
@@ -43990,7 +44033,7 @@
                 "outputEqualsReasoningPlusAnswer": true
               }
             },
-            "scoredVector": "d_iW = sum of the admitted Index components' d_ie + d_iA (Coding Agent Index)",
+            "scoredVector": "d_iW = sum over the admitted execution manifest: the admitted Index components' d_ie plus each separately admitted component's own demand (E307)",
             "tokenOntology": {
               "intelligenceIndexEvaluations[].outputTokensPerTask": {
                 "canonical": [
@@ -44694,7 +44737,7 @@
                 "outputEqualsReasoningPlusAnswer": true
               }
             },
-            "scoredVector": "d_iW = sum of the admitted Index components' d_ie + d_iA (Coding Agent Index)",
+            "scoredVector": "d_iW = sum over the admitted execution manifest: the admitted Index components' d_ie plus each separately admitted component's own demand (E307)",
             "tokenOntology": {
               "intelligenceIndexEvaluations[].outputTokensPerTask": {
                 "canonical": [
@@ -45438,7 +45481,7 @@
                 "outputEqualsReasoningPlusAnswer": true
               }
             },
-            "scoredVector": "d_iW = sum of the admitted Index components' d_ie + d_iA (Coding Agent Index)",
+            "scoredVector": "d_iW = sum over the admitted execution manifest: the admitted Index components' d_ie plus each separately admitted component's own demand (E307)",
             "tokenOntology": {
               "intelligenceIndexEvaluations[].outputTokensPerTask": {
                 "canonical": [
@@ -46198,7 +46241,7 @@
                 "outputEqualsReasoningPlusAnswer": true
               }
             },
-            "scoredVector": "d_iW = sum of the admitted Index components' d_ie + d_iA (Coding Agent Index)",
+            "scoredVector": "d_iW = sum over the admitted execution manifest: the admitted Index components' d_ie plus each separately admitted component's own demand (E307)",
             "tokenOntology": {
               "intelligenceIndexEvaluations[].outputTokensPerTask": {
                 "canonical": [
@@ -46950,7 +46993,7 @@
                 "outputEqualsReasoningPlusAnswer": true
               }
             },
-            "scoredVector": "d_iW = sum of the admitted Index components' d_ie + d_iA (Coding Agent Index)",
+            "scoredVector": "d_iW = sum over the admitted execution manifest: the admitted Index components' d_ie plus each separately admitted component's own demand (E307)",
             "tokenOntology": {
               "intelligenceIndexEvaluations[].outputTokensPerTask": {
                 "canonical": [
@@ -47666,7 +47709,7 @@
                 "outputEqualsReasoningPlusAnswer": true
               }
             },
-            "scoredVector": "d_iW = sum of the admitted Index components' d_ie + d_iA (Coding Agent Index)",
+            "scoredVector": "d_iW = sum over the admitted execution manifest: the admitted Index components' d_ie plus each separately admitted component's own demand (E307)",
             "tokenOntology": {
               "intelligenceIndexEvaluations[].outputTokensPerTask": {
                 "canonical": [
@@ -48423,7 +48466,7 @@
                 "outputEqualsReasoningPlusAnswer": true
               }
             },
-            "scoredVector": "d_iW = sum of the admitted Index components' d_ie + d_iA (Coding Agent Index)",
+            "scoredVector": "d_iW = sum over the admitted execution manifest: the admitted Index components' d_ie plus each separately admitted component's own demand (E307)",
             "tokenOntology": {
               "intelligenceIndexEvaluations[].outputTokensPerTask": {
                 "canonical": [
@@ -49165,7 +49208,7 @@
                 "outputEqualsReasoningPlusAnswer": true
               }
             },
-            "scoredVector": "d_iW = sum of the admitted Index components' d_ie + d_iA (Coding Agent Index)",
+            "scoredVector": "d_iW = sum over the admitted execution manifest: the admitted Index components' d_ie plus each separately admitted component's own demand (E307)",
             "tokenOntology": {
               "intelligenceIndexEvaluations[].outputTokensPerTask": {
                 "canonical": [
@@ -49917,7 +49960,7 @@
                 "outputEqualsReasoningPlusAnswer": true
               }
             },
-            "scoredVector": "d_iW = sum of the admitted Index components' d_ie + d_iA (Coding Agent Index)",
+            "scoredVector": "d_iW = sum over the admitted execution manifest: the admitted Index components' d_ie plus each separately admitted component's own demand (E307)",
             "tokenOntology": {
               "intelligenceIndexEvaluations[].outputTokensPerTask": {
                 "canonical": [
@@ -50614,7 +50657,7 @@
                 "outputEqualsReasoningPlusAnswer": true
               }
             },
-            "scoredVector": "d_iW = sum of the admitted Index components' d_ie + d_iA (Coding Agent Index)",
+            "scoredVector": "d_iW = sum over the admitted execution manifest: the admitted Index components' d_ie plus each separately admitted component's own demand (E307)",
             "tokenOntology": {
               "intelligenceIndexEvaluations[].outputTokensPerTask": {
                 "canonical": [
@@ -51347,7 +51390,7 @@
                 "outputEqualsReasoningPlusAnswer": true
               }
             },
-            "scoredVector": "d_iW = sum of the admitted Index components' d_ie + d_iA (Coding Agent Index)",
+            "scoredVector": "d_iW = sum over the admitted execution manifest: the admitted Index components' d_ie plus each separately admitted component's own demand (E307)",
             "tokenOntology": {
               "intelligenceIndexEvaluations[].outputTokensPerTask": {
                 "canonical": [
@@ -52080,7 +52123,7 @@
                 "outputEqualsReasoningPlusAnswer": true
               }
             },
-            "scoredVector": "d_iW = sum of the admitted Index components' d_ie + d_iA (Coding Agent Index)",
+            "scoredVector": "d_iW = sum over the admitted execution manifest: the admitted Index components' d_ie plus each separately admitted component's own demand (E307)",
             "tokenOntology": {
               "intelligenceIndexEvaluations[].outputTokensPerTask": {
                 "canonical": [
@@ -56349,7 +56392,7 @@
               ]
             },
             "costTolerance": 3.169149724362998,
-            "toleranceUnbounded": []
+            "clippedTolerance": {}
           },
           "plan": {
             "adjacentPairs": 34,
@@ -56641,26 +56684,116 @@
               ]
             },
             "costTolerance": 2.1493571322117577,
-            "toleranceUnbounded": [
-              "claude-haiku-5-5-high@claude-max-20x",
-              "claude-haiku-5-5-high@claude-max-5x",
-              "claude-haiku-5-5-high@claude-pro",
-              "claude-haiku-5-5-medium@claude-max-20x",
-              "claude-haiku-5-5-medium@claude-max-5x",
-              "claude-haiku-5-5-medium@claude-pro",
-              "gpt-6-luna-high@chatgpt-plus",
-              "gpt-6-luna-high@chatgpt-pro-100",
-              "gpt-6-luna-high@chatgpt-pro-200",
-              "gpt-6-luna-high@chatgpt-pro-500",
-              "gpt-6-luna-medium@chatgpt-plus",
-              "gpt-6-luna-medium@chatgpt-pro-100",
-              "gpt-6-luna-medium@chatgpt-pro-200",
-              "gpt-6-luna-medium@chatgpt-pro-500",
-              "gpt-6-luna-xhigh@chatgpt-plus",
-              "gpt-6-luna-xhigh@chatgpt-pro-100",
-              "gpt-6-luna-xhigh@chatgpt-pro-200",
-              "gpt-6-luna-xhigh@chatgpt-pro-500"
-            ]
+            "clippedTolerance": {
+              "claude-haiku-5-5-high@claude-max-20x": {
+                "status": "evaluated",
+                "direction": "multiple smaller",
+                "factor": 12.103839283065774,
+                "otherDirection": "cannot move the value"
+              },
+              "claude-haiku-5-5-high@claude-max-5x": {
+                "status": "evaluated",
+                "direction": "multiple smaller",
+                "factor": 11.818945914301818,
+                "otherDirection": "cannot move the value"
+              },
+              "claude-haiku-5-5-high@claude-pro": {
+                "status": "evaluated",
+                "direction": "multiple smaller",
+                "factor": 12.159579289997852,
+                "otherDirection": "cannot move the value"
+              },
+              "claude-haiku-5-5-medium@claude-max-20x": {
+                "status": "evaluated",
+                "direction": "multiple smaller",
+                "factor": 19.53548718207818,
+                "otherDirection": "cannot move the value"
+              },
+              "claude-haiku-5-5-medium@claude-max-5x": {
+                "status": "evaluated",
+                "direction": "multiple smaller",
+                "factor": 19.075671860378232,
+                "otherDirection": "cannot move the value"
+              },
+              "claude-haiku-5-5-medium@claude-pro": {
+                "status": "evaluated",
+                "direction": "multiple smaller",
+                "factor": 19.6254510493673,
+                "otherDirection": "cannot move the value"
+              },
+              "gpt-6-luna-high@chatgpt-plus": {
+                "status": "evaluated",
+                "direction": "multiple smaller",
+                "factor": 3.17111724565622,
+                "otherDirection": "cannot move the value"
+              },
+              "gpt-6-luna-high@chatgpt-pro-100": {
+                "status": "evaluated",
+                "direction": "multiple smaller",
+                "factor": 4.130282338478163,
+                "otherDirection": "cannot move the value"
+              },
+              "gpt-6-luna-high@chatgpt-pro-200": {
+                "status": "evaluated",
+                "direction": "multiple smaller",
+                "factor": 4.079387864165162,
+                "otherDirection": "cannot move the value"
+              },
+              "gpt-6-luna-high@chatgpt-pro-500": {
+                "status": "evaluated",
+                "direction": "multiple smaller",
+                "factor": 4.217194440766519,
+                "otherDirection": "cannot move the value"
+              },
+              "gpt-6-luna-medium@chatgpt-plus": {
+                "status": "evaluated",
+                "direction": "multiple smaller",
+                "factor": 4.93547638807235,
+                "otherDirection": "cannot move the value"
+              },
+              "gpt-6-luna-medium@chatgpt-pro-100": {
+                "status": "evaluated",
+                "direction": "multiple smaller",
+                "factor": 6.428305665946085,
+                "otherDirection": "cannot move the value"
+              },
+              "gpt-6-luna-medium@chatgpt-pro-200": {
+                "status": "evaluated",
+                "direction": "multiple smaller",
+                "factor": 6.3490943165078875,
+                "otherDirection": "cannot move the value"
+              },
+              "gpt-6-luna-medium@chatgpt-pro-500": {
+                "status": "evaluated",
+                "direction": "multiple smaller",
+                "factor": 6.563574278063625,
+                "otherDirection": "cannot move the value"
+              },
+              "gpt-6-luna-xhigh@chatgpt-plus": {
+                "status": "evaluated",
+                "direction": "multiple smaller",
+                "factor": 2.3601461548150455,
+                "otherDirection": "cannot move the value"
+              },
+              "gpt-6-luna-xhigh@chatgpt-pro-100": {
+                "status": "evaluated",
+                "direction": "multiple smaller",
+                "factor": 3.074017522629473,
+                "otherDirection": "cannot move the value"
+              },
+              "gpt-6-luna-xhigh@chatgpt-pro-200": {
+                "status": "evaluated",
+                "direction": "multiple smaller",
+                "factor": 3.036138633725034,
+                "otherDirection": "cannot move the value"
+              },
+              "gpt-6-luna-xhigh@chatgpt-pro-500": {
+                "status": "evaluated",
+                "direction": "multiple smaller",
+                "factor": 3.1387030098355146,
+                "otherDirection": "cannot move the value"
+              }
+            }
           }
         },
         "costedBarLadder": {
@@ -77405,7 +77538,9 @@
               "valuePointsPerCostDoubling": 2.5,
               "qualityPointsPerCostDoubling": 3.3333333333333335
             }
-          ]
+          ],
+          "anchorLow": 3.9736187608811266,
+          "anchorHigh": 13288.76172336006
         },
         "plan": {
           "valuePointsPerCostDoubling": 3.6607957518137075,
@@ -77437,7 +77572,9 @@
               "valuePointsPerCostDoubling": 2.5,
               "qualityPointsPerCostDoubling": 3.3333333333333335
             }
-          ]
+          ],
+          "anchorLow": 10.353893298399077,
+          "anchorHigh": 1177.2604121560782
         }
       },
       "meteringMix": {
@@ -82543,7 +82680,7 @@
                 "outputEqualsReasoningPlusAnswer": true
               }
             },
-            "scoredVector": "d_iW = sum of the admitted Index components' d_ie + d_iA (Coding Agent Index)",
+            "scoredVector": "d_iW = sum over the admitted execution manifest: the admitted Index components' d_ie plus each separately admitted component's own demand (E307)",
             "tokenOntology": {
               "intelligenceIndexEvaluations[].outputTokensPerTask": {
                 "canonical": [
@@ -83272,7 +83409,7 @@
                 "outputEqualsReasoningPlusAnswer": true
               }
             },
-            "scoredVector": "d_iW = sum of the admitted Index components' d_ie + d_iA (Coding Agent Index)",
+            "scoredVector": "d_iW = sum over the admitted execution manifest: the admitted Index components' d_ie plus each separately admitted component's own demand (E307)",
             "tokenOntology": {
               "intelligenceIndexEvaluations[].outputTokensPerTask": {
                 "canonical": [
@@ -84020,7 +84157,7 @@
                 "outputEqualsReasoningPlusAnswer": true
               }
             },
-            "scoredVector": "d_iW = sum of the admitted Index components' d_ie + d_iA (Coding Agent Index)",
+            "scoredVector": "d_iW = sum over the admitted execution manifest: the admitted Index components' d_ie plus each separately admitted component's own demand (E307)",
             "tokenOntology": {
               "intelligenceIndexEvaluations[].outputTokensPerTask": {
                 "canonical": [
@@ -84740,7 +84877,7 @@
                 "outputEqualsReasoningPlusAnswer": true
               }
             },
-            "scoredVector": "d_iW = sum of the admitted Index components' d_ie + d_iA (Coding Agent Index)",
+            "scoredVector": "d_iW = sum over the admitted execution manifest: the admitted Index components' d_ie plus each separately admitted component's own demand (E307)",
             "tokenOntology": {
               "intelligenceIndexEvaluations[].outputTokensPerTask": {
                 "canonical": [
@@ -85423,7 +85560,7 @@
                 "outputEqualsReasoningPlusAnswer": true
               }
             },
-            "scoredVector": "d_iW = sum of the admitted Index components' d_ie + d_iA (Coding Agent Index)",
+            "scoredVector": "d_iW = sum over the admitted execution manifest: the admitted Index components' d_ie plus each separately admitted component's own demand (E307)",
             "tokenOntology": {
               "intelligenceIndexEvaluations[].outputTokensPerTask": {
                 "canonical": [
@@ -86152,7 +86289,7 @@
                 "outputEqualsReasoningPlusAnswer": true
               }
             },
-            "scoredVector": "d_iW = sum of the admitted Index components' d_ie + d_iA (Coding Agent Index)",
+            "scoredVector": "d_iW = sum over the admitted execution manifest: the admitted Index components' d_ie plus each separately admitted component's own demand (E307)",
             "tokenOntology": {
               "intelligenceIndexEvaluations[].outputTokensPerTask": {
                 "canonical": [
@@ -86898,7 +87035,7 @@
                 "outputEqualsReasoningPlusAnswer": true
               }
             },
-            "scoredVector": "d_iW = sum of the admitted Index components' d_ie + d_iA (Coding Agent Index)",
+            "scoredVector": "d_iW = sum over the admitted execution manifest: the admitted Index components' d_ie plus each separately admitted component's own demand (E307)",
             "tokenOntology": {
               "intelligenceIndexEvaluations[].outputTokensPerTask": {
                 "canonical": [
@@ -87440,7 +87577,7 @@
                 "outputEqualsReasoningPlusAnswer": true
               }
             },
-            "scoredVector": "d_iW = sum of the admitted Index components' d_ie + d_iA (Coding Agent Index)",
+            "scoredVector": "d_iW = sum over the admitted execution manifest: the admitted Index components' d_ie plus each separately admitted component's own demand (E307)",
             "tokenOntology": {
               "intelligenceIndexEvaluations[].outputTokensPerTask": {
                 "canonical": [
@@ -88162,7 +88299,7 @@
                 "outputEqualsReasoningPlusAnswer": true
               }
             },
-            "scoredVector": "d_iW = sum of the admitted Index components' d_ie + d_iA (Coding Agent Index)",
+            "scoredVector": "d_iW = sum over the admitted execution manifest: the admitted Index components' d_ie plus each separately admitted component's own demand (E307)",
             "tokenOntology": {
               "intelligenceIndexEvaluations[].outputTokensPerTask": {
                 "canonical": [
@@ -88704,7 +88841,7 @@
                 "outputEqualsReasoningPlusAnswer": true
               }
             },
-            "scoredVector": "d_iW = sum of the admitted Index components' d_ie + d_iA (Coding Agent Index)",
+            "scoredVector": "d_iW = sum over the admitted execution manifest: the admitted Index components' d_ie plus each separately admitted component's own demand (E307)",
             "tokenOntology": {
               "intelligenceIndexEvaluations[].outputTokensPerTask": {
                 "canonical": [
@@ -89386,7 +89523,7 @@
                 "outputEqualsReasoningPlusAnswer": true
               }
             },
-            "scoredVector": "d_iW = sum of the admitted Index components' d_ie + d_iA (Coding Agent Index)",
+            "scoredVector": "d_iW = sum over the admitted execution manifest: the admitted Index components' d_ie plus each separately admitted component's own demand (E307)",
             "tokenOntology": {
               "intelligenceIndexEvaluations[].outputTokensPerTask": {
                 "canonical": [
@@ -89936,7 +90073,7 @@
                 "outputEqualsReasoningPlusAnswer": true
               }
             },
-            "scoredVector": "d_iW = sum of the admitted Index components' d_ie + d_iA (Coding Agent Index)",
+            "scoredVector": "d_iW = sum over the admitted execution manifest: the admitted Index components' d_ie plus each separately admitted component's own demand (E307)",
             "tokenOntology": {
               "intelligenceIndexEvaluations[].outputTokensPerTask": {
                 "canonical": [
@@ -90619,7 +90756,7 @@
                 "outputEqualsReasoningPlusAnswer": true
               }
             },
-            "scoredVector": "d_iW = sum of the admitted Index components' d_ie + d_iA (Coding Agent Index)",
+            "scoredVector": "d_iW = sum over the admitted execution manifest: the admitted Index components' d_ie plus each separately admitted component's own demand (E307)",
             "tokenOntology": {
               "intelligenceIndexEvaluations[].outputTokensPerTask": {
                 "canonical": [
@@ -91321,7 +91458,7 @@
                 "outputEqualsReasoningPlusAnswer": true
               }
             },
-            "scoredVector": "d_iW = sum of the admitted Index components' d_ie + d_iA (Coding Agent Index)",
+            "scoredVector": "d_iW = sum over the admitted execution manifest: the admitted Index components' d_ie plus each separately admitted component's own demand (E307)",
             "tokenOntology": {
               "intelligenceIndexEvaluations[].outputTokensPerTask": {
                 "canonical": [
@@ -91995,7 +92132,7 @@
                 "outputEqualsReasoningPlusAnswer": true
               }
             },
-            "scoredVector": "d_iW = sum of the admitted Index components' d_ie + d_iA (Coding Agent Index)",
+            "scoredVector": "d_iW = sum over the admitted execution manifest: the admitted Index components' d_ie plus each separately admitted component's own demand (E307)",
             "tokenOntology": {
               "intelligenceIndexEvaluations[].outputTokensPerTask": {
                 "canonical": [
@@ -92709,7 +92846,7 @@
                 "outputEqualsReasoningPlusAnswer": true
               }
             },
-            "scoredVector": "d_iW = sum of the admitted Index components' d_ie + d_iA (Coding Agent Index)",
+            "scoredVector": "d_iW = sum over the admitted execution manifest: the admitted Index components' d_ie plus each separately admitted component's own demand (E307)",
             "tokenOntology": {
               "intelligenceIndexEvaluations[].outputTokensPerTask": {
                 "canonical": [
@@ -93439,7 +93576,7 @@
                 "outputEqualsReasoningPlusAnswer": true
               }
             },
-            "scoredVector": "d_iW = sum of the admitted Index components' d_ie + d_iA (Coding Agent Index)",
+            "scoredVector": "d_iW = sum over the admitted execution manifest: the admitted Index components' d_ie plus each separately admitted component's own demand (E307)",
             "tokenOntology": {
               "intelligenceIndexEvaluations[].outputTokensPerTask": {
                 "canonical": [
@@ -94161,7 +94298,7 @@
                 "outputEqualsReasoningPlusAnswer": true
               }
             },
-            "scoredVector": "d_iW = sum of the admitted Index components' d_ie + d_iA (Coding Agent Index)",
+            "scoredVector": "d_iW = sum over the admitted execution manifest: the admitted Index components' d_ie plus each separately admitted component's own demand (E307)",
             "tokenOntology": {
               "intelligenceIndexEvaluations[].outputTokensPerTask": {
                 "canonical": [
@@ -94847,7 +94984,7 @@
                 "outputEqualsReasoningPlusAnswer": true
               }
             },
-            "scoredVector": "d_iW = sum of the admitted Index components' d_ie + d_iA (Coding Agent Index)",
+            "scoredVector": "d_iW = sum over the admitted execution manifest: the admitted Index components' d_ie plus each separately admitted component's own demand (E307)",
             "tokenOntology": {
               "intelligenceIndexEvaluations[].outputTokensPerTask": {
                 "canonical": [
@@ -95574,7 +95711,7 @@
                 "outputEqualsReasoningPlusAnswer": true
               }
             },
-            "scoredVector": "d_iW = sum of the admitted Index components' d_ie + d_iA (Coding Agent Index)",
+            "scoredVector": "d_iW = sum over the admitted execution manifest: the admitted Index components' d_ie plus each separately admitted component's own demand (E307)",
             "tokenOntology": {
               "intelligenceIndexEvaluations[].outputTokensPerTask": {
                 "canonical": [
@@ -96285,7 +96422,7 @@
                 "outputEqualsReasoningPlusAnswer": true
               }
             },
-            "scoredVector": "d_iW = sum of the admitted Index components' d_ie + d_iA (Coding Agent Index)",
+            "scoredVector": "d_iW = sum over the admitted execution manifest: the admitted Index components' d_ie plus each separately admitted component's own demand (E307)",
             "tokenOntology": {
               "intelligenceIndexEvaluations[].outputTokensPerTask": {
                 "canonical": [
@@ -97007,7 +97144,7 @@
                 "outputEqualsReasoningPlusAnswer": true
               }
             },
-            "scoredVector": "d_iW = sum of the admitted Index components' d_ie + d_iA (Coding Agent Index)",
+            "scoredVector": "d_iW = sum over the admitted execution manifest: the admitted Index components' d_ie plus each separately admitted component's own demand (E307)",
             "tokenOntology": {
               "intelligenceIndexEvaluations[].outputTokensPerTask": {
                 "canonical": [
@@ -97674,7 +97811,7 @@
                 "outputEqualsReasoningPlusAnswer": true
               }
             },
-            "scoredVector": "d_iW = sum of the admitted Index components' d_ie + d_iA (Coding Agent Index)",
+            "scoredVector": "d_iW = sum over the admitted execution manifest: the admitted Index components' d_ie plus each separately admitted component's own demand (E307)",
             "tokenOntology": {
               "intelligenceIndexEvaluations[].outputTokensPerTask": {
                 "canonical": [
@@ -98377,7 +98514,7 @@
                 "outputEqualsReasoningPlusAnswer": true
               }
             },
-            "scoredVector": "d_iW = sum of the admitted Index components' d_ie + d_iA (Coding Agent Index)",
+            "scoredVector": "d_iW = sum over the admitted execution manifest: the admitted Index components' d_ie plus each separately admitted component's own demand (E307)",
             "tokenOntology": {
               "intelligenceIndexEvaluations[].outputTokensPerTask": {
                 "canonical": [
@@ -99080,7 +99217,7 @@
                 "outputEqualsReasoningPlusAnswer": true
               }
             },
-            "scoredVector": "d_iW = sum of the admitted Index components' d_ie + d_iA (Coding Agent Index)",
+            "scoredVector": "d_iW = sum over the admitted execution manifest: the admitted Index components' d_ie plus each separately admitted component's own demand (E307)",
             "tokenOntology": {
               "intelligenceIndexEvaluations[].outputTokensPerTask": {
                 "canonical": [
@@ -99786,7 +99923,7 @@
                 "outputEqualsReasoningPlusAnswer": true
               }
             },
-            "scoredVector": "d_iW = sum of the admitted Index components' d_ie + d_iA (Coding Agent Index)",
+            "scoredVector": "d_iW = sum over the admitted execution manifest: the admitted Index components' d_ie plus each separately admitted component's own demand (E307)",
             "tokenOntology": {
               "intelligenceIndexEvaluations[].outputTokensPerTask": {
                 "canonical": [
@@ -100456,7 +100593,7 @@
                 "outputEqualsReasoningPlusAnswer": true
               }
             },
-            "scoredVector": "d_iW = sum of the admitted Index components' d_ie + d_iA (Coding Agent Index)",
+            "scoredVector": "d_iW = sum over the admitted execution manifest: the admitted Index components' d_ie plus each separately admitted component's own demand (E307)",
             "tokenOntology": {
               "intelligenceIndexEvaluations[].outputTokensPerTask": {
                 "canonical": [
@@ -101123,7 +101260,7 @@
                 "outputEqualsReasoningPlusAnswer": true
               }
             },
-            "scoredVector": "d_iW = sum of the admitted Index components' d_ie + d_iA (Coding Agent Index)",
+            "scoredVector": "d_iW = sum over the admitted execution manifest: the admitted Index components' d_ie plus each separately admitted component's own demand (E307)",
             "tokenOntology": {
               "intelligenceIndexEvaluations[].outputTokensPerTask": {
                 "canonical": [
@@ -101797,7 +101934,7 @@
                 "outputEqualsReasoningPlusAnswer": true
               }
             },
-            "scoredVector": "d_iW = sum of the admitted Index components' d_ie + d_iA (Coding Agent Index)",
+            "scoredVector": "d_iW = sum over the admitted execution manifest: the admitted Index components' d_ie plus each separately admitted component's own demand (E307)",
             "tokenOntology": {
               "intelligenceIndexEvaluations[].outputTokensPerTask": {
                 "canonical": [
@@ -102464,7 +102601,7 @@
                 "outputEqualsReasoningPlusAnswer": true
               }
             },
-            "scoredVector": "d_iW = sum of the admitted Index components' d_ie + d_iA (Coding Agent Index)",
+            "scoredVector": "d_iW = sum over the admitted execution manifest: the admitted Index components' d_ie plus each separately admitted component's own demand (E307)",
             "tokenOntology": {
               "intelligenceIndexEvaluations[].outputTokensPerTask": {
                 "canonical": [
@@ -103166,7 +103303,7 @@
                 "outputEqualsReasoningPlusAnswer": true
               }
             },
-            "scoredVector": "d_iW = sum of the admitted Index components' d_ie + d_iA (Coding Agent Index)",
+            "scoredVector": "d_iW = sum over the admitted execution manifest: the admitted Index components' d_ie plus each separately admitted component's own demand (E307)",
             "tokenOntology": {
               "intelligenceIndexEvaluations[].outputTokensPerTask": {
                 "canonical": [
@@ -103869,7 +104006,7 @@
                 "outputEqualsReasoningPlusAnswer": true
               }
             },
-            "scoredVector": "d_iW = sum of the admitted Index components' d_ie + d_iA (Coding Agent Index)",
+            "scoredVector": "d_iW = sum over the admitted execution manifest: the admitted Index components' d_ie plus each separately admitted component's own demand (E307)",
             "tokenOntology": {
               "intelligenceIndexEvaluations[].outputTokensPerTask": {
                 "canonical": [
@@ -104583,7 +104720,7 @@
                 "outputEqualsReasoningPlusAnswer": true
               }
             },
-            "scoredVector": "d_iW = sum of the admitted Index components' d_ie + d_iA (Coding Agent Index)",
+            "scoredVector": "d_iW = sum over the admitted execution manifest: the admitted Index components' d_ie plus each separately admitted component's own demand (E307)",
             "tokenOntology": {
               "intelligenceIndexEvaluations[].outputTokensPerTask": {
                 "canonical": [
@@ -110121,7 +110258,7 @@
               ]
             },
             "costTolerance": 3.3992552890219683,
-            "toleranceUnbounded": []
+            "clippedTolerance": {}
           },
           "plan": {
             "adjacentPairs": 49,
@@ -110589,42 +110726,212 @@
               ]
             },
             "costTolerance": 2.0900772417886575,
-            "toleranceUnbounded": [
-              "claude-haiku-5-5-high@claude-max-20x",
-              "claude-haiku-5-5-high@claude-max-5x",
-              "claude-haiku-5-5-high@claude-pro",
-              "claude-haiku-5-5-low@claude-max-20x",
-              "claude-haiku-5-5-low@claude-max-5x",
-              "claude-haiku-5-5-low@claude-pro",
-              "claude-haiku-5-5-max@claude-max-20x",
-              "claude-haiku-5-5-max@claude-max-5x",
-              "claude-haiku-5-5-max@claude-pro",
-              "claude-haiku-5-5-medium@claude-max-20x",
-              "claude-haiku-5-5-medium@claude-max-5x",
-              "claude-haiku-5-5-medium@claude-pro",
-              "claude-haiku-5-5@claude-max-20x",
-              "claude-haiku-5-5@claude-max-5x",
-              "claude-haiku-5-5@claude-pro",
-              "gpt-6-luna-high@chatgpt-plus",
-              "gpt-6-luna-high@chatgpt-pro-100",
-              "gpt-6-luna-high@chatgpt-pro-200",
-              "gpt-6-luna-high@chatgpt-pro-500",
-              "gpt-6-luna-low@chatgpt-plus",
-              "gpt-6-luna-low@chatgpt-pro-100",
-              "gpt-6-luna-low@chatgpt-pro-200",
-              "gpt-6-luna-low@chatgpt-pro-500",
-              "gpt-6-luna-medium@chatgpt-plus",
-              "gpt-6-luna-medium@chatgpt-pro-100",
-              "gpt-6-luna-medium@chatgpt-pro-200",
-              "gpt-6-luna-medium@chatgpt-pro-500",
-              "gpt-6-luna-xhigh@chatgpt-plus",
-              "gpt-6-luna-xhigh@chatgpt-pro-100",
-              "gpt-6-luna-xhigh@chatgpt-pro-200",
-              "gpt-6-luna-xhigh@chatgpt-pro-500",
-              "gpt-6.1-terra-low@chatgpt-pro-100",
-              "gpt-6.1-terra-low@chatgpt-pro-200",
-              "gpt-6.1-terra-low@chatgpt-pro-500"
-            ]
+            "clippedTolerance": {
+              "claude-haiku-5-5-high@claude-max-20x": {
+                "status": "evaluated",
+                "direction": "multiple smaller",
+                "factor": 11.770011900149372,
+                "otherDirection": "cannot move the value"
+              },
+              "claude-haiku-5-5-high@claude-max-5x": {
+                "status": "evaluated",
+                "direction": "multiple smaller",
+                "factor": 11.492975972770791,
+                "otherDirection": "cannot move the value"
+              },
+              "claude-haiku-5-5-high@claude-pro": {
+                "status": "evaluated",
+                "direction": "multiple smaller",
+                "factor": 11.824214581593006,
+                "otherDirection": "cannot move the value"
+              },
+              "claude-haiku-5-5-low@claude-max-20x": {
+                "status": "evaluated",
+                "direction": "multiple smaller",
+                "factor": 34.48741681716519,
+                "otherDirection": "cannot move the value"
+              },
+              "claude-haiku-5-5-low@claude-max-5x": {
+                "status": "evaluated",
+                "direction": "multiple smaller",
+                "factor": 33.675671376133494,
+                "otherDirection": "cannot move the value"
+              },
+              "claude-haiku-5-5-low@claude-pro": {
+                "status": "evaluated",
+                "direction": "multiple smaller",
+                "factor": 34.646236577367034,
+                "otherDirection": "cannot move the value"
+              },
+              "claude-haiku-5-5-max@claude-max-20x": {
+                "status": "evaluated",
+                "direction": "multiple smaller",
+                "factor": 4.687830538792427,
+                "otherDirection": "cannot move the value"
+              },
+              "claude-haiku-5-5-max@claude-max-5x": {
+                "status": "evaluated",
+                "direction": "multiple smaller",
+                "factor": 4.577491017326733,
+                "otherDirection": "cannot move the value"
+              },
+              "claude-haiku-5-5-max@claude-pro": {
+                "status": "evaluated",
+                "direction": "multiple smaller",
+                "factor": 4.709418706035715,
+                "otherDirection": "cannot move the value"
+              },
+              "claude-haiku-5-5-medium@claude-max-20x": {
+                "status": "evaluated",
+                "direction": "multiple smaller",
+                "factor": 18.996692803908097,
+                "otherDirection": "cannot move the value"
+              },
+              "claude-haiku-5-5-medium@claude-max-5x": {
+                "status": "evaluated",
+                "direction": "multiple smaller",
+                "factor": 18.54955932157152,
+                "otherDirection": "cannot move the value"
+              },
+              "claude-haiku-5-5-medium@claude-pro": {
+                "status": "evaluated",
+                "direction": "multiple smaller",
+                "factor": 19.084175441756553,
+                "otherDirection": "cannot move the value"
+              },
+              "claude-haiku-5-5@claude-max-20x": {
+                "status": "evaluated",
+                "direction": "multiple smaller",
+                "factor": 7.735796604286848,
+                "otherDirection": "cannot move the value"
+              },
+              "claude-haiku-5-5@claude-max-5x": {
+                "status": "evaluated",
+                "direction": "multiple smaller",
+                "factor": 7.553715770005492,
+                "otherDirection": "cannot move the value"
+              },
+              "claude-haiku-5-5@claude-pro": {
+                "status": "evaluated",
+                "direction": "multiple smaller",
+                "factor": 7.771421115341894,
+                "otherDirection": "cannot move the value"
+              },
+              "gpt-6-luna-high@chatgpt-plus": {
+                "status": "evaluated",
+                "direction": "multiple smaller",
+                "factor": 3.0836569162283864,
+                "otherDirection": "cannot move the value"
+              },
+              "gpt-6-luna-high@chatgpt-pro-100": {
+                "status": "evaluated",
+                "direction": "multiple smaller",
+                "factor": 4.016367958791293,
+                "otherDirection": "cannot move the value"
+              },
+              "gpt-6-luna-high@chatgpt-pro-200": {
+                "status": "evaluated",
+                "direction": "multiple smaller",
+                "factor": 3.9668771687777515,
+                "otherDirection": "cannot move the value"
+              },
+              "gpt-6-luna-high@chatgpt-pro-500": {
+                "status": "evaluated",
+                "direction": "multiple smaller",
+                "factor": 4.100883000199035,
+                "otherDirection": "cannot move the value"
+              },
+              "gpt-6-luna-low@chatgpt-plus": {
+                "status": "evaluated",
+                "direction": "multiple smaller",
+                "factor": 22.056411069862712,
+                "otherDirection": "cannot move the value"
+              },
+              "gpt-6-luna-low@chatgpt-pro-100": {
+                "status": "evaluated",
+                "direction": "multiple smaller",
+                "factor": 28.727794665068103,
+                "otherDirection": "cannot move the value"
+              },
+              "gpt-6-luna-low@chatgpt-pro-200": {
+                "status": "evaluated",
+                "direction": "multiple smaller",
+                "factor": 28.373802882465363,
+                "otherDirection": "cannot move the value"
+              },
+              "gpt-6-luna-low@chatgpt-pro-500": {
+                "status": "evaluated",
+                "direction": "multiple smaller",
+                "factor": 29.332303709205082,
+                "otherDirection": "cannot move the value"
+              },
+              "gpt-6-luna-medium@chatgpt-plus": {
+                "status": "evaluated",
+                "direction": "multiple smaller",
+                "factor": 4.799354523964239,
+                "otherDirection": "cannot move the value"
+              },
+              "gpt-6-luna-medium@chatgpt-pro-100": {
+                "status": "evaluated",
+                "direction": "multiple smaller",
+                "factor": 6.251011139237373,
+                "otherDirection": "cannot move the value"
+              },
+              "gpt-6-luna-medium@chatgpt-pro-200": {
+                "status": "evaluated",
+                "direction": "multiple smaller",
+                "factor": 6.173984461692269,
+                "otherDirection": "cannot move the value"
+              },
+              "gpt-6-luna-medium@chatgpt-pro-500": {
+                "status": "evaluated",
+                "direction": "multiple smaller",
+                "factor": 6.382549003968245,
+                "otherDirection": "cannot move the value"
+              },
+              "gpt-6-luna-xhigh@chatgpt-plus": {
+                "status": "evaluated",
+                "direction": "multiple smaller",
+                "factor": 2.2950526422744066,
+                "otherDirection": "cannot move the value"
+              },
+              "gpt-6-luna-xhigh@chatgpt-pro-100": {
+                "status": "evaluated",
+                "direction": "multiple smaller",
+                "factor": 2.98923523160432,
+                "otherDirection": "cannot move the value"
+              },
+              "gpt-6-luna-xhigh@chatgpt-pro-200": {
+                "status": "evaluated",
+                "direction": "multiple smaller",
+                "factor": 2.952401053394978,
+                "otherDirection": "cannot move the value"
+              },
+              "gpt-6-luna-xhigh@chatgpt-pro-500": {
+                "status": "evaluated",
+                "direction": "multiple smaller",
+                "factor": 3.0521366743925813,
+                "otherDirection": "cannot move the value"
+              },
+              "gpt-6.1-terra-low@chatgpt-pro-100": {
+                "status": "evaluated",
+                "direction": "multiple smaller",
+                "factor": 2.1754844369556765,
+                "otherDirection": "cannot move the value"
+              },
+              "gpt-6.1-terra-low@chatgpt-pro-200": {
+                "status": "evaluated",
+                "direction": "multiple smaller",
+                "factor": 2.148677519723047,
+                "otherDirection": "cannot move the value"
+              },
+              "gpt-6.1-terra-low@chatgpt-pro-500": {
+                "status": "evaluated",
+                "direction": "multiple smaller",
+                "factor": 2.221262403306781,
+                "otherDirection": "cannot move the value"
+              }
+            }
           }
         },
         "costedBarLadder": {

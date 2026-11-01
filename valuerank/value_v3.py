@@ -375,12 +375,19 @@ def demand_registry(page: dict, admitted: list[str]) -> dict:
             "outputEqualsReasoningPlusAnswer": (totals["output"] == totals["reasoning"] + totals["answer"]) if inclusive else None,
         },
     }
-    if basket.CODING_AGENT_INDEX in admitted:
-        populations[basket.CODING_AGENT_INDEX] = {"conservationTotalId": None, "status": "no public category telemetry; demand unconstrained beyond its cost identity"}
+    # E307 (reviewer 81): every admitted component outside the Index is a population of its own (the Coding Agent Index and,
+    # where a ranking admits it, each chart-costed component such as ITBench-AA), and the registry must cover exactly the
+    # admitted components.
+    for component in [basket.CODING_AGENT_INDEX, *basket.CHART_COMPONENTS]:
+        if component in admitted:
+            populations[component] = {"conservationTotalId": None, "status": "no public category telemetry; demand unconstrained beyond its cost identity"}
+    covered = set(populations["intelligence-index"]["scoredComponents"]) | (set(populations) - {"intelligence-index"})
+    if covered != set(admitted):
+        raise ValueError(f"the demand registry covers {sorted(covered)}, not the admitted components {sorted(admitted)} (E307)")
     return {
         "status": "set-identified feasible region; M_W not identified",
         "populations": populations,
-        "scoredVector": "d_iW = sum of the admitted Index components' d_ie + d_iA (Coding Agent Index)",
+        "scoredVector": "d_iW = sum over the admitted execution manifest: the admitted Index components' d_ie plus each separately admitted component's own demand (E307)",
         "tokenOntology": TOKEN_ONTOLOGY,
         "identities": "p . d_ie = C_ie for each component under AA's category-linear valuation (E157: a banded provider tariff needs band-allocated demand, unavailable, so tariff-corrected valuation and transport stay unidentified); the Index totals bound the sum over all ten Index executions only",
         "missingForIdentification": ["category-specific burn coefficients for each plan meter", "or a controlled measurement on a workload compatible with W"],
@@ -2678,7 +2685,8 @@ def score(assembled: dict, frozen: dict) -> dict:
             "qualityVsValue": diagnostics.kendall_tau_b([row["summary"].displayed for row in panel_rows], values) if len(panel_rows) >= 2 else None,
         }
         main_anchors = frozen["workloads"][main]["anchors"][basis]
-        exchange[basis] = {**anchor_math.exchange_rate(main_anchors, BETA), "curve": anchor_math.exchange_rate_curve(BETA, [4.0, 16.0, 64.0, 256.0, 1024.0])}
+        exchange[basis] = {**anchor_math.exchange_rate(main_anchors, BETA), "curve": anchor_math.exchange_rate_curve(BETA, [4.0, 16.0, 64.0, 256.0, 1024.0]),
+                           "anchorLow": main_anchors["low"], "anchorHigh": main_anchors["high"]}
     hold = any(item["hold"] for basis in BASES for item in gates[basis])
     yield_ = plan_routes.identification_yield({row["id"]: row["routeSelection"]["selected"] for row in plan_rows})
     agreement = _quality_agreement(rows)
@@ -3540,11 +3548,31 @@ def rank_separability(assembled: dict, per_row: dict, exchange: dict | None = No
         # I28: the factor by which a cost (on the Plan basis, a transferred multiple) can be wrong before the value moves
         # by the median separation threshold; a tolerance, not an estimate of any transfer's error.
         result[basis]["costTolerance"] = None if median is None or not doubling else 2.0 ** (median / doubling)
-        # E272: the tolerance uses the unclipped slope; an assumption row whose cost score is clipped at an anchor has slope 0
-        # there, so its multiple can be wrong by any factor until the row re-enters the scale.
-        result[basis]["toleranceUnbounded"] = sorted(row_id for row_id in (assumed if basis == "plan" else [])
-                                                     if (plan_scores.get(row_id) or {}).get(basis, {}).get("costScore") in (0.0, 100.0))
+        # E272 as corrected by E305 (reviewer 81): a clipped assumption row has slope 0 at its anchor, but a large enough error
+        # in its multiple moves its cost back across the anchor, so its tolerance is finite in one direction and unreachable
+        # in the other; each is published.
+        result[basis]["clippedTolerance"] = {
+            row_id: clipped_tolerance(plan_scores[row_id][basis], (exchange or {}).get(basis) or {}, median, doubling)
+            for row_id in (assumed if basis == "plan" else [])
+            if (plan_scores.get(row_id) or {}).get(basis, {}).get("costScore") in (0.0, 100.0)
+        }
     return result
+
+
+def clipped_tolerance(scores: dict, exchange: dict, median: float | None, doubling: float | None) -> dict:
+    """E305: for a row whose cost score is clipped at an anchor, the factor by which its multiple must move (in the one
+    direction that can move its value) before the value changes by the median separation threshold; the other direction
+    cannot move it. A row clipped at the high anchor needs a larger multiple (lower cost), one at the low anchor a smaller."""
+
+    if median is None or not doubling or exchange.get("anchorLow") is None:
+        return {"status": "unavailable"}
+    low, high, cost = exchange["anchorLow"], exchange["anchorHigh"], scores["costUsd"]
+    reach = 2.0 ** (median / doubling)
+    if reach > high / low:
+        return {"status": "unreachable in either direction: the threshold exceeds the whole cost scale"}
+    if scores["costScore"] == 0.0:
+        return {"status": "evaluated", "direction": "multiple larger", "factor": cost / high * reach, "otherDirection": "cannot move the value"}
+    return {"status": "evaluated", "direction": "multiple smaller", "factor": low / cost * reach, "otherDirection": "cannot move the value"}
 
 
 SEPARABILITY_CORRELATIONS = (0.0, 0.3, 0.6)

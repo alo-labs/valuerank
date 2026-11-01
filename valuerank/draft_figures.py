@@ -240,7 +240,9 @@ def named_figures(scores: dict, data: Path = DATA) -> dict:
         figures[f"{track}.indicativeClipped.plan"] = order(item["id"] for item in section["listedIndicative"] if item["plan"]["costScore"] in (0.0, 100.0))
         main = [row["id"] for row in section["rows"] if row["cost"]["workload"] == section["mainWorkload"]]
         figures[f"{track}.mainWorkloadRows"] = len(main)
-        figures[f"{track}.subsetRows"] = order(item for item in ids if item not in main)
+        figures[f"{track}.subsetRows"] = order(item for item in ids if item not in main) or "none"
+        # Reviewer 81: the rows flagged "partial component" (E37, E209), rendered rather than named by hand.
+        figures[f"{track}.partialRows"] = order(row["id"] for row in section["rows"] if row["cost"].get("partialComponents")) or "none"
         # E209 (reviewer 74 M2): scored main-workload rows outside the admission reference panel are in the influence panel only.
         reference = set(section["admission"]["referencePanel"])
         figures[f"{track}.influenceOnlyRows"] = order(item for item in main if item not in reference) or "none"

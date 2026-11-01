@@ -2225,3 +2225,16 @@ Asked on I64 Q1 whether future O71 admissions should be executed by the build fr
 - E302. Bug Hunt's z is on [0, ∞) and its missing-evidence bound is [0, 210] (105 planted plus an equal unplanted allowance); the build stops on an observed total above 210.
 - E303. The recentred S1T alternative publishes its realised mean shift after clipping.
 - E304. A workload migration needs at least two complete-evidence API references and at least two measured Plan references; otherwise the freeze stops for both bases.
+
+## Reviewer 81 (Gemini 3.8 Flash, round 13, Thinking, five sectional sends on r163)
+- Read checks: every listed part read to its end at commit 0aedd96.
+- Parts 1–3 M1 (a clipped transfer tolerance is not unbounded): verified; adopted as E305 (directional factor, the other direction cannot move the value). M2 (O145's "previous release's cohort" is recursive): adopted as E306 (plotted, retained and out read off consecutive releases; once per exit). L1 (subset-row and partial-component lists contradict the data: Claude Opus 5.5 (medium) was missing): verified; both lists now render from the build.
+- Parts 4–6 M1 (the demand equation omits ITBench-AA): adopted as E307 (the registry is the admitted execution manifest, each component outside the Index its own population, with a build check of set equality). M2 (two "report window" endpoints): adopted as E308 (the release envelope and each cell's admission window are separate objects).
+- Parts 7–9 M1 (Bug Hunt's unbounded z gives it leverage beyond its weight): rejected; it is the trade-off O163 settled when the owner chose the plain sum over a fixed 210 scale, a cohort-best scale and a clip, and E302 now states that weights are coefficients. M2 (Beta draws for partial-score leaves): rejected; O142 chose the Beta draw for these leaves, its variance is the binomial upper bound the normal plug-in used, and the mean shift is what O154's recentred alternative isolates (E303). L1 (harness alias table for E268): not adopted; the selection is published per duplicated row and a tie stops the build, so a formatting mismatch can only fall through to the dated tiebreak, which is disclosed.
+- Parts 10–12 M (the Omniscience gate ignores input rounding): verified that the rates are captured at AA's stored precision, so only the index rounding enters; the draft now says so and what a rounded capture would add.
+- Parts 13–14 M (the lifecycle table's report-window row predates O161): adopted under E308.
+- Round status (O56): not clean (Mediums).
+- E305. A clipped assumption row's transfer tolerance is directional and finite in the one direction that can move its value.
+- E306. O145's states are plotted, retained and out, read off consecutive releases; retention applies once per exit.
+- E307. The demand registry covers exactly the admitted components; each component outside the Index is its own population.
+- E308. The release report envelope [V − 30 days, V] is distinct from each cell's admission window, which O161 ends at the cell's latest staged search.

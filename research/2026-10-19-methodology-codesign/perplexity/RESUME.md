@@ -1,7 +1,7 @@
 # Resuming the Perplexity panel (round 13)
 
-State on 2026-11-01: draft r163 (reviewers 78–80 folded in; O153–O163, Plan anchors re-frozen as version a2 under O157; cutoff 2026-11-01T06:10:00Z, 37-configuration cohort under O145) is committed; its review copy goes in `perplexity/parts-r163/`. The ledger (`ledger.md`) and the condensed brief (`ledger-brief.md`) run through
-owner decision O162 and reviewer 79. Round 13 continues with Gemini 3.8 Flash on r163.
+State on 2026-11-01: draft r164 (reviewers 78–81 folded in; O153–O163, Plan anchors re-frozen as version a2 under O157; cutoff 2026-11-01T06:10:00Z, 37-configuration cohort under O145) is committed; its review copy goes in `perplexity/parts-r164/`. The ledger (`ledger.md`) and the condensed brief (`ledger-brief.md`) run through
+owner decision O162 and reviewer 79. Round 13 continues with Claude Sonnet 5.5 on r164.
 
 Panel order and status for round 13 (O56: a model's round is clean with no Medium-or-higher finding; each model needs
 two consecutive clean rounds and the panel ends when every model says NO FURTHER FEEDBACK on the same revision):
@@ -16,7 +16,8 @@ two consecutive clean rounds and the panel ends when every model says NO FURTHER
 | 78 | GLM 5.3 (sections of at most two parts) | r160 | findings (Highs, Mediums), folded into r161 (O153–O159, E289–E298) |
 | 79 | Grok 4.7 | r161 | findings (Highs, Mediums), folded into r162 (O160–O162, E299, E300) |
 | 80 | GPT-6.1 Sol | r162 | findings (Highs, Mediums), folded into r163 (E302–E304) |
-| 81 | Gemini 3.8 Flash (sectional) | r163 | next |
+| 81 | Gemini 3.8 Flash (sectional) | r163 | findings (Mediums), folded into r164 (E305–E308) |
+| 82 | Claude Sonnet 5.5 | r164 | next |
 
 To continue:
 
