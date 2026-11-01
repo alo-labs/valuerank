@@ -98,25 +98,25 @@ Cost score S_C = 100 × (ln c_H − ln c) / (ln c_H − ln c_L), clipped to 0–
 | Workload | Basis | Low anchor c_L (USD) | High anchor c_H (USD) | References | Status |
 |---|---|---:|---:|---:|---|
 | `aad36e77d6e17386` (main) | api | $79.50 | $21,003.64 | 6 | frozen |
-| `aad36e77d6e17386` (main) | plan | $7.38 | $17,761.84 | 17 | frozen |
+| `aad36e77d6e17386` (main) | plan | $64.38 | $1,681.08 | 8 | frozen |
 | `835a9baf594a1251` (subset) | api | $56.42 | $13,288.76 | 7 | frozen |
-| `835a9baf594a1251` (subset) | plan | $5.24 | $10,957.36 | 21 | frozen |
+| `835a9baf594a1251` (subset) | plan | $44.13 | $1,177.26 | 8 | frozen |
 
-**Anchor policy** (`complete-evidence-panel` v1). Population: ranked configurations with complete cost evidence (exact cost, no AA missing- or declined-task marker) on every component of the workload at the freeze cutoff; on the main workload this is the admission reference panel. Plan anchors: the same configurations at their displayed Plan cost: measured routes, owner assumptions of every kind and API-cost fallbacks alike, since each is scored in the Plan table (O13, O16) and a narrower panel would clip them. At least 2 references; below that, anchors unavailable: configurations on that workload get no cost score (the main workload must meet the minimum). Lifetime: reference IDs and costs are frozen; a population or rule change is a new anchor version with an old/new bridge, and evidence lost after freezing never rebuilds an anchor.
+**Anchor policy** (`complete-evidence-panel` v2). Population: ranked configurations with complete cost evidence (exact cost, no AA missing- or declined-task marker) on every component of the workload at the freeze cutoff; on the main workload this is the admission reference panel. Plan anchors: the same configurations' plan rows whose displayed Plan cost is measured (a controlled measurement or concordant reports, O157); owner assumptions and API-cost fallbacks are scored on these anchors and flagged, and are outside the Plan clip gate. At least 2 references; below that, anchors unavailable: configurations on that workload get no cost score (the main workload must meet the minimum). Lifetime: reference IDs and costs are frozen; a population or rule change is a new anchor version with an old/new bridge, and evidence lost after freezing never rebuilds an anchor.
 
 **Exchange rate.** In the unclipped region a cost doubling changes value by −100 × 0.25 × ln 2 / ln(c_H / c_L) points, offset by +100 × 0.25 × ln 2 / ((1 − 0.25) × ln(c_H / c_L)) quality points. At the main-workload anchors:
 
 | Basis | Anchor ratio c_H / c_L | Value points per cost doubling | Quality points that offset it |
 |---|---:|---:|---:|
 | api | 264.2 | 3.11 | 4.14 |
-| plan | 2406.8 | 2.23 | 2.97 |
+| plan | 26.1 | 5.31 | 7.08 |
 
 **Within-cohort influence (E91, E126).** Cost's share of the value dispersion on the common-workload panel, 0.25 × SD(S_C) / (0.25 × SD(S_C) + 0.75 × SD(S_Q)), is published and flagged below 10% or above 90%; the flag is informational and the cost weight never changes (O2). Because cost and quality covary, that ratio describes dispersion; the value-variance allocation Cov(0.25 S_C, V) / Var(V) and the Kendall tau of the cost-only and quality-only orderings against the value ordering show contribution (E189).
 
 | Basis | Panel | Cost's share | Status | Cost's variance allocation | Tau, cost vs value | Tau, quality vs value |
 |---|---:|---:|---|---:|---:|---:|
 | api | 8 | 51.4% | defined | 75.1% | 0.36 | -0.07 |
-| plan | 23 | 42.6% | defined | 2.4% | -0.04 | 0.66 |
+| plan | 23 | 50.5% | defined | 52.4% | 0.16 | 0.46 |
 
 ## Quality
 
@@ -169,13 +169,13 @@ Plan cost = basket API cost ÷ a subscription route's Value Multiple, at full ut
 
 **Interval outputs (O25).** Each observed leaf is placed anywhere inside its published reporting precision, each missing leaf anywhere in 0–100 and each cost inside its rounding. A configuration is on the **definite frontier** when no other configuration can beat it on both cost and quality for any values in those boxes, and on the **possible frontier** when some values put it there. The **cheapest above a quality bar** is confirmed only when its worst cost is below the best cost of every other configuration that could qualify. The bar is pinned by policy `quality-quartile-ladder` v3: the lower quartile, lower median (the headline bar) and upper quartile, each the displayed quality at zero-based position floor((n - 1) * k / 4), k = 1, 2, 3 (O34) of non-provisional ranked configurations with a displayed quality, ordered by displayed quality ascending, then configuration ID, selected deterministic at anchor freeze, before any bar outcome is computed; the displayed quality at each ladder position, frozen as a level; the configuration at that position is recorded for audit and competes like any other; a frozen level is never a configuration, so no bar can return its setter by construction; whether a result compares alternatives is published per result (possibleQualifierN, E198); fixed for the anchor version; replaced only by a versioned re-freeze that publishes old- and new-bar results on the common evaluable panel. Current headline bar: quality 61.4 (the displayed quality of Gemini 4 Argon at freeze); ladder: quality 49.1, quality 65.2.
 
-**Scenario shares** are frequencies over declared streams, never probabilities (10,000 scenarios per run, seed 20261101, input hash `a4a21de48b4da1a7`):
+**Scenario shares** are frequencies over declared streams, never probabilities (10,000 scenarios per run, seed 20261101, input hash `9397dc5c253fd57c`):
 
 - **S0**: published-record reporting precision.
 - **S1**: published-record reporting precision + conventional identification of missing leaves.
 - **S2**: published-record reporting precision + conventional identification of missing leaves + weight-specification stress.
 - **S1M**: published-record reporting precision + conventional identification of missing leaves + conventional range sensitivity inside published 95% confidence intervals (no tail model).
-- **S1T**: published-record leaf values redrawn with task-sampling noise from each leaf's published task count (binomial leaves from their Jeffreys Beta posterior, O142; independent-task approximation; GDPval-AA from its displayed rating interval, an assumption) + conventional identification of missing leaves.
+- **S1T**: published-record leaf values redrawn with task-sampling noise from each leaf's published task count (binomial leaves from their Jeffreys Beta posterior, O142, with its mean-preserving alternative, O154; independent-task approximation; GDPval-AA from its displayed rating interval, an assumption) + conventional identification of missing leaves.
 
 S1 also runs with the endpoint-heavy kernel. **S1T (owner decision O39, as amended by O142)** redraws every leaf with task-sampling noise from its published task count: a binomial leaf from its Jeffreys posterior Beta(k + ½, n − k + ½) on the 0–100 scale, which stays inside the score domain without clipping (O142), every other leaf from a normal with its plug-in SD (the proportion taken as (k + ½)/(n + 1), so a 0% or 100% score keeps a positive spread), clipped to 0–100 (FrontierCode 2.0 132, Terminal-Bench 4.0 66, AutomationBench-AA 657, AA-LCR 100, Terminal-Bench-Science 70, HLE-Diamond 1,000, CritPt v2 (hard subset) 40, Bug Hunt's 105 bugs, AA-Omniscience's 3,000 questions scored +1/0/−1, LiveBench 2.0 Overall as the weighted mean of its seven category shares, with the release's weights (O67) (Long Agentic 18, Reasoning 4, Coding 29, Browser 25, Data Analysis 3, Research 22, Design 25; Reasoning and Data Analysis publish only their parts, so their counts are the wide reading, E264), AI Coding Daily's 6 graded projects), with GDPval-AA drawn from each row's displayed rating interval read as a 95% normal interval (an assumption) and the two Vals boards from Vals' published standard error (E256). Tasks are treated as independent, so it is an approximation; it never authorises a label or changes a score. From the same noise the ranking prints a **noise band** beside each rank (O42): rows in value order join the current band while their value is not separable from the band's first row (1.96 × √(SD_i² + SD_j²), with analytic quality-leaf SDs; cost is not drawn), otherwise they start a new one, so every row is inseparable from its band's first row and adjacent rows in different bands may also be inseparable. Shared tasks correlate two rows' errors and narrow the true threshold (separable adjacent ranks at correlations 0.3 and 0.6 are published), while omitted sources widen it (run-to-run and harness variance, AA's single cost run, owner-assumption error on the Plan basis); the net direction is not established. Each bar also has a **noise-margin companion** (O44): the cheapest configuration whose displayed quality clears the bar by at least the quality noise margin, 1.96 × √2 × the median row's quality SD. On the Plan basis the core streams (S1, S2, S1M and S1T) run with owner assumptions off (E167): a row whose selected route rests on any owner assumption is unevaluable there, never reselected or replaced by API cost, while S0 keeps the displayed record. S1M draws Terminal-Bench 4.0 (AA run) inside its source's published 95% confidence interval, labelled conventional CI-range sensitivity (endpoint-conditioned; no tail model) under its interpretation contract (E165; estimand: not established from the captured documentation; method: not established from the captured documentation; sampling unit: not established from the captured documentation); values outside the interval are not explored; no tail mass is invented. A cheapest-above-the-bar label is published only when the share clears a sequential threshold with its per-look error controlled. Not quantified in these shares:
 
@@ -227,7 +227,7 @@ Diagnostics are published beside the ranking and never change a score: Terminal-
 
 - [data/scores.json](data/scores.json): the `v3` section holds every row, workload, anchor, interval output, scenario result, diagnostic and the evidence bundle
 - [data/plan_cost_routes.json](data/plan_cost_routes.json): subscription routes, their evidence, sources and policy
-- [data/v3_frozen.json](data/v3_frozen.json): frozen anchors, bar policy and anchor policy for anchor version `v3-2026-11-01`
+- [data/v3_frozen.json](data/v3_frozen.json): frozen anchors, bar policy and anchor policy for anchor version `v3-2026-11-01-a2`
 - [data/v3_scenarios.json](data/v3_scenarios.json): scenario-share runs for every stream
 - [data/tb4.json](data/tb4.json), [data/bug_hunt.json](data/bug_hunt.json): independent benchmark snapshots ([data/aa_deepswe.json](data/aa_deepswe.json) keeps AA's last DeepSWE v1.1 capture, no longer scored, O49)
 - [data/leaf_evidence.json](data/leaf_evidence.json), [data/cognition_frontiercode.json](data/cognition_frontiercode.json): leaf gap fills and the exhaustive-search log (O36/O37)

@@ -26,6 +26,7 @@ import hashlib
 import json
 import math
 import re
+import platform
 import random
 import statistics
 import sys
@@ -63,6 +64,7 @@ FRACTION_LEAVES = {
 }
 CHART_SOURCES = {slug: f"AA {basket.COMPONENT_LABELS[slug]} total cost chart (labels rounded to USD 1)" for slug in basket.CHART_COMPONENTS}
 DEFAULT_TB_HARNESS = "mini-SWE-agent"  # E125/O37: AA's Terminal-Bench harness; a leaf on any other agent is a gap fill
+OMNISCIENCE_TOLERANCE = 0.05  # index points: half of AA's displayed 0.1-point precision (reviewer 78)
 SCENARIO_COUNT = 10_000
 # O154: S1T also runs with its mean-preserving alternative kernel (appended, so the earlier strata keep their seeds).
 SCENARIO_RUNS = (("S0", False), ("S1", False), ("S2", False), ("S1", True), ("S1M", False), ("S1T", False), ("S1T", True))
@@ -227,6 +229,10 @@ def leaf_evidence(model_id: str, effort: str | None, page: dict, tb4_rows: list[
     if page.get("omniscience") is not None:
         accuracy, hallucination = page.get("omniscienceAccuracy"), page.get("omniscienceHallucinationRate")
         rebuilt = q.omniscience_index_from_rates(accuracy, hallucination) if accuracy is not None and hallucination is not None else None
+        # Reviewer 78: the reconstruction (A = c/T over all T questions, h = i/(T - c), partial answers only in T) is tested
+        # against AA's published index; a residual beyond half AA's displayed 0.1-point precision stops the build.
+        if rebuilt is not None and abs(rebuilt - page["omniscience"]) > OMNISCIENCE_TOLERANCE:
+            raise ValueError(f"{model_id}: AA-Omniscience index {page['omniscience']} does not reconstruct from accuracy and hallucination rate ({rebuilt:.3f})")
         # E128: with every question correct the conditional hallucination rate is undefined and nothing is unanswered.
         unanswered = 0.0 if accuracy == 1.0 else (1.0 - accuracy) * (1.0 - hallucination) if rebuilt is not None else None
         add("omniscience", page["omniscience"], q.omniscience_index_z(page["omniscience"]),
@@ -1466,14 +1472,21 @@ def bar_levels(assembled: dict) -> tuple[list[str], list[dict]]:
 # E160: the registered rule that selects each workload's anchor references (separate from workload admission).
 ANCHOR_POLICY = {
     "policyId": "complete-evidence-panel",
-    "version": 1,
+    "version": 2,
     "populationRule": "ranked configurations with complete cost evidence (exact cost, no AA missing- or declined-task marker) on every component of the workload at the freeze cutoff; on the main workload this is the admission reference panel",
-    "planRule": "the same configurations at their displayed Plan cost: measured routes, owner assumptions of every kind and API-cost fallbacks alike, since each is scored in the Plan table (O13, O16) and a narrower panel would clip them",
+    "planRule": "the same configurations' plan rows whose displayed Plan cost is measured (a controlled measurement or concordant reports, O157); owner assumptions and API-cost fallbacks are scored on these anchors and flagged, and are outside the Plan clip gate",
     "minimumReferences": 2,
     "belowMinimum": "anchors unavailable: configurations on that workload get no cost score (the main workload must meet the minimum)",
     "lifetime": "reference IDs and costs are frozen; a population or rule change is a new anchor version with an old/new bridge, and evidence lost after freezing never rebuilds an anchor",
 }
 MIN_ANCHOR_REFERENCES = 2
+
+
+def plan_measured(row: dict) -> bool:
+    """O157: a plan row whose displayed Plan cost is measured (a controlled measurement or concordant reports), not an
+    owner assumption or an API-cost fallback."""
+
+    return not row["plan"]["fallback"] and row["plan"]["grade"] in {"controlled", "reports"}
 
 
 def anchor_eligibility(assembled: dict, components: list[str]) -> list[dict]:
@@ -1513,13 +1526,16 @@ def freeze(assembled: dict, *, frozen_at: str) -> dict:
             workloads[workload] = {**entry, "anchors": {"api": None, "plan": None}, "anchorStatus": f"unavailable: fewer than {MIN_ANCHOR_REFERENCES} complete-evidence references"}
             continue
         api = {row_id: restricted_cost(by_id[row_id]["components"], components) for row_id in population}
-        # O48: the Plan anchor references are the plan rows of the reference configurations.
-        plan = {item["id"]: _plan_cost_on(item, components) for item in plan_variants(assembled)["rows"] if item["configurationId"] in population}
+        # O48: the Plan anchor references are the plan rows of the reference configurations; O157: measured rows only.
+        plan = {item["id"]: _plan_cost_on(item, components) for item in plan_variants(assembled)["rows"]
+                if item["configurationId"] in population and plan_measured(item)}
+        if len(plan) < MIN_ANCHOR_REFERENCES and entry["role"] == "main":
+            raise ValueError(f"the main workload has {len(plan)} measured Plan anchor references; at least {MIN_ANCHOR_REFERENCES} are required (O157)")
         workloads[workload] = {
             **entry,
             "anchors": {
                 "api": anchor_math.anchor_object(api, basis="api", workload=workload),
-                "plan": anchor_math.anchor_object(plan, basis="plan", workload=workload),
+                "plan": anchor_math.anchor_object(plan, basis="plan", workload=workload) if len(plan) >= MIN_ANCHOR_REFERENCES else None,
             },
             "anchorStatus": "frozen",
         }
@@ -1528,7 +1544,8 @@ def freeze(assembled: dict, *, frozen_at: str) -> dict:
     return {
         "schemaVersion": 1,
         "methodologyVersion": METHODOLOGY_VERSION,
-        "anchorVersion": f"v3-{frozen_at}" if q.TRACK == q.DEFAULT_TRACK else f"v3-{frozen_at}-{q.TRACK}",
+        # O157: an anchor-policy change is a new anchor version even on the same cutoff day.
+        "anchorVersion": f"v3-{frozen_at}-a{ANCHOR_POLICY['version']}" + ("" if q.TRACK == q.DEFAULT_TRACK else f"-{q.TRACK}"),
         "frozenAt": frozen_at,
         "basketVersion": BASKET_VERSION,
         "mainWorkload": assembled["mainWorkload"],
@@ -1858,6 +1875,38 @@ def gap_fill_sensitivity(rows: list[dict], per_row: dict) -> dict:
             "rows": filled, "bases": bases}
 
 
+def bug_hunt_harness_sensitivity(rows: list[dict], per_row: dict) -> dict:
+    """Reviewer 78: how far the record's harness choice moves value and rank. Each row the owner ran on two or more harnesses
+    has its Bug Hunt leaf set to its lowest and to its highest harness result (E224's per-harness largest-sample means),
+    the other rows kept; the largest value movement and the rank changes are published (a diagnostic; no score changes)."""
+
+    spans = {}
+    for row in rows:
+        results = row.get("bugHuntCrossHarness") or []
+        if len(results) > 1 and "bugHunt" in row["evidence"]["observations"]:
+            values = [item["fixedOf105"] for item in results]
+            spans[row["id"]] = {"low": min(values), "high": max(values),
+                                "harnesses": {item["harness"]: item["fixedOf105"] for item in results}}
+    bases = {}
+    for basis in BASES:
+        primary = {row["id"]: per_row[row["id"]][basis]["value"] for row in rows if per_row[row["id"]][basis]["value"] is not None}
+        branches, largest = {}, 0.0
+        for end in ("low", "high"):
+            branch = dict(primary)
+            for row in rows:
+                if row["id"] not in spans or row["id"] not in primary:
+                    continue
+                observations = row["evidence"]["observations"]
+                share = q.LEAF_BY_KEY["bugHunt"].weight / sum(q.LEAF_BY_KEY[key].weight for key in observations)
+                quality = row["summary"].displayed + share * (q.bug_hunt_z(spans[row["id"]][end]).z - observations["bugHunt"].z)
+                branch[row["id"]] = anchor_math.value_score(per_row[row["id"]][basis]["costScore"], quality, BETA)
+                largest = max(largest, abs(branch[row["id"]] - primary[row["id"]]))
+            branches[end] = diagnostics.paired_rank_change(primary, branch)
+        bases[basis] = {"largestValueMove": largest if spans else None, "rankChanges": branches}
+    return {"label": "Bug Hunt harness sensitivity: each multi-harness row's leaf at its lowest and highest harness result (reviewer 78; diagnostic)",
+            "rows": spans, "bases": bases}
+
+
 def gap_fill_bars(assembled: dict, frozen: dict, offset: float | None) -> dict:
     """E234 (as extended after I25): the displayed-record cheapest row at each frozen bar on both bases with the gap
     fills as published, removed (the rest renormalised), and with each third-party fill lowered by the measured mean
@@ -2107,7 +2156,12 @@ def _rebuilt_anchor_bases(assembled: dict, frozen: dict, per_row: dict, referenc
     rows = [row for row in assembled["rows"] if row["cost"]["workload"] == main]
     bases = {}
     for basis in BASES:
-        costs = {row_id: basis_cost_on(by_id[row_id], assembled["admitted"], basis) for row_id in references}
+        # O157: Plan anchors rebuild from measured references only, as the freeze does.
+        costs = {row_id: basis_cost_on(by_id[row_id], assembled["admitted"], basis) for row_id in references
+                 if basis == "api" or plan_measured(by_id[row_id])}
+        if len(costs) < MIN_ANCHOR_REFERENCES:
+            bases[basis] = {"status": f"unavailable: fewer than {MIN_ANCHOR_REFERENCES} measured references (O157)"}
+            continue
         rebuilt = anchor_math.anchor_object(costs, basis=basis, workload=main)
         primary = {row["id"]: per_row[row["id"]][basis]["value"] for row in rows}
         rescored = {row["id"]: anchor_math.value_score(anchor_math.cost_score(_basis_cost(row, basis), rebuilt), row["summary"].displayed, BETA) for row in rows}
@@ -2422,7 +2476,7 @@ def route_brackets(plan_rows: list[dict], per_plan: dict, frozen: dict, routes: 
 CROSSCHECK_COMPONENT = "terminalbench-4-0"
 
 
-def workload_cross_check(rows: list[dict], main: str) -> dict:
+def workload_cross_check(rows: list[dict], main: str, components: list[str] | None = None) -> dict:
     """E41, E68 (reviewer 77): Terminal-Bench 4.0's cost per solved task on AA's own execution (the component's cost per
     attempted task over AA's resolved fraction, never a tbench.ai gap fill) against the basket-cost rank, over the main-
     workload rows that have both; the statistic is suppressed below 8 rows, and the panel and its size are always published."""
@@ -2438,7 +2492,30 @@ def workload_cross_check(rows: list[dict], main: str) -> dict:
         if value is not None:
             per_solve[row["id"]], basket[row["id"]] = value, row["cost"]["costUsd"]
     result = diagnostics.workload_crosscheck(per_solve, basket, label="Terminal-Bench 4.0 cost per solved task (AA execution) against basket cost")
-    return {**result, "benchmark": "Terminal-Bench 4.0", "n": len(result["panel"]), "minRows": diagnostics.CROSSCHECK_MIN_ROWS}
+    return {**result, "benchmark": "Terminal-Bench 4.0", "n": len(result["panel"]), "minRows": diagnostics.CROSSCHECK_MIN_ROWS,
+            "attribution": cross_check_attribution(rows, per_solve, components) if components and result["tau"] is not None else None}
+
+
+def cross_check_attribution(rows: list[dict], per_solve: dict, components: list[str]) -> dict:
+    """Reviewer 78: what drives a disagreement between the basket-cost order and cost per solved task, from captured data
+    only: the tau-b with each basket component left out of the basket cost in turn, and the five most discordant rows with
+    their component-cost shares (a diagnostic beside E41's warning; nothing changes a score)."""
+
+    by_id = {row["id"]: row for row in rows if row["id"] in per_solve}
+    leave_one_out = {}
+    for component in components:
+        rest = [item for item in components if item != component]
+        basket = {row_id: restricted_cost(row["components"], rest) for row_id, row in by_id.items()}
+        leave_one_out[component] = diagnostics.agreement(per_solve, basket, label=f"without {component}", min_rows=diagnostics.CROSSCHECK_MIN_ROWS)["tau"]
+    basket = {row_id: row["cost"]["costUsd"] for row_id, row in by_id.items()}
+    solve_rank = diagnostics.competition_ranks(per_solve, lower_is_better=True)
+    basket_rank = diagnostics.competition_ranks(basket, lower_is_better=True)
+    gaps = sorted(by_id, key=lambda row_id: (-abs(solve_rank[row_id] - basket_rank[row_id]), row_id))[:5]
+    total = lambda row: sum(by_id[row]["components"][item]["costUsd"] for item in components)  # noqa: E731
+    inversions = [{"row": row_id, "basketRank": basket_rank[row_id], "costPerSolveRank": solve_rank[row_id],
+                   "componentShares": {item: by_id[row_id]["components"][item]["costUsd"] / total(row_id) for item in components}}
+                  for row_id in gaps]
+    return {"leaveOneOut": leave_one_out, "largestRankGaps": inversions}
 
 
 def score(assembled: dict, frozen: dict) -> dict:
@@ -2478,10 +2555,13 @@ def score(assembled: dict, frozen: dict) -> dict:
         basis_rows, scores_of = (rows, per_row) if basis == "api" else (plan_rows, per_plan)
         clip = []
         for workload in frozen["workloads"]:
-            costs = {row["id"]: _basis_cost(row, basis) for row in basis_rows if row["cost"]["workload"] == workload}
+            # O157: assumed and fallback plan rows are scored and flagged but outside the Plan clip-gate population.
+            members = [row for row in basis_rows if row["cost"]["workload"] == workload]
+            costs = {row["id"]: _basis_cost(row, basis) for row in members if basis == "api" or plan_measured(row)}
             anchors = frozen["workloads"][workload]["anchors"][basis]
             if costs and anchors:
-                clip.append({"workload": workload, **anchor_math.clip_gate(costs, anchors)})
+                outside = sorted(row["id"] for row in members if basis == "plan" and not plan_measured(row))
+                clip.append({"workload": workload, **anchor_math.clip_gate(costs, anchors), **({"outsideGate": outside} if basis == "plan" else {})})
         gates[basis] = clip
         influence[basis] = anchor_math.panel_cost_influence(
             [{"id": row["id"], "workloadId": row["cost"]["workload"], "costScore": scores_of[row["id"]][basis]["costScore"], "qualityScore": row["summary"].displayed} for row in basis_rows],
@@ -2613,11 +2693,12 @@ def score(assembled: dict, frozen: dict) -> dict:
             "rankSeparability": rank_separability(assembled, per_row, exchange, plan_assembled, per_plan),
             "costedBarLadder": costed_bar_ladder(assembled, per_row),
             "terminalBenchSameHarness": _tb_same_harness(rows, assembled["tb4Rows"]),
-            "workloadCrossCheck": workload_cross_check(rows, main),
+            "workloadCrossCheck": workload_cross_check(rows, main, frozen["workloads"][main]["components"]),
             # E260: the AA-against-Cognition comparison ranges over every cohort configuration (ranked or listed in this
             # ranking), so both rankings estimate one offset from one panel.
             "frontierCodeCrossSource": frontiercode_cross_source(cohort_rows, assembled["cognition"]),
             "gapFillSensitivity": gap_fill_sensitivity(rows, per_row),
+            "bugHuntHarnessSensitivity": bug_hunt_harness_sensitivity(rows, per_row),
             "harnessCostStress": harness_cost_stress(assembled, frozen),
             "gapFillBars": gap_fill_bars(assembled, frozen, frontiercode_cross_source(cohort_rows, assembled["cognition"])["meanOffset"]),
             "anchorStability": _anchor_stability(rows, frozen, main, per_row),
@@ -3651,6 +3732,9 @@ def run_scenarios(assembled: dict, frozen: dict, *, n: int = SCENARIO_COUNT, see
         "inputHash": scenario_hash(assembled, frozen, n=n, seed=seed),
         "seed": seed,
         "scenarios": n,
+        # Reviewer 78: Python guarantees only random() across versions, not its Beta and normal samplers, so the version that
+        # drew these scenarios is recorded beside the seed.
+        "generator": {"module": "random (Mersenne Twister)", "python": platform.python_version()},
         # E155: uncertainty descriptions come from the stream manifests, including what v1 does not quantify.
         "streamDescriptions": dict(scenarios.TARGET_PROFILES),
         "notQuantified": list(NOT_QUANTIFIED),
@@ -3854,6 +3938,8 @@ def configuration(row: dict) -> dict:
         # O58: whether AA plots the configuration on its rendered frontier or within the near gap.
         "aaTier": row.get("aaFrontierTier"),
         "developer": row.get("developer"),
+        # E224: Bug Hunt's largest-sample result per harness, when the owner ran the configuration on two or more.
+        "bugHuntCrossHarness": row.get("bugHuntCrossHarness"),
     }
 
 

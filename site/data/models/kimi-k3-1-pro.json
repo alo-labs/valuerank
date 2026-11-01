@@ -8,11 +8,11 @@
   "summary": {
     "rank": {
       "api": 11,
-      "plan": 49
+      "plan": 61
     },
     "overall": {
       "api": 48.217507213664376,
-      "plan": 46.707143513272996
+      "plan": 42.642376721870484
     },
     "quality": 56.85650229582731,
     "qualityRank": 2,
@@ -242,7 +242,7 @@
     ],
     "costScore": {
       "api": 22.300521967175573,
-      "plan": 16.259067165610038
+      "plan": 0.0
     },
     "components": [
       {
@@ -356,7 +356,7 @@
       {
         "stratum": "S1T",
         "kernel": "primary",
-        "targetProfile": "published-record leaf values redrawn with task-sampling noise from each leaf's published task count (binomial leaves from their Jeffreys Beta posterior, O142; independent-task approximation; GDPval-AA from its displayed rating interval, an assumption) + conventional identification of missing leaves",
+        "targetProfile": "published-record leaf values redrawn with task-sampling noise from each leaf's published task count (binomial leaves from their Jeffreys Beta posterior, O142, with its mean-preserving alternative, O154; independent-task approximation; GDPval-AA from its displayed rating interval, an assumption) + conventional identification of missing leaves",
         "unevaluable": null,
         "top1": 0.0,
         "top3": 0.0045,
@@ -364,8 +364,8 @@
       },
       {
         "stratum": "S1T",
-        "kernel": "endpoint-heavy",
-        "targetProfile": "published-record leaf values redrawn with task-sampling noise from each leaf's published task count (binomial leaves from their Jeffreys Beta posterior, O142; independent-task approximation; GDPval-AA from its displayed rating interval, an assumption) + conventional identification of missing leaves",
+        "kernel": "mean-preserving",
+        "targetProfile": "published-record leaf values redrawn with task-sampling noise from each leaf's published task count (binomial leaves from their Jeffreys Beta posterior, O142, with its mean-preserving alternative, O154; independent-task approximation; GDPval-AA from its displayed rating interval, an assumption) + conventional identification of missing leaves",
         "unevaluable": null,
         "top1": 0.0001,
         "top3": 0.0044,
@@ -421,7 +421,7 @@
       {
         "stratum": "S1T",
         "kernel": "primary",
-        "targetProfile": "published-record leaf values redrawn with task-sampling noise from each leaf's published task count (binomial leaves from their Jeffreys Beta posterior, O142; independent-task approximation; GDPval-AA from its displayed rating interval, an assumption) + conventional identification of missing leaves",
+        "targetProfile": "published-record leaf values redrawn with task-sampling noise from each leaf's published task count (binomial leaves from their Jeffreys Beta posterior, O142, with its mean-preserving alternative, O154; independent-task approximation; GDPval-AA from its displayed rating interval, an assumption) + conventional identification of missing leaves",
         "unevaluable": null,
         "top1": 0.0,
         "top3": 0.0,
@@ -429,8 +429,8 @@
       },
       {
         "stratum": "S1T",
-        "kernel": "endpoint-heavy",
-        "targetProfile": "published-record leaf values redrawn with task-sampling noise from each leaf's published task count (binomial leaves from their Jeffreys Beta posterior, O142; independent-task approximation; GDPval-AA from its displayed rating interval, an assumption) + conventional identification of missing leaves",
+        "kernel": "mean-preserving",
+        "targetProfile": "published-record leaf values redrawn with task-sampling noise from each leaf's published task count (binomial leaves from their Jeffreys Beta posterior, O142, with its mean-preserving alternative, O154; independent-task approximation; GDPval-AA from its displayed rating interval, an assumption) + conventional identification of missing leaves",
         "unevaluable": null,
         "top1": 0.0,
         "top3": 0.0,
@@ -451,7 +451,7 @@
       "date": "2026-10-19",
       "rank": {
         "api": 11,
-        "plan": 49
+        "plan": 61
       }
     }
   ],
@@ -487,11 +487,11 @@
       "rankingEligible": true,
       "rank": {
         "api": 11,
-        "plan": 49
+        "plan": 61
       },
       "overall": {
         "api": 48.217507213664376,
-        "plan": 46.707143513272996
+        "plan": 42.642376721870484
       }
     },
     {
@@ -502,11 +502,11 @@
       "rankingEligible": true,
       "rank": {
         "api": 12,
-        "plan": 76
+        "plan": 103
       },
       "overall": {
         "api": 43.84908648682452,
-        "plan": 42.32281758605991
+        "plan": 38.859977262996026
       }
     }
   ]

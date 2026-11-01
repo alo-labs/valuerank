@@ -1,14 +1,18 @@
 {
   "schemaVersion": 1,
-  "inputHash": "b3308393e72703ba012b116c049442e31f2816c3060b2c3b732f6630413a5862",
+  "inputHash": "1eaeb04019d6964597c6becfa3dea94de5fcbcd55693d249d8085a0bd9b44bf9",
   "seed": 20261101,
   "scenarios": 10000,
+  "generator": {
+    "module": "random (Mersenne Twister)",
+    "python": "3.13.16"
+  },
   "streamDescriptions": {
     "S0": "published-record reporting precision",
     "S1": "published-record reporting precision + conventional identification of missing leaves",
     "S2": "published-record reporting precision + conventional identification of missing leaves + weight-specification stress",
     "S1M": "published-record reporting precision + conventional identification of missing leaves + conventional range sensitivity inside published 95% confidence intervals (no tail model)",
-    "S1T": "published-record leaf values redrawn with task-sampling noise from each leaf's published task count (binomial leaves from their Jeffreys Beta posterior, O142; independent-task approximation; GDPval-AA from its displayed rating interval, an assumption) + conventional identification of missing leaves"
+    "S1T": "published-record leaf values redrawn with task-sampling noise from each leaf's published task count (binomial leaves from their Jeffreys Beta posterior, O142, with its mean-preserving alternative, O154; independent-task approximation; GDPval-AA from its displayed rating interval, an assumption) + conventional identification of missing leaves"
   },
   "notQuantified": [
     "benchmark repeatability beyond S1T's independent-task approximation (correlated tasks, harness and attempt effects): not quantified in v1 scenario shares",
@@ -2788,7 +2792,7 @@
       },
       {
         "stratum": "S1T",
-        "targetProfile": "published-record leaf values redrawn with task-sampling noise from each leaf's published task count (binomial leaves from their Jeffreys Beta posterior, O142; independent-task approximation; GDPval-AA from its displayed rating interval, an assumption) + conventional identification of missing leaves",
+        "targetProfile": "published-record leaf values redrawn with task-sampling noise from each leaf's published task count (binomial leaves from their Jeffreys Beta posterior, O142, with its mean-preserving alternative, O154; independent-task approximation; GDPval-AA from its displayed rating interval, an assumption) + conventional identification of missing leaves",
         "permittedTargets": [
           "identification convention",
           "reporting precision",
@@ -3337,7 +3341,7 @@
       },
       {
         "stratum": "S1T",
-        "targetProfile": "published-record leaf values redrawn with task-sampling noise from each leaf's published task count (binomial leaves from their Jeffreys Beta posterior, O142; independent-task approximation; GDPval-AA from its displayed rating interval, an assumption) + conventional identification of missing leaves",
+        "targetProfile": "published-record leaf values redrawn with task-sampling noise from each leaf's published task count (binomial leaves from their Jeffreys Beta posterior, O142, with its mean-preserving alternative, O154; independent-task approximation; GDPval-AA from its displayed rating interval, an assumption) + conventional identification of missing leaves",
         "permittedTargets": [
           "identification convention",
           "reporting precision",
@@ -6809,8 +6813,8 @@
           },
           "claude-opus-5-5-high@claude-max-20x": {
             "top3": {
-              "share": 1.0,
-              "monteCarloSe": 0.0
+              "share": 0.9989,
+              "monteCarloSe": 0.0003314800144805098
             },
             "top1": {
               "share": 0.0,
@@ -6834,8 +6838,8 @@
           },
           "claude-opus-5-5-high@claude-max-5x": {
             "top3": {
-              "share": 1.0,
-              "monteCarloSe": 0.0
+              "share": 0.9265,
+              "monteCarloSe": 0.002609554559690217
             },
             "top1": {
               "share": 0.0,
@@ -6863,8 +6867,8 @@
               "monteCarloSe": 0.0
             },
             "top1": {
-              "share": 1.0,
-              "monteCarloSe": 0.0
+              "share": 0.9989,
+              "monteCarloSe": 0.0003314800144805098
             },
             "frontier": {
               "share": 1.0,
@@ -7009,8 +7013,8 @@
           },
           "claude-opus-5-5-medium@claude-max-20x": {
             "top3": {
-              "share": 0.0,
-              "monteCarloSe": 0.0
+              "share": 0.0011,
+              "monteCarloSe": 0.00033148001448051134
             },
             "top1": {
               "share": 0.0,
@@ -7059,12 +7063,12 @@
           },
           "claude-opus-5-5-medium@claude-pro": {
             "top3": {
-              "share": 0.0,
-              "monteCarloSe": 0.0
+              "share": 0.0735,
+              "monteCarloSe": 0.0026095545596902165
             },
             "top1": {
-              "share": 0.0,
-              "monteCarloSe": 0.0
+              "share": 0.0011,
+              "monteCarloSe": 0.00033148001448051134
             },
             "frontier": {
               "share": 1.0,
@@ -9057,7 +9061,7 @@
       },
       {
         "stratum": "S1T",
-        "targetProfile": "published-record leaf values redrawn with task-sampling noise from each leaf's published task count (binomial leaves from their Jeffreys Beta posterior, O142; independent-task approximation; GDPval-AA from its displayed rating interval, an assumption) + conventional identification of missing leaves",
+        "targetProfile": "published-record leaf values redrawn with task-sampling noise from each leaf's published task count (binomial leaves from their Jeffreys Beta posterior, O142, with its mean-preserving alternative, O154; independent-task approximation; GDPval-AA from its displayed rating interval, an assumption) + conventional identification of missing leaves",
         "permittedTargets": [
           "identification convention",
           "reporting precision",
@@ -9108,8 +9112,8 @@
         "rows": {
           "gpt-6.1-sol-high@chatgpt-plus": {
             "top3": {
-              "share": 0.1837,
-              "monteCarloSe": 0.0038723934459194615
+              "share": 0.0831,
+              "monteCarloSe": 0.0027603331320693886
             },
             "top1": {
               "share": 0.0,
@@ -9133,8 +9137,8 @@
           },
           "gpt-6.1-sol-high@chatgpt-pro-100": {
             "top3": {
-              "share": 0.1837,
-              "monteCarloSe": 0.0038723934459194615
+              "share": 0.0831,
+              "monteCarloSe": 0.0027603331320693886
             },
             "top1": {
               "share": 0.0,
@@ -9183,12 +9187,12 @@
           },
           "gpt-6.1-sol-high@chatgpt-pro-500": {
             "top3": {
-              "share": 0.2045,
-              "monteCarloSe": 0.004033357782295044
+              "share": 0.1068,
+              "monteCarloSe": 0.0030885880269145645
             },
             "top1": {
-              "share": 0.1901,
-              "monteCarloSe": 0.003923799051939332
+              "share": 0.0919,
+              "monteCarloSe": 0.0028888473479919286
             },
             "frontier": {
               "share": 0.2873,
@@ -9233,8 +9237,8 @@
           },
           "gpt-6.1-sol-medium@chatgpt-plus": {
             "top3": {
-              "share": 0.0331,
-              "monteCarloSe": 0.001788977082022014
+              "share": 0.0605,
+              "monteCarloSe": 0.0023841088481862567
             },
             "top1": {
               "share": 0.0,
@@ -9258,8 +9262,8 @@
           },
           "gpt-6.1-sol-medium@chatgpt-pro-100": {
             "top3": {
-              "share": 0.0331,
-              "monteCarloSe": 0.001788977082022014
+              "share": 0.0605,
+              "monteCarloSe": 0.0023841088481862567
             },
             "top1": {
               "share": 0.0,
@@ -9308,12 +9312,12 @@
           },
           "gpt-6.1-sol-medium@chatgpt-pro-500": {
             "top3": {
-              "share": 0.0377,
-              "monteCarloSe": 0.0019046970887781605
+              "share": 0.0804,
+              "monteCarloSe": 0.0027191145617645462
             },
             "top1": {
-              "share": 0.0341,
-              "monteCarloSe": 0.001814860600707393
+              "share": 0.0671,
+              "monteCarloSe": 0.0025019510386896067
             },
             "frontier": {
               "share": 0.2675,
@@ -9358,8 +9362,8 @@
           },
           "claude-opus-5-5-high@claude-max-20x": {
             "top3": {
-              "share": 0.5834,
-              "monteCarloSe": 0.004929953752318575
+              "share": 0.474,
+              "monteCarloSe": 0.004993235424051223
             },
             "top1": {
               "share": 0.0,
@@ -9383,8 +9387,8 @@
           },
           "claude-opus-5-5-high@claude-max-5x": {
             "top3": {
-              "share": 0.5588,
-              "monteCarloSe": 0.004965305227274553
+              "share": 0.4269,
+              "monteCarloSe": 0.004946275265288013
             },
             "top1": {
               "share": 0.0,
@@ -9408,12 +9412,12 @@
           },
           "claude-opus-5-5-high@claude-pro": {
             "top3": {
-              "share": 0.5927,
-              "monteCarloSe": 0.004913315682917189
+              "share": 0.5042,
+              "monteCarloSe": 0.004999823596888194
             },
             "top1": {
-              "share": 0.5787,
-              "monteCarloSe": 0.0049376746551387934
+              "share": 0.4662,
+              "monteCarloSe": 0.004988562518401469
             },
             "frontier": {
               "share": 0.819,
@@ -9483,8 +9487,8 @@
           },
           "gpt-6-astra-high@chatgpt-pro-100": {
             "top3": {
-              "share": 0.0013,
-              "monteCarloSe": 0.00036032069049667407
+              "share": 0.0,
+              "monteCarloSe": 0.0
             },
             "top1": {
               "share": 0.0,
@@ -9508,12 +9512,12 @@
           },
           "gpt-6-astra-high@chatgpt-pro-200": {
             "top3": {
-              "share": 0.0031,
-              "monteCarloSe": 0.0005559127629403736
+              "share": 0.0,
+              "monteCarloSe": 0.0
             },
             "top1": {
-              "share": 0.0026,
-              "monteCarloSe": 0.0005092386473943233
+              "share": 0.0,
+              "monteCarloSe": 0.0
             },
             "frontier": {
               "share": 0.5012,
@@ -9533,8 +9537,8 @@
           },
           "gpt-6-astra-high@chatgpt-pro-500": {
             "top3": {
-              "share": 0.0025,
-              "monteCarloSe": 0.0004993746088859545
+              "share": 0.0,
+              "monteCarloSe": 0.0
             },
             "top1": {
               "share": 0.0,
@@ -9558,8 +9562,8 @@
           },
           "claude-opus-5-5-medium@claude-max-20x": {
             "top3": {
-              "share": 0.1971,
-              "monteCarloSe": 0.00397808484072424
+              "share": 0.3817,
+              "monteCarloSe": 0.004858035714154436
             },
             "top1": {
               "share": 0.0,
@@ -9583,8 +9587,8 @@
           },
           "claude-opus-5-5-medium@claude-max-5x": {
             "top3": {
-              "share": 0.1828,
-              "monteCarloSe": 0.00386502470884728
+              "share": 0.3352,
+              "monteCarloSe": 0.0047206033512677175
             },
             "top1": {
               "share": 0.0,
@@ -9608,12 +9612,12 @@
           },
           "claude-opus-5-5-medium@claude-pro": {
             "top3": {
-              "share": 0.2068,
-              "monteCarloSe": 0.004050108146704233
+              "share": 0.4088,
+              "monteCarloSe": 0.004916122048932471
             },
             "top1": {
-              "share": 0.1945,
-              "monteCarloSe": 0.0039581529783473506
+              "share": 0.3748,
+              "monteCarloSe": 0.004840712344273309
             },
             "frontier": {
               "share": 0.9999,
@@ -9907,7 +9911,7 @@
       },
       {
         "stratum": "S1T",
-        "targetProfile": "published-record leaf values redrawn with task-sampling noise from each leaf's published task count (binomial leaves from their Jeffreys Beta posterior, O142; independent-task approximation; GDPval-AA from its displayed rating interval, an assumption) + conventional identification of missing leaves",
+        "targetProfile": "published-record leaf values redrawn with task-sampling noise from each leaf's published task count (binomial leaves from their Jeffreys Beta posterior, O142, with its mean-preserving alternative, O154; independent-task approximation; GDPval-AA from its displayed rating interval, an assumption) + conventional identification of missing leaves",
         "permittedTargets": [
           "identification convention",
           "reporting precision",
@@ -9958,8 +9962,8 @@
         "rows": {
           "gpt-6.1-sol-high@chatgpt-plus": {
             "top3": {
-              "share": 0.1732,
-              "monteCarloSe": 0.003784200840336041
+              "share": 0.0791,
+              "monteCarloSe": 0.002698947757923447
             },
             "top1": {
               "share": 0.0,
@@ -9983,8 +9987,8 @@
           },
           "gpt-6.1-sol-high@chatgpt-pro-100": {
             "top3": {
-              "share": 0.1732,
-              "monteCarloSe": 0.003784200840336041
+              "share": 0.0791,
+              "monteCarloSe": 0.002698947757923447
             },
             "top1": {
               "share": 0.0,
@@ -10033,12 +10037,12 @@
           },
           "gpt-6.1-sol-high@chatgpt-pro-500": {
             "top3": {
-              "share": 0.1939,
-              "monteCarloSe": 0.003953514765370176
+              "share": 0.1035,
+              "monteCarloSe": 0.003046108172734514
             },
             "top1": {
-              "share": 0.1816,
-              "monteCarloSe": 0.0038551451334547706
+              "share": 0.0865,
+              "monteCarloSe": 0.002811009605106322
             },
             "frontier": {
               "share": 0.2877,
@@ -10083,8 +10087,8 @@
           },
           "gpt-6.1-sol-medium@chatgpt-plus": {
             "top3": {
-              "share": 0.0339,
-              "monteCarloSe": 0.0018097179338228374
+              "share": 0.0592,
+              "monteCarloSe": 0.0023599864406390137
             },
             "top1": {
               "share": 0.0,
@@ -10108,8 +10112,8 @@
           },
           "gpt-6.1-sol-medium@chatgpt-pro-100": {
             "top3": {
-              "share": 0.0339,
-              "monteCarloSe": 0.0018097179338228374
+              "share": 0.0592,
+              "monteCarloSe": 0.0023599864406390137
             },
             "top1": {
               "share": 0.0,
@@ -10158,12 +10162,12 @@
           },
           "gpt-6.1-sol-medium@chatgpt-pro-500": {
             "top3": {
-              "share": 0.0391,
-              "monteCarloSe": 0.0019383289194561382
+              "share": 0.0789,
+              "monteCarloSe": 0.0026958262184347123
             },
             "top1": {
-              "share": 0.0357,
-              "monteCarloSe": 0.001855411275162464
+              "share": 0.0663,
+              "monteCarloSe": 0.0024880576761803575
             },
             "frontier": {
               "share": 0.2614,
@@ -10208,8 +10212,8 @@
           },
           "claude-opus-5-5-high@claude-max-20x": {
             "top3": {
-              "share": 0.5999,
-              "monteCarloSe": 0.004899183503401358
+              "share": 0.489,
+              "monteCarloSe": 0.004998789853554558
             },
             "top1": {
               "share": 0.0,
@@ -10233,8 +10237,8 @@
           },
           "claude-opus-5-5-high@claude-max-5x": {
             "top3": {
-              "share": 0.5743,
-              "monteCarloSe": 0.004944486929904861
+              "share": 0.4381,
+              "monteCarloSe": 0.004961535951698829
             },
             "top1": {
               "share": 0.0,
@@ -10258,12 +10262,12 @@
           },
           "claude-opus-5-5-high@claude-pro": {
             "top3": {
-              "share": 0.6092,
-              "monteCarloSe": 0.0048792966706278475
+              "share": 0.5154,
+              "monteCarloSe": 0.004997627837284405
             },
             "top1": {
-              "share": 0.5933,
-              "monteCarloSe": 0.004912179862342176
+              "share": 0.4814,
+              "monteCarloSe": 0.004996539202287919
             },
             "frontier": {
               "share": 0.8321,
@@ -10333,8 +10337,8 @@
           },
           "gpt-6-astra-high@chatgpt-pro-100": {
             "top3": {
-              "share": 0.0016,
-              "monteCarloSe": 0.0003996798718974975
+              "share": 0.0,
+              "monteCarloSe": 0.0
             },
             "top1": {
               "share": 0.0,
@@ -10358,12 +10362,12 @@
           },
           "gpt-6-astra-high@chatgpt-pro-200": {
             "top3": {
-              "share": 0.0025,
-              "monteCarloSe": 0.0004993746088859545
+              "share": 0.0,
+              "monteCarloSe": 0.0
             },
             "top1": {
-              "share": 0.0022,
-              "monteCarloSe": 0.0004685253461660319
+              "share": 0.0,
+              "monteCarloSe": 0.0
             },
             "frontier": {
               "share": 0.518,
@@ -10383,8 +10387,8 @@
           },
           "gpt-6-astra-high@chatgpt-pro-500": {
             "top3": {
-              "share": 0.0021,
-              "monteCarloSe": 0.0004577761461675346
+              "share": 0.0,
+              "monteCarloSe": 0.0
             },
             "top1": {
               "share": 0.0,
@@ -10408,8 +10412,8 @@
           },
           "claude-opus-5-5-medium@claude-max-20x": {
             "top3": {
-              "share": 0.1905,
-              "monteCarloSe": 0.00392695492716685
+              "share": 0.3715,
+              "monteCarloSe": 0.004832057015392099
             },
             "top1": {
               "share": 0.0,
@@ -10433,8 +10437,8 @@
           },
           "claude-opus-5-5-medium@claude-max-5x": {
             "top3": {
-              "share": 0.1748,
-              "monteCarloSe": 0.003797959452126892
+              "share": 0.3304,
+              "monteCarloSe": 0.004703571409046535
             },
             "top1": {
               "share": 0.0,
@@ -10458,12 +10462,12 @@
           },
           "claude-opus-5-5-medium@claude-pro": {
             "top3": {
-              "share": 0.2019,
-              "monteCarloSe": 0.0040141797418650794
+              "share": 0.4021,
+              "monteCarloSe": 0.004903219248616158
             },
             "top1": {
-              "share": 0.1872,
-              "monteCarloSe": 0.0039007199335507284
+              "share": 0.3658,
+              "monteCarloSe": 0.004816537760674155
             },
             "frontier": {
               "share": 1.0,

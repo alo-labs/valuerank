@@ -185,6 +185,10 @@ def test_leaf_evidence_uses_exact_configurations_only():
     assert index_only["observations"]["omniscience"].z == 40.0 and index_only["provenance"]["omniscience"]["indexFromRates"] is None
     with pytest.raises(ValueError, match="outside its documented domain"):
         v.leaf_evidence("x", "max", {"hleDiamond": 1.5}, [], None)
+    # Reviewer 78: the index must reconstruct from accuracy and hallucination rate within half AA's display precision.
+    v.leaf_evidence("x", "max", {"omniscience": 30.04, "omniscienceAccuracy": 0.5, "omniscienceHallucinationRate": 0.4}, [], None)
+    with pytest.raises(ValueError, match="does not reconstruct"):
+        v.leaf_evidence("x", "max", {"omniscience": 31.0, "omniscienceAccuracy": 0.5, "omniscienceHallucinationRate": 0.4}, [], None)
 
 
 def test_components_and_restricted_cost():
@@ -750,7 +754,8 @@ def test_terminal_bench_same_harness_diagnostic():
 
 
 def test_abstention_sensitivity_and_demand_registry():
-    pages = [page("a-max", 1.0, omniscience=-40.0), page("b-max", 4.0), page("c-max", 0.5)]
+    # The index reconstructs from the rates (reviewer 78): I = 100 [0.2 - 0.75 (1 - 0.2)] = -40.
+    pages = [page("a-max", 1.0, omniscience=-40.0, omniscienceAccuracy=0.2, omniscienceHallucinationRate=0.75), page("b-max", 4.0), page("c-max", 0.5)]
     del pages[2]["model"]["omniscience"]
     # O36: c lacks the Omniscience leaf after a logged search, so it is listed, not scored.
     result, frozen = scored(snapshot={"pages": pages}, leafEvidence=searched("c"))
@@ -760,7 +765,7 @@ def test_abstention_sensitivity_and_demand_registry():
     assert sensitivity["rule"] == "z_pen = max(0, I)" and sensitivity["rankChanges"]["panel"] == ["a", "b"]
     rows = {row["id"]: row for row in output["rows"]}
     assert rows["a"]["quality"]["leaves"]["omniscience"]["abstentionPenalisedZ"] == 0.0
-    assert rows["a"]["quality"]["leaves"]["omniscience"]["unansweredOrPartialShare"] == pytest.approx(0.5 * 0.6)
+    assert rows["a"]["quality"]["leaves"]["omniscience"]["unansweredOrPartialShare"] == pytest.approx(0.8 * 0.25)
     # E181: the GDPval-AA logistic alternative is published per basis as rank changes on the common panel.
     logistic = output["diagnostics"]["gdpvalLogisticSensitivity"]
     assert logistic["rule"].startswith("z = 100 / (1 + 10^((1600 - E) / 400))") and logistic["api"]["rankChanges"]["panel"] == ["a", "b"]
@@ -1045,11 +1050,21 @@ def test_core_plan_streams_run_with_transfers_off():
 
     routes = documents()["planRoutes"]
     routes["routes"][0].update(valueMultipleKind="user_assumption", evidenceClass="user_assumption")
+    # O157: the Plan anchors freeze over measured plan rows only, so with a's route assumed the main workload needs a
+    # second measured reference: b's measured route on a second plan.
+    with pytest.raises(ValueError, match="the main workload has 1 measured Plan anchor references"):
+        scored(planRoutes=routes)
+    routes["routes"].append({**routes["routes"][1], "id": "plan-b2", "valueMultiple": 4.0, "identification": "unidentified"})
+    del routes["routes"][-1]["valuationBasis"]
     result, frozen = scored(planRoutes=routes)
+    assert frozen["workloads"][result["mainWorkload"]]["anchors"]["plan"]["referenceIds"] == ["b@plan-b", "b@plan-b2"]
+    # O157: the assumed plan row is scored and flagged but stays outside the Plan clip gate, which lists it.
+    (main_gate,) = [item for item in v.score(result, frozen)["gates"]["clip"]["plan"] if item["workload"] == result["mainWorkload"]]
+    assert main_gate["rows"] == 2 and main_gate["outsideGate"] == ["a@plan-a"]
     rows = {row["id"]: row for row in result["rows"]}
     assert v.transfer_dependent(rows["a"]) and not v.transfer_dependent(rows["b"]) and not v.transfer_dependent(rows["c"])
-    assert [item.row for item in v.scenario_panel(result, "plan")] == ["a@plan-a", "b@plan-b"]
-    assert [item.row for item in v.scenario_panel(result, "plan", transfers=False)] == ["b@plan-b"]
+    assert [item.row for item in v.scenario_panel(result, "plan")] == ["a@plan-a", "b@plan-b", "b@plan-b2"]
+    assert [item.row for item in v.scenario_panel(result, "plan", transfers=False)] == ["b@plan-b", "b@plan-b2"]
     assert [item.row for item in v.scenario_panel(result, "api", transfers=False)] == [item.row for item in v.scenario_panel(result, "api")]
     assert v.transfers_on("S0") and not any(v.transfers_on(stratum) for stratum in ("S1", "S2", "S1M"))
     document = v.run_scenarios(result, frozen, n=50, seed=3)
@@ -1057,9 +1072,33 @@ def test_core_plan_streams_run_with_transfers_off():
     assert runs[("S0", False)]["transfers"] == "on (the displayed record)" and runs[("S0", False)]["excluded"] == [] and "a@plan-a" in runs[("S0", False)]["rows"]
     for key in (("S1", False), ("S2", False), ("S1", True), ("S1M", False)):
         assert runs[key]["transfers"] == "off" and runs[key]["excluded"] == [{"row": "a@plan-a", "reason": "owner-named transfer: unevaluable with owner assumptions off (never reselected or replaced by API cost)"}]
-        assert list(runs[key]["rows"]) == ["b@plan-b"]
+        assert list(runs[key]["rows"]) == ["b@plan-b", "b@plan-b2"]
     assert all("transfers" not in run and "excluded" not in run for run in document["results"]["api"])
     assert document["inputHash"] != v.run_scenarios(*scored(), n=50, seed=3)["inputHash"]
+
+
+def test_plan_anchors_freeze_over_measured_plan_rows_only():
+    """O157: the Plan anchors use measured plan rows only; a non-main workload with fewer than two gets no Plan anchors
+    (and no Plan clip gate), while the main workload must meet the minimum; the anchor version names the policy."""
+
+    assert v.plan_measured({"plan": {"fallback": None, "grade": "controlled"}}) and v.plan_measured({"plan": {"fallback": None, "grade": "reports"}})
+    assert not v.plan_measured({"plan": {"fallback": None, "grade": "assumption"}}) and not v.plan_measured({"plan": {"fallback": "api", "grade": None}})
+    result, frozen = scored()
+    assert frozen["anchorVersion"] == f"v3-2026-10-19-a{v.ANCHOR_POLICY['version']}" == "v3-2026-10-19-a2"
+    # A non-main workload whose references are b (measured) and c (API-cost fallback): one measured Plan reference.
+    rows = {row["id"]: row for row in result["rows"]}
+    for row_id in ("b", "c"):
+        rows[row_id]["components"]["itbench-aa"] = dict(rows["b"]["components"]["aa-briefcase"])
+    components = [item for item in result["admitted"] if item != "coding-agent-index"] + ["itbench-aa"]
+    rows["c"]["cost"] = {**rows["c"]["cost"], "components": components, "workload": basket.workload_hash(components)}
+    frozen = v.freeze(result, frozen_at="2026-10-19")
+    other = frozen["workloads"][basket.workload_hash(components)]
+    assert other["role"] == "subset" and other["anchorStatus"] == "frozen" and other["anchors"]["api"]["referenceIds"] == ["b", "c"]
+    assert other["anchors"]["plan"] is None
+    assert frozen["workloads"][result["mainWorkload"]]["anchors"]["plan"]["referenceIds"] == ["a@plan-a", "b@plan-b"]
+    gates = v.score(result, frozen)["gates"]["clip"]
+    assert [item["workload"] for item in gates["api"]] == [result["mainWorkload"], basket.workload_hash(components)]
+    assert [item["workload"] for item in gates["plan"]] == [result["mainWorkload"]] and gates["plan"][0]["outsideGate"] == []
 
 
 def test_plan_amount_is_typed_by_what_the_measurement_establishes():
@@ -1202,6 +1241,9 @@ def gated_world_documents(gate_page, records):
     mapping["rows"]["d"] = {"coding-agent-index": None, "itbench-aa": None}
     routes = documents()["planRoutes"]
     routes["routes"][0].update(identification="point-identified", valuationBasis="release")
+    # O157: d's measured route, so the Plan anchors keep two measured references when a leaves the anchor population.
+    routes["routes"].append({"id": "plan-d", "valueMultiple": 5.0, "valueMultipleKind": "controlled_account_workload_projection", "modelIds": ["d"], "planPriceUsd": 20,
+                             "checkedOn": "2026-10-10", "allocationRegime": "single-model allocation"})
     return documents(snapshot={"pages": pages}, codingAgents=agents, configurationMap=mapping, planRoutes=routes, priceRecords={"records": records},
                      leafEvidence=filled("d"))
 
@@ -1386,6 +1428,12 @@ def test_family_primary_diagnostic_rebuilds_ladder_and_anchors_on_primary_rows()
     per_row = {row["id"]: {basis: {"value": 1.0} for basis in v.BASES} for row in narrow["rows"]}
     lone = v.family_primary_diagnostic(narrow, frozen, per_row)
     assert lone["status"].startswith("unavailable") and "b" not in lone["population"] and "bases" not in lone
+    # O157: rebuilt Plan anchors use measured references only, so a fallback reference leaves the Plan rebuild unavailable.
+    rows = {row["id"]: row for row in result["rows"]}
+    rows["b"]["plan"] = {**rows["b"]["plan"], "fallback": "api"}
+    per_row = {row_id: {basis: {"value": 1.0} for basis in v.BASES} for row_id in rows}
+    rebuilt = v._rebuilt_anchor_bases(result, frozen, per_row, ["a", "b"])
+    assert "rankChanges" in rebuilt["api"] and rebuilt["plan"] == {"status": "unavailable: fewer than 2 measured references (O157)"}
 
 
 def test_configurations_record_frontier_family_membership():
@@ -1402,9 +1450,9 @@ def test_configuration_carries_identity_and_frontier_family_flag_for_any_row():
 
     frontier = {"id": "f", "name": "F", "aaVariant": "max", "aaSlug": "f-max", "aaFrontierFootnote": "note", "aaFrontierTier": "frontier",
                 "rankingInclusionReasons": ["Required AA Intelligence Index versus total-evaluation-cost frontier family"]}
-    assert v.configuration(frontier) == {"id": "f", "name": "F", "family": "F", "effort": "max", "aaSlug": "f-max", "aaNote": "note", "frontierFamily": True, "familyPrimary": True, "aaTier": "frontier", "developer": None}
+    assert v.configuration(frontier) == {"id": "f", "name": "F", "family": "F", "effort": "max", "aaSlug": "f-max", "aaNote": "note", "frontierFamily": True, "familyPrimary": True, "aaTier": "frontier", "developer": None, "bugHuntCrossHarness": None}
     retained = {"id": "r", "name": "R", "aaSlug": "r", "rankingInclusionReasons": [v.RETAINED_REASON], "familyPrimary": False}
-    assert v.configuration(retained) == {"id": "r", "name": "R", "family": "R", "effort": None, "aaSlug": "r", "aaNote": None, "frontierFamily": True, "familyPrimary": False, "aaTier": None, "developer": None}
+    assert v.configuration(retained) == {"id": "r", "name": "R", "family": "R", "effort": None, "aaSlug": "r", "aaNote": None, "frontierFamily": True, "familyPrimary": False, "aaTier": None, "developer": None, "bugHuntCrossHarness": None}
     # O33: an evidenced sibling carries its AA family, which its display name no longer equals.
     sibling = {"id": "f-high", "name": "F (high)", "family": "F", "aaVariant": "high", "aaSlug": "f-high", "rankingInclusionReasons": [v.RETAINED_REASON]}
     assert v.configuration(sibling)["family"] == "F" and v.configuration(sibling)["frontierFamily"] is True

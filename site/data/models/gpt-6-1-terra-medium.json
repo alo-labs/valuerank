@@ -8,11 +8,11 @@
   "summary": {
     "rank": {
       "api": 7,
-      "plan": 34
+      "plan": 21
     },
     "overall": {
       "api": 48.81959070522838,
-      "plan": 51.21180804080832
+      "plan": 54.980017713496764
     },
     "quality": 43.533151613012635,
     "qualityRank": 12,
@@ -256,7 +256,7 @@
     ],
     "costScore": {
       "api": 64.67890798187561,
-      "plan": 74.24777732419541
+      "plan": 89.32061601494917
     },
     "components": [
       {
@@ -361,8 +361,8 @@
       "planIntervalEligible": false,
       "usdPerRun": 16.237572262455885,
       "selected": true,
-      "planRank": 34,
-      "planValue": 51.21180804080832
+      "planRank": 21,
+      "planValue": 54.980017713496764
     },
     {
       "id": "chatgpt-pro100-gpt-6.1-terra-medium-common-gpt-assumption",
@@ -379,8 +379,8 @@
       "planIntervalEligible": false,
       "usdPerRun": 16.57925387783647,
       "selected": false,
-      "planRank": 35,
-      "planValue": 51.152472192198246
+      "planRank": 23,
+      "planValue": 54.85645768769612
     },
     {
       "id": "chatgpt-pro200-gpt-6.1-terra-medium-common-gpt-assumption",
@@ -397,8 +397,8 @@
       "planIntervalEligible": false,
       "usdPerRun": 16.786096776504298,
       "selected": false,
-      "planRank": 36,
-      "planValue": 51.11714355262848
+      "planRank": 24,
+      "planValue": 54.78288989151564
     },
     {
       "id": "chatgpt-plus-gpt-6.1-terra-medium-common-gpt-assumption",
@@ -415,8 +415,8 @@
       "planIntervalEligible": false,
       "usdPerRun": 21.593966470515408,
       "selected": false,
-      "planRank": 37,
-      "planValue": 50.39949673857707
+      "planRank": 32,
+      "planValue": 53.288473599559545
     }
   ],
   "scenarios": {
@@ -470,7 +470,7 @@
       {
         "stratum": "S1T",
         "kernel": "primary",
-        "targetProfile": "published-record leaf values redrawn with task-sampling noise from each leaf's published task count (binomial leaves from their Jeffreys Beta posterior, O142; independent-task approximation; GDPval-AA from its displayed rating interval, an assumption) + conventional identification of missing leaves",
+        "targetProfile": "published-record leaf values redrawn with task-sampling noise from each leaf's published task count (binomial leaves from their Jeffreys Beta posterior, O142, with its mean-preserving alternative, O154; independent-task approximation; GDPval-AA from its displayed rating interval, an assumption) + conventional identification of missing leaves",
         "unevaluable": null,
         "top1": 0.0005,
         "top3": 0.0323,
@@ -478,8 +478,8 @@
       },
       {
         "stratum": "S1T",
-        "kernel": "endpoint-heavy",
-        "targetProfile": "published-record leaf values redrawn with task-sampling noise from each leaf's published task count (binomial leaves from their Jeffreys Beta posterior, O142; independent-task approximation; GDPval-AA from its displayed rating interval, an assumption) + conventional identification of missing leaves",
+        "kernel": "mean-preserving",
+        "targetProfile": "published-record leaf values redrawn with task-sampling noise from each leaf's published task count (binomial leaves from their Jeffreys Beta posterior, O142, with its mean-preserving alternative, O154; independent-task approximation; GDPval-AA from its displayed rating interval, an assumption) + conventional identification of missing leaves",
         "unevaluable": null,
         "top1": 0.0006,
         "top3": 0.028,
@@ -535,7 +535,7 @@
       {
         "stratum": "S1T",
         "kernel": "primary",
-        "targetProfile": "published-record leaf values redrawn with task-sampling noise from each leaf's published task count (binomial leaves from their Jeffreys Beta posterior, O142; independent-task approximation; GDPval-AA from its displayed rating interval, an assumption) + conventional identification of missing leaves",
+        "targetProfile": "published-record leaf values redrawn with task-sampling noise from each leaf's published task count (binomial leaves from their Jeffreys Beta posterior, O142, with its mean-preserving alternative, O154; independent-task approximation; GDPval-AA from its displayed rating interval, an assumption) + conventional identification of missing leaves",
         "unevaluable": "owner-named transfer: unevaluable with owner assumptions off (never reselected or replaced by API cost)",
         "top1": null,
         "top3": null,
@@ -543,8 +543,8 @@
       },
       {
         "stratum": "S1T",
-        "kernel": "endpoint-heavy",
-        "targetProfile": "published-record leaf values redrawn with task-sampling noise from each leaf's published task count (binomial leaves from their Jeffreys Beta posterior, O142; independent-task approximation; GDPval-AA from its displayed rating interval, an assumption) + conventional identification of missing leaves",
+        "kernel": "mean-preserving",
+        "targetProfile": "published-record leaf values redrawn with task-sampling noise from each leaf's published task count (binomial leaves from their Jeffreys Beta posterior, O142, with its mean-preserving alternative, O154; independent-task approximation; GDPval-AA from its displayed rating interval, an assumption) + conventional identification of missing leaves",
         "unevaluable": "owner-named transfer: unevaluable with owner assumptions off (never reselected or replaced by API cost)",
         "top1": null,
         "top3": null,
@@ -565,7 +565,7 @@
       "date": "2026-10-19",
       "rank": {
         "api": 7,
-        "plan": 34
+        "plan": 21
       }
     }
   ],
@@ -601,11 +601,11 @@
       "rankingEligible": true,
       "rank": {
         "api": 7,
-        "plan": 34
+        "plan": 21
       },
       "overall": {
         "api": 48.81959070522838,
-        "plan": 51.21180804080832
+        "plan": 54.980017713496764
       }
     },
     {
@@ -616,11 +616,11 @@
       "rankingEligible": true,
       "rank": {
         "api": 19,
-        "plan": 65
+        "plan": 51
       },
       "overall": {
         "api": 42.04786297534376,
-        "plan": 44.520362493315815
+        "plan": 51.33069138562365
       }
     }
   ]

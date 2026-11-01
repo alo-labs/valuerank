@@ -452,8 +452,9 @@ def family_primary_text(diagnostic, facts):
     if diagnostic["status"] != "evaluated":
         return text + f"; anchors {diagnostic['status']}."
     return text + "; anchors rebuilt from its " + f"{len(diagnostic['references'])} references move " + "; ".join(
-        f"{label} {rank_change_text(diagnostic['bases'][basis]['rankChanges']['changes'], facts.labels)} (value points per cost doubling "
-        f"{fnum(diagnostic['bases'][basis]['exchangeRate']['valuePointsPerCostDoubling'], 2)} vs {fnum(diagnostic['bases'][basis]['frozenExchangeRate']['valuePointsPerCostDoubling'], 2)} frozen)"
+        (f"{label} {rank_change_text(diagnostic['bases'][basis]['rankChanges']['changes'], facts.labels)} (value points per cost doubling "
+         f"{fnum(diagnostic['bases'][basis]['exchangeRate']['valuePointsPerCostDoubling'], 2)} vs {fnum(diagnostic['bases'][basis]['frozenExchangeRate']['valuePointsPerCostDoubling'], 2)} frozen)")
+        if "rankChanges" in diagnostic["bases"][basis] else f"{label} anchors {diagnostic['bases'][basis]['status']}"
         for basis, label in (("api", "API"), ("plan", "Plan"))
     ) + "."
 

@@ -8,7 +8,7 @@
   "summary": {
     "rank": {
       "api": 18,
-      "plan": 42
+      "plan": 49
     },
     "overall": {
       "api": 44.40119499658125,
@@ -353,7 +353,7 @@
       "planIntervalEligible": false,
       "usdPerRun": 1.1339466466831103,
       "selected": true,
-      "planRank": 42,
+      "planRank": 49,
       "planValue": 49.46901064029278
     },
     {
@@ -371,7 +371,7 @@
       "planIntervalEligible": false,
       "usdPerRun": 1.139168642156493,
       "selected": false,
-      "planRank": 42,
+      "planRank": 49,
       "planValue": 49.46901064029278
     },
     {
@@ -389,7 +389,7 @@
       "planIntervalEligible": false,
       "usdPerRun": 1.1666280784215755,
       "selected": false,
-      "planRank": 42,
+      "planRank": 49,
       "planValue": 49.46901064029278
     }
   ],
@@ -444,7 +444,7 @@
       {
         "stratum": "S1T",
         "kernel": "primary",
-        "targetProfile": "published-record leaf values redrawn with task-sampling noise from each leaf's published task count (binomial leaves from their Jeffreys Beta posterior, O142; independent-task approximation; GDPval-AA from its displayed rating interval, an assumption) + conventional identification of missing leaves",
+        "targetProfile": "published-record leaf values redrawn with task-sampling noise from each leaf's published task count (binomial leaves from their Jeffreys Beta posterior, O142, with its mean-preserving alternative, O154; independent-task approximation; GDPval-AA from its displayed rating interval, an assumption) + conventional identification of missing leaves",
         "unevaluable": null,
         "top1": 0.0,
         "top3": 0.0,
@@ -452,8 +452,8 @@
       },
       {
         "stratum": "S1T",
-        "kernel": "endpoint-heavy",
-        "targetProfile": "published-record leaf values redrawn with task-sampling noise from each leaf's published task count (binomial leaves from their Jeffreys Beta posterior, O142; independent-task approximation; GDPval-AA from its displayed rating interval, an assumption) + conventional identification of missing leaves",
+        "kernel": "mean-preserving",
+        "targetProfile": "published-record leaf values redrawn with task-sampling noise from each leaf's published task count (binomial leaves from their Jeffreys Beta posterior, O142, with its mean-preserving alternative, O154; independent-task approximation; GDPval-AA from its displayed rating interval, an assumption) + conventional identification of missing leaves",
         "unevaluable": null,
         "top1": 0.0,
         "top3": 0.0,
@@ -509,7 +509,7 @@
       {
         "stratum": "S1T",
         "kernel": "primary",
-        "targetProfile": "published-record leaf values redrawn with task-sampling noise from each leaf's published task count (binomial leaves from their Jeffreys Beta posterior, O142; independent-task approximation; GDPval-AA from its displayed rating interval, an assumption) + conventional identification of missing leaves",
+        "targetProfile": "published-record leaf values redrawn with task-sampling noise from each leaf's published task count (binomial leaves from their Jeffreys Beta posterior, O142, with its mean-preserving alternative, O154; independent-task approximation; GDPval-AA from its displayed rating interval, an assumption) + conventional identification of missing leaves",
         "unevaluable": "owner-named transfer: unevaluable with owner assumptions off (never reselected or replaced by API cost)",
         "top1": null,
         "top3": null,
@@ -517,8 +517,8 @@
       },
       {
         "stratum": "S1T",
-        "kernel": "endpoint-heavy",
-        "targetProfile": "published-record leaf values redrawn with task-sampling noise from each leaf's published task count (binomial leaves from their Jeffreys Beta posterior, O142; independent-task approximation; GDPval-AA from its displayed rating interval, an assumption) + conventional identification of missing leaves",
+        "kernel": "mean-preserving",
+        "targetProfile": "published-record leaf values redrawn with task-sampling noise from each leaf's published task count (binomial leaves from their Jeffreys Beta posterior, O142, with its mean-preserving alternative, O154; independent-task approximation; GDPval-AA from its displayed rating interval, an assumption) + conventional identification of missing leaves",
         "unevaluable": "owner-named transfer: unevaluable with owner assumptions off (never reselected or replaced by API cost)",
         "top1": null,
         "top3": null,
@@ -538,7 +538,7 @@
       "date": "2026-10-19",
       "rank": {
         "api": 18,
-        "plan": 42
+        "plan": 49
       }
     }
   ],
@@ -574,7 +574,7 @@
       "rankingEligible": true,
       "rank": {
         "api": 18,
-        "plan": 42
+        "plan": 49
       },
       "overall": {
         "api": 44.40119499658125,
@@ -589,11 +589,11 @@
       "rankingEligible": true,
       "rank": {
         "api": 30,
-        "plan": 77
+        "plan": 88
       },
       "overall": {
         "api": 35.4414485492598,
-        "plan": 41.40889573024934
+        "plan": 44.13482243682958
       }
     }
   ]

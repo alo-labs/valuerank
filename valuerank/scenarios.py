@@ -44,7 +44,7 @@ TARGET_PROFILES = {
     "S1M": "published-record reporting precision + conventional identification of missing leaves + conventional range sensitivity inside published 95% confidence intervals (no tail model)",
     # O39: benchmark sampling noise under an independent-task approximation (owner decision, 2026-10-21); it never
     # authorises a label and never changes a score.
-    "S1T": "published-record leaf values redrawn with task-sampling noise from each leaf's published task count (binomial leaves from their Jeffreys Beta posterior, O142; independent-task approximation; GDPval-AA from its displayed rating interval, an assumption) + conventional identification of missing leaves",
+    "S1T": "published-record leaf values redrawn with task-sampling noise from each leaf's published task count (binomial leaves from their Jeffreys Beta posterior, O142, with its mean-preserving alternative, O154; independent-task approximation; GDPval-AA from its displayed rating interval, an assumption) + conventional identification of missing leaves",
 }
 STRATA = ("S0", "S1", "S2", "S1M", "S1T")
 # E161: every stream's events name the quality equation they use, so S0-to-S1 changes are never read as uncertainty alone.

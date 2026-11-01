@@ -1,85 +1,31 @@
 {
-  "previousAnchorVersion": "v3-2026-10-23-aicd",
-  "anchorVersion": "v3-2026-10-25-aicd",
+  "previousAnchorVersion": "v3-2026-11-01-aicd",
+  "anchorVersion": "v3-2026-11-01-a2-aicd",
   "rows": [
     {
-      "row": "deepseek-v4-1-flash-1017",
+      "row": "gpt-6.1-terra",
       "api": {
         "previous": {
-          "costScore": 43.83596447625259,
-          "value": 50.576257489052985,
-          "rank": 4
+          "costScore": 43.26407416912765,
+          "value": 52.86225359941352,
+          "rank": 2
         },
         "current": {
-          "costScore": 43.83596447625259,
-          "value": 50.576257489052985,
-          "rank": 4
+          "costScore": 43.26407416912765,
+          "value": 52.86225359941352,
+          "rank": 2
         }
       },
       "plan": {
         "previous": {
-          "costScore": 26.621584405058105,
-          "value": 46.272662471254364,
-          "rank": 34
+          "costScore": 58.6344557250712,
+          "value": 56.70484898839941,
+          "rank": 11
         },
         "current": {
-          "costScore": 28.31454273870241,
-          "value": 46.69590205466544,
-          "rank": 34
-        }
-      }
-    },
-    {
-      "row": "gemini-4-argon",
-      "api": {
-        "previous": {
-          "costScore": 15.357975064454907,
-          "value": 47.86594844002679,
-          "rank": 10
-        },
-        "current": {
-          "costScore": 15.357975064454907,
-          "value": 47.86594844002679,
-          "rank": 10
-        }
-      },
-      "plan": {
-        "previous": {
-          "costScore": 7.564892008147247,
-          "value": 45.917677675949875,
-          "rank": 38
-        },
-        "current": {
-          "costScore": 9.697518954740866,
-          "value": 46.45083441259828,
-          "rank": 36
-        }
-      }
-    },
-    {
-      "row": "kimi-k3-1-pro",
-      "api": {
-        "previous": {
-          "costScore": 11.828769054834897,
-          "value": 49.209552997226545,
-          "rank": 5
-        },
-        "current": {
-          "costScore": 11.828769054834897,
-          "value": 49.209552997226545,
-          "rank": 5
-        }
-      },
-      "plan": {
-        "previous": {
-          "costScore": 5.203243776660941,
-          "value": 47.55317167768305,
-          "rank": 29
-        },
-        "current": {
-          "costScore": 7.39035775492749,
-          "value": 48.09995017224969,
-          "rank": 29
+          "costScore": 56.80768387001558,
+          "value": 56.248156024635506,
+          "rank": 15
         }
       }
     },
@@ -87,107 +33,53 @@
       "row": "gpt-6.1-sol-high",
       "api": {
         "previous": {
-          "costScore": 39.18516296475926,
-          "value": 52.67745170115651,
+          "costScore": 47.96093747217482,
+          "value": 53.68557329813444,
           "rank": 1
         },
         "current": {
-          "costScore": 39.18516296475926,
-          "value": 52.67745170115651,
+          "costScore": 47.96093747217482,
+          "value": 53.68557329813444,
           "rank": 1
         }
       },
       "plan": {
         "previous": {
-          "costScore": 49.451030431136545,
-          "value": 55.243918567750825,
-          "rank": 7
+          "costScore": 62.05888749506914,
+          "value": 57.21006080385802,
+          "rank": 5
         },
         "current": {
-          "costScore": 50.61727664393484,
-          "value": 55.5354801209504,
+          "costScore": 63.938666029451994,
+          "value": 57.68000543745373,
           "rank": 7
         }
       }
     },
     {
-      "row": "claude-opus-5-5-high",
+      "row": "deepseek-v4-1-flash-1017",
       "api": {
         "previous": {
-          "costScore": 15.338386144011588,
-          "value": 48.93596989115281,
-          "rank": 7
-        },
-        "current": {
-          "costScore": 15.338386144011588,
-          "value": 48.93596989115281,
-          "rank": 7
-        }
-      },
-      "plan": {
-        "previous": {
-          "costScore": 52.03482931404711,
-          "value": 58.110080683661685,
-          "rank": 1
-        },
-        "current": {
-          "costScore": 53.14146312153767,
-          "value": 58.38673913553433,
-          "rank": 1
-        }
-      }
-    },
-    {
-      "row": "mimo-v2-6-pro",
-      "api": {
-        "previous": {
-          "costScore": 57.98487038509784,
-          "value": 51.42515613187196,
-          "rank": 3
-        },
-        "current": {
-          "costScore": 57.98487038509784,
-          "value": 51.42515613187196,
-          "rank": 3
-        }
-      },
-      "plan": {
-        "previous": {
-          "costScore": 37.9034391489928,
-          "value": 46.40479832284569,
-          "rank": 33
-        },
-        "current": {
-          "costScore": 39.33610690736574,
-          "value": 46.76296526243893,
-          "rank": 33
-        }
-      }
-    },
-    {
-      "row": "claude-opus-5-5-medium",
-      "api": {
-        "previous": {
-          "costScore": 19.699700383905565,
-          "value": 49.17977588595866,
+          "costScore": 50.063310136338295,
+          "value": 48.834852737450184,
           "rank": 6
         },
         "current": {
-          "costScore": 19.699700383905565,
-          "value": 49.17977588595866,
+          "costScore": 50.063310136338295,
+          "value": 48.834852737450184,
           "rank": 6
         }
       },
       "plan": {
         "previous": {
-          "costScore": 54.953301637149224,
-          "value": 57.99317619926958,
-          "rank": 4
+          "costScore": 36.500613000789926,
+          "value": 45.4441784535631,
+          "rank": 56
         },
         "current": {
-          "costScore": 55.99260158357388,
-          "value": 58.25300118587574,
-          "rank": 4
+          "costScore": 10.716522419683612,
+          "value": 38.99815580828651,
+          "rank": 67
         }
       }
     },
@@ -195,26 +87,107 @@
       "row": "gpt-6.1-sol-medium",
       "api": {
         "previous": {
-          "costScore": 44.14456163893573,
-          "value": 51.68768777627585,
-          "rank": 2
+          "costScore": 53.36420211357066,
+          "value": 52.68396868046185,
+          "rank": 3
         },
         "current": {
-          "costScore": 44.14456163893573,
-          "value": 51.68768777627585,
-          "rank": 2
+          "costScore": 53.36420211357066,
+          "value": 52.68396868046185,
+          "rank": 3
         }
       },
       "plan": {
         "previous": {
-          "costScore": 52.76972451591893,
-          "value": 53.843978495521654,
+          "costScore": 65.99834877078868,
+          "value": 55.84250534476636,
+          "rank": 15
+        },
+        "current": {
+          "costScore": 72.14213742609876,
+          "value": 57.37845250859388,
+          "rank": 11
+        }
+      }
+    },
+    {
+      "row": "gemini-4-argon",
+      "api": {
+        "previous": {
+          "costScore": 10.835558180726302,
+          "value": 44.30587675677049,
+          "rank": 19
+        },
+        "current": {
+          "costScore": 10.835558180726302,
+          "value": 44.30587675677049,
+          "rank": 19
+        }
+      },
+      "plan": {
+        "previous": {
+          "costScore": 7.900087204085182,
+          "value": 43.57200901261021,
+          "rank": 63
+        },
+        "current": {
+          "costScore": 0.0,
+          "value": 41.59698721158891,
+          "rank": 62
+        }
+      }
+    },
+    {
+      "row": "claude-opus-5-5-high",
+      "api": {
+        "previous": {
+          "costScore": 23.22509271733011,
+          "value": 48.36752753089968,
+          "rank": 8
+        },
+        "current": {
+          "costScore": 23.22509271733011,
+          "value": 48.36752753089968,
+          "rank": 8
+        }
+      },
+      "plan": {
+        "previous": {
+          "costScore": 63.38722064399317,
+          "value": 58.408059512565444,
+          "rank": 1
+        },
+        "current": {
+          "costScore": 66.70476581562788,
+          "value": 59.237445805474124,
+          "rank": 1
+        }
+      }
+    },
+    {
+      "row": "kimi-k3-1-pro",
+      "api": {
+        "previous": {
+          "costScore": 22.300521967175573,
+          "value": 48.217507213664376,
           "rank": 11
         },
         "current": {
-          "costScore": 53.85940310645262,
-          "value": 54.116398143155074,
+          "costScore": 22.300521967175573,
+          "value": 48.217507213664376,
           "rank": 11
+        }
+      },
+      "plan": {
+        "previous": {
+          "costScore": 16.259067165610038,
+          "value": 46.707143513272996,
+          "rank": 49
+        },
+        "current": {
+          "costScore": 0.0,
+          "value": 42.642376721870484,
+          "rank": 61
         }
       }
     },
@@ -222,53 +195,134 @@
       "row": "gpt-6-astra-high",
       "api": {
         "previous": {
-          "costScore": 11.304842940338013,
-          "value": 46.781820375894775,
-          "rank": 13
+          "costScore": 21.139499432930705,
+          "value": 48.273926668380746,
+          "rank": 10
         },
         "current": {
-          "costScore": 11.304842940338013,
-          "value": 46.781820375894775,
-          "rank": 13
+          "costScore": 21.139499432930705,
+          "value": 48.273926668380746,
+          "rank": 10
         }
       },
       "plan": {
         "previous": {
-          "costScore": 30.794282057856957,
-          "value": 51.65418015527451,
-          "rank": 21
+          "costScore": 45.879168067461094,
+          "value": 54.45884382701334,
+          "rank": 19
         },
         "current": {
-          "costScore": 32.39096953027036,
-          "value": 52.05335202337786,
-          "rank": 18
+          "costScore": 30.246276070393453,
+          "value": 50.550620827746435,
+          "rank": 42
         }
       }
     },
     {
-      "row": "gpt-6-luna",
+      "row": "claude-opus-5-5-medium",
       "api": {
         "previous": {
-          "costScore": 66.74347781324263,
-          "value": 48.75856062662677,
-          "rank": 8
+          "costScore": 27.659931155358812,
+          "value": 47.470411813174415,
+          "rank": 13
         },
         "current": {
-          "costScore": 66.74347781324263,
-          "value": 48.75856062662677,
-          "rank": 8
+          "costScore": 27.659931155358812,
+          "value": 47.470411813174415,
+          "rank": 13
         }
       },
       "plan": {
         "previous": {
-          "costScore": 67.892301738977,
-          "value": 49.04576660806036,
-          "rank": 25
+          "costScore": 66.62061294479545,
+          "value": 57.21058226053358,
+          "rank": 4
         },
         "current": {
-          "costScore": 68.63307809540848,
-          "value": 49.23096069716823,
-          "rank": 25
+          "costScore": 73.43793042807219,
+          "value": 58.914911631352766,
+          "rank": 4
+        }
+      }
+    },
+    {
+      "row": "gpt-6.1-sol-low",
+      "api": {
+        "previous": {
+          "costScore": 60.877388818083176,
+          "value": 47.54642894431522,
+          "rank": 12
+        },
+        "current": {
+          "costScore": 60.877388818083176,
+          "value": 47.54642894431522,
+          "rank": 12
+        }
+      },
+      "plan": {
+        "previous": {
+          "costScore": 71.47613119382983,
+          "value": 50.19611453825188,
+          "rank": 38
+        },
+        "current": {
+          "costScore": 83.54898427123366,
+          "value": 53.21432780760284,
+          "rank": 33
+        }
+      }
+    },
+    {
+      "row": "gpt-6.1-terra-xhigh",
+      "api": {
+        "previous": {
+          "costScore": 54.73528652094975,
+          "value": 49.99247390594444,
+          "rank": 4
+        },
+        "current": {
+          "costScore": 54.73528652094975,
+          "value": 49.99247390594444,
+          "rank": 4
+        }
+      },
+      "plan": {
+        "previous": {
+          "costScore": 66.99799144740896,
+          "value": 53.058150137559245,
+          "rank": 22
+        },
+        "current": {
+          "costScore": 74.22377740948055,
+          "value": 54.86459662807714,
+          "rank": 22
+        }
+      }
+    },
+    {
+      "row": "gpt-6.1-terra-high",
+      "api": {
+        "previous": {
+          "costScore": 59.93533755378405,
+          "value": 49.97231620882509,
+          "rank": 5
+        },
+        "current": {
+          "costScore": 59.93533755378405,
+          "value": 49.97231620882509,
+          "rank": 5
+        }
+      },
+      "plan": {
+        "previous": {
+          "costScore": 70.7892918991159,
+          "value": 52.68580479515805,
+          "rank": 29
+        },
+        "current": {
+          "costScore": 82.11872106671731,
+          "value": 55.51816208705841,
+          "rank": 18
         }
       }
     },
@@ -276,53 +330,107 @@
       "row": "claude-haiku-5-5-high",
       "api": {
         "previous": {
-          "costScore": 68.63562864761751,
-          "value": 48.75548360619415,
-          "rank": 9
+          "costScore": 72.24534881247573,
+          "value": 46.096314606857774,
+          "rank": 15
         },
         "current": {
-          "costScore": 68.63562864761751,
-          "value": 48.75548360619415,
-          "rank": 9
+          "costScore": 72.24534881247573,
+          "value": 46.096314606857774,
+          "rank": 15
         }
       },
       "plan": {
         "previous": {
-          "costScore": 87.69988773190073,
-          "value": 53.521548377264956,
-          "rank": 14
+          "costScore": 99.12735432783818,
+          "value": 52.81681598569839,
+          "rank": 25
         },
         "current": {
-          "costScore": 87.9836711496838,
-          "value": 53.592494231710724,
-          "rank": 14
+          "costScore": 100.0,
+          "value": 53.03497740373885,
+          "rank": 37
         }
       }
     },
     {
-      "row": "gpt-6-luna-xhigh",
+      "row": "gpt-6-luna",
       "api": {
         "previous": {
-          "costScore": 74.51206879036066,
-          "value": 47.1302436346766,
-          "rank": 12
+          "costScore": 71.53122281484806,
+          "value": 46.522730704682616,
+          "rank": 14
         },
         "current": {
-          "costScore": 74.51206879036066,
-          "value": 47.1302436346766,
-          "rank": 12
+          "costScore": 71.53122281484806,
+          "value": 46.522730704682616,
+          "rank": 14
         }
       },
       "plan": {
         "previous": {
-          "costScore": 73.09083055600874,
-          "value": 46.77493407608862,
-          "rank": 30
+          "costScore": 79.24372527883047,
+          "value": 48.45085632067821,
+          "rank": 45
         },
         "current": {
-          "costScore": 73.71166847261254,
-          "value": 46.93014355523957,
-          "rank": 30
+          "costScore": 99.72409843971269,
+          "value": 53.57094961089877,
+          "rank": 29
+        }
+      }
+    },
+    {
+      "row": "mimo-v2-6-pro",
+      "api": {
+        "previous": {
+          "costScore": 64.96853638385893,
+          "value": 48.31190222236023,
+          "rank": 9
+        },
+        "current": {
+          "costScore": 64.96853638385893,
+          "value": 48.31190222236023,
+          "rank": 9
+        }
+      },
+      "plan": {
+        "previous": {
+          "costScore": 49.26201223158021,
+          "value": 44.385271184290545,
+          "rank": 59
+        },
+        "current": {
+          "costScore": 37.290656861925896,
+          "value": 41.39243234187697,
+          "rank": 63
+        }
+      }
+    },
+    {
+      "row": "gpt-6.1-terra-medium",
+      "api": {
+        "previous": {
+          "costScore": 64.67890798187561,
+          "value": 48.81959070522838,
+          "rank": 7
+        },
+        "current": {
+          "costScore": 64.67890798187561,
+          "value": 48.81959070522838,
+          "rank": 7
+        }
+      },
+      "plan": {
+        "previous": {
+          "costScore": 74.24777732419541,
+          "value": 51.21180804080832,
+          "rank": 34
+        },
+        "current": {
+          "costScore": 89.32061601494917,
+          "value": 54.980017713496764,
+          "rank": 21
         }
       }
     },
@@ -330,26 +438,53 @@
       "row": "claude-haiku-5-5-medium",
       "api": {
         "previous": {
-          "costScore": 75.7118593815146,
-          "value": 47.733956756246236,
-          "rank": 11
+          "costScore": 79.72873742515391,
+          "value": 44.40119499658125,
+          "rank": 18
         },
         "current": {
-          "costScore": 75.7118593815146,
-          "value": 47.733956756246236,
-          "rank": 11
+          "costScore": 79.72873742515391,
+          "value": 44.40119499658125,
+          "rank": 18
         }
       },
       "plan": {
         "previous": {
-          "costScore": 92.43510799185275,
-          "value": 51.91476890883077,
-          "rank": 18
+          "costScore": 100.0,
+          "value": 49.46901064029278,
+          "rank": 42
         },
         "current": {
-          "costScore": 92.6096422450725,
-          "value": 51.95840247213571,
-          "rank": 21
+          "costScore": 100.0,
+          "value": 49.46901064029278,
+          "rank": 49
+        }
+      }
+    },
+    {
+      "row": "gpt-6-luna-xhigh",
+      "api": {
+        "previous": {
+          "costScore": 77.63201484619232,
+          "value": 44.648796939894794,
+          "rank": 16
+        },
+        "current": {
+          "costScore": 77.63201484619232,
+          "value": 44.648796939894794,
+          "rank": 16
+        }
+      },
+      "plan": {
+        "previous": {
+          "costScore": 83.69174616134829,
+          "value": 46.163729768683794,
+          "rank": 50
+        },
+        "current": {
+          "costScore": 100.0,
+          "value": 50.24079322834672,
+          "rank": 44
         }
       }
     },
@@ -357,26 +492,26 @@
       "row": "gpt-6-luna-high",
       "api": {
         "previous": {
-          "costScore": 79.0581043338574,
-          "value": 46.6263350513685,
-          "rank": 14
+          "costScore": 82.24920889623174,
+          "value": 44.44844102704735,
+          "rank": 17
         },
         "current": {
-          "costScore": 79.0581043338574,
-          "value": 46.6263350513685,
-          "rank": 14
+          "costScore": 82.24920889623174,
+          "value": 44.44844102704735,
+          "rank": 17
         }
       },
       "plan": {
         "previous": {
-          "costScore": 76.13291332825499,
-          "value": 45.895037299967896,
-          "rank": 40
+          "costScore": 87.0580919485341,
+          "value": 45.65066179012294,
+          "rank": 53
         },
         "current": {
-          "costScore": 76.68356549147131,
-          "value": 46.032700340771974,
-          "rank": 40
+          "costScore": 100.0,
+          "value": 48.886138802989414,
+          "rank": 52
         }
       }
     },
@@ -384,53 +519,26 @@
       "row": "gpt-6-luna-medium",
       "api": {
         "previous": {
-          "costScore": 85.4568200135163,
-          "value": 45.57805060638822,
-          "rank": 15
+          "costScore": 89.16444181927372,
+          "value": 42.62625221049062,
+          "rank": 20
         },
         "current": {
-          "costScore": 85.4568200135163,
-          "value": 45.57805060638822,
-          "rank": 15
+          "costScore": 89.16444181927372,
+          "value": 42.62625221049062,
+          "rank": 20
         }
       },
       "plan": {
         "previous": {
-          "costScore": 80.41475902597249,
-          "value": 44.31753535950226,
-          "rank": 44
+          "costScore": 92.09991279591482,
+          "value": 43.3601199546509,
+          "rank": 64
         },
         "current": {
-          "costScore": 80.86662210661521,
-          "value": 44.43050112966294,
-          "rank": 44
-        }
-      }
-    },
-    {
-      "row": "gpt-5.6-luna-low",
-      "api": {
-        "previous": {
-          "costScore": 88.695157059662,
-          "value": 38.1644013553376,
-          "rank": 16
-        },
-        "current": {
-          "costScore": 88.695157059662,
-          "value": 38.1644013553376,
-          "rank": 16
-        }
-      },
-      "plan": {
-        "previous": {
-          "costScore": 82.58176569465091,
-          "value": 36.63605351408483,
-          "rank": 48
-        },
-        "current": {
-          "costScore": 82.98363243823651,
-          "value": 36.73652019998123,
-          "rank": 48
+          "costScore": 100.0,
+          "value": 45.3351417556722,
+          "rank": 57
         }
       }
     }
@@ -441,134 +549,144 @@
         {
           "reference": {
             "id": "bar:median-quality",
-            "level": 49.23993471413,
-            "levelConfiguration": "mimo-v2-6-pro",
+            "level": 46.65130909383877,
+            "levelConfiguration": "gpt-6.1-terra-high",
             "rule": "lower-median displayed quality of the non-provisional cohort configurations at freeze (E192; headline bar)"
           },
           "status": "certified",
           "rows": {
-            "deepseek-v4-1-flash-1017": {
+            "gpt-6.1-terra": {
               "confirmed": "certified",
               "possible": "certified",
               "possibleCheapest": "disproved",
               "witnessReferenceQuality": null,
-              "displayedMargin": 3.58308711252311
-            },
-            "gemini-4-argon": {
-              "confirmed": "certified",
-              "possible": "certified",
-              "possibleCheapest": "disproved",
-              "witnessReferenceQuality": null,
-              "displayedMargin": 9.462004851087414
-            },
-            "kimi-k3-1-pro": {
-              "confirmed": "certified",
-              "possible": "certified",
-              "possibleCheapest": "disproved",
-              "witnessReferenceQuality": null,
-              "displayedMargin": 12.429879597227085
+              "displayedMargin": 9.410337649003381
             },
             "gpt-6.1-sol-high": {
               "confirmed": "certified",
               "possible": "certified",
               "possibleCheapest": "disproved",
               "witnessReferenceQuality": null,
-              "displayedMargin": 7.934946565825591
+              "displayedMargin": 8.94247614628221
             },
-            "claude-opus-5-5-high": {
+            "deepseek-v4-1-flash-1017": {
               "confirmed": "certified",
               "possible": "certified",
               "possibleCheapest": "disproved",
               "witnessReferenceQuality": null,
-              "displayedMargin": 10.895229759403215
-            },
-            "mimo-v2-6-pro": {
-              "confirmed": "disproved",
-              "possible": "certified",
-              "possibleCheapest": "certified",
-              "witnessReferenceQuality": 49.23993471413,
-              "displayedMargin": -0.0013500000000021828
-            },
-            "claude-opus-5-5-medium": {
-              "confirmed": "certified",
-              "possible": "certified",
-              "possibleCheapest": "disproved",
-              "witnessReferenceQuality": null,
-              "displayedMargin": 9.766533005846362
+              "displayedMargin": 1.7740578439820496
             },
             "gpt-6.1-sol-medium": {
               "confirmed": "certified",
               "possible": "certified",
-              "possibleCheapest": "certified",
-              "witnessReferenceQuality": 49.23993471413,
-              "displayedMargin": 4.962128441259225
+              "possibleCheapest": "disproved",
+              "witnessReferenceQuality": null,
+              "displayedMargin": 5.8059151089201535
+            },
+            "gemini-4-argon": {
+              "confirmed": "certified",
+              "possible": "certified",
+              "possibleCheapest": "disproved",
+              "witnessReferenceQuality": null,
+              "displayedMargin": 8.811340521613111
+            },
+            "kimi-k3-1-pro": {
+              "confirmed": "certified",
+              "possible": "certified",
+              "possibleCheapest": "disproved",
+              "witnessReferenceQuality": null,
+              "displayedMargin": 10.205193201988543
             },
             "gpt-6-astra-high": {
               "confirmed": "certified",
               "possible": "certified",
               "possibleCheapest": "disproved",
               "witnessReferenceQuality": null,
-              "displayedMargin": 9.367544806950363
+              "displayedMargin": 10.667426653025323
+            },
+            "gpt-6.1-sol-low": {
+              "confirmed": "disproved",
+              "possible": "disproved",
+              "possibleCheapest": "disproved",
+              "witnessReferenceQuality": null,
+              "displayedMargin": -3.5485334407795364
+            },
+            "gpt-6.1-terra-xhigh": {
+              "confirmed": "certified",
+              "possible": "certified",
+              "possibleCheapest": "certified",
+              "witnessReferenceQuality": 46.65130909383877,
+              "displayedMargin": 1.7602272737705746
+            },
+            "gpt-6.1-terra-high": {
+              "confirmed": "disproved",
+              "possible": "certified",
+              "possibleCheapest": "certified",
+              "witnessReferenceQuality": 46.65130909383877,
+              "displayedMargin": 0.0
+            },
+            "claude-haiku-5-5-high": {
+              "status": "no interval label: AA's cost omits a pricing term (O94); competes over its published cost up to the stated factor"
             },
             "gpt-6-luna": {
               "confirmed": "disproved",
               "possible": "disproved",
               "possibleCheapest": "disproved",
               "witnessReferenceQuality": null,
-              "displayedMargin": -6.4763464830418584
+              "displayedMargin": -8.464742425877972
             },
-            "claude-haiku-5-5-high": {
+            "mimo-v2-6-pro": {
               "confirmed": "disproved",
               "possible": "disproved",
               "possibleCheapest": "disproved",
               "witnessReferenceQuality": null,
-              "displayedMargin": -7.111166121743636
+              "displayedMargin": -3.891618258644776
+            },
+            "gpt-6.1-terra-medium": {
+              "confirmed": "disproved",
+              "possible": "disproved",
+              "possibleCheapest": "disproved",
+              "witnessReferenceQuality": null,
+              "displayedMargin": -3.1181574808261345
+            },
+            "claude-haiku-5-5-medium": {
+              "status": "no interval label: AA's cost omits a pricing term (O94); competes over its published cost up to the stated factor"
             },
             "gpt-6-luna-xhigh": {
               "confirmed": "disproved",
               "possible": "disproved",
               "possibleCheapest": "disproved",
               "witnessReferenceQuality": null,
-              "displayedMargin": -11.23696613134809
-            },
-            "claude-haiku-5-5-medium": {
-              "confirmed": "disproved",
-              "possible": "disproved",
-              "possibleCheapest": "disproved",
-              "witnessReferenceQuality": null,
-              "displayedMargin": -10.831945499639886
+              "displayedMargin": -12.996918122709815
             },
             "gpt-6-luna-high": {
               "confirmed": "disproved",
               "possible": "disproved",
               "possibleCheapest": "disproved",
               "witnessReferenceQuality": null,
-              "displayedMargin": -13.424189423591137
+              "displayedMargin": -14.803124023186218
             },
             "gpt-6-luna-medium": {
               "confirmed": "disproved",
               "possible": "disproved",
               "possibleCheapest": "disproved",
               "witnessReferenceQuality": null,
-              "displayedMargin": -16.95480724345115
-            },
-            "gpt-5.6-luna-low": {
-              "confirmed": "disproved",
-              "possible": "disproved",
-              "possibleCheapest": "disproved",
-              "witnessReferenceQuality": null,
-              "displayedMargin": -27.9191185935672
+              "displayedMargin": -19.537786752942512
             }
           },
           "possibleCheapest": [
-            "mimo-v2-6-pro",
-            "gpt-6.1-sol-medium"
+            "gpt-6.1-terra-xhigh",
+            "gpt-6.1-terra-high"
           ],
           "confirmedCheapest": null,
           "uncheckedCheaperSiblings": {
-            "mimo-v2-6-pro": [],
-            "gpt-6.1-sol-medium": [
-              "GPT-6.1 Sol (low)"
+            "gpt-6.1-terra-xhigh": [
+              "GPT-6.1 Terra (non-reasoning)",
+              "GPT-6.1 Terra (low)"
+            ],
+            "gpt-6.1-terra-high": [
+              "GPT-6.1 Terra (non-reasoning)",
+              "GPT-6.1 Terra (low)"
             ]
           },
           "possibleQualifierN": 9,
@@ -578,132 +696,139 @@
         {
           "reference": {
             "id": "bar:lower-quartile-quality",
-            "level": 37.997018582781905,
-            "levelConfiguration": "gpt-6-luna-xhigh",
+            "level": 37.379969871651795,
+            "levelConfiguration": "claude-haiku-5-5-high",
             "rule": "lower-quartile displayed quality of the non-provisional cohort configurations at freeze (O34)"
           },
           "status": "certified",
           "rows": {
-            "deepseek-v4-1-flash-1017": {
+            "gpt-6.1-terra": {
               "confirmed": "certified",
               "possible": "certified",
               "possibleCheapest": "disproved",
               "witnessReferenceQuality": null,
-              "displayedMargin": 14.826003243871206
-            },
-            "gemini-4-argon": {
-              "confirmed": "certified",
-              "possible": "certified",
-              "possibleCheapest": "disproved",
-              "witnessReferenceQuality": null,
-              "displayedMargin": 20.70492098243551
-            },
-            "kimi-k3-1-pro": {
-              "confirmed": "certified",
-              "possible": "certified",
-              "possibleCheapest": "disproved",
-              "witnessReferenceQuality": null,
-              "displayedMargin": 23.67279572857518
+              "displayedMargin": 18.681676871190355
             },
             "gpt-6.1-sol-high": {
               "confirmed": "certified",
               "possible": "certified",
               "possibleCheapest": "disproved",
               "witnessReferenceQuality": null,
-              "displayedMargin": 19.177862697173687
+              "displayedMargin": 18.213815368469184
             },
-            "claude-opus-5-5-high": {
+            "deepseek-v4-1-flash-1017": {
               "confirmed": "certified",
               "possible": "certified",
               "possibleCheapest": "disproved",
               "witnessReferenceQuality": null,
-              "displayedMargin": 22.13814589075131
-            },
-            "mimo-v2-6-pro": {
-              "confirmed": "certified",
-              "possible": "certified",
-              "possibleCheapest": "disproved",
-              "witnessReferenceQuality": null,
-              "displayedMargin": 11.241566131348094
-            },
-            "claude-opus-5-5-medium": {
-              "confirmed": "certified",
-              "possible": "certified",
-              "possibleCheapest": "disproved",
-              "witnessReferenceQuality": null,
-              "displayedMargin": 21.00944913719446
+              "displayedMargin": 11.045397066169024
             },
             "gpt-6.1-sol-medium": {
               "confirmed": "certified",
               "possible": "certified",
               "possibleCheapest": "disproved",
               "witnessReferenceQuality": null,
-              "displayedMargin": 16.20504457260732
+              "displayedMargin": 15.077254331107127
+            },
+            "gemini-4-argon": {
+              "confirmed": "certified",
+              "possible": "certified",
+              "possibleCheapest": "disproved",
+              "witnessReferenceQuality": null,
+              "displayedMargin": 18.082679743800085
+            },
+            "kimi-k3-1-pro": {
+              "confirmed": "certified",
+              "possible": "certified",
+              "possibleCheapest": "disproved",
+              "witnessReferenceQuality": null,
+              "displayedMargin": 19.476532424175517
             },
             "gpt-6-astra-high": {
               "confirmed": "certified",
               "possible": "certified",
               "possibleCheapest": "disproved",
               "witnessReferenceQuality": null,
-              "displayedMargin": 20.61046093829846
+              "displayedMargin": 19.938765875212297
+            },
+            "gpt-6.1-sol-low": {
+              "confirmed": "certified",
+              "possible": "certified",
+              "possibleCheapest": "disproved",
+              "witnessReferenceQuality": null,
+              "displayedMargin": 5.722805781407438
+            },
+            "gpt-6.1-terra-xhigh": {
+              "confirmed": "certified",
+              "possible": "certified",
+              "possibleCheapest": "disproved",
+              "witnessReferenceQuality": null,
+              "displayedMargin": 11.031566495957549
+            },
+            "gpt-6.1-terra-high": {
+              "confirmed": "certified",
+              "possible": "certified",
+              "possibleCheapest": "disproved",
+              "witnessReferenceQuality": null,
+              "displayedMargin": 9.271339222186974
+            },
+            "claude-haiku-5-5-high": {
+              "status": "no interval label: AA's cost omits a pricing term (O94); competes over its published cost up to the stated factor"
             },
             "gpt-6-luna": {
               "confirmed": "certified",
               "possible": "certified",
-              "possibleCheapest": "disproved",
-              "witnessReferenceQuality": null,
-              "displayedMargin": 4.766569648306238
+              "possibleCheapest": "certified",
+              "witnessReferenceQuality": 37.379969871651795,
+              "displayedMargin": 0.8065967963090017
             },
-            "claude-haiku-5-5-high": {
+            "mimo-v2-6-pro": {
               "confirmed": "certified",
               "possible": "certified",
               "possibleCheapest": "disproved",
               "witnessReferenceQuality": null,
-              "displayedMargin": 4.13175000960446
+              "displayedMargin": 5.379720963542198
             },
-            "gpt-6-luna-xhigh": {
+            "gpt-6.1-terra-medium": {
               "confirmed": "certified",
               "possible": "certified",
               "possibleCheapest": "disproved",
               "witnessReferenceQuality": null,
-              "displayedMargin": 0.005950000000005673
+              "displayedMargin": 6.153181741360839
             },
             "claude-haiku-5-5-medium": {
-              "confirmed": "certified",
-              "possible": "certified",
-              "possibleCheapest": "certified",
-              "witnessReferenceQuality": 37.997018582781905,
-              "displayedMargin": 0.41097063170821
+              "status": "no interval label: AA's cost omits a pricing term (O94); competes over its published cost up to the stated factor"
+            },
+            "gpt-6-luna-xhigh": {
+              "confirmed": "disproved",
+              "possible": "disproved",
+              "possibleCheapest": "disproved",
+              "witnessReferenceQuality": null,
+              "displayedMargin": -3.725578900522841
             },
             "gpt-6-luna-high": {
               "confirmed": "disproved",
               "possible": "disproved",
               "possibleCheapest": "disproved",
               "witnessReferenceQuality": null,
-              "displayedMargin": -2.1812732922430413
+              "displayedMargin": -5.531784800999244
             },
             "gpt-6-luna-medium": {
               "confirmed": "disproved",
               "possible": "disproved",
               "possibleCheapest": "disproved",
               "witnessReferenceQuality": null,
-              "displayedMargin": -5.711891112103054
-            },
-            "gpt-5.6-luna-low": {
-              "confirmed": "disproved",
-              "possible": "disproved",
-              "possibleCheapest": "disproved",
-              "witnessReferenceQuality": null,
-              "displayedMargin": -16.676202462219106
+              "displayedMargin": -10.266447530755539
             }
           },
           "possibleCheapest": [
-            "claude-haiku-5-5-medium"
+            "gpt-6-luna"
           ],
-          "confirmedCheapest": "claude-haiku-5-5-medium",
+          "confirmedCheapest": null,
           "uncheckedCheaperSiblings": {
-            "claude-haiku-5-5-medium": [
-              "Claude Haiku 5.5 (low)"
+            "gpt-6-luna": [
+              "GPT-6 Luna (low)",
+              "GPT-6 Luna (non-reasoning)"
             ]
           },
           "possibleQualifierN": 13,
@@ -713,123 +838,129 @@
         {
           "reference": {
             "id": "bar:upper-quartile-quality",
-            "level": 57.15568127995559,
-            "levelConfiguration": "gpt-6.1-sol-high",
+            "level": 55.46264961545188,
+            "levelConfiguration": "gemini-4-argon",
             "rule": "upper-quartile displayed quality of the non-provisional cohort configurations at freeze (O34)"
           },
           "status": "certified",
           "rows": {
-            "deepseek-v4-1-flash-1017": {
-              "confirmed": "disproved",
-              "possible": "disproved",
-              "possibleCheapest": "disproved",
-              "witnessReferenceQuality": null,
-              "displayedMargin": -4.332659453302476
-            },
-            "gemini-4-argon": {
+            "gpt-6.1-terra": {
               "confirmed": "certified",
               "possible": "certified",
               "possibleCheapest": "disproved",
               "witnessReferenceQuality": null,
-              "displayedMargin": 1.5462582852618283
-            },
-            "kimi-k3-1-pro": {
-              "confirmed": "certified",
-              "possible": "certified",
-              "possibleCheapest": "disproved",
-              "witnessReferenceQuality": null,
-              "displayedMargin": 4.514133031401499
+              "displayedMargin": 0.5989971273902697
             },
             "gpt-6.1-sol-high": {
               "confirmed": "certified",
               "possible": "certified",
               "possibleCheapest": "certified",
-              "witnessReferenceQuality": 57.15568127995559,
-              "displayedMargin": 0.01920000000000499
+              "witnessReferenceQuality": 55.46264961545188,
+              "displayedMargin": 0.13113562466909912
             },
-            "claude-opus-5-5-high": {
-              "confirmed": "certified",
-              "possible": "certified",
-              "possibleCheapest": "disproved",
-              "witnessReferenceQuality": null,
-              "displayedMargin": 2.9794831935776287
-            },
-            "mimo-v2-6-pro": {
+            "deepseek-v4-1-flash-1017": {
               "confirmed": "disproved",
               "possible": "disproved",
               "possibleCheapest": "disproved",
               "witnessReferenceQuality": null,
-              "displayedMargin": -7.917096565825588
-            },
-            "claude-opus-5-5-medium": {
-              "confirmed": "certified",
-              "possible": "certified",
-              "possibleCheapest": "disproved",
-              "witnessReferenceQuality": null,
-              "displayedMargin": 1.8507864400207765
+              "displayedMargin": -7.037282677631062
             },
             "gpt-6.1-sol-medium": {
               "confirmed": "disproved",
               "possible": "disproved",
               "possibleCheapest": "disproved",
               "witnessReferenceQuality": null,
-              "displayedMargin": -2.9536181245663613
+              "displayedMargin": -3.005425412692958
+            },
+            "gemini-4-argon": {
+              "confirmed": "disproved",
+              "possible": "certified",
+              "possibleCheapest": "disproved",
+              "witnessReferenceQuality": null,
+              "displayedMargin": 0.0
+            },
+            "kimi-k3-1-pro": {
+              "confirmed": "certified",
+              "possible": "certified",
+              "possibleCheapest": "disproved",
+              "witnessReferenceQuality": null,
+              "displayedMargin": 1.3938526803754314
             },
             "gpt-6-astra-high": {
               "confirmed": "certified",
               "possible": "certified",
               "possibleCheapest": "disproved",
               "witnessReferenceQuality": null,
-              "displayedMargin": 1.4517982411247772
+              "displayedMargin": 1.8560861314122121
+            },
+            "gpt-6.1-sol-low": {
+              "confirmed": "disproved",
+              "possible": "disproved",
+              "possibleCheapest": "disproved",
+              "witnessReferenceQuality": null,
+              "displayedMargin": -12.359873962392648
+            },
+            "gpt-6.1-terra-xhigh": {
+              "confirmed": "disproved",
+              "possible": "disproved",
+              "possibleCheapest": "disproved",
+              "witnessReferenceQuality": null,
+              "displayedMargin": -7.051113247842537
+            },
+            "gpt-6.1-terra-high": {
+              "confirmed": "disproved",
+              "possible": "disproved",
+              "possibleCheapest": "disproved",
+              "witnessReferenceQuality": null,
+              "displayedMargin": -8.811340521613111
+            },
+            "claude-haiku-5-5-high": {
+              "status": "no interval label: AA's cost omits a pricing term (O94); competes over its published cost up to the stated factor"
             },
             "gpt-6-luna": {
               "confirmed": "disproved",
               "possible": "disproved",
               "possibleCheapest": "disproved",
               "witnessReferenceQuality": null,
-              "displayedMargin": -14.392093048867444
+              "displayedMargin": -17.276082947491084
             },
-            "claude-haiku-5-5-high": {
+            "mimo-v2-6-pro": {
               "confirmed": "disproved",
               "possible": "disproved",
               "possibleCheapest": "disproved",
               "witnessReferenceQuality": null,
-              "displayedMargin": -15.026912687569222
+              "displayedMargin": -12.702958780257887
+            },
+            "gpt-6.1-terra-medium": {
+              "confirmed": "disproved",
+              "possible": "disproved",
+              "possibleCheapest": "disproved",
+              "witnessReferenceQuality": null,
+              "displayedMargin": -11.929498002439246
+            },
+            "claude-haiku-5-5-medium": {
+              "status": "no interval label: AA's cost omits a pricing term (O94); competes over its published cost up to the stated factor"
             },
             "gpt-6-luna-xhigh": {
               "confirmed": "disproved",
               "possible": "disproved",
               "possibleCheapest": "disproved",
               "witnessReferenceQuality": null,
-              "displayedMargin": -19.152712697173676
-            },
-            "claude-haiku-5-5-medium": {
-              "confirmed": "disproved",
-              "possible": "disproved",
-              "possibleCheapest": "disproved",
-              "witnessReferenceQuality": null,
-              "displayedMargin": -18.747692065465472
+              "displayedMargin": -21.808258644322926
             },
             "gpt-6-luna-high": {
               "confirmed": "disproved",
               "possible": "disproved",
               "possibleCheapest": "disproved",
               "witnessReferenceQuality": null,
-              "displayedMargin": -21.339935989416723
+              "displayedMargin": -23.61446454479933
             },
             "gpt-6-luna-medium": {
               "confirmed": "disproved",
               "possible": "disproved",
               "possibleCheapest": "disproved",
               "witnessReferenceQuality": null,
-              "displayedMargin": -24.870553809276736
-            },
-            "gpt-5.6-luna-low": {
-              "confirmed": "disproved",
-              "possible": "disproved",
-              "possibleCheapest": "disproved",
-              "witnessReferenceQuality": null,
-              "displayedMargin": -35.83486515939279
+              "displayedMargin": -28.349127274555624
             }
           },
           "possibleCheapest": [
@@ -837,147 +968,155 @@
           ],
           "confirmedCheapest": "gpt-6.1-sol-high",
           "uncheckedCheaperSiblings": {
-            "gpt-6.1-sol-high": [
-              "GPT-6.1 Sol (low)"
-            ]
+            "gpt-6.1-sol-high": []
           },
-          "possibleQualifierN": 6,
-          "confirmedQualifierN": 6,
-          "comparison": "compares 6 configurations that can qualify"
+          "possibleQualifierN": 5,
+          "confirmedQualifierN": 4,
+          "comparison": "compares 5 configurations that can qualify"
         }
       ],
       "current": [
         {
           "reference": {
             "id": "bar:median-quality",
-            "level": 49.23858471413,
-            "levelConfiguration": "mimo-v2-6-pro",
+            "level": 46.65130909383877,
+            "levelConfiguration": "gpt-6.1-terra-high",
             "rule": "lower-median displayed quality of the non-provisional cohort configurations at freeze (E192; headline bar)"
           },
           "status": "certified",
           "rows": {
-            "deepseek-v4-1-flash-1017": {
+            "gpt-6.1-terra": {
               "confirmed": "certified",
               "possible": "certified",
               "possibleCheapest": "disproved",
               "witnessReferenceQuality": null,
-              "displayedMargin": 3.584437112523112
-            },
-            "gemini-4-argon": {
-              "confirmed": "certified",
-              "possible": "certified",
-              "possibleCheapest": "disproved",
-              "witnessReferenceQuality": null,
-              "displayedMargin": 9.463354851087416
-            },
-            "kimi-k3-1-pro": {
-              "confirmed": "certified",
-              "possible": "certified",
-              "possibleCheapest": "disproved",
-              "witnessReferenceQuality": null,
-              "displayedMargin": 12.431229597227087
+              "displayedMargin": 9.410337649003381
             },
             "gpt-6.1-sol-high": {
               "confirmed": "certified",
               "possible": "certified",
               "possibleCheapest": "disproved",
               "witnessReferenceQuality": null,
-              "displayedMargin": 7.936296565825593
+              "displayedMargin": 8.94247614628221
             },
-            "claude-opus-5-5-high": {
+            "deepseek-v4-1-flash-1017": {
               "confirmed": "certified",
               "possible": "certified",
               "possibleCheapest": "disproved",
               "witnessReferenceQuality": null,
-              "displayedMargin": 10.896579759403217
-            },
-            "mimo-v2-6-pro": {
-              "confirmed": "disproved",
-              "possible": "certified",
-              "possibleCheapest": "certified",
-              "witnessReferenceQuality": 49.23858471413,
-              "displayedMargin": 0.0
-            },
-            "claude-opus-5-5-medium": {
-              "confirmed": "certified",
-              "possible": "certified",
-              "possibleCheapest": "disproved",
-              "witnessReferenceQuality": null,
-              "displayedMargin": 9.767883005846365
+              "displayedMargin": 1.7740578439820496
             },
             "gpt-6.1-sol-medium": {
               "confirmed": "certified",
               "possible": "certified",
-              "possibleCheapest": "certified",
-              "witnessReferenceQuality": 49.23858471413,
-              "displayedMargin": 4.963478441259227
+              "possibleCheapest": "disproved",
+              "witnessReferenceQuality": null,
+              "displayedMargin": 5.8059151089201535
+            },
+            "gemini-4-argon": {
+              "confirmed": "certified",
+              "possible": "certified",
+              "possibleCheapest": "disproved",
+              "witnessReferenceQuality": null,
+              "displayedMargin": 8.811340521613111
+            },
+            "kimi-k3-1-pro": {
+              "confirmed": "certified",
+              "possible": "certified",
+              "possibleCheapest": "disproved",
+              "witnessReferenceQuality": null,
+              "displayedMargin": 10.205193201988543
             },
             "gpt-6-astra-high": {
               "confirmed": "certified",
               "possible": "certified",
               "possibleCheapest": "disproved",
               "witnessReferenceQuality": null,
-              "displayedMargin": 9.368894806950365
+              "displayedMargin": 10.667426653025323
+            },
+            "gpt-6.1-sol-low": {
+              "confirmed": "disproved",
+              "possible": "disproved",
+              "possibleCheapest": "disproved",
+              "witnessReferenceQuality": null,
+              "displayedMargin": -3.5485334407795364
+            },
+            "gpt-6.1-terra-xhigh": {
+              "confirmed": "certified",
+              "possible": "certified",
+              "possibleCheapest": "certified",
+              "witnessReferenceQuality": 46.65130909383877,
+              "displayedMargin": 1.7602272737705746
+            },
+            "gpt-6.1-terra-high": {
+              "confirmed": "disproved",
+              "possible": "certified",
+              "possibleCheapest": "certified",
+              "witnessReferenceQuality": 46.65130909383877,
+              "displayedMargin": 0.0
+            },
+            "claude-haiku-5-5-high": {
+              "status": "no interval label: AA's cost omits a pricing term (O94); competes over its published cost up to the stated factor"
             },
             "gpt-6-luna": {
               "confirmed": "disproved",
               "possible": "disproved",
               "possibleCheapest": "disproved",
               "witnessReferenceQuality": null,
-              "displayedMargin": -6.474996483041856
+              "displayedMargin": -8.464742425877972
             },
-            "claude-haiku-5-5-high": {
+            "mimo-v2-6-pro": {
               "confirmed": "disproved",
               "possible": "disproved",
               "possibleCheapest": "disproved",
               "witnessReferenceQuality": null,
-              "displayedMargin": -7.109816121743634
+              "displayedMargin": -3.891618258644776
+            },
+            "gpt-6.1-terra-medium": {
+              "confirmed": "disproved",
+              "possible": "disproved",
+              "possibleCheapest": "disproved",
+              "witnessReferenceQuality": null,
+              "displayedMargin": -3.1181574808261345
+            },
+            "claude-haiku-5-5-medium": {
+              "status": "no interval label: AA's cost omits a pricing term (O94); competes over its published cost up to the stated factor"
             },
             "gpt-6-luna-xhigh": {
               "confirmed": "disproved",
               "possible": "disproved",
               "possibleCheapest": "disproved",
               "witnessReferenceQuality": null,
-              "displayedMargin": -11.235616131348088
-            },
-            "claude-haiku-5-5-medium": {
-              "confirmed": "disproved",
-              "possible": "disproved",
-              "possibleCheapest": "disproved",
-              "witnessReferenceQuality": null,
-              "displayedMargin": -10.830595499639884
+              "displayedMargin": -12.996918122709815
             },
             "gpt-6-luna-high": {
               "confirmed": "disproved",
               "possible": "disproved",
               "possibleCheapest": "disproved",
               "witnessReferenceQuality": null,
-              "displayedMargin": -13.422839423591135
+              "displayedMargin": -14.803124023186218
             },
             "gpt-6-luna-medium": {
               "confirmed": "disproved",
               "possible": "disproved",
               "possibleCheapest": "disproved",
               "witnessReferenceQuality": null,
-              "displayedMargin": -16.953457243451147
-            },
-            "gpt-5.6-luna-low": {
-              "confirmed": "disproved",
-              "possible": "disproved",
-              "possibleCheapest": "disproved",
-              "witnessReferenceQuality": null,
-              "displayedMargin": -27.9177685935672
+              "displayedMargin": -19.537786752942512
             }
           },
           "possibleCheapest": [
-            "mimo-v2-6-pro",
-            "gpt-6.1-sol-medium"
+            "gpt-6.1-terra-xhigh",
+            "gpt-6.1-terra-high"
           ],
           "confirmedCheapest": null,
           "uncheckedCheaperSiblings": {
-            "mimo-v2-6-pro": [],
-            "gpt-6.1-sol-medium": [
-              "GPT-6.1 Sol (low)"
+            "gpt-6.1-terra-xhigh": [
+              "GPT-6.1 Terra (non-reasoning)",
+              "GPT-6.1 Terra (low)"
+            ],
+            "gpt-6.1-terra-high": [
+              "GPT-6.1 Terra (non-reasoning)",
+              "GPT-6.1 Terra (low)"
             ]
           },
           "possibleQualifierN": 9,
@@ -987,268 +1126,279 @@
         {
           "reference": {
             "id": "bar:lower-quartile-quality",
-            "level": 38.00296858278191,
-            "levelConfiguration": "gpt-6-luna-xhigh",
+            "level": 37.379969871651795,
+            "levelConfiguration": "claude-haiku-5-5-high",
             "rule": "lower-quartile displayed quality of the non-provisional cohort configurations at freeze (O34)"
           },
           "status": "certified",
           "rows": {
-            "deepseek-v4-1-flash-1017": {
+            "gpt-6.1-terra": {
               "confirmed": "certified",
               "possible": "certified",
               "possibleCheapest": "disproved",
               "witnessReferenceQuality": null,
-              "displayedMargin": 14.8200532438712
-            },
-            "gemini-4-argon": {
-              "confirmed": "certified",
-              "possible": "certified",
-              "possibleCheapest": "disproved",
-              "witnessReferenceQuality": null,
-              "displayedMargin": 20.698970982435505
-            },
-            "kimi-k3-1-pro": {
-              "confirmed": "certified",
-              "possible": "certified",
-              "possibleCheapest": "disproved",
-              "witnessReferenceQuality": null,
-              "displayedMargin": 23.666845728575176
+              "displayedMargin": 18.681676871190355
             },
             "gpt-6.1-sol-high": {
               "confirmed": "certified",
               "possible": "certified",
               "possibleCheapest": "disproved",
               "witnessReferenceQuality": null,
-              "displayedMargin": 19.17191269717368
+              "displayedMargin": 18.213815368469184
             },
-            "claude-opus-5-5-high": {
+            "deepseek-v4-1-flash-1017": {
               "confirmed": "certified",
               "possible": "certified",
               "possibleCheapest": "disproved",
               "witnessReferenceQuality": null,
-              "displayedMargin": 22.132195890751305
-            },
-            "mimo-v2-6-pro": {
-              "confirmed": "certified",
-              "possible": "certified",
-              "possibleCheapest": "disproved",
-              "witnessReferenceQuality": null,
-              "displayedMargin": 11.235616131348088
-            },
-            "claude-opus-5-5-medium": {
-              "confirmed": "certified",
-              "possible": "certified",
-              "possibleCheapest": "disproved",
-              "witnessReferenceQuality": null,
-              "displayedMargin": 21.003499137194453
+              "displayedMargin": 11.045397066169024
             },
             "gpt-6.1-sol-medium": {
               "confirmed": "certified",
               "possible": "certified",
               "possibleCheapest": "disproved",
               "witnessReferenceQuality": null,
-              "displayedMargin": 16.199094572607315
+              "displayedMargin": 15.077254331107127
+            },
+            "gemini-4-argon": {
+              "confirmed": "certified",
+              "possible": "certified",
+              "possibleCheapest": "disproved",
+              "witnessReferenceQuality": null,
+              "displayedMargin": 18.082679743800085
+            },
+            "kimi-k3-1-pro": {
+              "confirmed": "certified",
+              "possible": "certified",
+              "possibleCheapest": "disproved",
+              "witnessReferenceQuality": null,
+              "displayedMargin": 19.476532424175517
             },
             "gpt-6-astra-high": {
               "confirmed": "certified",
               "possible": "certified",
               "possibleCheapest": "disproved",
               "witnessReferenceQuality": null,
-              "displayedMargin": 20.604510938298453
+              "displayedMargin": 19.938765875212297
+            },
+            "gpt-6.1-sol-low": {
+              "confirmed": "certified",
+              "possible": "certified",
+              "possibleCheapest": "disproved",
+              "witnessReferenceQuality": null,
+              "displayedMargin": 5.722805781407438
+            },
+            "gpt-6.1-terra-xhigh": {
+              "confirmed": "certified",
+              "possible": "certified",
+              "possibleCheapest": "disproved",
+              "witnessReferenceQuality": null,
+              "displayedMargin": 11.031566495957549
+            },
+            "gpt-6.1-terra-high": {
+              "confirmed": "certified",
+              "possible": "certified",
+              "possibleCheapest": "disproved",
+              "witnessReferenceQuality": null,
+              "displayedMargin": 9.271339222186974
+            },
+            "claude-haiku-5-5-high": {
+              "status": "no interval label: AA's cost omits a pricing term (O94); competes over its published cost up to the stated factor"
             },
             "gpt-6-luna": {
               "confirmed": "certified",
               "possible": "certified",
-              "possibleCheapest": "disproved",
-              "witnessReferenceQuality": null,
-              "displayedMargin": 4.760619648306232
+              "possibleCheapest": "certified",
+              "witnessReferenceQuality": 37.379969871651795,
+              "displayedMargin": 0.8065967963090017
             },
-            "claude-haiku-5-5-high": {
+            "mimo-v2-6-pro": {
               "confirmed": "certified",
               "possible": "certified",
               "possibleCheapest": "disproved",
               "witnessReferenceQuality": null,
-              "displayedMargin": 4.125800009604454
+              "displayedMargin": 5.379720963542198
+            },
+            "gpt-6.1-terra-medium": {
+              "confirmed": "certified",
+              "possible": "certified",
+              "possibleCheapest": "disproved",
+              "witnessReferenceQuality": null,
+              "displayedMargin": 6.153181741360839
+            },
+            "claude-haiku-5-5-medium": {
+              "status": "no interval label: AA's cost omits a pricing term (O94); competes over its published cost up to the stated factor"
             },
             "gpt-6-luna-xhigh": {
               "confirmed": "disproved",
-              "possible": "certified",
+              "possible": "disproved",
               "possibleCheapest": "disproved",
               "witnessReferenceQuality": null,
-              "displayedMargin": 0.0
-            },
-            "claude-haiku-5-5-medium": {
-              "confirmed": "certified",
-              "possible": "certified",
-              "possibleCheapest": "certified",
-              "witnessReferenceQuality": 38.00296858278191,
-              "displayedMargin": 0.40502063170820435
+              "displayedMargin": -3.725578900522841
             },
             "gpt-6-luna-high": {
               "confirmed": "disproved",
               "possible": "disproved",
               "possibleCheapest": "disproved",
               "witnessReferenceQuality": null,
-              "displayedMargin": -2.187223292243047
+              "displayedMargin": -5.531784800999244
             },
             "gpt-6-luna-medium": {
               "confirmed": "disproved",
               "possible": "disproved",
               "possibleCheapest": "disproved",
               "witnessReferenceQuality": null,
-              "displayedMargin": -5.717841112103059
-            },
-            "gpt-5.6-luna-low": {
-              "confirmed": "disproved",
-              "possible": "disproved",
-              "possibleCheapest": "disproved",
-              "witnessReferenceQuality": null,
-              "displayedMargin": -16.68215246221911
+              "displayedMargin": -10.266447530755539
             }
           },
           "possibleCheapest": [
-            "claude-haiku-5-5-medium"
+            "gpt-6-luna"
           ],
-          "confirmedCheapest": "claude-haiku-5-5-medium",
+          "confirmedCheapest": null,
           "uncheckedCheaperSiblings": {
-            "claude-haiku-5-5-medium": [
-              "Claude Haiku 5.5 (low)"
+            "gpt-6-luna": [
+              "GPT-6 Luna (low)",
+              "GPT-6 Luna (non-reasoning)"
             ]
           },
           "possibleQualifierN": 13,
-          "confirmedQualifierN": 12,
+          "confirmedQualifierN": 13,
           "comparison": "compares 13 configurations that can qualify"
         },
         {
           "reference": {
             "id": "bar:upper-quartile-quality",
-            "level": 58.607479521080364,
-            "levelConfiguration": "gpt-6-astra-high",
+            "level": 55.46264961545188,
+            "levelConfiguration": "gemini-4-argon",
             "rule": "upper-quartile displayed quality of the non-provisional cohort configurations at freeze (O34)"
           },
           "status": "certified",
           "rows": {
+            "gpt-6.1-terra": {
+              "confirmed": "certified",
+              "possible": "certified",
+              "possibleCheapest": "disproved",
+              "witnessReferenceQuality": null,
+              "displayedMargin": 0.5989971273902697
+            },
+            "gpt-6.1-sol-high": {
+              "confirmed": "certified",
+              "possible": "certified",
+              "possibleCheapest": "certified",
+              "witnessReferenceQuality": 55.46264961545188,
+              "displayedMargin": 0.13113562466909912
+            },
             "deepseek-v4-1-flash-1017": {
               "confirmed": "disproved",
               "possible": "disproved",
               "possibleCheapest": "disproved",
               "witnessReferenceQuality": null,
-              "displayedMargin": -5.784457694427253
-            },
-            "gemini-4-argon": {
-              "confirmed": "certified",
-              "possible": "certified",
-              "possibleCheapest": "disproved",
-              "witnessReferenceQuality": null,
-              "displayedMargin": 0.09446004413705111
-            },
-            "kimi-k3-1-pro": {
-              "confirmed": "certified",
-              "possible": "certified",
-              "possibleCheapest": "disproved",
-              "witnessReferenceQuality": null,
-              "displayedMargin": 3.062334790276722
-            },
-            "gpt-6.1-sol-high": {
-              "confirmed": "disproved",
-              "possible": "disproved",
-              "possibleCheapest": "disproved",
-              "witnessReferenceQuality": null,
-              "displayedMargin": -1.4325982411247722
-            },
-            "claude-opus-5-5-high": {
-              "confirmed": "certified",
-              "possible": "certified",
-              "possibleCheapest": "disproved",
-              "witnessReferenceQuality": null,
-              "displayedMargin": 1.5276849524528515
-            },
-            "mimo-v2-6-pro": {
-              "confirmed": "disproved",
-              "possible": "disproved",
-              "possibleCheapest": "disproved",
-              "witnessReferenceQuality": null,
-              "displayedMargin": -9.368894806950365
-            },
-            "claude-opus-5-5-medium": {
-              "confirmed": "certified",
-              "possible": "certified",
-              "possibleCheapest": "certified",
-              "witnessReferenceQuality": 58.607479521080364,
-              "displayedMargin": 0.39898819889599935
+              "displayedMargin": -7.037282677631062
             },
             "gpt-6.1-sol-medium": {
               "confirmed": "disproved",
               "possible": "disproved",
               "possibleCheapest": "disproved",
               "witnessReferenceQuality": null,
-              "displayedMargin": -4.4054163656911385
+              "displayedMargin": -3.005425412692958
             },
-            "gpt-6-astra-high": {
+            "gemini-4-argon": {
               "confirmed": "disproved",
               "possible": "certified",
               "possibleCheapest": "disproved",
               "witnessReferenceQuality": null,
               "displayedMargin": 0.0
             },
+            "kimi-k3-1-pro": {
+              "confirmed": "certified",
+              "possible": "certified",
+              "possibleCheapest": "disproved",
+              "witnessReferenceQuality": null,
+              "displayedMargin": 1.3938526803754314
+            },
+            "gpt-6-astra-high": {
+              "confirmed": "certified",
+              "possible": "certified",
+              "possibleCheapest": "disproved",
+              "witnessReferenceQuality": null,
+              "displayedMargin": 1.8560861314122121
+            },
+            "gpt-6.1-sol-low": {
+              "confirmed": "disproved",
+              "possible": "disproved",
+              "possibleCheapest": "disproved",
+              "witnessReferenceQuality": null,
+              "displayedMargin": -12.359873962392648
+            },
+            "gpt-6.1-terra-xhigh": {
+              "confirmed": "disproved",
+              "possible": "disproved",
+              "possibleCheapest": "disproved",
+              "witnessReferenceQuality": null,
+              "displayedMargin": -7.051113247842537
+            },
+            "gpt-6.1-terra-high": {
+              "confirmed": "disproved",
+              "possible": "disproved",
+              "possibleCheapest": "disproved",
+              "witnessReferenceQuality": null,
+              "displayedMargin": -8.811340521613111
+            },
+            "claude-haiku-5-5-high": {
+              "status": "no interval label: AA's cost omits a pricing term (O94); competes over its published cost up to the stated factor"
+            },
             "gpt-6-luna": {
               "confirmed": "disproved",
               "possible": "disproved",
               "possibleCheapest": "disproved",
               "witnessReferenceQuality": null,
-              "displayedMargin": -15.843891289992222
+              "displayedMargin": -17.276082947491084
             },
-            "claude-haiku-5-5-high": {
+            "mimo-v2-6-pro": {
               "confirmed": "disproved",
               "possible": "disproved",
               "possibleCheapest": "disproved",
               "witnessReferenceQuality": null,
-              "displayedMargin": -16.478710928694
+              "displayedMargin": -12.702958780257887
+            },
+            "gpt-6.1-terra-medium": {
+              "confirmed": "disproved",
+              "possible": "disproved",
+              "possibleCheapest": "disproved",
+              "witnessReferenceQuality": null,
+              "displayedMargin": -11.929498002439246
+            },
+            "claude-haiku-5-5-medium": {
+              "status": "no interval label: AA's cost omits a pricing term (O94); competes over its published cost up to the stated factor"
             },
             "gpt-6-luna-xhigh": {
               "confirmed": "disproved",
               "possible": "disproved",
               "possibleCheapest": "disproved",
               "witnessReferenceQuality": null,
-              "displayedMargin": -20.604510938298453
-            },
-            "claude-haiku-5-5-medium": {
-              "confirmed": "disproved",
-              "possible": "disproved",
-              "possibleCheapest": "disproved",
-              "witnessReferenceQuality": null,
-              "displayedMargin": -20.19949030659025
+              "displayedMargin": -21.808258644322926
             },
             "gpt-6-luna-high": {
               "confirmed": "disproved",
               "possible": "disproved",
               "possibleCheapest": "disproved",
               "witnessReferenceQuality": null,
-              "displayedMargin": -22.7917342305415
+              "displayedMargin": -23.61446454479933
             },
             "gpt-6-luna-medium": {
               "confirmed": "disproved",
               "possible": "disproved",
               "possibleCheapest": "disproved",
               "witnessReferenceQuality": null,
-              "displayedMargin": -26.322352050401513
-            },
-            "gpt-5.6-luna-low": {
-              "confirmed": "disproved",
-              "possible": "disproved",
-              "possibleCheapest": "disproved",
-              "witnessReferenceQuality": null,
-              "displayedMargin": -37.28666340051757
+              "displayedMargin": -28.349127274555624
             }
           },
           "possibleCheapest": [
-            "claude-opus-5-5-medium"
+            "gpt-6.1-sol-high"
           ],
-          "confirmedCheapest": "claude-opus-5-5-medium",
+          "confirmedCheapest": "gpt-6.1-sol-high",
           "uncheckedCheaperSiblings": {
-            "claude-opus-5-5-medium": [
-              "Claude Opus 5.5 (low with fallback)"
-            ]
+            "gpt-6.1-sol-high": []
           },
           "possibleQualifierN": 5,
           "confirmedQualifierN": 4,

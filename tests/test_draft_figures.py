@@ -237,7 +237,7 @@ def test_gap_fill_bars_figure_names_a_changed_bar():
     assert f.named_figures(SCORES)["gapFillBars"] == "every bar of every ranking keeps its row in all three"
 
 
-def test_subset_strata_and_excluded_missing_leaves_render_from_the_build():
+def test_subset_strata_and_excluded_missing_leaves_render_from_the_build(tmp_path):
     """I53 M2, L3: the subset stratum's status and the excluded rows' missing leaves are figures."""
 
     manifest = f.named_figures(SCORES)
@@ -245,10 +245,24 @@ def test_subset_strata_and_excluded_missing_leaves_render_from_the_build():
               for item in section["costInfluence"][basis].get("subsetStrata", {}).values()]
     assert all(item["status"] in manifest["subsetStrata"] for item in strata) and manifest["excluded.missingCore"]
     empty = json.loads(json.dumps(SCORES))
+    excluded = {item["id"] for item in empty["v3"]["incompleteEvidence"]} & {item["id"] for item in empty["v3Tracks"]["aicd"]["incompleteEvidence"]}
     for section in (empty["v3"], *empty["v3Tracks"].values()):
         section["costInfluence"]["api"]["subsetStrata"] = section["costInfluence"]["plan"]["subsetStrata"] = {}
         section["incompleteEvidence"] = []
-    figures = f.named_figures(empty)
+    # Reviewer 78 H: with nothing in neither ranking, a consistent copy's cohort is the ranked rows alone, so the
+    # configurations that were excluded leave the captured cohort too (or the coverage figures do not close).
+    with pytest.raises(f.FigureError, match=r"coverage does not close: 25 ranked \+ 0 in neither != cohort 37"):
+        f.named_figures(empty)
+    data = tmp_path / "data"
+    shutil.copytree(DATA, data, ignore=shutil.ignore_patterns("site", "*.html"))
+    capture = json.loads((data / "aa_frontier_capture.json").read_text())
+    urls = {model["aaUrl"] for model in empty["models"] if model["id"] in excluded}
+    for key in ("frontier", "near_frontier"):
+        capture[key] = [item for item in capture[key] if item["url"] not in urls]
+    capture["retained"] = [item for item in capture["retained"] if item["sourceUrl"] not in urls]
+    (data / "aa_frontier_capture.json").write_text(json.dumps(capture))
+    figures = f.named_figures(empty, data)
+    assert figures["cohort.size"] == figures["rankedAny"] == "25" and figures["excluded"] == "0"
     assert figures["subsetStrata"] == "no ranking has a subset stratum" and figures["excluded.missingCore"] == "none"
 
 

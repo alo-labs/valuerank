@@ -130,12 +130,12 @@ def test_readme_states_what_the_interval_outputs_support(emitted):
     assert ("Cheapest at or above quality 65.2: not unique; possibly Claude Sonnet 5.5 (max), GPT-6 Astra (max). "
             "(Bar comparison: compares 2 configurations that can qualify.)") in readme
     # E196: the nominal cost weight is printed with cost's share of the variance in value.
-    assert "value is a 25% cost score (nominal weight; 75% of API and 2% of Plan value variance)" in readme
-    assert ("That weight is nominal: on the current panel cost accounts for 75% of the variance in API value and 2% in Plan value, "
+    assert "value is a 25% cost score (nominal weight; 75% of API and 52% of Plan value variance)" in readme
+    assert ("That weight is nominal: on the current panel cost accounts for 75% of the variance in API value and 52% in Plan value, "
             "because cost scores spread more than quality scores") in readme
     assert "Plan basis: interval outputs not evaluated (no row has FullCost and an identified M_W (E61/E67))." in readme
     assert "so the Plan ranking is labelled exploratory" in readme
-    assert "Claude Opus 5.5 (max) leads the Plan ranking at 65.4; GPT-6.1 Sol (max) leads the API ranking at 60.0; Claude Opus 5.5 (max) leads on quality." in readme
+    assert "Claude Opus 5.5 (max) leads the Plan ranking at 67.8; GPT-6.1 Sol (max) leads the API ranking at 60.0; Claude Opus 5.5 (max) leads on quality." in readme
     # The quality rank covers every cohort row with quality evidence, a cost-less one included (its quality is shown).
     # E203: the displayed record on the headline scale, beside the interval claims.
     assert ("- API basis, displayed record (not a claim; E203): cheapest at or above quality 61.4: GPT-6.1 Sol (max) ($1,387.03 per basket run; 5 reach it); "
@@ -193,7 +193,7 @@ def test_scores_md_ranking_matches_scores_json(emitted):
     assert len(table_rows(text, "| Model | Reasons")) == 28
     assert "### API basis: rank 1" in text and "### Plan basis: on the frontier" in text
     # O48: the Plan streams exclude transfer-dependent plan rows, each named as a configuration on its plan.
-    assert "Plan streams S1, S2, S1 endpoint-heavy, S1M and S1T run with owner assumptions off (owner-named transfers and O46 provider quota ceilings; E167): Claude Haiku 5.5 (max) on Claude Max 20x, Claude Haiku 5.5 (max) on Claude Max 5x, Claude Haiku 5.5 (max) on Claude Pro, Claude Sonnet 5.5 (max) on Claude Max 20x," in text
+    assert "Plan streams S1, S2, S1 endpoint-heavy, S1M, S1T and S1T mean-preserving run with owner assumptions off (owner-named transfers and O46 provider quota ceilings; E167): Claude Haiku 5.5 (max) on Claude Max 20x, Claude Haiku 5.5 (max) on Claude Max 5x, Claude Haiku 5.5 (max) on Claude Pro, Claude Sonnet 5.5 (max) on Claude Max 20x," in text
     assert "| $1,178 per month: assumed API-equivalent consumption (owner-named transfer) from claude-pro-opus55-semianalysis |" in text
     assert "| GPT-6.1 Sol (max) | ChatGPT Pro 500 $500 · GPT-6.1 Sol (10.772×, measured) | $5,386 per month: measured-workload capacity |" in text
     assert "| quality 65.2 | Claude Sonnet 5.5 (max) | not scenario-supported |" in text
@@ -407,12 +407,14 @@ def test_calibration_without_official_anchors_or_values_says_so(repo_copy, pinne
 
 def test_calibration_reports_reversals_and_the_official_anchor_extremes(emitted):
     section = (emitted / "scores.md").read_text().split("#### Measured-evidence calibration (diagnostic)", 1)[1].split("## Interval outputs", 1)[0]
-    # O48: an API-cost fallback setter's label already names its evidence, so it is not repeated in parentheses.
-    assert section.count("Official Plan anchors are set by GPT-6 Luna (max) on ChatGPT Pro 500 (owner-named transfer) at the low end and Gemini 4 Argon (high) on API-cost fallback at the high end.") == 2
+    # O157: the Plan anchors are measured plan rows only, so no owner assumption or API-cost fallback sets them; the
+    # setter's label names its measurement.
+    assert section.count("Official Plan anchors are set by GPT-6.1 Sol (max) on ChatGPT Pro 500 (controlled measurement) at the low end and GPT-6 Astra (max) on ChatGPT Plus (controlled measurement) at the high end.") == 2
+    assert "owner-named transfer) at the" not in section and "on API-cost fallback at the" not in section
     # A frozen setter at another effort of the same model is named at its own effort (O91).
-    assert "Official Plan anchors are set by GPT-6 Luna (medium) on ChatGPT Pro 500 (owner-named transfer) at the low end and Gemini 4 Argon (high) on API-cost fallback at the high end." in section
-    assert "Pairwise reversals: GPT-6 Astra (high) and GPT-6.1 Sol (low); GPT-6.1 Sol (high) and GPT-6.1 Sol (medium). Largest value change: 6.70 points." in section
-    assert "Pairwise reversals: Claude Opus 5.5 (max) and GPT-6.1 Sol (max). Largest value change: 5.20 points." in section
+    assert "Official Plan anchors are set by GPT-6.1 Sol (low) on ChatGPT Pro 500 (same-model measurement from another effort) at the low end and GPT-6 Astra (max) on ChatGPT Plus (controlled measurement) at the high end." in section
+    assert "Pairwise reversals: GPT-6.1 Sol (high) and GPT-6.1 Sol (medium). Largest value change: 2.79 points." in section
+    assert "Pairwise reversals: Claude Opus 5.5 (max) and GPT-6.1 Sol (max). Largest value change: 3.30 points." in section
     methodology = (emitted / "methodology.md").read_text()
     assert "labelled conventional CI-range sensitivity (endpoint-conditioned; no tail model) under its interpretation contract (E165" in methodology
 

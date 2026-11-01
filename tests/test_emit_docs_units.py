@@ -245,6 +245,12 @@ def test_cost_diagnostics_markdown_covers_readiness_family_and_subset_bridges():
     assert ed.required_scores_text({"status": "unavailable: x", "bars": []}, StubFacts({})).endswith("unavailable: x.")
     lone = ed.family_primary_text({"status": "unavailable: fewer than 2 family-primary references", "population": ["a"], "references": ["a"], "ladder": [], "frozenLadder": []}, StubFacts({}))
     assert lone.endswith("would be unavailable against unavailable frozen; anchors unavailable: fewer than 2 family-primary references.")
+    # O157: a Plan rebuild without two measured references says so instead of a rank change.
+    rate = {"valuePointsPerCostDoubling": 1.0}
+    partial = ed.family_primary_text({"status": "evaluated", "population": ["a"], "references": ["a", "b"], "ladder": [], "frozenLadder": [],
+                                      "bases": {"api": {"rankChanges": {"changes": {}}, "exchangeRate": rate, "frozenExchangeRate": rate},
+                                                "plan": {"status": "unavailable: fewer than 2 measured references (O157)"}}}, StubFacts({}))
+    assert partial.endswith("Plan anchors unavailable: fewer than 2 measured references (O157).")
     assert "No row is scored on a subset workload." in quiet and "unidentified (priced quality weight below 40%)." in quiet and "flagged far from the median ratio: none." in quiet
 
 

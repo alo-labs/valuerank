@@ -632,7 +632,9 @@ def _scenario_doc(v3: dict, model_id: str, plan_row: str | None = None) -> dict:
         # O48: the Plan streams rank plan rows; a model page shows its own plan row (its selected route).
         key = plan_row if basis == "plan" else model_id
         for run in scenarios["results"][basis]:
-            base = {"stratum": run["stratum"], "kernel": "endpoint-heavy" if run["alternative"] else "primary", "targetProfile": run.get("targetProfile")}
+            # O154: S1T's alternative is the mean-preserving recentred Jeffreys draw; every other alternative is endpoint-heavy.
+            kernel = "primary" if not run["alternative"] else "mean-preserving" if run["stratum"] == "S1T" else "endpoint-heavy"
+            base = {"stratum": run["stratum"], "kernel": kernel, "targetProfile": run.get("targetProfile")}
             # E167: a transfer-dependent row is declared unevaluable in the transfers-off Plan streams.
             reason = next((item["reason"] for item in run.get("excluded", []) if item["row"] == key), None)
             if key in run["rows"]:

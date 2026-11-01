@@ -1,14 +1,18 @@
 {
   "schemaVersion": 1,
-  "inputHash": "a4a21de48b4da1a781951a22022bcd887f1be75179c794fc96b30ef14e40751f",
+  "inputHash": "9397dc5c253fd57c1e8fa620b9e0ed8f639a80a0c36ff09dbf511c6c373b72b1",
   "seed": 20261101,
   "scenarios": 10000,
+  "generator": {
+    "module": "random (Mersenne Twister)",
+    "python": "3.13.16"
+  },
   "streamDescriptions": {
     "S0": "published-record reporting precision",
     "S1": "published-record reporting precision + conventional identification of missing leaves",
     "S2": "published-record reporting precision + conventional identification of missing leaves + weight-specification stress",
     "S1M": "published-record reporting precision + conventional identification of missing leaves + conventional range sensitivity inside published 95% confidence intervals (no tail model)",
-    "S1T": "published-record leaf values redrawn with task-sampling noise from each leaf's published task count (binomial leaves from their Jeffreys Beta posterior, O142; independent-task approximation; GDPval-AA from its displayed rating interval, an assumption) + conventional identification of missing leaves"
+    "S1T": "published-record leaf values redrawn with task-sampling noise from each leaf's published task count (binomial leaves from their Jeffreys Beta posterior, O142, with its mean-preserving alternative, O154; independent-task approximation; GDPval-AA from its displayed rating interval, an assumption) + conventional identification of missing leaves"
   },
   "notQuantified": [
     "benchmark repeatability beyond S1T's independent-task approximation (correlated tasks, harness and attempt effects): not quantified in v1 scenario shares",
@@ -1228,7 +1232,7 @@
       },
       {
         "stratum": "S1T",
-        "targetProfile": "published-record leaf values redrawn with task-sampling noise from each leaf's published task count (binomial leaves from their Jeffreys Beta posterior, O142; independent-task approximation; GDPval-AA from its displayed rating interval, an assumption) + conventional identification of missing leaves",
+        "targetProfile": "published-record leaf values redrawn with task-sampling noise from each leaf's published task count (binomial leaves from their Jeffreys Beta posterior, O142, with its mean-preserving alternative, O154; independent-task approximation; GDPval-AA from its displayed rating interval, an assumption) + conventional identification of missing leaves",
         "permittedTargets": [
           "identification convention",
           "reporting precision",
@@ -1465,7 +1469,7 @@
       },
       {
         "stratum": "S1T",
-        "targetProfile": "published-record leaf values redrawn with task-sampling noise from each leaf's published task count (binomial leaves from their Jeffreys Beta posterior, O142; independent-task approximation; GDPval-AA from its displayed rating interval, an assumption) + conventional identification of missing leaves",
+        "targetProfile": "published-record leaf values redrawn with task-sampling noise from each leaf's published task count (binomial leaves from their Jeffreys Beta posterior, O142, with its mean-preserving alternative, O154; independent-task approximation; GDPval-AA from its displayed rating interval, an assumption) + conventional identification of missing leaves",
         "permittedTargets": [
           "identification convention",
           "reporting precision",
@@ -2779,8 +2783,8 @@
         "rows": {
           "gpt-6.1-sol@chatgpt-plus": {
             "top3": {
-              "share": 0.0,
-              "monteCarloSe": 0.0
+              "share": 0.0275,
+              "monteCarloSe": 0.0016353516441426292
             },
             "top1": {
               "share": 0.0,
@@ -2804,8 +2808,8 @@
           },
           "gpt-6.1-sol@chatgpt-pro-100": {
             "top3": {
-              "share": 0.0,
-              "monteCarloSe": 0.0
+              "share": 0.0275,
+              "monteCarloSe": 0.0016353516441426292
             },
             "top1": {
               "share": 0.0,
@@ -2854,12 +2858,12 @@
           },
           "gpt-6.1-sol@chatgpt-pro-500": {
             "top3": {
-              "share": 0.0,
-              "monteCarloSe": 0.0
+              "share": 0.2736,
+              "monteCarloSe": 0.004458060564864501
             },
             "top1": {
-              "share": 0.0,
-              "monteCarloSe": 0.0
+              "share": 0.0772,
+              "monteCarloSe": 0.0026690852365557753
             },
             "frontier": {
               "share": 1.0,
@@ -2879,8 +2883,8 @@
           },
           "claude-opus-5-5@claude-max-20x": {
             "top3": {
-              "share": 1.0,
-              "monteCarloSe": 0.0
+              "share": 0.9725,
+              "monteCarloSe": 0.001635351644142628
             },
             "top1": {
               "share": 0.0,
@@ -2904,8 +2908,8 @@
           },
           "claude-opus-5-5@claude-max-5x": {
             "top3": {
-              "share": 1.0,
-              "monteCarloSe": 0.0
+              "share": 0.7264,
+              "monteCarloSe": 0.004458060564864501
             },
             "top1": {
               "share": 0.0,
@@ -2929,12 +2933,12 @@
           },
           "claude-opus-5-5@claude-pro": {
             "top3": {
-              "share": 1.0,
-              "monteCarloSe": 0.0
+              "share": 0.9797,
+              "monteCarloSe": 0.0014102450141730686
             },
             "top1": {
-              "share": 1.0,
-              "monteCarloSe": 0.0
+              "share": 0.9228,
+              "monteCarloSe": 0.002669085236555776
             },
             "frontier": {
               "share": 1.0,
@@ -3969,7 +3973,7 @@
       },
       {
         "stratum": "S1T",
-        "targetProfile": "published-record leaf values redrawn with task-sampling noise from each leaf's published task count (binomial leaves from their Jeffreys Beta posterior, O142; independent-task approximation; GDPval-AA from its displayed rating interval, an assumption) + conventional identification of missing leaves",
+        "targetProfile": "published-record leaf values redrawn with task-sampling noise from each leaf's published task count (binomial leaves from their Jeffreys Beta posterior, O142, with its mean-preserving alternative, O154; independent-task approximation; GDPval-AA from its displayed rating interval, an assumption) + conventional identification of missing leaves",
         "permittedTargets": [
           "identification convention",
           "reporting precision",
@@ -4008,8 +4012,8 @@
         "rows": {
           "gpt-6.1-sol@chatgpt-plus": {
             "top3": {
-              "share": 0.0909,
-              "monteCarloSe": 0.002874668502627738
+              "share": 0.3604,
+              "monteCarloSe": 0.004801164858656699
             },
             "top1": {
               "share": 0.0,
@@ -4033,8 +4037,8 @@
           },
           "gpt-6.1-sol@chatgpt-pro-100": {
             "top3": {
-              "share": 0.0909,
-              "monteCarloSe": 0.002874668502627738
+              "share": 0.3604,
+              "monteCarloSe": 0.004801164858656699
             },
             "top1": {
               "share": 0.0,
@@ -4083,12 +4087,12 @@
           },
           "gpt-6.1-sol@chatgpt-pro-500": {
             "top3": {
-              "share": 0.1078,
-              "monteCarloSe": 0.0031012765113739857
+              "share": 0.4602,
+              "monteCarloSe": 0.004984134428363665
             },
             "top1": {
-              "share": 0.0967,
-              "monteCarloSe": 0.0029554882845310012
+              "share": 0.3979,
+              "monteCarloSe": 0.0048946459524668385
             },
             "frontier": {
               "share": 1.0,
@@ -4108,8 +4112,8 @@
           },
           "claude-opus-5-5@claude-max-20x": {
             "top3": {
-              "share": 0.9091,
-              "monteCarloSe": 0.0028746685026277375
+              "share": 0.6396,
+              "monteCarloSe": 0.0048011648586567
             },
             "top1": {
               "share": 0.0,
@@ -4133,8 +4137,8 @@
           },
           "claude-opus-5-5@claude-max-5x": {
             "top3": {
-              "share": 0.8922,
-              "monteCarloSe": 0.0031012765113739857
+              "share": 0.5398,
+              "monteCarloSe": 0.004984134428363665
             },
             "top1": {
               "share": 0.0,
@@ -4158,12 +4162,12 @@
           },
           "claude-opus-5-5@claude-pro": {
             "top3": {
-              "share": 0.9109,
-              "monteCarloSe": 0.0028488803063659936
+              "share": 0.6504,
+              "monteCarloSe": 0.0047684362216559
             },
             "top1": {
-              "share": 0.9033,
-              "monteCarloSe": 0.0029554882845310012
+              "share": 0.6021,
+              "monteCarloSe": 0.0048946459524668385
             },
             "frontier": {
               "share": 0.9801,
@@ -4379,7 +4383,7 @@
       },
       {
         "stratum": "S1T",
-        "targetProfile": "published-record leaf values redrawn with task-sampling noise from each leaf's published task count (binomial leaves from their Jeffreys Beta posterior, O142; independent-task approximation; GDPval-AA from its displayed rating interval, an assumption) + conventional identification of missing leaves",
+        "targetProfile": "published-record leaf values redrawn with task-sampling noise from each leaf's published task count (binomial leaves from their Jeffreys Beta posterior, O142, with its mean-preserving alternative, O154; independent-task approximation; GDPval-AA from its displayed rating interval, an assumption) + conventional identification of missing leaves",
         "permittedTargets": [
           "identification convention",
           "reporting precision",
@@ -4418,8 +4422,8 @@
         "rows": {
           "gpt-6.1-sol@chatgpt-plus": {
             "top3": {
-              "share": 0.0913,
-              "monteCarloSe": 0.002880352582584292
+              "share": 0.3637,
+              "monteCarloSe": 0.004810637275871046
             },
             "top1": {
               "share": 0.0,
@@ -4443,8 +4447,8 @@
           },
           "gpt-6.1-sol@chatgpt-pro-100": {
             "top3": {
-              "share": 0.0913,
-              "monteCarloSe": 0.002880352582584292
+              "share": 0.3637,
+              "monteCarloSe": 0.004810637275871046
             },
             "top1": {
               "share": 0.0,
@@ -4493,12 +4497,12 @@
           },
           "gpt-6.1-sol@chatgpt-pro-500": {
             "top3": {
-              "share": 0.111,
-              "monteCarloSe": 0.0031413213780191293
+              "share": 0.4561,
+              "monteCarloSe": 0.004980690614764182
             },
             "top1": {
-              "share": 0.0982,
-              "monteCarloSe": 0.002975848786480926
+              "share": 0.3948,
+              "monteCarloSe": 0.004888076922471658
             },
             "frontier": {
               "share": 1.0,
@@ -4518,8 +4522,8 @@
           },
           "claude-opus-5-5@claude-max-20x": {
             "top3": {
-              "share": 0.9087,
-              "monteCarloSe": 0.0028803525825842925
+              "share": 0.6363,
+              "monteCarloSe": 0.004810637275871046
             },
             "top1": {
               "share": 0.0,
@@ -4543,8 +4547,8 @@
           },
           "claude-opus-5-5@claude-max-5x": {
             "top3": {
-              "share": 0.889,
-              "monteCarloSe": 0.003141321378019129
+              "share": 0.5439,
+              "monteCarloSe": 0.004980690614764182
             },
             "top1": {
               "share": 0.0,
@@ -4568,12 +4572,12 @@
           },
           "claude-opus-5-5@claude-pro": {
             "top3": {
-              "share": 0.9102,
-              "monteCarloSe": 0.0028589501569632166
+              "share": 0.6457,
+              "monteCarloSe": 0.004783006481283503
             },
             "top1": {
-              "share": 0.9018,
-              "monteCarloSe": 0.002975848786480925
+              "share": 0.6052,
+              "monteCarloSe": 0.004888076922471659
             },
             "frontier": {
               "share": 0.9797,

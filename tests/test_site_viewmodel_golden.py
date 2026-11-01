@@ -265,7 +265,7 @@ def test_unranked_and_subset_documents(bundle, synthetic):
     assert mimo["scenarios"]["status"] == "current" and mimo["scenarios"]["api"] == [] and mimo["scenarios"]["plan"] == []
     luna = synthetic.models["gpt-6-luna"]
     assert luna["scenarios"]["status"] == "current" and luna["scenarios"]["api"] == [] and luna["scenarios"]["plan"] == []
-    assert len(bundle.models["gpt-6-luna"]["scenarios"]["api"]) == 6
+    assert len(bundle.models["gpt-6-luna"]["scenarios"]["api"]) == 7
     # Every ranked v5 row has a subscription route; the synthetic copy leaves Claude Sonnet 5.5 without one, so it falls back to API cost.
     sonnet = synthetic.models["claude-sonnet-5-5"]
     assert sonnet["plans"] == [] and sonnet["cost"]["fallback"] == "api" and sonnet["cost"]["planUsd"] == sonnet["cost"]["apiUsd"]
@@ -278,13 +278,15 @@ def test_transfer_rows_are_unevaluable_in_the_transfers_off_plan_streams(bundle)
     sonnet = bundle.models["claude-sonnet-5-5"]
     plan = {(run["stratum"], run["kernel"]): run for run in sonnet["scenarios"]["plan"]}
     assert plan[("S0", "primary")]["unevaluable"] is None and plan[("S0", "primary")]["top1"] is not None
-    for key in (("S1", "primary"), ("S2", "primary"), ("S1", "endpoint-heavy"), ("S1M", "primary"), ("S1T", "primary")):
+    # O154: S1T also runs with its mean-preserving alternative, labelled as such (S1's alternative is endpoint-heavy).
+    assert list(plan) == [("S0", "primary"), ("S1", "primary"), ("S2", "primary"), ("S1", "endpoint-heavy"), ("S1M", "primary"), ("S1T", "primary"), ("S1T", "mean-preserving")]
+    for key in (("S1", "primary"), ("S2", "primary"), ("S1", "endpoint-heavy"), ("S1M", "primary"), ("S1T", "primary"), ("S1T", "mean-preserving")):
         assert plan[key]["unevaluable"].startswith("owner-named transfer") and plan[key]["top1"] is None
     assert all(run["unevaluable"] is None for run in sonnet["scenarios"]["api"])
     assert sonnet["cost"]["planAmount"]["amountKind"] == "assumed API-equivalent consumption (owner-named transfer)"
     assert sonnet["cost"]["planAmount"]["amountUsd"] == pytest.approx(58.9 * 20) and sonnet["cost"]["planAmount"]["donorRouteId"] == "claude-pro-opus55-semianalysis"
     opus = bundle.models["claude-opus-5-5"]
-    assert all(run["unevaluable"] is None for run in opus["scenarios"]["plan"]) and len(opus["scenarios"]["plan"]) == 6
+    assert all(run["unevaluable"] is None for run in opus["scenarios"]["plan"]) and len(opus["scenarios"]["plan"]) == 7
     assert opus["cost"]["planAmount"]["amountKind"] == "measured-workload capacity"
 
 
@@ -363,7 +365,7 @@ def test_changelog_document(bundle):
 def test_index_page(bundle):
     page = viewmodel.index_page(bundle)
     assert page["headline"]["api"] == "GPT-6.1 Sol (max) leads the API ranking at 60.0; Claude Opus 5.5 (max) leads on quality."
-    assert page["headline"]["plan"] == "Claude Opus 5.5 (max) leads the Plan ranking at 65.4 and also leads on quality."
+    assert page["headline"]["plan"] == "Claude Opus 5.5 (max) leads the Plan ranking at 67.8 and also leads on quality."
     assert page["picks"] == bundle.rankings["picks"] and page["rankingsJson"] is bundle.rankings
     assert len(page["models"]) == 9 and page["dimensions"] == bundle.rankings["dimensions"]
     assert len(page["chart"]["api"]) == len(page["chart"]["plan"]) == 9  # a row without a cost has no point and set(page["chart"]["plan"][0]) == {"slug", "name", "x", "y", "pareto", "costLabel"}
