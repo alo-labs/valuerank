@@ -285,7 +285,7 @@ Frequencies over 10,000 scenarios per run (seed 20261101); streams are defined i
 
 ### API basis: rank 1
 
-| Configuration | S0 | S1 | S2 | S1 endpoint-heavy | S1M | S1T | S1T mean-preserving |
+| Configuration | S0 | S1 | S2 | S1 endpoint-heavy | S1M | S1T | S1T recentred |
 |---|---:|---:|---:|---:|---:|---:|---:|
 | Claude Haiku 5.5 (high) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
 | Claude Haiku 5.5 (medium) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
@@ -310,7 +310,7 @@ Frequencies over 10,000 scenarios per run (seed 20261101); streams are defined i
 
 ### API basis: rank 3 or better
 
-| Configuration | S0 | S1 | S2 | S1 endpoint-heavy | S1M | S1T | S1T mean-preserving |
+| Configuration | S0 | S1 | S2 | S1 endpoint-heavy | S1M | S1T | S1T recentred |
 |---|---:|---:|---:|---:|---:|---:|---:|
 | Claude Haiku 5.5 (high) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
 | Claude Haiku 5.5 (medium) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
@@ -335,7 +335,7 @@ Frequencies over 10,000 scenarios per run (seed 20261101); streams are defined i
 
 ### API basis: on the frontier
 
-| Configuration | S0 | S1 | S2 | S1 endpoint-heavy | S1M | S1T | S1T mean-preserving |
+| Configuration | S0 | S1 | S2 | S1 endpoint-heavy | S1M | S1T | S1T recentred |
 |---|---:|---:|---:|---:|---:|---:|---:|
 | Claude Haiku 5.5 (high) | 100.0% | 100.0% | 100.0% | 100.0% | 100.0% | 82.6% | 84.3% |
 | Claude Haiku 5.5 (medium) | 100.0% | 100.0% | 60.4% | 100.0% | 100.0% | 51.3% | 52.4% |
@@ -360,7 +360,7 @@ Frequencies over 10,000 scenarios per run (seed 20261101); streams are defined i
 
 ### API basis: value-score dispersion (SD; covariance term)
 
-| Configuration | S0 | S1 | S2 | S1 endpoint-heavy | S1M | S1T | S1T mean-preserving |
+| Configuration | S0 | S1 | S2 | S1 endpoint-heavy | S1M | S1T | S1T recentred |
 |---|---:|---:|---:|---:|---:|---:|---:|
 | Claude Haiku 5.5 (high) | 0.00 (+0.00) | 0.00 (+0.00) | 1.64 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.44 (+0.00) | 1.42 (+0.00) |
 | Claude Haiku 5.5 (medium) | 0.00 (+0.00) | 0.00 (+0.00) | 1.80 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.39 (+0.00) | 1.35 (+0.00) |
@@ -383,11 +383,11 @@ Frequencies over 10,000 scenarios per run (seed 20261101); streams are defined i
 | Kimi K3.1 Pro (max) | 0.00 (+0.00) | 0.00 (+0.00) | 1.65 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.48 (+0.00) | 1.44 (+0.00) |
 | MiMo-V2.6-Pro | 0.00 (+0.00) | 0.00 (+0.00) | 1.52 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.54 (+0.00) | 1.57 (+0.00) |
 
-Plan streams S1, S2, S1 endpoint-heavy, S1M, S1T and S1T mean-preserving run with owner assumptions off (owner-named transfers and O46 provider quota ceilings; E167): Claude Haiku 5.5 (high) on Claude Max 20x, Claude Haiku 5.5 (high) on Claude Max 5x, Claude Haiku 5.5 (high) on Claude Pro, Claude Haiku 5.5 (medium) on Claude Max 20x, Claude Haiku 5.5 (medium) on Claude Max 5x, Claude Haiku 5.5 (medium) on Claude Pro, GPT-6 Luna (high) on ChatGPT Plus, GPT-6 Luna (high) on ChatGPT Pro 100, GPT-6 Luna (high) on ChatGPT Pro 200, GPT-6 Luna (high) on ChatGPT Pro 500, GPT-6 Luna (max) on ChatGPT Plus, GPT-6 Luna (max) on ChatGPT Pro 100, GPT-6 Luna (max) on ChatGPT Pro 200, GPT-6 Luna (max) on ChatGPT Pro 500, GPT-6 Luna (medium) on ChatGPT Plus, GPT-6 Luna (medium) on ChatGPT Pro 100, GPT-6 Luna (medium) on ChatGPT Pro 200, GPT-6 Luna (medium) on ChatGPT Pro 500, GPT-6 Luna (xhigh) on ChatGPT Plus, GPT-6 Luna (xhigh) on ChatGPT Pro 100, GPT-6 Luna (xhigh) on ChatGPT Pro 200, GPT-6 Luna (xhigh) on ChatGPT Pro 500, GPT-6.1 Terra (high) on ChatGPT Plus, GPT-6.1 Terra (high) on ChatGPT Pro 100, GPT-6.1 Terra (high) on ChatGPT Pro 200, GPT-6.1 Terra (high) on ChatGPT Pro 500, GPT-6.1 Terra (max) on ChatGPT Plus, GPT-6.1 Terra (max) on ChatGPT Pro 100, GPT-6.1 Terra (max) on ChatGPT Pro 200, GPT-6.1 Terra (max) on ChatGPT Pro 500, GPT-6.1 Terra (medium) on ChatGPT Plus, GPT-6.1 Terra (medium) on ChatGPT Pro 100, GPT-6.1 Terra (medium) on ChatGPT Pro 200, GPT-6.1 Terra (medium) on ChatGPT Pro 500, GPT-6.1 Terra (xhigh) on ChatGPT Plus, GPT-6.1 Terra (xhigh) on ChatGPT Pro 100, GPT-6.1 Terra (xhigh) on ChatGPT Pro 200, GPT-6.1 Terra (xhigh) on ChatGPT Pro 500, MiMo-V2.6-Pro on MiMo Token Plan Lite, MiMo-V2.6-Pro on MiMo Token Plan Max, MiMo-V2.6-Pro on MiMo Token Plan Pro, MiMo-V2.6-Pro on MiMo Token Plan Standard depend on an owner assumption and are unevaluable there (—), never reselected or replaced by API cost.
+Plan streams S1, S2, S1 endpoint-heavy, S1M, S1T and S1T recentred run with owner assumptions off (owner-named transfers and O46 provider quota ceilings; E167): Claude Haiku 5.5 (high) on Claude Max 20x, Claude Haiku 5.5 (high) on Claude Max 5x, Claude Haiku 5.5 (high) on Claude Pro, Claude Haiku 5.5 (medium) on Claude Max 20x, Claude Haiku 5.5 (medium) on Claude Max 5x, Claude Haiku 5.5 (medium) on Claude Pro, GPT-6 Luna (high) on ChatGPT Plus, GPT-6 Luna (high) on ChatGPT Pro 100, GPT-6 Luna (high) on ChatGPT Pro 200, GPT-6 Luna (high) on ChatGPT Pro 500, GPT-6 Luna (max) on ChatGPT Plus, GPT-6 Luna (max) on ChatGPT Pro 100, GPT-6 Luna (max) on ChatGPT Pro 200, GPT-6 Luna (max) on ChatGPT Pro 500, GPT-6 Luna (medium) on ChatGPT Plus, GPT-6 Luna (medium) on ChatGPT Pro 100, GPT-6 Luna (medium) on ChatGPT Pro 200, GPT-6 Luna (medium) on ChatGPT Pro 500, GPT-6 Luna (xhigh) on ChatGPT Plus, GPT-6 Luna (xhigh) on ChatGPT Pro 100, GPT-6 Luna (xhigh) on ChatGPT Pro 200, GPT-6 Luna (xhigh) on ChatGPT Pro 500, GPT-6.1 Terra (high) on ChatGPT Plus, GPT-6.1 Terra (high) on ChatGPT Pro 100, GPT-6.1 Terra (high) on ChatGPT Pro 200, GPT-6.1 Terra (high) on ChatGPT Pro 500, GPT-6.1 Terra (max) on ChatGPT Plus, GPT-6.1 Terra (max) on ChatGPT Pro 100, GPT-6.1 Terra (max) on ChatGPT Pro 200, GPT-6.1 Terra (max) on ChatGPT Pro 500, GPT-6.1 Terra (medium) on ChatGPT Plus, GPT-6.1 Terra (medium) on ChatGPT Pro 100, GPT-6.1 Terra (medium) on ChatGPT Pro 200, GPT-6.1 Terra (medium) on ChatGPT Pro 500, GPT-6.1 Terra (xhigh) on ChatGPT Plus, GPT-6.1 Terra (xhigh) on ChatGPT Pro 100, GPT-6.1 Terra (xhigh) on ChatGPT Pro 200, GPT-6.1 Terra (xhigh) on ChatGPT Pro 500, MiMo-V2.6-Pro on MiMo Token Plan Lite, MiMo-V2.6-Pro on MiMo Token Plan Max, MiMo-V2.6-Pro on MiMo Token Plan Pro, MiMo-V2.6-Pro on MiMo Token Plan Standard depend on an owner assumption and are unevaluable there (—), never reselected or replaced by API cost.
 
 ### Plan basis: rank 1
 
-| Configuration | S0 | S1 | S2 | S1 endpoint-heavy | S1M | S1T | S1T mean-preserving |
+| Configuration | S0 | S1 | S2 | S1 endpoint-heavy | S1M | S1T | S1T recentred |
 |---|---:|---:|---:|---:|---:|---:|---:|
 | Claude Haiku 5.5 (high) on Claude Max 20x | 0.0% | — | — | — | — | — | — |
 | Claude Haiku 5.5 (high) on Claude Max 5x | 0.0% | — | — | — | — | — | — |
@@ -459,7 +459,7 @@ Plan streams S1, S2, S1 endpoint-heavy, S1M, S1T and S1T mean-preserving run wit
 
 ### Plan basis: rank 3 or better
 
-| Configuration | S0 | S1 | S2 | S1 endpoint-heavy | S1M | S1T | S1T mean-preserving |
+| Configuration | S0 | S1 | S2 | S1 endpoint-heavy | S1M | S1T | S1T recentred |
 |---|---:|---:|---:|---:|---:|---:|---:|
 | Claude Haiku 5.5 (high) on Claude Max 20x | 0.0% | — | — | — | — | — | — |
 | Claude Haiku 5.5 (high) on Claude Max 5x | 0.0% | — | — | — | — | — | — |
@@ -531,7 +531,7 @@ Plan streams S1, S2, S1 endpoint-heavy, S1M, S1T and S1T mean-preserving run wit
 
 ### Plan basis: on the frontier
 
-| Configuration | S0 | S1 | S2 | S1 endpoint-heavy | S1M | S1T | S1T mean-preserving |
+| Configuration | S0 | S1 | S2 | S1 endpoint-heavy | S1M | S1T | S1T recentred |
 |---|---:|---:|---:|---:|---:|---:|---:|
 | Claude Haiku 5.5 (high) on Claude Max 20x | 0.0% | — | — | — | — | — | — |
 | Claude Haiku 5.5 (high) on Claude Max 5x | 0.0% | — | — | — | — | — | — |
@@ -603,7 +603,7 @@ Plan streams S1, S2, S1 endpoint-heavy, S1M, S1T and S1T mean-preserving run wit
 
 ### Plan basis: value-score dispersion (SD; covariance term)
 
-| Configuration | S0 | S1 | S2 | S1 endpoint-heavy | S1M | S1T | S1T mean-preserving |
+| Configuration | S0 | S1 | S2 | S1 endpoint-heavy | S1M | S1T | S1T recentred |
 |---|---:|---:|---:|---:|---:|---:|---:|
 | Claude Haiku 5.5 (high) on Claude Max 20x | 0.00 (+0.00) | — | — | — | — | — | — |
 | Claude Haiku 5.5 (high) on Claude Max 5x | 0.00 (+0.00) | — | — | — | — | — | — |
@@ -1078,7 +1078,7 @@ Frequencies over 10,000 scenarios per run (seed 20261101); streams are defined i
 
 ### API basis: rank 1
 
-| Configuration | S0 | S1 | S2 | S1 endpoint-heavy | S1M | S1T | S1T mean-preserving |
+| Configuration | S0 | S1 | S2 | S1 endpoint-heavy | S1M | S1T | S1T recentred |
 |---|---:|---:|---:|---:|---:|---:|---:|
 | Claude Haiku 5.5 (high) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
 | Claude Haiku 5.5 (low) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
@@ -1116,7 +1116,7 @@ Frequencies over 10,000 scenarios per run (seed 20261101); streams are defined i
 
 ### API basis: rank 3 or better
 
-| Configuration | S0 | S1 | S2 | S1 endpoint-heavy | S1M | S1T | S1T mean-preserving |
+| Configuration | S0 | S1 | S2 | S1 endpoint-heavy | S1M | S1T | S1T recentred |
 |---|---:|---:|---:|---:|---:|---:|---:|
 | Claude Haiku 5.5 (high) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
 | Claude Haiku 5.5 (low) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
@@ -1154,7 +1154,7 @@ Frequencies over 10,000 scenarios per run (seed 20261101); streams are defined i
 
 ### API basis: on the frontier
 
-| Configuration | S0 | S1 | S2 | S1 endpoint-heavy | S1M | S1T | S1T mean-preserving |
+| Configuration | S0 | S1 | S2 | S1 endpoint-heavy | S1M | S1T | S1T recentred |
 |---|---:|---:|---:|---:|---:|---:|---:|
 | Claude Haiku 5.5 (high) | 100.0% | 100.0% | 53.2% | 100.0% | 100.0% | 50.0% | 50.6% |
 | Claude Haiku 5.5 (low) | 100.0% | 100.0% | 55.7% | 100.0% | 100.0% | 52.2% | 52.7% |
@@ -1192,7 +1192,7 @@ Frequencies over 10,000 scenarios per run (seed 20261101); streams are defined i
 
 ### API basis: value-score dispersion (SD; covariance term)
 
-| Configuration | S0 | S1 | S2 | S1 endpoint-heavy | S1M | S1T | S1T mean-preserving |
+| Configuration | S0 | S1 | S2 | S1 endpoint-heavy | S1M | S1T | S1T recentred |
 |---|---:|---:|---:|---:|---:|---:|---:|
 | Claude Haiku 5.5 (high) | 0.00 (+0.00) | 0.00 (+0.00) | 0.98 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.14 (+0.00) | 1.15 (+0.00) |
 | Claude Haiku 5.5 (low) | 0.00 (+0.00) | 0.00 (+0.00) | 1.13 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 0.89 (+0.00) | 0.89 (+0.00) |
@@ -1228,11 +1228,11 @@ Frequencies over 10,000 scenarios per run (seed 20261101); streams are defined i
 | Kimi K3.1 Pro (max) | 0.00 (+0.00) | 0.00 (+0.00) | 1.48 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.40 (+0.00) | 1.41 (+0.00) |
 | MiMo-V2.6-Pro | 0.00 (+0.00) | 0.00 (+0.00) | 1.16 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.23 (+0.00) | 1.24 (+0.00) |
 
-Plan streams S1, S2, S1 endpoint-heavy, S1M, S1T and S1T mean-preserving run with owner assumptions off (owner-named transfers and O46 provider quota ceilings; E167): Claude Haiku 5.5 (high) on Claude Max 20x, Claude Haiku 5.5 (high) on Claude Max 5x, Claude Haiku 5.5 (high) on Claude Pro, Claude Haiku 5.5 (low) on Claude Max 20x, Claude Haiku 5.5 (low) on Claude Max 5x, Claude Haiku 5.5 (low) on Claude Pro, Claude Haiku 5.5 (max) on Claude Max 20x, Claude Haiku 5.5 (max) on Claude Max 5x, Claude Haiku 5.5 (max) on Claude Pro, Claude Haiku 5.5 (medium) on Claude Max 20x, Claude Haiku 5.5 (medium) on Claude Max 5x, Claude Haiku 5.5 (medium) on Claude Pro, Claude Haiku 5.5 (xhigh) on Claude Max 20x, Claude Haiku 5.5 (xhigh) on Claude Max 5x, Claude Haiku 5.5 (xhigh) on Claude Pro, Claude Sonnet 5.5 (max) on Claude Max 20x, Claude Sonnet 5.5 (max) on Claude Max 5x, Claude Sonnet 5.5 (max) on Claude Pro, Claude Sonnet 5.5 (xhigh) on Claude Max 20x, Claude Sonnet 5.5 (xhigh) on Claude Max 5x, Claude Sonnet 5.5 (xhigh) on Claude Pro, GPT-6 Luna (high) on ChatGPT Plus, GPT-6 Luna (high) on ChatGPT Pro 100, GPT-6 Luna (high) on ChatGPT Pro 200, GPT-6 Luna (high) on ChatGPT Pro 500, GPT-6 Luna (low) on ChatGPT Plus, GPT-6 Luna (low) on ChatGPT Pro 100, GPT-6 Luna (low) on ChatGPT Pro 200, GPT-6 Luna (low) on ChatGPT Pro 500, GPT-6 Luna (max) on ChatGPT Plus, GPT-6 Luna (max) on ChatGPT Pro 100, GPT-6 Luna (max) on ChatGPT Pro 200, GPT-6 Luna (max) on ChatGPT Pro 500, GPT-6 Luna (medium) on ChatGPT Plus, GPT-6 Luna (medium) on ChatGPT Pro 100, GPT-6 Luna (medium) on ChatGPT Pro 200, GPT-6 Luna (medium) on ChatGPT Pro 500, GPT-6 Luna (xhigh) on ChatGPT Plus, GPT-6 Luna (xhigh) on ChatGPT Pro 100, GPT-6 Luna (xhigh) on ChatGPT Pro 200, GPT-6 Luna (xhigh) on ChatGPT Pro 500, GPT-6.1 Terra (high) on ChatGPT Plus, GPT-6.1 Terra (high) on ChatGPT Pro 100, GPT-6.1 Terra (high) on ChatGPT Pro 200, GPT-6.1 Terra (high) on ChatGPT Pro 500, GPT-6.1 Terra (low) on ChatGPT Plus, GPT-6.1 Terra (low) on ChatGPT Pro 100, GPT-6.1 Terra (low) on ChatGPT Pro 200, GPT-6.1 Terra (low) on ChatGPT Pro 500, GPT-6.1 Terra (max) on ChatGPT Plus, GPT-6.1 Terra (max) on ChatGPT Pro 100, GPT-6.1 Terra (max) on ChatGPT Pro 200, GPT-6.1 Terra (max) on ChatGPT Pro 500, GPT-6.1 Terra (medium) on ChatGPT Plus, GPT-6.1 Terra (medium) on ChatGPT Pro 100, GPT-6.1 Terra (medium) on ChatGPT Pro 200, GPT-6.1 Terra (medium) on ChatGPT Pro 500, GPT-6.1 Terra (xhigh) on ChatGPT Plus, GPT-6.1 Terra (xhigh) on ChatGPT Pro 100, GPT-6.1 Terra (xhigh) on ChatGPT Pro 200, GPT-6.1 Terra (xhigh) on ChatGPT Pro 500, MiMo-V2.6-Pro on MiMo Token Plan Lite, MiMo-V2.6-Pro on MiMo Token Plan Max, MiMo-V2.6-Pro on MiMo Token Plan Pro, MiMo-V2.6-Pro on MiMo Token Plan Standard depend on an owner assumption and are unevaluable there (—), never reselected or replaced by API cost.
+Plan streams S1, S2, S1 endpoint-heavy, S1M, S1T and S1T recentred run with owner assumptions off (owner-named transfers and O46 provider quota ceilings; E167): Claude Haiku 5.5 (high) on Claude Max 20x, Claude Haiku 5.5 (high) on Claude Max 5x, Claude Haiku 5.5 (high) on Claude Pro, Claude Haiku 5.5 (low) on Claude Max 20x, Claude Haiku 5.5 (low) on Claude Max 5x, Claude Haiku 5.5 (low) on Claude Pro, Claude Haiku 5.5 (max) on Claude Max 20x, Claude Haiku 5.5 (max) on Claude Max 5x, Claude Haiku 5.5 (max) on Claude Pro, Claude Haiku 5.5 (medium) on Claude Max 20x, Claude Haiku 5.5 (medium) on Claude Max 5x, Claude Haiku 5.5 (medium) on Claude Pro, Claude Haiku 5.5 (xhigh) on Claude Max 20x, Claude Haiku 5.5 (xhigh) on Claude Max 5x, Claude Haiku 5.5 (xhigh) on Claude Pro, Claude Sonnet 5.5 (max) on Claude Max 20x, Claude Sonnet 5.5 (max) on Claude Max 5x, Claude Sonnet 5.5 (max) on Claude Pro, Claude Sonnet 5.5 (xhigh) on Claude Max 20x, Claude Sonnet 5.5 (xhigh) on Claude Max 5x, Claude Sonnet 5.5 (xhigh) on Claude Pro, GPT-6 Luna (high) on ChatGPT Plus, GPT-6 Luna (high) on ChatGPT Pro 100, GPT-6 Luna (high) on ChatGPT Pro 200, GPT-6 Luna (high) on ChatGPT Pro 500, GPT-6 Luna (low) on ChatGPT Plus, GPT-6 Luna (low) on ChatGPT Pro 100, GPT-6 Luna (low) on ChatGPT Pro 200, GPT-6 Luna (low) on ChatGPT Pro 500, GPT-6 Luna (max) on ChatGPT Plus, GPT-6 Luna (max) on ChatGPT Pro 100, GPT-6 Luna (max) on ChatGPT Pro 200, GPT-6 Luna (max) on ChatGPT Pro 500, GPT-6 Luna (medium) on ChatGPT Plus, GPT-6 Luna (medium) on ChatGPT Pro 100, GPT-6 Luna (medium) on ChatGPT Pro 200, GPT-6 Luna (medium) on ChatGPT Pro 500, GPT-6 Luna (xhigh) on ChatGPT Plus, GPT-6 Luna (xhigh) on ChatGPT Pro 100, GPT-6 Luna (xhigh) on ChatGPT Pro 200, GPT-6 Luna (xhigh) on ChatGPT Pro 500, GPT-6.1 Terra (high) on ChatGPT Plus, GPT-6.1 Terra (high) on ChatGPT Pro 100, GPT-6.1 Terra (high) on ChatGPT Pro 200, GPT-6.1 Terra (high) on ChatGPT Pro 500, GPT-6.1 Terra (low) on ChatGPT Plus, GPT-6.1 Terra (low) on ChatGPT Pro 100, GPT-6.1 Terra (low) on ChatGPT Pro 200, GPT-6.1 Terra (low) on ChatGPT Pro 500, GPT-6.1 Terra (max) on ChatGPT Plus, GPT-6.1 Terra (max) on ChatGPT Pro 100, GPT-6.1 Terra (max) on ChatGPT Pro 200, GPT-6.1 Terra (max) on ChatGPT Pro 500, GPT-6.1 Terra (medium) on ChatGPT Plus, GPT-6.1 Terra (medium) on ChatGPT Pro 100, GPT-6.1 Terra (medium) on ChatGPT Pro 200, GPT-6.1 Terra (medium) on ChatGPT Pro 500, GPT-6.1 Terra (xhigh) on ChatGPT Plus, GPT-6.1 Terra (xhigh) on ChatGPT Pro 100, GPT-6.1 Terra (xhigh) on ChatGPT Pro 200, GPT-6.1 Terra (xhigh) on ChatGPT Pro 500, MiMo-V2.6-Pro on MiMo Token Plan Lite, MiMo-V2.6-Pro on MiMo Token Plan Max, MiMo-V2.6-Pro on MiMo Token Plan Pro, MiMo-V2.6-Pro on MiMo Token Plan Standard depend on an owner assumption and are unevaluable there (—), never reselected or replaced by API cost.
 
 ### Plan basis: rank 1
 
-| Configuration | S0 | S1 | S2 | S1 endpoint-heavy | S1M | S1T | S1T mean-preserving |
+| Configuration | S0 | S1 | S2 | S1 endpoint-heavy | S1M | S1T | S1T recentred |
 |---|---:|---:|---:|---:|---:|---:|---:|
 | Claude Haiku 5.5 (high) on Claude Max 20x | 0.0% | — | — | — | — | — | — |
 | Claude Haiku 5.5 (high) on Claude Max 5x | 0.0% | — | — | — | — | — | — |
@@ -1349,7 +1349,7 @@ Plan streams S1, S2, S1 endpoint-heavy, S1M, S1T and S1T mean-preserving run wit
 
 ### Plan basis: rank 3 or better
 
-| Configuration | S0 | S1 | S2 | S1 endpoint-heavy | S1M | S1T | S1T mean-preserving |
+| Configuration | S0 | S1 | S2 | S1 endpoint-heavy | S1M | S1T | S1T recentred |
 |---|---:|---:|---:|---:|---:|---:|---:|
 | Claude Haiku 5.5 (high) on Claude Max 20x | 0.0% | — | — | — | — | — | — |
 | Claude Haiku 5.5 (high) on Claude Max 5x | 0.0% | — | — | — | — | — | — |
@@ -1466,7 +1466,7 @@ Plan streams S1, S2, S1 endpoint-heavy, S1M, S1T and S1T mean-preserving run wit
 
 ### Plan basis: on the frontier
 
-| Configuration | S0 | S1 | S2 | S1 endpoint-heavy | S1M | S1T | S1T mean-preserving |
+| Configuration | S0 | S1 | S2 | S1 endpoint-heavy | S1M | S1T | S1T recentred |
 |---|---:|---:|---:|---:|---:|---:|---:|
 | Claude Haiku 5.5 (high) on Claude Max 20x | 0.0% | — | — | — | — | — | — |
 | Claude Haiku 5.5 (high) on Claude Max 5x | 0.0% | — | — | — | — | — | — |
@@ -1583,7 +1583,7 @@ Plan streams S1, S2, S1 endpoint-heavy, S1M, S1T and S1T mean-preserving run wit
 
 ### Plan basis: value-score dispersion (SD; covariance term)
 
-| Configuration | S0 | S1 | S2 | S1 endpoint-heavy | S1M | S1T | S1T mean-preserving |
+| Configuration | S0 | S1 | S2 | S1 endpoint-heavy | S1M | S1T | S1T recentred |
 |---|---:|---:|---:|---:|---:|---:|---:|
 | Claude Haiku 5.5 (high) on Claude Max 20x | 0.00 (+0.00) | — | — | — | — | — | — |
 | Claude Haiku 5.5 (high) on Claude Max 5x | 0.00 (+0.00) | — | — | — | — | — | — |
@@ -2098,7 +2098,7 @@ Frequencies over 10,000 scenarios per run (seed 20261101); streams are defined i
 
 ### API basis: rank 1
 
-| Configuration | S0 | S1 | S2 | S1 endpoint-heavy | S1M | S1T | S1T mean-preserving |
+| Configuration | S0 | S1 | S2 | S1 endpoint-heavy | S1M | S1T | S1T recentred |
 |---|---:|---:|---:|---:|---:|---:|---:|
 | Claude Haiku 5.5 (max) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
 | Claude Opus 5.5 (max) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
@@ -2111,7 +2111,7 @@ Frequencies over 10,000 scenarios per run (seed 20261101); streams are defined i
 
 ### API basis: rank 3 or better
 
-| Configuration | S0 | S1 | S2 | S1 endpoint-heavy | S1M | S1T | S1T mean-preserving |
+| Configuration | S0 | S1 | S2 | S1 endpoint-heavy | S1M | S1T | S1T recentred |
 |---|---:|---:|---:|---:|---:|---:|---:|
 | Claude Haiku 5.5 (max) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
 | Claude Opus 5.5 (max) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 1.0% | 0.9% |
@@ -2124,7 +2124,7 @@ Frequencies over 10,000 scenarios per run (seed 20261101); streams are defined i
 
 ### API basis: on the frontier
 
-| Configuration | S0 | S1 | S2 | S1 endpoint-heavy | S1M | S1T | S1T mean-preserving |
+| Configuration | S0 | S1 | S2 | S1 endpoint-heavy | S1M | S1T | S1T recentred |
 |---|---:|---:|---:|---:|---:|---:|---:|
 | Claude Haiku 5.5 (max) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
 | Claude Opus 5.5 (max) | 0.0% | 0.0% | 18.0% | 0.0% | 0.0% | 13.1% | 12.2% |
@@ -2137,7 +2137,7 @@ Frequencies over 10,000 scenarios per run (seed 20261101); streams are defined i
 
 ### API basis: value-score dispersion (SD; covariance term)
 
-| Configuration | S0 | S1 | S2 | S1 endpoint-heavy | S1M | S1T | S1T mean-preserving |
+| Configuration | S0 | S1 | S2 | S1 endpoint-heavy | S1M | S1T | S1T recentred |
 |---|---:|---:|---:|---:|---:|---:|---:|
 | Claude Haiku 5.5 (max) | 0.00 (+0.00) | 0.00 (+0.00) | 1.33 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 0.98 (+0.00) | 0.98 (+0.00) |
 | Claude Opus 5.5 (max) | 0.00 (+0.00) | 0.00 (+0.00) | 1.10 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 0.97 (+0.00) | 0.98 (+0.00) |
@@ -2148,11 +2148,11 @@ Frequencies over 10,000 scenarios per run (seed 20261101); streams are defined i
 | GPT-6.1 Sol (max) | 0.00 (+0.00) | 0.00 (+0.00) | 1.51 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.08 (+0.00) | 1.06 (+0.00) |
 | Gemini 4 Argon (high) | 0.00 (+0.00) | 0.00 (+0.00) | 1.48 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 0.97 (+0.00) | 0.96 (+0.00) |
 
-Plan streams S1, S2, S1 endpoint-heavy, S1M, S1T and S1T mean-preserving run with owner assumptions off (owner-named transfers and O46 provider quota ceilings; E167): Claude Haiku 5.5 (max) on Claude Max 20x, Claude Haiku 5.5 (max) on Claude Max 5x, Claude Haiku 5.5 (max) on Claude Pro, Claude Sonnet 5.5 (max) on Claude Max 20x, Claude Sonnet 5.5 (max) on Claude Max 5x, Claude Sonnet 5.5 (max) on Claude Pro, GPT-6 Luna (max) on ChatGPT Plus, GPT-6 Luna (max) on ChatGPT Pro 100, GPT-6 Luna (max) on ChatGPT Pro 200, GPT-6 Luna (max) on ChatGPT Pro 500 depend on an owner assumption and are unevaluable there (—), never reselected or replaced by API cost.
+Plan streams S1, S2, S1 endpoint-heavy, S1M, S1T and S1T recentred run with owner assumptions off (owner-named transfers and O46 provider quota ceilings; E167): Claude Haiku 5.5 (max) on Claude Max 20x, Claude Haiku 5.5 (max) on Claude Max 5x, Claude Haiku 5.5 (max) on Claude Pro, Claude Sonnet 5.5 (max) on Claude Max 20x, Claude Sonnet 5.5 (max) on Claude Max 5x, Claude Sonnet 5.5 (max) on Claude Pro, GPT-6 Luna (max) on ChatGPT Plus, GPT-6 Luna (max) on ChatGPT Pro 100, GPT-6 Luna (max) on ChatGPT Pro 200, GPT-6 Luna (max) on ChatGPT Pro 500 depend on an owner assumption and are unevaluable there (—), never reselected or replaced by API cost.
 
 ### Plan basis: rank 1
 
-| Configuration | S0 | S1 | S2 | S1 endpoint-heavy | S1M | S1T | S1T mean-preserving |
+| Configuration | S0 | S1 | S2 | S1 endpoint-heavy | S1M | S1T | S1T recentred |
 |---|---:|---:|---:|---:|---:|---:|---:|
 | Claude Haiku 5.5 (max) on Claude Max 20x | 0.0% | — | — | — | — | — | — |
 | Claude Haiku 5.5 (max) on Claude Max 5x | 0.0% | — | — | — | — | — | — |
@@ -2180,7 +2180,7 @@ Plan streams S1, S2, S1 endpoint-heavy, S1M, S1T and S1T mean-preserving run wit
 
 ### Plan basis: rank 3 or better
 
-| Configuration | S0 | S1 | S2 | S1 endpoint-heavy | S1M | S1T | S1T mean-preserving |
+| Configuration | S0 | S1 | S2 | S1 endpoint-heavy | S1M | S1T | S1T recentred |
 |---|---:|---:|---:|---:|---:|---:|---:|
 | Claude Haiku 5.5 (max) on Claude Max 20x | 0.0% | — | — | — | — | — | — |
 | Claude Haiku 5.5 (max) on Claude Max 5x | 0.0% | — | — | — | — | — | — |
@@ -2208,7 +2208,7 @@ Plan streams S1, S2, S1 endpoint-heavy, S1M, S1T and S1T mean-preserving run wit
 
 ### Plan basis: on the frontier
 
-| Configuration | S0 | S1 | S2 | S1 endpoint-heavy | S1M | S1T | S1T mean-preserving |
+| Configuration | S0 | S1 | S2 | S1 endpoint-heavy | S1M | S1T | S1T recentred |
 |---|---:|---:|---:|---:|---:|---:|---:|
 | Claude Haiku 5.5 (max) on Claude Max 20x | 0.0% | — | — | — | — | — | — |
 | Claude Haiku 5.5 (max) on Claude Max 5x | 0.0% | — | — | — | — | — | — |
@@ -2236,7 +2236,7 @@ Plan streams S1, S2, S1 endpoint-heavy, S1M, S1T and S1T mean-preserving run wit
 
 ### Plan basis: value-score dispersion (SD; covariance term)
 
-| Configuration | S0 | S1 | S2 | S1 endpoint-heavy | S1M | S1T | S1T mean-preserving |
+| Configuration | S0 | S1 | S2 | S1 endpoint-heavy | S1M | S1T | S1T recentred |
 |---|---:|---:|---:|---:|---:|---:|---:|
 | Claude Haiku 5.5 (max) on Claude Max 20x | 0.00 (+0.00) | — | — | — | — | — | — |
 | Claude Haiku 5.5 (max) on Claude Max 5x | 0.00 (+0.00) | — | — | — | — | — | — |

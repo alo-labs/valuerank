@@ -67,7 +67,7 @@ CHART_SOURCES = {slug: f"AA {basket.COMPONENT_LABELS[slug]} total cost chart (la
 DEFAULT_TB_HARNESS = "mini-SWE-agent"  # E125/O37: AA's Terminal-Bench harness; a leaf on any other agent is a gap fill
 OMNISCIENCE_TOLERANCE = 0.05  # index points: half of AA's displayed 0.1-point precision (reviewer 78)
 SCENARIO_COUNT = 10_000
-# O154: S1T also runs with its mean-preserving alternative kernel (appended, so the earlier strata keep their seeds).
+# O154: S1T also runs with its recentred alternative kernel (appended, so the earlier strata keep their seeds).
 SCENARIO_RUNS = (("S0", False), ("S1", False), ("S2", False), ("S1", True), ("S1M", False), ("S1T", False), ("S1T", True))
 SAMPLING_STREAM = "S1T"  # O39: benchmark sampling noise, independent-task approximation (never a label)
 # O39: each leaf's sampling unit, the published task count of the run the leaf reads (AA's evaluation pages and
@@ -3427,7 +3427,8 @@ def gdpval_row_sd(source: dict) -> float:
     return (interval["upper"] - interval["lower"]) / 2.0 / 1.96 if interval else GDPVAL_RATING_SD
 
 
-def sampling_sd(key: str, observation: q.Observation, source: dict, gdpval_sd: float | None = None, tasks_of: dict | None = None) -> float:
+def sampling_sd(key: str, observation: q.Observation, source: dict, gdpval_sd: float | None = None, tasks_of: dict | None = None,
+                bug_hunt_rho: float = 0.0) -> float:
     """O39: the plug-in standard error of one leaf's z score under the independent-task approximation (binomial
     leaves with the Jeffreys-type proportion, I28)."""
 
@@ -3443,7 +3444,10 @@ def sampling_sd(key: str, observation: q.Observation, source: dict, gdpval_sd: f
         # O163: a count of bugs fixed. The planted part is binomial over the 105 planted bugs (Jeffreys plug-in) and the
         # unplanted part, with no answer key or ceiling, is read as a Poisson count; the two add in variance.
         p = (min(source["planted"], BUG_HUNT_PLANTED) + 0.5) / (BUG_HUNT_PLANTED + 1.0)
-        return math.sqrt(BUG_HUNT_PLANTED * p * (1.0 - p) + max(source.get("unplanted") or 0.0, 0.5))
+        planted, unplanted = BUG_HUNT_PLANTED * p * (1.0 - p), max(source.get("unplanted") or 0.0, 0.5)
+        # E309 (reviewer 82): the two counts come from the same runs; the primary SD sets their correlation to 0, and the
+        # separability statement is restated at correlations -1 and +1 as a specification stress.
+        return math.sqrt(max(0.0, planted + unplanted + 2.0 * bug_hunt_rho * math.sqrt(planted * unplanted)))
     if key == "livebench2Overall":
         # O67: LiveBench's Overall is the release's weighted mean, so the category draws carry the same weights.
         categories, weights = source["categories"], source.get("weights") or {name: 1.0 for name in LIVEBENCH_CATEGORY_TASKS}
@@ -3480,11 +3484,11 @@ def sampling_kernel(key: str, observation: q.Observation, source: dict) -> scena
     return scenarios.Kernel("normal", (observation.z, sampling_sd(key, observation, source), 0.0, observation.upper), None, scenarios.TASK_SAMPLING, derivation)
 
 
-def quality_sd(row: dict, gdpval_sd: float | None = None, tasks_of: dict | None = None) -> float:
+def quality_sd(row: dict, gdpval_sd: float | None = None, tasks_of: dict | None = None, bug_hunt_rho: float = 0.0) -> float:
     """O39: a row's analytic quality SD from its leaves' task-sampling SDs (cost is not drawn)."""
 
     observations, provenance = row["evidence"]["observations"], row["evidence"]["provenance"]
-    return math.sqrt(sum((q.LEAF_BY_KEY[key].weight / 100.0 * sampling_sd(key, value, provenance.get(key) or {}, gdpval_sd, tasks_of)) ** 2
+    return math.sqrt(sum((q.LEAF_BY_KEY[key].weight / 100.0 * sampling_sd(key, value, provenance.get(key) or {}, gdpval_sd, tasks_of, bug_hunt_rho)) ** 2
                          for key, value in observations.items()))
 
 
@@ -3544,6 +3548,16 @@ def rank_separability(assembled: dict, per_row: dict, exchange: dict | None = No
             **({"aicdNarrow": dict(zip(("separableAdjacentPairs", "medianSeparation"), adjacent(narrow, 0.0)))} if "aiCodingDaily" in q.LEAF_BY_KEY else {}),
             "bands": _bands_on_workload(ranked, off, sd, configuration_of),
         }
+        # E309: the separability statement, noise bands and noise margin under a planted/unplanted correlation of -1, 0, +1.
+        covariance = {}
+        for rho in BUG_HUNT_RHOS:
+            stressed = {row["id"]: (1.0 - BETA) * quality_sd(row, bug_hunt_rho=rho) for row in assembled["rows"]}
+            count, middle = adjacent(stressed, 0.0)
+            sds = [quality_sd(row, bug_hunt_rho=rho) for row in assembled["rows"]]
+            covariance[f"{rho:+.0f}"] = {"separableAdjacentPairs": count, "medianSeparation": middle,
+                                         "qualityMargin": 1.96 * math.sqrt(2.0) * statistics.median(sds) if sds else None,
+                                         "bandsUnchanged": _bands_on_workload(ranked, off, stressed, configuration_of) == result[basis]["bands"]}
+        result[basis]["bugHuntCovariance"] = covariance
         doubling = ((exchange or {}).get(basis) or {}).get("valuePointsPerCostDoubling")
         # I28: the factor by which a cost (on the Plan basis, a transferred multiple) can be wrong before the value moves
         # by the median separation threshold; a tolerance, not an estimate of any transfer's error.
@@ -3576,6 +3590,7 @@ def clipped_tolerance(scores: dict, exchange: dict, median: float | None, doubli
 
 
 SEPARABILITY_CORRELATIONS = (0.0, 0.3, 0.6)
+BUG_HUNT_RHOS = (-1.0, 0.0, 1.0)  # E309: planted/unplanted correlation stress endpoints (not estimates)
 AICD_NARROW_TASKS = 60  # E263: one trial per point of 60, the narrow reading of AI Coding Daily's noise
 GDPVAL_WIDE_SD = 26.0  # I26, I60: AA's displayed +/-26 Elo for Claude Opus 5.5 read as one SD for every row, the wide reading of an interval whose level is unstated
 SEPARABILITY_BIAS = ("net direction not established: treating two rows' errors as independent overstates the threshold, because every row "
@@ -3814,12 +3829,12 @@ def harness_band(tb4_rows: list[dict]) -> dict:
     return {"id": "Bug Hunt harness band (E19)", "stratum": "S2", "rule": HARNESS_BAND_RULE, "status": "evaluated", "spreads": spreads, "width": statistics.median(spreads.values())}
 
 
-MEAN_SHIFT_DRAWS = 2_000  # O154: draws per binomial-leaf kernel when estimating the mean-preserving kernel's clip rate
+MEAN_SHIFT_DRAWS = 2_000  # O154: draws per binomial-leaf kernel when estimating the recentred kernel's clip rate
 
 
 def sampling_mean_shift(panel: list[scenarios.RowInputs], seed: int) -> dict:
     """O154: per binomial leaf, the largest |Jeffreys mean - published score| over the S1T panel (points, with its row) and
-    the share of the mean-preserving alternative's draws that clip at 0 or 100."""
+    the share of the recentred alternative's draws that clip at 0 or 100."""
 
     rng, summary = random.Random(seed), {}
     for item in panel:

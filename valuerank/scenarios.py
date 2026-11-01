@@ -44,7 +44,7 @@ TARGET_PROFILES = {
     "S1M": "published-record reporting precision + conventional identification of missing leaves + conventional range sensitivity inside published 95% confidence intervals (no tail model)",
     # O39: benchmark sampling noise under an independent-task approximation (owner decision, 2026-10-21); it never
     # authorises a label and never changes a score.
-    "S1T": "published-record leaf values redrawn with task-sampling noise from each leaf's published task count (binomial leaves from their Jeffreys Beta posterior, O142, with its mean-preserving alternative, O154; independent-task approximation; GDPval-AA from its displayed rating interval, an assumption) + conventional identification of missing leaves",
+    "S1T": "published-record leaf values redrawn with task-sampling noise from each leaf's published task count (binomial leaves from their Jeffreys Beta posterior, O142, with its recentred, clipped alternative, O154, whose realised mean shift is reported; independent-task approximation; GDPval-AA from its displayed rating interval, an assumption) + conventional identification of missing leaves",
 }
 STRATA = ("S0", "S1", "S2", "S1M", "S1T")
 # E161: every stream's events name the quality equation they use, so S0-to-S1 changes are never read as uncertainty alone.
@@ -93,7 +93,7 @@ PUBLISHED_PRECISION = "published reporting precision"
 ANALYST_CONVENTION = "analyst convention"
 
 
-MEAN_PRESERVING = "mean-preserving"  # O154: the Jeffreys draw recentred on the published score (S1T's E25 alternative)
+MEAN_PRESERVING = "recentred"  # O154: the Jeffreys draw recentred on the published score (S1T's E25 alternative)
 
 
 def mean_shift(alpha: float, beta: float, published: float) -> float:
@@ -107,7 +107,7 @@ class Kernel:
     """A draw kernel: 'fixed' (value), 'uniform' (low, high), 'split-uniform' (low, point, high), 'uniform-sum'
     (offset, (low, high), ...), 'runs' (public run values), 'normal' (mean, sd, low, high: clipped, O39 task sampling) or
     'beta' (alpha, beta, published: 100 x a Beta draw, O142 task sampling of a binomial leaf, inside 0-100 without clipping;
-    its 'mean-preserving' alternative recentres the draw on the published score and clips, O154)."""
+    its 'recentred' alternative recentres the draw on the published score and clips, O154)."""
 
     family: str
     params: tuple
@@ -144,7 +144,7 @@ class Kernel:
             return min(high, max(low, rng.gauss(mean, sd)))
         if self.family == "beta":
             # O142 (2026-11-01): a binomial leaf's Jeffreys posterior, Beta(k + 1/2, n - k + 1/2), on the 0-100 scale.
-            # O154: its mean-preserving alternative recentres the draw on the published score, clipped to 0-100.
+            # O154: its recentred alternative recentres the draw on the published score, clipped to 0-100.
             alpha, beta, published = self.params
             value = 100.0 * rng.betavariate(alpha, beta)
             if use_alternative and self.alternative == MEAN_PRESERVING:

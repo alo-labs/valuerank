@@ -196,7 +196,7 @@ def test_scores_md_ranking_matches_scores_json(emitted):
     assert len(table_rows(text, "| Model | Reasons")) == 28
     assert "### API basis: rank 1" in text and "### Plan basis: on the frontier" in text
     # O48: the Plan streams exclude transfer-dependent plan rows, each named as a configuration on its plan.
-    assert "Plan streams S1, S2, S1 endpoint-heavy, S1M, S1T and S1T mean-preserving run with owner assumptions off (owner-named transfers and O46 provider quota ceilings; E167): Claude Haiku 5.5 (max) on Claude Max 20x, Claude Haiku 5.5 (max) on Claude Max 5x, Claude Haiku 5.5 (max) on Claude Pro, Claude Sonnet 5.5 (max) on Claude Max 20x," in text
+    assert "Plan streams S1, S2, S1 endpoint-heavy, S1M, S1T and S1T recentred run with owner assumptions off (owner-named transfers and O46 provider quota ceilings; E167): Claude Haiku 5.5 (max) on Claude Max 20x, Claude Haiku 5.5 (max) on Claude Max 5x, Claude Haiku 5.5 (max) on Claude Pro, Claude Sonnet 5.5 (max) on Claude Max 20x," in text
     assert "| $1,178 per month: assumed API-equivalent consumption (owner-named transfer) from claude-pro-opus55-semianalysis |" in text
     assert "| GPT-6.1 Sol (max) | ChatGPT Pro 500 $500 · GPT-6.1 Sol (10.772×, measured) | $5,386 per month: measured-workload capacity |" in text
     assert "| quality 68.5 | GPT-6.1 Sol (max) | supported under all registered role-group kernel checks |" in text

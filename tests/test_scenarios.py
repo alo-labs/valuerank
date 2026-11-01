@@ -43,8 +43,8 @@ def test_kernels_draw_their_families():
         Kernel("beta", (99.5, 1.5))
     beta = [Kernel("beta", (99.5, 1.5, 100.0), target="task sampling (independent-task approximation)").draw(rng) for _ in range(200)]
     assert all(0.0 < value < 100.0 for value in beta) and 90.0 < sum(beta) / len(beta) < 100.0
-    # O154: the mean-preserving alternative recentres on the published score and clips to 0-100.
-    kernel = Kernel("beta", (3.5, 0.5, 100.0), "mean-preserving", target="task sampling (independent-task approximation)")
+    # O154: the recentred alternative recentres on the published score and clips to 0-100.
+    kernel = Kernel("beta", (3.5, 0.5, 100.0), "recentred", target="task sampling (independent-task approximation)")
     assert sc.mean_shift(3.5, 0.5, 100.0) == pytest.approx(-12.5)
     recentred = [kernel.draw(rng, use_alternative=True) for _ in range(2000)]
     assert all(0.0 <= value <= 100.0 for value in recentred) and max(recentred) == 100.0 and sum(recentred) / len(recentred) > 93.0

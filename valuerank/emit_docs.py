@@ -710,9 +710,9 @@ def displayed_cheapest_sentences(facts):
 
 
 def run_label(run):
-    # O154: S1T's alternative is the mean-preserving recentred Jeffreys draw; S1's is the endpoint-heavy kernel.
+    # O154: S1T's alternative is the recentred, clipped Jeffreys draw; S1's is the endpoint-heavy kernel.
     if run["alternative"]:
-        return run["stratum"] + (" mean-preserving" if run["stratum"] == "S1T" else " endpoint-heavy")
+        return run["stratum"] + (" recentred" if run["stratum"] == "S1T" else " endpoint-heavy")
     return run["stratum"]
 
 

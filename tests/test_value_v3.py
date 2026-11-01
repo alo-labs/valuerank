@@ -561,7 +561,7 @@ def test_scenarios_hash_attach_and_bar_labels():
     document = v.run_scenarios(result, frozen, n=200, seed=7)
     assert document["inputHash"] == v.scenario_hash(result, frozen, n=200, seed=7)
     assert [run["stratum"] for run in document["results"]["api"]] == ["S0", "S1", "S2", "S1", "S1M", "S1T", "S1T"]
-    assert document["results"]["api"][-1]["alternative"] is True  # O154: S1T's mean-preserving alternative
+    assert document["results"]["api"][-1]["alternative"] is True  # O154: S1T's recentred alternative
     shift = document["samplingMeanShift"]["frontierCode"]
     assert shift["postClipRow"] in {"a", "b"} and isinstance(shift["maxPostClipShift"], float)  # E303
     assert shift["row"] in {"a", "b"} and 0.0 <= shift["clipRate"] <= 1.0
@@ -1832,6 +1832,10 @@ def test_bug_hunt_sampling_noise_is_a_binomial_planted_part_plus_a_poisson_unpla
     observation = q.bug_hunt_z(59.5, v.BUG_HUNT_HALF_WIDTH)
     p = 52.5 / 106.0
     assert v.sampling_sd("bugHunt", observation, {"planted": 52.0, "unplanted": 7.5}) == pytest.approx(math.sqrt(105 * p * (1 - p) + 7.5))
+    # E309: the correlation stress widens or narrows the SD by 2*rho*sqrt(vP*vU); a perfect negative one floors at 0.
+    vp, vu = 105 * p * (1 - p), 7.5
+    assert v.sampling_sd("bugHunt", observation, {"planted": 52.0, "unplanted": 7.5}, bug_hunt_rho=1.0) == pytest.approx(math.sqrt(vp) + math.sqrt(vu))
+    assert v.sampling_sd("bugHunt", observation, {"planted": 52.0, "unplanted": 7.5}, bug_hunt_rho=-1.0) == pytest.approx(abs(math.sqrt(vp) - math.sqrt(vu)))
     # The unplanted variance never falls below 0.5, whether the count is zero, small or absent.
     for unplanted in (0.0, 0.2, None):
         assert v.sampling_sd("bugHunt", observation, {"planted": 52.0, "unplanted": unplanted}) == pytest.approx(math.sqrt(105 * p * (1 - p) + 0.5))
@@ -1891,6 +1895,10 @@ def test_rank_bands_correlation_grid_and_listed_indicative_values():
     output = v.score(result, frozen)
     separability = output["diagnostics"]["rankSeparability"]
     assert set(separability["api"]["byCorrelation"]) == {"0.0", "0.3", "0.6"} and separability["bias"].startswith("net direction not established")
+    # E309: the separability statement restated at planted/unplanted correlations -1, 0 and +1.
+    covariance = separability["api"]["bugHuntCovariance"]
+    assert set(covariance) == {"-1", "+0", "+1"} and covariance["+0"]["bandsUnchanged"] is True
+    assert covariance["+0"]["separableAdjacentPairs"] == separability["api"]["separableAdjacentPairs"]
     assert set(separability["api"]["gdpvalWide"]) == {"separableAdjacentPairs", "medianSeparation"} and set(separability["api"]["bands"]) == {"a", "b"}
     assert output["listedIndicative"] == []
     # O41: a frontier-family configuration listed for a missing leaf keeps an indicative value apart from the ranking.

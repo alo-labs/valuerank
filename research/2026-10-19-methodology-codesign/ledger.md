@@ -2238,3 +2238,12 @@ Asked on I64 Q1 whether future O71 admissions should be executed by the build fr
 - E306. O145's states are plotted, retained and out, read off consecutive releases; retention applies once per exit.
 - E307. The demand registry covers exactly the admitted components; each component outside the Index is its own population.
 - E308. The release report envelope [V − 30 days, V] is distinct from each cell's admission window, which O161 ends at the cell's latest staged search.
+
+## Reviewer 82 (Claude Sonnet 5.5, round 13, Thinking, whole draft r164)
+- Read checks: every part read to its end at commit 47978a9 (the same parts as 22034d6).
+- M1 (the summed Bug Hunt leaf assumes zero covariance between planted and unplanted fixes): adopted as E309 (correlation −1, 0, +1 stress on separability, bands and margin; the primary SD unchanged).
+- M2 (the executable cohort rule omits O145's retained set): adopted as E310 (C_t = P_t ∪ T_t).
+- L (the S1T stream description still says "mean-preserving"): adopted; the kernel and every generated label now read "recentred" (and clipped).
+- Round status (O56): not clean (Mediums). Sonnet called the draft close to convergence and raised no owner question.
+- E309. The Bug Hunt planted/unplanted correlation is stressed at −1, 0, +1 beside the separability statement, noise bands and noise margin.
+- E310. The cohort is the union of the plotted cohort and the retained set; consumers read C_t, the frontier-only diagnostics P_t.

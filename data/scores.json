@@ -22711,6 +22711,26 @@
               9
             ]
           },
+          "bugHuntCovariance": {
+            "-1": {
+              "separableAdjacentPairs": 2,
+              "medianSeparation": 2.548408268234389,
+              "qualityMargin": 3.397071029889766,
+              "bandsUnchanged": true
+            },
+            "+0": {
+              "separableAdjacentPairs": 2,
+              "medianSeparation": 2.7440964006142448,
+              "qualityMargin": 3.6384463489902976,
+              "bandsUnchanged": true
+            },
+            "+1": {
+              "separableAdjacentPairs": 2,
+              "medianSeparation": 2.9450702432968416,
+              "qualityMargin": 3.8176451280655064,
+              "bandsUnchanged": true
+            }
+          },
           "costTolerance": 1.8443471854952709,
           "clippedTolerance": {}
         },
@@ -22822,6 +22842,26 @@
               27,
               27
             ]
+          },
+          "bugHuntCovariance": {
+            "-1": {
+              "separableAdjacentPairs": 3,
+              "medianSeparation": 2.5519145848166085,
+              "qualityMargin": 3.397071029889766,
+              "bandsUnchanged": true
+            },
+            "+0": {
+              "separableAdjacentPairs": 1,
+              "medianSeparation": 2.7667767657604085,
+              "qualityMargin": 3.6384463489902976,
+              "bandsUnchanged": true
+            },
+            "+1": {
+              "separableAdjacentPairs": 1,
+              "medianSeparation": 2.9960916048528277,
+              "qualityMargin": 3.8176451280655064,
+              "bandsUnchanged": false
+            }
           },
           "costTolerance": 1.4348357357167214,
           "clippedTolerance": {
@@ -28238,7 +28278,7 @@
         "S1": "published-record reporting precision + conventional identification of missing leaves",
         "S2": "published-record reporting precision + conventional identification of missing leaves + weight-specification stress",
         "S1M": "published-record reporting precision + conventional identification of missing leaves + conventional range sensitivity inside published 95% confidence intervals (no tail model)",
-        "S1T": "published-record leaf values redrawn with task-sampling noise from each leaf's published task count (binomial leaves from their Jeffreys Beta posterior, O142, with its mean-preserving alternative, O154; independent-task approximation; GDPval-AA from its displayed rating interval, an assumption) + conventional identification of missing leaves"
+        "S1T": "published-record leaf values redrawn with task-sampling noise from each leaf's published task count (binomial leaves from their Jeffreys Beta posterior, O142, with its recentred, clipped alternative, O154, whose realised mean shift is reported; independent-task approximation; GDPval-AA from its displayed rating interval, an assumption) + conventional identification of missing leaves"
       },
       "notQuantified": [
         "benchmark repeatability beyond S1T's independent-task approximation (correlated tasks, harness and attempt effects): not quantified in v1 scenario shares",
@@ -29458,7 +29498,7 @@
           },
           {
             "stratum": "S1T",
-            "targetProfile": "published-record leaf values redrawn with task-sampling noise from each leaf's published task count (binomial leaves from their Jeffreys Beta posterior, O142, with its mean-preserving alternative, O154; independent-task approximation; GDPval-AA from its displayed rating interval, an assumption) + conventional identification of missing leaves",
+            "targetProfile": "published-record leaf values redrawn with task-sampling noise from each leaf's published task count (binomial leaves from their Jeffreys Beta posterior, O142, with its recentred, clipped alternative, O154, whose realised mean shift is reported; independent-task approximation; GDPval-AA from its displayed rating interval, an assumption) + conventional identification of missing leaves",
             "permittedTargets": [
               "identification convention",
               "reporting precision",
@@ -29695,7 +29735,7 @@
           },
           {
             "stratum": "S1T",
-            "targetProfile": "published-record leaf values redrawn with task-sampling noise from each leaf's published task count (binomial leaves from their Jeffreys Beta posterior, O142, with its mean-preserving alternative, O154; independent-task approximation; GDPval-AA from its displayed rating interval, an assumption) + conventional identification of missing leaves",
+            "targetProfile": "published-record leaf values redrawn with task-sampling noise from each leaf's published task count (binomial leaves from their Jeffreys Beta posterior, O142, with its recentred, clipped alternative, O154, whose realised mean shift is reported; independent-task approximation; GDPval-AA from its displayed rating interval, an assumption) + conventional identification of missing leaves",
             "permittedTargets": [
               "identification convention",
               "reporting precision",
@@ -32199,7 +32239,7 @@
           },
           {
             "stratum": "S1T",
-            "targetProfile": "published-record leaf values redrawn with task-sampling noise from each leaf's published task count (binomial leaves from their Jeffreys Beta posterior, O142, with its mean-preserving alternative, O154; independent-task approximation; GDPval-AA from its displayed rating interval, an assumption) + conventional identification of missing leaves",
+            "targetProfile": "published-record leaf values redrawn with task-sampling noise from each leaf's published task count (binomial leaves from their Jeffreys Beta posterior, O142, with its recentred, clipped alternative, O154, whose realised mean shift is reported; independent-task approximation; GDPval-AA from its displayed rating interval, an assumption) + conventional identification of missing leaves",
             "permittedTargets": [
               "identification convention",
               "reporting precision",
@@ -32609,7 +32649,7 @@
           },
           {
             "stratum": "S1T",
-            "targetProfile": "published-record leaf values redrawn with task-sampling noise from each leaf's published task count (binomial leaves from their Jeffreys Beta posterior, O142, with its mean-preserving alternative, O154; independent-task approximation; GDPval-AA from its displayed rating interval, an assumption) + conventional identification of missing leaves",
+            "targetProfile": "published-record leaf values redrawn with task-sampling noise from each leaf's published task count (binomial leaves from their Jeffreys Beta posterior, O142, with its recentred, clipped alternative, O154, whose realised mean shift is reported; independent-task approximation; GDPval-AA from its displayed rating interval, an assumption) + conventional identification of missing leaves",
             "permittedTargets": [
               "identification convention",
               "reporting precision",
@@ -56391,6 +56431,26 @@
                 20
               ]
             },
+            "bugHuntCovariance": {
+              "-1": {
+                "separableAdjacentPairs": 0,
+                "medianSeparation": 4.283733488420292,
+                "qualityMargin": 5.5208195554712765,
+                "bandsUnchanged": false
+              },
+              "+0": {
+                "separableAdjacentPairs": 0,
+                "medianSeparation": 4.5078517703174334,
+                "qualityMargin": 5.947918549352882,
+                "bandsUnchanged": true
+              },
+              "+1": {
+                "separableAdjacentPairs": 0,
+                "medianSeparation": 4.686724255055944,
+                "qualityMargin": 6.39625793713078,
+                "bandsUnchanged": true
+              }
+            },
             "costTolerance": 3.169149724362998,
             "clippedTolerance": {}
           },
@@ -56682,6 +56742,26 @@
                 66,
                 67
               ]
+            },
+            "bugHuntCovariance": {
+              "-1": {
+                "separableAdjacentPairs": 1,
+                "medianSeparation": 4.301852701029824,
+                "qualityMargin": 5.5208195554712765,
+                "bandsUnchanged": true
+              },
+              "+0": {
+                "separableAdjacentPairs": 0,
+                "medianSeparation": 4.54009052426864,
+                "qualityMargin": 5.947918549352882,
+                "bandsUnchanged": true
+              },
+              "+1": {
+                "separableAdjacentPairs": 0,
+                "medianSeparation": 4.714110832850928,
+                "qualityMargin": 6.39625793713078,
+                "bandsUnchanged": false
+              }
             },
             "costTolerance": 2.1493571322117577,
             "clippedTolerance": {
@@ -64202,7 +64282,7 @@
           "S1": "published-record reporting precision + conventional identification of missing leaves",
           "S2": "published-record reporting precision + conventional identification of missing leaves + weight-specification stress",
           "S1M": "published-record reporting precision + conventional identification of missing leaves + conventional range sensitivity inside published 95% confidence intervals (no tail model)",
-          "S1T": "published-record leaf values redrawn with task-sampling noise from each leaf's published task count (binomial leaves from their Jeffreys Beta posterior, O142, with its mean-preserving alternative, O154; independent-task approximation; GDPval-AA from its displayed rating interval, an assumption) + conventional identification of missing leaves"
+          "S1T": "published-record leaf values redrawn with task-sampling noise from each leaf's published task count (binomial leaves from their Jeffreys Beta posterior, O142, with its recentred, clipped alternative, O154, whose realised mean shift is reported; independent-task approximation; GDPval-AA from its displayed rating interval, an assumption) + conventional identification of missing leaves"
         },
         "notQuantified": [
           "benchmark repeatability beyond S1T's independent-task approximation (correlated tasks, harness and attempt effects): not quantified in v1 scenario shares",
@@ -66982,7 +67062,7 @@
             },
             {
               "stratum": "S1T",
-              "targetProfile": "published-record leaf values redrawn with task-sampling noise from each leaf's published task count (binomial leaves from their Jeffreys Beta posterior, O142, with its mean-preserving alternative, O154; independent-task approximation; GDPval-AA from its displayed rating interval, an assumption) + conventional identification of missing leaves",
+              "targetProfile": "published-record leaf values redrawn with task-sampling noise from each leaf's published task count (binomial leaves from their Jeffreys Beta posterior, O142, with its recentred, clipped alternative, O154, whose realised mean shift is reported; independent-task approximation; GDPval-AA from its displayed rating interval, an assumption) + conventional identification of missing leaves",
               "permittedTargets": [
                 "identification convention",
                 "reporting precision",
@@ -67531,7 +67611,7 @@
             },
             {
               "stratum": "S1T",
-              "targetProfile": "published-record leaf values redrawn with task-sampling noise from each leaf's published task count (binomial leaves from their Jeffreys Beta posterior, O142, with its mean-preserving alternative, O154; independent-task approximation; GDPval-AA from its displayed rating interval, an assumption) + conventional identification of missing leaves",
+              "targetProfile": "published-record leaf values redrawn with task-sampling noise from each leaf's published task count (binomial leaves from their Jeffreys Beta posterior, O142, with its recentred, clipped alternative, O154, whose realised mean shift is reported; independent-task approximation; GDPval-AA from its displayed rating interval, an assumption) + conventional identification of missing leaves",
               "permittedTargets": [
                 "identification convention",
                 "reporting precision",
@@ -73251,7 +73331,7 @@
             },
             {
               "stratum": "S1T",
-              "targetProfile": "published-record leaf values redrawn with task-sampling noise from each leaf's published task count (binomial leaves from their Jeffreys Beta posterior, O142, with its mean-preserving alternative, O154; independent-task approximation; GDPval-AA from its displayed rating interval, an assumption) + conventional identification of missing leaves",
+              "targetProfile": "published-record leaf values redrawn with task-sampling noise from each leaf's published task count (binomial leaves from their Jeffreys Beta posterior, O142, with its recentred, clipped alternative, O154, whose realised mean shift is reported; independent-task approximation; GDPval-AA from its displayed rating interval, an assumption) + conventional identification of missing leaves",
               "permittedTargets": [
                 "identification convention",
                 "reporting precision",
@@ -74101,7 +74181,7 @@
             },
             {
               "stratum": "S1T",
-              "targetProfile": "published-record leaf values redrawn with task-sampling noise from each leaf's published task count (binomial leaves from their Jeffreys Beta posterior, O142, with its mean-preserving alternative, O154; independent-task approximation; GDPval-AA from its displayed rating interval, an assumption) + conventional identification of missing leaves",
+              "targetProfile": "published-record leaf values redrawn with task-sampling noise from each leaf's published task count (binomial leaves from their Jeffreys Beta posterior, O142, with its recentred, clipped alternative, O154, whose realised mean shift is reported; independent-task approximation; GDPval-AA from its displayed rating interval, an assumption) + conventional identification of missing leaves",
               "permittedTargets": [
                 "identification convention",
                 "reporting precision",
@@ -110257,6 +110337,26 @@
                 33
               ]
             },
+            "bugHuntCovariance": {
+              "-1": {
+                "separableAdjacentPairs": 0,
+                "medianSeparation": 3.3321700134664702,
+                "qualityMargin": 4.4807313080361775,
+                "bandsUnchanged": false
+              },
+              "+0": {
+                "separableAdjacentPairs": 0,
+                "medianSeparation": 3.7694296437432775,
+                "qualityMargin": 5.063749186865433,
+                "bandsUnchanged": true
+              },
+              "+1": {
+                "separableAdjacentPairs": 0,
+                "medianSeparation": 4.133720979058431,
+                "qualityMargin": 5.572209906758515,
+                "bandsUnchanged": false
+              }
+            },
             "costTolerance": 3.3992552890219683,
             "clippedTolerance": {}
           },
@@ -110724,6 +110824,26 @@
                 109,
                 112
               ]
+            },
+            "bugHuntCovariance": {
+              "-1": {
+                "separableAdjacentPairs": 1,
+                "medianSeparation": 3.4177484703853724,
+                "qualityMargin": 4.4807313080361775,
+                "bandsUnchanged": false
+              },
+              "+0": {
+                "separableAdjacentPairs": 1,
+                "medianSeparation": 3.893462238959113,
+                "qualityMargin": 5.063749186865433,
+                "bandsUnchanged": true
+              },
+              "+1": {
+                "separableAdjacentPairs": 0,
+                "medianSeparation": 4.378671804500848,
+                "qualityMargin": 5.572209906758515,
+                "bandsUnchanged": false
+              }
             },
             "costTolerance": 2.0900772417886575,
             "clippedTolerance": {
@@ -121449,7 +121569,7 @@
           "S1": "published-record reporting precision + conventional identification of missing leaves",
           "S2": "published-record reporting precision + conventional identification of missing leaves + weight-specification stress",
           "S1M": "published-record reporting precision + conventional identification of missing leaves + conventional range sensitivity inside published 95% confidence intervals (no tail model)",
-          "S1T": "published-record leaf values redrawn with task-sampling noise from each leaf's published task count (binomial leaves from their Jeffreys Beta posterior, O142, with its mean-preserving alternative, O154; independent-task approximation; GDPval-AA from its displayed rating interval, an assumption) + conventional identification of missing leaves"
+          "S1T": "published-record leaf values redrawn with task-sampling noise from each leaf's published task count (binomial leaves from their Jeffreys Beta posterior, O142, with its recentred, clipped alternative, O154, whose realised mean shift is reported; independent-task approximation; GDPval-AA from its displayed rating interval, an assumption) + conventional identification of missing leaves"
         },
         "notQuantified": [
           "benchmark repeatability beyond S1T's independent-task approximation (correlated tasks, harness and attempt effects): not quantified in v1 scenario shares",
@@ -125919,7 +126039,7 @@
             },
             {
               "stratum": "S1T",
-              "targetProfile": "published-record leaf values redrawn with task-sampling noise from each leaf's published task count (binomial leaves from their Jeffreys Beta posterior, O142, with its mean-preserving alternative, O154; independent-task approximation; GDPval-AA from its displayed rating interval, an assumption) + conventional identification of missing leaves",
+              "targetProfile": "published-record leaf values redrawn with task-sampling noise from each leaf's published task count (binomial leaves from their Jeffreys Beta posterior, O142, with its recentred, clipped alternative, O154, whose realised mean shift is reported; independent-task approximation; GDPval-AA from its displayed rating interval, an assumption) + conventional identification of missing leaves",
               "permittedTargets": [
                 "identification convention",
                 "reporting precision",
@@ -126806,7 +126926,7 @@
             },
             {
               "stratum": "S1T",
-              "targetProfile": "published-record leaf values redrawn with task-sampling noise from each leaf's published task count (binomial leaves from their Jeffreys Beta posterior, O142, with its mean-preserving alternative, O154; independent-task approximation; GDPval-AA from its displayed rating interval, an assumption) + conventional identification of missing leaves",
+              "targetProfile": "published-record leaf values redrawn with task-sampling noise from each leaf's published task count (binomial leaves from their Jeffreys Beta posterior, O142, with its recentred, clipped alternative, O154, whose realised mean shift is reported; independent-task approximation; GDPval-AA from its displayed rating interval, an assumption) + conventional identification of missing leaves",
               "permittedTargets": [
                 "identification convention",
                 "reporting precision",
@@ -136690,7 +136810,7 @@
             },
             {
               "stratum": "S1T",
-              "targetProfile": "published-record leaf values redrawn with task-sampling noise from each leaf's published task count (binomial leaves from their Jeffreys Beta posterior, O142, with its mean-preserving alternative, O154; independent-task approximation; GDPval-AA from its displayed rating interval, an assumption) + conventional identification of missing leaves",
+              "targetProfile": "published-record leaf values redrawn with task-sampling noise from each leaf's published task count (binomial leaves from their Jeffreys Beta posterior, O142, with its recentred, clipped alternative, O154, whose realised mean shift is reported; independent-task approximation; GDPval-AA from its displayed rating interval, an assumption) + conventional identification of missing leaves",
               "permittedTargets": [
                 "identification convention",
                 "reporting precision",
@@ -138204,7 +138324,7 @@
             },
             {
               "stratum": "S1T",
-              "targetProfile": "published-record leaf values redrawn with task-sampling noise from each leaf's published task count (binomial leaves from their Jeffreys Beta posterior, O142, with its mean-preserving alternative, O154; independent-task approximation; GDPval-AA from its displayed rating interval, an assumption) + conventional identification of missing leaves",
+              "targetProfile": "published-record leaf values redrawn with task-sampling noise from each leaf's published task count (binomial leaves from their Jeffreys Beta posterior, O142, with its recentred, clipped alternative, O154, whose realised mean shift is reported; independent-task approximation; GDPval-AA from its displayed rating interval, an assumption) + conventional identification of missing leaves",
               "permittedTargets": [
                 "identification convention",
                 "reporting precision",

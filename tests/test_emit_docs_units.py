@@ -98,7 +98,7 @@ def test_route_text_names_the_route_or_a_dash():
 def test_run_labels_mark_the_endpoint_heavy_kernel():
     assert ed.run_label({"stratum": "S1", "alternative": False}) == "S1"
     assert ed.run_label({"stratum": "S1", "alternative": True}) == "S1 endpoint-heavy"
-    assert ed.run_label({"stratum": "S1T", "alternative": True}) == "S1T mean-preserving"  # O154
+    assert ed.run_label({"stratum": "S1T", "alternative": True}) == "S1T recentred"  # O154
 
 
 def test_rank_change_text_reports_the_largest_moves():
