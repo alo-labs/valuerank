@@ -1,0 +1,801 @@
+{
+ "capturedAt": "2026-11-01T06:00:09Z",
+ "method": "As on 2026-10-25 and 2026-10-30: each board page read, its benchmarkViewUrl prop's hashed /_astro/benchmark_view_*.json downloaded (vals/<slug>.json, URL in vals/<slug>.jsonUrl.txt); values from tasks.overall.<model key>. Exact = same Vals model key (model version) and reasoning_effort/compute_effort equal to AA's effort, or, where AA plots no effort, the documented or owner-stated equivalent (O66, O135, O54/E252); plausible = AA plots no effort and Vals records none (MiMo-V2.6-Flash, O140); absent otherwise. Vals model pages for MiMo-V2.6-Pro and MiniMax-M3.1-Flash in vals/_models/ (read 2026-11-01T06:00:25Z).",
+ "cohortSource": "research/2026-11-01-recapture/cohort.json (37 configurations: 27 + 10 retained under O145)",
+ "benchmarks": [
+  {
+   "slug": "vibe-code",
+   "name": "Vibe Code Bench v1.1",
+   "version": "1.1",
+   "updated": "2026-10-29",
+   "models": 123,
+   "harness": "OpenHands, the same for every model row",
+   "sourceUrl": "https://www.vals.ai/benchmarks/vibe-code",
+   "jsonUrl": "https://www.vals.ai/_astro/benchmark_view_vibe_code_bench.J70PGD0L.json",
+   "captureFile": "research/2026-11-01-recapture/third-party/vals/vibe-code.json",
+   "readAt": "2026-11-01T06:00:08Z",
+   "changesSince20261030": {
+    "added": [],
+    "removed": [],
+    "valueChanged": [],
+    "fileIdentical": true
+   },
+   "coverage": {
+    "gpt-6-luna-low": {
+     "status": "absent",
+     "value": null,
+     "stderr": null,
+     "valsKey": null,
+     "effort": null,
+     "note": "Vals ran this model only at max (81.649), not low; not transferred."
+    },
+    "gpt-6-luna-medium": {
+     "status": "absent",
+     "value": null,
+     "stderr": null,
+     "valsKey": null,
+     "effort": null,
+     "note": "Vals ran this model only at max (81.649), not medium; not transferred."
+    },
+    "gpt-6-luna-high": {
+     "status": "absent",
+     "value": null,
+     "stderr": null,
+     "valsKey": null,
+     "effort": null,
+     "note": "Vals ran this model only at max (81.649), not high; not transferred."
+    },
+    "gpt-6-luna-xhigh": {
+     "status": "absent",
+     "value": null,
+     "stderr": null,
+     "valsKey": null,
+     "effort": null,
+     "note": "Vals ran this model only at max (81.649), not xhigh; not transferred."
+    },
+    "gpt-6-luna": {
+     "status": "exact",
+     "value": 81.649,
+     "stderr": 3.377,
+     "valsKey": "openai/gpt-6-luna",
+     "effort": "max",
+     "harness": "OpenHands",
+     "note": null
+    },
+    "claude-haiku-5-5-low": {
+     "status": "absent",
+     "value": null,
+     "stderr": null,
+     "valsKey": null,
+     "effort": null,
+     "note": "Vals ran this model only at max (90.444), not low; not transferred."
+    },
+    "claude-haiku-5-5-medium": {
+     "status": "absent",
+     "value": null,
+     "stderr": null,
+     "valsKey": null,
+     "effort": null,
+     "note": "Vals ran this model only at max (90.444), not medium; not transferred."
+    },
+    "claude-haiku-5-5-high": {
+     "status": "absent",
+     "value": null,
+     "stderr": null,
+     "valsKey": null,
+     "effort": null,
+     "note": "Vals ran this model only at max (90.444), not high; not transferred."
+    },
+    "mimo-v2-6-flash": {
+     "status": "plausible",
+     "value": 78.96,
+     "stderr": 4.045,
+     "valsKey": "xiaomi/mimo-v2.6-flash",
+     "effort": null,
+     "harness": "OpenHands",
+     "note": "Owner decision O135 (2026-10-30): AA plots MiMo-V2.6-Flash without an effort; Xiaomi's API documents a single thinking mode (thinking.type enabled/disabled, default enabled; on the Responses API every reasoning.effort other than none enables the same, undifferentiated reasoning), so the configuration is thinking enabled, the default (../../2026-10-30-v5-recapture/third-party/mimo-flash-effort.md; Xiaomi docs re-read 2026-11-01, mimo/). Vals records reasoning, reasoning_effort and compute_effort as null and its MiMo-V2.6-Flash model page (read 2026-10-30) states no reasoning setting; it stays unmatched under O140. New evidence for the owner: Vals' MiMo-V2.6-Pro model page (vals/_models/xiaomi_mimo-v2.6-pro.html, read 2026-11-01), in its 2026-09-22 update covering both models, says 'We evaluated them with reasoning enabled' through the official Xiaomi API."
+    },
+    "gpt-6.1-terra-low": {
+     "status": "absent",
+     "value": null,
+     "stderr": null,
+     "valsKey": null,
+     "effort": null,
+     "note": "Vals ran this model only at max (83.997), not low; not transferred."
+    },
+    "gpt-6.1-terra-medium": {
+     "status": "absent",
+     "value": null,
+     "stderr": null,
+     "valsKey": null,
+     "effort": null,
+     "note": "Vals ran this model only at max (83.997), not medium; not transferred."
+    },
+    "gpt-6.1-terra-high": {
+     "status": "absent",
+     "value": null,
+     "stderr": null,
+     "valsKey": null,
+     "effort": null,
+     "note": "Vals ran this model only at max (83.997), not high; not transferred."
+    },
+    "gpt-6.1-terra-xhigh": {
+     "status": "absent",
+     "value": null,
+     "stderr": null,
+     "valsKey": null,
+     "effort": null,
+     "note": "Vals ran this model only at max (83.997), not xhigh; not transferred."
+    },
+    "gpt-6.1-terra": {
+     "status": "exact",
+     "value": 83.997,
+     "stderr": 2.865,
+     "valsKey": "openai/gpt-6.1-terra",
+     "effort": "max",
+     "harness": "OpenHands",
+     "note": null
+    },
+    "gpt-6.1-sol-low": {
+     "status": "absent",
+     "value": null,
+     "stderr": null,
+     "valsKey": null,
+     "effort": null,
+     "note": "Vals ran this model only at max (88.931), not low; not transferred."
+    },
+    "gpt-6.1-sol-medium": {
+     "status": "absent",
+     "value": null,
+     "stderr": null,
+     "valsKey": null,
+     "effort": null,
+     "note": "Vals ran this model only at max (88.931), not medium; not transferred."
+    },
+    "gpt-6.1-sol-high": {
+     "status": "absent",
+     "value": null,
+     "stderr": null,
+     "valsKey": null,
+     "effort": null,
+     "note": "Vals ran this model only at max (88.931), not high; not transferred."
+    },
+    "gpt-6.1-sol-xhigh": {
+     "status": "absent",
+     "value": null,
+     "stderr": null,
+     "valsKey": null,
+     "effort": null,
+     "note": "Vals ran this model only at max (88.931), not xhigh; not transferred."
+    },
+    "gpt-6.1-sol": {
+     "status": "exact",
+     "value": 88.931,
+     "stderr": 1.893,
+     "valsKey": "openai/gpt-6.1-sol",
+     "effort": "max",
+     "harness": "OpenHands",
+     "note": null
+    },
+    "gpt-6-astra-high": {
+     "status": "absent",
+     "value": null,
+     "stderr": null,
+     "valsKey": null,
+     "effort": null,
+     "note": "Vals ran this model only at max (89.594), not high; not transferred."
+    },
+    "gpt-6-astra-xhigh": {
+     "status": "absent",
+     "value": null,
+     "stderr": null,
+     "valsKey": null,
+     "effort": null,
+     "note": "Vals ran this model only at max (89.594), not xhigh; not transferred."
+    },
+    "gpt-6-astra": {
+     "status": "exact",
+     "value": 89.594,
+     "stderr": 2.174,
+     "valsKey": "openai/gpt-6-astra",
+     "effort": "max",
+     "harness": "OpenHands",
+     "note": null
+    },
+    "claude-opus-5-5-high": {
+     "status": "absent",
+     "value": null,
+     "stderr": null,
+     "valsKey": null,
+     "effort": null,
+     "note": "Vals ran this model only at max (90.294), not high; not transferred."
+    },
+    "claude-opus-5-5-xhigh": {
+     "status": "absent",
+     "value": null,
+     "stderr": null,
+     "valsKey": null,
+     "effort": null,
+     "note": "Vals ran this model only at max (90.294), not xhigh; not transferred."
+    },
+    "claude-opus-5-5": {
+     "status": "exact",
+     "value": 90.294,
+     "stderr": 1.526,
+     "valsKey": "anthropic/claude-opus-5-5",
+     "effort": "max",
+     "harness": "OpenHands",
+     "note": "AA labels this configuration '... with default fallback'; the source has no fallback qualifier (as on 2026-10-25)."
+    },
+    "claude-sonnet-5-5": {
+     "status": "exact",
+     "value": 92.392,
+     "stderr": 1.26,
+     "valsKey": "anthropic/claude-sonnet-5-5",
+     "effort": "max",
+     "harness": "OpenHands",
+     "note": "AA labels this configuration '... with default fallback'; the source has no fallback qualifier (as on 2026-10-25)."
+    },
+    "gemini-4-carbon": {
+     "status": "exact",
+     "value": 89.06,
+     "stderr": 2.294,
+     "valsKey": "google/gemini-4-carbon",
+     "effort": "high",
+     "harness": "OpenHands",
+     "note": null
+    },
+    "claude-haiku-5-5": {
+     "status": "absent",
+     "value": null,
+     "stderr": null,
+     "valsKey": null,
+     "effort": null,
+     "note": "Vals ran this model only at max (90.444), not xhigh; not transferred."
+    },
+    "claude-haiku-5-5-max": {
+     "status": "exact",
+     "value": 90.444,
+     "stderr": 1.725,
+     "valsKey": "anthropic/claude-haiku-5-5",
+     "effort": "max",
+     "harness": "OpenHands",
+     "note": null
+    },
+    "claude-opus-5-5-medium": {
+     "status": "absent",
+     "value": null,
+     "stderr": null,
+     "valsKey": null,
+     "effort": null,
+     "note": "Vals ran this model only at max (90.294), not medium; not transferred."
+    },
+    "claude-sonnet-5-5-xhigh": {
+     "status": "absent",
+     "value": null,
+     "stderr": null,
+     "valsKey": null,
+     "effort": null,
+     "note": "Vals ran this model only at max (92.392), not xhigh; not transferred."
+    },
+    "deepseek-v4-1-flash-1017": {
+     "status": "exact",
+     "value": 87.73,
+     "stderr": 2.752,
+     "valsKey": "deepseek/deepseek-v4.1-flash-1017",
+     "effort": "max",
+     "harness": "OpenHands",
+     "note": null
+    },
+    "gemini-4-argon": {
+     "status": "exact",
+     "value": 91.906,
+     "stderr": 1.899,
+     "valsKey": "google/gemini-4-argon",
+     "effort": "high",
+     "harness": "OpenHands",
+     "note": null
+    },
+    "gpt-5.6-luna-low": {
+     "status": "absent",
+     "value": null,
+     "stderr": null,
+     "valsKey": null,
+     "effort": null,
+     "note": "Vals ran this model only at max (77.055), not low; not transferred."
+    },
+    "kimi-k3-1-pro": {
+     "status": "exact",
+     "value": 84.894,
+     "stderr": 2.949,
+     "valsKey": "kimi/kimi-k3.1-pro",
+     "effort": "max",
+     "harness": "OpenHands",
+     "note": "Owner decision O66 (2026-10-25): AA plots Kimi K3.1 Pro without an effort; Moonshot's API documents reasoning_effort low / high / max with max the default, so its configuration is taken at max, its maximum effort."
+    },
+    "mimo-v2-6-pro": {
+     "status": "exact",
+     "value": 85.223,
+     "stderr": 3.392,
+     "valsKey": "xiaomi/mimo-v2.6-pro",
+     "effort": "enabled (high, O54)",
+     "harness": "OpenHands",
+     "match": "owner (O54, E252)",
+     "note": "Owner decision O54 / E252: AA plots MiMo-V2.6-Pro without an effort; Xiaomi documents one thinking mode for mimo-v2.6-pro (thinking.type enabled/disabled, default enabled; re-read 2026-11-01, mimo/), so the configuration is thinking enabled, which the owner labels high: a source row labelled high, or stating reasoning enabled, is that configuration. Vals records reasoning, reasoning_effort and compute_effort as null; its model page (read 2026-11-01) says of MiMo V2.6 Pro and Flash 'We evaluated them with reasoning enabled' through the official Xiaomi API (2026-09-22 update)."
+    },
+    "minimax-m3-1-flash": {
+     "status": "exact",
+     "value": 73.944,
+     "stderr": 4.249,
+     "valsKey": "minimax/MiniMax-M3.1-flash",
+     "effort": "max",
+     "harness": "OpenHands",
+     "note": "Owner decision O135 (2026-10-30) applied to MiniMax-M3.1-Flash: AA plots it without an effort; MiniMax's API documents reasoning_effort / output_config.effort low, medium, high, xhigh, max with max the default when omitted, and thinking cannot be disabled (minimax-effort.md, read 2026-11-01), so the configuration is max. The O135 research outcome for MiniMax awaits the owner's confirmation (as O140 confirmed MiMo-V2.6-Flash). Vals' model page (read 2026-11-01): run 'via the official MiniMax API at temperature 1, top_p 0.95, compute effort max'."
+    }
+   },
+   "coverageCounts": {
+    "exact": 13,
+    "plausible": 1,
+    "absent": 23
+   },
+   "valueChangesSince20261030": {},
+   "retainedAgainst20261025Release": {
+    "claude-haiku-5-5": {
+     "release20261025": null,
+     "20261101": null,
+     "status": "absent",
+     "same": true
+    },
+    "claude-haiku-5-5-max": {
+     "release20261025": 90.444,
+     "20261101": 90.444,
+     "status": "exact",
+     "same": true
+    },
+    "claude-opus-5-5-medium": {
+     "release20261025": null,
+     "20261101": null,
+     "status": "absent",
+     "same": true
+    },
+    "claude-sonnet-5-5-xhigh": {
+     "release20261025": null,
+     "20261101": null,
+     "status": "absent",
+     "same": true
+    },
+    "deepseek-v4-1-flash-1017": {
+     "release20261025": 87.73,
+     "20261101": 87.73,
+     "status": "exact",
+     "same": true
+    },
+    "gemini-4-argon": {
+     "release20261025": 91.906,
+     "20261101": 91.906,
+     "status": "exact",
+     "same": true
+    },
+    "gpt-5.6-luna-low": {
+     "release20261025": null,
+     "20261101": null,
+     "status": "absent",
+     "same": true
+    },
+    "kimi-k3-1-pro": {
+     "release20261025": 84.894,
+     "20261101": 84.894,
+     "status": "exact",
+     "same": true
+    },
+    "mimo-v2-6-pro": {
+     "release20261025": 85.223,
+     "20261101": 85.223,
+     "status": "exact",
+     "same": true
+    },
+    "minimax-m3-1-flash": {
+     "release20261025": null,
+     "20261101": 73.944,
+     "status": "exact",
+     "same": false
+    }
+   }
+  },
+  {
+   "slug": "code-migration-v1-1",
+   "name": "Code Migration v1.1",
+   "version": "1.1",
+   "updated": "2026-10-28",
+   "models": 29,
+   "harness": "Pi agent harness, the same for every model row",
+   "sourceUrl": "https://www.vals.ai/benchmarks/code-migration-v1-1",
+   "jsonUrl": "https://www.vals.ai/_astro/benchmark_view_code_migration_v1_1.BRBJcaE4.json",
+   "captureFile": "research/2026-11-01-recapture/third-party/vals/code-migration-v1-1.json",
+   "readAt": "2026-11-01T06:00:09Z",
+   "changesSince20261030": {
+    "added": [],
+    "removed": [],
+    "valueChanged": [],
+    "fileIdentical": true
+   },
+   "coverage": {
+    "gpt-6-luna-low": {
+     "status": "absent",
+     "value": null,
+     "stderr": null,
+     "valsKey": null,
+     "effort": null,
+     "note": "Vals ran this model only at max (46.669), not low; not transferred."
+    },
+    "gpt-6-luna-medium": {
+     "status": "absent",
+     "value": null,
+     "stderr": null,
+     "valsKey": null,
+     "effort": null,
+     "note": "Vals ran this model only at max (46.669), not medium; not transferred."
+    },
+    "gpt-6-luna-high": {
+     "status": "absent",
+     "value": null,
+     "stderr": null,
+     "valsKey": null,
+     "effort": null,
+     "note": "Vals ran this model only at max (46.669), not high; not transferred."
+    },
+    "gpt-6-luna-xhigh": {
+     "status": "absent",
+     "value": null,
+     "stderr": null,
+     "valsKey": null,
+     "effort": null,
+     "note": "Vals ran this model only at max (46.669), not xhigh; not transferred."
+    },
+    "gpt-6-luna": {
+     "status": "exact",
+     "value": 46.669,
+     "stderr": 3.613,
+     "valsKey": "openai/gpt-6-luna",
+     "effort": "max",
+     "harness": null,
+     "note": null
+    },
+    "claude-haiku-5-5-low": {
+     "status": "absent",
+     "value": null,
+     "stderr": null,
+     "valsKey": null,
+     "effort": null,
+     "note": "Vals ran this model only at max (52.36), not low; not transferred."
+    },
+    "claude-haiku-5-5-medium": {
+     "status": "absent",
+     "value": null,
+     "stderr": null,
+     "valsKey": null,
+     "effort": null,
+     "note": "Vals ran this model only at max (52.36), not medium; not transferred."
+    },
+    "claude-haiku-5-5-high": {
+     "status": "absent",
+     "value": null,
+     "stderr": null,
+     "valsKey": null,
+     "effort": null,
+     "note": "Vals ran this model only at max (52.36), not high; not transferred."
+    },
+    "mimo-v2-6-flash": {
+     "status": "plausible",
+     "value": 39.552,
+     "stderr": 3.537,
+     "valsKey": "xiaomi/mimo-v2.6-flash",
+     "effort": null,
+     "harness": null,
+     "note": "Owner decision O135 (2026-10-30): AA plots MiMo-V2.6-Flash without an effort; Xiaomi's API documents a single thinking mode (thinking.type enabled/disabled, default enabled; on the Responses API every reasoning.effort other than none enables the same, undifferentiated reasoning), so the configuration is thinking enabled, the default (../../2026-10-30-v5-recapture/third-party/mimo-flash-effort.md; Xiaomi docs re-read 2026-11-01, mimo/). Vals records reasoning, reasoning_effort and compute_effort as null and its MiMo-V2.6-Flash model page (read 2026-10-30) states no reasoning setting; it stays unmatched under O140. New evidence for the owner: Vals' MiMo-V2.6-Pro model page (vals/_models/xiaomi_mimo-v2.6-pro.html, read 2026-11-01), in its 2026-09-22 update covering both models, says 'We evaluated them with reasoning enabled' through the official Xiaomi API."
+    },
+    "gpt-6.1-terra-low": {
+     "status": "absent",
+     "value": null,
+     "stderr": null,
+     "valsKey": null,
+     "effort": null,
+     "note": "No openai/gpt-6.1-terra row on this board."
+    },
+    "gpt-6.1-terra-medium": {
+     "status": "absent",
+     "value": null,
+     "stderr": null,
+     "valsKey": null,
+     "effort": null,
+     "note": "No openai/gpt-6.1-terra row on this board."
+    },
+    "gpt-6.1-terra-high": {
+     "status": "absent",
+     "value": null,
+     "stderr": null,
+     "valsKey": null,
+     "effort": null,
+     "note": "No openai/gpt-6.1-terra row on this board."
+    },
+    "gpt-6.1-terra-xhigh": {
+     "status": "absent",
+     "value": null,
+     "stderr": null,
+     "valsKey": null,
+     "effort": null,
+     "note": "No openai/gpt-6.1-terra row on this board."
+    },
+    "gpt-6.1-terra": {
+     "status": "absent",
+     "value": null,
+     "stderr": null,
+     "valsKey": null,
+     "effort": null,
+     "note": "No openai/gpt-6.1-terra row on this board."
+    },
+    "gpt-6.1-sol-low": {
+     "status": "absent",
+     "value": null,
+     "stderr": null,
+     "valsKey": null,
+     "effort": null,
+     "note": "Vals ran this model only at max (77.324), not low; not transferred."
+    },
+    "gpt-6.1-sol-medium": {
+     "status": "absent",
+     "value": null,
+     "stderr": null,
+     "valsKey": null,
+     "effort": null,
+     "note": "Vals ran this model only at max (77.324), not medium; not transferred."
+    },
+    "gpt-6.1-sol-high": {
+     "status": "absent",
+     "value": null,
+     "stderr": null,
+     "valsKey": null,
+     "effort": null,
+     "note": "Vals ran this model only at max (77.324), not high; not transferred."
+    },
+    "gpt-6.1-sol-xhigh": {
+     "status": "absent",
+     "value": null,
+     "stderr": null,
+     "valsKey": null,
+     "effort": null,
+     "note": "Vals ran this model only at max (77.324), not xhigh; not transferred."
+    },
+    "gpt-6.1-sol": {
+     "status": "exact",
+     "value": 77.324,
+     "stderr": 2.976,
+     "valsKey": "openai/gpt-6.1-sol",
+     "effort": "max",
+     "harness": null,
+     "note": null
+    },
+    "gpt-6-astra-high": {
+     "status": "absent",
+     "value": null,
+     "stderr": null,
+     "valsKey": null,
+     "effort": null,
+     "note": "Vals ran this model only at max (80.579), not high; not transferred."
+    },
+    "gpt-6-astra-xhigh": {
+     "status": "absent",
+     "value": null,
+     "stderr": null,
+     "valsKey": null,
+     "effort": null,
+     "note": "Vals ran this model only at max (80.579), not xhigh; not transferred."
+    },
+    "gpt-6-astra": {
+     "status": "exact",
+     "value": 80.579,
+     "stderr": 2.336,
+     "valsKey": "openai/gpt-6-astra",
+     "effort": "max",
+     "harness": null,
+     "note": null
+    },
+    "claude-opus-5-5-high": {
+     "status": "absent",
+     "value": null,
+     "stderr": null,
+     "valsKey": null,
+     "effort": null,
+     "note": "Vals ran this model only at max (81.012), not high; not transferred."
+    },
+    "claude-opus-5-5-xhigh": {
+     "status": "absent",
+     "value": null,
+     "stderr": null,
+     "valsKey": null,
+     "effort": null,
+     "note": "Vals ran this model only at max (81.012), not xhigh; not transferred."
+    },
+    "claude-opus-5-5": {
+     "status": "exact",
+     "value": 81.012,
+     "stderr": 3.207,
+     "valsKey": "anthropic/claude-opus-5-5",
+     "effort": "max",
+     "harness": null,
+     "note": "AA labels this configuration '... with default fallback'; the source has no fallback qualifier (as on 2026-10-25)."
+    },
+    "claude-sonnet-5-5": {
+     "status": "exact",
+     "value": 86.875,
+     "stderr": 1.521,
+     "valsKey": "anthropic/claude-sonnet-5-5",
+     "effort": "max",
+     "harness": null,
+     "note": "AA labels this configuration '... with default fallback'; the source has no fallback qualifier (as on 2026-10-25)."
+    },
+    "gemini-4-carbon": {
+     "status": "absent",
+     "value": null,
+     "stderr": null,
+     "valsKey": null,
+     "effort": null,
+     "note": "No google/gemini-4-carbon row on this board."
+    },
+    "claude-haiku-5-5": {
+     "status": "absent",
+     "value": null,
+     "stderr": null,
+     "valsKey": null,
+     "effort": null,
+     "note": "Vals ran this model only at max (52.36), not xhigh; not transferred."
+    },
+    "claude-haiku-5-5-max": {
+     "status": "exact",
+     "value": 52.36,
+     "stderr": 3.489,
+     "valsKey": "anthropic/claude-haiku-5-5",
+     "effort": "max",
+     "harness": null,
+     "note": null
+    },
+    "claude-opus-5-5-medium": {
+     "status": "absent",
+     "value": null,
+     "stderr": null,
+     "valsKey": null,
+     "effort": null,
+     "note": "Vals ran this model only at max (81.012), not medium; not transferred."
+    },
+    "claude-sonnet-5-5-xhigh": {
+     "status": "absent",
+     "value": null,
+     "stderr": null,
+     "valsKey": null,
+     "effort": null,
+     "note": "Vals ran this model only at max (86.875), not xhigh; not transferred."
+    },
+    "deepseek-v4-1-flash-1017": {
+     "status": "exact",
+     "value": 67.524,
+     "stderr": 2.763,
+     "valsKey": "deepseek/deepseek-v4.1-flash-1017",
+     "effort": "max",
+     "harness": null,
+     "note": null
+    },
+    "gemini-4-argon": {
+     "status": "exact",
+     "value": 70.796,
+     "stderr": 3.723,
+     "valsKey": "google/gemini-4-argon",
+     "effort": "high",
+     "harness": null,
+     "note": null
+    },
+    "gpt-5.6-luna-low": {
+     "status": "absent",
+     "value": null,
+     "stderr": null,
+     "valsKey": null,
+     "effort": null,
+     "note": "No openai/gpt-5.6-luna row on this board."
+    },
+    "kimi-k3-1-pro": {
+     "status": "absent",
+     "value": null,
+     "stderr": null,
+     "valsKey": null,
+     "effort": null,
+     "note": "No kimi/kimi-k3.1-pro row on this board."
+    },
+    "mimo-v2-6-pro": {
+     "status": "exact",
+     "value": 48.786,
+     "stderr": 3.876,
+     "valsKey": "xiaomi/mimo-v2.6-pro",
+     "effort": "enabled (high, O54)",
+     "harness": null,
+     "match": "owner (O54, E252)",
+     "note": "Owner decision O54 / E252: AA plots MiMo-V2.6-Pro without an effort; Xiaomi documents one thinking mode for mimo-v2.6-pro (thinking.type enabled/disabled, default enabled; re-read 2026-11-01, mimo/), so the configuration is thinking enabled, which the owner labels high: a source row labelled high, or stating reasoning enabled, is that configuration. Vals records reasoning, reasoning_effort and compute_effort as null; its model page (read 2026-11-01) says of MiMo V2.6 Pro and Flash 'We evaluated them with reasoning enabled' through the official Xiaomi API (2026-09-22 update)."
+    },
+    "minimax-m3-1-flash": {
+     "status": "absent",
+     "value": null,
+     "stderr": null,
+     "valsKey": null,
+     "effort": null,
+     "note": "No minimax/MiniMax-M3.1-flash row on this board."
+    }
+   },
+   "coverageCounts": {
+    "exact": 9,
+    "plausible": 1,
+    "absent": 27
+   },
+   "valueChangesSince20261030": {},
+   "retainedAgainst20261025Release": {
+    "claude-haiku-5-5": {
+     "release20261025": null,
+     "20261101": null,
+     "status": "absent",
+     "same": true
+    },
+    "claude-haiku-5-5-max": {
+     "release20261025": 52.36,
+     "20261101": 52.36,
+     "status": "exact",
+     "same": true
+    },
+    "claude-opus-5-5-medium": {
+     "release20261025": null,
+     "20261101": null,
+     "status": "absent",
+     "same": true
+    },
+    "claude-sonnet-5-5-xhigh": {
+     "release20261025": null,
+     "20261101": null,
+     "status": "absent",
+     "same": true
+    },
+    "deepseek-v4-1-flash-1017": {
+     "release20261025": 67.524,
+     "20261101": 67.524,
+     "status": "exact",
+     "same": true
+    },
+    "gemini-4-argon": {
+     "release20261025": 70.796,
+     "20261101": 70.796,
+     "status": "exact",
+     "same": true
+    },
+    "gpt-5.6-luna-low": {
+     "release20261025": null,
+     "20261101": null,
+     "status": "absent",
+     "same": true
+    },
+    "kimi-k3-1-pro": {
+     "release20261025": null,
+     "20261101": null,
+     "status": "absent",
+     "same": true
+    },
+    "mimo-v2-6-pro": {
+     "release20261025": 48.786,
+     "20261101": 48.786,
+     "status": "exact",
+     "same": true
+    },
+    "minimax-m3-1-flash": {
+     "release20261025": null,
+     "20261101": null,
+     "status": "absent",
+     "same": true
+    }
+   }
+  }
+ ]
+}
