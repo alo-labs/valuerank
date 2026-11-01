@@ -659,6 +659,22 @@ def o71_coverage(policy: dict, configurations: list[dict], listed_plans) -> dict
     return {"cells": cells, "uncovered": uncovered}
 
 
+def cell_search_dates(policy: dict, listed_plans) -> dict:
+    """O161 (2026-11-01): each (model, plan) cell's latest staged (O71) search date, from the entries that name the model
+    and the plan's seller (and the plan, when the entry lists plans). A cell's report window ends there."""
+
+    plans = [plan for plan in listed_plans if "(" not in plan]
+    entries = [entry for entry in policy.get("searchLog") or [] if (entry.get("searchedOn") or "") >= O71_FROM
+               and tuple(stage.get("stage") for stage in entry.get("stages") or []) == O71_STAGES]
+    dates = {}
+    for entry in entries:
+        for model in entry.get("models") or []:
+            for plan in entry.get("plans") or plans:
+                if plan_seller(plan) in (entry.get("providers") or []):
+                    dates[(model, plan)] = max(dates.get((model, plan), ""), entry["searchedOn"])
+    return dates
+
+
 def check_o71_coverage(policy: dict, configurations: list[dict], listed_plans) -> dict:
     coverage = o71_coverage(policy, configurations, listed_plans)
     if coverage["uncovered"]:
@@ -869,7 +885,8 @@ def assemble(configurations: list[dict], documents: dict, *, release_day: date, 
     # O87: cells are keyed by the model (the configuration's AA family), so reports at any effort pool.
     families = {item["id"]: configuration_family(item) for item in configurations}
     reports = plan_admission.canonical_plans(documents.get("planReports") or {"reports": []}, policy.get("planAliases"))
-    allowance_cells = plan_admission.evaluate(reports, policy.get("reportEligibilityProfile") or {}, release_day, families)
+    allowance_cells = plan_admission.evaluate(reports, policy.get("reportEligibilityProfile") or {}, release_day, families,
+                                              cell_search_dates(policy, (documents.get("planReports") or {}).get("listedPlans") or {}))
     plan_admission.check_routes(documents["planRoutes"]["routes"], allowance_cells, set(families), plan_routes.REPORT_KINDS, families)
     plan_routes.check_same_model_routes(documents["planRoutes"], families)
     change_records = plan_admission.profile_records(policy.get("reportEligibilityProfile") or {})
@@ -1876,7 +1893,7 @@ def gap_fill_sensitivity(rows: list[dict], per_row: dict) -> dict:
             "rows": filled, "bases": bases}
 
 
-def bug_hunt_harness_sensitivity(rows: list[dict], per_row: dict) -> dict:
+def bug_hunt_harness_sensitivity(rows: list[dict], per_row: dict, bars: list[dict] | None = None) -> dict:
     """Reviewer 78: how far the record's harness choice moves value and rank. Each row the owner ran on two or more harnesses
     has its Bug Hunt leaf set to its lowest and to its highest harness result (E224's per-harness largest-sample means),
     the other rows kept; the largest value movement and the rank changes are published (a diagnostic; no score changes)."""
@@ -1904,8 +1921,28 @@ def bug_hunt_harness_sensitivity(rows: list[dict], per_row: dict) -> dict:
                 largest = max(largest, abs(branch[row["id"]] - primary[row["id"]]))
             branches[end] = diagnostics.paired_rank_change(primary, branch)
         bases[basis] = {"largestValueMove": largest if spans else None, "rankChanges": branches}
+    # O162 (2026-11-01): a bar's displayed-record cheapest qualifying configuration that changes when the multi-harness rows
+    # take their other harness results is flagged beside that label.
+    def cheapest(level: float, end: str | None) -> str | None:
+        qualifying = []
+        for row in rows:
+            quality = row["summary"].displayed
+            if quality is None:
+                continue
+            if end and row["id"] in spans:
+                observations = row["evidence"]["observations"]
+                share = q.LEAF_BY_KEY["bugHunt"].weight / sum(q.LEAF_BY_KEY[key].weight for key in observations)
+                quality += share * (q.bug_hunt_z(spans[row["id"]][end]).z - observations["bugHunt"].z)
+            if quality >= level and row["cost"]["costUsd"] is not None:
+                qualifying.append((row["cost"]["costUsd"], row["id"]))
+        return min(qualifying)[1] if qualifying else None
+
+    flags = []
+    for bar in bars or []:
+        shown, low, high = cheapest(bar["level"], None), cheapest(bar["level"], "low"), cheapest(bar["level"], "high")
+        flags.append({"bar": bar["id"], "displayed": shown, "low": low, "high": high, "flagged": len({shown, low, high}) > 1})
     return {"label": "Bug Hunt harness sensitivity: each multi-harness row's leaf at its lowest and highest harness result (reviewer 78; diagnostic)",
-            "rows": spans, "bases": bases}
+            "rows": spans, "bases": bases, "labelFlags": flags}
 
 
 FALLBACK_REPRICING_LABEL = ("fallback-model re-pricing: each flagged row's Coding Agent Index cost with its fallback-attempt share (by attempts) "
@@ -2167,7 +2204,7 @@ def costed_bar_ladder(assembled: dict, per_row: dict) -> dict:
 def policy_cohort_bar(assembled: dict, frozen: dict) -> dict:
     """E199: the bar recomputed over the frontier and near-frontier configurations alone, with its API result (a sensitivity)."""
 
-    population, bars = bar_levels({**assembled, "rows": [row for row in assembled["rows"] if row.get("frontierFamily", True)]})
+    population, bars = bar_levels({**assembled, "rows": [row for row in assembled["rows"] if row.get("plotted", True)]})
     if not bars:
         return {"status": f"unavailable: fewer than {MIN_BAR_POPULATION} non-provisional frontier-family configurations", "population": population}
     bar = {**bars[0], "id": POLICY_BAR_ID, "rule": "lower-median displayed quality of the non-provisional frontier and near-frontier configurations (E199)"}
@@ -2179,11 +2216,15 @@ def frontier_anchor_diagnostic(assembled: dict, frozen: dict, per_row: dict) -> 
     """E187: each basis rescored on anchors built from the frontier and near-frontier references alone (and E199's bar)."""
 
     by_id = {row["id"]: row for row in assembled["rows"]}
-    references = [row_id for row_id in anchor_population(assembled, assembled["admitted"]) if by_id[row_id].get("frontierFamily", True)]
+    references = [row_id for row_id in anchor_population(assembled, assembled["admitted"]) if by_id[row_id].get("plotted", True)]
     policy_bar = policy_cohort_bar(assembled, frozen)
+    # Reviewer 79: the O145 retained rows the frontier-only population leaves out, named.
+    retained = sorted(row["id"] for row in assembled["rows"] if not row.get("plotted", True))
     if len(references) < MIN_ANCHOR_REFERENCES:
-        return {"label": FRONTIER_ANCHOR_LABEL, "status": f"unavailable: fewer than {MIN_ANCHOR_REFERENCES} frontier-family references", "references": references, "bar": policy_bar}
-    return {"label": FRONTIER_ANCHOR_LABEL, "status": "evaluated", "references": references, "bases": _rebuilt_anchor_bases(assembled, frozen, per_row, references), "bar": policy_bar}
+        return {"label": FRONTIER_ANCHOR_LABEL, "status": f"unavailable: fewer than {MIN_ANCHOR_REFERENCES} frontier-family references", "references": references,
+                "retainedExcluded": retained, "bar": policy_bar}
+    return {"label": FRONTIER_ANCHOR_LABEL, "status": "evaluated", "references": references, "retainedExcluded": retained,
+            "bases": _rebuilt_anchor_bases(assembled, frozen, per_row, references), "bar": policy_bar}
 
 
 def _rebuilt_anchor_bases(assembled: dict, frozen: dict, per_row: dict, references: list[str]) -> dict:
@@ -2751,7 +2792,7 @@ def score(assembled: dict, frozen: dict) -> dict:
             # ranking), so both rankings estimate one offset from one panel.
             "frontierCodeCrossSource": frontiercode_cross_source(cohort_rows, assembled["cognition"]),
             "gapFillSensitivity": gap_fill_sensitivity(rows, per_row),
-            "bugHuntHarnessSensitivity": bug_hunt_harness_sensitivity(rows, per_row),
+            "bugHuntHarnessSensitivity": bug_hunt_harness_sensitivity(rows, per_row, frozen.get("barReferences")),
             "fallbackRepricing": fallback_repricing(rows, per_row, frozen["workloads"][main]["anchors"]["api"], assembled.get("fallbackPrices") or {}),
             "harnessCostStress": harness_cost_stress(assembled, frozen),
             "gapFillBars": gap_fill_bars(assembled, frozen, frontiercode_cross_source(cohort_rows, assembled["cognition"])["meanOffset"]),
@@ -3979,6 +4020,7 @@ def evidence_bundle(data: Path) -> dict:
 
 
 RETAINED_REASON = "Plotted on or within the near gap of AA's rendered frontier (O51)"
+LEFT_COHORT_REASON = "Left AA's rendered frontier and near gap at this release; kept one more release, flagged 'left cohort' (O145)"
 
 
 def configuration(row: dict) -> dict:
@@ -3989,6 +4031,9 @@ def configuration(row: dict) -> dict:
         "aaNote": row.get("aaFrontierFootnote"),
         # O51: every cohort configuration is plotted on or near the frontier, so any inclusion reason makes it a frontier family row.
         "frontierFamily": bool(row.get("rankingInclusionReasons")),
+        # Reviewer 79: plotted on or near the rendered frontier at this release; an O145 retained row is a cohort row
+        # (ranked, searched, listed) but not plotted, so the frontier-only diagnostics (E187, E199) leave it out.
+        "plotted": any(reason != LEFT_COHORT_REASON for reason in row.get("rankingInclusionReasons") or []),
         "familyPrimary": row.get("familyPrimary", True),
         # O58: whether AA plots the configuration on its rendered frontier or within the near gap.
         "aaTier": row.get("aaFrontierTier"),

@@ -325,7 +325,20 @@ def label_safety_note(facts, row_ids):
     flags = {row["id"]: row.get("agentSafety") or {} for row in facts.v3.get("rows", [])}
     flagged = [f"{facts.labels([row_id])} ({flags[row_id]['blocked']} blocked and {flags[row_id]['fallback']} fallback attempts of {flags[row_id]['attempts']})"
                for row_id in sorted({row_id.split("@")[0] for row_id in row_ids}) if flags.get(row_id, {}).get("status") == "flagged"]
-    return (" Safety-refusal flags (O63; costs and scores unchanged) on these labelled rows: " + "; ".join(flagged) + ".") if flagged else ""
+    text = (" Safety-refusal flags (O63; costs and scores unchanged) on these labelled rows: " + "; ".join(flagged) + ".") if flagged else ""
+    # O160: while the ranking's E41 warning fires, every label it issues carries the warning and points to its attribution.
+    check = (facts.v3.get("diagnostics") or {}).get("workloadCrossCheck") or {}
+    if row_ids and check.get("warning") == "low agreement":
+        text += (f" These labels carry the workload cross-check warning (E41, O160: τ_b {check['tau']:.2f} on {check['n']} configurations): "
+                 "the basket-cost order behind them agrees weakly with cost per solved task; the attribution is in scores.json "
+                 "`diagnostics.workloadCrossCheck.attribution`.")
+    # O162: a bar whose displayed cheapest changes when the multi-harness Bug Hunt rows take their other harness results.
+    moved = [item for item in ((facts.v3.get("diagnostics") or {}).get("bugHuntHarnessSensitivity") or {}).get("labelFlags", []) if item["flagged"]]
+    if row_ids and moved:
+        text += (" Harness-sensitive bars (O162): " + "; ".join(
+            f"{item['bar'].removeprefix('bar:')} ({facts.labels(list(dict.fromkeys(item[end] for end in ('displayed', 'low', 'high') if item[end])))} across the harness ends)"
+            for item in moved) + ".")
+    return text
 
 
 def interval_sentences(facts):

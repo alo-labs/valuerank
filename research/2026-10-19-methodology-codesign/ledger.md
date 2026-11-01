@@ -2192,3 +2192,23 @@ Asked on I64 Q1 whether future O71 admissions should be executed by the build fr
 - E296. LiveBench's S1T SD is read as a bracket whose other end halves every category count (×√2).
 - E297. Scenario files record the Python version that drew them beside the seed.
 - E298. The cost-boundary record is re-verified for AA v5 on the 2026-11-01 catalog capture.
+
+## Owner decisions O160–O162 (2026-11-01), asked on reviewer 79 (Grok 4.7, r161)
+- O160 (labels under a firing workload cross-check, challenge to O133): O133 stands; labels are issued, and every label of a ranking whose E41 warning fires carries the warning and points to its attribution (E292).
+- O161 (report window): each model × plan cell's report window ends at that cell's latest staged search date (still at most seven days before V, E218); reports dated after it are not counted, and the published window states its end per cell.
+- O162 (per-model harnesses, challenge to O10/O53): labels stay cross-harness; a label that changes when the multi-harness rows take their other harness results (E291) is flagged.
+
+## Reviewer 79 (Grok 4.7, round 13, Thinking, whole draft r161) — adopted, modified or rejected
+- Read checks: every part read to its end at commit f8309b8.
+- H1 (frontier-families diagnostics include O145 retained rows): verified (configuration() marked every row with any inclusion reason as frontier-family); adopted as E299: a `plotted` flag excludes retained rows from E187/E199 and names them (`retainedExcluded`), while retained rows stay cohort rows for searches and listing. The owner question it raised is moot: the inclusion was an implementation slip, not a choice.
+- H2 (ranked-family count against the plotted families only): verified (9 of 9, though four ranked configurations are retained); adopted as E300: the denominator is the whole cohort's families (today 15). The generated family table is not adopted: scores.json carries each row's family, inclusion reasons and ranking membership.
+- H3 (owner challenge to O133, labels under a firing E41 warning): put to the owner, O160 (labels kept, each carrying the warning).
+- M1 (report window wider than the searched days): put to the owner, O161 (a cell's window ends at its latest staged search).
+- M2 (owner challenge to O10/O53, cross-harness labels): put to the owner, O162 (labels kept, flagged when the Bug Hunt harness span changes them).
+- Lows: "possibly superseded or expired" (adopted: reworded to the lifecycle's stages); "lacks every ranking's set" (adopted: both leading rankings, the common-leaf ranking may still rank it); negative or above-half cost allocation (already printed per ranking by E196 in the README); the AA v5 and OpenAI pool checks agree with the draft.
+- Round status (O56): not clean (Highs and Mediums).
+
+## Owner and editor decisions after reviewer 79
+- E299. An O145 retained row is not plotted: E187 and E199 leave it out and name it.
+- E300. The ranked-family count is over the whole cohort's families, plotted and retained.
+- O163 (Bug Hunt score, owner directive 2026-11-01, followed by two questions): the Bug Hunt leaf is not the board's planted-only score. It is the sum of the planted bugs a model fixed and the genuine unplanted bugs it fixed (the board's "extras", verified by the blind judge; partial and claimed-only fixes are not counted), at equal weight, used as the leaf's score without rescaling. The owner chose the plain sum over a fixed 210 denominator, a cohort-best scale or a clip at 105. The per-run mean is taken for both counts, as the board publishes them.

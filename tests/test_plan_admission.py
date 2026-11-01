@@ -235,6 +235,17 @@ def test_reports_across_documented_resets_count_and_are_flagged():
             pa.check_routes(routes, cells, {"m"}, {"end_user_report"})
 
 
+def test_a_cell_window_ends_at_its_latest_staged_search():
+    """O161: a report dated after its cell's latest staged search does not count; the cell states the date."""
+
+    reports = [report("a", start="2026-10-18", end="2026-10-18"), report("b", start="2026-10-19", end="2026-10-19"),
+               report("late", start="2026-10-23", end="2026-10-23")]
+    cell = pa.evaluate({**DOCUMENT, "reports": reports}, PROFILE, DAY, None, {("m", "Pro"): "2026-10-20"})[0]
+    assert cell["status"] == "passes" and cell["searchedThrough"] == "2026-10-20"
+    assert cell["reports"][-1]["excluded"] == "dated after the cell's latest staged search, 2026-10-20 (O161)"
+    assert pa.evaluate({**DOCUMENT, "reports": reports}, PROFILE, DAY)[0]["searchedThrough"] is None
+
+
 def test_form_submissions_need_evidence_and_a_searched_partner():
     """O124: a form-submitted report counts only with a hashed evidence artifact, and two submissions alone never admit."""
 

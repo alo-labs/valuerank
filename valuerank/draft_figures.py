@@ -229,6 +229,8 @@ def named_figures(scores: dict, data: Path = DATA) -> dict:
     sections = {track: scores["v3"] if track == q.DEFAULT_TRACK else scores["v3Tracks"][track] for track in q.TRACKS}
     ranked = {track: [row["id"] for row in section["rows"]] for track, section in sections.items()}
     order = lambda ids: series([names[item] for item in sorted(ids, key=lambda item: names[item])])
+    # Reviewer 79: the families of the whole cohort (plotted and O145 retained), the denominator of a ranked-family count.
+    figures["cohort.allFamilies"] = len({family[model["id"]] for model in scores["models"] if model.get("rankingInclusionReasons")})
     for track, ids in ranked.items():
         section, weights = sections[track], {leaf.key: leaf.weight for leaf in q.TRACKS[track]}
         figures[f"{track}.rankedFamilies"] = len({family[item] for item in ids})

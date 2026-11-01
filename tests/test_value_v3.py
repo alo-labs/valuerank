@@ -447,10 +447,10 @@ def test_policy_cohort_bar_is_a_sensitivity_over_frontier_families():
     policy = v.policy_cohort_bar(result, frozen)
     assert policy["status"] == "evaluated" and policy["bar"]["id"] == v.POLICY_BAR_ID and policy["api"]["status"] == "certified"
     for row in result["rows"][1:]:
-        row["frontierFamily"] = False
+        row["plotted"] = False
     assert v.policy_cohort_bar(result, frozen)["status"].startswith("unavailable") and v.frontier_anchor_diagnostic(result, frozen, {})["bar"]["status"].startswith("unavailable")
     for row in result["rows"][1:]:
-        row["frontierFamily"] = True
+        row["plotted"] = True
     for row in result["rows"]:
         row["cost"] = dict(row["cost"], fullCost=False)
     assert v.policy_cohort_bar(result, frozen)["api"] == {"status": "unevaluable"}
@@ -1410,10 +1410,12 @@ def test_frontier_anchor_diagnostic_and_subset_intervals():
     assert output["costInfluence"]["api"]["orderingAgreement"]["qualityVsValue"] is not None
     # I38: the fixture's common workload has two rows, too few for a variance split.
     assert output["costInfluence"]["api"]["commonWorkload"]["varianceAllocation"] is None
-    retained = [dict(item, frontierFamily=item["id"] != "b") for item in CONFIGURATIONS]
+    # Reviewer 79: an O145 retained row (not plotted) leaves the frontier-only population and is named.
+    retained = [dict(item, plotted=item["id"] == "a") for item in CONFIGURATIONS]
     narrow = v.assemble(retained, documents(), release_day=DAY)
     per_row = {row["id"]: {basis: {"value": 1.0} for basis in v.BASES} for row in narrow["rows"]}
-    assert v.frontier_anchor_diagnostic(narrow, frozen, per_row)["status"].startswith("unavailable")
+    narrowed = v.frontier_anchor_diagnostic(narrow, frozen, per_row)
+    assert narrowed["status"].startswith("unavailable") and narrowed["retainedExcluded"] == sorted(row["id"] for row in narrow["rows"] if row["id"] != "a")
 
 
 def test_family_primary_diagnostic_rebuilds_ladder_and_anchors_on_primary_rows():
@@ -1451,13 +1453,18 @@ def test_configuration_carries_identity_and_frontier_family_flag_for_any_row():
 
     frontier = {"id": "f", "name": "F", "aaVariant": "max", "aaSlug": "f-max", "aaFrontierFootnote": "note", "aaFrontierTier": "frontier",
                 "rankingInclusionReasons": ["Required AA Intelligence Index versus total-evaluation-cost frontier family"]}
-    assert v.configuration(frontier) == {"id": "f", "name": "F", "family": "F", "effort": "max", "aaSlug": "f-max", "aaNote": "note", "frontierFamily": True, "familyPrimary": True, "aaTier": "frontier", "developer": None, "bugHuntCrossHarness": None}
+    assert v.configuration(frontier) == {"id": "f", "name": "F", "family": "F", "effort": "max", "aaSlug": "f-max", "aaNote": "note", "frontierFamily": True, "plotted": True, "familyPrimary": True, "aaTier": "frontier", "developer": None, "bugHuntCrossHarness": None}
     retained = {"id": "r", "name": "R", "aaSlug": "r", "rankingInclusionReasons": [v.RETAINED_REASON], "familyPrimary": False}
-    assert v.configuration(retained) == {"id": "r", "name": "R", "family": "R", "effort": None, "aaSlug": "r", "aaNote": None, "frontierFamily": True, "familyPrimary": False, "aaTier": None, "developer": None, "bugHuntCrossHarness": None}
+    assert v.configuration(retained) == {"id": "r", "name": "R", "family": "R", "effort": None, "aaSlug": "r", "aaNote": None, "frontierFamily": True, "plotted": True, "familyPrimary": False, "aaTier": None, "developer": None, "bugHuntCrossHarness": None}
     # O33: an evidenced sibling carries its AA family, which its display name no longer equals.
     sibling = {"id": "f-high", "name": "F (high)", "family": "F", "aaVariant": "high", "aaSlug": "f-high", "rankingInclusionReasons": [v.RETAINED_REASON]}
     assert v.configuration(sibling)["family"] == "F" and v.configuration(sibling)["frontierFamily"] is True
     assert v.configuration({"id": "x", "name": "X", "aaSlug": "x"})["frontierFamily"] is False  # no stated reason
+    # Reviewer 79: an O145 retained row stays a cohort row but is not plotted; the two modules share the reason text.
+    left = v.configuration({"id": "l", "name": "L", "aaSlug": "l", "rankingInclusionReasons": [v.LEFT_COHORT_REASON]})
+    assert left["frontierFamily"] is True and left["plotted"] is False
+    from valuerank import build_scores
+    assert v.LEFT_COHORT_REASON == build_scores.RETAINED_REASON
 
 
 def test_cheaper_siblings_lists_same_family_points_below_the_row_cost():
@@ -2214,6 +2221,10 @@ def test_o71_coverage_is_keyed_by_model_and_plan_not_provider():
     partial = {"searchedOn": "2026-10-31", "singleProvider": True, "providers": ["OpenAI", "Google"], "models": ["GPT-6.1 Terra", "Gemini 4 Carbon"],
                "plans": ["ChatGPT Plus", "Google AI Pro"], "stages": stages}
     assert v.o71_coverage({"searchLog": [earlier, partial]}, configurations, plans)["uncovered"] == [("GPT-6.1 Terra", "ChatGPT Pro 200")]
+    # O161: each cell's latest staged search date; a plan outside the entry's providers is not dated by it.
+    dates = v.cell_search_dates({"searchLog": [earlier, partial]}, plans)
+    assert dates[("GPT-6.1 Sol", "ChatGPT Plus")] == "2026-10-25" and dates[("GPT-6.1 Terra", "ChatGPT Plus")] == "2026-10-31"
+    assert ("GPT-6.1 Terra", "ChatGPT Pro 200") not in dates and ("GPT-6.1 Sol", "Kimi Plus") not in dates
     assert len(v.o71_coverage({"searchLog": [earlier, {**partial, "plans": None, "stages": stages[:2]}]}, configurations, plans)["uncovered"]) == 3
     assert v.check_o71_coverage({"searchLog": [earlier, {**partial, "plans": None}]}, configurations, plans) == {"cells": 5, "uncovered": []}
 
@@ -2572,3 +2583,29 @@ def test_fallback_repricing_moves_only_flagged_priced_rows():
     assert result["rows"]["c"]["status"] == "unpriced: G" and result["rows"]["d"]["status"].startswith("unpriced: the row's own")
     assert "b" not in result["rows"] and "e" not in result["rows"] and set(result["rankChanges"]) == {"low", "high"}
     assert v.fallback_repricing(rows[:1], per_row, None, {"models": {"F": {"input": 5.0, "output": 25.0}}})["rows"]["a"]["value"]["low"] is None
+
+
+def test_bug_hunt_harness_sensitivity_moves_values_and_flags_labels():
+    """E291, O162: a multi-harness row's leaf at its lowest and highest harness result; a bar's displayed cheapest that
+    changes between the ends is flagged."""
+
+    from types import SimpleNamespace
+
+    def row(row_id, quality, cost, harnesses=None):
+        observations = {key: SimpleNamespace(z=quality) for key in ("bugHunt", "frontierCode")}
+        return {"id": row_id, "summary": SimpleNamespace(displayed=quality), "cost": {"costUsd": cost},
+                "evidence": {"observations": observations}, "bugHuntCrossHarness": harnesses}
+
+    harnesses = [{"harness": "x", "fixedOf105": 21.0}, {"harness": "y", "fixedOf105": 84.0}]
+    rows = [row("a", 50.0, 10.0, harnesses), row("b", 55.0, 20.0), row("c", 40.0, None)]
+    per_row = {item["id"]: {basis: {"value": 50.0, "costScore": 50.0} for basis in v.BASES} for item in rows}
+    per_row["c"] = {basis: {"value": None, "costScore": None} for basis in v.BASES}
+    bars = [{"id": "edge", "level": 52.0}, {"id": "high", "level": 99.0}]
+    result = v.bug_hunt_harness_sensitivity(rows, per_row, bars)
+    assert result["rows"]["a"]["low"] == 21.0 and result["rows"]["a"]["high"] == 84.0
+    assert result["bases"]["api"]["largestValueMove"] > 0
+    edge, high = result["labelFlags"]
+    assert edge == {"bar": "edge", "displayed": "b", "low": "b", "high": "a", "flagged": True}
+    assert high == {"bar": "high", "displayed": None, "low": None, "high": None, "flagged": False}
+    quiet = v.bug_hunt_harness_sensitivity(rows[1:], per_row)
+    assert quiet["rows"] == {} and quiet["bases"]["api"]["largestValueMove"] is None and quiet["labelFlags"] == []

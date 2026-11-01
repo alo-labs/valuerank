@@ -147,7 +147,8 @@ def test_readme_states_what_the_interval_outputs_support(emitted):
     # O50: the max-effort ranking admits the Coding Agent Index v2.0, so the coding share names it and its unrewarded SWE-Atlas QnA.
     assert ("Coding and terminal tasks (Coding Agent Index, Terminal-Bench 4.0 (AA Index run), FrontierCode 2.0) make up 53% of the basket's cost (median over 7 configurations "
             "with the full basket; 40% to 84%); AA-Briefcase, GDP.pdf, which have no quality leaf, make up 12%; the Coding Agent Index's SWE-Atlas QnA") in readme
-    assert "- **Frontier-families bar (E199, sensitivity; the frozen bar stays primary):** quality 61.4 over 9 configurations; cheapest at or above it on the API main workload: GPT-6.1 Sol (max) (confirmed)" in (emitted / "scores.md").read_text()
+    # Reviewer 79 (E299): the O145 retained rows leave the frontier-only population (9 ranked, 4 retained).
+    assert '- **Frontier-families bar (E199, sensitivity; the frozen bar stays primary):** quality 65.2 over 5 configurations; cheapest at or above it o' in (emitted / "scores.md").read_text()
     assert "FrontierCode 2.0 and Terminal-Bench-Science once at API rates" in readme
 
 

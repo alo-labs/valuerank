@@ -251,7 +251,7 @@ def cell_key(report: dict, families: dict | None = None) -> tuple:
     return report["provider"], report["plan"], model_of(report["modelId"], families), report["unit"], report.get("region", "global")
 
 
-def evaluate(document: dict, profile: dict, release_day: date, families: dict | None = None) -> list[dict]:
+def evaluate(document: dict, profile: dict, release_day: date, families: dict | None = None, search_dates: dict | None = None) -> list[dict]:
     """Every model × plan × unit cell's admission, with each report's role (E270, O11, O81, O82)."""
 
     records = profile_records(profile)
@@ -265,6 +265,10 @@ def evaluate(document: dict, profile: dict, release_day: date, families: dict | 
         rows, eligible = [], []
         for report in reports:
             reason = exclusion(report, profile, release_day)
+            # O161: a cell's window ends at its latest staged search; a report dated after it was never searched for.
+            searched = (search_dates or {}).get((model, plan))
+            if reason is None and searched and window(report)[1].date() > date.fromisoformat(searched):
+                reason = f"dated after the cell's latest staged search, {searched} (O161)"
             low, high = converted(report, multipliers)
             part = partition(report, splits) if reason is None else None
             rows.append({"id": report["id"], "observer": report["observer"], "valueLower": low, "valueUpper": high, "partition": part,
@@ -319,6 +323,7 @@ def evaluate(document: dict, profile: dict, release_day: date, families: dict | 
                         "range": None if lowest is None else [lowest, highest], "feasibleRange": feasible, "reports": rows,
                         "allReportsBand": None if all_lower is None else [all_lower / CONCORDANCE, CONCORDANCE * all_upper],
                         "admittingObservers": sorted(row["observer"] for row in firm) if status == "passes" else [],
+                        "searchedThrough": (search_dates or {}).get((model, plan)),
                         "flags": [ACROSS_RESETS_FLAG] if status == "passes" and any(row["acrossResets"] for row in firm) else []})
     return results
 

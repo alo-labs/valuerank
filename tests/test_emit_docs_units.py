@@ -529,6 +529,14 @@ def test_safety_flags_follow_every_label_their_row_earns():
     assert ed.label_safety_note(facts, ["a@plan", "b", "c"]) == (
         " Safety-refusal flags (O63; costs and scores unchanged) on these labelled rows: A (0 blocked and 76 fallback attempts of 870).")
     assert ed.label_safety_note(facts, ["b", "c"]) == ""
+    # O160: under a firing E41 warning every label note carries it; no labels, no note.
+    warned = SimpleNamespace(v3={"rows": rows, "diagnostics": {"workloadCrossCheck": {"warning": "low agreement", "tau": 0.347, "n": 20}}}, labels=facts.labels)
+    assert ed.label_safety_note(warned, ["b"]).startswith(" These labels carry the workload cross-check warning (E41, O160: τ_b 0.35 on 20 configurations)")
+    assert ed.label_safety_note(warned, []) == ""
+    # O162: a harness-sensitive bar is named beside the labels.
+    flagged = SimpleNamespace(v3={"rows": rows, "diagnostics": {"bugHuntHarnessSensitivity": {"labelFlags": [
+        {"bar": "bar:median-quality", "displayed": "b", "low": "b", "high": "a", "flagged": True}, {"bar": "bar:x", "displayed": None, "low": None, "high": None, "flagged": False}]}}}, labels=facts.labels)
+    assert ed.label_safety_note(flagged, ["b"]) == " Harness-sensitive bars (O162): median-quality (B, A across the harness ends)."
 
 
 def test_plan_evidence_line_counts_ranked_rows_by_route_state():
