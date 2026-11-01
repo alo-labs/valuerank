@@ -212,8 +212,22 @@ def converted(report: dict, multipliers: dict) -> tuple[float, float]:
 FORM_STAGE = "form"  # E244: a report submitted through the GitHub intake form, not found by the staged O71 search
 
 
+# O165 (2026-11-01): from the release after the 2026-11-01 cutoff, a report the staged search found counts only with an archived
+# copy of its page (URL or mirror URL, fetch instant, SHA-256 of the fetched bytes, the quoted allowance span) in the evidence
+# bundle, as O124 already asks of form submissions. Reports dated on or before that cutoff are grandfathered and flagged.
+ARCHIVE_FROM = date(2026, 11, 1)
+NOT_ARCHIVED = "not archived: recorded before O165 without a hashed copy"
+
+
+def archived(report: dict) -> bool:
+    return bool((report.get("archive") or {}).get("sha256"))
+
+
 def exclusion(report: dict, profile: dict, release_day: date) -> str | None:
     """Why a report does not count (E270), or None."""
+
+    if report.get("stage") != FORM_STAGE and not archived(report) and (report.get("reportDate") or "") > ARCHIVE_FROM.isoformat():
+        return "staged-search report without an archived hashed copy (O165)"
 
     # O124 (2026-10-30): a report submitted through the intake form counts only with an evidence artifact (a meter screenshot
     # or usage-ledger excerpt) hashed into the evidence bundle.
@@ -273,7 +287,8 @@ def evaluate(document: dict, profile: dict, release_day: date, families: dict | 
             part = partition(report, splits) if reason is None else None
             rows.append({"id": report["id"], "observer": report["observer"], "valueLower": low, "valueUpper": high, "partition": part,
                          "provisional": bool(report.get("provisional")), "speedMode": report.get("speedMode"), "stage": report.get("stage"), "excluded": reason,
-                         "acrossResets": spans_reset(report, records), "inferenceRechecked": report.get("inferenceRechecked")})
+                         "acrossResets": spans_reset(report, records), "inferenceRechecked": report.get("inferenceRechecked"),
+                         "archive": None if report.get("stage") == FORM_STAGE or archived(report) else NOT_ARCHIVED})
             if reason is None:
                 eligible.append(rows[-1])
         latest_split = sum(applies(item, reports[0]) for item in splits)
@@ -324,6 +339,7 @@ def evaluate(document: dict, profile: dict, release_day: date, families: dict | 
                         "allReportsBand": None if all_lower is None else [all_lower / CONCORDANCE, CONCORDANCE * all_upper],
                         "admittingObservers": sorted(row["observer"] for row in firm) if status == "passes" else [],
                         "searchedThrough": (search_dates or {}).get((model, plan)),
+                        "notArchivedAdmitting": sorted(row["observer"] for row in firm if row["archive"]) if status == "passes" else [],
                         "flags": [ACROSS_RESETS_FLAG] if status == "passes" and any(row["acrossResets"] for row in firm) else []})
     return results
 

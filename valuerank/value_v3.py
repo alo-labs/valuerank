@@ -82,8 +82,8 @@ SAMPLING_TASKS = {
     # publishes a standard error per record, which the stream reads instead; LiveBench 2.0 Overall is read per category.
     "aiCodingDaily": 6,
 }
-# O61, E264, O67: LiveBench 2.0 Overall is the release's weighted mean of seven category means, so its noise is the
-# weighted mean of seven binomial category draws. Counts are LiveBench's published task counts; Reasoning and Data Analysis publish only their parts (4
+# O61, E264, O67, E311: LiveBench 2.0 Overall is the release's weighted mean of seven category means, so its SD is the weighted
+# mean of seven category variance bounds p(1 - p)/n (exact for binary outcomes, an upper bound for fractional part scores). Counts are LiveBench's published task counts; Reasoning and Data Analysis publish only their parts (4
 # and 3), each holding several short questions, so reading them as 4 and 3 trials overstates their noise (the wide reading).
 LIVEBENCH_CATEGORY_TASKS = {"long_agentic": 18, "reasoning": 4, "coding": 29, "browser": 25, "data_analysis": 3, "research": 22, "design": 25}
 # O39: GDPval-AA is a fitted Elo with no task-level outcome; AA's model page displays each configuration's rating interval
@@ -1036,6 +1036,8 @@ def assemble(configurations: list[dict], documents: dict, *, release_day: date, 
         "sourceClocks": clocks,
         "planAllowanceCells": allowance_cells,
         "planResearchCoverage": research_coverage,
+        # O166: the previous release's published coverage for this ranking (None at the first v3 release).
+        "previousRankingCoverage": documents.get("previousRankingCoverage"),
         # O144, O146: the route registry and its shared token mix, for the route brackets.
         "planRoutes": documents["planRoutes"]["routes"],
         "costMix": documents["planRoutes"].get("costMix"),
@@ -1679,6 +1681,11 @@ def _interval_outputs(assembled: dict, frozen: dict, basis: str, candidates: lis
     frontier, bars = intervals.frontier(boxes), _bar_results(boxes, assembled, frozen)
     # E170/O29: a blocker competes over its hull but earns no interval label of its own; I79: each says why.
     by_id = {row["id"]: row for row in assembled["rows"]}
+    # E315 (reviewer 83): a blocker that can qualify makes a comparison substantive, though it earns no label, so it is counted
+    # before its row is replaced by its withheld-label status.
+    for bar in bars:
+        if "rows" in bar:
+            bar["possibleBlockerQualifierN"] = sum(1 for row_id in blockers if (bar["rows"].get(row_id) or {}).get("possible") == intervals.CERTIFIED)
     for row_id in blockers:
         status = withheld_label(by_id[row_id])
         frontier[row_id] = {"status": status}
@@ -1744,7 +1751,7 @@ def _bar_results(boxes: list[intervals.Box], assembled: dict, frozen: dict) -> l
     return results
 
 
-VACUOUS_COMPARISON = "vacuous: fewer than two evaluable configurations can qualify"
+VACUOUS_COMPARISON = "vacuous: fewer than two evaluable configurations, label-eligible or blocker, can qualify"
 
 DISPLAYED_CHEAPEST_LABEL = "displayed record on the headline scale, not a claim: the lowest-cost scored main-workload row whose displayed quality reaches each bar (E203)"
 
@@ -1792,7 +1799,9 @@ def _comparison(bar: dict) -> None:
     bar["possibleQualifierN"] = count
     # E201: confirmed qualification needs a row's full-composite lower bound (missing leaves at 0, O25) to clear the level.
     bar["confirmedQualifierN"] = sum(1 for item in bar["rows"].values() if item.get("confirmed") == intervals.CERTIFIED)
-    bar["comparison"] = VACUOUS_COMPARISON if count < 2 else f"compares {count} configurations that can qualify"
+    blockers = bar.get("possibleBlockerQualifierN", 0)
+    bar["comparison"] = (VACUOUS_COMPARISON if count + blockers < 2 else f"compares {count} configurations that can qualify"
+                         + (f" and {blockers} blocker(s) that can qualify but earn no label (E315)" if blockers else ""))
 
 
 # E146: registered deletion branches. Displayed-score sensitivity removes the leaf set R globally and
@@ -2422,6 +2431,23 @@ def required_missing_scores(assembled: dict, frozen: dict) -> dict:
     return {"label": REQUIRED_LABEL, "status": result["status"], "bars": bars}
 
 
+# O166 (2026-11-01): each ranking publishes the share of its cohort it ranks beside the previous release's share, and a drop
+# is flagged (informational, never a hold), so a benchmark withdrawal cannot shrink a ranking without a rule noticing.
+COVERAGE_DROP_FLAG = "ranks a smaller share of its cohort than the previous release (O166; informational, no hold)"
+NO_PREVIOUS_COVERAGE = "first v3 release: no previous v3 release to compare"
+
+
+def ranking_coverage(ranked: int, listed: int, previous: dict | None) -> dict:
+    """O166: ranked ÷ cohort (ranked plus listed-not-ranked) for one ranking, against the previous release's published share."""
+
+    cohort = ranked + listed
+    share = ranked / cohort if cohort else None
+    before = (previous or {}).get("share")
+    flag = COVERAGE_DROP_FLAG if before is not None and share is not None and share < before else None
+    return {"ranked": ranked, "cohort": cohort, "share": share, "previousShare": before, "flag": flag,
+            "status": NO_PREVIOUS_COVERAGE if before is None else "dropped" if flag else "held or rose"}
+
+
 # E207: the frozen ladder's standing in the current population, so a bar most rows have outgrown is flagged, not silent.
 BAR_LIFETIME = "until the next anchor re-freeze or methodology version, whichever comes first"
 BAR_STALE_LOW = "headline bar below the current population's lower quartile: re-freeze the ladder at the next anchor version (informational; no score changes)"
@@ -2699,6 +2725,7 @@ def score(assembled: dict, frozen: dict) -> dict:
     lifecycle_flagged = sorted(row["id"] for row in plan_rows if {"possibly-superseded", "expired"} & set((row.get("plan") or {}).get("flags", [])))
     fault_flagged = sorted(row["id"] for row in plan_rows if plan_routes.FAULT_FLAG in row["plan"].get("flags", []))
     caveated = sorted((row for row in rows if aa_cost_caveat(row)), key=lambda row: row["id"])
+    coverage = ranking_coverage(len(rows), len(assembled.get("incomplete", [])), assembled.get("previousRankingCoverage"))
     manifest = [
         _rule("clip gate (E20)", "fired" if hold else "passed", f"release held; remedy: {anchor_math.CLIP_REMEDY}" if hold else "no basis exceeds the clipping allowance"),
         _rule("cost influence flag (E91)", "fired" if influence["api"]["flag"] or influence["plan"]["flag"] else "passed", "cost not discriminating (< 10%); informational only; beta never changes (O2)"),
@@ -2735,6 +2762,9 @@ def score(assembled: dict, frozen: dict) -> dict:
               "the typed change records behind every route flag and partition split, which also produce each route's label and blocking dates within its launch- and schedule-bounded span (O99, O101, O105, O107, O110, O111), the register of AA notes covering every captured one, with the chart's inventory and duplicate-entry checks, the post-O103 capture notes, the basket-chart labels and chart-level notes' named rows (O100, O103, O106, O108) "
               "and the frontier path checks (E195, E204) hold; the build stops otherwise"),
         _rule("score swing gate (E177)", "vacuous", "first v3 release: no previous v3 release to compare"),
+        _rule("ranking coverage (O166)", "fired" if coverage["flag"] else "vacuous" if coverage["previousShare"] is None else "passed",
+              f"ranks {coverage['ranked']} of {coverage['cohort']} cohort configurations" + (f"; {coverage['flag']}" if coverage["flag"] else
+              f"; {NO_PREVIOUS_COVERAGE}" if coverage["previousShare"] is None else f", previous share {coverage['previousShare']:.0%}")),
         _rule("anchor migration (E184)", "fired" if assembled.get("deferred") else "vacuous",
               "deferred: " + ", ".join(item["component"] for item in assembled["deferred"]) if assembled.get("deferred") else "no main-workload migration deferred"),
         _rule("configuration map coverage", "fired" if not all(row["configurationMapped"] for row in rows) else "passed",
@@ -2792,6 +2822,7 @@ def score(assembled: dict, frozen: dict) -> dict:
         "planRows": [_plan_row_json(row, per_plan[row["id"]]["plan"], plan_ranks.get(row["id"])) for row in plan_rows],
         "intervals": {"api": interval_outputs(assembled, frozen, "api"), "plan": interval_outputs(plan_assembled, frozen, "plan")},
         "incompleteEvidence": assembled.get("incomplete", []),
+        "rankingCoverage": coverage,
         "listedIndicative": listed_indicative(assembled, frozen),
         "displayedCheapest": {basis: displayed_cheapest(assembled if basis == "api" else plan_assembled, frozen, basis, quality_margin(assembled)) for basis in BASES},
         "barCurrency": bar_currency(assembled, frozen, quality_margin(assembled)),

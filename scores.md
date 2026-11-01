@@ -229,7 +229,7 @@ Bar comparison: compares 9 configurations that can qualify. The bar is a display
 
 Configurations that can be confirmed to qualify: 13 (confirmation needs the full-composite lower bound, with missing leaves at 0, to clear the bar; O25). Cheaper same-family configurations on AA's chart that were not evaluated (not ranked in this ranking: lacking its full benchmark set, or not plotted on or near the frontier; E201c, O51): GPT-6 Luna (max): GPT-6 Luna (low), GPT-6 Luna (non-reasoning).
 
-Bar comparison: compares 13 configurations that can qualify. The bar is a displayed-quality level; qualification tests each row's full-composite bounds, so a row above the bar on displayed quality can still fail to qualify confirmed when leaves are missing (E198).
+Bar comparison: compares 13 configurations that can qualify and 1 blocker(s) that can qualify but earn no label (E315). The bar is a displayed-quality level; qualification tests each row's full-composite bounds, so a row above the bar on displayed quality can still fail to qualify confirmed when leaves are missing (E198).
 
 | Configuration | Displayed quality − bar | Confirmed qualifies | Possibly qualifies | Possibly cheapest |
 |---|---:|---|---|---|
@@ -788,6 +788,7 @@ No row is scored on a subset workload.
 | source clocks and evidence freshness (O59, O60, O65, E211, E216, E217, E218) | passed | every capture is within its age gate and none after the cutoff unless its source predates the cutoff's day; the build stops otherwise |
 | build-stopping evidence gates (O64, O69, O71, O75, O99, O100, O101, O103, O105-O111, E195, E204, E225) | passed | the Coding Agent Index manifest (O64), the Terminal-Bench agent list (E225), cutoff-day row dates (O69), the three-stage all-provider plan search (O71, O75), the typed change records behind every route flag and partition split, which also produce each route's label and blocking dates within its launch- and schedule-bounded span (O99, O101, O105, O107, O110, O111), the register of AA notes covering every captured one, with the chart's inventory and duplicate-entry checks, the post-O103 capture notes, the basket-chart labels and chart-level notes' named rows (O100, O103, O106, O108) and the frontier path checks (E195, E204) hold; the build stops otherwise |
 | score swing gate (E177) | vacuous | first v3 release: no previous v3 release to compare |
+| ranking coverage (O166) | vacuous | ranks 20 of 37 cohort configurations; first v3 release: no previous v3 release to compare |
 | anchor migration (E184) | vacuous | no main-workload migration deferred |
 | configuration map coverage | fired | cohort rows without a configuration-map entry (chart labels; the agent record is derived, E267): gpt-6.1-terra, gpt-6.1-terra-high, gpt-6.1-terra-medium, gpt-6.1-terra-xhigh |
 | quality clipping audit (E110) | passed | saturation disclosed; domain violations block the build |
@@ -1006,7 +1007,7 @@ Bar comparison: compares 13 configurations that can qualify. The bar is a displa
 
 Configurations that can be confirmed to qualify: 18 (confirmation needs the full-composite lower bound, with missing leaves at 0, to clear the bar; O25). Cheaper same-family configurations on AA's chart that were not evaluated (not ranked in this ranking: lacking its full benchmark set, or not plotted on or near the frontier; E201c, O51): GPT-6 Luna (max): GPT-6 Luna (non-reasoning).
 
-Bar comparison: compares 19 configurations that can qualify. The bar is a displayed-quality level; qualification tests each row's full-composite bounds, so a row above the bar on displayed quality can still fail to qualify confirmed when leaves are missing (E198).
+Bar comparison: compares 19 configurations that can qualify and 2 blocker(s) that can qualify but earn no label (E315). The bar is a displayed-quality level; qualification tests each row's full-composite bounds, so a row above the bar on displayed quality can still fail to qualify confirmed when leaves are missing (E198).
 
 | Configuration | Displayed quality − bar | Confirmed qualifies | Possibly qualifies | Possibly cheapest |
 |---|---:|---|---|---|
@@ -1801,6 +1802,7 @@ No row is scored on a subset workload.
 | source clocks and evidence freshness (O59, O60, O65, E211, E216, E217, E218) | passed | every capture is within its age gate and none after the cutoff unless its source predates the cutoff's day; the build stops otherwise |
 | build-stopping evidence gates (O64, O69, O71, O75, O99, O100, O101, O103, O105-O111, E195, E204, E225) | passed | the Coding Agent Index manifest (O64), the Terminal-Bench agent list (E225), cutoff-day row dates (O69), the three-stage all-provider plan search (O71, O75), the typed change records behind every route flag and partition split, which also produce each route's label and blocking dates within its launch- and schedule-bounded span (O99, O101, O105, O107, O110, O111), the register of AA notes covering every captured one, with the chart's inventory and duplicate-entry checks, the post-O103 capture notes, the basket-chart labels and chart-level notes' named rows (O100, O103, O106, O108) and the frontier path checks (E195, E204) hold; the build stops otherwise |
 | score swing gate (E177) | vacuous | first v3 release: no previous v3 release to compare |
+| ranking coverage (O166) | vacuous | ranks 33 of 37 cohort configurations; first v3 release: no previous v3 release to compare |
 | anchor migration (E184) | vacuous | no main-workload migration deferred |
 | configuration map coverage | fired | cohort rows without a configuration-map entry (chart labels; the agent record is derived, E267): gpt-6.1-terra, gpt-6.1-terra-high, gpt-6.1-terra-low, gpt-6.1-terra-medium, gpt-6.1-terra-xhigh |
 | quality clipping audit (E110) | passed | saturation disclosed; domain violations block the build |
@@ -2000,7 +2002,7 @@ Bar comparison: compares 4 configurations that can qualify. The bar is a display
 
 Configurations that can be confirmed to qualify: 5 (confirmation needs the full-composite lower bound, with missing leaves at 0, to clear the bar; O25). Cheaper same-family configurations on AA's chart that were not evaluated (not ranked in this ranking: lacking its full benchmark set, or not plotted on or near the frontier; E201c, O51): none.
 
-Bar comparison: compares 5 configurations that can qualify. The bar is a displayed-quality level; qualification tests each row's full-composite bounds, so a row above the bar on displayed quality can still fail to qualify confirmed when leaves are missing (E198).
+Bar comparison: compares 5 configurations that can qualify and 1 blocker(s) that can qualify but earn no label (E315). The bar is a displayed-quality level; qualification tests each row's full-composite bounds, so a row above the bar on displayed quality can still fail to qualify confirmed when leaves are missing (E198).
 
 | Configuration | Displayed quality − bar | Confirmed qualifies | Possibly qualifies | Possibly cheapest |
 |---|---:|---|---|---|
@@ -2060,7 +2062,7 @@ Bar comparison: compares 4 configurations that can qualify. The bar is a display
 
 Configurations that can be confirmed to qualify: 5 (confirmation needs the full-composite lower bound, with missing leaves at 0, to clear the bar; O25). Cheaper same-family configurations on AA's chart that were not evaluated (not ranked in this ranking: lacking its full benchmark set, or not plotted on or near the frontier; E201c, O51): none.
 
-Bar comparison: compares 5 configurations that can qualify. The bar is a displayed-quality level; qualification tests each row's full-composite bounds, so a row above the bar on displayed quality can still fail to qualify confirmed when leaves are missing (E198).
+Bar comparison: compares 5 configurations that can qualify and 1 blocker(s) that can qualify but earn no label (E315). The bar is a displayed-quality level; qualification tests each row's full-composite bounds, so a row above the bar on displayed quality can still fail to qualify confirmed when leaves are missing (E198).
 
 | Configuration | Displayed quality − bar | Confirmed qualifies | Possibly qualifies | Possibly cheapest |
 |---|---:|---|---|---|
@@ -2380,6 +2382,7 @@ Each admitted basket unit removed in turn, scored on anchors rebuilt by the free
 | source clocks and evidence freshness (O59, O60, O65, E211, E216, E217, E218) | passed | every capture is within its age gate and none after the cutoff unless its source predates the cutoff's day; the build stops otherwise |
 | build-stopping evidence gates (O64, O69, O71, O75, O99, O100, O101, O103, O105-O111, E195, E204, E225) | passed | the Coding Agent Index manifest (O64), the Terminal-Bench agent list (E225), cutoff-day row dates (O69), the three-stage all-provider plan search (O71, O75), the typed change records behind every route flag and partition split, which also produce each route's label and blocking dates within its launch- and schedule-bounded span (O99, O101, O105, O107, O110, O111), the register of AA notes covering every captured one, with the chart's inventory and duplicate-entry checks, the post-O103 capture notes, the basket-chart labels and chart-level notes' named rows (O100, O103, O106, O108) and the frontier path checks (E195, E204) hold; the build stops otherwise |
 | score swing gate (E177) | vacuous | first v3 release: no previous v3 release to compare |
+| ranking coverage (O166) | vacuous | ranks 9 of 37 cohort configurations; first v3 release: no previous v3 release to compare |
 | anchor migration (E184) | vacuous | no main-workload migration deferred |
 | configuration map coverage | passed | every cohort row has a configuration-map entry |
 | quality clipping audit (E110) | passed | saturation disclosed; domain violations block the build |

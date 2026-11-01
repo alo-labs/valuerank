@@ -2696,3 +2696,25 @@ def test_clipped_tolerance_is_directional_and_finite():
     assert v.clipped_tolerance({"costUsd": 5.0, "costScore": 100.0}, exchange, 40.0, 4.0)["status"].startswith("unreachable")
     assert v.clipped_tolerance({"costUsd": 5.0, "costScore": 100.0}, exchange, None, 4.0) == {"status": "unavailable"}
     assert v.clipped_tolerance({"costUsd": 5.0, "costScore": 100.0}, {}, 2.0, 4.0) == {"status": "unavailable"}
+
+
+def test_o166_ranking_coverage_flags_a_drop_against_the_previous_release():
+    first = v.ranking_coverage(9, 28, None)
+    assert first == {"ranked": 9, "cohort": 37, "share": 9 / 37, "previousShare": None, "flag": None, "status": v.NO_PREVIOUS_COVERAGE}
+    dropped = v.ranking_coverage(8, 29, {"share": 9 / 37})
+    assert dropped["flag"] == v.COVERAGE_DROP_FLAG and dropped["status"] == "dropped"
+    held = v.ranking_coverage(10, 27, {"share": 9 / 37})
+    assert held["flag"] is None and held["status"] == "held or rose"
+    assert v.ranking_coverage(0, 0, {"share": 0.5})["share"] is None
+
+
+def test_a_qualifying_blocker_makes_a_comparison_substantive():
+    """E315 (reviewer 83): one label-eligible qualifier and one blocker that can qualify is a comparison, not a vacuous one."""
+
+    result = assembled()
+    frozen = v.freeze(result, frozen_at="2026-10-19")
+    blocked = next(row for row in result["rows"] if row["id"] == "b")
+    blocked["valuationGate"] = {**blocked["valuationGate"], "outcome": v.GATE_UNVERIFIED}
+    bar = v.interval_outputs(result, frozen, "api")["bars"][0]
+    assert bar["possibleQualifierN"] == 1 and bar["possibleBlockerQualifierN"] == 1
+    assert bar["comparison"] == "compares 1 configurations that can qualify and 1 blocker(s) that can qualify but earn no label (E315)"

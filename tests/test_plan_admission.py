@@ -270,3 +270,17 @@ def test_reports_under_a_renamed_plan_count_under_its_canonical_key():
     assert [report["plan"] for report in canonical["reports"]] == ["Claude Max 20x", "Claude Pro"]
     assert canonical["reports"][0]["planAsFiled"] == "Claude Ultra" and "planAsFiled" not in canonical["reports"][1]
     assert pa.canonical_plans(document, None) is document and pa.canonical_plans(document, {}) is document
+
+
+def test_o165_staged_reports_need_an_archived_hashed_copy_after_the_2026_11_01_cutoff():
+    later = date(2026, 12, 1)
+    found = report("n", start="2026-11-20", end="2026-11-21", reportDate="2026-11-21", stage="S1")
+    assert "archived hashed copy (O165)" in pa.exclusion(found, {}, later)
+    assert pa.exclusion({**found, "archive": {"sha256": "ab" * 32}}, {}, later) is None
+    # Grandfathered: a report dated on or before the cutoff still counts, and a submission falls under O124 instead.
+    assert pa.exclusion({**found, "reportDate": "2026-11-01", "windowStart": "2026-11-01", "windowEnd": "2026-11-01"}, {}, later) is None
+    assert "O124" in pa.exclusion({**found, "stage": pa.FORM_STAGE}, {}, later)
+    cells = pa.evaluate({**DOCUMENT, "reports": [report("a", start="2026-10-18", end="2026-10-18", low=100, stage="S1"),
+                                                 report("b", start="2026-10-19", end="2026-10-19", low=104, stage="S2", archive={"sha256": "cd" * 32})]}, PROFILE, DAY)
+    assert cells[0]["status"] == "passes" and cells[0]["notArchivedAdmitting"] == ["a"]
+    assert [row["archive"] for row in cells[0]["reports"]] == [pa.NOT_ARCHIVED, None]
