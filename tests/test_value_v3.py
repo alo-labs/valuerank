@@ -2753,3 +2753,17 @@ def test_recalibrated_removal_anchors_read_the_eligible_population(monkeypatch):
     monkeypatch.setattr(v, "MIN_ANCHOR_REFERENCES", 99)
     held = v.cost_removal(result, frozen, per_row)["bases"]["api"]["recalibrated"]
     assert held["status"].startswith("unavailable: fewer than 99 eligible references") and "rankChanges" not in held
+
+
+def test_e322_the_chart_and_the_model_pages_reconcile_on_shared_fields():
+    pages = [{"model": {"slug": "m-high", "intelligenceIndex": 61.4, "intelligenceIndexCost": {"total": 100.0}}},
+             {"model": {"slug": "m-low", "intelligenceIndex": None}}, {"model": {}}]
+    point = {"model_name": "M (high)", "url": "https://artificialanalysis.ai/models/m-high", "total_cost_usd": 100.5, "intelligence_index_display": "61"}
+    others = [{"model_name": "N", "url": None, "total_cost_usd": 1.0, "intelligence_index_display": "1"},
+              {"model_name": "M (low)", "url": "https://artificialanalysis.ai/models/m-low/", "total_cost_usd": 1.0, "intelligence_index_display": "1"}]
+    result = v.aa_state_reconciliation([point, *others], pages)
+    assert result["reconciled"] == 1 and result["notOnACapturedPage"] == ["M (low)", "N"]
+    with pytest.raises(ValueError, match="not one AA state"):
+        v.aa_state_reconciliation([{**point, "total_cost_usd": 103.0}], pages)
+    with pytest.raises(ValueError, match="not one AA state"):
+        v.aa_state_reconciliation([{**point, "intelligence_index_display": "62"}], pages)

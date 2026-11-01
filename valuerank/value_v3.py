@@ -557,6 +557,35 @@ def _summary_json(summary: q.QualitySummary) -> dict:
     }
 
 
+# E322 (reviewer 87): capture proximity alone does not show that the chart and the model pages are one AA revision, so the
+# fields both surfaces publish are reconciled: each chart point linked to a captured page must carry that page's total
+# Index cost (relative tolerance) and its displayed Index (the page's unrounded Index within half a display unit).
+STATE_COST_TOLERANCE = 0.01
+STATE_INDEX_TOLERANCE = 0.5
+
+
+def aa_state_reconciliation(points: list[dict], pages: list[dict]) -> dict:
+    """E322: the chart against the model pages on their shared fields; a mismatch stops the build for a re-capture."""
+
+    by_slug = {page["model"]["slug"]: page["model"] for page in pages if (page.get("model") or {}).get("slug")}
+    checked, unlinked = [], []
+    for point in points:
+        page = by_slug.get((point.get("url") or "").rstrip("/").split("/")[-1]) if point.get("url") else None
+        if page is None:
+            unlinked.append(point["model_name"])
+            continue
+        cost, index = (page.get("intelligenceIndexCost") or {}).get("total"), page.get("intelligenceIndex")
+        if cost is None or index is None:
+            unlinked.append(point["model_name"])
+            continue
+        if abs(point["total_cost_usd"] - cost) > STATE_COST_TOLERANCE * cost or abs(float(point["intelligence_index_display"]) - index) > STATE_INDEX_TOLERANCE:
+            raise ValueError(f"{point['model_name']}: the chart (Index {point['intelligence_index_display']}, ${point['total_cost_usd']}) and its model page "
+                             f"(Index {index:.2f}, ${cost:.2f}) disagree, so they are not one AA state; re-capture both (E217, E322)")
+        checked.append(point["model_name"])
+    return {"reconciled": len(checked), "notOnACapturedPage": sorted(unlinked),
+            "status": "chart and model pages agree on every shared field; points without a captured page are within the capture window only (E322)"}
+
+
 def configuration_family(configuration: dict) -> str:
     """The AA family of a ranked configuration (its chart points' family); the name for a record without one."""
 
@@ -989,6 +1018,7 @@ def assemble(configurations: list[dict], documents: dict, *, release_day: date, 
     rows, supplements, tracks = [], leaf_supplements(documents), track_records(documents)
     check_captured_footnotes(documents.get("frontierCapture"), documents.get("aaFootnotes"))
     check_capture_twins(documents.get("frontierCapture"))
+    aa_state = aa_state_reconciliation(points, documents["snapshot"].get("pages", []))
     # I89 L4, I90 L6: the editorial roster (the cohort roster O51, the same in every command), not every configuration-map row.
     check_register_subjects(documents.get("aaFootnotes"), {item["id"] for item in documents.get("roster") or []} | {item["id"] for item in configurations})
     check_shared_labels(mapping)
@@ -1068,6 +1098,7 @@ def assemble(configurations: list[dict], documents: dict, *, release_day: date, 
         "cognition": documents.get("cognitionFrontierCode") or {"v1_1": {"data": {}}},
         "fallbackPrices": documents.get("fallbackPrices") or {},
         "sourceClocks": clocks,
+        "aaStateReconciliation": aa_state,
         "planAllowanceCells": allowance_cells,
         "planResearchCoverage": research_coverage,
         "planResearchClocks": research_clocks,
@@ -2855,6 +2886,7 @@ def score(assembled: dict, frozen: dict) -> dict:
         "sourceIntervals": SOURCE_INTERVALS,
         "sourceDates": SOURCE_DATES,
         "sourceClocks": assembled.get("sourceClocks", []),
+        "aaStateReconciliation": assembled.get("aaStateReconciliation"),
         "planAllowanceCells": assembled.get("planAllowanceCells", []),
         "planResearchCoverage": assembled.get("planResearchCoverage"),
         "planResearchClocks": assembled.get("planResearchClocks"),

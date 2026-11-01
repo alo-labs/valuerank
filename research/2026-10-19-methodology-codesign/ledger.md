@@ -2295,3 +2295,18 @@ Asked on I64 Q1 whether future O71 admissions should be executed by the build fr
 - No Critical, High or Medium finding: a clean round for GPT-6.1 Sol (O56, the first of two).
 - L (a 31-day-old staged search under O167 leaves a cell's new-report window empty, with no stated representation): adopted as E320; each cell publishes newReportWindow {start, end, status}, "empty" with no end when the search predates the envelope. Admission was already correct (a report outside the envelope or after the cell's search is excluded); only the published state is new.
 - E320. A cell's new-report window whose staged search predates the envelope is published as empty, never as an inverted range; freshness checks never move it.
+
+## Reviewer 87 (Gemini 3.8 Flash, round 13, Thinking, five sections of r169)
+- Read checks: every part read to its end.
+- Parts 1–3 M (the Coding Agent Index's cost share "bounds" an unmeasured agent overhead): adopted as E323, a one-directional dollar bound. L (subset-origin stratum against the subset comparison population): adopted as E324.
+- Parts 4–6 M1 (E246 lets an unstated SemiAnalysis effort win E85's exact-measurement grade): not adopted. The attachment is the owner's (O45 binds each GPT figure to its model's unsuffixed max row) and allowances are effort-invariant (O87), so the effort the measurement ran at cannot change the multiple; and every report alternative it competes with is model-level too. The draft already states that SemiAnalysis names no effort. M2 (E61's half threshold is weighted by each provider's plan catalogue): adopted as E321; a configuration-balanced yield is published, and the exploratory label holds while either yield is below one half. L1 (the short Value Multiple definition drops the gross-cash denominator): adopted.
+- Parts 7–9 M1 (Bug Hunt's kernel ignores the published run count): adopted as E326, naming the kernel a single-run dispersion approximation; dividing by the run count is not done, since runs share tasks and repositories, and per-run paired counts are not in the captured record. L1 (GDPval "the captures point the other way" on a no-movement comparison): adopted.
+- Parts 10–12 M1 (R_W's set definition does not subtract blockers): adopted as E325; the code already builds the universe without blockers and counts blocker qualifiers apart (E315), so only the definition changes. L1 ("the only open row at a bar is its setter"): adopted.
+- Parts 13–14 M ("one AA state" from capture proximity alone): adopted as E322, a build check reconciling each linked chart point's total Index cost and displayed Index with its model page (36 points reconcile at this release). L (lifecycle note calls earlier-admitted reports diagnostics): adopted.
+- Round status (O56): not clean (Mediums).
+- E321. The Plan identification yield is also published configuration-balanced; the exploratory label holds while either yield is below one half.
+- E322. The AA chart and model pages are reconciled on their shared fields (total Index cost within 1%, displayed Index within half a unit); a mismatch stops the build.
+- E323. The Coding Agent Index's cost share bounds only the reduction from removing its observed cost.
+- E324. Subset outputs compare the subset-evaluable rows; the subset-origin stratum carries the dispersion statuses.
+- E325. R_W = E_W ∖ B_W, disjoint from the blockers.
+- E326. Bug Hunt's sampling kernel is a single-run dispersion approximation, not the uncertainty of the published multi-run mean.

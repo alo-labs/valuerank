@@ -106,9 +106,15 @@ def add_off_cohort(root: Path, *, model_id: str = OFF_COHORT_ID, display: str = 
     def aa(document):
         document["models"][model_id] = {**document["models"][source_id], "id": model_id, "displayName": display,
                                         "family": family, "aaSlug": slug, "aaUrl": AA_URL + slug, "aaVariant": variant}
+    # E322: a chart point that links the synthetic page must agree with it, so the page takes that point's Index and cost.
+    plotted = next((point for point in json.loads((root / CAPTURE).read_text())["points"] if point.get("url") == AA_URL + slug), None)
     def snapshot(document):
         page = next(page for page in document["pages"] if page["model"]["slug"] == source_slug)
-        document["pages"].append({**page, "id": slug, "url": AA_URL + slug, "model": {**page["model"], "slug": slug, "name": display}})
+        model = {**page["model"], "slug": slug, "name": display}
+        if plotted:
+            model.update({"intelligenceIndex": float(plotted["intelligence_index_display"]),
+                          "intelligenceIndexCost": {**model["intelligenceIndexCost"], "total": plotted["total_cost_usd"]}})
+        document["pages"].append({**page, "id": slug, "url": AA_URL + slug, "model": model})
     def bughunt(document):
         source = next(m for m in document["models"] if m["modelId"] == source_id)
         document["models"].append({**source, "modelId": model_id, "matched": False, "matchStatus": "no_exact_owner_result"})
@@ -1137,6 +1143,13 @@ def add_near_family(root: Path, *, family: str, model_id, slug: str, gap: int = 
     inventory_path.write_text(json.dumps(inventory))
     capture_path.write_text(json.dumps(capture))
     register_notes(root, [row["sourceFootnote"]])
+    # E322: a captured page for the point must agree with it on the Index and total cost.
+    def agree(document):
+        for page in document["pages"]:
+            if page["model"].get("slug") == slug:
+                page["model"]["intelligenceIndex"] = float(row["intelligenceIndex"])
+                page["model"]["intelligenceIndexCost"] = {**page["model"]["intelligenceIndexCost"], "total": row["totalCostUsd"]}
+    edit(root, "snapshot", agree)
     return url
 
 

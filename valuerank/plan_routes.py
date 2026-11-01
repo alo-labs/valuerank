@@ -972,16 +972,29 @@ def plan_cost(api_cost: float | None, selected: dict | None) -> dict:
     }
 
 
+IDENTIFIED = ("point-identified", "set-identified")
+
+
 def identification_yield(selected_by_row: dict) -> dict:
-    """E61/E67: counts of point- and set-identified official routes, and the exploratory label rule."""
+    """E61/E67: counts of point- and set-identified official routes, and the exploratory label rule.
+
+    E321 (reviewer 87): one row per configuration and plan (O48) weights a configuration by how many plans its provider
+    sells, so the yield is also published configuration-balanced (each configuration's plan rows share one unit of weight,
+    keyed by the row id before "@"), and the label is exploratory when either yield is below one half."""
 
     rows = len(selected_by_row)
     point = sum(1 for item in selected_by_row.values() if item and item["identification"] == "point-identified")
     set_identified = sum(1 for item in selected_by_row.values() if item and item["identification"] == "set-identified")
+    by_configuration: dict[str, list[bool]] = {}
+    for row_id, item in selected_by_row.items():
+        by_configuration.setdefault(row_id.split("@")[0], []).append(bool(item) and item["identification"] in IDENTIFIED)
+    balanced = sum(sum(flags) / len(flags) for flags in by_configuration.values()) / len(by_configuration) if by_configuration else None
     return {
         "rows": rows,
         "pointIdentified": point,
         "setIdentified": set_identified,
         "unidentified": rows - point - set_identified,
-        "exploratory": rows > 0 and 2 * (point + set_identified) < rows,
+        "configurations": len(by_configuration),
+        "configurationBalancedYield": balanced,
+        "exploratory": rows > 0 and (2 * (point + set_identified) < rows or 2 * balanced < 1),
     }

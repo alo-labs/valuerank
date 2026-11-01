@@ -289,9 +289,15 @@ def test_identification_yield_and_exploratory_label():
         "e": candidate("e", 1, "assumption"),
     }
     result = pr.identification_yield(rows)
-    assert result == {"rows": 5, "pointIdentified": 1, "setIdentified": 1, "unidentified": 3, "exploratory": True}
+    assert result == {"rows": 5, "pointIdentified": 1, "setIdentified": 1, "unidentified": 3, "configurations": 5,
+                      "configurationBalancedYield": 0.4, "exploratory": True}
     assert pr.identification_yield({"a": rows["a"], "b": rows["b"], "c": rows["c"]})["exploratory"] is False
     assert pr.identification_yield({})["exploratory"] is False
+    # E321: three identified plan rows of one configuration against two unidentified configurations is row-weighted 3/5
+    # but configuration-balanced 1/3, so the label stays exploratory.
+    catalogue = {"x@p1": rows["a"], "x@p2": rows["a"], "x@p3": rows["b"], "y@p1": rows["c"], "z@p1": None}
+    balanced = pr.identification_yield(catalogue)
+    assert balanced["configurationBalancedYield"] == pytest.approx(1 / 3) and balanced["exploratory"] is True
 
 
 def test_admission_table_classifies_every_route_once():
