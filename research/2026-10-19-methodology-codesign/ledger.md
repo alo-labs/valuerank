@@ -2110,3 +2110,9 @@ Asked on I64 Q1 whether future O71 admissions should be executed by the build fr
 - E280. E88's dominance pre-filter compares only routes measured under the same allocation regime (E220).
 - E281. Report admission resolves a plan's dated aliases (evidencePolicy.planAliases) to the canonical plan key; the report keeps the name it was filed under (`planAsFiled`).
 
+## Owner decisions O143–O146 (2026-11-01), asked on reviewer 76 (Claude Sonnet 5.5, r158)
+- O143 (leading ranking, an O52–O54/O121 challenge): O121 stands; every bar answer's headline sentence also names the cheaper same-family efforts that could not be evaluated (today only in `uncheckedCheaperSiblings`).
+- O144 (cross-model Plan transfers, an O4/O7 challenge): each Claude transfer (Opus 5.5's measured multiples to other Claude models) carries a price-ratio bracket M_donor × [min(1, r), max(1, r)], r = the target's per-token price over the donor's blended over AA's Index-wide category mix, published as an S2 sensitivity with each row's rank range; ChatGPT transfers are exempt because Codex credits are priced per model at API parity; the displayed score is unchanged.
+- O145 (cohort churn, an O51 challenge): a configuration that leaves AA's rendered frontier and near gap stays a cohort row for one more release, flagged "left cohort", and leaves at the release after; applied now: the release cutoff moves (O65) and every source is re-captured, with the ten configurations that left at the v5 re-capture (Claude Haiku 5.5 (xhigh), Claude Haiku 5.5 (max), Claude Opus 5.5 (medium), Claude Sonnet 5.5 (xhigh), DeepSeek V4.1 Flash 1017, Gemini 4 Argon, GPT-5.6 Luna (low), Kimi K3.1 Pro, MiMo-V2.6-Pro, MiniMax-M3.1-Flash) retained.
+- O146 (cross-effort routes, an O87/O88 challenge): O88's point figure keeps scoring; each cross-effort route carries a mix-bounded [L, U] bracket from the E210 category-mix bound, published as a sensitivity with the rank range.
+
