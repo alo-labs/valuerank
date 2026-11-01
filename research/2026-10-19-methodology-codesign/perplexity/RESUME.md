@@ -1,7 +1,7 @@
 # Resuming the Perplexity panel (round 13)
 
-State on 2026-11-01: draft r171 (reviewers 78–88 folded in; O153–O167, Plan anchors re-frozen as version a2 under O157; cutoff 2026-11-01T06:10:00Z, 37-configuration cohort under O145) is committed; its review copy goes in `perplexity/parts-r171/`. The ledger (`ledger.md`) and the condensed brief (`ledger-brief.md`) run through
-owner decision O167 and reviewer 84 (O164 amends O75 to a monthly per-cell research cadence; O167 adds a release-time freshness check). Round 13 continues with Kimi K3 on r171 (Grok 4.7, GPT-6.1 Sol and Claude Sonnet 5.5 each have one clean round).
+State on 2026-11-01: draft r172 (reviewers 78–89 folded in; O153–O167, Plan anchors re-frozen as version a2 under O157; cutoff 2026-11-01T06:10:00Z, 37-configuration cohort under O145) is committed; its review copy goes in `perplexity/parts-r172/`. The ledger (`ledger.md`) and the condensed brief (`ledger-brief.md`) run through
+owner decision O167 and reviewer 84 (O164 amends O75 to a monthly per-cell research cadence; O167 adds a release-time freshness check). Round 13 continues with GLM 5.3 on r172 (Grok 4.7, GPT-6.1 Sol and Claude Sonnet 5.5 each have one clean round).
 
 Panel order and status for round 13 (O56: a model's round is clean with no Medium-or-higher finding; each model needs
 two consecutive clean rounds and the panel ends when every model says NO FURTHER FEEDBACK on the same revision):
@@ -24,7 +24,8 @@ two consecutive clean rounds and the panel ends when every model says NO FURTHER
 | 86 | GPT-6.1 Sol | r168 | clean (one Low), folded into r169 (E320); first clean round |
 | 87 | Gemini 3.8 Flash (five sections) | r169 | findings (six Mediums, five Lows), folded into r170 (E321–E326) |
 | 88 | Claude Sonnet 5.5 | r170 | clean (two Lows), folded into r171 (E327); first clean round |
-| 89 | Kimi K3 (four sections) | r171 | next |
+| 89 | Kimi K3 (four sections) | r171 | findings (five Mediums, one Low), folded into r172 (E328–E331) |
+| 90 | GLM 5.3 (seven sections) | r172 | next |
 
 To continue:
 

@@ -164,3 +164,18 @@ def test_dispersion_shares_and_covariance_allocation():
     assert dg.covariance_allocation({"a": [1.0, 2.0]}, weights)["status"] == dg.INSUFFICIENT_PANEL
     cancel = dg.covariance_allocation({"a": [10.0, 20.0, 30.0], "b": [60.0, 30.0, 0.0]}, weights)
     assert cancel["status"].startswith("not estimable on this panel")
+
+
+def test_e329_identity_bootstrap_resamples_a_model_with_all_its_efforts():
+    xs, ys = [1, 2, 3, 4, 5, 6], [1, 2, 3, 4, 6, 5]
+    assert dg.bootstrap_tau(xs, ys, draws=300) == dg.bootstrap_tau(xs, ys, draws=300, clusters=["a", "b", "c", "d", "e", "f"])
+    clustered = dg.bootstrap_tau(xs, ys, draws=300, clusters=["a", "a", "b", "b", "c", "c"])
+    assert clustered is not None and -1.0 <= clustered[0] <= clustered[1] <= 1.0
+    first, second = dict(zip("pqrstu", xs)), dict(zip("pqrstu", ys))
+    repeated = dg.agreement(first, second, label="x", identity_of={"p": "A", "q": "A", "r": "B", "s": "C", "t": "D", "u": "E"})
+    assert repeated["panelIdentities"] == 5 and isinstance(repeated["identityInterval"], tuple)
+    single = dg.agreement(first, second, label="x", identity_of={})
+    assert single["panelIdentities"] == 6 and single["identityInterval"].startswith("coincides")
+    flat = dg.agreement({"p": 1, "q": 1, "r": 1}, {"p": 2, "q": 3, "r": 4}, label="x", identity_of={})
+    assert flat["tau"] is None and flat["identityInterval"] is None
+    assert "panelIdentities" not in dg.agreement(first, second, label="x")

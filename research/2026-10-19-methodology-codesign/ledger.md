@@ -2318,3 +2318,14 @@ Asked on I64 Q1 whether future O71 admissions should be executed by the build fr
 - L2 (part 14 says the ten retained configurations "left" the cohort): adopted; they left the plotted set and remain in the cohort under O145.
 - The per-branch comparison-contract table is not adopted as a new artifact: each branch already publishes its label, removed set and held-fixed policy (scores.json `diagnostics`), and E327 fixes the one label that overstated its target.
 - E327. E178's branch is a recall/science-leaf removal sensitivity, not an execution-matched quality–cost comparison.
+
+## Reviewer 89 (Kimi K3, round 13, Thinking, sections 1–5, 6–9, 10–12, 13–14 of r171)
+- Read checks: every part read to its end. Parts 10–12: NO FURTHER FEEDBACK.
+- Parts 1–5 M1 (the noise-band text mixes the threshold rule and the plan-row grouping): adopted as E328; the draft now states the one algorithm the code runs (a row joins the band when it is a plan row of the first row's configuration or is not separable from the first row). M2 (O164's "at most once per calendar month" against O167's 31-day clock): adopted as a reading of O164, recorded here: the owner's "once per month, unless unavoidable" is read as one search per cell in each rolling 31-day interval, a second only when unavoidable, so the limit and the clock cannot conflict at a calendar boundary. M3 (the agreement panel has four rows while the brief says eight): verified, not a defect; scores.json's panel is the current four-row intersection and the statistic is undefined below E41's floor of eight; the brief's wording is corrected.
+- Parts 6–9 M1 (S1T mixes posterior or standard-error uncertainty with Bug Hunt's single-run dispersion): adopted as E330, naming S1T a mixed-target dispersion stress; the owner question (split the stream or relabel it) is not raised, since relabelling changes no score or owner decision and splitting would need Bug Hunt per-run data that is not captured. M2 (the weight draw's independence from the leaf draws is unstated): adopted as E331, with a fixture.
+- Parts 13–14 L (the independent-source bootstrap's resampling unit): adopted as E329; each check publishes its panel's distinct model identities and, where an identity repeats, a model-identity cluster-bootstrap companion.
+- Round status (O56): not clean (Mediums).
+- E328. A row joins the current noise band when it is a plan row of the first row's configuration or is not separable from the first row; otherwise it starts a new band.
+- E329. The independent-source checks' bootstrap resamples configuration rows; a model-identity cluster companion is published when an identity repeats.
+- E330. S1T is a mixed-target dispersion stress.
+- E331. The hierarchical weight draw is independent of every other draw in the replicate.

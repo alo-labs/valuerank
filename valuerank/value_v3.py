@@ -3226,7 +3226,13 @@ def _quality_agreement(rows: list[dict]) -> dict:
 
     independent = _independent_quality(rows)
     observed = {row["id"]: row["summary"].displayed for row in rows if row["id"] in independent}
-    return diagnostics.agreement(observed, independent, label="quality agreement (matched-panel sensitivity)")
+    return diagnostics.agreement(observed, independent, label="quality agreement (matched-panel sensitivity)", identity_of=_identities(rows))
+
+
+def _identities(rows: list[dict]) -> dict:
+    """E329: each row's model identity (its AA family), the resampling unit of the identity bootstrap."""
+
+    return {row["id"]: row.get("family") or row.get("name") or row["id"] for row in rows}
 
 
 def _substitution_agreement(rows: list[dict], per_row: dict) -> dict:
@@ -3237,7 +3243,8 @@ def _substitution_agreement(rows: list[dict], per_row: dict) -> dict:
     for basis in BASES:
         displayed = {row_id: per_row[row_id][basis]["value"] for row_id in independent}
         substituted = {row_id: anchor_math.value_score(per_row[row_id][basis]["costScore"], independent[row_id], BETA) for row_id in independent}
-        result[basis] = diagnostics.agreement(displayed, substituted, label=f"quality-substitution value agreement, {basis} basis (matched-panel sensitivity)")
+        result[basis] = diagnostics.agreement(displayed, substituted, label=f"quality-substitution value agreement, {basis} basis (matched-panel sensitivity)",
+                                              identity_of=_identities(rows))
     return result
 
 
@@ -3259,7 +3266,8 @@ def _disjoint_agreement(rows: list[dict]) -> dict:
         observed = [leaf for leaf in aa_leaves() if leaf.key in values]
         if row["id"] in independent and observed:
             aa_only[row["id"]] = sum(leaf.weight * values[leaf.key].z for leaf in observed) / sum(leaf.weight for leaf in observed)
-    result = diagnostics.agreement(aa_only, independent, label="disjoint-evidence agreement (restricted evidence comparison, not an eligible ranking)")
+    result = diagnostics.agreement(aa_only, independent, label="disjoint-evidence agreement (restricted evidence comparison, not an eligible ranking)",
+                                   identity_of=_identities(rows))
     result["retainedLeaves"] = {"aaExecuted": {leaf.key: leaf.weight for leaf in aa_leaves()}, "independent": {leaf.key: 100.0 / len(independent_leaves()) for leaf in independent_leaves()}}
     return result
 

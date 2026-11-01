@@ -44,14 +44,17 @@ def kendall_tau_b(xs: list[float], ys: list[float]) -> float | None:
     return (concordant - discordant) / denominator if denominator else None
 
 
-def bootstrap_tau(xs: list[float], ys: list[float], *, draws: int = 2000, seed: int = 20261019) -> tuple[float, float] | None:
-    """A model-row bootstrap 95% interval for tau-b (labelled matched-panel sensitivity)."""
+def bootstrap_tau(xs: list[float], ys: list[float], *, draws: int = 2000, seed: int = 20261019,
+                  clusters: list | None = None) -> tuple[float, float] | None:
+    """A configuration-row bootstrap 95% interval for tau-b (labelled matched-panel sensitivity); with ``clusters``, E329's
+    model-identity companion, which resamples each identity with all its matched efforts together."""
 
     rng = random.Random(seed)
     n = len(xs)
+    groups = [[k for k in range(n) if clusters[k] == key] for key in dict.fromkeys(clusters)] if clusters else [[k] for k in range(n)]
     values = []
     for _ in range(draws):
-        picks = [rng.randrange(n) for _ in range(n)]
+        picks = [k for _ in groups for k in groups[rng.randrange(len(groups))]]
         tau = kendall_tau_b([xs[k] for k in picks], [ys[k] for k in picks])
         if tau is not None:
             values.append(tau)
@@ -61,8 +64,11 @@ def bootstrap_tau(xs: list[float], ys: list[float], *, draws: int = 2000, seed: 
     return values[int(0.025 * (len(values) - 1))], values[int(0.975 * (len(values) - 1))]
 
 
-def agreement(first: dict, second: dict, *, label: str, min_rows: int = 3) -> dict:
-    """Tau-b between two scores on their common panel, with the panel and a bootstrap interval."""
+def agreement(first: dict, second: dict, *, label: str, min_rows: int = 3, identity_of: dict | None = None) -> dict:
+    """Tau-b between two scores on their common panel, with the panel and a bootstrap interval.
+
+    E329 (reviewer 89): the interval resamples configuration rows; with ``identity_of`` (row -> model identity) the result also
+    counts the panel's distinct identities and, when an identity repeats, adds a model-identity cluster-bootstrap companion."""
 
     panel = sorted(row for row in first if row in second and first[row] is not None and second[row] is not None)
     excluded = sorted((set(first) | set(second)) - set(panel))
@@ -70,12 +76,18 @@ def agreement(first: dict, second: dict, *, label: str, min_rows: int = 3) -> di
         return {"label": label, "panel": panel, "excluded": excluded, "tau": None, "interval": None, "meanOffset": None, "status": "undefined (panel too small)"}
     xs, ys = [first[row] for row in panel], [second[row] for row in panel]
     tau = kendall_tau_b(xs, ys)
+    identities = [identity_of.get(row, row) for row in panel] if identity_of is not None else None
+    repeated = identities is not None and len(set(identities)) < len(identities)
+    extra = {} if identities is None else {
+        "panelIdentities": len(set(identities)),
+        "identityInterval": (bootstrap_tau(xs, ys, clusters=identities) if repeated else "coincides with the configuration-row interval (one row per identity)") if tau is not None else None}
     return {
         "label": label,
         "panel": panel,
         "excluded": excluded,
         "tau": tau,
         "interval": bootstrap_tau(xs, ys) if tau is not None else None,
+        **extra,
         # Reviewer 72: a rank correlation cannot see a uniform level shift, so the mean offset (second minus first) is published beside it.
         "meanOffset": sum(y - x for x, y in zip(xs, ys)) / len(panel),
         "status": "defined" if tau is not None else "undefined (no rank variation)",

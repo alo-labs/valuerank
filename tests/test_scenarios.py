@@ -419,3 +419,13 @@ def test_s0_rejects_a_draw_derived_only_from_an_analyst_convention():
         sc.validate_stream([convention], "S0")
     assert sc.validate_stream([convention], "S1") == ["identification convention", "reporting precision"]
     assert Kernel("uniform", (1.0, 2.0)).derivation == sc.PUBLISHED_PRECISION
+
+
+def test_e331_weight_draws_keep_the_nominal_composite_with_leaf_values_fixed():
+    """E331: drawn independently of the leaf values, the hierarchical weights leave the mean composite at its nominal value."""
+
+    values = {leaf.key: float(10 + 7 * index) for index, leaf in enumerate(q.LEAVES)}
+    nominal = sum(sc.nominal_weights()[key] * value for key, value in values.items()) / 100.0
+    rng = random.Random(331)
+    draws = [sum(weights[key] * value for key, value in values.items()) / 100.0 for weights in (sc.hierarchical_weights(rng) for _ in range(4000))]
+    assert abs(sum(draws) / len(draws) - nominal) < 0.5
