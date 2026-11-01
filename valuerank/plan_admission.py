@@ -269,7 +269,7 @@ def evaluate(document: dict, profile: dict, release_day: date, families: dict | 
             part = partition(report, splits) if reason is None else None
             rows.append({"id": report["id"], "observer": report["observer"], "valueLower": low, "valueUpper": high, "partition": part,
                          "provisional": bool(report.get("provisional")), "speedMode": report.get("speedMode"), "stage": report.get("stage"), "excluded": reason,
-                         "acrossResets": spans_reset(report, records)})
+                         "acrossResets": spans_reset(report, records), "inferenceRechecked": report.get("inferenceRechecked")})
             if reason is None:
                 eligible.append(rows[-1])
         latest_split = sum(applies(item, reports[0]) for item in splits)
@@ -278,10 +278,15 @@ def evaluate(document: dict, profile: dict, release_day: date, families: dict | 
         lowest = min((row["valueLower"] for row in pool), default=None)
         highest = max((row["valueUpper"] for row in pool), default=None)
         # O86: the reports concord when the largest lower bound is at most 1.20x the smallest upper bound, so a coarse meter
-        # reading is not mistaken for disagreement.
-        largest_lower = max((row["valueLower"] for row in pool), default=None)
-        smallest_upper = min((row["valueUpper"] for row in pool), default=None)
+        # reading is not mistaken for disagreement. O159 (2026-11-01, amending O74/O81/O115): the test and the clip band read
+        # the non-provisional reports, plus a provisional report whose inference has been re-checked against them (logged as
+        # inferenceRechecked); the band over every report is published beside it.
         firm = [row for row in pool if not row["provisional"]]
+        tested = [row for row in pool if not row["provisional"] or row["inferenceRechecked"]]
+        largest_lower = max((row["valueLower"] for row in tested), default=None)
+        smallest_upper = min((row["valueUpper"] for row in tested), default=None)
+        all_lower = max((row["valueLower"] for row in pool), default=None)
+        all_upper = min((row["valueUpper"] for row in pool), default=None)
         # O85: every cell is tested; a cell on a plan the Plan ranking does not list is published as evidence only.
         listed = plan in document.get("listedPlans", {}) and region == "global"
         if unit not in UNIT_TO_MONTH:
@@ -312,6 +317,7 @@ def evaluate(document: dict, profile: dict, release_day: date, families: dict | 
                         "currentPartition": latest_split, "partitionsWithReports": sorted({row["partition"] for row in eligible}),
                         "configurations": sorted({str(report["modelId"]) for report in reports}), "efforts": sorted({str(report.get("effort") or "unstated") for report in reports}), "value": value, "monthlyUsd": monthly, "multiple": monthly / fee if monthly is not None and fee else None,
                         "range": None if lowest is None else [lowest, highest], "feasibleRange": feasible, "reports": rows,
+                        "allReportsBand": None if all_lower is None else [all_lower / CONCORDANCE, CONCORDANCE * all_upper],
                         "admittingObservers": sorted(row["observer"] for row in firm) if status == "passes" else [],
                         "flags": [ACROSS_RESETS_FLAG] if status == "passes" and any(row["acrossResets"] for row in firm) else []})
     return results

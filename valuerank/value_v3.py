@@ -1000,6 +1000,7 @@ def assemble(configurations: list[dict], documents: dict, *, release_day: date, 
         "rows": rows, "admission": admission, "admitted": admitted, "deferred": [{"component": component, "reason": DEFERRED_MIGRATION} for component in deferred],
         "mainWorkload": main, "releaseDay": release_day.isoformat(), "tb4Rows": documents["tb4"]["rows"], "incomplete": incomplete, "listed": listed,
         "cognition": documents.get("cognitionFrontierCode") or {"v1_1": {"data": {}}},
+        "fallbackPrices": documents.get("fallbackPrices") or {},
         "sourceClocks": clocks,
         "planAllowanceCells": allowance_cells,
         "planResearchCoverage": research_coverage,
@@ -1907,6 +1908,43 @@ def bug_hunt_harness_sensitivity(rows: list[dict], per_row: dict) -> dict:
             "rows": spans, "bases": bases}
 
 
+FALLBACK_REPRICING_LABEL = ("fallback-model re-pricing: each flagged row's Coding Agent Index cost with its fallback-attempt share (by attempts) "
+                            "re-priced from the fallback model's list price to the row's own, at the lower and the higher of the input and "
+                            "output price ratios (O158; scenario layer, scores unchanged)")
+
+
+def fallback_repricing(rows: list[dict], per_row: dict, anchors: dict | None, prices: dict) -> dict:
+    """O158 (2026-11-01): how the API value and rank would move if the attempts AA's fallback models finished (O63) had
+    been priced at the row's own model. The fallback share of the Coding Agent Index component is taken by attempts; a
+    fallback model without a captured list price leaves the row unpriced. A sensitivity only; no score changes."""
+
+    listed = prices.get("models") or {}
+    entries, low_branch, high_branch = {}, {}, {}
+    primary = {row["id"]: per_row[row["id"]]["api"]["value"] for row in rows if per_row[row["id"]]["api"]["value"] is not None}
+    for row in rows:
+        safety = row.get("agentSafety") or {}
+        component = row["components"].get("coding-agent-index") or {}
+        if not safety.get("fallback") or component.get("costUsd") is None or row["id"] not in primary:
+            continue
+        page = row.get("page") or {}
+        own = {"input": page.get("price1mInputTokens"), "output": page.get("price1mOutputTokens")}
+        missing = [model for model in safety["fallbackModels"] if model not in listed]
+        if missing or None in own.values():
+            entries[row["id"]] = {"status": "unpriced: " + (", ".join(missing) if missing else "the row's own list price is not captured")}
+            continue
+        ratios = [own[kind] / listed[model][kind] for model in safety["fallbackModels"] for kind in ("input", "output")]
+        share = safety["fallback"] / safety["attempts"]
+        entry = {"status": "evaluated", "fallbackShare": share, "priceRatio": [min(ratios), max(ratios)], "costUsd": {}, "value": {}}
+        for end, ratio, branch in (("low", min(ratios), low_branch), ("high", max(ratios), high_branch)):
+            cost = row["cost"]["costUsd"] + component["costUsd"] * share * (ratio - 1.0)
+            entry["costUsd"][end] = cost
+            entry["value"][end] = branch[row["id"]] = anchor_math.value_score(anchor_math.cost_score(cost, anchors), row["summary"].displayed, BETA) if anchors else None
+        entries[row["id"]] = entry
+    return {"label": FALLBACK_REPRICING_LABEL, "rows": entries,
+            "rankChanges": {end: diagnostics.paired_rank_change(primary, {**primary, **{k: v for k, v in branch.items() if v is not None}})
+                            for end, branch in (("low", low_branch), ("high", high_branch))}}
+
+
 def gap_fill_bars(assembled: dict, frozen: dict, offset: float | None) -> dict:
     """E234 (as extended after I25): the displayed-record cheapest row at each frozen bar on both bases with the gap
     fills as published, removed (the rest renormalised), and with each third-party fill lowered by the measured mean
@@ -2427,6 +2465,20 @@ def price_per_token(page: dict, mix: dict | None = None) -> float | None:
     return sum(spend.values()) / tokens if tokens > 0 else None
 
 
+BRACKET_CATEGORIES = {"input": "price1mInputTokens", "cacheRead": "cacheHitPrice", "cacheWrite": "cacheWritePrice", "output": "price1mOutputTokens"}
+
+
+def category_bracket(target: dict, donor: dict, multiple: float) -> list[float] | None:
+    """Reviewer 78: the wider bracket beside O144's shared-mix one, [M * min_k min(1, r_k), M * max_k max(1, r_k)] over every
+    priced token category k, cache writes included, so a category whose price ratio departs from the mix's is not hidden."""
+
+    ratios = [target[field] / donor[field] for field in BRACKET_CATEGORIES.values()
+              if isinstance(target.get(field), (int, float)) and isinstance(donor.get(field), (int, float)) and donor[field] > 0]
+    if len(ratios) < len(BRACKET_CATEGORIES):
+        return None
+    return [multiple * min(1.0, min(ratios)), multiple * max(1.0, max(ratios))]
+
+
 def route_bracket_kind(route: dict) -> str | None:
     if route.get("sameModelAcrossEfforts"):
         return "cross-effort"
@@ -2469,7 +2521,8 @@ def route_brackets(plan_rows: list[dict], per_plan: dict, frozen: dict, routes: 
             ends.append((multiple * factor, value, rank))
         out.append({**entry, "status": "evaluated", "priceRatio": ratio, "multipleRange": [ends[0][0], ends[1][0]],
                     "valueRange": [ends[0][1], ends[1][1]], "rankRange": [ends[1][2], ends[0][2]],
-                    "displayedValue": values[row["id"]]})
+                    "displayedValue": values[row["id"]],
+                    **({"categoryMultipleRange": category_bracket(target, source, multiple)} if kind == "claude-transfer" else {})})
     return out
 
 
@@ -2699,6 +2752,7 @@ def score(assembled: dict, frozen: dict) -> dict:
             "frontierCodeCrossSource": frontiercode_cross_source(cohort_rows, assembled["cognition"]),
             "gapFillSensitivity": gap_fill_sensitivity(rows, per_row),
             "bugHuntHarnessSensitivity": bug_hunt_harness_sensitivity(rows, per_row),
+            "fallbackRepricing": fallback_repricing(rows, per_row, frozen["workloads"][main]["anchors"]["api"], assembled.get("fallbackPrices") or {}),
             "harnessCostStress": harness_cost_stress(assembled, frozen),
             "gapFillBars": gap_fill_bars(assembled, frozen, frontiercode_cross_source(cohort_rows, assembled["cognition"])["meanOffset"]),
             "anchorStability": _anchor_stability(rows, frozen, main, per_row),
@@ -3866,6 +3920,7 @@ EVIDENCE_FILES = {
     "sweTracks": ("swe_tracks.json", "research/2026-10-23-swe-benchmarks/build_swe_tracks.py from the verified coverage captures (O53-O55)"),
     "planReports": ("plan_reports.json", "editorial table of every O71 user report with the facts E270 needs; the build derives admission from it (O81)"),
     "aaPreviousCapture": ("aa/aa_previous_capture.json", "valuerank.capture_aa: digest of the model-page capture this one replaced (I60)"),
+    "fallbackPrices": ("fallback_prices.json", "editorial capture of the list API prices of AA's named fallback models (O158 sensitivity only)"),
     "sourceRereads": ("source_rereads.json", "editorial record of the O68 re-reads, each 'unchanged' result verified against the re-read file"),
     "aaFootnotes": ("aa/aa_footnote_register.json", "editorial register of every AA note the captures record (the chart's footnotes, and from O103 the model pages, Coding Agent Index and cost charts), by exact text, each classified once (O100, O103)"),
 }

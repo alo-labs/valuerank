@@ -654,6 +654,7 @@ def write_world(root: Path) -> Path:
         "price_records.json": documents()["priceRecords"],
         "leaf_evidence.json": documents()["leafEvidence"],
         "cognition_frontiercode.json": {"v1_1": {"data": {}}, "v2_0": {"data": {}}, "v2_0Map": {}},
+        "fallback_prices.json": {"capturedAt": "2026-10-19T00:00:00Z", "models": {}},
         "swe_tracks.json": {"capturedAt": "2026-10-19T00:00:00Z", "sources": {}, "records": []},
         "aa_frontier_capture.json": {"captured_at": "2026-10-18T00:00:00Z", "points": []},
         # The roster is a bare JSON list; the Bug Hunt scoreboard is the O31 roster-check input.
@@ -2533,6 +2534,10 @@ def test_route_brackets_rescore_a_transfer_and_a_cross_effort_route_at_both_ends
     assert first["valueRange"][0] < first["valueRange"][1] and first["rankRange"][0] <= first["rankRange"][1]
     assert second["rule"] == "O146" and second["priceRatio"] == pytest.approx(v.price_per_token(dear) / v.price_per_token(cheap))
     assert missing["status"].startswith("not computable")
+    # Reviewer 78: the per-category bracket (cache writes included) sits beside the shared-mix one for a Claude transfer only.
+    assert first["categoryMultipleRange"] is None and "categoryMultipleRange" not in second
+    assert v.category_bracket({**dear, "cacheWritePrice": 6.25}, {**cheap, "cacheWritePrice": 1.25}, 10.0) == pytest.approx([10.0, 50.0])
+    assert v.category_bracket({**dear, "cacheWritePrice": 25.0}, {**cheap, "cacheWritePrice": 1.25}, 10.0) == pytest.approx([10.0, 200.0])
 
 
 def test_workload_cross_check_skips_a_row_without_a_per_task_cost():
@@ -2543,3 +2548,27 @@ def test_workload_cross_check_skips_a_row_without_a_per_task_cost():
            "evidence": {"observations": {"terminalBench": observation}, "provenance": {"terminalBench": {"source": "AA Terminal-Bench 4.0 run"}}}}
     result = v.workload_cross_check([row, {**row, "id": "b", "cost": {"workload": "other", "costUsd": 1.0}}], "W")
     assert result["n"] == 0 and result["status"] == "undefined (panel too small)" and result["benchmark"] == "Terminal-Bench 4.0"
+
+
+def test_fallback_repricing_moves_only_flagged_priced_rows():
+    """O158: the fallback-attempt share of the Coding Agent Index cost re-priced to the row's own list price (scores unchanged)."""
+
+    from types import SimpleNamespace
+
+    def row(row_id, fallback, models, own=(4.0, 20.0), cai=1000.0):
+        return {"id": row_id, "cost": {"costUsd": 2000.0}, "summary": SimpleNamespace(displayed=50.0),
+                "components": {"coding-agent-index": {"costUsd": cai}},
+                "agentSafety": {"attempts": 100, "fallback": fallback, "fallbackModels": models},
+                "page": {"price1mInputTokens": own[0], "price1mOutputTokens": own[1]}}
+
+    rows = [row("a", 10, ["F"]), row("b", 0, []), row("c", 5, ["G"]), row("d", 5, ["F"], own=(None, 20.0)), row("e", 5, ["F"], cai=None)]
+    per_row = {item["id"]: {"api": {"value": 40.0 + index}} for index, item in enumerate(rows)}
+    anchors = {"low": 100.0, "high": 10_000.0, "basis": "api"}
+    result = v.fallback_repricing(rows, per_row, anchors, {"models": {"F": {"input": 5.0, "output": 25.0}}})
+    a = result["rows"]["a"]
+    assert a["status"] == "evaluated" and a["fallbackShare"] == pytest.approx(0.1) and a["priceRatio"] == pytest.approx([0.8, 0.8])
+    assert a["costUsd"]["low"] == pytest.approx(2000.0 - 1000.0 * 0.1 * 0.2)
+    assert a["value"]["low"] == pytest.approx(v.anchor_math.value_score(v.anchor_math.cost_score(a["costUsd"]["low"], anchors), 50.0, v.BETA))
+    assert result["rows"]["c"]["status"] == "unpriced: G" and result["rows"]["d"]["status"].startswith("unpriced: the row's own")
+    assert "b" not in result["rows"] and "e" not in result["rows"] and set(result["rankChanges"]) == {"low", "high"}
+    assert v.fallback_repricing(rows[:1], per_row, None, {"models": {"F": {"input": 5.0, "output": 25.0}}})["rows"]["a"]["value"]["low"] is None

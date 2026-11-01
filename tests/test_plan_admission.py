@@ -70,6 +70,13 @@ def test_cells_pass_only_on_two_firm_concordant_reports_in_the_current_partition
     # O86: coarse whole-percent readings 7% apart share a value, though their whole span is 1.23x.
     coarse = cells(report("a", start="2026-10-18", end="2026-10-18", low=7.84, high=9.04), report("b", start="2026-10-19", end="2026-10-19", low=8.40, high=9.68))
     assert coarse[("Pro", "week", "global")]["status"] == "passes"
+    # O159: an unchecked provisional report neither fails the cell nor moves its band; once its inference is re-checked it counts.
+    firm = [report("a", start="2026-10-18", end="2026-10-18", low=100), report("b", start="2026-10-19", end="2026-10-19", low=104)]
+    stray = report("p", start="2026-10-20", end="2026-10-20", low=200, provisional=True)
+    unchecked = cells(*firm, stray)[("Pro", "week", "global")]
+    assert unchecked["status"] == "passes" and unchecked["feasibleRange"] == pytest.approx([104 / 1.2, 120]) and unchecked["allReportsBand"] == pytest.approx([200 / 1.2, 120])
+    checked = cells(*firm, {**stray, "inferenceRechecked": "matched tier and model against a and b"})[("Pro", "week", "global")]
+    assert checked["status"].startswith("fails: largest lower bound") and checked["reports"][-1]["inferenceRechecked"]
     # O87: reports at different efforts pool for the model, keyed without the effort suffix.
     reports = [report("a", start="2026-10-18", end="2026-10-18", effort="high"), {**report("b", start="2026-10-19", end="2026-10-19", effort="low"), "modelId": "m-max"}]
     pooled = pa.evaluate({**DOCUMENT, "reports": reports}, PROFILE, DAY, {"m": "M", "m-max": "M"})[0]

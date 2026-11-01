@@ -908,7 +908,7 @@ Each routed row's amount with what it measures, how it was derived and which obj
 
 ## Evidence bundle
 
-Bundle hash `7d3325739976aede3477bd253b6c5593fa0a3858960260746c03252b37b2201a`: every published output is rebuilt from these artifacts at the pinned publication clock (npm run verify:docs), never from live pages.
+Bundle hash `949da128abbc1ddddd54ba7db6c26cd8bcd325b636af8c06d21e10e839d8fab0`: every published output is rebuilt from these artifacts at the pinned publication clock (npm run verify:docs), never from live pages.
 
 | Key | Artifact | SHA-256 | Captured | Extractor |
 |---|---|---|---|---|
@@ -929,6 +929,7 @@ Bundle hash `7d3325739976aede3477bd253b6c5593fa0a3858960260746c03252b37b2201a`: 
 | sweTracks | `data/swe_tracks.json` | `54e76dc5d68f349fbe2d67f4234f6b999fceb07cfa7353ea22a487e18dcf4f4f` | 2026-11-01T06:03:32.614Z | research/2026-10-23-swe-benchmarks/build_swe_tracks.py from the verified coverage captures (O53-O55) |
 | planReports | `data/plan_reports.json` | `a699da4aa84fa0022671d1cf0132dd29c86379af22d6a4770b779033ee5aa0f4` | 2026-10-28 | editorial table of every O71 user report with the facts E270 needs; the build derives admission from it (O81) |
 | aaPreviousCapture | `data/aa/aa_previous_capture.json` | `d9ec560d2f27fc4de89e68d293399ee331e706e9c12c625c15012e7a237b577f` | 2026-10-31T04:07:04Z | valuerank.capture_aa: digest of the model-page capture this one replaced (I60) |
+| fallbackPrices | `data/fallback_prices.json` | `3ab915c9d8ad8a357d7dbcc326dd39a2af64e89b5ef312477d68ea3f3cf50ea9` | 2026-11-01T11:59:15Z | editorial capture of the list API prices of AA's named fallback models (O158 sensitivity only) |
 | sourceRereads | `data/source_rereads.json` | `41cb7583ad871a2972ce4e83684a60d60be5ad9bd71f2b096e61c56e435391cd` | 2026-11-01T08:39:42Z | editorial record of the O68 re-reads, each 'unchanged' result verified against the re-read file |
 | aaFootnotes | `data/aa/aa_footnote_register.json` | `ccc742e1cca305fa88b80b48d7f46e89392cee8225353f8daa88ec5e174d59a4` | 2026-11-01T05:53:05Z | editorial register of every AA note the captures record (the chart's footnotes, and from O103 the model pages, Coding Agent Index and cost charts), by exact text, each classified once (O100, O103) |
 | anchors | `data/v3_frozen.json` | `b03c6d16d2788b136cd8f437f26172770941bbdf0adb4dc11ba25c0137bf01a7` | 2026-11-01 | valuerank.value_v3 freeze |

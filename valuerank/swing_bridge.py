@@ -27,7 +27,7 @@ PRICE_FIELDS = ("price1mInputTokens", "price1mOutputTokens", "cacheHitPrice", "c
 TOKEN_FIELDS = ("intelligenceIndexEvaluations", "intelligenceIndexCost", "canonicalIntelligenceIndexTokenCount", "intelligenceIndexCostPerTask", "intelligenceIndexOutputTokensPerTask")
 # Each data class: the snapshot page fields it owns ("*" = every field no other class owns) and its whole documents.
 CLASSES = {
-    "price": {"fields": PRICE_FIELDS, "documents": ("priceRecords",)},
+    "price": {"fields": PRICE_FIELDS, "documents": ("priceRecords", "fallbackPrices")},
     # O64: the reviewed manifest describes the agent capture, so the two change together.
     "tokenUse": {"fields": TOKEN_FIELDS, "documents": ("codingAgents", "codingAgentsManifest", "costCharts")},
     "benchmarkRecord": {"fields": "*", "documents": ("bugHunt", "bugHuntScoreboard", "tb4", "leafEvidence", "cognitionFrontierCode", "sweTracks", "sourceRereads")},

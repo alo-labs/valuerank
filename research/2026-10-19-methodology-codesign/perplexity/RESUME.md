@@ -1,7 +1,7 @@
 # Resuming the Perplexity panel (round 13)
 
-State on 2026-11-01: draft r160 (reviewer 77 folded in; O150–O152; cutoff 2026-11-01T06:10:00Z, 37-configuration cohort under O145) is committed with its review copy in `perplexity/parts-r160/`. The ledger (`ledger.md`) and the condensed brief (`ledger-brief.md`) run through
-owner decision O152 and reviewer 77. Round 13 continues with GLM 5.3 on r160.
+State on 2026-11-01: draft r161 (reviewer 78 folded in; O153–O159, Plan anchors re-frozen as version a2 under O157; cutoff 2026-11-01T06:10:00Z, 37-configuration cohort under O145) is committed; its review copy goes in `perplexity/parts-r161/`. The ledger (`ledger.md`) and the condensed brief (`ledger-brief.md`) run through
+owner decision O159 and reviewer 78. Round 13 continues with Grok 4.7 on r161.
 
 Panel order and status for round 13 (O56: a model's round is clean with no Medium-or-higher finding; each model needs
 two consecutive clean rounds and the panel ends when every model says NO FURTHER FEEDBACK on the same revision):
@@ -13,8 +13,8 @@ two consecutive clean rounds and the panel ends when every model says NO FURTHER
 | 75 | Gemini 3.8 Flash (sectional) | r157 | findings (a Critical, Highs), folded into r158 (O141, O142, E279–E281) |
 | 76 | Claude Sonnet 5.5 (whole draft, part 6 re-sent) | r158 | findings, folded into r159 (O143–O149, E282–E284; cutoff moved under O145) |
 | 77 | Kimi K3 (four sections) | r159 | findings (a Critical, Highs), folded into r160 (O150–O152, E285–E288) |
-| 78 | GLM 5.3 (sections of at most two parts) | r160 | findings (two Highs), folding into r161 (O153–O156 asked and answered; implementation in progress) |
-| 79 | Grok 4.7 | | |
+| 78 | GLM 5.3 (sections of at most two parts) | r160 | findings (Highs, Mediums), folded into r161 (O153–O159, E289–E298) |
+| 79 | Grok 4.7 | r161 | next |
 
 To continue:
 

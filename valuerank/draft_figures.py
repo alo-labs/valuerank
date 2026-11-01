@@ -176,6 +176,14 @@ def named_figures(scores: dict, data: Path = DATA) -> dict:
         # I78 L4: plan rows resting on a measurement in an acknowledged fault window (O91, O92).
         figures[f"{track}.planFaultRows"] = sum(pr.FAULT_FLAG in row.get("flags", []) for row in section["planRows"])
         figures[f"{track}.planUnverifiedRows"] = sum("valuation basis unverified" in row.get("flags", []) for row in section["planRows"])
+        # Reviewer 78: the joint count the marginal counts cannot give: plan rows on a measured route with no flag at all.
+        measured = [row for row in section["planRows"] if not row.get("fallback") and row.get("grade") in ("controlled", "reports")]
+        figures[f"{track}.planMeasuredRows"] = len(measured)
+        figures[f"{track}.planCleanRows"] = sum(not row.get("flags") for row in measured)
+        # Reviewer 78 (O123): the Coding Agent Index's share of each ranked row's basket cost, as a range.
+        shares = [row["cost"]["componentsDetail"]["coding-agent-index"]["costUsd"] / row["cost"]["costUsd"] for row in section["rows"]
+                  if "coding-agent-index" in row["cost"]["components"] and row["cost"].get("costUsd")]
+        figures[f"{track}.caiShareRange"] = f"{min(shares) * 100:.0f}–{max(shares) * 100:.0f}%" if shares else "not admitted"
         # I71: plan rows per owner-assumption kind, and every kind named from the one registry.
         kinds = {kind: sum(1 for row in section["planRows"] if row.get("grade") == "assumption" and (row.get("assumptionKind") or "transfer") == kind)
                  for kind in pr.OWNER_ASSUMPTIONS}
