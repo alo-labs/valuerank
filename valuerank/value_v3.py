@@ -209,6 +209,8 @@ def leaf_evidence(model_id: str, effort: str | None, page: dict, tb4_rows: list[
         if bug_hunt.get("extras") is None:
             raise ValueError(f"{model_id}: the Bug Hunt record carries no unplanted-fix count, which the O163 leaf needs")
         found = bug_hunt["fixedOf105"] + bug_hunt["extras"]
+        if found > q.BUG_HUNT_MISSING_UPPER:
+            raise ValueError(f"{model_id}: Bug Hunt total {found} exceeds the registered missing-evidence bound {q.BUG_HUNT_MISSING_UPPER} (E302)")
         add("bugHunt", found, q.bug_hunt_z(found, BUG_HUNT_HALF_WIDTH),
             {"source": "Bug Hunt Bench owner-published runs", "configuration": bug_hunt.get("evaluatedModel"), "harness": bug_hunt.get("harness"), "runs": bug_hunt.get("sampleN"),
              "planted": bug_hunt["fixedOf105"], "unplanted": bug_hunt["extras"]},
@@ -2356,7 +2358,7 @@ def leaf_ranges(assembled: dict) -> dict:
     ranges = {}
     for leaf in q.LEAVES:
         values = [row["summary"].observations[leaf.key].z for row in assembled["rows"] if leaf.key in row["summary"].observations]
-        ranges[leaf.key] = (min(values), max(values)) if values else (0.0, 100.0)
+        ranges[leaf.key] = (min(values), max(values)) if values else (0.0, q.MISSING_UPPER.get(leaf.key, 100.0))
     return ranges
 
 
@@ -3797,15 +3799,22 @@ def sampling_mean_shift(panel: list[scenarios.RowInputs], seed: int) -> dict:
             if kernel.family != "beta":
                 continue
             shift = scenarios.mean_shift(*kernel.params)
-            entry = summary.setdefault(key, {"maxShift": 0.0, "row": None, "draws": 0, "clipped": 0})
+            entry = summary.setdefault(key, {"maxShift": 0.0, "row": None, "draws": 0, "clipped": 0, "maxPostClipShift": 0.0, "postClipRow": None})
             if entry["row"] is None or abs(shift) > abs(entry["maxShift"]):
                 entry["maxShift"], entry["row"] = shift, item.row
             alpha, beta, published = kernel.params
+            total = 0.0
             for _ in range(MEAN_SHIFT_DRAWS):
                 value = 100.0 * rng.betavariate(alpha, beta) - scenarios.mean_shift(alpha, beta, published)
                 entry["clipped"] += not 0.0 <= value <= 100.0
+                total += min(100.0, max(0.0, value))
             entry["draws"] += MEAN_SHIFT_DRAWS
-    return {key: {"maxShift": entry["maxShift"], "row": entry["row"], "clipRate": entry["clipped"] / entry["draws"]} for key, entry in summary.items()}
+            # Reviewer 80 (E303): clipping at 0 or 100 moves the recentred draw's mean again; publish that realised shift.
+            post = total / MEAN_SHIFT_DRAWS - published
+            if entry["postClipRow"] is None or abs(post) > abs(entry["maxPostClipShift"]):
+                entry["maxPostClipShift"], entry["postClipRow"] = post, item.row
+    return {key: {"maxShift": entry["maxShift"], "row": entry["row"], "clipRate": entry["clipped"] / entry["draws"],
+                  "maxPostClipShift": entry["maxPostClipShift"], "postClipRow": entry["postClipRow"]} for key, entry in summary.items()}
 
 
 def run_scenarios(assembled: dict, frozen: dict, *, n: int = SCENARIO_COUNT, seed: int) -> dict:

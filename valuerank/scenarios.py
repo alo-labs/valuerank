@@ -202,7 +202,7 @@ def missing_ranges(rows: list[RowInputs]) -> dict:
     for leaf in q.LEAVES:
         values = [row.leaves[leaf.key].params[0] for row in rows if leaf.key in row.leaves and row.leaves[leaf.key].family == "fixed"]
         values += [sum(row.leaves[leaf.key].params) / len(row.leaves[leaf.key].params) for row in rows if leaf.key in row.leaves and row.leaves[leaf.key].family != "fixed"]
-        ranges[leaf.key] = (min(values), max(values)) if values else (0.0, 100.0)
+        ranges[leaf.key] = (min(values), max(values)) if values else (0.0, q.MISSING_UPPER.get(leaf.key, 100.0))
     return ranges
 
 
@@ -331,7 +331,7 @@ def draw_scenario(rows: list[RowInputs], stratum: str, rng: random.Random, *, al
             for leaf in q.LEAVES:
                 if leaf.key not in values:
                     # A missing leaf's score domain is an interval-only input: uniform, with the E25 endpoint-heavy alternative.
-                    low, high = (ranges or {}).get(leaf.key, (0.0, 100.0))
+                    low, high = (ranges or {}).get(leaf.key, (0.0, q.MISSING_UPPER.get(leaf.key, 100.0)))
                     values[leaf.key] = Kernel("uniform", (low, high), "endpoint-heavy", IDENTIFICATION_CONVENTION).draw(rng, use_alternative=heavy)
             quality = sum(weights[key] * values[key] for key in weights) / 100.0
         cost = row.cost.draw(rng, use_alternative=heavy)

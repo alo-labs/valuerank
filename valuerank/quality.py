@@ -30,6 +30,11 @@ REQUIRED_LEAF_WEIGHT = 20.0  # leaves at or above this nominal weight must be ob
 GDPVAL_ELO_LOW = 500.0
 GDPVAL_ELO_SPAN = 2000.0
 BUG_HUNT_BUGS = 105.0
+# E302 (reviewer 80): O163's Bug Hunt count has no ceiling, so a missing Bug Hunt leaf is bounded by a registered
+# convention: the 105 planted bugs plus an equal allowance for unplanted fixes. The build stops on an observed total above
+# it (value_v3.leaf_evidence), so the bound is never below an observation.
+BUG_HUNT_MISSING_UPPER = 2.0 * BUG_HUNT_BUGS
+MISSING_UPPER = {"bugHunt": BUG_HUNT_MISSING_UPPER}
 AICD_POINTS = 60.0  # AI Coding Daily's Laravel quality, React-TS quality and edge-case columns (20 points each)
 
 
@@ -218,7 +223,7 @@ class QualitySummary:
     coverage: float  # observed share of total quality weight, 0-1
     displayed: float | None  # observed-only quality, 0-100
     lower: float  # formal bound with missing leaves at 0 and observed leaves at their low ends
-    upper: float  # formal bound with missing leaves at 100 and observed leaves at their high ends
+    upper: float  # formal bound with missing leaves at their missing-evidence upper end (100; Bug Hunt 210, E302) and observed leaves at their high ends
     provisional: bool
     provisional_reasons: tuple
     swe_leaves: int
@@ -236,7 +241,9 @@ def summarize(observations: dict) -> QualitySummary:
     weighted = sum(leaf.weight * observations[leaf.key].z for leaf in observed)
     displayed = weighted / (100.0 * coverage) if coverage else None
     lower = sum(leaf.weight * observations[leaf.key].low for leaf in observed) / 100.0
-    upper = (sum(leaf.weight * observations[leaf.key].high for leaf in observed) + 100.0 * (100.0 - 100.0 * coverage)) / 100.0
+    # Reviewer 80 (E302): a missing leaf is bounded by its missing-evidence upper end, 100 except for O163's Bug Hunt count.
+    upper = (sum(leaf.weight * observations[leaf.key].high for leaf in observed)
+             + sum(leaf.weight * MISSING_UPPER.get(leaf.key, 100.0) for leaf in LEAVES if leaf.key not in observations)) / 100.0
     swe = [leaf for leaf in observed if leaf.group == "swe"]
     swe_weight = sum(leaf.weight for leaf in swe) / 100.0
     reasons = []

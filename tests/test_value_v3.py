@@ -186,6 +186,8 @@ def test_leaf_evidence_uses_exact_configurations_only():
         v.leaf_evidence("claude-opus-5-5", "max", model, tb4, {key: value for key, value in record.items() if key != "extras"})
     with pytest.raises(ValueError, match="carries no unplanted-fix count"):
         v.leaf_evidence("claude-opus-5-5", "max", model, tb4, {**record, "extras": None})
+    with pytest.raises(ValueError, match="exceeds the registered missing-evidence bound 210.0"):
+        v.leaf_evidence("claude-opus-5-5", "max", model, tb4, {**record, "fixedOf105": 105.0, "extras": 106.0})
     # O37: AA's own Terminal-Bench 4.0 run is the leaf; tbench.ai fills a gap only.
     assert observations["terminalBench"].z == 50.0
     assert observations["omniscience"].z == pytest.approx(65.0)
@@ -561,6 +563,7 @@ def test_scenarios_hash_attach_and_bar_labels():
     assert [run["stratum"] for run in document["results"]["api"]] == ["S0", "S1", "S2", "S1", "S1M", "S1T", "S1T"]
     assert document["results"]["api"][-1]["alternative"] is True  # O154: S1T's mean-preserving alternative
     shift = document["samplingMeanShift"]["frontierCode"]
+    assert shift["postClipRow"] in {"a", "b"} and isinstance(shift["maxPostClipShift"], float)  # E303
     assert shift["row"] in {"a", "b"} and 0.0 <= shift["clipRate"] <= 1.0
     # O39: S1T redraws every observed leaf with its task-sampling noise.
     sampled = {item.row: item for item in v.scenario_panel(result, "api", sampling=True)}
@@ -1627,7 +1630,8 @@ def test_observed_range_bars_bound_missing_leaves_by_the_cohort_range():
     ranges = v.leaf_ranges(result)
     assert set(ranges) == {leaf.key for leaf in q.LEAVES} and all(low <= high for low, high in ranges.values())
     unobserved = v.leaf_ranges({"rows": []})
-    assert set(unobserved.values()) == {(0.0, 100.0)}
+    # E302: an unobserved Bug Hunt leaf keeps its missing-evidence domain, [0, 210].
+    assert unobserved["bugHunt"] == (0.0, 210.0) and {value for key, value in unobserved.items() if key != "bugHunt"} == {(0.0, 100.0)}
     for row in result["rows"]:
         band = v.band_summary(row["summary"], ranges)
         assert row["summary"].lower - 1e-9 <= band.lower <= band.upper <= row["summary"].upper + 1e-9

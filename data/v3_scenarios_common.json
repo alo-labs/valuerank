@@ -18285,37 +18285,51 @@
     "automationBench": {
       "maxShift": 0.0576760071843605,
       "row": "gpt-6-luna-low",
-      "clipRate": 0.0
+      "clipRate": 0.0,
+      "maxPostClipShift": 0.10976042187293444,
+      "postClipRow": "gpt-6.1-sol-xhigh"
     },
     "critpt": {
       "maxShift": 0.9878048780487809,
       "row": "gpt-6-luna-low",
-      "clipRate": 0.0
+      "clipRate": 0.0,
+      "maxPostClipShift": -0.4404462118965604,
+      "postClipRow": "gpt-6-luna-high"
     },
     "frontierCode": {
       "maxShift": 0.35943267259056677,
       "row": "gpt-6-luna-low",
-      "clipRate": 0.00016666666666666666
+      "clipRate": 0.00016666666666666666,
+      "maxPostClipShift": -0.10524875809089806,
+      "postClipRow": "kimi-k3-1-pro"
     },
     "hle": {
       "maxShift": 0.039760239760241234,
       "row": "gpt-6-luna-low",
-      "clipRate": 0.0
+      "clipRate": 0.0,
+      "maxPostClipShift": -0.07021133340560226,
+      "postClipRow": "claude-opus-5-5-xhigh"
     },
     "lcr": {
       "maxShift": -0.35973597359735265,
       "row": "kimi-k3-1-pro",
-      "clipRate": 0.0
+      "clipRate": 0.0,
+      "maxPostClipShift": -0.23341465765454927,
+      "postClipRow": "gpt-6-luna-low"
     },
     "tbScience": {
       "maxShift": 0.6908115358819588,
       "row": "gpt-6-luna-low",
-      "clipRate": 0.019984848484848484
+      "clipRate": 0.019984848484848484,
+      "maxPostClipShift": 0.23389596982772787,
+      "postClipRow": "gpt-6-astra-high"
     },
     "terminalBench": {
       "maxShift": 0.746268656716418,
       "row": "gpt-6-luna-low",
-      "clipRate": 0.023090909090909092
+      "clipRate": 0.023090909090909092,
+      "maxPostClipShift": 0.3544098008180842,
+      "postClipRow": "gpt-6-luna-low"
     }
   },
   "namedBranches": [

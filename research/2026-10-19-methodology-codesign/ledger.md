@@ -2213,3 +2213,15 @@ Asked on I64 Q1 whether future O71 admissions should be executed by the build fr
 - E300. The ranked-family count is over the whole cohort's families, plotted and retained.
 - O163 (Bug Hunt score, owner directive 2026-11-01, followed by two questions): the Bug Hunt leaf is not the board's planted-only score. It is the sum of the planted bugs a model fixed and the genuine unplanted bugs it fixed (the board's "extras", verified by the blind judge; partial and claimed-only fixes are not counted), at equal weight, used as the leaf's score without rescaling. The owner chose the plain sum over a fixed 210 denominator, a cohort-best scale or a clip at 105. The per-run mean is taken for both counts, as the board publishes them.
 - E301. O163's implementation: the Bug Hunt leaf is planted + unplanted bugs fixed (no ceiling; `Observation.upper` is infinite for it); its S1T noise is the planted binomial plus a Poisson count of the unplanted fixes, and a count without that split (another party's fill) is one Poisson count; the cross-harness diagnostics use the sum; anchors and bars re-frozen as version a3 with an O12 dual run against a2.
+
+## Reviewer 80 (GPT-6.1 Sol, round 13, Thinking, whole draft r162; re-sent once)
+- Read checks: the first send stopped at its own read check (quotes shorter than twelve words); the re-send, asking for each part's final sentence, read all 14 parts to their ends at commit 07c82f1.
+- H1 (O163 not carried through the 0–100 leaf domains): verified (the composite's formal upper bound and the missing-leaf defaults still assumed 100); adopted as E302. Its owner question (is an unbounded contribution intended?) is answered by O163's plain sum; the remedy is domain propagation.
+- H2 (O157 breaks "API and Plan anchor availability cannot differ"): verified; adopted as E304. The freeze already stops when the main workload has fewer than two measured Plan references, so an atomic migration defers both bases; the draft now says so. Its owner question (defer both, or migrate API alone) is settled by keeping migration atomic, as E160 had it; the owner may override.
+- M1 (the O154 alternative is not mean-preserving after clipping): verified; adopted as E303 (renamed recentred alternative; its realised post-clip mean shift published).
+- M2 (separability threshold called a lower bound against part 1's hedge): adopted (the stronger claim removed).
+- L1 (stale current-state notes: Kimi K3.1 Pro and MiMo-V2.6-Pro "return", "first v5 capture", "since O136 retired FrontierCode's" offset): adopted. The semantic E265 checks it recommends are not adopted beyond these fixes: they need hand-written predicates per sentence class.
+- Round status (O56): not clean (Highs and Mediums).
+- E302. Bug Hunt's z is on [0, ∞) and its missing-evidence bound is [0, 210] (105 planted plus an equal unplanted allowance); the build stops on an observed total above 210.
+- E303. The recentred S1T alternative publishes its realised mean shift after clipping.
+- E304. A workload migration needs at least two complete-evidence API references and at least two measured Plan references; otherwise the freeze stops for both bases.

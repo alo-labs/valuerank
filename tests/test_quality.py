@@ -131,6 +131,13 @@ def test_summarize_renormalises_over_observed_leaves_and_bounds_missing_ones():
     assert summary.lower == pytest.approx((weighted - 8 * 1.0) / 100)
     assert summary.upper == pytest.approx((weighted + 8 * 1.0 + (5 / 3) * 100) / 100)
     assert summary.provisional is False
+    # E302: a missing Bug Hunt leaf is bounded by 210 (105 planted plus an equal unplanted allowance), not 100.
+    del observations["bugHunt"]
+    without = q.summarize(observations)
+    observed = sum(leaf.weight * observations[leaf.key].high for leaf in q.LEAVES if leaf.key in observations)
+    weight = next(leaf.weight for leaf in q.LEAVES if leaf.key == "bugHunt")
+    assert without.upper == pytest.approx((observed + weight * q.BUG_HUNT_MISSING_UPPER + (5 / 3) * 100) / 100)
+    assert q.BUG_HUNT_MISSING_UPPER == 210.0 and q.MISSING_UPPER == {"bugHunt": 210.0}
 
 
 def test_provisional_rule_reports_every_failed_condition():
@@ -159,7 +166,9 @@ def test_provisional_when_only_frontiercode_is_missing():
 def test_summarize_with_no_observations_has_no_displayed_quality():
     summary = q.summarize({})
     assert summary.displayed is None and summary.coverage == 0.0
-    assert (summary.lower, summary.upper) == (0.0, 100.0)
+    # E302: with Bug Hunt's missing-evidence bound at 210, the formal composite upper bound exceeds 100.
+    weight = next(leaf.weight for leaf in q.LEAVES if leaf.key == "bugHunt")
+    assert summary.lower == 0.0 and summary.upper == pytest.approx(100.0 + weight * (q.BUG_HUNT_MISSING_UPPER - 100.0) / 100.0)
 
 
 def test_summarize_rejects_unknown_leaves():
