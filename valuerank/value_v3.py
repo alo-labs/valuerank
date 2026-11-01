@@ -563,6 +563,11 @@ def configuration_family(configuration: dict) -> str:
     return configuration.get("family") or configuration["name"]
 
 
+# E318 (reviewer 84): the sibling screen compares AA's total Index cost, not this ranking's workload cost C_W or a Plan cost,
+# so every disclosure names its comparison object; a sibling dearer on the Index but cheaper on C_W cannot be named by it.
+SIBLING_BASIS = "lower AA total Index cost; workload- and Plan-cost ordering unverified (E318)"
+
+
 def cheaper_siblings(configuration: dict, page: dict, points: list[dict], ranked_efforts: set | frozenset = frozenset()) -> list[str]:
     """E201/O33: same-family configurations AA plots at a lower total Index cost that are not ranked (not plotted on or
     near the frontier with every leaf, O51); ``ranked_efforts`` are the efforts of the family's ranked configurations."""
@@ -579,6 +584,11 @@ def cheaper_siblings(configuration: dict, page: dict, points: list[dict], ranked
 COST_EVIDENCE_MAX_AGE_DAYS = 45
 PRICE_RECORD_MAX_AGE_DAYS = 7
 REPORT_SEARCH_MAX_AGE_DAYS = 7
+# O167 (2026-11-01, on reviewer 84): two clocks. The three-stage research (O71, O75 as amended by O164) runs per cell once a
+# month, so the latest all-provider three-stage search is at most a month old at the cutoff; the release-time clock (E218's
+# 7 days) is met by it or by a later all-provider freshness check, a single-stage search for limit, price and metering
+# changes. A change the check finds opens its provider's cells to a new three-stage search before the release.
+RESEARCH_MAX_AGE_DAYS = 31
 CAPTURE_GAP_MAX_DAYS = 7
 
 
@@ -635,7 +645,8 @@ def check_o71_search(policy: dict, providers: set[str] = frozenset()) -> None:
     """O71, O75, I61 L3: from O71 on, the all-provider search that sets the cutoff ran all three stages over every cohort
     provider's plans, and records each stage."""
 
-    entries = [entry for entry in policy.get("searchLog") or [] if entry.get("searchedOn") and not entry.get("singleProvider")]
+    entries = [entry for entry in policy.get("searchLog") or [] if entry.get("searchedOn") and not entry.get("singleProvider")
+               and not entry.get("freshnessCheck")]
     latest = max(entries, key=lambda entry: entry["searchedOn"], default=None)
     if latest is None or latest["searchedOn"] < O71_FROM:
         return
@@ -649,6 +660,28 @@ def check_o71_search(policy: dict, providers: set[str] = frozenset()) -> None:
 
 # Reviewer 74 M1: each first-party plan's seller, by the plan's name in plan_reports.json's listed plans.
 PLAN_SELLER = {"Claude": "Anthropic", "ChatGPT": "OpenAI", "Google AI": "Google", "MiMo": "Xiaomi", "Kimi": "Kimi", "MiniMax": "MiniMax"}
+
+
+def check_freshness(policy: dict, release_day: date) -> dict | None:
+    """O167: the monthly three-stage clock and the release-time freshness checks. Returns the clocks for publication."""
+
+    log = [entry for entry in policy.get("searchLog") or [] if entry.get("searchedOn")]
+    staged = [entry for entry in log if tuple(_stage_names(entry)) == O71_STAGES]
+    three_stage = max((entry["searchedOn"] for entry in staged if not entry.get("singleProvider")), default=None)
+    if three_stage is None or three_stage < O71_FROM:
+        return None
+    if (release_day - date.fromisoformat(three_stage)).days > RESEARCH_MAX_AGE_DAYS:
+        raise ValueError(f"the latest all-provider three-stage search, {three_stage}, is more than {RESEARCH_MAX_AGE_DAYS} days before the release cutoff {release_day} (O164, O167)")
+    checks = [entry for entry in log if entry.get("freshnessCheck")]
+    for check in checks:
+        for provider in sorted({change["provider"] for change in check.get("changesFound") or []}):
+            if not any(entry["searchedOn"] >= check["searchedOn"] and provider in (entry.get("providers") or []) for entry in staged):
+                raise ValueError(f"the freshness check of {check['searchedOn']} found a {provider} change with no three-stage search after it (O167)")
+    return {"threeStage": three_stage, "freshnessCheck": max((entry["searchedOn"] for entry in checks), default=None)}
+
+
+def _stage_names(entry: dict) -> list:
+    return [stage.get("stage") if isinstance(stage, dict) else stage for stage in entry.get("stages") or []]
 
 
 def plan_seller(plan: str) -> str | None:
@@ -893,6 +926,7 @@ def assemble(configurations: list[dict], documents: dict, *, release_day: date, 
     if searched and documents["planRoutes"].get("asOf") and documents["planRoutes"]["asOf"] != searched:
         raise ValueError(f"the route registry is dated {documents['planRoutes']['asOf']}, not its search cutoff {searched} (E218)")
     check_o71_search(policy, cohort_providers(configurations))
+    research_clocks = check_freshness(policy, release_day)
     research_coverage = None
     if any((entry.get("searchedOn") or "") >= O71_FROM for entry in policy.get("searchLog") or []):
         research_coverage = check_o71_coverage(policy, configurations, (documents.get("planReports") or {}).get("listedPlans") or {})
@@ -1036,6 +1070,7 @@ def assemble(configurations: list[dict], documents: dict, *, release_day: date, 
         "sourceClocks": clocks,
         "planAllowanceCells": allowance_cells,
         "planResearchCoverage": research_coverage,
+        "planResearchClocks": research_clocks,
         # O166: the previous release's published coverage for this ranking (None at the first v3 release).
         "previousRankingCoverage": documents.get("previousRankingCoverage"),
         # O144, O146: the route registry and its shared token mix, for the route brackets.
@@ -1747,6 +1782,7 @@ def _bar_results(boxes: list[intervals.Box], assembled: dict, frozen: dict) -> l
         if "possibleCheapest" in outcome:
             # E201/O33: cheaper plotted configurations of each candidate's family that are not ranked were not evaluated.
             outcome["uncheckedCheaperSiblings"] = {row_id: by_id[row_id].get("cheaperSiblings", []) for row_id in outcome["possibleCheapest"]}
+            outcome["uncheckedCheaperSiblingsBasis"] = SIBLING_BASIS
         results.append({"reference": bar, **outcome})
     return results
 
@@ -1785,6 +1821,7 @@ def displayed_cheapest(assembled: dict, frozen: dict, basis: str, margin: float 
         by_id = {row["id"]: row for row in rows}
         entry["uncheckedCheaperSiblings"] = {row_id.split("@")[0]: by_id[row_id].get("cheaperSiblings", []) for row_id in rows_at
                                              if by_id[row_id].get("cheaperSiblings")}
+        entry["uncheckedCheaperSiblingsBasis"] = SIBLING_BASIS
         if margin is not None:
             above, above_low, above_rows = cheapest(bar["level"] + margin)
             entry["margin"] = {"level": bar["level"] + margin, "qualifierN": len(above), "costUsd": above_low, "cheapest": above_rows}
@@ -2008,8 +2045,9 @@ def fallback_repricing(rows: list[dict], per_row: dict, anchors: dict | None, pr
 
 def gap_fill_bars(assembled: dict, frozen: dict, offset: float | None) -> dict:
     """E234 (as extended after I25): the displayed-record cheapest row at each frozen bar on both bases with the gap
-    fills as published, removed (the rest renormalised), and with each third-party fill lowered by the measured mean
-    offset; a sensitivity that changes no score and no label."""
+    fills as published, removed (the rest renormalised), and with each third-party fill moved onto AA's scale by subtracting
+    the signed measured mean offset (third party minus AA, so a negative offset raises the fill; E316: a signed correction,
+    not a downward stress); a sensitivity that changes no score and no label."""
 
     def variants(row: dict) -> dict:
         observations, filled = row["evidence"]["observations"], gap_filled_leaves(row)
@@ -2138,24 +2176,32 @@ def cost_removal(assembled: dict, frozen: dict, per_row: dict, component: str = 
     remaining = [item for item in assembled["admitted"] if item != component]
     workload = basket.workload_hash(remaining)
     rows = [row for row in assembled["rows"] if row["cost"]["workload"] == main]
+    by_id = {row["id"]: row for row in assembled["rows"]}
+    # E317 (reviewer 84): the recalibrated anchors read the registered anchor population on the reduced workload (E160, E184),
+    # and on the Plan basis its measured rows only (O157), never every row with a cost.
+    population = anchor_population(assembled, remaining)
     bases = {}
     for basis in BASES:
         costs = {row["id"]: basis_cost_on(row, remaining, basis) for row in assembled["rows"]}
         original = frozen["workloads"][main]["anchors"][basis]
-        rebuilt = anchor_math.anchor_object(costs, basis=basis, workload=workload)
         primary = {row["id"]: per_row[row["id"]][basis]["value"] for row in rows}
         fixed = {row["id"]: anchor_math.value_score(anchor_math.cost_score(costs[row["id"]], original), row["summary"].displayed, BETA) for row in rows}
-        recalibrated = {row["id"]: anchor_math.value_score(anchor_math.cost_score(costs[row["id"]], rebuilt), row["summary"].displayed, BETA) for row in rows}
+        references = {row_id: costs[row_id] for row_id in population if basis == "api" or plan_measured(by_id[row_id])}
         bases[basis] = {
             "multiplePolicy": FIXED_MULTIPLE_LABEL if basis == "plan" else None,
             "fixedAnchors": {"label": FIXED_ANCHOR_LABEL, "rankChanges": diagnostics.paired_rank_change(primary, fixed)},
-            "recalibrated": {
-                "label": RECALIBRATED_LABEL,
+            "recalibrated": {"label": RECALIBRATED_LABEL, "status": f"unavailable: fewer than {MIN_ANCHOR_REFERENCES} eligible references (E160, E184, O157)",
+                             "excluded": sorted(set(costs) - set(references))},
+        }
+        if len(references) >= MIN_ANCHOR_REFERENCES:
+            rebuilt = anchor_math.anchor_object(references, basis=basis, workload=workload)
+            recalibrated = {row["id"]: anchor_math.value_score(anchor_math.cost_score(costs[row["id"]], rebuilt), row["summary"].displayed, BETA) for row in rows}
+            bases[basis]["recalibrated"].update({
+                "status": "evaluated",
                 "anchors": {key: rebuilt[key] for key in ("low", "high", "referenceIds")},
                 "exchangeRate": anchor_math.exchange_rate(rebuilt, BETA),
                 "rankChanges": diagnostics.paired_rank_change(primary, recalibrated),
-            },
-        }
+            })
     return {
         "component": component,
         "status": "evaluated",
@@ -2811,6 +2857,7 @@ def score(assembled: dict, frozen: dict) -> dict:
         "sourceClocks": assembled.get("sourceClocks", []),
         "planAllowanceCells": assembled.get("planAllowanceCells", []),
         "planResearchCoverage": assembled.get("planResearchCoverage"),
+        "planResearchClocks": assembled.get("planResearchClocks"),
         "costInfluence": influence,
         "planRouteBrackets": brackets,
         "gates": {"clip": gates, "hold": hold, "listedBeyondAnchors": listed_beyond_anchors(assembled.get("listed", []), frozen),

@@ -2265,3 +2265,19 @@ Asked on I64 Q1 whether future O71 admissions should be executed by the build fr
 - E313. E273's shared-donor guard reads every row a decision reads, blockers included.
 - E314. Calendar-day ages are counts, not elapsed-time guarantees; an observation up to about 24 hours past a boundary can count in the lower stage.
 - E315. A bar's comparison is vacuous only when label-eligible and blocker qualifiers together number under two; both counts are published.
+
+## Owner decision O167 (2026-11-01), asked on reviewer 84
+- O167 (two research clocks, reconciling O164 with E218): the three-stage plan research stays monthly per cell (O164), and the latest all-provider three-stage search is at most 31 days before the release cutoff. The release-time 7-day gate (E218) is met by that search or by a later all-provider freshness check, a single plain web search for announced or reported changes to limits, prices and metering. A freshness check searches no end-user reports and moves no cell's report window (O161); a change it finds needs a three-stage search for its provider before the release.
+
+## Reviewer 84 (GLM 5.3, round 13, Thinking, seven two-part sections of r166)
+- Read checks: every part read to its end at commit 8e532e4. Parts 7–8 and 13–14: NO FURTHER FEEDBACK.
+- Parts 1–2 L1 (E234's "lowered by the offset" with a negative offset): adopted as E316; the code already subtracts the signed offset (third party minus AA), so the text and the generated labels now say "moved onto AA's scale by the signed offset". L2 (E240's "every cohort configuration is plotted"): adopted; the search population now names retained configurations (O145).
+- Parts 3–4 M (E210 set-identifies M_W from a token-meter bound alone): adopted as E319; E210 is inactive, so nothing changes in the build.
+- Parts 5–6 M (O164's monthly cadence against E218's 7-day gate): owner question; O167, implemented as check_freshness with the clocks published in scores.json `planResearchClocks`.
+- Parts 9–10 M (the recalibrated cost-removal anchors read every row with a cost): verified in code and adopted as E317; the rebuilt anchors now read the E160/E184 population on the reduced workload, measured rows only on Plan (O157), with the excluded ids and an "unavailable" status below two references. L (AI Coding Daily's "overstate"): adopted ("upper-bound").
+- Parts 11–12 M (the cheaper-sibling screen reads AA's total Index cost, not C_W): adopted in part as E318; each list now carries its comparison object, and the text says it cannot name a sibling dearer on the Index but cheaper on the workload. A workload-cost check for siblings is not built: an unranked sibling has no captured per-component cost, so no workload ordering can be evidenced.
+- Round status (O56): not clean (Mediums).
+- E316. The cross-source fill sensitivity moves a third-party fill onto AA's scale by subtracting the signed mean offset (third party minus AA); a negative offset raises the fill.
+- E317. The cost-removal branch rebuilds its anchors from the registered anchor population on the reduced workload (Plan: measured rows), or reports itself unavailable.
+- E318. The unevaluated-cheaper-sibling screen is an Index-cost pointer; each list names its comparison object.
+- E319. E210's category-mix bound is a token-meter bound; it set-identifies M_W only when the other evidenced constraints are shown not to bind on the target workload.

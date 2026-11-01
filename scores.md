@@ -697,7 +697,7 @@ The 90% rule's error bound holds per published event (candidate and kernel assig
 - **Rank separability (O39, independent-task approximation):** median separation 4.51 value points (API) and 4.54 (Plan); separable adjacent ranks: API 0 of 19, Plan 0 of 34. Assumptions: tasks are independent and each leaf's score is a mean over its published task count (a binomial leaf drawn from its Jeffreys posterior Beta(k + 1/2, n - k + 1/2), O142; plug-in SDs with the proportion (k + 1/2) / (n + 1), I28); attempts averaged within a task and tasks shared across models are ignored, so the noise is approximate; GDPval-AA: each row's rating interval as AA's model page displays it, read as a 95% normal interval (AA states no level), SD = half-width / 1.96; AA-Omniscience: each of 3,000 questions scores +1, 0 or -1, with the shares from AA's accuracy and hallucination rate; Vals boards (Vibe Code Bench v1.1, Code Migration v1.1): Vals' published standard error per record, read as the leaf's SD; AI Coding Daily: judged points over its six graded projects read as a binomial share of 60 points (an assumption; the board publishes no error).
 - **FrontierCode against Cognition:** FrontierCode 2.0 cross-source agreement (AA against Cognition, exact model and effort; E234, O153): Kendall tau 0.91 (interval 0.83 to 0.97) on 26 rows. Cognition minus AA: mean -1.5 points, largest 7.7.
 - **Gap-fill removal (E234, diagnostic):** no ranked row has a leaf from another party or the provider.
-- **Bar results without the gap fills (E234, sensitivity; labels unchanged):** cheapest displayed row as published, with fills removed, and with third-party fills lowered by the mean offset -1.5 points — API quality 47.5: GPT-6.1 Terra (high) in all three; API quality 38.0: Claude Haiku 5.5 (high) in all three; API quality 56.6: GPT-6.1 Sol (high) in all three; Plan quality 47.5: GPT-6.1 Terra (high) in all three; Plan quality 38.0: Claude Haiku 5.5 (high) in all three; Plan quality 56.6: Claude Opus 5.5 (high) in all three.
+- **Bar results without the gap fills (E234, sensitivity; labels unchanged):** cheapest displayed row as published, with fills removed, and with third-party fills third-party fills minus the signed mean offset -1.5 points (third party minus AA) — API quality 47.5: GPT-6.1 Terra (high) in all three; API quality 38.0: Claude Haiku 5.5 (high) in all three; API quality 56.6: GPT-6.1 Sol (high) in all three; Plan quality 47.5: GPT-6.1 Terra (high) in all three; Plan quality 38.0: Claude Haiku 5.5 (high) in all three; Plan quality 56.6: Claude Opus 5.5 (high) in all three.
 - **Harness cost (O123, S2 stress):** unevaluable: no model is listed under two or more agents in AA's Coding Agent Index capture, so no agent effect is identified (O123). Coding Agent Index agents (each part of its costed configuration; none is the run behind the FrontierCode or Terminal-Bench leaf): GPT-6.1 Terra (max): Codex; DeepSeek V4.1 Flash 1017 (max): DeepSeek Harness; Gemini 4 Argon (high): Antigravity CLI; GPT-6.1 Terra (xhigh): Codex; GPT-6.1 Terra (high): Codex; GPT-6 Luna (max): Codex; GPT-6.1 Terra (medium): Codex.
 - **Quality agreement:** quality agreement (matched-panel sensitivity): Kendall tau 0.64 (interval 0.42 to 0.84) on 20 rows.
 - **Quality-substitution value agreement (API):** quality-substitution value agreement, api basis (matched-panel sensitivity): Kendall tau 0.45 (interval 0.09 to 0.74) on 20 rows.
@@ -731,12 +731,12 @@ Each admitted basket unit removed in turn, scored on anchors rebuilt by the free
 
 | Removed component | API rank changes | Plan rank changes | API value points per cost doubling |
 |---|---|---|---:|
-| AA-Briefcase | 9 rows move; largest move 2 (Claude Opus 5.5 (high)) | 17 rows move; largest move 7 (GPT-6 Astra (high)) | 2.74 |
-| GDP.pdf | no rank changes | 18 rows move; largest move 6 (GPT-6 Astra (high), GPT-6 Luna (max)) | 2.69 |
-| AutomationBench-AA | 5 rows move; largest move 2 (GPT-6.1 Sol (low)) | 16 rows move; largest move 6 (GPT-6 Astra (high), GPT-6 Luna (max)) | 2.62 |
-| Terminal-Bench 4.0 (AA Index run) | 6 rows move; largest move 1 (Claude Opus 5.5 (high), Claude Opus 5.5 (medium), GPT-6.1 Sol (high), GPT-6.1 Terra (max), GPT-6.1 Terra (medium), MiMo-V2.6-Pro) | 18 rows move; largest move 7 (GPT-6 Astra (high)) | 2.71 |
-| FrontierCode 2.0 | 13 rows move; largest move 2 (Claude Opus 5.5 (medium)) | 18 rows move; largest move 7 (GPT-6 Astra (high)) | 2.80 |
-| Terminal-Bench-Science | 6 rows move; largest move 2 (Claude Opus 5.5 (high), GPT-6.1 Sol (low)) | 17 rows move; largest move 7 (GPT-6 Astra (high)) | 2.70 |
+| AA-Briefcase | 9 rows move; largest move 2 (Claude Opus 5.5 (high)) | 8 rows move; largest move 3 (Claude Opus 5.5 (medium), GPT-6.1 Terra (max)) | 2.74 |
+| GDP.pdf | no rank changes | 13 rows move; largest move 3 (GPT-6.1 Sol (low), GPT-6.1 Terra (xhigh)) | 2.69 |
+| AutomationBench-AA | 5 rows move; largest move 2 (GPT-6.1 Sol (low)) | 14 rows move; largest move 4 (GPT-6.1 Sol (low)) | 2.62 |
+| Terminal-Bench 4.0 (AA Index run) | 6 rows move; largest move 1 (Claude Opus 5.5 (high), Claude Opus 5.5 (medium), GPT-6.1 Sol (high), GPT-6.1 Terra (max), GPT-6.1 Terra (medium), MiMo-V2.6-Pro) | 11 rows move; largest move 3 (Claude Opus 5.5 (medium)) | 2.71 |
+| FrontierCode 2.0 | 13 rows move; largest move 2 (Claude Opus 5.5 (medium)) | 9 rows move; largest move 2 (Claude Opus 5.5 (high)) | 2.80 |
+| Terminal-Bench-Science | 6 rows move; largest move 2 (Claude Opus 5.5 (high), GPT-6.1 Sol (low)) | 8 rows move; largest move 2 (Claude Opus 5.5 (medium), GPT-6.1 Terra (max)) | 2.70 |
 
 ### Subset rows: paired bridge and missing spend (E10, E173)
 
@@ -767,7 +767,7 @@ No row is scored on a subset workload.
 | api | cost-component removal, original anchors | 6 rows move; largest move 1 (Claude Opus 5.5 (high), Claude Opus 5.5 (medium), GPT-6.1 Sol (high), GPT-6.1 Terra (max), GPT-6.1 Terra (medium), MiMo-V2.6-Pro) |
 | api | alternative workload, recalibrated anchors | 6 rows move; largest move 1 (Claude Opus 5.5 (high), Claude Opus 5.5 (medium), GPT-6.1 Sol (high), GPT-6.1 Terra (max), GPT-6.1 Terra (medium), MiMo-V2.6-Pro) |
 | plan | cost-component removal, original anchors; fixed-multiple arithmetic stress (not identified Plan economics for the altered workload) | 7 rows move; largest move 2 (GPT-6 Luna (max)) |
-| plan | alternative workload, recalibrated anchors; fixed-multiple arithmetic stress (not identified Plan economics for the altered workload) | 18 rows move; largest move 7 (GPT-6 Astra (high)) |
+| plan | alternative workload, recalibrated anchors; fixed-multiple arithmetic stress (not identified Plan economics for the altered workload) | 11 rows move; largest move 3 (Claude Opus 5.5 (medium)) |
 
 ### AI Coding Daily ranking: release gates
 
@@ -1712,7 +1712,7 @@ Plan streams S1, S2, S1 endpoint-heavy, S1M, S1T and S1T recentred run with owne
 - **Rank separability (O39, independent-task approximation):** median separation 3.77 value points (API) and 3.89 (Plan); separable adjacent ranks: API 0 of 32, Plan 1 of 49. Assumptions: tasks are independent and each leaf's score is a mean over its published task count (a binomial leaf drawn from its Jeffreys posterior Beta(k + 1/2, n - k + 1/2), O142; plug-in SDs with the proportion (k + 1/2) / (n + 1), I28); attempts averaged within a task and tasks shared across models are ignored, so the noise is approximate; GDPval-AA: each row's rating interval as AA's model page displays it, read as a 95% normal interval (AA states no level), SD = half-width / 1.96; AA-Omniscience: each of 3,000 questions scores +1, 0 or -1, with the shares from AA's accuracy and hallucination rate; Vals boards (Vibe Code Bench v1.1, Code Migration v1.1): Vals' published standard error per record, read as the leaf's SD; AI Coding Daily: judged points over its six graded projects read as a binomial share of 60 points (an assumption; the board publishes no error).
 - **FrontierCode against Cognition:** FrontierCode 2.0 cross-source agreement (AA against Cognition, exact model and effort; E234, O153): Kendall tau 0.91 (interval 0.83 to 0.97) on 26 rows. Cognition minus AA: mean -1.5 points, largest 7.7.
 - **Gap-fill removal (E234, diagnostic):** no ranked row has a leaf from another party or the provider.
-- **Bar results without the gap fills (E234, sensitivity; labels unchanged):** cheapest displayed row as published, with fills removed, and with third-party fills lowered by the mean offset -1.5 points — API quality 50.0: GPT-6.1 Sol (medium) in all three; API quality 35.0: GPT-6 Luna (max) in all three; API quality 58.0: GPT-6.1 Sol (xhigh) in all three; Plan quality 50.0: Claude Opus 5.5 (medium) in all three; Plan quality 35.0: Claude Haiku 5.5 (xhigh) in all three; Plan quality 58.0: GPT-6.1 Sol (xhigh) in all three.
+- **Bar results without the gap fills (E234, sensitivity; labels unchanged):** cheapest displayed row as published, with fills removed, and with third-party fills third-party fills minus the signed mean offset -1.5 points (third party minus AA) — API quality 50.0: GPT-6.1 Sol (medium) in all three; API quality 35.0: GPT-6 Luna (max) in all three; API quality 58.0: GPT-6.1 Sol (xhigh) in all three; Plan quality 50.0: Claude Opus 5.5 (medium) in all three; Plan quality 35.0: Claude Haiku 5.5 (xhigh) in all three; Plan quality 58.0: GPT-6.1 Sol (xhigh) in all three.
 - **Harness cost (O123, S2 stress):** unevaluable: no model is listed under two or more agents in AA's Coding Agent Index capture, so no agent effect is identified (O123). Coding Agent Index agents (each part of its costed configuration; none is the run behind the FrontierCode or Terminal-Bench leaf): GPT-6.1 Sol (max): Codex; GPT-6.1 Terra (max): Codex; Claude Opus 5.5 (max): Claude Code; Claude Sonnet 5.5 (max): Claude Code; GPT-6 Astra (max): Codex; DeepSeek V4.1 Flash 1017 (max): DeepSeek Harness; Gemini 4 Argon (high): Antigravity CLI; Claude Haiku 5.5 (max): Claude Code; GPT-6.1 Terra (xhigh): Codex; GPT-6.1 Terra (high): Codex; GPT-6 Luna (max): Codex; GPT-6.1 Terra (medium): Codex; GPT-6.1 Terra (low): Codex.
 - **Quality agreement:** quality agreement (matched-panel sensitivity): Kendall tau 0.76 (interval 0.64 to 0.86) on 33 rows.
 - **Quality-substitution value agreement (API):** quality-substitution value agreement, api basis (matched-panel sensitivity): Kendall tau 0.68 (interval 0.51 to 0.81) on 33 rows.
@@ -1746,12 +1746,12 @@ Each admitted basket unit removed in turn, scored on anchors rebuilt by the free
 
 | Removed component | API rank changes | Plan rank changes | API value points per cost doubling |
 |---|---|---|---:|
-| AA-Briefcase | 6 rows move; largest move 1 (Claude Haiku 5.5 (high), Gemini 4 Argon (high), GPT-6.1 Sol (low), GPT-6.1 Terra (low), GPT-6.1 Terra (medium), MiMo-V2.6-Pro) | 31 rows move; largest move 9 (Kimi K3.1 Pro (max)) | 2.19 |
-| GDP.pdf | 5 rows move; largest move 2 (GPT-6 Luna (low)) | 31 rows move; largest move 9 (Kimi K3.1 Pro (max)) | 2.07 |
-| AutomationBench-AA | 10 rows move; largest move 2 (Claude Haiku 5.5 (low), GPT-6 Luna (low)) | 29 rows move; largest move 8 (GPT-6 Astra (max), GPT-6 Astra (xhigh), Kimi K3.1 Pro (max)) | 1.99 |
-| Terminal-Bench 4.0 (AA Index run) | 4 rows move; largest move 1 (Claude Haiku 5.5 (high), Gemini 4 Argon (high), GPT-6.1 Terra (low), MiMo-V2.6-Pro) | 31 rows move; largest move 9 (Kimi K3.1 Pro (max)) | 2.14 |
-| FrontierCode 2.0 | 11 rows move; largest move 2 (GPT-6.1 Terra (high)) | 32 rows move; largest move 9 (Kimi K3.1 Pro (max)) | 2.16 |
-| Terminal-Bench-Science | 11 rows move; largest move 2 (GPT-6.1 Sol (low)) | 31 rows move; largest move 9 (GPT-6 Astra (max), Kimi K3.1 Pro (max)) | 2.16 |
+| AA-Briefcase | 6 rows move; largest move 1 (Claude Haiku 5.5 (high), Gemini 4 Argon (high), GPT-6.1 Sol (low), GPT-6.1 Terra (low), GPT-6.1 Terra (medium), MiMo-V2.6-Pro) | 24 rows move; largest move 3 (DeepSeek V4.1 Flash 1017 (max), GPT-6 Astra (max), GPT-6 Astra (high), GPT-6.1 Sol (medium)) | 2.21 |
+| GDP.pdf | 5 rows move; largest move 2 (GPT-6 Luna (low)) | 19 rows move; largest move 3 (Claude Haiku 5.5 (xhigh), DeepSeek V4.1 Flash 1017 (max), GPT-6 Astra (max), GPT-6 Astra (high)) | 2.08 |
+| AutomationBench-AA | 10 rows move; largest move 2 (Claude Haiku 5.5 (low), GPT-6 Luna (low)) | 22 rows move; largest move 6 (Claude Haiku 5.5 (max)) | 2.00 |
+| Terminal-Bench 4.0 (AA Index run) | 4 rows move; largest move 1 (Claude Haiku 5.5 (high), Gemini 4 Argon (high), GPT-6.1 Terra (low), MiMo-V2.6-Pro) | 18 rows move; largest move 4 (GPT-6 Astra (high)) | 2.16 |
+| FrontierCode 2.0 | 11 rows move; largest move 2 (GPT-6.1 Terra (high)) | 18 rows move; largest move 4 (GPT-6 Astra (max)) | 2.17 |
+| Terminal-Bench-Science | 13 rows move; largest move 2 (GPT-6.1 Sol (low)) | 23 rows move; largest move 4 (Claude Sonnet 5.5 (xhigh)) | 2.19 |
 
 ### Subset rows: paired bridge and missing spend (E10, E173)
 
@@ -1781,7 +1781,7 @@ No row is scored on a subset workload.
 | api | cost-component removal, original anchors | 4 rows move; largest move 1 (Claude Haiku 5.5 (high), Gemini 4 Argon (high), GPT-6.1 Terra (low), MiMo-V2.6-Pro) |
 | api | alternative workload, recalibrated anchors | 4 rows move; largest move 1 (Claude Haiku 5.5 (high), Gemini 4 Argon (high), GPT-6.1 Terra (low), MiMo-V2.6-Pro) |
 | plan | cost-component removal, original anchors; fixed-multiple arithmetic stress (not identified Plan economics for the altered workload) | 6 rows move; largest move 1 (Claude Haiku 5.5 (xhigh), Claude Haiku 5.5 (max), Claude Opus 5.5 (high), GPT-6 Astra (max), GPT-6.1 Sol (medium), GPT-6.1 Terra (medium)) |
-| plan | alternative workload, recalibrated anchors; fixed-multiple arithmetic stress (not identified Plan economics for the altered workload) | 31 rows move; largest move 9 (Kimi K3.1 Pro (max)) |
+| plan | alternative workload, recalibrated anchors; fixed-multiple arithmetic stress (not identified Plan economics for the altered workload) | 18 rows move; largest move 4 (GPT-6 Astra (high)) |
 
 ### Common-leaf ranking (diagnostic): release gates
 
@@ -2287,7 +2287,7 @@ The 90% rule's error bound holds per published event (candidate and kernel assig
 - **Rank separability (O39, independent-task approximation):** median separation 2.74 value points (API) and 2.77 (Plan); separable adjacent ranks: API 2 of 6, Plan 1 of 8. Assumptions: tasks are independent and each leaf's score is a mean over its published task count (a binomial leaf drawn from its Jeffreys posterior Beta(k + 1/2, n - k + 1/2), O142; plug-in SDs with the proportion (k + 1/2) / (n + 1), I28); attempts averaged within a task and tasks shared across models are ignored, so the noise is approximate; GDPval-AA: each row's rating interval as AA's model page displays it, read as a 95% normal interval (AA states no level), SD = half-width / 1.96; AA-Omniscience: each of 3,000 questions scores +1, 0 or -1, with the shares from AA's accuracy and hallucination rate; Vals boards (Vibe Code Bench v1.1, Code Migration v1.1): Vals' published standard error per record, read as the leaf's SD; AI Coding Daily: judged points over its six graded projects read as a binomial share of 60 points (an assumption; the board publishes no error).
 - **FrontierCode against Cognition:** FrontierCode 2.0 cross-source agreement (AA against Cognition, exact model and effort; E234, O153): Kendall tau 0.91 (interval 0.83 to 0.97) on 26 rows. Cognition minus AA: mean -1.5 points, largest 7.7.
 - **Gap-fill removal (E234, diagnostic):** no ranked row has a leaf from another party or the provider.
-- **Bar results without the gap fills (E234, sensitivity; labels unchanged):** cheapest displayed row as published, with fills removed, and with third-party fills lowered by the mean offset -1.5 points — API quality 62.1: GPT-6.1 Sol (max) in all three; API quality 49.9: DeepSeek V4.1 Flash 1017 (max) in all three; API quality 68.5: GPT-6.1 Sol (max) in all three; Plan quality 62.1: GPT-6.1 Sol (max) in all three; Plan quality 49.9: Claude Haiku 5.5 (max) in all three; Plan quality 68.5: GPT-6.1 Sol (max) in all three.
+- **Bar results without the gap fills (E234, sensitivity; labels unchanged):** cheapest displayed row as published, with fills removed, and with third-party fills third-party fills minus the signed mean offset -1.5 points (third party minus AA) — API quality 62.1: GPT-6.1 Sol (max) in all three; API quality 49.9: DeepSeek V4.1 Flash 1017 (max) in all three; API quality 68.5: GPT-6.1 Sol (max) in all three; Plan quality 62.1: GPT-6.1 Sol (max) in all three; Plan quality 49.9: Claude Haiku 5.5 (max) in all three; Plan quality 68.5: GPT-6.1 Sol (max) in all three.
 - **Harness cost (O123, S2 stress):** unevaluable: no model is listed under two or more agents in AA's Coding Agent Index capture, so no agent effect is identified (O123). Coding Agent Index agents (each part of its costed configuration; none is the run behind the FrontierCode or Terminal-Bench leaf): GPT-6.1 Sol (max): Codex; Claude Opus 5.5 (max): Claude Code; Claude Sonnet 5.5 (max): Claude Code; GPT-6 Astra (max): Codex; DeepSeek V4.1 Flash 1017 (max): DeepSeek Harness; Gemini 4 Argon (high): Antigravity CLI; Claude Haiku 5.5 (max): Claude Code; GPT-6 Luna (max): Codex.
 - **Quality agreement:** quality agreement (matched-panel sensitivity): Kendall tau 0.78 (interval 0.45 to 1.00) on 9 rows.
 - **Quality-substitution value agreement (API):** quality-substitution value agreement, api basis (matched-panel sensitivity): Kendall tau 0.83 (interval 0.31 to 1.00) on 9 rows.
@@ -2321,13 +2321,13 @@ Each admitted basket unit removed in turn, scored on anchors rebuilt by the free
 
 | Removed component | API rank changes | Plan rank changes | API value points per cost doubling |
 |---|---|---|---:|
-| Coding Agent Index | 3 rows move; largest move 2 (Claude Haiku 5.5 (max)) | 2 rows move; largest move 1 (Claude Haiku 5.5 (max), GPT-6 Astra (max)) | 3.14 |
-| AA-Briefcase | no rank changes | 2 rows move; largest move 1 (Claude Haiku 5.5 (max), GPT-6 Astra (max)) | 3.16 |
-| GDP.pdf | no rank changes | 2 rows move; largest move 1 (Claude Haiku 5.5 (max), GPT-6 Astra (max)) | 3.10 |
-| AutomationBench-AA | 2 rows move; largest move 1 (Claude Haiku 5.5 (max), Gemini 4 Argon (high)) | 2 rows move; largest move 1 (Claude Haiku 5.5 (max), GPT-6 Astra (max)) | 3.05 |
-| Terminal-Bench 4.0 (AA Index run) | no rank changes | 2 rows move; largest move 1 (Claude Haiku 5.5 (max), GPT-6 Astra (max)) | 3.10 |
-| FrontierCode 2.0 | 4 rows move; largest move 1 (Claude Haiku 5.5 (max), Claude Opus 5.5 (max), Claude Sonnet 5.5 (max), Gemini 4 Argon (high)) | 2 rows move; largest move 1 (Claude Haiku 5.5 (max), GPT-6 Astra (max)) | 3.11 |
-| Terminal-Bench-Science | 2 rows move; largest move 1 (Claude Haiku 5.5 (max), Gemini 4 Argon (high)) | 2 rows move; largest move 1 (Claude Haiku 5.5 (max), GPT-6 Astra (max)) | 3.07 |
+| Coding Agent Index | 3 rows move; largest move 2 (Claude Haiku 5.5 (max)) | 2 rows move; largest move 1 (GPT-6 Astra (max), GPT-6 Luna (max)) | 3.17 |
+| AA-Briefcase | no rank changes | 4 rows move; largest move 1 (Claude Opus 5.5 (max), Claude Sonnet 5.5 (max), GPT-6 Astra (max), GPT-6 Luna (max)) | 3.16 |
+| GDP.pdf | no rank changes | 2 rows move; largest move 1 (Claude Opus 5.5 (max), Claude Sonnet 5.5 (max)) | 3.10 |
+| AutomationBench-AA | 2 rows move; largest move 1 (Claude Haiku 5.5 (max), Gemini 4 Argon (high)) | 2 rows move; largest move 1 (Claude Opus 5.5 (max), Claude Sonnet 5.5 (max)) | 3.05 |
+| Terminal-Bench 4.0 (AA Index run) | no rank changes | 2 rows move; largest move 1 (GPT-6 Astra (max), GPT-6 Luna (max)) | 3.10 |
+| FrontierCode 2.0 | 4 rows move; largest move 1 (Claude Haiku 5.5 (max), Claude Opus 5.5 (max), Claude Sonnet 5.5 (max), Gemini 4 Argon (high)) | 2 rows move; largest move 1 (Claude Opus 5.5 (max), Claude Sonnet 5.5 (max)) | 3.11 |
+| Terminal-Bench-Science | 2 rows move; largest move 1 (Claude Haiku 5.5 (max), Gemini 4 Argon (high)) | no rank changes | 3.08 |
 
 ### Subset rows: paired bridge and missing spend (E10, E173)
 
@@ -2361,7 +2361,7 @@ Each admitted basket unit removed in turn, scored on anchors rebuilt by the free
 | api | cost-component removal, original anchors | no rank changes |
 | api | alternative workload, recalibrated anchors | no rank changes |
 | plan | cost-component removal, original anchors; fixed-multiple arithmetic stress (not identified Plan economics for the altered workload) | 2 rows move; largest move 1 (Claude Haiku 5.5 (max), GPT-6 Astra (max)) |
-| plan | alternative workload, recalibrated anchors; fixed-multiple arithmetic stress (not identified Plan economics for the altered workload) | 2 rows move; largest move 1 (Claude Haiku 5.5 (max), GPT-6 Astra (max)) |
+| plan | alternative workload, recalibrated anchors; fixed-multiple arithmetic stress (not identified Plan economics for the altered workload) | 2 rows move; largest move 1 (GPT-6 Astra (max), GPT-6 Luna (max)) |
 
 ## Release gates
 

@@ -1532,7 +1532,7 @@ def test_displayed_cheapest_reads_the_headline_scale_with_ties_listed():
     assert low["cheapest"] and low["qualifierN"] >= 1 and low["costUsd"] is not None
     # O143: the cheaper same-family efforts a bar's cheapest row has that the ranking could not evaluate, keyed by that row.
     assert set(low["uncheckedCheaperSiblings"]) <= {row_id.split("@")[0] for row_id in low["cheapest"]}
-    assert high == {"bar": "high", "level": 101.0, "qualifierN": 0, "costUsd": None, "cheapest": [], "uncheckedCheaperSiblings": {}}
+    assert high == {"bar": "high", "level": 101.0, "qualifierN": 0, "costUsd": None, "cheapest": [], "uncheckedCheaperSiblings": {}, "uncheckedCheaperSiblingsBasis": v.SIBLING_BASIS}
 
 
 def test_bar_currency_flags_a_headline_bar_outside_the_current_interquartile_range():
@@ -2718,3 +2718,38 @@ def test_a_qualifying_blocker_makes_a_comparison_substantive():
     bar = v.interval_outputs(result, frozen, "api")["bars"][0]
     assert bar["possibleQualifierN"] == 1 and bar["possibleBlockerQualifierN"] == 1
     assert bar["comparison"] == "compares 1 configurations that can qualify and 1 blocker(s) that can qualify but earn no label (E315)"
+
+
+def test_o167_two_research_clocks():
+    """O167: the three-stage search is at most a month old; a later freshness check meets E218's clock, and a change it finds
+    needs a three-stage search for its provider after it."""
+
+    stages = [{"stage": name, "record": "r", "outcome": "o"} for name in v.O71_STAGES]
+    monthly = {"searchedOn": "2026-10-25", "providers": ["Anthropic", "OpenAI"], "stages": stages}
+    check = {"searchedOn": "2026-11-20", "freshnessCheck": True, "providers": ["Anthropic", "OpenAI"], "stages": [{"stage": "plain web search"}]}
+    day = date(2026, 11, 25)
+    assert v.check_freshness({"searchLog": [monthly, check]}, day) == {"threeStage": "2026-10-25", "freshnessCheck": "2026-11-20"}
+    # The freshness check never sets the three-stage stage record, so check_o71_search still reads the monthly search.
+    v.check_o71_search({"searchLog": [monthly, check]}, {"Anthropic", "OpenAI"})
+    assert v.check_freshness({"searchLog": [monthly]}, date(2026, 11, 1)) == {"threeStage": "2026-10-25", "freshnessCheck": None}
+    assert v.check_freshness({"searchLog": [{"searchedOn": "2026-10-21", "stages": stages}]}, day) is None  # before O71
+    assert v.check_freshness({}, day) is None
+    with pytest.raises(ValueError, match="more than 31 days"):
+        v.check_freshness({"searchLog": [monthly]}, date(2026, 11, 26))
+    changed = {**check, "changesFound": [{"provider": "OpenAI", "kind": "limit"}]}
+    with pytest.raises(ValueError, match="found a OpenAI change with no three-stage search after it"):
+        v.check_freshness({"searchLog": [monthly, changed]}, day)
+    rerun = {"searchedOn": "2026-11-21", "singleProvider": True, "providers": ["OpenAI"], "stages": ["plain web search", "Claude's Deep Research", "Silver Bullet's Deep Research"]}
+    assert v.check_freshness({"searchLog": [monthly, changed, rerun]}, day)["freshnessCheck"] == "2026-11-20"
+
+
+def test_recalibrated_removal_anchors_read_the_eligible_population(monkeypatch):
+    """E317 (reviewer 84): the rebuilt anchors read the E160/E184 population, never every row with a cost."""
+
+    result, frozen = scored()
+    per_row = {row["id"]: {basis: {"value": 50.0} for basis in v.BASES} for row in result["rows"]}
+    evaluated = v.cost_removal(result, frozen, per_row)["bases"]["api"]["recalibrated"]
+    assert evaluated["status"] == "evaluated" and set(evaluated["anchors"]["referenceIds"]) <= set(v.anchor_population(result, result["admitted"]))
+    monkeypatch.setattr(v, "MIN_ANCHOR_REFERENCES", 99)
+    held = v.cost_removal(result, frozen, per_row)["bases"]["api"]["recalibrated"]
+    assert held["status"].startswith("unavailable: fewer than 99 eligible references") and "rankChanges" not in held

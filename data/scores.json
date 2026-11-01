@@ -12176,6 +12176,10 @@
       "cells": 48,
       "uncovered": []
     },
+    "planResearchClocks": {
+      "threeStage": "2026-10-25",
+      "freshnessCheck": null
+    },
     "costInfluence": {
       "api": {
         "commonWorkload": {
@@ -20849,6 +20853,7 @@
                 "GPT-6.1 Sol (low)"
               ]
             },
+            "uncheckedCheaperSiblingsBasis": "lower AA total Index cost; workload- and Plan-cost ordering unverified (E318)",
             "possibleBlockerQualifierN": 0,
             "possibleQualifierN": 4,
             "confirmedQualifierN": 3,
@@ -20916,6 +20921,7 @@
             "uncheckedCheaperSiblings": {
               "deepseek-v4-1-flash-1017": []
             },
+            "uncheckedCheaperSiblingsBasis": "lower AA total Index cost; workload- and Plan-cost ordering unverified (E318)",
             "possibleBlockerQualifierN": 1,
             "possibleQualifierN": 5,
             "confirmedQualifierN": 5,
@@ -20988,6 +20994,7 @@
                 "GPT-6.1 Sol (low)"
               ]
             },
+            "uncheckedCheaperSiblingsBasis": "lower AA total Index cost; workload- and Plan-cost ordering unverified (E318)",
             "possibleBlockerQualifierN": 0,
             "possibleQualifierN": 3,
             "confirmedQualifierN": 2,
@@ -21986,6 +21993,7 @@
                 "GPT-6.1 Sol (low)"
               ]
             },
+            "uncheckedCheaperSiblingsBasis": "lower AA total Index cost; workload- and Plan-cost ordering unverified (E318)",
             "margin": {
               "level": 65.74436072634694,
               "qualifierN": 4,
@@ -22004,6 +22012,7 @@
               "deepseek-v4-1-flash-1017"
             ],
             "uncheckedCheaperSiblings": {},
+            "uncheckedCheaperSiblingsBasis": "lower AA total Index cost; workload- and Plan-cost ordering unverified (E318)",
             "margin": {
               "level": 53.52432488247068,
               "qualifierN": 6,
@@ -22029,6 +22038,7 @@
                 "GPT-6.1 Sol (low)"
               ]
             },
+            "uncheckedCheaperSiblingsBasis": "lower AA total Index cost; workload- and Plan-cost ordering unverified (E318)",
             "margin": {
               "level": 72.17265221455803,
               "qualifierN": 0,
@@ -22058,6 +22068,7 @@
                 "GPT-6.1 Sol (low)"
               ]
             },
+            "uncheckedCheaperSiblingsBasis": "lower AA total Index cost; workload- and Plan-cost ordering unverified (E318)",
             "margin": {
               "level": 65.74436072634694,
               "qualifierN": 14,
@@ -22083,6 +22094,7 @@
                 "Claude Haiku 5.5 (low)"
               ]
             },
+            "uncheckedCheaperSiblingsBasis": "lower AA total Index cost; workload- and Plan-cost ordering unverified (E318)",
             "margin": {
               "level": 53.52432488247068,
               "qualifierN": 16,
@@ -22108,6 +22120,7 @@
                 "GPT-6.1 Sol (low)"
               ]
             },
+            "uncheckedCheaperSiblingsBasis": "lower AA total Index cost; workload- and Plan-cost ordering unverified (E318)",
             "margin": {
               "level": 72.17265221455803,
               "qualifierN": 0,
@@ -22458,6 +22471,7 @@
                   "GPT-6.1 Sol (low)"
                 ]
               },
+              "uncheckedCheaperSiblingsBasis": "lower AA total Index cost; workload- and Plan-cost ordering unverified (E318)",
               "possibleBlockerQualifierN": 0,
               "possibleQualifierN": 4,
               "confirmedQualifierN": 3,
@@ -22532,6 +22546,7 @@
               "uncheckedCheaperSiblings": {
                 "deepseek-v4-1-flash-1017": []
               },
+              "uncheckedCheaperSiblingsBasis": "lower AA total Index cost; workload- and Plan-cost ordering unverified (E318)",
               "possibleBlockerQualifierN": 1,
               "possibleQualifierN": 5,
               "confirmedQualifierN": 5,
@@ -22611,6 +22626,7 @@
                   "GPT-6.1 Sol (low)"
                 ]
               },
+              "uncheckedCheaperSiblingsBasis": "lower AA total Index cost; workload- and Plan-cost ordering unverified (E318)",
               "possibleBlockerQualifierN": 0,
               "possibleQualifierN": 3,
               "confirmedQualifierN": 2,
@@ -25419,12 +25435,16 @@
             },
             "recalibrated": {
               "label": "alternative workload, recalibrated anchors",
+              "status": "evaluated",
+              "excluded": [
+                "claude-opus-5-5",
+                "mimo-v2-6-pro"
+              ],
               "anchors": {
                 "low": 71.70072129857242,
                 "high": 19334.306223919342,
                 "referenceIds": [
                   "claude-haiku-5-5-max",
-                  "claude-opus-5-5",
                   "claude-sonnet-5-5",
                   "deepseek-v4-1-flash-1017",
                   "gemini-4-argon",
@@ -25497,24 +25517,28 @@
             },
             "recalibrated": {
               "label": "alternative workload, recalibrated anchors",
+              "status": "evaluated",
+              "excluded": [
+                "claude-haiku-5-5-max",
+                "claude-opus-5-5",
+                "claude-sonnet-5-5",
+                "deepseek-v4-1-flash-1017",
+                "gemini-4-argon",
+                "gpt-6-luna",
+                "mimo-v2-6-pro"
+              ],
               "anchors": {
-                "low": 6.656212523075791,
-                "high": 16378.624052885993,
+                "low": 58.79710004268084,
+                "high": 862.6185252719117,
                 "referenceIds": [
-                  "claude-haiku-5-5-max",
-                  "claude-opus-5-5",
-                  "claude-sonnet-5-5",
-                  "deepseek-v4-1-flash-1017",
-                  "gemini-4-argon",
                   "gpt-6-astra",
-                  "gpt-6-luna",
                   "gpt-6.1-sol"
                 ]
               },
               "exchangeRate": {
-                "valuePointsPerCostDoubling": 2.2192976721270234,
-                "qualityPointsPerCostDoubling": 2.959063562836031,
-                "anchorRatio": 2460.6522096619506
+                "valuePointsPerCostDoubling": 6.451769755251045,
+                "qualityPointsPerCostDoubling": 8.60235967366806,
+                "anchorRatio": 14.671106647194106
               },
               "rankChanges": {
                 "panel": [
@@ -25529,17 +25553,17 @@
                 ],
                 "excluded": [],
                 "changes": {
-                  "claude-haiku-5-5-max": 1,
+                  "claude-haiku-5-5-max": 0,
                   "claude-opus-5-5": 0,
                   "claude-sonnet-5-5": 0,
                   "deepseek-v4-1-flash-1017": 0,
                   "gemini-4-argon": 0,
-                  "gpt-6-astra": -1,
-                  "gpt-6-luna": 0,
+                  "gpt-6-astra": 1,
+                  "gpt-6-luna": -1,
                   "gpt-6.1-sol": 0
                 },
                 "maxAbsChange": 1,
-                "maxRow": "gpt-6-astra"
+                "maxRow": "gpt-6-luna"
               }
             }
           }
@@ -25595,12 +25619,15 @@
               },
               "recalibrated": {
                 "label": "alternative workload, recalibrated anchors",
+                "status": "evaluated",
+                "excluded": [
+                  "claude-opus-5-5"
+                ],
                 "anchors": {
                   "low": 56.41812348162761,
-                  "high": 14096.742207100357,
+                  "high": 13288.76172336006,
                   "referenceIds": [
                     "claude-haiku-5-5-max",
-                    "claude-opus-5-5",
                     "claude-sonnet-5-5",
                     "deepseek-v4-1-flash-1017",
                     "gemini-4-argon",
@@ -25611,9 +25638,9 @@
                   ]
                 },
                 "exchangeRate": {
-                  "valuePointsPerCostDoubling": 3.138736919906711,
-                  "qualityPointsPerCostDoubling": 4.184982559875615,
-                  "anchorRatio": 249.86194749442382
+                  "valuePointsPerCostDoubling": 3.1726563598962056,
+                  "qualityPointsPerCostDoubling": 4.2302084798616075,
+                  "anchorRatio": 235.54065437301375
                 },
                 "rankChanges": {
                   "panel": [
@@ -25674,25 +25701,28 @@
               },
               "recalibrated": {
                 "label": "alternative workload, recalibrated anchors",
+                "status": "evaluated",
+                "excluded": [
+                  "claude-haiku-5-5-max",
+                  "claude-opus-5-5",
+                  "claude-sonnet-5-5",
+                  "deepseek-v4-1-flash-1017",
+                  "gemini-4-argon",
+                  "gpt-6-luna",
+                  "mimo-v2-6-pro"
+                ],
                 "anchors": {
-                  "low": 2.2975698379883975,
-                  "high": 10957.36378067045,
+                  "low": 44.12745090381962,
+                  "high": 658.3230471842757,
                   "referenceIds": [
-                    "claude-haiku-5-5-max",
-                    "claude-opus-5-5",
-                    "claude-sonnet-5-5",
-                    "deepseek-v4-1-flash-1017",
-                    "gemini-4-argon",
                     "gpt-6-astra",
-                    "gpt-6-luna",
-                    "gpt-6.1-sol",
-                    "mimo-v2-6-pro"
+                    "gpt-6.1-sol"
                   ]
                 },
                 "exchangeRate": {
-                  "valuePointsPerCostDoubling": 2.0459094873812886,
-                  "qualityPointsPerCostDoubling": 2.727879316508385,
-                  "anchorRatio": 4769.110213539365
+                  "valuePointsPerCostDoubling": 6.411822554287206,
+                  "qualityPointsPerCostDoubling": 8.549096739049608,
+                  "anchorRatio": 14.918673834551635
                 },
                 "rankChanges": {
                   "panel": [
@@ -25707,17 +25737,17 @@
                   ],
                   "excluded": [],
                   "changes": {
-                    "claude-haiku-5-5-max": 1,
+                    "claude-haiku-5-5-max": 0,
                     "claude-opus-5-5": 0,
                     "claude-sonnet-5-5": 0,
                     "deepseek-v4-1-flash-1017": 0,
                     "gemini-4-argon": 0,
-                    "gpt-6-astra": -1,
-                    "gpt-6-luna": 0,
+                    "gpt-6-astra": 1,
+                    "gpt-6-luna": -1,
                     "gpt-6.1-sol": 0
                   },
                   "maxAbsChange": 1,
-                  "maxRow": "gpt-6-astra"
+                  "maxRow": "gpt-6-luna"
                 }
               }
             }
@@ -25772,12 +25802,16 @@
               },
               "recalibrated": {
                 "label": "alternative workload, recalibrated anchors",
+                "status": "evaluated",
+                "excluded": [
+                  "claude-opus-5-5",
+                  "mimo-v2-6-pro"
+                ],
                 "anchors": {
                   "low": 71.76104017882156,
                   "high": 17277.38506256655,
                   "referenceIds": [
                     "claude-haiku-5-5-max",
-                    "claude-opus-5-5",
                     "claude-sonnet-5-5",
                     "deepseek-v4-1-flash-1017",
                     "gemini-4-argon",
@@ -25850,24 +25884,28 @@
               },
               "recalibrated": {
                 "label": "alternative workload, recalibrated anchors",
+                "status": "evaluated",
+                "excluded": [
+                  "claude-haiku-5-5-max",
+                  "claude-opus-5-5",
+                  "claude-sonnet-5-5",
+                  "deepseek-v4-1-flash-1017",
+                  "gemini-4-argon",
+                  "gpt-6-luna",
+                  "mimo-v2-6-pro"
+                ],
                 "anchors": {
-                  "low": 6.661812122059187,
-                  "high": 16093.075809086622,
+                  "low": 54.612897283015116,
+                  "high": 820.669785040213,
                   "referenceIds": [
-                    "claude-haiku-5-5-max",
-                    "claude-opus-5-5",
-                    "claude-sonnet-5-5",
-                    "deepseek-v4-1-flash-1017",
-                    "gemini-4-argon",
                     "gpt-6-astra",
-                    "gpt-6-luna",
                     "gpt-6.1-sol"
                   ]
                 },
                 "exchangeRate": {
-                  "valuePointsPerCostDoubling": 2.2245480511833193,
-                  "qualityPointsPerCostDoubling": 2.966064068244426,
-                  "anchorRatio": 2415.720454769025
+                  "valuePointsPerCostDoubling": 6.394698866761709,
+                  "qualityPointsPerCostDoubling": 8.526265155682278,
+                  "anchorRatio": 15.02703254850838
                 },
                 "rankChanges": {
                   "panel": [
@@ -25882,17 +25920,17 @@
                   ],
                   "excluded": [],
                   "changes": {
-                    "claude-haiku-5-5-max": 1,
-                    "claude-opus-5-5": 0,
-                    "claude-sonnet-5-5": 0,
+                    "claude-haiku-5-5-max": 0,
+                    "claude-opus-5-5": -1,
+                    "claude-sonnet-5-5": 1,
                     "deepseek-v4-1-flash-1017": 0,
                     "gemini-4-argon": 0,
-                    "gpt-6-astra": -1,
-                    "gpt-6-luna": 0,
+                    "gpt-6-astra": 1,
+                    "gpt-6-luna": -1,
                     "gpt-6.1-sol": 0
                   },
                   "maxAbsChange": 1,
-                  "maxRow": "gpt-6-astra"
+                  "maxRow": "gpt-6-luna"
                 }
               }
             }
@@ -25947,12 +25985,16 @@
               },
               "recalibrated": {
                 "label": "alternative workload, recalibrated anchors",
+                "status": "evaluated",
+                "excluded": [
+                  "claude-opus-5-5",
+                  "mimo-v2-6-pro"
+                ],
                 "anchors": {
                   "low": 78.06832634912558,
                   "high": 20844.770932217205,
                   "referenceIds": [
                     "claude-haiku-5-5-max",
-                    "claude-opus-5-5",
                     "claude-sonnet-5-5",
                     "deepseek-v4-1-flash-1017",
                     "gemini-4-argon",
@@ -26025,24 +26067,28 @@
               },
               "recalibrated": {
                 "label": "alternative workload, recalibrated anchors",
+                "status": "evaluated",
+                "excluded": [
+                  "claude-haiku-5-5-max",
+                  "claude-opus-5-5",
+                  "claude-sonnet-5-5",
+                  "deepseek-v4-1-flash-1017",
+                  "gemini-4-argon",
+                  "gpt-6-luna",
+                  "mimo-v2-6-pro"
+                ],
                 "anchors": {
-                  "low": 7.247338131185071,
-                  "high": 17658.1119044557,
+                  "low": 62.43225342556934,
+                  "high": 911.3991694061456,
                   "referenceIds": [
-                    "claude-haiku-5-5-max",
-                    "claude-opus-5-5",
-                    "claude-sonnet-5-5",
-                    "deepseek-v4-1-flash-1017",
-                    "gemini-4-argon",
                     "gpt-6-astra",
-                    "gpt-6-luna",
                     "gpt-6.1-sol"
                   ]
                 },
                 "exchangeRate": {
-                  "valuePointsPerCostDoubling": 2.2221052379001986,
-                  "qualityPointsPerCostDoubling": 2.9628069838669315,
-                  "anchorRatio": 2436.4962121021226
+                  "valuePointsPerCostDoubling": 6.463757074417577,
+                  "qualityPointsPerCostDoubling": 8.618342765890104,
+                  "anchorRatio": 14.59821037042496
                 },
                 "rankChanges": {
                   "panel": [
@@ -26057,17 +26103,17 @@
                   ],
                   "excluded": [],
                   "changes": {
-                    "claude-haiku-5-5-max": 1,
-                    "claude-opus-5-5": 0,
-                    "claude-sonnet-5-5": 0,
+                    "claude-haiku-5-5-max": 0,
+                    "claude-opus-5-5": -1,
+                    "claude-sonnet-5-5": 1,
                     "deepseek-v4-1-flash-1017": 0,
                     "gemini-4-argon": 0,
-                    "gpt-6-astra": -1,
+                    "gpt-6-astra": 0,
                     "gpt-6-luna": 0,
                     "gpt-6.1-sol": 0
                   },
                   "maxAbsChange": 1,
-                  "maxRow": "gpt-6-astra"
+                  "maxRow": "claude-sonnet-5-5"
                 }
               }
             }
@@ -26122,12 +26168,16 @@
               },
               "recalibrated": {
                 "label": "alternative workload, recalibrated anchors",
+                "status": "evaluated",
+                "excluded": [
+                  "claude-opus-5-5",
+                  "mimo-v2-6-pro"
+                ],
                 "anchors": {
                   "low": 67.53839635700825,
                   "high": 19647.005100466475,
                   "referenceIds": [
                     "claude-haiku-5-5-max",
-                    "claude-opus-5-5",
                     "claude-sonnet-5-5",
                     "deepseek-v4-1-flash-1017",
                     "gemini-4-argon",
@@ -26200,24 +26250,28 @@
               },
               "recalibrated": {
                 "label": "alternative workload, recalibrated anchors",
+                "status": "evaluated",
+                "excluded": [
+                  "claude-haiku-5-5-max",
+                  "claude-opus-5-5",
+                  "claude-sonnet-5-5",
+                  "deepseek-v4-1-flash-1017",
+                  "gemini-4-argon",
+                  "gpt-6-luna",
+                  "mimo-v2-6-pro"
+                ],
                 "anchors": {
-                  "low": 6.269810281935412,
-                  "high": 16285.63479707568,
+                  "low": 55.32940540478477,
+                  "high": 795.3174188479805,
                   "referenceIds": [
-                    "claude-haiku-5-5-max",
-                    "claude-opus-5-5",
-                    "claude-sonnet-5-5",
-                    "deepseek-v4-1-flash-1017",
-                    "gemini-4-argon",
                     "gpt-6-astra",
-                    "gpt-6-luna",
                     "gpt-6.1-sol"
                   ]
                 },
                 "exchangeRate": {
-                  "valuePointsPerCostDoubling": 2.2040237361709383,
-                  "qualityPointsPerCostDoubling": 2.938698314894584,
-                  "anchorRatio": 2597.4685141586947
+                  "valuePointsPerCostDoubling": 6.501253211697954,
+                  "qualityPointsPerCostDoubling": 8.668337615597272,
+                  "anchorRatio": 14.374226743076534
                 },
                 "rankChanges": {
                   "panel": [
@@ -26232,17 +26286,17 @@
                   ],
                   "excluded": [],
                   "changes": {
-                    "claude-haiku-5-5-max": 1,
-                    "claude-opus-5-5": 0,
-                    "claude-sonnet-5-5": 0,
+                    "claude-haiku-5-5-max": 0,
+                    "claude-opus-5-5": -1,
+                    "claude-sonnet-5-5": 1,
                     "deepseek-v4-1-flash-1017": 0,
                     "gemini-4-argon": 0,
-                    "gpt-6-astra": -1,
+                    "gpt-6-astra": 0,
                     "gpt-6-luna": 0,
                     "gpt-6.1-sol": 0
                   },
                   "maxAbsChange": 1,
-                  "maxRow": "gpt-6-astra"
+                  "maxRow": "claude-sonnet-5-5"
                 }
               }
             }
@@ -26297,12 +26351,16 @@
               },
               "recalibrated": {
                 "label": "alternative workload, recalibrated anchors",
+                "status": "evaluated",
+                "excluded": [
+                  "claude-opus-5-5",
+                  "mimo-v2-6-pro"
+                ],
                 "anchors": {
                   "low": 71.70072129857242,
                   "high": 19334.306223919342,
                   "referenceIds": [
                     "claude-haiku-5-5-max",
-                    "claude-opus-5-5",
                     "claude-sonnet-5-5",
                     "deepseek-v4-1-flash-1017",
                     "gemini-4-argon",
@@ -26375,24 +26433,28 @@
               },
               "recalibrated": {
                 "label": "alternative workload, recalibrated anchors",
+                "status": "evaluated",
+                "excluded": [
+                  "claude-haiku-5-5-max",
+                  "claude-opus-5-5",
+                  "claude-sonnet-5-5",
+                  "deepseek-v4-1-flash-1017",
+                  "gemini-4-argon",
+                  "gpt-6-luna",
+                  "mimo-v2-6-pro"
+                ],
                 "anchors": {
-                  "low": 6.656212523075791,
-                  "high": 16378.624052885993,
+                  "low": 58.79710004268084,
+                  "high": 862.6185252719117,
                   "referenceIds": [
-                    "claude-haiku-5-5-max",
-                    "claude-opus-5-5",
-                    "claude-sonnet-5-5",
-                    "deepseek-v4-1-flash-1017",
-                    "gemini-4-argon",
                     "gpt-6-astra",
-                    "gpt-6-luna",
                     "gpt-6.1-sol"
                   ]
                 },
                 "exchangeRate": {
-                  "valuePointsPerCostDoubling": 2.2192976721270234,
-                  "qualityPointsPerCostDoubling": 2.959063562836031,
-                  "anchorRatio": 2460.6522096619506
+                  "valuePointsPerCostDoubling": 6.451769755251045,
+                  "qualityPointsPerCostDoubling": 8.60235967366806,
+                  "anchorRatio": 14.671106647194106
                 },
                 "rankChanges": {
                   "panel": [
@@ -26407,17 +26469,17 @@
                   ],
                   "excluded": [],
                   "changes": {
-                    "claude-haiku-5-5-max": 1,
+                    "claude-haiku-5-5-max": 0,
                     "claude-opus-5-5": 0,
                     "claude-sonnet-5-5": 0,
                     "deepseek-v4-1-flash-1017": 0,
                     "gemini-4-argon": 0,
-                    "gpt-6-astra": -1,
-                    "gpt-6-luna": 0,
+                    "gpt-6-astra": 1,
+                    "gpt-6-luna": -1,
                     "gpt-6.1-sol": 0
                   },
                   "maxAbsChange": 1,
-                  "maxRow": "gpt-6-astra"
+                  "maxRow": "gpt-6-luna"
                 }
               }
             }
@@ -26472,12 +26534,16 @@
               },
               "recalibrated": {
                 "label": "alternative workload, recalibrated anchors",
+                "status": "evaluated",
+                "excluded": [
+                  "claude-opus-5-5",
+                  "mimo-v2-6-pro"
+                ],
                 "anchors": {
                   "low": 67.88473687282695,
                   "high": 17952.45224497177,
                   "referenceIds": [
                     "claude-haiku-5-5-max",
-                    "claude-opus-5-5",
                     "claude-sonnet-5-5",
                     "deepseek-v4-1-flash-1017",
                     "gemini-4-argon",
@@ -26550,24 +26616,28 @@
               },
               "recalibrated": {
                 "label": "alternative workload, recalibrated anchors",
+                "status": "evaluated",
+                "excluded": [
+                  "claude-haiku-5-5-max",
+                  "claude-opus-5-5",
+                  "claude-sonnet-5-5",
+                  "deepseek-v4-1-flash-1017",
+                  "gemini-4-argon",
+                  "gpt-6-luna",
+                  "mimo-v2-6-pro"
+                ],
                 "anchors": {
-                  "low": 6.301962205052631,
-                  "high": 14054.1560205361,
+                  "low": 57.45529870113207,
+                  "high": 820.8869792182549,
                   "referenceIds": [
-                    "claude-haiku-5-5-max",
-                    "claude-opus-5-5",
-                    "claude-sonnet-5-5",
-                    "deepseek-v4-1-flash-1017",
-                    "gemini-4-argon",
                     "gpt-6-astra",
-                    "gpt-6-luna",
                     "gpt-6.1-sol"
                   ]
                 },
                 "exchangeRate": {
-                  "valuePointsPerCostDoubling": 2.2476136439885734,
-                  "qualityPointsPerCostDoubling": 2.9968181919847647,
-                  "anchorRatio": 2230.123819096869
+                  "valuePointsPerCostDoubling": 6.516064347093317,
+                  "qualityPointsPerCostDoubling": 8.688085796124422,
+                  "anchorRatio": 14.28740251596813
                 },
                 "rankChanges": {
                   "panel": [
@@ -26582,17 +26652,17 @@
                   ],
                   "excluded": [],
                   "changes": {
-                    "claude-haiku-5-5-max": 1,
-                    "claude-opus-5-5": 0,
-                    "claude-sonnet-5-5": 0,
+                    "claude-haiku-5-5-max": 0,
+                    "claude-opus-5-5": -1,
+                    "claude-sonnet-5-5": 1,
                     "deepseek-v4-1-flash-1017": 0,
                     "gemini-4-argon": 0,
-                    "gpt-6-astra": -1,
+                    "gpt-6-astra": 0,
                     "gpt-6-luna": 0,
                     "gpt-6.1-sol": 0
                   },
                   "maxAbsChange": 1,
-                  "maxRow": "gpt-6-astra"
+                  "maxRow": "claude-sonnet-5-5"
                 }
               }
             }
@@ -26647,12 +26717,16 @@
               },
               "recalibrated": {
                 "label": "alternative workload, recalibrated anchors",
+                "status": "evaluated",
+                "excluded": [
+                  "claude-opus-5-5",
+                  "mimo-v2-6-pro"
+                ],
                 "anchors": {
                   "low": 63.602732756771175,
-                  "high": 17925.982167738683,
+                  "high": 17677.137809801825,
                   "referenceIds": [
                     "claude-haiku-5-5-max",
-                    "claude-opus-5-5",
                     "claude-sonnet-5-5",
                     "deepseek-v4-1-flash-1017",
                     "gemini-4-argon",
@@ -26662,9 +26736,9 @@
                   ]
                 },
                 "exchangeRate": {
-                  "valuePointsPerCostDoubling": 3.071725642448549,
-                  "qualityPointsPerCostDoubling": 4.095634189931398,
-                  "anchorRatio": 281.84295533795716
+                  "valuePointsPerCostDoubling": 3.079356154518619,
+                  "qualityPointsPerCostDoubling": 4.105808206024825,
+                  "anchorRatio": 277.93047631149005
                 },
                 "rankChanges": {
                   "panel": [
@@ -26725,24 +26799,28 @@
               },
               "recalibrated": {
                 "label": "alternative workload, recalibrated anchors",
+                "status": "evaluated",
+                "excluded": [
+                  "claude-haiku-5-5-max",
+                  "claude-opus-5-5",
+                  "claude-sonnet-5-5",
+                  "deepseek-v4-1-flash-1017",
+                  "gemini-4-argon",
+                  "gpt-6-luna",
+                  "mimo-v2-6-pro"
+                ],
                 "anchors": {
-                  "low": 5.904449754620421,
-                  "high": 15144.10037402366,
+                  "low": 53.53238735089924,
+                  "high": 771.1500493555617,
                   "referenceIds": [
-                    "claude-haiku-5-5-max",
-                    "claude-opus-5-5",
-                    "claude-sonnet-5-5",
-                    "deepseek-v4-1-flash-1017",
-                    "gemini-4-argon",
                     "gpt-6-astra",
-                    "gpt-6-luna",
                     "gpt-6.1-sol"
                   ]
                 },
                 "exchangeRate": {
-                  "valuePointsPerCostDoubling": 2.2075706954022922,
-                  "qualityPointsPerCostDoubling": 2.943427593869723,
-                  "anchorRatio": 2564.8622654757824
+                  "valuePointsPerCostDoubling": 6.495990649818112,
+                  "qualityPointsPerCostDoubling": 8.66132086642415,
+                  "anchorRatio": 14.40529906317746
                 },
                 "rankChanges": {
                   "panel": [
@@ -26757,17 +26835,17 @@
                   ],
                   "excluded": [],
                   "changes": {
-                    "claude-haiku-5-5-max": 1,
+                    "claude-haiku-5-5-max": 0,
                     "claude-opus-5-5": 0,
                     "claude-sonnet-5-5": 0,
                     "deepseek-v4-1-flash-1017": 0,
                     "gemini-4-argon": 0,
-                    "gpt-6-astra": -1,
+                    "gpt-6-astra": 0,
                     "gpt-6-luna": 0,
                     "gpt-6.1-sol": 0
                   },
-                  "maxAbsChange": 1,
-                  "maxRow": "gpt-6-astra"
+                  "maxAbsChange": 0,
+                  "maxRow": "gpt-6.1-sol"
                 }
               }
             }
@@ -26965,6 +27043,7 @@
                 "GPT-6.1 Sol (low)"
               ]
             },
+            "uncheckedCheaperSiblingsBasis": "lower AA total Index cost; workload- and Plan-cost ordering unverified (E318)",
             "possibleBlockerQualifierN": 0,
             "possibleQualifierN": 3,
             "confirmedQualifierN": 2,
@@ -38211,6 +38290,10 @@
       "planResearchCoverage": {
         "cells": 48,
         "uncovered": []
+      },
+      "planResearchClocks": {
+        "threeStage": "2026-10-25",
+        "freshnessCheck": null
       },
       "costInfluence": {
         "api": {
@@ -55171,6 +55254,7 @@
                   "GPT-6.1 Terra (low)"
                 ]
               },
+              "uncheckedCheaperSiblingsBasis": "lower AA total Index cost; workload- and Plan-cost ordering unverified (E318)",
               "possibleBlockerQualifierN": 0,
               "possibleQualifierN": 9,
               "confirmedQualifierN": 8,
@@ -55314,6 +55398,7 @@
                   "GPT-6 Luna (non-reasoning)"
                 ]
               },
+              "uncheckedCheaperSiblingsBasis": "lower AA total Index cost; workload- and Plan-cost ordering unverified (E318)",
               "possibleBlockerQualifierN": 1,
               "possibleQualifierN": 13,
               "confirmedQualifierN": 13,
@@ -55454,6 +55539,7 @@
               "uncheckedCheaperSiblings": {
                 "gpt-6.1-sol-high": []
               },
+              "uncheckedCheaperSiblingsBasis": "lower AA total Index cost; workload- and Plan-cost ordering unverified (E318)",
               "possibleBlockerQualifierN": 0,
               "possibleQualifierN": 5,
               "confirmedQualifierN": 4,
@@ -56071,6 +56157,7 @@
                   "GPT-6.1 Terra (low)"
                 ]
               },
+              "uncheckedCheaperSiblingsBasis": "lower AA total Index cost; workload- and Plan-cost ordering unverified (E318)",
               "margin": {
                 "level": 53.45865621462023,
                 "qualifierN": 9,
@@ -56093,6 +56180,7 @@
                   "Claude Haiku 5.5 (low)"
                 ]
               },
+              "uncheckedCheaperSiblingsBasis": "lower AA total Index cost; workload- and Plan-cost ordering unverified (E318)",
               "margin": {
                 "level": 43.89931699243325,
                 "qualifierN": 13,
@@ -56111,6 +56199,7 @@
                 "gpt-6.1-sol-high"
               ],
               "uncheckedCheaperSiblings": {},
+              "uncheckedCheaperSiblingsBasis": "lower AA total Index cost; workload- and Plan-cost ordering unverified (E318)",
               "margin": {
                 "level": 62.519139593376195,
                 "qualifierN": 0,
@@ -56138,6 +56227,7 @@
                   "GPT-6.1 Terra (low)"
                 ]
               },
+              "uncheckedCheaperSiblingsBasis": "lower AA total Index cost; workload- and Plan-cost ordering unverified (E318)",
               "margin": {
                 "level": 53.45865621462023,
                 "qualifierN": 25,
@@ -56160,6 +56250,7 @@
                   "Claude Haiku 5.5 (low)"
                 ]
               },
+              "uncheckedCheaperSiblingsBasis": "lower AA total Index cost; workload- and Plan-cost ordering unverified (E318)",
               "margin": {
                 "level": 43.89931699243325,
                 "qualifierN": 41,
@@ -56182,6 +56273,7 @@
                   "Claude Opus 5.5 (low with fallback)"
                 ]
               },
+              "uncheckedCheaperSiblingsBasis": "lower AA total Index cost; workload- and Plan-cost ordering unverified (E318)",
               "margin": {
                 "level": 62.519139593376195,
                 "qualifierN": 0,
@@ -60264,14 +60356,17 @@
               },
               "recalibrated": {
                 "label": "alternative workload, recalibrated anchors",
+                "status": "evaluated",
+                "excluded": [
+                  "claude-opus-5-5-high",
+                  "claude-opus-5-5-medium"
+                ],
                 "anchors": {
                   "low": 15.899914991088545,
                   "high": 9574.143377100741,
                   "referenceIds": [
                     "claude-haiku-5-5-high",
                     "claude-haiku-5-5-medium",
-                    "claude-opus-5-5-high",
-                    "claude-opus-5-5-medium",
                     "deepseek-v4-1-flash-1017",
                     "gemini-4-argon",
                     "gpt-6-astra-high",
@@ -60402,36 +60497,39 @@
               },
               "recalibrated": {
                 "label": "alternative workload, recalibrated anchors",
+                "status": "evaluated",
+                "excluded": [
+                  "claude-haiku-5-5-high",
+                  "claude-haiku-5-5-medium",
+                  "claude-opus-5-5-high",
+                  "claude-opus-5-5-medium",
+                  "deepseek-v4-1-flash-1017",
+                  "gemini-4-argon",
+                  "gpt-6-luna",
+                  "gpt-6-luna-high",
+                  "gpt-6-luna-medium",
+                  "gpt-6-luna-xhigh",
+                  "gpt-6.1-terra",
+                  "gpt-6.1-terra-high",
+                  "gpt-6.1-terra-medium",
+                  "gpt-6.1-terra-xhigh",
+                  "kimi-k3-1-pro",
+                  "mimo-v2-6-pro"
+                ],
                 "anchors": {
-                  "low": 0.45840218156165913,
-                  "high": 9574.143377100741,
+                  "low": 9.180751737907157,
+                  "high": 354.4355309201658,
                   "referenceIds": [
-                    "claude-haiku-5-5-high",
-                    "claude-haiku-5-5-medium",
-                    "claude-opus-5-5-high",
-                    "claude-opus-5-5-medium",
-                    "deepseek-v4-1-flash-1017",
-                    "gemini-4-argon",
                     "gpt-6-astra-high",
-                    "gpt-6-luna",
-                    "gpt-6-luna-high",
-                    "gpt-6-luna-medium",
-                    "gpt-6-luna-xhigh",
                     "gpt-6.1-sol-high",
                     "gpt-6.1-sol-low",
-                    "gpt-6.1-sol-medium",
-                    "gpt-6.1-terra",
-                    "gpt-6.1-terra-high",
-                    "gpt-6.1-terra-medium",
-                    "gpt-6.1-terra-xhigh",
-                    "kimi-k3-1-pro",
-                    "mimo-v2-6-pro"
+                    "gpt-6.1-sol-medium"
                   ]
                 },
                 "exchangeRate": {
-                  "valuePointsPerCostDoubling": 1.7421309137271364,
-                  "qualityPointsPerCostDoubling": 2.3228412183028486,
-                  "anchorRatio": 20885.90273389206
+                  "valuePointsPerCostDoubling": 4.743142573137972,
+                  "qualityPointsPerCostDoubling": 6.324190097517296,
+                  "anchorRatio": 38.60637353439239
                 },
                 "rankChanges": {
                   "panel": [
@@ -60458,29 +60556,29 @@
                   ],
                   "excluded": [],
                   "changes": {
-                    "claude-haiku-5-5-high": -3,
-                    "claude-haiku-5-5-medium": 1,
-                    "claude-opus-5-5-high": 0,
-                    "claude-opus-5-5-medium": 1,
-                    "deepseek-v4-1-flash-1017": -5,
-                    "gemini-4-argon": -2,
-                    "gpt-6-astra-high": -7,
-                    "gpt-6-luna": 6,
-                    "gpt-6-luna-high": 3,
-                    "gpt-6-luna-medium": 3,
-                    "gpt-6-luna-xhigh": 3,
-                    "gpt-6.1-sol-high": 1,
+                    "claude-haiku-5-5-high": -1,
+                    "claude-haiku-5-5-medium": 0,
+                    "claude-opus-5-5-high": 1,
+                    "claude-opus-5-5-medium": -3,
+                    "deepseek-v4-1-flash-1017": 1,
+                    "gemini-4-argon": -1,
+                    "gpt-6-astra-high": 1,
+                    "gpt-6-luna": -2,
+                    "gpt-6-luna-high": 0,
+                    "gpt-6-luna-medium": 0,
+                    "gpt-6-luna-xhigh": 0,
+                    "gpt-6.1-sol-high": 0,
                     "gpt-6.1-sol-low": 0,
                     "gpt-6.1-sol-medium": 1,
-                    "gpt-6.1-terra": -1,
+                    "gpt-6.1-terra": 1,
                     "gpt-6.1-terra-high": 1,
-                    "gpt-6.1-terra-medium": 2,
+                    "gpt-6.1-terra-medium": 0,
                     "gpt-6.1-terra-xhigh": 1,
-                    "kimi-k3-1-pro": -4,
-                    "mimo-v2-6-pro": -1
+                    "kimi-k3-1-pro": 0,
+                    "mimo-v2-6-pro": 0
                   },
-                  "maxAbsChange": 7,
-                  "maxRow": "gpt-6-astra-high"
+                  "maxAbsChange": 3,
+                  "maxRow": "claude-opus-5-5-medium"
                 }
               }
             }
@@ -60559,14 +60657,17 @@
                 },
                 "recalibrated": {
                   "label": "alternative workload, recalibrated anchors",
+                  "status": "evaluated",
+                  "excluded": [
+                    "claude-opus-5-5-high",
+                    "claude-opus-5-5-medium"
+                  ],
                   "anchors": {
                     "low": 16.7544761028286,
                     "high": 9288.595133301373,
                     "referenceIds": [
                       "claude-haiku-5-5-high",
                       "claude-haiku-5-5-medium",
-                      "claude-opus-5-5-high",
-                      "claude-opus-5-5-medium",
                       "deepseek-v4-1-flash-1017",
                       "gemini-4-argon",
                       "gpt-6-astra-high",
@@ -60697,36 +60798,39 @@
                 },
                 "recalibrated": {
                   "label": "alternative workload, recalibrated anchors",
+                  "status": "evaluated",
+                  "excluded": [
+                    "claude-haiku-5-5-high",
+                    "claude-haiku-5-5-medium",
+                    "claude-opus-5-5-high",
+                    "claude-opus-5-5-medium",
+                    "deepseek-v4-1-flash-1017",
+                    "gemini-4-argon",
+                    "gpt-6-luna",
+                    "gpt-6-luna-high",
+                    "gpt-6-luna-medium",
+                    "gpt-6-luna-xhigh",
+                    "gpt-6.1-terra",
+                    "gpt-6.1-terra-high",
+                    "gpt-6.1-terra-medium",
+                    "gpt-6.1-terra-xhigh",
+                    "kimi-k3-1-pro",
+                    "mimo-v2-6-pro"
+                  ],
                   "anchors": {
-                    "low": 0.46422951692155934,
-                    "high": 9288.595133301373,
+                    "low": 9.60587638142074,
+                    "high": 331.4628924381261,
                     "referenceIds": [
-                      "claude-haiku-5-5-high",
-                      "claude-haiku-5-5-medium",
-                      "claude-opus-5-5-high",
-                      "claude-opus-5-5-medium",
-                      "deepseek-v4-1-flash-1017",
-                      "gemini-4-argon",
                       "gpt-6-astra-high",
-                      "gpt-6-luna",
-                      "gpt-6-luna-high",
-                      "gpt-6-luna-medium",
-                      "gpt-6-luna-xhigh",
                       "gpt-6.1-sol-high",
                       "gpt-6.1-sol-low",
-                      "gpt-6.1-sol-medium",
-                      "gpt-6.1-terra",
-                      "gpt-6.1-terra-high",
-                      "gpt-6.1-terra-medium",
-                      "gpt-6.1-terra-xhigh",
-                      "kimi-k3-1-pro",
-                      "mimo-v2-6-pro"
+                      "gpt-6.1-sol-medium"
                     ]
                   },
                   "exchangeRate": {
-                    "valuePointsPerCostDoubling": 1.7496790784108343,
-                    "qualityPointsPerCostDoubling": 2.3329054378811125,
-                    "anchorRatio": 20008.626756214777
+                    "valuePointsPerCostDoubling": 4.893530176360338,
+                    "qualityPointsPerCostDoubling": 6.524706901813784,
+                    "anchorRatio": 34.50626254978951
                   },
                   "rankChanges": {
                     "panel": [
@@ -60753,29 +60857,29 @@
                     ],
                     "excluded": [],
                     "changes": {
-                      "claude-haiku-5-5-high": -3,
-                      "claude-haiku-5-5-medium": 1,
+                      "claude-haiku-5-5-high": -1,
+                      "claude-haiku-5-5-medium": 0,
                       "claude-opus-5-5-high": 0,
-                      "claude-opus-5-5-medium": 0,
-                      "deepseek-v4-1-flash-1017": -5,
-                      "gemini-4-argon": -2,
-                      "gpt-6-astra-high": -7,
-                      "gpt-6-luna": 6,
-                      "gpt-6-luna-high": 3,
-                      "gpt-6-luna-medium": 3,
-                      "gpt-6-luna-xhigh": 3,
-                      "gpt-6.1-sol-high": 1,
+                      "claude-opus-5-5-medium": -3,
+                      "deepseek-v4-1-flash-1017": 1,
+                      "gemini-4-argon": -1,
+                      "gpt-6-astra-high": 1,
+                      "gpt-6-luna": -2,
+                      "gpt-6-luna-high": 0,
+                      "gpt-6-luna-medium": 0,
+                      "gpt-6-luna-xhigh": 0,
+                      "gpt-6.1-sol-high": 0,
                       "gpt-6.1-sol-low": 0,
-                      "gpt-6.1-sol-medium": 2,
-                      "gpt-6.1-terra": -1,
-                      "gpt-6.1-terra-high": 1,
-                      "gpt-6.1-terra-medium": 2,
-                      "gpt-6.1-terra-xhigh": 1,
-                      "kimi-k3-1-pro": -4,
-                      "mimo-v2-6-pro": -1
+                      "gpt-6.1-sol-medium": 0,
+                      "gpt-6.1-terra": 3,
+                      "gpt-6.1-terra-high": 0,
+                      "gpt-6.1-terra-medium": 0,
+                      "gpt-6.1-terra-xhigh": 2,
+                      "kimi-k3-1-pro": 0,
+                      "mimo-v2-6-pro": 0
                     },
-                    "maxAbsChange": 7,
-                    "maxRow": "gpt-6-astra-high"
+                    "maxAbsChange": 3,
+                    "maxRow": "gpt-6.1-terra"
                   }
                 }
               }
@@ -60853,14 +60957,17 @@
                 },
                 "recalibrated": {
                   "label": "alternative workload, recalibrated anchors",
+                  "status": "evaluated",
+                  "excluded": [
+                    "claude-opus-5-5-high",
+                    "claude-opus-5-5-medium"
+                  ],
                   "anchors": {
                     "low": 17.38999686530081,
                     "high": 10853.63122867045,
                     "referenceIds": [
                       "claude-haiku-5-5-high",
                       "claude-haiku-5-5-medium",
-                      "claude-opus-5-5-high",
-                      "claude-opus-5-5-medium",
                       "deepseek-v4-1-flash-1017",
                       "gemini-4-argon",
                       "gpt-6-astra-high",
@@ -60991,36 +61098,39 @@
                 },
                 "recalibrated": {
                   "label": "alternative workload, recalibrated anchors",
+                  "status": "evaluated",
+                  "excluded": [
+                    "claude-haiku-5-5-high",
+                    "claude-haiku-5-5-medium",
+                    "claude-opus-5-5-high",
+                    "claude-opus-5-5-medium",
+                    "deepseek-v4-1-flash-1017",
+                    "gemini-4-argon",
+                    "gpt-6-luna",
+                    "gpt-6-luna-high",
+                    "gpt-6-luna-medium",
+                    "gpt-6-luna-xhigh",
+                    "gpt-6.1-terra",
+                    "gpt-6.1-terra-high",
+                    "gpt-6.1-terra-medium",
+                    "gpt-6.1-terra-xhigh",
+                    "kimi-k3-1-pro",
+                    "mimo-v2-6-pro"
+                  ],
                   "anchors": {
-                    "low": 0.5495095729171069,
-                    "high": 10853.63122867045,
+                    "low": 8.802926718376797,
+                    "high": 366.5334395201653,
                     "referenceIds": [
-                      "claude-haiku-5-5-high",
-                      "claude-haiku-5-5-medium",
-                      "claude-opus-5-5-high",
-                      "claude-opus-5-5-medium",
-                      "deepseek-v4-1-flash-1017",
-                      "gemini-4-argon",
                       "gpt-6-astra-high",
-                      "gpt-6-luna",
-                      "gpt-6-luna-high",
-                      "gpt-6-luna-medium",
-                      "gpt-6-luna-xhigh",
                       "gpt-6.1-sol-high",
                       "gpt-6.1-sol-low",
-                      "gpt-6.1-sol-medium",
-                      "gpt-6.1-terra",
-                      "gpt-6.1-terra-high",
-                      "gpt-6.1-terra-medium",
-                      "gpt-6.1-terra-xhigh",
-                      "kimi-k3-1-pro",
-                      "mimo-v2-6-pro"
+                      "gpt-6.1-sol-medium"
                     ]
                   },
                   "exchangeRate": {
-                    "valuePointsPerCostDoubling": 1.7519671859100145,
-                    "qualityPointsPerCostDoubling": 2.3359562478800195,
-                    "anchorRatio": 19751.487077928872
+                    "valuePointsPerCostDoubling": 4.646997562710543,
+                    "qualityPointsPerCostDoubling": 6.195996750280724,
+                    "anchorRatio": 41.63767929079747
                   },
                   "rankChanges": {
                     "panel": [
@@ -61047,29 +61157,29 @@
                     ],
                     "excluded": [],
                     "changes": {
-                      "claude-haiku-5-5-high": -2,
-                      "claude-haiku-5-5-medium": 1,
-                      "claude-opus-5-5-high": 0,
-                      "claude-opus-5-5-medium": 1,
-                      "deepseek-v4-1-flash-1017": -5,
-                      "gemini-4-argon": -2,
-                      "gpt-6-astra-high": -6,
-                      "gpt-6-luna": 6,
-                      "gpt-6-luna-high": 3,
-                      "gpt-6-luna-medium": 3,
-                      "gpt-6-luna-xhigh": 3,
-                      "gpt-6.1-sol-high": 1,
-                      "gpt-6.1-sol-low": -1,
-                      "gpt-6.1-sol-medium": 0,
-                      "gpt-6.1-terra": -1,
-                      "gpt-6.1-terra-high": 1,
-                      "gpt-6.1-terra-medium": 2,
-                      "gpt-6.1-terra-xhigh": 1,
-                      "kimi-k3-1-pro": -4,
-                      "mimo-v2-6-pro": -1
+                      "claude-haiku-5-5-high": -1,
+                      "claude-haiku-5-5-medium": 0,
+                      "claude-opus-5-5-high": 2,
+                      "claude-opus-5-5-medium": -2,
+                      "deepseek-v4-1-flash-1017": 1,
+                      "gemini-4-argon": -1,
+                      "gpt-6-astra-high": 1,
+                      "gpt-6-luna": 2,
+                      "gpt-6-luna-high": 0,
+                      "gpt-6-luna-medium": 0,
+                      "gpt-6-luna-xhigh": 0,
+                      "gpt-6.1-sol-high": 0,
+                      "gpt-6.1-sol-low": -3,
+                      "gpt-6.1-sol-medium": -2,
+                      "gpt-6.1-terra": 2,
+                      "gpt-6.1-terra-high": -1,
+                      "gpt-6.1-terra-medium": -1,
+                      "gpt-6.1-terra-xhigh": 3,
+                      "kimi-k3-1-pro": 0,
+                      "mimo-v2-6-pro": 0
                     },
-                    "maxAbsChange": 6,
-                    "maxRow": "gpt-6-luna"
+                    "maxAbsChange": 3,
+                    "maxRow": "gpt-6.1-terra-xhigh"
                   }
                 }
               }
@@ -61147,14 +61257,17 @@
                 },
                 "recalibrated": {
                   "label": "alternative workload, recalibrated anchors",
+                  "status": "evaluated",
+                  "excluded": [
+                    "claude-opus-5-5-high",
+                    "claude-opus-5-5-medium"
+                  ],
                   "anchors": {
                     "low": 12.817945236889118,
                     "high": 9481.15412129043,
                     "referenceIds": [
                       "claude-haiku-5-5-high",
                       "claude-haiku-5-5-medium",
-                      "claude-opus-5-5-high",
-                      "claude-opus-5-5-medium",
                       "deepseek-v4-1-flash-1017",
                       "gemini-4-argon",
                       "gpt-6-astra-high",
@@ -61285,36 +61398,39 @@
                 },
                 "recalibrated": {
                   "label": "alternative workload, recalibrated anchors",
+                  "status": "evaluated",
+                  "excluded": [
+                    "claude-haiku-5-5-high",
+                    "claude-haiku-5-5-medium",
+                    "claude-opus-5-5-high",
+                    "claude-opus-5-5-medium",
+                    "deepseek-v4-1-flash-1017",
+                    "gemini-4-argon",
+                    "gpt-6-luna",
+                    "gpt-6-luna-high",
+                    "gpt-6-luna-medium",
+                    "gpt-6-luna-xhigh",
+                    "gpt-6.1-terra",
+                    "gpt-6.1-terra-high",
+                    "gpt-6.1-terra-medium",
+                    "gpt-6.1-terra-xhigh",
+                    "kimi-k3-1-pro",
+                    "mimo-v2-6-pro"
+                  ],
                   "anchors": {
-                    "low": 0.4602254482709317,
-                    "high": 9481.15412129043,
+                    "low": 5.491681183330218,
+                    "high": 273.82318978176033,
                     "referenceIds": [
-                      "claude-haiku-5-5-high",
-                      "claude-haiku-5-5-medium",
-                      "claude-opus-5-5-high",
-                      "claude-opus-5-5-medium",
-                      "deepseek-v4-1-flash-1017",
-                      "gemini-4-argon",
                       "gpt-6-astra-high",
-                      "gpt-6-luna",
-                      "gpt-6-luna-high",
-                      "gpt-6-luna-medium",
-                      "gpt-6-luna-xhigh",
                       "gpt-6.1-sol-high",
                       "gpt-6.1-sol-low",
-                      "gpt-6.1-sol-medium",
-                      "gpt-6.1-terra",
-                      "gpt-6.1-terra-high",
-                      "gpt-6.1-terra-medium",
-                      "gpt-6.1-terra-xhigh",
-                      "kimi-k3-1-pro",
-                      "mimo-v2-6-pro"
+                      "gpt-6.1-sol-medium"
                     ]
                   },
                   "exchangeRate": {
-                    "valuePointsPerCostDoubling": 1.7445388930051875,
-                    "qualityPointsPerCostDoubling": 2.32605185734025,
-                    "anchorRatio": 20601.107906812093
+                    "valuePointsPerCostDoubling": 4.432739687910047,
+                    "qualityPointsPerCostDoubling": 5.910319583880063,
+                    "anchorRatio": 49.86145055414721
                   },
                   "rankChanges": {
                     "panel": [
@@ -61341,29 +61457,29 @@
                     ],
                     "excluded": [],
                     "changes": {
-                      "claude-haiku-5-5-high": -1,
-                      "claude-haiku-5-5-medium": 1,
-                      "claude-opus-5-5-high": 0,
-                      "claude-opus-5-5-medium": 1,
-                      "deepseek-v4-1-flash-1017": -5,
+                      "claude-haiku-5-5-high": -2,
+                      "claude-haiku-5-5-medium": 0,
+                      "claude-opus-5-5-high": 2,
+                      "claude-opus-5-5-medium": -2,
+                      "deepseek-v4-1-flash-1017": 1,
                       "gemini-4-argon": -1,
-                      "gpt-6-astra-high": -6,
-                      "gpt-6-luna": 6,
-                      "gpt-6-luna-high": 2,
-                      "gpt-6-luna-medium": 3,
-                      "gpt-6-luna-xhigh": 3,
+                      "gpt-6-astra-high": 2,
+                      "gpt-6-luna": 3,
+                      "gpt-6-luna-high": 0,
+                      "gpt-6-luna-medium": 0,
+                      "gpt-6-luna-xhigh": -1,
                       "gpt-6.1-sol-high": 0,
-                      "gpt-6.1-sol-low": -1,
-                      "gpt-6.1-sol-medium": 0,
-                      "gpt-6.1-terra": 0,
+                      "gpt-6.1-sol-low": -4,
+                      "gpt-6.1-sol-medium": -2,
+                      "gpt-6.1-terra": 2,
                       "gpt-6.1-terra-high": 1,
-                      "gpt-6.1-terra-medium": 1,
-                      "gpt-6.1-terra-xhigh": 1,
-                      "kimi-k3-1-pro": -4,
-                      "mimo-v2-6-pro": -1
+                      "gpt-6.1-terra-medium": -2,
+                      "gpt-6.1-terra-xhigh": 3,
+                      "kimi-k3-1-pro": 0,
+                      "mimo-v2-6-pro": 0
                     },
-                    "maxAbsChange": 6,
-                    "maxRow": "gpt-6-luna"
+                    "maxAbsChange": 4,
+                    "maxRow": "gpt-6.1-sol-low"
                   }
                 }
               }
@@ -61441,14 +61557,17 @@
                 },
                 "recalibrated": {
                   "label": "alternative workload, recalibrated anchors",
+                  "status": "evaluated",
+                  "excluded": [
+                    "claude-opus-5-5-high",
+                    "claude-opus-5-5-medium"
+                  ],
                   "anchors": {
                     "low": 15.899914991088545,
                     "high": 9574.143377100741,
                     "referenceIds": [
                       "claude-haiku-5-5-high",
                       "claude-haiku-5-5-medium",
-                      "claude-opus-5-5-high",
-                      "claude-opus-5-5-medium",
                       "deepseek-v4-1-flash-1017",
                       "gemini-4-argon",
                       "gpt-6-astra-high",
@@ -61579,36 +61698,39 @@
                 },
                 "recalibrated": {
                   "label": "alternative workload, recalibrated anchors",
+                  "status": "evaluated",
+                  "excluded": [
+                    "claude-haiku-5-5-high",
+                    "claude-haiku-5-5-medium",
+                    "claude-opus-5-5-high",
+                    "claude-opus-5-5-medium",
+                    "deepseek-v4-1-flash-1017",
+                    "gemini-4-argon",
+                    "gpt-6-luna",
+                    "gpt-6-luna-high",
+                    "gpt-6-luna-medium",
+                    "gpt-6-luna-xhigh",
+                    "gpt-6.1-terra",
+                    "gpt-6.1-terra-high",
+                    "gpt-6.1-terra-medium",
+                    "gpt-6.1-terra-xhigh",
+                    "kimi-k3-1-pro",
+                    "mimo-v2-6-pro"
+                  ],
                   "anchors": {
-                    "low": 0.45840218156165913,
-                    "high": 9574.143377100741,
+                    "low": 9.180751737907157,
+                    "high": 354.4355309201658,
                     "referenceIds": [
-                      "claude-haiku-5-5-high",
-                      "claude-haiku-5-5-medium",
-                      "claude-opus-5-5-high",
-                      "claude-opus-5-5-medium",
-                      "deepseek-v4-1-flash-1017",
-                      "gemini-4-argon",
                       "gpt-6-astra-high",
-                      "gpt-6-luna",
-                      "gpt-6-luna-high",
-                      "gpt-6-luna-medium",
-                      "gpt-6-luna-xhigh",
                       "gpt-6.1-sol-high",
                       "gpt-6.1-sol-low",
-                      "gpt-6.1-sol-medium",
-                      "gpt-6.1-terra",
-                      "gpt-6.1-terra-high",
-                      "gpt-6.1-terra-medium",
-                      "gpt-6.1-terra-xhigh",
-                      "kimi-k3-1-pro",
-                      "mimo-v2-6-pro"
+                      "gpt-6.1-sol-medium"
                     ]
                   },
                   "exchangeRate": {
-                    "valuePointsPerCostDoubling": 1.7421309137271364,
-                    "qualityPointsPerCostDoubling": 2.3228412183028486,
-                    "anchorRatio": 20885.90273389206
+                    "valuePointsPerCostDoubling": 4.743142573137972,
+                    "qualityPointsPerCostDoubling": 6.324190097517296,
+                    "anchorRatio": 38.60637353439239
                   },
                   "rankChanges": {
                     "panel": [
@@ -61635,29 +61757,29 @@
                     ],
                     "excluded": [],
                     "changes": {
-                      "claude-haiku-5-5-high": -3,
-                      "claude-haiku-5-5-medium": 1,
-                      "claude-opus-5-5-high": 0,
-                      "claude-opus-5-5-medium": 1,
-                      "deepseek-v4-1-flash-1017": -5,
-                      "gemini-4-argon": -2,
-                      "gpt-6-astra-high": -7,
-                      "gpt-6-luna": 6,
-                      "gpt-6-luna-high": 3,
-                      "gpt-6-luna-medium": 3,
-                      "gpt-6-luna-xhigh": 3,
-                      "gpt-6.1-sol-high": 1,
+                      "claude-haiku-5-5-high": -1,
+                      "claude-haiku-5-5-medium": 0,
+                      "claude-opus-5-5-high": 1,
+                      "claude-opus-5-5-medium": -3,
+                      "deepseek-v4-1-flash-1017": 1,
+                      "gemini-4-argon": -1,
+                      "gpt-6-astra-high": 1,
+                      "gpt-6-luna": -2,
+                      "gpt-6-luna-high": 0,
+                      "gpt-6-luna-medium": 0,
+                      "gpt-6-luna-xhigh": 0,
+                      "gpt-6.1-sol-high": 0,
                       "gpt-6.1-sol-low": 0,
                       "gpt-6.1-sol-medium": 1,
-                      "gpt-6.1-terra": -1,
+                      "gpt-6.1-terra": 1,
                       "gpt-6.1-terra-high": 1,
-                      "gpt-6.1-terra-medium": 2,
+                      "gpt-6.1-terra-medium": 0,
                       "gpt-6.1-terra-xhigh": 1,
-                      "kimi-k3-1-pro": -4,
-                      "mimo-v2-6-pro": -1
+                      "kimi-k3-1-pro": 0,
+                      "mimo-v2-6-pro": 0
                     },
-                    "maxAbsChange": 7,
-                    "maxRow": "gpt-6-astra-high"
+                    "maxAbsChange": 3,
+                    "maxRow": "claude-opus-5-5-medium"
                   }
                 }
               }
@@ -61735,14 +61857,17 @@
                 },
                 "recalibrated": {
                   "label": "alternative workload, recalibrated anchors",
+                  "status": "evaluated",
+                  "excluded": [
+                    "claude-opus-5-5-high",
+                    "claude-opus-5-5-medium"
+                  ],
                   "anchors": {
                     "low": 14.7758195760842,
                     "high": 7249.675344750851,
                     "referenceIds": [
                       "claude-haiku-5-5-high",
                       "claude-haiku-5-5-medium",
-                      "claude-opus-5-5-high",
-                      "claude-opus-5-5-medium",
                       "deepseek-v4-1-flash-1017",
                       "gemini-4-argon",
                       "gpt-6-astra-high",
@@ -61873,36 +61998,39 @@
                 },
                 "recalibrated": {
                   "label": "alternative workload, recalibrated anchors",
+                  "status": "evaluated",
+                  "excluded": [
+                    "claude-haiku-5-5-high",
+                    "claude-haiku-5-5-medium",
+                    "claude-opus-5-5-high",
+                    "claude-opus-5-5-medium",
+                    "deepseek-v4-1-flash-1017",
+                    "gemini-4-argon",
+                    "gpt-6-luna",
+                    "gpt-6-luna-high",
+                    "gpt-6-luna-medium",
+                    "gpt-6-luna-xhigh",
+                    "gpt-6.1-terra",
+                    "gpt-6.1-terra-high",
+                    "gpt-6.1-terra-medium",
+                    "gpt-6.1-terra-xhigh",
+                    "kimi-k3-1-pro",
+                    "mimo-v2-6-pro"
+                  ],
                   "anchors": {
-                    "low": 0.4815796286621721,
-                    "high": 7249.675344750851,
+                    "low": 9.121934624161852,
+                    "high": 322.6827991013917,
                     "referenceIds": [
-                      "claude-haiku-5-5-high",
-                      "claude-haiku-5-5-medium",
-                      "claude-opus-5-5-high",
-                      "claude-opus-5-5-medium",
-                      "deepseek-v4-1-flash-1017",
-                      "gemini-4-argon",
                       "gpt-6-astra-high",
-                      "gpt-6-luna",
-                      "gpt-6-luna-high",
-                      "gpt-6-luna-medium",
-                      "gpt-6-luna-xhigh",
                       "gpt-6.1-sol-high",
                       "gpt-6.1-sol-low",
-                      "gpt-6.1-sol-medium",
-                      "gpt-6.1-terra",
-                      "gpt-6.1-terra-high",
-                      "gpt-6.1-terra-medium",
-                      "gpt-6.1-terra-xhigh",
-                      "kimi-k3-1-pro",
-                      "mimo-v2-6-pro"
+                      "gpt-6.1-sol-medium"
                     ]
                   },
                   "exchangeRate": {
-                    "valuePointsPerCostDoubling": 1.8014312063799685,
-                    "qualityPointsPerCostDoubling": 2.4019082751732914,
-                    "anchorRatio": 15053.949364283628
+                    "valuePointsPerCostDoubling": 4.859433088912426,
+                    "qualityPointsPerCostDoubling": 6.479244118549901,
+                    "anchorRatio": 35.374381904325546
                   },
                   "rankChanges": {
                     "panel": [
@@ -61929,29 +62057,29 @@
                     ],
                     "excluded": [],
                     "changes": {
-                      "claude-haiku-5-5-high": -3,
-                      "claude-haiku-5-5-medium": 1,
-                      "claude-opus-5-5-high": 0,
-                      "claude-opus-5-5-medium": 1,
-                      "deepseek-v4-1-flash-1017": -4,
-                      "gemini-4-argon": -2,
-                      "gpt-6-astra-high": -7,
-                      "gpt-6-luna": 5,
-                      "gpt-6-luna-high": 3,
-                      "gpt-6-luna-medium": 3,
-                      "gpt-6-luna-xhigh": 3,
-                      "gpt-6.1-sol-high": 1,
+                      "claude-haiku-5-5-high": -1,
+                      "claude-haiku-5-5-medium": 0,
+                      "claude-opus-5-5-high": 2,
+                      "claude-opus-5-5-medium": -1,
+                      "deepseek-v4-1-flash-1017": 1,
+                      "gemini-4-argon": -1,
+                      "gpt-6-astra-high": 1,
+                      "gpt-6-luna": 1,
+                      "gpt-6-luna-high": 0,
+                      "gpt-6-luna-medium": 0,
+                      "gpt-6-luna-xhigh": 0,
+                      "gpt-6.1-sol-high": 0,
                       "gpt-6.1-sol-low": 0,
-                      "gpt-6.1-sol-medium": 1,
-                      "gpt-6.1-terra": -1,
-                      "gpt-6.1-terra-high": 1,
-                      "gpt-6.1-terra-medium": 2,
-                      "gpt-6.1-terra-xhigh": 1,
-                      "kimi-k3-1-pro": -4,
-                      "mimo-v2-6-pro": -1
+                      "gpt-6.1-sol-medium": -1,
+                      "gpt-6.1-terra": 0,
+                      "gpt-6.1-terra-high": 0,
+                      "gpt-6.1-terra-medium": -1,
+                      "gpt-6.1-terra-xhigh": 0,
+                      "kimi-k3-1-pro": 0,
+                      "mimo-v2-6-pro": 0
                     },
-                    "maxAbsChange": 7,
-                    "maxRow": "gpt-6-astra-high"
+                    "maxAbsChange": 2,
+                    "maxRow": "claude-opus-5-5-high"
                   }
                 }
               }
@@ -62029,14 +62157,17 @@
                 },
                 "recalibrated": {
                   "label": "alternative workload, recalibrated anchors",
+                  "status": "evaluated",
+                  "excluded": [
+                    "claude-opus-5-5-high",
+                    "claude-opus-5-5-medium"
+                  ],
                   "anchors": {
                     "low": 13.669718304312774,
                     "high": 8339.619698238408,
                     "referenceIds": [
                       "claude-haiku-5-5-high",
                       "claude-haiku-5-5-medium",
-                      "claude-opus-5-5-high",
-                      "claude-opus-5-5-medium",
                       "deepseek-v4-1-flash-1017",
                       "gemini-4-argon",
                       "gpt-6-astra-high",
@@ -62167,36 +62298,39 @@
                 },
                 "recalibrated": {
                   "label": "alternative workload, recalibrated anchors",
+                  "status": "evaluated",
+                  "excluded": [
+                    "claude-haiku-5-5-high",
+                    "claude-haiku-5-5-medium",
+                    "claude-opus-5-5-high",
+                    "claude-opus-5-5-medium",
+                    "deepseek-v4-1-flash-1017",
+                    "gemini-4-argon",
+                    "gpt-6-luna",
+                    "gpt-6-luna-high",
+                    "gpt-6-luna-medium",
+                    "gpt-6-luna-xhigh",
+                    "gpt-6.1-terra",
+                    "gpt-6.1-terra-high",
+                    "gpt-6.1-terra-medium",
+                    "gpt-6.1-terra-xhigh",
+                    "kimi-k3-1-pro",
+                    "mimo-v2-6-pro"
+                  ],
                   "anchors": {
-                    "low": 0.4209202683743467,
-                    "high": 8339.619698238408,
+                    "low": 9.56629584679862,
+                    "high": 307.63850013676637,
                     "referenceIds": [
-                      "claude-haiku-5-5-high",
-                      "claude-haiku-5-5-medium",
-                      "claude-opus-5-5-high",
-                      "claude-opus-5-5-medium",
-                      "deepseek-v4-1-flash-1017",
-                      "gemini-4-argon",
                       "gpt-6-astra-high",
-                      "gpt-6-luna",
-                      "gpt-6-luna-high",
-                      "gpt-6-luna-medium",
-                      "gpt-6-luna-xhigh",
                       "gpt-6.1-sol-high",
                       "gpt-6.1-sol-low",
-                      "gpt-6.1-sol-medium",
-                      "gpt-6.1-terra",
-                      "gpt-6.1-terra-high",
-                      "gpt-6.1-terra-medium",
-                      "gpt-6.1-terra-xhigh",
-                      "kimi-k3-1-pro",
-                      "mimo-v2-6-pro"
+                      "gpt-6.1-sol-medium"
                     ]
                   },
                   "exchangeRate": {
-                    "valuePointsPerCostDoubling": 1.7514181414637386,
-                    "qualityPointsPerCostDoubling": 2.335224188618318,
-                    "anchorRatio": 19812.82519477428
+                    "valuePointsPerCostDoubling": 4.9928783130793395,
+                    "qualityPointsPerCostDoubling": 6.657171084105786,
+                    "anchorRatio": 32.15858102901116
                   },
                   "rankChanges": {
                     "panel": [
@@ -62223,29 +62357,29 @@
                     ],
                     "excluded": [],
                     "changes": {
-                      "claude-haiku-5-5-high": -3,
-                      "claude-haiku-5-5-medium": 1,
-                      "claude-opus-5-5-high": 0,
-                      "claude-opus-5-5-medium": 0,
-                      "deepseek-v4-1-flash-1017": -5,
+                      "claude-haiku-5-5-high": -1,
+                      "claude-haiku-5-5-medium": 0,
+                      "claude-opus-5-5-high": -1,
+                      "claude-opus-5-5-medium": -2,
+                      "deepseek-v4-1-flash-1017": 1,
                       "gemini-4-argon": -1,
-                      "gpt-6-astra-high": -7,
-                      "gpt-6-luna": 6,
-                      "gpt-6-luna-high": 2,
-                      "gpt-6-luna-medium": 3,
-                      "gpt-6-luna-xhigh": 3,
-                      "gpt-6.1-sol-high": 1,
+                      "gpt-6-astra-high": 1,
+                      "gpt-6-luna": 0,
+                      "gpt-6-luna-high": 0,
+                      "gpt-6-luna-medium": 0,
+                      "gpt-6-luna-xhigh": 0,
+                      "gpt-6.1-sol-high": 0,
                       "gpt-6.1-sol-low": 0,
-                      "gpt-6.1-sol-medium": 2,
-                      "gpt-6.1-terra": -1,
-                      "gpt-6.1-terra-high": 1,
-                      "gpt-6.1-terra-medium": 2,
-                      "gpt-6.1-terra-xhigh": 1,
-                      "kimi-k3-1-pro": -4,
-                      "mimo-v2-6-pro": -1
+                      "gpt-6.1-sol-medium": 1,
+                      "gpt-6.1-terra": 2,
+                      "gpt-6.1-terra-high": 0,
+                      "gpt-6.1-terra-medium": 0,
+                      "gpt-6.1-terra-xhigh": 0,
+                      "kimi-k3-1-pro": 0,
+                      "mimo-v2-6-pro": 0
                     },
-                    "maxAbsChange": 7,
-                    "maxRow": "gpt-6-astra-high"
+                    "maxAbsChange": 2,
+                    "maxRow": "gpt-6.1-terra"
                   }
                 }
               }
@@ -62597,6 +62731,7 @@
                   "GPT-6.1 Terra (low)"
                 ]
               },
+              "uncheckedCheaperSiblingsBasis": "lower AA total Index cost; workload- and Plan-cost ordering unverified (E318)",
               "possibleBlockerQualifierN": 0,
               "possibleQualifierN": 10,
               "confirmedQualifierN": 9,
@@ -81304,6 +81439,10 @@
       "planResearchCoverage": {
         "cells": 48,
         "uncovered": []
+      },
+      "planResearchClocks": {
+        "threeStage": "2026-10-25",
+        "freshnessCheck": null
       },
       "costInfluence": {
         "api": {
@@ -109260,6 +109399,7 @@
               "uncheckedCheaperSiblings": {
                 "gpt-6.1-sol-medium": []
               },
+              "uncheckedCheaperSiblingsBasis": "lower AA total Index cost; workload- and Plan-cost ordering unverified (E318)",
               "possibleBlockerQualifierN": 0,
               "possibleQualifierN": 13,
               "confirmedQualifierN": 12,
@@ -109469,6 +109609,7 @@
                 ],
                 "mimo-v2-6-pro": []
               },
+              "uncheckedCheaperSiblingsBasis": "lower AA total Index cost; workload- and Plan-cost ordering unverified (E318)",
               "possibleBlockerQualifierN": 2,
               "possibleQualifierN": 19,
               "confirmedQualifierN": 18,
@@ -109674,6 +109815,7 @@
               "uncheckedCheaperSiblings": {
                 "gpt-6.1-sol-xhigh": []
               },
+              "uncheckedCheaperSiblingsBasis": "lower AA total Index cost; workload- and Plan-cost ordering unverified (E318)",
               "possibleBlockerQualifierN": 0,
               "possibleQualifierN": 7,
               "confirmedQualifierN": 7,
@@ -109954,6 +110096,7 @@
                 "gpt-6.1-sol-medium"
               ],
               "uncheckedCheaperSiblings": {},
+              "uncheckedCheaperSiblingsBasis": "lower AA total Index cost; workload- and Plan-cost ordering unverified (E318)",
               "margin": {
                 "level": 55.06144743781756,
                 "qualifierN": 11,
@@ -109976,6 +110119,7 @@
                   "GPT-6 Luna (non-reasoning)"
                 ]
               },
+              "uncheckedCheaperSiblingsBasis": "lower AA total Index cost; workload- and Plan-cost ordering unverified (E318)",
               "margin": {
                 "level": 40.02966607127645,
                 "qualifierN": 21,
@@ -109994,6 +110138,7 @@
                 "gpt-6.1-sol-xhigh"
               ],
               "uncheckedCheaperSiblings": {},
+              "uncheckedCheaperSiblingsBasis": "lower AA total Index cost; workload- and Plan-cost ordering unverified (E318)",
               "margin": {
                 "level": 63.02547418955845,
                 "qualifierN": 3,
@@ -110022,6 +110167,7 @@
                   "Claude Opus 5.5 (low with fallback)"
                 ]
               },
+              "uncheckedCheaperSiblingsBasis": "lower AA total Index cost; workload- and Plan-cost ordering unverified (E318)",
               "margin": {
                 "level": 55.06144743781756,
                 "qualifierN": 38,
@@ -110040,6 +110186,7 @@
                 "claude-haiku-5-5@claude-pro"
               ],
               "uncheckedCheaperSiblings": {},
+              "uncheckedCheaperSiblingsBasis": "lower AA total Index cost; workload- and Plan-cost ordering unverified (E318)",
               "margin": {
                 "level": 40.02966607127645,
                 "qualifierN": 68,
@@ -110058,6 +110205,7 @@
                 "gpt-6.1-sol-xhigh@chatgpt-pro-500"
               ],
               "uncheckedCheaperSiblings": {},
+              "uncheckedCheaperSiblingsBasis": "lower AA total Index cost; workload- and Plan-cost ordering unverified (E318)",
               "margin": {
                 "level": 63.02547418955845,
                 "qualifierN": 12,
@@ -115669,19 +115817,22 @@
               },
               "recalibrated": {
                 "label": "alternative workload, recalibrated anchors",
+                "status": "evaluated",
+                "excluded": [
+                  "claude-opus-5-5",
+                  "claude-opus-5-5-high",
+                  "claude-opus-5-5-medium",
+                  "claude-opus-5-5-xhigh"
+                ],
                 "anchors": {
                   "low": 3.7938236395756437,
-                  "high": 12366.317759240717,
+                  "high": 11619.431431062198,
                   "referenceIds": [
                     "claude-haiku-5-5",
                     "claude-haiku-5-5-high",
                     "claude-haiku-5-5-low",
                     "claude-haiku-5-5-max",
                     "claude-haiku-5-5-medium",
-                    "claude-opus-5-5",
-                    "claude-opus-5-5-high",
-                    "claude-opus-5-5-medium",
-                    "claude-opus-5-5-xhigh",
                     "claude-sonnet-5-5",
                     "claude-sonnet-5-5-xhigh",
                     "deepseek-v4-1-flash-1017",
@@ -115709,9 +115860,9 @@
                   ]
                 },
                 "exchangeRate": {
-                  "valuePointsPerCostDoubling": 2.142157744267573,
-                  "qualityPointsPerCostDoubling": 2.8562103256900975,
-                  "anchorRatio": 3259.592151369468
+                  "valuePointsPerCostDoubling": 2.1587829335290105,
+                  "qualityPointsPerCostDoubling": 2.8783772447053475,
+                  "anchorRatio": 3062.723135006319
                 },
                 "rankChanges": {
                   "panel": [
@@ -115872,49 +116023,52 @@
               },
               "recalibrated": {
                 "label": "alternative workload, recalibrated anchors",
+                "status": "evaluated",
+                "excluded": [
+                  "claude-haiku-5-5",
+                  "claude-haiku-5-5-high",
+                  "claude-haiku-5-5-low",
+                  "claude-haiku-5-5-max",
+                  "claude-haiku-5-5-medium",
+                  "claude-opus-5-5",
+                  "claude-opus-5-5-high",
+                  "claude-opus-5-5-medium",
+                  "claude-opus-5-5-xhigh",
+                  "claude-sonnet-5-5",
+                  "claude-sonnet-5-5-xhigh",
+                  "deepseek-v4-1-flash-1017",
+                  "gemini-4-argon",
+                  "gpt-6-luna",
+                  "gpt-6-luna-high",
+                  "gpt-6-luna-low",
+                  "gpt-6-luna-medium",
+                  "gpt-6-luna-xhigh",
+                  "gpt-6.1-terra",
+                  "gpt-6.1-terra-high",
+                  "gpt-6.1-terra-low",
+                  "gpt-6.1-terra-medium",
+                  "gpt-6.1-terra-xhigh",
+                  "kimi-k3-1-pro",
+                  "mimo-v2-6-pro"
+                ],
                 "anchors": {
-                  "low": 0.2458797039628286,
-                  "high": 9574.143377100741,
+                  "low": 9.180751737907157,
+                  "high": 580.8807434021303,
                   "referenceIds": [
-                    "claude-haiku-5-5",
-                    "claude-haiku-5-5-high",
-                    "claude-haiku-5-5-low",
-                    "claude-haiku-5-5-max",
-                    "claude-haiku-5-5-medium",
-                    "claude-opus-5-5",
-                    "claude-opus-5-5-high",
-                    "claude-opus-5-5-medium",
-                    "claude-opus-5-5-xhigh",
-                    "claude-sonnet-5-5",
-                    "claude-sonnet-5-5-xhigh",
-                    "deepseek-v4-1-flash-1017",
-                    "gemini-4-argon",
                     "gpt-6-astra",
                     "gpt-6-astra-high",
                     "gpt-6-astra-xhigh",
-                    "gpt-6-luna",
-                    "gpt-6-luna-high",
-                    "gpt-6-luna-low",
-                    "gpt-6-luna-medium",
-                    "gpt-6-luna-xhigh",
                     "gpt-6.1-sol",
                     "gpt-6.1-sol-high",
                     "gpt-6.1-sol-low",
                     "gpt-6.1-sol-medium",
-                    "gpt-6.1-sol-xhigh",
-                    "gpt-6.1-terra",
-                    "gpt-6.1-terra-high",
-                    "gpt-6.1-terra-low",
-                    "gpt-6.1-terra-medium",
-                    "gpt-6.1-terra-xhigh",
-                    "kimi-k3-1-pro",
-                    "mimo-v2-6-pro"
+                    "gpt-6.1-sol-xhigh"
                   ]
                 },
                 "exchangeRate": {
-                  "valuePointsPerCostDoubling": 1.639462181275266,
-                  "qualityPointsPerCostDoubling": 2.185949575033688,
-                  "anchorRatio": 38938.32318322676
+                  "valuePointsPerCostDoubling": 4.178166439639555,
+                  "qualityPointsPerCostDoubling": 5.570888586186073,
+                  "anchorRatio": 63.27158820815122
                 },
                 "rankChanges": {
                   "panel": [
@@ -115954,42 +116108,42 @@
                   ],
                   "excluded": [],
                   "changes": {
-                    "claude-haiku-5-5": -1,
-                    "claude-haiku-5-5-high": 1,
+                    "claude-haiku-5-5": -2,
+                    "claude-haiku-5-5-high": 0,
                     "claude-haiku-5-5-low": -1,
-                    "claude-haiku-5-5-max": 2,
-                    "claude-haiku-5-5-medium": -1,
-                    "claude-opus-5-5": -4,
-                    "claude-opus-5-5-high": 3,
-                    "claude-opus-5-5-medium": 4,
-                    "claude-opus-5-5-xhigh": 2,
-                    "claude-sonnet-5-5": -2,
-                    "claude-sonnet-5-5-xhigh": 3,
-                    "deepseek-v4-1-flash-1017": -6,
-                    "gemini-4-argon": -6,
-                    "gpt-6-astra": -8,
-                    "gpt-6-astra-high": -7,
-                    "gpt-6-astra-xhigh": -7,
-                    "gpt-6-luna": 3,
-                    "gpt-6-luna-high": 6,
+                    "claude-haiku-5-5-max": -2,
+                    "claude-haiku-5-5-medium": 0,
+                    "claude-opus-5-5": 1,
+                    "claude-opus-5-5-high": 0,
+                    "claude-opus-5-5-medium": -1,
+                    "claude-opus-5-5-xhigh": 0,
+                    "claude-sonnet-5-5": 0,
+                    "claude-sonnet-5-5-xhigh": 1,
+                    "deepseek-v4-1-flash-1017": 3,
+                    "gemini-4-argon": -1,
+                    "gpt-6-astra": 3,
+                    "gpt-6-astra-high": 4,
+                    "gpt-6-astra-xhigh": 1,
+                    "gpt-6-luna": -2,
+                    "gpt-6-luna-high": 0,
                     "gpt-6-luna-low": 0,
-                    "gpt-6-luna-medium": 2,
-                    "gpt-6-luna-xhigh": 5,
-                    "gpt-6.1-sol": -1,
-                    "gpt-6.1-sol-high": 5,
+                    "gpt-6-luna-medium": -1,
+                    "gpt-6-luna-xhigh": 0,
+                    "gpt-6.1-sol": 0,
+                    "gpt-6.1-sol-high": 0,
                     "gpt-6.1-sol-low": 0,
-                    "gpt-6.1-sol-medium": 6,
-                    "gpt-6.1-sol-xhigh": 1,
-                    "gpt-6.1-terra": 1,
-                    "gpt-6.1-terra-high": 2,
-                    "gpt-6.1-terra-low": 4,
-                    "gpt-6.1-terra-medium": 3,
-                    "gpt-6.1-terra-xhigh": 1,
-                    "kimi-k3-1-pro": -9,
-                    "mimo-v2-6-pro": -1
+                    "gpt-6.1-sol-medium": 0,
+                    "gpt-6.1-sol-xhigh": 0,
+                    "gpt-6.1-terra": 0,
+                    "gpt-6.1-terra-high": -1,
+                    "gpt-6.1-terra-low": 0,
+                    "gpt-6.1-terra-medium": -1,
+                    "gpt-6.1-terra-xhigh": -1,
+                    "kimi-k3-1-pro": -1,
+                    "mimo-v2-6-pro": 1
                   },
-                  "maxAbsChange": 9,
-                  "maxRow": "kimi-k3-1-pro"
+                  "maxAbsChange": 4,
+                  "maxRow": "gpt-6-astra-high"
                 }
               }
             }
@@ -116094,19 +116248,22 @@
                 },
                 "recalibrated": {
                   "label": "alternative workload, recalibrated anchors",
+                  "status": "evaluated",
+                  "excluded": [
+                    "claude-opus-5-5",
+                    "claude-opus-5-5-high",
+                    "claude-opus-5-5-medium",
+                    "claude-opus-5-5-xhigh"
+                  ],
                   "anchors": {
                     "low": 3.696718041768958,
-                    "high": 10266.375172850481,
+                    "high": 9562.510269709404,
                     "referenceIds": [
                       "claude-haiku-5-5",
                       "claude-haiku-5-5-high",
                       "claude-haiku-5-5-low",
                       "claude-haiku-5-5-max",
                       "claude-haiku-5-5-medium",
-                      "claude-opus-5-5",
-                      "claude-opus-5-5-high",
-                      "claude-opus-5-5-medium",
-                      "claude-opus-5-5-xhigh",
                       "claude-sonnet-5-5",
                       "claude-sonnet-5-5-xhigh",
                       "deepseek-v4-1-flash-1017",
@@ -116134,9 +116291,9 @@
                     ]
                   },
                   "exchangeRate": {
-                    "valuePointsPerCostDoubling": 2.1854304026783917,
-                    "qualityPointsPerCostDoubling": 2.913907203571189,
-                    "anchorRatio": 2777.159376736724
+                    "valuePointsPerCostDoubling": 2.2051827910454596,
+                    "qualityPointsPerCostDoubling": 2.940243721393946,
+                    "anchorRatio": 2586.756728985893
                   },
                   "rankChanges": {
                     "panel": [
@@ -116297,49 +116454,52 @@
                 },
                 "recalibrated": {
                   "label": "alternative workload, recalibrated anchors",
+                  "status": "evaluated",
+                  "excluded": [
+                    "claude-haiku-5-5",
+                    "claude-haiku-5-5-high",
+                    "claude-haiku-5-5-low",
+                    "claude-haiku-5-5-max",
+                    "claude-haiku-5-5-medium",
+                    "claude-opus-5-5",
+                    "claude-opus-5-5-high",
+                    "claude-opus-5-5-medium",
+                    "claude-opus-5-5-xhigh",
+                    "claude-sonnet-5-5",
+                    "claude-sonnet-5-5-xhigh",
+                    "deepseek-v4-1-flash-1017",
+                    "gemini-4-argon",
+                    "gpt-6-luna",
+                    "gpt-6-luna-high",
+                    "gpt-6-luna-low",
+                    "gpt-6-luna-medium",
+                    "gpt-6-luna-xhigh",
+                    "gpt-6.1-terra",
+                    "gpt-6.1-terra-high",
+                    "gpt-6.1-terra-low",
+                    "gpt-6.1-terra-medium",
+                    "gpt-6.1-terra-xhigh",
+                    "kimi-k3-1-pro",
+                    "mimo-v2-6-pro"
+                  ],
                   "anchors": {
-                    "low": 0.275837652052726,
-                    "high": 9288.595133301373,
+                    "low": 9.60587638142074,
+                    "high": 538.9320031704315,
                     "referenceIds": [
-                      "claude-haiku-5-5",
-                      "claude-haiku-5-5-high",
-                      "claude-haiku-5-5-low",
-                      "claude-haiku-5-5-max",
-                      "claude-haiku-5-5-medium",
-                      "claude-opus-5-5",
-                      "claude-opus-5-5-high",
-                      "claude-opus-5-5-medium",
-                      "claude-opus-5-5-xhigh",
-                      "claude-sonnet-5-5",
-                      "claude-sonnet-5-5-xhigh",
-                      "deepseek-v4-1-flash-1017",
-                      "gemini-4-argon",
                       "gpt-6-astra",
                       "gpt-6-astra-high",
                       "gpt-6-astra-xhigh",
-                      "gpt-6-luna",
-                      "gpt-6-luna-high",
-                      "gpt-6-luna-low",
-                      "gpt-6-luna-medium",
-                      "gpt-6-luna-xhigh",
                       "gpt-6.1-sol",
                       "gpt-6.1-sol-high",
                       "gpt-6.1-sol-low",
                       "gpt-6.1-sol-medium",
-                      "gpt-6.1-sol-xhigh",
-                      "gpt-6.1-terra",
-                      "gpt-6.1-terra-high",
-                      "gpt-6.1-terra-low",
-                      "gpt-6.1-terra-medium",
-                      "gpt-6.1-terra-xhigh",
-                      "kimi-k3-1-pro",
-                      "mimo-v2-6-pro"
+                      "gpt-6.1-sol-xhigh"
                     ]
                   },
                   "exchangeRate": {
-                    "valuePointsPerCostDoubling": 1.6623055094300885,
-                    "qualityPointsPerCostDoubling": 2.216407345906785,
-                    "anchorRatio": 33674.13790023804
+                    "valuePointsPerCostDoubling": 4.30289473079079,
+                    "qualityPointsPerCostDoubling": 5.73719297438772,
+                    "anchorRatio": 56.10440752837605
                   },
                   "rankChanges": {
                     "panel": [
@@ -116379,42 +116539,42 @@
                     ],
                     "excluded": [],
                     "changes": {
-                      "claude-haiku-5-5": -1,
-                      "claude-haiku-5-5-high": 1,
+                      "claude-haiku-5-5": -2,
+                      "claude-haiku-5-5-high": 0,
                       "claude-haiku-5-5-low": -1,
-                      "claude-haiku-5-5-max": 2,
-                      "claude-haiku-5-5-medium": -1,
-                      "claude-opus-5-5": -4,
-                      "claude-opus-5-5-high": 3,
-                      "claude-opus-5-5-medium": 4,
-                      "claude-opus-5-5-xhigh": 2,
-                      "claude-sonnet-5-5": -2,
-                      "claude-sonnet-5-5-xhigh": 3,
-                      "deepseek-v4-1-flash-1017": -6,
-                      "gemini-4-argon": -6,
-                      "gpt-6-astra": -8,
-                      "gpt-6-astra-high": -7,
-                      "gpt-6-astra-xhigh": -8,
-                      "gpt-6-luna": 3,
-                      "gpt-6-luna-high": 6,
+                      "claude-haiku-5-5-max": -1,
+                      "claude-haiku-5-5-medium": 0,
+                      "claude-opus-5-5": 0,
+                      "claude-opus-5-5-high": -1,
+                      "claude-opus-5-5-medium": -1,
+                      "claude-opus-5-5-xhigh": 0,
+                      "claude-sonnet-5-5": 0,
+                      "claude-sonnet-5-5-xhigh": -1,
+                      "deepseek-v4-1-flash-1017": 3,
+                      "gemini-4-argon": -1,
+                      "gpt-6-astra": 3,
+                      "gpt-6-astra-high": 3,
+                      "gpt-6-astra-xhigh": 1,
+                      "gpt-6-luna": -2,
+                      "gpt-6-luna-high": 0,
                       "gpt-6-luna-low": 0,
-                      "gpt-6-luna-medium": 2,
-                      "gpt-6-luna-xhigh": 6,
+                      "gpt-6-luna-medium": -1,
+                      "gpt-6-luna-xhigh": 0,
                       "gpt-6.1-sol": -1,
-                      "gpt-6.1-sol-high": 5,
-                      "gpt-6.1-sol-low": 0,
-                      "gpt-6.1-sol-medium": 6,
+                      "gpt-6.1-sol-high": -1,
+                      "gpt-6.1-sol-low": 1,
+                      "gpt-6.1-sol-medium": 3,
                       "gpt-6.1-sol-xhigh": 1,
-                      "gpt-6.1-terra": 2,
-                      "gpt-6.1-terra-high": 2,
-                      "gpt-6.1-terra-low": 4,
-                      "gpt-6.1-terra-medium": 3,
-                      "gpt-6.1-terra-xhigh": 1,
-                      "kimi-k3-1-pro": -9,
-                      "mimo-v2-6-pro": -2
+                      "gpt-6.1-terra": 1,
+                      "gpt-6.1-terra-high": -1,
+                      "gpt-6.1-terra-low": 0,
+                      "gpt-6.1-terra-medium": -1,
+                      "gpt-6.1-terra-xhigh": -1,
+                      "kimi-k3-1-pro": -1,
+                      "mimo-v2-6-pro": 1
                     },
-                    "maxAbsChange": 9,
-                    "maxRow": "kimi-k3-1-pro"
+                    "maxAbsChange": 3,
+                    "maxRow": "gpt-6.1-sol-medium"
                   }
                 }
               }
@@ -116518,19 +116678,22 @@
                 },
                 "recalibrated": {
                   "label": "alternative workload, recalibrated anchors",
+                  "status": "evaluated",
+                  "excluded": [
+                    "claude-opus-5-5",
+                    "claude-opus-5-5-high",
+                    "claude-opus-5-5-medium",
+                    "claude-opus-5-5-xhigh"
+                  ],
                   "anchors": {
                     "low": 3.1435162108811263,
-                    "high": 13786.275111100356,
+                    "high": 13129.89613936006,
                     "referenceIds": [
                       "claude-haiku-5-5",
                       "claude-haiku-5-5-high",
                       "claude-haiku-5-5-low",
                       "claude-haiku-5-5-max",
                       "claude-haiku-5-5-medium",
-                      "claude-opus-5-5",
-                      "claude-opus-5-5-high",
-                      "claude-opus-5-5-medium",
-                      "claude-opus-5-5-xhigh",
                       "claude-sonnet-5-5",
                       "claude-sonnet-5-5-xhigh",
                       "deepseek-v4-1-flash-1017",
@@ -116558,9 +116721,9 @@
                     ]
                   },
                   "exchangeRate": {
-                    "valuePointsPerCostDoubling": 2.066360611148563,
-                    "qualityPointsPerCostDoubling": 2.755147481531417,
-                    "anchorRatio": 4385.622400603454
+                    "valuePointsPerCostDoubling": 2.0784509341796684,
+                    "qualityPointsPerCostDoubling": 2.771267912239558,
+                    "anchorRatio": 4176.818332894729
                   },
                   "rankChanges": {
                     "panel": [
@@ -116721,49 +116884,52 @@
                 },
                 "recalibrated": {
                   "label": "alternative workload, recalibrated anchors",
+                  "status": "evaluated",
+                  "excluded": [
+                    "claude-haiku-5-5",
+                    "claude-haiku-5-5-high",
+                    "claude-haiku-5-5-low",
+                    "claude-haiku-5-5-max",
+                    "claude-haiku-5-5-medium",
+                    "claude-opus-5-5",
+                    "claude-opus-5-5-high",
+                    "claude-opus-5-5-medium",
+                    "claude-opus-5-5-xhigh",
+                    "claude-sonnet-5-5",
+                    "claude-sonnet-5-5-xhigh",
+                    "deepseek-v4-1-flash-1017",
+                    "gemini-4-argon",
+                    "gpt-6-luna",
+                    "gpt-6-luna-high",
+                    "gpt-6-luna-low",
+                    "gpt-6-luna-medium",
+                    "gpt-6-luna-xhigh",
+                    "gpt-6.1-terra",
+                    "gpt-6.1-terra-high",
+                    "gpt-6.1-terra-low",
+                    "gpt-6.1-terra-medium",
+                    "gpt-6.1-terra-xhigh",
+                    "kimi-k3-1-pro",
+                    "mimo-v2-6-pro"
+                  ],
                   "anchors": {
-                    "low": 0.29182289369486875,
-                    "high": 10853.63122867045,
+                    "low": 8.802926718376797,
+                    "high": 629.6613875363639,
                     "referenceIds": [
-                      "claude-haiku-5-5",
-                      "claude-haiku-5-5-high",
-                      "claude-haiku-5-5-low",
-                      "claude-haiku-5-5-max",
-                      "claude-haiku-5-5-medium",
-                      "claude-opus-5-5",
-                      "claude-opus-5-5-high",
-                      "claude-opus-5-5-medium",
-                      "claude-opus-5-5-xhigh",
-                      "claude-sonnet-5-5",
-                      "claude-sonnet-5-5-xhigh",
-                      "deepseek-v4-1-flash-1017",
-                      "gemini-4-argon",
                       "gpt-6-astra",
                       "gpt-6-astra-high",
                       "gpt-6-astra-xhigh",
-                      "gpt-6-luna",
-                      "gpt-6-luna-high",
-                      "gpt-6-luna-low",
-                      "gpt-6-luna-medium",
-                      "gpt-6-luna-xhigh",
                       "gpt-6.1-sol",
                       "gpt-6.1-sol-high",
                       "gpt-6.1-sol-low",
                       "gpt-6.1-sol-medium",
-                      "gpt-6.1-sol-xhigh",
-                      "gpt-6.1-terra",
-                      "gpt-6.1-terra-high",
-                      "gpt-6.1-terra-low",
-                      "gpt-6.1-terra-medium",
-                      "gpt-6.1-terra-xhigh",
-                      "kimi-k3-1-pro",
-                      "mimo-v2-6-pro"
+                      "gpt-6.1-sol-xhigh"
                     ]
                   },
                   "exchangeRate": {
-                    "valuePointsPerCostDoubling": 1.646608212025156,
-                    "qualityPointsPerCostDoubling": 2.1954776160335414,
-                    "anchorRatio": 37192.52828744496
+                    "valuePointsPerCostDoubling": 4.058145674694215,
+                    "qualityPointsPerCostDoubling": 5.410860899592286,
+                    "anchorRatio": 71.52864128948121
                   },
                   "rankChanges": {
                     "panel": [
@@ -116803,42 +116969,42 @@
                     ],
                     "excluded": [],
                     "changes": {
-                      "claude-haiku-5-5": -1,
-                      "claude-haiku-5-5-high": 1,
+                      "claude-haiku-5-5": -3,
+                      "claude-haiku-5-5-high": 0,
                       "claude-haiku-5-5-low": -1,
-                      "claude-haiku-5-5-max": 2,
-                      "claude-haiku-5-5-medium": -1,
-                      "claude-opus-5-5": -4,
-                      "claude-opus-5-5-high": 3,
-                      "claude-opus-5-5-medium": 4,
-                      "claude-opus-5-5-xhigh": 2,
-                      "claude-sonnet-5-5": -2,
-                      "claude-sonnet-5-5-xhigh": 3,
-                      "deepseek-v4-1-flash-1017": -5,
-                      "gemini-4-argon": -6,
-                      "gpt-6-astra": -8,
-                      "gpt-6-astra-high": -7,
-                      "gpt-6-astra-xhigh": -7,
-                      "gpt-6-luna": 3,
-                      "gpt-6-luna-high": 6,
+                      "claude-haiku-5-5-max": -2,
+                      "claude-haiku-5-5-medium": 0,
+                      "claude-opus-5-5": 1,
+                      "claude-opus-5-5-high": 0,
+                      "claude-opus-5-5-medium": -1,
+                      "claude-opus-5-5-xhigh": 1,
+                      "claude-sonnet-5-5": 0,
+                      "claude-sonnet-5-5-xhigh": 1,
+                      "deepseek-v4-1-flash-1017": 3,
+                      "gemini-4-argon": -1,
+                      "gpt-6-astra": 3,
+                      "gpt-6-astra-high": 3,
+                      "gpt-6-astra-xhigh": 1,
+                      "gpt-6-luna": 0,
+                      "gpt-6-luna-high": 0,
                       "gpt-6-luna-low": 0,
-                      "gpt-6-luna-medium": 2,
-                      "gpt-6-luna-xhigh": 5,
-                      "gpt-6.1-sol": -1,
-                      "gpt-6.1-sol-high": 5,
-                      "gpt-6.1-sol-low": 0,
-                      "gpt-6.1-sol-medium": 6,
-                      "gpt-6.1-sol-xhigh": 1,
-                      "gpt-6.1-terra": 1,
-                      "gpt-6.1-terra-high": 2,
-                      "gpt-6.1-terra-low": 4,
-                      "gpt-6.1-terra-medium": 2,
-                      "gpt-6.1-terra-xhigh": 1,
-                      "kimi-k3-1-pro": -9,
-                      "mimo-v2-6-pro": -1
+                      "gpt-6-luna-medium": -1,
+                      "gpt-6-luna-xhigh": 0,
+                      "gpt-6.1-sol": 0,
+                      "gpt-6.1-sol-high": 0,
+                      "gpt-6.1-sol-low": -1,
+                      "gpt-6.1-sol-medium": -1,
+                      "gpt-6.1-sol-xhigh": 0,
+                      "gpt-6.1-terra": 0,
+                      "gpt-6.1-terra-high": 0,
+                      "gpt-6.1-terra-low": 0,
+                      "gpt-6.1-terra-medium": -1,
+                      "gpt-6.1-terra-xhigh": -1,
+                      "kimi-k3-1-pro": -1,
+                      "mimo-v2-6-pro": 1
                     },
-                    "maxAbsChange": 9,
-                    "maxRow": "kimi-k3-1-pro"
+                    "maxAbsChange": 3,
+                    "maxRow": "gpt-6-astra-high"
                   }
                 }
               }
@@ -116942,19 +117108,22 @@
                 },
                 "recalibrated": {
                   "label": "alternative workload, recalibrated anchors",
+                  "status": "evaluated",
+                  "excluded": [
+                    "claude-opus-5-5",
+                    "claude-opus-5-5-high",
+                    "claude-opus-5-5-medium",
+                    "claude-opus-5-5-xhigh"
+                  ],
                   "anchors": {
                     "low": 2.0425318177049436,
-                    "high": 12219.357991848023,
+                    "high": 11932.130307609328,
                     "referenceIds": [
                       "claude-haiku-5-5",
                       "claude-haiku-5-5-high",
                       "claude-haiku-5-5-low",
                       "claude-haiku-5-5-max",
                       "claude-haiku-5-5-medium",
-                      "claude-opus-5-5",
-                      "claude-opus-5-5-high",
-                      "claude-opus-5-5-medium",
-                      "claude-opus-5-5-xhigh",
                       "claude-sonnet-5-5",
                       "claude-sonnet-5-5-xhigh",
                       "deepseek-v4-1-flash-1017",
@@ -116982,9 +117151,9 @@
                     ]
                   },
                   "exchangeRate": {
-                    "valuePointsPerCostDoubling": 1.9925840302638007,
-                    "qualityPointsPerCostDoubling": 2.656778707018401,
-                    "anchorRatio": 5982.456618755687
+                    "valuePointsPerCostDoubling": 1.9980490305250582,
+                    "qualityPointsPerCostDoubling": 2.664065374033411,
+                    "anchorRatio": 5841.833260162705
                   },
                   "rankChanges": {
                     "panel": [
@@ -117145,49 +117314,52 @@
                 },
                 "recalibrated": {
                   "label": "alternative workload, recalibrated anchors",
+                  "status": "evaluated",
+                  "excluded": [
+                    "claude-haiku-5-5",
+                    "claude-haiku-5-5-high",
+                    "claude-haiku-5-5-low",
+                    "claude-haiku-5-5-max",
+                    "claude-haiku-5-5-medium",
+                    "claude-opus-5-5",
+                    "claude-opus-5-5-high",
+                    "claude-opus-5-5-medium",
+                    "claude-opus-5-5-xhigh",
+                    "claude-sonnet-5-5",
+                    "claude-sonnet-5-5-xhigh",
+                    "deepseek-v4-1-flash-1017",
+                    "gemini-4-argon",
+                    "gpt-6-luna",
+                    "gpt-6-luna-high",
+                    "gpt-6-luna-low",
+                    "gpt-6-luna-medium",
+                    "gpt-6-luna-xhigh",
+                    "gpt-6.1-terra",
+                    "gpt-6.1-terra-high",
+                    "gpt-6.1-terra-low",
+                    "gpt-6.1-terra-medium",
+                    "gpt-6.1-terra-xhigh",
+                    "kimi-k3-1-pro",
+                    "mimo-v2-6-pro"
+                  ],
                   "anchors": {
-                    "low": 0.1896149106670018,
-                    "high": 9481.15412129043,
+                    "low": 5.491681183330218,
+                    "high": 513.579636978199,
                     "referenceIds": [
-                      "claude-haiku-5-5",
-                      "claude-haiku-5-5-high",
-                      "claude-haiku-5-5-low",
-                      "claude-haiku-5-5-max",
-                      "claude-haiku-5-5-medium",
-                      "claude-opus-5-5",
-                      "claude-opus-5-5-high",
-                      "claude-opus-5-5-medium",
-                      "claude-opus-5-5-xhigh",
-                      "claude-sonnet-5-5",
-                      "claude-sonnet-5-5-xhigh",
-                      "deepseek-v4-1-flash-1017",
-                      "gemini-4-argon",
                       "gpt-6-astra",
                       "gpt-6-astra-high",
                       "gpt-6-astra-xhigh",
-                      "gpt-6-luna",
-                      "gpt-6-luna-high",
-                      "gpt-6-luna-low",
-                      "gpt-6-luna-medium",
-                      "gpt-6-luna-xhigh",
                       "gpt-6.1-sol",
                       "gpt-6.1-sol-high",
                       "gpt-6.1-sol-low",
                       "gpt-6.1-sol-medium",
-                      "gpt-6.1-sol-xhigh",
-                      "gpt-6.1-terra",
-                      "gpt-6.1-terra-high",
-                      "gpt-6.1-terra-low",
-                      "gpt-6.1-terra-medium",
-                      "gpt-6.1-terra-xhigh",
-                      "kimi-k3-1-pro",
-                      "mimo-v2-6-pro"
+                      "gpt-6.1-sol-xhigh"
                     ]
                   },
                   "exchangeRate": {
-                    "valuePointsPerCostDoubling": 1.6015679839125683,
-                    "qualityPointsPerCostDoubling": 2.135423978550091,
-                    "anchorRatio": 50002.154830223546
+                    "valuePointsPerCostDoubling": 3.8184283444775122,
+                    "qualityPointsPerCostDoubling": 5.091237792636683,
+                    "anchorRatio": 93.5195652903431
                   },
                   "rankChanges": {
                     "panel": [
@@ -117227,42 +117399,42 @@
                     ],
                     "excluded": [],
                     "changes": {
-                      "claude-haiku-5-5": 0,
-                      "claude-haiku-5-5-high": 1,
+                      "claude-haiku-5-5": -4,
+                      "claude-haiku-5-5-high": 0,
                       "claude-haiku-5-5-low": -1,
-                      "claude-haiku-5-5-max": 3,
+                      "claude-haiku-5-5-max": -6,
                       "claude-haiku-5-5-medium": 0,
-                      "claude-opus-5-5": -3,
-                      "claude-opus-5-5-high": 3,
-                      "claude-opus-5-5-medium": 4,
-                      "claude-opus-5-5-xhigh": 3,
-                      "claude-sonnet-5-5": -2,
-                      "claude-sonnet-5-5-xhigh": 4,
-                      "deepseek-v4-1-flash-1017": -5,
-                      "gemini-4-argon": -5,
-                      "gpt-6-astra": -8,
-                      "gpt-6-astra-high": -7,
-                      "gpt-6-astra-xhigh": -8,
-                      "gpt-6-luna": 3,
-                      "gpt-6-luna-high": 6,
+                      "claude-opus-5-5": 2,
+                      "claude-opus-5-5-high": 2,
+                      "claude-opus-5-5-medium": -1,
+                      "claude-opus-5-5-xhigh": 2,
+                      "claude-sonnet-5-5": 1,
+                      "claude-sonnet-5-5-xhigh": 2,
+                      "deepseek-v4-1-flash-1017": 3,
+                      "gemini-4-argon": -1,
+                      "gpt-6-astra": 1,
+                      "gpt-6-astra-high": 3,
+                      "gpt-6-astra-xhigh": 0,
+                      "gpt-6-luna": 0,
+                      "gpt-6-luna-high": 0,
                       "gpt-6-luna-low": 0,
-                      "gpt-6-luna-medium": 2,
-                      "gpt-6-luna-xhigh": 6,
-                      "gpt-6.1-sol": -1,
-                      "gpt-6.1-sol-high": 3,
-                      "gpt-6.1-sol-low": -1,
-                      "gpt-6.1-sol-medium": 5,
-                      "gpt-6.1-sol-xhigh": 1,
-                      "gpt-6.1-terra": 2,
+                      "gpt-6-luna-medium": -1,
+                      "gpt-6-luna-xhigh": 0,
+                      "gpt-6.1-sol": 0,
+                      "gpt-6.1-sol-high": -1,
+                      "gpt-6.1-sol-low": -2,
+                      "gpt-6.1-sol-medium": -2,
+                      "gpt-6.1-sol-xhigh": 0,
+                      "gpt-6.1-terra": 1,
                       "gpt-6.1-terra-high": 1,
-                      "gpt-6.1-terra-low": 2,
-                      "gpt-6.1-terra-medium": 2,
-                      "gpt-6.1-terra-xhigh": 0,
-                      "kimi-k3-1-pro": -8,
-                      "mimo-v2-6-pro": -2
+                      "gpt-6.1-terra-low": 0,
+                      "gpt-6.1-terra-medium": 0,
+                      "gpt-6.1-terra-xhigh": 1,
+                      "kimi-k3-1-pro": -1,
+                      "mimo-v2-6-pro": 1
                     },
-                    "maxAbsChange": 8,
-                    "maxRow": "kimi-k3-1-pro"
+                    "maxAbsChange": 6,
+                    "maxRow": "claude-haiku-5-5-max"
                   }
                 }
               }
@@ -117366,19 +117538,22 @@
                 },
                 "recalibrated": {
                   "label": "alternative workload, recalibrated anchors",
+                  "status": "evaluated",
+                  "excluded": [
+                    "claude-opus-5-5",
+                    "claude-opus-5-5-high",
+                    "claude-opus-5-5-medium",
+                    "claude-opus-5-5-xhigh"
+                  ],
                   "anchors": {
                     "low": 3.7938236395756437,
-                    "high": 12366.317759240717,
+                    "high": 11619.431431062198,
                     "referenceIds": [
                       "claude-haiku-5-5",
                       "claude-haiku-5-5-high",
                       "claude-haiku-5-5-low",
                       "claude-haiku-5-5-max",
                       "claude-haiku-5-5-medium",
-                      "claude-opus-5-5",
-                      "claude-opus-5-5-high",
-                      "claude-opus-5-5-medium",
-                      "claude-opus-5-5-xhigh",
                       "claude-sonnet-5-5",
                       "claude-sonnet-5-5-xhigh",
                       "deepseek-v4-1-flash-1017",
@@ -117406,9 +117581,9 @@
                     ]
                   },
                   "exchangeRate": {
-                    "valuePointsPerCostDoubling": 2.142157744267573,
-                    "qualityPointsPerCostDoubling": 2.8562103256900975,
-                    "anchorRatio": 3259.592151369468
+                    "valuePointsPerCostDoubling": 2.1587829335290105,
+                    "qualityPointsPerCostDoubling": 2.8783772447053475,
+                    "anchorRatio": 3062.723135006319
                   },
                   "rankChanges": {
                     "panel": [
@@ -117569,49 +117744,52 @@
                 },
                 "recalibrated": {
                   "label": "alternative workload, recalibrated anchors",
+                  "status": "evaluated",
+                  "excluded": [
+                    "claude-haiku-5-5",
+                    "claude-haiku-5-5-high",
+                    "claude-haiku-5-5-low",
+                    "claude-haiku-5-5-max",
+                    "claude-haiku-5-5-medium",
+                    "claude-opus-5-5",
+                    "claude-opus-5-5-high",
+                    "claude-opus-5-5-medium",
+                    "claude-opus-5-5-xhigh",
+                    "claude-sonnet-5-5",
+                    "claude-sonnet-5-5-xhigh",
+                    "deepseek-v4-1-flash-1017",
+                    "gemini-4-argon",
+                    "gpt-6-luna",
+                    "gpt-6-luna-high",
+                    "gpt-6-luna-low",
+                    "gpt-6-luna-medium",
+                    "gpt-6-luna-xhigh",
+                    "gpt-6.1-terra",
+                    "gpt-6.1-terra-high",
+                    "gpt-6.1-terra-low",
+                    "gpt-6.1-terra-medium",
+                    "gpt-6.1-terra-xhigh",
+                    "kimi-k3-1-pro",
+                    "mimo-v2-6-pro"
+                  ],
                   "anchors": {
-                    "low": 0.2458797039628286,
-                    "high": 9574.143377100741,
+                    "low": 9.180751737907157,
+                    "high": 580.8807434021303,
                     "referenceIds": [
-                      "claude-haiku-5-5",
-                      "claude-haiku-5-5-high",
-                      "claude-haiku-5-5-low",
-                      "claude-haiku-5-5-max",
-                      "claude-haiku-5-5-medium",
-                      "claude-opus-5-5",
-                      "claude-opus-5-5-high",
-                      "claude-opus-5-5-medium",
-                      "claude-opus-5-5-xhigh",
-                      "claude-sonnet-5-5",
-                      "claude-sonnet-5-5-xhigh",
-                      "deepseek-v4-1-flash-1017",
-                      "gemini-4-argon",
                       "gpt-6-astra",
                       "gpt-6-astra-high",
                       "gpt-6-astra-xhigh",
-                      "gpt-6-luna",
-                      "gpt-6-luna-high",
-                      "gpt-6-luna-low",
-                      "gpt-6-luna-medium",
-                      "gpt-6-luna-xhigh",
                       "gpt-6.1-sol",
                       "gpt-6.1-sol-high",
                       "gpt-6.1-sol-low",
                       "gpt-6.1-sol-medium",
-                      "gpt-6.1-sol-xhigh",
-                      "gpt-6.1-terra",
-                      "gpt-6.1-terra-high",
-                      "gpt-6.1-terra-low",
-                      "gpt-6.1-terra-medium",
-                      "gpt-6.1-terra-xhigh",
-                      "kimi-k3-1-pro",
-                      "mimo-v2-6-pro"
+                      "gpt-6.1-sol-xhigh"
                     ]
                   },
                   "exchangeRate": {
-                    "valuePointsPerCostDoubling": 1.639462181275266,
-                    "qualityPointsPerCostDoubling": 2.185949575033688,
-                    "anchorRatio": 38938.32318322676
+                    "valuePointsPerCostDoubling": 4.178166439639555,
+                    "qualityPointsPerCostDoubling": 5.570888586186073,
+                    "anchorRatio": 63.27158820815122
                   },
                   "rankChanges": {
                     "panel": [
@@ -117651,42 +117829,42 @@
                     ],
                     "excluded": [],
                     "changes": {
-                      "claude-haiku-5-5": -1,
-                      "claude-haiku-5-5-high": 1,
+                      "claude-haiku-5-5": -2,
+                      "claude-haiku-5-5-high": 0,
                       "claude-haiku-5-5-low": -1,
-                      "claude-haiku-5-5-max": 2,
-                      "claude-haiku-5-5-medium": -1,
-                      "claude-opus-5-5": -4,
-                      "claude-opus-5-5-high": 3,
-                      "claude-opus-5-5-medium": 4,
-                      "claude-opus-5-5-xhigh": 2,
-                      "claude-sonnet-5-5": -2,
-                      "claude-sonnet-5-5-xhigh": 3,
-                      "deepseek-v4-1-flash-1017": -6,
-                      "gemini-4-argon": -6,
-                      "gpt-6-astra": -8,
-                      "gpt-6-astra-high": -7,
-                      "gpt-6-astra-xhigh": -7,
-                      "gpt-6-luna": 3,
-                      "gpt-6-luna-high": 6,
+                      "claude-haiku-5-5-max": -2,
+                      "claude-haiku-5-5-medium": 0,
+                      "claude-opus-5-5": 1,
+                      "claude-opus-5-5-high": 0,
+                      "claude-opus-5-5-medium": -1,
+                      "claude-opus-5-5-xhigh": 0,
+                      "claude-sonnet-5-5": 0,
+                      "claude-sonnet-5-5-xhigh": 1,
+                      "deepseek-v4-1-flash-1017": 3,
+                      "gemini-4-argon": -1,
+                      "gpt-6-astra": 3,
+                      "gpt-6-astra-high": 4,
+                      "gpt-6-astra-xhigh": 1,
+                      "gpt-6-luna": -2,
+                      "gpt-6-luna-high": 0,
                       "gpt-6-luna-low": 0,
-                      "gpt-6-luna-medium": 2,
-                      "gpt-6-luna-xhigh": 5,
-                      "gpt-6.1-sol": -1,
-                      "gpt-6.1-sol-high": 5,
+                      "gpt-6-luna-medium": -1,
+                      "gpt-6-luna-xhigh": 0,
+                      "gpt-6.1-sol": 0,
+                      "gpt-6.1-sol-high": 0,
                       "gpt-6.1-sol-low": 0,
-                      "gpt-6.1-sol-medium": 6,
-                      "gpt-6.1-sol-xhigh": 1,
-                      "gpt-6.1-terra": 1,
-                      "gpt-6.1-terra-high": 2,
-                      "gpt-6.1-terra-low": 4,
-                      "gpt-6.1-terra-medium": 3,
-                      "gpt-6.1-terra-xhigh": 1,
-                      "kimi-k3-1-pro": -9,
-                      "mimo-v2-6-pro": -1
+                      "gpt-6.1-sol-medium": 0,
+                      "gpt-6.1-sol-xhigh": 0,
+                      "gpt-6.1-terra": 0,
+                      "gpt-6.1-terra-high": -1,
+                      "gpt-6.1-terra-low": 0,
+                      "gpt-6.1-terra-medium": -1,
+                      "gpt-6.1-terra-xhigh": -1,
+                      "kimi-k3-1-pro": -1,
+                      "mimo-v2-6-pro": 1
                     },
-                    "maxAbsChange": 9,
-                    "maxRow": "kimi-k3-1-pro"
+                    "maxAbsChange": 4,
+                    "maxRow": "gpt-6-astra-high"
                   }
                 }
               }
@@ -117790,19 +117968,22 @@
                 },
                 "recalibrated": {
                   "label": "alternative workload, recalibrated anchors",
+                  "status": "evaluated",
+                  "excluded": [
+                    "claude-opus-5-5",
+                    "claude-opus-5-5-high",
+                    "claude-opus-5-5-medium",
+                    "claude-opus-5-5-xhigh"
+                  ],
                   "anchors": {
                     "low": 3.489817212502662,
-                    "high": 10544.580557088517,
+                    "high": 10237.577452114627,
                     "referenceIds": [
                       "claude-haiku-5-5",
                       "claude-haiku-5-5-high",
                       "claude-haiku-5-5-low",
                       "claude-haiku-5-5-max",
                       "claude-haiku-5-5-medium",
-                      "claude-opus-5-5",
-                      "claude-opus-5-5-high",
-                      "claude-opus-5-5-medium",
-                      "claude-opus-5-5-xhigh",
                       "claude-sonnet-5-5",
                       "claude-sonnet-5-5-xhigh",
                       "deepseek-v4-1-flash-1017",
@@ -117830,9 +118011,9 @@
                     ]
                   },
                   "exchangeRate": {
-                    "valuePointsPerCostDoubling": 2.16243098353831,
-                    "qualityPointsPerCostDoubling": 2.8832413113844133,
-                    "anchorRatio": 3021.528038577887
+                    "valuePointsPerCostDoubling": 2.1704336925092496,
+                    "qualityPointsPerCostDoubling": 2.893911590012333,
+                    "anchorRatio": 2933.5569253992317
                   },
                   "rankChanges": {
                     "panel": [
@@ -117993,49 +118174,52 @@
                 },
                 "recalibrated": {
                   "label": "alternative workload, recalibrated anchors",
+                  "status": "evaluated",
+                  "excluded": [
+                    "claude-haiku-5-5",
+                    "claude-haiku-5-5-high",
+                    "claude-haiku-5-5-low",
+                    "claude-haiku-5-5-max",
+                    "claude-haiku-5-5-medium",
+                    "claude-opus-5-5",
+                    "claude-opus-5-5-high",
+                    "claude-opus-5-5-medium",
+                    "claude-opus-5-5-xhigh",
+                    "claude-sonnet-5-5",
+                    "claude-sonnet-5-5-xhigh",
+                    "deepseek-v4-1-flash-1017",
+                    "gemini-4-argon",
+                    "gpt-6-luna",
+                    "gpt-6-luna-high",
+                    "gpt-6-luna-low",
+                    "gpt-6-luna-medium",
+                    "gpt-6-luna-xhigh",
+                    "gpt-6.1-terra",
+                    "gpt-6.1-terra-high",
+                    "gpt-6.1-terra-low",
+                    "gpt-6.1-terra-medium",
+                    "gpt-6.1-terra-xhigh",
+                    "kimi-k3-1-pro",
+                    "mimo-v2-6-pro"
+                  ],
                   "anchors": {
-                    "low": 0.26875198869786304,
-                    "high": 7249.675344750851,
+                    "low": 9.121934624161852,
+                    "high": 539.1491973484734,
                     "referenceIds": [
-                      "claude-haiku-5-5",
-                      "claude-haiku-5-5-high",
-                      "claude-haiku-5-5-low",
-                      "claude-haiku-5-5-max",
-                      "claude-haiku-5-5-medium",
-                      "claude-opus-5-5",
-                      "claude-opus-5-5-high",
-                      "claude-opus-5-5-medium",
-                      "claude-opus-5-5-xhigh",
-                      "claude-sonnet-5-5",
-                      "claude-sonnet-5-5-xhigh",
-                      "deepseek-v4-1-flash-1017",
-                      "gemini-4-argon",
                       "gpt-6-astra",
                       "gpt-6-astra-high",
                       "gpt-6-astra-xhigh",
-                      "gpt-6-luna",
-                      "gpt-6-luna-high",
-                      "gpt-6-luna-low",
-                      "gpt-6-luna-medium",
-                      "gpt-6-luna-xhigh",
                       "gpt-6.1-sol",
                       "gpt-6.1-sol-high",
                       "gpt-6.1-sol-low",
                       "gpt-6.1-sol-medium",
-                      "gpt-6.1-sol-xhigh",
-                      "gpt-6.1-terra",
-                      "gpt-6.1-terra-high",
-                      "gpt-6.1-terra-low",
-                      "gpt-6.1-terra-medium",
-                      "gpt-6.1-terra-xhigh",
-                      "kimi-k3-1-pro",
-                      "mimo-v2-6-pro"
+                      "gpt-6.1-sol-xhigh"
                     ]
                   },
                   "exchangeRate": {
-                    "valuePointsPerCostDoubling": 1.6984441791889047,
-                    "qualityPointsPerCostDoubling": 2.2645922389185396,
-                    "anchorRatio": 26975.336554257454
+                    "valuePointsPerCostDoubling": 4.247943330598654,
+                    "qualityPointsPerCostDoubling": 5.663924440798205,
+                    "anchorRatio": 59.10469868095682
                   },
                   "rankChanges": {
                     "panel": [
@@ -118075,42 +118259,42 @@
                     ],
                     "excluded": [],
                     "changes": {
-                      "claude-haiku-5-5": -1,
-                      "claude-haiku-5-5-high": 1,
+                      "claude-haiku-5-5": -2,
+                      "claude-haiku-5-5-high": 0,
                       "claude-haiku-5-5-low": -1,
-                      "claude-haiku-5-5-max": 2,
-                      "claude-haiku-5-5-medium": -1,
-                      "claude-opus-5-5": -4,
-                      "claude-opus-5-5-high": 3,
-                      "claude-opus-5-5-medium": 4,
-                      "claude-opus-5-5-xhigh": 2,
-                      "claude-sonnet-5-5": -2,
-                      "claude-sonnet-5-5-xhigh": 3,
-                      "deepseek-v4-1-flash-1017": -5,
-                      "gemini-4-argon": -6,
-                      "gpt-6-astra": -8,
-                      "gpt-6-astra-high": -7,
-                      "gpt-6-astra-xhigh": -7,
-                      "gpt-6-luna": 3,
-                      "gpt-6-luna-high": 6,
+                      "claude-haiku-5-5-max": -1,
+                      "claude-haiku-5-5-medium": 0,
+                      "claude-opus-5-5": 0,
+                      "claude-opus-5-5-high": 0,
+                      "claude-opus-5-5-medium": -1,
+                      "claude-opus-5-5-xhigh": 0,
+                      "claude-sonnet-5-5": 0,
+                      "claude-sonnet-5-5-xhigh": 1,
+                      "deepseek-v4-1-flash-1017": 3,
+                      "gemini-4-argon": -1,
+                      "gpt-6-astra": 4,
+                      "gpt-6-astra-high": 3,
+                      "gpt-6-astra-xhigh": 1,
+                      "gpt-6-luna": -2,
+                      "gpt-6-luna-high": 0,
                       "gpt-6-luna-low": 0,
-                      "gpt-6-luna-medium": 2,
-                      "gpt-6-luna-xhigh": 5,
-                      "gpt-6.1-sol": -1,
-                      "gpt-6.1-sol-high": 5,
+                      "gpt-6-luna-medium": -1,
+                      "gpt-6-luna-xhigh": 0,
+                      "gpt-6.1-sol": 0,
+                      "gpt-6.1-sol-high": 0,
                       "gpt-6.1-sol-low": 1,
-                      "gpt-6.1-sol-medium": 6,
-                      "gpt-6.1-sol-xhigh": 1,
-                      "gpt-6.1-terra": 1,
-                      "gpt-6.1-terra-high": 2,
-                      "gpt-6.1-terra-low": 4,
-                      "gpt-6.1-terra-medium": 1,
-                      "gpt-6.1-terra-xhigh": 1,
-                      "kimi-k3-1-pro": -9,
-                      "mimo-v2-6-pro": -1
+                      "gpt-6.1-sol-medium": 0,
+                      "gpt-6.1-sol-xhigh": 0,
+                      "gpt-6.1-terra": 0,
+                      "gpt-6.1-terra-high": -1,
+                      "gpt-6.1-terra-low": 0,
+                      "gpt-6.1-terra-medium": -2,
+                      "gpt-6.1-terra-xhigh": -1,
+                      "kimi-k3-1-pro": -1,
+                      "mimo-v2-6-pro": 1
                     },
-                    "maxAbsChange": 9,
-                    "maxRow": "kimi-k3-1-pro"
+                    "maxAbsChange": 4,
+                    "maxRow": "gpt-6-astra"
                   }
                 }
               }
@@ -118214,19 +118398,22 @@
                 },
                 "recalibrated": {
                   "label": "alternative workload, recalibrated anchors",
+                  "status": "evaluated",
+                  "excluded": [
+                    "claude-opus-5-5",
+                    "claude-opus-5-5-high",
+                    "claude-opus-5-5-medium",
+                    "claude-opus-5-5-xhigh"
+                  ],
                   "anchors": {
                     "low": 3.701686881972299,
-                    "high": 11300.80444337369,
+                    "high": 9962.263016944682,
                     "referenceIds": [
                       "claude-haiku-5-5",
                       "claude-haiku-5-5-high",
                       "claude-haiku-5-5-low",
                       "claude-haiku-5-5-max",
                       "claude-haiku-5-5-medium",
-                      "claude-opus-5-5",
-                      "claude-opus-5-5-high",
-                      "claude-opus-5-5-medium",
-                      "claude-opus-5-5-xhigh",
                       "claude-sonnet-5-5",
                       "claude-sonnet-5-5-xhigh",
                       "deepseek-v4-1-flash-1017",
@@ -118254,9 +118441,9 @@
                     ]
                   },
                   "exchangeRate": {
-                    "valuePointsPerCostDoubling": 2.1596490334024896,
-                    "qualityPointsPerCostDoubling": 2.879532044536653,
-                    "anchorRatio": 3052.8796204806226
+                    "valuePointsPerCostDoubling": 2.19412283811814,
+                    "qualityPointsPerCostDoubling": 2.925497117490853,
+                    "anchorRatio": 2691.276527321155
                   },
                   "rankChanges": {
                     "panel": [
@@ -118307,10 +118494,10 @@
                       "claude-opus-5-5-xhigh": 0,
                       "claude-sonnet-5-5": 0,
                       "claude-sonnet-5-5-xhigh": -1,
-                      "deepseek-v4-1-flash-1017": 0,
+                      "deepseek-v4-1-flash-1017": -1,
                       "gemini-4-argon": 1,
                       "gpt-6-astra": 0,
-                      "gpt-6-astra-high": 0,
+                      "gpt-6-astra-high": 1,
                       "gpt-6-astra-xhigh": 0,
                       "gpt-6-luna": 0,
                       "gpt-6-luna-high": 0,
@@ -118417,49 +118604,52 @@
                 },
                 "recalibrated": {
                   "label": "alternative workload, recalibrated anchors",
+                  "status": "evaluated",
+                  "excluded": [
+                    "claude-haiku-5-5",
+                    "claude-haiku-5-5-high",
+                    "claude-haiku-5-5-low",
+                    "claude-haiku-5-5-max",
+                    "claude-haiku-5-5-medium",
+                    "claude-opus-5-5",
+                    "claude-opus-5-5-high",
+                    "claude-opus-5-5-medium",
+                    "claude-opus-5-5-xhigh",
+                    "claude-sonnet-5-5",
+                    "claude-sonnet-5-5-xhigh",
+                    "deepseek-v4-1-flash-1017",
+                    "gemini-4-argon",
+                    "gpt-6-luna",
+                    "gpt-6-luna-high",
+                    "gpt-6-luna-low",
+                    "gpt-6-luna-medium",
+                    "gpt-6-luna-xhigh",
+                    "gpt-6.1-terra",
+                    "gpt-6.1-terra-high",
+                    "gpt-6.1-terra-low",
+                    "gpt-6.1-terra-medium",
+                    "gpt-6.1-terra-xhigh",
+                    "kimi-k3-1-pro",
+                    "mimo-v2-6-pro"
+                  ],
                   "anchors": {
-                    "low": 0.24803678250814523,
-                    "high": 8339.619698238408,
+                    "low": 9.56629584679862,
+                    "high": 489.41226748578015,
                     "referenceIds": [
-                      "claude-haiku-5-5",
-                      "claude-haiku-5-5-high",
-                      "claude-haiku-5-5-low",
-                      "claude-haiku-5-5-max",
-                      "claude-haiku-5-5-medium",
-                      "claude-opus-5-5",
-                      "claude-opus-5-5-high",
-                      "claude-opus-5-5-medium",
-                      "claude-opus-5-5-xhigh",
-                      "claude-sonnet-5-5",
-                      "claude-sonnet-5-5-xhigh",
-                      "deepseek-v4-1-flash-1017",
-                      "gemini-4-argon",
                       "gpt-6-astra",
                       "gpt-6-astra-high",
                       "gpt-6-astra-xhigh",
-                      "gpt-6-luna",
-                      "gpt-6-luna-high",
-                      "gpt-6-luna-low",
-                      "gpt-6-luna-medium",
-                      "gpt-6-luna-xhigh",
                       "gpt-6.1-sol",
                       "gpt-6.1-sol-high",
                       "gpt-6.1-sol-low",
                       "gpt-6.1-sol-medium",
-                      "gpt-6.1-sol-xhigh",
-                      "gpt-6.1-terra",
-                      "gpt-6.1-terra-high",
-                      "gpt-6.1-terra-low",
-                      "gpt-6.1-terra-medium",
-                      "gpt-6.1-terra-xhigh",
-                      "kimi-k3-1-pro",
-                      "mimo-v2-6-pro"
+                      "gpt-6.1-sol-xhigh"
                     ]
                   },
                   "exchangeRate": {
-                    "valuePointsPerCostDoubling": 1.6625502040111182,
-                    "qualityPointsPerCostDoubling": 2.2167336053481574,
-                    "anchorRatio": 33622.512007728306
+                    "valuePointsPerCostDoubling": 4.403776220731312,
+                    "qualityPointsPerCostDoubling": 5.871701627641749,
+                    "anchorRatio": 51.16005978944953
                   },
                   "rankChanges": {
                     "panel": [
@@ -118500,41 +118690,41 @@
                     "excluded": [],
                     "changes": {
                       "claude-haiku-5-5": -1,
-                      "claude-haiku-5-5-high": 1,
-                      "claude-haiku-5-5-low": 0,
-                      "claude-haiku-5-5-max": 2,
-                      "claude-haiku-5-5-medium": -1,
-                      "claude-opus-5-5": -3,
-                      "claude-opus-5-5-high": 4,
-                      "claude-opus-5-5-medium": 4,
-                      "claude-opus-5-5-xhigh": 1,
-                      "claude-sonnet-5-5": -2,
-                      "claude-sonnet-5-5-xhigh": 1,
-                      "deepseek-v4-1-flash-1017": -7,
-                      "gemini-4-argon": -6,
-                      "gpt-6-astra": -9,
-                      "gpt-6-astra-high": -6,
-                      "gpt-6-astra-xhigh": -6,
-                      "gpt-6-luna": 3,
-                      "gpt-6-luna-high": 6,
+                      "claude-haiku-5-5-high": 0,
+                      "claude-haiku-5-5-low": -1,
+                      "claude-haiku-5-5-max": -2,
+                      "claude-haiku-5-5-medium": 0,
+                      "claude-opus-5-5": 1,
+                      "claude-opus-5-5-high": -1,
+                      "claude-opus-5-5-medium": -1,
+                      "claude-opus-5-5-xhigh": 2,
+                      "claude-sonnet-5-5": 1,
+                      "claude-sonnet-5-5-xhigh": -4,
+                      "deepseek-v4-1-flash-1017": 3,
+                      "gemini-4-argon": -1,
+                      "gpt-6-astra": 2,
+                      "gpt-6-astra-high": 3,
+                      "gpt-6-astra-xhigh": 2,
+                      "gpt-6-luna": -2,
+                      "gpt-6-luna-high": 0,
                       "gpt-6-luna-low": 0,
-                      "gpt-6-luna-medium": 2,
-                      "gpt-6-luna-xhigh": 4,
-                      "gpt-6.1-sol": -1,
-                      "gpt-6.1-sol-high": 5,
-                      "gpt-6.1-sol-low": 2,
-                      "gpt-6.1-sol-medium": 6,
-                      "gpt-6.1-sol-xhigh": 1,
-                      "gpt-6.1-terra": 1,
-                      "gpt-6.1-terra-high": 2,
-                      "gpt-6.1-terra-low": 4,
-                      "gpt-6.1-terra-medium": 2,
-                      "gpt-6.1-terra-xhigh": 1,
-                      "kimi-k3-1-pro": -9,
-                      "mimo-v2-6-pro": -1
+                      "gpt-6-luna-medium": -1,
+                      "gpt-6-luna-xhigh": 0,
+                      "gpt-6.1-sol": 0,
+                      "gpt-6.1-sol-high": 0,
+                      "gpt-6.1-sol-low": 1,
+                      "gpt-6.1-sol-medium": 3,
+                      "gpt-6.1-sol-xhigh": 0,
+                      "gpt-6.1-terra": 0,
+                      "gpt-6.1-terra-high": -1,
+                      "gpt-6.1-terra-low": 0,
+                      "gpt-6.1-terra-medium": -1,
+                      "gpt-6.1-terra-xhigh": -2,
+                      "kimi-k3-1-pro": -1,
+                      "mimo-v2-6-pro": 1
                     },
-                    "maxAbsChange": 9,
-                    "maxRow": "kimi-k3-1-pro"
+                    "maxAbsChange": 4,
+                    "maxRow": "claude-sonnet-5-5-xhigh"
                   }
                 }
               }
@@ -119035,6 +119225,7 @@
                   "GPT-6.1 Terra (non-reasoning)"
                 ]
               },
+              "uncheckedCheaperSiblingsBasis": "lower AA total Index cost; workload- and Plan-cost ordering unverified (E318)",
               "possibleBlockerQualifierN": 0,
               "possibleQualifierN": 14,
               "confirmedQualifierN": 13,

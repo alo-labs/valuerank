@@ -193,6 +193,7 @@ def cost_world(**overrides):
         "costComponentFamily": [
             {"component": "scicode", "bases": {basis: {"recalibrated": {"rankChanges": {"changes": {"a": 1, "b": -1}}, "exchangeRate": {"valuePointsPerCostDoubling": 5.0}}} for basis in ("api", "plan")}},
             {"component": "coding-agent-index", "status": "not in the admitted basket"},
+            {"component": "gdpval", "bases": {basis: {"recalibrated": {"status": "unavailable: fewer than 2 eligible references (E160, E184, O157)"}} for basis in ("api", "plan")}},
         ],
         "subsetBridges": [{
             "subsetRows": ["s"], "missingComponents": ["coding-agent-index"], "pairedRows": ["a", "b"],
@@ -399,8 +400,8 @@ def test_gap_fill_bars_text_says_whether_each_bar_survives():
     same = {"level": 55.3, "published": ["a"], "removed": ["a"], "lowered": ["a"], "survives": True}
     flip = {"level": 59.6, "published": ["a"], "removed": [], "lowered": ["b"], "survives": False}
     text = ed.gap_fill_bars_text({"meanOffset": 2.53, "bases": {"api": [same], "plan": [flip]}}, Facts)
-    assert "lowered by the mean offset 2.5 points" in text and "API quality 55.3: a in all three" in text
-    assert text.endswith("Plan quality 59.6: a as published, none with the fills removed, b with third-party fills lowered by the offset.")
+    assert "third-party fills minus the signed mean offset +2.5 points (third party minus AA)" in text and "API quality 55.3: a in all three" in text
+    assert text.endswith("Plan quality 59.6: a as published, none with the fills removed, b with third-party fills moved onto AA's scale by the signed offset.")
     assert "no measured offset" in ed.gap_fill_bars_text({"meanOffset": None, "bases": {"api": [], "plan": []}}, Facts)
 
 
@@ -672,3 +673,14 @@ def test_workload_cross_check_is_printed_suppressed_or_absent_and_shared_costs_n
     facts = SimpleNamespace(v3={"rows": [{"id": "x", "cost": {"costUsd": 1.0}}]})
     other = SimpleNamespace(v3={"rows": [{"id": "y", "cost": {"costUsd": 2.0}}]})
     assert ed.cross_ranking_costs(facts, "aicd", other) == "" and ed.cross_ranking_costs(facts, "common", other) == ""
+
+
+def test_cost_removal_rows_state_an_unavailable_recalibration():
+    """E317: recalibrated anchors without two eligible references say so instead of a rank change."""
+
+    removal = {"bases": {"plan": {"multiplePolicy": "fixed", "fixedAnchors": {"label": "f", "rankChanges": {"changes": {}}},
+                                  "recalibrated": {"label": "r", "status": "unavailable: fewer than 2 eligible references (E160, E184, O157)"}}}}
+    rows = ed.cost_removal_rows(removal, StubFacts({}))
+    assert rows[1] == ["plan", "r; fixed", "unavailable: fewer than 2 eligible references (E160, E184, O157)"]
+    text = ed.cost_diagnostics_markdown(cost_world())
+    assert "| GDPval-AA v2.1 | unavailable: fewer than 2 eligible references (E160, E184, O157) |" in text or "unavailable: fewer than 2 eligible references" in text

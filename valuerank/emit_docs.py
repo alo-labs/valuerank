@@ -700,7 +700,7 @@ def displayed_cheapest_sentences(facts):
     sensitive = [f"{label} quality {entry['level']:.1f}" for basis, label in (("api", "API"), ("plan", "Plan"))
                  for entry in facts.v3["diagnostics"]["gapFillBars"]["bases"][basis] if not entry["survives"]]
     if sensitive:
-        sentences.append("Fill-sensitive (E234): the displayed-record cheapest row changes when gap-filled leaves are removed or lowered by the measured offset at "
+        sentences.append("Fill-sensitive (E234): the displayed-record cheapest row changes when gap-filled leaves are removed or moved onto AA's scale by the signed measured offset at "
                          + ", ".join(sensitive) + ".")
     # O43: the claims cover ranked configurations only; a listed family (O41) is outside them.
     if facts.v3.get("listedIndicative"):
@@ -1632,8 +1632,8 @@ def gap_fill_bars_text(result, facts):
                 parts.append(f"{label} quality {entry['level']:.1f}: {facts.labels(entry['published']) or 'none'} in all three")
             else:
                 parts.append(f"{label} quality {entry['level']:.1f}: {facts.labels(entry['published']) or 'none'} as published, {facts.labels(entry['removed']) or 'none'} "
-                             f"with the fills removed, {facts.labels(entry['lowered']) or 'none'} with third-party fills lowered by the offset")
-    offset = "no measured offset" if result["meanOffset"] is None else f"lowered by the mean offset {result['meanOffset']:.1f} points"
+                             f"with the fills removed, {facts.labels(entry['lowered']) or 'none'} with third-party fills moved onto AA's scale by the signed offset")
+    offset = "no measured offset" if result["meanOffset"] is None else f"third-party fills minus the signed mean offset {result['meanOffset']:+.1f} points (third party minus AA)"
     return "- **Bar results without the gap fills (E234, sensitivity; labels unchanged):** cheapest displayed row as published, with fills removed, and with third-party fills " + offset + " — " + "; ".join(parts) + "."
 
 
@@ -1674,8 +1674,9 @@ def cost_diagnostics_markdown(facts):
     for item in diagnostics["costComponentFamily"]:
         bases = item.get("bases", {})
         family_rows.append([component_label(item["component"])] + [
-            rank_change_text(bases[basis]["recalibrated"]["rankChanges"]["changes"], facts.labels) if basis in bases else DASH for basis in ("api", "plan")
-        ] + [fnum(bases["api"]["recalibrated"]["exchangeRate"]["valuePointsPerCostDoubling"], 2) if "api" in bases else DASH])
+            (rank_change_text(bases[basis]["recalibrated"]["rankChanges"]["changes"], facts.labels) if "rankChanges" in bases[basis]["recalibrated"]
+             else bases[basis]["recalibrated"]["status"]) if basis in bases else DASH for basis in ("api", "plan")
+        ] + [fnum(bases["api"]["recalibrated"]["exchangeRate"]["valuePointsPerCostDoubling"], 2) if "exchangeRate" in (bases.get("api") or {}).get("recalibrated", {}) else DASH])
     frontier = diagnostics["frontierAnchors"]
     if frontier["status"] == "evaluated":
         lines.append(
@@ -1763,6 +1764,17 @@ def workload_cross_check_text(facts, check):
             f"{result}; panel ({check['n']}): {panel}.")
 
 
+def cost_removal_rows(removal: dict, facts) -> list[list[str]]:
+    """E64/E149: the cost-removal branch's rows; a recalibration without eligible references states why (E317)."""
+
+    return [
+        [basis, item[key]["label"] + (f"; {item['multiplePolicy']}" if item["multiplePolicy"] else ""),
+         rank_change_text(item[key]["rankChanges"]["changes"], facts.labels) if "rankChanges" in item[key] else item[key]["status"]]
+        for basis, item in removal.get("bases", {}).items()
+        for key in ("fixedAnchors", "recalibrated")
+    ]
+
+
 def diagnostics_markdown(facts):
     diagnostics = facts.v3["diagnostics"]
     harness = diagnostics["terminalBenchSameHarness"]
@@ -1806,11 +1818,7 @@ def diagnostics_markdown(facts):
             cells.append(rank_change_text(result["rankChanges"]["changes"], facts.labels) if result else DASH)
         deletion_rows.append(cells)
     removal = diagnostics["costRemoval"]
-    removal_rows = [
-        [basis, item[key]["label"] + (f"; {item['multiplePolicy']}" if item["multiplePolicy"] else ""), rank_change_text(item[key]["rankChanges"]["changes"], facts.labels)]
-        for basis, item in removal.get("bases", {}).items()
-        for key in ("fixedAnchors", "recalibrated")
-    ]
+    removal_rows = cost_removal_rows(removal, facts)
     return "\n".join(lines) + "\n\n" + cost_diagnostics_markdown(facts) + "\n\n### Deletion sensitivity\n\n" + markdown_table(
         ["Branch", "Retained nominal weight", "Status", "API rank changes", "Plan rank changes"], deletion_rows, numeric={1}
     ) + f"\n\n### Cost-component removal ({component_label(removal['component'])}: {removal['status']})\n\n" + markdown_table(["Basis", "Run", "Rank changes"], removal_rows)
