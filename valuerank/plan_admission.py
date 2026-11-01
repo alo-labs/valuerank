@@ -261,6 +261,22 @@ def exclusion(report: dict, profile: dict, release_day: date) -> str | None:
     return None
 
 
+EMPTY_WINDOW = "empty: the cell's latest staged search predates the report envelope, so it admits no new report (E320)"
+
+
+def new_report_window(release_day: date, searched: str | None) -> dict:
+    """E308, E320 (reviewer 86): a cell's new-report window is the release envelope [V − 30 days, V] ended at its latest staged
+    search; under O167's 31-day monthly clock that search can predate the envelope, and the window is then empty, published
+    as such, never as an inverted date range. A freshness check never moves it."""
+
+    start = release_day - timedelta(days=30)
+    end = date.fromisoformat(searched) if searched else release_day
+    end = min(end, release_day)
+    if end < start:
+        return {"start": start.isoformat(), "end": None, "status": EMPTY_WINDOW}
+    return {"start": start.isoformat(), "end": end.isoformat(), "status": "nonempty"}
+
+
 def cell_key(report: dict, families: dict | None = None) -> tuple:
     return report["provider"], report["plan"], model_of(report["modelId"], families), report["unit"], report.get("region", "global")
 
@@ -339,6 +355,7 @@ def evaluate(document: dict, profile: dict, release_day: date, families: dict | 
                         "allReportsBand": None if all_lower is None else [all_lower / CONCORDANCE, CONCORDANCE * all_upper],
                         "admittingObservers": sorted(row["observer"] for row in firm) if status == "passes" else [],
                         "searchedThrough": (search_dates or {}).get((model, plan)),
+                        "newReportWindow": new_report_window(release_day, (search_dates or {}).get((model, plan))),
                         "notArchivedAdmitting": sorted(row["observer"] for row in firm if row["archive"]) if status == "passes" else [],
                         "flags": [ACROSS_RESETS_FLAG] if status == "passes" and any(row["acrossResets"] for row in firm) else []})
     return results

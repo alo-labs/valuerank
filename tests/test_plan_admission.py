@@ -284,3 +284,11 @@ def test_o165_staged_reports_need_an_archived_hashed_copy_after_the_2026_11_01_c
                                                  report("b", start="2026-10-19", end="2026-10-19", low=104, stage="S2", archive={"sha256": "cd" * 32})]}, PROFILE, DAY)
     assert cells[0]["status"] == "passes" and cells[0]["notArchivedAdmitting"] == ["a"]
     assert [row["archive"] for row in cells[0]["reports"]] == [pa.NOT_ARCHIVED, None]
+
+
+def test_e320_a_cell_whose_search_predates_the_envelope_has_an_empty_window():
+    day = date(2026, 11, 1)
+    assert pa.new_report_window(day, "2026-10-02") == {"start": "2026-10-02", "end": "2026-10-02", "status": "nonempty"}
+    assert pa.new_report_window(day, "2026-10-01") == {"start": "2026-10-02", "end": None, "status": pa.EMPTY_WINDOW}
+    assert pa.new_report_window(day, None)["end"] == "2026-11-01"
+    assert pa.new_report_window(day, "2026-11-05")["end"] == "2026-11-01"

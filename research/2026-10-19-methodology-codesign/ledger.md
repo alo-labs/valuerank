@@ -2289,3 +2289,9 @@ Asked on I64 Q1 whether future O71 admissions should be executed by the build fr
 - L2 (the Index reconciliation's residual attributed to the six SDLC components): adopted; verified in scores.json that the reconstructed nine-evaluation total exceeds AA's published total, and the text now says so.
 - L3 (part 3 still said E64 and E172 rebuild anchors from every row with a cost): adopted; it now points to E317.
 - The leaf-type registry recommendation is not adopted as a new mechanism: each kernel is already selected in code per leaf (binomial_leaf and the normal kernels), and the draft's descriptions now match it.
+
+## Reviewer 86 (GPT-6.1 Sol, round 13, Thinking, whole draft r168)
+- Read checks: every part read to its end.
+- No Critical, High or Medium finding: a clean round for GPT-6.1 Sol (O56, the first of two).
+- L (a 31-day-old staged search under O167 leaves a cell's new-report window empty, with no stated representation): adopted as E320; each cell publishes newReportWindow {start, end, status}, "empty" with no end when the search predates the envelope. Admission was already correct (a report outside the envelope or after the cell's search is excluded); only the published state is new.
+- E320. A cell's new-report window whose staged search predates the envelope is published as empty, never as an inverted range; freshness checks never move it.
