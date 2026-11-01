@@ -1,6 +1,25 @@
 {
   "asOf": "2026-10-25",
   "policy": {
+    "announcedChanges": {
+      "rule": "Provider announcements of changes that take effect after the release cutoff: recorded when seen, flag nothing until in force, then recorded as a typed change (O77, O99) at the release at which they take effect (reviewer 78).",
+      "items": [
+        {
+          "provider": "OpenAI",
+          "plans": [
+            "ChatGPT Plus",
+            "ChatGPT Pro 100",
+            "ChatGPT Pro 200",
+            "ChatGPT Pro 500"
+          ],
+          "announcedOn": "2026-10-31",
+          "effective": "December 2026 (no day stated)",
+          "change": "one token allowance shared by ChatGPT and Codex for Plus, Pro and Business (instant chat excluded); per-plan sizes not published",
+          "source": "OpenAI help center (updated 2026-10-31), as reported by several outlets on 2026-10-31 and 2026-11-01; Fei2411/real-api-pricing issue 178",
+          "status": "announced, not in force at the 2026-11-01T06:10:00Z cutoff"
+        }
+      ]
+    },
     "reportingWindow": {
       "start": "2026-10-02",
       "end": "2026-11-01"
