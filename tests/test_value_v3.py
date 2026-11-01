@@ -2449,3 +2449,13 @@ def test_route_brackets_rescore_a_transfer_and_a_cross_effort_route_at_both_ends
     assert first["valueRange"][0] < first["valueRange"][1] and first["rankRange"][0] <= first["rankRange"][1]
     assert second["rule"] == "O146" and second["priceRatio"] == pytest.approx(v.price_per_token(dear) / v.price_per_token(cheap))
     assert missing["status"].startswith("not computable")
+
+
+def test_workload_cross_check_skips_a_row_without_a_per_task_cost():
+    """E41, reviewer 77: a row priced by AA's own Terminal-Bench run but without a per-task cost is not in the panel."""
+
+    observation = q.Observation(z=50.0)
+    row = {"id": "a", "cost": {"workload": "W", "costUsd": 10.0}, "components": {"terminalbench-4-0": {"detail": {}}},
+           "evidence": {"observations": {"terminalBench": observation}, "provenance": {"terminalBench": {"source": "AA Terminal-Bench 4.0 run"}}}}
+    result = v.workload_cross_check([row, {**row, "id": "b", "cost": {"workload": "other", "costUsd": 1.0}}], "W")
+    assert result["n"] == 0 and result["status"] == "undefined (panel too small)" and result["benchmark"] == "Terminal-Bench 4.0"

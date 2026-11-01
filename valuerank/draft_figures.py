@@ -133,6 +133,10 @@ def named_figures(scores: dict, data: Path = DATA) -> dict:
         "cohort.families": len({item["family"] for item in capture["frontier"] + capture["near_frontier"]}),
         "cohort.frontierFamilies": len({item["family"] for item in capture["frontier"]}),
         "cohort.nearOnlyFamilies": len({item["family"] for item in capture["near_frontier"]} - {item["family"] for item in capture["frontier"]}),
+        # Reviewer 77: the configurations one rounded Index point either side of the near gap's edge (gap 3 in, gap 4 out),
+        # whose membership AA's display rounding could flip.
+        "cohort.boundaryIn": series(sorted(item["model_name"] for item in capture["points"] if item.get("intelligence_gap") == 3)) or "none",
+        "cohort.boundaryOut": series(sorted(item["model_name"] for item in capture["points"] if item.get("intelligence_gap") == 4)) or "none",
         # O145: configurations retained one release after leaving the rendered frontier and the near gap.
         "cohort.retained": len(capture.get("retained", [])),
         "cohort.retainedNames": series(sorted(item["displayName"] for item in capture.get("retained", []))) or "none",

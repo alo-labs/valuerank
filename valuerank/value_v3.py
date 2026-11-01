@@ -2373,6 +2373,28 @@ def route_brackets(plan_rows: list[dict], per_plan: dict, frozen: dict, routes: 
     return out
 
 
+CROSSCHECK_COMPONENT = "terminalbench-4-0"
+
+
+def workload_cross_check(rows: list[dict], main: str) -> dict:
+    """E41, E68 (reviewer 77): Terminal-Bench 4.0's cost per solved task on AA's own execution (the component's cost per
+    attempted task over AA's resolved fraction, never a tbench.ai gap fill) against the basket-cost rank, over the main-
+    workload rows that have both; the statistic is suppressed below 8 rows, and the panel and its size are always published."""
+
+    per_solve, basket = {}, {}
+    for row in rows:
+        component = (row["components"].get(CROSSCHECK_COMPONENT) or {}).get("detail") or {}
+        observation = row["evidence"]["observations"].get("terminalBench")
+        source = (row["evidence"]["provenance"].get("terminalBench") or {}).get("source", "")
+        if row["cost"]["workload"] != main or row["cost"]["costUsd"] is None or observation is None or not source.startswith("AA "):
+            continue
+        value = diagnostics.cost_per_solve(component.get("costPerTaskUsd"), observation.z / 100.0)
+        if value is not None:
+            per_solve[row["id"]], basket[row["id"]] = value, row["cost"]["costUsd"]
+    result = diagnostics.workload_crosscheck(per_solve, basket, label="Terminal-Bench 4.0 cost per solved task (AA execution) against basket cost")
+    return {**result, "benchmark": "Terminal-Bench 4.0", "n": len(result["panel"]), "minRows": diagnostics.CROSSCHECK_MIN_ROWS}
+
+
 def score(assembled: dict, frozen: dict) -> dict:
     """Scores per basis, ranks, gates, disclosures, interval outputs, diagnostics and the active-rules manifest."""
 
@@ -2544,6 +2566,7 @@ def score(assembled: dict, frozen: dict) -> dict:
             "rankSeparability": rank_separability(assembled, per_row, exchange, plan_assembled, per_plan),
             "costedBarLadder": costed_bar_ladder(assembled, per_row),
             "terminalBenchSameHarness": _tb_same_harness(rows, assembled["tb4Rows"]),
+            "workloadCrossCheck": workload_cross_check(rows, main),
             # E260: the AA-against-Cognition comparison ranges over every cohort configuration (ranked or listed in this
             # ranking), so both rankings estimate one offset from one panel.
             "frontierCodeCrossSource": frontiercode_cross_source(cohort_rows, assembled["cognition"]),
@@ -3801,7 +3824,10 @@ def ranking_agreement(first: dict, second: dict) -> dict:
     the values are not comparable across rankings, so only their order is compared."""
 
     values = [{row["id"]: row["api"]["value"] for row in section["rows"]} for section in (first, second)]
-    return diagnostics.agreement(*values, label="API value order on configurations ranked in both leading rankings (descriptive)")
+    # Reviewer 77: on a handful of shared configurations tau-b takes a few values and its interval says nothing, so it is
+    # published only from E41's floor of 8 shared configurations; below that the panel is published with the reason.
+    return diagnostics.agreement(*values, label="API value order on configurations ranked in both leading rankings (descriptive)",
+                                 min_rows=diagnostics.CROSSCHECK_MIN_ROWS)
 
 
 def build(configurations: list[dict], data: Path, *, release_day: date) -> dict:

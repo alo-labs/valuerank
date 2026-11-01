@@ -829,6 +829,22 @@ def diagnostic_note(other, facts):
             f"smaller than this ranking's quality noise margin ({v3['diagnostics']['rankSeparability']['qualityMargin']:.1f} points, O44) is not evidence.\n\n" + table)
 
 
+def cross_ranking_costs(facts, track, other):
+    """Reviewer 77: the configurations both leading rankings rank carry one basket cost in each, because the rankings admit
+    different baskets (O57, E254); both are printed side by side so the two values are never read as one cost."""
+
+    if track not in q.LEADING_TRACKS or track == q.DEFAULT_TRACK:
+        return ""
+    here = {row["id"]: row for row in other.v3["rows"]}
+    shared = [row for row in facts.v3["rows"] if row["id"] in here]
+    if not shared:
+        return ""
+    rows = [[facts.label(row["id"]), usd(row["cost"]["costUsd"]), usd(here[row["id"]]["cost"]["costUsd"])] for row in shared]
+    return (f"\n\n**Configurations ranked in both leading rankings ({len(shared)}): basket cost in each.** The two rankings admit different baskets "
+            "(O57, E254), so one configuration has two basket costs; each ranking scores its own, and neither is the other's.\n\n"
+            + markdown_table(["Configuration", f"API basket cost, {q.TRACK_NAMES[q.DEFAULT_TRACK]} (USD)", f"API basket cost, {q.TRACK_NAMES[track]} (USD)"], rows, numeric={1, 2}))
+
+
 def track_rankings_markdown(facts):
     """O53: every ranking other than the leading one, with its leaf set, table and listed configurations."""
 
@@ -843,6 +859,8 @@ def track_rankings_markdown(facts):
                 f"The interactive table is at [valuerank.alolabs.dev{viewmodel.TRACK_PATHS[track]}](https://valuerank.alolabs.dev{viewmodel.TRACK_PATHS[track]}).\n\n"
                 + markdown_table(RANKING_HEADERS, ranking_rows(other), numeric={0, 1, 3, 4, 5, 6, 7, 8})
                 + f"\n\n{separability_text(other).strip()}"
+                + crosscheck_warning(other.v3)
+                + cross_ranking_costs(facts, track, other)
                 + diagnostic_note(other, facts)
                 + f"\n\nCohort configurations without this ranking's full set ({len(listed)}): {names([entry['name'] for entry in listed])}.\n"
             )
@@ -877,7 +895,7 @@ ValueRank ranks frontier AI model configurations (see Model inclusion) by value 
 
 {markdown_table(RANKING_HEADERS, table_rows, numeric={0, 1, 3, 4, 5, 6, 7, 8})}
 
-Values are rounded for display; ranks are competition ranks (equal values share the better rank). The Plan rank is that of the configuration's own plan row (its selected route) in the Plan ranking of every plan below.{separability_text(facts)}{plan_rows_table(facts)}
+Values are rounded for display; ranks are competition ranks (equal values share the better rank). The Plan rank is that of the configuration's own plan row (its selected route) in the Plan ranking of every plan below.{separability_text(facts)}{crosscheck_warning(facts.v3)}{plan_rows_table(facts)}
 
 {legend}
 
@@ -1702,6 +1720,32 @@ def harness_cost_text(stress, facts):
             + "; ".join(f"{facts.label(row_id)} {rank}" for row_id, rank in sorted(moved.items(), key=lambda item: (item[1] is None, item[1]))) + f".{listing}")
 
 
+def crosscheck_warning(v3):
+    """E41: the pre-registered headline warning when the workload cross-check's point estimate is below 0.5."""
+
+    check = (v3.get("diagnostics") or {}).get("workloadCrossCheck") or {}
+    if check.get("warning") != "low agreement":
+        return ""
+    return (f"\n\n**Workload cross-check warning (E41):** the ranking's basket-cost order agrees weakly with {check['benchmark']}'s cost per solved task "
+            f"(τ_b {check['tau']:.2f} on {check['n']} configurations, below the pre-registered 0.5, a policy choice), so cost on the basket and cost per "
+            "solved coding task can order configurations differently.")
+
+
+def workload_cross_check_text(facts, check):
+    """E41 (reviewer 77): the workload cross-check is printed whether computed or suppressed, with its panel."""
+
+    if not check:
+        return "- **Workload cross-check (E41):** not computed."
+    panel = facts.labels(check["panel"]) if check["panel"] else "none"
+    if check["tau"] is None:
+        result = f"suppressed: {check['n']} rows, below the {check['minRows']}-row floor"
+    else:
+        result = f"τ_b {check['tau']:.2f}" + (f" (interval {check['interval'][0]:.2f} to {check['interval'][1]:.2f})" if check.get("interval") else "") \
+                 + (f", {check['warning']}" if check.get("warning") else "")
+    return (f"- **Workload cross-check (E41, mandatory diagnostic):** {check['benchmark']} cost per solved task on AA's own execution against basket cost: "
+            f"{result}; panel ({check['n']}): {panel}.")
+
+
 def diagnostics_markdown(facts):
     diagnostics = facts.v3["diagnostics"]
     harness = diagnostics["terminalBenchSameHarness"]
@@ -1712,6 +1756,7 @@ def diagnostics_markdown(facts):
     logistic = diagnostics["gdpvalLogisticSensitivity"]
     lines = [
         f"- **Terminal-Bench cross-source agreement (AA's {harness['defaultHarness']} run against tbench.ai):** {harness['agreement']['status']}; {len(harness['harnessMixed'])} rows take the leaf from tbench.ai (gap fill).",
+        workload_cross_check_text(facts, diagnostics.get("workloadCrossCheck")),
         f"- **Rank separability (O39, independent-task approximation):** median separation {diagnostics['rankSeparability']['api']['medianSeparation']:.2f} value points (API) and "
         f"{diagnostics['rankSeparability']['plan']['medianSeparation']:.2f} (Plan); separable adjacent ranks: API {diagnostics['rankSeparability']['api']['separableAdjacentPairs']} of "
         f"{diagnostics['rankSeparability']['api']['adjacentPairs']}, Plan {diagnostics['rankSeparability']['plan']['separableAdjacentPairs']} of {diagnostics['rankSeparability']['plan']['adjacentPairs']}. "

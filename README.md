@@ -135,6 +135,17 @@ The configurations AI Coding Daily has tested, mostly at high and medium effort,
 
 Benchmark sampling noise (O39, an independent-task approximation): two values must differ by about 4.4 value points (median, 95%) to separate, and 0 of 19 adjacent API ranks and 0 of 29 adjacent Plan ranks of different configurations do (37 more adjacent Plan pairs are one configuration on two plans, ordered by the plans' multiples alone; E258). Its net direction is not established: every configuration is scored on the same tasks, which correlates their errors and narrows the true threshold (API 0 at correlation 0.3, 0 at correlation 0.6; Plan 0 at correlation 0.3, 0 at correlation 0.6), while sources it leaves out widen it (run-to-run and harness variance, AA's single cost run and, for the 42 Plan rows on an owner assumption (38 owner-named transfers and 4 O46 provider quota ceilings), that assumption's error). The noise band column groups each row with the band's first row it cannot be told apart from (O42); a Plan band marked † rests on an owner assumption (an owner-named transfer or an O46 provider quota ceiling) and excludes its error: an assumed multiple can be wrong by a factor of about 4.4 before the row's value moves by the median threshold (a tolerance, not an estimate of the assumption's error). The S1T scenario shares in [scores.md](scores.md) show each row's rank-1 and top-3 frequencies under that noise. AI Coding Daily's noise treats its six graded projects as six trials of the share of 60 points (n = 6, the wide reading, E263); read as 60 trials, the median threshold would be 3.1 (API) and 3.0 (Plan), with 0 and 0 adjacent ranks separable.
 
+**Workload cross-check warning (E41):** the ranking's basket-cost order agrees weakly with Terminal-Bench 4.0's cost per solved task (τ_b 0.35 on 20 configurations, below the pre-registered 0.5, a policy choice), so cost on the basket and cost per solved coding task can order configurations differently.
+
+**Configurations ranked in both leading rankings (4): basket cost in each.** The two rankings admit different baskets (O57, E254), so one configuration has two basket costs; each ranking scores its own, and neither is the other's.
+
+| Configuration | API basket cost, max-effort ranking (USD) | API basket cost, AI Coding Daily ranking (USD) |
+|---|---:|---:|
+| DeepSeek V4.1 Flash 1017 (max) | $531.44 | $445.52 |
+| Gemini 4 Argon (high) | $8,880.92 | $5,478.68 |
+| GPT-6 Luna (max) | $158.99 | $112.84 |
+| MiMo-V2.6-Pro | $171.70 | $171.70 |
+
 Cohort configurations without this ranking's full set (17): Claude Haiku 5.5 (low), Claude Haiku 5.5 (max), Claude Haiku 5.5 (xhigh), Claude Opus 5.5 (max), Claude Opus 5.5 (xhigh), Claude Sonnet 5.5, Claude Sonnet 5.5 (xhigh), GPT-5.6 Luna, GPT-6 Astra (max), GPT-6 Astra (xhigh), GPT-6 Luna (low), GPT-6.1 Sol (max), GPT-6.1 Sol (xhigh), GPT-6.1 Terra (low), Gemini 4 Carbon, MiMo-V2.6-Flash, MiniMax-M3.1-Flash.
 
 ### Common-leaf ranking (diagnostic)

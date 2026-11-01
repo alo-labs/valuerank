@@ -631,3 +631,24 @@ def test_cohort_route_labels_a_configuration_kept_after_leaving_the_frontier():
                                                          {"id": "y", "rankingInclusionReasons": [left, "Near-frontier AA family (gap 2)"]}]}})()
     assert ed.Facts.cohort_route(facts, "x") == "Left the frontier and near gap at this release, kept one more release (O145)"
     assert ed.Facts.cohort_route(facts, "y") == "Near-frontier family"
+
+
+def test_workload_cross_check_is_printed_suppressed_or_absent_and_shared_costs_need_a_shared_row():
+    """E41, reviewer 77: the cross-check line names a suppression with its panel; the shared-cost table needs a shared row."""
+
+    from types import SimpleNamespace
+
+    class Labels:
+        @staticmethod
+        def labels(ids):
+            return ", ".join(ids)
+
+    assert ed.workload_cross_check_text(Labels, None) == "- **Workload cross-check (E41):** not computed."
+    suppressed = {"benchmark": "Terminal-Bench 4.0", "panel": [], "n": 0, "minRows": 8, "tau": None, "interval": None, "warning": None}
+    assert "suppressed: 0 rows, below the 8-row floor; panel (0): none." in ed.workload_cross_check_text(Labels, suppressed)
+    computed = dict(suppressed, panel=["a"], n=9, tau=0.4, interval=None, warning="low agreement")
+    assert "τ_b 0.40, low agreement; panel (9): a." in ed.workload_cross_check_text(Labels, computed)
+    assert ed.crosscheck_warning({}) == "" and "below the pre-registered 0.5" in ed.crosscheck_warning({"diagnostics": {"workloadCrossCheck": computed}})
+    facts = SimpleNamespace(v3={"rows": [{"id": "x", "cost": {"costUsd": 1.0}}]})
+    other = SimpleNamespace(v3={"rows": [{"id": "y", "cost": {"costUsd": 2.0}}]})
+    assert ed.cross_ranking_costs(facts, "aicd", other) == "" and ed.cross_ranking_costs(facts, "common", other) == ""

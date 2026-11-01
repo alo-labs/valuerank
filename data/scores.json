@@ -22258,6 +22258,31 @@
           "status": "defined"
         }
       },
+      "workloadCrossCheck": {
+        "label": "Terminal-Bench 4.0 cost per solved task (AA execution) against basket cost",
+        "panel": [
+          "claude-haiku-5-5-max",
+          "claude-opus-5-5",
+          "claude-sonnet-5-5",
+          "deepseek-v4-1-flash-1017",
+          "gemini-4-argon",
+          "gpt-6-astra",
+          "gpt-6-luna",
+          "gpt-6.1-sol"
+        ],
+        "excluded": [],
+        "tau": 0.8571428571428571,
+        "interval": [
+          0.4782608695652174,
+          1.0
+        ],
+        "meanOffset": 4948.912972277229,
+        "status": "defined",
+        "warning": "uncertain agreement",
+        "benchmark": "Terminal-Bench 4.0",
+        "n": 8,
+        "minRows": 8
+      },
       "frontierCodeCrossSource": {
         "label": "FrontierCode cross-source agreement (AA against Cognition; E234)",
         "panel": [],
@@ -32379,13 +32404,10 @@
         "gpt-6.1-terra-xhigh",
         "kimi-k3-1-pro"
       ],
-      "tau": 1.0,
-      "interval": [
-        1.0,
-        1.0
-      ],
-      "meanOffset": -7.221506080832464,
-      "status": "defined"
+      "tau": null,
+      "interval": null,
+      "meanOffset": null,
+      "status": "undefined (panel too small)"
     }
   },
   "v3Tracks": {
@@ -54773,6 +54795,43 @@
             "meanOffset": null,
             "status": "undefined (panel too small)"
           }
+        },
+        "workloadCrossCheck": {
+          "label": "Terminal-Bench 4.0 cost per solved task (AA execution) against basket cost",
+          "panel": [
+            "claude-haiku-5-5-high",
+            "claude-haiku-5-5-medium",
+            "claude-opus-5-5-high",
+            "claude-opus-5-5-medium",
+            "deepseek-v4-1-flash-1017",
+            "gemini-4-argon",
+            "gpt-6-astra-high",
+            "gpt-6-luna",
+            "gpt-6-luna-high",
+            "gpt-6-luna-medium",
+            "gpt-6-luna-xhigh",
+            "gpt-6.1-sol-high",
+            "gpt-6.1-sol-low",
+            "gpt-6.1-sol-medium",
+            "gpt-6.1-terra",
+            "gpt-6.1-terra-high",
+            "gpt-6.1-terra-medium",
+            "gpt-6.1-terra-xhigh",
+            "kimi-k3-1-pro",
+            "mimo-v2-6-pro"
+          ],
+          "excluded": [],
+          "tau": 0.3473684210526316,
+          "interval": [
+            -0.07262569832402235,
+            0.6741573033707865
+          ],
+          "meanOffset": 940.6491220958385,
+          "status": "defined",
+          "warning": "low agreement",
+          "benchmark": "Terminal-Bench 4.0",
+          "n": 20,
+          "minRows": 8
         },
         "frontierCodeCrossSource": {
           "label": "FrontierCode cross-source agreement (AA against Cognition; E234)",
@@ -106376,6 +106435,56 @@
             "meanOffset": 1.677979797979798,
             "status": "defined"
           }
+        },
+        "workloadCrossCheck": {
+          "label": "Terminal-Bench 4.0 cost per solved task (AA execution) against basket cost",
+          "panel": [
+            "claude-haiku-5-5",
+            "claude-haiku-5-5-high",
+            "claude-haiku-5-5-low",
+            "claude-haiku-5-5-max",
+            "claude-haiku-5-5-medium",
+            "claude-opus-5-5",
+            "claude-opus-5-5-high",
+            "claude-opus-5-5-medium",
+            "claude-opus-5-5-xhigh",
+            "claude-sonnet-5-5",
+            "claude-sonnet-5-5-xhigh",
+            "deepseek-v4-1-flash-1017",
+            "gemini-4-argon",
+            "gpt-6-astra",
+            "gpt-6-astra-high",
+            "gpt-6-astra-xhigh",
+            "gpt-6-luna",
+            "gpt-6-luna-high",
+            "gpt-6-luna-low",
+            "gpt-6-luna-medium",
+            "gpt-6-luna-xhigh",
+            "gpt-6.1-sol",
+            "gpt-6.1-sol-high",
+            "gpt-6.1-sol-low",
+            "gpt-6.1-sol-medium",
+            "gpt-6.1-sol-xhigh",
+            "gpt-6.1-terra",
+            "gpt-6.1-terra-high",
+            "gpt-6.1-terra-low",
+            "gpt-6.1-terra-medium",
+            "gpt-6.1-terra-xhigh",
+            "kimi-k3-1-pro",
+            "mimo-v2-6-pro"
+          ],
+          "excluded": [],
+          "tau": 0.5227272727272727,
+          "interval": [
+            0.22114545609543426,
+            0.7732793522267206
+          ],
+          "meanOffset": -Infinity,
+          "status": "defined",
+          "warning": "uncertain agreement",
+          "benchmark": "Terminal-Bench 4.0",
+          "n": 33,
+          "minRows": 8
         },
         "frontierCodeCrossSource": {
           "label": "FrontierCode cross-source agreement (AA against Cognition; E234)",
