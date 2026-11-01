@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
   "methodologyVersion": "3.0.0",
-  "anchorVersion": "v3-2026-10-31-aicd",
-  "frozenAt": "2026-10-31",
+  "anchorVersion": "v3-2026-11-01-aicd",
+  "frozenAt": "2026-11-01",
   "basketVersion": "SDLC basket v1",
   "mainWorkload": "835a9baf594a1251",
   "workloads": {
@@ -22,6 +22,8 @@
           "workload": "835a9baf594a1251",
           "units": "USD per workload pass",
           "referenceIds": [
+            "deepseek-v4-1-flash-1017",
+            "gemini-4-argon",
             "gpt-6-astra-high",
             "gpt-6-luna",
             "gpt-6-luna-high",
@@ -33,9 +35,13 @@
             "gpt-6.1-terra",
             "gpt-6.1-terra-high",
             "gpt-6.1-terra-medium",
-            "gpt-6.1-terra-xhigh"
+            "gpt-6.1-terra-xhigh",
+            "kimi-k3-1-pro",
+            "mimo-v2-6-pro"
           ],
           "referenceCosts": {
+            "deepseek-v4-1-flash-1017": 445.51597840042814,
+            "gemini-4-argon": 5478.681890335225,
             "gpt-6-astra-high": 2834.1008457247967,
             "gpt-6-luna": 112.83624696325522,
             "gpt-6-luna-high": 56.84404666658541,
@@ -47,10 +53,12 @@
             "gpt-6.1-terra": 688.2678341354039,
             "gpt-6.1-terra-high": 236.92003656268736,
             "gpt-6.1-terra-medium": 174.9111284111748,
-            "gpt-6.1-terra-xhigh": 330.42122570274984
+            "gpt-6.1-terra-xhigh": 330.42122570274984,
+            "kimi-k3-1-pro": 2631.238073586814,
+            "mimo-v2-6-pro": 171.70030964750728
           },
           "low": 18.261574215300808,
-          "high": 5668.201691449593,
+          "high": 10957.36378067045,
           "padding": 2.0
         },
         "plan": {
@@ -58,6 +66,8 @@
           "workload": "835a9baf594a1251",
           "units": "USD per workload pass",
           "referenceIds": [
+            "deepseek-v4-1-flash-1017@api",
+            "gemini-4-argon@api",
             "gpt-6-astra-high@chatgpt-plus",
             "gpt-6-astra-high@chatgpt-pro-100",
             "gpt-6-astra-high@chatgpt-pro-200",
@@ -105,9 +115,16 @@
             "gpt-6.1-terra@chatgpt-plus",
             "gpt-6.1-terra@chatgpt-pro-100",
             "gpt-6.1-terra@chatgpt-pro-200",
-            "gpt-6.1-terra@chatgpt-pro-500"
+            "gpt-6.1-terra@chatgpt-pro-500",
+            "kimi-k3-1-pro@api",
+            "mimo-v2-6-pro@mimo-token-plan-lite",
+            "mimo-v2-6-pro@mimo-token-plan-max",
+            "mimo-v2-6-pro@mimo-token-plan-pro",
+            "mimo-v2-6-pro@mimo-token-plan-standard"
           ],
           "referenceCosts": {
+            "deepseek-v4-1-flash-1017@api": 445.51597840042814,
+            "gemini-4-argon@api": 5478.681890335225,
             "gpt-6-astra-high@chatgpt-plus": 349.88899329935765,
             "gpt-6-astra-high@chatgpt-pro-100": 214.37979165845664,
             "gpt-6-astra-high@chatgpt-pro-200": 195.65763518983755,
@@ -155,10 +172,15 @@
             "gpt-6.1-terra@chatgpt-plus": 84.97133754758073,
             "gpt-6.1-terra@chatgpt-pro-100": 65.23865726401932,
             "gpt-6.1-terra@chatgpt-pro-200": 66.05257525291783,
-            "gpt-6.1-terra@chatgpt-pro-500": 63.894154672800205
+            "gpt-6.1-terra@chatgpt-pro-500": 63.894154672800205,
+            "kimi-k3-1-pro@api": 2631.238073586814,
+            "mimo-v2-6-pro@mimo-token-plan-lite": 174.4921846011253,
+            "mimo-v2-6-pro@mimo-token-plan-max": 145.41015383427106,
+            "mimo-v2-6-pro@mimo-token-plan-pro": 156.8899028211872,
+            "mimo-v2-6-pro@mimo-token-plan-standard": 173.4346562096033
           },
           "low": 1.6952816761326408,
-          "high": 699.7779865987153,
+          "high": 10957.36378067045,
           "padding": 2.0
         }
       },
@@ -168,20 +190,20 @@
   "barReferences": [
     {
       "id": "bar:median-quality",
-      "level": 43.533151613012635,
-      "levelConfiguration": "gpt-6.1-terra-medium",
+      "level": 46.65130909383877,
+      "levelConfiguration": "gpt-6.1-terra-high",
       "rule": "lower-median displayed quality of the non-provisional cohort configurations at freeze (E192; headline bar)"
     },
     {
       "id": "bar:lower-quartile-quality",
-      "level": 33.654390971128954,
-      "levelConfiguration": "gpt-6-luna-xhigh",
+      "level": 37.379969871651795,
+      "levelConfiguration": "claude-haiku-5-5-high",
       "rule": "lower-quartile displayed quality of the non-provisional cohort configurations at freeze (O34)"
     },
     {
       "id": "bar:upper-quartile-quality",
-      "level": 52.45722420275892,
-      "levelConfiguration": "gpt-6.1-sol-medium",
+      "level": 55.46264961545188,
+      "levelConfiguration": "gemini-4-argon",
       "rule": "upper-quartile displayed quality of the non-provisional cohort configurations at freeze (O34)"
     }
   ],
@@ -207,11 +229,14 @@
     "ladderPopulation": "fewer than four population configurations: only the headline bar is pinned, because the quartile positions would coincide with it (E215)",
     "nonTautology": "a frozen level is never a configuration, so no bar can return its setter by construction; whether a result compares alternatives is published per result (possibleQualifierN, E198)",
     "lifetime": "fixed for the anchor version; replaced only by a versioned re-freeze that publishes old- and new-bar results on the common evaluable panel",
-    "selectionCutoff": "2026-10-31",
+    "selectionCutoff": "2026-11-01",
     "population": [
       "claude-haiku-5-5-high",
       "claude-haiku-5-5-medium",
       "claude-opus-5-5-high",
+      "claude-opus-5-5-medium",
+      "deepseek-v4-1-flash-1017",
+      "gemini-4-argon",
       "gpt-6-astra-high",
       "gpt-6-luna",
       "gpt-6-luna-high",
@@ -223,23 +248,25 @@
       "gpt-6.1-terra",
       "gpt-6.1-terra-high",
       "gpt-6.1-terra-medium",
-      "gpt-6.1-terra-xhigh"
+      "gpt-6.1-terra-xhigh",
+      "kimi-k3-1-pro",
+      "mimo-v2-6-pro"
     ],
     "bars": [
       {
         "id": "bar:median-quality",
-        "level": 43.533151613012635,
-        "levelConfiguration": "gpt-6.1-terra-medium"
+        "level": 46.65130909383877,
+        "levelConfiguration": "gpt-6.1-terra-high"
       },
       {
         "id": "bar:lower-quartile-quality",
-        "level": 33.654390971128954,
-        "levelConfiguration": "gpt-6-luna-xhigh"
+        "level": 37.379969871651795,
+        "levelConfiguration": "claude-haiku-5-5-high"
       },
       {
         "id": "bar:upper-quartile-quality",
-        "level": 52.45722420275892,
-        "levelConfiguration": "gpt-6.1-sol-medium"
+        "level": 55.46264961545188,
+        "levelConfiguration": "gemini-4-argon"
       }
     ]
   }

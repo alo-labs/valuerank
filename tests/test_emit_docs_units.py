@@ -552,3 +552,82 @@ def test_research_coverage_text_states_the_covered_cells_only_when_recorded():
     assert ed.research_coverage_text({}) == ""
     assert ed.research_coverage_text({"planResearchCoverage": None}) == ""
     assert "all 31 cohort model × first-party plan cells have a three-stage search" in ed.research_coverage_text({"planResearchCoverage": {"cells": 31, "uncovered": []}})
+
+
+def test_route_brackets_markdown_says_none_without_bracketed_rows():
+    """O144, O146: a release with no cross-model or cross-effort assumed Plan route prints the rule and says so."""
+
+    class Facts:
+        v3 = {}
+
+    text = ed.route_brackets_markdown(Facts())
+    assert text.startswith("A plan meter counts tokens (O126)") and text.endswith("Scores and ranks are unchanged.\n\nNo Plan row rests on such a route.")
+    Facts.v3 = {"planRouteBrackets": []}
+    assert text == ed.route_brackets_markdown(Facts())
+
+
+def test_route_brackets_markdown_tables_evaluated_rows_and_names_unevaluated_ones():
+    """O144, O146: evaluated rows show their ranges (a single rank when the bracket moves none); the rest are named."""
+
+    def item(row_id, rank_range, status="evaluated", rule="O144"):
+        return {"rowId": row_id, "configurationId": row_id.split("@")[0], "rule": rule, "status": status, "priceRatio": 0.5,
+                "multipleRange": [29.315, 58.63], "valueRange": [62.21, 64.4356], "rankRange": rank_range}
+
+    class Facts:
+        v3 = {"planRouteBrackets": [item("a@claude-pro", [5, 10]), item("b@claude-max-5x", [3, 3], rule="O146"),
+                                    item("c@claude-pro", None, status="unavailable: no token mix"), item("c@claude-max-5x", None, status="unavailable")]}
+        label = staticmethod(lambda row_id: row_id.upper())
+
+    text = ed.route_brackets_markdown(Facts())
+    assert "\n\n2 rows bracketed; 1 change Plan rank within their bracket. Not computable: C.\n\n" in text
+    assert "| Plan row | Rule | Price ratio r | Multiple range | Plan value range | Plan rank range |" in text
+    assert "| A on claude-pro | O144 | 0.500 | 29.32–58.63 | 62.21–64.44 | 5–10 |" in text
+    assert "| B on claude-max-5x | O146 | 0.500 | 29.32–58.63 | 62.21–64.44 | 3 |" in text
+    Facts.v3["planRouteBrackets"] = Facts.v3["planRouteBrackets"][:2]
+    assert "1 change Plan rank within their bracket.\n\n" in ed.route_brackets_markdown(Facts()) and "Not computable" not in ed.route_brackets_markdown(Facts())
+
+
+def test_displayed_cheapest_sentences_name_unchecked_cheaper_siblings():
+    """O143: cheaper same-family efforts the ranking could not evaluate are named beside the displayed-record answer, per basis."""
+
+    class Facts:
+        labels = staticmethod(lambda row_ids: ", ".join(row_ids))
+        label = staticmethod(lambda row_id: row_id.upper())
+        v3 = {"displayedCheapest": {
+            "api": {"bars": [{"level": 50.0, "cheapest": ["b"], "costUsd": 12.0, "qualifierN": 3, "uncheckedCheaperSiblings": {"b": ["B (high)", "B (low)"]}},
+                             {"level": 60.0, "cheapest": ["a"], "costUsd": 20.0, "qualifierN": 2, "uncheckedCheaperSiblings": {"a": ["A (medium)"]}}]},
+            "plan": {"bars": [{"level": 50.0, "cheapest": ["a"], "costUsd": 2.0, "qualifierN": 4, "uncheckedCheaperSiblings": {}}]}},
+              "diagnostics": {"gapFillBars": {"bases": {"api": [], "plan": []}}}}
+
+    sentences = ed.displayed_cheapest_sentences(Facts)
+    assert sentences[1] == ("API basis, cheaper same-family efforts on AA's chart that this ranking could not evaluate (O143, E201c): "
+                            "below A: A (medium); below B: B (high), B (low).")
+    # The Plan basis has none, so its displayed record is followed by no O143 sentence.
+    assert len(sentences) == 3 and sentences[2].startswith("Plan basis, displayed record")
+    assert not any("O143" in sentence for sentence in sentences[2:])
+
+
+def test_bar_currency_text_appends_the_spacing_flag_only_when_set():
+    """E207: the bar-currency line carries a spacing flag when one is recorded."""
+
+    currency = {"lifetime": "l", "bars": [{"level": 56.7, "reachN": 2, "populationN": 3}], "currentLadder": [{"level": 56.7}], "flag": None}
+    plain = ed.bar_currency_text(currency)
+    assert plain.endswith("lifetime l; no staleness flag.") and "Spacing flag" not in plain
+    assert ed.bar_currency_text({**currency, "spacingFlag": None}) == plain
+    spaced = ed.bar_currency_text({**currency, "spacingFlag": "bars closer than the noise margin"})
+    assert spaced == plain + " Spacing flag: bars closer than the noise margin."
+    flagged = ed.bar_currency_text({**currency, "flag": "headline bar below", "spacingFlag": "x"})
+    assert flagged.endswith("flag: headline bar below. Spacing flag: x.")
+
+
+def test_cohort_route_labels_a_configuration_kept_after_leaving_the_frontier():
+    """O145: a configuration that left the frontier and near gap is kept one more release under its own cohort route,
+    and an earlier route in COHORT_ROUTES takes precedence when a row carries several reasons."""
+
+    assert ed.COHORT_ROUTES[-1] == ("Left AA's rendered frontier and near gap at this release",
+                                    "Left the frontier and near gap at this release, kept one more release (O145)")
+    left = "Left AA's rendered frontier and near gap at this release; kept one more release, flagged 'left cohort' (O145)"
+    facts = type("FactsStub", (), {"scores": {"models": [{"id": "x", "rankingInclusionReasons": [left]},
+                                                         {"id": "y", "rankingInclusionReasons": [left, "Near-frontier AA family (gap 2)"]}]}})()
+    assert ed.Facts.cohort_route(facts, "x") == "Left the frontier and near gap at this release, kept one more release (O145)"
+    assert ed.Facts.cohort_route(facts, "y") == "Near-frontier family"

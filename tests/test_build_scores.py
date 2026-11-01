@@ -90,16 +90,17 @@ def first_mapped(document):
     return next(c for c in document["configurations"] if c["valueRankModelId"])
 
 
-OFF_COHORT_ID = "claude-sonnet-5-5-xhigh"
+OFF_COHORT_ID = "claude-sonnet-5-5-high"
 
 
-def add_off_cohort(root: Path, *, model_id: str = OFF_COHORT_ID, display: str = "Claude Sonnet 5.5 (xhigh)",
-                   family: str = "Claude Sonnet 5.5", slug: str = "claude-sonnet-5-5-xhigh", variant: str = "xhigh",
+def add_off_cohort(root: Path, *, model_id: str = OFF_COHORT_ID, display: str = "Claude Sonnet 5.5 (high)",
+                   family: str = "Claude Sonnet 5.5", slug: str = "claude-sonnet-5-5-high", variant: str = "high",
                    source_id: str = "claude-sonnet-5-5") -> str:
     """Roster a synthetic configuration AA does not plot on or near its rendered frontier (O51).
 
     Since the v5 re-capture (O132) the roster is exactly the plotted cohort, so an off-frontier roster entry exists only
-    as a fixture: by default Claude Sonnet 5.5 (xhigh), which left the cohort with v5, with no Bug Hunt owner result."""
+    as a fixture: by default a synthetic Claude Sonnet 5.5 (high), with no Bug Hunt owner result. (Claude Sonnet 5.5
+    (xhigh), the former fixture, left the cohort with v5 but is a retained "left cohort" roster row under O145.)"""
 
     source_slug = json.loads((root / FILES["aa"]).read_text())["models"][source_id]["aaSlug"]
     def aa(document):
@@ -445,7 +446,7 @@ def test_manifest_and_outputs_list_expected_relative_paths(world, capsys):
     manifest = json.loads((world / "data/run_manifest.json").read_text())
     scoring = manifest["scoring"]
     assert scoring["weights"] == json.loads((world / "data/scores.json").read_text())["weights"]
-    assert scoring["observedAt"] == "2026-10-31T04:10:00Z"
+    assert scoring["observedAt"] == "2026-11-01T06:10:00Z"
     # O51: DeepSeek V4 Flash is off the frontier, so no committed claim targets a cohort configuration.
     assert scoring["providerClaimsUsed"] == []
     assert scoring["primaryMissingFields"]
@@ -1161,10 +1162,13 @@ def test_every_model_row_reports_its_aa_frontier_tier(world):
     primary = {row["family"]: row["requiredFamilyModelId"] for row in inventory["rows"] + inventory["nearFrontierRows"]}
     own = {row["sourceUrl"]: ("near", row["name"], row["intelligenceGap"], row.get("sourceFootnote")) for row in inventory["nearFrontierRows"]}
     own.update({row["sourceUrl"]: ("frontier", row["name"], 0, row.get("sourceFootnote")) for row in inventory["rows"]})
+    # O145: a configuration retained one release after leaving the frontier and near gap reports its own "left cohort" tier.
+    retained = {row["sourceUrl"]: ("left cohort", row["displayName"], None, row.get("sourceFootnote")) for row in inventory["retainedRows"]}
+    own.update(retained)
     seen_tiers, sibling_tiers = set(), set()
     for model in outputs(world)["scores.json"]["models"]:
         family = model["family"]
-        if primary.get(family) != model["id"]:
+        if model["aaUrl"] in retained or primary.get(family) != model["id"]:
             want = own.get(model["aaUrl"], (None, None, None, None))
             if family in primary:
                 sibling_tiers.add(want[0])
@@ -1179,10 +1183,11 @@ def test_every_model_row_reports_its_aa_frontier_tier(world):
         assert got == want, family
         seen_tiers.add(want[0])
         assert "frontierSelection" in model  # existing field untouched
-    assert seen_tiers == {"frontier", "near", None}
-    assert sibling_tiers == {"frontier", "near", None}  # e.g. GPT-6.1 Sol (xhigh), GPT-6.1 Sol (low), Claude Sonnet 5.5 (xhigh)
+    assert seen_tiers == {"frontier", "near", "left cohort", None}
+    # e.g. GPT-6.1 Sol (xhigh), GPT-6.1 Sol (low), Claude Sonnet 5.5 (xhigh) (retained, O145), the synthetic Claude Sonnet 5.5 (high)
+    assert sibling_tiers == {"frontier", "near", "left cohort", None}
     rows = model_rows(world)
-    # O51: a plotted sibling enters the cohort on its own point; an unplotted one (Claude Sonnet 5.5 (xhigh)) does not.
+    # O51: a plotted sibling enters the cohort on its own point; an unplotted one (the synthetic Claude Sonnet 5.5 (high)) does not.
     assert rows["claude-haiku-5-5-low"]["rankingInclusionReasons"] == ["Plotted on or within the near gap of AA's rendered frontier (O51)"]
     assert rows["claude-haiku-5-5-low"]["frontierSelection"] is None and rows["claude-haiku-5-5-low"]["family"] == "Claude Haiku 5.5"
     assert rows["gpt-6.1-sol-low"]["rankingInclusionReasons"] == ["Plotted on or within the near gap of AA's rendered frontier (O51)"]
@@ -1333,9 +1338,16 @@ def test_the_cohort_is_every_plotted_frontier_and_near_configuration(world):
     run_main(world)
     inventory = json.loads((world / FILES["inventory"]).read_text())
     plotted = {row["sourceUrl"] for row in inventory["rows"] + inventory["nearFrontierRows"]}
+    # O145: a configuration that left the frontier and near gap at this release stays a cohort row for one more release.
+    retained = {row["sourceUrl"] for row in inventory["retainedRows"]}
+    assert len(retained) == 10 and not retained & plotted
     for model in model_rows(world).values():
-        assert bool(model["rankingInclusionReasons"]) is (model["aaUrl"] in plotted), model["id"]
+        assert bool(model["rankingInclusionReasons"]) is (model["aaUrl"] in plotted | retained), model["id"]
+        if model["aaUrl"] in retained:
+            assert model["aaFrontierTier"] == "left cohort", model["id"]
+            assert model["rankingInclusionReasons"][0].startswith("Left AA's rendered frontier and near gap at this release"), model["id"]
     rows = model_rows(world)
+    assert len([m for m in rows.values() if m["rankingInclusionReasons"]]) == 37
     assert rows[OFF_COHORT_ID]["rankingStatus"] == "excluded_from_primary_cohort"
     # O53: a cohort row is ranked in each ranking whose full set it has, and listed when it has none.
     assert rows["claude-opus-5-5-high"]["rankingEligible"] is True and rows["claude-opus-5-5-high"]["rankings"] == {"max": False, "aicd": True, "common": True}

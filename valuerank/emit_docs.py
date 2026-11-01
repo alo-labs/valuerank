@@ -42,6 +42,7 @@ COHORT_ROUTES = (
     ("Required AA Intelligence Index versus total-evaluation-cost frontier family", "On AA's rendered frontier"),
     ("Near-frontier AA family", "Near-frontier family"),
     ("Plotted on or within the near gap of AA's rendered frontier (O51)", "Plotted on or near AA's rendered frontier, another effort of a frontier or near family (O51)"),
+    ("Left AA's rendered frontier and near gap at this release", "Left the frontier and near gap at this release, kept one more release (O145)"),
 )
 LEAF_TRANSFORMS = {
     "bugHunt": "z = 100 × bugs fixed / 105",
@@ -476,6 +477,31 @@ def sampling_counts_text():
     return f"{counts}, Bug Hunt's {value_v3.SAMPLING_TASKS['bugHunt']} bugs"
 
 
+def route_brackets_markdown(facts):
+    """O144, O146: each Plan row whose multiple is assumed across models (Claude) or efforts, bracketed by the price per
+    metered token, with its value and rank ranges; a sensitivity, never a score."""
+
+    items = facts.v3.get("planRouteBrackets") or []
+    intro = ("A plan meter counts tokens (O126), so a multiple measured on one model or effort is worth the target's price per metered token "
+             "over the donor's: a Claude transfer (O144) is bracketed by the two models' list prices over the registry's shared token mix, and a "
+             "same-model cross-effort route (O146) by the two configurations' own Intelligence Index token mixes. Each row is rescored at "
+             "M × min(1, r) and M × max(1, r) with every other row at its displayed value. ChatGPT transfers are not bracketed (Codex credits "
+             "are priced per model at API parity, O144). Scores and ranks are unchanged.")
+    if not items:
+        return intro + "\n\nNo Plan row rests on such a route."
+    evaluated = [item for item in items if item["status"] == "evaluated"]
+    moved = [item for item in evaluated if item["rankRange"][0] != item["rankRange"][1]]
+    rows = [[facts.label(item["configurationId"]) + " on " + item["rowId"].split("@", 1)[1], item["rule"], fnum(item["priceRatio"], 3),
+             f"{fnum(item['multipleRange'][0], 2)}–{fnum(item['multipleRange'][1], 2)}", f"{fnum(item['valueRange'][0], 2)}–{fnum(item['valueRange'][1], 2)}",
+             f"{item['rankRange'][0]}–{item['rankRange'][1]}" if item["rankRange"][0] != item["rankRange"][1] else str(item["rankRange"][0])]
+            for item in evaluated]
+    unevaluated = [item for item in items if item["status"] != "evaluated"]
+    text = intro + f"\n\n{len(evaluated)} rows bracketed; {len(moved)} change Plan rank within their bracket."
+    if unevaluated:
+        text += " Not computable: " + ", ".join(sorted({facts.label(item["configurationId"]) for item in unevaluated})) + "."
+    return text + "\n\n" + markdown_table(["Plan row", "Rule", "Price ratio r", "Multiple range", "Plan value range", "Plan rank range"], rows, numeric={2})
+
+
 def research_coverage_text(v3):
     """O71, O75 (reviewer 74 M1): the model × plan cells the staged search covers; the build stops on an uncovered one."""
 
@@ -514,7 +540,8 @@ def bar_currency_text(currency):
     reach = "; ".join(f"{bar_name(item)}: {item['reachN']} of {item['populationN']}" for item in currency["bars"]) or "no bar frozen"
     ladder = " / ".join(f"{item['level']:.1f}" for item in currency["currentLadder"]) or "unavailable"
     return (f"- **Bar currency (E207, informational):** rows reaching each frozen bar: {reach}; the current population would freeze {ladder}; "
-            f"lifetime {currency['lifetime']}; " + (f"flag: {currency['flag']}." if currency["flag"] else "no staleness flag."))
+            f"lifetime {currency['lifetime']}; " + (f"flag: {currency['flag']}." if currency["flag"] else "no staleness flag.")
+            + (f" Spacing flag: {currency['spacingFlag']}." if currency.get("spacingFlag") else ""))
 
 
 def observed_range_text(result, facts):
@@ -621,6 +648,11 @@ def displayed_cheapest_sentences(facts):
             for item in facts.v3["displayedCheapest"][basis]["bars"]
         ]
         sentences.append(f"{label} basis, displayed record (not a claim; E203): cheapest " + "; ".join(parts) + ".")
+        # O143: the cheaper same-family efforts that this ranking could not evaluate, beside its headline answer.
+        unchecked = {row_id: names for item in facts.v3["displayedCheapest"][basis]["bars"] for row_id, names in (item.get("uncheckedCheaperSiblings") or {}).items()}
+        if unchecked:
+            sentences.append(f"{label} basis, cheaper same-family efforts on AA's chart that this ranking could not evaluate (O143, E201c): "
+                             + "; ".join(f"below {facts.label(row_id)}: {', '.join(names)}" for row_id, names in sorted(unchecked.items())) + ".")
         margin = facts.v3["displayedCheapest"][basis].get("margin")
         companions = [f"at or above quality {item['margin']['level']:.1f}: {facts.labels(item['margin']['cheapest']) or 'none'}"
                       + (f" ({usd(item['margin']['costUsd'])} per basket run)" if item["margin"]["cheapest"] else "")
@@ -1236,6 +1268,10 @@ The Plan amount is the selected multiple times the cash paid for the fee period 
 Every admissible route-measurement pair in comparator order (E171) and the comparator's pick with the selected pair removed (E179). A larger displayed multiple is arithmetic on the measured workload, never a claim that the route is cheaper on the scored workload. Workday-feasible multiple (E15), for the {len(routed)} routed rows: {'; '.join(workday) or 'none routed'}.
 
 {markdown_table(['Configuration', 'Admissible pairs', 'Unidentified', 'Pairs (multiple, status)', 'Leave-selected-out choice'], alternative_rows, numeric={1, 2})}
+
+### Route brackets (O144, O146)
+
+{route_brackets_markdown(facts)}
 
 ### Plan allowance report cells (O71, O81)
 

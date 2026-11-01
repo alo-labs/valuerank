@@ -3,9 +3,9 @@
     {
       "version": "v3.0.0",
       "date": "October 19, 2026",
-      "models": 5,
+      "models": 9,
       "dimensions": 14,
-      "summary": "5 models ranked on 14 dimensions; GPT-6.1 Sol (max) is first on the API basis.",
+      "summary": "9 models ranked on 14 dimensions; GPT-6.1 Sol (max) is first on the API basis.",
       "rankChanges": [
         {
           "slug": "gpt-6-1-sol",
@@ -14,52 +14,69 @@
           "to": 1
         },
         {
+          "slug": "mimo-v2-6-pro",
+          "name": "MiMo-V2.6-Pro",
+          "from": 7,
+          "to": 3
+        },
+        {
           "slug": "gpt-6-luna",
           "name": "GPT-6 Luna (max)",
           "from": 11,
-          "to": 2
+          "to": 4
         },
         {
           "slug": "gpt-6-astra",
           "name": "GPT-6 Astra (max)",
           "from": 4,
-          "to": 3
+          "to": 5
         },
         {
           "slug": "claude-opus-5-5",
           "name": "Claude Opus 5.5 (max)",
           "from": 5,
-          "to": 4
+          "to": 6
         },
         {
           "slug": "claude-sonnet-5-5",
           "name": "Claude Sonnet 5.5",
           "from": 3,
-          "to": 5
+          "to": 7
+        },
+        {
+          "slug": "gemini-4-argon",
+          "name": "Gemini 4 Argon",
+          "from": 1,
+          "to": 9
         }
       ],
       "ranks": {
-        "claude-opus-5-5": 4,
-        "claude-sonnet-5-5": 5,
-        "gpt-6-astra": 3,
-        "gpt-6-luna": 2,
-        "gpt-6-1-sol": 1
+        "claude-haiku-5-5-max": 8,
+        "claude-opus-5-5": 6,
+        "claude-sonnet-5-5": 7,
+        "deepseek-v4-1-flash-1017": 2,
+        "gemini-4-argon": 9,
+        "gpt-6-astra": 5,
+        "gpt-6-luna": 4,
+        "gpt-6-1-sol": 1,
+        "mimo-v2-6-pro": 3
       },
-      "added": [],
+      "added": [
+        "claude-haiku-5-5-max",
+        "deepseek-v4-1-flash-1017"
+      ],
       "removed": [
         "claude-haiku-5-5",
         "claude-opus-5",
         "deepseek-v4-flash",
         "deepseek-v4-pro",
         "gemini-3-8-flash",
-        "gemini-4-argon",
         "glm-5-3",
         "gpt-5-6-luna",
         "gpt-5-6-sol",
         "gpt-6-sol",
         "grok-4-7",
         "mimo-v2-6-flash",
-        "mimo-v2-6-pro",
         "qwen3-8-max"
       ]
     },
@@ -68,7 +85,7 @@
       "date": "October 19, 2026",
       "models": 19,
       "dimensions": null,
-      "summary": "19 models ranked; gemini-4-argon first.",
+      "summary": "19 models ranked; Gemini 4 Argon first.",
       "rankChanges": [
         {
           "slug": "claude-opus-5-5",
@@ -84,7 +101,7 @@
         },
         {
           "slug": "mimo-v2-6-pro",
-          "name": "mimo-v2-6-pro",
+          "name": "MiMo-V2.6-Pro",
           "from": 9,
           "to": 7
         },
@@ -120,7 +137,7 @@
         },
         {
           "slug": "claude-haiku-5-5",
-          "name": "claude-haiku-5-5",
+          "name": "Claude Haiku 5.5 (xhigh)",
           "from": 16,
           "to": 13
         },
@@ -172,7 +189,7 @@
       "date": null,
       "models": 19,
       "dimensions": null,
-      "summary": "19 models ranked; gemini-4-argon first.",
+      "summary": "19 models ranked; Gemini 4 Argon first.",
       "rankChanges": [],
       "ranks": {
         "claude-haiku-5-5": 16,
@@ -203,7 +220,7 @@
       "date": null,
       "models": 19,
       "dimensions": null,
-      "summary": "19 models ranked; gemini-4-argon first.",
+      "summary": "19 models ranked; Gemini 4 Argon first.",
       "rankChanges": [
         {
           "slug": "gpt-6-1-sol",
@@ -243,7 +260,7 @@
         },
         {
           "slug": "mimo-v2-6-pro",
-          "name": "mimo-v2-6-pro",
+          "name": "MiMo-V2.6-Pro",
           "from": 7,
           "to": 9
         },

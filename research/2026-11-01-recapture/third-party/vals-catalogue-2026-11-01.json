@@ -87,13 +87,14 @@
      "note": "Vals ran this model only at max (90.444), not high; not transferred."
     },
     "mimo-v2-6-flash": {
-     "status": "plausible",
+     "status": "exact",
      "value": 78.96,
      "stderr": 4.045,
      "valsKey": "xiaomi/mimo-v2.6-flash",
-     "effort": null,
+     "effort": "enabled (O140)",
      "harness": "OpenHands",
-     "note": "Owner decision O135 (2026-10-30): AA plots MiMo-V2.6-Flash without an effort; Xiaomi's API documents a single thinking mode (thinking.type enabled/disabled, default enabled; on the Responses API every reasoning.effort other than none enables the same, undifferentiated reasoning), so the configuration is thinking enabled, the default (../../2026-10-30-v5-recapture/third-party/mimo-flash-effort.md; Xiaomi docs re-read 2026-11-01, mimo/). Vals records reasoning, reasoning_effort and compute_effort as null and its MiMo-V2.6-Flash model page (read 2026-10-30) states no reasoning setting; it stays unmatched under O140. New evidence for the owner: Vals' MiMo-V2.6-Pro model page (vals/_models/xiaomi_mimo-v2.6-pro.html, read 2026-11-01), in its 2026-09-22 update covering both models, says 'We evaluated them with reasoning enabled' through the official Xiaomi API."
+     "match": "owner (O149)",
+     "note": "Owner decision O135 (2026-10-30): AA plots MiMo-V2.6-Flash without an effort; Xiaomi's API documents a single thinking mode (thinking.type enabled/disabled, default enabled; on the Responses API every reasoning.effort other than none enables the same, undifferentiated reasoning), so the configuration is thinking enabled, the default (../../2026-10-30-v5-recapture/third-party/mimo-flash-effort.md; Xiaomi docs re-read 2026-11-01, mimo/). Vals records reasoning, reasoning_effort and compute_effort as null; its MiMo-V2.6-Pro model page (vals/_models/xiaomi_mimo-v2.6-pro.html, read 2026-11-01), in its 2026-09-22 update covering both MiMo V2.6 models, says 'We evaluated them with reasoning enabled' through the official Xiaomi API, so the record is the thinking-enabled configuration (owner decision O149, 2026-11-01)."
     },
     "gpt-6.1-terra-low": {
      "status": "absent",
@@ -330,12 +331,12 @@
      "valsKey": "minimax/MiniMax-M3.1-flash",
      "effort": "max",
      "harness": "OpenHands",
-     "note": "Owner decision O135 (2026-10-30) applied to MiniMax-M3.1-Flash: AA plots it without an effort; MiniMax's API documents reasoning_effort / output_config.effort low, medium, high, xhigh, max with max the default when omitted, and thinking cannot be disabled (minimax-effort.md, read 2026-11-01), so the configuration is max. The O135 research outcome for MiniMax awaits the owner's confirmation (as O140 confirmed MiMo-V2.6-Flash). Vals' model page (read 2026-11-01): run 'via the official MiniMax API at temperature 1, top_p 0.95, compute effort max'."
+     "note": "Owner decision O135 (2026-10-30) applied to MiniMax-M3.1-Flash: AA plots it without an effort; MiniMax's API documents reasoning_effort / output_config.effort low, medium, high, xhigh, max with max the default when omitted, and thinking cannot be disabled (minimax-effort.md, read 2026-11-01), so the configuration is max. The owner confirmed it at max (owner decision O148, 2026-11-01), as O140 did for MiMo-V2.6-Flash. Vals' model page (read 2026-11-01): run 'via the official MiniMax API at temperature 1, top_p 0.95, compute effort max'."
     }
    },
    "coverageCounts": {
-    "exact": 13,
-    "plausible": 1,
+    "exact": 14,
+    "plausible": 0,
     "absent": 23
    },
    "valueChangesSince20261030": {},
@@ -486,13 +487,14 @@
      "note": "Vals ran this model only at max (52.36), not high; not transferred."
     },
     "mimo-v2-6-flash": {
-     "status": "plausible",
+     "status": "exact",
      "value": 39.552,
      "stderr": 3.537,
      "valsKey": "xiaomi/mimo-v2.6-flash",
-     "effort": null,
+     "effort": "enabled (O140)",
      "harness": null,
-     "note": "Owner decision O135 (2026-10-30): AA plots MiMo-V2.6-Flash without an effort; Xiaomi's API documents a single thinking mode (thinking.type enabled/disabled, default enabled; on the Responses API every reasoning.effort other than none enables the same, undifferentiated reasoning), so the configuration is thinking enabled, the default (../../2026-10-30-v5-recapture/third-party/mimo-flash-effort.md; Xiaomi docs re-read 2026-11-01, mimo/). Vals records reasoning, reasoning_effort and compute_effort as null and its MiMo-V2.6-Flash model page (read 2026-10-30) states no reasoning setting; it stays unmatched under O140. New evidence for the owner: Vals' MiMo-V2.6-Pro model page (vals/_models/xiaomi_mimo-v2.6-pro.html, read 2026-11-01), in its 2026-09-22 update covering both models, says 'We evaluated them with reasoning enabled' through the official Xiaomi API."
+     "match": "owner (O149)",
+     "note": "Owner decision O135 (2026-10-30): AA plots MiMo-V2.6-Flash without an effort; Xiaomi's API documents a single thinking mode (thinking.type enabled/disabled, default enabled; on the Responses API every reasoning.effort other than none enables the same, undifferentiated reasoning), so the configuration is thinking enabled, the default (../../2026-10-30-v5-recapture/third-party/mimo-flash-effort.md; Xiaomi docs re-read 2026-11-01, mimo/). Vals records reasoning, reasoning_effort and compute_effort as null; its MiMo-V2.6-Pro model page (vals/_models/xiaomi_mimo-v2.6-pro.html, read 2026-11-01), in its 2026-09-22 update covering both MiMo V2.6 models, says 'We evaluated them with reasoning enabled' through the official Xiaomi API, so the record is the thinking-enabled configuration (owner decision O149, 2026-11-01)."
     },
     "gpt-6.1-terra-low": {
      "status": "absent",
@@ -729,8 +731,8 @@
     }
    },
    "coverageCounts": {
-    "exact": 9,
-    "plausible": 1,
+    "exact": 10,
+    "plausible": 0,
     "absent": 27
    },
    "valueChangesSince20261030": {},

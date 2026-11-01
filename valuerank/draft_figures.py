@@ -133,6 +133,9 @@ def named_figures(scores: dict, data: Path = DATA) -> dict:
         "cohort.families": len({item["family"] for item in capture["frontier"] + capture["near_frontier"]}),
         "cohort.frontierFamilies": len({item["family"] for item in capture["frontier"]}),
         "cohort.nearOnlyFamilies": len({item["family"] for item in capture["near_frontier"]} - {item["family"] for item in capture["frontier"]}),
+        # O145: configurations retained one release after leaving the rendered frontier and the near gap.
+        "cohort.retained": len(capture.get("retained", [])),
+        "cohort.retainedNames": series(sorted(item["displayName"] for item in capture.get("retained", []))) or "none",
         "aa.plottedPoints": capture["universe"]["plotted_models_with_both_coordinates"],
         "aa.catalog": capture["universe"]["catalog_models"],
         "aa.capturedAt": capture["captured_at"],
@@ -343,7 +346,10 @@ def registry_figures(capture: dict, plan_document: dict, release: str) -> dict:
 def family_figures(scores: dict, excluded: set, order) -> dict:
     """E193/E251: family primaries and the other plotted points, by tier and Index gap, as the build records them."""
 
-    cohort = [model for model in scores["models"] if model.get("aaFrontierTier")]
+    everyone = [model for model in scores["models"] if model.get("aaFrontierTier")]
+    # O145: retained configurations ("left cohort") are a class of their own, outside the frontier and near-gap classes.
+    retained = [model for model in everyone if model["aaFrontierTier"] == "left cohort"]
+    cohort = [model for model in everyone if model["aaFrontierTier"] != "left cohort"]
     family = lambda model: model.get("family") or model["name"]
     frontier_families = {family(model) for model in cohort if model["aaFrontierTier"] == "frontier"}
     primary = {family(model): model for model in cohort if model.get("familyPrimary")}
@@ -354,17 +360,18 @@ def family_figures(scores: dict, excluded: set, order) -> dict:
 
     near_families = [model for model in cohort if family(model) not in frontier_families]
     frontier_near = [model for model in cohort if family(model) in frontier_families and model["aaFrontierTier"] == "near"]
-    # I58 M1: the excluded configurations fall into exactly one of five classes, checked as a partition.
+    # I58 M1: the excluded configurations fall into exactly one of six classes (O145 adds the retained), checked as a partition.
     classes = {
         "frontierPrimaries": [m["id"] for m in cohort if m["id"] in excluded and m.get("familyPrimary") and family(m) in frontier_families],
         "nearPrimaries": [m["id"] for m in cohort if m["id"] in excluded and m.get("familyPrimary") and family(m) not in frontier_families],
         "nearPoints": [m["id"] for m in frontier_near if m["id"] in excluded and not m.get("familyPrimary")],
         "frontierPoints": [m["id"] for m in cohort if m["id"] in excluded and not m.get("familyPrimary") and m["aaFrontierTier"] == "frontier"],
         "nearFamilyPoints": [m["id"] for m in near_families if m["id"] in excluded and not m.get("familyPrimary")],
+        "retainedPoints": [m["id"] for m in retained if m["id"] in excluded],
     }
     placed = [item for ids in classes.values() for item in ids]
     if sorted(placed) != sorted(excluded) or len(set(placed)) != len(placed):
-        raise FigureError(f"the excluded configurations do not partition into the five classes: {sorted(set(excluded) ^ set(placed))}")
+        raise FigureError(f"the excluded configurations do not partition into the six classes: {sorted(set(excluded) ^ set(placed))}")
     return {
         "near.primaries": by_gap([model for model in near_families if model.get("familyPrimary")]),
         "near.others": by_gap([model for model in near_families if not model.get("familyPrimary")]),

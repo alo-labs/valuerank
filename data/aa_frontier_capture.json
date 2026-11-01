@@ -1,6 +1,6 @@
 {
-  "captured_at": "2026-10-30T22:15:18Z",
-  "local_capture_date": "2026-10-30",
+  "captured_at": "2026-11-01T05:53:05Z",
+  "local_capture_date": "2026-11-01",
   "local_timezone": "UTC",
   "source_url": "https://artificialanalysis.ai/evaluations/artificial-analysis-intelligence-index?eval-cost=intelligence-vs-total-cost",
   "source_owner": "Artificial Analysis",
@@ -18,38 +18,21 @@
     "model_families": 9,
     "selection_evidence": "The chart's model selector displayed '89 of 89 models' after Select all (it showed '28 of 89 models' before). The chart SVG held 82 circles and one dotted Pareto path (stroke-dasharray '0.1 6') with 18 M/L coordinate pairs, each matching a circle centre exactly."
   },
-  "method": "research/2026-10-30-v5-recapture/capture_chart.mjs: Playwright (headless Chromium 1600 x 1200; no sign-in; optional cookies declined). The chart's model selector set to Select all; every circle centre and the dotted Pareto path read from the chart SVG; each circle hovered at its on-screen centre from a neutral point and its public tooltip recorded verbatim. No embedded payload, API, export or paid data was used for the chart values; owner URLs come from AA's own catalog ({slug, name}) embedded in a model page.",
+  "method": "research/2026-11-01-recapture/capture_chart.mjs: Playwright (headless Chromium 1600 x 1200; no sign-in; optional cookies declined). The chart's model selector set to Select all; every circle centre and the dotted Pareto path read from the chart SVG; each circle hovered at its on-screen centre from a neutral point and its public tooltip recorded verbatim. No embedded payload, API, export or paid data was used for the chart values; owner URLs come from AA's own catalog ({slug, name}) embedded in a model page.",
   "precision": {
     "intelligence_index": "Rounded integer displayed by public tooltip; raw precision is not recovered from SVG coordinates.",
     "total_cost_usd": "Two decimal places displayed by public tooltip."
   },
   "duplicate_resolution": "None needed: every circle-centre hover returned a distinct tooltip (82 distinct for 82 circles).",
   "comparison_to_previous_capture": {
-    "previous_inventory": "data/aa_frontier_capture.json captured 2026-10-25T09:53:28Z (Intelligence Index v4.3.2)",
-    "previous_capture_date": "2026-10-25",
-    "previous_vertex_count": 19,
+    "previous_inventory": "data/aa_frontier_capture.json captured 2026-10-30T22:15:18Z (Intelligence Index v5.0)",
+    "previous_capture_date": "2026-10-30",
+    "previous_vertex_count": 18,
     "current_vertex_count": 18,
-    "frontier_membership_changed": true,
-    "added": [
-      "Claude Haiku 5.5 (low)",
-      "GPT-6.1 Terra (low)",
-      "GPT-6.1 Terra (medium)",
-      "GPT-6.1 Terra (high)",
-      "GPT-6 Astra (high)",
-      "GPT-6 Astra (xhigh)",
-      "Gemini 4 Carbon (high)"
-    ],
-    "removed": [
-      "GPT-6 Luna (xhigh)",
-      "GPT-6 Luna (max)",
-      "Claude Haiku 5.5 (xhigh)",
-      "MiMo-V2.6-Pro",
-      "Claude Opus 5.5 (high with fallback)",
-      "Kimi K3.1 Pro",
-      "Claude Sonnet 5.5 (max with fallback)",
-      "Claude Opus 5.5 (max with fallback)"
-    ],
-    "basis": "AA replaced Intelligence Index v4.3.2 with v5.0 (owner decision O132), so the Index, its evaluations, the costs and the chart's universe all changed; vertices are compared by name (the frozen v4.3.2 copy is previous-frontier-capture.json)."
+    "frontier_membership_changed": false,
+    "added": [],
+    "removed": [],
+    "basis": "Both captures are Intelligence Index v5.0; vertices are compared by name (the previous release's capture is previous-frontier-capture.json; the cutoff moved under O65 for O145)."
   },
   "family_groups": [
     {
@@ -1822,14 +1805,14 @@
       "effort": null,
       "fallback": null,
       "intelligence_index_display": 14,
-      "total_cost_usd": 482.18,
+      "total_cost_usd": 462.7,
       "footnote": null,
       "circle_id": "e2c0623e-c855-4a61-bb66-be1f1ed43234",
-      "svg_x": 493.4356782686432,
+      "svg_x": 489.0908392054973,
       "svg_y": 267.5681202746515,
       "url": "https://artificialanalysis.ai/models/nemotron-3-5-super-vl",
       "intelligence_gap": 32,
-      "cost_ratio": 12.1917,
+      "cost_ratio": 11.6991,
       "tier": "dominated"
     },
     {
@@ -2003,5 +1986,222 @@
       "tier": "dominated"
     }
   ],
-  "rendered_pareto_svg_path": "M 75.04099417166209 285.98355359690186 L 229.98110546911073 245.75465297324627 L 230.12102375652478 244.29328852659327 L 278.3152285861496 231.43486328306608 L 294.1143924678306 216.6609701202493 L 333.9856001550266 206.5252914986726 L 338.8507363310522 194.9325920882361 L 348.145011215938 193.03533082165401 L 395.52332604328143 153.49203286140022 L 431.0857451690866 133.84241451386353 L 470.69652067580336 116.08738879445833 L 511.64721400782065 97.07579769812752 L 535.3389553143471 87.39315033467334 L 582.5953612318199 77.14503966709105 L 692.9532956988338 75.55646724090062 L 709.4244925995052 73.66609320897712 L 734.786845932367 65.56751197773531 L 792.4636415008116 54.24584487963607"
+  "rendered_pareto_svg_path": "M 75.04099417166209 285.98355359690186 L 229.98110546911073 245.75465297324627 L 230.12102375652478 244.29328852659327 L 278.3152285861496 231.43486328306608 L 294.1143924678306 216.6609701202493 L 333.9856001550266 206.5252914986726 L 338.8507363310522 194.9325920882361 L 348.145011215938 193.03533082165401 L 395.52332604328143 153.49203286140022 L 431.0857451690866 133.84241451386353 L 470.69652067580336 116.08738879445833 L 511.64721400782065 97.07579769812752 L 535.3389553143471 87.39315033467334 L 582.5953612318199 77.14503966709105 L 692.9532956988338 75.55646724090062 L 709.4244925995052 73.66609320897712 L 734.786845932367 65.56751197773531 L 792.4636415008116 54.24584487963607",
+  "retained": [
+    {
+      "id": "claude-haiku-5-5",
+      "sourceUrl": "https://artificialanalysis.ai/models/claude-haiku-5-5-xhigh",
+      "displayName": "Claude Haiku 5.5 (xhigh)",
+      "rule": "O145",
+      "reason": "in the 2026-10-25 release's cohort; left AA's rendered frontier and near gap at the v5 re-capture; kept one more release, flagged 'left cohort'",
+      "chartPoint": {
+        "model_name": "Claude Haiku 5.5 (xhigh)",
+        "family": "Claude Haiku 5.5",
+        "effort": "xhigh",
+        "fallback": null,
+        "intelligence_index_display": 34,
+        "total_cost_usd": 192.7,
+        "footnote": "Claude Haiku 5.5 has 5x higher pricing on longer-context inputs which are not currently reflected; we are working to include this in cost figures across Artificial Analysis.",
+        "circle_id": "41b5bf5e-daf6-42d9-b8d1-60e340a3028d",
+        "svg_x": 396.8076496394404,
+        "svg_y": 171.07941486765608,
+        "url": "https://artificialanalysis.ai/models/claude-haiku-5-5-xhigh",
+        "intelligence_gap": 4,
+        "cost_ratio": 1.0123,
+        "tier": "dominated"
+      }
+    },
+    {
+      "id": "claude-haiku-5-5-max",
+      "sourceUrl": "https://artificialanalysis.ai/models/claude-haiku-5-5",
+      "displayName": "Claude Haiku 5.5 (max)",
+      "rule": "O145",
+      "reason": "in the 2026-10-25 release's cohort; left AA's rendered frontier and near gap at the v5 re-capture; kept one more release, flagged 'left cohort'",
+      "chartPoint": {
+        "model_name": "Claude Haiku 5.5 (max)",
+        "family": "Claude Haiku 5.5",
+        "effort": "max",
+        "fallback": null,
+        "intelligence_index_display": 36,
+        "total_cost_usd": 339.47,
+        "footnote": "Claude Haiku 5.5 has 5x higher pricing on longer-context inputs which are not currently reflected; we are working to include this in cost figures across Artificial Analysis.",
+        "circle_id": "7d064a11-6e78-4030-b535-cdf940615041",
+        "svg_x": 456.46613227865373,
+        "svg_y": 162.25055414724818,
+        "url": "https://artificialanalysis.ai/models/claude-haiku-5-5",
+        "intelligence_gap": 6,
+        "cost_ratio": 1.7833,
+        "tier": "dominated"
+      }
+    },
+    {
+      "id": "claude-opus-5-5-medium",
+      "sourceUrl": "https://artificialanalysis.ai/models/claude-opus-5-5-medium",
+      "displayName": "Claude Opus 5.5 (medium)",
+      "rule": "O145",
+      "reason": "in the 2026-10-25 release's cohort; left AA's rendered frontier and near gap at the v5 re-capture; kept one more release, flagged 'left cohort'",
+      "chartPoint": {
+        "model_name": "Claude Opus 5.5 (medium with fallback)",
+        "family": "Claude Opus 5.5",
+        "effort": "medium",
+        "fallback": "with fallback",
+        "intelligence_index_display": 48,
+        "total_cost_usd": 2031.27,
+        "footnote": null,
+        "circle_id": "ea9e0da6-169f-43c6-92f5-730a10d6ff8d",
+        "svg_x": 644.9409016451511,
+        "svg_y": 107.18655123259246,
+        "url": "https://artificialanalysis.ai/models/claude-opus-5-5-medium",
+        "intelligence_gap": 7,
+        "cost_ratio": 3.5439,
+        "tier": "dominated"
+      }
+    },
+    {
+      "id": "claude-sonnet-5-5-xhigh",
+      "sourceUrl": "https://artificialanalysis.ai/models/claude-sonnet-5-5-xhigh",
+      "displayName": "Claude Sonnet 5.5 (xhigh)",
+      "rule": "O145",
+      "reason": "in the 2026-10-25 release's cohort; left AA's rendered frontier and near gap at the v5 re-capture; kept one more release, flagged 'left cohort'",
+      "chartPoint": {
+        "model_name": "Claude Sonnet 5.5 (xhigh with fallback)",
+        "family": "Claude Sonnet 5.5",
+        "effort": "xhigh",
+        "fallback": "with fallback",
+        "intelligence_index_display": 50,
+        "total_cost_usd": 2902.5,
+        "footnote": null,
+        "circle_id": "975aeaef-50bd-4a65-9c73-f1015adcd4d4",
+        "svg_x": 682.5417115266474,
+        "svg_y": 100.12664734479871,
+        "url": "https://artificialanalysis.ai/models/claude-sonnet-5-5-xhigh",
+        "intelligence_gap": 5,
+        "cost_ratio": 5.0639,
+        "tier": "dominated"
+      }
+    },
+    {
+      "id": "deepseek-v4-1-flash-1017",
+      "sourceUrl": "https://artificialanalysis.ai/models/deepseek-v4-1-flash-1017",
+      "displayName": "DeepSeek V4.1 Flash 1017",
+      "rule": "O145",
+      "reason": "in the 2026-10-25 release's cohort; left AA's rendered frontier and near gap at the v5 re-capture; kept one more release, flagged 'left cohort'",
+      "chartPoint": {
+        "model_name": "DeepSeek V4.1 Flash 1017 (max)",
+        "family": "DeepSeek V4.1 Flash 1017",
+        "effort": "max",
+        "fallback": null,
+        "intelligence_index_display": 32,
+        "total_cost_usd": 520.63,
+        "footnote": null,
+        "circle_id": "f151fd0b-2139-40cf-a3ec-995e8cedc592",
+        "svg_x": 501.5192679653266,
+        "svg_y": 179.6911081550846,
+        "url": "https://artificialanalysis.ai/models/deepseek-v4-1-flash-1017",
+        "intelligence_gap": 14,
+        "cost_ratio": 2.735,
+        "tier": "dominated"
+      }
+    },
+    {
+      "id": "gemini-4-argon",
+      "sourceUrl": "https://artificialanalysis.ai/models/gemini-4-argon",
+      "displayName": "Gemini 4 Argon",
+      "rule": "O145",
+      "reason": "in the 2026-10-25 release's cohort; left AA's rendered frontier and near gap at the v5 re-capture; kept one more release, flagged 'left cohort'",
+      "chartPoint": {
+        "model_name": "Gemini 4 Argon (high)",
+        "family": "Gemini 4 Argon",
+        "effort": "high",
+        "fallback": null,
+        "intelligence_index_display": 50,
+        "total_cost_usd": 6102.84,
+        "footnote": null,
+        "circle_id": "d366dfa1-d940-4788-aa73-d298c45699b3",
+        "svg_x": 760.836440508627,
+        "svg_y": 96.22321270691883,
+        "url": "https://artificialanalysis.ai/models/gemini-4-argon",
+        "intelligence_gap": 7,
+        "cost_ratio": 10.6475,
+        "tier": "dominated"
+      }
+    },
+    {
+      "id": "gpt-5.6-luna-low",
+      "sourceUrl": "https://artificialanalysis.ai/models/gpt-5-6-luna-low",
+      "displayName": "GPT-5.6 Luna (low)",
+      "rule": "O145",
+      "reason": "in the 2026-10-25 release's cohort; left AA's rendered frontier and near gap at the v5 re-capture; kept one more release, flagged 'left cohort'",
+      "chartPoint": null
+    },
+    {
+      "id": "kimi-k3-1-pro",
+      "sourceUrl": "https://artificialanalysis.ai/models/kimi-k3-1-pro",
+      "displayName": "Kimi K3.1 Pro",
+      "rule": "O145",
+      "reason": "in the 2026-10-25 release's cohort; left AA's rendered frontier and near gap at the v5 re-capture; kept one more release, flagged 'left cohort'",
+      "chartPoint": {
+        "model_name": "Kimi K3.1 Pro",
+        "family": "Kimi K3.1 Pro",
+        "effort": null,
+        "fallback": null,
+        "intelligence_index_display": 46,
+        "total_cost_usd": 3152.8,
+        "footnote": null,
+        "circle_id": "665c67ca-09eb-48f0-a7a3-0096e1d5de51",
+        "svg_x": 691.2562427735113,
+        "svg_y": 116.75920974484912,
+        "url": "https://artificialanalysis.ai/models/kimi-k3-1-pro",
+        "intelligence_gap": 9,
+        "cost_ratio": 8.1139,
+        "tier": "dominated"
+      }
+    },
+    {
+      "id": "mimo-v2-6-pro",
+      "sourceUrl": "https://artificialanalysis.ai/models/mimo-v2-6-pro",
+      "displayName": "MiMo-V2.6-Pro",
+      "rule": "O145",
+      "reason": "in the 2026-10-25 release's cohort; left AA's rendered frontier and near gap at the v5 re-capture; kept one more release, flagged 'left cohort'",
+      "chartPoint": {
+        "model_name": "MiMo-V2.6-Pro",
+        "family": "MiMo-V2.6-Pro",
+        "effort": null,
+        "fallback": null,
+        "intelligence_index_display": 30,
+        "total_cost_usd": 220.73,
+        "footnote": null,
+        "circle_id": "24d8fdfe-6241-424e-b7b7-1b6efb06e4fb",
+        "svg_x": 411.1197396178282,
+        "svg_y": 191.7990091593962,
+        "url": "https://artificialanalysis.ai/models/mimo-v2-6-pro",
+        "intelligence_gap": 8,
+        "cost_ratio": 1.8181,
+        "tier": "dominated"
+      }
+    },
+    {
+      "id": "minimax-m3-1-flash",
+      "sourceUrl": "https://artificialanalysis.ai/models/minimax-m3-1-flash",
+      "displayName": "MiniMax-M3.1-Flash",
+      "rule": "O145",
+      "reason": "in the 2026-10-25 release's cohort; left AA's rendered frontier and near gap at the v5 re-capture; kept one more release, flagged 'left cohort'",
+      "chartPoint": {
+        "model_name": "MiniMax-M3.1-Flash",
+        "family": "MiniMax-M3.1-Flash",
+        "effort": null,
+        "fallback": null,
+        "intelligence_index_display": 29,
+        "total_cost_usd": 358.06,
+        "footnote": null,
+        "circle_id": "d49c8680-e29b-400e-9511-824f7ddebe07",
+        "svg_x": 462.0822167268816,
+        "svg_y": 196.364228773301,
+        "url": "https://artificialanalysis.ai/models/minimax-m3-1-flash",
+        "intelligence_gap": 13,
+        "cost_ratio": 3.2211,
+        "tier": "dominated"
+      }
+    }
+  ]
 }

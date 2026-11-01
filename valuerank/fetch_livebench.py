@@ -60,6 +60,9 @@ COHORT_MAP = {
         "gpt-6.1-sol-low", "gpt-6.1-sol-medium", "gpt-6.1-sol-high", "gpt-6.1-sol-xhigh", "gpt-6.1-sol",
         "gpt-6-astra-high", "gpt-6-astra-xhigh", "claude-opus-5-5-high", "claude-opus-5-5-xhigh", "claude-opus-5-5",
         "claude-sonnet-5-5", "gemini-4-carbon",
+        # O145 (2026-11-01): the ten configurations retained one release after leaving the frontier and near gap.
+        "claude-haiku-5-5", "claude-haiku-5-5-max", "claude-opus-5-5-medium", "claude-sonnet-5-5-xhigh", "deepseek-v4-1-flash-1017",
+        "gemini-4-argon", "gpt-5.6-luna-low", "kimi-k3-1-pro", "mimo-v2-6-pro", "minimax-m3-1-flash",
     )},
 }
 

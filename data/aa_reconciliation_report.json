@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "checkedAt": "2026-10-31T04:10:00+00:00",
+  "checkedAt": "2026-11-01T06:10:00+00:00",
   "inventoryPath": "data/aa_reconciliation_inventory.json",
   "maxAgeDays": 7,
   "issues": [],
@@ -114,7 +114,7 @@
       "intelligenceIndexPrecision": "rounded_whole_public_label",
       "rosterDecision": null,
       "primaryRankingGaps": [
-        "Incomplete benchmark evidence after an exhaustive search (O36, O53): Max-effort ranking: no Bug Hunt Bench, Vibe Code Bench v1.1 (Vals), Code Migration v1.1 (Vals), LiveBench 2.0 Overall; AI Coding Daily ranking: no Bug Hunt Bench"
+        "Incomplete benchmark evidence after an exhaustive search (O36, O53): Max-effort ranking: no Bug Hunt Bench, LiveBench 2.0 Overall; AI Coding Daily ranking: no Bug Hunt Bench"
       ],
       "metricGap": null,
       "rankStatus": "Unranked: incomplete benchmark evidence (O36)"
@@ -351,7 +351,7 @@
   "scope": "Complete displayed intelligence versus total evaluation cost Pareto line with all 89 catalog models selected; 82 eligible plotted points, every one read from its public tooltip. This is not ValueRank's composite-quality frontier.",
   "completeness": {
     "status": "complete",
-    "note": "All 89 catalog models selected; all 82 plotted points and all 18 Pareto path vertices captured from public tooltips (rounded integer Intelligence Index, two-decimal USD total cost) with Playwright on 2026-10-30. Every hover returned a distinct tooltip, so no overlapped-circle resolution was needed. No hidden state or paid export used."
+    "note": "All 89 catalog models selected; all 82 plotted points and all 18 Pareto path vertices captured from public tooltips (rounded integer Intelligence Index, two-decimal USD total cost) with Playwright on 2026-11-01. Every hover returned a distinct tooltip, so no overlapped-circle resolution was needed. No hidden state or paid export used."
   },
   "nearFrontierPolicy": {
     "maxIntelligenceGap": 3,
@@ -608,7 +608,7 @@
   "missingNearFrontierIds": [],
   "unresolvedNearFrontierIds": [],
   "deferredNearFrontierIds": [],
-  "observedAt": "2026-10-30T22:15:18Z",
+  "observedAt": "2026-11-01T05:53:05Z",
   "benchmarkVersion": "Artificial Analysis Intelligence Index v5.0",
   "sourceUrl": "https://artificialanalysis.ai/evaluations/artificial-analysis-intelligence-index?eval-cost=intelligence-vs-total-cost",
   "mode": "observedFrontier",
@@ -618,7 +618,7 @@
     "observedFrontierPointN": 18,
     "nearFrontierPointN": 9
   },
-  "ageDays": 0.246,
+  "ageDays": 0.012,
   "requiredFamilies": [
     {
       "family": "GPT-6 Luna",

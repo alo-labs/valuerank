@@ -154,8 +154,8 @@ describe('rankings instrument', () => {
   test('filters, sorting, columns and comparison all live in the URL', async () => {
     const { page, context, errors } = await open('/rankings/');
     // O48/O53: the max-effort ranking's Plan basis has one row per configuration and plan, then every roster model it does not
-    // rank; under v5 the roster is the 27-configuration cohort (O132).
-    assert.equal(await page.locator('#rankings-body tr').count(), 40);
+    // rank; under v5 the roster is the 37-configuration cohort (O132, O145): 27 plan rows and 28 unranked models.
+    assert.equal(await page.locator('#rankings-body tr').count(), 55);
 
     await page.locator('#filters input[name="provider"][value="OpenAI"]').check();
     assert.match(await query(page), /provider=OpenAI/);
@@ -282,9 +282,9 @@ describe('charts, model, plans and listing pages', () => {
     await context.close();
   });
 
-  test('the models index lists all 27 models and links to their pages', async () => {
+  test('the models index lists all 37 models and links to their pages', async () => {
     const { page, context } = await open('/models/');
-    assert.equal(await page.locator('#models-table tbody tr').count(), 27);
+    assert.equal(await page.locator('#models-table tbody tr').count(), 37);
     // O33: each ranked effort of a family has its own row and page.
     assert.equal(await page.locator('#models-table a.model-name[href$="/models/gpt-6-1-sol-xhigh/"]').innerText(), 'GPT-6.1 Sol (xhigh)');
     await page.locator('#models-table a.model-name', { hasText: /^GPT-6\.1 Sol \(max\)$/ }).click();

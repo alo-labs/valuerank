@@ -200,10 +200,13 @@ def test_registry_figures_name_changes_and_refuse_two_semianalysis_dates():
 
 
 def test_duplicate_rows_name_the_chosen_harness(tmp_path):
-    """I50 M2: a configuration a board lists twice is named with the row the selection rule chose (no board lists a v5
-    configuration twice, so one AI Coding Daily record is given a second row)."""
+    """I50 M2: a configuration a board lists twice is named with the row the selection rule chose (AI Coding Daily lists
+    DeepSeek V4.1 Flash 1017 (max) twice since O145 retained it; a second record is given a second row as well)."""
 
-    assert f.named_figures(SCORES)["duplicateRows"] == "none"
+    names = f.display_names(SCORES)
+    deepseek = (f"{names['deepseek-v4-1-flash-1017']} on AI Coding Daily "
+                "(DeepSeek Harness chosen over OpenCode by the harness of its Bug Hunt record)")
+    assert f.named_figures(SCORES)["duplicateRows"] == deepseek
     data = tmp_path / "data"
     shutil.copytree(DATA, data, ignore=shutil.ignore_patterns("site", "*.html"))
     tracks = json.loads((data / "swe_tracks.json").read_text())
@@ -212,7 +215,7 @@ def test_duplicate_rows_name_the_chosen_harness(tmp_path):
                   alternates=[{"harness": "OpenCode", "tested": "2026-10-17", "value": record["value"] - 1}])
     (data / "swe_tracks.json").write_text(json.dumps(tracks))
     assert f.named_figures(SCORES, data)["duplicateRows"] == (
-        f"{f.display_names(SCORES)['gpt-6.1-sol-high']} on AI Coding Daily (Codex CLI chosen over OpenCode by the harness of its Bug Hunt record)")
+        f"{names['gpt-6.1-sol-high']} on AI Coding Daily (Codex CLI chosen over OpenCode by the harness of its Bug Hunt record) and {deepseek}")
 
 
 def test_names_render_from_ids_and_names_in_undated_sentences_are_flagged():

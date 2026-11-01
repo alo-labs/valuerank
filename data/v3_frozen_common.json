@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
   "methodologyVersion": "3.0.0",
-  "anchorVersion": "v3-2026-10-31-common",
-  "frozenAt": "2026-10-31",
+  "anchorVersion": "v3-2026-11-01-common",
+  "frozenAt": "2026-11-01",
   "basketVersion": "SDLC basket v1",
   "mainWorkload": "835a9baf594a1251",
   "workloads": {
@@ -23,6 +23,9 @@
           "units": "USD per workload pass",
           "referenceIds": [
             "claude-sonnet-5-5",
+            "claude-sonnet-5-5-xhigh",
+            "deepseek-v4-1-flash-1017",
+            "gemini-4-argon",
             "gpt-6-astra",
             "gpt-6-astra-high",
             "gpt-6-astra-xhigh",
@@ -40,10 +43,15 @@
             "gpt-6.1-terra-high",
             "gpt-6.1-terra-low",
             "gpt-6.1-terra-medium",
-            "gpt-6.1-terra-xhigh"
+            "gpt-6.1-terra-xhigh",
+            "kimi-k3-1-pro",
+            "mimo-v2-6-pro"
           ],
           "referenceCosts": {
             "claude-sonnet-5-5": 6644.38086168003,
+            "claude-sonnet-5-5-xhigh": 2611.8169505039364,
+            "deepseek-v4-1-flash-1017": 445.51597840042814,
+            "gemini-4-argon": 5478.681890335225,
             "gpt-6-astra": 4767.904669232116,
             "gpt-6-astra-high": 2834.1008457247967,
             "gpt-6-astra-xhigh": 3186.48452284256,
@@ -61,7 +69,9 @@
             "gpt-6.1-terra-high": 236.92003656268736,
             "gpt-6.1-terra-low": 104.9451808532346,
             "gpt-6.1-terra-medium": 174.9111284111748,
-            "gpt-6.1-terra-xhigh": 330.42122570274984
+            "gpt-6.1-terra-xhigh": 330.42122570274984,
+            "kimi-k3-1-pro": 2631.238073586814,
+            "mimo-v2-6-pro": 171.70030964750728
           },
           "low": 3.9736187608811266,
           "high": 13288.76172336006,
@@ -72,9 +82,14 @@
           "workload": "835a9baf594a1251",
           "units": "USD per workload pass",
           "referenceIds": [
+            "claude-sonnet-5-5-xhigh@claude-max-20x",
+            "claude-sonnet-5-5-xhigh@claude-max-5x",
+            "claude-sonnet-5-5-xhigh@claude-pro",
             "claude-sonnet-5-5@claude-max-20x",
             "claude-sonnet-5-5@claude-max-5x",
             "claude-sonnet-5-5@claude-pro",
+            "deepseek-v4-1-flash-1017@api",
+            "gemini-4-argon@api",
             "gpt-6-astra-high@chatgpt-plus",
             "gpt-6-astra-high@chatgpt-pro-100",
             "gpt-6-astra-high@chatgpt-pro-200",
@@ -146,12 +161,22 @@
             "gpt-6.1-terra@chatgpt-plus",
             "gpt-6.1-terra@chatgpt-pro-100",
             "gpt-6.1-terra@chatgpt-pro-200",
-            "gpt-6.1-terra@chatgpt-pro-500"
+            "gpt-6.1-terra@chatgpt-pro-500",
+            "kimi-k3-1-pro@api",
+            "mimo-v2-6-pro@mimo-token-plan-lite",
+            "mimo-v2-6-pro@mimo-token-plan-max",
+            "mimo-v2-6-pro@mimo-token-plan-pro",
+            "mimo-v2-6-pro@mimo-token-plan-standard"
           ],
           "referenceCosts": {
+            "claude-sonnet-5-5-xhigh@claude-max-20x": 44.54744926665421,
+            "claude-sonnet-5-5-xhigh@claude-max-5x": 45.62125677736133,
+            "claude-sonnet-5-5-xhigh@claude-pro": 44.34324194403967,
             "claude-sonnet-5-5@claude-max-20x": 113.32732153641531,
             "claude-sonnet-5-5@claude-max-5x": 116.0590543524896,
             "claude-sonnet-5-5@claude-pro": 112.80782447674075,
+            "deepseek-v4-1-flash-1017@api": 445.51597840042814,
+            "gemini-4-argon@api": 5478.681890335225,
             "gpt-6-astra-high@chatgpt-plus": 349.88899329935765,
             "gpt-6-astra-high@chatgpt-pro-100": 214.37979165845664,
             "gpt-6-astra-high@chatgpt-pro-200": 195.65763518983755,
@@ -223,10 +248,15 @@
             "gpt-6.1-terra@chatgpt-plus": 84.97133754758073,
             "gpt-6.1-terra@chatgpt-pro-100": 65.23865726401932,
             "gpt-6.1-terra@chatgpt-pro-200": 66.05257525291783,
-            "gpt-6.1-terra@chatgpt-pro-500": 63.894154672800205
+            "gpt-6.1-terra@chatgpt-pro-500": 63.894154672800205,
+            "kimi-k3-1-pro@api": 2631.238073586814,
+            "mimo-v2-6-pro@mimo-token-plan-lite": 174.4921846011253,
+            "mimo-v2-6-pro@mimo-token-plan-max": 145.41015383427106,
+            "mimo-v2-6-pro@mimo-token-plan-pro": 156.8899028211872,
+            "mimo-v2-6-pro@mimo-token-plan-standard": 173.4346562096033
           },
           "low": 0.36888402904577855,
-          "high": 1177.2604121560782,
+          "high": 10957.36378067045,
           "padding": 2.0
         }
       },
@@ -242,14 +272,14 @@
     },
     {
       "id": "bar:lower-quartile-quality",
-      "level": 30.699315586691043,
-      "levelConfiguration": "gpt-6.1-terra-low",
+      "level": 31.430202598696724,
+      "levelConfiguration": "gpt-6-luna",
       "rule": "lower-quartile displayed quality of the non-provisional cohort configurations at freeze (O34)"
     },
     {
       "id": "bar:upper-quartile-quality",
-      "level": 52.47549551798771,
-      "levelConfiguration": "gpt-6.1-sol-xhigh",
+      "level": 51.83563923923465,
+      "levelConfiguration": "gpt-6.1-terra",
       "rule": "upper-quartile displayed quality of the non-provisional cohort configurations at freeze (O34)"
     }
   ],
@@ -275,15 +305,21 @@
     "ladderPopulation": "fewer than four population configurations: only the headline bar is pinned, because the quartile positions would coincide with it (E215)",
     "nonTautology": "a frozen level is never a configuration, so no bar can return its setter by construction; whether a result compares alternatives is published per result (possibleQualifierN, E198)",
     "lifetime": "fixed for the anchor version; replaced only by a versioned re-freeze that publishes old- and new-bar results on the common evaluable panel",
-    "selectionCutoff": "2026-10-31",
+    "selectionCutoff": "2026-11-01",
     "population": [
+      "claude-haiku-5-5",
       "claude-haiku-5-5-high",
       "claude-haiku-5-5-low",
+      "claude-haiku-5-5-max",
       "claude-haiku-5-5-medium",
       "claude-opus-5-5",
       "claude-opus-5-5-high",
+      "claude-opus-5-5-medium",
       "claude-opus-5-5-xhigh",
       "claude-sonnet-5-5",
+      "claude-sonnet-5-5-xhigh",
+      "deepseek-v4-1-flash-1017",
+      "gemini-4-argon",
       "gpt-6-astra",
       "gpt-6-astra-high",
       "gpt-6-astra-xhigh",
@@ -301,7 +337,9 @@
       "gpt-6.1-terra-high",
       "gpt-6.1-terra-low",
       "gpt-6.1-terra-medium",
-      "gpt-6.1-terra-xhigh"
+      "gpt-6.1-terra-xhigh",
+      "kimi-k3-1-pro",
+      "mimo-v2-6-pro"
     ],
     "bars": [
       {
@@ -311,13 +349,13 @@
       },
       {
         "id": "bar:lower-quartile-quality",
-        "level": 30.699315586691043,
-        "levelConfiguration": "gpt-6.1-terra-low"
+        "level": 31.430202598696724,
+        "levelConfiguration": "gpt-6-luna"
       },
       {
         "id": "bar:upper-quartile-quality",
-        "level": 52.47549551798771,
-        "levelConfiguration": "gpt-6.1-sol-xhigh"
+        "level": 51.83563923923465,
+        "levelConfiguration": "gpt-6.1-terra"
       }
     ]
   }

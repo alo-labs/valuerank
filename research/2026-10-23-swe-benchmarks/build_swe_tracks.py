@@ -16,9 +16,9 @@ from pathlib import Path
 HERE = Path(__file__).parent
 # O68 (2026-10-25): every added-leaf board re-read in full on 2026-10-25; O132 (2026-10-30): re-read again for the AA
 # Intelligence Index v5 cohort, with LiveBench's release 2026-10-25 (O139).
-READ = HERE.parent / "2026-10-30-v5-recapture" / "third-party"
-READ_DATE = "2026-10-30"
-COHORT_FILE = HERE.parent / "2026-10-30-v5-recapture" / "cohort.json"
+READ = HERE.parent / "2026-11-01-recapture" / "third-party"
+READ_DATE = "2026-11-01"
+COHORT_FILE = HERE.parent / "2026-11-01-recapture" / "cohort.json"
 LIVEBENCH_RELEASE = "20261025"
 ROOT = HERE.parent.parent
 OWNER_MATCHED = {"mimo-v2-6-pro"}  # O54, E252
@@ -103,7 +103,7 @@ def select_aicd(model_id: str, label: str, board: dict[str, list[dict]]) -> dict
 # placed by the bound the archived read supports: shown "N hours ago" at the read instant, it was tested no later than
 # the read minus N - 1 hours (reviewer 72: valid whether the board rounds, truncates or ceils the age; I60 L2's N - 1/2
 # assumed rounding), and not before the day's UTC midnight. No minute is claimed.
-AICD_READ = ("research/2026-10-30-v5-recapture/third-party/aicd/leaderboard-allrows-parsed.json", "2026-10-30T22:21:52Z")
+AICD_READ = ("research/2026-11-01-recapture/third-party/aicd/leaderboard-allrows-parsed.json", "2026-11-01T06:02:22Z")
 _AGE = re.compile(r"\b(\d+) (minute|hour)s? ago\b")
 
 

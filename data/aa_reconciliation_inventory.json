@@ -8,7 +8,7 @@
   },
   "requiredFamilyPolicy": "Every distinct frontier model family must have an exact selected frontier configuration in the primary ranking. Alternate efforts remain comparison rows with separate evidence.",
   "nearFrontierFamilyPolicy": "Every near-frontier model family must have a row in the primary ranking using its own selected configuration, or a dated defer decision for each of its near-frontier configurations.",
-  "observedAt": "2026-10-30T22:15:18Z",
+  "observedAt": "2026-11-01T05:53:05Z",
   "benchmarkVersion": "Artificial Analysis Intelligence Index v5.0",
   "sourceUrl": "https://artificialanalysis.ai/evaluations/artificial-analysis-intelligence-index?eval-cost=intelligence-vs-total-cost",
   "scope": "Complete displayed intelligence versus total evaluation cost Pareto line with all 89 catalog models selected; 82 eligible plotted points, every one read from its public tooltip. This is not ValueRank's composite-quality frontier.",
@@ -20,7 +20,7 @@
   },
   "completeness": {
     "status": "complete",
-    "note": "All 89 catalog models selected; all 82 plotted points and all 18 Pareto path vertices captured from public tooltips (rounded integer Intelligence Index, two-decimal USD total cost) with Playwright on 2026-10-30. Every hover returned a distinct tooltip, so no overlapped-circle resolution was needed. No hidden state or paid export used."
+    "note": "All 89 catalog models selected; all 82 plotted points and all 18 Pareto path vertices captured from public tooltips (rounded integer Intelligence Index, two-decimal USD total cost) with Playwright on 2026-11-01. Every hover returned a distinct tooltip, so no overlapped-circle resolution was needed. No hidden state or paid export used."
   },
   "rosterDecisions": [],
   "rows": [
@@ -378,5 +378,87 @@
       "sourceFootnote": null
     }
   ],
-  "captureArtifact": "data/aa_frontier_capture.json"
+  "captureArtifact": "data/aa_frontier_capture.json",
+  "retainedRows": [
+    {
+      "id": "claude-haiku-5-5",
+      "sourceUrl": "https://artificialanalysis.ai/models/claude-haiku-5-5-xhigh",
+      "displayName": "Claude Haiku 5.5 (xhigh)",
+      "rule": "O145",
+      "reason": "in the 2026-10-25 release's cohort; left AA's rendered frontier and near gap at the v5 re-capture; kept one more release, flagged 'left cohort'",
+      "sourceFootnote": "Claude Haiku 5.5 has 5x higher pricing on longer-context inputs which are not currently reflected; we are working to include this in cost figures across Artificial Analysis."
+    },
+    {
+      "id": "claude-haiku-5-5-max",
+      "sourceUrl": "https://artificialanalysis.ai/models/claude-haiku-5-5",
+      "displayName": "Claude Haiku 5.5 (max)",
+      "rule": "O145",
+      "reason": "in the 2026-10-25 release's cohort; left AA's rendered frontier and near gap at the v5 re-capture; kept one more release, flagged 'left cohort'",
+      "sourceFootnote": "Claude Haiku 5.5 has 5x higher pricing on longer-context inputs which are not currently reflected; we are working to include this in cost figures across Artificial Analysis."
+    },
+    {
+      "id": "claude-opus-5-5-medium",
+      "sourceUrl": "https://artificialanalysis.ai/models/claude-opus-5-5-medium",
+      "displayName": "Claude Opus 5.5 (medium)",
+      "rule": "O145",
+      "reason": "in the 2026-10-25 release's cohort; left AA's rendered frontier and near gap at the v5 re-capture; kept one more release, flagged 'left cohort'",
+      "sourceFootnote": null
+    },
+    {
+      "id": "claude-sonnet-5-5-xhigh",
+      "sourceUrl": "https://artificialanalysis.ai/models/claude-sonnet-5-5-xhigh",
+      "displayName": "Claude Sonnet 5.5 (xhigh)",
+      "rule": "O145",
+      "reason": "in the 2026-10-25 release's cohort; left AA's rendered frontier and near gap at the v5 re-capture; kept one more release, flagged 'left cohort'",
+      "sourceFootnote": null
+    },
+    {
+      "id": "deepseek-v4-1-flash-1017",
+      "sourceUrl": "https://artificialanalysis.ai/models/deepseek-v4-1-flash-1017",
+      "displayName": "DeepSeek V4.1 Flash 1017",
+      "rule": "O145",
+      "reason": "in the 2026-10-25 release's cohort; left AA's rendered frontier and near gap at the v5 re-capture; kept one more release, flagged 'left cohort'",
+      "sourceFootnote": null
+    },
+    {
+      "id": "gemini-4-argon",
+      "sourceUrl": "https://artificialanalysis.ai/models/gemini-4-argon",
+      "displayName": "Gemini 4 Argon",
+      "rule": "O145",
+      "reason": "in the 2026-10-25 release's cohort; left AA's rendered frontier and near gap at the v5 re-capture; kept one more release, flagged 'left cohort'",
+      "sourceFootnote": null
+    },
+    {
+      "id": "gpt-5.6-luna-low",
+      "sourceUrl": "https://artificialanalysis.ai/models/gpt-5-6-luna-low",
+      "displayName": "GPT-5.6 Luna (low)",
+      "rule": "O145",
+      "reason": "in the 2026-10-25 release's cohort; left AA's rendered frontier and near gap at the v5 re-capture; kept one more release, flagged 'left cohort'",
+      "sourceFootnote": null
+    },
+    {
+      "id": "kimi-k3-1-pro",
+      "sourceUrl": "https://artificialanalysis.ai/models/kimi-k3-1-pro",
+      "displayName": "Kimi K3.1 Pro",
+      "rule": "O145",
+      "reason": "in the 2026-10-25 release's cohort; left AA's rendered frontier and near gap at the v5 re-capture; kept one more release, flagged 'left cohort'",
+      "sourceFootnote": null
+    },
+    {
+      "id": "mimo-v2-6-pro",
+      "sourceUrl": "https://artificialanalysis.ai/models/mimo-v2-6-pro",
+      "displayName": "MiMo-V2.6-Pro",
+      "rule": "O145",
+      "reason": "in the 2026-10-25 release's cohort; left AA's rendered frontier and near gap at the v5 re-capture; kept one more release, flagged 'left cohort'",
+      "sourceFootnote": null
+    },
+    {
+      "id": "minimax-m3-1-flash",
+      "sourceUrl": "https://artificialanalysis.ai/models/minimax-m3-1-flash",
+      "displayName": "MiniMax-M3.1-Flash",
+      "rule": "O145",
+      "reason": "in the 2026-10-25 release's cohort; left AA's rendered frontier and near gap at the v5 re-capture; kept one more release, flagged 'left cohort'",
+      "sourceFootnote": null
+    }
+  ]
 }

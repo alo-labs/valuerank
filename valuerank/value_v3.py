@@ -600,6 +600,8 @@ O71_STAGES = ("plain web search", "Claude's Deep Research", "Silver Bullet's Dee
 # I62 L6: the providers an O71 search must cover are derived from the cohort's developers (named as the plans' sellers).
 PLAN_PROVIDER = {"Google DeepMind": "Google", "Moonshot AI": "Kimi"}
 O71_FROM = "2026-10-25"
+# Reviewer 76: an O46 ceiling is stored to four decimals, so its recomputation agrees within half a unit of the last place.
+CEILING_TOLERANCE = 0.00005
 
 
 def cohort_providers(configurations: list[dict]) -> set[str]:
@@ -871,7 +873,7 @@ def assemble(configurations: list[dict], documents: dict, *, release_day: date, 
     for route in documents["planRoutes"]["routes"]:
         if route.get("evidenceClass") == "provider_quota_ceiling":
             ceiling = route["quotaCredits"] * route["usdPerBillionCredits"] / 1e9 / route["planPriceUsd"]
-            if abs(ceiling - route["valueMultiple"]) > 0.0005:
+            if abs(ceiling - route["valueMultiple"]) > CEILING_TOLERANCE:
                 raise ValueError(f"{route['id']}: the stored multiple {route['valueMultiple']} is not the quota ceiling {ceiling:.4f} (O46)")
     if window and (not searched or (release_day - date.fromisoformat(searched)).days > REPORT_SEARCH_MAX_AGE_DAYS):
         raise ValueError(f"end-user reports were last searched on {searched}, more than {REPORT_SEARCH_MAX_AGE_DAYS} days before the release cutoff {release_day} (E218)")
@@ -993,6 +995,9 @@ def assemble(configurations: list[dict], documents: dict, *, release_day: date, 
         "sourceClocks": clocks,
         "planAllowanceCells": allowance_cells,
         "planResearchCoverage": research_coverage,
+        # O144, O146: the route registry and its shared token mix, for the route brackets.
+        "planRoutes": documents["planRoutes"]["routes"],
+        "costMix": documents["planRoutes"].get("costMix"),
         "gdpvalPrevious": documents.get("aaPreviousCapture"),
         "codingAgents": documents.get("codingAgents"),
         "pages": documents["snapshot"]["pages"],
@@ -1704,6 +1709,11 @@ def displayed_cheapest(assembled: dict, frozen: dict, basis: str, margin: float 
     for bar in frozen["barReferences"]:
         qualifying, low, rows_at = cheapest(bar["level"])
         entry = {"bar": bar["id"], "level": bar["level"], "qualifierN": len(qualifying), "costUsd": low, "cheapest": rows_at}
+        # O143 (2026-11-01): the headline answer names the cheaper same-family efforts AA plots that this ranking could not
+        # evaluate (E201c), so a reader sees where the leading ranking cannot look.
+        by_id = {row["id"]: row for row in rows}
+        entry["uncheckedCheaperSiblings"] = {row_id.split("@")[0]: by_id[row_id].get("cheaperSiblings", []) for row_id in rows_at
+                                             if by_id[row_id].get("cheaperSiblings")}
         if margin is not None:
             above, above_low, above_rows = cheapest(bar["level"] + margin)
             entry["margin"] = {"level": bar["level"] + margin, "qualifierN": len(above), "costUsd": above_low, "cheapest": above_rows}
@@ -2224,7 +2234,7 @@ BAR_STALE_LOW = "headline bar below the current population's lower quartile: re-
 BAR_STALE_HIGH = "headline bar above the current population's upper quartile: re-freeze the ladder at the next anchor version (informational; no score changes)"
 
 
-def bar_currency(assembled: dict, frozen: dict) -> dict:
+def bar_currency(assembled: dict, frozen: dict, margin: float | None = None) -> dict:
     """E207: each frozen bar's reach in the current bar population, the ladder this population would freeze, and a flag
     when the headline bar has left the current interquartile range."""
 
@@ -2237,7 +2247,13 @@ def bar_currency(assembled: dict, frozen: dict) -> dict:
     flag = None
     if headline is not None and len(levels) == len(BAR_LADDER):
         flag = BAR_STALE_LOW if headline < levels[BAR_LADDER[1][0]] else BAR_STALE_HIGH if headline > levels[BAR_LADDER[2][0]] else None
-    return {"lifetime": BAR_LIFETIME, "bars": bars, "currentLadder": [{key: bar[key] for key in ("id", "level")} for bar in current], "flag": flag}
+    # Reviewer 76: adjacent frozen bars closer than the quality noise margin (O44) are not statistically distinct levels.
+    levels_sorted = sorted(bar["level"] for bar in frozen["barReferences"])
+    spacing = min((high - low for low, high in zip(levels_sorted, levels_sorted[1:])), default=None)
+    spacing_flag = (f"adjacent bars {spacing:.1f} quality points apart at the closest, under the {margin:.1f}-point noise margin (O44): "
+                    "the ladder's levels are not statistically distinct, so read the noise-margin companions") if spacing is not None and margin is not None and spacing < margin else None
+    return {"lifetime": BAR_LIFETIME, "bars": bars, "currentLadder": [{key: bar[key] for key in ("id", "level")} for bar in current], "flag": flag,
+            "minSpacing": spacing, "spacingFlag": spacing_flag}
 
 
 INDICATIVE_LABEL = "not ranked, not comparable: quality on the leaves the configuration has, renormalised, with no imputation (O41)"
@@ -2286,6 +2302,77 @@ def _rule(rule: str, status: str, detail: str) -> dict:
     return {"rule": rule, "status": status, "detail": detail}
 
 
+# O144, O146 (2026-11-01): route brackets. A Claude transfer (an Opus 5.5 multiple applied to another Claude model) and a
+# same-model cross-effort route (O88) assume one API-dollar multiple; a plan meter counting tokens makes the multiple scale
+# with the target's price per metered token. Each such Plan row is rescored at M x min(1, r) and M x max(1, r), the others
+# held at their displayed values, and its value and rank ranges published (an S2-style sensitivity; scores unchanged).
+BRACKET_RULES = {"claude-transfer": "O144", "cross-effort": "O146"}
+
+
+def price_per_token(page: dict, mix: dict | None = None) -> float | None:
+    """USD per million tokens: over a fixed token mix (O144; the registry's shared mix, cache writes excluded), else over the
+    configuration's own Intelligence Index token mix from its category costs (O146)."""
+
+    prices = {"input": page.get("price1mInputTokens"), "cache": page.get("cacheHitPrice"), "output": page.get("price1mOutputTokens")}
+    if any(not isinstance(value, (int, float)) or value <= 0 for value in prices.values()):
+        return None
+    if mix is not None:
+        return (mix["uncachedInputPct"] * prices["input"] + mix["cacheReadPct"] * prices["cache"] + mix["outputPct"] * prices["output"]) / (
+            mix["uncachedInputPct"] + mix["cacheReadPct"] + mix["outputPct"])
+    cost = page.get("intelligenceIndexCost") or {}
+    spend = {"input": cost.get("nonCacheInput"), "cache": cost.get("cacheRead"), "output": cost.get("output")}
+    if any(not isinstance(value, (int, float)) for value in spend.values()):
+        return None
+    tokens = sum(spend[key] / prices[key] for key in spend)
+    return sum(spend.values()) / tokens if tokens > 0 else None
+
+
+def route_bracket_kind(route: dict) -> str | None:
+    if route.get("sameModelAcrossEfforts"):
+        return "cross-effort"
+    if route.get("provider") == "Anthropic" and route.get("valueMultipleKind") == "user_assumption" and route.get("donorRouteId"):
+        return "claude-transfer"
+    return None
+
+
+def route_brackets(plan_rows: list[dict], per_plan: dict, frozen: dict, routes: list[dict], pages: dict, mix: dict) -> list[dict]:
+    """O144, O146: each bracketed Plan row's multiple, value and rank ranges."""
+
+    by_id = {route["id"]: route for route in routes}
+    values = {row_id: entry["plan"]["value"] for row_id, entry in per_plan.items()}
+    out = []
+    for row in plan_rows:
+        selected = row["routeSelection"]["selected"]
+        kind = route_bracket_kind(selected["route"]) if selected else None
+        multiple = (row.get("plan") or {}).get("multiple")
+        if kind is None or not multiple or values.get(row["id"]) is None:
+            continue
+        donor = by_id.get(selected["route"].get("donorRouteId")) or {}
+        donor_id = (donor.get("modelIds") or [None])[0]
+        target, source = pages.get(row["configurationId"]), pages.get(donor_id)
+        fixed = mix if kind == "claude-transfer" else None
+        target_price = price_per_token(target, fixed) if target else None
+        donor_price = price_per_token(source, fixed) if source else None
+        entry = {"rowId": row["id"], "configurationId": row["configurationId"], "routeId": selected["route"]["id"], "kind": kind, "rule": BRACKET_RULES[kind],
+                 "donorConfigurationId": donor_id, "multiple": multiple}
+        if target_price is None or donor_price is None:
+            out.append({**entry, "status": "not computable: a price or category cost is missing"})
+            continue
+        ratio = target_price / donor_price
+        anchors = _anchors_for(frozen, row["cost"]["workload"], "plan")
+        api_cost = row["cost"]["costUsd"]
+        ends = []
+        for factor in (min(1.0, ratio), max(1.0, ratio)):
+            cost_score = anchor_math.cost_score(api_cost / (multiple * factor), anchors) if anchors and api_cost else None
+            value = anchor_math.value_score(cost_score, row["summary"].displayed, BETA)
+            rank = 1 + sum(1 for other, other_value in values.items() if other != row["id"] and other_value is not None and value is not None and other_value > value)
+            ends.append((multiple * factor, value, rank))
+        out.append({**entry, "status": "evaluated", "priceRatio": ratio, "multipleRange": [ends[0][0], ends[1][0]],
+                    "valueRange": [ends[0][1], ends[1][1]], "rankRange": [ends[1][2], ends[0][2]],
+                    "displayedValue": values[row["id"]]})
+    return out
+
+
 def score(assembled: dict, frozen: dict) -> dict:
     """Scores per basis, ranks, gates, disclosures, interval outputs, diagnostics and the active-rules manifest."""
 
@@ -2313,6 +2400,8 @@ def score(assembled: dict, frozen: dict) -> dict:
         cost_score = anchor_math.cost_score(cost, anchors) if anchors else None
         per_plan[row["id"]] = {"plan": {"costUsd": cost, "costScore": cost_score, "value": anchor_math.value_score(cost_score, row["summary"].displayed, BETA)}}
     plan_ranks = competition_ranks({row_id: entry["plan"]["value"] for row_id, entry in per_plan.items()})
+    brackets = route_brackets(plan_rows, per_plan, frozen, assembled.get("planRoutes", []), {row["id"]: row.get("page") or {} for row in rows},
+                              assembled.get("costMix") or {})
     representative = {row["configurationId"]: row["id"] for row in plan_rows if row["representative"]}
     ranks = {"api": competition_ranks({row_id: entry["api"]["value"] for row_id, entry in per_row.items()}),
              "plan": {row_id: plan_ranks[plan_id] for row_id, plan_id in representative.items() if plan_id in plan_ranks}}
@@ -2434,6 +2523,7 @@ def score(assembled: dict, frozen: dict) -> dict:
         "planAllowanceCells": assembled.get("planAllowanceCells", []),
         "planResearchCoverage": assembled.get("planResearchCoverage"),
         "costInfluence": influence,
+        "planRouteBrackets": brackets,
         "gates": {"clip": gates, "hold": hold, "listedBeyondAnchors": listed_beyond_anchors(assembled.get("listed", []), frozen),
                   "population": "ranked rows only; listed rows beyond the anchors are disclosed and never hold a release (O58)"},
         "identificationYield": yield_,
@@ -2445,7 +2535,7 @@ def score(assembled: dict, frozen: dict) -> dict:
         "incompleteEvidence": assembled.get("incomplete", []),
         "listedIndicative": listed_indicative(assembled, frozen),
         "displayedCheapest": {basis: displayed_cheapest(assembled if basis == "api" else plan_assembled, frozen, basis, quality_margin(assembled)) for basis in BASES},
-        "barCurrency": bar_currency(assembled, frozen),
+        "barCurrency": bar_currency(assembled, frozen, quality_margin(assembled)),
         "observedRangeBars": observed_range_bars(assembled, frozen),
         "requiredMissingScores": required_missing_scores(assembled, frozen),
         "subsetIntervals": subset_interval_outputs(assembled, frozen),
@@ -3672,9 +3762,11 @@ def configuration(row: dict) -> dict:
 
 
 def configurations_from_scores(scores: dict) -> list[dict]:
-    """The ranked cohort (fixed cohort policy: the ranking-eligible rows, in table order) with each AA identity."""
+    """The cohort the score build passes to every ranking (each cohort row with an inclusion reason, in table order) with
+    each AA identity. A row the leading rankings cannot rank (O36) is still a row of the common-leaf ranking (O121), so
+    selecting only the leading rankings' ranking-eligible rows left that ranking's scenarios stale."""
 
-    return [configuration(row) for row in scores["models"] if row.get("rankingEligible") is True]
+    return [configuration(row) for row in scores["models"] if row.get("rankingInclusionReasons")]
 
 
 def scenario_seed(release_day: date) -> int:

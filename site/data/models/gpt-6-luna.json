@@ -7,15 +7,15 @@
   "selectedPage": "https://artificialanalysis.ai/models/gpt-6-luna",
   "summary": {
     "rank": {
-      "api": 2,
-      "plan": 14
+      "api": 4,
+      "plan": 18
     },
     "overall": {
       "api": 54.238279828309715,
-      "plan": 54.15338728162162
+      "plan": 55.1199843115464
     },
     "quality": 43.12745168960582,
-    "qualityRank": 5,
+    "qualityRank": 9,
     "coverage": {
       "pct": 100.0,
       "costAvailable": true,
@@ -42,7 +42,7 @@
         "name": "Artificial Analysis model page (Intelligence Index v5.0)",
         "url": "https://artificialanalysis.ai/evaluations/frontiercode-2-0"
       },
-      "observedAt": "2026-10-31",
+      "observedAt": "2026-11-01",
       "evaluatedVariant": null,
       "note": null,
       "grade": "measured"
@@ -60,7 +60,7 @@
         "name": "Artificial Analysis model page (Intelligence Index v5.0)",
         "url": "https://livebench.ai/new"
       },
-      "observedAt": "2026-10-31",
+      "observedAt": "2026-11-01",
       "evaluatedVariant": "gpt-6-luna / LiveBench's own, one run per model at its top effort",
       "note": null,
       "grade": "measured"
@@ -78,7 +78,7 @@
         "name": "Artificial Analysis Terminal-Bench 4.0 run (mini-SWE-agent)",
         "url": "https://www.tbench.ai/leaderboard/terminal-bench/4.0"
       },
-      "observedAt": "2026-10-31",
+      "observedAt": "2026-11-01",
       "evaluatedVariant": "mini-SWE-agent",
       "note": null,
       "grade": "measured"
@@ -96,7 +96,7 @@
         "name": "Artificial Analysis model page (Intelligence Index v5.0)",
         "url": "https://artificialanalysis.ai/evaluations/gdpval-aa"
       },
-      "observedAt": "2026-10-31",
+      "observedAt": "2026-11-01",
       "evaluatedVariant": null,
       "note": null,
       "grade": "measured"
@@ -114,7 +114,7 @@
         "name": "Artificial Analysis model page (Intelligence Index v5.0)",
         "url": "https://artificialanalysis.ai/evaluations/automationbench-aa"
       },
-      "observedAt": "2026-10-31",
+      "observedAt": "2026-11-01",
       "evaluatedVariant": null,
       "note": null,
       "grade": "measured"
@@ -132,7 +132,7 @@
         "name": "Artificial Analysis model page (Intelligence Index v5.0)",
         "url": "https://artificialanalysis.ai/evaluations/omniscience"
       },
-      "observedAt": "2026-10-31",
+      "observedAt": "2026-11-01",
       "evaluatedVariant": null,
       "note": null,
       "grade": "measured"
@@ -168,7 +168,7 @@
         "name": "Artificial Analysis model page (Intelligence Index v5.0)",
         "url": "https://www.vals.ai/benchmarks/code-migration-v1-1"
       },
-      "observedAt": "2026-10-31",
+      "observedAt": "2026-11-01",
       "evaluatedVariant": "openai/gpt-6-luna / Pi agent harness, the same for every model",
       "note": null,
       "grade": "measured"
@@ -186,7 +186,7 @@
         "name": "Artificial Analysis model page (Intelligence Index v5.0)",
         "url": "https://www.vals.ai/benchmarks/vibe-code"
       },
-      "observedAt": "2026-10-31",
+      "observedAt": "2026-11-01",
       "evaluatedVariant": "openai/gpt-6-luna / OpenHands, the same for every model",
       "note": null,
       "grade": "measured"
@@ -204,7 +204,7 @@
         "name": "Artificial Analysis model page (Intelligence Index v5.0)",
         "url": "https://artificialanalysis.ai/evaluations/artificial-analysis-long-context-reasoning"
       },
-      "observedAt": "2026-10-31",
+      "observedAt": "2026-11-01",
       "evaluatedVariant": null,
       "note": null,
       "grade": "measured"
@@ -222,7 +222,7 @@
         "name": "Artificial Analysis model page (Intelligence Index v5.0)",
         "url": "https://artificialanalysis.ai/evaluations/hle-diamond"
       },
-      "observedAt": "2026-10-31",
+      "observedAt": "2026-11-01",
       "evaluatedVariant": null,
       "note": null,
       "grade": "measured"
@@ -240,7 +240,7 @@
         "name": "Artificial Analysis model page (Intelligence Index v5.0)",
         "url": "https://artificialanalysis.ai/evaluations/terminal-bench-science"
       },
-      "observedAt": "2026-10-31",
+      "observedAt": "2026-11-01",
       "evaluatedVariant": null,
       "note": null,
       "grade": "measured"
@@ -258,7 +258,7 @@
         "name": "Artificial Analysis model page (Intelligence Index v5.0)",
         "url": "https://artificialanalysis.ai/evaluations/critpt-v2"
       },
-      "observedAt": "2026-10-31",
+      "observedAt": "2026-11-01",
       "evaluatedVariant": null,
       "note": null,
       "grade": "measured"
@@ -292,7 +292,7 @@
     ],
     "costScore": {
       "api": 87.57076424442143,
-      "plan": 87.23119405766904
+      "plan": 91.09758217736818
     },
     "components": [
       {
@@ -397,8 +397,8 @@
       "planIntervalEligible": false,
       "usdPerRun": 14.759687996495655,
       "selected": true,
-      "planRank": 14,
-      "planValue": 54.15338728162162
+      "planRank": 18,
+      "planValue": 55.1199843115464
     },
     {
       "id": "chatgpt-pro100-gpt-6-luna-common-gpt-assumption",
@@ -415,8 +415,8 @@
       "planIntervalEligible": false,
       "usdPerRun": 15.070271004573572,
       "selected": false,
-      "planRank": 15,
-      "planValue": 54.05748353818777
+      "planRank": 19,
+      "planValue": 55.053120174158884
     },
     {
       "id": "chatgpt-pro200-gpt-6-luna-common-gpt-assumption",
@@ -433,8 +433,8 @@
       "planIntervalEligible": false,
       "usdPerRun": 15.25828782132929,
       "selected": false,
-      "planRank": 16,
-      "planValue": 54.00038232762902
+      "planRank": 20,
+      "planValue": 55.01330918189634
     },
     {
       "id": "chatgpt-plus-gpt-6-luna-common-gpt-assumption",
@@ -451,8 +451,8 @@
       "planIntervalEligible": false,
       "usdPerRun": 19.62856285163595,
       "selected": false,
-      "planRank": 17,
-      "planValue": 52.840459320827776
+      "planRank": 21,
+      "planValue": 54.20461028747623
     }
   ],
   "scenarios": {
@@ -482,7 +482,7 @@
         "targetProfile": "published-record reporting precision + conventional identification of missing leaves + weight-specification stress",
         "unevaluable": null,
         "top1": 0.0,
-        "top3": 0.7595,
+        "top3": 0.6431,
         "frontier": 1.0
       },
       {
@@ -509,7 +509,7 @@
         "targetProfile": "published-record leaf values redrawn with task-sampling noise from each leaf's published task count (binomial leaves from their Jeffreys Beta posterior, O142; independent-task approximation; GDPval-AA from its displayed rating interval, an assumption) + conventional identification of missing leaves",
         "unevaluable": null,
         "top1": 0.0,
-        "top3": 0.7777,
+        "top3": 0.4792,
         "frontier": 1.0
       }
     ],
@@ -638,8 +638,8 @@
       "version": "v3.0.0",
       "date": "2026-10-19",
       "rank": {
-        "api": 2,
-        "plan": 14
+        "api": 4,
+        "plan": 18
       }
     }
   ],
@@ -659,12 +659,12 @@
       "shown": true,
       "rankingEligible": true,
       "rank": {
-        "api": 2,
-        "plan": 14
+        "api": 4,
+        "plan": 18
       },
       "overall": {
         "api": 54.238279828309715,
-        "plan": 54.15338728162162
+        "plan": 55.1199843115464
       }
     },
     {
@@ -674,12 +674,12 @@
       "shown": false,
       "rankingEligible": true,
       "rank": {
-        "api": 10,
-        "plan": 41
+        "api": 14,
+        "plan": 45
       },
       "overall": {
-        "api": 45.70513455906291,
-        "plan": 46.08071662547053
+        "api": 46.522730704682616,
+        "plan": 48.45085632067821
       }
     },
     {
@@ -689,12 +689,12 @@
       "shown": false,
       "rankingEligible": true,
       "rank": {
-        "api": 17,
-        "plan": 70
+        "api": 25,
+        "plan": 80
       },
       "overall": {
         "api": 38.263774091725864,
-        "plan": 38.20400457793352
+        "plan": 40.44990354348913
       }
     }
   ]

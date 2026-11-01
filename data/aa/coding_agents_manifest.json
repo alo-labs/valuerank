@@ -1,13 +1,13 @@
 {
   "schemaVersion": 1,
-  "reviewedOn": "2026-10-30",
+  "reviewedOn": "2026-11-01",
   "capture": "data/aa/coding_agents_capture.json",
   "rule": "Owner decision O64 (2026-10-25): every Coding Agent Index row AA lists is registered here by AA's row id, either as the exact record of one cohort configuration or as not a cohort configuration with a reason. A captured row whose id is absent, whose label differs, or a registered row AA no longer lists stops the build until this manifest is reviewed; the label grammar of E267 is a cross-check, and any disagreement with it also stops the build.",
   "rows": {
     "ee454ece0aab8dacb7127770643dcb6b": {
       "label": "Antigravity CLI - Gemini 4 Argon (High)",
-      "classification": "other",
-      "reason": "model outside the cohort (O51)"
+      "classification": "exact",
+      "configurationId": "gemini-4-argon"
     },
     "615aa2e21916e4843210a552131d95b7": {
       "label": "Antigravity CLI - Gemini 4 Carbon (High)",
@@ -26,8 +26,8 @@
     },
     "2a2fed494e0d1343b14efe96e6bc3669": {
       "label": "Claude Code - Claude Haiku 5.5 (Max)",
-      "classification": "other",
-      "reason": "another effort or variant of a cohort model, not a cohort configuration"
+      "classification": "exact",
+      "configurationId": "claude-haiku-5-5-max"
     },
     "f8b3c23615b8b60e23364c27e8494d6d": {
       "label": "Claude Code - Claude Opus 5.5 (Max, Default Fallback)",
@@ -101,8 +101,8 @@
     },
     "24c98f188d41522a849006ac453fdebe": {
       "label": "DeepSeek Harness - DeepSeek V4.1 Flash 1017 (Max)",
-      "classification": "other",
-      "reason": "model outside the cohort (O51)"
+      "classification": "exact",
+      "configurationId": "deepseek-v4-1-flash-1017"
     },
     "fe6df4d0f0b5360790e73d6d8830d7a0": {
       "label": "Devin Fusion CLI - Claude Fable 5.1 XHigh + SWE-2 Medium",

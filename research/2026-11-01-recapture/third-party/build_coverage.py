@@ -40,7 +40,7 @@ O54 = ("Owner decision O54 / E252: AA plots MiMo-V2.6-Pro without an effort; Xia
 O135_MINIMAX = ("Owner decision O135 (2026-10-30) applied to MiniMax-M3.1-Flash: AA plots it without an effort; MiniMax's API "
                 "documents reasoning_effort / output_config.effort low, medium, high, xhigh, max with max the default when "
                 "omitted, and thinking cannot be disabled (minimax-effort.md, read 2026-11-01), so the configuration is max. "
-                "The O135 research outcome for MiniMax awaits the owner's confirmation (as O140 confirmed MiMo-V2.6-Flash).")
+                "The owner confirmed it at max (owner decision O148, 2026-11-01), as O140 did for MiMo-V2.6-Flash.")
 
 # id: (family, effort). Effort None = AA plots no effort and a documented single-mode equivalent applies (MiMo).
 COHORT = {
@@ -266,14 +266,15 @@ def vals() -> dict:
                 board["coverage"][model_id] = {"status": "absent", "value": None, "stderr": None, "valsKey": None, "effort": None,
                                                "note": f"No {key} row on this board."}
             elif family == "mimo-flash":
-                board["coverage"][model_id] = {"status": "plausible", "value": row["accuracy"], "stderr": row["stderr"], "valsKey": key,
-                                               "effort": row_effort, "harness": row.get("harness"),
-                                               "note": O135 + " Vals records reasoning, reasoning_effort and compute_effort as null and its "
-                                                       "MiMo-V2.6-Flash model page (read 2026-10-30) states no reasoning setting; it stays "
-                                                       "unmatched under O140. New evidence for the owner: Vals' MiMo-V2.6-Pro model page "
-                                                       "(vals/_models/xiaomi_mimo-v2.6-pro.html, read 2026-11-01), in its 2026-09-22 update "
-                                                       "covering both models, says 'We evaluated them with reasoning enabled' through the "
-                                                       "official Xiaomi API."}
+                # O149 (2026-11-01): Vals states both MiMo models were evaluated with reasoning enabled, which is
+                # MiMo-V2.6-Flash's configuration (thinking enabled, O140), so its records match.
+                board["coverage"][model_id] = {"status": "exact", "value": row["accuracy"], "stderr": row["stderr"], "valsKey": key,
+                                               "effort": "enabled (O140)", "harness": row.get("harness"), "match": "owner (O149)",
+                                               "note": O135 + " Vals records reasoning, reasoning_effort and compute_effort as null; its "
+                                                       "MiMo-V2.6-Pro model page (vals/_models/xiaomi_mimo-v2.6-pro.html, read 2026-11-01), "
+                                                       "in its 2026-09-22 update covering both MiMo V2.6 models, says 'We evaluated them with "
+                                                       "reasoning enabled' through the official Xiaomi API, so the record is the thinking-enabled "
+                                                       "configuration (owner decision O149, 2026-11-01)."}
             elif family == "mimo-pro":
                 board["coverage"][model_id] = {"status": "exact", "value": row["accuracy"], "stderr": row["stderr"], "valsKey": key,
                                                "effort": "enabled (high, O54)", "harness": row.get("harness"), "match": "owner (O54, E252)",

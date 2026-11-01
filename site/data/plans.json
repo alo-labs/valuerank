@@ -2,8 +2,8 @@
   "asOf": "2026-10-25",
   "policy": {
     "reportingWindow": {
-      "start": "2026-10-01",
-      "end": "2026-10-31"
+      "start": "2026-10-02",
+      "end": "2026-11-01"
     },
     "planAliases": {
       "Claude Max 5x": {
@@ -506,10 +506,10 @@
     "claudeApplication": "User authorizes (2026-10-18, Option 2) applying Opus 5.5's measured SemiAnalysis Claude plan multiples to every other Claude model. Opus 5.5 keeps its exact measured routes; the shared routes are labelled user assumptions, carry the recorded caution that allowances are model-specific (Fable 5.1 measured 12.4-12.7x on the same plans), and are superseded by any exact measurement for the listed model. Claude Fable 5.1 (retained 2026-10-21, owner decision O31) has exact SemiAnalysis measurements on Max 5x (12.73x) and Max 20x (12.425x), which replace the shared routes for it; it has no Pro route, because the source records Fable as unavailable on Pro, so there is no Pro allowance to measure or assume. Owner decision O33 (2026-10-21) ranks Claude Haiku 5.5 (max, high, medium, low) and Claude Sonnet 5.5 (xhigh, high, medium, low) as their own rows; as other Claude models in the roster they take the shared assumption routes. Owner decision O88 (2026-10-28): Opus 5.5's other efforts (xhigh, high, medium) take its figure as a same-model measurement from another effort (measured evidence under O90), not as the shared assumption; the multiple is the same."
   },
   "identificationYield": {
-    "rows": 18,
+    "rows": 27,
     "pointIdentified": 0,
     "setIdentified": 0,
-    "unidentified": 18,
+    "unidentified": 27,
     "exploratory": true
   },
   "routes": [
@@ -3168,10 +3168,31 @@
   ],
   "candidates": [
     {
+      "slug": "claude-haiku-5-5-max",
+      "name": "Claude Haiku 5.5 (max)",
+      "rank": {
+        "api": 8,
+        "plan": 14
+      },
+      "apiUsd": 1046.0801077265787,
+      "planUsd": 17.760273475833255,
+      "fallback": null,
+      "routeId": "claude-pro-claude-haiku-5-5-max-common-opus55-assumption",
+      "flags": [
+        "workload-unmatched",
+        "owner-named transfer (assumption)",
+        "possibly-superseded",
+        "valuation basis unverified"
+      ],
+      "measuredOnly": {
+        "status": "no measured route"
+      }
+    },
+    {
       "slug": "claude-opus-5-5",
       "name": "Claude Opus 5.5 (max)",
       "rank": {
-        "api": 4,
+        "api": 6,
         "plan": 1
       },
       "apiUsd": 10360.959965732674,
@@ -3189,8 +3210,8 @@
         "crossEffort": false,
         "faultWindow": null,
         "costUsd": 175.90763948612351,
-        "costScore": 41.58164011839217,
-        "value": 60.9470531282396,
+        "costScore": 59.27069057766518,
+        "value": 65.36931574305785,
         "rank": 1
       }
     },
@@ -3198,7 +3219,7 @@
       "slug": "claude-sonnet-5-5",
       "name": "Claude Sonnet 5.5",
       "rank": {
-        "api": 5,
+        "api": 7,
         "plan": 4
       },
       "apiUsd": 10501.818258108602,
@@ -3210,6 +3231,44 @@
         "owner-named transfer (assumption)",
         "possibly-superseded",
         "valuation basis unverified"
+      ],
+      "measuredOnly": {
+        "status": "no measured route"
+      }
+    },
+    {
+      "slug": "deepseek-v4-1-flash-1017",
+      "name": "DeepSeek V4.1 Flash 1017",
+      "rank": {
+        "api": 2,
+        "plan": 22
+      },
+      "apiUsd": 531.4356367333653,
+      "planUsd": 531.4356367333653,
+      "fallback": "api",
+      "routeId": null,
+      "flags": [
+        "API-cost fallback: no admitted Plan route",
+        "cross-estimand ordering not identified"
+      ],
+      "measuredOnly": {
+        "status": "no measured route"
+      }
+    },
+    {
+      "slug": "gemini-4-argon",
+      "name": "Gemini 4 Argon",
+      "rank": {
+        "api": 9,
+        "plan": 27
+      },
+      "apiUsd": 8880.92222822785,
+      "planUsd": 8880.92222822785,
+      "fallback": "api",
+      "routeId": null,
+      "flags": [
+        "API-cost fallback: no admitted Plan route",
+        "cross-estimand ordering not identified"
       ],
       "measuredOnly": {
         "status": "no measured route"
@@ -3238,8 +3297,8 @@
         "crossEffort": false,
         "faultWindow": "OpenAI support e-mail quoted by Vanja Petreski: Pro 200 → Pro 500 upgrades kept the previous plan's allowance until corrected on 2026-10-16",
         "costUsd": 128.76226437063366,
-        "costScore": 47.32898547546866,
-        "value": 59.61116146464849,
+        "costScore": 63.27774260514064,
+        "value": 63.59835074706648,
         "rank": 2
       }
     },
@@ -3247,7 +3306,7 @@
       "slug": "gpt-6-astra",
       "name": "GPT-6 Astra (max)",
       "rank": {
-        "api": 3,
+        "api": 5,
         "plan": 11
       },
       "apiUsd": 6808.390554424009,
@@ -3265,8 +3324,8 @@
         "crossEffort": false,
         "faultWindow": null,
         "costUsd": 470.0304145270286,
-        "costScore": 23.476290825355893,
-        "value": 54.74038132217815,
+        "costScore": 46.647632089717256,
+        "value": 60.53321663826849,
         "rank": 3
       }
     },
@@ -3274,8 +3333,8 @@
       "slug": "gpt-6-luna",
       "name": "GPT-6 Luna (max)",
       "rank": {
-        "api": 2,
-        "plan": 14
+        "api": 4,
+        "plan": 18
       },
       "apiUsd": 158.9913590982512,
       "planUsd": 14.759687996495655,
@@ -3287,6 +3346,25 @@
         "possibly-superseded",
         "measured inside an acknowledged accounting-fault window (O91, O92)",
         "valuation basis unverified"
+      ],
+      "measuredOnly": {
+        "status": "no measured route"
+      }
+    },
+    {
+      "slug": "mimo-v2-6-pro",
+      "name": "MiMo-V2.6-Pro",
+      "rank": {
+        "api": 3,
+        "plan": 23
+      },
+      "apiUsd": 171.70030964750728,
+      "planUsd": 145.41015383427106,
+      "fallback": null,
+      "routeId": "mimo-tokenplan-max-mimo-v2-6-pro-quota-ceiling",
+      "flags": [
+        "workload-unmatched",
+        "provider quota ceiling; full use assumed, the optimistic end on use; credits valued at the recorded API rate, not the highest (O46, O125)"
       ],
       "measuredOnly": {
         "status": "no measured route"

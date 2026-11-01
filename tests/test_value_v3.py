@@ -656,8 +656,9 @@ def write_world(root: Path) -> Path:
         "plan_reports.json": {"recordedOn": "2026-10-19", "reports": []},
         "aa/aa_footnote_register.json": documents()["aaFootnotes"],
         "scores.json": {
-            "models": [{"id": item["id"], "name": item["name"], "aaVariant": item["effort"], "aaSlug": item["aaSlug"], "rankingEligible": True} for item in CONFIGURATIONS]
-            + [{"id": "out", "name": "Out", "aaSlug": "out", "rankingEligible": False}],
+            "models": [{"id": item["id"], "name": item["name"], "aaVariant": item["effort"], "aaSlug": item["aaSlug"], "rankingEligible": True,
+                        "rankingInclusionReasons": ["Plotted on or within the near gap of AA's rendered frontier (O51)"]} for item in CONFIGURATIONS]
+            + [{"id": "out", "name": "Out", "aaSlug": "out", "rankingEligible": False, "rankingInclusionReasons": []}],
         },
     }.items():
         target = data / relative
@@ -1444,7 +1445,9 @@ def test_displayed_cheapest_reads_the_headline_scale_with_ties_listed():
     ladder = dict(frozen, barReferences=[{"id": "low", "level": 0.0}, {"id": "high", "level": 101.0}])
     low, high = v.displayed_cheapest(result, ladder, "api")["bars"]
     assert low["cheapest"] and low["qualifierN"] >= 1 and low["costUsd"] is not None
-    assert high == {"bar": "high", "level": 101.0, "qualifierN": 0, "costUsd": None, "cheapest": []}
+    # O143: the cheaper same-family efforts a bar's cheapest row has that the ranking could not evaluate, keyed by that row.
+    assert set(low["uncheckedCheaperSiblings"]) <= {row_id.split("@")[0] for row_id in low["cheapest"]}
+    assert high == {"bar": "high", "level": 101.0, "qualifierN": 0, "costUsd": None, "cheapest": [], "uncheckedCheaperSiblings": {}}
 
 
 def test_bar_currency_flags_a_headline_bar_outside_the_current_interquartile_range():
@@ -1455,6 +1458,10 @@ def test_bar_currency_flags_a_headline_bar_outside_the_current_interquartile_ran
     frozen = {"barReferences": bars}
     current = v.bar_currency(population, frozen)
     assert current["flag"] is None and current["lifetime"] == v.BAR_LIFETIME
+    # Reviewer 76: bars closer than the noise margin are flagged; without a margin there is no spacing flag.
+    assert current["minSpacing"] == 10.0 and current["spacingFlag"] is None
+    assert "under the 12.0-point noise margin (O44)" in v.bar_currency(population, frozen, 12.0)["spacingFlag"]
+    assert v.bar_currency(population, frozen, 5.0)["spacingFlag"] is None
     assert [(item["level"], item["reachN"], item["populationN"]) for item in current["bars"]] == [(20.0, 3, 5), (10.0, 4, 5), (30.0, 2, 5)]
 
     def moved(level):
@@ -1531,6 +1538,9 @@ def test_an_o46_ceiling_is_recomputed_from_its_credits_rate_and_fee():
                "planPriceUsd": 6, "valueMultiple": 0.984}
     with pytest.raises(ValueError, match=r"ceiling: the stored multiple 0.99 is not the quota ceiling 0.9840 \(O46\)"):
         v.assemble(CONFIGURATIONS, documents(planRoutes={**routes, "routes": routes["routes"] + [dict(ceiling, valueMultiple=0.99)]}), release_day=DAY)
+    # Reviewer 76: within half a unit of the fourth decimal, so a one-unit drift (0.9841) stops the build.
+    with pytest.raises(ValueError, match=r"not the quota ceiling 0.9840"):
+        v.assemble(CONFIGURATIONS, documents(planRoutes={**routes, "routes": routes["routes"] + [dict(ceiling, valueMultiple=0.9841)]}), release_day=DAY)
 
 
 def test_observed_range_bars_bound_missing_leaves_by_the_cohort_range():
@@ -2403,3 +2413,39 @@ def test_rows_sharing_an_uncertain_donor_multiple_leave_the_plan_intervals_unres
     monkeypatch.setattr(v, "plan_candidates", lambda assembled: [row("a@p", "a"), row("b@p", "b")])
     plan = v.interval_outputs(result, frozen, "plan")
     assert plan["status"] == "unresolved" and plan["reason"].endswith(": d") and plan["universe"] == ["a@p", "b@p"]
+
+
+def test_route_brackets_rescore_a_transfer_and_a_cross_effort_route_at_both_ends_of_the_price_ratio():
+    """O144, O146: a Claude transfer is bracketed by list prices over the shared mix, a cross-effort route by the two
+    configurations' own Index token mixes; values and ranks at both ends, the other rows held at their displayed values."""
+
+    mix = {"uncachedInputPct": 10.0, "cacheReadPct": 80.0, "outputPct": 10.0}
+    cheap = {"price1mInputTokens": 1.0, "cacheHitPrice": 0.1, "price1mOutputTokens": 5.0,
+             "intelligenceIndexCost": {"nonCacheInput": 10.0, "cacheRead": 10.0, "output": 50.0}}
+    dear = {"price1mInputTokens": 5.0, "cacheHitPrice": 0.5, "price1mOutputTokens": 25.0,
+            "intelligenceIndexCost": {"nonCacheInput": 10.0, "cacheRead": 10.0, "output": 200.0}}
+    assert v.price_per_token(cheap, mix) == pytest.approx((10 * 1.0 + 80 * 0.1 + 10 * 5.0) / 100)
+    assert v.price_per_token(dear, mix) / v.price_per_token(cheap, mix) == pytest.approx(5.0)
+    assert v.price_per_token(cheap) == pytest.approx(70.0 / (10.0 + 100.0 + 10.0))
+    assert v.price_per_token({**cheap, "cacheHitPrice": None}, mix) is None
+    assert v.price_per_token({**cheap, "intelligenceIndexCost": {"nonCacheInput": 1.0}}) is None
+    assert v.price_per_token({**cheap, "intelligenceIndexCost": {"nonCacheInput": 0.0, "cacheRead": 0.0, "output": 0.0}}) is None
+    transfer = {"id": "t", "provider": "Anthropic", "valueMultipleKind": "user_assumption", "donorRouteId": "d"}
+    effort = {"id": "e", "provider": "OpenAI", "valueMultipleKind": "user_assumption", "donorRouteId": "d2", "sameModelAcrossEfforts": True}
+    assert (v.route_bracket_kind(transfer), v.route_bracket_kind(effort), v.route_bracket_kind({"provider": "OpenAI", "valueMultipleKind": "user_assumption", "donorRouteId": "d"})) == ("claude-transfer", "cross-effort", None)
+    routes = [transfer, effort, {"id": "d", "modelIds": ["donor"]}, {"id": "d2", "modelIds": ["donor"]}]
+    frozen = {"workloads": {"W": {"anchors": {"plan": {"low": 1.0, "high": 1000.0}}}}}
+
+    def plan_row(row_id, configuration, route, multiple):
+        return {"id": row_id, "configurationId": configuration, "cost": {"workload": "W", "costUsd": 100.0}, "plan": {"multiple": multiple},
+                "routeSelection": {"selected": {"route": route} if route else None}, "summary": SimpleNamespace(displayed=60.0)}
+
+    rows = [plan_row("a@p", "target", transfer, 10.0), plan_row("b@p", "target", effort, 10.0), plan_row("c@p", "target", None, None),
+            plan_row("x@p", "nopage", transfer, 10.0)]
+    per_plan = {"a@p": {"plan": {"value": 70.0}}, "b@p": {"plan": {"value": 70.0}}, "c@p": {"plan": {"value": 75.0}}, "x@p": {"plan": {"value": 1.0}}}
+    out = v.route_brackets(rows, per_plan, frozen, routes, {"target": dear, "donor": cheap}, mix)
+    first, second, missing = out
+    assert first["rule"] == "O144" and first["priceRatio"] == pytest.approx(5.0) and first["multipleRange"] == pytest.approx([10.0, 50.0])
+    assert first["valueRange"][0] < first["valueRange"][1] and first["rankRange"][0] <= first["rankRange"][1]
+    assert second["rule"] == "O146" and second["priceRatio"] == pytest.approx(v.price_per_token(dear) / v.price_per_token(cheap))
+    assert missing["status"].startswith("not computable")

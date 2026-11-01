@@ -110,6 +110,7 @@ DEVELOPER = {
     "GPT-6 Astra (high)": "OpenAI",
     "GPT-6 Astra (xhigh)": "OpenAI",
     "Claude Haiku 5.5 (max)": "Anthropic",
+    "Claude Haiku 5.5 (xhigh)": "Anthropic",
     "Claude Haiku 5.5 (high)": "Anthropic",
     "Claude Haiku 5.5 (medium)": "Anthropic",
     "Claude Haiku 5.5 (low)": "Anthropic",
@@ -195,6 +196,7 @@ SHORT = {
     "Claude Sonnet 5.5 (low)": "Sonnet 5.5 (low)",
     "Muse Spark 1.3 (xhigh)": "Muse Spark 1.3 (xhigh)",
     "Grok 4.6 (xhigh)": "Grok 4.6 (xhigh)",
+    "Claude Haiku 5.5 (xhigh)": "Haiku 5.5 xhigh",
 }
 
 # The priority values are ValueRank's quality priorities, not the Artificial
@@ -283,6 +285,8 @@ def frontier_effort(variant):
 
 
 NO_FRONTIER_TIER = {"tier": None, "configuration": None, "intelligenceGap": None, "footnote": None}
+RETAINED_TIER = "left cohort"  # O145
+RETAINED_REASON = "Left AA's rendered frontier and near gap at this release; kept one more release, flagged 'left cohort' (O145)"
 
 # E195: frontier membership is AA's rendered Pareto path as observed. Each frontier point must sit on a path vertex
 # (one point per vertex) and the path must rise strictly in chart coordinates; rounded tooltip values tie (GPT-6 Luna
@@ -813,6 +817,11 @@ def main(*, root: Path = ROOT, data: Path = DATA) -> int:
     near_policy = frontier_inventory["nearFrontierPolicy"]
     aa_tiers, frontier_family_list, near_family_list = frontier_tiers(frontier_families, near_families)
     own_tiers = configuration_tiers(frontier_rows, frontier_inventory["nearFrontierRows"])
+    # O145 (2026-11-01): a configuration of the previous release's cohort that left the rendered frontier and near gap stays a
+    # cohort row for one more release, flagged "left cohort" (the inventory's retainedRows).
+    for item in frontier_inventory.get("retainedRows", []):
+        own_tiers[item["sourceUrl"]] = {"tier": RETAINED_TIER, "configuration": item["displayName"], "intelligenceGap": None,
+                                        "footnote": item.get("sourceFootnote")}
     # O33: the family annotations go to each family's primary configuration only.
     family_primary_ids = {family: group["modelId"] for family, group in near_families.items()}
     family_primary_ids.update({selection["family"]: model_id for model_id, selection in frontier_selection_by_id.items()})
@@ -1069,7 +1078,9 @@ def main(*, root: Path = ROOT, data: Path = DATA) -> int:
         row["dims"] = {}
         row["rankingEligible"] = row["id"] in primary_ids
         row["rankingInclusionReasons"] = []
-        if row["id"] in overlap_primary_ids:
+        if row["id"] in overlap_primary_ids and row["aaFrontierTier"] == RETAINED_TIER:
+            row["rankingInclusionReasons"].append(RETAINED_REASON)
+        elif row["id"] in overlap_primary_ids:
             row["rankingInclusionReasons"].append("Plotted on or within the near gap of AA's rendered frontier (O51)")
         if row["id"] in frontier_primary_ids:
             row["rankingInclusionReasons"].append(

@@ -2116,3 +2116,27 @@ Asked on I64 Q1 whether future O71 admissions should be executed by the build fr
 - O145 (cohort churn, an O51 challenge): a configuration that leaves AA's rendered frontier and near gap stays a cohort row for one more release, flagged "left cohort", and leaves at the release after; applied now: the release cutoff moves (O65) and every source is re-captured, with the ten configurations that left at the v5 re-capture (Claude Haiku 5.5 (xhigh), Claude Haiku 5.5 (max), Claude Opus 5.5 (medium), Claude Sonnet 5.5 (xhigh), DeepSeek V4.1 Flash 1017, Gemini 4 Argon, GPT-5.6 Luna (low), Kimi K3.1 Pro, MiMo-V2.6-Pro, MiniMax-M3.1-Flash) retained.
 - O146 (cross-effort routes, an O87/O88 challenge): O88's point figure keeps scoring; each cross-effort route carries a mix-bounded [L, U] bracket from the E210 category-mix bound, published as a sensitivity with the rank range.
 
+## Reviewer 76 (Claude Sonnet 5.5, round 13, Thinking, whole draft r158 plus a part-6 re-send) — adopted, modified or rejected
+- Read check: 13 of 14 parts read to their ends at commit 9677c8e; part 6 was read only to the end of its first paragraph (12,325 of 19,859 characters), so part 6 was re-sent alone and read to its end.
+- H1 (the leading max-effort ranking cannot see cheaper efforts, an O52–O54/O121 challenge): put to the owner; O143 keeps O121 and adds the headline note.
+- H2 (Plan transfers ignore the models' price ratio, an O4/O7 challenge): put to the owner; O144 adds a price-ratio bracket for Claude transfers.
+- H3 (split the specification into a core and a governance appendix): rejected as an editorial restructuring at this stage, as the dormant-appendix proposal was earlier; the conflict rule (an owner decision governs, an amending rule governs, else the later record, and a found conflict is a defect fixed in the next revision) stands.
+- M (anchors on four or five references): partly overtaken by O145 (the max-effort anchors now freeze over the larger cohort); no leave-one-out series is added (the E60 sensitivity curve over c_H/c_L shows the exchange rate's dependence on the span).
+- M (empirical slope check): rejected; the cohort is AA's Pareto frontier and near gap, so its quality-cost slope is the frontier's shape, not buyers' willingness to pay, and O2 sets the weight.
+- M (bar ladder at small n): adopted as a flag (E283), not a policy change.
+- M (cost pays for unrewarded work, an O15 challenge): adopted as a disclosure bound (SWE-Atlas QnA up to its 124/290 task share of the index cost); no quality-matched basket sensitivity is added (E203 already publishes the no-leaf share).
+- M (cohort churn, an O51 challenge): put to the owner; O145 adopts one-release retention, applied now.
+- L (wording "most" vs "all"): no change; the draft prints the generated counts, not "most". L (Bug Hunt headline shift): no change; the removal sensitivity is published per ranking. L (GDPval freeze): no change, as the reviewer notes. L (AI Coding Daily per-project points): already intended.
+- Part 6 M1 (effort invariance in tokens vs dollars, an O87/O88 challenge): put to the owner; O146 adds a cross-effort bracket. M2 (E106 has no evaluation order): adopted; the draft states the order the engine applies, (1), (4), (5), (2), (3a), (3). M3 (MiMo ceiling direction): answered from the record (credits are spent per token at model-specific rates, so the ceiling differs by model and the lower rate is the conservative choice, O125); the formula is written out and the recomputation tolerance tightened to 5 × 10⁻⁵. Lows: configuration-level counts (no change; the configuration counts are already published beside the row counts where a label depends on them), "unmatched" naming (no change; O7's owner term), zero-cost list (no change; no cohort row has a zero cost and E109 excludes one), fixtures table (rejected as editorial).
+- Round status (O56): not clean (three Highs).
+
+## Owner decisions O147–O149 (2026-11-01), asked on the O145 board re-read
+- O147 (LiveBench): the pinned 2026-10-25 release as LiveBench edited it in place on 2026-10-30 (DeepSeek V4.1 Flash 1017's Long Agentic 40.9 → 35.7, Overall 74.02 → 72.87) is the release used; the edit is recorded with both values.
+- O148 (MiniMax-M3.1-Flash, under O135): taken at max, MiniMax's documented default; its max-effort board rows match.
+- O149 (MiMo-V2.6-Flash on Vals, amending O140's Vals half): Vals states both MiMo V2.6 models were evaluated with reasoning enabled, which is MiMo-V2.6-Flash's configuration (thinking enabled), so its Vibe Code Bench and Code Migration records match.
+
+## Editor decisions after reviewer 76 (owner may override)
+- E282. O145's implementation: the retained configurations carry the tier "left cohort" and the inclusion reason saying so; the frontier capture and inventory list them (`retained`, `retainedRows`, with their chart footnotes); they join the family-exclusion partition as a sixth class; AA's GPT-5.6 Luna (low) page has no v5 value, so its AA leaves carry logged O36 searches; the legacy LiveBench snapshot, whose source no longer serves the release files, is extended with unmatched rows for the retained configurations (research/2026-11-01-recapture/extend_livebench.py).
+- E283. Bar currency prints a spacing flag when two adjacent frozen bars sit closer than the O44 noise margin; the ladder is unchanged.
+- E284. E106's case order is the engine's: (1), (4), (5), (2), (3a), (3).
+

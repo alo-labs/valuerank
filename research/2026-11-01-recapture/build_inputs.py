@@ -204,7 +204,8 @@ def main() -> None:
                       "chartPoint": strip(plotted_by_url[item["url"]]) if item["url"] in plotted_by_url else None} for item in retained]
     capture_doc["retained"] = retained_rows
     (DATA / "aa_frontier_capture.json").write_text(json.dumps(capture_doc, indent=2, ensure_ascii=False) + "\n")
-    inventory["retainedRows"] = [{key: row[key] for key in ("id", "sourceUrl", "displayName", "rule", "reason")} for row in retained_rows]
+    inventory["retainedRows"] = [{**{key: row[key] for key in ("id", "sourceUrl", "displayName", "rule", "reason")},
+                                  "sourceFootnote": (row["chartPoint"] or {}).get("footnote")} for row in retained_rows]
     (DATA / "aa_reconciliation_inventory.json").write_text(json.dumps(inventory, indent=2, ensure_ascii=False) + "\n")
     point_by_url = {point["url"]: point for point in cohort_points}
     extract = [{"id": item["id"], "displayName": item["displayName"], "url": item["url"], "variant": item["url"].rsplit("/", 1)[1],
