@@ -518,6 +518,15 @@
         "top1": 0.0,
         "top3": 0.2754,
         "frontier": 0.794
+      },
+      {
+        "stratum": "S1T",
+        "kernel": "endpoint-heavy",
+        "targetProfile": "published-record leaf values redrawn with task-sampling noise from each leaf's published task count (binomial leaves from their Jeffreys Beta posterior, O142; independent-task approximation; GDPval-AA from its displayed rating interval, an assumption) + conventional identification of missing leaves",
+        "unevaluable": null,
+        "top1": 0.0,
+        "top3": 0.2937,
+        "frontier": 0.7865
       }
     ],
     "plan": [
@@ -574,6 +583,15 @@
         "top1": 0.0,
         "top3": 0.0,
         "frontier": 0.1019
+      },
+      {
+        "stratum": "S1T",
+        "kernel": "endpoint-heavy",
+        "targetProfile": "published-record leaf values redrawn with task-sampling noise from each leaf's published task count (binomial leaves from their Jeffreys Beta posterior, O142; independent-task approximation; GDPval-AA from its displayed rating interval, an assumption) + conventional identification of missing leaves",
+        "unevaluable": null,
+        "top1": 0.0,
+        "top3": 0.0,
+        "frontier": 0.1011
       }
     ]
   },

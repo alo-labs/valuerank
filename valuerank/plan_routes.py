@@ -32,6 +32,8 @@ from __future__ import annotations
 import math
 from datetime import date, timedelta
 
+from valuerank import plan_admission
+
 SOFT_EXPIRY_DAYS = 30
 HARD_EXPIRY_DAYS = 90
 GRACE_DAYS = 30
@@ -342,12 +344,20 @@ def change_flagged(candidate: dict | None, release_day: date | None = None) -> b
 
 
 def label_denied(candidate: dict | None, release_day: date | None = None) -> bool:
-    """E228, O118, O119: a selected Plan route that competes but earns no label: change-flagged, hard-expired (in grace) or
-    measured inside an acknowledged accounting-fault window."""
+    """E228: a selected Plan route that competes but earns no label: one a detected change may have superseded."""
 
     if candidate is None:
         return False
-    return change_flagged(candidate, release_day) or candidate.get("expiry") == "expired" or bool(candidate.get("faultWindow"))
+    return change_flagged(candidate, release_day)
+
+
+def stops_blocking(candidate: dict | None) -> bool:
+    """O155 (2026-11-01, superseding the blocker status of O118 and O119): a hard-expired route (in grace) or one measured
+    inside an acknowledged accounting-fault window neither earns a label nor denies one; the row stays listed and flagged."""
+
+    if candidate is None:
+        return False
+    return candidate.get("expiry") == "expired" or bool(candidate.get("faultWindow"))
 
 
 
@@ -933,6 +943,8 @@ def plan_cost(api_cost: float | None, selected: dict | None) -> dict:
         flags.append(selected["expiry"])
     if selected.get("faultWindow"):
         flags.append(FAULT_FLAG)
+    if route.get("acrossResets"):
+        flags.append(plan_admission.ACROSS_RESETS_FLAG)
     # E144: a candidate carries its provenance's (the donor's, for a transfer) valuation and capacity status.
     valuation = selected.get("valuation", valuation_status(route))
     capacity = selected.get("measurementCapacityStatus", measurement_capacity_status(route))

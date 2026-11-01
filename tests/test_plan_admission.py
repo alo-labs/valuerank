@@ -192,7 +192,7 @@ def test_a_credit_grant_flags_and_blocks_without_splitting():
 
 def test_meter_families_and_resets():
     """O113: a record naming a meter family reaches every plan on it, and an unknown family stops the build; O112: a reading
-    spanning a reset day is excluded, and a reset flags and splits nothing."""
+    spanning a registered reset day counts (O156, superseding O112's exclusion), and a reset flags and splits nothing."""
 
     profile = {"meterFamilies": {"C": ["Pro", "Max (tier unstated)"]},
                "partitionSplits": [{"provider": "A", "meterFamily": "C", "date": "2026-10-17", "type": "limit"},
@@ -203,9 +203,29 @@ def test_meter_families_and_resets():
     with pytest.raises(ValueError, match="unknown meter family"):
         pa.profile_records({"partitionSplits": [{"provider": "A", "meterFamily": "X", "date": "2026-10-17", "type": "limit"}]})
     day = date(2026, 10, 25)
-    assert pa.exclusion(report("r", provider="O", start="2026-10-06", end="2026-10-07"), profile, day) == "spans a provider meter reset (O112)"
+    # O156: a reading spanning a registered reset counts; its cell and route carry the flag.
+    assert pa.exclusion(report("r", provider="O", start="2026-10-06", end="2026-10-07"), profile, day) is None
+    assert pa.spans_reset(report("r", provider="O", start="2026-10-06", end="2026-10-07"), records) is True
     assert pa.exclusion(report("s", provider="O", start="2026-10-08", end="2026-10-09"), profile, day) is None
     assert pa.spans_reset(report("t", provider="A", start="2026-10-06", end="2026-10-07"), records) is False
+
+
+def test_reports_across_documented_resets_count_and_are_flagged():
+    """O156: two concordant readings, one spanning a registered reset, admit the cell with the flag; a route on that cell
+    must set acrossResets, and a route on an unflagged cell must not."""
+
+    profile = {"partitionSplits": [{"provider": "R", "date": "2026-10-20", "type": "reset"}]}
+    reports = [report("a", provider="R", start="2026-10-19", end="2026-10-21"), report("b", provider="R", start="2026-10-22", end="2026-10-23")]
+    cell = pa.evaluate({**DOCUMENT, "reports": reports}, profile, DAY)[0]
+    assert cell["status"] == "passes" and cell["flags"] == [pa.ACROSS_RESETS_FLAG] and [row["acrossResets"] for row in cell["reports"]] == [True, False]
+    plain = pa.evaluate({**DOCUMENT, "reports": [{**item, "provider": "A"} for item in reports]}, profile, DAY)[0]
+    assert plain["status"] == "passes" and plain["flags"] == []
+    route = {"id": "r", "plan": "Pro", "modelIds": ["m"], "valueMultipleKind": "end_user_report", "independentReports": [{"observer": "a"}, {"observer": "b"}]}
+    pa.check_routes([{**route, "acrossResets": True}], [cell], {"m"}, {"end_user_report"})
+    pa.check_routes([route], [plain], {"m"}, {"end_user_report"})
+    for routes, cells in (([route], [cell]), ([{**route, "acrossResets": True}], [plain])):
+        with pytest.raises(ValueError, match="O156"):
+            pa.check_routes(routes, cells, {"m"}, {"end_user_report"})
 
 
 def test_form_submissions_need_evidence_and_a_searched_partner():

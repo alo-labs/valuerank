@@ -285,393 +285,393 @@ Frequencies over 10,000 scenarios per run (seed 20261101); streams are defined i
 
 ### API basis: rank 1
 
-| Configuration | S0 | S1 | S2 | S1 endpoint-heavy | S1M | S1T |
-|---|---:|---:|---:|---:|---:|---:|
-| Claude Haiku 5.5 (high) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| Claude Haiku 5.5 (medium) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| Claude Opus 5.5 (high) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| Claude Opus 5.5 (medium) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| DeepSeek V4.1 Flash 1017 (max) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.1% |
-| GPT-6 Astra (high) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| GPT-6 Luna (high) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| GPT-6 Luna (max) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| GPT-6 Luna (medium) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| GPT-6 Luna (xhigh) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| GPT-6.1 Sol (high) | 100.0% | 100.0% | 98.7% | 100.0% | 100.0% | 51.5% |
-| GPT-6.1 Sol (low) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| GPT-6.1 Sol (medium) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 20.6% |
-| GPT-6.1 Terra (high) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.9% |
-| GPT-6.1 Terra (max) | 0.0% | 0.0% | 1.3% | 0.0% | 0.0% | 26.1% |
-| GPT-6.1 Terra (medium) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.1% |
-| GPT-6.1 Terra (xhigh) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.7% |
-| Gemini 4 Argon (high) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| Kimi K3.1 Pro (max) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| MiMo-V2.6-Pro | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| Configuration | S0 | S1 | S2 | S1 endpoint-heavy | S1M | S1T | S1T mean-preserving |
+|---|---:|---:|---:|---:|---:|---:|---:|
+| Claude Haiku 5.5 (high) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| Claude Haiku 5.5 (medium) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| Claude Opus 5.5 (high) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| Claude Opus 5.5 (medium) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| DeepSeek V4.1 Flash 1017 (max) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.1% | 0.0% |
+| GPT-6 Astra (high) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| GPT-6 Luna (high) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| GPT-6 Luna (max) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| GPT-6 Luna (medium) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| GPT-6 Luna (xhigh) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| GPT-6.1 Sol (high) | 100.0% | 100.0% | 98.7% | 100.0% | 100.0% | 51.5% | 51.2% |
+| GPT-6.1 Sol (low) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| GPT-6.1 Sol (medium) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 20.6% | 20.3% |
+| GPT-6.1 Terra (high) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.9% | 0.8% |
+| GPT-6.1 Terra (max) | 0.0% | 0.0% | 1.3% | 0.0% | 0.0% | 26.1% | 26.9% |
+| GPT-6.1 Terra (medium) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.1% | 0.1% |
+| GPT-6.1 Terra (xhigh) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.7% | 0.5% |
+| Gemini 4 Argon (high) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| Kimi K3.1 Pro (max) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| MiMo-V2.6-Pro | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
 
 ### API basis: rank 3 or better
 
-| Configuration | S0 | S1 | S2 | S1 endpoint-heavy | S1M | S1T |
-|---|---:|---:|---:|---:|---:|---:|
-| Claude Haiku 5.5 (high) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| Claude Haiku 5.5 (medium) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| Claude Opus 5.5 (high) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.8% |
-| Claude Opus 5.5 (medium) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.1% |
-| DeepSeek V4.1 Flash 1017 (max) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 2.7% |
-| GPT-6 Astra (high) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.6% |
-| GPT-6 Luna (high) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| GPT-6 Luna (max) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| GPT-6 Luna (medium) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| GPT-6 Luna (xhigh) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| GPT-6.1 Sol (high) | 100.0% | 100.0% | 100.0% | 100.0% | 100.0% | 94.0% |
-| GPT-6.1 Sol (low) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.1% |
-| GPT-6.1 Sol (medium) | 100.0% | 100.0% | 100.0% | 100.0% | 100.0% | 82.6% |
-| GPT-6.1 Terra (high) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 15.5% |
-| GPT-6.1 Terra (max) | 100.0% | 100.0% | 100.0% | 100.0% | 100.0% | 83.8% |
-| GPT-6.1 Terra (medium) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 3.2% |
-| GPT-6.1 Terra (xhigh) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 14.5% |
-| Gemini 4 Argon (high) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| Kimi K3.1 Pro (max) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.4% |
-| MiMo-V2.6-Pro | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 1.6% |
+| Configuration | S0 | S1 | S2 | S1 endpoint-heavy | S1M | S1T | S1T mean-preserving |
+|---|---:|---:|---:|---:|---:|---:|---:|
+| Claude Haiku 5.5 (high) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| Claude Haiku 5.5 (medium) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| Claude Opus 5.5 (high) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.8% | 0.6% |
+| Claude Opus 5.5 (medium) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.1% | 0.1% |
+| DeepSeek V4.1 Flash 1017 (max) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 2.7% | 2.4% |
+| GPT-6 Astra (high) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.6% | 0.6% |
+| GPT-6 Luna (high) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| GPT-6 Luna (max) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| GPT-6 Luna (medium) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| GPT-6 Luna (xhigh) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| GPT-6.1 Sol (high) | 100.0% | 100.0% | 100.0% | 100.0% | 100.0% | 94.0% | 94.6% |
+| GPT-6.1 Sol (low) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.1% | 0.1% |
+| GPT-6.1 Sol (medium) | 100.0% | 100.0% | 100.0% | 100.0% | 100.0% | 82.6% | 83.7% |
+| GPT-6.1 Terra (high) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 15.5% | 14.4% |
+| GPT-6.1 Terra (max) | 100.0% | 100.0% | 100.0% | 100.0% | 100.0% | 83.8% | 85.3% |
+| GPT-6.1 Terra (medium) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 3.2% | 2.8% |
+| GPT-6.1 Terra (xhigh) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 14.5% | 13.6% |
+| Gemini 4 Argon (high) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| Kimi K3.1 Pro (max) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.4% | 0.4% |
+| MiMo-V2.6-Pro | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 1.6% | 1.1% |
 
 ### API basis: on the frontier
 
-| Configuration | S0 | S1 | S2 | S1 endpoint-heavy | S1M | S1T |
-|---|---:|---:|---:|---:|---:|---:|
-| Claude Haiku 5.5 (high) | 100.0% | 100.0% | 100.0% | 100.0% | 100.0% | 89.9% |
-| Claude Haiku 5.5 (medium) | 100.0% | 100.0% | 83.4% | 100.0% | 100.0% | 60.2% |
-| Claude Opus 5.5 (high) | 100.0% | 100.0% | 84.0% | 100.0% | 100.0% | 44.5% |
-| Claude Opus 5.5 (medium) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 10.3% |
-| DeepSeek V4.1 Flash 1017 (max) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 5.9% |
-| GPT-6 Astra (high) | 100.0% | 100.0% | 65.0% | 100.0% | 100.0% | 33.8% |
-| GPT-6 Luna (high) | 100.0% | 100.0% | 100.0% | 100.0% | 100.0% | 95.7% |
-| GPT-6 Luna (max) | 100.0% | 100.0% | 87.1% | 100.0% | 100.0% | 60.9% |
-| GPT-6 Luna (medium) | 100.0% | 100.0% | 100.0% | 100.0% | 100.0% | 100.0% |
-| GPT-6 Luna (xhigh) | 100.0% | 100.0% | 92.6% | 100.0% | 100.0% | 57.9% |
-| GPT-6.1 Sol (high) | 100.0% | 100.0% | 100.0% | 100.0% | 100.0% | 87.4% |
-| GPT-6.1 Sol (low) | 0.0% | 0.0% | 27.8% | 0.0% | 0.0% | 29.0% |
-| GPT-6.1 Sol (medium) | 100.0% | 100.0% | 100.0% | 100.0% | 100.0% | 90.7% |
-| GPT-6.1 Terra (high) | 100.0% | 100.0% | 99.9% | 100.0% | 100.0% | 77.0% |
-| GPT-6.1 Terra (max) | 100.0% | 100.0% | 82.5% | 100.0% | 100.0% | 56.8% |
-| GPT-6.1 Terra (medium) | 100.0% | 100.0% | 78.9% | 100.0% | 100.0% | 61.2% |
-| GPT-6.1 Terra (xhigh) | 100.0% | 100.0% | 100.0% | 100.0% | 100.0% | 69.7% |
-| Gemini 4 Argon (high) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 8.3% |
-| Kimi K3.1 Pro (max) | 100.0% | 100.0% | 52.9% | 100.0% | 100.0% | 34.7% |
-| MiMo-V2.6-Pro | 100.0% | 100.0% | 100.0% | 100.0% | 100.0% | 93.8% |
+| Configuration | S0 | S1 | S2 | S1 endpoint-heavy | S1M | S1T | S1T mean-preserving |
+|---|---:|---:|---:|---:|---:|---:|---:|
+| Claude Haiku 5.5 (high) | 100.0% | 100.0% | 100.0% | 100.0% | 100.0% | 89.9% | 90.7% |
+| Claude Haiku 5.5 (medium) | 100.0% | 100.0% | 83.4% | 100.0% | 100.0% | 60.2% | 61.5% |
+| Claude Opus 5.5 (high) | 100.0% | 100.0% | 84.0% | 100.0% | 100.0% | 44.5% | 43.5% |
+| Claude Opus 5.5 (medium) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 10.3% | 9.6% |
+| DeepSeek V4.1 Flash 1017 (max) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 5.9% | 5.3% |
+| GPT-6 Astra (high) | 100.0% | 100.0% | 65.0% | 100.0% | 100.0% | 33.8% | 33.2% |
+| GPT-6 Luna (high) | 100.0% | 100.0% | 100.0% | 100.0% | 100.0% | 95.7% | 96.2% |
+| GPT-6 Luna (max) | 100.0% | 100.0% | 87.1% | 100.0% | 100.0% | 60.9% | 61.5% |
+| GPT-6 Luna (medium) | 100.0% | 100.0% | 100.0% | 100.0% | 100.0% | 100.0% | 100.0% |
+| GPT-6 Luna (xhigh) | 100.0% | 100.0% | 92.6% | 100.0% | 100.0% | 57.9% | 58.7% |
+| GPT-6.1 Sol (high) | 100.0% | 100.0% | 100.0% | 100.0% | 100.0% | 87.4% | 88.8% |
+| GPT-6.1 Sol (low) | 0.0% | 0.0% | 27.8% | 0.0% | 0.0% | 29.0% | 30.6% |
+| GPT-6.1 Sol (medium) | 100.0% | 100.0% | 100.0% | 100.0% | 100.0% | 90.7% | 91.0% |
+| GPT-6.1 Terra (high) | 100.0% | 100.0% | 99.9% | 100.0% | 100.0% | 77.0% | 77.6% |
+| GPT-6.1 Terra (max) | 100.0% | 100.0% | 82.5% | 100.0% | 100.0% | 56.8% | 57.3% |
+| GPT-6.1 Terra (medium) | 100.0% | 100.0% | 78.9% | 100.0% | 100.0% | 61.2% | 59.8% |
+| GPT-6.1 Terra (xhigh) | 100.0% | 100.0% | 100.0% | 100.0% | 100.0% | 69.7% | 70.7% |
+| Gemini 4 Argon (high) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 8.3% | 8.2% |
+| Kimi K3.1 Pro (max) | 100.0% | 100.0% | 52.9% | 100.0% | 100.0% | 34.7% | 35.8% |
+| MiMo-V2.6-Pro | 100.0% | 100.0% | 100.0% | 100.0% | 100.0% | 93.8% | 94.2% |
 
 ### API basis: value-score dispersion (SD; covariance term)
 
-| Configuration | S0 | S1 | S2 | S1 endpoint-heavy | S1M | S1T |
-|---|---:|---:|---:|---:|---:|---:|
-| Claude Haiku 5.5 (high) | 0.00 (+0.00) | 0.00 (+0.00) | 1.69 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.42 (+0.00) |
-| Claude Haiku 5.5 (medium) | 0.00 (+0.00) | 0.00 (+0.00) | 1.84 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.36 (+0.00) |
-| Claude Opus 5.5 (high) | 0.00 (+0.00) | 0.00 (+0.00) | 1.58 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.38 (+0.00) |
-| Claude Opus 5.5 (medium) | 0.00 (+0.00) | 0.00 (+0.00) | 1.60 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.40 (+0.00) |
-| DeepSeek V4.1 Flash 1017 (max) | 0.00 (+0.00) | 0.00 (+0.00) | 1.51 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.49 (+0.00) |
-| GPT-6 Astra (high) | 0.00 (+0.00) | 0.00 (+0.00) | 1.45 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.42 (+0.00) |
-| GPT-6 Luna (high) | 0.00 (+0.00) | 0.00 (+0.00) | 1.87 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.36 (+0.00) |
-| GPT-6 Luna (max) | 0.00 (+0.00) | 0.00 (+0.00) | 1.81 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.39 (+0.00) |
-| GPT-6 Luna (medium) | 0.00 (+0.00) | 0.00 (+0.00) | 1.74 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.43 (+0.00) |
-| GPT-6 Luna (xhigh) | 0.00 (+0.00) | 0.00 (+0.00) | 1.86 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.34 (+0.00) |
-| GPT-6.1 Sol (high) | 0.00 (+0.00) | 0.00 (+0.00) | 1.48 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.39 (+0.00) |
-| GPT-6.1 Sol (low) | 0.00 (+0.00) | 0.00 (+0.00) | 1.81 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.43 (+0.00) |
-| GPT-6.1 Sol (medium) | 0.00 (+0.00) | 0.00 (+0.00) | 1.57 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.40 (+0.00) |
-| GPT-6.1 Terra (high) | 0.00 (+0.00) | 0.00 (+0.00) | 1.50 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.59 (+0.00) |
-| GPT-6.1 Terra (max) | 0.00 (+0.00) | 0.00 (+0.00) | 1.17 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.52 (+0.00) |
-| GPT-6.1 Terra (medium) | 0.00 (+0.00) | 0.00 (+0.00) | 1.59 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.54 (+0.00) |
-| GPT-6.1 Terra (xhigh) | 0.00 (+0.00) | 0.00 (+0.00) | 1.53 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.55 (+0.00) |
-| Gemini 4 Argon (high) | 0.00 (+0.00) | 0.00 (+0.00) | 1.59 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.53 (+0.00) |
-| Kimi K3.1 Pro (max) | 0.00 (+0.00) | 0.00 (+0.00) | 1.77 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.41 (+0.00) |
-| MiMo-V2.6-Pro | 0.00 (+0.00) | 0.00 (+0.00) | 1.57 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.54 (+0.00) |
+| Configuration | S0 | S1 | S2 | S1 endpoint-heavy | S1M | S1T | S1T mean-preserving |
+|---|---:|---:|---:|---:|---:|---:|---:|
+| Claude Haiku 5.5 (high) | 0.00 (+0.00) | 0.00 (+0.00) | 1.69 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.42 (+0.00) | 1.38 (+0.00) |
+| Claude Haiku 5.5 (medium) | 0.00 (+0.00) | 0.00 (+0.00) | 1.84 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.36 (+0.00) | 1.30 (+0.00) |
+| Claude Opus 5.5 (high) | 0.00 (+0.00) | 0.00 (+0.00) | 1.58 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.38 (+0.00) | 1.32 (+0.00) |
+| Claude Opus 5.5 (medium) | 0.00 (+0.00) | 0.00 (+0.00) | 1.60 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.40 (+0.00) | 1.34 (+0.00) |
+| DeepSeek V4.1 Flash 1017 (max) | 0.00 (+0.00) | 0.00 (+0.00) | 1.51 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.49 (+0.00) | 1.47 (+0.00) |
+| GPT-6 Astra (high) | 0.00 (+0.00) | 0.00 (+0.00) | 1.45 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.42 (+0.00) | 1.35 (+0.00) |
+| GPT-6 Luna (high) | 0.00 (+0.00) | 0.00 (+0.00) | 1.87 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.36 (+0.00) | 1.37 (+0.00) |
+| GPT-6 Luna (max) | 0.00 (+0.00) | 0.00 (+0.00) | 1.81 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.39 (+0.00) | 1.34 (+0.00) |
+| GPT-6 Luna (medium) | 0.00 (+0.00) | 0.00 (+0.00) | 1.74 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.43 (+0.00) | 1.40 (+0.00) |
+| GPT-6 Luna (xhigh) | 0.00 (+0.00) | 0.00 (+0.00) | 1.86 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.34 (+0.00) | 1.34 (+0.00) |
+| GPT-6.1 Sol (high) | 0.00 (+0.00) | 0.00 (+0.00) | 1.48 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.39 (+0.00) | 1.35 (+0.00) |
+| GPT-6.1 Sol (low) | 0.00 (+0.00) | 0.00 (+0.00) | 1.81 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.43 (+0.00) | 1.39 (+0.00) |
+| GPT-6.1 Sol (medium) | 0.00 (+0.00) | 0.00 (+0.00) | 1.57 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.40 (+0.00) | 1.39 (+0.00) |
+| GPT-6.1 Terra (high) | 0.00 (+0.00) | 0.00 (+0.00) | 1.50 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.59 (+0.00) | 1.60 (+0.00) |
+| GPT-6.1 Terra (max) | 0.00 (+0.00) | 0.00 (+0.00) | 1.17 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.52 (+0.00) | 1.51 (+0.00) |
+| GPT-6.1 Terra (medium) | 0.00 (+0.00) | 0.00 (+0.00) | 1.59 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.54 (+0.00) | 1.53 (+0.00) |
+| GPT-6.1 Terra (xhigh) | 0.00 (+0.00) | 0.00 (+0.00) | 1.53 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.55 (+0.00) | 1.55 (+0.00) |
+| Gemini 4 Argon (high) | 0.00 (+0.00) | 0.00 (+0.00) | 1.59 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.53 (+0.00) | 1.55 (+0.00) |
+| Kimi K3.1 Pro (max) | 0.00 (+0.00) | 0.00 (+0.00) | 1.77 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.41 (+0.00) | 1.37 (+0.00) |
+| MiMo-V2.6-Pro | 0.00 (+0.00) | 0.00 (+0.00) | 1.57 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.54 (+0.00) | 1.52 (+0.00) |
 
-Plan streams S1, S2, S1 endpoint-heavy, S1M and S1T run with owner assumptions off (owner-named transfers and O46 provider quota ceilings; E167): Claude Haiku 5.5 (high) on Claude Max 20x, Claude Haiku 5.5 (high) on Claude Max 5x, Claude Haiku 5.5 (high) on Claude Pro, Claude Haiku 5.5 (medium) on Claude Max 20x, Claude Haiku 5.5 (medium) on Claude Max 5x, Claude Haiku 5.5 (medium) on Claude Pro, GPT-6 Luna (high) on ChatGPT Plus, GPT-6 Luna (high) on ChatGPT Pro 100, GPT-6 Luna (high) on ChatGPT Pro 200, GPT-6 Luna (high) on ChatGPT Pro 500, GPT-6 Luna (max) on ChatGPT Plus, GPT-6 Luna (max) on ChatGPT Pro 100, GPT-6 Luna (max) on ChatGPT Pro 200, GPT-6 Luna (max) on ChatGPT Pro 500, GPT-6 Luna (medium) on ChatGPT Plus, GPT-6 Luna (medium) on ChatGPT Pro 100, GPT-6 Luna (medium) on ChatGPT Pro 200, GPT-6 Luna (medium) on ChatGPT Pro 500, GPT-6 Luna (xhigh) on ChatGPT Plus, GPT-6 Luna (xhigh) on ChatGPT Pro 100, GPT-6 Luna (xhigh) on ChatGPT Pro 200, GPT-6 Luna (xhigh) on ChatGPT Pro 500, GPT-6.1 Terra (high) on ChatGPT Plus, GPT-6.1 Terra (high) on ChatGPT Pro 100, GPT-6.1 Terra (high) on ChatGPT Pro 200, GPT-6.1 Terra (high) on ChatGPT Pro 500, GPT-6.1 Terra (max) on ChatGPT Plus, GPT-6.1 Terra (max) on ChatGPT Pro 100, GPT-6.1 Terra (max) on ChatGPT Pro 200, GPT-6.1 Terra (max) on ChatGPT Pro 500, GPT-6.1 Terra (medium) on ChatGPT Plus, GPT-6.1 Terra (medium) on ChatGPT Pro 100, GPT-6.1 Terra (medium) on ChatGPT Pro 200, GPT-6.1 Terra (medium) on ChatGPT Pro 500, GPT-6.1 Terra (xhigh) on ChatGPT Plus, GPT-6.1 Terra (xhigh) on ChatGPT Pro 100, GPT-6.1 Terra (xhigh) on ChatGPT Pro 200, GPT-6.1 Terra (xhigh) on ChatGPT Pro 500, MiMo-V2.6-Pro on MiMo Token Plan Lite, MiMo-V2.6-Pro on MiMo Token Plan Max, MiMo-V2.6-Pro on MiMo Token Plan Pro, MiMo-V2.6-Pro on MiMo Token Plan Standard depend on an owner assumption and are unevaluable there (—), never reselected or replaced by API cost.
+Plan streams S1, S2, S1 endpoint-heavy, S1M, S1T and S1T mean-preserving run with owner assumptions off (owner-named transfers and O46 provider quota ceilings; E167): Claude Haiku 5.5 (high) on Claude Max 20x, Claude Haiku 5.5 (high) on Claude Max 5x, Claude Haiku 5.5 (high) on Claude Pro, Claude Haiku 5.5 (medium) on Claude Max 20x, Claude Haiku 5.5 (medium) on Claude Max 5x, Claude Haiku 5.5 (medium) on Claude Pro, GPT-6 Luna (high) on ChatGPT Plus, GPT-6 Luna (high) on ChatGPT Pro 100, GPT-6 Luna (high) on ChatGPT Pro 200, GPT-6 Luna (high) on ChatGPT Pro 500, GPT-6 Luna (max) on ChatGPT Plus, GPT-6 Luna (max) on ChatGPT Pro 100, GPT-6 Luna (max) on ChatGPT Pro 200, GPT-6 Luna (max) on ChatGPT Pro 500, GPT-6 Luna (medium) on ChatGPT Plus, GPT-6 Luna (medium) on ChatGPT Pro 100, GPT-6 Luna (medium) on ChatGPT Pro 200, GPT-6 Luna (medium) on ChatGPT Pro 500, GPT-6 Luna (xhigh) on ChatGPT Plus, GPT-6 Luna (xhigh) on ChatGPT Pro 100, GPT-6 Luna (xhigh) on ChatGPT Pro 200, GPT-6 Luna (xhigh) on ChatGPT Pro 500, GPT-6.1 Terra (high) on ChatGPT Plus, GPT-6.1 Terra (high) on ChatGPT Pro 100, GPT-6.1 Terra (high) on ChatGPT Pro 200, GPT-6.1 Terra (high) on ChatGPT Pro 500, GPT-6.1 Terra (max) on ChatGPT Plus, GPT-6.1 Terra (max) on ChatGPT Pro 100, GPT-6.1 Terra (max) on ChatGPT Pro 200, GPT-6.1 Terra (max) on ChatGPT Pro 500, GPT-6.1 Terra (medium) on ChatGPT Plus, GPT-6.1 Terra (medium) on ChatGPT Pro 100, GPT-6.1 Terra (medium) on ChatGPT Pro 200, GPT-6.1 Terra (medium) on ChatGPT Pro 500, GPT-6.1 Terra (xhigh) on ChatGPT Plus, GPT-6.1 Terra (xhigh) on ChatGPT Pro 100, GPT-6.1 Terra (xhigh) on ChatGPT Pro 200, GPT-6.1 Terra (xhigh) on ChatGPT Pro 500, MiMo-V2.6-Pro on MiMo Token Plan Lite, MiMo-V2.6-Pro on MiMo Token Plan Max, MiMo-V2.6-Pro on MiMo Token Plan Pro, MiMo-V2.6-Pro on MiMo Token Plan Standard depend on an owner assumption and are unevaluable there (—), never reselected or replaced by API cost.
 
 ### Plan basis: rank 1
 
-| Configuration | S0 | S1 | S2 | S1 endpoint-heavy | S1M | S1T |
-|---|---:|---:|---:|---:|---:|---:|
-| Claude Haiku 5.5 (high) on Claude Max 20x | 0.0% | — | — | — | — | — |
-| Claude Haiku 5.5 (high) on Claude Max 5x | 0.0% | — | — | — | — | — |
-| Claude Haiku 5.5 (high) on Claude Pro | 0.0% | — | — | — | — | — |
-| Claude Haiku 5.5 (medium) on Claude Max 20x | 0.0% | — | — | — | — | — |
-| Claude Haiku 5.5 (medium) on Claude Max 5x | 0.0% | — | — | — | — | — |
-| Claude Haiku 5.5 (medium) on Claude Pro | 0.0% | — | — | — | — | — |
-| Claude Opus 5.5 (high) on Claude Max 20x | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| Claude Opus 5.5 (high) on Claude Max 5x | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| Claude Opus 5.5 (high) on Claude Pro | 100.0% | 100.0% | 100.0% | 100.0% | 100.0% | 57.9% |
-| Claude Opus 5.5 (medium) on Claude Max 20x | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| Claude Opus 5.5 (medium) on Claude Max 5x | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| Claude Opus 5.5 (medium) on Claude Pro | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 19.4% |
-| DeepSeek V4.1 Flash 1017 (max) on API-cost fallback | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| GPT-6 Astra (high) on ChatGPT Plus | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| GPT-6 Astra (high) on ChatGPT Pro 100 | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| GPT-6 Astra (high) on ChatGPT Pro 200 | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.3% |
-| GPT-6 Astra (high) on ChatGPT Pro 500 | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| GPT-6 Luna (high) on ChatGPT Plus | 0.0% | — | — | — | — | — |
-| GPT-6 Luna (high) on ChatGPT Pro 100 | 0.0% | — | — | — | — | — |
-| GPT-6 Luna (high) on ChatGPT Pro 200 | 0.0% | — | — | — | — | — |
-| GPT-6 Luna (high) on ChatGPT Pro 500 | 0.0% | — | — | — | — | — |
-| GPT-6 Luna (max) on ChatGPT Plus | 0.0% | — | — | — | — | — |
-| GPT-6 Luna (max) on ChatGPT Pro 100 | 0.0% | — | — | — | — | — |
-| GPT-6 Luna (max) on ChatGPT Pro 200 | 0.0% | — | — | — | — | — |
-| GPT-6 Luna (max) on ChatGPT Pro 500 | 0.0% | — | — | — | — | — |
-| GPT-6 Luna (medium) on ChatGPT Plus | 0.0% | — | — | — | — | — |
-| GPT-6 Luna (medium) on ChatGPT Pro 100 | 0.0% | — | — | — | — | — |
-| GPT-6 Luna (medium) on ChatGPT Pro 200 | 0.0% | — | — | — | — | — |
-| GPT-6 Luna (medium) on ChatGPT Pro 500 | 0.0% | — | — | — | — | — |
-| GPT-6 Luna (xhigh) on ChatGPT Plus | 0.0% | — | — | — | — | — |
-| GPT-6 Luna (xhigh) on ChatGPT Pro 100 | 0.0% | — | — | — | — | — |
-| GPT-6 Luna (xhigh) on ChatGPT Pro 200 | 0.0% | — | — | — | — | — |
-| GPT-6 Luna (xhigh) on ChatGPT Pro 500 | 0.0% | — | — | — | — | — |
-| GPT-6.1 Sol (high) on ChatGPT Plus | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| GPT-6.1 Sol (high) on ChatGPT Pro 100 | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| GPT-6.1 Sol (high) on ChatGPT Pro 200 | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| GPT-6.1 Sol (high) on ChatGPT Pro 500 | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 19.0% |
-| GPT-6.1 Sol (low) on ChatGPT Plus | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| GPT-6.1 Sol (low) on ChatGPT Pro 100 | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| GPT-6.1 Sol (low) on ChatGPT Pro 200 | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| GPT-6.1 Sol (low) on ChatGPT Pro 500 | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| GPT-6.1 Sol (medium) on ChatGPT Plus | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| GPT-6.1 Sol (medium) on ChatGPT Pro 100 | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| GPT-6.1 Sol (medium) on ChatGPT Pro 200 | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| GPT-6.1 Sol (medium) on ChatGPT Pro 500 | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 3.4% |
-| GPT-6.1 Terra (high) on ChatGPT Plus | 0.0% | — | — | — | — | — |
-| GPT-6.1 Terra (high) on ChatGPT Pro 100 | 0.0% | — | — | — | — | — |
-| GPT-6.1 Terra (high) on ChatGPT Pro 200 | 0.0% | — | — | — | — | — |
-| GPT-6.1 Terra (high) on ChatGPT Pro 500 | 0.0% | — | — | — | — | — |
-| GPT-6.1 Terra (max) on ChatGPT Plus | 0.0% | — | — | — | — | — |
-| GPT-6.1 Terra (max) on ChatGPT Pro 100 | 0.0% | — | — | — | — | — |
-| GPT-6.1 Terra (max) on ChatGPT Pro 200 | 0.0% | — | — | — | — | — |
-| GPT-6.1 Terra (max) on ChatGPT Pro 500 | 0.0% | — | — | — | — | — |
-| GPT-6.1 Terra (medium) on ChatGPT Plus | 0.0% | — | — | — | — | — |
-| GPT-6.1 Terra (medium) on ChatGPT Pro 100 | 0.0% | — | — | — | — | — |
-| GPT-6.1 Terra (medium) on ChatGPT Pro 200 | 0.0% | — | — | — | — | — |
-| GPT-6.1 Terra (medium) on ChatGPT Pro 500 | 0.0% | — | — | — | — | — |
-| GPT-6.1 Terra (xhigh) on ChatGPT Plus | 0.0% | — | — | — | — | — |
-| GPT-6.1 Terra (xhigh) on ChatGPT Pro 100 | 0.0% | — | — | — | — | — |
-| GPT-6.1 Terra (xhigh) on ChatGPT Pro 200 | 0.0% | — | — | — | — | — |
-| GPT-6.1 Terra (xhigh) on ChatGPT Pro 500 | 0.0% | — | — | — | — | — |
-| Gemini 4 Argon (high) on API-cost fallback | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| Kimi K3.1 Pro (max) on API-cost fallback | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| MiMo-V2.6-Pro on MiMo Token Plan Lite | 0.0% | — | — | — | — | — |
-| MiMo-V2.6-Pro on MiMo Token Plan Max | 0.0% | — | — | — | — | — |
-| MiMo-V2.6-Pro on MiMo Token Plan Pro | 0.0% | — | — | — | — | — |
-| MiMo-V2.6-Pro on MiMo Token Plan Standard | 0.0% | — | — | — | — | — |
+| Configuration | S0 | S1 | S2 | S1 endpoint-heavy | S1M | S1T | S1T mean-preserving |
+|---|---:|---:|---:|---:|---:|---:|---:|
+| Claude Haiku 5.5 (high) on Claude Max 20x | 0.0% | — | — | — | — | — | — |
+| Claude Haiku 5.5 (high) on Claude Max 5x | 0.0% | — | — | — | — | — | — |
+| Claude Haiku 5.5 (high) on Claude Pro | 0.0% | — | — | — | — | — | — |
+| Claude Haiku 5.5 (medium) on Claude Max 20x | 0.0% | — | — | — | — | — | — |
+| Claude Haiku 5.5 (medium) on Claude Max 5x | 0.0% | — | — | — | — | — | — |
+| Claude Haiku 5.5 (medium) on Claude Pro | 0.0% | — | — | — | — | — | — |
+| Claude Opus 5.5 (high) on Claude Max 20x | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| Claude Opus 5.5 (high) on Claude Max 5x | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| Claude Opus 5.5 (high) on Claude Pro | 100.0% | 100.0% | 100.0% | 100.0% | 100.0% | 57.9% | 59.3% |
+| Claude Opus 5.5 (medium) on Claude Max 20x | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| Claude Opus 5.5 (medium) on Claude Max 5x | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| Claude Opus 5.5 (medium) on Claude Pro | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 19.4% | 18.7% |
+| DeepSeek V4.1 Flash 1017 (max) on API-cost fallback | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| GPT-6 Astra (high) on ChatGPT Plus | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| GPT-6 Astra (high) on ChatGPT Pro 100 | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| GPT-6 Astra (high) on ChatGPT Pro 200 | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.3% | 0.2% |
+| GPT-6 Astra (high) on ChatGPT Pro 500 | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| GPT-6 Luna (high) on ChatGPT Plus | 0.0% | — | — | — | — | — | — |
+| GPT-6 Luna (high) on ChatGPT Pro 100 | 0.0% | — | — | — | — | — | — |
+| GPT-6 Luna (high) on ChatGPT Pro 200 | 0.0% | — | — | — | — | — | — |
+| GPT-6 Luna (high) on ChatGPT Pro 500 | 0.0% | — | — | — | — | — | — |
+| GPT-6 Luna (max) on ChatGPT Plus | 0.0% | — | — | — | — | — | — |
+| GPT-6 Luna (max) on ChatGPT Pro 100 | 0.0% | — | — | — | — | — | — |
+| GPT-6 Luna (max) on ChatGPT Pro 200 | 0.0% | — | — | — | — | — | — |
+| GPT-6 Luna (max) on ChatGPT Pro 500 | 0.0% | — | — | — | — | — | — |
+| GPT-6 Luna (medium) on ChatGPT Plus | 0.0% | — | — | — | — | — | — |
+| GPT-6 Luna (medium) on ChatGPT Pro 100 | 0.0% | — | — | — | — | — | — |
+| GPT-6 Luna (medium) on ChatGPT Pro 200 | 0.0% | — | — | — | — | — | — |
+| GPT-6 Luna (medium) on ChatGPT Pro 500 | 0.0% | — | — | — | — | — | — |
+| GPT-6 Luna (xhigh) on ChatGPT Plus | 0.0% | — | — | — | — | — | — |
+| GPT-6 Luna (xhigh) on ChatGPT Pro 100 | 0.0% | — | — | — | — | — | — |
+| GPT-6 Luna (xhigh) on ChatGPT Pro 200 | 0.0% | — | — | — | — | — | — |
+| GPT-6 Luna (xhigh) on ChatGPT Pro 500 | 0.0% | — | — | — | — | — | — |
+| GPT-6.1 Sol (high) on ChatGPT Plus | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| GPT-6.1 Sol (high) on ChatGPT Pro 100 | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| GPT-6.1 Sol (high) on ChatGPT Pro 200 | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| GPT-6.1 Sol (high) on ChatGPT Pro 500 | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 19.0% | 18.2% |
+| GPT-6.1 Sol (low) on ChatGPT Plus | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| GPT-6.1 Sol (low) on ChatGPT Pro 100 | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| GPT-6.1 Sol (low) on ChatGPT Pro 200 | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| GPT-6.1 Sol (low) on ChatGPT Pro 500 | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| GPT-6.1 Sol (medium) on ChatGPT Plus | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| GPT-6.1 Sol (medium) on ChatGPT Pro 100 | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| GPT-6.1 Sol (medium) on ChatGPT Pro 200 | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| GPT-6.1 Sol (medium) on ChatGPT Pro 500 | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 3.4% | 3.6% |
+| GPT-6.1 Terra (high) on ChatGPT Plus | 0.0% | — | — | — | — | — | — |
+| GPT-6.1 Terra (high) on ChatGPT Pro 100 | 0.0% | — | — | — | — | — | — |
+| GPT-6.1 Terra (high) on ChatGPT Pro 200 | 0.0% | — | — | — | — | — | — |
+| GPT-6.1 Terra (high) on ChatGPT Pro 500 | 0.0% | — | — | — | — | — | — |
+| GPT-6.1 Terra (max) on ChatGPT Plus | 0.0% | — | — | — | — | — | — |
+| GPT-6.1 Terra (max) on ChatGPT Pro 100 | 0.0% | — | — | — | — | — | — |
+| GPT-6.1 Terra (max) on ChatGPT Pro 200 | 0.0% | — | — | — | — | — | — |
+| GPT-6.1 Terra (max) on ChatGPT Pro 500 | 0.0% | — | — | — | — | — | — |
+| GPT-6.1 Terra (medium) on ChatGPT Plus | 0.0% | — | — | — | — | — | — |
+| GPT-6.1 Terra (medium) on ChatGPT Pro 100 | 0.0% | — | — | — | — | — | — |
+| GPT-6.1 Terra (medium) on ChatGPT Pro 200 | 0.0% | — | — | — | — | — | — |
+| GPT-6.1 Terra (medium) on ChatGPT Pro 500 | 0.0% | — | — | — | — | — | — |
+| GPT-6.1 Terra (xhigh) on ChatGPT Plus | 0.0% | — | — | — | — | — | — |
+| GPT-6.1 Terra (xhigh) on ChatGPT Pro 100 | 0.0% | — | — | — | — | — | — |
+| GPT-6.1 Terra (xhigh) on ChatGPT Pro 200 | 0.0% | — | — | — | — | — | — |
+| GPT-6.1 Terra (xhigh) on ChatGPT Pro 500 | 0.0% | — | — | — | — | — | — |
+| Gemini 4 Argon (high) on API-cost fallback | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| Kimi K3.1 Pro (max) on API-cost fallback | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| MiMo-V2.6-Pro on MiMo Token Plan Lite | 0.0% | — | — | — | — | — | — |
+| MiMo-V2.6-Pro on MiMo Token Plan Max | 0.0% | — | — | — | — | — | — |
+| MiMo-V2.6-Pro on MiMo Token Plan Pro | 0.0% | — | — | — | — | — | — |
+| MiMo-V2.6-Pro on MiMo Token Plan Standard | 0.0% | — | — | — | — | — | — |
 
 ### Plan basis: rank 3 or better
 
-| Configuration | S0 | S1 | S2 | S1 endpoint-heavy | S1M | S1T |
-|---|---:|---:|---:|---:|---:|---:|
-| Claude Haiku 5.5 (high) on Claude Max 20x | 0.0% | — | — | — | — | — |
-| Claude Haiku 5.5 (high) on Claude Max 5x | 0.0% | — | — | — | — | — |
-| Claude Haiku 5.5 (high) on Claude Pro | 0.0% | — | — | — | — | — |
-| Claude Haiku 5.5 (medium) on Claude Max 20x | 0.0% | — | — | — | — | — |
-| Claude Haiku 5.5 (medium) on Claude Max 5x | 0.0% | — | — | — | — | — |
-| Claude Haiku 5.5 (medium) on Claude Pro | 0.0% | — | — | — | — | — |
-| Claude Opus 5.5 (high) on Claude Max 20x | 100.0% | 100.0% | 100.0% | 100.0% | 100.0% | 58.3% |
-| Claude Opus 5.5 (high) on Claude Max 5x | 100.0% | 100.0% | 100.0% | 100.0% | 100.0% | 55.9% |
-| Claude Opus 5.5 (high) on Claude Pro | 100.0% | 100.0% | 100.0% | 100.0% | 100.0% | 59.3% |
-| Claude Opus 5.5 (medium) on Claude Max 20x | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 19.7% |
-| Claude Opus 5.5 (medium) on Claude Max 5x | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 18.3% |
-| Claude Opus 5.5 (medium) on Claude Pro | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 20.7% |
-| DeepSeek V4.1 Flash 1017 (max) on API-cost fallback | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| GPT-6 Astra (high) on ChatGPT Plus | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| GPT-6 Astra (high) on ChatGPT Pro 100 | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.1% |
-| GPT-6 Astra (high) on ChatGPT Pro 200 | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.3% |
-| GPT-6 Astra (high) on ChatGPT Pro 500 | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.2% |
-| GPT-6 Luna (high) on ChatGPT Plus | 0.0% | — | — | — | — | — |
-| GPT-6 Luna (high) on ChatGPT Pro 100 | 0.0% | — | — | — | — | — |
-| GPT-6 Luna (high) on ChatGPT Pro 200 | 0.0% | — | — | — | — | — |
-| GPT-6 Luna (high) on ChatGPT Pro 500 | 0.0% | — | — | — | — | — |
-| GPT-6 Luna (max) on ChatGPT Plus | 0.0% | — | — | — | — | — |
-| GPT-6 Luna (max) on ChatGPT Pro 100 | 0.0% | — | — | — | — | — |
-| GPT-6 Luna (max) on ChatGPT Pro 200 | 0.0% | — | — | — | — | — |
-| GPT-6 Luna (max) on ChatGPT Pro 500 | 0.0% | — | — | — | — | — |
-| GPT-6 Luna (medium) on ChatGPT Plus | 0.0% | — | — | — | — | — |
-| GPT-6 Luna (medium) on ChatGPT Pro 100 | 0.0% | — | — | — | — | — |
-| GPT-6 Luna (medium) on ChatGPT Pro 200 | 0.0% | — | — | — | — | — |
-| GPT-6 Luna (medium) on ChatGPT Pro 500 | 0.0% | — | — | — | — | — |
-| GPT-6 Luna (xhigh) on ChatGPT Plus | 0.0% | — | — | — | — | — |
-| GPT-6 Luna (xhigh) on ChatGPT Pro 100 | 0.0% | — | — | — | — | — |
-| GPT-6 Luna (xhigh) on ChatGPT Pro 200 | 0.0% | — | — | — | — | — |
-| GPT-6 Luna (xhigh) on ChatGPT Pro 500 | 0.0% | — | — | — | — | — |
-| GPT-6.1 Sol (high) on ChatGPT Plus | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 18.4% |
-| GPT-6.1 Sol (high) on ChatGPT Pro 100 | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 18.4% |
-| GPT-6.1 Sol (high) on ChatGPT Pro 200 | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| GPT-6.1 Sol (high) on ChatGPT Pro 500 | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 20.4% |
-| GPT-6.1 Sol (low) on ChatGPT Plus | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| GPT-6.1 Sol (low) on ChatGPT Pro 100 | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| GPT-6.1 Sol (low) on ChatGPT Pro 200 | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| GPT-6.1 Sol (low) on ChatGPT Pro 500 | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| GPT-6.1 Sol (medium) on ChatGPT Plus | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 3.3% |
-| GPT-6.1 Sol (medium) on ChatGPT Pro 100 | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 3.3% |
-| GPT-6.1 Sol (medium) on ChatGPT Pro 200 | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| GPT-6.1 Sol (medium) on ChatGPT Pro 500 | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 3.8% |
-| GPT-6.1 Terra (high) on ChatGPT Plus | 0.0% | — | — | — | — | — |
-| GPT-6.1 Terra (high) on ChatGPT Pro 100 | 0.0% | — | — | — | — | — |
-| GPT-6.1 Terra (high) on ChatGPT Pro 200 | 0.0% | — | — | — | — | — |
-| GPT-6.1 Terra (high) on ChatGPT Pro 500 | 0.0% | — | — | — | — | — |
-| GPT-6.1 Terra (max) on ChatGPT Plus | 0.0% | — | — | — | — | — |
-| GPT-6.1 Terra (max) on ChatGPT Pro 100 | 0.0% | — | — | — | — | — |
-| GPT-6.1 Terra (max) on ChatGPT Pro 200 | 0.0% | — | — | — | — | — |
-| GPT-6.1 Terra (max) on ChatGPT Pro 500 | 0.0% | — | — | — | — | — |
-| GPT-6.1 Terra (medium) on ChatGPT Plus | 0.0% | — | — | — | — | — |
-| GPT-6.1 Terra (medium) on ChatGPT Pro 100 | 0.0% | — | — | — | — | — |
-| GPT-6.1 Terra (medium) on ChatGPT Pro 200 | 0.0% | — | — | — | — | — |
-| GPT-6.1 Terra (medium) on ChatGPT Pro 500 | 0.0% | — | — | — | — | — |
-| GPT-6.1 Terra (xhigh) on ChatGPT Plus | 0.0% | — | — | — | — | — |
-| GPT-6.1 Terra (xhigh) on ChatGPT Pro 100 | 0.0% | — | — | — | — | — |
-| GPT-6.1 Terra (xhigh) on ChatGPT Pro 200 | 0.0% | — | — | — | — | — |
-| GPT-6.1 Terra (xhigh) on ChatGPT Pro 500 | 0.0% | — | — | — | — | — |
-| Gemini 4 Argon (high) on API-cost fallback | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| Kimi K3.1 Pro (max) on API-cost fallback | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| MiMo-V2.6-Pro on MiMo Token Plan Lite | 0.0% | — | — | — | — | — |
-| MiMo-V2.6-Pro on MiMo Token Plan Max | 0.0% | — | — | — | — | — |
-| MiMo-V2.6-Pro on MiMo Token Plan Pro | 0.0% | — | — | — | — | — |
-| MiMo-V2.6-Pro on MiMo Token Plan Standard | 0.0% | — | — | — | — | — |
+| Configuration | S0 | S1 | S2 | S1 endpoint-heavy | S1M | S1T | S1T mean-preserving |
+|---|---:|---:|---:|---:|---:|---:|---:|
+| Claude Haiku 5.5 (high) on Claude Max 20x | 0.0% | — | — | — | — | — | — |
+| Claude Haiku 5.5 (high) on Claude Max 5x | 0.0% | — | — | — | — | — | — |
+| Claude Haiku 5.5 (high) on Claude Pro | 0.0% | — | — | — | — | — | — |
+| Claude Haiku 5.5 (medium) on Claude Max 20x | 0.0% | — | — | — | — | — | — |
+| Claude Haiku 5.5 (medium) on Claude Max 5x | 0.0% | — | — | — | — | — | — |
+| Claude Haiku 5.5 (medium) on Claude Pro | 0.0% | — | — | — | — | — | — |
+| Claude Opus 5.5 (high) on Claude Max 20x | 100.0% | 100.0% | 100.0% | 100.0% | 100.0% | 58.3% | 60.0% |
+| Claude Opus 5.5 (high) on Claude Max 5x | 100.0% | 100.0% | 100.0% | 100.0% | 100.0% | 55.9% | 57.4% |
+| Claude Opus 5.5 (high) on Claude Pro | 100.0% | 100.0% | 100.0% | 100.0% | 100.0% | 59.3% | 60.9% |
+| Claude Opus 5.5 (medium) on Claude Max 20x | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 19.7% | 19.1% |
+| Claude Opus 5.5 (medium) on Claude Max 5x | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 18.3% | 17.5% |
+| Claude Opus 5.5 (medium) on Claude Pro | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 20.7% | 20.2% |
+| DeepSeek V4.1 Flash 1017 (max) on API-cost fallback | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| GPT-6 Astra (high) on ChatGPT Plus | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| GPT-6 Astra (high) on ChatGPT Pro 100 | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.1% | 0.2% |
+| GPT-6 Astra (high) on ChatGPT Pro 200 | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.3% | 0.2% |
+| GPT-6 Astra (high) on ChatGPT Pro 500 | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.2% | 0.2% |
+| GPT-6 Luna (high) on ChatGPT Plus | 0.0% | — | — | — | — | — | — |
+| GPT-6 Luna (high) on ChatGPT Pro 100 | 0.0% | — | — | — | — | — | — |
+| GPT-6 Luna (high) on ChatGPT Pro 200 | 0.0% | — | — | — | — | — | — |
+| GPT-6 Luna (high) on ChatGPT Pro 500 | 0.0% | — | — | — | — | — | — |
+| GPT-6 Luna (max) on ChatGPT Plus | 0.0% | — | — | — | — | — | — |
+| GPT-6 Luna (max) on ChatGPT Pro 100 | 0.0% | — | — | — | — | — | — |
+| GPT-6 Luna (max) on ChatGPT Pro 200 | 0.0% | — | — | — | — | — | — |
+| GPT-6 Luna (max) on ChatGPT Pro 500 | 0.0% | — | — | — | — | — | — |
+| GPT-6 Luna (medium) on ChatGPT Plus | 0.0% | — | — | — | — | — | — |
+| GPT-6 Luna (medium) on ChatGPT Pro 100 | 0.0% | — | — | — | — | — | — |
+| GPT-6 Luna (medium) on ChatGPT Pro 200 | 0.0% | — | — | — | — | — | — |
+| GPT-6 Luna (medium) on ChatGPT Pro 500 | 0.0% | — | — | — | — | — | — |
+| GPT-6 Luna (xhigh) on ChatGPT Plus | 0.0% | — | — | — | — | — | — |
+| GPT-6 Luna (xhigh) on ChatGPT Pro 100 | 0.0% | — | — | — | — | — | — |
+| GPT-6 Luna (xhigh) on ChatGPT Pro 200 | 0.0% | — | — | — | — | — | — |
+| GPT-6 Luna (xhigh) on ChatGPT Pro 500 | 0.0% | — | — | — | — | — | — |
+| GPT-6.1 Sol (high) on ChatGPT Plus | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 18.4% | 17.3% |
+| GPT-6.1 Sol (high) on ChatGPT Pro 100 | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 18.4% | 17.3% |
+| GPT-6.1 Sol (high) on ChatGPT Pro 200 | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| GPT-6.1 Sol (high) on ChatGPT Pro 500 | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 20.4% | 19.4% |
+| GPT-6.1 Sol (low) on ChatGPT Plus | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| GPT-6.1 Sol (low) on ChatGPT Pro 100 | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| GPT-6.1 Sol (low) on ChatGPT Pro 200 | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| GPT-6.1 Sol (low) on ChatGPT Pro 500 | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| GPT-6.1 Sol (medium) on ChatGPT Plus | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 3.3% | 3.4% |
+| GPT-6.1 Sol (medium) on ChatGPT Pro 100 | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 3.3% | 3.4% |
+| GPT-6.1 Sol (medium) on ChatGPT Pro 200 | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| GPT-6.1 Sol (medium) on ChatGPT Pro 500 | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 3.8% | 3.9% |
+| GPT-6.1 Terra (high) on ChatGPT Plus | 0.0% | — | — | — | — | — | — |
+| GPT-6.1 Terra (high) on ChatGPT Pro 100 | 0.0% | — | — | — | — | — | — |
+| GPT-6.1 Terra (high) on ChatGPT Pro 200 | 0.0% | — | — | — | — | — | — |
+| GPT-6.1 Terra (high) on ChatGPT Pro 500 | 0.0% | — | — | — | — | — | — |
+| GPT-6.1 Terra (max) on ChatGPT Plus | 0.0% | — | — | — | — | — | — |
+| GPT-6.1 Terra (max) on ChatGPT Pro 100 | 0.0% | — | — | — | — | — | — |
+| GPT-6.1 Terra (max) on ChatGPT Pro 200 | 0.0% | — | — | — | — | — | — |
+| GPT-6.1 Terra (max) on ChatGPT Pro 500 | 0.0% | — | — | — | — | — | — |
+| GPT-6.1 Terra (medium) on ChatGPT Plus | 0.0% | — | — | — | — | — | — |
+| GPT-6.1 Terra (medium) on ChatGPT Pro 100 | 0.0% | — | — | — | — | — | — |
+| GPT-6.1 Terra (medium) on ChatGPT Pro 200 | 0.0% | — | — | — | — | — | — |
+| GPT-6.1 Terra (medium) on ChatGPT Pro 500 | 0.0% | — | — | — | — | — | — |
+| GPT-6.1 Terra (xhigh) on ChatGPT Plus | 0.0% | — | — | — | — | — | — |
+| GPT-6.1 Terra (xhigh) on ChatGPT Pro 100 | 0.0% | — | — | — | — | — | — |
+| GPT-6.1 Terra (xhigh) on ChatGPT Pro 200 | 0.0% | — | — | — | — | — | — |
+| GPT-6.1 Terra (xhigh) on ChatGPT Pro 500 | 0.0% | — | — | — | — | — | — |
+| Gemini 4 Argon (high) on API-cost fallback | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| Kimi K3.1 Pro (max) on API-cost fallback | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| MiMo-V2.6-Pro on MiMo Token Plan Lite | 0.0% | — | — | — | — | — | — |
+| MiMo-V2.6-Pro on MiMo Token Plan Max | 0.0% | — | — | — | — | — | — |
+| MiMo-V2.6-Pro on MiMo Token Plan Pro | 0.0% | — | — | — | — | — | — |
+| MiMo-V2.6-Pro on MiMo Token Plan Standard | 0.0% | — | — | — | — | — | — |
 
 ### Plan basis: on the frontier
 
-| Configuration | S0 | S1 | S2 | S1 endpoint-heavy | S1M | S1T |
-|---|---:|---:|---:|---:|---:|---:|
-| Claude Haiku 5.5 (high) on Claude Max 20x | 0.0% | — | — | — | — | — |
-| Claude Haiku 5.5 (high) on Claude Max 5x | 0.0% | — | — | — | — | — |
-| Claude Haiku 5.5 (high) on Claude Pro | 100.0% | — | — | — | — | — |
-| Claude Haiku 5.5 (medium) on Claude Max 20x | 0.0% | — | — | — | — | — |
-| Claude Haiku 5.5 (medium) on Claude Max 5x | 0.0% | — | — | — | — | — |
-| Claude Haiku 5.5 (medium) on Claude Pro | 100.0% | — | — | — | — | — |
-| Claude Opus 5.5 (high) on Claude Max 20x | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| Claude Opus 5.5 (high) on Claude Max 5x | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| Claude Opus 5.5 (high) on Claude Pro | 100.0% | 100.0% | 100.0% | 100.0% | 100.0% | 81.9% |
-| Claude Opus 5.5 (medium) on Claude Max 20x | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| Claude Opus 5.5 (medium) on Claude Max 5x | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| Claude Opus 5.5 (medium) on Claude Pro | 100.0% | 100.0% | 100.0% | 100.0% | 100.0% | 100.0% |
-| DeepSeek V4.1 Flash 1017 (max) on API-cost fallback | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| GPT-6 Astra (high) on ChatGPT Plus | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| GPT-6 Astra (high) on ChatGPT Pro 100 | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| GPT-6 Astra (high) on ChatGPT Pro 200 | 100.0% | 100.0% | 93.7% | 100.0% | 100.0% | 50.1% |
-| GPT-6 Astra (high) on ChatGPT Pro 500 | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| GPT-6 Luna (high) on ChatGPT Plus | 0.0% | — | — | — | — | — |
-| GPT-6 Luna (high) on ChatGPT Pro 100 | 0.0% | — | — | — | — | — |
-| GPT-6 Luna (high) on ChatGPT Pro 200 | 0.0% | — | — | — | — | — |
-| GPT-6 Luna (high) on ChatGPT Pro 500 | 0.0% | — | — | — | — | — |
-| GPT-6 Luna (max) on ChatGPT Plus | 0.0% | — | — | — | — | — |
-| GPT-6 Luna (max) on ChatGPT Pro 100 | 0.0% | — | — | — | — | — |
-| GPT-6 Luna (max) on ChatGPT Pro 200 | 0.0% | — | — | — | — | — |
-| GPT-6 Luna (max) on ChatGPT Pro 500 | 100.0% | — | — | — | — | — |
-| GPT-6 Luna (medium) on ChatGPT Plus | 0.0% | — | — | — | — | — |
-| GPT-6 Luna (medium) on ChatGPT Pro 100 | 0.0% | — | — | — | — | — |
-| GPT-6 Luna (medium) on ChatGPT Pro 200 | 0.0% | — | — | — | — | — |
-| GPT-6 Luna (medium) on ChatGPT Pro 500 | 0.0% | — | — | — | — | — |
-| GPT-6 Luna (xhigh) on ChatGPT Plus | 0.0% | — | — | — | — | — |
-| GPT-6 Luna (xhigh) on ChatGPT Pro 100 | 0.0% | — | — | — | — | — |
-| GPT-6 Luna (xhigh) on ChatGPT Pro 200 | 0.0% | — | — | — | — | — |
-| GPT-6 Luna (xhigh) on ChatGPT Pro 500 | 0.0% | — | — | — | — | — |
-| GPT-6.1 Sol (high) on ChatGPT Plus | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| GPT-6.1 Sol (high) on ChatGPT Pro 100 | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| GPT-6.1 Sol (high) on ChatGPT Pro 200 | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| GPT-6.1 Sol (high) on ChatGPT Pro 500 | 0.0% | 0.0% | 0.1% | 0.0% | 0.0% | 28.7% |
-| GPT-6.1 Sol (low) on ChatGPT Plus | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| GPT-6.1 Sol (low) on ChatGPT Pro 100 | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| GPT-6.1 Sol (low) on ChatGPT Pro 200 | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| GPT-6.1 Sol (low) on ChatGPT Pro 500 | 0.0% | 100.0% | 100.0% | 100.0% | 100.0% | 100.0% |
-| GPT-6.1 Sol (medium) on ChatGPT Plus | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| GPT-6.1 Sol (medium) on ChatGPT Pro 100 | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| GPT-6.1 Sol (medium) on ChatGPT Pro 200 | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| GPT-6.1 Sol (medium) on ChatGPT Pro 500 | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 26.8% |
-| GPT-6.1 Terra (high) on ChatGPT Plus | 0.0% | — | — | — | — | — |
-| GPT-6.1 Terra (high) on ChatGPT Pro 100 | 0.0% | — | — | — | — | — |
-| GPT-6.1 Terra (high) on ChatGPT Pro 200 | 0.0% | — | — | — | — | — |
-| GPT-6.1 Terra (high) on ChatGPT Pro 500 | 100.0% | — | — | — | — | — |
-| GPT-6.1 Terra (max) on ChatGPT Plus | 0.0% | — | — | — | — | — |
-| GPT-6.1 Terra (max) on ChatGPT Pro 100 | 0.0% | — | — | — | — | — |
-| GPT-6.1 Terra (max) on ChatGPT Pro 200 | 0.0% | — | — | — | — | — |
-| GPT-6.1 Terra (max) on ChatGPT Pro 500 | 0.0% | — | — | — | — | — |
-| GPT-6.1 Terra (medium) on ChatGPT Plus | 0.0% | — | — | — | — | — |
-| GPT-6.1 Terra (medium) on ChatGPT Pro 100 | 0.0% | — | — | — | — | — |
-| GPT-6.1 Terra (medium) on ChatGPT Pro 200 | 0.0% | — | — | — | — | — |
-| GPT-6.1 Terra (medium) on ChatGPT Pro 500 | 100.0% | — | — | — | — | — |
-| GPT-6.1 Terra (xhigh) on ChatGPT Plus | 0.0% | — | — | — | — | — |
-| GPT-6.1 Terra (xhigh) on ChatGPT Pro 100 | 0.0% | — | — | — | — | — |
-| GPT-6.1 Terra (xhigh) on ChatGPT Pro 200 | 0.0% | — | — | — | — | — |
-| GPT-6.1 Terra (xhigh) on ChatGPT Pro 500 | 100.0% | — | — | — | — | — |
-| Gemini 4 Argon (high) on API-cost fallback | 0.0% | 0.0% | 0.1% | 0.0% | 0.0% | 9.7% |
-| Kimi K3.1 Pro (max) on API-cost fallback | 0.0% | 0.0% | 34.6% | 0.0% | 0.0% | 28.3% |
-| MiMo-V2.6-Pro on MiMo Token Plan Lite | 0.0% | — | — | — | — | — |
-| MiMo-V2.6-Pro on MiMo Token Plan Max | 0.0% | — | — | — | — | — |
-| MiMo-V2.6-Pro on MiMo Token Plan Pro | 0.0% | — | — | — | — | — |
-| MiMo-V2.6-Pro on MiMo Token Plan Standard | 0.0% | — | — | — | — | — |
+| Configuration | S0 | S1 | S2 | S1 endpoint-heavy | S1M | S1T | S1T mean-preserving |
+|---|---:|---:|---:|---:|---:|---:|---:|
+| Claude Haiku 5.5 (high) on Claude Max 20x | 0.0% | — | — | — | — | — | — |
+| Claude Haiku 5.5 (high) on Claude Max 5x | 0.0% | — | — | — | — | — | — |
+| Claude Haiku 5.5 (high) on Claude Pro | 100.0% | — | — | — | — | — | — |
+| Claude Haiku 5.5 (medium) on Claude Max 20x | 0.0% | — | — | — | — | — | — |
+| Claude Haiku 5.5 (medium) on Claude Max 5x | 0.0% | — | — | — | — | — | — |
+| Claude Haiku 5.5 (medium) on Claude Pro | 100.0% | — | — | — | — | — | — |
+| Claude Opus 5.5 (high) on Claude Max 20x | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| Claude Opus 5.5 (high) on Claude Max 5x | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| Claude Opus 5.5 (high) on Claude Pro | 100.0% | 100.0% | 100.0% | 100.0% | 100.0% | 81.9% | 83.2% |
+| Claude Opus 5.5 (medium) on Claude Max 20x | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| Claude Opus 5.5 (medium) on Claude Max 5x | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| Claude Opus 5.5 (medium) on Claude Pro | 100.0% | 100.0% | 100.0% | 100.0% | 100.0% | 100.0% | 100.0% |
+| DeepSeek V4.1 Flash 1017 (max) on API-cost fallback | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| GPT-6 Astra (high) on ChatGPT Plus | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| GPT-6 Astra (high) on ChatGPT Pro 100 | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| GPT-6 Astra (high) on ChatGPT Pro 200 | 100.0% | 100.0% | 93.7% | 100.0% | 100.0% | 50.1% | 51.8% |
+| GPT-6 Astra (high) on ChatGPT Pro 500 | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| GPT-6 Luna (high) on ChatGPT Plus | 0.0% | — | — | — | — | — | — |
+| GPT-6 Luna (high) on ChatGPT Pro 100 | 0.0% | — | — | — | — | — | — |
+| GPT-6 Luna (high) on ChatGPT Pro 200 | 0.0% | — | — | — | — | — | — |
+| GPT-6 Luna (high) on ChatGPT Pro 500 | 0.0% | — | — | — | — | — | — |
+| GPT-6 Luna (max) on ChatGPT Plus | 0.0% | — | — | — | — | — | — |
+| GPT-6 Luna (max) on ChatGPT Pro 100 | 0.0% | — | — | — | — | — | — |
+| GPT-6 Luna (max) on ChatGPT Pro 200 | 0.0% | — | — | — | — | — | — |
+| GPT-6 Luna (max) on ChatGPT Pro 500 | 100.0% | — | — | — | — | — | — |
+| GPT-6 Luna (medium) on ChatGPT Plus | 0.0% | — | — | — | — | — | — |
+| GPT-6 Luna (medium) on ChatGPT Pro 100 | 0.0% | — | — | — | — | — | — |
+| GPT-6 Luna (medium) on ChatGPT Pro 200 | 0.0% | — | — | — | — | — | — |
+| GPT-6 Luna (medium) on ChatGPT Pro 500 | 0.0% | — | — | — | — | — | — |
+| GPT-6 Luna (xhigh) on ChatGPT Plus | 0.0% | — | — | — | — | — | — |
+| GPT-6 Luna (xhigh) on ChatGPT Pro 100 | 0.0% | — | — | — | — | — | — |
+| GPT-6 Luna (xhigh) on ChatGPT Pro 200 | 0.0% | — | — | — | — | — | — |
+| GPT-6 Luna (xhigh) on ChatGPT Pro 500 | 0.0% | — | — | — | — | — | — |
+| GPT-6.1 Sol (high) on ChatGPT Plus | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| GPT-6.1 Sol (high) on ChatGPT Pro 100 | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| GPT-6.1 Sol (high) on ChatGPT Pro 200 | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| GPT-6.1 Sol (high) on ChatGPT Pro 500 | 0.0% | 0.0% | 0.1% | 0.0% | 0.0% | 28.7% | 28.8% |
+| GPT-6.1 Sol (low) on ChatGPT Plus | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| GPT-6.1 Sol (low) on ChatGPT Pro 100 | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| GPT-6.1 Sol (low) on ChatGPT Pro 200 | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| GPT-6.1 Sol (low) on ChatGPT Pro 500 | 0.0% | 100.0% | 100.0% | 100.0% | 100.0% | 100.0% | 100.0% |
+| GPT-6.1 Sol (medium) on ChatGPT Plus | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| GPT-6.1 Sol (medium) on ChatGPT Pro 100 | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| GPT-6.1 Sol (medium) on ChatGPT Pro 200 | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| GPT-6.1 Sol (medium) on ChatGPT Pro 500 | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 26.8% | 26.1% |
+| GPT-6.1 Terra (high) on ChatGPT Plus | 0.0% | — | — | — | — | — | — |
+| GPT-6.1 Terra (high) on ChatGPT Pro 100 | 0.0% | — | — | — | — | — | — |
+| GPT-6.1 Terra (high) on ChatGPT Pro 200 | 0.0% | — | — | — | — | — | — |
+| GPT-6.1 Terra (high) on ChatGPT Pro 500 | 100.0% | — | — | — | — | — | — |
+| GPT-6.1 Terra (max) on ChatGPT Plus | 0.0% | — | — | — | — | — | — |
+| GPT-6.1 Terra (max) on ChatGPT Pro 100 | 0.0% | — | — | — | — | — | — |
+| GPT-6.1 Terra (max) on ChatGPT Pro 200 | 0.0% | — | — | — | — | — | — |
+| GPT-6.1 Terra (max) on ChatGPT Pro 500 | 0.0% | — | — | — | — | — | — |
+| GPT-6.1 Terra (medium) on ChatGPT Plus | 0.0% | — | — | — | — | — | — |
+| GPT-6.1 Terra (medium) on ChatGPT Pro 100 | 0.0% | — | — | — | — | — | — |
+| GPT-6.1 Terra (medium) on ChatGPT Pro 200 | 0.0% | — | — | — | — | — | — |
+| GPT-6.1 Terra (medium) on ChatGPT Pro 500 | 100.0% | — | — | — | — | — | — |
+| GPT-6.1 Terra (xhigh) on ChatGPT Plus | 0.0% | — | — | — | — | — | — |
+| GPT-6.1 Terra (xhigh) on ChatGPT Pro 100 | 0.0% | — | — | — | — | — | — |
+| GPT-6.1 Terra (xhigh) on ChatGPT Pro 200 | 0.0% | — | — | — | — | — | — |
+| GPT-6.1 Terra (xhigh) on ChatGPT Pro 500 | 100.0% | — | — | — | — | — | — |
+| Gemini 4 Argon (high) on API-cost fallback | 0.0% | 0.0% | 0.1% | 0.0% | 0.0% | 9.7% | 9.7% |
+| Kimi K3.1 Pro (max) on API-cost fallback | 0.0% | 0.0% | 34.6% | 0.0% | 0.0% | 28.3% | 28.4% |
+| MiMo-V2.6-Pro on MiMo Token Plan Lite | 0.0% | — | — | — | — | — | — |
+| MiMo-V2.6-Pro on MiMo Token Plan Max | 0.0% | — | — | — | — | — | — |
+| MiMo-V2.6-Pro on MiMo Token Plan Pro | 0.0% | — | — | — | — | — | — |
+| MiMo-V2.6-Pro on MiMo Token Plan Standard | 0.0% | — | — | — | — | — | — |
 
 ### Plan basis: value-score dispersion (SD; covariance term)
 
-| Configuration | S0 | S1 | S2 | S1 endpoint-heavy | S1M | S1T |
-|---|---:|---:|---:|---:|---:|---:|
-| Claude Haiku 5.5 (high) on Claude Max 20x | 0.00 (+0.00) | — | — | — | — | — |
-| Claude Haiku 5.5 (high) on Claude Max 5x | 0.00 (+0.00) | — | — | — | — | — |
-| Claude Haiku 5.5 (high) on Claude Pro | 0.00 (+0.00) | — | — | — | — | — |
-| Claude Haiku 5.5 (medium) on Claude Max 20x | 0.00 (+0.00) | — | — | — | — | — |
-| Claude Haiku 5.5 (medium) on Claude Max 5x | 0.00 (+0.00) | — | — | — | — | — |
-| Claude Haiku 5.5 (medium) on Claude Pro | 0.00 (+0.00) | — | — | — | — | — |
-| Claude Opus 5.5 (high) on Claude Max 20x | 0.00 (+0.00) | 0.00 (+0.00) | 1.57 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.37 (+0.00) |
-| Claude Opus 5.5 (high) on Claude Max 5x | 0.00 (+0.00) | 0.00 (+0.00) | 1.57 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.37 (+0.00) |
-| Claude Opus 5.5 (high) on Claude Pro | 0.00 (+0.00) | 0.00 (+0.00) | 1.57 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.37 (+0.00) |
-| Claude Opus 5.5 (medium) on Claude Max 20x | 0.00 (+0.00) | 0.00 (+0.00) | 1.59 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.40 (+0.00) |
-| Claude Opus 5.5 (medium) on Claude Max 5x | 0.00 (+0.00) | 0.00 (+0.00) | 1.59 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.40 (+0.00) |
-| Claude Opus 5.5 (medium) on Claude Pro | 0.00 (+0.00) | 0.00 (+0.00) | 1.59 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.40 (+0.00) |
-| DeepSeek V4.1 Flash 1017 (max) on API-cost fallback | 0.00 (+0.00) | 0.00 (+0.00) | 1.50 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.49 (+0.00) |
-| GPT-6 Astra (high) on ChatGPT Plus | 0.00 (+0.00) | 0.00 (+0.00) | 1.45 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.41 (+0.00) |
-| GPT-6 Astra (high) on ChatGPT Pro 100 | 0.00 (+0.00) | 0.00 (+0.00) | 1.45 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.41 (+0.00) |
-| GPT-6 Astra (high) on ChatGPT Pro 200 | 0.00 (+0.00) | 0.00 (+0.00) | 1.45 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.41 (+0.00) |
-| GPT-6 Astra (high) on ChatGPT Pro 500 | 0.00 (+0.00) | 0.00 (+0.00) | 1.45 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.41 (+0.00) |
-| GPT-6 Luna (high) on ChatGPT Plus | 0.00 (+0.00) | — | — | — | — | — |
-| GPT-6 Luna (high) on ChatGPT Pro 100 | 0.00 (+0.00) | — | — | — | — | — |
-| GPT-6 Luna (high) on ChatGPT Pro 200 | 0.00 (+0.00) | — | — | — | — | — |
-| GPT-6 Luna (high) on ChatGPT Pro 500 | 0.00 (+0.00) | — | — | — | — | — |
-| GPT-6 Luna (max) on ChatGPT Plus | 0.00 (+0.00) | — | — | — | — | — |
-| GPT-6 Luna (max) on ChatGPT Pro 100 | 0.00 (+0.00) | — | — | — | — | — |
-| GPT-6 Luna (max) on ChatGPT Pro 200 | 0.00 (+0.00) | — | — | — | — | — |
-| GPT-6 Luna (max) on ChatGPT Pro 500 | 0.00 (+0.00) | — | — | — | — | — |
-| GPT-6 Luna (medium) on ChatGPT Plus | 0.00 (+0.00) | — | — | — | — | — |
-| GPT-6 Luna (medium) on ChatGPT Pro 100 | 0.00 (+0.00) | — | — | — | — | — |
-| GPT-6 Luna (medium) on ChatGPT Pro 200 | 0.00 (+0.00) | — | — | — | — | — |
-| GPT-6 Luna (medium) on ChatGPT Pro 500 | 0.00 (+0.00) | — | — | — | — | — |
-| GPT-6 Luna (xhigh) on ChatGPT Plus | 0.00 (+0.00) | — | — | — | — | — |
-| GPT-6 Luna (xhigh) on ChatGPT Pro 100 | 0.00 (+0.00) | — | — | — | — | — |
-| GPT-6 Luna (xhigh) on ChatGPT Pro 200 | 0.00 (+0.00) | — | — | — | — | — |
-| GPT-6 Luna (xhigh) on ChatGPT Pro 500 | 0.00 (+0.00) | — | — | — | — | — |
-| GPT-6.1 Sol (high) on ChatGPT Plus | 0.00 (+0.00) | 0.00 (+0.00) | 1.47 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.41 (+0.00) |
-| GPT-6.1 Sol (high) on ChatGPT Pro 100 | 0.00 (+0.00) | 0.00 (+0.00) | 1.47 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.41 (+0.00) |
-| GPT-6.1 Sol (high) on ChatGPT Pro 200 | 0.00 (+0.00) | 0.00 (+0.00) | 1.47 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.41 (+0.00) |
-| GPT-6.1 Sol (high) on ChatGPT Pro 500 | 0.00 (+0.00) | 0.00 (+0.00) | 1.47 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.41 (+0.00) |
-| GPT-6.1 Sol (low) on ChatGPT Plus | 0.00 (+0.00) | 0.00 (+0.00) | 1.80 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.43 (+0.00) |
-| GPT-6.1 Sol (low) on ChatGPT Pro 100 | 0.00 (+0.00) | 0.00 (+0.00) | 1.80 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.43 (+0.00) |
-| GPT-6.1 Sol (low) on ChatGPT Pro 200 | 0.00 (+0.00) | 0.00 (+0.00) | 1.80 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.43 (+0.00) |
-| GPT-6.1 Sol (low) on ChatGPT Pro 500 | 0.00 (+0.00) | 0.00 (+0.00) | 1.80 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.43 (+0.00) |
-| GPT-6.1 Sol (medium) on ChatGPT Plus | 0.00 (+0.00) | 0.00 (+0.00) | 1.57 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.44 (+0.00) |
-| GPT-6.1 Sol (medium) on ChatGPT Pro 100 | 0.00 (+0.00) | 0.00 (+0.00) | 1.57 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.44 (+0.00) |
-| GPT-6.1 Sol (medium) on ChatGPT Pro 200 | 0.00 (+0.00) | 0.00 (+0.00) | 1.57 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.44 (+0.00) |
-| GPT-6.1 Sol (medium) on ChatGPT Pro 500 | 0.00 (+0.00) | 0.00 (+0.00) | 1.57 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.44 (+0.00) |
-| GPT-6.1 Terra (high) on ChatGPT Plus | 0.00 (+0.00) | — | — | — | — | — |
-| GPT-6.1 Terra (high) on ChatGPT Pro 100 | 0.00 (+0.00) | — | — | — | — | — |
-| GPT-6.1 Terra (high) on ChatGPT Pro 200 | 0.00 (+0.00) | — | — | — | — | — |
-| GPT-6.1 Terra (high) on ChatGPT Pro 500 | 0.00 (+0.00) | — | — | — | — | — |
-| GPT-6.1 Terra (max) on ChatGPT Plus | 0.00 (+0.00) | — | — | — | — | — |
-| GPT-6.1 Terra (max) on ChatGPT Pro 100 | 0.00 (+0.00) | — | — | — | — | — |
-| GPT-6.1 Terra (max) on ChatGPT Pro 200 | 0.00 (+0.00) | — | — | — | — | — |
-| GPT-6.1 Terra (max) on ChatGPT Pro 500 | 0.00 (+0.00) | — | — | — | — | — |
-| GPT-6.1 Terra (medium) on ChatGPT Plus | 0.00 (+0.00) | — | — | — | — | — |
-| GPT-6.1 Terra (medium) on ChatGPT Pro 100 | 0.00 (+0.00) | — | — | — | — | — |
-| GPT-6.1 Terra (medium) on ChatGPT Pro 200 | 0.00 (+0.00) | — | — | — | — | — |
-| GPT-6.1 Terra (medium) on ChatGPT Pro 500 | 0.00 (+0.00) | — | — | — | — | — |
-| GPT-6.1 Terra (xhigh) on ChatGPT Plus | 0.00 (+0.00) | — | — | — | — | — |
-| GPT-6.1 Terra (xhigh) on ChatGPT Pro 100 | 0.00 (+0.00) | — | — | — | — | — |
-| GPT-6.1 Terra (xhigh) on ChatGPT Pro 200 | 0.00 (+0.00) | — | — | — | — | — |
-| GPT-6.1 Terra (xhigh) on ChatGPT Pro 500 | 0.00 (+0.00) | — | — | — | — | — |
-| Gemini 4 Argon (high) on API-cost fallback | 0.00 (+0.00) | 0.00 (+0.00) | 1.55 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.53 (+0.00) |
-| Kimi K3.1 Pro (max) on API-cost fallback | 0.00 (+0.00) | 0.00 (+0.00) | 1.74 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.41 (+0.00) |
-| MiMo-V2.6-Pro on MiMo Token Plan Lite | 0.00 (+0.00) | — | — | — | — | — |
-| MiMo-V2.6-Pro on MiMo Token Plan Max | 0.00 (+0.00) | — | — | — | — | — |
-| MiMo-V2.6-Pro on MiMo Token Plan Pro | 0.00 (+0.00) | — | — | — | — | — |
-| MiMo-V2.6-Pro on MiMo Token Plan Standard | 0.00 (+0.00) | — | — | — | — | — |
+| Configuration | S0 | S1 | S2 | S1 endpoint-heavy | S1M | S1T | S1T mean-preserving |
+|---|---:|---:|---:|---:|---:|---:|---:|
+| Claude Haiku 5.5 (high) on Claude Max 20x | 0.00 (+0.00) | — | — | — | — | — | — |
+| Claude Haiku 5.5 (high) on Claude Max 5x | 0.00 (+0.00) | — | — | — | — | — | — |
+| Claude Haiku 5.5 (high) on Claude Pro | 0.00 (+0.00) | — | — | — | — | — | — |
+| Claude Haiku 5.5 (medium) on Claude Max 20x | 0.00 (+0.00) | — | — | — | — | — | — |
+| Claude Haiku 5.5 (medium) on Claude Max 5x | 0.00 (+0.00) | — | — | — | — | — | — |
+| Claude Haiku 5.5 (medium) on Claude Pro | 0.00 (+0.00) | — | — | — | — | — | — |
+| Claude Opus 5.5 (high) on Claude Max 20x | 0.00 (+0.00) | 0.00 (+0.00) | 1.57 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.37 (+0.00) | 1.32 (+0.00) |
+| Claude Opus 5.5 (high) on Claude Max 5x | 0.00 (+0.00) | 0.00 (+0.00) | 1.57 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.37 (+0.00) | 1.32 (+0.00) |
+| Claude Opus 5.5 (high) on Claude Pro | 0.00 (+0.00) | 0.00 (+0.00) | 1.57 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.37 (+0.00) | 1.32 (+0.00) |
+| Claude Opus 5.5 (medium) on Claude Max 20x | 0.00 (+0.00) | 0.00 (+0.00) | 1.59 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.40 (+0.00) | 1.33 (+0.00) |
+| Claude Opus 5.5 (medium) on Claude Max 5x | 0.00 (+0.00) | 0.00 (+0.00) | 1.59 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.40 (+0.00) | 1.33 (+0.00) |
+| Claude Opus 5.5 (medium) on Claude Pro | 0.00 (+0.00) | 0.00 (+0.00) | 1.59 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.40 (+0.00) | 1.33 (+0.00) |
+| DeepSeek V4.1 Flash 1017 (max) on API-cost fallback | 0.00 (+0.00) | 0.00 (+0.00) | 1.50 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.49 (+0.00) | 1.47 (+0.00) |
+| GPT-6 Astra (high) on ChatGPT Plus | 0.00 (+0.00) | 0.00 (+0.00) | 1.45 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.41 (+0.00) | 1.35 (+0.00) |
+| GPT-6 Astra (high) on ChatGPT Pro 100 | 0.00 (+0.00) | 0.00 (+0.00) | 1.45 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.41 (+0.00) | 1.35 (+0.00) |
+| GPT-6 Astra (high) on ChatGPT Pro 200 | 0.00 (+0.00) | 0.00 (+0.00) | 1.45 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.41 (+0.00) | 1.35 (+0.00) |
+| GPT-6 Astra (high) on ChatGPT Pro 500 | 0.00 (+0.00) | 0.00 (+0.00) | 1.45 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.41 (+0.00) | 1.35 (+0.00) |
+| GPT-6 Luna (high) on ChatGPT Plus | 0.00 (+0.00) | — | — | — | — | — | — |
+| GPT-6 Luna (high) on ChatGPT Pro 100 | 0.00 (+0.00) | — | — | — | — | — | — |
+| GPT-6 Luna (high) on ChatGPT Pro 200 | 0.00 (+0.00) | — | — | — | — | — | — |
+| GPT-6 Luna (high) on ChatGPT Pro 500 | 0.00 (+0.00) | — | — | — | — | — | — |
+| GPT-6 Luna (max) on ChatGPT Plus | 0.00 (+0.00) | — | — | — | — | — | — |
+| GPT-6 Luna (max) on ChatGPT Pro 100 | 0.00 (+0.00) | — | — | — | — | — | — |
+| GPT-6 Luna (max) on ChatGPT Pro 200 | 0.00 (+0.00) | — | — | — | — | — | — |
+| GPT-6 Luna (max) on ChatGPT Pro 500 | 0.00 (+0.00) | — | — | — | — | — | — |
+| GPT-6 Luna (medium) on ChatGPT Plus | 0.00 (+0.00) | — | — | — | — | — | — |
+| GPT-6 Luna (medium) on ChatGPT Pro 100 | 0.00 (+0.00) | — | — | — | — | — | — |
+| GPT-6 Luna (medium) on ChatGPT Pro 200 | 0.00 (+0.00) | — | — | — | — | — | — |
+| GPT-6 Luna (medium) on ChatGPT Pro 500 | 0.00 (+0.00) | — | — | — | — | — | — |
+| GPT-6 Luna (xhigh) on ChatGPT Plus | 0.00 (+0.00) | — | — | — | — | — | — |
+| GPT-6 Luna (xhigh) on ChatGPT Pro 100 | 0.00 (+0.00) | — | — | — | — | — | — |
+| GPT-6 Luna (xhigh) on ChatGPT Pro 200 | 0.00 (+0.00) | — | — | — | — | — | — |
+| GPT-6 Luna (xhigh) on ChatGPT Pro 500 | 0.00 (+0.00) | — | — | — | — | — | — |
+| GPT-6.1 Sol (high) on ChatGPT Plus | 0.00 (+0.00) | 0.00 (+0.00) | 1.47 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.41 (+0.00) | 1.37 (+0.00) |
+| GPT-6.1 Sol (high) on ChatGPT Pro 100 | 0.00 (+0.00) | 0.00 (+0.00) | 1.47 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.41 (+0.00) | 1.37 (+0.00) |
+| GPT-6.1 Sol (high) on ChatGPT Pro 200 | 0.00 (+0.00) | 0.00 (+0.00) | 1.47 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.41 (+0.00) | 1.37 (+0.00) |
+| GPT-6.1 Sol (high) on ChatGPT Pro 500 | 0.00 (+0.00) | 0.00 (+0.00) | 1.47 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.41 (+0.00) | 1.37 (+0.00) |
+| GPT-6.1 Sol (low) on ChatGPT Plus | 0.00 (+0.00) | 0.00 (+0.00) | 1.80 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.43 (+0.00) | 1.39 (+0.00) |
+| GPT-6.1 Sol (low) on ChatGPT Pro 100 | 0.00 (+0.00) | 0.00 (+0.00) | 1.80 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.43 (+0.00) | 1.39 (+0.00) |
+| GPT-6.1 Sol (low) on ChatGPT Pro 200 | 0.00 (+0.00) | 0.00 (+0.00) | 1.80 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.43 (+0.00) | 1.39 (+0.00) |
+| GPT-6.1 Sol (low) on ChatGPT Pro 500 | 0.00 (+0.00) | 0.00 (+0.00) | 1.80 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.43 (+0.00) | 1.39 (+0.00) |
+| GPT-6.1 Sol (medium) on ChatGPT Plus | 0.00 (+0.00) | 0.00 (+0.00) | 1.57 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.44 (+0.00) | 1.36 (+0.00) |
+| GPT-6.1 Sol (medium) on ChatGPT Pro 100 | 0.00 (+0.00) | 0.00 (+0.00) | 1.57 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.44 (+0.00) | 1.36 (+0.00) |
+| GPT-6.1 Sol (medium) on ChatGPT Pro 200 | 0.00 (+0.00) | 0.00 (+0.00) | 1.57 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.44 (+0.00) | 1.36 (+0.00) |
+| GPT-6.1 Sol (medium) on ChatGPT Pro 500 | 0.00 (+0.00) | 0.00 (+0.00) | 1.57 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.44 (+0.00) | 1.36 (+0.00) |
+| GPT-6.1 Terra (high) on ChatGPT Plus | 0.00 (+0.00) | — | — | — | — | — | — |
+| GPT-6.1 Terra (high) on ChatGPT Pro 100 | 0.00 (+0.00) | — | — | — | — | — | — |
+| GPT-6.1 Terra (high) on ChatGPT Pro 200 | 0.00 (+0.00) | — | — | — | — | — | — |
+| GPT-6.1 Terra (high) on ChatGPT Pro 500 | 0.00 (+0.00) | — | — | — | — | — | — |
+| GPT-6.1 Terra (max) on ChatGPT Plus | 0.00 (+0.00) | — | — | — | — | — | — |
+| GPT-6.1 Terra (max) on ChatGPT Pro 100 | 0.00 (+0.00) | — | — | — | — | — | — |
+| GPT-6.1 Terra (max) on ChatGPT Pro 200 | 0.00 (+0.00) | — | — | — | — | — | — |
+| GPT-6.1 Terra (max) on ChatGPT Pro 500 | 0.00 (+0.00) | — | — | — | — | — | — |
+| GPT-6.1 Terra (medium) on ChatGPT Plus | 0.00 (+0.00) | — | — | — | — | — | — |
+| GPT-6.1 Terra (medium) on ChatGPT Pro 100 | 0.00 (+0.00) | — | — | — | — | — | — |
+| GPT-6.1 Terra (medium) on ChatGPT Pro 200 | 0.00 (+0.00) | — | — | — | — | — | — |
+| GPT-6.1 Terra (medium) on ChatGPT Pro 500 | 0.00 (+0.00) | — | — | — | — | — | — |
+| GPT-6.1 Terra (xhigh) on ChatGPT Plus | 0.00 (+0.00) | — | — | — | — | — | — |
+| GPT-6.1 Terra (xhigh) on ChatGPT Pro 100 | 0.00 (+0.00) | — | — | — | — | — | — |
+| GPT-6.1 Terra (xhigh) on ChatGPT Pro 200 | 0.00 (+0.00) | — | — | — | — | — | — |
+| GPT-6.1 Terra (xhigh) on ChatGPT Pro 500 | 0.00 (+0.00) | — | — | — | — | — | — |
+| Gemini 4 Argon (high) on API-cost fallback | 0.00 (+0.00) | 0.00 (+0.00) | 1.55 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.53 (+0.00) | 1.51 (+0.00) |
+| Kimi K3.1 Pro (max) on API-cost fallback | 0.00 (+0.00) | 0.00 (+0.00) | 1.74 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.41 (+0.00) | 1.36 (+0.00) |
+| MiMo-V2.6-Pro on MiMo Token Plan Lite | 0.00 (+0.00) | — | — | — | — | — | — |
+| MiMo-V2.6-Pro on MiMo Token Plan Max | 0.00 (+0.00) | — | — | — | — | — | — |
+| MiMo-V2.6-Pro on MiMo Token Plan Pro | 0.00 (+0.00) | — | — | — | — | — | — |
+| MiMo-V2.6-Pro on MiMo Token Plan Standard | 0.00 (+0.00) | — | — | — | — | — | — |
 
 ### Named S2 specification branches
 
@@ -695,9 +695,9 @@ The 90% rule's error bound holds per published event (candidate and kernel assig
 - **Terminal-Bench cross-source agreement (AA's mini-SWE-agent run against tbench.ai):** undefined (panel too small); 0 rows take the leaf from tbench.ai (gap fill).
 - **Workload cross-check (E41, mandatory diagnostic):** Terminal-Bench 4.0 cost per solved task on AA's own execution against basket cost: τ_b 0.35 (interval -0.07 to 0.67), low agreement; panel (20): Claude Haiku 5.5 (high), Claude Haiku 5.5 (medium), Claude Opus 5.5 (high), Claude Opus 5.5 (medium), DeepSeek V4.1 Flash 1017 (max), Gemini 4 Argon (high), GPT-6 Astra (high), GPT-6 Luna (max), GPT-6 Luna (high), GPT-6 Luna (medium), GPT-6 Luna (xhigh), GPT-6.1 Sol (high), GPT-6.1 Sol (low), GPT-6.1 Sol (medium), GPT-6.1 Terra (max), GPT-6.1 Terra (high), GPT-6.1 Terra (medium), GPT-6.1 Terra (xhigh), Kimi K3.1 Pro (max), MiMo-V2.6-Pro.
 - **Rank separability (O39, independent-task approximation):** median separation 4.37 value points (API) and 4.22 (Plan); separable adjacent ranks: API 0 of 19, Plan 0 of 29. Assumptions: tasks are independent and each leaf's score is a mean over its published task count (a binomial leaf drawn from its Jeffreys posterior Beta(k + 1/2, n - k + 1/2), O142; plug-in SDs with the proportion (k + 1/2) / (n + 1), I28); attempts averaged within a task and tasks shared across models are ignored, so the noise is approximate; GDPval-AA: each row's rating interval as AA's model page displays it, read as a 95% normal interval (AA states no level), SD = half-width / 1.96; AA-Omniscience: each of 3,000 questions scores +1, 0 or -1, with the shares from AA's accuracy and hallucination rate; Vals boards (Vibe Code Bench v1.1, Code Migration v1.1): Vals' published standard error per record, read as the leaf's SD; AI Coding Daily: judged points over its six graded projects read as a binomial share of 60 points (an assumption; the board publishes no error).
-- **FrontierCode against Cognition:** FrontierCode cross-source agreement (AA against Cognition; E234): retired (O136): the leaf is AA's FrontierCode 2.0 and Cognition's board publishes FrontierCode 1.1, so no fill or comparison is made across the two versions; panel of 0 rows.
+- **FrontierCode against Cognition:** FrontierCode 2.0 cross-source agreement (AA against Cognition, exact model and effort; E234, O153): Kendall tau 0.91 (interval 0.83 to 0.97) on 26 rows. Cognition minus AA: mean -1.5 points, largest 7.7.
 - **Gap-fill removal (E234, diagnostic):** no ranked row has a leaf from another party or the provider.
-- **Bar results without the gap fills (E234, sensitivity; labels unchanged):** cheapest displayed row as published, with fills removed, and with third-party fills no measured offset — API quality 46.7: GPT-6.1 Terra (high) in all three; API quality 37.4: Claude Haiku 5.5 (high) in all three; API quality 55.5: GPT-6.1 Sol (high) in all three; Plan quality 46.7: GPT-6.1 Terra (high) in all three; Plan quality 37.4: Claude Haiku 5.5 (high) in all three; Plan quality 55.5: Claude Opus 5.5 (high) in all three.
+- **Bar results without the gap fills (E234, sensitivity; labels unchanged):** cheapest displayed row as published, with fills removed, and with third-party fills lowered by the mean offset -1.5 points — API quality 46.7: GPT-6.1 Terra (high) in all three; API quality 37.4: Claude Haiku 5.5 (high) in all three; API quality 55.5: GPT-6.1 Sol (high) in all three; Plan quality 46.7: GPT-6.1 Terra (high) in all three; Plan quality 37.4: Claude Haiku 5.5 (high) in all three; Plan quality 55.5: Claude Opus 5.5 (high) in all three.
 - **Harness cost (O123, S2 stress):** unevaluable: no model is listed under two or more agents in AA's Coding Agent Index capture, so no agent effect is identified (O123). Coding Agent Index agents (each part of its costed configuration; none is the run behind the FrontierCode or Terminal-Bench leaf): GPT-6.1 Terra (max): Codex; DeepSeek V4.1 Flash 1017 (max): DeepSeek Harness; Gemini 4 Argon (high): Antigravity CLI; GPT-6.1 Terra (xhigh): Codex; GPT-6.1 Terra (high): Codex; GPT-6 Luna (max): Codex; GPT-6.1 Terra (medium): Codex.
 - **Quality agreement:** quality agreement (matched-panel sensitivity): Kendall tau 0.60 (interval 0.36 to 0.80) on 20 rows.
 - **Quality-substitution value agreement (API):** quality-substitution value agreement, api basis (matched-panel sensitivity): Kendall tau 0.07 (interval -0.38 to 0.47) on 20 rows.
@@ -1078,625 +1078,625 @@ Frequencies over 10,000 scenarios per run (seed 20261101); streams are defined i
 
 ### API basis: rank 1
 
-| Configuration | S0 | S1 | S2 | S1 endpoint-heavy | S1M | S1T |
-|---|---:|---:|---:|---:|---:|---:|
-| Claude Haiku 5.5 (high) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| Claude Haiku 5.5 (low) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| Claude Haiku 5.5 (max) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| Claude Haiku 5.5 (medium) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| Claude Haiku 5.5 (xhigh) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| Claude Opus 5.5 (high) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| Claude Opus 5.5 (max) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.4% |
-| Claude Opus 5.5 (medium) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| Claude Opus 5.5 (xhigh) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.3% |
-| Claude Sonnet 5.5 (max) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.2% |
-| Claude Sonnet 5.5 (xhigh) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| DeepSeek V4.1 Flash 1017 (max) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| GPT-6 Astra (high) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| GPT-6 Astra (max) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.1% |
-| GPT-6 Astra (xhigh) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.3% |
-| GPT-6 Luna (high) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| GPT-6 Luna (low) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| GPT-6 Luna (max) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| GPT-6 Luna (medium) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| GPT-6 Luna (xhigh) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| GPT-6.1 Sol (high) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 10.6% |
-| GPT-6.1 Sol (low) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| GPT-6.1 Sol (max) | 0.0% | 0.0% | 6.5% | 0.0% | 0.0% | 32.8% |
-| GPT-6.1 Sol (medium) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 1.3% |
-| GPT-6.1 Sol (xhigh) | 100.0% | 100.0% | 93.3% | 100.0% | 100.0% | 37.9% |
-| GPT-6.1 Terra (high) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| GPT-6.1 Terra (low) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| GPT-6.1 Terra (max) | 0.0% | 0.0% | 0.1% | 0.0% | 0.0% | 16.1% |
-| GPT-6.1 Terra (medium) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| GPT-6.1 Terra (xhigh) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| Gemini 4 Argon (high) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| Kimi K3.1 Pro (max) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| MiMo-V2.6-Pro | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| Configuration | S0 | S1 | S2 | S1 endpoint-heavy | S1M | S1T | S1T mean-preserving |
+|---|---:|---:|---:|---:|---:|---:|---:|
+| Claude Haiku 5.5 (high) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| Claude Haiku 5.5 (low) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| Claude Haiku 5.5 (max) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| Claude Haiku 5.5 (medium) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| Claude Haiku 5.5 (xhigh) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| Claude Opus 5.5 (high) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| Claude Opus 5.5 (max) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.4% | 0.4% |
+| Claude Opus 5.5 (medium) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| Claude Opus 5.5 (xhigh) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.3% | 0.3% |
+| Claude Sonnet 5.5 (max) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.2% | 0.3% |
+| Claude Sonnet 5.5 (xhigh) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| DeepSeek V4.1 Flash 1017 (max) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| GPT-6 Astra (high) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| GPT-6 Astra (max) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.1% | 0.1% |
+| GPT-6 Astra (xhigh) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.3% | 0.4% |
+| GPT-6 Luna (high) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| GPT-6 Luna (low) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| GPT-6 Luna (max) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| GPT-6 Luna (medium) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| GPT-6 Luna (xhigh) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| GPT-6.1 Sol (high) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 10.6% | 11.2% |
+| GPT-6.1 Sol (low) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| GPT-6.1 Sol (max) | 0.0% | 0.0% | 6.5% | 0.0% | 0.0% | 32.8% | 32.9% |
+| GPT-6.1 Sol (medium) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 1.3% | 1.3% |
+| GPT-6.1 Sol (xhigh) | 100.0% | 100.0% | 93.3% | 100.0% | 100.0% | 37.9% | 37.1% |
+| GPT-6.1 Terra (high) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| GPT-6.1 Terra (low) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| GPT-6.1 Terra (max) | 0.0% | 0.0% | 0.1% | 0.0% | 0.0% | 16.1% | 16.1% |
+| GPT-6.1 Terra (medium) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| GPT-6.1 Terra (xhigh) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| Gemini 4 Argon (high) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| Kimi K3.1 Pro (max) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| MiMo-V2.6-Pro | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
 
 ### API basis: rank 3 or better
 
-| Configuration | S0 | S1 | S2 | S1 endpoint-heavy | S1M | S1T |
-|---|---:|---:|---:|---:|---:|---:|
-| Claude Haiku 5.5 (high) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| Claude Haiku 5.5 (low) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| Claude Haiku 5.5 (max) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| Claude Haiku 5.5 (medium) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| Claude Haiku 5.5 (xhigh) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| Claude Opus 5.5 (high) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.2% |
-| Claude Opus 5.5 (max) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 4.7% |
-| Claude Opus 5.5 (medium) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| Claude Opus 5.5 (xhigh) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 3.5% |
-| Claude Sonnet 5.5 (max) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 3.9% |
-| Claude Sonnet 5.5 (xhigh) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| DeepSeek V4.1 Flash 1017 (max) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| GPT-6 Astra (high) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.2% |
-| GPT-6 Astra (max) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 1.6% |
-| GPT-6 Astra (xhigh) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 4.4% |
-| GPT-6 Luna (high) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| GPT-6 Luna (low) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| GPT-6 Luna (max) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| GPT-6 Luna (medium) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| GPT-6 Luna (xhigh) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| GPT-6.1 Sol (high) | 0.0% | 0.0% | 15.2% | 0.0% | 0.0% | 49.4% |
-| GPT-6.1 Sol (low) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| GPT-6.1 Sol (max) | 100.0% | 100.0% | 100.0% | 100.0% | 100.0% | 78.3% |
-| GPT-6.1 Sol (medium) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 12.3% |
-| GPT-6.1 Sol (xhigh) | 100.0% | 100.0% | 100.0% | 100.0% | 100.0% | 81.5% |
-| GPT-6.1 Terra (high) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.1% |
-| GPT-6.1 Terra (low) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| GPT-6.1 Terra (max) | 100.0% | 100.0% | 84.8% | 100.0% | 100.0% | 59.1% |
-| GPT-6.1 Terra (medium) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| GPT-6.1 Terra (xhigh) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.4% |
-| Gemini 4 Argon (high) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| Kimi K3.1 Pro (max) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.1% |
-| MiMo-V2.6-Pro | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| Configuration | S0 | S1 | S2 | S1 endpoint-heavy | S1M | S1T | S1T mean-preserving |
+|---|---:|---:|---:|---:|---:|---:|---:|
+| Claude Haiku 5.5 (high) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| Claude Haiku 5.5 (low) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| Claude Haiku 5.5 (max) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| Claude Haiku 5.5 (medium) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| Claude Haiku 5.5 (xhigh) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| Claude Opus 5.5 (high) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.2% | 0.0% |
+| Claude Opus 5.5 (max) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 4.7% | 4.8% |
+| Claude Opus 5.5 (medium) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| Claude Opus 5.5 (xhigh) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 3.5% | 3.5% |
+| Claude Sonnet 5.5 (max) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 3.9% | 4.1% |
+| Claude Sonnet 5.5 (xhigh) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| DeepSeek V4.1 Flash 1017 (max) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| GPT-6 Astra (high) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.2% | 0.2% |
+| GPT-6 Astra (max) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 1.6% | 1.7% |
+| GPT-6 Astra (xhigh) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 4.4% | 4.5% |
+| GPT-6 Luna (high) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| GPT-6 Luna (low) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| GPT-6 Luna (max) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| GPT-6 Luna (medium) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| GPT-6 Luna (xhigh) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| GPT-6.1 Sol (high) | 0.0% | 0.0% | 15.2% | 0.0% | 0.0% | 49.4% | 50.2% |
+| GPT-6.1 Sol (low) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| GPT-6.1 Sol (max) | 100.0% | 100.0% | 100.0% | 100.0% | 100.0% | 78.3% | 78.0% |
+| GPT-6.1 Sol (medium) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 12.3% | 11.8% |
+| GPT-6.1 Sol (xhigh) | 100.0% | 100.0% | 100.0% | 100.0% | 100.0% | 81.5% | 80.7% |
+| GPT-6.1 Terra (high) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.1% | 0.2% |
+| GPT-6.1 Terra (low) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| GPT-6.1 Terra (max) | 100.0% | 100.0% | 84.8% | 100.0% | 100.0% | 59.1% | 59.7% |
+| GPT-6.1 Terra (medium) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| GPT-6.1 Terra (xhigh) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.4% | 0.3% |
+| Gemini 4 Argon (high) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| Kimi K3.1 Pro (max) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.1% | 0.2% |
+| MiMo-V2.6-Pro | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
 
 ### API basis: on the frontier
 
-| Configuration | S0 | S1 | S2 | S1 endpoint-heavy | S1M | S1T |
-|---|---:|---:|---:|---:|---:|---:|
-| Claude Haiku 5.5 (high) | 100.0% | 100.0% | 57.4% | 100.0% | 100.0% | 52.0% |
-| Claude Haiku 5.5 (low) | 0.0% | 0.0% | 39.4% | 0.0% | 0.0% | 42.3% |
-| Claude Haiku 5.5 (max) | 0.0% | 0.0% | 0.1% | 0.0% | 0.0% | 8.3% |
-| Claude Haiku 5.5 (medium) | 100.0% | 100.0% | 73.6% | 100.0% | 100.0% | 60.3% |
-| Claude Haiku 5.5 (xhigh) | 100.0% | 100.0% | 100.0% | 100.0% | 100.0% | 94.9% |
-| Claude Opus 5.5 (high) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 6.2% |
-| Claude Opus 5.5 (max) | 100.0% | 100.0% | 70.8% | 100.0% | 100.0% | 45.8% |
-| Claude Opus 5.5 (medium) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.2% |
-| Claude Opus 5.5 (xhigh) | 100.0% | 100.0% | 98.0% | 100.0% | 100.0% | 50.5% |
-| Claude Sonnet 5.5 (max) | 100.0% | 100.0% | 99.9% | 100.0% | 100.0% | 61.8% |
-| Claude Sonnet 5.5 (xhigh) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 3.2% |
-| DeepSeek V4.1 Flash 1017 (max) | 0.0% | 0.0% | 0.1% | 0.0% | 0.0% | 4.9% |
-| GPT-6 Astra (high) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 10.1% |
-| GPT-6 Astra (max) | 0.0% | 0.0% | 37.5% | 0.0% | 0.0% | 32.6% |
-| GPT-6 Astra (xhigh) | 100.0% | 100.0% | 99.6% | 100.0% | 100.0% | 47.6% |
-| GPT-6 Luna (high) | 100.0% | 100.0% | 100.0% | 100.0% | 100.0% | 98.8% |
-| GPT-6 Luna (low) | 100.0% | 100.0% | 100.0% | 100.0% | 100.0% | 100.0% |
-| GPT-6 Luna (max) | 100.0% | 100.0% | 70.2% | 100.0% | 100.0% | 45.9% |
-| GPT-6 Luna (medium) | 100.0% | 100.0% | 100.0% | 100.0% | 100.0% | 100.0% |
-| GPT-6 Luna (xhigh) | 100.0% | 100.0% | 95.3% | 100.0% | 100.0% | 67.4% |
-| GPT-6.1 Sol (high) | 100.0% | 100.0% | 100.0% | 100.0% | 100.0% | 91.1% |
-| GPT-6.1 Sol (low) | 0.0% | 0.0% | 3.6% | 0.0% | 0.0% | 14.6% |
-| GPT-6.1 Sol (max) | 100.0% | 100.0% | 100.0% | 100.0% | 100.0% | 63.0% |
-| GPT-6.1 Sol (medium) | 100.0% | 100.0% | 100.0% | 100.0% | 100.0% | 89.2% |
-| GPT-6.1 Sol (xhigh) | 100.0% | 100.0% | 100.0% | 100.0% | 100.0% | 81.4% |
-| GPT-6.1 Terra (high) | 100.0% | 100.0% | 100.0% | 100.0% | 100.0% | 91.0% |
-| GPT-6.1 Terra (low) | 100.0% | 100.0% | 100.0% | 100.0% | 100.0% | 98.1% |
-| GPT-6.1 Terra (max) | 0.0% | 0.0% | 4.7% | 0.0% | 0.0% | 35.7% |
-| GPT-6.1 Terra (medium) | 100.0% | 100.0% | 81.8% | 100.0% | 100.0% | 61.8% |
-| GPT-6.1 Terra (xhigh) | 100.0% | 100.0% | 100.0% | 100.0% | 100.0% | 74.6% |
-| Gemini 4 Argon (high) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.1% |
-| Kimi K3.1 Pro (max) | 0.0% | 0.0% | 2.8% | 0.0% | 0.0% | 8.4% |
-| MiMo-V2.6-Pro | 100.0% | 100.0% | 99.0% | 100.0% | 100.0% | 79.0% |
+| Configuration | S0 | S1 | S2 | S1 endpoint-heavy | S1M | S1T | S1T mean-preserving |
+|---|---:|---:|---:|---:|---:|---:|---:|
+| Claude Haiku 5.5 (high) | 100.0% | 100.0% | 57.4% | 100.0% | 100.0% | 52.0% | 52.0% |
+| Claude Haiku 5.5 (low) | 0.0% | 0.0% | 39.4% | 0.0% | 0.0% | 42.3% | 43.1% |
+| Claude Haiku 5.5 (max) | 0.0% | 0.0% | 0.1% | 0.0% | 0.0% | 8.3% | 8.5% |
+| Claude Haiku 5.5 (medium) | 100.0% | 100.0% | 73.6% | 100.0% | 100.0% | 60.3% | 61.2% |
+| Claude Haiku 5.5 (xhigh) | 100.0% | 100.0% | 100.0% | 100.0% | 100.0% | 94.9% | 94.8% |
+| Claude Opus 5.5 (high) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 6.2% | 5.9% |
+| Claude Opus 5.5 (max) | 100.0% | 100.0% | 70.8% | 100.0% | 100.0% | 45.8% | 46.6% |
+| Claude Opus 5.5 (medium) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.2% | 0.2% |
+| Claude Opus 5.5 (xhigh) | 100.0% | 100.0% | 98.0% | 100.0% | 100.0% | 50.5% | 50.4% |
+| Claude Sonnet 5.5 (max) | 100.0% | 100.0% | 99.9% | 100.0% | 100.0% | 61.8% | 62.6% |
+| Claude Sonnet 5.5 (xhigh) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 3.2% | 3.4% |
+| DeepSeek V4.1 Flash 1017 (max) | 0.0% | 0.0% | 0.1% | 0.0% | 0.0% | 4.9% | 5.0% |
+| GPT-6 Astra (high) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 10.1% | 10.6% |
+| GPT-6 Astra (max) | 0.0% | 0.0% | 37.5% | 0.0% | 0.0% | 32.6% | 32.0% |
+| GPT-6 Astra (xhigh) | 100.0% | 100.0% | 99.6% | 100.0% | 100.0% | 47.6% | 48.0% |
+| GPT-6 Luna (high) | 100.0% | 100.0% | 100.0% | 100.0% | 100.0% | 98.8% | 99.2% |
+| GPT-6 Luna (low) | 100.0% | 100.0% | 100.0% | 100.0% | 100.0% | 100.0% | 100.0% |
+| GPT-6 Luna (max) | 100.0% | 100.0% | 70.2% | 100.0% | 100.0% | 45.9% | 46.1% |
+| GPT-6 Luna (medium) | 100.0% | 100.0% | 100.0% | 100.0% | 100.0% | 100.0% | 100.0% |
+| GPT-6 Luna (xhigh) | 100.0% | 100.0% | 95.3% | 100.0% | 100.0% | 67.4% | 66.7% |
+| GPT-6.1 Sol (high) | 100.0% | 100.0% | 100.0% | 100.0% | 100.0% | 91.1% | 91.1% |
+| GPT-6.1 Sol (low) | 0.0% | 0.0% | 3.6% | 0.0% | 0.0% | 14.6% | 14.4% |
+| GPT-6.1 Sol (max) | 100.0% | 100.0% | 100.0% | 100.0% | 100.0% | 63.0% | 63.9% |
+| GPT-6.1 Sol (medium) | 100.0% | 100.0% | 100.0% | 100.0% | 100.0% | 89.2% | 89.5% |
+| GPT-6.1 Sol (xhigh) | 100.0% | 100.0% | 100.0% | 100.0% | 100.0% | 81.4% | 81.4% |
+| GPT-6.1 Terra (high) | 100.0% | 100.0% | 100.0% | 100.0% | 100.0% | 91.0% | 91.5% |
+| GPT-6.1 Terra (low) | 100.0% | 100.0% | 100.0% | 100.0% | 100.0% | 98.1% | 98.2% |
+| GPT-6.1 Terra (max) | 0.0% | 0.0% | 4.7% | 0.0% | 0.0% | 35.7% | 35.5% |
+| GPT-6.1 Terra (medium) | 100.0% | 100.0% | 81.8% | 100.0% | 100.0% | 61.8% | 62.5% |
+| GPT-6.1 Terra (xhigh) | 100.0% | 100.0% | 100.0% | 100.0% | 100.0% | 74.6% | 74.9% |
+| Gemini 4 Argon (high) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.1% | 0.2% |
+| Kimi K3.1 Pro (max) | 0.0% | 0.0% | 2.8% | 0.0% | 0.0% | 8.4% | 8.4% |
+| MiMo-V2.6-Pro | 100.0% | 100.0% | 99.0% | 100.0% | 100.0% | 79.0% | 79.1% |
 
 ### API basis: value-score dispersion (SD; covariance term)
 
-| Configuration | S0 | S1 | S2 | S1 endpoint-heavy | S1M | S1T |
-|---|---:|---:|---:|---:|---:|---:|
-| Claude Haiku 5.5 (high) | 0.00 (+0.00) | 0.00 (+0.00) | 1.04 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.12 (+0.00) |
-| Claude Haiku 5.5 (low) | 0.00 (+0.00) | 0.00 (+0.00) | 1.15 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 0.87 (+0.00) |
-| Claude Haiku 5.5 (max) | 0.00 (+0.00) | 0.00 (+0.00) | 0.95 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.26 (+0.00) |
-| Claude Haiku 5.5 (medium) | 0.00 (+0.00) | 0.00 (+0.00) | 1.13 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 0.98 (+0.00) |
-| Claude Haiku 5.5 (xhigh) | 0.00 (+0.00) | 0.00 (+0.00) | 0.97 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.22 (+0.00) |
-| Claude Opus 5.5 (high) | 0.00 (+0.00) | 0.00 (+0.00) | 1.17 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.32 (+0.00) |
-| Claude Opus 5.5 (max) | 0.00 (+0.00) | 0.00 (+0.00) | 0.98 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.34 (+0.00) |
-| Claude Opus 5.5 (medium) | 0.00 (+0.00) | 0.00 (+0.00) | 1.16 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.29 (+0.00) |
-| Claude Opus 5.5 (xhigh) | 0.00 (+0.00) | 0.00 (+0.00) | 1.07 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.33 (+0.00) |
-| Claude Sonnet 5.5 (max) | 0.00 (+0.00) | 0.00 (+0.00) | 0.90 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.33 (+0.00) |
-| Claude Sonnet 5.5 (xhigh) | 0.00 (+0.00) | 0.00 (+0.00) | 1.03 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.32 (+0.00) |
-| DeepSeek V4.1 Flash 1017 (max) | 0.00 (+0.00) | 0.00 (+0.00) | 1.05 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.27 (+0.00) |
-| GPT-6 Astra (high) | 0.00 (+0.00) | 0.00 (+0.00) | 1.04 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.34 (+0.00) |
-| GPT-6 Astra (max) | 0.00 (+0.00) | 0.00 (+0.00) | 0.91 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.35 (+0.00) |
-| GPT-6 Astra (xhigh) | 0.00 (+0.00) | 0.00 (+0.00) | 0.94 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.33 (+0.00) |
-| GPT-6 Luna (high) | 0.00 (+0.00) | 0.00 (+0.00) | 1.35 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 0.86 (+0.00) |
-| GPT-6 Luna (low) | 0.00 (+0.00) | 0.00 (+0.00) | 1.21 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 0.43 (+0.00) |
-| GPT-6 Luna (max) | 0.00 (+0.00) | 0.00 (+0.00) | 1.23 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.05 (+0.00) |
-| GPT-6 Luna (medium) | 0.00 (+0.00) | 0.00 (+0.00) | 1.36 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 0.71 (+0.00) |
-| GPT-6 Luna (xhigh) | 0.00 (+0.00) | 0.00 (+0.00) | 1.27 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 0.93 (+0.00) |
-| GPT-6.1 Sol (high) | 0.00 (+0.00) | 0.00 (+0.00) | 1.02 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.32 (+0.00) |
-| GPT-6.1 Sol (low) | 0.00 (+0.00) | 0.00 (+0.00) | 1.32 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.20 (+0.00) |
-| GPT-6.1 Sol (max) | 0.00 (+0.00) | 0.00 (+0.00) | 0.91 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.34 (+0.00) |
-| GPT-6.1 Sol (medium) | 0.00 (+0.00) | 0.00 (+0.00) | 1.13 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.31 (+0.00) |
-| GPT-6.1 Sol (xhigh) | 0.00 (+0.00) | 0.00 (+0.00) | 0.94 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.34 (+0.00) |
-| GPT-6.1 Terra (high) | 0.00 (+0.00) | 0.00 (+0.00) | 1.32 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.24 (+0.00) |
-| GPT-6.1 Terra (low) | 0.00 (+0.00) | 0.00 (+0.00) | 1.46 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.03 (+0.00) |
-| GPT-6.1 Terra (max) | 0.00 (+0.00) | 0.00 (+0.00) | 0.80 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.34 (+0.00) |
-| GPT-6.1 Terra (medium) | 0.00 (+0.00) | 0.00 (+0.00) | 1.35 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.21 (+0.00) |
-| GPT-6.1 Terra (xhigh) | 0.00 (+0.00) | 0.00 (+0.00) | 1.33 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.27 (+0.00) |
-| Gemini 4 Argon (high) | 0.00 (+0.00) | 0.00 (+0.00) | 1.40 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.29 (+0.00) |
-| Kimi K3.1 Pro (max) | 0.00 (+0.00) | 0.00 (+0.00) | 1.54 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.25 (+0.00) |
-| MiMo-V2.6-Pro | 0.00 (+0.00) | 0.00 (+0.00) | 1.23 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.21 (+0.00) |
+| Configuration | S0 | S1 | S2 | S1 endpoint-heavy | S1M | S1T | S1T mean-preserving |
+|---|---:|---:|---:|---:|---:|---:|---:|
+| Claude Haiku 5.5 (high) | 0.00 (+0.00) | 0.00 (+0.00) | 1.04 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.12 (+0.00) | 1.13 (+0.00) |
+| Claude Haiku 5.5 (low) | 0.00 (+0.00) | 0.00 (+0.00) | 1.15 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 0.87 (+0.00) | 0.86 (+0.00) |
+| Claude Haiku 5.5 (max) | 0.00 (+0.00) | 0.00 (+0.00) | 0.95 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.26 (+0.00) | 1.25 (+0.00) |
+| Claude Haiku 5.5 (medium) | 0.00 (+0.00) | 0.00 (+0.00) | 1.13 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 0.98 (+0.00) | 0.98 (+0.00) |
+| Claude Haiku 5.5 (xhigh) | 0.00 (+0.00) | 0.00 (+0.00) | 0.97 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.22 (+0.00) | 1.21 (+0.00) |
+| Claude Opus 5.5 (high) | 0.00 (+0.00) | 0.00 (+0.00) | 1.17 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.32 (+0.00) | 1.31 (+0.00) |
+| Claude Opus 5.5 (max) | 0.00 (+0.00) | 0.00 (+0.00) | 0.98 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.34 (+0.00) | 1.34 (+0.00) |
+| Claude Opus 5.5 (medium) | 0.00 (+0.00) | 0.00 (+0.00) | 1.16 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.29 (+0.00) | 1.32 (+0.00) |
+| Claude Opus 5.5 (xhigh) | 0.00 (+0.00) | 0.00 (+0.00) | 1.07 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.33 (+0.00) | 1.33 (+0.00) |
+| Claude Sonnet 5.5 (max) | 0.00 (+0.00) | 0.00 (+0.00) | 0.90 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.33 (+0.00) | 1.32 (+0.00) |
+| Claude Sonnet 5.5 (xhigh) | 0.00 (+0.00) | 0.00 (+0.00) | 1.03 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.32 (+0.00) | 1.33 (+0.00) |
+| DeepSeek V4.1 Flash 1017 (max) | 0.00 (+0.00) | 0.00 (+0.00) | 1.05 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.27 (+0.00) | 1.28 (+0.00) |
+| GPT-6 Astra (high) | 0.00 (+0.00) | 0.00 (+0.00) | 1.04 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.34 (+0.00) | 1.34 (+0.00) |
+| GPT-6 Astra (max) | 0.00 (+0.00) | 0.00 (+0.00) | 0.91 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.35 (+0.00) | 1.33 (+0.00) |
+| GPT-6 Astra (xhigh) | 0.00 (+0.00) | 0.00 (+0.00) | 0.94 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.33 (+0.00) | 1.33 (+0.00) |
+| GPT-6 Luna (high) | 0.00 (+0.00) | 0.00 (+0.00) | 1.35 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 0.86 (+0.00) | 0.85 (+0.00) |
+| GPT-6 Luna (low) | 0.00 (+0.00) | 0.00 (+0.00) | 1.21 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 0.43 (+0.00) | 0.42 (+0.00) |
+| GPT-6 Luna (max) | 0.00 (+0.00) | 0.00 (+0.00) | 1.23 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.05 (+0.00) | 1.06 (+0.00) |
+| GPT-6 Luna (medium) | 0.00 (+0.00) | 0.00 (+0.00) | 1.36 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 0.71 (+0.00) | 0.72 (+0.00) |
+| GPT-6 Luna (xhigh) | 0.00 (+0.00) | 0.00 (+0.00) | 1.27 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 0.93 (+0.00) | 0.92 (+0.00) |
+| GPT-6.1 Sol (high) | 0.00 (+0.00) | 0.00 (+0.00) | 1.02 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.32 (+0.00) | 1.31 (+0.00) |
+| GPT-6.1 Sol (low) | 0.00 (+0.00) | 0.00 (+0.00) | 1.32 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.20 (+0.00) | 1.18 (+0.00) |
+| GPT-6.1 Sol (max) | 0.00 (+0.00) | 0.00 (+0.00) | 0.91 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.34 (+0.00) | 1.34 (+0.00) |
+| GPT-6.1 Sol (medium) | 0.00 (+0.00) | 0.00 (+0.00) | 1.13 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.31 (+0.00) | 1.30 (+0.00) |
+| GPT-6.1 Sol (xhigh) | 0.00 (+0.00) | 0.00 (+0.00) | 0.94 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.34 (+0.00) | 1.31 (+0.00) |
+| GPT-6.1 Terra (high) | 0.00 (+0.00) | 0.00 (+0.00) | 1.32 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.24 (+0.00) | 1.26 (+0.00) |
+| GPT-6.1 Terra (low) | 0.00 (+0.00) | 0.00 (+0.00) | 1.46 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.03 (+0.00) | 1.02 (+0.00) |
+| GPT-6.1 Terra (max) | 0.00 (+0.00) | 0.00 (+0.00) | 0.80 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.34 (+0.00) | 1.35 (+0.00) |
+| GPT-6.1 Terra (medium) | 0.00 (+0.00) | 0.00 (+0.00) | 1.35 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.21 (+0.00) | 1.19 (+0.00) |
+| GPT-6.1 Terra (xhigh) | 0.00 (+0.00) | 0.00 (+0.00) | 1.33 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.27 (+0.00) | 1.27 (+0.00) |
+| Gemini 4 Argon (high) | 0.00 (+0.00) | 0.00 (+0.00) | 1.40 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.29 (+0.00) | 1.28 (+0.00) |
+| Kimi K3.1 Pro (max) | 0.00 (+0.00) | 0.00 (+0.00) | 1.54 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.25 (+0.00) | 1.24 (+0.00) |
+| MiMo-V2.6-Pro | 0.00 (+0.00) | 0.00 (+0.00) | 1.23 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.21 (+0.00) | 1.21 (+0.00) |
 
-Plan streams S1, S2, S1 endpoint-heavy, S1M and S1T run with owner assumptions off (owner-named transfers and O46 provider quota ceilings; E167): Claude Haiku 5.5 (high) on Claude Max 20x, Claude Haiku 5.5 (high) on Claude Max 5x, Claude Haiku 5.5 (high) on Claude Pro, Claude Haiku 5.5 (low) on Claude Max 20x, Claude Haiku 5.5 (low) on Claude Max 5x, Claude Haiku 5.5 (low) on Claude Pro, Claude Haiku 5.5 (max) on Claude Max 20x, Claude Haiku 5.5 (max) on Claude Max 5x, Claude Haiku 5.5 (max) on Claude Pro, Claude Haiku 5.5 (medium) on Claude Max 20x, Claude Haiku 5.5 (medium) on Claude Max 5x, Claude Haiku 5.5 (medium) on Claude Pro, Claude Haiku 5.5 (xhigh) on Claude Max 20x, Claude Haiku 5.5 (xhigh) on Claude Max 5x, Claude Haiku 5.5 (xhigh) on Claude Pro, Claude Sonnet 5.5 (max) on Claude Max 20x, Claude Sonnet 5.5 (max) on Claude Max 5x, Claude Sonnet 5.5 (max) on Claude Pro, Claude Sonnet 5.5 (xhigh) on Claude Max 20x, Claude Sonnet 5.5 (xhigh) on Claude Max 5x, Claude Sonnet 5.5 (xhigh) on Claude Pro, GPT-6 Luna (high) on ChatGPT Plus, GPT-6 Luna (high) on ChatGPT Pro 100, GPT-6 Luna (high) on ChatGPT Pro 200, GPT-6 Luna (high) on ChatGPT Pro 500, GPT-6 Luna (low) on ChatGPT Plus, GPT-6 Luna (low) on ChatGPT Pro 100, GPT-6 Luna (low) on ChatGPT Pro 200, GPT-6 Luna (low) on ChatGPT Pro 500, GPT-6 Luna (max) on ChatGPT Plus, GPT-6 Luna (max) on ChatGPT Pro 100, GPT-6 Luna (max) on ChatGPT Pro 200, GPT-6 Luna (max) on ChatGPT Pro 500, GPT-6 Luna (medium) on ChatGPT Plus, GPT-6 Luna (medium) on ChatGPT Pro 100, GPT-6 Luna (medium) on ChatGPT Pro 200, GPT-6 Luna (medium) on ChatGPT Pro 500, GPT-6 Luna (xhigh) on ChatGPT Plus, GPT-6 Luna (xhigh) on ChatGPT Pro 100, GPT-6 Luna (xhigh) on ChatGPT Pro 200, GPT-6 Luna (xhigh) on ChatGPT Pro 500, GPT-6.1 Terra (high) on ChatGPT Plus, GPT-6.1 Terra (high) on ChatGPT Pro 100, GPT-6.1 Terra (high) on ChatGPT Pro 200, GPT-6.1 Terra (high) on ChatGPT Pro 500, GPT-6.1 Terra (low) on ChatGPT Plus, GPT-6.1 Terra (low) on ChatGPT Pro 100, GPT-6.1 Terra (low) on ChatGPT Pro 200, GPT-6.1 Terra (low) on ChatGPT Pro 500, GPT-6.1 Terra (max) on ChatGPT Plus, GPT-6.1 Terra (max) on ChatGPT Pro 100, GPT-6.1 Terra (max) on ChatGPT Pro 200, GPT-6.1 Terra (max) on ChatGPT Pro 500, GPT-6.1 Terra (medium) on ChatGPT Plus, GPT-6.1 Terra (medium) on ChatGPT Pro 100, GPT-6.1 Terra (medium) on ChatGPT Pro 200, GPT-6.1 Terra (medium) on ChatGPT Pro 500, GPT-6.1 Terra (xhigh) on ChatGPT Plus, GPT-6.1 Terra (xhigh) on ChatGPT Pro 100, GPT-6.1 Terra (xhigh) on ChatGPT Pro 200, GPT-6.1 Terra (xhigh) on ChatGPT Pro 500, MiMo-V2.6-Pro on MiMo Token Plan Lite, MiMo-V2.6-Pro on MiMo Token Plan Max, MiMo-V2.6-Pro on MiMo Token Plan Pro, MiMo-V2.6-Pro on MiMo Token Plan Standard depend on an owner assumption and are unevaluable there (—), never reselected or replaced by API cost.
+Plan streams S1, S2, S1 endpoint-heavy, S1M, S1T and S1T mean-preserving run with owner assumptions off (owner-named transfers and O46 provider quota ceilings; E167): Claude Haiku 5.5 (high) on Claude Max 20x, Claude Haiku 5.5 (high) on Claude Max 5x, Claude Haiku 5.5 (high) on Claude Pro, Claude Haiku 5.5 (low) on Claude Max 20x, Claude Haiku 5.5 (low) on Claude Max 5x, Claude Haiku 5.5 (low) on Claude Pro, Claude Haiku 5.5 (max) on Claude Max 20x, Claude Haiku 5.5 (max) on Claude Max 5x, Claude Haiku 5.5 (max) on Claude Pro, Claude Haiku 5.5 (medium) on Claude Max 20x, Claude Haiku 5.5 (medium) on Claude Max 5x, Claude Haiku 5.5 (medium) on Claude Pro, Claude Haiku 5.5 (xhigh) on Claude Max 20x, Claude Haiku 5.5 (xhigh) on Claude Max 5x, Claude Haiku 5.5 (xhigh) on Claude Pro, Claude Sonnet 5.5 (max) on Claude Max 20x, Claude Sonnet 5.5 (max) on Claude Max 5x, Claude Sonnet 5.5 (max) on Claude Pro, Claude Sonnet 5.5 (xhigh) on Claude Max 20x, Claude Sonnet 5.5 (xhigh) on Claude Max 5x, Claude Sonnet 5.5 (xhigh) on Claude Pro, GPT-6 Luna (high) on ChatGPT Plus, GPT-6 Luna (high) on ChatGPT Pro 100, GPT-6 Luna (high) on ChatGPT Pro 200, GPT-6 Luna (high) on ChatGPT Pro 500, GPT-6 Luna (low) on ChatGPT Plus, GPT-6 Luna (low) on ChatGPT Pro 100, GPT-6 Luna (low) on ChatGPT Pro 200, GPT-6 Luna (low) on ChatGPT Pro 500, GPT-6 Luna (max) on ChatGPT Plus, GPT-6 Luna (max) on ChatGPT Pro 100, GPT-6 Luna (max) on ChatGPT Pro 200, GPT-6 Luna (max) on ChatGPT Pro 500, GPT-6 Luna (medium) on ChatGPT Plus, GPT-6 Luna (medium) on ChatGPT Pro 100, GPT-6 Luna (medium) on ChatGPT Pro 200, GPT-6 Luna (medium) on ChatGPT Pro 500, GPT-6 Luna (xhigh) on ChatGPT Plus, GPT-6 Luna (xhigh) on ChatGPT Pro 100, GPT-6 Luna (xhigh) on ChatGPT Pro 200, GPT-6 Luna (xhigh) on ChatGPT Pro 500, GPT-6.1 Terra (high) on ChatGPT Plus, GPT-6.1 Terra (high) on ChatGPT Pro 100, GPT-6.1 Terra (high) on ChatGPT Pro 200, GPT-6.1 Terra (high) on ChatGPT Pro 500, GPT-6.1 Terra (low) on ChatGPT Plus, GPT-6.1 Terra (low) on ChatGPT Pro 100, GPT-6.1 Terra (low) on ChatGPT Pro 200, GPT-6.1 Terra (low) on ChatGPT Pro 500, GPT-6.1 Terra (max) on ChatGPT Plus, GPT-6.1 Terra (max) on ChatGPT Pro 100, GPT-6.1 Terra (max) on ChatGPT Pro 200, GPT-6.1 Terra (max) on ChatGPT Pro 500, GPT-6.1 Terra (medium) on ChatGPT Plus, GPT-6.1 Terra (medium) on ChatGPT Pro 100, GPT-6.1 Terra (medium) on ChatGPT Pro 200, GPT-6.1 Terra (medium) on ChatGPT Pro 500, GPT-6.1 Terra (xhigh) on ChatGPT Plus, GPT-6.1 Terra (xhigh) on ChatGPT Pro 100, GPT-6.1 Terra (xhigh) on ChatGPT Pro 200, GPT-6.1 Terra (xhigh) on ChatGPT Pro 500, MiMo-V2.6-Pro on MiMo Token Plan Lite, MiMo-V2.6-Pro on MiMo Token Plan Max, MiMo-V2.6-Pro on MiMo Token Plan Pro, MiMo-V2.6-Pro on MiMo Token Plan Standard depend on an owner assumption and are unevaluable there (—), never reselected or replaced by API cost.
 
 ### Plan basis: rank 1
 
-| Configuration | S0 | S1 | S2 | S1 endpoint-heavy | S1M | S1T |
-|---|---:|---:|---:|---:|---:|---:|
-| Claude Haiku 5.5 (high) on Claude Max 20x | 0.0% | — | — | — | — | — |
-| Claude Haiku 5.5 (high) on Claude Max 5x | 0.0% | — | — | — | — | — |
-| Claude Haiku 5.5 (high) on Claude Pro | 0.0% | — | — | — | — | — |
-| Claude Haiku 5.5 (low) on Claude Max 20x | 0.0% | — | — | — | — | — |
-| Claude Haiku 5.5 (low) on Claude Max 5x | 0.0% | — | — | — | — | — |
-| Claude Haiku 5.5 (low) on Claude Pro | 0.0% | — | — | — | — | — |
-| Claude Haiku 5.5 (max) on Claude Max 20x | 0.0% | — | — | — | — | — |
-| Claude Haiku 5.5 (max) on Claude Max 5x | 0.0% | — | — | — | — | — |
-| Claude Haiku 5.5 (max) on Claude Pro | 0.0% | — | — | — | — | — |
-| Claude Haiku 5.5 (medium) on Claude Max 20x | 0.0% | — | — | — | — | — |
-| Claude Haiku 5.5 (medium) on Claude Max 5x | 0.0% | — | — | — | — | — |
-| Claude Haiku 5.5 (medium) on Claude Pro | 0.0% | — | — | — | — | — |
-| Claude Haiku 5.5 (xhigh) on Claude Max 20x | 0.0% | — | — | — | — | — |
-| Claude Haiku 5.5 (xhigh) on Claude Max 5x | 0.0% | — | — | — | — | — |
-| Claude Haiku 5.5 (xhigh) on Claude Pro | 0.0% | — | — | — | — | — |
-| Claude Opus 5.5 (high) on Claude Max 20x | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| Claude Opus 5.5 (high) on Claude Max 5x | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| Claude Opus 5.5 (high) on Claude Pro | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 2.8% |
-| Claude Opus 5.5 (max) on Claude Max 20x | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| Claude Opus 5.5 (max) on Claude Max 5x | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| Claude Opus 5.5 (max) on Claude Pro | 100.0% | 100.0% | 100.0% | 100.0% | 100.0% | 53.8% |
-| Claude Opus 5.5 (medium) on Claude Max 20x | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| Claude Opus 5.5 (medium) on Claude Max 5x | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| Claude Opus 5.5 (medium) on Claude Pro | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.3% |
-| Claude Opus 5.5 (xhigh) on Claude Max 20x | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| Claude Opus 5.5 (xhigh) on Claude Max 5x | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| Claude Opus 5.5 (xhigh) on Claude Pro | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 33.6% |
-| Claude Sonnet 5.5 (max) on Claude Max 20x | 0.0% | — | — | — | — | — |
-| Claude Sonnet 5.5 (max) on Claude Max 5x | 0.0% | — | — | — | — | — |
-| Claude Sonnet 5.5 (max) on Claude Pro | 0.0% | — | — | — | — | — |
-| Claude Sonnet 5.5 (xhigh) on Claude Max 20x | 0.0% | — | — | — | — | — |
-| Claude Sonnet 5.5 (xhigh) on Claude Max 5x | 0.0% | — | — | — | — | — |
-| Claude Sonnet 5.5 (xhigh) on Claude Pro | 0.0% | — | — | — | — | — |
-| DeepSeek V4.1 Flash 1017 (max) on API-cost fallback | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| GPT-6 Astra (high) on ChatGPT Plus | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| GPT-6 Astra (high) on ChatGPT Pro 100 | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| GPT-6 Astra (high) on ChatGPT Pro 200 | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| GPT-6 Astra (high) on ChatGPT Pro 500 | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| GPT-6 Astra (max) on ChatGPT Plus | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| GPT-6 Astra (max) on ChatGPT Pro 100 | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| GPT-6 Astra (max) on ChatGPT Pro 200 | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.1% |
-| GPT-6 Astra (max) on ChatGPT Pro 500 | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| GPT-6 Astra (xhigh) on ChatGPT Plus | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| GPT-6 Astra (xhigh) on ChatGPT Pro 100 | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| GPT-6 Astra (xhigh) on ChatGPT Pro 200 | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.3% |
-| GPT-6 Astra (xhigh) on ChatGPT Pro 500 | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| GPT-6 Luna (high) on ChatGPT Plus | 0.0% | — | — | — | — | — |
-| GPT-6 Luna (high) on ChatGPT Pro 100 | 0.0% | — | — | — | — | — |
-| GPT-6 Luna (high) on ChatGPT Pro 200 | 0.0% | — | — | — | — | — |
-| GPT-6 Luna (high) on ChatGPT Pro 500 | 0.0% | — | — | — | — | — |
-| GPT-6 Luna (low) on ChatGPT Plus | 0.0% | — | — | — | — | — |
-| GPT-6 Luna (low) on ChatGPT Pro 100 | 0.0% | — | — | — | — | — |
-| GPT-6 Luna (low) on ChatGPT Pro 200 | 0.0% | — | — | — | — | — |
-| GPT-6 Luna (low) on ChatGPT Pro 500 | 0.0% | — | — | — | — | — |
-| GPT-6 Luna (max) on ChatGPT Plus | 0.0% | — | — | — | — | — |
-| GPT-6 Luna (max) on ChatGPT Pro 100 | 0.0% | — | — | — | — | — |
-| GPT-6 Luna (max) on ChatGPT Pro 200 | 0.0% | — | — | — | — | — |
-| GPT-6 Luna (max) on ChatGPT Pro 500 | 0.0% | — | — | — | — | — |
-| GPT-6 Luna (medium) on ChatGPT Plus | 0.0% | — | — | — | — | — |
-| GPT-6 Luna (medium) on ChatGPT Pro 100 | 0.0% | — | — | — | — | — |
-| GPT-6 Luna (medium) on ChatGPT Pro 200 | 0.0% | — | — | — | — | — |
-| GPT-6 Luna (medium) on ChatGPT Pro 500 | 0.0% | — | — | — | — | — |
-| GPT-6 Luna (xhigh) on ChatGPT Plus | 0.0% | — | — | — | — | — |
-| GPT-6 Luna (xhigh) on ChatGPT Pro 100 | 0.0% | — | — | — | — | — |
-| GPT-6 Luna (xhigh) on ChatGPT Pro 200 | 0.0% | — | — | — | — | — |
-| GPT-6 Luna (xhigh) on ChatGPT Pro 500 | 0.0% | — | — | — | — | — |
-| GPT-6.1 Sol (high) on ChatGPT Plus | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| GPT-6.1 Sol (high) on ChatGPT Pro 100 | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| GPT-6.1 Sol (high) on ChatGPT Pro 200 | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| GPT-6.1 Sol (high) on ChatGPT Pro 500 | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.5% |
-| GPT-6.1 Sol (low) on ChatGPT Plus | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| GPT-6.1 Sol (low) on ChatGPT Pro 100 | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| GPT-6.1 Sol (low) on ChatGPT Pro 200 | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| GPT-6.1 Sol (low) on ChatGPT Pro 500 | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| GPT-6.1 Sol (max) on ChatGPT Plus | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| GPT-6.1 Sol (max) on ChatGPT Pro 100 | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| GPT-6.1 Sol (max) on ChatGPT Pro 200 | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| GPT-6.1 Sol (max) on ChatGPT Pro 500 | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 4.8% |
-| GPT-6.1 Sol (medium) on ChatGPT Plus | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| GPT-6.1 Sol (medium) on ChatGPT Pro 100 | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| GPT-6.1 Sol (medium) on ChatGPT Pro 200 | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| GPT-6.1 Sol (medium) on ChatGPT Pro 500 | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| GPT-6.1 Sol (xhigh) on ChatGPT Plus | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| GPT-6.1 Sol (xhigh) on ChatGPT Pro 100 | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| GPT-6.1 Sol (xhigh) on ChatGPT Pro 200 | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| GPT-6.1 Sol (xhigh) on ChatGPT Pro 500 | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 3.9% |
-| GPT-6.1 Terra (high) on ChatGPT Plus | 0.0% | — | — | — | — | — |
-| GPT-6.1 Terra (high) on ChatGPT Pro 100 | 0.0% | — | — | — | — | — |
-| GPT-6.1 Terra (high) on ChatGPT Pro 200 | 0.0% | — | — | — | — | — |
-| GPT-6.1 Terra (high) on ChatGPT Pro 500 | 0.0% | — | — | — | — | — |
-| GPT-6.1 Terra (low) on ChatGPT Plus | 0.0% | — | — | — | — | — |
-| GPT-6.1 Terra (low) on ChatGPT Pro 100 | 0.0% | — | — | — | — | — |
-| GPT-6.1 Terra (low) on ChatGPT Pro 200 | 0.0% | — | — | — | — | — |
-| GPT-6.1 Terra (low) on ChatGPT Pro 500 | 0.0% | — | — | — | — | — |
-| GPT-6.1 Terra (max) on ChatGPT Plus | 0.0% | — | — | — | — | — |
-| GPT-6.1 Terra (max) on ChatGPT Pro 100 | 0.0% | — | — | — | — | — |
-| GPT-6.1 Terra (max) on ChatGPT Pro 200 | 0.0% | — | — | — | — | — |
-| GPT-6.1 Terra (max) on ChatGPT Pro 500 | 0.0% | — | — | — | — | — |
-| GPT-6.1 Terra (medium) on ChatGPT Plus | 0.0% | — | — | — | — | — |
-| GPT-6.1 Terra (medium) on ChatGPT Pro 100 | 0.0% | — | — | — | — | — |
-| GPT-6.1 Terra (medium) on ChatGPT Pro 200 | 0.0% | — | — | — | — | — |
-| GPT-6.1 Terra (medium) on ChatGPT Pro 500 | 0.0% | — | — | — | — | — |
-| GPT-6.1 Terra (xhigh) on ChatGPT Plus | 0.0% | — | — | — | — | — |
-| GPT-6.1 Terra (xhigh) on ChatGPT Pro 100 | 0.0% | — | — | — | — | — |
-| GPT-6.1 Terra (xhigh) on ChatGPT Pro 200 | 0.0% | — | — | — | — | — |
-| GPT-6.1 Terra (xhigh) on ChatGPT Pro 500 | 0.0% | — | — | — | — | — |
-| Gemini 4 Argon (high) on API-cost fallback | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| Kimi K3.1 Pro (max) on API-cost fallback | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| MiMo-V2.6-Pro on MiMo Token Plan Lite | 0.0% | — | — | — | — | — |
-| MiMo-V2.6-Pro on MiMo Token Plan Max | 0.0% | — | — | — | — | — |
-| MiMo-V2.6-Pro on MiMo Token Plan Pro | 0.0% | — | — | — | — | — |
-| MiMo-V2.6-Pro on MiMo Token Plan Standard | 0.0% | — | — | — | — | — |
+| Configuration | S0 | S1 | S2 | S1 endpoint-heavy | S1M | S1T | S1T mean-preserving |
+|---|---:|---:|---:|---:|---:|---:|---:|
+| Claude Haiku 5.5 (high) on Claude Max 20x | 0.0% | — | — | — | — | — | — |
+| Claude Haiku 5.5 (high) on Claude Max 5x | 0.0% | — | — | — | — | — | — |
+| Claude Haiku 5.5 (high) on Claude Pro | 0.0% | — | — | — | — | — | — |
+| Claude Haiku 5.5 (low) on Claude Max 20x | 0.0% | — | — | — | — | — | — |
+| Claude Haiku 5.5 (low) on Claude Max 5x | 0.0% | — | — | — | — | — | — |
+| Claude Haiku 5.5 (low) on Claude Pro | 0.0% | — | — | — | — | — | — |
+| Claude Haiku 5.5 (max) on Claude Max 20x | 0.0% | — | — | — | — | — | — |
+| Claude Haiku 5.5 (max) on Claude Max 5x | 0.0% | — | — | — | — | — | — |
+| Claude Haiku 5.5 (max) on Claude Pro | 0.0% | — | — | — | — | — | — |
+| Claude Haiku 5.5 (medium) on Claude Max 20x | 0.0% | — | — | — | — | — | — |
+| Claude Haiku 5.5 (medium) on Claude Max 5x | 0.0% | — | — | — | — | — | — |
+| Claude Haiku 5.5 (medium) on Claude Pro | 0.0% | — | — | — | — | — | — |
+| Claude Haiku 5.5 (xhigh) on Claude Max 20x | 0.0% | — | — | — | — | — | — |
+| Claude Haiku 5.5 (xhigh) on Claude Max 5x | 0.0% | — | — | — | — | — | — |
+| Claude Haiku 5.5 (xhigh) on Claude Pro | 0.0% | — | — | — | — | — | — |
+| Claude Opus 5.5 (high) on Claude Max 20x | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| Claude Opus 5.5 (high) on Claude Max 5x | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| Claude Opus 5.5 (high) on Claude Pro | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 2.8% | 2.6% |
+| Claude Opus 5.5 (max) on Claude Max 20x | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| Claude Opus 5.5 (max) on Claude Max 5x | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| Claude Opus 5.5 (max) on Claude Pro | 100.0% | 100.0% | 100.0% | 100.0% | 100.0% | 53.8% | 54.4% |
+| Claude Opus 5.5 (medium) on Claude Max 20x | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| Claude Opus 5.5 (medium) on Claude Max 5x | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| Claude Opus 5.5 (medium) on Claude Pro | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.3% | 0.2% |
+| Claude Opus 5.5 (xhigh) on Claude Max 20x | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| Claude Opus 5.5 (xhigh) on Claude Max 5x | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| Claude Opus 5.5 (xhigh) on Claude Pro | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 33.6% | 33.7% |
+| Claude Sonnet 5.5 (max) on Claude Max 20x | 0.0% | — | — | — | — | — | — |
+| Claude Sonnet 5.5 (max) on Claude Max 5x | 0.0% | — | — | — | — | — | — |
+| Claude Sonnet 5.5 (max) on Claude Pro | 0.0% | — | — | — | — | — | — |
+| Claude Sonnet 5.5 (xhigh) on Claude Max 20x | 0.0% | — | — | — | — | — | — |
+| Claude Sonnet 5.5 (xhigh) on Claude Max 5x | 0.0% | — | — | — | — | — | — |
+| Claude Sonnet 5.5 (xhigh) on Claude Pro | 0.0% | — | — | — | — | — | — |
+| DeepSeek V4.1 Flash 1017 (max) on API-cost fallback | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| GPT-6 Astra (high) on ChatGPT Plus | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| GPT-6 Astra (high) on ChatGPT Pro 100 | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| GPT-6 Astra (high) on ChatGPT Pro 200 | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| GPT-6 Astra (high) on ChatGPT Pro 500 | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| GPT-6 Astra (max) on ChatGPT Plus | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| GPT-6 Astra (max) on ChatGPT Pro 100 | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| GPT-6 Astra (max) on ChatGPT Pro 200 | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.1% | 0.1% |
+| GPT-6 Astra (max) on ChatGPT Pro 500 | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| GPT-6 Astra (xhigh) on ChatGPT Plus | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| GPT-6 Astra (xhigh) on ChatGPT Pro 100 | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| GPT-6 Astra (xhigh) on ChatGPT Pro 200 | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.3% | 0.2% |
+| GPT-6 Astra (xhigh) on ChatGPT Pro 500 | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| GPT-6 Luna (high) on ChatGPT Plus | 0.0% | — | — | — | — | — | — |
+| GPT-6 Luna (high) on ChatGPT Pro 100 | 0.0% | — | — | — | — | — | — |
+| GPT-6 Luna (high) on ChatGPT Pro 200 | 0.0% | — | — | — | — | — | — |
+| GPT-6 Luna (high) on ChatGPT Pro 500 | 0.0% | — | — | — | — | — | — |
+| GPT-6 Luna (low) on ChatGPT Plus | 0.0% | — | — | — | — | — | — |
+| GPT-6 Luna (low) on ChatGPT Pro 100 | 0.0% | — | — | — | — | — | — |
+| GPT-6 Luna (low) on ChatGPT Pro 200 | 0.0% | — | — | — | — | — | — |
+| GPT-6 Luna (low) on ChatGPT Pro 500 | 0.0% | — | — | — | — | — | — |
+| GPT-6 Luna (max) on ChatGPT Plus | 0.0% | — | — | — | — | — | — |
+| GPT-6 Luna (max) on ChatGPT Pro 100 | 0.0% | — | — | — | — | — | — |
+| GPT-6 Luna (max) on ChatGPT Pro 200 | 0.0% | — | — | — | — | — | — |
+| GPT-6 Luna (max) on ChatGPT Pro 500 | 0.0% | — | — | — | — | — | — |
+| GPT-6 Luna (medium) on ChatGPT Plus | 0.0% | — | — | — | — | — | — |
+| GPT-6 Luna (medium) on ChatGPT Pro 100 | 0.0% | — | — | — | — | — | — |
+| GPT-6 Luna (medium) on ChatGPT Pro 200 | 0.0% | — | — | — | — | — | — |
+| GPT-6 Luna (medium) on ChatGPT Pro 500 | 0.0% | — | — | — | — | — | — |
+| GPT-6 Luna (xhigh) on ChatGPT Plus | 0.0% | — | — | — | — | — | — |
+| GPT-6 Luna (xhigh) on ChatGPT Pro 100 | 0.0% | — | — | — | — | — | — |
+| GPT-6 Luna (xhigh) on ChatGPT Pro 200 | 0.0% | — | — | — | — | — | — |
+| GPT-6 Luna (xhigh) on ChatGPT Pro 500 | 0.0% | — | — | — | — | — | — |
+| GPT-6.1 Sol (high) on ChatGPT Plus | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| GPT-6.1 Sol (high) on ChatGPT Pro 100 | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| GPT-6.1 Sol (high) on ChatGPT Pro 200 | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| GPT-6.1 Sol (high) on ChatGPT Pro 500 | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.5% | 0.5% |
+| GPT-6.1 Sol (low) on ChatGPT Plus | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| GPT-6.1 Sol (low) on ChatGPT Pro 100 | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| GPT-6.1 Sol (low) on ChatGPT Pro 200 | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| GPT-6.1 Sol (low) on ChatGPT Pro 500 | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| GPT-6.1 Sol (max) on ChatGPT Plus | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| GPT-6.1 Sol (max) on ChatGPT Pro 100 | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| GPT-6.1 Sol (max) on ChatGPT Pro 200 | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| GPT-6.1 Sol (max) on ChatGPT Pro 500 | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 4.8% | 4.5% |
+| GPT-6.1 Sol (medium) on ChatGPT Plus | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| GPT-6.1 Sol (medium) on ChatGPT Pro 100 | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| GPT-6.1 Sol (medium) on ChatGPT Pro 200 | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| GPT-6.1 Sol (medium) on ChatGPT Pro 500 | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| GPT-6.1 Sol (xhigh) on ChatGPT Plus | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| GPT-6.1 Sol (xhigh) on ChatGPT Pro 100 | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| GPT-6.1 Sol (xhigh) on ChatGPT Pro 200 | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| GPT-6.1 Sol (xhigh) on ChatGPT Pro 500 | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 3.9% | 3.8% |
+| GPT-6.1 Terra (high) on ChatGPT Plus | 0.0% | — | — | — | — | — | — |
+| GPT-6.1 Terra (high) on ChatGPT Pro 100 | 0.0% | — | — | — | — | — | — |
+| GPT-6.1 Terra (high) on ChatGPT Pro 200 | 0.0% | — | — | — | — | — | — |
+| GPT-6.1 Terra (high) on ChatGPT Pro 500 | 0.0% | — | — | — | — | — | — |
+| GPT-6.1 Terra (low) on ChatGPT Plus | 0.0% | — | — | — | — | — | — |
+| GPT-6.1 Terra (low) on ChatGPT Pro 100 | 0.0% | — | — | — | — | — | — |
+| GPT-6.1 Terra (low) on ChatGPT Pro 200 | 0.0% | — | — | — | — | — | — |
+| GPT-6.1 Terra (low) on ChatGPT Pro 500 | 0.0% | — | — | — | — | — | — |
+| GPT-6.1 Terra (max) on ChatGPT Plus | 0.0% | — | — | — | — | — | — |
+| GPT-6.1 Terra (max) on ChatGPT Pro 100 | 0.0% | — | — | — | — | — | — |
+| GPT-6.1 Terra (max) on ChatGPT Pro 200 | 0.0% | — | — | — | — | — | — |
+| GPT-6.1 Terra (max) on ChatGPT Pro 500 | 0.0% | — | — | — | — | — | — |
+| GPT-6.1 Terra (medium) on ChatGPT Plus | 0.0% | — | — | — | — | — | — |
+| GPT-6.1 Terra (medium) on ChatGPT Pro 100 | 0.0% | — | — | — | — | — | — |
+| GPT-6.1 Terra (medium) on ChatGPT Pro 200 | 0.0% | — | — | — | — | — | — |
+| GPT-6.1 Terra (medium) on ChatGPT Pro 500 | 0.0% | — | — | — | — | — | — |
+| GPT-6.1 Terra (xhigh) on ChatGPT Plus | 0.0% | — | — | — | — | — | — |
+| GPT-6.1 Terra (xhigh) on ChatGPT Pro 100 | 0.0% | — | — | — | — | — | — |
+| GPT-6.1 Terra (xhigh) on ChatGPT Pro 200 | 0.0% | — | — | — | — | — | — |
+| GPT-6.1 Terra (xhigh) on ChatGPT Pro 500 | 0.0% | — | — | — | — | — | — |
+| Gemini 4 Argon (high) on API-cost fallback | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| Kimi K3.1 Pro (max) on API-cost fallback | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| MiMo-V2.6-Pro on MiMo Token Plan Lite | 0.0% | — | — | — | — | — | — |
+| MiMo-V2.6-Pro on MiMo Token Plan Max | 0.0% | — | — | — | — | — | — |
+| MiMo-V2.6-Pro on MiMo Token Plan Pro | 0.0% | — | — | — | — | — | — |
+| MiMo-V2.6-Pro on MiMo Token Plan Standard | 0.0% | — | — | — | — | — | — |
 
 ### Plan basis: rank 3 or better
 
-| Configuration | S0 | S1 | S2 | S1 endpoint-heavy | S1M | S1T |
-|---|---:|---:|---:|---:|---:|---:|
-| Claude Haiku 5.5 (high) on Claude Max 20x | 0.0% | — | — | — | — | — |
-| Claude Haiku 5.5 (high) on Claude Max 5x | 0.0% | — | — | — | — | — |
-| Claude Haiku 5.5 (high) on Claude Pro | 0.0% | — | — | — | — | — |
-| Claude Haiku 5.5 (low) on Claude Max 20x | 0.0% | — | — | — | — | — |
-| Claude Haiku 5.5 (low) on Claude Max 5x | 0.0% | — | — | — | — | — |
-| Claude Haiku 5.5 (low) on Claude Pro | 0.0% | — | — | — | — | — |
-| Claude Haiku 5.5 (max) on Claude Max 20x | 0.0% | — | — | — | — | — |
-| Claude Haiku 5.5 (max) on Claude Max 5x | 0.0% | — | — | — | — | — |
-| Claude Haiku 5.5 (max) on Claude Pro | 0.0% | — | — | — | — | — |
-| Claude Haiku 5.5 (medium) on Claude Max 20x | 0.0% | — | — | — | — | — |
-| Claude Haiku 5.5 (medium) on Claude Max 5x | 0.0% | — | — | — | — | — |
-| Claude Haiku 5.5 (medium) on Claude Pro | 0.0% | — | — | — | — | — |
-| Claude Haiku 5.5 (xhigh) on Claude Max 20x | 0.0% | — | — | — | — | — |
-| Claude Haiku 5.5 (xhigh) on Claude Max 5x | 0.0% | — | — | — | — | — |
-| Claude Haiku 5.5 (xhigh) on Claude Pro | 0.0% | — | — | — | — | — |
-| Claude Opus 5.5 (high) on Claude Max 20x | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 2.8% |
-| Claude Opus 5.5 (high) on Claude Max 5x | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 2.5% |
-| Claude Opus 5.5 (high) on Claude Pro | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 3.0% |
-| Claude Opus 5.5 (max) on Claude Max 20x | 100.0% | 100.0% | 100.0% | 100.0% | 100.0% | 54.1% |
-| Claude Opus 5.5 (max) on Claude Max 5x | 100.0% | 100.0% | 99.8% | 100.0% | 100.0% | 52.3% |
-| Claude Opus 5.5 (max) on Claude Pro | 100.0% | 100.0% | 100.0% | 100.0% | 100.0% | 55.3% |
-| Claude Opus 5.5 (medium) on Claude Max 20x | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.3% |
-| Claude Opus 5.5 (medium) on Claude Max 5x | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.2% |
-| Claude Opus 5.5 (medium) on Claude Pro | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.3% |
-| Claude Opus 5.5 (xhigh) on Claude Max 20x | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 33.8% |
-| Claude Opus 5.5 (xhigh) on Claude Max 5x | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 32.2% |
-| Claude Opus 5.5 (xhigh) on Claude Pro | 0.0% | 0.0% | 0.2% | 0.0% | 0.0% | 35.0% |
-| Claude Sonnet 5.5 (max) on Claude Max 20x | 0.0% | — | — | — | — | — |
-| Claude Sonnet 5.5 (max) on Claude Max 5x | 0.0% | — | — | — | — | — |
-| Claude Sonnet 5.5 (max) on Claude Pro | 0.0% | — | — | — | — | — |
-| Claude Sonnet 5.5 (xhigh) on Claude Max 20x | 0.0% | — | — | — | — | — |
-| Claude Sonnet 5.5 (xhigh) on Claude Max 5x | 0.0% | — | — | — | — | — |
-| Claude Sonnet 5.5 (xhigh) on Claude Pro | 0.0% | — | — | — | — | — |
-| DeepSeek V4.1 Flash 1017 (max) on API-cost fallback | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| GPT-6 Astra (high) on ChatGPT Plus | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| GPT-6 Astra (high) on ChatGPT Pro 100 | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| GPT-6 Astra (high) on ChatGPT Pro 200 | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| GPT-6 Astra (high) on ChatGPT Pro 500 | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| GPT-6 Astra (max) on ChatGPT Plus | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| GPT-6 Astra (max) on ChatGPT Pro 100 | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.1% |
-| GPT-6 Astra (max) on ChatGPT Pro 200 | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.1% |
-| GPT-6 Astra (max) on ChatGPT Pro 500 | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.1% |
-| GPT-6 Astra (xhigh) on ChatGPT Plus | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| GPT-6 Astra (xhigh) on ChatGPT Pro 100 | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.2% |
-| GPT-6 Astra (xhigh) on ChatGPT Pro 200 | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.3% |
-| GPT-6 Astra (xhigh) on ChatGPT Pro 500 | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.3% |
-| GPT-6 Luna (high) on ChatGPT Plus | 0.0% | — | — | — | — | — |
-| GPT-6 Luna (high) on ChatGPT Pro 100 | 0.0% | — | — | — | — | — |
-| GPT-6 Luna (high) on ChatGPT Pro 200 | 0.0% | — | — | — | — | — |
-| GPT-6 Luna (high) on ChatGPT Pro 500 | 0.0% | — | — | — | — | — |
-| GPT-6 Luna (low) on ChatGPT Plus | 0.0% | — | — | — | — | — |
-| GPT-6 Luna (low) on ChatGPT Pro 100 | 0.0% | — | — | — | — | — |
-| GPT-6 Luna (low) on ChatGPT Pro 200 | 0.0% | — | — | — | — | — |
-| GPT-6 Luna (low) on ChatGPT Pro 500 | 0.0% | — | — | — | — | — |
-| GPT-6 Luna (max) on ChatGPT Plus | 0.0% | — | — | — | — | — |
-| GPT-6 Luna (max) on ChatGPT Pro 100 | 0.0% | — | — | — | — | — |
-| GPT-6 Luna (max) on ChatGPT Pro 200 | 0.0% | — | — | — | — | — |
-| GPT-6 Luna (max) on ChatGPT Pro 500 | 0.0% | — | — | — | — | — |
-| GPT-6 Luna (medium) on ChatGPT Plus | 0.0% | — | — | — | — | — |
-| GPT-6 Luna (medium) on ChatGPT Pro 100 | 0.0% | — | — | — | — | — |
-| GPT-6 Luna (medium) on ChatGPT Pro 200 | 0.0% | — | — | — | — | — |
-| GPT-6 Luna (medium) on ChatGPT Pro 500 | 0.0% | — | — | — | — | — |
-| GPT-6 Luna (xhigh) on ChatGPT Plus | 0.0% | — | — | — | — | — |
-| GPT-6 Luna (xhigh) on ChatGPT Pro 100 | 0.0% | — | — | — | — | — |
-| GPT-6 Luna (xhigh) on ChatGPT Pro 200 | 0.0% | — | — | — | — | — |
-| GPT-6 Luna (xhigh) on ChatGPT Pro 500 | 0.0% | — | — | — | — | — |
-| GPT-6.1 Sol (high) on ChatGPT Plus | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.5% |
-| GPT-6.1 Sol (high) on ChatGPT Pro 100 | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.5% |
-| GPT-6.1 Sol (high) on ChatGPT Pro 200 | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| GPT-6.1 Sol (high) on ChatGPT Pro 500 | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.6% |
-| GPT-6.1 Sol (low) on ChatGPT Plus | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| GPT-6.1 Sol (low) on ChatGPT Pro 100 | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| GPT-6.1 Sol (low) on ChatGPT Pro 200 | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| GPT-6.1 Sol (low) on ChatGPT Pro 500 | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| GPT-6.1 Sol (max) on ChatGPT Plus | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 4.5% |
-| GPT-6.1 Sol (max) on ChatGPT Pro 100 | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 4.5% |
-| GPT-6.1 Sol (max) on ChatGPT Pro 200 | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| GPT-6.1 Sol (max) on ChatGPT Pro 500 | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 5.2% |
-| GPT-6.1 Sol (medium) on ChatGPT Plus | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| GPT-6.1 Sol (medium) on ChatGPT Pro 100 | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| GPT-6.1 Sol (medium) on ChatGPT Pro 200 | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| GPT-6.1 Sol (medium) on ChatGPT Pro 500 | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| GPT-6.1 Sol (xhigh) on ChatGPT Plus | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 3.7% |
-| GPT-6.1 Sol (xhigh) on ChatGPT Pro 100 | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 3.7% |
-| GPT-6.1 Sol (xhigh) on ChatGPT Pro 200 | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| GPT-6.1 Sol (xhigh) on ChatGPT Pro 500 | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 4.3% |
-| GPT-6.1 Terra (high) on ChatGPT Plus | 0.0% | — | — | — | — | — |
-| GPT-6.1 Terra (high) on ChatGPT Pro 100 | 0.0% | — | — | — | — | — |
-| GPT-6.1 Terra (high) on ChatGPT Pro 200 | 0.0% | — | — | — | — | — |
-| GPT-6.1 Terra (high) on ChatGPT Pro 500 | 0.0% | — | — | — | — | — |
-| GPT-6.1 Terra (low) on ChatGPT Plus | 0.0% | — | — | — | — | — |
-| GPT-6.1 Terra (low) on ChatGPT Pro 100 | 0.0% | — | — | — | — | — |
-| GPT-6.1 Terra (low) on ChatGPT Pro 200 | 0.0% | — | — | — | — | — |
-| GPT-6.1 Terra (low) on ChatGPT Pro 500 | 0.0% | — | — | — | — | — |
-| GPT-6.1 Terra (max) on ChatGPT Plus | 0.0% | — | — | — | — | — |
-| GPT-6.1 Terra (max) on ChatGPT Pro 100 | 0.0% | — | — | — | — | — |
-| GPT-6.1 Terra (max) on ChatGPT Pro 200 | 0.0% | — | — | — | — | — |
-| GPT-6.1 Terra (max) on ChatGPT Pro 500 | 0.0% | — | — | — | — | — |
-| GPT-6.1 Terra (medium) on ChatGPT Plus | 0.0% | — | — | — | — | — |
-| GPT-6.1 Terra (medium) on ChatGPT Pro 100 | 0.0% | — | — | — | — | — |
-| GPT-6.1 Terra (medium) on ChatGPT Pro 200 | 0.0% | — | — | — | — | — |
-| GPT-6.1 Terra (medium) on ChatGPT Pro 500 | 0.0% | — | — | — | — | — |
-| GPT-6.1 Terra (xhigh) on ChatGPT Plus | 0.0% | — | — | — | — | — |
-| GPT-6.1 Terra (xhigh) on ChatGPT Pro 100 | 0.0% | — | — | — | — | — |
-| GPT-6.1 Terra (xhigh) on ChatGPT Pro 200 | 0.0% | — | — | — | — | — |
-| GPT-6.1 Terra (xhigh) on ChatGPT Pro 500 | 0.0% | — | — | — | — | — |
-| Gemini 4 Argon (high) on API-cost fallback | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| Kimi K3.1 Pro (max) on API-cost fallback | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| MiMo-V2.6-Pro on MiMo Token Plan Lite | 0.0% | — | — | — | — | — |
-| MiMo-V2.6-Pro on MiMo Token Plan Max | 0.0% | — | — | — | — | — |
-| MiMo-V2.6-Pro on MiMo Token Plan Pro | 0.0% | — | — | — | — | — |
-| MiMo-V2.6-Pro on MiMo Token Plan Standard | 0.0% | — | — | — | — | — |
+| Configuration | S0 | S1 | S2 | S1 endpoint-heavy | S1M | S1T | S1T mean-preserving |
+|---|---:|---:|---:|---:|---:|---:|---:|
+| Claude Haiku 5.5 (high) on Claude Max 20x | 0.0% | — | — | — | — | — | — |
+| Claude Haiku 5.5 (high) on Claude Max 5x | 0.0% | — | — | — | — | — | — |
+| Claude Haiku 5.5 (high) on Claude Pro | 0.0% | — | — | — | — | — | — |
+| Claude Haiku 5.5 (low) on Claude Max 20x | 0.0% | — | — | — | — | — | — |
+| Claude Haiku 5.5 (low) on Claude Max 5x | 0.0% | — | — | — | — | — | — |
+| Claude Haiku 5.5 (low) on Claude Pro | 0.0% | — | — | — | — | — | — |
+| Claude Haiku 5.5 (max) on Claude Max 20x | 0.0% | — | — | — | — | — | — |
+| Claude Haiku 5.5 (max) on Claude Max 5x | 0.0% | — | — | — | — | — | — |
+| Claude Haiku 5.5 (max) on Claude Pro | 0.0% | — | — | — | — | — | — |
+| Claude Haiku 5.5 (medium) on Claude Max 20x | 0.0% | — | — | — | — | — | — |
+| Claude Haiku 5.5 (medium) on Claude Max 5x | 0.0% | — | — | — | — | — | — |
+| Claude Haiku 5.5 (medium) on Claude Pro | 0.0% | — | — | — | — | — | — |
+| Claude Haiku 5.5 (xhigh) on Claude Max 20x | 0.0% | — | — | — | — | — | — |
+| Claude Haiku 5.5 (xhigh) on Claude Max 5x | 0.0% | — | — | — | — | — | — |
+| Claude Haiku 5.5 (xhigh) on Claude Pro | 0.0% | — | — | — | — | — | — |
+| Claude Opus 5.5 (high) on Claude Max 20x | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 2.8% | 2.6% |
+| Claude Opus 5.5 (high) on Claude Max 5x | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 2.5% | 2.4% |
+| Claude Opus 5.5 (high) on Claude Pro | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 3.0% | 2.9% |
+| Claude Opus 5.5 (max) on Claude Max 20x | 100.0% | 100.0% | 100.0% | 100.0% | 100.0% | 54.1% | 54.6% |
+| Claude Opus 5.5 (max) on Claude Max 5x | 100.0% | 100.0% | 99.8% | 100.0% | 100.0% | 52.3% | 52.9% |
+| Claude Opus 5.5 (max) on Claude Pro | 100.0% | 100.0% | 100.0% | 100.0% | 100.0% | 55.3% | 55.8% |
+| Claude Opus 5.5 (medium) on Claude Max 20x | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.3% | 0.2% |
+| Claude Opus 5.5 (medium) on Claude Max 5x | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.2% | 0.2% |
+| Claude Opus 5.5 (medium) on Claude Pro | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.3% | 0.2% |
+| Claude Opus 5.5 (xhigh) on Claude Max 20x | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 33.8% | 33.8% |
+| Claude Opus 5.5 (xhigh) on Claude Max 5x | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 32.2% | 32.3% |
+| Claude Opus 5.5 (xhigh) on Claude Pro | 0.0% | 0.0% | 0.2% | 0.0% | 0.0% | 35.0% | 35.0% |
+| Claude Sonnet 5.5 (max) on Claude Max 20x | 0.0% | — | — | — | — | — | — |
+| Claude Sonnet 5.5 (max) on Claude Max 5x | 0.0% | — | — | — | — | — | — |
+| Claude Sonnet 5.5 (max) on Claude Pro | 0.0% | — | — | — | — | — | — |
+| Claude Sonnet 5.5 (xhigh) on Claude Max 20x | 0.0% | — | — | — | — | — | — |
+| Claude Sonnet 5.5 (xhigh) on Claude Max 5x | 0.0% | — | — | — | — | — | — |
+| Claude Sonnet 5.5 (xhigh) on Claude Pro | 0.0% | — | — | — | — | — | — |
+| DeepSeek V4.1 Flash 1017 (max) on API-cost fallback | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| GPT-6 Astra (high) on ChatGPT Plus | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| GPT-6 Astra (high) on ChatGPT Pro 100 | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| GPT-6 Astra (high) on ChatGPT Pro 200 | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| GPT-6 Astra (high) on ChatGPT Pro 500 | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| GPT-6 Astra (max) on ChatGPT Plus | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| GPT-6 Astra (max) on ChatGPT Pro 100 | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.1% | 0.1% |
+| GPT-6 Astra (max) on ChatGPT Pro 200 | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.1% | 0.1% |
+| GPT-6 Astra (max) on ChatGPT Pro 500 | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.1% | 0.1% |
+| GPT-6 Astra (xhigh) on ChatGPT Plus | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| GPT-6 Astra (xhigh) on ChatGPT Pro 100 | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.2% | 0.1% |
+| GPT-6 Astra (xhigh) on ChatGPT Pro 200 | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.3% | 0.2% |
+| GPT-6 Astra (xhigh) on ChatGPT Pro 500 | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.3% | 0.2% |
+| GPT-6 Luna (high) on ChatGPT Plus | 0.0% | — | — | — | — | — | — |
+| GPT-6 Luna (high) on ChatGPT Pro 100 | 0.0% | — | — | — | — | — | — |
+| GPT-6 Luna (high) on ChatGPT Pro 200 | 0.0% | — | — | — | — | — | — |
+| GPT-6 Luna (high) on ChatGPT Pro 500 | 0.0% | — | — | — | — | — | — |
+| GPT-6 Luna (low) on ChatGPT Plus | 0.0% | — | — | — | — | — | — |
+| GPT-6 Luna (low) on ChatGPT Pro 100 | 0.0% | — | — | — | — | — | — |
+| GPT-6 Luna (low) on ChatGPT Pro 200 | 0.0% | — | — | — | — | — | — |
+| GPT-6 Luna (low) on ChatGPT Pro 500 | 0.0% | — | — | — | — | — | — |
+| GPT-6 Luna (max) on ChatGPT Plus | 0.0% | — | — | — | — | — | — |
+| GPT-6 Luna (max) on ChatGPT Pro 100 | 0.0% | — | — | — | — | — | — |
+| GPT-6 Luna (max) on ChatGPT Pro 200 | 0.0% | — | — | — | — | — | — |
+| GPT-6 Luna (max) on ChatGPT Pro 500 | 0.0% | — | — | — | — | — | — |
+| GPT-6 Luna (medium) on ChatGPT Plus | 0.0% | — | — | — | — | — | — |
+| GPT-6 Luna (medium) on ChatGPT Pro 100 | 0.0% | — | — | — | — | — | — |
+| GPT-6 Luna (medium) on ChatGPT Pro 200 | 0.0% | — | — | — | — | — | — |
+| GPT-6 Luna (medium) on ChatGPT Pro 500 | 0.0% | — | — | — | — | — | — |
+| GPT-6 Luna (xhigh) on ChatGPT Plus | 0.0% | — | — | — | — | — | — |
+| GPT-6 Luna (xhigh) on ChatGPT Pro 100 | 0.0% | — | — | — | — | — | — |
+| GPT-6 Luna (xhigh) on ChatGPT Pro 200 | 0.0% | — | — | — | — | — | — |
+| GPT-6 Luna (xhigh) on ChatGPT Pro 500 | 0.0% | — | — | — | — | — | — |
+| GPT-6.1 Sol (high) on ChatGPT Plus | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.5% | 0.5% |
+| GPT-6.1 Sol (high) on ChatGPT Pro 100 | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.5% | 0.5% |
+| GPT-6.1 Sol (high) on ChatGPT Pro 200 | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| GPT-6.1 Sol (high) on ChatGPT Pro 500 | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.6% | 0.6% |
+| GPT-6.1 Sol (low) on ChatGPT Plus | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| GPT-6.1 Sol (low) on ChatGPT Pro 100 | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| GPT-6.1 Sol (low) on ChatGPT Pro 200 | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| GPT-6.1 Sol (low) on ChatGPT Pro 500 | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| GPT-6.1 Sol (max) on ChatGPT Plus | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 4.5% | 4.3% |
+| GPT-6.1 Sol (max) on ChatGPT Pro 100 | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 4.5% | 4.3% |
+| GPT-6.1 Sol (max) on ChatGPT Pro 200 | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| GPT-6.1 Sol (max) on ChatGPT Pro 500 | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 5.2% | 4.7% |
+| GPT-6.1 Sol (medium) on ChatGPT Plus | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| GPT-6.1 Sol (medium) on ChatGPT Pro 100 | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| GPT-6.1 Sol (medium) on ChatGPT Pro 200 | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| GPT-6.1 Sol (medium) on ChatGPT Pro 500 | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| GPT-6.1 Sol (xhigh) on ChatGPT Plus | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 3.7% | 3.6% |
+| GPT-6.1 Sol (xhigh) on ChatGPT Pro 100 | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 3.7% | 3.6% |
+| GPT-6.1 Sol (xhigh) on ChatGPT Pro 200 | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| GPT-6.1 Sol (xhigh) on ChatGPT Pro 500 | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 4.3% | 4.2% |
+| GPT-6.1 Terra (high) on ChatGPT Plus | 0.0% | — | — | — | — | — | — |
+| GPT-6.1 Terra (high) on ChatGPT Pro 100 | 0.0% | — | — | — | — | — | — |
+| GPT-6.1 Terra (high) on ChatGPT Pro 200 | 0.0% | — | — | — | — | — | — |
+| GPT-6.1 Terra (high) on ChatGPT Pro 500 | 0.0% | — | — | — | — | — | — |
+| GPT-6.1 Terra (low) on ChatGPT Plus | 0.0% | — | — | — | — | — | — |
+| GPT-6.1 Terra (low) on ChatGPT Pro 100 | 0.0% | — | — | — | — | — | — |
+| GPT-6.1 Terra (low) on ChatGPT Pro 200 | 0.0% | — | — | — | — | — | — |
+| GPT-6.1 Terra (low) on ChatGPT Pro 500 | 0.0% | — | — | — | — | — | — |
+| GPT-6.1 Terra (max) on ChatGPT Plus | 0.0% | — | — | — | — | — | — |
+| GPT-6.1 Terra (max) on ChatGPT Pro 100 | 0.0% | — | — | — | — | — | — |
+| GPT-6.1 Terra (max) on ChatGPT Pro 200 | 0.0% | — | — | — | — | — | — |
+| GPT-6.1 Terra (max) on ChatGPT Pro 500 | 0.0% | — | — | — | — | — | — |
+| GPT-6.1 Terra (medium) on ChatGPT Plus | 0.0% | — | — | — | — | — | — |
+| GPT-6.1 Terra (medium) on ChatGPT Pro 100 | 0.0% | — | — | — | — | — | — |
+| GPT-6.1 Terra (medium) on ChatGPT Pro 200 | 0.0% | — | — | — | — | — | — |
+| GPT-6.1 Terra (medium) on ChatGPT Pro 500 | 0.0% | — | — | — | — | — | — |
+| GPT-6.1 Terra (xhigh) on ChatGPT Plus | 0.0% | — | — | — | — | — | — |
+| GPT-6.1 Terra (xhigh) on ChatGPT Pro 100 | 0.0% | — | — | — | — | — | — |
+| GPT-6.1 Terra (xhigh) on ChatGPT Pro 200 | 0.0% | — | — | — | — | — | — |
+| GPT-6.1 Terra (xhigh) on ChatGPT Pro 500 | 0.0% | — | — | — | — | — | — |
+| Gemini 4 Argon (high) on API-cost fallback | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| Kimi K3.1 Pro (max) on API-cost fallback | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| MiMo-V2.6-Pro on MiMo Token Plan Lite | 0.0% | — | — | — | — | — | — |
+| MiMo-V2.6-Pro on MiMo Token Plan Max | 0.0% | — | — | — | — | — | — |
+| MiMo-V2.6-Pro on MiMo Token Plan Pro | 0.0% | — | — | — | — | — | — |
+| MiMo-V2.6-Pro on MiMo Token Plan Standard | 0.0% | — | — | — | — | — | — |
 
 ### Plan basis: on the frontier
 
-| Configuration | S0 | S1 | S2 | S1 endpoint-heavy | S1M | S1T |
-|---|---:|---:|---:|---:|---:|---:|
-| Claude Haiku 5.5 (high) on Claude Max 20x | 0.0% | — | — | — | — | — |
-| Claude Haiku 5.5 (high) on Claude Max 5x | 0.0% | — | — | — | — | — |
-| Claude Haiku 5.5 (high) on Claude Pro | 100.0% | — | — | — | — | — |
-| Claude Haiku 5.5 (low) on Claude Max 20x | 0.0% | — | — | — | — | — |
-| Claude Haiku 5.5 (low) on Claude Max 5x | 0.0% | — | — | — | — | — |
-| Claude Haiku 5.5 (low) on Claude Pro | 100.0% | — | — | — | — | — |
-| Claude Haiku 5.5 (max) on Claude Max 20x | 0.0% | — | — | — | — | — |
-| Claude Haiku 5.5 (max) on Claude Max 5x | 0.0% | — | — | — | — | — |
-| Claude Haiku 5.5 (max) on Claude Pro | 100.0% | — | — | — | — | — |
-| Claude Haiku 5.5 (medium) on Claude Max 20x | 0.0% | — | — | — | — | — |
-| Claude Haiku 5.5 (medium) on Claude Max 5x | 0.0% | — | — | — | — | — |
-| Claude Haiku 5.5 (medium) on Claude Pro | 100.0% | — | — | — | — | — |
-| Claude Haiku 5.5 (xhigh) on Claude Max 20x | 0.0% | — | — | — | — | — |
-| Claude Haiku 5.5 (xhigh) on Claude Max 5x | 0.0% | — | — | — | — | — |
-| Claude Haiku 5.5 (xhigh) on Claude Pro | 100.0% | — | — | — | — | — |
-| Claude Opus 5.5 (high) on Claude Max 20x | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| Claude Opus 5.5 (high) on Claude Max 5x | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| Claude Opus 5.5 (high) on Claude Pro | 100.0% | 100.0% | 100.0% | 100.0% | 100.0% | 84.8% |
-| Claude Opus 5.5 (max) on Claude Max 20x | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| Claude Opus 5.5 (max) on Claude Max 5x | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| Claude Opus 5.5 (max) on Claude Pro | 100.0% | 100.0% | 100.0% | 100.0% | 100.0% | 79.2% |
-| Claude Opus 5.5 (medium) on Claude Max 20x | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| Claude Opus 5.5 (medium) on Claude Max 5x | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| Claude Opus 5.5 (medium) on Claude Pro | 100.0% | 100.0% | 100.0% | 100.0% | 100.0% | 100.0% |
-| Claude Opus 5.5 (xhigh) on Claude Max 20x | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| Claude Opus 5.5 (xhigh) on Claude Max 5x | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| Claude Opus 5.5 (xhigh) on Claude Pro | 100.0% | 100.0% | 100.0% | 100.0% | 100.0% | 87.2% |
-| Claude Sonnet 5.5 (max) on Claude Max 20x | 0.0% | — | — | — | — | — |
-| Claude Sonnet 5.5 (max) on Claude Max 5x | 0.0% | — | — | — | — | — |
-| Claude Sonnet 5.5 (max) on Claude Pro | 100.0% | — | — | — | — | — |
-| Claude Sonnet 5.5 (xhigh) on Claude Max 20x | 0.0% | — | — | — | — | — |
-| Claude Sonnet 5.5 (xhigh) on Claude Max 5x | 0.0% | — | — | — | — | — |
-| Claude Sonnet 5.5 (xhigh) on Claude Pro | 0.0% | — | — | — | — | — |
-| DeepSeek V4.1 Flash 1017 (max) on API-cost fallback | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| GPT-6 Astra (high) on ChatGPT Plus | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| GPT-6 Astra (high) on ChatGPT Pro 100 | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| GPT-6 Astra (high) on ChatGPT Pro 200 | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.4% |
-| GPT-6 Astra (high) on ChatGPT Pro 500 | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| GPT-6 Astra (max) on ChatGPT Plus | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| GPT-6 Astra (max) on ChatGPT Pro 100 | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| GPT-6 Astra (max) on ChatGPT Pro 200 | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 11.0% |
-| GPT-6 Astra (max) on ChatGPT Pro 500 | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| GPT-6 Astra (xhigh) on ChatGPT Plus | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| GPT-6 Astra (xhigh) on ChatGPT Pro 100 | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| GPT-6 Astra (xhigh) on ChatGPT Pro 200 | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 6.6% |
-| GPT-6 Astra (xhigh) on ChatGPT Pro 500 | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| GPT-6 Luna (high) on ChatGPT Plus | 0.0% | — | — | — | — | — |
-| GPT-6 Luna (high) on ChatGPT Pro 100 | 0.0% | — | — | — | — | — |
-| GPT-6 Luna (high) on ChatGPT Pro 200 | 0.0% | — | — | — | — | — |
-| GPT-6 Luna (high) on ChatGPT Pro 500 | 0.0% | — | — | — | — | — |
-| GPT-6 Luna (low) on ChatGPT Plus | 0.0% | — | — | — | — | — |
-| GPT-6 Luna (low) on ChatGPT Pro 100 | 0.0% | — | — | — | — | — |
-| GPT-6 Luna (low) on ChatGPT Pro 200 | 0.0% | — | — | — | — | — |
-| GPT-6 Luna (low) on ChatGPT Pro 500 | 0.0% | — | — | — | — | — |
-| GPT-6 Luna (max) on ChatGPT Plus | 0.0% | — | — | — | — | — |
-| GPT-6 Luna (max) on ChatGPT Pro 100 | 0.0% | — | — | — | — | — |
-| GPT-6 Luna (max) on ChatGPT Pro 200 | 0.0% | — | — | — | — | — |
-| GPT-6 Luna (max) on ChatGPT Pro 500 | 0.0% | — | — | — | — | — |
-| GPT-6 Luna (medium) on ChatGPT Plus | 0.0% | — | — | — | — | — |
-| GPT-6 Luna (medium) on ChatGPT Pro 100 | 0.0% | — | — | — | — | — |
-| GPT-6 Luna (medium) on ChatGPT Pro 200 | 0.0% | — | — | — | — | — |
-| GPT-6 Luna (medium) on ChatGPT Pro 500 | 0.0% | — | — | — | — | — |
-| GPT-6 Luna (xhigh) on ChatGPT Plus | 0.0% | — | — | — | — | — |
-| GPT-6 Luna (xhigh) on ChatGPT Pro 100 | 0.0% | — | — | — | — | — |
-| GPT-6 Luna (xhigh) on ChatGPT Pro 200 | 0.0% | — | — | — | — | — |
-| GPT-6 Luna (xhigh) on ChatGPT Pro 500 | 0.0% | — | — | — | — | — |
-| GPT-6.1 Sol (high) on ChatGPT Plus | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| GPT-6.1 Sol (high) on ChatGPT Pro 100 | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| GPT-6.1 Sol (high) on ChatGPT Pro 200 | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| GPT-6.1 Sol (high) on ChatGPT Pro 500 | 0.0% | 0.0% | 0.4% | 0.0% | 0.0% | 31.7% |
-| GPT-6.1 Sol (low) on ChatGPT Plus | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| GPT-6.1 Sol (low) on ChatGPT Pro 100 | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| GPT-6.1 Sol (low) on ChatGPT Pro 200 | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| GPT-6.1 Sol (low) on ChatGPT Pro 500 | 0.0% | 100.0% | 100.0% | 100.0% | 100.0% | 100.0% |
-| GPT-6.1 Sol (max) on ChatGPT Plus | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| GPT-6.1 Sol (max) on ChatGPT Pro 100 | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| GPT-6.1 Sol (max) on ChatGPT Pro 200 | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| GPT-6.1 Sol (max) on ChatGPT Pro 500 | 0.0% | 0.0% | 0.1% | 0.0% | 0.0% | 23.3% |
-| GPT-6.1 Sol (medium) on ChatGPT Plus | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| GPT-6.1 Sol (medium) on ChatGPT Pro 100 | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| GPT-6.1 Sol (medium) on ChatGPT Pro 200 | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| GPT-6.1 Sol (medium) on ChatGPT Pro 500 | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 26.8% |
-| GPT-6.1 Sol (xhigh) on ChatGPT Plus | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| GPT-6.1 Sol (xhigh) on ChatGPT Pro 100 | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| GPT-6.1 Sol (xhigh) on ChatGPT Pro 200 | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| GPT-6.1 Sol (xhigh) on ChatGPT Pro 500 | 100.0% | 100.0% | 99.7% | 100.0% | 100.0% | 61.8% |
-| GPT-6.1 Terra (high) on ChatGPT Plus | 0.0% | — | — | — | — | — |
-| GPT-6.1 Terra (high) on ChatGPT Pro 100 | 0.0% | — | — | — | — | — |
-| GPT-6.1 Terra (high) on ChatGPT Pro 200 | 0.0% | — | — | — | — | — |
-| GPT-6.1 Terra (high) on ChatGPT Pro 500 | 100.0% | — | — | — | — | — |
-| GPT-6.1 Terra (low) on ChatGPT Plus | 0.0% | — | — | — | — | — |
-| GPT-6.1 Terra (low) on ChatGPT Pro 100 | 0.0% | — | — | — | — | — |
-| GPT-6.1 Terra (low) on ChatGPT Pro 200 | 0.0% | — | — | — | — | — |
-| GPT-6.1 Terra (low) on ChatGPT Pro 500 | 0.0% | — | — | — | — | — |
-| GPT-6.1 Terra (max) on ChatGPT Plus | 0.0% | — | — | — | — | — |
-| GPT-6.1 Terra (max) on ChatGPT Pro 100 | 0.0% | — | — | — | — | — |
-| GPT-6.1 Terra (max) on ChatGPT Pro 200 | 0.0% | — | — | — | — | — |
-| GPT-6.1 Terra (max) on ChatGPT Pro 500 | 0.0% | — | — | — | — | — |
-| GPT-6.1 Terra (medium) on ChatGPT Plus | 0.0% | — | — | — | — | — |
-| GPT-6.1 Terra (medium) on ChatGPT Pro 100 | 0.0% | — | — | — | — | — |
-| GPT-6.1 Terra (medium) on ChatGPT Pro 200 | 0.0% | — | — | — | — | — |
-| GPT-6.1 Terra (medium) on ChatGPT Pro 500 | 0.0% | — | — | — | — | — |
-| GPT-6.1 Terra (xhigh) on ChatGPT Plus | 0.0% | — | — | — | — | — |
-| GPT-6.1 Terra (xhigh) on ChatGPT Pro 100 | 0.0% | — | — | — | — | — |
-| GPT-6.1 Terra (xhigh) on ChatGPT Pro 200 | 0.0% | — | — | — | — | — |
-| GPT-6.1 Terra (xhigh) on ChatGPT Pro 500 | 100.0% | — | — | — | — | — |
-| Gemini 4 Argon (high) on API-cost fallback | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| Kimi K3.1 Pro (max) on API-cost fallback | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| MiMo-V2.6-Pro on MiMo Token Plan Lite | 0.0% | — | — | — | — | — |
-| MiMo-V2.6-Pro on MiMo Token Plan Max | 0.0% | — | — | — | — | — |
-| MiMo-V2.6-Pro on MiMo Token Plan Pro | 0.0% | — | — | — | — | — |
-| MiMo-V2.6-Pro on MiMo Token Plan Standard | 0.0% | — | — | — | — | — |
+| Configuration | S0 | S1 | S2 | S1 endpoint-heavy | S1M | S1T | S1T mean-preserving |
+|---|---:|---:|---:|---:|---:|---:|---:|
+| Claude Haiku 5.5 (high) on Claude Max 20x | 0.0% | — | — | — | — | — | — |
+| Claude Haiku 5.5 (high) on Claude Max 5x | 0.0% | — | — | — | — | — | — |
+| Claude Haiku 5.5 (high) on Claude Pro | 100.0% | — | — | — | — | — | — |
+| Claude Haiku 5.5 (low) on Claude Max 20x | 0.0% | — | — | — | — | — | — |
+| Claude Haiku 5.5 (low) on Claude Max 5x | 0.0% | — | — | — | — | — | — |
+| Claude Haiku 5.5 (low) on Claude Pro | 100.0% | — | — | — | — | — | — |
+| Claude Haiku 5.5 (max) on Claude Max 20x | 0.0% | — | — | — | — | — | — |
+| Claude Haiku 5.5 (max) on Claude Max 5x | 0.0% | — | — | — | — | — | — |
+| Claude Haiku 5.5 (max) on Claude Pro | 100.0% | — | — | — | — | — | — |
+| Claude Haiku 5.5 (medium) on Claude Max 20x | 0.0% | — | — | — | — | — | — |
+| Claude Haiku 5.5 (medium) on Claude Max 5x | 0.0% | — | — | — | — | — | — |
+| Claude Haiku 5.5 (medium) on Claude Pro | 100.0% | — | — | — | — | — | — |
+| Claude Haiku 5.5 (xhigh) on Claude Max 20x | 0.0% | — | — | — | — | — | — |
+| Claude Haiku 5.5 (xhigh) on Claude Max 5x | 0.0% | — | — | — | — | — | — |
+| Claude Haiku 5.5 (xhigh) on Claude Pro | 100.0% | — | — | — | — | — | — |
+| Claude Opus 5.5 (high) on Claude Max 20x | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| Claude Opus 5.5 (high) on Claude Max 5x | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| Claude Opus 5.5 (high) on Claude Pro | 100.0% | 100.0% | 100.0% | 100.0% | 100.0% | 84.8% | 85.4% |
+| Claude Opus 5.5 (max) on Claude Max 20x | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| Claude Opus 5.5 (max) on Claude Max 5x | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| Claude Opus 5.5 (max) on Claude Pro | 100.0% | 100.0% | 100.0% | 100.0% | 100.0% | 79.2% | 79.8% |
+| Claude Opus 5.5 (medium) on Claude Max 20x | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| Claude Opus 5.5 (medium) on Claude Max 5x | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| Claude Opus 5.5 (medium) on Claude Pro | 100.0% | 100.0% | 100.0% | 100.0% | 100.0% | 100.0% | 100.0% |
+| Claude Opus 5.5 (xhigh) on Claude Max 20x | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| Claude Opus 5.5 (xhigh) on Claude Max 5x | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| Claude Opus 5.5 (xhigh) on Claude Pro | 100.0% | 100.0% | 100.0% | 100.0% | 100.0% | 87.2% | 87.2% |
+| Claude Sonnet 5.5 (max) on Claude Max 20x | 0.0% | — | — | — | — | — | — |
+| Claude Sonnet 5.5 (max) on Claude Max 5x | 0.0% | — | — | — | — | — | — |
+| Claude Sonnet 5.5 (max) on Claude Pro | 100.0% | — | — | — | — | — | — |
+| Claude Sonnet 5.5 (xhigh) on Claude Max 20x | 0.0% | — | — | — | — | — | — |
+| Claude Sonnet 5.5 (xhigh) on Claude Max 5x | 0.0% | — | — | — | — | — | — |
+| Claude Sonnet 5.5 (xhigh) on Claude Pro | 0.0% | — | — | — | — | — | — |
+| DeepSeek V4.1 Flash 1017 (max) on API-cost fallback | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| GPT-6 Astra (high) on ChatGPT Plus | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| GPT-6 Astra (high) on ChatGPT Pro 100 | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| GPT-6 Astra (high) on ChatGPT Pro 200 | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.4% | 0.3% |
+| GPT-6 Astra (high) on ChatGPT Pro 500 | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| GPT-6 Astra (max) on ChatGPT Plus | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| GPT-6 Astra (max) on ChatGPT Pro 100 | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| GPT-6 Astra (max) on ChatGPT Pro 200 | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 11.0% | 10.8% |
+| GPT-6 Astra (max) on ChatGPT Pro 500 | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| GPT-6 Astra (xhigh) on ChatGPT Plus | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| GPT-6 Astra (xhigh) on ChatGPT Pro 100 | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| GPT-6 Astra (xhigh) on ChatGPT Pro 200 | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 6.6% | 6.5% |
+| GPT-6 Astra (xhigh) on ChatGPT Pro 500 | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| GPT-6 Luna (high) on ChatGPT Plus | 0.0% | — | — | — | — | — | — |
+| GPT-6 Luna (high) on ChatGPT Pro 100 | 0.0% | — | — | — | — | — | — |
+| GPT-6 Luna (high) on ChatGPT Pro 200 | 0.0% | — | — | — | — | — | — |
+| GPT-6 Luna (high) on ChatGPT Pro 500 | 0.0% | — | — | — | — | — | — |
+| GPT-6 Luna (low) on ChatGPT Plus | 0.0% | — | — | — | — | — | — |
+| GPT-6 Luna (low) on ChatGPT Pro 100 | 0.0% | — | — | — | — | — | — |
+| GPT-6 Luna (low) on ChatGPT Pro 200 | 0.0% | — | — | — | — | — | — |
+| GPT-6 Luna (low) on ChatGPT Pro 500 | 0.0% | — | — | — | — | — | — |
+| GPT-6 Luna (max) on ChatGPT Plus | 0.0% | — | — | — | — | — | — |
+| GPT-6 Luna (max) on ChatGPT Pro 100 | 0.0% | — | — | — | — | — | — |
+| GPT-6 Luna (max) on ChatGPT Pro 200 | 0.0% | — | — | — | — | — | — |
+| GPT-6 Luna (max) on ChatGPT Pro 500 | 0.0% | — | — | — | — | — | — |
+| GPT-6 Luna (medium) on ChatGPT Plus | 0.0% | — | — | — | — | — | — |
+| GPT-6 Luna (medium) on ChatGPT Pro 100 | 0.0% | — | — | — | — | — | — |
+| GPT-6 Luna (medium) on ChatGPT Pro 200 | 0.0% | — | — | — | — | — | — |
+| GPT-6 Luna (medium) on ChatGPT Pro 500 | 0.0% | — | — | — | — | — | — |
+| GPT-6 Luna (xhigh) on ChatGPT Plus | 0.0% | — | — | — | — | — | — |
+| GPT-6 Luna (xhigh) on ChatGPT Pro 100 | 0.0% | — | — | — | — | — | — |
+| GPT-6 Luna (xhigh) on ChatGPT Pro 200 | 0.0% | — | — | — | — | — | — |
+| GPT-6 Luna (xhigh) on ChatGPT Pro 500 | 0.0% | — | — | — | — | — | — |
+| GPT-6.1 Sol (high) on ChatGPT Plus | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| GPT-6.1 Sol (high) on ChatGPT Pro 100 | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| GPT-6.1 Sol (high) on ChatGPT Pro 200 | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| GPT-6.1 Sol (high) on ChatGPT Pro 500 | 0.0% | 0.0% | 0.4% | 0.0% | 0.0% | 31.7% | 32.2% |
+| GPT-6.1 Sol (low) on ChatGPT Plus | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| GPT-6.1 Sol (low) on ChatGPT Pro 100 | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| GPT-6.1 Sol (low) on ChatGPT Pro 200 | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| GPT-6.1 Sol (low) on ChatGPT Pro 500 | 0.0% | 100.0% | 100.0% | 100.0% | 100.0% | 100.0% | 100.0% |
+| GPT-6.1 Sol (max) on ChatGPT Plus | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| GPT-6.1 Sol (max) on ChatGPT Pro 100 | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| GPT-6.1 Sol (max) on ChatGPT Pro 200 | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| GPT-6.1 Sol (max) on ChatGPT Pro 500 | 0.0% | 0.0% | 0.1% | 0.0% | 0.0% | 23.3% | 22.8% |
+| GPT-6.1 Sol (medium) on ChatGPT Plus | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| GPT-6.1 Sol (medium) on ChatGPT Pro 100 | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| GPT-6.1 Sol (medium) on ChatGPT Pro 200 | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| GPT-6.1 Sol (medium) on ChatGPT Pro 500 | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 26.8% | 26.4% |
+| GPT-6.1 Sol (xhigh) on ChatGPT Plus | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| GPT-6.1 Sol (xhigh) on ChatGPT Pro 100 | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| GPT-6.1 Sol (xhigh) on ChatGPT Pro 200 | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| GPT-6.1 Sol (xhigh) on ChatGPT Pro 500 | 100.0% | 100.0% | 99.7% | 100.0% | 100.0% | 61.8% | 61.0% |
+| GPT-6.1 Terra (high) on ChatGPT Plus | 0.0% | — | — | — | — | — | — |
+| GPT-6.1 Terra (high) on ChatGPT Pro 100 | 0.0% | — | — | — | — | — | — |
+| GPT-6.1 Terra (high) on ChatGPT Pro 200 | 0.0% | — | — | — | — | — | — |
+| GPT-6.1 Terra (high) on ChatGPT Pro 500 | 100.0% | — | — | — | — | — | — |
+| GPT-6.1 Terra (low) on ChatGPT Plus | 0.0% | — | — | — | — | — | — |
+| GPT-6.1 Terra (low) on ChatGPT Pro 100 | 0.0% | — | — | — | — | — | — |
+| GPT-6.1 Terra (low) on ChatGPT Pro 200 | 0.0% | — | — | — | — | — | — |
+| GPT-6.1 Terra (low) on ChatGPT Pro 500 | 0.0% | — | — | — | — | — | — |
+| GPT-6.1 Terra (max) on ChatGPT Plus | 0.0% | — | — | — | — | — | — |
+| GPT-6.1 Terra (max) on ChatGPT Pro 100 | 0.0% | — | — | — | — | — | — |
+| GPT-6.1 Terra (max) on ChatGPT Pro 200 | 0.0% | — | — | — | — | — | — |
+| GPT-6.1 Terra (max) on ChatGPT Pro 500 | 0.0% | — | — | — | — | — | — |
+| GPT-6.1 Terra (medium) on ChatGPT Plus | 0.0% | — | — | — | — | — | — |
+| GPT-6.1 Terra (medium) on ChatGPT Pro 100 | 0.0% | — | — | — | — | — | — |
+| GPT-6.1 Terra (medium) on ChatGPT Pro 200 | 0.0% | — | — | — | — | — | — |
+| GPT-6.1 Terra (medium) on ChatGPT Pro 500 | 0.0% | — | — | — | — | — | — |
+| GPT-6.1 Terra (xhigh) on ChatGPT Plus | 0.0% | — | — | — | — | — | — |
+| GPT-6.1 Terra (xhigh) on ChatGPT Pro 100 | 0.0% | — | — | — | — | — | — |
+| GPT-6.1 Terra (xhigh) on ChatGPT Pro 200 | 0.0% | — | — | — | — | — | — |
+| GPT-6.1 Terra (xhigh) on ChatGPT Pro 500 | 100.0% | — | — | — | — | — | — |
+| Gemini 4 Argon (high) on API-cost fallback | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| Kimi K3.1 Pro (max) on API-cost fallback | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| MiMo-V2.6-Pro on MiMo Token Plan Lite | 0.0% | — | — | — | — | — | — |
+| MiMo-V2.6-Pro on MiMo Token Plan Max | 0.0% | — | — | — | — | — | — |
+| MiMo-V2.6-Pro on MiMo Token Plan Pro | 0.0% | — | — | — | — | — | — |
+| MiMo-V2.6-Pro on MiMo Token Plan Standard | 0.0% | — | — | — | — | — | — |
 
 ### Plan basis: value-score dispersion (SD; covariance term)
 
-| Configuration | S0 | S1 | S2 | S1 endpoint-heavy | S1M | S1T |
-|---|---:|---:|---:|---:|---:|---:|
-| Claude Haiku 5.5 (high) on Claude Max 20x | 0.00 (+0.00) | — | — | — | — | — |
-| Claude Haiku 5.5 (high) on Claude Max 5x | 0.00 (+0.00) | — | — | — | — | — |
-| Claude Haiku 5.5 (high) on Claude Pro | 0.00 (+0.00) | — | — | — | — | — |
-| Claude Haiku 5.5 (low) on Claude Max 20x | 0.00 (+0.00) | — | — | — | — | — |
-| Claude Haiku 5.5 (low) on Claude Max 5x | 0.00 (+0.00) | — | — | — | — | — |
-| Claude Haiku 5.5 (low) on Claude Pro | 0.00 (+0.00) | — | — | — | — | — |
-| Claude Haiku 5.5 (max) on Claude Max 20x | 0.00 (+0.00) | — | — | — | — | — |
-| Claude Haiku 5.5 (max) on Claude Max 5x | 0.00 (+0.00) | — | — | — | — | — |
-| Claude Haiku 5.5 (max) on Claude Pro | 0.00 (+0.00) | — | — | — | — | — |
-| Claude Haiku 5.5 (medium) on Claude Max 20x | 0.00 (+0.00) | — | — | — | — | — |
-| Claude Haiku 5.5 (medium) on Claude Max 5x | 0.00 (+0.00) | — | — | — | — | — |
-| Claude Haiku 5.5 (medium) on Claude Pro | 0.00 (+0.00) | — | — | — | — | — |
-| Claude Haiku 5.5 (xhigh) on Claude Max 20x | 0.00 (+0.00) | — | — | — | — | — |
-| Claude Haiku 5.5 (xhigh) on Claude Max 5x | 0.00 (+0.00) | — | — | — | — | — |
-| Claude Haiku 5.5 (xhigh) on Claude Pro | 0.00 (+0.00) | — | — | — | — | — |
-| Claude Opus 5.5 (high) on Claude Max 20x | 0.00 (+0.00) | 0.00 (+0.00) | 1.16 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.32 (+0.00) |
-| Claude Opus 5.5 (high) on Claude Max 5x | 0.00 (+0.00) | 0.00 (+0.00) | 1.16 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.32 (+0.00) |
-| Claude Opus 5.5 (high) on Claude Pro | 0.00 (+0.00) | 0.00 (+0.00) | 1.16 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.32 (+0.00) |
-| Claude Opus 5.5 (max) on Claude Max 20x | 0.00 (+0.00) | 0.00 (+0.00) | 0.97 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.33 (+0.00) |
-| Claude Opus 5.5 (max) on Claude Max 5x | 0.00 (+0.00) | 0.00 (+0.00) | 0.97 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.33 (+0.00) |
-| Claude Opus 5.5 (max) on Claude Pro | 0.00 (+0.00) | 0.00 (+0.00) | 0.97 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.33 (+0.00) |
-| Claude Opus 5.5 (medium) on Claude Max 20x | 0.00 (+0.00) | 0.00 (+0.00) | 1.14 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.30 (+0.00) |
-| Claude Opus 5.5 (medium) on Claude Max 5x | 0.00 (+0.00) | 0.00 (+0.00) | 1.14 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.30 (+0.00) |
-| Claude Opus 5.5 (medium) on Claude Pro | 0.00 (+0.00) | 0.00 (+0.00) | 1.14 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.30 (+0.00) |
-| Claude Opus 5.5 (xhigh) on Claude Max 20x | 0.00 (+0.00) | 0.00 (+0.00) | 1.05 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.32 (+0.00) |
-| Claude Opus 5.5 (xhigh) on Claude Max 5x | 0.00 (+0.00) | 0.00 (+0.00) | 1.05 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.32 (+0.00) |
-| Claude Opus 5.5 (xhigh) on Claude Pro | 0.00 (+0.00) | 0.00 (+0.00) | 1.05 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.32 (+0.00) |
-| Claude Sonnet 5.5 (max) on Claude Max 20x | 0.00 (+0.00) | — | — | — | — | — |
-| Claude Sonnet 5.5 (max) on Claude Max 5x | 0.00 (+0.00) | — | — | — | — | — |
-| Claude Sonnet 5.5 (max) on Claude Pro | 0.00 (+0.00) | — | — | — | — | — |
-| Claude Sonnet 5.5 (xhigh) on Claude Max 20x | 0.00 (+0.00) | — | — | — | — | — |
-| Claude Sonnet 5.5 (xhigh) on Claude Max 5x | 0.00 (+0.00) | — | — | — | — | — |
-| Claude Sonnet 5.5 (xhigh) on Claude Pro | 0.00 (+0.00) | — | — | — | — | — |
-| DeepSeek V4.1 Flash 1017 (max) on API-cost fallback | 0.00 (+0.00) | 0.00 (+0.00) | 1.05 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.28 (+0.00) |
-| GPT-6 Astra (high) on ChatGPT Plus | 0.00 (+0.00) | 0.00 (+0.00) | 1.03 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.34 (+0.00) |
-| GPT-6 Astra (high) on ChatGPT Pro 100 | 0.00 (+0.00) | 0.00 (+0.00) | 1.03 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.34 (+0.00) |
-| GPT-6 Astra (high) on ChatGPT Pro 200 | 0.00 (+0.00) | 0.00 (+0.00) | 1.03 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.34 (+0.00) |
-| GPT-6 Astra (high) on ChatGPT Pro 500 | 0.00 (+0.00) | 0.00 (+0.00) | 1.03 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.34 (+0.00) |
-| GPT-6 Astra (max) on ChatGPT Plus | 0.00 (+0.00) | 0.00 (+0.00) | 0.90 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.33 (+0.00) |
-| GPT-6 Astra (max) on ChatGPT Pro 100 | 0.00 (+0.00) | 0.00 (+0.00) | 0.90 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.33 (+0.00) |
-| GPT-6 Astra (max) on ChatGPT Pro 200 | 0.00 (+0.00) | 0.00 (+0.00) | 0.90 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.33 (+0.00) |
-| GPT-6 Astra (max) on ChatGPT Pro 500 | 0.00 (+0.00) | 0.00 (+0.00) | 0.90 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.33 (+0.00) |
-| GPT-6 Astra (xhigh) on ChatGPT Plus | 0.00 (+0.00) | 0.00 (+0.00) | 0.93 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.34 (+0.00) |
-| GPT-6 Astra (xhigh) on ChatGPT Pro 100 | 0.00 (+0.00) | 0.00 (+0.00) | 0.93 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.34 (+0.00) |
-| GPT-6 Astra (xhigh) on ChatGPT Pro 200 | 0.00 (+0.00) | 0.00 (+0.00) | 0.93 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.34 (+0.00) |
-| GPT-6 Astra (xhigh) on ChatGPT Pro 500 | 0.00 (+0.00) | 0.00 (+0.00) | 0.93 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.34 (+0.00) |
-| GPT-6 Luna (high) on ChatGPT Plus | 0.00 (+0.00) | — | — | — | — | — |
-| GPT-6 Luna (high) on ChatGPT Pro 100 | 0.00 (+0.00) | — | — | — | — | — |
-| GPT-6 Luna (high) on ChatGPT Pro 200 | 0.00 (+0.00) | — | — | — | — | — |
-| GPT-6 Luna (high) on ChatGPT Pro 500 | 0.00 (+0.00) | — | — | — | — | — |
-| GPT-6 Luna (low) on ChatGPT Plus | 0.00 (+0.00) | — | — | — | — | — |
-| GPT-6 Luna (low) on ChatGPT Pro 100 | 0.00 (+0.00) | — | — | — | — | — |
-| GPT-6 Luna (low) on ChatGPT Pro 200 | 0.00 (+0.00) | — | — | — | — | — |
-| GPT-6 Luna (low) on ChatGPT Pro 500 | 0.00 (+0.00) | — | — | — | — | — |
-| GPT-6 Luna (max) on ChatGPT Plus | 0.00 (+0.00) | — | — | — | — | — |
-| GPT-6 Luna (max) on ChatGPT Pro 100 | 0.00 (+0.00) | — | — | — | — | — |
-| GPT-6 Luna (max) on ChatGPT Pro 200 | 0.00 (+0.00) | — | — | — | — | — |
-| GPT-6 Luna (max) on ChatGPT Pro 500 | 0.00 (+0.00) | — | — | — | — | — |
-| GPT-6 Luna (medium) on ChatGPT Plus | 0.00 (+0.00) | — | — | — | — | — |
-| GPT-6 Luna (medium) on ChatGPT Pro 100 | 0.00 (+0.00) | — | — | — | — | — |
-| GPT-6 Luna (medium) on ChatGPT Pro 200 | 0.00 (+0.00) | — | — | — | — | — |
-| GPT-6 Luna (medium) on ChatGPT Pro 500 | 0.00 (+0.00) | — | — | — | — | — |
-| GPT-6 Luna (xhigh) on ChatGPT Plus | 0.00 (+0.00) | — | — | — | — | — |
-| GPT-6 Luna (xhigh) on ChatGPT Pro 100 | 0.00 (+0.00) | — | — | — | — | — |
-| GPT-6 Luna (xhigh) on ChatGPT Pro 200 | 0.00 (+0.00) | — | — | — | — | — |
-| GPT-6 Luna (xhigh) on ChatGPT Pro 500 | 0.00 (+0.00) | — | — | — | — | — |
-| GPT-6.1 Sol (high) on ChatGPT Plus | 0.00 (+0.00) | 0.00 (+0.00) | 1.00 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.34 (+0.00) |
-| GPT-6.1 Sol (high) on ChatGPT Pro 100 | 0.00 (+0.00) | 0.00 (+0.00) | 1.00 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.34 (+0.00) |
-| GPT-6.1 Sol (high) on ChatGPT Pro 200 | 0.00 (+0.00) | 0.00 (+0.00) | 1.00 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.34 (+0.00) |
-| GPT-6.1 Sol (high) on ChatGPT Pro 500 | 0.00 (+0.00) | 0.00 (+0.00) | 1.00 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.34 (+0.00) |
-| GPT-6.1 Sol (low) on ChatGPT Plus | 0.00 (+0.00) | 0.00 (+0.00) | 1.30 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.18 (+0.00) |
-| GPT-6.1 Sol (low) on ChatGPT Pro 100 | 0.00 (+0.00) | 0.00 (+0.00) | 1.30 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.18 (+0.00) |
-| GPT-6.1 Sol (low) on ChatGPT Pro 200 | 0.00 (+0.00) | 0.00 (+0.00) | 1.30 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.18 (+0.00) |
-| GPT-6.1 Sol (low) on ChatGPT Pro 500 | 0.00 (+0.00) | 0.00 (+0.00) | 1.30 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.18 (+0.00) |
-| GPT-6.1 Sol (max) on ChatGPT Plus | 0.00 (+0.00) | 0.00 (+0.00) | 0.90 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.34 (+0.00) |
-| GPT-6.1 Sol (max) on ChatGPT Pro 100 | 0.00 (+0.00) | 0.00 (+0.00) | 0.90 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.34 (+0.00) |
-| GPT-6.1 Sol (max) on ChatGPT Pro 200 | 0.00 (+0.00) | 0.00 (+0.00) | 0.90 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.34 (+0.00) |
-| GPT-6.1 Sol (max) on ChatGPT Pro 500 | 0.00 (+0.00) | 0.00 (+0.00) | 0.90 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.34 (+0.00) |
-| GPT-6.1 Sol (medium) on ChatGPT Plus | 0.00 (+0.00) | 0.00 (+0.00) | 1.12 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.33 (+0.00) |
-| GPT-6.1 Sol (medium) on ChatGPT Pro 100 | 0.00 (+0.00) | 0.00 (+0.00) | 1.12 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.33 (+0.00) |
-| GPT-6.1 Sol (medium) on ChatGPT Pro 200 | 0.00 (+0.00) | 0.00 (+0.00) | 1.12 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.33 (+0.00) |
-| GPT-6.1 Sol (medium) on ChatGPT Pro 500 | 0.00 (+0.00) | 0.00 (+0.00) | 1.12 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.33 (+0.00) |
-| GPT-6.1 Sol (xhigh) on ChatGPT Plus | 0.00 (+0.00) | 0.00 (+0.00) | 0.93 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.34 (+0.00) |
-| GPT-6.1 Sol (xhigh) on ChatGPT Pro 100 | 0.00 (+0.00) | 0.00 (+0.00) | 0.93 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.34 (+0.00) |
-| GPT-6.1 Sol (xhigh) on ChatGPT Pro 200 | 0.00 (+0.00) | 0.00 (+0.00) | 0.93 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.34 (+0.00) |
-| GPT-6.1 Sol (xhigh) on ChatGPT Pro 500 | 0.00 (+0.00) | 0.00 (+0.00) | 0.93 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.34 (+0.00) |
-| GPT-6.1 Terra (high) on ChatGPT Plus | 0.00 (+0.00) | — | — | — | — | — |
-| GPT-6.1 Terra (high) on ChatGPT Pro 100 | 0.00 (+0.00) | — | — | — | — | — |
-| GPT-6.1 Terra (high) on ChatGPT Pro 200 | 0.00 (+0.00) | — | — | — | — | — |
-| GPT-6.1 Terra (high) on ChatGPT Pro 500 | 0.00 (+0.00) | — | — | — | — | — |
-| GPT-6.1 Terra (low) on ChatGPT Plus | 0.00 (+0.00) | — | — | — | — | — |
-| GPT-6.1 Terra (low) on ChatGPT Pro 100 | 0.00 (+0.00) | — | — | — | — | — |
-| GPT-6.1 Terra (low) on ChatGPT Pro 200 | 0.00 (+0.00) | — | — | — | — | — |
-| GPT-6.1 Terra (low) on ChatGPT Pro 500 | 0.00 (+0.00) | — | — | — | — | — |
-| GPT-6.1 Terra (max) on ChatGPT Plus | 0.00 (+0.00) | — | — | — | — | — |
-| GPT-6.1 Terra (max) on ChatGPT Pro 100 | 0.00 (+0.00) | — | — | — | — | — |
-| GPT-6.1 Terra (max) on ChatGPT Pro 200 | 0.00 (+0.00) | — | — | — | — | — |
-| GPT-6.1 Terra (max) on ChatGPT Pro 500 | 0.00 (+0.00) | — | — | — | — | — |
-| GPT-6.1 Terra (medium) on ChatGPT Plus | 0.00 (+0.00) | — | — | — | — | — |
-| GPT-6.1 Terra (medium) on ChatGPT Pro 100 | 0.00 (+0.00) | — | — | — | — | — |
-| GPT-6.1 Terra (medium) on ChatGPT Pro 200 | 0.00 (+0.00) | — | — | — | — | — |
-| GPT-6.1 Terra (medium) on ChatGPT Pro 500 | 0.00 (+0.00) | — | — | — | — | — |
-| GPT-6.1 Terra (xhigh) on ChatGPT Plus | 0.00 (+0.00) | — | — | — | — | — |
-| GPT-6.1 Terra (xhigh) on ChatGPT Pro 100 | 0.00 (+0.00) | — | — | — | — | — |
-| GPT-6.1 Terra (xhigh) on ChatGPT Pro 200 | 0.00 (+0.00) | — | — | — | — | — |
-| GPT-6.1 Terra (xhigh) on ChatGPT Pro 500 | 0.00 (+0.00) | — | — | — | — | — |
-| Gemini 4 Argon (high) on API-cost fallback | 0.00 (+0.00) | 0.00 (+0.00) | 1.40 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.29 (+0.00) |
-| Kimi K3.1 Pro (max) on API-cost fallback | 0.00 (+0.00) | 0.00 (+0.00) | 1.54 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.25 (+0.00) |
-| MiMo-V2.6-Pro on MiMo Token Plan Lite | 0.00 (+0.00) | — | — | — | — | — |
-| MiMo-V2.6-Pro on MiMo Token Plan Max | 0.00 (+0.00) | — | — | — | — | — |
-| MiMo-V2.6-Pro on MiMo Token Plan Pro | 0.00 (+0.00) | — | — | — | — | — |
-| MiMo-V2.6-Pro on MiMo Token Plan Standard | 0.00 (+0.00) | — | — | — | — | — |
+| Configuration | S0 | S1 | S2 | S1 endpoint-heavy | S1M | S1T | S1T mean-preserving |
+|---|---:|---:|---:|---:|---:|---:|---:|
+| Claude Haiku 5.5 (high) on Claude Max 20x | 0.00 (+0.00) | — | — | — | — | — | — |
+| Claude Haiku 5.5 (high) on Claude Max 5x | 0.00 (+0.00) | — | — | — | — | — | — |
+| Claude Haiku 5.5 (high) on Claude Pro | 0.00 (+0.00) | — | — | — | — | — | — |
+| Claude Haiku 5.5 (low) on Claude Max 20x | 0.00 (+0.00) | — | — | — | — | — | — |
+| Claude Haiku 5.5 (low) on Claude Max 5x | 0.00 (+0.00) | — | — | — | — | — | — |
+| Claude Haiku 5.5 (low) on Claude Pro | 0.00 (+0.00) | — | — | — | — | — | — |
+| Claude Haiku 5.5 (max) on Claude Max 20x | 0.00 (+0.00) | — | — | — | — | — | — |
+| Claude Haiku 5.5 (max) on Claude Max 5x | 0.00 (+0.00) | — | — | — | — | — | — |
+| Claude Haiku 5.5 (max) on Claude Pro | 0.00 (+0.00) | — | — | — | — | — | — |
+| Claude Haiku 5.5 (medium) on Claude Max 20x | 0.00 (+0.00) | — | — | — | — | — | — |
+| Claude Haiku 5.5 (medium) on Claude Max 5x | 0.00 (+0.00) | — | — | — | — | — | — |
+| Claude Haiku 5.5 (medium) on Claude Pro | 0.00 (+0.00) | — | — | — | — | — | — |
+| Claude Haiku 5.5 (xhigh) on Claude Max 20x | 0.00 (+0.00) | — | — | — | — | — | — |
+| Claude Haiku 5.5 (xhigh) on Claude Max 5x | 0.00 (+0.00) | — | — | — | — | — | — |
+| Claude Haiku 5.5 (xhigh) on Claude Pro | 0.00 (+0.00) | — | — | — | — | — | — |
+| Claude Opus 5.5 (high) on Claude Max 20x | 0.00 (+0.00) | 0.00 (+0.00) | 1.16 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.32 (+0.00) | 1.32 (+0.00) |
+| Claude Opus 5.5 (high) on Claude Max 5x | 0.00 (+0.00) | 0.00 (+0.00) | 1.16 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.32 (+0.00) | 1.32 (+0.00) |
+| Claude Opus 5.5 (high) on Claude Pro | 0.00 (+0.00) | 0.00 (+0.00) | 1.16 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.32 (+0.00) | 1.32 (+0.00) |
+| Claude Opus 5.5 (max) on Claude Max 20x | 0.00 (+0.00) | 0.00 (+0.00) | 0.97 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.33 (+0.00) | 1.34 (+0.00) |
+| Claude Opus 5.5 (max) on Claude Max 5x | 0.00 (+0.00) | 0.00 (+0.00) | 0.97 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.33 (+0.00) | 1.34 (+0.00) |
+| Claude Opus 5.5 (max) on Claude Pro | 0.00 (+0.00) | 0.00 (+0.00) | 0.97 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.33 (+0.00) | 1.34 (+0.00) |
+| Claude Opus 5.5 (medium) on Claude Max 20x | 0.00 (+0.00) | 0.00 (+0.00) | 1.14 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.30 (+0.00) | 1.31 (+0.00) |
+| Claude Opus 5.5 (medium) on Claude Max 5x | 0.00 (+0.00) | 0.00 (+0.00) | 1.14 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.30 (+0.00) | 1.31 (+0.00) |
+| Claude Opus 5.5 (medium) on Claude Pro | 0.00 (+0.00) | 0.00 (+0.00) | 1.14 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.30 (+0.00) | 1.31 (+0.00) |
+| Claude Opus 5.5 (xhigh) on Claude Max 20x | 0.00 (+0.00) | 0.00 (+0.00) | 1.05 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.32 (+0.00) | 1.32 (+0.00) |
+| Claude Opus 5.5 (xhigh) on Claude Max 5x | 0.00 (+0.00) | 0.00 (+0.00) | 1.05 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.32 (+0.00) | 1.32 (+0.00) |
+| Claude Opus 5.5 (xhigh) on Claude Pro | 0.00 (+0.00) | 0.00 (+0.00) | 1.05 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.32 (+0.00) | 1.32 (+0.00) |
+| Claude Sonnet 5.5 (max) on Claude Max 20x | 0.00 (+0.00) | — | — | — | — | — | — |
+| Claude Sonnet 5.5 (max) on Claude Max 5x | 0.00 (+0.00) | — | — | — | — | — | — |
+| Claude Sonnet 5.5 (max) on Claude Pro | 0.00 (+0.00) | — | — | — | — | — | — |
+| Claude Sonnet 5.5 (xhigh) on Claude Max 20x | 0.00 (+0.00) | — | — | — | — | — | — |
+| Claude Sonnet 5.5 (xhigh) on Claude Max 5x | 0.00 (+0.00) | — | — | — | — | — | — |
+| Claude Sonnet 5.5 (xhigh) on Claude Pro | 0.00 (+0.00) | — | — | — | — | — | — |
+| DeepSeek V4.1 Flash 1017 (max) on API-cost fallback | 0.00 (+0.00) | 0.00 (+0.00) | 1.05 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.28 (+0.00) | 1.28 (+0.00) |
+| GPT-6 Astra (high) on ChatGPT Plus | 0.00 (+0.00) | 0.00 (+0.00) | 1.03 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.34 (+0.00) | 1.33 (+0.00) |
+| GPT-6 Astra (high) on ChatGPT Pro 100 | 0.00 (+0.00) | 0.00 (+0.00) | 1.03 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.34 (+0.00) | 1.33 (+0.00) |
+| GPT-6 Astra (high) on ChatGPT Pro 200 | 0.00 (+0.00) | 0.00 (+0.00) | 1.03 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.34 (+0.00) | 1.33 (+0.00) |
+| GPT-6 Astra (high) on ChatGPT Pro 500 | 0.00 (+0.00) | 0.00 (+0.00) | 1.03 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.34 (+0.00) | 1.33 (+0.00) |
+| GPT-6 Astra (max) on ChatGPT Plus | 0.00 (+0.00) | 0.00 (+0.00) | 0.90 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.33 (+0.00) | 1.33 (+0.00) |
+| GPT-6 Astra (max) on ChatGPT Pro 100 | 0.00 (+0.00) | 0.00 (+0.00) | 0.90 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.33 (+0.00) | 1.33 (+0.00) |
+| GPT-6 Astra (max) on ChatGPT Pro 200 | 0.00 (+0.00) | 0.00 (+0.00) | 0.90 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.33 (+0.00) | 1.33 (+0.00) |
+| GPT-6 Astra (max) on ChatGPT Pro 500 | 0.00 (+0.00) | 0.00 (+0.00) | 0.90 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.33 (+0.00) | 1.33 (+0.00) |
+| GPT-6 Astra (xhigh) on ChatGPT Plus | 0.00 (+0.00) | 0.00 (+0.00) | 0.93 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.34 (+0.00) | 1.34 (+0.00) |
+| GPT-6 Astra (xhigh) on ChatGPT Pro 100 | 0.00 (+0.00) | 0.00 (+0.00) | 0.93 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.34 (+0.00) | 1.34 (+0.00) |
+| GPT-6 Astra (xhigh) on ChatGPT Pro 200 | 0.00 (+0.00) | 0.00 (+0.00) | 0.93 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.34 (+0.00) | 1.34 (+0.00) |
+| GPT-6 Astra (xhigh) on ChatGPT Pro 500 | 0.00 (+0.00) | 0.00 (+0.00) | 0.93 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.34 (+0.00) | 1.34 (+0.00) |
+| GPT-6 Luna (high) on ChatGPT Plus | 0.00 (+0.00) | — | — | — | — | — | — |
+| GPT-6 Luna (high) on ChatGPT Pro 100 | 0.00 (+0.00) | — | — | — | — | — | — |
+| GPT-6 Luna (high) on ChatGPT Pro 200 | 0.00 (+0.00) | — | — | — | — | — | — |
+| GPT-6 Luna (high) on ChatGPT Pro 500 | 0.00 (+0.00) | — | — | — | — | — | — |
+| GPT-6 Luna (low) on ChatGPT Plus | 0.00 (+0.00) | — | — | — | — | — | — |
+| GPT-6 Luna (low) on ChatGPT Pro 100 | 0.00 (+0.00) | — | — | — | — | — | — |
+| GPT-6 Luna (low) on ChatGPT Pro 200 | 0.00 (+0.00) | — | — | — | — | — | — |
+| GPT-6 Luna (low) on ChatGPT Pro 500 | 0.00 (+0.00) | — | — | — | — | — | — |
+| GPT-6 Luna (max) on ChatGPT Plus | 0.00 (+0.00) | — | — | — | — | — | — |
+| GPT-6 Luna (max) on ChatGPT Pro 100 | 0.00 (+0.00) | — | — | — | — | — | — |
+| GPT-6 Luna (max) on ChatGPT Pro 200 | 0.00 (+0.00) | — | — | — | — | — | — |
+| GPT-6 Luna (max) on ChatGPT Pro 500 | 0.00 (+0.00) | — | — | — | — | — | — |
+| GPT-6 Luna (medium) on ChatGPT Plus | 0.00 (+0.00) | — | — | — | — | — | — |
+| GPT-6 Luna (medium) on ChatGPT Pro 100 | 0.00 (+0.00) | — | — | — | — | — | — |
+| GPT-6 Luna (medium) on ChatGPT Pro 200 | 0.00 (+0.00) | — | — | — | — | — | — |
+| GPT-6 Luna (medium) on ChatGPT Pro 500 | 0.00 (+0.00) | — | — | — | — | — | — |
+| GPT-6 Luna (xhigh) on ChatGPT Plus | 0.00 (+0.00) | — | — | — | — | — | — |
+| GPT-6 Luna (xhigh) on ChatGPT Pro 100 | 0.00 (+0.00) | — | — | — | — | — | — |
+| GPT-6 Luna (xhigh) on ChatGPT Pro 200 | 0.00 (+0.00) | — | — | — | — | — | — |
+| GPT-6 Luna (xhigh) on ChatGPT Pro 500 | 0.00 (+0.00) | — | — | — | — | — | — |
+| GPT-6.1 Sol (high) on ChatGPT Plus | 0.00 (+0.00) | 0.00 (+0.00) | 1.00 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.34 (+0.00) | 1.33 (+0.00) |
+| GPT-6.1 Sol (high) on ChatGPT Pro 100 | 0.00 (+0.00) | 0.00 (+0.00) | 1.00 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.34 (+0.00) | 1.33 (+0.00) |
+| GPT-6.1 Sol (high) on ChatGPT Pro 200 | 0.00 (+0.00) | 0.00 (+0.00) | 1.00 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.34 (+0.00) | 1.33 (+0.00) |
+| GPT-6.1 Sol (high) on ChatGPT Pro 500 | 0.00 (+0.00) | 0.00 (+0.00) | 1.00 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.34 (+0.00) | 1.33 (+0.00) |
+| GPT-6.1 Sol (low) on ChatGPT Plus | 0.00 (+0.00) | 0.00 (+0.00) | 1.30 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.18 (+0.00) | 1.18 (+0.00) |
+| GPT-6.1 Sol (low) on ChatGPT Pro 100 | 0.00 (+0.00) | 0.00 (+0.00) | 1.30 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.18 (+0.00) | 1.18 (+0.00) |
+| GPT-6.1 Sol (low) on ChatGPT Pro 200 | 0.00 (+0.00) | 0.00 (+0.00) | 1.30 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.18 (+0.00) | 1.18 (+0.00) |
+| GPT-6.1 Sol (low) on ChatGPT Pro 500 | 0.00 (+0.00) | 0.00 (+0.00) | 1.30 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.18 (+0.00) | 1.18 (+0.00) |
+| GPT-6.1 Sol (max) on ChatGPT Plus | 0.00 (+0.00) | 0.00 (+0.00) | 0.90 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.34 (+0.00) | 1.33 (+0.00) |
+| GPT-6.1 Sol (max) on ChatGPT Pro 100 | 0.00 (+0.00) | 0.00 (+0.00) | 0.90 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.34 (+0.00) | 1.33 (+0.00) |
+| GPT-6.1 Sol (max) on ChatGPT Pro 200 | 0.00 (+0.00) | 0.00 (+0.00) | 0.90 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.34 (+0.00) | 1.33 (+0.00) |
+| GPT-6.1 Sol (max) on ChatGPT Pro 500 | 0.00 (+0.00) | 0.00 (+0.00) | 0.90 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.34 (+0.00) | 1.33 (+0.00) |
+| GPT-6.1 Sol (medium) on ChatGPT Plus | 0.00 (+0.00) | 0.00 (+0.00) | 1.12 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.33 (+0.00) | 1.31 (+0.00) |
+| GPT-6.1 Sol (medium) on ChatGPT Pro 100 | 0.00 (+0.00) | 0.00 (+0.00) | 1.12 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.33 (+0.00) | 1.31 (+0.00) |
+| GPT-6.1 Sol (medium) on ChatGPT Pro 200 | 0.00 (+0.00) | 0.00 (+0.00) | 1.12 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.33 (+0.00) | 1.31 (+0.00) |
+| GPT-6.1 Sol (medium) on ChatGPT Pro 500 | 0.00 (+0.00) | 0.00 (+0.00) | 1.12 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.33 (+0.00) | 1.31 (+0.00) |
+| GPT-6.1 Sol (xhigh) on ChatGPT Plus | 0.00 (+0.00) | 0.00 (+0.00) | 0.93 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.34 (+0.00) | 1.34 (+0.00) |
+| GPT-6.1 Sol (xhigh) on ChatGPT Pro 100 | 0.00 (+0.00) | 0.00 (+0.00) | 0.93 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.34 (+0.00) | 1.34 (+0.00) |
+| GPT-6.1 Sol (xhigh) on ChatGPT Pro 200 | 0.00 (+0.00) | 0.00 (+0.00) | 0.93 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.34 (+0.00) | 1.34 (+0.00) |
+| GPT-6.1 Sol (xhigh) on ChatGPT Pro 500 | 0.00 (+0.00) | 0.00 (+0.00) | 0.93 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.34 (+0.00) | 1.34 (+0.00) |
+| GPT-6.1 Terra (high) on ChatGPT Plus | 0.00 (+0.00) | — | — | — | — | — | — |
+| GPT-6.1 Terra (high) on ChatGPT Pro 100 | 0.00 (+0.00) | — | — | — | — | — | — |
+| GPT-6.1 Terra (high) on ChatGPT Pro 200 | 0.00 (+0.00) | — | — | — | — | — | — |
+| GPT-6.1 Terra (high) on ChatGPT Pro 500 | 0.00 (+0.00) | — | — | — | — | — | — |
+| GPT-6.1 Terra (low) on ChatGPT Plus | 0.00 (+0.00) | — | — | — | — | — | — |
+| GPT-6.1 Terra (low) on ChatGPT Pro 100 | 0.00 (+0.00) | — | — | — | — | — | — |
+| GPT-6.1 Terra (low) on ChatGPT Pro 200 | 0.00 (+0.00) | — | — | — | — | — | — |
+| GPT-6.1 Terra (low) on ChatGPT Pro 500 | 0.00 (+0.00) | — | — | — | — | — | — |
+| GPT-6.1 Terra (max) on ChatGPT Plus | 0.00 (+0.00) | — | — | — | — | — | — |
+| GPT-6.1 Terra (max) on ChatGPT Pro 100 | 0.00 (+0.00) | — | — | — | — | — | — |
+| GPT-6.1 Terra (max) on ChatGPT Pro 200 | 0.00 (+0.00) | — | — | — | — | — | — |
+| GPT-6.1 Terra (max) on ChatGPT Pro 500 | 0.00 (+0.00) | — | — | — | — | — | — |
+| GPT-6.1 Terra (medium) on ChatGPT Plus | 0.00 (+0.00) | — | — | — | — | — | — |
+| GPT-6.1 Terra (medium) on ChatGPT Pro 100 | 0.00 (+0.00) | — | — | — | — | — | — |
+| GPT-6.1 Terra (medium) on ChatGPT Pro 200 | 0.00 (+0.00) | — | — | — | — | — | — |
+| GPT-6.1 Terra (medium) on ChatGPT Pro 500 | 0.00 (+0.00) | — | — | — | — | — | — |
+| GPT-6.1 Terra (xhigh) on ChatGPT Plus | 0.00 (+0.00) | — | — | — | — | — | — |
+| GPT-6.1 Terra (xhigh) on ChatGPT Pro 100 | 0.00 (+0.00) | — | — | — | — | — | — |
+| GPT-6.1 Terra (xhigh) on ChatGPT Pro 200 | 0.00 (+0.00) | — | — | — | — | — | — |
+| GPT-6.1 Terra (xhigh) on ChatGPT Pro 500 | 0.00 (+0.00) | — | — | — | — | — | — |
+| Gemini 4 Argon (high) on API-cost fallback | 0.00 (+0.00) | 0.00 (+0.00) | 1.40 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.29 (+0.00) | 1.29 (+0.00) |
+| Kimi K3.1 Pro (max) on API-cost fallback | 0.00 (+0.00) | 0.00 (+0.00) | 1.54 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.25 (+0.00) | 1.25 (+0.00) |
+| MiMo-V2.6-Pro on MiMo Token Plan Lite | 0.00 (+0.00) | — | — | — | — | — | — |
+| MiMo-V2.6-Pro on MiMo Token Plan Max | 0.00 (+0.00) | — | — | — | — | — | — |
+| MiMo-V2.6-Pro on MiMo Token Plan Pro | 0.00 (+0.00) | — | — | — | — | — | — |
+| MiMo-V2.6-Pro on MiMo Token Plan Standard | 0.00 (+0.00) | — | — | — | — | — | — |
 
 ### Named S2 specification branches
 
@@ -1709,9 +1709,9 @@ Plan streams S1, S2, S1 endpoint-heavy, S1M and S1T run with owner assumptions o
 - **Terminal-Bench cross-source agreement (AA's mini-SWE-agent run against tbench.ai):** defined; 0 rows take the leaf from tbench.ai (gap fill).
 - **Workload cross-check (E41, mandatory diagnostic):** Terminal-Bench 4.0 cost per solved task on AA's own execution against basket cost: τ_b 0.52 (interval 0.22 to 0.77), uncertain agreement; panel (33): Claude Haiku 5.5 (xhigh), Claude Haiku 5.5 (high), Claude Haiku 5.5 (low), Claude Haiku 5.5 (max), Claude Haiku 5.5 (medium), Claude Opus 5.5 (max), Claude Opus 5.5 (high), Claude Opus 5.5 (medium), Claude Opus 5.5 (xhigh), Claude Sonnet 5.5 (max), Claude Sonnet 5.5 (xhigh), DeepSeek V4.1 Flash 1017 (max), Gemini 4 Argon (high), GPT-6 Astra (max), GPT-6 Astra (high), GPT-6 Astra (xhigh), GPT-6 Luna (max), GPT-6 Luna (high), GPT-6 Luna (low), GPT-6 Luna (medium), GPT-6 Luna (xhigh), GPT-6.1 Sol (max), GPT-6.1 Sol (high), GPT-6.1 Sol (low), GPT-6.1 Sol (medium), GPT-6.1 Sol (xhigh), GPT-6.1 Terra (max), GPT-6.1 Terra (high), GPT-6.1 Terra (low), GPT-6.1 Terra (medium), GPT-6.1 Terra (xhigh), Kimi K3.1 Pro (max), MiMo-V2.6-Pro.
 - **Rank separability (O39, independent-task approximation):** median separation 3.55 value points (API) and 3.54 (Plan); separable adjacent ranks: API 0 of 32, Plan 0 of 47. Assumptions: tasks are independent and each leaf's score is a mean over its published task count (a binomial leaf drawn from its Jeffreys posterior Beta(k + 1/2, n - k + 1/2), O142; plug-in SDs with the proportion (k + 1/2) / (n + 1), I28); attempts averaged within a task and tasks shared across models are ignored, so the noise is approximate; GDPval-AA: each row's rating interval as AA's model page displays it, read as a 95% normal interval (AA states no level), SD = half-width / 1.96; AA-Omniscience: each of 3,000 questions scores +1, 0 or -1, with the shares from AA's accuracy and hallucination rate; Vals boards (Vibe Code Bench v1.1, Code Migration v1.1): Vals' published standard error per record, read as the leaf's SD; AI Coding Daily: judged points over its six graded projects read as a binomial share of 60 points (an assumption; the board publishes no error).
-- **FrontierCode against Cognition:** FrontierCode cross-source agreement (AA against Cognition; E234): retired (O136): the leaf is AA's FrontierCode 2.0 and Cognition's board publishes FrontierCode 1.1, so no fill or comparison is made across the two versions; panel of 0 rows.
+- **FrontierCode against Cognition:** FrontierCode 2.0 cross-source agreement (AA against Cognition, exact model and effort; E234, O153): Kendall tau 0.91 (interval 0.83 to 0.97) on 26 rows. Cognition minus AA: mean -1.5 points, largest 7.7.
 - **Gap-fill removal (E234, diagnostic):** no ranked row has a leaf from another party or the provider.
-- **Bar results without the gap fills (E234, sensitivity; labels unchanged):** cheapest displayed row as published, with fills removed, and with third-party fills no measured offset — API quality 43.6: GPT-6.1 Terra (xhigh) in all three; API quality 31.4: GPT-6 Luna (max) in all three; API quality 51.8: GPT-6.1 Sol (xhigh) in all three; Plan quality 43.6: GPT-6.1 Terra (xhigh) in all three; Plan quality 31.4: Claude Haiku 5.5 (xhigh) in all three; Plan quality 51.8: GPT-6.1 Sol (xhigh) in all three.
+- **Bar results without the gap fills (E234, sensitivity; labels unchanged):** cheapest displayed row as published, with fills removed, and with third-party fills lowered by the mean offset -1.5 points — API quality 43.6: GPT-6.1 Terra (xhigh) in all three; API quality 31.4: GPT-6 Luna (max) in all three; API quality 51.8: GPT-6.1 Sol (xhigh) in all three; Plan quality 43.6: GPT-6.1 Terra (xhigh) in all three; Plan quality 31.4: Claude Haiku 5.5 (xhigh) in all three; Plan quality 51.8: GPT-6.1 Sol (xhigh) in all three.
 - **Harness cost (O123, S2 stress):** unevaluable: no model is listed under two or more agents in AA's Coding Agent Index capture, so no agent effect is identified (O123). Coding Agent Index agents (each part of its costed configuration; none is the run behind the FrontierCode or Terminal-Bench leaf): GPT-6.1 Sol (max): Codex; GPT-6.1 Terra (max): Codex; Claude Opus 5.5 (max): Claude Code; Claude Sonnet 5.5 (max): Claude Code; GPT-6 Astra (max): Codex; DeepSeek V4.1 Flash 1017 (max): DeepSeek Harness; Gemini 4 Argon (high): Antigravity CLI; Claude Haiku 5.5 (max): Claude Code; GPT-6.1 Terra (xhigh): Codex; GPT-6.1 Terra (high): Codex; GPT-6 Luna (max): Codex; GPT-6.1 Terra (medium): Codex; GPT-6.1 Terra (low): Codex.
 - **Quality agreement:** quality agreement (matched-panel sensitivity): Kendall tau 0.72 (interval 0.59 to 0.84) on 33 rows.
 - **Quality-substitution value agreement (API):** quality-substitution value agreement, api basis (matched-panel sensitivity): Kendall tau 0.56 (interval 0.35 to 0.74) on 33 rows.
@@ -1924,9 +1924,9 @@ A plan meter counts tokens (O126), so a multiple measured on one model or effort
 | OpenAI | ChatGPT Plus | GPT-6 Astra | 5h | global | 0 of 2 | fails: a 5-hour figure never converts to a billing period (O82) |
 | OpenAI | ChatGPT Plus | GPT-6 Luna | 5h | global | 0 of 1 | fails: a 5-hour figure never converts to a billing period (O82) |
 | OpenAI | ChatGPT Plus | GPT-6 Luna | month | global | 0 of 1 | fails: 0 non-provisional report(s) in the current partition |
-| OpenAI | ChatGPT Plus | GPT-6.1 Sol | 5h | global | 0 of 3 | fails: a 5-hour figure never converts to a billing period (O82) |
-| OpenAI | ChatGPT Plus | GPT-6.1 Sol | week | global | 0 of 2 | fails: 0 non-provisional report(s) in the current partition |
-| OpenAI | ChatGPT Plus | GPT-6.1 Terra | 5h | global | 1 of 3 | fails: a 5-hour figure never converts to a billing period (O82) |
+| OpenAI | ChatGPT Plus | GPT-6.1 Sol | 5h | global | 1 of 3 | fails: a 5-hour figure never converts to a billing period (O82) |
+| OpenAI | ChatGPT Plus | GPT-6.1 Sol | week | global | 1 of 2 | fails: 0 non-provisional report(s) in the current partition |
+| OpenAI | ChatGPT Plus | GPT-6.1 Terra | 5h | global | 3 of 3 | fails: a 5-hour figure never converts to a billing period (O82) |
 | OpenAI | ChatGPT Pro (tier unstated) (not listed) | GPT-6 Astra | week | global | 0 of 1 | fails: 0 non-provisional report(s) in the current partition |
 | OpenAI | ChatGPT Pro 100 | GPT-6 Astra | week | global | 0 of 4 | fails: 0 non-provisional report(s) in the current partition |
 | OpenAI | ChatGPT Pro 100 | GPT-6.1 Sol | week | global | 0 of 1 | fails: 0 non-provisional report(s) in the current partition |
@@ -2098,169 +2098,169 @@ Frequencies over 10,000 scenarios per run (seed 20261101); streams are defined i
 
 ### API basis: rank 1
 
-| Configuration | S0 | S1 | S2 | S1 endpoint-heavy | S1M | S1T |
-|---|---:|---:|---:|---:|---:|---:|
-| Claude Haiku 5.5 (max) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| Claude Opus 5.5 (max) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| Claude Sonnet 5.5 (max) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| DeepSeek V4.1 Flash 1017 (max) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 1.1% |
-| GPT-6 Astra (max) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| GPT-6 Luna (max) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| GPT-6.1 Sol (max) | 100.0% | 100.0% | 100.0% | 100.0% | 100.0% | 99.0% |
-| Gemini 4 Argon (high) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| Configuration | S0 | S1 | S2 | S1 endpoint-heavy | S1M | S1T | S1T mean-preserving |
+|---|---:|---:|---:|---:|---:|---:|---:|
+| Claude Haiku 5.5 (max) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| Claude Opus 5.5 (max) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| Claude Sonnet 5.5 (max) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| DeepSeek V4.1 Flash 1017 (max) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 1.1% | 1.0% |
+| GPT-6 Astra (max) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| GPT-6 Luna (max) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| GPT-6.1 Sol (max) | 100.0% | 100.0% | 100.0% | 100.0% | 100.0% | 99.0% | 99.0% |
+| Gemini 4 Argon (high) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
 
 ### API basis: rank 3 or better
 
-| Configuration | S0 | S1 | S2 | S1 endpoint-heavy | S1M | S1T |
-|---|---:|---:|---:|---:|---:|---:|
-| Claude Haiku 5.5 (max) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| Claude Opus 5.5 (max) | 0.0% | 0.0% | 3.9% | 0.0% | 0.0% | 21.2% |
-| Claude Sonnet 5.5 (max) | 0.0% | 0.0% | 0.1% | 0.0% | 0.0% | 4.0% |
-| DeepSeek V4.1 Flash 1017 (max) | 100.0% | 100.0% | 100.0% | 100.0% | 100.0% | 99.4% |
-| GPT-6 Astra (max) | 0.0% | 0.0% | 31.7% | 0.0% | 0.0% | 27.5% |
-| GPT-6 Luna (max) | 100.0% | 100.0% | 64.3% | 100.0% | 100.0% | 47.9% |
-| GPT-6.1 Sol (max) | 100.0% | 100.0% | 100.0% | 100.0% | 100.0% | 100.0% |
-| Gemini 4 Argon (high) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| Configuration | S0 | S1 | S2 | S1 endpoint-heavy | S1M | S1T | S1T mean-preserving |
+|---|---:|---:|---:|---:|---:|---:|---:|
+| Claude Haiku 5.5 (max) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| Claude Opus 5.5 (max) | 0.0% | 0.0% | 3.9% | 0.0% | 0.0% | 21.2% | 22.5% |
+| Claude Sonnet 5.5 (max) | 0.0% | 0.0% | 0.1% | 0.0% | 0.0% | 4.0% | 4.3% |
+| DeepSeek V4.1 Flash 1017 (max) | 100.0% | 100.0% | 100.0% | 100.0% | 100.0% | 99.4% | 99.5% |
+| GPT-6 Astra (max) | 0.0% | 0.0% | 31.7% | 0.0% | 0.0% | 27.5% | 29.4% |
+| GPT-6 Luna (max) | 100.0% | 100.0% | 64.3% | 100.0% | 100.0% | 47.9% | 44.4% |
+| GPT-6.1 Sol (max) | 100.0% | 100.0% | 100.0% | 100.0% | 100.0% | 100.0% | 100.0% |
+| Gemini 4 Argon (high) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
 
 ### API basis: on the frontier
 
-| Configuration | S0 | S1 | S2 | S1 endpoint-heavy | S1M | S1T |
-|---|---:|---:|---:|---:|---:|---:|
-| Claude Haiku 5.5 (max) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.4% |
-| Claude Opus 5.5 (max) | 100.0% | 100.0% | 100.0% | 100.0% | 100.0% | 88.3% |
-| Claude Sonnet 5.5 (max) | 0.0% | 0.0% | 2.2% | 0.0% | 0.0% | 22.6% |
-| DeepSeek V4.1 Flash 1017 (max) | 100.0% | 100.0% | 100.0% | 100.0% | 100.0% | 100.0% |
-| GPT-6 Astra (max) | 100.0% | 100.0% | 100.0% | 100.0% | 100.0% | 79.4% |
-| GPT-6 Luna (max) | 100.0% | 100.0% | 100.0% | 100.0% | 100.0% | 100.0% |
-| GPT-6.1 Sol (max) | 100.0% | 100.0% | 100.0% | 100.0% | 100.0% | 100.0% |
-| Gemini 4 Argon (high) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.8% |
+| Configuration | S0 | S1 | S2 | S1 endpoint-heavy | S1M | S1T | S1T mean-preserving |
+|---|---:|---:|---:|---:|---:|---:|---:|
+| Claude Haiku 5.5 (max) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.4% | 0.4% |
+| Claude Opus 5.5 (max) | 100.0% | 100.0% | 100.0% | 100.0% | 100.0% | 88.3% | 88.2% |
+| Claude Sonnet 5.5 (max) | 0.0% | 0.0% | 2.2% | 0.0% | 0.0% | 22.6% | 23.5% |
+| DeepSeek V4.1 Flash 1017 (max) | 100.0% | 100.0% | 100.0% | 100.0% | 100.0% | 100.0% | 100.0% |
+| GPT-6 Astra (max) | 100.0% | 100.0% | 100.0% | 100.0% | 100.0% | 79.4% | 78.6% |
+| GPT-6 Luna (max) | 100.0% | 100.0% | 100.0% | 100.0% | 100.0% | 100.0% | 100.0% |
+| GPT-6.1 Sol (max) | 100.0% | 100.0% | 100.0% | 100.0% | 100.0% | 100.0% | 100.0% |
+| Gemini 4 Argon (high) | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.8% | 0.8% |
 
 ### API basis: value-score dispersion (SD; covariance term)
 
-| Configuration | S0 | S1 | S2 | S1 endpoint-heavy | S1M | S1T |
-|---|---:|---:|---:|---:|---:|---:|
-| Claude Haiku 5.5 (max) | 0.00 (+0.00) | 0.00 (+0.00) | 1.42 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 0.95 (+0.00) |
-| Claude Opus 5.5 (max) | 0.00 (+0.00) | 0.00 (+0.00) | 1.21 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 0.95 (+0.00) |
-| Claude Sonnet 5.5 (max) | 0.00 (+0.00) | 0.00 (+0.00) | 1.16 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 0.95 (+0.00) |
-| DeepSeek V4.1 Flash 1017 (max) | 0.00 (+0.00) | 0.00 (+0.00) | 1.43 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 0.95 (+0.00) |
-| GPT-6 Astra (max) | 0.00 (+0.00) | 0.00 (+0.00) | 1.25 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 0.94 (+0.00) |
-| GPT-6 Luna (max) | 0.00 (+0.00) | 0.00 (+0.00) | 1.59 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 0.88 (+0.00) |
-| GPT-6.1 Sol (max) | 0.00 (+0.00) | 0.00 (+0.00) | 1.26 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 0.96 (+0.00) |
-| Gemini 4 Argon (high) | 0.00 (+0.00) | 0.00 (+0.00) | 1.53 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 0.94 (+0.00) |
+| Configuration | S0 | S1 | S2 | S1 endpoint-heavy | S1M | S1T | S1T mean-preserving |
+|---|---:|---:|---:|---:|---:|---:|---:|
+| Claude Haiku 5.5 (max) | 0.00 (+0.00) | 0.00 (+0.00) | 1.42 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 0.95 (+0.00) | 0.95 (+0.00) |
+| Claude Opus 5.5 (max) | 0.00 (+0.00) | 0.00 (+0.00) | 1.21 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 0.95 (+0.00) | 0.96 (+0.00) |
+| Claude Sonnet 5.5 (max) | 0.00 (+0.00) | 0.00 (+0.00) | 1.16 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 0.95 (+0.00) | 0.96 (+0.00) |
+| DeepSeek V4.1 Flash 1017 (max) | 0.00 (+0.00) | 0.00 (+0.00) | 1.43 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 0.95 (+0.00) | 0.94 (+0.00) |
+| GPT-6 Astra (max) | 0.00 (+0.00) | 0.00 (+0.00) | 1.25 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 0.94 (+0.00) | 0.94 (+0.00) |
+| GPT-6 Luna (max) | 0.00 (+0.00) | 0.00 (+0.00) | 1.59 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 0.88 (+0.00) | 0.88 (+0.00) |
+| GPT-6.1 Sol (max) | 0.00 (+0.00) | 0.00 (+0.00) | 1.26 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 0.96 (+0.00) | 0.95 (+0.00) |
+| Gemini 4 Argon (high) | 0.00 (+0.00) | 0.00 (+0.00) | 1.53 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 0.94 (+0.00) | 0.94 (+0.00) |
 
-Plan streams S1, S2, S1 endpoint-heavy, S1M and S1T run with owner assumptions off (owner-named transfers and O46 provider quota ceilings; E167): Claude Haiku 5.5 (max) on Claude Max 20x, Claude Haiku 5.5 (max) on Claude Max 5x, Claude Haiku 5.5 (max) on Claude Pro, Claude Sonnet 5.5 (max) on Claude Max 20x, Claude Sonnet 5.5 (max) on Claude Max 5x, Claude Sonnet 5.5 (max) on Claude Pro, GPT-6 Luna (max) on ChatGPT Plus, GPT-6 Luna (max) on ChatGPT Pro 100, GPT-6 Luna (max) on ChatGPT Pro 200, GPT-6 Luna (max) on ChatGPT Pro 500 depend on an owner assumption and are unevaluable there (—), never reselected or replaced by API cost.
+Plan streams S1, S2, S1 endpoint-heavy, S1M, S1T and S1T mean-preserving run with owner assumptions off (owner-named transfers and O46 provider quota ceilings; E167): Claude Haiku 5.5 (max) on Claude Max 20x, Claude Haiku 5.5 (max) on Claude Max 5x, Claude Haiku 5.5 (max) on Claude Pro, Claude Sonnet 5.5 (max) on Claude Max 20x, Claude Sonnet 5.5 (max) on Claude Max 5x, Claude Sonnet 5.5 (max) on Claude Pro, GPT-6 Luna (max) on ChatGPT Plus, GPT-6 Luna (max) on ChatGPT Pro 100, GPT-6 Luna (max) on ChatGPT Pro 200, GPT-6 Luna (max) on ChatGPT Pro 500 depend on an owner assumption and are unevaluable there (—), never reselected or replaced by API cost.
 
 ### Plan basis: rank 1
 
-| Configuration | S0 | S1 | S2 | S1 endpoint-heavy | S1M | S1T |
-|---|---:|---:|---:|---:|---:|---:|
-| Claude Haiku 5.5 (max) on Claude Max 20x | 0.0% | — | — | — | — | — |
-| Claude Haiku 5.5 (max) on Claude Max 5x | 0.0% | — | — | — | — | — |
-| Claude Haiku 5.5 (max) on Claude Pro | 0.0% | — | — | — | — | — |
-| Claude Opus 5.5 (max) on Claude Max 20x | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| Claude Opus 5.5 (max) on Claude Max 5x | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| Claude Opus 5.5 (max) on Claude Pro | 100.0% | 100.0% | 100.0% | 100.0% | 100.0% | 90.3% |
-| Claude Sonnet 5.5 (max) on Claude Max 20x | 0.0% | — | — | — | — | — |
-| Claude Sonnet 5.5 (max) on Claude Max 5x | 0.0% | — | — | — | — | — |
-| Claude Sonnet 5.5 (max) on Claude Pro | 0.0% | — | — | — | — | — |
-| DeepSeek V4.1 Flash 1017 (max) on API-cost fallback | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| GPT-6 Astra (max) on ChatGPT Plus | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| GPT-6 Astra (max) on ChatGPT Pro 100 | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| GPT-6 Astra (max) on ChatGPT Pro 200 | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| GPT-6 Astra (max) on ChatGPT Pro 500 | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| GPT-6 Luna (max) on ChatGPT Plus | 0.0% | — | — | — | — | — |
-| GPT-6 Luna (max) on ChatGPT Pro 100 | 0.0% | — | — | — | — | — |
-| GPT-6 Luna (max) on ChatGPT Pro 200 | 0.0% | — | — | — | — | — |
-| GPT-6 Luna (max) on ChatGPT Pro 500 | 0.0% | — | — | — | — | — |
-| GPT-6.1 Sol (max) on ChatGPT Plus | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| GPT-6.1 Sol (max) on ChatGPT Pro 100 | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| GPT-6.1 Sol (max) on ChatGPT Pro 200 | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| GPT-6.1 Sol (max) on ChatGPT Pro 500 | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 9.7% |
-| Gemini 4 Argon (high) on API-cost fallback | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| Configuration | S0 | S1 | S2 | S1 endpoint-heavy | S1M | S1T | S1T mean-preserving |
+|---|---:|---:|---:|---:|---:|---:|---:|
+| Claude Haiku 5.5 (max) on Claude Max 20x | 0.0% | — | — | — | — | — | — |
+| Claude Haiku 5.5 (max) on Claude Max 5x | 0.0% | — | — | — | — | — | — |
+| Claude Haiku 5.5 (max) on Claude Pro | 0.0% | — | — | — | — | — | — |
+| Claude Opus 5.5 (max) on Claude Max 20x | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| Claude Opus 5.5 (max) on Claude Max 5x | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| Claude Opus 5.5 (max) on Claude Pro | 100.0% | 100.0% | 100.0% | 100.0% | 100.0% | 90.3% | 90.2% |
+| Claude Sonnet 5.5 (max) on Claude Max 20x | 0.0% | — | — | — | — | — | — |
+| Claude Sonnet 5.5 (max) on Claude Max 5x | 0.0% | — | — | — | — | — | — |
+| Claude Sonnet 5.5 (max) on Claude Pro | 0.0% | — | — | — | — | — | — |
+| DeepSeek V4.1 Flash 1017 (max) on API-cost fallback | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| GPT-6 Astra (max) on ChatGPT Plus | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| GPT-6 Astra (max) on ChatGPT Pro 100 | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| GPT-6 Astra (max) on ChatGPT Pro 200 | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| GPT-6 Astra (max) on ChatGPT Pro 500 | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| GPT-6 Luna (max) on ChatGPT Plus | 0.0% | — | — | — | — | — | — |
+| GPT-6 Luna (max) on ChatGPT Pro 100 | 0.0% | — | — | — | — | — | — |
+| GPT-6 Luna (max) on ChatGPT Pro 200 | 0.0% | — | — | — | — | — | — |
+| GPT-6 Luna (max) on ChatGPT Pro 500 | 0.0% | — | — | — | — | — | — |
+| GPT-6.1 Sol (max) on ChatGPT Plus | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| GPT-6.1 Sol (max) on ChatGPT Pro 100 | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| GPT-6.1 Sol (max) on ChatGPT Pro 200 | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| GPT-6.1 Sol (max) on ChatGPT Pro 500 | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 9.7% | 9.8% |
+| Gemini 4 Argon (high) on API-cost fallback | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
 
 ### Plan basis: rank 3 or better
 
-| Configuration | S0 | S1 | S2 | S1 endpoint-heavy | S1M | S1T |
-|---|---:|---:|---:|---:|---:|---:|
-| Claude Haiku 5.5 (max) on Claude Max 20x | 0.0% | — | — | — | — | — |
-| Claude Haiku 5.5 (max) on Claude Max 5x | 0.0% | — | — | — | — | — |
-| Claude Haiku 5.5 (max) on Claude Pro | 0.0% | — | — | — | — | — |
-| Claude Opus 5.5 (max) on Claude Max 20x | 100.0% | 100.0% | 100.0% | 100.0% | 100.0% | 90.9% |
-| Claude Opus 5.5 (max) on Claude Max 5x | 100.0% | 100.0% | 100.0% | 100.0% | 100.0% | 89.2% |
-| Claude Opus 5.5 (max) on Claude Pro | 100.0% | 100.0% | 100.0% | 100.0% | 100.0% | 91.1% |
-| Claude Sonnet 5.5 (max) on Claude Max 20x | 0.0% | — | — | — | — | — |
-| Claude Sonnet 5.5 (max) on Claude Max 5x | 0.0% | — | — | — | — | — |
-| Claude Sonnet 5.5 (max) on Claude Pro | 0.0% | — | — | — | — | — |
-| DeepSeek V4.1 Flash 1017 (max) on API-cost fallback | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| GPT-6 Astra (max) on ChatGPT Plus | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| GPT-6 Astra (max) on ChatGPT Pro 100 | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| GPT-6 Astra (max) on ChatGPT Pro 200 | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| GPT-6 Astra (max) on ChatGPT Pro 500 | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| GPT-6 Luna (max) on ChatGPT Plus | 0.0% | — | — | — | — | — |
-| GPT-6 Luna (max) on ChatGPT Pro 100 | 0.0% | — | — | — | — | — |
-| GPT-6 Luna (max) on ChatGPT Pro 200 | 0.0% | — | — | — | — | — |
-| GPT-6 Luna (max) on ChatGPT Pro 500 | 0.0% | — | — | — | — | — |
-| GPT-6.1 Sol (max) on ChatGPT Plus | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 9.1% |
-| GPT-6.1 Sol (max) on ChatGPT Pro 100 | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 9.1% |
-| GPT-6.1 Sol (max) on ChatGPT Pro 200 | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| GPT-6.1 Sol (max) on ChatGPT Pro 500 | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 10.8% |
-| Gemini 4 Argon (high) on API-cost fallback | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| Configuration | S0 | S1 | S2 | S1 endpoint-heavy | S1M | S1T | S1T mean-preserving |
+|---|---:|---:|---:|---:|---:|---:|---:|
+| Claude Haiku 5.5 (max) on Claude Max 20x | 0.0% | — | — | — | — | — | — |
+| Claude Haiku 5.5 (max) on Claude Max 5x | 0.0% | — | — | — | — | — | — |
+| Claude Haiku 5.5 (max) on Claude Pro | 0.0% | — | — | — | — | — | — |
+| Claude Opus 5.5 (max) on Claude Max 20x | 100.0% | 100.0% | 100.0% | 100.0% | 100.0% | 90.9% | 90.9% |
+| Claude Opus 5.5 (max) on Claude Max 5x | 100.0% | 100.0% | 100.0% | 100.0% | 100.0% | 89.2% | 88.9% |
+| Claude Opus 5.5 (max) on Claude Pro | 100.0% | 100.0% | 100.0% | 100.0% | 100.0% | 91.1% | 91.0% |
+| Claude Sonnet 5.5 (max) on Claude Max 20x | 0.0% | — | — | — | — | — | — |
+| Claude Sonnet 5.5 (max) on Claude Max 5x | 0.0% | — | — | — | — | — | — |
+| Claude Sonnet 5.5 (max) on Claude Pro | 0.0% | — | — | — | — | — | — |
+| DeepSeek V4.1 Flash 1017 (max) on API-cost fallback | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| GPT-6 Astra (max) on ChatGPT Plus | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| GPT-6 Astra (max) on ChatGPT Pro 100 | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| GPT-6 Astra (max) on ChatGPT Pro 200 | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| GPT-6 Astra (max) on ChatGPT Pro 500 | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| GPT-6 Luna (max) on ChatGPT Plus | 0.0% | — | — | — | — | — | — |
+| GPT-6 Luna (max) on ChatGPT Pro 100 | 0.0% | — | — | — | — | — | — |
+| GPT-6 Luna (max) on ChatGPT Pro 200 | 0.0% | — | — | — | — | — | — |
+| GPT-6 Luna (max) on ChatGPT Pro 500 | 0.0% | — | — | — | — | — | — |
+| GPT-6.1 Sol (max) on ChatGPT Plus | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 9.1% | 9.1% |
+| GPT-6.1 Sol (max) on ChatGPT Pro 100 | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 9.1% | 9.1% |
+| GPT-6.1 Sol (max) on ChatGPT Pro 200 | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| GPT-6.1 Sol (max) on ChatGPT Pro 500 | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 10.8% | 11.1% |
+| Gemini 4 Argon (high) on API-cost fallback | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
 
 ### Plan basis: on the frontier
 
-| Configuration | S0 | S1 | S2 | S1 endpoint-heavy | S1M | S1T |
-|---|---:|---:|---:|---:|---:|---:|
-| Claude Haiku 5.5 (max) on Claude Max 20x | 0.0% | — | — | — | — | — |
-| Claude Haiku 5.5 (max) on Claude Max 5x | 0.0% | — | — | — | — | — |
-| Claude Haiku 5.5 (max) on Claude Pro | 100.0% | — | — | — | — | — |
-| Claude Opus 5.5 (max) on Claude Max 20x | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| Claude Opus 5.5 (max) on Claude Max 5x | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| Claude Opus 5.5 (max) on Claude Pro | 100.0% | 100.0% | 100.0% | 100.0% | 100.0% | 98.0% |
-| Claude Sonnet 5.5 (max) on Claude Max 20x | 0.0% | — | — | — | — | — |
-| Claude Sonnet 5.5 (max) on Claude Max 5x | 0.0% | — | — | — | — | — |
-| Claude Sonnet 5.5 (max) on Claude Pro | 0.0% | — | — | — | — | — |
-| DeepSeek V4.1 Flash 1017 (max) on API-cost fallback | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| GPT-6 Astra (max) on ChatGPT Plus | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| GPT-6 Astra (max) on ChatGPT Pro 100 | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| GPT-6 Astra (max) on ChatGPT Pro 200 | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 10.2% |
-| GPT-6 Astra (max) on ChatGPT Pro 500 | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| GPT-6 Luna (max) on ChatGPT Plus | 0.0% | — | — | — | — | — |
-| GPT-6 Luna (max) on ChatGPT Pro 100 | 0.0% | — | — | — | — | — |
-| GPT-6 Luna (max) on ChatGPT Pro 200 | 0.0% | — | — | — | — | — |
-| GPT-6 Luna (max) on ChatGPT Pro 500 | 100.0% | — | — | — | — | — |
-| GPT-6.1 Sol (max) on ChatGPT Plus | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| GPT-6.1 Sol (max) on ChatGPT Pro 100 | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| GPT-6.1 Sol (max) on ChatGPT Pro 200 | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| GPT-6.1 Sol (max) on ChatGPT Pro 500 | 100.0% | 100.0% | 100.0% | 100.0% | 100.0% | 100.0% |
-| Gemini 4 Argon (high) on API-cost fallback | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| Configuration | S0 | S1 | S2 | S1 endpoint-heavy | S1M | S1T | S1T mean-preserving |
+|---|---:|---:|---:|---:|---:|---:|---:|
+| Claude Haiku 5.5 (max) on Claude Max 20x | 0.0% | — | — | — | — | — | — |
+| Claude Haiku 5.5 (max) on Claude Max 5x | 0.0% | — | — | — | — | — | — |
+| Claude Haiku 5.5 (max) on Claude Pro | 100.0% | — | — | — | — | — | — |
+| Claude Opus 5.5 (max) on Claude Max 20x | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| Claude Opus 5.5 (max) on Claude Max 5x | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| Claude Opus 5.5 (max) on Claude Pro | 100.0% | 100.0% | 100.0% | 100.0% | 100.0% | 98.0% | 98.0% |
+| Claude Sonnet 5.5 (max) on Claude Max 20x | 0.0% | — | — | — | — | — | — |
+| Claude Sonnet 5.5 (max) on Claude Max 5x | 0.0% | — | — | — | — | — | — |
+| Claude Sonnet 5.5 (max) on Claude Pro | 0.0% | — | — | — | — | — | — |
+| DeepSeek V4.1 Flash 1017 (max) on API-cost fallback | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| GPT-6 Astra (max) on ChatGPT Plus | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| GPT-6 Astra (max) on ChatGPT Pro 100 | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| GPT-6 Astra (max) on ChatGPT Pro 200 | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 10.2% | 10.1% |
+| GPT-6 Astra (max) on ChatGPT Pro 500 | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| GPT-6 Luna (max) on ChatGPT Plus | 0.0% | — | — | — | — | — | — |
+| GPT-6 Luna (max) on ChatGPT Pro 100 | 0.0% | — | — | — | — | — | — |
+| GPT-6 Luna (max) on ChatGPT Pro 200 | 0.0% | — | — | — | — | — | — |
+| GPT-6 Luna (max) on ChatGPT Pro 500 | 100.0% | — | — | — | — | — | — |
+| GPT-6.1 Sol (max) on ChatGPT Plus | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| GPT-6.1 Sol (max) on ChatGPT Pro 100 | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| GPT-6.1 Sol (max) on ChatGPT Pro 200 | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| GPT-6.1 Sol (max) on ChatGPT Pro 500 | 100.0% | 100.0% | 100.0% | 100.0% | 100.0% | 100.0% | 100.0% |
+| Gemini 4 Argon (high) on API-cost fallback | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
 
 ### Plan basis: value-score dispersion (SD; covariance term)
 
-| Configuration | S0 | S1 | S2 | S1 endpoint-heavy | S1M | S1T |
-|---|---:|---:|---:|---:|---:|---:|
-| Claude Haiku 5.5 (max) on Claude Max 20x | 0.00 (+0.00) | — | — | — | — | — |
-| Claude Haiku 5.5 (max) on Claude Max 5x | 0.00 (+0.00) | — | — | — | — | — |
-| Claude Haiku 5.5 (max) on Claude Pro | 0.00 (+0.00) | — | — | — | — | — |
-| Claude Opus 5.5 (max) on Claude Max 20x | 0.00 (+0.00) | 0.00 (+0.00) | 1.22 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 0.95 (+0.00) |
-| Claude Opus 5.5 (max) on Claude Max 5x | 0.00 (+0.00) | 0.00 (+0.00) | 1.22 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 0.95 (+0.00) |
-| Claude Opus 5.5 (max) on Claude Pro | 0.00 (+0.00) | 0.00 (+0.00) | 1.22 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 0.95 (+0.00) |
-| Claude Sonnet 5.5 (max) on Claude Max 20x | 0.00 (+0.00) | — | — | — | — | — |
-| Claude Sonnet 5.5 (max) on Claude Max 5x | 0.00 (+0.00) | — | — | — | — | — |
-| Claude Sonnet 5.5 (max) on Claude Pro | 0.00 (+0.00) | — | — | — | — | — |
-| DeepSeek V4.1 Flash 1017 (max) on API-cost fallback | 0.00 (+0.00) | 0.00 (+0.00) | 1.43 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 0.93 (+0.00) |
-| GPT-6 Astra (max) on ChatGPT Plus | 0.00 (+0.00) | 0.00 (+0.00) | 1.26 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 0.95 (+0.00) |
-| GPT-6 Astra (max) on ChatGPT Pro 100 | 0.00 (+0.00) | 0.00 (+0.00) | 1.26 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 0.95 (+0.00) |
-| GPT-6 Astra (max) on ChatGPT Pro 200 | 0.00 (+0.00) | 0.00 (+0.00) | 1.26 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 0.95 (+0.00) |
-| GPT-6 Astra (max) on ChatGPT Pro 500 | 0.00 (+0.00) | 0.00 (+0.00) | 1.26 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 0.95 (+0.00) |
-| GPT-6 Luna (max) on ChatGPT Plus | 0.00 (+0.00) | — | — | — | — | — |
-| GPT-6 Luna (max) on ChatGPT Pro 100 | 0.00 (+0.00) | — | — | — | — | — |
-| GPT-6 Luna (max) on ChatGPT Pro 200 | 0.00 (+0.00) | — | — | — | — | — |
-| GPT-6 Luna (max) on ChatGPT Pro 500 | 0.00 (+0.00) | — | — | — | — | — |
-| GPT-6.1 Sol (max) on ChatGPT Plus | 0.00 (+0.00) | 0.00 (+0.00) | 1.27 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 0.96 (+0.00) |
-| GPT-6.1 Sol (max) on ChatGPT Pro 100 | 0.00 (+0.00) | 0.00 (+0.00) | 1.27 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 0.96 (+0.00) |
-| GPT-6.1 Sol (max) on ChatGPT Pro 200 | 0.00 (+0.00) | 0.00 (+0.00) | 1.27 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 0.96 (+0.00) |
-| GPT-6.1 Sol (max) on ChatGPT Pro 500 | 0.00 (+0.00) | 0.00 (+0.00) | 1.27 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 0.96 (+0.00) |
-| Gemini 4 Argon (high) on API-cost fallback | 0.00 (+0.00) | 0.00 (+0.00) | 1.54 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 0.95 (+0.00) |
+| Configuration | S0 | S1 | S2 | S1 endpoint-heavy | S1M | S1T | S1T mean-preserving |
+|---|---:|---:|---:|---:|---:|---:|---:|
+| Claude Haiku 5.5 (max) on Claude Max 20x | 0.00 (+0.00) | — | — | — | — | — | — |
+| Claude Haiku 5.5 (max) on Claude Max 5x | 0.00 (+0.00) | — | — | — | — | — | — |
+| Claude Haiku 5.5 (max) on Claude Pro | 0.00 (+0.00) | — | — | — | — | — | — |
+| Claude Opus 5.5 (max) on Claude Max 20x | 0.00 (+0.00) | 0.00 (+0.00) | 1.22 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 0.95 (+0.00) | 0.95 (+0.00) |
+| Claude Opus 5.5 (max) on Claude Max 5x | 0.00 (+0.00) | 0.00 (+0.00) | 1.22 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 0.95 (+0.00) | 0.95 (+0.00) |
+| Claude Opus 5.5 (max) on Claude Pro | 0.00 (+0.00) | 0.00 (+0.00) | 1.22 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 0.95 (+0.00) | 0.95 (+0.00) |
+| Claude Sonnet 5.5 (max) on Claude Max 20x | 0.00 (+0.00) | — | — | — | — | — | — |
+| Claude Sonnet 5.5 (max) on Claude Max 5x | 0.00 (+0.00) | — | — | — | — | — | — |
+| Claude Sonnet 5.5 (max) on Claude Pro | 0.00 (+0.00) | — | — | — | — | — | — |
+| DeepSeek V4.1 Flash 1017 (max) on API-cost fallback | 0.00 (+0.00) | 0.00 (+0.00) | 1.43 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 0.93 (+0.00) | 0.95 (+0.00) |
+| GPT-6 Astra (max) on ChatGPT Plus | 0.00 (+0.00) | 0.00 (+0.00) | 1.26 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 0.95 (+0.00) | 0.95 (+0.00) |
+| GPT-6 Astra (max) on ChatGPT Pro 100 | 0.00 (+0.00) | 0.00 (+0.00) | 1.26 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 0.95 (+0.00) | 0.95 (+0.00) |
+| GPT-6 Astra (max) on ChatGPT Pro 200 | 0.00 (+0.00) | 0.00 (+0.00) | 1.26 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 0.95 (+0.00) | 0.95 (+0.00) |
+| GPT-6 Astra (max) on ChatGPT Pro 500 | 0.00 (+0.00) | 0.00 (+0.00) | 1.26 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 0.95 (+0.00) | 0.95 (+0.00) |
+| GPT-6 Luna (max) on ChatGPT Plus | 0.00 (+0.00) | — | — | — | — | — | — |
+| GPT-6 Luna (max) on ChatGPT Pro 100 | 0.00 (+0.00) | — | — | — | — | — | — |
+| GPT-6 Luna (max) on ChatGPT Pro 200 | 0.00 (+0.00) | — | — | — | — | — | — |
+| GPT-6 Luna (max) on ChatGPT Pro 500 | 0.00 (+0.00) | — | — | — | — | — | — |
+| GPT-6.1 Sol (max) on ChatGPT Plus | 0.00 (+0.00) | 0.00 (+0.00) | 1.27 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 0.96 (+0.00) | 0.96 (+0.00) |
+| GPT-6.1 Sol (max) on ChatGPT Pro 100 | 0.00 (+0.00) | 0.00 (+0.00) | 1.27 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 0.96 (+0.00) | 0.96 (+0.00) |
+| GPT-6.1 Sol (max) on ChatGPT Pro 200 | 0.00 (+0.00) | 0.00 (+0.00) | 1.27 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 0.96 (+0.00) | 0.96 (+0.00) |
+| GPT-6.1 Sol (max) on ChatGPT Pro 500 | 0.00 (+0.00) | 0.00 (+0.00) | 1.27 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 0.96 (+0.00) | 0.96 (+0.00) |
+| Gemini 4 Argon (high) on API-cost fallback | 0.00 (+0.00) | 0.00 (+0.00) | 1.54 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 0.95 (+0.00) | 0.94 (+0.00) |
 
 ### Named S2 specification branches
 
@@ -2284,9 +2284,9 @@ The 90% rule's error bound holds per published event (candidate and kernel assig
 - **Terminal-Bench cross-source agreement (AA's mini-SWE-agent run against tbench.ai):** defined; 0 rows take the leaf from tbench.ai (gap fill).
 - **Workload cross-check (E41, mandatory diagnostic):** Terminal-Bench 4.0 cost per solved task on AA's own execution against basket cost: τ_b 0.86 (interval 0.48 to 1.00), uncertain agreement; panel (8): Claude Haiku 5.5 (max), Claude Opus 5.5 (max), Claude Sonnet 5.5 (max), DeepSeek V4.1 Flash 1017 (max), Gemini 4 Argon (high), GPT-6 Astra (max), GPT-6 Luna (max), GPT-6.1 Sol (max).
 - **Rank separability (O39, independent-task approximation):** median separation 2.65 value points (API) and 2.65 (Plan); separable adjacent ranks: API 1 of 6, Plan 3 of 7. Assumptions: tasks are independent and each leaf's score is a mean over its published task count (a binomial leaf drawn from its Jeffreys posterior Beta(k + 1/2, n - k + 1/2), O142; plug-in SDs with the proportion (k + 1/2) / (n + 1), I28); attempts averaged within a task and tasks shared across models are ignored, so the noise is approximate; GDPval-AA: each row's rating interval as AA's model page displays it, read as a 95% normal interval (AA states no level), SD = half-width / 1.96; AA-Omniscience: each of 3,000 questions scores +1, 0 or -1, with the shares from AA's accuracy and hallucination rate; Vals boards (Vibe Code Bench v1.1, Code Migration v1.1): Vals' published standard error per record, read as the leaf's SD; AI Coding Daily: judged points over its six graded projects read as a binomial share of 60 points (an assumption; the board publishes no error).
-- **FrontierCode against Cognition:** FrontierCode cross-source agreement (AA against Cognition; E234): retired (O136): the leaf is AA's FrontierCode 2.0 and Cognition's board publishes FrontierCode 1.1, so no fill or comparison is made across the two versions; panel of 0 rows.
+- **FrontierCode against Cognition:** FrontierCode 2.0 cross-source agreement (AA against Cognition, exact model and effort; E234, O153): Kendall tau 0.91 (interval 0.83 to 0.97) on 26 rows. Cognition minus AA: mean -1.5 points, largest 7.7.
 - **Gap-fill removal (E234, diagnostic):** no ranked row has a leaf from another party or the provider.
-- **Bar results without the gap fills (E234, sensitivity; labels unchanged):** cheapest displayed row as published, with fills removed, and with third-party fills no measured offset — API quality 61.4: GPT-6.1 Sol (max) in all three; API quality 49.1: DeepSeek V4.1 Flash 1017 (max) in all three; API quality 65.2: GPT-6 Astra (max) in all three; Plan quality 61.4: GPT-6.1 Sol (max) in all three; Plan quality 49.1: Claude Haiku 5.5 (max) in all three; Plan quality 65.2: Claude Opus 5.5 (max) in all three.
+- **Bar results without the gap fills (E234, sensitivity; labels unchanged):** cheapest displayed row as published, with fills removed, and with third-party fills lowered by the mean offset -1.5 points — API quality 61.4: GPT-6.1 Sol (max) in all three; API quality 49.1: DeepSeek V4.1 Flash 1017 (max) in all three; API quality 65.2: GPT-6 Astra (max) in all three; Plan quality 61.4: GPT-6.1 Sol (max) in all three; Plan quality 49.1: Claude Haiku 5.5 (max) in all three; Plan quality 65.2: Claude Opus 5.5 (max) in all three.
 - **Harness cost (O123, S2 stress):** unevaluable: no model is listed under two or more agents in AA's Coding Agent Index capture, so no agent effect is identified (O123). Coding Agent Index agents (each part of its costed configuration; none is the run behind the FrontierCode or Terminal-Bench leaf): GPT-6.1 Sol (max): Codex; Claude Opus 5.5 (max): Claude Code; Claude Sonnet 5.5 (max): Claude Code; GPT-6 Astra (max): Codex; DeepSeek V4.1 Flash 1017 (max): DeepSeek Harness; Gemini 4 Argon (high): Antigravity CLI; Claude Haiku 5.5 (max): Claude Code; GPT-6 Luna (max): Codex.
 - **Quality agreement:** quality agreement (matched-panel sensitivity): Kendall tau 0.89 (interval 0.50 to 1.00) on 9 rows.
 - **Quality-substitution value agreement (API):** quality-substitution value agreement, api basis (matched-panel sensitivity): Kendall tau 0.89 (interval 0.61 to 1.00) on 9 rows.

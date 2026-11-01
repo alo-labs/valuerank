@@ -908,7 +908,7 @@ Each routed row's amount with what it measures, how it was derived and which obj
 
 ## Evidence bundle
 
-Bundle hash `64c0ca1c5a7a16c1cfd5aaebe2cea0f654b77c6d9d0b353ae7d44b373962f109`: every published output is rebuilt from these artifacts at the pinned publication clock (npm run verify:docs), never from live pages.
+Bundle hash `87e5fdb3e661c98465f22e89449945b025402cd9261f9e0b83c99138c8a84308`: every published output is rebuilt from these artifacts at the pinned publication clock (npm run verify:docs), never from live pages.
 
 | Key | Artifact | SHA-256 | Captured | Extractor |
 |---|---|---|---|---|
@@ -924,12 +924,12 @@ Bundle hash `64c0ca1c5a7a16c1cfd5aaebe2cea0f654b77c6d9d0b353ae7d44b373962f109`: 
 | bugHuntScoreboard | `data/bug_hunt_scoreboard.json` | `7be929ea55e67e8e589a22afb152981dca6c8063db8606df7f3a944b8a4ce1b5` | 2026-11-01T05:59:30Z | the owner's combined scoreboard at the pinned commit (O31 roster check) |
 | planRoutes | `data/plan_cost_routes.json` | `abd6e485ef02168b5b7fd513b289da1e728915de40cf3d265f5b89a4d1fd2a47` | 2026-10-31 | editorial Plan evidence registry |
 | priceRecords | `data/price_records.json` | `fe550f7770759a6219e671838f28b42d3b7d7db0fa5f7ab489e08a75605421f8` | 2026-10-31T04:10:00Z | editorial E141 price-record registry (superseded and promotional tariffs) |
-| leafEvidence | `data/leaf_evidence.json` | `008d42a8df7261b5a98107439dd3fe733d3dfe8b48fd1b283633774d909a396e` | 2026-11-01 | editorial supplementary leaf evidence and the exhaustive-search log (O36) |
-| cognitionFrontierCode | `data/cognition_frontiercode.json` | `ff0040778b7bdf69c705ad7474f771fb5e53cfaf5cf8573b3a4614153543d75f` | 2026-10-23 | Cognition's FrontierCode leaderboard data (https://cognition.com/data/frontiercode-leaderboard/data.json), captured unchanged (O37) |
+| leafEvidence | `data/leaf_evidence.json` | `248d3b46f6905241ca2e005959754a687b09776297dc2bbe6c11dc4e00cffd06` | 2026-11-01 | editorial supplementary leaf evidence and the exhaustive-search log (O36) |
+| cognitionFrontierCode | `data/cognition_frontiercode.json` | `c7ffd7b4a39cd5a307e49048bedb5ed8e656cca8331af452e47371e6e9866f86` | 2026-11-01 | Cognition's FrontierCode leaderboard data (https://cognition.com/data/frontiercode-leaderboard/data.json), captured unchanged (O37) |
 | sweTracks | `data/swe_tracks.json` | `54e76dc5d68f349fbe2d67f4234f6b999fceb07cfa7353ea22a487e18dcf4f4f` | 2026-11-01T06:03:32.614Z | research/2026-10-23-swe-benchmarks/build_swe_tracks.py from the verified coverage captures (O53-O55) |
 | planReports | `data/plan_reports.json` | `a699da4aa84fa0022671d1cf0132dd29c86379af22d6a4770b779033ee5aa0f4` | 2026-10-28 | editorial table of every O71 user report with the facts E270 needs; the build derives admission from it (O81) |
 | aaPreviousCapture | `data/aa/aa_previous_capture.json` | `d9ec560d2f27fc4de89e68d293399ee331e706e9c12c625c15012e7a237b577f` | 2026-10-31T04:07:04Z | valuerank.capture_aa: digest of the model-page capture this one replaced (I60) |
-| sourceRereads | `data/source_rereads.json` | `5d806f7ac471a2c09eb1a189a3d3d7c36b7e9d2c050bcc1835c6156405cb133a` | 2026-10-25T11:33:58Z | editorial record of the O68 re-reads, each 'unchanged' result verified against the re-read file |
+| sourceRereads | `data/source_rereads.json` | `41cb7583ad871a2972ce4e83684a60d60be5ad9bd71f2b096e61c56e435391cd` | 2026-11-01T08:39:42Z | editorial record of the O68 re-reads, each 'unchanged' result verified against the re-read file |
 | aaFootnotes | `data/aa/aa_footnote_register.json` | `ccc742e1cca305fa88b80b48d7f46e89392cee8225353f8daa88ec5e174d59a4` | 2026-11-01T05:53:05Z | editorial register of every AA note the captures record (the chart's footnotes, and from O103 the model pages, Coding Agent Index and cost charts), by exact text, each classified once (O100, O103) |
 | anchors | `data/v3_frozen.json` | `6e73858a3d2f3732180560ca3309d8ecf8708908650c5fded6b49229bd115dfa` | 2026-11-01 | valuerank.value_v3 freeze |
 | anchors:aicd | `data/v3_frozen_aicd.json` | `b179413b1f151a90943232361f9aa01868bad82ed13a0b16b1c2e6a4c3b159d6` | 2026-11-01 | valuerank.value_v3 freeze |

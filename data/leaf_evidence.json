@@ -3413,11 +3413,13 @@
     }
   ],
   "cognitionCapture": {
-    "url": "https://cognition.com/data/frontiercode-leaderboard/data.json",
-    "lastModified": "2026-10-22T22:28:12Z",
-    "capturedOn": "2026-10-23",
-    "sha256": "ff0040778b7bdf69c705ad7474f771fb5e53cfaf5cf8573b3a4614153543d75f",
-    "file": "data/cognition_frontiercode.json"
+    "url": "https://cognition.com/data/frontier-code-2.0/data.json",
+    "lastModified": "2026-10-31T13:46:59Z",
+    "capturedOn": "2026-11-01",
+    "sha256": "85b38c86839bf3da10228c928c222823f6a9fe155492df7bb3b651a202f96ab2",
+    "file": "data/cognition_frontiercode.json",
+    "artifact": "research/2026-11-01-recapture/third-party/cognition/frontier-code-2.0-data.json",
+    "note": "O153: Cognition's FrontierCode 2.0 board gap-fills the leaf after AA's run (exact model and effort, v2_0Map) and feeds the AA-Cognition agreement diagnostic."
   },
   "openWebRule": "I28 (2026-10-23): each search for a listed frontier or near-frontier family also logs an open-web discovery step: the queries and every candidate found, each resolved by a dated registry addition ('register') or a dated rejection with a reason ('reject'); the build fails on a missing step or an unresolved candidate.",
   "supplementsNote": "O136 (2026-10-30): Cognition's FrontierCode 1.1 fills ended; the FrontierCode leaf is AA's FrontierCode 2.0, which AA runs for every cohort configuration."

@@ -41,8 +41,14 @@ def test_kernels_draw_their_families():
     # O142: a binomial leaf's Beta draw stays inside 0-100 without a boundary atom.
     with pytest.raises(ValueError, match="a beta kernel concerns sampling noise"):
         Kernel("beta", (99.5, 1.5))
-    beta = [Kernel("beta", (99.5, 1.5), target="task sampling (independent-task approximation)").draw(rng) for _ in range(200)]
+    beta = [Kernel("beta", (99.5, 1.5, 100.0), target="task sampling (independent-task approximation)").draw(rng) for _ in range(200)]
     assert all(0.0 < value < 100.0 for value in beta) and 90.0 < sum(beta) / len(beta) < 100.0
+    # O154: the mean-preserving alternative recentres on the published score and clips to 0-100.
+    kernel = Kernel("beta", (3.5, 0.5, 100.0), "mean-preserving", target="task sampling (independent-task approximation)")
+    assert sc.mean_shift(3.5, 0.5, 100.0) == pytest.approx(-12.5)
+    recentred = [kernel.draw(rng, use_alternative=True) for _ in range(2000)]
+    assert all(0.0 <= value <= 100.0 for value in recentred) and max(recentred) == 100.0 and sum(recentred) / len(recentred) > 93.0
+    assert kernel.draw(rng) < 100.0 and Kernel("beta", (3.5, 0.5, 100.0), target="t").draw(rng, use_alternative=True) < 100.0
     summed = Kernel("uniform-sum", (100.0, (9.5, 10.5), (19.5, 20.5)), "endpoint-heavy")
     for heavy in (False, True):
         assert 129.0 <= summed.draw(rng, use_alternative=heavy) <= 131.0

@@ -494,6 +494,15 @@
         "top1": 0.0,
         "top3": 0.0001,
         "frontier": 0.0045
+      },
+      {
+        "stratum": "S1T",
+        "kernel": "endpoint-heavy",
+        "targetProfile": "published-record leaf values redrawn with task-sampling noise from each leaf's published task count (binomial leaves from their Jeffreys Beta posterior, O142; independent-task approximation; GDPval-AA from its displayed rating interval, an assumption) + conventional identification of missing leaves",
+        "unevaluable": null,
+        "top1": 0.0,
+        "top3": 0.0001,
+        "frontier": 0.0042
       }
     ],
     "plan": [
@@ -545,6 +554,15 @@
       {
         "stratum": "S1T",
         "kernel": "primary",
+        "targetProfile": "published-record leaf values redrawn with task-sampling noise from each leaf's published task count (binomial leaves from their Jeffreys Beta posterior, O142; independent-task approximation; GDPval-AA from its displayed rating interval, an assumption) + conventional identification of missing leaves",
+        "unevaluable": "owner-named transfer: unevaluable with owner assumptions off (never reselected or replaced by API cost)",
+        "top1": null,
+        "top3": null,
+        "frontier": null
+      },
+      {
+        "stratum": "S1T",
+        "kernel": "endpoint-heavy",
         "targetProfile": "published-record leaf values redrawn with task-sampling noise from each leaf's published task count (binomial leaves from their Jeffreys Beta posterior, O142; independent-task approximation; GDPval-AA from its displayed rating interval, an assumption) + conventional identification of missing leaves",
         "unevaluable": "owner-named transfer: unevaluable with owner assumptions off (never reselected or replaced by API cost)",
         "top1": null,

@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "inputHash": "493e4a9a6fd440273a0bad0de986726cc79b5e612a27df2ffc4257d449178c60",
+  "inputHash": "b3308393e72703ba012b116c049442e31f2816c3060b2c3b732f6630413a5862",
   "seed": 20261101,
   "scenarios": 10000,
   "streamDescriptions": {
@@ -3329,6 +3329,555 @@
               "valueSd": 1.4297619555909515,
               "costTerm": 0.0,
               "qualityTerm": 2.0442192496552622,
+              "covarianceTerm": 0.0
+            }
+          }
+        },
+        "pairwise": []
+      },
+      {
+        "stratum": "S1T",
+        "targetProfile": "published-record leaf values redrawn with task-sampling noise from each leaf's published task count (binomial leaves from their Jeffreys Beta posterior, O142; independent-task approximation; GDPval-AA from its displayed rating interval, an assumption) + conventional identification of missing leaves",
+        "permittedTargets": [
+          "identification convention",
+          "reporting precision",
+          "task sampling (independent-task approximation)"
+        ],
+        "variedTargets": [
+          "identification convention",
+          "task sampling (independent-task approximation)"
+        ],
+        "qualityEquation": "full composite, nominal weights",
+        "events": {
+          "top1": "rank-1 frequency (competition ranks on value)",
+          "top3": "rank 3 or better frequency (competition ranks on value)",
+          "frontier": "full-composite frontier frequency under task-sampling draws (independent-task approximation)",
+          "qualifies": "qualifying-at-the-bar frequency (full composite, nominal weights)"
+        },
+        "scenarios": 10000,
+        "seed": 20261107,
+        "alternative": true,
+        "panel": [
+          "claude-haiku-5-5-high",
+          "claude-haiku-5-5-medium",
+          "claude-opus-5-5-high",
+          "claude-opus-5-5-medium",
+          "deepseek-v4-1-flash-1017",
+          "gemini-4-argon",
+          "gpt-6-astra-high",
+          "gpt-6-luna",
+          "gpt-6-luna-high",
+          "gpt-6-luna-medium",
+          "gpt-6-luna-xhigh",
+          "gpt-6.1-sol-high",
+          "gpt-6.1-sol-low",
+          "gpt-6.1-sol-medium",
+          "gpt-6.1-terra",
+          "gpt-6.1-terra-high",
+          "gpt-6.1-terra-medium",
+          "gpt-6.1-terra-xhigh",
+          "kimi-k3-1-pro",
+          "mimo-v2-6-pro"
+        ],
+        "panelSize": 20,
+        "rows": {
+          "gpt-6.1-terra": {
+            "top3": {
+              "share": 0.8532,
+              "monteCarloSe": 0.0035390642831121337
+            },
+            "top1": {
+              "share": 0.2694,
+              "monteCarloSe": 0.0044364810379398665
+            },
+            "frontier": {
+              "share": 0.5731,
+              "monteCarloSe": 0.004946275265288013
+            },
+            "qualifies": {},
+            "dispersion": {
+              "status": "defined",
+              "label": "scenario dispersion under the declared kernels",
+              "scenarios": 10000,
+              "valueVariance": 2.2687278202861356,
+              "valueSd": 1.5062296704972107,
+              "costTerm": 0.0,
+              "qualityTerm": 2.2687278202861356,
+              "covarianceTerm": 0.0
+            }
+          },
+          "gpt-6.1-sol-high": {
+            "top3": {
+              "share": 0.9464,
+              "monteCarloSe": 0.002252266414081602
+            },
+            "top1": {
+              "share": 0.5125,
+              "monteCarloSe": 0.0049984372557830515
+            },
+            "frontier": {
+              "share": 0.8875,
+              "monteCarloSe": 0.003159806164941135
+            },
+            "qualifies": {},
+            "dispersion": {
+              "status": "defined",
+              "label": "scenario dispersion under the declared kernels",
+              "scenarios": 10000,
+              "valueVariance": 1.8220497788594017,
+              "valueSd": 1.3498332411299558,
+              "costTerm": 0.0,
+              "qualityTerm": 1.8220497788594017,
+              "covarianceTerm": 0.0
+            }
+          },
+          "deepseek-v4-1-flash-1017": {
+            "top3": {
+              "share": 0.0239,
+              "monteCarloSe": 0.0015273765089197882
+            },
+            "top1": {
+              "share": 0.0001,
+              "monteCarloSe": 9.999499987499375e-05
+            },
+            "frontier": {
+              "share": 0.0533,
+              "monteCarloSe": 0.002246310530625719
+            },
+            "qualifies": {},
+            "dispersion": {
+              "status": "defined",
+              "label": "scenario dispersion under the declared kernels",
+              "scenarios": 10000,
+              "valueVariance": 2.164498747479283,
+              "valueSd": 1.4712235545556231,
+              "costTerm": 0.0,
+              "qualityTerm": 2.164498747479283,
+              "covarianceTerm": 0.0
+            }
+          },
+          "gpt-6.1-sol-medium": {
+            "top3": {
+              "share": 0.8372,
+              "monteCarloSe": 0.003691830982046713
+            },
+            "top1": {
+              "share": 0.2035,
+              "monteCarloSe": 0.004026012295063193
+            },
+            "frontier": {
+              "share": 0.9104,
+              "monteCarloSe": 0.0028560784302956387
+            },
+            "qualifies": {},
+            "dispersion": {
+              "status": "defined",
+              "label": "scenario dispersion under the declared kernels",
+              "scenarios": 10000,
+              "valueVariance": 1.9364327679019062,
+              "valueSd": 1.3915576768146933,
+              "costTerm": 0.0,
+              "qualityTerm": 1.9364327679019062,
+              "covarianceTerm": 0.0
+            }
+          },
+          "gemini-4-argon": {
+            "top3": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "top1": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "frontier": {
+              "share": 0.082,
+              "monteCarloSe": 0.002743647207641682
+            },
+            "qualifies": {},
+            "dispersion": {
+              "status": "defined",
+              "label": "scenario dispersion under the declared kernels",
+              "scenarios": 10000,
+              "valueVariance": 2.3976700378449665,
+              "valueSd": 1.5484411638305688,
+              "costTerm": 0.0,
+              "qualityTerm": 2.3976700378449665,
+              "covarianceTerm": 0.0
+            }
+          },
+          "claude-opus-5-5-high": {
+            "top3": {
+              "share": 0.0063,
+              "monteCarloSe": 0.0007912212080069645
+            },
+            "top1": {
+              "share": 0.0001,
+              "monteCarloSe": 9.999499987499375e-05
+            },
+            "frontier": {
+              "share": 0.435,
+              "monteCarloSe": 0.004957569969249047
+            },
+            "qualifies": {},
+            "dispersion": {
+              "status": "defined",
+              "label": "scenario dispersion under the declared kernels",
+              "scenarios": 10000,
+              "valueVariance": 1.7393271267395936,
+              "valueSd": 1.3188355192136711,
+              "costTerm": 0.0,
+              "qualityTerm": 1.7393271267395936,
+              "covarianceTerm": 0.0
+            }
+          },
+          "kimi-k3-1-pro": {
+            "top3": {
+              "share": 0.0044,
+              "monteCarloSe": 0.0006618640343756413
+            },
+            "top1": {
+              "share": 0.0001,
+              "monteCarloSe": 9.999499987499375e-05
+            },
+            "frontier": {
+              "share": 0.3576,
+              "monteCarloSe": 0.0047929348003076366
+            },
+            "qualifies": {},
+            "dispersion": {
+              "status": "defined",
+              "label": "scenario dispersion under the declared kernels",
+              "scenarios": 10000,
+              "valueVariance": 1.8814366886456941,
+              "valueSd": 1.3716547264693453,
+              "costTerm": 0.0,
+              "qualityTerm": 1.8814366886456941,
+              "covarianceTerm": 0.0
+            }
+          },
+          "gpt-6-astra-high": {
+            "top3": {
+              "share": 0.0061,
+              "monteCarloSe": 0.0007786391975748459
+            },
+            "top1": {
+              "share": 0.0001,
+              "monteCarloSe": 9.999499987499375e-05
+            },
+            "frontier": {
+              "share": 0.3325,
+              "monteCarloSe": 0.00471109063805824
+            },
+            "qualifies": {},
+            "dispersion": {
+              "status": "defined",
+              "label": "scenario dispersion under the declared kernels",
+              "scenarios": 10000,
+              "valueVariance": 1.8257521010145872,
+              "valueSd": 1.3512039450114801,
+              "costTerm": 0.0,
+              "qualityTerm": 1.8257521010145872,
+              "covarianceTerm": 0.0
+            }
+          },
+          "claude-opus-5-5-medium": {
+            "top3": {
+              "share": 0.0014,
+              "monteCarloSe": 0.0003739037309254884
+            },
+            "top1": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "frontier": {
+              "share": 0.0961,
+              "monteCarloSe": 0.002947283325369314
+            },
+            "qualifies": {},
+            "dispersion": {
+              "status": "defined",
+              "label": "scenario dispersion under the declared kernels",
+              "scenarios": 10000,
+              "valueVariance": 1.7992800585482218,
+              "valueSd": 1.3413724533283893,
+              "costTerm": 0.0,
+              "qualityTerm": 1.7992800585482218,
+              "covarianceTerm": 0.0
+            }
+          },
+          "gpt-6.1-sol-low": {
+            "top3": {
+              "share": 0.0015,
+              "monteCarloSe": 0.0003870077518603471
+            },
+            "top1": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "frontier": {
+              "share": 0.306,
+              "monteCarloSe": 0.004608296865437381
+            },
+            "qualifies": {},
+            "dispersion": {
+              "status": "defined",
+              "label": "scenario dispersion under the declared kernels",
+              "scenarios": 10000,
+              "valueVariance": 1.9227552900395473,
+              "valueSd": 1.38663451927303,
+              "costTerm": 0.0,
+              "qualityTerm": 1.9227552900395473,
+              "covarianceTerm": 0.0
+            }
+          },
+          "gpt-6.1-terra-xhigh": {
+            "top3": {
+              "share": 0.1361,
+              "monteCarloSe": 0.0034289472145251814
+            },
+            "top1": {
+              "share": 0.0054,
+              "monteCarloSe": 0.0007328601503697688
+            },
+            "frontier": {
+              "share": 0.7065,
+              "monteCarloSe": 0.004553655125281228
+            },
+            "qualifies": {},
+            "dispersion": {
+              "status": "defined",
+              "label": "scenario dispersion under the declared kernels",
+              "scenarios": 10000,
+              "valueVariance": 2.394354716625364,
+              "valueSd": 1.5473702584143731,
+              "costTerm": 0.0,
+              "qualityTerm": 2.394354716625364,
+              "covarianceTerm": 0.0
+            }
+          },
+          "gpt-6.1-terra-high": {
+            "top3": {
+              "share": 0.1438,
+              "monteCarloSe": 0.003508868193591774
+            },
+            "top1": {
+              "share": 0.008,
+              "monteCarloSe": 0.0008908422980528036
+            },
+            "frontier": {
+              "share": 0.7756,
+              "monteCarloSe": 0.004171865769652711
+            },
+            "qualifies": {},
+            "dispersion": {
+              "status": "defined",
+              "label": "scenario dispersion under the declared kernels",
+              "scenarios": 10000,
+              "valueVariance": 2.546623904085998,
+              "valueSd": 1.5958144955119307,
+              "costTerm": 0.0,
+              "qualityTerm": 2.546623904085998,
+              "covarianceTerm": 0.0
+            }
+          },
+          "claude-haiku-5-5-high": {
+            "top3": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "top1": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "frontier": {
+              "share": 0.907,
+              "monteCarloSe": 0.0029043243620504922
+            },
+            "qualifies": {},
+            "dispersion": {
+              "status": "defined",
+              "label": "scenario dispersion under the declared kernels",
+              "scenarios": 10000,
+              "valueVariance": 1.907626108476853,
+              "valueSd": 1.3811683852727201,
+              "costTerm": 0.0,
+              "qualityTerm": 1.907626108476853,
+              "covarianceTerm": 0.0
+            }
+          },
+          "gpt-6-luna": {
+            "top3": {
+              "share": 0.0003,
+              "monteCarloSe": 0.00017317909804592468
+            },
+            "top1": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "frontier": {
+              "share": 0.6153,
+              "monteCarloSe": 0.004865243159390906
+            },
+            "qualifies": {},
+            "dispersion": {
+              "status": "defined",
+              "label": "scenario dispersion under the declared kernels",
+              "scenarios": 10000,
+              "valueVariance": 1.7993190622738202,
+              "valueSd": 1.3413869919877037,
+              "costTerm": 0.0,
+              "qualityTerm": 1.7993190622738202,
+              "covarianceTerm": 0.0
+            }
+          },
+          "mimo-v2-6-pro": {
+            "top3": {
+              "share": 0.0114,
+              "monteCarloSe": 0.001061604446109755
+            },
+            "top1": {
+              "share": 0.0002,
+              "monteCarloSe": 0.00014140721339450828
+            },
+            "frontier": {
+              "share": 0.942,
+              "monteCarloSe": 0.00233743449106066
+            },
+            "qualifies": {},
+            "dispersion": {
+              "status": "defined",
+              "label": "scenario dispersion under the declared kernels",
+              "scenarios": 10000,
+              "valueVariance": 2.3241728854620085,
+              "valueSd": 1.5245238225301723,
+              "costTerm": 0.0,
+              "qualityTerm": 2.3241728854620085,
+              "covarianceTerm": 0.0
+            }
+          },
+          "gpt-6.1-terra-medium": {
+            "top3": {
+              "share": 0.028,
+              "monteCarloSe": 0.0016497272501841023
+            },
+            "top1": {
+              "share": 0.0006,
+              "monteCarloSe": 0.0002448754785600224
+            },
+            "frontier": {
+              "share": 0.5975,
+              "monteCarloSe": 0.004904016211229323
+            },
+            "qualifies": {},
+            "dispersion": {
+              "status": "defined",
+              "label": "scenario dispersion under the declared kernels",
+              "scenarios": 10000,
+              "valueVariance": 2.3423159228178028,
+              "valueSd": 1.5304626499257676,
+              "costTerm": 0.0,
+              "qualityTerm": 2.3423159228178028,
+              "covarianceTerm": 0.0
+            }
+          },
+          "claude-haiku-5-5-medium": {
+            "top3": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "top1": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "frontier": {
+              "share": 0.6149,
+              "monteCarloSe": 0.004866189371571969
+            },
+            "qualifies": {},
+            "dispersion": {
+              "status": "defined",
+              "label": "scenario dispersion under the declared kernels",
+              "scenarios": 10000,
+              "valueVariance": 1.7017890979509303,
+              "valueSd": 1.3045263883689475,
+              "costTerm": 0.0,
+              "qualityTerm": 1.7017890979509303,
+              "covarianceTerm": 0.0
+            }
+          },
+          "gpt-6-luna-xhigh": {
+            "top3": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "top1": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "frontier": {
+              "share": 0.5874,
+              "monteCarloSe": 0.0049230198049571156
+            },
+            "qualifies": {},
+            "dispersion": {
+              "status": "defined",
+              "label": "scenario dispersion under the declared kernels",
+              "scenarios": 10000,
+              "valueVariance": 1.7958912016431994,
+              "valueSd": 1.3401086529245303,
+              "costTerm": 0.0,
+              "qualityTerm": 1.7958912016431994,
+              "covarianceTerm": 0.0
+            }
+          },
+          "gpt-6-luna-high": {
+            "top3": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "top1": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "frontier": {
+              "share": 0.9615,
+              "monteCarloSe": 0.0019239997401247222
+            },
+            "qualifies": {},
+            "dispersion": {
+              "status": "defined",
+              "label": "scenario dispersion under the declared kernels",
+              "scenarios": 10000,
+              "valueVariance": 1.8685891465440794,
+              "valueSd": 1.3669634766679317,
+              "costTerm": 0.0,
+              "qualityTerm": 1.8685891465440794,
+              "covarianceTerm": 0.0
+            }
+          },
+          "gpt-6-luna-medium": {
+            "top3": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "top1": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "frontier": {
+              "share": 1.0,
+              "monteCarloSe": 0.0
+            },
+            "qualifies": {},
+            "dispersion": {
+              "status": "defined",
+              "label": "scenario dispersion under the declared kernels",
+              "scenarios": 10000,
+              "valueVariance": 1.970409846328488,
+              "valueSd": 1.4037128788781872,
+              "costTerm": 0.0,
+              "qualityTerm": 1.970409846328488,
               "covarianceTerm": 0.0
             }
           }
@@ -9355,8 +9904,905 @@
             "reason": "O46 provider quota ceiling: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
           }
         ]
+      },
+      {
+        "stratum": "S1T",
+        "targetProfile": "published-record leaf values redrawn with task-sampling noise from each leaf's published task count (binomial leaves from their Jeffreys Beta posterior, O142; independent-task approximation; GDPval-AA from its displayed rating interval, an assumption) + conventional identification of missing leaves",
+        "permittedTargets": [
+          "identification convention",
+          "reporting precision",
+          "task sampling (independent-task approximation)"
+        ],
+        "variedTargets": [
+          "identification convention",
+          "task sampling (independent-task approximation)"
+        ],
+        "qualityEquation": "full composite, nominal weights",
+        "events": {
+          "top1": "rank-1 frequency (competition ranks on value)",
+          "top3": "rank 3 or better frequency (competition ranks on value)",
+          "frontier": "full-composite frontier frequency under task-sampling draws (independent-task approximation)",
+          "qualifies": "qualifying-at-the-bar frequency (full composite, nominal weights)"
+        },
+        "scenarios": 10000,
+        "seed": 20261107,
+        "alternative": true,
+        "panel": [
+          "claude-opus-5-5-high@claude-max-20x",
+          "claude-opus-5-5-high@claude-max-5x",
+          "claude-opus-5-5-high@claude-pro",
+          "claude-opus-5-5-medium@claude-max-20x",
+          "claude-opus-5-5-medium@claude-max-5x",
+          "claude-opus-5-5-medium@claude-pro",
+          "deepseek-v4-1-flash-1017@api",
+          "gemini-4-argon@api",
+          "gpt-6-astra-high@chatgpt-plus",
+          "gpt-6-astra-high@chatgpt-pro-100",
+          "gpt-6-astra-high@chatgpt-pro-200",
+          "gpt-6-astra-high@chatgpt-pro-500",
+          "gpt-6.1-sol-high@chatgpt-plus",
+          "gpt-6.1-sol-high@chatgpt-pro-100",
+          "gpt-6.1-sol-high@chatgpt-pro-200",
+          "gpt-6.1-sol-high@chatgpt-pro-500",
+          "gpt-6.1-sol-low@chatgpt-plus",
+          "gpt-6.1-sol-low@chatgpt-pro-100",
+          "gpt-6.1-sol-low@chatgpt-pro-200",
+          "gpt-6.1-sol-low@chatgpt-pro-500",
+          "gpt-6.1-sol-medium@chatgpt-plus",
+          "gpt-6.1-sol-medium@chatgpt-pro-100",
+          "gpt-6.1-sol-medium@chatgpt-pro-200",
+          "gpt-6.1-sol-medium@chatgpt-pro-500",
+          "kimi-k3-1-pro@api"
+        ],
+        "panelSize": 25,
+        "rows": {
+          "gpt-6.1-sol-high@chatgpt-plus": {
+            "top3": {
+              "share": 0.1732,
+              "monteCarloSe": 0.003784200840336041
+            },
+            "top1": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "frontier": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "qualifies": {},
+            "dispersion": {
+              "status": "defined",
+              "label": "scenario dispersion under the declared kernels",
+              "scenarios": 10000,
+              "valueVariance": 1.8684588267585298,
+              "valueSd": 1.3669158082188273,
+              "costTerm": 0.0,
+              "qualityTerm": 1.8684588267585298,
+              "covarianceTerm": 0.0
+            }
+          },
+          "gpt-6.1-sol-high@chatgpt-pro-100": {
+            "top3": {
+              "share": 0.1732,
+              "monteCarloSe": 0.003784200840336041
+            },
+            "top1": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "frontier": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "qualifies": {},
+            "dispersion": {
+              "status": "defined",
+              "label": "scenario dispersion under the declared kernels",
+              "scenarios": 10000,
+              "valueVariance": 1.8684588267585298,
+              "valueSd": 1.3669158082188273,
+              "costTerm": 0.0,
+              "qualityTerm": 1.8684588267585298,
+              "covarianceTerm": 0.0
+            }
+          },
+          "gpt-6.1-sol-high@chatgpt-pro-200": {
+            "top3": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "top1": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "frontier": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "qualifies": {},
+            "dispersion": {
+              "status": "defined",
+              "label": "scenario dispersion under the declared kernels",
+              "scenarios": 10000,
+              "valueVariance": 1.8684588267585298,
+              "valueSd": 1.3669158082188273,
+              "costTerm": 0.0,
+              "qualityTerm": 1.8684588267585298,
+              "covarianceTerm": 0.0
+            }
+          },
+          "gpt-6.1-sol-high@chatgpt-pro-500": {
+            "top3": {
+              "share": 0.1939,
+              "monteCarloSe": 0.003953514765370176
+            },
+            "top1": {
+              "share": 0.1816,
+              "monteCarloSe": 0.0038551451334547706
+            },
+            "frontier": {
+              "share": 0.2877,
+              "monteCarloSe": 0.004526905234263249
+            },
+            "qualifies": {},
+            "dispersion": {
+              "status": "defined",
+              "label": "scenario dispersion under the declared kernels",
+              "scenarios": 10000,
+              "valueVariance": 1.8684588267585298,
+              "valueSd": 1.3669158082188273,
+              "costTerm": 0.0,
+              "qualityTerm": 1.8684588267585298,
+              "covarianceTerm": 0.0
+            }
+          },
+          "deepseek-v4-1-flash-1017@api": {
+            "top3": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "top1": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "frontier": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "qualifies": {},
+            "dispersion": {
+              "status": "defined",
+              "label": "scenario dispersion under the declared kernels",
+              "scenarios": 10000,
+              "valueVariance": 2.155308945149148,
+              "valueSd": 1.4680970489545806,
+              "costTerm": 0.0,
+              "qualityTerm": 2.155308945149148,
+              "covarianceTerm": 0.0
+            }
+          },
+          "gpt-6.1-sol-medium@chatgpt-plus": {
+            "top3": {
+              "share": 0.0339,
+              "monteCarloSe": 0.0018097179338228374
+            },
+            "top1": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "frontier": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "qualifies": {},
+            "dispersion": {
+              "status": "defined",
+              "label": "scenario dispersion under the declared kernels",
+              "scenarios": 10000,
+              "valueVariance": 1.853412320575332,
+              "valueSd": 1.3614008669658368,
+              "costTerm": 0.0,
+              "qualityTerm": 1.853412320575332,
+              "covarianceTerm": 0.0
+            }
+          },
+          "gpt-6.1-sol-medium@chatgpt-pro-100": {
+            "top3": {
+              "share": 0.0339,
+              "monteCarloSe": 0.0018097179338228374
+            },
+            "top1": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "frontier": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "qualifies": {},
+            "dispersion": {
+              "status": "defined",
+              "label": "scenario dispersion under the declared kernels",
+              "scenarios": 10000,
+              "valueVariance": 1.853412320575332,
+              "valueSd": 1.3614008669658368,
+              "costTerm": 0.0,
+              "qualityTerm": 1.853412320575332,
+              "covarianceTerm": 0.0
+            }
+          },
+          "gpt-6.1-sol-medium@chatgpt-pro-200": {
+            "top3": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "top1": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "frontier": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "qualifies": {},
+            "dispersion": {
+              "status": "defined",
+              "label": "scenario dispersion under the declared kernels",
+              "scenarios": 10000,
+              "valueVariance": 1.853412320575332,
+              "valueSd": 1.3614008669658368,
+              "costTerm": 0.0,
+              "qualityTerm": 1.853412320575332,
+              "covarianceTerm": 0.0
+            }
+          },
+          "gpt-6.1-sol-medium@chatgpt-pro-500": {
+            "top3": {
+              "share": 0.0391,
+              "monteCarloSe": 0.0019383289194561382
+            },
+            "top1": {
+              "share": 0.0357,
+              "monteCarloSe": 0.001855411275162464
+            },
+            "frontier": {
+              "share": 0.2614,
+              "monteCarloSe": 0.004393973600284827
+            },
+            "qualifies": {},
+            "dispersion": {
+              "status": "defined",
+              "label": "scenario dispersion under the declared kernels",
+              "scenarios": 10000,
+              "valueVariance": 1.853412320575332,
+              "valueSd": 1.3614008669658368,
+              "costTerm": 0.0,
+              "qualityTerm": 1.853412320575332,
+              "covarianceTerm": 0.0
+            }
+          },
+          "gemini-4-argon@api": {
+            "top3": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "top1": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "frontier": {
+              "share": 0.0968,
+              "monteCarloSe": 0.002956852380488414
+            },
+            "qualifies": {},
+            "dispersion": {
+              "status": "defined",
+              "label": "scenario dispersion under the declared kernels",
+              "scenarios": 10000,
+              "valueVariance": 2.289929217149975,
+              "valueSd": 1.5132512075494853,
+              "costTerm": 0.0,
+              "qualityTerm": 2.289929217149975,
+              "covarianceTerm": 0.0
+            }
+          },
+          "claude-opus-5-5-high@claude-max-20x": {
+            "top3": {
+              "share": 0.5999,
+              "monteCarloSe": 0.004899183503401358
+            },
+            "top1": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "frontier": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "qualifies": {},
+            "dispersion": {
+              "status": "defined",
+              "label": "scenario dispersion under the declared kernels",
+              "scenarios": 10000,
+              "valueVariance": 1.7339315193130849,
+              "valueSd": 1.31678833504595,
+              "costTerm": 0.0,
+              "qualityTerm": 1.7339315193130849,
+              "covarianceTerm": 0.0
+            }
+          },
+          "claude-opus-5-5-high@claude-max-5x": {
+            "top3": {
+              "share": 0.5743,
+              "monteCarloSe": 0.004944486929904861
+            },
+            "top1": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "frontier": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "qualifies": {},
+            "dispersion": {
+              "status": "defined",
+              "label": "scenario dispersion under the declared kernels",
+              "scenarios": 10000,
+              "valueVariance": 1.7339315193130849,
+              "valueSd": 1.31678833504595,
+              "costTerm": 0.0,
+              "qualityTerm": 1.7339315193130849,
+              "covarianceTerm": 0.0
+            }
+          },
+          "claude-opus-5-5-high@claude-pro": {
+            "top3": {
+              "share": 0.6092,
+              "monteCarloSe": 0.0048792966706278475
+            },
+            "top1": {
+              "share": 0.5933,
+              "monteCarloSe": 0.004912179862342176
+            },
+            "frontier": {
+              "share": 0.8321,
+              "monteCarloSe": 0.0037377746052965795
+            },
+            "qualifies": {},
+            "dispersion": {
+              "status": "defined",
+              "label": "scenario dispersion under the declared kernels",
+              "scenarios": 10000,
+              "valueVariance": 1.7339315193130849,
+              "valueSd": 1.31678833504595,
+              "costTerm": 0.0,
+              "qualityTerm": 1.7339315193130849,
+              "covarianceTerm": 0.0
+            }
+          },
+          "kimi-k3-1-pro@api": {
+            "top3": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "top1": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "frontier": {
+              "share": 0.2837,
+              "monteCarloSe": 0.00450792979093508
+            },
+            "qualifies": {},
+            "dispersion": {
+              "status": "defined",
+              "label": "scenario dispersion under the declared kernels",
+              "scenarios": 10000,
+              "valueVariance": 1.8477727386888585,
+              "valueSd": 1.359328046752828,
+              "costTerm": 0.0,
+              "qualityTerm": 1.8477727386888585,
+              "covarianceTerm": 0.0
+            }
+          },
+          "gpt-6-astra-high@chatgpt-plus": {
+            "top3": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "top1": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "frontier": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "qualifies": {},
+            "dispersion": {
+              "status": "defined",
+              "label": "scenario dispersion under the declared kernels",
+              "scenarios": 10000,
+              "valueVariance": 1.8307269186057107,
+              "valueSd": 1.3530435760187884,
+              "costTerm": 0.0,
+              "qualityTerm": 1.8307269186057107,
+              "covarianceTerm": 0.0
+            }
+          },
+          "gpt-6-astra-high@chatgpt-pro-100": {
+            "top3": {
+              "share": 0.0016,
+              "monteCarloSe": 0.0003996798718974975
+            },
+            "top1": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "frontier": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "qualifies": {},
+            "dispersion": {
+              "status": "defined",
+              "label": "scenario dispersion under the declared kernels",
+              "scenarios": 10000,
+              "valueVariance": 1.8307269186057107,
+              "valueSd": 1.3530435760187884,
+              "costTerm": 0.0,
+              "qualityTerm": 1.8307269186057107,
+              "covarianceTerm": 0.0
+            }
+          },
+          "gpt-6-astra-high@chatgpt-pro-200": {
+            "top3": {
+              "share": 0.0025,
+              "monteCarloSe": 0.0004993746088859545
+            },
+            "top1": {
+              "share": 0.0022,
+              "monteCarloSe": 0.0004685253461660319
+            },
+            "frontier": {
+              "share": 0.518,
+              "monteCarloSe": 0.004996758949559204
+            },
+            "qualifies": {},
+            "dispersion": {
+              "status": "defined",
+              "label": "scenario dispersion under the declared kernels",
+              "scenarios": 10000,
+              "valueVariance": 1.8307269186057107,
+              "valueSd": 1.3530435760187884,
+              "costTerm": 0.0,
+              "qualityTerm": 1.8307269186057107,
+              "covarianceTerm": 0.0
+            }
+          },
+          "gpt-6-astra-high@chatgpt-pro-500": {
+            "top3": {
+              "share": 0.0021,
+              "monteCarloSe": 0.0004577761461675346
+            },
+            "top1": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "frontier": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "qualifies": {},
+            "dispersion": {
+              "status": "defined",
+              "label": "scenario dispersion under the declared kernels",
+              "scenarios": 10000,
+              "valueVariance": 1.8307269186057107,
+              "valueSd": 1.3530435760187884,
+              "costTerm": 0.0,
+              "qualityTerm": 1.8307269186057107,
+              "covarianceTerm": 0.0
+            }
+          },
+          "claude-opus-5-5-medium@claude-max-20x": {
+            "top3": {
+              "share": 0.1905,
+              "monteCarloSe": 0.00392695492716685
+            },
+            "top1": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "frontier": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "qualifies": {},
+            "dispersion": {
+              "status": "defined",
+              "label": "scenario dispersion under the declared kernels",
+              "scenarios": 10000,
+              "valueVariance": 1.7637075339820039,
+              "valueSd": 1.328046510473938,
+              "costTerm": 0.0,
+              "qualityTerm": 1.7637075339820039,
+              "covarianceTerm": 0.0
+            }
+          },
+          "claude-opus-5-5-medium@claude-max-5x": {
+            "top3": {
+              "share": 0.1748,
+              "monteCarloSe": 0.003797959452126892
+            },
+            "top1": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "frontier": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "qualifies": {},
+            "dispersion": {
+              "status": "defined",
+              "label": "scenario dispersion under the declared kernels",
+              "scenarios": 10000,
+              "valueVariance": 1.7637075339820039,
+              "valueSd": 1.328046510473938,
+              "costTerm": 0.0,
+              "qualityTerm": 1.7637075339820039,
+              "covarianceTerm": 0.0
+            }
+          },
+          "claude-opus-5-5-medium@claude-pro": {
+            "top3": {
+              "share": 0.2019,
+              "monteCarloSe": 0.0040141797418650794
+            },
+            "top1": {
+              "share": 0.1872,
+              "monteCarloSe": 0.0039007199335507284
+            },
+            "frontier": {
+              "share": 1.0,
+              "monteCarloSe": 0.0
+            },
+            "qualifies": {},
+            "dispersion": {
+              "status": "defined",
+              "label": "scenario dispersion under the declared kernels",
+              "scenarios": 10000,
+              "valueVariance": 1.7637075339820039,
+              "valueSd": 1.328046510473938,
+              "costTerm": 0.0,
+              "qualityTerm": 1.7637075339820039,
+              "covarianceTerm": 0.0
+            }
+          },
+          "gpt-6.1-sol-low@chatgpt-plus": {
+            "top3": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "top1": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "frontier": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "qualifies": {},
+            "dispersion": {
+              "status": "defined",
+              "label": "scenario dispersion under the declared kernels",
+              "scenarios": 10000,
+              "valueVariance": 1.9350671294340507,
+              "valueSd": 1.3910669032918763,
+              "costTerm": 0.0,
+              "qualityTerm": 1.9350671294340507,
+              "covarianceTerm": 0.0
+            }
+          },
+          "gpt-6.1-sol-low@chatgpt-pro-100": {
+            "top3": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "top1": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "frontier": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "qualifies": {},
+            "dispersion": {
+              "status": "defined",
+              "label": "scenario dispersion under the declared kernels",
+              "scenarios": 10000,
+              "valueVariance": 1.9350671294340507,
+              "valueSd": 1.3910669032918763,
+              "costTerm": 0.0,
+              "qualityTerm": 1.9350671294340507,
+              "covarianceTerm": 0.0
+            }
+          },
+          "gpt-6.1-sol-low@chatgpt-pro-200": {
+            "top3": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "top1": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "frontier": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "qualifies": {},
+            "dispersion": {
+              "status": "defined",
+              "label": "scenario dispersion under the declared kernels",
+              "scenarios": 10000,
+              "valueVariance": 1.9350671294340507,
+              "valueSd": 1.3910669032918763,
+              "costTerm": 0.0,
+              "qualityTerm": 1.9350671294340507,
+              "covarianceTerm": 0.0
+            }
+          },
+          "gpt-6.1-sol-low@chatgpt-pro-500": {
+            "top3": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "top1": {
+              "share": 0.0,
+              "monteCarloSe": 0.0
+            },
+            "frontier": {
+              "share": 1.0,
+              "monteCarloSe": 0.0
+            },
+            "qualifies": {},
+            "dispersion": {
+              "status": "defined",
+              "label": "scenario dispersion under the declared kernels",
+              "scenarios": 10000,
+              "valueVariance": 1.9350671294340507,
+              "valueSd": 1.3910669032918763,
+              "costTerm": 0.0,
+              "qualityTerm": 1.9350671294340507,
+              "covarianceTerm": 0.0
+            }
+          }
+        },
+        "pairwise": [],
+        "transfers": "off",
+        "excluded": [
+          {
+            "row": "claude-haiku-5-5-high@claude-max-20x",
+            "reason": "owner-named transfer: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
+          },
+          {
+            "row": "claude-haiku-5-5-high@claude-max-5x",
+            "reason": "owner-named transfer: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
+          },
+          {
+            "row": "claude-haiku-5-5-high@claude-pro",
+            "reason": "owner-named transfer: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
+          },
+          {
+            "row": "claude-haiku-5-5-medium@claude-max-20x",
+            "reason": "owner-named transfer: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
+          },
+          {
+            "row": "claude-haiku-5-5-medium@claude-max-5x",
+            "reason": "owner-named transfer: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
+          },
+          {
+            "row": "claude-haiku-5-5-medium@claude-pro",
+            "reason": "owner-named transfer: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
+          },
+          {
+            "row": "gpt-6-luna-high@chatgpt-plus",
+            "reason": "owner-named transfer: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
+          },
+          {
+            "row": "gpt-6-luna-high@chatgpt-pro-100",
+            "reason": "owner-named transfer: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
+          },
+          {
+            "row": "gpt-6-luna-high@chatgpt-pro-200",
+            "reason": "owner-named transfer: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
+          },
+          {
+            "row": "gpt-6-luna-high@chatgpt-pro-500",
+            "reason": "owner-named transfer: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
+          },
+          {
+            "row": "gpt-6-luna-medium@chatgpt-plus",
+            "reason": "owner-named transfer: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
+          },
+          {
+            "row": "gpt-6-luna-medium@chatgpt-pro-100",
+            "reason": "owner-named transfer: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
+          },
+          {
+            "row": "gpt-6-luna-medium@chatgpt-pro-200",
+            "reason": "owner-named transfer: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
+          },
+          {
+            "row": "gpt-6-luna-medium@chatgpt-pro-500",
+            "reason": "owner-named transfer: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
+          },
+          {
+            "row": "gpt-6-luna-xhigh@chatgpt-plus",
+            "reason": "owner-named transfer: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
+          },
+          {
+            "row": "gpt-6-luna-xhigh@chatgpt-pro-100",
+            "reason": "owner-named transfer: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
+          },
+          {
+            "row": "gpt-6-luna-xhigh@chatgpt-pro-200",
+            "reason": "owner-named transfer: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
+          },
+          {
+            "row": "gpt-6-luna-xhigh@chatgpt-pro-500",
+            "reason": "owner-named transfer: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
+          },
+          {
+            "row": "gpt-6-luna@chatgpt-plus",
+            "reason": "owner-named transfer: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
+          },
+          {
+            "row": "gpt-6-luna@chatgpt-pro-100",
+            "reason": "owner-named transfer: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
+          },
+          {
+            "row": "gpt-6-luna@chatgpt-pro-200",
+            "reason": "owner-named transfer: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
+          },
+          {
+            "row": "gpt-6-luna@chatgpt-pro-500",
+            "reason": "owner-named transfer: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
+          },
+          {
+            "row": "gpt-6.1-terra-high@chatgpt-plus",
+            "reason": "owner-named transfer: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
+          },
+          {
+            "row": "gpt-6.1-terra-high@chatgpt-pro-100",
+            "reason": "owner-named transfer: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
+          },
+          {
+            "row": "gpt-6.1-terra-high@chatgpt-pro-200",
+            "reason": "owner-named transfer: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
+          },
+          {
+            "row": "gpt-6.1-terra-high@chatgpt-pro-500",
+            "reason": "owner-named transfer: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
+          },
+          {
+            "row": "gpt-6.1-terra-medium@chatgpt-plus",
+            "reason": "owner-named transfer: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
+          },
+          {
+            "row": "gpt-6.1-terra-medium@chatgpt-pro-100",
+            "reason": "owner-named transfer: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
+          },
+          {
+            "row": "gpt-6.1-terra-medium@chatgpt-pro-200",
+            "reason": "owner-named transfer: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
+          },
+          {
+            "row": "gpt-6.1-terra-medium@chatgpt-pro-500",
+            "reason": "owner-named transfer: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
+          },
+          {
+            "row": "gpt-6.1-terra-xhigh@chatgpt-plus",
+            "reason": "owner-named transfer: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
+          },
+          {
+            "row": "gpt-6.1-terra-xhigh@chatgpt-pro-100",
+            "reason": "owner-named transfer: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
+          },
+          {
+            "row": "gpt-6.1-terra-xhigh@chatgpt-pro-200",
+            "reason": "owner-named transfer: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
+          },
+          {
+            "row": "gpt-6.1-terra-xhigh@chatgpt-pro-500",
+            "reason": "owner-named transfer: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
+          },
+          {
+            "row": "gpt-6.1-terra@chatgpt-plus",
+            "reason": "owner-named transfer: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
+          },
+          {
+            "row": "gpt-6.1-terra@chatgpt-pro-100",
+            "reason": "owner-named transfer: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
+          },
+          {
+            "row": "gpt-6.1-terra@chatgpt-pro-200",
+            "reason": "owner-named transfer: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
+          },
+          {
+            "row": "gpt-6.1-terra@chatgpt-pro-500",
+            "reason": "owner-named transfer: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
+          },
+          {
+            "row": "mimo-v2-6-pro@mimo-token-plan-lite",
+            "reason": "O46 provider quota ceiling: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
+          },
+          {
+            "row": "mimo-v2-6-pro@mimo-token-plan-max",
+            "reason": "O46 provider quota ceiling: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
+          },
+          {
+            "row": "mimo-v2-6-pro@mimo-token-plan-pro",
+            "reason": "O46 provider quota ceiling: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
+          },
+          {
+            "row": "mimo-v2-6-pro@mimo-token-plan-standard",
+            "reason": "O46 provider quota ceiling: unevaluable with owner assumptions off (never reselected or replaced by API cost)"
+          }
+        ]
       }
     ]
+  },
+  "samplingMeanShift": {
+    "aiCodingDaily": {
+      "maxShift": -6.590476190476181,
+      "row": "claude-opus-5-5-high",
+      "clipRate": 0.189475
+    },
+    "automationBench": {
+      "maxShift": -0.041813783372319335,
+      "row": "gemini-4-argon",
+      "clipRate": 0.0
+    },
+    "bugHunt": {
+      "maxShift": 0.4357592093441154,
+      "row": "gpt-6-luna-medium",
+      "clipRate": 0.0
+    },
+    "critpt": {
+      "maxShift": 0.6341463414634134,
+      "row": "deepseek-v4-1-flash-1017",
+      "clipRate": 0.0
+    },
+    "frontierCode": {
+      "maxShift": 0.2799299384825691,
+      "row": "gpt-6-luna-medium",
+      "clipRate": 0.0
+    },
+    "hle": {
+      "maxShift": 0.03486513486513587,
+      "row": "gpt-6-luna-medium",
+      "clipRate": 0.0
+    },
+    "lcr": {
+      "maxShift": -0.35973597359735265,
+      "row": "kimi-k3-1-pro",
+      "clipRate": 0.0
+    },
+    "tbScience": {
+      "maxShift": 0.6841046277665994,
+      "row": "gpt-6-luna-medium",
+      "clipRate": 0.010475
+    },
+    "terminalBench": {
+      "maxShift": 0.7085783205186189,
+      "row": "gpt-6-luna-medium",
+      "clipRate": 0.00305
+    }
   },
   "namedBranches": [
     {

@@ -26,6 +26,7 @@ import hashlib
 import json
 import math
 import re
+import random
 import statistics
 import sys
 from datetime import date, datetime, time, timezone
@@ -63,7 +64,8 @@ FRACTION_LEAVES = {
 CHART_SOURCES = {slug: f"AA {basket.COMPONENT_LABELS[slug]} total cost chart (labels rounded to USD 1)" for slug in basket.CHART_COMPONENTS}
 DEFAULT_TB_HARNESS = "mini-SWE-agent"  # E125/O37: AA's Terminal-Bench harness; a leaf on any other agent is a gap fill
 SCENARIO_COUNT = 10_000
-SCENARIO_RUNS = (("S0", False), ("S1", False), ("S2", False), ("S1", True), ("S1M", False), ("S1T", False))
+# O154: S1T also runs with its mean-preserving alternative kernel (appended, so the earlier strata keep their seeds).
+SCENARIO_RUNS = (("S0", False), ("S1", False), ("S2", False), ("S1", True), ("S1M", False), ("S1T", False), ("S1T", True))
 SAMPLING_STREAM = "S1T"  # O39: benchmark sampling noise, independent-task approximation (never a label)
 # O39: each leaf's sampling unit, the published task count of the run the leaf reads (AA's evaluation pages and
 # methodology; FrontierCode 1.1 Main's 100 tasks; Bug Hunt's 105 planted bugs).
@@ -135,7 +137,7 @@ LEAF_SEARCH_MAX_AGE_DAYS = 7
 
 
 # E237: the benchmark version a gap fill must state (O36: "the same benchmark version on the exact configuration").
-SUPPLEMENT_VERSIONS = {"bugHunt": "Bug Hunt Bench", "frontierCode": "FrontierCode 1.1", "terminalBench": "Terminal-Bench 4.0"}
+SUPPLEMENT_VERSIONS = {"bugHunt": "Bug Hunt Bench", "frontierCode": "FrontierCode 2.0", "terminalBench": "Terminal-Bench 4.0"}
 
 
 def check_comparability(entry: dict) -> None:
@@ -1582,6 +1584,19 @@ def interval_outputs(assembled: dict, frozen: dict, basis: str, components: list
     """
 
     candidates = api_candidates(assembled, components) if basis == "api" else plan_candidates(assembled)
+    if basis != "plan":
+        return _interval_outputs(assembled, frozen, basis, candidates)
+    # O155: a hard-expired (in grace) or fault-window Plan route stops blocking at expiry: it is listed, flagged and out of
+    # the competition, so it can deny no other row a label.
+    stale = sorted(row["id"] for row, _, _ in candidates if plan_routes.stops_blocking(row["routeSelection"]["selected"]))
+    outputs = _interval_outputs(assembled, frozen, basis, [item for item in candidates if item[0]["id"] not in stale])
+    outputs["unevaluable"] = [row_id for row_id in outputs["unevaluable"] if row_id not in stale]
+    return {**outputs, "staleListed": stale}
+
+
+def _interval_outputs(assembled: dict, frozen: dict, basis: str, candidates: list) -> dict:
+    """interval_outputs over the given candidates."""
+
     # E273 (reviewer 71): E89's separability needs every row's cost to rest on its own primitives; two Plan rows sharing one
     # donor multiple known only as a range share an uncertain factor, so the outputs are unresolved, never computed by corners.
     shared = shared_uncertain_donors(candidates) if basis == "plan" else []
@@ -1597,8 +1612,7 @@ def interval_outputs(assembled: dict, frozen: dict, basis: str, components: list
     unconstructible = sorted(row["id"] for row, _, _ in candidates
                              if row["id"] in not_in_force and blocker_domain(row["valuationGate"], basis) is None)
     # E222/E228/E233: an unverified basis, a provider-claimed leaf, or (Plan) a route whose evidence a detected change may
-    # have superseded, competes but earns no label, exactly like an O29 blocker; O118, O119: so does a hard-expired route
-    # (in grace) and one measured inside an acknowledged accounting-fault window.
+    # have superseded, competes but earns no label, exactly like an O29 blocker (O118 and O119's blocker status ended by O155).
     blocked = not_in_force | {row["id"] for row in assembled["rows"] if row["valuationGate"]["outcome"] == GATE_UNVERIFIED or provider_claimed(row) or aa_cost_caveat(row)}
     if basis == "plan":
         blocked |= {row["id"] for row in assembled["rows"] if plan_routes.label_denied(row["routeSelection"]["selected"], date.fromisoformat(assembled["releaseDay"]) if assembled.get("releaseDay") else None)}
@@ -1631,12 +1645,12 @@ def interval_outputs(assembled: dict, frozen: dict, basis: str, components: list
 
 WITHHELD_LABEL = "no interval label: AA cost on a price not in force at V (O29); competes over its current-tariff hull"
 WITHHELD_CAVEAT = "no interval label: AA's cost omits a pricing term (O94); competes over its published cost up to the stated factor"
-WITHHELD_OTHER = ("no interval label: unverified valuation basis (E222), a provider-claimed leaf (E233), or a change-flagged (E228),"
-                  " hard-expired (O118) or fault-window (O119) Plan route; competes at its published record")
+WITHHELD_OTHER = ("no interval label: unverified valuation basis (E222), a provider-claimed leaf (E233), or a change-flagged (E228)"
+                  " Plan route; competes at its published record")
 
 
 def withheld_label(row: dict) -> str:
-    """Why a blocker earns no interval label of its own (O29, O94, E222, E233, E228, O118, O119)."""
+    """Why a blocker earns no interval label of its own (O29, O94, E222, E233, E228)."""
 
     if row["valuationGate"]["outcome"] == GATE_NOT_IN_FORCE:
         return WITHHELD_LABEL
@@ -1873,16 +1887,48 @@ def gap_fill_bars(assembled: dict, frozen: dict, offset: float | None) -> dict:
     return result
 
 
-FRONTIERCODE_CROSS_SOURCE_RETIRED = ("retired (O136): the leaf is AA's FrontierCode 2.0 and Cognition's board publishes FrontierCode 1.1, "
-                                     "so no fill or comparison is made across the two versions")
+COGNITION_PUBLISHER = "Cognition (FrontierCode's author)"
+
+
+def cognition_score(cognition: dict, configuration_id: str) -> float | None:
+    """O153: Cognition's FrontierCode 2.0 main score (percent) for a configuration at its exact model and effort, read through
+    the registered map (v2_0Map; never best-of across efforts), or None."""
+
+    entry = (cognition.get("v2_0Map") or {}).get(configuration_id)
+    if entry is None:
+        return None
+    score = ((((cognition.get("v2_0") or {}).get("data") or {}).get(entry["model"]) or {}).get(entry["effort"] or "na") or {}).get("main", {}).get("new_score")
+    return None if score is None else 100.0 * score
 
 
 def frontiercode_cross_source(rows: list[dict], cognition: dict) -> dict:
-    """E234: AA's FrontierCode against Cognition's main score for the same family and effort. Retired by O136 (the leaf is
-    FrontierCode 2.0, Cognition's board 1.1); the object stays so the published diagnostic says why it is empty."""
+    """E234 revived by O153: AA's FrontierCode 2.0 run against Cognition's own 2.0 board at the exact model and effort, over
+    the configurations both run. A Cognition-filled leaf is not AA's run, so it never enters the panel on the AA side."""
 
-    return {"label": "FrontierCode cross-source agreement (AA against Cognition; E234)", "panel": [], "excluded": [], "tau": None,
-            "interval": None, "meanOffset": None, "maxAbsOffset": None, "status": FRONTIERCODE_CROSS_SOURCE_RETIRED, "scale": "not applicable"}
+    aa, other = {}, {}
+    for row in rows:
+        source = row["evidence"]["provenance"].get("frontierCode") or {}
+        if source.get("sourceType") in (None, "aa_recapture") and "frontierCode" in row["evidence"]["observations"]:
+            aa[row["id"]] = row["evidence"]["observations"]["frontierCode"].z
+        score = cognition_score(cognition, row.get("configurationId", row["id"]))
+        if score is not None:
+            other[row["id"]] = score
+    result = diagnostics.agreement(aa, other, label="FrontierCode 2.0 cross-source agreement (AA against Cognition, exact model and effort; E234, O153)")
+    offsets = [other[row_id] - aa[row_id] for row_id in result["panel"]]
+    result["meanOffset"] = statistics.fmean(offsets) if offsets else None
+    result["maxAbsOffset"] = max((abs(value) for value in offsets), default=None)
+    result["scale"] = "tested" if result["tau"] is not None else "scale equivalence not tested"
+    return result
+
+
+def check_cognition_fills(rows: list[dict], cognition: dict) -> None:
+    """O153: a configuration without AA's FrontierCode 2.0 run whose exact model and effort Cognition's board publishes must
+    carry Cognition's value as its gap fill, so a usable registered source is never left unread."""
+
+    for row in rows:
+        if "frontierCode" in row["evidence"]["observations"] or cognition_score(cognition, row.get("configurationId", row["id"])) is None:
+            continue
+        raise ValueError(f"{row['id']}: Cognition publishes FrontierCode 2.0 at this exact configuration but no gap fill records it (O153)")
 
 
 # E226: renormalising over each row's own leaves is not neutral when the sparse leaves are the hard ones. The common-leaf
@@ -2455,6 +2501,7 @@ def score(assembled: dict, frozen: dict) -> dict:
     yield_ = plan_routes.identification_yield({row["id"]: row["routeSelection"]["selected"] for row in plan_rows})
     agreement = _quality_agreement(rows)
     cohort_rows = rows + assembled.get("listed", [])
+    check_cognition_fills(cohort_rows, assembled["cognition"])
     measured = _measured_only_view(rows, frozen, per_row, plan_rows)
     readiness = cost_diagnostics.basket_readiness(rows, assembled["admission"], main)
     interval_rows = sorted(row["id"] for row in rows if (row["evidence"]["provenance"].get("terminalBench") or {}).get("ci95HalfWidthPct"))
@@ -3229,7 +3276,7 @@ def sampling_kernel(key: str, observation: q.Observation, source: dict) -> scena
     if binomial_leaf(key, source):
         tasks = SAMPLING_TASKS[key]
         successes = min(1.0, max(0.0, observation.z / 100.0)) * tasks
-        return scenarios.Kernel("beta", (successes + 0.5, tasks - successes + 0.5), None, scenarios.TASK_SAMPLING, derivation)
+        return scenarios.Kernel("beta", (successes + 0.5, tasks - successes + 0.5, observation.z), scenarios.MEAN_PRESERVING, scenarios.TASK_SAMPLING, derivation)
     return scenarios.Kernel("normal", (observation.z, sampling_sd(key, observation, source), 0.0, 100.0), None, scenarios.TASK_SAMPLING, derivation)
 
 
@@ -3547,6 +3594,30 @@ def harness_band(tb4_rows: list[dict]) -> dict:
     return {"id": "Bug Hunt harness band (E19)", "stratum": "S2", "rule": HARNESS_BAND_RULE, "status": "evaluated", "spreads": spreads, "width": statistics.median(spreads.values())}
 
 
+MEAN_SHIFT_DRAWS = 2_000  # O154: draws per binomial-leaf kernel when estimating the mean-preserving kernel's clip rate
+
+
+def sampling_mean_shift(panel: list[scenarios.RowInputs], seed: int) -> dict:
+    """O154: per binomial leaf, the largest |Jeffreys mean - published score| over the S1T panel (points, with its row) and
+    the share of the mean-preserving alternative's draws that clip at 0 or 100."""
+
+    rng, summary = random.Random(seed), {}
+    for item in panel:
+        for key, kernel in sorted(item.leaves.items()):
+            if kernel.family != "beta":
+                continue
+            shift = scenarios.mean_shift(*kernel.params)
+            entry = summary.setdefault(key, {"maxShift": 0.0, "row": None, "draws": 0, "clipped": 0})
+            if entry["row"] is None or abs(shift) > abs(entry["maxShift"]):
+                entry["maxShift"], entry["row"] = shift, item.row
+            alpha, beta, published = kernel.params
+            for _ in range(MEAN_SHIFT_DRAWS):
+                value = 100.0 * rng.betavariate(alpha, beta) - scenarios.mean_shift(alpha, beta, published)
+                entry["clipped"] += not 0.0 <= value <= 100.0
+            entry["draws"] += MEAN_SHIFT_DRAWS
+    return {key: {"maxShift": entry["maxShift"], "row": entry["row"], "clipRate": entry["clipped"] / entry["draws"]} for key, entry in summary.items()}
+
+
 def run_scenarios(assembled: dict, frozen: dict, *, n: int = SCENARIO_COUNT, seed: int) -> dict:
     """Per-basis, per-stratum scenario shares with the published seed and the input hash."""
 
@@ -3586,6 +3657,8 @@ def run_scenarios(assembled: dict, frozen: dict, *, n: int = SCENARIO_COUNT, see
         "intervalInterpretation": {MEASUREMENT_STREAM: [scenarios.interval_interpretation(TB_INTERVAL_CONTRACT)]},
         "jointRoundingLaw": {"samplingIdentities": list(SAMPLING_IDENTITIES), "registeredLaws": JOINT_LAWS, "components": "every rounded record is a singleton"},
         "results": results,
+        # O154: how far the Jeffreys draw moves each binomial leaf's mean, and how often its recentred alternative clips.
+        "samplingMeanShift": sampling_mean_shift(scenario_panel(assembled, "api", sampling=True), seed),
         "namedBranches": [band, CACHE_BRANCH, PRICE_RULE_BRANCH],
         "barLabels": bar_labels(assembled, frozen, seed=seed, batch=n),
     }

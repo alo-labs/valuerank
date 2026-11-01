@@ -577,13 +577,16 @@ def test_change_flagged_needs_a_detected_change_and_a_superseded_stage():
     assert not pr.change_flagged({"route": route, "expiry": "fresh"}) and not pr.change_flagged(None)
 
 
-def test_label_denied_adds_hard_expiry_and_fault_windows_to_change_flags():
-    """O118, O119: a hard-expired route (in grace) or one measured in a fault window competes but earns no label."""
+def test_label_denied_is_change_flags_and_stale_routes_stop_blocking():
+    """E228: a change-flagged route competes but earns no label; O155: a hard-expired (in grace) or fault-window route
+    stops blocking altogether."""
 
     route = {"id": "r"}
-    assert pr.label_denied({"route": route, "expiry": "expired"}) and pr.label_denied({"route": route, "expiry": "fresh", "faultWindow": {"id": "f"}})
+    assert not pr.label_denied({"route": route, "expiry": "expired"}) and not pr.label_denied({"route": route, "expiry": "fresh", "faultWindow": {"id": "f"}})
     assert pr.label_denied({"route": {"id": "r", "changeDetectedOn": "2026-10-15"}, "expiry": "possibly-superseded"})
     assert not pr.label_denied({"route": route, "expiry": "possibly-superseded", "faultWindow": None}) and not pr.label_denied(None)
+    assert pr.stops_blocking({"route": route, "expiry": "expired"}) and pr.stops_blocking({"route": route, "expiry": "fresh", "faultWindow": {"id": "f"}})
+    assert not pr.stops_blocking({"route": route, "expiry": "possibly-superseded"}) and not pr.stops_blocking(None)
 
 
 def test_a_report_pair_after_a_detected_change_outranks_the_flagged_controlled_route():
@@ -702,6 +705,7 @@ def test_a_controlled_measurement_in_a_fault_window_is_kept_flagged_until_report
     [kept] = pr.route_candidates("m", None, [measured], day, faults=faults)
     assert kept["grade"] == "controlled" and kept["faultWindow"] == "acknowledged"
     assert pr.FAULT_FLAG in pr.plan_cost(100.0, kept)["flags"]
+    assert pr.plan_admission.ACROSS_RESETS_FLAG in pr.plan_cost(100.0, {**kept, "route": {**kept["route"], "acrossResets": True}})["flags"]  # O156
     transfer = dict(route("t", 10.0, kind="user_assumption", models=("n",)), provider="P", plan="Pro", donorRouteId="m", sourceEvidenceClass="controlled_account_workload_projection")
     assert pr.route_candidates("n", None, [transfer], day, registry=[measured, transfer], faults=faults)[0]["faultWindow"] == "acknowledged"
     reports = candidate("reports", 5.0, "reports")

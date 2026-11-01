@@ -538,15 +538,19 @@ def test_scenarios_hash_attach_and_bar_labels():
     assert panel[0].leaves["frontierCode"].family == panel[1].leaves["frontierCode"].family
     document = v.run_scenarios(result, frozen, n=200, seed=7)
     assert document["inputHash"] == v.scenario_hash(result, frozen, n=200, seed=7)
-    assert [run["stratum"] for run in document["results"]["api"]] == ["S0", "S1", "S2", "S1", "S1M", "S1T"]
+    assert [run["stratum"] for run in document["results"]["api"]] == ["S0", "S1", "S2", "S1", "S1M", "S1T", "S1T"]
+    assert document["results"]["api"][-1]["alternative"] is True  # O154: S1T's mean-preserving alternative
+    shift = document["samplingMeanShift"]["frontierCode"]
+    assert shift["row"] in {"a", "b"} and 0.0 <= shift["clipRate"] <= 1.0
     # O39: S1T redraws every observed leaf with its task-sampling noise.
     sampled = {item.row: item for item in v.scenario_panel(result, "api", sampling=True)}
     # O142: a binomial leaf draws from its Jeffreys Beta posterior; GDPval-AA keeps the clipped normal.
     assert sampled["a"].leaves["frontierCode"].family == "beta" and sampled["a"].leaves["gdpval"].family == "normal"
     assert sampled["a"].leaves["gdpval"].derivation == scenarios.ANALYST_CONVENTION
     tasks = v.SAMPLING_TASKS["frontierCode"]
-    alpha, beta = sampled["a"].leaves["frontierCode"].params
-    assert alpha + beta == pytest.approx(tasks + 1.0)
+    alpha, beta, published = sampled["a"].leaves["frontierCode"].params
+    assert alpha + beta == pytest.approx(tasks + 1.0) and published == result["rows"][0]["evidence"]["observations"]["frontierCode"].z
+    assert shift["maxShift"] == pytest.approx(max((scenarios.mean_shift(*item.leaves["frontierCode"].params) for item in sampled.values()), key=abs))
     assert not v.binomial_leaf("omniscience", {}) and not v.binomial_leaf("vibeCode", {"stderr": 1.0}) and not v.binomial_leaf("gdpval", {})
     assert document["results"]["api"][-1]["variedTargets"] == ["identification convention", "task sampling (independent-task approximation)"]
     assert document["streamDescriptions"]["S0"] == "published-record reporting precision" and len(document["notQuantified"]) == 2
@@ -645,7 +649,7 @@ def write_world(root: Path) -> Path:
         "plan_cost_routes.json": {**documents()["planRoutes"], "evidencePolicy": {"reportingWindow": {"start": "2026-09-19", "end": "2026-10-19"}, "searchCutoff": "2026-10-19", "searchLog": [{"searchedOn": "2026-10-19"}]}},
         "price_records.json": documents()["priceRecords"],
         "leaf_evidence.json": documents()["leafEvidence"],
-        "cognition_frontiercode.json": {"v1_1": {"data": {}}},
+        "cognition_frontiercode.json": {"v1_1": {"data": {}}, "v2_0": {"data": {}}, "v2_0Map": {}},
         "swe_tracks.json": {"capturedAt": "2026-10-19T00:00:00Z", "sources": {}, "records": []},
         "aa_frontier_capture.json": {"captured_at": "2026-10-18T00:00:00Z", "points": []},
         # The roster is a bare JSON list; the Bug Hunt scoreboard is the O31 roster-check input.
@@ -954,7 +958,7 @@ def test_measurement_stream_draws_the_published_confidence_interval():
     assert kernel.family == "uniform"
     assert measured["a"].leaves["frontierCode"] == plain["a"].leaves["frontierCode"]
     document = v.run_scenarios(result, frozen, n=50, seed=3)
-    s1m = document["results"]["api"][-2]
+    s1m = document["results"]["api"][-3]
     assert s1m["stratum"] == "S1M" and s1m["variedTargets"] == ["identification convention", "published-interval range (conventional)", "reporting precision"]
     interpretation = document["intervalInterpretation"]["S1M"][0]
     assert interpretation["leaf"] == "terminalBench" and interpretation["kernelStatus"] == "conventional-within-CI"
@@ -1635,6 +1639,18 @@ def test_unverified_and_change_flagged_rows_compete_without_labels():
     assert "b" in plan.get("blockers", []) or plan["status"] != "evaluated"
 
 
+def test_expired_and_fault_window_plan_routes_stop_blocking():
+    """O155: a hard-expired (in grace) or fault-window Plan route is listed and flagged but neither competes nor blocks."""
+
+    for change in ({"expiry": "expired"}, {"faultWindow": {"id": "f"}}):
+        result, frozen = scored()
+        b = next(item for item in result["rows"] if item["id"] == "b")
+        b["routeSelection"] = {**b["routeSelection"], "selected": {**b["routeSelection"]["selected"], **change}}
+        plan = v.interval_outputs(result, frozen, "plan")
+        assert plan["staleListed"] == ["b"] and "b" not in plan["universe"] and "b" not in plan.get("blockers", []) and "b" not in plan["unevaluable"]
+    assert "staleListed" not in v.interval_outputs(*scored(), "api")
+
+
 def test_supplements_fill_only_missing_leaves_in_source_order():
     """O36: an independent result beats a provider claim; neither replaces a leaf the primary source has."""
 
@@ -1652,7 +1668,7 @@ def test_supplements_fill_only_missing_leaves_in_source_order():
     assert evidence["observations"]["bugHunt"].z == pytest.approx(100 * 52 / 105, abs=0.1) and evidence["observations"]["frontierCode"].z == 50.0
     # E237: a fill without the leaf's benchmark version, or without its metric, stops the build; another leaf needs its label.
     for broken in ({"benchmarkVersion": "FrontierCode 1.0", "metric": "main"}, {"benchmarkVersion": "FrontierCode 1.1"}):
-        with pytest.raises(ValueError, match=r"a: the frontierCode gap fill must state benchmark version 'FrontierCode 1.1' and its metric \(E237\)"):
+        with pytest.raises(ValueError, match=r"a: the frontierCode gap fill must state benchmark version 'FrontierCode 2.0' and its metric \(E237\)"):
             v.leaf_supplements({"leafEvidence": {"supplements": [{"modelId": "a", "leaf": "frontierCode", "sourceType": "independent", **broken}]}, "tb4": {}})
     v.check_comparability({"modelId": "a", "leaf": "hle", "benchmarkVersion": v.LEAF_LABELS["hle"], "metric": "accuracy"})
     # E239: another party's result counts only from a source registered for the leaf.
@@ -1919,11 +1935,31 @@ def test_an_agent_pin_must_be_the_exact_record_when_one_exists():
     assert v.exact_agent_records(mimo, {"A - MiMo-V2.6-Pro (high)": {}}) == ["A - MiMo-V2.6-Pro (high)"]
 
 
-def test_frontiercode_cross_source_is_retired_across_versions():
-    """O136: the leaf is FrontierCode 2.0 and Cognition's board 1.1, so the comparison is retired and says why."""
+def test_frontiercode_cross_source_reads_cognitions_2_0_board_at_exact_configurations():
+    """O153: AA's FrontierCode 2.0 run against Cognition's 2.0 board through the registered exact map; a Cognition-filled
+    leaf never sits on the AA side; a gap Cognition could fill without a recorded fill stops the build."""
 
-    result = v.frontiercode_cross_source([], {"v1_1": {"data": {}}})
-    assert result["status"] == v.FRONTIERCODE_CROSS_SOURCE_RETIRED and result["panel"] == [] and result["meanOffset"] is None
+    from types import SimpleNamespace
+
+    def row(row_id, z=None, source=None):
+        observations = {"frontierCode": SimpleNamespace(z=z)} if z is not None else {}
+        return {"id": row_id, "configurationId": row_id, "evidence": {"observations": observations, "provenance": {"frontierCode": source} if source else {}}}
+
+    cognition = {"v2_0": {"data": {"M": {"high": {"main": {"new_score": 0.40}}, "low": {"main": {"new_score": 0.20}}, "na": {"main": {"new_score": 0.10}}},
+                                   "N": {"max": {"main": {"new_score": 0.30}}}}},
+                 "v2_0Map": {"a": {"model": "M", "effort": "high"}, "b": {"model": "M", "effort": "low"}, "c": {"model": "N", "effort": "max"},
+                             "d": {"model": "M", "effort": None}, "e": {"model": "M", "effort": "max"}}}
+    assert v.cognition_score(cognition, "d") == pytest.approx(10.0) and v.cognition_score(cognition, "e") is None and v.cognition_score(cognition, "z") is None
+    rows = [row("a", 42.0), row("b", 21.0), row("c", 29.0), row("f", 30.0, {"sourceType": "independent"})]
+    result = v.frontiercode_cross_source(rows, cognition)
+    assert result["panel"] == ["a", "b", "c"] and result["tau"] == pytest.approx(1.0) and result["scale"] == "tested"
+    assert result["meanOffset"] == pytest.approx(((40 - 42) + (20 - 21) + (30 - 29)) / 3) and result["maxAbsOffset"] == pytest.approx(2.0)
+    small = v.frontiercode_cross_source(rows[:1], cognition)
+    assert small["tau"] is None and small["scale"] == "scale equivalence not tested" and small["meanOffset"] == pytest.approx(-2.0)
+    assert v.frontiercode_cross_source([], {})["maxAbsOffset"] is None
+    v.check_cognition_fills(rows + [row("z")], cognition)
+    with pytest.raises(ValueError, match="O153"):
+        v.check_cognition_fills([row("b")], cognition)
 
 def test_the_manifest_registers_every_aa_row_and_matches_the_grammar():
     """O64 (I56 M1): the real manifest covers every captured row and agrees with the E267 grammar for every cohort row."""
@@ -2054,7 +2090,7 @@ def test_rereads_name_the_pinned_capture_and_match_their_files(tmp_path):
     assert not v.reread_matches({**scrape, "pinned": "other.json"}, tmp_path)
     assert not v.reread_matches({**scrape, "file": "other.json"}, tmp_path)
     clocks = {clock["source"]: clock for clock in v.source_clocks(documents)}
-    assert clocks["Cognition: FrontierCode leaderboard"]["reRead"]["lastModified"] == "2026-10-23T21:44:27Z"
+    assert clocks["Cognition: FrontierCode leaderboard"]["reRead"]["lastModified"] == "2026-10-31T13:46:59Z"
 
 
 def test_bug_hunt_dates_follow_o69():

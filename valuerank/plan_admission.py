@@ -74,9 +74,11 @@ CREDIT_TYPES = {"credit"}
 BLOCKING_TYPES = SPLIT_TYPES | CREDIT_TYPES
 FLAGGING_TYPES = BLOCKING_TYPES | FLAG_ONLY_TYPES
 LOGGED_TYPES = {"metering"}
-# O112 (2026-10-29): a provider's global meter reset flags nothing and splits nothing, but a reading spanning a reset day is
-# not a fraction of one window's allowance, so it is excluded like a reading on an accounting-fault day.
+# O112 (2026-10-29): a provider's global meter reset flags nothing and splits nothing. O156 (2026-11-01, superseding O112's
+# exclusion and O131): a documented periodic reset is part of the regime every user of the plan experiences, so a reading
+# spanning registered reset records counts (O11, O85 and O86 as usual) and its cell and route carry ACROSS_RESETS_FLAG.
 RESET_TYPES = {"reset"}
+ACROSS_RESETS_FLAG = "measured across documented meter resets (O156)"
 
 
 def splitting(records: list[dict]) -> list[dict]:
@@ -118,7 +120,7 @@ def canonical_plans(document: dict, aliases: dict | None) -> dict:
 
 
 def spans_reset(report: dict, records: list[dict]) -> bool:
-    """O112: whether a reading's window touches a day on which its provider reset every meter."""
+    """O112, O156: whether a reading's window touches a registered day on which its provider reset every meter."""
 
     start, end = window(report)
     return any(record.get("type") in RESET_TYPES and applies(record, report)
@@ -239,8 +241,6 @@ def exclusion(report: dict, profile: dict, release_day: date) -> str | None:
     if on_fault_day(report, profile.get("accountingFaultDays", [])):
         return "measured on a provider-acknowledged accounting-fault day"
     records = profile_records(profile)
-    if spans_reset(report, records):
-        return "spans a provider meter reset (O112)"
     # I86 M1: only the records that split (O99, O105) can exclude a report as spanning a split.
     if partition(report, splitting(records)) is None:
         return "spans a partition split"
@@ -254,7 +254,8 @@ def cell_key(report: dict, families: dict | None = None) -> tuple:
 def evaluate(document: dict, profile: dict, release_day: date, families: dict | None = None) -> list[dict]:
     """Every model × plan × unit cell's admission, with each report's role (E270, O11, O81, O82)."""
 
-    multipliers, splits = document.get("speedModeMultipliers", {}), splitting(profile_records(profile))
+    records = profile_records(profile)
+    multipliers, splits = document.get("speedModeMultipliers", {}), splitting(records)
     cells: dict[tuple, list[dict]] = {}
     for report in document["reports"]:
         cells.setdefault(cell_key(report, families), []).append(report)
@@ -267,7 +268,8 @@ def evaluate(document: dict, profile: dict, release_day: date, families: dict | 
             low, high = converted(report, multipliers)
             part = partition(report, splits) if reason is None else None
             rows.append({"id": report["id"], "observer": report["observer"], "valueLower": low, "valueUpper": high, "partition": part,
-                         "provisional": bool(report.get("provisional")), "speedMode": report.get("speedMode"), "stage": report.get("stage"), "excluded": reason})
+                         "provisional": bool(report.get("provisional")), "speedMode": report.get("speedMode"), "stage": report.get("stage"), "excluded": reason,
+                         "acrossResets": spans_reset(report, records)})
             if reason is None:
                 eligible.append(rows[-1])
         latest_split = sum(applies(item, reports[0]) for item in splits)
@@ -310,7 +312,8 @@ def evaluate(document: dict, profile: dict, release_day: date, families: dict | 
                         "currentPartition": latest_split, "partitionsWithReports": sorted({row["partition"] for row in eligible}),
                         "configurations": sorted({str(report["modelId"]) for report in reports}), "efforts": sorted({str(report.get("effort") or "unstated") for report in reports}), "value": value, "monthlyUsd": monthly, "multiple": monthly / fee if monthly is not None and fee else None,
                         "range": None if lowest is None else [lowest, highest], "feasibleRange": feasible, "reports": rows,
-                        "admittingObservers": sorted(row["observer"] for row in firm) if status == "passes" else []})
+                        "admittingObservers": sorted(row["observer"] for row in firm) if status == "passes" else [],
+                        "flags": [ACROSS_RESETS_FLAG] if status == "passes" and any(row["acrossResets"] for row in firm) else []})
     return results
 
 
@@ -339,3 +342,7 @@ def check_routes(routes: list[dict], cells: list[dict], cohort: set[str], report
             if all(observers != cell["admittingObservers"] for cell in supporting):
                 raise ValueError(f"{route['id']}: its reports ({', '.join(observers)}) are not a passing cell's admitting reports "
                                  f"({'; '.join(', '.join(cell['admittingObservers']) for cell in supporting)}) (O81)")
+            # O156: a route resting on a cell admitted across documented meter resets carries the flag, and only then.
+            matched = [cell for cell in supporting if cell["admittingObservers"] == observers]
+            if any(ACROSS_RESETS_FLAG in cell.get("flags", []) for cell in matched) != bool(route.get("acrossResets")):
+                raise ValueError(f"{route['id']}: acrossResets must be set exactly when its admitting reports span documented meter resets (O156)")
