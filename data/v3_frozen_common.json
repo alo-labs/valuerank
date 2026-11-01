@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "methodologyVersion": "3.0.0",
-  "anchorVersion": "v3-2026-11-01-a2-common",
+  "anchorVersion": "v3-2026-11-01-a3-common",
   "frozenAt": "2026-11-01",
   "basketVersion": "SDLC basket v1",
   "mainWorkload": "835a9baf594a1251",
@@ -160,26 +160,26 @@
   "barReferences": [
     {
       "id": "bar:median-quality",
-      "level": 43.58104704582002,
-      "levelConfiguration": "gpt-6.1-terra-xhigh",
+      "level": 49.99769825095213,
+      "levelConfiguration": "deepseek-v4-1-flash-1017",
       "rule": "lower-median displayed quality of the non-provisional cohort configurations at freeze (E192; headline bar)"
     },
     {
       "id": "bar:lower-quartile-quality",
-      "level": 31.430202598696724,
+      "level": 34.965916884411016,
       "levelConfiguration": "gpt-6-luna",
       "rule": "lower-quartile displayed quality of the non-provisional cohort configurations at freeze (O34)"
     },
     {
       "id": "bar:upper-quartile-quality",
-      "level": 51.83563923923465,
-      "levelConfiguration": "gpt-6.1-terra",
+      "level": 57.96172500269302,
+      "levelConfiguration": "claude-opus-5-5-xhigh",
       "rule": "upper-quartile displayed quality of the non-provisional cohort configurations at freeze (O34)"
     }
   ],
   "anchorPolicy": {
     "policyId": "complete-evidence-panel",
-    "version": 2,
+    "version": 3,
     "populationRule": "ranked configurations with complete cost evidence (exact cost, no AA missing- or declined-task marker) on every component of the workload at the freeze cutoff; on the main workload this is the admission reference panel",
     "planRule": "the same configurations' plan rows whose displayed Plan cost is measured (a controlled measurement or concordant reports, O157); owner assumptions and API-cost fallbacks are scored on these anchors and flagged, and are outside the Plan clip gate",
     "minimumReferences": 2,
@@ -238,18 +238,18 @@
     "bars": [
       {
         "id": "bar:median-quality",
-        "level": 43.58104704582002,
-        "levelConfiguration": "gpt-6.1-terra-xhigh"
+        "level": 49.99769825095213,
+        "levelConfiguration": "deepseek-v4-1-flash-1017"
       },
       {
         "id": "bar:lower-quartile-quality",
-        "level": 31.430202598696724,
+        "level": 34.965916884411016,
         "levelConfiguration": "gpt-6-luna"
       },
       {
         "id": "bar:upper-quartile-quality",
-        "level": 51.83563923923465,
-        "levelConfiguration": "gpt-6.1-terra"
+        "level": 57.96172500269302,
+        "levelConfiguration": "claude-opus-5-5-xhigh"
       }
     ]
   }

@@ -7,14 +7,14 @@
   "selectedPage": "https://artificialanalysis.ai/models/mimo-v2-6-pro",
   "summary": {
     "rank": {
-      "api": 3,
+      "api": 4,
       "plan": 22
     },
     "overall": {
-      "api": 55.96466348258899,
-      "plan": 51.98057361090493
+      "api": 56.25609205401756,
+      "plan": 52.2720021823335
     },
-    "quality": 48.07850321614637,
+    "quality": 48.4670746447178,
     "qualityRank": 8,
     "coverage": {
       "pct": 100.0,
@@ -144,10 +144,10 @@
       "label": "Bug Hunt Bench",
       "category": "Software engineering",
       "weightPct": 6.0,
-      "value": 18,
+      "value": 22,
       "decimals": 1,
-      "unit": "bugs fixed of 105",
-      "normalized": 17.142857142857142,
+      "unit": "bugs fixed, planted plus unplanted (O163; no ceiling)",
+      "normalized": 22,
       "source": {
         "name": "Bug Hunt Bench published runs",
         "url": "https://bughunt.productcompass.pm/"
@@ -388,7 +388,7 @@
       "usdPerRun": 145.41015383427106,
       "selected": true,
       "planRank": 22,
-      "planValue": 51.98057361090493
+      "planValue": 52.2720021823335
     },
     {
       "id": "mimo-tokenplan-pro-mimo-v2-6-pro-quota-ceiling",
@@ -405,8 +405,8 @@
       "planIntervalEligible": false,
       "usdPerRun": 156.8899028211872,
       "selected": false,
-      "planRank": 23,
-      "planValue": 51.40209408383523
+      "planRank": 24,
+      "planValue": 51.6935226552638
     },
     {
       "id": "mimo-tokenplan-standard-mimo-v2-6-pro-quota-ceiling",
@@ -423,8 +423,8 @@
       "planIntervalEligible": false,
       "usdPerRun": 173.4346562096033,
       "selected": false,
-      "planRank": 24,
-      "planValue": 50.6388421201023
+      "planRank": 25,
+      "planValue": 50.930270691530865
     },
     {
       "id": "mimo-tokenplan-lite-mimo-v2-6-pro-quota-ceiling",
@@ -441,8 +441,8 @@
       "planIntervalEligible": false,
       "usdPerRun": 174.4921846011253,
       "selected": false,
-      "planRank": 25,
-      "planValue": 50.592562436945755
+      "planRank": 26,
+      "planValue": 50.88399100837432
     }
   ],
   "scenarios": {
@@ -491,7 +491,7 @@
       "version": "v3.0.0",
       "date": "2026-10-19",
       "rank": {
-        "api": 3,
+        "api": 4,
         "plan": 22
       }
     }
@@ -512,12 +512,12 @@
       "shown": true,
       "rankingEligible": true,
       "rank": {
-        "api": 3,
+        "api": 4,
         "plan": 22
       },
       "overall": {
-        "api": 55.96466348258899,
-        "plan": 51.98057361090493
+        "api": 56.25609205401756,
+        "plan": 52.2720021823335
       }
     },
     {
@@ -527,12 +527,12 @@
       "shown": false,
       "rankingEligible": true,
       "rank": {
-        "api": 9,
-        "plan": 63
+        "api": 13,
+        "plan": 64
       },
       "overall": {
-        "api": 48.31190222236023,
-        "plan": 41.39243234187697
+        "api": 48.74904507950309,
+        "plan": 41.82957519901983
       }
     },
     {
@@ -542,12 +542,12 @@
       "shown": false,
       "rankingEligible": true,
       "rank": {
-        "api": 20,
-        "plan": 102
+        "api": 23,
+        "plan": 104
       },
       "overall": {
-        "api": 41.4114748131771,
-        "plan": 39.059152917757416
+        "api": 41.95790338460567,
+        "plan": 39.60558148918599
       }
     }
   ]

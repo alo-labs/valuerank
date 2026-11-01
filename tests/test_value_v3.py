@@ -84,7 +84,7 @@ def documents(**overrides) -> dict:
     base = {
         "snapshot": {"pages": [page("a-max", 1.0), page("b-max", 4.0, gdpval=2000.0), page("c-max", 0.5, frontierCode20=None)]},
         "bugHunt": {"models": [
-            {"modelId": "a", "matched": True, "effort": "max", "fixedOf105": 52.0, "sampleN": 3},
+            {"modelId": "a", "matched": True, "effort": "max", "fixedOf105": 52.0, "extras": 0.0, "sampleN": 3},
             {"modelId": "b", "matched": False, "fixedOf105": None},
         ]},
         "tb4": {"observedAt": "2026-10-19T00:00:00Z", "rows": [{"model": "Opus 5.5 (max)", "agent": "Terminus 2", "resolutionRatePct": 60.0}]},
@@ -168,9 +168,24 @@ def assembled(**overrides):
 def test_leaf_evidence_uses_exact_configurations_only():
     model = page("a-max", 1.0)["model"]
     tb4 = [{"model": "Opus 5.5 (max)", "agent": "Terminus 2", "resolutionRatePct": 60.0}]
-    evidence = v.leaf_evidence("claude-opus-5-5", "max", model, tb4, {"matched": True, "effort": "max", "fixedOf105": 52.0})
+    record = {"matched": True, "effort": "max", "fixedOf105": 52.0, "extras": 7.5, "evaluatedModel": "Opus 5.5 (max)", "harness": "Claude Code", "sampleN": 3}
+    evidence = v.leaf_evidence("claude-opus-5-5", "max", model, tb4, record)
     observations = evidence["observations"]
     assert set(observations) == {leaf.key for leaf in q.LEAVES}
+    # O163: the Bug Hunt leaf is planted plus genuine unplanted bugs fixed, a plain sum with no rescaling or ceiling.
+    assert observations["bugHunt"] == q.Observation(59.5, v.BUG_HUNT_HALF_WIDTH, math.inf)
+    bug = evidence["provenance"]["bugHunt"]
+    assert bug["planted"] == 52.0 and bug["unplanted"] == 7.5 and bug["harness"] == "Claude Code" and bug["runs"] == 3
+    assert bug["evidence"] == {"artifact": "data/bug_hunt.json", "locator": "models[modelId=claude-opus-5-5].fixedOf105 + models[modelId=claude-opus-5-5].extras",
+                               "publishedValue": 59.5}
+    # A total above 100 (or above the 105 planted bugs) is inside the leaf's domain and is not clipped.
+    beyond = v.leaf_evidence("claude-opus-5-5", "max", model, tb4, {**record, "fixedOf105": 100.0, "extras": 12.0})
+    assert beyond["observations"]["bugHunt"].z == 112.0 and beyond["observations"]["bugHunt"].high == 112.05
+    assert next(item for item in beyond["clipAudit"] if item["leaf"] == "bugHunt")["clippingAmount"] == 0.0
+    with pytest.raises(ValueError, match="claude-opus-5-5: the Bug Hunt record carries no unplanted-fix count, which the O163 leaf needs"):
+        v.leaf_evidence("claude-opus-5-5", "max", model, tb4, {key: value for key, value in record.items() if key != "extras"})
+    with pytest.raises(ValueError, match="carries no unplanted-fix count"):
+        v.leaf_evidence("claude-opus-5-5", "max", model, tb4, {**record, "extras": None})
     # O37: AA's own Terminal-Bench 4.0 run is the leaf; tbench.ai fills a gap only.
     assert observations["terminalBench"].z == 50.0
     assert observations["omniscience"].z == pytest.approx(65.0)
@@ -229,9 +244,10 @@ def test_freeze_anchors_and_bar_reference():
     assert main["role"] == "main" and main["anchors"]["api"]["referenceIds"] == ["a", "b"]
     subset = next(entry for entry in frozen["workloads"].values() if entry["role"] == "subset")
     assert subset["anchors"]["api"]["referenceIds"] == ["a", "b", "c"]
-    # E192: the bar is the lower-median displayed quality of the population (c 49.36, a 57.45, b 60.31; O36 makes every row complete).
+    # E192: the bar is the lower-median displayed quality of the population (c 49.00, a 51.05, b 51.75; O36 makes every row complete;
+    # O163: a's Bug Hunt leaf is its 52 bugs fixed, unrescaled).
     assert frozen["barReferences"][0]["id"] == v.BAR_ID and frozen["barReferences"][0]["levelConfiguration"] == "a"
-    assert frozen["barReferences"][0]["level"] == pytest.approx(50.6786, abs=1e-4) and frozen["barPolicy"]["population"] == ["a", "b", "c"]
+    assert frozen["barReferences"][0]["level"] == pytest.approx(51.05, abs=1e-4) and frozen["barPolicy"]["population"] == ["a", "b", "c"]
     assert frozen["anchorPolicy"]["policyId"] == "complete-evidence-panel" and main["anchorStatus"] == "frozen"
     # E160: the main workload needs at least two complete-evidence references.
     lone = v.assemble(CONFIGURATIONS[:1], documents(), release_day=DAY)
@@ -587,8 +603,9 @@ def test_harness_band_runs_a_named_s2_branch_when_a_configuration_has_two_agents
     assert band["status"] == "evaluated" and band["spreads"] == {"M (max)": 8.0, "N (high)": 4.0} and band["width"] == 6.0
     result, frozen = scored(tb4={"observedAt": "2026-10-19T00:00:00Z", "rows": rows})
     panel = {item.row: item for item in v.scenario_panel(result, "api", harness=6.0)}
-    stressed = panel["a"].leaves["bugHunt"]  # a's Bug Hunt z is 52 of 105 bugs, on the 0-100 scale
+    stressed = panel["a"].leaves["bugHunt"]  # O163: a's Bug Hunt z is its 52 bugs fixed (52 planted, 0 unplanted), unrescaled
     observed = result["rows"][0]["evidence"]["observations"]["bugHunt"].z
+    assert observed == 52.0
     assert stressed.params == pytest.approx((observed - 3.0, observed + 3.0)) and stressed.target == scenarios.SPECIFICATION_STRESS
     assert panel["b"].leaves["bugHunt"].target == scenarios.SPECIFICATION_STRESS  # every Bug Hunt leaf, an O36 supplement included
     # E227: AA's single-harness Terminal-Bench and FrontierCode runs are not stressed (O37, O49).
@@ -941,7 +958,7 @@ def test_evidence_bundle_hashes_every_input_artifact(tmp_path, monkeypatch):
     assert built["evidenceBundle"]["bundleHash"] == bundle["bundleHash"]
     leaves = {row["id"]: row["quality"]["leaves"] for row in built["rows"]}
     assert leaves["a"]["gdpval"]["evidence"] == {"artifact": "data/aa/aa_v432_snapshot.json", "locator": "pages[model.slug=a-max].model.gdpval", "publishedValue": 1500.0}
-    assert leaves["a"]["bugHunt"]["evidence"]["locator"] == "models[modelId=a].fixedOf105"
+    assert leaves["a"]["bugHunt"]["evidence"]["locator"] == "models[modelId=a].fixedOf105 + models[modelId=a].extras"
     assert leaves["a"]["bugHunt"]["evidence"]["artifact"] == "data/bug_hunt.json"
 
 
@@ -1085,7 +1102,7 @@ def test_plan_anchors_freeze_over_measured_plan_rows_only():
     assert v.plan_measured({"plan": {"fallback": None, "grade": "controlled"}}) and v.plan_measured({"plan": {"fallback": None, "grade": "reports"}})
     assert not v.plan_measured({"plan": {"fallback": None, "grade": "assumption"}}) and not v.plan_measured({"plan": {"fallback": "api", "grade": None}})
     result, frozen = scored()
-    assert frozen["anchorVersion"] == f"v3-2026-10-19-a{v.ANCHOR_POLICY['version']}" == "v3-2026-10-19-a2"
+    assert frozen["anchorVersion"] == f"v3-2026-10-19-a{v.ANCHOR_POLICY['version']}" == "v3-2026-10-19-a3"
     # A non-main workload whose references are b (measured) and c (API-cost fallback): one measured Plan reference.
     rows = {row["id"]: row for row in result["rows"]}
     for row_id in ("b", "c"):
@@ -1370,9 +1387,9 @@ def test_scenario_labels_never_go_to_or_past_an_unsafe_blocker(monkeypatch):
     record = {"id": "old", "aaSlug": "a-max", "prices": PRICES, "tariffStatus": "superseded"}
     flagged = gated_world(priced_page("a-max", 1.0, PRICES, price1mOutputTokens=15.0), [record])
     frozen = v.freeze(flagged, frozen_at="2026-10-19")
-    # At level 50.68 (inside the blocker a's reporting-precision bounds) b is cheapest whenever a falls short, and a can
-    # reach the level and undercut it; d falls short.
-    frozen["barReferences"] = [{"id": v.BAR_ID, "level": 50.68, "levelConfiguration": "b", "rule": "x"}]
+    # At level 51.05 (inside the blocker a's reporting-precision bounds, 51.0425-51.0575) b is cheapest whenever a falls
+    # short, and a can reach the level and undercut it; d (50.75) falls short.
+    frozen["barReferences"] = [{"id": v.BAR_ID, "level": 51.05, "levelConfiguration": "b", "rule": "x"}]
     monkeypatch.setattr(v.scenarios, "kernel_robust_cheapest", lambda *args, **kwargs: {"label": True, "reading": "supported"})
     (bar,) = v.bar_labels(flagged, frozen, seed=1, batch=20)
     assert sorted(bar["candidates"]) == ["b"]
@@ -1721,7 +1738,8 @@ def test_supplements_fill_only_missing_leaves_in_source_order():
     assert chosen[("a", "terminalBench")]["url"] == "i" and chosen[("b", "terminalBench")]["artifact"] == "tb4" and ("z", "terminalBench") not in chosen
     evidence = v.leaf_evidence("a", "max", {"slug": "a"}, [], None, chosen)
     assert evidence["observations"]["terminalBench"].z == 30.0 and evidence["provenance"]["terminalBench"]["sourceType"] == "independent"
-    assert evidence["observations"]["bugHunt"].z == pytest.approx(100 * 52 / 105, abs=0.1) and evidence["observations"]["frontierCode"].z == 50.0
+    # O163: a Bug Hunt fill is a count of bugs fixed, used unrescaled.
+    assert evidence["observations"]["bugHunt"].z == 52.0 and evidence["observations"]["frontierCode"].z == 50.0
     # E237: a fill without the leaf's benchmark version, or without its metric, stops the build; another leaf needs its label.
     for broken in ({"benchmarkVersion": "FrontierCode 1.0", "metric": "main"}, {"benchmarkVersion": "FrontierCode 1.1"}):
         with pytest.raises(ValueError, match=r"a: the frontierCode gap fill must state benchmark version 'FrontierCode 2.0' and its metric \(E237\)"):
@@ -1796,6 +1814,40 @@ def test_sampling_noise_per_leaf_and_rank_separability():
     lone = v.rank_separability({"rows": result["rows"][:1]}, {"a": {basis: {"value": 1.0} for basis in v.BASES}})
     assert {key: lone["api"][key] for key in ("adjacentPairs", "separableAdjacentPairs", "medianSeparation")} == {"adjacentPairs": 0, "separableAdjacentPairs": 0, "medianSeparation": None}
     assert lone["api"]["bands"] == {"a": [1, 1]}
+
+
+def test_bug_hunt_sampling_noise_is_a_binomial_planted_part_plus_a_poisson_unplanted_count():
+    """O163: the Bug Hunt leaf is a count, so its task-sampling SD is the binomial over the 105 planted bugs (Jeffreys
+    plug-in) plus the unplanted fixes read as a Poisson count (floored at 0.5); it draws from a normal with no ceiling."""
+
+    observation = q.bug_hunt_z(59.5, v.BUG_HUNT_HALF_WIDTH)
+    p = 52.5 / 106.0
+    assert v.sampling_sd("bugHunt", observation, {"planted": 52.0, "unplanted": 7.5}) == pytest.approx(math.sqrt(105 * p * (1 - p) + 7.5))
+    # The unplanted variance never falls below 0.5, whether the count is zero, small or absent.
+    for unplanted in (0.0, 0.2, None):
+        assert v.sampling_sd("bugHunt", observation, {"planted": 52.0, "unplanted": unplanted}) == pytest.approx(math.sqrt(105 * p * (1 - p) + 0.5))
+    # The planted part is capped at the 105 planted bugs; a Vals-style published standard error still wins.
+    top = 105.5 / 106.0
+    assert v.sampling_sd("bugHunt", q.bug_hunt_z(120.0), {"planted": 106.0, "unplanted": 14.0}) == pytest.approx(math.sqrt(105 * top * (1 - top) + 14.0))
+    assert v.sampling_sd("bugHunt", observation, {"planted": 52.0, "unplanted": 7.5, "stderr": 2.0}) == 2.0
+    # A count without a planted/unplanted split (another party's fill) is one Poisson count, floored at 0.5.
+    assert v.sampling_sd("bugHunt", q.bug_hunt_z(110.0), {}) == pytest.approx(math.sqrt(110.0))
+    assert v.sampling_sd("bugHunt", q.bug_hunt_z(0.0), {}) == pytest.approx(math.sqrt(0.5))
+    assert not v.binomial_leaf("bugHunt", {"planted": 52.0}) and v.binomial_leaf("frontierCode", {})
+    kernel = v.sampling_kernel("bugHunt", observation, {"planted": 52.0, "unplanted": 7.5})
+    assert kernel.family == "normal" and kernel.params[0] == 59.5 and kernel.params[2:] == (0.0, math.inf)
+    assert v.sampling_kernel("gdpval", q.Observation(55.0), {}).params[2:] == (0.0, 100.0)
+    # The S1T stream carries a's planted and unplanted counts from its evidence into the kernel.
+    record = {"modelId": "a", "matched": True, "effort": "max", "fixedOf105": 100.0, "extras": 10.0, "sampleN": 3}
+    result, _ = scored(bugHunt={"models": [record]})
+    panel = {item.row: item for item in v.scenario_panel(result, "api", sampling=True)}
+    drawn = panel["a"].leaves["bugHunt"]
+    assert drawn.params[0] == 110.0 and drawn.params[3] == math.inf
+    high = 100.5 / 106.0
+    assert drawn.params[1] == pytest.approx(math.sqrt(105 * high * (1 - high) + 10.0))
+    # E19 band: a Bug Hunt total above 100 is stressed on both sides, with no 0-100 ceiling.
+    stressed = {item.row: item for item in v.scenario_panel(result, "api", harness=6.0)}["a"].leaves["bugHunt"]
+    assert stressed.params == pytest.approx((107.0, 113.0))
 
 
 def test_a_subset_workload_row_is_never_tested_or_banded_against_the_main_workload():
@@ -2607,5 +2659,10 @@ def test_bug_hunt_harness_sensitivity_moves_values_and_flags_labels():
     edge, high = result["labelFlags"]
     assert edge == {"bar": "edge", "displayed": "b", "low": "b", "high": "a", "flagged": True}
     assert high == {"bar": "high", "displayed": None, "low": None, "high": None, "flagged": False}
+    # O163: a harness result with the scoreboard's unplanted count spans the leaf's value, planted plus unplanted.
+    counted = [{"harness": "x", "fixedOf105": 21.0, "extras": 9.0, "totalFound": 30.0}, {"harness": "y", "fixedOf105": 84.0, "extras": 31.0, "totalFound": 115.0}]
+    summed = v.bug_hunt_harness_sensitivity([row("a", 50.0, 10.0, counted), *rows[1:]], per_row, bars)
+    assert summed["rows"]["a"] == {"low": 30.0, "high": 115.0, "harnesses": {"x": 30.0, "y": 115.0}}
+    assert summed["bases"]["api"]["largestValueMove"] > result["bases"]["api"]["largestValueMove"]
     quiet = v.bug_hunt_harness_sensitivity(rows[1:], per_row)
     assert quiet["rows"] == {} and quiet["bases"]["api"]["largestValueMove"] is None and quiet["labelFlags"] == []

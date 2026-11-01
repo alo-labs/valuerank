@@ -324,7 +324,12 @@ def test_cross_harness_text_lists_or_says_none():
         scores = {"models": [{"id": "g", "rankingEligible": True, "bugHuntCrossHarness": [{"harness": "A CLI", "fixedOf105": 40.7, "runs": 3}, {"harness": "B CLI", "fixedOf105": 33.0, "runs": 1}]},
                              {"id": "h", "rankingEligible": False, "bugHuntCrossHarness": [{"harness": "A", "fixedOf105": 1.0, "runs": 1}]}]}
 
-    assert ed.cross_harness_text(Facts) == "Cross-harness results at the same effort (E224, diagnostic): Gemini: A CLI 40.7 (3 runs), B CLI 33.0 (1 run)."
+    # A scoreboard row without an unplanted count shows its planted bugs fixed.
+    assert ed.cross_harness_text(Facts) == ("Cross-harness results at the same effort, planted plus unplanted bugs fixed (E224, O163, diagnostic): "
+                                            "Gemini: A CLI 40.7 (3 runs), B CLI 33.0 (1 run).")
+    # O163: with the scoreboard's unplanted count, each harness shows the leaf's value, planted plus unplanted.
+    Facts.scores["models"][0]["bugHuntCrossHarness"][0].update(extras=4.3, totalFound=45.0)
+    assert ed.cross_harness_text(Facts).endswith("Gemini: A CLI 45.0 (3 runs), B CLI 33.0 (1 run).")
     Facts.scores = {"models": []}
     assert ed.cross_harness_text(Facts).startswith("No ranked configuration has Bug Hunt results on two harnesses")
 

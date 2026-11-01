@@ -7,15 +7,15 @@
   "selectedPage": "https://artificialanalysis.ai/models/kimi-k3-1-pro",
   "summary": {
     "rank": {
-      "api": 11,
-      "plan": 61
+      "api": 7,
+      "plan": 57
     },
     "overall": {
-      "api": 48.217507213664376,
-      "plan": 42.642376721870484
+      "api": 51.0087929279501,
+      "plan": 45.433662436156204
     },
-    "quality": 56.85650229582731,
-    "qualityRank": 2,
+    "quality": 60.578216581541604,
+    "qualityRank": 4,
     "coverage": {
       "pct": 100.0,
       "costAvailable": true,
@@ -70,10 +70,10 @@
       "label": "Bug Hunt Bench",
       "category": "Software engineering",
       "weightPct": 9.0,
-      "value": 36,
+      "value": 65.3,
       "decimals": 1,
-      "unit": "bugs fixed of 105",
-      "normalized": 34.285714285714285,
+      "unit": "bugs fixed, planted plus unplanted (O163; no ceiling)",
+      "normalized": 65.3,
       "source": {
         "name": "Bug Hunt Bench published runs",
         "url": "https://bughunt.productcompass.pm/"
@@ -315,7 +315,7 @@
         "unevaluable": null,
         "top1": 0.0,
         "top3": 0.0,
-        "frontier": 1.0
+        "frontier": 0.0
       },
       {
         "stratum": "S1",
@@ -324,7 +324,7 @@
         "unevaluable": null,
         "top1": 0.0,
         "top3": 0.0,
-        "frontier": 1.0
+        "frontier": 0.0
       },
       {
         "stratum": "S2",
@@ -333,7 +333,7 @@
         "unevaluable": null,
         "top1": 0.0,
         "top3": 0.0,
-        "frontier": 0.5293
+        "frontier": 0.1676
       },
       {
         "stratum": "S1",
@@ -342,7 +342,7 @@
         "unevaluable": null,
         "top1": 0.0,
         "top3": 0.0,
-        "frontier": 1.0
+        "frontier": 0.0
       },
       {
         "stratum": "S1M",
@@ -351,16 +351,16 @@
         "unevaluable": null,
         "top1": 0.0,
         "top3": 0.0,
-        "frontier": 1.0
+        "frontier": 0.0
       },
       {
         "stratum": "S1T",
         "kernel": "primary",
         "targetProfile": "published-record leaf values redrawn with task-sampling noise from each leaf's published task count (binomial leaves from their Jeffreys Beta posterior, O142, with its mean-preserving alternative, O154; independent-task approximation; GDPval-AA from its displayed rating interval, an assumption) + conventional identification of missing leaves",
         "unevaluable": null,
-        "top1": 0.0,
-        "top3": 0.0045,
-        "frontier": 0.347
+        "top1": 0.0001,
+        "top3": 0.0067,
+        "frontier": 0.2042
       },
       {
         "stratum": "S1T",
@@ -368,8 +368,8 @@
         "targetProfile": "published-record leaf values redrawn with task-sampling noise from each leaf's published task count (binomial leaves from their Jeffreys Beta posterior, O142, with its mean-preserving alternative, O154; independent-task approximation; GDPval-AA from its displayed rating interval, an assumption) + conventional identification of missing leaves",
         "unevaluable": null,
         "top1": 0.0001,
-        "top3": 0.0044,
-        "frontier": 0.3576
+        "top3": 0.0057,
+        "frontier": 0.2092
       }
     ],
     "plan": [
@@ -398,7 +398,7 @@
         "unevaluable": null,
         "top1": 0.0,
         "top3": 0.0,
-        "frontier": 0.3456
+        "frontier": 0.0756
       },
       {
         "stratum": "S1",
@@ -425,7 +425,7 @@
         "unevaluable": null,
         "top1": 0.0,
         "top3": 0.0,
-        "frontier": 0.2831
+        "frontier": 0.1953
       },
       {
         "stratum": "S1T",
@@ -434,14 +434,14 @@
         "unevaluable": null,
         "top1": 0.0,
         "top3": 0.0,
-        "frontier": 0.2837
+        "frontier": 0.2005
       }
     ]
   },
   "intervals": {
     "api": {
-      "definite": "certified",
-      "possible": "certified"
+      "definite": "disproved",
+      "possible": "disproved"
     },
     "plan": null
   },
@@ -450,8 +450,8 @@
       "version": "v3.0.0",
       "date": "2026-10-19",
       "rank": {
-        "api": 11,
-        "plan": 61
+        "api": 7,
+        "plan": 57
       }
     }
   ],
@@ -486,12 +486,12 @@
       "shown": true,
       "rankingEligible": true,
       "rank": {
-        "api": 11,
-        "plan": 61
+        "api": 7,
+        "plan": 57
       },
       "overall": {
-        "api": 48.217507213664376,
-        "plan": 42.642376721870484
+        "api": 51.0087929279501,
+        "plan": 45.433662436156204
       }
     },
     {
@@ -501,12 +501,12 @@
       "shown": false,
       "rankingEligible": true,
       "rank": {
-        "api": 12,
-        "plan": 103
+        "api": 11,
+        "plan": 96
       },
       "overall": {
-        "api": 43.84908648682452,
-        "plan": 38.859977262996026
+        "api": 47.338193629681655,
+        "plan": 42.34908440585316
       }
     }
   ]

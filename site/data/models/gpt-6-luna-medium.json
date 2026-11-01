@@ -8,13 +8,13 @@
   "summary": {
     "rank": {
       "api": 20,
-      "plan": 57
+      "plan": 58
     },
     "overall": {
-      "api": 42.62625221049062,
-      "plan": 45.3351417556722
+      "api": 42.64339506763348,
+      "plan": 45.352284612815055
     },
-    "quality": 27.113522340896257,
+    "quality": 27.1363794837534,
     "qualityRank": 20,
     "coverage": {
       "pct": 100.0,
@@ -72,8 +72,8 @@
       "weightPct": 9.0,
       "value": 4.0,
       "decimals": 1,
-      "unit": "bugs fixed of 105",
-      "normalized": 3.8095238095238093,
+      "unit": "bugs fixed, planted plus unplanted (O163; no ceiling)",
+      "normalized": 4.0,
       "source": {
         "name": "Bug Hunt Bench published runs",
         "url": "https://bughunt.productcompass.pm/"
@@ -352,8 +352,8 @@
       "planIntervalEligible": false,
       "usdPerRun": 3.3905633522652816,
       "selected": true,
-      "planRank": 57,
-      "planValue": 45.3351417556722
+      "planRank": 58,
+      "planValue": 45.352284612815055
     },
     {
       "id": "chatgpt-pro100-gpt-6-luna-medium-common-gpt-assumption",
@@ -370,8 +370,8 @@
       "planIntervalEligible": false,
       "usdPerRun": 3.4619098038484943,
       "selected": false,
-      "planRank": 57,
-      "planValue": 45.3351417556722
+      "planRank": 58,
+      "planValue": 45.352284612815055
     },
     {
       "id": "chatgpt-pro200-gpt-6-luna-medium-common-gpt-assumption",
@@ -388,8 +388,8 @@
       "planIntervalEligible": false,
       "usdPerRun": 3.50510061714027,
       "selected": false,
-      "planRank": 57,
-      "planValue": 45.3351417556722
+      "planRank": 58,
+      "planValue": 45.352284612815055
     },
     {
       "id": "chatgpt-plus-gpt-6-luna-medium-common-gpt-assumption",
@@ -406,8 +406,8 @@
       "planIntervalEligible": false,
       "usdPerRun": 4.509030670444644,
       "selected": false,
-      "planRank": 57,
-      "planValue": 45.3351417556722
+      "planRank": 58,
+      "planValue": 45.352284612815055
     }
   ],
   "scenarios": {
@@ -556,7 +556,7 @@
       "date": "2026-10-19",
       "rank": {
         "api": 20,
-        "plan": 57
+        "plan": 58
       }
     }
   ],
@@ -592,11 +592,11 @@
       "rankingEligible": true,
       "rank": {
         "api": 20,
-        "plan": 57
+        "plan": 58
       },
       "overall": {
-        "api": 42.62625221049062,
-        "plan": 45.3351417556722
+        "api": 42.64339506763348,
+        "plan": 45.352284612815055
       }
     },
     {
@@ -606,12 +606,12 @@
       "shown": false,
       "rankingEligible": true,
       "rank": {
-        "api": 31,
-        "plan": 95
+        "api": 32,
+        "plan": 100
       },
       "overall": {
-        "api": 34.00189689697936,
-        "plan": 40.8357537686592
+        "api": 34.02332546840793,
+        "plan": 40.857182340087775
       }
     }
   ]

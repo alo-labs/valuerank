@@ -7,15 +7,15 @@
   "selectedPage": "https://artificialanalysis.ai/models/gpt-6-astra",
   "summary": {
     "rank": {
-      "api": 5,
+      "api": 3,
       "plan": 14
     },
     "overall": {
-      "api": 53.921473130709394,
-      "plan": 58.637179487095
+      "api": 57.35004455928082,
+      "plan": 62.06575091566642
     },
-    "quality": 65.1617448211189,
-    "qualityRank": 3,
+    "quality": 69.73317339254747,
+    "qualityRank": 1,
     "coverage": {
       "pct": 100.0,
       "costAvailable": true,
@@ -142,10 +142,10 @@
       "label": "Bug Hunt Bench",
       "category": "Software engineering",
       "weightPct": 6.0,
-      "value": 45.0,
+      "value": 100.0,
       "decimals": 1,
-      "unit": "bugs fixed of 105",
-      "normalized": 42.857142857142854,
+      "unit": "bugs fixed, planted plus unplanted (O163; no ceiling)",
+      "normalized": 100.0,
       "source": {
         "name": "Bug Hunt Bench published runs",
         "url": "https://bughunt.productcompass.pm/"
@@ -405,7 +405,7 @@
       "usdPerRun": 470.0304145270286,
       "selected": true,
       "planRank": 14,
-      "planValue": 58.637179487095
+      "planValue": 62.06575091566642
     },
     {
       "id": "chatgpt-pro500-gpt6astra-semianalysis",
@@ -423,7 +423,7 @@
       "usdPerRun": 489.4601405049611,
       "selected": false,
       "planRank": 15,
-      "planValue": 58.326779522507636
+      "planValue": 61.75535095107905
     },
     {
       "id": "chatgpt-pro100-gpt6astra-semianalysis",
@@ -441,7 +441,7 @@
       "usdPerRun": 515.0068498051444,
       "selected": false,
       "planRank": 16,
-      "planValue": 57.93690102725961
+      "planValue": 61.365472455831025
     },
     {
       "id": "chatgpt-plus-gpt6astra-semianalysis",
@@ -459,7 +459,7 @@
       "usdPerRun": 840.5420437560505,
       "selected": false,
       "planRank": 21,
-      "planValue": 54.182987148899684
+      "planValue": 57.61155857747111
     }
   ],
   "scenarios": {
@@ -471,7 +471,7 @@
         "targetProfile": "published-record reporting precision",
         "unevaluable": null,
         "top1": 0.0,
-        "top3": 0.0,
+        "top3": 1.0,
         "frontier": 1.0
       },
       {
@@ -480,7 +480,7 @@
         "targetProfile": "published-record reporting precision + conventional identification of missing leaves",
         "unevaluable": null,
         "top1": 0.0,
-        "top3": 0.0,
+        "top3": 1.0,
         "frontier": 1.0
       },
       {
@@ -489,8 +489,8 @@
         "targetProfile": "published-record reporting precision + conventional identification of missing leaves + weight-specification stress",
         "unevaluable": null,
         "top1": 0.0,
-        "top3": 0.3173,
-        "frontier": 1.0
+        "top3": 0.9243,
+        "frontier": 0.9534
       },
       {
         "stratum": "S1",
@@ -498,7 +498,7 @@
         "targetProfile": "published-record reporting precision + conventional identification of missing leaves",
         "unevaluable": null,
         "top1": 0.0,
-        "top3": 0.0,
+        "top3": 1.0,
         "frontier": 1.0
       },
       {
@@ -507,7 +507,7 @@
         "targetProfile": "published-record reporting precision + conventional identification of missing leaves + conventional range sensitivity inside published 95% confidence intervals (no tail model)",
         "unevaluable": null,
         "top1": 0.0,
-        "top3": 0.0,
+        "top3": 1.0,
         "frontier": 1.0
       },
       {
@@ -516,8 +516,8 @@
         "targetProfile": "published-record leaf values redrawn with task-sampling noise from each leaf's published task count (binomial leaves from their Jeffreys Beta posterior, O142, with its mean-preserving alternative, O154; independent-task approximation; GDPval-AA from its displayed rating interval, an assumption) + conventional identification of missing leaves",
         "unevaluable": null,
         "top1": 0.0,
-        "top3": 0.2754,
-        "frontier": 0.794
+        "top3": 0.861,
+        "frontier": 0.633
       },
       {
         "stratum": "S1T",
@@ -525,8 +525,8 @@
         "targetProfile": "published-record leaf values redrawn with task-sampling noise from each leaf's published task count (binomial leaves from their Jeffreys Beta posterior, O142, with its mean-preserving alternative, O154; independent-task approximation; GDPval-AA from its displayed rating interval, an assumption) + conventional identification of missing leaves",
         "unevaluable": null,
         "top1": 0.0,
-        "top3": 0.2937,
-        "frontier": 0.7865
+        "top3": 0.8707,
+        "frontier": 0.6202
       }
     ],
     "plan": [
@@ -537,7 +537,7 @@
         "unevaluable": null,
         "top1": 0.0,
         "top3": 0.0,
-        "frontier": 0.0
+        "frontier": 1.0
       },
       {
         "stratum": "S1",
@@ -546,7 +546,7 @@
         "unevaluable": null,
         "top1": 0.0,
         "top3": 0.0,
-        "frontier": 0.0
+        "frontier": 1.0
       },
       {
         "stratum": "S2",
@@ -555,7 +555,7 @@
         "unevaluable": null,
         "top1": 0.0,
         "top3": 0.0,
-        "frontier": 0.0
+        "frontier": 0.781
       },
       {
         "stratum": "S1",
@@ -564,7 +564,7 @@
         "unevaluable": null,
         "top1": 0.0,
         "top3": 0.0,
-        "frontier": 0.0
+        "frontier": 1.0
       },
       {
         "stratum": "S1M",
@@ -573,7 +573,7 @@
         "unevaluable": null,
         "top1": 0.0,
         "top3": 0.0,
-        "frontier": 0.0
+        "frontier": 1.0
       },
       {
         "stratum": "S1T",
@@ -582,7 +582,7 @@
         "unevaluable": null,
         "top1": 0.0,
         "top3": 0.0,
-        "frontier": 0.1019
+        "frontier": 0.5465
       },
       {
         "stratum": "S1T",
@@ -591,7 +591,7 @@
         "unevaluable": null,
         "top1": 0.0,
         "top3": 0.0,
-        "frontier": 0.1011
+        "frontier": 0.542
       }
     ]
   },
@@ -695,7 +695,7 @@
       "version": "v3.0.0",
       "date": "2026-10-19",
       "rank": {
-        "api": 5,
+        "api": 3,
         "plan": 14
       }
     }
@@ -716,12 +716,12 @@
       "shown": true,
       "rankingEligible": true,
       "rank": {
-        "api": 5,
+        "api": 3,
         "plan": 14
       },
       "overall": {
-        "api": 53.921473130709394,
-        "plan": 58.637179487095
+        "api": 57.35004455928082,
+        "plan": 62.06575091566642
       }
     },
     {
@@ -746,12 +746,12 @@
       "shown": false,
       "rankingEligible": true,
       "rank": {
-        "api": 10,
-        "plan": 67
+        "api": 6,
+        "plan": 45
       },
       "overall": {
-        "api": 44.82549490624819,
-        "plan": 48.39833895977146
+        "api": 51.25406633481962,
+        "plan": 54.82691038834289
       }
     }
   ]

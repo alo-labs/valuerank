@@ -11,10 +11,10 @@
       "plan": 27
     },
     "overall": {
-      "api": 49.88398569320171,
-      "plan": 46.02515006873177
+      "api": 50.43827140748742,
+      "plan": 46.57943578301748
     },
-    "quality": 61.36686675830902,
+    "quality": 62.10591437735664,
     "qualityRank": 5,
     "coverage": {
       "pct": 100.0,
@@ -142,10 +142,10 @@
       "label": "Bug Hunt Bench",
       "category": "Software engineering",
       "weightPct": 6.0,
-      "value": 40.7,
+      "value": 48.0,
       "decimals": 1,
-      "unit": "bugs fixed of 105",
-      "normalized": 38.761904761904766,
+      "unit": "bugs fixed, planted plus unplanted (O163; no ceiling)",
+      "normalized": 48.0,
       "source": {
         "name": "Bug Hunt Bench published runs",
         "url": "https://bughunt.productcompass.pm/"
@@ -405,7 +405,7 @@
         "unevaluable": null,
         "top1": 0.0,
         "top3": 0.0,
-        "frontier": 0.0084
+        "frontier": 0.0
       },
       {
         "stratum": "S1T",
@@ -414,7 +414,7 @@
         "unevaluable": null,
         "top1": 0.0,
         "top3": 0.0,
-        "frontier": 0.0075
+        "frontier": 0.0
       }
     ],
     "plan": [
@@ -470,7 +470,7 @@
         "unevaluable": null,
         "top1": 0.0,
         "top3": 0.0,
-        "frontier": 0.0003
+        "frontier": 0.0
       },
       {
         "stratum": "S1T",
@@ -544,8 +544,8 @@
         "plan": 27
       },
       "overall": {
-        "api": 49.88398569320171,
-        "plan": 46.02515006873177
+        "api": 50.43827140748742,
+        "plan": 46.57943578301748
       }
     },
     {
@@ -555,12 +555,12 @@
       "shown": false,
       "rankingEligible": true,
       "rank": {
-        "api": 19,
-        "plan": 62
+        "api": 18,
+        "plan": 63
       },
       "overall": {
-        "api": 44.30587675677049,
-        "plan": 41.59698721158891
+        "api": 45.13730532819906,
+        "plan": 42.428415783017485
       }
     },
     {
@@ -574,8 +574,8 @@
         "plan": 105
       },
       "overall": {
-        "api": 41.016630932335815,
-        "plan": 38.286949765701465
+        "api": 42.055916646621526,
+        "plan": 39.326235479987176
       }
     }
   ]

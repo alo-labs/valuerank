@@ -8,14 +8,14 @@
   "summary": {
     "rank": {
       "api": 1,
-      "plan": 4
+      "plan": 1
     },
     "overall": {
-      "api": 59.961341158805325,
-      "plan": 67.46723656272081
+      "api": 64.00591258737676,
+      "plan": 71.51180799129224
     },
-    "quality": 63.70522012770843,
-    "qualityRank": 4,
+    "quality": 69.09798203247033,
+    "qualityRank": 2,
     "coverage": {
       "pct": 100.0,
       "costAvailable": true,
@@ -142,10 +142,10 @@
       "label": "Bug Hunt Bench",
       "category": "Software engineering",
       "weightPct": 6.0,
-      "value": 44.3,
+      "value": 109.6,
       "decimals": 1,
-      "unit": "bugs fixed of 105",
-      "normalized": 42.19047619047619,
+      "unit": "bugs fixed, planted plus unplanted (O163; no ceiling)",
+      "normalized": 109.6,
       "source": {
         "name": "Bug Hunt Bench published runs",
         "url": "https://bughunt.productcompass.pm/"
@@ -396,8 +396,8 @@
       "planIntervalEligible": false,
       "usdPerRun": 128.76226437063366,
       "selected": true,
-      "planRank": 4,
-      "planValue": 67.46723656272081
+      "planRank": 1,
+      "planValue": 71.51180799129224
     },
     {
       "id": "chatgpt-plus-gpt61sol-semianalysis",
@@ -414,8 +414,8 @@
       "planIntervalEligible": false,
       "usdPerRun": 131.47176415170293,
       "selected": false,
-      "planRank": 5,
-      "planValue": 67.30765708205882
+      "planRank": 2,
+      "planValue": 71.35222851063025
     },
     {
       "id": "chatgpt-pro100-gpt61sol-semianalysis",
@@ -432,8 +432,8 @@
       "planIntervalEligible": false,
       "usdPerRun": 131.47176415170293,
       "selected": false,
-      "planRank": 5,
-      "planValue": 67.30765708205882
+      "planRank": 2,
+      "planValue": 71.35222851063025
     },
     {
       "id": "chatgpt-pro200-gpt61sol-semianalysis",
@@ -450,8 +450,8 @@
       "planIntervalEligible": false,
       "usdPerRun": 133.11200689063972,
       "selected": false,
-      "planRank": 7,
-      "planValue": 67.21264325673906
+      "planRank": 4,
+      "planValue": 71.25721468531049
     }
   ],
   "scenarios": {
@@ -507,7 +507,7 @@
         "kernel": "primary",
         "targetProfile": "published-record leaf values redrawn with task-sampling noise from each leaf's published task count (binomial leaves from their Jeffreys Beta posterior, O142, with its mean-preserving alternative, O154; independent-task approximation; GDPval-AA from its displayed rating interval, an assumption) + conventional identification of missing leaves",
         "unevaluable": null,
-        "top1": 0.9895,
+        "top1": 0.9989,
         "top3": 1.0,
         "frontier": 1.0
       },
@@ -516,7 +516,7 @@
         "kernel": "mean-preserving",
         "targetProfile": "published-record leaf values redrawn with task-sampling noise from each leaf's published task count (binomial leaves from their Jeffreys Beta posterior, O142, with its mean-preserving alternative, O154; independent-task approximation; GDPval-AA from its displayed rating interval, an assumption) + conventional identification of missing leaves",
         "unevaluable": null,
-        "top1": 0.9902,
+        "top1": 0.9986,
         "top3": 1.0,
         "frontier": 1.0
       }
@@ -527,8 +527,8 @@
         "kernel": "primary",
         "targetProfile": "published-record reporting precision",
         "unevaluable": null,
-        "top1": 0.0,
-        "top3": 0.0,
+        "top1": 1.0,
+        "top3": 1.0,
         "frontier": 1.0
       },
       {
@@ -536,8 +536,8 @@
         "kernel": "primary",
         "targetProfile": "published-record reporting precision + conventional identification of missing leaves",
         "unevaluable": null,
-        "top1": 0.0,
-        "top3": 0.0,
+        "top1": 1.0,
+        "top3": 1.0,
         "frontier": 1.0
       },
       {
@@ -545,8 +545,8 @@
         "kernel": "primary",
         "targetProfile": "published-record reporting precision + conventional identification of missing leaves + weight-specification stress",
         "unevaluable": null,
-        "top1": 0.0772,
-        "top3": 0.2736,
+        "top1": 0.9984,
+        "top3": 0.9995,
         "frontier": 1.0
       },
       {
@@ -554,8 +554,8 @@
         "kernel": "endpoint-heavy",
         "targetProfile": "published-record reporting precision + conventional identification of missing leaves",
         "unevaluable": null,
-        "top1": 0.0,
-        "top3": 0.0,
+        "top1": 1.0,
+        "top3": 1.0,
         "frontier": 1.0
       },
       {
@@ -563,8 +563,8 @@
         "kernel": "primary",
         "targetProfile": "published-record reporting precision + conventional identification of missing leaves + conventional range sensitivity inside published 95% confidence intervals (no tail model)",
         "unevaluable": null,
-        "top1": 0.0,
-        "top3": 0.0,
+        "top1": 1.0,
+        "top3": 1.0,
         "frontier": 1.0
       },
       {
@@ -572,8 +572,8 @@
         "kernel": "primary",
         "targetProfile": "published-record leaf values redrawn with task-sampling noise from each leaf's published task count (binomial leaves from their Jeffreys Beta posterior, O142, with its mean-preserving alternative, O154; independent-task approximation; GDPval-AA from its displayed rating interval, an assumption) + conventional identification of missing leaves",
         "unevaluable": null,
-        "top1": 0.3979,
-        "top3": 0.4602,
+        "top1": 0.9779,
+        "top3": 0.984,
         "frontier": 1.0
       },
       {
@@ -581,8 +581,8 @@
         "kernel": "mean-preserving",
         "targetProfile": "published-record leaf values redrawn with task-sampling noise from each leaf's published task count (binomial leaves from their Jeffreys Beta posterior, O142, with its mean-preserving alternative, O154; independent-task approximation; GDPval-AA from its displayed rating interval, an assumption) + conventional identification of missing leaves",
         "unevaluable": null,
-        "top1": 0.3948,
-        "top3": 0.4561,
+        "top1": 0.9821,
+        "top3": 0.9874,
         "frontier": 1.0
       }
     ]
@@ -632,7 +632,7 @@
       "date": "2026-10-19",
       "rank": {
         "api": 1,
-        "plan": 4
+        "plan": 1
       }
     }
   ],
@@ -653,11 +653,11 @@
       "rankingEligible": true,
       "rank": {
         "api": 1,
-        "plan": 4
+        "plan": 1
       },
       "overall": {
-        "api": 59.961341158805325,
-        "plan": 67.46723656272081
+        "api": 64.00591258737676,
+        "plan": 71.51180799129224
       }
     },
     {
@@ -682,12 +682,12 @@
       "shown": false,
       "rankingEligible": true,
       "rank": {
-        "api": 2,
-        "plan": 28
+        "api": 1,
+        "plan": 2
       },
       "overall": {
-        "api": 48.677981662608644,
-        "plan": 54.23524884800271
+        "api": 56.26155309118007,
+        "plan": 61.818820276574144
       }
     }
   ]

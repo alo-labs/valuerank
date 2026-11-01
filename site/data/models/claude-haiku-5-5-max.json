@@ -11,10 +11,10 @@
       "plan": 11
     },
     "overall": {
-      "api": 50.26008937029761,
-      "plan": 61.81298032868172
+      "api": 50.86151794172618,
+      "plan": 62.41440890011029
     },
-    "quality": 49.08397377157562,
+    "quality": 49.88587853348038,
     "qualityRank": 7,
     "coverage": {
       "pct": 100.0,
@@ -144,10 +144,10 @@
       "label": "Bug Hunt Bench",
       "category": "Software engineering",
       "weightPct": 6.0,
-      "value": 21.5,
+      "value": 30.5,
       "decimals": 1,
-      "unit": "bugs fixed of 105",
-      "normalized": 20.476190476190474,
+      "unit": "bugs fixed, planted plus unplanted (O163; no ceiling)",
+      "normalized": 30.5,
       "source": {
         "name": "Bug Hunt Bench published runs",
         "url": "https://bughunt.productcompass.pm/"
@@ -399,7 +399,7 @@
       "usdPerRun": 17.760273475833255,
       "selected": true,
       "planRank": 11,
-      "planValue": 61.81298032868172
+      "planValue": 62.41440890011029
     },
     {
       "id": "claude-max20x-claude-haiku-5-5-max-common-opus55-assumption",
@@ -417,7 +417,7 @@
       "usdPerRun": 17.842062216042617,
       "selected": false,
       "planRank": 11,
-      "planValue": 61.81298032868172
+      "planValue": 62.41440890011029
     },
     {
       "id": "claude-max5x-claude-haiku-5-5-max-common-opus55-assumption",
@@ -435,7 +435,7 @@
       "usdPerRun": 18.27214161967823,
       "selected": false,
       "planRank": 11,
-      "planValue": 61.81298032868172
+      "planValue": 62.41440890011029
     }
   ],
   "scenarios": {
@@ -492,8 +492,8 @@
         "targetProfile": "published-record leaf values redrawn with task-sampling noise from each leaf's published task count (binomial leaves from their Jeffreys Beta posterior, O142, with its mean-preserving alternative, O154; independent-task approximation; GDPval-AA from its displayed rating interval, an assumption) + conventional identification of missing leaves",
         "unevaluable": null,
         "top1": 0.0,
-        "top3": 0.0001,
-        "frontier": 0.0045
+        "top3": 0.0,
+        "frontier": 0.0
       },
       {
         "stratum": "S1T",
@@ -501,8 +501,8 @@
         "targetProfile": "published-record leaf values redrawn with task-sampling noise from each leaf's published task count (binomial leaves from their Jeffreys Beta posterior, O142, with its mean-preserving alternative, O154; independent-task approximation; GDPval-AA from its displayed rating interval, an assumption) + conventional identification of missing leaves",
         "unevaluable": null,
         "top1": 0.0,
-        "top3": 0.0001,
-        "frontier": 0.0042
+        "top3": 0.0,
+        "frontier": 0.0
       }
     ],
     "plan": [
@@ -607,8 +607,8 @@
         "plan": 11
       },
       "overall": {
-        "api": 50.26008937029761,
-        "plan": 61.81298032868172
+        "api": 50.86151794172618,
+        "plan": 62.41440890011029
       }
     },
     {
@@ -634,11 +634,11 @@
       "rankingEligible": true,
       "rank": {
         "api": 21,
-        "plan": 32
+        "plan": 42
       },
       "overall": {
-        "api": 41.11365139882825,
-        "plan": 54.11785570746959
+        "api": 42.24132997025682,
+        "plan": 55.24553427889816
       }
     }
   ]

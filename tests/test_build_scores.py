@@ -1397,6 +1397,12 @@ def test_bug_hunt_cross_harness_lists_each_harness_at_the_exact_effort():
     assert build_scores.bug_hunt_cross_harness("gemini-4-argon", model, rows) == [
         {"harness": "Antigravity CLI", "fixedOf105": 40.7, "runs": 3}, {"harness": "Gemini CLI", "fixedOf105": 33.0, "runs": 1}]
     assert build_scores.bug_hunt_cross_harness("gemini-4-argon", {**model, "aaVariant": "low"}, rows) is None
+    # O163: a scoreboard row with its unplanted count carries it and the leaf's value on that harness, planted plus unplanted.
+    rows[2]["extras"] = 4.3
+    rows[0]["extras"] = 0.0
+    assert build_scores.bug_hunt_cross_harness("gemini-4-argon", model, rows) == [
+        {"harness": "Antigravity CLI", "fixedOf105": 40.7, "runs": 3, "extras": 4.3, "totalFound": pytest.approx(45.0)},
+        {"harness": "Gemini CLI", "fixedOf105": 33.0, "runs": 1, "extras": 0.0, "totalFound": 33.0}]
 
 
 def test_the_build_rejects_a_bug_hunt_record_that_is_not_the_largest_sample(world):

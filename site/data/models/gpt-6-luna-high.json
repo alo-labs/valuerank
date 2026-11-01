@@ -8,13 +8,13 @@
   "summary": {
     "rank": {
       "api": 17,
-      "plan": 52
+      "plan": 53
     },
     "overall": {
-      "api": 44.44844102704735,
-      "plan": 48.886138802989414
+      "api": 45.297012455618784,
+      "plan": 49.73471023156085
     },
-    "quality": 31.84818507065255,
+    "quality": 32.97961364208113,
     "qualityRank": 19,
     "coverage": {
       "pct": 100.0,
@@ -70,10 +70,10 @@
       "label": "Bug Hunt Bench",
       "category": "Software engineering",
       "weightPct": 9.0,
-      "value": 9.0,
+      "value": 18.0,
       "decimals": 1,
-      "unit": "bugs fixed of 105",
-      "normalized": 8.571428571428571,
+      "unit": "bugs fixed, planted plus unplanted (O163; no ceiling)",
+      "normalized": 18.0,
       "source": {
         "name": "Bug Hunt Bench published runs",
         "url": "https://bughunt.productcompass.pm/"
@@ -352,8 +352,8 @@
       "planIntervalEligible": false,
       "usdPerRun": 5.277018814202136,
       "selected": true,
-      "planRank": 52,
-      "planValue": 48.886138802989414
+      "planRank": 53,
+      "planValue": 49.73471023156085
     },
     {
       "id": "chatgpt-pro100-gpt-6-luna-high-common-gpt-assumption",
@@ -370,8 +370,8 @@
       "planIntervalEligible": false,
       "usdPerRun": 5.38806129541094,
       "selected": false,
-      "planRank": 52,
-      "planValue": 48.886138802989414
+      "planRank": 53,
+      "planValue": 49.73471023156085
     },
     {
       "id": "chatgpt-pro200-gpt-6-luna-high-common-gpt-assumption",
@@ -388,8 +388,8 @@
       "planIntervalEligible": false,
       "usdPerRun": 5.4552827894995595,
       "selected": false,
-      "planRank": 52,
-      "planValue": 48.886138802989414
+      "planRank": 53,
+      "planValue": 49.73471023156085
     },
     {
       "id": "chatgpt-plus-gpt-6-luna-high-common-gpt-assumption",
@@ -406,8 +406,8 @@
       "planIntervalEligible": false,
       "usdPerRun": 7.017783539084619,
       "selected": false,
-      "planRank": 52,
-      "planValue": 48.886138802989414
+      "planRank": 53,
+      "planValue": 49.73471023156085
     }
   ],
   "scenarios": {
@@ -465,7 +465,7 @@
         "unevaluable": null,
         "top1": 0.0,
         "top3": 0.0,
-        "frontier": 0.9565
+        "frontier": 0.9829
       },
       {
         "stratum": "S1T",
@@ -474,7 +474,7 @@
         "unevaluable": null,
         "top1": 0.0,
         "top3": 0.0,
-        "frontier": 0.9615
+        "frontier": 0.9876
       }
     ],
     "plan": [
@@ -556,7 +556,7 @@
       "date": "2026-10-19",
       "rank": {
         "api": 17,
-        "plan": 52
+        "plan": 53
       }
     }
   ],
@@ -592,11 +592,11 @@
       "rankingEligible": true,
       "rank": {
         "api": 17,
-        "plan": 52
+        "plan": 53
       },
       "overall": {
-        "api": 44.44844102704735,
-        "plan": 48.886138802989414
+        "api": 45.297012455618784,
+        "plan": 49.73471023156085
       }
     },
     {
@@ -607,11 +607,11 @@
       "rankingEligible": true,
       "rank": {
         "api": 29,
-        "plan": 91
+        "plan": 88
       },
       "overall": {
-        "api": 35.5764056301463,
-        "plan": 43.77306412766474
+        "api": 36.63711991586058,
+        "plan": 44.83377841337902
       }
     }
   ]

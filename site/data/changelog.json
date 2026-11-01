@@ -14,33 +14,33 @@
           "to": 1
         },
         {
+          "slug": "gpt-6-astra",
+          "name": "GPT-6 Astra (max)",
+          "from": 4,
+          "to": 3
+        },
+        {
           "slug": "mimo-v2-6-pro",
           "name": "MiMo-V2.6-Pro",
           "from": 7,
-          "to": 3
+          "to": 4
         },
         {
           "slug": "gpt-6-luna",
           "name": "GPT-6 Luna (max)",
           "from": 11,
-          "to": 4
-        },
-        {
-          "slug": "gpt-6-astra",
-          "name": "GPT-6 Astra (max)",
-          "from": 4,
           "to": 5
-        },
-        {
-          "slug": "claude-opus-5-5",
-          "name": "Claude Opus 5.5 (max)",
-          "from": 5,
-          "to": 6
         },
         {
           "slug": "claude-sonnet-5-5",
           "name": "Claude Sonnet 5.5",
           "from": 3,
+          "to": 6
+        },
+        {
+          "slug": "claude-opus-5-5",
+          "name": "Claude Opus 5.5 (max)",
+          "from": 5,
           "to": 7
         },
         {
@@ -52,14 +52,14 @@
       ],
       "ranks": {
         "claude-haiku-5-5-max": 8,
-        "claude-opus-5-5": 6,
-        "claude-sonnet-5-5": 7,
+        "claude-opus-5-5": 7,
+        "claude-sonnet-5-5": 6,
         "deepseek-v4-1-flash-1017": 2,
         "gemini-4-argon": 9,
-        "gpt-6-astra": 5,
-        "gpt-6-luna": 4,
+        "gpt-6-astra": 3,
+        "gpt-6-luna": 5,
         "gpt-6-1-sol": 1,
-        "mimo-v2-6-pro": 3
+        "mimo-v2-6-pro": 4
       },
       "added": [
         "claude-haiku-5-5-max",

@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "methodologyVersion": "3.0.0",
-  "anchorVersion": "v3-2026-11-01-a2",
+  "anchorVersion": "v3-2026-11-01-a3",
   "frozenAt": "2026-11-01",
   "basketVersion": "SDLC basket v1",
   "mainWorkload": "aad36e77d6e17386",
@@ -145,26 +145,26 @@
   "barReferences": [
     {
       "id": "bar:median-quality",
-      "level": 61.36686675830902,
+      "level": 62.10591437735664,
       "levelConfiguration": "gemini-4-argon",
       "rule": "lower-median displayed quality of the non-provisional cohort configurations at freeze (E192; headline bar)"
     },
     {
       "id": "bar:lower-quartile-quality",
-      "level": 49.08397377157562,
+      "level": 49.88587853348038,
       "levelConfiguration": "claude-haiku-5-5-max",
       "rule": "lower-quartile displayed quality of the non-provisional cohort configurations at freeze (O34)"
     },
     {
       "id": "bar:upper-quartile-quality",
-      "level": 65.1617448211189,
-      "levelConfiguration": "gpt-6-astra",
+      "level": 68.53420586556773,
+      "levelConfiguration": "claude-sonnet-5-5",
       "rule": "upper-quartile displayed quality of the non-provisional cohort configurations at freeze (O34)"
     }
   ],
   "anchorPolicy": {
     "policyId": "complete-evidence-panel",
-    "version": 2,
+    "version": 3,
     "populationRule": "ranked configurations with complete cost evidence (exact cost, no AA missing- or declined-task marker) on every component of the workload at the freeze cutoff; on the main workload this is the admission reference panel",
     "planRule": "the same configurations' plan rows whose displayed Plan cost is measured (a controlled measurement or concordant reports, O157); owner assumptions and API-cost fallbacks are scored on these anchors and flagged, and are outside the Plan clip gate",
     "minimumReferences": 2,
@@ -199,18 +199,18 @@
     "bars": [
       {
         "id": "bar:median-quality",
-        "level": 61.36686675830902,
+        "level": 62.10591437735664,
         "levelConfiguration": "gemini-4-argon"
       },
       {
         "id": "bar:lower-quartile-quality",
-        "level": 49.08397377157562,
+        "level": 49.88587853348038,
         "levelConfiguration": "claude-haiku-5-5-max"
       },
       {
         "id": "bar:upper-quartile-quality",
-        "level": 65.1617448211189,
-        "levelConfiguration": "gpt-6-astra"
+        "level": 68.53420586556773,
+        "levelConfiguration": "claude-sonnet-5-5"
       }
     ]
   }

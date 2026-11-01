@@ -52,6 +52,7 @@ BASKET_VERSION = "SDLC basket v1"
 BETA = COST_WEIGHT_PCT / 100.0
 BASES = ("api", "plan")
 TB4_HALF_WIDTH_PCT = 0.05  # tbench.ai resolution rates are published to 0.1 percentage point
+BUG_HUNT_PLANTED = 105.0  # O163: the planted bugs, the binomial part of the leaf's sampling noise
 BUG_HUNT_HALF_WIDTH = 0.05  # owner means of bugs fixed are published to 0.1 bug
 # O136: the v5 successors' page fields (FrontierCode 2.0, HLE-Diamond, CritPt v2 hard subset, Terminal-Bench-Science).
 FRACTION_LEAVES = {
@@ -204,9 +205,14 @@ def leaf_evidence(model_id: str, effort: str | None, page: dict, tb4_rows: list[
     page_path = f"pages[model.slug={page.get('slug')}].model"
 
     if exact_match.bug_hunt_matches(model_id, effort, bug_hunt):
-        add("bugHunt", bug_hunt["fixedOf105"], q.bug_hunt_z(bug_hunt["fixedOf105"], BUG_HUNT_HALF_WIDTH),
-            {"source": "Bug Hunt Bench owner-published runs", "configuration": bug_hunt.get("evaluatedModel"), "harness": bug_hunt.get("harness"), "runs": bug_hunt.get("sampleN")},
-            "bugHunt", f"models[modelId={model_id}].fixedOf105")
+        # O163: the leaf is planted plus genuine unplanted bugs fixed (the board's per-run means), not its planted-only score.
+        if bug_hunt.get("extras") is None:
+            raise ValueError(f"{model_id}: the Bug Hunt record carries no unplanted-fix count, which the O163 leaf needs")
+        found = bug_hunt["fixedOf105"] + bug_hunt["extras"]
+        add("bugHunt", found, q.bug_hunt_z(found, BUG_HUNT_HALF_WIDTH),
+            {"source": "Bug Hunt Bench owner-published runs", "configuration": bug_hunt.get("evaluatedModel"), "harness": bug_hunt.get("harness"), "runs": bug_hunt.get("sampleN"),
+             "planted": bug_hunt["fixedOf105"], "unplanted": bug_hunt["extras"]},
+            "bugHunt", f"models[modelId={model_id}].fixedOf105 + models[modelId={model_id}].extras")
     # O37: AA's own Terminal-Bench 4.0 run (one harness, every configuration) is the leaf; tbench.ai fills a gap.
     if page.get("terminalBench40") is not None:
         add("terminalBench", 100.0 * page["terminalBench40"], q.percent_z(100.0 * page["terminalBench40"]),
@@ -1490,7 +1496,7 @@ def bar_levels(assembled: dict) -> tuple[list[str], list[dict]]:
 # E160: the registered rule that selects each workload's anchor references (separate from workload admission).
 ANCHOR_POLICY = {
     "policyId": "complete-evidence-panel",
-    "version": 2,
+    "version": 3,
     "populationRule": "ranked configurations with complete cost evidence (exact cost, no AA missing- or declined-task marker) on every component of the workload at the freeze cutoff; on the main workload this is the admission reference panel",
     "planRule": "the same configurations' plan rows whose displayed Plan cost is measured (a controlled measurement or concordant reports, O157); owner assumptions and API-cost fallbacks are scored on these anchors and flagged, and are outside the Plan clip gate",
     "minimumReferences": 2,
@@ -1902,9 +1908,9 @@ def bug_hunt_harness_sensitivity(rows: list[dict], per_row: dict, bars: list[dic
     for row in rows:
         results = row.get("bugHuntCrossHarness") or []
         if len(results) > 1 and "bugHunt" in row["evidence"]["observations"]:
-            values = [item["fixedOf105"] for item in results]
-            spans[row["id"]] = {"low": min(values), "high": max(values),
-                                "harnesses": {item["harness"]: item["fixedOf105"] for item in results}}
+            # O163: each harness's leaf value is its planted plus unplanted bugs fixed.
+            found = {item["harness"]: item.get("totalFound", item["fixedOf105"]) for item in results}
+            spans[row["id"]] = {"low": min(found.values()), "high": max(found.values()), "harnesses": found}
     bases = {}
     for basis in BASES:
         primary = {row["id"]: per_row[row["id"]][basis]["value"] for row in rows if per_row[row["id"]][basis]["value"] is not None}
@@ -3420,6 +3426,14 @@ def sampling_sd(key: str, observation: q.Observation, source: dict, gdpval_sd: f
         return (gdpval_row_sd(source) if gdpval_sd is None else gdpval_sd) * 100.0 / 2000.0  # E90: z = (Elo - 500) / 20
     if source.get("stderr") is not None:
         return source["stderr"]  # Vals' published standard error, in percentage points (the leaf's z unit)
+    if key == "bugHunt" and source.get("planted") is None:
+        # O163: a Bug Hunt count without a planted/unplanted split (another party's fill) is read as one Poisson count.
+        return math.sqrt(max(z, 0.5))
+    if key == "bugHunt":
+        # O163: a count of bugs fixed. The planted part is binomial over the 105 planted bugs (Jeffreys plug-in) and the
+        # unplanted part, with no answer key or ceiling, is read as a Poisson count; the two add in variance.
+        p = (min(source["planted"], BUG_HUNT_PLANTED) + 0.5) / (BUG_HUNT_PLANTED + 1.0)
+        return math.sqrt(BUG_HUNT_PLANTED * p * (1.0 - p) + max(source.get("unplanted") or 0.0, 0.5))
     if key == "livebench2Overall":
         # O67: LiveBench's Overall is the release's weighted mean, so the category draws carry the same weights.
         categories, weights = source["categories"], source.get("weights") or {name: 1.0 for name in LIVEBENCH_CATEGORY_TASKS}
@@ -3440,7 +3454,7 @@ def binomial_leaf(key: str, source: dict) -> bool:
     """O142: a leaf whose S1T noise is the plug-in binomial over its published task count (not GDPval-AA's rating
     interval, AA-Omniscience's three-outcome index, LiveBench's category mixture or a Vals published standard error)."""
 
-    return key in SAMPLING_TASKS and key != "omniscience" and source.get("stderr") is None
+    return key in SAMPLING_TASKS and key not in ("omniscience", "bugHunt") and source.get("stderr") is None
 
 
 def sampling_kernel(key: str, observation: q.Observation, source: dict) -> scenarios.Kernel:
@@ -3453,7 +3467,7 @@ def sampling_kernel(key: str, observation: q.Observation, source: dict) -> scena
         tasks = SAMPLING_TASKS[key]
         successes = min(1.0, max(0.0, observation.z / 100.0)) * tasks
         return scenarios.Kernel("beta", (successes + 0.5, tasks - successes + 0.5, observation.z), scenarios.MEAN_PRESERVING, scenarios.TASK_SAMPLING, derivation)
-    return scenarios.Kernel("normal", (observation.z, sampling_sd(key, observation, source), 0.0, 100.0), None, scenarios.TASK_SAMPLING, derivation)
+    return scenarios.Kernel("normal", (observation.z, sampling_sd(key, observation, source), 0.0, observation.upper), None, scenarios.TASK_SAMPLING, derivation)
 
 
 def quality_sd(row: dict, gdpval_sd: float | None = None, tasks_of: dict | None = None) -> float:
@@ -3689,7 +3703,7 @@ def scenario_panel(assembled: dict, basis: str, *, measurement: bool = False, tr
         if harness is not None:
             for key in agent_run_leaves(row):
                 z = observations[key].z
-                leaves[key] = scenarios.Kernel("uniform", (max(0.0, z - harness / 2.0), min(100.0, z + harness / 2.0)), "endpoint-heavy", scenarios.SPECIFICATION_STRESS)
+                leaves[key] = scenarios.Kernel("uniform", (max(0.0, z - harness / 2.0), min(observations[key].upper, z + harness / 2.0)), "endpoint-heavy", scenarios.SPECIFICATION_STRESS)
         meta = {"group": row["configurationId"], "costRatio": cost / row["cost"]["costUsd"]} if basis == "plan" else {}
         panel.append(scenarios.RowInputs(row["id"], leaves, _cost_kernel(row, cost), row["summary"].provisional, meta))
     return panel

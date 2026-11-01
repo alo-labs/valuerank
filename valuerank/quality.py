@@ -135,6 +135,7 @@ class Observation:
 
     z: float
     half_width: float = 0.0
+    upper: float = 100.0  # O163: the Bug Hunt leaf is a count of bugs fixed with no ceiling
 
     @property
     def low(self) -> float:
@@ -142,7 +143,7 @@ class Observation:
 
     @property
     def high(self) -> float:
-        return min(100.0, self.z + self.half_width)
+        return min(self.upper, self.z + self.half_width)
 
 
 def clip(value: float, low: float = 0.0, high: float = 100.0) -> float:
@@ -185,10 +186,11 @@ def aicd_z(points: float) -> Observation:
     return Observation(clip(100.0 * points / AICD_POINTS))
 
 
-def bug_hunt_z(bugs_fixed: float, half_width_bugs: float = 0.0) -> Observation:
-    """Bugs fixed out of 105 (release test vector: 52 -> 49.52)."""
+def bug_hunt_z(bugs_found: float, half_width_bugs: float = 0.0) -> Observation:
+    """Owner decision O163 (2026-11-01): the Bug Hunt leaf is the plain sum of the planted bugs a model fixed and the
+    genuine unplanted bugs it fixed, used as the leaf's score without rescaling (so it can exceed 100)."""
 
-    return Observation(clip(100.0 * bugs_fixed / BUG_HUNT_BUGS), 100.0 * half_width_bugs / BUG_HUNT_BUGS)
+    return Observation(max(0.0, bugs_found), half_width_bugs, math.inf)
 
 
 def omniscience_index_z(index: float) -> Observation:
@@ -271,7 +273,7 @@ def composite(values: dict) -> float:
 
 # E110: each leaf's documented raw domain (unit, low, high); a value outside it is a data-validation error.
 LEAF_DOMAINS = {
-    "bugHunt": ("bugs fixed of 105", 0.0, BUG_HUNT_BUGS),
+    "bugHunt": ("bugs fixed, planted plus unplanted (O163)", 0.0, math.inf),
     "frontierCode": ("fraction", 0.0, 1.0),
     "terminalBench": ("percent", 0.0, 100.0),
     "gdpval": ("Elo", -math.inf, math.inf),
@@ -296,7 +298,7 @@ def unclipped_z(key: str, raw) -> float:
     if key == "gdpval":
         return 100.0 * (raw - GDPVAL_ELO_LOW) / GDPVAL_ELO_SPAN
     if key == "bugHunt":
-        return 100.0 * raw / BUG_HUNT_BUGS
+        return raw
     if key == "aiCodingDaily":
         return 100.0 * raw / AICD_POINTS
     return raw if LEAF_DOMAINS[key][0] == "percent" else 100.0 * raw
@@ -308,7 +310,8 @@ def clip_audit(key: str, raw) -> dict:
     unit, low, high = LEAF_DOMAINS[key]
     valid = isinstance(raw, (int, float)) and not isinstance(raw, bool) and math.isfinite(raw) and low <= raw <= high
     z = unclipped_z(key, raw) if valid else None
-    position = None if z is None else "below" if z < 0.0 else "above" if z > 100.0 else "inside"
+    ceiling = math.inf if key == "bugHunt" else 100.0  # O163: a count has no ceiling
+    position = None if z is None else "below" if z < 0.0 else "above" if z > ceiling else "inside"
     if not valid:
         action = "reject: outside the metric's documented domain"
     else:
@@ -320,7 +323,7 @@ def clip_audit(key: str, raw) -> dict:
         "domainValid": valid,
         "anchorPosition": position,
         "unclippedZ": z,
-        "clippingAmount": None if z is None else z - clip(z),
+        "clippingAmount": None if z is None else z - clip(z, 0.0, ceiling),
         "weight": LEAF_BY_KEY[key].weight if key in LEAF_BY_KEY else ALL_LEAVES[key].weight,
         "action": action,
     }

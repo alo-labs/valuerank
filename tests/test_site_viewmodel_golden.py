@@ -239,7 +239,9 @@ def test_model_document_leaves_components_routes_and_scenarios(bundle, v3_rows):
     frontiercode = leaves["frontierCode"]
     assert frontiercode["value"] == pytest.approx(0.4063, abs=1e-4) and frontiercode["grade"] == "measured"
     assert frontiercode["normalized"] == row["quality"]["leaves"]["frontierCode"]["z"] and frontiercode["source"]["url"].startswith("https://artificialanalysis.ai")
-    assert leaves["bugHunt"]["value"] == 44.3 and "GPT-6.1 Sol" in leaves["bugHunt"]["evaluatedVariant"]
+    # O163: the Bug Hunt leaf is planted plus unplanted bugs fixed (44.3 + 65.3), unrescaled and above 100.
+    assert leaves["bugHunt"]["value"] == pytest.approx(109.6) and leaves["bugHunt"]["normalized"] == row["quality"]["leaves"]["bugHunt"]["z"] == pytest.approx(109.6)
+    assert "GPT-6.1 Sol" in leaves["bugHunt"]["evaluatedVariant"]
     assert leaves["omniscience"]["unit"].startswith("AA Omniscience Index")
     components = {c["key"]: c for c in doc["cost"]["components"]}
     # O137: the v5 basket admits the Coding Agent Index beside FrontierCode 2.0, priced inside the v5 Index; FrontierCode's
@@ -364,8 +366,8 @@ def test_changelog_document(bundle):
 
 def test_index_page(bundle):
     page = viewmodel.index_page(bundle)
-    assert page["headline"]["api"] == "GPT-6.1 Sol (max) leads the API ranking at 60.0; Claude Opus 5.5 (max) leads on quality."
-    assert page["headline"]["plan"] == "Claude Opus 5.5 (max) leads the Plan ranking at 67.8 and also leads on quality."
+    assert page["headline"]["api"] == "GPT-6.1 Sol (max) leads the API ranking at 64.0; GPT-6 Astra (max) leads on quality."
+    assert page["headline"]["plan"] == "GPT-6.1 Sol (max) leads the Plan ranking at 71.5; GPT-6 Astra (max) leads on quality."
     assert page["picks"] == bundle.rankings["picks"] and page["rankingsJson"] is bundle.rankings
     assert len(page["models"]) == 9 and page["dimensions"] == bundle.rankings["dimensions"]
     assert len(page["chart"]["api"]) == len(page["chart"]["plan"]) == 9  # a row without a cost has no point and set(page["chart"]["plan"][0]) == {"slug", "name", "x", "y", "pareto", "costLabel"}
@@ -405,7 +407,7 @@ def test_benchmark_pages_wrap_their_documents(bundle):
 def test_methodology_page(bundle, v3):
     page = viewmodel.methodology_page(bundle)
     method = page["method"]
-    assert method["costLabel"].startswith("contestant-model API token cost") and method["barLevel"] == "quality 61.4 (the displayed quality of Gemini 4 Argon at freeze)"
+    assert method["costLabel"].startswith("contestant-model API token cost") and method["barLevel"] == "quality 62.1 (the displayed quality of Gemini 4 Argon at freeze)"
     assert method["anchors"]["api"]["low"] == v3["workloads"][v3["mainWorkload"]]["anchors"]["api"]["low"]
     assert method["streamDescriptions"]["S0"] == "published-record reporting precision" and method["notQuantified"]
     example = page["workedExample"]

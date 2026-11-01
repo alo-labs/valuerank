@@ -7,15 +7,15 @@
   "selectedPage": "https://artificialanalysis.ai/models/claude-sonnet-5-5",
   "summary": {
     "rank": {
-      "api": 7,
-      "plan": 8
+      "api": 6,
+      "plan": 5
     },
     "overall": {
-      "api": 52.78339190949901,
-      "plan": 66.87009468566866
+      "api": 54.50796333807043,
+      "plan": 68.59466611424008
     },
-    "quality": 66.23477729413916,
-    "qualityRank": 2,
+    "quality": 68.53420586556773,
+    "qualityRank": 3,
     "coverage": {
       "pct": 100.0,
       "costAvailable": true,
@@ -142,10 +142,10 @@
       "label": "Bug Hunt Bench",
       "category": "Software engineering",
       "weightPct": 6.0,
-      "value": 51.3,
+      "value": 77.6,
       "decimals": 1,
-      "unit": "bugs fixed of 105",
-      "normalized": 48.857142857142854,
+      "unit": "bugs fixed, planted plus unplanted (O163; no ceiling)",
+      "normalized": 77.6,
       "source": {
         "name": "Bug Hunt Bench published runs",
         "url": "https://bughunt.productcompass.pm/"
@@ -396,8 +396,8 @@
       "planIntervalEligible": false,
       "usdPerRun": 178.29912152985742,
       "selected": true,
-      "planRank": 8,
-      "planValue": 66.87009468566866
+      "planRank": 5,
+      "planValue": 68.59466611424008
     },
     {
       "id": "claude-max20x-claude-sonnet-5-5-common-opus55-assumption",
@@ -414,8 +414,8 @@
       "planIntervalEligible": false,
       "usdPerRun": 179.12021589815114,
       "selected": false,
-      "planRank": 9,
-      "planValue": 66.83488581380612
+      "planRank": 6,
+      "planValue": 68.55945724237753
     },
     {
       "id": "claude-max5x-claude-sonnet-5-5-common-opus55-assumption",
@@ -432,8 +432,8 @@
       "planIntervalEligible": false,
       "usdPerRun": 183.4378735040804,
       "selected": false,
-      "planRank": 10,
-      "planValue": 66.65235867344765
+      "planRank": 9,
+      "planValue": 68.37693010201909
     }
   ],
   "scenarios": {
@@ -463,8 +463,8 @@
         "targetProfile": "published-record reporting precision + conventional identification of missing leaves + weight-specification stress",
         "unevaluable": null,
         "top1": 0.0,
-        "top3": 0.0006,
-        "frontier": 0.0217
+        "top3": 0.0,
+        "frontier": 0.0299
       },
       {
         "stratum": "S1",
@@ -490,8 +490,8 @@
         "targetProfile": "published-record leaf values redrawn with task-sampling noise from each leaf's published task count (binomial leaves from their Jeffreys Beta posterior, O142, with its mean-preserving alternative, O154; independent-task approximation; GDPval-AA from its displayed rating interval, an assumption) + conventional identification of missing leaves",
         "unevaluable": null,
         "top1": 0.0,
-        "top3": 0.0397,
-        "frontier": 0.2264
+        "top3": 0.0154,
+        "frontier": 0.1536
       },
       {
         "stratum": "S1T",
@@ -499,8 +499,8 @@
         "targetProfile": "published-record leaf values redrawn with task-sampling noise from each leaf's published task count (binomial leaves from their Jeffreys Beta posterior, O142, with its mean-preserving alternative, O154; independent-task approximation; GDPval-AA from its displayed rating interval, an assumption) + conventional identification of missing leaves",
         "unevaluable": null,
         "top1": 0.0,
-        "top3": 0.0426,
-        "frontier": 0.235
+        "top3": 0.0176,
+        "frontier": 0.1447
       }
     ],
     "plan": [
@@ -571,8 +571,8 @@
   },
   "intervals": {
     "api": {
-      "definite": "certified",
-      "possible": "certified"
+      "definite": "disproved",
+      "possible": "disproved"
     },
     "plan": null
   },
@@ -605,8 +605,8 @@
       "version": "v3.0.0",
       "date": "2026-10-19",
       "rank": {
-        "api": 7,
-        "plan": 8
+        "api": 6,
+        "plan": 5
       }
     }
   ],
@@ -626,12 +626,12 @@
       "shown": true,
       "rankingEligible": true,
       "rank": {
-        "api": 7,
-        "plan": 8
+        "api": 6,
+        "plan": 5
       },
       "overall": {
-        "api": 52.78339190949901,
-        "plan": 66.87009468566866
+        "api": 54.50796333807043,
+        "plan": 68.59466611424008
       }
     },
     {
@@ -657,11 +657,11 @@
       "rankingEligible": true,
       "rank": {
         "api": 8,
-        "plan": 7
+        "plan": 16
       },
       "overall": {
-        "api": 45.420802850514846,
-        "plan": 55.671695342939174
+        "api": 48.65437427908628,
+        "plan": 58.905266771510604
       }
     }
   ]

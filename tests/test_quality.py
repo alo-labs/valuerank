@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+import math
+
 import pytest
 
 from valuerank import quality as q
@@ -78,8 +80,21 @@ def test_gdpval_transform_matches_aa_integration():
 
 
 def test_bug_hunt_release_vector():
-    assert round(q.bug_hunt_z(52).z, 2) == 49.52
-    assert q.bug_hunt_z(44.3, 0.05).half_width == pytest.approx(100 * 0.05 / 105)
+    """O163: the leaf is the plain count of bugs fixed (planted plus unplanted), used without rescaling or a ceiling."""
+
+    assert q.bug_hunt_z(52) == q.Observation(52.0, 0.0, math.inf)
+    assert q.bug_hunt_z(44.3, 0.05).half_width == 0.05
+    above = q.bug_hunt_z(98.0 + 14.5, 0.05)  # a total above 100 stays unclipped
+    assert above.z == 112.5 and above.high == pytest.approx(112.55) and above.low == pytest.approx(112.45)
+    assert q.bug_hunt_z(-1.0).z == 0.0
+
+
+def test_observation_upper_defaults_to_the_0_100_scale():
+    """O163: an observation's ceiling is its own; the default stays 100."""
+
+    assert q.Observation(99.9, 0.5).upper == 100.0 and q.Observation(99.9, 0.5).high == 100.0
+    assert q.Observation(99.9, 0.5, math.inf).high == pytest.approx(100.4)
+    assert q.Observation(60.0, 5.0, 62.0).high == 62.0
 
 
 def test_omniscience_index_is_monotone_in_outcomes():
@@ -168,7 +183,12 @@ def test_clip_audit_discloses_saturation_and_rejects_domain_violations():
     high_elo = q.clip_audit("gdpval", 2700.0)
     assert high_elo["anchorPosition"] == "above" and high_elo["clippingAmount"] == pytest.approx(10.0) and high_elo["action"] == "disclose saturation"
     assert q.clip_audit("gdpval", 400.0)["anchorPosition"] == "below"
-    assert q.clip_audit("bugHunt", 52.0)["unclippedZ"] == pytest.approx(49.5238, abs=1e-4)
+    assert q.clip_audit("bugHunt", 52.0)["unclippedZ"] == 52.0
+    # O163: the Bug Hunt count has no ceiling, so a total above 100 is inside and unclipped; a negative count is rejected.
+    many = q.clip_audit("bugHunt", 117.0)
+    assert many["domainValid"] and many["anchorPosition"] == "inside" and many["unclippedZ"] == 117.0 and many["clippingAmount"] == 0.0 and many["action"] == "none"
+    assert q.clip_audit("bugHunt", -1.0)["domainValid"] is False
+    assert q.LEAF_DOMAINS["bugHunt"][1:] == (0.0, math.inf)
     assert q.clip_audit("hle", 0.5)["unclippedZ"] == 50.0
     omni = q.clip_audit("omniscience", 43.4)
     assert omni["raw"] == 43.4 and omni["unclippedZ"] == pytest.approx(71.7)

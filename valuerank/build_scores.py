@@ -406,7 +406,9 @@ def bug_hunt_cross_harness(model_id, aa_model, scoreboard_rows):
             if exact_match.efforts_match(model_id, aa_model.get("aaVariant"), effort):
                 current = best.get(row["harness"])
                 if current is None or scoreboard_sample(row["model"]) > current["runs"]:
-                    best[row["harness"]] = {"harness": row["harness"], "fixedOf105": row["fixedOf105"], "runs": scoreboard_sample(row["model"])}
+                    best[row["harness"]] = {"harness": row["harness"], "fixedOf105": row["fixedOf105"], "runs": scoreboard_sample(row["model"]),
+                                            # O163: the leaf's value on that harness, planted plus unplanted.
+                                            **({"extras": row["extras"], "totalFound": row["fixedOf105"] + row["extras"]} if row.get("extras") is not None else {})}
     return sorted(best.values(), key=lambda item: item["harness"]) if len(best) > 1 else None
 
 

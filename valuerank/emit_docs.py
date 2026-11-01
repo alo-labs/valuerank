@@ -45,7 +45,7 @@ COHORT_ROUTES = (
     ("Left AA's rendered frontier and near gap at this release", "Left the frontier and near gap at this release, kept one more release (O145)"),
 )
 LEAF_TRANSFORMS = {
-    "bugHunt": "z = 100 × bugs fixed / 105",
+    "bugHunt": "z = planted + unplanted bugs fixed (O163; no rescaling or ceiling)",
     "frontierCode": "z = 100 × score",
     "terminalBench": "z = resolution %",
     "gdpval": "z = 100 × (Elo − 500) / 2000 (AA's integration transform)",
@@ -529,9 +529,9 @@ def research_coverage_text(v3):
 def cross_harness_text(facts):
     """E224: configurations Bug Hunt reports on two or more harnesses at the same effort (a diagnostic, no score change)."""
 
-    parts = [f"{facts.names.get(row['id'], row['id'])}: " + ", ".join(f"{item['harness']} {fnum(item['fixedOf105'], 1)} ({item['runs']} run{'s' if item['runs'] != 1 else ''})" for item in row["bugHuntCrossHarness"])
+    parts = [f"{facts.names.get(row['id'], row['id'])}: " + ", ".join(f"{item['harness']} {fnum(item.get('totalFound', item['fixedOf105']), 1)} ({item['runs']} run{'s' if item['runs'] != 1 else ''})" for item in row["bugHuntCrossHarness"])
              for row in facts.scores["models"] if row.get("rankingEligible") and row.get("bugHuntCrossHarness")]
-    return ("Cross-harness results at the same effort (E224, diagnostic): " + "; ".join(parts) + ".") if parts else "No ranked configuration has Bug Hunt results on two harnesses at the same effort (E224)."
+    return ("Cross-harness results at the same effort, planted plus unplanted bugs fixed (E224, O163, diagnostic): " + "; ".join(parts) + ".") if parts else "No ranked configuration has Bug Hunt results on two harnesses at the same effort (E224)."
 
 
 def selected_agents_text(facts, tb4):
@@ -1864,7 +1864,8 @@ def raw_data(facts):
             usd(check.get("reconstructedTotalUsd")), usd(check.get("publishedTotalUsd")), "yes" if check.get("reconciled") else "no",
         ])
     bug_rows = [
-        [facts.names.get(record["modelId"], record["modelId"]), record["evaluatedModel"], fnum(record["fixedOf105"], 1), record["sampleN"], record["effort"], record["harness"]]
+        [facts.names.get(record["modelId"], record["modelId"]), record["evaluatedModel"], fnum(record["fixedOf105"], 1), fnum(record.get("extras"), 1),
+         fnum(record.get("totalFound"), 1), record["sampleN"], record["effort"], record["harness"]]
         for record in facts.bug_hunt["models"]
         if record.get("matched") is True
     ]
@@ -1943,9 +1944,9 @@ AA withdrew DeepSWE v1.1 from its Coding Agent Index (v2.0, October 2026) and th
 
 ## Bug Hunt Bench matched runs
 
-Owner-published runs at commit `{facts.bug_hunt['sourceCommit']}`; the score is the owner's largest-sample mean of bugs fixed of 105 for the exact model and effort, with the harness that result was run on (E206). {cross_harness_text(facts)}
+Owner-published runs at commit `{facts.bug_hunt['sourceCommit']}`; the record is the owner's largest-sample mean for the exact model and effort, and the leaf (owner decision O163) is its planted bugs fixed (of 105, the board's own score) plus the genuine unplanted bugs it fixed, a plain sum with no ceiling, with the harness that result was run on (E206). {cross_harness_text(facts)}
 
-{markdown_table(['Model', 'Evaluated model', 'Bugs fixed of 105', 'Runs', 'Effort', 'Harness'], bug_rows, numeric={2, 3})}
+{markdown_table(['Model', 'Evaluated model', 'Planted bugs fixed of 105', 'Unplanted bugs fixed', 'Leaf (sum, O163)', 'Runs', 'Effort', 'Harness'], bug_rows, numeric={2, 3, 4, 5})}
 
 ## Plan routes
 

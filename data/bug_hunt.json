@@ -198,7 +198,9 @@
       "judge": "grok-4.7 blinded to arm identity (the default OpenAI judge is disqualified for an OpenAI model)",
       "wallMinutes": 19.3,
       "listRateCostUsd": 0.2,
-      "note": "Single official run of GPT-6 Luna at low effort through OpenAI's Codex CLI 0.155.1 on a ChatGPT account (repo 1 1/45, repo 2 3/60; 9 unplanted extras, never scored); the owner publishes no repeated low runs, so treat it as one draw (the owner reports a 13-point spread between two runs of one identical configuration). Codex 0.155.1 is newer than the 0.154.0 build of the older OpenAI rows, which refuses this model; the GPT-6 Luna rungs compare cleanly with each other. The machine was idle for both legs. Cost is a list-rate floor at OpenAI's short-context rates (the long-context surcharge is not modelled), not a bill. Owner decision O51 (2026-10-23): every configuration AA plots on its rendered frontier or within 3 Index points of it is its own row; no result is transferred between efforts."
+      "note": "Single official run of GPT-6 Luna at low effort through OpenAI's Codex CLI 0.155.1 on a ChatGPT account (repo 1 1/45, repo 2 3/60; 9 unplanted extras, never scored); the owner publishes no repeated low runs, so treat it as one draw (the owner reports a 13-point spread between two runs of one identical configuration). Codex 0.155.1 is newer than the 0.154.0 build of the older OpenAI rows, which refuses this model; the GPT-6 Luna rungs compare cleanly with each other. The machine was idle for both legs. Cost is a list-rate floor at OpenAI's short-context rates (the long-context surcharge is not modelled), not a bill. Owner decision O51 (2026-10-23): every configuration AA plots on its rendered frontier or within 3 Index points of it is its own row; no result is transferred between efforts.",
+      "extras": 9,
+      "totalFound": 13.0
     },
     {
       "modelId": "gpt-6-luna-medium",
@@ -221,7 +223,9 @@
       "judge": "grok-4.7 blinded to arm identity (the default OpenAI judge is disqualified for an OpenAI model)",
       "wallMinutes": 8.6,
       "listRateCostUsd": 0.06,
-      "note": "Single official run of GPT-6 Luna at medium effort through OpenAI's Codex CLI 0.155.1 on a ChatGPT account (repo 1 2/45, repo 2 2/60; 0 unplanted extras, never scored); the owner publishes no repeated medium runs, so treat it as one draw (the owner reports a 13-point spread between two runs of one identical configuration). Codex 0.155.1 is newer than the 0.154.0 build of the older OpenAI rows, which refuses this model; the GPT-6 Luna rungs compare cleanly with each other. The machine was idle for both legs. Cost is a list-rate floor at OpenAI's short-context rates (the long-context surcharge is not modelled), not a bill. Owner decision O51 (2026-10-23): every configuration AA plots on its rendered frontier or within 3 Index points of it is its own row; no result is transferred between efforts."
+      "note": "Single official run of GPT-6 Luna at medium effort through OpenAI's Codex CLI 0.155.1 on a ChatGPT account (repo 1 2/45, repo 2 2/60; 0 unplanted extras, never scored); the owner publishes no repeated medium runs, so treat it as one draw (the owner reports a 13-point spread between two runs of one identical configuration). Codex 0.155.1 is newer than the 0.154.0 build of the older OpenAI rows, which refuses this model; the GPT-6 Luna rungs compare cleanly with each other. The machine was idle for both legs. Cost is a list-rate floor at OpenAI's short-context rates (the long-context surcharge is not modelled), not a bill. Owner decision O51 (2026-10-23): every configuration AA plots on its rendered frontier or within 3 Index points of it is its own row; no result is transferred between efforts.",
+      "extras": 0,
+      "totalFound": 4.0
     },
     {
       "modelId": "claude-haiku-5-5-low",
@@ -243,7 +247,9 @@
       "judge": "Codex gpt-5.5, blind; neither this model nor a sibling",
       "wallMinutes": 8.7,
       "listRateCostUsd": 1.61,
-      "note": "Single official run of Claude Haiku 5.5 at low effort through Claude Code on the first-party API (repo 1 4/45, repo 2 7/60); the owner publishes no repeated low runs, so treat it as one draw. Four legs ran at once on one account. Cost is a list-rate estimate priced per request, not an invoice. Owner decision O33 (2026-10-21): every evidenced effort is ranked as its own row; this record was an other-effort row of the family before."
+      "note": "Single official run of Claude Haiku 5.5 at low effort through Claude Code on the first-party API (repo 1 4/45, repo 2 7/60); the owner publishes no repeated low runs, so treat it as one draw. Four legs ran at once on one account. Cost is a list-rate estimate priced per request, not an invoice. Owner decision O33 (2026-10-21): every evidenced effort is ranked as its own row; this record was an other-effort row of the family before.",
+      "extras": 2,
+      "totalFound": 13.0
     },
     {
       "modelId": "gpt-6-luna-high",
@@ -266,7 +272,9 @@
       "judge": "grok-4.7 blinded to arm identity (the default OpenAI judge is disqualified for an OpenAI model)",
       "wallMinutes": 24.4,
       "listRateCostUsd": 0.13,
-      "note": "Single official run of GPT-6 Luna at high effort through OpenAI's Codex CLI 0.155.1 on a ChatGPT account (repo 1 2/45, repo 2 7/60; 9 unplanted extras, never scored); the owner publishes no repeated high runs, so treat it as one draw (the owner reports a 13-point spread between two runs of one identical configuration). Codex 0.155.1 is newer than the 0.154.0 build of the older OpenAI rows, which refuses this model; the GPT-6 Luna rungs compare cleanly with each other. The machine was idle for both legs. Cost is a list-rate floor at OpenAI's short-context rates (the long-context surcharge is not modelled), not a bill. Owner decision O51 (2026-10-23): every configuration AA plots on its rendered frontier or within 3 Index points of it is its own row; no result is transferred between efforts."
+      "note": "Single official run of GPT-6 Luna at high effort through OpenAI's Codex CLI 0.155.1 on a ChatGPT account (repo 1 2/45, repo 2 7/60; 9 unplanted extras, never scored); the owner publishes no repeated high runs, so treat it as one draw (the owner reports a 13-point spread between two runs of one identical configuration). Codex 0.155.1 is newer than the 0.154.0 build of the older OpenAI rows, which refuses this model; the GPT-6 Luna rungs compare cleanly with each other. The machine was idle for both legs. Cost is a list-rate floor at OpenAI's short-context rates (the long-context surcharge is not modelled), not a bill. Owner decision O51 (2026-10-23): every configuration AA plots on its rendered frontier or within 3 Index points of it is its own row; no result is transferred between efforts.",
+      "extras": 9,
+      "totalFound": 18.0
     },
     {
       "modelId": "claude-haiku-5-5-medium",
@@ -288,7 +296,9 @@
       "judge": "Codex gpt-5.5, blind; neither this model nor a sibling",
       "wallMinutes": 15.5,
       "listRateCostUsd": 2.66,
-      "note": "Single official run of Claude Haiku 5.5 at medium effort (the model's API default) through Claude Code on the first-party API (repo 1 5/45, repo 2 7/60); the owner publishes no repeated medium runs, so treat it as one draw. Four legs ran at once on one account. Cost is a list-rate estimate priced per request, not an invoice. Owner decision O33 (2026-10-21): every evidenced effort is ranked as its own row; this record was an other-effort row of the family before."
+      "note": "Single official run of Claude Haiku 5.5 at medium effort (the model's API default) through Claude Code on the first-party API (repo 1 5/45, repo 2 7/60); the owner publishes no repeated medium runs, so treat it as one draw. Four legs ran at once on one account. Cost is a list-rate estimate priced per request, not an invoice. Owner decision O33 (2026-10-21): every evidenced effort is ranked as its own row; this record was an other-effort row of the family before.",
+      "extras": 4,
+      "totalFound": 16.0
     },
     {
       "modelId": "mimo-v2-6-flash",
@@ -316,7 +326,9 @@
       "reportedOn": "2026-10-27",
       "sourceCommit": "12497971d928cc5ad97a184755734720388bc07f",
       "sourceUrl": "https://github.com/phuryn/bug-hunt-bench/blob/12497971d928cc5ad97a184755734720388bc07f/results/run-notes.md",
-      "note": "Owner-published mean of 3, read 2026-10-30 (O132)."
+      "note": "Owner-published mean of 3, read 2026-10-30 (O132).",
+      "extras": 5,
+      "totalFound": 11
     },
     {
       "modelId": "claude-haiku-5-5-high",
@@ -343,7 +355,9 @@
       "judge": "Codex gpt-5.5, blind; neither this model nor a sibling",
       "wallMinutes": 19.3,
       "listRateCostUsd": 3.56,
-      "note": "Owner-published mean of two runs of Claude Haiku 5.5 at high effort through Claude Code on the first-party API (15 and 17 of 105), superseding the owner's single high run (15). The owner did not capture high on the wire separately; the xhigh and max captures on the same CLI build showed the effort flag passed through verbatim. Each run took its two repository legs at the same time on one account. Cost is a list-rate estimate priced per request, not an invoice. Owner decision O33 (2026-10-21): every evidenced effort is ranked as its own row; this record was an other-effort row of the family before."
+      "note": "Owner-published mean of two runs of Claude Haiku 5.5 at high effort through Claude Code on the first-party API (15 and 17 of 105), superseding the owner's single high run (15). The owner did not capture high on the wire separately; the xhigh and max captures on the same CLI build showed the effort flag passed through verbatim. Each run took its two repository legs at the same time on one account. Cost is a list-rate estimate priced per request, not an invoice. Owner decision O33 (2026-10-21): every evidenced effort is ranked as its own row; this record was an other-effort row of the family before.",
+      "extras": 4,
+      "totalFound": 20.0
     },
     {
       "modelId": "gpt-6.1-terra-medium",
@@ -363,7 +377,9 @@
       "reportedOn": "2026-10-27",
       "sourceCommit": "12497971d928cc5ad97a184755734720388bc07f",
       "sourceUrl": "https://github.com/phuryn/bug-hunt-bench/blob/12497971d928cc5ad97a184755734720388bc07f/results/run-notes.md",
-      "note": "Owner-published mean of 3, read 2026-10-30 (O132)."
+      "note": "Owner-published mean of 3, read 2026-10-30 (O132).",
+      "extras": 7.3,
+      "totalFound": 14.6
     },
     {
       "modelId": "gpt-6.1-terra-high",
@@ -383,7 +399,9 @@
       "reportedOn": "2026-10-26",
       "sourceCommit": "12497971d928cc5ad97a184755734720388bc07f",
       "sourceUrl": "https://github.com/phuryn/bug-hunt-bench/blob/12497971d928cc5ad97a184755734720388bc07f/results/run-notes.md",
-      "note": "Owner-published mean of 3, read 2026-10-30 (O132)."
+      "note": "Owner-published mean of 3, read 2026-10-30 (O132).",
+      "extras": 6.7,
+      "totalFound": 16.4
     },
     {
       "modelId": "gpt-6.1-sol-medium",
@@ -411,7 +429,9 @@
       "judge": "grok-4.7 blinded to arm identity",
       "wallMinutes": 29.8,
       "listRateCostUsd": 1.76,
-      "note": "Owner-published mean of two identical medium configurations through Codex 0.159.0 on a ChatGPT account (28, 30 of 105). Codex 0.159.0 differs from older OpenAI rows. Cost is a list-rate estimate, not an invoice; no request reached long-context rates. Some laptop load may inflate wall time. Supersedes the owner's single medium run (28 of 105). Owner decision O33 (2026-10-21): every evidenced effort is ranked as its own row; this record was an other-effort row of the family before."
+      "note": "Owner-published mean of two identical medium configurations through Codex 0.159.0 on a ChatGPT account (28, 30 of 105). Codex 0.159.0 differs from older OpenAI rows. Cost is a list-rate estimate, not an invoice; no request reached long-context rates. Some laptop load may inflate wall time. Supersedes the owner's single medium run (28 of 105). Owner decision O33 (2026-10-21): every evidenced effort is ranked as its own row; this record was an other-effort row of the family before.",
+      "extras": 30.5,
+      "totalFound": 59.5
     },
     {
       "modelId": "gpt-6.1-sol-high",
@@ -439,7 +459,9 @@
       "judge": "grok-4.7 blinded to arm identity",
       "wallMinutes": 70.3,
       "listRateCostUsd": 3.26,
-      "note": "Owner-published mean of two identical high configurations through Codex 0.159.0 on a ChatGPT account (38, 35 of 105). Codex 0.159.0 differs from older OpenAI rows. Cost is a list-rate estimate, not an invoice; no request reached long-context rates. Some laptop load may inflate wall time. Supersedes the owner's single high run (38 of 105). Owner decision O33 (2026-10-21): every evidenced effort is ranked as its own row; this record was an other-effort row of the family before."
+      "note": "Owner-published mean of two identical high configurations through Codex 0.159.0 on a ChatGPT account (38, 35 of 105). Codex 0.159.0 differs from older OpenAI rows. Cost is a list-rate estimate, not an invoice; no request reached long-context rates. Some laptop load may inflate wall time. Supersedes the owner's single high run (38 of 105). Owner decision O33 (2026-10-21): every evidenced effort is ranked as its own row; this record was an other-effort row of the family before.",
+      "extras": 40,
+      "totalFound": 76.5
     },
     {
       "modelId": "gpt-6.1-sol-xhigh",
@@ -468,7 +490,9 @@
       "judge": "grok-4.7 blinded to arm identity",
       "wallMinutes": 98.7,
       "listRateCostUsd": 4.35,
-      "note": "Owner-published mean of three identical xhigh configurations through Codex 0.159.0 on a ChatGPT account (41, 43, 44 of 105). Codex 0.159.0 differs from older OpenAI rows. Cost is a list-rate estimate, not an invoice; no request reached long-context rates. Some laptop load may inflate wall time. Supersedes the owner's single xhigh run (41 of 105). Owner decision O33 (2026-10-21): every evidenced effort is ranked as its own row; this record was an other-effort row of the family before."
+      "note": "Owner-published mean of three identical xhigh configurations through Codex 0.159.0 on a ChatGPT account (41, 43, 44 of 105). Codex 0.159.0 differs from older OpenAI rows. Cost is a list-rate estimate, not an invoice; no request reached long-context rates. Some laptop load may inflate wall time. Supersedes the owner's single xhigh run (41 of 105). Owner decision O33 (2026-10-21): every evidenced effort is ranked as its own row; this record was an other-effort row of the family before.",
+      "extras": 56.7,
+      "totalFound": 99.4
     },
     {
       "modelId": "gpt-6.1-sol",
@@ -497,7 +521,9 @@
       "judge": "grok-4.7 blinded to arm identity",
       "wallMinutes": 139.3,
       "listRateCostUsd": 5.88,
-      "note": "Owner-published mean of three identical Max configurations; 44.3/105 is the owner's published one-decimal mean. Codex0.159.0 differs from older OpenAI rows; max is below ultra. Some laptop load may inflate wall time. Cost is a list-rate estimate, not an invoice; no retained request reached long-context rates. Earlier sandbox-blocked attempt voided and excluded; extras65.3 are unscored."
+      "note": "Owner-published mean of three identical Max configurations; 44.3/105 is the owner's published one-decimal mean. Codex0.159.0 differs from older OpenAI rows; max is below ultra. Some laptop load may inflate wall time. Cost is a list-rate estimate, not an invoice; no retained request reached long-context rates. Earlier sandbox-blocked attempt voided and excluded; extras65.3 are unscored.",
+      "extras": 65.3,
+      "totalFound": 109.6
     },
     {
       "modelId": "gpt-6-astra-high",
@@ -518,7 +544,9 @@
       "sourceUrl": "https://github.com/phuryn/bug-hunt-bench/blob/46802fc312b6fd467b0baee519df05693f120232/results/run-notes.md#user-content-gpt-6-astra-high-effort",
       "wallMinutes": 40.5,
       "listRateCostUsd": 20.6,
-      "note": "Single official run at high effort through Codex CLI (repo 1 19/45, repo 2 16/60); the owner publishes no repeated high runs, so treat it as one draw. The owner's run-notes entry carries only the result line (no caveat, judge or route detail); route recorded as for the family's GPT-6 Astra (max) record. Cost is the owner's list-rate figure, not an invoice. Owner decision O51 (2026-10-23): every configuration AA plots on its rendered frontier or within 3 Index points of it is its own row; no result is transferred between efforts."
+      "note": "Single official run at high effort through Codex CLI (repo 1 19/45, repo 2 16/60); the owner publishes no repeated high runs, so treat it as one draw. The owner's run-notes entry carries only the result line (no caveat, judge or route detail); route recorded as for the family's GPT-6 Astra (max) record. Cost is the owner's list-rate figure, not an invoice. Owner decision O51 (2026-10-23): every configuration AA plots on its rendered frontier or within 3 Index points of it is its own row; no result is transferred between efforts.",
+      "extras": 40,
+      "totalFound": 75.0
     },
     {
       "modelId": "gpt-6-astra-xhigh",
@@ -539,7 +567,9 @@
       "sourceUrl": "https://github.com/phuryn/bug-hunt-bench/blob/46802fc312b6fd467b0baee519df05693f120232/results/run-notes.md#user-content-gpt-6-astra-xhigh-effort",
       "wallMinutes": 58.8,
       "listRateCostUsd": 24.22,
-      "note": "Single official run at xhigh effort through Codex CLI (repo 1 23/45, repo 2 20/60); the owner publishes no repeated xhigh runs, so treat it as one draw. The owner's run-notes entry carries only the result line (no caveat, judge or route detail); route recorded as for the family's GPT-6 Astra (max) record. Cost is the owner's list-rate figure, not an invoice. Owner decision O51 (2026-10-23): every configuration AA plots on its rendered frontier or within 3 Index points of it is its own row; no result is transferred between efforts."
+      "note": "Single official run at xhigh effort through Codex CLI (repo 1 23/45, repo 2 20/60); the owner publishes no repeated xhigh runs, so treat it as one draw. The owner's run-notes entry carries only the result line (no caveat, judge or route detail); route recorded as for the family's GPT-6 Astra (max) record. Cost is the owner's list-rate figure, not an invoice. Owner decision O51 (2026-10-23): every configuration AA plots on its rendered frontier or within 3 Index points of it is its own row; no result is transferred between efforts.",
+      "extras": 53,
+      "totalFound": 96.0
     },
     {
       "modelId": "claude-opus-5-5-xhigh",
@@ -567,7 +597,9 @@
       "judge": "Codex gpt-5.5, blind; scoring an Anthropic model",
       "wallMinutes": 42.5,
       "listRateCostUsd": 34.98,
-      "note": "Benchmark-owner scoreboard mean of three Opus 5.5 xhigh-effort runs through Claude Code on the first-party API (35, 37 and 36 of 105; repo 1 16, 19, 16 of 45, repo 2 19, 18, 20 of 60; spread 2), superseding the owner's single run and mean of two at the same effort. Model string claude-opus-5-5[1m] (1M window, zero compactions); runs sequential, walls contended by other vendors' legs. The AA 'xhigh with fallback' configuration maps to the owner's '(xhigh effort)' row, the same convention as the Opus 5.5 max entry (AA's 'max with fallback' to the owner's '(max effort)') and the Sonnet 5.5 entries: AA plots every Claude configuration only with Default Fallback (E214), so the qualifier names AA's serving setting and the record matches by model and effort. Cost is a list-rate estimate at Anthropic's published Opus 5.5 rates, not an invoice. Owner decision O51 (2026-10-23): every configuration AA plots on its rendered frontier or within 3 Index points of it is its own row; no result is transferred between efforts."
+      "note": "Benchmark-owner scoreboard mean of three Opus 5.5 xhigh-effort runs through Claude Code on the first-party API (35, 37 and 36 of 105; repo 1 16, 19, 16 of 45, repo 2 19, 18, 20 of 60; spread 2), superseding the owner's single run and mean of two at the same effort. Model string claude-opus-5-5[1m] (1M window, zero compactions); runs sequential, walls contended by other vendors' legs. The AA 'xhigh with fallback' configuration maps to the owner's '(xhigh effort)' row, the same convention as the Opus 5.5 max entry (AA's 'max with fallback' to the owner's '(max effort)') and the Sonnet 5.5 entries: AA plots every Claude configuration only with Default Fallback (E214), so the qualifier names AA's serving setting and the record matches by model and effort. Cost is a list-rate estimate at Anthropic's published Opus 5.5 rates, not an invoice. Owner decision O51 (2026-10-23): every configuration AA plots on its rendered frontier or within 3 Index points of it is its own row; no result is transferred between efforts.",
+      "extras": 13.3,
+      "totalFound": 49.3
     },
     {
       "modelId": "gemini-4-carbon",
@@ -596,7 +628,9 @@
       "judge": "grok-4.7 blinded to arm identity (the default OpenAI judge is disqualified for an OpenAI model)",
       "wallMinutes": 57.0,
       "listRateCostUsd": 0.39,
-      "note": "Single official run of GPT-6 Luna at xhigh effort through OpenAI's Codex CLI 0.155.1 on a ChatGPT account (repo 1 4/45, repo 2 10/60; 12 unplanted extras, never scored); the owner publishes no repeated xhigh runs, so treat it as one draw (the owner reports a 13-point spread between two runs of one identical configuration). Codex 0.155.1 is newer than the 0.154.0 build of the older OpenAI rows, which refuses this model; the GPT-6 Luna rungs compare cleanly with each other. The machine was idle for both legs. Cost is a list-rate floor at OpenAI's short-context rates (the long-context surcharge is not modelled), not a bill. Owner decision O51 (2026-10-23): every configuration AA plots on its rendered frontier or within 3 Index points of it is its own row; no result is transferred between efforts."
+      "note": "Single official run of GPT-6 Luna at xhigh effort through OpenAI's Codex CLI 0.155.1 on a ChatGPT account (repo 1 4/45, repo 2 10/60; 12 unplanted extras, never scored); the owner publishes no repeated xhigh runs, so treat it as one draw (the owner reports a 13-point spread between two runs of one identical configuration). Codex 0.155.1 is newer than the 0.154.0 build of the older OpenAI rows, which refuses this model; the GPT-6 Luna rungs compare cleanly with each other. The machine was idle for both legs. Cost is a list-rate floor at OpenAI's short-context rates (the long-context surcharge is not modelled), not a bill. Owner decision O51 (2026-10-23): every configuration AA plots on its rendered frontier or within 3 Index points of it is its own row; no result is transferred between efforts.",
+      "extras": 12,
+      "totalFound": 26.0
     },
     {
       "modelId": "gpt-6-luna",
@@ -616,7 +650,9 @@
       "reportedOn": "2026-09-23",
       "sourceCommit": "12497971d928cc5ad97a184755734720388bc07f",
       "sourceUrl": "https://github.com/phuryn/bug-hunt-bench/blob/12497971d928cc5ad97a184755734720388bc07f/results/run-notes.md",
-      "note": "Owner-published mean of 3, read 2026-10-30 (O132)."
+      "note": "Owner-published mean of 3, read 2026-10-30 (O132).",
+      "extras": 22.7,
+      "totalFound": 41.0
     },
     {
       "modelId": "gpt-6.1-sol-low",
@@ -644,7 +680,9 @@
       "judge": "grok-4.7 blinded to arm identity",
       "wallMinutes": 25.4,
       "listRateCostUsd": 1.34,
-      "note": "Owner-published mean of two identical low configurations through Codex 0.159.0 on a ChatGPT account (31, 14 of 105). Codex 0.159.0 differs from older OpenAI rows. Cost is a list-rate estimate, not an invoice; no request reached long-context rates. Some laptop load may inflate wall time. Supersedes the owner's single low run (31 of 105). Owner decision O33 (2026-10-21): every evidenced effort is ranked as its own row; this record was an other-effort row of the family before."
+      "note": "Owner-published mean of two identical low configurations through Codex 0.159.0 on a ChatGPT account (31, 14 of 105). Codex 0.159.0 differs from older OpenAI rows. Cost is a list-rate estimate, not an invoice; no request reached long-context rates. Some laptop load may inflate wall time. Supersedes the owner's single low run (31 of 105). Owner decision O33 (2026-10-21): every evidenced effort is ranked as its own row; this record was an other-effort row of the family before.",
+      "extras": 24,
+      "totalFound": 46.5
     },
     {
       "modelId": "gpt-6.1-terra-xhigh",
@@ -664,7 +702,9 @@
       "reportedOn": "2026-10-26",
       "sourceCommit": "12497971d928cc5ad97a184755734720388bc07f",
       "sourceUrl": "https://github.com/phuryn/bug-hunt-bench/blob/12497971d928cc5ad97a184755734720388bc07f/results/run-notes.md",
-      "note": "Owner-published mean of 3, read 2026-10-30 (O132)."
+      "note": "Owner-published mean of 3, read 2026-10-30 (O132).",
+      "extras": 17,
+      "totalFound": 28.3
     },
     {
       "modelId": "gpt-6.1-terra",
@@ -684,7 +724,9 @@
       "reportedOn": "2026-10-26",
       "sourceCommit": "12497971d928cc5ad97a184755734720388bc07f",
       "sourceUrl": "https://github.com/phuryn/bug-hunt-bench/blob/12497971d928cc5ad97a184755734720388bc07f/results/run-notes.md",
-      "note": "Owner-published mean of 3, read 2026-10-30 (O132)."
+      "note": "Owner-published mean of 3, read 2026-10-30 (O132).",
+      "extras": 48,
+      "totalFound": 88.7
     },
     {
       "modelId": "claude-opus-5-5-high",
@@ -712,7 +754,9 @@
       "judge": "Codex gpt-5.5, blind; scoring an Anthropic model",
       "wallMinutes": 23.9,
       "listRateCostUsd": 22.25,
-      "note": "Benchmark-owner scoreboard mean of three Opus 5.5 high-effort runs through Claude Code on the first-party API (32, 32 and 31 of 105; repo 1 14, 13, 12 of 45, repo 2 18, 19, 19 of 60; spread 1), superseding the owner's single run and mean of two at the same effort. Model string claude-opus-5-5[1m] (1M window, zero compactions); runs sequential, walls contended by other vendors' legs. The AA 'high with fallback' configuration maps to the owner's '(high effort)' row, the same convention as the Opus 5.5 max entry (AA's 'max with fallback' to the owner's '(max effort)') and the Sonnet 5.5 entries: AA plots every Claude configuration only with Default Fallback (E214), so the qualifier names AA's serving setting and the record matches by model and effort. Cost is a list-rate estimate at Anthropic's published Opus 5.5 rates, not an invoice. Owner decision O51 (2026-10-23): every configuration AA plots on its rendered frontier or within 3 Index points of it is its own row; no result is transferred between efforts."
+      "note": "Benchmark-owner scoreboard mean of three Opus 5.5 high-effort runs through Claude Code on the first-party API (32, 32 and 31 of 105; repo 1 14, 13, 12 of 45, repo 2 18, 19, 19 of 60; spread 1), superseding the owner's single run and mean of two at the same effort. Model string claude-opus-5-5[1m] (1M window, zero compactions); runs sequential, walls contended by other vendors' legs. The AA 'high with fallback' configuration maps to the owner's '(high effort)' row, the same convention as the Opus 5.5 max entry (AA's 'max with fallback' to the owner's '(max effort)') and the Sonnet 5.5 entries: AA plots every Claude configuration only with Default Fallback (E214), so the qualifier names AA's serving setting and the record matches by model and effort. Cost is a list-rate estimate at Anthropic's published Opus 5.5 rates, not an invoice. Owner decision O51 (2026-10-23): every configuration AA plots on its rendered frontier or within 3 Index points of it is its own row; no result is transferred between efforts.",
+      "extras": 10.7,
+      "totalFound": 42.4
     },
     {
       "modelId": "gpt-6-astra",
@@ -731,7 +775,9 @@
       "observedAt": "2026-10-18",
       "reportedOn": "2026-09-14",
       "sourceCommit": "aec976170df89a371384174ca87646a9a8c82415",
-      "sourceUrl": "https://github.com/phuryn/bug-hunt-bench/blob/aec976170df89a371384174ca87646a9a8c82415/results/run-notes.md#user-content-gpt-6-astra-max-effort---mean-of-3"
+      "sourceUrl": "https://github.com/phuryn/bug-hunt-bench/blob/aec976170df89a371384174ca87646a9a8c82415/results/run-notes.md#user-content-gpt-6-astra-max-effort---mean-of-3",
+      "extras": 55,
+      "totalFound": 100.0
     },
     {
       "modelId": "claude-sonnet-5-5",
@@ -759,7 +805,9 @@
       "judge": "Codex gpt-5.5, blind; scoring an Anthropic model",
       "wallMinutes": 287.1,
       "listRateCostUsd": 154.03,
-      "note": "Benchmark-owner scoreboard mean of three Sonnet 5.5 max-effort runs (57, 54 and 43 of 105; spread 14), superseding the owner's mean of two (55.5). The AA 'max with fallback' configuration maps to the owner's '(max effort)' row, the same convention as the Opus 5.5 entry. Cost is a list-rate estimate, not an invoice; the owner notes the harness priced this model on another model's table."
+      "note": "Benchmark-owner scoreboard mean of three Sonnet 5.5 max-effort runs (57, 54 and 43 of 105; spread 14), superseding the owner's mean of two (55.5). The AA 'max with fallback' configuration maps to the owner's '(max effort)' row, the same convention as the Opus 5.5 entry. Cost is a list-rate estimate, not an invoice; the owner notes the harness priced this model on another model's table.",
+      "extras": 26.3,
+      "totalFound": 77.6
     },
     {
       "modelId": "claude-opus-5-5",
@@ -778,7 +826,9 @@
       "observedAt": "2026-10-18",
       "reportedOn": "2026-09-23",
       "sourceCommit": "aec976170df89a371384174ca87646a9a8c82415",
-      "sourceUrl": "https://github.com/phuryn/bug-hunt-bench/blob/aec976170df89a371384174ca87646a9a8c82415/results/run-notes.md#user-content-opus-55-max-effort---mean-of-3"
+      "sourceUrl": "https://github.com/phuryn/bug-hunt-bench/blob/aec976170df89a371384174ca87646a9a8c82415/results/run-notes.md#user-content-opus-55-max-effort---mean-of-3",
+      "extras": 9,
+      "totalFound": 50.7
     },
     {
       "modelId": "claude-haiku-5-5",
@@ -798,7 +848,9 @@
       "reportedOn": "2026-10-07",
       "sourceCommit": "12497971d928cc5ad97a184755734720388bc07f",
       "sourceUrl": "https://github.com/phuryn/bug-hunt-bench/blob/12497971d928cc5ad97a184755734720388bc07f/results/run-notes.md",
-      "note": "Owner-published mean of 3, read 2026-11-01 (O145)."
+      "note": "Owner-published mean of 3, read 2026-11-01 (O145).",
+      "extras": 6.7,
+      "totalFound": 25.0
     },
     {
       "modelId": "claude-haiku-5-5-max",
@@ -818,7 +870,9 @@
       "reportedOn": "2026-10-07",
       "sourceCommit": "12497971d928cc5ad97a184755734720388bc07f",
       "sourceUrl": "https://github.com/phuryn/bug-hunt-bench/blob/12497971d928cc5ad97a184755734720388bc07f/results/run-notes.md",
-      "note": "Owner-published mean of 2, read 2026-11-01 (O145)."
+      "note": "Owner-published mean of 2, read 2026-11-01 (O145).",
+      "extras": 9,
+      "totalFound": 30.5
     },
     {
       "modelId": "claude-opus-5-5-medium",
@@ -838,7 +892,9 @@
       "reportedOn": "2026-09-23",
       "sourceCommit": "12497971d928cc5ad97a184755734720388bc07f",
       "sourceUrl": "https://github.com/phuryn/bug-hunt-bench/blob/12497971d928cc5ad97a184755734720388bc07f/results/run-notes.md",
-      "note": "Owner-published mean of 3, read 2026-11-01 (O145)."
+      "note": "Owner-published mean of 3, read 2026-11-01 (O145).",
+      "extras": 13.3,
+      "totalFound": 43.6
     },
     {
       "modelId": "claude-sonnet-5-5-xhigh",
@@ -858,7 +914,9 @@
       "reportedOn": "2026-09-29",
       "sourceCommit": "12497971d928cc5ad97a184755734720388bc07f",
       "sourceUrl": "https://github.com/phuryn/bug-hunt-bench/blob/12497971d928cc5ad97a184755734720388bc07f/results/run-notes.md",
-      "note": "Owner-published mean of 3, read 2026-11-01 (O145)."
+      "note": "Owner-published mean of 3, read 2026-11-01 (O145).",
+      "extras": 14,
+      "totalFound": 50
     },
     {
       "modelId": "deepseek-v4-1-flash-1017",
@@ -879,7 +937,9 @@
       "sourceCommit": "12497971d928cc5ad97a184755734720388bc07f",
       "sourceUrl": "https://github.com/phuryn/bug-hunt-bench/blob/12497971d928cc5ad97a184755734720388bc07f/results/run-notes.md",
       "note": "Owner-published mean of 7, read 2026-11-01 (O145).",
-      "selectionReason": "Two owner means of seven runs exist at max effort: DeepSeek Harness 42.7 and Claude Code 39.1. The DeepSeek Harness row is DeepSeek's own agent, matching the benchmark's native-CLI method (the 2026-10-23 editor selection recorded in data/bug_hunt.json at f2a182a). Since commit 03d6127 (2026-10-27) the owner no longer features the Claude Code row; the DeepSeek Harness row stays featured."
+      "selectionReason": "Two owner means of seven runs exist at max effort: DeepSeek Harness 42.7 and Claude Code 39.1. The DeepSeek Harness row is DeepSeek's own agent, matching the benchmark's native-CLI method (the 2026-10-23 editor selection recorded in data/bug_hunt.json at f2a182a). Since commit 03d6127 (2026-10-27) the owner no longer features the Claude Code row; the DeepSeek Harness row stays featured.",
+      "extras": 44,
+      "totalFound": 86.7
     },
     {
       "modelId": "gemini-4-argon",
@@ -899,7 +959,9 @@
       "reportedOn": "2026-10-14",
       "sourceCommit": "12497971d928cc5ad97a184755734720388bc07f",
       "sourceUrl": "https://github.com/phuryn/bug-hunt-bench/blob/12497971d928cc5ad97a184755734720388bc07f/results/run-notes.md",
-      "note": "High is Gemini 4 Argon's ceiling. combined-scoreboard.csv also lists a single Gemini CLI run at high (33/105, a different harness; not in benchmark.json's current rows); the Antigravity CLI mean of 3 is the largest-sample mean (E206, E224)."
+      "note": "High is Gemini 4 Argon's ceiling. combined-scoreboard.csv also lists a single Gemini CLI run at high (33/105, a different harness; not in benchmark.json's current rows); the Antigravity CLI mean of 3 is the largest-sample mean (E206, E224).",
+      "extras": 7.3,
+      "totalFound": 48.0
     },
     {
       "modelId": "gpt-5.6-luna-low",
@@ -919,7 +981,9 @@
       "reportedOn": "2026-08-27",
       "sourceCommit": "12497971d928cc5ad97a184755734720388bc07f",
       "sourceUrl": "https://github.com/phuryn/bug-hunt-bench/blob/12497971d928cc5ad97a184755734720388bc07f/results/run-notes.md",
-      "note": "Owner-published single run, read 2026-11-01 (O145)."
+      "note": "Owner-published single run, read 2026-11-01 (O145).",
+      "extras": 1,
+      "totalFound": 5
     },
     {
       "modelId": "kimi-k3-1-pro",
@@ -939,7 +1003,9 @@
       "reportedOn": "2026-10-23",
       "sourceCommit": "12497971d928cc5ad97a184755734720388bc07f",
       "sourceUrl": "https://github.com/phuryn/bug-hunt-bench/blob/12497971d928cc5ad97a184755734720388bc07f/results/run-notes.md",
-      "note": "Owner decision O66 (2026-10-25): AA plots Kimi K3.1 Pro without an effort; Moonshot's API documents reasoning_effort low / high / max with max the default, so its configuration is taken at max, its maximum effort."
+      "note": "Owner decision O66 (2026-10-25): AA plots Kimi K3.1 Pro without an effort; Moonshot's API documents reasoning_effort low / high / max with max the default, so its configuration is taken at max, its maximum effort.",
+      "extras": 29.3,
+      "totalFound": 65.3
     },
     {
       "modelId": "mimo-v2-6-pro",
@@ -959,7 +1025,9 @@
       "reportedOn": "2026-09-22",
       "sourceCommit": "12497971d928cc5ad97a184755734720388bc07f",
       "sourceUrl": "https://github.com/phuryn/bug-hunt-bench/blob/12497971d928cc5ad97a184755734720388bc07f/results/run-notes.md",
-      "note": "Owner decision O54 / E252: AA plots MiMo-V2.6-Pro without an effort; Xiaomi documents one thinking mode for mimo-v2.6-pro (thinking.type enabled/disabled, default enabled; re-read 2026-11-01, mimo/), so the configuration is thinking enabled, which the owner labels high: a source row labelled high, or stating reasoning enabled, is that configuration. Bug Hunt's first-party row asserts thinking.type=enabled on Xiaomi's API (effort token 'enabled'), the documented single mode (E206). The OpenRouter 'default' rows (current: mean of 3, 22.7) do not assert a reasoning state and stay unmatched, as at f2a182a."
+      "note": "Owner decision O54 / E252: AA plots MiMo-V2.6-Pro without an effort; Xiaomi documents one thinking mode for mimo-v2.6-pro (thinking.type enabled/disabled, default enabled; re-read 2026-11-01, mimo/), so the configuration is thinking enabled, which the owner labels high: a source row labelled high, or stating reasoning enabled, is that configuration. Bug Hunt's first-party row asserts thinking.type=enabled on Xiaomi's API (effort token 'enabled'), the documented single mode (E206). The OpenRouter 'default' rows (current: mean of 3, 22.7) do not assert a reasoning state and stay unmatched, as at f2a182a.",
+      "extras": 4,
+      "totalFound": 22
     },
     {
       "modelId": "minimax-m3-1-flash",
