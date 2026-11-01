@@ -13,7 +13,7 @@ two consecutive clean rounds and the panel ends when every model says NO FURTHER
 | 75 | Gemini 3.8 Flash (sectional) | r157 | findings (a Critical, Highs), folded into r158 (O141, O142, E279–E281) |
 | 76 | Claude Sonnet 5.5 (whole draft, part 6 re-sent) | r158 | findings, folded into r159 (O143–O149, E282–E284; cutoff moved under O145) |
 | 77 | Kimi K3 (four sections) | r159 | findings (a Critical, Highs), folded into r160 (O150–O152, E285–E288) |
-| 78 | GLM 5.3 (sections of at most two parts) | r160 | next |
+| 78 | GLM 5.3 (sections of at most two parts) | r160 | findings (two Highs), folding into r161 (O153–O156 asked and answered; implementation in progress) |
 | 79 | Grok 4.7 | | |
 
 To continue:

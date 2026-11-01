@@ -139,6 +139,8 @@ def named_figures(scores: dict, data: Path = DATA) -> dict:
         "cohort.boundaryOut": series(sorted(item["model_name"] for item in capture["points"] if item.get("intelligence_gap") == 4)) or "none",
         # O145: configurations retained one release after leaving the rendered frontier and the near gap.
         "cohort.retained": len(capture.get("retained", [])),
+        # Reviewer 78 H: the whole cohort, plotted plus retained (O145), the denominator of every coverage sentence.
+        "cohort.size": len(capture["frontier"]) + len(capture["near_frontier"]) + len(capture.get("retained", [])),
         "cohort.retainedNames": series(sorted(item["displayName"] for item in capture.get("retained", []))) or "none",
         "aa.plottedPoints": capture["universe"]["plotted_models_with_both_coordinates"],
         "aa.catalog": capture["universe"]["catalog_models"],
@@ -274,6 +276,9 @@ def named_figures(scores: dict, data: Path = DATA) -> dict:
     figures["rankedAny"] = len(set(ranked["max"]) | set(ranked["aicd"]))
     excluded = {item["id"] for item in sections["max"]["incompleteEvidence"]} & {item["id"] for item in sections["aicd"]["incompleteEvidence"]}
     figures["excluded"], figures["excluded.names"] = len(excluded), order(excluded)
+    # Reviewer 78 H: the coverage figures must close: cohort = ranked in either + ranked in neither.
+    if figures["rankedAny"] + figures["excluded"] != figures["cohort.size"]:
+        raise FigureError(f"coverage does not close: {figures['rankedAny']} ranked + {figures['excluded']} in neither != cohort {figures['cohort.size']}")
     # O121: how many configurations neither leading ranking ranks that the diagnostic ranking does.
     common_only = set(ranked["common"]) - set(ranked["max"]) - set(ranked["aicd"])
     figures["commonOnly"], figures["commonOnly.names"] = len(common_only), order(common_only)

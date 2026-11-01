@@ -2159,3 +2159,9 @@ Asked on I64 Q1 whether future O71 admissions should be executed by the build fr
 - E287. E41's workload cross-check is computed and always published (computed or suppressed, with its panel), with its headline warning.
 - E288. The two-ranking τ_b (E274) is published from eight shared configurations.
 
+
+## Owner decisions O153–O156 (2026-11-01), asked on reviewer 78 (GLM 5.3, r160)
+- O153 (FrontierCode 2.0 source): Cognition publishes its own FrontierCode 2.0 board (launched about 2026-10-27), which the draft's "no longer fills" sentence missed. Cognition's 2.0 board becomes the FrontierCode gap-fill after AA's run, under the tbench.ai discipline (exact model and effort, one row per agent, registered order, never best-of), and an E234-style agreement diagnostic (τ_b, mean offset, panel size) is published over the configurations both AA and Cognition run.
+- O154 (S1T binomial kernel, challenge to O142): Jeffreys stays the primary S1T kernel; a mean-preserving alternative (the Beta draw recentred on the published score, clipped to the leaf domain, clip rate published) is registered through E25 and published beside it, with the largest per-leaf mean shift printed.
+- O155 (stale blockers, challenge to O118/O119): an expired Plan route (in grace) or one measured in an accounting-fault window stops blocking at expiry; it stays listed and flagged and can deny no label.
+- O156 (meter resets, challenge to O112/O131): a reading spanning a provider's global meter resets is admitted when every spanned reset instant is a registered typed reset record; it is flagged "measured across documented meter resets" and remains subject to O11, O85 and O86. Supersedes O112 and O131.
