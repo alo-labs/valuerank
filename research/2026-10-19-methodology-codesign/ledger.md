@@ -2281,3 +2281,11 @@ Asked on I64 Q1 whether future O71 admissions should be executed by the build fr
 - E317. The cost-removal branch rebuilds its anchors from the registered anchor population on the reduced workload (Plan: measured rows), or reports itself unavailable.
 - E318. The unevaluated-cheaper-sibling screen is an Index-cost pointer; each list names its comparison object.
 - E319. E210's category-mix bound is a token-meter bound; it set-identifies M_W only when the other evidenced constraints are shown not to bind on the target workload.
+
+## Reviewer 85 (Grok 4.7, round 13, Thinking, whole draft r167)
+- Read checks: every part read to its end at commit c8b0dd4.
+- No Critical, High or Medium finding: a clean round for Grok 4.7 (O56, the first of two).
+- L1 (part 9 still described LiveBench's categories as binomial shares, contradicting E311): adopted; the S1T clause now points to the E256/E311 normal kernel.
+- L2 (the Index reconciliation's residual attributed to the six SDLC components): adopted; verified in scores.json that the reconstructed nine-evaluation total exceeds AA's published total, and the text now says so.
+- L3 (part 3 still said E64 and E172 rebuild anchors from every row with a cost): adopted; it now points to E317.
+- The leaf-type registry recommendation is not adopted as a new mechanism: each kernel is already selected in code per leaf (binomial_leaf and the normal kernels), and the draft's descriptions now match it.
