@@ -227,3 +227,27 @@ def test_workday_calendar_restricts_consumption():
     workday = pc.capacity(windows, WORKLOAD, 12, grid_minutes=60, available={0, 1, 4, 5})
     assert workday["schedule"][2] == workday["schedule"][3] == 0.0
     assert workday["feasibleLowerBound"] <= full["feasibleLowerBound"]
+
+
+def test_e23_category_repricing_moves_plan_cost_by_the_workload_over_measured_price_ratio():
+    """E23 as corrected on reviewer 91: P(p) = F·(p·u)/(p·x), so P(p')/P(p) = (p'·u / p·u)·(p·x / p'·x)."""
+
+    measured = pc.Demand({"input": 0.0, "output": 100.0}, "workload-pass")  # x: a category the workload never uses
+    workload = pc.Demand({"input": 100.0, "output": 0.0}, "workload-pass")  # u
+    fee = 20.0
+
+    def plan_cost(prices):
+        multiple = pc.value_multiple(1.0, pc.priced(measured, prices), fee)
+        return pc.priced(workload, prices) / multiple
+
+    base = {"input": 1.0, "output": 1.0}
+    # Doubling the price of the category present only in measured consumption halves the Plan cost; it does not double it.
+    assert plan_cost({"input": 1.0, "output": 2.0}) == pytest.approx(plan_cost(base) / 2)
+    # Uniform scaling cancels, and so does any repricing when the measured mix is proportional to the workload's.
+    assert plan_cost({"input": 3.0, "output": 3.0}) == pytest.approx(plan_cost(base))
+    for prices in ({"input": 2.0, "output": 5.0}, {"input": 0.4, "output": 7.0}):
+        ratio = (pc.priced(workload, prices) / pc.priced(workload, base)) * (pc.priced(measured, base) / pc.priced(measured, prices))
+        assert plan_cost(prices) / plan_cost(base) == pytest.approx(ratio)
+    proportional = pc.Demand({"input": 50.0, "output": 0.0}, "workload-pass")
+    multiple = lambda prices: pc.value_multiple(1.0, pc.priced(proportional, prices), fee)
+    assert pc.priced(workload, {"input": 4.0, "output": 9.0}) / multiple({"input": 4.0, "output": 9.0}) == pytest.approx(pc.priced(workload, base) / multiple(base))

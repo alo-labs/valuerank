@@ -2345,3 +2345,10 @@ Asked on I64 Q1 whether future O71 admissions should be executed by the build fr
 - E332. A pricing-omission factor leaves definite and confirmed tests' adverse case unchanged but can change another row's PossibleFrontier through its upper endpoint.
 - E333. Admission changes only at a freeze; between freezes a failing reconstruction is handled per row, and only a fall below the admission threshold stops the build as a migration.
 - E334. A change of the selected Bug Hunt harness has its induced AI Coding Daily change attributed separately in the E177 replay.
+
+## Reviewer 91 (Grok 4.7, round 13, Thinking, whole draft r173)
+- Read checks: every part read to its end.
+- M1 (E23's release test states the category-repricing ratio inverted, p·x / p·u): adopted as E335. The relation is P(p) = F·(p·u)/(p·x), so a repricing multiplies Plan cost by (p′·u / p·u)·(p·x / p′·x). No code computed the inverted ratio (the engine values multiples at the release's prices and never applied the test's formula), so no score changes; a property test against plan_capacity.priced and value_multiple now checks the direction, uniform cancellation and proportional-mix cancellation.
+- L1 (E151 still says a counting report never reaches an age stage, contradicting O127): adopted.
+- Round status (O56): not clean (a Medium); Grok's run of clean rounds restarts.
+- E335. Category repricing multiplies Plan cost by (p′·u / p·u)·(p·x / p′·x).
