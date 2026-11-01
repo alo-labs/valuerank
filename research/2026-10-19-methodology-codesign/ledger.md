@@ -2310,3 +2310,11 @@ Asked on I64 Q1 whether future O71 admissions should be executed by the build fr
 - E324. Subset outputs compare the subset-evaluable rows; the subset-origin stratum carries the dispersion statuses.
 - E325. R_W = E_W ∖ B_W, disjoint from the blockers.
 - E326. Bug Hunt's sampling kernel is a single-run dispersion approximation, not the uncertainty of the published multi-run mean.
+
+## Reviewer 88 (Claude Sonnet 5.5, round 13, Thinking, whole draft r170)
+- Read checks: every part read to its end.
+- No Critical, High or Medium finding: a clean round for Claude Sonnet 5.5 (O56, the first of two).
+- L1 (E178's label "quality restricted to the cost basket's scope" overstates the branch since O137): adopted as E327; the branch and its generated label are renamed "recall/science-leaf removal sensitivity", with its leaf set unchanged.
+- L2 (part 14 says the ten retained configurations "left" the cohort): adopted; they left the plotted set and remain in the cohort under O145.
+- The per-branch comparison-contract table is not adopted as a new artifact: each branch already publishes its label, removed set and held-fixed policy (scores.json `diagnostics`), and E327 fixes the one label that overstated its target.
+- E327. E178's branch is a recall/science-leaf removal sensitivity, not an execution-matched quality–cost comparison.

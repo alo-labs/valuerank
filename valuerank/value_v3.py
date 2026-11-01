@@ -1895,7 +1895,8 @@ def source_leaves() -> dict:
 
 # E178: the leaves whose benchmarks O15 excludes from the cost basket (basket.INDEX_RESIDUAL_TASKS), removed jointly.
 BASKET_SCOPE_EXCLUDED = ("hle", "critpt", "omniscience")
-BASKET_SCOPE_LABEL = "quality restricted to the cost basket's scope"
+# E327 (reviewer 88): the branch removes three recall/science leaves; it is not an execution-matched quality-cost comparison.
+BASKET_SCOPE_LABEL = "recall/science-leaf removal sensitivity (not an execution-matched quality-cost comparison; see the matched-cost diagnostic)"
 
 
 def deletion_branches() -> list[dict]:
