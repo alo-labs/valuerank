@@ -265,7 +265,7 @@
       "version": "O71 v1 (E270), 2026-10-26",
       "rules": [
         "API-priced consumption tied to a meter fraction or to exhaustion of a window; a figure with no meter fraction is a lower bound and does not count",
-        "a meter fraction measures its own window's allowance; a 5-hour figure pools only with 5-hour figures of the same plan and model and never converts to a billing period (O82, replacing O80's exception); a weekly allowance converts to a month at 4.33 weeks",
+        "a meter fraction measures its own window's allowance; a 5-hour figure pools only with 5-hour figures of the same plan and model and never converts to a billing period (O82, replacing O80's exception); a weekly allowance converts to a month at 52/12 weeks (exact; reviewer 77)",
         "exact model and tier, at any reasoning effort (O87: an allowance is effort-invariant); a tier or model version the researcher infers counts provisionally: listed and in the range test, never one of the two admitting reports",
         "one model measured; a mixed-model week stays at plan level",
         "measured at least partly inside the report window",

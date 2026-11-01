@@ -23,7 +23,7 @@ import math
 from datetime import date, datetime, time, timedelta, timezone
 
 CONCORDANCE = 1.20  # O11 / E98
-WEEKS_PER_MONTH = 4.33  # E270
+WEEKS_PER_MONTH = 52 / 12  # E270: 52 weeks over 12 months, exact (reviewer 77; was the rounded 4.33)
 UNIT_TO_MONTH = {"month": 1.0, "week": WEEKS_PER_MONTH}
 
 
