@@ -19,6 +19,7 @@ concordance test to every model × plan cell, and the build refuses a report rou
 
 from __future__ import annotations
 
+import hashlib
 import math
 from datetime import date, datetime, time, timedelta, timezone
 
@@ -214,7 +215,9 @@ FORM_STAGE = "form"  # E244: a report submitted through the GitHub intake form, 
 
 # O165 (2026-11-01): from the release after the 2026-11-01 cutoff, a report the staged search found counts only with an archived
 # copy of its page (URL or mirror URL, fetch instant, SHA-256 of the fetched bytes, the quoted allowance span) in the evidence
-# bundle, as O124 already asks of form submissions. Reports dated on or before that cutoff are grandfathered and flagged.
+# bundle, as O124 already asks of form submissions. O168 (2026-11-01, on reviewer 90): only the report records present at the
+# 2026-11-01 release are grandfathered, frozen by id in plan_reports.json `o165Grandfathered` (hash-checked); a report first
+# added later needs a copy whatever its date.
 ARCHIVE_FROM = date(2026, 11, 1)
 NOT_ARCHIVED = "not archived: recorded before O165 without a hashed copy"
 
@@ -223,11 +226,23 @@ def archived(report: dict) -> bool:
     return bool((report.get("archive") or {}).get("sha256"))
 
 
-def exclusion(report: dict, profile: dict, release_day: date) -> str | None:
+def grandfathered_ids(document: dict) -> frozenset:
+    """O168: the frozen id list of report records grandfathered by O165, checked against its recorded hash."""
+
+    record = document.get("o165Grandfathered")
+    if not record:
+        return frozenset()
+    ids = sorted(record["ids"])
+    if hashlib.sha256("\n".join(ids).encode()).hexdigest() != record["sha256"]:
+        raise ValueError("the O165 grandfathered report list does not match its recorded hash (O168)")
+    return frozenset(ids)
+
+
+def exclusion(report: dict, profile: dict, release_day: date, grandfathered: frozenset = frozenset()) -> str | None:
     """Why a report does not count (E270), or None."""
 
-    if report.get("stage") != FORM_STAGE and not archived(report) and (report.get("reportDate") or "") > ARCHIVE_FROM.isoformat():
-        return "staged-search report without an archived hashed copy (O165)"
+    if report.get("stage") != FORM_STAGE and not archived(report) and release_day > ARCHIVE_FROM and report["id"] not in grandfathered:
+        return "staged-search report without an archived hashed copy, first recorded after the 2026-11-01 release (O165, O168)"
 
     # O124 (2026-10-30): a report submitted through the intake form counts only with an evidence artifact (a meter screenshot
     # or usage-ledger excerpt) hashed into the evidence bundle.
@@ -285,6 +300,7 @@ def evaluate(document: dict, profile: dict, release_day: date, families: dict | 
     """Every model × plan × unit cell's admission, with each report's role (E270, O11, O81, O82)."""
 
     records = profile_records(profile)
+    grandfathered = grandfathered_ids(document)
     multipliers, splits = document.get("speedModeMultipliers", {}), splitting(records)
     cells: dict[tuple, list[dict]] = {}
     for report in document["reports"]:
@@ -294,7 +310,7 @@ def evaluate(document: dict, profile: dict, release_day: date, families: dict | 
         provider, plan, model, unit, region = key
         rows, eligible = [], []
         for report in reports:
-            reason = exclusion(report, profile, release_day)
+            reason = exclusion(report, profile, release_day, grandfathered)
             # O161: a cell's window ends at its latest staged search; a report dated after it was never searched for.
             searched = (search_dates or {}).get((model, plan))
             if reason is None and searched and window(report)[1].date() > date.fromisoformat(searched):

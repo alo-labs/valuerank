@@ -173,3 +173,14 @@ def test_validated_root_certificates_are_exact():
     assert iv.point_certifies(square_minus_two, 1.414214) is False  # residual about 1e-6
     assert iv.point_certifies((-4, 0, 1), 2) is True
     assert iv._power_range(iv.Fraction(-2), iv.Fraction(1), 3) == (iv.Fraction(-8), iv.Fraction(1))
+
+
+def test_e332_a_blockers_upper_cost_endpoint_can_change_possible_frontier():
+    """E332 (reviewer 90 H1): an O94 factor widens a blocker's cost upward; PossibleFrontier reads that upper endpoint."""
+
+    candidate = Box("i", 10.0, 10.0, 60.0, 60.0)
+    factor_one = iv.frontier([candidate, Box("j", 5.0, 5.0, 70.0, 70.0)])
+    factor_four = iv.frontier([candidate, Box("j", 5.0, 20.0, 70.0, 70.0)])
+    assert factor_one["i"]["possible"] == iv.DISPROVED and factor_four["i"]["possible"] == iv.CERTIFIED
+    # The shared lower endpoint keeps the adverse case, so the definite test is unchanged.
+    assert factor_one["i"]["definite"] == factor_four["i"]["definite"] == iv.DISPROVED

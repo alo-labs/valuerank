@@ -2329,3 +2329,19 @@ Asked on I64 Q1 whether future O71 admissions should be executed by the build fr
 - E329. The independent-source checks' bootstrap resamples configuration rows; a model-identity cluster companion is published when an identity repeats.
 - E330. S1T is a mixed-target dispersion stress.
 - E331. The hierarchical weight draw is independent of every other draw in the replicate.
+
+## Owner decision O168 (2026-11-01), asked on reviewer 90
+- O168 (scoping O165): only the report records present at the 2026-11-01 release are grandfathered, frozen by id with a recorded hash (plan_reports.json `o165Grandfathered`); every report first added after that release needs an archived hashed copy, whatever its date.
+
+## Reviewer 90 (GLM 5.3, round 13, Thinking, seven two-part sections of r172)
+- Read checks: every part read to its end. Parts 11–12: NO FURTHER FEEDBACK.
+- Parts 9–10 H1 (the claim that a pricing-omission factor never changes another row's membership is false for PossibleFrontier): adopted as E332. Verified that the code's PossibleFrontier already reads each competitor's upper cost endpoint (intervals.frontier), so only the claim was wrong; GLM's two-factor counterexample is now a regression fixture. L1 (the measurement taxonomy omits the Vals standard errors): adopted.
+- Parts 1–2 M1 (the frontier-families diagnostic is not the ranking without retention): adopted (conditional-on-admission wording). M2 (the common-leaf answer comparison is not a coverage effect): adopted.
+- Parts 3–4 M1 (frozen workload against the reconstruction-failure migration): adopted as E333. M2 (part 4's [V − 30 days, V] counting instructions predate O161): adopted; both now name the cell's admission window.
+- Parts 5–6 M1 (O165's grandfathering keyed to report date, not to registry membership): owner question; O168, implemented with the frozen id list and its hash check.
+- Parts 7–8 M (a Bug Hunt harness change can change the AI Coding Daily leaf through E268): adopted as E334, a separate replay attribution of the induced change (vacuous at the first v3 release).
+- Parts 13–14 L (the comparison baseline's date against "the 2026-10-31 capture was the first"): adopted; the baseline is now named by its instant (2026-10-30T22:15:18Z, local date 2026-10-31).
+- Round status (O56): not clean (a High and Mediums).
+- E332. A pricing-omission factor leaves definite and confirmed tests' adverse case unchanged but can change another row's PossibleFrontier through its upper endpoint.
+- E333. Admission changes only at a freeze; between freezes a failing reconstruction is handled per row, and only a fall below the admission threshold stops the build as a migration.
+- E334. A change of the selected Bug Hunt harness has its induced AI Coding Daily change attributed separately in the E177 replay.

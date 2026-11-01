@@ -273,15 +273,25 @@ def test_reports_under_a_renamed_plan_count_under_its_canonical_key():
 
 
 def test_o165_staged_reports_need_an_archived_hashed_copy_after_the_2026_11_01_cutoff():
+    import hashlib
     later = date(2026, 12, 1)
     found = report("n", start="2026-11-20", end="2026-11-21", reportDate="2026-11-21", stage="S1")
-    assert "archived hashed copy (O165)" in pa.exclusion(found, {}, later)
+    assert "archived hashed copy" in pa.exclusion(found, {}, later)
     assert pa.exclusion({**found, "archive": {"sha256": "ab" * 32}}, {}, later) is None
-    # Grandfathered: a report dated on or before the cutoff still counts, and a submission falls under O124 instead.
-    assert pa.exclusion({**found, "reportDate": "2026-11-01", "windowStart": "2026-11-01", "windowEnd": "2026-11-01"}, {}, later) is None
+    # O168: an old-dated report first found later still needs a copy; only the frozen ids are grandfathered.
+    old = {**found, "reportDate": "2026-10-20", "windowStart": "2026-11-01", "windowEnd": "2026-11-01"}
+    assert "archived hashed copy" in pa.exclusion(old, {}, later)
+    assert pa.exclusion(old, {}, later, frozenset({"n"})) is None
+    assert pa.exclusion({**found, "windowStart": "2026-10-20", "windowEnd": "2026-10-21"}, {}, date(2026, 11, 1)) is None  # the 2026-11-01 release itself
     assert "O124" in pa.exclusion({**found, "stage": pa.FORM_STAGE}, {}, later)
-    cells = pa.evaluate({**DOCUMENT, "reports": [report("a", start="2026-10-18", end="2026-10-18", low=100, stage="S1"),
-                                                 report("b", start="2026-10-19", end="2026-10-19", low=104, stage="S2", archive={"sha256": "cd" * 32})]}, PROFILE, DAY)
+    ids = ["a", "b"]
+    frozen = {"ids": ids, "sha256": hashlib.sha256("\n".join(ids).encode()).hexdigest()}
+    assert pa.grandfathered_ids({"o165Grandfathered": frozen}) == frozenset(ids) and pa.grandfathered_ids({}) == frozenset()
+    with pytest.raises(ValueError, match="does not match its recorded hash"):
+        pa.grandfathered_ids({"o165Grandfathered": {**frozen, "ids": ["a", "b", "c"]}})
+    cells = pa.evaluate({**DOCUMENT, "o165Grandfathered": frozen,
+                         "reports": [report("a", start="2026-10-18", end="2026-10-18", low=100, stage="S1"),
+                                     report("b", start="2026-10-19", end="2026-10-19", low=104, stage="S2", archive={"sha256": "cd" * 32})]}, PROFILE, DAY)
     assert cells[0]["status"] == "passes" and cells[0]["notArchivedAdmitting"] == ["a"]
     assert [row["archive"] for row in cells[0]["reports"]] == [pa.NOT_ARCHIVED, None]
 

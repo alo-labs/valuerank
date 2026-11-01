@@ -359,7 +359,8 @@ def registry_figures(capture: dict, plan_document: dict, release: str) -> dict:
     comparison = capture["comparison_to_previous_capture"]
     changes = [f"{name} entered" for name in comparison["added"]] + [f"{name} left" for name in comparison["removed"]]
     figures.update({"aa.vertices": len(vertices), "aa.vertexMatchPx": f"{worst:.1f}".rstrip("0").rstrip("."),
-                    "aa.previousCapture": comparison["previous_capture_date"],
+                    # Reviewer 90: the comparison baseline is named by its instant (a date alone reads as the local-date label).
+                    "aa.previousCapture": (re.search(r"\d{4}-\d{2}-\d{2}T[\d:]+Z", comparison.get("previous_inventory") or "") or [comparison["previous_capture_date"]])[0],
                     "aa.vertexChanges": series(changes) if changes else "no vertex entered or left"})
     return figures
 
