@@ -541,7 +541,13 @@ def test_scenarios_hash_attach_and_bar_labels():
     assert [run["stratum"] for run in document["results"]["api"]] == ["S0", "S1", "S2", "S1", "S1M", "S1T"]
     # O39: S1T redraws every observed leaf with its task-sampling noise.
     sampled = {item.row: item for item in v.scenario_panel(result, "api", sampling=True)}
-    assert sampled["a"].leaves["frontierCode"].family == "normal" and sampled["a"].leaves["gdpval"].derivation == scenarios.ANALYST_CONVENTION
+    # O142: a binomial leaf draws from its Jeffreys Beta posterior; GDPval-AA keeps the clipped normal.
+    assert sampled["a"].leaves["frontierCode"].family == "beta" and sampled["a"].leaves["gdpval"].family == "normal"
+    assert sampled["a"].leaves["gdpval"].derivation == scenarios.ANALYST_CONVENTION
+    tasks = v.SAMPLING_TASKS["frontierCode"]
+    alpha, beta = sampled["a"].leaves["frontierCode"].params
+    assert alpha + beta == pytest.approx(tasks + 1.0)
+    assert not v.binomial_leaf("omniscience", {}) and not v.binomial_leaf("vibeCode", {"stderr": 1.0}) and not v.binomial_leaf("gdpval", {})
     assert document["results"]["api"][-1]["variedTargets"] == ["identification convention", "task sampling (independent-task approximation)"]
     assert document["streamDescriptions"]["S0"] == "published-record reporting precision" and len(document["notQuantified"]) == 2
     assert document["barLabels"][0]["status"] == "evaluated"

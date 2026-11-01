@@ -27,7 +27,7 @@
       "sources": [
         "https://bughunt.productcompass.pm/data/benchmark.json and the owner's results at commit 12497971 (updated 2026-10-27, read 2026-10-30)"
       ],
-      "notes": "Owner decision O135 (2026-10-30): AA plots MiMo-V2.6-Flash without an effort; Xiaomi's API documents a single thinking mode (thinking.type enabled/disabled, default enabled; on the Responses API every reasoning.effort other than none enables the same, undifferentiated reasoning), so the configuration is thinking enabled, the default (mimo-flash-effort.md). Bug Hunt ran the provider default through OpenRouter without asserting a reasoning state ('effort is `default` ... for this model the dial is untested rather than known-inert', run notes). Whether this route's default equals Xiaomi's documented default (thinking enabled) is not shown by the board: owner to confirm before it counts as exact.",
+      "notes": "Owner decision O135 (2026-10-30): AA plots MiMo-V2.6-Flash without an effort; Xiaomi's API documents a single thinking mode (thinking.type enabled/disabled, default enabled; on the Responses API every reasoning.effort other than none enables the same, undifferentiated reasoning), so the configuration is thinking enabled, the default (mimo-flash-effort.md). Bug Hunt ran the provider default through OpenRouter without asserting a reasoning state ('effort is `default` ... for this model the dial is untested rather than known-inert', run notes). The board does not show that this route's default is Xiaomi's documented default (thinking enabled), so the run stays unmatched (owner decision O140, 2026-10-30).",
       "openWeb": {
         "searchedOn": "2026-10-30",
         "record": "research/2026-10-23-swe-benchmarks/reports/SWE benchmark candidates.md",

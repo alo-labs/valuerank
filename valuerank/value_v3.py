@@ -87,9 +87,9 @@ LIVEBENCH_CATEGORY_TASKS = {"long_agentic": 18, "reasoning": 4, "coding": 29, "b
 GDPVAL_RATING_SD = 26.0 / 1.96
 GDPVAL_SOURCE = "AA GDPval-AA v2.1 Elo as displayed on AA's model page at the capture (E90, O70)"
 SAMPLING_ASSUMPTIONS = (
-    "tasks are independent and each leaf's score is a mean over its published task count (plug-in binomial with the proportion (k + 1/2) / (n + 1), I28); attempts averaged within a task and tasks shared across models are ignored, so the noise is approximate",
+    "tasks are independent and each leaf's score is a mean over its published task count (a binomial leaf drawn from its Jeffreys posterior Beta(k + 1/2, n - k + 1/2), O142; plug-in SDs with the proportion (k + 1/2) / (n + 1), I28); attempts averaged within a task and tasks shared across models are ignored, so the noise is approximate",
     "GDPval-AA: each row's rating interval as AA's model page displays it, read as a 95% normal interval (AA states no level), SD = half-width / 1.96",
-    "AA-Omniscience: each of 6,000 questions scores +1, 0 or -1, with the shares from AA's accuracy and hallucination rate",
+    f"AA-Omniscience: each of {SAMPLING_TASKS['omniscience']:,} questions scores +1, 0 or -1, with the shares from AA's accuracy and hallucination rate",
     "Vals boards (Vibe Code Bench v1.1, Code Migration v1.1): Vals' published standard error per record, read as the leaf's SD",
     "AI Coding Daily: judged points over its six graded projects read as a binomial share of 60 points (an assumption; the board publishes no error)",
 )
@@ -858,7 +858,8 @@ def assemble(configurations: list[dict], documents: dict, *, release_day: date, 
     # O81: the build decides every O71 cell's admission from the report table, and refuses an unsupported report route.
     # O87: cells are keyed by the model (the configuration's AA family), so reports at any effort pool.
     families = {item["id"]: configuration_family(item) for item in configurations}
-    allowance_cells = plan_admission.evaluate(documents.get("planReports") or {"reports": []}, policy.get("reportEligibilityProfile") or {}, release_day, families)
+    reports = plan_admission.canonical_plans(documents.get("planReports") or {"reports": []}, policy.get("planAliases"))
+    allowance_cells = plan_admission.evaluate(reports, policy.get("reportEligibilityProfile") or {}, release_day, families)
     plan_admission.check_routes(documents["planRoutes"]["routes"], allowance_cells, set(families), plan_routes.REPORT_KINDS, families)
     plan_routes.check_same_model_routes(documents["planRoutes"], families)
     change_records = plan_admission.profile_records(policy.get("reportEligibilityProfile") or {})
@@ -3099,10 +3100,23 @@ def sampling_sd(key: str, observation: q.Observation, source: dict, gdpval_sd: f
     return 100.0 * math.sqrt(p * (1.0 - p) / tasks)
 
 
+def binomial_leaf(key: str, source: dict) -> bool:
+    """O142: a leaf whose S1T noise is the plug-in binomial over its published task count (not GDPval-AA's rating
+    interval, AA-Omniscience's three-outcome index, LiveBench's category mixture or a Vals published standard error)."""
+
+    return key in SAMPLING_TASKS and key != "omniscience" and source.get("stderr") is None
+
+
 def sampling_kernel(key: str, observation: q.Observation, source: dict) -> scenarios.Kernel:
-    """O39: the task-sampling kernel of one leaf, clipped to the 0-100 score domain."""
+    """O39 as amended by O142: the task-sampling kernel of one leaf. A binomial leaf draws from its Jeffreys posterior,
+    Beta(k + 1/2, n - k + 1/2) with k = n x z / 100, which stays inside 0-100 without clipping; every other leaf draws
+    from a normal with its plug-in SD, clipped to the 0-100 score domain."""
 
     derivation = scenarios.ANALYST_CONVENTION if key == "gdpval" else scenarios.PUBLISHED_PRECISION
+    if binomial_leaf(key, source):
+        tasks = SAMPLING_TASKS[key]
+        successes = min(1.0, max(0.0, observation.z / 100.0)) * tasks
+        return scenarios.Kernel("beta", (successes + 0.5, tasks - successes + 0.5), None, scenarios.TASK_SAMPLING, derivation)
     return scenarios.Kernel("normal", (observation.z, sampling_sd(key, observation, source), 0.0, 100.0), None, scenarios.TASK_SAMPLING, derivation)
 
 

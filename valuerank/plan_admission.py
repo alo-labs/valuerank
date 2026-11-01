@@ -105,6 +105,18 @@ def profile_records(profile: dict) -> list[dict]:
     return records
 
 
+def canonical_plans(document: dict, aliases: dict | None) -> dict:
+    """E244 (reviewer 75): a report filed under a provider's renamed plan (evidencePolicy.planAliases, e.g. Anthropic's
+    "Claude Ultra" for Max 20x from 2026-10-30) counts under the plan's canonical key, never as an unlisted plan (O85)."""
+
+    names = {alias["name"]: plan for plan, alias in (aliases or {}).items()}
+    if not names:
+        return document
+    reports = [{**report, "plan": names[report["plan"]], "planAsFiled": report["plan"]} if report.get("plan") in names else report
+               for report in document.get("reports", [])]
+    return {**document, "reports": reports}
+
+
 def spans_reset(report: dict, records: list[dict]) -> bool:
     """O112: whether a reading's window touches a day on which its provider reset every meter."""
 

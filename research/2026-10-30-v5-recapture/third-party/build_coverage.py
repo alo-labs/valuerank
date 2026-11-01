@@ -89,8 +89,8 @@ def bughunt() -> dict:
                 board["coverage"][model_id] = cell(
                     "plausible", run["fixed"], run["id"], "default", O135 + " Bug Hunt ran the provider default through "
                     "OpenRouter without asserting a reasoning state ('effort is `default` ... for this model the dial is untested "
-                    "rather than known-inert', run notes). Whether this route's default equals Xiaomi's documented default "
-                    "(thinking enabled) is not shown by the board: owner to confirm before it counts as exact.",
+                    "rather than known-inert', run notes). The board does not show that this route's default is Xiaomi's documented "
+                    "default (thinking enabled), so the run stays unmatched (owner decision O140, 2026-10-30).",
                     harness=run["harness"], harnessVersion=run.get("harness_version"), date=run["date"], nRuns=run["n_runs"],
                     routeModelId=run.get("model_id"))
             else:

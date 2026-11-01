@@ -260,6 +260,9 @@ def test_dominance_filter_sets_aside_certifiably_dearer_routes():
     open_set = {"route": route("S", 3.0, valueMultipleLower=1.0), "grade": "controlled", "identification": "set-identified", "expiry": "fresh"}
     assert pr.dominance_filter([point_low, unidentified_high, open_set])[1] == {}
     assert pr.identified_bounds(open_set) == (1.0, math.inf) and pr.identified_bounds(unidentified_high) is None
+    # E220 (reviewer 75): a route never sets aside one measured under another allocation regime.
+    shared_pool = {"route": route("P", 10.5, valueMultipleLower=10.0, valueMultipleUpper=11.0, allocationRegime="50% shared pool"), "grade": "controlled", "identification": "set-identified", "expiry": "fresh"}
+    assert pr.dominance_filter([point_low, shared_pool])[1] == {}
 
 
 def test_plan_cost_routes_fallbacks_and_flags():

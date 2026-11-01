@@ -221,3 +221,14 @@ def test_form_submissions_need_evidence_and_a_searched_partner():
     assert pa.exclusion(first, PROFILE, DAY) is None
     assert cell(first, second)["status"].startswith("fails: every counting report was submitted through the intake form")
     assert cell(first, report("s", start="2026-10-19", end="2026-10-19", stage="S1"))["status"] == "passes"
+
+
+def test_reports_under_a_renamed_plan_count_under_its_canonical_key():
+    """E244 (reviewer 75): a report filed as "Claude Ultra" counts under Claude Max 20x, keeping the name it was filed under."""
+
+    aliases = {"Claude Max 20x": {"name": "Claude Ultra", "from": "2026-10-30"}}
+    document = {"reports": [{"id": "a", "plan": "Claude Ultra"}, {"id": "b", "plan": "Claude Pro"}]}
+    canonical = pa.canonical_plans(document, aliases)
+    assert [report["plan"] for report in canonical["reports"]] == ["Claude Max 20x", "Claude Pro"]
+    assert canonical["reports"][0]["planAsFiled"] == "Claude Ultra" and "planAsFiled" not in canonical["reports"][1]
+    assert pa.canonical_plans(document, None) is document and pa.canonical_plans(document, {}) is document

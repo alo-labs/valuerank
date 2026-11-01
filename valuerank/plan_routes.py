@@ -807,7 +807,8 @@ def dominance_filter(candidates: list[dict]) -> tuple[list[dict], dict]:
     """E88: set aside each route b for which an identified route a of at least b's grade has L_a > U_b.
 
     L_a > U_b makes a cheaper on the workload in every admissible state, whatever
-    the joint constraints. Unidentified routes neither filter nor are filtered.
+    the joint constraints. Unidentified routes neither filter nor are filtered, and a route never filters one measured
+    under another allocation regime (E220: measurements under different regimes are never compared; reviewer 75).
     Returns the remaining routes and {dominated route ID: dominating route ID}.
     """
 
@@ -817,6 +818,8 @@ def dominance_filter(candidates: list[dict]) -> tuple[list[dict], dict]:
         for winner in candidates:
             winner_bounds = identified_bounds(winner)
             if winner is loser or loser_bounds is None or winner_bounds is None:
+                continue
+            if winner["route"].get("allocationRegime") != loser["route"].get("allocationRegime"):
                 continue
             if grade_rank(winner) >= grade_rank(loser) and winner_bounds[0] > loser_bounds[1]:
                 dominated[loser["route"]["id"]] = winner["route"]["id"]

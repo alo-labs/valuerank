@@ -300,7 +300,7 @@ Exhaustive searches for the leaves a cohort configuration still lacks (each with
 
 | Configuration | Leaf | Searched | Result | Sources checked | Open-web discovery (E240) | Notes |
 |---|---|---|---|---:|---|---|
-| MiMo-V2.6-Flash | Bug Hunt Bench | 2026-10-30 | not found | 1 | 2026-10-30: 7 queries, 1 candidates (0 registered, 1 rejected) | Owner decision O135 (2026-10-30): AA plots MiMo-V2.6-Flash without an effort; Xiaomi's API documents a single thinking mode (thinking.type enabled/disabled, default enabled; on the Responses API every reasoning.effort other than none enables the same, undifferentiated reasoning), so the configuration is thinking enabled, the default (mimo-flash-effort.md). Bug Hunt ran the provider default through OpenRouter without asserting a reasoning state ('effort is `default` ... for this model the dial is untested rather than known-inert', run notes). Whether this route's default equals Xiaomi's documented default (thinking enabled) is not shown by the board: owner to confirm before it counts as exact. |
+| MiMo-V2.6-Flash | Bug Hunt Bench | 2026-10-30 | not found | 1 | 2026-10-30: 7 queries, 1 candidates (0 registered, 1 rejected) | Owner decision O135 (2026-10-30): AA plots MiMo-V2.6-Flash without an effort; Xiaomi's API documents a single thinking mode (thinking.type enabled/disabled, default enabled; on the Responses API every reasoning.effort other than none enables the same, undifferentiated reasoning), so the configuration is thinking enabled, the default (mimo-flash-effort.md). Bug Hunt ran the provider default through OpenRouter without asserting a reasoning state ('effort is `default` ... for this model the dial is untested rather than known-inert', run notes). The board does not show that this route's default is Xiaomi's documented default (thinking enabled), so the run stays unmatched (owner decision O140, 2026-10-30). |
 | Gemini 4 Carbon | Bug Hunt Bench | 2026-10-30 | not found | 1 | 2026-10-30: 7 queries, 0 candidates (0 registered, 0 rejected) | No Bug Hunt row for this model at any effort. |
 | GPT-6 Luna (low) | Vibe Code Bench v1.1 (Vals) | 2026-10-30 | not found | 1 | 2026-10-30: 7 queries, 0 candidates (0 registered, 0 rejected) | Vals ran this model only at max (81.649), not low; not transferred. |
 | GPT-6 Luna (medium) | Vibe Code Bench v1.1 (Vals) | 2026-10-30 | not found | 1 | 2026-10-30: 7 queries, 0 candidates (0 registered, 0 rejected) | Vals ran this model only at max (81.649), not medium; not transferred. |
@@ -719,12 +719,12 @@ Each routed row's amount with what it measures, how it was derived and which obj
 
 ## Evidence bundle
 
-Bundle hash `214072259fc7b5ceb301625d86875f1e5568d1e688a77a5aa494f36e3342b023`: every published output is rebuilt from these artifacts at the pinned publication clock (npm run verify:docs), never from live pages.
+Bundle hash `8504c3da689112523a0f03a811d1971a3e9dcf148a076bb51b1ecf25bef9866a`: every published output is rebuilt from these artifacts at the pinned publication clock (npm run verify:docs), never from live pages.
 
 | Key | Artifact | SHA-256 | Captured | Extractor |
 |---|---|---|---|---|
 | snapshot | `data/aa/aa_v432_snapshot.json` | `73c1309dbe2d353070b52881b0aaca3ca1a1442547312a49fa093ddcfe066291` | 2026-10-31T04:07:04Z | valuerank.capture_aa |
-| bugHunt | `data/bug_hunt.json` | `73077b1931d163b8a3fcf859f9a363ecad936b056ba0412bb56fa0b7f4348c00` | 2026-10-30 | editorial capture of the owner's published results (source commit recorded) |
+| bugHunt | `data/bug_hunt.json` | `708b42bdc42095ede591e377c6cc44c48fc68c55acd5382ddf8cd585e2f495f2` | 2026-10-30 | editorial capture of the owner's published results (source commit recorded) |
 | tb4 | `data/tb4.json` | `3ab0a227c23c09f86f9c006432bdc62ba7d4737476c0c53d20a8dfdc36a27219` | 2026-10-30T22:22:49.248Z | scripts/scrape-tb4.js, then valuerank.build_tb4 |
 | codingAgents | `data/aa/coding_agents_capture.json` | `7786431da787e38ce3998df018ccce7328cc0f788119ae346456eb69f4fd93a5` | 2026-10-31T04:07:05Z | valuerank.capture_coding_agents |
 | costCharts | `data/aa/cost_charts_capture.json` | `bc388a1fd7a8b6bcb511df340377fa956142e632dfd4638b6fc8c548556458ec` | 2026-10-31T04:07:51.285Z | scripts/capture-aa-cost-charts.js |
@@ -735,10 +735,10 @@ Bundle hash `214072259fc7b5ceb301625d86875f1e5568d1e688a77a5aa494f36e3342b023`: 
 | bugHuntScoreboard | `data/bug_hunt_scoreboard.json` | `2e0f1eab15f219ba491af8c4ca694197c9bed96546b4157c06ca1414f9d6e8dc` | 2026-10-30T22:19:18Z | the owner's combined scoreboard at the pinned commit (O31 roster check) |
 | planRoutes | `data/plan_cost_routes.json` | `445a101e972eaa519c75fcc1c9be73f0618adbb39ef2bd8c2ba0401a96a0cc9d` | 2026-10-31 | editorial Plan evidence registry |
 | priceRecords | `data/price_records.json` | `fe550f7770759a6219e671838f28b42d3b7d7db0fa5f7ab489e08a75605421f8` | 2026-10-31T04:10:00Z | editorial E141 price-record registry (superseded and promotional tariffs) |
-| leafEvidence | `data/leaf_evidence.json` | `b1cd6ea2e7d8d7c4f631a3f3bc384482f87cf76dc78d4ad723c5c12ffd052668` | 2026-10-30 | editorial supplementary leaf evidence and the exhaustive-search log (O36) |
+| leafEvidence | `data/leaf_evidence.json` | `faa59e44c24d683a7af040410e2c8b97e2585ba16b4651c2426c60cafab4e008` | 2026-10-30 | editorial supplementary leaf evidence and the exhaustive-search log (O36) |
 | cognitionFrontierCode | `data/cognition_frontiercode.json` | `ff0040778b7bdf69c705ad7474f771fb5e53cfaf5cf8573b3a4614153543d75f` | 2026-10-23 | Cognition's FrontierCode leaderboard data (https://cognition.com/data/frontiercode-leaderboard/data.json), captured unchanged (O37) |
 | sweTracks | `data/swe_tracks.json` | `8b65fb2afbceb90e42de2c90df921294dc234f5d8db7d52a2e7d2ecc879bfde5` | 2026-10-30T22:22:49.248Z | research/2026-10-23-swe-benchmarks/build_swe_tracks.py from the verified coverage captures (O53-O55) |
-| planReports | `data/plan_reports.json` | `3d3ce37c8a4a0b374c04649f62369272a9079b910bb74defcb8a3d727bcdb98d` | 2026-10-28 | editorial table of every O71 user report with the facts E270 needs; the build derives admission from it (O81) |
+| planReports | `data/plan_reports.json` | `a699da4aa84fa0022671d1cf0132dd29c86379af22d6a4770b779033ee5aa0f4` | 2026-10-28 | editorial table of every O71 user report with the facts E270 needs; the build derives admission from it (O81) |
 | aaPreviousCapture | `data/aa/aa_previous_capture.json` | `d72ee6a35b4016d0f309fcf0f1df231d5ec5afa955a31935b7fafc86a1355d85` | 2026-10-30T22:23:33Z | valuerank.capture_aa: digest of the model-page capture this one replaced (I60) |
 | sourceRereads | `data/source_rereads.json` | `5d806f7ac471a2c09eb1a189a3d3d7c36b7e9d2c050bcc1835c6156405cb133a` | 2026-10-25T11:33:58Z | editorial record of the O68 re-reads, each 'unchanged' result verified against the re-read file |
 | aaFootnotes | `data/aa/aa_footnote_register.json` | `ccc742e1cca305fa88b80b48d7f46e89392cee8225353f8daa88ec5e174d59a4` | 2026-10-30T22:15:18Z | editorial register of every AA note the captures record (the chart's footnotes, and from O103 the model pages, Coding Agent Index and cost charts), by exact text, each classified once (O100, O103) |

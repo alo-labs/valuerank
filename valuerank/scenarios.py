@@ -44,7 +44,7 @@ TARGET_PROFILES = {
     "S1M": "published-record reporting precision + conventional identification of missing leaves + conventional range sensitivity inside published 95% confidence intervals (no tail model)",
     # O39: benchmark sampling noise under an independent-task approximation (owner decision, 2026-10-21); it never
     # authorises a label and never changes a score.
-    "S1T": "published-record leaf values redrawn with plug-in binomial task-sampling noise from each leaf's published task count (independent-task approximation; GDPval-AA from its displayed rating interval, an assumption) + conventional identification of missing leaves",
+    "S1T": "published-record leaf values redrawn with task-sampling noise from each leaf's published task count (binomial leaves from their Jeffreys Beta posterior, O142; independent-task approximation; GDPval-AA from its displayed rating interval, an assumption) + conventional identification of missing leaves",
 }
 STRATA = ("S0", "S1", "S2", "S1M", "S1T")
 # E161: every stream's events name the quality equation they use, so S0-to-S1 changes are never read as uncertainty alone.
@@ -96,7 +96,8 @@ ANALYST_CONVENTION = "analyst convention"
 @dataclass(frozen=True)
 class Kernel:
     """A draw kernel: 'fixed' (value), 'uniform' (low, high), 'split-uniform' (low, point, high), 'uniform-sum'
-    (offset, (low, high), ...), 'runs' (public run values) or 'normal' (mean, sd, low, high: clipped, O39 task sampling)."""
+    (offset, (low, high), ...), 'runs' (public run values), 'normal' (mean, sd, low, high: clipped, O39 task sampling) or
+    'beta' (alpha, beta: 100 x a Beta draw, O142 task sampling of a binomial leaf, inside 0-100 without clipping)."""
 
     family: str
     params: tuple
@@ -105,7 +106,7 @@ class Kernel:
     derivation: str = PUBLISHED_PRECISION  # E134: what its parameters are derived from
 
     def __post_init__(self):
-        if self.family in ("runs", "normal") and self.target == REPORTING_PRECISION:
+        if self.family in ("runs", "normal", "beta") and self.target == REPORTING_PRECISION:
             raise ValueError(f"a {self.family} kernel concerns sampling noise or future runs, never reporting precision")
         if self.family == "split-uniform" and not self.params[0] <= self.params[1] <= self.params[2]:
             raise ValueError("a split-uniform kernel's published point must lie inside its interval (E182)")
@@ -131,6 +132,10 @@ class Kernel:
         if self.family == "normal":
             mean, sd, low, high = self.params
             return min(high, max(low, rng.gauss(mean, sd)))
+        if self.family == "beta":
+            # O142 (2026-11-01): a binomial leaf's Jeffreys posterior, Beta(k + 1/2, n - k + 1/2), on the 0-100 scale.
+            alpha, beta = self.params
+            return 100.0 * rng.betavariate(alpha, beta)
         if self.family == "uniform-sum":
             # E154: a derived sum of independently rounded primitives (an exact offset plus one interval per record).
             offset, *intervals = self.params

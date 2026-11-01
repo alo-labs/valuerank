@@ -38,6 +38,11 @@ def test_kernels_draw_their_families():
         Kernel("normal", (50.0, 5.0, 0.0, 100.0))
     sampled = [Kernel("normal", (99.0, 5.0, 0.0, 100.0), target="task sampling (independent-task approximation)").draw(rng) for _ in range(200)]
     assert max(sampled) == 100.0 and min(sampled) < 99.0
+    # O142: a binomial leaf's Beta draw stays inside 0-100 without a boundary atom.
+    with pytest.raises(ValueError, match="a beta kernel concerns sampling noise"):
+        Kernel("beta", (99.5, 1.5))
+    beta = [Kernel("beta", (99.5, 1.5), target="task sampling (independent-task approximation)").draw(rng) for _ in range(200)]
+    assert all(0.0 < value < 100.0 for value in beta) and 90.0 < sum(beta) / len(beta) < 100.0
     summed = Kernel("uniform-sum", (100.0, (9.5, 10.5), (19.5, 20.5)), "endpoint-heavy")
     for heavy in (False, True):
         assert 129.0 <= summed.draw(rng, use_alternative=heavy) <= 131.0
