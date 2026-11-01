@@ -1,62 +1,1620 @@
 <!doctype html>
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Bug Hunt Pareto Frontier</title>
-<style>
-:root{--surface:#fcfcfb;--text-primary:#0b0b0b;--text-secondary:#52514e;--muted:#8a8984;--grid:#e6e5e1;--series-1:#2a78d6;--other:#b4b2ab;}
-@media (prefers-color-scheme: dark){:root:where(:not([data-theme="light"])){--surface:#1a1a19;--text-primary:#f0efec;--text-secondary:#c3c2b7;--muted:#8f8e88;--grid:#33332f;--series-1:#3987e5;--other:#5e5d58;}}
-:root[data-theme="dark"]{--surface:#1a1a19;--text-primary:#f0efec;--text-secondary:#c3c2b7;--muted:#8f8e88;--grid:#33332f;--series-1:#3987e5;--other:#5e5d58;}
-body{margin:0;background:var(--surface);color:var(--text-primary);font:14px/1.45 system-ui,-apple-system,"Segoe UI",sans-serif}
-main{max-width:1080px;margin:0 auto;padding:24px 16px}
-h1{font-size:20px;margin:0 0 4px}p{margin:4px 0;color:var(--text-secondary)}
-.legend{display:flex;gap:18px;flex-wrap:wrap;margin:12px 0;color:var(--text-secondary);font-size:13px}
-.legend span{display:inline-flex;align-items:center;gap:6px}
-#chart svg{width:100%;height:auto;display:block;overflow:visible}.legend svg{flex:none}
-.tip{position:fixed;pointer-events:none;background:var(--surface);border:1px solid var(--grid);border-radius:6px;padding:8px 10px;font-size:12px;box-shadow:0 2px 8px rgba(0,0,0,.15);display:none;max-width:320px}
-table{border-collapse:collapse;width:100%;font-size:13px;margin-top:8px}th,td{text-align:left;padding:4px 8px;border-bottom:1px solid var(--grid)}td.n,th.n{text-align:right}
-details{margin-top:16px}
-</style></head><body><main>
-<p style="margin:0 0 12px"><a href="/" style="color:var(--series-1)">← ValueRank</a></p>
-<h1>Bug Hunt Bench: cost vs bugs fixed, Pareto frontier</h1>
-<p>Score = planted bugs fixed + genuine unplanted bugs fixed, ValueRank's rescoring (the board itself scores planted bugs only and lists unplanted fixes separately); per-run means where a row averages several runs. Cost is the board's per-run figure (list-rate estimate, bill or floor), log scale.</p>
-<p>The frontier joins the configurations that no other configuration beats on both cost and score: nothing cheaper scores higher.</p>
-<div class="legend"><span><svg width="14" height="14"><circle cx="7" cy="7" r="5" fill="var(--series-1)"/></svg>On the Pareto frontier</span><span><svg width="14" height="14"><circle cx="7" cy="7" r="4" fill="var(--other)"/></svg>Dominated</span><span><svg width="14" height="14"><circle cx="7" cy="7" r="4" fill="none" stroke="var(--text-secondary)" stroke-width="1.5"/></svg>Cost is a floor (lower bound)</span></div>
-<div id="chart"></div>
-<div class="tip" id="tip"></div>
-<details open><summary>Frontier configurations</summary><table id="ftable"></table></details>
-<details><summary>Not plotted (no positive cost)</summary><p id="skipped"></p></details>
-<p style="margin-top:16px;font-size:12px">Source: Bug Hunt Bench (github.com/phuryn/bug-hunt-bench), board updated 2026-10-27, read 2026-11-01T05:59:30Z; 130 of the 133 live rows plotted. Costs mix list-rate estimates, bills and floors as the board labels them, so they are not all the same kind of number.</p>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Bug Hunt Bench, rescored · ValueRank</title>
+  <meta name="description" content="Bug Hunt Bench rescored as planted plus unplanted bugs fixed, against cost per run, with the Pareto frontier.">
+  <link rel="canonical" href="https://valuerank.alolabs.dev/bughunt/">
+  <meta name="theme-color" content="#4f46e5">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="ValueRank">
+  <meta property="og:title" content="Bug Hunt Bench, rescored · ValueRank">
+  <meta property="og:description" content="Bug Hunt Bench rescored as planted plus unplanted bugs fixed, against cost per run, with the Pareto frontier.">
+  <meta property="og:url" content="https://valuerank.alolabs.dev/bughunt/">
+  <meta property="og:image" content="https://valuerank.alolabs.dev/og/tb4.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Bug Hunt Bench, rescored · ValueRank">
+  <meta name="twitter:description" content="Bug Hunt Bench rescored as planted plus unplanted bugs fixed, against cost per run, with the Pareto frontier.">
+  <meta name="twitter:image" content="https://valuerank.alolabs.dev/og/tb4.png">
+  <link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
+  <script>
+    (function () {
+      try {
+        var t = localStorage.getItem("vr-theme");
+        if (t === "light" || t === "dark") document.documentElement.setAttribute("data-theme", t);
+      } catch (e) { /* storage unavailable: follow the system theme */ }
+      var b = /[?&]basis=(api|plan)(&|$)/.exec(location.search);
+      document.documentElement.setAttribute("data-basis", b ? b[1] : "plan");
+    })();
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap">
+  <link rel="stylesheet" href="/assets/css/site.css">
+</head>
+<body data-page="bughunt">
+  <a class="skip-link" href="#main">Skip to main content</a>  <header class="site-header">
+    <nav class="wrap nav" aria-label="Primary">
+      <a class="brand" href="/" aria-label="ValueRank home">
+        <svg class="brand-mark" viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" focusable="false"><rect width="24" height="24" rx="6" fill="currentColor"/><path d="M6 8l6 9 6-9" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <span class="brand-word">Value<span>Rank</span></span>
+      </a>
+      <button type="button" class="nav-menu" data-nav-toggle aria-controls="site-nav-links" aria-expanded="false"><span class="nav-menu-bars" aria-hidden="true"></span><span class="nav-menu-label">Menu</span></button>
+      <ul id="site-nav-links" class="nav-links">        <li><a href="/rankings/">Rankings</a></li>        <li><a href="/models/">Models</a></li>        <li><a href="/plans/">Plans</a></li>        <li><a href="/benchmarks/" aria-current="page">Benchmarks</a></li>        <li><a href="/methodology/">Methodology</a></li>        <li><a href="/changelog/">Changelog</a></li>        <li><a href="/data/">Data</a></li>      </ul>
+      <button type="button" id="theme-toggle" class="icon-btn" data-theme-toggle aria-label="Toggle theme">
+        <svg class="icon-sun" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="2"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+        <svg class="icon-moon" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" focusable="false"><path d="M20 14.5A8 8 0 019.5 4 8 8 0 1020 14.5z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>
+      </button>
+    </nav>
+  </header>
+  <main id="main" class="wrap main" tabindex="-1">
+<header class="page-head">
+  <p class="eyebrow"><a href="/benchmarks/">Benchmarks</a> / Bug Hunt Bench, rescored</p>
+  <h1 id="page-title">Bug Hunt Bench, rescored</h1>
+  <p class="lead">ValueRank rescores Bug Hunt Bench as the planted bugs a model fixed plus the genuine unplanted bugs it fixed, counted equally. The board itself scores planted bugs only and lists unplanted fixes separately. 133 live board rows, 12 on the cost frontier. Board updated 2026-10-27, read 2026-11-01 from <a href="https://bughunt.productcompass.pm/" rel="noopener">Bug Hunt Bench</a>.</p>
+</header>
+
+<section class="block" id="score-vs-cost" aria-labelledby="svc-title">
+  <h2 id="svc-title" class="section-title">Bugs fixed against cost</h2>
+  <div class="chart-card">
+  <div class="chart-panel" tabindex="0" id="panel-bughunt">
+    <div class="chart" data-bughunt-chart role="img" aria-label="Scatter chart of bugs fixed, planted plus unplanted, against cost per run for each live Bug Hunt Bench row">
+      <p class="chart-state" data-chart-state>Loading chart…</p>
+    </div>
+    <p class="chart-summary" id="bughunt-summary" data-chart-summary>Scatter chart of bugs fixed against cost per run. A text summary appears here when the chart loads.</p>
+  </div></div>
+  <p class="muted">The frontier joins the configurations no cheaper configuration beats: nothing to their left fixes more bugs. Cost is the board's per-run figure on a log scale; it mixes list-rate estimates, bills and floors as the board labels them. 3 rows without a positive cost are listed below but not plotted.</p>
+</section>
+
+<section class="block" id="all-rows" aria-labelledby="rows-title">
+  <h2 id="rows-title" class="section-title">All configurations, rescored</h2>
+  <div class="table-wrap" tabindex="0" role="region" aria-label="Rescored Bug Hunt Bench rows table">
+    <table class="data-table">
+      <thead><tr><th scope="col" class="col-num">Rank</th><th scope="col" class="col-model">Configuration</th><th scope="col">Harness</th><th scope="col" class="col-num">Planted</th><th scope="col" class="col-num">Unplanted</th><th scope="col" class="col-num">Total</th><th scope="col" class="col-num">Planted rank</th><th scope="col" class="col-num">Cost per run</th><th scope="col">Frontier</th></tr></thead>
+      <tbody>
+        <tr>
+          <td class="cell-num">1</td>
+          <th scope="row" class="cell-model"><span class="model-id"><span class="model-name">GPT-6.1 Sol (max effort) - mean of 3</span><span class="model-dev">OpenAI &middot; 3 runs</span></span></th>
+          <td>Codex CLI</td>
+          <td class="cell-num">44.3</td>
+          <td class="cell-num">65.3</td>
+          <td class="cell-num"><strong>109.6</strong></td>
+          <td class="cell-num">3</td>
+          <td class="cell-num" title="List-rate estimate">$5.88</td>
+          <td><span class="badge badge-measured" title="On the Pareto frontier: no cheaper configuration fixes more bugs.">Frontier</span></td>
+        </tr>
+        <tr>
+          <td class="cell-num">2</td>
+          <th scope="row" class="cell-model"><span class="model-id"><span class="model-name">GPT-6 Astra (max effort) - mean of 3</span><span class="model-dev">OpenAI &middot; 3 runs</span></span></th>
+          <td>Codex CLI</td>
+          <td class="cell-num">45</td>
+          <td class="cell-num">55</td>
+          <td class="cell-num"><strong>100</strong></td>
+          <td class="cell-num">2</td>
+          <td class="cell-num" title="List-rate estimate">$33.03</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td class="cell-num">3</td>
+          <th scope="row" class="cell-model"><span class="model-id"><span class="model-name">GPT-6.1 Sol (xhigh effort) - mean of 3</span><span class="model-dev">OpenAI &middot; 3 runs</span></span></th>
+          <td>Codex CLI</td>
+          <td class="cell-num">42.7</td>
+          <td class="cell-num">56.7</td>
+          <td class="cell-num"><strong>99.4</strong></td>
+          <td class="cell-num">7</td>
+          <td class="cell-num" title="List-rate estimate">$4.35</td>
+          <td><span class="badge badge-measured" title="On the Pareto frontier: no cheaper configuration fixes more bugs.">Frontier</span></td>
+        </tr>
+        <tr>
+          <td class="cell-num">4</td>
+          <th scope="row" class="cell-model"><span class="model-id"><span class="model-name">GPT-5.6 Sol (xhigh effort)</span><span class="model-dev">OpenAI &middot; 1 run</span></span></th>
+          <td>Codex CLI</td>
+          <td class="cell-num">39</td>
+          <td class="cell-num">59</td>
+          <td class="cell-num"><strong>98</strong></td>
+          <td class="cell-num">19</td>
+          <td class="cell-num" title="List-rate estimate">$52.75</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td class="cell-num">5</td>
+          <th scope="row" class="cell-model"><span class="model-id"><span class="model-name">GPT-6 Astra (xhigh effort)</span><span class="model-dev">OpenAI &middot; 1 run</span></span></th>
+          <td>Codex CLI</td>
+          <td class="cell-num">43</td>
+          <td class="cell-num">53</td>
+          <td class="cell-num"><strong>96</strong></td>
+          <td class="cell-num">5</td>
+          <td class="cell-num" title="List-rate estimate">$24.22</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td class="cell-num">6</td>
+          <th scope="row" class="cell-model"><span class="model-id"><span class="model-name">GPT-5.6 Sol (max effort) - mean of 2</span><span class="model-dev">OpenAI &middot; 2 runs</span></span></th>
+          <td>Codex CLI</td>
+          <td class="cell-num">43.5</td>
+          <td class="cell-num">48.5</td>
+          <td class="cell-num"><strong>92</strong></td>
+          <td class="cell-num">4</td>
+          <td class="cell-num" title="List-rate estimate">$95.35</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td class="cell-num">7</td>
+          <th scope="row" class="cell-model"><span class="model-id"><span class="model-name">GPT-6.1 Terra (max effort) - mean of 3</span><span class="model-dev">OpenAI &middot; 3 runs</span></span></th>
+          <td>Codex CLI</td>
+          <td class="cell-num">40.7</td>
+          <td class="cell-num">48</td>
+          <td class="cell-num"><strong>88.7</strong></td>
+          <td class="cell-num">13</td>
+          <td class="cell-num" title="List-rate estimate">$3.88</td>
+          <td><span class="badge badge-measured" title="On the Pareto frontier: no cheaper configuration fixes more bugs.">Frontier</span></td>
+        </tr>
+        <tr>
+          <td class="cell-num">8</td>
+          <th scope="row" class="cell-model"><span class="model-id"><span class="model-name">DeepSeek V4.1 Flash 1017 (max effort, DeepSeek Harness) - mean of 7</span><span class="model-dev">DeepSeek &middot; 7 runs</span></span></th>
+          <td>DeepSeek Harness / DeepSeek API</td>
+          <td class="cell-num">42.7</td>
+          <td class="cell-num">44</td>
+          <td class="cell-num"><strong>86.7</strong></td>
+          <td class="cell-num">7</td>
+          <td class="cell-num" title="Billed">$1.84</td>
+          <td><span class="badge badge-measured" title="On the Pareto frontier: no cheaper configuration fixes more bugs.">Frontier</span></td>
+        </tr>
+        <tr>
+          <td class="cell-num">9</td>
+          <th scope="row" class="cell-model"><span class="model-id"><span class="model-name">GPT-5.6 Luna (max effort) - mean of 3</span><span class="model-dev">OpenAI &middot; 3 runs</span></span></th>
+          <td>Codex CLI</td>
+          <td class="cell-num">31.3</td>
+          <td class="cell-num">54.7</td>
+          <td class="cell-num"><strong>86</strong></td>
+          <td class="cell-num">41</td>
+          <td class="cell-num" title="List-rate estimate">$3.15</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td class="cell-num">10</td>
+          <th scope="row" class="cell-model"><span class="model-id"><span class="model-name">DeepSeek V4.1 Flash 1017 (max effort, Pi) - mean of 5</span><span class="model-dev">DeepSeek &middot; 5 runs</span></span></th>
+          <td>Pi / DeepSeek API</td>
+          <td class="cell-num">42.2</td>
+          <td class="cell-num">41.8</td>
+          <td class="cell-num"><strong>84</strong></td>
+          <td class="cell-num">9</td>
+          <td class="cell-num" title="Billed">$0.83</td>
+          <td><span class="badge badge-measured" title="On the Pareto frontier: no cheaper configuration fixes more bugs.">Frontier</span></td>
+        </tr>
+        <tr>
+          <td class="cell-num">11</td>
+          <th scope="row" class="cell-model"><span class="model-id"><span class="model-name">DeepSeek V4.1 Flash 1017 (high effort, DeepSeek Harness) - mean of 5</span><span class="model-dev">DeepSeek &middot; 5 runs</span></span></th>
+          <td>DeepSeek Harness / DeepSeek API</td>
+          <td class="cell-num">39.2</td>
+          <td class="cell-num">43.8</td>
+          <td class="cell-num"><strong>83</strong></td>
+          <td class="cell-num">17</td>
+          <td class="cell-num" title="Billed">$1.27</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td class="cell-num">12</td>
+          <th scope="row" class="cell-model"><span class="model-id"><span class="model-name">Muse Wonder Full 1.0 (max effort, Muse Code, Meta API) - mean of 2</span><span class="model-dev">Meta &middot; 2 runs</span></span></th>
+          <td>Muse Code / Meta API</td>
+          <td class="cell-num">42</td>
+          <td class="cell-num">36.5</td>
+          <td class="cell-num"><strong>78.5</strong></td>
+          <td class="cell-num">10</td>
+          <td class="cell-num" title="Unknown">—</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td class="cell-num">13</td>
+          <th scope="row" class="cell-model"><span class="model-id"><span class="model-name">Sonnet 5.5 (max effort) - mean of 3</span><span class="model-dev">Anthropic &middot; 3 runs</span></span></th>
+          <td>Claude Code</td>
+          <td class="cell-num">51.3</td>
+          <td class="cell-num">26.3</td>
+          <td class="cell-num"><strong>77.6</strong></td>
+          <td class="cell-num">1</td>
+          <td class="cell-num" title="List-rate estimate">$154.03</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td class="cell-num">14</td>
+          <th scope="row" class="cell-model"><span class="model-id"><span class="model-name">GPT-5.6 Terra (max effort)</span><span class="model-dev">OpenAI &middot; 1 run</span></span></th>
+          <td>Codex CLI</td>
+          <td class="cell-num">32</td>
+          <td class="cell-num">45</td>
+          <td class="cell-num"><strong>77</strong></td>
+          <td class="cell-num">38</td>
+          <td class="cell-num" title="List-rate estimate">$27.98</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td class="cell-num">15</td>
+          <th scope="row" class="cell-model"><span class="model-id"><span class="model-name">GPT-6.1 Sol (high effort) - mean of 2</span><span class="model-dev">OpenAI &middot; 2 runs</span></span></th>
+          <td>Codex CLI</td>
+          <td class="cell-num">36.5</td>
+          <td class="cell-num">40</td>
+          <td class="cell-num"><strong>76.5</strong></td>
+          <td class="cell-num">22</td>
+          <td class="cell-num" title="List-rate estimate">$3.26</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td class="cell-num">16</td>
+          <th scope="row" class="cell-model"><span class="model-id"><span class="model-name">GPT-5.6 Luna (xhigh effort)</span><span class="model-dev">OpenAI &middot; 1 run</span></span></th>
+          <td>Codex CLI</td>
+          <td class="cell-num">23</td>
+          <td class="cell-num">53</td>
+          <td class="cell-num"><strong>76</strong></td>
+          <td class="cell-num">63</td>
+          <td class="cell-num" title="List-rate estimate">$2.50</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td class="cell-num">17</td>
+          <th scope="row" class="cell-model"><span class="model-id"><span class="model-name">GPT-6 Astra (high effort)</span><span class="model-dev">OpenAI &middot; 1 run</span></span></th>
+          <td>Codex CLI</td>
+          <td class="cell-num">35</td>
+          <td class="cell-num">40</td>
+          <td class="cell-num"><strong>75</strong></td>
+          <td class="cell-num">28</td>
+          <td class="cell-num" title="List-rate estimate">$20.60</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td class="cell-num">18</td>
+          <th scope="row" class="cell-model"><span class="model-id"><span class="model-name">DeepSeek V4.1 Flash 1017 (max effort, OpenCode) - mean of 5</span><span class="model-dev">DeepSeek &middot; 5 runs</span></span></th>
+          <td>OpenCode / DeepSeek API</td>
+          <td class="cell-num">37.6</td>
+          <td class="cell-num">36.2</td>
+          <td class="cell-num"><strong>73.8</strong></td>
+          <td class="cell-num">20</td>
+          <td class="cell-num" title="Billed">$0.96</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td class="cell-num">19</td>
+          <th scope="row" class="cell-model"><span class="model-id"><span class="model-name">GPT-6 Sol (max effort) - mean of 3</span><span class="model-dev">OpenAI &middot; 3 runs</span></span></th>
+          <td>Codex CLI</td>
+          <td class="cell-num">29.3</td>
+          <td class="cell-num">41.3</td>
+          <td class="cell-num"><strong>70.6</strong></td>
+          <td class="cell-num">44</td>
+          <td class="cell-num" title="List-rate estimate">$9.33</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td class="cell-num">20</td>
+          <th scope="row" class="cell-model"><span class="model-id"><span class="model-name">DeepSeek V4.1 Flash 1017 (high effort, Pi) - mean of 5</span><span class="model-dev">DeepSeek &middot; 5 runs</span></span></th>
+          <td>Pi / DeepSeek API</td>
+          <td class="cell-num">40.4</td>
+          <td class="cell-num">29.4</td>
+          <td class="cell-num"><strong>69.8</strong></td>
+          <td class="cell-num">15</td>
+          <td class="cell-num" title="Billed">$0.64</td>
+          <td><span class="badge badge-measured" title="On the Pareto frontier: no cheaper configuration fixes more bugs.">Frontier</span></td>
+        </tr>
+        <tr>
+          <td class="cell-num">21</td>
+          <th scope="row" class="cell-model"><span class="model-id"><span class="model-name">DeepSeek V4.1 Flash 1017 (low effort, DeepSeek Harness) - mean of 5</span><span class="model-dev">DeepSeek &middot; 5 runs</span></span></th>
+          <td>DeepSeek Harness / DeepSeek API</td>
+          <td class="cell-num">34.8</td>
+          <td class="cell-num">34.4</td>
+          <td class="cell-num"><strong>69.2</strong></td>
+          <td class="cell-num">29</td>
+          <td class="cell-num" title="Billed">$1.06</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td class="cell-num">22</td>
+          <th scope="row" class="cell-model"><span class="model-id"><span class="model-name">GPT-6 Astra (medium effort)</span><span class="model-dev">OpenAI &middot; 1 run</span></span></th>
+          <td>Codex CLI</td>
+          <td class="cell-num">34</td>
+          <td class="cell-num">33</td>
+          <td class="cell-num"><strong>67</strong></td>
+          <td class="cell-num">32</td>
+          <td class="cell-num" title="List-rate estimate">$15.78</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td class="cell-num">23</td>
+          <th scope="row" class="cell-model"><span class="model-id"><span class="model-name">Muse Wonder Full 1.0 (xhigh effort, Muse Code, Meta API) - mean of 2</span><span class="model-dev">Meta &middot; 2 runs</span></span></th>
+          <td>Muse Code / Meta API</td>
+          <td class="cell-num">41.5</td>
+          <td class="cell-num">24.5</td>
+          <td class="cell-num"><strong>66</strong></td>
+          <td class="cell-num">12</td>
+          <td class="cell-num" title="Unknown">—</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td class="cell-num">24</td>
+          <th scope="row" class="cell-model"><span class="model-id"><span class="model-name">Kimi K3.1 Pro (max effort, Moonshot API) - mean of 3</span><span class="model-dev">Moonshot AI &middot; 3 runs</span></span></th>
+          <td>Claude Code / Moonshot API</td>
+          <td class="cell-num">36</td>
+          <td class="cell-num">29.3</td>
+          <td class="cell-num"><strong>65.3</strong></td>
+          <td class="cell-num">24</td>
+          <td class="cell-num" title="Billed">$13.76</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td class="cell-num">25</td>
+          <th scope="row" class="cell-model"><span class="model-id"><span class="model-name">DeepSeek V4.1 Flash 1017 (high effort, OpenCode) - mean of 5</span><span class="model-dev">DeepSeek &middot; 5 runs</span></span></th>
+          <td>OpenCode / DeepSeek API</td>
+          <td class="cell-num">36.6</td>
+          <td class="cell-num">25.6</td>
+          <td class="cell-num"><strong>62.2</strong></td>
+          <td class="cell-num">21</td>
+          <td class="cell-num" title="Billed">$0.79</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td class="cell-num">26</td>
+          <th scope="row" class="cell-model"><span class="model-id"><span class="model-name">DeepSeek V4.1 Flash 1017 (max effort) - mean of 7</span><span class="model-dev">DeepSeek &middot; 7 runs</span></span></th>
+          <td>Claude Code / DeepSeek API</td>
+          <td class="cell-num">39.1</td>
+          <td class="cell-num">22.9</td>
+          <td class="cell-num"><strong>62</strong></td>
+          <td class="cell-num">18</td>
+          <td class="cell-num" title="Billed">$1.01</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td class="cell-num">26</td>
+          <th scope="row" class="cell-model"><span class="model-id"><span class="model-name">GPT-5.6 Sol (re-run Jul 31)</span><span class="model-dev">OpenAI &middot; 1 run</span></span></th>
+          <td>Codex CLI</td>
+          <td class="cell-num">34</td>
+          <td class="cell-num">28</td>
+          <td class="cell-num"><strong>62</strong></td>
+          <td class="cell-num">32</td>
+          <td class="cell-num" title="List-rate estimate">$33.92</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td class="cell-num">28</td>
+          <th scope="row" class="cell-model"><span class="model-id"><span class="model-name">Grok 4.7 (xhigh) - mean of 5</span><span class="model-dev">xAI &middot; 5 runs</span></span></th>
+          <td>Grok Build CLI (ACP)</td>
+          <td class="cell-num">29</td>
+          <td class="cell-num">32.2</td>
+          <td class="cell-num"><strong>61.2</strong></td>
+          <td class="cell-num">45</td>
+          <td class="cell-num" title="Lower bound (floor)">$22.96</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td class="cell-num">29</td>
+          <th scope="row" class="cell-model"><span class="model-id"><span class="model-name">DeepSeek V4.1 Flash 1017 (high effort) - mean of 5</span><span class="model-dev">DeepSeek &middot; 5 runs</span></span></th>
+          <td>Claude Code / DeepSeek API</td>
+          <td class="cell-num">36.4</td>
+          <td class="cell-num">24.4</td>
+          <td class="cell-num"><strong>60.8</strong></td>
+          <td class="cell-num">23</td>
+          <td class="cell-num" title="Billed">$0.82</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td class="cell-num">30</td>
+          <th scope="row" class="cell-model"><span class="model-id"><span class="model-name">GPT-6.1 Sol (medium effort) - mean of 2</span><span class="model-dev">OpenAI &middot; 2 runs</span></span></th>
+          <td>Codex CLI</td>
+          <td class="cell-num">29</td>
+          <td class="cell-num">30.5</td>
+          <td class="cell-num"><strong>59.5</strong></td>
+          <td class="cell-num">45</td>
+          <td class="cell-num" title="List-rate estimate">$1.76</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td class="cell-num">31</td>
+          <th scope="row" class="cell-model"><span class="model-id"><span class="model-name">Muse Spark 1.3 (max effort, Muse Code, Meta API) - mean of 5</span><span class="model-dev">Meta &middot; 5 runs</span></span></th>
+          <td>Muse Code / Meta API</td>
+          <td class="cell-num">32.2</td>
+          <td class="cell-num">24</td>
+          <td class="cell-num"><strong>56.2</strong></td>
+          <td class="cell-num">37</td>
+          <td class="cell-num" title="List-rate estimate">$18.11</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td class="cell-num">32</td>
+          <th scope="row" class="cell-model"><span class="model-id"><span class="model-name">Fable 5.1 (max effort)</span><span class="model-dev">Anthropic &middot; 1 run</span></span></th>
+          <td>Claude Code</td>
+          <td class="cell-num">43</td>
+          <td class="cell-num">11</td>
+          <td class="cell-num"><strong>54</strong></td>
+          <td class="cell-num">5</td>
+          <td class="cell-num" title="List-rate estimate">$87.18</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td class="cell-num">33</td>
+          <th scope="row" class="cell-model"><span class="model-id"><span class="model-name">DeepSeek V4.1 Flash 1017 (low effort, Pi) - mean of 5</span><span class="model-dev">DeepSeek &middot; 5 runs</span></span></th>
+          <td>Pi / DeepSeek API</td>
+          <td class="cell-num">33.8</td>
+          <td class="cell-num">19.6</td>
+          <td class="cell-num"><strong>53.4</strong></td>
+          <td class="cell-num">34</td>
+          <td class="cell-num" title="Billed">$0.46</td>
+          <td><span class="badge badge-measured" title="On the Pareto frontier: no cheaper configuration fixes more bugs.">Frontier</span></td>
+        </tr>
+        <tr>
+          <td class="cell-num">34</td>
+          <th scope="row" class="cell-model"><span class="model-id"><span class="model-name">GPT-5.6 Sol (medium effort)</span><span class="model-dev">OpenAI &middot; 1 run</span></span></th>
+          <td>Codex CLI</td>
+          <td class="cell-num">29</td>
+          <td class="cell-num">24</td>
+          <td class="cell-num"><strong>53</strong></td>
+          <td class="cell-num">45</td>
+          <td class="cell-num" title="List-rate estimate">$15.77</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td class="cell-num">35</td>
+          <th scope="row" class="cell-model"><span class="model-id"><span class="model-name">GPT-6 Astra (low effort)</span><span class="model-dev">OpenAI &middot; 1 run</span></span></th>
+          <td>Codex CLI</td>
+          <td class="cell-num">27</td>
+          <td class="cell-num">25</td>
+          <td class="cell-num"><strong>52</strong></td>
+          <td class="cell-num">52</td>
+          <td class="cell-num" title="List-rate estimate">$11.69</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td class="cell-num">36</td>
+          <th scope="row" class="cell-model"><span class="model-id"><span class="model-name">DeepSeek V4.1 Flash 1017 (low effort) - mean of 5</span><span class="model-dev">DeepSeek &middot; 5 runs</span></span></th>
+          <td>Claude Code / DeepSeek API</td>
+          <td class="cell-num">34.4</td>
+          <td class="cell-num">16.8</td>
+          <td class="cell-num"><strong>51.2</strong></td>
+          <td class="cell-num">30</td>
+          <td class="cell-num" title="Billed">$0.71</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td class="cell-num">37</td>
+          <th scope="row" class="cell-model"><span class="model-id"><span class="model-name">Opus 5.5 (max effort) - mean of 3</span><span class="model-dev">Anthropic &middot; 3 runs</span></span></th>
+          <td>Claude Code</td>
+          <td class="cell-num">41.7</td>
+          <td class="cell-num">9</td>
+          <td class="cell-num"><strong>50.7</strong></td>
+          <td class="cell-num">11</td>
+          <td class="cell-num" title="List-rate estimate">$58.53</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td class="cell-num">38</td>
+          <th scope="row" class="cell-model"><span class="model-id"><span class="model-name">Gemini 4 Argon (medium effort, Antigravity CLI) - mean of 3</span><span class="model-dev">Google &middot; 3 runs</span></span></th>
+          <td>Antigravity CLI</td>
+          <td class="cell-num">39.3</td>
+          <td class="cell-num">11.3</td>
+          <td class="cell-num"><strong>50.6</strong></td>
+          <td class="cell-num">16</td>
+          <td class="cell-num" title="List-rate estimate">$7.50</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td class="cell-num">39</td>
+          <th scope="row" class="cell-model"><span class="model-id"><span class="model-name">DeepSeek V4.1 Flash 1017 (low effort, OpenCode) - mean of 5</span><span class="model-dev">DeepSeek &middot; 5 runs</span></span></th>
+          <td>OpenCode / DeepSeek API</td>
+          <td class="cell-num">32.8</td>
+          <td class="cell-num">17.6</td>
+          <td class="cell-num"><strong>50.4</strong></td>
+          <td class="cell-num">36</td>
+          <td class="cell-num" title="Billed">$0.66</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td class="cell-num">40</td>
+          <th scope="row" class="cell-model"><span class="model-id"><span class="model-name">Sonnet 5.5 (xhigh effort) - mean of 3</span><span class="model-dev">Anthropic &middot; 3 runs</span></span></th>
+          <td>Claude Code</td>
+          <td class="cell-num">36</td>
+          <td class="cell-num">14</td>
+          <td class="cell-num"><strong>50</strong></td>
+          <td class="cell-num">24</td>
+          <td class="cell-num" title="List-rate estimate">$42.86</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td class="cell-num">41</td>
+          <th scope="row" class="cell-model"><span class="model-id"><span class="model-name">Grok 4.7 (medium) - mean of 3</span><span class="model-dev">xAI &middot; 3 runs</span></span></th>
+          <td>Grok Build CLI (ACP)</td>
+          <td class="cell-num">26.7</td>
+          <td class="cell-num">22.7</td>
+          <td class="cell-num"><strong>49.4</strong></td>
+          <td class="cell-num">54</td>
+          <td class="cell-num" title="Lower bound (floor)">$16.76</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td class="cell-num">42</td>
+          <th scope="row" class="cell-model"><span class="model-id"><span class="model-name">Opus 5.5 (xhigh effort) - mean of 3</span><span class="model-dev">Anthropic &middot; 3 runs</span></span></th>
+          <td>Claude Code</td>
+          <td class="cell-num">36</td>
+          <td class="cell-num">13.3</td>
+          <td class="cell-num"><strong>49.3</strong></td>
+          <td class="cell-num">24</td>
+          <td class="cell-num" title="List-rate estimate">$34.98</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td class="cell-num">43</td>
+          <th scope="row" class="cell-model"><span class="model-id"><span class="model-name">GPT-6 Sol (xhigh effort)</span><span class="model-dev">OpenAI &middot; 1 run</span></span></th>
+          <td>Codex CLI</td>
+          <td class="cell-num">25</td>
+          <td class="cell-num">24</td>
+          <td class="cell-num"><strong>49</strong></td>
+          <td class="cell-num">58</td>
+          <td class="cell-num" title="List-rate estimate">$7.67</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td class="cell-num">43</td>
+          <th scope="row" class="cell-model"><span class="model-id"><span class="model-name">GPT-5.6 Terra (xhigh effort)</span><span class="model-dev">OpenAI &middot; 1 run</span></span></th>
+          <td>Codex CLI</td>
+          <td class="cell-num">20</td>
+          <td class="cell-num">29</td>
+          <td class="cell-num"><strong>49</strong></td>
+          <td class="cell-num">77</td>
+          <td class="cell-num" title="List-rate estimate">$8.98</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td class="cell-num">45</td>
+          <th scope="row" class="cell-model"><span class="model-id"><span class="model-name">Gemini 4 Argon (high effort, Antigravity CLI) - mean of 3</span><span class="model-dev">Google &middot; 3 runs</span></span></th>
+          <td>Antigravity CLI</td>
+          <td class="cell-num">40.7</td>
+          <td class="cell-num">7.3</td>
+          <td class="cell-num"><strong>48</strong></td>
+          <td class="cell-num">13</td>
+          <td class="cell-num" title="List-rate estimate">$7.16</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td class="cell-num">46</td>
+          <th scope="row" class="cell-model"><span class="model-id"><span class="model-name">Grok 4.6 (xhigh) seq - mean of 3</span><span class="model-dev">xAI &middot; 3 runs</span></span></th>
+          <td>Grok Build CLI (ACP)</td>
+          <td class="cell-num">28.7</td>
+          <td class="cell-num">18</td>
+          <td class="cell-num"><strong>46.7</strong></td>
+          <td class="cell-num">51</td>
+          <td class="cell-num" title="Lower bound (floor)">$18.60</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td class="cell-num">47</td>
+          <th scope="row" class="cell-model"><span class="model-id"><span class="model-name">GPT-6.1 Sol (low effort) - mean of 2</span><span class="model-dev">OpenAI &middot; 2 runs</span></span></th>
+          <td>Codex CLI</td>
+          <td class="cell-num">22.5</td>
+          <td class="cell-num">24</td>
+          <td class="cell-num"><strong>46.5</strong></td>
+          <td class="cell-num">67</td>
+          <td class="cell-num" title="List-rate estimate">$1.34</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td class="cell-num">48</td>
+          <th scope="row" class="cell-model"><span class="model-id"><span class="model-name">Sonnet 5.5 (high effort) - mean of 3</span><span class="model-dev">Anthropic &middot; 3 runs</span></span></th>
+          <td>Claude Code</td>
+          <td class="cell-num">34.3</td>
+          <td class="cell-num">10.7</td>
+          <td class="cell-num"><strong>45</strong></td>
+          <td class="cell-num">31</td>
+          <td class="cell-num" title="List-rate estimate">$19.85</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td class="cell-num">48</td>
+          <th scope="row" class="cell-model"><span class="model-id"><span class="model-name">Muse Wonder 1.0 (max effort, Muse Code, Meta API) - mean of 3</span><span class="model-dev">Meta &middot; 3 runs</span></span></th>
+          <td>Muse Code / Meta API</td>
+          <td class="cell-num">31.7</td>
+          <td class="cell-num">13.3</td>
+          <td class="cell-num"><strong>45</strong></td>
+          <td class="cell-num">39</td>
+          <td class="cell-num" title="List-rate estimate">$27.87</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td class="cell-num">50</td>
+          <th scope="row" class="cell-model"><span class="model-id"><span class="model-name">Opus 5.5 (medium effort) - mean of 3</span><span class="model-dev">Anthropic &middot; 3 runs</span></span></th>
+          <td>Claude Code</td>
+          <td class="cell-num">30.3</td>
+          <td class="cell-num">13.3</td>
+          <td class="cell-num"><strong>43.6</strong></td>
+          <td class="cell-num">43</td>
+          <td class="cell-num" title="List-rate estimate">$15.68</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td class="cell-num">51</td>
+          <th scope="row" class="cell-model"><span class="model-id"><span class="model-name">Opus 5.5 (high effort) - mean of 3</span><span class="model-dev">Anthropic &middot; 3 runs</span></span></th>
+          <td>Claude Code</td>
+          <td class="cell-num">31.7</td>
+          <td class="cell-num">10.7</td>
+          <td class="cell-num"><strong>42.4</strong></td>
+          <td class="cell-num">39</td>
+          <td class="cell-num" title="List-rate estimate">$22.25</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td class="cell-num">52</td>
+          <th scope="row" class="cell-model"><span class="model-id"><span class="model-name">Gemini 4 Argon (low effort, Antigravity CLI) - mean of 3</span><span class="model-dev">Google &middot; 3 runs</span></span></th>
+          <td>Antigravity CLI</td>
+          <td class="cell-num">35.3</td>
+          <td class="cell-num">5.7</td>
+          <td class="cell-num"><strong>41</strong></td>
+          <td class="cell-num">27</td>
+          <td class="cell-num" title="List-rate estimate">$6.47</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td class="cell-num">52</td>
+          <th scope="row" class="cell-model"><span class="model-id"><span class="model-name">Union Alpha (stealth; free) - mean of 3</span><span class="model-dev">Unbiased &middot; 3 runs</span></span></th>
+          <td>Claude Code / OpenRouter</td>
+          <td class="cell-num">30.7</td>
+          <td class="cell-num">10.3</td>
+          <td class="cell-num"><strong>41</strong></td>
+          <td class="cell-num">42</td>
+          <td class="cell-num" title="List-rate estimate">$4.81</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td class="cell-num">52</td>
+          <th scope="row" class="cell-model"><span class="model-id"><span class="model-name">GPT-6 Luna (max effort) - mean of 3</span><span class="model-dev">OpenAI &middot; 3 runs</span></span></th>
+          <td>Codex CLI</td>
+          <td class="cell-num">18.3</td>
+          <td class="cell-num">22.7</td>
+          <td class="cell-num"><strong>41</strong></td>
+          <td class="cell-num">84</td>
+          <td class="cell-num" title="List-rate estimate">$0.52</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td class="cell-num">55</td>
+          <th scope="row" class="cell-model"><span class="model-id"><span class="model-name">Fable 5.1</span><span class="model-dev">Anthropic &middot; 1 run</span></span></th>
+          <td>Claude Code</td>
+          <td class="cell-num">33</td>
+          <td class="cell-num">7</td>
+          <td class="cell-num"><strong>40</strong></td>
+          <td class="cell-num">35</td>
+          <td class="cell-num" title="List-rate estimate">$48.58</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td class="cell-num">56</td>
+          <th scope="row" class="cell-model"><span class="model-id"><span class="model-name">Grok 4.6 (high)</span><span class="model-dev">xAI &middot; 1 run</span></span></th>
+          <td>Grok Build CLI (ACP)</td>
+          <td class="cell-num">23</td>
+          <td class="cell-num">16</td>
+          <td class="cell-num"><strong>39</strong></td>
+          <td class="cell-num">63</td>
+          <td class="cell-num" title="Lower bound (floor)">$15.73</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td class="cell-num">57</td>
+          <th scope="row" class="cell-model"><span class="model-id"><span class="model-name">Muse Spark 1.3 (high effort, Muse Code, Meta API) - mean of 3</span><span class="model-dev">Meta &middot; 3 runs</span></span></th>
+          <td>Muse Code / Meta API</td>
+          <td class="cell-num">18.7</td>
+          <td class="cell-num">19.3</td>
+          <td class="cell-num"><strong>38</strong></td>
+          <td class="cell-num">83</td>
+          <td class="cell-num" title="List-rate estimate">$12.94</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td class="cell-num">58</td>
+          <th scope="row" class="cell-model"><span class="model-id"><span class="model-name">Fable 5.1 (low effort)</span><span class="model-dev">Anthropic &middot; 1 run</span></span></th>
+          <td>Claude Code</td>
+          <td class="cell-num">29</td>
+          <td class="cell-num">6</td>
+          <td class="cell-num"><strong>35</strong></td>
+          <td class="cell-num">45</td>
+          <td class="cell-num" title="List-rate estimate">$33.00</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td class="cell-num">58</td>
+          <th scope="row" class="cell-model"><span class="model-id"><span class="model-name">GPT-6 Sol (high effort)</span><span class="model-dev">OpenAI &middot; 1 run</span></span></th>
+          <td>Codex CLI</td>
+          <td class="cell-num">20</td>
+          <td class="cell-num">15</td>
+          <td class="cell-num"><strong>35</strong></td>
+          <td class="cell-num">77</td>
+          <td class="cell-num" title="List-rate estimate">$4.16</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td class="cell-num">58</td>
+          <th scope="row" class="cell-model"><span class="model-id"><span class="model-name">Grok 4.7 (high) - mean of 3</span><span class="model-dev">xAI &middot; 3 runs</span></span></th>
+          <td>Grok Build CLI (ACP)</td>
+          <td class="cell-num">19.3</td>
+          <td class="cell-num">15.7</td>
+          <td class="cell-num"><strong>35</strong></td>
+          <td class="cell-num">79</td>
+          <td class="cell-num" title="Lower bound (floor)">$12.29</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td class="cell-num">58</td>
+          <th scope="row" class="cell-model"><span class="model-id"><span class="model-name">GPT-5.6 Terra (high effort)</span><span class="model-dev">OpenAI &middot; 1 run</span></span></th>
+          <td>Codex CLI</td>
+          <td class="cell-num">18</td>
+          <td class="cell-num">17</td>
+          <td class="cell-num"><strong>35</strong></td>
+          <td class="cell-num">86</td>
+          <td class="cell-num" title="List-rate estimate">$5.89</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td class="cell-num">58</td>
+          <th scope="row" class="cell-model"><span class="model-id"><span class="model-name">GPT-5.6 Luna (high effort)</span><span class="model-dev">OpenAI &middot; 1 run</span></span></th>
+          <td>Codex CLI</td>
+          <td class="cell-num">13</td>
+          <td class="cell-num">22</td>
+          <td class="cell-num"><strong>35</strong></td>
+          <td class="cell-num">107</td>
+          <td class="cell-num" title="List-rate estimate">$0.57</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td class="cell-num">63</td>
+          <th scope="row" class="cell-model"><span class="model-id"><span class="model-name">Fable 5 (max effort)</span><span class="model-dev">Anthropic &middot; 1 run</span></span></th>
+          <td>Claude Code</td>
+          <td class="cell-num">29</td>
+          <td class="cell-num">5</td>
+          <td class="cell-num"><strong>34</strong></td>
+          <td class="cell-num">45</td>
+          <td class="cell-num" title="List-rate estimate">$112.40</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td class="cell-num">63</td>
+          <th scope="row" class="cell-model"><span class="model-id"><span class="model-name">Grok 4.7 (low) - mean of 3</span><span class="model-dev">xAI &middot; 3 runs</span></span></th>
+          <td>Grok Build CLI (ACP)</td>
+          <td class="cell-num">15.7</td>
+          <td class="cell-num">18.3</td>
+          <td class="cell-num"><strong>34</strong></td>
+          <td class="cell-num">98</td>
+          <td class="cell-num" title="Lower bound (floor)">$9.36</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td class="cell-num">65</td>
+          <th scope="row" class="cell-model"><span class="model-id"><span class="model-name">Muse Spark 1.3 (xhigh effort, Muse Code, Meta API) - mean of 3</span><span class="model-dev">Meta &middot; 3 runs</span></span></th>
+          <td>Muse Code / Meta API</td>
+          <td class="cell-num">20.3</td>
+          <td class="cell-num">13.3</td>
+          <td class="cell-num"><strong>33.6</strong></td>
+          <td class="cell-num">76</td>
+          <td class="cell-num" title="List-rate estimate">$13.71</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td class="cell-num">66</td>
+          <th scope="row" class="cell-model"><span class="model-id"><span class="model-name">Fable 5.1 (xhigh effort)</span><span class="model-dev">Anthropic &middot; 1 run</span></span></th>
+          <td>Claude Code</td>
+          <td class="cell-num">29</td>
+          <td class="cell-num">4</td>
+          <td class="cell-num"><strong>33</strong></td>
+          <td class="cell-num">45</td>
+          <td class="cell-num" title="List-rate estimate">$53.61</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td class="cell-num">66</td>
+          <th scope="row" class="cell-model"><span class="model-id"><span class="model-name">Qwen3.8-Flash (max effort)</span><span class="model-dev">Alibaba &middot; 1 run</span></span></th>
+          <td>Claude Code / Alibaba API</td>
+          <td class="cell-num">26</td>
+          <td class="cell-num">7</td>
+          <td class="cell-num"><strong>33</strong></td>
+          <td class="cell-num">55</td>
+          <td class="cell-num" title="List-rate estimate">$1.81</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td class="cell-num">66</td>
+          <th scope="row" class="cell-model"><span class="model-id"><span class="model-name">Grok 4.6 (medium) seq</span><span class="model-dev">xAI &middot; 1 run</span></span></th>
+          <td>Grok Build CLI (ACP)</td>
+          <td class="cell-num">22</td>
+          <td class="cell-num">11</td>
+          <td class="cell-num"><strong>33</strong></td>
+          <td class="cell-num">69</td>
+          <td class="cell-num" title="Lower bound (floor)">$5.80</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td class="cell-num">69</td>
+          <th scope="row" class="cell-model"><span class="model-id"><span class="model-name">Qwen3.8-Max (max effort, Alibaba API) - mean of 3</span><span class="model-dev">Alibaba &middot; 3 runs</span></span></th>
+          <td>Claude Code / Alibaba API</td>
+          <td class="cell-num">25.7</td>
+          <td class="cell-num">7</td>
+          <td class="cell-num"><strong>32.7</strong></td>
+          <td class="cell-num">57</td>
+          <td class="cell-num" title="List-rate estimate">$26.76</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td class="cell-num">70</td>
+          <th scope="row" class="cell-model"><span class="model-id"><span class="model-name">Sonnet 5.5 (medium effort) - mean of 3</span><span class="model-dev">Anthropic &middot; 3 runs</span></span></th>
+          <td>Claude Code</td>
+          <td class="cell-num">23.3</td>
+          <td class="cell-num">8.7</td>
+          <td class="cell-num"><strong>32</strong></td>
+          <td class="cell-num">61</td>
+          <td class="cell-num" title="List-rate estimate">$11.11</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td class="cell-num">70</td>
+          <th scope="row" class="cell-model"><span class="model-id"><span class="model-name">Opus 5.5 (low effort) - mean of 3</span><span class="model-dev">Anthropic &middot; 3 runs</span></span></th>
+          <td>Claude Code</td>
+          <td class="cell-num">22.3</td>
+          <td class="cell-num">9.7</td>
+          <td class="cell-num"><strong>32</strong></td>
+          <td class="cell-num">68</td>
+          <td class="cell-num" title="List-rate estimate">$8.34</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td class="cell-num">72</td>
+          <th scope="row" class="cell-model"><span class="model-id"><span class="model-name">MiMo-V2.6-Flash - mean of 3</span><span class="model-dev">Xiaomi &middot; 3 runs</span></span></th>
+          <td>Claude Code / OpenRouter</td>
+          <td class="cell-num">23.3</td>
+          <td class="cell-num">7.3</td>
+          <td class="cell-num"><strong>30.6</strong></td>
+          <td class="cell-num">61</td>
+          <td class="cell-num" title="Billed">$0.49</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td class="cell-num">73</td>
+          <th scope="row" class="cell-model"><span class="model-id"><span class="model-name">Haiku 5.5 (max effort) - mean of 2</span><span class="model-dev">Anthropic &middot; 2 runs</span></span></th>
+          <td>Claude Code</td>
+          <td class="cell-num">21.5</td>
+          <td class="cell-num">9</td>
+          <td class="cell-num"><strong>30.5</strong></td>
+          <td class="cell-num">72</td>
+          <td class="cell-num" title="List-rate estimate">$5.83</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td class="cell-num">74</td>
+          <th scope="row" class="cell-model"><span class="model-id"><span class="model-name">Muse Spark 1.3 (medium effort, Muse Code, Meta API) - mean of 3</span><span class="model-dev">Meta &middot; 3 runs</span></span></th>
+          <td>Muse Code / Meta API</td>
+          <td class="cell-num">13</td>
+          <td class="cell-num">17.3</td>
+          <td class="cell-num"><strong>30.3</strong></td>
+          <td class="cell-num">107</td>
+          <td class="cell-num" title="List-rate estimate">$9.24</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td class="cell-num">75</td>
+          <th scope="row" class="cell-model"><span class="model-id"><span class="model-name">Qwen3.8-Flash (low effort)</span><span class="model-dev">Alibaba &middot; 1 run</span></span></th>
+          <td>Claude Code / Alibaba API</td>
+          <td class="cell-num">23</td>
+          <td class="cell-num">7</td>
+          <td class="cell-num"><strong>30</strong></td>
+          <td class="cell-num">63</td>
+          <td class="cell-num" title="List-rate estimate">$1.37</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td class="cell-num">76</td>
+          <th scope="row" class="cell-model"><span class="model-id"><span class="model-name">Opus 5 (max effort)</span><span class="model-dev">Anthropic &middot; 1 run</span></span></th>
+          <td>Claude Code</td>
+          <td class="cell-num">27</td>
+          <td class="cell-num">2</td>
+          <td class="cell-num"><strong>29</strong></td>
+          <td class="cell-num">52</td>
+          <td class="cell-num" title="List-rate estimate">$54.94</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td class="cell-num">76</td>
+          <th scope="row" class="cell-model"><span class="model-id"><span class="model-name">Opus 5 (xhigh effort)</span><span class="model-dev">Anthropic &middot; 1 run</span></span></th>
+          <td>Claude Code</td>
+          <td class="cell-num">26</td>
+          <td class="cell-num">3</td>
+          <td class="cell-num"><strong>29</strong></td>
+          <td class="cell-num">55</td>
+          <td class="cell-num" title="List-rate estimate">$63.25</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td class="cell-num">76</td>
+          <th scope="row" class="cell-model"><span class="model-id"><span class="model-name">Muse Spark 1.2 (xhigh, Meta API)</span><span class="model-dev">Meta &middot; 1 run</span></span></th>
+          <td>Claude Code / Meta API</td>
+          <td class="cell-num">17</td>
+          <td class="cell-num">12</td>
+          <td class="cell-num"><strong>29</strong></td>
+          <td class="cell-num">91</td>
+          <td class="cell-num" title="List-rate estimate">$13.99</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td class="cell-num">79</td>
+          <th scope="row" class="cell-model"><span class="model-id"><span class="model-name">DeepSeek V4.1 Flash (max effort) - mean of 3</span><span class="model-dev">DeepSeek &middot; 3 runs</span></span></th>
+          <td>Claude Code / DeepSeek API</td>
+          <td class="cell-num">21.7</td>
+          <td class="cell-num">6.7</td>
+          <td class="cell-num"><strong>28.4</strong></td>
+          <td class="cell-num">71</td>
+          <td class="cell-num" title="Billed">$0.78</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td class="cell-num">80</td>
+          <th scope="row" class="cell-model"><span class="model-id"><span class="model-name">GPT-6.1 Terra (xhigh effort) - mean of 3</span><span class="model-dev">OpenAI &middot; 3 runs</span></span></th>
+          <td>Codex CLI</td>
+          <td class="cell-num">11.3</td>
+          <td class="cell-num">17</td>
+          <td class="cell-num"><strong>28.3</strong></td>
+          <td class="cell-num">112</td>
+          <td class="cell-num" title="List-rate estimate">$0.75</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td class="cell-num">81</td>
+          <th scope="row" class="cell-model"><span class="model-id"><span class="model-name">Opus 5 (medium effort)</span><span class="model-dev">Anthropic &middot; 1 run</span></span></th>
+          <td>Claude Code</td>
+          <td class="cell-num">24</td>
+          <td class="cell-num">4</td>
+          <td class="cell-num"><strong>28</strong></td>
+          <td class="cell-num">59</td>
+          <td class="cell-num" title="List-rate estimate">$37.40</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td class="cell-num">81</td>
+          <th scope="row" class="cell-model"><span class="model-id"><span class="model-name">MiMo-V2.6-Pro - mean of 3</span><span class="model-dev">Xiaomi &middot; 3 runs</span></span></th>
+          <td>Claude Code / OpenRouter</td>
+          <td class="cell-num">22.7</td>
+          <td class="cell-num">5.3</td>
+          <td class="cell-num"><strong>28</strong></td>
+          <td class="cell-num">66</td>
+          <td class="cell-num" title="Billed">$0.86</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td class="cell-num">83</td>
+          <th scope="row" class="cell-model"><span class="model-id"><span class="model-name">Fable 5</span><span class="model-dev">Anthropic &middot; 1 run</span></span></th>
+          <td>Claude Code</td>
+          <td class="cell-num">24</td>
+          <td class="cell-num">3</td>
+          <td class="cell-num"><strong>27</strong></td>
+          <td class="cell-num">59</td>
+          <td class="cell-num" title="List-rate estimate">$74.52</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td class="cell-num">83</td>
+          <th scope="row" class="cell-model"><span class="model-id"><span class="model-name">Kimi K3</span><span class="model-dev">Moonshot AI &middot; 1 run</span></span></th>
+          <td>Claude Code / OpenRouter</td>
+          <td class="cell-num">21</td>
+          <td class="cell-num">6</td>
+          <td class="cell-num"><strong>27</strong></td>
+          <td class="cell-num">73</td>
+          <td class="cell-num" title="List-rate estimate">$25.27</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td class="cell-num">83</td>
+          <th scope="row" class="cell-model"><span class="model-id"><span class="model-name">Opus 5</span><span class="model-dev">Anthropic &middot; 1 run</span></span></th>
+          <td>Claude Code</td>
+          <td class="cell-num">21</td>
+          <td class="cell-num">6</td>
+          <td class="cell-num"><strong>27</strong></td>
+          <td class="cell-num">73</td>
+          <td class="cell-num" title="List-rate estimate">$41.51</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td class="cell-num">83</td>
+          <th scope="row" class="cell-model"><span class="model-id"><span class="model-name">Sonnet 5.5 (low effort) - mean of 3</span><span class="model-dev">Anthropic &middot; 3 runs</span></span></th>
+          <td>Claude Code</td>
+          <td class="cell-num">19</td>
+          <td class="cell-num">8</td>
+          <td class="cell-num"><strong>27</strong></td>
+          <td class="cell-num">80</td>
+          <td class="cell-num" title="List-rate estimate">$5.73</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td class="cell-num">83</td>
+          <th scope="row" class="cell-model"><span class="model-id"><span class="model-name">Grok 4.5 (re-run Aug 6)</span><span class="model-dev">xAI &middot; 1 run</span></span></th>
+          <td>Grok Build CLI (ACP)</td>
+          <td class="cell-num">17</td>
+          <td class="cell-num">10</td>
+          <td class="cell-num"><strong>27</strong></td>
+          <td class="cell-num">91</td>
+          <td class="cell-num" title="Lower bound (floor)">$8.50</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td class="cell-num">83</td>
+          <th scope="row" class="cell-model"><span class="model-id"><span class="model-name">GPT-6 Sol (medium effort)</span><span class="model-dev">OpenAI &middot; 1 run</span></span></th>
+          <td>Codex CLI</td>
+          <td class="cell-num">14</td>
+          <td class="cell-num">13</td>
+          <td class="cell-num"><strong>27</strong></td>
+          <td class="cell-num">104</td>
+          <td class="cell-num" title="List-rate estimate">$2.39</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td class="cell-num">89</td>
+          <th scope="row" class="cell-model"><span class="model-id"><span class="model-name">Gemini 3.7 Flash (high)</span><span class="model-dev">Google &middot; 1 run</span></span></th>
+          <td>Gemini CLI (retired) + model-pinning gateway</td>
+          <td class="cell-num">22</td>
+          <td class="cell-num">4</td>
+          <td class="cell-num"><strong>26</strong></td>
+          <td class="cell-num">69</td>
+          <td class="cell-num" title="List-rate estimate">$8.43</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td class="cell-num">89</td>
+          <th scope="row" class="cell-model"><span class="model-id"><span class="model-name">GPT-6 Luna (xhigh effort)</span><span class="model-dev">OpenAI &middot; 1 run</span></span></th>
+          <td>Codex CLI</td>
+          <td class="cell-num">14</td>
+          <td class="cell-num">12</td>
+          <td class="cell-num"><strong>26</strong></td>
+          <td class="cell-num">104</td>
+          <td class="cell-num" title="List-rate estimate">$0.39</td>
+          <td><span class="badge badge-measured" title="On the Pareto frontier: no cheaper configuration fixes more bugs.">Frontier</span></td>
+        </tr>
+        <tr>
+          <td class="cell-num">91</td>
+          <th scope="row" class="cell-model"><span class="model-id"><span class="model-name">Haiku 5.5 (xhigh effort) - mean of 3</span><span class="model-dev">Anthropic &middot; 3 runs</span></span></th>
+          <td>Claude Code</td>
+          <td class="cell-num">18.3</td>
+          <td class="cell-num">6.7</td>
+          <td class="cell-num"><strong>25</strong></td>
+          <td class="cell-num">84</td>
+          <td class="cell-num" title="List-rate estimate">$4.80</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td class="cell-num">92</td>
+          <th scope="row" class="cell-model"><span class="model-id"><span class="model-name">Fable 5.1 (medium effort)</span><span class="model-dev">Anthropic &middot; 1 run</span></span></th>
+          <td>Claude Code</td>
+          <td class="cell-num">21</td>
+          <td class="cell-num">3</td>
+          <td class="cell-num"><strong>24</strong></td>
+          <td class="cell-num">73</td>
+          <td class="cell-num" title="List-rate estimate">$23.73</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td class="cell-num">92</td>
+          <th scope="row" class="cell-model"><span class="model-id"><span class="model-name">Grok 4.6 (low)</span><span class="model-dev">xAI &middot; 1 run</span></span></th>
+          <td>Grok Build CLI (ACP)</td>
+          <td class="cell-num">15</td>
+          <td class="cell-num">9</td>
+          <td class="cell-num"><strong>24</strong></td>
+          <td class="cell-num">99</td>
+          <td class="cell-num" title="Lower bound (floor)">$4.14</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td class="cell-num">94</td>
+          <th scope="row" class="cell-model"><span class="model-id"><span class="model-name">DeepSeek V4.1 Flash (high effort)</span><span class="model-dev">DeepSeek &middot; 1 run</span></span></th>
+          <td>Claude Code / DeepSeek API</td>
+          <td class="cell-num">19</td>
+          <td class="cell-num">4</td>
+          <td class="cell-num"><strong>23</strong></td>
+          <td class="cell-num">80</td>
+          <td class="cell-num" title="Billed">$0.31</td>
+          <td><span class="badge badge-measured" title="On the Pareto frontier: no cheaper configuration fixes more bugs.">Frontier</span></td>
+        </tr>
+        <tr>
+          <td class="cell-num">95</td>
+          <th scope="row" class="cell-model"><span class="model-id"><span class="model-name">Gemini 3.8 Flash - mean of 3</span><span class="model-dev">Google &middot; 3 runs</span></span></th>
+          <td>Antigravity CLI</td>
+          <td class="cell-num">18</td>
+          <td class="cell-num">4</td>
+          <td class="cell-num"><strong>22</strong></td>
+          <td class="cell-num">86</td>
+          <td class="cell-num" title="List-rate estimate">$11.03</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td class="cell-num">95</td>
+          <th scope="row" class="cell-model"><span class="model-id"><span class="model-name">MiMo-V2.6-Pro (first-party)</span><span class="model-dev">Xiaomi &middot; 1 run</span></span></th>
+          <td>Claude Code / Xiaomi first-party</td>
+          <td class="cell-num">18</td>
+          <td class="cell-num">4</td>
+          <td class="cell-num"><strong>22</strong></td>
+          <td class="cell-num">86</td>
+          <td class="cell-num" title="List-rate estimate">$0.59</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td class="cell-num">97</td>
+          <th scope="row" class="cell-model"><span class="model-id"><span class="model-name">GLM-5.3 (max effort, Z.ai API)</span><span class="model-dev">Z.ai &middot; 1 run</span></span></th>
+          <td>Claude Code / Z.ai API</td>
+          <td class="cell-num">19</td>
+          <td class="cell-num">2</td>
+          <td class="cell-num"><strong>21</strong></td>
+          <td class="cell-num">80</td>
+          <td class="cell-num" title="List-rate estimate">$15.93</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td class="cell-num">97</td>
+          <th scope="row" class="cell-model"><span class="model-id"><span class="model-name">GLM-5.3 Flash (max effort, Z.ai API) - mean of 3</span><span class="model-dev">Z.ai &middot; 3 runs</span></span></th>
+          <td>Claude Code / Z.ai API</td>
+          <td class="cell-num">17.7</td>
+          <td class="cell-num">3.3</td>
+          <td class="cell-num"><strong>21</strong></td>
+          <td class="cell-num">90</td>
+          <td class="cell-num" title="List-rate estimate">$1.03</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td class="cell-num">97</td>
+          <th scope="row" class="cell-model"><span class="model-id"><span class="model-name">GPT-5.6 Terra (medium effort)</span><span class="model-dev">OpenAI &middot; 1 run</span></span></th>
+          <td>Codex CLI</td>
+          <td class="cell-num">15</td>
+          <td class="cell-num">6</td>
+          <td class="cell-num"><strong>21</strong></td>
+          <td class="cell-num">99</td>
+          <td class="cell-num" title="List-rate estimate">$3.87</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td class="cell-num">100</td>
+          <th scope="row" class="cell-model"><span class="model-id"><span class="model-name">Hy4 Preview</span><span class="model-dev">Tencent &middot; 1 run</span></span></th>
+          <td>Claude Code / OpenRouter</td>
+          <td class="cell-num">18</td>
+          <td class="cell-num">2</td>
+          <td class="cell-num"><strong>20</strong></td>
+          <td class="cell-num">86</td>
+          <td class="cell-num" title="Billed">$3.13</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td class="cell-num">100</td>
+          <th scope="row" class="cell-model"><span class="model-id"><span class="model-name">DeepSeek V4-Pro (max effort, DeepSeek API)</span><span class="model-dev">DeepSeek &middot; 1 run</span></span></th>
+          <td>Claude Code / DeepSeek API</td>
+          <td class="cell-num">16</td>
+          <td class="cell-num">4</td>
+          <td class="cell-num"><strong>20</strong></td>
+          <td class="cell-num">93</td>
+          <td class="cell-num" title="Billed">$1.89</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td class="cell-num">100</td>
+          <th scope="row" class="cell-model"><span class="model-id"><span class="model-name">GLM-5.3 Flash (high effort, Z.ai API)</span><span class="model-dev">Z.ai &middot; 1 run</span></span></th>
+          <td>Claude Code / Z.ai API</td>
+          <td class="cell-num">16</td>
+          <td class="cell-num">4</td>
+          <td class="cell-num"><strong>20</strong></td>
+          <td class="cell-num">93</td>
+          <td class="cell-num" title="List-rate estimate">$0.94</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td class="cell-num">100</td>
+          <th scope="row" class="cell-model"><span class="model-id"><span class="model-name">Haiku 5.5 (high effort) - mean of 2</span><span class="model-dev">Anthropic &middot; 2 runs</span></span></th>
+          <td>Claude Code</td>
+          <td class="cell-num">16</td>
+          <td class="cell-num">4</td>
+          <td class="cell-num"><strong>20</strong></td>
+          <td class="cell-num">93</td>
+          <td class="cell-num" title="List-rate estimate">$3.56</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td class="cell-num">104</td>
+          <th scope="row" class="cell-model"><span class="model-id"><span class="model-name">Ox Alpha (stealth; free)</span><span class="model-dev">Z.ai &middot; 1 run</span></span></th>
+          <td>Claude Code / OpenRouter</td>
+          <td class="cell-num">16</td>
+          <td class="cell-num">3</td>
+          <td class="cell-num"><strong>19</strong></td>
+          <td class="cell-num">93</td>
+          <td class="cell-num" title="Free">—</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td class="cell-num">105</td>
+          <th scope="row" class="cell-model"><span class="model-id"><span class="model-name">Mistral Large 4 - mean of 3</span><span class="model-dev">Mistral &middot; 3 runs</span></span></th>
+          <td>Claude Code / OpenRouter</td>
+          <td class="cell-num">15</td>
+          <td class="cell-num">3.3</td>
+          <td class="cell-num"><strong>18.3</strong></td>
+          <td class="cell-num">99</td>
+          <td class="cell-num" title="Billed">$11.95</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td class="cell-num">106</td>
+          <th scope="row" class="cell-model"><span class="model-id"><span class="model-name">Gemini 3.7 Flash seq</span><span class="model-dev">Google &middot; 1 run</span></span></th>
+          <td>Antigravity CLI</td>
+          <td class="cell-num">16</td>
+          <td class="cell-num">2</td>
+          <td class="cell-num"><strong>18</strong></td>
+          <td class="cell-num">93</td>
+          <td class="cell-num" title="List-rate estimate">$6.36</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td class="cell-num">106</td>
+          <th scope="row" class="cell-model"><span class="model-id"><span class="model-name">Opus 4.8 (max effort)</span><span class="model-dev">Anthropic &middot; 1 run</span></span></th>
+          <td>Claude Code</td>
+          <td class="cell-num">15</td>
+          <td class="cell-num">3</td>
+          <td class="cell-num"><strong>18</strong></td>
+          <td class="cell-num">99</td>
+          <td class="cell-num" title="List-rate estimate">$58.11</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td class="cell-num">106</td>
+          <th scope="row" class="cell-model"><span class="model-id"><span class="model-name">GPT-6 Luna (high effort)</span><span class="model-dev">OpenAI &middot; 1 run</span></span></th>
+          <td>Codex CLI</td>
+          <td class="cell-num">9</td>
+          <td class="cell-num">9</td>
+          <td class="cell-num"><strong>18</strong></td>
+          <td class="cell-num">117</td>
+          <td class="cell-num" title="List-rate estimate">$0.13</td>
+          <td><span class="badge badge-measured" title="On the Pareto frontier: no cheaper configuration fixes more bugs.">Frontier</span></td>
+        </tr>
+        <tr>
+          <td class="cell-num">109</td>
+          <th scope="row" class="cell-model"><span class="model-id"><span class="model-name">Qwen3.8-27B (xhigh effort, Alibaba API) - mean of 3</span><span class="model-dev">Alibaba &middot; 3 runs</span></span></th>
+          <td>Claude Code / Alibaba API</td>
+          <td class="cell-num">15</td>
+          <td class="cell-num">2.3</td>
+          <td class="cell-num"><strong>17.3</strong></td>
+          <td class="cell-num">99</td>
+          <td class="cell-num" title="List-rate estimate">$5.55</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td class="cell-num">110</td>
+          <th scope="row" class="cell-model"><span class="model-id"><span class="model-name">GLM-5.3 Flash</span><span class="model-dev">Z.ai &middot; 1 run</span></span></th>
+          <td>Claude Code / OpenRouter</td>
+          <td class="cell-num">13</td>
+          <td class="cell-num">4</td>
+          <td class="cell-num"><strong>17</strong></td>
+          <td class="cell-num">107</td>
+          <td class="cell-num" title="Billed">$0.79</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td class="cell-num">111</td>
+          <th scope="row" class="cell-model"><span class="model-id"><span class="model-name">GPT-6.1 Terra (high effort) - mean of 3</span><span class="model-dev">OpenAI &middot; 3 runs</span></span></th>
+          <td>Codex CLI</td>
+          <td class="cell-num">9.7</td>
+          <td class="cell-num">6.7</td>
+          <td class="cell-num"><strong>16.4</strong></td>
+          <td class="cell-num">115</td>
+          <td class="cell-num" title="List-rate estimate">$0.56</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td class="cell-num">111</td>
+          <th scope="row" class="cell-model"><span class="model-id"><span class="model-name">Muse Spark 1.3 (low effort, Muse Code, Meta API) - mean of 3</span><span class="model-dev">Meta &middot; 3 runs</span></span></th>
+          <td>Muse Code / Meta API</td>
+          <td class="cell-num">9.7</td>
+          <td class="cell-num">6.7</td>
+          <td class="cell-num"><strong>16.4</strong></td>
+          <td class="cell-num">115</td>
+          <td class="cell-num" title="List-rate estimate">$5.61</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td class="cell-num">113</td>
+          <th scope="row" class="cell-model"><span class="model-id"><span class="model-name">Haiku 5.5 (medium effort)</span><span class="model-dev">Anthropic &middot; 1 run</span></span></th>
+          <td>Claude Code</td>
+          <td class="cell-num">12</td>
+          <td class="cell-num">4</td>
+          <td class="cell-num"><strong>16</strong></td>
+          <td class="cell-num">111</td>
+          <td class="cell-num" title="List-rate estimate">$2.66</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td class="cell-num">114</td>
+          <th scope="row" class="cell-model"><span class="model-id"><span class="model-name">GPT-6.1 Terra (medium effort) - mean of 3</span><span class="model-dev">OpenAI &middot; 3 runs</span></span></th>
+          <td>Codex CLI</td>
+          <td class="cell-num">7.3</td>
+          <td class="cell-num">7.3</td>
+          <td class="cell-num"><strong>14.6</strong></td>
+          <td class="cell-num">123</td>
+          <td class="cell-num" title="List-rate estimate">$0.31</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td class="cell-num">115</td>
+          <th scope="row" class="cell-model"><span class="model-id"><span class="model-name">DeepSeek V4-Flash 0731</span><span class="model-dev">DeepSeek &middot; 1 run</span></span></th>
+          <td>Claude Code / OpenRouter</td>
+          <td class="cell-num">14</td>
+          <td class="cell-num">0</td>
+          <td class="cell-num"><strong>14</strong></td>
+          <td class="cell-num">104</td>
+          <td class="cell-num" title="Billed">$1.52</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td class="cell-num">115</td>
+          <th scope="row" class="cell-model"><span class="model-id"><span class="model-name">DeepSeek V4-Pro (high effort, DeepSeek API)</span><span class="model-dev">DeepSeek &middot; 1 run</span></span></th>
+          <td>Claude Code / DeepSeek API</td>
+          <td class="cell-num">13</td>
+          <td class="cell-num">1</td>
+          <td class="cell-num"><strong>14</strong></td>
+          <td class="cell-num">107</td>
+          <td class="cell-num" title="Billed">$1.08</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td class="cell-num">115</td>
+          <th scope="row" class="cell-model"><span class="model-id"><span class="model-name">GPT-5.6 Luna (medium effort)</span><span class="model-dev">OpenAI &middot; 1 run</span></span></th>
+          <td>Codex CLI</td>
+          <td class="cell-num">9</td>
+          <td class="cell-num">5</td>
+          <td class="cell-num"><strong>14</strong></td>
+          <td class="cell-num">117</td>
+          <td class="cell-num" title="List-rate estimate">$0.33</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td class="cell-num">118</td>
+          <th scope="row" class="cell-model"><span class="model-id"><span class="model-name">Haiku 5.5 (low effort)</span><span class="model-dev">Anthropic &middot; 1 run</span></span></th>
+          <td>Claude Code</td>
+          <td class="cell-num">11</td>
+          <td class="cell-num">2</td>
+          <td class="cell-num"><strong>13</strong></td>
+          <td class="cell-num">113</td>
+          <td class="cell-num" title="List-rate estimate">$1.61</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td class="cell-num">118</td>
+          <th scope="row" class="cell-model"><span class="model-id"><span class="model-name">GLM-5.3 Flash (low effort, Z.ai API)</span><span class="model-dev">Z.ai &middot; 1 run</span></span></th>
+          <td>Claude Code / Z.ai API</td>
+          <td class="cell-num">9</td>
+          <td class="cell-num">4</td>
+          <td class="cell-num"><strong>13</strong></td>
+          <td class="cell-num">117</td>
+          <td class="cell-num" title="List-rate estimate">$0.42</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td class="cell-num">118</td>
+          <th scope="row" class="cell-model"><span class="model-id"><span class="model-name">Sonnet 5</span><span class="model-dev">Anthropic &middot; 1 run</span></span></th>
+          <td>Claude Code</td>
+          <td class="cell-num">9</td>
+          <td class="cell-num">4</td>
+          <td class="cell-num"><strong>13</strong></td>
+          <td class="cell-num">117</td>
+          <td class="cell-num" title="List-rate estimate">$11.38</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td class="cell-num">118</td>
+          <th scope="row" class="cell-model"><span class="model-id"><span class="model-name">GPT-6 Luna (low effort)</span><span class="model-dev">OpenAI &middot; 1 run</span></span></th>
+          <td>Codex CLI</td>
+          <td class="cell-num">4</td>
+          <td class="cell-num">9</td>
+          <td class="cell-num"><strong>13</strong></td>
+          <td class="cell-num">126</td>
+          <td class="cell-num" title="List-rate estimate">$0.20</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td class="cell-num">122</td>
+          <th scope="row" class="cell-model"><span class="model-id"><span class="model-name">Qwen3.8-27B 8-bit (OpenRouter/Parasail) - mean of 3</span><span class="model-dev">Alibaba &middot; 3 runs</span></span></th>
+          <td>Claude Code / OpenRouter</td>
+          <td class="cell-num">10.7</td>
+          <td class="cell-num">1.7</td>
+          <td class="cell-num"><strong>12.4</strong></td>
+          <td class="cell-num">114</td>
+          <td class="cell-num" title="Billed">$2.97</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td class="cell-num">123</td>
+          <th scope="row" class="cell-model"><span class="model-id"><span class="model-name">Sonnet 5 (max effort)</span><span class="model-dev">Anthropic &middot; 1 run</span></span></th>
+          <td>Claude Code</td>
+          <td class="cell-num">9</td>
+          <td class="cell-num">3</td>
+          <td class="cell-num"><strong>12</strong></td>
+          <td class="cell-num">117</td>
+          <td class="cell-num" title="List-rate estimate">$17.96</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td class="cell-num">124</td>
+          <th scope="row" class="cell-model"><span class="model-id"><span class="model-name">GPT-6 Sol (low effort)</span><span class="model-dev">OpenAI &middot; 1 run</span></span></th>
+          <td>Codex CLI</td>
+          <td class="cell-num">6</td>
+          <td class="cell-num">5</td>
+          <td class="cell-num"><strong>11</strong></td>
+          <td class="cell-num">124</td>
+          <td class="cell-num" title="List-rate estimate">$1.08</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td class="cell-num">124</td>
+          <th scope="row" class="cell-model"><span class="model-id"><span class="model-name">GPT-6.1 Terra (low effort) - mean of 3</span><span class="model-dev">OpenAI &middot; 3 runs</span></span></th>
+          <td>Codex CLI</td>
+          <td class="cell-num">6</td>
+          <td class="cell-num">5</td>
+          <td class="cell-num"><strong>11</strong></td>
+          <td class="cell-num">124</td>
+          <td class="cell-num" title="List-rate estimate">$0.30</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td class="cell-num">126</td>
+          <th scope="row" class="cell-model"><span class="model-id"><span class="model-name">Opus 4.8</span><span class="model-dev">Anthropic &middot; 1 run</span></span></th>
+          <td>Claude Code</td>
+          <td class="cell-num">9</td>
+          <td class="cell-num">1</td>
+          <td class="cell-num"><strong>10</strong></td>
+          <td class="cell-num">117</td>
+          <td class="cell-num" title="List-rate estimate">$21.30</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td class="cell-num">127</td>
+          <th scope="row" class="cell-model"><span class="model-id"><span class="model-name">Gemma 4 31B (OpenRouter/Crusoe)</span><span class="model-dev">Google &middot; 1 run</span></span></th>
+          <td>Claude Code / OpenRouter</td>
+          <td class="cell-num">4</td>
+          <td class="cell-num">2</td>
+          <td class="cell-num"><strong>6</strong></td>
+          <td class="cell-num">126</td>
+          <td class="cell-num" title="Billed">$8.61</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td class="cell-num">128</td>
+          <th scope="row" class="cell-model"><span class="model-id"><span class="model-name">GPT-5.6 Luna (low effort)</span><span class="model-dev">OpenAI &middot; 1 run</span></span></th>
+          <td>Codex CLI</td>
+          <td class="cell-num">4</td>
+          <td class="cell-num">1</td>
+          <td class="cell-num"><strong>5</strong></td>
+          <td class="cell-num">126</td>
+          <td class="cell-num" title="List-rate estimate">$0.10</td>
+          <td><span class="badge badge-measured" title="On the Pareto frontier: no cheaper configuration fixes more bugs.">Frontier</span></td>
+        </tr>
+        <tr>
+          <td class="cell-num">128</td>
+          <th scope="row" class="cell-model"><span class="model-id"><span class="model-name">Gemma 4 31B 4-bit (OpenRouter/CoreWeave)</span><span class="model-dev">Google &middot; 1 run</span></span></th>
+          <td>Claude Code / OpenRouter</td>
+          <td class="cell-num">3</td>
+          <td class="cell-num">2</td>
+          <td class="cell-num"><strong>5</strong></td>
+          <td class="cell-num">130</td>
+          <td class="cell-num" title="Billed">$0.56</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td class="cell-num">130</td>
+          <th scope="row" class="cell-model"><span class="model-id"><span class="model-name">GPT-6 Luna (medium effort)</span><span class="model-dev">OpenAI &middot; 1 run</span></span></th>
+          <td>Codex CLI</td>
+          <td class="cell-num">4</td>
+          <td class="cell-num">0</td>
+          <td class="cell-num"><strong>4</strong></td>
+          <td class="cell-num">126</td>
+          <td class="cell-num" title="List-rate estimate">$0.06</td>
+          <td><span class="badge badge-measured" title="On the Pareto frontier: no cheaper configuration fixes more bugs.">Frontier</span></td>
+        </tr>
+        <tr>
+          <td class="cell-num">130</td>
+          <th scope="row" class="cell-model"><span class="model-id"><span class="model-name">Haiku 4.5 - mean of 2</span><span class="model-dev">Anthropic &middot; 2 runs</span></span></th>
+          <td>Claude Code</td>
+          <td class="cell-num">1.5</td>
+          <td class="cell-num">2.5</td>
+          <td class="cell-num"><strong>4</strong></td>
+          <td class="cell-num">131</td>
+          <td class="cell-num" title="List-rate estimate">$2.22</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td class="cell-num">132</td>
+          <th scope="row" class="cell-model"><span class="model-id"><span class="model-name">gpt-oss-120b - mean of 3</span><span class="model-dev">OpenAI &middot; 3 runs</span></span></th>
+          <td>Claude Code / OpenRouter</td>
+          <td class="cell-num">0</td>
+          <td class="cell-num">0.3</td>
+          <td class="cell-num"><strong>0.3</strong></td>
+          <td class="cell-num">132</td>
+          <td class="cell-num" title="Billed">$0.11</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td class="cell-num">133</td>
+          <th scope="row" class="cell-model"><span class="model-id"><span class="model-name">gpt-oss-20b - mean of 3</span><span class="model-dev">OpenAI &middot; 3 runs</span></span></th>
+          <td>Claude Code / OpenRouter</td>
+          <td class="cell-num">0</td>
+          <td class="cell-num">0</td>
+          <td class="cell-num"><strong>0</strong></td>
+          <td class="cell-num">132</td>
+          <td class="cell-num" title="Billed">$0.11</td>
+          <td></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="muted">Rows averaging several runs use the board's per-run means for both counts. Partial and claimed-only fixes are not counted. Ranks are competition ranks; "Planted rank" is the row's rank on the board's own planted-only score. Superseded board rows are left out.</p>
+</section>
 </main>
-<script>
-const DATA = {"points": [{"id": "GPT-6 Luna (medium effort)", "vendor": "OpenAI", "harness": "Codex CLI", "cost": 0.06, "kind": "list", "planted": 4, "extras": 0, "total": 4, "frontier": true}, {"id": "GPT-5.6 Luna (low effort)", "vendor": "OpenAI", "harness": "Codex CLI", "cost": 0.1, "kind": "list", "planted": 4, "extras": 1, "total": 5, "frontier": true}, {"id": "gpt-oss-120b - mean of 3", "vendor": "OpenAI", "harness": "Claude Code / OpenRouter", "cost": 0.11, "kind": "bill", "planted": 0, "extras": 0.3, "total": 0.3, "frontier": false}, {"id": "gpt-oss-20b - mean of 3", "vendor": "OpenAI", "harness": "Claude Code / OpenRouter", "cost": 0.11, "kind": "bill", "planted": 0, "extras": 0, "total": 0, "frontier": false}, {"id": "GPT-6 Luna (high effort)", "vendor": "OpenAI", "harness": "Codex CLI", "cost": 0.13, "kind": "list", "planted": 9, "extras": 9, "total": 18, "frontier": true}, {"id": "GPT-6 Luna (low effort)", "vendor": "OpenAI", "harness": "Codex CLI", "cost": 0.2, "kind": "list", "planted": 4, "extras": 9, "total": 13, "frontier": false}, {"id": "GPT-6.1 Terra (low effort) - mean of 3", "vendor": "OpenAI", "harness": "Codex CLI", "cost": 0.3, "kind": "list", "planted": 6, "extras": 5, "total": 11, "frontier": false}, {"id": "DeepSeek V4.1 Flash (high effort)", "vendor": "DeepSeek", "harness": "Claude Code / DeepSeek API", "cost": 0.31, "kind": "bill", "planted": 19, "extras": 4, "total": 23, "frontier": true}, {"id": "GPT-6.1 Terra (medium effort) - mean of 3", "vendor": "OpenAI", "harness": "Codex CLI", "cost": 0.31, "kind": "list", "planted": 7.3, "extras": 7.3, "total": 14.6, "frontier": false}, {"id": "GPT-5.6 Luna (medium effort)", "vendor": "OpenAI", "harness": "Codex CLI", "cost": 0.33, "kind": "list", "planted": 9, "extras": 5, "total": 14, "frontier": false}, {"id": "GPT-6 Luna (xhigh effort)", "vendor": "OpenAI", "harness": "Codex CLI", "cost": 0.39, "kind": "list", "planted": 14, "extras": 12, "total": 26, "frontier": true}, {"id": "GLM-5.3 Flash (low effort, Z.ai API)", "vendor": "Z.ai", "harness": "Claude Code / Z.ai API", "cost": 0.42, "kind": "list", "planted": 9, "extras": 4, "total": 13, "frontier": false}, {"id": "DeepSeek V4.1 Flash 1017 (low effort, Pi) - mean of 5", "vendor": "DeepSeek", "harness": "Pi / DeepSeek API", "cost": 0.46, "kind": "bill", "planted": 33.8, "extras": 19.6, "total": 53.4, "frontier": true}, {"id": "MiMo-V2.6-Flash - mean of 3", "vendor": "Xiaomi", "harness": "Claude Code / OpenRouter", "cost": 0.49, "kind": "bill", "planted": 23.3, "extras": 7.3, "total": 30.6, "frontier": false}, {"id": "GPT-6 Luna (max effort) - mean of 3", "vendor": "OpenAI", "harness": "Codex CLI", "cost": 0.52, "kind": "list", "planted": 18.3, "extras": 22.7, "total": 41.0, "frontier": false}, {"id": "GPT-6.1 Terra (high effort) - mean of 3", "vendor": "OpenAI", "harness": "Codex CLI", "cost": 0.56, "kind": "list", "planted": 9.7, "extras": 6.7, "total": 16.4, "frontier": false}, {"id": "Gemma 4 31B 4-bit (OpenRouter/CoreWeave)", "vendor": "Google", "harness": "Claude Code / OpenRouter", "cost": 0.56, "kind": "bill", "planted": 3, "extras": 2, "total": 5, "frontier": false}, {"id": "GPT-5.6 Luna (high effort)", "vendor": "OpenAI", "harness": "Codex CLI", "cost": 0.57, "kind": "list", "planted": 13, "extras": 22, "total": 35, "frontier": false}, {"id": "MiMo-V2.6-Pro (first-party)", "vendor": "Xiaomi", "harness": "Claude Code / Xiaomi first-party", "cost": 0.59, "kind": "list", "planted": 18, "extras": 4, "total": 22, "frontier": false}, {"id": "DeepSeek V4.1 Flash 1017 (high effort, Pi) - mean of 5", "vendor": "DeepSeek", "harness": "Pi / DeepSeek API", "cost": 0.64, "kind": "bill", "planted": 40.4, "extras": 29.4, "total": 69.8, "frontier": true}, {"id": "DeepSeek V4.1 Flash 1017 (low effort, OpenCode) - mean of 5", "vendor": "DeepSeek", "harness": "OpenCode / DeepSeek API", "cost": 0.66, "kind": "bill", "planted": 32.8, "extras": 17.6, "total": 50.4, "frontier": false}, {"id": "DeepSeek V4.1 Flash 1017 (low effort) - mean of 5", "vendor": "DeepSeek", "harness": "Claude Code / DeepSeek API", "cost": 0.71, "kind": "bill", "planted": 34.4, "extras": 16.8, "total": 51.2, "frontier": false}, {"id": "GPT-6.1 Terra (xhigh effort) - mean of 3", "vendor": "OpenAI", "harness": "Codex CLI", "cost": 0.75, "kind": "list", "planted": 11.3, "extras": 17, "total": 28.3, "frontier": false}, {"id": "DeepSeek V4.1 Flash (max effort) - mean of 3", "vendor": "DeepSeek", "harness": "Claude Code / DeepSeek API", "cost": 0.78, "kind": "bill", "planted": 21.7, "extras": 6.7, "total": 28.4, "frontier": false}, {"id": "DeepSeek V4.1 Flash 1017 (high effort, OpenCode) - mean of 5", "vendor": "DeepSeek", "harness": "OpenCode / DeepSeek API", "cost": 0.79, "kind": "bill", "planted": 36.6, "extras": 25.6, "total": 62.2, "frontier": false}, {"id": "GLM-5.3 Flash", "vendor": "Z.ai", "harness": "Claude Code / OpenRouter", "cost": 0.79, "kind": "bill", "planted": 13, "extras": 4, "total": 17, "frontier": false}, {"id": "DeepSeek V4.1 Flash 1017 (high effort) - mean of 5", "vendor": "DeepSeek", "harness": "Claude Code / DeepSeek API", "cost": 0.82, "kind": "bill", "planted": 36.4, "extras": 24.4, "total": 60.8, "frontier": false}, {"id": "DeepSeek V4.1 Flash 1017 (max effort, Pi) - mean of 5", "vendor": "DeepSeek", "harness": "Pi / DeepSeek API", "cost": 0.83, "kind": "bill", "planted": 42.2, "extras": 41.8, "total": 84.0, "frontier": true}, {"id": "MiMo-V2.6-Pro - mean of 3", "vendor": "Xiaomi", "harness": "Claude Code / OpenRouter", "cost": 0.86, "kind": "bill", "planted": 22.7, "extras": 5.3, "total": 28.0, "frontier": false}, {"id": "GLM-5.3 Flash (high effort, Z.ai API)", "vendor": "Z.ai", "harness": "Claude Code / Z.ai API", "cost": 0.94, "kind": "list", "planted": 16, "extras": 4, "total": 20, "frontier": false}, {"id": "DeepSeek V4.1 Flash 1017 (max effort, OpenCode) - mean of 5", "vendor": "DeepSeek", "harness": "OpenCode / DeepSeek API", "cost": 0.96, "kind": "bill", "planted": 37.6, "extras": 36.2, "total": 73.8, "frontier": false}, {"id": "DeepSeek V4.1 Flash 1017 (max effort) - mean of 7", "vendor": "DeepSeek", "harness": "Claude Code / DeepSeek API", "cost": 1.01, "kind": "bill", "planted": 39.1, "extras": 22.9, "total": 62.0, "frontier": false}, {"id": "GLM-5.3 Flash (max effort, Z.ai API) - mean of 3", "vendor": "Z.ai", "harness": "Claude Code / Z.ai API", "cost": 1.03, "kind": "list", "planted": 17.7, "extras": 3.3, "total": 21.0, "frontier": false}, {"id": "DeepSeek V4.1 Flash 1017 (low effort, DeepSeek Harness) - mean of 5", "vendor": "DeepSeek", "harness": "DeepSeek Harness / DeepSeek API", "cost": 1.06, "kind": "bill", "planted": 34.8, "extras": 34.4, "total": 69.2, "frontier": false}, {"id": "DeepSeek V4-Pro (high effort, DeepSeek API)", "vendor": "DeepSeek", "harness": "Claude Code / DeepSeek API", "cost": 1.08, "kind": "bill", "planted": 13, "extras": 1, "total": 14, "frontier": false}, {"id": "GPT-6 Sol (low effort)", "vendor": "OpenAI", "harness": "Codex CLI", "cost": 1.08, "kind": "list", "planted": 6, "extras": 5, "total": 11, "frontier": false}, {"id": "DeepSeek V4.1 Flash 1017 (high effort, DeepSeek Harness) - mean of 5", "vendor": "DeepSeek", "harness": "DeepSeek Harness / DeepSeek API", "cost": 1.27, "kind": "bill", "planted": 39.2, "extras": 43.8, "total": 83.0, "frontier": false}, {"id": "GPT-6.1 Sol (low effort) - mean of 2", "vendor": "OpenAI", "harness": "Codex CLI", "cost": 1.34, "kind": "list", "planted": 22.5, "extras": 24, "total": 46.5, "frontier": false}, {"id": "Qwen3.8-Flash (low effort)", "vendor": "Alibaba", "harness": "Claude Code / Alibaba API", "cost": 1.37, "kind": "list", "planted": 23, "extras": 7, "total": 30, "frontier": false}, {"id": "DeepSeek V4-Flash 0731", "vendor": "DeepSeek", "harness": "Claude Code / OpenRouter", "cost": 1.52, "kind": "bill", "planted": 14, "extras": 0, "total": 14, "frontier": false}, {"id": "Haiku 5.5 (low effort)", "vendor": "Anthropic", "harness": "Claude Code", "cost": 1.61, "kind": "list", "planted": 11, "extras": 2, "total": 13, "frontier": false}, {"id": "GPT-6.1 Sol (medium effort) - mean of 2", "vendor": "OpenAI", "harness": "Codex CLI", "cost": 1.76, "kind": "list", "planted": 29, "extras": 30.5, "total": 59.5, "frontier": false}, {"id": "Qwen3.8-Flash (max effort)", "vendor": "Alibaba", "harness": "Claude Code / Alibaba API", "cost": 1.81, "kind": "list", "planted": 26, "extras": 7, "total": 33, "frontier": false}, {"id": "DeepSeek V4.1 Flash 1017 (max effort, DeepSeek Harness) - mean of 7", "vendor": "DeepSeek", "harness": "DeepSeek Harness / DeepSeek API", "cost": 1.84, "kind": "bill", "planted": 42.7, "extras": 44, "total": 86.7, "frontier": true}, {"id": "DeepSeek V4-Pro (max effort, DeepSeek API)", "vendor": "DeepSeek", "harness": "Claude Code / DeepSeek API", "cost": 1.89, "kind": "bill", "planted": 16, "extras": 4, "total": 20, "frontier": false}, {"id": "Haiku 4.5 - mean of 2", "vendor": "Anthropic", "harness": "Claude Code", "cost": 2.22, "kind": "list", "planted": 1.5, "extras": 2.5, "total": 4.0, "frontier": false}, {"id": "GPT-6 Sol (medium effort)", "vendor": "OpenAI", "harness": "Codex CLI", "cost": 2.39, "kind": "list", "planted": 14, "extras": 13, "total": 27, "frontier": false}, {"id": "GPT-5.6 Luna (xhigh effort)", "vendor": "OpenAI", "harness": "Codex CLI", "cost": 2.5, "kind": "list", "planted": 23, "extras": 53, "total": 76, "frontier": false}, {"id": "Haiku 5.5 (medium effort)", "vendor": "Anthropic", "harness": "Claude Code", "cost": 2.66, "kind": "list", "planted": 12, "extras": 4, "total": 16, "frontier": false}, {"id": "Qwen3.8-27B 8-bit (OpenRouter/Parasail) - mean of 3", "vendor": "Alibaba", "harness": "Claude Code / OpenRouter", "cost": 2.97, "kind": "bill", "planted": 10.7, "extras": 1.7, "total": 12.4, "frontier": false}, {"id": "Hy4 Preview", "vendor": "Tencent", "harness": "Claude Code / OpenRouter", "cost": 3.13, "kind": "bill", "planted": 18, "extras": 2, "total": 20, "frontier": false}, {"id": "GPT-5.6 Luna (max effort) - mean of 3", "vendor": "OpenAI", "harness": "Codex CLI", "cost": 3.15, "kind": "list", "planted": 31.3, "extras": 54.7, "total": 86.0, "frontier": false}, {"id": "GPT-6.1 Sol (high effort) - mean of 2", "vendor": "OpenAI", "harness": "Codex CLI", "cost": 3.26, "kind": "list", "planted": 36.5, "extras": 40, "total": 76.5, "frontier": false}, {"id": "Haiku 5.5 (high effort) - mean of 2", "vendor": "Anthropic", "harness": "Claude Code", "cost": 3.56, "kind": "list", "planted": 16, "extras": 4, "total": 20, "frontier": false}, {"id": "GPT-5.6 Terra (medium effort)", "vendor": "OpenAI", "harness": "Codex CLI", "cost": 3.87, "kind": "list", "planted": 15, "extras": 6, "total": 21, "frontier": false}, {"id": "GPT-6.1 Terra (max effort) - mean of 3", "vendor": "OpenAI", "harness": "Codex CLI", "cost": 3.88, "kind": "list", "planted": 40.7, "extras": 48, "total": 88.7, "frontier": true}, {"id": "Grok 4.6 (low)", "vendor": "xAI", "harness": "Grok Build CLI (ACP)", "cost": 4.14, "kind": "floor", "planted": 15, "extras": 9, "total": 24, "frontier": false}, {"id": "GPT-6 Sol (high effort)", "vendor": "OpenAI", "harness": "Codex CLI", "cost": 4.16, "kind": "list", "planted": 20, "extras": 15, "total": 35, "frontier": false}, {"id": "GPT-6.1 Sol (xhigh effort) - mean of 3", "vendor": "OpenAI", "harness": "Codex CLI", "cost": 4.35, "kind": "list", "planted": 42.7, "extras": 56.7, "total": 99.4, "frontier": true}, {"id": "Haiku 5.5 (xhigh effort) - mean of 3", "vendor": "Anthropic", "harness": "Claude Code", "cost": 4.8, "kind": "list", "planted": 18.3, "extras": 6.7, "total": 25.0, "frontier": false}, {"id": "Union Alpha (stealth; free) - mean of 3", "vendor": "Unbiased", "harness": "Claude Code / OpenRouter", "cost": 4.81, "kind": "list", "planted": 30.7, "extras": 10.3, "total": 41.0, "frontier": false}, {"id": "Qwen3.8-27B (xhigh effort, Alibaba API) - mean of 3", "vendor": "Alibaba", "harness": "Claude Code / Alibaba API", "cost": 5.55, "kind": "list", "planted": 15, "extras": 2.3, "total": 17.3, "frontier": false}, {"id": "Muse Spark 1.3 (low effort, Muse Code, Meta API) - mean of 3", "vendor": "Meta", "harness": "Muse Code / Meta API", "cost": 5.61, "kind": "list", "planted": 9.7, "extras": 6.7, "total": 16.4, "frontier": false}, {"id": "Sonnet 5.5 (low effort) - mean of 3", "vendor": "Anthropic", "harness": "Claude Code", "cost": 5.73, "kind": "list", "planted": 19, "extras": 8, "total": 27, "frontier": false}, {"id": "Grok 4.6 (medium) seq", "vendor": "xAI", "harness": "Grok Build CLI (ACP)", "cost": 5.8, "kind": "floor", "planted": 22, "extras": 11, "total": 33, "frontier": false}, {"id": "Haiku 5.5 (max effort) - mean of 2", "vendor": "Anthropic", "harness": "Claude Code", "cost": 5.83, "kind": "list", "planted": 21.5, "extras": 9, "total": 30.5, "frontier": false}, {"id": "GPT-6.1 Sol (max effort) - mean of 3", "vendor": "OpenAI", "harness": "Codex CLI", "cost": 5.88, "kind": "list", "planted": 44.3, "extras": 65.3, "total": 109.6, "frontier": true}, {"id": "GPT-5.6 Terra (high effort)", "vendor": "OpenAI", "harness": "Codex CLI", "cost": 5.89, "kind": "list", "planted": 18, "extras": 17, "total": 35, "frontier": false}, {"id": "Gemini 3.7 Flash seq", "vendor": "Google", "harness": "Antigravity CLI", "cost": 6.36, "kind": "list", "planted": 16, "extras": 2, "total": 18, "frontier": false}, {"id": "Gemini 4 Argon (low effort, Antigravity CLI) - mean of 3", "vendor": "Google", "harness": "Antigravity CLI", "cost": 6.47, "kind": "list", "planted": 35.3, "extras": 5.7, "total": 41.0, "frontier": false}, {"id": "Gemini 4 Argon (high effort, Antigravity CLI) - mean of 3", "vendor": "Google", "harness": "Antigravity CLI", "cost": 7.16, "kind": "list", "planted": 40.7, "extras": 7.3, "total": 48.0, "frontier": false}, {"id": "Gemini 4 Argon (medium effort, Antigravity CLI) - mean of 3", "vendor": "Google", "harness": "Antigravity CLI", "cost": 7.5, "kind": "list", "planted": 39.3, "extras": 11.3, "total": 50.6, "frontier": false}, {"id": "GPT-6 Sol (xhigh effort)", "vendor": "OpenAI", "harness": "Codex CLI", "cost": 7.67, "kind": "list", "planted": 25, "extras": 24, "total": 49, "frontier": false}, {"id": "Opus 5.5 (low effort) - mean of 3", "vendor": "Anthropic", "harness": "Claude Code", "cost": 8.34, "kind": "list", "planted": 22.3, "extras": 9.7, "total": 32.0, "frontier": false}, {"id": "Gemini 3.7 Flash (high)", "vendor": "Google", "harness": "Gemini CLI (retired) + model-pinning gateway", "cost": 8.43, "kind": "list", "planted": 22, "extras": 4, "total": 26, "frontier": false}, {"id": "Grok 4.5 (re-run Aug 6)", "vendor": "xAI", "harness": "Grok Build CLI (ACP)", "cost": 8.5, "kind": "floor", "planted": 17, "extras": 10, "total": 27, "frontier": false}, {"id": "Gemma 4 31B (OpenRouter/Crusoe)", "vendor": "Google", "harness": "Claude Code / OpenRouter", "cost": 8.61, "kind": "bill", "planted": 4, "extras": 2, "total": 6, "frontier": false}, {"id": "GPT-5.6 Terra (xhigh effort)", "vendor": "OpenAI", "harness": "Codex CLI", "cost": 8.98, "kind": "list", "planted": 20, "extras": 29, "total": 49, "frontier": false}, {"id": "Muse Spark 1.3 (medium effort, Muse Code, Meta API) - mean of 3", "vendor": "Meta", "harness": "Muse Code / Meta API", "cost": 9.24, "kind": "list", "planted": 13, "extras": 17.3, "total": 30.3, "frontier": false}, {"id": "GPT-6 Sol (max effort) - mean of 3", "vendor": "OpenAI", "harness": "Codex CLI", "cost": 9.33, "kind": "list", "planted": 29.3, "extras": 41.3, "total": 70.6, "frontier": false}, {"id": "Grok 4.7 (low) - mean of 3", "vendor": "xAI", "harness": "Grok Build CLI (ACP)", "cost": 9.36, "kind": "floor", "planted": 15.7, "extras": 18.3, "total": 34.0, "frontier": false}, {"id": "Gemini 3.8 Flash - mean of 3", "vendor": "Google", "harness": "Antigravity CLI", "cost": 11.03, "kind": "list", "planted": 18, "extras": 4, "total": 22, "frontier": false}, {"id": "Sonnet 5.5 (medium effort) - mean of 3", "vendor": "Anthropic", "harness": "Claude Code", "cost": 11.11, "kind": "list", "planted": 23.3, "extras": 8.7, "total": 32.0, "frontier": false}, {"id": "Sonnet 5", "vendor": "Anthropic", "harness": "Claude Code", "cost": 11.38, "kind": "list", "planted": 9, "extras": 4, "total": 13, "frontier": false}, {"id": "GPT-6 Astra (low effort)", "vendor": "OpenAI", "harness": "Codex CLI", "cost": 11.69, "kind": "list", "planted": 27, "extras": 25, "total": 52, "frontier": false}, {"id": "Mistral Large 4 - mean of 3", "vendor": "Mistral", "harness": "Claude Code / OpenRouter", "cost": 11.95, "kind": "bill", "planted": 15, "extras": 3.3, "total": 18.3, "frontier": false}, {"id": "Grok 4.7 (high) - mean of 3", "vendor": "xAI", "harness": "Grok Build CLI (ACP)", "cost": 12.29, "kind": "floor", "planted": 19.3, "extras": 15.7, "total": 35.0, "frontier": false}, {"id": "Muse Spark 1.3 (high effort, Muse Code, Meta API) - mean of 3", "vendor": "Meta", "harness": "Muse Code / Meta API", "cost": 12.94, "kind": "list", "planted": 18.7, "extras": 19.3, "total": 38.0, "frontier": false}, {"id": "Muse Spark 1.3 (xhigh effort, Muse Code, Meta API) - mean of 3", "vendor": "Meta", "harness": "Muse Code / Meta API", "cost": 13.71, "kind": "list", "planted": 20.3, "extras": 13.3, "total": 33.6, "frontier": false}, {"id": "Kimi K3.1 Pro (max effort, Moonshot API) - mean of 3", "vendor": "Moonshot AI", "harness": "Claude Code / Moonshot API", "cost": 13.76, "kind": "bill", "planted": 36, "extras": 29.3, "total": 65.3, "frontier": false}, {"id": "Muse Spark 1.2 (xhigh, Meta API)", "vendor": "Meta", "harness": "Claude Code / Meta API", "cost": 13.99, "kind": "list", "planted": 17, "extras": 12, "total": 29, "frontier": false}, {"id": "Opus 5.5 (medium effort) - mean of 3", "vendor": "Anthropic", "harness": "Claude Code", "cost": 15.68, "kind": "list", "planted": 30.3, "extras": 13.3, "total": 43.6, "frontier": false}, {"id": "Grok 4.6 (high)", "vendor": "xAI", "harness": "Grok Build CLI (ACP)", "cost": 15.73, "kind": "floor", "planted": 23, "extras": 16, "total": 39, "frontier": false}, {"id": "GPT-5.6 Sol (medium effort)", "vendor": "OpenAI", "harness": "Codex CLI", "cost": 15.77, "kind": "list", "planted": 29, "extras": 24, "total": 53, "frontier": false}, {"id": "GPT-6 Astra (medium effort)", "vendor": "OpenAI", "harness": "Codex CLI", "cost": 15.78, "kind": "list", "planted": 34, "extras": 33, "total": 67, "frontier": false}, {"id": "GLM-5.3 (max effort, Z.ai API)", "vendor": "Z.ai", "harness": "Claude Code / Z.ai API", "cost": 15.93, "kind": "list", "planted": 19, "extras": 2, "total": 21, "frontier": false}, {"id": "Grok 4.7 (medium) - mean of 3", "vendor": "xAI", "harness": "Grok Build CLI (ACP)", "cost": 16.76, "kind": "floor", "planted": 26.7, "extras": 22.7, "total": 49.4, "frontier": false}, {"id": "Sonnet 5 (max effort)", "vendor": "Anthropic", "harness": "Claude Code", "cost": 17.96, "kind": "list", "planted": 9, "extras": 3, "total": 12, "frontier": false}, {"id": "Muse Spark 1.3 (max effort, Muse Code, Meta API) - mean of 5", "vendor": "Meta", "harness": "Muse Code / Meta API", "cost": 18.11, "kind": "list", "planted": 32.2, "extras": 24, "total": 56.2, "frontier": false}, {"id": "Grok 4.6 (xhigh) seq - mean of 3", "vendor": "xAI", "harness": "Grok Build CLI (ACP)", "cost": 18.6, "kind": "floor", "planted": 28.7, "extras": 18, "total": 46.7, "frontier": false}, {"id": "Sonnet 5.5 (high effort) - mean of 3", "vendor": "Anthropic", "harness": "Claude Code", "cost": 19.85, "kind": "list", "planted": 34.3, "extras": 10.7, "total": 45.0, "frontier": false}, {"id": "GPT-6 Astra (high effort)", "vendor": "OpenAI", "harness": "Codex CLI", "cost": 20.6, "kind": "list", "planted": 35, "extras": 40, "total": 75, "frontier": false}, {"id": "Opus 4.8", "vendor": "Anthropic", "harness": "Claude Code", "cost": 21.3, "kind": "list", "planted": 9, "extras": 1, "total": 10, "frontier": false}, {"id": "Opus 5.5 (high effort) - mean of 3", "vendor": "Anthropic", "harness": "Claude Code", "cost": 22.25, "kind": "list", "planted": 31.7, "extras": 10.7, "total": 42.4, "frontier": false}, {"id": "Grok 4.7 (xhigh) - mean of 5", "vendor": "xAI", "harness": "Grok Build CLI (ACP)", "cost": 22.96, "kind": "floor", "planted": 29, "extras": 32.2, "total": 61.2, "frontier": false}, {"id": "Fable 5.1 (medium effort)", "vendor": "Anthropic", "harness": "Claude Code", "cost": 23.73, "kind": "list", "planted": 21, "extras": 3, "total": 24, "frontier": false}, {"id": "GPT-6 Astra (xhigh effort)", "vendor": "OpenAI", "harness": "Codex CLI", "cost": 24.22, "kind": "list", "planted": 43, "extras": 53, "total": 96, "frontier": false}, {"id": "Kimi K3", "vendor": "Moonshot AI", "harness": "Claude Code / OpenRouter", "cost": 25.27, "kind": "list", "planted": 21, "extras": 6, "total": 27, "frontier": false}, {"id": "Qwen3.8-Max (max effort, Alibaba API) - mean of 3", "vendor": "Alibaba", "harness": "Claude Code / Alibaba API", "cost": 26.76, "kind": "list", "planted": 25.7, "extras": 7, "total": 32.7, "frontier": false}, {"id": "Muse Wonder 1.0 (max effort, Muse Code, Meta API) - mean of 3", "vendor": "Meta", "harness": "Muse Code / Meta API", "cost": 27.87, "kind": "list", "planted": 31.7, "extras": 13.3, "total": 45.0, "frontier": false}, {"id": "GPT-5.6 Terra (max effort)", "vendor": "OpenAI", "harness": "Codex CLI", "cost": 27.98, "kind": "list", "planted": 32, "extras": 45, "total": 77, "frontier": false}, {"id": "Fable 5.1 (low effort)", "vendor": "Anthropic", "harness": "Claude Code", "cost": 33.0, "kind": "list", "planted": 29, "extras": 6, "total": 35, "frontier": false}, {"id": "GPT-6 Astra (max effort) - mean of 3", "vendor": "OpenAI", "harness": "Codex CLI", "cost": 33.03, "kind": "list", "planted": 45, "extras": 55, "total": 100, "frontier": false}, {"id": "GPT-5.6 Sol (re-run Jul 31)", "vendor": "OpenAI", "harness": "Codex CLI", "cost": 33.92, "kind": "list", "planted": 34, "extras": 28, "total": 62, "frontier": false}, {"id": "Opus 5.5 (xhigh effort) - mean of 3", "vendor": "Anthropic", "harness": "Claude Code", "cost": 34.98, "kind": "list", "planted": 36, "extras": 13.3, "total": 49.3, "frontier": false}, {"id": "Opus 5 (medium effort)", "vendor": "Anthropic", "harness": "Claude Code", "cost": 37.4, "kind": "list", "planted": 24, "extras": 4, "total": 28, "frontier": false}, {"id": "Opus 5", "vendor": "Anthropic", "harness": "Claude Code", "cost": 41.51, "kind": "list", "planted": 21, "extras": 6, "total": 27, "frontier": false}, {"id": "Sonnet 5.5 (xhigh effort) - mean of 3", "vendor": "Anthropic", "harness": "Claude Code", "cost": 42.86, "kind": "list", "planted": 36, "extras": 14, "total": 50, "frontier": false}, {"id": "Fable 5.1", "vendor": "Anthropic", "harness": "Claude Code", "cost": 48.58, "kind": "list", "planted": 33, "extras": 7, "total": 40, "frontier": false}, {"id": "GPT-5.6 Sol (xhigh effort)", "vendor": "OpenAI", "harness": "Codex CLI", "cost": 52.75, "kind": "list", "planted": 39, "extras": 59, "total": 98, "frontier": false}, {"id": "Fable 5.1 (xhigh effort)", "vendor": "Anthropic", "harness": "Claude Code", "cost": 53.61, "kind": "list", "planted": 29, "extras": 4, "total": 33, "frontier": false}, {"id": "Opus 5 (max effort)", "vendor": "Anthropic", "harness": "Claude Code", "cost": 54.94, "kind": "list", "planted": 27, "extras": 2, "total": 29, "frontier": false}, {"id": "Opus 4.8 (max effort)", "vendor": "Anthropic", "harness": "Claude Code", "cost": 58.11, "kind": "list", "planted": 15, "extras": 3, "total": 18, "frontier": false}, {"id": "Opus 5.5 (max effort) - mean of 3", "vendor": "Anthropic", "harness": "Claude Code", "cost": 58.53, "kind": "list", "planted": 41.7, "extras": 9, "total": 50.7, "frontier": false}, {"id": "Opus 5 (xhigh effort)", "vendor": "Anthropic", "harness": "Claude Code", "cost": 63.25, "kind": "list", "planted": 26, "extras": 3, "total": 29, "frontier": false}, {"id": "Fable 5", "vendor": "Anthropic", "harness": "Claude Code", "cost": 74.52, "kind": "list", "planted": 24, "extras": 3, "total": 27, "frontier": false}, {"id": "Fable 5.1 (max effort)", "vendor": "Anthropic", "harness": "Claude Code", "cost": 87.18, "kind": "list", "planted": 43, "extras": 11, "total": 54, "frontier": false}, {"id": "GPT-5.6 Sol (max effort) - mean of 2", "vendor": "OpenAI", "harness": "Codex CLI", "cost": 95.35, "kind": "list", "planted": 43.5, "extras": 48.5, "total": 92.0, "frontier": false}, {"id": "Fable 5 (max effort)", "vendor": "Anthropic", "harness": "Claude Code", "cost": 112.4, "kind": "list", "planted": 29, "extras": 5, "total": 34, "frontier": false}, {"id": "Sonnet 5.5 (max effort) - mean of 3", "vendor": "Anthropic", "harness": "Claude Code", "cost": 154.03, "kind": "list", "planted": 51.3, "extras": 26.3, "total": 77.6, "frontier": false}], "skipped": ["Muse Wonder Full 1.0 (max effort, Muse Code, Meta API) - mean of 2 (unknown)", "Muse Wonder Full 1.0 (xhigh effort, Muse Code, Meta API) - mean of 2 (unknown)", "Ox Alpha (stealth; free) (free)"]};
-const W=1040,H=560,M={l:56,r:24,t:16,b:48};
-const pts=DATA.points;
-const xs=pts.map(p=>p.cost), lo=Math.pow(10,Math.floor(Math.log10(Math.min(...xs)))), hi=Math.pow(10,Math.ceil(Math.log10(Math.max(...xs))));
-const ymax=Math.ceil(Math.max(...pts.map(p=>p.total))/20)*20;
-const X=v=>M.l+(Math.log10(v)-Math.log10(lo))/(Math.log10(hi)-Math.log10(lo))*(W-M.l-M.r);
-const Y=v=>H-M.b-(v/ymax)*(H-M.t-M.b);
-const ns="http://www.w3.org/2000/svg";
-const svg=document.createElementNS(ns,"svg");svg.setAttribute("viewBox",`0 0 ${W} ${H}`);svg.setAttribute("role","img");
-svg.setAttribute("aria-label","Scatter of cost versus bugs fixed with the Pareto frontier highlighted");
-const el=(t,a,p=svg)=>{const e=document.createElementNS(ns,t);for(const k in a)e.setAttribute(k,a[k]);p.appendChild(e);return e;};
-for(let v=0;v<=ymax;v+=20){el("line",{x1:M.l,x2:W-M.r,y1:Y(v),y2:Y(v),stroke:"var(--grid)"});const t=el("text",{x:M.l-8,y:Y(v)+4,"text-anchor":"end","font-size":11,fill:"var(--muted)"});t.textContent=v;}
-for(let e=Math.log10(lo);e<=Math.log10(hi);e++){const v=Math.pow(10,e);el("line",{x1:X(v),x2:X(v),y1:M.t,y2:H-M.b,stroke:"var(--grid)"});const t=el("text",{x:X(v),y:H-M.b+16,"text-anchor":"middle","font-size":11,fill:"var(--muted)"});t.textContent="$"+(v<1?v.toString():v.toLocaleString());}
-const xl=el("text",{x:(M.l+W-M.r)/2,y:H-8,"text-anchor":"middle","font-size":12,fill:"var(--text-secondary)"});xl.textContent="Cost per run (USD, log scale)";
-const yl=el("text",{x:14,y:(M.t+H-M.b)/2,"text-anchor":"middle","font-size":12,fill:"var(--text-secondary)",transform:`rotate(-90 14 ${(M.t+H-M.b)/2})`});yl.textContent="Bugs fixed (planted + unplanted)";
-const front=pts.filter(p=>p.frontier);
-let d="";front.forEach((p,i)=>{d+=(i?"L":"M")+X(p.cost)+" "+Y(p.total)+(i<front.length-1?" H"+X(front[i+1].cost):"");});
-el("path",{d,fill:"none",stroke:"var(--series-1)","stroke-width":2,"stroke-linejoin":"round"});
-const tip=document.getElementById("tip");
-const fmt=v=>(Math.round(v*10)/10).toString();
-const show=(p,ev)=>{tip.style.display="block";tip.innerHTML=`<b>${p.id}</b><br>${p.vendor} · ${p.harness}<br>Total <b>${fmt(p.total)}</b> = ${fmt(p.planted)} planted + ${fmt(p.extras)} unplanted<br>Cost $${p.cost.toFixed(2)} (${p.kind})${p.frontier?"<br>On the Pareto frontier":""}`;tip.style.left=Math.min(ev.clientX+14,innerWidth-330)+"px";tip.style.top=(ev.clientY+14)+"px";};
-[...pts].sort((a,b)=>a.frontier-b.frontier).forEach(p=>{
-  const floor=p.kind==="floor", c=p.frontier?"var(--series-1)":"var(--other)";
-  el("circle",{cx:X(p.cost),cy:Y(p.total),r:p.frontier?5.5:4,fill:floor?"var(--surface)":c,stroke:floor?(p.frontier?"var(--series-1)":"var(--text-secondary)"):"var(--surface)","stroke-width":floor?1.5:2});
-  const hit=el("circle",{cx:X(p.cost),cy:Y(p.total),r:10,fill:"transparent"});
-  hit.addEventListener("mousemove",ev=>show(p,ev));hit.addEventListener("mouseleave",()=>tip.style.display="none");
-});
-const short=s=>s.replace(/ - mean of \d+/,"").replace(/ effort/,"");
-front.forEach((p,i)=>{const t=el("text",{x:X(p.cost)+(i%2?8:-8),y:Y(p.total)+(i%2?14:-8),"text-anchor":i%2?"start":"end","font-size":11,fill:"var(--text-primary)"});t.textContent=short(p.id);});
-document.getElementById("chart").appendChild(svg);
-document.getElementById("ftable").innerHTML="<tr><th>Configuration</th><th>Harness</th><th class=n>Cost</th><th class=n>Planted</th><th class=n>Unplanted</th><th class=n>Total</th></tr>"+front.map(p=>`<tr><td>${p.id}</td><td>${p.harness}</td><td class=n>$${p.cost.toFixed(2)} (${p.kind})</td><td class=n>${fmt(p.planted)}</td><td class=n>${fmt(p.extras)}</td><td class=n><b>${fmt(p.total)}</b></td></tr>`).join("");
-document.getElementById("skipped").textContent=DATA.skipped.join("; ");
-</script></body></html>
+<footer class="site-footer">
+  <div class="wrap footer-grid">
+    <div>
+      <p class="footer-brand">ValueRank <span class="mono">v2.0.0</span></p>
+      <p class="muted">Published October 19, 2026. Data observed 2026-10-17. Every score is traceable to a source, a date and an evidence grade.</p>
+    </div>
+    <nav aria-label="Footer">
+      <ul class="footer-links">        <li><a href="/rankings/">Rankings</a></li>        <li><a href="/models/">Models</a></li>        <li><a href="/plans/">Plans</a></li>        <li><a href="/benchmarks/">Benchmarks</a></li>        <li><a href="/methodology/">Methodology</a></li>        <li><a href="/changelog/">Changelog</a></li>        <li><a href="/data/">Data</a></li>        <li><a href="/archive/coding-agents-v0.3/">Archive</a></li>
+      </ul>
+    </nav>
+  </div>
+</footer>
+<script type="application/json" id="page-data">{"rows": [{"id": "GPT-6 Luna (medium effort)", "vendor": "OpenAI", "harness": "Codex CLI", "planted": 4, "unplanted": 0, "total": 4, "costUsd": 0.06, "costKind": "list", "frontier": true}, {"id": "GPT-5.6 Luna (low effort)", "vendor": "OpenAI", "harness": "Codex CLI", "planted": 4, "unplanted": 1, "total": 5, "costUsd": 0.1, "costKind": "list", "frontier": true}, {"id": "gpt-oss-120b - mean of 3", "vendor": "OpenAI", "harness": "Claude Code / OpenRouter", "planted": 0, "unplanted": 0.3, "total": 0.3, "costUsd": 0.11, "costKind": "bill", "frontier": false}, {"id": "gpt-oss-20b - mean of 3", "vendor": "OpenAI", "harness": "Claude Code / OpenRouter", "planted": 0, "unplanted": 0, "total": 0, "costUsd": 0.11, "costKind": "bill", "frontier": false}, {"id": "GPT-6 Luna (high effort)", "vendor": "OpenAI", "harness": "Codex CLI", "planted": 9, "unplanted": 9, "total": 18, "costUsd": 0.13, "costKind": "list", "frontier": true}, {"id": "GPT-6 Luna (low effort)", "vendor": "OpenAI", "harness": "Codex CLI", "planted": 4, "unplanted": 9, "total": 13, "costUsd": 0.2, "costKind": "list", "frontier": false}, {"id": "GPT-6.1 Terra (low effort) - mean of 3", "vendor": "OpenAI", "harness": "Codex CLI", "planted": 6, "unplanted": 5, "total": 11, "costUsd": 0.3, "costKind": "list", "frontier": false}, {"id": "DeepSeek V4.1 Flash (high effort)", "vendor": "DeepSeek", "harness": "Claude Code / DeepSeek API", "planted": 19, "unplanted": 4, "total": 23, "costUsd": 0.31, "costKind": "bill", "frontier": true}, {"id": "GPT-6.1 Terra (medium effort) - mean of 3", "vendor": "OpenAI", "harness": "Codex CLI", "planted": 7.3, "unplanted": 7.3, "total": 14.6, "costUsd": 0.31, "costKind": "list", "frontier": false}, {"id": "GPT-5.6 Luna (medium effort)", "vendor": "OpenAI", "harness": "Codex CLI", "planted": 9, "unplanted": 5, "total": 14, "costUsd": 0.33, "costKind": "list", "frontier": false}, {"id": "GPT-6 Luna (xhigh effort)", "vendor": "OpenAI", "harness": "Codex CLI", "planted": 14, "unplanted": 12, "total": 26, "costUsd": 0.39, "costKind": "list", "frontier": true}, {"id": "GLM-5.3 Flash (low effort, Z.ai API)", "vendor": "Z.ai", "harness": "Claude Code / Z.ai API", "planted": 9, "unplanted": 4, "total": 13, "costUsd": 0.42, "costKind": "list", "frontier": false}, {"id": "DeepSeek V4.1 Flash 1017 (low effort, Pi) - mean of 5", "vendor": "DeepSeek", "harness": "Pi / DeepSeek API", "planted": 33.8, "unplanted": 19.6, "total": 53.4, "costUsd": 0.46, "costKind": "bill", "frontier": true}, {"id": "MiMo-V2.6-Flash - mean of 3", "vendor": "Xiaomi", "harness": "Claude Code / OpenRouter", "planted": 23.3, "unplanted": 7.3, "total": 30.6, "costUsd": 0.49, "costKind": "bill", "frontier": false}, {"id": "GPT-6 Luna (max effort) - mean of 3", "vendor": "OpenAI", "harness": "Codex CLI", "planted": 18.3, "unplanted": 22.7, "total": 41.0, "costUsd": 0.52, "costKind": "list", "frontier": false}, {"id": "GPT-6.1 Terra (high effort) - mean of 3", "vendor": "OpenAI", "harness": "Codex CLI", "planted": 9.7, "unplanted": 6.7, "total": 16.4, "costUsd": 0.56, "costKind": "list", "frontier": false}, {"id": "Gemma 4 31B 4-bit (OpenRouter/CoreWeave)", "vendor": "Google", "harness": "Claude Code / OpenRouter", "planted": 3, "unplanted": 2, "total": 5, "costUsd": 0.56, "costKind": "bill", "frontier": false}, {"id": "GPT-5.6 Luna (high effort)", "vendor": "OpenAI", "harness": "Codex CLI", "planted": 13, "unplanted": 22, "total": 35, "costUsd": 0.57, "costKind": "list", "frontier": false}, {"id": "MiMo-V2.6-Pro (first-party)", "vendor": "Xiaomi", "harness": "Claude Code / Xiaomi first-party", "planted": 18, "unplanted": 4, "total": 22, "costUsd": 0.59, "costKind": "list", "frontier": false}, {"id": "DeepSeek V4.1 Flash 1017 (high effort, Pi) - mean of 5", "vendor": "DeepSeek", "harness": "Pi / DeepSeek API", "planted": 40.4, "unplanted": 29.4, "total": 69.8, "costUsd": 0.64, "costKind": "bill", "frontier": true}, {"id": "DeepSeek V4.1 Flash 1017 (low effort, OpenCode) - mean of 5", "vendor": "DeepSeek", "harness": "OpenCode / DeepSeek API", "planted": 32.8, "unplanted": 17.6, "total": 50.4, "costUsd": 0.66, "costKind": "bill", "frontier": false}, {"id": "DeepSeek V4.1 Flash 1017 (low effort) - mean of 5", "vendor": "DeepSeek", "harness": "Claude Code / DeepSeek API", "planted": 34.4, "unplanted": 16.8, "total": 51.2, "costUsd": 0.71, "costKind": "bill", "frontier": false}, {"id": "GPT-6.1 Terra (xhigh effort) - mean of 3", "vendor": "OpenAI", "harness": "Codex CLI", "planted": 11.3, "unplanted": 17, "total": 28.3, "costUsd": 0.75, "costKind": "list", "frontier": false}, {"id": "DeepSeek V4.1 Flash (max effort) - mean of 3", "vendor": "DeepSeek", "harness": "Claude Code / DeepSeek API", "planted": 21.7, "unplanted": 6.7, "total": 28.4, "costUsd": 0.78, "costKind": "bill", "frontier": false}, {"id": "DeepSeek V4.1 Flash 1017 (high effort, OpenCode) - mean of 5", "vendor": "DeepSeek", "harness": "OpenCode / DeepSeek API", "planted": 36.6, "unplanted": 25.6, "total": 62.2, "costUsd": 0.79, "costKind": "bill", "frontier": false}, {"id": "GLM-5.3 Flash", "vendor": "Z.ai", "harness": "Claude Code / OpenRouter", "planted": 13, "unplanted": 4, "total": 17, "costUsd": 0.79, "costKind": "bill", "frontier": false}, {"id": "DeepSeek V4.1 Flash 1017 (high effort) - mean of 5", "vendor": "DeepSeek", "harness": "Claude Code / DeepSeek API", "planted": 36.4, "unplanted": 24.4, "total": 60.8, "costUsd": 0.82, "costKind": "bill", "frontier": false}, {"id": "DeepSeek V4.1 Flash 1017 (max effort, Pi) - mean of 5", "vendor": "DeepSeek", "harness": "Pi / DeepSeek API", "planted": 42.2, "unplanted": 41.8, "total": 84.0, "costUsd": 0.83, "costKind": "bill", "frontier": true}, {"id": "MiMo-V2.6-Pro - mean of 3", "vendor": "Xiaomi", "harness": "Claude Code / OpenRouter", "planted": 22.7, "unplanted": 5.3, "total": 28.0, "costUsd": 0.86, "costKind": "bill", "frontier": false}, {"id": "GLM-5.3 Flash (high effort, Z.ai API)", "vendor": "Z.ai", "harness": "Claude Code / Z.ai API", "planted": 16, "unplanted": 4, "total": 20, "costUsd": 0.94, "costKind": "list", "frontier": false}, {"id": "DeepSeek V4.1 Flash 1017 (max effort, OpenCode) - mean of 5", "vendor": "DeepSeek", "harness": "OpenCode / DeepSeek API", "planted": 37.6, "unplanted": 36.2, "total": 73.8, "costUsd": 0.96, "costKind": "bill", "frontier": false}, {"id": "DeepSeek V4.1 Flash 1017 (max effort) - mean of 7", "vendor": "DeepSeek", "harness": "Claude Code / DeepSeek API", "planted": 39.1, "unplanted": 22.9, "total": 62.0, "costUsd": 1.01, "costKind": "bill", "frontier": false}, {"id": "GLM-5.3 Flash (max effort, Z.ai API) - mean of 3", "vendor": "Z.ai", "harness": "Claude Code / Z.ai API", "planted": 17.7, "unplanted": 3.3, "total": 21.0, "costUsd": 1.03, "costKind": "list", "frontier": false}, {"id": "DeepSeek V4.1 Flash 1017 (low effort, DeepSeek Harness) - mean of 5", "vendor": "DeepSeek", "harness": "DeepSeek Harness / DeepSeek API", "planted": 34.8, "unplanted": 34.4, "total": 69.2, "costUsd": 1.06, "costKind": "bill", "frontier": false}, {"id": "DeepSeek V4-Pro (high effort, DeepSeek API)", "vendor": "DeepSeek", "harness": "Claude Code / DeepSeek API", "planted": 13, "unplanted": 1, "total": 14, "costUsd": 1.08, "costKind": "bill", "frontier": false}, {"id": "GPT-6 Sol (low effort)", "vendor": "OpenAI", "harness": "Codex CLI", "planted": 6, "unplanted": 5, "total": 11, "costUsd": 1.08, "costKind": "list", "frontier": false}, {"id": "DeepSeek V4.1 Flash 1017 (high effort, DeepSeek Harness) - mean of 5", "vendor": "DeepSeek", "harness": "DeepSeek Harness / DeepSeek API", "planted": 39.2, "unplanted": 43.8, "total": 83.0, "costUsd": 1.27, "costKind": "bill", "frontier": false}, {"id": "GPT-6.1 Sol (low effort) - mean of 2", "vendor": "OpenAI", "harness": "Codex CLI", "planted": 22.5, "unplanted": 24, "total": 46.5, "costUsd": 1.34, "costKind": "list", "frontier": false}, {"id": "Qwen3.8-Flash (low effort)", "vendor": "Alibaba", "harness": "Claude Code / Alibaba API", "planted": 23, "unplanted": 7, "total": 30, "costUsd": 1.37, "costKind": "list", "frontier": false}, {"id": "DeepSeek V4-Flash 0731", "vendor": "DeepSeek", "harness": "Claude Code / OpenRouter", "planted": 14, "unplanted": 0, "total": 14, "costUsd": 1.52, "costKind": "bill", "frontier": false}, {"id": "Haiku 5.5 (low effort)", "vendor": "Anthropic", "harness": "Claude Code", "planted": 11, "unplanted": 2, "total": 13, "costUsd": 1.61, "costKind": "list", "frontier": false}, {"id": "GPT-6.1 Sol (medium effort) - mean of 2", "vendor": "OpenAI", "harness": "Codex CLI", "planted": 29, "unplanted": 30.5, "total": 59.5, "costUsd": 1.76, "costKind": "list", "frontier": false}, {"id": "Qwen3.8-Flash (max effort)", "vendor": "Alibaba", "harness": "Claude Code / Alibaba API", "planted": 26, "unplanted": 7, "total": 33, "costUsd": 1.81, "costKind": "list", "frontier": false}, {"id": "DeepSeek V4.1 Flash 1017 (max effort, DeepSeek Harness) - mean of 7", "vendor": "DeepSeek", "harness": "DeepSeek Harness / DeepSeek API", "planted": 42.7, "unplanted": 44, "total": 86.7, "costUsd": 1.84, "costKind": "bill", "frontier": true}, {"id": "DeepSeek V4-Pro (max effort, DeepSeek API)", "vendor": "DeepSeek", "harness": "Claude Code / DeepSeek API", "planted": 16, "unplanted": 4, "total": 20, "costUsd": 1.89, "costKind": "bill", "frontier": false}, {"id": "Haiku 4.5 - mean of 2", "vendor": "Anthropic", "harness": "Claude Code", "planted": 1.5, "unplanted": 2.5, "total": 4.0, "costUsd": 2.22, "costKind": "list", "frontier": false}, {"id": "GPT-6 Sol (medium effort)", "vendor": "OpenAI", "harness": "Codex CLI", "planted": 14, "unplanted": 13, "total": 27, "costUsd": 2.39, "costKind": "list", "frontier": false}, {"id": "GPT-5.6 Luna (xhigh effort)", "vendor": "OpenAI", "harness": "Codex CLI", "planted": 23, "unplanted": 53, "total": 76, "costUsd": 2.5, "costKind": "list", "frontier": false}, {"id": "Haiku 5.5 (medium effort)", "vendor": "Anthropic", "harness": "Claude Code", "planted": 12, "unplanted": 4, "total": 16, "costUsd": 2.66, "costKind": "list", "frontier": false}, {"id": "Qwen3.8-27B 8-bit (OpenRouter/Parasail) - mean of 3", "vendor": "Alibaba", "harness": "Claude Code / OpenRouter", "planted": 10.7, "unplanted": 1.7, "total": 12.4, "costUsd": 2.97, "costKind": "bill", "frontier": false}, {"id": "Hy4 Preview", "vendor": "Tencent", "harness": "Claude Code / OpenRouter", "planted": 18, "unplanted": 2, "total": 20, "costUsd": 3.13, "costKind": "bill", "frontier": false}, {"id": "GPT-5.6 Luna (max effort) - mean of 3", "vendor": "OpenAI", "harness": "Codex CLI", "planted": 31.3, "unplanted": 54.7, "total": 86.0, "costUsd": 3.15, "costKind": "list", "frontier": false}, {"id": "GPT-6.1 Sol (high effort) - mean of 2", "vendor": "OpenAI", "harness": "Codex CLI", "planted": 36.5, "unplanted": 40, "total": 76.5, "costUsd": 3.26, "costKind": "list", "frontier": false}, {"id": "Haiku 5.5 (high effort) - mean of 2", "vendor": "Anthropic", "harness": "Claude Code", "planted": 16, "unplanted": 4, "total": 20, "costUsd": 3.56, "costKind": "list", "frontier": false}, {"id": "GPT-5.6 Terra (medium effort)", "vendor": "OpenAI", "harness": "Codex CLI", "planted": 15, "unplanted": 6, "total": 21, "costUsd": 3.87, "costKind": "list", "frontier": false}, {"id": "GPT-6.1 Terra (max effort) - mean of 3", "vendor": "OpenAI", "harness": "Codex CLI", "planted": 40.7, "unplanted": 48, "total": 88.7, "costUsd": 3.88, "costKind": "list", "frontier": true}, {"id": "Grok 4.6 (low)", "vendor": "xAI", "harness": "Grok Build CLI (ACP)", "planted": 15, "unplanted": 9, "total": 24, "costUsd": 4.14, "costKind": "floor", "frontier": false}, {"id": "GPT-6 Sol (high effort)", "vendor": "OpenAI", "harness": "Codex CLI", "planted": 20, "unplanted": 15, "total": 35, "costUsd": 4.16, "costKind": "list", "frontier": false}, {"id": "GPT-6.1 Sol (xhigh effort) - mean of 3", "vendor": "OpenAI", "harness": "Codex CLI", "planted": 42.7, "unplanted": 56.7, "total": 99.4, "costUsd": 4.35, "costKind": "list", "frontier": true}, {"id": "Haiku 5.5 (xhigh effort) - mean of 3", "vendor": "Anthropic", "harness": "Claude Code", "planted": 18.3, "unplanted": 6.7, "total": 25.0, "costUsd": 4.8, "costKind": "list", "frontier": false}, {"id": "Union Alpha (stealth; free) - mean of 3", "vendor": "Unbiased", "harness": "Claude Code / OpenRouter", "planted": 30.7, "unplanted": 10.3, "total": 41.0, "costUsd": 4.81, "costKind": "list", "frontier": false}, {"id": "Qwen3.8-27B (xhigh effort, Alibaba API) - mean of 3", "vendor": "Alibaba", "harness": "Claude Code / Alibaba API", "planted": 15, "unplanted": 2.3, "total": 17.3, "costUsd": 5.55, "costKind": "list", "frontier": false}, {"id": "Muse Spark 1.3 (low effort, Muse Code, Meta API) - mean of 3", "vendor": "Meta", "harness": "Muse Code / Meta API", "planted": 9.7, "unplanted": 6.7, "total": 16.4, "costUsd": 5.61, "costKind": "list", "frontier": false}, {"id": "Sonnet 5.5 (low effort) - mean of 3", "vendor": "Anthropic", "harness": "Claude Code", "planted": 19, "unplanted": 8, "total": 27, "costUsd": 5.73, "costKind": "list", "frontier": false}, {"id": "Grok 4.6 (medium) seq", "vendor": "xAI", "harness": "Grok Build CLI (ACP)", "planted": 22, "unplanted": 11, "total": 33, "costUsd": 5.8, "costKind": "floor", "frontier": false}, {"id": "Haiku 5.5 (max effort) - mean of 2", "vendor": "Anthropic", "harness": "Claude Code", "planted": 21.5, "unplanted": 9, "total": 30.5, "costUsd": 5.83, "costKind": "list", "frontier": false}, {"id": "GPT-6.1 Sol (max effort) - mean of 3", "vendor": "OpenAI", "harness": "Codex CLI", "planted": 44.3, "unplanted": 65.3, "total": 109.6, "costUsd": 5.88, "costKind": "list", "frontier": true}, {"id": "GPT-5.6 Terra (high effort)", "vendor": "OpenAI", "harness": "Codex CLI", "planted": 18, "unplanted": 17, "total": 35, "costUsd": 5.89, "costKind": "list", "frontier": false}, {"id": "Gemini 3.7 Flash seq", "vendor": "Google", "harness": "Antigravity CLI", "planted": 16, "unplanted": 2, "total": 18, "costUsd": 6.36, "costKind": "list", "frontier": false}, {"id": "Gemini 4 Argon (low effort, Antigravity CLI) - mean of 3", "vendor": "Google", "harness": "Antigravity CLI", "planted": 35.3, "unplanted": 5.7, "total": 41.0, "costUsd": 6.47, "costKind": "list", "frontier": false}, {"id": "Gemini 4 Argon (high effort, Antigravity CLI) - mean of 3", "vendor": "Google", "harness": "Antigravity CLI", "planted": 40.7, "unplanted": 7.3, "total": 48.0, "costUsd": 7.16, "costKind": "list", "frontier": false}, {"id": "Gemini 4 Argon (medium effort, Antigravity CLI) - mean of 3", "vendor": "Google", "harness": "Antigravity CLI", "planted": 39.3, "unplanted": 11.3, "total": 50.6, "costUsd": 7.5, "costKind": "list", "frontier": false}, {"id": "GPT-6 Sol (xhigh effort)", "vendor": "OpenAI", "harness": "Codex CLI", "planted": 25, "unplanted": 24, "total": 49, "costUsd": 7.67, "costKind": "list", "frontier": false}, {"id": "Opus 5.5 (low effort) - mean of 3", "vendor": "Anthropic", "harness": "Claude Code", "planted": 22.3, "unplanted": 9.7, "total": 32.0, "costUsd": 8.34, "costKind": "list", "frontier": false}, {"id": "Gemini 3.7 Flash (high)", "vendor": "Google", "harness": "Gemini CLI (retired) + model-pinning gateway", "planted": 22, "unplanted": 4, "total": 26, "costUsd": 8.43, "costKind": "list", "frontier": false}, {"id": "Grok 4.5 (re-run Aug 6)", "vendor": "xAI", "harness": "Grok Build CLI (ACP)", "planted": 17, "unplanted": 10, "total": 27, "costUsd": 8.5, "costKind": "floor", "frontier": false}, {"id": "Gemma 4 31B (OpenRouter/Crusoe)", "vendor": "Google", "harness": "Claude Code / OpenRouter", "planted": 4, "unplanted": 2, "total": 6, "costUsd": 8.61, "costKind": "bill", "frontier": false}, {"id": "GPT-5.6 Terra (xhigh effort)", "vendor": "OpenAI", "harness": "Codex CLI", "planted": 20, "unplanted": 29, "total": 49, "costUsd": 8.98, "costKind": "list", "frontier": false}, {"id": "Muse Spark 1.3 (medium effort, Muse Code, Meta API) - mean of 3", "vendor": "Meta", "harness": "Muse Code / Meta API", "planted": 13, "unplanted": 17.3, "total": 30.3, "costUsd": 9.24, "costKind": "list", "frontier": false}, {"id": "GPT-6 Sol (max effort) - mean of 3", "vendor": "OpenAI", "harness": "Codex CLI", "planted": 29.3, "unplanted": 41.3, "total": 70.6, "costUsd": 9.33, "costKind": "list", "frontier": false}, {"id": "Grok 4.7 (low) - mean of 3", "vendor": "xAI", "harness": "Grok Build CLI (ACP)", "planted": 15.7, "unplanted": 18.3, "total": 34.0, "costUsd": 9.36, "costKind": "floor", "frontier": false}, {"id": "Gemini 3.8 Flash - mean of 3", "vendor": "Google", "harness": "Antigravity CLI", "planted": 18, "unplanted": 4, "total": 22, "costUsd": 11.03, "costKind": "list", "frontier": false}, {"id": "Sonnet 5.5 (medium effort) - mean of 3", "vendor": "Anthropic", "harness": "Claude Code", "planted": 23.3, "unplanted": 8.7, "total": 32.0, "costUsd": 11.11, "costKind": "list", "frontier": false}, {"id": "Sonnet 5", "vendor": "Anthropic", "harness": "Claude Code", "planted": 9, "unplanted": 4, "total": 13, "costUsd": 11.38, "costKind": "list", "frontier": false}, {"id": "GPT-6 Astra (low effort)", "vendor": "OpenAI", "harness": "Codex CLI", "planted": 27, "unplanted": 25, "total": 52, "costUsd": 11.69, "costKind": "list", "frontier": false}, {"id": "Mistral Large 4 - mean of 3", "vendor": "Mistral", "harness": "Claude Code / OpenRouter", "planted": 15, "unplanted": 3.3, "total": 18.3, "costUsd": 11.95, "costKind": "bill", "frontier": false}, {"id": "Grok 4.7 (high) - mean of 3", "vendor": "xAI", "harness": "Grok Build CLI (ACP)", "planted": 19.3, "unplanted": 15.7, "total": 35.0, "costUsd": 12.29, "costKind": "floor", "frontier": false}, {"id": "Muse Spark 1.3 (high effort, Muse Code, Meta API) - mean of 3", "vendor": "Meta", "harness": "Muse Code / Meta API", "planted": 18.7, "unplanted": 19.3, "total": 38.0, "costUsd": 12.94, "costKind": "list", "frontier": false}, {"id": "Muse Spark 1.3 (xhigh effort, Muse Code, Meta API) - mean of 3", "vendor": "Meta", "harness": "Muse Code / Meta API", "planted": 20.3, "unplanted": 13.3, "total": 33.6, "costUsd": 13.71, "costKind": "list", "frontier": false}, {"id": "Kimi K3.1 Pro (max effort, Moonshot API) - mean of 3", "vendor": "Moonshot AI", "harness": "Claude Code / Moonshot API", "planted": 36, "unplanted": 29.3, "total": 65.3, "costUsd": 13.76, "costKind": "bill", "frontier": false}, {"id": "Muse Spark 1.2 (xhigh, Meta API)", "vendor": "Meta", "harness": "Claude Code / Meta API", "planted": 17, "unplanted": 12, "total": 29, "costUsd": 13.99, "costKind": "list", "frontier": false}, {"id": "Opus 5.5 (medium effort) - mean of 3", "vendor": "Anthropic", "harness": "Claude Code", "planted": 30.3, "unplanted": 13.3, "total": 43.6, "costUsd": 15.68, "costKind": "list", "frontier": false}, {"id": "Grok 4.6 (high)", "vendor": "xAI", "harness": "Grok Build CLI (ACP)", "planted": 23, "unplanted": 16, "total": 39, "costUsd": 15.73, "costKind": "floor", "frontier": false}, {"id": "GPT-5.6 Sol (medium effort)", "vendor": "OpenAI", "harness": "Codex CLI", "planted": 29, "unplanted": 24, "total": 53, "costUsd": 15.77, "costKind": "list", "frontier": false}, {"id": "GPT-6 Astra (medium effort)", "vendor": "OpenAI", "harness": "Codex CLI", "planted": 34, "unplanted": 33, "total": 67, "costUsd": 15.78, "costKind": "list", "frontier": false}, {"id": "GLM-5.3 (max effort, Z.ai API)", "vendor": "Z.ai", "harness": "Claude Code / Z.ai API", "planted": 19, "unplanted": 2, "total": 21, "costUsd": 15.93, "costKind": "list", "frontier": false}, {"id": "Grok 4.7 (medium) - mean of 3", "vendor": "xAI", "harness": "Grok Build CLI (ACP)", "planted": 26.7, "unplanted": 22.7, "total": 49.4, "costUsd": 16.76, "costKind": "floor", "frontier": false}, {"id": "Sonnet 5 (max effort)", "vendor": "Anthropic", "harness": "Claude Code", "planted": 9, "unplanted": 3, "total": 12, "costUsd": 17.96, "costKind": "list", "frontier": false}, {"id": "Muse Spark 1.3 (max effort, Muse Code, Meta API) - mean of 5", "vendor": "Meta", "harness": "Muse Code / Meta API", "planted": 32.2, "unplanted": 24, "total": 56.2, "costUsd": 18.11, "costKind": "list", "frontier": false}, {"id": "Grok 4.6 (xhigh) seq - mean of 3", "vendor": "xAI", "harness": "Grok Build CLI (ACP)", "planted": 28.7, "unplanted": 18, "total": 46.7, "costUsd": 18.6, "costKind": "floor", "frontier": false}, {"id": "Sonnet 5.5 (high effort) - mean of 3", "vendor": "Anthropic", "harness": "Claude Code", "planted": 34.3, "unplanted": 10.7, "total": 45.0, "costUsd": 19.85, "costKind": "list", "frontier": false}, {"id": "GPT-6 Astra (high effort)", "vendor": "OpenAI", "harness": "Codex CLI", "planted": 35, "unplanted": 40, "total": 75, "costUsd": 20.6, "costKind": "list", "frontier": false}, {"id": "Opus 4.8", "vendor": "Anthropic", "harness": "Claude Code", "planted": 9, "unplanted": 1, "total": 10, "costUsd": 21.3, "costKind": "list", "frontier": false}, {"id": "Opus 5.5 (high effort) - mean of 3", "vendor": "Anthropic", "harness": "Claude Code", "planted": 31.7, "unplanted": 10.7, "total": 42.4, "costUsd": 22.25, "costKind": "list", "frontier": false}, {"id": "Grok 4.7 (xhigh) - mean of 5", "vendor": "xAI", "harness": "Grok Build CLI (ACP)", "planted": 29, "unplanted": 32.2, "total": 61.2, "costUsd": 22.96, "costKind": "floor", "frontier": false}, {"id": "Fable 5.1 (medium effort)", "vendor": "Anthropic", "harness": "Claude Code", "planted": 21, "unplanted": 3, "total": 24, "costUsd": 23.73, "costKind": "list", "frontier": false}, {"id": "GPT-6 Astra (xhigh effort)", "vendor": "OpenAI", "harness": "Codex CLI", "planted": 43, "unplanted": 53, "total": 96, "costUsd": 24.22, "costKind": "list", "frontier": false}, {"id": "Kimi K3", "vendor": "Moonshot AI", "harness": "Claude Code / OpenRouter", "planted": 21, "unplanted": 6, "total": 27, "costUsd": 25.27, "costKind": "list", "frontier": false}, {"id": "Qwen3.8-Max (max effort, Alibaba API) - mean of 3", "vendor": "Alibaba", "harness": "Claude Code / Alibaba API", "planted": 25.7, "unplanted": 7, "total": 32.7, "costUsd": 26.76, "costKind": "list", "frontier": false}, {"id": "Muse Wonder 1.0 (max effort, Muse Code, Meta API) - mean of 3", "vendor": "Meta", "harness": "Muse Code / Meta API", "planted": 31.7, "unplanted": 13.3, "total": 45.0, "costUsd": 27.87, "costKind": "list", "frontier": false}, {"id": "GPT-5.6 Terra (max effort)", "vendor": "OpenAI", "harness": "Codex CLI", "planted": 32, "unplanted": 45, "total": 77, "costUsd": 27.98, "costKind": "list", "frontier": false}, {"id": "Fable 5.1 (low effort)", "vendor": "Anthropic", "harness": "Claude Code", "planted": 29, "unplanted": 6, "total": 35, "costUsd": 33.0, "costKind": "list", "frontier": false}, {"id": "GPT-6 Astra (max effort) - mean of 3", "vendor": "OpenAI", "harness": "Codex CLI", "planted": 45, "unplanted": 55, "total": 100, "costUsd": 33.03, "costKind": "list", "frontier": false}, {"id": "GPT-5.6 Sol (re-run Jul 31)", "vendor": "OpenAI", "harness": "Codex CLI", "planted": 34, "unplanted": 28, "total": 62, "costUsd": 33.92, "costKind": "list", "frontier": false}, {"id": "Opus 5.5 (xhigh effort) - mean of 3", "vendor": "Anthropic", "harness": "Claude Code", "planted": 36, "unplanted": 13.3, "total": 49.3, "costUsd": 34.98, "costKind": "list", "frontier": false}, {"id": "Opus 5 (medium effort)", "vendor": "Anthropic", "harness": "Claude Code", "planted": 24, "unplanted": 4, "total": 28, "costUsd": 37.4, "costKind": "list", "frontier": false}, {"id": "Opus 5", "vendor": "Anthropic", "harness": "Claude Code", "planted": 21, "unplanted": 6, "total": 27, "costUsd": 41.51, "costKind": "list", "frontier": false}, {"id": "Sonnet 5.5 (xhigh effort) - mean of 3", "vendor": "Anthropic", "harness": "Claude Code", "planted": 36, "unplanted": 14, "total": 50, "costUsd": 42.86, "costKind": "list", "frontier": false}, {"id": "Fable 5.1", "vendor": "Anthropic", "harness": "Claude Code", "planted": 33, "unplanted": 7, "total": 40, "costUsd": 48.58, "costKind": "list", "frontier": false}, {"id": "GPT-5.6 Sol (xhigh effort)", "vendor": "OpenAI", "harness": "Codex CLI", "planted": 39, "unplanted": 59, "total": 98, "costUsd": 52.75, "costKind": "list", "frontier": false}, {"id": "Fable 5.1 (xhigh effort)", "vendor": "Anthropic", "harness": "Claude Code", "planted": 29, "unplanted": 4, "total": 33, "costUsd": 53.61, "costKind": "list", "frontier": false}, {"id": "Opus 5 (max effort)", "vendor": "Anthropic", "harness": "Claude Code", "planted": 27, "unplanted": 2, "total": 29, "costUsd": 54.94, "costKind": "list", "frontier": false}, {"id": "Opus 4.8 (max effort)", "vendor": "Anthropic", "harness": "Claude Code", "planted": 15, "unplanted": 3, "total": 18, "costUsd": 58.11, "costKind": "list", "frontier": false}, {"id": "Opus 5.5 (max effort) - mean of 3", "vendor": "Anthropic", "harness": "Claude Code", "planted": 41.7, "unplanted": 9, "total": 50.7, "costUsd": 58.53, "costKind": "list", "frontier": false}, {"id": "Opus 5 (xhigh effort)", "vendor": "Anthropic", "harness": "Claude Code", "planted": 26, "unplanted": 3, "total": 29, "costUsd": 63.25, "costKind": "list", "frontier": false}, {"id": "Fable 5", "vendor": "Anthropic", "harness": "Claude Code", "planted": 24, "unplanted": 3, "total": 27, "costUsd": 74.52, "costKind": "list", "frontier": false}, {"id": "Fable 5.1 (max effort)", "vendor": "Anthropic", "harness": "Claude Code", "planted": 43, "unplanted": 11, "total": 54, "costUsd": 87.18, "costKind": "list", "frontier": false}, {"id": "GPT-5.6 Sol (max effort) - mean of 2", "vendor": "OpenAI", "harness": "Codex CLI", "planted": 43.5, "unplanted": 48.5, "total": 92.0, "costUsd": 95.35, "costKind": "list", "frontier": false}, {"id": "Fable 5 (max effort)", "vendor": "Anthropic", "harness": "Claude Code", "planted": 29, "unplanted": 5, "total": 34, "costUsd": 112.4, "costKind": "list", "frontier": false}, {"id": "Sonnet 5.5 (max effort) - mean of 3", "vendor": "Anthropic", "harness": "Claude Code", "planted": 51.3, "unplanted": 26.3, "total": 77.6, "costUsd": 154.03, "costKind": "list", "frontier": false}]}</script>
+<script type="module">
+import { initApp } from '/assets/js/app.js';
+import { loadPlotly } from '/assets/js/charts/plotly-loader.js';
+import { makeSpec, renderSpec, resolveOptions } from '/assets/js/charts/common.js';
+import { DOMINATED_COLOR, FRONTIER_COLOR, FONT_FAMILY, frontierRing, themeTokens } from '/assets/js/charts/theme.js';
+
+const CHART_VARS = { '--bg-card': '--surface', '--text-secondary': '--text-muted', '--border': '--border', '--text-primary': '--text', '--border-hover': '--border-strong' };
+const doc = document;
+const rows = JSON.parse(doc.getElementById('page-data').textContent).rows;
+const container = doc.querySelector('[data-bughunt-chart]');
+const summary = doc.getElementById('bughunt-summary');
+const KIND = { list: 'list-rate estimate', bill: 'billed', floor: 'lower bound (floor)' };
+
+function build(dark) {
+  const getVar = (name) => getComputedStyle(doc.documentElement).getPropertyValue(CHART_VARS[name]);
+  const opts = resolveOptions({ dark, tokens: themeTokens({ dark, getVar }) });
+  const { tokens } = opts;
+  const frontier = rows.filter((r) => r.frontier).sort((a, b) => a.costUsd - b.costUsd);
+  const dominated = rows.filter((r) => !r.frontier);
+  const custom = (r) => [r.id, r.harness, r.planted, r.unplanted, KIND[r.costKind] ?? r.costKind, r.vendor];
+  const hover = '<b>%{customdata[0]}</b><br>Total: %{y:.1f} = %{customdata[2]:.1f} planted + %{customdata[3]:.1f} unplanted<br>Cost per run: $%{x:,.2f} (%{customdata[4]})<br>Harness: %{customdata[1]}';
+  const traces = [
+    { x: dominated.map((r) => r.costUsd), y: dominated.map((r) => r.total), mode: 'markers', type: 'scatter', name: 'Board rows', marker: { size: 10, color: DOMINATED_COLOR, opacity: 0.6 }, customdata: dominated.map(custom), hovertemplate: `${hover}<extra></extra>` },
+    { x: frontier.map((r) => r.costUsd), y: frontier.map((r) => r.total), mode: 'markers', type: 'scatter', name: 'Pareto frontier', marker: { size: 14, color: FRONTIER_COLOR, line: { width: 2, color: frontierRing(tokens) } }, customdata: frontier.map(custom), hovertemplate: `${hover}<extra>Frontier</extra>` },
+    { x: frontier.map((r) => r.costUsd), y: frontier.map((r) => r.total), mode: 'lines', type: 'scatter', name: 'frontier-curve', line: { shape: 'hv', dash: 'dot', color: '#94a3b8', width: 2 }, hoverinfo: 'skip', showlegend: false },
+  ];
+  const best = Math.max(...rows.map((r) => r.total));
+  const axis = { gridcolor: tokens.grid, zeroline: false };
+  const layout = {
+    paper_bgcolor: 'rgba(0,0,0,0)', plot_bgcolor: 'rgba(0,0,0,0)', font: { family: FONT_FAMILY, color: tokens.text },
+    height: 560, margin: { l: 64, r: 24, t: 28, b: 80 }, hovermode: 'closest',
+    xaxis: { ...axis, type: 'log', title: { text: 'Cost per run (USD, log scale)' }, tickprefix: '$', tickformat: ',.2f' },
+    yaxis: { ...axis, title: { text: 'Bugs fixed (planted + unplanted)' }, range: [0, Math.ceil(best * 1.1 / 10) * 10] },
+    legend: { orientation: 'h', y: -0.18 },
+  };
+  const short = (id) => id.replace(/ - mean of \d+/, '').replace(/ effort/, '');
+  return makeSpec(opts, {
+    traces, layout,
+    label: `Scatter chart of bugs fixed, planted plus unplanted, against cost per run for ${rows.length} Bug Hunt Bench rows.`,
+    summary: `Bugs fixed (planted plus unplanted) against cost per run, ${rows.length} rows. Frontier: ${frontier.map((r) => short(r.id)).join(', ')}.`,
+    labels: { points: frontier.map((r) => ({ id: r.id, label: short(r.id), x: r.costUsd, y: r.total, frontier: true })), options: { fontSize: 9, markerRadius: 12, safety: 1.12 }, dark: tokens.dark },
+  });
+}
+
+let plotly = null;
+async function draw(dark) {
+  try {
+    plotly = plotly ?? await loadPlotly(doc);
+    container.textContent = '';
+    container.setAttribute('data-chart-status', 'ready');
+    if (plotly.purge) plotly.purge(container);
+    await renderSpec(container, build(dark), {}, plotly);
+  } catch {
+    container.setAttribute('data-chart-status', 'error');
+    container.innerHTML = '<p class="chart-state">The chart could not load. The table below has every value.</p>';
+  }
+}
+const isDark = () => doc.documentElement.getAttribute('data-theme') === 'dark' || (!doc.documentElement.hasAttribute('data-theme') && matchMedia('(prefers-color-scheme: dark)').matches);
+initApp(window, (dark) => draw(dark));
+draw(isDark());
+</script>
+</body>
+</html>
