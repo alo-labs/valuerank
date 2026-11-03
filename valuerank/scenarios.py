@@ -44,7 +44,7 @@ TARGET_PROFILES = {
     "S1M": "published-record reporting precision + conventional identification of missing leaves + conventional range sensitivity inside published 95% confidence intervals (no tail model)",
     # O39: benchmark sampling noise under an independent-task approximation (owner decision, 2026-10-21); it never
     # authorises a label and never changes a score.
-    "S1T": "published-record leaf values redrawn with task-sampling noise from each leaf's published task count (binomial leaves from their Jeffreys Beta posterior, O142, with its recentred, clipped alternative, O154, whose realised mean shift is reported; independent-task approximation; GDPval-AA from its displayed rating interval, an assumption) + conventional identification of missing leaves",
+    "S1T": "mixed-target performance dispersion stress, not a common confidence interval for published mean performance (reviewer 101): published-record leaf values redrawn from task-count approximations (binomial leaves from their Jeffreys Beta posterior, O142, with its recentred, clipped alternative, O154, whose realised mean shift is reported; independent-task approximation), Vals' published standard errors, an assumed reading of GDPval-AA's displayed rating interval and Bug Hunt's single-run dispersion + conventional identification of missing leaves",
 }
 STRATA = ("S0", "S1", "S2", "S1M", "S1T")
 # E161: every stream's events name the quality equation they use, so S0-to-S1 changes are never read as uncertainty alone.

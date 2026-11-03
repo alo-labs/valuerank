@@ -2468,3 +2468,10 @@ Asked on I64 Q1 whether future O71 admissions should be executed by the build fr
 - Lows: E41 attribution panels, the group rename (O122 already prints the coding share), midpoint bars (an O34 challenge; E201b discloses the setter's straddle), pairing labels with the O171 status (the screen already prints beside each bar answer), and estimating ρ (no public per-task correlation for every leaf): not adopted.
 - Round status (O56): not clean (Highs); Sonnet's clean run restarts.
 - E343. Each ranking prints its coding share in its own section, and the share with Terminal-Bench-Science's terminal tasks counted beside E200's narrow one.
+
+## Reviewer 101 (Kimi K3, round 13, Thinking, four sections of r183)
+- Read checks: every part read to its end.
+- Parts 1–5: NO FURTHER FEEDBACK. Parts 13–15: NO FURTHER FEEDBACK.
+- Parts 6–9 L (the step-ordering sentence restates report admission loosely): adopted; it now names the re-checked provisional reports and the clipped midpoints and points to the governing paragraph.
+- Parts 10–12 L1 (S1T's stream description does not carry its mixed-target reading): adopted; the generated description (scenarios.py) now opens "mixed-target performance dispersion stress, not a common confidence interval" and names Vals' standard errors and Bug Hunt's single-run dispersion. L2 (E226's population): adopted; the diagnostic counts the ranking's ranked rows (as the code did), and its label says it is a within-ranking completeness check distinct from O121's ranking.
+- Round status (O56): clean (Lows only); Kimi's first clean round.

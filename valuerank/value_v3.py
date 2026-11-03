@@ -2241,11 +2241,11 @@ def check_cognition_fills(rows: list[dict], cognition: dict) -> None:
 
 
 # E226: renormalising over each row's own leaves is not neutral when the sparse leaves are the hard ones. The common-leaf
-# branch drops, for every row, the leaves fewer than 90% of cohort rows observe, and publishes each row's effect
+# branch drops, for every row, the leaves fewer than 90% of the ranking's ranked rows observe, and publishes each row's effect
 # (displayed minus common-leaf quality, also in cost-doubling equivalents), the rank changes and the bar reach. It is a
 # deletion diagnostic like E146: nothing is imputed and no score changes (O8).
 COMMON_LEAF_SHARE = 0.90
-COMMON_LEAF_LABEL = "common leaf set: leaves observed by fewer than 90% of cohort rows removed for every row (E226; diagnostic)"
+COMMON_LEAF_LABEL = "common leaf set: leaves observed by fewer than 90% of the ranking's ranked rows removed for every row (E226; diagnostic; a within-ranking completeness check, distinct from O121's common-leaf ranking)"
 
 
 def common_leaf_diagnostic(rows: list[dict], per_row: dict, frozen: dict, quality_per_doubling: float) -> dict:

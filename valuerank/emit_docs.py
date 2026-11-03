@@ -613,7 +613,7 @@ def common_leaf_text(diagnostic, facts):
     reach = "; ".join(f"quality {item['level']:.1f}: {item['displayedReachN']} → {item['commonLeafReachN']}" for item in diagnostic["barReach"])
     moves = "; ".join(f"{label} {rank_change_text(diagnostic['bases'][basis]['rankChanges']['changes'], facts.labels)}" for basis, label in (("api", "API"), ("plan", "Plan")))
     flagged = ", ".join(f"{facts.label(row_id)} {fnum(diagnostic['rows'][row_id]['effect'], 1)}" for row_id in diagnostic["flagged"]) or "none"
-    return (f"- **Common leaf set (E226, diagnostic; scores unchanged):** without the leaves fewer than 90% of cohort rows have ({sparse}), {moves}; "
+    return (f"- **Common leaf set (E226, diagnostic; scores unchanged):** without the leaves fewer than 90% of the ranking's ranked rows have ({sparse}), {moves}; "
             f"rows reaching each bar: {reach}; rows whose displayed quality differs from common-leaf quality by more than one cost doubling's worth: {flagged}.")
 
 
