@@ -236,7 +236,8 @@ def leaf_evidence(model_id: str, effort: str | None, page: dict, tb4_rows: list[
             add(key, page[field], q.fraction_z(page[field]), {"source": f"AA field {field}"}, "snapshot", f"{page_path}.{field}")
     if page.get("omniscience") is not None:
         accuracy, hallucination = page.get("omniscienceAccuracy"), page.get("omniscienceHallucinationRate")
-        rebuilt = q.omniscience_index_from_rates(accuracy, hallucination) if accuracy is not None and hallucination is not None else None
+        rebuilt = (q.omniscience_index_from_rates(accuracy, hallucination)
+                   if accuracy is not None and (hallucination is not None or accuracy == 1.0) else None)
         # Reviewer 78: the reconstruction (A = c/T over all T questions, h = i/(T - c), partial answers only in T) is tested
         # against AA's published index; a residual beyond half AA's displayed 0.1-point precision stops the build.
         if rebuilt is not None and abs(rebuilt - page["omniscience"]) > OMNISCIENCE_TOLERANCE:

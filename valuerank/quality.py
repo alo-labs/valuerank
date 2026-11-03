@@ -219,9 +219,12 @@ def omniscience_index_z(index: float) -> Observation:
     return Observation(clip((index + 100.0) / 2.0))
 
 
-def omniscience_index_from_rates(accuracy: float, hallucination_rate: float) -> float:
-    """I = 100 [A - h (1 - A)] from AA's accuracy and conditional hallucination rate (fractions): the reconciliation check."""
+def omniscience_index_from_rates(accuracy: float, hallucination_rate: float | None) -> float:
+    """I = 100 [A - h (1 - A)] from AA's accuracy and conditional hallucination rate (fractions): the reconciliation check.
+    Reviewer 99: with every question correct (A = 1) h is undefined (0/0), and I = 100 directly."""
 
+    if accuracy == 1.0:
+        return 100.0
     return 100.0 * (accuracy - hallucination_rate * (1.0 - accuracy))
 
 

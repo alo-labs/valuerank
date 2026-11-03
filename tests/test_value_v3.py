@@ -206,6 +206,9 @@ def test_leaf_evidence_uses_exact_configurations_only():
     v.leaf_evidence("x", "max", {"omniscience": 30.04, "omniscienceAccuracy": 0.5, "omniscienceHallucinationRate": 0.4}, [], None)
     with pytest.raises(ValueError, match="does not reconstruct"):
         v.leaf_evidence("x", "max", {"omniscience": 31.0, "omniscienceAccuracy": 0.5, "omniscienceHallucinationRate": 0.4}, [], None)
+    # Reviewer 99: perfect accuracy with no published hallucination rate still reconstructs (I = 100), nothing unanswered.
+    perfect = v.leaf_evidence("x", "max", {"omniscience": 100.0, "omniscienceAccuracy": 1.0}, [], None)
+    assert perfect["provenance"]["omniscience"]["indexFromRates"] == 100.0 and perfect["provenance"]["omniscience"]["unansweredOrPartialShare"] == 0.0
 
 
 def test_components_and_restricted_cost():

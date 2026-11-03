@@ -114,6 +114,8 @@ def test_omniscience_index_is_monotone_in_outcomes():
     assert q.omniscience_from_counts(0, 0, 0, 10) == (0.0, 50.0)  # all abstention
     # Reconciliation with AA's accuracy and conditional hallucination rate (GPT-6 Astra xhigh, 2026-10-17 snapshot).
     assert q.omniscience_index_from_rates(0.6185, 0.4831804281345566) == pytest.approx(43.416666666666664)
+    # Reviewer 99: perfect accuracy leaves h undefined; the index is 100 whatever (or whether) h is published.
+    assert q.omniscience_index_from_rates(1.0, None) == q.omniscience_index_from_rates(1.0, 0.0) == 100.0
 
 
 def test_summarize_full_coverage_row():
