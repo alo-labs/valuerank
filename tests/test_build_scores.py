@@ -1498,3 +1498,15 @@ def test_the_legacy_composite_takes_terminal_bench_only_at_the_configurations_ef
     assert rows["claude-opus-5-5"]["terminalBenchV4"] == pytest.approx(0.648)  # Opus 5.5 (max) is exact
     assert rows["claude-opus-5-5"]["terminalBenchV4Effort"] == "Opus 5.5 (max)"
     assert rows["gpt-6-astra"]["terminalBenchV4"] == pytest.approx(0.582)  # GPT-6 Astra (max) is exact
+
+
+def test_bug_hunt_version_suffixes_match_only_registered_aliases():
+    """E206 (reviewer 102): a version-suffixed scoreboard name matches only as a registered alias of the same release; an
+    unregistered one stops the build, so a newer release is never read as the roster's model."""
+
+    rows = [{"model": "Muse Wonder 1.0 (high effort)"}, {"model": "Muse Wonder Full 1.0 (high effort)"}, {"model": "Opus 5.5 (max effort)"}]
+    assert build_scores.scoreboard_matches(["muse wonder"], rows) == [("high", "Muse Wonder 1.0 (high effort)")]
+    assert build_scores.scoreboard_matches(["opus 5.5"], rows) == [("max", "Opus 5.5 (max effort)")]
+    assert build_scores.scoreboard_matches(["opus 5.5"], [{"model": "Opus 5.5 - notes"}]) == []
+    with pytest.raises(ValueError, match="without a registered alias"):
+        build_scores.scoreboard_matches(["muse spark"], [{"model": "Muse Spark 1.3 (high effort)"}])

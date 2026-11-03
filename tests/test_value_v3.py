@@ -568,6 +568,11 @@ def test_scenarios_hash_attach_and_bar_labels():
     shift = document["samplingMeanShift"]["frontierCode"]
     assert shift["postClipRow"] in {"a", "b"} and isinstance(shift["maxPostClipShift"], float)  # E303
     assert shift["row"] in {"a", "b"} and 0.0 <= shift["clipRate"] <= 1.0
+    # Reviewer 102: clipped-normal kernels report their realised displacement too (no posterior shift of their own).
+    kernel = scenarios.Kernel("normal", (99.0, 5.0, 0.0, 100.0), None, scenarios.TASK_SAMPLING)
+    normal = v.sampling_mean_shift([scenarios.RowInputs("n", {"bugHunt": kernel, "lcr": scenarios.Kernel("fixed", (50.0,))}, scenarios.Kernel("fixed", (1.0,)))], 3)
+    assert normal["bugHunt"]["maxShift"] == 0.0 and normal["bugHunt"]["maxPostClipShift"] < 0.0 and normal["bugHunt"]["clipRate"] > 0.0
+    assert "lcr" not in normal  # a fixed kernel has no sampling displacement
     # O39: S1T redraws every observed leaf with its task-sampling noise.
     sampled = {item.row: item for item in v.scenario_panel(result, "api", sampling=True)}
     # O142: a binomial leaf draws from its Jeffreys Beta posterior; GDPval-AA keeps the clipped normal.

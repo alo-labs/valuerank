@@ -344,8 +344,11 @@ def frontier_order(row):
     return (-row["intelligenceIndex"], -row["totalCostUsd"], row["name"])
 
 
-# O31: a Bug Hunt scoreboard name may add only a version number to AA's model name ("Muse Wonder 1.0").
+# O31: a Bug Hunt scoreboard name may add only a version number to AA's model name ("Muse Wonder 1.0"). Reviewer 102: only a
+# registered alias counts, since a bare-name base can also prefix a different release ("Muse Spark 1.2" and "1.3"); a
+# version-suffixed scoreboard name that would otherwise match and is not registered stops the build.
 VERSION_SUFFIX = r"( v?\d+(\.\d+)*)?"
+VERSION_ALIASES = {"muse wonder": ("muse wonder 1.0",)}  # each pair names one release (the board's label for AA's model)
 # O33: the effort follows the name as "(<effort> effort, ...)", or on some rows as a bare known effort ("Grok 4.6 (xhigh) seq").
 SCOREBOARD_EFFORT = re.compile(r"(\w+) effort|(minimal|low|medium|high|xhigh|max)(?=[),;])")
 # DeepSWE statuses that place a chart configuration on a roster entry (a duplicate row of a mapped configuration included).
@@ -358,8 +361,13 @@ def scoreboard_matches(names, scoreboard_rows):
     for row in scoreboard_rows:
         base, _, rest = row["model"].partition(" (")
         effort = SCOREBOARD_EFFORT.match(rest)
-        if effort and any(re.fullmatch(re.escape(name) + VERSION_SUFFIX, normalise_name(base)) for name in names):
+        label = normalise_name(base)
+        if not effort:
+            continue
+        if any(label == name or label in VERSION_ALIASES.get(name, ()) for name in names):
             matches.append((effort.group(1) or effort.group(2), row["model"]))
+        elif any(re.fullmatch(re.escape(name) + VERSION_SUFFIX, label) for name in names):
+            raise ValueError(f"Bug Hunt scoreboard name {row['model']!r} adds a version to {sorted(names)} without a registered alias (E206)")
     return matches
 
 

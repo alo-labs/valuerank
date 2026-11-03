@@ -34111,50 +34111,92 @@
           "maxShift": -0.041813783372319335,
           "row": "gemini-4-argon",
           "clipRate": 0.0,
-          "maxPostClipShift": 0.06527552619471066,
-          "postClipRow": "claude-opus-5-5"
+          "maxPostClipShift": 0.09056192446387001,
+          "postClipRow": "deepseek-v4-1-flash-1017"
+        },
+        "bugHunt": {
+          "maxShift": 0.0,
+          "row": "gpt-6.1-sol",
+          "clipRate": 0.0136875,
+          "maxPostClipShift": -0.23626725082276323,
+          "postClipRow": "gpt-6.1-sol"
+        },
+        "codeMigration": {
+          "maxShift": 0.0,
+          "row": "gpt-6.1-sol",
+          "clipRate": 0.0,
+          "maxPostClipShift": 0.08083883073152975,
+          "postClipRow": "claude-haiku-5-5-max"
         },
         "critpt": {
           "maxShift": 0.6341463414634134,
           "row": "deepseek-v4-1-flash-1017",
           "clipRate": 0.0,
-          "maxPostClipShift": -0.24810181619012894,
+          "maxPostClipShift": -0.43841446432620756,
           "postClipRow": "gemini-4-argon"
         },
         "frontierCode": {
           "maxShift": 0.1866558441558439,
           "row": "gpt-6-luna",
           "clipRate": 0.0,
-          "maxPostClipShift": -0.11468475944933942,
-          "postClipRow": "claude-sonnet-5-5"
+          "maxPostClipShift": 0.10484945253706002,
+          "postClipRow": "gemini-4-argon"
+        },
+        "gdpval": {
+          "maxShift": 0.0,
+          "row": "gpt-6.1-sol",
+          "clipRate": 0.0,
+          "maxPostClipShift": 0.0314481126659345,
+          "postClipRow": "claude-haiku-5-5-max"
         },
         "hle": {
           "maxShift": 0.02777222777222832,
           "row": "gpt-6-luna",
           "clipRate": 0.0,
-          "maxPostClipShift": -0.09054437335980481,
-          "postClipRow": "gpt-6-astra"
+          "maxPostClipShift": 0.07103677300586497,
+          "postClipRow": "claude-sonnet-5-5"
         },
         "lcr": {
           "maxShift": -0.34323432343234117,
           "row": "claude-opus-5-5",
           "clipRate": 0.0,
-          "maxPostClipShift": 0.18146665923177352,
-          "postClipRow": "claude-haiku-5-5-max"
+          "maxPostClipShift": 0.13363968554345718,
+          "postClipRow": "gemini-4-argon"
+        },
+        "livebench2Overall": {
+          "maxShift": 0.0,
+          "row": "gpt-6.1-sol",
+          "clipRate": 0.0003125,
+          "maxPostClipShift": 0.21067084217798993,
+          "postClipRow": "gpt-6-luna"
+        },
+        "omniscience": {
+          "maxShift": 0.0,
+          "row": "gpt-6.1-sol",
+          "clipRate": 0.0,
+          "maxPostClipShift": -0.015155382788876182,
+          "postClipRow": "deepseek-v4-1-flash-1017"
         },
         "tbScience": {
           "maxShift": 0.5835010060362169,
           "row": "gpt-6-luna",
           "clipRate": 0.0,
-          "maxPostClipShift": -0.16551676967126383,
-          "postClipRow": "gemini-4-argon"
+          "maxPostClipShift": 0.23203621071758107,
+          "postClipRow": "claude-opus-5-5"
         },
         "terminalBench": {
           "maxShift": 0.557816975727425,
           "row": "gpt-6-luna",
           "clipRate": 0.0,
-          "maxPostClipShift": -0.156816269742599,
-          "postClipRow": "claude-haiku-5-5-max"
+          "maxPostClipShift": -0.17191226877851307,
+          "postClipRow": "claude-opus-5-5"
+        },
+        "vibeCode": {
+          "maxShift": 0.0,
+          "row": "gpt-6.1-sol",
+          "clipRate": 0.0,
+          "maxPostClipShift": -0.04283708608249981,
+          "postClipRow": "gpt-6-astra"
         }
       },
       "namedBranches": [
@@ -77518,58 +77560,79 @@
           "aiCodingDaily": {
             "maxShift": -6.590476190476181,
             "row": "claude-opus-5-5-high",
-            "clipRate": 0.1901,
-            "maxPostClipShift": -2.10152164776639,
-            "postClipRow": "claude-opus-5-5-high"
+            "clipRate": 0.185975,
+            "maxPostClipShift": -2.1322717836758613,
+            "postClipRow": "gpt-6.1-sol-high"
           },
           "automationBench": {
             "maxShift": -0.041813783372319335,
             "row": "gemini-4-argon",
             "clipRate": 0.0,
-            "maxPostClipShift": -0.07315481619836106,
-            "postClipRow": "mimo-v2-6-pro"
+            "maxPostClipShift": -0.09904706227364102,
+            "postClipRow": "deepseek-v4-1-flash-1017"
+          },
+          "bugHunt": {
+            "maxShift": 0.0,
+            "row": "gpt-6.1-terra",
+            "clipRate": 0.001675,
+            "maxPostClipShift": -0.22466045278108027,
+            "postClipRow": "claude-opus-5-5-medium"
           },
           "critpt": {
             "maxShift": 0.6341463414634134,
             "row": "deepseek-v4-1-flash-1017",
             "clipRate": 0.0,
-            "maxPostClipShift": 0.3610818765127455,
-            "postClipRow": "gpt-6-luna-medium"
+            "maxPostClipShift": -0.27029070969387803,
+            "postClipRow": "gpt-6-luna-high"
           },
           "frontierCode": {
             "maxShift": 0.2799299384825691,
             "row": "gpt-6-luna-medium",
             "clipRate": 0.0,
-            "maxPostClipShift": 0.14052755882543266,
-            "postClipRow": "gpt-6-astra-high"
+            "maxPostClipShift": -0.13998347071299833,
+            "postClipRow": "claude-opus-5-5-high"
+          },
+          "gdpval": {
+            "maxShift": 0.0,
+            "row": "gpt-6.1-terra",
+            "clipRate": 0.0,
+            "maxPostClipShift": 0.030617887321525927,
+            "postClipRow": "gpt-6-luna-xhigh"
           },
           "hle": {
             "maxShift": 0.03486513486513587,
             "row": "gpt-6-luna-medium",
             "clipRate": 0.0,
-            "maxPostClipShift": -0.06506986726313357,
-            "postClipRow": "gpt-6-astra-high"
+            "maxPostClipShift": -0.07635470183624449,
+            "postClipRow": "gpt-6.1-sol-high"
           },
           "lcr": {
             "maxShift": -0.35973597359735265,
             "row": "kimi-k3-1-pro",
             "clipRate": 0.0,
-            "maxPostClipShift": -0.20038371948606937,
-            "postClipRow": "gpt-6.1-terra-high"
+            "maxPostClipShift": 0.1902320590725708,
+            "postClipRow": "gpt-6.1-terra-medium"
+          },
+          "omniscience": {
+            "maxShift": 0.0,
+            "row": "gpt-6.1-terra",
+            "clipRate": 0.0,
+            "maxPostClipShift": 0.0499284071612891,
+            "postClipRow": "gpt-6.1-terra"
           },
           "tbScience": {
             "maxShift": 0.6841046277665994,
             "row": "gpt-6-luna-medium",
-            "clipRate": 0.009925,
-            "maxPostClipShift": 0.1906180307666432,
-            "postClipRow": "claude-haiku-5-5-high"
+            "clipRate": 0.011525,
+            "maxPostClipShift": -0.274763170598348,
+            "postClipRow": "claude-opus-5-5-medium"
           },
           "terminalBench": {
             "maxShift": 0.7085783205186189,
             "row": "gpt-6-luna-medium",
-            "clipRate": 0.003525,
-            "maxPostClipShift": -0.27515584695675344,
-            "postClipRow": "claude-haiku-5-5-medium"
+            "clipRate": 0.003025,
+            "maxPostClipShift": 0.21962988394659533,
+            "postClipRow": "gpt-6.1-terra-xhigh"
           }
         },
         "namedBranches": [
@@ -143735,49 +143798,70 @@
             "maxShift": 0.0576760071843605,
             "row": "gpt-6-luna-low",
             "clipRate": 0.0,
-            "maxPostClipShift": 0.10976042187293444,
-            "postClipRow": "gpt-6.1-sol-xhigh"
+            "maxPostClipShift": 0.11134277342792132,
+            "postClipRow": "gpt-6-luna-xhigh"
+          },
+          "bugHunt": {
+            "maxShift": 0.0,
+            "row": "gpt-6.1-sol",
+            "clipRate": 0.0045,
+            "maxPostClipShift": -0.23626725082276323,
+            "postClipRow": "gpt-6.1-sol"
           },
           "critpt": {
             "maxShift": 0.9878048780487809,
             "row": "gpt-6-luna-low",
-            "clipRate": 0.0,
-            "maxPostClipShift": -0.4404462118965604,
-            "postClipRow": "gpt-6-luna-high"
+            "clipRate": 1.5151515151515151e-05,
+            "maxPostClipShift": 0.409571797426004,
+            "postClipRow": "claude-opus-5-5-medium"
           },
           "frontierCode": {
             "maxShift": 0.35943267259056677,
             "row": "gpt-6-luna-low",
-            "clipRate": 0.00016666666666666666,
-            "maxPostClipShift": -0.10524875809089806,
-            "postClipRow": "kimi-k3-1-pro"
+            "clipRate": 0.00010606060606060606,
+            "maxPostClipShift": 0.24892217533664507,
+            "postClipRow": "gpt-6.1-sol-high"
+          },
+          "gdpval": {
+            "maxShift": 0.0,
+            "row": "gpt-6.1-sol",
+            "clipRate": 0.0,
+            "maxPostClipShift": -0.027357383759458287,
+            "postClipRow": "deepseek-v4-1-flash-1017"
           },
           "hle": {
             "maxShift": 0.039760239760241234,
             "row": "gpt-6-luna-low",
             "clipRate": 0.0,
-            "maxPostClipShift": -0.07021133340560226,
-            "postClipRow": "claude-opus-5-5-xhigh"
+            "maxPostClipShift": 0.06992406785787608,
+            "postClipRow": "claude-sonnet-5-5"
           },
           "lcr": {
             "maxShift": -0.35973597359735265,
             "row": "kimi-k3-1-pro",
             "clipRate": 0.0,
-            "maxPostClipShift": -0.23341465765454927,
-            "postClipRow": "gpt-6-luna-low"
+            "maxPostClipShift": 0.23505244129637504,
+            "postClipRow": "claude-sonnet-5-5-xhigh"
+          },
+          "omniscience": {
+            "maxShift": 0.0,
+            "row": "gpt-6.1-sol",
+            "clipRate": 0.0,
+            "maxPostClipShift": -0.04644406749563501,
+            "postClipRow": "claude-sonnet-5-5-xhigh"
           },
           "tbScience": {
             "maxShift": 0.6908115358819588,
             "row": "gpt-6-luna-low",
-            "clipRate": 0.019984848484848484,
-            "maxPostClipShift": 0.23389596982772787,
-            "postClipRow": "gpt-6-astra-high"
+            "clipRate": 0.019893939393939394,
+            "maxPostClipShift": -0.25360556239314036,
+            "postClipRow": "kimi-k3-1-pro"
           },
           "terminalBench": {
             "maxShift": 0.746268656716418,
             "row": "gpt-6-luna-low",
-            "clipRate": 0.023090909090909092,
-            "maxPostClipShift": 0.3544098008180842,
+            "clipRate": 0.022818181818181817,
+            "maxPostClipShift": 0.34202690288801835,
             "postClipRow": "gpt-6-luna-low"
           }
         },

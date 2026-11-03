@@ -4062,11 +4062,27 @@ MEAN_SHIFT_DRAWS = 2_000  # O154: draws per binomial-leaf kernel when estimating
 
 def sampling_mean_shift(panel: list[scenarios.RowInputs], seed: int) -> dict:
     """O154: per binomial leaf, the largest |Jeffreys mean - published score| over the S1T panel (points, with its row) and
-    the share of the recentred alternative's draws that clip at 0 or 100."""
+    the share of the recentred alternative's draws that clip at 0 or 100; reviewer 102: per clipped-normal leaf, the realised
+    post-clip displacement and the share of draws at a bound (its maxShift is 0: the kernel is centred on the record)."""
 
     rng, summary = random.Random(seed), {}
     for item in panel:
         for key, kernel in sorted(item.leaves.items()):
+            if kernel.family == "normal":
+                # Reviewer 102: a clipped normal kernel (Bug Hunt's single-run dispersion, Vals' standard errors, LiveBench)
+                # also moves its mean at a bound; publish the realised displacement and the clipped share too.
+                mean, _sd, low, high = kernel.params
+                entry = summary.setdefault(key, {"maxShift": 0.0, "row": item.row, "draws": 0, "clipped": 0, "maxPostClipShift": 0.0, "postClipRow": None})
+                total = 0.0
+                for _ in range(MEAN_SHIFT_DRAWS):
+                    value = kernel.draw(rng)
+                    entry["clipped"] += value in (low, high)
+                    total += value
+                entry["draws"] += MEAN_SHIFT_DRAWS
+                post = total / MEAN_SHIFT_DRAWS - mean
+                if entry["postClipRow"] is None or abs(post) > abs(entry["maxPostClipShift"]):
+                    entry["maxPostClipShift"], entry["postClipRow"] = post, item.row
+                continue
             if kernel.family != "beta":
                 continue
             shift = scenarios.mean_shift(*kernel.params)
