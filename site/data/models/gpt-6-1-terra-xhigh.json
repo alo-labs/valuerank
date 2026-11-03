@@ -7,14 +7,14 @@
   "selectedPage": "https://artificialanalysis.ai/models/gpt-6-1-terra-xhigh",
   "summary": {
     "rank": {
-      "api": 6,
+      "api": 5,
       "plan": 19
     },
     "overall": {
-      "api": 51.57090247737302,
-      "plan": 56.44302519950571
+      "api": 51.10648628767555,
+      "plan": 55.97860900980825
     },
-    "quality": 50.51610779618077,
+    "quality": 49.89688620991748,
     "qualityRank": 10,
     "coverage": {
       "pct": 100.0,
@@ -72,8 +72,8 @@
       "weightPct": 9.0,
       "value": 28.3,
       "decimals": 1,
-      "unit": "bugs fixed, planted plus unplanted (O163; no ceiling)",
-      "normalized": 28.3,
+      "unit": "% of the board's best planted plus best unplanted bugs fixed (O163, O170)",
+      "normalized": 23.13982011447261,
       "source": {
         "name": "Bug Hunt Bench published runs",
         "url": "https://bughunt.productcompass.pm/"
@@ -362,7 +362,7 @@
       "usdPerRun": 30.67408333668305,
       "selected": true,
       "planRank": 19,
-      "planValue": 56.44302519950571
+      "planValue": 55.97860900980825
     },
     {
       "id": "chatgpt-pro100-gpt-6.1-terra-xhigh-common-gpt-assumption",
@@ -379,8 +379,8 @@
       "planIntervalEligible": false,
       "usdPerRun": 31.319547459976285,
       "selected": false,
-      "planRank": 20,
-      "planValue": 56.319465173705076
+      "planRank": 21,
+      "planValue": 55.85504898400761
     },
     {
       "id": "chatgpt-pro200-gpt-6.1-terra-xhigh-common-gpt-assumption",
@@ -397,8 +397,8 @@
       "planIntervalEligible": false,
       "usdPerRun": 31.71029037454413,
       "selected": false,
-      "planRank": 21,
-      "planValue": 56.245897377524585
+      "planRank": 22,
+      "planValue": 55.781481187827126
     },
     {
       "id": "chatgpt-plus-gpt-6.1-terra-xhigh-common-gpt-assumption",
@@ -416,7 +416,7 @@
       "usdPerRun": 40.792743913919736,
       "selected": false,
       "planRank": 35,
-      "planValue": 54.7514810855685
+      "planValue": 54.28706489587103
     }
   ],
   "scenarios": {
@@ -447,7 +447,7 @@
         "unevaluable": null,
         "top1": 0.0,
         "top3": 0.0,
-        "frontier": 0.9997
+        "frontier": 0.9999
       },
       {
         "stratum": "S1",
@@ -472,18 +472,18 @@
         "kernel": "primary",
         "targetProfile": "published-record leaf values redrawn with task-sampling noise from each leaf's published task count (binomial leaves from their Jeffreys Beta posterior, O142, with its recentred, clipped alternative, O154, whose realised mean shift is reported; independent-task approximation; GDPval-AA from its displayed rating interval, an assumption) + conventional identification of missing leaves",
         "unevaluable": null,
-        "top1": 0.0003,
-        "top3": 0.0272,
-        "frontier": 0.8096
+        "top1": 0.0012,
+        "top3": 0.0567,
+        "frontier": 0.802
       },
       {
         "stratum": "S1T",
         "kernel": "recentred",
         "targetProfile": "published-record leaf values redrawn with task-sampling noise from each leaf's published task count (binomial leaves from their Jeffreys Beta posterior, O142, with its recentred, clipped alternative, O154, whose realised mean shift is reported; independent-task approximation; GDPval-AA from its displayed rating interval, an assumption) + conventional identification of missing leaves",
         "unevaluable": null,
-        "top1": 0.0001,
-        "top3": 0.0254,
-        "frontier": 0.8091
+        "top1": 0.0007,
+        "top3": 0.0522,
+        "frontier": 0.8006
       }
     ],
     "plan": [
@@ -564,7 +564,7 @@
       "version": "v3.0.0",
       "date": "2026-10-19",
       "rank": {
-        "api": 6,
+        "api": 5,
         "plan": 19
       }
     }
@@ -600,12 +600,12 @@
       "shown": true,
       "rankingEligible": true,
       "rank": {
-        "api": 6,
+        "api": 5,
         "plan": 19
       },
       "overall": {
-        "api": 51.57090247737302,
-        "plan": 56.44302519950571
+        "api": 51.10648628767555,
+        "plan": 55.97860900980825
       }
     },
     {
@@ -616,11 +616,11 @@
       "rankingEligible": true,
       "rank": {
         "api": 14,
-        "plan": 48
+        "plan": 45
       },
       "overall": {
-        "api": 46.039927478318766,
-        "plan": 53.92291461372295
+        "api": 45.45940724119694,
+        "plan": 53.34239437660113
       }
     }
   ]

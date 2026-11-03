@@ -11,11 +11,11 @@
       "plan": 1
     },
     "overall": {
-      "api": 57.442001869563,
-      "plan": 61.4364340088823
+      "api": 56.186601215433825,
+      "plan": 60.18103335475311
     },
-    "quality": 60.6023566686924,
-    "qualityRank": 3,
+    "quality": 58.92848912985349,
+    "qualityRank": 4,
     "coverage": {
       "pct": 100.0,
       "costAvailable": true,
@@ -72,8 +72,8 @@
       "weightPct": 9.0,
       "value": 76.5,
       "decimals": 1,
-      "unit": "bugs fixed, planted plus unplanted (O163; no ceiling)",
-      "normalized": 76.5,
+      "unit": "% of the board's best planted plus best unplanted bugs fixed (O163, O170)",
+      "normalized": 62.551103843008995,
       "source": {
         "name": "Bug Hunt Bench published runs",
         "url": "https://bughunt.productcompass.pm/"
@@ -353,7 +353,7 @@
       "usdPerRun": 47.31233493564381,
       "selected": true,
       "planRank": 1,
-      "planValue": 61.4364340088823
+      "planValue": 60.18103335475311
     },
     {
       "id": "chatgpt-plus-gpt-6.1-sol-high-common-gpt-assumption",
@@ -371,7 +371,7 @@
       "usdPerRun": 48.30791203097205,
       "selected": false,
       "planRank": 2,
-      "planValue": 61.31287398308166
+      "planValue": 60.057473328952476
     },
     {
       "id": "chatgpt-pro100-gpt-6.1-sol-high-common-gpt-assumption",
@@ -389,7 +389,7 @@
       "usdPerRun": 48.30791203097205,
       "selected": false,
       "planRank": 2,
-      "planValue": 61.31287398308166
+      "planValue": 60.057473328952476
     },
     {
       "id": "chatgpt-pro200-gpt-6.1-sol-high-common-gpt-assumption",
@@ -407,7 +407,7 @@
       "usdPerRun": 48.91060191235654,
       "selected": false,
       "planRank": 4,
-      "planValue": 61.23930618690117
+      "planValue": 59.983905532771985
     }
   ],
   "scenarios": {
@@ -436,7 +436,7 @@
         "kernel": "primary",
         "targetProfile": "published-record reporting precision + conventional identification of missing leaves + weight-specification stress",
         "unevaluable": null,
-        "top1": 0.5671,
+        "top1": 0.7391,
         "top3": 1.0,
         "frontier": 1.0
       },
@@ -463,18 +463,18 @@
         "kernel": "primary",
         "targetProfile": "published-record leaf values redrawn with task-sampling noise from each leaf's published task count (binomial leaves from their Jeffreys Beta posterior, O142, with its recentred, clipped alternative, O154, whose realised mean shift is reported; independent-task approximation; GDPval-AA from its displayed rating interval, an assumption) + conventional identification of missing leaves",
         "unevaluable": null,
-        "top1": 0.4486,
-        "top3": 0.9765,
-        "frontier": 0.923
+        "top1": 0.473,
+        "top3": 0.9762,
+        "frontier": 0.9167
       },
       {
         "stratum": "S1T",
         "kernel": "recentred",
         "targetProfile": "published-record leaf values redrawn with task-sampling noise from each leaf's published task count (binomial leaves from their Jeffreys Beta posterior, O142, with its recentred, clipped alternative, O154, whose realised mean shift is reported; independent-task approximation; GDPval-AA from its displayed rating interval, an assumption) + conventional identification of missing leaves",
         "unevaluable": null,
-        "top1": 0.4573,
-        "top3": 0.9796,
-        "frontier": 0.9335
+        "top1": 0.4776,
+        "top3": 0.9795,
+        "frontier": 0.9259
       }
     ],
     "plan": [
@@ -501,9 +501,9 @@
         "kernel": "primary",
         "targetProfile": "published-record reporting precision + conventional identification of missing leaves + weight-specification stress",
         "unevaluable": null,
-        "top1": 0.8777,
-        "top3": 0.9146,
-        "frontier": 0.983
+        "top1": 0.7306,
+        "top3": 0.7923,
+        "frontier": 0.9506
       },
       {
         "stratum": "S1",
@@ -528,18 +528,18 @@
         "kernel": "primary",
         "targetProfile": "published-record leaf values redrawn with task-sampling noise from each leaf's published task count (binomial leaves from their Jeffreys Beta posterior, O142, with its recentred, clipped alternative, O154, whose realised mean shift is reported; independent-task approximation; GDPval-AA from its displayed rating interval, an assumption) + conventional identification of missing leaves",
         "unevaluable": null,
-        "top1": 0.5045,
-        "top3": 0.5359,
-        "frontier": 0.7736
+        "top1": 0.4071,
+        "top3": 0.4399,
+        "frontier": 0.7005
       },
       {
         "stratum": "S1T",
         "kernel": "recentred",
         "targetProfile": "published-record leaf values redrawn with task-sampling noise from each leaf's published task count (binomial leaves from their Jeffreys Beta posterior, O142, with its recentred, clipped alternative, O154, whose realised mean shift is reported; independent-task approximation; GDPval-AA from its displayed rating interval, an assumption) + conventional identification of missing leaves",
         "unevaluable": null,
-        "top1": 0.5119,
-        "top3": 0.547,
-        "frontier": 0.7897
+        "top1": 0.4131,
+        "top3": 0.4497,
+        "frontier": 0.716
       }
     ]
   },
@@ -595,8 +595,8 @@
         "plan": 1
       },
       "overall": {
-        "api": 57.442001869563,
-        "plan": 61.4364340088823
+        "api": 56.186601215433825,
+        "plan": 60.18103335475311
       }
     },
     {
@@ -610,8 +610,8 @@
         "plan": 12
       },
       "overall": {
-        "api": 52.37654652862818,
-        "plan": 59.305855625688466
+        "api": 50.80729571096669,
+        "plan": 57.73660480802697
       }
     }
   ]

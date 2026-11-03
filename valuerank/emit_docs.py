@@ -667,6 +667,16 @@ def displayed_cheapest_sentences(facts):
         if unchecked:
             sentences.append(f"{label} basis, cheaper same-family efforts on AA's chart that this ranking could not evaluate (O143, E201c): "
                              + "; ".join(f"below {facts.label(row_id)}: {', '.join(names)}" for row_id, names in sorted(unchecked.items())) + ".")
+        # O172: the common-leaf diagnostic ranking's answer at each bar position, beside this ranking's (its levels are its own).
+        common = ((facts.v3.get("commonAnswer") or {}).get("bases") or {}).get(basis)
+        if common:
+            sentences.append(f"{label} basis, common-leaf diagnostic ranking at the same bar positions (O172; its own bar levels, no label, not a claim): cheapest "
+                             + "; ".join(f"at or above {bar_name(item)}: {facts.labels(item['cheapest']) or 'none'}" for item in common) + ".")
+        # O171: whether each answer is clear of benchmark noise.
+        noise = [f"at or above {bar_name(item)}: {item['noise']['status'].split(':')[0]}" + (f" (contested by {facts.labels(item['noise']['contestedBy'])})" if item["noise"]["contestedBy"] else "")
+                 for item in facts.v3["displayedCheapest"][basis]["bars"] if item.get("noise")]
+        if noise:
+            sentences.append(f"{label} basis, noise companion (O171; Δ = (Q − H)/√(σ² + σ_H²) at correlation 0, 1.96 for 95%): " + "; ".join(noise) + ".")
         margin = facts.v3["displayedCheapest"][basis].get("margin")
         companions = [f"at or above quality {item['margin']['level']:.1f}: {facts.labels(item['margin']['cheapest']) or 'none'}"
                       + (f" ({usd(item['margin']['costUsd'])} per basket run)" if item["margin"]["cheapest"] else "")
@@ -1952,7 +1962,7 @@ AA withdrew DeepSWE v1.1 from its Coding Agent Index (v2.0, October 2026) and th
 
 ## Bug Hunt Bench matched runs
 
-Owner-published runs at commit `{facts.bug_hunt['sourceCommit']}`; the record is the owner's largest-sample mean for the exact model and effort, and the leaf (owner decision O163) is its planted bugs fixed (of 105, the board's own score) plus the genuine unplanted bugs it fixed, a plain sum with no ceiling, with the harness that result was run on (E206). {cross_harness_text(facts)}
+Owner-published runs at commit `{facts.bug_hunt['sourceCommit']}`; the record is the owner's largest-sample mean for the exact model and effort, and the leaf (owner decisions O163 and O170) is its planted bugs fixed (of 105, the board's own score) plus the genuine unplanted bugs it fixed, as a percentage of the live board's largest planted plus largest unplanted counts over every run, recomputed at every release, with the harness that result was run on (E206). {cross_harness_text(facts)}
 
 {markdown_table(['Model', 'Evaluated model', 'Planted bugs fixed of 105', 'Unplanted bugs fixed', 'Leaf (sum, O163)', 'Runs', 'Effort', 'Harness'], bug_rows, numeric={2, 3, 4, 5})}
 

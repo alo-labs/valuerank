@@ -209,8 +209,8 @@ def leaf_evidence(model_id: str, effort: str | None, page: dict, tb4_rows: list[
         if bug_hunt.get("extras") is None:
             raise ValueError(f"{model_id}: the Bug Hunt record carries no unplanted-fix count, which the O163 leaf needs")
         found = bug_hunt["fixedOf105"] + bug_hunt["extras"]
-        if found > q.BUG_HUNT_MISSING_UPPER:
-            raise ValueError(f"{model_id}: Bug Hunt total {found} exceeds the registered missing-evidence bound {q.BUG_HUNT_MISSING_UPPER} (E302)")
+        if found > q.BUG_HUNT_SCALE["scale"] + 1e-9:
+            raise ValueError(f"{model_id}: Bug Hunt total {found} exceeds the board's planted plus unplanted maxima {q.BUG_HUNT_SCALE['scale']} (O170)")
         add("bugHunt", found, q.bug_hunt_z(found, BUG_HUNT_HALF_WIDTH),
             {"source": "Bug Hunt Bench owner-published runs", "configuration": bug_hunt.get("evaluatedModel"), "harness": bug_hunt.get("harness"), "runs": bug_hunt.get("sampleN"),
              "planted": bug_hunt["fixedOf105"], "unplanted": bug_hunt["extras"]},
@@ -281,6 +281,7 @@ def incomplete_entry(configuration: dict, evidence: dict) -> dict | None:
 def incomplete_configurations(configurations: list[dict], documents: dict) -> list[dict]:
     """O36: the configurations the ranking must list but not rank, each with the leaves it lacks after every source."""
 
+    set_bug_hunt_scale(documents)
     pages = {page["model"]["slug"]: page["model"] for page in documents["snapshot"]["pages"]}
     bug_hunt_by_id = {item["modelId"]: item for item in documents["bugHunt"]["models"]}
     supplements, tracks = leaf_supplements(documents), track_records(documents)
@@ -919,9 +920,17 @@ def agent_record_for(configuration: dict, mapping: dict, agent_records, manifest
     return pin or (exact[0] if exact else None)
 
 
+def set_bug_hunt_scale(documents: dict) -> dict | None:
+    """O170: the release's Bug Hunt scale from the live board (every run), set before any Bug Hunt leaf is read."""
+
+    rows = (documents.get("bugHuntScoreboard") or {}).get("rows")
+    return q.bug_hunt_scale(rows) if rows else None
+
+
 def assemble(configurations: list[dict], documents: dict, *, release_day: date, pinned: list[str] | None = None) -> dict:
     """Evidence, admission, basket costs and Plan routes for every ranked configuration (no anchors yet)."""
 
+    bug_hunt_scale = set_bug_hunt_scale(documents)
     pages = {page["model"]["slug"]: page["model"] for page in documents["snapshot"]["pages"]}
     bug_hunt_by_id = {item["modelId"]: item for item in documents["bugHunt"]["models"]}
     agent_records = {item["label"]: item for item in documents["codingAgents"]["configurations"]}
@@ -1109,6 +1118,7 @@ def assemble(configurations: list[dict], documents: dict, *, release_day: date, 
         "planAllowanceCells": allowance_cells,
         "planResearchCoverage": research_coverage,
         "planResearchClocks": research_clocks,
+        "bugHuntScale": bug_hunt_scale,
         # O166: the previous release's published coverage for this ranking (None at the first v3 release).
         "previousRankingCoverage": documents.get("previousRankingCoverage"),
         # O144, O146: the route registry and its shared token mix, for the route brackets.
@@ -1583,7 +1593,7 @@ def bar_levels(assembled: dict) -> tuple[list[str], list[dict]]:
 # E160: the registered rule that selects each workload's anchor references (separate from workload admission).
 ANCHOR_POLICY = {
     "policyId": "complete-evidence-panel",
-    "version": 3,
+    "version": 4,  # a4: re-frozen for O170's 0-100 Bug Hunt scale (the bar levels read the rescaled leaf)
     "populationRule": "ranked configurations with complete cost evidence (exact cost, no AA missing- or declined-task marker) on every component of the workload at the freeze cutoff; on the main workload this is the admission reference panel",
     "planRule": "the same configurations' plan rows whose displayed Plan cost is measured (a controlled measurement or concordant reports, O157); owner assumptions and API-cost fallbacks are scored on these anchors and flagged, and are outside the Plan clip gate",
     "minimumReferences": 2,
@@ -1841,6 +1851,34 @@ def quality_margin(assembled: dict) -> float | None:
     return 1.96 * math.sqrt(2.0) * statistics.median(sds) if sds else None
 
 
+# O171 (2026-11-03, on reviewer 94, amending O25/O39's scope): beside each cheapest-above-bar answer, a noise companion says
+# whether the answer is clear of benchmark noise, at correlation 0 with each row's analytic quality SD (O39) and the SD of
+# the configuration that set the bar: Δ_i = (Q_i − H) / √(σ_i² + σ_H²). Labels are unchanged; this is read beside them.
+NOISE_SEPARATED = "noise-separated: the answer clears the bar by the 95% noise margin and no cheaper row can reach it within noise (O171)"
+NOISE_CONTESTED = "contested: the answer clears the bar, but a cheaper row reaches it within noise (O171)"
+NOISE_ROUNDING_ONLY = "rounding-stable only: the answer does not clear the bar by the 95% noise margin (O171)"
+NOISE_Z = 1.96
+
+
+def noise_companion(answer: str | None, level: float, setter_sd: float, candidates: list[tuple[str, float, float, float]]) -> dict | None:
+    """O171: the noise status of a cheapest-above-bar answer. ``candidates`` holds (row, cost, displayed quality, quality SD)
+    for every row the answer was chosen from; a cheaper row whose Δ exceeds −1.96 contests the answer."""
+
+    if answer is None:
+        return None
+    by_id = {row: (cost, quality, sd) for row, cost, quality, sd in candidates}
+    cost, quality, sd = by_id[answer]
+
+    def delta(value: float, spread: float) -> float:
+        scale = math.sqrt(spread ** 2 + setter_sd ** 2)
+        return (value - level) / scale if scale else (math.inf if value >= level else -math.inf)
+
+    own = delta(quality, sd)
+    rivals = sorted(row for row, other_cost, other_quality, other_sd in candidates if other_cost < cost and delta(other_quality, other_sd) > -NOISE_Z)
+    status = NOISE_ROUNDING_ONLY if own < NOISE_Z else NOISE_CONTESTED if rivals else NOISE_SEPARATED
+    return {"status": status, "delta": own, "contestedBy": rivals}
+
+
 def displayed_cheapest(assembled: dict, frozen: dict, basis: str, margin: float | None = None) -> dict:
     """E203: per bar, the cheapest non-provisional scored main-workload rows whose displayed quality reaches the level (ties
     listed); O44: beside it, the cheapest whose displayed quality clears the level by at least the quality noise margin."""
@@ -1853,10 +1891,15 @@ def displayed_cheapest(assembled: dict, frozen: dict, basis: str, margin: float 
         low = min((_basis_cost(row, basis) for row in qualifying), default=None)
         return qualifying, low, sorted(row["id"] for row in qualifying if _basis_cost(row, basis) == low)
 
+    sds = {row["id"]: quality_sd(row) for row in rows}
+    every = {row["id"]: row for row in assembled["rows"]}
+    candidates = [(row["id"], _basis_cost(row, basis), row["summary"].displayed, sds[row["id"]]) for row in rows]
     bars = []
     for bar in frozen["barReferences"]:
         qualifying, low, rows_at = cheapest(bar["level"])
         entry = {"bar": bar["id"], "level": bar["level"], "qualifierN": len(qualifying), "costUsd": low, "cheapest": rows_at}
+        setter = every.get(bar.get("levelConfiguration"))
+        entry["noise"] = noise_companion(rows_at[0] if rows_at else None, bar["level"], quality_sd(setter) if setter else 0.0, candidates)
         # O143 (2026-11-01): the headline answer names the cheaper same-family efforts AA plots that this ranking could not
         # evaluate (E201c), so a reader sees where the leading ranking cannot look.
         by_id = {row["id"]: row for row in rows}
@@ -2905,6 +2948,7 @@ def score(assembled: dict, frozen: dict) -> dict:
         "planAllowanceCells": assembled.get("planAllowanceCells", []),
         "planResearchCoverage": assembled.get("planResearchCoverage"),
         "planResearchClocks": assembled.get("planResearchClocks"),
+        "bugHuntScale": assembled.get("bugHuntScale"),
         "costInfluence": influence,
         "planRouteBrackets": brackets,
         "gates": {"clip": gates, "hold": hold, "listedBeyondAnchors": listed_beyond_anchors(assembled.get("listed", []), frozen),
@@ -3571,8 +3615,10 @@ def sampling_sd(key: str, observation: q.Observation, source: dict, gdpval_sd: f
     if source.get("stderr") is not None:
         return source["stderr"]  # Vals' published standard error, in percentage points (the leaf's z unit)
     if key == "bugHunt" and source.get("planted") is None:
-        # O163: a Bug Hunt count without a planted/unplanted split (another party's fill) is read as one Poisson count.
-        return math.sqrt(max(z, 0.5))
+        # O163: a Bug Hunt count without a planted/unplanted split (another party's fill) is read as one Poisson count; O170
+        # rescales its SD with the leaf.
+        to_z = 100.0 / q.BUG_HUNT_SCALE["scale"]
+        return math.sqrt(max(z / to_z, 0.5)) * to_z
     if key == "bugHunt":
         # O163: a count of bugs fixed. The planted part is binomial over the 105 planted bugs (Jeffreys plug-in) and the
         # unplanted part, with no answer key or ceiling, is read as a Poisson count; the two add in variance.
@@ -3580,7 +3626,8 @@ def sampling_sd(key: str, observation: q.Observation, source: dict, gdpval_sd: f
         planted, unplanted = BUG_HUNT_PLANTED * p * (1.0 - p), max(source.get("unplanted") or 0.0, 0.5)
         # E309 (reviewer 82): the two counts come from the same runs; the primary SD sets their correlation to 0, and the
         # separability statement is restated at correlations -1 and +1 as a specification stress.
-        return math.sqrt(max(0.0, planted + unplanted + 2.0 * bug_hunt_rho * math.sqrt(planted * unplanted)))
+        # O170: the count's SD is rescaled with the leaf (100 / the board's planted + unplanted maxima).
+        return math.sqrt(max(0.0, planted + unplanted + 2.0 * bug_hunt_rho * math.sqrt(planted * unplanted))) * 100.0 / q.BUG_HUNT_SCALE["scale"]
     if key == "livebench2Overall":
         # O67: LiveBench's Overall is the release's weighted mean, so the category draws carry the same weights.
         categories, weights = source["categories"], source.get("weights") or {name: 1.0 for name in LIVEBENCH_CATEGORY_TASKS}
@@ -4273,6 +4320,8 @@ def build_tracks(configurations: list[dict], data: Path, *, release_day: date) -
             sections[track] = build(configurations, data, release_day=release_day)
     for track, comparison in leading_comparison(sections).items():
         sections[track]["leadingComparison"] = comparison
+    for track, answers in common_answers(sections).items():
+        sections[track]["commonAnswer"] = answers
     sections[q.DEFAULT_TRACK]["rankingAgreement"] = ranking_agreement(*(sections[track] for track in q.LEADING_TRACKS))
     return sections
 
@@ -4336,6 +4385,26 @@ def withhold_labels(scored: dict) -> dict:
                                   for item in scenarios["barLabels"]]
     scored["manifest"].append(_rule("diagnostic ranking (O121)", "fired", "no label is issued and the gates are disclosed without holding the release"))
     return scored
+
+
+COMMON_ANSWER_LABEL = ("the common-leaf diagnostic ranking's displayed-record answer at the same bar position, at its own bar level, "
+                       "printed beside this ranking's answer (O172); diagnostic, no label, not a claim")
+
+
+def common_answers(sections: dict) -> dict:
+    """O172 (2026-11-03, on reviewer 94): each leading ranking carries the common-leaf ranking's answer at each bar position,
+    so its headline shows the low-effort configurations it cannot rank where the diagnostic ranking can."""
+
+    answers = {}
+    for track in q.LEADING_TRACKS:
+        if track not in sections:
+            continue
+        for diagnostic in sorted(q.DIAGNOSTIC_TRACKS & set(sections)):
+            own = sections[diagnostic]["displayedCheapest"]
+            answers[track] = {"label": COMMON_ANSWER_LABEL, "ranking": diagnostic, "bases": {
+                basis: [{key: bar[key] for key in ("bar", "level", "cheapest", "costUsd")} for bar in own[basis]["bars"]]
+                for basis in own if basis in BASES}}
+    return answers
 
 
 def leading_comparison(sections: dict) -> dict:

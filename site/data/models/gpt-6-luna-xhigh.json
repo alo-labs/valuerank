@@ -11,10 +11,10 @@
       "plan": 45
     },
     "overall": {
-      "api": 45.788796939894794,
-      "plan": 51.38079322834672
+      "api": 45.36212482215154,
+      "plan": 50.95412111060346
     },
-    "quality": 35.17439097112896,
+    "quality": 34.60549481413795,
     "qualityRank": 17,
     "coverage": {
       "pct": 100.0,
@@ -72,8 +72,8 @@
       "weightPct": 9.0,
       "value": 26.0,
       "decimals": 1,
-      "unit": "bugs fixed, planted plus unplanted (O163; no ceiling)",
-      "normalized": 26.0,
+      "unit": "% of the board's best planted plus best unplanted bugs fixed (O163, O170)",
+      "normalized": 21.25919869174162,
       "source": {
         "name": "Bug Hunt Bench published runs",
         "url": "https://bughunt.productcompass.pm/"
@@ -353,7 +353,7 @@
       "usdPerRun": 7.090258089834316,
       "selected": true,
       "planRank": 45,
-      "planValue": 51.38079322834672
+      "planValue": 50.95412111060346
     },
     {
       "id": "chatgpt-pro100-gpt-6-luna-xhigh-common-gpt-assumption",
@@ -371,7 +371,7 @@
       "usdPerRun": 7.2394559377910195,
       "selected": false,
       "planRank": 45,
-      "planValue": 51.38079322834672
+      "planValue": 50.95412111060346
     },
     {
       "id": "chatgpt-pro200-gpt-6-luna-xhigh-common-gpt-assumption",
@@ -389,7 +389,7 @@
       "usdPerRun": 7.329775445652136,
       "selected": false,
       "planRank": 45,
-      "planValue": 51.38079322834672
+      "planValue": 50.95412111060346
     },
     {
       "id": "chatgpt-plus-gpt-6-luna-xhigh-common-gpt-assumption",
@@ -407,7 +407,7 @@
       "usdPerRun": 9.429167918974724,
       "selected": false,
       "planRank": 45,
-      "planValue": 51.38079322834672
+      "planValue": 50.95412111060346
     }
   ],
   "scenarios": {
@@ -438,7 +438,7 @@
         "unevaluable": null,
         "top1": 0.0,
         "top3": 0.0,
-        "frontier": 0.9952
+        "frontier": 0.9906
       },
       {
         "stratum": "S1",
@@ -465,7 +465,7 @@
         "unevaluable": null,
         "top1": 0.0,
         "top3": 0.0,
-        "frontier": 0.6882
+        "frontier": 0.665
       },
       {
         "stratum": "S1T",
@@ -474,7 +474,7 @@
         "unevaluable": null,
         "top1": 0.0,
         "top3": 0.0,
-        "frontier": 0.6853
+        "frontier": 0.6576
       }
     ],
     "plan": [
@@ -595,8 +595,8 @@
         "plan": 45
       },
       "overall": {
-        "api": 45.788796939894794,
-        "plan": 51.38079322834672
+        "api": 45.36212482215154,
+        "plan": 50.95412111060346
       }
     },
     {
@@ -610,8 +610,8 @@
         "plan": 84
       },
       "overall": {
-        "api": 37.35124801510382,
-        "plan": 46.45782807683156
+        "api": 36.81790786792476,
+        "plan": 45.9244879296525
       }
     }
   ]

@@ -1,0 +1,217 @@
+{
+  "schemaVersion": 1,
+  "methodologyVersion": "3.0.0",
+  "anchorVersion": "v3-2026-11-01-a3",
+  "frozenAt": "2026-11-01",
+  "basketVersion": "SDLC basket v1",
+  "mainWorkload": "aad36e77d6e17386",
+  "workloads": {
+    "aad36e77d6e17386": {
+      "components": [
+        "coding-agent-index",
+        "aa-briefcase",
+        "gdp-pdf",
+        "automationbench-aa",
+        "terminalbench-4-0",
+        "frontiercode-2-0",
+        "terminal-bench-science"
+      ],
+      "role": "main",
+      "anchors": {
+        "api": {
+          "basis": "api",
+          "workload": "aad36e77d6e17386",
+          "units": "USD per workload pass",
+          "referenceIds": [
+            "claude-sonnet-5-5",
+            "deepseek-v4-1-flash-1017",
+            "gemini-4-argon",
+            "gpt-6-astra",
+            "gpt-6-luna",
+            "gpt-6.1-sol"
+          ],
+          "referenceCosts": {
+            "claude-sonnet-5-5": 10501.818258108602,
+            "deepseek-v4-1-flash-1017": 531.4356367333653,
+            "gemini-4-argon": 8880.92222822785,
+            "gpt-6-astra": 6808.390554424009,
+            "gpt-6-luna": 158.9913590982512,
+            "gpt-6.1-sol": 1387.027111800466
+          },
+          "low": 79.4956795491256,
+          "high": 21003.636516217204,
+          "padding": 2.0
+        },
+        "plan": {
+          "basis": "plan",
+          "workload": "aad36e77d6e17386",
+          "units": "USD per workload pass",
+          "referenceIds": [
+            "gpt-6-astra@chatgpt-plus",
+            "gpt-6-astra@chatgpt-pro-100",
+            "gpt-6-astra@chatgpt-pro-200",
+            "gpt-6-astra@chatgpt-pro-500",
+            "gpt-6.1-sol@chatgpt-plus",
+            "gpt-6.1-sol@chatgpt-pro-100",
+            "gpt-6.1-sol@chatgpt-pro-200",
+            "gpt-6.1-sol@chatgpt-pro-500"
+          ],
+          "referenceCosts": {
+            "gpt-6-astra@chatgpt-plus": 840.5420437560505,
+            "gpt-6-astra@chatgpt-pro-100": 515.0068498051444,
+            "gpt-6-astra@chatgpt-pro-200": 470.0304145270286,
+            "gpt-6-astra@chatgpt-pro-500": 489.4601405049611,
+            "gpt-6.1-sol@chatgpt-plus": 131.47176415170293,
+            "gpt-6.1-sol@chatgpt-pro-100": 131.47176415170293,
+            "gpt-6.1-sol@chatgpt-pro-200": 133.11200689063972,
+            "gpt-6.1-sol@chatgpt-pro-500": 128.76226437063366
+          },
+          "low": 64.38113218531683,
+          "high": 1681.084087512101,
+          "padding": 2.0
+        }
+      },
+      "anchorStatus": "frozen"
+    },
+    "835a9baf594a1251": {
+      "components": [
+        "aa-briefcase",
+        "gdp-pdf",
+        "automationbench-aa",
+        "terminalbench-4-0",
+        "frontiercode-2-0",
+        "terminal-bench-science"
+      ],
+      "role": "subset",
+      "anchors": {
+        "api": {
+          "basis": "api",
+          "workload": "835a9baf594a1251",
+          "units": "USD per workload pass",
+          "referenceIds": [
+            "claude-sonnet-5-5",
+            "deepseek-v4-1-flash-1017",
+            "gemini-4-argon",
+            "gpt-6-astra",
+            "gpt-6-luna",
+            "gpt-6.1-sol",
+            "mimo-v2-6-pro"
+          ],
+          "referenceCosts": {
+            "claude-sonnet-5-5": 6644.38086168003,
+            "deepseek-v4-1-flash-1017": 445.51597840042814,
+            "gemini-4-argon": 5478.681890335225,
+            "gpt-6-astra": 4767.904669232116,
+            "gpt-6-luna": 112.83624696325522,
+            "gpt-6.1-sol": 950.68180227189,
+            "mimo-v2-6-pro": 171.70030964750728
+          },
+          "low": 56.41812348162761,
+          "high": 13288.76172336006,
+          "padding": 2.0
+        },
+        "plan": {
+          "basis": "plan",
+          "workload": "835a9baf594a1251",
+          "units": "USD per workload pass",
+          "referenceIds": [
+            "gpt-6-astra@chatgpt-plus",
+            "gpt-6-astra@chatgpt-pro-100",
+            "gpt-6-astra@chatgpt-pro-200",
+            "gpt-6-astra@chatgpt-pro-500",
+            "gpt-6.1-sol@chatgpt-plus",
+            "gpt-6.1-sol@chatgpt-pro-100",
+            "gpt-6.1-sol@chatgpt-pro-200",
+            "gpt-6.1-sol@chatgpt-pro-500"
+          ],
+          "referenceCosts": {
+            "gpt-6-astra@chatgpt-plus": 588.6302060780391,
+            "gpt-6-astra@chatgpt-pro-100": 360.65844699183936,
+            "gpt-6-astra@chatgpt-pro-200": 329.1615235921378,
+            "gpt-6-astra@chatgpt-pro-500": 342.768128629196,
+            "gpt-6.1-sol@chatgpt-plus": 90.11201917269099,
+            "gpt-6.1-sol@chatgpt-pro-100": 90.11201917269099,
+            "gpt-6.1-sol@chatgpt-pro-200": 91.2362574157284,
+            "gpt-6.1-sol@chatgpt-pro-500": 88.25490180763924
+          },
+          "low": 44.12745090381962,
+          "high": 1177.2604121560782,
+          "padding": 2.0
+        }
+      },
+      "anchorStatus": "frozen"
+    }
+  },
+  "barReferences": [
+    {
+      "id": "bar:median-quality",
+      "level": 62.10591437735664,
+      "levelConfiguration": "gemini-4-argon",
+      "rule": "lower-median displayed quality of the non-provisional cohort configurations at freeze (E192; headline bar)"
+    },
+    {
+      "id": "bar:lower-quartile-quality",
+      "level": 49.88587853348038,
+      "levelConfiguration": "claude-haiku-5-5-max",
+      "rule": "lower-quartile displayed quality of the non-provisional cohort configurations at freeze (O34)"
+    },
+    {
+      "id": "bar:upper-quartile-quality",
+      "level": 68.53420586556773,
+      "levelConfiguration": "claude-sonnet-5-5",
+      "rule": "upper-quartile displayed quality of the non-provisional cohort configurations at freeze (O34)"
+    }
+  ],
+  "anchorPolicy": {
+    "policyId": "complete-evidence-panel",
+    "version": 3,
+    "populationRule": "ranked configurations with complete cost evidence (exact cost, no AA missing- or declined-task marker) on every component of the workload at the freeze cutoff; on the main workload this is the admission reference panel",
+    "planRule": "the same configurations' plan rows whose displayed Plan cost is measured (a controlled measurement or concordant reports, O157); owner assumptions and API-cost fallbacks are scored on these anchors and flagged, and are outside the Plan clip gate",
+    "minimumReferences": 2,
+    "belowMinimum": "anchors unavailable: configurations on that workload get no cost score (the main workload must meet the minimum)",
+    "lifetime": "reference IDs and costs are frozen; a population or rule change is a new anchor version with an old/new bridge, and evidence lost after freezing never rebuilds an anchor"
+  },
+  "barPolicy": {
+    "policyId": "quality-quartile-ladder",
+    "version": 3,
+    "selectionMode": "deterministic at anchor freeze, before any bar outcome is computed",
+    "populationRule": "non-provisional ranked configurations with a displayed quality",
+    "order": "displayed quality ascending, then configuration ID",
+    "position": "lower quartile, lower median (the headline bar) and upper quartile, each the displayed quality at zero-based position floor((n - 1) * k / 4), k = 1, 2, 3 (O34)",
+    "reference": "the displayed quality at each ladder position, frozen as a level; the configuration at that position is recorded for audit and competes like any other",
+    "minimumPopulation": 2,
+    "emptyPopulation": "fewer than two population configurations: no bar pinned; the bar is published as unavailable",
+    "ladderPopulation": "fewer than four population configurations: only the headline bar is pinned, because the quartile positions would coincide with it (E215)",
+    "nonTautology": "a frozen level is never a configuration, so no bar can return its setter by construction; whether a result compares alternatives is published per result (possibleQualifierN, E198)",
+    "lifetime": "fixed for the anchor version; replaced only by a versioned re-freeze that publishes old- and new-bar results on the common evaluable panel",
+    "selectionCutoff": "2026-11-01",
+    "population": [
+      "claude-haiku-5-5-max",
+      "claude-opus-5-5",
+      "claude-sonnet-5-5",
+      "deepseek-v4-1-flash-1017",
+      "gemini-4-argon",
+      "gpt-6-astra",
+      "gpt-6-luna",
+      "gpt-6.1-sol",
+      "mimo-v2-6-pro"
+    ],
+    "bars": [
+      {
+        "id": "bar:median-quality",
+        "level": 62.10591437735664,
+        "levelConfiguration": "gemini-4-argon"
+      },
+      {
+        "id": "bar:lower-quartile-quality",
+        "level": 49.88587853348038,
+        "levelConfiguration": "claude-haiku-5-5-max"
+      },
+      {
+        "id": "bar:upper-quartile-quality",
+        "level": 68.53420586556773,
+        "levelConfiguration": "claude-sonnet-5-5"
+      }
+    ]
+  }
+}

@@ -8,13 +8,13 @@
   "summary": {
     "rank": {
       "api": 2,
-      "plan": 23
+      "plan": 24
     },
     "overall": {
-      "api": 59.536457740492956,
-      "plan": 51.878381218030434
+      "api": 58.58793280181757,
+      "plan": 50.92985627935505
     },
-    "quality": 57.40456754388143,
+    "quality": 56.13986762564758,
     "qualityRank": 6,
     "coverage": {
       "pct": 100.0,
@@ -144,8 +144,8 @@
       "weightPct": 6.0,
       "value": 86.7,
       "decimals": 1,
-      "unit": "bugs fixed, planted plus unplanted (O163; no ceiling)",
-      "normalized": 86.7,
+      "unit": "% of the board's best planted plus best unplanted bugs fixed (O163, O170)",
+      "normalized": 70.89125102207686,
       "source": {
         "name": "Bug Hunt Bench published runs",
         "url": "https://bughunt.productcompass.pm/"
@@ -403,8 +403,8 @@
         "kernel": "primary",
         "targetProfile": "published-record leaf values redrawn with task-sampling noise from each leaf's published task count (binomial leaves from their Jeffreys Beta posterior, O142, with its recentred, clipped alternative, O154, whose realised mean shift is reported; independent-task approximation; GDPval-AA from its displayed rating interval, an assumption) + conventional identification of missing leaves",
         "unevaluable": null,
-        "top1": 0.0011,
-        "top3": 0.999,
+        "top1": 0.0013,
+        "top3": 0.998,
         "frontier": 1.0
       },
       {
@@ -412,8 +412,8 @@
         "kernel": "recentred",
         "targetProfile": "published-record leaf values redrawn with task-sampling noise from each leaf's published task count (binomial leaves from their Jeffreys Beta posterior, O142, with its recentred, clipped alternative, O154, whose realised mean shift is reported; independent-task approximation; GDPval-AA from its displayed rating interval, an assumption) + conventional identification of missing leaves",
         "unevaluable": null,
-        "top1": 0.0014,
-        "top3": 0.9979,
+        "top1": 0.0013,
+        "top3": 0.9971,
         "frontier": 1.0
       }
     ],
@@ -496,7 +496,7 @@
       "date": "2026-10-19",
       "rank": {
         "api": 2,
-        "plan": 23
+        "plan": 24
       }
     }
   ],
@@ -517,11 +517,11 @@
       "rankingEligible": true,
       "rank": {
         "api": 2,
-        "plan": 23
+        "plan": 24
       },
       "overall": {
-        "api": 59.536457740492956,
-        "plan": 51.878381218030434
+        "api": 58.58793280181757,
+        "plan": 50.92985627935505
       }
     },
     {
@@ -535,8 +535,8 @@
         "plan": 62
       },
       "overall": {
-        "api": 52.97785273745019,
-        "plan": 43.14115580828652
+        "api": 51.5550653294371,
+        "plan": 41.71836840027343
       }
     },
     {
@@ -547,11 +547,11 @@
       "rankingEligible": true,
       "rank": {
         "api": 10,
-        "plan": 95
+        "plan": 96
       },
       "overall": {
-        "api": 47.95866251691005,
-        "plan": 42.6302861534598
+        "api": 46.18017825689371,
+        "plan": 40.85180189344345
       }
     }
   ]

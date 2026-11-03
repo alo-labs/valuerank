@@ -156,7 +156,7 @@ def test_missing_ranges_use_observed_values_and_default_to_the_domain():
     assert ranges["frontierCode"] == (40.0, 70.0)
     assert ranges["bugHunt"] == (40.0, 40.0)
     assert ranges["critpt"] == (0.0, 100.0)
-    assert sc.missing_ranges(rows[1:])["bugHunt"] == (0.0, 210.0)  # E302
+    assert sc.missing_ranges(rows[1:])["bugHunt"] == (0.0, 100.0)  # O170
 
 
 def test_draw_scenario_strata():

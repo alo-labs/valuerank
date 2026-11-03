@@ -7,14 +7,14 @@
   "selectedPage": "https://artificialanalysis.ai/models/claude-haiku-5-5-medium",
   "summary": {
     "rank": {
-      "api": 19,
+      "api": 18,
       "plan": 50
     },
     "overall": {
-      "api": 44.812623568009826,
-      "plan": 49.88043921172135
+      "api": 44.55005611093705,
+      "plan": 49.617871754648576
     },
-    "quality": 33.1739189489618,
+    "quality": 32.8238290061981,
     "qualityRank": 18,
     "coverage": {
       "pct": 100.0,
@@ -74,8 +74,8 @@
       "weightPct": 9.0,
       "value": 16.0,
       "decimals": 1,
-      "unit": "bugs fixed, planted plus unplanted (O163; no ceiling)",
-      "normalized": 16.0,
+      "unit": "% of the board's best planted plus best unplanted bugs fixed (O163, O170)",
+      "normalized": 13.082583810302536,
       "source": {
         "name": "Bug Hunt Bench published runs",
         "url": "https://bughunt.productcompass.pm/"
@@ -354,7 +354,7 @@
       "usdPerRun": 1.1339466466831103,
       "selected": true,
       "planRank": 50,
-      "planValue": 49.88043921172135
+      "planValue": 49.617871754648576
     },
     {
       "id": "claude-max20x-claude-haiku-5-5-medium-common-opus55-assumption",
@@ -372,7 +372,7 @@
       "usdPerRun": 1.139168642156493,
       "selected": false,
       "planRank": 50,
-      "planValue": 49.88043921172135
+      "planValue": 49.617871754648576
     },
     {
       "id": "claude-max5x-claude-haiku-5-5-medium-common-opus55-assumption",
@@ -390,7 +390,7 @@
       "usdPerRun": 1.1666280784215755,
       "selected": false,
       "planRank": 50,
-      "planValue": 49.88043921172135
+      "planValue": 49.617871754648576
     }
   ],
   "scenarios": {
@@ -421,7 +421,7 @@
         "unevaluable": null,
         "top1": 0.0,
         "top3": 0.0,
-        "frontier": 0.6036
+        "frontier": 0.6205
       },
       {
         "stratum": "S1",
@@ -448,7 +448,7 @@
         "unevaluable": null,
         "top1": 0.0,
         "top3": 0.0,
-        "frontier": 0.5135
+        "frontier": 0.5189
       },
       {
         "stratum": "S1T",
@@ -457,7 +457,7 @@
         "unevaluable": null,
         "top1": 0.0,
         "top3": 0.0,
-        "frontier": 0.5236
+        "frontier": 0.5315
       }
     ],
     "plan": [
@@ -537,7 +537,7 @@
       "version": "v3.0.0",
       "date": "2026-10-19",
       "rank": {
-        "api": 19,
+        "api": 18,
         "plan": 50
       }
     }
@@ -573,12 +573,12 @@
       "shown": true,
       "rankingEligible": true,
       "rank": {
-        "api": 19,
+        "api": 18,
         "plan": 50
       },
       "overall": {
-        "api": 44.812623568009826,
-        "plan": 49.88043921172135
+        "api": 44.55005611093705,
+        "plan": 49.617871754648576
       }
     },
     {
@@ -592,8 +592,8 @@
         "plan": 92
       },
       "overall": {
-        "api": 35.955734263545516,
-        "plan": 44.64910815111529
+        "api": 35.62752494220455,
+        "plan": 44.32089882977433
       }
     }
   ]

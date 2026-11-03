@@ -7,15 +7,15 @@
   "selectedPage": "https://artificialanalysis.ai/models/kimi-k3-1-pro",
   "summary": {
     "rank": {
-      "api": 7,
-      "plan": 57
+      "api": 8,
+      "plan": 61
     },
     "overall": {
-      "api": 51.0087929279501,
-      "plan": 45.433662436156204
+      "api": 49.93718949377184,
+      "plan": 44.36205900197795
     },
-    "quality": 60.578216581541604,
-    "qualityRank": 4,
+    "quality": 59.14941200263726,
+    "qualityRank": 3,
     "coverage": {
       "pct": 100.0,
       "costAvailable": true,
@@ -72,8 +72,8 @@
       "weightPct": 9.0,
       "value": 65.3,
       "decimals": 1,
-      "unit": "bugs fixed, planted plus unplanted (O163; no ceiling)",
-      "normalized": 65.3,
+      "unit": "% of the board's best planted plus best unplanted bugs fixed (O163, O170)",
+      "normalized": 53.39329517579722,
       "source": {
         "name": "Bug Hunt Bench published runs",
         "url": "https://bughunt.productcompass.pm/"
@@ -333,7 +333,7 @@
         "unevaluable": null,
         "top1": 0.0,
         "top3": 0.0,
-        "frontier": 0.1676
+        "frontier": 0.2543
       },
       {
         "stratum": "S1",
@@ -359,8 +359,8 @@
         "targetProfile": "published-record leaf values redrawn with task-sampling noise from each leaf's published task count (binomial leaves from their Jeffreys Beta posterior, O142, with its recentred, clipped alternative, O154, whose realised mean shift is reported; independent-task approximation; GDPval-AA from its displayed rating interval, an assumption) + conventional identification of missing leaves",
         "unevaluable": null,
         "top1": 0.0001,
-        "top3": 0.0067,
-        "frontier": 0.2042
+        "top3": 0.0055,
+        "frontier": 0.2451
       },
       {
         "stratum": "S1T",
@@ -368,8 +368,8 @@
         "targetProfile": "published-record leaf values redrawn with task-sampling noise from each leaf's published task count (binomial leaves from their Jeffreys Beta posterior, O142, with its recentred, clipped alternative, O154, whose realised mean shift is reported; independent-task approximation; GDPval-AA from its displayed rating interval, an assumption) + conventional identification of missing leaves",
         "unevaluable": null,
         "top1": 0.0001,
-        "top3": 0.0057,
-        "frontier": 0.2092
+        "top3": 0.0048,
+        "frontier": 0.254
       }
     ],
     "plan": [
@@ -398,7 +398,7 @@
         "unevaluable": null,
         "top1": 0.0,
         "top3": 0.0,
-        "frontier": 0.0756
+        "frontier": 0.1025
       },
       {
         "stratum": "S1",
@@ -425,7 +425,7 @@
         "unevaluable": null,
         "top1": 0.0,
         "top3": 0.0,
-        "frontier": 0.1953
+        "frontier": 0.214
       },
       {
         "stratum": "S1T",
@@ -434,7 +434,7 @@
         "unevaluable": null,
         "top1": 0.0,
         "top3": 0.0,
-        "frontier": 0.2005
+        "frontier": 0.2154
       }
     ]
   },
@@ -450,8 +450,8 @@
       "version": "v3.0.0",
       "date": "2026-10-19",
       "rank": {
-        "api": 7,
-        "plan": 57
+        "api": 8,
+        "plan": 61
       }
     }
   ],
@@ -486,12 +486,12 @@
       "shown": true,
       "rankingEligible": true,
       "rank": {
-        "api": 7,
-        "plan": 57
+        "api": 8,
+        "plan": 61
       },
       "overall": {
-        "api": 51.0087929279501,
-        "plan": 45.433662436156204
+        "api": 49.93718949377184,
+        "plan": 44.36205900197795
       }
     },
     {
@@ -502,11 +502,11 @@
       "rankingEligible": true,
       "rank": {
         "api": 11,
-        "plan": 96
+        "plan": 95
       },
       "overall": {
-        "api": 47.338193629681655,
-        "plan": 42.34908440585316
+        "api": 45.99868933695885,
+        "plan": 41.009580113130355
       }
     }
   ]

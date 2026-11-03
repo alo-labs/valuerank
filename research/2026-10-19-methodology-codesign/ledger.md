@@ -2372,3 +2372,21 @@ Asked on I64 Q1 whether future O71 admissions should be executed by the build fr
 - Parts 13–14 M1 (a zero price in force makes the bound start at 0): not adopted; E185 already leaves such outputs unresolved rather than computing a label, which is the intended conservative result. M2 (a partition with fewer than two unexpired reports): adopted as a clarification matching plan_routes (concordant_pool needs two). L (bootstrap wording): adopted.
 - Round status (O56): not clean (Highs and Mediums raised; the adopted ones are clarifications and E336).
 - E336. A report with a non-positive allowance figure is excluded before the concordance test.
+
+## Owner decisions O170–O172 (2026-11-03), asked on reviewer 94
+- O170 (Bug Hunt scale, amending O163): the leaf is z = 100 × (planted + unplanted bugs fixed) / (P_max + U_max), with P_max and U_max the largest planted and the largest unplanted counts over every run on the whole live board, recomputed at every release. The owner proposed the percentage-of-maxima form; asked when and over which runs, the owner chose "live every release" and "the whole live board". It retires E302's [0, 210] bound (every leaf is on 0–100 again); the anchors and bars are re-frozen as version a4, with the a3 objects kept in research/2026-11-01-recapture/previous-anchors-o170/ and the dual run in data/v3_dual_run*.json. At this release P_max = 57, U_max = 65.3 and the top total (109.6) scores 89.6.
+- O171 (noise companion, amending the scope of O25/O39): beside each displayed-record cheapest-above-bar answer the release prints whether it is noise-separated, contested or rounding-stable only, from Δ = (Q̄ − H)/√(σ² + σ_H²) at correlation 0; labels unchanged.
+- O172 (common-leaf answer in the headline, amending O121's presentation): each leading ranking's headline prints the common-leaf diagnostic ranking's answer at the same bar position; it stays diagnostic, with no label.
+- Asked whether the owner can run subscription accounts for a monthly controlled meter probe: no; the Plan basis stays on public evidence.
+
+## Reviewer 94 (Claude Sonnet 5.5, round 13, Thinking, whole draft r176)
+- Read checks: every part read to its end.
+- H1 (owner decision challenge to O25/O39: labels certify only rounding stability under O36): owner decision O171.
+- H2 (owner decision challenge to O53/O54/O121: the cost-optimal end cannot be ranked): owner decision O172 (the common-leaf answer in the headline; the promotion test was not chosen).
+- H3 (the Plan basis cannot become a claim from public data): put to the owner (meter probe); declined by the owner, so the Plan ranking stays exploratory, as disclosed.
+- M1 (owner decision challenge to O2: cost has little influence): not put as a new question; O2 stands, and E196/E272 already print the nominal weight beside the realised allocation, including the AI Coding Daily ranking's negative cost allocation. The cohort-independent exchange-rate column is not adopted as a new artifact.
+- M2 (owner decision challenge to O163): owner decision O170.
+- M3 (the Coding Agent Index's vendor-agent confound): not adopted beyond E172, whose leave-one-component-out branch publishes the rank changes without the index.
+- M4 (specification size): acknowledged, not adopted during the review rounds; a normative-core refactor would invalidate the review copies the panel is converging on, and the generated figures already carry the per-release numbers.
+- Lows: Terminal-Bench-Science's two classifications follow O137 (its cost is an Index SDLC component) and O136 (its quality sits with science), not changed; the SemiAnalysis transcription is hashed in the evidence bundle with the route registry it lives in (E159); the read-copy count note needs no change.
+- Round status (O56): not clean (owner decision challenges at High); Sonnet's clean run restarts.

@@ -80,13 +80,18 @@ def test_gdpval_transform_matches_aa_integration():
 
 
 def test_bug_hunt_release_vector():
-    """O163: the leaf is the plain count of bugs fixed (planted plus unplanted), used without rescaling or a ceiling."""
+    """O170: planted plus unplanted bugs fixed as a percentage of the live board's planted and unplanted maxima."""
 
-    assert q.bug_hunt_z(52) == q.Observation(52.0, 0.0, math.inf)
-    assert q.bug_hunt_z(44.3, 0.05).half_width == 0.05
-    above = q.bug_hunt_z(98.0 + 14.5, 0.05)  # a total above 100 stays unclipped
-    assert above.z == 112.5 and above.high == pytest.approx(112.55) and above.low == pytest.approx(112.45)
-    assert q.bug_hunt_z(-1.0).z == 0.0
+    saved = dict(q.BUG_HUNT_SCALE)
+    try:
+        board = [{"fixedOf105": 57.0, "extras": 20.0}, {"fixedOf105": 44.3, "extras": 65.3}, {"fixedOf105": 10.0}]
+        assert q.bug_hunt_scale(board) == {"maxPlanted": 57.0, "maxUnplanted": 65.3, "scale": pytest.approx(122.3)}
+        best = q.bug_hunt_z(44.3 + 65.3, 0.05)
+        assert best.z == pytest.approx(100 * 109.6 / 122.3) and best.half_width == pytest.approx(5 / 122.3) and best.upper == 100.0
+        assert q.bug_hunt_z(-1.0).z == 0.0 and q.bug_hunt_z(130.0).z == 100.0
+        assert q.clip_audit("bugHunt", 61.15)["unclippedZ"] == pytest.approx(50.0)
+    finally:
+        q.BUG_HUNT_SCALE.update(saved)
 
 
 def test_observation_upper_defaults_to_the_0_100_scale():
@@ -131,13 +136,12 @@ def test_summarize_renormalises_over_observed_leaves_and_bounds_missing_ones():
     assert summary.lower == pytest.approx((weighted - 8 * 1.0) / 100)
     assert summary.upper == pytest.approx((weighted + 8 * 1.0 + (5 / 3) * 100) / 100)
     assert summary.provisional is False
-    # E302: a missing Bug Hunt leaf is bounded by 210 (105 planted plus an equal unplanted allowance), not 100.
+    # O170: a missing Bug Hunt leaf is bounded by 100 like every other leaf (E302's 210 retired).
     del observations["bugHunt"]
     without = q.summarize(observations)
     observed = sum(leaf.weight * observations[leaf.key].high for leaf in q.LEAVES if leaf.key in observations)
     weight = next(leaf.weight for leaf in q.LEAVES if leaf.key == "bugHunt")
-    assert without.upper == pytest.approx((observed + weight * q.BUG_HUNT_MISSING_UPPER + (5 / 3) * 100) / 100)
-    assert q.BUG_HUNT_MISSING_UPPER == 210.0 and q.MISSING_UPPER == {"bugHunt": 210.0}
+    assert without.upper == pytest.approx((observed + weight * 100 + (5 / 3) * 100) / 100) and q.MISSING_UPPER == {}
 
 
 def test_provisional_rule_reports_every_failed_condition():
@@ -166,9 +170,7 @@ def test_provisional_when_only_frontiercode_is_missing():
 def test_summarize_with_no_observations_has_no_displayed_quality():
     summary = q.summarize({})
     assert summary.displayed is None and summary.coverage == 0.0
-    # E302: with Bug Hunt's missing-evidence bound at 210, the formal composite upper bound exceeds 100.
-    weight = next(leaf.weight for leaf in q.LEAVES if leaf.key == "bugHunt")
-    assert summary.lower == 0.0 and summary.upper == pytest.approx(100.0 + weight * (q.BUG_HUNT_MISSING_UPPER - 100.0) / 100.0)
+    assert summary.lower == 0.0 and summary.upper == pytest.approx(100.0)
 
 
 def test_summarize_rejects_unknown_leaves():
@@ -192,10 +194,10 @@ def test_clip_audit_discloses_saturation_and_rejects_domain_violations():
     high_elo = q.clip_audit("gdpval", 2700.0)
     assert high_elo["anchorPosition"] == "above" and high_elo["clippingAmount"] == pytest.approx(10.0) and high_elo["action"] == "disclose saturation"
     assert q.clip_audit("gdpval", 400.0)["anchorPosition"] == "below"
-    assert q.clip_audit("bugHunt", 52.0)["unclippedZ"] == 52.0
-    # O163: the Bug Hunt count has no ceiling, so a total above 100 is inside and unclipped; a negative count is rejected.
+    # O170: the count is rescaled by the board's maxima (the fixture board's sum to 100).
+    assert q.clip_audit("bugHunt", 50.0)["unclippedZ"] == pytest.approx(50.0)
     many = q.clip_audit("bugHunt", 117.0)
-    assert many["domainValid"] and many["anchorPosition"] == "inside" and many["unclippedZ"] == 117.0 and many["clippingAmount"] == 0.0 and many["action"] == "none"
+    assert many["domainValid"] and many["anchorPosition"] == "above" and many["action"] == "disclose saturation"
     assert q.clip_audit("bugHunt", -1.0)["domainValid"] is False
     assert q.LEAF_DOMAINS["bugHunt"][1:] == (0.0, math.inf)
     assert q.clip_audit("hle", 0.5)["unclippedZ"] == 50.0

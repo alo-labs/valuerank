@@ -7,15 +7,15 @@
   "selectedPage": "https://artificialanalysis.ai/models/claude-sonnet-5-5",
   "summary": {
     "rank": {
-      "api": 6,
-      "plan": 5
+      "api": 7,
+      "plan": 7
     },
     "overall": {
-      "api": 54.50796333807043,
-      "plan": 68.59466611424008
+      "api": 53.65899522686846,
+      "plan": 67.74569800303811
     },
-    "quality": 68.53420586556773,
-    "qualityRank": 3,
+    "quality": 67.4022483839651,
+    "qualityRank": 4,
     "coverage": {
       "pct": 100.0,
       "costAvailable": true,
@@ -144,8 +144,8 @@
       "weightPct": 6.0,
       "value": 77.6,
       "decimals": 1,
-      "unit": "bugs fixed, planted plus unplanted (O163; no ceiling)",
-      "normalized": 77.6,
+      "unit": "% of the board's best planted plus best unplanted bugs fixed (O163, O170)",
+      "normalized": 63.45053147996729,
       "source": {
         "name": "Bug Hunt Bench published runs",
         "url": "https://bughunt.productcompass.pm/"
@@ -396,8 +396,8 @@
       "planIntervalEligible": false,
       "usdPerRun": 178.29912152985742,
       "selected": true,
-      "planRank": 5,
-      "planValue": 68.59466611424008
+      "planRank": 7,
+      "planValue": 67.74569800303811
     },
     {
       "id": "claude-max20x-claude-sonnet-5-5-common-opus55-assumption",
@@ -414,8 +414,8 @@
       "planIntervalEligible": false,
       "usdPerRun": 179.12021589815114,
       "selected": false,
-      "planRank": 6,
-      "planValue": 68.55945724237753
+      "planRank": 9,
+      "planValue": 67.71048913117556
     },
     {
       "id": "claude-max5x-claude-sonnet-5-5-common-opus55-assumption",
@@ -432,8 +432,8 @@
       "planIntervalEligible": false,
       "usdPerRun": 183.4378735040804,
       "selected": false,
-      "planRank": 9,
-      "planValue": 68.37693010201909
+      "planRank": 10,
+      "planValue": 67.52796199081712
     }
   ],
   "scenarios": {
@@ -464,7 +464,7 @@
         "unevaluable": null,
         "top1": 0.0,
         "top3": 0.0,
-        "frontier": 0.0299
+        "frontier": 0.0392
       },
       {
         "stratum": "S1",
@@ -490,8 +490,8 @@
         "targetProfile": "published-record leaf values redrawn with task-sampling noise from each leaf's published task count (binomial leaves from their Jeffreys Beta posterior, O142, with its recentred, clipped alternative, O154, whose realised mean shift is reported; independent-task approximation; GDPval-AA from its displayed rating interval, an assumption) + conventional identification of missing leaves",
         "unevaluable": null,
         "top1": 0.0,
-        "top3": 0.0154,
-        "frontier": 0.1536
+        "top3": 0.0146,
+        "frontier": 0.1843
       },
       {
         "stratum": "S1T",
@@ -499,8 +499,8 @@
         "targetProfile": "published-record leaf values redrawn with task-sampling noise from each leaf's published task count (binomial leaves from their Jeffreys Beta posterior, O142, with its recentred, clipped alternative, O154, whose realised mean shift is reported; independent-task approximation; GDPval-AA from its displayed rating interval, an assumption) + conventional identification of missing leaves",
         "unevaluable": null,
         "top1": 0.0,
-        "top3": 0.0176,
-        "frontier": 0.1447
+        "top3": 0.0167,
+        "frontier": 0.1745
       }
     ],
     "plan": [
@@ -605,8 +605,8 @@
       "version": "v3.0.0",
       "date": "2026-10-19",
       "rank": {
-        "api": 6,
-        "plan": 5
+        "api": 7,
+        "plan": 7
       }
     }
   ],
@@ -626,12 +626,12 @@
       "shown": true,
       "rankingEligible": true,
       "rank": {
-        "api": 6,
-        "plan": 5
+        "api": 7,
+        "plan": 7
       },
       "overall": {
-        "api": 54.50796333807043,
-        "plan": 68.59466611424008
+        "api": 53.65899522686846,
+        "plan": 67.74569800303811
       }
     },
     {
@@ -660,8 +660,8 @@
         "plan": 16
       },
       "overall": {
-        "api": 48.65437427908628,
-        "plan": 58.905266771510604
+        "api": 47.0625590705826,
+        "plan": 57.31345156300693
       }
     }
   ]

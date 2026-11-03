@@ -11,10 +11,10 @@
       "plan": 11
     },
     "overall": {
-      "api": 50.86151794172618,
-      "plan": 62.41440890011029
+      "api": 50.52783846502953,
+      "plan": 62.08072942341364
     },
-    "quality": 49.88587853348038,
+    "quality": 49.44097256455152,
     "qualityRank": 7,
     "coverage": {
       "pct": 100.0,
@@ -146,8 +146,8 @@
       "weightPct": 6.0,
       "value": 30.5,
       "decimals": 1,
-      "unit": "bugs fixed, planted plus unplanted (O163; no ceiling)",
-      "normalized": 30.5,
+      "unit": "% of the board's best planted plus best unplanted bugs fixed (O163, O170)",
+      "normalized": 24.938675388389207,
       "source": {
         "name": "Bug Hunt Bench published runs",
         "url": "https://bughunt.productcompass.pm/"
@@ -399,7 +399,7 @@
       "usdPerRun": 17.760273475833255,
       "selected": true,
       "planRank": 11,
-      "planValue": 62.41440890011029
+      "planValue": 62.08072942341364
     },
     {
       "id": "claude-max20x-claude-haiku-5-5-max-common-opus55-assumption",
@@ -417,7 +417,7 @@
       "usdPerRun": 17.842062216042617,
       "selected": false,
       "planRank": 11,
-      "planValue": 62.41440890011029
+      "planValue": 62.08072942341364
     },
     {
       "id": "claude-max5x-claude-haiku-5-5-max-common-opus55-assumption",
@@ -435,7 +435,7 @@
       "usdPerRun": 18.27214161967823,
       "selected": false,
       "planRank": 11,
-      "planValue": 62.41440890011029
+      "planValue": 62.08072942341364
     }
   ],
   "scenarios": {
@@ -502,7 +502,7 @@
         "unevaluable": null,
         "top1": 0.0,
         "top3": 0.0,
-        "frontier": 0.0
+        "frontier": 0.0001
       }
     ],
     "plan": [
@@ -607,8 +607,8 @@
         "plan": 11
       },
       "overall": {
-        "api": 50.86151794172618,
-        "plan": 62.41440890011029
+        "api": 50.52783846502953,
+        "plan": 62.08072942341364
       }
     },
     {
@@ -634,11 +634,11 @@
       "rankingEligible": true,
       "rank": {
         "api": 21,
-        "plan": 42
+        "plan": 39
       },
       "overall": {
-        "api": 42.24132997025682,
-        "plan": 55.24553427889816
+        "api": 41.615680951450614,
+        "plan": 54.61988526009195
       }
     }
   ]

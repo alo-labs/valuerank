@@ -7,14 +7,14 @@
   "selectedPage": "https://artificialanalysis.ai/models/claude-opus-5-5-medium",
   "summary": {
     "rank": {
-      "api": 12,
-      "plan": 11
+      "api": 13,
+      "plan": 7
     },
     "overall": {
-      "api": 48.79726895603156,
-      "plan": 60.2417687742099
+      "api": 48.08177263550826,
+      "plan": 59.5262724536866
     },
-    "quality": 55.84304822292248,
+    "quality": 54.88905312889141,
     "qualityRank": 8,
     "coverage": {
       "pct": 100.0,
@@ -74,8 +74,8 @@
       "weightPct": 9.0,
       "value": 43.6,
       "decimals": 1,
-      "unit": "bugs fixed, planted plus unplanted (O163; no ceiling)",
-      "normalized": 43.6,
+      "unit": "% of the board's best planted plus best unplanted bugs fixed (O163, O170)",
+      "normalized": 35.65004088307441,
       "source": {
         "name": "Bug Hunt Bench published runs",
         "url": "https://bughunt.productcompass.pm/"
@@ -360,8 +360,8 @@
       "planIntervalEligible": false,
       "usdPerRun": 31.706730843597438,
       "selected": true,
-      "planRank": 11,
-      "planValue": 60.2417687742099
+      "planRank": 7,
+      "planValue": 59.5262724536866
     },
     {
       "id": "claude-max20x-claude-opus-5-5-medium-common-opus55-assumption",
@@ -378,8 +378,8 @@
       "planIntervalEligible": false,
       "usdPerRun": 31.852745125155877,
       "selected": false,
-      "planRank": 12,
-      "planValue": 60.214507066766686
+      "planRank": 8,
+      "planValue": 59.499010746243385
     },
     {
       "id": "claude-max5x-claude-opus-5-5-medium-common-opus55-assumption",
@@ -396,8 +396,8 @@
       "planIntervalEligible": false,
       "usdPerRun": 32.6205492871247,
       "selected": false,
-      "planRank": 16,
-      "planValue": 60.073179008306724
+      "planRank": 10,
+      "planValue": 59.357682687783424
     }
   ],
   "scenarios": {
@@ -455,7 +455,7 @@
         "unevaluable": null,
         "top1": 0.0,
         "top3": 0.0001,
-        "frontier": 0.0026
+        "frontier": 0.0058
       },
       {
         "stratum": "S1T",
@@ -464,7 +464,7 @@
         "unevaluable": null,
         "top1": 0.0,
         "top3": 0.0003,
-        "frontier": 0.0026
+        "frontier": 0.0061
       }
     ],
     "plan": [
@@ -491,8 +491,8 @@
         "kernel": "primary",
         "targetProfile": "published-record reporting precision + conventional identification of missing leaves + weight-specification stress",
         "unevaluable": null,
-        "top1": 0.0002,
-        "top3": 0.0108,
+        "top1": 0.0017,
+        "top3": 0.0425,
         "frontier": 1.0
       },
       {
@@ -518,18 +518,18 @@
         "kernel": "primary",
         "targetProfile": "published-record leaf values redrawn with task-sampling noise from each leaf's published task count (binomial leaves from their Jeffreys Beta posterior, O142, with its recentred, clipped alternative, O154, whose realised mean shift is reported; independent-task approximation; GDPval-AA from its displayed rating interval, an assumption) + conventional identification of missing leaves",
         "unevaluable": null,
-        "top1": 0.1543,
-        "top3": 0.1725,
-        "frontier": 0.9994
+        "top1": 0.202,
+        "top3": 0.228,
+        "frontier": 0.9995
       },
       {
         "stratum": "S1T",
         "kernel": "recentred",
         "targetProfile": "published-record leaf values redrawn with task-sampling noise from each leaf's published task count (binomial leaves from their Jeffreys Beta posterior, O142, with its recentred, clipped alternative, O154, whose realised mean shift is reported; independent-task approximation; GDPval-AA from its displayed rating interval, an assumption) + conventional identification of missing leaves",
         "unevaluable": null,
-        "top1": 0.1575,
-        "top3": 0.1766,
-        "frontier": 0.9997
+        "top1": 0.2054,
+        "top3": 0.2327,
+        "frontier": 0.9998
       }
     ]
   },
@@ -542,8 +542,8 @@
       "version": "v3.0.0",
       "date": "2026-10-19",
       "rank": {
-        "api": 12,
-        "plan": 11
+        "api": 13,
+        "plan": 7
       }
     }
   ],
@@ -578,12 +578,12 @@
       "shown": true,
       "rankingEligible": true,
       "rank": {
-        "api": 12,
-        "plan": 11
+        "api": 13,
+        "plan": 7
       },
       "overall": {
-        "api": 48.79726895603156,
-        "plan": 60.2417687742099
+        "api": 48.08177263550826,
+        "plan": 59.5262724536866
       }
     },
     {
@@ -594,11 +594,11 @@
       "rankingEligible": true,
       "rank": {
         "api": 18,
-        "plan": 32
+        "plan": 29
       },
       "overall": {
-        "api": 43.964034809371725,
-        "plan": 57.00795531085033
+        "api": 43.06966440871759,
+        "plan": 56.113584910196195
       }
     }
   ]

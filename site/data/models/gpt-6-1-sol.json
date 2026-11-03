@@ -11,11 +11,11 @@
       "plan": 1
     },
     "overall": {
-      "api": 64.00591258737676,
-      "plan": 71.51180799129224
+      "api": 62.8068545334111,
+      "plan": 70.31274993732659
     },
-    "quality": 69.09798203247033,
-    "qualityRank": 2,
+    "quality": 67.49923796051613,
+    "qualityRank": 3,
     "coverage": {
       "pct": 100.0,
       "costAvailable": true,
@@ -144,8 +144,8 @@
       "weightPct": 6.0,
       "value": 109.6,
       "decimals": 1,
-      "unit": "bugs fixed, planted plus unplanted (O163; no ceiling)",
-      "normalized": 109.6,
+      "unit": "% of the board's best planted plus best unplanted bugs fixed (O163, O170)",
+      "normalized": 89.61569910057237,
       "source": {
         "name": "Bug Hunt Bench published runs",
         "url": "https://bughunt.productcompass.pm/"
@@ -397,7 +397,7 @@
       "usdPerRun": 128.76226437063366,
       "selected": true,
       "planRank": 1,
-      "planValue": 71.51180799129224
+      "planValue": 70.31274993732659
     },
     {
       "id": "chatgpt-plus-gpt61sol-semianalysis",
@@ -415,7 +415,7 @@
       "usdPerRun": 131.47176415170293,
       "selected": false,
       "planRank": 2,
-      "planValue": 71.35222851063025
+      "planValue": 70.15317045666461
     },
     {
       "id": "chatgpt-pro100-gpt61sol-semianalysis",
@@ -433,7 +433,7 @@
       "usdPerRun": 131.47176415170293,
       "selected": false,
       "planRank": 2,
-      "planValue": 71.35222851063025
+      "planValue": 70.15317045666461
     },
     {
       "id": "chatgpt-pro200-gpt61sol-semianalysis",
@@ -451,7 +451,7 @@
       "usdPerRun": 133.11200689063972,
       "selected": false,
       "planRank": 4,
-      "planValue": 71.25721468531049
+      "planValue": 70.05815663134483
     }
   ],
   "scenarios": {
@@ -507,7 +507,7 @@
         "kernel": "primary",
         "targetProfile": "published-record leaf values redrawn with task-sampling noise from each leaf's published task count (binomial leaves from their Jeffreys Beta posterior, O142, with its recentred, clipped alternative, O154, whose realised mean shift is reported; independent-task approximation; GDPval-AA from its displayed rating interval, an assumption) + conventional identification of missing leaves",
         "unevaluable": null,
-        "top1": 0.9989,
+        "top1": 0.9987,
         "top3": 1.0,
         "frontier": 1.0
       },
@@ -516,7 +516,7 @@
         "kernel": "recentred",
         "targetProfile": "published-record leaf values redrawn with task-sampling noise from each leaf's published task count (binomial leaves from their Jeffreys Beta posterior, O142, with its recentred, clipped alternative, O154, whose realised mean shift is reported; independent-task approximation; GDPval-AA from its displayed rating interval, an assumption) + conventional identification of missing leaves",
         "unevaluable": null,
-        "top1": 0.9986,
+        "top1": 0.9987,
         "top3": 1.0,
         "frontier": 1.0
       }
@@ -545,8 +545,8 @@
         "kernel": "primary",
         "targetProfile": "published-record reporting precision + conventional identification of missing leaves + weight-specification stress",
         "unevaluable": null,
-        "top1": 0.9984,
-        "top3": 0.9995,
+        "top1": 0.9968,
+        "top3": 0.9986,
         "frontier": 1.0
       },
       {
@@ -572,8 +572,8 @@
         "kernel": "primary",
         "targetProfile": "published-record leaf values redrawn with task-sampling noise from each leaf's published task count (binomial leaves from their Jeffreys Beta posterior, O142, with its recentred, clipped alternative, O154, whose realised mean shift is reported; independent-task approximation; GDPval-AA from its displayed rating interval, an assumption) + conventional identification of missing leaves",
         "unevaluable": null,
-        "top1": 0.9779,
-        "top3": 0.984,
+        "top1": 0.9505,
+        "top3": 0.9636,
         "frontier": 1.0
       },
       {
@@ -581,8 +581,8 @@
         "kernel": "recentred",
         "targetProfile": "published-record leaf values redrawn with task-sampling noise from each leaf's published task count (binomial leaves from their Jeffreys Beta posterior, O142, with its recentred, clipped alternative, O154, whose realised mean shift is reported; independent-task approximation; GDPval-AA from its displayed rating interval, an assumption) + conventional identification of missing leaves",
         "unevaluable": null,
-        "top1": 0.9821,
-        "top3": 0.9874,
+        "top1": 0.9553,
+        "top3": 0.9681,
         "frontier": 1.0
       }
     ]
@@ -656,8 +656,8 @@
         "plan": 1
       },
       "overall": {
-        "api": 64.00591258737676,
-        "plan": 71.51180799129224
+        "api": 62.8068545334111,
+        "plan": 70.31274993732659
       }
     },
     {
@@ -683,11 +683,11 @@
       "rankingEligible": true,
       "rank": {
         "api": 1,
-        "plan": 2
+        "plan": 5
       },
       "overall": {
-        "api": 56.26155309118007,
-        "plan": 61.818820276574144
+        "api": 54.01331923999445,
+        "plan": 59.57058642538853
       }
     }
   ]

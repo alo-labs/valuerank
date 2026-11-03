@@ -11,10 +11,10 @@
       "plan": 22
     },
     "overall": {
-      "api": 56.25609205401756,
-      "plan": 52.2720021823335
+      "api": 56.01540521836752,
+      "plan": 52.03131534668346
     },
-    "quality": 48.4670746447178,
+    "quality": 48.14615886385108,
     "qualityRank": 8,
     "coverage": {
       "pct": 100.0,
@@ -146,8 +146,8 @@
       "weightPct": 6.0,
       "value": 22,
       "decimals": 1,
-      "unit": "bugs fixed, planted plus unplanted (O163; no ceiling)",
-      "normalized": 22,
+      "unit": "% of the board's best planted plus best unplanted bugs fixed (O163, O170)",
+      "normalized": 17.988552739165986,
       "source": {
         "name": "Bug Hunt Bench published runs",
         "url": "https://bughunt.productcompass.pm/"
@@ -388,7 +388,7 @@
       "usdPerRun": 145.41015383427106,
       "selected": true,
       "planRank": 22,
-      "planValue": 52.2720021823335
+      "planValue": 52.03131534668346
     },
     {
       "id": "mimo-tokenplan-pro-mimo-v2-6-pro-quota-ceiling",
@@ -405,8 +405,8 @@
       "planIntervalEligible": false,
       "usdPerRun": 156.8899028211872,
       "selected": false,
-      "planRank": 24,
-      "planValue": 51.6935226552638
+      "planRank": 23,
+      "planValue": 51.45283581961376
     },
     {
       "id": "mimo-tokenplan-standard-mimo-v2-6-pro-quota-ceiling",
@@ -424,7 +424,7 @@
       "usdPerRun": 173.4346562096033,
       "selected": false,
       "planRank": 25,
-      "planValue": 50.930270691530865
+      "planValue": 50.68958385588083
     },
     {
       "id": "mimo-tokenplan-lite-mimo-v2-6-pro-quota-ceiling",
@@ -442,7 +442,7 @@
       "usdPerRun": 174.4921846011253,
       "selected": false,
       "planRank": 26,
-      "planValue": 50.88399100837432
+      "planValue": 50.643304172724285
     }
   ],
   "scenarios": {
@@ -516,8 +516,8 @@
         "plan": 22
       },
       "overall": {
-        "api": 56.25609205401756,
-        "plan": 52.2720021823335
+        "api": 56.01540521836752,
+        "plan": 52.03131534668346
       }
     },
     {
@@ -527,12 +527,12 @@
       "shown": false,
       "rankingEligible": true,
       "rank": {
-        "api": 13,
+        "api": 12,
         "plan": 64
       },
       "overall": {
-        "api": 48.74904507950309,
-        "plan": 41.82957519901983
+        "api": 48.38801482602803,
+        "plan": 41.468544945544764
       }
     },
     {
@@ -542,12 +542,12 @@
       "shown": false,
       "rankingEligible": true,
       "rank": {
-        "api": 23,
+        "api": 22,
         "plan": 104
       },
       "overall": {
-        "api": 41.95790338460567,
-        "plan": 39.60558148918599
+        "api": 41.50661556776184,
+        "plan": 39.154293672342156
       }
     }
   ]

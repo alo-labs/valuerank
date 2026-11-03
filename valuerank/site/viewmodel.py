@@ -79,7 +79,7 @@ COST_KEY = "costComposite"
 TIERS = ((15, "Budget"), (22, "Near-Budget"), (35, "Mid-Range"), (55, "Premium"))
 LEAF_INFO = {
     "deepswe": {"unit": "% pass@1", "url": BENCHMARK_URLS["DeepSWE pass@1"]},
-    "bugHunt": {"unit": "bugs fixed, planted plus unplanted (O163; no ceiling)", "url": BENCHMARK_URLS["Bug Hunt Bench"]},
+    "bugHunt": {"unit": "% of the board's best planted plus best unplanted bugs fixed (O163, O170)", "url": BENCHMARK_URLS["Bug Hunt Bench"]},
     "frontierCode": {"unit": "AA score (0-1)", "url": BENCHMARK_URLS["FrontierCode 2.0"]},
     "terminalBench": {"unit": "% resolved", "url": BENCHMARK_URLS["Terminal-Bench 4.0"]},
     "gdpval": {"unit": "Elo", "url": BENCHMARK_URLS["GDPval-AA v2.1"]},

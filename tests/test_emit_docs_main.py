@@ -124,23 +124,23 @@ def test_readme_states_what_the_interval_outputs_support(emitted):
     # MiMo-V2.6-Pro is on a subset workload).
     assert "GPT-6 Luna (max); the possible frontier adds none. Not evaluable on this workload: Claude Opus 5.5 (max), MiMo-V2.6-Pro." in readme
     # E192: the bar is a quality level, so the output compares alternatives instead of returning the bar setter
-    # (62.1 is Gemini 4 Argon (high)'s own quality; GPT-6.1 Sol (max) is the confirmed cheapest at or above it).
-    assert ("Cheapest at or above quality 62.1: GPT-6.1 Sol (max) (confirmed). "
+    # (61.4 is Gemini 4 Argon (high)'s own quality since O170's rescale; GPT-6.1 Sol (max) is the confirmed cheapest at or above it).
+    assert ("Cheapest at or above quality 61.4: GPT-6.1 Sol (max) (confirmed). "
             "(Bar comparison: compares 4 configurations that can qualify.)") in readme
-    assert ("Cheapest at or above quality 68.5: GPT-6.1 Sol (max) (confirmed). "
-            "(Bar comparison: compares 3 configurations that can qualify.)") in readme
+    assert ("Cheapest at or above quality 67.5: not unique; possibly GPT-6.1 Sol (max), GPT-6 Astra (max). "
+            "(Bar comparison: compares 2 configurations that can qualify.") in readme
     # E196: the nominal cost weight is printed with cost's share of the variance in value.
-    assert "value is a 25% cost score (nominal weight; 48% of API and 42% of Plan value variance)" in readme
-    assert ("That weight is nominal: on the current panel cost accounts for 48% of the variance in API value and 42% in Plan value, "
+    assert "value is a 25% cost score (nominal weight; 56% of API and 46% of Plan value variance)" in readme
+    assert ("That weight is nominal: on the current panel cost accounts for 56% of the variance in API value and 46% in Plan value, "
             "because cost scores spread more than quality scores") in readme
     assert "Plan basis: interval outputs not evaluated (no row has FullCost and an identified M_W (E61/E67))." in readme
     assert "so the Plan ranking is labelled exploratory" in readme
-    assert "GPT-6.1 Sol (max) leads the Plan ranking at 71.5; GPT-6.1 Sol (max) leads the API ranking at 64.0; GPT-6 Astra (max) leads on quality." in readme
+    assert "GPT-6.1 Sol (max) leads the Plan ranking at 70.3; GPT-6.1 Sol (max) leads the API ranking at 62.8; GPT-6 Astra (max) leads on quality." in readme
     # The quality rank covers every cohort row with quality evidence, a cost-less one included (its quality is shown).
     # E203: the displayed record on the headline scale, beside the interval claims.
-    assert ("- API basis, displayed record (not a claim; E203): cheapest at or above quality 62.1: GPT-6.1 Sol (max) ($1,387.03 per basket run; 5 reach it); "
-            "at or above quality 49.9: DeepSeek V4.1 Flash 1017 (max) ($531.44 per basket run; 7 reach it); "
-            "at or above quality 68.5: GPT-6.1 Sol (max) ($1,387.03 per basket run; 3 reach it).") in readme
+    assert ("- API basis, displayed record (not a claim; E203): cheapest at or above quality 61.4: GPT-6.1 Sol (max) ($1,387.03 per basket run; 5 reach it); "
+            "at or above quality 49.4: DeepSeek V4.1 Flash 1017 (max) ($531.44 per basket run; 7 reach it); "
+            "at or above quality 67.5: GPT-6.1 Sol (max) ($1,387.03 per basket run; 3 reach it).") in readme
     # O143: cheaper same-family efforts on AA's chart that the ranking could not evaluate are named beside the displayed record.
     assert ("- API basis, cheaper same-family efforts on AA's chart that this ranking could not evaluate (O143, E201c): below GPT-6.1 Sol (max): "
             "GPT-6.1 Sol (xhigh), GPT-6.1 Sol (high), GPT-6.1 Sol (medium), GPT-6.1 Sol (low).") in readme
@@ -150,7 +150,7 @@ def test_readme_states_what_the_interval_outputs_support(emitted):
     assert ("Coding and terminal tasks (Coding Agent Index, Terminal-Bench 4.0 (AA Index run), FrontierCode 2.0) make up 53% of the basket's cost (median over 7 configurations "
             "with the full basket; 40% to 84%); AA-Briefcase, GDP.pdf, which have no quality leaf, make up 12%; the Coding Agent Index's SWE-Atlas QnA") in readme
     # Reviewer 79 (E299): the O145 retained rows leave the frontier-only population (9 ranked, 4 retained).
-    assert '- **Frontier-families bar (E199, sensitivity; the frozen bar stays primary):** quality 68.5 over 5 configurations; cheapest at or above it o' in (emitted / "scores.md").read_text()
+    assert '- **Frontier-families bar (E199, sensitivity; the frozen bar stays primary):** quality 67.5 over 5 configurations; cheapest at or above it o' in (emitted / "scores.md").read_text()
     assert "FrontierCode 2.0 and Terminal-Bench-Science once at API rates" in readme
 
 
@@ -199,7 +199,7 @@ def test_scores_md_ranking_matches_scores_json(emitted):
     assert "Plan streams S1, S2, S1 endpoint-heavy, S1M, S1T and S1T recentred run with owner assumptions off (owner-named transfers and O46 provider quota ceilings; E167): Claude Haiku 5.5 (max) on Claude Max 20x, Claude Haiku 5.5 (max) on Claude Max 5x, Claude Haiku 5.5 (max) on Claude Pro, Claude Sonnet 5.5 (max) on Claude Max 20x," in text
     assert "| $1,178 per month: assumed API-equivalent consumption (owner-named transfer) from claude-pro-opus55-semianalysis |" in text
     assert "| GPT-6.1 Sol (max) | ChatGPT Pro 500 $500 · GPT-6.1 Sol (10.772×, measured) | $5,386 per month: measured-workload capacity |" in text
-    assert "| quality 68.5 | GPT-6.1 Sol (max) | supported under all registered role-group kernel checks |" in text
+    assert "| quality 61.4 | GPT-6.1 Sol (max) | supported under all registered role-group kernel checks |" in text
 
 
 def test_scores_md_prints_a_dash_for_a_configuration_without_a_rank(repo_copy, pinned_clock):
@@ -309,9 +309,9 @@ def test_plan_interval_outputs_and_unconfirmed_bars_are_described(repo_copy, pin
     readme = (repo_copy / "README.md").read_text()
     plan_sentence = next(line for line in readme.splitlines() if line.startswith("- Plan basis, main workload"))
     assert "Not evaluable" not in plan_sentence
-    assert "Cheapest at or above quality 62.1: not unique; possibly GPT-6 Luna (max), GPT-6.1 Sol (max)." in plan_sentence
-    assert "Cheapest at or above quality 62.1: unresolved." in plan_sentence
-    assert "Cheapest at or above quality 62.1: GPT-6 Astra (max) (confirmed). (Bar comparison: compares 4 configurations that can qualify.)" in plan_sentence
+    assert "Cheapest at or above quality 61.4: not unique; possibly GPT-6 Luna (max), GPT-6.1 Sol (max)." in plan_sentence
+    assert "Cheapest at or above quality 61.4: unresolved." in plan_sentence
+    assert "Cheapest at or above quality 61.4: GPT-6 Astra (max) (confirmed). (Bar comparison: compares 4 configurations that can qualify.)" in plan_sentence
     # Reviewer 72 (O63): the labelled rows' safety-refusal flags follow the labels.
     assert plan_sentence.endswith("GPT-6.1 Sol (max) (15 blocked and 0 fallback attempts of 870).")
     scores = (repo_copy / "scores.md").read_text()
@@ -416,8 +416,7 @@ def test_calibration_reports_reversals_and_the_official_anchor_extremes(emitted)
     assert "owner-named transfer) at the" not in section and "on API-cost fallback at the" not in section
     # A frozen setter at another effort of the same model is named at its own effort (O91).
     assert "Official Plan anchors are set by GPT-6.1 Sol (low) on ChatGPT Pro 500 (same-model measurement from another effort) at the low end and GPT-6 Astra (max) on ChatGPT Plus (controlled measurement) at the high end." in section
-    assert ("Pairwise reversals: Claude Opus 5.5 (high) and Claude Opus 5.5 (medium); Claude Opus 5.5 (high) and GPT-6.1 Sol (medium); "
-            "Claude Opus 5.5 (medium) and GPT-6.1 Sol (medium). Largest value change: 2.79 points.") in section
+    assert "Pairwise reversals: Claude Opus 5.5 (high) and Claude Opus 5.5 (medium). Largest value change: 2.79 points." in section
     assert "Pairwise reversals: none. Largest value change: 3.30 points." in section
     methodology = (emitted / "methodology.md").read_text()
     assert "labelled conventional CI-range sensitivity (endpoint-conditioned; no tail model) under its interpretation contract (E165" in methodology

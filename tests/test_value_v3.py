@@ -169,25 +169,25 @@ def test_leaf_evidence_uses_exact_configurations_only():
     model = page("a-max", 1.0)["model"]
     tb4 = [{"model": "Opus 5.5 (max)", "agent": "Terminus 2", "resolutionRatePct": 60.0}]
     record = {"matched": True, "effort": "max", "fixedOf105": 52.0, "extras": 7.5, "evaluatedModel": "Opus 5.5 (max)", "harness": "Claude Code", "sampleN": 3}
+    q.bug_hunt_scale([{"fixedOf105": 60.0, "extras": 59.0}])  # O170: the board's maxima, 60 + 59 = 119
     evidence = v.leaf_evidence("claude-opus-5-5", "max", model, tb4, record)
     observations = evidence["observations"]
     assert set(observations) == {leaf.key for leaf in q.LEAVES}
-    # O163: the Bug Hunt leaf is planted plus genuine unplanted bugs fixed, a plain sum with no rescaling or ceiling.
-    assert observations["bugHunt"] == q.Observation(59.5, v.BUG_HUNT_HALF_WIDTH, math.inf)
+    # O170: planted plus genuine unplanted bugs fixed as a percentage of the board's maxima.
+    assert observations["bugHunt"] == q.Observation(50.0, 100 * v.BUG_HUNT_HALF_WIDTH / 119.0)
     bug = evidence["provenance"]["bugHunt"]
     assert bug["planted"] == 52.0 and bug["unplanted"] == 7.5 and bug["harness"] == "Claude Code" and bug["runs"] == 3
     assert bug["evidence"] == {"artifact": "data/bug_hunt.json", "locator": "models[modelId=claude-opus-5-5].fixedOf105 + models[modelId=claude-opus-5-5].extras",
                                "publishedValue": 59.5}
-    # A total above 100 (or above the 105 planted bugs) is inside the leaf's domain and is not clipped.
-    beyond = v.leaf_evidence("claude-opus-5-5", "max", model, tb4, {**record, "fixedOf105": 100.0, "extras": 12.0})
-    assert beyond["observations"]["bugHunt"].z == 112.0 and beyond["observations"]["bugHunt"].high == 112.05
-    assert next(item for item in beyond["clipAudit"] if item["leaf"] == "bugHunt")["clippingAmount"] == 0.0
+    # The board leader on both counts scores 100.
+    leader = v.leaf_evidence("claude-opus-5-5", "max", model, tb4, {**record, "fixedOf105": 60.0, "extras": 59.0})
+    assert leader["observations"]["bugHunt"].z == pytest.approx(100.0)
     with pytest.raises(ValueError, match="claude-opus-5-5: the Bug Hunt record carries no unplanted-fix count, which the O163 leaf needs"):
         v.leaf_evidence("claude-opus-5-5", "max", model, tb4, {key: value for key, value in record.items() if key != "extras"})
     with pytest.raises(ValueError, match="carries no unplanted-fix count"):
         v.leaf_evidence("claude-opus-5-5", "max", model, tb4, {**record, "extras": None})
-    with pytest.raises(ValueError, match="exceeds the registered missing-evidence bound 210.0"):
-        v.leaf_evidence("claude-opus-5-5", "max", model, tb4, {**record, "fixedOf105": 105.0, "extras": 106.0})
+    with pytest.raises(ValueError, match=r"exceeds the board's planted plus unplanted maxima 119.0 \(O170\)"):
+        v.leaf_evidence("claude-opus-5-5", "max", model, tb4, {**record, "fixedOf105": 61.0, "extras": 59.0})
     # O37: AA's own Terminal-Bench 4.0 run is the leaf; tbench.ai fills a gap only.
     assert observations["terminalBench"].z == 50.0
     assert observations["omniscience"].z == pytest.approx(65.0)
@@ -679,7 +679,7 @@ def write_world(root: Path) -> Path:
         "aa_frontier_capture.json": {"captured_at": "2026-10-18T00:00:00Z", "points": []},
         # The roster is a bare JSON list; the Bug Hunt scoreboard is the O31 roster-check input.
         "aa_mapping.json": [{"id": item["id"], "displayName": item["name"]} for item in CONFIGURATIONS],
-        "bug_hunt_scoreboard.json": {"capturedAt": "2026-10-21T06:30:00Z", "sourceUpdated": "2026-10-17", "rows": [{"model": "A (max effort)", "fixedOf105": 10.0}]},
+        "bug_hunt_scoreboard.json": {"capturedAt": "2026-10-21T06:30:00Z", "sourceUpdated": "2026-10-17", "rows": [{"model": "A (max effort)", "fixedOf105": 52.0, "extras": 0.0}]},
         "aa/aa_previous_capture.json": {"capturedAt": "2026-10-12T00:00:00Z", "sha256": "0" * 64, "pages": []},
         "source_rereads.json": {"recordedOn": "2026-10-19", "rereads": []},
         "plan_reports.json": {"recordedOn": "2026-10-19", "reports": []},
@@ -1110,7 +1110,7 @@ def test_plan_anchors_freeze_over_measured_plan_rows_only():
     assert v.plan_measured({"plan": {"fallback": None, "grade": "controlled"}}) and v.plan_measured({"plan": {"fallback": None, "grade": "reports"}})
     assert not v.plan_measured({"plan": {"fallback": None, "grade": "assumption"}}) and not v.plan_measured({"plan": {"fallback": "api", "grade": None}})
     result, frozen = scored()
-    assert frozen["anchorVersion"] == f"v3-2026-10-19-a{v.ANCHOR_POLICY['version']}" == "v3-2026-10-19-a3"
+    assert frozen["anchorVersion"] == f"v3-2026-10-19-a{v.ANCHOR_POLICY['version']}" == "v3-2026-10-19-a4"
     # A non-main workload whose references are b (measured) and c (API-cost fallback): one measured Plan reference.
     rows = {row["id"]: row for row in result["rows"]}
     for row_id in ("b", "c"):
@@ -1532,7 +1532,7 @@ def test_displayed_cheapest_reads_the_headline_scale_with_ties_listed():
     assert low["cheapest"] and low["qualifierN"] >= 1 and low["costUsd"] is not None
     # O143: the cheaper same-family efforts a bar's cheapest row has that the ranking could not evaluate, keyed by that row.
     assert set(low["uncheckedCheaperSiblings"]) <= {row_id.split("@")[0] for row_id in low["cheapest"]}
-    assert high == {"bar": "high", "level": 101.0, "qualifierN": 0, "costUsd": None, "cheapest": [], "uncheckedCheaperSiblings": {}, "uncheckedCheaperSiblingsBasis": v.SIBLING_BASIS}
+    assert high == {"bar": "high", "level": 101.0, "qualifierN": 0, "costUsd": None, "cheapest": [], "uncheckedCheaperSiblings": {}, "uncheckedCheaperSiblingsBasis": v.SIBLING_BASIS, "noise": None}
 
 
 def test_bar_currency_flags_a_headline_bar_outside_the_current_interquartile_range():
@@ -1635,8 +1635,8 @@ def test_observed_range_bars_bound_missing_leaves_by_the_cohort_range():
     ranges = v.leaf_ranges(result)
     assert set(ranges) == {leaf.key for leaf in q.LEAVES} and all(low <= high for low, high in ranges.values())
     unobserved = v.leaf_ranges({"rows": []})
-    # E302: an unobserved Bug Hunt leaf keeps its missing-evidence domain, [0, 210].
-    assert unobserved["bugHunt"] == (0.0, 210.0) and {value for key, value in unobserved.items() if key != "bugHunt"} == {(0.0, 100.0)}
+    # O170: an unobserved Bug Hunt leaf takes the 0-100 domain like every other leaf.
+    assert set(unobserved.values()) == {(0.0, 100.0)}
     for row in result["rows"]:
         band = v.band_summary(row["summary"], ranges)
         assert row["summary"].lower - 1e-9 <= band.lower <= band.upper <= row["summary"].upper + 1e-9
@@ -1827,7 +1827,7 @@ def test_sampling_noise_per_leaf_and_rank_separability():
 
 def test_bug_hunt_sampling_noise_is_a_binomial_planted_part_plus_a_poisson_unplanted_count():
     """O163: the Bug Hunt leaf is a count, so its task-sampling SD is the binomial over the 105 planted bugs (Jeffreys
-    plug-in) plus the unplanted fixes read as a Poisson count (floored at 0.5); it draws from a normal with no ceiling."""
+    plug-in) plus the unplanted fixes read as a Poisson count (floored at 0.5); O170 rescales it with the leaf, drawn inside 0-100."""
 
     observation = q.bug_hunt_z(59.5, v.BUG_HUNT_HALF_WIDTH)
     p = 52.5 / 106.0
@@ -1844,23 +1844,24 @@ def test_bug_hunt_sampling_noise_is_a_binomial_planted_part_plus_a_poisson_unpla
     assert v.sampling_sd("bugHunt", q.bug_hunt_z(120.0), {"planted": 106.0, "unplanted": 14.0}) == pytest.approx(math.sqrt(105 * top * (1 - top) + 14.0))
     assert v.sampling_sd("bugHunt", observation, {"planted": 52.0, "unplanted": 7.5, "stderr": 2.0}) == 2.0
     # A count without a planted/unplanted split (another party's fill) is one Poisson count, floored at 0.5.
-    assert v.sampling_sd("bugHunt", q.bug_hunt_z(110.0), {}) == pytest.approx(math.sqrt(110.0))
+    assert v.sampling_sd("bugHunt", q.bug_hunt_z(90.0), {}) == pytest.approx(math.sqrt(90.0))
     assert v.sampling_sd("bugHunt", q.bug_hunt_z(0.0), {}) == pytest.approx(math.sqrt(0.5))
     assert not v.binomial_leaf("bugHunt", {"planted": 52.0}) and v.binomial_leaf("frontierCode", {})
     kernel = v.sampling_kernel("bugHunt", observation, {"planted": 52.0, "unplanted": 7.5})
-    assert kernel.family == "normal" and kernel.params[0] == 59.5 and kernel.params[2:] == (0.0, math.inf)
+    assert kernel.family == "normal" and kernel.params[0] == 59.5 and kernel.params[2:] == (0.0, 100.0)  # O170: 0-100 like every leaf
     assert v.sampling_kernel("gdpval", q.Observation(55.0), {}).params[2:] == (0.0, 100.0)
     # The S1T stream carries a's planted and unplanted counts from its evidence into the kernel.
-    record = {"modelId": "a", "matched": True, "effort": "max", "fixedOf105": 100.0, "extras": 10.0, "sampleN": 3}
+    record = {"modelId": "a", "matched": True, "effort": "max", "fixedOf105": 60.0, "extras": 30.0, "sampleN": 3}
     result, _ = scored(bugHunt={"models": [record]})
     panel = {item.row: item for item in v.scenario_panel(result, "api", sampling=True)}
     drawn = panel["a"].leaves["bugHunt"]
-    assert drawn.params[0] == 110.0 and drawn.params[3] == math.inf
-    high = 100.5 / 106.0
-    assert drawn.params[1] == pytest.approx(math.sqrt(105 * high * (1 - high) + 10.0))
-    # E19 band: a Bug Hunt total above 100 is stressed on both sides, with no 0-100 ceiling.
+    # O170: on the fixture board (maxima summing to 100) the count reads as its percentage, drawn inside 0-100.
+    assert drawn.params[0] == 90.0 and drawn.params[3] == 100.0
+    high = 60.5 / 106.0
+    assert drawn.params[1] == pytest.approx(math.sqrt(105 * high * (1 - high) + 30.0))
+    # E19 band: the Bug Hunt leaf is stressed on both sides inside its 0-100 domain.
     stressed = {item.row: item for item in v.scenario_panel(result, "api", harness=6.0)}["a"].leaves["bugHunt"]
-    assert stressed.params == pytest.approx((107.0, 113.0))
+    assert stressed.params == pytest.approx((87.0, 93.0))
 
 
 def test_a_subset_workload_row_is_never_tested_or_banded_against_the_main_workload():
@@ -2788,3 +2789,27 @@ def test_o169_a_frozen_component_that_lost_coverage_stays_until_the_next_refreez
     output = v.score(result, frozen)
     manifest = {item["rule"]: item for item in output["manifest"]}
     assert manifest["frozen admission (O169)"]["status"] == "vacuous" and output["frozenBelowThreshold"] == []
+
+
+def test_o171_noise_companion_reads_each_answer_against_benchmark_noise():
+    """O171: separated, contested or rounding-stable only, at correlation 0 with the bar setter's SD."""
+
+    rows = [("cheap", 1.0, 52.0, 1.0), ("answer", 2.0, 60.0, 1.0), ("dear", 3.0, 70.0, 1.0)]
+    clear = v.noise_companion("answer", 50.0, 1.0, [rows[1], rows[2], ("cheap", 1.0, 40.0, 1.0)])
+    assert clear["status"] == v.NOISE_SEPARATED and clear["contestedBy"] == [] and clear["delta"] == pytest.approx(10 / math.sqrt(2))
+    contested = v.noise_companion("answer", 50.0, 1.0, rows)
+    assert contested["status"] == v.NOISE_CONTESTED and contested["contestedBy"] == ["cheap"]
+    near = v.noise_companion("answer", 59.0, 1.0, rows)
+    assert near["status"] == v.NOISE_ROUNDING_ONLY
+    assert v.noise_companion(None, 50.0, 1.0, rows) is None
+    assert v.noise_companion("answer", 50.0, 0.0, [("answer", 2.0, 60.0, 0.0), ("cheap", 1.0, 49.0, 0.0)])["status"] == v.NOISE_SEPARATED
+    assert v.noise_companion("answer", 50.0, 0.0, [("answer", 2.0, 60.0, 0.0), ("cheap", 1.0, 50.0, 0.0)])["status"] == v.NOISE_CONTESTED
+
+
+def test_o172_each_leading_ranking_carries_the_common_leaf_answer():
+    bars = lambda name: {"api": {"bars": [{"bar": "bar:median-quality", "level": 50.0, "cheapest": [name], "costUsd": 1.0, "qualifierN": 2}]}, "label": "x"}
+    sections = {"max": {"displayedCheapest": bars("m")}, "aicd": {"displayedCheapest": bars("a")}, "common": {"displayedCheapest": bars("low")}}
+    answers = v.common_answers(sections)
+    assert set(answers) == {"max", "aicd"} and answers["max"]["ranking"] == "common"
+    assert answers["max"]["bases"]["api"] == [{"bar": "bar:median-quality", "level": 50.0, "cheapest": ["low"], "costUsd": 1.0}]
+    assert v.common_answers({"max": sections["max"]}) == {}

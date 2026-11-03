@@ -30,11 +30,12 @@ REQUIRED_LEAF_WEIGHT = 20.0  # leaves at or above this nominal weight must be ob
 GDPVAL_ELO_LOW = 500.0
 GDPVAL_ELO_SPAN = 2000.0
 BUG_HUNT_BUGS = 105.0
-# E302 (reviewer 80): O163's Bug Hunt count has no ceiling, so a missing Bug Hunt leaf is bounded by a registered
-# convention: the 105 planted bugs plus an equal allowance for unplanted fixes. The build stops on an observed total above
-# it (value_v3.leaf_evidence), so the bound is never below an observation.
-BUG_HUNT_MISSING_UPPER = 2.0 * BUG_HUNT_BUGS
-MISSING_UPPER = {"bugHunt": BUG_HUNT_MISSING_UPPER}
+# O170 (2026-11-03, on reviewer 94, amending O163): the Bug Hunt leaf is planted plus genuine unplanted bugs fixed as a
+# percentage of the live board's largest planted count plus its largest unplanted count, both taken over every run on the
+# whole board and recomputed at every release, so the leaf lies on 0-100 like every other leaf. bug_hunt_scale sets the
+# denominator from the board; the default before it is set is the planted count alone (fixtures).
+BUG_HUNT_SCALE = {"maxPlanted": BUG_HUNT_BUGS, "maxUnplanted": 0.0, "scale": BUG_HUNT_BUGS}
+MISSING_UPPER: dict = {}
 AICD_POINTS = 60.0  # AI Coding Daily's Laravel quality, React-TS quality and edge-case columns (20 points each)
 
 
@@ -140,7 +141,7 @@ class Observation:
 
     z: float
     half_width: float = 0.0
-    upper: float = 100.0  # O163: the Bug Hunt leaf is a count of bugs fixed with no ceiling
+    upper: float = 100.0  # every leaf, Bug Hunt included since O170, lies on 0-100
 
     @property
     def low(self) -> float:
@@ -191,11 +192,22 @@ def aicd_z(points: float) -> Observation:
     return Observation(clip(100.0 * points / AICD_POINTS))
 
 
-def bug_hunt_z(bugs_found: float, half_width_bugs: float = 0.0) -> Observation:
-    """Owner decision O163 (2026-11-01): the Bug Hunt leaf is the plain sum of the planted bugs a model fixed and the
-    genuine unplanted bugs it fixed, used as the leaf's score without rescaling (so it can exceed 100)."""
+def bug_hunt_scale(rows: list[dict]) -> dict:
+    """O170: the live board's largest planted and largest unplanted counts over every run, and their sum, the leaf's
+    denominator; it becomes the release's scale."""
 
-    return Observation(max(0.0, bugs_found), half_width_bugs, math.inf)
+    planted = max(row["fixedOf105"] for row in rows)
+    unplanted = max(row.get("extras") or 0.0 for row in rows)
+    BUG_HUNT_SCALE.update({"maxPlanted": planted, "maxUnplanted": unplanted, "scale": planted + unplanted})
+    return dict(BUG_HUNT_SCALE)
+
+
+def bug_hunt_z(bugs_found: float, half_width_bugs: float = 0.0) -> Observation:
+    """O170: planted plus genuine unplanted bugs fixed as a percentage of the board's largest planted plus largest
+    unplanted counts (O163's count, rescaled to 0-100)."""
+
+    scale = BUG_HUNT_SCALE["scale"]
+    return Observation(clip(100.0 * bugs_found / scale), 100.0 * half_width_bugs / scale)
 
 
 def omniscience_index_z(index: float) -> Observation:
@@ -223,7 +235,7 @@ class QualitySummary:
     coverage: float  # observed share of total quality weight, 0-1
     displayed: float | None  # observed-only quality, 0-100
     lower: float  # formal bound with missing leaves at 0 and observed leaves at their low ends
-    upper: float  # formal bound with missing leaves at their missing-evidence upper end (100; Bug Hunt 210, E302) and observed leaves at their high ends
+    upper: float  # formal bound with missing leaves at 100 and observed leaves at their high ends
     provisional: bool
     provisional_reasons: tuple
     swe_leaves: int
@@ -241,7 +253,7 @@ def summarize(observations: dict) -> QualitySummary:
     weighted = sum(leaf.weight * observations[leaf.key].z for leaf in observed)
     displayed = weighted / (100.0 * coverage) if coverage else None
     lower = sum(leaf.weight * observations[leaf.key].low for leaf in observed) / 100.0
-    # Reviewer 80 (E302): a missing leaf is bounded by its missing-evidence upper end, 100 except for O163's Bug Hunt count.
+    # A missing leaf is bounded by 100 (O170 put Bug Hunt back on 0-100, retiring E302's 210 bound).
     upper = (sum(leaf.weight * observations[leaf.key].high for leaf in observed)
              + sum(leaf.weight * MISSING_UPPER.get(leaf.key, 100.0) for leaf in LEAVES if leaf.key not in observations)) / 100.0
     swe = [leaf for leaf in observed if leaf.group == "swe"]
@@ -280,7 +292,7 @@ def composite(values: dict) -> float:
 
 # E110: each leaf's documented raw domain (unit, low, high); a value outside it is a data-validation error.
 LEAF_DOMAINS = {
-    "bugHunt": ("bugs fixed, planted plus unplanted (O163)", 0.0, math.inf),
+    "bugHunt": ("bugs fixed, planted plus unplanted (O163, O170)", 0.0, math.inf),
     "frontierCode": ("fraction", 0.0, 1.0),
     "terminalBench": ("percent", 0.0, 100.0),
     "gdpval": ("Elo", -math.inf, math.inf),
@@ -305,7 +317,7 @@ def unclipped_z(key: str, raw) -> float:
     if key == "gdpval":
         return 100.0 * (raw - GDPVAL_ELO_LOW) / GDPVAL_ELO_SPAN
     if key == "bugHunt":
-        return raw
+        return 100.0 * raw / BUG_HUNT_SCALE["scale"]
     if key == "aiCodingDaily":
         return 100.0 * raw / AICD_POINTS
     return raw if LEAF_DOMAINS[key][0] == "percent" else 100.0 * raw
@@ -317,7 +329,7 @@ def clip_audit(key: str, raw) -> dict:
     unit, low, high = LEAF_DOMAINS[key]
     valid = isinstance(raw, (int, float)) and not isinstance(raw, bool) and math.isfinite(raw) and low <= raw <= high
     z = unclipped_z(key, raw) if valid else None
-    ceiling = math.inf if key == "bugHunt" else 100.0  # O163: a count has no ceiling
+    ceiling = 100.0
     position = None if z is None else "below" if z < 0.0 else "above" if z > ceiling else "inside"
     if not valid:
         action = "reject: outside the metric's documented domain"

@@ -301,16 +301,16 @@
         "plan": 1
       },
       "overall": {
-        "api": 64.00591258737676,
-        "plan": 71.51180799129224
+        "api": 62.8068545334111,
+        "plan": 70.31274993732659
       },
-      "quality": 69.09798203247033,
-      "qualityRank": 2,
+      "quality": 67.49923796051613,
+      "qualityRank": 3,
       "dims": {
         "costComposite": null,
         "frontierCode": 40.6262878787879,
         "terminalBench": 56.0606060606061,
-        "bugHunt": 109.6,
+        "bugHunt": 89.61569910057237,
         "vibeCode": 88.931,
         "codeMigration": 77.324,
         "livebench2Overall": 84.07,
@@ -407,7 +407,146 @@
         ],
         "plan": [
           1,
-          4
+          10
+        ]
+      },
+      "bandExcludesTransfer": false
+    },
+    {
+      "slug": "claude-opus-5-5",
+      "name": "Claude Opus 5.5 (max)",
+      "shortName": "Opus 5.5 (max)",
+      "developer": "Anthropic",
+      "aaUrl": "https://artificialanalysis.ai/models/claude-opus-5-5",
+      "aaVariant": "max",
+      "rankingEligible": true,
+      "exclusionReasons": [],
+      "intelligenceIndex": {
+        "value": 58.4060336078904,
+        "status": "measured"
+      },
+      "speed": 96.6267211164451,
+      "aaFrontierTier": "near",
+      "aaFrontierConfiguration": "Claude Opus 5.5 (max with fallback)",
+      "aaFrontierIntelligenceGap": 1,
+      "aaFrontierFootnote": null,
+      "rank": {
+        "api": 6,
+        "plan": 5
+      },
+      "overall": {
+        "api": 53.82395604392801,
+        "plan": 67.95360314931419
+      },
+      "quality": 67.54148293695758,
+      "qualityRank": 2,
+      "dims": {
+        "costComposite": null,
+        "frontierCode": 46.4359595959596,
+        "terminalBench": 59.5959595959596,
+        "bugHunt": 41.455437448896156,
+        "vibeCode": 90.294,
+        "codeMigration": 81.012,
+        "livebench2Overall": 85.14,
+        "gdpval": 68.3135,
+        "automationBench": 69.5386812863607,
+        "omniscience": 74.06666666666666,
+        "lcr": 84.6666666666667,
+        "hle": 67.9,
+        "tbScience": 59.047619047619,
+        "critpt": 61.0
+      },
+      "costDims": {
+        "api": 12.671375364839287,
+        "plan": 69.18996378638403
+      },
+      "raw": {
+        "frontierCode": 0.464359595959596,
+        "terminalBench": 59.5959595959596,
+        "bugHunt": 50.7,
+        "vibeCode": 90.294,
+        "codeMigration": 81.012,
+        "livebench2Overall": 85.14,
+        "gdpval": 1866.27,
+        "automationBench": 0.6953868128636069,
+        "omniscience": 48.13333333333333,
+        "lcr": 0.846666666666667,
+        "hle": 0.679,
+        "tbScience": 0.59047619047619,
+        "critpt": 0.61
+      },
+      "coverage": {
+        "pct": 100.0,
+        "costAvailable": true,
+        "missing": [],
+        "provisional": false,
+        "provisionalReasons": []
+      },
+      "cost": {
+        "apiUsd": 10360.959965732674,
+        "planUsd": 175.90763948612351,
+        "fallback": null,
+        "route": {
+          "id": "claude-pro-opus55-semianalysis",
+          "planLabel": "Claude Pro $20 · Opus 5.5",
+          "planFeeUsd": 20,
+          "valueMultiple": 58.9,
+          "grade": "measured",
+          "assumptionKind": null,
+          "evidenceLabel": "Controlled account measurement / workload projection",
+          "sourceModel": "Opus 5.5",
+          "sourceUrl": "https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x",
+          "sourceDate": "2026-10-06"
+        },
+        "subset": false,
+        "partialComponents": [
+          "aa-briefcase",
+          "gdp-pdf",
+          "automationbench-aa",
+          "terminalbench-4-0",
+          "frontiercode-2-0",
+          "terminal-bench-science"
+        ],
+        "workload": "aad36e77d6e17386",
+        "planFlags": [
+          "workload-unmatched",
+          "possibly-superseded",
+          "valuation basis unverified"
+        ]
+      },
+      "grade": "measured",
+      "pareto": {
+        "api": false,
+        "plan": true
+      },
+      "frontierStatus": {
+        "api": null,
+        "plan": null
+      },
+      "scenario": {
+        "api": {
+          "top1": 0.0,
+          "top3": 0.0,
+          "frontier": 0.0
+        },
+        "plan": {
+          "top1": 0.0,
+          "top3": 0.0,
+          "frontier": 1.0
+        }
+      },
+      "flags": [
+        "Partial cost component: AA marks tasks missing or declined"
+      ],
+      "tier": "Mid-Range",
+      "band": {
+        "api": [
+          5,
+          7
+        ],
+        "plan": [
+          1,
+          10
         ]
       },
       "bandExcludesTransfer": false
@@ -431,20 +570,20 @@
       "aaFrontierIntelligenceGap": 3,
       "aaFrontierFootnote": null,
       "rank": {
-        "api": 6,
-        "plan": 5
+        "api": 7,
+        "plan": 7
       },
       "overall": {
-        "api": 54.50796333807043,
-        "plan": 68.59466611424008
+        "api": 53.65899522686846,
+        "plan": 67.74569800303811
       },
-      "quality": 68.53420586556773,
-      "qualityRank": 3,
+      "quality": 67.4022483839651,
+      "qualityRank": 4,
       "dims": {
         "costComposite": null,
         "frontierCode": 41.6993434343434,
         "terminalBench": 63.636363636363605,
-        "bugHunt": 77.6,
+        "bugHunt": 63.45053147996729,
         "vibeCode": 92.392,
         "codeMigration": 86.875,
         "livebench2Overall": 80.04,
@@ -536,150 +675,11 @@
           7
         ],
         "plan": [
-          5,
+          1,
           10
         ]
       },
       "bandExcludesTransfer": true
-    },
-    {
-      "slug": "claude-opus-5-5",
-      "name": "Claude Opus 5.5 (max)",
-      "shortName": "Opus 5.5 (max)",
-      "developer": "Anthropic",
-      "aaUrl": "https://artificialanalysis.ai/models/claude-opus-5-5",
-      "aaVariant": "max",
-      "rankingEligible": true,
-      "exclusionReasons": [],
-      "intelligenceIndex": {
-        "value": 58.4060336078904,
-        "status": "measured"
-      },
-      "speed": 96.6267211164451,
-      "aaFrontierTier": "near",
-      "aaFrontierConfiguration": "Claude Opus 5.5 (max with fallback)",
-      "aaFrontierIntelligenceGap": 1,
-      "aaFrontierFootnote": null,
-      "rank": {
-        "api": 7,
-        "plan": 7
-      },
-      "overall": {
-        "api": 54.37862979699424,
-        "plan": 68.50827690238043
-      },
-      "quality": 68.28104794104588,
-      "qualityRank": 4,
-      "dims": {
-        "costComposite": null,
-        "frontierCode": 46.4359595959596,
-        "terminalBench": 59.5959595959596,
-        "bugHunt": 50.7,
-        "vibeCode": 90.294,
-        "codeMigration": 81.012,
-        "livebench2Overall": 85.14,
-        "gdpval": 68.3135,
-        "automationBench": 69.5386812863607,
-        "omniscience": 74.06666666666666,
-        "lcr": 84.6666666666667,
-        "hle": 67.9,
-        "tbScience": 59.047619047619,
-        "critpt": 61.0
-      },
-      "costDims": {
-        "api": 12.671375364839287,
-        "plan": 69.18996378638403
-      },
-      "raw": {
-        "frontierCode": 0.464359595959596,
-        "terminalBench": 59.5959595959596,
-        "bugHunt": 50.7,
-        "vibeCode": 90.294,
-        "codeMigration": 81.012,
-        "livebench2Overall": 85.14,
-        "gdpval": 1866.27,
-        "automationBench": 0.6953868128636069,
-        "omniscience": 48.13333333333333,
-        "lcr": 0.846666666666667,
-        "hle": 0.679,
-        "tbScience": 0.59047619047619,
-        "critpt": 0.61
-      },
-      "coverage": {
-        "pct": 100.0,
-        "costAvailable": true,
-        "missing": [],
-        "provisional": false,
-        "provisionalReasons": []
-      },
-      "cost": {
-        "apiUsd": 10360.959965732674,
-        "planUsd": 175.90763948612351,
-        "fallback": null,
-        "route": {
-          "id": "claude-pro-opus55-semianalysis",
-          "planLabel": "Claude Pro $20 · Opus 5.5",
-          "planFeeUsd": 20,
-          "valueMultiple": 58.9,
-          "grade": "measured",
-          "assumptionKind": null,
-          "evidenceLabel": "Controlled account measurement / workload projection",
-          "sourceModel": "Opus 5.5",
-          "sourceUrl": "https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x",
-          "sourceDate": "2026-10-06"
-        },
-        "subset": false,
-        "partialComponents": [
-          "aa-briefcase",
-          "gdp-pdf",
-          "automationbench-aa",
-          "terminalbench-4-0",
-          "frontiercode-2-0",
-          "terminal-bench-science"
-        ],
-        "workload": "aad36e77d6e17386",
-        "planFlags": [
-          "workload-unmatched",
-          "possibly-superseded",
-          "valuation basis unverified"
-        ]
-      },
-      "grade": "measured",
-      "pareto": {
-        "api": false,
-        "plan": false
-      },
-      "frontierStatus": {
-        "api": null,
-        "plan": null
-      },
-      "scenario": {
-        "api": {
-          "top1": 0.0,
-          "top3": 0.0,
-          "frontier": 0.0
-        },
-        "plan": {
-          "top1": 0.0,
-          "top3": 0.0,
-          "frontier": 0.0
-        }
-      },
-      "flags": [
-        "Partial cost component: AA marks tasks missing or declined"
-      ],
-      "tier": "Mid-Range",
-      "band": {
-        "api": [
-          5,
-          7
-        ],
-        "plan": [
-          5,
-          10
-        ]
-      },
-      "bandExcludesTransfer": false
     },
     {
       "slug": "claude-haiku-5-5-max",
@@ -704,16 +704,16 @@
         "plan": 11
       },
       "overall": {
-        "api": 50.86151794172618,
-        "plan": 62.41440890011029
+        "api": 50.52783846502953,
+        "plan": 62.08072942341364
       },
-      "quality": 49.88587853348038,
+      "quality": 49.44097256455152,
       "qualityRank": 7,
       "dims": {
         "costComposite": null,
         "frontierCode": 34.9325505050505,
         "terminalBench": 32.8282828282828,
-        "bugHunt": 30.5,
+        "bugHunt": 24.938675388389207,
         "vibeCode": 90.444,
         "codeMigration": 52.36,
         "livebench2Overall": 69.85,
@@ -835,16 +835,16 @@
         "plan": 14
       },
       "overall": {
-        "api": 57.35004455928082,
-        "plan": 62.06575091566642
+        "api": 56.256013488144276,
+        "plan": 60.97171984452988
       },
-      "quality": 69.73317339254747,
+      "quality": 68.27446529769874,
       "qualityRank": 1,
       "dims": {
         "costComposite": null,
         "frontierCode": 42.374797979798004,
         "terminalBench": 59.09090909090911,
-        "bugHunt": 100.0,
+        "bugHunt": 81.76614881439085,
         "vibeCode": 89.594,
         "codeMigration": 80.579,
         "livebench2Overall": 85.64,
@@ -968,16 +968,16 @@
         "plan": 17
       },
       "overall": {
-        "api": 55.65256554259544,
-        "plan": 58.75987448149008
+        "api": 55.20401280342945,
+        "plan": 58.3113217423241
       },
-      "quality": 45.013165975320106,
+      "quality": 44.41509565643213,
       "qualityRank": 9,
       "dims": {
         "costComposite": null,
         "frontierCode": 25.1747727272727,
         "terminalBench": 12.6262626262626,
-        "bugHunt": 41.0,
+        "bugHunt": 33.52412101390025,
         "vibeCode": 81.649,
         "codeMigration": 46.669,
         "livebench2Overall": 64.59,
@@ -1099,16 +1099,16 @@
         "plan": 22
       },
       "overall": {
-        "api": 56.25609205401756,
-        "plan": 52.2720021823335
+        "api": 56.01540521836752,
+        "plan": 52.03131534668346
       },
-      "quality": 48.4670746447178,
+      "quality": 48.14615886385108,
       "qualityRank": 8,
       "dims": {
         "costComposite": null,
         "frontierCode": 23.9701262626263,
         "terminalBench": 34.8484848484849,
-        "bugHunt": 22,
+        "bugHunt": 17.988552739165986,
         "vibeCode": 85.223,
         "codeMigration": 48.786,
         "livebench2Overall": 68.48,
@@ -1213,19 +1213,19 @@
       "aaFrontierFootnote": null,
       "rank": {
         "api": 2,
-        "plan": 23
+        "plan": 24
       },
       "overall": {
-        "api": 59.536457740492956,
-        "plan": 51.878381218030434
+        "api": 58.58793280181757,
+        "plan": 50.92985627935505
       },
-      "quality": 57.40456754388143,
+      "quality": 56.13986762564758,
       "qualityRank": 6,
       "dims": {
         "costComposite": null,
         "frontierCode": 28.4711616161616,
         "terminalBench": 33.8383838383838,
-        "bugHunt": 86.7,
+        "bugHunt": 70.89125102207686,
         "vibeCode": 87.73,
         "codeMigration": 67.524,
         "livebench2Overall": 72.87,
@@ -1308,8 +1308,8 @@
           3
         ],
         "plan": [
-          23,
-          23
+          24,
+          24
         ]
       },
       "bandExcludesTransfer": false
@@ -1337,16 +1337,16 @@
         "plan": 27
       },
       "overall": {
-        "api": 50.43827140748742,
-        "plan": 46.57943578301748
+        "api": 49.913136493341874,
+        "plan": 46.054300868871934
       },
-      "quality": 62.10591437735664,
+      "quality": 61.40573449182924,
       "qualityRank": 5,
       "dims": {
         "costComposite": null,
         "frontierCode": 25.7076262626263,
         "terminalBench": 57.07070707070711,
-        "bugHunt": 48.0,
+        "bugHunt": 39.247751430907606,
         "vibeCode": 91.906,
         "codeMigration": 70.796,
         "livebench2Overall": 79.3,
@@ -4736,16 +4736,16 @@
         "plan": 1
       },
       "overall": {
-        "api": 64.00591258737676,
-        "plan": 71.51180799129224
+        "api": 62.8068545334111,
+        "plan": 70.31274993732659
       },
-      "quality": 69.09798203247033,
-      "qualityRank": 2,
+      "quality": 67.49923796051613,
+      "qualityRank": 3,
       "dims": {
         "costComposite": null,
         "frontierCode": 40.6262878787879,
         "terminalBench": 56.0606060606061,
-        "bugHunt": 109.6,
+        "bugHunt": 89.61569910057237,
         "vibeCode": 88.931,
         "codeMigration": 77.324,
         "livebench2Overall": 84.07,
@@ -4842,7 +4842,7 @@
         ],
         "plan": [
           1,
-          4
+          10
         ]
       },
       "bandExcludesTransfer": false,
@@ -4877,16 +4877,16 @@
         "plan": 2
       },
       "overall": {
-        "api": 64.00591258737676,
-        "plan": 71.35222851063025
+        "api": 62.8068545334111,
+        "plan": 70.15317045666461
       },
-      "quality": 69.09798203247033,
-      "qualityRank": 2,
+      "quality": 67.49923796051613,
+      "qualityRank": 3,
       "dims": {
         "costComposite": null,
         "frontierCode": 40.6262878787879,
         "terminalBench": 56.0606060606061,
-        "bugHunt": 109.6,
+        "bugHunt": 89.61569910057237,
         "vibeCode": 88.931,
         "codeMigration": 77.324,
         "livebench2Overall": 84.07,
@@ -4982,7 +4982,7 @@
         ],
         "plan": [
           1,
-          4
+          10
         ]
       },
       "bandExcludesTransfer": false,
@@ -5017,16 +5017,16 @@
         "plan": 2
       },
       "overall": {
-        "api": 64.00591258737676,
-        "plan": 71.35222851063025
+        "api": 62.8068545334111,
+        "plan": 70.15317045666461
       },
-      "quality": 69.09798203247033,
-      "qualityRank": 2,
+      "quality": 67.49923796051613,
+      "qualityRank": 3,
       "dims": {
         "costComposite": null,
         "frontierCode": 40.6262878787879,
         "terminalBench": 56.0606060606061,
-        "bugHunt": 109.6,
+        "bugHunt": 89.61569910057237,
         "vibeCode": 88.931,
         "codeMigration": 77.324,
         "livebench2Overall": 84.07,
@@ -5122,7 +5122,7 @@
         ],
         "plan": [
           1,
-          4
+          10
         ]
       },
       "bandExcludesTransfer": false,
@@ -5157,16 +5157,16 @@
         "plan": 4
       },
       "overall": {
-        "api": 64.00591258737676,
-        "plan": 71.25721468531049
+        "api": 62.8068545334111,
+        "plan": 70.05815663134483
       },
-      "quality": 69.09798203247033,
-      "qualityRank": 2,
+      "quality": 67.49923796051613,
+      "qualityRank": 3,
       "dims": {
         "costComposite": null,
         "frontierCode": 40.6262878787879,
         "terminalBench": 56.0606060606061,
-        "bugHunt": 109.6,
+        "bugHunt": 89.61569910057237,
         "vibeCode": 88.931,
         "codeMigration": 77.324,
         "livebench2Overall": 84.07,
@@ -5262,7 +5262,7 @@
         ],
         "plan": [
           1,
-          4
+          10
         ]
       },
       "bandExcludesTransfer": false,
@@ -5271,6 +5271,298 @@
         "plan": "ChatGPT Pro 200",
         "routeId": "chatgpt-pro200-gpt61sol-semianalysis",
         "multiple": 10.42,
+        "representative": false
+      }
+    },
+    {
+      "slug": "claude-opus-5-5",
+      "name": "Claude Opus 5.5 (max) · Claude Pro",
+      "shortName": "Opus 5.5 (max)",
+      "developer": "Anthropic",
+      "aaUrl": "https://artificialanalysis.ai/models/claude-opus-5-5",
+      "aaVariant": "max",
+      "rankingEligible": true,
+      "exclusionReasons": [],
+      "intelligenceIndex": {
+        "value": 58.4060336078904,
+        "status": "measured"
+      },
+      "speed": 96.6267211164451,
+      "aaFrontierTier": "near",
+      "aaFrontierConfiguration": "Claude Opus 5.5 (max with fallback)",
+      "aaFrontierIntelligenceGap": 1,
+      "aaFrontierFootnote": null,
+      "rank": {
+        "api": 6,
+        "plan": 5
+      },
+      "overall": {
+        "api": 53.82395604392801,
+        "plan": 67.95360314931419
+      },
+      "quality": 67.54148293695758,
+      "qualityRank": 2,
+      "dims": {
+        "costComposite": null,
+        "frontierCode": 46.4359595959596,
+        "terminalBench": 59.5959595959596,
+        "bugHunt": 41.455437448896156,
+        "vibeCode": 90.294,
+        "codeMigration": 81.012,
+        "livebench2Overall": 85.14,
+        "gdpval": 68.3135,
+        "automationBench": 69.5386812863607,
+        "omniscience": 74.06666666666666,
+        "lcr": 84.6666666666667,
+        "hle": 67.9,
+        "tbScience": 59.047619047619,
+        "critpt": 61.0
+      },
+      "costDims": {
+        "api": 12.671375364839287,
+        "plan": 69.18996378638403
+      },
+      "raw": {
+        "frontierCode": 0.464359595959596,
+        "terminalBench": 59.5959595959596,
+        "bugHunt": 50.7,
+        "vibeCode": 90.294,
+        "codeMigration": 81.012,
+        "livebench2Overall": 85.14,
+        "gdpval": 1866.27,
+        "automationBench": 0.6953868128636069,
+        "omniscience": 48.13333333333333,
+        "lcr": 0.846666666666667,
+        "hle": 0.679,
+        "tbScience": 0.59047619047619,
+        "critpt": 0.61
+      },
+      "coverage": {
+        "pct": 100.0,
+        "costAvailable": true,
+        "missing": [],
+        "provisional": false,
+        "provisionalReasons": []
+      },
+      "cost": {
+        "apiUsd": 10360.959965732674,
+        "planUsd": 175.90763948612351,
+        "fallback": null,
+        "route": {
+          "id": "claude-pro-opus55-semianalysis",
+          "planLabel": "Claude Pro $20 · Opus 5.5",
+          "planFeeUsd": 20,
+          "valueMultiple": 58.9,
+          "grade": "measured",
+          "assumptionKind": null,
+          "evidenceLabel": "Controlled account measurement / workload projection",
+          "sourceModel": "Opus 5.5",
+          "sourceUrl": "https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x",
+          "sourceDate": "2026-10-06"
+        },
+        "subset": false,
+        "partialComponents": [
+          "aa-briefcase",
+          "gdp-pdf",
+          "automationbench-aa",
+          "terminalbench-4-0",
+          "frontiercode-2-0",
+          "terminal-bench-science"
+        ],
+        "workload": "aad36e77d6e17386",
+        "planFlags": [
+          "workload-unmatched",
+          "possibly-superseded",
+          "valuation basis unverified"
+        ]
+      },
+      "grade": "measured",
+      "pareto": {
+        "api": false,
+        "plan": true
+      },
+      "frontierStatus": {
+        "api": null,
+        "plan": null
+      },
+      "scenario": {
+        "api": {
+          "top1": 0.0,
+          "top3": 0.0,
+          "frontier": 0.0
+        },
+        "plan": {
+          "top1": 0.0,
+          "top3": 0.0,
+          "frontier": 1.0
+        }
+      },
+      "flags": [
+        "Partial cost component: AA marks tasks missing or declined"
+      ],
+      "tier": "Mid-Range",
+      "band": {
+        "api": [
+          5,
+          7
+        ],
+        "plan": [
+          1,
+          10
+        ]
+      },
+      "bandExcludesTransfer": false,
+      "key": "claude-opus-5-5--claude-pro",
+      "planRow": {
+        "plan": "Claude Pro",
+        "routeId": "claude-pro-opus55-semianalysis",
+        "multiple": 58.9,
+        "representative": true
+      }
+    },
+    {
+      "slug": "claude-opus-5-5",
+      "name": "Claude Opus 5.5 (max) · Claude Max 20x",
+      "shortName": "Opus 5.5 (max)",
+      "developer": "Anthropic",
+      "aaUrl": "https://artificialanalysis.ai/models/claude-opus-5-5",
+      "aaVariant": "max",
+      "rankingEligible": true,
+      "exclusionReasons": [],
+      "intelligenceIndex": {
+        "value": 58.4060336078904,
+        "status": "measured"
+      },
+      "speed": 96.6267211164451,
+      "aaFrontierTier": "near",
+      "aaFrontierConfiguration": "Claude Opus 5.5 (max with fallback)",
+      "aaFrontierIntelligenceGap": 1,
+      "aaFrontierFootnote": null,
+      "rank": {
+        "api": 6,
+        "plan": 6
+      },
+      "overall": {
+        "api": 53.82395604392801,
+        "plan": 67.91839427745165
+      },
+      "quality": 67.54148293695758,
+      "qualityRank": 2,
+      "dims": {
+        "costComposite": null,
+        "frontierCode": 46.4359595959596,
+        "terminalBench": 59.5959595959596,
+        "bugHunt": 41.455437448896156,
+        "vibeCode": 90.294,
+        "codeMigration": 81.012,
+        "livebench2Overall": 85.14,
+        "gdpval": 68.3135,
+        "automationBench": 69.5386812863607,
+        "omniscience": 74.06666666666666,
+        "lcr": 84.6666666666667,
+        "hle": 67.9,
+        "tbScience": 59.047619047619,
+        "critpt": 61.0
+      },
+      "costDims": {
+        "api": 12.671375364839287,
+        "plan": 69.04912829893387
+      },
+      "raw": {
+        "frontierCode": 0.464359595959596,
+        "terminalBench": 59.5959595959596,
+        "bugHunt": 50.7,
+        "vibeCode": 90.294,
+        "codeMigration": 81.012,
+        "livebench2Overall": 85.14,
+        "gdpval": 1866.27,
+        "automationBench": 0.6953868128636069,
+        "omniscience": 48.13333333333333,
+        "lcr": 0.846666666666667,
+        "hle": 0.679,
+        "tbScience": 0.59047619047619,
+        "critpt": 0.61
+      },
+      "coverage": {
+        "pct": 100.0,
+        "costAvailable": true,
+        "missing": [],
+        "provisional": false,
+        "provisionalReasons": []
+      },
+      "cost": {
+        "apiUsd": 10360.959965732674,
+        "planUsd": 176.71772071861972,
+        "fallback": null,
+        "route": {
+          "id": "claude-max20x-opus55-semianalysis",
+          "planLabel": "Claude Max $200 · Opus 5.5",
+          "planFeeUsd": 200,
+          "valueMultiple": 58.63,
+          "grade": "measured",
+          "assumptionKind": null,
+          "evidenceLabel": "Controlled account measurement / workload projection",
+          "sourceModel": "Opus 5.5",
+          "sourceUrl": "https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x",
+          "sourceDate": "2026-10-06"
+        },
+        "subset": false,
+        "partialComponents": [
+          "aa-briefcase",
+          "gdp-pdf",
+          "automationbench-aa",
+          "terminalbench-4-0",
+          "frontiercode-2-0",
+          "terminal-bench-science"
+        ],
+        "workload": "aad36e77d6e17386",
+        "planFlags": [
+          "workload-unmatched",
+          "possibly-superseded",
+          "valuation basis unverified"
+        ]
+      },
+      "grade": "measured",
+      "pareto": {
+        "api": false,
+        "plan": true
+      },
+      "frontierStatus": {
+        "api": null,
+        "plan": null
+      },
+      "scenario": {
+        "api": {
+          "top1": 0.0,
+          "top3": 0.0,
+          "frontier": 0.0
+        },
+        "plan": {
+          "top1": 0.0,
+          "top3": 0.0,
+          "frontier": 0.0
+        }
+      },
+      "flags": [
+        "Partial cost component: AA marks tasks missing or declined"
+      ],
+      "tier": "Mid-Range",
+      "band": {
+        "api": [
+          5,
+          7
+        ],
+        "plan": [
+          1,
+          10
+        ]
+      },
+      "bandExcludesTransfer": false,
+      "key": "claude-opus-5-5--claude-max-20x",
+      "planRow": {
+        "plan": "Claude Max 20x",
+        "routeId": "claude-max20x-opus55-semianalysis",
+        "multiple": 58.63,
         "representative": false
       }
     },
@@ -5293,20 +5585,20 @@
       "aaFrontierIntelligenceGap": 3,
       "aaFrontierFootnote": null,
       "rank": {
-        "api": 6,
-        "plan": 5
+        "api": 7,
+        "plan": 7
       },
       "overall": {
-        "api": 54.50796333807043,
-        "plan": 68.59466611424008
+        "api": 53.65899522686846,
+        "plan": 67.74569800303811
       },
-      "quality": 68.53420586556773,
-      "qualityRank": 3,
+      "quality": 67.4022483839651,
+      "qualityRank": 4,
       "dims": {
         "costComposite": null,
         "frontierCode": 41.6993434343434,
         "terminalBench": 63.636363636363605,
-        "bugHunt": 77.6,
+        "bugHunt": 63.45053147996729,
         "vibeCode": 92.392,
         "codeMigration": 86.875,
         "livebench2Overall": 80.04,
@@ -5398,7 +5690,7 @@
           7
         ],
         "plan": [
-          5,
+          1,
           10
         ]
       },
@@ -5409,6 +5701,152 @@
         "routeId": "claude-pro-claude-sonnet-5-5-common-opus55-assumption",
         "multiple": 58.9,
         "representative": true
+      }
+    },
+    {
+      "slug": "claude-opus-5-5",
+      "name": "Claude Opus 5.5 (max) · Claude Max 5x",
+      "shortName": "Opus 5.5 (max)",
+      "developer": "Anthropic",
+      "aaUrl": "https://artificialanalysis.ai/models/claude-opus-5-5",
+      "aaVariant": "max",
+      "rankingEligible": true,
+      "exclusionReasons": [],
+      "intelligenceIndex": {
+        "value": 58.4060336078904,
+        "status": "measured"
+      },
+      "speed": 96.6267211164451,
+      "aaFrontierTier": "near",
+      "aaFrontierConfiguration": "Claude Opus 5.5 (max with fallback)",
+      "aaFrontierIntelligenceGap": 1,
+      "aaFrontierFootnote": null,
+      "rank": {
+        "api": 6,
+        "plan": 8
+      },
+      "overall": {
+        "api": 53.82395604392801,
+        "plan": 67.7358671370932
+      },
+      "quality": 67.54148293695758,
+      "qualityRank": 2,
+      "dims": {
+        "costComposite": null,
+        "frontierCode": 46.4359595959596,
+        "terminalBench": 59.5959595959596,
+        "bugHunt": 41.455437448896156,
+        "vibeCode": 90.294,
+        "codeMigration": 81.012,
+        "livebench2Overall": 85.14,
+        "gdpval": 68.3135,
+        "automationBench": 69.5386812863607,
+        "omniscience": 74.06666666666666,
+        "lcr": 84.6666666666667,
+        "hle": 67.9,
+        "tbScience": 59.047619047619,
+        "critpt": 61.0
+      },
+      "costDims": {
+        "api": 12.671375364839287,
+        "plan": 68.31901973750003
+      },
+      "raw": {
+        "frontierCode": 0.464359595959596,
+        "terminalBench": 59.5959595959596,
+        "bugHunt": 50.7,
+        "vibeCode": 90.294,
+        "codeMigration": 81.012,
+        "livebench2Overall": 85.14,
+        "gdpval": 1866.27,
+        "automationBench": 0.6953868128636069,
+        "omniscience": 48.13333333333333,
+        "lcr": 0.846666666666667,
+        "hle": 0.679,
+        "tbScience": 0.59047619047619,
+        "critpt": 0.61
+      },
+      "coverage": {
+        "pct": 100.0,
+        "costAvailable": true,
+        "missing": [],
+        "provisional": false,
+        "provisionalReasons": []
+      },
+      "cost": {
+        "apiUsd": 10360.959965732674,
+        "planUsd": 180.9774666503524,
+        "fallback": null,
+        "route": {
+          "id": "claude-max5x-opus55-semianalysis",
+          "planLabel": "Claude Max $100 · Opus 5.5",
+          "planFeeUsd": 100,
+          "valueMultiple": 57.25,
+          "grade": "measured",
+          "assumptionKind": null,
+          "evidenceLabel": "Controlled account measurement / workload projection",
+          "sourceModel": "Opus 5.5",
+          "sourceUrl": "https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x",
+          "sourceDate": "2026-10-06"
+        },
+        "subset": false,
+        "partialComponents": [
+          "aa-briefcase",
+          "gdp-pdf",
+          "automationbench-aa",
+          "terminalbench-4-0",
+          "frontiercode-2-0",
+          "terminal-bench-science"
+        ],
+        "workload": "aad36e77d6e17386",
+        "planFlags": [
+          "workload-unmatched",
+          "possibly-superseded",
+          "valuation basis unverified"
+        ]
+      },
+      "grade": "measured",
+      "pareto": {
+        "api": false,
+        "plan": true
+      },
+      "frontierStatus": {
+        "api": null,
+        "plan": null
+      },
+      "scenario": {
+        "api": {
+          "top1": 0.0,
+          "top3": 0.0,
+          "frontier": 0.0
+        },
+        "plan": {
+          "top1": 0.0,
+          "top3": 0.0,
+          "frontier": 0.0
+        }
+      },
+      "flags": [
+        "Partial cost component: AA marks tasks missing or declined"
+      ],
+      "tier": "Mid-Range",
+      "band": {
+        "api": [
+          5,
+          7
+        ],
+        "plan": [
+          1,
+          10
+        ]
+      },
+      "bandExcludesTransfer": false,
+      "key": "claude-opus-5-5--claude-max-5x",
+      "planRow": {
+        "plan": "Claude Max 5x",
+        "routeId": "claude-max5x-opus55-semianalysis",
+        "multiple": 57.25,
+        "representative": false
       }
     },
     {
@@ -5430,20 +5868,20 @@
       "aaFrontierIntelligenceGap": 3,
       "aaFrontierFootnote": null,
       "rank": {
-        "api": 6,
-        "plan": 6
+        "api": 7,
+        "plan": 9
       },
       "overall": {
-        "api": 54.50796333807043,
-        "plan": 68.55945724237753
+        "api": 53.65899522686846,
+        "plan": 67.71048913117556
       },
-      "quality": 68.53420586556773,
-      "qualityRank": 3,
+      "quality": 67.4022483839651,
+      "qualityRank": 4,
       "dims": {
         "costComposite": null,
         "frontierCode": 41.6993434343434,
         "terminalBench": 63.636363636363605,
-        "bugHunt": 77.6,
+        "bugHunt": 63.45053147996729,
         "vibeCode": 92.392,
         "codeMigration": 86.875,
         "livebench2Overall": 80.04,
@@ -5535,7 +5973,7 @@
           7
         ],
         "plan": [
-          5,
+          1,
           10
         ]
       },
@@ -5544,298 +5982,6 @@
       "planRow": {
         "plan": "Claude Max 20x",
         "routeId": "claude-max20x-claude-sonnet-5-5-common-opus55-assumption",
-        "multiple": 58.63,
-        "representative": false
-      }
-    },
-    {
-      "slug": "claude-opus-5-5",
-      "name": "Claude Opus 5.5 (max) · Claude Pro",
-      "shortName": "Opus 5.5 (max)",
-      "developer": "Anthropic",
-      "aaUrl": "https://artificialanalysis.ai/models/claude-opus-5-5",
-      "aaVariant": "max",
-      "rankingEligible": true,
-      "exclusionReasons": [],
-      "intelligenceIndex": {
-        "value": 58.4060336078904,
-        "status": "measured"
-      },
-      "speed": 96.6267211164451,
-      "aaFrontierTier": "near",
-      "aaFrontierConfiguration": "Claude Opus 5.5 (max with fallback)",
-      "aaFrontierIntelligenceGap": 1,
-      "aaFrontierFootnote": null,
-      "rank": {
-        "api": 7,
-        "plan": 7
-      },
-      "overall": {
-        "api": 54.37862979699424,
-        "plan": 68.50827690238043
-      },
-      "quality": 68.28104794104588,
-      "qualityRank": 4,
-      "dims": {
-        "costComposite": null,
-        "frontierCode": 46.4359595959596,
-        "terminalBench": 59.5959595959596,
-        "bugHunt": 50.7,
-        "vibeCode": 90.294,
-        "codeMigration": 81.012,
-        "livebench2Overall": 85.14,
-        "gdpval": 68.3135,
-        "automationBench": 69.5386812863607,
-        "omniscience": 74.06666666666666,
-        "lcr": 84.6666666666667,
-        "hle": 67.9,
-        "tbScience": 59.047619047619,
-        "critpt": 61.0
-      },
-      "costDims": {
-        "api": 12.671375364839287,
-        "plan": 69.18996378638403
-      },
-      "raw": {
-        "frontierCode": 0.464359595959596,
-        "terminalBench": 59.5959595959596,
-        "bugHunt": 50.7,
-        "vibeCode": 90.294,
-        "codeMigration": 81.012,
-        "livebench2Overall": 85.14,
-        "gdpval": 1866.27,
-        "automationBench": 0.6953868128636069,
-        "omniscience": 48.13333333333333,
-        "lcr": 0.846666666666667,
-        "hle": 0.679,
-        "tbScience": 0.59047619047619,
-        "critpt": 0.61
-      },
-      "coverage": {
-        "pct": 100.0,
-        "costAvailable": true,
-        "missing": [],
-        "provisional": false,
-        "provisionalReasons": []
-      },
-      "cost": {
-        "apiUsd": 10360.959965732674,
-        "planUsd": 175.90763948612351,
-        "fallback": null,
-        "route": {
-          "id": "claude-pro-opus55-semianalysis",
-          "planLabel": "Claude Pro $20 · Opus 5.5",
-          "planFeeUsd": 20,
-          "valueMultiple": 58.9,
-          "grade": "measured",
-          "assumptionKind": null,
-          "evidenceLabel": "Controlled account measurement / workload projection",
-          "sourceModel": "Opus 5.5",
-          "sourceUrl": "https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x",
-          "sourceDate": "2026-10-06"
-        },
-        "subset": false,
-        "partialComponents": [
-          "aa-briefcase",
-          "gdp-pdf",
-          "automationbench-aa",
-          "terminalbench-4-0",
-          "frontiercode-2-0",
-          "terminal-bench-science"
-        ],
-        "workload": "aad36e77d6e17386",
-        "planFlags": [
-          "workload-unmatched",
-          "possibly-superseded",
-          "valuation basis unverified"
-        ]
-      },
-      "grade": "measured",
-      "pareto": {
-        "api": false,
-        "plan": false
-      },
-      "frontierStatus": {
-        "api": null,
-        "plan": null
-      },
-      "scenario": {
-        "api": {
-          "top1": 0.0,
-          "top3": 0.0,
-          "frontier": 0.0
-        },
-        "plan": {
-          "top1": 0.0,
-          "top3": 0.0,
-          "frontier": 0.0
-        }
-      },
-      "flags": [
-        "Partial cost component: AA marks tasks missing or declined"
-      ],
-      "tier": "Mid-Range",
-      "band": {
-        "api": [
-          5,
-          7
-        ],
-        "plan": [
-          5,
-          10
-        ]
-      },
-      "bandExcludesTransfer": false,
-      "key": "claude-opus-5-5--claude-pro",
-      "planRow": {
-        "plan": "Claude Pro",
-        "routeId": "claude-pro-opus55-semianalysis",
-        "multiple": 58.9,
-        "representative": true
-      }
-    },
-    {
-      "slug": "claude-opus-5-5",
-      "name": "Claude Opus 5.5 (max) · Claude Max 20x",
-      "shortName": "Opus 5.5 (max)",
-      "developer": "Anthropic",
-      "aaUrl": "https://artificialanalysis.ai/models/claude-opus-5-5",
-      "aaVariant": "max",
-      "rankingEligible": true,
-      "exclusionReasons": [],
-      "intelligenceIndex": {
-        "value": 58.4060336078904,
-        "status": "measured"
-      },
-      "speed": 96.6267211164451,
-      "aaFrontierTier": "near",
-      "aaFrontierConfiguration": "Claude Opus 5.5 (max with fallback)",
-      "aaFrontierIntelligenceGap": 1,
-      "aaFrontierFootnote": null,
-      "rank": {
-        "api": 7,
-        "plan": 8
-      },
-      "overall": {
-        "api": 54.37862979699424,
-        "plan": 68.47306803051788
-      },
-      "quality": 68.28104794104588,
-      "qualityRank": 4,
-      "dims": {
-        "costComposite": null,
-        "frontierCode": 46.4359595959596,
-        "terminalBench": 59.5959595959596,
-        "bugHunt": 50.7,
-        "vibeCode": 90.294,
-        "codeMigration": 81.012,
-        "livebench2Overall": 85.14,
-        "gdpval": 68.3135,
-        "automationBench": 69.5386812863607,
-        "omniscience": 74.06666666666666,
-        "lcr": 84.6666666666667,
-        "hle": 67.9,
-        "tbScience": 59.047619047619,
-        "critpt": 61.0
-      },
-      "costDims": {
-        "api": 12.671375364839287,
-        "plan": 69.04912829893387
-      },
-      "raw": {
-        "frontierCode": 0.464359595959596,
-        "terminalBench": 59.5959595959596,
-        "bugHunt": 50.7,
-        "vibeCode": 90.294,
-        "codeMigration": 81.012,
-        "livebench2Overall": 85.14,
-        "gdpval": 1866.27,
-        "automationBench": 0.6953868128636069,
-        "omniscience": 48.13333333333333,
-        "lcr": 0.846666666666667,
-        "hle": 0.679,
-        "tbScience": 0.59047619047619,
-        "critpt": 0.61
-      },
-      "coverage": {
-        "pct": 100.0,
-        "costAvailable": true,
-        "missing": [],
-        "provisional": false,
-        "provisionalReasons": []
-      },
-      "cost": {
-        "apiUsd": 10360.959965732674,
-        "planUsd": 176.71772071861972,
-        "fallback": null,
-        "route": {
-          "id": "claude-max20x-opus55-semianalysis",
-          "planLabel": "Claude Max $200 · Opus 5.5",
-          "planFeeUsd": 200,
-          "valueMultiple": 58.63,
-          "grade": "measured",
-          "assumptionKind": null,
-          "evidenceLabel": "Controlled account measurement / workload projection",
-          "sourceModel": "Opus 5.5",
-          "sourceUrl": "https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x",
-          "sourceDate": "2026-10-06"
-        },
-        "subset": false,
-        "partialComponents": [
-          "aa-briefcase",
-          "gdp-pdf",
-          "automationbench-aa",
-          "terminalbench-4-0",
-          "frontiercode-2-0",
-          "terminal-bench-science"
-        ],
-        "workload": "aad36e77d6e17386",
-        "planFlags": [
-          "workload-unmatched",
-          "possibly-superseded",
-          "valuation basis unverified"
-        ]
-      },
-      "grade": "measured",
-      "pareto": {
-        "api": false,
-        "plan": false
-      },
-      "frontierStatus": {
-        "api": null,
-        "plan": null
-      },
-      "scenario": {
-        "api": {
-          "top1": 0.0,
-          "top3": 0.0,
-          "frontier": 0.0
-        },
-        "plan": {
-          "top1": 0.0,
-          "top3": 0.0,
-          "frontier": 0.0
-        }
-      },
-      "flags": [
-        "Partial cost component: AA marks tasks missing or declined"
-      ],
-      "tier": "Mid-Range",
-      "band": {
-        "api": [
-          5,
-          7
-        ],
-        "plan": [
-          5,
-          10
-        ]
-      },
-      "bandExcludesTransfer": false,
-      "key": "claude-opus-5-5--claude-max-20x",
-      "planRow": {
-        "plan": "Claude Max 20x",
-        "routeId": "claude-max20x-opus55-semianalysis",
         "multiple": 58.63,
         "representative": false
       }
@@ -5859,20 +6005,20 @@
       "aaFrontierIntelligenceGap": 3,
       "aaFrontierFootnote": null,
       "rank": {
-        "api": 6,
-        "plan": 9
+        "api": 7,
+        "plan": 10
       },
       "overall": {
-        "api": 54.50796333807043,
-        "plan": 68.37693010201909
+        "api": 53.65899522686846,
+        "plan": 67.52796199081712
       },
-      "quality": 68.53420586556773,
-      "qualityRank": 3,
+      "quality": 67.4022483839651,
+      "qualityRank": 4,
       "dims": {
         "costComposite": null,
         "frontierCode": 41.6993434343434,
         "terminalBench": 63.636363636363605,
-        "bugHunt": 77.6,
+        "bugHunt": 63.45053147996729,
         "vibeCode": 92.392,
         "codeMigration": 86.875,
         "livebench2Overall": 80.04,
@@ -5964,7 +6110,7 @@
           7
         ],
         "plan": [
-          5,
+          1,
           10
         ]
       },
@@ -5973,152 +6119,6 @@
       "planRow": {
         "plan": "Claude Max 5x",
         "routeId": "claude-max5x-claude-sonnet-5-5-common-opus55-assumption",
-        "multiple": 57.25,
-        "representative": false
-      }
-    },
-    {
-      "slug": "claude-opus-5-5",
-      "name": "Claude Opus 5.5 (max) · Claude Max 5x",
-      "shortName": "Opus 5.5 (max)",
-      "developer": "Anthropic",
-      "aaUrl": "https://artificialanalysis.ai/models/claude-opus-5-5",
-      "aaVariant": "max",
-      "rankingEligible": true,
-      "exclusionReasons": [],
-      "intelligenceIndex": {
-        "value": 58.4060336078904,
-        "status": "measured"
-      },
-      "speed": 96.6267211164451,
-      "aaFrontierTier": "near",
-      "aaFrontierConfiguration": "Claude Opus 5.5 (max with fallback)",
-      "aaFrontierIntelligenceGap": 1,
-      "aaFrontierFootnote": null,
-      "rank": {
-        "api": 7,
-        "plan": 10
-      },
-      "overall": {
-        "api": 54.37862979699424,
-        "plan": 68.29054089015942
-      },
-      "quality": 68.28104794104588,
-      "qualityRank": 4,
-      "dims": {
-        "costComposite": null,
-        "frontierCode": 46.4359595959596,
-        "terminalBench": 59.5959595959596,
-        "bugHunt": 50.7,
-        "vibeCode": 90.294,
-        "codeMigration": 81.012,
-        "livebench2Overall": 85.14,
-        "gdpval": 68.3135,
-        "automationBench": 69.5386812863607,
-        "omniscience": 74.06666666666666,
-        "lcr": 84.6666666666667,
-        "hle": 67.9,
-        "tbScience": 59.047619047619,
-        "critpt": 61.0
-      },
-      "costDims": {
-        "api": 12.671375364839287,
-        "plan": 68.31901973750003
-      },
-      "raw": {
-        "frontierCode": 0.464359595959596,
-        "terminalBench": 59.5959595959596,
-        "bugHunt": 50.7,
-        "vibeCode": 90.294,
-        "codeMigration": 81.012,
-        "livebench2Overall": 85.14,
-        "gdpval": 1866.27,
-        "automationBench": 0.6953868128636069,
-        "omniscience": 48.13333333333333,
-        "lcr": 0.846666666666667,
-        "hle": 0.679,
-        "tbScience": 0.59047619047619,
-        "critpt": 0.61
-      },
-      "coverage": {
-        "pct": 100.0,
-        "costAvailable": true,
-        "missing": [],
-        "provisional": false,
-        "provisionalReasons": []
-      },
-      "cost": {
-        "apiUsd": 10360.959965732674,
-        "planUsd": 180.9774666503524,
-        "fallback": null,
-        "route": {
-          "id": "claude-max5x-opus55-semianalysis",
-          "planLabel": "Claude Max $100 · Opus 5.5",
-          "planFeeUsd": 100,
-          "valueMultiple": 57.25,
-          "grade": "measured",
-          "assumptionKind": null,
-          "evidenceLabel": "Controlled account measurement / workload projection",
-          "sourceModel": "Opus 5.5",
-          "sourceUrl": "https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x",
-          "sourceDate": "2026-10-06"
-        },
-        "subset": false,
-        "partialComponents": [
-          "aa-briefcase",
-          "gdp-pdf",
-          "automationbench-aa",
-          "terminalbench-4-0",
-          "frontiercode-2-0",
-          "terminal-bench-science"
-        ],
-        "workload": "aad36e77d6e17386",
-        "planFlags": [
-          "workload-unmatched",
-          "possibly-superseded",
-          "valuation basis unverified"
-        ]
-      },
-      "grade": "measured",
-      "pareto": {
-        "api": false,
-        "plan": false
-      },
-      "frontierStatus": {
-        "api": null,
-        "plan": null
-      },
-      "scenario": {
-        "api": {
-          "top1": 0.0,
-          "top3": 0.0,
-          "frontier": 0.0
-        },
-        "plan": {
-          "top1": 0.0,
-          "top3": 0.0,
-          "frontier": 0.0
-        }
-      },
-      "flags": [
-        "Partial cost component: AA marks tasks missing or declined"
-      ],
-      "tier": "Mid-Range",
-      "band": {
-        "api": [
-          5,
-          7
-        ],
-        "plan": [
-          5,
-          10
-        ]
-      },
-      "bandExcludesTransfer": false,
-      "key": "claude-opus-5-5--claude-max-5x",
-      "planRow": {
-        "plan": "Claude Max 5x",
-        "routeId": "claude-max5x-opus55-semianalysis",
         "multiple": 57.25,
         "representative": false
       }
@@ -6146,16 +6146,16 @@
         "plan": 11
       },
       "overall": {
-        "api": 50.86151794172618,
-        "plan": 62.41440890011029
+        "api": 50.52783846502953,
+        "plan": 62.08072942341364
       },
-      "quality": 49.88587853348038,
+      "quality": 49.44097256455152,
       "qualityRank": 7,
       "dims": {
         "costComposite": null,
         "frontierCode": 34.9325505050505,
         "terminalBench": 32.8282828282828,
-        "bugHunt": 30.5,
+        "bugHunt": 24.938675388389207,
         "vibeCode": 90.444,
         "codeMigration": 52.36,
         "livebench2Overall": 69.85,
@@ -6284,16 +6284,16 @@
         "plan": 11
       },
       "overall": {
-        "api": 50.86151794172618,
-        "plan": 62.41440890011029
+        "api": 50.52783846502953,
+        "plan": 62.08072942341364
       },
-      "quality": 49.88587853348038,
+      "quality": 49.44097256455152,
       "qualityRank": 7,
       "dims": {
         "costComposite": null,
         "frontierCode": 34.9325505050505,
         "terminalBench": 32.8282828282828,
-        "bugHunt": 30.5,
+        "bugHunt": 24.938675388389207,
         "vibeCode": 90.444,
         "codeMigration": 52.36,
         "livebench2Overall": 69.85,
@@ -6422,16 +6422,16 @@
         "plan": 11
       },
       "overall": {
-        "api": 50.86151794172618,
-        "plan": 62.41440890011029
+        "api": 50.52783846502953,
+        "plan": 62.08072942341364
       },
-      "quality": 49.88587853348038,
+      "quality": 49.44097256455152,
       "qualityRank": 7,
       "dims": {
         "costComposite": null,
         "frontierCode": 34.9325505050505,
         "terminalBench": 32.8282828282828,
-        "bugHunt": 30.5,
+        "bugHunt": 24.938675388389207,
         "vibeCode": 90.444,
         "codeMigration": 52.36,
         "livebench2Overall": 69.85,
@@ -6560,16 +6560,16 @@
         "plan": 14
       },
       "overall": {
-        "api": 57.35004455928082,
-        "plan": 62.06575091566642
+        "api": 56.256013488144276,
+        "plan": 60.97171984452988
       },
-      "quality": 69.73317339254747,
+      "quality": 68.27446529769874,
       "qualityRank": 1,
       "dims": {
         "costComposite": null,
         "frontierCode": 42.374797979798004,
         "terminalBench": 59.09090909090911,
-        "bugHunt": 100.0,
+        "bugHunt": 81.76614881439085,
         "vibeCode": 89.594,
         "codeMigration": 80.579,
         "livebench2Overall": 85.64,
@@ -6700,16 +6700,16 @@
         "plan": 15
       },
       "overall": {
-        "api": 57.35004455928082,
-        "plan": 61.75535095107905
+        "api": 56.256013488144276,
+        "plan": 60.66131987994251
       },
-      "quality": 69.73317339254747,
+      "quality": 68.27446529769874,
       "qualityRank": 1,
       "dims": {
         "costComposite": null,
         "frontierCode": 42.374797979798004,
         "terminalBench": 59.09090909090911,
-        "bugHunt": 100.0,
+        "bugHunt": 81.76614881439085,
         "vibeCode": 89.594,
         "codeMigration": 80.579,
         "livebench2Overall": 85.64,
@@ -6841,16 +6841,16 @@
         "plan": 16
       },
       "overall": {
-        "api": 57.35004455928082,
-        "plan": 61.365472455831025
+        "api": 56.256013488144276,
+        "plan": 60.271441384694484
       },
-      "quality": 69.73317339254747,
+      "quality": 68.27446529769874,
       "qualityRank": 1,
       "dims": {
         "costComposite": null,
         "frontierCode": 42.374797979798004,
         "terminalBench": 59.09090909090911,
-        "bugHunt": 100.0,
+        "bugHunt": 81.76614881439085,
         "vibeCode": 89.594,
         "codeMigration": 80.579,
         "livebench2Overall": 85.64,
@@ -6981,16 +6981,16 @@
         "plan": 17
       },
       "overall": {
-        "api": 55.65256554259544,
-        "plan": 58.75987448149008
+        "api": 55.20401280342945,
+        "plan": 58.3113217423241
       },
-      "quality": 45.013165975320106,
+      "quality": 44.41509565643213,
       "qualityRank": 9,
       "dims": {
         "costComposite": null,
         "frontierCode": 25.1747727272727,
         "terminalBench": 12.6262626262626,
-        "bugHunt": 41.0,
+        "bugHunt": 33.52412101390025,
         "vibeCode": 81.649,
         "codeMigration": 46.669,
         "livebench2Overall": 64.59,
@@ -7118,16 +7118,16 @@
         "plan": 17
       },
       "overall": {
-        "api": 55.65256554259544,
-        "plan": 58.75987448149008
+        "api": 55.20401280342945,
+        "plan": 58.3113217423241
       },
-      "quality": 45.013165975320106,
+      "quality": 44.41509565643213,
       "qualityRank": 9,
       "dims": {
         "costComposite": null,
         "frontierCode": 25.1747727272727,
         "terminalBench": 12.6262626262626,
-        "bugHunt": 41.0,
+        "bugHunt": 33.52412101390025,
         "vibeCode": 81.649,
         "codeMigration": 46.669,
         "livebench2Overall": 64.59,
@@ -7255,16 +7255,16 @@
         "plan": 17
       },
       "overall": {
-        "api": 55.65256554259544,
-        "plan": 58.75987448149008
+        "api": 55.20401280342945,
+        "plan": 58.3113217423241
       },
-      "quality": 45.013165975320106,
+      "quality": 44.41509565643213,
       "qualityRank": 9,
       "dims": {
         "costComposite": null,
         "frontierCode": 25.1747727272727,
         "terminalBench": 12.6262626262626,
-        "bugHunt": 41.0,
+        "bugHunt": 33.52412101390025,
         "vibeCode": 81.649,
         "codeMigration": 46.669,
         "livebench2Overall": 64.59,
@@ -7392,16 +7392,16 @@
         "plan": 17
       },
       "overall": {
-        "api": 55.65256554259544,
-        "plan": 58.75987448149008
+        "api": 55.20401280342945,
+        "plan": 58.3113217423241
       },
-      "quality": 45.013165975320106,
+      "quality": 44.41509565643213,
       "qualityRank": 9,
       "dims": {
         "costComposite": null,
         "frontierCode": 25.1747727272727,
         "terminalBench": 12.6262626262626,
-        "bugHunt": 41.0,
+        "bugHunt": 33.52412101390025,
         "vibeCode": 81.649,
         "codeMigration": 46.669,
         "livebench2Overall": 64.59,
@@ -7530,16 +7530,16 @@
         "plan": 21
       },
       "overall": {
-        "api": 57.35004455928082,
-        "plan": 57.61155857747111
+        "api": 56.256013488144276,
+        "plan": 56.51752750633457
       },
-      "quality": 69.73317339254747,
+      "quality": 68.27446529769874,
       "qualityRank": 1,
       "dims": {
         "costComposite": null,
         "frontierCode": 42.374797979798004,
         "terminalBench": 59.09090909090911,
-        "bugHunt": 100.0,
+        "bugHunt": 81.76614881439085,
         "vibeCode": 89.594,
         "codeMigration": 80.579,
         "livebench2Overall": 85.64,
@@ -7670,16 +7670,16 @@
         "plan": 22
       },
       "overall": {
-        "api": 56.25609205401756,
-        "plan": 52.2720021823335
+        "api": 56.01540521836752,
+        "plan": 52.03131534668346
       },
-      "quality": 48.4670746447178,
+      "quality": 48.14615886385108,
       "qualityRank": 8,
       "dims": {
         "costComposite": null,
         "frontierCode": 23.9701262626263,
         "terminalBench": 34.8484848484849,
-        "bugHunt": 22,
+        "bugHunt": 17.988552739165986,
         "vibeCode": 85.223,
         "codeMigration": 48.786,
         "livebench2Overall": 68.48,
@@ -7772,134 +7772,6 @@
       }
     },
     {
-      "slug": "deepseek-v4-1-flash-1017",
-      "name": "DeepSeek V4.1 Flash 1017 · API-cost fallback",
-      "shortName": "DeepSeek V4.1 Flash 1017",
-      "developer": "DeepSeek",
-      "aaUrl": "https://artificialanalysis.ai/models/deepseek-v4-1-flash-1017",
-      "aaVariant": "max",
-      "rankingEligible": true,
-      "exclusionReasons": [],
-      "intelligenceIndex": {
-        "value": 32.4896393532027,
-        "status": "measured"
-      },
-      "speed": 174.977934757459,
-      "aaFrontierTier": "left cohort",
-      "aaFrontierConfiguration": "DeepSeek V4.1 Flash 1017",
-      "aaFrontierIntelligenceGap": null,
-      "aaFrontierFootnote": null,
-      "rank": {
-        "api": 2,
-        "plan": 23
-      },
-      "overall": {
-        "api": 59.536457740492956,
-        "plan": 51.878381218030434
-      },
-      "quality": 57.40456754388143,
-      "qualityRank": 6,
-      "dims": {
-        "costComposite": null,
-        "frontierCode": 28.4711616161616,
-        "terminalBench": 33.8383838383838,
-        "bugHunt": 86.7,
-        "vibeCode": 87.73,
-        "codeMigration": 67.524,
-        "livebench2Overall": 72.87,
-        "gdpval": 62.2885,
-        "automationBench": 66.64095364949257,
-        "omniscience": 50.45,
-        "lcr": 82.6666666666667,
-        "hle": 25.3,
-        "tbScience": 12.8571428571429,
-        "critpt": 24.0
-      },
-      "costDims": {
-        "api": 65.93212833032754,
-        "plan": 35.29982224047746
-      },
-      "raw": {
-        "frontierCode": 0.284711616161616,
-        "terminalBench": 33.8383838383838,
-        "bugHunt": 86.7,
-        "vibeCode": 87.73,
-        "codeMigration": 67.524,
-        "livebench2Overall": 72.87,
-        "gdpval": 1745.77,
-        "automationBench": 0.6664095364949257,
-        "omniscience": 0.9,
-        "lcr": 0.826666666666667,
-        "hle": 0.253,
-        "tbScience": 0.128571428571429,
-        "critpt": 0.24
-      },
-      "coverage": {
-        "pct": 100.0,
-        "costAvailable": true,
-        "missing": [],
-        "provisional": false,
-        "provisionalReasons": []
-      },
-      "cost": {
-        "apiUsd": 531.4356367333653,
-        "planUsd": 531.4356367333653,
-        "fallback": "api",
-        "route": null,
-        "subset": false,
-        "partialComponents": [],
-        "workload": "aad36e77d6e17386",
-        "planFlags": [
-          "API-cost fallback: no admitted Plan route",
-          "cross-estimand ordering not identified"
-        ]
-      },
-      "grade": "measured",
-      "pareto": {
-        "api": true,
-        "plan": false
-      },
-      "frontierStatus": {
-        "api": {
-          "definite": "certified",
-          "possible": "certified"
-        },
-        "plan": null
-      },
-      "scenario": {
-        "api": {
-          "top1": 0.0,
-          "top3": 1.0,
-          "frontier": 1.0
-        },
-        "plan": {
-          "top1": 0.0,
-          "top3": 0.0,
-          "frontier": 0.0
-        }
-      },
-      "flags": [],
-      "tier": "Expensive",
-      "band": {
-        "api": [
-          2,
-          3
-        ],
-        "plan": [
-          23,
-          23
-        ]
-      },
-      "bandExcludesTransfer": false,
-      "key": "deepseek-v4-1-flash-1017--api",
-      "planRow": {
-        "plan": null,
-        "routeId": null,
-        "multiple": null,
-        "representative": true
-      }
-    },
-    {
       "slug": "mimo-v2-6-pro",
       "name": "MiMo-V2.6-Pro · MiMo Token Plan Pro",
       "shortName": "MiMo V2.6 Pro",
@@ -7919,19 +7791,19 @@
       "aaFrontierFootnote": null,
       "rank": {
         "api": 4,
-        "plan": 24
+        "plan": 23
       },
       "overall": {
-        "api": 56.25609205401756,
-        "plan": 51.6935226552638
+        "api": 56.01540521836752,
+        "plan": 51.45283581961376
       },
-      "quality": 48.4670746447178,
+      "quality": 48.14615886385108,
       "qualityRank": 8,
       "dims": {
         "costComposite": null,
         "frontierCode": 23.9701262626263,
         "terminalBench": 34.8484848484849,
-        "bugHunt": 22,
+        "bugHunt": 17.988552739165986,
         "vibeCode": 85.223,
         "codeMigration": 48.786,
         "livebench2Overall": 68.48,
@@ -8024,6 +7896,134 @@
       }
     },
     {
+      "slug": "deepseek-v4-1-flash-1017",
+      "name": "DeepSeek V4.1 Flash 1017 · API-cost fallback",
+      "shortName": "DeepSeek V4.1 Flash 1017",
+      "developer": "DeepSeek",
+      "aaUrl": "https://artificialanalysis.ai/models/deepseek-v4-1-flash-1017",
+      "aaVariant": "max",
+      "rankingEligible": true,
+      "exclusionReasons": [],
+      "intelligenceIndex": {
+        "value": 32.4896393532027,
+        "status": "measured"
+      },
+      "speed": 174.977934757459,
+      "aaFrontierTier": "left cohort",
+      "aaFrontierConfiguration": "DeepSeek V4.1 Flash 1017",
+      "aaFrontierIntelligenceGap": null,
+      "aaFrontierFootnote": null,
+      "rank": {
+        "api": 2,
+        "plan": 24
+      },
+      "overall": {
+        "api": 58.58793280181757,
+        "plan": 50.92985627935505
+      },
+      "quality": 56.13986762564758,
+      "qualityRank": 6,
+      "dims": {
+        "costComposite": null,
+        "frontierCode": 28.4711616161616,
+        "terminalBench": 33.8383838383838,
+        "bugHunt": 70.89125102207686,
+        "vibeCode": 87.73,
+        "codeMigration": 67.524,
+        "livebench2Overall": 72.87,
+        "gdpval": 62.2885,
+        "automationBench": 66.64095364949257,
+        "omniscience": 50.45,
+        "lcr": 82.6666666666667,
+        "hle": 25.3,
+        "tbScience": 12.8571428571429,
+        "critpt": 24.0
+      },
+      "costDims": {
+        "api": 65.93212833032754,
+        "plan": 35.29982224047746
+      },
+      "raw": {
+        "frontierCode": 0.284711616161616,
+        "terminalBench": 33.8383838383838,
+        "bugHunt": 86.7,
+        "vibeCode": 87.73,
+        "codeMigration": 67.524,
+        "livebench2Overall": 72.87,
+        "gdpval": 1745.77,
+        "automationBench": 0.6664095364949257,
+        "omniscience": 0.9,
+        "lcr": 0.826666666666667,
+        "hle": 0.253,
+        "tbScience": 0.128571428571429,
+        "critpt": 0.24
+      },
+      "coverage": {
+        "pct": 100.0,
+        "costAvailable": true,
+        "missing": [],
+        "provisional": false,
+        "provisionalReasons": []
+      },
+      "cost": {
+        "apiUsd": 531.4356367333653,
+        "planUsd": 531.4356367333653,
+        "fallback": "api",
+        "route": null,
+        "subset": false,
+        "partialComponents": [],
+        "workload": "aad36e77d6e17386",
+        "planFlags": [
+          "API-cost fallback: no admitted Plan route",
+          "cross-estimand ordering not identified"
+        ]
+      },
+      "grade": "measured",
+      "pareto": {
+        "api": true,
+        "plan": false
+      },
+      "frontierStatus": {
+        "api": {
+          "definite": "certified",
+          "possible": "certified"
+        },
+        "plan": null
+      },
+      "scenario": {
+        "api": {
+          "top1": 0.0,
+          "top3": 1.0,
+          "frontier": 1.0
+        },
+        "plan": {
+          "top1": 0.0,
+          "top3": 0.0,
+          "frontier": 0.0
+        }
+      },
+      "flags": [],
+      "tier": "Expensive",
+      "band": {
+        "api": [
+          2,
+          3
+        ],
+        "plan": [
+          24,
+          24
+        ]
+      },
+      "bandExcludesTransfer": false,
+      "key": "deepseek-v4-1-flash-1017--api",
+      "planRow": {
+        "plan": null,
+        "routeId": null,
+        "multiple": null,
+        "representative": true
+      }
+    },
+    {
       "slug": "mimo-v2-6-pro",
       "name": "MiMo-V2.6-Pro · MiMo Token Plan Standard",
       "shortName": "MiMo V2.6 Pro",
@@ -8046,16 +8046,16 @@
         "plan": 25
       },
       "overall": {
-        "api": 56.25609205401756,
-        "plan": 50.930270691530865
+        "api": 56.01540521836752,
+        "plan": 50.68958385588083
       },
-      "quality": 48.4670746447178,
+      "quality": 48.14615886385108,
       "qualityRank": 8,
       "dims": {
         "costComposite": null,
         "frontierCode": 23.9701262626263,
         "terminalBench": 34.8484848484849,
-        "bugHunt": 22,
+        "bugHunt": 17.988552739165986,
         "vibeCode": 85.223,
         "codeMigration": 48.786,
         "livebench2Overall": 68.48,
@@ -8170,16 +8170,16 @@
         "plan": 26
       },
       "overall": {
-        "api": 56.25609205401756,
-        "plan": 50.88399100837432
+        "api": 56.01540521836752,
+        "plan": 50.643304172724285
       },
-      "quality": 48.4670746447178,
+      "quality": 48.14615886385108,
       "qualityRank": 8,
       "dims": {
         "costComposite": null,
         "frontierCode": 23.9701262626263,
         "terminalBench": 34.8484848484849,
-        "bugHunt": 22,
+        "bugHunt": 17.988552739165986,
         "vibeCode": 85.223,
         "codeMigration": 48.786,
         "livebench2Overall": 68.48,
@@ -8294,16 +8294,16 @@
         "plan": 27
       },
       "overall": {
-        "api": 50.43827140748742,
-        "plan": 46.57943578301748
+        "api": 49.913136493341874,
+        "plan": 46.054300868871934
       },
-      "quality": 62.10591437735664,
+      "quality": 61.40573449182924,
       "qualityRank": 5,
       "dims": {
         "costComposite": null,
         "frontierCode": 25.7076262626263,
         "terminalBench": 57.07070707070711,
-        "bugHunt": 48.0,
+        "bugHunt": 39.247751430907606,
         "vibeCode": 91.906,
         "codeMigration": 70.796,
         "livebench2Overall": 79.3,
@@ -11681,22 +11681,22 @@
       "value": {
         "slug": "gpt-6-1-sol",
         "label": "Best overall value",
-        "reason": "GPT-6.1 Sol (max) has the highest overall score in the API ranking at 64.0, costing $1,387.03 per basket run.",
-        "score": 64.00591258737676,
+        "reason": "GPT-6.1 Sol (max) has the highest overall score in the API ranking at 62.8, costing $1,387.03 per basket run.",
+        "score": 62.8068545334111,
         "unit": "overall"
       },
       "other": {
         "slug": "gpt-6-astra",
         "label": "Best quality, any cost",
-        "reason": "GPT-6 Astra (max) has the best quality score (69.7) before cost; it ranks #3 in the API ranking.",
-        "score": 69.73317339254747,
+        "reason": "GPT-6 Astra (max) has the best quality score (68.3) before cost; it ranks #3 in the API ranking.",
+        "score": 68.27446529769874,
         "unit": "quality"
       },
       "budget": {
         "slug": "deepseek-v4-1-flash-1017",
         "label": "Best on a budget",
-        "reason": "DeepSeek V4.1 Flash 1017 scores best overall (59.5) among the cheapest third, at $531.44 per basket run.",
-        "score": 59.536457740492956,
+        "reason": "DeepSeek V4.1 Flash 1017 scores best overall (58.6) among the cheapest third, at $531.44 per basket run.",
+        "score": 58.58793280181757,
         "unit": "overall"
       }
     },
@@ -11704,22 +11704,22 @@
       "value": {
         "slug": "gpt-6-1-sol",
         "label": "Best overall value",
-        "reason": "GPT-6.1 Sol (max) has the highest overall score in the Plan ranking at 71.5, costing $128.76 per basket run.",
-        "score": 71.51180799129224,
+        "reason": "GPT-6.1 Sol (max) has the highest overall score in the Plan ranking at 70.3, costing $128.76 per basket run.",
+        "score": 70.31274993732659,
         "unit": "overall"
       },
       "other": {
         "slug": "gpt-6-astra",
         "label": "Best quality, any cost",
-        "reason": "GPT-6 Astra (max) has the best quality score (69.7) before cost; it ranks #14 in the Plan ranking.",
-        "score": 69.73317339254747,
+        "reason": "GPT-6 Astra (max) has the best quality score (68.3) before cost; it ranks #14 in the Plan ranking.",
+        "score": 68.27446529769874,
         "unit": "quality"
       },
       "budget": {
         "slug": "claude-haiku-5-5-max",
         "label": "Best on a budget",
-        "reason": "Claude Haiku 5.5 (max) scores best overall (62.4) among the cheapest third, at $17.76 per basket run.",
-        "score": 62.41440890011029,
+        "reason": "Claude Haiku 5.5 (max) scores best overall (62.1) among the cheapest third, at $17.76 per basket run.",
+        "score": 62.08072942341364,
         "unit": "overall"
       }
     }

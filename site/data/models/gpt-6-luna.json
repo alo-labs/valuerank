@@ -11,10 +11,10 @@
       "plan": 17
     },
     "overall": {
-      "api": 55.65256554259544,
-      "plan": 58.75987448149008
+      "api": 55.20401280342945,
+      "plan": 58.3113217423241
     },
-    "quality": 45.013165975320106,
+    "quality": 44.41509565643213,
     "qualityRank": 9,
     "coverage": {
       "pct": 100.0,
@@ -144,8 +144,8 @@
       "weightPct": 6.0,
       "value": 41.0,
       "decimals": 1,
-      "unit": "bugs fixed, planted plus unplanted (O163; no ceiling)",
-      "normalized": 41.0,
+      "unit": "% of the board's best planted plus best unplanted bugs fixed (O163, O170)",
+      "normalized": 33.52412101390025,
       "source": {
         "name": "Bug Hunt Bench published runs",
         "url": "https://bughunt.productcompass.pm/"
@@ -398,7 +398,7 @@
       "usdPerRun": 14.759687996495655,
       "selected": true,
       "planRank": 17,
-      "planValue": 58.75987448149008
+      "planValue": 58.3113217423241
     },
     {
       "id": "chatgpt-pro100-gpt-6-luna-common-gpt-assumption",
@@ -416,7 +416,7 @@
       "usdPerRun": 15.070271004573572,
       "selected": false,
       "planRank": 17,
-      "planValue": 58.75987448149008
+      "planValue": 58.3113217423241
     },
     {
       "id": "chatgpt-pro200-gpt-6-luna-common-gpt-assumption",
@@ -434,7 +434,7 @@
       "usdPerRun": 15.25828782132929,
       "selected": false,
       "planRank": 17,
-      "planValue": 58.75987448149008
+      "planValue": 58.3113217423241
     },
     {
       "id": "chatgpt-plus-gpt-6-luna-common-gpt-assumption",
@@ -452,7 +452,7 @@
       "usdPerRun": 19.62856285163595,
       "selected": false,
       "planRank": 17,
-      "planValue": 58.75987448149008
+      "planValue": 58.3113217423241
     }
   ],
   "scenarios": {
@@ -482,7 +482,7 @@
         "targetProfile": "published-record reporting precision + conventional identification of missing leaves + weight-specification stress",
         "unevaluable": null,
         "top1": 0.0,
-        "top3": 0.0757,
+        "top3": 0.1678,
         "frontier": 1.0
       },
       {
@@ -509,7 +509,7 @@
         "targetProfile": "published-record leaf values redrawn with task-sampling noise from each leaf's published task count (binomial leaves from their Jeffreys Beta posterior, O142, with its recentred, clipped alternative, O154, whose realised mean shift is reported; independent-task approximation; GDPval-AA from its displayed rating interval, an assumption) + conventional identification of missing leaves",
         "unevaluable": null,
         "top1": 0.0,
-        "top3": 0.1149,
+        "top3": 0.2196,
         "frontier": 1.0
       },
       {
@@ -518,7 +518,7 @@
         "targetProfile": "published-record leaf values redrawn with task-sampling noise from each leaf's published task count (binomial leaves from their Jeffreys Beta posterior, O142, with its recentred, clipped alternative, O154, whose realised mean shift is reported; independent-task approximation; GDPval-AA from its displayed rating interval, an assumption) + conventional identification of missing leaves",
         "unevaluable": null,
         "top1": 0.0,
-        "top3": 0.1048,
+        "top3": 0.204,
         "frontier": 1.0
       }
     ],
@@ -681,8 +681,8 @@
         "plan": 17
       },
       "overall": {
-        "api": 55.65256554259544,
-        "plan": 58.75987448149008
+        "api": 55.20401280342945,
+        "plan": 58.3113217423241
       }
     },
     {
@@ -693,11 +693,11 @@
       "rankingEligible": true,
       "rank": {
         "api": 14,
-        "plan": 25
+        "plan": 28
       },
       "overall": {
-        "api": 48.64415927611118,
-        "plan": 55.692378182327346
+        "api": 47.971330167362204,
+        "plan": 55.01954907357836
       }
     },
     {
@@ -711,8 +711,8 @@
         "plan": 71
       },
       "overall": {
-        "api": 40.91555980601158,
-        "plan": 51.16304210716321
+        "api": 40.07452342007535,
+        "plan": 50.32200572122699
       }
     }
   ]

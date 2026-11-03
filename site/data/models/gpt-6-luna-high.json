@@ -11,10 +11,10 @@
       "plan": 53
     },
     "overall": {
-      "api": 45.297012455618784,
-      "plan": 49.73471023156085
+      "api": 45.00162406641191,
+      "plan": 49.439321842353976
     },
-    "quality": 32.97961364208113,
+    "quality": 32.58576245647197,
     "qualityRank": 19,
     "coverage": {
       "pct": 100.0,
@@ -72,8 +72,8 @@
       "weightPct": 9.0,
       "value": 18.0,
       "decimals": 1,
-      "unit": "bugs fixed, planted plus unplanted (O163; no ceiling)",
-      "normalized": 18.0,
+      "unit": "% of the board's best planted plus best unplanted bugs fixed (O163, O170)",
+      "normalized": 14.717906786590351,
       "source": {
         "name": "Bug Hunt Bench published runs",
         "url": "https://bughunt.productcompass.pm/"
@@ -353,7 +353,7 @@
       "usdPerRun": 5.277018814202136,
       "selected": true,
       "planRank": 53,
-      "planValue": 49.73471023156085
+      "planValue": 49.439321842353976
     },
     {
       "id": "chatgpt-pro100-gpt-6-luna-high-common-gpt-assumption",
@@ -371,7 +371,7 @@
       "usdPerRun": 5.38806129541094,
       "selected": false,
       "planRank": 53,
-      "planValue": 49.73471023156085
+      "planValue": 49.439321842353976
     },
     {
       "id": "chatgpt-pro200-gpt-6-luna-high-common-gpt-assumption",
@@ -389,7 +389,7 @@
       "usdPerRun": 5.4552827894995595,
       "selected": false,
       "planRank": 53,
-      "planValue": 49.73471023156085
+      "planValue": 49.439321842353976
     },
     {
       "id": "chatgpt-plus-gpt-6-luna-high-common-gpt-assumption",
@@ -407,7 +407,7 @@
       "usdPerRun": 7.017783539084619,
       "selected": false,
       "planRank": 53,
-      "planValue": 49.73471023156085
+      "planValue": 49.439321842353976
     }
   ],
   "scenarios": {
@@ -465,7 +465,7 @@
         "unevaluable": null,
         "top1": 0.0,
         "top3": 0.0,
-        "frontier": 0.9829
+        "frontier": 0.9784
       },
       {
         "stratum": "S1T",
@@ -474,7 +474,7 @@
         "unevaluable": null,
         "top1": 0.0,
         "top3": 0.0,
-        "frontier": 0.9876
+        "frontier": 0.985
       }
     ],
     "plan": [
@@ -595,8 +595,8 @@
         "plan": 53
       },
       "overall": {
-        "api": 45.297012455618784,
-        "plan": 49.73471023156085
+        "api": 45.00162406641191,
+        "plan": 49.439321842353976
       }
     },
     {
@@ -610,8 +610,8 @@
         "plan": 88
       },
       "overall": {
-        "api": 36.63711991586058,
-        "plan": 44.83377841337902
+        "api": 36.267884429352,
+        "plan": 44.46454292687044
       }
     }
   ]

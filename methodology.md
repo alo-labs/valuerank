@@ -102,7 +102,7 @@ Cost score S_C = 100 × (ln c_H − ln c) / (ln c_H − ln c_L), clipped to 0–
 | `835a9baf594a1251` (subset) | api | $56.42 | $13,288.76 | 7 | frozen |
 | `835a9baf594a1251` (subset) | plan | $44.13 | $1,177.26 | 8 | frozen |
 
-**Anchor policy** (`complete-evidence-panel` v3). Population: ranked configurations with complete cost evidence (exact cost, no AA missing- or declined-task marker) on every component of the workload at the freeze cutoff; on the main workload this is the admission reference panel. Plan anchors: the same configurations' plan rows whose displayed Plan cost is measured (a controlled measurement or concordant reports, O157); owner assumptions and API-cost fallbacks are scored on these anchors and flagged, and are outside the Plan clip gate. At least 2 references; below that, anchors unavailable: configurations on that workload get no cost score (the main workload must meet the minimum). Lifetime: reference IDs and costs are frozen; a population or rule change is a new anchor version with an old/new bridge, and evidence lost after freezing never rebuilds an anchor.
+**Anchor policy** (`complete-evidence-panel` v4). Population: ranked configurations with complete cost evidence (exact cost, no AA missing- or declined-task marker) on every component of the workload at the freeze cutoff; on the main workload this is the admission reference panel. Plan anchors: the same configurations' plan rows whose displayed Plan cost is measured (a controlled measurement or concordant reports, O157); owner assumptions and API-cost fallbacks are scored on these anchors and flagged, and are outside the Plan clip gate. At least 2 references; below that, anchors unavailable: configurations on that workload get no cost score (the main workload must meet the minimum). Lifetime: reference IDs and costs are frozen; a population or rule change is a new anchor version with an old/new bridge, and evidence lost after freezing never rebuilds an anchor.
 
 **Exchange rate.** In the unclipped region a cost doubling changes value by −100 × 0.25 × ln 2 / ln(c_H / c_L) points, offset by +100 × 0.25 × ln 2 / ((1 − 0.25) × ln(c_H / c_L)) quality points. At the main-workload anchors:
 
@@ -115,8 +115,8 @@ Cost score S_C = 100 × (ln c_H − ln c) / (ln c_H − ln c_L), clipped to 0–
 
 | Basis | Panel | Cost's share | Status | Cost's variance allocation | Tau, cost vs value | Tau, quality vs value |
 |---|---:|---:|---|---:|---:|---:|
-| api | 8 | 49.8% | defined | 47.9% | 0.21 | 0.29 |
-| plan | 23 | 48.4% | defined | 41.8% | 0.23 | 0.34 |
+| api | 8 | 50.5% | defined | 56.0% | 0.29 | 0.21 |
+| plan | 23 | 49.2% | defined | 46.0% | 0.27 | 0.25 |
 
 ## Quality
 
@@ -128,7 +128,7 @@ Quality is the weighted mean of the leaves observed for the exact configuration,
 |---|---|---:|---:|---|---|---|---|
 | [FrontierCode 2.0](https://artificialanalysis.ai/evaluations/frontiercode-2-0) | Software engineering | 15.00% | 21.00% | 25.00% | AA score (0-1) | z = 100 × score | AA-run |
 | [Terminal-Bench 4.0 (AA run)](https://www.tbench.ai/leaderboard/terminal-bench/4.0) | Software engineering | 11.00% | 17.00% | 20.00% | % resolved | z = resolution % | AA-run |
-| [Bug Hunt Bench](https://bughunt.productcompass.pm/) | Software engineering | 8.00% | 12.00% | 15.00% | bugs fixed, planted plus unplanted (O163; no ceiling) | z = planted + unplanted bugs fixed (O163; no rescaling or ceiling) | independent |
+| [Bug Hunt Bench](https://bughunt.productcompass.pm/) | Software engineering | 8.00% | 12.00% | 15.00% | % of the board's best planted plus best unplanted bugs fixed (O163, O170) | z = planted + unplanted bugs fixed (O163; no rescaling or ceiling) | independent |
 | [Vibe Code Bench v1.1 (Vals)](https://www.vals.ai/benchmarks/vibe-code) | Software engineering | 5.00% | — | — | % of test workflows passed | z = pass rate % | independent |
 | [Code Migration v1.1 (Vals)](https://www.vals.ai/benchmarks/code-migration-v1-1) | Software engineering | 6.00% | — | — | % of hidden tests passed | z = pass rate % | independent |
 | [LiveBench 2.0 Overall](https://livebench.ai/new) | Software engineering | 15.00% | — | — | LiveBench's weighted Overall of seven category scores (0-100) | z = LiveBench's weighted Overall of the seven category scores (release 2026-10-25, O67, O139) | independent |
@@ -167,9 +167,9 @@ Plan cost = basket API cost ÷ a subscription route's Value Multiple, at full ut
 
 ## Uncertainty outputs
 
-**Interval outputs (O25).** Each observed leaf is placed anywhere inside its published reporting precision, each missing leaf anywhere in 0–100 and each cost inside its rounding. A configuration is on the **definite frontier** when no other configuration can beat it on both cost and quality for any values in those boxes, and on the **possible frontier** when some values put it there. The **cheapest above a quality bar** is confirmed only when its worst cost is below the best cost of every other configuration that could qualify. The bar is pinned by policy `quality-quartile-ladder` v3: the lower quartile, lower median (the headline bar) and upper quartile, each the displayed quality at zero-based position floor((n - 1) * k / 4), k = 1, 2, 3 (O34) of non-provisional ranked configurations with a displayed quality, ordered by displayed quality ascending, then configuration ID, selected deterministic at anchor freeze, before any bar outcome is computed; the displayed quality at each ladder position, frozen as a level; the configuration at that position is recorded for audit and competes like any other; a frozen level is never a configuration, so no bar can return its setter by construction; whether a result compares alternatives is published per result (possibleQualifierN, E198); fixed for the anchor version; replaced only by a versioned re-freeze that publishes old- and new-bar results on the common evaluable panel. Current headline bar: quality 62.1 (the displayed quality of Gemini 4 Argon at freeze); ladder: quality 49.9, quality 68.5.
+**Interval outputs (O25).** Each observed leaf is placed anywhere inside its published reporting precision, each missing leaf anywhere in 0–100 and each cost inside its rounding. A configuration is on the **definite frontier** when no other configuration can beat it on both cost and quality for any values in those boxes, and on the **possible frontier** when some values put it there. The **cheapest above a quality bar** is confirmed only when its worst cost is below the best cost of every other configuration that could qualify. The bar is pinned by policy `quality-quartile-ladder` v3: the lower quartile, lower median (the headline bar) and upper quartile, each the displayed quality at zero-based position floor((n - 1) * k / 4), k = 1, 2, 3 (O34) of non-provisional ranked configurations with a displayed quality, ordered by displayed quality ascending, then configuration ID, selected deterministic at anchor freeze, before any bar outcome is computed; the displayed quality at each ladder position, frozen as a level; the configuration at that position is recorded for audit and competes like any other; a frozen level is never a configuration, so no bar can return its setter by construction; whether a result compares alternatives is published per result (possibleQualifierN, E198); fixed for the anchor version; replaced only by a versioned re-freeze that publishes old- and new-bar results on the common evaluable panel. Current headline bar: quality 61.4 (the displayed quality of Gemini 4 Argon at freeze); ladder: quality 49.4, quality 67.5.
 
-**Scenario shares** are frequencies over declared streams, never probabilities (10,000 scenarios per run, seed 20261101, input hash `04cf4a8e4dc362f3`):
+**Scenario shares** are frequencies over declared streams, never probabilities (10,000 scenarios per run, seed 20261101, input hash `2c1734436a365e69`):
 
 - **S0**: published-record reporting precision.
 - **S1**: published-record reporting precision + conventional identification of missing leaves.
@@ -229,7 +229,7 @@ Diagnostics are published beside the ranking and never change a score: Terminal-
 
 - [data/scores.json](data/scores.json): the `v3` section holds every row, workload, anchor, interval output, scenario result, diagnostic and the evidence bundle
 - [data/plan_cost_routes.json](data/plan_cost_routes.json): subscription routes, their evidence, sources and policy
-- [data/v3_frozen.json](data/v3_frozen.json): frozen anchors, bar policy and anchor policy for anchor version `v3-2026-11-01-a3`
+- [data/v3_frozen.json](data/v3_frozen.json): frozen anchors, bar policy and anchor policy for anchor version `v3-2026-11-01-a4`
 - [data/v3_scenarios.json](data/v3_scenarios.json): scenario-share runs for every stream
 - [data/tb4.json](data/tb4.json), [data/bug_hunt.json](data/bug_hunt.json): independent benchmark snapshots ([data/aa_deepswe.json](data/aa_deepswe.json) keeps AA's last DeepSWE v1.1 capture, no longer scored, O49)
 - [data/leaf_evidence.json](data/leaf_evidence.json), [data/cognition_frontiercode.json](data/cognition_frontiercode.json): leaf gap fills and the exhaustive-search log (O36/O37)
