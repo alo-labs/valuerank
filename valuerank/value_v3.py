@@ -1084,7 +1084,13 @@ def assemble(configurations: list[dict], documents: dict, *, release_day: date, 
     admitted = admission["admitted"]
     # E184: a deferred migration keeps the frozen admitted set; the newly admissible components stay pending.
     deferred = [component for component in admitted if pinned is not None and component not in pinned]
-    admitted = [component for component in admitted if component not in deferred]
+    # O169 (2026-11-01, on reviewer 92): an admitted component stays in the workload until the next re-freeze whatever its
+    # coverage does meanwhile (entrants without its cost, failed reconstructions); a row lacking it is a subset row (O17),
+    # and the component's coverage is re-tested only at the next freeze. The frozen components below the admission
+    # threshold at this refresh are published, never acted on.
+    below = [component for component in pinned or [] if component not in admitted]
+    admitted = ([component for component in basket.TARGET_COMPONENTS if component in pinned] if pinned is not None
+                else [component for component in admitted if component not in deferred])
     main = basket.workload_hash(admitted)
     for row in rows + listed:
         row["aaNoteClass"] = admitted_note_class(row, admitted, documents.get("aaFootnotes"))
@@ -1094,6 +1100,7 @@ def assemble(configurations: list[dict], documents: dict, *, release_day: date, 
         row["plan"] = plan_routes.plan_cost(row["cost"]["costUsd"], selected)
     return {
         "rows": rows, "admission": admission, "admitted": admitted, "deferred": [{"component": component, "reason": DEFERRED_MIGRATION} for component in deferred],
+        "frozenBelowThreshold": [{"component": component, "status": FROZEN_BELOW} for component in below],
         "mainWorkload": main, "releaseDay": release_day.isoformat(), "tb4Rows": documents["tb4"]["rows"], "incomplete": incomplete, "listed": listed,
         "cognition": documents.get("cognitionFrontierCode") or {"v1_1": {"data": {}}},
         "fallbackPrices": documents.get("fallbackPrices") or {},
@@ -1114,6 +1121,7 @@ def assemble(configurations: list[dict], documents: dict, *, release_day: date, 
 
 
 DEFERRED_MIGRATION = "anchor migration unavailable — insufficient valuation-eligible references (E184)"
+FROZEN_BELOW = "below the two-thirds admission threshold at this refresh; stays admitted until the next re-freeze (O169), rows lacking it are subset rows"
 
 
 def assemble_for_release(configurations: list[dict], documents: dict, frozen: dict, *, release_day: date) -> dict:
@@ -1127,7 +1135,9 @@ def assemble_for_release(configurations: list[dict], documents: dict, frozen: di
     assembled = assemble(configurations, documents, release_day=release_day)
     frozen_components = frozen["workloads"][frozen["mainWorkload"]]["components"]
     gained = set(assembled["admitted"]) > set(frozen_components)
-    if assembled["mainWorkload"] != frozen["mainWorkload"] and gained and len(anchor_population(assembled, assembled["admitted"], freezing=True)) < MIN_ANCHOR_REFERENCES:
+    # O169: a frozen component that lost coverage stays admitted until the next re-freeze, so only a gain whose new
+    # workload can be anchored is a migration; every other change publishes on the frozen workload.
+    if assembled["mainWorkload"] != frozen["mainWorkload"] and (not gained or len(anchor_population(assembled, assembled["admitted"], freezing=True)) < MIN_ANCHOR_REFERENCES):
         return assemble(configurations, documents, release_day=release_day, pinned=frozen_components)
     return assembled
 
@@ -2845,6 +2855,9 @@ def score(assembled: dict, frozen: dict) -> dict:
               f"; {NO_PREVIOUS_COVERAGE}" if coverage["previousShare"] is None else f", previous share {coverage['previousShare']:.0%}")),
         _rule("anchor migration (E184)", "fired" if assembled.get("deferred") else "vacuous",
               "deferred: " + ", ".join(item["component"] for item in assembled["deferred"]) if assembled.get("deferred") else "no main-workload migration deferred"),
+        _rule("frozen admission (O169)", "fired" if assembled.get("frozenBelowThreshold") else "vacuous",
+              "below the admission threshold, kept until the next re-freeze: " + ", ".join(item["component"] for item in assembled["frozenBelowThreshold"])
+              if assembled.get("frozenBelowThreshold") else "every frozen component still meets the admission threshold"),
         _rule("configuration map coverage", "fired" if not all(row["configurationMapped"] for row in rows) else "passed",
               "cohort rows without a configuration-map entry (chart labels; the agent record is derived, E267): " + ", ".join(sorted(row["id"] for row in rows if not row["configurationMapped"])) if not all(row["configurationMapped"] for row in rows) else "every cohort row has a configuration-map entry"),
         _rule("quality clipping audit (E110)", "fired" if any(item["anchorPosition"] != "inside" for row in rows for item in row["evidence"]["clipAudit"]) else "passed", "saturation disclosed; domain violations block the build"),
@@ -2876,6 +2889,7 @@ def score(assembled: dict, frozen: dict) -> dict:
         "mainWorkload": main,
         "admission": {key: value for key, value in assembled["admission"].items() if key != "matrices"},
         "deferredComponents": assembled.get("deferred", []),
+        "frozenBelowThreshold": assembled.get("frozenBelowThreshold", []),
         "admissionMatrices": assembled["admission"]["matrices"],
         "workloads": {
             workload: {"components": entry["components"], "role": entry["role"], "anchors": entry["anchors"], "anchorStatus": entry["anchorStatus"]}

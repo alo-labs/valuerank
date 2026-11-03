@@ -2352,3 +2352,13 @@ Asked on I64 Q1 whether future O71 admissions should be executed by the build fr
 - L1 (E151 still says a counting report never reaches an age stage, contradicting O127): adopted.
 - Round status (O56): not clean (a Medium); Grok's run of clean rounds restarts.
 - E335. Category repricing multiplies Plan cost by (p′·u / p·u)·(p·x / p′·x).
+
+## Owner decision O169 (2026-11-01), asked on reviewer 92
+- O169 (frozen admission): an admitted basket component stays in the workload until the next anchor re-freeze, whatever its coverage does meanwhile (entrants without its cost, failed reconstructions); rows lacking it are subset rows, and its coverage is re-tested at the next freeze. This replaces E333's between-freeze threshold test and the code's re-test on the current rows (which would have stopped a release when a frozen component fell below two-thirds).
+
+## Reviewer 92 (GPT-6.1 Sol, round 13, Thinking, whole draft r174)
+- Read checks: every part read to its end.
+- M1 (E333's between-freeze test has no defined denominator for entrants and departures): owner question; O169 removes the between-freeze test. Implemented: assemble_for_release pins the frozen workload unless a newly admissible component can be anchored (E184), the frozen components below the threshold are published (`frozenBelowThreshold`) with a manifest rule, and a test covers a frozen component that lost coverage.
+- M2 (E333 sends unresolved costs to subset scoring, contradicting E209): adopted; unresolved and confirmed-incomplete costs stay on W (the code already did so).
+- L (the "newly admitted report" sentence and the empty window): adopted; a report is first admitted only through a nonempty cell window.
+- Round status (O56): not clean (Mediums); Sol's clean run restarts.

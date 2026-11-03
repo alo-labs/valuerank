@@ -2767,3 +2767,24 @@ def test_e322_the_chart_and_the_model_pages_reconcile_on_shared_fields():
         v.aa_state_reconciliation([{**point, "total_cost_usd": 103.0}], pages)
     with pytest.raises(ValueError, match="not one AA state"):
         v.aa_state_reconciliation([{**point, "intelligence_index_display": "62"}], pages)
+
+
+def test_o169_a_frozen_component_that_lost_coverage_stays_until_the_next_refreeze():
+    """O169: between freezes the frozen workload holds; a component below the threshold is published, never acted on."""
+
+    result, frozen = scored()
+    lost = copy.deepcopy(frozen)
+    main = lost["mainWorkload"]
+    components = [*lost["workloads"][main]["components"], "itbench-aa"]
+    widened = basket.workload_hash(components)
+    lost["workloads"][widened] = {**lost["workloads"].pop(main), "components": components}
+    lost["mainWorkload"] = widened
+    kept = v.assemble_for_release(CONFIGURATIONS, documents(), lost, release_day=DAY)
+    assert "itbench-aa" in kept["admitted"] and kept["deferred"] == []
+    assert kept["frozenBelowThreshold"] == [{"component": "itbench-aa", "status": v.FROZEN_BELOW}]
+    # Rows without the frozen component's cost are subset rows on their own workload, not dropped from W.
+    lacking = [row for row in kept["rows"] if row["components"].get("itbench-aa") is None]
+    assert lacking and all(row["cost"]["subset"] for row in lacking) and kept["mainWorkload"] == lost["mainWorkload"]
+    output = v.score(result, frozen)
+    manifest = {item["rule"]: item for item in output["manifest"]}
+    assert manifest["frozen admission (O169)"]["status"] == "vacuous" and output["frozenBelowThreshold"] == []

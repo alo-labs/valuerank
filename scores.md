@@ -790,6 +790,7 @@ No row is scored on a subset workload.
 | score swing gate (E177) | vacuous | first v3 release: no previous v3 release to compare |
 | ranking coverage (O166) | vacuous | ranks 20 of 37 cohort configurations; first v3 release: no previous v3 release to compare |
 | anchor migration (E184) | vacuous | no main-workload migration deferred |
+| frozen admission (O169) | vacuous | every frozen component still meets the admission threshold |
 | configuration map coverage | fired | cohort rows without a configuration-map entry (chart labels; the agent record is derived, E267): gpt-6.1-terra, gpt-6.1-terra-high, gpt-6.1-terra-medium, gpt-6.1-terra-xhigh |
 | quality clipping audit (E110) | passed | saturation disclosed; domain violations block the build |
 | full benchmark set (O36, O38) | fired | listed, not ranked: gpt-6.1-sol, claude-opus-5-5, claude-sonnet-5-5, gpt-6-astra, claude-haiku-5-5-max, claude-haiku-5-5-low, claude-haiku-5-5, claude-opus-5-5-xhigh, claude-sonnet-5-5-xhigh, gpt-5.6-luna-low, gpt-6-astra-xhigh, gpt-6-luna-low, gpt-6.1-sol-xhigh, gpt-6.1-terra-low, gemini-4-carbon, mimo-v2-6-flash, minimax-m3-1-flash |
@@ -1804,6 +1805,7 @@ No row is scored on a subset workload.
 | score swing gate (E177) | vacuous | first v3 release: no previous v3 release to compare |
 | ranking coverage (O166) | vacuous | ranks 33 of 37 cohort configurations; first v3 release: no previous v3 release to compare |
 | anchor migration (E184) | vacuous | no main-workload migration deferred |
+| frozen admission (O169) | vacuous | every frozen component still meets the admission threshold |
 | configuration map coverage | fired | cohort rows without a configuration-map entry (chart labels; the agent record is derived, E267): gpt-6.1-terra, gpt-6.1-terra-high, gpt-6.1-terra-low, gpt-6.1-terra-medium, gpt-6.1-terra-xhigh |
 | quality clipping audit (E110) | passed | saturation disclosed; domain violations block the build |
 | full benchmark set (O36, O38) | fired | listed, not ranked: gpt-5.6-luna-low, gemini-4-carbon, mimo-v2-6-flash, minimax-m3-1-flash |
@@ -2384,6 +2386,7 @@ Each admitted basket unit removed in turn, scored on anchors rebuilt by the free
 | score swing gate (E177) | vacuous | first v3 release: no previous v3 release to compare |
 | ranking coverage (O166) | vacuous | ranks 9 of 37 cohort configurations; first v3 release: no previous v3 release to compare |
 | anchor migration (E184) | vacuous | no main-workload migration deferred |
+| frozen admission (O169) | vacuous | every frozen component still meets the admission threshold |
 | configuration map coverage | passed | every cohort row has a configuration-map entry |
 | quality clipping audit (E110) | passed | saturation disclosed; domain violations block the build |
 | full benchmark set (O36, O38) | fired | listed, not ranked: gpt-6.1-terra, gpt-6.1-sol-high, gpt-6.1-sol-medium, claude-opus-5-5-high, kimi-k3-1-pro, gpt-6-astra-high, claude-opus-5-5-medium, gpt-6.1-sol-low, gpt-6.1-terra-xhigh, gpt-6.1-terra-high, claude-haiku-5-5-high, gpt-6.1-terra-medium, claude-haiku-5-5-medium, gpt-6-luna-xhigh, gpt-6-luna-high, gpt-6-luna-medium, claude-haiku-5-5-low, claude-haiku-5-5, claude-opus-5-5-xhigh, claude-sonnet-5-5-xhigh, gpt-5.6-luna-low, gpt-6-astra-xhigh, gpt-6-luna-low, gpt-6.1-sol-xhigh, gpt-6.1-terra-low, gemini-4-carbon, mimo-v2-6-flash, minimax-m3-1-flash |

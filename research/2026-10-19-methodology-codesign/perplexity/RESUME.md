@@ -1,7 +1,7 @@
 # Resuming the Perplexity panel (round 13)
 
-State on 2026-11-01: draft r174 (reviewers 78–91 folded in; O153–O168, Plan anchors re-frozen as version a2 under O157; cutoff 2026-11-01T06:10:00Z, 37-configuration cohort under O145) is committed; its review copy goes in `perplexity/parts-r174/`. The ledger (`ledger.md`) and the condensed brief (`ledger-brief.md`) run through
-owner decision O167 and reviewer 84 (O164 amends O75 to a monthly per-cell research cadence; O167 adds a release-time freshness check). Round 13 continues with GPT-6.1 Sol on r174 (GPT-6.1 Sol and Claude Sonnet 5.5 each have one clean round; Grok 4.7's run restarted).
+State on 2026-11-01: draft r175 (reviewers 78–92 folded in; O153–O169, Plan anchors re-frozen as version a2 under O157; cutoff 2026-11-01T06:10:00Z, 37-configuration cohort under O145) is committed; its review copy goes in `perplexity/parts-r175/`. The ledger (`ledger.md`) and the condensed brief (`ledger-brief.md`) run through
+owner decision O167 and reviewer 84 (O164 amends O75 to a monthly per-cell research cadence; O167 adds a release-time freshness check). Round 13 continues with Gemini 3.8 Flash on r175 (Claude Sonnet 5.5 has one clean round; Grok 4.7's and GPT-6.1 Sol's runs restarted).
 
 Panel order and status for round 13 (O56: a model's round is clean with no Medium-or-higher finding; each model needs
 two consecutive clean rounds and the panel ends when every model says NO FURTHER FEEDBACK on the same revision):
@@ -27,7 +27,8 @@ two consecutive clean rounds and the panel ends when every model says NO FURTHER
 | 89 | Kimi K3 (four sections) | r171 | findings (five Mediums, one Low), folded into r172 (E328–E331) |
 | 90 | GLM 5.3 (seven sections) | r172 | findings (one High, six Mediums, two Lows; owner decision O168), folded into r173 (E332–E334) |
 | 91 | Grok 4.7 | r173 | findings (one Medium, one Low), folded into r174 (E335); clean run restarts |
-| 92 | GPT-6.1 Sol | r174 | next (its second clean round would count) |
+| 92 | GPT-6.1 Sol | r174 | findings (two Mediums, one Low; owner decision O169), folded into r175; clean run restarts |
+| 93 | Gemini 3.8 Flash (five sections) | r175 | next |
 
 To continue:
 

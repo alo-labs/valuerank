@@ -8498,6 +8498,7 @@
       "requiredPanelSize": 6
     },
     "deferredComponents": [],
+    "frozenBelowThreshold": [],
     "admissionMatrices": {
       "exactCostAvailable": {
         "gpt-6.1-sol": {
@@ -28549,6 +28550,11 @@
         "detail": "no main-workload migration deferred"
       },
       {
+        "rule": "frozen admission (O169)",
+        "status": "vacuous",
+        "detail": "every frozen component still meets the admission threshold"
+      },
+      {
         "rule": "configuration map coverage",
         "status": "passed",
         "detail": "every cohort row has a configuration-map entry"
@@ -34753,6 +34759,7 @@
         "requiredPanelSize": 14
       },
       "deferredComponents": [],
+      "frozenBelowThreshold": [],
       "admissionMatrices": {
         "exactCostAvailable": {
           "gpt-6.1-terra": {
@@ -65142,6 +65149,11 @@
           "detail": "no main-workload migration deferred"
         },
         {
+          "rule": "frozen admission (O169)",
+          "status": "vacuous",
+          "detail": "every frozen component still meets the admission threshold"
+        },
+        {
           "rule": "configuration map coverage",
           "status": "fired",
           "detail": "cohort rows without a configuration-map entry (chart labels; the agent record is derived, E267): gpt-6.1-terra, gpt-6.1-terra-high, gpt-6.1-terra-medium, gpt-6.1-terra-xhigh"
@@ -77933,6 +77945,7 @@
         "requiredPanelSize": 22
       },
       "deferredComponents": [],
+      "frozenBelowThreshold": [],
       "admissionMatrices": {
         "exactCostAvailable": {
           "gpt-6.1-sol": {
@@ -123004,6 +123017,11 @@
           "rule": "anchor migration (E184)",
           "status": "vacuous",
           "detail": "no main-workload migration deferred"
+        },
+        {
+          "rule": "frozen admission (O169)",
+          "status": "vacuous",
+          "detail": "every frozen component still meets the admission threshold"
         },
         {
           "rule": "configuration map coverage",
