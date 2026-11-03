@@ -248,6 +248,10 @@ def exclusion(report: dict, profile: dict, release_day: date, grandfathered: fro
     # or usage-ledger excerpt) hashed into the evidence bundle.
     if report.get("stage") == FORM_STAGE and not report.get("evidenceArtifactSha256"):
         return "form submission without an evidence artifact (O124)"
+    # E336 (reviewer 93): the O86 concordance ratio divides by the smallest upper bound, so a report with a non-positive
+    # figure is excluded before any test reads it.
+    if report["valueUpper"] <= 0 or report["valueLower"] < 0:
+        return "non-positive allowance figure: no concordance test can read it (E336)"
     if report.get("lowerBound"):
         return "lower bound: no meter fraction"
     if report.get("mixedModel"):

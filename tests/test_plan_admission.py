@@ -302,3 +302,8 @@ def test_e320_a_cell_whose_search_predates_the_envelope_has_an_empty_window():
     assert pa.new_report_window(day, "2026-10-01") == {"start": "2026-10-02", "end": None, "status": pa.EMPTY_WINDOW}
     assert pa.new_report_window(day, None)["end"] == "2026-11-01"
     assert pa.new_report_window(day, "2026-11-05")["end"] == "2026-11-01"
+
+
+def test_e336_a_non_positive_figure_is_excluded_before_concordance():
+    assert "non-positive allowance figure" in pa.exclusion(report("z", low=0.0, high=0.0), PROFILE, DAY)
+    assert "non-positive allowance figure" in pa.exclusion(report("n", low=-1.0, high=5.0), PROFILE, DAY)
