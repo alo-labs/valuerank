@@ -376,6 +376,8 @@ def evaluate(document: dict, profile: dict, release_day: date, families: dict | 
                         "admittingObservers": sorted(row["observer"] for row in firm) if status == "passes" else [],
                         "searchedThrough": (search_dates or {}).get((model, plan)),
                         "newReportWindow": new_report_window(release_day, (search_dates or {}).get((model, plan))),
+                        # Reviewer 95: the reports whose midpoint the O115 band moved, so a band-dominated value is visible.
+                        "bandMoved": sorted(row["observer"] for row in firm if not feasible[0] <= (row["valueLower"] + row["valueUpper"]) / 2 <= feasible[1]) if status == "passes" else [],
                         "notArchivedAdmitting": sorted(row["observer"] for row in firm if row["archive"]) if status == "passes" else [],
                         "flags": [ACROSS_RESETS_FLAG] if status == "passes" and any(row["acrossResets"] for row in firm) else []})
     return results

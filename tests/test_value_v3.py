@@ -1369,6 +1369,8 @@ def test_bound_domain_checks_and_unconstructible_blockers():
     assert v.reconciles(model, {**PRICES, "output": 0.0}) is False and v.reconciles(model, {**PRICES, "cacheRead": 0.0}) is False
     open_plan = {"bounds": {"status": "available", "apiCost": [0.0, 1.5], "planCost": [0.0, None]}}
     assert v.blocker_domain(open_plan, "api") is None and v.blocker_domain(open_plan, "plan") is None
+    # E339: a positive lower ratio with an open upper end is the domain [low, infinity), not an unavailable one.
+    assert v.blocker_domain({"bounds": {"status": "available", "apiCost": [0.0, 1.5], "planCost": [0.4, None]}}, "plan") == (0.4, math.inf)
     assert v.blocker_domain({"bounds": {"status": "available", "apiCost": [0.5, 1.5], "planCost": [0.3, 3.0]}}, "plan") == (0.3, 3.0)
     record = {"id": "free", "aaSlug": "a-max", "prices": {**PRICES, "cacheWrite": 0.0}}
     page_free = priced_page("a-max", 1.0, {**PRICES, "cacheWrite": 0.0}, price1mOutputTokens=15.0)
@@ -2821,3 +2823,22 @@ def test_o172_each_leading_ranking_carries_the_common_leaf_answer():
     assert set(answers) == {"max", "aicd"} and answers["max"]["ranking"] == "common"
     assert answers["max"]["bases"]["api"] == [{"bar": "bar:median-quality", "level": 50.0, "cheapest": ["low"], "costUsd": 1.0}]
     assert v.common_answers({"max": sections["max"]}) == {}
+
+
+def test_o173_bug_hunt_scale_stress_moves_every_row_by_the_rescaled_leaf():
+    """O173: the live scale kept, a ±10% scale move is published as a value and rank stress (cost held)."""
+
+    result, frozen = scored()
+    output = v.score(result, frozen)
+    stress = output["diagnostics"]["bugHuntScaleStress"]
+    assert stress["label"] == v.BUG_HUNT_SCALE_STRESS_LABEL and set(stress["bases"]["api"]) == {"0.9", "1.1"}
+    rows = result["rows"]
+    per_row = {row["id"]: {basis: {"value": 50.0, "costScore": 50.0} for basis in v.BASES} for row in rows}
+    direct = v.bug_hunt_scale_stress(rows, per_row)
+    hunted = [row for row in rows if "bugHunt" in row["evidence"]["observations"]]
+    assert hunted and direct["bases"]["api"]["0.9"]["largestValueMove"] > 0.0
+    # A row without a value or without a Bug Hunt leaf is left as it is.
+    per_row[hunted[0]["id"]]["api"]["value"] = None
+    assert v.bug_hunt_scale_stress(rows, per_row)["bases"]["api"]["1.1"]["largestValueMove"] >= 0.0
+    bare = [dict(rows[0], evidence={"observations": {}})]
+    assert v.bug_hunt_scale_stress(bare, {rows[0]["id"]: per_row[rows[0]["id"]]})["bases"]["api"]["0.9"]["largestValueMove"] == 0.0

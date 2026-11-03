@@ -65,6 +65,8 @@ def test_cells_pass_only_on_two_firm_concordant_reports_in_the_current_partition
     # O115: a wide report's midpoint is clipped to the concordance band before pooling (R68's counterexample: 240 -> ~118).
     wide = cells(report("a", start="2026-10-18", end="2026-10-19", low=100, high=110), report("b", start="2026-10-20", end="2026-10-20", low=100, high=1000))[("Pro", "week", "global")]
     assert wide["status"] == "passes" and wide["value"] == pytest.approx((105 * 132) ** 0.5) and wide["feasibleRange"] == pytest.approx([100 / 1.2, 132])
+    # Reviewer 95: the band moved b's midpoint (550 -> 132), so the cell names it; a cell no band moved names none.
+    assert wide["bandMoved"] == ["b"] and passing["bandMoved"] == []
     assert passing["monthlyUsd"] == pytest.approx(105 * 52 / 12) and passing["multiple"] == pytest.approx(105 * 52 / 12 / 20)
     assert cells(report("a", start="2026-10-18", end="2026-10-18", low=100), report("b", start="2026-10-19", end="2026-10-19", low=125))[("Pro", "week", "global")]["status"] == "fails: largest lower bound 1.25× the smallest upper bound (O86 allows 1.20×) in the current partition"
     # O86: coarse whole-percent readings 7% apart share a value, though their whole span is 1.23x.

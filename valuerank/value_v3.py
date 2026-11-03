@@ -1487,13 +1487,15 @@ def provider_claimed(row: dict) -> bool:
 
 
 def blocker_domain(gate: dict, basis: str) -> tuple[float, float] | None:
-    """E183/E185: the current-tariff ratio range a blocker's box is widened by, or None when it cannot be constructed."""
+    """E183/E185: the current-tariff ratio range a blocker's box is widened by, or None when it cannot be constructed.
+    E339 (on reviewer 95): an established positive lower ratio with no finite upper end is a domain, [low, infinity), like
+    O98's factorless caveat; the interval decisions then settle what a finite witness or the lower bound settles."""
 
     bounds = gate["bounds"]
     if bounds["status"] != "available":
         return None
     low, high = bounds["apiCost" if basis == "api" else "planCost"]
-    return (low, high) if high is not None and low > 0 else None
+    return (low, math.inf if high is None else high) if low > 0 else None
 
 
 def api_candidates(assembled: dict, components: list[str] | None = None) -> list[tuple[dict, float, float]]:
@@ -2042,6 +2044,36 @@ def gap_fill_sensitivity(rows: list[dict], per_row: dict) -> dict:
         bases[basis] = {"rankChanges": diagnostics.paired_rank_change(primary, branched)}
     return {"label": "gap-fill removal: each row's leaves from another party or the provider removed, the rest renormalised (E234; diagnostic)",
             "rows": filled, "bases": bases}
+
+
+# O173 (2026-11-03, on reviewer 95, keeping O170's live scale): how far a ±10% move of the live Bug Hunt scale moves value
+# and rank, every row's Bug Hunt z rescaled (capped at 100), the other leaves and the cost score held (a diagnostic).
+BUG_HUNT_SCALE_FACTORS = (0.9, 1.1)
+BUG_HUNT_SCALE_STRESS_LABEL = ("Bug Hunt scale stress: the live board maxima (O170, kept live by O173) moved by ±10%, every row's "
+                               "Bug Hunt z rescaled, other leaves and cost held (diagnostic; no score changes)")
+
+
+def bug_hunt_scale_stress(rows: list[dict], per_row: dict) -> dict:
+    """O173: value and rank changes when the live Bug Hunt scale is 10% smaller or larger."""
+
+    bases = {}
+    for basis in BASES:
+        primary = {row["id"]: per_row[row["id"]][basis]["value"] for row in rows if per_row[row["id"]][basis]["value"] is not None}
+        factors = {}
+        for factor in BUG_HUNT_SCALE_FACTORS:
+            branch, largest = dict(primary), 0.0
+            for row in rows:
+                observations = row["evidence"]["observations"]
+                if row["id"] not in primary or "bugHunt" not in observations:
+                    continue
+                share = q.LEAF_BY_KEY["bugHunt"].weight / sum(q.LEAF_BY_KEY[key].weight for key in observations)
+                z = observations["bugHunt"].z
+                quality = row["summary"].displayed + share * (min(100.0, z / factor) - z)
+                branch[row["id"]] = anchor_math.value_score(per_row[row["id"]][basis]["costScore"], quality, BETA)
+                largest = max(largest, abs(branch[row["id"]] - primary[row["id"]]))
+            factors[f"{factor:.1f}"] = {"largestValueMove": largest, "rankChanges": diagnostics.paired_rank_change(primary, branch)}
+        bases[basis] = factors
+    return {"label": BUG_HUNT_SCALE_STRESS_LABEL, "scale": dict(q.BUG_HUNT_SCALE), "bases": bases}
 
 
 def bug_hunt_harness_sensitivity(rows: list[dict], per_row: dict, bars: list[dict] | None = None) -> dict:
@@ -2992,6 +3024,7 @@ def score(assembled: dict, frozen: dict) -> dict:
             "frontierCodeCrossSource": frontiercode_cross_source(cohort_rows, assembled["cognition"]),
             "gapFillSensitivity": gap_fill_sensitivity(rows, per_row),
             "bugHuntHarnessSensitivity": bug_hunt_harness_sensitivity(rows, per_row, frozen.get("barReferences")),
+            "bugHuntScaleStress": bug_hunt_scale_stress(rows, per_row),
             "fallbackRepricing": fallback_repricing(rows, per_row, frozen["workloads"][main]["anchors"]["api"], assembled.get("fallbackPrices") or {}),
             "harnessCostStress": harness_cost_stress(assembled, frozen),
             "gapFillBars": gap_fill_bars(assembled, frozen, frontiercode_cross_source(cohort_rows, assembled["cognition"])["meanOffset"]),

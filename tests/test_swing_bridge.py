@@ -36,7 +36,7 @@ def test_replay_attributes_each_change_to_its_class_with_named_fields():
     changed["planRoutes"]["routes"][1]["valueMultiple"] = 4.0  # Plan evidence
     current = release(CONFIGURATIONS[:2], changed, frozen)  # c leaves the cohort
     result = sb.bridge(previous, current, frozen, DAY)
-    assert result["order"] == [sb.METHOD_STEP, "price", "tokenUse", "benchmarkRecord", "planEvidence", "cohort"]
+    assert result["order"] == [sb.METHOD_STEP, "price", "tokenUse", "benchmarkRecord", "bugHuntScale", "planEvidence", "cohort"]
     assert result["exits"] == [{"row": "c", "status": "cohort exit"}] and result["admissions"] == []
     a, b = result["rows"]["a"], result["rows"]["b"]
     assert a["api"]["steps"][sb.METHOD_STEP] == pytest.approx(0.0) and a["api"]["replayResidual"] == pytest.approx(0.0)
