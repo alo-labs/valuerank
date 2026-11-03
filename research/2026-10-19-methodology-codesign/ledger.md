@@ -2447,3 +2447,12 @@ Asked on I64 Q1 whether future O71 admissions should be executed by the build fr
 - M1 (owner decision challenge to O179's wording): owner decision O180. The separate "cost incentive" field is not adopted: the derivative is fixed by the scoring equation (−25/ln(c_H/c_L) per log cost inside the anchors, 0 beyond), stated in the text and held by the new test.
 - M2 (a stale sentence still called the Opus rows unresolved): verified; corrected, and the text now says the frozen a4 anchor references, set while those rows were unresolved, leave them out until the next versioned re-freeze. The release-state object is not adopted as a new artifact; the figures it would hold are already rendered from the build (E265), and the stale sentence was hand-written prose, now removed.
 - Round status (O56): not clean (Mediums); Sol's clean run restarts.
+
+## Reviewer 99 (Gemini 3.8 Flash, round 13, Thinking, five sections of r181)
+- Read checks: every part read to its end; the parts 4–6 send was submitted three times (two runs left the prompt unsent).
+- Parts 1–3 H (clipped tolerance undefined when the threshold exceeds the anchor span): verified not a defect; the build already publishes `{"status": "unreachable in either direction: the threshold exceeds the whole cost scale"}` with no factor; the text now names the status. M1 (one unpriced fallback model makes the O158 sensitivity "unpriced"): not adopted; an attempt whose fallback model has no captured price has nothing to bound, and a partial bound would understate the stress. M2 (O175 residual as a directional interval): not adopted; O175 judged a residual of at most 0.1% immaterial, and each row's sign and size are published. L (punctuation of the excluded-set partition): adopted.
+- Parts 4–6: NO FURTHER FEEDBACK. Parts 7–9: NO FURTHER FEEDBACK.
+- Parts 10–12 M1 (the noise screen and S1T answer different questions): verified; adopted as E342 (S1T holds the bar at H, E52; the screen treats the setter as noisy).
+- Parts 13–15 L1 (Omniscience at perfect accuracy): verified; with A = 1 the reconstruction now reads I = 100 whether or not h is published (code and tests).
+- Round status (O56): not clean (a Medium adopted); Gemini's clean run restarts.
+- E342. The O171 screen is not S1T's joint counterpart: S1T fixes the bar at H while the screen treats the bar setter as noisy.
