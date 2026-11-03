@@ -2488,7 +2488,7 @@ Asked on I64 Q1 whether future O71 admissions should be executed by the build fr
 - Round status (O56): not clean (a High and Mediums); GLM's clean run restarts.
 
 ## Owner decisions O181–O182 (2026-11-03), asked on reviewer 103
-- O181 (token-meter transfers, keeping O144): challenged with the argument that on a token meter a dearer target exhausts the allowance sooner, so the donor multiple overstates its Plan value in a known direction, the owner kept the donor multiple as the displayed figure; the O144/O146 bracket stays the sensitivity, its low end the conservative reading, and the text now states the direction.
+- O181 (token-meter transfers, keeping O144): challenged with the argument that on a token meter a dearer target exhausts the allowance sooner, so the donor multiple overstates its Plan value in a known direction, the owner kept the donor multiple as the displayed figure; the O144/O146 bracket stays the sensitivity, its low end the conservative reading, and the text now states the direction. (Reviewer 104 showed the stated direction was reversed: under an equal raw-token allowance a dearer target's tokens are worth more API dollars, so where r > 1 the donor multiple is the bracket's low end; corrected in r187.)
 - O182 (E41 and labels, amending O160): while a ranking's workload cross-check reads low agreement (τ_b below 0.5), it issues no confirmed-cheapest interval label and no scenario-supported cheapest label; each bar reads "labels withheld" with the evaluated status and answer kept in scores.json (`evaluatedStatus`, `withheldConfirmedCheapest`, `labelGate`); tables, displayed-record answers and the attribution stay, and the release is not held. Under uncertain agreement the labels are issued with the warning. Today this withholds the AI Coding Daily ranking's labels (τ_b 0.35 on 20 configurations).
 
 ## Reviewer 103 (Grok 4.7, round 13, Thinking, whole draft r185)
@@ -2499,3 +2499,9 @@ Asked on I64 Q1 whether future O71 admissions should be executed by the build fr
 - M2 (machine-readable primary answer under a negative cost allocation): not adopted; O179 chose the banner without the bar-table sort.
 - M3 (LiveBench's categories "all needed in the SDLC"): not changed; that is the owner's O61 clarification, and O122 prints the coding-specific share beside it.
 - Round status (O56): not clean (Highs and owner decisions); Grok's clean run restarts.
+
+## Reviewer 104 (GPT-6.1 Sol, round 13, Thinking, whole draft r186)
+- Read checks: every part read to its end.
+- M1 (the O181 sentence reverses the price-ratio direction): verified; under an equal attainable raw-token allowance and the shared mix, M_target = r·M_donor, so where r > 1 the donor multiple understates the conditional valuation and is the bracket's low (conservative) end. Corrected, with the caveat that a credit-valued or burn-rate meter needs its own coefficients; O181's displayed figure is unchanged. The sign fixture is not added (the bracket code already computes M × min(1, r) and M × max(1, r), tested).
+- L1 (the limitations sentence still kept the AI Coding Daily labels): adopted; it now separates O133 (pending components keep eligibility) from O182 (the low cross-check withholds the cheapest labels).
+- Round status (O56): not clean (a Medium); Sol's clean run restarts.
