@@ -672,11 +672,13 @@ def displayed_cheapest_sentences(facts):
         if common:
             sentences.append(f"{label} basis, common-leaf diagnostic ranking at the same bar positions (O172; its own bar levels, no label, not a claim): cheapest "
                              + "; ".join(f"at or above {bar_name(item)}: {facts.labels(item['cheapest']) or 'none'}" for item in common) + ".")
-        # O171: whether each answer is clear of benchmark noise.
+        # O171: the pointwise noise-margin screen of each answer (E337: not a simultaneous confidence statement).
         noise = [f"at or above {bar_name(item)}: {item['noise']['status'].split(':')[0]}" + (f" (contested by {facts.labels(item['noise']['contestedBy'])})" if item["noise"]["contestedBy"] else "")
+                 + (f", {item['noise']['cheaperCompared']} cheaper rows compared" if "cheaperCompared" in item["noise"] else "")
                  for item in facts.v3["displayedCheapest"][basis]["bars"] if item.get("noise")]
         if noise:
-            sentences.append(f"{label} basis, noise companion (O171; Δ = (Q − H)/√(σ² + σ_H²) at correlation 0, 1.96 for 95%): " + "; ".join(noise) + ".")
+            sentences.append(f"{label} basis, pointwise noise-margin screen (O171; Δ = (Q − H)/√(σ² + σ_H²) at correlation 0 with the bar setter, 1.96 per "
+                             "comparison; separate comparisons, not a simultaneous confidence statement, E337): " + "; ".join(noise) + ".")
         margin = facts.v3["displayedCheapest"][basis].get("margin")
         companions = [f"at or above quality {item['margin']['level']:.1f}: {facts.labels(item['margin']['cheapest']) or 'none'}"
                       + (f" ({usd(item['margin']['costUsd'])} per basket run)" if item["margin"]["cheapest"] else "")

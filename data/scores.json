@@ -22318,9 +22318,11 @@
               "gpt-6.1-sol"
             ],
             "noise": {
-              "status": "noise-separated: the answer clears the bar by the 95% noise margin and no cheaper row can reach it within noise (O171)",
+              "status": "screen passed: the answer clears the bar by the pointwise 95% noise margin and every cheaper row falls below it by the same margin (O171; separate comparisons sharing the bar setter, not a simultaneous confidence statement, E337)",
               "delta": 3.277295763632903,
-              "contestedBy": []
+              "contestedBy": [],
+              "cheaperCompared": 3,
+              "setter": "gemini-4-argon"
             },
             "uncheckedCheaperSiblings": {
               "gpt-6.1-sol": [
@@ -22349,9 +22351,11 @@
               "deepseek-v4-1-flash-1017"
             ],
             "noise": {
-              "status": "noise-separated: the answer clears the bar by the 95% noise margin and no cheaper row can reach it within noise (O171)",
+              "status": "screen passed: the answer clears the bar by the pointwise 95% noise margin and every cheaper row falls below it by the same margin (O171; separate comparisons sharing the bar setter, not a simultaneous confidence statement, E337)",
               "delta": 3.634431279158614,
-              "contestedBy": []
+              "contestedBy": [],
+              "cheaperCompared": 1,
+              "setter": "claude-haiku-5-5-max"
             },
             "uncheckedCheaperSiblings": {},
             "uncheckedCheaperSiblingsBasis": "lower AA total Index cost; workload- and Plan-cost ordering unverified (E318)",
@@ -22373,9 +22377,11 @@
               "gpt-6.1-sol"
             ],
             "noise": {
-              "status": "rounding-stable only: the answer does not clear the bar by the 95% noise margin (O171)",
+              "status": "rounding-stable only: the answer does not clear the bar by the pointwise 95% noise margin (O171)",
               "delta": 0.0,
-              "contestedBy": []
+              "contestedBy": [],
+              "cheaperCompared": 3,
+              "setter": "gpt-6.1-sol"
             },
             "uncheckedCheaperSiblings": {
               "gpt-6.1-sol": [
@@ -22408,9 +22414,11 @@
               "gpt-6.1-sol@chatgpt-pro-500"
             ],
             "noise": {
-              "status": "noise-separated: the answer clears the bar by the 95% noise margin and no cheaper row can reach it within noise (O171)",
+              "status": "screen passed: the answer clears the bar by the pointwise 95% noise margin and every cheaper row falls below it by the same margin (O171; separate comparisons sharing the bar setter, not a simultaneous confidence statement, E337)",
               "delta": 4.446211286002337,
-              "contestedBy": []
+              "contestedBy": [],
+              "cheaperCompared": 7,
+              "setter": "gemini-4-argon"
             },
             "uncheckedCheaperSiblings": {
               "gpt-6.1-sol": [
@@ -22439,9 +22447,11 @@
               "claude-haiku-5-5-max@claude-pro"
             ],
             "noise": {
-              "status": "rounding-stable only: the answer does not clear the bar by the 95% noise margin (O171)",
+              "status": "rounding-stable only: the answer does not clear the bar by the pointwise 95% noise margin (O171)",
               "delta": 0.0,
-              "contestedBy": []
+              "contestedBy": [],
+              "cheaperCompared": 3,
+              "setter": "claude-haiku-5-5-max"
             },
             "uncheckedCheaperSiblings": {
               "claude-haiku-5-5-max": [
@@ -22470,9 +22480,11 @@
               "gpt-6.1-sol@chatgpt-pro-500"
             ],
             "noise": {
-              "status": "rounding-stable only: the answer does not clear the bar by the 95% noise margin (O171)",
+              "status": "rounding-stable only: the answer does not clear the bar by the pointwise 95% noise margin (O171)",
               "delta": 0.0,
-              "contestedBy": []
+              "contestedBy": [],
+              "cheaperCompared": 7,
+              "setter": "gpt-6.1-sol"
             },
             "uncheckedCheaperSiblings": {
               "gpt-6.1-sol": [
@@ -22635,6 +22647,7 @@
             {
               "row": "gemini-4-argon",
               "required": null,
+              "domain": null,
               "missing": []
             }
           ]
@@ -22651,6 +22664,7 @@
             {
               "row": "gpt-6.1-sol",
               "required": null,
+              "domain": null,
               "missing": []
             }
           ]
@@ -57166,13 +57180,15 @@
                 "gpt-6.1-terra-high"
               ],
               "noise": {
-                "status": "rounding-stable only: the answer does not clear the bar by the 95% noise margin (O171)",
+                "status": "rounding-stable only: the answer does not clear the bar by the pointwise 95% noise margin (O171)",
                 "delta": 0.0,
                 "contestedBy": [
                   "gpt-6.1-sol-low",
                   "gpt-6.1-terra-medium",
                   "mimo-v2-6-pro"
-                ]
+                ],
+                "cheaperCompared": 9,
+                "setter": "gpt-6.1-terra-high"
               },
               "uncheckedCheaperSiblings": {
                 "gpt-6.1-terra-high": [
@@ -57199,13 +57215,15 @@
                 "claude-haiku-5-5-high"
               ],
               "noise": {
-                "status": "rounding-stable only: the answer does not clear the bar by the 95% noise margin (O171)",
+                "status": "rounding-stable only: the answer does not clear the bar by the pointwise 95% noise margin (O171)",
                 "delta": 0.0,
                 "contestedBy": [
                   "claude-haiku-5-5-medium",
                   "gpt-6-luna-high",
                   "gpt-6-luna-xhigh"
-                ]
+                ],
+                "cheaperCompared": 4,
+                "setter": "claude-haiku-5-5-high"
               },
               "uncheckedCheaperSiblings": {
                 "claude-haiku-5-5-high": [
@@ -57231,13 +57249,15 @@
                 "gpt-6.1-sol-high"
               ],
               "noise": {
-                "status": "rounding-stable only: the answer does not clear the bar by the 95% noise margin (O171)",
+                "status": "rounding-stable only: the answer does not clear the bar by the pointwise 95% noise margin (O171)",
                 "delta": 1.1200798565724825,
                 "contestedBy": [
                   "deepseek-v4-1-flash-1017",
                   "gpt-6.1-sol-medium",
                   "gpt-6.1-terra-xhigh"
-                ]
+                ],
+                "cheaperCompared": 13,
+                "setter": "gemini-4-argon"
               },
               "uncheckedCheaperSiblings": {},
               "uncheckedCheaperSiblingsBasis": "lower AA total Index cost; workload- and Plan-cost ordering unverified (E318)",
@@ -57263,7 +57283,7 @@
                 "gpt-6.1-terra-high@chatgpt-pro-500"
               ],
               "noise": {
-                "status": "rounding-stable only: the answer does not clear the bar by the 95% noise margin (O171)",
+                "status": "rounding-stable only: the answer does not clear the bar by the pointwise 95% noise margin (O171)",
                 "delta": 0.0,
                 "contestedBy": [
                   "gpt-6.1-sol-low@chatgpt-plus",
@@ -57274,7 +57294,9 @@
                   "gpt-6.1-terra-medium@chatgpt-pro-100",
                   "gpt-6.1-terra-medium@chatgpt-pro-200",
                   "gpt-6.1-terra-medium@chatgpt-pro-500"
-                ]
+                ],
+                "cheaperCompared": 30,
+                "setter": "gpt-6.1-terra-high"
               },
               "uncheckedCheaperSiblings": {
                 "gpt-6.1-terra-high": [
@@ -57301,9 +57323,11 @@
                 "claude-haiku-5-5-high@claude-pro"
               ],
               "noise": {
-                "status": "rounding-stable only: the answer does not clear the bar by the 95% noise margin (O171)",
+                "status": "rounding-stable only: the answer does not clear the bar by the pointwise 95% noise margin (O171)",
                 "delta": 0.0,
-                "contestedBy": []
+                "contestedBy": [],
+                "cheaperCompared": 3,
+                "setter": "claude-haiku-5-5-high"
               },
               "uncheckedCheaperSiblings": {
                 "claude-haiku-5-5-high": [
@@ -57329,7 +57353,7 @@
                 "claude-opus-5-5-high@claude-pro"
               ],
               "noise": {
-                "status": "rounding-stable only: the answer does not clear the bar by the 95% noise margin (O171)",
+                "status": "rounding-stable only: the answer does not clear the bar by the pointwise 95% noise margin (O171)",
                 "delta": 0.901555393443241,
                 "contestedBy": [
                   "claude-opus-5-5-medium@claude-max-20x",
@@ -57339,7 +57363,9 @@
                   "gpt-6.1-sol-medium@chatgpt-pro-100",
                   "gpt-6.1-sol-medium@chatgpt-pro-200",
                   "gpt-6.1-sol-medium@chatgpt-pro-500"
-                ]
+                ],
+                "cheaperCompared": 45,
+                "setter": "gemini-4-argon"
               },
               "uncheckedCheaperSiblings": {
                 "claude-opus-5-5-high": [
@@ -57491,6 +57517,7 @@
               {
                 "row": "gpt-6.1-terra-high",
                 "required": null,
+                "domain": null,
                 "missing": []
               }
             ]
@@ -57507,6 +57534,7 @@
               {
                 "row": "gemini-4-argon",
                 "required": null,
+                "domain": null,
                 "missing": []
               }
             ]
@@ -111570,11 +111598,13 @@
                 "gpt-6.1-sol-medium"
               ],
               "noise": {
-                "status": "rounding-stable only: the answer does not clear the bar by the 95% noise margin (O171)",
+                "status": "rounding-stable only: the answer does not clear the bar by the pointwise 95% noise margin (O171)",
                 "delta": 0.878500262180727,
                 "contestedBy": [
                   "gpt-6.1-terra-xhigh"
-                ]
+                ],
+                "cheaperCompared": 16,
+                "setter": "deepseek-v4-1-flash-1017"
               },
               "uncheckedCheaperSiblings": {},
               "uncheckedCheaperSiblingsBasis": "lower AA total Index cost; workload- and Plan-cost ordering unverified (E318)",
@@ -111596,12 +111626,14 @@
                 "gpt-6-luna"
               ],
               "noise": {
-                "status": "rounding-stable only: the answer does not clear the bar by the 95% noise margin (O171)",
+                "status": "rounding-stable only: the answer does not clear the bar by the pointwise 95% noise margin (O171)",
                 "delta": 0.0,
                 "contestedBy": [
                   "claude-haiku-5-5-high",
                   "gpt-6.1-terra-low"
-                ]
+                ],
+                "cheaperCompared": 8,
+                "setter": "gpt-6-luna"
               },
               "uncheckedCheaperSiblings": {
                 "gpt-6-luna": [
@@ -111627,11 +111659,13 @@
                 "gpt-6.1-sol-xhigh"
               ],
               "noise": {
-                "status": "rounding-stable only: the answer does not clear the bar by the 95% noise margin (O171)",
+                "status": "rounding-stable only: the answer does not clear the bar by the pointwise 95% noise margin (O171)",
                 "delta": 0.8246421646004557,
                 "contestedBy": [
                   "gpt-6.1-sol-high"
-                ]
+                ],
+                "cheaperCompared": 19,
+                "setter": "gpt-6-astra-high"
               },
               "uncheckedCheaperSiblings": {},
               "uncheckedCheaperSiblingsBasis": "lower AA total Index cost; workload- and Plan-cost ordering unverified (E318)",
@@ -111659,12 +111693,14 @@
                 "claude-opus-5-5-medium@claude-pro"
               ],
               "noise": {
-                "status": "rounding-stable only: the answer does not clear the bar by the 95% noise margin (O171)",
+                "status": "rounding-stable only: the answer does not clear the bar by the pointwise 95% noise margin (O171)",
                 "delta": 0.9733590647742588,
                 "contestedBy": [
                   "gpt-6.1-terra-xhigh@chatgpt-pro-100",
                   "gpt-6.1-terra-xhigh@chatgpt-pro-500"
-                ]
+                ],
+                "cheaperCompared": 53,
+                "setter": "deepseek-v4-1-flash-1017"
               },
               "uncheckedCheaperSiblings": {
                 "claude-opus-5-5-medium": [
@@ -111690,13 +111726,15 @@
                 "claude-haiku-5-5@claude-pro"
               ],
               "noise": {
-                "status": "rounding-stable only: the answer does not clear the bar by the 95% noise margin (O171)",
+                "status": "rounding-stable only: the answer does not clear the bar by the pointwise 95% noise margin (O171)",
                 "delta": 1.2770000392663952,
                 "contestedBy": [
                   "claude-haiku-5-5-high@claude-max-20x",
                   "claude-haiku-5-5-high@claude-max-5x",
                   "claude-haiku-5-5-high@claude-pro"
-                ]
+                ],
+                "cheaperCompared": 13,
+                "setter": "gpt-6-luna"
               },
               "uncheckedCheaperSiblings": {},
               "uncheckedCheaperSiblingsBasis": "lower AA total Index cost; workload- and Plan-cost ordering unverified (E318)",
@@ -111718,14 +111756,16 @@
                 "gpt-6.1-sol-xhigh@chatgpt-pro-500"
               ],
               "noise": {
-                "status": "rounding-stable only: the answer does not clear the bar by the 95% noise margin (O171)",
+                "status": "rounding-stable only: the answer does not clear the bar by the pointwise 95% noise margin (O171)",
                 "delta": 1.1464240440992386,
                 "contestedBy": [
                   "gpt-6.1-sol-high@chatgpt-plus",
                   "gpt-6.1-sol-high@chatgpt-pro-100",
                   "gpt-6.1-sol-high@chatgpt-pro-200",
                   "gpt-6.1-sol-high@chatgpt-pro-500"
-                ]
+                ],
+                "cheaperCompared": 72,
+                "setter": "gpt-6-astra-high"
               },
               "uncheckedCheaperSiblings": {},
               "uncheckedCheaperSiblingsBasis": "lower AA total Index cost; workload- and Plan-cost ordering unverified (E318)",
@@ -111871,6 +111911,7 @@
               {
                 "row": "deepseek-v4-1-flash-1017",
                 "required": null,
+                "domain": null,
                 "missing": []
               }
             ]
@@ -111882,6 +111923,7 @@
               {
                 "row": "gpt-6-luna",
                 "required": null,
+                "domain": null,
                 "missing": []
               }
             ]
@@ -111893,6 +111935,7 @@
               {
                 "row": "gpt-6-astra-high",
                 "required": null,
+                "domain": null,
                 "missing": []
               }
             ]

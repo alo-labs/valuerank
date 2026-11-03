@@ -1655,6 +1655,11 @@ def test_required_missing_scores_say_what_would_settle_each_open_row():
     output = v.required_missing_scores(result, frozen)
     assert output["label"] == v.REQUIRED_LABEL and output["status"] == "evaluated" and [bar["bar"] for bar in output["bars"]] == [bar["id"] for bar in frozen["barReferences"]]
     assert v.score(result, frozen)["requiredMissingScores"] == output
+    # E338 (reviewer 95's fixtures): at point values u* can leave 0–100 while observed-score rounding keeps the row open.
+    nine = SimpleNamespace(observations={leaf.key: SimpleNamespace(z=90.0) for leaf in q.LEAVES if leaf.key != "frontierCode"})
+    high, low = (v.required_missing_score(nine, level) for level in (93.0, 67.0))
+    assert v.required_domain(None) is None and v.required_domain(50.0) is None and v.required_domain(0.0) is None
+    assert v.required_domain(high) == v.required_domain(low) == v.REQUIRED_OUT_OF_DOMAIN and low < 0.0 < 100.0 < high
 
 
 def test_the_quartile_bars_need_four_configurations():
@@ -2797,6 +2802,9 @@ def test_o171_noise_companion_reads_each_answer_against_benchmark_noise():
     rows = [("cheap", 1.0, 52.0, 1.0), ("answer", 2.0, 60.0, 1.0), ("dear", 3.0, 70.0, 1.0)]
     clear = v.noise_companion("answer", 50.0, 1.0, [rows[1], rows[2], ("cheap", 1.0, 40.0, 1.0)])
     assert clear["status"] == v.NOISE_SEPARATED and clear["contestedBy"] == [] and clear["delta"] == pytest.approx(10 / math.sqrt(2))
+    # E337: the screen reports its comparison panel and bar setter; it is not a simultaneous confidence statement.
+    assert clear["cheaperCompared"] == 1 and clear["setter"] is None and "not a simultaneous confidence statement" in v.NOISE_SEPARATED
+    assert v.noise_companion("answer", 50.0, 1.0, rows, "dear")["setter"] == "dear"
     contested = v.noise_companion("answer", 50.0, 1.0, rows)
     assert contested["status"] == v.NOISE_CONTESTED and contested["contestedBy"] == ["cheap"]
     near = v.noise_companion("answer", 59.0, 1.0, rows)

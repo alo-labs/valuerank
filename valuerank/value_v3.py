@@ -1851,16 +1851,19 @@ def quality_margin(assembled: dict) -> float | None:
     return 1.96 * math.sqrt(2.0) * statistics.median(sds) if sds else None
 
 
-# O171 (2026-11-03, on reviewer 94, amending O25/O39's scope): beside each cheapest-above-bar answer, a noise companion says
-# whether the answer is clear of benchmark noise, at correlation 0 with each row's analytic quality SD (O39) and the SD of
-# the configuration that set the bar: Δ_i = (Q_i − H) / √(σ_i² + σ_H²). Labels are unchanged; this is read beside them.
-NOISE_SEPARATED = "noise-separated: the answer clears the bar by the 95% noise margin and no cheaper row can reach it within noise (O171)"
-NOISE_CONTESTED = "contested: the answer clears the bar, but a cheaper row reaches it within noise (O171)"
-NOISE_ROUNDING_ONLY = "rounding-stable only: the answer does not clear the bar by the 95% noise margin (O171)"
+# O171 (2026-11-03, on reviewer 94, amending O25/O39's scope): beside each cheapest-above-bar answer, a pointwise noise-margin
+# screen, at correlation 0 with each row's analytic quality SD (O39) and the SD of the configuration that set the bar:
+# Δ_i = (Q_i − H) / √(σ_i² + σ_H²). Each comparison is separate, all share the setter, so passing the screen is not a
+# simultaneous confidence statement (E337, on reviewer 95). Labels are unchanged; this is read beside them.
+NOISE_SEPARATED = ("screen passed: the answer clears the bar by the pointwise 95% noise margin and every cheaper row falls below it by "
+                   "the same margin (O171; separate comparisons sharing the bar setter, not a simultaneous confidence statement, E337)")
+NOISE_CONTESTED = "contested: the answer clears the bar by the pointwise margin, but a cheaper row reaches it within that margin (O171)"
+NOISE_ROUNDING_ONLY = "rounding-stable only: the answer does not clear the bar by the pointwise 95% noise margin (O171)"
 NOISE_Z = 1.96
 
 
-def noise_companion(answer: str | None, level: float, setter_sd: float, candidates: list[tuple[str, float, float, float]]) -> dict | None:
+def noise_companion(answer: str | None, level: float, setter_sd: float, candidates: list[tuple[str, float, float, float]],
+                    setter: str | None = None) -> dict | None:
     """O171: the noise status of a cheapest-above-bar answer. ``candidates`` holds (row, cost, displayed quality, quality SD)
     for every row the answer was chosen from; a cheaper row whose Δ exceeds −1.96 contests the answer."""
 
@@ -1876,7 +1879,8 @@ def noise_companion(answer: str | None, level: float, setter_sd: float, candidat
     own = delta(quality, sd)
     rivals = sorted(row for row, other_cost, other_quality, other_sd in candidates if other_cost < cost and delta(other_quality, other_sd) > -NOISE_Z)
     status = NOISE_ROUNDING_ONLY if own < NOISE_Z else NOISE_CONTESTED if rivals else NOISE_SEPARATED
-    return {"status": status, "delta": own, "contestedBy": rivals}
+    cheaper = sum(1 for _row, other_cost, _quality, _sd in candidates if other_cost < cost)
+    return {"status": status, "delta": own, "contestedBy": rivals, "cheaperCompared": cheaper, "setter": setter}
 
 
 def displayed_cheapest(assembled: dict, frozen: dict, basis: str, margin: float | None = None) -> dict:
@@ -1899,7 +1903,8 @@ def displayed_cheapest(assembled: dict, frozen: dict, basis: str, margin: float 
         qualifying, low, rows_at = cheapest(bar["level"])
         entry = {"bar": bar["id"], "level": bar["level"], "qualifierN": len(qualifying), "costUsd": low, "cheapest": rows_at}
         setter = every.get(bar.get("levelConfiguration"))
-        entry["noise"] = noise_companion(rows_at[0] if rows_at else None, bar["level"], quality_sd(setter) if setter else 0.0, candidates)
+        entry["noise"] = noise_companion(rows_at[0] if rows_at else None, bar["level"], quality_sd(setter) if setter else 0.0, candidates,
+                                         bar.get("levelConfiguration"))
         # O143 (2026-11-01): the headline answer names the cheaper same-family efforts AA plots that this ranking could not
         # evaluate (E201c), so a reader sees where the leading ranking cannot look.
         by_id = {row["id"]: row for row in rows}
@@ -2535,6 +2540,9 @@ def observed_range_bars(assembled: dict, frozen: dict) -> dict:
 # leaves' point values) for its full composite to reach the bar. It says what evidence would settle the row; it is a
 # deterministic reading of published values, never a claim and never a label.
 REQUIRED_LABEL = "required mean score on the missing leaves for the full composite to reach the bar (E221; not a claim)"
+# E338 (on reviewer 95): u* holds the observed leaves at their point values, while qualification reads their rounding
+# intervals, so an open row's u* can fall outside 0–100; it is published unclipped with this status, never as a guarantee.
+REQUIRED_OUT_OF_DOMAIN = "outside the missing leaves' 0–100 domain at the observed point values: observed-score rounding decides this row (E338)"
 
 
 def required_missing_score(summary, level: float) -> float | None:
@@ -2547,6 +2555,12 @@ def required_missing_score(summary, level: float) -> float | None:
     return (100.0 * level - observed) / missing
 
 
+def required_domain(required: float | None) -> str | None:
+    """E338: the status of a u* outside the missing leaves' 0–100 domain (published unclipped)."""
+
+    return REQUIRED_OUT_OF_DOMAIN if required is not None and not 0.0 <= required <= 100.0 else None
+
+
 def required_missing_scores(assembled: dict, frozen: dict) -> dict:
     """E221: the API rows that can possibly but not certainly reach each bar, with u* and their missing leaves."""
 
@@ -2556,7 +2570,7 @@ def required_missing_scores(assembled: dict, frozen: dict) -> dict:
     for bar in result.get("bars", []):
         level = bar["reference"]["level"]
         open_rows = [row_id for row_id, status in bar["rows"].items() if status.get("possible") == "certified" and status.get("confirmed") != "certified"]
-        rows = [{"row": row_id, "required": required_missing_score(by_id[row_id]["summary"], level),
+        rows = [{"row": row_id, "required": (required := required_missing_score(by_id[row_id]["summary"], level)), "domain": required_domain(required),
                  "missing": [leaf.key for leaf in q.LEAVES if leaf.key not in by_id[row_id]["summary"].observations]} for row_id in open_rows]
         bars.append({"bar": bar["reference"]["id"], "level": level, "rows": sorted(rows, key=lambda item: (item["required"] is None, item["required"] or 0.0, item["row"]))})
     return {"label": REQUIRED_LABEL, "status": result["status"], "bars": bars}
