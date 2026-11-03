@@ -2426,3 +2426,15 @@ Asked on I64 Q1 whether future O71 admissions should be executed by the build fr
 - Parts 13–14 M (missing change-detection scope): adopted as text (a monitored section that moves or disappears is a change to classify). Lows: cohort rationale and E276 wording adopted; vendored samplers and a harness-band status line not adopted.
 - Round status (O56): not clean (Highs and owner decisions); GLM's clean run restarts.
 - E341. The O171 screen's comparison panel is E203's: non-provisional main-workload rows on the answer's basis at their published cost, blockers included, subset-workload rows excluded.
+
+## Owner decisions O178–O179 (2026-11-03), asked on reviewer 97
+- O178 (which changes open cells, reading O164): a change to a window no admission cell reads, such as a five-hour limit (O82: a five-hour figure never converts to a billing period), opens no cell and needs no new three-stage search; the routes it touches stay flagged as recorded. Anthropic's 2026-10-30 removal of Ultra's five-hour limit (weekly limits unchanged) therefore opened none. The owner chose this over running an Anthropic search now.
+- O179 (display beside O2): where cost's covariance allocation of value variance is negative on a basis, that ranking and basis carry a bold banner: "this value order rewards higher cost; there the cheapest-above-bar answer is the cost answer". β, the anchors and the value order are unchanged; the bar-table default sort was not chosen. Today it fires on the AI Coding Daily ranking's API basis (−55%).
+
+## Reviewer 97 (Grok 4.7, round 13, Thinking, whole draft r179)
+- Read checks: every part read to its end.
+- H1 (stale Opus partial-component sentence contradicts O175): verified; the sentence is corrected (the rendered partial-row figures already read "none").
+- H2 (no Anthropic search after the 2026-10-30 change): verified (the 2026-10-31 search covered only the v5 entrants); owner decision O178. Owner question 1 answered the same way.
+- H3 (owner decision challenge to O2's display, negative cost allocation): owner decision O179.
+- M (the Ultra flag ignores the binding window): not adopted; the selected SemiAnalysis transcription records no binding window (`measurementWindow` is null), so the window cannot be identified from the source, and the route keeps the recorded limit-change flag; the published plan card stays in the route record. Owner question 2 answered: it does not.
+- Round status (O56): not clean (Highs); Grok's clean run restarts.

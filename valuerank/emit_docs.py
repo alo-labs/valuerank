@@ -432,6 +432,19 @@ def influence_text(v3, short=False):
             f"{pct(shares['plan'], 0)} in Plan value, because cost scores spread more than quality scores (see [methodology.md](methodology.md)).")
 
 
+def negative_cost_banner(v3):
+    """O179 (2026-11-03, on reviewer 97): where cost's covariance allocation of value variance is negative, the value order
+    on that basis rewards higher cost, so a banner says so and points to the cheapest-above-bar answer (no weight change)."""
+
+    shares = {basis: (v3["costInfluence"][basis]["commonWorkload"]["varianceAllocation"] or {}).get("cost") for basis in ("api", "plan")}
+    negative = [basis for basis in ("api", "plan") if shares[basis] is not None and shares[basis] < 0]
+    if not negative:
+        return ""
+    return ("\n\n**" + "; ".join(f"{'API' if basis == 'api' else 'Plan'} basis: this value order rewards higher cost (cost's covariance allocation "
+                                   f"of value variance is {pct(shares[basis], 0)})" for basis in negative)
+            + "; there the cheapest-above-bar answer is the cost answer (O179; weights unchanged).**")
+
+
 def policy_bar_text(policy, facts):
     """E199: the bar recomputed over the frontier and near-frontier configurations alone, as a sensitivity."""
 
@@ -885,7 +898,8 @@ def track_rankings_markdown(facts):
                 f"### {q.TRACK_LABELS[track]}\n\n{viewmodel.TRACK_LEADS[track]} Its leaves: {leaf_set_text(q.LEAVES)}. "
                 f"It ranks {len(other.ranked)} configurations, each with every leaf for its exact configuration (O36); its cost anchors and quality bars are its own "
                 f"(anchor version `{other.v3['anchorVersion']}`), so its values are not comparable with the {q.TRACK_NAMES[q.DEFAULT_TRACK]}'s. "
-                f"The interactive table is at [valuerank.alolabs.dev{viewmodel.TRACK_PATHS[track]}](https://valuerank.alolabs.dev{viewmodel.TRACK_PATHS[track]}).\n\n"
+                f"The interactive table is at [valuerank.alolabs.dev{viewmodel.TRACK_PATHS[track]}](https://valuerank.alolabs.dev{viewmodel.TRACK_PATHS[track]})."
+                + negative_cost_banner(other.v3) + "\n\n"
                 + markdown_table(RANKING_HEADERS, ranking_rows(other), numeric={0, 1, 3, 4, 5, 6, 7, 8})
                 + f"\n\n{separability_text(other).strip()}"
                 + crosscheck_warning(other.v3)
@@ -918,7 +932,7 @@ def readme(facts):
 
 ## Current result
 
-ValueRank ranks frontier AI model configurations (see Model inclusion) by value for software engineering and DevOps work, separately for API buyers and for subscription (Plan) buyers. It publishes {len(q.TRACKS)} rankings (owner decision O53), each over the configurations that have its complete benchmark set: the **{q.TRACK_NAMES[q.DEFAULT_TRACK]}** below ({viewmodel.TRACK_LEADS[q.DEFAULT_TRACK][0].lower()}{viewmodel.TRACK_LEADS[q.DEFAULT_TRACK][1:-1]}) and {names(['the ' + q.TRACK_NAMES[track] for track in facts.tracks])} after it. The {q.TRACK_NAMES[q.DEFAULT_TRACK]}'s leaves: {leaf_set_text(q.LEAVES)}. Value is a fixed **{facts.cost_pct:.0f}%** cost score plus **{facts.quality_pct:.0f}%** benchmark quality.{influence_text(v3)} Cost is the {method['costLabel']}: Artificial Analysis' (AA) published cost of running the {series(admitted)} once at API rates (the {q.TRACK_NAMES[q.DEFAULT_TRACK]}'s basket; each ranking admits its own components, E254), scored on a log scale against frozen anchors so cost ratios keep their size.{coding_share_text(v3)} Quality is the weighted mean of {len(q.LEAVES)} (in the {q.TRACK_NAMES[q.DEFAULT_TRACK]}; {', '.join(f'{len(q.TRACKS[track])} in the {q.TRACK_NAMES[track]}' for track in q.TRACKS if track != q.DEFAULT_TRACK)}) benchmark leaves on fixed 0–100 anchors, and every configuration ranked in a ranking has all of that ranking's leaves for its exact configuration (O36): a leaf AA has not run comes from another party's run of the same benchmark, then from the model provider's published result, and a configuration still missing one after a logged exhaustive search is listed, not ranked. The Plan ranking divides the basket's API cost by a subscription route's Value Multiple at full utilisation, with one row per configuration and plan (O48), and uses the API cost, flagged, when no route is admitted.{exploratory}
+ValueRank ranks frontier AI model configurations (see Model inclusion) by value for software engineering and DevOps work, separately for API buyers and for subscription (Plan) buyers. It publishes {len(q.TRACKS)} rankings (owner decision O53), each over the configurations that have its complete benchmark set: the **{q.TRACK_NAMES[q.DEFAULT_TRACK]}** below ({viewmodel.TRACK_LEADS[q.DEFAULT_TRACK][0].lower()}{viewmodel.TRACK_LEADS[q.DEFAULT_TRACK][1:-1]}) and {names(['the ' + q.TRACK_NAMES[track] for track in facts.tracks])} after it. The {q.TRACK_NAMES[q.DEFAULT_TRACK]}'s leaves: {leaf_set_text(q.LEAVES)}. Value is a fixed **{facts.cost_pct:.0f}%** cost score plus **{facts.quality_pct:.0f}%** benchmark quality.{influence_text(v3)}{negative_cost_banner(v3).replace(chr(10), ' ').replace('**', '')} Cost is the {method['costLabel']}: Artificial Analysis' (AA) published cost of running the {series(admitted)} once at API rates (the {q.TRACK_NAMES[q.DEFAULT_TRACK]}'s basket; each ranking admits its own components, E254), scored on a log scale against frozen anchors so cost ratios keep their size.{coding_share_text(v3)} Quality is the weighted mean of {len(q.LEAVES)} (in the {q.TRACK_NAMES[q.DEFAULT_TRACK]}; {', '.join(f'{len(q.TRACKS[track])} in the {q.TRACK_NAMES[track]}' for track in q.TRACKS if track != q.DEFAULT_TRACK)}) benchmark leaves on fixed 0–100 anchors, and every configuration ranked in a ranking has all of that ranking's leaves for its exact configuration (O36): a leaf AA has not run comes from another party's run of the same benchmark, then from the model provider's published result, and a configuration still missing one after a logged exhaustive search is listed, not ranked. The Plan ranking divides the basket's API cost by a subscription route's Value Multiple at full utilisation, with one row per configuration and plan (O48), and uses the API cost, flagged, when no route is admitted.{exploratory}
 
 {leaders(facts)}
 

@@ -110,6 +110,8 @@ Not ranked in the max-effort ranking (28 roster models): Claude Haiku 5.5 (high)
 
 The configurations AI Coding Daily has tested, mostly at high and medium effort, scored on the AA leaves plus AI Coding Daily. Its leaves: FrontierCode 2.0 21%, Terminal-Bench 4.0 (AA run) 17%, Bug Hunt Bench 12%, AI Coding Daily (excl. bug finding) 10% (software engineering 60%), plus the 7 leaves outside software engineering every ranking shares. It ranks 20 configurations, each with every leaf for its exact configuration (O36); its cost anchors and quality bars are its own (anchor version `v3-2026-11-01-a4-aicd`), so its values are not comparable with the max-effort ranking's. The interactive table is at [valuerank.alolabs.dev/rankings/ai-coding-daily/](https://valuerank.alolabs.dev/rankings/ai-coding-daily/).
 
+**API basis: this value order rewards higher cost (cost's covariance allocation of value variance is -55%); there the cheapest-above-bar answer is the cost answer (O179; weights unchanged).**
+
 | Plan rank | API rank | Configuration | Plan value | API value | Quality | Quality coverage | API cost (USD per basket run) | Plan cost (USD per basket run) | Plan route | Flags | Noise band (Plan / API) |
 |---:|---:|---|---:|---:|---:|---:|---:|---:|---|---|---|
 | 1 | 1 | [GPT-6.1 Sol (high)](https://valuerank.alolabs.dev/models/gpt-6-1-sol-high/) | 60.2 | 56.2 | 58.9 | 100% | $509.65 | $47.31 | ChatGPT Pro 500 $500 · same-model measurement, another effort (O88, O90) (10.772×, measured) | route possibly superseded, fault window | 1–24 / 1–3 |
@@ -151,6 +153,8 @@ Cohort configurations without this ranking's full set (17): Claude Haiku 5.5 (lo
 ### Common-leaf ranking (diagnostic)
 
 Diagnostic only (O121): every configuration with AA's leaves and Bug Hunt, at any effort, scored on the ten leaves the two leading rankings share; it earns no label and never holds a release. Its leaves: FrontierCode 2.0 25%, Terminal-Bench 4.0 (AA run) 20%, Bug Hunt Bench 15% (software engineering 60%), plus the 7 leaves outside software engineering every ranking shares. It ranks 33 configurations, each with every leaf for its exact configuration (O36); its cost anchors and quality bars are its own (anchor version `v3-2026-11-01-a4-common`), so its values are not comparable with the max-effort ranking's. The interactive table is at [valuerank.alolabs.dev/rankings/common-leaves/](https://valuerank.alolabs.dev/rankings/common-leaves/).
+
+**API basis: this value order rewards higher cost (cost's covariance allocation of value variance is -68%); Plan basis: this value order rewards higher cost (cost's covariance allocation of value variance is -25%); there the cheapest-above-bar answer is the cost answer (O179; weights unchanged).**
 
 | Plan rank | API rank | Configuration | Plan value | API value | Quality | Quality coverage | API cost (USD per basket run) | Plan cost (USD per basket run) | Plan route | Flags | Noise band (Plan / API) |
 |---:|---:|---|---:|---:|---:|---:|---:|---:|---|---|---|

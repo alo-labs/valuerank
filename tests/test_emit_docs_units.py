@@ -470,6 +470,10 @@ def test_influence_text_explains_a_negative_cost_allocation_and_workload_dash():
     negative = ed.influence_text(v3(-0.12, 0.3))
     assert "covariance allocation of value variance is -12% on the API basis and 30% on the Plan basis" in negative
     assert "cost accounts for 40% of the variance in API value and 30% in Plan value" in ed.influence_text(v3(0.4, 0.3))
+    # O179: a negative allocation on a basis prints the banner for that basis only.
+    assert ed.negative_cost_banner(v3(-0.12, 0.3)) == ("\n\n**API basis: this value order rewards higher cost (cost's covariance allocation of value "
+                                                       "variance is -12%); there the cheapest-above-bar answer is the cost answer (O179; weights unchanged).**")
+    assert ed.negative_cost_banner(v3(0.4, 0.3)) == "" and ed.negative_cost_banner(v3(None, -0.5)).startswith("\n\n**Plan basis:")
     assert ed.workload_text({"cost": {"apiUsd": None}}) == ed.DASH
     assert ed.influence_text(v3(0.4, 0.3), short=True) == "; 40% of API and 30% of Plan value variance"
     above = ed.influence_text(v3(1.2, 0.3))

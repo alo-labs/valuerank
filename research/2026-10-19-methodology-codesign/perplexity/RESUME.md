@@ -32,7 +32,8 @@ two consecutive clean rounds and the panel ends when every model says NO FURTHER
 | 94 | Claude Sonnet 5.5 | r176 | owner decision challenges; owner decisions O170–O172, folded into r177 (re-freeze a4); clean run restarts |
 | 95 | Kimi K3 (four sections) | r177 | findings (two Highs, five Mediums; owner decisions O173–O174), folded into r178 (E337–E340); clean run restarts |
 | 96 | GLM 5.3 (eight sections) | r178 | findings (five Highs; owner decisions O175–O177), folded into r179 (E341); clean run restarts |
-| 97 | Grok 4.7 | r179 | next |
+| 97 | Grok 4.7 | r179 | findings (three Highs, one Medium; owner decisions O178–O179), folded into r180; clean run restarts |
+| 98 | GPT-6.1 Sol | r180 | next |
 
 To continue:
 
