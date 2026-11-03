@@ -379,6 +379,9 @@ def interval_sentences(facts):
 
 
 CODING_COMPONENTS = ("coding-agent-index", "terminalbench-4-0", "frontiercode-2-0")
+# E343 (reviewer 100, owner correction): Terminal-Bench-Science is terminal-task execution in the SDLC basket (O137) although its
+# quality sits with science (O136), so the share is also printed with it counted.
+TERMINAL_SCIENCE = "terminal-bench-science"
 # Basket components priced in the cost but with no quality leaf of their own (E203 disclosure; O6 and O15 stand).
 UNREWARDED_COMPONENTS = ("aa-briefcase", "gdp-pdf")
 
@@ -405,8 +408,11 @@ def coding_share_text(v3):
     atlas = (f"; the Coding Agent Index's SWE-Atlas QnA ({basket.CODING_AGENT_TASKS['swe-atlas-qna']} of its {sum(basket.CODING_AGENT_TASKS.values())} "
              "tasks) has no quality leaf either, and its cost share is not separable because AA publishes one pooled cost"
              if basket.CODING_AGENT_INDEX in admitted else "")
+    wide = (_median_share(v3, (*CODING_COMPONENTS, TERMINAL_SCIENCE)) if TERMINAL_SCIENCE in admitted else None)
+    science = (f"; with Terminal-Bench-Science's terminal tasks, whose quality O136 files under science, {pct(wide[0], 0)} "
+               f"({pct(wide[1], 0)} to {pct(wide[2], 0)}; E343)" if wide else "")
     return (f" Coding and terminal tasks ({labels}) make up {pct(middle, 0)} of the basket's cost (median over {n} configurations "
-            f"with the full basket; {pct(low, 0)} to {pct(high, 0)}); {', '.join(component_label(key) for key in UNREWARDED_COMPONENTS)}, "
+            f"with the full basket; {pct(low, 0)} to {pct(high, 0)}){science}; {', '.join(component_label(key) for key in UNREWARDED_COMPONENTS)}, "
             f"which have no quality leaf, make up {pct(unrewarded, 0)}{atlas}.")
 
 
@@ -903,6 +909,7 @@ def track_rankings_markdown(facts):
                 f"The interactive table is at [valuerank.alolabs.dev{viewmodel.TRACK_PATHS[track]}](https://valuerank.alolabs.dev{viewmodel.TRACK_PATHS[track]})."
                 + negative_cost_banner(other.v3) + "\n\n"
                 + markdown_table(RANKING_HEADERS, ranking_rows(other), numeric={0, 1, 3, 4, 5, 6, 7, 8})
+                + f"\n\n{coding_share_text(other.v3).strip()}"
                 + f"\n\n{separability_text(other).strip()}"
                 + crosscheck_warning(other.v3)
                 + cross_ranking_costs(facts, track, other)

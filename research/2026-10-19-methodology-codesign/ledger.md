@@ -2456,3 +2456,15 @@ Asked on I64 Q1 whether future O71 admissions should be executed by the build fr
 - Parts 13–15 L1 (Omniscience at perfect accuracy): verified; with A = 1 the reconstruction now reads I = 100 whether or not h is published (code and tests).
 - Round status (O56): not clean (a Medium adopted); Gemini's clean run restarts.
 - E342. The O171 screen is not S1T's joint counterpart: S1T fixes the bar at H while the screen treats the bar setter as noisy.
+
+## Owner answers (2026-11-03), asked on reviewer 100
+- On H1 (the AI Coding Daily basket "prices mostly non-coding work"), the owner pointed out that the ranking does price coding tasks and asked for a check. Verified: its basket prices FrontierCode 2.0, Terminal-Bench 4.0 and Terminal-Bench-Science; E200's narrow count (Coding Agent Index, Terminal-Bench 4.0, FrontierCode 2.0) gives a median 33% (23% to 47%), and counting Terminal-Bench-Science's terminal tasks 58% (31% to 70%). Adopted as E343: every ranking's section prints its coding share, and the share is also printed with Terminal-Bench-Science counted. No component-wise cost score.
+- On M2 (Bug Hunt's unplanted credit, an O163/O170 challenge), the owner kept the leaf as is: no planted-only sensitivity and no cap.
+
+## Reviewer 100 (Claude Sonnet 5.5, round 13, Thinking, whole draft r182)
+- Read checks: every part read to its end.
+- H1: E343 (above). H2 (owner decision challenge to O54/O121/O172, lead with the common-leaf ranking): not put again; O172 (reviewer 94) settled it and the leading headline already prints the common-leaf answer at each bar position and the unevaluated cheaper siblings (O143).
+- M1 (credible rank, O152 challenge): not adopted; O152 keeps the ordinal rank, and the O42 bands and per-stratum scenario shares print the uncertainty beside it. M2: owner answer above. M3 (Plan evidence not reproducible): the selected transcription is hashed in the evidence bundle with its route registry (E159, E238) and the Plan headline is already labelled exploratory; not adopted further. M4 (normative core and second scorer): not adopted during the review rounds, as on reviewer 94. M5 (snapped anchors): not adopted; the recent re-freezes came from workload migrations (O47, O132) and owner rescales (O163, O170), which a snapped grid would not have avoided.
+- Lows: E41 attribution panels, the group rename (O122 already prints the coding share), midpoint bars (an O34 challenge; E201b discloses the setter's straddle), pairing labels with the O171 status (the screen already prints beside each bar answer), and estimating ρ (no public per-task correlation for every leaf): not adopted.
+- Round status (O56): not clean (Highs); Sonnet's clean run restarts.
+- E343. Each ranking prints its coding share in its own section, and the share with Terminal-Bench-Science's terminal tasks counted beside E200's narrow one.

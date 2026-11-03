@@ -286,6 +286,10 @@ def test_coding_share_text_reports_the_median_coding_share():
     with_index = ed.coding_share_text({"rows": rows, "admission": {"admitted": ["coding-agent-index", "gdpval-aa"]}})
     assert "SWE-Atlas QnA (124 of its 290 tasks) has no quality leaf either" in with_index
     assert ed.coding_share_text({"rows": rows[2:], "admission": {"admitted": []}}) == ""
+    # E343: with Terminal-Bench-Science admitted, the share is also printed with its terminal tasks counted.
+    science = [row({"frontiercode-2-0": 20.0, "terminal-bench-science": 30.0, "gdpval-aa": 50.0})]
+    both = ed.coding_share_text({"rows": science, "admission": {"admitted": ["frontiercode-2-0", "terminal-bench-science", "gdpval-aa"]}})
+    assert "make up 20% of the basket's cost" in both and "with Terminal-Bench-Science's terminal tasks, whose quality O136 files under science, 50% (50% to 50%; E343)" in both
 
 
 def test_displayed_cheapest_sentences_name_the_row_or_none():

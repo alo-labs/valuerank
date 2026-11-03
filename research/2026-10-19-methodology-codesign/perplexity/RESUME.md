@@ -35,7 +35,8 @@ two consecutive clean rounds and the panel ends when every model says NO FURTHER
 | 97 | Grok 4.7 | r179 | findings (three Highs, one Medium; owner decisions O178–O179), folded into r180; clean run restarts |
 | 98 | GPT-6.1 Sol | r180 | findings (two Mediums; owner decision O180), folded into r181; clean run restarts |
 | 99 | Gemini 3.8 Flash (five sections) | r181 | findings (one High verified not a defect, three Mediums: E342 adopted, two declined; two sections clean), folded into r182; clean run restarts |
-| 100 | Claude Sonnet 5.5 | r182 | next |
+| 100 | Claude Sonnet 5.5 | r182 | findings (two Highs, five Mediums; owner answers), folded into r183 (E343); clean run restarts |
+| 101 | Kimi K3 (four sections) | r183 | next |
 
 To continue:
 

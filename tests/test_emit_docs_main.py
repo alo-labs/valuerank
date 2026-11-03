@@ -149,7 +149,8 @@ def test_readme_states_what_the_interval_outputs_support(emitted):
             "Claude Haiku 5.5 (xhigh), Claude Haiku 5.5 (high), Claude Haiku 5.5 (medium), Claude Haiku 5.5 (low); below GPT-6.1 Sol (max):") in readme
     # O50: the max-effort ranking admits the Coding Agent Index v2.0, so the coding share names it and its unrewarded SWE-Atlas QnA.
     assert ("Coding and terminal tasks (Coding Agent Index, Terminal-Bench 4.0 (AA Index run), FrontierCode 2.0) make up 55% of the basket's cost (median over 8 configurations "
-            "with the full basket; 40% to 84%); AA-Briefcase, GDP.pdf, which have no quality leaf, make up 14%; the Coding Agent Index's SWE-Atlas QnA") in readme
+            "with the full basket; 40% to 84%); with Terminal-Bench-Science's terminal tasks, whose quality O136 files under science, 72% (66% to 91%; E343); "
+            "AA-Briefcase, GDP.pdf, which have no quality leaf, make up 14%; the Coding Agent Index's SWE-Atlas QnA") in readme
     # Reviewer 79 (E299): the O145 retained rows leave the frontier-only population (9 ranked, 4 retained).
     assert '- **Frontier-families bar (E199, sensitivity; the frozen bar stays primary):** quality 67.5 over 5 configurations; cheapest at or above it o' in (emitted / "scores.md").read_text()
     assert "FrontierCode 2.0 and Terminal-Bench-Science once at API rates" in readme
