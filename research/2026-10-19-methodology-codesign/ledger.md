@@ -2438,3 +2438,12 @@ Asked on I64 Q1 whether future O71 admissions should be executed by the build fr
 - H3 (owner decision challenge to O2's display, negative cost allocation): owner decision O179.
 - M (the Ultra flag ignores the binding window): not adopted; the selected SemiAnalysis transcription records no binding window (`measurementWindow` is null), so the window cannot be identified from the source, and the route keeps the recorded limit-change flag; the published plan card stays in the route record. Owner question 2 answered: it does not.
 - Round status (O56): not clean (Highs); Grok's clean run restarts.
+
+## Owner decision O180 (2026-11-03), asked on reviewer 98
+- O180 (O179's wording): the banner describes a panel association, not a scoring incentive: "higher-cost configurations tend to score higher here because their quality differences outweigh their cost penalties; at equal quality, lower cost never lowers the value score. For the cheapest configuration meeting a quality level, use cheapest-above-bar". A regression test holds that at equal quality and one anchor object a cheaper row never scores lower (strictly higher inside the anchors, level beyond them).
+
+## Reviewer 98 (GPT-6.1 Sol, round 13, Thinking, whole draft r180)
+- Read checks: every part read to its end.
+- M1 (owner decision challenge to O179's wording): owner decision O180. The separate "cost incentive" field is not adopted: the derivative is fixed by the scoring equation (−25/ln(c_H/c_L) per log cost inside the anchors, 0 beyond), stated in the text and held by the new test.
+- M2 (a stale sentence still called the Opus rows unresolved): verified; corrected, and the text now says the frozen a4 anchor references, set while those rows were unresolved, leave them out until the next versioned re-freeze. The release-state object is not adopted as a new artifact; the figures it would hold are already rendered from the build (E265), and the stale sentence was hand-written prose, now removed.
+- Round status (O56): not clean (Mediums); Sol's clean run restarts.

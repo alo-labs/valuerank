@@ -160,3 +160,14 @@ def test_a_plan_stratum_of_one_configuration_is_undefined():
             {"id": "a", "workloadId": "W", "costScore": 10.0, "qualityScore": 40.0}, {"id": "b", "workloadId": "W", "costScore": 60.0, "qualityScore": 70.0}]
     stratum = a.panel_cost_influence(rows, 0.25, "W")["subsetStrata"]["S"]
     assert stratum["status"] == a.ONE_CONFIGURATION and stratum["costShare"] is None and stratum["varianceAllocation"] is None
+
+
+def test_lower_cost_never_lowers_value_at_equal_quality():
+    """O180 (reviewer 98): at equal quality and one anchor object, a cheaper configuration never scores lower, whatever the
+    panel's cost variance allocation; inside the anchors it scores strictly higher, beyond them the clip holds it level."""
+
+    anchors = {"low": 10.0, "high": 1000.0}
+    costs = [1.0, 5.0, 10.0, 50.0, 200.0, 1000.0, 5000.0]
+    values = [a.value_score(a.cost_score(cost, anchors), 70.0, 0.25) for cost in costs]
+    assert all(cheaper >= dearer for cheaper, dearer in zip(values, values[1:]))
+    assert values[2] > values[3] > values[4] > values[5] and values[0] == values[1] == values[2] and values[5] == values[6]

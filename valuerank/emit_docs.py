@@ -440,9 +440,11 @@ def negative_cost_banner(v3):
     negative = [basis for basis in ("api", "plan") if shares[basis] is not None and shares[basis] < 0]
     if not negative:
         return ""
-    return ("\n\n**" + "; ".join(f"{'API' if basis == 'api' else 'Plan'} basis: this value order rewards higher cost (cost's covariance allocation "
-                                   f"of value variance is {pct(shares[basis], 0)})" for basis in negative)
-            + "; there the cheapest-above-bar answer is the cost answer (O179; weights unchanged).**")
+    return ("\n\n**" + "; ".join(f"{'API' if basis == 'api' else 'Plan'} basis: higher-cost configurations tend to score higher here because their "
+                                   f"quality differences outweigh their cost penalties (cost's covariance allocation of value variance is {pct(shares[basis], 0)})"
+                                   for basis in negative)
+            + "; at equal quality, lower cost never lowers the value score. For the cheapest configuration meeting a quality level, use "
+            "cheapest-above-bar (O179, O180; weights unchanged).**")
 
 
 def policy_bar_text(policy, facts):
