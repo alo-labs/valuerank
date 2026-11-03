@@ -21582,6 +21582,7 @@
         "staleListed": []
       }
     },
+    "labelGate": null,
     "incompleteEvidence": [
       {
         "id": "gpt-6.1-terra",
@@ -56787,7 +56788,7 @@
                 "levelConfiguration": "gpt-6.1-terra-high",
                 "rule": "lower-median displayed quality of the non-provisional cohort configurations at freeze (E192; headline bar)"
               },
-              "status": "certified",
+              "status": "labels withheld: the ranking's workload cross-check (E41) is below 0.5 (O182)",
               "rows": {
                 "gpt-6.1-terra": {
                   "confirmed": "certified",
@@ -56941,7 +56942,9 @@
               "possibleBlockerQualifierN": 0,
               "possibleQualifierN": 11,
               "confirmedQualifierN": 10,
-              "comparison": "compares 11 configurations that can qualify"
+              "comparison": "compares 11 configurations that can qualify",
+              "evaluatedStatus": "certified",
+              "withheldConfirmedCheapest": null
             },
             {
               "reference": {
@@ -56950,7 +56953,7 @@
                 "levelConfiguration": "claude-haiku-5-5-high",
                 "rule": "lower-quartile displayed quality of the non-provisional cohort configurations at freeze (O34)"
               },
-              "status": "certified",
+              "status": "labels withheld: the ranking's workload cross-check (E41) is below 0.5 (O182)",
               "rows": {
                 "gpt-6.1-terra": {
                   "confirmed": "certified",
@@ -57099,7 +57102,9 @@
               "possibleBlockerQualifierN": 1,
               "possibleQualifierN": 15,
               "confirmedQualifierN": 15,
-              "comparison": "compares 15 configurations that can qualify and 1 blocker(s) that can qualify but earn no label (E315)"
+              "comparison": "compares 15 configurations that can qualify and 1 blocker(s) that can qualify but earn no label (E315)",
+              "evaluatedStatus": "certified",
+              "withheldConfirmedCheapest": null
             },
             {
               "reference": {
@@ -57108,7 +57113,7 @@
                 "levelConfiguration": "gemini-4-argon",
                 "rule": "upper-quartile displayed quality of the non-provisional cohort configurations at freeze (O34)"
               },
-              "status": "certified",
+              "status": "labels withheld: the ranking's workload cross-check (E41) is below 0.5 (O182)",
               "rows": {
                 "gpt-6.1-terra": {
                   "confirmed": "certified",
@@ -57246,7 +57251,7 @@
               "possibleCheapest": [
                 "gpt-6.1-sol-high"
               ],
-              "confirmedCheapest": "gpt-6.1-sol-high",
+              "confirmedCheapest": null,
               "uncheckedCheaperSiblings": {
                 "gpt-6.1-sol-high": []
               },
@@ -57254,9 +57259,12 @@
               "possibleBlockerQualifierN": 0,
               "possibleQualifierN": 6,
               "confirmedQualifierN": 5,
-              "comparison": "compares 6 configurations that can qualify"
+              "comparison": "compares 6 configurations that can qualify",
+              "evaluatedStatus": "certified",
+              "withheldConfirmedCheapest": "gpt-6.1-sol-high"
             }
-          ]
+          ],
+          "labelGate": "labels withheld: the ranking's workload cross-check (E41) is below 0.5 (O182)"
         },
         "plan": {
           "universe": [],
@@ -57331,9 +57339,12 @@
           ],
           "status": "unevaluable",
           "reason": "no row has FullCost and an identified M_W (E61/E67)",
-          "staleListed": []
+          "staleListed": [],
+          "bars": [],
+          "labelGate": "labels withheld: the ranking's workload cross-check (E41) is below 0.5 (O182)"
         }
       },
+      "labelGate": "labels withheld: the ranking's workload cross-check (E41) is below 0.5 (O182)",
       "incompleteEvidence": [
         {
           "id": "gpt-6.1-sol",
@@ -79027,8 +79038,8 @@
                   1.0,
                   1.0
                 ],
-                "label": true,
-                "reading": "supported under all registered role-group kernel checks"
+                "label": false,
+                "reading": "labels withheld: the ranking's workload cross-check (E41) is below 0.5 (O182)"
               }
             }
           }
@@ -112725,6 +112736,7 @@
           "labelsWithheld": "diagnostic ranking (O121): computed like the leading rankings for comparison, but it earns no interval or scenario label and its gates never hold the release"
         }
       },
+      "labelGate": null,
       "incompleteEvidence": [
         {
           "id": "gpt-5.6-luna-low",

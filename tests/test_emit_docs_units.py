@@ -555,8 +555,11 @@ def test_safety_flags_follow_every_label_their_row_earns():
         " Safety-refusal flags (O63; costs and scores unchanged) on these labelled rows: A (0 blocked and 76 fallback attempts of 870).")
     assert ed.label_safety_note(facts, ["b", "c"]) == ""
     # O160: under a firing E41 warning every label note carries it; no labels, no note.
-    warned = SimpleNamespace(v3={"rows": rows, "diagnostics": {"workloadCrossCheck": {"warning": "low agreement", "tau": 0.347, "n": 20}}}, labels=facts.labels)
-    assert ed.label_safety_note(warned, ["b"]).startswith(" These labels carry the workload cross-check warning (E41, O160: τ_b 0.35 on 20 configurations)")
+    warned = SimpleNamespace(v3={"rows": rows, "diagnostics": {"workloadCrossCheck": {"warning": "uncertain agreement", "tau": 0.547, "n": 20}}}, labels=facts.labels)
+    assert ed.label_safety_note(warned, ["b"]).startswith(" These labels carry the workload cross-check warning (E41, O160, O182: τ_b 0.55 on 20 configurations, its interval below 0.5)")
+    # O182: low agreement withholds the labels, so no label note is printed for it.
+    low = SimpleNamespace(v3={"rows": rows, "diagnostics": {"workloadCrossCheck": {"warning": "low agreement", "tau": 0.347, "n": 20}}}, labels=facts.labels)
+    assert "cross-check warning" not in ed.label_safety_note(low, ["b"])
     assert ed.label_safety_note(warned, []) == ""
     # O162: a harness-sensitive bar is named beside the labels.
     flagged = SimpleNamespace(v3={"rows": rows, "diagnostics": {"bugHuntHarnessSensitivity": {"labelFlags": [

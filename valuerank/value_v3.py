@@ -2789,6 +2789,29 @@ def route_brackets(plan_rows: list[dict], per_plan: dict, frozen: dict, routes: 
 CROSSCHECK_COMPONENT = "terminalbench-4-0"
 
 
+# O182 (2026-11-03, on reviewer 103, amending O160): while a ranking's workload cross-check (E41) reads "low agreement" (τ_b
+# below 0.5), it issues no confirmed-cheapest interval label and no scenario-supported cheapest label; the tables, the
+# displayed-record answers and the attribution stay, and the release is not held. "Uncertain agreement" (the point estimate
+# at least 0.5, the interval reaching below it) keeps the labels, each carrying the warning.
+LABEL_GATE = "labels withheld: the ranking's workload cross-check (E41) is below 0.5 (O182)"
+
+
+def label_gate(rows: list[dict], main: str) -> str | None:
+    """O182: the withholding reason when the ranking's E41 cross-check reads low agreement, else None."""
+
+    return LABEL_GATE if workload_cross_check(rows, main)["warning"] == "low agreement" else None
+
+
+def withhold_bars(result: dict, gate: str | None) -> dict:
+    """O182: an interval output whose bar answers are withheld; the evaluated status and answer are kept beside the gate."""
+
+    if not gate:
+        return result
+    bars = [{**bar, "status": gate, "evaluatedStatus": bar["status"], "confirmedCheapest": None, "withheldConfirmedCheapest": bar.get("confirmedCheapest")}
+            for bar in result.get("bars", [])]
+    return {**result, "bars": bars, "labelGate": gate}
+
+
 def workload_cross_check(rows: list[dict], main: str, components: list[str] | None = None) -> dict:
     """E41, E68 (reviewer 77): Terminal-Bench 4.0's cost per solved task on AA's own execution (the component's cost per
     attempted task over AA's resolved fraction, never a tbench.ai gap fill) against the basket-cost rank, over the main-
@@ -3005,7 +3028,9 @@ def score(assembled: dict, frozen: dict) -> dict:
                   "planRowId": representative.get(row["id"])} for row in rows],
         "planRowRule": PLAN_ROW_RULE,
         "planRows": [_plan_row_json(row, per_plan[row["id"]]["plan"], plan_ranks.get(row["id"])) for row in plan_rows],
-        "intervals": {"api": interval_outputs(assembled, frozen, "api"), "plan": interval_outputs(plan_assembled, frozen, "plan")},
+        "intervals": {basis: withhold_bars(interval_outputs(source, frozen, basis), label_gate(rows, main))
+                      for basis, source in (("api", assembled), ("plan", plan_assembled))},
+        "labelGate": label_gate(rows, main),
         "incompleteEvidence": assembled.get("incomplete", []),
         "rankingCoverage": coverage,
         "listedIndicative": listed_indicative(assembled, frozen),
@@ -4174,6 +4199,7 @@ def bar_labels(assembled: dict, frozen: dict, *, seed: int, batch: int) -> list[
     if any(len(component) > 1 for component in scenarios.dependency_components(panel)):
         raise ValueError(f"compiled dependency graph differs from the registered kernel-check object ({REGISTERED_DEPENDENCY})")
     blocked, claimed = label_exclusions(assembled)
+    gate = label_gate(assembled["rows"], assembled["mainWorkload"])
     labels = []
     for reference in frozen["barReferences"]:
         bar = _bar_reference(reference)
@@ -4184,6 +4210,8 @@ def bar_labels(assembled: dict, frozen: dict, *, seed: int, batch: int) -> list[
             result = scenarios.kernel_robust_cheapest(panel, candidate, reference["level"], seed, batch=batch)
             if result["label"] and not blocker_safe(candidate, bar, boxes, blocked):
                 result = {**result, "label": False, "reading": BLOCKER_UNRESOLVED}
+            if result["label"] and gate:
+                result = {**result, "label": False, "reading": gate}
             results[candidate] = result
         labels.append({"reference": reference["id"], "level": reference["level"], "status": "evaluated", "candidates": results})
     return labels

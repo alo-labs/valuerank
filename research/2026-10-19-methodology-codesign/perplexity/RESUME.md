@@ -38,7 +38,8 @@ two consecutive clean rounds and the panel ends when every model says NO FURTHER
 | 100 | Claude Sonnet 5.5 | r182 | findings (two Highs, five Mediums; owner answers), folded into r183 (E343); clean run restarts |
 | 101 | Kimi K3 (four sections) | r183 | clean (three Lows, two sections NO FURTHER FEEDBACK), folded into r184; Kimi's first clean round |
 | 102 | GLM 5.3 (eight sections) | r184 | findings (one High, eight Mediums; two sections clean), folded into r185; clean run restarts |
-| 103 | Grok 4.7 | r185 | next |
+| 103 | Grok 4.7 | r185 | findings (two Highs, three Mediums; owner decisions O181–O182), folded into r186; clean run restarts |
+| 104 | GPT-6.1 Sol | r186 | next |
 
 To continue:
 

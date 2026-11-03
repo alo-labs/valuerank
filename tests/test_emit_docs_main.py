@@ -315,7 +315,9 @@ def test_plan_interval_outputs_and_unconfirmed_bars_are_described(repo_copy, pin
     assert "Cheapest at or above quality 61.4: unresolved." in plan_sentence
     assert "Cheapest at or above quality 61.4: GPT-6 Astra (max) (confirmed). (Bar comparison: compares 5 configurations that can qualify.)" in plan_sentence
     # Reviewer 72 (O63): the labelled rows' safety-refusal flags follow the labels.
-    assert plan_sentence.endswith("GPT-6.1 Sol (max) (15 blocked and 0 fallback attempts of 870).")
+    assert "GPT-6.1 Sol (max) (15 blocked and 0 fallback attempts of 870)." in plan_sentence
+    # O182: under uncertain agreement the labels are issued and carry the cross-check warning.
+    assert plan_sentence.endswith("`diagnostics.workloadCrossCheck.attribution`.") and "O160, O182" in plan_sentence
     scores = (repo_copy / "scores.md").read_text()
     assert "**Plan basis, main workload: frontier.** Not evaluable: none." in scores
     assert "Status certified; confirmed cheapest: none." in scores

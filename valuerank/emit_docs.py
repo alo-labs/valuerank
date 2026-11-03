@@ -326,10 +326,10 @@ def label_safety_note(facts, row_ids):
     flagged = [f"{facts.labels([row_id])} ({flags[row_id]['blocked']} blocked and {flags[row_id]['fallback']} fallback attempts of {flags[row_id]['attempts']})"
                for row_id in sorted({row_id.split("@")[0] for row_id in row_ids}) if flags.get(row_id, {}).get("status") == "flagged"]
     text = (" Safety-refusal flags (O63; costs and scores unchanged) on these labelled rows: " + "; ".join(flagged) + ".") if flagged else ""
-    # O160: while the ranking's E41 warning fires, every label it issues carries the warning and points to its attribution.
+    # O160 as amended by O182: low agreement withholds the labels; under "uncertain agreement" every label carries the warning.
     check = (facts.v3.get("diagnostics") or {}).get("workloadCrossCheck") or {}
-    if row_ids and check.get("warning") == "low agreement":
-        text += (f" These labels carry the workload cross-check warning (E41, O160: τ_b {check['tau']:.2f} on {check['n']} configurations): "
+    if row_ids and check.get("warning") == "uncertain agreement":
+        text += (f" These labels carry the workload cross-check warning (E41, O160, O182: τ_b {check['tau']:.2f} on {check['n']} configurations, its interval below 0.5): "
                  "the basket-cost order behind them agrees weakly with cost per solved task; the attribution is in scores.json "
                  "`diagnostics.workloadCrossCheck.attribution`.")
     # O162: a bar whose displayed cheapest changes when the multi-harness Bug Hunt rows take their other harness results.

@@ -2850,3 +2850,24 @@ def test_o173_bug_hunt_scale_stress_moves_every_row_by_the_rescaled_leaf():
     assert v.bug_hunt_scale_stress(rows, per_row)["bases"]["api"]["1.1"]["largestValueMove"] >= 0.0
     bare = [dict(rows[0], evidence={"observations": {}})]
     assert v.bug_hunt_scale_stress(bare, {rows[0]["id"]: per_row[rows[0]["id"]]})["bases"]["api"]["0.9"]["largestValueMove"] == 0.0
+
+
+def test_o182_low_workload_agreement_withholds_the_cheapest_labels(monkeypatch):
+    """O182: while E41 reads low agreement, interval and scenario cheapest labels are withheld; tables stay."""
+
+    result, frozen = scored()
+    assert v.label_gate(result["rows"], result["mainWorkload"]) in (None, v.LABEL_GATE)
+    output = {"bars": [{"status": "certified", "confirmedCheapest": "a", "possibleCheapest": ["a"]}]}
+    assert v.withhold_bars(output, None) is output
+    withheld = v.withhold_bars(output, v.LABEL_GATE)
+    assert withheld["bars"][0] == {"status": v.LABEL_GATE, "evaluatedStatus": "certified", "confirmedCheapest": None,
+                                   "withheldConfirmedCheapest": "a", "possibleCheapest": ["a"]} and withheld["labelGate"] == v.LABEL_GATE
+    monkeypatch.setattr(v, "workload_cross_check", lambda rows, main, components=None: {"warning": "low agreement"})
+    assert v.label_gate(result["rows"], result["mainWorkload"]) == v.LABEL_GATE
+    scores = v.score(result, frozen)
+    assert scores["labelGate"] == v.LABEL_GATE and all(bar["status"] == v.LABEL_GATE for bar in scores["intervals"]["api"]["bars"])
+    monkeypatch.setattr(v.scenarios, "kernel_robust_cheapest", lambda panel, candidate, level, seed, batch: {"label": True, "reading": "supported"})
+    monkeypatch.setattr(v, "blocker_safe", lambda candidate, bar, boxes, blocked: True)
+    monkeypatch.setattr(v.intervals, "cheapest_above_bar", lambda boxes, bar: {"possibleCheapest": ["a"]})
+    labels = v.bar_labels(result, frozen, seed=1, batch=10)
+    assert labels and all(item["candidates"]["a"] == {"label": False, "reading": v.LABEL_GATE} for item in labels)

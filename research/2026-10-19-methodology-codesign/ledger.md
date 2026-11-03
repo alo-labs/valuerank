@@ -2486,3 +2486,16 @@ Asked on I64 Q1 whether future O71 admissions should be executed by the build fr
 - Parts 11–12 M (only the binomial kernel's post-clip shift is audited): adopted; `samplingMeanShift` now also reports each clipped-normal leaf's realised displacement and the share of its draws at a bound, with a test.
 - Parts 15–16 L (the equal-weight independent-source statistic changes weights too): not adopted (Low); E62/E66 label it equal-weight.
 - Round status (O56): not clean (a High and Mediums); GLM's clean run restarts.
+
+## Owner decisions O181–O182 (2026-11-03), asked on reviewer 103
+- O181 (token-meter transfers, keeping O144): challenged with the argument that on a token meter a dearer target exhausts the allowance sooner, so the donor multiple overstates its Plan value in a known direction, the owner kept the donor multiple as the displayed figure; the O144/O146 bracket stays the sensitivity, its low end the conservative reading, and the text now states the direction.
+- O182 (E41 and labels, amending O160): while a ranking's workload cross-check reads low agreement (τ_b below 0.5), it issues no confirmed-cheapest interval label and no scenario-supported cheapest label; each bar reads "labels withheld" with the evaluated status and answer kept in scores.json (`evaluatedStatus`, `withheldConfirmedCheapest`, `labelGate`); tables, displayed-record answers and the attribution stay, and the release is not held. Under uncertain agreement the labels are issued with the warning. Today this withholds the AI Coding Daily ranking's labels (τ_b 0.35 on 20 configurations).
+
+## Reviewer 103 (Grok 4.7, round 13, Thinking, whole draft r185)
+- Read checks: every part read to its end.
+- H1 (owner decision challenge to O144): owner decision O181. Owner question (which window bound the SemiAnalysis runs) answered as on reviewer 97: the selected transcription records no binding window.
+- H2 (owner decision challenge to O54 given O172, an "objective answer" block led by the common-leaf ranking): not put a third time; O172 (reviewer 94) settled it and reviewers 96 and 100 raised it again without a new argument; the common-leaf answer already prints in each leading headline.
+- M1 (owner decision challenge to O133/O160): owner decision O182.
+- M2 (machine-readable primary answer under a negative cost allocation): not adopted; O179 chose the banner without the bar-table sort.
+- M3 (LiveBench's categories "all needed in the SDLC"): not changed; that is the owner's O61 clarification, and O122 prints the coding-specific share beside it.
+- Round status (O56): not clean (Highs and owner decisions); Grok's clean run restarts.
