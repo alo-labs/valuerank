@@ -26,9 +26,7 @@
     "grade": "measured",
     "rankingEligible": true,
     "exclusionReasons": [],
-    "flags": [
-      "Partial cost component: AA marks tasks missing or declined"
-    ]
+    "flags": []
   },
   "dimensions": [
     {
@@ -247,14 +245,7 @@
       "sourceDate": "2026-10-06"
     },
     "subset": false,
-    "partialComponents": [
-      "aa-briefcase",
-      "gdp-pdf",
-      "automationbench-aa",
-      "terminalbench-4-0",
-      "frontiercode-2-0",
-      "terminal-bench-science"
-    ],
+    "partialComponents": [],
     "workload": "835a9baf594a1251",
     "planFlags": [
       "workload-unmatched",
@@ -271,7 +262,7 @@
         "key": "aa-briefcase",
         "label": "AA-Briefcase",
         "costUsd": 570.6447931434362,
-        "completeness": "unresolved",
+        "completeness": "confirmed-complete",
         "source": "AA Intelligence Index evaluation cost (cost per task x task count)",
         "agent": null,
         "admitted": true
@@ -280,7 +271,7 @@
         "key": "gdp-pdf",
         "label": "GDP.pdf",
         "costUsd": 82.542564,
-        "completeness": "unresolved",
+        "completeness": "confirmed-complete",
         "source": "AA Intelligence Index evaluation cost (cost per task x task count)",
         "agent": null,
         "admitted": true
@@ -289,7 +280,7 @@
         "key": "automationbench-aa",
         "label": "AutomationBench-AA",
         "costUsd": 458.98783042329603,
-        "completeness": "unresolved",
+        "completeness": "confirmed-complete",
         "source": "AA Intelligence Index evaluation cost (cost per task x task count)",
         "agent": null,
         "admitted": true
@@ -298,7 +289,7 @@
         "key": "terminalbench-4-0",
         "label": "Terminal-Bench 4.0 (AA Index run)",
         "costUsd": 337.8477421433739,
-        "completeness": "unresolved",
+        "completeness": "confirmed-complete",
         "source": "AA Intelligence Index evaluation cost (cost per task x task count)",
         "agent": null,
         "admitted": true
@@ -307,7 +298,7 @@
         "key": "frontiercode-2-0",
         "label": "FrontierCode 2.0",
         "costUsd": 328.4788025662747,
-        "completeness": "unresolved",
+        "completeness": "confirmed-complete",
         "source": "AA Intelligence Index evaluation cost (cost per task x task count)",
         "agent": null,
         "admitted": true
@@ -316,7 +307,7 @@
         "key": "terminal-bench-science",
         "label": "Terminal-Bench-Science",
         "costUsd": 701.6258208533405,
-        "completeness": "unresolved",
+        "completeness": "confirmed-complete",
         "source": "AA Intelligence Index evaluation cost (cost per task x task count)",
         "agent": null,
         "admitted": true
@@ -534,7 +525,10 @@
     ]
   },
   "intervals": {
-    "api": null,
+    "api": {
+      "definite": "disproved",
+      "possible": "disproved"
+    },
     "plan": null
   },
   "history": [

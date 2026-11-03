@@ -193,6 +193,28 @@ def partition(report: dict, splits: list[dict]) -> int | None:
     return index
 
 
+# O177 (2026-11-03, on reviewer 96, amending the outright exclusion of split-spanning reports): a report that states its
+# readings per period ("periods": windowStart, windowEnd, valueLower, valueUpper each) and spans a split counts only through
+# its periods in the latest partition they reach, each wholly on one side of every split; they enter as one range for the
+# observer (E270) and the report is flagged. A report without isolable periods stays excluded; nothing pools across a split.
+ACROSS_SPLIT_FLAG = "measured across a split: only its readings wholly after the split count (O177)"
+
+
+def isolate_periods(report: dict, splits: list[dict]) -> dict | None:
+    """O177: the report reduced to its isolable periods in the latest partition they reach, or None."""
+
+    periods = report.get("periods") or []
+    if not periods or partition(report, splits) is not None:
+        return None
+    placed = [(partition({**report, "windowStart": item["windowStart"], "windowEnd": item["windowEnd"]}, splits), item) for item in periods]
+    indices = [index for index, _ in placed if index is not None]
+    if not indices:
+        return None
+    kept = [item for index, item in placed if index == max(indices)]
+    return {**report, "windowStart": min(item["windowStart"] for item in kept), "windowEnd": max(item["windowEnd"] for item in kept),
+            "valueLower": min(item["valueLower"] for item in kept), "valueUpper": max(item["valueUpper"] for item in kept), "acrossSplit": True}
+
+
 def on_fault_day(report: dict, faults: list[dict]) -> bool:
     start, end = window(report)
     for fault in faults:
@@ -314,6 +336,7 @@ def evaluate(document: dict, profile: dict, release_day: date, families: dict | 
         provider, plan, model, unit, region = key
         rows, eligible = [], []
         for report in reports:
+            report = isolate_periods(report, splits) or report
             reason = exclusion(report, profile, release_day, grandfathered)
             # O161: a cell's window ends at its latest staged search; a report dated after it was never searched for.
             searched = (search_dates or {}).get((model, plan))
@@ -323,7 +346,7 @@ def evaluate(document: dict, profile: dict, release_day: date, families: dict | 
             part = partition(report, splits) if reason is None else None
             rows.append({"id": report["id"], "observer": report["observer"], "valueLower": low, "valueUpper": high, "partition": part,
                          "provisional": bool(report.get("provisional")), "speedMode": report.get("speedMode"), "stage": report.get("stage"), "excluded": reason,
-                         "acrossResets": spans_reset(report, records), "inferenceRechecked": report.get("inferenceRechecked"),
+                         "acrossResets": spans_reset(report, records), "acrossSplit": bool(report.get("acrossSplit")), "inferenceRechecked": report.get("inferenceRechecked"),
                          "archive": None if report.get("stage") == FORM_STAGE or archived(report) else NOT_ARCHIVED})
             if reason is None:
                 eligible.append(rows[-1])
@@ -363,7 +386,10 @@ def evaluate(document: dict, profile: dict, release_day: date, families: dict | 
         # O115 (2026-10-29), E271: each midpoint is first clipped to the concordance band [largest lower bound / 1.20, 1.20x
         # the smallest upper bound], so a wide report cannot pull the pool beyond what the concordance test admitted, while
         # concordant point reports keep their own values (the symmetric band adds no upward pull); every report still counts.
-        feasible = [largest_lower / CONCORDANCE, CONCORDANCE * smallest_upper] if status == "passes" else None
+        # O176 (2026-11-03, on reviewer 96, amending O159): the band that clips the value reads only the admitting
+        # (non-provisional) reports, so a re-checked provisional report can fail a cell but never move its value.
+        feasible = ([max(row["valueLower"] for row in firm) / CONCORDANCE, CONCORDANCE * min(row["valueUpper"] for row in firm)]
+                    if status == "passes" else None)
         value = (math.exp(sum(math.log(min(max((row["valueLower"] + row["valueUpper"]) / 2, feasible[0]), feasible[1])) for row in firm) / len(firm))
                  if status == "passes" else None)
         monthly = value * UNIT_TO_MONTH[unit] if value is not None else None
@@ -379,7 +405,8 @@ def evaluate(document: dict, profile: dict, release_day: date, families: dict | 
                         # Reviewer 95: the reports whose midpoint the O115 band moved, so a band-dominated value is visible.
                         "bandMoved": sorted(row["observer"] for row in firm if not feasible[0] <= (row["valueLower"] + row["valueUpper"]) / 2 <= feasible[1]) if status == "passes" else [],
                         "notArchivedAdmitting": sorted(row["observer"] for row in firm if row["archive"]) if status == "passes" else [],
-                        "flags": [ACROSS_RESETS_FLAG] if status == "passes" and any(row["acrossResets"] for row in firm) else []})
+                        "flags": ([ACROSS_RESETS_FLAG] if status == "passes" and any(row["acrossResets"] for row in firm) else [])
+                                 + ([ACROSS_SPLIT_FLAG] if status == "passes" and any(row["acrossSplit"] for row in firm) else [])})
     return results
 
 

@@ -319,7 +319,7 @@ def test_displayed_cheapest_sentences_name_the_row_or_none():
     Facts.v3["displayedCheapest"]["plan"]["bars"][0]["noise"] = {"status": "screen passed: y", "delta": 4.0, "contestedBy": [], "cheaperCompared": 3}
     Facts.v3["commonAnswer"] = {"bases": {"api": [{"level": 48.0, "cheapest": ["low"]}, {"level": 66.0, "cheapest": []}]}}
     added = ed.displayed_cheapest_sentences(Facts)
-    assert "API basis, common-leaf diagnostic ranking at the same bar positions (O172; its own bar levels, no label, not a claim): cheapest at or above quality 48.0: low; at or above quality 66.0: none." in added
+    assert "API basis, common-leaf diagnostic ranking at the same bar positions (O172; its own bar levels; no label by owner policy, O121, not for want of evidence; not a claim): cheapest at or above quality 48.0: low; at or above quality 66.0: none." in added
     assert any(item.startswith("API basis, pointwise noise-margin screen (O171") and item.endswith("at or above quality 50.0: contested (contested by c).") for item in added)
     assert any(item.endswith("at or above quality 50.0: screen passed, 3 cheaper rows compared.") for item in added)
     assert ed.basket_runs_text({"amountUsd": 1178.0, "feePeriod": "month"}, 9373.65) == "0.13 per month"

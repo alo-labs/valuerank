@@ -207,9 +207,9 @@ def test_flags_name_subset_rows(bundle, synthetic):
     assert flagged == {m["slug"] for m in bundle.rankings["models"] if m["cost"]["subset"]} == {"mimo-v2-6-pro"}
     astra = by_slug(synthetic.rankings)["gpt-6-astra"]
     assert any(flag.startswith("AA cost caveat") for flag in astra["flags"])
-    # E209: AA marks Claude Opus 5.5's component tasks missing or declined, so its row names the partial component.
+    # O175: Claude Opus 5.5's 0.03-0.04% Index residual is within the materiality band, so its row carries no partial component.
     opus = by_slug(bundle.rankings)["claude-opus-5-5"]
-    assert opus["cost"]["partialComponents"] and "Partial cost component: AA marks tasks missing or declined" in opus["flags"]
+    assert not opus["cost"]["partialComponents"] and "Partial cost component: AA marks tasks missing or declined" not in opus["flags"]
 
 
 def test_picks_reference_ranked_models_with_plain_reasons(bundle):

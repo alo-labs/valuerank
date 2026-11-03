@@ -71,6 +71,10 @@ def component_cost(cost_usd, *, half_width=0.0, completeness=COMPLETE, source, c
     }
 
 
+EXACT_TOLERANCE = 1e-6  # source precision (E209)
+MATERIALITY_TOLERANCE = 1e-3  # O175: 0.1% of AA's published Index total
+
+
 def index_components(evaluations: list[dict], published_total: float | None) -> tuple[dict, dict]:
     """The six SDLC component costs and the Index reconciliation for one AA model page.
 
@@ -91,7 +95,10 @@ def index_components(evaluations: list[dict], published_total: float | None) -> 
         if complete_set and isinstance(published_total, (int, float)) and published_total > 0
         else None
     )
-    reconciled = relative_error is not None and relative_error <= 1e-6
+    # O175 (2026-11-03, on reviewer 96, amending O141/E209): a residual within 0.1% of AA's published total is immaterial
+    # next to the cost noise the scenario layer carries, so the row stays complete with its residual published; a larger
+    # residual leaves the components unresolved. The exact (1e-6) reproduction is still reported.
+    reconciled = relative_error is not None and relative_error <= MATERIALITY_TOLERANCE
     status = COMPLETE if reconciled else UNRESOLVED
     components = {
         slug: component_cost(
@@ -110,6 +117,8 @@ def index_components(evaluations: list[dict], published_total: float | None) -> 
         "publishedTotalUsd": published_total,
         "relativeError": relative_error,
         "reconciled": reconciled,
+        "exact": relative_error is not None and relative_error <= EXACT_TOLERANCE,
+        "residualDisclosed": reconciled and relative_error > EXACT_TOLERANCE,
     }
     return components, reconciliation
 

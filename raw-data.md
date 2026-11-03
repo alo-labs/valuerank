@@ -535,12 +535,12 @@ Exhaustive searches for the leaves a cohort configuration still lacks (each with
 | GPT-6.1 Sol (max) | FrontierCode 2.0 | $149.21 | confirmed-complete | 132 | $1.1304 | AA Intelligence Index evaluation cost (cost per task x task count) |
 | GPT-6.1 Sol (max) | Terminal-Bench-Science | $233.73 | confirmed-complete | 70 | $3.3389 | AA Intelligence Index evaluation cost (cost per task x task count) |
 | GPT-6.1 Sol (max) | Coding Agent Index | $436.35 | confirmed-complete | — | — | AA Coding Agent Index v2.0 cost to run (mean API cost per task) x 290 tasks |
-| Claude Opus 5.5 (max) | AA-Briefcase | $1,915.18 | unresolved | 91 | $21.0460 | AA Intelligence Index evaluation cost (cost per task x task count) |
-| Claude Opus 5.5 (max) | GDP.pdf | $155.23 | unresolved | 100 | $1.5523 | AA Intelligence Index evaluation cost (cost per task x task count) |
-| Claude Opus 5.5 (max) | AutomationBench-AA | $938.69 | unresolved | 657 | $1.4288 | AA Intelligence Index evaluation cost (cost per task x task count) |
-| Claude Opus 5.5 (max) | Terminal-Bench 4.0 (AA Index run) | $865.21 | unresolved | 66 | $13.1093 | AA Intelligence Index evaluation cost (cost per task x task count) |
-| Claude Opus 5.5 (max) | FrontierCode 2.0 | $1,776.08 | unresolved | 132 | $13.4552 | AA Intelligence Index evaluation cost (cost per task x task count) |
-| Claude Opus 5.5 (max) | Terminal-Bench-Science | $1,397.97 | unresolved | 70 | $19.9710 | AA Intelligence Index evaluation cost (cost per task x task count) |
+| Claude Opus 5.5 (max) | AA-Briefcase | $1,915.18 | confirmed-complete | 91 | $21.0460 | AA Intelligence Index evaluation cost (cost per task x task count) |
+| Claude Opus 5.5 (max) | GDP.pdf | $155.23 | confirmed-complete | 100 | $1.5523 | AA Intelligence Index evaluation cost (cost per task x task count) |
+| Claude Opus 5.5 (max) | AutomationBench-AA | $938.69 | confirmed-complete | 657 | $1.4288 | AA Intelligence Index evaluation cost (cost per task x task count) |
+| Claude Opus 5.5 (max) | Terminal-Bench 4.0 (AA Index run) | $865.21 | confirmed-complete | 66 | $13.1093 | AA Intelligence Index evaluation cost (cost per task x task count) |
+| Claude Opus 5.5 (max) | FrontierCode 2.0 | $1,776.08 | confirmed-complete | 132 | $13.4552 | AA Intelligence Index evaluation cost (cost per task x task count) |
+| Claude Opus 5.5 (max) | Terminal-Bench-Science | $1,397.97 | confirmed-complete | 70 | $19.9710 | AA Intelligence Index evaluation cost (cost per task x task count) |
 | Claude Opus 5.5 (max) | Coding Agent Index | $3,312.59 | confirmed-complete | — | — | AA Coding Agent Index v2.0 cost to run (mean API cost per task) x 290 tasks |
 | Claude Opus 5.5 (max) | ITBench-AA | $146.00 | confirmed-complete | — | — | AA ITBench-AA total cost chart (labels rounded to USD 1) |
 | Claude Sonnet 5.5 (max) | AA-Briefcase | $1,863.13 | confirmed-complete | 91 | $20.4739 | AA Intelligence Index evaluation cost (cost per task x task count) |
@@ -600,7 +600,7 @@ The seven Index components plus AA's residual reproduce AA's published Intellige
 | Configuration | Index SDLC components | Residual | Reconstructed total | Published total | Reconciled |
 |---|---:|---:|---:|---:|---|
 | GPT-6.1 Sol (max) | — | $173.29 | $1,123.97 | $1,123.97 | yes |
-| Claude Opus 5.5 (max) | — | $1,863.54 | $8,911.91 | $8,909.67 | no |
+| Claude Opus 5.5 (max) | — | $1,863.54 | $8,911.91 | $8,909.67 | yes |
 | Claude Sonnet 5.5 (max) | — | $1,336.25 | $7,980.63 | $7,980.63 | yes |
 | Claude Haiku 5.5 (max) | — | $68.82 | $339.47 | $339.47 | yes |
 | GPT-6 Astra (max) | — | $893.27 | $5,661.18 | $5,661.18 | yes |

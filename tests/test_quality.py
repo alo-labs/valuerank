@@ -84,8 +84,9 @@ def test_bug_hunt_release_vector():
 
     saved = dict(q.BUG_HUNT_SCALE)
     try:
-        board = [{"fixedOf105": 57.0, "extras": 20.0}, {"fixedOf105": 44.3, "extras": 65.3}, {"fixedOf105": 10.0}]
-        assert q.bug_hunt_scale(board) == {"maxPlanted": 57.0, "maxUnplanted": 65.3, "scale": pytest.approx(122.3)}
+        board = [{"model": "a", "harness": "x", "fixedOf105": 57.0, "extras": 20.0}, {"model": "b", "harness": "y", "fixedOf105": 44.3, "extras": 65.3}, {"fixedOf105": 10.0}]
+        assert q.bug_hunt_scale(board) == {"maxPlanted": 57.0, "maxUnplanted": 65.3, "scale": pytest.approx(122.3),
+                                           "maxPlantedRuns": ["a / x"], "maxUnplantedRuns": ["b / y"]}
         best = q.bug_hunt_z(44.3 + 65.3, 0.05)
         assert best.z == pytest.approx(100 * 109.6 / 122.3) and best.half_width == pytest.approx(5 / 122.3) and best.upper == 100.0
         assert q.bug_hunt_z(-1.0).z == 0.0 and q.bug_hunt_z(130.0).z == 100.0

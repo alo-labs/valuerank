@@ -79,6 +79,10 @@ def test_cells_pass_only_on_two_firm_concordant_reports_in_the_current_partition
     assert unchecked["status"] == "passes" and unchecked["feasibleRange"] == pytest.approx([104 / 1.2, 120]) and unchecked["allReportsBand"] == pytest.approx([200 / 1.2, 120])
     checked = cells(*firm, {**stray, "inferenceRechecked": "matched tier and model against a and b"})[("Pro", "week", "global")]
     assert checked["status"].startswith("fails: largest lower bound") and checked["reports"][-1]["inferenceRechecked"]
+    # O176: a re-checked provisional report that concords still cannot narrow the band that clips the value.
+    narrow = {**report("p", start="2026-10-20", end="2026-10-20", low=110, provisional=True), "inferenceRechecked": "matched"}
+    moved = cells(report("a", start="2026-10-18", end="2026-10-18", low=90, high=120), report("b", start="2026-10-19", end="2026-10-19", low=100), narrow)[("Pro", "week", "global")]
+    assert moved["status"] == "passes" and moved["feasibleRange"] == pytest.approx([100 / 1.2, 120])
     # O87: reports at different efforts pool for the model, keyed without the effort suffix.
     reports = [report("a", start="2026-10-18", end="2026-10-18", effort="high"), {**report("b", start="2026-10-19", end="2026-10-19", effort="low"), "modelId": "m-max"}]
     pooled = pa.evaluate({**DOCUMENT, "reports": reports}, PROFILE, DAY, {"m": "M", "m-max": "M"})[0]
@@ -309,3 +313,21 @@ def test_e320_a_cell_whose_search_predates_the_envelope_has_an_empty_window():
 def test_e336_a_non_positive_figure_is_excluded_before_concordance():
     assert "non-positive allowance figure" in pa.exclusion(report("z", low=0.0, high=0.0), PROFILE, DAY)
     assert "non-positive allowance figure" in pa.exclusion(report("n", low=-1.0, high=5.0), PROFILE, DAY)
+
+
+def test_o177_a_split_spanning_report_counts_through_its_post_split_periods():
+    """O177: per-period readings wholly after the split count, flagged; a report without them stays excluded."""
+
+    splits = PROFILE["partitionSplits"]
+    periods = [{"windowStart": "2026-10-14", "windowEnd": "2026-10-16", "valueLower": 300, "valueUpper": 300},
+               {"windowStart": "2026-10-18", "windowEnd": "2026-10-19", "valueLower": 100, "valueUpper": 104},
+               {"windowStart": "2026-10-20", "windowEnd": "2026-10-21", "valueLower": 102, "valueUpper": 106}]
+    spanning = {**report("s", start="2026-10-14", end="2026-10-21", low=200), "periods": periods}
+    kept = pa.isolate_periods(spanning, splits)
+    assert (kept["windowStart"], kept["windowEnd"], kept["valueLower"], kept["valueUpper"], kept["acrossSplit"]) == ("2026-10-18", "2026-10-21", 100, 106, True)
+    assert pa.isolate_periods(report("plain", start="2026-10-14", end="2026-10-21"), splits) is None
+    assert pa.isolate_periods({**report("inside", start="2026-10-18", end="2026-10-19"), "periods": periods[1:2]}, splits) is None
+    assert pa.isolate_periods({**spanning, "periods": [{**periods[0], "windowEnd": "2026-10-18"}]}, splits) is None
+    cell = pa.evaluate({**DOCUMENT, "reports": [spanning, report("b", start="2026-10-20", end="2026-10-20", low=103)]}, PROFILE, DAY)
+    passing = [item for item in cell if item["status"] == "passes"]
+    assert passing and pa.ACROSS_SPLIT_FLAG in passing[0]["flags"] and any(row["acrossSplit"] for row in passing[0]["reports"])

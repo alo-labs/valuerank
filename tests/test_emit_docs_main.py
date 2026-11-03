@@ -76,7 +76,8 @@ def test_readme_flags_fallback_and_subset_rows(emitted):
     readme = (emitted / "README.md").read_text()
     rows = ranking_rows(readme)
     # E37: AA marks tasks of one of Claude Opus 5.5 (max)'s basket components missing or declined.
-    assert rows["Claude Opus 5.5 (max)"][10] == "partial component, route possibly superseded"
+    # O175: the Opus rows' 0.03-0.04% Index residual is within the materiality band, so no partial component.
+    assert rows["Claude Opus 5.5 (max)"][10] == "route possibly superseded"
     assert rows["GPT-6 Astra (max)"][6] == "100%" and rows["GPT-6 Astra (max)"][10] == "route possibly superseded"
     # O91-O95: a route resting on a controlled measurement inside an accounting-fault window is flagged.
     assert rows["GPT-6.1 Sol (max)"][10] == "route possibly superseded, fault window"
@@ -120,15 +121,15 @@ def test_readme_flags_an_api_cost_fallback_row_and_a_subset_cost_row(repo_copy, 
 def test_readme_states_what_the_interval_outputs_support(emitted):
     readme = (emitted / "README.md").read_text()
     assert "the definite frontier (no configuration can beat it on both cost and quality" in readme
-    # E190: the frontier names the configurations it cannot evaluate (Claude Opus 5.5 (max) has a partial component,
-    # MiMo-V2.6-Pro is on a subset workload).
-    assert "GPT-6 Luna (max); the possible frontier adds none. Not evaluable on this workload: Claude Opus 5.5 (max), MiMo-V2.6-Pro." in readme
+    # E190: the frontier names the configurations it cannot evaluate (MiMo-V2.6-Pro is on a subset workload; since O175
+    # Claude Opus 5.5 (max) has no partial component).
+    assert "GPT-6 Luna (max); the possible frontier adds none. Not evaluable on this workload: MiMo-V2.6-Pro." in readme
     # E192: the bar is a quality level, so the output compares alternatives instead of returning the bar setter
     # (61.4 is Gemini 4 Argon (high)'s own quality since O170's rescale; GPT-6.1 Sol (max) is the confirmed cheapest at or above it).
     assert ("Cheapest at or above quality 61.4: GPT-6.1 Sol (max) (confirmed). "
-            "(Bar comparison: compares 4 configurations that can qualify.)") in readme
+            "(Bar comparison: compares 5 configurations that can qualify.)") in readme
     assert ("Cheapest at or above quality 67.5: not unique; possibly GPT-6.1 Sol (max), GPT-6 Astra (max). "
-            "(Bar comparison: compares 2 configurations that can qualify.") in readme
+            "(Bar comparison: compares 3 configurations that can qualify.") in readme
     # E196: the nominal cost weight is printed with cost's share of the variance in value.
     assert "value is a 25% cost score (nominal weight; 56% of API and 46% of Plan value variance)" in readme
     assert ("That weight is nominal: on the current panel cost accounts for 56% of the variance in API value and 46% in Plan value, "
@@ -147,8 +148,8 @@ def test_readme_states_what_the_interval_outputs_support(emitted):
     assert ("- Plan basis, cheaper same-family efforts on AA's chart that this ranking could not evaluate (O143, E201c): below Claude Haiku 5.5 (max): "
             "Claude Haiku 5.5 (xhigh), Claude Haiku 5.5 (high), Claude Haiku 5.5 (medium), Claude Haiku 5.5 (low); below GPT-6.1 Sol (max):") in readme
     # O50: the max-effort ranking admits the Coding Agent Index v2.0, so the coding share names it and its unrewarded SWE-Atlas QnA.
-    assert ("Coding and terminal tasks (Coding Agent Index, Terminal-Bench 4.0 (AA Index run), FrontierCode 2.0) make up 53% of the basket's cost (median over 7 configurations "
-            "with the full basket; 40% to 84%); AA-Briefcase, GDP.pdf, which have no quality leaf, make up 12%; the Coding Agent Index's SWE-Atlas QnA") in readme
+    assert ("Coding and terminal tasks (Coding Agent Index, Terminal-Bench 4.0 (AA Index run), FrontierCode 2.0) make up 55% of the basket's cost (median over 8 configurations "
+            "with the full basket; 40% to 84%); AA-Briefcase, GDP.pdf, which have no quality leaf, make up 14%; the Coding Agent Index's SWE-Atlas QnA") in readme
     # Reviewer 79 (E299): the O145 retained rows leave the frontier-only population (9 ranked, 4 retained).
     assert '- **Frontier-families bar (E199, sensitivity; the frozen bar stays primary):** quality 67.5 over 5 configurations; cheapest at or above it o' in (emitted / "scores.md").read_text()
     assert "FrontierCode 2.0 and Terminal-Bench-Science once at API rates" in readme
@@ -311,7 +312,7 @@ def test_plan_interval_outputs_and_unconfirmed_bars_are_described(repo_copy, pin
     assert "Not evaluable" not in plan_sentence
     assert "Cheapest at or above quality 61.4: not unique; possibly GPT-6 Luna (max), GPT-6.1 Sol (max)." in plan_sentence
     assert "Cheapest at or above quality 61.4: unresolved." in plan_sentence
-    assert "Cheapest at or above quality 61.4: GPT-6 Astra (max) (confirmed). (Bar comparison: compares 4 configurations that can qualify.)" in plan_sentence
+    assert "Cheapest at or above quality 61.4: GPT-6 Astra (max) (confirmed). (Bar comparison: compares 5 configurations that can qualify.)" in plan_sentence
     # Reviewer 72 (O63): the labelled rows' safety-refusal flags follow the labels.
     assert plan_sentence.endswith("GPT-6.1 Sol (max) (15 blocked and 0 fallback attempts of 870).")
     scores = (repo_copy / "scores.md").read_text()

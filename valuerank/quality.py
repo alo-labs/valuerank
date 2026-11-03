@@ -198,7 +198,10 @@ def bug_hunt_scale(rows: list[dict]) -> dict:
 
     planted = max(row["fixedOf105"] for row in rows)
     unplanted = max(row.get("extras") or 0.0 for row in rows)
-    BUG_HUNT_SCALE.update({"maxPlanted": planted, "maxUnplanted": unplanted, "scale": planted + unplanted})
+    # Reviewer 96: the runs that set each maximum are published, so a scale move names its source.
+    setters = lambda key, value: sorted(f"{row.get('model')} / {row.get('harness')}" for row in rows if (row.get(key) or 0.0) == value)
+    BUG_HUNT_SCALE.update({"maxPlanted": planted, "maxUnplanted": unplanted, "scale": planted + unplanted,
+                           "maxPlantedRuns": setters("fixedOf105", planted), "maxUnplantedRuns": setters("extras", unplanted)})
     return dict(BUG_HUNT_SCALE)
 
 

@@ -28,6 +28,16 @@ def test_index_components_reconcile_to_the_published_total():
     assert reconciliation["reconciled"] is True and reconciliation["relativeError"] == pytest.approx(0.0)
 
 
+def test_index_components_within_the_o175_materiality_band_stay_complete():
+    """O175: a residual above source precision but within 0.1% keeps the row complete, its residual disclosed."""
+
+    components, reconciliation = b.index_components(evaluations(), published_total() * 1.0004)
+    assert reconciliation["reconciled"] is True and reconciliation["exact"] is False and reconciliation["residualDisclosed"] is True
+    assert all(item["completeness"] == b.COMPLETE for item in components.values())
+    exact = b.index_components(evaluations(), published_total())[1]
+    assert exact["exact"] is True and exact["residualDisclosed"] is False
+
+
 def test_index_components_unresolved_when_totals_disagree():
     components, reconciliation = b.index_components(evaluations(), published_total() * 1.01)
     assert reconciliation["reconciled"] is False

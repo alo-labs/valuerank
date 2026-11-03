@@ -62,18 +62,18 @@ Value on a basis = **25%** × cost score + **75%** × quality score (owner decis
 
 ## Cost: the SDLC basket
 
-The cost figure is the **contestant-model API token cost for the SDLC basket (not total agent or workflow operating cost)**. SDLC basket v1 holds the components the admission rule admits (maximise components, then panel size, then target order, over subsets with a complete-evidence panel of at least two-thirds); its reference panel is 7 of the 9 ranked configurations (at least 6 required):
+The cost figure is the **contestant-model API token cost for the SDLC basket (not total agent or workflow operating cost)**. SDLC basket v1 holds the components the admission rule admits (maximise components, then panel size, then target order, over subsets with a complete-evidence panel of at least two-thirds); its reference panel is 8 of the 9 ranked configurations (at least 6 required):
 
 | Component | Status | Exact cost available | Complete | Ranked |
 |---|---|---:|---:|---:|
 | Coding Agent Index | admitted | 8 | 8 | 9 |
 | ITBench-AA | pending capture | 2 | 2 | 9 |
-| AA-Briefcase | admitted | 9 | 8 | 9 |
-| GDP.pdf | admitted | 9 | 8 | 9 |
-| AutomationBench-AA | admitted | 9 | 8 | 9 |
-| Terminal-Bench 4.0 (AA Index run) | admitted | 9 | 8 | 9 |
-| FrontierCode 2.0 | admitted | 9 | 8 | 9 |
-| Terminal-Bench-Science | admitted | 9 | 8 | 9 |
+| AA-Briefcase | admitted | 9 | 9 | 9 |
+| GDP.pdf | admitted | 9 | 9 | 9 |
+| AutomationBench-AA | admitted | 9 | 9 | 9 |
+| Terminal-Bench 4.0 (AA Index run) | admitted | 9 | 9 | 9 |
+| FrontierCode 2.0 | admitted | 9 | 9 | 9 |
+| Terminal-Bench-Science | admitted | 9 | 9 | 9 |
 
 A configuration's basket cost is the sum of AA's published costs for the admitted components at that exact model and effort: each Intelligence Index component is AA's cost per task times its task count, and the Coding Agent Index cost is AA's unrounded mean cost per task times its 290 required tasks (O27, O50). The Index components plus AA's residual reproduce AA's published Index total for every configuration (see raw-data.md).
 
@@ -169,7 +169,7 @@ Plan cost = basket API cost ÷ a subscription route's Value Multiple, at full ut
 
 **Interval outputs (O25).** Each observed leaf is placed anywhere inside its published reporting precision, each missing leaf anywhere in 0–100 and each cost inside its rounding. A configuration is on the **definite frontier** when no other configuration can beat it on both cost and quality for any values in those boxes, and on the **possible frontier** when some values put it there. The **cheapest above a quality bar** is confirmed only when its worst cost is below the best cost of every other configuration that could qualify. The bar is pinned by policy `quality-quartile-ladder` v3: the lower quartile, lower median (the headline bar) and upper quartile, each the displayed quality at zero-based position floor((n - 1) * k / 4), k = 1, 2, 3 (O34) of non-provisional ranked configurations with a displayed quality, ordered by displayed quality ascending, then configuration ID, selected deterministic at anchor freeze, before any bar outcome is computed; the displayed quality at each ladder position, frozen as a level; the configuration at that position is recorded for audit and competes like any other; a frozen level is never a configuration, so no bar can return its setter by construction; whether a result compares alternatives is published per result (possibleQualifierN, E198); fixed for the anchor version; replaced only by a versioned re-freeze that publishes old- and new-bar results on the common evaluable panel. Current headline bar: quality 61.4 (the displayed quality of Gemini 4 Argon at freeze); ladder: quality 49.4, quality 67.5.
 
-**Scenario shares** are frequencies over declared streams, never probabilities (10,000 scenarios per run, seed 20261101, input hash `2c1734436a365e69`):
+**Scenario shares** are frequencies over declared streams, never probabilities (10,000 scenarios per run, seed 20261101, input hash `cb78fb05b35ecb18`):
 
 - **S0**: published-record reporting precision.
 - **S1**: published-record reporting precision + conventional identification of missing leaves.
@@ -195,7 +195,7 @@ Diagnostics are published beside the ranking and never change a score: Terminal-
 | realised influence (E272) | passed | cost's value-variance allocation lies within 0-100% on both bases |
 | quality influence flag (E126) | passed | quality not discriminating (cost share > 90%); informational only |
 | subset scoring (O17) | fired | subset rows scored on their own workload and anchors |
-| partial component flag (E37) | fired | AA declined- or missing-task markers, or an Index reconstruction that misses AA's total (E209) |
+| partial component flag (E37) | vacuous | AA declined- or missing-task markers, or an Index reconstruction that misses AA's total (E209) |
 | route dominance filter (E88) | vacuous | certifiably dearer routes set aside |
 | Plan exploratory label (E61) | fired | fewer than half of Plan rows have an identified M_W |
 | Plan evidence lifecycle and change detection (E18, E151, E269, O77, O79) | fired | 21 of 27 plan rows carry a possibly-superseded or expired route: claude-haiku-5-5-max@claude-max-20x, claude-haiku-5-5-max@claude-max-5x, claude-haiku-5-5-max@claude-pro, claude-opus-5-5@claude-max-20x, claude-opus-5-5@claude-max-5x, claude-opus-5-5@claude-pro, claude-sonnet-5-5@claude-max-20x, claude-sonnet-5-5@claude-max-5x, claude-sonnet-5-5@claude-pro, gpt-6-astra@chatgpt-plus, gpt-6-astra@chatgpt-pro-100, gpt-6-astra@chatgpt-pro-200, gpt-6-astra@chatgpt-pro-500, gpt-6-luna@chatgpt-plus, gpt-6-luna@chatgpt-pro-100, gpt-6-luna@chatgpt-pro-200, gpt-6-luna@chatgpt-pro-500, gpt-6.1-sol@chatgpt-plus, gpt-6.1-sol@chatgpt-pro-100, gpt-6.1-sol@chatgpt-pro-200, gpt-6.1-sol@chatgpt-pro-500 |

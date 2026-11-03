@@ -123,12 +123,12 @@ The configurations AI Coding Daily has tested, mostly at high and medium effort,
 
 - API basis, displayed record (not a claim; E203): cheapest at or above quality 47.2: GPT-6.1 Terra (high) ($236.92 per basket run; 11 reach it); at or above quality 37.5: Claude Haiku 5.5 (high) ($107.80 per basket run; 16 reach it); at or above quality 55.5: GPT-6.1 Sol (high) ($509.65 per basket run; 6 reach it).
 - API basis, cheaper same-family efforts on AA's chart that this ranking could not evaluate (O143, E201c): below Claude Haiku 5.5 (high): Claude Haiku 5.5 (low); below GPT-6.1 Terra (high): GPT-6.1 Terra (non-reasoning), GPT-6.1 Terra (low).
-- API basis, common-leaf diagnostic ranking at the same bar positions (O172; its own bar levels, no label, not a claim): cheapest at or above quality 47.6: GPT-6.1 Sol (medium); at or above quality 33.8: GPT-6 Luna (max); at or above quality 56.3: GPT-6.1 Sol (xhigh).
+- API basis, common-leaf diagnostic ranking at the same bar positions (O172; its own bar levels; no label by owner policy, O121, not for want of evidence; not a claim): cheapest at or above quality 47.6: GPT-6.1 Sol (medium); at or above quality 33.8: GPT-6 Luna (max); at or above quality 56.3: GPT-6.1 Sol (xhigh).
 - API basis, pointwise noise-margin screen (O171; Δ = (Q − H)/√(σ² + σ_H²) at correlation 0 with the bar setter, 1.96 per comparison; separate comparisons, not a simultaneous confidence statement, E337): at or above quality 47.2: rounding-stable only (contested by GPT-6.1 Sol (low), GPT-6.1 Terra (medium), MiMo-V2.6-Pro), 9 cheaper rows compared; at or above quality 37.5: rounding-stable only (contested by Claude Haiku 5.5 (medium), GPT-6 Luna (high), GPT-6 Luna (xhigh)), 4 cheaper rows compared; at or above quality 55.5: rounding-stable only (contested by DeepSeek V4.1 Flash 1017 (max), GPT-6.1 Sol (medium), GPT-6.1 Terra (xhigh)), 13 cheaper rows compared.
 - API basis, noise-margin companion (O44; each bar plus 5.8 quality points, so the bar's own configuration cannot decide it): cheapest at or above quality 52.9: GPT-6.1 Sol (medium) ($360.71 per basket run); at or above quality 43.3: GPT-6.1 Terra (medium) ($174.91 per basket run); at or above quality 61.3: none.
 - Plan basis, displayed record (not a claim; E203): cheapest at or above quality 47.2: GPT-6.1 Terra (high) on ChatGPT Pro 500 ($21.99 per basket run; 33 reach it); at or above quality 37.5: Claude Haiku 5.5 (high) on Claude Pro ($1.83 per basket run; 52 reach it); at or above quality 55.5: Claude Opus 5.5 (high) on Claude Pro ($42.11 per basket run; 17 reach it).
 - Plan basis, cheaper same-family efforts on AA's chart that this ranking could not evaluate (O143, E201c): below Claude Haiku 5.5 (high): Claude Haiku 5.5 (low); below Claude Opus 5.5 (high): Claude Opus 5.5 (low with fallback); below GPT-6.1 Terra (high): GPT-6.1 Terra (non-reasoning), GPT-6.1 Terra (low).
-- Plan basis, common-leaf diagnostic ranking at the same bar positions (O172; its own bar levels, no label, not a claim): cheapest at or above quality 47.6: Claude Opus 5.5 (medium) on Claude Pro; at or above quality 33.8: Claude Haiku 5.5 (xhigh) on Claude Pro; at or above quality 56.3: GPT-6.1 Sol (xhigh) on ChatGPT Pro 500.
+- Plan basis, common-leaf diagnostic ranking at the same bar positions (O172; its own bar levels; no label by owner policy, O121, not for want of evidence; not a claim): cheapest at or above quality 47.6: Claude Opus 5.5 (medium) on Claude Pro; at or above quality 33.8: Claude Haiku 5.5 (xhigh) on Claude Pro; at or above quality 56.3: GPT-6.1 Sol (xhigh) on ChatGPT Pro 500.
 - Plan basis, pointwise noise-margin screen (O171; Δ = (Q − H)/√(σ² + σ_H²) at correlation 0 with the bar setter, 1.96 per comparison; separate comparisons, not a simultaneous confidence statement, E337): at or above quality 47.2: rounding-stable only (contested by GPT-6.1 Sol (low) on ChatGPT Plus, GPT-6.1 Sol (low) on ChatGPT Pro 100, GPT-6.1 Sol (low) on ChatGPT Pro 200, GPT-6.1 Sol (low) on ChatGPT Pro 500, GPT-6.1 Terra (medium) on ChatGPT Plus, GPT-6.1 Terra (medium) on ChatGPT Pro 100, GPT-6.1 Terra (medium) on ChatGPT Pro 200, GPT-6.1 Terra (medium) on ChatGPT Pro 500), 30 cheaper rows compared; at or above quality 37.5: rounding-stable only, 3 cheaper rows compared; at or above quality 55.5: rounding-stable only (contested by Claude Opus 5.5 (medium) on Claude Max 20x, Claude Opus 5.5 (medium) on Claude Max 5x, Claude Opus 5.5 (medium) on Claude Pro, GPT-6.1 Sol (medium) on ChatGPT Plus, GPT-6.1 Sol (medium) on ChatGPT Pro 100, GPT-6.1 Sol (medium) on ChatGPT Pro 200, GPT-6.1 Sol (medium) on ChatGPT Pro 500), 45 cheaper rows compared.
 - Plan basis, noise-margin companion (O44; each bar plus 5.8 quality points, so the bar's own configuration cannot decide it): cheapest at or above quality 52.9: Claude Opus 5.5 (medium) on Claude Pro ($31.71 per basket run); at or above quality 43.3: GPT-6.1 Terra (medium) on ChatGPT Pro 500 ($16.24 per basket run); at or above quality 61.3: none.
 - AA cost caveat (O94; ranked at the published cost, no label of its own) on these bars' cheapest rows: Claude Haiku 5.5 (high) (AA's cost omits a pricing term; up to 5× on its cost).
@@ -166,7 +166,7 @@ Benchmark sampling noise (O39, an independent-task approximation): two values mu
 
 References: each workload's measured-only rows with complete cost evidence are the references: c_L = cheapest / 2, c_H = dearest x 2 (diagnostic only; the official anchors are unchanged). Status: evaluated.
 
-- Workload `835a9baf594a1251`: measured anchors $10.35 to $391.32 from GPT-6 Astra (high), GPT-6.1 Sol (high), GPT-6.1 Sol (low), GPT-6.1 Sol (medium); anchor ratio 37.8 against the official 67.6. Official Plan anchors are set by GPT-6.1 Sol (low) on ChatGPT Pro 500 (same-model measurement from another effort) at the low end and GPT-6 Astra (high) on ChatGPT Plus (same-model measurement from another effort) at the high end.
+- Workload `835a9baf594a1251`: measured anchors $10.35 to $391.32 from Claude Opus 5.5 (high), Claude Opus 5.5 (medium), GPT-6 Astra (high), GPT-6.1 Sol (high), GPT-6.1 Sol (low), GPT-6.1 Sol (medium); anchor ratio 37.8 against the official 67.6. Official Plan anchors are set by GPT-6.1 Sol (low) on ChatGPT Pro 500 (same-model measurement from another effort) at the low end and GPT-6 Astra (high) on ChatGPT Plus (same-model measurement from another effort) at the high end.
 
 | Configuration | Value on official Plan anchors | Value on measured anchors | Rank change |
 |---|---:|---:|---:|
@@ -183,7 +183,7 @@ Pairwise reversals: Claude Opus 5.5 (high) and Claude Opus 5.5 (medium). Largest
 
 ### AI Coding Daily ranking: interval outputs
 
-**API basis, main workload: frontier.** Not evaluable: Claude Opus 5.5 (high), Claude Opus 5.5 (medium). Competing without a label of its own (E183): Claude Haiku 5.5 (high): AA's cost omits a pricing term (O94); competes over its published cost up to the stated factor; Claude Haiku 5.5 (medium): AA's cost omits a pricing term (O94); competes over its published cost up to the stated factor.
+**API basis, main workload: frontier.** Not evaluable: none. Competing without a label of its own (E183): Claude Haiku 5.5 (high): AA's cost omits a pricing term (O94); competes over its published cost up to the stated factor; Claude Haiku 5.5 (medium): AA's cost omits a pricing term (O94); competes over its published cost up to the stated factor.
 
 | Configuration | Possible frontier | Definite frontier | Definite counterexample | Possible frontier blocked by |
 |---|---|---|---|---|
@@ -191,9 +191,11 @@ Pairwise reversals: Claude Opus 5.5 (high) and Claude Opus 5.5 (medium). Largest
 | GPT-6.1 Sol (high) | certified | certified | — | — |
 | DeepSeek V4.1 Flash 1017 (max) | disproved | disproved | GPT-6.1 Sol (medium) | GPT-6.1 Sol (medium) |
 | GPT-6.1 Sol (medium) | certified | certified | — | — |
-| Gemini 4 Argon (high) | disproved | disproved | GPT-6.1 Terra (max) | GPT-6.1 Terra (max), GPT-6.1 Sol (high), Kimi K3.1 Pro (max), GPT-6 Astra (high) |
+| Gemini 4 Argon (high) | disproved | disproved | GPT-6.1 Terra (max) | GPT-6.1 Terra (max), GPT-6.1 Sol (high), Claude Opus 5.5 (high), Kimi K3.1 Pro (max), GPT-6 Astra (high) |
+| Claude Opus 5.5 (high) | disproved | disproved | GPT-6.1 Terra (max) | GPT-6.1 Terra (max), GPT-6.1 Sol (high) |
 | Kimi K3.1 Pro (max) | disproved | disproved | GPT-6.1 Terra (max) | GPT-6.1 Terra (max) |
 | GPT-6 Astra (high) | certified | certified | — | — |
+| Claude Opus 5.5 (medium) | disproved | disproved | GPT-6.1 Terra (max) | GPT-6.1 Terra (max), GPT-6.1 Sol (high), GPT-6.1 Sol (medium) |
 | GPT-6.1 Sol (low) | certified | certified | — | — |
 | GPT-6.1 Terra (xhigh) | certified | certified | — | — |
 | GPT-6.1 Terra (high) | certified | certified | — | — |
@@ -206,9 +208,9 @@ Pairwise reversals: Claude Opus 5.5 (high) and Claude Opus 5.5 (medium). Largest
 
 **API basis, main workload: cheapest at or above quality 47.2** (lower-median displayed quality of the non-provisional cohort configurations at freeze (E192; headline bar)). Status certified; confirmed cheapest: none.
 
-Configurations that can be confirmed to qualify: 8 (confirmation needs the full-composite lower bound, with missing leaves at 0, to clear the bar; O25). Cheaper same-family configurations on AA's chart that were not evaluated (not ranked in this ranking: lacking its full benchmark set, or not plotted on or near the frontier; E201c, O51): GPT-6.1 Terra (xhigh): GPT-6.1 Terra (non-reasoning), GPT-6.1 Terra (low); GPT-6.1 Terra (high): GPT-6.1 Terra (non-reasoning), GPT-6.1 Terra (low).
+Configurations that can be confirmed to qualify: 10 (confirmation needs the full-composite lower bound, with missing leaves at 0, to clear the bar; O25). Cheaper same-family configurations on AA's chart that were not evaluated (not ranked in this ranking: lacking its full benchmark set, or not plotted on or near the frontier; E201c, O51): GPT-6.1 Terra (xhigh): GPT-6.1 Terra (non-reasoning), GPT-6.1 Terra (low); GPT-6.1 Terra (high): GPT-6.1 Terra (non-reasoning), GPT-6.1 Terra (low).
 
-Bar comparison: compares 9 configurations that can qualify. The bar is a displayed-quality level; qualification tests each row's full-composite bounds, so a row above the bar on displayed quality can still fail to qualify confirmed when leaves are missing (E198).
+Bar comparison: compares 11 configurations that can qualify. The bar is a displayed-quality level; qualification tests each row's full-composite bounds, so a row above the bar on displayed quality can still fail to qualify confirmed when leaves are missing (E198).
 
 | Configuration | Displayed quality − bar | Confirmed qualifies | Possibly qualifies | Possibly cheapest |
 |---|---:|---|---|---|
@@ -217,8 +219,10 @@ Bar comparison: compares 9 configurations that can qualify. The bar is a display
 | DeepSeek V4.1 Flash 1017 (max) | 4.9 | certified | certified | disproved |
 | GPT-6.1 Sol (medium) | 7.8 | certified | certified | disproved |
 | Gemini 4 Argon (high) | 8.4 | certified | certified | disproved |
+| Claude Opus 5.5 (high) | 10.1 | certified | certified | disproved |
 | Kimi K3.1 Pro (max) | 12.0 | certified | certified | disproved |
 | GPT-6 Astra (high) | 13.5 | certified | certified | disproved |
+| Claude Opus 5.5 (medium) | 7.7 | certified | certified | disproved |
 | GPT-6.1 Sol (low) | -2.1 | disproved | disproved | disproved |
 | GPT-6.1 Terra (xhigh) | 2.7 | certified | certified | certified |
 | GPT-6.1 Terra (high) | 0.0 | disproved | certified | certified |
@@ -231,9 +235,9 @@ Bar comparison: compares 9 configurations that can qualify. The bar is a display
 
 **API basis, main workload: cheapest at or above quality 37.5** (lower-quartile displayed quality of the non-provisional cohort configurations at freeze (O34)). Status certified; confirmed cheapest: none.
 
-Configurations that can be confirmed to qualify: 13 (confirmation needs the full-composite lower bound, with missing leaves at 0, to clear the bar; O25). Cheaper same-family configurations on AA's chart that were not evaluated (not ranked in this ranking: lacking its full benchmark set, or not plotted on or near the frontier; E201c, O51): GPT-6 Luna (max): GPT-6 Luna (low), GPT-6 Luna (non-reasoning).
+Configurations that can be confirmed to qualify: 15 (confirmation needs the full-composite lower bound, with missing leaves at 0, to clear the bar; O25). Cheaper same-family configurations on AA's chart that were not evaluated (not ranked in this ranking: lacking its full benchmark set, or not plotted on or near the frontier; E201c, O51): GPT-6 Luna (max): GPT-6 Luna (low), GPT-6 Luna (non-reasoning).
 
-Bar comparison: compares 13 configurations that can qualify and 1 blocker(s) that can qualify but earn no label (E315). The bar is a displayed-quality level; qualification tests each row's full-composite bounds, so a row above the bar on displayed quality can still fail to qualify confirmed when leaves are missing (E198).
+Bar comparison: compares 15 configurations that can qualify and 1 blocker(s) that can qualify but earn no label (E315). The bar is a displayed-quality level; qualification tests each row's full-composite bounds, so a row above the bar on displayed quality can still fail to qualify confirmed when leaves are missing (E198).
 
 | Configuration | Displayed quality − bar | Confirmed qualifies | Possibly qualifies | Possibly cheapest |
 |---|---:|---|---|---|
@@ -242,8 +246,10 @@ Bar comparison: compares 13 configurations that can qualify and 1 blocker(s) tha
 | DeepSeek V4.1 Flash 1017 (max) | 14.5 | certified | certified | disproved |
 | GPT-6.1 Sol (medium) | 17.5 | certified | certified | disproved |
 | Gemini 4 Argon (high) | 18.0 | certified | certified | disproved |
+| Claude Opus 5.5 (high) | 19.8 | certified | certified | disproved |
 | Kimi K3.1 Pro (max) | 21.6 | certified | certified | disproved |
 | GPT-6 Astra (high) | 23.2 | certified | certified | disproved |
+| Claude Opus 5.5 (medium) | 17.4 | certified | certified | disproved |
 | GPT-6.1 Sol (low) | 7.6 | certified | certified | disproved |
 | GPT-6.1 Terra (xhigh) | 12.4 | certified | certified | disproved |
 | GPT-6.1 Terra (high) | 9.6 | certified | certified | disproved |
@@ -256,9 +262,9 @@ Bar comparison: compares 13 configurations that can qualify and 1 blocker(s) tha
 
 **API basis, main workload: cheapest at or above quality 55.5** (upper-quartile displayed quality of the non-provisional cohort configurations at freeze (O34)). Status certified; confirmed cheapest: GPT-6.1 Sol (high).
 
-Configurations that can be confirmed to qualify: 4 (confirmation needs the full-composite lower bound, with missing leaves at 0, to clear the bar; O25). Cheaper same-family configurations on AA's chart that were not evaluated (not ranked in this ranking: lacking its full benchmark set, or not plotted on or near the frontier; E201c, O51): none.
+Configurations that can be confirmed to qualify: 5 (confirmation needs the full-composite lower bound, with missing leaves at 0, to clear the bar; O25). Cheaper same-family configurations on AA's chart that were not evaluated (not ranked in this ranking: lacking its full benchmark set, or not plotted on or near the frontier; E201c, O51): none.
 
-Bar comparison: compares 5 configurations that can qualify. The bar is a displayed-quality level; qualification tests each row's full-composite bounds, so a row above the bar on displayed quality can still fail to qualify confirmed when leaves are missing (E198).
+Bar comparison: compares 6 configurations that can qualify. The bar is a displayed-quality level; qualification tests each row's full-composite bounds, so a row above the bar on displayed quality can still fail to qualify confirmed when leaves are missing (E198).
 
 | Configuration | Displayed quality − bar | Confirmed qualifies | Possibly qualifies | Possibly cheapest |
 |---|---:|---|---|---|
@@ -267,8 +273,10 @@ Bar comparison: compares 5 configurations that can qualify. The bar is a display
 | DeepSeek V4.1 Flash 1017 (max) | -3.5 | disproved | disproved | disproved |
 | GPT-6.1 Sol (medium) | -0.5 | disproved | disproved | disproved |
 | Gemini 4 Argon (high) | 0.0 | disproved | certified | disproved |
+| Claude Opus 5.5 (high) | 1.8 | certified | certified | disproved |
 | Kimi K3.1 Pro (max) | 3.6 | certified | certified | disproved |
 | GPT-6 Astra (high) | 5.2 | certified | certified | disproved |
+| Claude Opus 5.5 (medium) | -0.6 | disproved | disproved | disproved |
 | GPT-6.1 Sol (low) | -10.4 | disproved | disproved | disproved |
 | GPT-6.1 Terra (xhigh) | -5.6 | disproved | disproved | disproved |
 | GPT-6.1 Terra (high) | -8.4 | disproved | disproved | disproved |
@@ -717,13 +725,13 @@ The 90% rule's error bound holds per published event (candidate and kernel assig
 - **Basket readiness (E22):** priced leaves cover 50% of nominal quality weight (AutomationBench-AA, FrontierCode 2.0, Terminal-Bench-Science 0.1, Terminal-Bench 4.0 (AA run)); pending components: Coding Agent Index, ITBench-AA.
 - **SWE cost companion (O14, diagnostic):** 7 rows evaluated; flagged far from the median ratio: DeepSeek V4.1 Flash 1017 (max).
 - **Matched-cost diagnostic (E55):** evaluated at 63% priced quality weight; basket/matched cost-order reversals with separated intervals: 2; rank-gap warnings: 0.
-- **Frontier-families anchors (E187, diagnostic):** anchors rebuilt from the 14 frontier and near-frontier references move API 11 rows move; largest move 2 (Claude Opus 5.5 (high), GPT-6 Luna (max), Kimi K3.1 Pro (max)) (value points per cost doubling 3.02 vs 2.71 frozen); Plan 11 rows move; largest move 3 (GPT-6.1 Terra (xhigh)) (value points per cost doubling 4.77 vs 4.11 frozen).
-- **Frontier-families bar (E199, sensitivity; the frozen bar stays primary):** quality 45.1 over 15 configurations; cheapest at or above it on the API main workload: not unique; possibly GPT-6.1 Sol (low), GPT-6.1 Terra (high) (compares 10 configurations that can qualify).
+- **Frontier-families anchors (E187, diagnostic):** anchors rebuilt from the 15 frontier and near-frontier references move API 11 rows move; largest move 2 (Claude Opus 5.5 (high), GPT-6 Luna (max), Kimi K3.1 Pro (max)) (value points per cost doubling 3.02 vs 2.71 frozen); Plan 11 rows move; largest move 3 (GPT-6.1 Terra (xhigh)) (value points per cost doubling 4.77 vs 4.11 frozen).
+- **Frontier-families bar (E199, sensitivity; the frozen bar stays primary):** quality 45.1 over 15 configurations; cheapest at or above it on the API main workload: not unique; possibly GPT-6.1 Sol (low), GPT-6.1 Terra (high) (compares 12 configurations that can qualify).
 - **One row per family (E205, diagnostic; the frozen ladder and anchors stay primary):** with each family's primary configuration only (3 rows in the one-row-per-family bar population), the ladder (headline, lower quartile, upper quartile) would be 37.5 against 47.2 / 37.5 / 55.5 frozen; anchors rebuilt from its 3 references move API 18 rows move; largest move 16 (DeepSeek V4.1 Flash 1017 (max)) (value points per cost doubling 6.16 vs 2.71 frozen); Plan anchors unavailable: fewer than 2 measured references (O157).
 - **Ladder over scored rows (I28, sensitivity; the frozen ladder stays primary):** the bar population keeps full-benchmark rows that have no cost; today every such row has a cost, so the ladder is unchanged.
 - **Bar currency (E207, informational):** rows reaching each frozen bar: quality 47.2: 11 of 20; quality 37.5: 16 of 20; quality 55.5: 6 of 20; the current population would freeze 47.2 / 37.5 / 55.5; lifetime until the next anchor re-freeze or methodology version, whichever comes first; no staleness flag.
 - **Token mix (E208):** 1 selected routes: mix not reported: the measurement publishes no token-category shares; 16 selected routes: mix unidentified: the basket's token-category shares are set-identified only (E124), so the L1 test (above 0.30 flags mix-unmatched) is not computed.
-- **Observed-range sensitivity (E219, not evidence; no label changes):** with each missing leaf inside the cohort's observed range for that leaf, quality 47.2: 9 can qualify, 8 confirmed; possibly cheapest GPT-6.1 Terra (xhigh), GPT-6.1 Terra (high); quality 37.5: 13 can qualify, 13 confirmed; possibly cheapest GPT-6 Luna (max); quality 55.5: 5 can qualify, 4 confirmed; GPT-6.1 Sol (high) confirmed cheapest.
+- **Observed-range sensitivity (E219, not evidence; no label changes):** with each missing leaf inside the cohort's observed range for that leaf, quality 47.2: 11 can qualify, 10 confirmed; possibly cheapest GPT-6.1 Terra (xhigh), GPT-6.1 Terra (high); quality 37.5: 15 can qualify, 15 confirmed; possibly cheapest GPT-6 Luna (max); quality 55.5: 6 can qualify, 5 confirmed; GPT-6.1 Sol (high) confirmed cheapest.
 - **What would settle the headline bar (E221, not a claim):** rows that can but need not reach quality 47.2, with the mean score their missing leaves would need: GPT-6.1 Terra (high) (no missing leaf; reporting precision only).
 - **Common leaf set (E226, diagnostic; scores unchanged):** without the leaves fewer than 90% of cohort rows have (none), API no rank changes; Plan no rank changes; rows reaching each bar: quality 47.2: 11 → 11; quality 37.5: 16 → 16; quality 55.5: 6 → 6; rows whose displayed quality differs from common-leaf quality by more than one cost doubling's worth: none.
 - **Harness by leaf (E227):** Terminal-Bench: mini-SWE-agent 20; Bug Hunt: Codex CLI 12, Claude Code 4, Antigravity CLI 1, Claude Code / Moonshot API 1, Claude Code / Xiaomi first-party 1, DeepSeek Harness / DeepSeek API 1; AI Coding Daily: Codex CLI 12, Claude Code 4, OpenCode 2, DeepSeek Harness 1, Devin 1.
@@ -782,7 +790,7 @@ No row is scored on a subset workload.
 | realised influence (E272) | fired | API: cost term offsetting (-55% of value variance); informational only, beta never changes (O2) |
 | quality influence flag (E126) | passed | quality not discriminating (cost share > 90%); informational only |
 | subset scoring (O17) | vacuous | subset rows scored on their own workload and anchors |
-| partial component flag (E37) | fired | AA declined- or missing-task markers, or an Index reconstruction that misses AA's total (E209) |
+| partial component flag (E37) | vacuous | AA declined- or missing-task markers, or an Index reconstruction that misses AA's total (E209) |
 | route dominance filter (E88) | vacuous | certifiably dearer routes set aside |
 | Plan exploratory label (E61) | fired | fewer than half of Plan rows have an identified M_W |
 | Plan evidence lifecycle and change detection (E18, E151, E269, O77, O79) | fired | 60 of 67 plan rows carry a possibly-superseded or expired route: claude-haiku-5-5-high@claude-max-20x, claude-haiku-5-5-high@claude-max-5x, claude-haiku-5-5-high@claude-pro, claude-haiku-5-5-medium@claude-max-20x, claude-haiku-5-5-medium@claude-max-5x, claude-haiku-5-5-medium@claude-pro, claude-opus-5-5-high@claude-max-20x, claude-opus-5-5-high@claude-max-5x, claude-opus-5-5-high@claude-pro, claude-opus-5-5-medium@claude-max-20x, claude-opus-5-5-medium@claude-max-5x, claude-opus-5-5-medium@claude-pro, gpt-6-astra-high@chatgpt-plus, gpt-6-astra-high@chatgpt-pro-100, gpt-6-astra-high@chatgpt-pro-200, gpt-6-astra-high@chatgpt-pro-500, gpt-6-luna-high@chatgpt-plus, gpt-6-luna-high@chatgpt-pro-100, gpt-6-luna-high@chatgpt-pro-200, gpt-6-luna-high@chatgpt-pro-500, gpt-6-luna-medium@chatgpt-plus, gpt-6-luna-medium@chatgpt-pro-100, gpt-6-luna-medium@chatgpt-pro-200, gpt-6-luna-medium@chatgpt-pro-500, gpt-6-luna-xhigh@chatgpt-plus, gpt-6-luna-xhigh@chatgpt-pro-100, gpt-6-luna-xhigh@chatgpt-pro-200, gpt-6-luna-xhigh@chatgpt-pro-500, gpt-6-luna@chatgpt-plus, gpt-6-luna@chatgpt-pro-100, gpt-6-luna@chatgpt-pro-200, gpt-6-luna@chatgpt-pro-500, gpt-6.1-sol-high@chatgpt-plus, gpt-6.1-sol-high@chatgpt-pro-100, gpt-6.1-sol-high@chatgpt-pro-200, gpt-6.1-sol-high@chatgpt-pro-500, gpt-6.1-sol-low@chatgpt-plus, gpt-6.1-sol-low@chatgpt-pro-100, gpt-6.1-sol-low@chatgpt-pro-200, gpt-6.1-sol-low@chatgpt-pro-500, gpt-6.1-sol-medium@chatgpt-plus, gpt-6.1-sol-medium@chatgpt-pro-100, gpt-6.1-sol-medium@chatgpt-pro-200, gpt-6.1-sol-medium@chatgpt-pro-500, gpt-6.1-terra-high@chatgpt-plus, gpt-6.1-terra-high@chatgpt-pro-100, gpt-6.1-terra-high@chatgpt-pro-200, gpt-6.1-terra-high@chatgpt-pro-500, gpt-6.1-terra-medium@chatgpt-plus, gpt-6.1-terra-medium@chatgpt-pro-100, gpt-6.1-terra-medium@chatgpt-pro-200, gpt-6.1-terra-medium@chatgpt-pro-500, gpt-6.1-terra-xhigh@chatgpt-plus, gpt-6.1-terra-xhigh@chatgpt-pro-100, gpt-6.1-terra-xhigh@chatgpt-pro-200, gpt-6.1-terra-xhigh@chatgpt-pro-500, gpt-6.1-terra@chatgpt-plus, gpt-6.1-terra@chatgpt-pro-100, gpt-6.1-terra@chatgpt-pro-200, gpt-6.1-terra@chatgpt-pro-500 |
@@ -925,7 +933,7 @@ Benchmark sampling noise (O39, an independent-task approximation): two values mu
 
 References: each workload's measured-only rows with complete cost evidence are the references: c_L = cheapest / 2, c_H = dearest x 2 (diagnostic only; the official anchors are unchanged). Status: evaluated.
 
-- Workload `835a9baf594a1251`: measured anchors $10.35 to $658.32 from GPT-6 Astra (max), GPT-6 Astra (high), GPT-6 Astra (xhigh), GPT-6.1 Sol (max), GPT-6.1 Sol (high), GPT-6.1 Sol (low), GPT-6.1 Sol (medium), GPT-6.1 Sol (xhigh); anchor ratio 63.6 against the official 113.7. Official Plan anchors are set by GPT-6.1 Sol (low) on ChatGPT Pro 500 (same-model measurement from another effort) at the low end and GPT-6 Astra (max) on ChatGPT Plus (controlled measurement) at the high end.
+- Workload `835a9baf594a1251`: measured anchors $10.35 to $658.32 from Claude Opus 5.5 (max), Claude Opus 5.5 (high), Claude Opus 5.5 (medium), Claude Opus 5.5 (xhigh), GPT-6 Astra (max), GPT-6 Astra (high), GPT-6 Astra (xhigh), GPT-6.1 Sol (max), GPT-6.1 Sol (high), GPT-6.1 Sol (low), GPT-6.1 Sol (medium), GPT-6.1 Sol (xhigh); anchor ratio 63.6 against the official 113.7. Official Plan anchors are set by GPT-6.1 Sol (low) on ChatGPT Pro 500 (same-model measurement from another effort) at the low end and GPT-6 Astra (max) on ChatGPT Plus (controlled measurement) at the high end.
 
 | Configuration | Value on official Plan anchors | Value on measured anchors | Rank change |
 |---|---:|---:|---:|
@@ -948,20 +956,23 @@ Pairwise reversals: GPT-6 Astra (high) and GPT-6.1 Sol (low). Largest value chan
 
 ### Common-leaf ranking (diagnostic): interval outputs
 
-**API basis, main workload: frontier.** Not evaluable: Claude Opus 5.5 (max), Claude Opus 5.5 (high), Claude Opus 5.5 (medium), Claude Opus 5.5 (xhigh). Competing without a label of its own (E183): Claude Haiku 5.5 (xhigh): AA's cost omits a pricing term (O94); competes over its published cost up to the stated factor; Claude Haiku 5.5 (high): AA's cost omits a pricing term (O94); competes over its published cost up to the stated factor; Claude Haiku 5.5 (low): AA's cost omits a pricing term (O94); competes over its published cost up to the stated factor; Claude Haiku 5.5 (max): AA's cost omits a pricing term (O94); competes over its published cost up to the stated factor; Claude Haiku 5.5 (medium): AA's cost omits a pricing term (O94); competes over its published cost up to the stated factor.
+**API basis, main workload: frontier.** Not evaluable: none. Competing without a label of its own (E183): Claude Haiku 5.5 (xhigh): AA's cost omits a pricing term (O94); competes over its published cost up to the stated factor; Claude Haiku 5.5 (high): AA's cost omits a pricing term (O94); competes over its published cost up to the stated factor; Claude Haiku 5.5 (low): AA's cost omits a pricing term (O94); competes over its published cost up to the stated factor; Claude Haiku 5.5 (max): AA's cost omits a pricing term (O94); competes over its published cost up to the stated factor; Claude Haiku 5.5 (medium): AA's cost omits a pricing term (O94); competes over its published cost up to the stated factor.
 
 | Configuration | Possible frontier | Definite frontier | Definite counterexample | Possible frontier blocked by |
 |---|---|---|---|---|
 | GPT-6.1 Sol (max) | certified | certified | — | — |
 | GPT-6.1 Terra (max) | disproved | disproved | GPT-6.1 Sol (xhigh) | GPT-6.1 Sol (xhigh) |
+| Claude Opus 5.5 (max) | disproved | disproved | GPT-6.1 Sol (max) | GPT-6.1 Sol (max), Claude Sonnet 5.5 (max), GPT-6 Astra (max), GPT-6 Astra (xhigh), GPT-6.1 Sol (xhigh) |
 | Claude Sonnet 5.5 (max) | disproved | disproved | GPT-6.1 Sol (max) | GPT-6.1 Sol (max), GPT-6 Astra (max), GPT-6 Astra (xhigh) |
 | GPT-6.1 Sol (high) | certified | certified | — | — |
 | GPT-6 Astra (max) | certified | certified | — | — |
 | DeepSeek V4.1 Flash 1017 (max) | disproved | disproved | GPT-6.1 Sol (medium) | GPT-6.1 Sol (medium) |
 | GPT-6.1 Sol (medium) | certified | certified | — | — |
-| Gemini 4 Argon (high) | disproved | disproved | GPT-6.1 Sol (max) | GPT-6.1 Sol (max), GPT-6.1 Terra (max), GPT-6.1 Sol (high), GPT-6 Astra (max), Kimi K3.1 Pro (max), GPT-6 Astra (high), Claude Sonnet 5.5 (xhigh), GPT-6 Astra (xhigh), GPT-6.1 Sol (xhigh) |
+| Gemini 4 Argon (high) | disproved | disproved | GPT-6.1 Sol (max) | GPT-6.1 Sol (max), GPT-6.1 Terra (max), GPT-6.1 Sol (high), GPT-6 Astra (max), Claude Opus 5.5 (high), Kimi K3.1 Pro (max), GPT-6 Astra (high), Claude Opus 5.5 (xhigh), Claude Sonnet 5.5 (xhigh), GPT-6 Astra (xhigh), GPT-6.1 Sol (xhigh) |
+| Claude Opus 5.5 (high) | disproved | disproved | GPT-6.1 Sol (max) | GPT-6.1 Sol (max), GPT-6.1 Terra (max), GPT-6.1 Sol (high), GPT-6.1 Sol (xhigh) |
 | Kimi K3.1 Pro (max) | disproved | disproved | GPT-6.1 Sol (max) | GPT-6.1 Sol (max), GPT-6.1 Terra (max), GPT-6.1 Sol (xhigh) |
 | GPT-6 Astra (high) | disproved | disproved | GPT-6.1 Sol (max) | GPT-6.1 Sol (max), GPT-6.1 Terra (max), GPT-6.1 Sol (xhigh) |
+| Claude Opus 5.5 (medium) | disproved | disproved | GPT-6.1 Sol (max) | GPT-6.1 Sol (max), GPT-6.1 Terra (max), GPT-6.1 Sol (high), GPT-6.1 Sol (medium), GPT-6.1 Sol (xhigh) |
 | GPT-6.1 Sol (low) | certified | certified | — | — |
 | GPT-6.1 Terra (xhigh) | certified | certified | — | — |
 | GPT-6.1 Terra (high) | certified | certified | — | — |
@@ -971,7 +982,8 @@ Pairwise reversals: GPT-6 Astra (high) and GPT-6.1 Sol (low). Largest value chan
 | GPT-6 Luna (xhigh) | certified | certified | — | — |
 | GPT-6 Luna (high) | certified | certified | — | — |
 | GPT-6 Luna (medium) | certified | certified | — | — |
-| Claude Sonnet 5.5 (xhigh) | disproved | disproved | GPT-6.1 Sol (max) | GPT-6.1 Sol (max), GPT-6.1 Terra (max), GPT-6.1 Sol (high), GPT-6.1 Sol (xhigh) |
+| Claude Opus 5.5 (xhigh) | disproved | disproved | GPT-6.1 Sol (max) | GPT-6.1 Sol (max), GPT-6.1 Terra (max), GPT-6 Astra (xhigh), GPT-6.1 Sol (xhigh) |
+| Claude Sonnet 5.5 (xhigh) | disproved | disproved | GPT-6.1 Sol (max) | GPT-6.1 Sol (max), GPT-6.1 Terra (max), GPT-6.1 Sol (high), Claude Opus 5.5 (high), GPT-6.1 Sol (xhigh) |
 | GPT-6 Astra (xhigh) | disproved | disproved | GPT-6.1 Sol (max) | GPT-6.1 Sol (max) |
 | GPT-6 Luna (low) | certified | certified | — | — |
 | GPT-6.1 Sol (xhigh) | certified | certified | — | — |
@@ -979,22 +991,25 @@ Pairwise reversals: GPT-6 Astra (high) and GPT-6.1 Sol (low). Largest value chan
 
 **API basis, main workload: cheapest at or above quality 47.6** (lower-median displayed quality of the non-provisional cohort configurations at freeze (E192; headline bar)). Status certified; confirmed cheapest: GPT-6.1 Sol (medium).
 
-Configurations that can be confirmed to qualify: 12 (confirmation needs the full-composite lower bound, with missing leaves at 0, to clear the bar; O25). Cheaper same-family configurations on AA's chart that were not evaluated (not ranked in this ranking: lacking its full benchmark set, or not plotted on or near the frontier; E201c, O51): none.
+Configurations that can be confirmed to qualify: 16 (confirmation needs the full-composite lower bound, with missing leaves at 0, to clear the bar; O25). Cheaper same-family configurations on AA's chart that were not evaluated (not ranked in this ranking: lacking its full benchmark set, or not plotted on or near the frontier; E201c, O51): none.
 
-Bar comparison: compares 13 configurations that can qualify. The bar is a displayed-quality level; qualification tests each row's full-composite bounds, so a row above the bar on displayed quality can still fail to qualify confirmed when leaves are missing (E198).
+Bar comparison: compares 17 configurations that can qualify. The bar is a displayed-quality level; qualification tests each row's full-composite bounds, so a row above the bar on displayed quality can still fail to qualify confirmed when leaves are missing (E198).
 
 | Configuration | Displayed quality − bar | Confirmed qualifies | Possibly qualifies | Possibly cheapest |
 |---|---:|---|---|---|
 | GPT-6.1 Sol (max) | 13.6 | certified | certified | disproved |
 | GPT-6.1 Terra (max) | 9.3 | certified | certified | disproved |
+| Claude Opus 5.5 (max) | 10.7 | certified | certified | disproved |
 | Claude Sonnet 5.5 (max) | 12.3 | certified | certified | disproved |
 | GPT-6.1 Sol (high) | 6.7 | certified | certified | disproved |
 | GPT-6 Astra (max) | 13.8 | certified | certified | disproved |
 | DeepSeek V4.1 Flash 1017 (max) | 0.0 | disproved | certified | disproved |
 | GPT-6.1 Sol (medium) | 2.3 | certified | certified | certified |
 | Gemini 4 Argon (high) | 3.5 | certified | certified | disproved |
+| Claude Opus 5.5 (high) | 4.2 | certified | certified | disproved |
 | Kimi K3.1 Pro (max) | 7.1 | certified | certified | disproved |
 | GPT-6 Astra (high) | 8.7 | certified | certified | disproved |
+| Claude Opus 5.5 (medium) | 1.7 | certified | certified | disproved |
 | GPT-6.1 Sol (low) | -8.4 | disproved | disproved | disproved |
 | GPT-6.1 Terra (xhigh) | -2.2 | disproved | disproved | disproved |
 | GPT-6.1 Terra (high) | -5.1 | disproved | disproved | disproved |
@@ -1004,6 +1019,7 @@ Bar comparison: compares 13 configurations that can qualify. The bar is a displa
 | GPT-6 Luna (xhigh) | -19.7 | disproved | disproved | disproved |
 | GPT-6 Luna (high) | -21.7 | disproved | disproved | disproved |
 | GPT-6 Luna (medium) | -26.6 | disproved | disproved | disproved |
+| Claude Opus 5.5 (xhigh) | 9.0 | certified | certified | disproved |
 | Claude Sonnet 5.5 (xhigh) | 4.1 | certified | certified | disproved |
 | GPT-6 Astra (xhigh) | 12.8 | certified | certified | disproved |
 | GPT-6 Luna (low) | -33.4 | disproved | disproved | disproved |
@@ -1012,22 +1028,25 @@ Bar comparison: compares 13 configurations that can qualify. The bar is a displa
 
 **API basis, main workload: cheapest at or above quality 33.8** (lower-quartile displayed quality of the non-provisional cohort configurations at freeze (O34)). Status certified; confirmed cheapest: none.
 
-Configurations that can be confirmed to qualify: 18 (confirmation needs the full-composite lower bound, with missing leaves at 0, to clear the bar; O25). Cheaper same-family configurations on AA's chart that were not evaluated (not ranked in this ranking: lacking its full benchmark set, or not plotted on or near the frontier; E201c, O51): GPT-6 Luna (max): GPT-6 Luna (non-reasoning).
+Configurations that can be confirmed to qualify: 22 (confirmation needs the full-composite lower bound, with missing leaves at 0, to clear the bar; O25). Cheaper same-family configurations on AA's chart that were not evaluated (not ranked in this ranking: lacking its full benchmark set, or not plotted on or near the frontier; E201c, O51): GPT-6 Luna (max): GPT-6 Luna (non-reasoning).
 
-Bar comparison: compares 19 configurations that can qualify and 2 blocker(s) that can qualify but earn no label (E315). The bar is a displayed-quality level; qualification tests each row's full-composite bounds, so a row above the bar on displayed quality can still fail to qualify confirmed when leaves are missing (E198).
+Bar comparison: compares 23 configurations that can qualify and 2 blocker(s) that can qualify but earn no label (E315). The bar is a displayed-quality level; qualification tests each row's full-composite bounds, so a row above the bar on displayed quality can still fail to qualify confirmed when leaves are missing (E198).
 
 | Configuration | Displayed quality − bar | Confirmed qualifies | Possibly qualifies | Possibly cheapest |
 |---|---:|---|---|---|
 | GPT-6.1 Sol (max) | 27.3 | certified | certified | disproved |
 | GPT-6.1 Terra (max) | 23.1 | certified | certified | disproved |
+| Claude Opus 5.5 (max) | 24.5 | certified | certified | disproved |
 | Claude Sonnet 5.5 (max) | 26.1 | certified | certified | disproved |
 | GPT-6.1 Sol (high) | 20.5 | certified | certified | disproved |
 | GPT-6 Astra (max) | 27.5 | certified | certified | disproved |
 | DeepSeek V4.1 Flash 1017 (max) | 13.8 | certified | certified | disproved |
 | GPT-6.1 Sol (medium) | 16.1 | certified | certified | disproved |
 | Gemini 4 Argon (high) | 17.3 | certified | certified | disproved |
+| Claude Opus 5.5 (high) | 18.0 | certified | certified | disproved |
 | Kimi K3.1 Pro (max) | 20.8 | certified | certified | disproved |
 | GPT-6 Astra (high) | 22.4 | certified | certified | disproved |
+| Claude Opus 5.5 (medium) | 15.5 | certified | certified | disproved |
 | GPT-6.1 Sol (low) | 5.3 | certified | certified | disproved |
 | GPT-6.1 Terra (xhigh) | 11.6 | certified | certified | disproved |
 | GPT-6.1 Terra (high) | 8.7 | certified | certified | disproved |
@@ -1037,6 +1056,7 @@ Bar comparison: compares 19 configurations that can qualify and 2 blocker(s) tha
 | GPT-6 Luna (xhigh) | -5.9 | disproved | disproved | disproved |
 | GPT-6 Luna (high) | -7.9 | disproved | disproved | disproved |
 | GPT-6 Luna (medium) | -12.8 | disproved | disproved | disproved |
+| Claude Opus 5.5 (xhigh) | 22.8 | certified | certified | disproved |
 | Claude Sonnet 5.5 (xhigh) | 17.9 | certified | certified | disproved |
 | GPT-6 Astra (xhigh) | 26.6 | certified | certified | disproved |
 | GPT-6 Luna (low) | -19.7 | disproved | disproved | disproved |
@@ -1045,22 +1065,25 @@ Bar comparison: compares 19 configurations that can qualify and 2 blocker(s) tha
 
 **API basis, main workload: cheapest at or above quality 56.3** (upper-quartile displayed quality of the non-provisional cohort configurations at freeze (O34)). Status certified; confirmed cheapest: GPT-6.1 Sol (xhigh).
 
-Configurations that can be confirmed to qualify: 6 (confirmation needs the full-composite lower bound, with missing leaves at 0, to clear the bar; O25). Cheaper same-family configurations on AA's chart that were not evaluated (not ranked in this ranking: lacking its full benchmark set, or not plotted on or near the frontier; E201c, O51): none.
+Configurations that can be confirmed to qualify: 8 (confirmation needs the full-composite lower bound, with missing leaves at 0, to clear the bar; O25). Cheaper same-family configurations on AA's chart that were not evaluated (not ranked in this ranking: lacking its full benchmark set, or not plotted on or near the frontier; E201c, O51): none.
 
-Bar comparison: compares 7 configurations that can qualify. The bar is a displayed-quality level; qualification tests each row's full-composite bounds, so a row above the bar on displayed quality can still fail to qualify confirmed when leaves are missing (E198).
+Bar comparison: compares 9 configurations that can qualify. The bar is a displayed-quality level; qualification tests each row's full-composite bounds, so a row above the bar on displayed quality can still fail to qualify confirmed when leaves are missing (E198).
 
 | Configuration | Displayed quality − bar | Confirmed qualifies | Possibly qualifies | Possibly cheapest |
 |---|---:|---|---|---|
 | GPT-6.1 Sol (max) | 4.9 | certified | certified | disproved |
 | GPT-6.1 Terra (max) | 0.6 | certified | certified | disproved |
+| Claude Opus 5.5 (max) | 2.0 | certified | certified | disproved |
 | Claude Sonnet 5.5 (max) | 3.6 | certified | certified | disproved |
 | GPT-6.1 Sol (high) | -1.9 | disproved | disproved | disproved |
 | GPT-6 Astra (max) | 5.1 | certified | certified | disproved |
 | DeepSeek V4.1 Flash 1017 (max) | -8.7 | disproved | disproved | disproved |
 | GPT-6.1 Sol (medium) | -6.3 | disproved | disproved | disproved |
 | Gemini 4 Argon (high) | -5.2 | disproved | disproved | disproved |
+| Claude Opus 5.5 (high) | -4.4 | disproved | disproved | disproved |
 | Kimi K3.1 Pro (max) | -1.6 | disproved | disproved | disproved |
 | GPT-6 Astra (high) | 0.0 | disproved | certified | disproved |
+| Claude Opus 5.5 (medium) | -6.9 | disproved | disproved | disproved |
 | GPT-6.1 Sol (low) | -17.1 | disproved | disproved | disproved |
 | GPT-6.1 Terra (xhigh) | -10.8 | disproved | disproved | disproved |
 | GPT-6.1 Terra (high) | -13.8 | disproved | disproved | disproved |
@@ -1070,6 +1093,7 @@ Bar comparison: compares 7 configurations that can qualify. The bar is a display
 | GPT-6 Luna (xhigh) | -28.4 | disproved | disproved | disproved |
 | GPT-6 Luna (high) | -30.3 | disproved | disproved | disproved |
 | GPT-6 Luna (medium) | -35.2 | disproved | disproved | disproved |
+| Claude Opus 5.5 (xhigh) | 0.3 | certified | certified | disproved |
 | Claude Sonnet 5.5 (xhigh) | -4.6 | disproved | disproved | disproved |
 | GPT-6 Astra (xhigh) | 4.1 | certified | certified | disproved |
 | GPT-6 Luna (low) | -42.1 | disproved | disproved | disproved |
@@ -1735,13 +1759,13 @@ Plan streams S1, S2, S1 endpoint-heavy, S1M, S1T and S1T recentred run with owne
 - **Basket readiness (E22):** priced leaves cover 57% of nominal quality weight (AutomationBench-AA, FrontierCode 2.0, Terminal-Bench-Science 0.1, Terminal-Bench 4.0 (AA run)); pending components: Coding Agent Index, ITBench-AA.
 - **SWE cost companion (O14, diagnostic):** 13 rows evaluated; flagged far from the median ratio: DeepSeek V4.1 Flash 1017 (max), Claude Haiku 5.5 (max).
 - **Matched-cost diagnostic (E55):** evaluated at 70% priced quality weight; basket/matched cost-order reversals with separated intervals: 4; rank-gap warnings: 0.
-- **Frontier-families anchors (E187, diagnostic):** anchors rebuilt from the 22 frontier and near-frontier references move API no rank changes (value points per cost doubling 2.14 vs 2.14 frozen); Plan 17 rows move; largest move 3 (DeepSeek V4.1 Flash 1017 (max), GPT-6 Astra (max), GPT-6 Astra (xhigh), GPT-6 Luna (max)) (value points per cost doubling 4.17 vs 3.66 frozen).
-- **Frontier-families bar (E199, sensitivity; the frozen bar stays primary):** quality 45.4 over 25 configurations; cheapest at or above it on the API main workload: not unique; possibly GPT-6.1 Sol (medium), GPT-6.1 Terra (xhigh) (compares 14 configurations that can qualify).
-- **One row per family (E205, diagnostic; the frozen ladder and anchors stay primary):** with each family's primary configuration only (7 rows in the one-row-per-family bar population), the ladder (headline, lower quartile, upper quartile) would be 56.6 / 31.0 / 59.9 against 47.6 / 33.8 / 56.3 frozen; anchors rebuilt from its 6 references move API 23 rows move; largest move 5 (GPT-6.1 Terra (xhigh)) (value points per cost doubling 2.82 vs 2.14 frozen); Plan 23 rows move; largest move 6 (Claude Sonnet 5.5 (xhigh)) (value points per cost doubling 7.54 vs 3.66 frozen).
+- **Frontier-families anchors (E187, diagnostic):** anchors rebuilt from the 25 frontier and near-frontier references move API 2 rows move; largest move 1 (Claude Opus 5.5 (xhigh), Kimi K3.1 Pro (max)) (value points per cost doubling 2.12 vs 2.14 frozen); Plan 17 rows move; largest move 3 (DeepSeek V4.1 Flash 1017 (max), GPT-6 Astra (max), GPT-6 Astra (xhigh), GPT-6 Luna (max)) (value points per cost doubling 4.17 vs 3.66 frozen).
+- **Frontier-families bar (E199, sensitivity; the frozen bar stays primary):** quality 45.4 over 25 configurations; cheapest at or above it on the API main workload: not unique; possibly GPT-6.1 Sol (medium), GPT-6.1 Terra (xhigh) (compares 18 configurations that can qualify).
+- **One row per family (E205, diagnostic; the frozen ladder and anchors stay primary):** with each family's primary configuration only (7 rows in the one-row-per-family bar population), the ladder (headline, lower quartile, upper quartile) would be 56.6 / 31.0 / 59.9 against 47.6 / 33.8 / 56.3 frozen; anchors rebuilt from its 7 references move API 23 rows move; largest move 5 (GPT-6.1 Terra (xhigh)) (value points per cost doubling 2.82 vs 2.14 frozen); Plan 25 rows move; largest move 6 (Claude Sonnet 5.5 (max)) (value points per cost doubling 6.91 vs 3.66 frozen).
 - **Ladder over scored rows (I28, sensitivity; the frozen ladder stays primary):** the bar population keeps full-benchmark rows that have no cost; today every such row has a cost, so the ladder is unchanged.
 - **Bar currency (E207, informational):** rows reaching each frozen bar: quality 47.6: 17 of 33; quality 33.8: 25 of 33; quality 56.3: 9 of 33; the current population would freeze 47.6 / 33.8 / 56.3; lifetime until the next anchor re-freeze or methodology version, whichever comes first; no staleness flag.
 - **Token mix (E208):** 1 selected routes: mix not reported: the measurement publishes no token-category shares; 29 selected routes: mix unidentified: the basket's token-category shares are set-identified only (E124), so the L1 test (above 0.30 flags mix-unmatched) is not computed.
-- **Observed-range sensitivity (E219, not evidence; no label changes):** with each missing leaf inside the cohort's observed range for that leaf, quality 47.6: 13 can qualify, 12 confirmed; GPT-6.1 Sol (medium) confirmed cheapest; quality 33.8: 19 can qualify, 18 confirmed; possibly cheapest GPT-6 Luna (max), MiMo-V2.6-Pro; quality 56.3: 7 can qualify, 6 confirmed; GPT-6.1 Sol (xhigh) confirmed cheapest.
+- **Observed-range sensitivity (E219, not evidence; no label changes):** with each missing leaf inside the cohort's observed range for that leaf, quality 47.6: 17 can qualify, 16 confirmed; GPT-6.1 Sol (medium) confirmed cheapest; quality 33.8: 23 can qualify, 22 confirmed; possibly cheapest GPT-6 Luna (max), MiMo-V2.6-Pro; quality 56.3: 9 can qualify, 8 confirmed; GPT-6.1 Sol (xhigh) confirmed cheapest.
 - **What would settle the headline bar (E221, not a claim):** rows that can but need not reach quality 47.6, with the mean score their missing leaves would need: DeepSeek V4.1 Flash 1017 (max) (no missing leaf; reporting precision only).
 - **Common leaf set (E226, diagnostic; scores unchanged):** without the leaves fewer than 90% of cohort rows have (none), API no rank changes; Plan no rank changes; rows reaching each bar: quality 47.6: 17 → 17; quality 33.8: 25 → 25; quality 56.3: 9 → 9; rows whose displayed quality differs from common-leaf quality by more than one cost doubling's worth: none.
 - **Harness by leaf (E227):** Terminal-Bench: mini-SWE-agent 33; Bug Hunt: Codex CLI 18, Claude Code 11, Antigravity CLI 1, Claude Code / Moonshot API 1, Claude Code / Xiaomi first-party 1, DeepSeek Harness / DeepSeek API 1.
@@ -1753,12 +1777,12 @@ Each admitted basket unit removed in turn, scored on anchors rebuilt by the free
 
 | Removed component | API rank changes | Plan rank changes | API value points per cost doubling |
 |---|---|---|---:|
-| AA-Briefcase | 9 rows move; largest move 2 (Claude Opus 5.5 (xhigh), DeepSeek V4.1 Flash 1017 (max), GPT-6.1 Sol (low)) | 18 rows move; largest move 3 (Claude Opus 5.5 (xhigh), DeepSeek V4.1 Flash 1017 (max), GPT-6 Astra (max), GPT-6 Luna (max), GPT-6.1 Terra (max)) | 2.21 |
-| GDP.pdf | 5 rows move; largest move 2 (Claude Opus 5.5 (xhigh)) | 23 rows move; largest move 3 (DeepSeek V4.1 Flash 1017 (max), GPT-6 Astra (max), GPT-6 Astra (xhigh)) | 2.08 |
-| AutomationBench-AA | 8 rows move; largest move 2 (Gemini 4 Argon (high), GPT-6 Luna (low)) | 25 rows move; largest move 6 (Claude Haiku 5.5 (max)) | 2.00 |
-| Terminal-Bench 4.0 (AA Index run) | 6 rows move; largest move 1 (Claude Haiku 5.5 (high), Claude Haiku 5.5 (low), Claude Opus 5.5 (xhigh), GPT-6 Luna (medium), GPT-6.1 Terra (low), Kimi K3.1 Pro (max)) | 19 rows move; largest move 3 (DeepSeek V4.1 Flash 1017 (max), GPT-6 Astra (max), GPT-6 Astra (xhigh), GPT-6 Luna (max)) | 2.16 |
-| FrontierCode 2.0 | 5 rows move; largest move 2 (Kimi K3.1 Pro (max)) | 17 rows move; largest move 4 (GPT-6 Astra (xhigh)) | 2.17 |
-| Terminal-Bench-Science | 9 rows move; largest move 2 (GPT-6.1 Sol (low)) | 21 rows move; largest move 5 (Claude Sonnet 5.5 (xhigh)) | 2.19 |
+| AA-Briefcase | 11 rows move; largest move 2 (Claude Opus 5.5 (xhigh), DeepSeek V4.1 Flash 1017 (max), GPT-6.1 Sol (low)) | 18 rows move; largest move 3 (Claude Opus 5.5 (xhigh), DeepSeek V4.1 Flash 1017 (max), GPT-6 Astra (max), GPT-6 Luna (max), GPT-6.1 Terra (max)) | 2.19 |
+| GDP.pdf | 4 rows move; largest move 2 (Claude Opus 5.5 (xhigh), DeepSeek V4.1 Flash 1017 (max)) | 23 rows move; largest move 3 (DeepSeek V4.1 Flash 1017 (max), GPT-6 Astra (max), GPT-6 Astra (xhigh)) | 2.07 |
+| AutomationBench-AA | 8 rows move; largest move 2 (Gemini 4 Argon (high), GPT-6 Luna (low)) | 25 rows move; largest move 6 (Claude Haiku 5.5 (max)) | 1.99 |
+| Terminal-Bench 4.0 (AA Index run) | 6 rows move; largest move 1 (Claude Haiku 5.5 (high), Claude Haiku 5.5 (low), Claude Opus 5.5 (xhigh), GPT-6 Luna (medium), GPT-6.1 Terra (low), Kimi K3.1 Pro (max)) | 19 rows move; largest move 3 (DeepSeek V4.1 Flash 1017 (max), GPT-6 Astra (max), GPT-6 Astra (xhigh), GPT-6 Luna (max)) | 2.14 |
+| FrontierCode 2.0 | 7 rows move; largest move 2 (Kimi K3.1 Pro (max)) | 17 rows move; largest move 4 (GPT-6 Astra (xhigh)) | 2.16 |
+| Terminal-Bench-Science | 7 rows move; largest move 2 (Claude Sonnet 5.5 (xhigh), GPT-6.1 Sol (low), GPT-6.1 Terra (high)) | 21 rows move; largest move 5 (Claude Sonnet 5.5 (xhigh)) | 2.16 |
 
 ### Subset rows: paired bridge and missing spend (E10, E173)
 
@@ -1799,7 +1823,7 @@ No row is scored on a subset workload.
 | realised influence (E272) | fired | API: cost term offsetting (-68% of value variance); Plan: cost term offsetting (-25% of value variance); informational only, beta never changes (O2) |
 | quality influence flag (E126) | passed | quality not discriminating (cost share > 90%); informational only |
 | subset scoring (O17) | vacuous | subset rows scored on their own workload and anchors |
-| partial component flag (E37) | fired | AA declined- or missing-task markers, or an Index reconstruction that misses AA's total (E209) |
+| partial component flag (E37) | vacuous | AA declined- or missing-task markers, or an Index reconstruction that misses AA's total (E209) |
 | route dominance filter (E88) | vacuous | certifiably dearer routes set aside |
 | Plan exploratory label (E61) | fired | fewer than half of Plan rows have an identified M_W |
 | Plan evidence lifecycle and change detection (E18, E151, E269, O77, O79) | fired | 105 of 112 plan rows carry a possibly-superseded or expired route: claude-haiku-5-5-high@claude-max-20x, claude-haiku-5-5-high@claude-max-5x, claude-haiku-5-5-high@claude-pro, claude-haiku-5-5-low@claude-max-20x, claude-haiku-5-5-low@claude-max-5x, claude-haiku-5-5-low@claude-pro, claude-haiku-5-5-max@claude-max-20x, claude-haiku-5-5-max@claude-max-5x, claude-haiku-5-5-max@claude-pro, claude-haiku-5-5-medium@claude-max-20x, claude-haiku-5-5-medium@claude-max-5x, claude-haiku-5-5-medium@claude-pro, claude-haiku-5-5@claude-max-20x, claude-haiku-5-5@claude-max-5x, claude-haiku-5-5@claude-pro, claude-opus-5-5-high@claude-max-20x, claude-opus-5-5-high@claude-max-5x, claude-opus-5-5-high@claude-pro, claude-opus-5-5-medium@claude-max-20x, claude-opus-5-5-medium@claude-max-5x, claude-opus-5-5-medium@claude-pro, claude-opus-5-5-xhigh@claude-max-20x, claude-opus-5-5-xhigh@claude-max-5x, claude-opus-5-5-xhigh@claude-pro, claude-opus-5-5@claude-max-20x, claude-opus-5-5@claude-max-5x, claude-opus-5-5@claude-pro, claude-sonnet-5-5-xhigh@claude-max-20x, claude-sonnet-5-5-xhigh@claude-max-5x, claude-sonnet-5-5-xhigh@claude-pro, claude-sonnet-5-5@claude-max-20x, claude-sonnet-5-5@claude-max-5x, claude-sonnet-5-5@claude-pro, gpt-6-astra-high@chatgpt-plus, gpt-6-astra-high@chatgpt-pro-100, gpt-6-astra-high@chatgpt-pro-200, gpt-6-astra-high@chatgpt-pro-500, gpt-6-astra-xhigh@chatgpt-plus, gpt-6-astra-xhigh@chatgpt-pro-100, gpt-6-astra-xhigh@chatgpt-pro-200, gpt-6-astra-xhigh@chatgpt-pro-500, gpt-6-astra@chatgpt-plus, gpt-6-astra@chatgpt-pro-100, gpt-6-astra@chatgpt-pro-200, gpt-6-astra@chatgpt-pro-500, gpt-6-luna-high@chatgpt-plus, gpt-6-luna-high@chatgpt-pro-100, gpt-6-luna-high@chatgpt-pro-200, gpt-6-luna-high@chatgpt-pro-500, gpt-6-luna-low@chatgpt-plus, gpt-6-luna-low@chatgpt-pro-100, gpt-6-luna-low@chatgpt-pro-200, gpt-6-luna-low@chatgpt-pro-500, gpt-6-luna-medium@chatgpt-plus, gpt-6-luna-medium@chatgpt-pro-100, gpt-6-luna-medium@chatgpt-pro-200, gpt-6-luna-medium@chatgpt-pro-500, gpt-6-luna-xhigh@chatgpt-plus, gpt-6-luna-xhigh@chatgpt-pro-100, gpt-6-luna-xhigh@chatgpt-pro-200, gpt-6-luna-xhigh@chatgpt-pro-500, gpt-6-luna@chatgpt-plus, gpt-6-luna@chatgpt-pro-100, gpt-6-luna@chatgpt-pro-200, gpt-6-luna@chatgpt-pro-500, gpt-6.1-sol-high@chatgpt-plus, gpt-6.1-sol-high@chatgpt-pro-100, gpt-6.1-sol-high@chatgpt-pro-200, gpt-6.1-sol-high@chatgpt-pro-500, gpt-6.1-sol-low@chatgpt-plus, gpt-6.1-sol-low@chatgpt-pro-100, gpt-6.1-sol-low@chatgpt-pro-200, gpt-6.1-sol-low@chatgpt-pro-500, gpt-6.1-sol-medium@chatgpt-plus, gpt-6.1-sol-medium@chatgpt-pro-100, gpt-6.1-sol-medium@chatgpt-pro-200, gpt-6.1-sol-medium@chatgpt-pro-500, gpt-6.1-sol-xhigh@chatgpt-plus, gpt-6.1-sol-xhigh@chatgpt-pro-100, gpt-6.1-sol-xhigh@chatgpt-pro-200, gpt-6.1-sol-xhigh@chatgpt-pro-500, gpt-6.1-sol@chatgpt-plus, gpt-6.1-sol@chatgpt-pro-100, gpt-6.1-sol@chatgpt-pro-200, gpt-6.1-sol@chatgpt-pro-500, gpt-6.1-terra-high@chatgpt-plus, gpt-6.1-terra-high@chatgpt-pro-100, gpt-6.1-terra-high@chatgpt-pro-200, gpt-6.1-terra-high@chatgpt-pro-500, gpt-6.1-terra-low@chatgpt-plus, gpt-6.1-terra-low@chatgpt-pro-100, gpt-6.1-terra-low@chatgpt-pro-200, gpt-6.1-terra-low@chatgpt-pro-500, gpt-6.1-terra-medium@chatgpt-plus, gpt-6.1-terra-medium@chatgpt-pro-100, gpt-6.1-terra-medium@chatgpt-pro-200, gpt-6.1-terra-medium@chatgpt-pro-500, gpt-6.1-terra-xhigh@chatgpt-plus, gpt-6.1-terra-xhigh@chatgpt-pro-100, gpt-6.1-terra-xhigh@chatgpt-pro-200, gpt-6.1-terra-xhigh@chatgpt-pro-500, gpt-6.1-terra@chatgpt-plus, gpt-6.1-terra@chatgpt-pro-100, gpt-6.1-terra@chatgpt-pro-200, gpt-6.1-terra@chatgpt-pro-500 |
@@ -1967,7 +1991,7 @@ Admission: measurement candidates of grade controlled (exact effort, or the same
 
 References: each workload's measured-only rows with complete cost evidence are the references: c_L = cheapest / 2, c_H = dearest x 2 (diagnostic only; the official anchors are unchanged). Status: evaluated.
 
-- Workload `aad36e77d6e17386`: measured anchors $64.38 to $940.06 from GPT-6 Astra (max), GPT-6.1 Sol (max); anchor ratio 14.6 against the official 26.1. Official Plan anchors are set by GPT-6.1 Sol (max) on ChatGPT Pro 500 (controlled measurement) at the low end and GPT-6 Astra (max) on ChatGPT Plus (controlled measurement) at the high end.
+- Workload `aad36e77d6e17386`: measured anchors $64.38 to $940.06 from Claude Opus 5.5 (max), GPT-6 Astra (max), GPT-6.1 Sol (max); anchor ratio 14.6 against the official 26.1. Official Plan anchors are set by GPT-6.1 Sol (max) on ChatGPT Pro 500 (controlled measurement) at the low end and GPT-6 Astra (max) on ChatGPT Plus (controlled measurement) at the high end.
 - Workload `835a9baf594a1251`: measured-evidence calibration unavailable (fewer than two measured references); measured rows none. Official Plan anchors are set by GPT-6.1 Sol (max) on ChatGPT Pro 500 (controlled measurement) at the low end and GPT-6 Astra (max) on ChatGPT Plus (controlled measurement) at the high end.
 
 | Configuration | Value on official Plan anchors | Value on measured anchors | Rank change |
@@ -1980,12 +2004,13 @@ Pairwise reversals: none. Largest value change: 3.30 points.
 
 ## Interval outputs
 
-**API basis, main workload: frontier.** Not evaluable: Claude Opus 5.5 (max), MiMo-V2.6-Pro. Competing without a label of its own (E183): Claude Haiku 5.5 (max): AA's cost omits a pricing term (O94); competes over its published cost up to the stated factor.
+**API basis, main workload: frontier.** Not evaluable: MiMo-V2.6-Pro. Competing without a label of its own (E183): Claude Haiku 5.5 (max): AA's cost omits a pricing term (O94); competes over its published cost up to the stated factor.
 
 | Configuration | Possible frontier | Definite frontier | Definite counterexample | Possible frontier blocked by |
 |---|---|---|---|---|
 | GPT-6.1 Sol (max) | certified | certified | — | — |
-| Claude Sonnet 5.5 (max) | disproved | disproved | GPT-6.1 Sol (max) | GPT-6.1 Sol (max), GPT-6 Astra (max) |
+| Claude Opus 5.5 (max) | disproved | disproved | GPT-6 Astra (max) | GPT-6 Astra (max) |
+| Claude Sonnet 5.5 (max) | disproved | disproved | GPT-6.1 Sol (max) | GPT-6.1 Sol (max), Claude Opus 5.5 (max), GPT-6 Astra (max) |
 | GPT-6 Astra (max) | certified | certified | — | — |
 | DeepSeek V4.1 Flash 1017 (max) | certified | certified | — | — |
 | Gemini 4 Argon (high) | disproved | disproved | GPT-6.1 Sol (max) | GPT-6.1 Sol (max), GPT-6 Astra (max) |
@@ -1993,13 +2018,14 @@ Pairwise reversals: none. Largest value change: 3.30 points.
 
 **API basis, main workload: cheapest at or above quality 61.4** (lower-median displayed quality of the non-provisional cohort configurations at freeze (E192; headline bar)). Status certified; confirmed cheapest: GPT-6.1 Sol (max).
 
-Configurations that can be confirmed to qualify: 3 (confirmation needs the full-composite lower bound, with missing leaves at 0, to clear the bar; O25). Cheaper same-family configurations on AA's chart that were not evaluated (not ranked in this ranking: lacking its full benchmark set, or not plotted on or near the frontier; E201c, O51): GPT-6.1 Sol (max): GPT-6.1 Sol (xhigh), GPT-6.1 Sol (high), GPT-6.1 Sol (medium), GPT-6.1 Sol (low).
+Configurations that can be confirmed to qualify: 4 (confirmation needs the full-composite lower bound, with missing leaves at 0, to clear the bar; O25). Cheaper same-family configurations on AA's chart that were not evaluated (not ranked in this ranking: lacking its full benchmark set, or not plotted on or near the frontier; E201c, O51): GPT-6.1 Sol (max): GPT-6.1 Sol (xhigh), GPT-6.1 Sol (high), GPT-6.1 Sol (medium), GPT-6.1 Sol (low).
 
-Bar comparison: compares 4 configurations that can qualify. The bar is a displayed-quality level; qualification tests each row's full-composite bounds, so a row above the bar on displayed quality can still fail to qualify confirmed when leaves are missing (E198).
+Bar comparison: compares 5 configurations that can qualify. The bar is a displayed-quality level; qualification tests each row's full-composite bounds, so a row above the bar on displayed quality can still fail to qualify confirmed when leaves are missing (E198).
 
 | Configuration | Displayed quality − bar | Confirmed qualifies | Possibly qualifies | Possibly cheapest |
 |---|---:|---|---|---|
 | GPT-6.1 Sol (max) | 6.1 | certified | certified | certified |
+| Claude Opus 5.5 (max) | 6.1 | certified | certified | disproved |
 | Claude Sonnet 5.5 (max) | 6.0 | certified | certified | disproved |
 | GPT-6 Astra (max) | 6.9 | certified | certified | disproved |
 | DeepSeek V4.1 Flash 1017 (max) | -5.3 | disproved | disproved | disproved |
@@ -2008,13 +2034,14 @@ Bar comparison: compares 4 configurations that can qualify. The bar is a display
 
 **API basis, main workload: cheapest at or above quality 49.4** (lower-quartile displayed quality of the non-provisional cohort configurations at freeze (O34)). Status certified; confirmed cheapest: DeepSeek V4.1 Flash 1017 (max).
 
-Configurations that can be confirmed to qualify: 5 (confirmation needs the full-composite lower bound, with missing leaves at 0, to clear the bar; O25). Cheaper same-family configurations on AA's chart that were not evaluated (not ranked in this ranking: lacking its full benchmark set, or not plotted on or near the frontier; E201c, O51): none.
+Configurations that can be confirmed to qualify: 6 (confirmation needs the full-composite lower bound, with missing leaves at 0, to clear the bar; O25). Cheaper same-family configurations on AA's chart that were not evaluated (not ranked in this ranking: lacking its full benchmark set, or not plotted on or near the frontier; E201c, O51): none.
 
-Bar comparison: compares 5 configurations that can qualify and 1 blocker(s) that can qualify but earn no label (E315). The bar is a displayed-quality level; qualification tests each row's full-composite bounds, so a row above the bar on displayed quality can still fail to qualify confirmed when leaves are missing (E198).
+Bar comparison: compares 6 configurations that can qualify and 1 blocker(s) that can qualify but earn no label (E315). The bar is a displayed-quality level; qualification tests each row's full-composite bounds, so a row above the bar on displayed quality can still fail to qualify confirmed when leaves are missing (E198).
 
 | Configuration | Displayed quality − bar | Confirmed qualifies | Possibly qualifies | Possibly cheapest |
 |---|---:|---|---|---|
 | GPT-6.1 Sol (max) | 18.1 | certified | certified | disproved |
+| Claude Opus 5.5 (max) | 18.1 | certified | certified | disproved |
 | Claude Sonnet 5.5 (max) | 18.0 | certified | certified | disproved |
 | GPT-6 Astra (max) | 18.8 | certified | certified | disproved |
 | DeepSeek V4.1 Flash 1017 (max) | 6.7 | certified | certified | certified |
@@ -2023,13 +2050,14 @@ Bar comparison: compares 5 configurations that can qualify and 1 blocker(s) that
 
 **API basis, main workload: cheapest at or above quality 67.5** (upper-quartile displayed quality of the non-provisional cohort configurations at freeze (O34)). Status certified; confirmed cheapest: none.
 
-Configurations that can be confirmed to qualify: 1 (confirmation needs the full-composite lower bound, with missing leaves at 0, to clear the bar; O25). Cheaper same-family configurations on AA's chart that were not evaluated (not ranked in this ranking: lacking its full benchmark set, or not plotted on or near the frontier; E201c, O51): GPT-6.1 Sol (max): GPT-6.1 Sol (xhigh), GPT-6.1 Sol (high), GPT-6.1 Sol (medium), GPT-6.1 Sol (low); GPT-6 Astra (max): GPT-6 Astra (xhigh), GPT-6 Astra (high), GPT-6 Astra (medium), GPT-6 Astra (low).
+Configurations that can be confirmed to qualify: 2 (confirmation needs the full-composite lower bound, with missing leaves at 0, to clear the bar; O25). Cheaper same-family configurations on AA's chart that were not evaluated (not ranked in this ranking: lacking its full benchmark set, or not plotted on or near the frontier; E201c, O51): GPT-6.1 Sol (max): GPT-6.1 Sol (xhigh), GPT-6.1 Sol (high), GPT-6.1 Sol (medium), GPT-6.1 Sol (low); GPT-6 Astra (max): GPT-6 Astra (xhigh), GPT-6 Astra (high), GPT-6 Astra (medium), GPT-6 Astra (low).
 
-Bar comparison: compares 2 configurations that can qualify. The bar is a displayed-quality level; qualification tests each row's full-composite bounds, so a row above the bar on displayed quality can still fail to qualify confirmed when leaves are missing (E198).
+Bar comparison: compares 3 configurations that can qualify. The bar is a displayed-quality level; qualification tests each row's full-composite bounds, so a row above the bar on displayed quality can still fail to qualify confirmed when leaves are missing (E198).
 
 | Configuration | Displayed quality − bar | Confirmed qualifies | Possibly qualifies | Possibly cheapest |
 |---|---:|---|---|---|
 | GPT-6.1 Sol (max) | 0.0 | disproved | certified | certified |
+| Claude Opus 5.5 (max) | 0.0 | certified | certified | disproved |
 | Claude Sonnet 5.5 (max) | -0.1 | disproved | disproved | disproved |
 | GPT-6 Astra (max) | 0.8 | certified | certified | certified |
 | DeepSeek V4.1 Flash 1017 (max) | -11.4 | disproved | disproved | disproved |
@@ -2038,11 +2066,12 @@ Bar comparison: compares 2 configurations that can qualify. The bar is a display
 
 **Plan basis, main workload:** not evaluated (no row has FullCost and an identified M_W (E61/E67)).
 
-**API basis, subset workload (AA-Briefcase, GDP.pdf, AutomationBench-AA, Terminal-Bench 4.0 (AA Index run), FrontierCode 2.0, Terminal-Bench-Science; orderings across workloads not identified): frontier.** Not evaluable: Claude Opus 5.5 (max). Competing without a label of its own (E183): Claude Haiku 5.5 (max): AA's cost omits a pricing term (O94); competes over its published cost up to the stated factor.
+**API basis, subset workload (AA-Briefcase, GDP.pdf, AutomationBench-AA, Terminal-Bench 4.0 (AA Index run), FrontierCode 2.0, Terminal-Bench-Science; orderings across workloads not identified): frontier.** Not evaluable: none. Competing without a label of its own (E183): Claude Haiku 5.5 (max): AA's cost omits a pricing term (O94); competes over its published cost up to the stated factor.
 
 | Configuration | Possible frontier | Definite frontier | Definite counterexample | Possible frontier blocked by |
 |---|---|---|---|---|
 | GPT-6.1 Sol (max) | certified | certified | — | — |
+| Claude Opus 5.5 (max) | disproved | disproved | GPT-6 Astra (max) | GPT-6 Astra (max) |
 | Claude Sonnet 5.5 (max) | disproved | disproved | GPT-6.1 Sol (max) | GPT-6.1 Sol (max), GPT-6 Astra (max) |
 | GPT-6 Astra (max) | certified | certified | — | — |
 | DeepSeek V4.1 Flash 1017 (max) | certified | certified | — | — |
@@ -2052,13 +2081,14 @@ Bar comparison: compares 2 configurations that can qualify. The bar is a display
 
 **API basis, subset workload (AA-Briefcase, GDP.pdf, AutomationBench-AA, Terminal-Bench 4.0 (AA Index run), FrontierCode 2.0, Terminal-Bench-Science; orderings across workloads not identified): cheapest at or above quality 61.4** (lower-median displayed quality of the non-provisional cohort configurations at freeze (E192; headline bar)). Status certified; confirmed cheapest: GPT-6.1 Sol (max).
 
-Configurations that can be confirmed to qualify: 3 (confirmation needs the full-composite lower bound, with missing leaves at 0, to clear the bar; O25). Cheaper same-family configurations on AA's chart that were not evaluated (not ranked in this ranking: lacking its full benchmark set, or not plotted on or near the frontier; E201c, O51): GPT-6.1 Sol (max): GPT-6.1 Sol (xhigh), GPT-6.1 Sol (high), GPT-6.1 Sol (medium), GPT-6.1 Sol (low).
+Configurations that can be confirmed to qualify: 4 (confirmation needs the full-composite lower bound, with missing leaves at 0, to clear the bar; O25). Cheaper same-family configurations on AA's chart that were not evaluated (not ranked in this ranking: lacking its full benchmark set, or not plotted on or near the frontier; E201c, O51): GPT-6.1 Sol (max): GPT-6.1 Sol (xhigh), GPT-6.1 Sol (high), GPT-6.1 Sol (medium), GPT-6.1 Sol (low).
 
-Bar comparison: compares 4 configurations that can qualify. The bar is a displayed-quality level; qualification tests each row's full-composite bounds, so a row above the bar on displayed quality can still fail to qualify confirmed when leaves are missing (E198).
+Bar comparison: compares 5 configurations that can qualify. The bar is a displayed-quality level; qualification tests each row's full-composite bounds, so a row above the bar on displayed quality can still fail to qualify confirmed when leaves are missing (E198).
 
 | Configuration | Displayed quality − bar | Confirmed qualifies | Possibly qualifies | Possibly cheapest |
 |---|---:|---|---|---|
 | GPT-6.1 Sol (max) | 6.1 | certified | certified | certified |
+| Claude Opus 5.5 (max) | 6.1 | certified | certified | disproved |
 | Claude Sonnet 5.5 (max) | 6.0 | certified | certified | disproved |
 | GPT-6 Astra (max) | 6.9 | certified | certified | disproved |
 | DeepSeek V4.1 Flash 1017 (max) | -5.3 | disproved | disproved | disproved |
@@ -2068,13 +2098,14 @@ Bar comparison: compares 4 configurations that can qualify. The bar is a display
 
 **API basis, subset workload (AA-Briefcase, GDP.pdf, AutomationBench-AA, Terminal-Bench 4.0 (AA Index run), FrontierCode 2.0, Terminal-Bench-Science; orderings across workloads not identified): cheapest at or above quality 49.4** (lower-quartile displayed quality of the non-provisional cohort configurations at freeze (O34)). Status certified; confirmed cheapest: none.
 
-Configurations that can be confirmed to qualify: 5 (confirmation needs the full-composite lower bound, with missing leaves at 0, to clear the bar; O25). Cheaper same-family configurations on AA's chart that were not evaluated (not ranked in this ranking: lacking its full benchmark set, or not plotted on or near the frontier; E201c, O51): none.
+Configurations that can be confirmed to qualify: 6 (confirmation needs the full-composite lower bound, with missing leaves at 0, to clear the bar; O25). Cheaper same-family configurations on AA's chart that were not evaluated (not ranked in this ranking: lacking its full benchmark set, or not plotted on or near the frontier; E201c, O51): none.
 
-Bar comparison: compares 5 configurations that can qualify and 1 blocker(s) that can qualify but earn no label (E315). The bar is a displayed-quality level; qualification tests each row's full-composite bounds, so a row above the bar on displayed quality can still fail to qualify confirmed when leaves are missing (E198).
+Bar comparison: compares 6 configurations that can qualify and 1 blocker(s) that can qualify but earn no label (E315). The bar is a displayed-quality level; qualification tests each row's full-composite bounds, so a row above the bar on displayed quality can still fail to qualify confirmed when leaves are missing (E198).
 
 | Configuration | Displayed quality − bar | Confirmed qualifies | Possibly qualifies | Possibly cheapest |
 |---|---:|---|---|---|
 | GPT-6.1 Sol (max) | 18.1 | certified | certified | disproved |
+| Claude Opus 5.5 (max) | 18.1 | certified | certified | disproved |
 | Claude Sonnet 5.5 (max) | 18.0 | certified | certified | disproved |
 | GPT-6 Astra (max) | 18.8 | certified | certified | disproved |
 | DeepSeek V4.1 Flash 1017 (max) | 6.7 | certified | certified | certified |
@@ -2084,13 +2115,14 @@ Bar comparison: compares 5 configurations that can qualify and 1 blocker(s) that
 
 **API basis, subset workload (AA-Briefcase, GDP.pdf, AutomationBench-AA, Terminal-Bench 4.0 (AA Index run), FrontierCode 2.0, Terminal-Bench-Science; orderings across workloads not identified): cheapest at or above quality 67.5** (upper-quartile displayed quality of the non-provisional cohort configurations at freeze (O34)). Status certified; confirmed cheapest: none.
 
-Configurations that can be confirmed to qualify: 1 (confirmation needs the full-composite lower bound, with missing leaves at 0, to clear the bar; O25). Cheaper same-family configurations on AA's chart that were not evaluated (not ranked in this ranking: lacking its full benchmark set, or not plotted on or near the frontier; E201c, O51): GPT-6.1 Sol (max): GPT-6.1 Sol (xhigh), GPT-6.1 Sol (high), GPT-6.1 Sol (medium), GPT-6.1 Sol (low); GPT-6 Astra (max): GPT-6 Astra (xhigh), GPT-6 Astra (high), GPT-6 Astra (medium), GPT-6 Astra (low).
+Configurations that can be confirmed to qualify: 2 (confirmation needs the full-composite lower bound, with missing leaves at 0, to clear the bar; O25). Cheaper same-family configurations on AA's chart that were not evaluated (not ranked in this ranking: lacking its full benchmark set, or not plotted on or near the frontier; E201c, O51): GPT-6.1 Sol (max): GPT-6.1 Sol (xhigh), GPT-6.1 Sol (high), GPT-6.1 Sol (medium), GPT-6.1 Sol (low); GPT-6 Astra (max): GPT-6 Astra (xhigh), GPT-6 Astra (high), GPT-6 Astra (medium), GPT-6 Astra (low).
 
-Bar comparison: compares 2 configurations that can qualify. The bar is a displayed-quality level; qualification tests each row's full-composite bounds, so a row above the bar on displayed quality can still fail to qualify confirmed when leaves are missing (E198).
+Bar comparison: compares 3 configurations that can qualify. The bar is a displayed-quality level; qualification tests each row's full-composite bounds, so a row above the bar on displayed quality can still fail to qualify confirmed when leaves are missing (E198).
 
 | Configuration | Displayed quality − bar | Confirmed qualifies | Possibly qualifies | Possibly cheapest |
 |---|---:|---|---|---|
 | GPT-6.1 Sol (max) | 0.0 | disproved | certified | certified |
+| Claude Opus 5.5 (max) | 0.0 | certified | certified | disproved |
 | Claude Sonnet 5.5 (max) | -0.1 | disproved | disproved | disproved |
 | GPT-6 Astra (max) | 0.8 | certified | certified | certified |
 | DeepSeek V4.1 Flash 1017 (max) | -11.4 | disproved | disproved | disproved |
@@ -2312,13 +2344,13 @@ The 90% rule's error bound holds per published event (candidate and kernel assig
 - **Basket readiness (E22):** priced leaves cover 38% of nominal quality weight (AutomationBench-AA, FrontierCode 2.0, Terminal-Bench-Science 0.1, Terminal-Bench 4.0 (AA run)); pending components: ITBench-AA.
 - **SWE cost companion (O14, diagnostic):** 8 rows evaluated; flagged far from the median ratio: Claude Haiku 5.5 (max).
 - **Matched-cost diagnostic (E55):** evaluated at 51% priced quality weight; basket/matched cost-order reversals with separated intervals: 2; rank-gap warnings: 0.
-- **Frontier-families anchors (E187, diagnostic):** anchors rebuilt from the 4 frontier and near-frontier references move API no rank changes (value points per cost doubling 3.11 vs 3.11 frozen); Plan 2 rows move; largest move 1 (GPT-6 Astra (max), GPT-6 Luna (max)) (value points per cost doubling 6.46 vs 5.31 frozen).
-- **Frontier-families bar (E199, sensitivity; the frozen bar stays primary):** quality 67.5 over 5 configurations; cheapest at or above it on the API main workload: not unique; possibly GPT-6.1 Sol (max), GPT-6 Astra (max) (compares 2 configurations that can qualify).
+- **Frontier-families anchors (E187, diagnostic):** anchors rebuilt from the 5 frontier and near-frontier references move API no rank changes (value points per cost doubling 3.11 vs 3.11 frozen); Plan 2 rows move; largest move 1 (GPT-6 Astra (max), GPT-6 Luna (max)) (value points per cost doubling 6.46 vs 5.31 frozen).
+- **Frontier-families bar (E199, sensitivity; the frozen bar stays primary):** quality 67.5 over 5 configurations; cheapest at or above it on the API main workload: not unique; possibly GPT-6.1 Sol (max), GPT-6 Astra (max) (compares 3 configurations that can qualify).
 - **One row per family (E205, diagnostic; the frozen ladder and anchors stay primary):** with each family's primary configuration only (2 rows in the one-row-per-family bar population), the ladder (headline, lower quartile, upper quartile) would be 67.4 against 61.4 / 49.4 / 67.5 frozen; anchors rebuilt from its 2 references move API 4 rows move; largest move 3 (Claude Haiku 5.5 (max)) (value points per cost doubling 5.08 vs 3.11 frozen); Plan anchors unavailable: fewer than 2 measured references (O157).
 - **Ladder over scored rows (I28, sensitivity; the frozen ladder stays primary):** the bar population keeps full-benchmark rows that have no cost; today every such row has a cost, so the ladder is unchanged.
 - **Bar currency (E207, informational):** rows reaching each frozen bar: quality 61.4: 5 of 9; quality 49.4: 7 of 9; quality 67.5: 3 of 9; the current population would freeze 61.4 / 49.4 / 67.5; lifetime until the next anchor re-freeze or methodology version, whichever comes first; no staleness flag.
 - **Token mix (E208):** 1 selected routes: mix not reported: the measurement publishes no token-category shares; 6 selected routes: mix unidentified: the basket's token-category shares are set-identified only (E124), so the L1 test (above 0.30 flags mix-unmatched) is not computed.
-- **Observed-range sensitivity (E219, not evidence; no label changes):** with each missing leaf inside the cohort's observed range for that leaf, quality 61.4: 4 can qualify, 3 confirmed; GPT-6.1 Sol (max) confirmed cheapest; quality 49.4: 5 can qualify, 5 confirmed; DeepSeek V4.1 Flash 1017 (max) confirmed cheapest; quality 67.5: 2 can qualify, 1 confirmed; possibly cheapest GPT-6.1 Sol (max), GPT-6 Astra (max).
+- **Observed-range sensitivity (E219, not evidence; no label changes):** with each missing leaf inside the cohort's observed range for that leaf, quality 61.4: 5 can qualify, 4 confirmed; GPT-6.1 Sol (max) confirmed cheapest; quality 49.4: 6 can qualify, 6 confirmed; DeepSeek V4.1 Flash 1017 (max) confirmed cheapest; quality 67.5: 3 can qualify, 2 confirmed; possibly cheapest GPT-6.1 Sol (max), GPT-6 Astra (max).
 - **What would settle the headline bar (E221, not a claim):** rows that can but need not reach quality 61.4, with the mean score their missing leaves would need: Gemini 4 Argon (high) (no missing leaf; reporting precision only).
 - **Common leaf set (E226, diagnostic; scores unchanged):** without the leaves fewer than 90% of cohort rows have (none), API no rank changes; Plan no rank changes; rows reaching each bar: quality 61.4: 5 → 5; quality 49.4: 7 → 7; quality 67.5: 3 → 3; rows whose displayed quality differs from common-leaf quality by more than one cost doubling's worth: none.
 - **Harness by leaf (E227):** Terminal-Bench: mini-SWE-agent 9; Bug Hunt: Claude Code 3, Codex CLI 3, Antigravity CLI 1, Claude Code / Xiaomi first-party 1, DeepSeek Harness / DeepSeek API 1.
@@ -2330,13 +2362,13 @@ Each admitted basket unit removed in turn, scored on anchors rebuilt by the free
 
 | Removed component | API rank changes | Plan rank changes | API value points per cost doubling |
 |---|---|---|---:|
-| Coding Agent Index | 2 rows move; largest move 2 (Claude Haiku 5.5 (max), Claude Opus 5.5 (max)) | 6 rows move; largest move 1 (Claude Opus 5.5 (max), Claude Sonnet 5.5 (max), DeepSeek V4.1 Flash 1017 (max), Gemini 4 Argon (high), GPT-6 Astra (max), GPT-6 Luna (max)) | 3.17 |
+| Coding Agent Index | 2 rows move; largest move 2 (Claude Haiku 5.5 (max), Claude Opus 5.5 (max)) | 6 rows move; largest move 1 (Claude Opus 5.5 (max), Claude Sonnet 5.5 (max), DeepSeek V4.1 Flash 1017 (max), Gemini 4 Argon (high), GPT-6 Astra (max), GPT-6 Luna (max)) | 3.14 |
 | AA-Briefcase | no rank changes | 2 rows move; largest move 1 (GPT-6 Astra (max), GPT-6 Luna (max)) | 3.16 |
 | GDP.pdf | no rank changes | 2 rows move; largest move 1 (GPT-6 Astra (max), GPT-6 Luna (max)) | 3.10 |
 | AutomationBench-AA | no rank changes | 2 rows move; largest move 1 (GPT-6 Astra (max), GPT-6 Luna (max)) | 3.05 |
 | Terminal-Bench 4.0 (AA Index run) | no rank changes | 2 rows move; largest move 1 (GPT-6 Astra (max), GPT-6 Luna (max)) | 3.10 |
 | FrontierCode 2.0 | 2 rows move; largest move 1 (Claude Haiku 5.5 (max), Gemini 4 Argon (high)) | 2 rows move; largest move 1 (GPT-6 Astra (max), GPT-6 Luna (max)) | 3.11 |
-| Terminal-Bench-Science | no rank changes | 4 rows move; largest move 1 (Claude Opus 5.5 (max), Claude Sonnet 5.5 (max), GPT-6 Astra (max), GPT-6 Luna (max)) | 3.08 |
+| Terminal-Bench-Science | no rank changes | 4 rows move; largest move 1 (Claude Opus 5.5 (max), Claude Sonnet 5.5 (max), GPT-6 Astra (max), GPT-6 Luna (max)) | 3.07 |
 
 ### Subset rows: paired bridge and missing spend (E10, E173)
 
@@ -2381,7 +2413,7 @@ Each admitted basket unit removed in turn, scored on anchors rebuilt by the free
 | realised influence (E272) | passed | cost's value-variance allocation lies within 0-100% on both bases |
 | quality influence flag (E126) | passed | quality not discriminating (cost share > 90%); informational only |
 | subset scoring (O17) | fired | subset rows scored on their own workload and anchors |
-| partial component flag (E37) | fired | AA declined- or missing-task markers, or an Index reconstruction that misses AA's total (E209) |
+| partial component flag (E37) | vacuous | AA declined- or missing-task markers, or an Index reconstruction that misses AA's total (E209) |
 | route dominance filter (E88) | vacuous | certifiably dearer routes set aside |
 | Plan exploratory label (E61) | fired | fewer than half of Plan rows have an identified M_W |
 | Plan evidence lifecycle and change detection (E18, E151, E269, O77, O79) | fired | 21 of 27 plan rows carry a possibly-superseded or expired route: claude-haiku-5-5-max@claude-max-20x, claude-haiku-5-5-max@claude-max-5x, claude-haiku-5-5-max@claude-pro, claude-opus-5-5@claude-max-20x, claude-opus-5-5@claude-max-5x, claude-opus-5-5@claude-pro, claude-sonnet-5-5@claude-max-20x, claude-sonnet-5-5@claude-max-5x, claude-sonnet-5-5@claude-pro, gpt-6-astra@chatgpt-plus, gpt-6-astra@chatgpt-pro-100, gpt-6-astra@chatgpt-pro-200, gpt-6-astra@chatgpt-pro-500, gpt-6-luna@chatgpt-plus, gpt-6-luna@chatgpt-pro-100, gpt-6-luna@chatgpt-pro-200, gpt-6-luna@chatgpt-pro-500, gpt-6.1-sol@chatgpt-plus, gpt-6.1-sol@chatgpt-pro-100, gpt-6.1-sol@chatgpt-pro-200, gpt-6.1-sol@chatgpt-pro-500 |

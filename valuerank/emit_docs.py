@@ -670,7 +670,7 @@ def displayed_cheapest_sentences(facts):
         # O172: the common-leaf diagnostic ranking's answer at each bar position, beside this ranking's (its levels are its own).
         common = ((facts.v3.get("commonAnswer") or {}).get("bases") or {}).get(basis)
         if common:
-            sentences.append(f"{label} basis, common-leaf diagnostic ranking at the same bar positions (O172; its own bar levels, no label, not a claim): cheapest "
+            sentences.append(f"{label} basis, common-leaf diagnostic ranking at the same bar positions (O172; its own bar levels; no label by owner policy, O121, not for want of evidence; not a claim): cheapest "
                              + "; ".join(f"at or above {bar_name(item)}: {facts.labels(item['cheapest']) or 'none'}" for item in common) + ".")
         # O171: the pointwise noise-margin screen of each answer (E337: not a simultaneous confidence statement).
         noise = [f"at or above {bar_name(item)}: {item['noise']['status'].split(':')[0]}" + (f" (contested by {facts.labels(item['noise']['contestedBy'])})" if item["noise"]["contestedBy"] else "")
