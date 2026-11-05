@@ -314,7 +314,9 @@ def registry_figures(capture: dict, plan_document: dict, release: str) -> dict:
     policy = plan_document["evidencePolicy"]
     window, cutoff = policy["reportingWindow"], policy["searchCutoff"]
     figures = {"evidence.windowStart": window["start"], "evidence.windowEnd": window["end"], "evidence.searchCutoff": cutoff,
-               "evidence.searchGapDays": (date.fromisoformat(release) - date.fromisoformat(cutoff)).days}
+               "evidence.searchGapDays": abs((date.fromisoformat(release) - date.fromisoformat(cutoff)).days),
+               # O185: a search may run after the release cutoff (it then finds reports dated up to the cutoff).
+               "evidence.searchGapSide": "after" if date.fromisoformat(cutoff) > date.fromisoformat(release) else "before"}
     # I89 L1: each flagged measurement's label and blocking dates (O107, O110, O111), from the registry, grouped by date pair.
     groups: dict[tuple, list[str]] = {}
     for route in plan_document["routes"]:
@@ -615,7 +617,7 @@ REGISTRY_FACTS = (
     ("evidence.windowStart", r"\bwindow\b", "{v}"),
     ("evidence.windowEnd", r"\bwindow (?:is|ends?|runs)\b", "{v}"),
     ("evidence.searchCutoff", r"\bsearch cutoff\b|\blast search\b", "{v}"),
-    ("evidence.searchGapDays", r"\bsearch cutoff\b", r"\b{v} days? before\b|\bthose {v} days\b"),
+    ("evidence.searchGapDays", r"\bsearch cutoff\b", r"\b{v} days? (?:before|after)\b|\bthose {v} days\b"),
     ("semianalysis.lastCurrent", r"\bCurrent day\b|\bsuperseded\b|\bexpired\b|\bdemoted\b", "{v}"),
     ("semianalysis.supersededFrom", r"\bsuperseded\b", "{v}"),
     ("semianalysis.expiredFrom", r"\bexpired\b", "{v}"),

@@ -1913,7 +1913,7 @@ A plan meter counts tokens (O126), so a multiple measured on one model or effort
 
 ### Plan allowance report cells (O71, O81)
 
-53 cells; 0 pass. A cell on a plan the Plan ranking does not list is evidence only (O85).
+55 cells; 0 pass. A cell on a plan the Plan ranking does not list is evidence only (O85).
 
 | Provider | Plan | Model | Unit | Region | Eligible reports | Verdict |
 |---|---|---|---|---|---|---|
@@ -1933,9 +1933,11 @@ A plan meter counts tokens (O126), so a multiple measured on one model or effort
 | Anthropic | Claude Team Premium (not listed) | Claude Opus 5.5 | week | global | 0 of 1 | fails: 0 non-provisional report(s) in the current partition |
 | Google | Google AI (tier unstated) (not listed) | Gemini 4 Argon | week | global | 0 of 1 | fails: 0 non-provisional report(s) in the current partition |
 | Google | Google AI Pro | Gemini 4 Argon | week | global | 3 of 3 | fails: largest lower bound 1.35× the smallest upper bound (O86 allows 1.20×) in the current partition |
+| Google | Google AI Ultra | Gemini 4 Argon | 5h | global | 1 of 1 | fails: a 5-hour figure never converts to a billing period (O82) |
+| Google | Google AI Ultra | Gemini 4 Argon | week | global | 1 of 1 | fails: 1 non-provisional report(s) in the current partition |
 | Kimi | Kimi Allegretto (legacy, CN) (not listed) | Kimi K3.1 Pro | 5h | CN | 2 of 4 | fails: a 5-hour figure never converts to a billing period (O82) |
 | Kimi | Kimi Allegretto (legacy, CN) (not listed) | Kimi K3.1 Pro | month | CN | 2 of 3 | fails: 1 non-provisional report(s) in the current partition |
-| Kimi | Kimi Allegretto (legacy, CN) (not listed) | Kimi K3.1 Pro | week | CN | 1 of 3 | fails: 0 non-provisional report(s) in the current partition |
+| Kimi | Kimi Allegretto (legacy, CN) (not listed) | Kimi K3.1 Pro | week | CN | 1 of 2 | fails: 0 non-provisional report(s) in the current partition |
 | Kimi | Kimi Allegro (legacy, CN) (not listed) | Kimi K3.1 Pro | 5h | CN | 1 of 5 | fails: a 5-hour figure never converts to a billing period (O82) |
 | Kimi | Kimi Allegro (legacy, CN) (not listed) | Kimi K3.1 Pro | month | CN | 0 of 1 | fails: 0 non-provisional report(s) in the current partition |
 | Kimi | Kimi Allegro (legacy, CN) (not listed) | Kimi K3.1 Pro | week | CN | 0 of 2 | fails: 0 non-provisional report(s) in the current partition |

@@ -731,7 +731,7 @@ Owner-published runs at commit `12497971d928cc5ad97a184755734720388bc07f`; the r
 
 ## Plan routes
 
-Route evidence as of 2026-10-25. Full allocation regimes, workloads and notes are in [data/plan_cost_routes.json](data/plan_cost_routes.json).
+Route evidence as of 2026-11-05. Full allocation regimes, workloads and notes are in [data/plan_cost_routes.json](data/plan_cost_routes.json).
 
 | Plan | Eligible configurations | Monthly fee | Value Multiple | Evidence | Source model | Source date | Source |
 |---|---|---:|---:|---|---|---|---|
@@ -908,7 +908,7 @@ Each routed row's amount with what it measures, how it was derived and which obj
 
 ## Evidence bundle
 
-Bundle hash `90611a124694de0138328263dfca6c4a8efc08f2139d64c353571a8c7e2fefab`: every published output is rebuilt from these artifacts at the pinned publication clock (npm run verify:docs), never from live pages.
+Bundle hash `354a920d489414198b8818de480af18480a1534875518b9866f54d92929a0028`: every published output is rebuilt from these artifacts at the pinned publication clock (npm run verify:docs), never from live pages.
 
 | Key | Artifact | SHA-256 | Captured | Extractor |
 |---|---|---|---|---|
@@ -922,12 +922,12 @@ Bundle hash `90611a124694de0138328263dfca6c4a8efc08f2139d64c353571a8c7e2fefab`: 
 | frontierCapture | `data/aa_frontier_capture.json` | `a6ff97010eb9329d405d5ef356aeb2eaa44d747c19d22aa6e3e55bd39f6fafb9` | 2026-11-01T05:53:05Z | browser capture of AA's Intelligence Index vs cost chart from public tooltips (frontier membership, E195; unevaluated cheaper siblings, E201) |
 | roster | `data/aa_mapping.json` | `a11a7f276eefc338b2b26b66c6c3b3fe7e0b09391c64aea26c6dce3fc80b2e71` | 2026-11-01T05:53:05Z | editorial roster: every configuration AA plots on its rendered frontier or within 3 Index points of it (O51) |
 | bugHuntScoreboard | `data/bug_hunt_scoreboard.json` | `294ee5418d6993530eeff77e8ce700d2d282f259fe4d2f646f6a42238e2d2eb0` | 2026-11-01T05:59:30Z | the owner's combined scoreboard at the pinned commit (O31 roster check) |
-| planRoutes | `data/plan_cost_routes.json` | `4f357d22b759b06914c3900ab706b6b25d0ab6f05b9de9235b9a1073c9ceca6c` | 2026-10-31 | editorial Plan evidence registry |
+| planRoutes | `data/plan_cost_routes.json` | `6eeb8ffe3733a2b802060dc36f710e07246181e13d04a7b3f2e97f2bdb0d8963` | 2026-11-05 | editorial Plan evidence registry |
 | priceRecords | `data/price_records.json` | `fe550f7770759a6219e671838f28b42d3b7d7db0fa5f7ab489e08a75605421f8` | 2026-10-31T04:10:00Z | editorial E141 price-record registry (superseded and promotional tariffs) |
 | leafEvidence | `data/leaf_evidence.json` | `248d3b46f6905241ca2e005959754a687b09776297dc2bbe6c11dc4e00cffd06` | 2026-11-01 | editorial supplementary leaf evidence and the exhaustive-search log (O36) |
 | cognitionFrontierCode | `data/cognition_frontiercode.json` | `c7ffd7b4a39cd5a307e49048bedb5ed8e656cca8331af452e47371e6e9866f86` | 2026-11-01 | Cognition's FrontierCode leaderboard data (https://cognition.com/data/frontiercode-leaderboard/data.json), captured unchanged (O37) |
 | sweTracks | `data/swe_tracks.json` | `54e76dc5d68f349fbe2d67f4234f6b999fceb07cfa7353ea22a487e18dcf4f4f` | 2026-11-01T06:03:32.614Z | research/2026-10-23-swe-benchmarks/build_swe_tracks.py from the verified coverage captures (O53-O55) |
-| planReports | `data/plan_reports.json` | `daf15c46138cd5fcabe580224b2228ddbffb53d281316bb5ba1f3f3fcfdae282` | 2026-10-28 | editorial table of every O71 user report with the facts E270 needs; the build derives admission from it (O81) |
+| planReports | `data/plan_reports.json` | `afc3ab6b973825c0cb08c1f96f7b73879af7ab4ebb720880aa1563f831c93de5` | 2026-10-28 | editorial table of every O71 user report with the facts E270 needs; the build derives admission from it (O81) |
 | aaPreviousCapture | `data/aa/aa_previous_capture.json` | `d9ec560d2f27fc4de89e68d293399ee331e706e9c12c625c15012e7a237b577f` | 2026-10-31T04:07:04Z | valuerank.capture_aa: digest of the model-page capture this one replaced (I60) |
 | fallbackPrices | `data/fallback_prices.json` | `3ab915c9d8ad8a357d7dbcc326dd39a2af64e89b5ef312477d68ea3f3cf50ea9` | 2026-11-01T11:59:15Z | editorial capture of the list API prices of AA's named fallback models (O158 sensitivity only) |
 | sourceRereads | `data/source_rereads.json` | `41cb7583ad871a2972ce4e83684a60d60be5ad9bd71f2b096e61c56e435391cd` | 2026-11-01T08:39:42Z | editorial record of the O68 re-reads, each 'unchanged' result verified against the re-read file |

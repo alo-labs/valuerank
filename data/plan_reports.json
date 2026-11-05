@@ -1481,8 +1481,8 @@
    "windowEnd": "2026-10-11",
    "windowStated": false,
    "unit": "5h",
-   "valueLower": 3.6,
-   "valueUpper": 7.4,
+   "valueLower": 3.58,
+   "valueUpper": 3.69,
    "provisional": false,
    "mixedModel": false,
    "modelUnstated": false,
@@ -1492,7 +1492,7 @@
    "challenged": false,
    "derived": false,
    "anomaly": false,
-   "note": "\"5h: fresh → 67%\": $3.6 if 67% was used, $7.4 if 67% remained (meter direction ambiguous)",
+   "note": "\"5h: fresh \u2192 67%\": 67% of the window was consumed, so $3.58-3.69 (the earlier $7.4 upper bound read the meter as remaining; corrected 2026-11-05, O185 stages 2 and 3); the comment is dated 2026-10-11 with no clock time, so its place against the 10-11 split is a convention",
    "source": [
     "research/2026-10-25-plan-allowances/stage1-openai.md",
     "research/2026-10-25-plan-allowances/reports/Plan allowance user reports.md",
@@ -2854,7 +2854,7 @@
    "plan": "Kimi legacy plan (tier not stated, CN)",
    "modelId": "kimi-k3-1-pro",
    "observer": "choulei",
-   "url": null,
+   "url": "https://linux.do/t/topic/3071240/11",
    "stage": "S1",
    "reportDate": "2026-10-25",
    "windowStart": null,
@@ -2907,38 +2907,6 @@
    "note": "\"kimi k3.1\": 156,006 fresh / 27,711 output / 4,776,704 cached = 12.47% of the window; low confidence (kojimako's rates predict 5.8%)",
    "source": [
     "research/2026-10-25-plan-allowances/stage1-kimi.md"
-   ]
-  },
-  {
-   "id": "moondrinker-allegretto",
-   "provider": "Kimi",
-   "plan": "Kimi Allegretto (legacy, CN)",
-   "modelId": "kimi-k3-1-pro",
-   "observer": "MoonDrinker",
-   "url": "https://www.locdd.com/t/103607/1",
-   "stage": "S3",
-   "reportDate": "2026-10-25",
-   "windowStart": null,
-   "windowEnd": "2026-10-25",
-   "windowStated": false,
-   "unit": "week",
-   "valueLower": 48.6,
-   "valueUpper": 48.6,
-   "region": "CN",
-   "provisional": false,
-   "mixedModel": false,
-   "modelUnstated": false,
-   "tierUnstated": false,
-   "lowerBound": false,
-   "aggregator": false,
-   "challenged": false,
-   "derived": true,
-   "anomaly": false,
-   "note": "fitted weekly shares per 1M tokens (6.61% / 0.0391% / 50.71%) applied at Astralyn's stage-1 mix (97.5% cache); 1.15× from Astralyn's $55.9, which shares that assumed mix",
-   "source": [
-    "research/2026-10-25-plan-allowances-sb-deep-research/research_report.md",
-    "research/2026-10-25-plan-allowances-sb-deep-research/evidence.jsonl",
-    "research/2026-10-25-plan-allowances-sb-deep-research/decision-record.md"
    ]
   },
   {
@@ -3503,9 +3471,85 @@
     "research/2026-10-31-plan-allowances-v5-entrants/stage3-sb-deep-research/research_report.md",
     "research/2026-10-31-plan-allowances-v5-entrants/stage3-sb-deep-research/evidence.jsonl"
    ]
+  },
+  {
+   "id": "jamie950315-ultra",
+   "provider": "Google",
+   "plan": "Google AI Ultra",
+   "modelId": "gemini-4-argon",
+   "stage": "S2",
+   "windowStart": null,
+   "windowStated": false,
+   "provisional": false,
+   "mixedModel": false,
+   "modelUnstated": false,
+   "tierUnstated": false,
+   "lowerBound": false,
+   "aggregator": false,
+   "challenged": false,
+   "derived": false,
+   "anomaly": false,
+   "observer": "jamie950315",
+   "effort": "medium",
+   "url": "https://www.reddit.com/r/google_antigravity/comments/1xfnvds/",
+   "reportDate": "2026-10-26",
+   "windowEnd": "2026-10-26",
+   "unit": "week",
+   "valueLower": 199.9,
+   "valueUpper": 200.1,
+   "note": "Ultra 5x, Antigravity 2.26.0, Argon Medium (stated on the post's closing line): four weekly-delta probe rows priced at the current Argon list price give $199.87-200.06 per week; the post's own ~$600 weekly and ~$150 per five-hour figures are its $6/$30 pricing, and its five-hour figure is derived from weekly deltas, so it is not a five-hour reading; cross-posted 23 s later to r/AntigravityGoogle (one observer); Arctic Shift copy taken 27 s after posting, unedited",
+   "source": [
+    "research/2026-11-05-plan-allowances/stage2/research_notes/Plan allowance reports November/others.md",
+    "research/2026-11-05-plan-allowances/stage3-sb-deep-research/raw/reddit-1xfnvds-jamie950315.arcticshift.json"
+   ],
+   "archive": {
+    "url": "https://arctic-shift.photon-reddit.com/api/posts/ids?ids=1xfnvds",
+    "fetchedAt": "2026-11-05",
+    "sha256": "65cb74b0f3bd5a198518cb57c9253ccfa8d8b3f9ed2c01d8c6d6b573235f08c7",
+    "file": "research/2026-11-05-plan-allowances/stage3-sb-deep-research/raw/reddit-1xfnvds-jamie950315.arcticshift.json",
+    "span": "Ultra 5x, Antigravity 2.26.0, Argon Medium, 2026-10-26"
+   }
+  },
+  {
+   "id": "yiji-kong-ultra-5h",
+   "provider": "Google",
+   "plan": "Google AI Ultra",
+   "modelId": "gemini-4-argon",
+   "stage": "S2",
+   "windowStart": null,
+   "windowStated": false,
+   "provisional": false,
+   "mixedModel": false,
+   "modelUnstated": false,
+   "tierUnstated": false,
+   "lowerBound": false,
+   "aggregator": false,
+   "challenged": false,
+   "derived": false,
+   "anomaly": false,
+   "observer": "Yiji_Kong",
+   "effort": "high",
+   "url": "https://discuss.ai.google.dev/t/196351/1",
+   "reportDate": "2026-10-28",
+   "windowEnd": "2026-10-28",
+   "unit": "5h",
+   "valueLower": 49.2,
+   "valueUpper": 50.0,
+   "note": "Ultra 5x, Antigravity 2.27.0, Windows: quotaInfo.remainingFraction polled every 30 s with trajectory token counts; clean A/B row 14,918 in / 4,233 out for a 0.0014434 drop = $50.0 per five hours at list, 42-step session $1.5511 / 0.0315481 = $49.2; n = 1 per model, no window start or end times; the reporter's own ~150 USD implied bucket uses the $6/$30 Argon price",
+   "source": [
+    "research/2026-11-05-plan-allowances/stage2/research_notes/Plan allowance reports November/others.md",
+    "research/2026-11-05-plan-allowances/stage3-sb-deep-research/raw/googleforum-196351.raw.txt"
+   ],
+   "archive": {
+    "url": "https://discuss.ai.google.dev/t/196351/1",
+    "fetchedAt": "2026-11-05",
+    "sha256": "5cba2e487cbcb3ed2b51df0303eb68358997f7f61b793ca5f8c4324b505baa83",
+    "file": "research/2026-11-05-plan-allowances/stage3-sb-deep-research/raw/googleforum-196351.raw.txt",
+    "span": "Gemini 4 Argon (High) | 14,918 / 4,233 | 0.00144340 | 0.0722 USD (2 / 10)"
+   }
   }
  ],
- "notTabulated": [
+ "notTabulated": [{"observer": "MoonDrinker", "reason": "the same observer and thread as Astralyn (LINUX DO 3071240): the locdd mirror reassigns pseudonyms per post; derived weekly $48.6 is carried by astralyn-allegretto (O185 stages 2 and 3, 2026-11-05)", "source": ["research/2026-11-05-plan-allowances/stage2/research_notes/Plan allowance reports November/others.md", "research/2026-11-05-plan-allowances/stage3-sb-deep-research/decision-record.md"]}, 
   {
    "observer": "muscgab",
    "reason": "Claude Max 5x, 5-hour window: the record gives only \"1% ≈ $0.68\" of the 5-hour window, no per-window figure",

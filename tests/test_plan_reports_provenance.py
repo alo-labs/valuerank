@@ -22,6 +22,7 @@ STAGE1 = ROOT / "research" / "2026-10-25-plan-allowances"
 STAGE3 = ROOT / "research" / "2026-10-25-plan-allowances-sb-deep-research"
 MIMO = ROOT / "research" / "2026-10-23-mimo-token-plans"
 ENTRANTS = ROOT / "research" / "2026-10-31-plan-allowances-v5-entrants"
+NOVEMBER = ROOT / "research" / "2026-11-05-plan-allowances"
 
 
 def record_files() -> list[Path]:
@@ -33,6 +34,9 @@ def record_files() -> list[Path]:
     # Reviewer 74 M1 (E278): the 2026-10-31 search for the v5 entrants, all three stages.
     files += sorted(ENTRANTS.glob("stage1-*.md")) + [ENTRANTS / "stage2" / "report.md"] + sorted((ENTRANTS / "stage2" / "research_notes").glob("*.md"))
     files += [ENTRANTS / "stage3-sb-deep-research" / name for name in ("research_report.md", "evidence.jsonl", "sources.jsonl", "decision-record.md")]
+    # O185 (2026-11-05): the November search, all three stages.
+    files += sorted(NOVEMBER.glob("stage1-*.md")) + sorted((NOVEMBER / "stage2" / "research_notes").rglob("*.md")) + sorted((NOVEMBER / "stage2" / "reports").glob("*.md"))
+    files += [NOVEMBER / "stage3-sb-deep-research" / name for name in ("research_report.md", "evidence.jsonl", "sources.jsonl", "decision-record.md")]
     return files
 
 

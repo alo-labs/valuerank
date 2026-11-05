@@ -9214,10 +9214,10 @@
         ],
         "allReportsBand": null,
         "admittingObservers": [],
-        "searchedThrough": "2026-10-25",
+        "searchedThrough": "2026-11-05",
         "newReportWindow": {
           "start": "2026-10-02",
-          "end": "2026-10-25",
+          "end": "2026-11-01",
           "status": "nonempty"
         },
         "bandMoved": [],
@@ -9264,10 +9264,10 @@
         ],
         "allReportsBand": null,
         "admittingObservers": [],
-        "searchedThrough": "2026-10-25",
+        "searchedThrough": "2026-11-05",
         "newReportWindow": {
           "start": "2026-10-02",
-          "end": "2026-10-25",
+          "end": "2026-11-01",
           "status": "nonempty"
         },
         "bandMoved": [],
@@ -9470,10 +9470,10 @@
         ],
         "allReportsBand": null,
         "admittingObservers": [],
-        "searchedThrough": "2026-10-25",
+        "searchedThrough": "2026-11-05",
         "newReportWindow": {
           "start": "2026-10-02",
-          "end": "2026-10-25",
+          "end": "2026-11-01",
           "status": "nonempty"
         },
         "bandMoved": [],
@@ -9645,10 +9645,10 @@
         ],
         "allReportsBand": null,
         "admittingObservers": [],
-        "searchedThrough": "2026-10-25",
+        "searchedThrough": "2026-11-05",
         "newReportWindow": {
           "start": "2026-10-02",
-          "end": "2026-10-25",
+          "end": "2026-11-01",
           "status": "nonempty"
         },
         "bandMoved": [],
@@ -9713,10 +9713,10 @@
         ],
         "allReportsBand": null,
         "admittingObservers": [],
-        "searchedThrough": "2026-10-25",
+        "searchedThrough": "2026-11-05",
         "newReportWindow": {
           "start": "2026-10-02",
-          "end": "2026-10-25",
+          "end": "2026-11-01",
           "status": "nonempty"
         },
         "bandMoved": [],
@@ -9867,10 +9867,10 @@
           50.4
         ],
         "admittingObservers": [],
-        "searchedThrough": "2026-10-25",
+        "searchedThrough": "2026-11-05",
         "newReportWindow": {
           "start": "2026-10-02",
-          "end": "2026-10-25",
+          "end": "2026-11-01",
           "status": "nonempty"
         },
         "bandMoved": [],
@@ -9917,10 +9917,10 @@
         ],
         "allReportsBand": null,
         "admittingObservers": [],
-        "searchedThrough": "2026-10-25",
+        "searchedThrough": "2026-11-05",
         "newReportWindow": {
           "start": "2026-10-02",
-          "end": "2026-10-25",
+          "end": "2026-11-01",
           "status": "nonempty"
         },
         "bandMoved": [],
@@ -10098,10 +10098,10 @@
           360.0
         ],
         "admittingObservers": [],
-        "searchedThrough": "2026-10-25",
+        "searchedThrough": "2026-11-05",
         "newReportWindow": {
           "start": "2026-10-02",
-          "end": "2026-10-25",
+          "end": "2026-11-01",
           "status": "nonempty"
         },
         "bandMoved": [],
@@ -10338,10 +10338,126 @@
           10.164
         ],
         "admittingObservers": [],
-        "searchedThrough": "2026-10-25",
+        "searchedThrough": "2026-11-05",
         "newReportWindow": {
           "start": "2026-10-02",
-          "end": "2026-10-25",
+          "end": "2026-11-01",
+          "status": "nonempty"
+        },
+        "bandMoved": [],
+        "notArchivedAdmitting": [],
+        "flags": []
+      },
+      {
+        "provider": "Google",
+        "plan": "Google AI Ultra",
+        "modelId": "Gemini 4 Argon",
+        "unit": "5h",
+        "region": "global",
+        "status": "fails: a 5-hour figure never converts to a billing period (O82)",
+        "listed": true,
+        "currentPartition": 0,
+        "partitionsWithReports": [
+          0
+        ],
+        "configurations": [
+          "gemini-4-argon"
+        ],
+        "efforts": [
+          "high"
+        ],
+        "value": null,
+        "monthlyUsd": null,
+        "multiple": null,
+        "range": [
+          49.2,
+          50.0
+        ],
+        "feasibleRange": null,
+        "reports": [
+          {
+            "id": "yiji-kong-ultra-5h",
+            "observer": "Yiji_Kong",
+            "valueLower": 49.2,
+            "valueUpper": 50.0,
+            "partition": 0,
+            "provisional": false,
+            "speedMode": null,
+            "stage": "S2",
+            "excluded": null,
+            "acrossResets": false,
+            "acrossSplit": false,
+            "inferenceRechecked": null,
+            "archive": null
+          }
+        ],
+        "allReportsBand": [
+          41.00000000000001,
+          60.0
+        ],
+        "admittingObservers": [],
+        "searchedThrough": "2026-11-05",
+        "newReportWindow": {
+          "start": "2026-10-02",
+          "end": "2026-11-01",
+          "status": "nonempty"
+        },
+        "bandMoved": [],
+        "notArchivedAdmitting": [],
+        "flags": []
+      },
+      {
+        "provider": "Google",
+        "plan": "Google AI Ultra",
+        "modelId": "Gemini 4 Argon",
+        "unit": "week",
+        "region": "global",
+        "status": "fails: 1 non-provisional report(s) in the current partition",
+        "listed": true,
+        "currentPartition": 0,
+        "partitionsWithReports": [
+          0
+        ],
+        "configurations": [
+          "gemini-4-argon"
+        ],
+        "efforts": [
+          "medium"
+        ],
+        "value": null,
+        "monthlyUsd": null,
+        "multiple": null,
+        "range": [
+          199.9,
+          200.1
+        ],
+        "feasibleRange": null,
+        "reports": [
+          {
+            "id": "jamie950315-ultra",
+            "observer": "jamie950315",
+            "valueLower": 199.9,
+            "valueUpper": 200.1,
+            "partition": 0,
+            "provisional": false,
+            "speedMode": null,
+            "stage": "S2",
+            "excluded": null,
+            "acrossResets": false,
+            "acrossSplit": false,
+            "inferenceRechecked": null,
+            "archive": null
+          }
+        ],
+        "allReportsBand": [
+          166.58333333333334,
+          240.11999999999998
+        ],
+        "admittingObservers": [],
+        "searchedThrough": "2026-11-05",
+        "newReportWindow": {
+          "start": "2026-10-02",
+          "end": "2026-11-01",
           "status": "nonempty"
         },
         "bandMoved": [],
@@ -10592,21 +10708,6 @@
             "provisional": false,
             "speedMode": null,
             "stage": "S1",
-            "excluded": "the research's own arithmetic, not a figure the observer reported",
-            "acrossResets": false,
-            "acrossSplit": false,
-            "inferenceRechecked": null,
-            "archive": "not archived: recorded before O165 without a hashed copy"
-          },
-          {
-            "id": "moondrinker-allegretto",
-            "observer": "MoonDrinker",
-            "valueLower": 48.6,
-            "valueUpper": 48.6,
-            "partition": null,
-            "provisional": false,
-            "speedMode": null,
-            "stage": "S3",
             "excluded": "the research's own arithmetic, not a figure the observer reported",
             "acrossResets": false,
             "acrossSplit": false,
@@ -11008,10 +11109,10 @@
         ],
         "allReportsBand": null,
         "admittingObservers": [],
-        "searchedThrough": "2026-10-25",
+        "searchedThrough": "2026-11-05",
         "newReportWindow": {
           "start": "2026-10-02",
-          "end": "2026-10-25",
+          "end": "2026-11-01",
           "status": "nonempty"
         },
         "bandMoved": [],
@@ -11639,10 +11740,10 @@
         ],
         "allReportsBand": null,
         "admittingObservers": [],
-        "searchedThrough": "2026-10-25",
+        "searchedThrough": "2026-11-05",
         "newReportWindow": {
           "start": "2026-10-02",
-          "end": "2026-10-25",
+          "end": "2026-11-01",
           "status": "nonempty"
         },
         "bandMoved": [],
@@ -11689,10 +11790,10 @@
         ],
         "allReportsBand": null,
         "admittingObservers": [],
-        "searchedThrough": "2026-10-25",
+        "searchedThrough": "2026-11-05",
         "newReportWindow": {
           "start": "2026-10-02",
-          "end": "2026-10-25",
+          "end": "2026-11-01",
           "status": "nonempty"
         },
         "bandMoved": [],
@@ -11755,10 +11856,10 @@
         ],
         "allReportsBand": null,
         "admittingObservers": [],
-        "searchedThrough": "2026-10-25",
+        "searchedThrough": "2026-11-05",
         "newReportWindow": {
           "start": "2026-10-02",
-          "end": "2026-10-25",
+          "end": "2026-11-01",
           "status": "nonempty"
         },
         "bandMoved": [],
@@ -11805,10 +11906,10 @@
         ],
         "allReportsBand": null,
         "admittingObservers": [],
-        "searchedThrough": "2026-10-25",
+        "searchedThrough": "2026-11-05",
         "newReportWindow": {
           "start": "2026-10-02",
-          "end": "2026-10-25",
+          "end": "2026-11-01",
           "status": "nonempty"
         },
         "bandMoved": [],
@@ -11855,10 +11956,10 @@
         ],
         "allReportsBand": null,
         "admittingObservers": [],
-        "searchedThrough": "2026-10-25",
+        "searchedThrough": "2026-11-05",
         "newReportWindow": {
           "start": "2026-10-02",
-          "end": "2026-10-25",
+          "end": "2026-11-01",
           "status": "nonempty"
         },
         "bandMoved": [],
@@ -11909,8 +12010,8 @@
           {
             "id": "oleg-plus",
             "observer": "Oleg-125",
-            "valueLower": 3.6,
-            "valueUpper": 7.4,
+            "valueLower": 3.58,
+            "valueUpper": 3.69,
             "partition": null,
             "provisional": false,
             "speedMode": null,
@@ -11939,10 +12040,10 @@
         ],
         "allReportsBand": null,
         "admittingObservers": [],
-        "searchedThrough": "2026-10-25",
+        "searchedThrough": "2026-11-05",
         "newReportWindow": {
           "start": "2026-10-02",
-          "end": "2026-10-25",
+          "end": "2026-11-01",
           "status": "nonempty"
         },
         "bandMoved": [],
@@ -12007,10 +12108,10 @@
         ],
         "allReportsBand": null,
         "admittingObservers": [],
-        "searchedThrough": "2026-10-25",
+        "searchedThrough": "2026-11-05",
         "newReportWindow": {
           "start": "2026-10-02",
-          "end": "2026-10-25",
+          "end": "2026-11-01",
           "status": "nonempty"
         },
         "bandMoved": [],
@@ -12096,10 +12197,10 @@
           6.396
         ],
         "admittingObservers": [],
-        "searchedThrough": "2026-10-31",
+        "searchedThrough": "2026-11-05",
         "newReportWindow": {
           "start": "2026-10-02",
-          "end": "2026-10-31",
+          "end": "2026-11-01",
           "status": "nonempty"
         },
         "bandMoved": [],
@@ -12243,10 +12344,10 @@
         ],
         "allReportsBand": null,
         "admittingObservers": [],
-        "searchedThrough": "2026-10-25",
+        "searchedThrough": "2026-11-05",
         "newReportWindow": {
           "start": "2026-10-02",
-          "end": "2026-10-25",
+          "end": "2026-11-01",
           "status": "nonempty"
         },
         "bandMoved": [],
@@ -12293,10 +12394,10 @@
         ],
         "allReportsBand": null,
         "admittingObservers": [],
-        "searchedThrough": "2026-10-25",
+        "searchedThrough": "2026-11-05",
         "newReportWindow": {
           "start": "2026-10-02",
-          "end": "2026-10-25",
+          "end": "2026-11-01",
           "status": "nonempty"
         },
         "bandMoved": [],
@@ -12477,10 +12578,10 @@
         ],
         "allReportsBand": null,
         "admittingObservers": [],
-        "searchedThrough": "2026-10-25",
+        "searchedThrough": "2026-11-05",
         "newReportWindow": {
           "start": "2026-10-02",
-          "end": "2026-10-25",
+          "end": "2026-11-01",
           "status": "nonempty"
         },
         "bandMoved": [],
@@ -12527,10 +12628,10 @@
         ],
         "allReportsBand": null,
         "admittingObservers": [],
-        "searchedThrough": "2026-10-25",
+        "searchedThrough": "2026-11-05",
         "newReportWindow": {
           "start": "2026-10-02",
-          "end": "2026-10-25",
+          "end": "2026-11-01",
           "status": "nonempty"
         },
         "bandMoved": [],
@@ -12585,10 +12686,10 @@
           5.52
         ],
         "admittingObservers": [],
-        "searchedThrough": "2026-10-25",
+        "searchedThrough": "2026-11-05",
         "newReportWindow": {
           "start": "2026-10-02",
-          "end": "2026-10-25",
+          "end": "2026-11-01",
           "status": "nonempty"
         },
         "bandMoved": [],
@@ -12643,10 +12744,10 @@
           126.0
         ],
         "admittingObservers": [],
-        "searchedThrough": "2026-10-25",
+        "searchedThrough": "2026-11-05",
         "newReportWindow": {
           "start": "2026-10-02",
-          "end": "2026-10-25",
+          "end": "2026-11-01",
           "status": "nonempty"
         },
         "bandMoved": [],
@@ -12659,7 +12760,7 @@
       "uncovered": []
     },
     "planResearchClocks": {
-      "threeStage": "2026-10-25",
+      "threeStage": "2026-11-05",
       "freshnessCheck": null
     },
     "bugHuntScale": {
@@ -29243,8 +29344,8 @@
         {
           "key": "planRoutes",
           "artifact": "data/plan_cost_routes.json",
-          "sha256": "4f357d22b759b06914c3900ab706b6b25d0ab6f05b9de9235b9a1073c9ceca6c",
-          "capturedAt": "2026-10-31",
+          "sha256": "6eeb8ffe3733a2b802060dc36f710e07246181e13d04a7b3f2e97f2bdb0d8963",
+          "capturedAt": "2026-11-05",
           "extractor": "editorial Plan evidence registry"
         },
         {
@@ -29278,7 +29379,7 @@
         {
           "key": "planReports",
           "artifact": "data/plan_reports.json",
-          "sha256": "daf15c46138cd5fcabe580224b2228ddbffb53d281316bb5ba1f3f3fcfdae282",
+          "sha256": "afc3ab6b973825c0cb08c1f96f7b73879af7ab4ebb720880aa1563f831c93de5",
           "capturedAt": "2026-10-28",
           "extractor": "editorial table of every O71 user report with the facts E270 needs; the build derives admission from it (O81)"
         },
@@ -29332,7 +29433,7 @@
           "extractor": "valuerank.value_v3 freeze"
         }
       ],
-      "bundleHash": "90611a124694de0138328263dfca6c4a8efc08f2139d64c353571a8c7e2fefab",
+      "bundleHash": "354a920d489414198b8818de480af18480a1534875518b9866f54d92929a0028",
       "rebuild": "every published output is rebuilt from these artifacts at the pinned publication clock (npm run verify:docs), never from live pages"
     },
     "track": {
@@ -36583,10 +36684,10 @@
           ],
           "allReportsBand": null,
           "admittingObservers": [],
-          "searchedThrough": "2026-10-25",
+          "searchedThrough": "2026-11-05",
           "newReportWindow": {
             "start": "2026-10-02",
-            "end": "2026-10-25",
+            "end": "2026-11-01",
             "status": "nonempty"
           },
           "bandMoved": [],
@@ -36633,10 +36734,10 @@
           ],
           "allReportsBand": null,
           "admittingObservers": [],
-          "searchedThrough": "2026-10-25",
+          "searchedThrough": "2026-11-05",
           "newReportWindow": {
             "start": "2026-10-02",
-            "end": "2026-10-25",
+            "end": "2026-11-01",
             "status": "nonempty"
           },
           "bandMoved": [],
@@ -36839,10 +36940,10 @@
           ],
           "allReportsBand": null,
           "admittingObservers": [],
-          "searchedThrough": "2026-10-25",
+          "searchedThrough": "2026-11-05",
           "newReportWindow": {
             "start": "2026-10-02",
-            "end": "2026-10-25",
+            "end": "2026-11-01",
             "status": "nonempty"
           },
           "bandMoved": [],
@@ -37014,10 +37115,10 @@
           ],
           "allReportsBand": null,
           "admittingObservers": [],
-          "searchedThrough": "2026-10-25",
+          "searchedThrough": "2026-11-05",
           "newReportWindow": {
             "start": "2026-10-02",
-            "end": "2026-10-25",
+            "end": "2026-11-01",
             "status": "nonempty"
           },
           "bandMoved": [],
@@ -37082,10 +37183,10 @@
           ],
           "allReportsBand": null,
           "admittingObservers": [],
-          "searchedThrough": "2026-10-25",
+          "searchedThrough": "2026-11-05",
           "newReportWindow": {
             "start": "2026-10-02",
-            "end": "2026-10-25",
+            "end": "2026-11-01",
             "status": "nonempty"
           },
           "bandMoved": [],
@@ -37236,10 +37337,10 @@
             50.4
           ],
           "admittingObservers": [],
-          "searchedThrough": "2026-10-25",
+          "searchedThrough": "2026-11-05",
           "newReportWindow": {
             "start": "2026-10-02",
-            "end": "2026-10-25",
+            "end": "2026-11-01",
             "status": "nonempty"
           },
           "bandMoved": [],
@@ -37286,10 +37387,10 @@
           ],
           "allReportsBand": null,
           "admittingObservers": [],
-          "searchedThrough": "2026-10-25",
+          "searchedThrough": "2026-11-05",
           "newReportWindow": {
             "start": "2026-10-02",
-            "end": "2026-10-25",
+            "end": "2026-11-01",
             "status": "nonempty"
           },
           "bandMoved": [],
@@ -37467,10 +37568,10 @@
             360.0
           ],
           "admittingObservers": [],
-          "searchedThrough": "2026-10-25",
+          "searchedThrough": "2026-11-05",
           "newReportWindow": {
             "start": "2026-10-02",
-            "end": "2026-10-25",
+            "end": "2026-11-01",
             "status": "nonempty"
           },
           "bandMoved": [],
@@ -37707,10 +37808,126 @@
             10.164
           ],
           "admittingObservers": [],
-          "searchedThrough": "2026-10-25",
+          "searchedThrough": "2026-11-05",
           "newReportWindow": {
             "start": "2026-10-02",
-            "end": "2026-10-25",
+            "end": "2026-11-01",
+            "status": "nonempty"
+          },
+          "bandMoved": [],
+          "notArchivedAdmitting": [],
+          "flags": []
+        },
+        {
+          "provider": "Google",
+          "plan": "Google AI Ultra",
+          "modelId": "Gemini 4 Argon",
+          "unit": "5h",
+          "region": "global",
+          "status": "fails: a 5-hour figure never converts to a billing period (O82)",
+          "listed": true,
+          "currentPartition": 0,
+          "partitionsWithReports": [
+            0
+          ],
+          "configurations": [
+            "gemini-4-argon"
+          ],
+          "efforts": [
+            "high"
+          ],
+          "value": null,
+          "monthlyUsd": null,
+          "multiple": null,
+          "range": [
+            49.2,
+            50.0
+          ],
+          "feasibleRange": null,
+          "reports": [
+            {
+              "id": "yiji-kong-ultra-5h",
+              "observer": "Yiji_Kong",
+              "valueLower": 49.2,
+              "valueUpper": 50.0,
+              "partition": 0,
+              "provisional": false,
+              "speedMode": null,
+              "stage": "S2",
+              "excluded": null,
+              "acrossResets": false,
+              "acrossSplit": false,
+              "inferenceRechecked": null,
+              "archive": null
+            }
+          ],
+          "allReportsBand": [
+            41.00000000000001,
+            60.0
+          ],
+          "admittingObservers": [],
+          "searchedThrough": "2026-11-05",
+          "newReportWindow": {
+            "start": "2026-10-02",
+            "end": "2026-11-01",
+            "status": "nonempty"
+          },
+          "bandMoved": [],
+          "notArchivedAdmitting": [],
+          "flags": []
+        },
+        {
+          "provider": "Google",
+          "plan": "Google AI Ultra",
+          "modelId": "Gemini 4 Argon",
+          "unit": "week",
+          "region": "global",
+          "status": "fails: 1 non-provisional report(s) in the current partition",
+          "listed": true,
+          "currentPartition": 0,
+          "partitionsWithReports": [
+            0
+          ],
+          "configurations": [
+            "gemini-4-argon"
+          ],
+          "efforts": [
+            "medium"
+          ],
+          "value": null,
+          "monthlyUsd": null,
+          "multiple": null,
+          "range": [
+            199.9,
+            200.1
+          ],
+          "feasibleRange": null,
+          "reports": [
+            {
+              "id": "jamie950315-ultra",
+              "observer": "jamie950315",
+              "valueLower": 199.9,
+              "valueUpper": 200.1,
+              "partition": 0,
+              "provisional": false,
+              "speedMode": null,
+              "stage": "S2",
+              "excluded": null,
+              "acrossResets": false,
+              "acrossSplit": false,
+              "inferenceRechecked": null,
+              "archive": null
+            }
+          ],
+          "allReportsBand": [
+            166.58333333333334,
+            240.11999999999998
+          ],
+          "admittingObservers": [],
+          "searchedThrough": "2026-11-05",
+          "newReportWindow": {
+            "start": "2026-10-02",
+            "end": "2026-11-01",
             "status": "nonempty"
           },
           "bandMoved": [],
@@ -37961,21 +38178,6 @@
               "provisional": false,
               "speedMode": null,
               "stage": "S1",
-              "excluded": "the research's own arithmetic, not a figure the observer reported",
-              "acrossResets": false,
-              "acrossSplit": false,
-              "inferenceRechecked": null,
-              "archive": "not archived: recorded before O165 without a hashed copy"
-            },
-            {
-              "id": "moondrinker-allegretto",
-              "observer": "MoonDrinker",
-              "valueLower": 48.6,
-              "valueUpper": 48.6,
-              "partition": null,
-              "provisional": false,
-              "speedMode": null,
-              "stage": "S3",
               "excluded": "the research's own arithmetic, not a figure the observer reported",
               "acrossResets": false,
               "acrossSplit": false,
@@ -38377,10 +38579,10 @@
           ],
           "allReportsBand": null,
           "admittingObservers": [],
-          "searchedThrough": "2026-10-25",
+          "searchedThrough": "2026-11-05",
           "newReportWindow": {
             "start": "2026-10-02",
-            "end": "2026-10-25",
+            "end": "2026-11-01",
             "status": "nonempty"
           },
           "bandMoved": [],
@@ -39008,10 +39210,10 @@
           ],
           "allReportsBand": null,
           "admittingObservers": [],
-          "searchedThrough": "2026-10-25",
+          "searchedThrough": "2026-11-05",
           "newReportWindow": {
             "start": "2026-10-02",
-            "end": "2026-10-25",
+            "end": "2026-11-01",
             "status": "nonempty"
           },
           "bandMoved": [],
@@ -39058,10 +39260,10 @@
           ],
           "allReportsBand": null,
           "admittingObservers": [],
-          "searchedThrough": "2026-10-25",
+          "searchedThrough": "2026-11-05",
           "newReportWindow": {
             "start": "2026-10-02",
-            "end": "2026-10-25",
+            "end": "2026-11-01",
             "status": "nonempty"
           },
           "bandMoved": [],
@@ -39124,10 +39326,10 @@
           ],
           "allReportsBand": null,
           "admittingObservers": [],
-          "searchedThrough": "2026-10-25",
+          "searchedThrough": "2026-11-05",
           "newReportWindow": {
             "start": "2026-10-02",
-            "end": "2026-10-25",
+            "end": "2026-11-01",
             "status": "nonempty"
           },
           "bandMoved": [],
@@ -39174,10 +39376,10 @@
           ],
           "allReportsBand": null,
           "admittingObservers": [],
-          "searchedThrough": "2026-10-25",
+          "searchedThrough": "2026-11-05",
           "newReportWindow": {
             "start": "2026-10-02",
-            "end": "2026-10-25",
+            "end": "2026-11-01",
             "status": "nonempty"
           },
           "bandMoved": [],
@@ -39224,10 +39426,10 @@
           ],
           "allReportsBand": null,
           "admittingObservers": [],
-          "searchedThrough": "2026-10-25",
+          "searchedThrough": "2026-11-05",
           "newReportWindow": {
             "start": "2026-10-02",
-            "end": "2026-10-25",
+            "end": "2026-11-01",
             "status": "nonempty"
           },
           "bandMoved": [],
@@ -39278,8 +39480,8 @@
             {
               "id": "oleg-plus",
               "observer": "Oleg-125",
-              "valueLower": 3.6,
-              "valueUpper": 7.4,
+              "valueLower": 3.58,
+              "valueUpper": 3.69,
               "partition": null,
               "provisional": false,
               "speedMode": null,
@@ -39308,10 +39510,10 @@
           ],
           "allReportsBand": null,
           "admittingObservers": [],
-          "searchedThrough": "2026-10-25",
+          "searchedThrough": "2026-11-05",
           "newReportWindow": {
             "start": "2026-10-02",
-            "end": "2026-10-25",
+            "end": "2026-11-01",
             "status": "nonempty"
           },
           "bandMoved": [],
@@ -39376,10 +39578,10 @@
           ],
           "allReportsBand": null,
           "admittingObservers": [],
-          "searchedThrough": "2026-10-25",
+          "searchedThrough": "2026-11-05",
           "newReportWindow": {
             "start": "2026-10-02",
-            "end": "2026-10-25",
+            "end": "2026-11-01",
             "status": "nonempty"
           },
           "bandMoved": [],
@@ -39465,10 +39667,10 @@
             6.396
           ],
           "admittingObservers": [],
-          "searchedThrough": "2026-10-31",
+          "searchedThrough": "2026-11-05",
           "newReportWindow": {
             "start": "2026-10-02",
-            "end": "2026-10-31",
+            "end": "2026-11-01",
             "status": "nonempty"
           },
           "bandMoved": [],
@@ -39612,10 +39814,10 @@
           ],
           "allReportsBand": null,
           "admittingObservers": [],
-          "searchedThrough": "2026-10-25",
+          "searchedThrough": "2026-11-05",
           "newReportWindow": {
             "start": "2026-10-02",
-            "end": "2026-10-25",
+            "end": "2026-11-01",
             "status": "nonempty"
           },
           "bandMoved": [],
@@ -39662,10 +39864,10 @@
           ],
           "allReportsBand": null,
           "admittingObservers": [],
-          "searchedThrough": "2026-10-25",
+          "searchedThrough": "2026-11-05",
           "newReportWindow": {
             "start": "2026-10-02",
-            "end": "2026-10-25",
+            "end": "2026-11-01",
             "status": "nonempty"
           },
           "bandMoved": [],
@@ -39846,10 +40048,10 @@
           ],
           "allReportsBand": null,
           "admittingObservers": [],
-          "searchedThrough": "2026-10-25",
+          "searchedThrough": "2026-11-05",
           "newReportWindow": {
             "start": "2026-10-02",
-            "end": "2026-10-25",
+            "end": "2026-11-01",
             "status": "nonempty"
           },
           "bandMoved": [],
@@ -39896,10 +40098,10 @@
           ],
           "allReportsBand": null,
           "admittingObservers": [],
-          "searchedThrough": "2026-10-25",
+          "searchedThrough": "2026-11-05",
           "newReportWindow": {
             "start": "2026-10-02",
-            "end": "2026-10-25",
+            "end": "2026-11-01",
             "status": "nonempty"
           },
           "bandMoved": [],
@@ -39954,10 +40156,10 @@
             5.52
           ],
           "admittingObservers": [],
-          "searchedThrough": "2026-10-25",
+          "searchedThrough": "2026-11-05",
           "newReportWindow": {
             "start": "2026-10-02",
-            "end": "2026-10-25",
+            "end": "2026-11-01",
             "status": "nonempty"
           },
           "bandMoved": [],
@@ -40012,10 +40214,10 @@
             126.0
           ],
           "admittingObservers": [],
-          "searchedThrough": "2026-10-25",
+          "searchedThrough": "2026-11-05",
           "newReportWindow": {
             "start": "2026-10-02",
-            "end": "2026-10-25",
+            "end": "2026-11-01",
             "status": "nonempty"
           },
           "bandMoved": [],
@@ -40028,7 +40230,7 @@
         "uncovered": []
       },
       "planResearchClocks": {
-        "threeStage": "2026-10-25",
+        "threeStage": "2026-11-05",
         "freshnessCheck": null
       },
       "bugHuntScale": {
@@ -67185,8 +67387,8 @@
           {
             "key": "planRoutes",
             "artifact": "data/plan_cost_routes.json",
-            "sha256": "4f357d22b759b06914c3900ab706b6b25d0ab6f05b9de9235b9a1073c9ceca6c",
-            "capturedAt": "2026-10-31",
+            "sha256": "6eeb8ffe3733a2b802060dc36f710e07246181e13d04a7b3f2e97f2bdb0d8963",
+            "capturedAt": "2026-11-05",
             "extractor": "editorial Plan evidence registry"
           },
           {
@@ -67220,7 +67422,7 @@
           {
             "key": "planReports",
             "artifact": "data/plan_reports.json",
-            "sha256": "daf15c46138cd5fcabe580224b2228ddbffb53d281316bb5ba1f3f3fcfdae282",
+            "sha256": "afc3ab6b973825c0cb08c1f96f7b73879af7ab4ebb720880aa1563f831c93de5",
             "capturedAt": "2026-10-28",
             "extractor": "editorial table of every O71 user report with the facts E270 needs; the build derives admission from it (O81)"
           },
@@ -67274,7 +67476,7 @@
             "extractor": "valuerank.value_v3 freeze"
           }
         ],
-        "bundleHash": "90611a124694de0138328263dfca6c4a8efc08f2139d64c353571a8c7e2fefab",
+        "bundleHash": "354a920d489414198b8818de480af18480a1534875518b9866f54d92929a0028",
         "rebuild": "every published output is rebuilt from these artifacts at the pinned publication clock (npm run verify:docs), never from live pages"
       },
       "track": {
@@ -81159,10 +81361,10 @@
           ],
           "allReportsBand": null,
           "admittingObservers": [],
-          "searchedThrough": "2026-10-25",
+          "searchedThrough": "2026-11-05",
           "newReportWindow": {
             "start": "2026-10-02",
-            "end": "2026-10-25",
+            "end": "2026-11-01",
             "status": "nonempty"
           },
           "bandMoved": [],
@@ -81209,10 +81411,10 @@
           ],
           "allReportsBand": null,
           "admittingObservers": [],
-          "searchedThrough": "2026-10-25",
+          "searchedThrough": "2026-11-05",
           "newReportWindow": {
             "start": "2026-10-02",
-            "end": "2026-10-25",
+            "end": "2026-11-01",
             "status": "nonempty"
           },
           "bandMoved": [],
@@ -81415,10 +81617,10 @@
           ],
           "allReportsBand": null,
           "admittingObservers": [],
-          "searchedThrough": "2026-10-25",
+          "searchedThrough": "2026-11-05",
           "newReportWindow": {
             "start": "2026-10-02",
-            "end": "2026-10-25",
+            "end": "2026-11-01",
             "status": "nonempty"
           },
           "bandMoved": [],
@@ -81590,10 +81792,10 @@
           ],
           "allReportsBand": null,
           "admittingObservers": [],
-          "searchedThrough": "2026-10-25",
+          "searchedThrough": "2026-11-05",
           "newReportWindow": {
             "start": "2026-10-02",
-            "end": "2026-10-25",
+            "end": "2026-11-01",
             "status": "nonempty"
           },
           "bandMoved": [],
@@ -81658,10 +81860,10 @@
           ],
           "allReportsBand": null,
           "admittingObservers": [],
-          "searchedThrough": "2026-10-25",
+          "searchedThrough": "2026-11-05",
           "newReportWindow": {
             "start": "2026-10-02",
-            "end": "2026-10-25",
+            "end": "2026-11-01",
             "status": "nonempty"
           },
           "bandMoved": [],
@@ -81812,10 +82014,10 @@
             50.4
           ],
           "admittingObservers": [],
-          "searchedThrough": "2026-10-25",
+          "searchedThrough": "2026-11-05",
           "newReportWindow": {
             "start": "2026-10-02",
-            "end": "2026-10-25",
+            "end": "2026-11-01",
             "status": "nonempty"
           },
           "bandMoved": [],
@@ -81862,10 +82064,10 @@
           ],
           "allReportsBand": null,
           "admittingObservers": [],
-          "searchedThrough": "2026-10-25",
+          "searchedThrough": "2026-11-05",
           "newReportWindow": {
             "start": "2026-10-02",
-            "end": "2026-10-25",
+            "end": "2026-11-01",
             "status": "nonempty"
           },
           "bandMoved": [],
@@ -82043,10 +82245,10 @@
             360.0
           ],
           "admittingObservers": [],
-          "searchedThrough": "2026-10-25",
+          "searchedThrough": "2026-11-05",
           "newReportWindow": {
             "start": "2026-10-02",
-            "end": "2026-10-25",
+            "end": "2026-11-01",
             "status": "nonempty"
           },
           "bandMoved": [],
@@ -82283,10 +82485,126 @@
             10.164
           ],
           "admittingObservers": [],
-          "searchedThrough": "2026-10-25",
+          "searchedThrough": "2026-11-05",
           "newReportWindow": {
             "start": "2026-10-02",
-            "end": "2026-10-25",
+            "end": "2026-11-01",
+            "status": "nonempty"
+          },
+          "bandMoved": [],
+          "notArchivedAdmitting": [],
+          "flags": []
+        },
+        {
+          "provider": "Google",
+          "plan": "Google AI Ultra",
+          "modelId": "Gemini 4 Argon",
+          "unit": "5h",
+          "region": "global",
+          "status": "fails: a 5-hour figure never converts to a billing period (O82)",
+          "listed": true,
+          "currentPartition": 0,
+          "partitionsWithReports": [
+            0
+          ],
+          "configurations": [
+            "gemini-4-argon"
+          ],
+          "efforts": [
+            "high"
+          ],
+          "value": null,
+          "monthlyUsd": null,
+          "multiple": null,
+          "range": [
+            49.2,
+            50.0
+          ],
+          "feasibleRange": null,
+          "reports": [
+            {
+              "id": "yiji-kong-ultra-5h",
+              "observer": "Yiji_Kong",
+              "valueLower": 49.2,
+              "valueUpper": 50.0,
+              "partition": 0,
+              "provisional": false,
+              "speedMode": null,
+              "stage": "S2",
+              "excluded": null,
+              "acrossResets": false,
+              "acrossSplit": false,
+              "inferenceRechecked": null,
+              "archive": null
+            }
+          ],
+          "allReportsBand": [
+            41.00000000000001,
+            60.0
+          ],
+          "admittingObservers": [],
+          "searchedThrough": "2026-11-05",
+          "newReportWindow": {
+            "start": "2026-10-02",
+            "end": "2026-11-01",
+            "status": "nonempty"
+          },
+          "bandMoved": [],
+          "notArchivedAdmitting": [],
+          "flags": []
+        },
+        {
+          "provider": "Google",
+          "plan": "Google AI Ultra",
+          "modelId": "Gemini 4 Argon",
+          "unit": "week",
+          "region": "global",
+          "status": "fails: 1 non-provisional report(s) in the current partition",
+          "listed": true,
+          "currentPartition": 0,
+          "partitionsWithReports": [
+            0
+          ],
+          "configurations": [
+            "gemini-4-argon"
+          ],
+          "efforts": [
+            "medium"
+          ],
+          "value": null,
+          "monthlyUsd": null,
+          "multiple": null,
+          "range": [
+            199.9,
+            200.1
+          ],
+          "feasibleRange": null,
+          "reports": [
+            {
+              "id": "jamie950315-ultra",
+              "observer": "jamie950315",
+              "valueLower": 199.9,
+              "valueUpper": 200.1,
+              "partition": 0,
+              "provisional": false,
+              "speedMode": null,
+              "stage": "S2",
+              "excluded": null,
+              "acrossResets": false,
+              "acrossSplit": false,
+              "inferenceRechecked": null,
+              "archive": null
+            }
+          ],
+          "allReportsBand": [
+            166.58333333333334,
+            240.11999999999998
+          ],
+          "admittingObservers": [],
+          "searchedThrough": "2026-11-05",
+          "newReportWindow": {
+            "start": "2026-10-02",
+            "end": "2026-11-01",
             "status": "nonempty"
           },
           "bandMoved": [],
@@ -82537,21 +82855,6 @@
               "provisional": false,
               "speedMode": null,
               "stage": "S1",
-              "excluded": "the research's own arithmetic, not a figure the observer reported",
-              "acrossResets": false,
-              "acrossSplit": false,
-              "inferenceRechecked": null,
-              "archive": "not archived: recorded before O165 without a hashed copy"
-            },
-            {
-              "id": "moondrinker-allegretto",
-              "observer": "MoonDrinker",
-              "valueLower": 48.6,
-              "valueUpper": 48.6,
-              "partition": null,
-              "provisional": false,
-              "speedMode": null,
-              "stage": "S3",
               "excluded": "the research's own arithmetic, not a figure the observer reported",
               "acrossResets": false,
               "acrossSplit": false,
@@ -82953,10 +83256,10 @@
           ],
           "allReportsBand": null,
           "admittingObservers": [],
-          "searchedThrough": "2026-10-25",
+          "searchedThrough": "2026-11-05",
           "newReportWindow": {
             "start": "2026-10-02",
-            "end": "2026-10-25",
+            "end": "2026-11-01",
             "status": "nonempty"
           },
           "bandMoved": [],
@@ -83584,10 +83887,10 @@
           ],
           "allReportsBand": null,
           "admittingObservers": [],
-          "searchedThrough": "2026-10-25",
+          "searchedThrough": "2026-11-05",
           "newReportWindow": {
             "start": "2026-10-02",
-            "end": "2026-10-25",
+            "end": "2026-11-01",
             "status": "nonempty"
           },
           "bandMoved": [],
@@ -83634,10 +83937,10 @@
           ],
           "allReportsBand": null,
           "admittingObservers": [],
-          "searchedThrough": "2026-10-25",
+          "searchedThrough": "2026-11-05",
           "newReportWindow": {
             "start": "2026-10-02",
-            "end": "2026-10-25",
+            "end": "2026-11-01",
             "status": "nonempty"
           },
           "bandMoved": [],
@@ -83700,10 +84003,10 @@
           ],
           "allReportsBand": null,
           "admittingObservers": [],
-          "searchedThrough": "2026-10-25",
+          "searchedThrough": "2026-11-05",
           "newReportWindow": {
             "start": "2026-10-02",
-            "end": "2026-10-25",
+            "end": "2026-11-01",
             "status": "nonempty"
           },
           "bandMoved": [],
@@ -83750,10 +84053,10 @@
           ],
           "allReportsBand": null,
           "admittingObservers": [],
-          "searchedThrough": "2026-10-25",
+          "searchedThrough": "2026-11-05",
           "newReportWindow": {
             "start": "2026-10-02",
-            "end": "2026-10-25",
+            "end": "2026-11-01",
             "status": "nonempty"
           },
           "bandMoved": [],
@@ -83800,10 +84103,10 @@
           ],
           "allReportsBand": null,
           "admittingObservers": [],
-          "searchedThrough": "2026-10-25",
+          "searchedThrough": "2026-11-05",
           "newReportWindow": {
             "start": "2026-10-02",
-            "end": "2026-10-25",
+            "end": "2026-11-01",
             "status": "nonempty"
           },
           "bandMoved": [],
@@ -83854,8 +84157,8 @@
             {
               "id": "oleg-plus",
               "observer": "Oleg-125",
-              "valueLower": 3.6,
-              "valueUpper": 7.4,
+              "valueLower": 3.58,
+              "valueUpper": 3.69,
               "partition": null,
               "provisional": false,
               "speedMode": null,
@@ -83884,10 +84187,10 @@
           ],
           "allReportsBand": null,
           "admittingObservers": [],
-          "searchedThrough": "2026-10-25",
+          "searchedThrough": "2026-11-05",
           "newReportWindow": {
             "start": "2026-10-02",
-            "end": "2026-10-25",
+            "end": "2026-11-01",
             "status": "nonempty"
           },
           "bandMoved": [],
@@ -83952,10 +84255,10 @@
           ],
           "allReportsBand": null,
           "admittingObservers": [],
-          "searchedThrough": "2026-10-25",
+          "searchedThrough": "2026-11-05",
           "newReportWindow": {
             "start": "2026-10-02",
-            "end": "2026-10-25",
+            "end": "2026-11-01",
             "status": "nonempty"
           },
           "bandMoved": [],
@@ -84041,10 +84344,10 @@
             6.396
           ],
           "admittingObservers": [],
-          "searchedThrough": "2026-10-31",
+          "searchedThrough": "2026-11-05",
           "newReportWindow": {
             "start": "2026-10-02",
-            "end": "2026-10-31",
+            "end": "2026-11-01",
             "status": "nonempty"
           },
           "bandMoved": [],
@@ -84188,10 +84491,10 @@
           ],
           "allReportsBand": null,
           "admittingObservers": [],
-          "searchedThrough": "2026-10-25",
+          "searchedThrough": "2026-11-05",
           "newReportWindow": {
             "start": "2026-10-02",
-            "end": "2026-10-25",
+            "end": "2026-11-01",
             "status": "nonempty"
           },
           "bandMoved": [],
@@ -84238,10 +84541,10 @@
           ],
           "allReportsBand": null,
           "admittingObservers": [],
-          "searchedThrough": "2026-10-25",
+          "searchedThrough": "2026-11-05",
           "newReportWindow": {
             "start": "2026-10-02",
-            "end": "2026-10-25",
+            "end": "2026-11-01",
             "status": "nonempty"
           },
           "bandMoved": [],
@@ -84422,10 +84725,10 @@
           ],
           "allReportsBand": null,
           "admittingObservers": [],
-          "searchedThrough": "2026-10-25",
+          "searchedThrough": "2026-11-05",
           "newReportWindow": {
             "start": "2026-10-02",
-            "end": "2026-10-25",
+            "end": "2026-11-01",
             "status": "nonempty"
           },
           "bandMoved": [],
@@ -84472,10 +84775,10 @@
           ],
           "allReportsBand": null,
           "admittingObservers": [],
-          "searchedThrough": "2026-10-25",
+          "searchedThrough": "2026-11-05",
           "newReportWindow": {
             "start": "2026-10-02",
-            "end": "2026-10-25",
+            "end": "2026-11-01",
             "status": "nonempty"
           },
           "bandMoved": [],
@@ -84530,10 +84833,10 @@
             5.52
           ],
           "admittingObservers": [],
-          "searchedThrough": "2026-10-25",
+          "searchedThrough": "2026-11-05",
           "newReportWindow": {
             "start": "2026-10-02",
-            "end": "2026-10-25",
+            "end": "2026-11-01",
             "status": "nonempty"
           },
           "bandMoved": [],
@@ -84588,10 +84891,10 @@
             126.0
           ],
           "admittingObservers": [],
-          "searchedThrough": "2026-10-25",
+          "searchedThrough": "2026-11-05",
           "newReportWindow": {
             "start": "2026-10-02",
-            "end": "2026-10-25",
+            "end": "2026-11-01",
             "status": "nonempty"
           },
           "bandMoved": [],
@@ -84604,7 +84907,7 @@
         "uncovered": []
       },
       "planResearchClocks": {
-        "threeStage": "2026-10-25",
+        "threeStage": "2026-11-05",
         "freshnessCheck": null
       },
       "bugHuntScale": {
@@ -126571,8 +126874,8 @@
           {
             "key": "planRoutes",
             "artifact": "data/plan_cost_routes.json",
-            "sha256": "4f357d22b759b06914c3900ab706b6b25d0ab6f05b9de9235b9a1073c9ceca6c",
-            "capturedAt": "2026-10-31",
+            "sha256": "6eeb8ffe3733a2b802060dc36f710e07246181e13d04a7b3f2e97f2bdb0d8963",
+            "capturedAt": "2026-11-05",
             "extractor": "editorial Plan evidence registry"
           },
           {
@@ -126606,7 +126909,7 @@
           {
             "key": "planReports",
             "artifact": "data/plan_reports.json",
-            "sha256": "daf15c46138cd5fcabe580224b2228ddbffb53d281316bb5ba1f3f3fcfdae282",
+            "sha256": "afc3ab6b973825c0cb08c1f96f7b73879af7ab4ebb720880aa1563f831c93de5",
             "capturedAt": "2026-10-28",
             "extractor": "editorial table of every O71 user report with the facts E270 needs; the build derives admission from it (O81)"
           },
@@ -126660,7 +126963,7 @@
             "extractor": "valuerank.value_v3 freeze"
           }
         ],
-        "bundleHash": "90611a124694de0138328263dfca6c4a8efc08f2139d64c353571a8c7e2fefab",
+        "bundleHash": "354a920d489414198b8818de480af18480a1534875518b9866f54d92929a0028",
         "rebuild": "every published output is rebuilt from these artifacts at the pinned publication clock (npm run verify:docs), never from live pages"
       },
       "track": {

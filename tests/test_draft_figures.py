@@ -167,6 +167,8 @@ def test_registry_facts_are_figures_and_typed_values_fail_even_in_dated_sentence
 
     manifest = f.named_figures(SCORES)
     assert manifest["evidence.windowStart"] < manifest["evidence.windowEnd"] and int(manifest["evidence.searchGapDays"]) >= 0
+    # O185: the search may follow the release cutoff; the gap is then counted "after" it.
+    assert manifest["evidence.searchGapSide"] in ("before", "after")
     assert manifest["semianalysis.lastCurrent"] < manifest["semianalysis.supersededFrom"] < manifest["semianalysis.expiredFrom"] < manifest["semianalysis.demotedFrom"]
     assert manifest["aa.vertices"] == str(len(json.loads((DATA / "aa_frontier_capture.json").read_text())["frontier"]))
     text = "\n".join([
@@ -189,6 +191,8 @@ def test_registry_figures_name_changes_and_refuse_two_semianalysis_dates():
     plan = json.loads((DATA / "plan_cost_routes.json").read_text())
     capture["comparison_to_previous_capture"].update(added=["A (max)"], removed=["B (low)"])
     assert f.registry_figures(capture, plan, "2026-10-23")["aa.vertexChanges"] == "A (max) entered and B (low) left"
+    # O185: the gap is counted from the release cutoff, "after" it when the search followed the cutoff.
+    assert (f.registry_figures(capture, plan, "2026-10-23")["evidence.searchGapSide"], f.registry_figures(capture, plan, "2026-12-01")["evidence.searchGapSide"]) == ("after", "before")
     plan["routes"] = [dict(route, sourcePublicationDate="2026-01-01") if i == 0 and route.get("sourceEvidenceId") == "semianalysis" else route
                       for i, route in enumerate(sorted(plan["routes"], key=lambda route: route.get("sourceEvidenceId") != "semianalysis"))]
     plan["routes"][0]["valueMultipleKind"] = "controlled_account_workload_projection"

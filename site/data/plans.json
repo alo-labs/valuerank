@@ -1,5 +1,5 @@
 {
-  "asOf": "2026-10-25",
+  "asOf": "2026-11-05",
   "policy": {
     "announcedChanges": {
       "rule": "Provider announcements of changes that take effect after the release cutoff: recorded when seen, flag nothing until in force, then recorded as a typed change (O77, O99) at the release at which they take effect (reviewer 78).",
@@ -36,7 +36,7 @@
         "source": "Anthropic announcement, 2026-10-30"
       }
     },
-    "searchCutoff": "2026-10-25",
+    "searchCutoff": "2026-11-05",
     "searchLog": [
       {
         "searchedOn": "2026-10-08",
@@ -187,6 +187,71 @@
             "queries": "listed in research-plan.md; sources in sources.jsonl",
             "reached": "Reddit via arctic-shift; the locdd.com LINUX DO mirror; Bluesky via api.bsky.app; X posts via Yahoo Japan real-time search; Hacker News; GitHub issue pages; OpenAI forum; V2EX; Google changelogs",
             "unreachable": "linux.do directly; X directly; YouTube video pages; Zhihu; Xiaohongshu; Bilibili; note.com"
+          }
+        ]
+      },
+      {
+        "searchedOn": "2026-11-05",
+        "scope": "Owner decision O185: every cohort provider's first-party plans (Anthropic Claude Pro/Max 5x/Max 20x; OpenAI ChatGPT Plus/Pro in Codex; Google AI Pro/Ultra in Antigravity; Xiaomi MiMo Token Plan; Kimi membership; MiniMax M Plan; DeepSeek sells no first-party plan) for every cohort model, new and updated end-user reports since 2026-10-19, in three stages: plain web search, Claude's Deep Research, Silver Bullet's Deep Research (deep mode)",
+        "record": "research/2026-11-05-plan-allowances/",
+        "reached": "web search; Hacker News (Algolia); Reddit via Arctic Shift; GitHub issue pages; Google AI developer forum; OpenAI community forum; LINUX DO topic 3071240 and the locdd.com mirror; Bluesky; X post JSON via fxtwitter; aiplans.dev ledgers",
+        "unreachable": "linux.do search and latest (Cloudflare challenge, not automated); X search; GitHub search APIs; Zhihu; YouTube video pages",
+        "qualifyingNewReports": 2,
+        "o185Result": "no model x tier newly passes O11; two earlier-recorded cells are unchanged. New in-window records: jamie950315 (Google AI Ultra, Argon, weekly, $199.9-200.1) and Yiji_Kong (Google AI Ultra, Argon, five-hour, $49.2-50.0), each with a hashed archive copy (O165). Corrections: Oleg-125 $3.58-3.69 (67% consumed, not remaining), choulei-legacy URL, moondrinker-allegretto merged into Astralyn. Reports dated after the 2026-11-01 cutoff (douflou, ricardoraposo, x2v/aiplans Pro, smaug42, sergiokapone) are queued for the next release.",
+        "providers": [
+          "Anthropic",
+          "OpenAI",
+          "Google",
+          "Xiaomi",
+          "Kimi",
+          "MiniMax",
+          "DeepSeek"
+        ],
+        "models": [
+          "Claude Opus 5.5",
+          "Claude Sonnet 5.5",
+          "Claude Haiku 5.5",
+          "GPT-6.1 Sol",
+          "GPT-6 Astra",
+          "GPT-6 Luna",
+          "GPT-5.6 Luna",
+          "Gemini 4 Argon",
+          "Gemini 3.8 Flash",
+          "MiMo-V2.6-Pro",
+          "MiMo-V2.6-Flash",
+          "Kimi K3.1 Pro",
+          "MiniMax-M3.1-Flash",
+          "DeepSeek V4.1 Flash 1017",
+          "GPT-6.1 Terra",
+          "Gemini 4 Carbon"
+        ],
+        "stages": [
+          {
+            "stage": "plain web search",
+            "method": "three provider agents (WebSearch, WebFetch, curl, Hacker News Algolia, Reddit mirrors)",
+            "record": "research/2026-11-05-plan-allowances/stage1-*.md",
+            "outcome": "no model x tier newly passes O11",
+            "queries": "listed in each stage1 file",
+            "reached": "web search; Hacker News; Reddit mirrors; GitHub issue pages; Google AI forum",
+            "unreachable": "reddit.com directly; X; GitHub search APIs; linux.do search"
+          },
+          {
+            "stage": "Claude's Deep Research",
+            "method": "anthropic-skills deep-research: three researchers and a report writer",
+            "record": "research/2026-11-05-plan-allowances/stage2/research_notes/ and stage2/reports/",
+            "outcome": "no model x tier newly passes O11; corrections to five records and two new Google records",
+            "queries": "listed in each research note",
+            "reached": "as stage 1, plus LINUX DO topic 3071240 via the locdd.com mirror",
+            "unreachable": "linux.do search (403); X"
+          },
+          {
+            "stage": "Silver Bullet's Deep Research",
+            "method": "silver-deep-research, deep mode, all nine phases and validations; run degraded: no search-cli (host search and fetch instead) and a single retriever",
+            "record": "research/2026-11-05-plan-allowances/stage3-sb-deep-research/",
+            "outcome": "no model x tier newly passes O11; confirms the corrections; hashed raw copies in raw/MANIFEST.sha256",
+            "queries": "listed in research-plan.md; sources in sources.jsonl",
+            "reached": "host search and fetch; Arctic Shift; Hacker News; GitHub issue pages via fetch; Google AI forum; aiplans.dev; LINUX DO topic 3071240 directly",
+            "unreachable": "linux.do search and latest (Cloudflare challenge); X search; GitHub REST for openai/codex and anthropics/claude-code; Zhihu; YouTube"
           }
         ]
       }
