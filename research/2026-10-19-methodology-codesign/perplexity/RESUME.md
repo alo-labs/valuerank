@@ -67,7 +67,8 @@ two consecutive clean rounds and the panel ends when every model says NO FURTHER
 | 129 | Gemini 3.8 Flash (six sections) | r209 | findings (a High that O86 allows by design, repeats and design additions; two of six sections clean), one wording folded into r210; Gemini's clean run restarts |
 | 130 | Claude Sonnet 5.5 (whole draft) | r210 | findings (one Medium: E353 states the Beta draw's variance), folded into r211 as text; Sonnet's clean run restarts |
 | 131 | Kimi K3 (four sections) | r211 | findings (one Medium: E354 states the LiveBench dependence envelope; three of four sections clean), folded into r212; Kimi's clean run restarts |
-| 132 | GLM 5.3 (eight two-part sections) | r212 | next |
+| 132 | GLM 5.3 (eight two-part sections) | r212 | findings (a High and Mediums, two wordings folded into r213; four of eight sections clean); GLM's clean run restarts |
+| 133 | Grok 4.7 (whole draft) | r213 | next |
 
 To continue:
 
