@@ -908,7 +908,7 @@ Each routed row's amount with what it measures, how it was derived and which obj
 
 ## Evidence bundle
 
-Bundle hash `e740c4a07c28cb910de46f4250593faeb492cb3da7717ea4b28fd13e6eab0d1a`: every published output is rebuilt from these artifacts at the pinned publication clock (npm run verify:docs), never from live pages.
+Bundle hash `cb50fd3b7c63133022afdbbb8a01a6434bd126818d3cb6c613166087434a1f5e`: every published output is rebuilt from these artifacts at the pinned publication clock (npm run verify:docs), never from live pages.
 
 | Key | Artifact | SHA-256 | Captured | Extractor |
 |---|---|---|---|---|
@@ -932,9 +932,9 @@ Bundle hash `e740c4a07c28cb910de46f4250593faeb492cb3da7717ea4b28fd13e6eab0d1a`: 
 | fallbackPrices | `data/fallback_prices.json` | `3ab915c9d8ad8a357d7dbcc326dd39a2af64e89b5ef312477d68ea3f3cf50ea9` | 2026-11-01T11:59:15Z | editorial capture of the list API prices of AA's named fallback models (O158 sensitivity only) |
 | sourceRereads | `data/source_rereads.json` | `41cb7583ad871a2972ce4e83684a60d60be5ad9bd71f2b096e61c56e435391cd` | 2026-11-01T08:39:42Z | editorial record of the O68 re-reads, each 'unchanged' result verified against the re-read file |
 | aaFootnotes | `data/aa/aa_footnote_register.json` | `ccc742e1cca305fa88b80b48d7f46e89392cee8225353f8daa88ec5e174d59a4` | 2026-11-01T05:53:05Z | editorial register of every AA note the captures record (the chart's footnotes, and from O103 the model pages, Coding Agent Index and cost charts), by exact text, each classified once (O100, O103) |
-| anchors | `data/v3_frozen.json` | `07800e6d054feaea7f163032de961a2a25b27eb57d742975c8593ad442fc23b6` | 2026-11-01 | valuerank.value_v3 freeze |
-| anchors:aicd | `data/v3_frozen_aicd.json` | `7b0b86aab3df290bc8c90509c0ce00b86e68be039ffb0cbf38bc4398c5570ceb` | 2026-11-01 | valuerank.value_v3 freeze |
-| anchors:common | `data/v3_frozen_common.json` | `89edcb4e700586169a77a0e0e8eccdcf57fee4cf5b68f9f24296a079556f96b3` | 2026-11-01 | valuerank.value_v3 freeze |
+| anchors | `data/v3_frozen.json` | `ced71230c8bc2bceb4548b7b3f256d4901e3614471a8ae8620a3a8e9c09448ad` | 2026-11-01 | valuerank.value_v3 freeze |
+| anchors:aicd | `data/v3_frozen_aicd.json` | `3e0b35f5908e295d73085a610dd1aa508aee77ff7765f49c95f02a9b10cbd3dc` | 2026-11-01 | valuerank.value_v3 freeze |
+| anchors:common | `data/v3_frozen_common.json` | `156669ca9bc198b680941f5127a7185c0b4f5166735524d8803d6b23644ac3e1` | 2026-11-01 | valuerank.value_v3 freeze |
 
 
 ## AA intelligence and total-cost comparison

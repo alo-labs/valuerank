@@ -480,13 +480,15 @@ def test_policy_cohort_bar_is_a_sensitivity_over_frontier_families():
     assert v.policy_cohort_bar(result, frozen)["api"] == {"status": "unevaluable"}
 
 
-def test_the_bar_ladder_freezes_three_levels_with_the_median_first():
+def test_the_bar_ladder_freezes_three_levels_with_the_median_first(monkeypatch):
     """O34: the lower quartile, median and upper quartile of the population, median first (the headline bar)."""
 
+    monkeypatch.setattr(v, "quality_sd", lambda row: 1.5)  # E352: the setter's SD freezes with the bar
     rows = [{"id": f"r{index}", "summary": SimpleNamespace(displayed=value, provisional=False)} for index, value in enumerate((10.0, 20.0, 30.0, 40.0, 50.0))]
     population, bars = v.bar_levels({"rows": rows})
     assert [bar["id"] for bar in bars] == [v.BAR_ID, "bar:lower-quartile-quality", "bar:upper-quartile-quality"]
     assert [bar["levelConfiguration"] for bar in bars] == ["r2", "r1", "r3"] and population == ["r0", "r1", "r2", "r3", "r4"]
+    assert [bar["levelSd"] for bar in bars] == [1.5, 1.5, 1.5]
 
 
 def test_freeze_with_fewer_than_two_population_rows_pins_no_bar():
@@ -1548,9 +1550,10 @@ def test_displayed_cheapest_reads_the_headline_scale_with_ties_listed():
     assert high == {"bar": "high", "level": 101.0, "qualifierN": 0, "costUsd": None, "cheapest": [], "uncheckedCheaperSiblings": {}, "uncheckedCheaperSiblingsBasis": v.SIBLING_BASIS, "noise": None}
 
 
-def test_bar_currency_flags_a_headline_bar_outside_the_current_interquartile_range():
+def test_bar_currency_flags_a_headline_bar_outside_the_current_interquartile_range(monkeypatch):
     """E207: reach of each frozen bar in the current population, and an informational flag (no score changes)."""
 
+    monkeypatch.setattr(v, "quality_sd", lambda row: 1.0)
     population = {"rows": [{"id": f"r{i}", "summary": SimpleNamespace(displayed=10.0 * i, provisional=False)} for i in range(5)]}
     _ids, bars = v.bar_levels(population)
     frozen = {"barReferences": bars}
@@ -1675,9 +1678,10 @@ def test_required_missing_scores_say_what_would_settle_each_open_row():
     assert v.required_domain(high) == v.required_domain(low) == v.REQUIRED_OUT_OF_DOMAIN and low < 0.0 < 100.0 < high
 
 
-def test_the_quartile_bars_need_four_configurations():
+def test_the_quartile_bars_need_four_configurations(monkeypatch):
     """E215: with fewer than four, the quartile positions coincide with the headline's, so only the headline is pinned."""
 
+    monkeypatch.setattr(v, "quality_sd", lambda row: 1.0)
     def ladder(n):
         return [bar["id"] for bar in v.bar_levels({"rows": [{"id": f"r{i}", "summary": SimpleNamespace(displayed=float(i), provisional=False)} for i in range(n)]})[1]]
 
@@ -1980,6 +1984,23 @@ def test_noise_margin_companion_and_quality_margin():
     entry = v.displayed_cheapest(result, frozen, "api", margin)["bars"][0]
     assert entry["margin"]["level"] == pytest.approx(entry["level"] + margin)
     assert "margin" not in v.displayed_cheapest(result, frozen, "api")["bars"][0]
+
+
+def test_the_screen_reads_the_setters_frozen_noise_not_its_current_noise():
+    """E352 (reviewers 127, 128): the pointwise screen takes the bar setter's SD from the bar record, frozen with the level."""
+
+    result, frozen = scored()
+    bars = frozen["barReferences"]
+    pinned = {**frozen, "barReferences": [{**bar, "levelSd": 1000.0} for bar in bars]}
+    bare = {**frozen, "barReferences": [{key: value for key, value in bar.items() if key != "levelSd"} for bar in bars]}
+    gone = {**bare, "barReferences": [{**bar, "levelConfiguration": "left"} for bar in bare["barReferences"]]}
+    frozen_sd = [bar["noise"] for bar in v.displayed_cheapest(result, pinned, "api")["bars"]]
+    current_sd = [bar["noise"] for bar in v.displayed_cheapest(result, bare, "api")["bars"]]
+    unknown = [bar["noise"] for bar in v.displayed_cheapest(result, gone, "api")["bars"]]
+    # A frozen SD of 1000 swamps the denominator, so every non-zero Δ shrinks against the one read from the setter's current evidence.
+    assert all(abs(f["delta"]) < abs(c["delta"]) for f, c in zip(frozen_sd, current_sd) if f and c and c["delta"])
+    assert [item and item["status"] for item in unknown] == [None if item is None else v.NOISE_SETTER_GONE for item in current_sd]
+    assert [item and item["setter"] for item in frozen_sd] == [item and item["setter"] for item in current_sd]
 
 
 def test_plan_rows_rank_every_plan_and_share_their_configuration():

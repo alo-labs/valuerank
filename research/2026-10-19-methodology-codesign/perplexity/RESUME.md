@@ -63,7 +63,8 @@ two consecutive clean rounds and the panel ends when every model says NO FURTHER
 | 125 | Kimi K3 (four sections) | r205 | findings (one real gap in O192, E350; three of four sections clean), folded into r206; Kimi's clean run restarts |
 | 126 | GLM 5.3 (eight two-part sections) | r206 | findings (Mediums, three wording fixes into r207; two of eight sections clean); GLM's clean run restarts |
 | 127 | Grok 4.7 (whole draft) | r207 | findings (one Medium: E351 a departed setter reads rounding-stable only), folded into r208; Grok's clean run restarts |
-| 128 | GPT-6.1 Sol (whole draft) | r208 | next |
+| 128 | GPT-6.1 Sol (whole draft) | r208 | findings (one Medium: E352 freezes the bar setter's SD with the bar), folded into r209; Sol's clean run restarts |
+| 129 | Gemini 3.8 Flash (six sections) | r209 | next |
 
 To continue:
 

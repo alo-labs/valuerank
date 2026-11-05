@@ -1590,7 +1590,9 @@ def bar_levels(assembled: dict) -> tuple[list[str], list[dict]]:
         if quarter != 2 and len(ordered) < MIN_LADDER_POPULATION:
             continue
         row = ordered[(len(ordered) - 1) * quarter // 4]
-        bars.append({"id": bar_id, "level": row["summary"].displayed, "levelConfiguration": row["id"], "rule": rule})
+        # E352 (reviewers 127, 128): the setter's analytic quality SD is frozen with the bar, so the pointwise screen pairs the frozen
+        # level with the noise of the observation that set it.
+        bars.append({"id": bar_id, "level": row["summary"].displayed, "levelConfiguration": row["id"], "levelSd": quality_sd(row), "rule": rule})
     return [row["id"] for row in ordered], bars
 
 
@@ -1927,7 +1929,7 @@ def displayed_cheapest(assembled: dict, frozen: dict, basis: str, margin: float 
         qualifying, low, rows_at = cheapest(bar["level"])
         entry = {"bar": bar["id"], "level": bar["level"], "qualifierN": len(qualifying), "costUsd": low, "cheapest": rows_at}
         setter = every.get(bar.get("levelConfiguration"))
-        entry["noise"] = noise_companion(rows_at[0] if rows_at else None, bar["level"], quality_sd(setter) if setter else None, candidates,
+        entry["noise"] = noise_companion(rows_at[0] if rows_at else None, bar["level"], bar["levelSd"] if bar.get("levelSd") is not None else (quality_sd(setter) if setter else None), candidates,
                                          bar.get("levelConfiguration"))
         # O143 (2026-11-01): the headline answer names the cheaper same-family efforts AA plots that this ranking could not
         # evaluate (E201c), so a reader sees where the leading ranking cannot look.

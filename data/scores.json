@@ -21802,6 +21802,7 @@
               "id": "bar:median-quality",
               "level": 61.40573449182924,
               "levelConfiguration": "gemini-4-argon",
+              "levelSd": 1.2564932674736984,
               "rule": "lower-median displayed quality of the non-provisional cohort configurations at freeze (E192; headline bar)"
             },
             "status": "certified",
@@ -21882,6 +21883,7 @@
               "id": "bar:lower-quartile-quality",
               "level": 49.44097256455152,
               "levelConfiguration": "claude-haiku-5-5-max",
+              "levelSd": 1.291238343823337,
               "rule": "lower-quartile displayed quality of the non-provisional cohort configurations at freeze (O34)"
             },
             "status": "certified",
@@ -21957,6 +21959,7 @@
               "id": "bar:upper-quartile-quality",
               "level": 67.49923796051613,
               "levelConfiguration": "gpt-6.1-sol",
+              "levelSd": 1.3704934553763983,
               "rule": "upper-quartile displayed quality of the non-provisional cohort configurations at freeze (O34)"
             },
             "status": "certified",
@@ -23122,10 +23125,10 @@
               "gpt-6.1-sol@chatgpt-pro-500"
             ],
             "noise": {
-              "status": "rounding-stable only: the bar's setter has left the ranking, so its noise cannot be read and the pointwise margin is not tested (O171, E351)",
-              "delta": null,
+              "status": "screen passed: the answer clears the bar by the pointwise 95% noise margin and every cheaper row falls below it by the same margin (O171; separate comparisons sharing the bar setter, not a simultaneous confidence statement, E337)",
+              "delta": 3.277295763632903,
               "contestedBy": [],
-              "cheaperCompared": 0,
+              "cheaperCompared": 7,
               "setter": "gemini-4-argon"
             },
             "uncheckedCheaperSiblings": {
@@ -23155,10 +23158,10 @@
               "claude-haiku-5-5-max@claude-pro"
             ],
             "noise": {
-              "status": "rounding-stable only: the bar's setter has left the ranking, so its noise cannot be read and the pointwise margin is not tested (O171, E351)",
-              "delta": null,
+              "status": "rounding-stable only: the answer does not clear the bar by the pointwise 95% noise margin (O171)",
+              "delta": 0.0,
               "contestedBy": [],
-              "cheaperCompared": 0,
+              "cheaperCompared": 3,
               "setter": "claude-haiku-5-5-max"
             },
             "uncheckedCheaperSiblings": {
@@ -23188,10 +23191,10 @@
               "gpt-6.1-sol@chatgpt-pro-500"
             ],
             "noise": {
-              "status": "rounding-stable only: the bar's setter has left the ranking, so its noise cannot be read and the pointwise margin is not tested (O171, E351)",
-              "delta": null,
+              "status": "rounding-stable only: the answer does not clear the bar by the pointwise 95% noise margin (O171)",
+              "delta": 0.0,
               "contestedBy": [],
-              "cheaperCompared": 0,
+              "cheaperCompared": 7,
               "setter": "gpt-6.1-sol"
             },
             "uncheckedCheaperSiblings": {
@@ -23495,6 +23498,7 @@
                 "id": "bar:median-quality",
                 "level": 61.40573449182924,
                 "levelConfiguration": "gemini-4-argon",
+                "levelSd": 1.2564932674736984,
                 "rule": "lower-median displayed quality of the non-provisional cohort configurations at freeze (E192; headline bar)"
               },
               "status": "certified",
@@ -23582,6 +23586,7 @@
                 "id": "bar:lower-quartile-quality",
                 "level": 49.44097256455152,
                 "levelConfiguration": "claude-haiku-5-5-max",
+                "levelSd": 1.291238343823337,
                 "rule": "lower-quartile displayed quality of the non-provisional cohort configurations at freeze (O34)"
               },
               "status": "certified",
@@ -23664,6 +23669,7 @@
                 "id": "bar:upper-quartile-quality",
                 "level": 67.49923796051613,
                 "levelConfiguration": "gpt-6.1-sol",
+                "levelSd": 1.3704934553763983,
                 "rule": "upper-quartile displayed quality of the non-provisional cohort configurations at freeze (O34)"
               },
               "status": "certified",
@@ -28256,6 +28262,7 @@
             "id": "bar:policy-cohort-median",
             "level": 67.49923796051613,
             "levelConfiguration": "gpt-6.1-sol",
+            "levelSd": 1.3704934553763983,
             "rule": "lower-median displayed quality of the non-provisional frontier and near-frontier configurations (E199)"
           },
           "api": {
@@ -28263,6 +28270,7 @@
               "id": "bar:policy-cohort-median",
               "level": 67.49923796051613,
               "levelConfiguration": "gpt-6.1-sol",
+              "levelSd": 1.3704934553763983,
               "rule": "lower-median displayed quality of the non-provisional frontier and near-frontier configurations (E199)"
             },
             "status": "certified",
@@ -29691,26 +29699,26 @@
         {
           "key": "anchors",
           "artifact": "data/v3_frozen.json",
-          "sha256": "07800e6d054feaea7f163032de961a2a25b27eb57d742975c8593ad442fc23b6",
+          "sha256": "ced71230c8bc2bceb4548b7b3f256d4901e3614471a8ae8620a3a8e9c09448ad",
           "capturedAt": "2026-11-01",
           "extractor": "valuerank.value_v3 freeze"
         },
         {
           "key": "anchors:aicd",
           "artifact": "data/v3_frozen_aicd.json",
-          "sha256": "7b0b86aab3df290bc8c90509c0ce00b86e68be039ffb0cbf38bc4398c5570ceb",
+          "sha256": "3e0b35f5908e295d73085a610dd1aa508aee77ff7765f49c95f02a9b10cbd3dc",
           "capturedAt": "2026-11-01",
           "extractor": "valuerank.value_v3 freeze"
         },
         {
           "key": "anchors:common",
           "artifact": "data/v3_frozen_common.json",
-          "sha256": "89edcb4e700586169a77a0e0e8eccdcf57fee4cf5b68f9f24296a079556f96b3",
+          "sha256": "156669ca9bc198b680941f5127a7185c0b4f5166735524d8803d6b23644ac3e1",
           "capturedAt": "2026-11-01",
           "extractor": "valuerank.value_v3 freeze"
         }
       ],
-      "bundleHash": "e740c4a07c28cb910de46f4250593faeb492cb3da7717ea4b28fd13e6eab0d1a",
+      "bundleHash": "cb50fd3b7c63133022afdbbb8a01a6434bd126818d3cb6c613166087434a1f5e",
       "rebuild": "every published output is rebuilt from these artifacts at the pinned publication clock (npm run verify:docs), never from live pages"
     },
     "track": {
@@ -58104,6 +58112,7 @@
                 "id": "bar:median-quality",
                 "level": 47.15189547393456,
                 "levelConfiguration": "gpt-6.1-terra-high",
+                "levelSd": 2.308755164477721,
                 "rule": "lower-median displayed quality of the non-provisional cohort configurations at freeze (E192; headline bar)"
               },
               "status": "certified",
@@ -58267,6 +58276,7 @@
                 "id": "bar:lower-quartile-quality",
                 "level": 37.513786014625744,
                 "levelConfiguration": "claude-haiku-5-5-high",
+                "levelSd": 2.053933102093826,
                 "rule": "lower-quartile displayed quality of the non-provisional cohort configurations at freeze (O34)"
               },
               "status": "certified",
@@ -58425,6 +58435,7 @@
                 "id": "bar:upper-quartile-quality",
                 "level": 55.52095121573222,
                 "levelConfiguration": "gemini-4-argon",
+                "levelSd": 2.2237819895431348,
                 "rule": "upper-quartile displayed quality of the non-provisional cohort configurations at freeze (O34)"
               },
               "status": "certified",
@@ -59286,10 +59297,19 @@
                 "gpt-6.1-terra-high@chatgpt-pro-500"
               ],
               "noise": {
-                "status": "rounding-stable only: the bar's setter has left the ranking, so its noise cannot be read and the pointwise margin is not tested (O171, E351)",
-                "delta": null,
-                "contestedBy": [],
-                "cheaperCompared": 0,
+                "status": "rounding-stable only: the answer does not clear the bar by the pointwise 95% noise margin (O171)",
+                "delta": 0.0,
+                "contestedBy": [
+                  "gpt-6.1-sol-low@chatgpt-plus",
+                  "gpt-6.1-sol-low@chatgpt-pro-100",
+                  "gpt-6.1-sol-low@chatgpt-pro-200",
+                  "gpt-6.1-sol-low@chatgpt-pro-500",
+                  "gpt-6.1-terra-medium@chatgpt-plus",
+                  "gpt-6.1-terra-medium@chatgpt-pro-100",
+                  "gpt-6.1-terra-medium@chatgpt-pro-200",
+                  "gpt-6.1-terra-medium@chatgpt-pro-500"
+                ],
+                "cheaperCompared": 30,
                 "setter": "gpt-6.1-terra-high"
               },
               "uncheckedCheaperSiblings": {
@@ -59317,10 +59337,14 @@
                 "claude-haiku-5-5-high@claude-pro"
               ],
               "noise": {
-                "status": "rounding-stable only: the bar's setter has left the ranking, so its noise cannot be read and the pointwise margin is not tested (O171, E351)",
-                "delta": null,
-                "contestedBy": [],
-                "cheaperCompared": 0,
+                "status": "rounding-stable only: the answer does not clear the bar by the pointwise 95% noise margin (O171)",
+                "delta": 0.0,
+                "contestedBy": [
+                  "claude-haiku-5-5-medium@claude-max-20x",
+                  "claude-haiku-5-5-medium@claude-max-5x",
+                  "claude-haiku-5-5-medium@claude-pro"
+                ],
+                "cheaperCompared": 3,
                 "setter": "claude-haiku-5-5-high"
               },
               "uncheckedCheaperSiblings": {
@@ -59347,10 +59371,22 @@
                 "claude-opus-5-5-high@claude-pro"
               ],
               "noise": {
-                "status": "rounding-stable only: the bar's setter has left the ranking, so its noise cannot be read and the pointwise margin is not tested (O171, E351)",
-                "delta": null,
-                "contestedBy": [],
-                "cheaperCompared": 0,
+                "status": "rounding-stable only: the answer does not clear the bar by the pointwise 95% noise margin (O171)",
+                "delta": 0.5956902796572902,
+                "contestedBy": [
+                  "claude-opus-5-5-medium@claude-max-20x",
+                  "claude-opus-5-5-medium@claude-max-5x",
+                  "claude-opus-5-5-medium@claude-pro",
+                  "gpt-6.1-sol-medium@chatgpt-plus",
+                  "gpt-6.1-sol-medium@chatgpt-pro-100",
+                  "gpt-6.1-sol-medium@chatgpt-pro-200",
+                  "gpt-6.1-sol-medium@chatgpt-pro-500",
+                  "gpt-6.1-terra-xhigh@chatgpt-plus",
+                  "gpt-6.1-terra-xhigh@chatgpt-pro-100",
+                  "gpt-6.1-terra-xhigh@chatgpt-pro-200",
+                  "gpt-6.1-terra-xhigh@chatgpt-pro-500"
+                ],
+                "cheaperCompared": 45,
                 "setter": "gemini-4-argon"
               },
               "uncheckedCheaperSiblings": {
@@ -65926,6 +65962,7 @@
               "id": "bar:policy-cohort-median",
               "level": 45.09389818547367,
               "levelConfiguration": "gpt-6.1-sol-low",
+              "levelSd": 2.0973684670227937,
               "rule": "lower-median displayed quality of the non-provisional frontier and near-frontier configurations (E199)"
             },
             "api": {
@@ -65933,6 +65970,7 @@
                 "id": "bar:policy-cohort-median",
                 "level": 45.09389818547367,
                 "levelConfiguration": "gpt-6.1-sol-low",
+                "levelSd": 2.0973684670227937,
                 "rule": "lower-median displayed quality of the non-provisional frontier and near-frontier configurations (E199)"
               },
               "status": "certified",
@@ -67994,26 +68032,26 @@
           {
             "key": "anchors",
             "artifact": "data/v3_frozen.json",
-            "sha256": "07800e6d054feaea7f163032de961a2a25b27eb57d742975c8593ad442fc23b6",
+            "sha256": "ced71230c8bc2bceb4548b7b3f256d4901e3614471a8ae8620a3a8e9c09448ad",
             "capturedAt": "2026-11-01",
             "extractor": "valuerank.value_v3 freeze"
           },
           {
             "key": "anchors:aicd",
             "artifact": "data/v3_frozen_aicd.json",
-            "sha256": "7b0b86aab3df290bc8c90509c0ce00b86e68be039ffb0cbf38bc4398c5570ceb",
+            "sha256": "3e0b35f5908e295d73085a610dd1aa508aee77ff7765f49c95f02a9b10cbd3dc",
             "capturedAt": "2026-11-01",
             "extractor": "valuerank.value_v3 freeze"
           },
           {
             "key": "anchors:common",
             "artifact": "data/v3_frozen_common.json",
-            "sha256": "89edcb4e700586169a77a0e0e8eccdcf57fee4cf5b68f9f24296a079556f96b3",
+            "sha256": "156669ca9bc198b680941f5127a7185c0b4f5166735524d8803d6b23644ac3e1",
             "capturedAt": "2026-11-01",
             "extractor": "valuerank.value_v3 freeze"
           }
         ],
-        "bundleHash": "e740c4a07c28cb910de46f4250593faeb492cb3da7717ea4b28fd13e6eab0d1a",
+        "bundleHash": "cb50fd3b7c63133022afdbbb8a01a6434bd126818d3cb6c613166087434a1f5e",
         "rebuild": "every published output is rebuilt from these artifacts at the pinned publication clock (npm run verify:docs), never from live pages"
       },
       "track": {
@@ -114241,6 +114279,7 @@
                 "id": "bar:median-quality",
                 "level": 47.626385904263664,
                 "levelConfiguration": "deepseek-v4-1-flash-1017",
+                "levelSd": 1.8627804740054614,
                 "rule": "lower-median displayed quality of the non-provisional cohort configurations at freeze (E192; headline bar)"
               },
               "status": "certified",
@@ -114475,6 +114514,7 @@
                 "id": "bar:lower-quartile-quality",
                 "level": 33.84453503649605,
                 "levelConfiguration": "gpt-6-luna",
+                "levelSd": 1.5052238164912997,
                 "rule": "lower-quartile displayed quality of the non-provisional cohort configurations at freeze (O34)"
               },
               "status": "certified",
@@ -114713,6 +114753,7 @@
                 "id": "bar:upper-quartile-quality",
                 "level": 56.28237900363458,
                 "levelConfiguration": "gpt-6-astra-high",
+                "levelSd": 1.9244299176428794,
                 "rule": "upper-quartile displayed quality of the non-provisional cohort configurations at freeze (O34)"
               },
               "status": "certified",
@@ -115313,10 +115354,13 @@
                 "claude-opus-5-5-medium@claude-pro"
               ],
               "noise": {
-                "status": "rounding-stable only: the bar's setter has left the ranking, so its noise cannot be read and the pointwise margin is not tested (O171, E351)",
-                "delta": null,
-                "contestedBy": [],
-                "cheaperCompared": 0,
+                "status": "rounding-stable only: the answer does not clear the bar by the pointwise 95% noise margin (O171)",
+                "delta": 0.6738409808193739,
+                "contestedBy": [
+                  "gpt-6.1-terra-xhigh@chatgpt-pro-100",
+                  "gpt-6.1-terra-xhigh@chatgpt-pro-500"
+                ],
+                "cheaperCompared": 53,
                 "setter": "deepseek-v4-1-flash-1017"
               },
               "uncheckedCheaperSiblings": {
@@ -115343,10 +115387,14 @@
                 "claude-haiku-5-5@claude-pro"
               ],
               "noise": {
-                "status": "rounding-stable only: the bar's setter has left the ranking, so its noise cannot be read and the pointwise margin is not tested (O171, E351)",
-                "delta": null,
-                "contestedBy": [],
-                "cheaperCompared": 0,
+                "status": "rounding-stable only: the answer does not clear the bar by the pointwise 95% noise margin (O171)",
+                "delta": 0.9416319169420432,
+                "contestedBy": [
+                  "claude-haiku-5-5-high@claude-max-20x",
+                  "claude-haiku-5-5-high@claude-max-5x",
+                  "claude-haiku-5-5-high@claude-pro"
+                ],
+                "cheaperCompared": 13,
                 "setter": "gpt-6-luna"
               },
               "uncheckedCheaperSiblings": {},
@@ -115369,10 +115417,21 @@
                 "gpt-6.1-sol-xhigh@chatgpt-pro-500"
               ],
               "noise": {
-                "status": "rounding-stable only: the bar's setter has left the ranking, so its noise cannot be read and the pointwise margin is not tested (O171, E351)",
-                "delta": null,
-                "contestedBy": [],
-                "cheaperCompared": 0,
+                "status": "rounding-stable only: the answer does not clear the bar by the pointwise 95% noise margin (O171)",
+                "delta": 0.8246421646004557,
+                "contestedBy": [
+                  "claude-opus-5-5-high@claude-max-20x",
+                  "claude-opus-5-5-high@claude-max-5x",
+                  "claude-opus-5-5-high@claude-pro",
+                  "claude-sonnet-5-5-xhigh@claude-max-20x",
+                  "claude-sonnet-5-5-xhigh@claude-max-5x",
+                  "claude-sonnet-5-5-xhigh@claude-pro",
+                  "gpt-6.1-sol-high@chatgpt-plus",
+                  "gpt-6.1-sol-high@chatgpt-pro-100",
+                  "gpt-6.1-sol-high@chatgpt-pro-200",
+                  "gpt-6.1-sol-high@chatgpt-pro-500"
+                ],
+                "cheaperCompared": 72,
                 "setter": "gpt-6-astra-high"
               },
               "uncheckedCheaperSiblings": {},
@@ -124573,6 +124632,7 @@
               "id": "bar:policy-cohort-median",
               "level": 45.4377343487052,
               "levelConfiguration": "gpt-6.1-terra-xhigh",
+              "levelSd": 1.7700623136223066,
               "rule": "lower-median displayed quality of the non-provisional frontier and near-frontier configurations (E199)"
             },
             "api": {
@@ -124580,6 +124640,7 @@
                 "id": "bar:policy-cohort-median",
                 "level": 45.4377343487052,
                 "levelConfiguration": "gpt-6.1-terra-xhigh",
+                "levelSd": 1.7700623136223066,
                 "rule": "lower-median displayed quality of the non-provisional frontier and near-frontier configurations (E199)"
               },
               "status": "certified",
@@ -127746,26 +127807,26 @@
           {
             "key": "anchors",
             "artifact": "data/v3_frozen.json",
-            "sha256": "07800e6d054feaea7f163032de961a2a25b27eb57d742975c8593ad442fc23b6",
+            "sha256": "ced71230c8bc2bceb4548b7b3f256d4901e3614471a8ae8620a3a8e9c09448ad",
             "capturedAt": "2026-11-01",
             "extractor": "valuerank.value_v3 freeze"
           },
           {
             "key": "anchors:aicd",
             "artifact": "data/v3_frozen_aicd.json",
-            "sha256": "7b0b86aab3df290bc8c90509c0ce00b86e68be039ffb0cbf38bc4398c5570ceb",
+            "sha256": "3e0b35f5908e295d73085a610dd1aa508aee77ff7765f49c95f02a9b10cbd3dc",
             "capturedAt": "2026-11-01",
             "extractor": "valuerank.value_v3 freeze"
           },
           {
             "key": "anchors:common",
             "artifact": "data/v3_frozen_common.json",
-            "sha256": "89edcb4e700586169a77a0e0e8eccdcf57fee4cf5b68f9f24296a079556f96b3",
+            "sha256": "156669ca9bc198b680941f5127a7185c0b4f5166735524d8803d6b23644ac3e1",
             "capturedAt": "2026-11-01",
             "extractor": "valuerank.value_v3 freeze"
           }
         ],
-        "bundleHash": "e740c4a07c28cb910de46f4250593faeb492cb3da7717ea4b28fd13e6eab0d1a",
+        "bundleHash": "cb50fd3b7c63133022afdbbb8a01a6434bd126818d3cb6c613166087434a1f5e",
         "rebuild": "every published output is rebuilt from these artifacts at the pinned publication clock (npm run verify:docs), never from live pages"
       },
       "track": {

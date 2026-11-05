@@ -114,18 +114,21 @@
       "id": "bar:median-quality",
       "level": 47.15189547393456,
       "levelConfiguration": "gpt-6.1-terra-high",
+      "levelSd": 2.308755164477721,
       "rule": "lower-median displayed quality of the non-provisional cohort configurations at freeze (E192; headline bar)"
     },
     {
       "id": "bar:lower-quartile-quality",
       "level": 37.513786014625744,
       "levelConfiguration": "claude-haiku-5-5-high",
+      "levelSd": 2.053933102093826,
       "rule": "lower-quartile displayed quality of the non-provisional cohort configurations at freeze (O34)"
     },
     {
       "id": "bar:upper-quartile-quality",
       "level": 55.52095121573222,
       "levelConfiguration": "gemini-4-argon",
+      "levelSd": 2.2237819895431348,
       "rule": "upper-quartile displayed quality of the non-provisional cohort configurations at freeze (O34)"
     }
   ],
