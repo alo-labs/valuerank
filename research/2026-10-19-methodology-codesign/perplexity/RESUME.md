@@ -57,7 +57,8 @@ two consecutive clean rounds and the panel ends when every model says NO FURTHER
 | 119 | Kimi K3 (four sections) | r199 | findings (a Medium, two Lows; two of four sections clean), folded into r200 as text; Kimi's clean run restarts |
 | 120 | GLM 5.3 (eight two-part sections) | r200 | findings (a High and Mediums that are design additions; four of eight sections clean), one wording folded into r201; GLM's clean run restarts |
 | 121 | Grok 4.7 (whole draft) | r201 | findings (one Medium on the 52/12 convention, one Low), wording folded into r202; Grok's clean run restarts |
-| 122 | GPT-6.1 Sol (whole draft) | r202 | next |
+| 122 | GPT-6.1 Sol (whole draft) | r202 | CLEAN (two Lows, wording folded into r203); Sol's clean run is 1 of 2 |
+| 123 | Gemini 3.8 Flash (six sections) | r203 | next |
 
 To continue:
 

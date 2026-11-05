@@ -2636,3 +2636,8 @@ Asked on I64 Q1 whether future O71 admissions should be executed by the build fr
 - M (the weekly-to-month conversion at 52/12 does not preserve the finite-fee-period capacity estimand of E39/E105/E115): the conversion is the owner's O82 rule and stays; adopted as wording in r202 (an annualised display convention that does not establish capacity over any one billing period). The reviewer's horizon-identification fields, the period solver reuse and three fixtures are not adopted: the rule is a labelled convention on a diagnostic Plan amount and no weekly report gives the reset phase and billing boundary such a solver would need.
 - L (LiveBench's "wide reading" of the Reasoning and Data Analysis part counts could read as conservative; rename the fields): not adopted; the draft already states that the count sensitivity is not a bound on actual sampling uncertainty.
 - Round status (O56): not clean (a Medium); Grok's clean run restarts.
+
+## Reviewer 122 (GPT-6.1 Sol, round 13, whole draft r202, 16 parts)
+- Read check: all 16 parts read to their ends. Verdict: no Critical, High or Medium finding (two Lows); a clean round under O56.
+- L1 (part 8 says a noise band extends over its configuration's other plan rows, which E328's forward-only algorithm does not guarantee): verified; adopted as wording in r203. L2 (part 6 says the O115 clipping band is taken over the same reports as the range test, which O159/O176 amended): verified; adopted as wording in r203. The reviewer's fixtures are not added (the algorithm and O176 already have them).
+- Round status (O56): clean round 1 for Sol (run 1 of 2 consecutive); the previous Sol round (reviewer 116) was not clean.
