@@ -1124,6 +1124,7 @@ def assemble(configurations: list[dict], documents: dict, *, release_day: date, 
         "previousRankingCoverage": documents.get("previousRankingCoverage"),
         # O144, O146: the route registry and its shared token mix, for the route brackets.
         "planRoutes": documents["planRoutes"]["routes"],
+        "changeRecords": change_records,
         "costMix": documents["planRoutes"].get("costMix"),
         "gdpvalPrevious": documents.get("aaPreviousCapture"),
         "codingAgents": documents.get("codingAgents"),
@@ -2801,6 +2802,40 @@ def route_brackets(plan_rows: list[dict], per_plan: dict, frozen: dict, routes: 
     return out
 
 
+# O186 (2026-11-05, on reviewer 106): a route measured before a provider-announced limit change that states its factor (a
+# limit-change record's "announcedFactor", e.g. OpenAI doubling every Pro tier's limits on 2026-10-29) is rescored at its
+# multiple times that factor, a sensitivity only: a provider figure never enters a numerator or a score (O72).
+ANNOUNCED_CHANGE_LABEL = "announced-change sensitivity: multiple x the provider's announced limit factor (sensitivity; provider announcement, not a measurement; O186)"
+
+
+def announced_change_sensitivity(plan_rows: list[dict], per_plan: dict, frozen: dict, records: list[dict]) -> dict:
+    """O186: each flagged Plan row whose route predates a quantified limit change, rescored at multiple x factor."""
+
+    values = {row_id: entry["plan"]["value"] for row_id, entry in per_plan.items()}
+    quantified = [record for record in records if record.get("type") == "limit" and record.get("announcedFactor")]
+    out = []
+    for row in plan_rows:
+        selected = row["routeSelection"]["selected"]
+        multiple = (row.get("plan") or {}).get("multiple")
+        if not selected or not multiple or values.get(row["id"]) is None:
+            continue
+        route = selected["route"]
+        measured = route.get("sourcePublicationDate") or route.get("validFrom") or ""
+        for record in quantified:
+            if record["provider"] != route.get("provider") or (record.get("plans") and route.get("plan") not in record["plans"]) or not measured < record["date"]:
+                continue
+            factor = float(record["announcedFactor"])
+            anchors = _anchors_for(frozen, row["cost"]["workload"], "plan")
+            api_cost = row["cost"]["costUsd"]
+            cost_score = anchor_math.cost_score(api_cost / (multiple * factor), anchors) if anchors and api_cost else None
+            value = anchor_math.value_score(cost_score, row["summary"].displayed, BETA)
+            rank = 1 + sum(1 for other, other_value in values.items() if other != row["id"] and other_value is not None and value is not None and other_value > value)
+            out.append({"rowId": row["id"], "routeId": route["id"], "change": record["date"], "factor": factor, "multiple": multiple,
+                        "scaledMultiple": multiple * factor, "displayedValue": values[row["id"]], "value": value, "rank": rank,
+                        "direction": "likely understated" if factor > 1 else "likely overstated"})
+    return {"label": ANNOUNCED_CHANGE_LABEL, "rows": out}
+
+
 CROSSCHECK_COMPONENT = "terminalbench-4-0"
 
 
@@ -3045,6 +3080,7 @@ def score(assembled: dict, frozen: dict) -> dict:
         "bugHuntScale": assembled.get("bugHuntScale"),
         "costInfluence": influence,
         "planRouteBrackets": brackets,
+        "announcedChangeSensitivity": announced_change_sensitivity(plan_rows, per_plan, frozen, assembled.get("changeRecords", [])),
         "gates": {"clip": gates, "hold": hold, "listedBeyondAnchors": listed_beyond_anchors(assembled.get("listed", []), frozen),
                   "population": "ranked rows only; listed rows beyond the anchors are disclosed and never hold a release (O58)"},
         "identificationYield": yield_,

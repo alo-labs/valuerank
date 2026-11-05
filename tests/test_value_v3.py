@@ -2884,3 +2884,25 @@ def test_o184_subset_rows_rank_within_their_workload():
     headline, within = v.workload_ranks(values, workload, "main")
     assert headline == {"a": 1, "b": 2} and within == {"s": 1, "t": 2, "u": 1}
     assert v._within(within, "s") == {"rankWithinWorkload": 1, "rankNote": v.SUBSET_RANK_NOTE} and v._within(within, "a") == {} and v._within(None, "s") == {}
+
+
+def test_o186_announced_limit_change_rescales_the_multiple_as_a_sensitivity():
+    """O186: a route measured before a quantified provider limit change is rescored at multiple x factor (sensitivity only)."""
+
+    frozen = {"workloads": {"w": {"anchors": {"plan": {"low": 1.0, "high": 1000.0}}}}}
+    route = {"id": "r", "provider": "OpenAI", "plan": "ChatGPT Pro 200", "sourcePublicationDate": "2026-10-06"}
+    row = {"id": "p", "routeSelection": {"selected": {"route": route}}, "plan": {"multiple": 10.0}, "cost": {"workload": "w", "costUsd": 1000.0},
+           "summary": SimpleNamespace(displayed=60.0)}
+    other = {"id": "q", "routeSelection": {"selected": None}, "plan": {}, "cost": {"workload": "w", "costUsd": 1.0}, "summary": SimpleNamespace(displayed=50.0)}
+    per_plan = {"p": {"plan": {"value": 55.0}}, "q": {"plan": {"value": 70.0}}}
+    records = [{"provider": "OpenAI", "plans": ["ChatGPT Pro 200"], "date": "2026-10-29", "type": "limit", "announcedFactor": 2.0},
+               {"provider": "OpenAI", "plans": ["ChatGPT Plus"], "date": "2026-10-29", "type": "limit", "announcedFactor": 2.0},
+               {"provider": "OpenAI", "date": "2026-10-01", "type": "limit", "announcedFactor": 3.0},
+               {"provider": "OpenAI", "date": "2026-10-30", "type": "limit"}]
+    result = v.announced_change_sensitivity([row, other], per_plan, frozen, records)
+    assert result["label"] == v.ANNOUNCED_CHANGE_LABEL and len(result["rows"]) == 1
+    item = result["rows"][0]
+    assert item["scaledMultiple"] == 20.0 and item["direction"] == "likely understated" and item["value"] > 0 and item["rank"] in (1, 2)
+    shrink = v.announced_change_sensitivity([row], per_plan, frozen, [dict(records[0], announcedFactor=0.5)])
+    assert shrink["rows"][0]["direction"] == "likely overstated"
+    assert v.announced_change_sensitivity([dict(row, plan={"multiple": None})], per_plan, frozen, records)["rows"] == []

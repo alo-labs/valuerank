@@ -2516,3 +2516,16 @@ Asked on I64 Q1 whether future O71 admissions should be executed by the build fr
 - Parts 1–3 M (owner decision challenge to O117's global rank for subset rows): owner decision O184. L (two uses of "cohort row"): adopted; the configuration rule now says "cohort configuration", a cohort row of each ranking whose full set it has.
 - Parts 10–12 M (owner decision challenge to O182: the gate reads success, not cost): owner decision O183.
 - Round status (O56): not clean (Mediums); Gemini's clean run restarts.
+
+## Owner decisions O185–O186 (2026-11-05), asked on reviewer 106
+- O185 (aging Plan evidence): asked whether the Plan ranking should carry a staleness banner as the 2026-10-06 SemiAnalysis measurements age (age trigger 2026-11-06), the owner instead directed a fresh run of the plan-allowance research ladder (O71: plain web search, then Claude's Deep Research, then Silver Bullet's Deep Research) now, over every cohort model × plan cell, for reports measured inside the window [V − 30 days, V]. Its results are recorded in research/2026-11-05-plan-allowances/ and folded into plan_reports.json.
+- O186 (announced-change sensitivity): a route measured before a provider-announced limit change that states its factor is rescored at its multiple × that factor as a sensitivity (`diagnostics.announcedChangeSensitivity`), labelled "likely understated" (or overstated); a provider figure never enters a numerator or a score. Today: OpenAI's 2026-10-29 doubling of every Pro tier's limits (`announcedFactor` 2.0 on that split record).
+
+## Reviewer 106 (Claude Sonnet 5.5, round 13, Thinking, whole draft r188)
+- Read checks: the first send failed (Perplexity's GitHub connector was temporarily unavailable and nothing was read; not counted); the second read every part.
+- C (the Plan half cannot be refreshed; the single analysis ages and every route is flagged): owner decision O185 (a fresh research ladder) and O186.
+- H1 (owner decision challenge to O36/O121/O172, coverage-tolerant common-leaf ranking with labels): not put a fourth time; O172 settled it, and O36's full-benchmark rule is fixed policy.
+- H2 (owner decision challenge to O15/O182/O183, matched cost as the scored cost): not adopted; its premise is wrong (the AI Coding Daily ranking's like-for-like check reads 0.91; 0.35 is the success-adjusted diagnostic), and the owner declined a component-wise cost on reviewer 100.
+- H3 (anchors move with every re-capture; snapped decade anchors and absolute bars): not adopted, as on reviewer 100 (the re-freezes came from workload migrations and owner rescales).
+- Mediums: O25 (O171's screen already prints beside each answer), Bug Hunt (the owner kept it twice), replicable discovery (O165's hashed archive applies from this release on), the cohort cliff (O145 fixed), the software-engineering group name (O122 prints the coding share), the normative core (declined on reviewers 94 and 100): not adopted. R8 became O186; R9 (a cost-noise stress from Terminal-Bench priced twice) is not adopted: the two executions differ by harness and agent, so their spread is not run-to-run cost noise.
+- Round status (O56): not clean (Critical, Highs); Sonnet's clean run restarts.
