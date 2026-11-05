@@ -80,7 +80,8 @@ two consecutive clean rounds and the panel ends when every model says NO FURTHER
 | 142 | Claude Sonnet 5.5 (whole draft) | r220 | CLEAN (no findings); Sonnet is DONE (two consecutive clean rounds, 136 and 142) |
 | 143 | Kimi K3 (four sections, parts 1–17) | r220 | findings (two Highs that repeat owner decisions, Mediums that are presentation additions; three of four sections clean); draft unchanged; Kimi's clean run restarts |
 | 144 | GLM 5.3 (eight two-part sections, parts 1–17) | r220 | findings (a wording on O123 into r221; a repeated unstated-window Medium; six of eight sections clean); GLM's clean run restarts |
-| 145 | Grok 4.7 (whole draft) | r221 | next |
+| 145 | Grok 4.7 (whole draft) | r221 | CLEAN (no findings); Grok is DONE (two consecutive clean rounds, 139 and 145) |
+| 146 | GPT-6.1 Sol (whole draft) | r221 | next |
 
 To continue:
 
