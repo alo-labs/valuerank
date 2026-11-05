@@ -53,7 +53,8 @@ two consecutive clean rounds and the panel ends when every model says NO FURTHER
 | 115 | Grok 4.7 (whole draft) | r196 | findings (one Medium; owner decision O191: a withheld discordant observer blocks the cell), folded into r197; Grok's clean run restarts |
 | 116 | GPT-6.1 Sol (whole draft) | r197 | findings (one Medium: E348 extends O191 to a re-checked provisional observer), folded into r198; Sol's clean run restarts |
 | 117 | Gemini 3.8 Flash (six sections) | r198 | CLEAN (one Low, wording folded into r199); Gemini's clean run is 1 of 2 |
-| 118 | Claude Sonnet 5.5 (whole draft) | r199 | next |
+| 118 | Claude Sonnet 5.5 (whole draft) | r199 | CLEAN (no findings); Sonnet's clean run is 1 of 2 |
+| 119 | Kimi K3 (four sections) | r199 | next |
 
 To continue:
 
