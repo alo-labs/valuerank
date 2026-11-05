@@ -49,7 +49,8 @@ two consecutive clean rounds and the panel ends when every model says NO FURTHER
 | 111 | Gemini 3.8 Flash (six sections) | r193 | findings (Mediums; owner decision O189: an observer whose readings disagree is withheld), folded into r194; Gemini's clean run restarts |
 | 112 | Claude Sonnet 5.5 (whole draft) | r194 | findings (a High that is an owner action, Mediums that are owner-decision challenges; owner decision O190: Bug Hunt's live scale stays); draft unchanged; Sonnet's clean run restarts |
 | 113 | Kimi K3 (four sections) | r194 | findings (two Mediums in two sections, the other two sections clean), folded into r195; Kimi's clean run restarts |
-| 114 | GLM 5.3 (eight two-part sections) | r195 | next |
+| 114 | GLM 5.3 (eight two-part sections) | r195 | findings (two text Mediums; six of eight sections clean), folded into r196; GLM's clean run restarts |
+| 115 | Grok 4.7 (whole draft) | r196 | next |
 
 To continue:
 
