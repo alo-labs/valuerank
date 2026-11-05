@@ -58,6 +58,23 @@ def test_exclusions_follow_e270():
     assert pa.converted(report("slow", provider="A", low=100, speedMode="fast"), DOCUMENT["speedModeMultipliers"]) == (100, 100)
 
 
+def test_a_discordant_observer_blocks_the_cell_instead_of_creating_a_pass():
+    """O191 (reviewer 115): withholding an observer whose own readings disagree must never turn a failing cell into a passing one."""
+
+    def cell(*reports):
+        return next(item for item in pa.evaluate({**DOCUMENT, "reports": list(reports)}, PROFILE, DAY) if item["plan"] == "Pro" and item["unit"] == "week")
+
+    a, b = report("a", start="2026-10-18", end="2026-10-18", low=100), report("b", start="2026-10-19", end="2026-10-19", low=110)
+    c = report("c", start="2026-10-20", end="2026-10-20", low=150)
+    assert cell(a, b, c)["status"].startswith("fails: largest lower bound") and cell(a, b)["status"] == "passes"
+    discordant = {**c, "readings": [[150, 150], [100, 100]]}
+    blocked = cell(a, b, discordant)
+    assert blocked["status"].startswith("fails: an observer's own readings disagree") and blocked["discordantObservers"] == ["c"] and blocked["admittingObservers"] == []
+    # A provisional discordant observer is unchecked evidence and blocks nothing; a concordant second reading changes nothing.
+    assert cell(a, b, {**discordant, "provisional": True})["status"] == "passes"
+    assert cell(a, b, {**c, "readings": [[150, 150], [145, 145]]})["status"].startswith("fails: largest lower bound")
+
+
 def test_cells_pass_only_on_two_firm_concordant_reports_in_the_current_partition():
     def cells(*reports):
         return {(cell["plan"], cell["unit"], cell["region"]): cell for cell in pa.evaluate({**DOCUMENT, "reports": list(reports)}, PROFILE, DAY)}

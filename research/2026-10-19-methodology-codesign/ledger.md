@@ -2596,3 +2596,11 @@ Asked on I64 Q1 whether future O71 admissions should be executed by the build fr
 - Section 1 M (E237's "a version change there is a new capture under O59" blurs capture freshness with authorising a replacement benchmark version): verified; adopted as text in r196 (O59 governs freshness only; a mismatch stops the build until a versioned decision authorises it; an authorised in-place revision is recorded, O147).
 - Section 4 M (storing one range per observer erases the readings O189 needs to test): verified against the implementation (plan_admission reads an optional `readings` list on the record); adopted as text in r196 (the report record keeps the individual readings; a single wide-interval reading has no list and is not tested).
 - Round status (O56): not clean (two Mediums, both text); GLM's clean run restarts, though six of its eight sections were clean.
+
+## Owner decision O191 (2026-11-05), asked on reviewer 115
+- O191 (O189 side effect: withholding a discordant observer can turn a failing cell into a passing one): a non-provisional observer withheld for discordant readings is not pooled but blocks its partition's admission while its readings stay unresolved ("Discordant observer blocks the cell"); the cell publishes `discordantObservers`. Implemented in plan_admission.evaluate with a fixture (100, 110, 150, then a second reading of 100 from the third observer); no current cell is affected.
+
+## Reviewer 115 (Grok 4.7, round 13, whole draft r196, 16 parts)
+- Read check: all 16 parts read to their ends. Verdict: HAS FEEDBACK (no Critical or High; one Medium, an owner-decision interaction).
+- M (O189's removal of a discordant observer can manufacture admission): verified with the reviewer's fixture; put to the owner and adopted as O191 with code and a test. The reviewer's fuller design (an admission-conflict register, a wouldPassAfterRemoval field, metamorphic fixtures for donors) is not adopted beyond `discordantObservers` and the one fixture.
+- Round status (O56): not clean (a Medium); Grok's clean run restarts.

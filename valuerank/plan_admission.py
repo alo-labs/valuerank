@@ -260,6 +260,9 @@ def grandfathered_ids(document: dict) -> frozenset:
     return frozenset(ids)
 
 
+READINGS_DISAGREE = "the observer's own readings disagree beyond the O86 tolerance (O189)"
+
+
 def exclusion(report: dict, profile: dict, release_day: date, grandfathered: frozenset = frozenset()) -> str | None:
     """Why a report does not count (E270), or None."""
 
@@ -295,7 +298,7 @@ def exclusion(report: dict, profile: dict, release_day: date, grandfathered: fro
     # an observer whose readings disagree cannot manufacture agreement with another observer.
     readings = report.get("readings") or []
     if len(readings) >= 2 and max(low for low, _ in readings) > CONCORDANCE * min(high for _, high in readings):
-        return "the observer's own readings disagree beyond the O86 tolerance (O189)"
+        return READINGS_DISAGREE
     start, end = window(report)
     if end.date() < release_day - timedelta(days=30) or start.date() > release_day:
         return "measured outside the report window"
@@ -340,7 +343,7 @@ def evaluate(document: dict, profile: dict, release_day: date, families: dict | 
     results = []
     for key, reports in sorted(cells.items(), key=lambda item: tuple(str(part) for part in item[0])):
         provider, plan, model, unit, region = key
-        rows, eligible = [], []
+        rows, eligible, discordant = [], [], []
         for report in reports:
             report = isolate_periods(report, splits) or report
             reason = exclusion(report, profile, release_day, grandfathered)
@@ -350,12 +353,16 @@ def evaluate(document: dict, profile: dict, release_day: date, families: dict | 
                 reason = f"dated after the cell's latest staged search, {searched} (O161)"
             low, high = converted(report, multipliers)
             part = partition(report, splits) if reason is None else None
+            # O191: an observer withheld for discordant readings is not pooled but still blocks its partition's admission.
+            discordant_part = partition(report, splits) if reason == READINGS_DISAGREE and not report.get("provisional") else None
             rows.append({"id": report["id"], "observer": report["observer"], "valueLower": low, "valueUpper": high, "partition": part,
                          "provisional": bool(report.get("provisional")), "speedMode": report.get("speedMode"), "stage": report.get("stage"), "excluded": reason,
                          "acrossResets": spans_reset(report, records), "acrossSplit": bool(report.get("acrossSplit")), "inferenceRechecked": report.get("inferenceRechecked"),
                          "archive": None if report.get("stage") == FORM_STAGE or archived(report) else NOT_ARCHIVED})
             if reason is None:
                 eligible.append(rows[-1])
+            elif discordant_part is not None:
+                discordant.append({**rows[-1], "partition": discordant_part})
         latest_split = sum(applies(item, reports[0]) for item in splits)
         pool = [row for row in eligible if row["partition"] == latest_split]
         observers = [row["observer"] for row in pool]
@@ -379,6 +386,9 @@ def evaluate(document: dict, profile: dict, release_day: date, families: dict | 
             raise ValueError(f"{key}: one observer reports twice in one partition; record it once with its range (E270)")
         elif len(firm) < 2:
             status = f"fails: {len(firm)} non-provisional report(s) in the current partition"
+        elif any(row["partition"] == latest_split for row in discordant):
+            # O191 (2026-11-05, on reviewer 115, amending O189): withholding a discordant observer must never create a pass.
+            status = "fails: an observer's own readings disagree, which blocks admission while it stays unresolved (O189, O191)"
         elif all(row["stage"] == FORM_STAGE for row in firm):
             # O124: an admitted pair needs at least one report the staged search found, so submissions alone never admit.
             status = "fails: every counting report was submitted through the intake form; one must be found by the staged search (O124)"
@@ -406,6 +416,7 @@ def evaluate(document: dict, profile: dict, release_day: date, families: dict | 
                         "range": None if lowest is None else [lowest, highest], "feasibleRange": feasible, "reports": rows,
                         "allReportsBand": None if all_lower is None else [all_lower / CONCORDANCE, CONCORDANCE * all_upper],
                         "admittingObservers": sorted(row["observer"] for row in firm) if status == "passes" else [],
+                        "discordantObservers": sorted(row["observer"] for row in discordant if row["partition"] == latest_split),
                         "searchedThrough": (search_dates or {}).get((model, plan)),
                         "newReportWindow": new_report_window(release_day, (search_dates or {}).get((model, plan))),
                         # Reviewer 95: the reports whose midpoint the O115 band moved, so a band-dominated value is visible.
