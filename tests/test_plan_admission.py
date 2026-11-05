@@ -77,6 +77,24 @@ def test_a_discordant_observer_blocks_the_cell_instead_of_creating_a_pass():
     assert cell(a, b, {**c, "readings": [[150, 150], [145, 145]]})["status"].startswith("fails: largest lower bound")
 
 
+def test_the_cell_test_reads_each_observers_tightest_readings():
+    """O192 (reviewer 123): an observer with several readings enters the O86 test through its largest lower and smallest upper bound."""
+
+    def cell(*reports):
+        return next(item for item in pa.evaluate({**DOCUMENT, "reports": list(reports)}, PROFILE, DAY) if item["plan"] == "Pro" and item["unit"] == "week")
+
+    a = report("a", start="2026-10-18", end="2026-10-18", low=100, high=120)
+    b = report("b", start="2026-10-19", end="2026-10-19", low=144)
+    assert cell(a, b)["status"] == "passes"  # without recorded readings the covering range stands
+    tight = cell({**a, "readings": [[100, 100], [120, 120]]}, b)
+    assert tight["status"].startswith("fails: largest lower bound") and cell({**a, "readings": [[100, 100]]}, b)["status"] == "passes"
+    # The value still pools the observer's whole range, and a speed mode scales the readings with the range.
+    ok = cell({**a, "readings": [[110, 110], [120, 120]]}, report("c", start="2026-10-19", end="2026-10-19", low=125))
+    assert ok["status"] == "passes" and ok["feasibleRange"] == pytest.approx([125 / 1.2, 1.2 * 110]) and ok["range"][0] == 100
+    fast = {**a, "provider": "O", "plan": "Plus", "speedMode": "fast", "readings": [[100, 100], [120, 120]]}
+    assert pa.test_bounds(fast, DOCUMENT["speedModeMultipliers"]) == (300, 250)
+
+
 def test_cells_pass_only_on_two_firm_concordant_reports_in_the_current_partition():
     def cells(*reports):
         return {(cell["plan"], cell["unit"], cell["region"]): cell for cell in pa.evaluate({**DOCUMENT, "reports": list(reports)}, PROFILE, DAY)}

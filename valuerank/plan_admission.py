@@ -232,6 +232,19 @@ def converted(report: dict, multipliers: dict) -> tuple[float, float]:
     return report["valueLower"] * factor, report["valueUpper"] * factor
 
 
+def test_bounds(report: dict, multipliers: dict) -> tuple[float, float]:
+    """O192 (2026-11-05, on reviewer 123, amending O174): the bounds the O86 test reads for an observer. Without recorded readings
+    they are the report's range; with several readings they are the tightest (the largest lower bound and the smallest upper
+    bound over the readings, which may cross), so an observer's spread cannot create agreement its readings never had."""
+
+    low, high = converted(report, multipliers)
+    readings = report.get("readings") or []
+    if len(readings) < 2:
+        return low, high
+    scale = low / report["valueLower"] if report["valueLower"] else 1.0
+    return max(lower for lower, _ in readings) * scale, min(upper for _, upper in readings) * scale
+
+
 FORM_STAGE = "form"  # E244: a report submitted through the GitHub intake form, not found by the staged O71 search
 
 
@@ -357,7 +370,8 @@ def evaluate(document: dict, profile: dict, release_day: date, families: dict | 
             # E348 (reviewer 116): every observer O159 lets contest the range test blocks, a re-checked provisional one included.
             discordant_part = (partition(report, splits) if reason == READINGS_DISAGREE
                                and (not report.get("provisional") or report.get("inferenceRechecked")) else None)
-            rows.append({"id": report["id"], "observer": report["observer"], "valueLower": low, "valueUpper": high, "partition": part,
+            test_low, test_high = test_bounds(report, multipliers)
+            rows.append({"id": report["id"], "observer": report["observer"], "valueLower": low, "valueUpper": high, "testLower": test_low, "testUpper": test_high, "partition": part,
                          "provisional": bool(report.get("provisional")), "speedMode": report.get("speedMode"), "stage": report.get("stage"), "excluded": reason,
                          "acrossResets": spans_reset(report, records), "acrossSplit": bool(report.get("acrossSplit")), "inferenceRechecked": report.get("inferenceRechecked"),
                          "archive": None if report.get("stage") == FORM_STAGE or archived(report) else NOT_ARCHIVED})
@@ -376,10 +390,10 @@ def evaluate(document: dict, profile: dict, release_day: date, families: dict | 
         # inferenceRechecked); the band over every report is published beside it.
         firm = [row for row in pool if not row["provisional"]]
         tested = [row for row in pool if not row["provisional"] or row["inferenceRechecked"]]
-        largest_lower = max((row["valueLower"] for row in tested), default=None)
-        smallest_upper = min((row["valueUpper"] for row in tested), default=None)
-        all_lower = max((row["valueLower"] for row in pool), default=None)
-        all_upper = min((row["valueUpper"] for row in pool), default=None)
+        largest_lower = max((row["testLower"] for row in tested), default=None)
+        smallest_upper = min((row["testUpper"] for row in tested), default=None)
+        all_lower = max((row["testLower"] for row in pool), default=None)
+        all_upper = min((row["testUpper"] for row in pool), default=None)
         # O85: every cell is tested; a cell on a plan the Plan ranking does not list is published as evidence only.
         listed = plan in document.get("listedPlans", {}) and region == "global"
         if unit not in UNIT_TO_MONTH:
@@ -406,7 +420,7 @@ def evaluate(document: dict, profile: dict, release_day: date, families: dict | 
         # concordant point reports keep their own values (the symmetric band adds no upward pull); every report still counts.
         # O176 (2026-11-03, on reviewer 96, amending O159): the band that clips the value reads only the admitting
         # (non-provisional) reports, so a re-checked provisional report can fail a cell but never move its value.
-        feasible = ([max(row["valueLower"] for row in firm) / CONCORDANCE, CONCORDANCE * min(row["valueUpper"] for row in firm)]
+        feasible = ([max(row["testLower"] for row in firm) / CONCORDANCE, CONCORDANCE * min(row["testUpper"] for row in firm)]
                     if status == "passes" else None)
         value = (math.exp(sum(math.log(min(max((row["valueLower"] + row["valueUpper"]) / 2, feasible[0]), feasible[1])) for row in firm) / len(firm))
                  if status == "passes" else None)
