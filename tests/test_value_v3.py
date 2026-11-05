@@ -1922,6 +1922,10 @@ def test_rank_bands_correlation_grid_and_listed_indicative_values():
     covariance = separability["api"]["bugHuntCovariance"]
     assert set(covariance) == {"-1", "+0", "+1"} and covariance["+0"]["bandsUnchanged"] is True
     assert covariance["+0"]["separableAdjacentPairs"] == separability["api"]["separableAdjacentPairs"]
+    # E355: restated with LiveBench's category dependence at its sqrt(7) envelope; never a narrower statement than the primary.
+    dependence = separability["api"]["liveBenchDependence"]
+    assert dependence["factor"] == pytest.approx(7 ** 0.5) and dependence["qualityMargin"] >= separability["qualityMargin"] - 1e-9
+    assert dependence["separableAdjacentPairs"] <= separability["api"]["separableAdjacentPairs"] and isinstance(dependence["bandsUnchanged"], bool)
     assert set(separability["api"]["gdpvalWide"]) == {"separableAdjacentPairs", "medianSeparation"} and set(separability["api"]["bands"]) == {"a", "b"}
     assert output["listedIndicative"] == []
     # O41: a frontier-family configuration listed for a missing leaf keeps an indicative value apart from the ranking.

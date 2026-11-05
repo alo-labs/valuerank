@@ -2724,3 +2724,8 @@ Asked on I64 Q1 whether future O71 admissions should be executed by the build fr
 ## Reviewer 136 (Claude Sonnet 5.5, round 13, whole draft r216, 17 parts)
 - Read check: all 17 parts read to their ends. Verdict: NO FURTHER FEEDBACK (no finding at any severity; no recommendations beyond those adopted; no owner questions).
 - Round status (O56): clean round 1 for Sonnet (run 1 of 2 consecutive); its previous rounds (reviewers 124 and 130) were not clean. Draft unchanged (r216).
+
+## Reviewer 137 (Kimi K3, round 13, four sections of r216, 17 parts)
+- Read check: all 17 parts read to their ends in four sections. Sections 1, 2 and 4 returned NO FURTHER FEEDBACK; section 3 returned one Medium. Verdict overall: HAS FEEDBACK.
+- Section 3 M (E354's LiveBench dependence envelope is a leaf-level factor that no downstream diagnostic restates; raised on reviewers 113, 117, 120, 131, 134 and now 137): adopted as E355, with code: value_v3.rank_separability restates the separable-pair count, the median separation, the bands and the quality margin with LiveBench's SD at the √7 envelope (`diagnostics.rankSeparability.<basis>.liveBenchDependence`), a specification stress beside the Bug Hunt covariance one; scores and labels unchanged. Test added.
+- Round status (O56): not clean (a Medium); Kimi's clean run restarts, though three of four sections were clean.

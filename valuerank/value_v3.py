@@ -3758,8 +3758,13 @@ def gdpval_row_sd(source: dict) -> float:
     return (interval["upper"] - interval["lower"]) / 2.0 / 1.96 if interval else GDPVAL_RATING_SD
 
 
+# E354, E355 (reviewers 131, 134, 137): any non-negative dependence between LiveBench's seven categories raises its Overall SD
+# by at most sqrt(7) (Cauchy-Schwarz); the separability statement, bands and margin are restated at that factor.
+LIVEBENCH_DEPENDENCE_FACTOR = math.sqrt(7.0)
+
+
 def sampling_sd(key: str, observation: q.Observation, source: dict, gdpval_sd: float | None = None, tasks_of: dict | None = None,
-                bug_hunt_rho: float = 0.0) -> float:
+                bug_hunt_rho: float = 0.0, livebench_factor: float = 1.0) -> float:
     """O39: the plug-in standard error of one leaf's z score under the independent-task approximation (binomial
     leaves with the Jeffreys-type proportion, I28)."""
 
@@ -3786,7 +3791,7 @@ def sampling_sd(key: str, observation: q.Observation, source: dict, gdpval_sd: f
         # O67: LiveBench's Overall is the release's weighted mean, so the category draws carry the same weights.
         categories, weights = source["categories"], source.get("weights") or {name: 1.0 for name in LIVEBENCH_CATEGORY_TASKS}
         variance = sum(weights[name] ** 2 * _binomial_variance(categories[name], tasks) for name, tasks in LIVEBENCH_CATEGORY_TASKS.items())
-        return 100.0 * math.sqrt(variance) / sum(weights[name] for name in LIVEBENCH_CATEGORY_TASKS)
+        return livebench_factor * 100.0 * math.sqrt(variance) / sum(weights[name] for name in LIVEBENCH_CATEGORY_TASKS)
     tasks = (tasks_of or SAMPLING_TASKS)[key]
     if key == "omniscience" and source.get("accuracy") is not None and source.get("hallucinationRate") is not None:
         correct = source["accuracy"]
@@ -3818,11 +3823,12 @@ def sampling_kernel(key: str, observation: q.Observation, source: dict) -> scena
     return scenarios.Kernel("normal", (observation.z, sampling_sd(key, observation, source), 0.0, observation.upper), None, scenarios.TASK_SAMPLING, derivation)
 
 
-def quality_sd(row: dict, gdpval_sd: float | None = None, tasks_of: dict | None = None, bug_hunt_rho: float = 0.0) -> float:
+def quality_sd(row: dict, gdpval_sd: float | None = None, tasks_of: dict | None = None, bug_hunt_rho: float = 0.0,
+               livebench_factor: float = 1.0) -> float:
     """O39: a row's analytic quality SD from its leaves' task-sampling SDs (cost is not drawn)."""
 
     observations, provenance = row["evidence"]["observations"], row["evidence"]["provenance"]
-    return math.sqrt(sum((q.LEAF_BY_KEY[key].weight / 100.0 * sampling_sd(key, value, provenance.get(key) or {}, gdpval_sd, tasks_of, bug_hunt_rho)) ** 2
+    return math.sqrt(sum((q.LEAF_BY_KEY[key].weight / 100.0 * sampling_sd(key, value, provenance.get(key) or {}, gdpval_sd, tasks_of, bug_hunt_rho, livebench_factor)) ** 2
                          for key, value in observations.items()))
 
 
@@ -3892,6 +3898,14 @@ def rank_separability(assembled: dict, per_row: dict, exchange: dict | None = No
                                          "qualityMargin": 1.96 * math.sqrt(2.0) * statistics.median(sds) if sds else None,
                                          "bandsUnchanged": _bands_on_workload(ranked, off, stressed, configuration_of) == result[basis]["bands"]}
         result[basis]["bugHuntCovariance"] = covariance
+        # E355: the same statement with LiveBench's category dependence at its sqrt(7) envelope (a specification stress).
+        dependent = {row["id"]: (1.0 - BETA) * quality_sd(row, livebench_factor=LIVEBENCH_DEPENDENCE_FACTOR) for row in assembled["rows"]}
+        count, middle = adjacent(dependent, 0.0)
+        dependent_sds = [quality_sd(row, livebench_factor=LIVEBENCH_DEPENDENCE_FACTOR) for row in assembled["rows"]]
+        result[basis]["liveBenchDependence"] = {
+            "factor": LIVEBENCH_DEPENDENCE_FACTOR, "separableAdjacentPairs": count, "medianSeparation": middle,
+            "qualityMargin": 1.96 * math.sqrt(2.0) * statistics.median(dependent_sds) if dependent_sds else None,
+            "bandsUnchanged": _bands_on_workload(ranked, off, dependent, configuration_of) == result[basis]["bands"]}
         doubling = ((exchange or {}).get(basis) or {}).get("valuePointsPerCostDoubling")
         # I28: the factor by which a cost (on the Plan basis, a transferred multiple) can be wrong before the value moves
         # by the median separation threshold; a tolerance, not an estimate of any transfer's error.
