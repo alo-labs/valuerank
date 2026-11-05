@@ -2770,3 +2770,11 @@ Asked on I64 Q1 whether future O71 admissions should be executed by the build fr
 ## Reviewer 145 (Grok 4.7, round 13, whole draft r221, 17 parts)
 - Read check: all 17 parts read to their ends. Verdict: NO FURTHER FEEDBACK (no finding at any severity; no recommendations beyond those adopted; no owner questions).
 - Round status (O56): clean round 2 for Grok (reviewers 139 and 145 are consecutive Grok rounds, both clean): Grok is DONE under O56. With Sonnet, two of six models are done; Gemini has one clean round (141). Draft unchanged (r221).
+
+## Owner decision O193 (2026-11-05), asked on reviewer 146
+- O193 (E304 challenge, raised by Gemini on reviewer 135 and by Sol on reviewer 146: a workload migration needs two measured Plan references, which all demote on 2027-02-04): when the API references and gates pass and the Plan references do not, the API basis migrates and the Plan basis reads "unavailable for the new version", its historical outputs staying labelled historical; no Plan anchor is made from an assumption, a fallback or an expired measurement ("API migrates, Plan unavailable"). Implementation: not yet built. value_v3.freeze still stops when the main workload has fewer than two measured Plan references (O157), which is the safe default; the split migration is built at the first release that needs it (the earliest is after the 2027-02-04 demotion). The draft says so.
+
+## Reviewer 146 (GPT-6.1 Sol, round 13, whole draft r221, 17 parts)
+- Read check: all 17 parts read to their ends. Verdict: HAS FEEDBACK (no Critical or High; one Medium, two Lows).
+- M (no terminal operating state for E304's atomic migration when measured Plan references disappear): put to the owner and adopted as O193 (above). L1 (the FrontierCode table row said Cognition's 1.1 board no longer fills it, without the operative 2.0 gap-fill): adopted as wording in r222. L2 (the dormant common-coverage check and the active common-leaf ranking share a name): left a candidate.
+- Round status (O56): not clean (a Medium); Sol's clean run restarts.
