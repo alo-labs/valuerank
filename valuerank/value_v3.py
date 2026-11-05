@@ -3906,6 +3906,17 @@ def rank_separability(assembled: dict, per_row: dict, exchange: dict | None = No
             "factor": LIVEBENCH_DEPENDENCE_FACTOR, "separableAdjacentPairs": count, "medianSeparation": middle,
             "qualityMargin": 1.96 * math.sqrt(2.0) * statistics.median(dependent_sds) if dependent_sds else None,
             "bandsUnchanged": _bands_on_workload(ranked, off, dependent, configuration_of) == result[basis]["bands"]}
+        # E356 (reviewer 147): the three LiveBench and Bug Hunt stresses applied together (half task counts, which multiply the
+        # LiveBench SD by sqrt(2), category dependence at sqrt(7), and a planted/unplanted correlation of +1), the widest SDs
+        # the specification stresses allow; a result that holds here holds under each stress alone.
+        joint_factor = LIVEBENCH_DEPENDENCE_FACTOR * math.sqrt(2.0)
+        joint = {row["id"]: (1.0 - BETA) * quality_sd(row, bug_hunt_rho=1.0, livebench_factor=joint_factor) for row in assembled["rows"]}
+        count, middle = adjacent(joint, 0.0)
+        joint_sds = [quality_sd(row, bug_hunt_rho=1.0, livebench_factor=joint_factor) for row in assembled["rows"]]
+        result[basis]["jointAdverseStress"] = {
+            "liveBenchFactor": joint_factor, "bugHuntRho": 1.0, "separableAdjacentPairs": count, "medianSeparation": middle,
+            "qualityMargin": 1.96 * math.sqrt(2.0) * statistics.median(joint_sds) if joint_sds else None,
+            "bandsUnchanged": _bands_on_workload(ranked, off, joint, configuration_of) == result[basis]["bands"]}
         doubling = ((exchange or {}).get(basis) or {}).get("valuePointsPerCostDoubling")
         # I28: the factor by which a cost (on the Plan basis, a transferred multiple) can be wrong before the value moves
         # by the median separation threshold; a tolerance, not an estimate of any transfer's error.

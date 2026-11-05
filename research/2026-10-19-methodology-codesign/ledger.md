@@ -2778,3 +2778,9 @@ Asked on I64 Q1 whether future O71 admissions should be executed by the build fr
 - Read check: all 17 parts read to their ends. Verdict: HAS FEEDBACK (no Critical or High; one Medium, two Lows).
 - M (no terminal operating state for E304's atomic migration when measured Plan references disappear): put to the owner and adopted as O193 (above). L1 (the FrontierCode table row said Cognition's 1.1 board no longer fills it, without the operative 2.0 gap-fill): adopted as wording in r222. L2 (the dormant common-coverage check and the active common-leaf ranking share a name): left a candidate.
 - Round status (O56): not clean (a Medium); Sol's clean run restarts.
+
+## Reviewer 147 (Gemini 3.8 Flash, round 13, six sections of r222, 17 parts)
+- Read check: all 17 parts read to their ends in six sections. Sections 1, 2, 3 and 5 returned NO FURTHER FEEDBACK; sections 4 and 6 returned a Medium each. Verdict overall: HAS FEEDBACK.
+- Section 4 M (the LiveBench half-count, LiveBench category-dependence and Bug Hunt correlation stresses are each restated alone, never together): adopted as E356, with code: value_v3.rank_separability restates the separable-pair count, median separation, bands and quality margin with the three applied together (LiveBench SD factor √2 · √7 = √14, planted/unplanted correlation +1), `diagnostics.rankSeparability.<basis>.jointAdverseStress`; scores unchanged. Test added.
+- Section 6 M (the chart-page cost reconciliation accepts a 1% discrepancy without distinguishing rounding-compatible agreement from a different record) and L (undefined bootstrap replicates in the independent-source checks): left candidates.
+- Round status (O56): not clean (a Medium); Gemini's clean run restarts (reviewer 141's clean round no longer counts).
