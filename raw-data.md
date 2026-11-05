@@ -86,19 +86,6 @@ Every input behind the published scores, with the artifact and locator that hold
 | GPT-6 Luna (max) | HLE-Diamond | 0.222 | fraction | 22.20 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=gpt-6-luna].model.hleDiamond` |
 | GPT-6 Luna (max) | Terminal-Bench-Science 0.1 | 0.0857142857142857 | fraction | 8.57 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=gpt-6-luna].model.terminalBenchScience` |
 | GPT-6 Luna (max) | CritPt v2 (hard subset) | 0.415 | fraction | 41.50 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=gpt-6-luna].model.critptAgenticHard` |
-| MiMo-V2.6-Pro | FrontierCode 2.0 | 0.239701262626263 | fraction | 23.97 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=mimo-v2-6-pro].model.frontierCode20` |
-| MiMo-V2.6-Pro | Terminal-Bench 4.0 (AA run) | 34.8484848484849 | percent | 34.85 | mini-SWE-agent | `data/aa/aa_v432_snapshot.json` `pages[model.slug=mimo-v2-6-pro].model.terminalBench40` |
-| MiMo-V2.6-Pro | Bug Hunt Bench | 22 | bugs fixed, planted plus unplanted (O163, O170) | 17.99 | MiMo-V2.6-Pro (first-party) | `data/bug_hunt.json` `models[modelId=mimo-v2-6-pro].fixedOf105 + models[modelId=mimo-v2-6-pro].extras` |
-| MiMo-V2.6-Pro | Vibe Code Bench v1.1 (Vals) | 85.223 | percent | 85.22 | xiaomi/mimo-v2.6-pro | `data/swe_tracks.json` `records[modelId=mimo-v2-6-pro, leaf=vibeCode].value` |
-| MiMo-V2.6-Pro | Code Migration v1.1 (Vals) | 48.786 | percent | 48.79 | xiaomi/mimo-v2.6-pro | `data/swe_tracks.json` `records[modelId=mimo-v2-6-pro, leaf=codeMigration].value` |
-| MiMo-V2.6-Pro | LiveBench 2.0 Overall | 68.48 | percent | 68.48 | mimo-v2.6-pro | `data/swe_tracks.json` `records[modelId=mimo-v2-6-pro, leaf=livebench2Overall].value` |
-| MiMo-V2.6-Pro | GDPval-AA v2.1 | 1689.4 | Elo | 59.47 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=mimo-v2-6-pro].model.gdpval` |
-| MiMo-V2.6-Pro | AutomationBench-AA | 0.5862340943419085 | fraction | 58.62 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=mimo-v2-6-pro].model.automationBenchPartialScore` |
-| MiMo-V2.6-Pro | AA-Omniscience v1.1 | -4.466666666666667 | AA Omniscience Index | 47.77 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=mimo-v2-6-pro].model.omniscience` |
-| MiMo-V2.6-Pro | AA-LCR v1.1 | 0.863333333333333 | fraction | 86.33 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=mimo-v2-6-pro].model.lcr` |
-| MiMo-V2.6-Pro | HLE-Diamond | 0.152 | fraction | 15.20 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=mimo-v2-6-pro].model.hleDiamond` |
-| MiMo-V2.6-Pro | Terminal-Bench-Science 0.1 | 0.0571428571428571 | fraction | 5.71 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=mimo-v2-6-pro].model.terminalBenchScience` |
-| MiMo-V2.6-Pro | CritPt v2 (hard subset) | 0.34 | fraction | 34.00 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=mimo-v2-6-pro].model.critptAgenticHard` |
 | DeepSeek V4.1 Flash 1017 (max) | FrontierCode 2.0 | 0.284711616161616 | fraction | 28.47 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=deepseek-v4-1-flash-1017].model.frontierCode20` |
 | DeepSeek V4.1 Flash 1017 (max) | Terminal-Bench 4.0 (AA run) | 33.8383838383838 | percent | 33.84 | mini-SWE-agent | `data/aa/aa_v432_snapshot.json` `pages[model.slug=deepseek-v4-1-flash-1017].model.terminalBench40` |
 | DeepSeek V4.1 Flash 1017 (max) | Bug Hunt Bench | 86.7 | bugs fixed, planted plus unplanted (O163, O170) | 70.89 | DeepSeek V4.1 Flash 1017 (max effort, DeepSeek Harness) - mean of 7 | `data/bug_hunt.json` `models[modelId=deepseek-v4-1-flash-1017].fixedOf105 + models[modelId=deepseek-v4-1-flash-1017].extras` |
@@ -125,6 +112,19 @@ Every input behind the published scores, with the artifact and locator that hold
 | Gemini 4 Argon (high) | HLE-Diamond | 0.567 | fraction | 56.70 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=gemini-4-argon].model.hleDiamond` |
 | Gemini 4 Argon (high) | Terminal-Bench-Science 0.1 | 0.528571428571429 | fraction | 52.86 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=gemini-4-argon].model.terminalBenchScience` |
 | Gemini 4 Argon (high) | CritPt v2 (hard subset) | 0.525 | fraction | 52.50 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=gemini-4-argon].model.critptAgenticHard` |
+| MiMo-V2.6-Pro | FrontierCode 2.0 | 0.239701262626263 | fraction | 23.97 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=mimo-v2-6-pro].model.frontierCode20` |
+| MiMo-V2.6-Pro | Terminal-Bench 4.0 (AA run) | 34.8484848484849 | percent | 34.85 | mini-SWE-agent | `data/aa/aa_v432_snapshot.json` `pages[model.slug=mimo-v2-6-pro].model.terminalBench40` |
+| MiMo-V2.6-Pro | Bug Hunt Bench | 22 | bugs fixed, planted plus unplanted (O163, O170) | 17.99 | MiMo-V2.6-Pro (first-party) | `data/bug_hunt.json` `models[modelId=mimo-v2-6-pro].fixedOf105 + models[modelId=mimo-v2-6-pro].extras` |
+| MiMo-V2.6-Pro | Vibe Code Bench v1.1 (Vals) | 85.223 | percent | 85.22 | xiaomi/mimo-v2.6-pro | `data/swe_tracks.json` `records[modelId=mimo-v2-6-pro, leaf=vibeCode].value` |
+| MiMo-V2.6-Pro | Code Migration v1.1 (Vals) | 48.786 | percent | 48.79 | xiaomi/mimo-v2.6-pro | `data/swe_tracks.json` `records[modelId=mimo-v2-6-pro, leaf=codeMigration].value` |
+| MiMo-V2.6-Pro | LiveBench 2.0 Overall | 68.48 | percent | 68.48 | mimo-v2.6-pro | `data/swe_tracks.json` `records[modelId=mimo-v2-6-pro, leaf=livebench2Overall].value` |
+| MiMo-V2.6-Pro | GDPval-AA v2.1 | 1689.4 | Elo | 59.47 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=mimo-v2-6-pro].model.gdpval` |
+| MiMo-V2.6-Pro | AutomationBench-AA | 0.5862340943419085 | fraction | 58.62 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=mimo-v2-6-pro].model.automationBenchPartialScore` |
+| MiMo-V2.6-Pro | AA-Omniscience v1.1 | -4.466666666666667 | AA Omniscience Index | 47.77 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=mimo-v2-6-pro].model.omniscience` |
+| MiMo-V2.6-Pro | AA-LCR v1.1 | 0.863333333333333 | fraction | 86.33 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=mimo-v2-6-pro].model.lcr` |
+| MiMo-V2.6-Pro | HLE-Diamond | 0.152 | fraction | 15.20 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=mimo-v2-6-pro].model.hleDiamond` |
+| MiMo-V2.6-Pro | Terminal-Bench-Science 0.1 | 0.0571428571428571 | fraction | 5.71 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=mimo-v2-6-pro].model.terminalBenchScience` |
+| MiMo-V2.6-Pro | CritPt v2 (hard subset) | 0.34 | fraction | 34.00 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=mimo-v2-6-pro].model.critptAgenticHard` |
 | GPT-6.1 Sol (high) | FrontierCode 2.0 | 0.36737297979798 | fraction | 36.74 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=gpt-6-1-sol-high].model.frontierCode20` |
 | GPT-6.1 Sol (high) | Terminal-Bench 4.0 (AA run) | 51.5151515151515 | percent | 51.52 | mini-SWE-agent | `data/aa/aa_v432_snapshot.json` `pages[model.slug=gpt-6-1-sol-high].model.terminalBench40` |
 | GPT-6.1 Sol (high) | Bug Hunt Bench | 76.5 | bugs fixed, planted plus unplanted (O163, O170) | 62.55 | GPT-6.1 Sol (high effort) - mean of 2 | `data/bug_hunt.json` `models[modelId=gpt-6.1-sol-high].fixedOf105 + models[modelId=gpt-6.1-sol-high].extras` |
@@ -572,12 +572,6 @@ Exhaustive searches for the leaves a cohort configuration still lacks (each with
 | GPT-6 Luna (max) | FrontierCode 2.0 | $23.22 | confirmed-complete | 132 | $0.1759 | AA Intelligence Index evaluation cost (cost per task x task count) |
 | GPT-6 Luna (max) | Terminal-Bench-Science | $31.79 | confirmed-complete | 70 | $0.4541 | AA Intelligence Index evaluation cost (cost per task x task count) |
 | GPT-6 Luna (max) | Coding Agent Index | $46.16 | confirmed-complete | — | — | AA Coding Agent Index v2.0 cost to run (mean API cost per task) x 290 tasks |
-| MiMo-V2.6-Pro | AA-Briefcase | $34.60 | confirmed-complete | 91 | $0.3802 | AA Intelligence Index evaluation cost (cost per task x task count) |
-| MiMo-V2.6-Pro | GDP.pdf | $2.40 | confirmed-complete | 100 | $0.0240 | AA Intelligence Index evaluation cost (cost per task x task count) |
-| MiMo-V2.6-Pro | AutomationBench-AA | $27.77 | confirmed-complete | 657 | $0.0423 | AA Intelligence Index evaluation cost (cost per task x task count) |
-| MiMo-V2.6-Pro | Terminal-Bench 4.0 (AA Index run) | $28.91 | confirmed-complete | 66 | $0.4381 | AA Intelligence Index evaluation cost (cost per task x task count) |
-| MiMo-V2.6-Pro | FrontierCode 2.0 | $33.87 | confirmed-complete | 132 | $0.2566 | AA Intelligence Index evaluation cost (cost per task x task count) |
-| MiMo-V2.6-Pro | Terminal-Bench-Science | $44.15 | confirmed-complete | 70 | $0.6308 | AA Intelligence Index evaluation cost (cost per task x task count) |
 | DeepSeek V4.1 Flash 1017 (max) | AA-Briefcase | $61.72 | confirmed-complete | 91 | $0.6783 | AA Intelligence Index evaluation cost (cost per task x task count) |
 | DeepSeek V4.1 Flash 1017 (max) | GDP.pdf | $4.23 | confirmed-complete | 100 | $0.0423 | AA Intelligence Index evaluation cost (cost per task x task count) |
 | DeepSeek V4.1 Flash 1017 (max) | AutomationBench-AA | $114.26 | confirmed-complete | 657 | $0.1739 | AA Intelligence Index evaluation cost (cost per task x task count) |
@@ -592,6 +586,12 @@ Exhaustive searches for the leaves a cohort configuration still lacks (each with
 | Gemini 4 Argon (high) | FrontierCode 2.0 | $1,853.84 | confirmed-complete | 132 | $14.0443 | AA Intelligence Index evaluation cost (cost per task x task count) |
 | Gemini 4 Argon (high) | Terminal-Bench-Science | $1,308.87 | confirmed-complete | 70 | $18.6982 | AA Intelligence Index evaluation cost (cost per task x task count) |
 | Gemini 4 Argon (high) | Coding Agent Index | $3,402.24 | confirmed-complete | — | — | AA Coding Agent Index v2.0 cost to run (mean API cost per task) x 290 tasks |
+| MiMo-V2.6-Pro | AA-Briefcase | $34.60 | confirmed-complete | 91 | $0.3802 | AA Intelligence Index evaluation cost (cost per task x task count) |
+| MiMo-V2.6-Pro | GDP.pdf | $2.40 | confirmed-complete | 100 | $0.0240 | AA Intelligence Index evaluation cost (cost per task x task count) |
+| MiMo-V2.6-Pro | AutomationBench-AA | $27.77 | confirmed-complete | 657 | $0.0423 | AA Intelligence Index evaluation cost (cost per task x task count) |
+| MiMo-V2.6-Pro | Terminal-Bench 4.0 (AA Index run) | $28.91 | confirmed-complete | 66 | $0.4381 | AA Intelligence Index evaluation cost (cost per task x task count) |
+| MiMo-V2.6-Pro | FrontierCode 2.0 | $33.87 | confirmed-complete | 132 | $0.2566 | AA Intelligence Index evaluation cost (cost per task x task count) |
+| MiMo-V2.6-Pro | Terminal-Bench-Science | $44.15 | confirmed-complete | 70 | $0.6308 | AA Intelligence Index evaluation cost (cost per task x task count) |
 
 ### AA Index total reconciliation
 
@@ -605,9 +605,9 @@ The seven Index components plus AA's residual reproduce AA's published Intellige
 | Claude Haiku 5.5 (max) | — | $68.82 | $339.47 | $339.47 | yes |
 | GPT-6 Astra (max) | — | $893.27 | $5,661.18 | $5,661.18 | yes |
 | GPT-6 Luna (max) | — | $23.22 | $136.06 | $136.06 | yes |
-| MiMo-V2.6-Pro | — | $49.03 | $220.73 | $220.73 | yes |
 | DeepSeek V4.1 Flash 1017 (max) | — | $75.12 | $520.63 | $520.63 | yes |
 | Gemini 4 Argon (high) | — | $624.16 | $6,102.84 | $6,102.84 | yes |
+| MiMo-V2.6-Pro | — | $49.03 | $220.73 | $220.73 | yes |
 
 ## DeepSWE v1.1 AA chart configurations (withdrawn by AA, not scored)
 

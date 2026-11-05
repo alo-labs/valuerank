@@ -63,9 +63,10 @@ def test_models_index_lists_every_roster_model_ranked_first(bundle):
     assert {"slug", "name", "developer", "rank", "overall", "grade", "rankingEligible", "coveragePct"} <= set(models[0])
     ranked = [m for m in models if m["rank"]["plan"] is not None]
     plan_ranks = [m["rank"]["plan"] for m in ranked]
-    assert plan_ranks == sorted(plan_ranks) and plan_ranks[0] == 1 and len(ranked) == 9
-    assert models[:9] == ranked
-    assert all(m["rank"]["plan"] is None for m in models[9:])
+    # O184: eight main-workload rows ranked, then the subset-workload row ranked only within its workload.
+    assert plan_ranks == sorted(plan_ranks) and plan_ranks[0] == 1 and len(ranked) == 8
+    assert models[:8] == ranked and models[8]["slug"] == "mimo-v2-6-pro"
+    assert all(m["rank"]["plan"] is None for m in models[8:])
     # O51: every configuration with the max-effort ranking's full set has a cost and a rank there.
     assert [m["slug"] for m in models[9:] if m["rankingEligible"]] == []
     assert page["rankedCount"] == 9 and page["unrankedCount"] == 28

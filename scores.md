@@ -9,14 +9,14 @@ Value = 25% × cost score + 75% × quality. Costs are USD per basket run; the co
 | Configuration | Plan rank | Plan value | Plan cost score | API rank | API value | API cost score | Quality | Quality coverage | Workload |
 |---|---:|---:|---:|---:|---:|---:|---:|---:|---|
 | [GPT-6.1 Sol (max)](https://valuerank.alolabs.dev/models/gpt-6-1-sol/) | 1 | 70.31 | 78.75 | 1 | 62.81 | 48.73 | 67.50 | 100% | main |
-| [Claude Opus 5.5 (max)](https://valuerank.alolabs.dev/models/claude-opus-5-5/) | 5 | 67.95 | 69.19 | 6 | 53.82 | 12.67 | 67.54 | 100% | main |
-| [Claude Sonnet 5.5 (max)](https://valuerank.alolabs.dev/models/claude-sonnet-5-5/) | 7 | 67.75 | 68.78 | 7 | 53.66 | 12.43 | 67.40 | 100% | main |
-| [Claude Haiku 5.5 (max)](https://valuerank.alolabs.dev/models/claude-haiku-5-5-max/) | 11 | 62.08 | 100.00 | 8 | 50.53 | 53.79 | 49.44 | 100% | main |
+| [Claude Opus 5.5 (max)](https://valuerank.alolabs.dev/models/claude-opus-5-5/) | 5 | 67.95 | 69.19 | 5 | 53.82 | 12.67 | 67.54 | 100% | main |
+| [Claude Sonnet 5.5 (max)](https://valuerank.alolabs.dev/models/claude-sonnet-5-5/) | 7 | 67.75 | 68.78 | 6 | 53.66 | 12.43 | 67.40 | 100% | main |
+| [Claude Haiku 5.5 (max)](https://valuerank.alolabs.dev/models/claude-haiku-5-5-max/) | 11 | 62.08 | 100.00 | 7 | 50.53 | 53.79 | 49.44 | 100% | main |
 | [GPT-6 Astra (max)](https://valuerank.alolabs.dev/models/gpt-6-astra/) | 14 | 60.97 | 39.06 | 3 | 56.26 | 20.20 | 68.27 | 100% | main |
-| [GPT-6 Luna (max)](https://valuerank.alolabs.dev/models/gpt-6-luna/) | 17 | 58.31 | 100.00 | 5 | 55.20 | 87.57 | 44.42 | 100% | main |
-| [MiMo-V2.6-Pro](https://valuerank.alolabs.dev/models/mimo-v2-6-pro/) | 22 | 52.03 | 63.69 | 4 | 56.02 | 79.62 | 48.15 | 100% | subset |
-| [DeepSeek V4.1 Flash 1017 (max)](https://valuerank.alolabs.dev/models/deepseek-v4-1-flash-1017/) | 24 | 50.93 | 35.30 | 2 | 58.59 | 65.93 | 56.14 | 100% | main |
-| [Gemini 4 Argon (high)](https://valuerank.alolabs.dev/models/gemini-4-argon/) | 27 | 46.05 | 0.00 | 9 | 49.91 | 15.44 | 61.41 | 100% | main |
+| [GPT-6 Luna (max)](https://valuerank.alolabs.dev/models/gpt-6-luna/) | 17 | 58.31 | 100.00 | 4 | 55.20 | 87.57 | 44.42 | 100% | main |
+| [DeepSeek V4.1 Flash 1017 (max)](https://valuerank.alolabs.dev/models/deepseek-v4-1-flash-1017/) | 22 | 50.93 | 35.30 | 2 | 58.59 | 65.93 | 56.14 | 100% | main |
+| [Gemini 4 Argon (high)](https://valuerank.alolabs.dev/models/gemini-4-argon/) | 23 | 46.05 | 0.00 | 8 | 49.91 | 15.44 | 61.41 | 100% | main |
+| [MiMo-V2.6-Pro](https://valuerank.alolabs.dev/models/mimo-v2-6-pro/) | — | 52.03 | 63.69 | — | 56.02 | 79.62 | 48.15 | 100% | subset |
 
 ## Not ranked
 
@@ -63,9 +63,9 @@ Each leaf's score z on its fixed 0–100 anchors; "—" marks a leaf with no eli
 | Claude Haiku 5.5 (max) | 34.9 | 32.8 | 24.9 | 90.4 | 52.4 | 69.8 | 56.5 | 35.4 | 56.1 | 82.7 | 29.6 | 20.0 | 41.0 | 49.44 | no |
 | GPT-6 Astra (max) | 42.4 | 59.1 | 81.8 | 89.6 | 80.6 | 85.6 | 54.2 | 68.5 | 71.2 | 80.7 | 63.8 | 63.3 | 70.5 | 68.27 | no |
 | GPT-6 Luna (max) | 25.2 | 12.6 | 33.5 | 81.6 | 46.7 | 64.6 | 47.2 | 53.2 | 45.9 | 83.3 | 22.2 | 8.6 | 41.5 | 44.42 | no |
-| MiMo-V2.6-Pro | 24.0 | 34.8 | 18.0 | 85.2 | 48.8 | 68.5 | 59.5 | 58.6 | 47.8 | 86.3 | 15.2 | 5.7 | 34.0 | 48.15 | no |
 | DeepSeek V4.1 Flash 1017 (max) | 28.5 | 33.8 | 70.9 | 87.7 | 67.5 | 72.9 | 62.3 | 66.6 | 50.5 | 82.7 | 25.3 | 12.9 | 24.0 | 56.14 | no |
 | Gemini 4 Argon (high) | 25.7 | 57.1 | 39.2 | 91.9 | 70.8 | 79.3 | 56.5 | 77.5 | 73.0 | 79.7 | 56.7 | 52.9 | 52.5 | 61.41 | no |
+| MiMo-V2.6-Pro | 24.0 | 34.8 | 18.0 | 85.2 | 48.8 | 68.5 | 59.5 | 58.6 | 47.8 | 86.3 | 15.2 | 5.7 | 34.0 | 48.15 | no |
 
 ## AI Coding Daily ranking
 
@@ -204,13 +204,88 @@ Pairwise reversals: Claude Opus 5.5 (high) and Claude Opus 5.5 (medium). Largest
 | GPT-6.1 Terra (medium) | certified | certified | — | — |
 | GPT-6 Luna (xhigh) | certified | certified | — | — |
 | GPT-6 Luna (high) | certified | certified | — | — |
-| GPT-6 Luna (medium) | certified | certified | — | — |
+| GPT-6 Luna (medium) | certified | certified | — | — | These labels carry the workload cross-check warning (E41, O160, O183: cost per solved task, τ_b 0.35 on 20 configurations, low agreement): the basket-cost order behind them agrees weakly with cost per solved task; the attribution is in scores.json `diagnostics.workloadCrossCheck.attribution`.
 
-**API basis, main workload: cheapest at or above quality 47.2** (lower-median displayed quality of the non-provisional cohort configurations at freeze (E192; headline bar)). Status labels withheld: the ranking's workload cross-check (E41) is below 0.5 (O182).
+**API basis, main workload: cheapest at or above quality 47.2** (lower-median displayed quality of the non-provisional cohort configurations at freeze (E192; headline bar)). Status certified; confirmed cheapest: none.
 
-**API basis, main workload: cheapest at or above quality 37.5** (lower-quartile displayed quality of the non-provisional cohort configurations at freeze (O34)). Status labels withheld: the ranking's workload cross-check (E41) is below 0.5 (O182).
+Configurations that can be confirmed to qualify: 10 (confirmation needs the full-composite lower bound, with missing leaves at 0, to clear the bar; O25). Cheaper same-family configurations on AA's chart that were not evaluated (not ranked in this ranking: lacking its full benchmark set, or not plotted on or near the frontier; E201c, O51): GPT-6.1 Terra (xhigh): GPT-6.1 Terra (non-reasoning), GPT-6.1 Terra (low); GPT-6.1 Terra (high): GPT-6.1 Terra (non-reasoning), GPT-6.1 Terra (low).
 
-**API basis, main workload: cheapest at or above quality 55.5** (upper-quartile displayed quality of the non-provisional cohort configurations at freeze (O34)). Status labels withheld: the ranking's workload cross-check (E41) is below 0.5 (O182).
+Bar comparison: compares 11 configurations that can qualify. The bar is a displayed-quality level; qualification tests each row's full-composite bounds, so a row above the bar on displayed quality can still fail to qualify confirmed when leaves are missing (E198).
+
+| Configuration | Displayed quality − bar | Confirmed qualifies | Possibly qualifies | Possibly cheapest |
+|---|---:|---|---|---|
+| GPT-6.1 Terra (max) | 13.0 | certified | certified | disproved |
+| GPT-6.1 Sol (high) | 11.8 | certified | certified | disproved |
+| DeepSeek V4.1 Flash 1017 (max) | 4.9 | certified | certified | disproved |
+| GPT-6.1 Sol (medium) | 7.8 | certified | certified | disproved |
+| Gemini 4 Argon (high) | 8.4 | certified | certified | disproved |
+| Claude Opus 5.5 (high) | 10.1 | certified | certified | disproved |
+| Kimi K3.1 Pro (max) | 12.0 | certified | certified | disproved |
+| GPT-6 Astra (high) | 13.5 | certified | certified | disproved |
+| Claude Opus 5.5 (medium) | 7.7 | certified | certified | disproved |
+| GPT-6.1 Sol (low) | -2.1 | disproved | disproved | disproved |
+| GPT-6.1 Terra (xhigh) | 2.7 | certified | certified | certified |
+| GPT-6.1 Terra (high) | 0.0 | disproved | certified | certified |
+| GPT-6 Luna (max) | -7.0 | disproved | disproved | disproved |
+| MiMo-V2.6-Pro | -4.3 | disproved | disproved | disproved |
+| GPT-6.1 Terra (medium) | -3.0 | disproved | disproved | disproved |
+| GPT-6 Luna (xhigh) | -12.5 | disproved | disproved | disproved |
+| GPT-6 Luna (high) | -14.6 | disproved | disproved | disproved |
+| GPT-6 Luna (medium) | -20.1 | disproved | disproved | disproved |
+
+**API basis, main workload: cheapest at or above quality 37.5** (lower-quartile displayed quality of the non-provisional cohort configurations at freeze (O34)). Status certified; confirmed cheapest: none.
+
+Configurations that can be confirmed to qualify: 15 (confirmation needs the full-composite lower bound, with missing leaves at 0, to clear the bar; O25). Cheaper same-family configurations on AA's chart that were not evaluated (not ranked in this ranking: lacking its full benchmark set, or not plotted on or near the frontier; E201c, O51): GPT-6 Luna (max): GPT-6 Luna (low), GPT-6 Luna (non-reasoning).
+
+Bar comparison: compares 15 configurations that can qualify and 1 blocker(s) that can qualify but earn no label (E315). The bar is a displayed-quality level; qualification tests each row's full-composite bounds, so a row above the bar on displayed quality can still fail to qualify confirmed when leaves are missing (E198).
+
+| Configuration | Displayed quality − bar | Confirmed qualifies | Possibly qualifies | Possibly cheapest |
+|---|---:|---|---|---|
+| GPT-6.1 Terra (max) | 22.6 | certified | certified | disproved |
+| GPT-6.1 Sol (high) | 21.4 | certified | certified | disproved |
+| DeepSeek V4.1 Flash 1017 (max) | 14.5 | certified | certified | disproved |
+| GPT-6.1 Sol (medium) | 17.5 | certified | certified | disproved |
+| Gemini 4 Argon (high) | 18.0 | certified | certified | disproved |
+| Claude Opus 5.5 (high) | 19.8 | certified | certified | disproved |
+| Kimi K3.1 Pro (max) | 21.6 | certified | certified | disproved |
+| GPT-6 Astra (high) | 23.2 | certified | certified | disproved |
+| Claude Opus 5.5 (medium) | 17.4 | certified | certified | disproved |
+| GPT-6.1 Sol (low) | 7.6 | certified | certified | disproved |
+| GPT-6.1 Terra (xhigh) | 12.4 | certified | certified | disproved |
+| GPT-6.1 Terra (high) | 9.6 | certified | certified | disproved |
+| GPT-6 Luna (max) | 2.6 | certified | certified | certified |
+| MiMo-V2.6-Pro | 5.3 | certified | certified | disproved |
+| GPT-6.1 Terra (medium) | 6.6 | certified | certified | disproved |
+| GPT-6 Luna (xhigh) | -2.9 | disproved | disproved | disproved |
+| GPT-6 Luna (high) | -4.9 | disproved | disproved | disproved |
+| GPT-6 Luna (medium) | -10.5 | disproved | disproved | disproved |
+
+**API basis, main workload: cheapest at or above quality 55.5** (upper-quartile displayed quality of the non-provisional cohort configurations at freeze (O34)). Status certified; confirmed cheapest: GPT-6.1 Sol (high).
+
+Configurations that can be confirmed to qualify: 5 (confirmation needs the full-composite lower bound, with missing leaves at 0, to clear the bar; O25). Cheaper same-family configurations on AA's chart that were not evaluated (not ranked in this ranking: lacking its full benchmark set, or not plotted on or near the frontier; E201c, O51): none.
+
+Bar comparison: compares 6 configurations that can qualify. The bar is a displayed-quality level; qualification tests each row's full-composite bounds, so a row above the bar on displayed quality can still fail to qualify confirmed when leaves are missing (E198).
+
+| Configuration | Displayed quality − bar | Confirmed qualifies | Possibly qualifies | Possibly cheapest |
+|---|---:|---|---|---|
+| GPT-6.1 Terra (max) | 4.6 | certified | certified | disproved |
+| GPT-6.1 Sol (high) | 3.4 | certified | certified | certified |
+| DeepSeek V4.1 Flash 1017 (max) | -3.5 | disproved | disproved | disproved |
+| GPT-6.1 Sol (medium) | -0.5 | disproved | disproved | disproved |
+| Gemini 4 Argon (high) | 0.0 | disproved | certified | disproved |
+| Claude Opus 5.5 (high) | 1.8 | certified | certified | disproved |
+| Kimi K3.1 Pro (max) | 3.6 | certified | certified | disproved |
+| GPT-6 Astra (high) | 5.2 | certified | certified | disproved |
+| Claude Opus 5.5 (medium) | -0.6 | disproved | disproved | disproved |
+| GPT-6.1 Sol (low) | -10.4 | disproved | disproved | disproved |
+| GPT-6.1 Terra (xhigh) | -5.6 | disproved | disproved | disproved |
+| GPT-6.1 Terra (high) | -8.4 | disproved | disproved | disproved |
+| GPT-6 Luna (max) | -15.4 | disproved | disproved | disproved |
+| MiMo-V2.6-Pro | -12.7 | disproved | disproved | disproved |
+| GPT-6.1 Terra (medium) | -11.4 | disproved | disproved | disproved |
+| GPT-6 Luna (xhigh) | -20.9 | disproved | disproved | disproved |
+| GPT-6 Luna (high) | -22.9 | disproved | disproved | disproved |
+| GPT-6 Luna (medium) | -28.5 | disproved | disproved | disproved |
 
 **Plan basis, main workload:** not evaluated (no row has FullCost and an identified M_W (E61/E67)).
 
@@ -625,7 +700,7 @@ The 90% rule's error bound holds per published event (candidate and kernel assig
 | quality 47.2 | GPT-6.1 Terra (xhigh) | not scenario-supported | 49.5% to 50.5% | UU not met, UH not met, HU not met, HH not met | no |
 | quality 47.2 | GPT-6.1 Terra (high) | not scenario-supported | 49.2% to 50.5% | UU not met, UH not met, HU not met, HH not met | no |
 | quality 37.5 | GPT-6 Luna (max) | not scenario-supported | 49.9% to 50.6% | UU not met, UH not met, HU not met, HH not met | no |
-| quality 55.5 | GPT-6.1 Sol (high) | labels withheld: the ranking's workload cross-check (E41) is below 0.5 (O182) | 100.0% to 100.0% | UU met, UH met, HU met, HH met | no |
+| quality 55.5 | GPT-6.1 Sol (high) | supported under all registered role-group kernel checks | 100.0% to 100.0% | UU met, UH met, HU met, HH met | yes | These labels carry the workload cross-check warning (E41, O160, O183: cost per solved task, τ_b 0.35 on 20 configurations, low agreement): the basket-cost order behind them agrees weakly with cost per solved task; the attribution is in scores.json `diagnostics.workloadCrossCheck.attribution`.
 
 ### AI Coding Daily ranking: diagnostics
 
@@ -912,7 +987,7 @@ Pairwise reversals: GPT-6 Astra (high) and GPT-6.1 Sol (low). Largest value chan
 | GPT-6 Astra (xhigh) | disproved | disproved | GPT-6.1 Sol (max) | GPT-6.1 Sol (max) |
 | GPT-6 Luna (low) | certified | certified | — | — |
 | GPT-6.1 Sol (xhigh) | certified | certified | — | — |
-| GPT-6.1 Terra (low) | certified | certified | — | — | Safety-refusal flags (O63; costs and scores unchanged) on these labelled rows: GPT-6 Astra (max) (13 blocked and 0 fallback attempts of 870); GPT-6.1 Sol (max) (15 blocked and 0 fallback attempts of 870); GPT-6.1 Terra (low) (1 blocked and 0 fallback attempts of 870). These labels carry the workload cross-check warning (E41, O160, O182: τ_b 0.52 on 33 configurations, its interval below 0.5): the basket-cost order behind them agrees weakly with cost per solved task; the attribution is in scores.json `diagnostics.workloadCrossCheck.attribution`.
+| GPT-6.1 Terra (low) | certified | certified | — | — | Safety-refusal flags (O63; costs and scores unchanged) on these labelled rows: GPT-6 Astra (max) (13 blocked and 0 fallback attempts of 870); GPT-6.1 Sol (max) (15 blocked and 0 fallback attempts of 870); GPT-6.1 Terra (low) (1 blocked and 0 fallback attempts of 870). These labels carry the workload cross-check warning (E41, O160, O183: cost per solved task, τ_b 0.52 on 33 configurations, uncertain agreement): the basket-cost order behind them agrees weakly with cost per solved task; the attribution is in scores.json `diagnostics.workloadCrossCheck.attribution`.
 
 **API basis, main workload: cheapest at or above quality 47.6** (lower-median displayed quality of the non-provisional cohort configurations at freeze (E192; headline bar)). Status certified; confirmed cheapest: GPT-6.1 Sol (medium).
 
@@ -1783,9 +1858,9 @@ USD at API rates for the exact configuration; "—" marks a component without an
 | Claude Haiku 5.5 (max) | $775.43 | — | $61.41 | $5.27 | $27.80 | $43.02 | $60.79 | $72.36 | $1,046.08 | none |
 | GPT-6 Astra (max) | $2,040.49 | $133.00 | $864.69 | $207.58 | $1,048.30 | $560.88 | $863.12 | $1,223.34 | $6,808.39 | none |
 | GPT-6 Luna (max) | $46.16 | — | $15.47 | $2.85 | $23.91 | $15.59 | $23.22 | $31.79 | $158.99 | none |
-| MiMo-V2.6-Pro | — | — | $34.60 | $2.40 | $27.77 | $28.91 | $33.87 | $44.15 | $171.70 | Coding Agent Index |
 | DeepSeek V4.1 Flash 1017 (max) | $85.92 | — | $61.72 | $4.23 | $114.26 | $58.09 | $68.49 | $138.73 | $531.44 | none |
 | Gemini 4 Argon (high) | $3,402.24 | — | $834.38 | $51.87 | $738.10 | $691.61 | $1,853.84 | $1,308.87 | $8,880.92 | none |
+| MiMo-V2.6-Pro | — | — | $34.60 | $2.40 | $27.77 | $28.91 | $33.87 | $44.15 | $171.70 | Coding Agent Index |
 
 ### Valuation basis
 
@@ -1803,9 +1878,9 @@ The Plan amount is the selected multiple times the cash paid for the fee period 
 | Claude Haiku 5.5 (max) | Claude Pro $20 · common Claude assumption (58.9×, assumption) | $1,178 per month: assumed API-equivalent consumption (owner-named transfer) from claude-pro-opus55-semianalysis | 1.13 per month | unidentified | $17.76 | workload-unmatched; owner-named transfer (assumption); possibly-superseded; valuation basis unverified | larger observed multiple (observed-workload multiple — target-workload ordering not identified) |
 | GPT-6 Astra (max) | ChatGPT Pro 200 $200 · GPT-6 Astra (14.485×, measured) | $2,897 per month: measured-workload capacity | 0.43 per month | unidentified | $470.03 | workload-unmatched; possibly-superseded; valuation basis unverified | larger observed multiple (observed-workload multiple — target-workload ordering not identified) |
 | GPT-6 Luna (max) | ChatGPT Pro 500 $500 · common GPT assumption (10.772×, assumption) | $5,386 per month: assumed API-equivalent consumption (owner-named transfer) from chatgpt-pro500-gpt61sol-semianalysis | 33.88 per month | unidentified | $14.76 | workload-unmatched; owner-named transfer (assumption); possibly-superseded; measured inside an acknowledged accounting-fault window (O91, O92); valuation basis unverified | larger observed multiple (observed-workload multiple — target-workload ordering not identified) |
-| MiMo-V2.6-Pro | MiMo Token Plan Max $100 · quota ceiling (provider-derived) (1.1808×, assumption) | $118 per month: provider quota ceiling: the full quota at API rates (O46; full use assumed) | 0.69 per month | unidentified | $145.41 | workload-unmatched; provider quota ceiling; full use assumed, the optimistic end on use; credits valued at the recorded API rate, not the highest (O46, O125) | larger quota-ceiling multiple (O46: provider-derived, not observed) |
 | DeepSeek V4.1 Flash 1017 (max) | — | — | — | — | $531.44 | API-cost fallback: no admitted Plan route; cross-estimand ordering not identified | no eligible route |
 | Gemini 4 Argon (high) | — | — | — | — | $8,880.92 | API-cost fallback: no admitted Plan route; cross-estimand ordering not identified | no eligible route |
+| MiMo-V2.6-Pro | MiMo Token Plan Max $100 · quota ceiling (provider-derived) (1.1808×, assumption) | $118 per month: provider quota ceiling: the full quota at API rates (O46; full use assumed) | 0.69 per month | unidentified | $145.41 | workload-unmatched; provider quota ceiling; full use assumed, the optimistic end on use; credits valued at the recorded API rate, not the highest (O46, O125) | larger quota-ceiling multiple (O46: provider-derived, not observed) |
 
 ### Route alternatives
 
@@ -1939,7 +2014,7 @@ Pairwise reversals: none. Largest value change: 3.30 points.
 | GPT-6 Astra (max) | certified | certified | — | — |
 | DeepSeek V4.1 Flash 1017 (max) | certified | certified | — | — |
 | Gemini 4 Argon (high) | disproved | disproved | GPT-6.1 Sol (max) | GPT-6.1 Sol (max), GPT-6 Astra (max) |
-| GPT-6 Luna (max) | certified | certified | — | — | Safety-refusal flags (O63; costs and scores unchanged) on these labelled rows: GPT-6 Astra (max) (13 blocked and 0 fallback attempts of 870); GPT-6.1 Sol (max) (15 blocked and 0 fallback attempts of 870). These labels carry the workload cross-check warning (E41, O160, O182: τ_b 0.86 on 8 configurations, its interval below 0.5): the basket-cost order behind them agrees weakly with cost per solved task; the attribution is in scores.json `diagnostics.workloadCrossCheck.attribution`.
+| GPT-6 Luna (max) | certified | certified | — | — | Safety-refusal flags (O63; costs and scores unchanged) on these labelled rows: GPT-6 Astra (max) (13 blocked and 0 fallback attempts of 870); GPT-6.1 Sol (max) (15 blocked and 0 fallback attempts of 870). These labels carry the workload cross-check warning (E41, O160, O183: cost per solved task, τ_b 0.86 on 8 configurations, uncertain agreement): the basket-cost order behind them agrees weakly with cost per solved task; the attribution is in scores.json `diagnostics.workloadCrossCheck.attribution`.
 
 **API basis, main workload: cheapest at or above quality 61.4** (lower-median displayed quality of the non-provisional cohort configurations at freeze (E192; headline bar)). Status certified; confirmed cheapest: GPT-6.1 Sol (max).
 
@@ -2002,7 +2077,7 @@ Bar comparison: compares 3 configurations that can qualify. The bar is a display
 | DeepSeek V4.1 Flash 1017 (max) | certified | certified | — | — |
 | Gemini 4 Argon (high) | disproved | disproved | GPT-6.1 Sol (max) | GPT-6.1 Sol (max), GPT-6 Astra (max) |
 | GPT-6 Luna (max) | certified | certified | — | — |
-| MiMo-V2.6-Pro | certified | certified | — | — | Safety-refusal flags (O63; costs and scores unchanged) on these labelled rows: GPT-6 Astra (max) (13 blocked and 0 fallback attempts of 870); GPT-6.1 Sol (max) (15 blocked and 0 fallback attempts of 870). These labels carry the workload cross-check warning (E41, O160, O182: τ_b 0.86 on 8 configurations, its interval below 0.5): the basket-cost order behind them agrees weakly with cost per solved task; the attribution is in scores.json `diagnostics.workloadCrossCheck.attribution`.
+| MiMo-V2.6-Pro | certified | certified | — | — | Safety-refusal flags (O63; costs and scores unchanged) on these labelled rows: GPT-6 Astra (max) (13 blocked and 0 fallback attempts of 870); GPT-6.1 Sol (max) (15 blocked and 0 fallback attempts of 870). These labels carry the workload cross-check warning (E41, O160, O183: cost per solved task, τ_b 0.86 on 8 configurations, uncertain agreement): the basket-cost order behind them agrees weakly with cost per solved task; the attribution is in scores.json `diagnostics.workloadCrossCheck.attribution`.
 
 **API basis, subset workload (AA-Briefcase, GDP.pdf, AutomationBench-AA, Terminal-Bench 4.0 (AA Index run), FrontierCode 2.0, Terminal-Bench-Science; orderings across workloads not identified): cheapest at or above quality 61.4** (lower-median displayed quality of the non-provisional cohort configurations at freeze (E192; headline bar)). Status certified; confirmed cheapest: GPT-6.1 Sol (max).
 
@@ -2244,7 +2319,7 @@ The 90% rule's error bound holds per published event (candidate and kernel assig
 | quality 61.4 | GPT-6.1 Sol (max) | supported under all registered role-group kernel checks | 100.0% to 100.0% | UU met, UH met, HU met, HH met | yes |
 | quality 49.4 | DeepSeek V4.1 Flash 1017 (max) | supported under all registered role-group kernel checks | 100.0% to 100.0% | UU met, UH met, HU met, HH met | yes |
 | quality 67.5 | GPT-6.1 Sol (max) | not scenario-supported | 49.5% to 50.2% | UU not met, UH not met, HU not met, HH not met | no |
-| quality 67.5 | GPT-6 Astra (max) | not scenario-supported | 49.4% to 50.5% | UU not met, UH not met, HU not met, HH not met | no | Safety-refusal flags (O63; costs and scores unchanged) on these labelled rows: GPT-6.1 Sol (max) (15 blocked and 0 fallback attempts of 870). These labels carry the workload cross-check warning (E41, O160, O182: τ_b 0.86 on 8 configurations, its interval below 0.5): the basket-cost order behind them agrees weakly with cost per solved task; the attribution is in scores.json `diagnostics.workloadCrossCheck.attribution`.
+| quality 67.5 | GPT-6 Astra (max) | not scenario-supported | 49.4% to 50.5% | UU not met, UH not met, HU not met, HH not met | no | Safety-refusal flags (O63; costs and scores unchanged) on these labelled rows: GPT-6.1 Sol (max) (15 blocked and 0 fallback attempts of 870). These labels carry the workload cross-check warning (E41, O160, O183: cost per solved task, τ_b 0.86 on 8 configurations, uncertain agreement): the basket-cost order behind them agrees weakly with cost per solved task; the attribution is in scores.json `diagnostics.workloadCrossCheck.attribution`.
 
 ## Diagnostics
 

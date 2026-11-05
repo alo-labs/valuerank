@@ -316,7 +316,10 @@ def test_score_ranks_gates_disclosures_and_intervals():
     result, frozen = scored()
     output = v.score(result, frozen)
     rows = {row["id"]: row for row in output["rows"]}
-    assert {row["api"]["rank"] for row in output["rows"]} == {1, 2, 3}
+    # O184: the fixture's subset-workload row is ranked within its own workload, not among the main-workload rows.
+    assert sorted(row["api"]["rank"] for row in output["rows"] if row["api"]["rank"] is not None) == [1, 2]
+    subset = [row for row in output["rows"] if row["api"]["rank"] is None]
+    assert len(subset) == 1 and subset[0]["api"]["rankWithinWorkload"] == 1 and subset[0]["api"]["rankNote"] == v.SUBSET_RANK_NOTE
     assert rows["c"]["quality"]["status"] == "scored" and rows["a"]["plan"]["selectionReason"] == "only remaining eligible route"
     assert rows["a"]["aaCostCaveat"] is None and rows["b"]["aaCostCaveat"] is None  # a footnote without a pricing term
     assert output["gates"]["hold"] is False and output["intervals"]["api"]["status"] == "evaluated"
@@ -2862,7 +2865,7 @@ def test_o182_low_workload_agreement_withholds_the_cheapest_labels(monkeypatch):
     withheld = v.withhold_bars(output, v.LABEL_GATE)
     assert withheld["bars"][0] == {"status": v.LABEL_GATE, "evaluatedStatus": "certified", "confirmedCheapest": None,
                                    "withheldConfirmedCheapest": "a", "possibleCheapest": ["a"]} and withheld["labelGate"] == v.LABEL_GATE
-    monkeypatch.setattr(v, "workload_cross_check", lambda rows, main, components=None: {"warning": "low agreement"})
+    monkeypatch.setattr(v, "workload_cross_check", lambda rows, main, components=None: {"warning": "low agreement", "attemptCheck": {"warning": "low agreement"}})
     assert v.label_gate(result["rows"], result["mainWorkload"]) == v.LABEL_GATE
     scores = v.score(result, frozen)
     assert scores["labelGate"] == v.LABEL_GATE and all(bar["status"] == v.LABEL_GATE for bar in scores["intervals"]["api"]["bars"])
@@ -2871,3 +2874,13 @@ def test_o182_low_workload_agreement_withholds_the_cheapest_labels(monkeypatch):
     monkeypatch.setattr(v.intervals, "cheapest_above_bar", lambda boxes, bar: {"possibleCheapest": ["a"]})
     labels = v.bar_labels(result, frozen, seed=1, batch=10)
     assert labels and all(item["candidates"]["a"] == {"label": False, "reading": v.LABEL_GATE} for item in labels)
+
+
+def test_o184_subset_rows_rank_within_their_workload():
+    """O184: main-workload rows are ranked among themselves; a subset-workload row only within its own workload."""
+
+    values = {"a": 60.0, "b": 50.0, "s": 99.0, "t": 40.0, "u": 70.0}
+    workload = {"a": "main", "b": "main", "s": "sub1", "t": "sub1", "u": "sub2"}
+    headline, within = v.workload_ranks(values, workload, "main")
+    assert headline == {"a": 1, "b": 2} and within == {"s": 1, "t": 2, "u": 1}
+    assert v._within(within, "s") == {"rankWithinWorkload": 1, "rankNote": v.SUBSET_RANK_NOTE} and v._within(within, "a") == {} and v._within(None, "s") == {}

@@ -190,7 +190,11 @@ def model_link(entry, label=None):
     return f"[{label or entry['name']}]({SITE_URL}/models/{entry['slug']}/)"
 
 
-def rank_text(rank):
+def rank_text(rank, scores=None):
+    """A competition rank, or for a subset-workload row its within-workload rank (O184)."""
+
+    if rank is None and (scores or {}).get("rankWithinWorkload") is not None:
+        return f"{scores['rankWithinWorkload']} (own workload, O184)"
     return DASH if rank is None else rank
 
 
@@ -326,10 +330,11 @@ def label_safety_note(facts, row_ids):
     flagged = [f"{facts.labels([row_id])} ({flags[row_id]['blocked']} blocked and {flags[row_id]['fallback']} fallback attempts of {flags[row_id]['attempts']})"
                for row_id in sorted({row_id.split("@")[0] for row_id in row_ids}) if flags.get(row_id, {}).get("status") == "flagged"]
     text = (" Safety-refusal flags (O63; costs and scores unchanged) on these labelled rows: " + "; ".join(flagged) + ".") if flagged else ""
-    # O160 as amended by O182: low agreement withholds the labels; under "uncertain agreement" every label carries the warning.
+    # O160 as amended by O182/O183: the like-for-like check gates the labels; any label issued while the success-adjusted
+    # check warns carries that warning.
     check = (facts.v3.get("diagnostics") or {}).get("workloadCrossCheck") or {}
-    if row_ids and check.get("warning") == "uncertain agreement":
-        text += (f" These labels carry the workload cross-check warning (E41, O160, O182: τ_b {check['tau']:.2f} on {check['n']} configurations, its interval below 0.5): "
+    if row_ids and check.get("warning") in ("low agreement", "uncertain agreement"):
+        text += (f" These labels carry the workload cross-check warning (E41, O160, O183: cost per solved task, τ_b {check['tau']:.2f} on {check['n']} configurations, {check['warning']}): "
                  "the basket-cost order behind them agrees weakly with cost per solved task; the attribution is in scores.json "
                  "`diagnostics.workloadCrossCheck.attribution`.")
     # O162: a bar whose displayed cheapest changes when the multi-harness Bug Hunt rows take their other harness results.
@@ -822,8 +827,8 @@ def ranking_rows(facts, flags=True):
     for entry in facts.ranked:
         row = facts.row(entry)
         table_rows.append([
-            rank_text(entry["rank"]["plan"]),
-            rank_text(entry["rank"]["api"]),
+            rank_text(entry["rank"]["plan"], row.get("planScore")),
+            rank_text(entry["rank"]["api"], row.get("api")),
             model_link(entry, configuration_label(row, facts.names)),
             fnum(entry["overall"]["plan"], 1),
             fnum(entry["overall"]["api"], 1),
@@ -937,7 +942,7 @@ def readme(facts):
 **Version:** {VERSION}
 **Updated:** {DATE}
 **Methodology:** {v3['methodologyVersion']} · {v3['basketVersion']} · anchor version {v3['anchorVersion']}
-**Scope:** {len(facts.ranked)} cohort configurations ({sum(1 for entry in facts.ranked if entry['rank']['api'] is not None)} with a value score) from a {len(facts.scores['models'])}-model AA-mapped roster; value is a {facts.cost_pct:.0f}% cost score (nominal weight{influence_text(v3, short=True)}) plus {facts.quality_pct:.0f}% quality over {len(q.LEAVES)} benchmark leaves
+**Scope:** {len(facts.ranked)} cohort configurations ({sum(1 for entry in facts.ranked if entry['overall']['api'] is not None)} with a value score) from a {len(facts.scores['models'])}-model AA-mapped roster; value is a {facts.cost_pct:.0f}% cost score (nominal weight{influence_text(v3, short=True)}) plus {facts.quality_pct:.0f}% quality over {len(q.LEAVES)} benchmark leaves
 
 ## Current result
 

@@ -54,11 +54,12 @@ def test_readme_ranks_configurations_in_plan_order(emitted):
     # O53/O54: the leading max-effort ranking has one configuration per family at its top effort.
     assert rows[0][2].startswith("[GPT-6.1 Sol (max)](https://valuerank.alolabs.dev/models/gpt-6-1-sol/)")
     assert any(row[2].startswith("[Claude Opus 5.5 (max)](https://valuerank.alolabs.dev/models/claude-opus-5-5/)") for row in ranked)
-    # Every cohort configuration has an AA cost today, so no row is unranked for want of one.
-    assert unranked == []
+    # Every cohort configuration has an AA cost today, so no row is unranked for want of one; O184: the subset-workload row
+    # follows the ranked rows with its rank within its own workload.
+    assert [(row[0], row[1], row[2].split("]")[0]) for row in unranked] == [("1 (own workload, O184)", "1 (own workload, O184)", "[MiMo-V2.6-Pro")]
     assert "- **no cost**: AA publishes no cost for the configuration, so it has no value score and no rank (AGENTS.md); its quality is shown." in readme
     assert readme.startswith("# ValueRank\n")
-    scored = sum(1 for row in v3["rows"] if row["api"]["rank"] is not None)
+    scored = sum(1 for row in v3["rows"] if row["api"]["value"] is not None)
     assert f"**Scope:** {len(v3['rows'])} cohort configurations ({scored} with a value score)" in readme and scored == len(v3["rows"])
     assert f"**Methodology:** {v3['methodologyVersion']} · {v3['basketVersion']} · anchor version {v3['anchorVersion']}" in readme
     assert "## AA intelligence and total-cost comparison" in readme
@@ -317,7 +318,7 @@ def test_plan_interval_outputs_and_unconfirmed_bars_are_described(repo_copy, pin
     # Reviewer 72 (O63): the labelled rows' safety-refusal flags follow the labels.
     assert "GPT-6.1 Sol (max) (15 blocked and 0 fallback attempts of 870)." in plan_sentence
     # O182: under uncertain agreement the labels are issued and carry the cross-check warning.
-    assert plan_sentence.endswith("`diagnostics.workloadCrossCheck.attribution`.") and "O160, O182" in plan_sentence
+    assert plan_sentence.endswith("`diagnostics.workloadCrossCheck.attribution`.") and "O160, O183" in plan_sentence
     scores = (repo_copy / "scores.md").read_text()
     assert "**Plan basis, main workload: frontier.** Not evaluable: none." in scores
     assert "Status certified; confirmed cheapest: none." in scores

@@ -14998,7 +14998,7 @@
           "costUsd": 10360.959965732674,
           "costScore": 12.671375364839287,
           "value": 53.82395604392801,
-          "rank": 6
+          "rank": 5
         },
         "planScore": {
           "costUsd": 175.90763948612351,
@@ -15820,7 +15820,7 @@
           "costUsd": 10501.818258108602,
           "costScore": 12.429235755578565,
           "value": 53.65899522686846,
-          "rank": 7
+          "rank": 6
         },
         "planScore": {
           "costUsd": 178.29912152985742,
@@ -17371,7 +17371,7 @@
           "costUsd": 531.4356367333653,
           "costScore": 35.29982224047746,
           "value": 50.92985627935505,
-          "rank": 24
+          "rank": 22
         },
         "planRowId": "deepseek-v4-1-flash-1017@api"
       },
@@ -18041,13 +18041,13 @@
           "costUsd": 8880.92222822785,
           "costScore": 15.435342497879763,
           "value": 49.913136493341874,
-          "rank": 9
+          "rank": 8
         },
         "planScore": {
           "costUsd": 8880.92222822785,
           "costScore": 0.0,
           "value": 46.054300868871934,
-          "rank": 27
+          "rank": 23
         },
         "planRowId": "gemini-4-argon@api"
       },
@@ -18863,7 +18863,7 @@
           "costUsd": 1046.0801077265787,
           "costScore": 53.788436166463555,
           "value": 50.52783846502953,
-          "rank": 8
+          "rank": 7
         },
         "planScore": {
           "costUsd": 17.760273475833255,
@@ -19716,7 +19716,7 @@
           "costUsd": 158.9913590982512,
           "costScore": 87.57076424442143,
           "value": 55.20401280342945,
-          "rank": 5
+          "rank": 4
         },
         "planScore": {
           "costUsd": 14.759687996495655,
@@ -20539,13 +20539,17 @@
           "costUsd": 171.70030964750728,
           "costScore": 79.62314428191684,
           "value": 56.01540521836752,
-          "rank": 4
+          "rank": null,
+          "rankWithinWorkload": 1,
+          "rankNote": "subset workload: no cross-workload rank; ranked within its own workload (O184)"
         },
         "planScore": {
           "costUsd": 145.41015383427106,
           "costScore": 63.686784795180614,
           "value": 52.03131534668346,
-          "rank": 22
+          "rank": null,
+          "rankWithinWorkload": 1,
+          "rankNote": "subset workload: no cross-workload rank; ranked within its own workload (O184)"
         },
         "planRowId": "mimo-v2-6-pro@mimo-token-plan-max"
       }
@@ -20914,7 +20918,7 @@
         "costUsd": 531.4356367333653,
         "costScore": 35.29982224047746,
         "value": 50.92985627935505,
-        "rank": 24
+        "rank": 22
       },
       {
         "id": "gemini-4-argon@api",
@@ -20937,7 +20941,7 @@
         "costUsd": 8880.92222822785,
         "costScore": 0.0,
         "value": 46.054300868871934,
-        "rank": 27
+        "rank": 23
       },
       {
         "id": "claude-haiku-5-5-max@claude-max-20x",
@@ -21136,7 +21140,7 @@
         "costUsd": 174.4921846011253,
         "costScore": 58.134740099343894,
         "value": 50.643304172724285,
-        "rank": 26
+        "rank": null
       },
       {
         "id": "mimo-v2-6-pro@mimo-token-plan-max",
@@ -21159,7 +21163,7 @@
         "costUsd": 145.41015383427106,
         "costScore": 63.686784795180614,
         "value": 52.03131534668346,
-        "rank": 22
+        "rank": null
       },
       {
         "id": "mimo-v2-6-pro@mimo-token-plan-pro",
@@ -21182,7 +21186,7 @@
         "costUsd": 156.8899028211872,
         "costScore": 61.3728666869018,
         "value": 51.45283581961376,
-        "rank": 23
+        "rank": null
       },
       {
         "id": "mimo-v2-6-pro@mimo-token-plan-standard",
@@ -21205,7 +21209,7 @@
         "costUsd": 173.4346562096033,
         "costScore": 58.31985883197005,
         "value": 50.68958385588083,
-        "rank": 25
+        "rank": null
       }
     ],
     "intervals": {
@@ -23799,6 +23803,14 @@
         "benchmark": "Terminal-Bench 4.0",
         "n": 8,
         "minRows": 8,
+        "attemptCheck": {
+          "tau": 0.8571428571428571,
+          "interval": [
+            0.4782608695652174,
+            1.0
+          ],
+          "warning": "uncertain agreement"
+        },
         "attribution": {
           "leaveOneOut": {
             "coding-agent-index": 1.0,
@@ -56788,7 +56800,7 @@
                 "levelConfiguration": "gpt-6.1-terra-high",
                 "rule": "lower-median displayed quality of the non-provisional cohort configurations at freeze (E192; headline bar)"
               },
-              "status": "labels withheld: the ranking's workload cross-check (E41) is below 0.5 (O182)",
+              "status": "certified",
               "rows": {
                 "gpt-6.1-terra": {
                   "confirmed": "certified",
@@ -56942,9 +56954,7 @@
               "possibleBlockerQualifierN": 0,
               "possibleQualifierN": 11,
               "confirmedQualifierN": 10,
-              "comparison": "compares 11 configurations that can qualify",
-              "evaluatedStatus": "certified",
-              "withheldConfirmedCheapest": null
+              "comparison": "compares 11 configurations that can qualify"
             },
             {
               "reference": {
@@ -56953,7 +56963,7 @@
                 "levelConfiguration": "claude-haiku-5-5-high",
                 "rule": "lower-quartile displayed quality of the non-provisional cohort configurations at freeze (O34)"
               },
-              "status": "labels withheld: the ranking's workload cross-check (E41) is below 0.5 (O182)",
+              "status": "certified",
               "rows": {
                 "gpt-6.1-terra": {
                   "confirmed": "certified",
@@ -57102,9 +57112,7 @@
               "possibleBlockerQualifierN": 1,
               "possibleQualifierN": 15,
               "confirmedQualifierN": 15,
-              "comparison": "compares 15 configurations that can qualify and 1 blocker(s) that can qualify but earn no label (E315)",
-              "evaluatedStatus": "certified",
-              "withheldConfirmedCheapest": null
+              "comparison": "compares 15 configurations that can qualify and 1 blocker(s) that can qualify but earn no label (E315)"
             },
             {
               "reference": {
@@ -57113,7 +57121,7 @@
                 "levelConfiguration": "gemini-4-argon",
                 "rule": "upper-quartile displayed quality of the non-provisional cohort configurations at freeze (O34)"
               },
-              "status": "labels withheld: the ranking's workload cross-check (E41) is below 0.5 (O182)",
+              "status": "certified",
               "rows": {
                 "gpt-6.1-terra": {
                   "confirmed": "certified",
@@ -57251,7 +57259,7 @@
               "possibleCheapest": [
                 "gpt-6.1-sol-high"
               ],
-              "confirmedCheapest": null,
+              "confirmedCheapest": "gpt-6.1-sol-high",
               "uncheckedCheaperSiblings": {
                 "gpt-6.1-sol-high": []
               },
@@ -57259,12 +57267,9 @@
               "possibleBlockerQualifierN": 0,
               "possibleQualifierN": 6,
               "confirmedQualifierN": 5,
-              "comparison": "compares 6 configurations that can qualify",
-              "evaluatedStatus": "certified",
-              "withheldConfirmedCheapest": "gpt-6.1-sol-high"
+              "comparison": "compares 6 configurations that can qualify"
             }
-          ],
-          "labelGate": "labels withheld: the ranking's workload cross-check (E41) is below 0.5 (O182)"
+          ]
         },
         "plan": {
           "universe": [],
@@ -57339,12 +57344,10 @@
           ],
           "status": "unevaluable",
           "reason": "no row has FullCost and an identified M_W (E61/E67)",
-          "staleListed": [],
-          "bars": [],
-          "labelGate": "labels withheld: the ranking's workload cross-check (E41) is below 0.5 (O182)"
+          "staleListed": []
         }
       },
-      "labelGate": "labels withheld: the ranking's workload cross-check (E41) is below 0.5 (O182)",
+      "labelGate": null,
       "incompleteEvidence": [
         {
           "id": "gpt-6.1-sol",
@@ -59201,6 +59204,14 @@
           "benchmark": "Terminal-Bench 4.0",
           "n": 20,
           "minRows": 8,
+          "attemptCheck": {
+            "tau": 0.9052631578947369,
+            "interval": [
+              0.7900552486187845,
+              0.9782608695652174
+            ],
+            "warning": null
+          },
           "attribution": {
             "leaveOneOut": {
               "aa-briefcase": 0.3473684210526316,
@@ -79038,8 +79049,8 @@
                   1.0,
                   1.0
                 ],
-                "label": false,
-                "reading": "labels withheld: the ranking's workload cross-check (E41) is below 0.5 (O182)"
+                "label": true,
+                "reading": "supported under all registered role-group kernel checks"
               }
             }
           }
@@ -114728,6 +114739,14 @@
           "benchmark": "Terminal-Bench 4.0",
           "n": 33,
           "minRows": 8,
+          "attemptCheck": {
+            "tau": 0.9166666666666666,
+            "interval": [
+              0.8512720156555773,
+              0.9724409448818898
+            ],
+            "warning": null
+          },
           "attribution": {
             "leaveOneOut": {
               "aa-briefcase": 0.5227272727272727,

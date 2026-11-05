@@ -5,7 +5,7 @@
       "date": "October 19, 2026",
       "models": 9,
       "dimensions": 14,
-      "summary": "9 models ranked on 14 dimensions; GPT-6.1 Sol (max) is first on the API basis.",
+      "summary": "8 models ranked on 14 dimensions; GPT-6.1 Sol (max) is first on the API basis.",
       "rankChanges": [
         {
           "slug": "gpt-6-1-sol",
@@ -20,46 +20,33 @@
           "to": 3
         },
         {
-          "slug": "mimo-v2-6-pro",
-          "name": "MiMo-V2.6-Pro",
-          "from": 7,
-          "to": 4
-        },
-        {
           "slug": "gpt-6-luna",
           "name": "GPT-6 Luna (max)",
           "from": 11,
-          "to": 5
-        },
-        {
-          "slug": "claude-opus-5-5",
-          "name": "Claude Opus 5.5 (max)",
-          "from": 5,
-          "to": 6
+          "to": 4
         },
         {
           "slug": "claude-sonnet-5-5",
           "name": "Claude Sonnet 5.5",
           "from": 3,
-          "to": 7
+          "to": 6
         },
         {
           "slug": "gemini-4-argon",
           "name": "Gemini 4 Argon",
           "from": 1,
-          "to": 9
+          "to": 8
         }
       ],
       "ranks": {
-        "claude-haiku-5-5-max": 8,
-        "claude-opus-5-5": 6,
-        "claude-sonnet-5-5": 7,
+        "claude-haiku-5-5-max": 7,
+        "claude-opus-5-5": 5,
+        "claude-sonnet-5-5": 6,
         "deepseek-v4-1-flash-1017": 2,
-        "gemini-4-argon": 9,
+        "gemini-4-argon": 8,
         "gpt-6-astra": 3,
-        "gpt-6-luna": 5,
-        "gpt-6-1-sol": 1,
-        "mimo-v2-6-pro": 4
+        "gpt-6-luna": 4,
+        "gpt-6-1-sol": 1
       },
       "added": [
         "claude-haiku-5-5-max",
@@ -77,6 +64,7 @@
         "gpt-6-sol",
         "grok-4-7",
         "mimo-v2-6-flash",
+        "mimo-v2-6-pro",
         "qwen3-8-max"
       ]
     },

@@ -2505,3 +2505,14 @@ Asked on I64 Q1 whether future O71 admissions should be executed by the build fr
 - M1 (the O181 sentence reverses the price-ratio direction): verified; under an equal attainable raw-token allowance and the shared mix, M_target = r·M_donor, so where r > 1 the donor multiple understates the conditional valuation and is the bracket's low (conservative) end. Corrected, with the caveat that a credit-valued or burn-rate meter needs its own coefficients; O181's displayed figure is unchanged. The sign fixture is not added (the bracket code already computes M × min(1, r) and M × max(1, r), tested).
 - L1 (the limitations sentence still kept the AI Coding Daily labels): adopted; it now separates O133 (pending components keep eligibility) from O182 (the low cross-check withholds the cheapest labels).
 - Round status (O56): not clean (a Medium); Sol's clean run restarts.
+
+## Owner decisions O183–O184 (2026-11-05), asked on reviewer 105
+- O183 (the O182 gate, amending O182): cost per solved task also reads success, so a basket that tracks the execution's cost per attempted task exactly can read low agreement (reviewer 105's counterexample). The label gate now reads a like-for-like check, basket cost against Terminal-Bench 4.0 cost per attempted task on the same panel (`workloadCrossCheck.attemptCheck`); the success-adjusted statistic stays a published diagnostic, its warning carried by every label issued. Today the like-for-like check reads τ_b 0.91 in the AI Coding Daily ranking (0.86 in the max-effort ranking), so no ranking's labels are withheld; the AI Coding Daily ranking's 0.35 was success, not cost, and its labels issue again, each carrying that warning.
+- O184 (subset-workload ranks, reading O17/O117): a subset-workload row stays scored and in the table but takes no rank among the main-workload rows; it is ranked within its own workload (`rankWithinWorkload`, `rankNote`), shown "N (own workload, O184)". Today this is MiMo-V2.6-Pro in the max-effort ranking.
+
+## Reviewer 105 (Gemini 3.8 Flash, round 13, Thinking, six sections of r187, 16 parts)
+- Read checks: every part read to its end.
+- Parts 4–6, 7–9, 13–14 and 15–16: NO FURTHER FEEDBACK (parts 15–16 added a Low on the review copy's character-based split, a tooling matter outside the methodology, not changed).
+- Parts 1–3 M (owner decision challenge to O117's global rank for subset rows): owner decision O184. L (two uses of "cohort row"): adopted; the configuration rule now says "cohort configuration", a cohort row of each ranking whose full set it has.
+- Parts 10–12 M (owner decision challenge to O182: the gate reads success, not cost): owner decision O183.
+- Round status (O56): not clean (Mediums); Gemini's clean run restarts.

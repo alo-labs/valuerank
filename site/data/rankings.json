@@ -300,6 +300,11 @@
         "api": 1,
         "plan": 1
       },
+      "rankWithinWorkload": {
+        "api": null,
+        "plan": null
+      },
+      "rankNote": null,
       "overall": {
         "api": 62.8068545334111,
         "plan": 70.31274993732659
@@ -431,9 +436,14 @@
       "aaFrontierIntelligenceGap": 1,
       "aaFrontierFootnote": null,
       "rank": {
-        "api": 6,
+        "api": 5,
         "plan": 5
       },
+      "rankWithinWorkload": {
+        "api": null,
+        "plan": null
+      },
+      "rankNote": null,
       "overall": {
         "api": 53.82395604392801,
         "plan": 67.95360314931419
@@ -564,9 +574,14 @@
       "aaFrontierIntelligenceGap": 3,
       "aaFrontierFootnote": null,
       "rank": {
-        "api": 7,
+        "api": 6,
         "plan": 7
       },
+      "rankWithinWorkload": {
+        "api": null,
+        "plan": null
+      },
+      "rankNote": null,
       "overall": {
         "api": 53.65899522686846,
         "plan": 67.74569800303811
@@ -694,9 +709,14 @@
       "aaFrontierIntelligenceGap": null,
       "aaFrontierFootnote": "Claude Haiku 5.5 has 5x higher pricing on longer-context inputs which are not currently reflected; we are working to include this in cost figures across Artificial Analysis.",
       "rank": {
-        "api": 8,
+        "api": 7,
         "plan": 11
       },
+      "rankWithinWorkload": {
+        "api": null,
+        "plan": null
+      },
+      "rankNote": null,
       "overall": {
         "api": 50.52783846502953,
         "plan": 62.08072942341364
@@ -828,6 +848,11 @@
         "api": 3,
         "plan": 14
       },
+      "rankWithinWorkload": {
+        "api": null,
+        "plan": null
+      },
+      "rankNote": null,
       "overall": {
         "api": 56.256013488144276,
         "plan": 60.97171984452988
@@ -958,9 +983,14 @@
       "aaFrontierIntelligenceGap": 2,
       "aaFrontierFootnote": null,
       "rank": {
-        "api": 5,
+        "api": 4,
         "plan": 17
       },
+      "rankWithinWorkload": {
+        "api": null,
+        "plan": null
+      },
+      "rankNote": null,
       "overall": {
         "api": 55.20401280342945,
         "plan": 58.3113217423241
@@ -1071,123 +1101,6 @@
       "bandExcludesTransfer": true
     },
     {
-      "slug": "mimo-v2-6-pro",
-      "name": "MiMo-V2.6-Pro",
-      "shortName": "MiMo V2.6 Pro",
-      "developer": "Xiaomi",
-      "aaUrl": "https://artificialanalysis.ai/models/mimo-v2-6-pro",
-      "aaVariant": null,
-      "rankingEligible": true,
-      "exclusionReasons": [],
-      "intelligenceIndex": {
-        "value": 29.8897833093321,
-        "status": "measured"
-      },
-      "speed": 49.3553855539778,
-      "aaFrontierTier": "left cohort",
-      "aaFrontierConfiguration": "MiMo-V2.6-Pro",
-      "aaFrontierIntelligenceGap": null,
-      "aaFrontierFootnote": null,
-      "rank": {
-        "api": 4,
-        "plan": 22
-      },
-      "overall": {
-        "api": 56.01540521836752,
-        "plan": 52.03131534668346
-      },
-      "quality": 48.14615886385108,
-      "qualityRank": 8,
-      "dims": {
-        "costComposite": null,
-        "frontierCode": 23.9701262626263,
-        "terminalBench": 34.8484848484849,
-        "bugHunt": 17.988552739165986,
-        "vibeCode": 85.223,
-        "codeMigration": 48.786,
-        "livebench2Overall": 68.48,
-        "gdpval": 59.470000000000006,
-        "automationBench": 58.623409434190854,
-        "omniscience": 47.766666666666666,
-        "lcr": 86.3333333333333,
-        "hle": 15.2,
-        "tbScience": 5.71428571428571,
-        "critpt": 34.0
-      },
-      "costDims": {
-        "api": 79.62314428191684,
-        "plan": 63.686784795180614
-      },
-      "raw": {
-        "frontierCode": 0.239701262626263,
-        "terminalBench": 34.8484848484849,
-        "bugHunt": 22,
-        "vibeCode": 85.223,
-        "codeMigration": 48.786,
-        "livebench2Overall": 68.48,
-        "gdpval": 1689.4,
-        "automationBench": 0.5862340943419085,
-        "omniscience": -4.466666666666667,
-        "lcr": 0.863333333333333,
-        "hle": 0.152,
-        "tbScience": 0.0571428571428571,
-        "critpt": 0.34
-      },
-      "coverage": {
-        "pct": 100.0,
-        "costAvailable": true,
-        "missing": [],
-        "provisional": false,
-        "provisionalReasons": []
-      },
-      "cost": {
-        "apiUsd": 171.70030964750728,
-        "planUsd": 145.41015383427106,
-        "fallback": null,
-        "route": {
-          "id": "mimo-tokenplan-max-mimo-v2-6-pro-quota-ceiling",
-          "planLabel": "MiMo Token Plan Max $100 · quota ceiling (provider-derived)",
-          "planFeeUsd": 100,
-          "valueMultiple": 1.1808,
-          "grade": "assumption",
-          "assumptionKind": "ceiling",
-          "evidenceLabel": "Provider quota ceiling (owner decision O46; not a measurement)",
-          "sourceModel": null,
-          "sourceUrl": "https://mimo.mi.com/docs/en-US/price/token-plan",
-          "sourceDate": "2026-10-21"
-        },
-        "subset": true,
-        "partialComponents": [],
-        "workload": "835a9baf594a1251",
-        "planFlags": [
-          "workload-unmatched",
-          "provider quota ceiling; full use assumed, the optimistic end on use; credits valued at the recorded API rate, not the highest (O46, O125)"
-        ]
-      },
-      "grade": "measured",
-      "pareto": {
-        "api": false,
-        "plan": false
-      },
-      "frontierStatus": {
-        "api": null,
-        "plan": null
-      },
-      "scenario": {
-        "api": null,
-        "plan": null
-      },
-      "flags": [
-        "Subset cost: scored on its own workload; cross-workload ordering not identified"
-      ],
-      "tier": "Premium",
-      "band": {
-        "api": null,
-        "plan": null
-      },
-      "bandExcludesTransfer": true
-    },
-    {
       "slug": "deepseek-v4-1-flash-1017",
       "name": "DeepSeek V4.1 Flash 1017",
       "shortName": "DeepSeek V4.1 Flash 1017",
@@ -1207,8 +1120,13 @@
       "aaFrontierFootnote": null,
       "rank": {
         "api": 2,
-        "plan": 24
+        "plan": 22
       },
+      "rankWithinWorkload": {
+        "api": null,
+        "plan": null
+      },
+      "rankNote": null,
       "overall": {
         "api": 58.58793280181757,
         "plan": 50.92985627935505
@@ -1327,9 +1245,14 @@
       "aaFrontierIntelligenceGap": null,
       "aaFrontierFootnote": null,
       "rank": {
-        "api": 9,
-        "plan": 27
+        "api": 8,
+        "plan": 23
       },
+      "rankWithinWorkload": {
+        "api": null,
+        "plan": null
+      },
+      "rankNote": null,
       "overall": {
         "api": 49.913136493341874,
         "plan": 46.054300868871934
@@ -1428,6 +1351,128 @@
         ]
       },
       "bandExcludesTransfer": false
+    },
+    {
+      "slug": "mimo-v2-6-pro",
+      "name": "MiMo-V2.6-Pro",
+      "shortName": "MiMo V2.6 Pro",
+      "developer": "Xiaomi",
+      "aaUrl": "https://artificialanalysis.ai/models/mimo-v2-6-pro",
+      "aaVariant": null,
+      "rankingEligible": true,
+      "exclusionReasons": [],
+      "intelligenceIndex": {
+        "value": 29.8897833093321,
+        "status": "measured"
+      },
+      "speed": 49.3553855539778,
+      "aaFrontierTier": "left cohort",
+      "aaFrontierConfiguration": "MiMo-V2.6-Pro",
+      "aaFrontierIntelligenceGap": null,
+      "aaFrontierFootnote": null,
+      "rank": {
+        "api": null,
+        "plan": null
+      },
+      "rankWithinWorkload": {
+        "api": 1,
+        "plan": 1
+      },
+      "rankNote": "subset workload: no cross-workload rank; ranked within its own workload (O184)",
+      "overall": {
+        "api": 56.01540521836752,
+        "plan": 52.03131534668346
+      },
+      "quality": 48.14615886385108,
+      "qualityRank": 8,
+      "dims": {
+        "costComposite": null,
+        "frontierCode": 23.9701262626263,
+        "terminalBench": 34.8484848484849,
+        "bugHunt": 17.988552739165986,
+        "vibeCode": 85.223,
+        "codeMigration": 48.786,
+        "livebench2Overall": 68.48,
+        "gdpval": 59.470000000000006,
+        "automationBench": 58.623409434190854,
+        "omniscience": 47.766666666666666,
+        "lcr": 86.3333333333333,
+        "hle": 15.2,
+        "tbScience": 5.71428571428571,
+        "critpt": 34.0
+      },
+      "costDims": {
+        "api": 79.62314428191684,
+        "plan": 63.686784795180614
+      },
+      "raw": {
+        "frontierCode": 0.239701262626263,
+        "terminalBench": 34.8484848484849,
+        "bugHunt": 22,
+        "vibeCode": 85.223,
+        "codeMigration": 48.786,
+        "livebench2Overall": 68.48,
+        "gdpval": 1689.4,
+        "automationBench": 0.5862340943419085,
+        "omniscience": -4.466666666666667,
+        "lcr": 0.863333333333333,
+        "hle": 0.152,
+        "tbScience": 0.0571428571428571,
+        "critpt": 0.34
+      },
+      "coverage": {
+        "pct": 100.0,
+        "costAvailable": true,
+        "missing": [],
+        "provisional": false,
+        "provisionalReasons": []
+      },
+      "cost": {
+        "apiUsd": 171.70030964750728,
+        "planUsd": 145.41015383427106,
+        "fallback": null,
+        "route": {
+          "id": "mimo-tokenplan-max-mimo-v2-6-pro-quota-ceiling",
+          "planLabel": "MiMo Token Plan Max $100 · quota ceiling (provider-derived)",
+          "planFeeUsd": 100,
+          "valueMultiple": 1.1808,
+          "grade": "assumption",
+          "assumptionKind": "ceiling",
+          "evidenceLabel": "Provider quota ceiling (owner decision O46; not a measurement)",
+          "sourceModel": null,
+          "sourceUrl": "https://mimo.mi.com/docs/en-US/price/token-plan",
+          "sourceDate": "2026-10-21"
+        },
+        "subset": true,
+        "partialComponents": [],
+        "workload": "835a9baf594a1251",
+        "planFlags": [
+          "workload-unmatched",
+          "provider quota ceiling; full use assumed, the optimistic end on use; credits valued at the recorded API rate, not the highest (O46, O125)"
+        ]
+      },
+      "grade": "measured",
+      "pareto": {
+        "api": false,
+        "plan": false
+      },
+      "frontierStatus": {
+        "api": null,
+        "plan": null
+      },
+      "scenario": {
+        "api": null,
+        "plan": null
+      },
+      "flags": [
+        "Subset cost: scored on its own workload; cross-workload ordering not identified"
+      ],
+      "tier": "Premium",
+      "band": {
+        "api": null,
+        "plan": null
+      },
+      "bandExcludesTransfer": true
     },
     {
       "slug": "claude-haiku-5-5-high",
@@ -4729,6 +4774,11 @@
         "api": 1,
         "plan": 1
       },
+      "rankWithinWorkload": {
+        "api": null,
+        "plan": null
+      },
+      "rankNote": null,
       "overall": {
         "api": 62.8068545334111,
         "plan": 70.31274993732659
@@ -4870,6 +4920,11 @@
         "api": 1,
         "plan": 2
       },
+      "rankWithinWorkload": {
+        "api": null,
+        "plan": null
+      },
+      "rankNote": null,
       "overall": {
         "api": 62.8068545334111,
         "plan": 70.15317045666461
@@ -5010,6 +5065,11 @@
         "api": 1,
         "plan": 2
       },
+      "rankWithinWorkload": {
+        "api": null,
+        "plan": null
+      },
+      "rankNote": null,
       "overall": {
         "api": 62.8068545334111,
         "plan": 70.15317045666461
@@ -5150,6 +5210,11 @@
         "api": 1,
         "plan": 4
       },
+      "rankWithinWorkload": {
+        "api": null,
+        "plan": null
+      },
+      "rankNote": null,
       "overall": {
         "api": 62.8068545334111,
         "plan": 70.05815663134483
@@ -5287,9 +5352,14 @@
       "aaFrontierIntelligenceGap": 1,
       "aaFrontierFootnote": null,
       "rank": {
-        "api": 6,
+        "api": 5,
         "plan": 5
       },
+      "rankWithinWorkload": {
+        "api": null,
+        "plan": null
+      },
+      "rankNote": null,
       "overall": {
         "api": 53.82395604392801,
         "plan": 67.95360314931419
@@ -5427,9 +5497,14 @@
       "aaFrontierIntelligenceGap": 1,
       "aaFrontierFootnote": null,
       "rank": {
-        "api": 6,
+        "api": 5,
         "plan": 6
       },
+      "rankWithinWorkload": {
+        "api": null,
+        "plan": null
+      },
+      "rankNote": null,
       "overall": {
         "api": 53.82395604392801,
         "plan": 67.91839427745165
@@ -5567,9 +5642,14 @@
       "aaFrontierIntelligenceGap": 3,
       "aaFrontierFootnote": null,
       "rank": {
-        "api": 7,
+        "api": 6,
         "plan": 7
       },
+      "rankWithinWorkload": {
+        "api": null,
+        "plan": null
+      },
+      "rankNote": null,
       "overall": {
         "api": 53.65899522686846,
         "plan": 67.74569800303811
@@ -5704,9 +5784,14 @@
       "aaFrontierIntelligenceGap": 1,
       "aaFrontierFootnote": null,
       "rank": {
-        "api": 6,
+        "api": 5,
         "plan": 8
       },
+      "rankWithinWorkload": {
+        "api": null,
+        "plan": null
+      },
+      "rankNote": null,
       "overall": {
         "api": 53.82395604392801,
         "plan": 67.7358671370932
@@ -5844,9 +5929,14 @@
       "aaFrontierIntelligenceGap": 3,
       "aaFrontierFootnote": null,
       "rank": {
-        "api": 7,
+        "api": 6,
         "plan": 9
       },
+      "rankWithinWorkload": {
+        "api": null,
+        "plan": null
+      },
+      "rankNote": null,
       "overall": {
         "api": 53.65899522686846,
         "plan": 67.71048913117556
@@ -5981,9 +6071,14 @@
       "aaFrontierIntelligenceGap": 3,
       "aaFrontierFootnote": null,
       "rank": {
-        "api": 7,
+        "api": 6,
         "plan": 10
       },
+      "rankWithinWorkload": {
+        "api": null,
+        "plan": null
+      },
+      "rankNote": null,
       "overall": {
         "api": 53.65899522686846,
         "plan": 67.52796199081712
@@ -6118,9 +6213,14 @@
       "aaFrontierIntelligenceGap": null,
       "aaFrontierFootnote": "Claude Haiku 5.5 has 5x higher pricing on longer-context inputs which are not currently reflected; we are working to include this in cost figures across Artificial Analysis.",
       "rank": {
-        "api": 8,
+        "api": 7,
         "plan": 11
       },
+      "rankWithinWorkload": {
+        "api": null,
+        "plan": null
+      },
+      "rankNote": null,
       "overall": {
         "api": 50.52783846502953,
         "plan": 62.08072942341364
@@ -6256,9 +6356,14 @@
       "aaFrontierIntelligenceGap": null,
       "aaFrontierFootnote": "Claude Haiku 5.5 has 5x higher pricing on longer-context inputs which are not currently reflected; we are working to include this in cost figures across Artificial Analysis.",
       "rank": {
-        "api": 8,
+        "api": 7,
         "plan": 11
       },
+      "rankWithinWorkload": {
+        "api": null,
+        "plan": null
+      },
+      "rankNote": null,
       "overall": {
         "api": 50.52783846502953,
         "plan": 62.08072942341364
@@ -6394,9 +6499,14 @@
       "aaFrontierIntelligenceGap": null,
       "aaFrontierFootnote": "Claude Haiku 5.5 has 5x higher pricing on longer-context inputs which are not currently reflected; we are working to include this in cost figures across Artificial Analysis.",
       "rank": {
-        "api": 8,
+        "api": 7,
         "plan": 11
       },
+      "rankWithinWorkload": {
+        "api": null,
+        "plan": null
+      },
+      "rankNote": null,
       "overall": {
         "api": 50.52783846502953,
         "plan": 62.08072942341364
@@ -6535,6 +6645,11 @@
         "api": 3,
         "plan": 14
       },
+      "rankWithinWorkload": {
+        "api": null,
+        "plan": null
+      },
+      "rankNote": null,
       "overall": {
         "api": 56.256013488144276,
         "plan": 60.97171984452988
@@ -6675,6 +6790,11 @@
         "api": 3,
         "plan": 15
       },
+      "rankWithinWorkload": {
+        "api": null,
+        "plan": null
+      },
+      "rankNote": null,
       "overall": {
         "api": 56.256013488144276,
         "plan": 60.66131987994251
@@ -6816,6 +6936,11 @@
         "api": 3,
         "plan": 16
       },
+      "rankWithinWorkload": {
+        "api": null,
+        "plan": null
+      },
+      "rankNote": null,
       "overall": {
         "api": 56.256013488144276,
         "plan": 60.271441384694484
@@ -6953,9 +7078,14 @@
       "aaFrontierIntelligenceGap": 2,
       "aaFrontierFootnote": null,
       "rank": {
-        "api": 5,
+        "api": 4,
         "plan": 17
       },
+      "rankWithinWorkload": {
+        "api": null,
+        "plan": null
+      },
+      "rankNote": null,
       "overall": {
         "api": 55.20401280342945,
         "plan": 58.3113217423241
@@ -7090,9 +7220,14 @@
       "aaFrontierIntelligenceGap": 2,
       "aaFrontierFootnote": null,
       "rank": {
-        "api": 5,
+        "api": 4,
         "plan": 17
       },
+      "rankWithinWorkload": {
+        "api": null,
+        "plan": null
+      },
+      "rankNote": null,
       "overall": {
         "api": 55.20401280342945,
         "plan": 58.3113217423241
@@ -7227,9 +7362,14 @@
       "aaFrontierIntelligenceGap": 2,
       "aaFrontierFootnote": null,
       "rank": {
-        "api": 5,
+        "api": 4,
         "plan": 17
       },
+      "rankWithinWorkload": {
+        "api": null,
+        "plan": null
+      },
+      "rankNote": null,
       "overall": {
         "api": 55.20401280342945,
         "plan": 58.3113217423241
@@ -7364,9 +7504,14 @@
       "aaFrontierIntelligenceGap": 2,
       "aaFrontierFootnote": null,
       "rank": {
-        "api": 5,
+        "api": 4,
         "plan": 17
       },
+      "rankWithinWorkload": {
+        "api": null,
+        "plan": null
+      },
+      "rankNote": null,
       "overall": {
         "api": 55.20401280342945,
         "plan": 58.3113217423241
@@ -7505,6 +7650,11 @@
         "api": 3,
         "plan": 21
       },
+      "rankWithinWorkload": {
+        "api": null,
+        "plan": null
+      },
+      "rankNote": null,
       "overall": {
         "api": 56.256013488144276,
         "plan": 56.51752750633457
@@ -7624,254 +7774,6 @@
       }
     },
     {
-      "slug": "mimo-v2-6-pro",
-      "name": "MiMo-V2.6-Pro · MiMo Token Plan Max",
-      "shortName": "MiMo V2.6 Pro",
-      "developer": "Xiaomi",
-      "aaUrl": "https://artificialanalysis.ai/models/mimo-v2-6-pro",
-      "aaVariant": null,
-      "rankingEligible": true,
-      "exclusionReasons": [],
-      "intelligenceIndex": {
-        "value": 29.8897833093321,
-        "status": "measured"
-      },
-      "speed": 49.3553855539778,
-      "aaFrontierTier": "left cohort",
-      "aaFrontierConfiguration": "MiMo-V2.6-Pro",
-      "aaFrontierIntelligenceGap": null,
-      "aaFrontierFootnote": null,
-      "rank": {
-        "api": 4,
-        "plan": 22
-      },
-      "overall": {
-        "api": 56.01540521836752,
-        "plan": 52.03131534668346
-      },
-      "quality": 48.14615886385108,
-      "qualityRank": 8,
-      "dims": {
-        "costComposite": null,
-        "frontierCode": 23.9701262626263,
-        "terminalBench": 34.8484848484849,
-        "bugHunt": 17.988552739165986,
-        "vibeCode": 85.223,
-        "codeMigration": 48.786,
-        "livebench2Overall": 68.48,
-        "gdpval": 59.470000000000006,
-        "automationBench": 58.623409434190854,
-        "omniscience": 47.766666666666666,
-        "lcr": 86.3333333333333,
-        "hle": 15.2,
-        "tbScience": 5.71428571428571,
-        "critpt": 34.0
-      },
-      "costDims": {
-        "api": 79.62314428191684,
-        "plan": 63.686784795180614
-      },
-      "raw": {
-        "frontierCode": 0.239701262626263,
-        "terminalBench": 34.8484848484849,
-        "bugHunt": 22,
-        "vibeCode": 85.223,
-        "codeMigration": 48.786,
-        "livebench2Overall": 68.48,
-        "gdpval": 1689.4,
-        "automationBench": 0.5862340943419085,
-        "omniscience": -4.466666666666667,
-        "lcr": 0.863333333333333,
-        "hle": 0.152,
-        "tbScience": 0.0571428571428571,
-        "critpt": 0.34
-      },
-      "coverage": {
-        "pct": 100.0,
-        "costAvailable": true,
-        "missing": [],
-        "provisional": false,
-        "provisionalReasons": []
-      },
-      "cost": {
-        "apiUsd": 171.70030964750728,
-        "planUsd": 145.41015383427106,
-        "fallback": null,
-        "route": {
-          "id": "mimo-tokenplan-max-mimo-v2-6-pro-quota-ceiling",
-          "planLabel": "MiMo Token Plan Max $100 · quota ceiling (provider-derived)",
-          "planFeeUsd": 100,
-          "valueMultiple": 1.1808,
-          "grade": "assumption",
-          "assumptionKind": "ceiling",
-          "evidenceLabel": "Provider quota ceiling (owner decision O46; not a measurement)",
-          "sourceModel": null,
-          "sourceUrl": "https://mimo.mi.com/docs/en-US/price/token-plan",
-          "sourceDate": "2026-10-21"
-        },
-        "subset": true,
-        "partialComponents": [],
-        "workload": "835a9baf594a1251",
-        "planFlags": [
-          "workload-unmatched",
-          "provider quota ceiling; full use assumed, the optimistic end on use; credits valued at the recorded API rate, not the highest (O46, O125)"
-        ]
-      },
-      "grade": "measured",
-      "pareto": {
-        "api": false,
-        "plan": false
-      },
-      "frontierStatus": {
-        "api": null,
-        "plan": null
-      },
-      "scenario": {
-        "api": null,
-        "plan": null
-      },
-      "flags": [
-        "Subset cost: scored on its own workload; cross-workload ordering not identified"
-      ],
-      "tier": "Premium",
-      "band": {
-        "api": null,
-        "plan": null
-      },
-      "bandExcludesTransfer": true,
-      "key": "mimo-v2-6-pro--mimo-token-plan-max",
-      "planRow": {
-        "plan": "MiMo Token Plan Max",
-        "routeId": "mimo-tokenplan-max-mimo-v2-6-pro-quota-ceiling",
-        "multiple": 1.1808,
-        "representative": true
-      }
-    },
-    {
-      "slug": "mimo-v2-6-pro",
-      "name": "MiMo-V2.6-Pro · MiMo Token Plan Pro",
-      "shortName": "MiMo V2.6 Pro",
-      "developer": "Xiaomi",
-      "aaUrl": "https://artificialanalysis.ai/models/mimo-v2-6-pro",
-      "aaVariant": null,
-      "rankingEligible": true,
-      "exclusionReasons": [],
-      "intelligenceIndex": {
-        "value": 29.8897833093321,
-        "status": "measured"
-      },
-      "speed": 49.3553855539778,
-      "aaFrontierTier": "left cohort",
-      "aaFrontierConfiguration": "MiMo-V2.6-Pro",
-      "aaFrontierIntelligenceGap": null,
-      "aaFrontierFootnote": null,
-      "rank": {
-        "api": 4,
-        "plan": 23
-      },
-      "overall": {
-        "api": 56.01540521836752,
-        "plan": 51.45283581961376
-      },
-      "quality": 48.14615886385108,
-      "qualityRank": 8,
-      "dims": {
-        "costComposite": null,
-        "frontierCode": 23.9701262626263,
-        "terminalBench": 34.8484848484849,
-        "bugHunt": 17.988552739165986,
-        "vibeCode": 85.223,
-        "codeMigration": 48.786,
-        "livebench2Overall": 68.48,
-        "gdpval": 59.470000000000006,
-        "automationBench": 58.623409434190854,
-        "omniscience": 47.766666666666666,
-        "lcr": 86.3333333333333,
-        "hle": 15.2,
-        "tbScience": 5.71428571428571,
-        "critpt": 34.0
-      },
-      "costDims": {
-        "api": 79.62314428191684,
-        "plan": 61.3728666869018
-      },
-      "raw": {
-        "frontierCode": 0.239701262626263,
-        "terminalBench": 34.8484848484849,
-        "bugHunt": 22,
-        "vibeCode": 85.223,
-        "codeMigration": 48.786,
-        "livebench2Overall": 68.48,
-        "gdpval": 1689.4,
-        "automationBench": 0.5862340943419085,
-        "omniscience": -4.466666666666667,
-        "lcr": 0.863333333333333,
-        "hle": 0.152,
-        "tbScience": 0.0571428571428571,
-        "critpt": 0.34
-      },
-      "coverage": {
-        "pct": 100.0,
-        "costAvailable": true,
-        "missing": [],
-        "provisional": false,
-        "provisionalReasons": []
-      },
-      "cost": {
-        "apiUsd": 171.70030964750728,
-        "planUsd": 156.8899028211872,
-        "fallback": null,
-        "route": {
-          "id": "mimo-tokenplan-pro-mimo-v2-6-pro-quota-ceiling",
-          "planLabel": "MiMo Token Plan Pro $50 · quota ceiling (provider-derived)",
-          "planFeeUsd": 50,
-          "valueMultiple": 1.0944,
-          "grade": "assumption",
-          "assumptionKind": "ceiling",
-          "evidenceLabel": "Provider quota ceiling (owner decision O46; not a measurement)",
-          "sourceModel": null,
-          "sourceUrl": "https://mimo.mi.com/docs/en-US/price/token-plan",
-          "sourceDate": "2026-10-21"
-        },
-        "subset": true,
-        "partialComponents": [],
-        "workload": "835a9baf594a1251",
-        "planFlags": [
-          "workload-unmatched",
-          "provider quota ceiling; full use assumed, the optimistic end on use; credits valued at the recorded API rate, not the highest (O46, O125)"
-        ]
-      },
-      "grade": "measured",
-      "pareto": {
-        "api": false,
-        "plan": false
-      },
-      "frontierStatus": {
-        "api": null,
-        "plan": null
-      },
-      "scenario": {
-        "api": null,
-        "plan": null
-      },
-      "flags": [
-        "Subset cost: scored on its own workload; cross-workload ordering not identified"
-      ],
-      "tier": "Premium",
-      "band": {
-        "api": null,
-        "plan": null
-      },
-      "bandExcludesTransfer": true,
-      "key": "mimo-v2-6-pro--mimo-token-plan-pro",
-      "planRow": {
-        "plan": "MiMo Token Plan Pro",
-        "routeId": "mimo-tokenplan-pro-mimo-v2-6-pro-quota-ceiling",
-        "multiple": 1.0944,
-        "representative": false
-      }
-    },
-    {
       "slug": "deepseek-v4-1-flash-1017",
       "name": "DeepSeek V4.1 Flash 1017 · API-cost fallback",
       "shortName": "DeepSeek V4.1 Flash 1017",
@@ -7891,8 +7793,13 @@
       "aaFrontierFootnote": null,
       "rank": {
         "api": 2,
-        "plan": 24
+        "plan": 22
       },
+      "rankWithinWorkload": {
+        "api": null,
+        "plan": null
+      },
+      "rankNote": null,
       "overall": {
         "api": 58.58793280181757,
         "plan": 50.92985627935505
@@ -8000,254 +7907,6 @@
       }
     },
     {
-      "slug": "mimo-v2-6-pro",
-      "name": "MiMo-V2.6-Pro · MiMo Token Plan Standard",
-      "shortName": "MiMo V2.6 Pro",
-      "developer": "Xiaomi",
-      "aaUrl": "https://artificialanalysis.ai/models/mimo-v2-6-pro",
-      "aaVariant": null,
-      "rankingEligible": true,
-      "exclusionReasons": [],
-      "intelligenceIndex": {
-        "value": 29.8897833093321,
-        "status": "measured"
-      },
-      "speed": 49.3553855539778,
-      "aaFrontierTier": "left cohort",
-      "aaFrontierConfiguration": "MiMo-V2.6-Pro",
-      "aaFrontierIntelligenceGap": null,
-      "aaFrontierFootnote": null,
-      "rank": {
-        "api": 4,
-        "plan": 25
-      },
-      "overall": {
-        "api": 56.01540521836752,
-        "plan": 50.68958385588083
-      },
-      "quality": 48.14615886385108,
-      "qualityRank": 8,
-      "dims": {
-        "costComposite": null,
-        "frontierCode": 23.9701262626263,
-        "terminalBench": 34.8484848484849,
-        "bugHunt": 17.988552739165986,
-        "vibeCode": 85.223,
-        "codeMigration": 48.786,
-        "livebench2Overall": 68.48,
-        "gdpval": 59.470000000000006,
-        "automationBench": 58.623409434190854,
-        "omniscience": 47.766666666666666,
-        "lcr": 86.3333333333333,
-        "hle": 15.2,
-        "tbScience": 5.71428571428571,
-        "critpt": 34.0
-      },
-      "costDims": {
-        "api": 79.62314428191684,
-        "plan": 58.31985883197005
-      },
-      "raw": {
-        "frontierCode": 0.239701262626263,
-        "terminalBench": 34.8484848484849,
-        "bugHunt": 22,
-        "vibeCode": 85.223,
-        "codeMigration": 48.786,
-        "livebench2Overall": 68.48,
-        "gdpval": 1689.4,
-        "automationBench": 0.5862340943419085,
-        "omniscience": -4.466666666666667,
-        "lcr": 0.863333333333333,
-        "hle": 0.152,
-        "tbScience": 0.0571428571428571,
-        "critpt": 0.34
-      },
-      "coverage": {
-        "pct": 100.0,
-        "costAvailable": true,
-        "missing": [],
-        "provisional": false,
-        "provisionalReasons": []
-      },
-      "cost": {
-        "apiUsd": 171.70030964750728,
-        "planUsd": 173.4346562096033,
-        "fallback": null,
-        "route": {
-          "id": "mimo-tokenplan-standard-mimo-v2-6-pro-quota-ceiling",
-          "planLabel": "MiMo Token Plan Standard $16 · quota ceiling (provider-derived)",
-          "planFeeUsd": 16,
-          "valueMultiple": 0.99,
-          "grade": "assumption",
-          "assumptionKind": "ceiling",
-          "evidenceLabel": "Provider quota ceiling (owner decision O46; not a measurement)",
-          "sourceModel": null,
-          "sourceUrl": "https://mimo.mi.com/docs/en-US/price/token-plan",
-          "sourceDate": "2026-10-21"
-        },
-        "subset": true,
-        "partialComponents": [],
-        "workload": "835a9baf594a1251",
-        "planFlags": [
-          "workload-unmatched",
-          "provider quota ceiling; full use assumed, the optimistic end on use; credits valued at the recorded API rate, not the highest (O46, O125)"
-        ]
-      },
-      "grade": "measured",
-      "pareto": {
-        "api": false,
-        "plan": false
-      },
-      "frontierStatus": {
-        "api": null,
-        "plan": null
-      },
-      "scenario": {
-        "api": null,
-        "plan": null
-      },
-      "flags": [
-        "Subset cost: scored on its own workload; cross-workload ordering not identified"
-      ],
-      "tier": "Premium",
-      "band": {
-        "api": null,
-        "plan": null
-      },
-      "bandExcludesTransfer": true,
-      "key": "mimo-v2-6-pro--mimo-token-plan-standard",
-      "planRow": {
-        "plan": "MiMo Token Plan Standard",
-        "routeId": "mimo-tokenplan-standard-mimo-v2-6-pro-quota-ceiling",
-        "multiple": 0.99,
-        "representative": false
-      }
-    },
-    {
-      "slug": "mimo-v2-6-pro",
-      "name": "MiMo-V2.6-Pro · MiMo Token Plan Lite",
-      "shortName": "MiMo V2.6 Pro",
-      "developer": "Xiaomi",
-      "aaUrl": "https://artificialanalysis.ai/models/mimo-v2-6-pro",
-      "aaVariant": null,
-      "rankingEligible": true,
-      "exclusionReasons": [],
-      "intelligenceIndex": {
-        "value": 29.8897833093321,
-        "status": "measured"
-      },
-      "speed": 49.3553855539778,
-      "aaFrontierTier": "left cohort",
-      "aaFrontierConfiguration": "MiMo-V2.6-Pro",
-      "aaFrontierIntelligenceGap": null,
-      "aaFrontierFootnote": null,
-      "rank": {
-        "api": 4,
-        "plan": 26
-      },
-      "overall": {
-        "api": 56.01540521836752,
-        "plan": 50.643304172724285
-      },
-      "quality": 48.14615886385108,
-      "qualityRank": 8,
-      "dims": {
-        "costComposite": null,
-        "frontierCode": 23.9701262626263,
-        "terminalBench": 34.8484848484849,
-        "bugHunt": 17.988552739165986,
-        "vibeCode": 85.223,
-        "codeMigration": 48.786,
-        "livebench2Overall": 68.48,
-        "gdpval": 59.470000000000006,
-        "automationBench": 58.623409434190854,
-        "omniscience": 47.766666666666666,
-        "lcr": 86.3333333333333,
-        "hle": 15.2,
-        "tbScience": 5.71428571428571,
-        "critpt": 34.0
-      },
-      "costDims": {
-        "api": 79.62314428191684,
-        "plan": 58.134740099343894
-      },
-      "raw": {
-        "frontierCode": 0.239701262626263,
-        "terminalBench": 34.8484848484849,
-        "bugHunt": 22,
-        "vibeCode": 85.223,
-        "codeMigration": 48.786,
-        "livebench2Overall": 68.48,
-        "gdpval": 1689.4,
-        "automationBench": 0.5862340943419085,
-        "omniscience": -4.466666666666667,
-        "lcr": 0.863333333333333,
-        "hle": 0.152,
-        "tbScience": 0.0571428571428571,
-        "critpt": 0.34
-      },
-      "coverage": {
-        "pct": 100.0,
-        "costAvailable": true,
-        "missing": [],
-        "provisional": false,
-        "provisionalReasons": []
-      },
-      "cost": {
-        "apiUsd": 171.70030964750728,
-        "planUsd": 174.4921846011253,
-        "fallback": null,
-        "route": {
-          "id": "mimo-tokenplan-lite-mimo-v2-6-pro-quota-ceiling",
-          "planLabel": "MiMo Token Plan Lite $6 · quota ceiling (provider-derived)",
-          "planFeeUsd": 6,
-          "valueMultiple": 0.984,
-          "grade": "assumption",
-          "assumptionKind": "ceiling",
-          "evidenceLabel": "Provider quota ceiling (owner decision O46; not a measurement)",
-          "sourceModel": null,
-          "sourceUrl": "https://mimo.mi.com/docs/en-US/price/token-plan",
-          "sourceDate": "2026-10-21"
-        },
-        "subset": true,
-        "partialComponents": [],
-        "workload": "835a9baf594a1251",
-        "planFlags": [
-          "workload-unmatched",
-          "provider quota ceiling; full use assumed, the optimistic end on use; credits valued at the recorded API rate, not the highest (O46, O125)"
-        ]
-      },
-      "grade": "measured",
-      "pareto": {
-        "api": false,
-        "plan": false
-      },
-      "frontierStatus": {
-        "api": null,
-        "plan": null
-      },
-      "scenario": {
-        "api": null,
-        "plan": null
-      },
-      "flags": [
-        "Subset cost: scored on its own workload; cross-workload ordering not identified"
-      ],
-      "tier": "Premium",
-      "band": {
-        "api": null,
-        "plan": null
-      },
-      "bandExcludesTransfer": true,
-      "key": "mimo-v2-6-pro--mimo-token-plan-lite",
-      "planRow": {
-        "plan": "MiMo Token Plan Lite",
-        "routeId": "mimo-tokenplan-lite-mimo-v2-6-pro-quota-ceiling",
-        "multiple": 0.984,
-        "representative": false
-      }
-    },
-    {
       "slug": "gemini-4-argon",
       "name": "Gemini 4 Argon · API-cost fallback",
       "shortName": "Gem 4 Argon",
@@ -8266,9 +7925,14 @@
       "aaFrontierIntelligenceGap": null,
       "aaFrontierFootnote": null,
       "rank": {
-        "api": 9,
-        "plan": 27
+        "api": 8,
+        "plan": 23
       },
+      "rankWithinWorkload": {
+        "api": null,
+        "plan": null
+      },
+      "rankNote": null,
       "overall": {
         "api": 49.913136493341874,
         "plan": 46.054300868871934
@@ -11533,6 +11197,522 @@
         "plan": null
       },
       "bandExcludesTransfer": false
+    },
+    {
+      "slug": "mimo-v2-6-pro",
+      "name": "MiMo-V2.6-Pro · MiMo Token Plan Lite",
+      "shortName": "MiMo V2.6 Pro",
+      "developer": "Xiaomi",
+      "aaUrl": "https://artificialanalysis.ai/models/mimo-v2-6-pro",
+      "aaVariant": null,
+      "rankingEligible": true,
+      "exclusionReasons": [],
+      "intelligenceIndex": {
+        "value": 29.8897833093321,
+        "status": "measured"
+      },
+      "speed": 49.3553855539778,
+      "aaFrontierTier": "left cohort",
+      "aaFrontierConfiguration": "MiMo-V2.6-Pro",
+      "aaFrontierIntelligenceGap": null,
+      "aaFrontierFootnote": null,
+      "rank": {
+        "api": null,
+        "plan": null
+      },
+      "rankWithinWorkload": {
+        "api": 1,
+        "plan": 1
+      },
+      "rankNote": "subset workload: no cross-workload rank; ranked within its own workload (O184)",
+      "overall": {
+        "api": 56.01540521836752,
+        "plan": 50.643304172724285
+      },
+      "quality": 48.14615886385108,
+      "qualityRank": 8,
+      "dims": {
+        "costComposite": null,
+        "frontierCode": 23.9701262626263,
+        "terminalBench": 34.8484848484849,
+        "bugHunt": 17.988552739165986,
+        "vibeCode": 85.223,
+        "codeMigration": 48.786,
+        "livebench2Overall": 68.48,
+        "gdpval": 59.470000000000006,
+        "automationBench": 58.623409434190854,
+        "omniscience": 47.766666666666666,
+        "lcr": 86.3333333333333,
+        "hle": 15.2,
+        "tbScience": 5.71428571428571,
+        "critpt": 34.0
+      },
+      "costDims": {
+        "api": 79.62314428191684,
+        "plan": 58.134740099343894
+      },
+      "raw": {
+        "frontierCode": 0.239701262626263,
+        "terminalBench": 34.8484848484849,
+        "bugHunt": 22,
+        "vibeCode": 85.223,
+        "codeMigration": 48.786,
+        "livebench2Overall": 68.48,
+        "gdpval": 1689.4,
+        "automationBench": 0.5862340943419085,
+        "omniscience": -4.466666666666667,
+        "lcr": 0.863333333333333,
+        "hle": 0.152,
+        "tbScience": 0.0571428571428571,
+        "critpt": 0.34
+      },
+      "coverage": {
+        "pct": 100.0,
+        "costAvailable": true,
+        "missing": [],
+        "provisional": false,
+        "provisionalReasons": []
+      },
+      "cost": {
+        "apiUsd": 171.70030964750728,
+        "planUsd": 174.4921846011253,
+        "fallback": null,
+        "route": {
+          "id": "mimo-tokenplan-lite-mimo-v2-6-pro-quota-ceiling",
+          "planLabel": "MiMo Token Plan Lite $6 · quota ceiling (provider-derived)",
+          "planFeeUsd": 6,
+          "valueMultiple": 0.984,
+          "grade": "assumption",
+          "assumptionKind": "ceiling",
+          "evidenceLabel": "Provider quota ceiling (owner decision O46; not a measurement)",
+          "sourceModel": null,
+          "sourceUrl": "https://mimo.mi.com/docs/en-US/price/token-plan",
+          "sourceDate": "2026-10-21"
+        },
+        "subset": true,
+        "partialComponents": [],
+        "workload": "835a9baf594a1251",
+        "planFlags": [
+          "workload-unmatched",
+          "provider quota ceiling; full use assumed, the optimistic end on use; credits valued at the recorded API rate, not the highest (O46, O125)"
+        ]
+      },
+      "grade": "measured",
+      "pareto": {
+        "api": false,
+        "plan": false
+      },
+      "frontierStatus": {
+        "api": null,
+        "plan": null
+      },
+      "scenario": {
+        "api": null,
+        "plan": null
+      },
+      "flags": [
+        "Subset cost: scored on its own workload; cross-workload ordering not identified"
+      ],
+      "tier": "Premium",
+      "band": {
+        "api": null,
+        "plan": null
+      },
+      "bandExcludesTransfer": true,
+      "key": "mimo-v2-6-pro--mimo-token-plan-lite",
+      "planRow": {
+        "plan": "MiMo Token Plan Lite",
+        "routeId": "mimo-tokenplan-lite-mimo-v2-6-pro-quota-ceiling",
+        "multiple": 0.984,
+        "representative": false
+      }
+    },
+    {
+      "slug": "mimo-v2-6-pro",
+      "name": "MiMo-V2.6-Pro · MiMo Token Plan Max",
+      "shortName": "MiMo V2.6 Pro",
+      "developer": "Xiaomi",
+      "aaUrl": "https://artificialanalysis.ai/models/mimo-v2-6-pro",
+      "aaVariant": null,
+      "rankingEligible": true,
+      "exclusionReasons": [],
+      "intelligenceIndex": {
+        "value": 29.8897833093321,
+        "status": "measured"
+      },
+      "speed": 49.3553855539778,
+      "aaFrontierTier": "left cohort",
+      "aaFrontierConfiguration": "MiMo-V2.6-Pro",
+      "aaFrontierIntelligenceGap": null,
+      "aaFrontierFootnote": null,
+      "rank": {
+        "api": null,
+        "plan": null
+      },
+      "rankWithinWorkload": {
+        "api": 1,
+        "plan": 1
+      },
+      "rankNote": "subset workload: no cross-workload rank; ranked within its own workload (O184)",
+      "overall": {
+        "api": 56.01540521836752,
+        "plan": 52.03131534668346
+      },
+      "quality": 48.14615886385108,
+      "qualityRank": 8,
+      "dims": {
+        "costComposite": null,
+        "frontierCode": 23.9701262626263,
+        "terminalBench": 34.8484848484849,
+        "bugHunt": 17.988552739165986,
+        "vibeCode": 85.223,
+        "codeMigration": 48.786,
+        "livebench2Overall": 68.48,
+        "gdpval": 59.470000000000006,
+        "automationBench": 58.623409434190854,
+        "omniscience": 47.766666666666666,
+        "lcr": 86.3333333333333,
+        "hle": 15.2,
+        "tbScience": 5.71428571428571,
+        "critpt": 34.0
+      },
+      "costDims": {
+        "api": 79.62314428191684,
+        "plan": 63.686784795180614
+      },
+      "raw": {
+        "frontierCode": 0.239701262626263,
+        "terminalBench": 34.8484848484849,
+        "bugHunt": 22,
+        "vibeCode": 85.223,
+        "codeMigration": 48.786,
+        "livebench2Overall": 68.48,
+        "gdpval": 1689.4,
+        "automationBench": 0.5862340943419085,
+        "omniscience": -4.466666666666667,
+        "lcr": 0.863333333333333,
+        "hle": 0.152,
+        "tbScience": 0.0571428571428571,
+        "critpt": 0.34
+      },
+      "coverage": {
+        "pct": 100.0,
+        "costAvailable": true,
+        "missing": [],
+        "provisional": false,
+        "provisionalReasons": []
+      },
+      "cost": {
+        "apiUsd": 171.70030964750728,
+        "planUsd": 145.41015383427106,
+        "fallback": null,
+        "route": {
+          "id": "mimo-tokenplan-max-mimo-v2-6-pro-quota-ceiling",
+          "planLabel": "MiMo Token Plan Max $100 · quota ceiling (provider-derived)",
+          "planFeeUsd": 100,
+          "valueMultiple": 1.1808,
+          "grade": "assumption",
+          "assumptionKind": "ceiling",
+          "evidenceLabel": "Provider quota ceiling (owner decision O46; not a measurement)",
+          "sourceModel": null,
+          "sourceUrl": "https://mimo.mi.com/docs/en-US/price/token-plan",
+          "sourceDate": "2026-10-21"
+        },
+        "subset": true,
+        "partialComponents": [],
+        "workload": "835a9baf594a1251",
+        "planFlags": [
+          "workload-unmatched",
+          "provider quota ceiling; full use assumed, the optimistic end on use; credits valued at the recorded API rate, not the highest (O46, O125)"
+        ]
+      },
+      "grade": "measured",
+      "pareto": {
+        "api": false,
+        "plan": false
+      },
+      "frontierStatus": {
+        "api": null,
+        "plan": null
+      },
+      "scenario": {
+        "api": null,
+        "plan": null
+      },
+      "flags": [
+        "Subset cost: scored on its own workload; cross-workload ordering not identified"
+      ],
+      "tier": "Premium",
+      "band": {
+        "api": null,
+        "plan": null
+      },
+      "bandExcludesTransfer": true,
+      "key": "mimo-v2-6-pro--mimo-token-plan-max",
+      "planRow": {
+        "plan": "MiMo Token Plan Max",
+        "routeId": "mimo-tokenplan-max-mimo-v2-6-pro-quota-ceiling",
+        "multiple": 1.1808,
+        "representative": true
+      }
+    },
+    {
+      "slug": "mimo-v2-6-pro",
+      "name": "MiMo-V2.6-Pro · MiMo Token Plan Pro",
+      "shortName": "MiMo V2.6 Pro",
+      "developer": "Xiaomi",
+      "aaUrl": "https://artificialanalysis.ai/models/mimo-v2-6-pro",
+      "aaVariant": null,
+      "rankingEligible": true,
+      "exclusionReasons": [],
+      "intelligenceIndex": {
+        "value": 29.8897833093321,
+        "status": "measured"
+      },
+      "speed": 49.3553855539778,
+      "aaFrontierTier": "left cohort",
+      "aaFrontierConfiguration": "MiMo-V2.6-Pro",
+      "aaFrontierIntelligenceGap": null,
+      "aaFrontierFootnote": null,
+      "rank": {
+        "api": null,
+        "plan": null
+      },
+      "rankWithinWorkload": {
+        "api": 1,
+        "plan": 1
+      },
+      "rankNote": "subset workload: no cross-workload rank; ranked within its own workload (O184)",
+      "overall": {
+        "api": 56.01540521836752,
+        "plan": 51.45283581961376
+      },
+      "quality": 48.14615886385108,
+      "qualityRank": 8,
+      "dims": {
+        "costComposite": null,
+        "frontierCode": 23.9701262626263,
+        "terminalBench": 34.8484848484849,
+        "bugHunt": 17.988552739165986,
+        "vibeCode": 85.223,
+        "codeMigration": 48.786,
+        "livebench2Overall": 68.48,
+        "gdpval": 59.470000000000006,
+        "automationBench": 58.623409434190854,
+        "omniscience": 47.766666666666666,
+        "lcr": 86.3333333333333,
+        "hle": 15.2,
+        "tbScience": 5.71428571428571,
+        "critpt": 34.0
+      },
+      "costDims": {
+        "api": 79.62314428191684,
+        "plan": 61.3728666869018
+      },
+      "raw": {
+        "frontierCode": 0.239701262626263,
+        "terminalBench": 34.8484848484849,
+        "bugHunt": 22,
+        "vibeCode": 85.223,
+        "codeMigration": 48.786,
+        "livebench2Overall": 68.48,
+        "gdpval": 1689.4,
+        "automationBench": 0.5862340943419085,
+        "omniscience": -4.466666666666667,
+        "lcr": 0.863333333333333,
+        "hle": 0.152,
+        "tbScience": 0.0571428571428571,
+        "critpt": 0.34
+      },
+      "coverage": {
+        "pct": 100.0,
+        "costAvailable": true,
+        "missing": [],
+        "provisional": false,
+        "provisionalReasons": []
+      },
+      "cost": {
+        "apiUsd": 171.70030964750728,
+        "planUsd": 156.8899028211872,
+        "fallback": null,
+        "route": {
+          "id": "mimo-tokenplan-pro-mimo-v2-6-pro-quota-ceiling",
+          "planLabel": "MiMo Token Plan Pro $50 · quota ceiling (provider-derived)",
+          "planFeeUsd": 50,
+          "valueMultiple": 1.0944,
+          "grade": "assumption",
+          "assumptionKind": "ceiling",
+          "evidenceLabel": "Provider quota ceiling (owner decision O46; not a measurement)",
+          "sourceModel": null,
+          "sourceUrl": "https://mimo.mi.com/docs/en-US/price/token-plan",
+          "sourceDate": "2026-10-21"
+        },
+        "subset": true,
+        "partialComponents": [],
+        "workload": "835a9baf594a1251",
+        "planFlags": [
+          "workload-unmatched",
+          "provider quota ceiling; full use assumed, the optimistic end on use; credits valued at the recorded API rate, not the highest (O46, O125)"
+        ]
+      },
+      "grade": "measured",
+      "pareto": {
+        "api": false,
+        "plan": false
+      },
+      "frontierStatus": {
+        "api": null,
+        "plan": null
+      },
+      "scenario": {
+        "api": null,
+        "plan": null
+      },
+      "flags": [
+        "Subset cost: scored on its own workload; cross-workload ordering not identified"
+      ],
+      "tier": "Premium",
+      "band": {
+        "api": null,
+        "plan": null
+      },
+      "bandExcludesTransfer": true,
+      "key": "mimo-v2-6-pro--mimo-token-plan-pro",
+      "planRow": {
+        "plan": "MiMo Token Plan Pro",
+        "routeId": "mimo-tokenplan-pro-mimo-v2-6-pro-quota-ceiling",
+        "multiple": 1.0944,
+        "representative": false
+      }
+    },
+    {
+      "slug": "mimo-v2-6-pro",
+      "name": "MiMo-V2.6-Pro · MiMo Token Plan Standard",
+      "shortName": "MiMo V2.6 Pro",
+      "developer": "Xiaomi",
+      "aaUrl": "https://artificialanalysis.ai/models/mimo-v2-6-pro",
+      "aaVariant": null,
+      "rankingEligible": true,
+      "exclusionReasons": [],
+      "intelligenceIndex": {
+        "value": 29.8897833093321,
+        "status": "measured"
+      },
+      "speed": 49.3553855539778,
+      "aaFrontierTier": "left cohort",
+      "aaFrontierConfiguration": "MiMo-V2.6-Pro",
+      "aaFrontierIntelligenceGap": null,
+      "aaFrontierFootnote": null,
+      "rank": {
+        "api": null,
+        "plan": null
+      },
+      "rankWithinWorkload": {
+        "api": 1,
+        "plan": 1
+      },
+      "rankNote": "subset workload: no cross-workload rank; ranked within its own workload (O184)",
+      "overall": {
+        "api": 56.01540521836752,
+        "plan": 50.68958385588083
+      },
+      "quality": 48.14615886385108,
+      "qualityRank": 8,
+      "dims": {
+        "costComposite": null,
+        "frontierCode": 23.9701262626263,
+        "terminalBench": 34.8484848484849,
+        "bugHunt": 17.988552739165986,
+        "vibeCode": 85.223,
+        "codeMigration": 48.786,
+        "livebench2Overall": 68.48,
+        "gdpval": 59.470000000000006,
+        "automationBench": 58.623409434190854,
+        "omniscience": 47.766666666666666,
+        "lcr": 86.3333333333333,
+        "hle": 15.2,
+        "tbScience": 5.71428571428571,
+        "critpt": 34.0
+      },
+      "costDims": {
+        "api": 79.62314428191684,
+        "plan": 58.31985883197005
+      },
+      "raw": {
+        "frontierCode": 0.239701262626263,
+        "terminalBench": 34.8484848484849,
+        "bugHunt": 22,
+        "vibeCode": 85.223,
+        "codeMigration": 48.786,
+        "livebench2Overall": 68.48,
+        "gdpval": 1689.4,
+        "automationBench": 0.5862340943419085,
+        "omniscience": -4.466666666666667,
+        "lcr": 0.863333333333333,
+        "hle": 0.152,
+        "tbScience": 0.0571428571428571,
+        "critpt": 0.34
+      },
+      "coverage": {
+        "pct": 100.0,
+        "costAvailable": true,
+        "missing": [],
+        "provisional": false,
+        "provisionalReasons": []
+      },
+      "cost": {
+        "apiUsd": 171.70030964750728,
+        "planUsd": 173.4346562096033,
+        "fallback": null,
+        "route": {
+          "id": "mimo-tokenplan-standard-mimo-v2-6-pro-quota-ceiling",
+          "planLabel": "MiMo Token Plan Standard $16 · quota ceiling (provider-derived)",
+          "planFeeUsd": 16,
+          "valueMultiple": 0.99,
+          "grade": "assumption",
+          "assumptionKind": "ceiling",
+          "evidenceLabel": "Provider quota ceiling (owner decision O46; not a measurement)",
+          "sourceModel": null,
+          "sourceUrl": "https://mimo.mi.com/docs/en-US/price/token-plan",
+          "sourceDate": "2026-10-21"
+        },
+        "subset": true,
+        "partialComponents": [],
+        "workload": "835a9baf594a1251",
+        "planFlags": [
+          "workload-unmatched",
+          "provider quota ceiling; full use assumed, the optimistic end on use; credits valued at the recorded API rate, not the highest (O46, O125)"
+        ]
+      },
+      "grade": "measured",
+      "pareto": {
+        "api": false,
+        "plan": false
+      },
+      "frontierStatus": {
+        "api": null,
+        "plan": null
+      },
+      "scenario": {
+        "api": null,
+        "plan": null
+      },
+      "flags": [
+        "Subset cost: scored on its own workload; cross-workload ordering not identified"
+      ],
+      "tier": "Premium",
+      "band": {
+        "api": null,
+        "plan": null
+      },
+      "bandExcludesTransfer": true,
+      "key": "mimo-v2-6-pro--mimo-token-plan-standard",
+      "planRow": {
+        "plan": "MiMo Token Plan Standard",
+        "routeId": "mimo-tokenplan-standard-mimo-v2-6-pro-quota-ceiling",
+        "multiple": 0.99,
+        "representative": false
+      }
     },
     {
       "slug": "minimax-m3-1-flash",

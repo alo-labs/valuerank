@@ -1692,6 +1692,21 @@ def competition_ranks(values: dict) -> dict:
     return {key: 1 + sum(1 for other in scored.values() if other > value) for key, value in scored.items()}
 
 
+# O184 (2026-11-05, on reviewer 105, reading O17/O117): a subset-workload row stays scored and in the table, but its cost is on
+# another workload and anchor object, so it takes no rank among the main-workload rows; it is ranked within its own workload.
+SUBSET_RANK_NOTE = "subset workload: no cross-workload rank; ranked within its own workload (O184)"
+
+
+def workload_ranks(values: dict, workload_of: dict, main: str) -> tuple[dict, dict]:
+    """O184: competition ranks among main-workload rows, and within-workload ranks for every subset-workload row."""
+
+    headline = competition_ranks({key: value for key, value in values.items() if workload_of.get(key) == main})
+    within = {}
+    for workload in sorted({workload_of.get(key) for key in values if workload_of.get(key) != main}, key=str):
+        within.update(competition_ranks({key: value for key, value in values.items() if workload_of.get(key) == workload}))
+    return headline, within
+
+
 def _basis_cost(row: dict, basis: str) -> float | None:
     return row["cost"]["costUsd"] if basis == "api" else row["plan"]["costUsd"]
 
@@ -2793,13 +2808,13 @@ CROSSCHECK_COMPONENT = "terminalbench-4-0"
 # below 0.5), it issues no confirmed-cheapest interval label and no scenario-supported cheapest label; the tables, the
 # displayed-record answers and the attribution stay, and the release is not held. "Uncertain agreement" (the point estimate
 # at least 0.5, the interval reaching below it) keeps the labels, each carrying the warning.
-LABEL_GATE = "labels withheld: the ranking's workload cross-check (E41) is below 0.5 (O182)"
+LABEL_GATE = "labels withheld: the ranking's like-for-like workload cost check (basket cost against Terminal-Bench cost per attempted task) is below 0.5 (O182, O183)"
 
 
 def label_gate(rows: list[dict], main: str) -> str | None:
     """O182: the withholding reason when the ranking's E41 cross-check reads low agreement, else None."""
 
-    return LABEL_GATE if workload_cross_check(rows, main)["warning"] == "low agreement" else None
+    return LABEL_GATE if (workload_cross_check(rows, main).get("attemptCheck") or {}).get("warning") == "low agreement" else None
 
 
 def withhold_bars(result: dict, gate: str | None) -> dict:
@@ -2817,7 +2832,7 @@ def workload_cross_check(rows: list[dict], main: str, components: list[str] | No
     attempted task over AA's resolved fraction, never a tbench.ai gap fill) against the basket-cost rank, over the main-
     workload rows that have both; the statistic is suppressed below 8 rows, and the panel and its size are always published."""
 
-    per_solve, basket = {}, {}
+    per_solve, per_attempt, basket = {}, {}, {}
     for row in rows:
         component = (row["components"].get(CROSSCHECK_COMPONENT) or {}).get("detail") or {}
         observation = row["evidence"]["observations"].get("terminalBench")
@@ -2827,8 +2842,14 @@ def workload_cross_check(rows: list[dict], main: str, components: list[str] | No
         value = diagnostics.cost_per_solve(component.get("costPerTaskUsd"), observation.z / 100.0)
         if value is not None:
             per_solve[row["id"]], basket[row["id"]] = value, row["cost"]["costUsd"]
+            per_attempt[row["id"]] = component["costPerTaskUsd"]
     result = diagnostics.workload_crosscheck(per_solve, basket, label="Terminal-Bench 4.0 cost per solved task (AA execution) against basket cost")
+    # O183 (2026-11-05, on reviewer 105, amending O182): cost per solved task also reads success, so a ranking whose basket
+    # tracks the execution's cost per attempted task exactly can still read low agreement; the like-for-like check (cost per
+    # attempted task against basket cost) is the one that gates labels, the success-adjusted one stays a diagnostic.
+    attempt = diagnostics.workload_crosscheck(per_attempt, basket, label="Terminal-Bench 4.0 cost per attempted task (AA execution) against basket cost")
     return {**result, "benchmark": "Terminal-Bench 4.0", "n": len(result["panel"]), "minRows": diagnostics.CROSSCHECK_MIN_ROWS,
+            "attemptCheck": {key: attempt[key] for key in ("tau", "interval", "warning")},
             "attribution": cross_check_attribution(rows, per_solve, components) if components and result["tau"] is not None else None}
 
 
@@ -2880,12 +2901,15 @@ def score(assembled: dict, frozen: dict) -> dict:
         cost = _basis_cost(row, "plan")
         cost_score = anchor_math.cost_score(cost, anchors) if anchors else None
         per_plan[row["id"]] = {"plan": {"costUsd": cost, "costScore": cost_score, "value": anchor_math.value_score(cost_score, row["summary"].displayed, BETA)}}
-    plan_ranks = competition_ranks({row_id: entry["plan"]["value"] for row_id, entry in per_plan.items()})
+    plan_ranks, plan_within = workload_ranks({row_id: entry["plan"]["value"] for row_id, entry in per_plan.items()},
+                                             {row["id"]: row["cost"]["workload"] for row in plan_rows}, main)
     brackets = route_brackets(plan_rows, per_plan, frozen, assembled.get("planRoutes", []), {row["id"]: row.get("page") or {} for row in rows},
                               assembled.get("costMix") or {})
     representative = {row["configurationId"]: row["id"] for row in plan_rows if row["representative"]}
-    ranks = {"api": competition_ranks({row_id: entry["api"]["value"] for row_id, entry in per_row.items()}),
-             "plan": {row_id: plan_ranks[plan_id] for row_id, plan_id in representative.items() if plan_id in plan_ranks}}
+    api_ranks, api_within = workload_ranks({row_id: entry["api"]["value"] for row_id, entry in per_row.items()},
+                                           {row["id"]: row["cost"]["workload"] for row in rows}, main)
+    ranks = {"api": api_ranks, "plan": {row_id: plan_ranks[plan_id] for row_id, plan_id in representative.items() if plan_id in plan_ranks},
+             "apiWithin": api_within, "planWithin": {row_id: plan_within[plan_id] for row_id, plan_id in representative.items() if plan_id in plan_within}}
     gates, influence, exchange = {}, {}, {}
     for basis in BASES:
         basis_rows, scores_of = (rows, per_row) if basis == "api" else (plan_rows, per_plan)
@@ -3629,9 +3653,15 @@ def _row_json(row: dict, scores: dict, ranks: dict, alternatives: list[dict]) ->
                 for item in row["admissionTable"]
             ],
         },
-        "api": {**scores["api"], "rank": ranks["api"].get(row["id"])},
-        "planScore": {**scores["plan"], "rank": ranks["plan"].get(row["id"])},
+        "api": {**scores["api"], "rank": ranks["api"].get(row["id"]), **_within(ranks.get("apiWithin"), row["id"])},
+        "planScore": {**scores["plan"], "rank": ranks["plan"].get(row["id"]), **_within(ranks.get("planWithin"), row["id"])},
     }
+
+
+def _within(within: dict | None, row_id: str) -> dict:
+    """O184: a subset-workload row's within-workload rank and its note (nothing for a main-workload row)."""
+
+    return {"rankWithinWorkload": within[row_id], "rankNote": SUBSET_RANK_NOTE} if within and row_id in within else {}
 
 
 def _plan_row_json(row: dict, scores: dict, rank: int | None) -> dict:

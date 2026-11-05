@@ -556,10 +556,10 @@ def test_safety_flags_follow_every_label_their_row_earns():
     assert ed.label_safety_note(facts, ["b", "c"]) == ""
     # O160: under a firing E41 warning every label note carries it; no labels, no note.
     warned = SimpleNamespace(v3={"rows": rows, "diagnostics": {"workloadCrossCheck": {"warning": "uncertain agreement", "tau": 0.547, "n": 20}}}, labels=facts.labels)
-    assert ed.label_safety_note(warned, ["b"]).startswith(" These labels carry the workload cross-check warning (E41, O160, O182: τ_b 0.55 on 20 configurations, its interval below 0.5)")
-    # O182: low agreement withholds the labels, so no label note is printed for it.
+    assert ed.label_safety_note(warned, ["b"]).startswith(" These labels carry the workload cross-check warning (E41, O160, O183: cost per solved task, τ_b 0.55 on 20 configurations, uncertain agreement)")
+    # O183: a low success-adjusted reading no longer withholds the labels on its own; issued labels carry it.
     low = SimpleNamespace(v3={"rows": rows, "diagnostics": {"workloadCrossCheck": {"warning": "low agreement", "tau": 0.347, "n": 20}}}, labels=facts.labels)
-    assert "cross-check warning" not in ed.label_safety_note(low, ["b"])
+    assert "low agreement" in ed.label_safety_note(low, ["b"]) and "cross-check warning" not in ed.label_safety_note(low, [])
     assert ed.label_safety_note(warned, []) == ""
     # O162: a harness-sensitive bar is named beside the labels.
     flagged = SimpleNamespace(v3={"rows": rows, "diagnostics": {"bugHuntHarnessSensitivity": {"labelFlags": [
@@ -706,3 +706,10 @@ def test_cost_removal_rows_state_an_unavailable_recalibration():
     assert rows[1] == ["plan", "r; fixed", "unavailable: fewer than 2 eligible references (E160, E184, O157)"]
     text = ed.cost_diagnostics_markdown(cost_world())
     assert "| GDPval-AA v2.1 | unavailable: fewer than 2 eligible references (E160, E184, O157) |" in text or "unavailable: fewer than 2 eligible references" in text
+
+
+def test_rank_text_shows_a_subset_rows_own_workload_rank():
+    """O184: a subset-workload row shows its within-workload rank; a main row its rank; no rank a dash."""
+
+    assert ed.rank_text(3) == 3 and ed.rank_text(None) == ed.DASH and ed.rank_text(None, {"rank": None}) == ed.DASH
+    assert ed.rank_text(None, {"rankWithinWorkload": 1}) == "1 (own workload, O184)"

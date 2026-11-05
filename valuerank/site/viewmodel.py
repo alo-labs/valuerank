@@ -311,6 +311,9 @@ def _entry(source: dict, row: dict | None, quality_ranks: dict, frontier: dict, 
     return {
         **base,
         "rank": {"api": row["api"]["rank"], "plan": row["planScore"]["rank"]},
+        # O184: a subset-workload row has no cross-workload rank; its within-workload rank and note travel with it.
+        "rankWithinWorkload": {"api": row["api"].get("rankWithinWorkload"), "plan": row["planScore"].get("rankWithinWorkload")},
+        "rankNote": row["api"].get("rankNote"),
         "overall": {"api": row["api"]["value"], "plan": row["planScore"]["value"]},
         "quality": row["quality"]["displayed"],
         "qualityRank": quality_ranks.get(model_id),
@@ -423,7 +426,8 @@ def _track_bundle(data: Path, track: str) -> Bundle:
         entries[slugify(source["id"])]["band"] = {"api": bands["api"].get(source["id"]), "plan": bands["plan"].get(plan_row)}
         # I28: a Plan band on an owner-named transfer excludes the transfer's error.
         entries[slugify(source["id"])]["bandExcludesTransfer"] = plan_row in transferred
-    ordered = sorted(entries.values(), key=lambda entry: (entry["rank"]["plan"] is None, entry["rank"]["plan"] or 0, entry["name"]))
+    # O184: ranked rows first, then a ranking's subset-workload rows (ranked only within their workload), then the rest.
+    ordered = sorted(entries.values(), key=lambda entry: (entry["rank"]["plan"] is None, not entry.get("rankNote"), entry["rank"]["plan"] or 0, entry["name"]))
     plan_models = _plan_models(v3, entries, routes, shares, bands, transferred)
     rankings = {
         "track": {"key": track, "label": q.TRACK_LABELS[track], "href": TRACK_PATHS[track]},

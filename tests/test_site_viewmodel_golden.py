@@ -115,9 +115,11 @@ def test_roster_has_37_models_with_the_9_max_effort_rows_ranked_first(bundle, v3
     models = bundle.rankings["models"]
     assert len(models) == 37 and sum(m["rankingEligible"] for m in models) == len(v3_rows) == 9
     leading, trailing = models[:9], models[9:]
-    assert all(m["rankingEligible"] and m["rank"]["plan"] is not None for m in leading)
-    plan_ranks = [m["rank"]["plan"] for m in leading]
-    assert plan_ranks == sorted(plan_ranks) and plan_ranks[0] == 1
+    # O184: the subset-workload row (MiMo-V2.6-Pro) is ranked only within its workload and follows the ranked rows.
+    assert all(m["rankingEligible"] and (m["rank"]["plan"] is not None or m["rankNote"]) for m in leading)
+    plan_ranks = [m["rank"]["plan"] for m in leading if m["rank"]["plan"] is not None]
+    assert plan_ranks == sorted(plan_ranks) and plan_ranks[0] == 1 and len(plan_ranks) == 8
+    assert leading[-1]["slug"] == "mimo-v2-6-pro" and leading[-1]["rankWithinWorkload"]["api"] == 1
     for model in trailing:
         assert model["rank"] == {"api": None, "plan": None} and model["overall"] == {"api": None, "plan": None}
         assert model["costDims"] == {"api": None, "plan": None} and model["pareto"] == {"api": False, "plan": False}
@@ -159,15 +161,19 @@ def test_value_is_the_fixed_cost_share_rule_on_unrounded_inputs(bundle):
 
 
 def test_ranks_are_competition_ranks_on_unrounded_values(bundle):
-    ranked = [m for m in bundle.rankings["models"] if m["rankingEligible"] and m["overall"]["plan"] is not None]
-    assert len(ranked) == 9
+    # O184: competition ranks run over the main-workload rows; the subset-workload row takes none.
+    ranked = [m for m in bundle.rankings["models"] if m["rankingEligible"] and m["overall"]["plan"] is not None and not m["rankNote"]]
+    assert len(ranked) == 8
     for model in ranked:
         assert model["rank"]["api"] == 1 + sum(1 for other in ranked if other["overall"]["api"] > model["overall"]["api"])
     # O48: the Plan basis ranks plan rows, so a configuration's Plan rank is its own plan row's rank among every plan row.
     plan_rows = [m for m in bundle.rankings["planModels"] if m["rankingEligible"] and m["overall"]["plan"] is not None]
     assert len(plan_rows) > len(ranked) and len({m["key"] for m in plan_rows}) == len(plan_rows)
-    for row in plan_rows:
-        assert row["rank"]["plan"] == 1 + sum(1 for other in plan_rows if other["overall"]["plan"] > row["overall"]["plan"])
+    # O184: subset-workload plan rows take no rank among the main-workload plan rows.
+    main_rows = [row for row in plan_rows if row["rank"]["plan"] is not None]
+    assert 0 < len(plan_rows) - len(main_rows) and all(row["rankNote"] for row in plan_rows if row["rank"]["plan"] is None)
+    for row in main_rows:
+        assert row["rank"]["plan"] == 1 + sum(1 for other in main_rows if other["overall"]["plan"] > row["overall"]["plan"])
 
 
 def test_plan_cost_is_api_cost_over_the_selected_multiple_or_the_api_fallback(bundle, data):
