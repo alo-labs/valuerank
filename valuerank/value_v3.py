@@ -1879,16 +1879,20 @@ NOISE_SEPARATED = ("screen passed: the answer clears the bar by the pointwise 95
                    "the same margin (O171; separate comparisons sharing the bar setter, not a simultaneous confidence statement, E337)")
 NOISE_CONTESTED = "contested: the answer clears the bar by the pointwise margin, but a cheaper row reaches it within that margin (O171)"
 NOISE_ROUNDING_ONLY = "rounding-stable only: the answer does not clear the bar by the pointwise 95% noise margin (O171)"
+NOISE_SETTER_GONE = "rounding-stable only: the bar's setter has left the ranking, so its noise cannot be read and the pointwise margin is not tested (O171, E351)"
 NOISE_Z = 1.96
 
 
-def noise_companion(answer: str | None, level: float, setter_sd: float, candidates: list[tuple[str, float, float, float]],
+def noise_companion(answer: str | None, level: float, setter_sd: float | None, candidates: list[tuple[str, float, float, float]],
                     setter: str | None = None) -> dict | None:
     """O171: the noise status of a cheapest-above-bar answer. ``candidates`` holds (row, cost, displayed quality, quality SD)
     for every row the answer was chosen from; a cheaper row whose Δ exceeds −1.96 contests the answer."""
 
     if answer is None:
         return None
+    if setter_sd is None:
+        # E351 (reviewer 127): a departed setter's noise is unknown, not zero, so the screen cannot pass; the answer reads rounding-stable only.
+        return {"status": NOISE_SETTER_GONE, "delta": None, "contestedBy": [], "cheaperCompared": 0, "setter": setter}
     by_id = {row: (cost, quality, sd) for row, cost, quality, sd in candidates}
     cost, quality, sd = by_id[answer]
 
@@ -1923,7 +1927,7 @@ def displayed_cheapest(assembled: dict, frozen: dict, basis: str, margin: float 
         qualifying, low, rows_at = cheapest(bar["level"])
         entry = {"bar": bar["id"], "level": bar["level"], "qualifierN": len(qualifying), "costUsd": low, "cheapest": rows_at}
         setter = every.get(bar.get("levelConfiguration"))
-        entry["noise"] = noise_companion(rows_at[0] if rows_at else None, bar["level"], quality_sd(setter) if setter else 0.0, candidates,
+        entry["noise"] = noise_companion(rows_at[0] if rows_at else None, bar["level"], quality_sd(setter) if setter else None, candidates,
                                          bar.get("levelConfiguration"))
         # O143 (2026-11-01): the headline answer names the cheaper same-family efforts AA plots that this ranking could not
         # evaluate (E201c), so a reader sees where the leading ranking cannot look.

@@ -2823,6 +2823,9 @@ def test_o171_noise_companion_reads_each_answer_against_benchmark_noise():
     near = v.noise_companion("answer", 59.0, 1.0, rows)
     assert near["status"] == v.NOISE_ROUNDING_ONLY
     assert v.noise_companion(None, 50.0, 1.0, rows) is None
+    # E351 (reviewer 127): a departed setter's noise is unknown, not zero, so the answer can only read rounding-stable.
+    gone = v.noise_companion("answer", 50.0, None, [("answer", 2.0, 60.0, 0.0), ("cheap", 1.0, 40.0, 0.0)], "left")
+    assert gone["status"] == v.NOISE_SETTER_GONE and gone["delta"] is None and gone["setter"] == "left"
     assert v.noise_companion("answer", 50.0, 0.0, [("answer", 2.0, 60.0, 0.0), ("cheap", 1.0, 49.0, 0.0)])["status"] == v.NOISE_SEPARATED
     assert v.noise_companion("answer", 50.0, 0.0, [("answer", 2.0, 60.0, 0.0), ("cheap", 1.0, 50.0, 0.0)])["status"] == v.NOISE_CONTESTED
 

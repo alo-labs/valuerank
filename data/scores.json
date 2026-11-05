@@ -23122,10 +23122,10 @@
               "gpt-6.1-sol@chatgpt-pro-500"
             ],
             "noise": {
-              "status": "screen passed: the answer clears the bar by the pointwise 95% noise margin and every cheaper row falls below it by the same margin (O171; separate comparisons sharing the bar setter, not a simultaneous confidence statement, E337)",
-              "delta": 4.446211286002337,
+              "status": "rounding-stable only: the bar's setter has left the ranking, so its noise cannot be read and the pointwise margin is not tested (O171, E351)",
+              "delta": null,
               "contestedBy": [],
-              "cheaperCompared": 7,
+              "cheaperCompared": 0,
               "setter": "gemini-4-argon"
             },
             "uncheckedCheaperSiblings": {
@@ -23155,10 +23155,10 @@
               "claude-haiku-5-5-max@claude-pro"
             ],
             "noise": {
-              "status": "rounding-stable only: the answer does not clear the bar by the pointwise 95% noise margin (O171)",
-              "delta": 0.0,
+              "status": "rounding-stable only: the bar's setter has left the ranking, so its noise cannot be read and the pointwise margin is not tested (O171, E351)",
+              "delta": null,
               "contestedBy": [],
-              "cheaperCompared": 3,
+              "cheaperCompared": 0,
               "setter": "claude-haiku-5-5-max"
             },
             "uncheckedCheaperSiblings": {
@@ -23188,10 +23188,10 @@
               "gpt-6.1-sol@chatgpt-pro-500"
             ],
             "noise": {
-              "status": "rounding-stable only: the answer does not clear the bar by the pointwise 95% noise margin (O171)",
-              "delta": 0.0,
+              "status": "rounding-stable only: the bar's setter has left the ranking, so its noise cannot be read and the pointwise margin is not tested (O171, E351)",
+              "delta": null,
               "contestedBy": [],
-              "cheaperCompared": 7,
+              "cheaperCompared": 0,
               "setter": "gpt-6.1-sol"
             },
             "uncheckedCheaperSiblings": {
@@ -59286,19 +59286,10 @@
                 "gpt-6.1-terra-high@chatgpt-pro-500"
               ],
               "noise": {
-                "status": "rounding-stable only: the answer does not clear the bar by the pointwise 95% noise margin (O171)",
-                "delta": 0.0,
-                "contestedBy": [
-                  "gpt-6.1-sol-low@chatgpt-plus",
-                  "gpt-6.1-sol-low@chatgpt-pro-100",
-                  "gpt-6.1-sol-low@chatgpt-pro-200",
-                  "gpt-6.1-sol-low@chatgpt-pro-500",
-                  "gpt-6.1-terra-medium@chatgpt-plus",
-                  "gpt-6.1-terra-medium@chatgpt-pro-100",
-                  "gpt-6.1-terra-medium@chatgpt-pro-200",
-                  "gpt-6.1-terra-medium@chatgpt-pro-500"
-                ],
-                "cheaperCompared": 30,
+                "status": "rounding-stable only: the bar's setter has left the ranking, so its noise cannot be read and the pointwise margin is not tested (O171, E351)",
+                "delta": null,
+                "contestedBy": [],
+                "cheaperCompared": 0,
                 "setter": "gpt-6.1-terra-high"
               },
               "uncheckedCheaperSiblings": {
@@ -59326,10 +59317,10 @@
                 "claude-haiku-5-5-high@claude-pro"
               ],
               "noise": {
-                "status": "rounding-stable only: the answer does not clear the bar by the pointwise 95% noise margin (O171)",
-                "delta": 0.0,
+                "status": "rounding-stable only: the bar's setter has left the ranking, so its noise cannot be read and the pointwise margin is not tested (O171, E351)",
+                "delta": null,
                 "contestedBy": [],
-                "cheaperCompared": 3,
+                "cheaperCompared": 0,
                 "setter": "claude-haiku-5-5-high"
               },
               "uncheckedCheaperSiblings": {
@@ -59356,18 +59347,10 @@
                 "claude-opus-5-5-high@claude-pro"
               ],
               "noise": {
-                "status": "rounding-stable only: the answer does not clear the bar by the pointwise 95% noise margin (O171)",
-                "delta": 0.901555393443241,
-                "contestedBy": [
-                  "claude-opus-5-5-medium@claude-max-20x",
-                  "claude-opus-5-5-medium@claude-max-5x",
-                  "claude-opus-5-5-medium@claude-pro",
-                  "gpt-6.1-sol-medium@chatgpt-plus",
-                  "gpt-6.1-sol-medium@chatgpt-pro-100",
-                  "gpt-6.1-sol-medium@chatgpt-pro-200",
-                  "gpt-6.1-sol-medium@chatgpt-pro-500"
-                ],
-                "cheaperCompared": 45,
+                "status": "rounding-stable only: the bar's setter has left the ranking, so its noise cannot be read and the pointwise margin is not tested (O171, E351)",
+                "delta": null,
+                "contestedBy": [],
+                "cheaperCompared": 0,
                 "setter": "gemini-4-argon"
               },
               "uncheckedCheaperSiblings": {
@@ -115330,13 +115313,10 @@
                 "claude-opus-5-5-medium@claude-pro"
               ],
               "noise": {
-                "status": "rounding-stable only: the answer does not clear the bar by the pointwise 95% noise margin (O171)",
-                "delta": 0.9733590647742588,
-                "contestedBy": [
-                  "gpt-6.1-terra-xhigh@chatgpt-pro-100",
-                  "gpt-6.1-terra-xhigh@chatgpt-pro-500"
-                ],
-                "cheaperCompared": 53,
+                "status": "rounding-stable only: the bar's setter has left the ranking, so its noise cannot be read and the pointwise margin is not tested (O171, E351)",
+                "delta": null,
+                "contestedBy": [],
+                "cheaperCompared": 0,
                 "setter": "deepseek-v4-1-flash-1017"
               },
               "uncheckedCheaperSiblings": {
@@ -115363,14 +115343,10 @@
                 "claude-haiku-5-5@claude-pro"
               ],
               "noise": {
-                "status": "rounding-stable only: the answer does not clear the bar by the pointwise 95% noise margin (O171)",
-                "delta": 1.2770000392663952,
-                "contestedBy": [
-                  "claude-haiku-5-5-high@claude-max-20x",
-                  "claude-haiku-5-5-high@claude-max-5x",
-                  "claude-haiku-5-5-high@claude-pro"
-                ],
-                "cheaperCompared": 13,
+                "status": "rounding-stable only: the bar's setter has left the ranking, so its noise cannot be read and the pointwise margin is not tested (O171, E351)",
+                "delta": null,
+                "contestedBy": [],
+                "cheaperCompared": 0,
                 "setter": "gpt-6-luna"
               },
               "uncheckedCheaperSiblings": {},
@@ -115393,15 +115369,10 @@
                 "gpt-6.1-sol-xhigh@chatgpt-pro-500"
               ],
               "noise": {
-                "status": "rounding-stable only: the answer does not clear the bar by the pointwise 95% noise margin (O171)",
-                "delta": 1.1464240440992386,
-                "contestedBy": [
-                  "gpt-6.1-sol-high@chatgpt-plus",
-                  "gpt-6.1-sol-high@chatgpt-pro-100",
-                  "gpt-6.1-sol-high@chatgpt-pro-200",
-                  "gpt-6.1-sol-high@chatgpt-pro-500"
-                ],
-                "cheaperCompared": 72,
+                "status": "rounding-stable only: the bar's setter has left the ranking, so its noise cannot be read and the pointwise margin is not tested (O171, E351)",
+                "delta": null,
+                "contestedBy": [],
+                "cheaperCompared": 0,
                 "setter": "gpt-6-astra-high"
               },
               "uncheckedCheaperSiblings": {},
