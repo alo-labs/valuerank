@@ -2859,14 +2859,20 @@ def test_o182_low_workload_agreement_withholds_the_cheapest_labels(monkeypatch):
     """O182: while E41 reads low agreement, interval and scenario cheapest labels are withheld; tables stay."""
 
     result, frozen = scored()
-    assert v.label_gate(result["rows"], result["mainWorkload"]) in (None, v.LABEL_GATE)
+    assert v.label_gate(result["rows"], result["mainWorkload"]) in (None, v.LABEL_GATE, v.LABEL_GATE_UNCHECKED)
     output = {"bars": [{"status": "certified", "confirmedCheapest": "a", "possibleCheapest": ["a"]}]}
     assert v.withhold_bars(output, None) is output
     withheld = v.withhold_bars(output, v.LABEL_GATE)
     assert withheld["bars"][0] == {"status": v.LABEL_GATE, "evaluatedStatus": "certified", "confirmedCheapest": None,
                                    "withheldConfirmedCheapest": "a", "possibleCheapest": ["a"]} and withheld["labelGate"] == v.LABEL_GATE
-    monkeypatch.setattr(v, "workload_cross_check", lambda rows, main, components=None: {"warning": "low agreement", "attemptCheck": {"warning": "low agreement"}})
+    monkeypatch.setattr(v, "workload_cross_check", lambda rows, main, components=None: {"warning": "low agreement", "attemptCheck": {"tau": 0.2, "warning": "low agreement"}})
     assert v.label_gate(result["rows"], result["mainWorkload"]) == v.LABEL_GATE
+    # O187 (reviewer 107): a check that cannot be computed (panel below 8 rows, or no rank variation) fails safe and withholds too.
+    monkeypatch.setattr(v, "workload_cross_check", lambda rows, main, components=None: {"warning": None, "attemptCheck": {"tau": None, "interval": None, "warning": None}})
+    assert v.label_gate(result["rows"], result["mainWorkload"]) == v.LABEL_GATE_UNCHECKED
+    monkeypatch.setattr(v, "workload_cross_check", lambda rows, main, components=None: {"warning": None, "attemptCheck": {"tau": 0.9, "interval": (0.8, 1.0), "warning": None}})
+    assert v.label_gate(result["rows"], result["mainWorkload"]) is None
+    monkeypatch.setattr(v, "workload_cross_check", lambda rows, main, components=None: {"warning": "low agreement", "attemptCheck": {"tau": 0.2, "warning": "low agreement"}})
     scores = v.score(result, frozen)
     assert scores["labelGate"] == v.LABEL_GATE and all(bar["status"] == v.LABEL_GATE for bar in scores["intervals"]["api"]["bars"])
     monkeypatch.setattr(v.scenarios, "kernel_robust_cheapest", lambda panel, candidate, level, seed, batch: {"label": True, "reading": "supported"})

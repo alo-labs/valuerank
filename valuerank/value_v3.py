@@ -2846,10 +2846,18 @@ CROSSCHECK_COMPONENT = "terminalbench-4-0"
 LABEL_GATE = "labels withheld: the ranking's like-for-like workload cost check (basket cost against Terminal-Bench cost per attempted task) is below 0.5 (O182, O183)"
 
 
-def label_gate(rows: list[dict], main: str) -> str | None:
-    """O182: the withholding reason when the ranking's E41 cross-check reads low agreement, else None."""
+LABEL_GATE_UNCHECKED = ("labels withheld: the ranking's like-for-like workload cost check (basket cost against Terminal-Bench cost per attempted task) "
+                        "cannot be computed (a panel below the 8-row floor or no rank variation), so no label is cleared by it (O187)")
 
-    return LABEL_GATE if (workload_cross_check(rows, main).get("attemptCheck") or {}).get("warning") == "low agreement" else None
+
+def label_gate(rows: list[dict], main: str) -> str | None:
+    """O182: the withholding reason when the ranking's E41 cross-check reads low agreement, else None. O187 (2026-11-05, on
+    reviewer 107): a check that cannot be computed fails safe and withholds the labels as well."""
+
+    check = workload_cross_check(rows, main).get("attemptCheck") or {}
+    if check.get("tau") is None:
+        return LABEL_GATE_UNCHECKED
+    return LABEL_GATE if check.get("warning") == "low agreement" else None
 
 
 def withhold_bars(result: dict, gate: str | None) -> dict:
