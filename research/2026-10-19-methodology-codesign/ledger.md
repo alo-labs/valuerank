@@ -2804,3 +2804,8 @@ Asked on I64 Q1 whether future O71 admissions should be executed by the build fr
 ## Reviewer 150 (GPT-6.1 Sol, round 13, whole draft r225, 17 parts)
 - Read check: all 17 parts read to their ends. Verdict: NO FURTHER FEEDBACK (no finding at any severity; no recommendations beyond those adopted; no owner questions).
 - Round status (O56): clean round 1 for Sol (run 1 of 2 consecutive); its previous round (reviewer 146) was not clean. Draft unchanged (r225).
+
+## Reviewer 151 (Gemini 3.8 Flash, round 13, six sections of r225, 17 parts)
+- Read check: all 17 parts read to their ends in six sections. Five sections returned NO FURTHER FEEDBACK; section 3 returned one Medium. Verdict overall: HAS FEEDBACK.
+- Section 3 M (the demand registry's exact cost identities p·d_ie = C_ie against costs accepted as complete under O175's residual; an empty region would be evidence inconsistency, not a narrow bound): adopted as wording in r226 (the identities are read within the records' reporting precision and the O175 residual, and an empty region reads "accounting inconsistent" and bounds nothing). Dormant while Plan transport is unidentified.
+- Round status (O56): not clean (a Medium); Gemini's clean run restarts, though five of six sections were clean.
