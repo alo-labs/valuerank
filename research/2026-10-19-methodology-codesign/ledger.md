@@ -2720,3 +2720,7 @@ Asked on I64 Q1 whether future O71 admissions should be executed by the build fr
 - Section 6 M (a date-only capture on the cutoff's day passes the cutoff test; raised on reviewers 123, 126, 132 and now 135): checked against the data: every non-AA board capture of this release carries an instant (bug_hunt_scoreboard 2026-11-01T05:59:30Z, swe_tracks 2026-11-01T06:03:32Z, fallback_prices 2026-11-01T11:59:15Z, the rest earlier days), so the convention decides none of them; r216 says so. The interval treatment stays a candidate for a release that has a date-only capture on the cutoff's day.
 - Section 3 M1 (a measured Plan route whose dollar valuation is unverified can still set a Plan anchor, since E184 makes valuation status govern interval eligibility only) and M2 (E304's joint migration makes the API workload depend on measured Plan references): left candidates; both follow O157/E304 as owner-set and neither has a case in the current data (every anchor reference has a recorded basis).
 - Round status (O56): not clean (Mediums); Gemini's clean run restarts, though four of six sections were clean.
+
+## Reviewer 136 (Claude Sonnet 5.5, round 13, whole draft r216, 17 parts)
+- Read check: all 17 parts read to their ends. Verdict: NO FURTHER FEEDBACK (no finding at any severity; no recommendations beyond those adopted; no owner questions).
+- Round status (O56): clean round 1 for Sonnet (run 1 of 2 consecutive); its previous rounds (reviewers 124 and 130) were not clean. Draft unchanged (r216).

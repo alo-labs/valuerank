@@ -71,7 +71,8 @@ two consecutive clean rounds and the panel ends when every model says NO FURTHER
 | 133 | Grok 4.7 (whole draft) | r213 | findings (one Medium: wording in r214), Grok's clean run restarts |
 | 134 | GPT-6.1 Sol (whole draft) | r214 | findings (one Medium, wording in r215), Sol's clean run restarts |
 | 135 | Gemini 3.8 Flash (six sections, parts 1–17) | r215 | findings (Mediums; four of six sections clean), one wording into r216; Gemini's clean run restarts |
-| 136 | Claude Sonnet 5.5 (whole draft) | r216 | next |
+| 136 | Claude Sonnet 5.5 (whole draft) | r216 | CLEAN (no findings); Sonnet's clean run is 1 of 2 |
+| 137 | Kimi K3 (four sections, parts 1–17) | r216 | next |
 
 To continue:
 
