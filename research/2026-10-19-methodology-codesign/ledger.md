@@ -2618,3 +2618,9 @@ Asked on I64 Q1 whether future O71 admissions should be executed by the build fr
 ## Reviewer 118 (Claude Sonnet 5.5, round 13, whole draft r199, 16 parts)
 - Read check: all 16 parts read to their ends. Verdict: NO FURTHER FEEDBACK (no finding at any severity; no recommendations beyond those adopted; no owner questions).
 - Round status (O56): clean round 1 for Sonnet (run 1 of 2 consecutive); its previous round (reviewer 112) was not clean. Draft unchanged (r199).
+
+## Reviewer 119 (Kimi K3, round 13, four sections of r199, 16 parts)
+- Read check: all 16 parts read to their ends in four sections. Sections 1 and 3 returned NO FURTHER FEEDBACK; section 2 returned one Medium and one Low; section 4 returned one Low. Verdict overall: HAS FEEDBACK.
+- Section 2 M (an unstated measurement window becomes an asserted measurement history, and should be "unknown" with admission only if every possible window passes the split and fault tests): not adopted; the rule is a recorded convention adopted on reviewer 78 (L2: the meter's own period ending on the report date, fail-closed against splits and fault days, `windowStated` false in the record) and the 30-day alternative was rejected on reviewer 77; a range-of-possible-windows test would drop every unstated-window report, since the possible windows are unbounded. Wording adopted in r200 (the rule is marked a convention). Section 2 L (E106 has no explicit subcase for an unrecorded valuation basis): left a candidate; E138 and E222 already state the outcome (ranked, flagged, a provisional blocker, never interval-eligible).
+- Section 4 L (the release test says "misses AA's total" without O175's thresholds): adopted as text in r200 (the three-way relative-residual classification with fixtures on both thresholds); the same wording was fixed in r193 for the other occurrence.
+- Round status (O56): not clean (a Medium); Kimi's clean run restarts.

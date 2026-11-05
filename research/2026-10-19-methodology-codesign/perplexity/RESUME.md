@@ -54,7 +54,8 @@ two consecutive clean rounds and the panel ends when every model says NO FURTHER
 | 116 | GPT-6.1 Sol (whole draft) | r197 | findings (one Medium: E348 extends O191 to a re-checked provisional observer), folded into r198; Sol's clean run restarts |
 | 117 | Gemini 3.8 Flash (six sections) | r198 | CLEAN (one Low, wording folded into r199); Gemini's clean run is 1 of 2 |
 | 118 | Claude Sonnet 5.5 (whole draft) | r199 | CLEAN (no findings); Sonnet's clean run is 1 of 2 |
-| 119 | Kimi K3 (four sections) | r199 | next |
+| 119 | Kimi K3 (four sections) | r199 | findings (a Medium, two Lows; two of four sections clean), folded into r200 as text; Kimi's clean run restarts |
+| 120 | GLM 5.3 (eight two-part sections) | r200 | next |
 
 To continue:
 
