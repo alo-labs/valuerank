@@ -61,7 +61,8 @@ two consecutive clean rounds and the panel ends when every model says NO FURTHER
 | 123 | Gemini 3.8 Flash (six sections) | r203 | findings (Mediums; owner decision O192: the observer test reads tightest readings), folded into r204; Gemini's clean run restarts |
 | 124 | Claude Sonnet 5.5 (whole draft) | r204 | findings (one Medium: E349 applies the label gate to subset-workload labels), folded into r205; Sonnet's clean run restarts |
 | 125 | Kimi K3 (four sections) | r205 | findings (one real gap in O192, E350; three of four sections clean), folded into r206; Kimi's clean run restarts |
-| 126 | GLM 5.3 (eight two-part sections) | r206 | next |
+| 126 | GLM 5.3 (eight two-part sections) | r206 | findings (Mediums, three wording fixes into r207; two of eight sections clean); GLM's clean run restarts |
+| 127 | Grok 4.7 (whole draft) | r207 | next |
 
 To continue:
 
