@@ -2740,3 +2740,9 @@ Asked on I64 Q1 whether future O71 admissions should be executed by the build fr
 - Read check: all 17 parts read to their ends. Verdict: no Critical, High or Medium finding (one Low); a clean round under O56.
 - L (E355's "restated at that factor" could be read as scaling the final thresholds): verified against the code (quality_sd takes livebench_factor and multiplies only the LiveBench leaf SD); adopted as wording in r219. The reviewer's output fields and four fixtures are not added.
 - Round status (O56): clean round 1 for Grok (run 1 of 2 consecutive); its previous round (reviewer 133) was not clean.
+
+## Reviewer 140 (GPT-6.1 Sol, round 13, whole draft r219, 17 parts)
+- Read check: all 17 parts read to their ends. Verdict: HAS FEEDBACK (no Critical or High; one Medium, two Lows, no owner questions).
+- M (an O182/O183/O187 challenge: agreement between the basket cost and one component's cost is neither necessary nor sufficient for the basket's cheapest ordering, so the gate tests a different proposition from the claim it withholds): the owner decided the gate on reviewers 103, 105 and 107 and it stays; the new argument is accepted as wording, adopted in r220: the gate is an editorial label-issuance policy, not a finding that the basket's ordering is wrong, and the evaluated status and withheld answer stay in scores.json (they already do, withholdBars). Not put to the owner again.
+- L1 (separate model_configuration_id and execution_configuration_id) and L2 (separate historical explanation from the operational rules): left candidates.
+- Round status (O56): not clean (a Medium); Sol's clean run restarts.
