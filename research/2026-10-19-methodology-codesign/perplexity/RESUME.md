@@ -51,7 +51,8 @@ two consecutive clean rounds and the panel ends when every model says NO FURTHER
 | 113 | Kimi K3 (four sections) | r194 | findings (two Mediums in two sections, the other two sections clean), folded into r195; Kimi's clean run restarts |
 | 114 | GLM 5.3 (eight two-part sections) | r195 | findings (two text Mediums; six of eight sections clean), folded into r196; GLM's clean run restarts |
 | 115 | Grok 4.7 (whole draft) | r196 | findings (one Medium; owner decision O191: a withheld discordant observer blocks the cell), folded into r197; Grok's clean run restarts |
-| 116 | GPT-6.1 Sol (whole draft) | r197 | next |
+| 116 | GPT-6.1 Sol (whole draft) | r197 | findings (one Medium: E348 extends O191 to a re-checked provisional observer), folded into r198; Sol's clean run restarts |
+| 117 | Gemini 3.8 Flash (six sections) | r198 | next |
 
 To continue:
 

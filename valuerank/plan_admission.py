@@ -354,7 +354,9 @@ def evaluate(document: dict, profile: dict, release_day: date, families: dict | 
             low, high = converted(report, multipliers)
             part = partition(report, splits) if reason is None else None
             # O191: an observer withheld for discordant readings is not pooled but still blocks its partition's admission.
-            discordant_part = partition(report, splits) if reason == READINGS_DISAGREE and not report.get("provisional") else None
+            # E348 (reviewer 116): every observer O159 lets contest the range test blocks, a re-checked provisional one included.
+            discordant_part = (partition(report, splits) if reason == READINGS_DISAGREE
+                               and (not report.get("provisional") or report.get("inferenceRechecked")) else None)
             rows.append({"id": report["id"], "observer": report["observer"], "valueLower": low, "valueUpper": high, "partition": part,
                          "provisional": bool(report.get("provisional")), "speedMode": report.get("speedMode"), "stage": report.get("stage"), "excluded": reason,
                          "acrossResets": spans_reset(report, records), "acrossSplit": bool(report.get("acrossSplit")), "inferenceRechecked": report.get("inferenceRechecked"),

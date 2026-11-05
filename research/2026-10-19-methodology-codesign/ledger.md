@@ -2604,3 +2604,8 @@ Asked on I64 Q1 whether future O71 admissions should be executed by the build fr
 - Read check: all 16 parts read to their ends. Verdict: HAS FEEDBACK (no Critical or High; one Medium, an owner-decision interaction).
 - M (O189's removal of a discordant observer can manufacture admission): verified with the reviewer's fixture; put to the owner and adopted as O191 with code and a test. The reviewer's fuller design (an admission-conflict register, a wouldPassAfterRemoval field, metamorphic fixtures for donors) is not adopted beyond `discordantObservers` and the one fixture.
 - Round status (O56): not clean (a Medium); Grok's clean run restarts.
+
+## Reviewer 116 (GPT-6.1 Sol, round 13, whole draft r197, 16 parts)
+- Read check: all 16 parts read to their ends. Verdict: HAS FEEDBACK (no Critical or High; one Medium, no owner questions).
+- M (O191's block covers a non-provisional discordant observer but not a provisional one whose inference was re-checked, who may contest the range test under O159): verified with the reviewer's fixture (A 100, B 110, rechecked provisional C 40 and 60); adopted as E348 within O191's rule: the block applies to every observer O159 lets contest the range test, and such an observer still neither counts toward the minimum nor moves the value. Code (plan_admission.evaluate) and the fixture extended. The reviewer's observer-state table, the "otherwise passes" field and the five further fixtures are not adopted.
+- Round status (O56): not clean (a Medium); Sol's clean run restarts.

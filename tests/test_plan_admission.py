@@ -72,6 +72,8 @@ def test_a_discordant_observer_blocks_the_cell_instead_of_creating_a_pass():
     assert blocked["status"].startswith("fails: an observer's own readings disagree") and blocked["discordantObservers"] == ["c"] and blocked["admittingObservers"] == []
     # A provisional discordant observer is unchecked evidence and blocks nothing; a concordant second reading changes nothing.
     assert cell(a, b, {**discordant, "provisional": True})["status"] == "passes"
+    # E348 (reviewer 116): a provisional observer whose inference was re-checked may contest the range test, so its discord blocks too.
+    assert cell(a, b, {**discordant, "provisional": True, "inferenceRechecked": True})["status"].startswith("fails: an observer's own readings disagree")
     assert cell(a, b, {**c, "readings": [[150, 150], [145, 145]]})["status"].startswith("fails: largest lower bound")
 
 
