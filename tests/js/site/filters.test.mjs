@@ -15,8 +15,8 @@ test('provider and grade filter by membership', () => {
   assert.deepEqual(slugs(applyFilters(models, { ...none, grade: ['estimate', 'claim'] })), ['beta', 'delta']);
 });
 
-test('route filter separates ranking-eligible and fallback-cost models', () => {
-  assert.deepEqual(slugs(applyFilters(models, { ...none, route: 'eligible' })), ['alpha', 'beta', 'gamma', 'eps']);
+test('route filter separates models with an admitted subscription route from API-fallback models', () => {
+  assert.deepEqual(slugs(applyFilters(models, { ...none, route: 'eligible' })), ['alpha', 'gamma']);
   assert.deepEqual(slugs(applyFilters(models, { ...none, route: 'fallback' })), ['beta']);
 });
 
@@ -45,7 +45,7 @@ test('columnValue reads basis-specific and nested fields', () => {
   assert.equal(columnValue(b, 'quality', 'plan'), 84);
   assert.equal(columnValue(b, 'qualityRank', 'plan'), 1);
   assert.equal(columnValue(b, 'cost', 'api'), 2500);
-  assert.equal(columnValue(b, 'cost', 'plan'), 2.25);
+  assert.equal(columnValue(b, 'cost', 'plan'), 2500);
   assert.equal(columnValue(b, 'grade', 'plan'), 'estimate');
   assert.equal(columnValue(b, 'coverage', 'plan'), 68);
   assert.equal(columnValue(models[3], 'coverage', 'plan'), null);

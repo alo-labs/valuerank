@@ -34,7 +34,7 @@ test('hover shows both overalls and the plan change; labels sit at the plan poin
   assert.equal(spec.labels.points.length, 4);
   assert.deepEqual(spec.labels.points[0], { id: 'alpha', label: 'alpha', x: 80, y: 75.7 });
   assert.equal(spec.labels.options.markerRadius, 12);
-  assert.deepEqual(spec.layout.xaxis.range, [0, 105]);
+  assert.deepEqual(spec.layout.xaxis.range, [105, 0]); // cheaper on the left, as on AA charts
   assert.match(spec.label, /4 models/);
   assert.match(spec.summary, /higher than API score for 3 models and lower for 1/);
 });

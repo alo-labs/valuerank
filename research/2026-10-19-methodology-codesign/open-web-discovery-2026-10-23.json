@@ -1,0 +1,302 @@
+{
+  "searchedOn": "2026-10-23",
+  "cutoff": "2026-10-21T05:24:16Z",
+  "entries": [
+    {
+      "modelId": "mimo-v2-6-flash",
+      "leaf": "bugHunt",
+      "queries": [
+        "MiMo-V2.6-Flash Bug Hunt Bench score",
+        "\"bug-hunt-bench\" MiMo-V2.6-Flash thinking",
+        "Bug Hunt Bench leaderboard Product Compass models results",
+        "小米 MiMo-V2.6-Flash Bug Hunt 评测",
+        "MiMo-V2.6-Flash 代码 bug 修复 第三方评测 thinking 模式 排行榜 Bug Hunt Bench (extended)",
+        "Bug Hunt Bench MiMo Flash reddit OR hackernews OR github thinking enabled (extended)",
+        "github \"bug-hunt-bench\" fork results model run phuryn alternative results",
+        "\"Bug Hunt Bench\" Pawel Huryn Xiaomi MiMo Flash",
+        "Bug Hunt Bench new results added MiMo thinking enabled Flash first-party Xiaomi API productcompass update",
+        "MiMo-V2.6-Flash default thinking mode enabled by default Xiaomi API docs reasoning_content",
+        "WebFetch/curl: bughunt.productcompass.pm/data/benchmark.json (updated 2026-10-19; 47 models, 290 runs), raw.githubusercontent.com/phuryn/bug-hunt-bench/main/results/run-notes.md (fetched 2026-10-23, 1573 lines), benchlm.ai/md/benchmarks/bug-hunt-bench.md, plugandship.dev/p/bug-hunt-bench, benchlm.ai/models/mimo-v2-6-flash, mimo.mi.com/docs/en-US/updates/model, docs.litellm.ai/blog/mimo_v2_6"
+      ],
+      "candidates": [
+        {
+          "url": "https://bughunt.productcompass.pm/data/benchmark.json",
+          "publisher": "Product Compass (Pawel Huryn), Bug Hunt Bench owner",
+          "published": "2026-09-22",
+          "reports": "Only MiMo-V2.6-Flash row: 'MiMo-V2.6-Flash - mean of 3', 23.3/105 (runs 19, 25, 26), Claude Code via OpenRouter (xiaomi/mimo-v2.6-flash), effort 'default' (effort_status default), blind Codex gpt-5.5 judge. Re-fetched 2026-10-23: board updated 2026-10-19, no other Flash row (no first-party / thinking-asserted run). Owner notes: reasoning state not asserted and untested for Flash; for sibling Pro the reasoning field was measured inert and Pro first-party thinking.type=enabled row exists (single run).",
+          "resolution": "reject",
+          "reason": "not the exact configuration: registered-source (owner) row exists but at 'default' effort with reasoning state not asserted, as already logged 2026-10-21. Context: Xiaomi's release notes recommend Thinking as default mode and LiteLLM states thinking is on by default for every V2.6 model, so the row is plausibly thinking-enabled, but no party asserts it. Editor's call whether 'default' may stand for the AA-plotted configuration; this is not an unregistered-party finding."
+        },
+        {
+          "url": "https://raw.githubusercontent.com/phuryn/bug-hunt-bench/main/results/run-notes.md",
+          "publisher": "Product Compass / phuryn (GitHub raw notes)",
+          "published": "2026-09-22",
+          "reports": "Same Flash mean-of-3 row (23.3/105, $0.49/run, walls 66.6/81.1/64.3 min) with the note 'effort is default ... for this model the dial is untested rather than known-inert'. Live file now longer than the 2026-10-21 capture (1573 vs 1499 lines) but still only one Flash entry.",
+          "resolution": "reject",
+          "reason": "not the exact configuration (same registered-source row; reasoning state not asserted)"
+        },
+        {
+          "url": "https://plugandship.dev/p/bug-hunt-bench",
+          "publisher": "Plug and Ship (directory)",
+          "published": "2026-10-14",
+          "reports": "Lists 'Xiaomi: MiMo-V2.6-Flash (default) 23.3' as 2nd behind Qwen3.8-Flash (max) 26 (snapshot of 185 rows / 227 runs).",
+          "resolution": "reject",
+          "reason": "relay of a registered source (Bug Hunt Bench owner); same default-effort row"
+        },
+        {
+          "url": "https://benchlm.ai/md/benchmarks/bug-hunt-bench.md",
+          "publisher": "BenchLM (aggregator)",
+          "published": "2026-10-19",
+          "reports": "Mirror of owner board (28 featured configs); only MiMo-V2.6-Pro (default, mean of 3, 22.7) is featured; no Flash row.",
+          "resolution": "reject",
+          "reason": "relay of a registered source (Bug Hunt Bench owner); and the featured MiMo row is a different model version (Pro)"
+        },
+        {
+          "url": "https://bughunt.productcompass.pm/data/benchmark.json",
+          "publisher": "Product Compass (Pawel Huryn), Bug Hunt Bench owner",
+          "published": "2026-09-22",
+          "reports": "MiMo-V2.6-Pro rows: first-party thinking.type=enabled single run 18/105 (2026-09-22); OpenRouter default mean of 3 22.7/105.",
+          "resolution": "reject",
+          "reason": "different model version (Pro, not Flash)"
+        },
+        {
+          "url": "https://mimo.mi.com/docs/en-US/updates/model",
+          "publisher": "Xiaomi MiMo docs",
+          "published": "2026-09-21",
+          "reports": "Release notes: thinking mode recommended as default for V2.6; no Bug Hunt score.",
+          "resolution": "reject",
+          "reason": "not a score"
+        }
+      ],
+      "result": "not found",
+      "notes": "No third party other than the registered owner has run Bug Hunt Bench on MiMo-V2.6-Flash. GitHub code/repo search is blocked in this environment (HTTP 403), so fork discovery used web search only; no fork or alternative results repo surfaced. The only Flash datapoint is the owner's default-effort mean of 3."
+    },
+    {
+      "modelId": "grok-4.6-xhigh",
+      "leaf": "frontierCode",
+      "queries": [
+        "FrontierCode Grok 4.6 xhigh score",
+        "Grok 4.6 FrontierCode 1.1 Main xhigh reasoning effort grok-build Cognition (extended)",
+        "FrontierCode benchmark leaderboard Muse Wonder Full Muse Spark 1.3 DeepSeek V4 Flash Grok 4.6 (extended)",
+        "Cognition FrontierCode leaderboard v1.1 Main Extended results",
+        "reddit FrontierCode benchmark results Muse Wonder Grok 4.6 DeepSeek V4 Flash mergeability independent evaluation",
+        "Grok 4.6 \"xhigh\" FrontierCode \"1.1\" third-party evaluation Artificial Analysis Coding Agent Index grok-build",
+        "arxiv FrontierCode 1.1 Cognition benchmark evaluation Grok 4.6 DeepSeek-V4-Flash Muse results table (extended)",
+        "WebFetch/curl: cognition.com/data/frontiercode-leaderboard/data.json (Last-Modified 2026-10-22T22:28:12Z), cognition.com/frontiercode (changelog to 2026-10-13), artificialanalysis.ai/evaluations/frontiercode (live payload 2026-10-23), artificialanalysis.ai/models/grok-4-6-xhigh, benchlm.ai/models/grok-4-6, llm-stats.com/benchmarks/frontiercode, llmreference.com FrontierCode Main/Extended, codingfleet.com FrontierCode v1.1 leaderboard"
+      ],
+      "candidates": [
+        {
+          "url": "https://cognition.com/data/frontiercode-leaderboard/data.json",
+          "publisher": "Cognition (FrontierCode author; registered)",
+          "published": "2026-09-01",
+          "reports": "Grok 4.6 FrontierCode 1.1 Main (grok-build harness): low 40.1%, medium 46.1%, high 48.0% (new_score; raw correct 44.6/51.2/53.2%). Efforts listed: low, medium, high only. Low and medium added 2026-09-01. File re-fetched 2026-10-23 (last modified 2026-10-22T22:28Z): still no xhigh row.",
+          "resolution": "reject",
+          "reason": "different effort (low/medium/high; no xhigh run exists on Cognition)"
+        },
+        {
+          "url": "https://x.ai/news/grok-4-6",
+          "publisher": "xAI (model provider)",
+          "published": "2026-08-12",
+          "reports": "FrontierCode v1.1 Extended 61.3% for Grok 4.6 High (Grok Build harness); no xhigh figure on the launch page or model card (media.x.ai card-4p6).",
+          "resolution": "reject",
+          "reason": "different effort (High) and different subset (Extended, not Main); provider claim"
+        },
+        {
+          "url": "https://benchlm.ai/models/grok-4-6",
+          "publisher": "BenchLM, llm-stats.com, CometAPI, AWS Bedrock model card (aggregators)",
+          "published": null,
+          "reports": "Repeat xAI's 61.3% FrontierCode 1.1 Extended at High.",
+          "resolution": "reject",
+          "reason": "relay of a registered source (model provider xAI launch post); different effort"
+        },
+        {
+          "url": "https://www.llmreference.com/benchmark/frontiercode-main",
+          "publisher": "LLM Reference / CodingFleet / BenchLM Main table (aggregators)",
+          "published": "2026-10-16",
+          "reports": "Grok 4.6 high-effort Main 48.0% (grok-build, evaluator Cognition).",
+          "resolution": "reject",
+          "reason": "relay of a registered source (Cognition); different effort"
+        },
+        {
+          "url": "https://artificialanalysis.ai/models/grok-4-6-xhigh",
+          "publisher": "Artificial Analysis (registered)",
+          "published": "2026-10-23",
+          "reports": "Live model page/payload fetched 2026-10-23: frontierCode null for Grok 4.6 (xhigh), (high), (medium) and (low). AA's only Grok FrontierCode values are Grok 4.7 (high) 34.2%, (xhigh) 33.8%, (low) 39.6%.",
+          "resolution": "reject",
+          "reason": "not a score (no AA row at this configuration); Grok 4.7 rows are a different model version"
+        },
+        {
+          "url": "https://x.com/XFreeze/status/2091642814606032998",
+          "publisher": "X post by XFreeze (fan account)",
+          "published": null,
+          "reports": "States Grok Build exposes xhigh ('Extra High') effort for Grok 4.6; gives no benchmark score.",
+          "resolution": "reject",
+          "reason": "not a score"
+        }
+      ],
+      "result": "not found",
+      "notes": "Neither Cognition, AA, xAI nor any aggregator publishes FrontierCode 1.1 for Grok 4.6 at xhigh. Open-web search surfaced no independent run."
+    },
+    {
+      "modelId": "deepseek-v4-flash",
+      "leaf": "frontierCode",
+      "queries": [
+        "FrontierCode DeepSeek V4 Flash 0731 max effort",
+        "\"FrontierCode\" \"DeepSeek V4\" Flash",
+        "FrontierCode 评测 DeepSeek V4 Flash 0731 得分",
+        "DeepSeek V4 Flash 0731 FrontierCode max reasoning chisel harness score (extended)",
+        "DeepSeek V4 Flash FrontierCode 18.8% Cognition high effort chisel max effort",
+        "DeepSeek V4 Flash 0731 FrontierCode Artificial Analysis max 版 FrontierCode 1.1 DeepSeek 0731 vs 1017",
+        "WebFetch/curl: cognition.com data.json, artificialanalysis.ai/models/deepseek-v4-flash and evaluations/frontiercode payload (2026-10-23), benchlm.ai/models/deepseek-v4-flash-0731, benchlm.ai/md/benchmarks/frontiercode.md, benchleader.com DeepSeek V4.1 Flash vs Muse Spark 1.3, llm-stats.com FrontierCode 1.1, codingfleet.com"
+      ],
+      "candidates": [
+        {
+          "url": "https://cognition.com/data/frontiercode-leaderboard/data.json",
+          "publisher": "Cognition (registered)",
+          "published": "2026-08-06",
+          "reports": "DeepSeek V4 Flash 0731 FrontierCode 1.1 Main at high effort only: 18.8% (new_score; raw correct 21.1%), chisel harness. Efforts list ['high'].",
+          "resolution": "reject",
+          "reason": "different effort (high, not max)"
+        },
+        {
+          "url": "https://cognition.com/data/frontiercode-leaderboard/data.json",
+          "publisher": "Cognition (registered)",
+          "published": "2026-10-13",
+          "reports": "DeepSeek V4.1 Flash, high effort, Main 43.9% (new_score; raw 48.6%).",
+          "resolution": "reject",
+          "reason": "different model version (V4.1 Flash, not V4 Flash 0731) and different effort"
+        },
+        {
+          "url": "https://artificialanalysis.ai/models/deepseek-v4-flash",
+          "publisher": "Artificial Analysis (registered)",
+          "published": "2026-10-23",
+          "reports": "Live payload 2026-10-23: frontierCode null for DeepSeek V4 Flash 0731 (max) and for DeepSeek V4 Flash (high)/(max)/(non-reasoning). Non-null rows are other versions: DeepSeek V4.1 Flash (max) 44.0%, V4.1 Flash 1017 (max) 43.7%, V4 Pro 0813 (max) 38.8%.",
+          "resolution": "reject",
+          "reason": "different model version (V4.1 Flash / V4 Pro 0813); no AA row for the 0731 (max) configuration"
+        },
+        {
+          "url": "https://www.benchleader.com/compare/deepseek-v4-1-flash-1017-vs-muse-spark-1-3",
+          "publisher": "BenchLeader, BenchLM, Roo3, codingfleet (aggregators)",
+          "published": "2026-10-20",
+          "reports": "Repeat AA's 43.7% (V4.1 Flash 1017 max) and Cognition's 43.9% (V4.1 Flash high) and 18.8% (V4 Flash 0731 high).",
+          "resolution": "reject",
+          "reason": "relay of a registered source (AA / Cognition); different model version or effort"
+        },
+        {
+          "url": "https://huggingface.co/deepseek-ai/DeepSeek-V4-Flash-0731",
+          "publisher": "DeepSeek (model provider)",
+          "published": "2026-07-31",
+          "reports": "Model card reports code-agent results at max effort in the (unreleased) DeepSeek Harness, e.g. Terminal-Bench 2.1 82.7; no FrontierCode result.",
+          "resolution": "reject",
+          "reason": "not a score (no FrontierCode figure)"
+        }
+      ],
+      "result": "not found",
+      "notes": "Chinese-language and English searches found no FrontierCode result for DeepSeek V4 Flash 0731 at max effort from any party. All DeepSeek FrontierCode numbers found belong to V4.1 Flash, V4 Pro, or the 0731 build at high."
+    },
+    {
+      "modelId": "muse-wonder",
+      "leaf": "frontierCode",
+      "queries": [
+        "FrontierCode Muse Wonder Meta score",
+        "\"FrontierCode\" \"Muse Wonder\"",
+        "Muse Wonder FrontierCode Cognition leaderboard added Meta (extended)",
+        "Cognition FrontierCode \"Muse\" added to leaderboard X post Cognition_Labs",
+        "Meta Muse Wonder model card FrontierCode OR \"FrontierCode 1.1\" Cognition evaluation Muse Code",
+        "Muse Wonder Artificial Analysis FrontierCode 1.1 46% Muse Wonder (max) Coding Agent Index v2.0",
+        "WebFetch/curl: artificialanalysis.ai/models/muse-wonder and /evaluations/frontiercode (live 2026-10-23), artificialanalysis.ai/articles/muse-wonder, cognition.com data.json (no Muse model), benchlm.ai/models/muse-wonder, llm-stats.com FrontierCode pages"
+      ],
+      "candidates": [
+        {
+          "url": "https://artificialanalysis.ai/models/muse-wonder",
+          "publisher": "Artificial Analysis (registered; FrontierCode 1.1 Main, AA harness)",
+          "published": "2026-10-23 (first observed; AA does not date individual scores)",
+          "reports": "Muse Wonder (Max): frontierCode = 0.464713333333333 (46.47%) on the model page payload and in the live FrontierCode leaderboard payload, fetched 2026-10-23. An AA FrontierCode leaderboard payload saved at about 2026-10-21 15:58 UTC (after the cutoff) has the Muse Wonder (max) object with no FrontierCode value, while its Muse Wonder Full (max) 44.89% was already present. Reasoning effort max, the configuration AA plots as 'Muse Wonder (Max)'.",
+          "resolution": "reject",
+          "reason": "published after cutoff (absent from AA's 2026-10-21 capture, present 2026-10-23). IMPORTANT for the editor: this is an exact-configuration, same-version score from a REGISTERED source (AA), so it would fill the leaf by a newer capture (aa_recapture) if the owner admits post-cutoff AA recaptures; it is recorded, not applied."
+        },
+        {
+          "url": "https://artificialanalysis.ai/models/muse-wonder-full",
+          "publisher": "Artificial Analysis (registered)",
+          "published": "2026-10-21",
+          "reports": "Muse Wonder Full (Max) FrontierCode 1.1 = 44.89% (already in leaf_evidence supplements as muse-wonder-full).",
+          "resolution": "reject",
+          "reason": "not the exact configuration (Muse Wonder Full is a different model from Muse Wonder)"
+        },
+        {
+          "url": "https://research.meta.ai/blog/introducing-muse-wonder",
+          "publisher": "Meta (model provider)",
+          "published": "2026-10-12",
+          "reports": "Evaluation table and model card contain no FrontierCode row (re-checked via coverage; no secondary report cites one).",
+          "resolution": "reject",
+          "reason": "not a score"
+        },
+        {
+          "url": "https://cognition.com/frontiercode",
+          "publisher": "Cognition (registered)",
+          "published": "2026-10-22",
+          "reports": "Leaderboard data.json (last modified 2026-10-22T22:28Z, 46 models, changelog to 2026-10-13) has no Muse model of any kind.",
+          "resolution": "reject",
+          "reason": "not a score (no row)"
+        }
+      ],
+      "result": "not found",
+      "notes": "Within the cutoff no party ran FrontierCode on Muse Wonder. After the cutoff, AA's own site now shows 46.47% for Muse Wonder (Max); that is a registered-source recapture, flagged for the editor, not an unregistered-party finding. Third-party sites reviewed (BenchLM, llm-stats, BenchLeader) show nothing for Muse Wonder."
+    },
+    {
+      "modelId": "muse-spark-1-3-xhigh",
+      "leaf": "frontierCode",
+      "queries": [
+        "FrontierCode Muse Spark 1.3 xhigh",
+        "Muse Spark 1.3 xhigh FrontierCode 1.1 Main score Artificial Analysis Cognition (extended)",
+        "\"FrontierCode\" Muse Spark 1.3 xhigh 1.1 Main %",
+        "FrontierCode benchmark leaderboard Muse Wonder Full Muse Spark 1.3 DeepSeek V4 Flash Grok 4.6 (extended)",
+        "WebFetch/curl: artificialanalysis.ai/models/muse-spark-1-3-xhigh (live 2026-10-23), artificialanalysis.ai/evaluations/frontiercode, benchlm.ai/models/muse-spark-1-3, benchleader.com Muse Spark 1.3 comparison, cognition.com data.json, web.archive.org snapshot (blocked, 403 from proxy)"
+      ],
+      "candidates": [
+        {
+          "url": "https://artificialanalysis.ai/models/muse-spark-1-3-xhigh",
+          "publisher": "Artificial Analysis (registered; FrontierCode 1.1 Main, AA harness)",
+          "published": "2026-10-23 (first observed; AA does not date individual scores)",
+          "reports": "Muse Spark 1.3 (Xhigh), currentModel payload on the model page fetched 2026-10-23: frontierCode = 0.386337666666667 (38.63%), effort xhigh, release Muse Spark 1.3, deprecated -> muse-wonder. The model is not in the live FrontierCode leaderboard rows (deprecated), and the project's 2026-10-21 log recorded 'no row for this configuration'. Whether the value existed on the model page before the cutoff cannot be verified (Wayback fetch blocked).",
+          "resolution": "reject",
+          "reason": "published after cutoff (not seen in the 2026-10-21 AA chart capture; first observed 2026-10-23; unverified whether it predates the cutoff). IMPORTANT for the editor: exact-configuration, same-version score from a REGISTERED source (AA); recorded, not applied."
+        },
+        {
+          "url": "https://artificialanalysis.ai/models/muse-spark-1-3",
+          "publisher": "Artificial Analysis (registered); relayed by BenchLeader",
+          "published": "2026-10-13",
+          "reports": "Muse Spark 1.3 (Max) FrontierCode 1.1 = 40.65%; BenchLeader repeats 40.6% (max) with 'new result 13 Oct 2026'.",
+          "resolution": "reject",
+          "reason": "different effort (max, not xhigh)"
+        },
+        {
+          "url": "https://artificialanalysis.ai/models/muse-spark-open",
+          "publisher": "Artificial Analysis (registered)",
+          "published": "2026-10-23",
+          "reports": "Muse Spark Open (xhigh) FrontierCode 1.1 = 27.65%.",
+          "resolution": "reject",
+          "reason": "different model version (Muse Spark Open, not 1.3)"
+        },
+        {
+          "url": "https://research.meta.ai/blog/introducing-muse-spark-1-3",
+          "publisher": "Meta (model provider)",
+          "published": "2026-09-02",
+          "reports": "Scorecard predates FrontierCode on AA and has no FrontierCode row; shows 1.3 only at max.",
+          "resolution": "reject",
+          "reason": "not a score"
+        },
+        {
+          "url": "https://cognition.com/frontiercode",
+          "publisher": "Cognition (registered)",
+          "published": "2026-10-22",
+          "reports": "data.json has no Muse model at any effort.",
+          "resolution": "reject",
+          "reason": "not a score (no row)"
+        }
+      ],
+      "result": "not found",
+      "notes": "Within the cutoff no party published FrontierCode for Muse Spark 1.3 at xhigh. AA's model page now shows 38.63% for the xhigh configuration; first-appearance date is unverifiable, so it is flagged for the editor."
+    }
+  ]
+}

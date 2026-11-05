@@ -1,0 +1,55 @@
+{
+  "workflow_id": "WF-SILVER-DEEP-RESEARCH",
+  "atomic_flow": "AF-DECIDE",
+  "flow_step": "FS-SILVER_DEEP_RESEARCH",
+  "version": "3.0.0",
+  "question": "Find user-reported measurements of subscription plan allowances (dollar-equivalent API-priced usage consumed per rate-limit window: 5-hour, weekly, monthly) for coding-agent plans, published or updated since about 2026-10-19, for Anthropic Claude Pro/Max 5x/Max 20x (Ultra); OpenAI ChatGPT Plus/Pro/Business with Codex; Google AI Pro/Ultra (Gemini CLI / Antigravity); Kimi; Xiaomi MiMo token plans; MiniMax coding plans. Apply qualification rule O11 (plan tier, window, measured token/dollar consumption to the limit, how the dollar figure was computed) and cross-check stage-1 and stage-2 findings.",
+  "query": "Find user-reported measurements of subscription plan allowances (dollar-equivalent API-priced usage consumed per rate-limit window) for coding-agent plans since about 2026-10-19; apply O11; cross-check stage 1 and stage 2.",
+  "mode": "deep",
+  "research_type": "default",
+  "started_at": "2026-11-05T03:40:00Z",
+  "finished_at": "2026-11-05T05:40:00Z",
+  "current_date_source": "host runtime / task statement (2026-11-05)",
+  "report_dir": "/home/user/valuerank/research/2026-11-05-plan-allowances/stage3-sb-deep-research",
+  "out_dir_override": "SB_RESEARCH_OUT_DIR set by caller (not research/<date>-<slug>/)",
+  "artifact_paths": {
+    "sources": "sources.jsonl",
+    "evidence": "evidence.jsonl",
+    "claims": "claims.jsonl",
+    "report": "research_report.md"
+  },
+  "search_cli": {
+    "status": "unavailable",
+    "providers_available": []
+  },
+  "fallback_reason": "search-cli (`search`) not installed on this host. Retrieval used host WebSearch/WebFetch plus direct JSON/HTML fetches (Arctic Shift Reddit mirror, Algolia HN API, LINUX DO mirror locdd.com, Google AI developer forum /raw, aiplans.dev reports, fxtwitter, GitHub pages via WebFetch).",
+  "provider_config": {
+    "primary": "WebSearch",
+    "scholarly": null
+  },
+  "assumptions": [
+    {
+      "assumption_id": "asm_00000001",
+      "text": "O11 qualification rule and O86 concordance (largest lower bound <= 1.20 x smallest upper bound) as stated in the task and project AGENTS.md; prices as used by stage 1 (Opus 5.5 $4/$20/$0.20 cache read, $5 and $8 cache write; Sol $2/$0.10/$10; Astra $10/$1/$50; Argon intro $2/$0.10/$10; K3.1 Pro $2/$0.20/$10).",
+      "materiality": "high",
+      "status": "implicit"
+    },
+    {
+      "assumption_id": "asm_00000002",
+      "text": "Report window opens 2026-10-19; stage-1/2 cutoff 2026-11-01T06:10Z is kept, later reports are labelled 'after cutoff' and never counted for that release.",
+      "materiality": "medium",
+      "status": "implicit"
+    }
+  ],
+  "continuation": null,
+  "constraints_observed": [
+    "No writes under /home/user/silver-bullet (read-only).",
+    "No credentials requested, used, or copied; a credential visible in a mirrored thread (reported by stage 1) was not opened.",
+    "Cloudflare human verification was not automated; linux.do search and latest endpoints returned the challenge page and are recorded as blocked.",
+    "Nothing committed or pushed."
+  ],
+  "validation_scripts": "run from /home/user/silver-bullet against this directory; logs in validation/",
+  "stage_context": "Stage 1 used plain web search and stage 2 used Claude Deep Research; this stage 3 runs the Silver Bullet deep workflow in deep mode with two critique cycles.",
+  "critique_cycles": 2,
+  "o11_rule": "A report counts under O11 only if it states the plan tier, the window, the measured consumption and how the dollar figure was computed; others are provisional or excluded."
+}

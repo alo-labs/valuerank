@@ -20,8 +20,8 @@ from __future__ import annotations
 import datetime as dt
 import re
 
-# Release dates that are stated in the repository (the v1.5.0 page header); all others are unknown.
-VERSION_DATES = {"v1.5.0": "2026-09-06"}
+# Release dates that are stated in the repository (the v1.5.0 page header; v2.0.0's valuerank/release.py); all others are unknown.
+VERSION_DATES = {"v1.5.0": "2026-09-06", "v2.0.0": "2026-10-19"}
 
 _KEY = re.compile(r"^v(\d)(\d)(\d)$")
 
@@ -56,7 +56,8 @@ def _snapshots(history: dict, current: dict) -> list[dict]:
         {
             "version": current["version"],
             "dateIso": current["dateIso"],
-            "ranks": {model_id: ranks["api"] for model_id, ranks in current["ranks"].items()},
+            # A configuration without a cost has no value score and no rank (AGENTS.md), so it is left out.
+            "ranks": {model_id: ranks["api"] for model_id, ranks in current["ranks"].items() if ranks["api"] is not None},
             "models": current["modelCount"],
             "dimensions": current["dimensionCount"],
         }

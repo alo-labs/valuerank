@@ -1,0 +1,96 @@
+{
+  "version": "3.0.0",
+  "query": "O71 stage 3: user reports of API-priced plan allowances per model x tier (O11 test)",
+  "mode": "deep",
+  "started_at": "2026-10-25T14:35:10.528776+00:00",
+  "finished_at": "2026-10-25T15:06:30.361740+00:00",
+  "assumptions": [
+    {
+      "assumption_id": "asm_0a1b2c01",
+      "text": "API list prices as fixed in the stage files apply to every conversion",
+      "materiality": "high",
+      "status": "user_confirmed"
+    },
+    {
+      "assumption_id": "asm_0a1b2c02",
+      "text": "Stage-2 eligibility (seven conditions) and reporting rules remain the operative reading of O11",
+      "materiality": "high",
+      "status": "user_confirmed"
+    },
+    {
+      "assumption_id": "asm_0a1b2c03",
+      "text": "Reporter tooling (ccusage, OTel, LiteLLM) prices tokens correctly at list unless shown otherwise",
+      "materiality": "medium",
+      "status": "implicit"
+    },
+    {
+      "assumption_id": "asm_0a1b2c04",
+      "text": "A provider statement or support e-mail is public evidence of a schema change; one user's impression is not",
+      "materiality": "medium",
+      "status": "evidence_validated"
+    }
+  ],
+  "provider_config": {
+    "primary": "WebSearch+WebFetch+curl (fallback)",
+    "scholarly": null
+  },
+  "report_dir": "/home/user/valuerank/research/2026-10-25-plan-allowances-sb-deep-research",
+  "artifact_paths": {
+    "sources": "sources.jsonl",
+    "evidence": "evidence.jsonl",
+    "claims": "claims.jsonl",
+    "report": "research_report.md"
+  },
+  "continuation": null,
+  "workflow_id": "WF-SILVER-DEEP-RESEARCH",
+  "atomic_flow": "AF-DECIDE",
+  "flow_step": "FS-SILVER_DEEP_RESEARCH",
+  "owner_decision": "O71 stage 3 (test against O11)",
+  "question": "For each first-party subscription plan tier of the frontier and near-frontier model providers, find actual end-user reports of the API-list-price-equivalent usage the plan delivers per period, and judge each model x tier against O11 (>=2 independent reports, largest <= 1.20 x smallest over every eligible report of a comparability partition; split only on public evidence of a quota-schema change).",
+  "research_type": "default",
+  "search_cli": {
+    "status": "unavailable",
+    "providers_available": [],
+    "probe": "command -v search -> not found (2026-10-25T14:34Z)"
+  },
+  "fallback_reason": "search-cli not installed; host WebSearch and WebFetch plus curl through the agent proxy used for all retrieval (Reddit via arctic-shift API, HN via Algolia API, GitHub issue pages via WebFetch/curl, YouTube via transcript attempts). No Task/Agent tool was available in this session, so the planned 5 parallel helper agents were not spawned; retrieval ran sequentially in the lead agent.",
+  "retrieval": {
+    "intent_class": "factual",
+    "portals_attempted": [],
+    "portals_succeeded": [],
+    "fallback_reason": "search-cli unavailable; non-landscape run, portals not used",
+    "channels_succeeded": [
+      "Bluesky public API",
+      "HN Algolia",
+      "arctic-shift Reddit API",
+      "YouTube search-result snippets",
+      "Qiita API",
+      "Bilibili search API",
+      "locdd (LINUX DO mirror)",
+      "Google AI forum search",
+      "OpenAI forum search + thread read",
+      "GitHub issues via WebFetch",
+      "WebSearch"
+    ],
+    "channels_failed": [
+      "YouTube watch pages/transcripts (bot check, not circumvented)",
+      "X (HTTP 402)",
+      "nitter (challenge)",
+      "Zhihu (403)",
+      "LINUX DO search (403)",
+      "Xiaohongshu (redirect)",
+      "grep.app (429)",
+      "web.archive.org (timeout)",
+      "Task/Agent tool for helper agents (not available)"
+    ],
+    "sources_registered": 55,
+    "evidence_spans": 69,
+    "avg_credibility": 53.6,
+    "deep_budget_min_avg_credibility": 70
+  },
+  "prior_stages": [
+    "/home/user/valuerank/research/2026-10-25-plan-allowances/stage1-*.md",
+    "/home/user/valuerank/research/2026-10-25-plan-allowances/research_notes/Plan allowance user reports/*.md",
+    "/home/user/valuerank/research/2026-10-25-plan-allowances/reports/Plan allowance user reports.md"
+  ]
+}

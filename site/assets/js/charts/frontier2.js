@@ -28,7 +28,8 @@ export function buildFrontier2(models, options) {
   const base = baseLayout(opts, 'Cost impact: API ranking (○) vs Plan ranking (◆), lines show the change per model', 13);
   const layout = {
     ...base,
-    xaxis: axisWith(base.xaxis, 'Cost score (0–100, higher is cheaper)', { range: [0, 105] }),
+    // Cheaper to the left, dearer to the right, as on AA's cost charts.
+    xaxis: axisWith(base.xaxis, 'Cost score (cheaper ← · → dearer; 100 = cheapest)', { range: [105, 0] }),
     yaxis: axisWith(base.yaxis, 'Overall score (0–100)', { range: [Math.max(0, Math.floor(Math.min(...scores) - 5)), Math.min(100, Math.ceil(Math.max(...scores) + 5))] }),
     legend: { orientation: 'h', y: -0.15 },
     annotations: [],

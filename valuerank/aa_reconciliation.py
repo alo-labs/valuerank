@@ -30,6 +30,7 @@ from valuerank.paths import DATA, ROOT
 INVENTORY = DATA / "aa_reconciliation_inventory.json"
 REPORT = DATA / "aa_reconciliation_report.json"
 MAX_AGE_DAYS = 7
+INCOMPLETE_STATUS = "excluded_incomplete_benchmarks"  # O36/O38: the score build's status for a logged incomplete-evidence exclusion
 
 
 def number(value):
@@ -215,10 +216,13 @@ def reconcile(now=None, data=None):
             issues.append("Inventory benchmark version differs from aa_metrics.json; recapture or migrate the exact version before publishing.")
         scores = read_json(data / "scores.json")
         ranked = {item["id"] for item in scores["models"] if item.get("rankingEligible") is True}
+        # O36/O38: a family whose selected configuration lacks a benchmark after the logged exhaustive search (the score
+        # build refuses an unlogged gap) is listed unranked, explicitly, never silently.
+        incomplete = {item["id"] for item in scores["models"] if item.get("rankingStatus") == INCOMPLETE_STATUS}
         primary_gaps = {item["id"]: item.get("rankingExclusionReasons", []) for item in scores["models"]}
     except (OSError, ValueError, KeyError, TypeError, AttributeError) as exc:
         issues.append(f"Source roster or ranking unavailable: {exc}")
-        roster, ranked, primary_gaps = [], set(), {}
+        roster, ranked, incomplete, primary_gaps = [], set(), set(), {}
     decisions = {}
     decision_rows = doc.get("rosterDecisions", [])
     if not isinstance(decision_rows, list):
@@ -250,7 +254,8 @@ def reconcile(now=None, data=None):
                 "primaryRankingGaps": primary_gaps.get(model_id, ["Exact evaluated variant absent from source roster"]),
                 "metricGap": "Numeric intelligence/cost values not fully available in the public chart capture"
                 if not number(row.get("intelligenceIndex")) or not number(row.get("totalCostUsd")) else None,
-                "rankStatus": "Primary ranked" if model_id in ranked else "Unranked source candidate" if model_id else "Deferred comparison candidate" if deferred else "Missing from source roster"}
+                "rankStatus": "Primary ranked" if model_id in ranked else "Unranked: incomplete benchmark evidence (O36)" if model_id in incomplete
+                else "Unranked source candidate" if model_id else "Deferred comparison candidate" if deferred else "Missing from source roster"}
 
     valid = []
     for index, row in enumerate(rows):
@@ -321,8 +326,9 @@ def reconcile(now=None, data=None):
         required_id = next(iter(group["modelIds"]))
         in_roster, primary_ranked = required_id in roster_ids, required_id in ranked
         report["nearFrontierFamilies"].append({"family": family, "modelId": required_id, "configurationN": len(group["rows"]),
-                                               "inRoster": in_roster, "primaryRanked": primary_ranked, "deferred": required_id is None})
-        if required_id is not None and not (in_roster and primary_ranked):
+                                               "inRoster": in_roster, "primaryRanked": primary_ranked, "deferred": required_id is None,
+                                               "incompleteEvidence": required_id in incomplete})
+        if required_id is not None and not (in_roster and (primary_ranked or required_id in incomplete)):
             issues.append(f"Near-frontier AA family {family} ({required_id}) must appear in the primary ranking using its selected roster configuration; the near configuration itself need not be selected.")
         undecided = [row["name"] for row in group["rows"] if required_id is None and not row["rosterDecision"]]
         if undecided:
@@ -349,10 +355,11 @@ def reconcile(now=None, data=None):
         required_id = next(iter(group["modelIds"]))
         matches = [row for row in group["rows"] if row.get("valueRankModelId") == required_id]
         included = len(matches) == 1 and required_id in ranked
+        excluded = len(matches) == 1 and required_id in incomplete
         report["requiredFamilies"].append({"family": family, "modelId": required_id,
                                           "selectedFrontierConfigurationN": len(matches),
-                                          "primaryRanked": included})
-        if not included:
+                                          "primaryRanked": included, "incompleteEvidence": excluded})
+        if not (included or excluded):
             issues.append(f"Required AA frontier family {family} ({required_id}) must resolve to one exact selected frontier configuration and appear in the primary ranking.")
     report["comparisonCandidates"] = [row for row in valid if not row["valueRankModelId"]]
     report["metricGaps"] = [{"aaId": row["aaId"], "name": row["name"], "gap": row["metricGap"]} for row in valid if row["metricGap"]]

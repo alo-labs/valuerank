@@ -1,0 +1,378 @@
+"""Owner decision O81: the build decides O71 plan admission from the report table (E270, O11, O76, O80)."""
+
+from __future__ import annotations
+
+import json
+from datetime import date
+
+import pytest
+
+from valuerank import plan_admission as pa
+from valuerank.paths import DATA
+
+DAY = date(2026, 10, 25)
+PROFILE = {
+    "partitionSplits": [{"provider": "A", "date": "2026-10-17T13:00:00Z", "type": "limit"}, {"provider": "O", "date": "2026-10-11", "type": "price"},
+                        {"provider": "O", "date": "2026-10-20", "type": "metering"}],
+    "accountingFaultDays": [{"provider": "O", "days": ["2026-10-16"]}, {"provider": "O", "plans": ["P500"], "days": ["2026-09-29..2026-10-14"]}],
+}
+DOCUMENT = {"listedPlans": {"Pro": 20, "P500": 500, "Plus": 20}, "speedModeMultipliers": {"O": {"fast": 2.5}}}
+
+
+def report(identifier, provider="A", plan="Pro", start="2026-10-01", end="2026-10-02", low=100.0, high=None, unit="week", **extra):
+    return {"id": identifier, "provider": provider, "plan": plan, "modelId": "m", "observer": identifier, "windowStart": start, "windowEnd": end,
+            "unit": unit, "valueLower": low, "valueUpper": high if high is not None else low, **extra}
+
+
+def test_partitions_follow_instant_and_whole_day_splits():
+    splits = PROFILE["partitionSplits"]
+    assert pa.partition(report("a", end="2026-10-17T13:00:00Z"), splits) == 0
+    assert pa.partition(report("b", start="2026-10-17T13:00:00Z", end="2026-10-18"), splits) == 1
+    assert pa.partition(report("c", start="2026-10-17", end="2026-10-18"), splits) is None
+    assert pa.partition(report("d", provider="O", start="2026-10-10", end="2026-10-10"), splits) == 0
+    assert pa.partition(report("e", provider="O", start="2026-10-11", end="2026-10-11"), splits) is None
+    assert pa.partition(report("f", provider="O", start="2026-10-12", end="2026-10-12"), splits) == 1
+    # I79 L2: a weekly reading without a stated start covers the 7 days ending on its date, so one on 2026-10-20 spans the
+    # 2026-10-17 split; a 5-hour reading is its own day.
+    assert pa.partition(report("g", start=None, end="2026-10-20"), splits) is None
+    assert pa.partition(report("g", start=None, end="2026-10-25"), splits) == 1
+    assert pa.partition(report("g", start=None, end="2026-10-20", unit="5h"), splits) == 1
+
+
+def test_exclusions_follow_e270():
+    for extra, reason in (({"lowerBound": True}, "lower bound"), ({"mixedModel": True}, "mixed-model"), ({"aggregator": True}, "aggregator"),
+                          ({"modelId": None}, "model not stated"), ({"modelUnstated": True}, "model not stated"), ({"challenged": True}, "challenged"),
+                          ({"tierUnstated": True}, "tier not stated"), ({"derived": True}, "own arithmetic"), ({"anomaly": True}, "anomaly")):
+        assert reason in pa.exclusion({**report("x"), **extra}, PROFILE, DAY)
+    # O189: an observer's own readings must concord (largest lower at most 1.20x the smallest upper) for their range to stand for the observer.
+    assert "readings disagree" in pa.exclusion({**report("r"), "readings": [[10, 10], [100, 100]]}, PROFILE, DAY)
+    assert pa.exclusion({**report("r"), "readings": [[8.3, 8.3], [8.7, 8.7]]}, PROFILE, DAY) is None
+    assert pa.exclusion({**report("r"), "readings": [[10, 10]]}, PROFILE, DAY) is None
+    assert "outside the report window" in pa.exclusion(report("old", start="2026-09-01", end="2026-09-20"), PROFILE, DAY)
+    assert "outside the report window" in pa.exclusion(report("late", start="2026-10-26", end="2026-10-27"), PROFILE, DAY)
+    assert "accounting-fault day" in pa.exclusion(report("f", provider="O", start="2026-10-16", end="2026-10-16"), PROFILE, DAY)
+    assert "accounting-fault day" in pa.exclusion(report("u", provider="O", plan="P500", start="2026-10-12", end="2026-10-12"), PROFILE, DAY)
+    assert pa.exclusion(report("ok", provider="O", plan="Plus", start="2026-10-12", end="2026-10-12"), PROFILE, DAY) is None
+    assert "spans a partition split" in pa.exclusion(report("s", start="2026-10-17", end="2026-10-18"), PROFILE, DAY)
+    assert pa.converted(report("fast", provider="O", low=100, high=110, speedMode="fast"), DOCUMENT["speedModeMultipliers"]) == (250, 275)
+    assert pa.converted(report("slow", provider="A", low=100, speedMode="fast"), DOCUMENT["speedModeMultipliers"]) == (100, 100)
+
+
+def test_a_discordant_observer_blocks_the_cell_instead_of_creating_a_pass():
+    """O191 (reviewer 115): withholding an observer whose own readings disagree must never turn a failing cell into a passing one."""
+
+    def cell(*reports):
+        return next(item for item in pa.evaluate({**DOCUMENT, "reports": list(reports)}, PROFILE, DAY) if item["plan"] == "Pro" and item["unit"] == "week")
+
+    a, b = report("a", start="2026-10-18", end="2026-10-18", low=100), report("b", start="2026-10-19", end="2026-10-19", low=110)
+    c = report("c", start="2026-10-20", end="2026-10-20", low=150)
+    assert cell(a, b, c)["status"].startswith("fails: largest lower bound") and cell(a, b)["status"] == "passes"
+    discordant = {**c, "readings": [[150, 150], [100, 100]]}
+    blocked = cell(a, b, discordant)
+    assert blocked["status"].startswith("fails: an observer's own readings disagree") and blocked["discordantObservers"] == ["c"] and blocked["admittingObservers"] == []
+    # A provisional discordant observer is unchecked evidence and blocks nothing; a concordant second reading changes nothing.
+    assert cell(a, b, {**discordant, "provisional": True})["status"] == "passes"
+    # E348 (reviewer 116): a provisional observer whose inference was re-checked may contest the range test, so its discord blocks too.
+    assert cell(a, b, {**discordant, "provisional": True, "inferenceRechecked": True})["status"].startswith("fails: an observer's own readings disagree")
+    assert cell(a, b, {**c, "readings": [[150, 150], [145, 145]]})["status"].startswith("fails: largest lower bound")
+
+
+def test_the_cell_test_reads_each_observers_tightest_readings():
+    """O192 (reviewer 123): an observer with several readings enters the O86 test through its largest lower and smallest upper bound."""
+
+    def cell(*reports):
+        return next(item for item in pa.evaluate({**DOCUMENT, "reports": list(reports)}, PROFILE, DAY) if item["plan"] == "Pro" and item["unit"] == "week")
+
+    a = report("a", start="2026-10-18", end="2026-10-18", low=100, high=120)
+    b = report("b", start="2026-10-19", end="2026-10-19", low=144)
+    assert cell(a, b)["status"] == "passes"  # without recorded readings the covering range stands
+    tight = cell({**a, "readings": [[100, 100], [120, 120]]}, b)
+    assert tight["status"].startswith("fails: largest lower bound") and cell({**a, "readings": [[100, 100]]}, b)["status"] == "passes"
+    # The value still pools the observer's whole range, and a speed mode scales the readings with the range.
+    ok = cell({**a, "readings": [[110, 110], [120, 120]]}, report("c", start="2026-10-19", end="2026-10-19", low=125))
+    assert ok["status"] == "passes" and ok["feasibleRange"] == pytest.approx([125 / 1.2, 1.2 * 110]) and ok["range"][0] == 100
+    # E350 (reviewer 125): a coarser extra reading widens the range but leaves the pooled value where the tight readings put it.
+    coarse = {**report("d", start="2026-10-18", end="2026-10-18", low=1, high=1000), "readings": [[100, 100], [1, 1000]]}
+    pooled = cell(coarse, report("e", start="2026-10-19", end="2026-10-19", low=100))
+    assert pooled["status"] == "passes" and pooled["value"] == pytest.approx(100) and pooled["range"] == [1, 1000]
+    fast = {**a, "provider": "O", "plan": "Plus", "speedMode": "fast", "readings": [[100, 100], [120, 120]]}
+    assert pa.test_bounds(fast, DOCUMENT["speedModeMultipliers"]) == (300, 250)
+
+
+def test_cells_pass_only_on_two_firm_concordant_reports_in_the_current_partition():
+    def cells(*reports):
+        return {(cell["plan"], cell["unit"], cell["region"]): cell for cell in pa.evaluate({**DOCUMENT, "reports": list(reports)}, PROFILE, DAY)}
+
+    passing = cells(report("a", start="2026-10-18", end="2026-10-19", low=100, high=110), report("b", start="2026-10-20", end="2026-10-20", low=105),
+                    report("before", end="2026-10-03", low=500), report("p", start="2026-10-21", end="2026-10-21", low=108, provisional=True))[("Pro", "week", "global")]
+    assert passing["status"] == "passes" and passing["value"] == pytest.approx(105) and passing["range"] == [100, 110]
+    assert passing["admittingObservers"] == ["a", "b"]
+    # O115: a wide report's midpoint is clipped to the concordance band before pooling (R68's counterexample: 240 -> ~118).
+    wide = cells(report("a", start="2026-10-18", end="2026-10-19", low=100, high=110), report("b", start="2026-10-20", end="2026-10-20", low=100, high=1000))[("Pro", "week", "global")]
+    assert wide["status"] == "passes" and wide["value"] == pytest.approx((105 * 132) ** 0.5) and wide["feasibleRange"] == pytest.approx([100 / 1.2, 132])
+    # Reviewer 95: the band moved b's midpoint (550 -> 132), so the cell names it; a cell no band moved names none.
+    assert wide["bandMoved"] == ["b"] and passing["bandMoved"] == []
+    assert passing["monthlyUsd"] == pytest.approx(105 * 52 / 12) and passing["multiple"] == pytest.approx(105 * 52 / 12 / 20)
+    assert cells(report("a", start="2026-10-18", end="2026-10-18", low=100), report("b", start="2026-10-19", end="2026-10-19", low=125))[("Pro", "week", "global")]["status"] == "fails: largest lower bound 1.25× the smallest upper bound (O86 allows 1.20×) in the current partition"
+    # O86: coarse whole-percent readings 7% apart share a value, though their whole span is 1.23x.
+    coarse = cells(report("a", start="2026-10-18", end="2026-10-18", low=7.84, high=9.04), report("b", start="2026-10-19", end="2026-10-19", low=8.40, high=9.68))
+    assert coarse[("Pro", "week", "global")]["status"] == "passes"
+    # O159: an unchecked provisional report neither fails the cell nor moves its band; once its inference is re-checked it counts.
+    firm = [report("a", start="2026-10-18", end="2026-10-18", low=100), report("b", start="2026-10-19", end="2026-10-19", low=104)]
+    stray = report("p", start="2026-10-20", end="2026-10-20", low=200, provisional=True)
+    unchecked = cells(*firm, stray)[("Pro", "week", "global")]
+    assert unchecked["status"] == "passes" and unchecked["feasibleRange"] == pytest.approx([104 / 1.2, 120]) and unchecked["allReportsBand"] == pytest.approx([200 / 1.2, 120])
+    checked = cells(*firm, {**stray, "inferenceRechecked": "matched tier and model against a and b"})[("Pro", "week", "global")]
+    assert checked["status"].startswith("fails: largest lower bound") and checked["reports"][-1]["inferenceRechecked"]
+    # O176: a re-checked provisional report that concords still cannot narrow the band that clips the value.
+    narrow = {**report("p", start="2026-10-20", end="2026-10-20", low=110, provisional=True), "inferenceRechecked": "matched"}
+    moved = cells(report("a", start="2026-10-18", end="2026-10-18", low=90, high=120), report("b", start="2026-10-19", end="2026-10-19", low=100), narrow)[("Pro", "week", "global")]
+    assert moved["status"] == "passes" and moved["feasibleRange"] == pytest.approx([100 / 1.2, 120])
+    # O87: reports at different efforts pool for the model, keyed without the effort suffix.
+    reports = [report("a", start="2026-10-18", end="2026-10-18", effort="high"), {**report("b", start="2026-10-19", end="2026-10-19", effort="low"), "modelId": "m-max"}]
+    pooled = pa.evaluate({**DOCUMENT, "reports": reports}, PROFILE, DAY, {"m": "M", "m-max": "M"})[0]
+    assert (pooled["modelId"], pooled["status"], pooled["efforts"], pooled["configurations"]) == ("M", "passes", ["high", "low"], ["m", "m-max"])
+    assert len(pa.evaluate({**DOCUMENT, "reports": reports}, PROFILE, DAY)) == 2  # I69 L2: an ID is never parsed for its effort
+    assert cells(report("a", start="2026-10-18", end="2026-10-18"), report("p", start="2026-10-19", end="2026-10-19", provisional=True))[("Pro", "week", "global")]["status"].startswith("fails: 1 non-provisional")
+    assert cells(report("h", unit="5h"))[("Pro", "5h", "global")]["status"] == "fails: a 5-hour figure never converts to a billing period (O82)"
+    legacy = cells(report("r", start="2026-10-18", end="2026-10-18", plan="Legacy"), report("s", start="2026-10-19", end="2026-10-19", plan="Legacy"))
+    assert legacy[("Legacy", "week", "global")]["status"] == "passes" and legacy[("Legacy", "week", "global")]["listed"] is False
+    assert legacy[("Legacy", "week", "global")]["multiple"] is None
+    cn = cells(report("cn", region="CN"))[("Pro", "week", "CN")]
+    assert cn["status"].startswith("fails: ") and cn["listed"] is False
+    monthly = cells(report("m1", start="2026-10-18", end="2026-10-18", unit="month"), report("m2", start="2026-10-19", end="2026-10-19", unit="month"))[("Pro", "month", "global")]
+    assert monthly["monthlyUsd"] == pytest.approx(100) and monthly["multiple"] == pytest.approx(5)
+    with pytest.raises(ValueError, match="one observer reports twice"):
+        cells(report("a", start="2026-10-18", end="2026-10-18"), {**report("b", start="2026-10-19", end="2026-10-19"), "observer": "a"})
+
+
+def test_a_report_route_needs_a_passing_cell_with_the_same_reports():
+    cells = [{"plan": "Pro", "modelId": "m", "status": "passes", "admittingObservers": ["a", "b"]},
+             {"plan": "Pro", "modelId": "m", "status": "passes", "admittingObservers": ["c", "d"]}, {"plan": "Max", "modelId": "m", "status": "fails: x"}]
+    pair = [{"observer": "b"}, {"observer": "a"}]
+    routes = [{"id": "ok", "plan": "Pro", "modelIds": ["m"], "valueMultipleKind": "end_user_report", "independentReports": pair},
+              {"id": "other", "plan": "Max", "modelIds": ["outside"], "valueMultipleKind": "end_user_report"},
+              {"id": "controlled", "plan": "Max", "modelIds": ["m"], "valueMultipleKind": "controlled_account_workload_projection"}]
+    pa.check_routes(routes, cells, {"m"}, {"end_user_report"})
+    pa.check_routes([{**routes[0], "modelIds": ["m-high"]}], cells, {"m-high"}, {"end_user_report"}, {"m-high": "m"})  # O87
+    with pytest.raises(ValueError, match="no passing O71 cell"):
+        pa.check_routes(routes[:1], [{**cells[0], "listed": False}], {"m"}, {"end_user_report"})
+    # O127: a pair admitted at an earlier release needs no passing cell now; it ages like a measurement.
+    aged = [{**report, "admittedOn": "2026-09-20"} for report in pair]
+    pa.check_routes([{**routes[0], "independentReports": aged}], [], {"m"}, {"end_user_report"})
+    pa.check_routes([{**routes[0], "independentReports": [{"observer": "d"}, {"observer": "c"}]}], cells, {"m"}, {"end_user_report"})
+    with pytest.raises(ValueError, match="no passing O71 cell supports a report route for m on Max"):
+        pa.check_routes([{"id": "bad", "plan": "Max", "modelIds": ["m"], "valueMultipleKind": "end_user_report"}], cells, {"m"}, {"end_user_report"})
+    with pytest.raises(ValueError, match="are not a passing cell's admitting reports"):
+        pa.check_routes([{"id": "odd", "plan": "Pro", "modelIds": ["m"], "valueMultipleKind": "end_user_report", "independentReports": [{"observer": "c"}, {}]}],
+                        cells, {"m"}, {"end_user_report"})
+
+
+def test_the_committed_report_table_admits_no_cell_today():
+    """The O71 outcome: no cohort model × plan has two concordant user reports (stages 1-3)."""
+
+    document = json.loads((DATA / "plan_reports.json").read_text())
+    profile = json.loads((DATA / "plan_cost_routes.json").read_text())["evidencePolicy"]["reportEligibilityProfile"]
+    cells = pa.evaluate(document, profile, DAY)
+    assert cells and not [cell for cell in cells if cell["status"] == "passes"]
+    by = {(cell["plan"], cell["modelId"]): cell for cell in cells}
+    assert by[("Google AI Pro", "gemini-4-argon")]["status"] == "fails: largest lower bound 1.35× the smallest upper bound (O86 allows 1.20×) in the current partition"
+
+
+def test_only_limit_and_price_changes_split_partitions():
+    """O99: a metering-only announcement is logged and splits nothing; an untyped or unknown record stops the build."""
+
+    splits = pa.splitting(PROFILE["partitionSplits"])
+    assert [item["date"] for item in splits] == ["2026-10-17T13:00:00Z", "2026-10-11"]
+    assert pa.partition(report("h", provider="O", start="2026-10-20", end="2026-10-20"), splits) == 1  # no split on the 20th
+    # I86 M1: a report measured on a metering-only day is not excluded as spanning a split.
+    assert pa.exclusion(report("h", provider="O", start="2026-10-20", end="2026-10-20"), PROFILE, date(2026, 10, 25)) is None
+    with pytest.raises(ValueError, match="needs a type"):
+        pa.splitting([{"provider": "O", "date": "2026-10-20"}])
+    with pytest.raises(ValueError, match="needs a type"):
+        pa.splitting([{"provider": "O", "date": "2026-10-20", "type": "rumour"}])
+
+
+def test_route_change_flags_rest_on_typed_limit_or_price_records():
+    """O101, I84 L2: a route's change flag needs a limit or price record for its provider and plan on that date."""
+
+    records = [{"provider": "O", "date": "2026-10-11", "type": "price"}, {"provider": "O", "date": "2026-10-20", "type": "metering"},
+               {"provider": "A", "plans": ["Pro"], "date": "2026-10-17T13:00:00Z", "type": "limit"}]
+    pa.check_change_flags([{"id": "r1", "provider": "O", "plan": "Plus", "changeDetectedOn": "2026-10-11"},
+                           {"id": "r2", "provider": "A", "plan": "Pro", "changeDetectedOn": "2026-10-17"}, {"id": "r3", "provider": "O", "plan": "Plus"}], records)
+    for bad in ({"id": "m", "provider": "O", "plan": "Plus", "changeDetectedOn": "2026-10-20"},
+                {"id": "p", "provider": "A", "plan": "Max", "changeDetectedOn": "2026-10-17"}):
+        with pytest.raises(ValueError, match="no typed limit, price, credit or availability change record"):
+            pa.check_change_flags([bad], records)
+    # O105: a model-availability record flags the plan's routes but splits nothing.
+    availability = [{"provider": "O", "date": "2026-10-22", "type": "availability"}]
+    pa.check_change_flags([{"id": "a", "provider": "O", "plan": "Plus", "changeDetectedOn": "2026-10-22"}], availability)
+    assert pa.splitting(availability) == []
+
+
+
+def test_change_records_produce_their_route_flags():
+    """I86 L3, O107, I87 M1 and L1: a controlled route carries the earliest applicable record as its label date, and a
+    separate blocking date when the earliest limit or price record from there on differs (null when none); a later limit
+    change after an earlier availability record still blocks."""
+
+    records = [{"provider": "O", "date": "2026-10-11", "type": "price"}, {"provider": "O", "date": "2026-10-20", "type": "metering"},
+               {"provider": "K", "date": "2026-10-22", "type": "availability"}, {"provider": "O", "date": "2027-01-01", "type": "limit"},
+               {"provider": "A", "date": "2026-10-07", "type": "availability"}, {"provider": "A", "date": "2026-10-17T13:00:00Z", "type": "limit"}]
+    measured = {"valueMultipleKind": "controlled_account_workload_projection", "sourcePublicationDate": "2026-10-06"}
+    day = date(2026, 10, 25)
+    good = [{**measured, "id": "o", "provider": "O", "plan": "Plus", "changeDetectedOn": "2026-10-11"},
+            {**measured, "id": "k", "provider": "K", "plan": "Pro", "changeDetectedOn": "2026-10-22", "blockingChangeOn": None},
+            {**measured, "id": "a", "provider": "A", "plan": "Pro", "changeDetectedOn": "2026-10-07", "blockingChangeOn": "2026-10-17"},
+            {**measured, "id": "n", "provider": "N", "plan": "Pro"},
+            {"id": "c", "valueMultipleKind": "user_assumption", "provider": "K", "plan": "Pro", "changeDetectedOn": "2026-10-22", "blockingChangeOn": None},
+            {"id": "t", "valueMultipleKind": "user_assumption", "provider": "O", "plan": "Plus"}]
+    pa.check_change_records(good, records, day)
+    for bad, message in (({**good[0], "changeDetectedOn": None}, "must be 2026-10-11"), ({**good[1], "blockingChangeOn": "2026-10-22"}, "must be None"),
+                         ({**good[0], "blockingChangeOn": "2026-10-11"}, "must be omitted"), ({**good[2], "blockingChangeOn": None}, "must be 2026-10-17"),
+                         ({**good[4], "blockingChangeOn": "x"}, "must be None"), ({**good[5], "blockingChangeOn": None}, "without a change flag"),
+                         ({**good[0], "sourcePublicationDate": "2026-11-20"}, "must be None")):
+        with pytest.raises(ValueError, match=message):
+            pa.check_change_records([bad], records, day)
+
+
+def test_a_credit_grant_flags_and_blocks_without_splitting():
+    """O111: a credit record supports and blocks a flag but splits no partition; O110: a change on the launch day does not
+    flag the launched model's measurement."""
+
+    records = [{"provider": "A", "plans": ["Max"], "date": "2026-10-07", "type": "credit"},
+               {"provider": "A", "plans": ["Max"], "date": "2026-09-22", "type": "limit"}]
+    assert pa.splitting(records) == [records[1]]
+    measured = {"valueMultipleKind": "controlled_account_workload_projection", "sourcePublicationDate": "2026-10-06", "modelLaunchedOn": "2026-09-22"}
+    pa.check_change_records([{**measured, "id": "m", "provider": "A", "plan": "Max", "changeDetectedOn": "2026-10-07"}], records, date(2026, 10, 25))
+    pa.check_change_flags([{"id": "m", "provider": "A", "plan": "Max", "changeDetectedOn": "2026-10-07"}], records)
+
+
+def test_meter_families_and_resets():
+    """O113: a record naming a meter family reaches every plan on it, and an unknown family stops the build; O112: a reading
+    spanning a registered reset day counts (O156, superseding O112's exclusion), and a reset flags and splits nothing."""
+
+    profile = {"meterFamilies": {"C": ["Pro", "Max (tier unstated)"]},
+               "partitionSplits": [{"provider": "A", "meterFamily": "C", "date": "2026-10-17", "type": "limit"},
+                                   {"provider": "O", "date": "2026-10-07", "type": "reset"}]}
+    records = pa.profile_records(profile)
+    assert records[0]["plans"] == ["Pro", "Max (tier unstated)"] and pa.splitting(records) == [records[0]]
+    assert pa.applies(records[0], {"provider": "A", "plan": "Max (tier unstated)"})
+    with pytest.raises(ValueError, match="unknown meter family"):
+        pa.profile_records({"partitionSplits": [{"provider": "A", "meterFamily": "X", "date": "2026-10-17", "type": "limit"}]})
+    day = date(2026, 10, 25)
+    # O156: a reading spanning a registered reset counts; its cell and route carry the flag.
+    assert pa.exclusion(report("r", provider="O", start="2026-10-06", end="2026-10-07"), profile, day) is None
+    assert pa.spans_reset(report("r", provider="O", start="2026-10-06", end="2026-10-07"), records) is True
+    assert pa.exclusion(report("s", provider="O", start="2026-10-08", end="2026-10-09"), profile, day) is None
+    assert pa.spans_reset(report("t", provider="A", start="2026-10-06", end="2026-10-07"), records) is False
+
+
+def test_reports_across_documented_resets_count_and_are_flagged():
+    """O156: two concordant readings, one spanning a registered reset, admit the cell with the flag; a route on that cell
+    must set acrossResets, and a route on an unflagged cell must not."""
+
+    profile = {"partitionSplits": [{"provider": "R", "date": "2026-10-20", "type": "reset"}]}
+    reports = [report("a", provider="R", start="2026-10-19", end="2026-10-21"), report("b", provider="R", start="2026-10-22", end="2026-10-23")]
+    cell = pa.evaluate({**DOCUMENT, "reports": reports}, profile, DAY)[0]
+    assert cell["status"] == "passes" and cell["flags"] == [pa.ACROSS_RESETS_FLAG] and [row["acrossResets"] for row in cell["reports"]] == [True, False]
+    plain = pa.evaluate({**DOCUMENT, "reports": [{**item, "provider": "A"} for item in reports]}, profile, DAY)[0]
+    assert plain["status"] == "passes" and plain["flags"] == []
+    route = {"id": "r", "plan": "Pro", "modelIds": ["m"], "valueMultipleKind": "end_user_report", "independentReports": [{"observer": "a"}, {"observer": "b"}]}
+    pa.check_routes([{**route, "acrossResets": True}], [cell], {"m"}, {"end_user_report"})
+    pa.check_routes([route], [plain], {"m"}, {"end_user_report"})
+    for routes, cells in (([route], [cell]), ([{**route, "acrossResets": True}], [plain])):
+        with pytest.raises(ValueError, match="O156"):
+            pa.check_routes(routes, cells, {"m"}, {"end_user_report"})
+
+
+def test_a_cell_window_ends_at_its_latest_staged_search():
+    """O161: a report dated after its cell's latest staged search does not count; the cell states the date."""
+
+    reports = [report("a", start="2026-10-18", end="2026-10-18"), report("b", start="2026-10-19", end="2026-10-19"),
+               report("late", start="2026-10-23", end="2026-10-23")]
+    cell = pa.evaluate({**DOCUMENT, "reports": reports}, PROFILE, DAY, None, {("m", "Pro"): "2026-10-20"})[0]
+    assert cell["status"] == "passes" and cell["searchedThrough"] == "2026-10-20"
+    assert cell["reports"][-1]["excluded"] == "dated after the cell's latest staged search, 2026-10-20 (O161)"
+    assert pa.evaluate({**DOCUMENT, "reports": reports}, PROFILE, DAY)[0]["searchedThrough"] is None
+
+
+def test_form_submissions_need_evidence_and_a_searched_partner():
+    """O124: a form-submitted report counts only with a hashed evidence artifact, and two submissions alone never admit."""
+
+    def cell(*reports):
+        return pa.evaluate({**DOCUMENT, "reports": list(reports)}, PROFILE, DAY)[0]
+
+    bare = report("f", start="2026-10-18", end="2026-10-18", stage=pa.FORM_STAGE)
+    assert pa.exclusion(bare, PROFILE, DAY) == "form submission without an evidence artifact (O124)"
+    first = {**bare, "evidenceArtifactSha256": "ab"}
+    second = report("g", start="2026-10-19", end="2026-10-19", stage=pa.FORM_STAGE, evidenceArtifactSha256="cd")
+    assert pa.exclusion(first, PROFILE, DAY) is None
+    assert cell(first, second)["status"].startswith("fails: every counting report was submitted through the intake form")
+    assert cell(first, report("s", start="2026-10-19", end="2026-10-19", stage="S1"))["status"] == "passes"
+
+
+def test_reports_under_a_renamed_plan_count_under_its_canonical_key():
+    """E244 (reviewer 75): a report filed as "Claude Ultra" counts under Claude Max 20x, keeping the name it was filed under."""
+
+    aliases = {"Claude Max 20x": {"name": "Claude Ultra", "from": "2026-10-30"}}
+    document = {"reports": [{"id": "a", "plan": "Claude Ultra"}, {"id": "b", "plan": "Claude Pro"}]}
+    canonical = pa.canonical_plans(document, aliases)
+    assert [report["plan"] for report in canonical["reports"]] == ["Claude Max 20x", "Claude Pro"]
+    assert canonical["reports"][0]["planAsFiled"] == "Claude Ultra" and "planAsFiled" not in canonical["reports"][1]
+    assert pa.canonical_plans(document, None) is document and pa.canonical_plans(document, {}) is document
+
+
+def test_o165_staged_reports_need_an_archived_hashed_copy_after_the_2026_11_01_cutoff():
+    import hashlib
+    later = date(2026, 12, 1)
+    found = report("n", start="2026-11-20", end="2026-11-21", reportDate="2026-11-21", stage="S1")
+    assert "archived hashed copy" in pa.exclusion(found, {}, later)
+    assert pa.exclusion({**found, "archive": {"sha256": "ab" * 32}}, {}, later) is None
+    # O168: an old-dated report first found later still needs a copy; only the frozen ids are grandfathered.
+    old = {**found, "reportDate": "2026-10-20", "windowStart": "2026-11-01", "windowEnd": "2026-11-01"}
+    assert "archived hashed copy" in pa.exclusion(old, {}, later)
+    assert pa.exclusion(old, {}, later, frozenset({"n"})) is None
+    assert pa.exclusion({**found, "windowStart": "2026-10-20", "windowEnd": "2026-10-21"}, {}, date(2026, 11, 1)) is None  # the 2026-11-01 release itself
+    assert "O124" in pa.exclusion({**found, "stage": pa.FORM_STAGE}, {}, later)
+    ids = ["a", "b"]
+    frozen = {"ids": ids, "sha256": hashlib.sha256("\n".join(ids).encode()).hexdigest()}
+    assert pa.grandfathered_ids({"o165Grandfathered": frozen}) == frozenset(ids) and pa.grandfathered_ids({}) == frozenset()
+    with pytest.raises(ValueError, match="does not match its recorded hash"):
+        pa.grandfathered_ids({"o165Grandfathered": {**frozen, "ids": ["a", "b", "c"]}})
+    cells = pa.evaluate({**DOCUMENT, "o165Grandfathered": frozen,
+                         "reports": [report("a", start="2026-10-18", end="2026-10-18", low=100, stage="S1"),
+                                     report("b", start="2026-10-19", end="2026-10-19", low=104, stage="S2", archive={"sha256": "cd" * 32})]}, PROFILE, DAY)
+    assert cells[0]["status"] == "passes" and cells[0]["notArchivedAdmitting"] == ["a"]
+    assert [row["archive"] for row in cells[0]["reports"]] == [pa.NOT_ARCHIVED, None]
+
+
+def test_e320_a_cell_whose_search_predates_the_envelope_has_an_empty_window():
+    day = date(2026, 11, 1)
+    assert pa.new_report_window(day, "2026-10-02") == {"start": "2026-10-02", "end": "2026-10-02", "status": "nonempty"}
+    assert pa.new_report_window(day, "2026-10-01") == {"start": "2026-10-02", "end": None, "status": pa.EMPTY_WINDOW}
+    assert pa.new_report_window(day, None)["end"] == "2026-11-01"
+    assert pa.new_report_window(day, "2026-11-05")["end"] == "2026-11-01"
+
+
+def test_e336_a_non_positive_figure_is_excluded_before_concordance():
+    assert "non-positive allowance figure" in pa.exclusion(report("z", low=0.0, high=0.0), PROFILE, DAY)
+    assert "non-positive allowance figure" in pa.exclusion(report("n", low=-1.0, high=5.0), PROFILE, DAY)
+
+
+def test_o177_a_split_spanning_report_counts_through_its_post_split_periods():
+    """O177: per-period readings wholly after the split count, flagged; a report without them stays excluded."""
+
+    splits = PROFILE["partitionSplits"]
+    periods = [{"windowStart": "2026-10-14", "windowEnd": "2026-10-16", "valueLower": 300, "valueUpper": 300},
+               {"windowStart": "2026-10-18", "windowEnd": "2026-10-19", "valueLower": 100, "valueUpper": 104},
+               {"windowStart": "2026-10-20", "windowEnd": "2026-10-21", "valueLower": 102, "valueUpper": 106}]
+    spanning = {**report("s", start="2026-10-14", end="2026-10-21", low=200), "periods": periods}
+    kept = pa.isolate_periods(spanning, splits)
+    assert (kept["windowStart"], kept["windowEnd"], kept["valueLower"], kept["valueUpper"], kept["acrossSplit"]) == ("2026-10-18", "2026-10-21", 100, 106, True)
+    assert pa.isolate_periods(report("plain", start="2026-10-14", end="2026-10-21"), splits) is None
+    assert pa.isolate_periods({**report("inside", start="2026-10-18", end="2026-10-19"), "periods": periods[1:2]}, splits) is None
+    assert pa.isolate_periods({**spanning, "periods": [{**periods[0], "windowEnd": "2026-10-18"}]}, splits) is None
+    cell = pa.evaluate({**DOCUMENT, "reports": [spanning, report("b", start="2026-10-20", end="2026-10-20", low=103)]}, PROFILE, DAY)
+    passing = [item for item in cell if item["status"] == "passes"]
+    assert passing and pa.ACROSS_SPLIT_FLAG in passing[0]["flags"] and any(row["acrossSplit"] for row in passing[0]["reports"])

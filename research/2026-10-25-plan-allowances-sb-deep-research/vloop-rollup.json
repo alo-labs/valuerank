@@ -1,0 +1,162 @@
+{
+  "workflow_id": "WF-SILVER-DEEP-RESEARCH",
+  "atomic_flow": "AF-DECIDE",
+  "flow_step": "FS-SILVER_DEEP_RESEARCH",
+  "vloop": "VL-FS-SILVER_DEEP_RESEARCH",
+  "evidence": "EV-FS-SILVER_DEEP_RESEARCH",
+  "mode": "deep",
+  "generated_at": "2026-10-25T15:06:30.361740+00:00",
+  "phases": [
+    {
+      "phase": "DR-SCOPE",
+      "input_contract": "question + mode",
+      "work_product": [
+        "scope.md"
+      ],
+      "evidence_refs": [],
+      "verification": "bounded question, assumptions, in/out scope present",
+      "validation": "n/a",
+      "repair": "none",
+      "status": "pass",
+      "summary": "scope.md bounded to 6 providers' cells; assumptions A1-A4"
+    },
+    {
+      "phase": "DR-PLAN",
+      "input_contract": "outputs of DR-SCOPE",
+      "work_product": [
+        "research-plan.md"
+      ],
+      "evidence_refs": [],
+      "verification": "source classes + strategy + mode rationale present",
+      "validation": "n/a",
+      "repair": "plan amended: helper agents unavailable -> sequential retrieval",
+      "status": "pass",
+      "summary": "research-plan.md: deep-mode rationale, source classes, query variants, priority order"
+    },
+    {
+      "phase": "DR-RETRIEVE",
+      "input_contract": "outputs of DR-PLAN",
+      "work_product": [
+        "sources.jsonl",
+        "evidence.jsonl",
+        "raw/"
+      ],
+      "evidence_refs": [
+        "sources.jsonl"
+      ],
+      "verification": "provider manifest recorded (search-cli unavailable, host fallback); 25+ sources met; avg credibility 53.6 < 70 target (user-report evidence class)",
+      "validation": "phase_gate retrieve",
+      "repair": "credibility shortfall recorded as limitation; not repairable by retrieval",
+      "status": "pass_with_note",
+      "summary": "55 sources registered (51 web + 4 local docs), 69 evidence spans; raw dumps in raw/"
+    },
+    {
+      "phase": "DR-TRIANGULATE",
+      "input_contract": "outputs of DR-RETRIEVE",
+      "work_product": [
+        "triangulation.md"
+      ],
+      "evidence_refs": [
+        "evidence.jsonl"
+      ],
+      "verification": "cross-checks, grades, contradictions flagged",
+      "validation": "phase_gate triangulate",
+      "repair": "T8 added after critique cycle 2",
+      "status": "pass",
+      "summary": "triangulation.md T1-T8 with admiralty grades and contradictions C-1..C-5"
+    },
+    {
+      "phase": "DR-OUTLINE",
+      "input_contract": "outputs of DR-TRIANGULATE",
+      "work_product": [
+        "outline.md"
+      ],
+      "evidence_refs": [
+        "triangulation.md"
+      ],
+      "verification": "findings tied to evidence ids",
+      "validation": "phase_gate outline",
+      "repair": "none",
+      "status": "pass",
+      "summary": "outline.md re-weighted toward eligibility rulings, mapped to source numbers"
+    },
+    {
+      "phase": "DR-SYNTHESIZE",
+      "input_contract": "outputs of DR-OUTLINE",
+      "work_product": [
+        "research_report.md",
+        "claims.jsonl"
+      ],
+      "evidence_refs": [
+        "evidence.jsonl"
+      ],
+      "verification": "major claims extracted; draft present",
+      "validation": "validate_report pass (attempt 1)",
+      "repair": "none",
+      "status": "pass",
+      "summary": "research_report.md draft; claims.jsonl extracted (241 claims)"
+    },
+    {
+      "phase": "DR-CRITIQUE",
+      "input_contract": "outputs of DR-SYNTHESIZE",
+      "work_product": [
+        "critique.md"
+      ],
+      "evidence_refs": [
+        "research_report.md"
+      ],
+      "verification": "gaps/contradictions documented; loopback decision recorded",
+      "validation": "stopping rule: no open high delta after refine; max cycles reached",
+      "repair": "loopback 2 found OpenAI upgrade-entitlement evidence (vanja.io)",
+      "status": "pass",
+      "summary": "critique.md: 2 cycles (Skeptical Practitioner, Adversarial Reviewer); 2 high deltas; 2 loopbacks"
+    },
+    {
+      "phase": "DR-REFINE",
+      "input_contract": "outputs of DR-CRITIQUE",
+      "work_product": [
+        "research_report.md",
+        "triangulation.md",
+        "sources.jsonl",
+        "evidence.jsonl",
+        "claims.jsonl"
+      ],
+      "evidence_refs": [
+        "critique.md"
+      ],
+      "verification": "factual_unsupported = 0 (strict pass)",
+      "validation": "verify_claim_support --strict pass",
+      "repair": "repair 1: claims linking; repair 2: generic bibliography title",
+      "status": "pass",
+      "summary": "report revised: four rulings, sensitivity statements, Pro $500 exclusion, YouTube leads, local-doc evidence links"
+    },
+    {
+      "phase": "DR-PACKAGE",
+      "input_contract": "outputs of DR-REFINE",
+      "work_product": [
+        "decision-record.md",
+        "handoff.md",
+        "vloop-rollup.json",
+        "validation/"
+      ],
+      "evidence_refs": [
+        "research_report.md"
+      ],
+      "verification": "AF-DECIDE rollup complete; validation logs present",
+      "validation": "validate_report, verify_citations, verify_claim_support, phase_gate",
+      "repair": "none",
+      "status": "pass",
+      "summary": "decision-record.md (ends with provider tables), handoff.md, vloop-rollup.json, validation logs"
+    }
+  ],
+  "repair_loops_used": 2,
+  "repair_loops_max": 3,
+  "validation": {
+    "validate_report": "pass",
+    "verify_citations": "pass (non-strict; 26/52 URL-verified, 0 suspicious; 403/405/404 are sandbox HEAD/proxy artefacts, see validation/url_reachability_note.log)",
+    "verify_claim_support": "pass (strict; 0 unsupported factual of 147)",
+    "phase_gate": "see validation/phase_gate.log"
+  },
+  "af_decide_gate": "pass",
+  "decision": "No model x tier passes O11 after stages 1-3"
+}

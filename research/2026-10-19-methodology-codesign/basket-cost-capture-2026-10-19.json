@@ -1,0 +1,1209 @@
+{
+ "capturedAt": "2026-10-19",
+ "purpose": "Feasibility capture for the O15 SDLC cost basket (methodology co-design). Exact model+effort matches only; no transfer between efforts or versions.",
+ "rankedRows": {
+  "gemini-4-argon": "Gemini 4 Argon (High)",
+  "gpt-6.1-sol": "GPT-6.1 Sol (Max)",
+  "claude-sonnet-5-5": "Claude Sonnet 5.5 (Max, Default Fallback)",
+  "gpt-6-astra": "GPT-6 Astra (Xhigh)",
+  "claude-opus-5-5": "Claude Opus 5.5 (Max, Default Fallback)",
+  "gpt-5.6-sol": "GPT-5.6 Sol (Max)",
+  "mimo-v2-6-pro": "MiMo-V2.6-Pro",
+  "gpt-6-sol": "GPT-6 Sol (Max)",
+  "grok-4.7": "Grok 4.7 (Xhigh)",
+  "gpt-5.6-luna": "GPT-5.6 Luna (Max)",
+  "gpt-6-luna": "GPT-6 Luna (Max)",
+  "mimo-v2-6-flash": "MiMo-V2.6-Flash",
+  "claude-haiku-5-5": "Claude Haiku 5.5 (Xhigh)",
+  "gemini-3.8-flash": "Gemini 3.8 Flash (High)",
+  "claude-opus-5": "Claude Opus 5 (Max)",
+  "glm-5.3": "GLM-5.3 (Max)",
+  "deepseek-v4-flash": "DeepSeek V4 Flash 0731 (Max)",
+  "qwen3.8-max": "Qwen3.8 Max (0902)",
+  "deepseek-v4-pro": "DeepSeek V4 Pro 0813 (Max)"
+ },
+ "components": {
+  "coding-agent-index": {
+   "source": "https://artificialanalysis.ai/agents/coding-agents",
+   "field": "sums.costUsd (= mean.costUsd x tasks; one pass, repeats averaged)",
+   "tasks": {
+    "deep-swe-v1.1": 113,
+    "swe-atlas-qna": 124,
+    "terminal-bench-v4": 66
+   },
+   "rows": {
+    "gemini-4-argon": {
+     "configuration": "Antigravity CLI - Gemini 4 Argon (high)",
+     "agent": "Antigravity CLI",
+     "totalCostUsd": 1764.8594,
+     "meanCostPerTaskUsd": 5.843905,
+     "indexScore": 0.637577603035782
+    },
+    "gpt-6.1-sol": {
+     "configuration": "Codex - GPT-6.1 Sol (max)",
+     "agent": "Codex",
+     "totalCostUsd": 468.7189,
+     "meanCostPerTaskUsd": 1.55412,
+     "indexScore": 0.6014750704302517
+    },
+    "claude-sonnet-5-5": {
+     "configuration": "Claude Code - Sonnet 5.5 (max)",
+     "agent": "Claude Code",
+     "totalCostUsd": 4299.8126,
+     "meanCostPerTaskUsd": 14.190801,
+     "indexScore": 0.6835783373750831
+    },
+    "gpt-6-astra": null,
+    "claude-opus-5-5": {
+     "configuration": "Claude Code - Opus 5.5 (max)",
+     "agent": "Claude Code",
+     "totalCostUsd": 3950.0242,
+     "meanCostPerTaskUsd": 13.036383,
+     "indexScore": 0.659885802549234
+    },
+    "gpt-5.6-sol": {
+     "configuration": "Codex - GPT-5.6 Sol (max) ({'reasoning_effort': 'max'})",
+     "agent": "Codex",
+     "totalCostUsd": 1925.0554,
+     "meanCostPerTaskUsd": 6.353318,
+     "indexScore": 0.54559127289644
+    },
+    "mimo-v2-6-pro": null,
+    "gpt-6-sol": {
+     "configuration": "Codex - GPT-6 Sol (max)",
+     "agent": "Codex",
+     "totalCostUsd": 905.8879,
+     "meanCostPerTaskUsd": 2.989729,
+     "indexScore": 0.5666259127577997
+    },
+    "grok-4.7": {
+     "configuration": "Grok Build - Grok 4.7 (xhigh)",
+     "agent": "Grok Build",
+     "totalCostUsd": 2671.693,
+     "meanCostPerTaskUsd": 8.817469,
+     "indexScore": 0.5626764360706693
+    },
+    "gpt-5.6-luna": {
+     "configuration": "Codex - GPT-5.6 Luna (max)",
+     "agent": "Codex",
+     "totalCostUsd": 132.7208,
+     "meanCostPerTaskUsd": 0.438023,
+     "indexScore": 0.4322468668029613
+    },
+    "gpt-6-luna": {
+     "configuration": "Codex - GPT-6 Luna (max) ({'reasoning_effort': 'max'})",
+     "agent": "Codex",
+     "totalCostUsd": 53.3013,
+     "meanCostPerTaskUsd": 0.175912,
+     "indexScore": 0.4107438934016153
+    },
+    "mimo-v2-6-flash": null,
+    "claude-haiku-5-5": {
+     "configuration": "Claude Code - Haiku 5.5 (xhigh)",
+     "agent": "Claude Code",
+     "totalCostUsd": 184.9795,
+     "meanCostPerTaskUsd": 0.610494,
+     "indexScore": 0.414392761951997
+    },
+    "gemini-3.8-flash": {
+     "configuration": "Antigravity SDK - Gemini 3.8 Flash (high)",
+     "agent": "Antigravity SDK",
+     "totalCostUsd": 747.6198,
+     "meanCostPerTaskUsd": 2.467392,
+     "indexScore": 0.4186315529449987
+    },
+    "claude-opus-5": {
+     "configuration": "Claude Code - Opus 5 (max)",
+     "agent": "Claude Code",
+     "totalCostUsd": 3269.1139,
+     "meanCostPerTaskUsd": 10.789155,
+     "indexScore": 0.5972636729844837
+    },
+    "glm-5.3": {
+     "configuration": "Opencode - GLM-5.3 ({'reasoning_effort': 'max'})",
+     "agent": "Opencode",
+     "totalCostUsd": 1285.1399,
+     "meanCostPerTaskUsd": 4.241386,
+     "indexScore": 0.5355484140097326
+    },
+    "deepseek-v4-flash": {
+     "configuration": "Codex - DeepSeek V4 Flash 0731 (max)",
+     "agent": "Codex",
+     "totalCostUsd": 25.7745,
+     "meanCostPerTaskUsd": 0.085064,
+     "indexScore": 0.3874247758775307
+    },
+    "qwen3.8-max": {
+     "configuration": "Claude Code - Qwen3.8 Max",
+     "agent": "Claude Code",
+     "totalCostUsd": 1048.2136,
+     "meanCostPerTaskUsd": 3.478966,
+     "indexScore": 0.43265296412598736
+    },
+    "deepseek-v4-pro": {
+     "configuration": "Codex - DeepSeek V4 Pro 0813 (max)",
+     "agent": "Codex",
+     "totalCostUsd": 72.128,
+     "meanCostPerTaskUsd": 0.238046,
+     "indexScore": 0.4305203524444174
+    }
+   },
+   "allConfigurations": [
+    {
+     "label": "Grok Build - Grok 4.7 (xhigh)",
+     "agent": "Grok Build",
+     "model": "Grok 4.7 (xhigh)",
+     "totalCostUsd": 2671.693025333334,
+     "meanCostPerTaskUsd": 8.817468730473037,
+     "indexScore": 0.5626764360706693
+    },
+    {
+     "label": "Antigravity CLI - Gemini 4 Argon (high)",
+     "agent": "Antigravity CLI",
+     "model": "Gemini 4 Argon",
+     "totalCostUsd": 1764.8594276123329,
+     "meanCostPerTaskUsd": 5.8439053894448145,
+     "indexScore": 0.637577603035782
+    },
+    {
+     "label": "Claude Code - Sonnet 5.5 (max)",
+     "agent": "Claude Code",
+     "model": "Sonnet 5.5 (max)",
+     "totalCostUsd": 4299.812641299994,
+     "meanCostPerTaskUsd": 14.190800796369649,
+     "indexScore": 0.6835783373750831
+    },
+    {
+     "label": "Muse Code - Muse Wonder (max)",
+     "agent": "Muse Code",
+     "model": "Muse Wonder (max)",
+     "totalCostUsd": 2439.82644826666,
+     "meanCostPerTaskUsd": 8.052232502530256,
+     "indexScore": 0.6349675266318143
+    },
+    {
+     "label": "Codex - GPT-6.1 Sol (max)",
+     "agent": "Codex",
+     "model": "GPT-6.1 Sol (max)",
+     "totalCostUsd": 468.718937949999,
+     "meanCostPerTaskUsd": 1.554119528390054,
+     "indexScore": 0.6014750704302517
+    },
+    {
+     "label": "Codex - GPT-6 Astra (max)",
+     "agent": "Codex",
+     "model": "GPT-6 Astra (max)",
+     "totalCostUsd": 2251.127294666667,
+     "meanCostPerTaskUsd": 7.46709735138597,
+     "indexScore": 0.6164504498789397
+    },
+    {
+     "label": "Claude Code - Fable 5.1 (max) (with fallback)",
+     "agent": "Claude Code",
+     "model": "Fable 5.1 (max) (with fallback)",
+     "totalCostUsd": 3753.591989666663,
+     "meanCostPerTaskUsd": 12.388092375137534,
+     "indexScore": 0.6222249615769457
+    },
+    {
+     "label": "Claude Code - Opus 5.5 (max)",
+     "agent": "Claude Code",
+     "model": "Opus 5.5 (max)",
+     "totalCostUsd": 3950.02417578334,
+     "meanCostPerTaskUsd": 13.036383418426828,
+     "indexScore": 0.659885802549234
+    },
+    {
+     "label": "Codex - GPT-6.1 Sol (high) ({'reasoning_effort': 'high'})",
+     "agent": "Codex",
+     "model": "GPT-6.1 Sol (high)",
+     "totalCostUsd": 268.0356914333333,
+     "meanCostPerTaskUsd": 0.8892413135295484,
+     "indexScore": 0.6014923716179784
+    },
+    {
+     "label": "Codex - DeepSeek V4 Flash 0731 (max)",
+     "agent": "Codex",
+     "model": "DeepSeek V4 Flash 0731 (max)",
+     "totalCostUsd": 25.774450070133362,
+     "meanCostPerTaskUsd": 0.08506419165060494,
+     "indexScore": 0.3874247758775307
+    },
+    {
+     "label": "Claude Code - Sonnet 5.5 (high)",
+     "agent": "Claude Code",
+     "model": "Sonnet 5.5 (high)",
+     "totalCostUsd": 374.355629533333,
+     "meanCostPerTaskUsd": 1.235497127172719,
+     "indexScore": 0.5501249049636148
+    },
+    {
+     "label": "Muse Code - Muse Spark 1.3 (max)",
+     "agent": "Muse Code",
+     "model": "Muse Spark 1.3 (max)",
+     "totalCostUsd": 1205.183741375,
+     "meanCostPerTaskUsd": 3.977504096947204,
+     "indexScore": 0.5430273329930766
+    },
+    {
+     "label": "Claude Code - Sonnet 5.5 (xhigh)",
+     "agent": "Claude Code",
+     "model": "Sonnet 5.5 (xhigh)",
+     "totalCostUsd": 1010.0161200666669,
+     "meanCostPerTaskUsd": 3.3333865348734886,
+     "indexScore": 0.628713868151493
+    },
+    {
+     "label": "Codex - GPT-6 Luna (max) ({'reasoning_effort': 'max'})",
+     "agent": "Codex",
+     "model": "GPT-6 Luna (max)",
+     "totalCostUsd": 53.3012520824999,
+     "meanCostPerTaskUsd": 0.17591172304455457,
+     "indexScore": 0.4107438934016153
+    },
+    {
+     "label": "Antigravity SDK - Gemini 3.8 Flash (high)",
+     "agent": "Antigravity SDK",
+     "model": "Gemini 3.8 Flash (high)",
+     "totalCostUsd": 747.619836725,
+     "meanCostPerTaskUsd": 2.4673922004125437,
+     "indexScore": 0.4186315529449987
+    },
+    {
+     "label": "Muse Code - Muse Spark 1.3 (xhigh)",
+     "agent": "Muse Code",
+     "model": "Muse Spark 1.3 (xhigh)",
+     "totalCostUsd": 1050.7294745666659,
+     "meanCostPerTaskUsd": 3.467754041474145,
+     "indexScore": 0.482993172759088
+    },
+    {
+     "label": "Devin Fusion CLI - GPT-6 Astra XHigh + SWE-2 Medium",
+     "agent": "Devin Fusion CLI",
+     "model": "GPT-6 Astra XHigh + SWE-2 Medium",
+     "totalCostUsd": 1374.557311679999,
+     "meanCostPerTaskUsd": 4.536492777821779,
+     "indexScore": 0.588884131062264
+    },
+    {
+     "label": "Claude Code - Haiku 5.5 (high)",
+     "agent": "Claude Code",
+     "model": "Haiku 5.5 (high)",
+     "totalCostUsd": 110.49784073833341,
+     "meanCostPerTaskUsd": 0.36467934237073724,
+     "indexScore": 0.350585020439431
+    },
+    {
+     "label": "Muse Code - Muse Spark Open (xhigh)",
+     "agent": "Muse Code",
+     "model": "Muse Spark Open (xhigh)",
+     "totalCostUsd": 1007.7758001333341,
+     "meanCostPerTaskUsd": 3.3259927397139704,
+     "indexScore": 0.41176081876909754
+    },
+    {
+     "label": "Claude Code - Qwen3.8 Max",
+     "agent": "Claude Code",
+     "model": "Qwen3.8 Max",
+     "totalCostUsd": 1048.213634833334,
+     "meanCostPerTaskUsd": 3.478965577837015,
+     "indexScore": 0.43265296412598736
+    },
+    {
+     "label": "Claude Code - Haiku 5.5 (xhigh)",
+     "agent": "Claude Code",
+     "model": "Haiku 5.5 (xhigh)",
+     "totalCostUsd": 184.9795354675001,
+     "meanCostPerTaskUsd": 0.6104935163943895,
+     "indexScore": 0.414392761951997
+    },
+    {
+     "label": "Devin Fusion CLI - Claude Opus 5.5 Max + GPT-6 Luna High",
+     "agent": "Devin Fusion CLI",
+     "model": "Claude Opus 5.5 Max + GPT-6 Luna High",
+     "totalCostUsd": 2729.7990792291657,
+     "meanCostPerTaskUsd": 9.00923788524477,
+     "indexScore": 0.6810374657220217
+    },
+    {
+     "label": "Devin Fusion CLI - Claude Fable 5.1 XHigh + SWE-2 Medium",
+     "agent": "Devin Fusion CLI",
+     "model": "Claude Fable 5.1 XHigh + SWE-2 Medium",
+     "totalCostUsd": 2392.829476520833,
+     "meanCostPerTaskUsd": 7.897126985217273,
+     "indexScore": 0.6168255492406223
+    },
+    {
+     "label": "Codex - GPT-5.6 Sol (max) ({'reasoning_effort': 'max'})",
+     "agent": "Codex",
+     "model": "GPT-5.6 Sol (max)",
+     "totalCostUsd": 1925.0554239,
+     "meanCostPerTaskUsd": 6.353318230693071,
+     "indexScore": 0.54559127289644
+    },
+    {
+     "label": "Codex - GPT-6.1 Sol (medium) ({'reasoning_effort': 'medium'})",
+     "agent": "Codex",
+     "model": "GPT-6.1 Sol (medium)",
+     "totalCostUsd": 212.41134426666656,
+     "meanCostPerTaskUsd": 0.7046746644898908,
+     "indexScore": 0.6141474695571183
+    },
+    {
+     "label": "Muse Code - Muse Wonder Full (max)",
+     "agent": "Muse Code",
+     "model": "Muse Wonder Full (max)",
+     "totalCostUsd": null,
+     "meanCostPerTaskUsd": null,
+     "indexScore": 0.6803093740718634
+    },
+    {
+     "label": "Claude Code - Haiku 5.5 (medium)",
+     "agent": "Claude Code",
+     "model": "Haiku 5.5 (medium)",
+     "totalCostUsd": 68.59568807000001,
+     "meanCostPerTaskUsd": 0.22638840947194713,
+     "indexScore": 0.33591817883853303
+    },
+    {
+     "label": "Mirror - Beam 1.0",
+     "agent": "Mirror",
+     "model": "Beam 1.0",
+     "totalCostUsd": null,
+     "meanCostPerTaskUsd": null,
+     "indexScore": 0.2771443620715672
+    },
+    {
+     "label": "Claude Code - Opus 5 (max)",
+     "agent": "Claude Code",
+     "model": "Opus 5 (max)",
+     "totalCostUsd": 3269.1138738750005,
+     "meanCostPerTaskUsd": 10.789154699257413,
+     "indexScore": 0.5972636729844837
+    },
+    {
+     "label": "Claude Code - Step 5 Preview",
+     "agent": "Claude Code",
+     "model": "Step 5 Preview",
+     "totalCostUsd": 503.6513459166663,
+     "meanCostPerTaskUsd": 1.662215663091308,
+     "indexScore": 0.5120452310717793
+    },
+    {
+     "label": "Claude Code - Sonnet 5.5 (low)",
+     "agent": "Claude Code",
+     "model": "Sonnet 5.5 (low)",
+     "totalCostUsd": 146.3823647666666,
+     "meanCostPerTaskUsd": 0.48311011474147336,
+     "indexScore": 0.420593075103495
+    },
+    {
+     "label": "Claude Code - Sonnet 5.5 (medium)",
+     "agent": "Claude Code",
+     "model": "Sonnet 5.5 (medium)",
+     "totalCostUsd": 187.48148491666672,
+     "meanCostPerTaskUsd": 0.6187507753025301,
+     "indexScore": 0.4588397535157457
+    },
+    {
+     "label": "Codex - GPT-6 Sol (max)",
+     "agent": "Codex",
+     "model": "GPT-6 Sol (max)",
+     "totalCostUsd": 905.887888266666,
+     "meanCostPerTaskUsd": 2.989729004180416,
+     "indexScore": 0.5666259127577997
+    },
+    {
+     "label": "Claude Code - Haiku 5.5 (max)",
+     "agent": "Claude Code",
+     "model": "Haiku 5.5 (max)",
+     "totalCostUsd": 779.2629703,
+     "meanCostPerTaskUsd": 2.5803409612582775,
+     "indexScore": 0.3647260981688613
+    },
+    {
+     "label": "Claude Code - Haiku 5.5 (low)",
+     "agent": "Claude Code",
+     "model": "Haiku 5.5 (low)",
+     "totalCostUsd": 43.40396637666663,
+     "meanCostPerTaskUsd": 0.14324741378437839,
+     "indexScore": 0.2818428360106922
+    },
+    {
+     "label": "Codex - GPT-6.1 Sol (low) ({'reasoning_effort': 'low'})",
+     "agent": "Codex",
+     "model": "GPT-6.1 Sol (low)",
+     "totalCostUsd": 150.4073521333333,
+     "meanCostPerTaskUsd": 0.49880364510270725,
+     "indexScore": 0.5721634943016617
+    },
+    {
+     "label": "Kimi Code CLI - Kimi K3",
+     "agent": "Kimi Code CLI",
+     "model": "Kimi K3",
+     "totalCostUsd": 1529.30021932,
+     "meanCostPerTaskUsd": 5.047195443300332,
+     "indexScore": 0.519259105470924
+    },
+    {
+     "label": "Opencode - GLM-5.3 ({'reasoning_effort': 'max'})",
+     "agent": "Opencode",
+     "model": "GLM-5.3",
+     "totalCostUsd": 1285.139907626667,
+     "meanCostPerTaskUsd": 4.241385833751375,
+     "indexScore": 0.5355484140097326
+    },
+    {
+     "label": "Grok Build - Grok 4.6 (xhigh)",
+     "agent": "Grok Build",
+     "model": "Grok 4.6 (xhigh)",
+     "totalCostUsd": 1081.753414000001,
+     "meanCostPerTaskUsd": 3.5701432805280535,
+     "indexScore": 0.4696895205744764
+    },
+    {
+     "label": "Codex - GPT-5.6 Luna (max)",
+     "agent": "Codex",
+     "model": "GPT-5.6 Luna (max)",
+     "totalCostUsd": 132.7208368733333,
+     "meanCostPerTaskUsd": 0.43802256393839384,
+     "indexScore": 0.4322468668029613
+    },
+    {
+     "label": "Codex - DeepSeek V4 Pro 0813 (max)",
+     "agent": "Codex",
+     "model": "DeepSeek V4 Pro 0813 (max)",
+     "totalCostUsd": 72.127970484,
+     "meanCostPerTaskUsd": 0.23804610720792058,
+     "indexScore": 0.4305203524444174
+    },
+    {
+     "label": "Codex - GPT-6.1 Sol (xhigh) ({'reasoning_effort': 'xhigh'})",
+     "agent": "Codex",
+     "model": "GPT-6.1 Sol (xhigh)",
+     "totalCostUsd": 313.4238835999993,
+     "meanCostPerTaskUsd": 1.0397081014409635,
+     "indexScore": 0.6290776736822983
+    }
+   ],
+   "note": "Configurations are agent + model + effort. Claude Code rows may differ from the AA Index deployment policy (AA Index Claude rows run with \"Default Fallback\"); recorded per component as deployment policy."
+  },
+  "frontiercode": {
+   "source": "https://artificialanalysis.ai/evaluations/frontiercode?eval-cost=total-cost",
+   "chart": "FrontierCode 1.1: Total Cost to Run",
+   "capturedAt": "2026-10-19T19:11:32.413Z",
+   "precision": "chart label rounded to USD 1 (uniform rounding interval)",
+   "rows": {
+    "gemini-4-argon": {
+     "configuration": "Gemini 4 Argon (high)",
+     "totalUsdLabel": "$670",
+     "totalUsd": 670.0,
+     "flagged": false
+    },
+    "gpt-6.1-sol": {
+     "configuration": "GPT-6.1 Sol (max)",
+     "totalUsdLabel": "$81",
+     "totalUsd": 81.0,
+     "flagged": false
+    },
+    "claude-sonnet-5-5": {
+     "configuration": "Claude Sonnet 5.5 (max with fallback)",
+     "totalUsdLabel": "$826",
+     "totalUsd": 826.0,
+     "flagged": false
+    },
+    "gpt-6-astra": null,
+    "claude-opus-5-5": {
+     "configuration": "Claude Opus 5.5 (max with fallback)",
+     "totalUsdLabel": "$1,015",
+     "totalUsd": 1015.0,
+     "flagged": false
+    },
+    "gpt-5.6-sol": null,
+    "mimo-v2-6-pro": {
+     "configuration": "MiMo-V2.6-Pro",
+     "totalUsdLabel": "$18",
+     "totalUsd": 18.0,
+     "flagged": false
+    },
+    "gpt-6-sol": null,
+    "grok-4.7": {
+     "configuration": "Grok 4.7 (xhigh)",
+     "totalUsdLabel": "$1,131",
+     "totalUsd": 1131.0,
+     "flagged": false
+    },
+    "gpt-5.6-luna": null,
+    "gpt-6-luna": {
+     "configuration": "GPT-6 Luna (max)",
+     "totalUsdLabel": "$9",
+     "totalUsd": 9.0,
+     "flagged": false
+    },
+    "mimo-v2-6-flash": null,
+    "claude-haiku-5-5": {
+     "configuration": "Claude Haiku 5.5 (xhigh)",
+     "totalUsdLabel": "$16*",
+     "totalUsd": 16.0,
+     "flagged": true
+    },
+    "gemini-3.8-flash": {
+     "configuration": "Gemini 3.8 Flash (high)",
+     "totalUsdLabel": "$372",
+     "totalUsd": 372.0,
+     "flagged": false
+    },
+    "claude-opus-5": null,
+    "glm-5.3": {
+     "configuration": "GLM-5.3 (max)",
+     "totalUsdLabel": "$432",
+     "totalUsd": 432.0,
+     "flagged": false
+    },
+    "deepseek-v4-flash": null,
+    "qwen3.8-max": {
+     "configuration": "Qwen3.8 Max (0902)",
+     "totalUsdLabel": "$675",
+     "totalUsd": 675.0,
+     "flagged": false
+    },
+    "deepseek-v4-pro": null
+   },
+   "allConfigurations": [
+    {
+     "model": "GPT-6 Luna (max)",
+     "totalUsdLabel": "$9",
+     "totalUsd": 9.0,
+     "flagged": false,
+     "segments": []
+    },
+    {
+     "model": "Claude Haiku 5.5 (xhigh)",
+     "totalUsdLabel": "$16*",
+     "totalUsd": 16.0,
+     "flagged": true,
+     "segments": []
+    },
+    {
+     "model": "MiMo-V2.6-Pro",
+     "totalUsdLabel": "$18",
+     "totalUsd": 18.0,
+     "flagged": false,
+     "segments": []
+    },
+    {
+     "model": "Claude Haiku 5.5 (max)",
+     "totalUsdLabel": "$33*",
+     "totalUsd": 33.0,
+     "flagged": true,
+     "segments": []
+    },
+    {
+     "model": "GLM-5.3-Flash",
+     "totalUsdLabel": "$36",
+     "totalUsd": 36.0,
+     "flagged": false,
+     "segments": []
+    },
+    {
+     "model": "Claude Opus 5.5 (medium with fallback)",
+     "totalUsdLabel": "$78",
+     "totalUsd": 78.0,
+     "flagged": false,
+     "segments": []
+    },
+    {
+     "model": "GPT-6.1 Sol (max)",
+     "totalUsdLabel": "$81",
+     "totalUsd": 81.0,
+     "flagged": false,
+     "segments": []
+    },
+    {
+     "model": "Claude Sonnet 5.5 (xhigh with fallback)",
+     "totalUsdLabel": "$120",
+     "totalUsd": 120.0,
+     "flagged": false,
+     "segments": []
+    },
+    {
+     "model": "Claude Opus 5.5 (high with fallback)",
+     "totalUsdLabel": "$125",
+     "totalUsd": 125.0,
+     "flagged": false,
+     "segments": []
+    },
+    {
+     "model": "Step 5 Preview",
+     "totalUsdLabel": "$196",
+     "totalUsd": 196.0,
+     "flagged": false,
+     "segments": [
+      "$132"
+     ]
+    },
+    {
+     "model": "Qwen3.8 27B (xhigh)",
+     "totalUsdLabel": "$247",
+     "totalUsd": 247.0,
+     "flagged": false,
+     "segments": [
+      "$106",
+      "$116"
+     ]
+    },
+    {
+     "model": "Gemini 3.8 Flash (high)",
+     "totalUsdLabel": "$372",
+     "totalUsd": 372.0,
+     "flagged": false,
+     "segments": [
+      "$143",
+      "$192"
+     ]
+    },
+    {
+     "model": "Kimi K3 (max)",
+     "totalUsdLabel": "$389",
+     "totalUsd": 389.0,
+     "flagged": false,
+     "segments": [
+      "$215",
+      "$89"
+     ]
+    },
+    {
+     "model": "Claude Opus 5.5 (xhigh with fallback)",
+     "totalUsdLabel": "$398",
+     "totalUsd": 398.0,
+     "flagged": false,
+     "segments": [
+      "$167",
+      "$93",
+      "$74"
+     ]
+    },
+    {
+     "model": "GPT-6 Astra (max)",
+     "totalUsdLabel": "$422",
+     "totalUsd": 422.0,
+     "flagged": false,
+     "segments": [
+      "$157",
+      "$130",
+      "$78"
+     ]
+    },
+    {
+     "model": "GLM-5.3 (max)",
+     "totalUsdLabel": "$432",
+     "totalUsd": 432.0,
+     "flagged": false,
+     "segments": [
+      "$363"
+     ]
+    },
+    {
+     "model": "Gemini 4 Argon (high)",
+     "totalUsdLabel": "$670",
+     "totalUsd": 670.0,
+     "flagged": false,
+     "segments": [
+      "$145",
+      "$415",
+      "$92"
+     ]
+    },
+    {
+     "model": "Qwen3.8 Max (0902)",
+     "totalUsdLabel": "$675",
+     "totalUsd": 675.0,
+     "flagged": false,
+     "segments": [
+      "$376",
+      "$228"
+     ]
+    },
+    {
+     "model": "Claude Sonnet 5.5 (max with fallback)",
+     "totalUsdLabel": "$826",
+     "totalUsd": 826.0,
+     "flagged": false,
+     "segments": [
+      "$390",
+      "$200",
+      "$171"
+     ]
+    },
+    {
+     "model": "Claude Opus 5.5 (max with fallback)",
+     "totalUsdLabel": "$1,015",
+     "totalUsd": 1015.0,
+     "flagged": false,
+     "segments": [
+      "$503",
+      "$198",
+      "$217",
+      "$97"
+     ]
+    },
+    {
+     "model": "Grok 4.7 (xhigh)",
+     "totalUsdLabel": "$1,131",
+     "totalUsd": 1131.0,
+     "flagged": false,
+     "segments": [
+      "$521",
+      "$553"
+     ]
+    },
+    {
+     "model": "Claude Fable 5.1 (max with fallback)",
+     "totalUsdLabel": "$1,200",
+     "totalUsd": 1200.0,
+     "flagged": false,
+     "segments": [
+      "$363",
+      "$366",
+      "$259",
+      "$212"
+     ]
+    }
+   ],
+   "flagMeaning": "\"*\" on a chart label: \"The model or provider declined some tasks on safety grounds\" (AA page text); the total then prices fewer than all tasks."
+  },
+  "mmmu-pro": {
+   "source": "https://artificialanalysis.ai/evaluations/mmmu-pro?eval-cost=total-cost",
+   "chart": "MMMU-Pro: Total Cost to Run",
+   "capturedAt": "2026-10-19T19:11:46.102Z",
+   "precision": "chart label rounded to USD 1 (uniform rounding interval)",
+   "rows": {
+    "gemini-4-argon": null,
+    "gpt-6.1-sol": {
+     "configuration": "GPT-6.1 Sol (max)",
+     "totalUsdLabel": "$22",
+     "totalUsd": 22.0,
+     "flagged": false
+    },
+    "claude-sonnet-5-5": null,
+    "gpt-6-astra": {
+     "configuration": "GPT-6 Astra (xhigh)",
+     "totalUsdLabel": "$65",
+     "totalUsd": 65.0,
+     "flagged": false
+    },
+    "claude-opus-5-5": {
+     "configuration": "Claude Opus 5.5 (max with fallback)",
+     "totalUsdLabel": "$186",
+     "totalUsd": 186.0,
+     "flagged": false
+    },
+    "gpt-5.6-sol": null,
+    "mimo-v2-6-pro": null,
+    "gpt-6-sol": null,
+    "grok-4.7": null,
+    "gpt-5.6-luna": null,
+    "gpt-6-luna": {
+     "configuration": "GPT-6 Luna (max)",
+     "totalUsdLabel": "$4",
+     "totalUsd": 4.0,
+     "flagged": false
+    },
+    "mimo-v2-6-flash": null,
+    "claude-haiku-5-5": null,
+    "gemini-3.8-flash": {
+     "configuration": "Gemini 3.8 Flash (high)",
+     "totalUsdLabel": "$33",
+     "totalUsd": 33.0,
+     "flagged": false
+    },
+    "claude-opus-5": null,
+    "glm-5.3": null,
+    "deepseek-v4-flash": null,
+    "qwen3.8-max": {
+     "configuration": "Qwen3.8 Max (0902)",
+     "totalUsdLabel": "$44",
+     "totalUsd": 44.0,
+     "flagged": false
+    },
+    "deepseek-v4-pro": null
+   },
+   "allConfigurations": [
+    {
+     "model": "GPT-6 Luna (max)",
+     "totalUsdLabel": "$4",
+     "totalUsd": 4.0,
+     "flagged": false,
+     "segments": []
+    },
+    {
+     "model": "MiniMax-M3.1-Flash",
+     "totalUsdLabel": "$4",
+     "totalUsd": 4.0,
+     "flagged": false,
+     "segments": []
+    },
+    {
+     "model": "DeepSeek V4.1 Flash 1017 (max)",
+     "totalUsdLabel": "$16",
+     "totalUsd": 16.0,
+     "flagged": false,
+     "segments": [
+      "$16"
+     ]
+    },
+    {
+     "model": "GPT-6.1 Sol (max)",
+     "totalUsdLabel": "$22",
+     "totalUsd": 22.0,
+     "flagged": false,
+     "segments": [
+      "$19"
+     ]
+    },
+    {
+     "model": "Claude Opus 5.5 (medium with fallback)",
+     "totalUsdLabel": "$25",
+     "totalUsd": 25.0,
+     "flagged": false,
+     "segments": []
+    },
+    {
+     "model": "Qwen3.8 27B (xhigh)",
+     "totalUsdLabel": "$25",
+     "totalUsd": 25.0,
+     "flagged": false,
+     "segments": [
+      "$23"
+     ]
+    },
+    {
+     "model": "Claude Opus 5.5 (high with fallback)",
+     "totalUsdLabel": "$26",
+     "totalUsd": 26.0,
+     "flagged": false,
+     "segments": []
+    },
+    {
+     "model": "Step 5 Preview",
+     "totalUsdLabel": "$26",
+     "totalUsd": 26.0,
+     "flagged": false,
+     "segments": [
+      "$25"
+     ]
+    },
+    {
+     "model": "Gemini 3.8 Flash (high)",
+     "totalUsdLabel": "$33",
+     "totalUsd": 33.0,
+     "flagged": false,
+     "segments": [
+      "$29"
+     ]
+    },
+    {
+     "model": "Muse Spark Open (xhigh)",
+     "totalUsdLabel": "$33",
+     "totalUsd": 33.0,
+     "flagged": false,
+     "segments": [
+      "$31"
+     ]
+    },
+    {
+     "model": "Claude Opus 5.5 (xhigh with fallback)",
+     "totalUsdLabel": "$37",
+     "totalUsd": 37.0,
+     "flagged": false,
+     "segments": [
+      "$21"
+     ]
+    },
+    {
+     "model": "GPT-6 Astra (high)",
+     "totalUsdLabel": "$42",
+     "totalUsd": 42.0,
+     "flagged": false,
+     "segments": [
+      "$24"
+     ]
+    },
+    {
+     "model": "Qwen3.8 Max (0902)",
+     "totalUsdLabel": "$44",
+     "totalUsd": 44.0,
+     "flagged": false,
+     "segments": [
+      "$41"
+     ]
+    },
+    {
+     "model": "Mistral Large 4 Preview",
+     "totalUsdLabel": "$60",
+     "totalUsd": 60.0,
+     "flagged": false,
+     "segments": [
+      "$56"
+     ]
+    },
+    {
+     "model": "Inkling (xhigh)",
+     "totalUsdLabel": "$62",
+     "totalUsd": 62.0,
+     "flagged": false,
+     "segments": [
+      "$59"
+     ]
+    },
+    {
+     "model": "GPT-6 Astra (xhigh)",
+     "totalUsdLabel": "$65",
+     "totalUsd": 65.0,
+     "flagged": false,
+     "segments": [
+      "$48"
+     ]
+    },
+    {
+     "model": "GPT-6 Astra (max)",
+     "totalUsdLabel": "$112",
+     "totalUsd": 112.0,
+     "flagged": false,
+     "segments": [
+      "$95"
+     ]
+    },
+    {
+     "model": "Kimi K3 (max)",
+     "totalUsdLabel": "$150",
+     "totalUsd": 150.0,
+     "flagged": false,
+     "segments": [
+      "$144"
+     ]
+    },
+    {
+     "model": "Claude Opus 5.5 (max with fallback)",
+     "totalUsdLabel": "$186",
+     "totalUsd": 186.0,
+     "flagged": false,
+     "segments": [
+      "$168",
+      "$13"
+     ]
+    }
+   ],
+   "flagMeaning": "\"*\" on a chart label: \"The model or provider declined some tasks on safety grounds\" (AA page text); the total then prices fewer than all tasks."
+  },
+  "itbench-aa": {
+   "source": "https://artificialanalysis.ai/evaluations/itbench-aa?eval-cost=total-cost",
+   "chart": "ITBench-AA: Total Cost to Run",
+   "capturedAt": "2026-10-19T19:11:59.679Z",
+   "precision": "chart label rounded to USD 1 (uniform rounding interval)",
+   "rows": {
+    "gemini-4-argon": null,
+    "gpt-6.1-sol": null,
+    "claude-sonnet-5-5": null,
+    "gpt-6-astra": null,
+    "claude-opus-5-5": {
+     "configuration": "Claude Opus 5.5 (max with fallback)",
+     "totalUsdLabel": "$146",
+     "totalUsd": 146.0,
+     "flagged": false
+    },
+    "gpt-5.6-sol": {
+     "configuration": "GPT-5.6 Sol (max)",
+     "totalUsdLabel": "$106",
+     "totalUsd": 106.0,
+     "flagged": false
+    },
+    "mimo-v2-6-pro": null,
+    "gpt-6-sol": {
+     "configuration": "GPT-6 Sol (max)",
+     "totalUsdLabel": "$38",
+     "totalUsd": 38.0,
+     "flagged": false
+    },
+    "grok-4.7": {
+     "configuration": "Grok 4.7 (xhigh)",
+     "totalUsdLabel": "$203",
+     "totalUsd": 203.0,
+     "flagged": false
+    },
+    "gpt-5.6-luna": null,
+    "gpt-6-luna": null,
+    "mimo-v2-6-flash": null,
+    "claude-haiku-5-5": null,
+    "gemini-3.8-flash": {
+     "configuration": "Gemini 3.8 Flash (high)",
+     "totalUsdLabel": "$86",
+     "totalUsd": 86.0,
+     "flagged": false
+    },
+    "claude-opus-5": null,
+    "glm-5.3": {
+     "configuration": "GLM-5.3 (max)",
+     "totalUsdLabel": "$91",
+     "totalUsd": 91.0,
+     "flagged": false
+    },
+    "deepseek-v4-flash": null,
+    "qwen3.8-max": {
+     "configuration": "Qwen3.8 Max (0902)",
+     "totalUsdLabel": "$327",
+     "totalUsd": 327.0,
+     "flagged": false
+    },
+    "deepseek-v4-pro": null
+   },
+   "allConfigurations": [
+    {
+     "model": "GLM-5.3-Flash",
+     "totalUsdLabel": "$9",
+     "totalUsd": 9.0,
+     "flagged": false,
+     "segments": []
+    },
+    {
+     "model": "DeepSeek V4.1 Flash (max)",
+     "totalUsdLabel": "$26",
+     "totalUsd": 26.0,
+     "flagged": false,
+     "segments": []
+    },
+    {
+     "model": "Step 5 Preview",
+     "totalUsdLabel": "$32",
+     "totalUsd": 32.0,
+     "flagged": false,
+     "segments": []
+    },
+    {
+     "model": "GPT-6 Sol (max)",
+     "totalUsdLabel": "$38",
+     "totalUsd": 38.0,
+     "flagged": false,
+     "segments": []
+    },
+    {
+     "model": "GPT-5.6 Terra (max)",
+     "totalUsdLabel": "$80",
+     "totalUsd": 80.0,
+     "flagged": false,
+     "segments": [
+      "$38",
+      "$23"
+     ]
+    },
+    {
+     "model": "Kimi K3 (max)",
+     "totalUsdLabel": "$83",
+     "totalUsd": 83.0,
+     "flagged": false,
+     "segments": [
+      "$29",
+      "$23"
+     ]
+    },
+    {
+     "model": "Gemini 3.8 Flash (high)",
+     "totalUsdLabel": "$86",
+     "totalUsd": 86.0,
+     "flagged": false,
+     "segments": [
+      "$30",
+      "$45"
+     ]
+    },
+    {
+     "model": "GLM-5.3 (max)",
+     "totalUsdLabel": "$91",
+     "totalUsd": 91.0,
+     "flagged": false,
+     "segments": [
+      "$65"
+     ]
+    },
+    {
+     "model": "GPT-5.6 Sol (max)",
+     "totalUsdLabel": "$106",
+     "totalUsd": 106.0,
+     "flagged": false,
+     "segments": [
+      "$48",
+      "$33"
+     ]
+    },
+    {
+     "model": "GPT-6 Astra (max)",
+     "totalUsdLabel": "$133",
+     "totalUsd": 133.0,
+     "flagged": false,
+     "segments": [
+      "$29",
+      "$64",
+      "$21"
+     ]
+    },
+    {
+     "model": "Claude Opus 5.5 (max with fallback)",
+     "totalUsdLabel": "$146",
+     "totalUsd": 146.0,
+     "flagged": false,
+     "segments": [
+      "$30",
+      "$45",
+      "$52"
+     ]
+    },
+    {
+     "model": "Grok 4.7 (xhigh)",
+     "totalUsdLabel": "$203",
+     "totalUsd": 203.0,
+     "flagged": false,
+     "segments": [
+      "$87",
+      "$104"
+     ]
+    },
+    {
+     "model": "Claude Fable 5.1 (max with fallback)",
+     "totalUsdLabel": "$237",
+     "totalUsd": 237.0,
+     "flagged": false,
+     "segments": [
+      "$26",
+      "$92",
+      "$73",
+      "$47"
+     ]
+    },
+    {
+     "model": "Qwen3.8 Max (0902)",
+     "totalUsdLabel": "$327",
+     "totalUsd": 327.0,
+     "flagged": false,
+     "segments": [
+      "$145",
+      "$114",
+      "$61"
+     ]
+    },
+    {
+     "model": "Claude Opus 4.7 (max)",
+     "totalUsdLabel": "$338",
+     "totalUsd": 338.0,
+     "flagged": false,
+     "segments": [
+      "$135",
+      "$126",
+      "$35",
+      "$42"
+     ]
+    }
+   ],
+   "flagMeaning": "\"*\" on a chart label: \"The model or provider declined some tasks on safety grounds\" (AA page text); the total then prices fewer than all tasks."
+  }
+ }
+}

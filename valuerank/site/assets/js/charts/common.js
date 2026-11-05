@@ -27,10 +27,10 @@ export function resolveOptions(options = {}) {
 
 export const money = (value, digits = 2) => (finite(value) ? `$${value.toLocaleString('en-US', { minimumFractionDigits: digits, maximumFractionDigits: digits })}` : '—');
 
-/** One-line cost description in the unit of the active basis. */
+/** One-line cost description in the unit of the active basis (USD per run of the SDLC basket). */
 export function costText(model, basis) {
   const cost = model.cost ?? {};
-  return `${money(basis === 'api' ? cost.apiUsdPerPoint : cost.planUsdPerPoint, 3)} per Index point`;
+  return `${money(basis === 'api' ? cost.apiUsd : cost.planUsd, 2)} per basket run`;
 }
 
 export const baseLayout = (opts, title, titleSize) => ({

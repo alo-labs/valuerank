@@ -1,0 +1,27 @@
+{#- Evidence footnotes. Tables carry no Evidence column: a numbered marker after a row's name links to that row's
+    entry in the page's closing "Evidence" section, and each entry links back. Numbering runs through the whole page.
+    Ids: the entry is #ev-<id>, the marker is #evref-<id> (assets/js/rankings.js builds the same ids client-side). -#}
+{%- macro fn_ref(id, n, label, ref=none) -%}
+<sup class="fn-ref"><a href="#ev-{{ id }}" id="evref-{{ ref if ref else id }}" aria-label="Evidence note {{ n }} for {{ label }}">{{ n }}</a></sup>
+{%- endmacro -%}
+
+{#- The row name followed by its marker, kept on one line inside the flex .model-id stack. -#}
+{%- macro fn_name(id, n, label, ref=none) -%}
+<span class="fn-host">{{ caller() }}{{ fn_ref(id, n, label, ref) }}</span>
+{%- endmacro -%}
+
+{#- One entry; the caller supplies the badge and the explanation or source. -#}
+{%- macro fn_item(id, label, back=none, back_label=none) -%}
+<li id="ev-{{ id }}" class="fn-item"><span class="fn-label">{{ label }}</span> <a class="fn-back" href="{{ back if back else '#evref-' ~ id }}" aria-label="{{ back_label if back_label else 'Back to ' ~ label ~ ' in the table' }}">&#8617;&#xFE0E;</a><div class="fn-body">{{ caller() }}</div></li>
+{%- endmacro -%}
+
+{#- The closing section; the caller supplies one or more <ol class="footnotes"> lists. -#}
+{%- macro fn_section(intro=none) -%}
+<section class="block" id="evidence-notes" aria-labelledby="evidence-notes-title">
+  <h2 id="evidence-notes-title" class="section-title">Evidence</h2>
+  {%- if intro %}
+  <p class="muted">{{ intro }}</p>
+  {%- endif %}
+  {{ caller() }}
+</section>
+{%- endmacro -%}

@@ -33,10 +33,10 @@ test('api basis uses the api cost score and flags', () => {
 
 test('axes, hover data and label points', () => {
   const spec = buildPareto(models, baseOptions);
-  assert.deepEqual(spec.layout.xaxis.range, [0, 105]);
+  assert.deepEqual(spec.layout.xaxis.range, [105, 0]); // cheaper on the left, as on AA charts
   assert.deepEqual(spec.layout.yaxis.range, [42, 88]);
   const frontier = byName(spec, 'Pareto frontier');
-  assert.match(frontier.customdata[0][2], /per Index point/);
+  assert.match(frontier.customdata[0][2], /per basket run/);
   assert.match(frontier.hovertemplate, /<extra>Frontier<\/extra>/);
   assert.equal(spec.labels.points.length, 4);
   assert.deepEqual(spec.labels.points.filter((p) => p.frontier).map((p) => p.label), ['alpha']);

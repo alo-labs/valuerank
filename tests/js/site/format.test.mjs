@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {
-  fmtUsd, fmtPct, fmtScore, fmtMultiple, gradeLabel, gradeBadge, GRADES, coverageNote, escapeHtml,
+  fmtUsd, fmtPct, fmtScore, fmtMultiple, gradeLabel, gradeBadge, gradeDescription, GRADES, coverageNote, escapeHtml,
 } from '../../../valuerank/site/assets/js/format.js';
 
 test('fmtUsd formats with grouping and fixed digits; nulls become a dash', () => {
@@ -25,7 +25,7 @@ test('fmtPct, fmtScore and fmtMultiple', () => {
 
 test('grade labels and short badge text follow the contract enum', () => {
   assert.deepEqual(GRADES, ['measured', 'claim', 'estimate', 'assumption', 'missing']);
-  assert.equal(gradeLabel('measured'), 'Owner-measured');
+  assert.equal(gradeLabel('measured'), 'Measured');
   assert.equal(gradeLabel('claim'), 'Provider claim');
   assert.equal(gradeLabel('estimate'), 'Modelled');
   assert.equal(gradeLabel('assumption'), 'Assumption');
@@ -34,6 +34,8 @@ test('grade labels and short badge text follow the contract enum', () => {
   assert.equal(gradeBadge('measured'), 'Measured');
   assert.equal(gradeBadge('estimate'), 'Modelled');
   assert.equal(gradeBadge('weird'), '?');
+  assert.equal(gradeDescription('claim'), 'Published by the model provider for the exact benchmark version and evaluated variant.');
+  assert.equal(gradeDescription('weird'), gradeDescription('missing'));
 });
 
 test('coverageNote lists missing metrics or states full coverage', () => {

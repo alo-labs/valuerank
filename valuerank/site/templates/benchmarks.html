@@ -6,7 +6,7 @@
 <header class="page-head">
   <p class="eyebrow">Source registry</p>
   <h1 id="page-title">Benchmarks behind the scores</h1>
-  <p class="lead">Every dimension in the ranking comes from a named benchmark with an owner, a version and an observation date. This page lists them all and how much of the roster each one covers.</p>
+  <p class="lead">Every quality leaf in the ranking comes from a named benchmark with an owner, a version and an observation date, and cost comes from a named basket of Artificial Analysis evaluations. This page lists them all and how much of the ranked cohort each one covers.</p>
 </header>
 
 <section class="block" id="sources" aria-labelledby="sources-title">
@@ -31,13 +31,17 @@
   <p class="note">Terminal-Bench 4.0 has its own page: <a href="/benchmarks/terminal-bench-4/">Terminal-Bench 4.0 details</a>.</p>
 </section>
 
-<section class="block" id="aa-components" aria-labelledby="aa-title">
-  <h2 id="aa-title" class="section-title">Artificial Analysis Intelligence Index components</h2>
+<section class="block" id="basket" aria-labelledby="basket-title">
+  <h2 id="basket-title" class="section-title">The SDLC cost basket ({{ b.basket.version }})</h2>
+  <p class="muted">Cost is what Artificial Analysis reports for running these evaluations once at API rates. A component joins the basket when at least {{ b.basket.requiredPanelSize }} ranked configurations have complete cost evidence for it together with the other admitted components; {{ b.basket.referencePanelSize }} do today.</p>
   <ul class="chip-list">
-    {%- for c in b.aaComponents %}
-    <li><a class="chip" href="{{ c.url }}" rel="noopener">{{ c.name }} <span class="mono">{{ num(c.weightPct, 1) }}%</span></a></li>
+    {%- for c in b.basket.admitted %}
+    <li><span class="chip">{{ c.label }}</span></li>
     {%- endfor %}
   </ul>
+  {%- if b.basket.pending %}
+  <p class="muted">Pending capture: {% for c in b.basket.pending %}{{ c.label }} ({{ c.covered }} of {{ c.ranked }} with complete cost evidence){{ ", " if not loop.last }}{% endfor %}.</p>
+  {%- endif %}
 </section>
 
 <section class="block" id="coverage" aria-labelledby="coverage-title">

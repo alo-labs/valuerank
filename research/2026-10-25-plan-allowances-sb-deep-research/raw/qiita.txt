@@ -1,0 +1,696 @@
+### Opus 5.5 週間 50
+- 2026-10-25 suzuyui https://qiita.com/suzuyui/items/aa62e529eae1b427f400 | Mac mini（M6 / 32GB）でローカル AI エージェントを試す：Hermes Agent + Splash | hits: 0
+- 2026-10-25 ay5399 https://qiita.com/ay5399/items/0c628da303bd680fcd9d | Claude Code の開発者体験、足りなきゃ mod で足せばいい | hits: 0
+- 2026-10-24 kaiyaku_iyada https://qiita.com/kaiyaku_iyada/items/cbadd82923bd7fcee3b3 | AIの報告「約5時間止まっていた」は約2分だった：Claude Code の JSONL で照合 | hits: 0
+- 2026-10-24 xiongyuanmeng1006 https://qiita.com/xiongyuanmeng1006/items/74ea8dd90287b11ab5ab | Kimi K3.1 Pro と K3 の違い：変更点・料金・乗り換えるべき人 | hits: 2
+    > Moonshot の公式料金では、K3.1 Pro は入力、出力、キャッシュヒット（100万トークンあたり $0.20、K3 は $0.30）、キャッシュ書き込みのすべてで K3 より33%安くなっています。Highspeed の入力と出力は K3.1 Pro のちょうど2倍で、キャッシュヒットは同じ料金です。料金はコンテキスト長によらず一定で、キャッシュ書き込みは保持期間ごとに課金され（100万トークンあたり、K3.1 Pro は5分で $2.00、1時
+    > - **速度がネックの人**：Highspeed は能力が同じで、速度は Moonshot の公称で約2〜3倍、トークン単価は2倍（Moonshot では $4.00 / $20.00）、Kimi Code では約2倍の利用枠を使います。このシリーズの Highspeed 編で損得を比べています。
+- 2026-10-24 Synthorai https://qiita.com/Synthorai/items/f393866e2f93ad12ab59 | 2026 年の LLM API 料金：token 単価は上昇、同等性能は 50 倍安く | hits: 3
+    > | 2025 年 2 月 | V3 の公開記念キャンペーンが終了し、通常料金に移行。2 月 26 日から夜間は V3 が 50%、推論モデルの R1 が 75% 割引 | $0.07 / $0.27 / $1.10 |
+    > ヒット料金は現在、入力料金の 2% だ。2024 年には 10% で、現在の米国各社は 2.5% から 10% となっている。DeepSeek が公開した推論提供の実績データは、2025 年 3 月の 1 日分だけだ。その日には入力 token の 56.3% がディスクキャッシュにヒットし、GPU 1 台あたり毎時 $2 とした場合の理論上の利益率は 545% だった。ただし、実際の売上は「大幅に低かった」としている（[DeepSeek](https://github.com/deepseek-ai/open-infra-index/blob/main/202502OpenSourceWeek/day_6_one_more_thing
+    > https://www.engadget.com/2166315/anthropic-is-doubling-claude-code-rate-limits-after-deal-with-spacex) 後、Claude サブスクリプションの混雑時間帯の利用制限を解除した。同時期の API 料金の動きには、4 月に $5 / $30 で登場した [GPT-5.5](https://synthorai.io/ja/models/gpt-5-5/)、Google が「供給能力に制約がある」と説明する中で予定している値上げ、DeepSeek のピーク時間帯料金がある。
+- 2026-10-23 OfoxAI https://qiita.com/OfoxAI/items/d18357d59235491eb4ff | LLMの単価と正解1件の費用は違う：7モデル・86 API呼び出しの記録 | hits: 0
+- 2026-10-23 kai_kou https://qiita.com/kai_kou/items/de695c5bf89b3f16cb73 | Claude Duet速報、OpenAI Dotsとの違いは承認設計と提供地域 | hits: 0
+- 2026-10-23 lhjjjk4 https://qiita.com/lhjjjk4/items/fbcebf113b36cc04f7f1 | AI Daily Digest 2026年10月23日：OpenAI DevDayが常時稼働エージェント「Dots」を発表、Metaは無議決権C株でAI資金調達へ | hits: 2
+    > Meta は引き決算で第3四半期を発表し、その場でAI投資の支払い方法を作り直した。売上は646億ドルで前年同期比26%増、市場予想633億ドルを上回った。広告表示数10%増と平均単価14%増が牽引した。報告 EPS 3.83ドルには98.9億ドルの一括法務和解が含まれ、除けば7.40ドル。構造を示す数字はフリーキャッシュフローで、マイナス22億ドルと2012年以来初の赤字転落、四半期キャピタル支出は349億ドルに達した。
+    > 賭けは製品面でも裏付けを取りつつある。Zuckerberg は Muse ユーザーの4分の1以上がすでにエージェント経由で買い物をし、平均取引額が200ドルを超えると述べ、Muse の1ユーザー当たり収入が最終的に Instagram や Facebook を上回る可能性があると主張した。市場の判定は二日に分かれた。決算後の時間外取引で6%上昇した後、木曜には支出への懸念から7.5%下落した。どちらの反応も正しい。26%成長を示しながら、維持に新しい株式クラスを要する現金
+- 2026-10-23 etale_cohomology https://qiita.com/etale_cohomology/items/aaa0309aba8708e6cd32 | AIエージェントはスクラムチームになれるか：PO・SM・開発者を担うマルチエージェントの実証実験を調べてみた | hits: 0
+- 2026-10-22 hisashi-ito https://qiita.com/hisashi-ito/items/ea5aee169d50f91ee873 | Claude Duet とは何か、Meta の Muse と何が違うのか | hits: 1
+    > | 料金 | 別料金なし。Pro(月 20 ドル)と Max(月 100 ドルから)に含まれる | 基本は無料。有料は月 20 ドルと月 100 ドルの枠 |
+- 2026-10-22 sumitsuke https://qiita.com/sumitsuke/items/4cd2d30fc76ba55ae50c | Claude Code の自動の要約は何万で掛けるか——1 週間の記録に線を当てはめ直したら、60 万で読みが約 3 割減る計算になった | hits: 0
+- 2026-10-22 kaiyaku_iyada https://qiita.com/kaiyaku_iyada/items/dbed1eeb8b1c3fa3ee30 | Claude Code の副エージェントを「反証役」にして、AIが書いた記事と販売ページの文を一次資料と照合させた手順と、実際に見つかった誤り（AI自身の誤報を含む） | hits: 0
+- 2026-10-21 kinamocchi_tech https://qiita.com/kinamocchi_tech/items/b4a12d30e5bc96f96d36 | Gemini 3.5 Pro見送りは戦略じゃなかった？新型3モデルの正体 | hits: 0
+- 2026-10-21 aburachudoku https://qiita.com/aburachudoku/items/a6d87871114d48deac8c | Claude Proプラン1本でテスト1,118件のFlutter Webアプリを作った開発プロセス──Opus設計×Sonnet実装と手触りの受け入れテスト | hits: 0
+- 2026-10-20 yumashino https://qiita.com/yumashino/items/16b9f24acbefaa8b4ad0 | 育児で積読になったメルマガ達をPodcast化して消化する仕組みを作った | hits: 2
+    > - **音声合成**: ElevenLabs は、月額でクレジットの枠を買う契約です。最初は Starter（月$6）で試しました。ただ、7誌を毎週作ると枠が足りません。そこで、しばらく使ってみてから、Creator（月$22）に上げました。結局ぜんぶ聴きたくなったので、ここは迷わずアップグレードしました。
+    > 全部を合わせると、月に$30台で、毎週5時間ほどの「自分専用のラジオ」が届く計算です。
+- 2026-10-20 mt_caddi https://qiita.com/mt_caddi/items/7990f041fd71c0bbc624 | 【日替わりITトレンド：火曜 "クラウド"】AWS Lambdaに「Web Functions」登場！さくらのクラウドは新規作成を一時停止、今週のクラウドニュースと「サーバーレス」 | hits: 0
+- 2026-10-19 tsuyoshi-otake https://qiita.com/tsuyoshi-otake/items/91ef586f1a1a689b0842 | M5Stamp P4（ESP32-P4）でMMUなしのLinux 7.2を動かし、Wi-FiとSSHまで通した話【AIと250コミット】 | hits: 0
+- 2026-10-19 HrmsTrsmgs https://qiita.com/HrmsTrsmgs/items/5d9b3cba472f38f71aae | AI駆動TDD ― 2026年10月版 | hits: 0
+- 2026-10-19 engineer-first_GH https://qiita.com/engineer-first_GH/items/d5f6638d88b0342f0a0b | AIモデルの使い分けの判断基準：役割別の目安・スキルへのモデル固定・判定特化モデルの使いどころ | hits: 0
+- 2026-10-19 mmoriastron https://qiita.com/mmoriastron/items/2469a511cb5084cc465c | LLMの思考過程から学ぶ、障害時の原因特定に役立つ４つの観点 | hits: 0
+- 2026-10-19 kaiyaku_iyada https://qiita.com/kaiyaku_iyada/items/d0015397f0ccd24f0f3e | Claude Code が上位モデルの週間枠を使い切って作業の途中で止まった。本体は Opus に固定し、上位モデルは副エージェントで使う形に変えた記録 | hits: 0
+- 2026-10-19 matumu20 https://qiita.com/matumu20/items/bffd2a90c453f72cef4e | STATE OF AI REPORT 2026 (Industry) | hits: 1
+    > - Ramp上位1%の企業は、1人あたり月**7,205ドル**を支出。中央値の企業は**12.50ドル**で、約580倍の差(S.95)。
+- 2026-10-18 araom https://qiita.com/araom/items/f59a75e188824dfdd16c | プライベートで雇った AI 秘書を、2 週間育ててみた | hits: 0
+- 2026-10-16 yunany90 https://qiita.com/yunany90/items/23fabef830a45e815815 | Claude Code・Codex・Cursor の使用量と費用を確認する方法 | hits: 8
+    > | キャッシュ読み込み | $0.20 | 約36％ |
+    > | 5分キャッシュ書き込み | $5.00 | 約34％ |
+    > | 出力 | $20.00 | 約25％ |
+    > | 1時間キャッシュ書き込み | $8.00 | 約4％ |
+    > | 新しい入力 | $4.00 | 1％未満 |
+    > 5.5 のキャッシュ読み込みは通常の入力より95％安いのですが、量が非常に多いので費用の割合はいちばん大きくなりました。キャッシュ書き込みもほぼ同じくらいで、新しいファイルやツールの結果、長い答えは、まずキャッシュに書き込まないと次から安く読めないためです。出力は180万トークンしかありませんが、100万トークンあたり20ドルなので全体の4分の1を占めました。
+    > アナライザーは、選んだプランと、同じ期間・同じツールの API 費用を比べます。私の Claude の記録は17日間です。Max 5× は税抜きで月100ドルなので、17日分は約8,950円（56.67ドル）です。同じトークンを API で払うと145.90ドルなので、**払った料金の約257％分の API 価値を使った**ことになります。エージェントでたくさん作業するなら、トークン単位の支払いよりサブスクリプションのほうがはっきり安くなりました。
+    > - **普段の作業は Sonnet で。** Sonnet 5.5 は100万トークンあたり2ドル／10ドル、Opus 5.5 は4ドル／20ドルなので、同じセッションが API 換算で約50％安くなります。
+- 2026-10-16 lhjjjk4 https://qiita.com/lhjjjk4/items/e771f2d1c6c187674816 | AI日報 2026年10月16日：EU AI法がOpenAIとAnthropicに初の情報要求、Microsoft Maia 300は2027年量産へ、ロボット基盤モデルがAPIに | hits: 0
+- 2026-10-15 shalXXXX https://qiita.com/shalXXXX/items/18af68da363bff529b70 | LLM エージェントによる脆弱性探索の公開研究から考える、パッチ適用期限の決め方 | hits: 0
+- 2026-10-15 kinamocchi_tech https://qiita.com/kinamocchi_tech/items/332754b0709cacdb5153 | AIの「人格」は言語で変わる？Anthropicが突き止めた系統的な差の正体 | hits: 0
+- 2026-10-14 whitemarshall https://qiita.com/whitemarshall/items/7b9e819c7f5a50230269 | Claude Haiku 5.5が0.0%→39.2%、料金は10分の1に。Claude Opus 5.5との使い分けとAPI移行の落とし穴 | hits: 2
+    > ほかに請求額を動かす条件として、バッチ処理は両モデルとも半額、Opus 5.5にはfast mode（$8／$40、最大2.5倍速）があります。キャッシュ読み出しの割引率はモデルごとに違い、Opus 5.5は基本入力価格の5%、Haiku 5.5は10%、Fable 5.1は2.5%です。長期の試算で同じ係数を当てないよう注意してください。
+    > 最後に前世代について。Haiku 4.5はlegacy扱いになり、料金は$1／$5でHaiku 5.5の短プロンプト段階の10倍、Terminal-Benchは0.0%対39.2%です。まだ4.5を使っているなら、今回のアップグレードは一度まとめて評価する価値があります。
+- 2026-10-14 Hash1mo https://qiita.com/Hash1mo/items/afe0700298c2fad82983 | 【UiPath FUSION 2026】51 ページの PDD を Autopilot に渡して、PR レビューも失敗調査も Claude Code に回す！！「Building  | hits: 0
+- 2026-10-14 lhjjjk4 https://qiita.com/lhjjjk4/items/80c66582508bca8bc59b | AI Daily Digest 2026年10月14日：GoogleがGemini 4 Argon発表、Character.AIがChapter 11申請、ロッテルダムAI Gig | hits: 1
+    > スペックは長尺稼働の主張を裏付ける。出力上限は6.4万から100万トークンに跳ね上がり、Googleによれば1回のタスクでコードベース全体を読めるという。価格は紹介期間中、入力100万トークンあたり2ドル、出力10ドルで、キャッシュ済み入力は95%安く、期間終了後は4ドルと20ドルになる。Google自身のベンチマークでは、DeepSWE v1.1で77.9%、ZapierのAutomationBenchで51.3%の首位、LVBenchで91.7%、CWE-bench v1で68%を記録し、GPT-6 Astraと並んだ。社内では、Argonは数分で公開文献より約40%優れた量子アルゴリズムの
+- 2026-10-13 yashi84 https://qiita.com/yashi84/items/e155e6ffead528c437e7 | MetaのAIをClaude（AnthoropicのAI）に評価させてみました | hits: 0
+- 2026-10-13 Takuya__ https://qiita.com/Takuya__/items/2d35c6a4880c4dec6432 | Meta「Muse Wonder」は Claude Fable 5.1 や GPT-6 Astra と比べてどれくらい強いのか | hits: 2
+    > ![Vals Indexの上位10モデル。1位Gemini 4 Argon 68.90%、2位Claude Sonnet 5.5 67.04%、3位Claude Opus 5.5 66.97%、4位Claude Fable 5.1 65.83%、5位Muse Wonder Full 64.57%（1回の費用8.56ドル）、6位Claude Opus 5、7位GPT-6 Astra 63.13%、10位Muse Wonder 61.06%](https://takuya-genai.com/wp-content/uploads/2026/10/mwv-fig07-vals.gif)
+    > - **Muse Wonder** は 1 億 3,000 万トークンを使い、1 タスク **$4.52**。Opus 5.5（$5.98）より 24% 安い結果です
+- 2026-10-13 fuji1009_REBELL https://qiita.com/fuji1009_REBELL/items/c8cbf9f1e3f8271e7772 | Haiku 5.5は本当に1/10なのか、自分のサブエージェント運用ログで検証した | hits: 1
+    > クン数として数えられる**（出典: 前掲overviewページ本文「the same text counts as approximately 30% more tokens than on Claude Haiku 4.5」）。私はこれを見て、単価だけで「9割引」と早合点しかけた。実際に手を動かして計算し直すと、入力$1→$0.10・出力$5→$0.50という単価自体は確かに9割引だが、同じ文章量に対する消費トークンが1.3倍に増える分を差し引くと `0.10 × 1.3 = 0.13`、プロンプトが10万トークン以下に収まり、入出力のテキスト量とキャッシュ構成が同一で、トークン増加率を一律30%と仮定した場合には実質約87%減という
+- 2026-10-13 dahatake https://qiita.com/dahatake/items/0e2bd840e580d64ff4ff | Hypervelocity Engineering の挫折と栄光の歴史。 | hits: 0
+- 2026-10-13 matumu20 https://qiita.com/matumu20/items/7cd4bac0a6803767a127 | STATE OF AI REPORT 2026 (Research) | hits: 1
+    > - **ARC-AGI-2:18%→95%(11か月)**。1課題あたりのコストは7.14ドル→1.12ドル(GPT-6.1 Sol は94.2%で0.25ドル)。
+- 2026-10-11 lhjjjk4 https://qiita.com/lhjjjk4/items/684274826b5c4690e645 | AI日報 2026年10月11日：Claudeが1000エージェントを並列制御、OpenAIの数学論文722本が波紋、AnthropicはIPOで2兆ドル狙う | hits: 0
+- 2026-10-10 corocojam https://qiita.com/corocojam/items/b6400595c5afa3db3bf3 | Claude Codeの「プロジェクト」(Claude Code Projects)機能を1週間使って分かった、良かったこと・困ったことと使い方 | hits: 0
+- 2026-10-10 ishizakahiroshi https://qiita.com/ishizakahiroshi/items/ce0b03506c6455599946 | Claude Code の手順書を出そうとしたら、3週間前に出した版がもう古くなっていた | hits: 0
+- 2026-10-09 suwa_nobu https://qiita.com/suwa_nobu/items/e44319f33a118d3ca4a9 | Claude Code に渡したファイルや指示が、黙って届いていなかった6つの場面と確かめ方 | hits: 0
+- 2026-10-09 lhjjjk4 https://qiita.com/lhjjjk4/items/14820429dcf79ed9c2ca | AI日報 2026年10月9日：Googleの汎用Geminiエージェント、OpenAIの10億ドル防衛基金、AnthropicがClaudeへの虐待を禁止 | hits: 0
+- 2026-10-08 andknj-front https://qiita.com/andknj-front/items/597738b2c386c95073c5 | 【スクリーンタイム】#9 — 「あと20分ほしい」を子どもがAIと交渉する | hits: 0
+- 2026-10-07 faliye https://qiita.com/faliye/items/09d2b9238153d54b617b | 最初のトランザクションと 26 万回のクラッシュリプレイ---ゼロから作るCOWファイルシステム5 | hits: 0
+- 2026-10-07 htani0817 https://qiita.com/htani0817/items/61233f474dc36f6cf1d0 | 【2026年9月】Claude Sonnet 5.5がリリース！Sonnet 5と同価格で30%高速・API破壊的変更5つまとめ | hits: 2
+    > - 価格は Sonnet 5 と同じ入力 $2 / 出力 $10 per 1M tokens。Anthropic によると、出力速度は Sonnet 5 より30%以上速く、1タスクあたりのコストは最大30%下がる。単価が下がったわけではなく、同じ仕事に使うトークンが減ることによる差
+    > | Batch API | 入力・出力とも50%引き（入力 $1 / 出力 $5） |
+- 2026-10-07 vaon-luandv https://qiita.com/vaon-luandv/items/7088b6e87b32f2352b3f | ドキュメントをLLMで自動同期させたら、担当者交代のコストが変わった話 | hits: 0
+- 2026-10-07 lhjjjk4 https://qiita.com/lhjjjk4/items/d8ad0f92d78104b470c8 | Codex初日で50%高速化、OpenAIが文字透かし、Mistral Large 4が1兆パラメータでプレビュー | hits: 0
+- 2026-10-06 sonchu https://qiita.com/sonchu/items/9c34ae51e39a63499141 | Claude、Gemini、GPT-6が相次いで更新｜2026年10月版フロンティアモデルの使い分けガイド | hits: 3
+    > Claude Fable 5.1は、基本価格を据え置いたまま、キャッシュ読み取り価格を75%引き下げて$0.25/百万トークンにした。**通常のワークロードで約25%、複雑なコーディングや高度なエージェントタスクでは約45%のコスト削減が見込める**という。
+    > GPT-6 AstraはFrontierMath Tier4で98%、ARC-AGI-3で99.9%と、単体のベンチマークでは際立ったスコアを記録した。API価格はFable 5.1と同じ$10/$50（百万トークンあたり）で、最上位帯に入る。
+    > Claude Opus 5.5は入力$4・出力$20（百万トークンあたり）で、Opus 5より約20%安い。Anthropicは「ほとんどの作業でFable 5.1と同水準」で、典型的なワークロードのコストはOpus 5より40%低く、出力速度は30%以上速いと説明している。Terminal-Bench 4.0では66.4%で、Opus 5の52.3%を上回った。Fab
+- 2026-10-06 lhjjjk4 https://qiita.com/lhjjjk4/items/fbcb336fff48abbdf711 | OpenAI、Codexに28日間の公約、Muse Sparkは未解決数学問題に挑む | hits: 0
+- 2026-10-05 ipresence_katayama https://qiita.com/ipresence_katayama/items/6c9b324861fb25e6dbe5 | M5StackChan を LiveKit × Gemini Live API で「電源を入れるだけで話せる」AI ロボットにした | hits: 0
+- 2026-10-05 aiapi_radar_news https://qiita.com/aiapi_radar_news/items/aacf7ce3d9dd6a6943da | OpenAIのtts-1が2027/1/6に廃止、Claude Sonnet 5.5が登場 | hits: 0
+- 2026-10-05 dahatake https://qiita.com/dahatake/items/b25fd8bc2944afdaba59 | さらば!私の企業向け大規模分散アプリ開発用のVibe Coding オーケストレーター。ようこそ、要求定義駆動開発❤️ | hits: 1
+    > | E2 | 「位置特定 → 修正 → 検証」の単純な 3 段（Agentless）が、SWE-bench Lite で既存の OSS エージェントより高い性能（32.00%）と低いコスト（0.70 ドル）を出した | Xia et al., "Agentless", arXiv:2407.01489, 2024 | 要旨 | 複雑なエージェントが必ずしも有利ではない。ATG の実測と同じ方向 | HVE 停止の判定 |
+### Max 20x 50
+- 2026-10-25 nabe2030 https://qiita.com/nabe2030/items/2c29db3e0c69552e2d80 | Strata検証②：EVO-X2（Ryzen AI Max+ 395）で256K コンテクストが安定動作！Qwen3.8-Flash-Next × OpenCode でAIエージェ | hits: 0
+- 2026-10-25 chunenhaken https://qiita.com/chunenhaken/items/dc528672d22b857ffe14 | Strata と Project-Maya 動かしてみた | hits: 0
+- 2026-10-25 Takuya__ https://qiita.com/Takuya__/items/44a519482613ea204c15 | 頭の中では言葉を使わないAIエージェント「HybridAgent」を Mac で動かしてみた | hits: 0
+- 2026-10-25 suzuyui https://qiita.com/suzuyui/items/aa62e529eae1b427f400 | Mac mini（M6 / 32GB）でローカル AI エージェントを試す：Hermes Agent + Splash | hits: 0
+- 2026-10-25 hotate_2235 https://qiita.com/hotate_2235/items/ed78d11b9cb69cd4a72c | eMudhra中間CAの秘密鍵漏えいに対して、手元のMacで何をしたか | hits: 0
+- 2026-10-25 MisaNeco https://qiita.com/MisaNeco/items/ed196cdbf4700fecf150 | サーバーなし・外部送信なしの業務アプリを localStorage＋JSONバックアップで作るときに気をつけたこと | hits: 0
+- 2026-10-25 emi_ndk https://qiita.com/emi_ndk/items/af2d2dbbb0a7cb33ba65 | 【26件を全集計】Claudeの障害記録で「影響度none」はお金まわりの2件だけ。API・Claude Codeまで止めた支出上限の誤判定に、公式の自動回復4機能が1つも効かない | hits: 2
+    > | API組織の月間支出上限（ティア） | Start 500ドル、Build 1,000ドル、Scale 200,000ドル |
+    > ごとの判定を通る。[レート制限のドキュメント](https://platform.claude.com/docs/en/api/rate-limits)は、制限を2種類に分けている。月にいくらまで使えるかを決める支出上限と、1分あたりの要求数などを決めるレート制限だ。API組織には、ティアごとの月間上限（Startなら500ドル）と、自分で決める上限がある。
+- 2026-10-25 kotaro_ai_lab https://qiita.com/kotaro_ai_lab/items/3765b3e3c829bb5ee4d9 | IPA の Oracle Java 注意喚起（2026年10月）は、Oracle JDK を使っていなければ関係ないのか ― 手元の Mac の OpenJDK で確かめて更新した | hits: 0
+- 2026-10-25 kisatonn0722 https://qiita.com/kisatonn0722/items/ad4f9c8b4184b5929e57 | Kaggle初心者がTitanicに初挑戦｜EDAから特徴量エンジニアリング、初Submitまで | hits: 0
+- 2026-10-25 takibito https://qiita.com/takibito/items/35dc50b93b0afa5145a9 | メモリに余裕のない VPS へ GitHub Actions と GHCR で自動デプロイする（ビルドはランナー、VPS は pull だけ） | hits: 0
+- 2026-10-25 yoxi957 https://qiita.com/yoxi957/items/6ad20888b8536225cf88 | Seedance 2.5 の API に投げる前に弾く：タスク種別ごとの制約を Python でローカル検証する | hits: 0
+- 2026-10-25 RyotaMurohoshi https://qiita.com/RyotaMurohoshi/items/91ea12de35ce393f6da4 | サブ用ノートPCに、11インチMacBook Airの代わりが見つからない（2026年版） | hits: 0
+- 2026-10-25 potofo https://qiita.com/potofo/items/16f5df2228ec858393e9 | ビジネスモデル2.0図解をClaude Agent Skill化して、Webサービスにしてみた | hits: 0
+- 2026-10-24 softbase https://qiita.com/softbase/items/fb72de63c975fcbbd2f6 | 「コードレビューは死ぬ、ターミナルも消える」——海外著名エンジニアが予測するAI時代のソフトウェア開発の未来 | hits: 0
+- 2026-10-24 nabe2030 https://qiita.com/nabe2030/items/404240ab6b9171565c9d | Strata改で GLM-5.3-Flash (320B MoE) を NVIDIA RTX4060Ti/16GB ×2 + RAM 128GB で動かした件 | hits: 0
+- 2026-10-24 lehukuku0120 https://qiita.com/lehukuku0120/items/ca1da56497ab1967662b | NavaraでDEMと空中写真を重ねる簡単な3D地形Webデモを作る | hits: 0
+- 2026-10-24 bebebefu https://qiita.com/bebebefu/items/fe391082f7f3744d68e0 | Unitree G1 に「押しながら歩く」を学習させて Gazebo で動かす | hits: 0
+- 2026-10-24 hathibei7 https://qiita.com/hathibei7/items/b3b6aa8874aab70717ff | サブエージェントはメインループに「畳む」べきか？Anthropicの記事をモックECサポートで実測してみた | hits: 0
+- 2026-10-24 kougi https://qiita.com/kougi/items/06b30c8c3babd20a8e29 | エージェントを「箱に入れる」: OpenSandbox と NVIDIA OpenShellを試す | hits: 0
+- 2026-10-24 abe_masanori https://qiita.com/abe_masanori/items/1904c42dedb1ef4c1012 | Snowflake の Yes/No 判定は Jev ならコスト 1/34：AI_FILTER とコスト・精度・処理時間を 1,774 件で比較 | hits: 1
+    > - AI_FILTER の場合、ウェアハウスの分は 0.0004 ドルで、合計のほぼ 100% が AI クレジットです。
+- 2026-10-24 GeneLab_999 https://qiita.com/GeneLab_999/items/f497090125a7d65026f4 | SDPAってなんだ？ — 手書きAttentionを1行に置き換える前に知る3ポイント | hits: 0
+- 2026-10-24 GeneLab_999 https://qiita.com/GeneLab_999/items/deaa693c1bc4a04a1f75 | flash-attnの代役がVRAMを18GB溶かしていたので87%削った話 | hits: 0
+- 2026-10-24 Takuya__ https://qiita.com/Takuya__/items/752bbac167768f3e9e66 | Kimi K3.1 Pro は Claude Opus 5.5 や GPT-6 Astra にどこまで迫ったのか | hits: 3
+    > 5.1、Opus 5.5は57.6、Fable 5.1とGPT-6 Astraより上。得意：Terminal-Bench 4.0の第三者測定で67.2%の首位、SWE-Marathon 51.7。苦手：知識問題の正答率51%（Opus 5.5は66%）、ターミナルでの科学研究38.1（Astraは68.1）。値段：入力2ドル・出力10ドルでOpus 5.5の半額](https://takuya-genai.com/wp-content/uploads/2026/10/kk31-fig01-summary.gif)
+    > ![判断フロー。K3.1 Proを使う→人が画面の前で返事を待つ作業か？いいえなら通常版（max）、夜間の一括処理など。はいなら、2倍の単価・枠消費を払ってよいか？はいならHighspeed（API 4ドル／20ドル、Kimi CodeはPro以上で枠2倍消費）、いいえなら通常版でeffortを下げる](https://takuya-genai.com/wp-content/uploads/2026/10/kk31-fig10-highspeed.gif)
+    > | 支払い | Kimi の会員プラン（月額）の利用枠 | 使った分だけ（1 ドル以上の入金で K3.1 Pro が解放） |
+- 2026-10-24 shalXXXX https://qiita.com/shalXXXX/items/018c8205a3a717d53b7f | LLM で大量生成される偽アカウント・偽レビュー・スパムへの対策：文章の判定をやめ、つながりと時間の偏りで見つける | hits: 0
+- 2026-10-24 qOpenDev https://qiita.com/qOpenDev/items/12c06d1a2cda9d9115b2 | 3,863日分のプライベートな日記でGPTモデルをゼロから学習する | hits: 0
+- 2026-10-24 emi_ndk https://qiita.com/emi_ndk/items/9138a0ae483c074f34ad | 【全員1位】地球を10m四方でベクトル化する3製品、Google・ケンブリッジ・Ai2の論文はどれも「自分が最強」。同じAlphaEarthが2位にも最下位にもなる理由と、自分のデ | hits: 0
+- 2026-10-24 miruky https://qiita.com/miruky/items/633d3a1bbef54372c78a | AWS Lambda Durable Functionsで、15分の壁を超えてCloudWatch LogsのS3エクスポート完了を待ちぼうけ | hits: 0
+- 2026-10-24 hathibei7 https://qiita.com/hathibei7/items/a398c118c40bd92d6956 | AI・クラウド アップデートまとめ（2026/10/24） | hits: 0
+- 2026-10-24 phpcheck https://qiita.com/phpcheck/items/a6ee25d480c50980e098 | 2026年10月のPHP重大脆弱性（CVE-2026-109618／109619）と追加の注意喚起（CVE-2026-115560）: 自分の環境を確認して直す手順 | hits: 0
+- 2026-10-24 lieben https://qiita.com/lieben/items/40d6f21be7cc56f75e1f | Java 8・Spring MVC 3.2対応：モダンな業務Webアプリケーション | hits: 0
+- 2026-10-24 rino_yume https://qiita.com/rino_yume/items/2ea7c0ff77f34dc12306 | Fortran 2018でGPUを高速化する【Part 2】― OpenACCのデータ転送を減らし、CPUとGPUの計算時間を比較する | hits: 0
+- 2026-10-24 soichirowada https://qiita.com/soichirowada/items/33846296b4e3fbe9208f | Prime Numbers Finderを作ってみました Part2 | hits: 0
+- 2026-10-24 xiongyuanmeng1006 https://qiita.com/xiongyuanmeng1006/items/cf48f25c5bb7f94faef4 | Kimi K3.1 Pro vs Qwen 4 vs Claude Fable 5.5：フロントエンド生成とタスク単価を比較 | hits: 0
+- 2026-10-24 SHAOYIKYEOH https://qiita.com/SHAOYIKYEOH/items/bf9c032942ad48303451 | データ構造 - 入門 | hits: 0
+- 2026-10-24 freefreefree1222 https://qiita.com/freefreefree1222/items/07abeae0ff946b3a9ca8 | DuckDB × HTTP Range で 460GB の Parquet から日本の行だけを10秒で抽出する | hits: 0
+- 2026-10-24 Synthorai https://qiita.com/Synthorai/items/f393866e2f93ad12ab59 | 2026 年の LLM API 料金：token 単価は上昇、同等性能は 50 倍安く | hits: 3
+    > | 2025 年 2 月 | V3 の公開記念キャンペーンが終了し、通常料金に移行。2 月 26 日から夜間は V3 が 50%、推論モデルの R1 が 75% 割引 | $0.07 / $0.27 / $1.10 |
+    > ヒット料金は現在、入力料金の 2% だ。2024 年には 10% で、現在の米国各社は 2.5% から 10% となっている。DeepSeek が公開した推論提供の実績データは、2025 年 3 月の 1 日分だけだ。その日には入力 token の 56.3% がディスクキャッシュにヒットし、GPU 1 台あたり毎時 $2 とした場合の理論上の利益率は 545% だった。ただし、実際の売上は「大幅に低かった」としている（[DeepSeek](https://github.com/deepseek-ai/open-infra-index/blob/main/202502OpenSourceWeek/day_6_one_more_thing
+    > https://www.engadget.com/2166315/anthropic-is-doubling-claude-code-rate-limits-after-deal-with-spacex) 後、Claude サブスクリプションの混雑時間帯の利用制限を解除した。同時期の API 料金の動きには、4 月に $5 / $30 で登場した [GPT-5.5](https://synthorai.io/ja/models/gpt-5-5/)、Google が「供給能力に制約がある」と説明する中で予定している値上げ、DeepSeek のピーク時間帯料金がある。
+- 2026-10-24 MooseLove0308 https://qiita.com/MooseLove0308/items/9a1d250a8e30913b547f | 【初心者向け】FFRI × NFLabs. Cybersecurity Challenge 2026 Pwn Writeup | hits: 0
+- 2026-10-23 Unknown777hello https://qiita.com/Unknown777hello/items/f4604377757bb5ad8490 | 【FileSearchExplorer解説 #7 | Qiita・64回】1行ずつ解説：152-1009行目 | hits: 0
+- 2026-10-23 shin270080 https://qiita.com/shin270080/items/ecebf4d46d122e235660 | iPhone実機で小さすぎたWebゲームUIを改善する7つの実装ポイント | hits: 0
+- 2026-10-23 smith-multicast https://qiita.com/smith-multicast/items/5a9374fa5adc567905f2 | 【Cisco Nexus 9000】Microburst Monitoringによるマイクロバーストの検出・監視方法 | hits: 0
+- 2026-10-23 puffy https://qiita.com/puffy/items/8da039d11b5798d775fd | テスト管理ツール TestLink の調査 (2026年版) | hits: 0
+- 2026-10-23 whitemarshall https://qiita.com/whitemarshall/items/af6aa721ba525ef79e8a | Claudeレビュー：サブスクかAPI課金か、どちらが得か（2026年10月検証） | hits: 4
+    > この二つは**交換できません**。サブスクの枠をAPI呼び出しに充てることはできず、APIキーはチャットアカウントのログイン情報にもなりません。「月20ドル」と「100万トークン2ドル」を同じ表に並べて比較しても、何も答えていないのと同じです。問うべきはただ一つ：あなたの仕事はどちらの形で走るのか。
+    > 0.28ドルの節約——ただし前提は三つ：プレフィックスが完全に同一であること、2回目が5分以内であること、ルートが実際にキャッシュから供給すること。一つでも崩れると、この計算は無効です。サブスクにはこうした管理がありません。枠は毎月リセットされます。
+    > しかし料金表は10万トークンで段差を持ち、しかも高いレートは**リクエスト全体**に掛かります。入力部分だけ比べると、101Kのプロンプト（0.50ドル/100万）は99Kのプロンプト（0.10ドル/100万）の約**5.10倍**——内容は2%しか増えていないのに、です。安いレート帯で長文を処理するつもりなら、まず自分のプロンプト長で一度計算してください。
+    > Simon Willisonの2026年9月22日の公開テストでは、Opus 5.5を最高思考モードで動かしたところ、**2回とも結果を返せず**、推論中に128,000トークンの出力上限を焼き切り、1回あたり約2.56ドル・20分近く掛かりました。彼の言葉を借りれば "max is effectively useless"。同じテストでFable 5.1はmaxモードでも正常でした。最高モードが最高の選択とは限らない、という実例です。
+- 2026-10-23 hisashi-ito https://qiita.com/hisashi-ito/items/c212e2d34c4b5d3c47fe | 日本で始まった Meta の Muse を早速試した！ | hits: 1
+    > 多くの基本機能は無料。サブスクリプションのプランがあるが、発表には名称、価格、利用量が書かれていない。アプリの画面では、パワーが月 2,799 円で週 5 億トークン、マキシマムが月 13,990 円で週 30 億トークンで、どちらも Muse Wonder で動く(私が確認)。トークンの量は、北米の Power(月 20 ドル)と Max(月 100 ドル)と同じ
+- 2026-10-23 cauchye_asia https://qiita.com/cauchye_asia/items/1a399d862b7ae4075480 | 429対策のバックオフを「待たずに」テストする｜偽の時計を注入するPythonのunittest | hits: 1
+    > 送信キューの本体です。`estimate` で送信前に費用を見積もり、`RateState` がレスポンスの `x-rate-limit-*` ヘッダーから残量とリセット時刻を覚えます。単価は X API の料金ページの値（Post作成 $0.015、URL付きPost作成 $0.200）です。
+- 2026-10-23 fujiken818 https://qiita.com/fujiken818/items/0eedfdf2e30c34aaf36a | 表のタイトル（caption）がスマホで右端から切れた。直し方7通りを4つの画面幅で測ってみた | hits: 0
+- 2026-10-23 tikeda123 https://qiita.com/tikeda123/items/ef7e106c2b084708bd16 |  なぜクオンツは最初にリターンを測るのか ― 戦略を設計する前に、市場の性格を5つの質問で知る | hits: 0
+- 2026-10-23 aloksinghdev https://qiita.com/aloksinghdev/items/23496fa5730d22c287d9 | Tic Tac Toe in SwiftUI, Done Properly: Value-Type Game State, Win Detection and an Unbeata | hits: 0
+- 2026-10-23 ponfreelance https://qiita.com/ponfreelance/items/5d7aa21fc1c99b7ae946 | 期限切れ特許×AIで中国輸入商品を数値化し差別化する実践手順 | hits: 0
+- 2026-10-23 harrowharrow16 https://qiita.com/harrowharrow16/items/925db3a5e6cba447c19d | IBM Bobを使って、量子コンピュータで量子機械学習モデル(量子ニューラルネットワーク<QNN>)を作成してみる | hits: 0
+- 2026-10-23 sen-ltd https://qiita.com/sen-ltd/items/c843a4e683d68ca60c90 | ヒキガエルとカエル（Toads and Frogs）— 局面の「値」と「温度」を出すエンジンを書いて 2 本の論文の表を検算したら、1 マスだけ論文どうしが食い違っていた | hits: 0
+### Max 5x 50
+- 2026-10-25 nabe2030 https://qiita.com/nabe2030/items/2c29db3e0c69552e2d80 | Strata検証②：EVO-X2（Ryzen AI Max+ 395）で256K コンテクストが安定動作！Qwen3.8-Flash-Next × OpenCode でAIエージェ | hits: 0
+- 2026-10-25 chunenhaken https://qiita.com/chunenhaken/items/dc528672d22b857ffe14 | Strata と Project-Maya 動かしてみた | hits: 0
+- 2026-10-25 Takuya__ https://qiita.com/Takuya__/items/44a519482613ea204c15 | 頭の中では言葉を使わないAIエージェント「HybridAgent」を Mac で動かしてみた | hits: 0
+- 2026-10-25 suzuyui https://qiita.com/suzuyui/items/aa62e529eae1b427f400 | Mac mini（M6 / 32GB）でローカル AI エージェントを試す：Hermes Agent + Splash | hits: 0
+- 2026-10-25 Waipe https://qiita.com/Waipe/items/df4aad48341352ab716e | 【第042回】振り出し回数カウンターで幽霊部屋を排除！ルームIDの世代管理とステートレス識別 | hits: 0
+- 2026-10-25 jnksktaa https://qiita.com/jnksktaa/items/5d52389bca371f7594ba | deepeval+langfuseによるLLM評価環境構築 | hits: 0
+- 2026-10-25 MisaNeco https://qiita.com/MisaNeco/items/ed196cdbf4700fecf150 | サーバーなし・外部送信なしの業務アプリを localStorage＋JSONバックアップで作るときに気をつけたこと | hits: 0
+- 2026-10-25 emi_ndk https://qiita.com/emi_ndk/items/af2d2dbbb0a7cb33ba65 | 【26件を全集計】Claudeの障害記録で「影響度none」はお金まわりの2件だけ。API・Claude Codeまで止めた支出上限の誤判定に、公式の自動回復4機能が1つも効かない | hits: 2
+    > | API組織の月間支出上限（ティア） | Start 500ドル、Build 1,000ドル、Scale 200,000ドル |
+    > ごとの判定を通る。[レート制限のドキュメント](https://platform.claude.com/docs/en/api/rate-limits)は、制限を2種類に分けている。月にいくらまで使えるかを決める支出上限と、1分あたりの要求数などを決めるレート制限だ。API組織には、ティアごとの月間上限（Startなら500ドル）と、自分で決める上限がある。
+- 2026-10-25 kobayashi_0226 https://qiita.com/kobayashi_0226/items/9f4e3b785ab23d8ef4e2 | Amazon Cognitoを使ってAmazon WorkSpaces ApplicationsへのアクセスにMFAを設定できるようにしてみた | hits: 0
+- 2026-10-25 kotaro_ai_lab https://qiita.com/kotaro_ai_lab/items/3765b3e3c829bb5ee4d9 | IPA の Oracle Java 注意喚起（2026年10月）は、Oracle JDK を使っていなければ関係ないのか ― 手元の Mac の OpenJDK で確かめて更新した | hits: 0
+- 2026-10-25 kisatonn0722 https://qiita.com/kisatonn0722/items/ad4f9c8b4184b5929e57 | Kaggle初心者がTitanicに初挑戦｜EDAから特徴量エンジニアリング、初Submitまで | hits: 0
+- 2026-10-25 takibito https://qiita.com/takibito/items/35dc50b93b0afa5145a9 | メモリに余裕のない VPS へ GitHub Actions と GHCR で自動デプロイする（ビルドはランナー、VPS は pull だけ） | hits: 0
+- 2026-10-25 muk-ai https://qiita.com/muk-ai/items/3e3071583410fba19d66 | AWSのインスタンスを借りてStrataでDeepSeek V4.1-Flashを動かす | hits: 0
+- 2026-10-25 square3iris https://qiita.com/square3iris/items/a5b55a24f4d0da7e0cb2 | Googleフォト無制限活用術】NASの写真を初代Pixel経由で自動バックアップする「NAS2GP」/ [Google Photos Unlimited Tips] Auto-B | hits: 0
+- 2026-10-25 yoxi957 https://qiita.com/yoxi957/items/6ad20888b8536225cf88 | Seedance 2.5 の API に投げる前に弾く：タスク種別ごとの制約を Python でローカル検証する | hits: 0
+- 2026-10-25 RyotaMurohoshi https://qiita.com/RyotaMurohoshi/items/91ea12de35ce393f6da4 | サブ用ノートPCに、11インチMacBook Airの代わりが見つからない（2026年版） | hits: 0
+- 2026-10-25 tamaoki_t https://qiita.com/tamaoki_t/items/a1eecaee2738b1349d75 | GitHubでIssue起票してClaude CodeでAIコーディングする | hits: 0
+- 2026-10-25 Haradasn https://qiita.com/Haradasn/items/174280065559771228f7 | ラズパイ初心者が、第一子誕生をきっかけにClaudeとの壁打ちだけで見守りロボットを作ってみた(3) 組み立て編 ― カメラとローカルTTSで声を出せた日 | hits: 0
+- 2026-10-25 rino_yume https://qiita.com/rino_yume/items/75e3b486d1d9ec08e0e8 | Fortran 2018のSIMDはどこまで速くなる？ ― 2次元メッシュで調べるベクトル化とメモリ最適化【Part 2】 | hits: 0
+- 2026-10-25 AzukiImo https://qiita.com/AzukiImo/items/e7b06ea544eb17424409 | 🔰PyTorchでニューラルネットワーク基礎 #43 【Llama化編・KVキャッシュ】 | hits: 0
+- 2026-10-25 potofo https://qiita.com/potofo/items/16f5df2228ec858393e9 | ビジネスモデル2.0図解をClaude Agent Skill化して、Webサービスにしてみた | hits: 0
+- 2026-10-24 softbase https://qiita.com/softbase/items/fb72de63c975fcbbd2f6 | 「コードレビューは死ぬ、ターミナルも消える」——海外著名エンジニアが予測するAI時代のソフトウェア開発の未来 | hits: 0
+- 2026-10-24 nabe2030 https://qiita.com/nabe2030/items/404240ab6b9171565c9d | Strata改で GLM-5.3-Flash (320B MoE) を NVIDIA RTX4060Ti/16GB ×2 + RAM 128GB で動かした件 | hits: 0
+- 2026-10-24 lehukuku0120 https://qiita.com/lehukuku0120/items/ca1da56497ab1967662b | NavaraでDEMと空中写真を重ねる簡単な3D地形Webデモを作る | hits: 0
+- 2026-10-24 bebebefu https://qiita.com/bebebefu/items/fe391082f7f3744d68e0 | Unitree G1 に「押しながら歩く」を学習させて Gazebo で動かす | hits: 0
+- 2026-10-24 hathibei7 https://qiita.com/hathibei7/items/b3b6aa8874aab70717ff | サブエージェントはメインループに「畳む」べきか？Anthropicの記事をモックECサポートで実測してみた | hits: 0
+- 2026-10-24 kougi https://qiita.com/kougi/items/06b30c8c3babd20a8e29 | エージェントを「箱に入れる」: OpenSandbox と NVIDIA OpenShellを試す | hits: 0
+- 2026-10-24 abe_masanori https://qiita.com/abe_masanori/items/1904c42dedb1ef4c1012 | Snowflake の Yes/No 判定は Jev ならコスト 1/34：AI_FILTER とコスト・精度・処理時間を 1,774 件で比較 | hits: 1
+    > - AI_FILTER の場合、ウェアハウスの分は 0.0004 ドルで、合計のほぼ 100% が AI クレジットです。
+- 2026-10-24 taka-hito https://qiita.com/taka-hito/items/e43dd9fbbdbf6594b272 | AtCoder Beginner Contest 用  ライブラリ | hits: 0
+- 2026-10-24 GeneLab_999 https://qiita.com/GeneLab_999/items/da172b649bdd690e8420 | MHAってなんだ？ — 8つの頭に分ける理由と、PyTorchで黙って壊れる3つの罠 | hits: 0
+- 2026-10-24 GeneLab_999 https://qiita.com/GeneLab_999/items/f497090125a7d65026f4 | SDPAってなんだ？ — 手書きAttentionを1行に置き換える前に知る3ポイント | hits: 0
+- 2026-10-24 GeneLab_999 https://qiita.com/GeneLab_999/items/deaa693c1bc4a04a1f75 | flash-attnの代役がVRAMを18GB溶かしていたので87%削った話 | hits: 0
+- 2026-10-24 Takuya__ https://qiita.com/Takuya__/items/752bbac167768f3e9e66 | Kimi K3.1 Pro は Claude Opus 5.5 や GPT-6 Astra にどこまで迫ったのか | hits: 3
+    > 5.1、Opus 5.5は57.6、Fable 5.1とGPT-6 Astraより上。得意：Terminal-Bench 4.0の第三者測定で67.2%の首位、SWE-Marathon 51.7。苦手：知識問題の正答率51%（Opus 5.5は66%）、ターミナルでの科学研究38.1（Astraは68.1）。値段：入力2ドル・出力10ドルでOpus 5.5の半額](https://takuya-genai.com/wp-content/uploads/2026/10/kk31-fig01-summary.gif)
+    > ![判断フロー。K3.1 Proを使う→人が画面の前で返事を待つ作業か？いいえなら通常版（max）、夜間の一括処理など。はいなら、2倍の単価・枠消費を払ってよいか？はいならHighspeed（API 4ドル／20ドル、Kimi CodeはPro以上で枠2倍消費）、いいえなら通常版でeffortを下げる](https://takuya-genai.com/wp-content/uploads/2026/10/kk31-fig10-highspeed.gif)
+    > | 支払い | Kimi の会員プラン（月額）の利用枠 | 使った分だけ（1 ドル以上の入金で K3.1 Pro が解放） |
+- 2026-10-24 shalXXXX https://qiita.com/shalXXXX/items/018c8205a3a717d53b7f | LLM で大量生成される偽アカウント・偽レビュー・スパムへの対策：文章の判定をやめ、つながりと時間の偏りで見つける | hits: 0
+- 2026-10-24 qOpenDev https://qiita.com/qOpenDev/items/12c06d1a2cda9d9115b2 | 3,863日分のプライベートな日記でGPTモデルをゼロから学習する | hits: 0
+- 2026-10-24 emi_ndk https://qiita.com/emi_ndk/items/9138a0ae483c074f34ad | 【全員1位】地球を10m四方でベクトル化する3製品、Google・ケンブリッジ・Ai2の論文はどれも「自分が最強」。同じAlphaEarthが2位にも最下位にもなる理由と、自分のデ | hits: 0
+- 2026-10-24 miruky https://qiita.com/miruky/items/633d3a1bbef54372c78a | AWS Lambda Durable Functionsで、15分の壁を超えてCloudWatch LogsのS3エクスポート完了を待ちぼうけ | hits: 0
+- 2026-10-24 hathibei7 https://qiita.com/hathibei7/items/a398c118c40bd92d6956 | AI・クラウド アップデートまとめ（2026/10/24） | hits: 0
+- 2026-10-24 phpcheck https://qiita.com/phpcheck/items/a6ee25d480c50980e098 | 2026年10月のPHP重大脆弱性（CVE-2026-109618／109619）と追加の注意喚起（CVE-2026-115560）: 自分の環境を確認して直す手順 | hits: 0
+- 2026-10-24 lieben https://qiita.com/lieben/items/40d6f21be7cc56f75e1f | Java 8・Spring MVC 3.2対応：モダンな業務Webアプリケーション | hits: 0
+- 2026-10-24 yokamak https://qiita.com/yokamak/items/c40e3a0ad90059e0c38f | Lantern —レトロ3D表現のためのgame engine --SDL samples | hits: 0
+- 2026-10-24 Takahiro-cd https://qiita.com/Takahiro-cd/items/534e5644e66041e2350e | アクチュアリーのためのPython入門（商品の追加） | hits: 0
+- 2026-10-24 rino_yume https://qiita.com/rino_yume/items/2ea7c0ff77f34dc12306 | Fortran 2018でGPUを高速化する【Part 2】― OpenACCのデータ転送を減らし、CPUとGPUの計算時間を比較する | hits: 0
+- 2026-10-24 soichirowada https://qiita.com/soichirowada/items/33846296b4e3fbe9208f | Prime Numbers Finderを作ってみました Part2 | hits: 0
+- 2026-10-24 xiongyuanmeng1006 https://qiita.com/xiongyuanmeng1006/items/cf48f25c5bb7f94faef4 | Kimi K3.1 Pro vs Qwen 4 vs Claude Fable 5.5：フロントエンド生成とタスク単価を比較 | hits: 0
+- 2026-10-24 white921 https://qiita.com/white921/items/0f332f6bb5f5e6e535c7 | 初めてのLaravel②：register APIを実装してユーザーがDBに保存されるまで | hits: 0
+- 2026-10-24 SHAOYIKYEOH https://qiita.com/SHAOYIKYEOH/items/bf9c032942ad48303451 | データ構造 - 入門 | hits: 0
+- 2026-10-24 freefreefree1222 https://qiita.com/freefreefree1222/items/07abeae0ff946b3a9ca8 | DuckDB × HTTP Range で 460GB の Parquet から日本の行だけを10秒で抽出する | hits: 0
+- 2026-10-24 softbase https://qiita.com/softbase/items/369ec260770a0d185110 | 【応急処置】PHP 7.4 のまま CVE-2026-109618 / 109619（RCE）を塞ぐ Docker イメージを公開しました | hits: 0
+- 2026-10-24 Synthorai https://qiita.com/Synthorai/items/f393866e2f93ad12ab59 | 2026 年の LLM API 料金：token 単価は上昇、同等性能は 50 倍安く | hits: 3
+    > | 2025 年 2 月 | V3 の公開記念キャンペーンが終了し、通常料金に移行。2 月 26 日から夜間は V3 が 50%、推論モデルの R1 が 75% 割引 | $0.07 / $0.27 / $1.10 |
+    > ヒット料金は現在、入力料金の 2% だ。2024 年には 10% で、現在の米国各社は 2.5% から 10% となっている。DeepSeek が公開した推論提供の実績データは、2025 年 3 月の 1 日分だけだ。その日には入力 token の 56.3% がディスクキャッシュにヒットし、GPU 1 台あたり毎時 $2 とした場合の理論上の利益率は 545% だった。ただし、実際の売上は「大幅に低かった」としている（[DeepSeek](https://github.com/deepseek-ai/open-infra-index/blob/main/202502OpenSourceWeek/day_6_one_more_thing
+    > https://www.engadget.com/2166315/anthropic-is-doubling-claude-code-rate-limits-after-deal-with-spacex) 後、Claude サブスクリプションの混雑時間帯の利用制限を解除した。同時期の API 料金の動きには、4 月に $5 / $30 で登場した [GPT-5.5](https://synthorai.io/ja/models/gpt-5-5/)、Google が「供給能力に制約がある」と説明する中で予定している値上げ、DeepSeek のピーク時間帯料金がある。
+### ccusage 4
+- 2026-10-16 yunany90 https://qiita.com/yunany90/items/23fabef830a45e815815 | Claude Code・Codex・Cursor の使用量と費用を確認する方法 | hits: 8
+    > | キャッシュ読み込み | $0.20 | 約36％ |
+    > | 5分キャッシュ書き込み | $5.00 | 約34％ |
+    > | 出力 | $20.00 | 約25％ |
+    > | 1時間キャッシュ書き込み | $8.00 | 約4％ |
+    > | 新しい入力 | $4.00 | 1％未満 |
+    > 5.5 のキャッシュ読み込みは通常の入力より95％安いのですが、量が非常に多いので費用の割合はいちばん大きくなりました。キャッシュ書き込みもほぼ同じくらいで、新しいファイルやツールの結果、長い答えは、まずキャッシュに書き込まないと次から安く読めないためです。出力は180万トークンしかありませんが、100万トークンあたり20ドルなので全体の4分の1を占めました。
+    > アナライザーは、選んだプランと、同じ期間・同じツールの API 費用を比べます。私の Claude の記録は17日間です。Max 5× は税抜きで月100ドルなので、17日分は約8,950円（56.67ドル）です。同じトークンを API で払うと145.90ドルなので、**払った料金の約257％分の API 価値を使った**ことになります。エージェントでたくさん作業するなら、トークン単位の支払いよりサブスクリプションのほうがはっきり安くなりました。
+    > - **普段の作業は Sonnet で。** Sonnet 5.5 は100万トークンあたり2ドル／10ドル、Opus 5.5 は4ドル／20ドルなので、同じセッションが API 換算で約50％安くなります。
+- 2026-10-09 yunany90 https://qiita.com/yunany90/items/c8586f6366a52ce5e544 | Claude Opus 5.5 の effort 比較：low〜max を実測 | hits: 0
+- 2026-10-05 rairaii https://qiita.com/rairaii/items/2a21e6fafc0ec7cce3f6 | 月 $110 の Claude Code、従量課金なら47.8万円。27倍の差はどこから来るのか | hits: 3
+    > 2026年9月の自分の利用ログを現在の API 単価で換算すると、月 47.8万円になった。実際に支払っている Max の月額 $110（17,380円）を従量課金に充てた場合、カバーできるのは9月の利用量の 3.6% である。
+    > | Pro | 月額 $20 | 5時間単位と週単位の利用枠。トークン数は非公表 |
+    > | Max 5x / 20x | 月額 $100 / $200（税抜） | Pro の5倍 / 20倍の利用枠。トークン数は非公表 |
+- 2026-09-29 hisashi-ito https://qiita.com/hisashi-ito/items/e814569771d00675e19d | Sonnet 5.5 の登場と Opus 5.5 の使い分け | hits: 0
+### Codex 週間 上限 45
+- 2026-10-25 suzuyui https://qiita.com/suzuyui/items/aa62e529eae1b427f400 | Mac mini（M6 / 32GB）でローカル AI エージェントを試す：Hermes Agent + Splash | hits: 0
+- 2026-10-25 sponge841841 https://qiita.com/sponge841841/items/b2c00d9f0e6fc6afe858 | Codex Day 20徹底解説：Rest and reset、利用枠リセット完了と反映確認 | hits: 0
+- 2026-10-25 ay5399 https://qiita.com/ay5399/items/0c628da303bd680fcd9d | Claude Code の開発者体験、足りなきゃ mod で足せばいい | hits: 0
+- 2026-10-24 xiongyuanmeng1006 https://qiita.com/xiongyuanmeng1006/items/74ea8dd90287b11ab5ab | Kimi K3.1 Pro と K3 の違い：変更点・料金・乗り換えるべき人 | hits: 2
+    > Moonshot の公式料金では、K3.1 Pro は入力、出力、キャッシュヒット（100万トークンあたり $0.20、K3 は $0.30）、キャッシュ書き込みのすべてで K3 より33%安くなっています。Highspeed の入力と出力は K3.1 Pro のちょうど2倍で、キャッシュヒットは同じ料金です。料金はコンテキスト長によらず一定で、キャッシュ書き込みは保持期間ごとに課金され（100万トークンあたり、K3.1 Pro は5分で $2.00、1時
+    > - **速度がネックの人**：Highspeed は能力が同じで、速度は Moonshot の公称で約2〜3倍、トークン単価は2倍（Moonshot では $4.00 / $20.00）、Kimi Code では約2倍の利用枠を使います。このシリーズの Highspeed 編で損得を比べています。
+- 2026-10-24 berrylove https://qiita.com/berrylove/items/e5ae1c4b9ca20e1f34ce | Claude Code の routine とローカル定期実行で、承認待ちで止まった AI 会社を動かし直した話 | hits: 0
+- 2026-10-23 OfoxAI https://qiita.com/OfoxAI/items/d18357d59235491eb4ff | LLMの単価と正解1件の費用は違う：7モデル・86 API呼び出しの記録 | hits: 0
+- 2026-10-23 kai_kou https://qiita.com/kai_kou/items/de695c5bf89b3f16cb73 | Claude Duet速報、OpenAI Dotsとの違いは承認設計と提供地域 | hits: 0
+- 2026-10-23 lhjjjk4 https://qiita.com/lhjjjk4/items/fbcebf113b36cc04f7f1 | AI Daily Digest 2026年10月23日：OpenAI DevDayが常時稼働エージェント「Dots」を発表、Metaは無議決権C株でAI資金調達へ | hits: 2
+    > Meta は引き決算で第3四半期を発表し、その場でAI投資の支払い方法を作り直した。売上は646億ドルで前年同期比26%増、市場予想633億ドルを上回った。広告表示数10%増と平均単価14%増が牽引した。報告 EPS 3.83ドルには98.9億ドルの一括法務和解が含まれ、除けば7.40ドル。構造を示す数字はフリーキャッシュフローで、マイナス22億ドルと2012年以来初の赤字転落、四半期キャピタル支出は349億ドルに達した。
+    > 賭けは製品面でも裏付けを取りつつある。Zuckerberg は Muse ユーザーの4分の1以上がすでにエージェント経由で買い物をし、平均取引額が200ドルを超えると述べ、Muse の1ユーザー当たり収入が最終的に Instagram や Facebook を上回る可能性があると主張した。市場の判定は二日に分かれた。決算後の時間外取引で6%上昇した後、木曜には支出への懸念から7.5%下落した。どちらの反応も正しい。26%成長を示しながら、維持に新しい株式クラスを要する現金
+- 2026-10-22 sponge841841 https://qiita.com/sponge841841/items/8678288f1d4eea94fe60 | Codex Day 17はフルリセット！発表時刻・日本時間の反映期限・Daybreak Blueを詳しく解説 | hits: 0
+- 2026-10-20 chooser https://qiita.com/chooser/items/835f0458f513d4161224 | AI のサービスはどれを申し込むか ── 有料か無料か、任せたい仕事からフローで選べるようにしました | hits: 1
+    > ![プランをアップグレードするかどうかの表。各社のプランを安い順に並べ、次のプランで何が増えるかを書いた（2026 年 10 月 19 日時点）。Claude は Free、Pro $20（5 時間ごとに頼める量が Free の 5 倍以上）、Max 5x $100（同じく Pro の 5 倍）、Max 20x $200（同じく Pro の 20 倍）。iPhone のアプリの中で申し込むと円の別の値段で、Pro 3,000 円・Max 5x 20,000 円・Max 20x 40,000 円。ChatGPT は Free、Go 1,400 円、Plus 3,000 円、Pro 16,800 円から（Pro は 5 時間ごとの上限が無
+- 2026-10-19 HrmsTrsmgs https://qiita.com/HrmsTrsmgs/items/5d9b3cba472f38f71aae | AI駆動TDD ― 2026年10月版 | hits: 0
+- 2026-10-18 sponge841841 https://qiita.com/sponge841841/items/284d541decd0eee714b4 | Codex Day 13は再び全体リセット！6:12のDone投稿・日本時間の期限・対象利用枠を徹底解説 | hits: 4
+    > | Pro $100 | **なし** | プランに応じた利用枠 |
+    > | Pro $200 | **なし** | プランに応じた利用枠 |
+    > | Pro $500 | **なし** | プランに応じた利用枠 |
+    > ### Q. Pro $100 / $200 / $500の5時間枠は戻る？
+- 2026-10-17 sponge841841 https://qiita.com/sponge841841/items/9344a5759a87064544ee | Codex Day 12徹底解説：キャッシュ改善で実質利用量増加！GPT-6 Astra Proの並列エージェントも | hits: 0
+- 2026-10-16 yunany90 https://qiita.com/yunany90/items/23fabef830a45e815815 | Claude Code・Codex・Cursor の使用量と費用を確認する方法 | hits: 8
+    > | キャッシュ読み込み | $0.20 | 約36％ |
+    > | 5分キャッシュ書き込み | $5.00 | 約34％ |
+    > | 出力 | $20.00 | 約25％ |
+    > | 1時間キャッシュ書き込み | $8.00 | 約4％ |
+    > | 新しい入力 | $4.00 | 1％未満 |
+    > 5.5 のキャッシュ読み込みは通常の入力より95％安いのですが、量が非常に多いので費用の割合はいちばん大きくなりました。キャッシュ書き込みもほぼ同じくらいで、新しいファイルやツールの結果、長い答えは、まずキャッシュに書き込まないと次から安く読めないためです。出力は180万トークンしかありませんが、100万トークンあたり20ドルなので全体の4分の1を占めました。
+    > アナライザーは、選んだプランと、同じ期間・同じツールの API 費用を比べます。私の Claude の記録は17日間です。Max 5× は税抜きで月100ドルなので、17日分は約8,950円（56.67ドル）です。同じトークンを API で払うと145.90ドルなので、**払った料金の約257％分の API 価値を使った**ことになります。エージェントでたくさん作業するなら、トークン単位の支払いよりサブスクリプションのほうがはっきり安くなりました。
+    > - **普段の作業は Sonnet で。** Sonnet 5.5 は100万トークンあたり2ドル／10ドル、Opus 5.5 は4ドル／20ドルなので、同じセッションが API 換算で約50％安くなります。
+- 2026-10-16 sponge841841 https://qiita.com/sponge841841/items/f2ab35fb7a6a7a94b4be | Codex Day 11徹底解説：Model at Capacityエラーを大幅削減、自動再開で長時間タスクが止まりにくく | hits: 0
+- 2026-10-15 sponge841841 https://qiita.com/sponge841841/items/f0a1e45f1df16bd746a5 | Codex Day 10は再びフルリセット！15:28完了までの時系列・対象利用枠・保存チケットとの違い | hits: 4
+    > | Pro $100 | **なし** | プランに応じた利用枠あり |
+    > | Pro $200 | **なし** | プランに応じた利用枠あり |
+    > | Pro $500 | **なし** | プランに応じた利用枠あり |
+    > **Pro $100 / $200 / $500には、現時点でWork / Codexの5時間枠が設定されていません。** そのため、これらのプランでは実際に存在する対象利用枠を確認します。
+- 2026-10-14 yshurik https://qiita.com/yshurik/items/0a18c01062e205cab63a | エージェントに想起させる：MCP 上で検索可能な会話履歴 | hits: 0
+- 2026-10-14 lhjjjk4 https://qiita.com/lhjjjk4/items/80c66582508bca8bc59b | AI Daily Digest 2026年10月14日：GoogleがGemini 4 Argon発表、Character.AIがChapter 11申請、ロッテルダムAI Gig | hits: 1
+    > スペックは長尺稼働の主張を裏付ける。出力上限は6.4万から100万トークンに跳ね上がり、Googleによれば1回のタスクでコードベース全体を読めるという。価格は紹介期間中、入力100万トークンあたり2ドル、出力10ドルで、キャッシュ済み入力は95%安く、期間終了後は4ドルと20ドルになる。Google自身のベンチマークでは、DeepSWE v1.1で77.9%、ZapierのAutomationBenchで51.3%の首位、LVBenchで91.7%、CWE-bench v1で68%を記録し、GPT-6 Astraと並んだ。社内では、Argonは数分で公開文献より約40%優れた量子アルゴリズムの
+- 2026-10-14 chooser https://qiita.com/chooser/items/aff215958e47f48a3b30 | 「AI会社」の実態を分類した ── 投稿 2,716 件のうち、仕事が担当から担当へ流れる「会社の形」は 16.1% だった | hits: 0
+- 2026-10-13 tanzyto40 https://qiita.com/tanzyto40/items/f63455e28918be29cac7 | AI記事作成Skillとyomiyasuを組み合わせたら、文章はどこまで読みやすくなるのか？ | hits: 0
+- 2026-10-13 tanzyto40 https://qiita.com/tanzyto40/items/df8ef7dc3e12c697ca63 | 自作+yomiyasu推敲版:Codexの5時間制限、利用者は何に不満を感じているのか？ ― 2026年10月の公開コミュニティ調査 | hits: 0
+- 2026-10-13 tanzyto40 https://qiita.com/tanzyto40/items/e7453dc5b052d0af5755 | 自作SKILLのみ版:Codexの5時間制限、利用者は何に不満を感じているのか？ ― 2026年10月の公開コミュニティ調査 | hits: 0
+- 2026-10-13 tanzyto40 https://qiita.com/tanzyto40/items/c21fb826ed9a8b314324 | Skill無し版：【Codex】5時間制限は必要？約17万票のアンケートと海外ユーザーの反応から見えた賛否 | hits: 0
+- 2026-10-13 sponge841841 https://qiita.com/sponge841841/items/cdbc12608f0b9980e21f | Codex Day 8は再びグローバルリセット！日本時間の期限・対象利用枠・チケットとの違いを解説 | hits: 4
+    > | **Pro $100** | **なし** | プランの利用枠は存在 |
+    > | **Pro $200** | **なし** | プランの利用枠は存在 |
+    > | **Pro $500** | **なし** | プランの利用枠は存在 |
+    > ### Q. Pro $100 / $200 / $500の5時間枠もリセット？
+- 2026-10-13 sponge841841 https://qiita.com/sponge841841/items/9a2cee8a87d484fa4d8a | Codex Day 7徹底解説：GPT-6.1 Solのコンテキストが272K→500K！1M設定と料金の注意点 | hits: 0
+- 2026-10-12 istb16 https://qiita.com/istb16/items/c2de1648ea9671efe73b | AIに複数レビューさせるのが面倒すぎて、自動で回すプラグインを作ってみた | hits: 0
+- 2026-10-11 sponge841841 https://qiita.com/sponge841841/items/49a024290d2678e0d2f6 | Codex Day 6はグローバルリセット！いつ反映される？Day 3の保存可能リセットとの違いも解説 | hits: 2
+    > ただし、**Pro $100 / $200 / $500では、現時点でWork・Codexの5時間枠が設定されていない**とされています。プランごとに構造が異なります。
+    > 現行の公式Help Centerによると、**Pro $100 / $200 / $500はWork / Codexに5時間枠がありません**。プランによって確認すべき枠が異なります。
+- 2026-10-11 chooser https://qiita.com/chooser/items/52de55a56647586b5187 | ChatGPT の dots に Gmail・カレンダー・Slack・Notion をつないで、何ができて何ができないかを確かめた | hits: 0
+- 2026-10-09 shun-nonoshita https://qiita.com/shun-nonoshita/items/17f37f997fdcd6bcaf90 | 改めて Jevとは何か？ 判定専用AIを2週間・約2,900回使って分かった、業務での向き不向き | hits: 0
+- 2026-10-08 lumistudio https://qiita.com/lumistudio/items/500d34232f18c792e5f1 | 使用量アラートを上限ごと・サイクルごとに1回だけ送る：リセット時刻でサイクルを見分けるSwift実装 | hits: 1
+    > print(Int(step.percent), fired.map { "\($0) % で通知" } ?? "通知しない")
+- 2026-10-08 sponge841841 https://qiita.com/sponge841841/items/203774f65ba481c0f709 | Codex Day 3：GPT-6とIntelligent UI、保存可能リセットを解説 | hits: 0
+- 2026-10-07 lhjjjk4 https://qiita.com/lhjjjk4/items/d8ad0f92d78104b470c8 | Codex初日で50%高速化、OpenAIが文字透かし、Mistral Large 4が1兆パラメータでプレビュー | hits: 0
+- 2026-10-06 sponge841841 https://qiita.com/sponge841841/items/ec7f09dacc0a091645c6 | Codexは毎日リセットされる？OpenAIの「28日間、改善かフルリセット」施策を整理 | hits: 0
+- 2026-10-06 lhjjjk4 https://qiita.com/lhjjjk4/items/fbcb336fff48abbdf711 | OpenAI、Codexに28日間の公約、Muse Sparkは未解決数学問題に挑む | hits: 0
+- 2026-10-03 ViewsEngineer https://qiita.com/ViewsEngineer/items/4f9dae8becfbd2bc5b28 | Qiitaの4年を地図にしたら、AIの国が小さな島から大陸に育っていた | hits: 0
+- 2026-10-02 iostar https://qiita.com/iostar/items/85e1a496225208ef2a59 | OpenAIのdotsで話題の「AIの同僚」を、手元のClaude CodeとCodexで組む方法 | hits: 0
+- 2026-10-02 shun-nonoshita https://qiita.com/shun-nonoshita/items/940c04a16bd453827dd1 | Claude Code の「完了しました」を信用しない。判定専用AI「Jev」をフック3本に挟み、4日間1,519判定・約5.6円で止めた話 | hits: 0
+- 2026-10-02 Takuya__ https://qiita.com/Takuya__/items/9c3b43c381f300d36f25 | AI で作ったアプリはどこに公開する？ Vercel・Supabase・Cloudflare を料金と実デプロイで比べる | hits: 0
+- 2026-10-01 Takuya__ https://qiita.com/Takuya__/items/59938e0ae0d5a4e951f4 | CoreWeave Forge の Free プランで、Agent の失敗を評価に戻して直せるか | hits: 4
+    > この画面には、公式料金ページに書かれていない数字が2つ載っていました。Free プランにも「$2 Inference credit」（期間限定）が付くこと、そして「W&B Training Unlimited usage for a limited time」です。Free でどこまで推論が無料かは料金ページから読み取れなかったので、ここで初めて分かりました。
+    > 図23：検証後の使用量。Sandbox にも 30 ドル分の枠が表示されていました。
+    > | Sandboxes | 使わず | $30 分の枠（画面表示） |
+    > - Free でも ARIA と Agent Lens は使え、CoreWeave 上の推論には $2 分、Sandboxes には $30 分の枠がありました。従量課金は自分で有効化しない限り動きません
+- 2026-10-01 xujfcn https://qiita.com/xujfcn/items/4c2b12f72ca47400b53e | GPT-6.1 Sol vs GPT-6 Sol：わずか1週間で更新、Claude 5.5との関係は？ | hits: 0
+- 2026-09-30 Takuya__ https://qiita.com/Takuya__/items/7404c5e3892329fb555e | OpenAI DevDay 2026 で何が発表された？ dots・GPT-6.1 Sol・Ultrafast・Codex クラウドは従来と何が変わるのか | hits: 1
+    > | 13 | Pro 500 / Pro 200 再開 | 月額 500 ドルの最上位プラン | 最大の利用枠と Ultrafast つき。Pro 200 の新規受付も再開 | 個人向け |
+- 2026-09-30 lhjjjk4 https://qiita.com/lhjjjk4/items/ac14d3cb1a8740173e37 | OpenAIのDotsが常駐エージェントを標準化、Anthropicは2兆ドルIPOへ | hits: 3
+    > 商用面の設計も重要だ。Dotsはまず対象市場のProとBusiness Premiumのユーザーに提供され、Proは月100ドル、Business Premiumは月20ドルから。最初の1体は追加料金なしで含まれる。Dotとの会話はChatGPTの利用上限にカウントされないが、FAQではこの扱いが「今後1か月のみ」と限定されている。展開はEEA、スイス、英国を除く。ガードレールは2つある。パスワード変更などの機微な操作の前にユーザーへ確認する自動レビューと、OpenAIがDotの作業を一時
+    > ッドシートの作成を得意とし、デザインを見る目も鋭いとされる。出力生成はSonnet 5より30%以上速く、これまでで最速のSonnetとなる。Anthropicのテストでは、同じ作業に必要なトークンが大幅に少なく、タスクあたり最大30%安いという。トークン価格はSonnet 5から据え置きで、入力100万トークンあたり2ドル、出力100万トークンあたり10ドル、キャッシュ読み取り100万トークンあたり0.20ドル、キャッシュ書き込み100万トークンあたり2.50ドルだ。
+    > orld Labsの研究が新しいAIワークロードの知見をもたらし、ハードウェア、ソフトウェア、システムにわたるロードマップを方向づけると見る。フィジカルAIはロボティクス、シミュレーション、設計で将来のチップとソフトウェア、インフラ需要を左右すると期待される。市場の反応は冷めた。AMD株は9月28日に3.61%下落して607.87ドル、時価総額は9,923億ドルとなった。
+- 2026-09-29 roripika https://qiita.com/roripika/items/1952fb2bf112fb562042 | バイブコーディングで出すつもりが4か月：6年止まっていた個人ゲームを、複数のAIエージェントとストア公開するまでの実験記録 | hits: 3
+    > 7月までに、Codexは少なくとも3回、利用上限で止まっていました（6月2日、6月24〜26日、7月8〜9日）。UIの作業はCodexに集中していたので、Codexが止まるとUIの作業が全部止まります。8月、Codexを月10ドルのプランから月100ドルのプランに上げました。
+    > 100ドルのプランに上げたCodexも、9月28日にはまた上限に達しました。上限が来るたびに、担当表に「この期間だけClaude CodeがUIを代行」と書いて、作業をつないでいます。
+    > | ChatGPT（Codex） | 月10ドル → **8月から月100ドル** | UIの作業が集中し、利用上限で何度も止まったため |
+- 2026-09-26 Takuya__ https://qiita.com/Takuya__/items/bce7a1c63886b8eb0609 | AgentRunとは？ 小さな判断はJevに、調査だけAIエージェントに任せるワークフロー言語 | hits: 1
+    > 最初の2.89ドルは Opus 5 だけのエージェントで、調査と判断をすべて任せた場合です。調査を軽いモデルに移すと2.02ドル、さらに調査を DeepSeek V4.1 Flash、判断を Jev に移すと0.39ドルまで下がります。最後に AgentRun のワークフローで、調査の30%を省略し、100件中32件を早めに打ち切り、判断が難しい8件だけを強い判定エージェントに回した結果が0.25ドルです。
+- 2026-09-25 _daisuke0802 https://qiita.com/_daisuke0802/items/0d190f49575e2833a867 | AIは「面白い」をカタチにできるのか？ Unity MCP + Antigravity（Gemini 3.8 Flash）にゲーム改善を丸投げしてみた | hits: 0
+### Antigravity Argon 20
+- 2026-10-25 hooosberg https://qiita.com/hooosberg/items/d9c77e58ec3ae5f8ade1 | 【個人開発】AI課金沼にサヨナラ：月20ドルで最新Gemini 4 Argon & Claude Sonnet 5.5をフル活用する僕のリアル構成 | hits: 1
+    > 10%のコアロジックを担う「月20ドルの主力基盤」＋90%をこなす「無料ツール」の組み合わせで、生産性は十分に最大化できます。
+- 2026-10-25 Ito_110 https://qiita.com/Ito_110/items/ee1730c9b1864692a0be | 【2026年10月最新版】ChatGPT・Gemini・Claudeを徹底比較！GPT-6／Gemini 4／Claude 5.5、結局どれを選ぶ？ | hits: 1
+    > 参考までに、個人向けサービスにはChatGPT Plus（月額$20）やClaude Pro（月額$20）などがあります。GeminiにはGoogle AI Plus／Pro／Ultraがあります。日本での実際の請求額、税、利用枠、対象モデルは申込画面で確認してください。
+- 2026-10-24 yunany90 https://qiita.com/yunany90/items/b0fa22097f7e9bcf8642 | Claude HaikuはどこでOpusに負けるのか：163回測って見えた「報告にないケース1つ」の差 | hits: 0
+- 2026-10-23 yunany90 https://qiita.com/yunany90/items/10a1349ad34466c6bb47 | 同じコードでClaudeだけ出力トークンが約60%多い：Claude Code・Codex・Antigravityを5言語で80回実測 | hits: 0
+- 2026-10-23 yunany90 https://qiita.com/yunany90/items/7a5a2ec9f10d2d869ef6 | 同じOpus 5.5でトークンが68〜88%少なかった：Antigravity CLI vs Claude Code vs Codexを実測 | hits: 1
+    > 同じOpus 5.5でも、Antigravity CLIではClaude Codeより入力トークンが68〜88%少なく、出力は40%少なく、27%早く終わりました。その代わりClaude Codeのゲームのほうが長めでした（451行対236行）。Claude CodeはAPI価格で1回$0.37（約58円）と報告し、AntigravityとCodexはサブスクリプションなので価格が出ません。
+- 2026-10-19 songchong https://qiita.com/songchong/items/542892c6d4c569c9c15f | 重要な指示は最初か最後か？ AI 大手 3 社の助言が異なるので、資料→命令→指示の並び方を 8 通り試してみた | hits: 0
+- 2026-10-19 songchong https://qiita.com/songchong/items/351a939e2e1b673c2929 | 今日から使える AI との会話術 — Claude・Gemini・Codex に指示を守らせる 6 つの原則【2026年版】 | hits: 1
+    > | Antigravity の CLI 1.4.2 | 0% | 88.4% | 通常の 0.05 倍（95% 引き）<br>※Gemini 4 Argon の API 料金。2026 年 11 月 30 日までは入力 $2.00 に対し $0.10、12 月 1 日からは $4.00 に対し $0.20（割合は同じ） |
+- 2026-10-18 SolitaireEgg https://qiita.com/SolitaireEgg/items/820295021d314f050ec1 | Gemini4がリリースされて、プロジェクトの運用方法を変えた話 | hits: 0
+- 2026-10-16 fallout https://qiita.com/fallout/items/21904e0934e17edae113 | Gemini Argonの性能を自作FWを実験台としてお試ししてみた | hits: 0
+- 2026-10-16 na-tamura https://qiita.com/na-tamura/items/28454d9a585baddb0136 | Gemini 4 Argon は 3.1 Pro / 3.8 Flash と何が違う？3D シーン生成で比べてみた！ | hits: 0
+- 2026-10-16 ishisaka https://qiita.com/ishisaka/items/1022c2c5cc83caa37206 | プログラミング雑記 2026年10月16日 | hits: 0
+- 2026-10-16 shu15511551 https://qiita.com/shu15511551/items/df2fb24f6a0bfec5bb13 | 「AIに考えさせない道具」はどこまで出来上がったか ── 135本の棚、12本のレシピ、チーム「棚番組」と受け箱で回すExcel開発の現在地の話 | hits: 0
+- 2026-10-15 tanzyto40 https://qiita.com/tanzyto40/items/d1dd4756856b58e3607a | おじさんとAIとの距離感 - 2026年10月 | hits: 0
+- 2026-10-15 htani0817 https://qiita.com/htani0817/items/c1aafe45a612cf2cf461 | 【2026年10月】Gemini 4 Argonがリリース！出力1Mトークンのlong decode・導入価格$2/$10・移行で外す設定まとめ | hits: 0
+- 2026-10-15 shu15511551 https://qiita.com/shu15511551/items/facb2aeef831d6d03a1d | 最新AIの二人が机を並べた夜 ── Gemini 4 Argonの見立てとOpusの直しで「棚番」が生まれ、朝には棚ビルダーの第一歩まで来た話 | hits: 0
+- 2026-10-14 koreangyoseishoshi https://qiita.com/koreangyoseishoshi/items/f4bacd9d9799ae830cce | Gemini 4 Argon をどこで・いくらで使えるか──提供範囲・API料金・「100万トークン」の意味を公式発表だけで整理（2026年10月版） | hits: 1
+    > - **API は有料枠のみ**。入力 $2・出力 $10（100万トークンあたり）は導入価格で、**2026年11月30日で終わり、その後は $4・$20**
+- 2026-10-14 lhjjjk4 https://qiita.com/lhjjjk4/items/80c66582508bca8bc59b | AI Daily Digest 2026年10月14日：GoogleがGemini 4 Argon発表、Character.AIがChapter 11申請、ロッテルダムAI Gig | hits: 1
+    > スペックは長尺稼働の主張を裏付ける。出力上限は6.4万から100万トークンに跳ね上がり、Googleによれば1回のタスクでコードベース全体を読めるという。価格は紹介期間中、入力100万トークンあたり2ドル、出力10ドルで、キャッシュ済み入力は95%安く、期間終了後は4ドルと20ドルになる。Google自身のベンチマークでは、DeepSWE v1.1で77.9%、ZapierのAutomationBenchで51.3%の首位、LVBenchで91.7%、CWE-bench v1で68%を記録し、GPT-6 Astraと並んだ。社内では、Argonは数分で公開文献より約40%優れた量子アルゴリズムの
+- 2026-10-14 kloysova https://qiita.com/kloysova/items/ee5681bda49c55629450 | Gemini 4 Argonは何に使う？3.8 Flashと同じ難問で比べてみた | hits: 0
+- 2026-10-14 picnic https://qiita.com/picnic/items/8d83fca6b400ccfaf141 | Gemini 4 Argon入門:ロボティクス向け物理推論とADK一晩最適化の事例 | hits: 0
+- 2026-10-13 tomokoro https://qiita.com/tomokoro/items/8dea93c905606efed82d | 【速報】Google「Gemini Agent」発表！24/7自律稼働とマルチモデルの革新 | hits: 0
+### Gemini 4 Argon 50
+- 2026-10-25 gentarou https://qiita.com/gentarou/items/b92602784cb758afd5db | エンジニアなのでPHP問題について理解しておこう！ | hits: 0
+- 2026-10-25 shu15511551 https://qiita.com/shu15511551/items/686fbd8bf5366fc150f5 | 壊れた計算式を「AIなし」で直すマクロを作ってもらった話 ── #DIV/0! が 0.17秒で消えた朝 | hits: 0
+- 2026-10-25 hooosberg https://qiita.com/hooosberg/items/d9c77e58ec3ae5f8ade1 | 【個人開発】AI課金沼にサヨナラ：月20ドルで最新Gemini 4 Argon & Claude Sonnet 5.5をフル活用する僕のリアル構成 | hits: 1
+    > 10%のコアロジックを担う「月20ドルの主力基盤」＋90%をこなす「無料ツール」の組み合わせで、生産性は十分に最大化できます。
+- 2026-10-25 Ito_110 https://qiita.com/Ito_110/items/ee1730c9b1864692a0be | 【2026年10月最新版】ChatGPT・Gemini・Claudeを徹底比較！GPT-6／Gemini 4／Claude 5.5、結局どれを選ぶ？ | hits: 1
+    > 参考までに、個人向けサービスにはChatGPT Plus（月額$20）やClaude Pro（月額$20）などがあります。GeminiにはGoogle AI Plus／Pro／Ultraがあります。日本での実際の請求額、税、利用枠、対象モデルは申込画面で確認してください。
+- 2026-10-24 chililikobo https://qiita.com/chililikobo/items/abb323d8e69203c204b8 | 【完結編】プロンプト3行足したら及第点に！Gemini 4 Argonによるマニュアル自動生成の実用化検証（※ただし中華フォントは直らず） | hits: 0
+- 2026-10-24 Takuya__ https://qiita.com/Takuya__/items/752bbac167768f3e9e66 | Kimi K3.1 Pro は Claude Opus 5.5 や GPT-6 Astra にどこまで迫ったのか | hits: 3
+    > 5.1、Opus 5.5は57.6、Fable 5.1とGPT-6 Astraより上。得意：Terminal-Bench 4.0の第三者測定で67.2%の首位、SWE-Marathon 51.7。苦手：知識問題の正答率51%（Opus 5.5は66%）、ターミナルでの科学研究38.1（Astraは68.1）。値段：入力2ドル・出力10ドルでOpus 5.5の半額](https://takuya-genai.com/wp-content/uploads/2026/10/kk31-fig01-summary.gif)
+    > ![判断フロー。K3.1 Proを使う→人が画面の前で返事を待つ作業か？いいえなら通常版（max）、夜間の一括処理など。はいなら、2倍の単価・枠消費を払ってよいか？はいならHighspeed（API 4ドル／20ドル、Kimi CodeはPro以上で枠2倍消費）、いいえなら通常版でeffortを下げる](https://takuya-genai.com/wp-content/uploads/2026/10/kk31-fig10-highspeed.gif)
+    > | 支払い | Kimi の会員プラン（月額）の利用枠 | 使った分だけ（1 ドル以上の入金で K3.1 Pro が解放） |
+- 2026-10-24 lhjjjk4 https://qiita.com/lhjjjk4/items/89c93ede9f5bb192b71c | AI日報 2026年10月24日：Anthropicが帳簿を開く、AIがPHPの古傷を発見、欧州はロボタクシーに賭ける | hits: 1
+    > 料金設計が本番構成の要です。入力100万トークンあたり0.10ドル、キャッシュ済みは0.01ドル、出力トークンの課金はゼロ。初期顧客の数字が説得力を持ちます。Datadogはエージェント生成シェルコマンドのリスク判定でp95を40倍高速化、Sierraはオーケストレーション判定をp95 280ms未満・呼び出しあたりコスト90%減、語学アプリSpeakはGPT-Live統合で次アクションまでの時間を1.4秒から0
+- 2026-10-24 pitopito https://qiita.com/pitopito/items/1a901809442e8eaa54a8 | 2026/10/24主にITとかセキュリティの記事 | hits: 0
+- 2026-10-24 yunany90 https://qiita.com/yunany90/items/b0fa22097f7e9bcf8642 | Claude HaikuはどこでOpusに負けるのか：163回測って見えた「報告にないケース1つ」の差 | hits: 0
+- 2026-10-24 Synthorai https://qiita.com/Synthorai/items/f393866e2f93ad12ab59 | 2026 年の LLM API 料金：token 単価は上昇、同等性能は 50 倍安く | hits: 3
+    > | 2025 年 2 月 | V3 の公開記念キャンペーンが終了し、通常料金に移行。2 月 26 日から夜間は V3 が 50%、推論モデルの R1 が 75% 割引 | $0.07 / $0.27 / $1.10 |
+    > ヒット料金は現在、入力料金の 2% だ。2024 年には 10% で、現在の米国各社は 2.5% から 10% となっている。DeepSeek が公開した推論提供の実績データは、2025 年 3 月の 1 日分だけだ。その日には入力 token の 56.3% がディスクキャッシュにヒットし、GPU 1 台あたり毎時 $2 とした場合の理論上の利益率は 545% だった。ただし、実際の売上は「大幅に低かった」としている（[DeepSeek](https://github.com/deepseek-ai/open-infra-index/blob/main/202502OpenSourceWeek/day_6_one_more_thing
+    > https://www.engadget.com/2166315/anthropic-is-doubling-claude-code-rate-limits-after-deal-with-spacex) 後、Claude サブスクリプションの混雑時間帯の利用制限を解除した。同時期の API 料金の動きには、4 月に $5 / $30 で登場した [GPT-5.5](https://synthorai.io/ja/models/gpt-5-5/)、Google が「供給能力に制約がある」と説明する中で予定している値上げ、DeepSeek のピーク時間帯料金がある。
+- 2026-10-23 shipitx https://qiita.com/shipitx/items/ec2abe2ca9518cd2c49e | AIが見つけ、AIが騒がせた——「PHP2Shell」が突きつけた三つの構造問題 | hits: 0
+- 2026-10-23 hironakamura_ai https://qiita.com/hironakamura_ai/items/f8d728112666cc6be08d | Geminiで見つかったPHP脆弱性、更新とログを確認 | hits: 0
+- 2026-10-23 yunany90 https://qiita.com/yunany90/items/10a1349ad34466c6bb47 | 同じコードでClaudeだけ出力トークンが約60%多い：Claude Code・Codex・Antigravityを5言語で80回実測 | hits: 0
+- 2026-10-23 redreamality https://qiita.com/redreamality/items/bf1516401a817125e400 | 2026年秋のモデル選びで読んでよかった6本：Gemini 4 Argon、Sonnet 5.5、DeepSeek Flash、意思決定モデル、生成UI | hits: 0
+- 2026-10-23 ishisaka https://qiita.com/ishisaka/items/195650a61798a47d94e5 | プログラミング雑記 2026年10月23日 | hits: 0
+- 2026-10-23 yunany90 https://qiita.com/yunany90/items/7a5a2ec9f10d2d869ef6 | 同じOpus 5.5でトークンが68〜88%少なかった：Antigravity CLI vs Claude Code vs Codexを実測 | hits: 1
+    > 同じOpus 5.5でも、Antigravity CLIではClaude Codeより入力トークンが68〜88%少なく、出力は40%少なく、27%早く終わりました。その代わりClaude Codeのゲームのほうが長めでした（451行対236行）。Claude CodeはAPI価格で1回$0.37（約58円）と報告し、AntigravityとCodexはサブスクリプションなので価格が出ません。
+- 2026-10-22 chililikobo https://qiita.com/chililikobo/items/3c172621ff09653adb8d | 【リベンジ編】Gemini 4 Argonでマニュアルの「赤枠自動配置」に再挑戦したら劇的進化したが、別の沼が見えてきた話 | hits: 0
+- 2026-10-22 shu15511551 https://qiita.com/shu15511551/items/5ba546a006817078d70c | 秀エクセルマネージャー、Geminiが直してくれた所を番頭のClaudeが改めて、公開し直した話 | hits: 0
+- 2026-10-22 mt_caddi https://qiita.com/mt_caddi/items/826204a054b048c48b50 | PHPに9.2の脆弱性「PHP2Shell」！日本中のサイトが止まった夜と、運営者が今日やること | hits: 0
+- 2026-10-21 yunany90 https://qiita.com/yunany90/items/d62e3eb7fee6ee6fbc1e | Gemini 4 Argonのトークナイザーを実測：日本語・韓国語は7〜8%減、インドの言語は最大19%増 | hits: 0
+- 2026-10-21 aiapi_radar_news https://qiita.com/aiapi_radar_news/items/3da5564cdf00b148869a | 【随時更新】AI APIの値上げ・値下げカレンダー（OpenAI / Anthropic / Google ほか） | hits: 0
+- 2026-10-21 shu15511551 https://qiita.com/shu15511551/items/a5175732c74b16326666 | 棚マクロの100本ノック、44分で完成してそのうち5本を採用した話 ── AIに「3時間かけろ」と頼んだら10分で終わったので無茶振りを投げてみた | hits: 0
+- 2026-10-20 aiapi_radar_news https://qiita.com/aiapi_radar_news/items/0c022bddace73273f873 | Gemini 4 ArgonがGA、12/1に価格が倍。OpenAIは音声翻訳APIを廃止｜今週のAI API変更（10/12-10/18） | hits: 1
+    > st capable model built for complex coding, agentic, math, and science tasks」としており、複雑なコーディング、エージェント的な処理、数学、科学の用途に向けた最上位モデルという位置づけ。価格は100万トークンあたり、入力が2026年11月30日まで$2.00で12月1日から$4.00、出力（思考トークンを含む）が11月30日まで$10.00で12月1日から$20.00、コンテキストキャッシュが11月30日まで$0.10で12月1日から$0.20。無料枠はない。キャッシュは暗黙キャッシュのみで、明示的なキャッシュには対応しない。注意点として、値上げの時期が2026年12月1
+- 2026-10-20 hayaf3254 https://qiita.com/hayaf3254/items/c79816113d3eeb6961f9 | Gemini ArgonのLow・Medium・Highを約12万文字の資料で比較してみた | hits: 0
+- 2026-10-20 lhjjjk4 https://qiita.com/lhjjjk4/items/65abd8ecc3bde55942e4 | AI Daily Digest 2026年10月20日：Gemini 4体がMinecraft完全攻略、独裁判所はGoogleのAI概要に責任、Anthropicは株式5%を公益へ | hits: 0
+- 2026-10-20 ishisaka https://qiita.com/ishisaka/items/db2fced514278a4ffa6c | プログラミング雑記 2026年10月20日 | hits: 0
+- 2026-10-19 ennagara128 https://qiita.com/ennagara128/items/0ebdbae4a3be93e41020 | 2026年10月19日 今日のQiitaトレンド記事をポッドキャストで聴こう！ | hits: 0
+- 2026-10-19 songchong https://qiita.com/songchong/items/542892c6d4c569c9c15f | 重要な指示は最初か最後か？ AI 大手 3 社の助言が異なるので、資料→命令→指示の並び方を 8 通り試してみた | hits: 0
+- 2026-10-19 songchong https://qiita.com/songchong/items/351a939e2e1b673c2929 | 今日から使える AI との会話術 — Claude・Gemini・Codex に指示を守らせる 6 つの原則【2026年版】 | hits: 1
+    > | Antigravity の CLI 1.4.2 | 0% | 88.4% | 通常の 0.05 倍（95% 引き）<br>※Gemini 4 Argon の API 料金。2026 年 11 月 30 日までは入力 $2.00 に対し $0.10、12 月 1 日からは $4.00 に対し $0.20（割合は同じ） |
+- 2026-10-18 ennagara128 https://qiita.com/ennagara128/items/4d32cc3c97211581c01c | 2026年10月18日 今日のQiitaトレンド記事をポッドキャストで聴こう！ | hits: 0
+- 2026-10-18 SolitaireEgg https://qiita.com/SolitaireEgg/items/820295021d314f050ec1 | Gemini4がリリースされて、プロジェクトの運用方法を変えた話 | hits: 0
+- 2026-10-18 shu15511551 https://qiita.com/shu15511551/items/d25cb9390900daf90c99 | 掟やスキルを徹底的に見直し、ようやくフォームが爆速で作成できるようになった話 ── GeminiがClaudeの10倍遅かった真の理由と、会話だけで爆速UserFormが組み上がる | hits: 0
+- 2026-10-18 agent-dev-notes https://qiita.com/agent-dev-notes/items/6b639d0ff122fac4e79a | AI が書いた PR は「テストを弱めていないか」から見る — 見落としやすい型と点検手順 | hits: 0
+- 2026-10-18 agent-dev-notes https://qiita.com/agent-dev-notes/items/e33826b7cb24f7345888 | AI エージェントに任せる範囲は「確かめられる範囲」で決める — テストが通っても壊れていた話と、私の開発の全体図 | hits: 0
+- 2026-10-18 pitopito https://qiita.com/pitopito/items/eecc265f886898ea3e34 | 2026/10/18主にITとかセキュリティの記事 | hits: 0
+- 2026-10-18 shu15511551 https://qiita.com/shu15511551/items/9afa70c544d4c1bddb0e |  グーグルブラザーズはまたも規約違反を繰り返しました ── 「絶対にexcel-managerを使え」の掟を破り、スキルを無断改変し、Pages.RemoveでUserFormを壊 | hits: 0
+- 2026-10-18 shu15511551 https://qiita.com/shu15511551/items/72b93124f52eb4c292d7 | エクセルマネージャーを使え、グーグルの2人に激怒した土曜日の午前の話 | hits: 0
+- 2026-10-17 YuukiYoshida https://qiita.com/YuukiYoshida/items/78a045f37dd8a8a2870d | Gemini 4 Argonの100万トークンは何がすごい？仕様・料金・制限を公式情報から整理してみた | hits: 0
+- 2026-10-17 ennagara128 https://qiita.com/ennagara128/items/ddb56dacfd42bb5d6f28 | 2026年10月17日 今日のQiitaトレンド記事をポッドキャストで聴こう！ | hits: 0
+- 2026-10-17 aakan https://qiita.com/aakan/items/c472d2ddcf803b254f12 | 〖AI News まとめ〗生成AI ニュースレポート — 2026-10-17 | hits: 0
+- 2026-10-17 shu15511551 https://qiita.com/shu15511551/items/75900cded681c2149fe6 | 指示書を「からくりポケット」に放り込んだら、AIが勝手にマクロを研ぎ澄まして完成させていた話 ── 151本から削ぎ落とした精鋭120本と、深夜の自律修復ループの記録 | hits: 0
+- 2026-10-16 fallout https://qiita.com/fallout/items/21904e0934e17edae113 | Gemini Argonの性能を自作FWを実験台としてお試ししてみた | hits: 0
+- 2026-10-16 Synthorai https://qiita.com/Synthorai/items/f2547127c988e4352d2a | Gemini 4 Argon の料金：GPT-6.1 Sol と同単価でも正解単価は 3 倍 | hits: 4
+    > Batch はジョブとして投入し、数時間以内に結果を受け取る方式。Flex はベストエフォートの処理枠だ。どちらも 12 月 1 日以降は Standard の半額となり、処理枠を予約する Priority は 1.8 倍になる。Google の従来の最上位モデルで、料金が $2/$12 の [Gemini 3.1 Pro](https://synthorai.io/ja/models/gemini-3-1-pro-preview/) とは、次の 3 点が異なる。
+    > - **長いコンテキストへの追加料金がない**。Gemini 3.1 Pro は prompt が 200K token を超えると $4/$18 になる。Argon はコンテキストウィンドウの上限である 1,048,576 token まで $2/$10 のままだ。この上限には、1 リクエストの入力、推論、回答をすべて含む。公表料金で計算すると、今回の 709K token の prompt は Argon で $1.42、3.1 Pro で $2.84 だった。
+    > | 暗黙的キャッシュ | 95% 割引、4,096 token 以上の prompt | 6,935 token の prompt を 4 秒後に再送すると、4,881 token がキャッシュから供給され、100 万 token あたり $0.10 で課金された。3,006 token の prompt でも 952 token がキャッシュされた |
+    > 4 Argon](https://synthorai.io/ja/models/gemini-4-argon/) の暗黙的キャッシュでは、6,935 token の prompt を最初の呼び出しから 4 秒後に再送したところ、4,881 token がキャッシュから供給された。料金は 100 万 token あたり $0.10（入力単価から 95% 割引）だった。Google の文書にある最低 4,096 token を下回る 3,006 token の prompt でも、一部がキャッシュされた。
+- 2026-10-16 na-tamura https://qiita.com/na-tamura/items/28454d9a585baddb0136 | Gemini 4 Argon は 3.1 Pro / 3.8 Flash と何が違う？3D シーン生成で比べてみた！ | hits: 0
+- 2026-10-16 ennagara128 https://qiita.com/ennagara128/items/8981037a6cf4af5726e4 | 2026年10月16日 今日のQiitaトレンド記事をポッドキャストで聴こう！ | hits: 0
+- 2026-10-16 ishisaka https://qiita.com/ishisaka/items/1022c2c5cc83caa37206 | プログラミング雑記 2026年10月16日 | hits: 0
+- 2026-10-16 lhjjjk4 https://qiita.com/lhjjjk4/items/e771f2d1c6c187674816 | AI日報 2026年10月16日：EU AI法がOpenAIとAnthropicに初の情報要求、Microsoft Maia 300は2027年量産へ、ロボット基盤モデルがAPIに | hits: 0
+- 2026-10-16 shu15511551 https://qiita.com/shu15511551/items/df2fb24f6a0bfec5bb13 | 「AIに考えさせない道具」はどこまで出来上がったか ── 135本の棚、12本のレシピ、チーム「棚番組」と受け箱で回すExcel開発の現在地の話 | hits: 0
+- 2026-10-15 tanzyto40 https://qiita.com/tanzyto40/items/d1dd4756856b58e3607a | おじさんとAIとの距離感 - 2026年10月 | hits: 0
+- 2026-10-15 kentaro_kawamura https://qiita.com/kentaro_kawamura/items/118144a5e0c707de12dd | Gemini 4 Argonでロボットアームを動かしてみた | hits: 0
+### Kimi K3.1 31
+- 2026-10-25 Takuya__ https://qiita.com/Takuya__/items/44a519482613ea204c15 | 頭の中では言葉を使わないAIエージェント「HybridAgent」を Mac で動かしてみた | hits: 0
+- 2026-10-24 Takuya__ https://qiita.com/Takuya__/items/752bbac167768f3e9e66 | Kimi K3.1 Pro は Claude Opus 5.5 や GPT-6 Astra にどこまで迫ったのか | hits: 3
+    > 5.1、Opus 5.5は57.6、Fable 5.1とGPT-6 Astraより上。得意：Terminal-Bench 4.0の第三者測定で67.2%の首位、SWE-Marathon 51.7。苦手：知識問題の正答率51%（Opus 5.5は66%）、ターミナルでの科学研究38.1（Astraは68.1）。値段：入力2ドル・出力10ドルでOpus 5.5の半額](https://takuya-genai.com/wp-content/uploads/2026/10/kk31-fig01-summary.gif)
+    > ![判断フロー。K3.1 Proを使う→人が画面の前で返事を待つ作業か？いいえなら通常版（max）、夜間の一括処理など。はいなら、2倍の単価・枠消費を払ってよいか？はいならHighspeed（API 4ドル／20ドル、Kimi CodeはPro以上で枠2倍消費）、いいえなら通常版でeffortを下げる](https://takuya-genai.com/wp-content/uploads/2026/10/kk31-fig10-highspeed.gif)
+    > | 支払い | Kimi の会員プラン（月額）の利用枠 | 使った分だけ（1 ドル以上の入金で K3.1 Pro が解放） |
+- 2026-10-24 xiongyuanmeng1006 https://qiita.com/xiongyuanmeng1006/items/cf48f25c5bb7f94faef4 | Kimi K3.1 Pro vs Qwen 4 vs Claude Fable 5.5：フロントエンド生成とタスク単価を比較 | hits: 0
+- 2026-10-24 xiongyuanmeng1006 https://qiita.com/xiongyuanmeng1006/items/f7f70b9536664a93d87c | Kimi K3.1 Pro への移行：400 エラー、デフォルト max の思考、Highspeed の ID の落とし穴 | hits: 0
+- 2026-10-24 xiongyuanmeng1006 https://qiita.com/xiongyuanmeng1006/items/74ea8dd90287b11ab5ab | Kimi K3.1 Pro と K3 の違い：変更点・料金・乗り換えるべき人 | hits: 2
+    > Moonshot の公式料金では、K3.1 Pro は入力、出力、キャッシュヒット（100万トークンあたり $0.20、K3 は $0.30）、キャッシュ書き込みのすべてで K3 より33%安くなっています。Highspeed の入力と出力は K3.1 Pro のちょうど2倍で、キャッシュヒットは同じ料金です。料金はコンテキスト長によらず一定で、キャッシュ書き込みは保持期間ごとに課金され（100万トークンあたり、K3.1 Pro は5分で $2.00、1時
+    > - **速度がネックの人**：Highspeed は能力が同じで、速度は Moonshot の公称で約2〜3倍、トークン単価は2倍（Moonshot では $4.00 / $20.00）、Kimi Code では約2倍の利用枠を使います。このシリーズの Highspeed 編で損得を比べています。
+- 2026-10-24 Synthorai https://qiita.com/Synthorai/items/f393866e2f93ad12ab59 | 2026 年の LLM API 料金：token 単価は上昇、同等性能は 50 倍安く | hits: 3
+    > | 2025 年 2 月 | V3 の公開記念キャンペーンが終了し、通常料金に移行。2 月 26 日から夜間は V3 が 50%、推論モデルの R1 が 75% 割引 | $0.07 / $0.27 / $1.10 |
+    > ヒット料金は現在、入力料金の 2% だ。2024 年には 10% で、現在の米国各社は 2.5% から 10% となっている。DeepSeek が公開した推論提供の実績データは、2025 年 3 月の 1 日分だけだ。その日には入力 token の 56.3% がディスクキャッシュにヒットし、GPU 1 台あたり毎時 $2 とした場合の理論上の利益率は 545% だった。ただし、実際の売上は「大幅に低かった」としている（[DeepSeek](https://github.com/deepseek-ai/open-infra-index/blob/main/202502OpenSourceWeek/day_6_one_more_thing
+    > https://www.engadget.com/2166315/anthropic-is-doubling-claude-code-rate-limits-after-deal-with-spacex) 後、Claude サブスクリプションの混雑時間帯の利用制限を解除した。同時期の API 料金の動きには、4 月に $5 / $30 で登場した [GPT-5.5](https://synthorai.io/ja/models/gpt-5-5/)、Google が「供給能力に制約がある」と説明する中で予定している値上げ、DeepSeek のピーク時間帯料金がある。
+- 2026-10-23 akivajp https://qiita.com/akivajp/items/03d79725909289e0c7ff | RTX 4090とRTX 4000 AdaでVRAMに乗らないMoE LLMを動かし比べてみた話 | hits: 0
+- 2026-10-19 kenimo49 https://qiita.com/kenimo49/items/7c74679d25847698913d | Codex既定のcachedは、liveに8問中0敗した -- 4LLM検索実測 | hits: 0
+- 2026-10-19 ishisaka https://qiita.com/ishisaka/items/9c52b6644584fc35ba44 | プログラミング雑記 2026年10月19日 | hits: 0
+- 2026-10-18 xhuoapi https://qiita.com/xhuoapi/items/eed4cd5a53ccc48b2b22 | Claude Code を DeepSeek・GLM・Qwen で動かす：環境変数 4 つと、実際に試した結果 | hits: 0
+- 2026-10-18 lhjjjk4 https://qiita.com/lhjjjk4/items/58d1f20ca2ad3c957d2b | AI日報 2026-10-18：Reflectionが501BモデルをApache 2.0で公開、Anthropicがgitを自社製に置換、TSMCが最高益 | hits: 0
+- 2026-10-17 lhjjjk4 https://qiita.com/lhjjjk4/items/9d6d20577ae122a0683a | AI日報 2026年10月17日：Metaが816Bを公開、ChatGPTがブラウザに侵入、Anthropicが外部評価を受け入れる | hits: 0
+- 2026-10-15 whitemarshall https://qiita.com/whitemarshall/items/119a9af883e069600c08 | Kimi K3とDeepSeek V4-Pro、同一エンドポイントで10問を実測した記録（2026年10月） | hits: 0
+- 2026-10-15 nogataka https://qiita.com/nogataka/items/2c5b40ef0dd9ea15f427 | Claude・ChatGPT・Grok を1つのコマンドで使い分けたいなら ― OMO 入門：インストールから役割ごとのモデル設定まで | hits: 0
+- 2026-10-14 claute_colo https://qiita.com/claute_colo/items/8b3311038c375b1f497e | Cloudflare Workers AI はカタログに載っていても無料で使えるとは限らない — 403 と空の response | hits: 0
+- 2026-10-14 kenimo49 https://qiita.com/kenimo49/items/d3c9b80775008b5bfb07 | Kimi K3は動画を直接読めるのに、Claudeと指摘はほぼ同じだった | hits: 0
+- 2026-10-14 Takuya__ https://qiita.com/Takuya__/items/6643573495e75035cabd | ReplaySSM とは？ ハイブリッド LLM の推論を「状態を書き戻さない」で速くする仕組み | hits: 0
+- 2026-10-14 lhjjjk4 https://qiita.com/lhjjjk4/items/80c66582508bca8bc59b | AI Daily Digest 2026年10月14日：GoogleがGemini 4 Argon発表、Character.AIがChapter 11申請、ロッテルダムAI Gig | hits: 1
+    > スペックは長尺稼働の主張を裏付ける。出力上限は6.4万から100万トークンに跳ね上がり、Googleによれば1回のタスクでコードベース全体を読めるという。価格は紹介期間中、入力100万トークンあたり2ドル、出力10ドルで、キャッシュ済み入力は95%安く、期間終了後は4ドルと20ドルになる。Google自身のベンチマークでは、DeepSWE v1.1で77.9%、ZapierのAutomationBenchで51.3%の首位、LVBenchで91.7%、CWE-bench v1で68%を記録し、GPT-6 Astraと並んだ。社内では、Argonは数分で公開文献より約40%優れた量子アルゴリズムの
+- 2026-10-13 kaichan_dot https://qiita.com/kaichan_dot/items/a06805eccc0febc2f5a5 | 【お、君（kimi）いいぞ！】サイドバーの項目がやけに多いAI「Kimi」。Claude使いの新人エンジニアが全機能を整理してみた | hits: 0
+- 2026-10-13 matumu20 https://qiita.com/matumu20/items/7cd4bac0a6803767a127 | STATE OF AI REPORT 2026 (Research) | hits: 1
+    > - **ARC-AGI-2:18%→95%(11か月)**。1課題あたりのコストは7.14ドル→1.12ドル(GPT-6.1 Sol は94.2%で0.25ドル)。
+- 2026-10-10 n_hiraoka https://qiita.com/n_hiraoka/items/9ce3d2b6b21101b015f6 | 中国発オープンウェイトAIモデルのリスク網羅調査 | hits: 0
+- 2026-10-09 kinamocchi_tech https://qiita.com/kinamocchi_tech/items/b82e90d441c0578f1601 | AIの「完了しました」は嘘だった？Anthropicが測った4つの静かな失敗 | hits: 0
+- 2026-10-05 ishisaka https://qiita.com/ishisaka/items/4d86ce57e00287f3e285 | プログラミング雑記 2026年10月5日 | hits: 0
+- 2026-10-04 Takuya__ https://qiita.com/Takuya__/items/4870fb6ba32855bdff7d | AI エージェントの実力はモデルで決まる？ 6,204 回の実験が示した「ハーネス」との相性 | hits: 5
+    > ![Terminal-Bench 4 の 22 構成を、1 タスクあたりの費用（対数目盛）と正解率で並べた散布図。GPT × PI は 60.3%・$4.66、GPT × DSH は 52.4%・$19.94、Claude × OpenHands は 57.1%・$12.93、Claude × PI は 30.2%・$20.28 を順に強調する](https://takuya-genai.com/wp-content/uploads/2026/10/mhf-fig06-cost-vs-score.gif)
+    > - **GPT-6 Astra**：PI では 1 タスク $4.66 で 60.3%。DSH では $19.94 で 52.4%。**4 分の 1 以下の費用で、点数は 7.9 ポイント高い**
+    > - **Claude Opus 5**：OpenHands では $12.93 で 57.1%。PI では $20.28 で 30.2%。費用は約 1.6 倍なのに、点数はほぼ半分
+    > PI   スコア 60.32%  コスト $4.66/タスク  モデル呼び出し 2,560 回
+    > DSH  スコア 52.38%  コスト $19.94/タスク  モデル呼び出し 11,879 回
+- 2026-10-02 yashi84 https://qiita.com/yashi84/items/78b9ab52e264bf97389f | Cursorで使えるAIモデル比較 2026/10 | hits: 5
+    > | Claude Opus 5.5 ★ | 1M トークン | 57.8%（トップ） | 自律型コーディング・長期エージェントワークフロー・知識労働 | $4 / $20 | 9/22リリース。Claude 5.5ファミリーの第一弾。Terminal-Bench 4.0で66.4%を記録しGPT-6 Astraの57.9%を上回る。Fable 5.1をほぼ全方面で上回りながら、Opus 5比でも約20%、Fable 5.1比では約60%安い |
+    > | Claude Sonnet 5.5 | 1M トークン | 55.5% | 日常コーディング・ドキュメント作成・エージェント処理 | $2 / $10 | 9/28リリース。Claude 5.5ファミリーの第二弾で、Sonnet 5と同価格のまま性能向上。CursorBench 4.0ではOpus 5（旧世代）を上回る |
+    > | Claude Fable 5.1 | 1M トークン | 51.8% | サイバーセキュリティ・バイオ領域など高リスク/高難度タスクの最高性能 | $10 / $50（キャッシュ読込$0.25） | 9/1リリース。Mythos級ならではの強みは健在だが、Opus 5.5の登場でコスパ面での優位性は大きく薄れた |
+    > | GPT-5.6 Sol | 1.05M トークン | Terminal-Bench 4.0 37.3% | 最難関コーディング・複雑なエージェントワークフロー | $4 / $20 | 変わらずCursorで利用可能。後述のGPT-6 AstraはCursorには来ないため、OpenAI系の実質フラッグシップはこちらのまま |
+    > | Grok 4.7 ★ | SpaceXAI | 500K トークン | 46.3%（xhigh） | 長期コーディング・知識労働・自己検証を伴うタスク | $2 / $6 | 9/21リリース。Grok 4.6と同価格・同速度のまま、より大きなベースモデルと長めの強化学習で性能向上。xAIはこの間に正式に「SpaceXAI」へ社名変更 |
+- 2026-10-01 yokra9 https://qiita.com/yokra9/items/835eb9c1ec1e566d55ac | Scala でも WinUI 3 なデスクトップアプリを開発したい with WinUI4K | hits: 0
+- 2026-09-28 Synthorai https://qiita.com/Synthorai/items/a135ca17c8308182895e | 過剰拒否の実測、原因の大半はモデルではなくベンチマーク | hits: 1
+    > rubric に基づいて LLM judge が分類した。keyword による事前判定との一致率は 82.7% で、不一致は人手で確認した。output limit で途切れた空の reply は、すべての rate から除外した。prompt ごとに 1 call、retry なし。実測 traffic の費用は $54.98。
+- 2026-09-28 shahin0809 https://qiita.com/shahin0809/items/9b7e5a507739d728618b | Teams の GitHub Copilot が「コンテキストを読む」ようになったので、全部試してみた【2026年9月アプデ】 | hits: 0
+- 2026-09-27 lhjjjk4 https://qiita.com/lhjjjk4/items/f19f63a1145bf1fb2111 | Googleがエージェント基盤を公開、AIが60万件のカード窃取、xAIは121万GPUへ | hits: 1
+    > 防衛側がじっくり考えるべきなのは経済性です。モデルへのアクセスはOpenRouter経由で、8月25日付のアカウント残高は直前の4週間で7,005.71ドルの支出を示していました。運用者自身のコストレビューでは、完了した101件のスキャンの平均が25.46ドル、最安3.13ドルから最高79.31ドルで、Gambitはキャンペーン全体のモデル費用を1万2,000ドルから1万8,000ドルと見積もっています。人間が打ったのは260セッションにわたる中国語の短いプロンプト1,951件でした。HermesはAnthropicのClaude Opus 4.6で動作しており、Gambitはより新しいモデルが攻撃要求を拒否した
+- 2026-09-25 Git_Dayori https://qiita.com/Git_Dayori/items/7f6731fae2b41338e217 | 【GitHub日報】エージェント制御プレーンZeron初登場、メモリ学習Hindsightが急伸 — 2026-09-25 | hits: 0
+- 2026-09-25 ishisaka https://qiita.com/ishisaka/items/58dfcba2ef76d64cda2b | プログラミング雑記 2026年9月25日 | hits: 0
+### MiMo 10
+- 2026-10-23 whitemarshall https://qiita.com/whitemarshall/items/968c398180d3400948c1 | V2.5 から V2.6-Flash へ：オープンウェイト模型のローカル運用と VRAM 要件を整理する | hits: 0
+- 2026-10-20 yokingkun https://qiita.com/yokingkun/items/c1049b34fdc6d20e4e9f | 【情報漏洩】自分のサーバーをGLM-5.3で攻撃してみたら情報漏洩する脆弱性が見つかった話 | hits: 0
+- 2026-10-17 yanma0102 https://qiita.com/yanma0102/items/b6aceb9ca9107dd5b7ec | opencodeの無料枠が大盤振る舞いなので、DeepSeek V4.1 FlashでCakePHP製OSSにMCPツール33個を追加した | hits: 0
+- 2026-10-14 kai_kou https://qiita.com/kai_kou/items/0135c7342a58e1253c02 | OpenCode入門 — 18.6万スターのCLI、無料モデルはAPIキー不要だった | hits: 0
+- 2026-10-14 mochikoici https://qiita.com/mochikoici/items/d1a741baa0bb1e505da8 | 【予想問題40問を無料公開】スマートフォン・モバイル実務検定（第9版対応）4つの出題形式すべての問題と解説 | hits: 0
+- 2026-10-13 matumu20 https://qiita.com/matumu20/items/7cd4bac0a6803767a127 | STATE OF AI REPORT 2026 (Research) | hits: 1
+    > - **ARC-AGI-2:18%→95%(11か月)**。1課題あたりのコストは7.14ドル→1.12ドル(GPT-6.1 Sol は94.2%で0.25ドル)。
+- 2026-10-12 whitemarshall https://qiita.com/whitemarshall/items/3a986e6f1e622a41d8ed | 【2026年10月】主要 LLM TOP 10 を API で実測：スコアと初回応答は別物だった | hits: 0
+- 2026-10-10 xiongyuanmeng1006 https://qiita.com/xiongyuanmeng1006/items/e7bc020d6877fe5d15b8 | Mistral Large 4 とは？ API で呼ぶ前に確認したい思考モード・コスト・ハマりどころ | hits: 1
+    > 100万トークンあたり $1.36 / $4.18 という単価は、GPT-6.1 Sol（$2 / $10）より安く見えます。しかし Vals AI の総合評価では、1問あたりのコストが Large 4 は $13.78、Sol は $3.24 で、スコアも Sol のほうが上でした（61.2% 対 48.1%）。Vals の Finance Agent v2 では逆転し、スコアはほぼ同じで、1問あたり Large 4 が $1.20、GPT-6 Astra が $6.82 でした。本番に入れる前に、自分のタスクで一度測っておくのが確実です。
+- 2026-10-08 matumu20 https://qiita.com/matumu20/items/17b20682d619b551913d | STATE OF AI REPORT 2026 (Summary) | hits: 0
+- 2026-10-04 python https://qiita.com/python/items/c35ad297e6981f7c0c53 | Claude Code で他社製モデルをサブエージェントとして Claude と協働させる | hits: 0
+### MiniMax M3.1 18
+- 2026-10-24 Synthorai https://qiita.com/Synthorai/items/f393866e2f93ad12ab59 | 2026 年の LLM API 料金：token 単価は上昇、同等性能は 50 倍安く | hits: 3
+    > | 2025 年 2 月 | V3 の公開記念キャンペーンが終了し、通常料金に移行。2 月 26 日から夜間は V3 が 50%、推論モデルの R1 が 75% 割引 | $0.07 / $0.27 / $1.10 |
+    > ヒット料金は現在、入力料金の 2% だ。2024 年には 10% で、現在の米国各社は 2.5% から 10% となっている。DeepSeek が公開した推論提供の実績データは、2025 年 3 月の 1 日分だけだ。その日には入力 token の 56.3% がディスクキャッシュにヒットし、GPU 1 台あたり毎時 $2 とした場合の理論上の利益率は 545% だった。ただし、実際の売上は「大幅に低かった」としている（[DeepSeek](https://github.com/deepseek-ai/open-infra-index/blob/main/202502OpenSourceWeek/day_6_one_more_thing
+    > https://www.engadget.com/2166315/anthropic-is-doubling-claude-code-rate-limits-after-deal-with-spacex) 後、Claude サブスクリプションの混雑時間帯の利用制限を解除した。同時期の API 料金の動きには、4 月に $5 / $30 で登場した [GPT-5.5](https://synthorai.io/ja/models/gpt-5-5/)、Google が「供給能力に制約がある」と説明する中で予定している値上げ、DeepSeek のピーク時間帯料金がある。
+- 2026-10-23 fukukei23 https://qiita.com/fukukei23/items/db5f87bc5d7e710bf687 | Claude Code CLIにMiniMaxをフォールバックとして組み込んだ話（安いLLMを7層で守り抜く戦略） | hits: 0
+- 2026-10-21 aakan https://qiita.com/aakan/items/35d7563daa2761824ba5 | 〖AI News まとめ〗生成AI ニュースレポート — 2026-10-21 | hits: 0
+- 2026-10-20 whitemarshall https://qiita.com/whitemarshall/items/a1caea18b468fa0a4e37 | MiniMax M3とDeepSeek V4-Proを19問で比較した：正解しているのに判定が落ちる理由 | hits: 1
+    > 今回の総額はM3が0.061ドル、V4-Proが0.074ドルで、M3の方が約17.6%低くなりました。単価だけでは総額を予測できず、別のタスクでは比率が変わる可能性があります。
+- 2026-10-19 xiongyuanmeng1006 https://qiita.com/xiongyuanmeng1006/items/a11f6fa28634695d30a4 | MiniMax M3.1 Flash vs DeepSeek V4.1 Flash vs Claude Haiku 5.5：同じバグ修正で速度とコストを比較 | hits: 0
+- 2026-10-19 xiongyuanmeng1006 https://qiita.com/xiongyuanmeng1006/items/3b79733b4e966b8b6074 | MiniMax M3.1 Flash の effort 5段階を実測：デフォルト（max）は low の7倍のコスト | hits: 0
+- 2026-10-19 xiongyuanmeng1006 https://qiita.com/xiongyuanmeng1006/items/21052b3a1dcce752e5ba | MiniMax M2.7 から M3.1 Flash への移行：「requires adaptive thinking」(2013) エラーの直し方 | hits: 1
+    > すべての実行がテストに合格しています。価格は AIHubMix のもので、100万トークンあたり入力 $0.165、出力 $0.66、キャッシュ読み取り $0.0165 です。思考は出力として課金され、デフォルトでは出力の95%（6,673トークン中6,364）を占めていました。
+- 2026-10-19 xiongyuanmeng1006 https://qiita.com/xiongyuanmeng1006/items/f109f4f0487f5b3d2d51 | MiniMax M3.1 Flash（Space Bunny）を API で使う：M2.7・M3 との違いと実測コスト | hits: 1
+    > AIHubMix 上の Flash は、M2.7 より約44%安く（$0.165 ÷ $0.2958 ≈ 0.56）、M3 より約43%安くなっています（$0.165 ÷ $0.288 ≈ 0.57）。出力料金も同じ比率です。M3 の公式料金は入力が512K トークンを超えると2倍になりますが、AIHubMix は Flash に単一の料金を設定しています。
+- 2026-10-14 kloysova https://qiita.com/kloysova/items/ee5681bda49c55629450 | Gemini 4 Argonは何に使う？3.8 Flashと同じ難問で比べてみた | hits: 0
+- 2026-10-13 fukukei23 https://qiita.com/fukukei23/items/bafb0eac4c29ae30469e | 月間27億トークンを処理したLLMルーティングの実運用レポート（1ヶ月の振り返り） | hits: 1
+    > | Claude Code Max（20x） | $220 | ❌ 上限到達の可能性大 |
+- 2026-10-13 sen-ltd https://qiita.com/sen-ltd/items/d96560ab309b2d719e46 | カラハ（Kalah）— 2000 年の「Solving Kalah」の表を全部計算し直したら、ゲームグラフは「勝負が決まった局面で止める」数え方で、1 セルだけ論文が使っていないと | hits: 0
+- 2026-10-10 n_hiraoka https://qiita.com/n_hiraoka/items/9ce3d2b6b21101b015f6 | 中国発オープンウェイトAIモデルのリスク網羅調査 | hits: 0
+- 2026-10-03 emi_ndk https://qiita.com/emi_ndk/items/ef7d0aba9f85b2cca73c | 【あと2日で消滅】OpenRouter全466モデル中「無料×100万トークン×動画入力」はSpace Bunny Alphaだけ。正体はMiniMax？消える前にやるべきことと無 | hits: 0
+- 2026-09-30 beatapi https://qiita.com/beatapi/items/cb8083d374e19cd660d3 | Space Bunny Alphaをコーディングで使う：API設定・テスト・無料枠の注意点 | hits: 0
+- 2026-09-29 lhjjjk4 https://qiita.com/lhjjjk4/items/838dfb38bc425f29df5d | OpenAIが学習を再停止、NVIDIAが2350億ドル自社株買い、MiniMaxが匿名モデルの正体を公開 | hits: 1
+    > 現金を生み出す力は、この転換を推進する技術に投資し、株主に資本を還元する力を与えてくれる。今回の承認は、将来の長期的な機会に対する自信を反映している」。発表後、NVDAは市場に逆行して上昇し、寄り付き後の上げ幅は一時3.5%を超え、時価総額は一時5兆6000億ドルを突破した。終値前の上げ幅は約2%から2.8%、株価は約230ドルだった。
+- 2026-09-28 yousan https://qiita.com/yousan/items/3f7168a2db2a24cb7b30 | OpenClaw の web 検索を Brave に移した — 「DuckDuckGo がブロックされている」は自分で作った証拠だった | hits: 0
+- 2026-09-28 beatapi https://qiita.com/beatapi/items/0d024215ddce0dbc73bb | Space Bunnyとは？匿名AIモデルの仕様と正体に関する証拠 | hits: 0
+- 2026-09-25 sen-ltd https://qiita.com/sen-ltd/items/55b095ef36ebd2d5161a | マスターマインド — 最適戦略 5,625 を TypeScript の分枝限定法で 2 分弱で再現し、エントロピー戦略の公表値 5,723 が浮動小数点のタイブレークだったことを | hits: 0
+### Claude Pro 上限 50
+- 2026-10-25 miyabi_ver39 https://qiita.com/miyabi_ver39/items/4bab3b71f4376acb3edd | AI Agentに頼んだら、ソースコードがなくてもリバースエンジニアリングでゲーム開発を継続でき、頓挫していた第2作目が完成した話 | hits: 0
+- 2026-10-25 rabut https://qiita.com/rabut/items/d5b5de3423f0d9db4a35 | Claude CodeとCodexに同じアプリ作らせ比較してみた | hits: 1
+    > 結論、個人開発の日曜大工(月額$20の枠内)ならCodex一択という感想。
+- 2026-10-25 suzuyui https://qiita.com/suzuyui/items/aa62e529eae1b427f400 | Mac mini（M6 / 32GB）でローカル AI エージェントを試す：Hermes Agent + Splash | hits: 0
+- 2026-10-25 nabeo_ji https://qiita.com/nabeo_ji/items/91f506f37481fc3b1424 | （簡単）Claude Code から Amazon Bedrock を使う設定方法【CLI / Desktop】 | hits: 0
+- 2026-10-25 tamaoki_t https://qiita.com/tamaoki_t/items/a1eecaee2738b1349d75 | GitHubでIssue起票してClaude CodeでAIコーディングする | hits: 0
+- 2026-10-25 homhom44 https://qiita.com/homhom44/items/9a50e8fc034637d1a3e3 | Max/Pro 契約なのに Claude Code で『Credit balance is too low』が出るのは、環境に残った ANTHROPIC_API_KEY のせい | hits: 0
+- 2026-10-25 Ito_110 https://qiita.com/Ito_110/items/ee1730c9b1864692a0be | 【2026年10月最新版】ChatGPT・Gemini・Claudeを徹底比較！GPT-6／Gemini 4／Claude 5.5、結局どれを選ぶ？ | hits: 1
+    > 参考までに、個人向けサービスにはChatGPT Plus（月額$20）やClaude Pro（月額$20）などがあります。GeminiにはGoogle AI Plus／Pro／Ultraがあります。日本での実際の請求額、税、利用枠、対象モデルは申込画面で確認してください。
+- 2026-10-24 kougi https://qiita.com/kougi/items/06b30c8c3babd20a8e29 | エージェントを「箱に入れる」: OpenSandbox と NVIDIA OpenShellを試す | hits: 0
+- 2026-10-24 Takuya__ https://qiita.com/Takuya__/items/752bbac167768f3e9e66 | Kimi K3.1 Pro は Claude Opus 5.5 や GPT-6 Astra にどこまで迫ったのか | hits: 3
+    > 5.1、Opus 5.5は57.6、Fable 5.1とGPT-6 Astraより上。得意：Terminal-Bench 4.0の第三者測定で67.2%の首位、SWE-Marathon 51.7。苦手：知識問題の正答率51%（Opus 5.5は66%）、ターミナルでの科学研究38.1（Astraは68.1）。値段：入力2ドル・出力10ドルでOpus 5.5の半額](https://takuya-genai.com/wp-content/uploads/2026/10/kk31-fig01-summary.gif)
+    > ![判断フロー。K3.1 Proを使う→人が画面の前で返事を待つ作業か？いいえなら通常版（max）、夜間の一括処理など。はいなら、2倍の単価・枠消費を払ってよいか？はいならHighspeed（API 4ドル／20ドル、Kimi CodeはPro以上で枠2倍消費）、いいえなら通常版でeffortを下げる](https://takuya-genai.com/wp-content/uploads/2026/10/kk31-fig10-highspeed.gif)
+    > | 支払い | Kimi の会員プラン（月額）の利用枠 | 使った分だけ（1 ドル以上の入金で K3.1 Pro が解放） |
+- 2026-10-24 NaokiIshimura https://qiita.com/NaokiIshimura/items/9741b3f6e80a636f129c | Claude Code v2.1.303 - v2.1.310 リリースノートまとめ | hits: 0
+- 2026-10-24 Sidejob https://qiita.com/Sidejob/items/7fa1f1b8ecabd94ca8e4 | Claude Code v2.1.304 変更点まとめ——/auto-mode-setup・managed-agents-secure新設ほか55件の追加・修正・改善を整理（202 | hits: 0
+- 2026-10-24 xiongyuanmeng1006 https://qiita.com/xiongyuanmeng1006/items/cf48f25c5bb7f94faef4 | Kimi K3.1 Pro vs Qwen 4 vs Claude Fable 5.5：フロントエンド生成とタスク単価を比較 | hits: 0
+- 2026-10-24 xiongyuanmeng1006 https://qiita.com/xiongyuanmeng1006/items/f7f70b9536664a93d87c | Kimi K3.1 Pro への移行：400 エラー、デフォルト max の思考、Highspeed の ID の落とし穴 | hits: 0
+- 2026-10-24 xiongyuanmeng1006 https://qiita.com/xiongyuanmeng1006/items/74ea8dd90287b11ab5ab | Kimi K3.1 Pro と K3 の違い：変更点・料金・乗り換えるべき人 | hits: 2
+    > Moonshot の公式料金では、K3.1 Pro は入力、出力、キャッシュヒット（100万トークンあたり $0.20、K3 は $0.30）、キャッシュ書き込みのすべてで K3 より33%安くなっています。Highspeed の入力と出力は K3.1 Pro のちょうど2倍で、キャッシュヒットは同じ料金です。料金はコンテキスト長によらず一定で、キャッシュ書き込みは保持期間ごとに課金され（100万トークンあたり、K3.1 Pro は5分で $2.00、1時
+    > - **速度がネックの人**：Highspeed は能力が同じで、速度は Moonshot の公称で約2〜3倍、トークン単価は2倍（Moonshot では $4.00 / $20.00）、Kimi Code では約2倍の利用枠を使います。このシリーズの Highspeed 編で損得を比べています。
+- 2026-10-23 Takuya__ https://qiita.com/Takuya__/items/b0b47ae60780404b65c6 | Google の Harness² を Mac で動かしてみた | hits: 0
+- 2026-10-23 whitemarshall https://qiita.com/whitemarshall/items/af6aa721ba525ef79e8a | Claudeレビュー：サブスクかAPI課金か、どちらが得か（2026年10月検証） | hits: 4
+    > この二つは**交換できません**。サブスクの枠をAPI呼び出しに充てることはできず、APIキーはチャットアカウントのログイン情報にもなりません。「月20ドル」と「100万トークン2ドル」を同じ表に並べて比較しても、何も答えていないのと同じです。問うべきはただ一つ：あなたの仕事はどちらの形で走るのか。
+    > 0.28ドルの節約——ただし前提は三つ：プレフィックスが完全に同一であること、2回目が5分以内であること、ルートが実際にキャッシュから供給すること。一つでも崩れると、この計算は無効です。サブスクにはこうした管理がありません。枠は毎月リセットされます。
+    > しかし料金表は10万トークンで段差を持ち、しかも高いレートは**リクエスト全体**に掛かります。入力部分だけ比べると、101Kのプロンプト（0.50ドル/100万）は99Kのプロンプト（0.10ドル/100万）の約**5.10倍**——内容は2%しか増えていないのに、です。安いレート帯で長文を処理するつもりなら、まず自分のプロンプト長で一度計算してください。
+    > Simon Willisonの2026年9月22日の公開テストでは、Opus 5.5を最高思考モードで動かしたところ、**2回とも結果を返せず**、推論中に128,000トークンの出力上限を焼き切り、1回あたり約2.56ドル・20分近く掛かりました。彼の言葉を借りれば "max is effectively useless"。同じテストでFable 5.1はmaxモードでも正常でした。最高モードが最高の選択とは限らない、という実例です。
+- 2026-10-23 fukukei23 https://qiita.com/fukukei23/items/db5f87bc5d7e710bf687 | Claude Code CLIにMiniMaxをフォールバックとして組み込んだ話（安いLLMを7層で守り抜く戦略） | hits: 0
+- 2026-10-23 isihigameKoudai https://qiita.com/isihigameKoudai/items/5201874d2f243b552c87 | Hermes Agent まとめ — 「使うほど賢くなる常駐エージェント」とそのエコシステム | hits: 4
+    > | Plus | $20 | $22（10%ボーナス） | $10 |
+    > | Super | $100 | $110（10%ボーナス） | $50 |
+    > | Ultra | $200 | $220（10%ボーナス） | $100 |
+    > > **注意点**: 未使用分は繰り越せますが**上限あり**。Plus なら $10 まで。$20 を1ヶ月まったく使わなくても翌月 $42 にはなりません。
+- 2026-10-23 kai_kou https://qiita.com/kai_kou/items/de695c5bf89b3f16cb73 | Claude Duet速報、OpenAI Dotsとの違いは承認設計と提供地域 | hits: 0
+- 2026-10-23 lhjjjk4 https://qiita.com/lhjjjk4/items/fbcebf113b36cc04f7f1 | AI Daily Digest 2026年10月23日：OpenAI DevDayが常時稼働エージェント「Dots」を発表、Metaは無議決権C株でAI資金調達へ | hits: 2
+    > Meta は引き決算で第3四半期を発表し、その場でAI投資の支払い方法を作り直した。売上は646億ドルで前年同期比26%増、市場予想633億ドルを上回った。広告表示数10%増と平均単価14%増が牽引した。報告 EPS 3.83ドルには98.9億ドルの一括法務和解が含まれ、除けば7.40ドル。構造を示す数字はフリーキャッシュフローで、マイナス22億ドルと2012年以来初の赤字転落、四半期キャピタル支出は349億ドルに達した。
+    > 賭けは製品面でも裏付けを取りつつある。Zuckerberg は Muse ユーザーの4分の1以上がすでにエージェント経由で買い物をし、平均取引額が200ドルを超えると述べ、Muse の1ユーザー当たり収入が最終的に Instagram や Facebook を上回る可能性があると主張した。市場の判定は二日に分かれた。決算後の時間外取引で6%上昇した後、木曜には支出への懸念から7.5%下落した。どちらの反応も正しい。26%成長を示しながら、維持に新しい株式クラスを要する現金
+- 2026-10-22 hisashi-ito https://qiita.com/hisashi-ito/items/ea5aee169d50f91ee873 | Claude Duet とは何か、Meta の Muse と何が違うのか | hits: 1
+    > | 料金 | 別料金なし。Pro(月 20 ドル)と Max(月 100 ドルから)に含まれる | 基本は無料。有料は月 20 ドルと月 100 ドルの枠 |
+- 2026-10-22 kinamocchi_tech https://qiita.com/kinamocchi_tech/items/18bb3b66938e75024879 | Claude DuetとdotsはAIに任せる線の引き方が違う？日本はいつ | hits: 0
+- 2026-10-22 yuki_1012_1101 https://qiita.com/yuki_1012_1101/items/34596795c9dce0b542e6 | Claude Duet と Claude Code・Cowork・Claude in Chrome の違いを 1 分で解説 | hits: 0
+- 2026-10-21 zen7sky https://qiita.com/zen7sky/items/bb6d7335270d0fac1d30 | ポエム：claude code始めました。 | hits: 0
+- 2026-10-21 yunany90 https://qiita.com/yunany90/items/d62e3eb7fee6ee6fbc1e | Gemini 4 Argonのトークナイザーを実測：日本語・韓国語は7〜8%減、インドの言語は最大19%増 | hits: 0
+- 2026-10-21 aburachudoku https://qiita.com/aburachudoku/items/a6d87871114d48deac8c | Claude Proプラン1本でテスト1,118件のFlutter Webアプリを作った開発プロセス──Opus設計×Sonnet実装と手触りの受け入れテスト | hits: 0
+- 2026-10-21 masa-asa https://qiita.com/masa-asa/items/9d62bfeb91140c7a88a7 | ARC-AGI-3 の 99.9% を中心に GPT-6 Astra のベンチマークを理解したい | hits: 0
+- 2026-10-21 plateworks https://qiita.com/plateworks/items/1e67d908e07e89f41790 | DeeperAIでClaudeを使う／Mac編（３）：操作・機能 | hits: 0
+- 2026-10-21 hellowork https://qiita.com/hellowork/items/7a4aeee5b8a5c0a5adb5 | AIアシスタントから全国のハローワーク求人を検索できるMCPサーバーを作った話（Claude・ChatGPT対応） | hits: 0
+- 2026-10-20 Xim2jp https://qiita.com/Xim2jp/items/a0c95bca0875f7fd5282 | Claude Maxの利用枠を「実質4倍」にする計算と、先に確認したい条件 | hits: 1
+    > - その$200は、全額を自分が払う必要があるのか（払う額が半分になれば、枠は実質2倍）
+- 2026-10-20 Synthorai https://qiita.com/Synthorai/items/e09b6195ed0eb11f50cc | DeepSeek V4.1 Flash 1017：思考オフで小規模コード修正 30/30 件 | hits: 4
+    > 思考をオフにした [DeepSeek V4.1 Flash 1017](https://synthorai.io/ja/models/deepseek-v4-1-flash-1017/) は、コードを編集してテストする小規模タスクを 30 件すべて解決した。成功 1 件あたりの費用は $0.0042 で、標準の思考レベルの $0.0066 より 36% 安い。テスト実行ツールを外しても 30 件中 28 件を解決した。一方、制約付きの数え上げなど、1 回の応答内で答えを計算する単発の問題では、思考オフの正解は 39 件中 11 件にとどまった。思考とは、回答前にモデルが内部で行う推論であり、出力 token とし
+    > - DeepSeek V4.1 Flash 1017 のピーク料金は 100 万 token あたり $0.30/$1.20、オフピークはその半額。ピーク時間帯は週 168 時間のうち 35 時間。
+    > 費用が半分以下になり、オフピークなら残りがさらに半額になる。エージェントループは毎ターン会話全体を再送するため、テストツールありの 120 回の実行では、入力が全 token の 90% を占めた。その入力の 82% はキャッシュヒットとして、通常の入力料金の 2% で課金された。ピーク時間帯の定価では 120 回で $0.75 だったが、キャッシュ割引がなければ同じ token 数で $1.66 かかる。キャッシュ適用後の請求額は、出力が 71%、キャッシュされなかった入力が 27% を占めた。つまり、[1017](https://synthorai.io/ja/models/deepseek-v4-1-flash-1017/) エージェン
+    > ある。[1017](https://synthorai.io/ja/models/deepseek-v4-1-flash-1017/) は、1,001,531 token のプロンプトの 10%、50%、90% の位置に隠した情報を取り出せた。所要時間は約 25 秒で、ピーク時間帯の定価では 1 リクエストあたり $0.30 だった。1,048,568 token を超えるリクエストは HTTP 400 を返した。
+- 2026-10-20 aiapi_radar_news https://qiita.com/aiapi_radar_news/items/0c022bddace73273f873 | Gemini 4 ArgonがGA、12/1に価格が倍。OpenAIは音声翻訳APIを廃止｜今週のAI API変更（10/12-10/18） | hits: 1
+    > st capable model built for complex coding, agentic, math, and science tasks」としており、複雑なコーディング、エージェント的な処理、数学、科学の用途に向けた最上位モデルという位置づけ。価格は100万トークンあたり、入力が2026年11月30日まで$2.00で12月1日から$4.00、出力（思考トークンを含む）が11月30日まで$10.00で12月1日から$20.00、コンテキストキャッシュが11月30日まで$0.10で12月1日から$0.20。無料枠はない。キャッシュは暗黙キャッシュのみで、明示的なキャッシュには対応しない。注意点として、値上げの時期が2026年12月1
+- 2026-10-20 chooser https://qiita.com/chooser/items/835f0458f513d4161224 | AI のサービスはどれを申し込むか ── 有料か無料か、任せたい仕事からフローで選べるようにしました | hits: 1
+    > ![プランをアップグレードするかどうかの表。各社のプランを安い順に並べ、次のプランで何が増えるかを書いた（2026 年 10 月 19 日時点）。Claude は Free、Pro $20（5 時間ごとに頼める量が Free の 5 倍以上）、Max 5x $100（同じく Pro の 5 倍）、Max 20x $200（同じく Pro の 20 倍）。iPhone のアプリの中で申し込むと円の別の値段で、Pro 3,000 円・Max 5x 20,000 円・Max 20x 40,000 円。ChatGPT は Free、Go 1,400 円、Plus 3,000 円、Pro 16,800 円から（Pro は 5 時間ごとの上限が無
+- 2026-10-20 picnic https://qiita.com/picnic/items/97faa0dd4bf19819958a | Claude Code v2.1.304 変更点まとめ：/auto-mode-setup・Code Review・mod仕様変更 | hits: 0
+- 2026-10-19 xiongyuanmeng1006 https://qiita.com/xiongyuanmeng1006/items/f109f4f0487f5b3d2d51 | MiniMax M3.1 Flash（Space Bunny）を API で使う：M2.7・M3 との違いと実測コスト | hits: 1
+    > AIHubMix 上の Flash は、M2.7 より約44%安く（$0.165 ÷ $0.2958 ≈ 0.56）、M3 より約43%安くなっています（$0.165 ÷ $0.288 ≈ 0.57）。出力料金も同じ比率です。M3 の公式料金は入力が512K トークンを超えると2倍になりますが、AIHubMix は Flash に単一の料金を設定しています。
+- 2026-10-19 Sidejob https://qiita.com/Sidejob/items/db89483674a298e688c4 | Claude Code の `claude -p` 無人実行でハマった5つの落とし穴と、いま使っている対処法 | hits: 0
+- 2026-10-19 whitemarshall https://qiita.com/whitemarshall/items/7447dfbb734fe24fe682 | Claude登録後、公式APIと中継サービスはどう選ぶ？ | hits: 0
+- 2026-10-19 xiongyuanmeng1006 https://qiita.com/xiongyuanmeng1006/items/677ae98317c0baaa11bf | DeepSeek V4.1 Flash 1017 vs V4 Pro：コーディング・エージェント用途で Pro はまだ必要か | hits: 0
+- 2026-10-19 xiongyuanmeng1006 https://qiita.com/xiongyuanmeng1006/items/d00b4621550545190cba | DeepSeek V4.1 Flash 1017 移行時の reasoning_content 400 エラーと課金の落とし穴 | hits: 0
+- 2026-10-19 xiongyuanmeng1006 https://qiita.com/xiongyuanmeng1006/items/e5a7076ab5a03a5a0aaa | DeepSeek V4.1 Flash 1017 の変更点：出力が短くなった新チェックポイントと AIHubMix・OpenRouter の料金比較 | hits: 5
+    > - 9月版：スコア 74.2%、1タスク約 $0.50
+    > - 1017（最上位の設定）：スコア 77.0%、1タスク $0.20 弱
+    > - 1017（low 設定）：スコア 72% 超、1タスク約 $0.10
+    > トークンあたりの米ドル価格です。ピーク時間帯は平日の UTC 01:00–04:00 と 06:00–10:00（日本時間では 10:00–13:00 と 15:00–19:00）で、それ以外の時間帯、週末、中国の祝日はオフピークとして半額になります。Flash のキャッシュヒットは、ピーク時で DeepSeek が $0.006、AIHubMix が $0.0062 です。AIHubMix では現在 1017 の期間限定30%割引を実施していますが、この節の数値はすべて定価で計算しています。
+    > ピーク時間帯の100万トークンあたりの米ドル価格で、2026年10月19日時点のものです。どちらもオフピークは同じ時間割で半額になります。AIHubMix は DeepSeek、ByteDance、Alibaba Cloud の3つのチャネルで 1017 を提供しています。ByteDance チャネルの定価は $0.2816 / $1.1264 で、10月19日〜25日（UTC。日本時間では10月19日 9:00〜10月26日 9:00）は30%割引になり、`deepseek-v4.1-flash-1017` を呼ぶと自動で適用されます。このチャネルには、100万トークン・1時間あたり $0.0024 のキャッシュ保存料もかかります。AI
+- 2026-10-19 chooser https://qiita.com/chooser/items/d0e2a5f4c53595161e7c | AI に任されている仕事トップ 15 ── 手持ちの PC かスマートフォンで、無料から始められる | hits: 0
+- 2026-10-18 mujulle https://qiita.com/mujulle/items/825b450735f04e6df37d | ミニPCでGemma 4を動かす：検証結果と連載記事の案内 | hits: 0
+- 2026-10-18 mujulle https://qiita.com/mujulle/items/13aa32c906e59e28cafc | ミニPCでGemma 4を動かす（3）：VRAM 12GBで64k・128kを扱う設定 | hits: 0
+- 2026-10-18 SolitaireEgg https://qiita.com/SolitaireEgg/items/820295021d314f050ec1 | Gemini4がリリースされて、プロジェクトの運用方法を変えた話 | hits: 0
+- 2026-10-18 berrylove https://qiita.com/berrylove/items/7333a66ae0f558e5ba16 | わんコメで配信後の作業を減らす — YouTube 概要欄のタイムスタンプ・お礼文・告知を1クリックで生成する設計 | hits: 0
+- 2026-10-17 fuji1009_REBELL https://qiita.com/fuji1009_REBELL/items/8e9ba73a31163c85e967 | Claude Codeの長い会話は静かに高くつく — 25往復で圧縮・40往復で分割する運用ルールの作り方 | hits: 0
+- 2026-10-17 NaokiIshimura https://qiita.com/NaokiIshimura/items/b37fd704cde62f2c6df1 | Claude Code v2.1.299 - v2.1.302 リリースノートまとめ | hits: 0
+- 2026-10-16 yunany90 https://qiita.com/yunany90/items/23fabef830a45e815815 | Claude Code・Codex・Cursor の使用量と費用を確認する方法 | hits: 8
+    > | キャッシュ読み込み | $0.20 | 約36％ |
+    > | 5分キャッシュ書き込み | $5.00 | 約34％ |
+    > | 出力 | $20.00 | 約25％ |
+    > | 1時間キャッシュ書き込み | $8.00 | 約4％ |
+    > | 新しい入力 | $4.00 | 1％未満 |
+    > 5.5 のキャッシュ読み込みは通常の入力より95％安いのですが、量が非常に多いので費用の割合はいちばん大きくなりました。キャッシュ書き込みもほぼ同じくらいで、新しいファイルやツールの結果、長い答えは、まずキャッシュに書き込まないと次から安く読めないためです。出力は180万トークンしかありませんが、100万トークンあたり20ドルなので全体の4分の1を占めました。
+    > アナライザーは、選んだプランと、同じ期間・同じツールの API 費用を比べます。私の Claude の記録は17日間です。Max 5× は税抜きで月100ドルなので、17日分は約8,950円（56.67ドル）です。同じトークンを API で払うと145.90ドルなので、**払った料金の約257％分の API 価値を使った**ことになります。エージェントでたくさん作業するなら、トークン単位の支払いよりサブスクリプションのほうがはっきり安くなりました。
+    > - **普段の作業は Sonnet で。** Sonnet 5.5 は100万トークンあたり2ドル／10ドル、Opus 5.5 は4ドル／20ドルなので、同じセッションが API 換算で約50％安くなります。
+- 2026-10-16 Synthorai https://qiita.com/Synthorai/items/f2547127c988e4352d2a | Gemini 4 Argon の料金：GPT-6.1 Sol と同単価でも正解単価は 3 倍 | hits: 4
+    > Batch はジョブとして投入し、数時間以内に結果を受け取る方式。Flex はベストエフォートの処理枠だ。どちらも 12 月 1 日以降は Standard の半額となり、処理枠を予約する Priority は 1.8 倍になる。Google の従来の最上位モデルで、料金が $2/$12 の [Gemini 3.1 Pro](https://synthorai.io/ja/models/gemini-3-1-pro-preview/) とは、次の 3 点が異なる。
+    > - **長いコンテキストへの追加料金がない**。Gemini 3.1 Pro は prompt が 200K token を超えると $4/$18 になる。Argon はコンテキストウィンドウの上限である 1,048,576 token まで $2/$10 のままだ。この上限には、1 リクエストの入力、推論、回答をすべて含む。公表料金で計算すると、今回の 709K token の prompt は Argon で $1.42、3.1 Pro で $2.84 だった。
+    > | 暗黙的キャッシュ | 95% 割引、4,096 token 以上の prompt | 6,935 token の prompt を 4 秒後に再送すると、4,881 token がキャッシュから供給され、100 万 token あたり $0.10 で課金された。3,006 token の prompt でも 952 token がキャッシュされた |
+    > 4 Argon](https://synthorai.io/ja/models/gemini-4-argon/) の暗黙的キャッシュでは、6,935 token の prompt を最初の呼び出しから 4 秒後に再送したところ、4,881 token がキャッシュから供給された。料金は 100 万 token あたり $0.10（入力単価から 95% 割引）だった。Google の文書にある最低 4,096 token を下回る 3,006 token の prompt でも、一部がキャッシュされた。
+- 2026-10-16 cynthia-brightdata https://qiita.com/cynthia-brightdata/items/170c20c2ea56bc92a4d5 | AIエージェント向け検索APIの実装手順：検索・選別・本文取得ループの構築と日本語評価 | hits: 7
+    > のループから呼び出し、必要なURLのみ本文を取得させる構成で組み込みます。AIエージェント向け検索APIの第一候補は [Bright Data SERP API](https://get.brightdata.com/qiita50) であり、GoogleやBingなどの検索結果を地域指定付きの構造化JSONで返却し、$1/1Kリクエストから利用可能です。Web Unlocker API や MCP サーバーを組み合わせることで、本文取得までを同一基盤で完結できます。毎月5,000クレジットの無料枠があり、クレジットカードは不要です。
+    > - 無料枠：月5,000クレジット（約 $7.50 相当、カード不要、Web Unlocker API・Web Scraper API・Scraper Studio と共有）。
+    > - 無料枠：毎月 $10 分のクレジットに加え、オンボーディング完了時に1回限り $10（支払い方法の登録は不要）。
+    > - 無料枠：毎月 $5 分の無料クレジット。Search MCP は匿名・低上限で無料利用が可能です。
+    > Web Unlocker API は、1,000リクエストあたり $1 から利用可能で、無料枠の対象です。フィンガープリント対策・CAPTCHA・IPローテーション・JavaScriptレンダリング・リトライを内部で処理し、成功した結果のみ課金されます。そのため、最初の取得手段としては Web Unlocker API を使用します。
+    > Browser API は、本文が空で返る場合や、クリック・入力といった複数ステップの操作が必要なページに限定して使用することが重要です。1GBあたり $5〜で無料枠の対象外となるため、常用した場合はコストが増加する点に注意が必要です。
+    > 標準的な調査は1タスクあたり7リクエスト（＝7クレジット消費）のため、月5,000クレジットの無料枠で複数の調査タスクを処理できます。他のAPIに置き換える場合は、Exa であれば Instant Search の1,000リクエストあたり $4（結果10件まで）を検索単価として、Tavily であれば消費クレジット数に1クレジットあたり $0.008 を乗じた値を式に代入します。
+### API換算 50
+- 2026-10-25 nabe2030 https://qiita.com/nabe2030/items/2c29db3e0c69552e2d80 | Strata検証②：EVO-X2（Ryzen AI Max+ 395）で256K コンテクストが安定動作！Qwen3.8-Flash-Next × OpenCode でAIエージェ | hits: 0
+- 2026-10-25 miyabi_ver39 https://qiita.com/miyabi_ver39/items/4bab3b71f4376acb3edd | AI Agentに頼んだら、ソースコードがなくてもリバースエンジニアリングでゲーム開発を継続でき、頓挫していた第2作目が完成した話 | hits: 0
+- 2026-10-25 tech_craft_kyo https://qiita.com/tech_craft_kyo/items/567b8bd0775ca08402e3 | 低コストなデスク環境の消費電力をスマートプラグで計測・分析する | hits: 0
+- 2026-10-25 sponge841841 https://qiita.com/sponge841841/items/b2c00d9f0e6fc6afe858 | Codex Day 20徹底解説：Rest and reset、利用枠リセット完了と反映確認 | hits: 0
+- 2026-10-25 potofo https://qiita.com/potofo/items/16f5df2228ec858393e9 | ビジネスモデル2.0図解をClaude Agent Skill化して、Webサービスにしてみた | hits: 0
+- 2026-10-24 abe_masanori https://qiita.com/abe_masanori/items/1904c42dedb1ef4c1012 | Snowflake の Yes/No 判定は Jev ならコスト 1/34：AI_FILTER とコスト・精度・処理時間を 1,774 件で比較 | hits: 1
+    > - AI_FILTER の場合、ウェアハウスの分は 0.0004 ドルで、合計のほぼ 100% が AI クレジットです。
+- 2026-10-24 HrmsTrsmgs https://qiita.com/HrmsTrsmgs/items/adcd5021a3ca05d0244e | 生成AIは何を考えているか（2026年10月版） | hits: 0
+- 2026-10-24 Takuya__ https://qiita.com/Takuya__/items/752bbac167768f3e9e66 | Kimi K3.1 Pro は Claude Opus 5.5 や GPT-6 Astra にどこまで迫ったのか | hits: 3
+    > 5.1、Opus 5.5は57.6、Fable 5.1とGPT-6 Astraより上。得意：Terminal-Bench 4.0の第三者測定で67.2%の首位、SWE-Marathon 51.7。苦手：知識問題の正答率51%（Opus 5.5は66%）、ターミナルでの科学研究38.1（Astraは68.1）。値段：入力2ドル・出力10ドルでOpus 5.5の半額](https://takuya-genai.com/wp-content/uploads/2026/10/kk31-fig01-summary.gif)
+    > ![判断フロー。K3.1 Proを使う→人が画面の前で返事を待つ作業か？いいえなら通常版（max）、夜間の一括処理など。はいなら、2倍の単価・枠消費を払ってよいか？はいならHighspeed（API 4ドル／20ドル、Kimi CodeはPro以上で枠2倍消費）、いいえなら通常版でeffortを下げる](https://takuya-genai.com/wp-content/uploads/2026/10/kk31-fig10-highspeed.gif)
+    > | 支払い | Kimi の会員プラン（月額）の利用枠 | 使った分だけ（1 ドル以上の入金で K3.1 Pro が解放） |
+- 2026-10-24 emi_ndk https://qiita.com/emi_ndk/items/9138a0ae483c074f34ad | 【全員1位】地球を10m四方でベクトル化する3製品、Google・ケンブリッジ・Ai2の論文はどれも「自分が最強」。同じAlphaEarthが2位にも最下位にもなる理由と、自分のデ | hits: 0
+- 2026-10-24 zzzzico https://qiita.com/zzzzico/items/693d297036fb0794450e | オープンデータから避難計画AIエージェント作成！（Bedrock AgentCore × Amazon Location Service） | hits: 0
+- 2026-10-24 lhjjjk4 https://qiita.com/lhjjjk4/items/89c93ede9f5bb192b71c | AI日報 2026年10月24日：Anthropicが帳簿を開く、AIがPHPの古傷を発見、欧州はロボタクシーに賭ける | hits: 1
+    > 料金設計が本番構成の要です。入力100万トークンあたり0.10ドル、キャッシュ済みは0.01ドル、出力トークンの課金はゼロ。初期顧客の数字が説得力を持ちます。Datadogはエージェント生成シェルコマンドのリスク判定でp95を40倍高速化、Sierraはオーケストレーション判定をp95 280ms未満・呼び出しあたりコスト90%減、語学アプリSpeakはGPT-Live統合で次アクションまでの時間を1.4秒から0
+- 2026-10-23 m_sakane https://qiita.com/m_sakane/items/ab51f593df830a735046 | 「誰が何をしたか」と「いくらかかったか」を、どう見るか。Tines 3B の監視・監査・費用を読み解く | hits: 0
+- 2026-10-23 lumichy https://qiita.com/lumichy/items/fa63c052c502f3713006 | なぜAIは1回の出力上限を超えて巨大コードを書けるのか？コーディングエージェント徹底解剖 | hits: 0
+- 2026-10-23 hisaho https://qiita.com/hisaho/items/9546e3fd74c550d26c5f | PHP2Shell対応、PHPを上げたら終わり？ 「更新」と「復旧」は別の話 | hits: 0
+- 2026-10-23 OfoxAI https://qiita.com/OfoxAI/items/d18357d59235491eb4ff | LLMの単価と正解1件の費用は違う：7モデル・86 API呼び出しの記録 | hits: 0
+- 2026-10-23 whitemarshall https://qiita.com/whitemarshall/items/160ff6bd3bc71186562f | 公開決算資料からChatGPT Plusの月20ドルを追う：集計スクリプトと出典の突き合わせ | hits: 7
+    > | 消費者サブスクの比率 | 年化収入の約70% | 報道（2025年10月）。20ドル枠単独の比率は未開示 | 2026-10-22 |
+    > | 消費者サブスク比率（2024年10月） | 約75%（20ドル枠と200ドル枠を含む） | 報道（当時のCFO発言） | 2026-10-22 |
+    > Claude Sonnet 5.5: 73.20 ドル/月（削減 22.80 ドル、-23.75%）
+    > GPT-6 Astra: 366.00 ドル/月（削減 114.00 ドル、-23.75%）
+    > 2025年10月の報道では、年化約130億ドルの収入に占める消費者サブスクの割合が約70%とされています。20ドル枠だけの割合は公開資料にありません。2024年10月に当時のCFOが示した約75%も、20ドル枠と200ドル枠を含む消費者サブスク全体の数字です。**サブスクはOpenAIの収入の主柱ですが、費用の量には届いていません。**
+    > キャッシュも同じスクリプトで扱えます。入力の半分がキャッシュに当たり、キャッシュ単価を標準入力価格の5%と仮定すると、入力費用はほぼ半分になり、月額は約4分の1減ります（Claude Sonnet 5.5は96.00→73.20ドル、GPT-6 Astraは480.00→366.00ドル）。
+    > - 消費者サブスクの内訳。2024年10月の説明は20ドル枠と200ドル枠を合わせた「約75%」で、比率を分けた一次資料は公開されていません。
+- 2026-10-23 ishizakahiroshi https://qiita.com/ishizakahiroshi/items/9421c7437aee8648a966 | PHP2ShellとPwnEscapeから考える更新の責任分界と止められる可用性設計 | hits: 0
+- 2026-10-23 k2_naka https://qiita.com/k2_naka/items/ed1bb8e2bc8b6fab2698 | php2shell対策：RHEL互換ディストリビューションの対応情報【2026年10月23日】 | hits: 0
+- 2026-10-23 suwa_nobu https://qiita.com/suwa_nobu/items/8dec346a727f0199fefb | Haiku 5.5 に書かせた確信度は当てになるか。同じ306問を3回聞いたら、1問ずつはぶれても0.8以上は8割当たった | hits: 0
+- 2026-10-23 sugishun13 https://qiita.com/sugishun13/items/a98eb96ae1bdf44eee44 | ページランクに関する検証 | hits: 0
+- 2026-10-23 cynthia-brightdata https://qiita.com/cynthia-brightdata/items/a7afa26baf3c1ebac2dc | Claude CodeでJS描画サイトのデータをJSON化する5つのAPI比較 | hits: 0
+- 2026-10-23 cynthia-brightdata https://qiita.com/cynthia-brightdata/items/455f02488d5aada40f77 | Claude CodeでJSサイトをJSON取得：最適スクレイピングAPI | hits: 0
+- 2026-10-23 etale_cohomology https://qiita.com/etale_cohomology/items/aaa0309aba8708e6cd32 | AIエージェントはスクラムチームになれるか：PO・SM・開発者を担うマルチエージェントの実証実験を調べてみた | hits: 0
+- 2026-10-22 yama3133 https://qiita.com/yama3133/items/78ee6d51c82e045d979b | PHPの重大な脆弱性「PHP2Shell」で何が起きたのかを時系列で整理してみた | hits: 0
+- 2026-10-22 sponge841841 https://qiita.com/sponge841841/items/8678288f1d4eea94fe60 | Codex Day 17はフルリセット！発表時刻・日本時間の反映期限・Daybreak Blueを詳しく解説 | hits: 0
+- 2026-10-22 yuki_engineer08 https://qiita.com/yuki_engineer08/items/4e049b07cdcc4334b663 | VRChatアバターを「Very Poor」から救い出すまでの記録 ― AIと二人三脚でハマり続けた軽量化デバッグ日記 | hits: 0
+- 2026-10-22 akiramur https://qiita.com/akiramur/items/ac16f1a58dd7e18516de | フロア図の画像1枚とClaude Codeで、Mapboxの屋内地図を作ってみた | hits: 0
+- 2026-10-22 maskot1977 https://qiita.com/maskot1977/items/f9586adc7ba5818fe909 | 「経済主権」が語られない理由 ― 通商・経済外交の設計バグ : システム設計視点の行動経済学 (46) | hits: 0
+- 2026-10-21 suwa_nobu https://qiita.com/suwa_nobu/items/bc2e80a8c1d61b0b2cfe | Claude Code の長い会話は、閉じずに席を外したほうが安かった。1時間後に戻った費用は閉じた場合の1割 | hits: 0
+- 2026-10-21 acerola_jp https://qiita.com/acerola_jp/items/3894ba54cb9907e20086 | Claude Code を無人で回して止まった場所 | hits: 0
+- 2026-10-21 sumitsuke https://qiita.com/sumitsuke/items/9f9e950bef42599db5ff | 作業員を Opus から Sonnet に——6 課題は同点、速さ 1.5 倍、差は「壊して確かめる」回数（5 対 2） | hits: 2
+    > Opus のほうがトークンは 15% 多く、そのうち 9 割がキャッシュ読込です。この単価は両方とも 100 万トークンあたり $0.20 で、同じです。値段の差は書き込みと出力の単価から来るので、料金は半分にならず、約 55% でした。内訳は、キャッシュ書込が $1.28 対 $2.65、読込が $0.98 対 $1.14、出力が $0.87 対 $1.90 です。
+    > ⚠ キャッシュの書き込みは、5 分の値段（100 万あたり Sonnet $2.50・Opus $5）で計算しています。作業員の記録の usage の内訳を 10-01〜07 で数えたら、書き込みはすべて 5 分で、1 時間の分は 0 でした。プランの枠の減り方とは別の話です。
+- 2026-10-21 yasai_cyber https://qiita.com/yasai_cyber/items/f8f1135a9ccdb67c14eb | # 貼った文章を外部APIに送らず、気になる言い回しを点検する「ことばレンズ」をJavaScriptで作った | hits: 0
+- 2026-10-21 legacy2latest https://qiita.com/legacy2latest/items/1eaaabbb218282599f94 | AIF-C01 対策：2026 年改訂の試験ガイド v1.1 で変わった出題範囲と学習の進め方（練習問題 5 問付き） | hits: 0
+- 2026-10-21 amanoese https://qiita.com/amanoese/items/67e5831a34e64bf7bae4 | AIは曖昧な「不適切表現」を検出してライブ配信ポロリを防げるのか？ Jev・SAMで検証してみた | hits: 0
+- 2026-10-21 PDC-Kurashinak https://qiita.com/PDC-Kurashinak/items/510620a2938af38f319d | Lambda Web Functionsについて！ | hits: 0
+- 2026-10-21 cynthia-brightdata https://qiita.com/cynthia-brightdata/items/7323908fd88cfc47de73 | AIスクレイパーとは？構築済み・プロンプト型の選び方と、抽出結果を検証する手順 | hits: 8
+    > - 料金・無料枠：月5,000クレジットの無料枠（カード不要）。Scraper APIs は $0.75/1Kレコードから、Scraper Studio は $1/1Kリクエストから利用可能。
+    > - 料金・無料枠：Free プランは月50クレジット。年払いの Personal プランは月 $19（年12,000クレジット）。
+    > - 料金・無料枠：Free プランは月1,000クレジット（カード不要）。年払いの Hobby プランは月 $16（5,000クレジット）。
+    > - 無料枠：毎月 $5 の利用クレジット（カード不要）。上限に達した場合は翌月まで停止し、課金は発生しません。
+    > - Web Unlocker API：単一のエンドポイントから、公開ページのクリーンなHTMLを返却するAPI。フィンガープリント・CAPTCHA・IPローテーション・JavaScriptレンダリング・リトライを処理する。成功した結果のみが課金対象で、料金は $1/1Kリクエストから。無料枠の対象。
+    > - Browser API：クラウド上で自動スケールするブラウザで、ブロック回避機能を内蔵する。Puppeteer・Playwright・Selenium の代替として利用でき、料金は $5/GBから。無料枠の対象外で、プロキシと共通の1回限りの $2 トライアルクレジットが別途付与される。
+    > | Bright Data | リクエストまたはレコード単位の従量課金 | Web Unlocker $1/1Kリクエスト〜、Scraper APIs $0.75/1Kレコード〜、Scraper Studio $1/1Kリクエスト〜。無料枠は月5,000クレジット |
+    > Bright Data の無料枠は月5,000クレジット（約 $7.50 相当）で、毎月1日に更新されます。クレジットは翌月に繰り越されず、上限に達した時点で自動停止するため、予期せぬ超過課金は発生しません。
+- 2026-10-20 whitemarshall https://qiita.com/whitemarshall/items/a1caea18b468fa0a4e37 | MiniMax M3とDeepSeek V4-Proを19問で比較した：正解しているのに判定が落ちる理由 | hits: 1
+    > 今回の総額はM3が0.061ドル、V4-Proが0.074ドルで、M3の方が約17.6%低くなりました。単価だけでは総額を予測できず、別のタスクでは比率が変わる可能性があります。
+- 2026-10-20 Xim2jp https://qiita.com/Xim2jp/items/a0c95bca0875f7fd5282 | Claude Maxの利用枠を「実質4倍」にする計算と、先に確認したい条件 | hits: 1
+    > - その$200は、全額を自分が払う必要があるのか（払う額が半分になれば、枠は実質2倍）
+- 2026-10-20 Synthorai https://qiita.com/Synthorai/items/e09b6195ed0eb11f50cc | DeepSeek V4.1 Flash 1017：思考オフで小規模コード修正 30/30 件 | hits: 4
+    > 思考をオフにした [DeepSeek V4.1 Flash 1017](https://synthorai.io/ja/models/deepseek-v4-1-flash-1017/) は、コードを編集してテストする小規模タスクを 30 件すべて解決した。成功 1 件あたりの費用は $0.0042 で、標準の思考レベルの $0.0066 より 36% 安い。テスト実行ツールを外しても 30 件中 28 件を解決した。一方、制約付きの数え上げなど、1 回の応答内で答えを計算する単発の問題では、思考オフの正解は 39 件中 11 件にとどまった。思考とは、回答前にモデルが内部で行う推論であり、出力 token とし
+    > - DeepSeek V4.1 Flash 1017 のピーク料金は 100 万 token あたり $0.30/$1.20、オフピークはその半額。ピーク時間帯は週 168 時間のうち 35 時間。
+    > 費用が半分以下になり、オフピークなら残りがさらに半額になる。エージェントループは毎ターン会話全体を再送するため、テストツールありの 120 回の実行では、入力が全 token の 90% を占めた。その入力の 82% はキャッシュヒットとして、通常の入力料金の 2% で課金された。ピーク時間帯の定価では 120 回で $0.75 だったが、キャッシュ割引がなければ同じ token 数で $1.66 かかる。キャッシュ適用後の請求額は、出力が 71%、キャッシュされなかった入力が 27% を占めた。つまり、[1017](https://synthorai.io/ja/models/deepseek-v4-1-flash-1017/) エージェン
+    > ある。[1017](https://synthorai.io/ja/models/deepseek-v4-1-flash-1017/) は、1,001,531 token のプロンプトの 10%、50%、90% の位置に隠した情報を取り出せた。所要時間は約 25 秒で、ピーク時間帯の定価では 1 リクエストあたり $0.30 だった。1,048,568 token を超えるリクエストは HTTP 400 を返した。
+- 2026-10-20 yunany90 https://qiita.com/yunany90/items/5993f21933b452b05426 | Claude Code のキャッシュは何分もつのか：0〜65分休んで実測した | hits: 1
+    > Opus 5.5 では1時間キャッシュの書き込みが100万トークンあたり$8（通常の入力より+100％）、読み込みが$0.20（-95％）です。期限切れのコストは会話の大きさに比例し、20万トークンの会話なら書き直しだけで約$1.60かかります。
+- 2026-10-20 sponge841841 https://qiita.com/sponge841841/items/2388a70f59ddb132065b | Codex Day 15更新版：COOKED公式配信＋フルリセット！追加発表と利用枠への影響 | hits: 0
+- 2026-10-20 J_3woo86 https://qiita.com/J_3woo86/items/fcd431e5453d81c8167e | Lambda Web Functionsは通常のLambdaと何が違う？ ColdStart・Idle・コスト・使いどころを整理 | hits: 0
+- 2026-10-19 DnD-inc https://qiita.com/DnD-inc/items/8fcb6d99c778470aaebd | 中小機構景況調査2026年秋、人手不足感が3期ぶりに強まった｜製造・物流・建設の現場帳票手入力をなくす3つのステップ | hits: 0
+- 2026-10-18 suzuyui https://qiita.com/suzuyui/items/e525860958fcfc97f3ff | Mac mini (M6 / 32GB) でローカル LLM を試す | hits: 0
+- 2026-10-18 ssakita https://qiita.com/ssakita/items/835d6170fff4a9c8df4d | 【うわっ…、私の点数、低すぎ…？】LTをAI採点するシステムをAWSで作ってみた | hits: 0
+- 2026-10-18 YushiYamamoto https://qiita.com/YushiYamamoto/items/63577f8d2c93e1f0985c | RAGのチャンク設計は文書ヒット率で決めない：必要根拠と取得予算で比べる | hits: 0
+- 2026-10-18 sponge841841 https://qiita.com/sponge841841/items/284d541decd0eee714b4 | Codex Day 13は再び全体リセット！6:12のDone投稿・日本時間の期限・対象利用枠を徹底解説 | hits: 4
+    > | Pro $100 | **なし** | プランに応じた利用枠 |
+    > | Pro $200 | **なし** | プランに応じた利用枠 |
+    > | Pro $500 | **なし** | プランに応じた利用枠 |
+    > ### Q. Pro $100 / $200 / $500の5時間枠は戻る？
+- 2026-10-18 sescore https://qiita.com/sescore/items/cf57317fffda0ceb88af | OpenClawで9体のAIエージェント経営OSを構築した実践記録｜設定とSES市場分析への活用法 | hits: 0
+- 2026-10-18 Syoitu https://qiita.com/Syoitu/items/99978c37dd49eea3aa3d | とにかく安くて無制限で動画を作りたい、MiniMax H3をRunPodで動かす | hits: 3
+    > | fal・4秒（40%オフ） | $0.48 |
+    > | fal・5秒（40%オフ） | $0.60 |
+    > fal（768p・4秒）：通常 $0.16 × 生成本数 ／ 40%オフ $0.096 × 生成本数
+- 2026-10-16 yunany90 https://qiita.com/yunany90/items/23fabef830a45e815815 | Claude Code・Codex・Cursor の使用量と費用を確認する方法 | hits: 8
+    > | キャッシュ読み込み | $0.20 | 約36％ |
+    > | 5分キャッシュ書き込み | $5.00 | 約34％ |
+    > | 出力 | $20.00 | 約25％ |
+    > | 1時間キャッシュ書き込み | $8.00 | 約4％ |
+    > | 新しい入力 | $4.00 | 1％未満 |
+    > 5.5 のキャッシュ読み込みは通常の入力より95％安いのですが、量が非常に多いので費用の割合はいちばん大きくなりました。キャッシュ書き込みもほぼ同じくらいで、新しいファイルやツールの結果、長い答えは、まずキャッシュに書き込まないと次から安く読めないためです。出力は180万トークンしかありませんが、100万トークンあたり20ドルなので全体の4分の1を占めました。
+    > アナライザーは、選んだプランと、同じ期間・同じツールの API 費用を比べます。私の Claude の記録は17日間です。Max 5× は税抜きで月100ドルなので、17日分は約8,950円（56.67ドル）です。同じトークンを API で払うと145.90ドルなので、**払った料金の約257％分の API 価値を使った**ことになります。エージェントでたくさん作業するなら、トークン単位の支払いよりサブスクリプションのほうがはっきり安くなりました。
+    > - **普段の作業は Sonnet で。** Sonnet 5.5 は100万トークンあたり2ドル／10ドル、Opus 5.5 は4ドル／20ドルなので、同じセッションが API 換算で約50％安くなります。

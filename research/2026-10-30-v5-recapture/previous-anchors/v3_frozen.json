@@ -1,0 +1,295 @@
+{
+  "schemaVersion": 1,
+  "methodologyVersion": "3.0.0",
+  "anchorVersion": "v3-2026-10-25",
+  "frozenAt": "2026-10-25",
+  "basketVersion": "SDLC basket v1",
+  "mainWorkload": "9a0d376cc6080f3c",
+  "workloads": {
+    "9a0d376cc6080f3c": {
+      "components": [
+        "coding-agent-index",
+        "aa-briefcase",
+        "gdpval-aa",
+        "gdp-pdf",
+        "automationbench-aa",
+        "terminalbench-4-0",
+        "scicode",
+        "artificial-analysis-long-context-reasoning"
+      ],
+      "role": "main",
+      "anchors": {
+        "api": {
+          "basis": "api",
+          "workload": "9a0d376cc6080f3c",
+          "units": "USD per workload pass",
+          "referenceIds": [
+            "claude-haiku-5-5-max",
+            "claude-opus-5-5",
+            "claude-sonnet-5-5",
+            "deepseek-v4-1-flash-1017",
+            "gemini-4-argon",
+            "gpt-6-astra",
+            "gpt-6-luna",
+            "gpt-6.1-sol"
+          ],
+          "referenceCosts": {
+            "claude-haiku-5-5-max": 966.9203778594009,
+            "claude-opus-5-5": 9351.716124793993,
+            "claude-sonnet-5-5": 8931.27781421091,
+            "deepseek-v4-1-flash-1017": 410.04054222171686,
+            "gemini-4-argon": 3557.766318119637,
+            "gpt-6-astra": 5885.045403144297,
+            "gpt-6-luna": 125.71906502148906,
+            "gpt-6.1-sol": 1233.1097561488218
+          },
+          "low": 62.85953251074453,
+          "high": 18703.432249587986,
+          "padding": 2.0
+        },
+        "plan": {
+          "basis": "plan",
+          "workload": "9a0d376cc6080f3c",
+          "units": "USD per workload pass",
+          "referenceIds": [
+            "claude-haiku-5-5-max@claude-max-20x",
+            "claude-haiku-5-5-max@claude-max-5x",
+            "claude-haiku-5-5-max@claude-pro",
+            "claude-opus-5-5@claude-max-20x",
+            "claude-opus-5-5@claude-max-5x",
+            "claude-opus-5-5@claude-pro",
+            "claude-sonnet-5-5@claude-max-20x",
+            "claude-sonnet-5-5@claude-max-5x",
+            "claude-sonnet-5-5@claude-pro",
+            "deepseek-v4-1-flash-1017@api",
+            "gemini-4-argon@api",
+            "gpt-6-astra@chatgpt-plus",
+            "gpt-6-astra@chatgpt-pro-100",
+            "gpt-6-astra@chatgpt-pro-200",
+            "gpt-6-astra@chatgpt-pro-500",
+            "gpt-6-luna@chatgpt-plus",
+            "gpt-6-luna@chatgpt-pro-100",
+            "gpt-6-luna@chatgpt-pro-200",
+            "gpt-6-luna@chatgpt-pro-500",
+            "gpt-6.1-sol@chatgpt-plus",
+            "gpt-6.1-sol@chatgpt-pro-100",
+            "gpt-6.1-sol@chatgpt-pro-200",
+            "gpt-6.1-sol@chatgpt-pro-500"
+          ],
+          "referenceCosts": {
+            "claude-haiku-5-5-max@claude-max-20x": 16.491904790370132,
+            "claude-haiku-5-5-max@claude-max-5x": 16.88943891457469,
+            "claude-haiku-5-5-max@claude-pro": 16.416305226814956,
+            "claude-opus-5-5@claude-max-20x": 159.50394209097718,
+            "claude-opus-5-5@claude-max-5x": 163.3487532715108,
+            "claude-opus-5-5@claude-pro": 158.77276952112044,
+            "claude-sonnet-5-5@claude-max-20x": 152.33289807625633,
+            "claude-sonnet-5-5@claude-max-5x": 156.0048526499722,
+            "claude-sonnet-5-5@claude-pro": 151.63459786436178,
+            "deepseek-v4-1-flash-1017@api": 410.04054222171686,
+            "gemini-4-argon@api": 3557.766318119637,
+            "gpt-6-astra@chatgpt-plus": 726.5488152029997,
+            "gpt-6-astra@chatgpt-pro-100": 445.1622846553931,
+            "gpt-6-astra@chatgpt-pro-200": 406.2854955570795,
+            "gpt-6-astra@chatgpt-pro-500": 423.0801871419336,
+            "gpt-6-luna@chatgpt-plus": 15.520872224875193,
+            "gpt-6-luna@chatgpt-pro-100": 11.916499054169579,
+            "gpt-6-luna@chatgpt-pro-200": 12.065169387858834,
+            "gpt-6-luna@chatgpt-pro-500": 11.67091208888684,
+            "gpt-6.1-sol@chatgpt-plus": 116.88244134112054,
+            "gpt-6.1-sol@chatgpt-pro-100": 116.88244134112054,
+            "gpt-6.1-sol@chatgpt-pro-200": 118.34066757666237,
+            "gpt-6.1-sol@chatgpt-pro-500": 114.47361271340715
+          },
+          "low": 5.83545604444342,
+          "high": 7115.532636239274,
+          "padding": 2.0
+        }
+      },
+      "anchorStatus": "frozen"
+    },
+    "1453a9a0576b02ea": {
+      "components": [
+        "aa-briefcase",
+        "gdpval-aa",
+        "gdp-pdf",
+        "automationbench-aa",
+        "terminalbench-4-0",
+        "scicode",
+        "artificial-analysis-long-context-reasoning"
+      ],
+      "role": "subset",
+      "anchors": {
+        "api": {
+          "basis": "api",
+          "workload": "1453a9a0576b02ea",
+          "units": "USD per workload pass",
+          "referenceIds": [
+            "claude-haiku-5-5-max",
+            "claude-opus-5-5",
+            "claude-sonnet-5-5",
+            "deepseek-v4-1-flash-1017",
+            "gemini-4-argon",
+            "gpt-6-astra",
+            "gpt-6-luna",
+            "gpt-6.1-sol",
+            "mimo-v2-6-pro"
+          ],
+          "referenceCosts": {
+            "claude-haiku-5-5-max": 191.4939970478554,
+            "claude-opus-5-5": 6039.127262611497,
+            "claude-sonnet-5-5": 5073.840417782336,
+            "deepseek-v4-1-flash-1017": 324.12088388877964,
+            "gemini-4-argon": 1857.935358161643,
+            "gpt-6-astra": 3844.5595179524043,
+            "gpt-6-luna": 79.56395288649308,
+            "gpt-6.1-sol": 796.764446620246,
+            "mimo-v2-6-pro": 136.12695920883297
+          },
+          "low": 39.78197644324654,
+          "high": 12078.254525222994,
+          "padding": 2.0
+        },
+        "plan": {
+          "basis": "plan",
+          "workload": "1453a9a0576b02ea",
+          "units": "USD per workload pass",
+          "referenceIds": [
+            "claude-haiku-5-5-max@claude-max-20x",
+            "claude-haiku-5-5-max@claude-max-5x",
+            "claude-haiku-5-5-max@claude-pro",
+            "claude-opus-5-5@claude-max-20x",
+            "claude-opus-5-5@claude-max-5x",
+            "claude-opus-5-5@claude-pro",
+            "claude-sonnet-5-5@claude-max-20x",
+            "claude-sonnet-5-5@claude-max-5x",
+            "claude-sonnet-5-5@claude-pro",
+            "deepseek-v4-1-flash-1017@api",
+            "gemini-4-argon@api",
+            "gpt-6-astra@chatgpt-plus",
+            "gpt-6-astra@chatgpt-pro-100",
+            "gpt-6-astra@chatgpt-pro-200",
+            "gpt-6-astra@chatgpt-pro-500",
+            "gpt-6-luna@chatgpt-plus",
+            "gpt-6-luna@chatgpt-pro-100",
+            "gpt-6-luna@chatgpt-pro-200",
+            "gpt-6-luna@chatgpt-pro-500",
+            "gpt-6.1-sol@chatgpt-plus",
+            "gpt-6.1-sol@chatgpt-pro-100",
+            "gpt-6.1-sol@chatgpt-pro-200",
+            "gpt-6.1-sol@chatgpt-pro-500",
+            "mimo-v2-6-pro@mimo-token-plan-lite",
+            "mimo-v2-6-pro@mimo-token-plan-max",
+            "mimo-v2-6-pro@mimo-token-plan-pro",
+            "mimo-v2-6-pro@mimo-token-plan-standard"
+          ],
+          "referenceCosts": {
+            "claude-haiku-5-5-max@claude-max-20x": 3.2661435621329593,
+            "claude-haiku-5-5-max@claude-max-5x": 3.3448733108795703,
+            "claude-haiku-5-5-max@claude-pro": 3.251171426958496,
+            "claude-opus-5-5@claude-max-20x": 103.00404677829604,
+            "claude-opus-5-5@claude-max-5x": 105.48693908491698,
+            "claude-opus-5-5@claude-pro": 102.53187203075547,
+            "claude-sonnet-5-5@claude-max-20x": 86.54000371452048,
+            "claude-sonnet-5-5@claude-max-5x": 88.62603349838142,
+            "claude-sonnet-5-5@claude-pro": 86.1433008112451,
+            "deepseek-v4-1-flash-1017@api": 324.12088388877964,
+            "gemini-4-argon@api": 1857.935358161643,
+            "gpt-6-astra@chatgpt-plus": 474.6369775249882,
+            "gpt-6-astra@chatgpt-pro-100": 290.81388184208805,
+            "gpt-6-astra@chatgpt-pro-200": 265.4166046221888,
+            "gpt-6-astra@chatgpt-pro-500": 276.38817526616856,
+            "gpt-6-luna@chatgpt-plus": 9.82271023290038,
+            "gpt-6-luna@chatgpt-pro-100": 7.54160690867233,
+            "gpt-6-luna@chatgpt-pro-200": 7.635696054365939,
+            "gpt-6-luna@chatgpt-pro-500": 7.386182035508084,
+            "gpt-6.1-sol@chatgpt-plus": 75.52269636210862,
+            "gpt-6.1-sol@chatgpt-pro-100": 75.52269636210862,
+            "gpt-6.1-sol@chatgpt-pro-200": 76.46491810175105,
+            "gpt-6.1-sol@chatgpt-pro-500": 73.96625015041273,
+            "mimo-v2-6-pro@mimo-token-plan-lite": 138.3404057000335,
+            "mimo-v2-6-pro@mimo-token-plan-max": 115.28367141669459,
+            "mimo-v2-6-pro@mimo-token-plan-pro": 124.38501389695995,
+            "mimo-v2-6-pro@mimo-token-plan-standard": 137.5019789988212
+          },
+          "low": 1.625585713479248,
+          "high": 3715.870716323286,
+          "padding": 2.0
+        }
+      },
+      "anchorStatus": "frozen"
+    }
+  },
+  "barReferences": [
+    {
+      "id": "bar:median-quality",
+      "level": 63.54142228383213,
+      "levelConfiguration": "gemini-4-argon",
+      "rule": "lower-median displayed quality of the non-provisional cohort configurations at freeze (E192; headline bar)"
+    },
+    {
+      "id": "bar:lower-quartile-quality",
+      "level": 53.27068467083996,
+      "levelConfiguration": "mimo-v2-6-pro",
+      "rule": "lower-quartile displayed quality of the non-provisional cohort configurations at freeze (O34)"
+    },
+    {
+      "id": "bar:upper-quartile-quality",
+      "level": 64.94250168018203,
+      "levelConfiguration": "gpt-6-astra",
+      "rule": "upper-quartile displayed quality of the non-provisional cohort configurations at freeze (O34)"
+    }
+  ],
+  "anchorPolicy": {
+    "policyId": "complete-evidence-panel",
+    "version": 1,
+    "populationRule": "ranked configurations with complete cost evidence (exact cost, no AA missing- or declined-task marker) on every component of the workload at the freeze cutoff; on the main workload this is the admission reference panel",
+    "planRule": "the same configurations at their displayed Plan cost: measured routes, owner-named transfers and API-cost fallbacks alike, since each is scored in the Plan table (O13, O16) and a narrower panel would clip them",
+    "minimumReferences": 2,
+    "belowMinimum": "anchors unavailable: configurations on that workload get no cost score (the main workload must meet the minimum)",
+    "lifetime": "reference IDs and costs are frozen; a population or rule change is a new anchor version with an old/new bridge, and evidence lost after freezing never rebuilds an anchor"
+  },
+  "barPolicy": {
+    "policyId": "quality-quartile-ladder",
+    "version": 3,
+    "selectionMode": "deterministic at anchor freeze, before any bar outcome is computed",
+    "populationRule": "non-provisional ranked configurations with a displayed quality",
+    "order": "displayed quality ascending, then configuration ID",
+    "position": "lower quartile, lower median (the headline bar) and upper quartile, each the displayed quality at zero-based position floor((n - 1) * k / 4), k = 1, 2, 3 (O34)",
+    "reference": "the displayed quality at each ladder position, frozen as a level; the configuration at that position is recorded for audit and competes like any other",
+    "minimumPopulation": 2,
+    "emptyPopulation": "fewer than two population configurations: no bar pinned; the bar is published as unavailable",
+    "ladderPopulation": "fewer than four population configurations: only the headline bar is pinned, because the quartile positions would coincide with it (E215)",
+    "nonTautology": "a frozen level is never a configuration, so no bar can return its setter by construction; whether a result compares alternatives is published per result (possibleQualifierN, E198)",
+    "lifetime": "fixed for the anchor version; replaced only by a versioned re-freeze that publishes old- and new-bar results on the common evaluable panel",
+    "selectionCutoff": "2026-10-25",
+    "population": [
+      "claude-haiku-5-5-max",
+      "claude-opus-5-5",
+      "claude-sonnet-5-5",
+      "deepseek-v4-1-flash-1017",
+      "gemini-4-argon",
+      "gpt-6-astra",
+      "gpt-6-luna",
+      "gpt-6.1-sol",
+      "mimo-v2-6-pro"
+    ],
+    "bars": [
+      {
+        "id": "bar:median-quality",
+        "level": 63.54142228383213,
+        "levelConfiguration": "gemini-4-argon"
+      },
+      {
+        "id": "bar:lower-quartile-quality",
+        "level": 53.27068467083996,
+        "levelConfiguration": "mimo-v2-6-pro"
+      },
+      {
+        "id": "bar:upper-quartile-quality",
+        "level": 64.94250168018203,
+        "levelConfiguration": "gpt-6-astra"
+      }
+    ]
+  }
+}

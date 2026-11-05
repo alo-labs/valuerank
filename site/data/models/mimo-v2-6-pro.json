@@ -7,331 +7,453 @@
   "selectedPage": "https://artificialanalysis.ai/models/mimo-v2-6-pro",
   "summary": {
     "rank": {
-      "api": 7,
-      "plan": 11
+      "api": null,
+      "plan": null
     },
     "overall": {
-      "api": 54.3,
-      "plan": 44.2
+      "api": 56.01540521836752,
+      "plan": 52.03131534668346
     },
-    "quality": 42.7,
-    "qualityRank": 10,
+    "quality": 48.14615886385108,
+    "qualityRank": 8,
     "coverage": {
-      "pct": 71.96,
+      "pct": 100.0,
       "costAvailable": true,
-      "availablePriority": 67,
-      "totalPriority": 107,
-      "missing": [
-        "Terminal-Bench 4.0",
-        "Instruction Following (LiveBench)",
-        "DeepSWE v1.1",
-        "GPQA Diamond (legacy)"
-      ]
+      "missing": [],
+      "provisional": false,
+      "provisionalReasons": []
     },
     "grade": "measured",
     "rankingEligible": true,
-    "exclusionReasons": []
+    "exclusionReasons": [],
+    "flags": [
+      "Subset cost: scored on its own workload; cross-workload ordering not identified"
+    ]
   },
   "dimensions": [
     {
-      "key": "costComposite",
-      "label": "Cost",
-      "category": "cost",
-      "weightPct": 25.0,
-      "value": 4.461065915513719,
-      "unit": "USD per Index point",
-      "normalized": 89.0,
+      "key": "frontierCode",
+      "label": "FrontierCode 2.0",
+      "category": "Software engineering",
+      "weightPct": 11.25,
+      "value": 0.239701262626263,
+      "decimals": 3,
+      "unit": "AA score (0-1)",
+      "normalized": 23.9701262626263,
       "source": {
-        "name": "Artificial Analysis total cost to run the Intelligence Index, per Index point",
-        "url": "https://artificialanalysis.ai/models/mimo-v2-6-pro"
+        "name": "Artificial Analysis model page (Intelligence Index v5.0)",
+        "url": "https://artificialanalysis.ai/evaluations/frontiercode-2-0"
       },
-      "observedAt": "2026-10-17",
-      "evaluatedVariant": null,
-      "note": null,
-      "grade": "measured",
-      "normalizedByBasis": {
-        "api": 89.0,
-        "plan": 48.5
-      }
-    },
-    {
-      "key": "deepswePassAt1",
-      "label": "DeepSWE v1.1",
-      "category": "code",
-      "weightPct": 17.5234,
-      "value": null,
-      "unit": "% pass@1",
-      "normalized": null,
-      "source": null,
-      "observedAt": null,
-      "evaluatedVariant": null,
-      "note": null,
-      "grade": "missing"
-    },
-    {
-      "key": "bugHuntFixedOf105",
-      "label": "Bug Hunt Bench",
-      "category": "code",
-      "weightPct": 14.0187,
-      "value": 18,
-      "unit": "bugs fixed of 105",
-      "normalized": 8.8,
-      "source": {
-        "name": "Bug Hunt Bench",
-        "url": "https://github.com/phuryn/bug-hunt-bench/blob/aec976170df89a371384174ca87646a9a8c82415/results/run-notes.md#user-content-mimo-v26-pro-first-party"
-      },
-      "observedAt": "2026-10-18",
-      "evaluatedVariant": "MiMo-V2.6-Pro (first-party, thinking enabled)",
-      "note": "Single owner run with thinking explicitly enabled on Xiaomi's first-party endpoint. Do not substitute the OpenRouter default mean, whose reasoning state was not asserted and whose three runs used two judge standards.",
-      "grade": "measured"
-    },
-    {
-      "key": "omniNonHallucination",
-      "label": "Non-Hallucination",
-      "category": "rely",
-      "weightPct": 4.2056,
-      "value": 59.38,
-      "unit": "% non-hallucination",
-      "normalized": 77.8,
-      "source": {
-        "name": "Artificial Analysis Intelligence Index v4.3.2",
-        "url": "https://artificialanalysis.ai/models/mimo-v2-6-pro"
-      },
-      "observedAt": "2026-10-17",
+      "observedAt": "2026-11-01",
       "evaluatedVariant": null,
       "note": null,
       "grade": "measured"
     },
     {
-      "key": "terminalBenchV4",
-      "label": "Terminal-Bench 4.0",
-      "category": "code",
-      "weightPct": 4.2056,
-      "value": null,
+      "key": "livebench2Overall",
+      "label": "LiveBench 2.0 Overall",
+      "category": "Software engineering",
+      "weightPct": 11.25,
+      "value": 68.48,
+      "decimals": 1,
+      "unit": "LiveBench's weighted Overall of seven category scores (0-100)",
+      "normalized": 68.48,
+      "source": {
+        "name": "Artificial Analysis model page (Intelligence Index v5.0)",
+        "url": "https://livebench.ai/new"
+      },
+      "observedAt": "2026-11-01",
+      "evaluatedVariant": "mimo-v2.6-pro / LiveBench's own, one run per model at its top effort",
+      "note": null,
+      "grade": "measured"
+    },
+    {
+      "key": "terminalBench",
+      "label": "Terminal-Bench 4.0 (AA run)",
+      "category": "Software engineering",
+      "weightPct": 8.25,
+      "value": 34.8484848484849,
+      "decimals": 1,
       "unit": "% resolved",
-      "normalized": null,
-      "source": null,
-      "observedAt": null,
-      "evaluatedVariant": null,
+      "normalized": 34.8484848484849,
+      "source": {
+        "name": "Artificial Analysis Terminal-Bench 4.0 run (mini-SWE-agent)",
+        "url": "https://www.tbench.ai/leaderboard/terminal-bench/4.0"
+      },
+      "observedAt": "2026-11-01",
+      "evaluatedVariant": "mini-SWE-agent",
       "note": null,
-      "grade": "missing"
+      "grade": "measured"
     },
     {
-      "key": "gdpvalV21",
+      "key": "gdpval",
       "label": "GDPval-AA v2.1",
-      "category": "prod",
-      "weightPct": 4.2056,
-      "value": 1684.34,
+      "category": "Professional work",
+      "weightPct": 7.5,
+      "value": 1689.4,
+      "decimals": 1,
       "unit": "Elo",
-      "normalized": 77.8,
+      "normalized": 59.470000000000006,
       "source": {
-        "name": "Artificial Analysis Intelligence Index v4.3.2",
-        "url": "https://artificialanalysis.ai/models/mimo-v2-6-pro"
+        "name": "Artificial Analysis model page (Intelligence Index v5.0)",
+        "url": "https://artificialanalysis.ai/evaluations/gdpval-aa"
       },
-      "observedAt": "2026-10-17",
+      "observedAt": "2026-11-01",
       "evaluatedVariant": null,
       "note": null,
       "grade": "measured"
     },
     {
-      "key": "intelligenceIndex",
-      "label": "AA Intelligence Index",
-      "category": "intel",
-      "weightPct": 4.2056,
-      "value": 46.3242065310383,
-      "unit": "Index points",
-      "normalized": 52.8,
-      "source": {
-        "name": "Artificial Analysis Intelligence Index v4.3.2",
-        "url": "https://artificialanalysis.ai/models/mimo-v2-6-pro"
-      },
-      "observedAt": "2026-10-17",
-      "evaluatedVariant": null,
-      "note": null,
-      "grade": "measured"
-    },
-    {
-      "key": "livebenchInstructionFollowing",
-      "label": "Instruction Following (LiveBench)",
-      "category": "language",
-      "weightPct": 3.5047,
-      "value": null,
-      "unit": "score",
-      "normalized": null,
-      "source": null,
-      "observedAt": null,
-      "evaluatedVariant": null,
-      "note": null,
-      "grade": "missing"
-    },
-    {
-      "key": "automationBenchAA",
+      "key": "automationBench",
       "label": "AutomationBench-AA",
-      "category": "prod",
-      "weightPct": 3.5047,
-      "value": 58.62,
-      "unit": "% score",
-      "normalized": 38.9,
+      "category": "Professional work",
+      "weightPct": 7.5,
+      "value": 0.5862340943419085,
+      "decimals": 3,
+      "unit": "AA score (0-1)",
+      "normalized": 58.623409434190854,
       "source": {
-        "name": "Artificial Analysis Intelligence Index v4.3.2",
-        "url": "https://artificialanalysis.ai/models/mimo-v2-6-pro"
+        "name": "Artificial Analysis model page (Intelligence Index v5.0)",
+        "url": "https://artificialanalysis.ai/evaluations/automationbench-aa"
       },
-      "observedAt": "2026-10-17",
+      "observedAt": "2026-11-01",
       "evaluatedVariant": null,
       "note": null,
       "grade": "measured"
     },
     {
-      "key": "speed",
-      "label": "Speed",
-      "category": "prod",
-      "weightPct": 3.5047,
-      "value": 48.0431227818126,
-      "unit": "tokens per second",
-      "normalized": 5.9,
+      "key": "omniscience",
+      "label": "AA-Omniscience v1.1",
+      "category": "Reliability",
+      "weightPct": 7.5,
+      "value": -4.466666666666667,
+      "decimals": 1,
+      "unit": "AA Omniscience Index (-100 to 100)",
+      "normalized": 47.766666666666666,
       "source": {
-        "name": "Artificial Analysis Intelligence Index v4.3.2",
-        "url": "https://artificialanalysis.ai/models/mimo-v2-6-pro"
+        "name": "Artificial Analysis model page (Intelligence Index v5.0)",
+        "url": "https://artificialanalysis.ai/evaluations/omniscience"
       },
-      "observedAt": "2026-10-17",
+      "observedAt": "2026-11-01",
       "evaluatedVariant": null,
       "note": null,
       "grade": "measured"
     },
     {
-      "key": "aaLcr",
+      "key": "bugHunt",
+      "label": "Bug Hunt Bench",
+      "category": "Software engineering",
+      "weightPct": 6.0,
+      "value": 22,
+      "decimals": 1,
+      "unit": "% of the board's best planted plus best unplanted bugs fixed (O163, O170)",
+      "normalized": 17.988552739165986,
+      "source": {
+        "name": "Bug Hunt Bench published runs",
+        "url": "https://bughunt.productcompass.pm/"
+      },
+      "observedAt": "2026-10-27",
+      "evaluatedVariant": "MiMo-V2.6-Pro (first-party) / Claude Code / Xiaomi first-party",
+      "note": null,
+      "grade": "measured"
+    },
+    {
+      "key": "codeMigration",
+      "label": "Code Migration v1.1 (Vals)",
+      "category": "Software engineering",
+      "weightPct": 4.5,
+      "value": 48.786,
+      "decimals": 1,
+      "unit": "% of hidden tests passed",
+      "normalized": 48.786,
+      "source": {
+        "name": "Artificial Analysis model page (Intelligence Index v5.0)",
+        "url": "https://www.vals.ai/benchmarks/code-migration-v1-1"
+      },
+      "observedAt": "2026-11-01",
+      "evaluatedVariant": "xiaomi/mimo-v2.6-pro / Pi agent harness, the same for every model",
+      "note": null,
+      "grade": "measured"
+    },
+    {
+      "key": "vibeCode",
+      "label": "Vibe Code Bench v1.1 (Vals)",
+      "category": "Software engineering",
+      "weightPct": 3.75,
+      "value": 85.223,
+      "decimals": 1,
+      "unit": "% of test workflows passed",
+      "normalized": 85.223,
+      "source": {
+        "name": "Artificial Analysis model page (Intelligence Index v5.0)",
+        "url": "https://www.vals.ai/benchmarks/vibe-code"
+      },
+      "observedAt": "2026-11-01",
+      "evaluatedVariant": "xiaomi/mimo-v2.6-pro / OpenHands, the same for every model",
+      "note": null,
+      "grade": "measured"
+    },
+    {
+      "key": "lcr",
       "label": "AA-LCR v1.1",
-      "category": "language",
-      "weightPct": 2.8037,
-      "value": 86.33,
-      "unit": "% accuracy",
-      "normalized": 100.0,
+      "category": "Knowledge and science",
+      "weightPct": 3.75,
+      "value": 0.863333333333333,
+      "decimals": 3,
+      "unit": "accuracy (0-1)",
+      "normalized": 86.3333333333333,
       "source": {
-        "name": "Artificial Analysis Intelligence Index v4.3.2",
-        "url": "https://artificialanalysis.ai/models/mimo-v2-6-pro"
+        "name": "Artificial Analysis model page (Intelligence Index v5.0)",
+        "url": "https://artificialanalysis.ai/evaluations/artificial-analysis-long-context-reasoning"
       },
-      "observedAt": "2026-10-17",
-      "evaluatedVariant": null,
-      "note": null,
-      "grade": "measured"
-    },
-    {
-      "key": "omniAccuracy",
-      "label": "AA-Omniscience Accuracy",
-      "category": "rely",
-      "weightPct": 2.8037,
-      "value": 34.85,
-      "unit": "% accuracy",
-      "normalized": 16.7,
-      "source": {
-        "name": "Artificial Analysis Intelligence Index v4.3.2",
-        "url": "https://artificialanalysis.ai/models/mimo-v2-6-pro"
-      },
-      "observedAt": "2026-10-17",
+      "observedAt": "2026-11-01",
       "evaluatedVariant": null,
       "note": null,
       "grade": "measured"
     },
     {
       "key": "hle",
-      "label": "HLE",
-      "category": "intel",
-      "weightPct": 2.8037,
-      "value": 49.35,
-      "unit": "% accuracy",
-      "normalized": 61.1,
+      "label": "HLE-Diamond",
+      "category": "Knowledge and science",
+      "weightPct": 1.25,
+      "value": 0.152,
+      "decimals": 3,
+      "unit": "accuracy (0-1)",
+      "normalized": 15.2,
       "source": {
-        "name": "Artificial Analysis Intelligence Index v4.3.2",
-        "url": "https://artificialanalysis.ai/models/mimo-v2-6-pro"
+        "name": "Artificial Analysis model page (Intelligence Index v5.0)",
+        "url": "https://artificialanalysis.ai/evaluations/hle-diamond"
       },
-      "observedAt": "2026-10-17",
+      "observedAt": "2026-11-01",
       "evaluatedVariant": null,
       "note": null,
       "grade": "measured"
     },
     {
-      "key": "gpqaDiamond",
-      "label": "GPQA Diamond (legacy)",
-      "category": "intel",
-      "weightPct": 2.8037,
-      "value": null,
-      "unit": "% accuracy",
-      "normalized": null,
-      "source": null,
-      "observedAt": null,
-      "evaluatedVariant": null,
-      "note": null,
-      "grade": "missing"
-    },
-    {
-      "key": "scicode",
-      "label": "SciCode",
-      "category": "intel",
-      "weightPct": 2.8037,
-      "value": 60.88,
-      "unit": "% score",
-      "normalized": 83.3,
+      "key": "tbScience",
+      "label": "Terminal-Bench-Science 0.1",
+      "category": "Knowledge and science",
+      "weightPct": 1.25,
+      "value": 0.0571428571428571,
+      "decimals": 3,
+      "unit": "% resolved (0-1)",
+      "normalized": 5.71428571428571,
       "source": {
-        "name": "Artificial Analysis Intelligence Index v4.3.2",
-        "url": "https://artificialanalysis.ai/models/mimo-v2-6-pro"
+        "name": "Artificial Analysis model page (Intelligence Index v5.0)",
+        "url": "https://artificialanalysis.ai/evaluations/terminal-bench-science"
       },
-      "observedAt": "2026-10-17",
+      "observedAt": "2026-11-01",
       "evaluatedVariant": null,
       "note": null,
       "grade": "measured"
     },
     {
       "key": "critpt",
-      "label": "CritPt",
-      "category": "intel",
-      "weightPct": 2.1028,
-      "value": 26.57,
-      "unit": "% score",
-      "normalized": 55.6,
+      "label": "CritPt v2 (hard subset)",
+      "category": "Knowledge and science",
+      "weightPct": 1.25,
+      "value": 0.34,
+      "decimals": 3,
+      "unit": "score (0-1)",
+      "normalized": 34.0,
       "source": {
-        "name": "Artificial Analysis Intelligence Index v4.3.2",
-        "url": "https://artificialanalysis.ai/models/mimo-v2-6-pro"
+        "name": "Artificial Analysis model page (Intelligence Index v5.0)",
+        "url": "https://artificialanalysis.ai/evaluations/critpt-v2"
       },
-      "observedAt": "2026-10-17",
+      "observedAt": "2026-11-01",
       "evaluatedVariant": null,
       "note": null,
       "grade": "measured"
     }
   ],
   "cost": {
-    "apiUsd": 206.65533881883294,
-    "apiUsdPerPoint": 4.461065915513719,
-    "planUsdPerRun": 137.77022587922195,
-    "planUsdPerPoint": 2.974043943675812,
-    "planComparableUsdPerPoint": 2.974043943675812,
+    "apiUsd": 171.70030964750728,
+    "planUsd": 145.41015383427106,
     "fallback": null,
     "route": {
-      "id": "mimo-provisional-user-assumption",
-      "planLabel": "MiMo · provisional 1.5x assumption",
-      "planFeeUsd": null,
-      "valueMultiple": 1.5,
+      "id": "mimo-tokenplan-max-mimo-v2-6-pro-quota-ceiling",
+      "planLabel": "MiMo Token Plan Max $100 · quota ceiling (provider-derived)",
+      "planFeeUsd": 100,
+      "valueMultiple": 1.1808,
       "grade": "assumption",
-      "evidenceLabel": "Provisional assumption",
+      "assumptionKind": "ceiling",
+      "evidenceLabel": "Provider quota ceiling (owner decision O46; not a measurement)",
       "sourceModel": null,
-      "sourceUrl": null,
-      "sourceDate": null
+      "sourceUrl": "https://mimo.mi.com/docs/en-US/price/token-plan",
+      "sourceDate": "2026-10-21"
+    },
+    "subset": true,
+    "partialComponents": [],
+    "workload": "835a9baf594a1251",
+    "planFlags": [
+      "workload-unmatched",
+      "provider quota ceiling; full use assumed, the optimistic end on use; credits valued at the recorded API rate, not the highest (O46, O125)"
+    ],
+    "costScore": {
+      "api": 79.62314428191684,
+      "plan": 63.686784795180614
+    },
+    "components": [
+      {
+        "key": "aa-briefcase",
+        "label": "AA-Briefcase",
+        "costUsd": 34.596611763440706,
+        "completeness": "confirmed-complete",
+        "source": "AA Intelligence Index evaluation cost (cost per task x task count)",
+        "agent": null,
+        "admitted": true
+      },
+      {
+        "key": "gdp-pdf",
+        "label": "GDP.pdf",
+        "costUsd": 2.402207025,
+        "completeness": "confirmed-complete",
+        "source": "AA Intelligence Index evaluation cost (cost per task x task count)",
+        "agent": null,
+        "admitted": true
+      },
+      {
+        "key": "automationbench-aa",
+        "label": "AutomationBench-AA",
+        "costUsd": 27.765931976685117,
+        "completeness": "confirmed-complete",
+        "source": "AA Intelligence Index evaluation cost (cost per task x task count)",
+        "agent": null,
+        "admitted": true
+      },
+      {
+        "key": "terminalbench-4-0",
+        "label": "Terminal-Bench 4.0 (AA Index run)",
+        "costUsd": 28.911314773989552,
+        "completeness": "confirmed-complete",
+        "source": "AA Intelligence Index evaluation cost (cost per task x task count)",
+        "agent": null,
+        "admitted": true
+      },
+      {
+        "key": "frontiercode-2-0",
+        "label": "FrontierCode 2.0",
+        "costUsd": 33.86992938803026,
+        "completeness": "confirmed-complete",
+        "source": "AA Intelligence Index evaluation cost (cost per task x task count)",
+        "agent": null,
+        "admitted": true
+      },
+      {
+        "key": "terminal-bench-science",
+        "label": "Terminal-Bench-Science",
+        "costUsd": 44.154314720361654,
+        "completeness": "confirmed-complete",
+        "source": "AA Intelligence Index evaluation cost (cost per task x task count)",
+        "agent": null,
+        "admitted": true
+      }
+    ],
+    "aaCostCaveat": null,
+    "selectionReason": "larger quota-ceiling multiple (O46: provider-derived, not observed)",
+    "planAmount": {
+      "amountKind": "provider quota ceiling: the full quota at API rates (O46; full use assumed)",
+      "amountTarget": "full-quota consumption",
+      "amountUsd": 118.08000000000001,
+      "derivation": "quota ceiling: the tier's credits at the provider's API rate",
+      "feePeriod": "month",
+      "subscriptionCashUsd": 100,
+      "additionalCashUsd": 0.0,
+      "grossCashUsd": 100.0,
+      "workload": "the route's measurement workload",
+      "measurementObjectId": "mimo-tokenplan-max-mimo-v2-6-pro-quota-ceiling",
+      "capacitySolutionId": null,
+      "cashObjectId": "mimo-tokenplan-max-mimo-v2-6-pro-quota-ceiling:month cash",
+      "purchasePolicyId": "subscription fee for the fee period, no additional cash declared",
+      "capacityStatus": "provider quota ceiling: full use of the quota assumed (O46)",
+      "valuationStatus": "release",
+      "donorRouteId": null,
+      "interpretationLabel": "provider quota ceiling: the full quota at API rates (O46; full use assumed), API-priced USD per month"
     }
   },
   "plans": [
     {
-      "id": "mimo-provisional-user-assumption",
-      "planLabel": "MiMo · provisional 1.5x assumption",
-      "planFeeUsd": null,
-      "valueMultiple": 1.5,
+      "id": "mimo-tokenplan-max-mimo-v2-6-pro-quota-ceiling",
+      "planLabel": "MiMo Token Plan Max $100 · quota ceiling (provider-derived)",
+      "planFeeUsd": 100,
+      "valueMultiple": 1.1808,
       "grade": "assumption",
-      "evidenceLabel": "Provisional assumption",
-      "sourceUrl": null,
-      "sourceDate": null,
-      "usdPerRun": 137.77022587922195,
-      "usdPerPoint": 2.974043943675812,
-      "selected": true
+      "assumptionKind": null,
+      "evidenceLabel": "Provider quota ceiling (owner decision O46; not a measurement)",
+      "sourceUrl": "https://mimo.mi.com/docs/en-US/price/token-plan",
+      "sourceDate": "2026-10-21",
+      "case": 2,
+      "officialDisplayEligible": true,
+      "planIntervalEligible": false,
+      "usdPerRun": 145.41015383427106,
+      "selected": true,
+      "planRank": null,
+      "planValue": 52.03131534668346
+    },
+    {
+      "id": "mimo-tokenplan-pro-mimo-v2-6-pro-quota-ceiling",
+      "planLabel": "MiMo Token Plan Pro $50 · quota ceiling (provider-derived)",
+      "planFeeUsd": 50,
+      "valueMultiple": 1.0944,
+      "grade": "assumption",
+      "assumptionKind": null,
+      "evidenceLabel": "Provider quota ceiling (owner decision O46; not a measurement)",
+      "sourceUrl": "https://mimo.mi.com/docs/en-US/price/token-plan",
+      "sourceDate": "2026-10-21",
+      "case": 2,
+      "officialDisplayEligible": true,
+      "planIntervalEligible": false,
+      "usdPerRun": 156.8899028211872,
+      "selected": false,
+      "planRank": null,
+      "planValue": 51.45283581961376
+    },
+    {
+      "id": "mimo-tokenplan-standard-mimo-v2-6-pro-quota-ceiling",
+      "planLabel": "MiMo Token Plan Standard $16 · quota ceiling (provider-derived)",
+      "planFeeUsd": 16,
+      "valueMultiple": 0.99,
+      "grade": "assumption",
+      "assumptionKind": null,
+      "evidenceLabel": "Provider quota ceiling (owner decision O46; not a measurement)",
+      "sourceUrl": "https://mimo.mi.com/docs/en-US/price/token-plan",
+      "sourceDate": "2026-10-21",
+      "case": 2,
+      "officialDisplayEligible": true,
+      "planIntervalEligible": false,
+      "usdPerRun": 173.4346562096033,
+      "selected": false,
+      "planRank": null,
+      "planValue": 50.68958385588083
+    },
+    {
+      "id": "mimo-tokenplan-lite-mimo-v2-6-pro-quota-ceiling",
+      "planLabel": "MiMo Token Plan Lite $6 · quota ceiling (provider-derived)",
+      "planFeeUsd": 6,
+      "valueMultiple": 0.984,
+      "grade": "assumption",
+      "assumptionKind": null,
+      "evidenceLabel": "Provider quota ceiling (owner decision O46; not a measurement)",
+      "sourceUrl": "https://mimo.mi.com/docs/en-US/price/token-plan",
+      "sourceDate": "2026-10-21",
+      "case": 2,
+      "officialDisplayEligible": true,
+      "planIntervalEligible": false,
+      "usdPerRun": 174.4921846011253,
+      "selected": false,
+      "planRank": null,
+      "planValue": 50.643304172724285
     }
   ],
+  "scenarios": {
+    "status": "current",
+    "api": [],
+    "plan": []
+  },
+  "intervals": {
+    "api": null,
+    "plan": null
+  },
   "history": [
     {
       "version": "v1.9.6",
@@ -362,16 +484,71 @@
       "date": "2026-10-19",
       "rank": {
         "api": 7,
-        "plan": 11
+        "plan": null
+      }
+    },
+    {
+      "version": "v3.0.0",
+      "date": "2026-10-19",
+      "rank": {
+        "api": null,
+        "plan": null
       }
     }
   ],
   "frontier": {
-    "onAaFrontier": true,
-    "aaFrontierNote": "On the observed Artificial Analysis Intelligence Index versus total cost frontier as MiMo-V2.6-Pro.",
-    "tier": "frontier",
+    "onAaFrontier": false,
+    "aaFrontierNote": "Not on the observed Artificial Analysis Intelligence Index versus total cost frontier.",
+    "tier": "left cohort",
     "configuration": "MiMo-V2.6-Pro",
-    "intelligenceGap": 0,
+    "intelligenceGap": null,
     "footnote": null
-  }
+  },
+  "rankings": [
+    {
+      "track": "max",
+      "label": "Max-effort ranking",
+      "href": "/rankings/",
+      "shown": true,
+      "rankingEligible": true,
+      "rank": {
+        "api": null,
+        "plan": null
+      },
+      "overall": {
+        "api": 56.01540521836752,
+        "plan": 52.03131534668346
+      }
+    },
+    {
+      "track": "aicd",
+      "label": "AI Coding Daily ranking",
+      "href": "/rankings/ai-coding-daily/",
+      "shown": false,
+      "rankingEligible": true,
+      "rank": {
+        "api": 12,
+        "plan": 64
+      },
+      "overall": {
+        "api": 48.38801482602803,
+        "plan": 41.468544945544764
+      }
+    },
+    {
+      "track": "common",
+      "label": "Common-leaf ranking (diagnostic)",
+      "href": "/rankings/common-leaves/",
+      "shown": false,
+      "rankingEligible": true,
+      "rank": {
+        "api": 22,
+        "plan": 104
+      },
+      "overall": {
+        "api": 41.50661556776184,
+        "plan": 39.154293672342156
+      }
+    }
+  ]
 }

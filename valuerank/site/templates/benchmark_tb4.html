@@ -1,5 +1,6 @@
 {% extends "base.html" %}
-{%- from "partials/badge.html" import badge -%}
+{%- from "partials/badge.html" import badge, describe -%}
+{%- from "partials/footnotes.html" import fn_name, fn_item, fn_section -%}
 {%- from "partials/fmt.html" import num, usd -%}
 {%- from "partials/chart.html" import chart -%}
 {% block content %}
@@ -19,17 +20,16 @@
   <h2 id="rows-title" class="section-title">Official leaderboard rows</h2>
   <div class="table-wrap" tabindex="0" role="region" aria-label="Official leaderboard rows table">
     <table class="data-table">
-      <thead><tr><th scope="col" class="col-num">Rank</th><th scope="col" class="col-model">Model</th><th scope="col">Agent</th><th scope="col" class="col-num">Resolved</th><th scope="col" class="col-num">&plusmn;</th><th scope="col" class="col-num">Cost (USD)</th><th scope="col">Evidence</th></tr></thead>
+      <thead><tr><th scope="col" class="col-num">Rank</th><th scope="col" class="col-model">Model</th><th scope="col">Agent</th><th scope="col" class="col-num">Resolved</th><th scope="col" class="col-num">&plusmn;</th><th scope="col" class="col-num">Cost (USD)</th></tr></thead>
       <tbody>
         {%- for r in t.rows %}
         <tr>
           <td class="cell-num">{{ r.rank }}</td>
-          <th scope="row" class="cell-model"><span class="model-id"><span class="model-name">{{ r.model }}</span><span class="model-dev">{{ r.releaseDate }} &middot; {{ r.tokens }} tokens</span></span></th>
+          <th scope="row" class="cell-model"><span class="model-id">{% call fn_name("tb4-official", 1, r.model, "tb4-official-" ~ loop.index) %}<span class="model-name">{{ r.model }}</span>{% endcall %}<span class="model-dev">{{ r.releaseDate }} &middot; {{ r.tokens }} tokens</span></span></th>
           <td>{{ r.agent }}</td>
           <td class="cell-num">{{ num(r.resolutionRatePct) }}%</td>
           <td class="cell-num">{{ num(r.uncertaintyPct) }}</td>
           <td class="cell-num">{% if r.costUsd is none %}Not published{% else %}{{ usd(r.costUsd, 0) }}{% endif %}</td>
-          <td>{{ badge("measured") }}</td>
         </tr>
         {%- endfor %}
       </tbody>
@@ -43,16 +43,15 @@
   {%- if t.providerClaims %}
   <div class="table-wrap" tabindex="0" role="region" aria-label="Provider claim supplement table">
     <table class="data-table">
-      <thead><tr><th scope="col" class="col-model">Model</th><th scope="col" class="col-num">Claimed</th><th scope="col">Publisher</th><th scope="col">Published</th><th scope="col">Scope</th><th scope="col">Evidence</th></tr></thead>
+      <thead><tr><th scope="col" class="col-model">Model</th><th scope="col" class="col-num">Claimed</th><th scope="col">Publisher</th><th scope="col">Published</th><th scope="col">Scope</th></tr></thead>
       <tbody>
         {%- for c in t.providerClaims %}
         <tr>
-          <th scope="row" class="cell-model"><span class="model-id"><a class="model-name" href="{{ c.sourceUrl }}" rel="noopener">{{ c.evaluatedModel }}</a></span></th>
+          <th scope="row" class="cell-model"><span class="model-id">{% call fn_name("tb4-claim-" ~ loop.index, 1 + loop.index, c.evaluatedModel) %}<a class="model-name" href="{{ c.sourceUrl }}" rel="noopener">{{ c.evaluatedModel }}</a>{% endcall %}</span></th>
           <td class="cell-num">{{ num(c.valuePct) }}%</td>
           <td>{{ c.publisher }}</td>
           <td>{{ c.publishedOn }}</td>
           <td>{{ c.eligibilityScope }}{% if c.caveat %}<details class="evidence"><summary>Caveat</summary><p class="small">{{ c.caveat }}</p></details>{% endif %}</td>
-          <td>{{ badge("claim") if c.eligibleForRanking else badge("missing", label="Not ranked") }}</td>
         </tr>
         {%- endfor %}
       </tbody>
@@ -73,5 +72,14 @@
   </ul>
   {%- endif %}
 </section>
+
+{% call fn_section() %}
+  <ol class="footnotes">
+    {% call fn_item("tb4-official", "Official leaderboard rows", back="#official-rows", back_label="Back to the official leaderboard rows") %}{{ badge("measured") }} <span class="fn-text">Every official row: {{ describe("measured") }} Captured {{ t.observedAt[:10] }} from <a href="{{ t.source.targetUrl }}" rel="noopener">{{ t.source.publisher }}</a>.</span>{% endcall %}
+    {%- for c in t.providerClaims %}
+    {% call fn_item("tb4-claim-" ~ loop.index, c.evaluatedModel) %}{{ badge("claim") if c.eligibleForRanking else badge("missing", label="Not ranked") }} <span class="fn-text">{{ "Provider claim used for ranking" if c.eligibleForRanking else "Provider claim not used for ranking" }}: {{ c.publisher }}, {{ c.publishedOn }}.</span> <a href="{{ c.sourceUrl }}" rel="noopener">Source</a>{% endcall %}
+    {%- endfor %}
+  </ol>
+{% endcall %}
 {% endblock %}
 {% block data %}<script type="application/json" id="page-data">{{ page.tb4Json | tojson }}</script>{% endblock %}

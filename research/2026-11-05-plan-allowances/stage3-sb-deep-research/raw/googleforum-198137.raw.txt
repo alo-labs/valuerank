@@ -1,0 +1,66 @@
+burackb | 2026-11-04 10:35:54 UTC | #1
+
+Product: Antigravity 2.0 desktop app 2.29.0 (Windows). The agy CLI (1.3.5) was not used.
+
+All times are UTC, with Turkey time (UTC+3) in brackets.
+
+STEPS -as observed-:
+
+1. In a long-running conversation, start a task with /boost; its subagents run in the background.
+2. While it runs, open /btw and ask a side question that trigerred tools (here: checking recently changed files on disk).
+3. The /btw agent runs tools (run_command, read_file, \~40 calls) and answers.
+4. After the answer, the /btw turn keeps getting resumed automatically, with no input.
+
+OBSERVED
+
+* Exactly one user message in the /btw conversation, at 07:32 UTC (10:32).
+* From 07:53 UTC (10:53) to 09:01 UTC (12:01): at least 259 model turns with no tool calls and no new input. They came every \~7–15 seconds until \~08:29 UTC (11:29), then sporadically until 09:01 UTC (12:01). A few similar empty turns appear just before 07:53 UTC but are not counted.
+* Every one of these turns returns almost the same reply: "This /btw side question is complete; close this side window and continue in the main chat."
+* The conversation received only two background-task notifications (07:32 and 07:33 UTC), both before the loop. No subagent or task message triggered the resumes.
+* The model's own reasoning during the loop: "The backend was unexpectedly resuming the same turn after timeouts or stream breaks ... related to the Continue signal in the stream." It checked for running background tasks; none were running.
+* The /btw panel disappeared from the UI while the loop kept running in the background, so I could not see or stop it.
+* Step numbers jump 6111 -> 6336 -> 7049, which suggests more turns ran than were written to the local transcript.
+
+TOKEN IMPACT (from the local transcript)
+
+* Loop turns: 17,852,005 input + 12,427,293 cache read + 24,036 output = \~30.3M tokens.
+* Early loop turns were mostly cached (\~2K new input + \~100K cache read each). Later turns averaged \~69K uncached input each, so prompt caching also stopped working.
+* Loop share of all my token usage, per quota window (measured at 10:08 UTC / 13:08):
+  * Current 5-hour window (since 06:26 UTC / 09:26): \~38% of all tokens, \~85% of all uncached input (17.85M of 21.0M).
+  * Current weekly window (since Nov 1, 08:07 UTC / 11:07): \~11% of all tokens, \~39% of all uncached input (17.85M of 45.8M).
+  * These totals include conversations on both the Gemini and third-party model pools. The local transcript doesn't record which model each turn used, so I can't split them by pool.
+* My weekly quota dropped from \~50% to \~30% in about two hours, on the same workflow I had used for the previous three days.
+
+POSSIBLY RELATED
+
+* agy CLI 1.5.0 release notes: "Changed /btw side questions to be able to call tools ... showing each call live in the /btw card and a Called N tools summary once the answer is done." The same capability seems to be live in the 2.0 app, since my /btw agent called tools. The loop started right after a tool-using /btw turn finished.
+
+EXPECTED
+
+* A /btw turn ends once the answer is given and is not resumed without user input.
+* A running /btw panel stays visible and can be stopped.
+* Tokens spent by a loop I didn't trigger are not counted against my quota.
+
+REQUESTS
+
+1. Please investigate the Continue / turn-resume behaviour of /btw side conversations, especially after tool use.
+2. Please review and restore the quota consumed by this loop.
+
+Evidence: I have a sanitized step-by-step log (timestamps, token counts, tool names only) and a quota screenshot. Happy to send them on request.
+
+-------------------------
+
+burackb | 2026-11-04 10:47:33 UTC | #2
+
+Additional finding: I compared this with my earlier /btw side conversations (about 60 of them, Oct 14 – Nov 3).
+
+Until Nov 3, every /btw prompt was wrapped by the app with:
+"This is a side question from the user. You MUST answer directly in a single response. Your tools are disabled... You must complete your response in a single turn with no follow-up turns."
+All of those finished in exactly 1 turn.
+
+Since the update (first seen Nov 4, 07:32 UTC), this wrapper is gone: the question is sent as-is and tools are enabled. In the broken conversation, the single-turn guard no longer applied, and the side conversation kept getting resumed by a "Continue" signal: 347 turns from one question.
+
+So the regression seems to be: tool-enabled /btw removed the single-turn limit, but the side conversation still gets auto-continued and has no stop condition.
+
+-------------------------
+

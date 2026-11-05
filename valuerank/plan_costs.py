@@ -125,14 +125,12 @@ def cost_scores(costs: list[float | int | None]) -> list[float | None]:
 def blend(cost_score: float | None, quality_score: float | None, cost_weight_pct: float = COST_WEIGHT_PCT) -> float | None:
     """Overall score: cost carries ``cost_weight_pct`` and quality the rest.
 
-    A model without a quality score has no overall score; a model without a cost
-    score is scored on quality alone. Neither gap is filled in.
+    A model without a quality score or without a cost score has no overall score
+    (AGENTS.md: a configuration without a cost gets no value score). Neither gap is filled in.
     """
 
-    if quality_score is None:
+    if quality_score is None or cost_score is None:
         return None
-    if cost_score is None:
-        return round(quality_score, 1)
     share = cost_weight_pct / 100
     return round(share * cost_score + (1 - share) * quality_score, 1)
 

@@ -1,0 +1,1964 @@
+<!DOCTYPE html><!-- Last Published: Fri Oct 23 2026 03:58:45 GMT+0000 (Coordinated Universal Time) --><html data-wf-domain="surgehq.ai" data-wf-page="68dcfaf6b468278d034d05ca" data-wf-site="68dc970bd6e945ea3fb0f426" lang="en" data-wf-collection="68dcfaf6b468278d034d05c3" data-wf-item-slug="complexconstraints-a-benchmark-for-entangled-instruction-following"><head><meta charset="utf-8"/><link href="https://cdn.prod.website-files.com" rel="preconnect" crossorigin="anonymous"/><title>ComplexConstraints: A Benchmark for Entangled Instruction Following</title><meta content="A benchmark for entangled instruction following, where constraints depend on each other, fire conditionally, and must be inferred from context." name="description"/><meta content="ComplexConstraints: A Benchmark for Entangled Instruction Following" property="og:title"/><meta content="A benchmark for entangled instruction following, where constraints depend on each other, fire conditionally, and must be inferred from context." property="og:description"/><meta content="https://cdn.prod.website-files.com/68dcd2ceb173c46fa029931c/6aaacab099d64c6ea6047ce0_6aaacaaf190eed7bde98d08f_6aaab07f6be646b401013825_cc-e.jpeg" property="og:image"/><meta content="ComplexConstraints: A Benchmark for Entangled Instruction Following" name="twitter:title"/><meta content="A benchmark for entangled instruction following, where constraints depend on each other, fire conditionally, and must be inferred from context." name="twitter:description"/><meta content="https://cdn.prod.website-files.com/68dcd2ceb173c46fa029931c/6aaacab099d64c6ea6047ce0_6aaacaaf190eed7bde98d08f_6aaab07f6be646b401013825_cc-e.jpeg" name="twitter:image"/><meta property="og:type" content="website"/><meta content="summary_large_image" name="twitter:card"/><meta content="width=device-width, initial-scale=1" name="viewport"/><meta content="pQAswCzysPjLs0G2VYk3eveYKntEtcAtW3ebpLZct_0" name="google-site-verification"/><link href="https://cdn.prod.website-files.com/68dc970bd6e945ea3fb0f426/css/surgeai.webflow.shared.319079d2e.min.css" rel="stylesheet" type="text/css" integrity="sha384-MZB50uKheJoLQzADb3PZp5u1i7pBWYAVWEf/hhUeoTblOf0CHakwi3BpdAwcnGq4" crossorigin="anonymous"/><script type="text/javascript">!function(o,c){var n=c.documentElement,t=" w-mod-";n.className+=t+"js",("ontouchstart"in o||o.DocumentTouch&&c instanceof DocumentTouch)&&(n.className+=t+"touch")}(window,document);</script><link href="https://cdn.prod.website-files.com/68dc970bd6e945ea3fb0f426/6a5b7e19105f4fce18c0625c_surge-favicon.png" rel="icon" type="image/png" sizes="32x32" media="(prefers-color-scheme: light)"/><link href="https://cdn.prod.website-files.com/68dc970bd6e945ea3fb0f426/6a5b7e19105f4fce18c0625c_surge-favicon.png" rel="icon" type="image/png" sizes="32x32" media="(prefers-color-scheme: dark)"/><link href="https://cdn.prod.website-files.com/68dc970bd6e945ea3fb0f426/6a5b7e195965f618cc315255_surge-favicon.png" rel="icon" type="image/png" sizes="48x48"/><link href="https://cdn.prod.website-files.com/68dc970bd6e945ea3fb0f426/6a5b7e19dbef008a2100f7c4_surge-favicon.png" rel="apple-touch-icon" sizes="180x180"/><link href="https://cdn.prod.website-files.com/68dc970bd6e945ea3fb0f426/6a5b7e196502d0e9dd4580fa_surge-favicon.png" rel="icon" type="image/png" sizes="192x192"/><link href="https://cdn.prod.website-files.com/68dc970bd6e945ea3fb0f426/6a5b7e190c239069b2ce48b0_surge-favicon.png" rel="icon" type="image/png" sizes="512x512"/><link href="https://surgehq.ai/blog/complexconstraints-a-benchmark-for-entangled-instruction-following" rel="canonical"/><script>(function(w,i,g){w[g]=w[g]||[];if(typeof w[g].push=='function')w[g].push.apply(w[g],Array.isArray(i)?i:[i]);})(window,['AW-18321036587','G-7B428DH1EK'],'google_tags_first_party');</script><script async="" src="/v2645sy3qzdjNjhkYzk3MGJkNmU5NDVlYTNmYjBmNDI2/O2mph2sGwb8WM6kpC8iVq66OnpRPqQ"></script><script async="" src="/v2645sy3qzdjNjhkYzk3MGJkNmU5NDVlYTNmYjBmNDI2/O2mph2sGx8UMQKUoAb3tqd3wT6k"></script><script type="text/javascript">window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments);}gtag('set', 'developer_id.dZGVlNj', true);gtag('set', 'developer_id.dYWYxNW', true);gtag('js', new Date());gtag('config', 'AW-18321036587');gtag('config', 'G-7B428DH1EK');</script><!-- Start cookieyes banner --> <script id="cookieyes" type="text/javascript" src="https://cdn-cookieyes.com/client_data/29f19a518b28f4335a52dca41ead4cc2/script.js"></script> <!-- End cookieyes banner -->
+
+<style>
+  html {
+    -webkit-tap-highlight-color: transparent;
+  }
+  .debug-grid,
+  .container-column{
+  	display: none;
+  } 
+  .toc-stick-inner {
+	opacity: 0;
+    transform: translateY(1rem);
+  }
+</style>
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<script>
+   const commentElement = document.createComment(`
+                       ↑↑↑↑↑↑↑↑↑↑↑↑     
+                    ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑   
+                 ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑ 
+              ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑ 
+          ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑
+       ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑
+    ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑
+  ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑
+ ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑ 
+↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑  
+↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑    
+↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑      
+↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑         
+↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑     
+ ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑   
+  ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑ 
+    ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑
+         ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑
+       ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑
+    ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑
+  ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑
+ ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑ 
+↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑  
+↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑    
+↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑       
+↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑          
+ ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑              
+ ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑                 
+  ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑                    
+     ↑↑↑↑↑↑↑↑↑↑↑↑                          
+ 
+ Yes, we’re hiring.  Visit https://surgehq.ai/careers to learn more.
+`);
+        
+  if (document.documentElement) {
+    document.insertBefore(commentElement, document.documentElement);
+  }
+</script>
+
+<!-- Marketing conversions -->
+<script async crossorigin="anonymous" src="//dwuve4jqqfp9f.cloudfront.net/docs/javascripts/marketing-captures-v3.js" type="text/javascript"></script>
+
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-TXM5FHJG');</script>
+<!-- End Google Tag Manager -->
+
+ 
+<script async type="text/javascript">
+	!function(){"use strict";!function(e,t){var n=e.amplitude||{_q:[],_iq:{}};if(n.invoked)e.console&&console.error&&console.error("Amplitude snippet has been loaded.");else{var r=function(e,t){e.prototype[t]=function(){return this._q.push({name:t,args:Array.prototype.slice.call(arguments,0)}),this}},s=function(e,t,n){return function(r){e._q.push({name:t,args:Array.prototype.slice.call(n,0),resolve:r})}},o=function(e,t,n){e[t]=function(){if(n)return{promise:new Promise(s(e,t,Array.prototype.slice.call(arguments)))}}},i=function(e){for(var t=0;t<y.length;t++)o(e,y[t],!1);for(var n=0;n<g.length;n++)o(e,g[n],!0)};n.invoked=!0;var a=t.createElement("script");a.type="text/javascript",a.integrity="sha384-TPZhteUkZj8CAyBx+GZZytBdkuKnhKsSKcCoVCq0QSteWf/Kw5Kb9oVFUROLE1l3",a.crossOrigin="anonymous",a.async=!0,a.src="https://cdn.amplitude.com/libs/analytics-browser-1.9.1-min.js.gz",a.onload=function(){e.amplitude.runQueuedFunctions||console.log("[Amplitude] Error: could not load SDK")};var c=t.getElementsByTagName("script")[0];c.parentNode.insertBefore(a,c);for(var u=function(){return this._q=[],this},l=["add","append","clearAll","prepend","set","setOnce","unset","preInsert","postInsert","remove","getUserProperties"],p=0;p<l.length;p++)r(u,l[p]);n.Identify=u;for(var d=function(){return this._q=[],this},f=["getEventProperties","setProductId","setQuantity","setPrice","setRevenue","setRevenueType","setEventProperties"],v=0;v<f.length;v++)r(d,f[v]);n.Revenue=d;var y=["getDeviceId","setDeviceId","getSessionId","setSessionId","getUserId","setUserId","setOptOut","setTransport","reset"],g=["init","add","remove","track","logEvent","identify","groupIdentify","setGroup","revenue","flush"];i(n),n.createInstance=function(e){return n._iq[e]={_q:[]},i(n._iq[e]),n._iq[e]},e.amplitude=n}}(window,document)}();
+  
+	amplitude.init('50c088a20a7d080570a593d506aec403', undefined, { defaultTracking: { sessions: true, pageViews: true, formInteractions: true, fileDownloads: true }});
+</script> 
+
+<!-- Tablet Header Navigation -->
+<style>
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+  .header-ham .header-ham-txt:last-child,
+  .header-ham.active .header-ham-txt:first-child {
+    opacity: 0;
+  }
+  .header-ham .header-ham-txt:first-child,
+  .header-ham.active .header-ham-txt:last-child {
+    opacity: 1;
+  }
+  .header.on-open-nav .header-act {
+    opacity: 1;
+    transform: translate(0);
+  }
+  .header.on-open-nav .header-link,
+  .header.on-open-nav .header-btn {
+    pointer-events: auto;
+  }
+}
+</style>
+
+<!-- Benchmark sticky header class alignment -->
+<style id="benchmark-sticky-header-alignment">
+.lead-header .lead-header-right {
+  align-items: center;
+  column-gap: 3.2rem;
+  row-gap: 3.2rem;
+}
+.lead-header .header-link {
+  pointer-events: auto;
+  color: var(--_color---content--title);
+  border-bottom: 0;
+  padding-top: 0;
+  padding-bottom: 0;
+}
+.lead-header .header-link:hover {
+  color: var(--_color---content--subtitle);
+}
+.lead-header .header-btn {
+  pointer-events: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  column-gap: .4rem;
+  color: var(--_color---content--title);
+  background-color: #24241d0d;
+  padding: 1.1rem 2rem .9rem;
+}
+.lead-header .header-btn:hover {
+  color: var(--_color---background--surface);
+  background-color: var(--_color---content--title);
+}
+.lead-header .header-btn .lead-header-btn-ic {
+  display: none;
+}
+@media only screen and (max-width: 767px) {
+  .lead-header .header-link {
+    display: none;
+  }
+}
+</style>
+
+<!-- Benchmark hero dark actions -->
+<style id="benchmark-hero-dark-actions">
+.main .lead-hero .lead-hero-btns .lead-hero-btn {
+  background-color: var(--_color---content--title);
+  border-color: var(--_color---content--title);
+  color: var(--_color---background--main);
+}
+.main .lead-hero .lead-hero-btns .lead-hero-btn .lead-hero-btn-ic {
+  color: var(--_color---content--icon);
+}
+</style>
+
+<!-- Blog callout label scale -->
+<style id="blog-callout-label-scale">
+body .post-content-richtext blockquote > strong:first-child {
+  font-size: 1.2rem !important;
+  color: var(--_color---content--soft-body) !important;
+}
+</style>
+
+
+
+
+<script>
+    !function(e,r){try{if(e.vector)return void console.log("Vector snippet included more than once.");var t={};t.q=t.q||[];for(var o=["load","identify","on"],n=function(e){return function(){var r=Array.prototype.slice.call(arguments);t.q.push([e,r])}},c=0;c<o.length;c++){var a=o[c];t[a]=n(a)}if(e.vector=t,!t.loaded){var i=r.createElement("script");i.type="text/javascript",i.async=!0,i.src="https://cdn.vector.co/pixel.js";var l=r.getElementsByTagName("script")[0];l.parentNode.insertBefore(i,l),t.loaded=!0}}catch(e){console.error("Error loading Vector:",e)}}(window,document);
+    vector.load("2e47fc4f-2aa6-4a2a-92b9-83fb723c15c0");
+</script><style>
+.post-content-toc-ruler,
+.post-content-toc-wrap {
+  opacity: 0;
+  transform: translateX(-1rem);
+  pointer-events: none;
+}
+/*.post-content-toc-list-wrap,
+.post-content-toc-appendix {
+  display: none;
+}*/
+</style>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","headline":"ComplexConstraints: A Benchmark for Entangled Instruction Following","image":"https://cdn.prod.website-files.com/68dcd2ceb173c46fa029931c/6aaacab099d64c6ea6047ce0_6aaacaaf190eed7bde98d08f_6aaab07f6be646b401013825_cc-e.jpeg","datePublished":"2026-06-03","author":{"@type":"Organization","name":"Surge AI","url":"https://surgehq.ai/"},"publisher":{"@type":"Organization","name":"Surge AI","logo":{"@type":"ImageObject","url":"https://cdn.prod.website-files.com/68dc970bd6e945ea3fb0f426/68e340b3dfa20e2c97749a3a_Logo.svg"}},"mainEntityOfPage":{"@type":"WebPage","@id":"https://surgehq.ai/blog/complexconstraints-a-benchmark-for-entangled-instruction-following"}}
+</script></head><body class="body"><div class="global-comp"><div class="css-layout css-embed w-embed"><style>
+:root {
+  interpolate-size: allow-keywords;
+}
+
+ html {
+ 	 	--fs-global: 0.6535947712vw;
+   
+   	font-size: var(--fs-global);
+   	height: auto;
+    min-height: -webkit-fill-available;
+		-webkit-font-smoothing: antialiased;
+		-moz-osx-font-smoothing: grayscale;
+		font-kerning: none;
+		-webkit-text-size-adjust: 100%;
+    touch-action: manipulation;
+   	overflow-y: overlay;
+    /*scrollbar-gutter: stable;*/
+    overscroll-behavior: none;
+    
+ }
+  @media only screen and (min-width: 1531px) { html { --fs-global: 10px; } }
+  @media only screen and (max-width: 991px) { html { --fs-global: 1.1990407674vw; }}
+  @media only screen and (max-width: 767px) { html { --fs-global: 2.3255813953vw; }}
+  .custom-scroll {
+  	overflow-y: overlay;
+    scrollbar-gutter: stable;
+  }
+  html::-webkit-scrollbar,
+  html::-webkit-scrollbar-track {
+     width: .8rem;
+  }
+	.custom-scroll::-webkit-scrollbar,
+  .custom-scroll::-webkit-scrollbar-track {
+    width: .6rem;
+  }
+	html::-webkit-scrollbar-track,
+	.custom-scroll::-webkit-scrollbar-track {
+    border: solid .2rem transparent;
+  }
+	html::-webkit-scrollbar-thumb,
+  .custom-scroll::-webkit-scrollbar-thumb {
+    box-shadow: inset 0 0 1rem 1rem #24241D;
+    transition: all .4s;
+    border: solid .2rem transparent;
+  }
+  html::-webkit-scrollbar-thumb:hover,
+  .custom-scroll::-webkit-scrollbar-thumb:hover {
+    box-shadow: inset 0 0 1rem 1rem #3D424D;
+  }
+  html::-webkit-scrollbar-corner,
+  .custom-scroll::-webkit-scrollbar-corner {
+    background-color: transparent;
+  }
+  body, .body {
+  	position: relative;
+  }
+  main, .main {
+    flex-grow: 1;
+  }
+  .w-container:before,
+  .w-container:after {
+      display: none;
+  }
+  .w-embed:before,
+  .w-embed:after {
+    display: none;
+  }
+  .w-richtext:before,
+  .w-richtext:after {
+  	display: none;
+  }
+   .w-richtext a,
+   .w-richtext button {
+     position: relative;
+     display: inline-block;
+     vertical-align: bottom;
+     color: var(--decor--primary);
+  }
+  .w-richtext a::before,
+  .w-richtext button:before {
+  	content: '';
+    position: absolute;
+    display: block;
+    bottom: 0.15em;
+    width: 100%;
+    height: 1px;
+    left: 0;
+    transform: scaleX(0);
+    transform-origin: right;
+    background-color: currentColor;
+    -webkit-transition: 0.6s transform cubic-bezier(0.66, 0, 0.15, 1);
+    transition: 0.6s transform cubic-bezier(0.66, 0, 0.15, 1);
+  }
+  .w-richtext > *:first-child{
+  	margin-top: 0 !important;
+  }
+  .w-richtext > *:last-child {
+  	margin-bottom: 0 !important;
+  }
+  .w-richtext li:has(strong)::marker {
+    font-weight: 500;
+	}
+  .w-richtext ol:has(ul, ol) > li > *:not(ul, ol) {
+    font-size: 1.8rem;
+  }
+  .w-richtext li ul,
+  .w-richtext li ol {
+		margin-top: .7rem !important;
+    margin-bottom: .7rem !important;
+  }
+  .w-richtext li:last-child {
+  	margin-bottom: 0;
+  }
+  .w--current {
+  	pointer-events: none;
+  }
+  .w-input,
+  .w-select {
+    height: auto;
+    padding: 1rem 1.4rem;
+    background-color: transparent;
+  }
+  .w-radio-input {
+  	accent-color: var(--decor--primary);
+  }
+  .w-richtext figure {
+    display: block;
+  }
+  .w-richtext figure > div {
+  	border-radius: 1rem;
+		overflow: hidden;
+    width: 100%;
+  }
+  .w-richtext figure img {
+  	width: 100% !important;
+    max-width: 100%;
+    object-fit: cover;
+    height: auto;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -o-user-select: none;
+    user-select: none;
+    pointer-events: none;
+    display: block;
+    outline: 0;
+  }
+  
+  button {
+  	background-color: initial;
+    color: currentColor;
+    padding: 0;
+  }
+  button > * {
+  	pointer-events: none;
+  }
+  a {
+    text-decoration: none;
+    color: currentColor;
+    outline: 0;
+    cursor: pointer;
+  }
+  textarea {
+  	resize: vertical;
+  }
+	.input-default {
+  	border: none;
+    padding: 0;
+    margin: 0;
+    background-color: transparent;
+  }
+  .swiper, .swiper-wrapper {
+  	width: 100%;
+  }
+  .swiper-pagination {
+  	position: relative;
+		bottom: 0;
+  }
+  code {
+  	font-family: var(--boder--fonts--button);
+  }
+  :root {
+		--swiper-pagination-bullet-size: .6rem;
+    --swiper-pagination-bullet-horizontal-gap: .2rem;
+  	--swiper-theme-color: var(--decor--primary);
+    --swiper-pagination-bullet-inactive-opacity: .1;
+  }
+  [data-pagination-mode="dark"] {
+  	--swiper-pagination-bullet-inactive-color: #fff;
+  }
+  html.lenis,
+  html.lenis body {
+    height: auto;
+  }
+
+  /*.lenis:not(.lenis-autoToggle).lenis-stopped {
+    overflow: clip;
+  }*/
+  .lenis.lenis-smooth [data-lenis-prevent] {
+    overscroll-behavior: contain;
+  }
+  .lenis.lenis-smooth iframe {
+    pointer-events: none;
+  }
+  .lenis.lenis-autoToggle {
+    transition-property: overflow;
+    transition-duration: 1ms;
+    transition-behavior: allow-discrete;
+  }
+	@media only screen and (max-width: 767px) {
+    .w-richtext figure > div {
+      border-radius: .8rem;
+    }
+  }
+</style></div><div class="css-global css-embed w-embed"><style>
+	[text-shorten] {
+  	white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    line-break: auto;
+		text-overflow: ellipsis;
+    white-space: initial;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+  } 
+  [text-shorten="2"] {
+	  -webkit-line-clamp: 2;
+  }
+  [text-shorten="3"] {
+	  -webkit-line-clamp: 3;
+  }
+	.hover-un .line-inner {
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform 0.65s cubic-bezier(.785, .135, .15, .86);
+  }
+  .hover-line {
+   --line-spacing: 1rem;
+
+   position: relative;
+   overflow: hidden;
+   display: inline-block;
+   vertical-align: bottom;
+  }
+ .hover-line::before,
+ .hover-line::after {
+    content: '';
+    position: absolute;
+    display: block;
+    bottom: 0.2em;
+    width: 100%;
+    height: max(2px, .2rem);
+    background-color: currentColor;
+ }
+ .hover-line::before {
+    left: 0;
+ }
+ .hover-line::after {
+    left: calc(-1 * var(--line-spacing));
+    transform: translateX(-100%);    
+ }
+ .img-default {
+    height: auto;
+    user-select: none;
+    display: block;
+    outline: 0;
+  }
+	.hover-un.filled .line-inner {
+  	transform: scaleX(1);
+  }
+  .hover-un.filled .textarea-placeholder {
+  	opacity: 0;
+  }
+  .input-field-wrap:focus-within .line-inner,
+  .input-field-wrap.filled .line-inner {
+  	transform: scaleX(1);
+  }
+  [data-hidden] { display: none; }
+  .accordion.active .accordion-ic {
+  	transform: rotate(-180deg);
+  }
+  .accordion.active .accordion-ic-line.ver {
+		opacity: 0;
+    transition-delay: .1s;
+  }
+  @keyframes marquee { 
+  	0% { transform: translateX(0%); }
+  	100% { transform: translateX(-100%); }
+  }
+  .anim-marquee {
+  	animation: marquee 30s linear infinite;
+  }
+  @keyframes fade-in-out {
+    0% {
+      opacity: 0;
+      transform: scale(1.1);
+      filter: grayscale(.5);
+    }
+    20% {
+      opacity: 1;
+      transform: scale(1);
+      filter: grayscale(0);
+    }
+    50% {
+      opacity: 0;
+      transform: scale(1.1);
+      filter: grayscale(.5);
+    }
+    80% {
+      opacity: 1;
+      transform: scale(1);
+      filter: grayscale(0);
+    }
+    100% {
+      opacity: 0;
+      transform: scale(1.1);
+      filter: grayscale(.5);
+    }
+  }
+  .job-point {
+    animation: fade-in-out 3s cubic-bezier(0.64, 0.57, 0.67, 1.53) infinite;
+  }
+ 	.job-sub .txt:empty {
+		display: none;
+  }
+  @media (hover:hover) {
+    .job-item:hover .job-arr,
+    .job-item:hover .job-bg {
+      opacity: 1;
+    }
+    .job-item:hover .job-point {
+      opacity: 0 !important;
+      animation-play-state: paused;
+    }
+  }
+  @media (hover: hover) {
+    .hover-un:hover .line-inner {
+      transform: scaleX(1);
+      transform-origin: left;
+    }
+    .hover-line:hover::before {
+  		transform: translateX(calc(100% + var(--line-spacing))) rotate(.01deg);
+    	transition: transform .65s cubic-bezier(.6,0,.3,1);
+    }
+    .hover-line:hover::after {
+      transform: translateX(var(--line-spacing)) rotate(.01deg);
+    	transition: transform .65s cubic-bezier(.6,0,.3,1) .15s;
+    }
+    .hover-arrow:hover .arrows path:first-child {
+      transform: translateX(100%);
+      transition-delay: 0s;
+    }
+    .hover-arrow:hover .arrows path:last-child {
+      transform: translateX(0);
+      transition-delay: .1s;
+    }
+  }
+/* Removes native scrollbar */
+.no-scrollbar {
+    -ms-overflow-style: none;
+    overflow: -moz-scrollbars-none; 
+}
+
+.no-scrollbar::-webkit-scrollbar {
+    display: none;
+}
+@media only screen and (max-width: 767px) {
+  .lboard-perc-row-title.only-mb {
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    line-break: auto;
+    text-overflow: ellipsis;
+    white-space: initial;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+  }
+}
+</style></div><div class="css-container css-embed w-embed"><style>
+  :root {
+    --page-padding: max(calc((100vw - var(--container--max-width)) / 2), 0px);
+  }
+ .container.grid {
+		grid-template-columns: repeat(var(--container--column), minmax(0, 1fr));
+    grid-auto-columns: minmax(0, 1fr);
+    grid-template-rows: auto;
+  }
+</style></div></div><div class="body-inner"><a data-wf--hiring-banner--variant="base" href="https://app.surgehq.ai/ots" class="hire-banner w-inline-block"><div aria-hidden="true" class="hire-banner-mobile-arrow-cell"><span class="hire-banner-arrow hire-banner-mobile-arrow-icon"><svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 16" width="100%" class="svg svg"><path stroke-miterlimit="10" stroke-linecap="square" stroke-width="1.3" stroke="currentColor" d="M11.2 4.80005L4 12"></path><path stroke-miterlimit="10" stroke-linecap="square" stroke-width="1.3" stroke="currentColor" d="M5.6001 4H12.0001V10.4"></path></svg></span></div><div class="hire-banner-cell"><div class="hire-banner-eyebrow"></div></div><p class="hire-banner-q"><span class="hire-banner-question">New</span> <span class="hire-banner-pay">Frontier data and RL environments, off the shelf</span><span class="hire-banner-arrow"><svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M11.2 4.80005L4 12" stroke="currentColor" stroke-width="1.3" stroke-miterlimit="10" stroke-linecap="square"></path><path d="M5.6001 4H12.0001V10.4" stroke="currentColor" stroke-width="1.3" stroke-miterlimit="10" stroke-linecap="square"></path></svg></span></p><div class="hire-banner-cta"><span></span></div><div class="w-embed"><style>
+.hire-banner{transition-property:color}
+.hire-banner-arrow{transition-duration:.35s}
+.hire-banner-cell,.hire-banner-cta{display:none}
+.hire-banner-q .hire-banner-arrow{display:inline-flex;width:1.2rem;height:1.2rem;align-items:center;justify-content:center;flex:0 0 auto;margin-left:.6rem;font-size:1.2rem;line-height:1}
+.hire-banner-pay{transition:color .35s ease}
+@media screen and (max-width:767px){.hire-banner.hire-banner{justify-content:flex-start}.hire-banner .hire-banner-q{flex:1 1 0%;width:auto;text-align:left}.hire-banner .hire-banner-q .hire-banner-arrow{display:none}}
+@media (hover:hover) and (min-width:992px){.hire-banner:hover .hire-banner-pay{color:inherit}.hire-banner:hover .hire-banner-arrow{transform:translate(10%,-10%)}}
+.hire-banner:focus-visible .hire-banner-pay,.hire-banner[data-wf-focus-visible] .hire-banner-pay{color:inherit}
+</style></div></a><div data-wf--header--variant="base" class="header"><div class="header-css w-embed w-script"><style>
+.header-dropdown-list-link:last-child {
+  border: 0px;
+}
+.header-dropdown-tabs-item-link:after {
+  counter-increment: leaderboard;
+  content: '0' counter(leaderboard);
+  font-size: 1.2rem;
+  line-height: 1.08;
+  font-family: var(--fonts--button);
+  margin-left: auto;
+}
+/*.header-dropdown-lboard-post-title {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  line-break: auto;
+  text-overflow: ellipsis;
+  white-space: initial;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+} */
+ .header-dropdown-toggle.w--open .w-icon-dropdown-toggle {
+   transform: rotate(180deg);
+ }
+.header-dropdown-lboard-desc .w-richtext p {
+  display: inline;
+}
+@media (hover:hover) and (min-width: 992px) {
+	.header-dropdown-tabs-link:hover .header-dropdown-tabs-item-ic,
+  .header-dropdown-tabs-item-link:hover .header-dropdown-tabs-item-ic {
+    opacity: 1;
+    transition-delay: .1s;
+  }
+  .header-dropdown-tabs-item-link:hover .header-dropdown-tabs-line {
+    transform: scaleX(1);
+  }
+  .header-dropdown-lboard-btn:hover .header-dropdown-lboard-btn-ic {
+    color: var(--_color---content--link);
+  }
+  .header-dropdown-list-link:hover .header-dropdown-icon-wrap {
+    opacity: 1;
+    inset: auto -2rem 0% auto;
+  }
+}
+.lboard-row-num {
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: contain;
+}
+/*.lboard-row-num:before {
+  counter-increment: leaderboard;
+  content: counter(leaderboard);
+  font-size: 1.1rem;
+  font-weight: bold;
+  line-height: 1.3;
+  padding-top: .2rem;
+}*/
+.lboard-list .lboard-item:nth-child(1) .lboard-row-num {
+  background-image: url(https://cdn.prod.website-files.com/68dc970bd6e945ea3fb0f426/6980808e2327fc6669789b4f_9dfc4c94c9b47fbc168489647f546bbc_gold-medal.png); 
+  color: #3b1d00;
+}
+.lboard-list .lboard-item:nth-child(2) .lboard-row-num {
+  background-image: url(https://cdn.prod.website-files.com/68dc970bd6e945ea3fb0f426/6980808b7e0535cc959299e2_93171a3c97df924a75b7241477b3ab94_silver-medal.png);
+  color: #333333;
+}
+.lboard-list .lboard-item:nth-child(3) .lboard-row-num {
+  background-image: url(https://cdn.prod.website-files.com/68dc970bd6e945ea3fb0f426/6980808aa38d78bce27d689d_487f82ae0a0a6060e38aca05b468c61f_bronge-medal.png);
+  color: #301414;
+}
+.lboard-list .lboard-item:nth-child(1) [data-leaderboard-range-track] {
+  background-color: var(--_color---leaderboard-ranking--rank-1);
+}
+.lboard-list .lboard-item:nth-child(2) [data-leaderboard-range-track] {
+  background-color: var(--_color---leaderboard-ranking--rank-2);
+}
+.lboard-list .lboard-item:nth-child(3) [data-leaderboard-range-track] {
+  background-color: var(--_color---leaderboard-ranking--rank-3);
+}
+.lboard-list .lboard-item:not(:nth-child(-n+3)) {
+  display: none;
+}
+.lboard-perc-row-title-inner .txt {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+@media only screen and (min-width: 992px) {
+.header-dropdown-tabs-list
+:not(:has(.header-dropdown-tabs-item.active))
+:not(:has(.header-dropdown-tabs-item-link.w--current))
+.header-dropdown-tabs-item:first-child {
+  	color: var(--_color---content--body);
+    .header-dropdown-tabs-item-link:not(.w--current) {
+      padding-left: 2rem;
+    }
+    .header-dropdown-tabs-item-link:not(.w--current) .header-dropdown-tabs-item-ic {
+      opacity: 1;
+      transition-delay: .1s;
+    	}
+	}
+  .header-dropdown-tabs-item.active .header-dropdown-tabs-item-link:not(.w--current) {
+    padding-left: 2rem;
+  }
+  .header-dropdown-tabs-item.active .header-dropdown-tabs-item-link:not(.w--current) .header-dropdown-tabs-item-ic {
+    opacity: 1;
+    transition-delay: .1s;
+  }
+}
+.header-dropdown-tabs-item.active .header-dropdown-tabs-item-link:not(.w--current) .header-dropdown-tabs-line {
+  transform: scaleX(1);
+}
+@media only screen and (max-width: 767px) {
+  .header-dropdown-lboard-post-title {
+    -webkit-line-clamp: 2;
+  }
+  .header-dropdown-lboard-item:last-child .header-dropdown-lboard-head-txt,
+  .header-dropdown-lboard-item:last-child .header-dropdown-lboard-right {
+    border-bottom: none;
+    padding-bottom: 1.8rem;
+  }
+  .header-dropdown-toggle.w--open .w-icon-dropdown-toggle,
+  .header-dropdown-lboard-head.w--open .w-icon-dropdown-toggle {
+    transform: rotate(0);
+  }
+  .header-ham .header-ham-txt:last-child,
+  .header-ham.active .header-ham-txt:first-child {
+    opacity: 0;
+  }
+  .header-ham .header-ham-txt:first-child,
+  .header-ham.active .header-ham-txt:last-child {
+    opacity: 1;
+  }
+  .header.on-open-nav .header-act {
+    opacity: 1;
+    transform: translate(0);
+  }
+  .header.on-open-nav .header-link,
+  .header.on-open-nav .header-login {
+    pointer-events: auto;
+  }
+}
+/* Button system: arrow nudge on hover (the one rule Webflow classes cannot express) */
+.btn:hover .btn-arrow {
+  transform: translate(2px, -2px);
+}
+@media (prefers-reduced-motion: reduce) {
+  .btn,
+  .btn-arrow {
+    transition: none;
+  }
+  .btn:hover .btn-arrow {
+    transform: none;
+  }
+}
+/* Button system: a CTA card's own button keeps the title-to-button spacing the retired cta-btn class carried. Direct child only, so buttons inside forms or link rows within a card are not touched. */
+.cta-card > .btn {
+  margin-top: 3.2rem;
+}
+@media screen and (max-width: 767px) {
+  .cta-card > .btn {
+    margin-top: 2.4rem;
+  }
+}
+/* Benchmark pages, Our Benchmarks: each column shows only its first card (page rule). A page never lists itself: Webflow marks links to the current page with w--current, so the card holding one is hidden and, only when it was the column's first card, the next card in that column takes its place. */
+.lead-dms-cate-card:has(.w--current) {
+  display: none;
+}
+.lead-dms-cate-left .lead-dms-cate-card:first-child:has(.w--current) + .lead-dms-cate-card,
+.lead-dms-cate-right .lead-dms-cate-card:first-child:has(.w--current) + .lead-dms-cate-card {
+  display: flex;
+}
+/* Footer: the link to the current page stays clickable (the site's global w--current rule turns pointer events off). */
+.footer-links-link.w--current {
+  pointer-events: auto;
+}
+/* Benchmark detail pages (the pages with the dark CTA section, lead-hero footer): section spacing. Buttons to leaderboard 6.4rem; leaderboard to examples (and to and from the charts on Chartography), examples to the dark CTA, the dark CTA to Our Benchmarks, and Our Benchmarks to the newsletter 8rem; the newsletter to the footer 16rem, 12.8rem at 991px and below. Before 2026-10-06 these were 9.6, 9.6, 9.6, 10, 20 and 20rem (16 and 16 at 991px and below). Each gap is the section container's bottom padding (8rem site-wide, 6.4rem here) plus the section paddings below. Nav to hero is not touched, and /benchmarks keeps the class values. */
+.main-inner:has(> .lead-hero.footer) > section > .container.grid {
+  padding-bottom: 6.4rem;
+}
+.main-inner:has(> .lead-hero.footer) > .lead-hero:not(.footer) {
+  padding-bottom: 0;
+}
+.main-inner:has(> .lead-hero.footer) > .lead-main,
+.main-inner:has(> .lead-hero.footer) > .lead-related {
+  padding-bottom: 1.6rem;
+}
+.main-inner:has(> .lead-hero.footer) > .lead-charts {
+  padding-bottom: 6.4rem;
+}
+.main-inner:has(> .lead-hero.footer) > .lead-hero.footer {
+  padding-bottom: 8rem;
+}
+.main-inner:has(> .lead-hero.footer) > .lead-newsletter {
+  padding-top: 0;
+  padding-bottom: 9.6rem;
+}
+@media screen and (max-width: 991px) {
+  .main-inner:has(> .lead-hero.footer) > .lead-newsletter {
+    padding-bottom: 6.4rem;
+  }
+}
+@media screen and (max-width: 767px) {
+  .main-inner:has(> .lead-hero.footer) > .lead-hero:not(.footer) .lead-hero-left {
+    margin-bottom: 0;
+  }
+}
+/* Benchmark detail pages, leaderboard card: the card draws its own bottom edge (the card itself on desktop, the list at 991px and below), so on leaderboards with row dividers (Antidote and Hemingway) the last row drops its divider and the edge stays a single line at every width. */
+.lead-rank-table-list-body .w-dyn-item:last-child > .lead-rank-table-list-row-wrap {
+  border-bottom-style: none;
+}
+/* Benchmark detail pages, type and padding (2026-10-07, from the sudo L7 sample Jean approved): section titles (the examples title and Our Benchmarks) one weight lighter, 500 to 400, and one size down, 3.2rem to 2.8rem (the h5 step). Example toggles: the title is centred on the chevron (its extra 0.8rem top padding removed, the chevron's 3.2rem hit area overlapping the padding so the visible chevron lines up with the text) and sits 2.9rem from every edge (2rem on phones). Our Benchmarks cards at 768 to 991px: side padding and the button row's left edge 3.2rem, matching the top (were 1.2rem). /benchmarks keeps the class values. */
+.main-inner:has(> .lead-hero.footer) h2.section-title {
+  font-size: 2.8rem;
+  font-weight: 400;
+}
+.main-inner:has(> .lead-hero.footer) .lead-examples-item .lead-dropdown-toggle {
+  align-items: center;
+  padding: 2.9rem;
+}
+.main-inner:has(> .lead-hero.footer) .lead-examples-item .lead-dropdown-title {
+  padding-top: 0;
+}
+.main-inner:has(> .lead-hero.footer) .lead-examples-item .lead-dropdown-icon {
+  margin: -0.8rem -0.8rem -0.8rem 0;
+}
+@media screen and (max-width: 479px) {
+  .main-inner:has(> .lead-hero.footer) .lead-examples-item .lead-dropdown-toggle {
+    padding: 2rem;
+  }
+}
+/* Benchmark detail pages, example cards at every width (Jean 2026-10-10: "final response has too much space, it should match failing reason"): a response card (Final Response, Rubrics, Model A / B Response, the Hemingway model cards) puts its text 0.8rem under its title, like Task Prompt, Rationale and the failure reason cards. The card class adds a 1.5rem gap under the title, a 0.4rem offset above it and 4rem above the text; all three are dropped here (sudo L7, DAYJOB and GDP.xlsx already did this in their page code). */
+.main-inner:has(> .lead-hero.footer) .lead-examples-item .lead-examples-model {
+  row-gap: 0;
+}
+.main-inner:has(> .lead-hero.footer) .lead-examples-item .lead-examples-model .lead-examples-model-text {
+  margin-top: 0;
+}
+.main-inner:has(> .lead-hero.footer) .lead-examples-item .lead-examples-model .lead-examples-text-wrap {
+  padding-top: 0;
+}
+/* Benchmark detail pages, example card labels at every width (Jean 2026-10-10: "go with B but increase spacing between label and content slightly"): the card titles (Task Prompt, Final Response, Rubrics, Rationale, the failure reason, the model names) take the site's label style, the one the hero eyebrow and the buttons use: JetBrains Mono Regular 1.4rem in capitals, in the soft body colour, so they read as labels and not as text. 0.4rem more room under each label (label to content 1.2rem). The example titles in the collapsed rows keep the body font. */
+.main-inner:has(> .lead-hero.footer) .lead-examples-item :is(.lead-examples-prompt-heading, .lead-examples-comment-heading .txt, .lead-examples-model-text .txt) {
+  font-family: var(--fonts--button);
+  font-weight: 400;
+  font-size: 1.4rem;
+  line-height: 1.4;
+  text-transform: uppercase;
+  color: var(--_color---content--soft-body);
+}
+.main-inner:has(> .lead-hero.footer) .lead-examples-item :is(.lead-examples-comment-heading, .lead-examples-model-content) {
+  padding-bottom: 0.4rem;
+}
+/* Benchmark detail pages, Examples on phones (767px and below, Jean 2026-10-09: more room to read, keep the cards): the example card's inner gutter and the gaps between its cards are all 0.8rem (were 2rem at the sides, 0.6rem on top, 2.4rem at the bottom and 1.6rem between), each card's padding is 1.6rem (was 2rem), and the toggle title sits on the same text edge as the text in the cards (0.8rem + the 1px card border + 1.6rem). The response loses its extra 2.4rem bottom padding. Rubric cards: the verdict icon sits above the text instead of in a 4.8rem left column, and their text lines up with the other cards'. Text runs 307px wide at 390 (was 277). 768px and up are unchanged. */
+@media screen and (max-width: 767px) {
+  .main-inner:has(> .lead-hero.footer) .lead-examples-item .lead-dropdown-toggle {
+    padding: 2rem calc(2.4rem + 1px);
+  }
+  .main-inner:has(> .lead-hero.footer) .lead-examples-item .lead-dropdown-example-wrap {
+    padding: 0.8rem;
+    row-gap: 0.8rem;
+  }
+  .main-inner:has(> .lead-hero.footer) .lead-examples-item .lead-examples-grid,
+  .main-inner:has(> .lead-hero.footer) .lead-examples-item .lead-examples-subgrid {
+    margin-top: 0;
+    row-gap: 0.8rem;
+  }
+  .main-inner:has(> .lead-hero.footer) .lead-examples-item .lead-examples-prompt-wrap,
+  .main-inner:has(> .lead-hero.footer) .lead-examples-item .lead-examples-model,
+  .main-inner:has(> .lead-hero.footer) .lead-examples-item .lead-examples-purple-wrap,
+  .main-inner:has(> .lead-hero.footer) .lead-examples-item .lead-examples-comment-wrap {
+    padding: 1.6rem;
+  }
+  .main-inner:has(> .lead-hero.footer) .lead-examples-item .lead-examples-grid > .dj-rubrics {
+    padding: 0;
+  }
+  .main-inner:has(> .lead-hero.footer) .lead-examples-item .lead-examples-text-wrap {
+    padding-bottom: 0;
+  }
+  .main-inner:has(> .lead-hero.footer) .lead-examples-item .dj-rubrics .w-richtext > p {
+    padding: 1.4rem 1.6rem;
+  }
+  .main-inner:has(> .lead-hero.footer) .lead-examples-item .dj-rubrics .w-richtext > p::before {
+    position: static;
+    display: block;
+    margin-bottom: 0.8rem;
+  }
+}
+/* Benchmark detail pages, tables in Examples on phones (767px and below, Jean 2026-10-09: the GDP.xlsx table was cut off at the band's inner edge). A table of up to 3 columns fits the text width (the 11em cell minimum GDP.xlsx sets for desktop is dropped). A wider table scrolls in a strip that runs through its card's 1.6rem padding to the card's edges and starts on the text edge, ending 1.6rem in when scrolled to the end; the blocks around a table stop clipping so the strip can reach the card edge (Antidote's fixed 30rem table width is lifted too). */
+@media screen and (max-width: 767px) {
+  .main-inner:has(> .lead-hero.footer) .lead-examples-item :is(.lead-examples-model-img, .lead-examples-text-wrap, .lead-examples-prompt-text-wrap, .lead-examples-comment, .w-richtext):has(table) {
+    overflow: visible;
+  }
+  .main-inner:has(> .lead-hero.footer) .lead-examples-item .w-richtext > div:has(table) {
+    width: auto;
+    max-width: none;
+    margin-left: -1.6rem;
+    margin-right: -1.6rem;
+    padding-left: 1.6rem;
+    padding-right: 1.6rem;
+    overflow-x: auto;
+  }
+  .main-inner:has(> .lead-hero.footer) .lead-examples-item table:not(:has(tr > :nth-child(4))) :is(td, th) {
+    min-width: 0;
+  }
+}
+@media screen and (min-width: 768px) and (max-width: 991px) {
+  .main-inner:has(> .lead-hero.footer) .lead-dms-cate-card {
+    padding-left: 3.2rem;
+    padding-right: 3.2rem;
+  }
+  .main-inner:has(> .lead-hero.footer) .lead-cms-cate-card-btns {
+    left: 3.2rem;
+  }
+}
+/* Nav Dropdown (the Platform menu): state rules Webflow classes cannot express. While the menu is open the toggle stays muted and its chevron flips, and the panel fades in. Mouse and trackpad users open it on hover (the Dropdown's own hover setting is not reachable from the API); click, touch and keyboard use Webflow's dropdown. The script after this style block closes a clicked-open menu when the pointer or keyboard focus leaves it. */
+.nav-dd-toggle.w--open {
+  color: var(--_color---content--subtitle);
+}
+.nav-dd-toggle.w--open .nav-dd-chev {
+  transform: rotate(180deg);
+}
+@media screen and (min-width: 992px) {
+  .nav-dd-list.w--open {
+    animation: nav-dd-in .16s ease-out;
+  }
+  /* the site-wide .w--current rule turns pointer events off; the link to the current page stays clickable, like header-link */
+  .nav-dd-link.w--current {
+    pointer-events: auto;
+  }
+}
+@media (hover: hover) and (min-width: 992px) {
+  .nav-dd:hover .nav-dd-list {
+    display: block;
+    animation: nav-dd-in .16s ease-out;
+  }
+  .nav-dd:hover .nav-dd-toggle {
+    color: var(--_color---content--subtitle);
+  }
+  .nav-dd:hover .nav-dd-chev {
+    transform: rotate(180deg);
+  }
+}
+@keyframes nav-dd-in {
+  from { opacity: 0; transform: translateY(4px); }
+  to { opacity: 1; transform: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .nav-dd-list.w--open,
+  .nav-dd:hover .nav-dd-list {
+    animation: none;
+  }
+  .nav-dd-chev {
+    transition: none;
+  }
+}
+/* Dark mode header (/workforce, /fellowship, /consultant-network): the Platform panel's hairline and item hover get the same 10% white weight the Header's Dark mode variant gives the header divider and Login. The panel lives in the nested Nav Dropdown component, which the Header's variant styles do not reach. */
+@media screen and (min-width: 992px) {
+  .header.w-variant-617cdaac-35e1-861b-1aac-8f1aacd4673f .nav-dd-panel {
+    border-color: rgba(238, 238, 232, 0.1);
+  }
+  .header.w-variant-617cdaac-35e1-861b-1aac-8f1aacd4673f .nav-dd-link:hover {
+    background-color: rgba(238, 238, 232, 0.1);
+  }
+}
+/* Hamburger menu (991px and below): Platform is a row like the others and starts collapsed; a tap on it opens its links underneath (Webflow's dropdown). The row and its links, like header-link, only take clicks while the menu is open. Login is listed here too because the tablet rule in the site head still names the retired header-btn class, which left Login dead at 768 to 991px. */
+@media screen and (max-width: 991px) {
+  .nav-dd-toggle.w--open {
+    color: var(--_color---background--main);
+  }
+  .header.on-open-nav .nav-dd-toggle,
+  .header.on-open-nav .nav-dd-link,
+  .header.on-open-nav .header-login {
+    pointer-events: auto;
+  }
+}
+/* Leaderboards right on the first frame (Jean 2026-10-11, "the freeze or jump doesn't happen at all"): the bar widths, rank colours,
+   rank numbers and medals used to be set by the site script (surgeai-bp.netlify.app) only at window load, so every leaderboard first
+   drew with equal 50% bars and ranks of 1, then slid into place. The script below applies the same values while the page is still being
+   read, before anything is drawn. Until a table has been read to its end it stays invisible (for a moment, and only while the page is
+   still arriving), so a half-sized table is never shown. Bar transitions are off until load so nothing slides. html.lbx-on is only set
+   by that script, so if it never runs nothing is hidden. */
+html.lbx-on .lead-rank-table:not([data-lbx]),
+html.lbx-on [data-leaderboard-table]:not([data-lbx]) { visibility: hidden; }
+html.lbx-on [data-leaderboard-range-track] { transition: none !important; }
+/* Benchmark detail pages, leaderboard names (Jean 2026-10-14): the reasoning level follows the model name in the same type, slightly
+   faded, and the harness (sudo L7: Claude Code, Codex, OpenCode...) is a filled tag, all caps JetBrains Mono. The sheet wording stays
+   as it is; only the level is shown ("High reasoning" -> High) and "No reasoning" shows nothing. The tag's letters sit on the name's
+   baseline (Jean 10-15). The script below splits the name as each leaderboard arrives. */
+.lead-rank-table .head-rank-table-name .txt[data-lb-tags] { display: flex; flex-wrap: wrap; align-items: baseline; column-gap: 0.6rem; row-gap: 0.3rem; white-space: normal; }
+.lead-rank-table .lb-tag { display: inline-block; padding: 0.38rem 0.55rem 0.42rem; font-family: var(--fonts--button); font-size: 1rem; line-height: 1;
+  font-weight: 500; text-transform: uppercase; letter-spacing: 0.02em; white-space: nowrap; color: rgba(29, 29, 23, 0.85);
+  border: 1px solid transparent; border-radius: 0.3rem; }
+@supports (text-box: trim-both cap alphabetic) { .lead-rank-table .lb-tag { padding: 0.4rem 0.55rem; text-box: trim-both cap alphabetic; } }
+.lead-rank-table .lb-level { opacity: 0.5; }
+.lead-rank-table .lb-tag-harness { background: var(--_color---background--surface-1); }
+/* Benchmark cards (/benchmarks and the Our Benchmarks teaser, Jean 2026-10-21): same faded level as the leaderboards,
+   "Gemini 4 Argon (High)" -> Gemini 4 Argon High. Inline, so the one-line ellipsis on phones still works. */
+.lboard-perc-row-title .lb-level { opacity: 0.5; }
+</style>
+<script>
+/* Nav Dropdown (the Platform menu): a click on Platform sets Webflow's open state, which would keep the menu pinned
+   open after the pointer moves on to Experts or Benchmarks. Close it when the pointer leaves the menu (desktop mouse
+   only), and when keyboard focus moves out of it (Webflow's own focus-out check never fires). */
+(function () {
+  var mouse = window.matchMedia('(hover: hover) and (pointer: fine) and (min-width: 992px)');
+  var wide = window.matchMedia('(min-width: 992px)');
+  function close(dd) {
+    var toggle = dd.querySelector('.nav-dd-toggle');
+    if (toggle && toggle.classList.contains('w--open') && window.jQuery) window.jQuery(dd).triggerHandler('w-close');
+  }
+  function bind() {
+    document.querySelectorAll('.nav-dd').forEach(function (dd) {
+      if (dd.hasAttribute('data-nav-dd-bound')) return;
+      dd.setAttribute('data-nav-dd-bound', '');
+      dd.addEventListener('mouseleave', function () { if (mouse.matches) close(dd); });
+      dd.addEventListener('focusout', function (e) { if (wide.matches && e.relatedTarget && !dd.contains(e.relatedTarget)) close(dd); });
+    });
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', bind); else bind();
+})();
+/* Benchmark detail pages: a hero title written as one CamelCase word (ComplexConstraints) gets a <wbr> at each word joint, so on a
+   phone too narrow for it the title breaks between the words instead of running off the screen (Jean 2026-10-09). Where it fits,
+   it stays on one line. The title comes from the Benchmark Infos Name field, which is left as it is. */
+(function () {
+  function split() {
+    var hs;
+    try { hs = document.querySelectorAll('.main-inner:has(> .lead-hero.footer) > .lead-hero:not(.footer) h1'); } catch (e) { return; }
+    hs.forEach(function (h) {
+      var t = h.textContent;
+      if (h.children.length || !/[a-z][A-Z]/.test(t)) return;
+      h.innerHTML = t.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/([a-z])(?=[A-Z])/g, '$1<wbr>');
+    });
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', split); else split();
+})();
+/* Leaderboards right on the first frame (Jean 2026-10-11): applies, as each leaderboard finishes arriving and before it is drawn, the
+   exact values the site script (surgeai-bp.netlify.app/index.js, run at window load) sets later: bar width = score capped at 100%, range
+   bars placed from the CI columns, competition ranks (1, 1, 3) and their colours, medals on the first three rank cells, and the medal
+   tally in the /benchmarks hero. Same inputs and same formulas as that script, so when it runs it writes identical values and nothing
+   moves. Mirrors its top-level [data-leaderboard-table] block and the leaderboard / enterprisebench / pdfparse / hemingway page scripts. */
+(function () {
+  if (window.__lbx || !window.MutationObserver || !Element.prototype.closest) return;
+  window.__lbx = 1;
+  var root = document.documentElement;
+  var RC = ['#8333FF', '#9B3FFE', '#B04DFD', '#C25BFC', '#D26AFC', '#E179FD', '#EE89FD', '#FA99FF', '#FFA0D7', '#FFACBC',
+    '#FFB5A6', '#FFBC85', '#FECB49', '#FEBB36', '#FFAB24', '#FF9912', '#FF8700', '#FF7300', '#FF5F00', '#FF3E00'];
+  var CDN = 'https://cdn.prod.website-files.com/68dc970bd6e945ea3fb0f426/';
+  var MED = [CDN + '6980808e2327fc6669789b4f_9dfc4c94c9b47fbc168489647f546bbc_gold-medal.png',
+    CDN + '6980808b7e0535cc959299e2_93171a3c97df924a75b7241477b3ab94_silver-medal.png',
+    CDN + '6980808aa38d78bce27d689d_487f82ae0a0a6060e38aca05b468c61f_bronge-medal.png'];
+  function qa(el, s) { return Array.prototype.slice.call(el.querySelectorAll(s)); }
+  function num(v) { if (v == null) return NaN; var n = parseFloat(String(v).replace(/,/g, '').trim()); return isFinite(n) ? n : NaN; }
+  function pscore(el) { if (!el) return null; var m = (el.textContent || '').trim().replace(',', '.').match(/[-+]?\d*\.?\d+/); return m ? Number(m[0]) : null; }
+  function ranksOf(s) { var r = [1]; for (var i = 1; i < s.length; i++) r.push(s[i] === s[i - 1] ? r[i - 1] : i + 1); return r; }
+  function clamp01(x) { return Math.min(1, Math.max(0, x)); }
+  function rowScore(el) { var row = el.closest('[data-leaderboard-row]'); if (!row) return null; var s = row.querySelector('[data-score]'); return s ? s.textContent.trim() : null; }
+  function medal(el, i) {
+    el.style.backgroundImage = 'url("' + MED[i] + '")'; el.style.backgroundRepeat = 'no-repeat';
+    el.style.backgroundPosition = 'center'; el.style.backgroundSize = 'contain'; el.style.color = 'transparent';
+  }
+  /* an element has been read to its end once anything follows it in the document */
+  function closed(el) { for (var n = el; n && n !== root; n = n.parentNode) if (n.nextSibling) return true; return false; }
+  function elo(t) {
+    var val = function (el) {
+      if (!el) return NaN;
+      var f = num(el.getAttribute('data-value') ?? el.getAttribute('data-ci-upper') ?? el.getAttribute('data-ci-lower'));
+      return isFinite(f) ? f : num(el.textContent);
+    };
+    var mx = -Infinity, mn = Infinity;
+    qa(t, '[data-leaderboard-ci-upper]').forEach(function (e) { var v = val(e); if (isFinite(v)) mx = Math.max(mx, v); });
+    qa(t, '[data-leaderboard-ci-lower]').forEach(function (e) { var v = val(e); if (isFinite(v)) mn = Math.min(mn, v); });
+    if (!isFinite(mx) || !isFinite(mn)) return;
+    var full = mx - mn; if (!(full > 0)) return;
+    qa(t, '[data-leaderboard-row]').forEach(function (row) {
+      var u = row.querySelector('[data-leaderboard-ci-upper]'), l = row.querySelector('[data-leaderboard-ci-lower]'),
+        tr = row.querySelector('[data-leaderboard-range-track]');
+      if (!u || !l || !tr) return;
+      var ru = val(u), rl = val(l); if (!isFinite(ru) || !isFinite(rl)) return;
+      if (getComputedStyle(tr).position === 'static') tr.style.position = 'absolute';
+      tr.style.left = (clamp01((rl - mn) / full) * 100).toFixed(2) + '%';
+      tr.style.width = (clamp01((ru - rl) / full) * 100).toFixed(2) + '%';
+    });
+  }
+  function bars(t) {
+    var items = qa(t, '[data-leaderboard-item]'); if (!items.length) return;
+    if (!items.some(function (it) { return pscore(it.querySelector('[data-score]')) !== null; })) return;
+    items.forEach(function (it) {
+      var s = it.querySelector('[data-score]'), tr = it.querySelector('[data-leaderboard-range-track]');
+      if (!s || !tr) return;
+      var pct = pscore(s);
+      tr.style.width = pct <= 0 ? '0rem' : Math.min(100, pct).toFixed(2) + '%';
+    });
+  }
+  /* the site script's top-level pass over every [data-leaderboard-table] */
+  function table(t) {
+    elo(t); bars(t);
+    var items = qa(t, '.lboard-item'); if (!items.length) return;
+    var r = ranksOf(items.map(function (it) { var e = it.querySelector('[data-score]'); return e ? e.textContent.trim() : ''; }));
+    items.forEach(function (it, i) { var n = it.querySelector('.lboard-row-num'); if (n && r[i] <= 3) medal(n, r[i] - 1); });
+    items.forEach(function (it, i) {
+      var tr = it.querySelector('[data-leaderboard-range-track]'); if (!tr) return;
+      tr.style.setProperty('--_color---leaderboard-ranking--rank', RC[r[i] - 1]);
+      tr.style.backgroundColor = 'var(--_color---leaderboard-ranking--rank)';
+    });
+  }
+  function spread(els, r) {
+    var u = []; r.forEach(function (x) { if (u.indexOf(x) < 0) u.push(x); });
+    return function (i) { return u.length <= 1 ? 0 : Math.round(u.indexOf(r[i]) * (RC.length - 1) / (u.length - 1)); };
+  }
+  /* the page scripts' pass over every .lead-rank-table */
+  function rankTable(t, ns) {
+    if (ns === 'enterprisebench' || ns === 'pdfparse') {
+      var rows = qa(t, '[data-leaderboard-row]'); if (!rows.length) return;
+      var r = ranksOf(rows.map(function (row) { var e = row.querySelector('[data-score]'); return e ? e.textContent.trim() : ''; }));
+      var c = spread(rows, r);
+      rows.forEach(function (row, i) {
+        var tr = row.querySelector('[data-leaderboard-range-track]');
+        if (tr) tr.style.setProperty('--_color---leaderboard-ranking--rank', RC[c(i)]);
+        var rk = row.querySelector('[data-leaderboard-rank]'); if (rk) rk.textContent = r[i];
+      });
+    } else if (ns === 'hemingway') {
+      ['[data-leaderboard-range-track]', '[data-leaderboard-persona-description]'].forEach(function (sel) {
+        var els = qa(t, sel); if (!els.length) return;
+        var c = spread(els, ranksOf(els.map(rowScore)));
+        els.forEach(function (el, i) { el.style.setProperty('--_color---leaderboard-ranking--rank', RC[c(i)]); });
+      });
+    }
+  }
+  function medals() {
+    var els = qa(document, '.lead-rank-table-rank-value').slice(0, 3), s = els.map(rowScore), m = 0;
+    els.forEach(function (el, i) { if (i > 0 && s[i] !== s[i - 1]) m = i; medal(el, m); });
+  }
+  /* /benchmarks hero: medals per lab across all benchmark cards (the leaderboard page script) */
+  function tally() {
+    var hero = qa(document, '.lead-hero-lboard-item'); if (!hero.length) return;
+    var own = {}, order = [];
+    qa(document, '.lead-dms-cate-card').forEach(function (card) {
+      var os = qa(card, '[data-owner]');
+      var r = ranksOf(os.map(function (el) {
+        var row = el.closest('[data-leaderboard-row], [data-leaderboard-item], .lboard-item'), s = row ? row.querySelector('[data-score]') : null;
+        return s ? s.textContent.trim() : '';
+      }));
+      os.forEach(function (el, i) {
+        var o = el.getAttribute('data-owner'), k = r[i] || i + 1; if (k > 3) return;
+        if (!own[o]) { own[o] = { total: 0, gold: 0, silver: 0, copper: 0 }; order.push(o); }
+        own[o].total++; own[o][k === 1 ? 'gold' : k === 2 ? 'silver' : 'copper']++;
+      });
+    });
+    var list = order.map(function (o) { return [o, own[o]]; }).sort(function (a, b) { return b[1].total - a[1].total; });
+    hero.forEach(function (item, i) {
+      var e = list[i]; if (!e) return;
+      qa(item, '.lead-hero-lboard-item-title .txt').forEach(function (x) { x.textContent = e[0]; });
+      qa(item, '.lead-hero-lboard-item-desc .heading').forEach(function (x) { x.textContent = e[1].total; });
+      var ic = item.querySelector('.lead-hero-lboard-item-ic'); if (!ic) return;
+      var tpl = ['gold', 'silver', 'copper'].map(function (k) { var t = item.querySelector('[data-medal="' + k + '"]'); if (t) t.remove(); return t; });
+      ic.textContent = '';
+      ['gold', 'silver', 'copper'].forEach(function (k, j) { for (var n = 0; tpl[j] && n < e[1][k]; n++) ic.appendChild(tpl[j].cloneNode(true)); });
+    });
+    qa(document, '.lead-hero-right').forEach(function (x) { x.classList.remove('hidden'); });
+  }
+  /* leaderboard names: "Opus 5.5 (Adaptive/Max)\n[Claude Code]" -> model + faded level + harness tag. Only a known reasoning
+     level is split off, so "(experimental)" or "(Fast)" stay in the name; "(No reasoning)" is taken off and shows nothing. */
+  var LEVEL = /^(?:(?:no|minimal|low|medium|high|xhigh|max|auto)(?: reasoning)?|adaptive(?:\/[a-z]+)+|thinking (?:on|off)|default)$/i;
+  function esc(s) { return s.replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); }
+  function tags(t) {
+    qa(t, '.head-rank-table-name .txt').forEach(function (el) {
+      if (el.hasAttribute('data-lb-tags') || el.children.length) return;
+      var s = el.textContent.replace(/\s+/g, ' ').trim(), h = '', r = '', m = s.match(/\s*\[([^\]]+)\]$/);
+      if (m) { h = m[1]; s = s.slice(0, m.index); }
+      m = s.match(/\s*\(([^()]+)\)$/);
+      var cut = !!(m && LEVEL.test(m[1]));
+      if (cut) { r = /^no\b/i.test(m[1]) ? '' : m[1].replace(/ reasoning$/i, ''); s = s.slice(0, m.index); }
+      if (!h && !cut) return;
+      el.setAttribute('data-lb-tags', '');
+      el.innerHTML = '<span class="lb-model">' + esc(s) + (r ? ' <span class="lb-level">' + esc(r) + '</span>' : '') + '</span>' +
+        (h ? '<span class="lb-tag lb-tag-harness">' + esc(h) + '</span>' : '');
+    });
+  }
+  /* benchmark cards: the same split, level only (cards carry no harness) */
+  function cardLevels(t) {
+    qa(t, '.lboard-perc-row-title .txt').forEach(function (el) {
+      if (el.hasAttribute('data-lb-tags') || el.children.length) return;
+      var s = el.textContent.replace(/\s+/g, ' ').trim(), m = s.match(/\s*\(([^()]+)\)$/);
+      if (!m || !LEVEL.test(m[1])) return;
+      var r = /^no\b/i.test(m[1]) ? '' : m[1].replace(/ reasoning$/i, '');
+      el.setAttribute('data-lb-tags', '');
+      el.innerHTML = esc(s.slice(0, m.index)) + (r ? ' <span class="lb-level">' + esc(r) + '</span>' : '');
+    });
+  }
+  function ns() { var m = document.querySelector('main.main'); return m ? m.getAttribute('data-namespace') : null; }
+  function run(all) {
+    var n = ns(), did = false;
+    qa(document, '[data-leaderboard-table]:not([data-lbx])').forEach(function (t) {
+      if (!all && !closed(t)) return; try { table(t); } catch (e) {} try { cardLevels(t); } catch (e) {} t.setAttribute('data-lbx', '');
+    });
+    qa(document, '.lead-rank-table:not([data-lbx])').forEach(function (t) {
+      if (!all && !closed(t)) return; try { rankTable(t, n); did = true; } catch (e) {} try { tags(t); } catch (e) {} t.setAttribute('data-lbx', '');
+    });
+    if (did && /^(enterprisebench|pdfparse|hemingway)$/.test(n || '')) { try { medals(); } catch (e) {} }
+  }
+  var mo = new MutationObserver(function () { run(false); });
+  mo.observe(root, { childList: true, subtree: true });
+  root.classList.add('lbx-on');
+  document.addEventListener('DOMContentLoaded', function () {
+    mo.disconnect(); run(true);
+    if (ns() === 'leaderboard') { try { tally(); } catch (e) {} }
+  });
+  window.addEventListener('load', function () { setTimeout(function () { root.classList.remove('lbx-on'); }, 1500); });
+})();
+/* No jump back to the top at load (Jean 2026-10-12): the site script (surgeai-bp.netlify.app) calls window.scrollTo(0, 0) when the
+   page finishes loading, so on a slow load a visitor who had already scrolled was thrown back to the top. If the visitor has
+   scrolled, tapped or used the keyboard before load, that one call is skipped. Otherwise nothing changes (pages still open at the top). */
+(function () {
+  if (window.__noTopJump) return;
+  window.__noTopJump = 1;
+  var acted = false;
+  function mark() { acted = true; }
+  ['wheel', 'touchmove', 'keydown', 'pointerdown'].forEach(function (t) { window.addEventListener(t, mark, { passive: true, capture: true }); });
+  window.addEventListener('load', function () {
+    if (!acted) return;
+    var orig = window.scrollTo;
+    window.scrollTo = function (x, y) {
+      var top = typeof x === 'object' && x ? (x.top || 0) + (x.left || 0) : (x || 0) + (y || 0);
+      if (top === 0) return;
+      return orig.apply(window, arguments);
+    };
+    setTimeout(function () { window.scrollTo = orig; }, 0);
+  });
+})();
+</script></div><div class="w-embed"><style>
+/* Benchmark Examples, shared collection (2026-10-05). Each benchmark page's Examples list reads the shared "Benchmark · Examples" collection and carries data-examples="shared". Webflow stores grid placement per element on the original lists; these rules give the shared lists that same placement, once for every page. Remove this embed to undo. */
+.lead-examples-list-wrapper[data-examples="shared"] {
+  grid-area: 3 / 1 / 4 / -1;
+}
+.lead-examples-list-wrapper[data-examples="shared"] > .lead-examples-list,
+.lead-examples-list-wrapper[data-examples="shared"] > .lead-examples-list > .lead-examples-item,
+.lead-examples-list-wrapper[data-examples="shared"] .lead-examples-item > .lead-dropdown,
+.lead-examples-list-wrapper[data-examples="shared"] .lead-dropdown > .lead-dropdown-list,
+.lead-examples-list-wrapper[data-examples="shared"] .lead-dropdown-example-wrap > .lead-examples-subgrid {
+  grid-area: span 1 / span 12 / span 1 / span 12;
+}
+.lead-examples-list-wrapper[data-examples="shared"] .lead-dropdown > .lead-dropdown-toggle,
+.lead-examples-list-wrapper[data-examples="shared"] .lead-dropdown-list > .lead-dropdown-example-wrap {
+  grid-area: 1 / 1 / 2 / -1;
+}
+.lead-examples-list-wrapper[data-examples="shared"] .lead-dropdown-example-wrap > .lead-dropdown-example-pdf-img {
+  grid-area: 2 / 1 / 3 / -1;
+}
+@media screen and (max-width: 767px) {
+  .lead-examples-list-wrapper[data-examples="shared"] .lead-dropdown > .lead-dropdown-list {
+    grid-area: 2 / 1 / 3 / -1;
+  }
+}
+</style></div><div class="w-layout-blockcontainer container fluid w-container"><div class="header-inner"><a aria-label="Surge AI home" href="/" class="header-logo w-inline-block"><div data-wf--logo--variant="base" class="logo"><div class="logo-lm"><img src="https://cdn.prod.website-files.com/68dc970bd6e945ea3fb0f426/68e340b3dfa20e2c97749a3a_Logo.svg" loading="lazy" alt="" class="img-default"/></div><div class="logo-dm"><img src="https://cdn.prod.website-files.com/68dc970bd6e945ea3fb0f426/68edc094dab2221243f61246_Logo-dm.svg" loading="lazy" alt="" class="img-default"/></div></div></a><div class="header-act"><div class="header-menu"><a href="/blog" class="header-link w-inline-block"><div class="txt fs-14">Blog</div></a><a href="/benchmarks" class="header-link w-inline-block"><div class="txt fs-14"><code>benchmarks</code></div></a><a href="/ots" class="header-link w-inline-block"><div class="txt fs-14">Off-the-Shelf</div></a><a href="/post-training" class="header-link w-inline-block"><div class="txt fs-14">Training</div></a><a href="/workforce" class="header-link w-inline-block"><div class="txt fs-14">experts</div></a><a href="/products" class="header-link w-inline-block"><div class="txt fs-14">Products</div></a><a href="/enterprise" class="header-link w-inline-block"><div class="txt fs-14">Enterprise</div></a><a href="/research" class="header-link w-inline-block"><div class="txt fs-14">Research</div></a><a href="/careers" class="header-link w-inline-block"><div class="txt fs-14">Careers</div></a><a href="/contact" class="header-link w-inline-block"><div class="txt fs-14">Contact</div></a></div><a href="https://app.surgehq.ai/customers/sign_in" target="_blank" class="btn is-light header-login w-inline-block"><div class="txt fs-14">Login</div></a></div><button class="header-ham"><div class="header-ham-txt"><div class="txt fs-14">Menu</div></div><div class="header-ham-txt is-close"><div class="txt fs-14">Close</div></div></button></div></div><div class="w-embed w-script"><!-- Surge · logo right-click menu: copy / download the brand logo. Desktop-first.
+     Dropdown styles ported from surge-mirror nav.html (.nav-dd-menu / .dd-chip), rem→px at 16px. -->
+<style>
+.nav-dd-menu{position:fixed;left:0;top:0;z-index:10000;box-sizing:border-box;min-width:216px;background:#fff;border:1px solid #24241d1a;border-radius:.4rem;padding:7px;display:flex;flex-direction:column;opacity:0;visibility:hidden;transition:opacity .16s ease-out,visibility 0s linear .16s;box-shadow:0 3px 10px rgba(0,0,0,.05);pointer-events:auto;outline:0;font-family:var(--fonts--button,"JetBrains Mono",monospace);font-weight:400}
+.nav-dd-menu.is-open{opacity:1;visibility:visible;transition:none}  /* appears instantly like a native context menu; fades out on close */
+.nav-dd-menu a{display:block;font-family:inherit;font-weight:400;font-size:12.5px;line-height:1.3;letter-spacing:.02em;text-transform:uppercase;color:#1d1d17;text-decoration:none;padding:10px 13px 8px;border-radius:.3rem;transition:background-color .15s ease,color .15s ease;outline:0;white-space:nowrap;cursor:pointer}
+.nav-dd-menu a:hover,.nav-dd-menu a:focus-visible{background:rgba(36,36,29,.05);color:#1d1d17}
+.nav-dd-menu a.on{color:rgba(29,29,23,.45)}
+.nav-dd-menu .has-chip{display:flex;align-items:stretch;gap:2px;box-sizing:border-box;padding:2px;margin:0 0 4px;background:rgba(36,36,29,.06);border-radius:.3rem;white-space:nowrap}
+.dd-chip{flex:1 1 0;text-align:center;font-family:inherit;font-weight:400;font-size:10px;line-height:1.2;letter-spacing:.06em;text-transform:uppercase;color:rgba(29,29,23,.45);background:transparent;border:0;border-radius:.2rem;padding:7px 8px 6px;white-space:nowrap;cursor:pointer;-webkit-appearance:none;appearance:none;transition:background-color .2s ease,color .2s ease,box-shadow .2s ease}
+.dd-chip[aria-pressed="true"]{background:#fff;color:#1d1d17;box-shadow:0 1px 2px rgba(0,0,0,.06)}
+.dd-chip[aria-pressed="false"]:hover{color:#1d1d17}
+.dd-chip:focus-visible{outline:1px solid #9747ff;outline-offset:1px}
+@media (hover:none){.nav-dd-menu{display:none!important}}
+</style>
+<script>
+(function(){
+if(window.__surgeLogoMenu)return;window.__surgeLogoMenu=1;
+var FALLBACK={dark:"https://cdn.prod.website-files.com/68dc970bd6e945ea3fb0f426/68e340b3dfa20e2c97749a3a_Logo.svg",white:"https://cdn.prod.website-files.com/68dc970bd6e945ea3fb0f426/68edc094dab2221243f61246_Logo-dm.svg"};
+var ITEMS=[["svg","Copy logo as SVG"],["png","Copy logo as PNG"],["dl","Download SVG Logo"]];
+var menu,variant="dark",U=FALLBACK,cache={},closeTimer,restoreTimer,pending;
+function el(tag,cls,html){var e=document.createElement(tag);if(cls)e.className=cls;if(html!=null)e.innerHTML=html;return e}
+function isOpen(){return !!(menu&&menu.classList.contains("is-open"))}
+function build(){
+  menu=el("div","nav-dd-menu");menu.setAttribute("role","menu");menu.setAttribute("aria-label","Surge AI logo");menu.setAttribute("tabindex","-1");
+  var color=el("div","has-chip",'<button type="button" class="dd-chip" data-v="dark" aria-pressed="true">Dark</button><button type="button" class="dd-chip" data-v="white" aria-pressed="false">White</button>');
+  color.setAttribute("role","group");color.setAttribute("aria-label","Logo color");
+  [].forEach.call(color.querySelectorAll("button"),function(b){b.addEventListener("click",function(e){e.preventDefault();e.stopPropagation();setVariant(b.dataset.v);prefetch()})});
+  menu.appendChild(color);
+  ITEMS.forEach(function(d){
+    var a=el("a",null,d[1]);a.href="#";a.setAttribute("role","menuitem");a.dataset.act=d[0];a.dataset.lbl=d[1];
+    a.addEventListener("click",onAct);menu.appendChild(a);
+  });
+  menu.addEventListener("transitionend",function(e){if(e.target===menu&&e.propertyName==="opacity"&&!isOpen())restore()});
+  document.body.appendChild(menu);
+}
+function setVariant(v){variant=v;[].forEach.call(menu.querySelectorAll(".dd-chip"),function(b){b.setAttribute("aria-pressed",b.dataset.v===v?"true":"false")})}
+function readLogo(logo){
+  var lm=logo.querySelector(".logo-lm img"),dm=logo.querySelector(".logo-dm img");
+  U={dark:(lm&&(lm.currentSrc||lm.src))||FALLBACK.dark,white:(dm&&(dm.currentSrc||dm.src))||FALLBACK.white};
+  return dm&&dm.getClientRects().length?"white":"dark";
+}
+function prefetch(){["dark","white"].forEach(function(v){var u=U[v];if(cache[u])return;var p=fetch(u,{mode:"cors"}).then(function(r){if(!r.ok)throw new Error("http "+r.status);return r.text()}).then(function(t){p.value=t;return t});cache[u]=p})}
+function svgText(){prefetch();return cache[U[variant]]}
+function fileName(ext){return "surge-ai-logo-"+variant+"."+ext}
+function toPng(text){
+  return new Promise(function(res,rej){
+    var url=URL.createObjectURL(new Blob([text],{type:"image/svg+xml"})),img=new Image();
+    img.onload=function(){
+      var W=1200,H=img.naturalWidth?Math.round(W*img.naturalHeight/img.naturalWidth):375,c=document.createElement("canvas");
+      c.width=W;c.height=H;c.getContext("2d").drawImage(img,0,0,W,H);URL.revokeObjectURL(url);
+      c.toBlob(function(b){b?res(b):rej(new Error("png"))},"image/png");
+    };
+    img.onerror=function(){URL.revokeObjectURL(url);rej(new Error("svg"))};
+    img.src=url;
+  });
+}
+function download(blob,name){var a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download=name;a.style.display="none";document.body.appendChild(a);a.click();setTimeout(function(){URL.revokeObjectURL(a.href);a.remove()},1500)}
+function legacyCopy(t){var ta=document.createElement("textarea");ta.value=t;ta.setAttribute("readonly","");ta.style.cssText="position:fixed;left:-9999px;top:0;opacity:0";document.body.appendChild(ta);ta.select();var ok=false;try{ok=document.execCommand("copy")}catch(e){}ta.remove();if(!ok)throw new Error("copy blocked");return ok}
+function copyText(p){
+  var cb=navigator.clipboard,w;
+  if(!cb)return p.then(legacyCopy);
+  if(p.value!=null&&cb.writeText)w=cb.writeText(p.value);
+  else if(window.ClipboardItem&&cb.write){try{w=cb.write([new ClipboardItem({"text/plain":p.then(function(t){return new Blob([t],{type:"text/plain"})})})])}catch(e){}}
+  if(!w)w=p.then(function(t){return cb.writeText(t)});
+  return w.catch(function(){return p.then(legacyCopy)});
+}
+function copyPng(p){
+  var cb=navigator.clipboard,blobP=p.then(toPng);
+  if(!cb||!window.ClipboardItem||!cb.write)return blobP.then(function(b){download(b,fileName("png"));return "Saved"});
+  var w;try{w=cb.write([new ClipboardItem({"image/png":blobP})])}catch(e){w=blobP.then(function(b){return cb.write([new ClipboardItem({"image/png":b})])})}
+  return w.then(function(){return "Copied"}).catch(function(){return blobP.then(function(b){download(b,fileName("png"));return "Saved"})});
+}
+function onAct(e){
+  e.preventDefault();e.stopPropagation();
+  var a=e.currentTarget,act=a.dataset.act,p=svgText(),done;
+  if(act==="svg")done=copyText(p).then(function(){return "Copied"});
+  else if(act==="png")done=copyPng(p);
+  else done=p.then(function(t){download(new Blob([t],{type:"image/svg+xml"}),fileName("svg"));return "Saved"});
+  done.then(function(msg){flash(a,msg)},function(){flash(a,"Failed")});
+}
+function restore(){if(pending){pending.textContent=pending.dataset.lbl;pending.classList.remove("on");pending=null}}
+function flash(a,msg){
+  restore();pending=a;a.textContent=msg;a.classList.add("on");
+  clearTimeout(closeTimer);clearTimeout(restoreTimer);
+  closeTimer=setTimeout(close,900);        /* fade out with the label still reading Copied / Saved */
+  restoreTimer=setTimeout(restore,2500);   /* fallback only; the normal restore runs on transitionend below */
+}
+function open(x,y,logo){
+  if(!menu)build();
+  clearTimeout(closeTimer);clearTimeout(restoreTimer);restore();
+  setVariant(readLogo(logo));prefetch();
+  menu.style.left="0px";menu.style.top="0px";
+  var r=menu.getBoundingClientRect(),W=r.width||216,H=r.height||160,vw=window.innerWidth,vh=window.innerHeight;
+  if(vw>200&&x+W>vw-8)x=Math.max(8,vw-W-8);
+  if(vh>200&&y+H>vh-8)y=Math.max(8,y-H);
+  menu.style.left=x+"px";menu.style.top=y+"px";
+  menu.classList.add("is-open");
+  menu.focus({preventScroll:true}); /* nothing preselected, like a native context menu; arrows pick the first / last row */
+}
+function close(){if(isOpen())menu.classList.remove("is-open")}
+function logoAtPoint(x,y){var ls=document.querySelectorAll(".header-logo");for(var i=0;i<ls.length;i++){var r=ls[i].getBoundingClientRect();if(r.width&&r.height&&x>=r.left&&x<=r.right&&y>=r.top&&y<=r.bottom)return ls[i]}return null}
+document.addEventListener("contextmenu",function(e){
+  /* hit-test by geometry too: on the current page the logo link has pointer-events:none, so the event target is whatever sits under it */
+  var logo=(e.target&&e.target.closest&&e.target.closest(".header-logo"))||logoAtPoint(e.clientX,e.clientY);
+  if(!logo)return;e.preventDefault();open(e.clientX,e.clientY,logo);
+},true);
+document.addEventListener("pointerdown",function(e){if(isOpen()&&!menu.contains(e.target))close()},true);
+document.addEventListener("keydown",function(e){
+  if(!isOpen())return;
+  if(e.key==="Escape"){close();return}
+  if(e.key==="ArrowDown"||e.key==="ArrowUp"){
+    e.preventDefault();var items=[].slice.call(menu.querySelectorAll("a[role=menuitem]")),n=items.length,i=items.indexOf(document.activeElement),down=e.key==="ArrowDown";
+    items[i<0?(down?0:n-1):(down?(i+1)%n:(i-1+n)%n)].focus();
+  }
+});
+window.addEventListener("scroll",close,true);window.addEventListener("resize",close);
+})();
+</script>
+</div><div class="w-embed"><!-- Text selection highlight: brand purple (#9747FF) at 28% so selected text keeps its own color -->
+<style>
+::selection{background:rgba(151,71,255,.28)}
+::-moz-selection{background:rgba(151,71,255,.28)}
+img::selection{background:rgba(151,71,255,.18)}
+</style></div></div><main data-namespace="post" class="main"><div class="css-embed w-embed w-script"><style>
+  .is-post-hero-summary p {
+    margin-top: 2rem;
+  }
+
+  .is-post-hero-summary p.ep {
+    display: none;
+  }
+
+  .is-post-hero-summary p.fp {
+    margin-top: 0;
+  }
+  .post-hero-summary .w-richtext a {
+    text-decoration: underline;
+    transition: color 0.3s ease;
+  }
+  .post-hero-summary .w-richtext a:hover {
+    color: var(--_color---content--link);
+  }
+  .post-content-toc-item:before {
+    content: '';
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: max(1px, 0.1rem);
+    background-color: var(--_color---background--content--title);
+    transition: transform 0.65s cubic-bezier(0.785, 0.135, 0.15, 0.86);
+    bottom: -0.1rem;
+    transform: scaleX(0);
+    transform-origin: right;
+  }
+  .post-content-toc-item.w--current:before {
+    transform: scaleX(1);
+    transform-origin: left;
+  }
+  .post-content-toc-item .txt {
+    pointer-events: none;
+  }
+  .post-content-richtext.w-richtext figure > div {
+    border-radius: 0;
+    overflow: visible;
+  }
+  .post-content-richtext.w-richtext > *:not(pre) code,
+  .post-content-richtext.w-richtext > *:not(pre) code span {
+    background-color: initial;
+    display: initial;
+    overflow-x: initial;
+    padding: initial;
+    color: #24241dcc;
+    font-size: 1.4rem;
+    padding: 0.4rem;
+    line-height: 1.5;
+    background-color: whitesmoke;
+    border-radius: 0.4rem;
+  }
+  .post-content-richtext.w-richtext a {
+    display: inline;
+  }
+
+  .post-content-nav-cms-title .txt {
+    display: inline;
+    --underlineWidth: 1.5px;
+    --blockLength: 1rem;
+    text-decoration: none;
+    background-image: linear-gradient(90deg, var(--_color---background--surface), var(--_color---background--surface)), linear-gradient(var(--_color---background--content--title), var(--_color---background--content--title)), linear-gradient(var(--_color---background--content--title), var(--_color---background--content--title));
+    background-repeat: no-repeat;
+    background-size:
+      var(--blockLength) var(--underlineWidth),
+      0 var(--underlineWidth),
+      0 var(--underlineWidth);
+    transition:
+      background-size cubic-bezier(0.39, 0.575, 0.565, 1) 0.4s,
+      background-position cubic-bezier(0.39, 0.575, 0.565, 1) 0.4s,
+      color cubic-bezier(0.39, 0.575, 0.565, 1) 0.4s;
+    border: none;
+    background-position:
+      calc(var(--blockLength) * -1) 100%,
+      100% 100%,
+      0 100%;
+  }
+  a.blog-btn {
+    z-index: 2;
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+
+    width: fit-content;
+    margin-top: 2rem;
+    padding: 0.8rem 1rem;
+
+    color: #eeeee8 !important;
+    background-color: #1d1d17;
+
+    font-family: var(--fonts--button);
+    text-transform: uppercase;
+    text-decoration: none !important;
+
+    border-radius: 0.4rem;
+
+    pointer-events: auto;
+
+    transition:
+      color 0.45s ease,
+      background-color 0.45s ease !important;
+  }
+
+  a.blog-btn:hover {
+    color: #1d1d17 !important;
+    background-color: #eeeee8;
+  }
+
+  a.blog-btn .blog-btn-ic {
+    color: var(--_color---content--link);
+    flex: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 1.2rem;
+    height: 1.2rem;
+  }
+  @media only screen and (min-width: 992px) {
+    .post-content-nav-cms-item.prev:hover .txt {
+      background-size:
+        var(--blockLength) var(--underlineWidth),
+        100% var(--underlineWidth),
+        0 var(--underlineWidth);
+    }
+    .post-content-nav-cms-item.next:hover .txt {
+      background-size:
+        var(--blockLength) var(--underlineWidth),
+        0 var(--underlineWidth),
+        100% var(--underlineWidth);
+      background-position:
+        calc(100% + var(--blockLength)) 100%,
+        100% 100%,
+        0 100%;
+    }
+  }
+  @media only screen and (min-width: 768px) {
+    /*
+  .post-content-richtext.w-richtext figure {
+		--negative-space: calc(var(--container--one-column) + var(--container--column-gap));
+
+    margin-inline: calc(var(--negative-space) * -1);
+    width: calc(100% + var(--negative-space) * 2) !important;
+    max-width: calc(100% + var(--negative-space) * 2) !important;
+  }
+  */
+
+    /* Image zoom: the rest of the post fades out and back in over .5s instead of snapping (text had no transition, figures .3s) */
+    .post-content-richtext.w-richtext > * {
+      transition: opacity 0.5s ease;
+    }
+    .post-content-richtext.w-richtext.on-zoom > *:not(figure:has(.is-zoomed)) {
+      opacity: 0.2;
+    }
+    .post-content-richtext.w-richtext.on-zoom figure:not(:has(.is-zoomed)):hover {
+      opacity: 0.8;
+    }
+  }
+  .post-content-nav-cms-link:before {
+    position: relative;
+    display: inline-block;
+    font-size: 1.2rem;
+    font-weight: 500;
+    line-height: 1.4;
+    text-transform: uppercase;
+    font-family: var(--boder--fonts--button);
+  }
+  .post-content-nav-cms-item.next .post-content-nav-cms-link {
+    align-items: flex-start;
+  }
+  .post-content-nav-cms-item.next .post-content-nav-cms-link:before {
+    content: 'Next';
+  }
+  .post-content-nav-cms-item.prev .post-content-nav-cms-link {
+    align-items: flex-end;
+  }
+  .post-content-nav-cms-item.prev .post-content-nav-cms-link:before {
+    content: 'Previous';
+  }
+  .post-content-toc.active a {
+    pointer-events: auto;
+  }
+  .is-zoomed {
+    z-index: 5;
+    position: relative;
+    transform: translate(var(--zoom-x, 0px), var(--zoom-y, 0px)) scale(var(--zoom-scale, 1.2));
+    box-shadow: rgba(0, 0, 0, 0.2) 0px 0.2rem 3rem !important;
+    cursor:
+      url('https://cdn.prod.website-files.com/68dc970bd6e945ea3fb0f426/68e5e6f02d5a45ce79f32ba0_98e41333df8d7a2b1bba262847cd13a6_zoom-out.svg') 6 2,
+      zoom-out !important;
+  }
+
+  /*.post-content-richtext.w-richtext h2:hover .post-content-achor {
+	opacity: 1;
+  transform: scale(1);
+}*/
+.post-content-achor-ic svg:first-child,
+.post-content-achor.copied .post-content-achor-ic svg:last-child {
+	opacity: 1;
+}
+.post-content-achor-ic svg:last-child,
+.post-content-achor.copied .post-content-achor-ic svg:first-child {
+	opacity: 0;
+}
+
+.post-hero-authors-item:not(:last-child) {
+  border-right-style: solid;
+  border-right-width: 1px;
+  border-right-color: var(--_color---border--main);
+}
+.post-content-toc-title.active .post-content-toc-title-ic {
+	transform: rotate(-180deg);
+}
+.post-content-toc-title.active .post-content-toc-title-ic-line.ver {
+	opacity: 0;
+  transition-delay: .1s;
+}
+/* Appendix h3 dividers, kept switched off: turning them on changes the appendix layout on live posts.
+.post-content-appendix-richtext h3 {
+  display: contents;
+}
+.post-content-appendix-richtext h3:before {
+	content: '';
+  grid-column: 1/-1;
+  position: relative;
+  margin-top: 2.8rem;
+	margin-bottom: 4rem;
+	height: max(1px, .1rem);
+  display: block;
+  width: 100%;
+  background: rgba(36, 36, 29, 0.10);
+}
+.post-content-appendix-richtext h3:first-of-type:before {
+	display: none;
+}
+*/
+/*.post-content-related-post-text {
+	grid-template-rows: auto auto auto 0fr;
+  transition: grid-template-rows .4s ease;
+}*/
+  .post-content-related-post-author-item:last-child .txt:last-child {
+    display: none;
+  }
+
+  @media (hover: hover) {
+    /*.post-content-related-post:hover .post-content-related-post-text {
+    grid-template-rows: auto auto auto 1fr;
+  }
+  .post-content-related-post:hover .post-content-related-post-bot {
+		opacity: 0;
+  }*/
+    .post-content-related-post:hover .post-content-related-post-read-inner {
+      opacity: 1;
+    }
+    .post-content-related-post:hover .post-content-related-post-date {
+      opacity: 0;
+    }
+  }
+  .post-content-related-post-title {
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    line-break: auto;
+    text-overflow: ellipsis;
+    white-space: initial;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+  }
+  .post-content-related-post-title {
+    -webkit-line-clamp: 4;
+  }
+  .post-content-related-post-desc {
+    -webkit-line-clamp: 4;
+  }
+  @media only screen and (max-width: 767px) {
+    .post-content-appendix-richtext h3 {
+      display: inline-block;
+    }
+    .post-content-related-post-text {
+      grid-template-rows: auto auto auto 1fr;
+    }
+    .post-content-appendix-richtext h3:before {
+      margin-top: 2rem;
+      margin-bottom: 2.8rem;
+    }
+    .post-content-related-post:hover .post-content-related-post-bot {
+      opacity: 1;
+    }
+    .post-content-related-post-desc {
+      -webkit-line-clamp: 2;
+    }
+  }
+  .post-content-subscribe-input:focus-within {
+    box-shadow: 0 0 0 0.3rem #00000008;
+  }
+  @media (hover: hover) and (min-width: 992px) {
+    .post-content-subscribe-inner:hover .post-content-subscribe-bg {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+  @media (hover: hover) and (min-width: 768px) {
+    .post-content-subscribe-input:focus-within {
+      border-color: rgba(255, 255, 255, 0.5);
+    }
+  }
+
+  .post-content-richtext blockquote strong {
+    font-weight: 700 !important;
+  }
+  .post-content-inner ::selection, .post-hero-summary ::selection {
+    background: rgba(151, 71, 255, .18);
+  }
+  .post-content-richtext blockquote > strong:first-child {
+    font-family: var(--fonts--button);
+    font-size: 1.1rem;
+    font-weight: 500 !important;
+    color: var(--_color---content--subtitle) !important;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    margin-bottom: .6rem;
+  }
+  .post-content-inner blockquote>strong:first-child+br {
+    display: none;
+  }
+  .post-content-inner :is(p,h2,h3,h4,h5,ul,ol,blockquote) {
+	max-width: 74rem;
+    margin-inline: auto;
+  }
+</style>
+<script>
+/* Blog image zoom: the site bundle toggles .is-zoomed on click; this sets how far the image grows (read by the
+   .is-zoomed rule above). It grows toward the file's actual pixel size, capped so the zoomed image stays inside
+   the viewport with a margin (and below the header while the header is on screen). It never shrinks: when the
+   file is smaller than the column, or the image already fills the screen, it gets the old slight 1.2x. */
+(function () {
+  var MIN = 1.2;
+  var IMG = '.post-content-richtext .w-richtext-figure-type-image img';
+  function place(img) {
+    var w0 = img.offsetWidth, h0 = img.offsetHeight;
+    if (!w0 || !h0 || !img.naturalWidth) return;
+    var r = img.getBoundingClientRect();
+    var cx = r.left + r.width / 2, cy = r.top + r.height / 2;
+    var t = getComputedStyle(img).transform;
+    if (t && t !== 'none') { var mx = new DOMMatrixReadOnly(t); cx -= mx.e; cy -= mx.f; }
+    var vw = document.documentElement.clientWidth, vh = window.innerHeight;
+    var m = Math.max(24, Math.min(64, Math.round(Math.min(vw, vh) * 0.05)));
+    var top = m, header = document.querySelector('.header');
+    if (header) { var hb = header.getBoundingClientRect().bottom; if (hb > 0) top = Math.max(top, hb + m / 2); }
+    var roomW = vw - 2 * m, roomH = vh - m - top;
+    var s = Math.max(MIN, Math.min(img.naturalWidth / w0, roomW / w0, roomH / h0));
+    var w = w0 * s, h = h0 * s, dx = 0, dy = 0;
+    if (w > roomW) dx = vw / 2 - cx;
+    else if (cx - w / 2 < m) dx = m - (cx - w / 2);
+    else if (cx + w / 2 > vw - m) dx = vw - m - (cx + w / 2);
+    if (h <= roomH) {
+      if (cy - h / 2 < top) dy = top - (cy - h / 2);
+      else if (cy + h / 2 > vh - m) dy = vh - m - (cy + h / 2);
+    }
+    img.style.setProperty('--zoom-scale', s.toFixed(3));
+    img.style.setProperty('--zoom-x', Math.round(dx) + 'px');
+    img.style.setProperty('--zoom-y', Math.round(dy) + 'px');
+  }
+  document.addEventListener('click', function (e) {
+    var img = e.target instanceof Element ? e.target.closest(IMG) : null;
+    if (img && !img.classList.contains('is-zoomed')) place(img);
+  }, true);
+})();
+</script></div><div class="main-inner"><section class="post-hero"><div class="w-layout-blockcontainer container grid w-container"><div id="w-node-_5830df19-560b-1141-00a9-eb534bdaadfc-034d05ca" class="post-hero-title-wrap"><div class="post-hero-breadcrumb"><a href="/blog" class="btn is-medium is-light w-inline-block"><div>THE SURGE AI BLOG</div></a></div><div id="w-node-_5830df19-560b-1141-00a9-eb534bdaae03-034d05ca" class="post-hero-title"><h1 id="w-node-_5830df19-560b-1141-00a9-eb534bdaae04-034d05ca" class="heading h1">ComplexConstraints: A Benchmark for Entangled Instruction Following</h1></div><div id="w-node-_5830df19-560b-1141-00a9-eb534bdaae06-034d05ca" class="post-hero-date"><div class="txt fs-12 w-condition-invisible">October 21, 2026</div><div class="txt fs-12">June 3, 2026</div></div><div class="w-condition-invisible"><div class="post-hero-authors-cms w-dyn-list"><div class="hidden w-dyn-empty"><div>No items found.</div></div></div></div></div><aside id="w-node-aa46caa1-235e-39a5-71b0-c5b4194314ed-034d05ca" class="post-hero-summary"><div class="post-hero-summary-title"><div class="txt fs-16 fw-med">TL;DR</div></div><div class="txt fs-14 is-post-hero-summary w-richtext"><p>Real instructions aren’t lists of independent rules – they&#x27;re entangled.</p><p>Introducing <strong>ComplexConstraints</strong>: our new IF benchmark where instructions depend on each other, fire conditionally, and must be inferred from context.</p><p>We also show how training a Qwen3-4B model on ComplexConstraints data generalizes to other benchmarks, improving AdvancedIF performance from 28% to 37% and MultiChallenge performance from 41% to 51%.</p></div><div class="post-content-bmark-action"><a href="/benchmarks/complex-constraints" class="btn is-medium w-inline-block"><div>LEADERBOARD</div><div class="btn-arrow"><svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 24 24" fill="none" class="svg"><path d="M7 7h10v10" stroke="currentColor" stroke-width="2" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"></path><path d="M7 17 17 7" stroke="currentColor" stroke-width="2" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"></path></svg></div></a><a href="https://arxiv.org/abs/2606.09118" class="btn is-medium is-light w-inline-block"><div>RESEARCH PAPER</div><div class="btn-arrow"><svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 24 24" fill="none" class="svg"><path d="M7 7h10v10" stroke="currentColor" stroke-width="2" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"></path><path d="M7 17 17 7" stroke="currentColor" stroke-width="2" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"></path></svg></div></a><a href="https://github.com/surge-ai/complex-constraints" class="btn is-medium is-light w-inline-block"><div>GITHUB</div><div class="btn-arrow"><svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 24 24" fill="none" class="svg"><path d="M7 7h10v10" stroke="currentColor" stroke-width="2" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"></path><path d="M7 17 17 7" stroke="currentColor" stroke-width="2" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"></path></svg></div></a></div></aside></div></section><section class="post-content"><div id="w-node-_74c272ea-1751-109d-befe-43780a0cddd7-034d05ca" class="post-content-stick"><div class="post-content-toc-wrap"><div id="w-node-_03534e6d-107d-16ff-458d-f8a9f65def01-034d05ca" class="post-content-toc"><div class="post-content-toc-title"><div class="txt fs-12 fw-med">Table of contents</div><div class="post-content-toc-title-ic"><div class="post-content-toc-title-ic-line"></div><div class="post-content-toc-title-ic-line ver"></div></div></div><div class="post-content-toc-list-wrap custom-scroll"><div class="post-content-toc-list"><a href="#" class="post-content-toc-item w-inline-block"><div class="txt fs-14 fw-med">Case Study Llama</div></a><a href="#" class="post-content-toc-item w-inline-block"><div class="txt fs-14 fw-med">Analysis of Individual writings</div></a></div></div></div><a href="#appendix" class="post-content-toc-appendix w-inline-block w-condition-invisible"><div class="txt fs-14 fw-med">Appendix</div></a></div><div class="post-content-toc-ruler"><div class="post-content-toc-ruler-line"></div></div></div><div id="w-node-_73599568-8451-258e-b364-8fdced879755-034d05ca" class="post-content-wrap"><div id="w-node-_5830df19-560b-1141-00a9-eb534bdaae0a-034d05ca" class="w-layout-blockcontainer container grid w-container"><div id="w-node-_5830df19-560b-1141-00a9-eb534bdaae0b-034d05ca" class="post-content-inner"><div fs-codehighlight-element="code" fs-codehighlight-theme="webflow" class="txt fs-16 post-content-richtext w-richtext"><p>Most instruction-following benchmarks test constraints that are simple and explicit: keep it under 300 characters, use a professional tone, format in Markdown.</p><p>Real work isn't like that. The instructions people give come in tangles. Constraints depend on each other, fire only when conditions set by other constraints are met, and sometimes go unstated entirely. The real world contains:</p><ul><li><strong>Conditional constraints.</strong> A customer gets automatic refunds <em>if</em> their balance is below a threshold – <em>unless</em> their fraud score is too high.</li><li><strong>Planning constraints.</strong> A film shoot schedule has to fit the availability of 5 actors, sufficient daylight for outdoor scenes, travel times, and equipment rental windows.</li><li><strong>Multistep constraints.</strong> A reimbursement requires checking the expense category, converting currency at the right exchange rate, applying the company’s per-diem cap, and formatting the result in a quarterly report.</li><li><strong>Implicit constraints.</strong> When a restaurant manager asks for a schedule and some staff observe religious dietary restrictions, no one has to spell out that those employees shouldn't be assigned to pork prep.</li><li><strong>Negative constraints.</strong> An SEC disclosure has to convey material developments – but can <em>not</em> include forward-looking statements without safe-harbor language or reveal anything that hasn't been publicly filed.</li></ul><p>We wanted a benchmark that captures this.</p><p>Today we're releasing <strong>ComplexConstraints</strong>: 75 expert-crafted prompts with 1,559 evaluation rubrics, measuring whether models can do the constraint-heavy work professionals do every day.</p><h2>Where existing benchmarks fall short</h2><p>IFEval tests things like avoiding commas or hitting an exact word count. Frontier models score above 80% on it. That's a long way from following the kind of instruction a human professional gives.</p><p><a href="https://surgehq.ai/blog/advancedif-and-the-evolution-of-instruction-following-benchmarks">AdvancedIF</a>, which we helped the Meta Superintelligence team build, was a step forward: human-written prompts, LLM-as-judge evaluation, rubrics that capture what people care about. But the frontier has largely now mastered the kinds of simple, independent, and explicit constraints that AdvancedIF is composed of.</p><h2>How ComplexConstraints prompts are built</h2><p>ComplexConstraints introduces a new level of realistic complexity. Most prompts contain dozens of multi-dependency constraints spanning the following taxonomy:</p><ul><li><strong>Conditional constraints</strong> fire only under specific circumstances.</li><li><strong>Planning constraints</strong> require finding an arrangement that satisfies multiple constraints at once.&nbsp;</li><li><strong>Multistep constraints</strong> require sequential reasoning where each step's output feeds the next; an early error corrupts everything downstream.</li><li><strong>Negative constraints</strong> are defined by what the model must not do.&nbsp;</li><li><strong>Implicit constraints</strong> are requirements a competent professional would understand without being spelled out.</li><li>It also includes standard <strong>explicit constraints</strong> (e.g., a specific budget cap, a required exchange rate, a named employee's day off, a specific format).</li></ul><figure class="w-richtext-figure-type-image w-richtext-align-center" data-rt-type="image" data-rt-align="center"><div><img alt="__wf_reserved_inherit" src="https://cdn.prod.website-files.com/68dcd2ceb173c46fa029931c/6ad8ef8d6b0d36f79ca48588_6ad8ed536bb6309a9d564133_taxonomy.webp" width="auto" height="auto" loading="lazy"></div></figure><p>Every prompt comes from day-to-day work: line producers, restaurant managers, teachers, business administrators. Three examples:</p><ul><li><strong>Film production crisis.</strong> You're on week 2 of a 5-week feature shoot and four crew members test positive for COVID. Draft a crew memo (2–3 paragraphs, most important info first). Build a contact tracing list using specific exposure criteria (indoor close contact, 60+ minutes). Revise the shooting schedule to move interior scenes to later in the week. Write a formal letter to the bond company. Keep sick crew members' names out of the memo, hold a calm tone, and don't violate union turnaround rules. 33 rubric items.</li><li><strong>Restaurant staff scheduling.</strong> An Indian restaurant owner with a diverse staff needs a weekly schedule covering FOH/BOH language requirements, religious restrictions on pork preparation, dishwasher coverage every night shift, extra FOH staffing when training new employees, specific days off per employee, and minimum coverage that varies by shift. 18 interlocking constraints, many of which only matter in combination.</li><li><strong>Office procurement.</strong> A team of six needs to outfit a new office on a £3,000 budget: £500 per-person cap (except the boss), standing desks prioritized, one employee with a medical accommodation, desk plants outside individual budgets, output formatted as a draft email to the boss with prices and totals. 30 rubric items spanning budget math, prioritization, and communication.</li></ul><figure class="w-richtext-figure-type-image w-richtext-align-center" data-rt-type="image" data-rt-align="center"><div><img alt="__wf_reserved_inherit" src="https://cdn.prod.website-files.com/68dcd2ceb173c46fa029931c/6ad8ef8d6b0d36f79ca4857b_6ad8ed53ec8c4fc2325cec7d_cc-ex.webp" width="auto" height="auto" loading="lazy"></div></figure><h2>How frontier models perform</h2><p>Each prompt has 15-40 rubric items, graded by an LLM judge. Top models score under 40%.&nbsp;View the leaderboard <a href="https://surgehq.ai/benchmarks/complex-constraints">here</a>.</p><figure class="w-richtext-figure-type-image w-richtext-align-center" data-rt-type="image" data-rt-align="center"><div><img alt="__wf_reserved_inherit" src="https://cdn.prod.website-files.com/68dcd2ceb173c46fa029931c/6ad8ef8d6b0d36f79ca4857e_6ad8ed530181d5602787c42d_CleanShot-2026-06-04-at-10.19.07-2x.webp" width="auto" height="auto" loading="lazy"></div></figure><h2>Training on ComplexConstraints companion data</h2><p>To check whether ComplexConstraints measures something worth optimizing for, we built a companion training set of 1,000 examples, and trained Qwen3-4B using RLVR with a judge model.</p><p>On a held-out set, rubric pass rate rose from 57.9% to 73.4% – a 15.5-point gain. The trained 4B model landed at near-parity with Qwen3-235B-A22B-Instruct (73.9%), a model roughly 60x its size.</p><figure class="w-richtext-figure-type-image w-richtext-align-center" data-rt-type="image" data-rt-align="center"><div><img alt="__wf_reserved_inherit" src="https://cdn.prod.website-files.com/68dcd2ceb173c46fa029931c/6ad8ef8d6b0d36f79ca48581_6ad8ed5309bae55f7c58936c_c3.webp" width="auto" height="auto" loading="lazy"></div></figure><p>The bigger question is whether those gains transfer.</p><h3><strong>Do ComplexConstraints gains generalize to other benchmarks?</strong></h3><p>They do.</p><p>On AdvancedIF, overall task pass rate rose from 28.15% to 36.60% (+8.45pp). System Steerability – following behavioral directives in system prompts – jumped 12.42pp. Carried Context, which tests multi-turn instruction retention, improved 7.07pp.</p><p>On MultiChallenge, overall task pass rate rose from 41.1% to 51.2% (+10.1pp). Instruction Retention gained 22.1pp, from 23.6% to 45.7%. Self Coherence improved 10.5pp.</p><div data-rt-embed-type='true'><div class="cc-results-table-wrap">
+  <table class="cc-results-table">
+    <caption>Training on ComplexConstraints</caption>
+    <thead>
+      <tr>
+        <th>Benchmark</th>
+        <th>Category</th>
+        <th>Baseline</th>
+        <th>Trained</th>
+        <th>Delta</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Meta AdvancedIF</td>
+        <td>Overall Task Pass Rate <span class="cc-muted">(all criteria pass)</span></td>
+        <td>28.15%</td>
+        <td>36.60%</td>
+        <td class="cc-delta">+8.45pp</td>
+      </tr>
+      <tr>
+        <td>Meta AdvancedIF</td>
+        <td>Single Turn</td>
+        <td>34.08%</td>
+        <td>40.05%</td>
+        <td class="cc-delta">+5.97pp</td>
+      </tr>
+      <tr>
+        <td>Meta AdvancedIF</td>
+        <td>System Steerability</td>
+        <td>22.49%</td>
+        <td>34.91%</td>
+        <td class="cc-delta">+12.42pp</td>
+      </tr>
+      <tr>
+        <td>Meta AdvancedIF</td>
+        <td>Carried Context <span class="cc-muted">(multi-turn)</span></td>
+        <td>28.80%</td>
+        <td>35.87%</td>
+        <td class="cc-delta">+7.07pp</td>
+      </tr>
+
+      <tr>
+        <td>MultiChallenge</td>
+        <td>Overall Task Pass Rate <span class="cc-muted">(all criteria pass)</span></td>
+        <td>41.1%</td>
+        <td>51.2%</td>
+        <td class="cc-delta">+10.1pp</td>
+      </tr>
+      <tr>
+        <td>MultiChallenge</td>
+        <td>Inference Memory</td>
+        <td>59.5%</td>
+        <td>65.3%</td>
+        <td class="cc-delta">+5.8pp</td>
+      </tr>
+      <tr>
+        <td>MultiChallenge</td>
+        <td>Self Coherence</td>
+        <td>33.5%</td>
+        <td>44.0%</td>
+        <td class="cc-delta">+10.5pp</td>
+      </tr>
+      <tr>
+        <td>MultiChallenge</td>
+        <td>Instruction Retention</td>
+        <td>23.6%</td>
+        <td>45.7%</td>
+        <td class="cc-delta">+22.1pp</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<style>
+  .cc-results-table-wrap {
+    width: 100%;
+    overflow-x: auto;
+    margin: 2rem 0;
+    border: 1px solid #e4d8f3;
+    border-radius: 14px;
+    background: #ffffff;
+    box-shadow: 0 8px 24px rgba(32, 24, 48, 0.05);
+  }
+
+  .cc-results-table {
+    width: 100%;
+    min-width: 860px;
+    border-collapse: separate;
+    border-spacing: 0;
+    font-family: inherit;
+    color: #24211f;
+    font-size: 16px;
+    line-height: 1.45;
+  }
+
+  .cc-results-table caption {
+    caption-side: top;
+    background: #f8f2ff;
+    color: #1f1b24;
+    font-size: 1.75rem;
+    line-height: 1.25;
+    font-weight: 700;
+    text-align: left;
+    padding: 18px 18px 16px;
+    border-bottom: 1px solid #e4d8f3;
+  }
+
+  .cc-results-table thead th {
+    background: #f3eaff;
+    color: #1f1b24;
+    font-weight: 700;
+    text-align: left;
+    padding: 16px 18px;
+    border-bottom: 1px solid #e4d8f3;
+    white-space: nowrap;
+  }
+
+  .cc-results-table tbody td {
+    padding: 15px 18px;
+    border-bottom: 1px solid #eee9e4;
+    vertical-align: middle;
+  }
+
+  .cc-results-table tbody tr:last-child td {
+    border-bottom: none;
+  }
+
+  .cc-results-table tbody tr:nth-child(even) {
+    background: #fbfaf8;
+  }
+
+  .cc-results-table th:nth-child(3),
+  .cc-results-table th:nth-child(4),
+  .cc-results-table td:nth-child(3),
+  .cc-results-table td:nth-child(4) {
+    text-align: right;
+  }
+
+  .cc-results-table th:nth-child(5),
+  .cc-results-table td:nth-child(5) {
+    text-align: center;
+  }
+
+  .cc-results-table td:first-child {
+    font-weight: 600;
+    white-space: nowrap;
+  }
+
+  .cc-delta {
+    font-weight: 700;
+    color: #008f2f;
+    background: #eefaf0;
+  }
+
+  .cc-muted {
+    color: #6f6a64;
+  }
+
+  @media (max-width: 767px) {
+    .cc-results-table {
+      font-size: 15px;
+      min-width: 820px;
+    }
+
+    .cc-results-table caption {
+      font-size: 1.4rem;
+      padding: 16px 15px 14px;
+    }
+
+    .cc-results-table thead th,
+    .cc-results-table tbody td {
+      padding: 13px 15px;
+    }
+  }
+</style></div><figure class="w-richtext-figure-type-image w-richtext-align-center" data-rt-type="image" data-rt-align="center"><div><img alt="__wf_reserved_inherit" src="https://cdn.prod.website-files.com/68dcd2ceb173c46fa029931c/6ad8ef8d6b0d36f79ca48585_6ad8ed54b1571822fe09a235_c1.webp" width="auto" height="auto" loading="lazy"></div></figure><figure class="w-richtext-figure-type-image w-richtext-align-center" data-rt-type="image" data-rt-align="center"><div><img alt="__wf_reserved_inherit" src="https://cdn.prod.website-files.com/68dcd2ceb173c46fa029931c/6ad8ef8d6b0d36f79ca4858b_6ad8ed540a973aee722a2f27_c2.webp" width="auto" height="auto" loading="lazy"></div></figure><h3><strong>Single-turn training, multi-turn gains</strong></h3><p>One of the most interesting findings: training on single-turn ComplexConstraints data produced consistent improvements on multi-turn evaluation dimensions in both AdvancedIF and MultiChallenge.</p><p>The multi-turn transfer makes sense once you look at the underlying skill. Tracking many simultaneous requirements without dropping the lower-priority ones is the same skill multi-turn IF tests – the difference is just where the requirements come from. In single-turn ComplexConstraints data, they come from earlier in the prompt; in a multi-turn conversation they come from earlier turns. Training on complex single-turn rubrics carries over.</p><h3><strong>Behavior changes in the ComplexConstraints-trained model</strong></h3><p>We compared paired runs of the baseline and trained models on the same tasks to understand how the trained model learned to behave differently. A few patterns:</p><ol><li><strong>It stopped dropping hard constraints. </strong>On a camp counselor task with 30+ campers and strict rules about sibling separation and medical needs, the baseline ignored the hardest constraints. The trained model processed them systematically: identifying strict limits first, grouping by specialization, and validating group sizes.</li><li><strong>It stopped giving up.</strong> On a restaurant scheduling task involving minor labor laws and tight availability, the baseline output "NEED COVERAGE" for every shift. The trained model produced a complete schedule and only flagged shifts where full staffing was mathematically impossible.</li><li><strong>It handled rule-based transformations cleanly.</strong> On a sales table task involving unit conversions and conditional formatting, the baseline made errors at nearly every step. The trained model didn't.</li><li><strong>It remembered stated preferences.</strong> In multi-turn evaluations, the trained model carried user preferences across intervening turns. The baseline would reason about a preference internally and then fail to surface it in the final answer.</li></ol><h2>What we want to measure</h2><p>What a benchmark measures is what models eventually get good at. IFEval rewards letter-counting and formatting tricks, and that's what models learn. ComplexConstraints rewards holding many entangled constraints in mind at once – and the 4B results show that the skill transfers to settings the model has never seen.</p><p>That's the kind of complex instruction following that professional work demands.</p><p>The full ComplexConstraints benchmark is on HuggingFace <a href="https://huggingface.co/datasets/surgeai/ComplexConstraints">here</a>. Leaderboard results are <a href="https://surgehq.ai/benchmarks/complex-constraints">here</a>.</p></div><div class="post-content-achor hidden"><div class="post-content-achor-ic"><svg id="w-node-_2b1f304c-44d8-f2ae-f191-bf9fba33193b-034d05ca" xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 256 256" class="svg"><g STYLE="stroke:none;stroke-width:0;stroke-dasharray:none;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:10;fill:none;fill-rule:nonzero;opacity:1"><path d="M21.36 89.995c-5.471 0-10.942-2.082-15.107-6.248A21.23 21.23 0 0 1-.005 68.64a21.22 21.22 0 0 1 6.258-15.107l16.659-16.66a4.002 4.002 0 0 1 5.658 5.658L11.91 59.19c-2.525 2.525-3.914 5.881-3.914 9.45s1.39 6.926 3.914 9.45c5.211 5.21 13.69 5.212 18.899 0L47.47 61.43a4 4 0 0 1 5.657 0 4 4 0 0 1 0 5.657l-16.66 16.66c-4.165 4.166-9.636 6.248-15.107 6.248m42.899-35.696a3.999 3.999 0 0 1-2.828-6.829l16.66-16.661c5.211-5.211 5.211-13.689 0-18.899-2.525-2.524-5.881-3.914-9.45-3.914s-6.926 1.39-9.45 3.914l-16.66 16.66a4.002 4.002 0 0 1-5.658-5.658l16.66-16.66A21.22 21.22 0 0 1 68.64-.006a21.22 21.22 0 0 1 15.107 6.258c8.33 8.331 8.33 21.884 0 30.215l-16.66 16.66a4 4 0 0 1-2.828 1.172" STYLE="stroke:none;stroke-width:1;stroke-dasharray:none;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:10;fill:#000;fill-rule:nonzero;opacity:1" transform="translate(1.407 1.407)scale(2.81)"></path><path d="M25.338 68.663a4 4 0 0 1-2.829-6.829l39.325-39.325a4 4 0 1 1 5.657 5.658L28.167 67.491a4 4 0 0 1-2.829 1.172" STYLE="stroke:none;stroke-width:1;stroke-dasharray:none;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:10;fill:#000;fill-rule:nonzero;opacity:1" transform="translate(1.407 1.407)scale(2.81)"></path></g></svg><svg id="w-node-b8216578-6f87-9dde-bea5-410df2f2e9ce-034d05ca" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="100%" viewBox="0 0 50 50" class="svg"><path d="M 41.9375 8.625 C 41.273438 8.648438 40.664063 9 40.3125 9.5625 L 21.5 38.34375 L 9.3125 27.8125 C 8.789063 27.269531 8.003906 27.066406 7.28125 27.292969 C 6.5625 27.515625 6.027344 28.125 5.902344 28.867188 C 5.777344 29.613281 6.078125 30.363281 6.6875 30.8125 L 20.625 42.875 C 21.0625 43.246094 21.640625 43.410156 22.207031 43.328125 C 22.777344 43.242188 23.28125 42.917969 23.59375 42.4375 L 43.6875 11.75 C 44.117188 11.121094 44.152344 10.308594 43.78125 9.644531 C 43.410156 8.984375 42.695313 8.589844 41.9375 8.625 Z"></path></svg></div></div><div id="w-node-_0e52279a-7210-5e92-6264-0d7f25c2244f-034d05ca" class="post-content-bmark"><div id="w-node-fc2a5863-b1ac-f9f7-9b1a-2c3d251235b5-034d05ca" class="post-content-bmark-inner"><div class="post-content-bmark-text"><div class="post-content-bmark-label"><div class="txt fs-12">Benchmark</div></div><div class="post-content-bmark-title"><div class="heading h3">ComplexConstraints</div></div></div><div class="post-content-bmark-action"><a href="/benchmarks/complex-constraints" class="btn is-medium w-inline-block"><div>VIEW LEADERBOARD</div><div class="btn-arrow"><svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 24 24" fill="none" class="svg"><path d="M7 7h10v10" stroke="currentColor" stroke-width="2" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"></path><path d="M7 17 17 7" stroke="currentColor" stroke-width="2" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"></path></svg></div></a><a href="https://arxiv.org/abs/2606.09118" class="btn is-medium is-light w-inline-block"><div>RESEARCH PAPER</div><div class="btn-arrow"><svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 24 24" fill="none" class="svg"><path d="M7 7h10v10" stroke="currentColor" stroke-width="2" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"></path><path d="M7 17 17 7" stroke="currentColor" stroke-width="2" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"></path></svg></div></a><a href="https://github.com/surge-ai/complex-constraints" class="btn is-medium is-light w-inline-block"><div>GITHUB</div><div class="btn-arrow"><svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 24 24" fill="none" class="svg"><path d="M7 7h10v10" stroke="currentColor" stroke-width="2" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"></path><path d="M7 17 17 7" stroke="currentColor" stroke-width="2" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"></path></svg></div></a></div></div></div><div class="post-content-follow"><div class="line"></div><div class="post-content-follow-text"><div class="post-content-follow-links"><a href="https://www.linkedin.com/company/surge-ai/" target="_blank" class="post-content-follow-link w-inline-block"><div class="post-content-follow-link-ic"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" width="100%" class="svg"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.225 0z"></path></svg></div><div class="txt fs-12">/surge-ai</div></a><a href="https://x.com/HelloSurgeAI" target="_blank" class="post-content-follow-link w-inline-block"><div class="post-content-follow-link-ic"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" width="100%" class="svg"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231 5.451-6.231zm-1.161 17.52h1.833L7.084 4.126H5.117l11.966 15.644z"></path></svg></div><div class="txt fs-12">@hellosurgeai</div></a></div></div></div></div></div></div><div class="post-content-nav-wrap"><div class="w-layout-blockcontainer container grid w-container"><div class="hidden w-dyn-list"><div fs-list-element="list" role="list" class="w-dyn-items"><div role="listitem" class="w-dyn-item"><a href="/blog/sudo-l7" class="post-content-nav-cms-link w-inline-block"><div class="post-content-nav-cms-title"><div class="txt fs-16 fw-med">sudo L7: Can Coding Agents Act Like Staff Engineers?</div></div></a></div><div role="listitem" class="w-dyn-item"><a href="/blog/gdp-xlsx" class="post-content-nav-cms-link w-inline-block"><div class="post-content-nav-cms-title"><div class="txt fs-16 fw-med">GDP.xlsx: Can Agents Understand the Spreadsheets That Run the World?</div></div></a></div><div role="listitem" class="w-dyn-item"><a href="/blog/gdp-pdf-post-training" class="post-content-nav-cms-link w-inline-block"><div class="post-content-nav-cms-title"><div class="txt fs-16 fw-med">What Does GDP.pdf Teach — Beyond PDFs?</div></div></a></div><div role="listitem" class="w-dyn-item"><a href="/blog/dayjob" class="post-content-nav-cms-link w-inline-block"><div class="post-content-nav-cms-title"><div class="txt fs-16 fw-med">DAYJOB: Can Agents Survive a 9 to 5?</div></div></a></div><div role="listitem" class="w-dyn-item"><a href="/blog/anthropic-automated-alignment-research" class="post-content-nav-cms-link w-inline-block"><div class="post-content-nav-cms-title"><div class="txt fs-16 fw-med">Helping Anthropic Build Automated Alignment Researchers</div></div></a></div><div role="listitem" class="w-dyn-item"><a href="/blog/hill-climbing-swe-agent-kimi-k-2-7" class="post-content-nav-cms-link w-inline-block"><div class="post-content-nav-cms-title"><div class="txt fs-16 fw-med">Hill-Climbing a SWE Agent: What 1,700 Coding Tasks Taught Kimi K2.7</div></div></a></div><div role="listitem" class="w-dyn-item"><a href="/blog/fable-5-1-tuesday-work-index" class="post-content-nav-cms-link w-inline-block"><div class="post-content-nav-cms-title"><div class="txt fs-16 fw-med">Fable 5.1, Muse Spark 1.3, and Gemini 3.8 Flash on the Tuesday Work Index</div></div></a></div><div role="listitem" class="w-dyn-item"><a href="/blog/deepseek-v4-pro-tuesday-work-index" class="post-content-nav-cms-link w-inline-block"><div class="post-content-nav-cms-title"><div class="txt fs-16 fw-med">DeepSeek V4 Pro Scores 59.7 on the Tuesday Work Index</div></div></a></div><div role="listitem" class="w-dyn-item"><a href="/blog/qwen-3-8-max-scores-58-7-on-the-tuesday-work-index" class="post-content-nav-cms-link w-inline-block"><div class="post-content-nav-cms-title"><div class="txt fs-16 fw-med">Qwen 3.8 Max Scores 58.7 on the Tuesday Work Index</div></div></a></div><div role="listitem" class="w-dyn-item"><a href="/blog/tuesday-frontier-work-index" class="post-content-nav-cms-link w-inline-block"><div class="post-content-nav-cms-title"><div class="txt fs-16 fw-med">Introducing the Tuesday Work Index: Can AI Get Through an Ordinary Day?</div></div></a></div><div role="listitem" class="w-dyn-item"><a href="/blog/office-work-post-training-improves-coding" class="post-content-nav-cms-link w-inline-block"><div class="post-content-nav-cms-title"><div class="txt fs-16 fw-med">We Trained a Model on Office Work. It Also Got Better at Coding.</div></div></a></div><div role="listitem" class="w-dyn-item"><a href="/blog/chartography" class="post-content-nav-cms-link w-inline-block"><div class="post-content-nav-cms-title"><div class="txt fs-16 fw-med">Chartography: A Benchmark for Professional Chart Understanding</div></div></a></div><div role="listitem" class="w-dyn-item"><a href="/blog/openai-gpt-5-6-gdp-pdf-benchmark" class="post-content-nav-cms-link w-inline-block"><div class="post-content-nav-cms-title"><div class="txt fs-16 fw-med">OpenAI cites GDP.pdf in its GPT-5.6 release</div></div></a></div><div role="listitem" class="w-dyn-item"><a href="/blog/training-on-complexconstraints" class="post-content-nav-cms-link w-inline-block"><div class="post-content-nav-cms-title"><div class="txt fs-16 fw-med">Training on ComplexConstraints: +10.1 on MultiChallenge, +8.5 on AdvancedIF</div></div></a></div><div role="listitem" class="w-dyn-item"><a href="/blog/handbook-md" class="post-content-nav-cms-link w-inline-block"><div class="post-content-nav-cms-title"><div class="txt fs-16 fw-med">HANDBOOK.md Benchmark: Can Agents Follow 100-Page Company Policies?</div></div></a></div><div role="listitem" class="w-dyn-item"><a href="/blog/anthropic-fable-5-mythos-5-cites-surge-benchmarks" class="post-content-nav-cms-link w-inline-block"><div class="post-content-nav-cms-title"><div class="txt fs-16 fw-med">Anthropic cited GDP.pdf and Riemann-bench in their Fable 5 and Mythos 5 system card</div></div></a></div><div role="listitem" class="w-dyn-item"><a href="/blog/complexconstraints-a-benchmark-for-entangled-instruction-following" aria-current="page" class="post-content-nav-cms-link w-inline-block w--current"><div class="post-content-nav-cms-title"><div class="txt fs-16 fw-med">ComplexConstraints: A Benchmark for Entangled Instruction Following</div></div></a></div><div role="listitem" class="w-dyn-item"><a href="/blog/surge-human-evaluation-mai-thinking-1" class="post-content-nav-cms-link w-inline-block"><div class="post-content-nav-cms-title"><div class="txt fs-16 fw-med">Microsoft used Surge human evaluations to benchmark MAI-Thinking-1</div></div></a></div><div role="listitem" class="w-dyn-item"><a href="/blog/cross-benchmark-generalization-for-long-horizon-agentic-tasks" class="post-content-nav-cms-link w-inline-block"><div class="post-content-nav-cms-title"><div class="txt fs-16 fw-med">Training on Long-Horizon Agent Tasks: +9.6 on Toolathlon, +5.3 on τ²-Bench</div></div></a></div><div role="listitem" class="w-dyn-item"><a href="/blog/introducing-antidote" class="post-content-nav-cms-link w-inline-block"><div class="post-content-nav-cms-title"><div class="txt fs-16 fw-med">Antidote Leaderboard: Optimizing for You</div></div></a></div><div role="listitem" class="w-dyn-item"><a href="/blog/gdp-pdf-can-100b-ai-models-master-the-documents-that-run-the-world" class="post-content-nav-cms-link w-inline-block"><div class="post-content-nav-cms-title"><div class="txt fs-16 fw-med">GDP.pdf Benchmark: Can Frontier Models Master the Documents that Run the World?</div></div></a></div><div role="listitem" class="w-dyn-item"><a href="/blog/riemann-bench-a-benchmark-for-moonshot-mathematics" class="post-content-nav-cms-link w-inline-block"><div class="post-content-nav-cms-title"><div class="txt fs-16 fw-med">Riemann-bench: A Benchmark for Moonshot Mathematics</div></div></a></div><div role="listitem" class="w-dyn-item"><a href="/blog/enterprisebench-corecraft" class="post-content-nav-cms-link w-inline-block"><div class="post-content-nav-cms-title"><div class="txt fs-16 fw-med">EnterpriseBench: CoreCraft – Measuring AI Agents in Chaotic, Enterprise RL Environments</div></div></a></div><div role="listitem" class="w-dyn-item"><a href="/blog/hemingway-bench-ai-writing-leaderboard" class="post-content-nav-cms-link w-inline-block"><div class="post-content-nav-cms-title"><div class="txt fs-16 fw-med">Hemingway-bench: The AI Writing Leaderboard Judged by Expert Writers</div></div></a></div><div role="listitem" class="w-dyn-item"><a href="/blog/advancedif-and-the-evolution-of-instruction-following-benchmarks" class="post-content-nav-cms-link w-inline-block"><div class="post-content-nav-cms-title"><div class="txt fs-16 fw-med">Building AdvancedIF: Evolving Instruction Following Beyond IFEval and “Avoid the Letter C”</div></div></a></div><div role="listitem" class="w-dyn-item"><a href="/blog/lmarena-is-a-plague-on-ai" class="post-content-nav-cms-link w-inline-block"><div class="post-content-nav-cms-title"><div class="txt fs-16 fw-med">LMArena is a cancer on AI</div></div></a></div><div role="listitem" class="w-dyn-item"><a href="/blog/rl-envs-real-world" class="post-content-nav-cms-link w-inline-block"><div class="post-content-nav-cms-title"><div class="txt fs-16 fw-med">RL Environments and the Hierarchy of Agentic Capabilities</div></div></a></div><div role="listitem" class="w-dyn-item"><a href="/blog/finance-eval-real-world" class="post-content-nav-cms-link w-inline-block"><div class="post-content-nav-cms-title"><div class="txt fs-16 fw-med">How do frontier models perform on real-world finance problems?</div></div></a></div><div role="listitem" class="w-dyn-item"><a href="/blog/sonnet-4-5-product-take" class="post-content-nav-cms-link w-inline-block"><div class="post-content-nav-cms-title"><div class="txt fs-16 fw-med">A Product Take on Sonnet 4.5</div></div></a></div><div role="listitem" class="w-dyn-item"><a href="/blog/sonnet-4-5-coding-model-evaluation" class="post-content-nav-cms-link w-inline-block"><div class="post-content-nav-cms-title"><div class="txt fs-16 fw-med">Is Sonnet 4.5 the best coding model in the world?</div></div></a></div><div role="listitem" class="w-dyn-item"><a href="/blog/the-human-frontier-bogdan-grechuk" class="post-content-nav-cms-link w-inline-block"><div class="post-content-nav-cms-title"><div class="txt fs-16 fw-med">The Human/AI Frontier: A Conversation with Bogdan Grechuk</div></div></a></div><div role="listitem" class="w-dyn-item"><a href="/blog/when-coding-agents-spiral-into-693-lines-of-hallucinations" class="post-content-nav-cms-link w-inline-block"><div class="post-content-nav-cms-title"><div class="txt fs-16 fw-med">SWE-Bench Failures: When Coding Agents Spiral Into 693 Lines of Hallucinations</div></div></a></div><div role="listitem" class="w-dyn-item"><a href="/blog/benchmarks-are-broken" class="post-content-nav-cms-link w-inline-block"><div class="post-content-nav-cms-title"><div class="txt fs-16 fw-med">Benchmarks are broken</div></div></a></div><div role="listitem" class="w-dyn-item"><a href="/blog/the-pdf-that-broke-chatgpt" class="post-content-nav-cms-link w-inline-block"><div class="post-content-nav-cms-title"><div class="txt fs-16 fw-med">Unsexy AI Failures: The PDF That Broke ChatGPT</div></div></a></div><div role="listitem" class="w-dyn-item"><a href="/blog/bringing-light-to-the-gpt-4o-vs-gpt-5-personality-controversy" class="post-content-nav-cms-link w-inline-block"><div class="post-content-nav-cms-title"><div class="txt fs-16 fw-med">Bringing light to the GPT-4o vs. GPT-5 personality controversy</div></div></a></div><div role="listitem" class="w-dyn-item"><a href="/blog/dalle-3-and-midjourney-fail-astral-codex-tens-image-generation-bet" class="post-content-nav-cms-link w-inline-block"><div class="post-content-nav-cms-title"><div class="txt fs-16 fw-med">DALL·E 3 and Midjourney Fail Astral Codex Ten&#x27;s Image Generation Bet</div></div></a></div><div role="listitem" class="w-dyn-item"><a href="/blog/anthropic-surge-ai-rlhf-platform-train-llm-assistant-human-feedback" class="post-content-nav-cms-link w-inline-block"><div class="post-content-nav-cms-title"><div class="txt fs-16 fw-med">How Anthropic uses Surge AI to Train and Evaluate Claude</div></div></a></div><div role="listitem" class="w-dyn-item"><a href="/blog/googles-existential-threat-chatgpt-matches-googles-performance-on-informational-search-queries-and-smashes-it-on-coding" class="post-content-nav-cms-link w-inline-block"><div class="post-content-nav-cms-title"><div class="txt fs-16 fw-med">We Evaluated ChatGPT vs. Google on 500 Search Queries</div></div></a></div><div role="listitem" class="w-dyn-item"><a href="/blog/ai-red-teams-for-adversarial-training-making-chatgpt-and-large-language-models-adversarially-robust" class="post-content-nav-cms-link w-inline-block"><div class="post-content-nav-cms-title"><div class="txt fs-16 fw-med">AI Red Teams for Adversarial Training: How to Make ChatGPT and LLMs Adversarially Robust</div></div></a></div><div role="listitem" class="w-dyn-item"><a href="/blog/hellaswag-or-hellabad-36-of-this-popular-llm-benchmark-contains-errors" class="post-content-nav-cms-link w-inline-block"><div class="post-content-nav-cms-title"><div class="txt fs-16 fw-med">HellaSwag or HellaBad? 36% of this popular LLM benchmark contains errors</div></div></a></div><div role="listitem" class="w-dyn-item"><a href="/blog/how-tiktok-is-evolving-the-next-generation-of-search" class="post-content-nav-cms-link w-inline-block"><div class="post-content-nav-cms-title"><div class="txt fs-16 fw-med">How TikTok is Evolving the Next Generation of Search</div></div></a></div><div role="listitem" class="w-dyn-item"><a href="/blog/dall-e-vs-imagen-and-evaluating-astral-codex-tens-3000-ai-bet" class="post-content-nav-cms-link w-inline-block"><div class="post-content-nav-cms-title"><div class="txt fs-16 fw-med">Evaluating Generative AI: Did Astral Codex Ten Win His Bet on AI Progress?</div></div></a></div><div role="listitem" class="w-dyn-item"><a href="/blog/tiktok-vs-instagram-reels-personalized-human-evaluation" class="post-content-nav-cms-link w-inline-block"><div class="post-content-nav-cms-title"><div class="txt fs-16 fw-med">Why Instagram is Losing Gen Z: We Asked 100 Users to Compare TikTok vs. Reels</div></div></a></div><div role="listitem" class="w-dyn-item"><a href="/blog/the-250k-inverse-scaling-prize-and-human-ai-alignment" class="post-content-nav-cms-link w-inline-block"><div class="post-content-nav-cms-title"><div class="txt fs-16 fw-med">The $250K Inverse Scaling Prize and Human-AI Alignment</div></div></a></div><div role="listitem" class="w-dyn-item"><a href="/blog/beyond-clicks-how-neeva-uses-human-evaluation-of-search-quality-to-take-on-google" class="post-content-nav-cms-link w-inline-block"><div class="post-content-nav-cms-title"><div class="txt fs-16 fw-med">Search Behind-the-Scenes: How Neeva Uses Human Evaluation to Measure Search Quality</div></div></a></div><div role="listitem" class="w-dyn-item"><a href="/blog/how-good-is-hugging-faces-bloom-a-real-world-human-evaluation-of-language-models" class="post-content-nav-cms-link w-inline-block"><div class="post-content-nav-cms-title"><div class="txt fs-16 fw-med">Human Evaluation of Large Language Models: How Good is Hugging Face’s BLOOM?</div></div></a></div><div role="listitem" class="w-dyn-item"><a href="/blog/30-percent-of-googles-reddit-emotions-dataset-is-mislabeled" class="post-content-nav-cms-link w-inline-block"><div class="post-content-nav-cms-title"><div class="txt fs-16 fw-med">30% of Google&#x27;s Emotions Dataset is Mislabeled</div></div></a></div><div role="listitem" class="w-dyn-item"><a href="/blog/ai-red-teams-and-adversarial-data-labeling-with-redwood-research" class="post-content-nav-cms-link w-inline-block"><div class="post-content-nav-cms-title"><div class="txt fs-16 fw-med">AI Red Teams and Adversarial Data Labeling with Redwood Research</div></div></a></div><div role="listitem" class="w-dyn-item"><a href="/blog/humans-vs-gary-marcus" class="post-content-nav-cms-link w-inline-block"><div class="post-content-nav-cms-title"><div class="txt fs-16 fw-med">Humans vs. Gary Marcus vs. Slate Star Codex: When is an AI failure actually a failure?</div></div></a></div><div role="listitem" class="w-dyn-item"><a href="/blog/how-we-built-it-openais-gsm8k-dataset-of-8500-math-problems" class="post-content-nav-cms-link w-inline-block"><div class="post-content-nav-cms-title"><div class="txt fs-16 fw-med">How Surge AI Built OpenAI&#x27;s GSM8K Dataset of 8,500 Math Problems</div></div></a></div><div role="listitem" class="w-dyn-item"><a href="/blog/humans-vs-dall-e" class="post-content-nav-cms-link w-inline-block"><div class="post-content-nav-cms-title"><div class="txt fs-16 fw-med">We asked 100 humans to draw the DALL·E prompts</div></div></a></div><div role="listitem" class="w-dyn-item"><a href="/blog/google-search-is-falling-behind" class="post-content-nav-cms-link w-inline-block"><div class="post-content-nav-cms-title"><div class="txt fs-16 fw-med">Google Search is Falling Behind</div></div></a></div><div role="listitem" class="w-dyn-item"><a href="/blog/what-if-social-media-optimized-for-human-values" class="post-content-nav-cms-link w-inline-block"><div class="post-content-nav-cms-title"><div class="txt fs-16 fw-med">Moving Beyond Engagement: Optimizing Facebook&#x27;s Algorithms for Human Values</div></div></a></div><div role="listitem" class="w-dyn-item"><a href="/blog/are-popular-toxicity-models-simply-profanity-detectors" class="post-content-nav-cms-link w-inline-block"><div class="post-content-nav-cms-title"><div class="txt fs-16 fw-med">Holy $#!t: Are popular toxicity models simply profanity detectors?</div></div></a></div><div role="listitem" class="w-dyn-item"><a href="/blog/is-google-search-deteriorating-measuring-search-quality-in-2022" class="post-content-nav-cms-link w-inline-block"><div class="post-content-nav-cms-title"><div class="txt fs-16 fw-med">Is Google Search Deteriorating? Measuring Google&#x27;s Search Quality in 2022</div></div></a></div><div role="listitem" class="w-dyn-item"><a href="/blog/why-context-aware-datasets-are-crucial-for-data-centric-ai" class="post-content-nav-cms-link w-inline-block"><div class="post-content-nav-cms-title"><div class="txt fs-16 fw-med">5 Examples of the Importance of Context-Sensitivity in Data-Centric AI</div></div></a></div></div></div><div id="w-node-_6be9363c-0834-9e37-f9a0-04ddf6c1f244-034d05ca" class="post-content-nav"><div class="post-content-nav-item"><div fs-list-element="previous-item" class="post-content-nav-cms-item prev"></div><div fs-list-element="previous-empty" class="post-content-nav-item-empty"></div></div><div class="post-content-nav-item"><div fs-list-element="next-item" class="post-content-nav-cms-item next"></div><div fs-list-element="next-empty" class="post-content-nav-item-empty"></div></div></div></div></div><div id="w-node-ae741afa-2bb9-6ceb-f317-1a21c14a0873-034d05ca" class="post-content-related"><div class="w-layout-blockcontainer container grid w-container"><div id="w-node-_784ab178-a15a-c3af-864b-62bdc299486c-034d05ca" class="post-content-related-title"><h4 class="section-title post-related-title">More Posts</h4></div><div id="w-node-_34bfad55-6a88-026b-4c84-7c9a7b50998d-034d05ca" class="post-content-related-nav"><button class="post-content-related-nav-btn prev"><div class="post-content-related-nav-btn-ic"><svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 14 14" fill="none" class="svg"><path d="M8.3125 3.0625L4.375 7L8.3125 10.9375" stroke="currentColor" stroke-width="1.3" stroke-miterlimit="10"></path></svg></div></button><button class="post-content-related-nav-btn next"><div class="post-content-related-nav-btn-ic"><svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 14 14" fill="none" class="svg"><path d="M5.6875 3.0625L9.625 7L5.6875 10.9375" stroke="currentColor" stroke-width="1.3" stroke-miterlimit="10"></path></svg></div></button></div><div id="w-node-_34bfad55-6a88-026b-4c84-7c9a7b509996-034d05ca" class="post-content-related-main"><div class="post-content-related-cms w-dyn-list"><div role="list" class="post-content-related-list w-dyn-items"><div role="listitem" class="post-content-related-post w-dyn-item"><div class="post-content-related-post-inner"><div class="post-content-related-post-thumb"><img src="https://cdn.prod.website-files.com/68dcd2ceb173c46fa029931c/6ad8d90a769d4bd261ed1a40_6ad8d8cb0cb76a813fe14237_sudo-l7-thumb.webp" loading="lazy" alt="sudo L7: Can Coding Agents Act Like Staff Engineers?" class="img-default img-fill"/><img src="https://cdn.prod.website-files.com/68dcd2ceb173c46fa029931c/6ad8da24b49e96322acf9c74_6ad8d9b2ff5cf29c6a218802_sudo-l7-main.webp" loading="lazy" alt="sudo L7: Can Coding Agents Act Like Staff Engineers?" class="img-default img-fill w-condition-invisible"/><div class="post-content-related-post-thumb-ic w-condition-invisible"><svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 49 48" fill="none" class="svg"><path d="M39.1602 1H5.16016C4.60816 1 4.16016 1.448 4.16016 2V40.5C4.16016 42.985 6.17516 45 8.66016 45C11.1452 45 13.1602 42.985 13.1602 40.5V38H40.1602V2C40.1602 1.448 39.7122 1 39.1602 1ZM31.1602 29H13.1602C12.6082 29 12.1602 28.552 12.1602 28C12.1602 27.448 12.6082 27 13.1602 27H31.1602C31.7122 27 32.1602 27.448 32.1602 28C32.1602 28.552 31.7122 29 31.1602 29ZM31.1602 21H13.1602C12.6082 21 12.1602 20.552 12.1602 20C12.1602 19.448 12.6082 19 13.1602 19H31.1602C31.7122 19 32.1602 19.448 32.1602 20C32.1602 20.552 31.7122 21 31.1602 21ZM31.1602 13H13.1602C12.6082 13 12.1602 12.552 12.1602 12C12.1602 11.448 12.6082 11 13.1602 11H31.1602C31.7122 11 32.1602 11.448 32.1602 12C32.1602 12.552 31.7122 13 31.1602 13Z" fill="#24241D" fill-opacity="0.8"></path><path d="M15.1602 40V40.5C15.1602 44.084 12.7442 47 9.16016 47C13.1362 47 39.8422 47 40.1602 47C42.9212 47 45.1602 44.761 45.1602 42V40H15.1602Z" fill="#24241D" fill-opacity="0.8"></path></svg></div></div><div class="post-content-related-post-info"><div class="post-content-related-post-text"><div class="post-content-related-post-title"><div class="txt fs-20 fw-med">sudo L7: Can Coding Agents Act Like Staff Engineers?</div></div><div class="post-content-related-post-desc"><div class="txt fs-16">Introducing sudo L7, a coding benchmark testing whether AI agents can go beyond correct code and exercise staff-level engineering judgment.</div></div><div class="post-content-related-post-read"><div class="post-content-related-post-read-inner"><div class="post-content-related-post-read-ic"><svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 12 13" fill="none" class="svg"><path d="M8.4 3.81189L3 9.21189" stroke="currentColor" stroke-width="1.3" stroke-miterlimit="10" stroke-linecap="square"></path><path d="M4.19922 3.21191H8.99922V8.01191" stroke="currentColor" stroke-width="1.3" stroke-miterlimit="10" stroke-linecap="square"></path></svg></div><div class="txt fs-12">read post</div></div><div class="post-content-related-post-bot"><div class="post-content-related-post-date"><div class="txt fs-12">October 8, 2026</div></div></div></div></div></div><a aria-label="sudo L7: Can Coding Agents Act Like Staff Engineers?" href="/blog/sudo-l7" class="post-content-related-post-link w-inline-block"></a></div></div><div role="listitem" class="post-content-related-post w-dyn-item"><div class="post-content-related-post-inner"><div class="post-content-related-post-thumb"><img src="https://cdn.prod.website-files.com/68dcd2ceb173c46fa029931c/6abd4d9e8a7f11828c499e66_gdp-xlsx.jpg" loading="lazy" alt="GDP.xlsx: Can Agents Understand the Spreadsheets That Run the World?" sizes="(max-width: 767px) 100vw, (max-width: 991px) 727px, 940px" srcset="https://cdn.prod.website-files.com/68dcd2ceb173c46fa029931c/6abd4d9e8a7f11828c499e66_gdp-xlsx-p-500.jpg 500w, https://cdn.prod.website-files.com/68dcd2ceb173c46fa029931c/6abd4d9e8a7f11828c499e66_gdp-xlsx-p-800.jpg 800w, https://cdn.prod.website-files.com/68dcd2ceb173c46fa029931c/6abd4d9e8a7f11828c499e66_gdp-xlsx-p-1080.jpg 1080w, https://cdn.prod.website-files.com/68dcd2ceb173c46fa029931c/6abd4d9e8a7f11828c499e66_gdp-xlsx-p-1600.jpg 1600w, https://cdn.prod.website-files.com/68dcd2ceb173c46fa029931c/6abd4d9e8a7f11828c499e66_gdp-xlsx-p-2000.jpg 2000w, https://cdn.prod.website-files.com/68dcd2ceb173c46fa029931c/6abd4d9e8a7f11828c499e66_gdp-xlsx-p-2600.jpg 2600w, https://cdn.prod.website-files.com/68dcd2ceb173c46fa029931c/6abd4d9e8a7f11828c499e66_gdp-xlsx.jpg 3148w" class="img-default img-fill"/><img src="https://cdn.prod.website-files.com/68dcd2ceb173c46fa029931c/6ad8da24b49e96322acf9c6e_6ad8d9b2972a5c062cd63bf9_gdp-xlsx-main.webp" loading="lazy" alt="GDP.xlsx: Can Agents Understand the Spreadsheets That Run the World?" class="img-default img-fill w-condition-invisible"/><div class="post-content-related-post-thumb-ic w-condition-invisible"><svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 49 48" fill="none" class="svg"><path d="M39.1602 1H5.16016C4.60816 1 4.16016 1.448 4.16016 2V40.5C4.16016 42.985 6.17516 45 8.66016 45C11.1452 45 13.1602 42.985 13.1602 40.5V38H40.1602V2C40.1602 1.448 39.7122 1 39.1602 1ZM31.1602 29H13.1602C12.6082 29 12.1602 28.552 12.1602 28C12.1602 27.448 12.6082 27 13.1602 27H31.1602C31.7122 27 32.1602 27.448 32.1602 28C32.1602 28.552 31.7122 29 31.1602 29ZM31.1602 21H13.1602C12.6082 21 12.1602 20.552 12.1602 20C12.1602 19.448 12.6082 19 13.1602 19H31.1602C31.7122 19 32.1602 19.448 32.1602 20C32.1602 20.552 31.7122 21 31.1602 21ZM31.1602 13H13.1602C12.6082 13 12.1602 12.552 12.1602 12C12.1602 11.448 12.6082 11 13.1602 11H31.1602C31.7122 11 32.1602 11.448 32.1602 12C32.1602 12.552 31.7122 13 31.1602 13Z" fill="#24241D" fill-opacity="0.8"></path><path d="M15.1602 40V40.5C15.1602 44.084 12.7442 47 9.16016 47C13.1362 47 39.8422 47 40.1602 47C42.9212 47 45.1602 44.761 45.1602 42V40H15.1602Z" fill="#24241D" fill-opacity="0.8"></path></svg></div></div><div class="post-content-related-post-info"><div class="post-content-related-post-text"><div class="post-content-related-post-title"><div class="txt fs-20 fw-med">GDP.xlsx: Can Agents Understand the Spreadsheets That Run the World?</div></div><div class="post-content-related-post-desc"><div class="txt fs-16">GDP.xlsx tests whether frontier agents can read the professional spreadsheets that run the world. It spans 70 tasks across 12 knowledge-work domains: finance, healthcare, engineering, manufacturing, insurance, real estate, legal, human resources, agriculture, energy, logistics, and public sector.</div></div><div class="post-content-related-post-read"><div class="post-content-related-post-read-inner"><div class="post-content-related-post-read-ic"><svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 12 13" fill="none" class="svg"><path d="M8.4 3.81189L3 9.21189" stroke="currentColor" stroke-width="1.3" stroke-miterlimit="10" stroke-linecap="square"></path><path d="M4.19922 3.21191H8.99922V8.01191" stroke="currentColor" stroke-width="1.3" stroke-miterlimit="10" stroke-linecap="square"></path></svg></div><div class="txt fs-12">read post</div></div><div class="post-content-related-post-bot"><div class="post-content-related-post-date"><div class="txt fs-12">September 30, 2026</div></div></div></div></div></div><a aria-label="GDP.xlsx: Can Agents Understand the Spreadsheets That Run the World?" href="/blog/gdp-xlsx" class="post-content-related-post-link w-inline-block"></a></div></div><div role="listitem" class="post-content-related-post w-dyn-item"><div class="post-content-related-post-inner"><div class="post-content-related-post-thumb"><img src="https://cdn.prod.website-files.com/68dcd2ceb173c46fa029931c/6ab6940caef5231a82ca58f3_Screenshot%202026-09-25%20at%2010.32.24%E2%80%AFAM.png" loading="lazy" alt="What Does GDP.pdf Teach — Beyond PDFs?" sizes="(max-width: 767px) 100vw, (max-width: 991px) 727px, 940px" srcset="https://cdn.prod.website-files.com/68dcd2ceb173c46fa029931c/6ab6940caef5231a82ca58f3_Screenshot%202026-09-25%20at%2010.32.24%E2%80%AFAM-p-500.png 500w, https://cdn.prod.website-files.com/68dcd2ceb173c46fa029931c/6ab6940caef5231a82ca58f3_Screenshot%202026-09-25%20at%2010.32.24%E2%80%AFAM-p-800.png 800w, https://cdn.prod.website-files.com/68dcd2ceb173c46fa029931c/6ab6940caef5231a82ca58f3_Screenshot%202026-09-25%20at%2010.32.24%E2%80%AFAM-p-1080.png 1080w, https://cdn.prod.website-files.com/68dcd2ceb173c46fa029931c/6ab6940caef5231a82ca58f3_Screenshot%202026-09-25%20at%2010.32.24%E2%80%AFAM.png 1294w" class="img-default img-fill"/><img src="https://cdn.prod.website-files.com/68dcd2ceb173c46fa029931c/6ad8da24b49e96322acf9c68_6ad8d9b28e352acc36a26ba4_gdp-pdf-post-training-main.webp" loading="lazy" alt="What Does GDP.pdf Teach — Beyond PDFs?" class="img-default img-fill w-condition-invisible"/><div class="post-content-related-post-thumb-ic w-condition-invisible"><svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 49 48" fill="none" class="svg"><path d="M39.1602 1H5.16016C4.60816 1 4.16016 1.448 4.16016 2V40.5C4.16016 42.985 6.17516 45 8.66016 45C11.1452 45 13.1602 42.985 13.1602 40.5V38H40.1602V2C40.1602 1.448 39.7122 1 39.1602 1ZM31.1602 29H13.1602C12.6082 29 12.1602 28.552 12.1602 28C12.1602 27.448 12.6082 27 13.1602 27H31.1602C31.7122 27 32.1602 27.448 32.1602 28C32.1602 28.552 31.7122 29 31.1602 29ZM31.1602 21H13.1602C12.6082 21 12.1602 20.552 12.1602 20C12.1602 19.448 12.6082 19 13.1602 19H31.1602C31.7122 19 32.1602 19.448 32.1602 20C32.1602 20.552 31.7122 21 31.1602 21ZM31.1602 13H13.1602C12.6082 13 12.1602 12.552 12.1602 12C12.1602 11.448 12.6082 11 13.1602 11H31.1602C31.7122 11 32.1602 11.448 32.1602 12C32.1602 12.552 31.7122 13 31.1602 13Z" fill="#24241D" fill-opacity="0.8"></path><path d="M15.1602 40V40.5C15.1602 44.084 12.7442 47 9.16016 47C13.1362 47 39.8422 47 40.1602 47C42.9212 47 45.1602 44.761 45.1602 42V40H15.1602Z" fill="#24241D" fill-opacity="0.8"></path></svg></div></div><div class="post-content-related-post-info"><div class="post-content-related-post-text"><div class="post-content-related-post-title"><div class="txt fs-20 fw-med">What Does GDP.pdf Teach — Beyond PDFs?</div></div><div class="post-content-related-post-desc"><div class="txt fs-16">Post-training on GDP.pdf improved Kimi K2.7 on GDPval, including tasks without PDFs, and changed how it gathered information and used tools before building deliverables.</div></div><div class="post-content-related-post-read"><div class="post-content-related-post-read-inner"><div class="post-content-related-post-read-ic"><svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 12 13" fill="none" class="svg"><path d="M8.4 3.81189L3 9.21189" stroke="currentColor" stroke-width="1.3" stroke-miterlimit="10" stroke-linecap="square"></path><path d="M4.19922 3.21191H8.99922V8.01191" stroke="currentColor" stroke-width="1.3" stroke-miterlimit="10" stroke-linecap="square"></path></svg></div><div class="txt fs-12">read post</div></div><div class="post-content-related-post-bot"><div class="post-content-related-post-date"><div class="txt fs-12">September 29, 2026</div></div></div></div></div></div><a aria-label="What Does GDP.pdf Teach — Beyond PDFs?" href="/blog/gdp-pdf-post-training" class="post-content-related-post-link w-inline-block"></a></div></div><div role="listitem" class="post-content-related-post w-dyn-item"><div class="post-content-related-post-inner"><div class="post-content-related-post-thumb"><img src="https://cdn.prod.website-files.com/68dcd2ceb173c46fa029931c/6ad011d4da9c5b9f7b0ebcc5_sunny.jpg" loading="lazy" alt="DAYJOB: Can Agents Survive a 9 to 5?" sizes="(max-width: 767px) 100vw, (max-width: 991px) 727px, 940px" srcset="https://cdn.prod.website-files.com/68dcd2ceb173c46fa029931c/6ad011d4da9c5b9f7b0ebcc5_sunny-p-500.jpg 500w, https://cdn.prod.website-files.com/68dcd2ceb173c46fa029931c/6ad011d4da9c5b9f7b0ebcc5_sunny-p-800.jpg 800w, https://cdn.prod.website-files.com/68dcd2ceb173c46fa029931c/6ad011d4da9c5b9f7b0ebcc5_sunny-p-1080.jpg 1080w, https://cdn.prod.website-files.com/68dcd2ceb173c46fa029931c/6ad011d4da9c5b9f7b0ebcc5_sunny-p-1600.jpg 1600w, https://cdn.prod.website-files.com/68dcd2ceb173c46fa029931c/6ad011d4da9c5b9f7b0ebcc5_sunny.jpg 1672w" class="img-default img-fill"/><img src="https://cdn.prod.website-files.com/68dcd2ceb173c46fa029931c/6ad011d4da9c5b9f7b0ebcc5_sunny.jpg" loading="lazy" alt="DAYJOB: Can Agents Survive a 9 to 5?" sizes="100vw" srcset="https://cdn.prod.website-files.com/68dcd2ceb173c46fa029931c/6ad011d4da9c5b9f7b0ebcc5_sunny-p-500.jpg 500w, https://cdn.prod.website-files.com/68dcd2ceb173c46fa029931c/6ad011d4da9c5b9f7b0ebcc5_sunny-p-800.jpg 800w, https://cdn.prod.website-files.com/68dcd2ceb173c46fa029931c/6ad011d4da9c5b9f7b0ebcc5_sunny-p-1080.jpg 1080w, https://cdn.prod.website-files.com/68dcd2ceb173c46fa029931c/6ad011d4da9c5b9f7b0ebcc5_sunny-p-1600.jpg 1600w, https://cdn.prod.website-files.com/68dcd2ceb173c46fa029931c/6ad011d4da9c5b9f7b0ebcc5_sunny.jpg 1672w" class="img-default img-fill w-condition-invisible"/><div class="post-content-related-post-thumb-ic w-condition-invisible"><svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 49 48" fill="none" class="svg"><path d="M39.1602 1H5.16016C4.60816 1 4.16016 1.448 4.16016 2V40.5C4.16016 42.985 6.17516 45 8.66016 45C11.1452 45 13.1602 42.985 13.1602 40.5V38H40.1602V2C40.1602 1.448 39.7122 1 39.1602 1ZM31.1602 29H13.1602C12.6082 29 12.1602 28.552 12.1602 28C12.1602 27.448 12.6082 27 13.1602 27H31.1602C31.7122 27 32.1602 27.448 32.1602 28C32.1602 28.552 31.7122 29 31.1602 29ZM31.1602 21H13.1602C12.6082 21 12.1602 20.552 12.1602 20C12.1602 19.448 12.6082 19 13.1602 19H31.1602C31.7122 19 32.1602 19.448 32.1602 20C32.1602 20.552 31.7122 21 31.1602 21ZM31.1602 13H13.1602C12.6082 13 12.1602 12.552 12.1602 12C12.1602 11.448 12.6082 11 13.1602 11H31.1602C31.7122 11 32.1602 11.448 32.1602 12C32.1602 12.552 31.7122 13 31.1602 13Z" fill="#24241D" fill-opacity="0.8"></path><path d="M15.1602 40V40.5C15.1602 44.084 12.7442 47 9.16016 47C13.1362 47 39.8422 47 40.1602 47C42.9212 47 45.1602 44.761 45.1602 42V40H15.1602Z" fill="#24241D" fill-opacity="0.8"></path></svg></div></div><div class="post-content-related-post-info"><div class="post-content-related-post-text"><div class="post-content-related-post-title"><div class="txt fs-20 fw-med">DAYJOB: Can Agents Survive a 9 to 5?</div></div><div class="post-content-related-post-desc"><div class="txt fs-16">Introducing DAYJOB, Surge AI’s benchmark family for economically valuable agents: realistic requests in complex environments, requiring end-to-end professional judgment.</div></div><div class="post-content-related-post-read"><div class="post-content-related-post-read-inner"><div class="post-content-related-post-read-ic"><svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 12 13" fill="none" class="svg"><path d="M8.4 3.81189L3 9.21189" stroke="currentColor" stroke-width="1.3" stroke-miterlimit="10" stroke-linecap="square"></path><path d="M4.19922 3.21191H8.99922V8.01191" stroke="currentColor" stroke-width="1.3" stroke-miterlimit="10" stroke-linecap="square"></path></svg></div><div class="txt fs-12">read post</div></div><div class="post-content-related-post-bot"><div class="post-content-related-post-date"><div class="txt fs-12">September 23, 2026</div></div></div></div></div></div><a aria-label="DAYJOB: Can Agents Survive a 9 to 5?" href="/blog/dayjob" class="post-content-related-post-link w-inline-block"></a></div></div><div role="listitem" class="post-content-related-post w-dyn-item"><div class="post-content-related-post-inner"><div class="post-content-related-post-thumb"><img src="https://cdn.prod.website-files.com/68dcd2ceb173c46fa029931c/6ad013ce2ab22abbca2443cb_aa.jpg" loading="lazy" alt="Helping Anthropic Build Automated Alignment Researchers" sizes="(max-width: 767px) 100vw, (max-width: 991px) 727px, 940px" srcset="https://cdn.prod.website-files.com/68dcd2ceb173c46fa029931c/6ad013ce2ab22abbca2443cb_aa-p-500.jpg 500w, https://cdn.prod.website-files.com/68dcd2ceb173c46fa029931c/6ad013ce2ab22abbca2443cb_aa-p-800.jpg 800w, https://cdn.prod.website-files.com/68dcd2ceb173c46fa029931c/6ad013ce2ab22abbca2443cb_aa-p-1080.jpg 1080w, https://cdn.prod.website-files.com/68dcd2ceb173c46fa029931c/6ad013ce2ab22abbca2443cb_aa.jpg 1492w" class="img-default img-fill"/><img src="https://cdn.prod.website-files.com/plugins/Basic/assets/placeholder.60f9b1840c.svg" loading="lazy" alt="Helping Anthropic Build Automated Alignment Researchers" class="img-default img-fill w-condition-invisible w-dyn-bind-empty"/><div class="post-content-related-post-thumb-ic w-condition-invisible"><svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 49 48" fill="none" class="svg"><path d="M39.1602 1H5.16016C4.60816 1 4.16016 1.448 4.16016 2V40.5C4.16016 42.985 6.17516 45 8.66016 45C11.1452 45 13.1602 42.985 13.1602 40.5V38H40.1602V2C40.1602 1.448 39.7122 1 39.1602 1ZM31.1602 29H13.1602C12.6082 29 12.1602 28.552 12.1602 28C12.1602 27.448 12.6082 27 13.1602 27H31.1602C31.7122 27 32.1602 27.448 32.1602 28C32.1602 28.552 31.7122 29 31.1602 29ZM31.1602 21H13.1602C12.6082 21 12.1602 20.552 12.1602 20C12.1602 19.448 12.6082 19 13.1602 19H31.1602C31.7122 19 32.1602 19.448 32.1602 20C32.1602 20.552 31.7122 21 31.1602 21ZM31.1602 13H13.1602C12.6082 13 12.1602 12.552 12.1602 12C12.1602 11.448 12.6082 11 13.1602 11H31.1602C31.7122 11 32.1602 11.448 32.1602 12C32.1602 12.552 31.7122 13 31.1602 13Z" fill="#24241D" fill-opacity="0.8"></path><path d="M15.1602 40V40.5C15.1602 44.084 12.7442 47 9.16016 47C13.1362 47 39.8422 47 40.1602 47C42.9212 47 45.1602 44.761 45.1602 42V40H15.1602Z" fill="#24241D" fill-opacity="0.8"></path></svg></div></div><div class="post-content-related-post-info"><div class="post-content-related-post-text"><div class="post-content-related-post-title"><div class="txt fs-20 fw-med">Helping Anthropic Build Automated Alignment Researchers</div></div><div class="post-content-related-post-desc"><div class="txt fs-16">Anthropic recently published new work on automated alignment researchers. Surge contributed to the research by building the human baseline, including researcher recruitment, structured submissions, quality control, and expert review.</div></div><div class="post-content-related-post-read"><div class="post-content-related-post-read-inner"><div class="post-content-related-post-read-ic"><svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 12 13" fill="none" class="svg"><path d="M8.4 3.81189L3 9.21189" stroke="currentColor" stroke-width="1.3" stroke-miterlimit="10" stroke-linecap="square"></path><path d="M4.19922 3.21191H8.99922V8.01191" stroke="currentColor" stroke-width="1.3" stroke-miterlimit="10" stroke-linecap="square"></path></svg></div><div class="txt fs-12">read post</div></div><div class="post-content-related-post-bot"><div class="post-content-related-post-date"><div class="txt fs-12">September 15, 2026</div></div></div></div></div></div><a aria-label="Helping Anthropic Build Automated Alignment Researchers" href="/blog/anthropic-automated-alignment-research" class="post-content-related-post-link w-inline-block"></a></div></div><div role="listitem" class="post-content-related-post w-dyn-item"><div class="post-content-related-post-inner"><div class="post-content-related-post-thumb"><img src="https://cdn.prod.website-files.com/68dcd2ceb173c46fa029931c/6aaaca984e6b6b009a6ec2a2_6aaaca954e6b6b009a6ec15e_6aaab0575d9afb415a5f412a_Screenshot-2026-09-11-at-12.51.03-P.jpeg" loading="lazy" alt="Hill-Climbing a SWE Agent: What 1,700 Coding Tasks Taught Kimi K2.7" class="img-default img-fill"/><img src="https://cdn.prod.website-files.com/68dcd2ceb173c46fa029931c/6aa48b0c63861b447adbdc3b_swe.jpg" loading="lazy" alt="Hill-Climbing a SWE Agent: What 1,700 Coding Tasks Taught Kimi K2.7" sizes="100vw" srcset="https://cdn.prod.website-files.com/68dcd2ceb173c46fa029931c/6aa48b0c63861b447adbdc3b_swe-p-500.jpg 500w, https://cdn.prod.website-files.com/68dcd2ceb173c46fa029931c/6aa48b0c63861b447adbdc3b_swe-p-800.jpg 800w, https://cdn.prod.website-files.com/68dcd2ceb173c46fa029931c/6aa48b0c63861b447adbdc3b_swe-p-1080.jpg 1080w, https://cdn.prod.website-files.com/68dcd2ceb173c46fa029931c/6aa48b0c63861b447adbdc3b_swe.jpg 1672w" class="img-default img-fill w-condition-invisible"/><div class="post-content-related-post-thumb-ic w-condition-invisible"><svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 49 48" fill="none" class="svg"><path d="M39.1602 1H5.16016C4.60816 1 4.16016 1.448 4.16016 2V40.5C4.16016 42.985 6.17516 45 8.66016 45C11.1452 45 13.1602 42.985 13.1602 40.5V38H40.1602V2C40.1602 1.448 39.7122 1 39.1602 1ZM31.1602 29H13.1602C12.6082 29 12.1602 28.552 12.1602 28C12.1602 27.448 12.6082 27 13.1602 27H31.1602C31.7122 27 32.1602 27.448 32.1602 28C32.1602 28.552 31.7122 29 31.1602 29ZM31.1602 21H13.1602C12.6082 21 12.1602 20.552 12.1602 20C12.1602 19.448 12.6082 19 13.1602 19H31.1602C31.7122 19 32.1602 19.448 32.1602 20C32.1602 20.552 31.7122 21 31.1602 21ZM31.1602 13H13.1602C12.6082 13 12.1602 12.552 12.1602 12C12.1602 11.448 12.6082 11 13.1602 11H31.1602C31.7122 11 32.1602 11.448 32.1602 12C32.1602 12.552 31.7122 13 31.1602 13Z" fill="#24241D" fill-opacity="0.8"></path><path d="M15.1602 40V40.5C15.1602 44.084 12.7442 47 9.16016 47C13.1362 47 39.8422 47 40.1602 47C42.9212 47 45.1602 44.761 45.1602 42V40H15.1602Z" fill="#24241D" fill-opacity="0.8"></path></svg></div></div><div class="post-content-related-post-info"><div class="post-content-related-post-text"><div class="post-content-related-post-title"><div class="txt fs-20 fw-med">Hill-Climbing a SWE Agent: What 1,700 Coding Tasks Taught Kimi K2.7</div></div><div class="post-content-related-post-desc"><div class="txt fs-16">We post-trained Kimi K2.7 on 1,700 Surge agentic coding tasks. The trained model improved on all external benchmarks we tested, including +20.0pp on SWE-Marathon, +12.4pp on DeepSWE, and +7.6pp on Terminal-Bench 4.</div></div><div class="post-content-related-post-read"><div class="post-content-related-post-read-inner"><div class="post-content-related-post-read-ic"><svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 12 13" fill="none" class="svg"><path d="M8.4 3.81189L3 9.21189" stroke="currentColor" stroke-width="1.3" stroke-miterlimit="10" stroke-linecap="square"></path><path d="M4.19922 3.21191H8.99922V8.01191" stroke="currentColor" stroke-width="1.3" stroke-miterlimit="10" stroke-linecap="square"></path></svg></div><div class="txt fs-12">read post</div></div><div class="post-content-related-post-bot"><div class="post-content-related-post-date"><div class="txt fs-12">September 11, 2026</div></div></div></div></div></div><a aria-label="Hill-Climbing a SWE Agent: What 1,700 Coding Tasks Taught Kimi K2.7" href="/blog/hill-climbing-swe-agent-kimi-k-2-7" class="post-content-related-post-link w-inline-block"></a></div></div></div></div><div class="post-content-related-pagin"></div></div></div></div><div id="appendix" class="post-content-appendix w-node-_91380805-765e-4a02-48df-704c8d85d8f4-034d05ca w-condition-invisible"><div class="w-layout-blockcontainer container grid w-container"><div id="w-node-_48007d99-dfa0-59e9-0dec-aefff13507e4-034d05ca" class="post-content-appendix-inner"><div class="post-content-appendix-title"><div class="heading h3">Appendix</div></div><div fs-codehighlight-element="code" fs-codehighlight-theme="webflow" class="txt fs-12 post-content-appendix-richtext w-dyn-bind-empty w-richtext"></div></div></div></div></section></div><div class="w-embed"><style>
+/* Quotes: bold inside a quote is plain bold, never a label (Jean 2026-10-22). This undoes the old label look (mono caps, small, line break hidden) that the css embed above and the site head "blog-callout-label-scale" block still set on a quote's first bold. */
+html body .post-content-richtext blockquote > strong:first-child {
+  font-family: inherit;
+  font-size: inherit !important;
+  font-weight: 700 !important;
+  color: inherit !important;
+  letter-spacing: inherit;
+  text-transform: none;
+  margin-bottom: 0;
+}
+html body .post-content-inner blockquote > strong:first-child + br {
+  display: inline;
+}
+/* Quote text matches the body text size (1.9rem); phones already match at 1.8rem (Jean 2026-10-22). */
+@media screen and (min-width: 768px) {
+  body .txt.fs-16.post-content-richtext blockquote {
+    font-size: 1.9rem;
+  }
+}
+</style></div></main><div data-wf--footer--variant="base" class="footer"><div class="footer-cta"><div class="w-layout-blockcontainer container grid w-container"><div id="w-node-c89b9624-b627-5d30-8ccb-9b67c90ac85d-c90ac85b" class="footer-inner"><div id="w-node-c89b9624-b627-5d30-8ccb-9b67c90ac85e-c90ac85b" class="footer-title"><div class="cta-eyebrow"><p class="txt fs-18 fw-med">Smart ≠ Useful</p></div><h3 class="heading h2">Raise AGI with the richness of human intelligence.</h3></div></div></div></div><nav aria-label="Site" class="footer-links"><div class="container"><div class="footer-links-grid"><div class="footer-links-col"><div class="txt fs-16 footer-links-label">Platform</div><div class="footer-links-list"><a href="/products" class="footer-links-link w-inline-block"><div class="txt fs-16">Products</div></a><a href="/ots" class="footer-links-link w-inline-block"><div class="txt fs-16">Off-the-Shelf</div></a><a href="/post-training" class="footer-links-link w-inline-block"><div class="txt fs-16">Post-Training Runs</div></a><a href="/workforce" class="footer-links-link w-inline-block"><div class="txt fs-16">Expert Workforce</div></a><a href="/enterprise" class="footer-links-link w-inline-block"><div class="txt fs-16">Enterprise</div></a><a href="/guides" class="footer-links-link w-inline-block"><div class="txt fs-16">Enterprise Guides</div></a><a target="_blank" rel="noopener" href="https://app.surgehq.ai/customers/sign_in" class="footer-links-link w-inline-block"><div class="txt fs-16">Login</div></a></div></div><div class="footer-links-col"><div class="txt fs-16 footer-links-label">Company</div><div class="footer-links-list"><a href="/research" class="footer-links-link w-inline-block"><div class="txt fs-16">Research</div></a><a href="/blog" class="footer-links-link w-inline-block"><div class="txt fs-16">Blog</div></a><a href="/contact" class="footer-links-link w-inline-block"><div class="txt fs-16">Contact</div></a></div></div><div class="footer-links-col"><div class="txt fs-16 footer-links-label">Work with us</div><div class="footer-links-list"><a href="/careers" class="footer-links-link w-inline-block"><div class="txt fs-16">Careers</div></a><a href="/swe" class="footer-links-link w-inline-block"><div class="txt fs-16">SWE</div></a><a href="/consultant-network" class="footer-links-link w-inline-block"><div class="txt fs-16">Consultant Network</div></a></div></div><div class="footer-links-col"><div class="txt fs-16 footer-links-label">Benchmarks</div><div class="footer-links-list"><a href="/benchmarks" class="footer-links-link w-inline-block"><div class="txt fs-16">Tuesday Work Index</div></a><a href="/benchmarks/sudo-l7" class="footer-links-link w-inline-block"><div class="txt fs-16">sudo L7</div><div class="txt fs-14 footer-links-chip">NEW</div></a><a href="/benchmarks/gdp-xlsx" class="footer-links-link w-inline-block"><div class="txt fs-16">GDP.xlsx</div><div class="txt fs-14 footer-links-chip">NEW</div></a><a href="/benchmarks/dayjob-healthcare" class="footer-links-link w-inline-block"><div class="txt fs-16">DAYJOB: Healthcare</div></a><a href="/benchmarks/dayjob-finance" class="footer-links-link w-inline-block"><div class="txt fs-16">DAYJOB: Finance</div></a><a href="/benchmarks/chartography" class="footer-links-link w-inline-block"><div class="txt fs-16">Chartography</div></a><a href="/benchmarks/handbook" class="footer-links-link w-inline-block"><div class="txt fs-16">HANDBOOK.md</div></a><a href="/benchmarks/complex-constraints" class="footer-links-link w-inline-block"><div class="txt fs-16">ComplexConstraints</div></a><a href="/benchmarks/gdp-pdf" class="footer-links-link w-inline-block"><div class="txt fs-16">GDP.pdf</div></a><a href="/benchmarks/riemann-bench" class="footer-links-link w-inline-block"><div class="txt fs-16">Riemann-bench</div></a><a href="/benchmarks/enterprisebench-corecraft" class="footer-links-link w-inline-block"><div class="txt fs-16">EnterpriseBench: CoreCraft</div></a><a href="/benchmarks/antidote" class="footer-links-link w-inline-block"><div class="txt fs-16">Antidote</div></a><a href="/benchmarks/hemingway-bench" class="footer-links-link w-inline-block"><div class="txt fs-16">Hemingway-bench</div></a></div></div></div></div></nav><div class="footer-bot"><div class="w-layout-blockcontainer container fluid w-container"><div class="footer-bot-inner"><div class="footer-menus-social"><div class="footer-copyright"><div class="txt fs-12">© 2026 Surge AI</div></div><div class="footer-menu-divider hidden-tab"></div><div class="footer-menu"><a id="w-node-_28857a6f-b146-9c44-65f6-c9a73756fc0f-c90ac85b" href="https://x.com/HelloSurgeAI" target="_blank" class="footer-link w-inline-block"><div class="txt fs-12">X</div></a><div class="footer-menu-divider"></div><a id="w-node-_4eb37819-d838-e772-136f-ad3fa12c1e35-c90ac85b" href="https://www.linkedin.com/company/surge-ai/" target="_blank" class="footer-link w-inline-block"><div class="txt fs-12">Linkedin</div></a></div></div><div class="footer-menu-legal"><a href="#" class="footer-link w-inline-block cky-banner-element"><div class="txt fs-12 fs-10-mb">Cookie Settings</div></a><div class="footer-menu-divider"></div><a href="/cookie-policy" class="footer-link w-inline-block"><div class="txt fs-12 fs-10-mb">Cookie Policy</div></a><div class="footer-menu-divider"></div><a href="/privacy-policy" class="footer-link w-inline-block"><div class="txt fs-12 fs-10-mb">Privacy Policy</div></a><div class="footer-menu-divider"></div><a id="w-node-f435daee-4132-dc1e-a9a6-cbcd49efda5d-c90ac85b" href="/terms-of-service" class="footer-link w-inline-block"><div class="txt fs-12 fs-10-mb">Terms of Service</div></a></div></div></div></div></div></div><script src="https://d3e54v103j8qbb.cloudfront.net/js/jquery-3.5.1.min.dc5e7f18c8.js?site=68dc970bd6e945ea3fb0f426" type="text/javascript" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script><script src="https://cdn.prod.website-files.com/68dc970bd6e945ea3fb0f426/js/webflow.schunk.f49f65e6e39b81f5.js" type="text/javascript" integrity="sha384-vuxk32Ib7GpoSEBA3bt4x0J3x6vIZxsyNuhQSGsGwHVtz1SqM4QKShyIXfK53GCj" crossorigin="anonymous"></script><script src="https://cdn.prod.website-files.com/68dc970bd6e945ea3fb0f426/js/webflow.schunk.4069dd53359757ca.js" type="text/javascript" integrity="sha384-gogE0o/H3IClg0XSGOlKe83go8Qj0CDax7vGw+4lteSW51ZveS6ps1MgAp5fZAzB" crossorigin="anonymous"></script><script src="https://cdn.prod.website-files.com/68dc970bd6e945ea3fb0f426/js/webflow.4cd48606.1e9164807e2a47b7.js" type="text/javascript" integrity="sha384-yWbqTqP2Q+0FzdvKrx6/wmJTiJ+aUhkxd52dkfGFpCpLCTgAO8SFg4XRtq9UR6aT" crossorigin="anonymous"></script><script src="https://cdn.prod.website-files.com/gsap/3.15.0/gsap.min.js" type="text/javascript"></script><!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TXM5FHJG"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+<script defer src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+<script src="https://surgeai-bp.netlify.app/index.js" async type="text/javascript"></script>
+<style>
+/* blog typography: balanced headlines (no lone last word), pretty body text. .heading[class] outranks the site's .heading rule */
+.heading[class], h1, h2, h3, h4 { text-wrap: balance; }
+h5, h6, p, li, blockquote { text-wrap: pretty; }
+/* in-article subheadings wrap normally, no balance or pretty (Jean 10-11): overrides the balance rule above and the pretty inherited from the site's .body class. The post title keeps balance. */
+.w-richtext.post-content-richtext :is(h2, h3, h4, h5, h6) { text-wrap: wrap; }
+/* TL;DR box on phones: pretty wrapping re-breaks its short lines into a ragged block (Jean 10-08), so the summary paragraphs wrap normally there */
+@media screen and (max-width: 767px) { .post-hero-summary p, .post-hero-summary li { text-wrap: wrap; } }
+/* Benchmark call-out at the end of the article (black, .post-content-bmark-inner): its button row is the same Benchmark Actions component as the TL;DR box, whose class lays out as a left-aligned row with a 2.2rem gap. In the call-out the row is centred under the headline with a .8rem gap at every width. */
+/* At every width (Jean 10-09: phones first, then desktop too): the main CTA (first button, VIEW LEADERBOARD in the call-out via the component's Leaderboard Label prop) sits alone on the first row, the other buttons centred below it. The row wraps and spans the card; the ::after is a zero-height line break placed after the first button via order; vertical spacing comes from the buttons' margin-top; the break line only adds height in the rule below. */
+.post-content-bmark-inner .post-content-bmark-action { margin-top: 0.8rem; justify-content: center; flex-wrap: wrap; width: 100%; row-gap: 0; }
+.post-content-bmark-inner .post-content-bmark-action > * { order: 2; margin-top: 0.8rem; }
+.post-content-bmark-inner .post-content-bmark-action > :first-child { order: 0; margin-top: 0; }
+.post-content-bmark-inner .post-content-bmark-action::after { content: ""; order: 1; flex-basis: 100%; height: 0; }
+/* A little more room under the main CTA when secondary buttons follow (Jean 10-09): the break line grows to .8rem, so main CTA to secondaries = 1.6rem while secondaries keep .8rem between their own rows (the 0.8 / 1.6 / 3.2rem steps of the card: buttons, CTA to secondaries, headline to buttons). With the main CTA alone the line stays 0 and the card is unchanged. */
+.post-content-bmark-inner .post-content-bmark-action:has(> :nth-child(2))::after { height: 0.8rem; }
+/* Secondary call-out buttons (RESEARCH PAPER, GITHUB, HUGGING FACE: .btn.is-light) without the arrow icon (Jean 10-09); VIEW LEADERBOARD keeps it. Call-out only, the TL;DR row is untouched. */
+.post-content-bmark-inner .post-content-bmark-action .btn.is-light .btn-arrow { display: none; }
+/* Follow row ON the divider (Jean 10-09, option C of the prototype): the LinkedIn / X buttons sit on the line. The row's top edge stays where the line was, the line moves to the buttons' centre (button height 3.2rem) and breaks 1.6rem either side of the pair; buttons and the gap behind them take the page colour (#FAF9F6, the body background). */
+.post-content-follow { position: relative; }
+.post-content-follow > .line { position: absolute; left: 0; right: 0; top: calc(1.6rem - 0.5px); }
+.post-content-follow-text { padding-top: 0; position: relative; }
+.post-content-follow-links { background-color: #FAF9F6; padding: 0 1.6rem; }
+.post-content-follow-link { background-color: #FAF9F6; }
+/* Posts without the benchmark call-out (Jean 10-09, "increase spacing from text to divider"): last paragraph to the follow row 2rem -> 4.8rem, the same gap as a figure to the next paragraph and as the text to the call-out. */
+.post-content-inner:not(:has(> .post-content-bmark)) > .post-content-follow { margin-top: 4.8rem; }
+/* in-article headings: looser line-height for reading (site rule .txt.fs-16.post-content-richtext h2/h3 = 1.2) */
+.w-richtext.txt.fs-16.post-content-richtext h2 { line-height: 1.25; }
+.w-richtext.txt.fs-16.post-content-richtext h3 { line-height: 1.35; }
+/* TL;DR buttons (rp-btn embeds in post rich text): the up-right arrow is drawn here as a mask on the empty .rp-btn-ic span, because the CMS editor strips inline SVG from rich-text embeds on every save. Colour comes from the span's own color. */
+.rp-btn-ic { background-color: currentColor; -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='none' stroke='%23000' stroke-width='1.3' stroke-linecap='square' stroke-miterlimit='10'%3E%3Cpath d='M11.2 4.8L4 12M5.6 4H12V10.4'/%3E%3C/svg%3E") center / 100% 100% no-repeat; mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='none' stroke='%23000' stroke-width='1.3' stroke-linecap='square' stroke-miterlimit='10'%3E%3Cpath d='M11.2 4.8L4 12M5.6 4H12V10.4'/%3E%3C/svg%3E") center / 100% 100% no-repeat; }
+/* gap between the hero (TL;DR box) and the article body at half the default. The gap = hero container padding-bottom (global .container.grid 8rem) + .post-content padding-top + the .has-img spacer (desktop) or .post-hero padding-bottom (mobile); only the hero container's share changes, sized so the total is exactly half at each breakpoint: 15rem to 7.5rem desktop, 12.2rem to 6.1rem tablet, 12rem to 6rem mobile. */
+.post-hero > .container.grid { padding-bottom: 0.5rem; }
+@media screen and (max-width: 991px) { .post-hero > .container.grid { padding-bottom: 1.9rem; } }
+@media screen and (max-width: 767px) { .post-hero > .container.grid { padding-bottom: 2rem; } }
+</style><script src="https://cdn.prod.website-files.com/68dc970bd6e945ea3fb0f426/6ad29b4c88a296913d78a44b_lead-attribution-1.0.0.js" type="text/javascript" integrity="sha384-+McLbuWiYwqE7y46k3q95jPSAVPxhozZALBsnF8GhkAUGg3jbOKHMam9iAcO1hbC" crossorigin="anonymous"></script></body></html>

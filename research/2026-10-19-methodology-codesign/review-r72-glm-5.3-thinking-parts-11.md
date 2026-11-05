@@ -1,0 +1,1 @@
+All three parts have been read to their end. Before writing the review, I'm running two quick checks on external facts these parts rely on (OpenAI plan metering cadence, and the AA Omniscience-style reliability index) so my factual claims are sourced.

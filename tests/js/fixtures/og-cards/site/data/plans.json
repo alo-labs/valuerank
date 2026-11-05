@@ -1,27 +1,109 @@
 {
   "asOf": "2026-10-08",
   "policy": {
-    "reportingWindow": {"start": "2026-09-08", "end": "2026-10-08"},
+    "reportingWindow": {
+      "start": "2026-09-08",
+      "end": "2026-10-08"
+    },
     "defaultNumerator": "Fixture policy text for the share-card tests."
   },
   "routes": [
     {
-      "id": "acme-plus-fixture", "provider": "Acme AI", "planLabel": "Acme Plus $20 fixture route", "planFeeUsd": 20,
-      "valueMultiple": 8.1, "apiEquivalentUsd": 162, "grade": "assumption", "evidenceLabel": "Provisional assumption",
-      "sourceModel": "Alpha One", "sourceUrl": "https://example.test/plans/acme", "sourceDate": "2026-10-06",
-      "modelSlugs": ["alpha-one"], "notes": "Fixture route."
+      "id": "acme-plus-fixture",
+      "provider": "Acme AI",
+      "planLabel": "Acme Plus $20 fixture route",
+      "planFeeUsd": 20,
+      "valueMultiple": 8.1,
+      "apiEquivalentUsd": 162,
+      "grade": "assumption",
+      "evidenceLabel": "Provisional assumption",
+      "sourceModel": "Alpha One",
+      "sourceUrl": "https://example.test/plans/acme",
+      "sourceDate": "2026-10-06",
+      "modelSlugs": [
+        "alpha-one"
+      ],
+      "notes": "Fixture route."
     },
     {
-      "id": "beta-pro-fixture", "provider": "Beta Labs", "planLabel": "Beta Pro $200 fixture route", "planFeeUsd": 200,
-      "valueMultiple": 10.5, "apiEquivalentUsd": 2100, "grade": "measured", "evidenceLabel": "Controlled account measurement",
-      "sourceModel": "Beta Two", "sourceUrl": "https://example.test/plans/beta", "sourceDate": "2026-10-06",
-      "modelSlugs": ["beta-two"], "notes": "Fixture route."
+      "id": "beta-pro-fixture",
+      "provider": "Beta Labs",
+      "planLabel": "Beta Pro $200 fixture route",
+      "planFeeUsd": 200,
+      "valueMultiple": 10.5,
+      "apiEquivalentUsd": 2100,
+      "grade": "measured",
+      "evidenceLabel": "Controlled account measurement",
+      "sourceModel": "Beta Two",
+      "sourceUrl": "https://example.test/plans/beta",
+      "sourceDate": "2026-10-06",
+      "modelSlugs": [
+        "beta-two"
+      ],
+      "notes": "Fixture route."
     }
   ],
   "candidates": [
-    {"slug": "alpha-one", "name": "Alpha One", "rank": {"api": 1, "plan": 2}, "intelligenceIndex": {"value": 57.6, "status": "measured"}, "apiUsd": 1081.55, "planUsdPerRun": 100.4, "planUsdPerPoint": 2.5, "fallback": null, "routeId": "acme-plus-fixture"},
-    {"slug": "beta-two", "name": "Beta <Two> & Co", "rank": {"api": 2, "plan": 1}, "intelligenceIndex": {"value": 52.0, "status": "measured"}, "apiUsd": 900, "planUsdPerRun": 98.8, "planUsdPerPoint": 1.9, "fallback": null, "routeId": "beta-pro-fixture"},
-    {"slug": "gamma-three", "name": "Gamma Three", "rank": {"api": null, "plan": null}, "intelligenceIndex": {"value": null, "status": "missing"}, "apiUsd": null, "planUsdPerRun": null, "planUsdPerPoint": null, "fallback": "api", "routeId": null}
+    {
+      "slug": "alpha-one",
+      "name": "Alpha One",
+      "rank": {
+        "api": 1,
+        "plan": 2
+      },
+      "apiUsd": 1081.55,
+      "fallback": null,
+      "routeId": "acme-plus-fixture",
+      "planUsd": 100.4,
+      "flags": [
+        "workload-unmatched"
+      ],
+      "measuredOnly": null
+    },
+    {
+      "slug": "beta-two",
+      "name": "Beta <Two> & Co",
+      "rank": {
+        "api": 2,
+        "plan": 1
+      },
+      "apiUsd": 900,
+      "fallback": null,
+      "routeId": "beta-pro-fixture",
+      "planUsd": 98.8,
+      "flags": [
+        "workload-unmatched"
+      ],
+      "measuredOnly": null
+    },
+    {
+      "slug": "gamma-three",
+      "name": "Gamma Three",
+      "rank": {
+        "api": null,
+        "plan": null
+      },
+      "apiUsd": null,
+      "fallback": "api",
+      "routeId": null,
+      "planUsd": null,
+      "flags": [
+        "API-cost fallback: no admitted Plan route"
+      ],
+      "measuredOnly": null
+    }
   ],
-  "workedExample": {"slugs": ["alpha-one", "beta-two"]}
+  "workedExample": {
+    "slugs": [
+      "alpha-one",
+      "beta-two"
+    ]
+  },
+  "identificationYield": {
+    "rows": 2,
+    "pointIdentified": 0,
+    "setIdentified": 0,
+    "unidentified": 2,
+    "exploratory": true
+  }
 }

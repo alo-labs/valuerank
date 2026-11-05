@@ -4,11 +4,16 @@
 {%- from "partials/table.html" import head_cells -%}
 {%- from "partials/chart.html" import chart -%}
 {%- from "partials/badge.html" import tier_badge -%}
+{%- from "partials/footnotes.html" import fn_section -%}
 {% block content %}
 <header class="page-head">
   <p class="eyebrow">The full instrument</p>
-  <h1 id="page-title">Rankings</h1>
+  <h1 id="page-title">{{ page.get("heading") or "Rankings" }}</h1>
   <p class="lead">Sort, filter and compare every model on either basis. The address bar always holds your current view, so a copied link reproduces it.</p>
+  {%- if page.get("trackLinks") %}
+  <p class="note">{{ page.trackLead }} ValueRank publishes {{ page.trackLinks | length }} rankings, each over the configurations with its complete benchmark set:
+    {%- for link in page.trackLinks %} {% if link.current %}<strong>{{ link.label }}</strong>{% else %}<a href="{{ link.href }}">{{ link.label }}</a>{% endif %}{{ "," if not loop.last else "." }}{%- endfor %}</p>
+  {%- endif %}
   <div class="hero-controls">
     {{ basis_toggle(site) }}
     <p class="note basis-note"><span data-basis-label>{{ site.basis[site.defaultBasis].label }}</span>: cost in <span data-cost-unit>{{ site.basis[site.defaultBasis].costUnit }}</span>.</p>
@@ -16,7 +21,7 @@
 </header>
 
 <div class="rank-layout">
-  <form id="filters" class="filters" method="get" action="/rankings/" autocomplete="off" role="search" aria-label="Filter rankings">
+  <form id="filters" class="filters" method="get" action="{{ page.get('action') or '/rankings/' }}" autocomplete="off" role="search" aria-label="Filter rankings">
     <details class="filters-details">
     <summary><h2 class="filters-title">Filters</h2></summary>
     <div class="field">
@@ -73,7 +78,7 @@
     <div class="table-wrap" tabindex="0" role="region" aria-label="Rankings table, scrolls sideways on small screens">
       <table id="rankings-table" class="data-table" data-basis="{{ site.defaultBasis }}">
         <caption class="sr-only">All models ranked by <span data-basis-label>{{ site.basis[site.defaultBasis].label }}</span></caption>
-        <thead id="rankings-head"><tr>{{ head_cells(page.columns | selectattr("default") | list, site) }}</tr></thead>
+        <thead id="rankings-head"><tr>{{ head_cells(page.columns | selectattr("default") | rejectattr("key", "equalto", "grade") | list, site) }}</tr></thead>
         <tbody id="rankings-body">
           <tr class="state-row" data-state="loading"><td colspan="{{ page.columns | length }}">Loading rankings&hellip;</td></tr>
         </tbody>
@@ -113,5 +118,10 @@
     </section>
   </div>
 </div>
+
+{% call fn_section("The number after each model in the table links to its note here. Each note gives the weakest evidence grade of any value inside that model's score, and follows the table's current sort and filters.") %}
+  <ol class="footnotes" id="rankings-evidence"></ol>
+  <noscript><p class="note">The notes are built with the table. Each model's grade is the <code>grade</code> field in <a href="/data/rankings.json">rankings.json</a>.</p></noscript>
+{% endcall %}
 {% endblock %}
 {% block data %}<script type="application/json" id="rankings-data">{{ page.rankingsJson | tojson }}</script>{% endblock %}

@@ -1,0 +1,291 @@
+{
+  "schemaVersion": "valuerank-aa-cost-charts/v1",
+  "capturedAt": "2026-10-23T05:33:53.042Z",
+  "precision": "chart labels rounded to USD 1",
+  "declinedTasksMarker": {
+    "marker": "*",
+    "meaning": "The model or provider declined some tasks on safety grounds"
+  },
+  "evaluations": [
+    {
+      "slug": "frontiercode",
+      "url": "https://artificialanalysis.ai/evaluations/frontiercode",
+      "finalUrl": "https://artificialanalysis.ai/evaluations/frontiercode?eval-cost=total-cost",
+      "chartTitle": "FrontierCode 1.1: Total Cost to Run",
+      "rows": [
+        {
+          "model": "GPT-6 Luna (max)",
+          "totalUsdLabel": "$9",
+          "totalUsd": 9,
+          "declinedTasks": false
+        },
+        {
+          "model": "MiMo-V2.6-Pro",
+          "totalUsdLabel": "$18",
+          "totalUsd": 18,
+          "declinedTasks": false
+        },
+        {
+          "model": "Claude Haiku 5.5 (max)",
+          "totalUsdLabel": "$33*",
+          "totalUsd": 33,
+          "declinedTasks": true
+        },
+        {
+          "model": "MiniMax-M3.1-Flash",
+          "totalUsdLabel": "$35",
+          "totalUsd": 35,
+          "declinedTasks": false
+        },
+        {
+          "model": "DeepSeek V4.1 Flash 1017 (max)",
+          "totalUsdLabel": "$35",
+          "totalUsd": 35,
+          "declinedTasks": false
+        },
+        {
+          "model": "GLM-5.3-Flash",
+          "totalUsdLabel": "$36",
+          "totalUsd": 36,
+          "declinedTasks": false
+        },
+        {
+          "model": "Beam 1.0",
+          "totalUsdLabel": "$38",
+          "totalUsd": 38,
+          "declinedTasks": false
+        },
+        {
+          "model": "GPT-6.1 Sol (high)",
+          "totalUsdLabel": "$42",
+          "totalUsd": 42,
+          "declinedTasks": false
+        },
+        {
+          "model": "GPT-6.1 Sol (xhigh)",
+          "totalUsdLabel": "$60",
+          "totalUsd": 60,
+          "declinedTasks": false
+        },
+        {
+          "model": "Nemotron 3.5 Super VL",
+          "totalUsdLabel": "$69",
+          "totalUsd": 69,
+          "declinedTasks": false
+        },
+        {
+          "model": "Claude Opus 5.5 (medium with fallback)",
+          "totalUsdLabel": "$78",
+          "totalUsd": 78,
+          "declinedTasks": false
+        },
+        {
+          "model": "GPT-6.1 Sol (max)",
+          "totalUsdLabel": "$81",
+          "totalUsd": 81,
+          "declinedTasks": false
+        },
+        {
+          "model": "Claude Opus 5.5 (high with fallback)",
+          "totalUsdLabel": "$125",
+          "totalUsd": 125,
+          "declinedTasks": false
+        },
+        {
+          "model": "Muse Spark Open (xhigh)",
+          "totalUsdLabel": "$194",
+          "totalUsd": 194,
+          "declinedTasks": false
+        },
+        {
+          "model": "Step 5 Preview",
+          "totalUsdLabel": "$196",
+          "totalUsd": 196,
+          "declinedTasks": false
+        },
+        {
+          "model": "Qwen3.8 27B (xhigh)",
+          "totalUsdLabel": "$247",
+          "totalUsd": 247,
+          "declinedTasks": false
+        },
+        {
+          "model": "Mistral Large 4 Preview",
+          "totalUsdLabel": "$261",
+          "totalUsd": 261,
+          "declinedTasks": false
+        },
+        {
+          "model": "Gemini 3.8 Flash (high)",
+          "totalUsdLabel": "$372",
+          "totalUsd": 372,
+          "declinedTasks": false
+        },
+        {
+          "model": "Kimi K3 (max)",
+          "totalUsdLabel": "$389",
+          "totalUsd": 389,
+          "declinedTasks": false
+        },
+        {
+          "model": "Claude Opus 5.5 (xhigh with fallback)",
+          "totalUsdLabel": "$398",
+          "totalUsd": 398,
+          "declinedTasks": false
+        },
+        {
+          "model": "GPT-6 Astra (max)",
+          "totalUsdLabel": "$422",
+          "totalUsd": 422,
+          "declinedTasks": false
+        },
+        {
+          "model": "GLM-5.3 (max)",
+          "totalUsdLabel": "$432",
+          "totalUsd": 432,
+          "declinedTasks": false
+        },
+        {
+          "model": "Muse Wonder (max)",
+          "totalUsdLabel": "$503",
+          "totalUsd": 503,
+          "declinedTasks": false
+        },
+        {
+          "model": "Gemini 4 Argon (high)",
+          "totalUsdLabel": "$670",
+          "totalUsd": 670,
+          "declinedTasks": false
+        },
+        {
+          "model": "Qwen3.8 Max (0902)",
+          "totalUsdLabel": "$675",
+          "totalUsd": 675,
+          "declinedTasks": false
+        },
+        {
+          "model": "Claude Sonnet 5.5 (max with fallback)",
+          "totalUsdLabel": "$826",
+          "totalUsd": 826,
+          "declinedTasks": false
+        },
+        {
+          "model": "Claude Opus 5.5 (max with fallback)",
+          "totalUsdLabel": "$1,015",
+          "totalUsd": 1015,
+          "declinedTasks": false
+        },
+        {
+          "model": "Grok 4.7 (xhigh)",
+          "totalUsdLabel": "$1,131",
+          "totalUsd": 1131,
+          "declinedTasks": false
+        },
+        {
+          "model": "Claude Fable 5.1 (max with fallback)",
+          "totalUsdLabel": "$1,200",
+          "totalUsd": 1200,
+          "declinedTasks": false
+        }
+      ]
+    },
+    {
+      "slug": "itbench-aa",
+      "url": "https://artificialanalysis.ai/evaluations/itbench-aa",
+      "finalUrl": "https://artificialanalysis.ai/evaluations/itbench-aa?eval-cost=total-cost",
+      "chartTitle": "ITBench-AA: Total Cost to Run",
+      "rows": [
+        {
+          "model": "GLM-5.3-Flash",
+          "totalUsdLabel": "$9",
+          "totalUsd": 9,
+          "declinedTasks": false
+        },
+        {
+          "model": "DeepSeek V4.1 Flash (max)",
+          "totalUsdLabel": "$22",
+          "totalUsd": 22,
+          "declinedTasks": false
+        },
+        {
+          "model": "Step 5 Preview",
+          "totalUsdLabel": "$32",
+          "totalUsd": 32,
+          "declinedTasks": false
+        },
+        {
+          "model": "GPT-6 Sol (max)",
+          "totalUsdLabel": "$38",
+          "totalUsd": 38,
+          "declinedTasks": false
+        },
+        {
+          "model": "GPT-5.6 Terra (max)",
+          "totalUsdLabel": "$80",
+          "totalUsd": 80,
+          "declinedTasks": false
+        },
+        {
+          "model": "Kimi K3 (max)",
+          "totalUsdLabel": "$83",
+          "totalUsd": 83,
+          "declinedTasks": false
+        },
+        {
+          "model": "Gemini 3.8 Flash (high)",
+          "totalUsdLabel": "$86",
+          "totalUsd": 86,
+          "declinedTasks": false
+        },
+        {
+          "model": "GLM-5.3 (max)",
+          "totalUsdLabel": "$91",
+          "totalUsd": 91,
+          "declinedTasks": false
+        },
+        {
+          "model": "GPT-5.6 Sol (max)",
+          "totalUsdLabel": "$106",
+          "totalUsd": 106,
+          "declinedTasks": false
+        },
+        {
+          "model": "GPT-6 Astra (max)",
+          "totalUsdLabel": "$133",
+          "totalUsd": 133,
+          "declinedTasks": false
+        },
+        {
+          "model": "Claude Opus 5.5 (max with fallback)",
+          "totalUsdLabel": "$146",
+          "totalUsd": 146,
+          "declinedTasks": false
+        },
+        {
+          "model": "Grok 4.7 (xhigh)",
+          "totalUsdLabel": "$203",
+          "totalUsd": 203,
+          "declinedTasks": false
+        },
+        {
+          "model": "Claude Fable 5.1 (max with fallback)",
+          "totalUsdLabel": "$237",
+          "totalUsd": 237,
+          "declinedTasks": false
+        },
+        {
+          "model": "Qwen3.8 Max (0902)",
+          "totalUsdLabel": "$327",
+          "totalUsd": 327,
+          "declinedTasks": false
+        },
+        {
+          "model": "Claude Opus 4.7 (max)",
+          "totalUsdLabel": "$338",
+          "totalUsd": 338,
+          "declinedTasks": false
+        }
+      ]
+    }
+  ]
+}

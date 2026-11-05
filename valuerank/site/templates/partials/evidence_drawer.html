@@ -1,16 +1,11 @@
-{#- Per-value provenance expander: source, date, evaluated variant, note. -#}
-{%- from "partials/badge.html" import badge -%}
+{#- Per-value provenance list for an evidence note: source, date, evaluated variant, note. The grade badge sits beside it. -#}
 {%- macro evidence(d) -%}
-<details class="evidence">
-  <summary>Details</summary>
-  <dl class="evidence-list">
-    <div><dt>Grade</dt><dd>{{ badge(d.grade) }}</dd></div>
-    <div><dt>Source</dt><dd>{% if d.source %}{% if d.source.url %}<a href="{{ d.source.url }}" rel="noopener">{{ d.source.name }}</a>{% else %}{{ d.source.name }}{% endif %}{% else %}None{% endif %}</dd></div>
-    <div><dt>Observed</dt><dd>{{ d.observedAt if d.observedAt else "Not observed" }}</dd></div>
-    <div><dt>Evaluated variant</dt><dd>{{ d.evaluatedVariant if d.evaluatedVariant else "None" }}</dd></div>
-    {%- if d.note %}
-    <div><dt>Note</dt><dd>{{ d.note }}</dd></div>
-    {%- endif %}
-  </dl>
-</details>
+<dl class="evidence-list">
+  <div><dt>Source</dt><dd>{% if d.source %}{% if d.source.url %}<a href="{{ d.source.url }}" rel="noopener">{{ d.source.name }}</a>{% else %}{{ d.source.name }}{% endif %}{% else %}None{% endif %}</dd></div>
+  <div><dt>Observed</dt><dd>{{ d.observedAt if d.observedAt else "Not observed" }}</dd></div>
+  <div><dt>Evaluated variant</dt><dd>{{ d.evaluatedVariant if d.evaluatedVariant else "None" }}</dd></div>
+  {%- if d.note %}
+  <div><dt>Note</dt><dd>{{ d.note }}</dd></div>
+  {%- endif %}
+</dl>
 {%- endmacro -%}

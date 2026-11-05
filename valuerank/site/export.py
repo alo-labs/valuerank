@@ -1,6 +1,7 @@
 """Write the public JSON files (``site/data/``) from the committed snapshots.
 
-``export_public_data(data, out)`` returns the sorted list of files written: ``rankings.json``,
+``export_public_data(data, out)`` returns the sorted list of files written: ``rankings.json`` (and ``rankings-<track>.json`` for
+every other ranking, O53),
 ``plans.json``, ``benchmarks.json``, ``changelog.json``, ``livebench.json``, ``benchmarks/terminal-bench-4.json`` and
 ``models/<slug>.json``. Output is deterministic: two-space indent, UTF-8 without escapes, a
 trailing newline, ``NaN``/``Infinity`` rejected, and field order fixed by the view models.
@@ -25,6 +26,7 @@ def export_public_data(data: Path = DATA, out: Path = DATA.parent / "site" / "da
     bundle = build_bundle(data)
     documents = {
         "rankings.json": bundle.rankings,
+        **{f"rankings-{track}.json": other.rankings for track, other in bundle.extras.get("tracks", {}).items()},
         "plans.json": bundle.plans,
         "benchmarks.json": bundle.benchmarks,
         "benchmarks/terminal-bench-4.json": bundle.tb4,

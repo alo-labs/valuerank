@@ -2,18 +2,20 @@
 {%- from "partials/basis_toggle.html" import basis_toggle -%}
 {%- from "partials/cost_slider.html" import cost_slider -%}
 {%- from "partials/picks.html" import picks -%}
-{%- from "partials/table.html" import head_cells, answer_row -%}
+{%- from "partials/table.html" import head_cells, answer_row, model_note -%}
+{%- from "partials/footnotes.html" import fn_section -%}
 {%- from "partials/chart.html" import chart -%}
 {%- from "partials/badge.html" import legend -%}
-{%- set cols = [{"key":"rank","label":"Rank"},{"key":"name","label":"Model"},{"key":"overall","label":"Score"},{"key":"quality","label":"Quality"},{"key":"cost","label":"Cost"},{"key":"grade","label":"Evidence"},{"key":"coverage","label":"Coverage"}] -%}
+{%- from "partials/fmt.html" import num -%}
+{%- set cols = [{"key":"rank","label":"Rank"},{"key":"name","label":"Model"},{"key":"overall","label":"Score"},{"key":"quality","label":"Quality"},{"key":"cost","label":"Cost"},{"key":"coverage","label":"Coverage"}] -%}
 {% block content %}
 <section class="hero" aria-labelledby="page-title">
-  <p class="eyebrow">Best value today <span class="mono">{{ site.version }}</span></p>
+  <p class="eyebrow">Software engineering and DevOps · best value today <span class="mono">{{ site.version }}</span></p>
   <h1 id="page-title" class="hero-title">
     <span data-basis-only="plan">{{ page.headline.plan }}</span>
     <span data-basis-only="api">{{ page.headline.api }}</span>
   </h1>
-  <p class="lead">ValueRank scores {{ page.models | length }} frontier models on what you get for what you pay: quality from independent benchmarks, cost at API rates or on a subscription. Missing evidence is shown as missing, never filled in.</p>
+  <p class="lead">ValueRank ranks {{ page.models | length }} frontier models by value for software engineering and DevOps work: what you get for what you pay. {{ num(page.focus.swePct, 0) }}% of quality comes from coding, debugging and terminal benchmarks ({{ page.focus.sweLeaves | join(", ") }}), and cost is what a software-development task basket costs to run, at API rates or on a subscription. Missing evidence is shown as missing, never filled in.</p>
   <div class="hero-controls">
     {{ basis_toggle(site) }}
     <p class="note basis-note">
@@ -40,12 +42,12 @@
       <thead><tr>{{ head_cells(cols, site, sortable=false) }}</tr></thead>
       <tbody id="index-body">
         {%- for m in page.models %}
-        {{ answer_row(m, site) }}
+        {{ answer_row(m, site, loop.index) }}
         {%- endfor %}
       </tbody>
     </table>
   </div>
-  <p class="note">Rank, score and cost follow the selected basis. Evidence shows the weakest grade of any value inside the score. A <span class="fallback-mark" aria-hidden="true">*</span> after a cost means no subscription route is measured, so the plan cost falls back to the API price. <a href="/methodology/">How scoring works</a>.</p>
+  <p class="note">Rank, score and cost follow the selected basis. The number after each model links to its evidence note at the <a href="#evidence-notes">bottom of the page</a>, which gives the weakest grade of any value inside the score. A <span class="fallback-mark" aria-hidden="true">*</span> after a cost means no subscription route is measured, so the plan cost falls back to the API price. <a href="/methodology/">How scoring works</a>.</p>
 </section>
 
 <section class="block" aria-labelledby="chart-title">
@@ -59,5 +61,13 @@
   <p class="muted">Every value carries one of five evidence grades. Weaker grades are shown plainly, never blended in silently.</p>
   {{ legend() }}
 </section>
+
+{% call fn_section("Each note gives the weakest evidence grade of any value inside that model's score. Grades do not change with the basis.") %}
+  <ol class="footnotes" id="index-evidence">
+    {%- for m in page.models %}
+    {{ model_note(m) }}
+    {%- endfor %}
+  </ol>
+{% endcall %}
 {% endblock %}
 {% block data %}<script type="application/json" id="rankings-data">{{ page.rankingsJson | tojson }}</script>{% endblock %}

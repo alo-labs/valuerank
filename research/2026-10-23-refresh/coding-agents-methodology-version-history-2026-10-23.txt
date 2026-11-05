@@ -1,0 +1,53 @@
+Source: https://artificialanalysis.ai/methodology/coding-agents-benchmarking (rendered with Playwright 2026-10-23T05:32:56Z). Excerpt: version history, verbatim.
+Index definition on the same page: "Coding Agent Index v2.0 is the equal-weight average of FrontierCode v1.1, Terminal-Bench 4.0 and SWE-Atlas-QnA-AA."
+
+Version History
+
+Version 2.0
+
+October 2026 - current
+
+Replaced DeepSWE v1.1 with FrontierCode v1.1 from Cognition: 100 software engineering tasks on real open-source repositories, graded on whether a maintainer would merge the change
+Renamed SWE-Atlas-QnA to SWE-Atlas-QnA-AA with adjustments to Scale AI's grading: GPT-6 Luna (xhigh) as the judge with five votes per criterion, and 127 rubric criteria reworded; published on Hugging Face
+
+Version 1.5
+
+September 2026 - October 2026
+
+Replaced Terminal-Bench 2.1 with Terminal-Bench 4.0: 66 harder terminal tasks, updated environments and verifiers, and revised compute and time budgets
+Upgraded DeepSWE v1.0 to v1.1, retaining the same 113 tasks with updated execution environments and isolated verification of committed patches
+Aligned SWE-Atlas-QnA grading with Scale AI's published methodology, using Claude Opus 4.5 as the judge across 124 repository Q&A tasks
+
+Version 1.4
+
+August 2026 - September 2026
+
+Upgraded Terminal-Bench 2.0 to Terminal-Bench 2.1, covering the full 89-task set
+Added reward hacking detection aligned with Terminal-Bench's integrity methodology, scoring reward-hacked trials 0
+Revised token counting methodology for agents that report reasoning within output tokens
+
+Version 1.3
+
+July 2026 - August 2026
+
+Refined SWE-Atlas-QnA binary pass/fail scoring to align with Scale AI's Task Resolve Rate methodology
+
+Version 1.2
+
+July 2026
+
+Changed SWE-Atlas-QnA scoring from rubric reward to binary pass/fail, requiring all rubric criteria to pass for a task to be marked correct
+
+Version 1.1
+
+June 2026 - July 2026
+
+Added DeepSWE (long-horizon software engineering)
+Removed SWE-Bench-Pro-Hard-AA from Coding Agent Index
+
+Version 1.0
+
+May 2026 - June 2026
+
+Initial release with SWE-Bench-Pro-Hard-AA (code generation), Terminal-Bench 2.0 (agentic terminal use), and SWE-Atlas-QnA (repository Q&A)
+
