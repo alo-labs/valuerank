@@ -176,7 +176,10 @@ def test_the_committed_report_table_admits_no_cell_today():
     cells = pa.evaluate(document, profile, DAY)
     assert cells and not [cell for cell in cells if cell["status"] == "passes"]
     by = {(cell["plan"], cell["modelId"]): cell for cell in cells}
-    assert by[("Google AI Pro", "gemini-4-argon")]["status"] == "fails: largest lower bound 1.35× the smallest upper bound (O86 allows 1.20×) in the current partition"
+    assert by[("Google AI Pro", "gemini-4-argon")]["status"].startswith("fails: ")
+    # O194: a report with no stated measurement window is timing-unresolved and admits nothing.
+    assert pa.exclusion({**report("u"), "windowStart": None, "windowStated": False}, PROFILE, DAY) == pa.TIMING_UNRESOLVED
+    assert pa.exclusion({**report("s"), "windowStart": None, "windowStated": True}, PROFILE, DAY) != pa.TIMING_UNRESOLVED
 
 
 def test_only_limit_and_price_changes_split_partitions():

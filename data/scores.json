@@ -9175,9 +9175,7 @@
         "status": "fails: a 5-hour figure never converts to a billing period (O82)",
         "listed": true,
         "currentPartition": 5,
-        "partitionsWithReports": [
-          2
-        ],
+        "partitionsWithReports": [],
         "configurations": [
           "claude-opus-5-5"
         ],
@@ -9198,11 +9196,11 @@
             "valueUpper": 754.0,
             "testLower": 662.0,
             "testUpper": 754.0,
-            "partition": 2,
+            "partition": null,
             "provisional": false,
             "speedMode": null,
             "stage": "S1",
-            "excluded": null,
+            "excluded": "timing unresolved: the report states no measurement window (O194)",
             "acrossResets": false,
             "acrossSplit": false,
             "inferenceRechecked": null,
@@ -9219,7 +9217,7 @@
             "provisional": true,
             "speedMode": null,
             "stage": "S1",
-            "excluded": "measured outside the report window",
+            "excluded": "timing unresolved: the report states no measurement window (O194)",
             "acrossResets": false,
             "acrossSplit": false,
             "inferenceRechecked": null,
@@ -9302,7 +9300,6 @@
         "listed": true,
         "currentPartition": 5,
         "partitionsWithReports": [
-          2,
           3,
           4
         ],
@@ -9327,11 +9324,11 @@
             "valueUpper": 2920.0,
             "testLower": 2484.0,
             "testUpper": 2920.0,
-            "partition": 2,
+            "partition": null,
             "provisional": false,
             "speedMode": null,
             "stage": "S1",
-            "excluded": null,
+            "excluded": "timing unresolved: the report states no measurement window (O194)",
             "acrossResets": false,
             "acrossSplit": false,
             "inferenceRechecked": null,
@@ -9344,11 +9341,11 @@
             "valueUpper": 2600.0,
             "testLower": 2446.0,
             "testUpper": 2600.0,
-            "partition": 2,
+            "partition": null,
             "provisional": false,
             "speedMode": null,
             "stage": "S1",
-            "excluded": null,
+            "excluded": "timing unresolved: the report states no measurement window (O194)",
             "acrossResets": false,
             "acrossSplit": false,
             "inferenceRechecked": null,
@@ -9365,7 +9362,7 @@
             "provisional": false,
             "speedMode": null,
             "stage": "S1",
-            "excluded": "measured outside the report window",
+            "excluded": "timing unresolved: the report states no measurement window (O194)",
             "acrossResets": false,
             "acrossSplit": false,
             "inferenceRechecked": null,
@@ -9382,7 +9379,7 @@
             "provisional": false,
             "speedMode": null,
             "stage": "S1",
-            "excluded": "measured outside the report window",
+            "excluded": "timing unresolved: the report states no measurement window (O194)",
             "acrossResets": false,
             "acrossSplit": false,
             "inferenceRechecked": null,
@@ -9721,9 +9718,7 @@
         "status": "fails: 0 non-provisional report(s) in the current partition",
         "listed": true,
         "currentPartition": 4,
-        "partitionsWithReports": [
-          2
-        ],
+        "partitionsWithReports": [],
         "configurations": [
           "claude-opus-5-5"
         ],
@@ -9744,11 +9739,11 @@
             "valueUpper": 830.0,
             "testLower": 750.0,
             "testUpper": 830.0,
-            "partition": 2,
+            "partition": null,
             "provisional": false,
             "speedMode": null,
             "stage": "S1",
-            "excluded": null,
+            "excluded": "timing unresolved: the report states no measurement window (O194)",
             "acrossResets": false,
             "acrossSplit": false,
             "inferenceRechecked": null,
@@ -9761,11 +9756,11 @@
             "valueUpper": 1920.0,
             "testLower": 1920.0,
             "testUpper": 1920.0,
-            "partition": 2,
+            "partition": null,
             "provisional": false,
             "speedMode": null,
             "stage": "S1",
-            "excluded": null,
+            "excluded": "timing unresolved: the report states no measurement window (O194)",
             "acrossResets": false,
             "acrossSplit": false,
             "inferenceRechecked": null,
@@ -9911,7 +9906,7 @@
             "provisional": false,
             "speedMode": null,
             "stage": "S1",
-            "excluded": "measured outside the report window",
+            "excluded": "timing unresolved: the report states no measurement window (O194)",
             "acrossResets": false,
             "acrossSplit": false,
             "inferenceRechecked": null,
@@ -10062,7 +10057,7 @@
             "provisional": false,
             "speedMode": null,
             "stage": "S1",
-            "excluded": "measured outside the report window",
+            "excluded": "timing unresolved: the report states no measurement window (O194)",
             "acrossResets": false,
             "acrossSplit": false,
             "inferenceRechecked": null,
@@ -10164,7 +10159,7 @@
             "provisional": false,
             "speedMode": null,
             "stage": "S1",
-            "excluded": "measured outside the report window",
+            "excluded": "timing unresolved: the report states no measurement window (O194)",
             "acrossResets": false,
             "acrossSplit": false,
             "inferenceRechecked": null,
@@ -10369,12 +10364,10 @@
         "modelId": "Gemini 4 Argon",
         "unit": "week",
         "region": "global",
-        "status": "fails: largest lower bound 1.35× the smallest upper bound (O86 allows 1.20×) in the current partition",
+        "status": "fails: 0 non-provisional report(s) in the current partition",
         "listed": true,
         "currentPartition": 0,
-        "partitionsWithReports": [
-          0
-        ],
+        "partitionsWithReports": [],
         "configurations": [
           "gemini-4-argon"
         ],
@@ -10386,10 +10379,7 @@
         "value": null,
         "monthlyUsd": null,
         "multiple": null,
-        "range": [
-          7.84,
-          13.4
-        ],
+        "range": null,
         "feasibleRange": null,
         "reports": [
           {
@@ -10399,11 +10389,11 @@
             "valueUpper": 9.04,
             "testLower": 7.84,
             "testUpper": 9.04,
-            "partition": 0,
+            "partition": null,
             "provisional": true,
             "speedMode": null,
             "stage": "S2",
-            "excluded": null,
+            "excluded": "timing unresolved: the report states no measurement window (O194)",
             "acrossResets": false,
             "acrossSplit": false,
             "inferenceRechecked": null,
@@ -10416,11 +10406,11 @@
             "valueUpper": 8.47,
             "testLower": 8.47,
             "testUpper": 8.47,
-            "partition": 0,
+            "partition": null,
             "provisional": false,
             "speedMode": null,
             "stage": "S1",
-            "excluded": null,
+            "excluded": "timing unresolved: the report states no measurement window (O194)",
             "acrossResets": false,
             "acrossSplit": false,
             "inferenceRechecked": null,
@@ -10433,21 +10423,18 @@
             "valueUpper": 13.4,
             "testLower": 11.4,
             "testUpper": 13.4,
-            "partition": 0,
+            "partition": null,
             "provisional": false,
             "speedMode": null,
             "stage": "S1",
-            "excluded": null,
+            "excluded": "timing unresolved: the report states no measurement window (O194)",
             "acrossResets": false,
             "acrossSplit": false,
             "inferenceRechecked": null,
             "archive": "not archived: recorded before O165 without a hashed copy"
           }
         ],
-        "allReportsBand": [
-          9.5,
-          10.164
-        ],
+        "allReportsBand": null,
         "admittingObservers": [],
         "discordantObservers": [],
         "searchedThrough": "2026-11-05",
@@ -10469,9 +10456,7 @@
         "status": "fails: a 5-hour figure never converts to a billing period (O82)",
         "listed": true,
         "currentPartition": 0,
-        "partitionsWithReports": [
-          0
-        ],
+        "partitionsWithReports": [],
         "configurations": [
           "gemini-4-argon"
         ],
@@ -10481,10 +10466,7 @@
         "value": null,
         "monthlyUsd": null,
         "multiple": null,
-        "range": [
-          49.2,
-          50.0
-        ],
+        "range": null,
         "feasibleRange": null,
         "reports": [
           {
@@ -10494,21 +10476,18 @@
             "valueUpper": 50.0,
             "testLower": 49.2,
             "testUpper": 50.0,
-            "partition": 0,
+            "partition": null,
             "provisional": false,
             "speedMode": null,
             "stage": "S2",
-            "excluded": null,
+            "excluded": "timing unresolved: the report states no measurement window (O194)",
             "acrossResets": false,
             "acrossSplit": false,
             "inferenceRechecked": null,
             "archive": null
           }
         ],
-        "allReportsBand": [
-          41.00000000000001,
-          60.0
-        ],
+        "allReportsBand": null,
         "admittingObservers": [],
         "discordantObservers": [],
         "searchedThrough": "2026-11-05",
@@ -10527,12 +10506,10 @@
         "modelId": "Gemini 4 Argon",
         "unit": "week",
         "region": "global",
-        "status": "fails: 1 non-provisional report(s) in the current partition",
+        "status": "fails: 0 non-provisional report(s) in the current partition",
         "listed": true,
         "currentPartition": 0,
-        "partitionsWithReports": [
-          0
-        ],
+        "partitionsWithReports": [],
         "configurations": [
           "gemini-4-argon"
         ],
@@ -10542,10 +10519,7 @@
         "value": null,
         "monthlyUsd": null,
         "multiple": null,
-        "range": [
-          199.9,
-          200.1
-        ],
+        "range": null,
         "feasibleRange": null,
         "reports": [
           {
@@ -10555,21 +10529,18 @@
             "valueUpper": 200.1,
             "testLower": 199.9,
             "testUpper": 200.1,
-            "partition": 0,
+            "partition": null,
             "provisional": false,
             "speedMode": null,
             "stage": "S2",
-            "excluded": null,
+            "excluded": "timing unresolved: the report states no measurement window (O194)",
             "acrossResets": false,
             "acrossSplit": false,
             "inferenceRechecked": null,
             "archive": null
           }
         ],
-        "allReportsBand": [
-          166.58333333333334,
-          240.11999999999998
-        ],
+        "allReportsBand": null,
         "admittingObservers": [],
         "discordantObservers": [],
         "searchedThrough": "2026-11-05",
@@ -10673,7 +10644,7 @@
             "provisional": false,
             "speedMode": null,
             "stage": "S2",
-            "excluded": "spans a partition split",
+            "excluded": "timing unresolved: the report states no measurement window (O194)",
             "acrossResets": false,
             "acrossSplit": false,
             "inferenceRechecked": null,
@@ -10875,9 +10846,7 @@
         "status": "fails: a 5-hour figure never converts to a billing period (O82)",
         "listed": false,
         "currentPartition": 1,
-        "partitionsWithReports": [
-          0
-        ],
+        "partitionsWithReports": [],
         "configurations": [
           "kimi-k3-1-pro"
         ],
@@ -10931,11 +10900,11 @@
             "valueUpper": 12.4,
             "testLower": 12.4,
             "testUpper": 12.4,
-            "partition": 0,
+            "partition": null,
             "provisional": false,
             "speedMode": null,
             "stage": "S1",
-            "excluded": null,
+            "excluded": "timing unresolved: the report states no measurement window (O194)",
             "acrossResets": false,
             "acrossSplit": false,
             "inferenceRechecked": null,
@@ -10969,7 +10938,7 @@
             "provisional": false,
             "speedMode": null,
             "stage": "S2",
-            "excluded": "spans a partition split",
+            "excluded": "timing unresolved: the report states no measurement window (O194)",
             "acrossResets": false,
             "acrossSplit": false,
             "inferenceRechecked": null,
@@ -11162,7 +11131,7 @@
             "provisional": false,
             "speedMode": null,
             "stage": "S2",
-            "excluded": "spans a partition split",
+            "excluded": "timing unresolved: the report states no measurement window (O194)",
             "acrossResets": false,
             "acrossSplit": false,
             "inferenceRechecked": null,
@@ -11268,7 +11237,7 @@
             "provisional": false,
             "speedMode": null,
             "stage": "S1",
-            "excluded": "spans a partition split",
+            "excluded": "timing unresolved: the report states no measurement window (O194)",
             "acrossResets": false,
             "acrossSplit": false,
             "inferenceRechecked": null,
@@ -11321,7 +11290,7 @@
             "provisional": false,
             "speedMode": null,
             "stage": "S2",
-            "excluded": "spans a partition split",
+            "excluded": "timing unresolved: the report states no measurement window (O194)",
             "acrossResets": false,
             "acrossSplit": false,
             "inferenceRechecked": null,
@@ -11374,7 +11343,7 @@
             "provisional": false,
             "speedMode": null,
             "stage": "S2",
-            "excluded": "spans a partition split",
+            "excluded": "timing unresolved: the report states no measurement window (O194)",
             "acrossResets": false,
             "acrossSplit": false,
             "inferenceRechecked": null,
@@ -11427,7 +11396,7 @@
             "provisional": false,
             "speedMode": null,
             "stage": "S2",
-            "excluded": "spans a partition split",
+            "excluded": "timing unresolved: the report states no measurement window (O194)",
             "acrossResets": false,
             "acrossSplit": false,
             "inferenceRechecked": null,
@@ -11656,7 +11625,7 @@
             "provisional": true,
             "speedMode": null,
             "stage": "S1",
-            "excluded": "measured outside the report window",
+            "excluded": "timing unresolved: the report states no measurement window (O194)",
             "acrossResets": false,
             "acrossSplit": false,
             "inferenceRechecked": null,
@@ -11685,9 +11654,7 @@
         "status": "fails: 0 non-provisional report(s) in the current partition",
         "listed": false,
         "currentPartition": 0,
-        "partitionsWithReports": [
-          0
-        ],
+        "partitionsWithReports": [],
         "configurations": [
           "minimax-m3-1-flash"
         ],
@@ -11697,10 +11664,7 @@
         "value": null,
         "monthlyUsd": null,
         "multiple": null,
-        "range": [
-          60.0,
-          127.0
-        ],
+        "range": null,
         "feasibleRange": null,
         "reports": [
           {
@@ -11710,21 +11674,18 @@
             "valueUpper": 127.0,
             "testLower": 60.0,
             "testUpper": 127.0,
-            "partition": 0,
+            "partition": null,
             "provisional": true,
             "speedMode": null,
             "stage": "S1",
-            "excluded": null,
+            "excluded": "timing unresolved: the report states no measurement window (O194)",
             "acrossResets": false,
             "acrossSplit": false,
             "inferenceRechecked": null,
             "archive": "not archived: recorded before O165 without a hashed copy"
           }
         ],
-        "allReportsBand": [
-          50.0,
-          152.4
-        ],
+        "allReportsBand": null,
         "admittingObservers": [],
         "discordantObservers": [],
         "searchedThrough": null,
@@ -11746,9 +11707,7 @@
         "status": "fails: a 5-hour figure never converts to a billing period (O82)",
         "listed": false,
         "currentPartition": 0,
-        "partitionsWithReports": [
-          0
-        ],
+        "partitionsWithReports": [],
         "configurations": [
           "minimax-m3-1-flash"
         ],
@@ -11758,10 +11717,7 @@
         "value": null,
         "monthlyUsd": null,
         "multiple": null,
-        "range": [
-          3.5,
-          13.5
-        ],
+        "range": null,
         "feasibleRange": null,
         "reports": [
           {
@@ -11771,21 +11727,18 @@
             "valueUpper": 13.5,
             "testLower": 3.5,
             "testUpper": 13.5,
-            "partition": 0,
+            "partition": null,
             "provisional": true,
             "speedMode": null,
             "stage": "S1",
-            "excluded": null,
+            "excluded": "timing unresolved: the report states no measurement window (O194)",
             "acrossResets": false,
             "acrossSplit": false,
             "inferenceRechecked": null,
             "archive": "not archived: recorded before O165 without a hashed copy"
           }
         ],
-        "allReportsBand": [
-          2.916666666666667,
-          16.2
-        ],
+        "allReportsBand": null,
         "admittingObservers": [],
         "discordantObservers": [],
         "searchedThrough": null,
@@ -11990,7 +11943,7 @@
             "provisional": false,
             "speedMode": null,
             "stage": "S1",
-            "excluded": "measured outside the report window",
+            "excluded": "timing unresolved: the report states no measurement window (O194)",
             "acrossResets": false,
             "acrossSplit": false,
             "inferenceRechecked": null,
@@ -12114,7 +12067,7 @@
             "provisional": false,
             "speedMode": null,
             "stage": "S1",
-            "excluded": "measured outside the report window",
+            "excluded": "timing unresolved: the report states no measurement window (O194)",
             "acrossResets": false,
             "acrossSplit": false,
             "inferenceRechecked": null,
@@ -12241,7 +12194,7 @@
             "provisional": false,
             "speedMode": null,
             "stage": "S1",
-            "excluded": "spans a partition split",
+            "excluded": "timing unresolved: the report states no measurement window (O194)",
             "acrossResets": false,
             "acrossSplit": false,
             "inferenceRechecked": null,
@@ -12552,7 +12505,7 @@
             "provisional": false,
             "speedMode": null,
             "stage": "S1",
-            "excluded": "measured on a provider-acknowledged accounting-fault day",
+            "excluded": "timing unresolved: the report states no measurement window (O194)",
             "acrossResets": true,
             "acrossSplit": false,
             "inferenceRechecked": null,
@@ -12569,7 +12522,7 @@
             "provisional": false,
             "speedMode": "fast",
             "stage": "S1",
-            "excluded": "measured on a provider-acknowledged accounting-fault day",
+            "excluded": "timing unresolved: the report states no measurement window (O194)",
             "acrossResets": true,
             "acrossSplit": false,
             "inferenceRechecked": null,
@@ -12836,7 +12789,7 @@
             "provisional": false,
             "speedMode": "fast",
             "stage": "S1",
-            "excluded": "measured on a provider-acknowledged accounting-fault day",
+            "excluded": "timing unresolved: the report states no measurement window (O194)",
             "acrossResets": true,
             "acrossSplit": false,
             "inferenceRechecked": null,
@@ -12915,12 +12868,10 @@
         "modelId": "MiMo-V2.6-Pro",
         "unit": "month",
         "region": "global",
-        "status": "fails: 1 non-provisional report(s) in the current partition",
+        "status": "fails: 0 non-provisional report(s) in the current partition",
         "listed": true,
         "currentPartition": 0,
-        "partitionsWithReports": [
-          0
-        ],
+        "partitionsWithReports": [],
         "configurations": [
           "mimo-v2-6-pro"
         ],
@@ -12930,10 +12881,7 @@
         "value": null,
         "monthlyUsd": null,
         "multiple": null,
-        "range": [
-          4.6,
-          4.6
-        ],
+        "range": null,
         "feasibleRange": null,
         "reports": [
           {
@@ -12943,21 +12891,18 @@
             "valueUpper": 4.6,
             "testLower": 4.6,
             "testUpper": 4.6,
-            "partition": 0,
+            "partition": null,
             "provisional": false,
             "speedMode": null,
             "stage": "S1",
-            "excluded": null,
+            "excluded": "timing unresolved: the report states no measurement window (O194)",
             "acrossResets": false,
             "acrossSplit": false,
             "inferenceRechecked": null,
             "archive": "not archived: recorded before O165 without a hashed copy"
           }
         ],
-        "allReportsBand": [
-          3.833333333333333,
-          5.52
-        ],
+        "allReportsBand": null,
         "admittingObservers": [],
         "discordantObservers": [],
         "searchedThrough": "2026-11-05",
@@ -36960,9 +36905,7 @@
           "status": "fails: a 5-hour figure never converts to a billing period (O82)",
           "listed": true,
           "currentPartition": 5,
-          "partitionsWithReports": [
-            2
-          ],
+          "partitionsWithReports": [],
           "configurations": [
             "claude-opus-5-5"
           ],
@@ -36983,11 +36926,11 @@
               "valueUpper": 754.0,
               "testLower": 662.0,
               "testUpper": 754.0,
-              "partition": 2,
+              "partition": null,
               "provisional": false,
               "speedMode": null,
               "stage": "S1",
-              "excluded": null,
+              "excluded": "timing unresolved: the report states no measurement window (O194)",
               "acrossResets": false,
               "acrossSplit": false,
               "inferenceRechecked": null,
@@ -37004,7 +36947,7 @@
               "provisional": true,
               "speedMode": null,
               "stage": "S1",
-              "excluded": "measured outside the report window",
+              "excluded": "timing unresolved: the report states no measurement window (O194)",
               "acrossResets": false,
               "acrossSplit": false,
               "inferenceRechecked": null,
@@ -37087,7 +37030,6 @@
           "listed": true,
           "currentPartition": 5,
           "partitionsWithReports": [
-            2,
             3,
             4
           ],
@@ -37112,11 +37054,11 @@
               "valueUpper": 2920.0,
               "testLower": 2484.0,
               "testUpper": 2920.0,
-              "partition": 2,
+              "partition": null,
               "provisional": false,
               "speedMode": null,
               "stage": "S1",
-              "excluded": null,
+              "excluded": "timing unresolved: the report states no measurement window (O194)",
               "acrossResets": false,
               "acrossSplit": false,
               "inferenceRechecked": null,
@@ -37129,11 +37071,11 @@
               "valueUpper": 2600.0,
               "testLower": 2446.0,
               "testUpper": 2600.0,
-              "partition": 2,
+              "partition": null,
               "provisional": false,
               "speedMode": null,
               "stage": "S1",
-              "excluded": null,
+              "excluded": "timing unresolved: the report states no measurement window (O194)",
               "acrossResets": false,
               "acrossSplit": false,
               "inferenceRechecked": null,
@@ -37150,7 +37092,7 @@
               "provisional": false,
               "speedMode": null,
               "stage": "S1",
-              "excluded": "measured outside the report window",
+              "excluded": "timing unresolved: the report states no measurement window (O194)",
               "acrossResets": false,
               "acrossSplit": false,
               "inferenceRechecked": null,
@@ -37167,7 +37109,7 @@
               "provisional": false,
               "speedMode": null,
               "stage": "S1",
-              "excluded": "measured outside the report window",
+              "excluded": "timing unresolved: the report states no measurement window (O194)",
               "acrossResets": false,
               "acrossSplit": false,
               "inferenceRechecked": null,
@@ -37506,9 +37448,7 @@
           "status": "fails: 0 non-provisional report(s) in the current partition",
           "listed": true,
           "currentPartition": 4,
-          "partitionsWithReports": [
-            2
-          ],
+          "partitionsWithReports": [],
           "configurations": [
             "claude-opus-5-5"
           ],
@@ -37529,11 +37469,11 @@
               "valueUpper": 830.0,
               "testLower": 750.0,
               "testUpper": 830.0,
-              "partition": 2,
+              "partition": null,
               "provisional": false,
               "speedMode": null,
               "stage": "S1",
-              "excluded": null,
+              "excluded": "timing unresolved: the report states no measurement window (O194)",
               "acrossResets": false,
               "acrossSplit": false,
               "inferenceRechecked": null,
@@ -37546,11 +37486,11 @@
               "valueUpper": 1920.0,
               "testLower": 1920.0,
               "testUpper": 1920.0,
-              "partition": 2,
+              "partition": null,
               "provisional": false,
               "speedMode": null,
               "stage": "S1",
-              "excluded": null,
+              "excluded": "timing unresolved: the report states no measurement window (O194)",
               "acrossResets": false,
               "acrossSplit": false,
               "inferenceRechecked": null,
@@ -37696,7 +37636,7 @@
               "provisional": false,
               "speedMode": null,
               "stage": "S1",
-              "excluded": "measured outside the report window",
+              "excluded": "timing unresolved: the report states no measurement window (O194)",
               "acrossResets": false,
               "acrossSplit": false,
               "inferenceRechecked": null,
@@ -37847,7 +37787,7 @@
               "provisional": false,
               "speedMode": null,
               "stage": "S1",
-              "excluded": "measured outside the report window",
+              "excluded": "timing unresolved: the report states no measurement window (O194)",
               "acrossResets": false,
               "acrossSplit": false,
               "inferenceRechecked": null,
@@ -37949,7 +37889,7 @@
               "provisional": false,
               "speedMode": null,
               "stage": "S1",
-              "excluded": "measured outside the report window",
+              "excluded": "timing unresolved: the report states no measurement window (O194)",
               "acrossResets": false,
               "acrossSplit": false,
               "inferenceRechecked": null,
@@ -38154,12 +38094,10 @@
           "modelId": "Gemini 4 Argon",
           "unit": "week",
           "region": "global",
-          "status": "fails: largest lower bound 1.35× the smallest upper bound (O86 allows 1.20×) in the current partition",
+          "status": "fails: 0 non-provisional report(s) in the current partition",
           "listed": true,
           "currentPartition": 0,
-          "partitionsWithReports": [
-            0
-          ],
+          "partitionsWithReports": [],
           "configurations": [
             "gemini-4-argon"
           ],
@@ -38171,10 +38109,7 @@
           "value": null,
           "monthlyUsd": null,
           "multiple": null,
-          "range": [
-            7.84,
-            13.4
-          ],
+          "range": null,
           "feasibleRange": null,
           "reports": [
             {
@@ -38184,11 +38119,11 @@
               "valueUpper": 9.04,
               "testLower": 7.84,
               "testUpper": 9.04,
-              "partition": 0,
+              "partition": null,
               "provisional": true,
               "speedMode": null,
               "stage": "S2",
-              "excluded": null,
+              "excluded": "timing unresolved: the report states no measurement window (O194)",
               "acrossResets": false,
               "acrossSplit": false,
               "inferenceRechecked": null,
@@ -38201,11 +38136,11 @@
               "valueUpper": 8.47,
               "testLower": 8.47,
               "testUpper": 8.47,
-              "partition": 0,
+              "partition": null,
               "provisional": false,
               "speedMode": null,
               "stage": "S1",
-              "excluded": null,
+              "excluded": "timing unresolved: the report states no measurement window (O194)",
               "acrossResets": false,
               "acrossSplit": false,
               "inferenceRechecked": null,
@@ -38218,21 +38153,18 @@
               "valueUpper": 13.4,
               "testLower": 11.4,
               "testUpper": 13.4,
-              "partition": 0,
+              "partition": null,
               "provisional": false,
               "speedMode": null,
               "stage": "S1",
-              "excluded": null,
+              "excluded": "timing unresolved: the report states no measurement window (O194)",
               "acrossResets": false,
               "acrossSplit": false,
               "inferenceRechecked": null,
               "archive": "not archived: recorded before O165 without a hashed copy"
             }
           ],
-          "allReportsBand": [
-            9.5,
-            10.164
-          ],
+          "allReportsBand": null,
           "admittingObservers": [],
           "discordantObservers": [],
           "searchedThrough": "2026-11-05",
@@ -38254,9 +38186,7 @@
           "status": "fails: a 5-hour figure never converts to a billing period (O82)",
           "listed": true,
           "currentPartition": 0,
-          "partitionsWithReports": [
-            0
-          ],
+          "partitionsWithReports": [],
           "configurations": [
             "gemini-4-argon"
           ],
@@ -38266,10 +38196,7 @@
           "value": null,
           "monthlyUsd": null,
           "multiple": null,
-          "range": [
-            49.2,
-            50.0
-          ],
+          "range": null,
           "feasibleRange": null,
           "reports": [
             {
@@ -38279,21 +38206,18 @@
               "valueUpper": 50.0,
               "testLower": 49.2,
               "testUpper": 50.0,
-              "partition": 0,
+              "partition": null,
               "provisional": false,
               "speedMode": null,
               "stage": "S2",
-              "excluded": null,
+              "excluded": "timing unresolved: the report states no measurement window (O194)",
               "acrossResets": false,
               "acrossSplit": false,
               "inferenceRechecked": null,
               "archive": null
             }
           ],
-          "allReportsBand": [
-            41.00000000000001,
-            60.0
-          ],
+          "allReportsBand": null,
           "admittingObservers": [],
           "discordantObservers": [],
           "searchedThrough": "2026-11-05",
@@ -38312,12 +38236,10 @@
           "modelId": "Gemini 4 Argon",
           "unit": "week",
           "region": "global",
-          "status": "fails: 1 non-provisional report(s) in the current partition",
+          "status": "fails: 0 non-provisional report(s) in the current partition",
           "listed": true,
           "currentPartition": 0,
-          "partitionsWithReports": [
-            0
-          ],
+          "partitionsWithReports": [],
           "configurations": [
             "gemini-4-argon"
           ],
@@ -38327,10 +38249,7 @@
           "value": null,
           "monthlyUsd": null,
           "multiple": null,
-          "range": [
-            199.9,
-            200.1
-          ],
+          "range": null,
           "feasibleRange": null,
           "reports": [
             {
@@ -38340,21 +38259,18 @@
               "valueUpper": 200.1,
               "testLower": 199.9,
               "testUpper": 200.1,
-              "partition": 0,
+              "partition": null,
               "provisional": false,
               "speedMode": null,
               "stage": "S2",
-              "excluded": null,
+              "excluded": "timing unresolved: the report states no measurement window (O194)",
               "acrossResets": false,
               "acrossSplit": false,
               "inferenceRechecked": null,
               "archive": null
             }
           ],
-          "allReportsBand": [
-            166.58333333333334,
-            240.11999999999998
-          ],
+          "allReportsBand": null,
           "admittingObservers": [],
           "discordantObservers": [],
           "searchedThrough": "2026-11-05",
@@ -38458,7 +38374,7 @@
               "provisional": false,
               "speedMode": null,
               "stage": "S2",
-              "excluded": "spans a partition split",
+              "excluded": "timing unresolved: the report states no measurement window (O194)",
               "acrossResets": false,
               "acrossSplit": false,
               "inferenceRechecked": null,
@@ -38660,9 +38576,7 @@
           "status": "fails: a 5-hour figure never converts to a billing period (O82)",
           "listed": false,
           "currentPartition": 1,
-          "partitionsWithReports": [
-            0
-          ],
+          "partitionsWithReports": [],
           "configurations": [
             "kimi-k3-1-pro"
           ],
@@ -38716,11 +38630,11 @@
               "valueUpper": 12.4,
               "testLower": 12.4,
               "testUpper": 12.4,
-              "partition": 0,
+              "partition": null,
               "provisional": false,
               "speedMode": null,
               "stage": "S1",
-              "excluded": null,
+              "excluded": "timing unresolved: the report states no measurement window (O194)",
               "acrossResets": false,
               "acrossSplit": false,
               "inferenceRechecked": null,
@@ -38754,7 +38668,7 @@
               "provisional": false,
               "speedMode": null,
               "stage": "S2",
-              "excluded": "spans a partition split",
+              "excluded": "timing unresolved: the report states no measurement window (O194)",
               "acrossResets": false,
               "acrossSplit": false,
               "inferenceRechecked": null,
@@ -38947,7 +38861,7 @@
               "provisional": false,
               "speedMode": null,
               "stage": "S2",
-              "excluded": "spans a partition split",
+              "excluded": "timing unresolved: the report states no measurement window (O194)",
               "acrossResets": false,
               "acrossSplit": false,
               "inferenceRechecked": null,
@@ -39053,7 +38967,7 @@
               "provisional": false,
               "speedMode": null,
               "stage": "S1",
-              "excluded": "spans a partition split",
+              "excluded": "timing unresolved: the report states no measurement window (O194)",
               "acrossResets": false,
               "acrossSplit": false,
               "inferenceRechecked": null,
@@ -39106,7 +39020,7 @@
               "provisional": false,
               "speedMode": null,
               "stage": "S2",
-              "excluded": "spans a partition split",
+              "excluded": "timing unresolved: the report states no measurement window (O194)",
               "acrossResets": false,
               "acrossSplit": false,
               "inferenceRechecked": null,
@@ -39159,7 +39073,7 @@
               "provisional": false,
               "speedMode": null,
               "stage": "S2",
-              "excluded": "spans a partition split",
+              "excluded": "timing unresolved: the report states no measurement window (O194)",
               "acrossResets": false,
               "acrossSplit": false,
               "inferenceRechecked": null,
@@ -39212,7 +39126,7 @@
               "provisional": false,
               "speedMode": null,
               "stage": "S2",
-              "excluded": "spans a partition split",
+              "excluded": "timing unresolved: the report states no measurement window (O194)",
               "acrossResets": false,
               "acrossSplit": false,
               "inferenceRechecked": null,
@@ -39441,7 +39355,7 @@
               "provisional": true,
               "speedMode": null,
               "stage": "S1",
-              "excluded": "measured outside the report window",
+              "excluded": "timing unresolved: the report states no measurement window (O194)",
               "acrossResets": false,
               "acrossSplit": false,
               "inferenceRechecked": null,
@@ -39470,9 +39384,7 @@
           "status": "fails: 0 non-provisional report(s) in the current partition",
           "listed": false,
           "currentPartition": 0,
-          "partitionsWithReports": [
-            0
-          ],
+          "partitionsWithReports": [],
           "configurations": [
             "minimax-m3-1-flash"
           ],
@@ -39482,10 +39394,7 @@
           "value": null,
           "monthlyUsd": null,
           "multiple": null,
-          "range": [
-            60.0,
-            127.0
-          ],
+          "range": null,
           "feasibleRange": null,
           "reports": [
             {
@@ -39495,21 +39404,18 @@
               "valueUpper": 127.0,
               "testLower": 60.0,
               "testUpper": 127.0,
-              "partition": 0,
+              "partition": null,
               "provisional": true,
               "speedMode": null,
               "stage": "S1",
-              "excluded": null,
+              "excluded": "timing unresolved: the report states no measurement window (O194)",
               "acrossResets": false,
               "acrossSplit": false,
               "inferenceRechecked": null,
               "archive": "not archived: recorded before O165 without a hashed copy"
             }
           ],
-          "allReportsBand": [
-            50.0,
-            152.4
-          ],
+          "allReportsBand": null,
           "admittingObservers": [],
           "discordantObservers": [],
           "searchedThrough": null,
@@ -39531,9 +39437,7 @@
           "status": "fails: a 5-hour figure never converts to a billing period (O82)",
           "listed": false,
           "currentPartition": 0,
-          "partitionsWithReports": [
-            0
-          ],
+          "partitionsWithReports": [],
           "configurations": [
             "minimax-m3-1-flash"
           ],
@@ -39543,10 +39447,7 @@
           "value": null,
           "monthlyUsd": null,
           "multiple": null,
-          "range": [
-            3.5,
-            13.5
-          ],
+          "range": null,
           "feasibleRange": null,
           "reports": [
             {
@@ -39556,21 +39457,18 @@
               "valueUpper": 13.5,
               "testLower": 3.5,
               "testUpper": 13.5,
-              "partition": 0,
+              "partition": null,
               "provisional": true,
               "speedMode": null,
               "stage": "S1",
-              "excluded": null,
+              "excluded": "timing unresolved: the report states no measurement window (O194)",
               "acrossResets": false,
               "acrossSplit": false,
               "inferenceRechecked": null,
               "archive": "not archived: recorded before O165 without a hashed copy"
             }
           ],
-          "allReportsBand": [
-            2.916666666666667,
-            16.2
-          ],
+          "allReportsBand": null,
           "admittingObservers": [],
           "discordantObservers": [],
           "searchedThrough": null,
@@ -39775,7 +39673,7 @@
               "provisional": false,
               "speedMode": null,
               "stage": "S1",
-              "excluded": "measured outside the report window",
+              "excluded": "timing unresolved: the report states no measurement window (O194)",
               "acrossResets": false,
               "acrossSplit": false,
               "inferenceRechecked": null,
@@ -39899,7 +39797,7 @@
               "provisional": false,
               "speedMode": null,
               "stage": "S1",
-              "excluded": "measured outside the report window",
+              "excluded": "timing unresolved: the report states no measurement window (O194)",
               "acrossResets": false,
               "acrossSplit": false,
               "inferenceRechecked": null,
@@ -40026,7 +39924,7 @@
               "provisional": false,
               "speedMode": null,
               "stage": "S1",
-              "excluded": "spans a partition split",
+              "excluded": "timing unresolved: the report states no measurement window (O194)",
               "acrossResets": false,
               "acrossSplit": false,
               "inferenceRechecked": null,
@@ -40337,7 +40235,7 @@
               "provisional": false,
               "speedMode": null,
               "stage": "S1",
-              "excluded": "measured on a provider-acknowledged accounting-fault day",
+              "excluded": "timing unresolved: the report states no measurement window (O194)",
               "acrossResets": true,
               "acrossSplit": false,
               "inferenceRechecked": null,
@@ -40354,7 +40252,7 @@
               "provisional": false,
               "speedMode": "fast",
               "stage": "S1",
-              "excluded": "measured on a provider-acknowledged accounting-fault day",
+              "excluded": "timing unresolved: the report states no measurement window (O194)",
               "acrossResets": true,
               "acrossSplit": false,
               "inferenceRechecked": null,
@@ -40621,7 +40519,7 @@
               "provisional": false,
               "speedMode": "fast",
               "stage": "S1",
-              "excluded": "measured on a provider-acknowledged accounting-fault day",
+              "excluded": "timing unresolved: the report states no measurement window (O194)",
               "acrossResets": true,
               "acrossSplit": false,
               "inferenceRechecked": null,
@@ -40700,12 +40598,10 @@
           "modelId": "MiMo-V2.6-Pro",
           "unit": "month",
           "region": "global",
-          "status": "fails: 1 non-provisional report(s) in the current partition",
+          "status": "fails: 0 non-provisional report(s) in the current partition",
           "listed": true,
           "currentPartition": 0,
-          "partitionsWithReports": [
-            0
-          ],
+          "partitionsWithReports": [],
           "configurations": [
             "mimo-v2-6-pro"
           ],
@@ -40715,10 +40611,7 @@
           "value": null,
           "monthlyUsd": null,
           "multiple": null,
-          "range": [
-            4.6,
-            4.6
-          ],
+          "range": null,
           "feasibleRange": null,
           "reports": [
             {
@@ -40728,21 +40621,18 @@
               "valueUpper": 4.6,
               "testLower": 4.6,
               "testUpper": 4.6,
-              "partition": 0,
+              "partition": null,
               "provisional": false,
               "speedMode": null,
               "stage": "S1",
-              "excluded": null,
+              "excluded": "timing unresolved: the report states no measurement window (O194)",
               "acrossResets": false,
               "acrossSplit": false,
               "inferenceRechecked": null,
               "archive": "not archived: recorded before O165 without a hashed copy"
             }
           ],
-          "allReportsBand": [
-            3.833333333333333,
-            5.52
-          ],
+          "allReportsBand": null,
           "admittingObservers": [],
           "discordantObservers": [],
           "searchedThrough": "2026-11-05",
@@ -81957,9 +81847,7 @@
           "status": "fails: a 5-hour figure never converts to a billing period (O82)",
           "listed": true,
           "currentPartition": 5,
-          "partitionsWithReports": [
-            2
-          ],
+          "partitionsWithReports": [],
           "configurations": [
             "claude-opus-5-5"
           ],
@@ -81980,11 +81868,11 @@
               "valueUpper": 754.0,
               "testLower": 662.0,
               "testUpper": 754.0,
-              "partition": 2,
+              "partition": null,
               "provisional": false,
               "speedMode": null,
               "stage": "S1",
-              "excluded": null,
+              "excluded": "timing unresolved: the report states no measurement window (O194)",
               "acrossResets": false,
               "acrossSplit": false,
               "inferenceRechecked": null,
@@ -82001,7 +81889,7 @@
               "provisional": true,
               "speedMode": null,
               "stage": "S1",
-              "excluded": "measured outside the report window",
+              "excluded": "timing unresolved: the report states no measurement window (O194)",
               "acrossResets": false,
               "acrossSplit": false,
               "inferenceRechecked": null,
@@ -82084,7 +81972,6 @@
           "listed": true,
           "currentPartition": 5,
           "partitionsWithReports": [
-            2,
             3,
             4
           ],
@@ -82109,11 +81996,11 @@
               "valueUpper": 2920.0,
               "testLower": 2484.0,
               "testUpper": 2920.0,
-              "partition": 2,
+              "partition": null,
               "provisional": false,
               "speedMode": null,
               "stage": "S1",
-              "excluded": null,
+              "excluded": "timing unresolved: the report states no measurement window (O194)",
               "acrossResets": false,
               "acrossSplit": false,
               "inferenceRechecked": null,
@@ -82126,11 +82013,11 @@
               "valueUpper": 2600.0,
               "testLower": 2446.0,
               "testUpper": 2600.0,
-              "partition": 2,
+              "partition": null,
               "provisional": false,
               "speedMode": null,
               "stage": "S1",
-              "excluded": null,
+              "excluded": "timing unresolved: the report states no measurement window (O194)",
               "acrossResets": false,
               "acrossSplit": false,
               "inferenceRechecked": null,
@@ -82147,7 +82034,7 @@
               "provisional": false,
               "speedMode": null,
               "stage": "S1",
-              "excluded": "measured outside the report window",
+              "excluded": "timing unresolved: the report states no measurement window (O194)",
               "acrossResets": false,
               "acrossSplit": false,
               "inferenceRechecked": null,
@@ -82164,7 +82051,7 @@
               "provisional": false,
               "speedMode": null,
               "stage": "S1",
-              "excluded": "measured outside the report window",
+              "excluded": "timing unresolved: the report states no measurement window (O194)",
               "acrossResets": false,
               "acrossSplit": false,
               "inferenceRechecked": null,
@@ -82503,9 +82390,7 @@
           "status": "fails: 0 non-provisional report(s) in the current partition",
           "listed": true,
           "currentPartition": 4,
-          "partitionsWithReports": [
-            2
-          ],
+          "partitionsWithReports": [],
           "configurations": [
             "claude-opus-5-5"
           ],
@@ -82526,11 +82411,11 @@
               "valueUpper": 830.0,
               "testLower": 750.0,
               "testUpper": 830.0,
-              "partition": 2,
+              "partition": null,
               "provisional": false,
               "speedMode": null,
               "stage": "S1",
-              "excluded": null,
+              "excluded": "timing unresolved: the report states no measurement window (O194)",
               "acrossResets": false,
               "acrossSplit": false,
               "inferenceRechecked": null,
@@ -82543,11 +82428,11 @@
               "valueUpper": 1920.0,
               "testLower": 1920.0,
               "testUpper": 1920.0,
-              "partition": 2,
+              "partition": null,
               "provisional": false,
               "speedMode": null,
               "stage": "S1",
-              "excluded": null,
+              "excluded": "timing unresolved: the report states no measurement window (O194)",
               "acrossResets": false,
               "acrossSplit": false,
               "inferenceRechecked": null,
@@ -82693,7 +82578,7 @@
               "provisional": false,
               "speedMode": null,
               "stage": "S1",
-              "excluded": "measured outside the report window",
+              "excluded": "timing unresolved: the report states no measurement window (O194)",
               "acrossResets": false,
               "acrossSplit": false,
               "inferenceRechecked": null,
@@ -82844,7 +82729,7 @@
               "provisional": false,
               "speedMode": null,
               "stage": "S1",
-              "excluded": "measured outside the report window",
+              "excluded": "timing unresolved: the report states no measurement window (O194)",
               "acrossResets": false,
               "acrossSplit": false,
               "inferenceRechecked": null,
@@ -82946,7 +82831,7 @@
               "provisional": false,
               "speedMode": null,
               "stage": "S1",
-              "excluded": "measured outside the report window",
+              "excluded": "timing unresolved: the report states no measurement window (O194)",
               "acrossResets": false,
               "acrossSplit": false,
               "inferenceRechecked": null,
@@ -83151,12 +83036,10 @@
           "modelId": "Gemini 4 Argon",
           "unit": "week",
           "region": "global",
-          "status": "fails: largest lower bound 1.35× the smallest upper bound (O86 allows 1.20×) in the current partition",
+          "status": "fails: 0 non-provisional report(s) in the current partition",
           "listed": true,
           "currentPartition": 0,
-          "partitionsWithReports": [
-            0
-          ],
+          "partitionsWithReports": [],
           "configurations": [
             "gemini-4-argon"
           ],
@@ -83168,10 +83051,7 @@
           "value": null,
           "monthlyUsd": null,
           "multiple": null,
-          "range": [
-            7.84,
-            13.4
-          ],
+          "range": null,
           "feasibleRange": null,
           "reports": [
             {
@@ -83181,11 +83061,11 @@
               "valueUpper": 9.04,
               "testLower": 7.84,
               "testUpper": 9.04,
-              "partition": 0,
+              "partition": null,
               "provisional": true,
               "speedMode": null,
               "stage": "S2",
-              "excluded": null,
+              "excluded": "timing unresolved: the report states no measurement window (O194)",
               "acrossResets": false,
               "acrossSplit": false,
               "inferenceRechecked": null,
@@ -83198,11 +83078,11 @@
               "valueUpper": 8.47,
               "testLower": 8.47,
               "testUpper": 8.47,
-              "partition": 0,
+              "partition": null,
               "provisional": false,
               "speedMode": null,
               "stage": "S1",
-              "excluded": null,
+              "excluded": "timing unresolved: the report states no measurement window (O194)",
               "acrossResets": false,
               "acrossSplit": false,
               "inferenceRechecked": null,
@@ -83215,21 +83095,18 @@
               "valueUpper": 13.4,
               "testLower": 11.4,
               "testUpper": 13.4,
-              "partition": 0,
+              "partition": null,
               "provisional": false,
               "speedMode": null,
               "stage": "S1",
-              "excluded": null,
+              "excluded": "timing unresolved: the report states no measurement window (O194)",
               "acrossResets": false,
               "acrossSplit": false,
               "inferenceRechecked": null,
               "archive": "not archived: recorded before O165 without a hashed copy"
             }
           ],
-          "allReportsBand": [
-            9.5,
-            10.164
-          ],
+          "allReportsBand": null,
           "admittingObservers": [],
           "discordantObservers": [],
           "searchedThrough": "2026-11-05",
@@ -83251,9 +83128,7 @@
           "status": "fails: a 5-hour figure never converts to a billing period (O82)",
           "listed": true,
           "currentPartition": 0,
-          "partitionsWithReports": [
-            0
-          ],
+          "partitionsWithReports": [],
           "configurations": [
             "gemini-4-argon"
           ],
@@ -83263,10 +83138,7 @@
           "value": null,
           "monthlyUsd": null,
           "multiple": null,
-          "range": [
-            49.2,
-            50.0
-          ],
+          "range": null,
           "feasibleRange": null,
           "reports": [
             {
@@ -83276,21 +83148,18 @@
               "valueUpper": 50.0,
               "testLower": 49.2,
               "testUpper": 50.0,
-              "partition": 0,
+              "partition": null,
               "provisional": false,
               "speedMode": null,
               "stage": "S2",
-              "excluded": null,
+              "excluded": "timing unresolved: the report states no measurement window (O194)",
               "acrossResets": false,
               "acrossSplit": false,
               "inferenceRechecked": null,
               "archive": null
             }
           ],
-          "allReportsBand": [
-            41.00000000000001,
-            60.0
-          ],
+          "allReportsBand": null,
           "admittingObservers": [],
           "discordantObservers": [],
           "searchedThrough": "2026-11-05",
@@ -83309,12 +83178,10 @@
           "modelId": "Gemini 4 Argon",
           "unit": "week",
           "region": "global",
-          "status": "fails: 1 non-provisional report(s) in the current partition",
+          "status": "fails: 0 non-provisional report(s) in the current partition",
           "listed": true,
           "currentPartition": 0,
-          "partitionsWithReports": [
-            0
-          ],
+          "partitionsWithReports": [],
           "configurations": [
             "gemini-4-argon"
           ],
@@ -83324,10 +83191,7 @@
           "value": null,
           "monthlyUsd": null,
           "multiple": null,
-          "range": [
-            199.9,
-            200.1
-          ],
+          "range": null,
           "feasibleRange": null,
           "reports": [
             {
@@ -83337,21 +83201,18 @@
               "valueUpper": 200.1,
               "testLower": 199.9,
               "testUpper": 200.1,
-              "partition": 0,
+              "partition": null,
               "provisional": false,
               "speedMode": null,
               "stage": "S2",
-              "excluded": null,
+              "excluded": "timing unresolved: the report states no measurement window (O194)",
               "acrossResets": false,
               "acrossSplit": false,
               "inferenceRechecked": null,
               "archive": null
             }
           ],
-          "allReportsBand": [
-            166.58333333333334,
-            240.11999999999998
-          ],
+          "allReportsBand": null,
           "admittingObservers": [],
           "discordantObservers": [],
           "searchedThrough": "2026-11-05",
@@ -83455,7 +83316,7 @@
               "provisional": false,
               "speedMode": null,
               "stage": "S2",
-              "excluded": "spans a partition split",
+              "excluded": "timing unresolved: the report states no measurement window (O194)",
               "acrossResets": false,
               "acrossSplit": false,
               "inferenceRechecked": null,
@@ -83657,9 +83518,7 @@
           "status": "fails: a 5-hour figure never converts to a billing period (O82)",
           "listed": false,
           "currentPartition": 1,
-          "partitionsWithReports": [
-            0
-          ],
+          "partitionsWithReports": [],
           "configurations": [
             "kimi-k3-1-pro"
           ],
@@ -83713,11 +83572,11 @@
               "valueUpper": 12.4,
               "testLower": 12.4,
               "testUpper": 12.4,
-              "partition": 0,
+              "partition": null,
               "provisional": false,
               "speedMode": null,
               "stage": "S1",
-              "excluded": null,
+              "excluded": "timing unresolved: the report states no measurement window (O194)",
               "acrossResets": false,
               "acrossSplit": false,
               "inferenceRechecked": null,
@@ -83751,7 +83610,7 @@
               "provisional": false,
               "speedMode": null,
               "stage": "S2",
-              "excluded": "spans a partition split",
+              "excluded": "timing unresolved: the report states no measurement window (O194)",
               "acrossResets": false,
               "acrossSplit": false,
               "inferenceRechecked": null,
@@ -83944,7 +83803,7 @@
               "provisional": false,
               "speedMode": null,
               "stage": "S2",
-              "excluded": "spans a partition split",
+              "excluded": "timing unresolved: the report states no measurement window (O194)",
               "acrossResets": false,
               "acrossSplit": false,
               "inferenceRechecked": null,
@@ -84050,7 +83909,7 @@
               "provisional": false,
               "speedMode": null,
               "stage": "S1",
-              "excluded": "spans a partition split",
+              "excluded": "timing unresolved: the report states no measurement window (O194)",
               "acrossResets": false,
               "acrossSplit": false,
               "inferenceRechecked": null,
@@ -84103,7 +83962,7 @@
               "provisional": false,
               "speedMode": null,
               "stage": "S2",
-              "excluded": "spans a partition split",
+              "excluded": "timing unresolved: the report states no measurement window (O194)",
               "acrossResets": false,
               "acrossSplit": false,
               "inferenceRechecked": null,
@@ -84156,7 +84015,7 @@
               "provisional": false,
               "speedMode": null,
               "stage": "S2",
-              "excluded": "spans a partition split",
+              "excluded": "timing unresolved: the report states no measurement window (O194)",
               "acrossResets": false,
               "acrossSplit": false,
               "inferenceRechecked": null,
@@ -84209,7 +84068,7 @@
               "provisional": false,
               "speedMode": null,
               "stage": "S2",
-              "excluded": "spans a partition split",
+              "excluded": "timing unresolved: the report states no measurement window (O194)",
               "acrossResets": false,
               "acrossSplit": false,
               "inferenceRechecked": null,
@@ -84438,7 +84297,7 @@
               "provisional": true,
               "speedMode": null,
               "stage": "S1",
-              "excluded": "measured outside the report window",
+              "excluded": "timing unresolved: the report states no measurement window (O194)",
               "acrossResets": false,
               "acrossSplit": false,
               "inferenceRechecked": null,
@@ -84467,9 +84326,7 @@
           "status": "fails: 0 non-provisional report(s) in the current partition",
           "listed": false,
           "currentPartition": 0,
-          "partitionsWithReports": [
-            0
-          ],
+          "partitionsWithReports": [],
           "configurations": [
             "minimax-m3-1-flash"
           ],
@@ -84479,10 +84336,7 @@
           "value": null,
           "monthlyUsd": null,
           "multiple": null,
-          "range": [
-            60.0,
-            127.0
-          ],
+          "range": null,
           "feasibleRange": null,
           "reports": [
             {
@@ -84492,21 +84346,18 @@
               "valueUpper": 127.0,
               "testLower": 60.0,
               "testUpper": 127.0,
-              "partition": 0,
+              "partition": null,
               "provisional": true,
               "speedMode": null,
               "stage": "S1",
-              "excluded": null,
+              "excluded": "timing unresolved: the report states no measurement window (O194)",
               "acrossResets": false,
               "acrossSplit": false,
               "inferenceRechecked": null,
               "archive": "not archived: recorded before O165 without a hashed copy"
             }
           ],
-          "allReportsBand": [
-            50.0,
-            152.4
-          ],
+          "allReportsBand": null,
           "admittingObservers": [],
           "discordantObservers": [],
           "searchedThrough": null,
@@ -84528,9 +84379,7 @@
           "status": "fails: a 5-hour figure never converts to a billing period (O82)",
           "listed": false,
           "currentPartition": 0,
-          "partitionsWithReports": [
-            0
-          ],
+          "partitionsWithReports": [],
           "configurations": [
             "minimax-m3-1-flash"
           ],
@@ -84540,10 +84389,7 @@
           "value": null,
           "monthlyUsd": null,
           "multiple": null,
-          "range": [
-            3.5,
-            13.5
-          ],
+          "range": null,
           "feasibleRange": null,
           "reports": [
             {
@@ -84553,21 +84399,18 @@
               "valueUpper": 13.5,
               "testLower": 3.5,
               "testUpper": 13.5,
-              "partition": 0,
+              "partition": null,
               "provisional": true,
               "speedMode": null,
               "stage": "S1",
-              "excluded": null,
+              "excluded": "timing unresolved: the report states no measurement window (O194)",
               "acrossResets": false,
               "acrossSplit": false,
               "inferenceRechecked": null,
               "archive": "not archived: recorded before O165 without a hashed copy"
             }
           ],
-          "allReportsBand": [
-            2.916666666666667,
-            16.2
-          ],
+          "allReportsBand": null,
           "admittingObservers": [],
           "discordantObservers": [],
           "searchedThrough": null,
@@ -84772,7 +84615,7 @@
               "provisional": false,
               "speedMode": null,
               "stage": "S1",
-              "excluded": "measured outside the report window",
+              "excluded": "timing unresolved: the report states no measurement window (O194)",
               "acrossResets": false,
               "acrossSplit": false,
               "inferenceRechecked": null,
@@ -84896,7 +84739,7 @@
               "provisional": false,
               "speedMode": null,
               "stage": "S1",
-              "excluded": "measured outside the report window",
+              "excluded": "timing unresolved: the report states no measurement window (O194)",
               "acrossResets": false,
               "acrossSplit": false,
               "inferenceRechecked": null,
@@ -85023,7 +84866,7 @@
               "provisional": false,
               "speedMode": null,
               "stage": "S1",
-              "excluded": "spans a partition split",
+              "excluded": "timing unresolved: the report states no measurement window (O194)",
               "acrossResets": false,
               "acrossSplit": false,
               "inferenceRechecked": null,
@@ -85334,7 +85177,7 @@
               "provisional": false,
               "speedMode": null,
               "stage": "S1",
-              "excluded": "measured on a provider-acknowledged accounting-fault day",
+              "excluded": "timing unresolved: the report states no measurement window (O194)",
               "acrossResets": true,
               "acrossSplit": false,
               "inferenceRechecked": null,
@@ -85351,7 +85194,7 @@
               "provisional": false,
               "speedMode": "fast",
               "stage": "S1",
-              "excluded": "measured on a provider-acknowledged accounting-fault day",
+              "excluded": "timing unresolved: the report states no measurement window (O194)",
               "acrossResets": true,
               "acrossSplit": false,
               "inferenceRechecked": null,
@@ -85618,7 +85461,7 @@
               "provisional": false,
               "speedMode": "fast",
               "stage": "S1",
-              "excluded": "measured on a provider-acknowledged accounting-fault day",
+              "excluded": "timing unresolved: the report states no measurement window (O194)",
               "acrossResets": true,
               "acrossSplit": false,
               "inferenceRechecked": null,
@@ -85697,12 +85540,10 @@
           "modelId": "MiMo-V2.6-Pro",
           "unit": "month",
           "region": "global",
-          "status": "fails: 1 non-provisional report(s) in the current partition",
+          "status": "fails: 0 non-provisional report(s) in the current partition",
           "listed": true,
           "currentPartition": 0,
-          "partitionsWithReports": [
-            0
-          ],
+          "partitionsWithReports": [],
           "configurations": [
             "mimo-v2-6-pro"
           ],
@@ -85712,10 +85553,7 @@
           "value": null,
           "monthlyUsd": null,
           "multiple": null,
-          "range": [
-            4.6,
-            4.6
-          ],
+          "range": null,
           "feasibleRange": null,
           "reports": [
             {
@@ -85725,21 +85563,18 @@
               "valueUpper": 4.6,
               "testLower": 4.6,
               "testUpper": 4.6,
-              "partition": 0,
+              "partition": null,
               "provisional": false,
               "speedMode": null,
               "stage": "S1",
-              "excluded": null,
+              "excluded": "timing unresolved: the report states no measurement window (O194)",
               "acrossResets": false,
               "acrossSplit": false,
               "inferenceRechecked": null,
               "archive": "not archived: recorded before O165 without a hashed copy"
             }
           ],
-          "allReportsBand": [
-            3.833333333333333,
-            5.52
-          ],
+          "allReportsBand": null,
           "admittingObservers": [],
           "discordantObservers": [],
           "searchedThrough": "2026-11-05",

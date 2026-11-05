@@ -273,6 +273,7 @@ def grandfathered_ids(document: dict) -> frozenset:
     return frozenset(ids)
 
 
+TIMING_UNRESOLVED = "timing unresolved: the report states no measurement window (O194)"
 READINGS_DISAGREE = "the observer's own readings disagree beyond the O86 tolerance (O189)"
 
 
@@ -306,6 +307,11 @@ def exclusion(report: dict, profile: dict, release_day: date, grandfathered: fro
         return "an anomaly or legacy-account report"
     if report.get("challenged"):
         return "challenged: does not reproduce from its own figures"
+    # O194 (2026-11-05, on reviewers 119, 144 and 148, amending the E270 undated-report convention): a report whose measurement
+    # window is not stated is timing-unresolved. The assumed window (the meter's own period ending on the report date) stays
+    # for display, but a publication date does not show when the usage happened, so it cannot admit a cell.
+    if report.get("windowStart") is None and not report.get("windowStated"):
+        return TIMING_UNRESOLVED
     # O189 (2026-11-05, on reviewer 111, amending O174): an observer's several readings in one partition stand in for the observer
     # as their enclosing range only when they concord with one another (O86's 1.20x test over the observer's own readings), so
     # an observer whose readings disagree cannot manufacture agreement with another observer.
