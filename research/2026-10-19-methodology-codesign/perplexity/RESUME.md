@@ -55,7 +55,8 @@ two consecutive clean rounds and the panel ends when every model says NO FURTHER
 | 117 | Gemini 3.8 Flash (six sections) | r198 | CLEAN (one Low, wording folded into r199); Gemini's clean run is 1 of 2 |
 | 118 | Claude Sonnet 5.5 (whole draft) | r199 | CLEAN (no findings); Sonnet's clean run is 1 of 2 |
 | 119 | Kimi K3 (four sections) | r199 | findings (a Medium, two Lows; two of four sections clean), folded into r200 as text; Kimi's clean run restarts |
-| 120 | GLM 5.3 (eight two-part sections) | r200 | next |
+| 120 | GLM 5.3 (eight two-part sections) | r200 | findings (a High and Mediums that are design additions; four of eight sections clean), one wording folded into r201; GLM's clean run restarts |
+| 121 | Grok 4.7 (whole draft) | r201 | next |
 
 To continue:
 
