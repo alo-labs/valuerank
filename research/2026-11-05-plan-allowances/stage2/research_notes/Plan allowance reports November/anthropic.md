@@ -185,8 +185,9 @@ and two later comments add a 98% reading (Nov 1) with no tokens. Coriatel's comm
 ## Q2. Further reports that stage 1 missed
 
 ### Takeaway
-Seven new items were found. All are in GitHub issue comments. None of them adds a second admitting Opus 5.5 report to
-any partition inside the window. The strongest new items are after the cutoff:
+About a dozen new items were found: mostly GitHub issue comments, plus a few Reddit and HN comments. None of them adds
+a second admitting Opus 5.5 report to any partition inside the window. ruuurbag's Max 5x "$1300-$1400 per week" agrees
+with deepfoundationdesign numerically, but it states no model and no meter fraction. The strongest new items are after the cutoff:
 - ricardoraposo: controlled Max 20x/Ultra weekly runs on Opus 5.5 low, $20.6 per weekly point in the interactive arm,
   2026-11-03.
 - smaug42: Pro, Opus 5.5, $32 = 3% of the week and 16% of the 5h window, 2026-11-02.
@@ -244,6 +245,30 @@ model mix is about 93% Opus 5.5.
 - stymaar (HN 50341690, 2026-11-02): "the only time I maxed my $20 plan for a week I made the calculation that I had
   spend close to $200 in a single week". It is undated, with no model, and does not qualify. —
   [HN 50341690](https://news.ycombinator.com/item?id=50341690)
+- ruuurbag (r/ClaudeAI, 2026-10-30T15:32Z), replying to Unlikely-Peace1268's Max 5x "$55 … 3–4%" comment: "That's roughly
+  the usage I see. $55 for 4% extrapolates to $1375 per week, and I've seen $1300-$1400 per week for the past few weeks."
+  The plan is implied by the thread. The model is unstated and no meter fraction is tied to his own dollars. —
+  [Reddit / ruuurbag](https://www.reddit.com/r/ClaudeAI/comments/1xj7z30/are_limits_for_opus_55_on_pro_seemingly_increased/19rvx5vumchoh/)
+- ruuurbag again (r/ClaudeAI, 2026-11-03T17:11Z): "On my $100 plan, I have been getting $1350-1400 API-equivalent usage
+  per week for the month and change that I've had this plan, and am on pace for the same right now." Model unstated. It
+  does not say the week was exhausted, so it is at most a lower bound. Numerically it agrees with deepfoundationdesign's
+  $1,360–1,495. —
+  [Reddit / ruuurbag](https://www.reddit.com/r/ClaudeAI/comments/1xmmmte/what_the_hel_is_happening_with_limits/19s36hkoqbk8y/)
+- Old_Ad_6033 (r/ClaudeCode, 2026-11-02): "Multiply those nums by api pricing, and that's where the $1,000–1,100 comes
+  from … I also build a tracker that measures usage % of the weekly (or 5h) limit in realtime". Plan and model are not in
+  the comment. —
+  [Reddit / Old_Ad_6033](https://www.reddit.com/r/ClaudeCode/comments/1xlrlj5/is_it_just_me_or_the_subscription_is_getting/19s0z2nhc16qs/)
+- Mistuv (r/ClaudeAI, 2026-11-03): "last month my usage on the $100 tier was about $4500 in API costs with about another
+  10-15% in total that I didn't get to spend before, the usage expired." Monthly, model unstated, loose meter tie. —
+  [Reddit / Mistuv](https://www.reddit.com/r/ClaudeAI/comments/1xmmmte/what_the_hel_is_happening_with_limits/19s3b54e1ejwl/)
+- badcookies (r/ClaudeCode, 2026-10-30), the same observer as stage 1 rows 7–9: "Roughly $11-12 API credit for the weekly
+  / $1 paid. Max 20 was 10x Pro. Max 5 was 5x Pro". This is a cross-plan summary of his own post, not a new report. —
+  [Reddit / badcookies](https://www.reddit.com/r/ClaudeCode/comments/1xjm3ah/max_plans_renamed_20x_is_now_ultra_no_more_5_hour/19rwbftiv4vaa/)
+- Meter-only Reddit readings (no dollars or tokens):
+  - thtanner (2026-10-27): "$200 max plan used 70% in a day vs ~10-15 prior".
+  - MannToots (2026-10-27): "less than 15% of my weekly on a $20 account".
+  — [Reddit / thtanner](https://www.reddit.com/r/ClaudeAI/comments/1xh3yyu/claude_code_usage_exploded_8x_today_anthropic/19rr09nq3fdfk/);
+  [Reddit / MannToots](https://www.reddit.com/r/ClaudeAI/comments/1xh3yyu/claude_code_usage_exploded_8x_today_anthropic/19rr5o1ulrnic/)
 
 **Entrypoint (interactive vs. SDK) changes the meter rate: a new caveat for any comparison**
 - douflou (#106375, comment Nov 3, 2026): "Controlled measurement on a Max plan (2026-11-02/03, Claude Code 2.1.316,
@@ -313,11 +338,13 @@ model mix is about 93% Opus 5.5.
   Pro history. This suggests the metering was unstable around 10-28..11-03.
 
 ### Gaps
-- Reddit coverage is partial. Arctic Shift rate-limited this session to about one query a minute, so only these
-  comment searches finished, over 2026-10-20..11-05:
-  - r/ClaudeCode: "ccusage", "API equivalent", "API price", "of my weekly", "API cost"
-  - r/ClaudeAI: the same terms
-  Earlier passes that were cut short: "Opus 5.5", "Ultra", "Sonnet 5.5" and "Haiku 5.5".
+- Reddit coverage is partial. Arctic Shift rate-limited this session to about one query a minute.
+  - Completed: comment searches over 2026-10-20..11-05 in 8-day slices for "ccusage", "API equivalent", "API price",
+    "of my weekly" and "API cost", in r/ClaudeCode and r/ClaudeAI. That is 975 unique comments, filtered for "$" and "%".
+  - Truncated: "of my weekly" hit the 100-result cap in every slice.
+  - Failed: r/ClaudeAI "API cost" 10-20..10-28.
+  - Not run: "Opus 5.5", "Ultra", "Sonnet 5.5" and "Haiku 5.5".
+  - Stage 1 recorded "ccusage" as returning 0 hits. It returned 9–18 per slice in this session.
 - harry924's Max 20x comment in #97074 (the "$8.1–8.5 for interactive use" per 1% of 5h) was not retrievable. The
   folded comments on the 68-comment page were not shown.
 - No X search was possible. Only X posts linked from GitHub or Fei2411 digests were read.
