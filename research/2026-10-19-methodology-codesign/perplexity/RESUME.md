@@ -45,7 +45,8 @@ two consecutive clean rounds and the panel ends when every model says NO FURTHER
 | 107 | Kimi K3 (four sections) | r189 | findings (two Highs, one a wrong-premise owner challenge; owner decision O187: a label check that cannot be computed withholds labels), folded into r190; Kimi's clean run restarts |
 | 108 | GLM 5.3 (eight two-part sections) | r190 | findings (Highs; one real text defect from the 2026-11-05 search; owner decision O188: O87 stands), folded into r191; GLM's clean run restarts |
 | 109 | Grok 4.7 (whole draft) | r191 | findings (two Mediums, text only), folded into r192; Grok's clean run restarts |
-| 110 | GPT-6.1 Sol (whole draft) | r192 | next |
+| 110 | GPT-6.1 Sol (whole draft) | r192 | findings (one Medium, one Low, text only), folded into r193; Sol's clean run restarts |
+| 111 | Gemini 3.8 Flash (six sections) | r193 | next |
 
 To continue:
 
