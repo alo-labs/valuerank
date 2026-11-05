@@ -2754,3 +2754,9 @@ Asked on I64 Q1 whether future O71 admissions should be executed by the build fr
 ## Reviewer 142 (Claude Sonnet 5.5, round 13, whole draft r220, 17 parts)
 - Read check: all 17 parts read to their ends. Verdict: NO FURTHER FEEDBACK (no finding at any severity; no recommendations beyond those adopted; no owner questions).
 - Round status (O56): clean round 2 for Sonnet (reviewers 136 and 142 are consecutive Sonnet rounds, both clean): Sonnet is DONE under O56. Draft unchanged (r220).
+
+## Reviewer 143 (Kimi K3, round 13, four sections of r220, 17 parts)
+- Read check: all 17 parts read to their ends in four sections. Sections 2, 3 and 4 returned NO FURTHER FEEDBACK; section 1 returned two Highs, five Mediums and two Lows, almost all presentation additions. Verdict overall: HAS FEEDBACK.
+- Highs, both owner-decision challenges, not put again: (1) make the measured-only Plan view the default Plan surface because every measured Plan row is flagged (O3, O16, O22: the owner required the full Plan ranking with its labels, and the exploratory character is stated in the outputs); (2) group rows by noise band with ordinal rank secondary because only 2 of 6 and 0 of 19 adjacent pairs separate (O152 settled data primacy and ordinal ranks, E328 prints the bands beside them).
+- Mediums and Lows left as candidates: the typing of the 2026-10-30/31 Anthropic changes (the reviewer's own text says it was conditional on parts it did not read; O178 settled that a five-hour-window change opens no admission cell); a winner's-curse sensitivity beside comparator key 3; an automatic activator for O123's S2 stress; a standing leave-out-the-Index-run-Terminal-Bench column in E172's family (O24 stands); a multiplicity-adjusted separable count; version-string drift on the AA index; normative readability.
+- Round status (O56): not clean (Highs); Kimi's clean run restarts, though three of four sections were clean. Draft unchanged (r220).
