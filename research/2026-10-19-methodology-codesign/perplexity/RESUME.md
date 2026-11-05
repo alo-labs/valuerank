@@ -47,7 +47,8 @@ two consecutive clean rounds and the panel ends when every model says NO FURTHER
 | 109 | Grok 4.7 (whole draft) | r191 | findings (two Mediums, text only), folded into r192; Grok's clean run restarts |
 | 110 | GPT-6.1 Sol (whole draft) | r192 | findings (one Medium, one Low, text only), folded into r193; Sol's clean run restarts |
 | 111 | Gemini 3.8 Flash (six sections) | r193 | findings (Mediums; owner decision O189: an observer whose readings disagree is withheld), folded into r194; Gemini's clean run restarts |
-| 112 | Claude Sonnet 5.5 (whole draft) | r194 | next |
+| 112 | Claude Sonnet 5.5 (whole draft) | r194 | findings (a High that is an owner action, Mediums that are owner-decision challenges; owner decision O190: Bug Hunt's live scale stays); draft unchanged; Sonnet's clean run restarts |
+| 113 | Kimi K3 (four sections) | r194 | next |
 
 To continue:
 
