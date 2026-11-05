@@ -2708,3 +2708,9 @@ Asked on I64 Q1 whether future O71 admissions should be executed by the build fr
 - M (blocker(i)'s "on or after the earliest day" includes the equality case that O110's governance exception excludes): verified against the code (plan_routes.change_floor already returns the day after a launch or schedule start that bounds the span, so the predicate and the exception agree in the engine); the predicate's prose omitted the clause. Adopted as wording in r214. The reviewer's closed temporal-relation enumeration and published change-effect fields are not adopted.
 - L (the v1 separability sentence "every row's C and Q come from distinct published records" is current-state and API-basis): left; the surrounding E89 text already requires dependency compilation whenever a transport mechanism activates.
 - Round status (O56): not clean (a Medium); Grok's clean run restarts.
+
+## Reviewer 134 (GPT-6.1 Sol, round 13, whole draft r214, 17 parts)
+- Read check: all 17 parts read to their ends. Verdict: HAS FEEDBACK (no Critical or High; one Medium, one Low, no owner questions).
+- M ("v1 registers singleton components" read against the shared quality primitive of a configuration's several Plan rows): verified as a wording gap (a singleton component is one per rounded record in the joint-law registry; the Plan rows of one configuration share a quality primitive and merge their role groups through it, E248); adopted as wording in r215. The reviewer's evidence-addressed primitive nodes and duplicated-row fixture are not adopted.
+- L (propagate E354's LiveBench category-dependence envelope through the noise outputs): left a candidate; E354 is a disclosed envelope and no category covariance is public.
+- Round status (O56): not clean (a Medium); Sol's clean run restarts.

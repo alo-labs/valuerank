@@ -69,7 +69,8 @@ two consecutive clean rounds and the panel ends when every model says NO FURTHER
 | 131 | Kimi K3 (four sections) | r211 | findings (one Medium: E354 states the LiveBench dependence envelope; three of four sections clean), folded into r212; Kimi's clean run restarts |
 | 132 | GLM 5.3 (eight two-part sections) | r212 | findings (a High and Mediums, two wordings folded into r213; four of eight sections clean); GLM's clean run restarts |
 | 133 | Grok 4.7 (whole draft) | r213 | findings (one Medium: wording in r214), Grok's clean run restarts |
-| 134 | GPT-6.1 Sol (whole draft) | r214 | next |
+| 134 | GPT-6.1 Sol (whole draft) | r214 | findings (one Medium, wording in r215), Sol's clean run restarts |
+| 135 | Gemini 3.8 Flash (six sections, parts 1–17) | r215 | next |
 
 To continue:
 
