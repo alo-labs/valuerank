@@ -2746,3 +2746,7 @@ Asked on I64 Q1 whether future O71 admissions should be executed by the build fr
 - M (an O182/O183/O187 challenge: agreement between the basket cost and one component's cost is neither necessary nor sufficient for the basket's cheapest ordering, so the gate tests a different proposition from the claim it withholds): the owner decided the gate on reviewers 103, 105 and 107 and it stays; the new argument is accepted as wording, adopted in r220: the gate is an editorial label-issuance policy, not a finding that the basket's ordering is wrong, and the evaluated status and withheld answer stay in scores.json (they already do, withholdBars). Not put to the owner again.
 - L1 (separate model_configuration_id and execution_configuration_id) and L2 (separate historical explanation from the operational rules): left candidates.
 - Round status (O56): not clean (a Medium); Sol's clean run restarts.
+
+## Reviewer 141 (Gemini 3.8 Flash, round 13, six sections of r220, 17 parts)
+- Read check: all 17 parts read to their ends in six sections. Five sections returned NO FURTHER FEEDBACK; section 1 returned one Low (a configuration-balanced companion beside the plan-row influence diagnostic; raised on reviewers 111, 120 and 141, left a candidate). Verdict overall: no Medium-or-higher finding; a clean round under O56.
+- Round status (O56): clean round 1 for Gemini (run 1 of 2 consecutive); its previous round (reviewer 135) was not clean. Draft unchanged (r220).
