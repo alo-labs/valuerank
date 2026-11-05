@@ -87,7 +87,8 @@ two consecutive clean rounds and the panel ends when every model says NO FURTHER
 | 149 | GLM 5.3 (eight two-part sections, parts 1–17) | r224 | findings (one Medium, wording into r225; six of eight sections clean); GLM's clean run restarts |
 | 150 | GPT-6.1 Sol (whole draft) | r225 | CLEAN (no findings); Sol's clean run is 1 of 2 |
 | 151 | Gemini 3.8 Flash (six sections, parts 1–17) | r225 | findings (one Medium, wording into r226; five of six sections clean); Gemini's clean run restarts |
-| 152 | GPT-6.1 Sol (whole draft) | r226 | next |
+| 152 | GPT-6.1 Sol (whole draft) | r226 | CLEAN (no findings); Sol is DONE (two consecutive clean rounds, 150 and 152) |
+| 153 | Kimi K3 (four sections, parts 1–17) | r226 | next |
 
 To continue:
 
