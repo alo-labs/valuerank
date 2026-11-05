@@ -68,7 +68,8 @@ two consecutive clean rounds and the panel ends when every model says NO FURTHER
 | 130 | Claude Sonnet 5.5 (whole draft) | r210 | findings (one Medium: E353 states the Beta draw's variance), folded into r211 as text; Sonnet's clean run restarts |
 | 131 | Kimi K3 (four sections) | r211 | findings (one Medium: E354 states the LiveBench dependence envelope; three of four sections clean), folded into r212; Kimi's clean run restarts |
 | 132 | GLM 5.3 (eight two-part sections) | r212 | findings (a High and Mediums, two wordings folded into r213; four of eight sections clean); GLM's clean run restarts |
-| 133 | Grok 4.7 (whole draft) | r213 | next |
+| 133 | Grok 4.7 (whole draft) | r213 | findings (one Medium: wording in r214), Grok's clean run restarts |
+| 134 | GPT-6.1 Sol (whole draft) | r214 | next |
 
 To continue:
 
