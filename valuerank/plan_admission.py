@@ -422,7 +422,9 @@ def evaluate(document: dict, profile: dict, release_day: date, families: dict | 
         # (non-provisional) reports, so a re-checked provisional report can fail a cell but never move its value.
         feasible = ([max(row["testLower"] for row in firm) / CONCORDANCE, CONCORDANCE * min(row["testUpper"] for row in firm)]
                     if status == "passes" else None)
-        value = (math.exp(sum(math.log(min(max((row["valueLower"] + row["valueUpper"]) / 2, feasible[0]), feasible[1])) for row in firm) / len(firm))
+        # E350 (reviewer 125): an observer's midpoint is that of the bounds the test reads (its tightest readings), so a coarser
+        # extra reading widens the disclosed range without moving the pooled value.
+        value = (math.exp(sum(math.log(min(max((row["testLower"] + row["testUpper"]) / 2, feasible[0]), feasible[1])) for row in firm) / len(firm))
                  if status == "passes" else None)
         monthly = value * UNIT_TO_MONTH[unit] if value is not None else None
         fee = document.get("listedPlans", {}).get(plan) if listed else None
@@ -436,7 +438,7 @@ def evaluate(document: dict, profile: dict, release_day: date, families: dict | 
                         "searchedThrough": (search_dates or {}).get((model, plan)),
                         "newReportWindow": new_report_window(release_day, (search_dates or {}).get((model, plan))),
                         # Reviewer 95: the reports whose midpoint the O115 band moved, so a band-dominated value is visible.
-                        "bandMoved": sorted(row["observer"] for row in firm if not feasible[0] <= (row["valueLower"] + row["valueUpper"]) / 2 <= feasible[1]) if status == "passes" else [],
+                        "bandMoved": sorted(row["observer"] for row in firm if not feasible[0] <= (row["testLower"] + row["testUpper"]) / 2 <= feasible[1]) if status == "passes" else [],
                         "notArchivedAdmitting": sorted(row["observer"] for row in firm if row["archive"]) if status == "passes" else [],
                         "flags": ([ACROSS_RESETS_FLAG] if status == "passes" and any(row["acrossResets"] for row in firm) else [])
                                  + ([ACROSS_SPLIT_FLAG] if status == "passes" and any(row["acrossSplit"] for row in firm) else [])})

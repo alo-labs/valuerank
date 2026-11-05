@@ -91,6 +91,10 @@ def test_the_cell_test_reads_each_observers_tightest_readings():
     # The value still pools the observer's whole range, and a speed mode scales the readings with the range.
     ok = cell({**a, "readings": [[110, 110], [120, 120]]}, report("c", start="2026-10-19", end="2026-10-19", low=125))
     assert ok["status"] == "passes" and ok["feasibleRange"] == pytest.approx([125 / 1.2, 1.2 * 110]) and ok["range"][0] == 100
+    # E350 (reviewer 125): a coarser extra reading widens the range but leaves the pooled value where the tight readings put it.
+    coarse = {**report("d", start="2026-10-18", end="2026-10-18", low=1, high=1000), "readings": [[100, 100], [1, 1000]]}
+    pooled = cell(coarse, report("e", start="2026-10-19", end="2026-10-19", low=100))
+    assert pooled["status"] == "passes" and pooled["value"] == pytest.approx(100) and pooled["range"] == [1, 1000]
     fast = {**a, "provider": "O", "plan": "Plus", "speedMode": "fast", "readings": [[100, 100], [120, 120]]}
     assert pa.test_bounds(fast, DOCUMENT["speedModeMultipliers"]) == (300, 250)
 
