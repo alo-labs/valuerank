@@ -2882,6 +2882,18 @@ def test_o182_low_workload_agreement_withholds_the_cheapest_labels(monkeypatch):
     assert labels and all(item["candidates"]["a"] == {"label": False, "reading": v.LABEL_GATE} for item in labels)
 
 
+def test_the_label_gate_also_withholds_the_subset_workload_labels(monkeypatch):
+    """E349 (reviewer 124): subset-workload cheapest labels follow the ranking's cost-check gate."""
+
+    bars = {"bars": [{"status": "certified", "confirmedCheapest": "a", "possibleCheapest": ["a"]}]}
+    monkeypatch.setattr(v, "interval_outputs", lambda assembled, frozen, basis, components=None: dict(bars))
+    frozen = {"workloads": {"main": {"role": "main"}, "sub": {"role": "subset", "components": ["c"]}}}
+    open_ = v.subset_interval_outputs({}, frozen)["sub"]["api"]
+    gated = v.subset_interval_outputs({}, frozen, v.LABEL_GATE)["sub"]["api"]
+    assert open_["bars"][0]["confirmedCheapest"] == "a" and "labelGate" not in open_
+    assert gated["bars"][0]["confirmedCheapest"] is None and gated["bars"][0]["status"] == v.LABEL_GATE and gated["labelGate"] == v.LABEL_GATE
+
+
 def test_o184_subset_rows_rank_within_their_workload():
     """O184: main-workload rows are ranked among themselves; a subset-workload row only within its own workload."""
 

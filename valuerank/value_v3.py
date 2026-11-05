@@ -1822,11 +1822,12 @@ def withheld_label(row: dict) -> str:
 SUBSET_PLAN_INTERVALS = "unevaluable: no Plan multiple is identified for a subset workload (E149, E190)"
 
 
-def subset_interval_outputs(assembled: dict, frozen: dict) -> dict:
-    """E190: frontier and bar outputs on each subset workload over every row with FullCost there."""
+def subset_interval_outputs(assembled: dict, frozen: dict, gate: str | None = None) -> dict:
+    """E190: frontier and bar outputs on each subset workload over every row with FullCost there. E349 (reviewer 124): the
+    ranking's label gate (O182, O183, O187) withholds the cheapest labels on its subset workloads as well."""
 
     return {
-        workload: {"components": entry["components"], "api": interval_outputs(assembled, frozen, "api", entry["components"]),
+        workload: {"components": entry["components"], "api": withhold_bars(interval_outputs(assembled, frozen, "api", entry["components"]), gate),
                    "plan": {"status": intervals.UNEVALUABLE, "reason": SUBSET_PLAN_INTERVALS}}
         for workload, entry in sorted(frozen["workloads"].items())
         if entry.get("role") == "subset"
@@ -3106,7 +3107,7 @@ def score(assembled: dict, frozen: dict) -> dict:
         "barCurrency": bar_currency(assembled, frozen, quality_margin(assembled)),
         "observedRangeBars": observed_range_bars(assembled, frozen),
         "requiredMissingScores": required_missing_scores(assembled, frozen),
-        "subsetIntervals": subset_interval_outputs(assembled, frozen),
+        "subsetIntervals": subset_interval_outputs(assembled, frozen, label_gate(rows, main)),
         "measuredOnlyPlanView": measured,
         "diagnostics": {
             "rankSeparability": rank_separability(assembled, per_row, exchange, plan_assembled, per_plan),

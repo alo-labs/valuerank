@@ -59,7 +59,8 @@ two consecutive clean rounds and the panel ends when every model says NO FURTHER
 | 121 | Grok 4.7 (whole draft) | r201 | findings (one Medium on the 52/12 convention, one Low), wording folded into r202; Grok's clean run restarts |
 | 122 | GPT-6.1 Sol (whole draft) | r202 | CLEAN (two Lows, wording folded into r203); Sol's clean run is 1 of 2 |
 | 123 | Gemini 3.8 Flash (six sections) | r203 | findings (Mediums; owner decision O192: the observer test reads tightest readings), folded into r204; Gemini's clean run restarts |
-| 124 | Claude Sonnet 5.5 (whole draft) | r204 | next |
+| 124 | Claude Sonnet 5.5 (whole draft) | r204 | findings (one Medium: E349 applies the label gate to subset-workload labels), folded into r205; Sonnet's clean run restarts |
+| 125 | Kimi K3 (four sections) | r205 | next |
 
 To continue:
 
