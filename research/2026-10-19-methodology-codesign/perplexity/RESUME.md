@@ -65,7 +65,8 @@ two consecutive clean rounds and the panel ends when every model says NO FURTHER
 | 127 | Grok 4.7 (whole draft) | r207 | findings (one Medium: E351 a departed setter reads rounding-stable only), folded into r208; Grok's clean run restarts |
 | 128 | GPT-6.1 Sol (whole draft) | r208 | findings (one Medium: E352 freezes the bar setter's SD with the bar), folded into r209; Sol's clean run restarts |
 | 129 | Gemini 3.8 Flash (six sections) | r209 | findings (a High that O86 allows by design, repeats and design additions; two of six sections clean), one wording folded into r210; Gemini's clean run restarts |
-| 130 | Claude Sonnet 5.5 (whole draft) | r210 | next |
+| 130 | Claude Sonnet 5.5 (whole draft) | r210 | findings (one Medium: E353 states the Beta draw's variance), folded into r211 as text; Sonnet's clean run restarts |
+| 131 | Kimi K3 (four sections) | r211 | next |
 
 To continue:
 
