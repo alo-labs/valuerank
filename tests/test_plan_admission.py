@@ -44,6 +44,10 @@ def test_exclusions_follow_e270():
                           ({"modelId": None}, "model not stated"), ({"modelUnstated": True}, "model not stated"), ({"challenged": True}, "challenged"),
                           ({"tierUnstated": True}, "tier not stated"), ({"derived": True}, "own arithmetic"), ({"anomaly": True}, "anomaly")):
         assert reason in pa.exclusion({**report("x"), **extra}, PROFILE, DAY)
+    # O189: an observer's own readings must concord (largest lower at most 1.20x the smallest upper) for their range to stand for the observer.
+    assert "readings disagree" in pa.exclusion({**report("r"), "readings": [[10, 10], [100, 100]]}, PROFILE, DAY)
+    assert pa.exclusion({**report("r"), "readings": [[8.3, 8.3], [8.7, 8.7]]}, PROFILE, DAY) is None
+    assert pa.exclusion({**report("r"), "readings": [[10, 10]]}, PROFILE, DAY) is None
     assert "outside the report window" in pa.exclusion(report("old", start="2026-09-01", end="2026-09-20"), PROFILE, DAY)
     assert "outside the report window" in pa.exclusion(report("late", start="2026-10-26", end="2026-10-27"), PROFILE, DAY)
     assert "accounting-fault day" in pa.exclusion(report("f", provider="O", start="2026-10-16", end="2026-10-16"), PROFILE, DAY)

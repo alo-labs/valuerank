@@ -290,6 +290,12 @@ def exclusion(report: dict, profile: dict, release_day: date, grandfathered: fro
         return "an anomaly or legacy-account report"
     if report.get("challenged"):
         return "challenged: does not reproduce from its own figures"
+    # O189 (2026-11-05, on reviewer 111, amending O174): an observer's several readings in one partition stand in for the observer
+    # as their enclosing range only when they concord with one another (O86's 1.20x test over the observer's own readings), so
+    # an observer whose readings disagree cannot manufacture agreement with another observer.
+    readings = report.get("readings") or []
+    if len(readings) >= 2 and max(low for low, _ in readings) > CONCORDANCE * min(high for _, high in readings):
+        return "the observer's own readings disagree beyond the O86 tolerance (O189)"
     start, end = window(report)
     if end.date() < release_day - timedelta(days=30) or start.date() > release_day:
         return "measured outside the report window"

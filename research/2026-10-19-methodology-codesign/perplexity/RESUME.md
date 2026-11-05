@@ -46,7 +46,8 @@ two consecutive clean rounds and the panel ends when every model says NO FURTHER
 | 108 | GLM 5.3 (eight two-part sections) | r190 | findings (Highs; one real text defect from the 2026-11-05 search; owner decision O188: O87 stands), folded into r191; GLM's clean run restarts |
 | 109 | Grok 4.7 (whole draft) | r191 | findings (two Mediums, text only), folded into r192; Grok's clean run restarts |
 | 110 | GPT-6.1 Sol (whole draft) | r192 | findings (one Medium, one Low, text only), folded into r193; Sol's clean run restarts |
-| 111 | Gemini 3.8 Flash (six sections) | r193 | next |
+| 111 | Gemini 3.8 Flash (six sections) | r193 | findings (Mediums; owner decision O189: an observer whose readings disagree is withheld), folded into r194; Gemini's clean run restarts |
+| 112 | Claude Sonnet 5.5 (whole draft) | r194 | next |
 
 To continue:
 
