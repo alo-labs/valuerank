@@ -89,7 +89,7 @@ two consecutive clean rounds and the panel ends when every model says NO FURTHER
 | 151 | Gemini 3.8 Flash (six sections, parts 1–17) | r225 | findings (one Medium, wording into r226; five of six sections clean); Gemini's clean run restarts |
 | 152 | GPT-6.1 Sol (whole draft) | r226 | CLEAN (no findings); Sol is DONE (two consecutive clean rounds, 150 and 152) |
 | 153 | Kimi K3 (four sections, parts 1–17) | r226 | CLEAN (all four sections); Kimi's clean run is 1 of 2 |
-| 154 | GLM 5.3 (eight sections, parts 1–17) | r226 | next |
+| 154 | GLM 5.3 (eight sections, parts 1–17) | r226 | PAUSED: sections 1–4 received (partial-r154/: one Low in section 1, sections 2–4 NO FURTHER FEEDBACK); sections 5–8 not sent; see ../HANDOFF.md |
 
 To continue:
 
