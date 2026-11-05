@@ -2794,3 +2794,9 @@ Asked on I64 Q1 whether future O71 admissions should be executed by the build fr
 - Section 3 M (the noise screen's "separate 95% test" and "not statistically distinct" imply a calibrated inference its mixed-target model disclaims): adopted as wording in r224 (a pointwise 1.96-SD screen under the declared approximation with no established coverage or error-rate guarantee; adjacent levels are closer than the noise-margin heuristic).
 - Section 1 Highs, both owner-decision challenges, not put again: a cohort track keyed to the SWE-group sub-score gap (O51, O129 settled the cohort by the Index frontier and the near gap; O41 prints indicative values) and a standing bare-model basket view for the max-effort ranking (O15, O24, O123 settled; the subset-workload bridges already exist). Mediums in section 1 left candidates.
 - Round status (O56): not clean (Highs repeating owner decisions); Kimi's clean run restarts, though one of four sections was clean.
+
+## Reviewer 149 (GLM 5.3, round 13, eight two-part sections of r224, 17 parts)
+- Read check: all 17 parts read to their ends in eight sections. Sections 1, 2, 3, 5, 6 and 7 returned NO FURTHER FEEDBACK; section 4 returned a Low and section 8 a Medium. Verdict overall: HAS FEEDBACK.
+- Section 8 M (E185 treats a zero lower tariff ratio as an unconstructible blocker domain although the API enclosure [0, C·max r] is finite; raised on reviewer 138): the code builds blocker domains only with a positive lower end (value_v3.blocker_domain, E339), because a domain that reaches a cost of exactly zero contains a point that E109 cannot score; adopted as wording in r225 (the reason is stated). A zero-inclusive API domain stays a candidate.
+- Section 4 L (E109 treats a verified structural zero price like an unscoreable record): left a candidate.
+- Round status (O56): not clean (a Medium); GLM's clean run restarts, though six of eight sections were clean.

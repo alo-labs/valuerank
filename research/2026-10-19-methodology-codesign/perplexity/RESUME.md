@@ -84,7 +84,8 @@ two consecutive clean rounds and the panel ends when every model says NO FURTHER
 | 146 | GPT-6.1 Sol (whole draft) | r221 | findings (one Medium; owner decision O193: the API basis migrates alone when Plan references are short, built when first needed), folded into r222; Sol's clean run restarts |
 | 147 | Gemini 3.8 Flash (six sections, parts 1–17) | r222 | findings (one Medium: E356 joint adverse stress; four of six sections clean), folded into r223; Gemini's clean run restarts |
 | 148 | Kimi K3 (four sections, parts 1–17) | r223 | findings (owner decision O194: an unstated-window report is timing-unresolved; a wording; two Highs repeating owner decisions), folded into r224; Kimi's clean run restarts |
-| 149 | GLM 5.3 (eight two-part sections, parts 1–17) | r224 | next |
+| 149 | GLM 5.3 (eight two-part sections, parts 1–17) | r224 | findings (one Medium, wording into r225; six of eight sections clean); GLM's clean run restarts |
+| 150 | GPT-6.1 Sol (whole draft) | r225 | next |
 
 To continue:
 
