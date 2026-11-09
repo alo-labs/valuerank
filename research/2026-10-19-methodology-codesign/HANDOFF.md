@@ -13,6 +13,11 @@ Run the Perplexity six-model panel (GPT-6.1 Sol, Gemini 3.8 Flash, Claude Sonnet
 - Gemini 3.8 Flash: last round 151 not clean; needs two consecutive clean rounds.
 - Next: finish and triage reviewer 154 (resend sections 5–8, rebuild prompts as below), then Gemini (six sections), then Kimi/GLM/Gemini as needed. If a finding is adopted, create draft r227 (workflow below) and restart that model's clean run.
 
+## Added 2026-11-09: owner decision O195 and publish blockers
+- O195: third-party plans (OpenCode Go and Go Plus for DeepSeek and others; Google AI Pro/Ultra for Gemini 4 Argon and Carbon) are in scope. Run the three-stage plan research for them before further panel rounds that depend on plan data; details and open points are in ledger.md (O195).
+- Remaining before v3 is published: (a) finish the panel (Gemini needs two clean rounds, GLM two with 154 incomplete, Kimi one more; O195 changes restart touched runs); (b) O195 research and data work; (c) settle the Ultra price conflict and check the Claude Pro 58.9x vs Max 20x 58.6x oddity and the Kimi Moderato/Allegretto naming against listed plans; (d) full tests, regen and verify:docs, CI green on PR 2; (e) the release-time freshness check (O167: Google and OpenAI change detection); (f) research README, PR update, close task #10. Known unbuilt: O193 (API migrates alone when Plan references are short); monthly controlled saturation measurements remain an owner action.
+- The owner asked for work to resume automatically after their weekly quota reset (2026-11-10, 2 pm, their timezone); a scheduled message in the Claude session does this.
+
 ## Standing rules (verbatim intent)
 - Use AskUserQuestion for owner decisions; record them in $D/ledger.md, $D/ledger-brief.md and $P/RESUME.md (and AGENTS.md for broad policies).
 - Do not bypass Silver Bullet process enforcement or hooks; never ask to touch trivial or edit quality-gate state files.
