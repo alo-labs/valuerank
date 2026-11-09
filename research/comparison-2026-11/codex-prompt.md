@@ -2,7 +2,7 @@
 
 Prepared 2026-11-09 for the owner. Run it in a local Codex session with model GPT-6.1 Terra at high effort, in a checkout of this repository on branch `claude/wizardly-volta-2ppc48`, at the commit that contains this file or later. Everything between the fences is the prompt. The outputs go to this folder. Nothing in the prompt changes published data.
 
-Review notes (checked against the repository, three passes; the third found that row ids do not carry the effort and that the unlabelled Sonnet 5.5 row's effort field is max): scores.json track names and row fields; each track's own `mainWorkload` (main track `aad36e77d6e17386`, AI Coding Daily and common tracks `835a9baf594a1251`) and own `planRows`; rank fields are `row["api"]["rank"]` and `row["planScore"]["rank"]` (the `intervals` sections hold frontier and certification outputs, not ranks); the Plan-cost rule (`cost = api_cost / multiple`, `valuerank/value_v3.py`, reproduced for GPT-6.1 Sol max: 1387.03 / 10.772 = 128.76); Plan grade can be `controlled`, `assumption` or null (null means API-cost fallback); the OpenCode Go records in `data/plan_cost_routes.json` (`excludedRoutes`); the Pareto helper `valuerank/site/viewmodel.py pareto_set` (`valuerank/frontier.py` works on Artificial Analysis points, not score rows); the common-leaves track is a diagnostic ranking (O121) that earns no interval or scenario label; and the stored common-track rank-separability result (API basis: 0 of 32 adjacent pairs separable, median separation about 3.6 value points; Plan basis: 1 of 53), which means most orderings among these nine are expected to be within noise.
+Review notes (checked against the repository, four passes; the third found that row ids do not carry the effort and that the unlabelled Sonnet 5.5 row's effort field is max; the fourth added the preflight and the read-only final check): scores.json track names and row fields; each track's own `mainWorkload` (main track `aad36e77d6e17386`, AI Coding Daily and common tracks `835a9baf594a1251`) and own `planRows`; rank fields are `row["api"]["rank"]` and `row["planScore"]["rank"]` (the `intervals` sections hold frontier and certification outputs, not ranks); the Plan-cost rule (`cost = api_cost / multiple`, `valuerank/value_v3.py`, reproduced for GPT-6.1 Sol max: 1387.03 / 10.772 = 128.76); Plan grade can be `controlled`, `assumption` or null (null means API-cost fallback); the OpenCode Go records in `data/plan_cost_routes.json` (`excludedRoutes`); the Pareto helper `valuerank/site/viewmodel.py pareto_set` (`valuerank/frontier.py` works on Artificial Analysis points, not score rows); the common-leaves track is a diagnostic ranking (O121) that earns no interval or scenario label; and the stored common-track rank-separability result (API basis: 0 of 32 adjacent pairs separable, median separation about 3.6 value points; Plan basis: 1 of 53), which means most orderings among these nine are expected to be within noise.
 
 ```text
 You are working in a local checkout of the ValueRank repository (alo-labs/valuerank, branch claude/wizardly-volta-2ppc48). Model: GPT-6.1 Terra, high effort. Today is 2026-11-09. The data cutoff of the published scores is 2026-11-01T06:10:00Z.
@@ -27,9 +27,12 @@ HARD RULES
 - Read AGENTS.md and docs/development.md first and follow the repo's conventions. Use absolute dates.
 - Do not install packages. If matplotlib or an SVG-to-PNG renderer is unavailable, write the SVG by hand, skip the PNG, and say so in method-log.md.
 
+STEP 0 - PREFLIGHT
+Run `git pull` on the branch if you have network access, then record `git rev-parse HEAD` and `git status --short` (it should be clean) in method-log.md. Set PYTHONDONTWRITEBYTECODE=1 for every Python command and run pytest, if you use it at all, with `-p no:cacheprovider`, so no cache files appear in the checkout. Open data/scores.json and confirm scores["observedAt"] is 2026-11-01T06:10:00Z and scores["version"] is v3.0.0; if either differs, say so at the top of comparison.md and continue with what you have.
+
 STEP 1 - LOCATE EACH CONFIGURATION
 Source: data/scores.json. Tracks:
- - max-effort main track: scores["v3"]["rows"] and scores["v3"]["mainWorkload"];
+ - max-effort main track: scores["v3"]["rows"];
  - AI Coding Daily track: scores["v3Tracks"]["aicd"]["rows"];
  - common-leaves track: scores["v3Tracks"]["common"]["rows"]. This one is a diagnostic ranking (O121): "computed like the leading rankings for comparison, but it earns no interval or scenario label and its gates never hold the release". Say so wherever you use it.
 Each track also has its own "mainWorkload" (the cost workload ID of its main rows), "planRows" (Plan-basis rows, one per configuration and plan) and "diagnostics". Also read data/v3_configuration_map.json, data/aa_mapping.json and data/leaf_evidence.json.
@@ -57,7 +60,7 @@ STEP 4 - CAVEATS TO STATE
 
 STEP 5 - PARETO CHARTS
 Use the repository's own frontier rule, not a new one: valuerank/site/viewmodel.py pareto_set(rows, workload, basis) (a point is on the Pareto set if no other point has cost <= and quality >= with at least one strict). valuerank/frontier.py works on Artificial Analysis points and is not the right helper for score rows.
-Axes: x = cost in USD on a log scale (lower is better); y = displayed quality (higher is better). Use row["api"]["costUsd"] for the API basis and row["planScore"]["costUsd"] for the Plan basis, and workload = the track's own "mainWorkload" (rows on another workload, such as the MiMo subset row in the main track, are not part of the Pareto set; do not plot them).
+Axes: x = workload total cost in USD (the cost of the track's whole task basket, not per task) on a log scale (lower is better); y = displayed quality (higher is better). Use row["api"]["costUsd"] for the API basis and row["planScore"]["costUsd"] for the Plan basis, and workload = the track's own "mainWorkload" (rows on another workload, such as the MiMo subset row in the main track, are not part of the Pareto set; do not plot them).
 For each chart compute two things and show both: (a) the frontier among the plotted points only (at most seven are scored; the two unscored efforts are not plotted), and (b) whether each point is on the Pareto set of its full track (all rows of that track on the track's mainWorkload, via pareto_set). A configuration can be on frontier (a) and off frontier (b); say so.
 Charts (all from rows that exist; never plot a point you have not read from the data):
  A. API basis, common-leaves track.
@@ -69,7 +72,7 @@ First look, which you must confirm and not trust (full-track Pareto set membersh
 Add the chart data (configuration, track, basis, cost, quality, onFrontierAmongPlotted, onFullTrackParetoSet, dominatedBy) to comparison.json under "pareto", each with a "source".
 
 STEP 6 - SELF-CHECK BEFORE FINISHING
-Write a short script (kept in research/comparison-2026-11/check_comparison.py) that reloads data/scores.json and re-derives every number in comparison.json that is not a what-if, and asserts equality with the stored value; run it and record the result in method-log.md. Re-derive the Pareto sets with pareto_set and assert they match the charts' data. List any number you could not re-derive.
+Write a short script (kept in research/comparison-2026-11/check_comparison.py) that reloads data/scores.json and re-derives every number in comparison.json that is not a what-if, and asserts equality with the stored value; run it and record the result in method-log.md. Re-derive the Pareto sets with pareto_set and assert they match the charts' data. List any number you could not re-derive. As the last action, run `git status --short` in the checkout and record it: only research/comparison-2026-11/ may show changes (untracked or modified). If anything else shows, undo it with the specific file's checkout or deletion, and say so.
 
 OUTPUTS (all in research/comparison-2026-11/)
  1. comparison.md: the tables, the Pareto charts embedded by relative link, a reading of the results (five sentences at most), the caveats, and a "Discrepancies" section for anything in the repository that contradicts this prompt.
