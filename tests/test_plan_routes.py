@@ -105,6 +105,10 @@ def test_evidence_clock_runs_from_the_observation_never_from_a_record_edit():
     assert pr.evidence_date(ceiling) == date(2026, 10, 18) and pr.expiry_status(ceiling, TODAY) == "fresh"
     stale = dict(ceiling, capturedOn="2026-05-01")
     assert pr.age_days(stale, TODAY) == 171 and pr.expiry_status(stale, TODAY) == "demoted"
+    # O198: a published dollar limit is a function of the seller's page and ages from the read of that page too.
+    limit = route("d", 1, checked="2026-05-01", evidenceClass="provider_dollar_limit", capturedOn="2026-10-18")
+    assert pr.evidence_date(limit) == date(2026, 10, 18) and pr.expiry_status(limit, TODAY) == "fresh"
+    assert pr.age_days(dict(limit, capturedOn="2026-05-01"), TODAY) == 171
 
 
 def test_transfers_inherit_their_donor_measurements_clock_and_status():
@@ -219,6 +223,8 @@ def test_route_selection_publishes_the_deciding_key():
     lite, top = candidate("lite", 1.0, "controlled"), candidate("top", 1.2, "controlled")
     top["route"]["evidenceClass"] = "provider_quota_ceiling"
     assert pr.route_selection([lite, top])["reason"].startswith("larger quota-ceiling multiple")
+    top["route"]["evidenceClass"] = "provider_dollar_limit"
+    assert pr.route_selection([lite, top])["reason"].startswith("larger published-limit multiple (O198")
     points = pr.route_selection([candidate("a", 8.0, "controlled", identification="point-identified"), candidate("b", 12.0, "controlled", identification="point-identified")])
     assert points["reason"] == "only remaining eligible route" and points["dominated"] == {"a": "b"}
     overlapping = [
@@ -438,6 +444,12 @@ def test_measurement_capacity_status():
     capped = pr.plan_cost(100.0, {"route": ceiling, "grade": "assumption", "identification": "unidentified", "expiry": "fresh"})
     assert "provider quota ceiling; full use assumed, the optimistic end on use; credits valued at the recorded API rate, not the highest (O46, O125)" in capped["flags"] and "valuation basis unverified" not in capped["flags"]
     assert not any(flag.startswith("observed-usage") for flag in capped["flags"])
+    # O198: a published dollar limit is the whole limit by construction, flagged as such, never as observed usage.
+    limit = dict(route("p", 1.5, kind="user_assumption"), evidenceClass="provider_dollar_limit", valuationBasis="release")
+    assert pr.measurement_capacity_status(limit) == pr.CAPACITY_DOLLAR_LIMIT
+    limited = pr.plan_cost(100.0, {"route": limit, "grade": "assumption", "identification": "unidentified", "expiry": "fresh"})
+    assert "published dollar limit; full use of the limit assumed, at the seller's listed token prices (O198)" in limited["flags"]
+    assert limited["assumptionKind"] == "dollarLimit" and not any(flag.startswith("observed-usage") for flag in limited["flags"])
     assert "owner-named transfer (assumption)" not in capped["flags"]
     same = pr.plan_cost(100.0, {"route": dict(route("s", 10.0, kind="user_assumption"), sameModelAcrossEfforts=True), "grade": "assumption", "identification": "unidentified", "expiry": "fresh"})
     assert pr.CROSS_EFFORT_FLAG in same["flags"] and "owner-named transfer (assumption)" not in same["flags"]
@@ -634,9 +646,10 @@ def test_owner_assumption_kinds_are_named_from_one_registry():
 
     assert pr.assumption_kind({"evidenceClass": "provider_quota_ceiling"}) == "ceiling"
     assert pr.assumption_kind({"sameModelAcrossEfforts": True}) == "transfer" and pr.assumption_kind({}) == "transfer"  # O90: O88 routes are measured
-    assert pr.assumption_kinds_text() == "an owner-named transfer or an O46 provider quota ceiling"
-    assert pr.assumption_kinds_text("and", plural=True).endswith("and O46 provider quota ceilings")
-    assert pr.assumption_counts_text({"transfer": 2, "ceiling": 1}) == "2 owner-named transfers and 1 O46 provider quota ceiling"
+    assert pr.assumption_kind({"evidenceClass": "provider_dollar_limit"}) == "dollarLimit"
+    assert pr.assumption_kinds_text() == "an owner-named transfer, an O46 provider quota ceiling or an O198 published dollar limit"
+    assert pr.assumption_kinds_text("and", plural=True).endswith("and O198 published dollar limits")
+    assert pr.assumption_counts_text({"transfer": 2, "ceiling": 1, "dollarLimit": 3}) == "2 owner-named transfers, 1 O46 provider quota ceiling and 3 O198 published dollar limits"
     assert pr.assumption_counts_text({"transfer": 1}) == "1 owner-named transfer" and pr.assumption_counts_text({}) == "none"
 
 

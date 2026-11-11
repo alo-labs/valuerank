@@ -984,10 +984,15 @@ def assemble(configurations: list[dict], documents: dict, *, release_day: date, 
     plan_routes.check_source_rereads(documents["planRoutes"], release_day)
     # I51 L7: an O46 ceiling is recomputed from its recorded credits, rate and fee, so the stored multiple cannot drift.
     for route in documents["planRoutes"]["routes"]:
-        if route.get("evidenceClass") == "provider_quota_ceiling":
+        if route.get("evidenceClass") == plan_routes.QUOTA_CEILING_CLASS:
             ceiling = route["quotaCredits"] * route["usdPerBillionCredits"] / 1e9 / route["planPriceUsd"]
             if abs(ceiling - route["valueMultiple"]) > CEILING_TOLERANCE:
                 raise ValueError(f"{route['id']}: the stored multiple {route['valueMultiple']} is not the quota ceiling {ceiling:.4f} (O46)")
+        # O198: a published dollar limit is recomputed from its recorded monthly limit and fee, at the seller's listed prices.
+        if route.get("evidenceClass") == plan_routes.DOLLAR_LIMIT_CLASS:
+            limit = route["monthlyLimitUsd"] / route["planPriceUsd"]
+            if abs(limit - route["valueMultiple"]) > CEILING_TOLERANCE:
+                raise ValueError(f"{route['id']}: the stored multiple {route['valueMultiple']} is not the published dollar limit {limit:.4f} (O198)")
     if window and (not searched or (release_day - date.fromisoformat(searched)).days > REPORT_SEARCH_MAX_AGE_DAYS):
         raise ValueError(f"end-user reports were last searched on {searched}, more than {REPORT_SEARCH_MAX_AGE_DAYS} days before the release cutoff {release_day} (E218)")
     # E216: the AA model-page snapshot and the price records are at most 45 days old at the release cutoff (the chart
@@ -3526,9 +3531,10 @@ AMOUNT_KINDS = {
     "capacity": "measured-workload capacity",
     "observed": "observed eligible consumption (capacity not established)",
     "ceiling": "provider quota ceiling: the full quota at API rates (O46; full use assumed)",
+    "dollarLimit": "published dollar limit: the full monthly limit at the seller's listed token prices (O198; full use assumed)",
     "sameModel": "API-equivalent consumption measured on the same model at another effort (O88, O90)",
 }
-AMOUNT_TARGETS = {"ceiling": "full-quota consumption", "sameModel": "measured-workload consumption (another effort)", "transfer": "assumed consumption", "identified": "target-workload capacity", "capacity": "measured-workload capacity", "observed": "measured-workload consumption"}
+AMOUNT_TARGETS = {"ceiling": "full-quota consumption", "dollarLimit": "full-limit consumption", "sameModel": "measured-workload consumption (another effort)", "transfer": "assumed consumption", "identified": "target-workload capacity", "capacity": "measured-workload capacity", "observed": "measured-workload consumption"}
 NO_TARGET_LINEAGE = "not derivable: the target solution's cash lineage is not established"
 
 
@@ -3537,6 +3543,8 @@ def _amount_derivation(kind: str, route: dict, multiple: float, gross: float) ->
 
     if kind == "ceiling":
         return (multiple * gross if math.isfinite(gross) else None), "quota ceiling: the tier's credits at the provider's API rate"
+    if kind == "dollarLimit":
+        return (multiple * gross if math.isfinite(gross) else None), "published dollar limit: the model's monthly limit at the seller's listed token prices"
     if kind == "sameModel":
         return (multiple * gross if math.isfinite(gross) else None), "same-model measurement: the multiple measured at another effort times this route's cash (O88, O90)"
     if kind == "transfer":
@@ -3559,8 +3567,10 @@ def plan_amount(selected: dict | None, workload: str | None = None) -> dict | No
     if selected is None:
         return None
     route = selected["route"]
-    if route.get("evidenceClass") == "provider_quota_ceiling":
+    if route.get("evidenceClass") == plan_routes.QUOTA_CEILING_CLASS:
         kind = "ceiling"
+    elif route.get("evidenceClass") == plan_routes.DOLLAR_LIMIT_CLASS:
+        kind = "dollarLimit"
     elif route.get("sameModelAcrossEfforts"):
         kind = "sameModel"
     elif selected["grade"] == "assumption":

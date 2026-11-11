@@ -8,7 +8,7 @@
   "summary": {
     "rank": {
       "api": 4,
-      "plan": 17
+      "plan": 18
     },
     "overall": {
       "api": 55.20401280342945,
@@ -397,7 +397,7 @@
       "planIntervalEligible": false,
       "usdPerRun": 14.759687996495655,
       "selected": true,
-      "planRank": 17,
+      "planRank": 18,
       "planValue": 58.3113217423241
     },
     {
@@ -415,7 +415,7 @@
       "planIntervalEligible": false,
       "usdPerRun": 15.070271004573572,
       "selected": false,
-      "planRank": 17,
+      "planRank": 18,
       "planValue": 58.3113217423241
     },
     {
@@ -433,7 +433,7 @@
       "planIntervalEligible": false,
       "usdPerRun": 15.25828782132929,
       "selected": false,
-      "planRank": 17,
+      "planRank": 18,
       "planValue": 58.3113217423241
     },
     {
@@ -451,8 +451,26 @@
       "planIntervalEligible": false,
       "usdPerRun": 19.62856285163595,
       "selected": false,
-      "planRank": 17,
+      "planRank": 18,
       "planValue": 58.3113217423241
+    },
+    {
+      "id": "opencode-go-gpt-6-luna-dollar-limit",
+      "planLabel": "OpenCode Go $10 · GPT-6 Luna (max) · published dollar limit ($15 a month)",
+      "planFeeUsd": 10,
+      "valueMultiple": 1.5,
+      "grade": "assumption",
+      "assumptionKind": null,
+      "evidenceLabel": "Published dollar limit (owner decision O198; the plan's terms, not a measurement)",
+      "sourceUrl": "https://opencode.ai/docs/console/go/",
+      "sourceDate": "2026-11-11",
+      "case": 2,
+      "officialDisplayEligible": true,
+      "planIntervalEligible": false,
+      "usdPerRun": 105.99423939883413,
+      "selected": false,
+      "planRank": 23,
+      "planValue": 54.490758821578
     }
   ],
   "scenarios": {
@@ -657,7 +675,7 @@
       "date": "2026-10-19",
       "rank": {
         "api": 4,
-        "plan": 17
+        "plan": 18
       }
     }
   ],
@@ -678,7 +696,7 @@
       "rankingEligible": true,
       "rank": {
         "api": 4,
-        "plan": 17
+        "plan": 18
       },
       "overall": {
         "api": 55.20401280342945,
@@ -693,7 +711,7 @@
       "rankingEligible": true,
       "rank": {
         "api": 14,
-        "plan": 28
+        "plan": 29
       },
       "overall": {
         "api": 47.971330167362204,
@@ -708,7 +726,7 @@
       "rankingEligible": true,
       "rank": {
         "api": 25,
-        "plan": 71
+        "plan": 72
       },
       "overall": {
         "api": 40.07452342007535,

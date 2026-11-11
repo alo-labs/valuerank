@@ -8,7 +8,7 @@
   "summary": {
     "rank": {
       "api": 20,
-      "plan": 57
+      "plan": 58
     },
     "overall": {
       "api": 42.57775320336529,
@@ -352,7 +352,7 @@
       "planIntervalEligible": false,
       "usdPerRun": 3.3905633522652816,
       "selected": true,
-      "planRank": 57,
+      "planRank": 58,
       "planValue": 45.28664274854686
     },
     {
@@ -370,7 +370,7 @@
       "planIntervalEligible": false,
       "usdPerRun": 3.4619098038484943,
       "selected": false,
-      "planRank": 57,
+      "planRank": 58,
       "planValue": 45.28664274854686
     },
     {
@@ -388,7 +388,7 @@
       "planIntervalEligible": false,
       "usdPerRun": 3.50510061714027,
       "selected": false,
-      "planRank": 57,
+      "planRank": 58,
       "planValue": 45.28664274854686
     },
     {
@@ -406,8 +406,26 @@
       "planIntervalEligible": false,
       "usdPerRun": 4.509030670444644,
       "selected": false,
-      "planRank": 57,
+      "planRank": 58,
       "planValue": 45.28664274854686
+    },
+    {
+      "id": "opencode-go-gpt-6-luna-medium-dollar-limit",
+      "planLabel": "OpenCode Go $10 · GPT-6 Luna (medium) · published dollar limit ($15 a month)",
+      "planFeeUsd": 10,
+      "valueMultiple": 1.5,
+      "grade": "assumption",
+      "assumptionKind": null,
+      "evidenceLabel": "Published dollar limit (owner decision O198; the plan's terms, not a measurement)",
+      "sourceUrl": "https://opencode.ai/docs/console/go/",
+      "sourceDate": "2026-11-11",
+      "case": 2,
+      "officialDisplayEligible": true,
+      "planIntervalEligible": false,
+      "usdPerRun": 24.34876562040108,
+      "selected": false,
+      "planRank": 74,
+      "planValue": 40.21283989026153
     }
   ],
   "scenarios": {
@@ -556,7 +574,7 @@
       "date": "2026-10-19",
       "rank": {
         "api": 20,
-        "plan": 57
+        "plan": 58
       }
     }
   ],
@@ -592,7 +610,7 @@
       "rankingEligible": true,
       "rank": {
         "api": 20,
-        "plan": 57
+        "plan": 58
       },
       "overall": {
         "api": 42.57775320336529,

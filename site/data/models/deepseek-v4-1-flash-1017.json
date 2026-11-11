@@ -8,11 +8,11 @@
   "summary": {
     "rank": {
       "api": 2,
-      "plan": 22
+      "plan": 11
     },
     "overall": {
       "api": 58.58793280181757,
-      "plan": 50.92985627935505
+      "plan": 67.10490071923569
     },
     "quality": 56.13986762564758,
     "qualityRank": 6,
@@ -266,19 +266,30 @@
   ],
   "cost": {
     "apiUsd": 531.4356367333653,
-    "planUsd": 531.4356367333653,
-    "fallback": "api",
-    "route": null,
+    "planUsd": 53.14356367333653,
+    "fallback": null,
+    "route": {
+      "id": "opencode-go-deepseek-v4-1-flash-1017-dollar-limit",
+      "planLabel": "OpenCode Go $10 · DeepSeek V4.1 Flash · published dollar limit ($100 a month)",
+      "planFeeUsd": 10,
+      "valueMultiple": 10.0,
+      "grade": "assumption",
+      "assumptionKind": "dollarLimit",
+      "evidenceLabel": "Published dollar limit (owner decision O198; the plan's terms, not a measurement)",
+      "sourceModel": null,
+      "sourceUrl": "https://opencode.ai/docs/console/go/",
+      "sourceDate": "2026-11-11"
+    },
     "subset": false,
     "partialComponents": [],
     "workload": "aad36e77d6e17386",
     "planFlags": [
-      "API-cost fallback: no admitted Plan route",
-      "cross-estimand ordering not identified"
+      "workload-unmatched",
+      "published dollar limit; full use of the limit assumed, at the seller's listed token prices (O198)"
     ],
     "costScore": {
       "api": 65.93212833032754,
-      "plan": 35.29982224047746
+      "plan": 100.0
     },
     "components": [
       {
@@ -346,10 +357,47 @@
       }
     ],
     "aaCostCaveat": null,
-    "selectionReason": "no eligible route",
-    "planAmount": null
+    "selectionReason": "only remaining eligible route",
+    "planAmount": {
+      "amountKind": "published dollar limit: the full monthly limit at the seller's listed token prices (O198; full use assumed)",
+      "amountTarget": "full-limit consumption",
+      "amountUsd": 100.0,
+      "derivation": "published dollar limit: the model's monthly limit at the seller's listed token prices",
+      "feePeriod": "month",
+      "subscriptionCashUsd": 10,
+      "additionalCashUsd": 0.0,
+      "grossCashUsd": 10.0,
+      "workload": "the route's measurement workload",
+      "measurementObjectId": "opencode-go-deepseek-v4-1-flash-1017-dollar-limit",
+      "capacitySolutionId": null,
+      "cashObjectId": "opencode-go-deepseek-v4-1-flash-1017-dollar-limit:month cash",
+      "purchasePolicyId": "subscription fee for the fee period, no additional cash declared",
+      "capacityStatus": "published dollar limit: full use of the limit assumed (O198)",
+      "valuationStatus": "release",
+      "donorRouteId": null,
+      "interpretationLabel": "published dollar limit: the full monthly limit at the seller's listed token prices (O198; full use assumed), API-priced USD per month"
+    }
   },
-  "plans": [],
+  "plans": [
+    {
+      "id": "opencode-go-deepseek-v4-1-flash-1017-dollar-limit",
+      "planLabel": "OpenCode Go $10 · DeepSeek V4.1 Flash · published dollar limit ($100 a month)",
+      "planFeeUsd": 10,
+      "valueMultiple": 10.0,
+      "grade": "assumption",
+      "assumptionKind": null,
+      "evidenceLabel": "Published dollar limit (owner decision O198; the plan's terms, not a measurement)",
+      "sourceUrl": "https://opencode.ai/docs/console/go/",
+      "sourceDate": "2026-11-11",
+      "case": 2,
+      "officialDisplayEligible": true,
+      "planIntervalEligible": false,
+      "usdPerRun": 53.14356367333653,
+      "selected": true,
+      "planRank": 11,
+      "planValue": 67.10490071923569
+    }
+  ],
   "scenarios": {
     "status": "current",
     "api": [
@@ -425,61 +473,61 @@
         "unevaluable": null,
         "top1": 0.0,
         "top3": 0.0,
-        "frontier": 0.0
+        "frontier": 1.0
       },
       {
         "stratum": "S1",
         "kernel": "primary",
         "targetProfile": "published-record reporting precision + conventional identification of missing leaves",
-        "unevaluable": null,
-        "top1": 0.0,
-        "top3": 0.0,
-        "frontier": 0.0
+        "unevaluable": "O198 published dollar limit: unevaluable with owner assumptions off (never reselected or replaced by API cost)",
+        "top1": null,
+        "top3": null,
+        "frontier": null
       },
       {
         "stratum": "S2",
         "kernel": "primary",
         "targetProfile": "published-record reporting precision + conventional identification of missing leaves + weight-specification stress",
-        "unevaluable": null,
-        "top1": 0.0,
-        "top3": 0.0,
-        "frontier": 0.0
+        "unevaluable": "O198 published dollar limit: unevaluable with owner assumptions off (never reselected or replaced by API cost)",
+        "top1": null,
+        "top3": null,
+        "frontier": null
       },
       {
         "stratum": "S1",
         "kernel": "endpoint-heavy",
         "targetProfile": "published-record reporting precision + conventional identification of missing leaves",
-        "unevaluable": null,
-        "top1": 0.0,
-        "top3": 0.0,
-        "frontier": 0.0
+        "unevaluable": "O198 published dollar limit: unevaluable with owner assumptions off (never reselected or replaced by API cost)",
+        "top1": null,
+        "top3": null,
+        "frontier": null
       },
       {
         "stratum": "S1M",
         "kernel": "primary",
         "targetProfile": "published-record reporting precision + conventional identification of missing leaves + conventional range sensitivity inside published 95% confidence intervals (no tail model)",
-        "unevaluable": null,
-        "top1": 0.0,
-        "top3": 0.0,
-        "frontier": 0.0
+        "unevaluable": "O198 published dollar limit: unevaluable with owner assumptions off (never reselected or replaced by API cost)",
+        "top1": null,
+        "top3": null,
+        "frontier": null
       },
       {
         "stratum": "S1T",
         "kernel": "primary",
         "targetProfile": "mixed-target performance dispersion stress, not a common confidence interval for published mean performance (reviewer 101): published-record leaf values redrawn from task-count approximations (binomial leaves from their Jeffreys Beta posterior, O142, with its recentred, clipped alternative, O154, whose realised mean shift is reported; independent-task approximation), Vals' published standard errors, an assumed reading of GDPval-AA's displayed rating interval and Bug Hunt's single-run dispersion + conventional identification of missing leaves",
-        "unevaluable": null,
-        "top1": 0.0,
-        "top3": 0.0,
-        "frontier": 0.0
+        "unevaluable": "O198 published dollar limit: unevaluable with owner assumptions off (never reselected or replaced by API cost)",
+        "top1": null,
+        "top3": null,
+        "frontier": null
       },
       {
         "stratum": "S1T",
         "kernel": "recentred",
         "targetProfile": "mixed-target performance dispersion stress, not a common confidence interval for published mean performance (reviewer 101): published-record leaf values redrawn from task-count approximations (binomial leaves from their Jeffreys Beta posterior, O142, with its recentred, clipped alternative, O154, whose realised mean shift is reported; independent-task approximation), Vals' published standard errors, an assumed reading of GDPval-AA's displayed rating interval and Bug Hunt's single-run dispersion + conventional identification of missing leaves",
-        "unevaluable": null,
-        "top1": 0.0,
-        "top3": 0.0,
-        "frontier": 0.0
+        "unevaluable": "O198 published dollar limit: unevaluable with owner assumptions off (never reselected or replaced by API cost)",
+        "top1": null,
+        "top3": null,
+        "frontier": null
       }
     ]
   },
@@ -496,7 +544,7 @@
       "date": "2026-10-19",
       "rank": {
         "api": 2,
-        "plan": 22
+        "plan": 11
       }
     }
   ],
@@ -517,11 +565,11 @@
       "rankingEligible": true,
       "rank": {
         "api": 2,
-        "plan": 22
+        "plan": 11
       },
       "overall": {
         "api": 58.58793280181757,
-        "plan": 50.92985627935505
+        "plan": 67.10490071923569
       }
     },
     {
@@ -532,11 +580,11 @@
       "rankingEligible": true,
       "rank": {
         "api": 4,
-        "plan": 62
+        "plan": 26
       },
       "overall": {
         "api": 51.5550653294371,
-        "plan": 41.71836840027343
+        "plan": 55.38064123497913
       }
     },
     {
@@ -547,11 +595,11 @@
       "rankingEligible": true,
       "rank": {
         "api": 10,
-        "plan": 96
+        "plan": 48
       },
       "overall": {
         "api": 46.18017825689371,
-        "plan": 40.85180189344345
+        "plan": 53.01270215103771
       }
     }
   ]

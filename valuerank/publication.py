@@ -57,6 +57,9 @@ def plan_evidence_label(route):
     if route.get("evidenceClass") == "provider_quota_ceiling":
         # O46: the quota-implied ceiling, an owner-authorised provider-derived figure, never a measurement.
         return "Provider quota ceiling (owner decision O46; not a measurement)"
+    if route.get("evidenceClass") == "provider_dollar_limit":
+        # O198: the seller's published monthly dollar limit, the plan's own terms, never a measurement.
+        return "Published dollar limit (owner decision O198; the plan's terms, not a measurement)"
     if route.get("evidenceClass") == "controlled_account_workload_projection":
         # O40: an exact measurement the selected article added after the owner's selection replaces the transfer at once.
         added = f" (added after selection, {route['addedAfterSelection']})" if route.get("addedAfterSelection") else ""

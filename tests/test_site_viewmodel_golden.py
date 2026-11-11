@@ -313,7 +313,7 @@ def test_model_history_and_frontier_notes(bundle):
 def test_plans_document(bundle, v3, synthetic):
     plans = bundle.plans
     # O45/O46: one route record per model and plan.
-    assert plans["asOf"] == "2026-11-05" and len(plans["routes"]) == 156 and len(plans["candidates"]) == 9
+    assert plans["asOf"] == "2026-11-05" and len(plans["routes"]) == 170 and len(plans["candidates"]) == 9
     assert plans["identificationYield"] == v3["identificationYield"]
     route = next(r for r in plans["routes"] if r["id"] == "claude-pro-opus55-semianalysis")
     assert route["grade"] == "measured" and route["modelSlugs"] == ["claude-opus-5-5"] and route["valueMultiple"] == 58.9

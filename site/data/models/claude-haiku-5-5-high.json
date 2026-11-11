@@ -8,7 +8,7 @@
   "summary": {
     "rank": {
       "api": 15,
-      "plan": 39
+      "plan": 40
     },
     "overall": {
       "api": 46.19667671408824,
@@ -353,7 +353,7 @@
       "planIntervalEligible": false,
       "usdPerRun": 1.8301796366737215,
       "selected": true,
-      "planRank": 39,
+      "planRank": 40,
       "planValue": 53.13533951096931
     },
     {
@@ -371,7 +371,7 @@
       "planIntervalEligible": false,
       "usdPerRun": 1.8386078901600238,
       "selected": false,
-      "planRank": 39,
+      "planRank": 40,
       "planValue": 53.13533951096931
     },
     {
@@ -389,8 +389,26 @@
       "planIntervalEligible": false,
       "usdPerRun": 1.8829271720538376,
       "selected": false,
-      "planRank": 39,
+      "planRank": 40,
       "planValue": 53.13533951096931
+    },
+    {
+      "id": "opencode-go-claude-haiku-5-5-high-dollar-limit",
+      "planLabel": "OpenCode Go $10 · Claude Haiku 5.5 (high) · published dollar limit ($15 a month)",
+      "planFeeUsd": 10,
+      "valueMultiple": 1.5,
+      "grade": "assumption",
+      "assumptionKind": null,
+      "evidenceLabel": "Published dollar limit (owner decision O198; the plan's terms, not a measurement)",
+      "sourceUrl": "https://opencode.ai/docs/console/go/",
+      "sourceDate": "2026-11-11",
+      "case": 2,
+      "officialDisplayEligible": true,
+      "planIntervalEligible": false,
+      "usdPerRun": 71.86505373338814,
+      "selected": false,
+      "planRank": 67,
+      "planValue": 41.63971092555199
     }
   ],
   "scenarios": {
@@ -538,7 +556,7 @@
       "date": "2026-10-19",
       "rank": {
         "api": 15,
-        "plan": 39
+        "plan": 40
       }
     }
   ],
@@ -574,7 +592,7 @@
       "rankingEligible": true,
       "rank": {
         "api": 15,
-        "plan": 39
+        "plan": 40
       },
       "overall": {
         "api": 46.19667671408824,
@@ -589,7 +607,7 @@
       "rankingEligible": true,
       "rank": {
         "api": 27,
-        "plan": 80
+        "plan": 81
       },
       "overall": {
         "api": 38.07603173434583,

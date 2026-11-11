@@ -47,6 +47,19 @@ Every input behind the published scores, with the artifact and locator that hold
 | Claude Sonnet 5.5 (max) | HLE-Diamond | 0.533 | fraction | 53.30 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=claude-sonnet-5-5].model.hleDiamond` |
 | Claude Sonnet 5.5 (max) | Terminal-Bench-Science 0.1 | 0.533333333333333 | fraction | 53.33 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=claude-sonnet-5-5].model.terminalBenchScience` |
 | Claude Sonnet 5.5 (max) | CritPt v2 (hard subset) | 0.56 | fraction | 56.00 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=claude-sonnet-5-5].model.critptAgenticHard` |
+| DeepSeek V4.1 Flash 1017 (max) | FrontierCode 2.0 | 0.284711616161616 | fraction | 28.47 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=deepseek-v4-1-flash-1017].model.frontierCode20` |
+| DeepSeek V4.1 Flash 1017 (max) | Terminal-Bench 4.0 (AA run) | 33.8383838383838 | percent | 33.84 | mini-SWE-agent | `data/aa/aa_v432_snapshot.json` `pages[model.slug=deepseek-v4-1-flash-1017].model.terminalBench40` |
+| DeepSeek V4.1 Flash 1017 (max) | Bug Hunt Bench | 86.7 | bugs fixed, planted plus unplanted (O163, O170) | 70.89 | DeepSeek V4.1 Flash 1017 (max effort, DeepSeek Harness) - mean of 7 | `data/bug_hunt.json` `models[modelId=deepseek-v4-1-flash-1017].fixedOf105 + models[modelId=deepseek-v4-1-flash-1017].extras` |
+| DeepSeek V4.1 Flash 1017 (max) | Vibe Code Bench v1.1 (Vals) | 87.73 | percent | 87.73 | deepseek/deepseek-v4.1-flash-1017 | `data/swe_tracks.json` `records[modelId=deepseek-v4-1-flash-1017, leaf=vibeCode].value` |
+| DeepSeek V4.1 Flash 1017 (max) | Code Migration v1.1 (Vals) | 67.524 | percent | 67.52 | deepseek/deepseek-v4.1-flash-1017 | `data/swe_tracks.json` `records[modelId=deepseek-v4-1-flash-1017, leaf=codeMigration].value` |
+| DeepSeek V4.1 Flash 1017 (max) | LiveBench 2.0 Overall | 72.87 | percent | 72.87 | deepseek-v4.1-flash-1017 | `data/swe_tracks.json` `records[modelId=deepseek-v4-1-flash-1017, leaf=livebench2Overall].value` |
+| DeepSeek V4.1 Flash 1017 (max) | GDPval-AA v2.1 | 1745.77 | Elo | 62.29 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=deepseek-v4-1-flash-1017].model.gdpval` |
+| DeepSeek V4.1 Flash 1017 (max) | AutomationBench-AA | 0.6664095364949257 | fraction | 66.64 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=deepseek-v4-1-flash-1017].model.automationBenchPartialScore` |
+| DeepSeek V4.1 Flash 1017 (max) | AA-Omniscience v1.1 | 0.9 | AA Omniscience Index | 50.45 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=deepseek-v4-1-flash-1017].model.omniscience` |
+| DeepSeek V4.1 Flash 1017 (max) | AA-LCR v1.1 | 0.826666666666667 | fraction | 82.67 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=deepseek-v4-1-flash-1017].model.lcr` |
+| DeepSeek V4.1 Flash 1017 (max) | HLE-Diamond | 0.253 | fraction | 25.30 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=deepseek-v4-1-flash-1017].model.hleDiamond` |
+| DeepSeek V4.1 Flash 1017 (max) | Terminal-Bench-Science 0.1 | 0.128571428571429 | fraction | 12.86 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=deepseek-v4-1-flash-1017].model.terminalBenchScience` |
+| DeepSeek V4.1 Flash 1017 (max) | CritPt v2 (hard subset) | 0.24 | fraction | 24.00 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=deepseek-v4-1-flash-1017].model.critptAgenticHard` |
 | Claude Haiku 5.5 (max) | FrontierCode 2.0 | 0.349325505050505 | fraction | 34.93 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=claude-haiku-5-5].model.frontierCode20` |
 | Claude Haiku 5.5 (max) | Terminal-Bench 4.0 (AA run) | 32.8282828282828 | percent | 32.83 | mini-SWE-agent | `data/aa/aa_v432_snapshot.json` `pages[model.slug=claude-haiku-5-5].model.terminalBench40` |
 | Claude Haiku 5.5 (max) | Bug Hunt Bench | 30.5 | bugs fixed, planted plus unplanted (O163, O170) | 24.94 | Haiku 5.5 (max effort) - mean of 2 | `data/bug_hunt.json` `models[modelId=claude-haiku-5-5-max].fixedOf105 + models[modelId=claude-haiku-5-5-max].extras` |
@@ -86,19 +99,6 @@ Every input behind the published scores, with the artifact and locator that hold
 | GPT-6 Luna (max) | HLE-Diamond | 0.222 | fraction | 22.20 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=gpt-6-luna].model.hleDiamond` |
 | GPT-6 Luna (max) | Terminal-Bench-Science 0.1 | 0.0857142857142857 | fraction | 8.57 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=gpt-6-luna].model.terminalBenchScience` |
 | GPT-6 Luna (max) | CritPt v2 (hard subset) | 0.415 | fraction | 41.50 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=gpt-6-luna].model.critptAgenticHard` |
-| DeepSeek V4.1 Flash 1017 (max) | FrontierCode 2.0 | 0.284711616161616 | fraction | 28.47 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=deepseek-v4-1-flash-1017].model.frontierCode20` |
-| DeepSeek V4.1 Flash 1017 (max) | Terminal-Bench 4.0 (AA run) | 33.8383838383838 | percent | 33.84 | mini-SWE-agent | `data/aa/aa_v432_snapshot.json` `pages[model.slug=deepseek-v4-1-flash-1017].model.terminalBench40` |
-| DeepSeek V4.1 Flash 1017 (max) | Bug Hunt Bench | 86.7 | bugs fixed, planted plus unplanted (O163, O170) | 70.89 | DeepSeek V4.1 Flash 1017 (max effort, DeepSeek Harness) - mean of 7 | `data/bug_hunt.json` `models[modelId=deepseek-v4-1-flash-1017].fixedOf105 + models[modelId=deepseek-v4-1-flash-1017].extras` |
-| DeepSeek V4.1 Flash 1017 (max) | Vibe Code Bench v1.1 (Vals) | 87.73 | percent | 87.73 | deepseek/deepseek-v4.1-flash-1017 | `data/swe_tracks.json` `records[modelId=deepseek-v4-1-flash-1017, leaf=vibeCode].value` |
-| DeepSeek V4.1 Flash 1017 (max) | Code Migration v1.1 (Vals) | 67.524 | percent | 67.52 | deepseek/deepseek-v4.1-flash-1017 | `data/swe_tracks.json` `records[modelId=deepseek-v4-1-flash-1017, leaf=codeMigration].value` |
-| DeepSeek V4.1 Flash 1017 (max) | LiveBench 2.0 Overall | 72.87 | percent | 72.87 | deepseek-v4.1-flash-1017 | `data/swe_tracks.json` `records[modelId=deepseek-v4-1-flash-1017, leaf=livebench2Overall].value` |
-| DeepSeek V4.1 Flash 1017 (max) | GDPval-AA v2.1 | 1745.77 | Elo | 62.29 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=deepseek-v4-1-flash-1017].model.gdpval` |
-| DeepSeek V4.1 Flash 1017 (max) | AutomationBench-AA | 0.6664095364949257 | fraction | 66.64 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=deepseek-v4-1-flash-1017].model.automationBenchPartialScore` |
-| DeepSeek V4.1 Flash 1017 (max) | AA-Omniscience v1.1 | 0.9 | AA Omniscience Index | 50.45 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=deepseek-v4-1-flash-1017].model.omniscience` |
-| DeepSeek V4.1 Flash 1017 (max) | AA-LCR v1.1 | 0.826666666666667 | fraction | 82.67 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=deepseek-v4-1-flash-1017].model.lcr` |
-| DeepSeek V4.1 Flash 1017 (max) | HLE-Diamond | 0.253 | fraction | 25.30 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=deepseek-v4-1-flash-1017].model.hleDiamond` |
-| DeepSeek V4.1 Flash 1017 (max) | Terminal-Bench-Science 0.1 | 0.128571428571429 | fraction | 12.86 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=deepseek-v4-1-flash-1017].model.terminalBenchScience` |
-| DeepSeek V4.1 Flash 1017 (max) | CritPt v2 (hard subset) | 0.24 | fraction | 24.00 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=deepseek-v4-1-flash-1017].model.critptAgenticHard` |
 | Gemini 4 Argon (high) | FrontierCode 2.0 | 0.257076262626263 | fraction | 25.71 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=gemini-4-argon].model.frontierCode20` |
 | Gemini 4 Argon (high) | Terminal-Bench 4.0 (AA run) | 57.07070707070711 | percent | 57.07 | mini-SWE-agent | `data/aa/aa_v432_snapshot.json` `pages[model.slug=gemini-4-argon].model.terminalBench40` |
 | Gemini 4 Argon (high) | Bug Hunt Bench | 48.0 | bugs fixed, planted plus unplanted (O163, O170) | 39.25 | Gemini 4 Argon (high effort, Antigravity CLI) - mean of 3 | `data/bug_hunt.json` `models[modelId=gemini-4-argon].fixedOf105 + models[modelId=gemini-4-argon].extras` |
@@ -213,6 +213,7 @@ Every input behind the published scores, with the artifact and locator that hold
 | GPT-6.1 Terra (medium) | HLE-Diamond | 0.313 | fraction | 31.30 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=gpt-6-1-terra-medium].model.hleDiamond` |
 | GPT-6.1 Terra (medium) | Terminal-Bench-Science 0.1 | 0.247619047619048 | fraction | 24.76 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=gpt-6-1-terra-medium].model.terminalBenchScience` |
 | GPT-6.1 Terra (medium) | CritPt v2 (hard subset) | 0.56 | fraction | 56.00 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=gpt-6-1-terra-medium].model.critptAgenticHard` |
+| DeepSeek V4.1 Flash 1017 (max) | AI Coding Daily (excl. bug finding) | 52.24 | points of 60 | 87.07 | Deepseek-V4.1-Flash-1017 (Max) | `data/swe_tracks.json` `records[modelId=deepseek-v4-1-flash-1017, leaf=aiCodingDaily].value` |
 | GPT-6 Luna (max) | AI Coding Daily (excl. bug finding) | 51.99 | points of 60 | 86.65 | GPT-6-Luna (Max) | `data/swe_tracks.json` `records[modelId=gpt-6-luna, leaf=aiCodingDaily].value` |
 | GPT-6.1 Sol (low) | FrontierCode 2.0 | 0.201560858585859 | fraction | 20.16 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=gpt-6-1-sol-low].model.frontierCode20` |
 | GPT-6.1 Sol (low) | Terminal-Bench 4.0 (AA run) | 30.808080808080803 | percent | 30.81 | mini-SWE-agent | `data/aa/aa_v432_snapshot.json` `pages[model.slug=gpt-6-1-sol-low].model.terminalBench40` |
@@ -302,9 +303,8 @@ Every input behind the published scores, with the artifact and locator that hold
 | Kimi K3.1 Pro (max) | HLE-Diamond | 0.373 | fraction | 37.30 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=kimi-k3-1-pro].model.hleDiamond` |
 | Kimi K3.1 Pro (max) | Terminal-Bench-Science 0.1 | 0.342857142857143 | fraction | 34.29 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=kimi-k3-1-pro].model.terminalBenchScience` |
 | Kimi K3.1 Pro (max) | CritPt v2 (hard subset) | 0.45 | fraction | 45.00 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=kimi-k3-1-pro].model.critptAgenticHard` |
-| DeepSeek V4.1 Flash 1017 (max) | AI Coding Daily (excl. bug finding) | 52.24 | points of 60 | 87.07 | Deepseek-V4.1-Flash-1017 (Max) | `data/swe_tracks.json` `records[modelId=deepseek-v4-1-flash-1017, leaf=aiCodingDaily].value` |
-| Gemini 4 Argon (high) | AI Coding Daily (excl. bug finding) | 49.9 | points of 60 | 83.17 | Gemini 4 Argon (High) | `data/swe_tracks.json` `records[modelId=gemini-4-argon, leaf=aiCodingDaily].value` |
 | MiMo-V2.6-Pro | AI Coding Daily (excl. bug finding) | 47.56 | points of 60 | 79.27 | MiMo-V2.6 Pro (High) | `data/swe_tracks.json` `records[modelId=mimo-v2-6-pro, leaf=aiCodingDaily].value` |
+| Gemini 4 Argon (high) | AI Coding Daily (excl. bug finding) | 49.9 | points of 60 | 83.17 | Gemini 4 Argon (High) | `data/swe_tracks.json` `records[modelId=gemini-4-argon, leaf=aiCodingDaily].value` |
 | GPT-6.1 Sol (xhigh) | FrontierCode 2.0 | 0.385190909090909 | fraction | 38.52 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=gpt-6-1-sol-xhigh].model.frontierCode20` |
 | GPT-6.1 Sol (xhigh) | Terminal-Bench 4.0 (AA run) | 54.040404040404 | percent | 54.04 | mini-SWE-agent | `data/aa/aa_v432_snapshot.json` `pages[model.slug=gpt-6-1-sol-xhigh].model.terminalBench40` |
 | GPT-6.1 Sol (xhigh) | Bug Hunt Bench | 99.4 | bugs fixed, planted plus unplanted (O163, O170) | 81.28 | GPT-6.1 Sol (xhigh effort) - mean of 3 | `data/bug_hunt.json` `models[modelId=gpt-6.1-sol-xhigh].fixedOf105 + models[modelId=gpt-6.1-sol-xhigh].extras` |
@@ -550,6 +550,13 @@ Exhaustive searches for the leaves a cohort configuration still lacks (each with
 | Claude Sonnet 5.5 (max) | FrontierCode 2.0 | $1,525.59 | confirmed-complete | 132 | $11.5575 | AA Intelligence Index evaluation cost (cost per task x task count) |
 | Claude Sonnet 5.5 (max) | Terminal-Bench-Science | $1,663.25 | confirmed-complete | 70 | $23.7607 | AA Intelligence Index evaluation cost (cost per task x task count) |
 | Claude Sonnet 5.5 (max) | Coding Agent Index | $3,857.44 | confirmed-complete | — | — | AA Coding Agent Index v2.0 cost to run (mean API cost per task) x 290 tasks |
+| DeepSeek V4.1 Flash 1017 (max) | AA-Briefcase | $61.72 | confirmed-complete | 91 | $0.6783 | AA Intelligence Index evaluation cost (cost per task x task count) |
+| DeepSeek V4.1 Flash 1017 (max) | GDP.pdf | $4.23 | confirmed-complete | 100 | $0.0423 | AA Intelligence Index evaluation cost (cost per task x task count) |
+| DeepSeek V4.1 Flash 1017 (max) | AutomationBench-AA | $114.26 | confirmed-complete | 657 | $0.1739 | AA Intelligence Index evaluation cost (cost per task x task count) |
+| DeepSeek V4.1 Flash 1017 (max) | Terminal-Bench 4.0 (AA Index run) | $58.09 | confirmed-complete | 66 | $0.8801 | AA Intelligence Index evaluation cost (cost per task x task count) |
+| DeepSeek V4.1 Flash 1017 (max) | FrontierCode 2.0 | $68.49 | confirmed-complete | 132 | $0.5188 | AA Intelligence Index evaluation cost (cost per task x task count) |
+| DeepSeek V4.1 Flash 1017 (max) | Terminal-Bench-Science | $138.73 | confirmed-complete | 70 | $1.9818 | AA Intelligence Index evaluation cost (cost per task x task count) |
+| DeepSeek V4.1 Flash 1017 (max) | Coding Agent Index | $85.92 | confirmed-complete | — | — | AA Coding Agent Index v2.0 cost to run (mean API cost per task) x 290 tasks |
 | Claude Haiku 5.5 (max) | AA-Briefcase | $61.41 | confirmed-complete | 91 | $0.6749 | AA Intelligence Index evaluation cost (cost per task x task count) |
 | Claude Haiku 5.5 (max) | GDP.pdf | $5.27 | confirmed-complete | 100 | $0.0527 | AA Intelligence Index evaluation cost (cost per task x task count) |
 | Claude Haiku 5.5 (max) | AutomationBench-AA | $27.80 | confirmed-complete | 657 | $0.0423 | AA Intelligence Index evaluation cost (cost per task x task count) |
@@ -572,13 +579,6 @@ Exhaustive searches for the leaves a cohort configuration still lacks (each with
 | GPT-6 Luna (max) | FrontierCode 2.0 | $23.22 | confirmed-complete | 132 | $0.1759 | AA Intelligence Index evaluation cost (cost per task x task count) |
 | GPT-6 Luna (max) | Terminal-Bench-Science | $31.79 | confirmed-complete | 70 | $0.4541 | AA Intelligence Index evaluation cost (cost per task x task count) |
 | GPT-6 Luna (max) | Coding Agent Index | $46.16 | confirmed-complete | — | — | AA Coding Agent Index v2.0 cost to run (mean API cost per task) x 290 tasks |
-| DeepSeek V4.1 Flash 1017 (max) | AA-Briefcase | $61.72 | confirmed-complete | 91 | $0.6783 | AA Intelligence Index evaluation cost (cost per task x task count) |
-| DeepSeek V4.1 Flash 1017 (max) | GDP.pdf | $4.23 | confirmed-complete | 100 | $0.0423 | AA Intelligence Index evaluation cost (cost per task x task count) |
-| DeepSeek V4.1 Flash 1017 (max) | AutomationBench-AA | $114.26 | confirmed-complete | 657 | $0.1739 | AA Intelligence Index evaluation cost (cost per task x task count) |
-| DeepSeek V4.1 Flash 1017 (max) | Terminal-Bench 4.0 (AA Index run) | $58.09 | confirmed-complete | 66 | $0.8801 | AA Intelligence Index evaluation cost (cost per task x task count) |
-| DeepSeek V4.1 Flash 1017 (max) | FrontierCode 2.0 | $68.49 | confirmed-complete | 132 | $0.5188 | AA Intelligence Index evaluation cost (cost per task x task count) |
-| DeepSeek V4.1 Flash 1017 (max) | Terminal-Bench-Science | $138.73 | confirmed-complete | 70 | $1.9818 | AA Intelligence Index evaluation cost (cost per task x task count) |
-| DeepSeek V4.1 Flash 1017 (max) | Coding Agent Index | $85.92 | confirmed-complete | — | — | AA Coding Agent Index v2.0 cost to run (mean API cost per task) x 290 tasks |
 | Gemini 4 Argon (high) | AA-Briefcase | $834.38 | confirmed-complete | 91 | $9.1691 | AA Intelligence Index evaluation cost (cost per task x task count) |
 | Gemini 4 Argon (high) | GDP.pdf | $51.87 | confirmed-complete | 100 | $0.5187 | AA Intelligence Index evaluation cost (cost per task x task count) |
 | Gemini 4 Argon (high) | AutomationBench-AA | $738.10 | confirmed-complete | 657 | $1.1234 | AA Intelligence Index evaluation cost (cost per task x task count) |
@@ -602,10 +602,10 @@ The seven Index components plus AA's residual reproduce AA's published Intellige
 | GPT-6.1 Sol (max) | — | $173.29 | $1,123.97 | $1,123.97 | yes |
 | Claude Opus 5.5 (max) | — | $1,863.54 | $8,911.91 | $8,909.67 | yes |
 | Claude Sonnet 5.5 (max) | — | $1,336.25 | $7,980.63 | $7,980.63 | yes |
+| DeepSeek V4.1 Flash 1017 (max) | — | $75.12 | $520.63 | $520.63 | yes |
 | Claude Haiku 5.5 (max) | — | $68.82 | $339.47 | $339.47 | yes |
 | GPT-6 Astra (max) | — | $893.27 | $5,661.18 | $5,661.18 | yes |
 | GPT-6 Luna (max) | — | $23.22 | $136.06 | $136.06 | yes |
-| DeepSeek V4.1 Flash 1017 (max) | — | $75.12 | $520.63 | $520.63 | yes |
 | Gemini 4 Argon (high) | — | $624.16 | $6,102.84 | $6,102.84 | yes |
 | MiMo-V2.6-Pro | — | $49.03 | $220.73 | $220.73 | yes |
 
@@ -891,6 +891,20 @@ Route evidence as of 2026-11-05. Full allocation regimes, workloads and notes ar
 | ChatGPT Pro 100 $100 · common GPT assumption | GPT-5.6 Luna | $100.00 | 10.55× | Provisional assumption | GPT-6.1 Sol | 2026-10-06 | [Source](https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x) |
 | ChatGPT Pro 200 $200 · common GPT assumption | GPT-5.6 Luna | $200.00 | 10.42× | Provisional assumption | GPT-6.1 Sol | 2026-10-06 | [Source](https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x) |
 | ChatGPT Pro 500 $500 · common GPT assumption | GPT-5.6 Luna | $500.00 | 10.772× | Provisional assumption | GPT-6.1 Sol | 2026-10-06 | [Source](https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x) |
+| OpenCode Go $10 · DeepSeek V4.1 Flash · published dollar limit ($100 a month) | DeepSeek V4.1 Flash 1017 | $10.00 | 10× | Published dollar limit (owner decision O198; the plan's terms, not a measurement) | — | 2026-11-11 | [Source](https://opencode.ai/docs/console/go/) |
+| OpenCode Go $10 · Gemini 4 Argon · published dollar limit ($30 a month) | Gemini 4 Argon | $10.00 | 3× | Published dollar limit (owner decision O198; the plan's terms, not a measurement) | — | 2026-11-11 | [Source](https://opencode.ai/docs/console/go/) |
+| OpenCode Go $10 · Claude Haiku 5.5 (xhigh) · published dollar limit ($15 a month) | Claude Haiku 5.5 (xhigh) | $10.00 | 1.5× | Published dollar limit (owner decision O198; the plan's terms, not a measurement) | — | 2026-11-11 | [Source](https://opencode.ai/docs/console/go/) |
+| OpenCode Go $10 · Claude Haiku 5.5 (high) · published dollar limit ($15 a month) | Claude Haiku 5.5 (high) | $10.00 | 1.5× | Published dollar limit (owner decision O198; the plan's terms, not a measurement) | — | 2026-11-11 | [Source](https://opencode.ai/docs/console/go/) |
+| OpenCode Go $10 · Claude Haiku 5.5 (low) · published dollar limit ($15 a month) | Claude Haiku 5.5 (low) | $10.00 | 1.5× | Published dollar limit (owner decision O198; the plan's terms, not a measurement) | — | 2026-11-11 | [Source](https://opencode.ai/docs/console/go/) |
+| OpenCode Go $10 · Claude Haiku 5.5 (max) · published dollar limit ($15 a month) | Claude Haiku 5.5 (max) | $10.00 | 1.5× | Published dollar limit (owner decision O198; the plan's terms, not a measurement) | — | 2026-11-11 | [Source](https://opencode.ai/docs/console/go/) |
+| OpenCode Go $10 · Claude Haiku 5.5 (medium) · published dollar limit ($15 a month) | Claude Haiku 5.5 (medium) | $10.00 | 1.5× | Published dollar limit (owner decision O198; the plan's terms, not a measurement) | — | 2026-11-11 | [Source](https://opencode.ai/docs/console/go/) |
+| OpenCode Go $10 · GPT-6 Luna (max) · published dollar limit ($15 a month) | GPT-6 Luna (max) | $10.00 | 1.5× | Published dollar limit (owner decision O198; the plan's terms, not a measurement) | — | 2026-11-11 | [Source](https://opencode.ai/docs/console/go/) |
+| OpenCode Go $10 · GPT-6 Luna (high) · published dollar limit ($15 a month) | GPT-6 Luna (high) | $10.00 | 1.5× | Published dollar limit (owner decision O198; the plan's terms, not a measurement) | — | 2026-11-11 | [Source](https://opencode.ai/docs/console/go/) |
+| OpenCode Go $10 · GPT-6 Luna (low) · published dollar limit ($15 a month) | GPT-6 Luna (low) | $10.00 | 1.5× | Published dollar limit (owner decision O198; the plan's terms, not a measurement) | — | 2026-11-11 | [Source](https://opencode.ai/docs/console/go/) |
+| OpenCode Go $10 · GPT-6 Luna (medium) · published dollar limit ($15 a month) | GPT-6 Luna (medium) | $10.00 | 1.5× | Published dollar limit (owner decision O198; the plan's terms, not a measurement) | — | 2026-11-11 | [Source](https://opencode.ai/docs/console/go/) |
+| OpenCode Go $10 · GPT-6 Luna (xhigh) · published dollar limit ($15 a month) | GPT-6 Luna (xhigh) | $10.00 | 1.5× | Published dollar limit (owner decision O198; the plan's terms, not a measurement) | — | 2026-11-11 | [Source](https://opencode.ai/docs/console/go/) |
+| OpenCode Go $10 · Kimi K3.1 Pro · published dollar limit ($15 a month) | Kimi K3.1 Pro | $10.00 | 1.5× | Published dollar limit (owner decision O198; the plan's terms, not a measurement) | — | 2026-11-11 | [Source](https://opencode.ai/docs/console/go/) |
+| OpenCode Go $10 · MiMo-V2.6-Pro · published dollar limit ($15 a month) | MiMo-V2.6-Pro | $10.00 | 1.5× | Published dollar limit (owner decision O198; the plan's terms, not a measurement) | — | 2026-11-11 | [Source](https://opencode.ai/docs/console/go/) |
 
 ### Plan amounts and their lineage
 
@@ -902,13 +916,15 @@ Each routed row's amount with what it measures, how it was derived and which obj
 | Claude Opus 5.5 (max) | $1,178 | measured-workload capacity | measurement record: its recorded numerator U_obs = M_obs x F_obs (workload capacity projection) | the route's measurement workload | claude-pro-opus55-semianalysis:month cash | claude-pro-opus55-semianalysis |
 | Claude Sonnet 5.5 (max) | $1,178 | assumed consumption | authorised assumption: the donor's multiple times this route's cash | the route's measurement workload | claude-pro-claude-sonnet-5-5-common-opus55-assumption:month cash | claude-pro-claude-sonnet-5-5-common-opus55-assumption |
 | GPT-6 Astra (max) | $2,897 | measured-workload capacity | measurement record: its recorded numerator U_obs = M_obs x F_obs (workload capacity projection) | the route's measurement workload | chatgpt-pro200-gpt6astra-semianalysis:month cash | chatgpt-pro200-gpt6astra-semianalysis |
+| DeepSeek V4.1 Flash 1017 (max) | $100 | full-limit consumption | published dollar limit: the model's monthly limit at the seller's listed token prices | the route's measurement workload | opencode-go-deepseek-v4-1-flash-1017-dollar-limit:month cash | opencode-go-deepseek-v4-1-flash-1017-dollar-limit |
+| Gemini 4 Argon (high) | $30 | full-limit consumption | published dollar limit: the model's monthly limit at the seller's listed token prices | the route's measurement workload | opencode-go-gemini-4-argon-dollar-limit:month cash | opencode-go-gemini-4-argon-dollar-limit |
 | Claude Haiku 5.5 (max) | $1,178 | assumed consumption | authorised assumption: the donor's multiple times this route's cash | the route's measurement workload | claude-pro-claude-haiku-5-5-max-common-opus55-assumption:month cash | claude-pro-claude-haiku-5-5-max-common-opus55-assumption |
 | GPT-6 Luna (max) | $5,386 | assumed consumption | authorised assumption: the donor's multiple times this route's cash | the route's measurement workload | chatgpt-pro500-gpt-6-luna-common-gpt-assumption:month cash | chatgpt-pro500-gpt-6-luna-common-gpt-assumption |
-| MiMo-V2.6-Pro | $118 | full-quota consumption | quota ceiling: the tier's credits at the provider's API rate | the route's measurement workload | mimo-tokenplan-max-mimo-v2-6-pro-quota-ceiling:month cash | mimo-tokenplan-max-mimo-v2-6-pro-quota-ceiling |
+| MiMo-V2.6-Pro | $15 | full-limit consumption | published dollar limit: the model's monthly limit at the seller's listed token prices | the route's measurement workload | opencode-go-mimo-v2-6-pro-dollar-limit:month cash | opencode-go-mimo-v2-6-pro-dollar-limit |
 
 ## Evidence bundle
 
-Bundle hash `65d84d231fea34bde1b789d9313abe888ac4cdf09532815f21973f9b858b22a1`: every published output is rebuilt from these artifacts at the pinned publication clock (npm run verify:docs), never from live pages.
+Bundle hash `54d3d45ef1d741dd124ccead7eae893f8c0f44e68f91f350075d5f9bfa22d2ab`: every published output is rebuilt from these artifacts at the pinned publication clock (npm run verify:docs), never from live pages.
 
 | Key | Artifact | SHA-256 | Captured | Extractor |
 |---|---|---|---|---|
@@ -922,12 +938,12 @@ Bundle hash `65d84d231fea34bde1b789d9313abe888ac4cdf09532815f21973f9b858b22a1`: 
 | frontierCapture | `data/aa_frontier_capture.json` | `a6ff97010eb9329d405d5ef356aeb2eaa44d747c19d22aa6e3e55bd39f6fafb9` | 2026-11-01T05:53:05Z | browser capture of AA's Intelligence Index vs cost chart from public tooltips (frontier membership, E195; unevaluated cheaper siblings, E201) |
 | roster | `data/aa_mapping.json` | `a11a7f276eefc338b2b26b66c6c3b3fe7e0b09391c64aea26c6dce3fc80b2e71` | 2026-11-01T05:53:05Z | editorial roster: every configuration AA plots on its rendered frontier or within 3 Index points of it (O51) |
 | bugHuntScoreboard | `data/bug_hunt_scoreboard.json` | `294ee5418d6993530eeff77e8ce700d2d282f259fe4d2f646f6a42238e2d2eb0` | 2026-11-01T05:59:30Z | the owner's combined scoreboard at the pinned commit (O31 roster check) |
-| planRoutes | `data/plan_cost_routes.json` | `f9a0939955d8a0b6e296e21288cee9057f0df589cfe9f95b8d84c533e9b09c52` | 2026-11-05 | editorial Plan evidence registry |
+| planRoutes | `data/plan_cost_routes.json` | `9fd3417ecd4edfcdbb1dcfd76979f47620c586617f3099cec107807eeec93565` | 2026-11-05 | editorial Plan evidence registry |
 | priceRecords | `data/price_records.json` | `fe550f7770759a6219e671838f28b42d3b7d7db0fa5f7ab489e08a75605421f8` | 2026-10-31T04:10:00Z | editorial E141 price-record registry (superseded and promotional tariffs) |
 | leafEvidence | `data/leaf_evidence.json` | `248d3b46f6905241ca2e005959754a687b09776297dc2bbe6c11dc4e00cffd06` | 2026-11-01 | editorial supplementary leaf evidence and the exhaustive-search log (O36) |
 | cognitionFrontierCode | `data/cognition_frontiercode.json` | `c7ffd7b4a39cd5a307e49048bedb5ed8e656cca8331af452e47371e6e9866f86` | 2026-11-01 | Cognition's FrontierCode leaderboard data (https://cognition.com/data/frontiercode-leaderboard/data.json), captured unchanged (O37) |
 | sweTracks | `data/swe_tracks.json` | `54e76dc5d68f349fbe2d67f4234f6b999fceb07cfa7353ea22a487e18dcf4f4f` | 2026-11-01T06:03:32.614Z | research/2026-10-23-swe-benchmarks/build_swe_tracks.py from the verified coverage captures (O53-O55) |
-| planReports | `data/plan_reports.json` | `de9850b1a555e30122e57707f32aebc731aac36719b6f96ac7f4fe11e77ab481` | 2026-10-28 | editorial table of every O71 user report with the facts E270 needs; the build derives admission from it (O81) |
+| planReports | `data/plan_reports.json` | `ecc7c305d6032485552b615b247d5d418884ed7e49e86ba18e5a277aaeeff321` | 2026-10-28 | editorial table of every O71 user report with the facts E270 needs; the build derives admission from it (O81) |
 | aaPreviousCapture | `data/aa/aa_previous_capture.json` | `d9ec560d2f27fc4de89e68d293399ee331e706e9c12c625c15012e7a237b577f` | 2026-10-31T04:07:04Z | valuerank.capture_aa: digest of the model-page capture this one replaced (I60) |
 | fallbackPrices | `data/fallback_prices.json` | `3ab915c9d8ad8a357d7dbcc326dd39a2af64e89b5ef312477d68ea3f3cf50ea9` | 2026-11-01T11:59:15Z | editorial capture of the list API prices of AA's named fallback models (O158 sensitivity only) |
 | sourceRereads | `data/source_rereads.json` | `41cb7583ad871a2972ce4e83684a60d60be5ad9bd71f2b096e61c56e435391cd` | 2026-11-01T08:39:42Z | editorial record of the O68 re-reads, each 'unchanged' result verified against the re-read file |

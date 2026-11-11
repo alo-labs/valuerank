@@ -598,15 +598,16 @@
         }
       ]
     },
+    "openCodeGoApplication": "Owner decisions O198 and O199 (2026-11-11), an explicit exception to the end-user numerator rule: OpenCode's published monthly dollar limit per model on the single-member Go plan ($10 a month) is the plan's actual limit, a hard cap on usage metered at OpenCode's listed token prices, so each cohort model it lists takes limit / fee as its Value Multiple at full use of the limit, labelled a published dollar limit (the plan's terms, not a measurement and not a ceiling), and needs no staged end-user-report search. Go Plus and Go Teams are not Plan-basis plans. Evidence: research/2026-11-11-opencode-go/ (page archived with its SHA-256).",
     "mimoApplication": "Owner decision O46 (2026-10-23), an explicit exception to the end-user numerator rule: each MiMo-V2.6 model takes, per Token Plan tier, the quota-implied ceiling (the tier's monthly credits valued at Xiaomi's pay-as-you-go rate for that model, divided by the list fee), labelled provider-derived. It replaces the 2026-10-08 provisional 1.5x assumption. End-user measurements for the exact model and tier replace the ceiling once they meet the admission rule of any other provider's route (O11); one report alone does not (owner decision O62).",
     "unsupportedModels": "Use API fallback; do not transfer evidence across model versions or variants except for the explicit common GPT, Claude and MiMo assumptions; across thinking effort, plan-allowance evidence for a model serves its other efforts (O87 for user reports, O88 for SemiAnalysis measurements, labelled and counted as measured evidence under O90).",
     "claudeApplication": "User authorizes (2026-10-18, Option 2) applying Opus 5.5's measured SemiAnalysis Claude plan multiples to every other Claude model. Opus 5.5 keeps its exact measured routes; the shared routes are labelled user assumptions, carry the recorded caution that allowances are model-specific (Fable 5.1 measured 12.4-12.7x on the same plans), and are superseded by any exact measurement for the listed model. Claude Fable 5.1 (retained 2026-10-21, owner decision O31) has exact SemiAnalysis measurements on Max 5x (12.73x) and Max 20x (12.425x), which replace the shared routes for it; it has no Pro route, because the source records Fable as unavailable on Pro, so there is no Pro allowance to measure or assume. Owner decision O33 (2026-10-21) ranks Claude Haiku 5.5 (max, high, medium, low) and Claude Sonnet 5.5 (xhigh, high, medium, low) as their own rows; as other Claude models in the roster they take the shared assumption routes. Owner decision O88 (2026-10-28): Opus 5.5's other efforts (xhigh, high, medium) take its figure as a same-model measurement from another effort (measured evidence under O90), not as the shared assumption; the multiple is the same."
   },
   "identificationYield": {
-    "rows": 27,
+    "rows": 30,
     "pointIdentified": 0,
     "setIdentified": 0,
-    "unidentified": 27,
+    "unidentified": 30,
     "configurations": 9,
     "configurationBalancedYield": 0.0,
     "exploratory": true
@@ -3263,6 +3264,244 @@
         "gpt-5-6-luna-low"
       ],
       "notes": "Common GPT assumption for gpt-5.6-luna-low: the lower of the two SemiAnalysis model-conditional figures on ChatGPT Pro 500 (GPT-6.1 Sol's 10.772x; the other donor measured 13.91x). The owner authorises the shared ChatGPT multiples for every GPT model; the lower-of selection applies only to GPT rows without their own figure (owner decision O45, 2026-10-23). It does not measure gpt-5.6-luna-low. Original figures and workload are retained in sourceEvidence.semianalysis."
+    },
+    {
+      "id": "opencode-go-deepseek-v4-1-flash-1017-dollar-limit",
+      "provider": "OpenCode",
+      "planLabel": "OpenCode Go $10 · DeepSeek V4.1 Flash · published dollar limit ($100 a month)",
+      "planFeeUsd": 10,
+      "valueMultiple": 10.0,
+      "apiEquivalentUsd": 100.0,
+      "grade": "assumption",
+      "evidenceLabel": "Published dollar limit (owner decision O198; the plan's terms, not a measurement)",
+      "sourceModel": null,
+      "sourceUrl": "https://opencode.ai/docs/console/go/",
+      "sourceDate": "2026-11-11",
+      "modelSlugs": [
+        "deepseek-v4-1-flash-1017"
+      ],
+      "notes": "Owner decision O198 (2026-11-11): OpenCode's published monthly limit for DeepSeek V4.1 Flash on the $10 Go plan, $100, is the plan's actual limit (a hard cap on usage metered at OpenCode's listed token prices), so the multiple is 100 / 10 = 10x at full use of the limit; it is the plan's terms, not an end-user measurement and not a ceiling to be replaced by user reports. The 5-hour (20%) and weekly (50%) caps do not change the monthly figure. AA prices the model at OpenCode's peak rate, so usage in off-peak hours (OpenCode lists half the peak price; peak hours are 01:00-04:00 and 06:00-10:00 UTC, Monday to Friday) buys twice the tokens and would double the multiple; the route records the conservative peak-priced multiple. Go Plus and Go Teams are not Plan-basis plans (O199)."
+    },
+    {
+      "id": "opencode-go-gemini-4-argon-dollar-limit",
+      "provider": "OpenCode",
+      "planLabel": "OpenCode Go $10 · Gemini 4 Argon · published dollar limit ($30 a month)",
+      "planFeeUsd": 10,
+      "valueMultiple": 3.0,
+      "apiEquivalentUsd": 30.0,
+      "grade": "assumption",
+      "evidenceLabel": "Published dollar limit (owner decision O198; the plan's terms, not a measurement)",
+      "sourceModel": null,
+      "sourceUrl": "https://opencode.ai/docs/console/go/",
+      "sourceDate": "2026-11-11",
+      "modelSlugs": [
+        "gemini-4-argon"
+      ],
+      "notes": "Owner decision O198 (2026-11-11): OpenCode's published monthly limit for Gemini 4 Argon on the $10 Go plan, $30, is the plan's actual limit (a hard cap on usage metered at OpenCode's listed token prices), so the multiple is 30 / 10 = 3x at full use of the limit; it is the plan's terms, not an end-user measurement and not a ceiling to be replaced by user reports. The 5-hour (20%) and weekly (50%) caps do not change the monthly figure. The multiple is at list price; OpenCode's 50% discount, in force through 2026-11-30, would double it until then and is not counted. Go Plus and Go Teams are not Plan-basis plans (O199)."
+    },
+    {
+      "id": "opencode-go-claude-haiku-5-5-dollar-limit",
+      "provider": "OpenCode",
+      "planLabel": "OpenCode Go $10 · Claude Haiku 5.5 (xhigh) · published dollar limit ($15 a month)",
+      "planFeeUsd": 10,
+      "valueMultiple": 1.5,
+      "apiEquivalentUsd": 15.0,
+      "grade": "assumption",
+      "evidenceLabel": "Published dollar limit (owner decision O198; the plan's terms, not a measurement)",
+      "sourceModel": null,
+      "sourceUrl": "https://opencode.ai/docs/console/go/",
+      "sourceDate": "2026-11-11",
+      "modelSlugs": [
+        "claude-haiku-5-5"
+      ],
+      "notes": "Owner decision O198 (2026-11-11): OpenCode's published monthly limit for Claude Haiku 5.5 (xhigh) on the $10 Go plan, $15, is the plan's actual limit (a hard cap on usage metered at OpenCode's listed token prices), so the multiple is 15 / 10 = 1.5x at full use of the limit; it is the plan's terms, not an end-user measurement and not a ceiling to be replaced by user reports. The 5-hour (20%) and weekly (50%) caps do not change the monthly figure. The multiple is at the up-to-100K-token tier, which equals AA's list price; requests above 100K tokens count at five times that price and would lower it. An allowance is effort-invariant (O87), so one limit serves every effort. Go Plus and Go Teams are not Plan-basis plans (O199)."
+    },
+    {
+      "id": "opencode-go-claude-haiku-5-5-high-dollar-limit",
+      "provider": "OpenCode",
+      "planLabel": "OpenCode Go $10 · Claude Haiku 5.5 (high) · published dollar limit ($15 a month)",
+      "planFeeUsd": 10,
+      "valueMultiple": 1.5,
+      "apiEquivalentUsd": 15.0,
+      "grade": "assumption",
+      "evidenceLabel": "Published dollar limit (owner decision O198; the plan's terms, not a measurement)",
+      "sourceModel": null,
+      "sourceUrl": "https://opencode.ai/docs/console/go/",
+      "sourceDate": "2026-11-11",
+      "modelSlugs": [
+        "claude-haiku-5-5-high"
+      ],
+      "notes": "Owner decision O198 (2026-11-11): OpenCode's published monthly limit for Claude Haiku 5.5 (high) on the $10 Go plan, $15, is the plan's actual limit (a hard cap on usage metered at OpenCode's listed token prices), so the multiple is 15 / 10 = 1.5x at full use of the limit; it is the plan's terms, not an end-user measurement and not a ceiling to be replaced by user reports. The 5-hour (20%) and weekly (50%) caps do not change the monthly figure. The multiple is at the up-to-100K-token tier, which equals AA's list price; requests above 100K tokens count at five times that price and would lower it. An allowance is effort-invariant (O87), so one limit serves every effort. Go Plus and Go Teams are not Plan-basis plans (O199)."
+    },
+    {
+      "id": "opencode-go-claude-haiku-5-5-low-dollar-limit",
+      "provider": "OpenCode",
+      "planLabel": "OpenCode Go $10 · Claude Haiku 5.5 (low) · published dollar limit ($15 a month)",
+      "planFeeUsd": 10,
+      "valueMultiple": 1.5,
+      "apiEquivalentUsd": 15.0,
+      "grade": "assumption",
+      "evidenceLabel": "Published dollar limit (owner decision O198; the plan's terms, not a measurement)",
+      "sourceModel": null,
+      "sourceUrl": "https://opencode.ai/docs/console/go/",
+      "sourceDate": "2026-11-11",
+      "modelSlugs": [
+        "claude-haiku-5-5-low"
+      ],
+      "notes": "Owner decision O198 (2026-11-11): OpenCode's published monthly limit for Claude Haiku 5.5 (low) on the $10 Go plan, $15, is the plan's actual limit (a hard cap on usage metered at OpenCode's listed token prices), so the multiple is 15 / 10 = 1.5x at full use of the limit; it is the plan's terms, not an end-user measurement and not a ceiling to be replaced by user reports. The 5-hour (20%) and weekly (50%) caps do not change the monthly figure. The multiple is at the up-to-100K-token tier, which equals AA's list price; requests above 100K tokens count at five times that price and would lower it. An allowance is effort-invariant (O87), so one limit serves every effort. Go Plus and Go Teams are not Plan-basis plans (O199)."
+    },
+    {
+      "id": "opencode-go-claude-haiku-5-5-max-dollar-limit",
+      "provider": "OpenCode",
+      "planLabel": "OpenCode Go $10 · Claude Haiku 5.5 (max) · published dollar limit ($15 a month)",
+      "planFeeUsd": 10,
+      "valueMultiple": 1.5,
+      "apiEquivalentUsd": 15.0,
+      "grade": "assumption",
+      "evidenceLabel": "Published dollar limit (owner decision O198; the plan's terms, not a measurement)",
+      "sourceModel": null,
+      "sourceUrl": "https://opencode.ai/docs/console/go/",
+      "sourceDate": "2026-11-11",
+      "modelSlugs": [
+        "claude-haiku-5-5-max"
+      ],
+      "notes": "Owner decision O198 (2026-11-11): OpenCode's published monthly limit for Claude Haiku 5.5 (max) on the $10 Go plan, $15, is the plan's actual limit (a hard cap on usage metered at OpenCode's listed token prices), so the multiple is 15 / 10 = 1.5x at full use of the limit; it is the plan's terms, not an end-user measurement and not a ceiling to be replaced by user reports. The 5-hour (20%) and weekly (50%) caps do not change the monthly figure. The multiple is at the up-to-100K-token tier, which equals AA's list price; requests above 100K tokens count at five times that price and would lower it. An allowance is effort-invariant (O87), so one limit serves every effort. Go Plus and Go Teams are not Plan-basis plans (O199)."
+    },
+    {
+      "id": "opencode-go-claude-haiku-5-5-medium-dollar-limit",
+      "provider": "OpenCode",
+      "planLabel": "OpenCode Go $10 · Claude Haiku 5.5 (medium) · published dollar limit ($15 a month)",
+      "planFeeUsd": 10,
+      "valueMultiple": 1.5,
+      "apiEquivalentUsd": 15.0,
+      "grade": "assumption",
+      "evidenceLabel": "Published dollar limit (owner decision O198; the plan's terms, not a measurement)",
+      "sourceModel": null,
+      "sourceUrl": "https://opencode.ai/docs/console/go/",
+      "sourceDate": "2026-11-11",
+      "modelSlugs": [
+        "claude-haiku-5-5-medium"
+      ],
+      "notes": "Owner decision O198 (2026-11-11): OpenCode's published monthly limit for Claude Haiku 5.5 (medium) on the $10 Go plan, $15, is the plan's actual limit (a hard cap on usage metered at OpenCode's listed token prices), so the multiple is 15 / 10 = 1.5x at full use of the limit; it is the plan's terms, not an end-user measurement and not a ceiling to be replaced by user reports. The 5-hour (20%) and weekly (50%) caps do not change the monthly figure. The multiple is at the up-to-100K-token tier, which equals AA's list price; requests above 100K tokens count at five times that price and would lower it. An allowance is effort-invariant (O87), so one limit serves every effort. Go Plus and Go Teams are not Plan-basis plans (O199)."
+    },
+    {
+      "id": "opencode-go-gpt-6-luna-dollar-limit",
+      "provider": "OpenCode",
+      "planLabel": "OpenCode Go $10 · GPT-6 Luna (max) · published dollar limit ($15 a month)",
+      "planFeeUsd": 10,
+      "valueMultiple": 1.5,
+      "apiEquivalentUsd": 15.0,
+      "grade": "assumption",
+      "evidenceLabel": "Published dollar limit (owner decision O198; the plan's terms, not a measurement)",
+      "sourceModel": null,
+      "sourceUrl": "https://opencode.ai/docs/console/go/",
+      "sourceDate": "2026-11-11",
+      "modelSlugs": [
+        "gpt-6-luna"
+      ],
+      "notes": "Owner decision O198 (2026-11-11): OpenCode's published monthly limit for GPT-6 Luna (max) on the $10 Go plan, $15, is the plan's actual limit (a hard cap on usage metered at OpenCode's listed token prices), so the multiple is 15 / 10 = 1.5x at full use of the limit; it is the plan's terms, not an end-user measurement and not a ceiling to be replaced by user reports. The 5-hour (20%) and weekly (50%) caps do not change the monthly figure. The multiple is at the up-to-272K-token tier, which equals AA's list price; requests above 272K tokens count at twice the input price and would lower it. An allowance is effort-invariant (O87), so one limit serves every effort. Go Plus and Go Teams are not Plan-basis plans (O199)."
+    },
+    {
+      "id": "opencode-go-gpt-6-luna-high-dollar-limit",
+      "provider": "OpenCode",
+      "planLabel": "OpenCode Go $10 · GPT-6 Luna (high) · published dollar limit ($15 a month)",
+      "planFeeUsd": 10,
+      "valueMultiple": 1.5,
+      "apiEquivalentUsd": 15.0,
+      "grade": "assumption",
+      "evidenceLabel": "Published dollar limit (owner decision O198; the plan's terms, not a measurement)",
+      "sourceModel": null,
+      "sourceUrl": "https://opencode.ai/docs/console/go/",
+      "sourceDate": "2026-11-11",
+      "modelSlugs": [
+        "gpt-6-luna-high"
+      ],
+      "notes": "Owner decision O198 (2026-11-11): OpenCode's published monthly limit for GPT-6 Luna (high) on the $10 Go plan, $15, is the plan's actual limit (a hard cap on usage metered at OpenCode's listed token prices), so the multiple is 15 / 10 = 1.5x at full use of the limit; it is the plan's terms, not an end-user measurement and not a ceiling to be replaced by user reports. The 5-hour (20%) and weekly (50%) caps do not change the monthly figure. The multiple is at the up-to-272K-token tier, which equals AA's list price; requests above 272K tokens count at twice the input price and would lower it. An allowance is effort-invariant (O87), so one limit serves every effort. Go Plus and Go Teams are not Plan-basis plans (O199)."
+    },
+    {
+      "id": "opencode-go-gpt-6-luna-low-dollar-limit",
+      "provider": "OpenCode",
+      "planLabel": "OpenCode Go $10 · GPT-6 Luna (low) · published dollar limit ($15 a month)",
+      "planFeeUsd": 10,
+      "valueMultiple": 1.5,
+      "apiEquivalentUsd": 15.0,
+      "grade": "assumption",
+      "evidenceLabel": "Published dollar limit (owner decision O198; the plan's terms, not a measurement)",
+      "sourceModel": null,
+      "sourceUrl": "https://opencode.ai/docs/console/go/",
+      "sourceDate": "2026-11-11",
+      "modelSlugs": [
+        "gpt-6-luna-low"
+      ],
+      "notes": "Owner decision O198 (2026-11-11): OpenCode's published monthly limit for GPT-6 Luna (low) on the $10 Go plan, $15, is the plan's actual limit (a hard cap on usage metered at OpenCode's listed token prices), so the multiple is 15 / 10 = 1.5x at full use of the limit; it is the plan's terms, not an end-user measurement and not a ceiling to be replaced by user reports. The 5-hour (20%) and weekly (50%) caps do not change the monthly figure. The multiple is at the up-to-272K-token tier, which equals AA's list price; requests above 272K tokens count at twice the input price and would lower it. An allowance is effort-invariant (O87), so one limit serves every effort. Go Plus and Go Teams are not Plan-basis plans (O199)."
+    },
+    {
+      "id": "opencode-go-gpt-6-luna-medium-dollar-limit",
+      "provider": "OpenCode",
+      "planLabel": "OpenCode Go $10 · GPT-6 Luna (medium) · published dollar limit ($15 a month)",
+      "planFeeUsd": 10,
+      "valueMultiple": 1.5,
+      "apiEquivalentUsd": 15.0,
+      "grade": "assumption",
+      "evidenceLabel": "Published dollar limit (owner decision O198; the plan's terms, not a measurement)",
+      "sourceModel": null,
+      "sourceUrl": "https://opencode.ai/docs/console/go/",
+      "sourceDate": "2026-11-11",
+      "modelSlugs": [
+        "gpt-6-luna-medium"
+      ],
+      "notes": "Owner decision O198 (2026-11-11): OpenCode's published monthly limit for GPT-6 Luna (medium) on the $10 Go plan, $15, is the plan's actual limit (a hard cap on usage metered at OpenCode's listed token prices), so the multiple is 15 / 10 = 1.5x at full use of the limit; it is the plan's terms, not an end-user measurement and not a ceiling to be replaced by user reports. The 5-hour (20%) and weekly (50%) caps do not change the monthly figure. The multiple is at the up-to-272K-token tier, which equals AA's list price; requests above 272K tokens count at twice the input price and would lower it. An allowance is effort-invariant (O87), so one limit serves every effort. Go Plus and Go Teams are not Plan-basis plans (O199)."
+    },
+    {
+      "id": "opencode-go-gpt-6-luna-xhigh-dollar-limit",
+      "provider": "OpenCode",
+      "planLabel": "OpenCode Go $10 · GPT-6 Luna (xhigh) · published dollar limit ($15 a month)",
+      "planFeeUsd": 10,
+      "valueMultiple": 1.5,
+      "apiEquivalentUsd": 15.0,
+      "grade": "assumption",
+      "evidenceLabel": "Published dollar limit (owner decision O198; the plan's terms, not a measurement)",
+      "sourceModel": null,
+      "sourceUrl": "https://opencode.ai/docs/console/go/",
+      "sourceDate": "2026-11-11",
+      "modelSlugs": [
+        "gpt-6-luna-xhigh"
+      ],
+      "notes": "Owner decision O198 (2026-11-11): OpenCode's published monthly limit for GPT-6 Luna (xhigh) on the $10 Go plan, $15, is the plan's actual limit (a hard cap on usage metered at OpenCode's listed token prices), so the multiple is 15 / 10 = 1.5x at full use of the limit; it is the plan's terms, not an end-user measurement and not a ceiling to be replaced by user reports. The 5-hour (20%) and weekly (50%) caps do not change the monthly figure. The multiple is at the up-to-272K-token tier, which equals AA's list price; requests above 272K tokens count at twice the input price and would lower it. An allowance is effort-invariant (O87), so one limit serves every effort. Go Plus and Go Teams are not Plan-basis plans (O199)."
+    },
+    {
+      "id": "opencode-go-kimi-k3-1-pro-dollar-limit",
+      "provider": "OpenCode",
+      "planLabel": "OpenCode Go $10 · Kimi K3.1 Pro · published dollar limit ($15 a month)",
+      "planFeeUsd": 10,
+      "valueMultiple": 1.5,
+      "apiEquivalentUsd": 15.0,
+      "grade": "assumption",
+      "evidenceLabel": "Published dollar limit (owner decision O198; the plan's terms, not a measurement)",
+      "sourceModel": null,
+      "sourceUrl": "https://opencode.ai/docs/console/go/",
+      "sourceDate": "2026-11-11",
+      "modelSlugs": [
+        "kimi-k3-1-pro"
+      ],
+      "notes": "Owner decision O198 (2026-11-11): OpenCode's published monthly limit for Kimi K3.1 Pro on the $10 Go plan, $15, is the plan's actual limit (a hard cap on usage metered at OpenCode's listed token prices), so the multiple is 15 / 10 = 1.5x at full use of the limit; it is the plan's terms, not an end-user measurement and not a ceiling to be replaced by user reports. The 5-hour (20%) and weekly (50%) caps do not change the monthly figure. OpenCode's listed price equals AA's list price. Go Plus and Go Teams are not Plan-basis plans (O199)."
+    },
+    {
+      "id": "opencode-go-mimo-v2-6-pro-dollar-limit",
+      "provider": "OpenCode",
+      "planLabel": "OpenCode Go $10 · MiMo-V2.6-Pro · published dollar limit ($15 a month)",
+      "planFeeUsd": 10,
+      "valueMultiple": 1.5,
+      "apiEquivalentUsd": 15.0,
+      "grade": "assumption",
+      "evidenceLabel": "Published dollar limit (owner decision O198; the plan's terms, not a measurement)",
+      "sourceModel": null,
+      "sourceUrl": "https://opencode.ai/docs/console/go/",
+      "sourceDate": "2026-11-11",
+      "modelSlugs": [
+        "mimo-v2-6-pro"
+      ],
+      "notes": "Owner decision O198 (2026-11-11): OpenCode's published monthly limit for MiMo-V2.6-Pro on the $10 Go plan, $15, is the plan's actual limit (a hard cap on usage metered at OpenCode's listed token prices), so the multiple is 15 / 10 = 1.5x at full use of the limit; it is the plan's terms, not an end-user measurement and not a ceiling to be replaced by user reports. The 5-hour (20%) and weekly (50%) caps do not change the monthly figure. OpenCode's listed price equals AA's list price. Go Plus and Go Teams are not Plan-basis plans (O199)."
     }
   ],
   "candidates": [
@@ -3271,7 +3510,7 @@
       "name": "Claude Haiku 5.5 (max)",
       "rank": {
         "api": 7,
-        "plan": 11
+        "plan": 12
       },
       "apiUsd": 1046.0801077265787,
       "planUsd": 17.760273475833255,
@@ -3340,15 +3579,15 @@
       "name": "DeepSeek V4.1 Flash 1017",
       "rank": {
         "api": 2,
-        "plan": 22
+        "plan": 11
       },
       "apiUsd": 531.4356367333653,
-      "planUsd": 531.4356367333653,
-      "fallback": "api",
-      "routeId": null,
+      "planUsd": 53.14356367333653,
+      "fallback": null,
+      "routeId": "opencode-go-deepseek-v4-1-flash-1017-dollar-limit",
       "flags": [
-        "API-cost fallback: no admitted Plan route",
-        "cross-estimand ordering not identified"
+        "workload-unmatched",
+        "published dollar limit; full use of the limit assumed, at the seller's listed token prices (O198)"
       ],
       "measuredOnly": {
         "status": "no measured route"
@@ -3359,15 +3598,15 @@
       "name": "Gemini 4 Argon",
       "rank": {
         "api": 8,
-        "plan": 23
+        "plan": 24
       },
       "apiUsd": 8880.92222822785,
-      "planUsd": 8880.92222822785,
-      "fallback": "api",
-      "routeId": null,
+      "planUsd": 2960.307409409283,
+      "fallback": null,
+      "routeId": "opencode-go-gemini-4-argon-dollar-limit",
       "flags": [
-        "API-cost fallback: no admitted Plan route",
-        "cross-estimand ordering not identified"
+        "workload-unmatched",
+        "published dollar limit; full use of the limit assumed, at the seller's listed token prices (O198)"
       ],
       "measuredOnly": {
         "status": "no measured route"
@@ -3406,7 +3645,7 @@
       "name": "GPT-6 Astra (max)",
       "rank": {
         "api": 3,
-        "plan": 14
+        "plan": 15
       },
       "apiUsd": 6808.390554424009,
       "planUsd": 470.0304145270286,
@@ -3433,7 +3672,7 @@
       "name": "GPT-6 Luna (max)",
       "rank": {
         "api": 4,
-        "plan": 17
+        "plan": 18
       },
       "apiUsd": 158.9913590982512,
       "planUsd": 14.759687996495655,
@@ -3458,12 +3697,12 @@
         "plan": null
       },
       "apiUsd": 171.70030964750728,
-      "planUsd": 145.41015383427106,
+      "planUsd": 114.46687309833818,
       "fallback": null,
-      "routeId": "mimo-tokenplan-max-mimo-v2-6-pro-quota-ceiling",
+      "routeId": "opencode-go-mimo-v2-6-pro-dollar-limit",
       "flags": [
         "workload-unmatched",
-        "provider quota ceiling; full use assumed, the optimistic end on use; credits valued at the recorded API rate, not the highest (O46, O125)"
+        "published dollar limit; full use of the limit assumed, at the seller's listed token prices (O198)"
       ],
       "measuredOnly": {
         "status": "no measured route"

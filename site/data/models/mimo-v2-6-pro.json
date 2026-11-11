@@ -12,7 +12,7 @@
     },
     "overall": {
       "api": 56.01540521836752,
-      "plan": 52.03131534668346
+      "plan": 53.85289646308496
     },
     "quality": 48.14615886385108,
     "qualityRank": 8,
@@ -268,30 +268,30 @@
   ],
   "cost": {
     "apiUsd": 171.70030964750728,
-    "planUsd": 145.41015383427106,
+    "planUsd": 114.46687309833818,
     "fallback": null,
     "route": {
-      "id": "mimo-tokenplan-max-mimo-v2-6-pro-quota-ceiling",
-      "planLabel": "MiMo Token Plan Max $100 · quota ceiling (provider-derived)",
-      "planFeeUsd": 100,
-      "valueMultiple": 1.1808,
+      "id": "opencode-go-mimo-v2-6-pro-dollar-limit",
+      "planLabel": "OpenCode Go $10 · MiMo-V2.6-Pro · published dollar limit ($15 a month)",
+      "planFeeUsd": 10,
+      "valueMultiple": 1.5,
       "grade": "assumption",
-      "assumptionKind": "ceiling",
-      "evidenceLabel": "Provider quota ceiling (owner decision O46; not a measurement)",
+      "assumptionKind": "dollarLimit",
+      "evidenceLabel": "Published dollar limit (owner decision O198; the plan's terms, not a measurement)",
       "sourceModel": null,
-      "sourceUrl": "https://mimo.mi.com/docs/en-US/price/token-plan",
-      "sourceDate": "2026-10-21"
+      "sourceUrl": "https://opencode.ai/docs/console/go/",
+      "sourceDate": "2026-11-11"
     },
     "subset": true,
     "partialComponents": [],
     "workload": "835a9baf594a1251",
     "planFlags": [
       "workload-unmatched",
-      "provider quota ceiling; full use assumed, the optimistic end on use; credits valued at the recorded API rate, not the highest (O46, O125)"
+      "published dollar limit; full use of the limit assumed, at the seller's listed token prices (O198)"
     ],
     "costScore": {
       "api": 79.62314428191684,
-      "plan": 63.686784795180614
+      "plan": 70.97310926078659
     },
     "components": [
       {
@@ -350,28 +350,46 @@
       }
     ],
     "aaCostCaveat": null,
-    "selectionReason": "larger quota-ceiling multiple (O46: provider-derived, not observed)",
+    "selectionReason": "larger published-limit multiple (O198: the seller's published dollar limit, not observed)",
     "planAmount": {
-      "amountKind": "provider quota ceiling: the full quota at API rates (O46; full use assumed)",
-      "amountTarget": "full-quota consumption",
-      "amountUsd": 118.08000000000001,
-      "derivation": "quota ceiling: the tier's credits at the provider's API rate",
+      "amountKind": "published dollar limit: the full monthly limit at the seller's listed token prices (O198; full use assumed)",
+      "amountTarget": "full-limit consumption",
+      "amountUsd": 15.0,
+      "derivation": "published dollar limit: the model's monthly limit at the seller's listed token prices",
       "feePeriod": "month",
-      "subscriptionCashUsd": 100,
+      "subscriptionCashUsd": 10,
       "additionalCashUsd": 0.0,
-      "grossCashUsd": 100.0,
+      "grossCashUsd": 10.0,
       "workload": "the route's measurement workload",
-      "measurementObjectId": "mimo-tokenplan-max-mimo-v2-6-pro-quota-ceiling",
+      "measurementObjectId": "opencode-go-mimo-v2-6-pro-dollar-limit",
       "capacitySolutionId": null,
-      "cashObjectId": "mimo-tokenplan-max-mimo-v2-6-pro-quota-ceiling:month cash",
+      "cashObjectId": "opencode-go-mimo-v2-6-pro-dollar-limit:month cash",
       "purchasePolicyId": "subscription fee for the fee period, no additional cash declared",
-      "capacityStatus": "provider quota ceiling: full use of the quota assumed (O46)",
+      "capacityStatus": "published dollar limit: full use of the limit assumed (O198)",
       "valuationStatus": "release",
       "donorRouteId": null,
-      "interpretationLabel": "provider quota ceiling: the full quota at API rates (O46; full use assumed), API-priced USD per month"
+      "interpretationLabel": "published dollar limit: the full monthly limit at the seller's listed token prices (O198; full use assumed), API-priced USD per month"
     }
   },
   "plans": [
+    {
+      "id": "opencode-go-mimo-v2-6-pro-dollar-limit",
+      "planLabel": "OpenCode Go $10 · MiMo-V2.6-Pro · published dollar limit ($15 a month)",
+      "planFeeUsd": 10,
+      "valueMultiple": 1.5,
+      "grade": "assumption",
+      "assumptionKind": null,
+      "evidenceLabel": "Published dollar limit (owner decision O198; the plan's terms, not a measurement)",
+      "sourceUrl": "https://opencode.ai/docs/console/go/",
+      "sourceDate": "2026-11-11",
+      "case": 2,
+      "officialDisplayEligible": true,
+      "planIntervalEligible": false,
+      "usdPerRun": 114.46687309833818,
+      "selected": true,
+      "planRank": null,
+      "planValue": 53.85289646308496
+    },
     {
       "id": "mimo-tokenplan-max-mimo-v2-6-pro-quota-ceiling",
       "planLabel": "MiMo Token Plan Max $100 · quota ceiling (provider-derived)",
@@ -386,7 +404,7 @@
       "officialDisplayEligible": true,
       "planIntervalEligible": false,
       "usdPerRun": 145.41015383427106,
-      "selected": true,
+      "selected": false,
       "planRank": null,
       "planValue": 52.03131534668346
     },
@@ -517,7 +535,7 @@
       },
       "overall": {
         "api": 56.01540521836752,
-        "plan": 52.03131534668346
+        "plan": 53.85289646308496
       }
     },
     {
@@ -532,7 +550,7 @@
       },
       "overall": {
         "api": 48.38801482602803,
-        "plan": 41.468544945544764
+        "plan": 42.88825886008698
       }
     },
     {
@@ -547,7 +565,7 @@
       },
       "overall": {
         "api": 41.50661556776184,
-        "plan": 39.154293672342156
+        "plan": 40.41799258378601
       }
     }
   ]

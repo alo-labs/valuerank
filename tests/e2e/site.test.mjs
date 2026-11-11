@@ -154,8 +154,10 @@ describe('rankings instrument', () => {
   test('filters, sorting, columns and comparison all live in the URL', async () => {
     const { page, context, errors } = await open('/rankings/');
     // O48/O53: the max-effort ranking's Plan basis has one row per configuration and plan, then every roster model it does not
-    // rank; under v5 the roster is the 37-configuration cohort (O132, O145): 27 plan rows and 28 unranked models.
-    assert.equal(await page.locator('#rankings-body tr').count(), 55);
+    // rank; under v5 the roster is the 37-configuration cohort (O132, O145): 30 plan rows and 28 unranked models. O198 gives
+    // DeepSeek V4.1 Flash and Gemini 4 Argon an OpenCode Go row in place of their API-fallback row and adds an OpenCode Go row
+    // for Claude Haiku 5.5 (max), GPT-6 Luna (max) and MiMo-V2.6-Pro.
+    assert.equal(await page.locator('#rankings-body tr').count(), 58);
 
     await page.locator('#filters input[name="provider"][value="OpenAI"]').check();
     assert.match(await query(page), /provider=OpenAI/);

@@ -8,7 +8,7 @@
   "summary": {
     "rank": {
       "api": 7,
-      "plan": 11
+      "plan": 12
     },
     "overall": {
       "api": 50.52783846502953,
@@ -398,7 +398,7 @@
       "planIntervalEligible": false,
       "usdPerRun": 17.760273475833255,
       "selected": true,
-      "planRank": 11,
+      "planRank": 12,
       "planValue": 62.08072942341364
     },
     {
@@ -416,7 +416,7 @@
       "planIntervalEligible": false,
       "usdPerRun": 17.842062216042617,
       "selected": false,
-      "planRank": 11,
+      "planRank": 12,
       "planValue": 62.08072942341364
     },
     {
@@ -434,8 +434,26 @@
       "planIntervalEligible": false,
       "usdPerRun": 18.27214161967823,
       "selected": false,
-      "planRank": 11,
+      "planRank": 12,
       "planValue": 62.08072942341364
+    },
+    {
+      "id": "opencode-go-claude-haiku-5-5-max-dollar-limit",
+      "planLabel": "OpenCode Go $10 · Claude Haiku 5.5 (max) · published dollar limit ($15 a month)",
+      "planFeeUsd": 10,
+      "valueMultiple": 1.5,
+      "grade": "assumption",
+      "assumptionKind": null,
+      "evidenceLabel": "Published dollar limit (owner decision O198; the plan's terms, not a measurement)",
+      "sourceUrl": "https://opencode.ai/docs/console/go/",
+      "sourceDate": "2026-11-11",
+      "case": 2,
+      "officialDisplayEligible": true,
+      "planIntervalEligible": false,
+      "usdPerRun": 697.3867384843858,
+      "selected": false,
+      "planRank": 25,
+      "planValue": 43.82316728749389
     }
   ],
   "scenarios": {
@@ -583,7 +601,7 @@
       "date": "2026-10-19",
       "rank": {
         "api": 7,
-        "plan": 11
+        "plan": 12
       }
     }
   ],
@@ -604,7 +622,7 @@
       "rankingEligible": true,
       "rank": {
         "api": 7,
-        "plan": 11
+        "plan": 12
       },
       "overall": {
         "api": 50.52783846502953,

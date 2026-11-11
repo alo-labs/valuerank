@@ -89,11 +89,13 @@ def test_readme_flags_fallback_and_subset_rows(emitted):
     aicd = ranking_rows(readme, "### AI Coding Daily ranking")
     assert aicd["Claude Haiku 5.5 (high)"][10] == "AA cost caveat, route possibly superseded"
     # O13/O17: rows without an admitted Plan route are flagged API-cost fallback and show no route; a row scored on a
-    # subset workload is flagged subset cost. No other row carries either flag.
+    # subset workload is flagged subset cost. O198: DeepSeek V4.1 Flash and Gemini 4 Argon now take OpenCode Go's published
+    # dollar limit, so no row of this ranking is left on the fallback.
     fallback = {label for label, row in rows.items() if "API-cost fallback" in row[10]}
     subset = {label for label, row in rows.items() if "subset cost" in row[10]}
-    assert fallback == {"DeepSeek V4.1 Flash 1017 (max)", "Gemini 4 Argon (high)"}
-    assert all(rows[label][9] == "—" for label in fallback)
+    assert fallback == set()
+    assert rows["DeepSeek V4.1 Flash 1017 (max)"][9] == "OpenCode Go $10 · DeepSeek V4.1 Flash · published dollar limit ($100 a month) (10×, assumption)"
+    assert rows["Gemini 4 Argon (high)"][9].endswith("published dollar limit ($30 a month) (3×, assumption)")
     assert subset == {"MiMo-V2.6-Pro"}
 
 
@@ -132,8 +134,8 @@ def test_readme_states_what_the_interval_outputs_support(emitted):
     assert ("Cheapest at or above quality 67.5: not unique; possibly GPT-6.1 Sol (max), GPT-6 Astra (max). "
             "(Bar comparison: compares 3 configurations that can qualify.") in readme
     # E196: the nominal cost weight is printed with cost's share of the variance in value.
-    assert "value is a 25% cost score (nominal weight; 56% of API and 46% of Plan value variance)" in readme
-    assert ("That weight is nominal: on the current panel cost accounts for 56% of the variance in API value and 46% in Plan value, "
+    assert "value is a 25% cost score (nominal weight; 56% of API and 43% of Plan value variance)" in readme
+    assert ("That weight is nominal: on the current panel cost accounts for 56% of the variance in API value and 43% in Plan value, "
             "because cost scores spread more than quality scores") in readme
     assert "Plan basis: interval outputs not evaluated (no row has FullCost and an identified M_W (E61/E67))." in readme
     assert "so the Plan ranking is labelled exploratory" in readme
@@ -199,7 +201,7 @@ def test_scores_md_ranking_matches_scores_json(emitted):
     assert len(table_rows(text, "| Model | Reasons")) == 28
     assert "### API basis: rank 1" in text and "### Plan basis: on the frontier" in text
     # O48: the Plan streams exclude transfer-dependent plan rows, each named as a configuration on its plan.
-    assert "Plan streams S1, S2, S1 endpoint-heavy, S1M, S1T and S1T recentred run with owner assumptions off (owner-named transfers and O46 provider quota ceilings; E167): Claude Haiku 5.5 (max) on Claude Max 20x, Claude Haiku 5.5 (max) on Claude Max 5x, Claude Haiku 5.5 (max) on Claude Pro, Claude Sonnet 5.5 (max) on Claude Max 20x," in text
+    assert "Plan streams S1, S2, S1 endpoint-heavy, S1M, S1T and S1T recentred run with owner assumptions off (owner-named transfers, O46 provider quota ceilings and O198 published dollar limits; E167): Claude Haiku 5.5 (max) on Claude Max 20x, Claude Haiku 5.5 (max) on Claude Max 5x, Claude Haiku 5.5 (max) on Claude Pro, Claude Haiku 5.5 (max) on OpenCode Go, Claude Sonnet 5.5 (max) on Claude Max 20x," in text
     assert "| $1,178 per month: assumed API-equivalent consumption (owner-named transfer) from claude-pro-opus55-semianalysis |" in text
     assert "| GPT-6.1 Sol (max) | ChatGPT Pro 500 $500 · GPT-6.1 Sol (10.772×, measured) | $5,386 per month: measured-workload capacity |" in text
     assert "| quality 61.4 | GPT-6.1 Sol (max) | supported under all registered role-group kernel checks |" in text

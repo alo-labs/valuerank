@@ -1165,6 +1165,9 @@ def test_plan_amount_is_typed_by_what_the_measurement_establishes():
     ceiling = v.plan_amount({**base, "grade": "assumption", "route": {**route, "evidenceClass": "provider_quota_ceiling"}})
     assert ceiling["amountKind"].startswith("provider quota ceiling") and ceiling["amountTarget"] == "full-quota consumption"
     assert ceiling["amountUsd"] == pytest.approx(250.0) and ceiling["derivation"].startswith("quota ceiling")
+    limit = v.plan_amount({**base, "grade": "assumption", "route": {**route, "evidenceClass": "provider_dollar_limit"}})
+    assert limit["amountKind"].startswith("published dollar limit") and limit["amountTarget"] == "full-limit consumption"
+    assert limit["amountUsd"] == pytest.approx(250.0) and limit["derivation"].startswith("published dollar limit")
     same = v.plan_amount({**base, "route": {**route, "sameModelAcrossEfforts": True}})
     assert same["amountKind"].endswith("at another effort (O88, O90)") and same["derivation"].startswith("same-model measurement")
     unpriced = v.plan_amount({**base, "grade": "assumption", "route": {**route, "evidenceClass": "provider_quota_ceiling", "planPriceUsd": None, "additionalCashUsd": None}})
@@ -1642,6 +1645,18 @@ def test_an_o46_ceiling_is_recomputed_from_its_credits_rate_and_fee():
     # Reviewer 76: within half a unit of the fourth decimal, so a one-unit drift (0.9841) stops the build.
     with pytest.raises(ValueError, match=r"not the quota ceiling 0.9840"):
         v.assemble(CONFIGURATIONS, documents(planRoutes={**routes, "routes": routes["routes"] + [dict(ceiling, valueMultiple=0.9841)]}), release_day=DAY)
+
+
+def test_an_o198_dollar_limit_is_recomputed_from_its_monthly_limit_and_fee():
+    """O198: the stored multiple of a published dollar limit must equal its monthly limit over its fee."""
+
+    routes = documents()["planRoutes"]
+    limit = {"id": "go-limit", "evidenceClass": "provider_dollar_limit", "monthlyLimitUsd": 100, "planPriceUsd": 10, "valueMultiple": 10.0}
+    with pytest.raises(ValueError, match=r"go-limit: the stored multiple 9.0 is not the published dollar limit 10.0000 \(O198\)"):
+        v.assemble(CONFIGURATIONS, documents(planRoutes={**routes, "routes": routes["routes"] + [dict(limit, valueMultiple=9.0)]}), release_day=DAY)
+    # Within half a unit of the fourth decimal, as for an O46 ceiling.
+    with pytest.raises(ValueError, match=r"not the published dollar limit 10.0000"):
+        v.assemble(CONFIGURATIONS, documents(planRoutes={**routes, "routes": routes["routes"] + [dict(limit, valueMultiple=10.0001)]}), release_day=DAY)
 
 
 def test_observed_range_bars_bound_missing_leaves_by_the_cohort_range():

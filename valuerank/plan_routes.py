@@ -187,11 +187,12 @@ def evidence_date(route: dict, registry: dict | None = None) -> date | None:
     the source publication date, or (for an owner assumption without a donor measurement) its authorisation date.
 
     A record's check or edit date (``checkedOn``) is an editorial event and never restarts the clock. An O46 quota
-    ceiling is a function of Xiaomi's pages, so it ages from the read of those pages (``capturedOn``, E261, I50 M1).
+    ceiling is a function of Xiaomi's pages, so it ages from the read of those pages (``capturedOn``, E261, I50 M1); an
+    O198 published dollar limit is a function of the seller's page and ages the same way.
     """
 
     source = donor(route, registry) or route
-    ceiling = source.get("evidenceClass") == "provider_quota_ceiling" and source.get("capturedOn")
+    ceiling = source.get("evidenceClass") in PROVIDER_PAGE_CLASSES and source.get("capturedOn")
     stamp = ceiling or (source.get("measurementWindow") or {}).get("end") or source.get("sourcePublicationDate") or source.get("validFrom")
     return date.fromisoformat(stamp) if stamp else None
 
@@ -231,7 +232,14 @@ CAPACITY_ESTABLISHED = "capacity established on the measurement workload"
 CAPACITY_OBSERVED = "observed usage; capacity not established"
 CAPACITY_UNVERIFIED = "saturation unverified"
 CAPACITY_CEILING = "provider quota ceiling: full use of the quota assumed (O46)"
-CAPACITY_STATUSES = (CAPACITY_ESTABLISHED, CAPACITY_OBSERVED, CAPACITY_UNVERIFIED, CAPACITY_CEILING)
+# O198 (2026-11-11): OpenCode's published monthly dollar limit per model is the plan's actual limit, a hard cap on usage
+# metered at the seller's listed token prices; the route's multiple is that limit over the fee, at full use of the limit.
+CAPACITY_DOLLAR_LIMIT = "published dollar limit: full use of the limit assumed (O198)"
+CAPACITY_STATUSES = (CAPACITY_ESTABLISHED, CAPACITY_OBSERVED, CAPACITY_UNVERIFIED, CAPACITY_CEILING, CAPACITY_DOLLAR_LIMIT)
+QUOTA_CEILING_CLASS = "provider_quota_ceiling"
+DOLLAR_LIMIT_CLASS = "provider_dollar_limit"
+# Classes whose figure is read from the seller's own page and ages from that read.
+PROVIDER_PAGE_CLASSES = (QUOTA_CEILING_CLASS, DOLLAR_LIMIT_CLASS)
 
 
 def measurement_capacity_status(route: dict) -> str:
@@ -244,9 +252,12 @@ def measurement_capacity_status(route: dict) -> str:
     recorded = route.get("measurementCapacityStatus")
     if recorded in CAPACITY_STATUSES:
         return recorded
-    if route.get("evidenceClass") == "provider_quota_ceiling":
+    if route.get("evidenceClass") == QUOTA_CEILING_CLASS:
         # I68 L2: an O46 ceiling observes nothing; it is the whole quota by construction.
         return CAPACITY_CEILING
+    if route.get("evidenceClass") == DOLLAR_LIMIT_CLASS:
+        # O198: a published dollar limit observes nothing either; it is the whole limit by construction.
+        return CAPACITY_DOLLAR_LIMIT
     kind, source_kind = route.get("valueMultipleKind"), route.get("sourceEvidenceClass")
     if kind in CONTROLLED_KINDS or (kind in ASSUMPTION_KINDS and source_kind in CONTROLLED_KINDS):
         return CAPACITY_ESTABLISHED
@@ -866,8 +877,10 @@ def route_selection(candidates: list[dict]) -> dict:
         return {"selected": ordered[0], "reason": "only remaining eligible route", "dominated": dominated, "tuples": tuples}
     best, runner_up = (comparison_tuple(candidate) for candidate in ordered[:2])
     deciding = next((DECIDING_KEYS[index] for index, (a, b) in enumerate(zip(best, runner_up)) if a != b), "route ID tie-break")
-    if deciding == DECIDING_KEYS[2] and ordered[0]["route"].get("evidenceClass") == "provider_quota_ceiling":
+    if deciding == DECIDING_KEYS[2] and ordered[0]["route"].get("evidenceClass") == QUOTA_CEILING_CLASS:
         deciding = "larger quota-ceiling multiple (O46: provider-derived, not observed)"
+    elif deciding == DECIDING_KEYS[2] and ordered[0]["route"].get("evidenceClass") == DOLLAR_LIMIT_CLASS:
+        deciding = "larger published-limit multiple (O198: the seller's published dollar limit, not observed)"
     elif deciding == DECIDING_KEYS[2] and ordered[0]["identification"] == "unidentified":
         deciding = "larger observed multiple (observed-workload multiple — target-workload ordering not identified)"
     return {"selected": ordered[0], "reason": deciding, "dominated": dominated, "tuples": tuples}
@@ -877,14 +890,17 @@ def route_selection(candidates: list[dict]) -> dict:
 OWNER_ASSUMPTIONS = {
     "transfer": ("owner-named transfer", "owner-named transfers"),
     "ceiling": ("O46 provider quota ceiling", "O46 provider quota ceilings"),
+    "dollarLimit": ("O198 published dollar limit", "O198 published dollar limits"),
 }
 
 
 def assumption_kind(route: dict) -> str:
-    """Which owner assumption an assumption-graded route is (O45/2026-10-18 transfer or O46 ceiling; an O88 route is
-    measured evidence under O90, not an assumption)."""
+    """Which owner assumption an assumption-graded route is (O45/2026-10-18 transfer, O46 ceiling or O198 published
+    dollar limit; an O88 route is measured evidence under O90, not an assumption)."""
 
-    return "ceiling" if route.get("evidenceClass") == "provider_quota_ceiling" else "transfer"
+    if route.get("evidenceClass") == QUOTA_CEILING_CLASS:
+        return "ceiling"
+    return "dollarLimit" if route.get("evidenceClass") == DOLLAR_LIMIT_CLASS else "transfer"
 
 
 def assumption_kinds_text(conjunction: str = "or", plural: bool = False) -> str:
@@ -952,6 +968,8 @@ def plan_cost(api_cost: float | None, selected: dict | None) -> dict:
         flags.append("valuation basis unverified")
     if capacity == CAPACITY_CEILING:
         flags.append("provider quota ceiling; full use assumed, the optimistic end on use; credits valued at the recorded API rate, not the highest (O46, O125)")
+    elif capacity == CAPACITY_DOLLAR_LIMIT:
+        flags.append("published dollar limit; full use of the limit assumed, at the seller's listed token prices (O198)")
     elif capacity != CAPACITY_ESTABLISHED:
         flags.append("observed-usage multiple; full utilisation not established")
     return {

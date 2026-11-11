@@ -1692,7 +1692,7 @@
         ],
         "plan": [
           36,
-          53
+          54
         ]
       },
       "bandExcludesTransfer": false
@@ -1822,7 +1822,7 @@
         ],
         "plan": [
           36,
-          53
+          54
         ]
       },
       "bandExcludesTransfer": true
@@ -1956,7 +1956,7 @@
         ],
         "plan": [
           36,
-          53
+          54
         ]
       },
       "bandExcludesTransfer": false
@@ -2085,7 +2085,133 @@
         ],
         "plan": [
           36,
-          53
+          54
+        ]
+      },
+      "bandExcludesTransfer": true
+    },
+    {
+      "slug": "deepseek-v4-1-flash-1017",
+      "name": "DeepSeek V4.1 Flash 1017",
+      "shortName": "DeepSeek V4.1 Flash 1017",
+      "developer": "DeepSeek",
+      "aaUrl": "https://artificialanalysis.ai/models/deepseek-v4-1-flash-1017",
+      "aaVariant": "max",
+      "rankingEligible": true,
+      "exclusionReasons": [],
+      "intelligenceIndex": {
+        "value": 32.4896393532027,
+        "status": "measured"
+      },
+      "speed": 174.977934757459,
+      "aaFrontierTier": "left cohort",
+      "aaFrontierConfiguration": "DeepSeek V4.1 Flash 1017",
+      "aaFrontierIntelligenceGap": null,
+      "aaFrontierFootnote": null,
+      "rank": {
+        "api": 10,
+        "plan": 48
+      },
+      "rankWithinWorkload": {
+        "api": null,
+        "plan": null
+      },
+      "rankNote": null,
+      "overall": {
+        "api": 46.18017825689371,
+        "plan": 53.01270215103771
+      },
+      "quality": 47.626385904263664,
+      "qualityRank": 17,
+      "dims": {
+        "costComposite": null,
+        "frontierCode": 28.4711616161616,
+        "terminalBench": 33.8383838383838,
+        "bugHunt": 70.89125102207686,
+        "gdpval": 62.2885,
+        "automationBench": 66.64095364949257,
+        "omniscience": 50.45,
+        "lcr": 82.6666666666667,
+        "hle": 25.3,
+        "tbScience": 12.8571428571429,
+        "critpt": 24.0
+      },
+      "costDims": {
+        "api": 41.84155531478383,
+        "plan": 69.17165089135983
+      },
+      "raw": {
+        "frontierCode": 0.284711616161616,
+        "terminalBench": 33.8383838383838,
+        "bugHunt": 86.7,
+        "gdpval": 1745.77,
+        "automationBench": 0.6664095364949257,
+        "omniscience": 0.9,
+        "lcr": 0.826666666666667,
+        "hle": 0.253,
+        "tbScience": 0.128571428571429,
+        "critpt": 0.24
+      },
+      "coverage": {
+        "pct": 100.0,
+        "costAvailable": true,
+        "missing": [],
+        "provisional": false,
+        "provisionalReasons": []
+      },
+      "cost": {
+        "apiUsd": 445.51597840042814,
+        "planUsd": 44.55159784004282,
+        "fallback": null,
+        "route": {
+          "id": "opencode-go-deepseek-v4-1-flash-1017-dollar-limit",
+          "planLabel": "OpenCode Go $10 · DeepSeek V4.1 Flash · published dollar limit ($100 a month)",
+          "planFeeUsd": 10,
+          "valueMultiple": 10.0,
+          "grade": "assumption",
+          "assumptionKind": "dollarLimit",
+          "evidenceLabel": "Published dollar limit (owner decision O198; the plan's terms, not a measurement)",
+          "sourceModel": null,
+          "sourceUrl": "https://opencode.ai/docs/console/go/",
+          "sourceDate": "2026-11-11"
+        },
+        "subset": false,
+        "partialComponents": [],
+        "workload": "835a9baf594a1251",
+        "planFlags": [
+          "workload-unmatched",
+          "published dollar limit; full use of the limit assumed, at the seller's listed token prices (O198)"
+        ]
+      },
+      "grade": "measured",
+      "pareto": {
+        "api": false,
+        "plan": false
+      },
+      "frontierStatus": {
+        "api": {
+          "withheld": "diagnostic ranking (O121): computed like the leading rankings for comparison, but it earns no interval or scenario label and its gates never hold the release"
+        },
+        "plan": null
+      },
+      "scenario": {
+        "api": {
+          "top1": 0.0,
+          "top3": 0.0,
+          "frontier": 0.0
+        },
+        "plan": null
+      },
+      "flags": [],
+      "tier": "Mid-Range",
+      "band": {
+        "api": [
+          5,
+          12
+        ],
+        "plan": [
+          36,
+          54
         ]
       },
       "bandExcludesTransfer": true
@@ -2110,7 +2236,7 @@
       "aaFrontierFootnote": null,
       "rank": {
         "api": 15,
-        "plan": 48
+        "plan": 49
       },
       "rankWithinWorkload": {
         "api": null,
@@ -2214,7 +2340,7 @@
         ],
         "plan": [
           36,
-          53
+          54
         ]
       },
       "bandExcludesTransfer": true
@@ -2239,7 +2365,7 @@
       "aaFrontierFootnote": null,
       "rank": {
         "api": 6,
-        "plan": 50
+        "plan": 51
       },
       "rankWithinWorkload": {
         "api": null,
@@ -2345,7 +2471,7 @@
         ],
         "plan": [
           36,
-          53
+          54
         ]
       },
       "bandExcludesTransfer": false
@@ -2372,7 +2498,7 @@
       "aaFrontierFootnote": "Claude Haiku 5.5 has 5x higher pricing on longer-context inputs which are not currently reflected; we are working to include this in cost figures across Artificial Analysis.",
       "rank": {
         "api": 24,
-        "plan": 54
+        "plan": 55
       },
       "rankWithinWorkload": {
         "api": null,
@@ -2476,8 +2602,8 @@
           25
         ],
         "plan": [
-          54,
-          76
+          55,
+          77
         ]
       },
       "bandExcludesTransfer": true
@@ -2502,7 +2628,7 @@
       "aaFrontierFootnote": null,
       "rank": {
         "api": 19,
-        "plan": 57
+        "plan": 58
       },
       "rankWithinWorkload": {
         "api": null,
@@ -2605,8 +2731,8 @@
           19
         ],
         "plan": [
-          54,
-          76
+          55,
+          77
         ]
       },
       "bandExcludesTransfer": true
@@ -2631,7 +2757,7 @@
       "aaFrontierFootnote": null,
       "rank": {
         "api": 9,
-        "plan": 61
+        "plan": 62
       },
       "rankWithinWorkload": {
         "api": null,
@@ -2737,8 +2863,8 @@
           12
         ],
         "plan": [
-          54,
-          76
+          55,
+          77
         ]
       },
       "bandExcludesTransfer": false
@@ -2763,7 +2889,7 @@
       "aaFrontierFootnote": null,
       "rank": {
         "api": 20,
-        "plan": 66
+        "plan": 67
       },
       "rankWithinWorkload": {
         "api": null,
@@ -2870,8 +2996,8 @@
           25
         ],
         "plan": [
-          54,
-          76
+          55,
+          77
         ]
       },
       "bandExcludesTransfer": false
@@ -2896,7 +3022,7 @@
       "aaFrontierFootnote": null,
       "rank": {
         "api": 25,
-        "plan": 71
+        "plan": 72
       },
       "rankWithinWorkload": {
         "api": null,
@@ -2999,8 +3125,8 @@
           25
         ],
         "plan": [
-          54,
-          76
+          55,
+          77
         ]
       },
       "bandExcludesTransfer": true
@@ -3027,7 +3153,7 @@
       "aaFrontierFootnote": null,
       "rank": {
         "api": 26,
-        "plan": 77
+        "plan": 78
       },
       "rankWithinWorkload": {
         "api": null,
@@ -3130,8 +3256,8 @@
           30
         ],
         "plan": [
-          77,
-          87
+          78,
+          88
         ]
       },
       "bandExcludesTransfer": true
@@ -3156,7 +3282,7 @@
       "aaFrontierFootnote": "Claude Haiku 5.5 has 5x higher pricing on longer-context inputs which are not currently reflected; we are working to include this in cost figures across Artificial Analysis.",
       "rank": {
         "api": 27,
-        "plan": 80
+        "plan": 81
       },
       "rankWithinWorkload": {
         "api": null,
@@ -3260,8 +3386,8 @@
           30
         ],
         "plan": [
-          77,
-          87
+          78,
+          88
         ]
       },
       "bandExcludesTransfer": true
@@ -3286,7 +3412,7 @@
       "aaFrontierFootnote": null,
       "rank": {
         "api": 28,
-        "plan": 84
+        "plan": 85
       },
       "rankWithinWorkload": {
         "api": null,
@@ -3389,8 +3515,8 @@
           30
         ],
         "plan": [
-          77,
-          87
+          78,
+          88
         ]
       },
       "bandExcludesTransfer": true
@@ -3415,7 +3541,7 @@
       "aaFrontierFootnote": null,
       "rank": {
         "api": 29,
-        "plan": 88
+        "plan": 89
       },
       "rankWithinWorkload": {
         "api": null,
@@ -3518,8 +3644,8 @@
           30
         ],
         "plan": [
-          88,
-          94
+          89,
+          95
         ]
       },
       "bandExcludesTransfer": true
@@ -3544,7 +3670,7 @@
       "aaFrontierFootnote": "Claude Haiku 5.5 has 5x higher pricing on longer-context inputs which are not currently reflected; we are working to include this in cost figures across Artificial Analysis.",
       "rank": {
         "api": 30,
-        "plan": 92
+        "plan": 93
       },
       "rankWithinWorkload": {
         "api": null,
@@ -3648,8 +3774,8 @@
           30
         ],
         "plan": [
-          88,
-          94
+          89,
+          95
         ]
       },
       "bandExcludesTransfer": true
@@ -3674,7 +3800,7 @@
       "aaFrontierFootnote": null,
       "rank": {
         "api": 11,
-        "plan": 95
+        "plan": 96
       },
       "rankWithinWorkload": {
         "api": null,
@@ -3725,15 +3851,26 @@
       },
       "cost": {
         "apiUsd": 2631.238073586814,
-        "planUsd": 2631.238073586814,
-        "fallback": "api",
-        "route": null,
+        "planUsd": 1754.1587157245428,
+        "fallback": null,
+        "route": {
+          "id": "opencode-go-kimi-k3-1-pro-dollar-limit",
+          "planLabel": "OpenCode Go $10 · Kimi K3.1 Pro · published dollar limit ($15 a month)",
+          "planFeeUsd": 10,
+          "valueMultiple": 1.5,
+          "grade": "assumption",
+          "assumptionKind": "dollarLimit",
+          "evidenceLabel": "Published dollar limit (owner decision O198; the plan's terms, not a measurement)",
+          "sourceModel": null,
+          "sourceUrl": "https://opencode.ai/docs/console/go/",
+          "sourceDate": "2026-11-11"
+        },
         "subset": false,
         "partialComponents": [],
         "workload": "835a9baf594a1251",
         "planFlags": [
-          "API-cost fallback: no admitted Plan route",
-          "cross-estimand ordering not identified"
+          "workload-unmatched",
+          "published dollar limit; full use of the limit assumed, at the seller's listed token prices (O198)"
         ]
       },
       "grade": "measured",
@@ -3753,11 +3890,7 @@
           "top3": 0.0,
           "frontier": 0.0
         },
-        "plan": {
-          "top1": 0.0,
-          "top3": 0.0,
-          "frontier": 0.0
-        }
+        "plan": null
       },
       "flags": [],
       "tier": "Expensive",
@@ -3767,130 +3900,11 @@
           12
         ],
         "plan": [
-          95,
-          108
+          96,
+          113
         ]
       },
-      "bandExcludesTransfer": false
-    },
-    {
-      "slug": "deepseek-v4-1-flash-1017",
-      "name": "DeepSeek V4.1 Flash 1017",
-      "shortName": "DeepSeek V4.1 Flash 1017",
-      "developer": "DeepSeek",
-      "aaUrl": "https://artificialanalysis.ai/models/deepseek-v4-1-flash-1017",
-      "aaVariant": "max",
-      "rankingEligible": true,
-      "exclusionReasons": [],
-      "intelligenceIndex": {
-        "value": 32.4896393532027,
-        "status": "measured"
-      },
-      "speed": 174.977934757459,
-      "aaFrontierTier": "left cohort",
-      "aaFrontierConfiguration": "DeepSeek V4.1 Flash 1017",
-      "aaFrontierIntelligenceGap": null,
-      "aaFrontierFootnote": null,
-      "rank": {
-        "api": 10,
-        "plan": 96
-      },
-      "rankWithinWorkload": {
-        "api": null,
-        "plan": null
-      },
-      "rankNote": null,
-      "overall": {
-        "api": 46.18017825689371,
-        "plan": 40.85180189344345
-      },
-      "quality": 47.626385904263664,
-      "qualityRank": 17,
-      "dims": {
-        "costComposite": null,
-        "frontierCode": 28.4711616161616,
-        "terminalBench": 33.8383838383838,
-        "bugHunt": 70.89125102207686,
-        "gdpval": 62.2885,
-        "automationBench": 66.64095364949257,
-        "omniscience": 50.45,
-        "lcr": 82.6666666666667,
-        "hle": 25.3,
-        "tbScience": 12.8571428571429,
-        "critpt": 24.0
-      },
-      "costDims": {
-        "api": 41.84155531478383,
-        "plan": 20.528049860982797
-      },
-      "raw": {
-        "frontierCode": 0.284711616161616,
-        "terminalBench": 33.8383838383838,
-        "bugHunt": 86.7,
-        "gdpval": 1745.77,
-        "automationBench": 0.6664095364949257,
-        "omniscience": 0.9,
-        "lcr": 0.826666666666667,
-        "hle": 0.253,
-        "tbScience": 0.128571428571429,
-        "critpt": 0.24
-      },
-      "coverage": {
-        "pct": 100.0,
-        "costAvailable": true,
-        "missing": [],
-        "provisional": false,
-        "provisionalReasons": []
-      },
-      "cost": {
-        "apiUsd": 445.51597840042814,
-        "planUsd": 445.51597840042814,
-        "fallback": "api",
-        "route": null,
-        "subset": false,
-        "partialComponents": [],
-        "workload": "835a9baf594a1251",
-        "planFlags": [
-          "API-cost fallback: no admitted Plan route",
-          "cross-estimand ordering not identified"
-        ]
-      },
-      "grade": "measured",
-      "pareto": {
-        "api": false,
-        "plan": false
-      },
-      "frontierStatus": {
-        "api": {
-          "withheld": "diagnostic ranking (O121): computed like the leading rankings for comparison, but it earns no interval or scenario label and its gates never hold the release"
-        },
-        "plan": null
-      },
-      "scenario": {
-        "api": {
-          "top1": 0.0,
-          "top3": 0.0,
-          "frontier": 0.0
-        },
-        "plan": {
-          "top1": 0.0,
-          "top3": 0.0,
-          "frontier": 0.0
-        }
-      },
-      "flags": [],
-      "tier": "Expensive",
-      "band": {
-        "api": [
-          5,
-          12
-        ],
-        "plan": [
-          95,
-          108
-        ]
-      },
-      "bandExcludesTransfer": false
+      "bandExcludesTransfer": true
     },
     {
       "slug": "gpt-6-luna-medium",
@@ -4015,8 +4029,8 @@
           33
         ],
         "plan": [
-          95,
-          108
+          96,
+          113
         ]
       },
       "bandExcludesTransfer": true
@@ -4147,8 +4161,8 @@
           33
         ],
         "plan": [
-          95,
-          108
+          96,
+          113
         ]
       },
       "bandExcludesTransfer": true
@@ -4182,7 +4196,7 @@
       "rankNote": null,
       "overall": {
         "api": 41.50661556776184,
-        "plan": 39.154293672342156
+        "plan": 40.41799258378601
       },
       "quality": 37.478423818218964,
       "qualityRank": 23,
@@ -4201,7 +4215,7 @@
       },
       "costDims": {
         "api": 53.59119081639048,
-        "plan": 44.18190323471173
+        "plan": 49.23669888048716
       },
       "raw": {
         "frontierCode": 0.239701262626263,
@@ -4224,26 +4238,26 @@
       },
       "cost": {
         "apiUsd": 171.70030964750728,
-        "planUsd": 145.41015383427106,
+        "planUsd": 114.46687309833818,
         "fallback": null,
         "route": {
-          "id": "mimo-tokenplan-max-mimo-v2-6-pro-quota-ceiling",
-          "planLabel": "MiMo Token Plan Max $100 · quota ceiling (provider-derived)",
-          "planFeeUsd": 100,
-          "valueMultiple": 1.1808,
+          "id": "opencode-go-mimo-v2-6-pro-dollar-limit",
+          "planLabel": "OpenCode Go $10 · MiMo-V2.6-Pro · published dollar limit ($15 a month)",
+          "planFeeUsd": 10,
+          "valueMultiple": 1.5,
           "grade": "assumption",
-          "assumptionKind": "ceiling",
-          "evidenceLabel": "Provider quota ceiling (owner decision O46; not a measurement)",
+          "assumptionKind": "dollarLimit",
+          "evidenceLabel": "Published dollar limit (owner decision O198; the plan's terms, not a measurement)",
           "sourceModel": null,
-          "sourceUrl": "https://mimo.mi.com/docs/en-US/price/token-plan",
-          "sourceDate": "2026-10-21"
+          "sourceUrl": "https://opencode.ai/docs/console/go/",
+          "sourceDate": "2026-11-11"
         },
         "subset": false,
         "partialComponents": [],
         "workload": "835a9baf594a1251",
         "planFlags": [
           "workload-unmatched",
-          "provider quota ceiling; full use assumed, the optimistic end on use; credits valued at the recorded API rate, not the highest (O46, O125)"
+          "published dollar limit; full use of the limit assumed, at the seller's listed token prices (O198)"
         ]
       },
       "grade": "measured",
@@ -4266,15 +4280,15 @@
         "plan": null
       },
       "flags": [],
-      "tier": "Expensive",
+      "tier": "Premium",
       "band": {
         "api": [
           20,
           25
         ],
         "plan": [
-          95,
-          108
+          96,
+          113
         ]
       },
       "bandExcludesTransfer": true
@@ -4299,7 +4313,7 @@
       "aaFrontierFootnote": null,
       "rank": {
         "api": 23,
-        "plan": 106
+        "plan": 110
       },
       "rankWithinWorkload": {
         "api": null,
@@ -4350,15 +4364,26 @@
       },
       "cost": {
         "apiUsd": 5478.681890335225,
-        "planUsd": 5478.681890335225,
-        "fallback": "api",
-        "route": null,
+        "planUsd": 1826.2272967784083,
+        "fallback": null,
+        "route": {
+          "id": "opencode-go-gemini-4-argon-dollar-limit",
+          "planLabel": "OpenCode Go $10 · Gemini 4 Argon · published dollar limit ($30 a month)",
+          "planFeeUsd": 10,
+          "valueMultiple": 3.0,
+          "grade": "assumption",
+          "assumptionKind": "dollarLimit",
+          "evidenceLabel": "Published dollar limit (owner decision O198; the plan's terms, not a measurement)",
+          "sourceModel": null,
+          "sourceUrl": "https://opencode.ai/docs/console/go/",
+          "sourceDate": "2026-11-11"
+        },
         "subset": false,
         "partialComponents": [],
         "workload": "835a9baf594a1251",
         "planFlags": [
-          "API-cost fallback: no admitted Plan route",
-          "cross-estimand ordering not identified"
+          "workload-unmatched",
+          "published dollar limit; full use of the limit assumed, at the seller's listed token prices (O198)"
         ]
       },
       "grade": "measured",
@@ -4378,11 +4403,7 @@
           "top3": 0.0,
           "frontier": 0.0
         },
-        "plan": {
-          "top1": 0.0,
-          "top3": 0.0,
-          "frontier": 0.0
-        }
+        "plan": null
       },
       "flags": [],
       "tier": "Expensive",
@@ -4392,11 +4413,11 @@
           25
         ],
         "plan": [
-          95,
-          108
+          96,
+          113
         ]
       },
-      "bandExcludesTransfer": false
+      "bandExcludesTransfer": true
     },
     {
       "slug": "gpt-6-luna-low",
@@ -4420,7 +4441,7 @@
       "aaFrontierFootnote": null,
       "rank": {
         "api": 33,
-        "plan": 109
+        "plan": 119
       },
       "rankWithinWorkload": {
         "api": null,
@@ -4523,8 +4544,8 @@
           33
         ],
         "plan": [
-          109,
-          112
+          114,
+          123
         ]
       },
       "bandExcludesTransfer": true
@@ -9935,7 +9956,7 @@
         ],
         "plan": [
           36,
-          53
+          54
         ]
       },
       "bandExcludesTransfer": false,
@@ -10073,7 +10094,7 @@
         ],
         "plan": [
           36,
-          53
+          54
         ]
       },
       "bandExcludesTransfer": false,
@@ -10211,7 +10232,7 @@
         ],
         "plan": [
           36,
-          53
+          54
         ]
       },
       "bandExcludesTransfer": false,
@@ -10348,7 +10369,7 @@
         ],
         "plan": [
           36,
-          53
+          54
         ]
       },
       "bandExcludesTransfer": true,
@@ -10485,7 +10506,7 @@
         ],
         "plan": [
           36,
-          53
+          54
         ]
       },
       "bandExcludesTransfer": true,
@@ -10622,7 +10643,7 @@
         ],
         "plan": [
           36,
-          53
+          54
         ]
       },
       "bandExcludesTransfer": true,
@@ -10763,7 +10784,7 @@
         ],
         "plan": [
           36,
-          53
+          54
         ]
       },
       "bandExcludesTransfer": false,
@@ -10905,7 +10926,7 @@
         ],
         "plan": [
           36,
-          53
+          54
         ]
       },
       "bandExcludesTransfer": false,
@@ -11046,7 +11067,7 @@
         ],
         "plan": [
           36,
-          53
+          54
         ]
       },
       "bandExcludesTransfer": false,
@@ -11182,7 +11203,7 @@
         ],
         "plan": [
           36,
-          53
+          54
         ]
       },
       "bandExcludesTransfer": true,
@@ -11317,7 +11338,7 @@
         ],
         "plan": [
           36,
-          53
+          54
         ]
       },
       "bandExcludesTransfer": true,
@@ -11452,7 +11473,7 @@
         ],
         "plan": [
           36,
-          53
+          54
         ]
       },
       "bandExcludesTransfer": true,
@@ -11462,6 +11483,139 @@
         "routeId": "chatgpt-pro200-gpt-6.1-terra-xhigh-common-gpt-assumption",
         "multiple": 10.42,
         "representative": false
+      }
+    },
+    {
+      "slug": "deepseek-v4-1-flash-1017",
+      "name": "DeepSeek V4.1 Flash 1017 · OpenCode Go",
+      "shortName": "DeepSeek V4.1 Flash 1017",
+      "developer": "DeepSeek",
+      "aaUrl": "https://artificialanalysis.ai/models/deepseek-v4-1-flash-1017",
+      "aaVariant": "max",
+      "rankingEligible": true,
+      "exclusionReasons": [],
+      "intelligenceIndex": {
+        "value": 32.4896393532027,
+        "status": "measured"
+      },
+      "speed": 174.977934757459,
+      "aaFrontierTier": "left cohort",
+      "aaFrontierConfiguration": "DeepSeek V4.1 Flash 1017",
+      "aaFrontierIntelligenceGap": null,
+      "aaFrontierFootnote": null,
+      "rank": {
+        "api": 10,
+        "plan": 48
+      },
+      "rankWithinWorkload": {
+        "api": null,
+        "plan": null
+      },
+      "rankNote": null,
+      "overall": {
+        "api": 46.18017825689371,
+        "plan": 53.01270215103771
+      },
+      "quality": 47.626385904263664,
+      "qualityRank": 17,
+      "dims": {
+        "costComposite": null,
+        "frontierCode": 28.4711616161616,
+        "terminalBench": 33.8383838383838,
+        "bugHunt": 70.89125102207686,
+        "gdpval": 62.2885,
+        "automationBench": 66.64095364949257,
+        "omniscience": 50.45,
+        "lcr": 82.6666666666667,
+        "hle": 25.3,
+        "tbScience": 12.8571428571429,
+        "critpt": 24.0
+      },
+      "costDims": {
+        "api": 41.84155531478383,
+        "plan": 69.17165089135983
+      },
+      "raw": {
+        "frontierCode": 0.284711616161616,
+        "terminalBench": 33.8383838383838,
+        "bugHunt": 86.7,
+        "gdpval": 1745.77,
+        "automationBench": 0.6664095364949257,
+        "omniscience": 0.9,
+        "lcr": 0.826666666666667,
+        "hle": 0.253,
+        "tbScience": 0.128571428571429,
+        "critpt": 0.24
+      },
+      "coverage": {
+        "pct": 100.0,
+        "costAvailable": true,
+        "missing": [],
+        "provisional": false,
+        "provisionalReasons": []
+      },
+      "cost": {
+        "apiUsd": 445.51597840042814,
+        "planUsd": 44.55159784004282,
+        "fallback": null,
+        "route": {
+          "id": "opencode-go-deepseek-v4-1-flash-1017-dollar-limit",
+          "planLabel": "OpenCode Go $10 · DeepSeek V4.1 Flash · published dollar limit ($100 a month)",
+          "planFeeUsd": 10,
+          "valueMultiple": 10.0,
+          "grade": "assumption",
+          "assumptionKind": "dollarLimit",
+          "evidenceLabel": "Published dollar limit (owner decision O198; the plan's terms, not a measurement)",
+          "sourceModel": null,
+          "sourceUrl": "https://opencode.ai/docs/console/go/",
+          "sourceDate": "2026-11-11"
+        },
+        "subset": false,
+        "partialComponents": [],
+        "workload": "835a9baf594a1251",
+        "planFlags": [
+          "workload-unmatched",
+          "published dollar limit; full use of the limit assumed, at the seller's listed token prices (O198)"
+        ]
+      },
+      "grade": "measured",
+      "pareto": {
+        "api": false,
+        "plan": false
+      },
+      "frontierStatus": {
+        "api": {
+          "withheld": "diagnostic ranking (O121): computed like the leading rankings for comparison, but it earns no interval or scenario label and its gates never hold the release"
+        },
+        "plan": null
+      },
+      "scenario": {
+        "api": {
+          "top1": 0.0,
+          "top3": 0.0,
+          "frontier": 0.0
+        },
+        "plan": null
+      },
+      "flags": [],
+      "tier": "Mid-Range",
+      "band": {
+        "api": [
+          5,
+          12
+        ],
+        "plan": [
+          36,
+          54
+        ]
+      },
+      "bandExcludesTransfer": true,
+      "key": "deepseek-v4-1-flash-1017--opencode-go",
+      "planRow": {
+        "plan": "OpenCode Go",
+        "routeId": "opencode-go-deepseek-v4-1-flash-1017-dollar-limit",
+        "multiple": 10.0,
+        "representative": true
       }
     },
     {
@@ -11484,7 +11638,7 @@
       "aaFrontierFootnote": null,
       "rank": {
         "api": 15,
-        "plan": 48
+        "plan": 49
       },
       "rankWithinWorkload": {
         "api": null,
@@ -11588,7 +11742,7 @@
         ],
         "plan": [
           36,
-          53
+          54
         ]
       },
       "bandExcludesTransfer": true,
@@ -11620,7 +11774,7 @@
       "aaFrontierFootnote": null,
       "rank": {
         "api": 15,
-        "plan": 49
+        "plan": 50
       },
       "rankWithinWorkload": {
         "api": null,
@@ -11723,7 +11877,7 @@
         ],
         "plan": [
           36,
-          53
+          54
         ]
       },
       "bandExcludesTransfer": true,
@@ -11755,7 +11909,7 @@
       "aaFrontierFootnote": null,
       "rank": {
         "api": 6,
-        "plan": 50
+        "plan": 51
       },
       "rankWithinWorkload": {
         "api": null,
@@ -11861,7 +12015,7 @@
         ],
         "plan": [
           36,
-          53
+          54
         ]
       },
       "bandExcludesTransfer": false,
@@ -11893,7 +12047,7 @@
       "aaFrontierFootnote": null,
       "rank": {
         "api": 15,
-        "plan": 51
+        "plan": 52
       },
       "rankWithinWorkload": {
         "api": null,
@@ -11996,7 +12150,7 @@
         ],
         "plan": [
           36,
-          53
+          54
         ]
       },
       "bandExcludesTransfer": true,
@@ -12028,7 +12182,7 @@
       "aaFrontierFootnote": null,
       "rank": {
         "api": 6,
-        "plan": 52
+        "plan": 53
       },
       "rankWithinWorkload": {
         "api": null,
@@ -12135,7 +12289,7 @@
         ],
         "plan": [
           36,
-          53
+          54
         ]
       },
       "bandExcludesTransfer": false,
@@ -12167,7 +12321,7 @@
       "aaFrontierFootnote": null,
       "rank": {
         "api": 6,
-        "plan": 53
+        "plan": 54
       },
       "rankWithinWorkload": {
         "api": null,
@@ -12273,7 +12427,7 @@
         ],
         "plan": [
           36,
-          53
+          54
         ]
       },
       "bandExcludesTransfer": false,
@@ -12307,7 +12461,7 @@
       "aaFrontierFootnote": "Claude Haiku 5.5 has 5x higher pricing on longer-context inputs which are not currently reflected; we are working to include this in cost figures across Artificial Analysis.",
       "rank": {
         "api": 24,
-        "plan": 54
+        "plan": 55
       },
       "rankWithinWorkload": {
         "api": null,
@@ -12411,8 +12565,8 @@
           25
         ],
         "plan": [
-          54,
-          76
+          55,
+          77
         ]
       },
       "bandExcludesTransfer": true,
@@ -12446,7 +12600,7 @@
       "aaFrontierFootnote": "Claude Haiku 5.5 has 5x higher pricing on longer-context inputs which are not currently reflected; we are working to include this in cost figures across Artificial Analysis.",
       "rank": {
         "api": 24,
-        "plan": 54
+        "plan": 55
       },
       "rankWithinWorkload": {
         "api": null,
@@ -12550,8 +12704,8 @@
           25
         ],
         "plan": [
-          54,
-          76
+          55,
+          77
         ]
       },
       "bandExcludesTransfer": true,
@@ -12585,7 +12739,7 @@
       "aaFrontierFootnote": "Claude Haiku 5.5 has 5x higher pricing on longer-context inputs which are not currently reflected; we are working to include this in cost figures across Artificial Analysis.",
       "rank": {
         "api": 24,
-        "plan": 54
+        "plan": 55
       },
       "rankWithinWorkload": {
         "api": null,
@@ -12689,8 +12843,8 @@
           25
         ],
         "plan": [
-          54,
-          76
+          55,
+          77
         ]
       },
       "bandExcludesTransfer": true,
@@ -12722,7 +12876,7 @@
       "aaFrontierFootnote": null,
       "rank": {
         "api": 19,
-        "plan": 57
+        "plan": 58
       },
       "rankWithinWorkload": {
         "api": null,
@@ -12825,8 +12979,8 @@
           19
         ],
         "plan": [
-          54,
-          76
+          55,
+          77
         ]
       },
       "bandExcludesTransfer": true,
@@ -12858,7 +13012,7 @@
       "aaFrontierFootnote": null,
       "rank": {
         "api": 14,
-        "plan": 58
+        "plan": 59
       },
       "rankWithinWorkload": {
         "api": null,
@@ -12960,8 +13114,8 @@
           19
         ],
         "plan": [
-          54,
-          76
+          55,
+          77
         ]
       },
       "bandExcludesTransfer": true,
@@ -12993,7 +13147,7 @@
       "aaFrontierFootnote": null,
       "rank": {
         "api": 19,
-        "plan": 59
+        "plan": 60
       },
       "rankWithinWorkload": {
         "api": null,
@@ -13095,8 +13249,8 @@
           19
         ],
         "plan": [
-          54,
-          76
+          55,
+          77
         ]
       },
       "bandExcludesTransfer": true,
@@ -13128,7 +13282,7 @@
       "aaFrontierFootnote": null,
       "rank": {
         "api": 19,
-        "plan": 60
+        "plan": 61
       },
       "rankWithinWorkload": {
         "api": null,
@@ -13230,8 +13384,8 @@
           19
         ],
         "plan": [
-          54,
-          76
+          55,
+          77
         ]
       },
       "bandExcludesTransfer": true,
@@ -13263,7 +13417,7 @@
       "aaFrontierFootnote": null,
       "rank": {
         "api": 9,
-        "plan": 61
+        "plan": 62
       },
       "rankWithinWorkload": {
         "api": null,
@@ -13369,8 +13523,8 @@
           12
         ],
         "plan": [
-          54,
-          76
+          55,
+          77
         ]
       },
       "bandExcludesTransfer": false,
@@ -13402,7 +13556,7 @@
       "aaFrontierFootnote": null,
       "rank": {
         "api": 9,
-        "plan": 62
+        "plan": 63
       },
       "rankWithinWorkload": {
         "api": null,
@@ -13509,8 +13663,8 @@
           12
         ],
         "plan": [
-          54,
-          76
+          55,
+          77
         ]
       },
       "bandExcludesTransfer": false,
@@ -13542,7 +13696,7 @@
       "aaFrontierFootnote": null,
       "rank": {
         "api": 15,
-        "plan": 63
+        "plan": 64
       },
       "rankWithinWorkload": {
         "api": null,
@@ -13644,8 +13798,8 @@
           19
         ],
         "plan": [
-          54,
-          76
+          55,
+          77
         ]
       },
       "bandExcludesTransfer": true,
@@ -13677,7 +13831,7 @@
       "aaFrontierFootnote": null,
       "rank": {
         "api": 9,
-        "plan": 64
+        "plan": 65
       },
       "rankWithinWorkload": {
         "api": null,
@@ -13783,8 +13937,8 @@
           12
         ],
         "plan": [
-          54,
-          76
+          55,
+          77
         ]
       },
       "bandExcludesTransfer": false,
@@ -13818,7 +13972,7 @@
       "aaFrontierFootnote": null,
       "rank": {
         "api": 5,
-        "plan": 65
+        "plan": 66
       },
       "rankWithinWorkload": {
         "api": null,
@@ -13924,8 +14078,8 @@
           12
         ],
         "plan": [
-          54,
-          76
+          55,
+          77
         ]
       },
       "bandExcludesTransfer": false,
@@ -13957,7 +14111,7 @@
       "aaFrontierFootnote": null,
       "rank": {
         "api": 20,
-        "plan": 66
+        "plan": 67
       },
       "rankWithinWorkload": {
         "api": null,
@@ -14064,8 +14218,8 @@
           25
         ],
         "plan": [
-          54,
-          76
+          55,
+          77
         ]
       },
       "bandExcludesTransfer": false,
@@ -14097,7 +14251,7 @@
       "aaFrontierFootnote": null,
       "rank": {
         "api": 20,
-        "plan": 67
+        "plan": 68
       },
       "rankWithinWorkload": {
         "api": null,
@@ -14203,8 +14357,8 @@
           25
         ],
         "plan": [
-          54,
-          76
+          55,
+          77
         ]
       },
       "bandExcludesTransfer": false,
@@ -14236,7 +14390,7 @@
       "aaFrontierFootnote": null,
       "rank": {
         "api": 20,
-        "plan": 67
+        "plan": 68
       },
       "rankWithinWorkload": {
         "api": null,
@@ -14342,8 +14496,8 @@
           25
         ],
         "plan": [
-          54,
-          76
+          55,
+          77
         ]
       },
       "bandExcludesTransfer": false,
@@ -14375,7 +14529,7 @@
       "aaFrontierFootnote": null,
       "rank": {
         "api": 20,
-        "plan": 69
+        "plan": 70
       },
       "rankWithinWorkload": {
         "api": null,
@@ -14481,8 +14635,8 @@
           25
         ],
         "plan": [
-          54,
-          76
+          55,
+          77
         ]
       },
       "bandExcludesTransfer": false,
@@ -14514,7 +14668,7 @@
       "aaFrontierFootnote": null,
       "rank": {
         "api": 19,
-        "plan": 70
+        "plan": 71
       },
       "rankWithinWorkload": {
         "api": null,
@@ -14616,8 +14770,8 @@
           19
         ],
         "plan": [
-          54,
-          76
+          55,
+          77
         ]
       },
       "bandExcludesTransfer": true,
@@ -14649,7 +14803,7 @@
       "aaFrontierFootnote": null,
       "rank": {
         "api": 25,
-        "plan": 71
+        "plan": 72
       },
       "rankWithinWorkload": {
         "api": null,
@@ -14752,8 +14906,8 @@
           25
         ],
         "plan": [
-          54,
-          76
+          55,
+          77
         ]
       },
       "bandExcludesTransfer": true,
@@ -14785,7 +14939,7 @@
       "aaFrontierFootnote": null,
       "rank": {
         "api": 25,
-        "plan": 72
+        "plan": 73
       },
       "rankWithinWorkload": {
         "api": null,
@@ -14887,8 +15041,8 @@
           25
         ],
         "plan": [
-          54,
-          76
+          55,
+          77
         ]
       },
       "bandExcludesTransfer": true,
@@ -14920,7 +15074,7 @@
       "aaFrontierFootnote": null,
       "rank": {
         "api": 25,
-        "plan": 73
+        "plan": 74
       },
       "rankWithinWorkload": {
         "api": null,
@@ -15022,8 +15176,8 @@
           25
         ],
         "plan": [
-          54,
-          76
+          55,
+          77
         ]
       },
       "bandExcludesTransfer": true,
@@ -15055,7 +15209,7 @@
       "aaFrontierFootnote": null,
       "rank": {
         "api": 6,
-        "plan": 74
+        "plan": 75
       },
       "rankWithinWorkload": {
         "api": null,
@@ -15160,8 +15314,8 @@
           12
         ],
         "plan": [
-          54,
-          76
+          55,
+          77
         ]
       },
       "bandExcludesTransfer": false,
@@ -15193,7 +15347,7 @@
       "aaFrontierFootnote": null,
       "rank": {
         "api": 25,
-        "plan": 75
+        "plan": 76
       },
       "rankWithinWorkload": {
         "api": null,
@@ -15295,8 +15449,8 @@
           25
         ],
         "plan": [
-          54,
-          76
+          55,
+          77
         ]
       },
       "bandExcludesTransfer": true,
@@ -15328,7 +15482,7 @@
       "aaFrontierFootnote": null,
       "rank": {
         "api": 9,
-        "plan": 76
+        "plan": 77
       },
       "rankWithinWorkload": {
         "api": null,
@@ -15434,8 +15588,8 @@
           12
         ],
         "plan": [
-          54,
-          76
+          55,
+          77
         ]
       },
       "bandExcludesTransfer": false,
@@ -15469,7 +15623,7 @@
       "aaFrontierFootnote": null,
       "rank": {
         "api": 26,
-        "plan": 77
+        "plan": 78
       },
       "rankWithinWorkload": {
         "api": null,
@@ -15571,8 +15725,8 @@
           30
         ],
         "plan": [
-          77,
-          87
+          78,
+          88
         ]
       },
       "bandExcludesTransfer": true,
@@ -15606,7 +15760,7 @@
       "aaFrontierFootnote": null,
       "rank": {
         "api": 26,
-        "plan": 77
+        "plan": 78
       },
       "rankWithinWorkload": {
         "api": null,
@@ -15708,8 +15862,8 @@
           30
         ],
         "plan": [
-          77,
-          87
+          78,
+          88
         ]
       },
       "bandExcludesTransfer": true,
@@ -15743,7 +15897,7 @@
       "aaFrontierFootnote": null,
       "rank": {
         "api": 26,
-        "plan": 77
+        "plan": 78
       },
       "rankWithinWorkload": {
         "api": null,
@@ -15846,8 +16000,8 @@
           30
         ],
         "plan": [
-          77,
-          87
+          78,
+          88
         ]
       },
       "bandExcludesTransfer": true,
@@ -15879,7 +16033,7 @@
       "aaFrontierFootnote": "Claude Haiku 5.5 has 5x higher pricing on longer-context inputs which are not currently reflected; we are working to include this in cost figures across Artificial Analysis.",
       "rank": {
         "api": 27,
-        "plan": 80
+        "plan": 81
       },
       "rankWithinWorkload": {
         "api": null,
@@ -15983,8 +16137,8 @@
           30
         ],
         "plan": [
-          77,
-          87
+          78,
+          88
         ]
       },
       "bandExcludesTransfer": true,
@@ -16016,7 +16170,7 @@
       "aaFrontierFootnote": "Claude Haiku 5.5 has 5x higher pricing on longer-context inputs which are not currently reflected; we are working to include this in cost figures across Artificial Analysis.",
       "rank": {
         "api": 27,
-        "plan": 80
+        "plan": 81
       },
       "rankWithinWorkload": {
         "api": null,
@@ -16120,8 +16274,8 @@
           30
         ],
         "plan": [
-          77,
-          87
+          78,
+          88
         ]
       },
       "bandExcludesTransfer": true,
@@ -16153,7 +16307,7 @@
       "aaFrontierFootnote": "Claude Haiku 5.5 has 5x higher pricing on longer-context inputs which are not currently reflected; we are working to include this in cost figures across Artificial Analysis.",
       "rank": {
         "api": 27,
-        "plan": 80
+        "plan": 81
       },
       "rankWithinWorkload": {
         "api": null,
@@ -16257,8 +16411,8 @@
           30
         ],
         "plan": [
-          77,
-          87
+          78,
+          88
         ]
       },
       "bandExcludesTransfer": true,
@@ -16292,7 +16446,7 @@
       "aaFrontierFootnote": null,
       "rank": {
         "api": 26,
-        "plan": 83
+        "plan": 84
       },
       "rankWithinWorkload": {
         "api": null,
@@ -16394,8 +16548,8 @@
           30
         ],
         "plan": [
-          77,
-          87
+          78,
+          88
         ]
       },
       "bandExcludesTransfer": true,
@@ -16427,7 +16581,7 @@
       "aaFrontierFootnote": null,
       "rank": {
         "api": 28,
-        "plan": 84
+        "plan": 85
       },
       "rankWithinWorkload": {
         "api": null,
@@ -16529,8 +16683,8 @@
           30
         ],
         "plan": [
-          77,
-          87
+          78,
+          88
         ]
       },
       "bandExcludesTransfer": true,
@@ -16562,7 +16716,7 @@
       "aaFrontierFootnote": null,
       "rank": {
         "api": 28,
-        "plan": 84
+        "plan": 85
       },
       "rankWithinWorkload": {
         "api": null,
@@ -16664,8 +16818,8 @@
           30
         ],
         "plan": [
-          77,
-          87
+          78,
+          88
         ]
       },
       "bandExcludesTransfer": true,
@@ -16697,7 +16851,7 @@
       "aaFrontierFootnote": null,
       "rank": {
         "api": 28,
-        "plan": 84
+        "plan": 85
       },
       "rankWithinWorkload": {
         "api": null,
@@ -16799,8 +16953,8 @@
           30
         ],
         "plan": [
-          77,
-          87
+          78,
+          88
         ]
       },
       "bandExcludesTransfer": true,
@@ -16832,7 +16986,7 @@
       "aaFrontierFootnote": null,
       "rank": {
         "api": 28,
-        "plan": 84
+        "plan": 85
       },
       "rankWithinWorkload": {
         "api": null,
@@ -16935,8 +17089,8 @@
           30
         ],
         "plan": [
-          77,
-          87
+          78,
+          88
         ]
       },
       "bandExcludesTransfer": true,
@@ -16968,7 +17122,7 @@
       "aaFrontierFootnote": null,
       "rank": {
         "api": 29,
-        "plan": 88
+        "plan": 89
       },
       "rankWithinWorkload": {
         "api": null,
@@ -17070,8 +17224,8 @@
           30
         ],
         "plan": [
-          88,
-          94
+          89,
+          95
         ]
       },
       "bandExcludesTransfer": true,
@@ -17103,7 +17257,7 @@
       "aaFrontierFootnote": null,
       "rank": {
         "api": 29,
-        "plan": 88
+        "plan": 89
       },
       "rankWithinWorkload": {
         "api": null,
@@ -17205,8 +17359,8 @@
           30
         ],
         "plan": [
-          88,
-          94
+          89,
+          95
         ]
       },
       "bandExcludesTransfer": true,
@@ -17238,7 +17392,7 @@
       "aaFrontierFootnote": null,
       "rank": {
         "api": 29,
-        "plan": 88
+        "plan": 89
       },
       "rankWithinWorkload": {
         "api": null,
@@ -17340,8 +17494,8 @@
           30
         ],
         "plan": [
-          88,
-          94
+          89,
+          95
         ]
       },
       "bandExcludesTransfer": true,
@@ -17373,7 +17527,7 @@
       "aaFrontierFootnote": null,
       "rank": {
         "api": 29,
-        "plan": 88
+        "plan": 89
       },
       "rankWithinWorkload": {
         "api": null,
@@ -17476,8 +17630,8 @@
           30
         ],
         "plan": [
-          88,
-          94
+          89,
+          95
         ]
       },
       "bandExcludesTransfer": true,
@@ -17509,7 +17663,7 @@
       "aaFrontierFootnote": "Claude Haiku 5.5 has 5x higher pricing on longer-context inputs which are not currently reflected; we are working to include this in cost figures across Artificial Analysis.",
       "rank": {
         "api": 30,
-        "plan": 92
+        "plan": 93
       },
       "rankWithinWorkload": {
         "api": null,
@@ -17613,8 +17767,8 @@
           30
         ],
         "plan": [
-          88,
-          94
+          89,
+          95
         ]
       },
       "bandExcludesTransfer": true,
@@ -17646,7 +17800,7 @@
       "aaFrontierFootnote": "Claude Haiku 5.5 has 5x higher pricing on longer-context inputs which are not currently reflected; we are working to include this in cost figures across Artificial Analysis.",
       "rank": {
         "api": 30,
-        "plan": 92
+        "plan": 93
       },
       "rankWithinWorkload": {
         "api": null,
@@ -17750,8 +17904,8 @@
           30
         ],
         "plan": [
-          88,
-          94
+          89,
+          95
         ]
       },
       "bandExcludesTransfer": true,
@@ -17783,7 +17937,7 @@
       "aaFrontierFootnote": "Claude Haiku 5.5 has 5x higher pricing on longer-context inputs which are not currently reflected; we are working to include this in cost figures across Artificial Analysis.",
       "rank": {
         "api": 30,
-        "plan": 92
+        "plan": 93
       },
       "rankWithinWorkload": {
         "api": null,
@@ -17887,8 +18041,8 @@
           30
         ],
         "plan": [
-          88,
-          94
+          89,
+          95
         ]
       },
       "bandExcludesTransfer": true,
@@ -17902,7 +18056,7 @@
     },
     {
       "slug": "kimi-k3-1-pro",
-      "name": "Kimi K3.1 Pro · API-cost fallback",
+      "name": "Kimi K3.1 Pro · OpenCode Go",
       "shortName": "Kimi K3.1 Pro",
       "developer": "Moonshot AI",
       "aaUrl": "https://artificialanalysis.ai/models/kimi-k3-1-pro",
@@ -17920,7 +18074,7 @@
       "aaFrontierFootnote": null,
       "rank": {
         "api": 11,
-        "plan": 95
+        "plan": 96
       },
       "rankWithinWorkload": {
         "api": null,
@@ -17971,15 +18125,26 @@
       },
       "cost": {
         "apiUsd": 2631.238073586814,
-        "planUsd": 2631.238073586814,
-        "fallback": "api",
-        "route": null,
+        "planUsd": 1754.1587157245428,
+        "fallback": null,
+        "route": {
+          "id": "opencode-go-kimi-k3-1-pro-dollar-limit",
+          "planLabel": "OpenCode Go $10 · Kimi K3.1 Pro · published dollar limit ($15 a month)",
+          "planFeeUsd": 10,
+          "valueMultiple": 1.5,
+          "grade": "assumption",
+          "assumptionKind": "dollarLimit",
+          "evidenceLabel": "Published dollar limit (owner decision O198; the plan's terms, not a measurement)",
+          "sourceModel": null,
+          "sourceUrl": "https://opencode.ai/docs/console/go/",
+          "sourceDate": "2026-11-11"
+        },
         "subset": false,
         "partialComponents": [],
         "workload": "835a9baf594a1251",
         "planFlags": [
-          "API-cost fallback: no admitted Plan route",
-          "cross-estimand ordering not identified"
+          "workload-unmatched",
+          "published dollar limit; full use of the limit assumed, at the seller's listed token prices (O198)"
         ]
       },
       "grade": "measured",
@@ -17999,11 +18164,7 @@
           "top3": 0.0,
           "frontier": 0.0
         },
-        "plan": {
-          "top1": 0.0,
-          "top3": 0.0,
-          "frontier": 0.0
-        }
+        "plan": null
       },
       "flags": [],
       "tier": "Expensive",
@@ -18013,142 +18174,16 @@
           12
         ],
         "plan": [
-          95,
-          108
+          96,
+          113
         ]
       },
-      "bandExcludesTransfer": false,
-      "key": "kimi-k3-1-pro--api",
+      "bandExcludesTransfer": true,
+      "key": "kimi-k3-1-pro--opencode-go",
       "planRow": {
-        "plan": null,
-        "routeId": null,
-        "multiple": null,
-        "representative": true
-      }
-    },
-    {
-      "slug": "deepseek-v4-1-flash-1017",
-      "name": "DeepSeek V4.1 Flash 1017 · API-cost fallback",
-      "shortName": "DeepSeek V4.1 Flash 1017",
-      "developer": "DeepSeek",
-      "aaUrl": "https://artificialanalysis.ai/models/deepseek-v4-1-flash-1017",
-      "aaVariant": "max",
-      "rankingEligible": true,
-      "exclusionReasons": [],
-      "intelligenceIndex": {
-        "value": 32.4896393532027,
-        "status": "measured"
-      },
-      "speed": 174.977934757459,
-      "aaFrontierTier": "left cohort",
-      "aaFrontierConfiguration": "DeepSeek V4.1 Flash 1017",
-      "aaFrontierIntelligenceGap": null,
-      "aaFrontierFootnote": null,
-      "rank": {
-        "api": 10,
-        "plan": 96
-      },
-      "rankWithinWorkload": {
-        "api": null,
-        "plan": null
-      },
-      "rankNote": null,
-      "overall": {
-        "api": 46.18017825689371,
-        "plan": 40.85180189344345
-      },
-      "quality": 47.626385904263664,
-      "qualityRank": 17,
-      "dims": {
-        "costComposite": null,
-        "frontierCode": 28.4711616161616,
-        "terminalBench": 33.8383838383838,
-        "bugHunt": 70.89125102207686,
-        "gdpval": 62.2885,
-        "automationBench": 66.64095364949257,
-        "omniscience": 50.45,
-        "lcr": 82.6666666666667,
-        "hle": 25.3,
-        "tbScience": 12.8571428571429,
-        "critpt": 24.0
-      },
-      "costDims": {
-        "api": 41.84155531478383,
-        "plan": 20.528049860982797
-      },
-      "raw": {
-        "frontierCode": 0.284711616161616,
-        "terminalBench": 33.8383838383838,
-        "bugHunt": 86.7,
-        "gdpval": 1745.77,
-        "automationBench": 0.6664095364949257,
-        "omniscience": 0.9,
-        "lcr": 0.826666666666667,
-        "hle": 0.253,
-        "tbScience": 0.128571428571429,
-        "critpt": 0.24
-      },
-      "coverage": {
-        "pct": 100.0,
-        "costAvailable": true,
-        "missing": [],
-        "provisional": false,
-        "provisionalReasons": []
-      },
-      "cost": {
-        "apiUsd": 445.51597840042814,
-        "planUsd": 445.51597840042814,
-        "fallback": "api",
-        "route": null,
-        "subset": false,
-        "partialComponents": [],
-        "workload": "835a9baf594a1251",
-        "planFlags": [
-          "API-cost fallback: no admitted Plan route",
-          "cross-estimand ordering not identified"
-        ]
-      },
-      "grade": "measured",
-      "pareto": {
-        "api": false,
-        "plan": false
-      },
-      "frontierStatus": {
-        "api": {
-          "withheld": "diagnostic ranking (O121): computed like the leading rankings for comparison, but it earns no interval or scenario label and its gates never hold the release"
-        },
-        "plan": null
-      },
-      "scenario": {
-        "api": {
-          "top1": 0.0,
-          "top3": 0.0,
-          "frontier": 0.0
-        },
-        "plan": {
-          "top1": 0.0,
-          "top3": 0.0,
-          "frontier": 0.0
-        }
-      },
-      "flags": [],
-      "tier": "Expensive",
-      "band": {
-        "api": [
-          5,
-          12
-        ],
-        "plan": [
-          95,
-          108
-        ]
-      },
-      "bandExcludesTransfer": false,
-      "key": "deepseek-v4-1-flash-1017--api",
-      "planRow": {
-        "plan": null,
-        "routeId": null,
-        "multiple": null,
+        "plan": "OpenCode Go",
+        "routeId": "opencode-go-kimi-k3-1-pro-dollar-limit",
+        "multiple": 1.5,
         "representative": true
       }
     },
@@ -18274,8 +18309,8 @@
           33
         ],
         "plan": [
-          95,
-          108
+          96,
+          113
         ]
       },
       "bandExcludesTransfer": true,
@@ -18409,8 +18444,8 @@
           33
         ],
         "plan": [
-          95,
-          108
+          96,
+          113
         ]
       },
       "bandExcludesTransfer": true,
@@ -18544,8 +18579,8 @@
           33
         ],
         "plan": [
-          95,
-          108
+          96,
+          113
         ]
       },
       "bandExcludesTransfer": true,
@@ -18680,8 +18715,8 @@
           33
         ],
         "plan": [
-          95,
-          108
+          96,
+          113
         ]
       },
       "bandExcludesTransfer": true,
@@ -18819,8 +18854,8 @@
           33
         ],
         "plan": [
-          95,
-          108
+          96,
+          113
         ]
       },
       "bandExcludesTransfer": true,
@@ -18958,8 +18993,8 @@
           33
         ],
         "plan": [
-          95,
-          108
+          96,
+          113
         ]
       },
       "bandExcludesTransfer": true,
@@ -19097,8 +19132,8 @@
           33
         ],
         "plan": [
-          95,
-          108
+          96,
+          113
         ]
       },
       "bandExcludesTransfer": true,
@@ -19108,6 +19143,544 @@
         "routeId": "claude-pro-claude-haiku-5-5-low-common-opus55-assumption",
         "multiple": 58.9,
         "representative": true
+      }
+    },
+    {
+      "slug": "mimo-v2-6-pro",
+      "name": "MiMo-V2.6-Pro · OpenCode Go",
+      "shortName": "MiMo V2.6 Pro",
+      "developer": "Xiaomi",
+      "aaUrl": "https://artificialanalysis.ai/models/mimo-v2-6-pro",
+      "aaVariant": null,
+      "rankingEligible": true,
+      "exclusionReasons": [],
+      "intelligenceIndex": {
+        "value": 29.8897833093321,
+        "status": "measured"
+      },
+      "speed": 49.3553855539778,
+      "aaFrontierTier": "left cohort",
+      "aaFrontierConfiguration": "MiMo-V2.6-Pro",
+      "aaFrontierIntelligenceGap": null,
+      "aaFrontierFootnote": null,
+      "rank": {
+        "api": 22,
+        "plan": 104
+      },
+      "rankWithinWorkload": {
+        "api": null,
+        "plan": null
+      },
+      "rankNote": null,
+      "overall": {
+        "api": 41.50661556776184,
+        "plan": 40.41799258378601
+      },
+      "quality": 37.478423818218964,
+      "qualityRank": 23,
+      "dims": {
+        "costComposite": null,
+        "frontierCode": 23.9701262626263,
+        "terminalBench": 34.8484848484849,
+        "bugHunt": 17.988552739165986,
+        "gdpval": 59.470000000000006,
+        "automationBench": 58.623409434190854,
+        "omniscience": 47.766666666666666,
+        "lcr": 86.3333333333333,
+        "hle": 15.2,
+        "tbScience": 5.71428571428571,
+        "critpt": 34.0
+      },
+      "costDims": {
+        "api": 53.59119081639048,
+        "plan": 49.23669888048716
+      },
+      "raw": {
+        "frontierCode": 0.239701262626263,
+        "terminalBench": 34.8484848484849,
+        "bugHunt": 22,
+        "gdpval": 1689.4,
+        "automationBench": 0.5862340943419085,
+        "omniscience": -4.466666666666667,
+        "lcr": 0.863333333333333,
+        "hle": 0.152,
+        "tbScience": 0.0571428571428571,
+        "critpt": 0.34
+      },
+      "coverage": {
+        "pct": 100.0,
+        "costAvailable": true,
+        "missing": [],
+        "provisional": false,
+        "provisionalReasons": []
+      },
+      "cost": {
+        "apiUsd": 171.70030964750728,
+        "planUsd": 114.46687309833818,
+        "fallback": null,
+        "route": {
+          "id": "opencode-go-mimo-v2-6-pro-dollar-limit",
+          "planLabel": "OpenCode Go $10 · MiMo-V2.6-Pro · published dollar limit ($15 a month)",
+          "planFeeUsd": 10,
+          "valueMultiple": 1.5,
+          "grade": "assumption",
+          "assumptionKind": "dollarLimit",
+          "evidenceLabel": "Published dollar limit (owner decision O198; the plan's terms, not a measurement)",
+          "sourceModel": null,
+          "sourceUrl": "https://opencode.ai/docs/console/go/",
+          "sourceDate": "2026-11-11"
+        },
+        "subset": false,
+        "partialComponents": [],
+        "workload": "835a9baf594a1251",
+        "planFlags": [
+          "workload-unmatched",
+          "published dollar limit; full use of the limit assumed, at the seller's listed token prices (O198)"
+        ]
+      },
+      "grade": "measured",
+      "pareto": {
+        "api": true,
+        "plan": false
+      },
+      "frontierStatus": {
+        "api": {
+          "withheld": "diagnostic ranking (O121): computed like the leading rankings for comparison, but it earns no interval or scenario label and its gates never hold the release"
+        },
+        "plan": null
+      },
+      "scenario": {
+        "api": {
+          "top1": 0.0,
+          "top3": 0.0,
+          "frontier": 1.0
+        },
+        "plan": null
+      },
+      "flags": [],
+      "tier": "Premium",
+      "band": {
+        "api": [
+          20,
+          25
+        ],
+        "plan": [
+          96,
+          113
+        ]
+      },
+      "bandExcludesTransfer": true,
+      "key": "mimo-v2-6-pro--opencode-go",
+      "planRow": {
+        "plan": "OpenCode Go",
+        "routeId": "opencode-go-mimo-v2-6-pro-dollar-limit",
+        "multiple": 1.5,
+        "representative": true
+      }
+    },
+    {
+      "slug": "gpt-6-luna",
+      "name": "GPT-6 Luna (max) · OpenCode Go",
+      "shortName": "GPT-6 Luna (max)",
+      "developer": "OpenAI",
+      "aaUrl": "https://artificialanalysis.ai/models/gpt-6-luna",
+      "aaVariant": "max",
+      "rankingEligible": true,
+      "exclusionReasons": [],
+      "intelligenceIndex": {
+        "value": 27.7552004938153,
+        "status": "measured"
+      },
+      "speed": 118.287890387621,
+      "aaFrontierTier": "near",
+      "aaFrontierConfiguration": "GPT-6 Luna (max)",
+      "aaFrontierIntelligenceGap": 2,
+      "aaFrontierFootnote": null,
+      "rank": {
+        "api": 25,
+        "plan": 105
+      },
+      "rankWithinWorkload": {
+        "api": null,
+        "plan": null
+      },
+      "rankNote": null,
+      "overall": {
+        "api": 40.07452342007535,
+        "plan": 39.90978107418145
+      },
+      "quality": 33.84453503649605,
+      "qualityRank": 25,
+      "dims": {
+        "costComposite": null,
+        "frontierCode": 25.1747727272727,
+        "terminalBench": 12.6262626262626,
+        "bugHunt": 33.52412101390025,
+        "gdpval": 47.223,
+        "automationBench": 53.16814034483175,
+        "omniscience": 45.86666666666667,
+        "lcr": 83.3333333333333,
+        "hle": 22.2,
+        "tbScience": 8.57142857142857,
+        "critpt": 41.5
+      },
+      "costDims": {
+        "api": 58.76448857081327,
+        "plan": 58.10551918723767
+      },
+      "raw": {
+        "frontierCode": 0.251747727272727,
+        "terminalBench": 12.6262626262626,
+        "bugHunt": 41.0,
+        "gdpval": 1444.46,
+        "automationBench": 0.5316814034483175,
+        "omniscience": -8.266666666666667,
+        "lcr": 0.833333333333333,
+        "hle": 0.222,
+        "tbScience": 0.0857142857142857,
+        "critpt": 0.415
+      },
+      "coverage": {
+        "pct": 100.0,
+        "costAvailable": true,
+        "missing": [],
+        "provisional": false,
+        "provisionalReasons": []
+      },
+      "cost": {
+        "apiUsd": 112.83624696325522,
+        "planUsd": 75.22416464217015,
+        "fallback": null,
+        "route": {
+          "id": "opencode-go-gpt-6-luna-dollar-limit",
+          "planLabel": "OpenCode Go $10 · GPT-6 Luna (max) · published dollar limit ($15 a month)",
+          "planFeeUsd": 10,
+          "valueMultiple": 1.5,
+          "grade": "assumption",
+          "assumptionKind": "dollarLimit",
+          "evidenceLabel": "Published dollar limit (owner decision O198; the plan's terms, not a measurement)",
+          "sourceModel": null,
+          "sourceUrl": "https://opencode.ai/docs/console/go/",
+          "sourceDate": "2026-11-11"
+        },
+        "subset": false,
+        "partialComponents": [],
+        "workload": "835a9baf594a1251",
+        "planFlags": [
+          "workload-unmatched",
+          "published dollar limit; full use of the limit assumed, at the seller's listed token prices (O198)"
+        ]
+      },
+      "grade": "measured",
+      "pareto": {
+        "api": true,
+        "plan": false
+      },
+      "frontierStatus": {
+        "api": {
+          "withheld": "diagnostic ranking (O121): computed like the leading rankings for comparison, but it earns no interval or scenario label and its gates never hold the release"
+        },
+        "plan": null
+      },
+      "scenario": {
+        "api": {
+          "top1": 0.0,
+          "top3": 0.0,
+          "frontier": 1.0
+        },
+        "plan": null
+      },
+      "flags": [],
+      "tier": "Premium",
+      "band": {
+        "api": [
+          20,
+          25
+        ],
+        "plan": [
+          96,
+          113
+        ]
+      },
+      "bandExcludesTransfer": true,
+      "key": "gpt-6-luna--opencode-go",
+      "planRow": {
+        "plan": "OpenCode Go",
+        "routeId": "opencode-go-gpt-6-luna-dollar-limit",
+        "multiple": 1.5,
+        "representative": false
+      }
+    },
+    {
+      "slug": "claude-haiku-5-5-max",
+      "name": "Claude Haiku 5.5 (max) · OpenCode Go",
+      "shortName": "Haiku 5.5 (max)",
+      "developer": "Anthropic",
+      "aaUrl": "https://artificialanalysis.ai/models/claude-haiku-5-5",
+      "aaVariant": "max",
+      "rankingEligible": true,
+      "exclusionReasons": [],
+      "intelligenceIndex": {
+        "value": 36.2345435880142,
+        "status": "measured"
+      },
+      "speed": 235.23979828462,
+      "aaFrontierTier": "left cohort",
+      "aaFrontierConfiguration": "Claude Haiku 5.5 (max)",
+      "aaFrontierIntelligenceGap": null,
+      "aaFrontierFootnote": "Claude Haiku 5.5 has 5x higher pricing on longer-context inputs which are not currently reflected; we are working to include this in cost figures across Artificial Analysis.",
+      "rank": {
+        "api": 21,
+        "plan": 106
+      },
+      "rankWithinWorkload": {
+        "api": null,
+        "plan": null
+      },
+      "rankNote": null,
+      "overall": {
+        "api": 41.615680951450614,
+        "plan": 39.52554398114833
+      },
+      "quality": 39.493180346789266,
+      "qualityRank": 20,
+      "dims": {
+        "costComposite": null,
+        "frontierCode": 34.9325505050505,
+        "terminalBench": 32.8282828282828,
+        "bugHunt": 24.938675388389207,
+        "gdpval": 56.5415,
+        "automationBench": 35.411015132783625,
+        "omniscience": 56.15,
+        "lcr": 82.6666666666667,
+        "hle": 29.599999999999998,
+        "tbScience": 20.0,
+        "critpt": 41.0
+      },
+      "costDims": {
+        "api": 47.983182765434655,
+        "plan": 39.62263488422553
+      },
+      "raw": {
+        "frontierCode": 0.349325505050505,
+        "terminalBench": 32.8282828282828,
+        "bugHunt": 30.5,
+        "gdpval": 1630.83,
+        "automationBench": 0.35411015132783624,
+        "omniscience": 12.3,
+        "lcr": 0.826666666666667,
+        "hle": 0.296,
+        "tbScience": 0.2,
+        "critpt": 0.41
+      },
+      "coverage": {
+        "pct": 100.0,
+        "costAvailable": true,
+        "missing": [],
+        "provisional": false,
+        "provisionalReasons": []
+      },
+      "cost": {
+        "apiUsd": 270.65372691503325,
+        "planUsd": 180.4358179433555,
+        "fallback": null,
+        "route": {
+          "id": "opencode-go-claude-haiku-5-5-max-dollar-limit",
+          "planLabel": "OpenCode Go $10 · Claude Haiku 5.5 (max) · published dollar limit ($15 a month)",
+          "planFeeUsd": 10,
+          "valueMultiple": 1.5,
+          "grade": "assumption",
+          "assumptionKind": "dollarLimit",
+          "evidenceLabel": "Published dollar limit (owner decision O198; the plan's terms, not a measurement)",
+          "sourceModel": null,
+          "sourceUrl": "https://opencode.ai/docs/console/go/",
+          "sourceDate": "2026-11-11"
+        },
+        "subset": false,
+        "partialComponents": [],
+        "workload": "835a9baf594a1251",
+        "planFlags": [
+          "workload-unmatched",
+          "published dollar limit; full use of the limit assumed, at the seller's listed token prices (O198)"
+        ]
+      },
+      "grade": "measured",
+      "pareto": {
+        "api": false,
+        "plan": true
+      },
+      "frontierStatus": {
+        "api": {
+          "withheld": "diagnostic ranking (O121): computed like the leading rankings for comparison, but it earns no interval or scenario label and its gates never hold the release"
+        },
+        "plan": null
+      },
+      "scenario": {
+        "api": {
+          "top1": 0.0,
+          "top3": 0.0,
+          "frontier": 0.0
+        },
+        "plan": null
+      },
+      "flags": [
+        "AA cost caveat: Claude Haiku 5.5 has 5x higher pricing on longer-context inputs which are not currently reflected; we are working to include this in cost figures across Artificial Analysis."
+      ],
+      "tier": "Expensive",
+      "band": {
+        "api": [
+          20,
+          25
+        ],
+        "plan": [
+          96,
+          113
+        ]
+      },
+      "bandExcludesTransfer": true,
+      "key": "claude-haiku-5-5-max--opencode-go",
+      "planRow": {
+        "plan": "OpenCode Go",
+        "routeId": "opencode-go-claude-haiku-5-5-max-dollar-limit",
+        "multiple": 1.5,
+        "representative": false
+      }
+    },
+    {
+      "slug": "claude-haiku-5-5",
+      "name": "Claude Haiku 5.5 (xhigh) · OpenCode Go",
+      "shortName": "Haiku 5.5 xhigh",
+      "developer": "Anthropic",
+      "aaUrl": "https://artificialanalysis.ai/models/claude-haiku-5-5-xhigh",
+      "aaVariant": "xhigh",
+      "rankingEligible": true,
+      "exclusionReasons": [
+        "Incomplete benchmark evidence after an exhaustive search (O36, O53): Max-effort ranking: no Vibe Code Bench v1.1 (Vals), Code Migration v1.1 (Vals), LiveBench 2.0 Overall; AI Coding Daily ranking: no AI Coding Daily (excl. bug finding)"
+      ],
+      "intelligenceIndex": {
+        "value": 34.3387759486628,
+        "status": "measured"
+      },
+      "speed": 186.354442173344,
+      "aaFrontierTier": "left cohort",
+      "aaFrontierConfiguration": "Claude Haiku 5.5 (xhigh)",
+      "aaFrontierIntelligenceGap": null,
+      "aaFrontierFootnote": "Claude Haiku 5.5 has 5x higher pricing on longer-context inputs which are not currently reflected; we are working to include this in cost figures across Artificial Analysis.",
+      "rank": {
+        "api": 24,
+        "plan": 107
+      },
+      "rankWithinWorkload": {
+        "api": null,
+        "plan": null
+      },
+      "rankNote": null,
+      "overall": {
+        "api": 40.49602481788262,
+        "plan": 39.5081912641985
+      },
+      "quality": 35.94284499078291,
+      "qualityRank": 24,
+      "dims": {
+        "costComposite": null,
+        "frontierCode": 29.9334090909091,
+        "terminalBench": 29.292929292929298,
+        "bugHunt": 20.44153720359771,
+        "gdpval": 51.077,
+        "automationBench": 35.953889773428195,
+        "omniscience": 53.916666666666664,
+        "lcr": 78.3333333333333,
+        "hle": 28.799999999999997,
+        "tbScience": 18.095238095238102,
+        "critpt": 44.5
+      },
+      "costDims": {
+        "api": 54.15556429918174,
+        "plan": 50.20423008444528
+      },
+      "raw": {
+        "frontierCode": 0.299334090909091,
+        "terminalBench": 29.292929292929298,
+        "bugHunt": 25.0,
+        "gdpval": 1521.54,
+        "automationBench": 0.35953889773428194,
+        "omniscience": 7.833333333333333,
+        "lcr": 0.783333333333333,
+        "hle": 0.288,
+        "tbScience": 0.180952380952381,
+        "critpt": 0.445
+      },
+      "coverage": {
+        "pct": 100.0,
+        "costAvailable": true,
+        "missing": [],
+        "provisional": false,
+        "provisionalReasons": []
+      },
+      "cost": {
+        "apiUsd": 164.0139821886185,
+        "planUsd": 109.34265479241235,
+        "fallback": null,
+        "route": {
+          "id": "opencode-go-claude-haiku-5-5-dollar-limit",
+          "planLabel": "OpenCode Go $10 · Claude Haiku 5.5 (xhigh) · published dollar limit ($15 a month)",
+          "planFeeUsd": 10,
+          "valueMultiple": 1.5,
+          "grade": "assumption",
+          "assumptionKind": "dollarLimit",
+          "evidenceLabel": "Published dollar limit (owner decision O198; the plan's terms, not a measurement)",
+          "sourceModel": null,
+          "sourceUrl": "https://opencode.ai/docs/console/go/",
+          "sourceDate": "2026-11-11"
+        },
+        "subset": false,
+        "partialComponents": [],
+        "workload": "835a9baf594a1251",
+        "planFlags": [
+          "workload-unmatched",
+          "published dollar limit; full use of the limit assumed, at the seller's listed token prices (O198)"
+        ]
+      },
+      "grade": "measured",
+      "pareto": {
+        "api": true,
+        "plan": true
+      },
+      "frontierStatus": {
+        "api": {
+          "withheld": "diagnostic ranking (O121): computed like the leading rankings for comparison, but it earns no interval or scenario label and its gates never hold the release"
+        },
+        "plan": null
+      },
+      "scenario": {
+        "api": {
+          "top1": 0.0,
+          "top3": 0.0,
+          "frontier": 1.0
+        },
+        "plan": null
+      },
+      "flags": [
+        "AA cost caveat: Claude Haiku 5.5 has 5x higher pricing on longer-context inputs which are not currently reflected; we are working to include this in cost figures across Artificial Analysis."
+      ],
+      "tier": "Premium",
+      "band": {
+        "api": [
+          20,
+          25
+        ],
+        "plan": [
+          96,
+          113
+        ]
+      },
+      "bandExcludesTransfer": true,
+      "key": "claude-haiku-5-5--opencode-go",
+      "planRow": {
+        "plan": "OpenCode Go",
+        "routeId": "opencode-go-claude-haiku-5-5-dollar-limit",
+        "multiple": 1.5,
+        "representative": false
       }
     },
     {
@@ -19130,7 +19703,7 @@
       "aaFrontierFootnote": null,
       "rank": {
         "api": 22,
-        "plan": 104
+        "plan": 108
       },
       "rankWithinWorkload": {
         "api": null,
@@ -19230,8 +19803,8 @@
           25
         ],
         "plan": [
-          95,
-          108
+          96,
+          113
         ]
       },
       "bandExcludesTransfer": true,
@@ -19240,7 +19813,7 @@
         "plan": "MiMo Token Plan Max",
         "routeId": "mimo-tokenplan-max-mimo-v2-6-pro-quota-ceiling",
         "multiple": 1.1808,
-        "representative": true
+        "representative": false
       }
     },
     {
@@ -19263,7 +19836,7 @@
       "aaFrontierFootnote": null,
       "rank": {
         "api": 22,
-        "plan": 105
+        "plan": 109
       },
       "rankWithinWorkload": {
         "api": null,
@@ -19363,8 +19936,8 @@
           25
         ],
         "plan": [
-          95,
-          108
+          96,
+          113
         ]
       },
       "bandExcludesTransfer": true,
@@ -19378,7 +19951,7 @@
     },
     {
       "slug": "gemini-4-argon",
-      "name": "Gemini 4 Argon · API-cost fallback",
+      "name": "Gemini 4 Argon · OpenCode Go",
       "shortName": "Gem 4 Argon",
       "developer": "Google DeepMind",
       "aaUrl": "https://artificialanalysis.ai/models/gemini-4-argon",
@@ -19396,7 +19969,7 @@
       "aaFrontierFootnote": null,
       "rank": {
         "api": 23,
-        "plan": 106
+        "plan": 110
       },
       "rankWithinWorkload": {
         "api": null,
@@ -19447,15 +20020,26 @@
       },
       "cost": {
         "apiUsd": 5478.681890335225,
-        "planUsd": 5478.681890335225,
-        "fallback": "api",
-        "route": null,
+        "planUsd": 1826.2272967784083,
+        "fallback": null,
+        "route": {
+          "id": "opencode-go-gemini-4-argon-dollar-limit",
+          "planLabel": "OpenCode Go $10 · Gemini 4 Argon · published dollar limit ($30 a month)",
+          "planFeeUsd": 10,
+          "valueMultiple": 3.0,
+          "grade": "assumption",
+          "assumptionKind": "dollarLimit",
+          "evidenceLabel": "Published dollar limit (owner decision O198; the plan's terms, not a measurement)",
+          "sourceModel": null,
+          "sourceUrl": "https://opencode.ai/docs/console/go/",
+          "sourceDate": "2026-11-11"
+        },
         "subset": false,
         "partialComponents": [],
         "workload": "835a9baf594a1251",
         "planFlags": [
-          "API-cost fallback: no admitted Plan route",
-          "cross-estimand ordering not identified"
+          "workload-unmatched",
+          "published dollar limit; full use of the limit assumed, at the seller's listed token prices (O198)"
         ]
       },
       "grade": "measured",
@@ -19475,11 +20059,7 @@
           "top3": 0.0,
           "frontier": 0.0
         },
-        "plan": {
-          "top1": 0.0,
-          "top3": 0.0,
-          "frontier": 0.0
-        }
+        "plan": null
       },
       "flags": [],
       "tier": "Expensive",
@@ -19489,16 +20069,16 @@
           25
         ],
         "plan": [
-          95,
-          108
+          96,
+          113
         ]
       },
-      "bandExcludesTransfer": false,
-      "key": "gemini-4-argon--api",
+      "bandExcludesTransfer": true,
+      "key": "gemini-4-argon--opencode-go",
       "planRow": {
-        "plan": null,
-        "routeId": null,
-        "multiple": null,
+        "plan": "OpenCode Go",
+        "routeId": "opencode-go-gemini-4-argon-dollar-limit",
+        "multiple": 3.0,
         "representative": true
       }
     },
@@ -19522,7 +20102,7 @@
       "aaFrontierFootnote": null,
       "rank": {
         "api": 22,
-        "plan": 107
+        "plan": 111
       },
       "rankWithinWorkload": {
         "api": null,
@@ -19622,8 +20202,8 @@
           25
         ],
         "plan": [
-          95,
-          108
+          96,
+          113
         ]
       },
       "bandExcludesTransfer": true,
@@ -19655,7 +20235,7 @@
       "aaFrontierFootnote": null,
       "rank": {
         "api": 22,
-        "plan": 108
+        "plan": 112
       },
       "rankWithinWorkload": {
         "api": null,
@@ -19755,8 +20335,8 @@
           25
         ],
         "plan": [
-          95,
-          108
+          96,
+          113
         ]
       },
       "bandExcludesTransfer": true,
@@ -19765,6 +20345,812 @@
         "plan": "MiMo Token Plan Lite",
         "routeId": "mimo-tokenplan-lite-mimo-v2-6-pro-quota-ceiling",
         "multiple": 0.984,
+        "representative": false
+      }
+    },
+    {
+      "slug": "claude-haiku-5-5-high",
+      "name": "Claude Haiku 5.5 (high) · OpenCode Go",
+      "shortName": "Haiku 5.5 (high)",
+      "developer": "Anthropic",
+      "aaUrl": "https://artificialanalysis.ai/models/claude-haiku-5-5-high",
+      "aaVariant": "high",
+      "rankingEligible": true,
+      "exclusionReasons": [],
+      "intelligenceIndex": {
+        "value": 29.624315467743,
+        "status": "measured"
+      },
+      "speed": 172.74280180683,
+      "aaFrontierTier": "frontier",
+      "aaFrontierConfiguration": "Claude Haiku 5.5 (high)",
+      "aaFrontierIntelligenceGap": 0,
+      "aaFrontierFootnote": "Claude Haiku 5.5 has 5x higher pricing on longer-context inputs which are not currently reflected; we are working to include this in cost figures across Artificial Analysis.",
+      "rank": {
+        "api": 27,
+        "plan": 113
+      },
+      "rankWithinWorkload": {
+        "api": null,
+        "plan": null
+      },
+      "rankNote": null,
+      "overall": {
+        "api": 38.07603173434583,
+        "plan": 38.011822484051876
+      },
+      "quality": 30.99223341256259,
+      "qualityRank": 27,
+      "dims": {
+        "costComposite": null,
+        "frontierCode": 23.200050505050502,
+        "terminalBench": 21.7171717171717,
+        "bugHunt": 16.35322976287817,
+        "gdpval": 46.2145,
+        "automationBench": 33.72685311767238,
+        "omniscience": 52.65,
+        "lcr": 77.3333333333333,
+        "hle": 23.7,
+        "tbScience": 10.0,
+        "critpt": 42.5
+      },
+      "costDims": {
+        "api": 59.32742669969555,
+        "plan": 59.070589698519726
+      },
+      "raw": {
+        "frontierCode": 0.232000505050505,
+        "terminalBench": 21.7171717171717,
+        "bugHunt": 20.0,
+        "gdpval": 1424.29,
+        "automationBench": 0.3372685311767238,
+        "omniscience": 5.3,
+        "lcr": 0.773333333333333,
+        "hle": 0.237,
+        "tbScience": 0.1,
+        "critpt": 0.425
+      },
+      "coverage": {
+        "pct": 100.0,
+        "costAvailable": true,
+        "missing": [],
+        "provisional": false,
+        "provisionalReasons": []
+      },
+      "cost": {
+        "apiUsd": 107.7975806000822,
+        "planUsd": 71.86505373338814,
+        "fallback": null,
+        "route": {
+          "id": "opencode-go-claude-haiku-5-5-high-dollar-limit",
+          "planLabel": "OpenCode Go $10 · Claude Haiku 5.5 (high) · published dollar limit ($15 a month)",
+          "planFeeUsd": 10,
+          "valueMultiple": 1.5,
+          "grade": "assumption",
+          "assumptionKind": "dollarLimit",
+          "evidenceLabel": "Published dollar limit (owner decision O198; the plan's terms, not a measurement)",
+          "sourceModel": null,
+          "sourceUrl": "https://opencode.ai/docs/console/go/",
+          "sourceDate": "2026-11-11"
+        },
+        "subset": false,
+        "partialComponents": [],
+        "workload": "835a9baf594a1251",
+        "planFlags": [
+          "workload-unmatched",
+          "published dollar limit; full use of the limit assumed, at the seller's listed token prices (O198)"
+        ]
+      },
+      "grade": "measured",
+      "pareto": {
+        "api": false,
+        "plan": true
+      },
+      "frontierStatus": {
+        "api": {
+          "withheld": "diagnostic ranking (O121): computed like the leading rankings for comparison, but it earns no interval or scenario label and its gates never hold the release"
+        },
+        "plan": null
+      },
+      "scenario": {
+        "api": {
+          "top1": 0.0,
+          "top3": 0.0,
+          "frontier": 0.0
+        },
+        "plan": null
+      },
+      "flags": [
+        "AA cost caveat: Claude Haiku 5.5 has 5x higher pricing on longer-context inputs which are not currently reflected; we are working to include this in cost figures across Artificial Analysis."
+      ],
+      "tier": "Premium",
+      "band": {
+        "api": [
+          26,
+          30
+        ],
+        "plan": [
+          96,
+          113
+        ]
+      },
+      "bandExcludesTransfer": true,
+      "key": "claude-haiku-5-5-high--opencode-go",
+      "planRow": {
+        "plan": "OpenCode Go",
+        "routeId": "opencode-go-claude-haiku-5-5-high-dollar-limit",
+        "multiple": 1.5,
+        "representative": false
+      }
+    },
+    {
+      "slug": "gpt-6-luna-high",
+      "name": "GPT-6 Luna (high) · OpenCode Go",
+      "shortName": "GPT-6 Luna (high)",
+      "developer": "OpenAI",
+      "aaUrl": "https://artificialanalysis.ai/models/gpt-6-luna-high",
+      "aaVariant": "high",
+      "rankingEligible": true,
+      "exclusionReasons": [],
+      "intelligenceIndex": {
+        "value": 21.3790170864582,
+        "status": "measured"
+      },
+      "speed": 112.84580098389,
+      "aaFrontierTier": "frontier",
+      "aaFrontierConfiguration": "GPT-6 Luna (high)",
+      "aaFrontierIntelligenceGap": 0,
+      "aaFrontierFootnote": null,
+      "rank": {
+        "api": 29,
+        "plan": 114
+      },
+      "rankWithinWorkload": {
+        "api": null,
+        "plan": null
+      },
+      "rankNote": null,
+      "overall": {
+        "api": 36.267884429352,
+        "plan": 37.61199671546731
+      },
+      "quality": 25.952723902493922,
+      "qualityRank": 29,
+      "dims": {
+        "costComposite": null,
+        "frontierCode": 18.601515151515198,
+        "terminalBench": 4.545454545454549,
+        "bugHunt": 14.717906786590351,
+        "gdpval": 42.60499999999999,
+        "automationBench": 47.82449139916615,
+        "omniscience": 43.6,
+        "lcr": 79.3333333333333,
+        "hle": 15.6,
+        "tbScience": 2.85714285714286,
+        "critpt": 30.5
+      },
+      "costDims": {
+        "api": 67.21336600992623,
+        "plan": 72.58981515438747
+      },
+      "raw": {
+        "frontierCode": 0.186015151515152,
+        "terminalBench": 4.545454545454549,
+        "bugHunt": 18.0,
+        "gdpval": 1352.1,
+        "automationBench": 0.4782449139916615,
+        "omniscience": -12.8,
+        "lcr": 0.793333333333333,
+        "hle": 0.156,
+        "tbScience": 0.0285714285714286,
+        "critpt": 0.305
+      },
+      "coverage": {
+        "pct": 100.0,
+        "costAvailable": true,
+        "missing": [],
+        "provisional": false,
+        "provisionalReasons": []
+      },
+      "cost": {
+        "apiUsd": 56.84404666658541,
+        "planUsd": 37.89603111105694,
+        "fallback": null,
+        "route": {
+          "id": "opencode-go-gpt-6-luna-high-dollar-limit",
+          "planLabel": "OpenCode Go $10 · GPT-6 Luna (high) · published dollar limit ($15 a month)",
+          "planFeeUsd": 10,
+          "valueMultiple": 1.5,
+          "grade": "assumption",
+          "assumptionKind": "dollarLimit",
+          "evidenceLabel": "Published dollar limit (owner decision O198; the plan's terms, not a measurement)",
+          "sourceModel": null,
+          "sourceUrl": "https://opencode.ai/docs/console/go/",
+          "sourceDate": "2026-11-11"
+        },
+        "subset": false,
+        "partialComponents": [],
+        "workload": "835a9baf594a1251",
+        "planFlags": [
+          "workload-unmatched",
+          "published dollar limit; full use of the limit assumed, at the seller's listed token prices (O198)"
+        ]
+      },
+      "grade": "measured",
+      "pareto": {
+        "api": true,
+        "plan": false
+      },
+      "frontierStatus": {
+        "api": {
+          "withheld": "diagnostic ranking (O121): computed like the leading rankings for comparison, but it earns no interval or scenario label and its gates never hold the release"
+        },
+        "plan": null
+      },
+      "scenario": {
+        "api": {
+          "top1": 0.0,
+          "top3": 0.0,
+          "frontier": 1.0
+        },
+        "plan": null
+      },
+      "flags": [],
+      "tier": "Mid-Range",
+      "band": {
+        "api": [
+          26,
+          30
+        ],
+        "plan": [
+          114,
+          123
+        ]
+      },
+      "bandExcludesTransfer": true,
+      "key": "gpt-6-luna-high--opencode-go",
+      "planRow": {
+        "plan": "OpenCode Go",
+        "routeId": "opencode-go-gpt-6-luna-high-dollar-limit",
+        "multiple": 1.5,
+        "representative": false
+      }
+    },
+    {
+      "slug": "gpt-6-luna-xhigh",
+      "name": "GPT-6 Luna (xhigh) · OpenCode Go",
+      "shortName": "GPT-6 Luna (xhigh)",
+      "developer": "OpenAI",
+      "aaUrl": "https://artificialanalysis.ai/models/gpt-6-luna-xhigh",
+      "aaVariant": "xhigh",
+      "rankingEligible": true,
+      "exclusionReasons": [],
+      "intelligenceIndex": {
+        "value": 23.3008728089378,
+        "status": "measured"
+      },
+      "speed": 119.133924155022,
+      "aaFrontierTier": "near",
+      "aaFrontierConfiguration": "GPT-6 Luna (xhigh)",
+      "aaFrontierIntelligenceGap": 2,
+      "aaFrontierFootnote": null,
+      "rank": {
+        "api": 28,
+        "plan": 115
+      },
+      "rankWithinWorkload": {
+        "api": null,
+        "plan": null
+      },
+      "rankNote": null,
+      "overall": {
+        "api": 36.81790786792476,
+        "plan": 37.512021677051195
+      },
+      "quality": 27.899317239536664,
+      "qualityRank": 28,
+      "dims": {
+        "costComposite": null,
+        "frontierCode": 18.4238888888889,
+        "terminalBench": 8.08080808080808,
+        "bugHunt": 21.25919869174162,
+        "gdpval": 43.626,
+        "automationBench": 47.800686767566575,
+        "omniscience": 43.516666666666666,
+        "lcr": 80.0,
+        "hle": 18.9,
+        "tbScience": 5.23809523809524,
+        "critpt": 35.5
+      },
+      "costDims": {
+        "api": 63.57367975308904,
+        "plan": 66.35013498959476
+      },
+      "raw": {
+        "frontierCode": 0.184238888888889,
+        "terminalBench": 8.08080808080808,
+        "bugHunt": 26.0,
+        "gdpval": 1372.52,
+        "automationBench": 0.47800686767566575,
+        "omniscience": -12.966666666666667,
+        "lcr": 0.8,
+        "hle": 0.189,
+        "tbScience": 0.0523809523809524,
+        "critpt": 0.355
+      },
+      "coverage": {
+        "pct": 100.0,
+        "costAvailable": true,
+        "missing": [],
+        "provisional": false,
+        "provisionalReasons": []
+      },
+      "cost": {
+        "apiUsd": 76.37626014369526,
+        "planUsd": 50.91750676246351,
+        "fallback": null,
+        "route": {
+          "id": "opencode-go-gpt-6-luna-xhigh-dollar-limit",
+          "planLabel": "OpenCode Go $10 · GPT-6 Luna (xhigh) · published dollar limit ($15 a month)",
+          "planFeeUsd": 10,
+          "valueMultiple": 1.5,
+          "grade": "assumption",
+          "assumptionKind": "dollarLimit",
+          "evidenceLabel": "Published dollar limit (owner decision O198; the plan's terms, not a measurement)",
+          "sourceModel": null,
+          "sourceUrl": "https://opencode.ai/docs/console/go/",
+          "sourceDate": "2026-11-11"
+        },
+        "subset": false,
+        "partialComponents": [],
+        "workload": "835a9baf594a1251",
+        "planFlags": [
+          "workload-unmatched",
+          "published dollar limit; full use of the limit assumed, at the seller's listed token prices (O198)"
+        ]
+      },
+      "grade": "measured",
+      "pareto": {
+        "api": true,
+        "plan": false
+      },
+      "frontierStatus": {
+        "api": {
+          "withheld": "diagnostic ranking (O121): computed like the leading rankings for comparison, but it earns no interval or scenario label and its gates never hold the release"
+        },
+        "plan": null
+      },
+      "scenario": {
+        "api": {
+          "top1": 0.0,
+          "top3": 0.0,
+          "frontier": 1.0
+        },
+        "plan": null
+      },
+      "flags": [],
+      "tier": "Mid-Range",
+      "band": {
+        "api": [
+          26,
+          30
+        ],
+        "plan": [
+          114,
+          123
+        ]
+      },
+      "bandExcludesTransfer": true,
+      "key": "gpt-6-luna-xhigh--opencode-go",
+      "planRow": {
+        "plan": "OpenCode Go",
+        "routeId": "opencode-go-gpt-6-luna-xhigh-dollar-limit",
+        "multiple": 1.5,
+        "representative": false
+      }
+    },
+    {
+      "slug": "claude-haiku-5-5-medium",
+      "name": "Claude Haiku 5.5 (medium) · OpenCode Go",
+      "shortName": "Haiku 5.5 (medium)",
+      "developer": "Anthropic",
+      "aaUrl": "https://artificialanalysis.ai/models/claude-haiku-5-5-medium",
+      "aaVariant": "medium",
+      "rankingEligible": true,
+      "exclusionReasons": [],
+      "intelligenceIndex": {
+        "value": 24.5513254343023,
+        "status": "measured"
+      },
+      "speed": 169.405450933168,
+      "aaFrontierTier": "frontier",
+      "aaFrontierConfiguration": "Claude Haiku 5.5 (medium)",
+      "aaFrontierIntelligenceGap": 0,
+      "aaFrontierFootnote": "Claude Haiku 5.5 has 5x higher pricing on longer-context inputs which are not currently reflected; we are working to include this in cost figures across Artificial Analysis.",
+      "rank": {
+        "api": 30,
+        "plan": 116
+      },
+      "rankWithinWorkload": {
+        "api": null,
+        "plan": null
+      },
+      "rankNote": null,
+      "overall": {
+        "api": 35.62752494220455,
+        "plan": 36.6168107688427
+      },
+      "quality": 25.761198439699104,
+      "qualityRank": 30,
+      "dims": {
+        "costComposite": null,
+        "frontierCode": 16.091994949495,
+        "terminalBench": 15.151515151515198,
+        "bugHunt": 13.082583810302536,
+        "gdpval": 39.125,
+        "automationBench": 28.589614814293164,
+        "omniscience": 52.083333333333336,
+        "lcr": 77.3333333333333,
+        "hle": 16.8,
+        "tbScience": 7.14285714285714,
+        "critpt": 30.0
+      },
+      "costDims": {
+        "api": 65.22650444972089,
+        "plan": 69.18364775627349
+      },
+      "raw": {
+        "frontierCode": 0.16091994949495,
+        "terminalBench": 15.151515151515198,
+        "bugHunt": 16.0,
+        "gdpval": 1282.5,
+        "automationBench": 0.2858961481429316,
+        "omniscience": 4.166666666666667,
+        "lcr": 0.773333333333333,
+        "hle": 0.168,
+        "tbScience": 0.0714285714285714,
+        "critpt": 0.3
+      },
+      "coverage": {
+        "pct": 100.0,
+        "costAvailable": true,
+        "missing": [],
+        "provisional": false,
+        "provisionalReasons": []
+      },
+      "cost": {
+        "apiUsd": 66.7894574896352,
+        "planUsd": 44.52630499309013,
+        "fallback": null,
+        "route": {
+          "id": "opencode-go-claude-haiku-5-5-medium-dollar-limit",
+          "planLabel": "OpenCode Go $10 · Claude Haiku 5.5 (medium) · published dollar limit ($15 a month)",
+          "planFeeUsd": 10,
+          "valueMultiple": 1.5,
+          "grade": "assumption",
+          "assumptionKind": "dollarLimit",
+          "evidenceLabel": "Published dollar limit (owner decision O198; the plan's terms, not a measurement)",
+          "sourceModel": null,
+          "sourceUrl": "https://opencode.ai/docs/console/go/",
+          "sourceDate": "2026-11-11"
+        },
+        "subset": false,
+        "partialComponents": [],
+        "workload": "835a9baf594a1251",
+        "planFlags": [
+          "workload-unmatched",
+          "published dollar limit; full use of the limit assumed, at the seller's listed token prices (O198)"
+        ]
+      },
+      "grade": "measured",
+      "pareto": {
+        "api": false,
+        "plan": true
+      },
+      "frontierStatus": {
+        "api": {
+          "withheld": "diagnostic ranking (O121): computed like the leading rankings for comparison, but it earns no interval or scenario label and its gates never hold the release"
+        },
+        "plan": null
+      },
+      "scenario": {
+        "api": {
+          "top1": 0.0,
+          "top3": 0.0,
+          "frontier": 0.0
+        },
+        "plan": null
+      },
+      "flags": [
+        "AA cost caveat: Claude Haiku 5.5 has 5x higher pricing on longer-context inputs which are not currently reflected; we are working to include this in cost figures across Artificial Analysis."
+      ],
+      "tier": "Mid-Range",
+      "band": {
+        "api": [
+          26,
+          30
+        ],
+        "plan": [
+          114,
+          123
+        ]
+      },
+      "bandExcludesTransfer": true,
+      "key": "claude-haiku-5-5-medium--opencode-go",
+      "planRow": {
+        "plan": "OpenCode Go",
+        "routeId": "opencode-go-claude-haiku-5-5-medium-dollar-limit",
+        "multiple": 1.5,
+        "representative": false
+      }
+    },
+    {
+      "slug": "gpt-6-luna-medium",
+      "name": "GPT-6 Luna (medium) · OpenCode Go",
+      "shortName": "GPT-6 Luna (medium)",
+      "developer": "OpenAI",
+      "aaUrl": "https://artificialanalysis.ai/models/gpt-6-luna-medium",
+      "aaVariant": "medium",
+      "rankingEligible": true,
+      "exclusionReasons": [],
+      "intelligenceIndex": {
+        "value": 18.3042156192416,
+        "status": "measured"
+      },
+      "speed": null,
+      "aaFrontierTier": "frontier",
+      "aaFrontierConfiguration": "GPT-6 Luna (medium)",
+      "aaFrontierIntelligenceGap": 0,
+      "aaFrontierFootnote": null,
+      "rank": {
+        "api": 31,
+        "plan": 117
+      },
+      "rankWithinWorkload": {
+        "api": null,
+        "plan": null
+      },
+      "rankNote": null,
+      "overall": {
+        "api": 33.941273138072695,
+        "plan": 36.25889678612919
+      },
+      "quality": 21.03350667967005,
+      "qualityRank": 31,
+      "dims": {
+        "costComposite": null,
+        "frontierCode": 12.769318181818202,
+        "terminalBench": 2.52525252525253,
+        "bugHunt": 3.270645952575634,
+        "gdpval": 38.5225,
+        "automationBench": 40.46136879135791,
+        "omniscience": 43.21666666666667,
+        "lcr": 78.3333333333333,
+        "hle": 15.1,
+        "tbScience": 1.42857142857143,
+        "critpt": 26.0
+      },
+      "costDims": {
+        "api": 72.66457251328063,
+        "plan": 81.93506710550662
+      },
+      "raw": {
+        "frontierCode": 0.127693181818182,
+        "terminalBench": 2.52525252525253,
+        "bugHunt": 4.0,
+        "gdpval": 1270.45,
+        "automationBench": 0.4046136879135791,
+        "omniscience": -13.566666666666666,
+        "lcr": 0.783333333333333,
+        "hle": 0.151,
+        "tbScience": 0.0142857142857143,
+        "critpt": 0.26
+      },
+      "coverage": {
+        "pct": 100.0,
+        "costAvailable": true,
+        "missing": [],
+        "provisional": false,
+        "provisionalReasons": []
+      },
+      "cost": {
+        "apiUsd": 36.523148430601616,
+        "planUsd": 24.34876562040108,
+        "fallback": null,
+        "route": {
+          "id": "opencode-go-gpt-6-luna-medium-dollar-limit",
+          "planLabel": "OpenCode Go $10 · GPT-6 Luna (medium) · published dollar limit ($15 a month)",
+          "planFeeUsd": 10,
+          "valueMultiple": 1.5,
+          "grade": "assumption",
+          "assumptionKind": "dollarLimit",
+          "evidenceLabel": "Published dollar limit (owner decision O198; the plan's terms, not a measurement)",
+          "sourceModel": null,
+          "sourceUrl": "https://opencode.ai/docs/console/go/",
+          "sourceDate": "2026-11-11"
+        },
+        "subset": false,
+        "partialComponents": [],
+        "workload": "835a9baf594a1251",
+        "planFlags": [
+          "workload-unmatched",
+          "published dollar limit; full use of the limit assumed, at the seller's listed token prices (O198)"
+        ]
+      },
+      "grade": "measured",
+      "pareto": {
+        "api": true,
+        "plan": false
+      },
+      "frontierStatus": {
+        "api": {
+          "withheld": "diagnostic ranking (O121): computed like the leading rankings for comparison, but it earns no interval or scenario label and its gates never hold the release"
+        },
+        "plan": null
+      },
+      "scenario": {
+        "api": {
+          "top1": 0.0,
+          "top3": 0.0,
+          "frontier": 1.0
+        },
+        "plan": null
+      },
+      "flags": [],
+      "tier": "Near-Budget",
+      "band": {
+        "api": [
+          31,
+          33
+        ],
+        "plan": [
+          114,
+          123
+        ]
+      },
+      "bandExcludesTransfer": true,
+      "key": "gpt-6-luna-medium--opencode-go",
+      "planRow": {
+        "plan": "OpenCode Go",
+        "routeId": "opencode-go-gpt-6-luna-medium-dollar-limit",
+        "multiple": 1.5,
+        "representative": false
+      }
+    },
+    {
+      "slug": "claude-haiku-5-5-low",
+      "name": "Claude Haiku 5.5 (low) · OpenCode Go",
+      "shortName": "Haiku 5.5 (low)",
+      "developer": "Anthropic",
+      "aaUrl": "https://artificialanalysis.ai/models/claude-haiku-5-5-low",
+      "aaVariant": "low",
+      "rankingEligible": true,
+      "exclusionReasons": [
+        "Incomplete benchmark evidence after an exhaustive search (O36, O53): Max-effort ranking: no Vibe Code Bench v1.1 (Vals), Code Migration v1.1 (Vals), LiveBench 2.0 Overall; AI Coding Daily ranking: no AI Coding Daily (excl. bug finding)"
+      ],
+      "intelligenceIndex": {
+        "value": 18.6180055310996,
+        "status": "measured"
+      },
+      "speed": 157.734879144301,
+      "aaFrontierTier": "frontier",
+      "aaFrontierConfiguration": "Claude Haiku 5.5 (low)",
+      "aaFrontierIntelligenceGap": 0,
+      "aaFrontierFootnote": "Claude Haiku 5.5 has 5x higher pricing on longer-context inputs which are not currently reflected; we are working to include this in cost figures across Artificial Analysis.",
+      "rank": {
+        "api": 32,
+        "plan": 118
+      },
+      "rankWithinWorkload": {
+        "api": null,
+        "plan": null
+      },
+      "rankNote": null,
+      "overall": {
+        "api": 33.8226130637566,
+        "plan": 36.124239068758946
+      },
+      "quality": 20.90515301032357,
+      "qualityRank": 32,
+      "dims": {
+        "costComposite": null,
+        "frontierCode": 8.036666666666669,
+        "terminalBench": 12.6262626262626,
+        "bugHunt": 10.62959934587081,
+        "gdpval": 31.517999999999997,
+        "automationBench": 22.910812181110643,
+        "omniscience": 51.083333333333336,
+        "lcr": 72.0,
+        "hle": 14.099999999999998,
+        "tbScience": 1.9047619047619,
+        "critpt": 21.5
+      },
+      "costDims": {
+        "api": 72.57499322405569,
+        "plan": 81.78149724406508
+      },
+      "raw": {
+        "frontierCode": 0.0803666666666667,
+        "terminalBench": 12.6262626262626,
+        "bugHunt": 13.0,
+        "gdpval": 1130.36,
+        "automationBench": 0.22910812181110643,
+        "omniscience": 2.1666666666666665,
+        "lcr": 0.72,
+        "hle": 0.141,
+        "tbScience": 0.019047619047619,
+        "critpt": 0.215
+      },
+      "coverage": {
+        "pct": 100.0,
+        "costAvailable": true,
+        "missing": [],
+        "provisional": false,
+        "provisionalReasons": []
+      },
+      "cost": {
+        "apiUsd": 36.78961556316905,
+        "planUsd": 24.526410375446034,
+        "fallback": null,
+        "route": {
+          "id": "opencode-go-claude-haiku-5-5-low-dollar-limit",
+          "planLabel": "OpenCode Go $10 · Claude Haiku 5.5 (low) · published dollar limit ($15 a month)",
+          "planFeeUsd": 10,
+          "valueMultiple": 1.5,
+          "grade": "assumption",
+          "assumptionKind": "dollarLimit",
+          "evidenceLabel": "Published dollar limit (owner decision O198; the plan's terms, not a measurement)",
+          "sourceModel": null,
+          "sourceUrl": "https://opencode.ai/docs/console/go/",
+          "sourceDate": "2026-11-11"
+        },
+        "subset": false,
+        "partialComponents": [],
+        "workload": "835a9baf594a1251",
+        "planFlags": [
+          "workload-unmatched",
+          "published dollar limit; full use of the limit assumed, at the seller's listed token prices (O198)"
+        ]
+      },
+      "grade": "measured",
+      "pareto": {
+        "api": false,
+        "plan": true
+      },
+      "frontierStatus": {
+        "api": {
+          "withheld": "diagnostic ranking (O121): computed like the leading rankings for comparison, but it earns no interval or scenario label and its gates never hold the release"
+        },
+        "plan": null
+      },
+      "scenario": {
+        "api": {
+          "top1": 0.0,
+          "top3": 0.0,
+          "frontier": 0.0
+        },
+        "plan": null
+      },
+      "flags": [
+        "AA cost caveat: Claude Haiku 5.5 has 5x higher pricing on longer-context inputs which are not currently reflected; we are working to include this in cost figures across Artificial Analysis."
+      ],
+      "tier": "Near-Budget",
+      "band": {
+        "api": [
+          31,
+          33
+        ],
+        "plan": [
+          114,
+          123
+        ]
+      },
+      "bandExcludesTransfer": true,
+      "key": "claude-haiku-5-5-low--opencode-go",
+      "planRow": {
+        "plan": "OpenCode Go",
+        "routeId": "opencode-go-claude-haiku-5-5-low-dollar-limit",
+        "multiple": 1.5,
         "representative": false
       }
     },
@@ -19790,7 +21176,7 @@
       "aaFrontierFootnote": null,
       "rank": {
         "api": 33,
-        "plan": 109
+        "plan": 119
       },
       "rankWithinWorkload": {
         "api": null,
@@ -19892,8 +21278,8 @@
           33
         ],
         "plan": [
-          109,
-          112
+          114,
+          123
         ]
       },
       "bandExcludesTransfer": true,
@@ -19927,7 +21313,7 @@
       "aaFrontierFootnote": null,
       "rank": {
         "api": 33,
-        "plan": 109
+        "plan": 119
       },
       "rankWithinWorkload": {
         "api": null,
@@ -20029,8 +21415,8 @@
           33
         ],
         "plan": [
-          109,
-          112
+          114,
+          123
         ]
       },
       "bandExcludesTransfer": true,
@@ -20064,7 +21450,7 @@
       "aaFrontierFootnote": null,
       "rank": {
         "api": 33,
-        "plan": 109
+        "plan": 119
       },
       "rankWithinWorkload": {
         "api": null,
@@ -20166,8 +21552,8 @@
           33
         ],
         "plan": [
-          109,
-          112
+          114,
+          123
         ]
       },
       "bandExcludesTransfer": true,
@@ -20201,7 +21587,7 @@
       "aaFrontierFootnote": null,
       "rank": {
         "api": 33,
-        "plan": 109
+        "plan": 119
       },
       "rankWithinWorkload": {
         "api": null,
@@ -20304,8 +21690,8 @@
           33
         ],
         "plan": [
-          109,
-          112
+          114,
+          123
         ]
       },
       "bandExcludesTransfer": true,
@@ -20315,6 +21701,141 @@
         "routeId": "chatgpt-pro500-gpt-6-luna-low-common-gpt-assumption",
         "multiple": 10.772,
         "representative": true
+      }
+    },
+    {
+      "slug": "gpt-6-luna-low",
+      "name": "GPT-6 Luna (low) · OpenCode Go",
+      "shortName": "GPT-6 Luna (low)",
+      "developer": "OpenAI",
+      "aaUrl": "https://artificialanalysis.ai/models/gpt-6-luna-low",
+      "aaVariant": "low",
+      "rankingEligible": true,
+      "exclusionReasons": [
+        "Incomplete benchmark evidence after an exhaustive search (O36, O53): Max-effort ranking: no Vibe Code Bench v1.1 (Vals), Code Migration v1.1 (Vals), LiveBench 2.0 Overall; AI Coding Daily ranking: no AI Coding Daily (excl. bug finding)"
+      ],
+      "intelligenceIndex": {
+        "value": 9.66610812336462,
+        "status": "measured"
+      },
+      "speed": 124.820824663837,
+      "aaFrontierTier": "frontier",
+      "aaFrontierConfiguration": "GPT-6 Luna (low)",
+      "aaFrontierIntelligenceGap": 0,
+      "aaFrontierFootnote": null,
+      "rank": {
+        "api": 33,
+        "plan": 119
+      },
+      "rankWithinWorkload": {
+        "api": null,
+        "plan": null
+      },
+      "rankNote": null,
+      "overall": {
+        "api": 33.50698188415956,
+        "plan": 35.642371461039744
+      },
+      "quality": 14.189828614719659,
+      "qualityRank": 33,
+      "dims": {
+        "costComposite": null,
+        "frontierCode": 2.19545454545455,
+        "terminalBench": 0.0,
+        "bugHunt": 10.62959934587081,
+        "gdpval": 27.024,
+        "automationBench": 12.049187272690505,
+        "omniscience": 40.95,
+        "lcr": 74.0,
+        "hle": 10.2,
+        "tbScience": 0.952380952380952,
+        "critpt": 9.5
+      },
+      "costDims": {
+        "api": 91.45844169247925,
+        "plan": 100.0
+      },
+      "raw": {
+        "frontierCode": 0.0219545454545455,
+        "terminalBench": 0.0,
+        "bugHunt": 13.0,
+        "gdpval": 1040.48,
+        "automationBench": 0.12049187272690505,
+        "omniscience": -18.1,
+        "lcr": 0.74,
+        "hle": 0.102,
+        "tbScience": 0.00952380952380952,
+        "critpt": 0.095
+      },
+      "coverage": {
+        "pct": 100.0,
+        "costAvailable": true,
+        "missing": [],
+        "provisional": false,
+        "provisionalReasons": []
+      },
+      "cost": {
+        "apiUsd": 7.947237521762253,
+        "planUsd": 5.298158347841502,
+        "fallback": null,
+        "route": {
+          "id": "opencode-go-gpt-6-luna-low-dollar-limit",
+          "planLabel": "OpenCode Go $10 · GPT-6 Luna (low) · published dollar limit ($15 a month)",
+          "planFeeUsd": 10,
+          "valueMultiple": 1.5,
+          "grade": "assumption",
+          "assumptionKind": "dollarLimit",
+          "evidenceLabel": "Published dollar limit (owner decision O198; the plan's terms, not a measurement)",
+          "sourceModel": null,
+          "sourceUrl": "https://opencode.ai/docs/console/go/",
+          "sourceDate": "2026-11-11"
+        },
+        "subset": false,
+        "partialComponents": [],
+        "workload": "835a9baf594a1251",
+        "planFlags": [
+          "workload-unmatched",
+          "published dollar limit; full use of the limit assumed, at the seller's listed token prices (O198)"
+        ]
+      },
+      "grade": "measured",
+      "pareto": {
+        "api": true,
+        "plan": false
+      },
+      "frontierStatus": {
+        "api": {
+          "withheld": "diagnostic ranking (O121): computed like the leading rankings for comparison, but it earns no interval or scenario label and its gates never hold the release"
+        },
+        "plan": null
+      },
+      "scenario": {
+        "api": {
+          "top1": 0.0,
+          "top3": 0.0,
+          "frontier": 1.0
+        },
+        "plan": null
+      },
+      "flags": [],
+      "tier": "Budget",
+      "band": {
+        "api": [
+          31,
+          33
+        ],
+        "plan": [
+          114,
+          123
+        ]
+      },
+      "bandExcludesTransfer": true,
+      "key": "gpt-6-luna-low--opencode-go",
+      "planRow": {
+        "plan": "OpenCode Go",
+        "routeId": "opencode-go-gpt-6-luna-low-dollar-limit",
+        "multiple": 1.5,
+        "representative": false
       }
     },
     {
