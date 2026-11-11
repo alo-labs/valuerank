@@ -219,9 +219,9 @@ def test_change_records_produce_their_route_flags():
     separate blocking date when the earliest limit or price record from there on differs (null when none); a later limit
     change after an earlier availability record still blocks."""
 
-    records = [{"provider": "O", "date": "2026-10-11", "type": "price"}, {"provider": "O", "date": "2026-10-20", "type": "metering"},
-               {"provider": "K", "date": "2026-10-22", "type": "availability"}, {"provider": "O", "date": "2027-01-01", "type": "limit"},
-               {"provider": "A", "date": "2026-10-07", "type": "availability"}, {"provider": "A", "date": "2026-10-17T13:00:00Z", "type": "limit"}]
+    records = [{"provider": "O", "date": "2026-10-11", "type": "price", "direction": "benign"}, {"provider": "O", "date": "2026-10-20", "type": "metering"},
+               {"provider": "K", "date": "2026-10-22", "type": "availability"}, {"provider": "O", "date": "2027-01-01", "type": "limit", "direction": "benign"},
+               {"provider": "A", "date": "2026-10-07", "type": "availability"}, {"provider": "A", "date": "2026-10-17T13:00:00Z", "type": "limit", "direction": "unclear"}]
     measured = {"valueMultipleKind": "controlled_account_workload_projection", "sourcePublicationDate": "2026-10-06"}
     day = date(2026, 10, 25)
     good = [{**measured, "id": "o", "provider": "O", "plan": "Plus", "changeDetectedOn": "2026-10-11"},
@@ -243,8 +243,8 @@ def test_a_credit_grant_flags_and_blocks_without_splitting():
     """O111: a credit record supports and blocks a flag but splits no partition; O110: a change on the launch day does not
     flag the launched model's measurement."""
 
-    records = [{"provider": "A", "plans": ["Max"], "date": "2026-10-07", "type": "credit"},
-               {"provider": "A", "plans": ["Max"], "date": "2026-09-22", "type": "limit"}]
+    records = [{"provider": "A", "plans": ["Max"], "date": "2026-10-07", "type": "credit", "direction": "benign"},
+               {"provider": "A", "plans": ["Max"], "date": "2026-09-22", "type": "limit", "direction": "benign"}]
     assert pa.splitting(records) == [records[1]]
     measured = {"valueMultipleKind": "controlled_account_workload_projection", "sourcePublicationDate": "2026-10-06", "modelLaunchedOn": "2026-09-22"}
     pa.check_change_records([{**measured, "id": "m", "provider": "A", "plan": "Max", "changeDetectedOn": "2026-10-07"}], records, date(2026, 10, 25))
@@ -379,3 +379,42 @@ def test_o177_a_split_spanning_report_counts_through_its_post_split_periods():
     cell = pa.evaluate({**DOCUMENT, "reports": [spanning, report("b", start="2026-10-20", end="2026-10-20", low=103)]}, PROFILE, DAY)
     passing = [item for item in cell if item["status"] == "passes"]
     assert passing and pa.ACROSS_SPLIT_FLAG in passing[0]["flags"] and any(row["acrossSplit"] for row in passing[0]["reports"])
+
+
+def test_every_limit_price_or_credit_record_states_its_direction():
+    """O196: a record without a valid direction, or a stated factor on the wrong side of 1, stops the build."""
+
+    ok = [{"provider": "A", "date": "2026-09-14", "type": "limit", "direction": "adverse", "announcedFactor": 0.83},
+          {"provider": "A", "date": "2026-09-15", "type": "price", "direction": "benign", "announcedFactor": 2.0},
+          {"provider": "A", "date": "2026-09-16", "type": "credit", "direction": "unclear"},
+          {"provider": "A", "date": "2026-09-17", "type": "availability"}, {"provider": "A", "date": "2026-09-18", "type": "metering"}]
+    pa.check_directions(ok)
+    for bad, message in (({"provider": "A", "date": "2026-09-14", "type": "limit"}, "needs a direction"),
+                         ({"provider": "A", "date": "2026-09-14", "type": "limit", "direction": "worse"}, "needs a direction"),
+                         ({"provider": "A", "date": "2026-09-14", "type": "limit", "direction": "adverse", "announcedFactor": 2.0}, "below 1 goes with"),
+                         ({"provider": "A", "date": "2026-09-14", "type": "limit", "direction": "benign", "announcedFactor": 0.5}, "below 1 goes with"),
+                         ({"provider": "A", "date": "2026-09-14", "type": "limit", "direction": "unclear", "announcedFactor": 0.5}, "below 1 goes with")):
+        with pytest.raises(ValueError, match=message):
+            pa.check_directions([bad])
+
+
+def test_adverse_changes_after_the_evidence_widen_the_hull():
+    """O196: only adverse or unclear limit, price or credit changes that apply to the plan and fall between the earliest
+    evidence day and the cutoff count; the factor is the product of the stated ones, open when any is missing."""
+
+    route = {"provider": "A", "plan": "Max"}
+    records = [{"provider": "A", "plans": ["Max"], "date": "2026-10-01", "type": "limit", "direction": "adverse", "announcedFactor": 0.8},
+               {"provider": "A", "date": "2026-10-05T09:00:00Z", "type": "price", "direction": "adverse", "announcedFactor": 0.5},
+               {"provider": "A", "date": "2026-10-06", "type": "limit", "direction": "benign", "announcedFactor": 2.0},
+               {"provider": "A", "plans": ["Pro"], "date": "2026-10-07", "type": "limit", "direction": "adverse"},
+               {"provider": "B", "date": "2026-10-07", "type": "limit", "direction": "adverse"},
+               {"provider": "A", "date": "2026-10-08", "type": "availability"},
+               {"provider": "A", "date": "2026-09-01", "type": "limit", "direction": "adverse", "announcedFactor": 0.1},
+               {"provider": "A", "date": "2026-12-01", "type": "limit", "direction": "adverse", "announcedFactor": 0.1}]
+    found = pa.adverse_changes(route, records, "2026-09-15", date(2026, 11, 1))
+    assert found == {"factor": pytest.approx(0.4), "changes": ["2026-10-01", "2026-10-05"]}
+    unclear = pa.adverse_changes(route, records + [{"provider": "A", "date": "2026-10-10", "type": "limit", "direction": "unclear"}], "2026-09-15", date(2026, 11, 1))
+    assert unclear == {"factor": None, "changes": ["2026-10-01", "2026-10-05", "2026-10-10"]}
+    assert pa.adverse_changes(route, records, None, None)["changes"] == ["2026-09-01", "2026-10-01", "2026-10-05", "2026-12-01"]
+    assert pa.adverse_changes(route, records[2:3], "2026-09-15", date(2026, 11, 1)) is None
+    assert pa.adverse_changes(route, [{"provider": "A", "date": "2026-10-01", "type": "limit", "direction": "adverse", "announcedFactor": 1.0}], None, None)["factor"] == 1.0

@@ -79,6 +79,11 @@ LOGGED_TYPES = {"metering"}
 # exclusion and O131): a documented periodic reset is part of the regime every user of the plan experiences, so a reading
 # spanning registered reset records counts (O11, O85 and O86 as usual) and its cell and route carry ACROSS_RESETS_FLAG.
 RESET_TYPES = {"reset"}
+# O196 (2026-11-11, on reviewer 154): every limit, price or credit record states the direction of its effect on what a
+# subscriber can use for the fee: "benign" (more, or the same for less), "adverse" (less, or the same for more) or
+# "unclear" (the evidence does not say). A flagged route that an adverse or unclear change postdates competes over a widened
+# cost hull, because its published cost is then too low; a benign change leaves the point record (the stale cost is not too low).
+DIRECTIONS = ("benign", "adverse", "unclear")
 ACROSS_RESETS_FLAG = "measured across documented meter resets (O156)"
 
 
@@ -140,6 +145,39 @@ def check_change_flags(routes: list[dict], records: list[dict]) -> None:
             raise ValueError(f"route {route['id']}: change flag {changed} has no typed limit, price, credit or availability change record for its provider and plan (O101, O105, O111)")
 
 
+def check_directions(records: list[dict]) -> None:
+    """O196: each limit, price or credit record states its direction; a stated factor agrees with it (an adverse change
+    shrinks, a benign one grows what the fee buys). The build stops otherwise."""
+
+    for record in records:
+        if record["type"] not in BLOCKING_TYPES:
+            continue
+        name = f"change record {record['provider']} {record['date']}"
+        if record.get("direction") not in DIRECTIONS:
+            raise ValueError(f"{name} needs a direction, one of {list(DIRECTIONS)} (O196)")
+        factor = record.get("announcedFactor")
+        if factor is not None and ((record["direction"] == "adverse") != (float(factor) < 1.0) or record["direction"] == "unclear"):
+            raise ValueError(f"{name}: an announced factor below 1 goes with an adverse direction and above 1 with a benign one (O196)")
+
+
+def adverse_changes(route: dict, records: list[dict], earliest: str | None, release_day: date | None) -> dict | None:
+    """O196: the adverse or unclear limit, price or credit changes that apply to the route's plan and fall between the
+    earliest day its evidence can date from and the cutoff, or None when there are none. ``factor`` multiplies the route's
+    multiple at its worst (the product of the stated factors), and is None when any such change states no factor, so the
+    hull is open-ended (O98's shape)."""
+
+    low = date.fromisoformat(earliest) if earliest else None
+    found = [record for record in records
+             if record["type"] in BLOCKING_TYPES and record.get("direction") in ("adverse", "unclear") and applies(record, route)
+             and (low is None or date.fromisoformat(record["date"][:10]) >= low)
+             and (release_day is None or date.fromisoformat(record["date"][:10]) <= release_day)]
+    if not found:
+        return None
+    factors = [record.get("announcedFactor") for record in found]
+    return {"factor": None if any(item is None for item in factors) else min(1.0, math.prod(float(item) for item in factors)),
+            "changes": sorted({record["date"][:10] for record in found})}
+
+
 def check_change_records(routes: list[dict], records: list[dict], release_day: date) -> None:
     """I86 L3, O107, I87 M1 and L1: the typed records produce every route's two change dates. A controlled measurement on a
     plan a record covers carries ``changeDetectedOn``, the earliest limit, price or availability record dated on or after the
@@ -151,6 +189,7 @@ def check_change_records(routes: list[dict], records: list[dict], release_day: d
     from valuerank import plan_routes  # local: plan_routes does not depend on this module
 
     splitting(records)
+    check_directions(records)
     dated = [(date.fromisoformat(record["date"][:10]), record) for record in records if record["type"] in FLAGGING_TYPES]
     for route in routes:
         applicable = sorted((day, record["type"]) for day, record in dated if applies(record, route) and day <= release_day)

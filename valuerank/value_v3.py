@@ -1513,6 +1513,19 @@ def api_candidates(assembled: dict, components: list[str] | None = None) -> list
     return found
 
 
+def adverse_hull(assembled: dict, row: dict) -> dict | None:
+    """O196 (reviewer 154): for a Plan row whose selected route a detected change may have superseded (a blocker, E228), the
+    adverse or unclear limit, price or credit changes after its evidence, with their combined worst-case factor on the
+    multiple (None: no factor stated, so the cost is open above); None when the route is current or the changes are benign."""
+
+    selected = row["routeSelection"]["selected"]
+    release_day = date.fromisoformat(assembled["releaseDay"]) if assembled.get("releaseDay") else None
+    if selected is None or not plan_routes.label_denied(selected, release_day):
+        return None
+    earliest = selected.get("earliestEvidenceDate") or selected.get("evidenceDate")
+    return plan_admission.adverse_changes(selected["route"], assembled.get("changeRecords", []), earliest, release_day)
+
+
 def plan_candidates(assembled: dict) -> list[tuple[dict, float, float]]:
     """The rows R_W admits on the Plan basis before the valuation gate: FullCost on the main workload and an identified,
     finite M_W (E106 PlanIntervalEligible)."""
@@ -1527,7 +1540,13 @@ def plan_candidates(assembled: dict) -> list[tuple[dict, float, float]]:
         # E138: an unrecorded or different valuation basis is never interval-eligible.
         if bounds is None or not anchor_math.scoreable(bounds[1]) or selected["valuation"] not in {"release", "revalued"}:
             continue
-        found.append((row, cost["lowUsd"] / bounds[1], cost["highUsd"] / bounds[0]))
+        high = cost["highUsd"] / bounds[0]
+        # O196: a flagged route that an adverse change postdates may cost more than its published record, so it competes over
+        # [C, C / factor] (or [C, infinity) with no stated factor); it still earns no label and denies one only across the hull.
+        hull = adverse_hull(assembled, row)
+        if hull is not None:
+            high = math.inf if hull["factor"] is None else high / hull["factor"]
+        found.append((row, cost["lowUsd"] / bounds[1], high))
     return found
 
 
@@ -1804,7 +1823,11 @@ def _interval_outputs(assembled: dict, frozen: dict, basis: str, candidates: lis
     for bar in bars:
         if "rows" in bar:
             _comparison(bar)
-    return {"universe": universe, "blockers": blockers, "unevaluable": unevaluable, "status": "evaluated", "frontier": frontier, "bars": bars}
+    result = {"universe": universe, "blockers": blockers, "unevaluable": unevaluable, "status": "evaluated", "frontier": frontier, "bars": bars}
+    if basis == "plan":
+        # O196: each flagged blocker's hull, so a reader sees how many denials rest on a widened stale cost.
+        result["adverseHulls"] = {row_id: hull for row_id in blockers if (hull := adverse_hull(assembled, by_id[row_id])) is not None}
+    return result
 
 
 WITHHELD_LABEL = "no interval label: AA cost on a price not in force at V (O29); competes over its current-tariff hull"

@@ -324,7 +324,7 @@ def test_score_ranks_gates_disclosures_and_intervals():
     assert rows["a"]["aaCostCaveat"] is None and rows["b"]["aaCostCaveat"] is None  # a footnote without a pricing term
     assert output["gates"]["hold"] is False and output["intervals"]["api"]["status"] == "evaluated"
     # O48: the Plan basis ranks plan rows, "<configuration>@<plan>".
-    assert output["intervals"]["plan"]["universe"] == ["b@plan-b"]
+    assert output["intervals"]["plan"]["universe"] == ["b@plan-b"] and output["intervals"]["plan"]["adverseHulls"] == {}
     assert output["costInfluence"]["api"]["commonWorkload"]["panel"] == ["a", "b"]
     manifest = {item["rule"]: item["status"] for item in output["manifest"]}
     assert manifest["subset scoring (O17)"] == "fired" and manifest["Plan exploratory label (E61)"] == "fired"
@@ -2956,3 +2956,34 @@ def test_o186_announced_limit_change_rescales_the_multiple_as_a_sensitivity():
     shrink = v.announced_change_sensitivity([row], per_plan, frozen, [dict(records[0], announcedFactor=0.5)])
     assert shrink["rows"][0]["direction"] == "likely overstated"
     assert v.announced_change_sensitivity([dict(row, plan={"multiple": None})], per_plan, frozen, records)["rows"] == []
+
+
+def test_a_flagged_plan_blocker_that_an_adverse_change_postdates_competes_over_a_widened_cost_range(monkeypatch):
+    """O196 (reviewer 154): a route a detected change may have superseded competes over [C, C / factor] when an adverse
+    change with a stated factor postdates its evidence, [C, infinity) when the factor is not stated, and at its point record
+    when the changes are benign or the route is current."""
+
+    selected = {"route": {"provider": "A", "plan": "Max"}, "valuation": "release", "evidenceDate": "2026-09-01"}
+    row = {"id": "a@p", "cost": {"fullCost": True, "workload": "W", "lowUsd": 100.0, "highUsd": 120.0}, "routeSelection": {"selected": selected}}
+    flagged = [True]
+    monkeypatch.setattr(v.plan_routes, "identified_bounds", lambda candidate: (8.0, 10.0))
+    monkeypatch.setattr(v.plan_routes, "label_denied", lambda candidate, day: flagged[0])
+
+    def candidates(*records, release="2026-11-01"):
+        assembled = {"rows": [row], "mainWorkload": "W", "changeRecords": list(records), **({"releaseDay": release} if release else {})}
+        return v.plan_candidates(assembled), v.adverse_hull(assembled, row)
+
+    adverse = {"provider": "A", "date": "2026-10-01", "type": "limit", "direction": "adverse", "announcedFactor": 0.5}
+    (found,), hull = candidates(adverse)
+    assert found[1:] == (10.0, 30.0) and hull == {"factor": 0.5, "changes": ["2026-10-01"]}
+    (found,), hull = candidates({**adverse, "direction": "unclear", "announcedFactor": None})
+    assert found[2] == math.inf and hull["factor"] is None
+    (found,), hull = candidates({**adverse, "direction": "benign", "announcedFactor": 2.0})
+    assert found[1:] == (10.0, 15.0) and hull is None
+    (found,), hull = candidates(adverse, release=None)  # no release day: every dated change counts
+    assert found[2] == 30.0
+    flagged[0] = False  # a current route keeps its point record whatever the records say
+    (found,), hull = candidates(adverse)
+    assert found[2] == 15.0 and hull is None
+    row["routeSelection"]["selected"] = None
+    assert v.adverse_hull({"rows": [row], "changeRecords": [adverse]}, row) is None
