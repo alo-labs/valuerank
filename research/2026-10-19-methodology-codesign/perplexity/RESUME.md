@@ -90,7 +90,8 @@ two consecutive clean rounds and the panel ends when every model says NO FURTHER
 | 152 | GPT-6.1 Sol (whole draft) | r226 | CLEAN (no findings); Sol is DONE (two consecutive clean rounds, 150 and 152) |
 | 153 | Kimi K3 (four sections, parts 1–17) | r226 | CLEAN (all four sections); Kimi's clean run is 1 of 2 |
 | 154 | GLM 5.3 (eight sections, parts 1–17) | r226 | findings (sections 1, 5, 6, 7, 8; owner decisions O196, O197), folded into r227; GLM's clean run restarts |
-| 155 | Gemini 3.8 Flash (six sections, parts 1–17) | r227 | next |
+| 155 | Gemini 3.8 Flash (six sections, parts 1–17) | r227 | findings (O196 factor wording defect; no owner questions), folded into r228; Gemini's clean run restarts |
+| 156 | Kimi K3 (four sections, parts 1–17) | r227 | sent (second clean round needed) |
 
 To continue:
 
