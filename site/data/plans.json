@@ -400,6 +400,7 @@
           ],
           "date": "2026-10-29",
           "type": "limit",
+          "direction": "benign",
           "announcedFactor": 2.0,
           "basis": "provider announcement, Day 25 (O77 as amended by O101): \"We are doubling all usage limits for all Pro 100/200/500 tiers and Business Premium, effective today\" (Tibo, X, 2026-10-29, quoted in OpenAI community topic 1403525 #117); the same post keeps Pro 200's limits unreduced. Found by the O71 search for GPT-6.1 Terra (research/2026-10-31-plan-allowances-v5-entrants/stage1-openai-terra.md); the Pro routes were already flagged from 2026-10-11 (reviewer 74 M1)"
         },
@@ -416,6 +417,7 @@
           ],
           "date": "2026-10-30",
           "type": "limit",
+          "direction": "benign",
           "basis": "Anthropic's announcement of 2026-10-30: Max 5x renamed Max and Max 20x renamed Ultra (prices unchanged, subscribers migrated), and the five-hour limit removed for verified Ultra accounts with weekly limits stated unchanged; a provider-announced limit change on that plan (O77 as amended by O101; reviewer 73, O132 re-capture). The plan keys keep their measured names; evidencePolicy.planAliases records the new ones."
         },
         {
@@ -489,6 +491,7 @@
           "meterFamily": "Claude",
           "date": "2026-10-09",
           "type": "limit",
+          "direction": "benign",
           "basis": "E18 change detected by two independent reports of an undocumented five-hour change from about 2026-10-09: Cadaverr (four Max 20x accounts, about 15% bigger five-hour window, provisional) and jihjun-ai (#102667, a five-hour window from about 10% to about 15% of the weekly quota); a change to the shared Claude meter reaches the whole family (O79, O113; I90 L3)"
         },
         {
@@ -496,6 +499,8 @@
           "meterFamily": "Claude",
           "date": "2026-09-14",
           "type": "limit",
+          "direction": "adverse",
+          "announcedFactor": 0.83,
           "basis": "the 25% permanent weekly raise replaced the 50% promotion (a 17% reduction in Claude Code weekly limits, per Anthropic via BleepingComputer; O71 stage-2 Anthropic notes); before every Opus 5.5 measurement (O110), inside the Fable 5.1 span (I89 L1)"
         },
         {
@@ -503,6 +508,7 @@
           "meterFamily": "Claude",
           "date": "2026-09-22",
           "type": "limit",
+          "direction": "benign",
           "basis": "five-hour limits raised at the Opus 5.5 launch (O71 stage-2 Anthropic notes, wokey.ai); for the Opus 5.5 measurements part of the measured regime (O110: a change on the launch day itself does not postdate the measurement)"
         },
         {
@@ -526,6 +532,8 @@
           ],
           "date": "2026-09-29",
           "type": "limit",
+          "direction": "adverse",
+          "announcedFactor": 0.5,
           "basis": "DevDay: new Pro $200 subscriptions cut from 20x to 10x, existing ones grandfathered to 2026-10-29, Pro $500 added (O71 record); the GPT routes were measured under the post-September 29 schedule, which bounds their span (O110)"
         },
         {
@@ -545,6 +553,7 @@
           ],
           "date": "2026-10-07",
           "type": "credit",
+          "direction": "benign",
           "basis": "Agent SDK help article, October 7 update: Max plans gained monthly API credits ($100 on Max 5x, $200 on Max 20x; O71 stage-2 Anthropic notes and r/ClaudeCode reports), a bundled API-credit grant for the Claude Platform, not a change to the Claude Code meter users read; typed credit, which flags and blocks without splitting the report partitions (O111)"
         },
         {
@@ -552,12 +561,14 @@
           "meterFamily": "Claude",
           "date": "2026-10-17T13:00:00Z",
           "type": "limit",
+          "direction": "unclear",
           "basis": "E18 change detected (O79); NicoAica's measurement places it at about 08:00 CDT"
         },
         {
           "provider": "OpenAI",
           "date": "2026-10-11",
           "type": "price",
+          "direction": "benign",
           "basis": "provider announcement, Day 7 (O77): long-context fees removed on subscriptions"
         },
         {
@@ -582,6 +593,7 @@
           "provider": "Kimi",
           "date": "2026-10-24",
           "type": "limit",
+          "direction": "benign",
           "basis": "E18 change detected: an ≈50% quota increase measured by kojimako and okarin (independent per-token fits) on CN plans; owner decision O84 (2026-10-28): it splits every Kimi plan"
         }
       ]
