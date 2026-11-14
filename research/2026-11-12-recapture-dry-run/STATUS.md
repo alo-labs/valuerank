@@ -1,0 +1,3 @@
+# Status of this folder (2026-11-14)
+
+This is the record of a dry-run cutoff move to 2026-11-12 (owner decision O202), which the owner did not adopt (O203): the release cutoff stays 2026-11-01T06:10:00Z. The full work, with the captured AA pages, boards, leaf searches and scripts, is on the local worktree branch `o202-cutoff-move` of the session that produced it; only the summary files are kept here. Nothing under `data/` or the draft uses these files. They are the starting point of the next release's refresh: the cohort diff, the chart capture, the roster diff, the leaf searches, the ranking diff of the dry run (not publishable) and the re-fetched OpenCode Go page.

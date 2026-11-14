@@ -1,0 +1,319 @@
+{
+ "added": [
+  {
+   "id": "muse-ember-xhigh",
+   "displayName": "Muse Ember (xhigh)",
+   "tier": "frontier"
+  },
+  {
+   "id": "muse-ember",
+   "displayName": "Muse Ember (max)",
+   "tier": "frontier"
+  },
+  {
+   "id": "claude-fable-5-2-medium",
+   "displayName": "Claude Fable 5.2 (medium)",
+   "tier": "frontier"
+  },
+  {
+   "id": "gemini-4-carbon-medium",
+   "displayName": "Gemini 4 Carbon (medium)",
+   "tier": "frontier"
+  },
+  {
+   "id": "claude-fable-5-2-high",
+   "displayName": "Claude Fable 5.2 (high)",
+   "tier": "frontier"
+  },
+  {
+   "id": "claude-fable-5-2-xhigh",
+   "displayName": "Claude Fable 5.2 (xhigh)",
+   "tier": "frontier"
+  },
+  {
+   "id": "claude-fable-5-2",
+   "displayName": "Claude Fable 5.2 (max)",
+   "tier": "frontier"
+  },
+  {
+   "id": "gpt-6-astra-medium",
+   "displayName": "GPT-6 Astra (medium)",
+   "tier": "near"
+  },
+  {
+   "id": "claude-fable-5-2-low",
+   "displayName": "Claude Fable 5.2 (low)",
+   "tier": "near"
+  },
+  {
+   "id": "gemini-4-carbon-low",
+   "displayName": "Gemini 4 Carbon (low)",
+   "tier": "near"
+  }
+ ],
+ "kept": [
+  {
+   "id": "gpt-6-luna-low",
+   "displayName": "GPT-6 Luna (low)",
+   "tier": "frontier",
+   "was": "frontier"
+  },
+  {
+   "id": "gpt-6-luna-medium",
+   "displayName": "GPT-6 Luna (medium)",
+   "tier": "frontier",
+   "was": "frontier"
+  },
+  {
+   "id": "claude-haiku-5-5-low",
+   "displayName": "Claude Haiku 5.5 (low)",
+   "tier": "frontier",
+   "was": "frontier"
+  },
+  {
+   "id": "gpt-6-luna-high",
+   "displayName": "GPT-6 Luna (high)",
+   "tier": "frontier",
+   "was": "frontier"
+  },
+  {
+   "id": "claude-haiku-5-5-medium",
+   "displayName": "Claude Haiku 5.5 (medium)",
+   "tier": "frontier",
+   "was": "frontier"
+  },
+  {
+   "id": "gpt-6.1-terra-medium",
+   "displayName": "GPT-6.1 Terra (medium)",
+   "tier": "frontier",
+   "was": "frontier"
+  },
+  {
+   "id": "gpt-6.1-terra-high",
+   "displayName": "GPT-6.1 Terra (high)",
+   "tier": "frontier",
+   "was": "frontier"
+  },
+  {
+   "id": "gpt-6.1-sol-medium",
+   "displayName": "GPT-6.1 Sol (medium)",
+   "tier": "frontier",
+   "was": "frontier"
+  },
+  {
+   "id": "gpt-6.1-sol-high",
+   "displayName": "GPT-6.1 Sol (high)",
+   "tier": "frontier",
+   "was": "frontier"
+  },
+  {
+   "id": "gpt-6.1-sol-xhigh",
+   "displayName": "GPT-6.1 Sol (xhigh)",
+   "tier": "frontier",
+   "was": "frontier"
+  },
+  {
+   "id": "gpt-6.1-sol",
+   "displayName": "GPT-6.1 Sol (max)",
+   "tier": "frontier",
+   "was": "frontier"
+  },
+  {
+   "id": "gpt-6-astra-high",
+   "displayName": "GPT-6 Astra (high)",
+   "tier": "frontier",
+   "was": "frontier"
+  },
+  {
+   "id": "claude-opus-5-5-xhigh",
+   "displayName": "Claude Opus 5.5 (xhigh)",
+   "tier": "frontier",
+   "was": "frontier"
+  },
+  {
+   "id": "gpt-6-luna-xhigh",
+   "displayName": "GPT-6 Luna (xhigh)",
+   "tier": "near",
+   "was": "near"
+  },
+  {
+   "id": "claude-haiku-5-5",
+   "displayName": "Claude Haiku 5.5 (xhigh)",
+   "tier": "near",
+   "was": "retained"
+  },
+  {
+   "id": "gpt-6.1-sol-low",
+   "displayName": "GPT-6.1 Sol (low)",
+   "tier": "near",
+   "was": "near"
+  },
+  {
+   "id": "gpt-6.1-terra-xhigh",
+   "displayName": "GPT-6.1 Terra (xhigh)",
+   "tier": "near",
+   "was": "near"
+  },
+  {
+   "id": "gpt-6.1-terra",
+   "displayName": "GPT-6.1 Terra (max)",
+   "tier": "near",
+   "was": "near"
+  },
+  {
+   "id": "claude-opus-5-5-high",
+   "displayName": "Claude Opus 5.5 (high)",
+   "tier": "near",
+   "was": "near"
+  },
+  {
+   "id": "gpt-6-astra-xhigh",
+   "displayName": "GPT-6 Astra (xhigh)",
+   "tier": "near",
+   "was": "frontier"
+  },
+  {
+   "id": "gpt-6-astra",
+   "displayName": "GPT-6 Astra (max)",
+   "tier": "near",
+   "was": "near"
+  },
+  {
+   "id": "gemini-4-carbon",
+   "displayName": "Gemini 4 Carbon (high)",
+   "tier": "near",
+   "was": "frontier"
+  },
+  {
+   "id": "claude-opus-5-5",
+   "displayName": "Claude Opus 5.5 (max)",
+   "tier": "near",
+   "was": "near"
+  }
+ ],
+ "dropped": [
+  {
+   "id": "mimo-v2-6-flash",
+   "displayName": "MiMo-V2.6-Flash",
+   "was": "frontier",
+   "chartPoint": {
+    "index": 27,
+    "costUsd": 106.14
+   }
+  },
+  {
+   "id": "gpt-6.1-terra-low",
+   "displayName": "GPT-6.1 Terra (low)",
+   "was": "frontier",
+   "chartPoint": {
+    "index": 29,
+    "costUsd": 111.16
+   }
+  },
+  {
+   "id": "claude-haiku-5-5-high",
+   "displayName": "Claude Haiku 5.5 (high)",
+   "was": "frontier",
+   "chartPoint": {
+    "index": 30,
+    "costUsd": 121.41
+   }
+  },
+  {
+   "id": "gpt-6-luna",
+   "displayName": "GPT-6 Luna (max)",
+   "was": "near",
+   "chartPoint": {
+    "index": 28,
+    "costUsd": 136.06
+   }
+  },
+  {
+   "id": "claude-sonnet-5-5",
+   "displayName": "Claude Sonnet 5.5 (max with fallback)",
+   "was": "near",
+   "chartPoint": {
+    "index": 55,
+    "costUsd": 7980.63
+   }
+  },
+  {
+   "id": "claude-haiku-5-5-max",
+   "displayName": "Claude Haiku 5.5 (max)",
+   "was": "retained",
+   "chartPoint": {
+    "index": 36,
+    "costUsd": 339.47
+   }
+  },
+  {
+   "id": "claude-opus-5-5-medium",
+   "displayName": "Claude Opus 5.5 (medium)",
+   "was": "retained",
+   "chartPoint": {
+    "index": 48,
+    "costUsd": 2031.27
+   }
+  },
+  {
+   "id": "claude-sonnet-5-5-xhigh",
+   "displayName": "Claude Sonnet 5.5 (xhigh)",
+   "was": "retained",
+   "chartPoint": {
+    "index": 50,
+    "costUsd": 2902.5
+   }
+  },
+  {
+   "id": "deepseek-v4-1-flash-1017",
+   "displayName": "DeepSeek V4.1 Flash 1017",
+   "was": "retained",
+   "chartPoint": {
+    "index": 33,
+    "costUsd": 520.63
+   }
+  },
+  {
+   "id": "gemini-4-argon",
+   "displayName": "Gemini 4 Argon",
+   "was": "retained",
+   "chartPoint": {
+    "index": 50,
+    "costUsd": 7620.22
+   }
+  },
+  {
+   "id": "gpt-5.6-luna-low",
+   "displayName": "GPT-5.6 Luna (low)",
+   "was": "retained",
+   "chartPoint": null
+  },
+  {
+   "id": "kimi-k3-1-pro",
+   "displayName": "Kimi K3.1 Pro",
+   "was": "retained",
+   "chartPoint": {
+    "index": 46,
+    "costUsd": 3152.8
+   }
+  },
+  {
+   "id": "mimo-v2-6-pro",
+   "displayName": "MiMo-V2.6-Pro",
+   "was": "retained",
+   "chartPoint": {
+    "index": 30,
+    "costUsd": 220.73
+   }
+  },
+  {
+   "id": "minimax-m3-1-flash",
+   "displayName": "MiniMax-M3.1-Flash",
+   "was": "retained",
+   "chartPoint": {
+    "index": 29,
+    "costUsd": 358.06
+   }
+  }
+ ]
+}
