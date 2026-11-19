@@ -24253,9 +24253,9 @@
           "dollarLimit": 5
         },
         "api": {
-          "adjacentPairs": 6,
+          "adjacentPairs": 7,
           "separableAdjacentPairs": 2,
-          "medianSeparation": 2.7010964668638264,
+          "medianSeparation": 2.6940066776927387,
           "sameConfigurationAdjacentPairs": 0,
           "crossWorkloadAdjacentPairs": 2,
           "byCorrelation": {
@@ -24265,7 +24265,7 @@
           },
           "gdpvalWide": {
             "separableAdjacentPairs": 2,
-            "medianSeparation": 2.7116480395148628
+            "medianSeparation": 2.7043369120411143
           },
           "bands": {
             "gpt-6.1-sol": [
@@ -24304,19 +24304,19 @@
           "bugHuntCovariance": {
             "-1": {
               "separableAdjacentPairs": 2,
-              "medianSeparation": 2.541317011003473,
+              "medianSeparation": 2.5343719785925414,
               "qualityMargin": 3.397070937962748,
               "bandsUnchanged": true
             },
             "+0": {
               "separableAdjacentPairs": 2,
-              "medianSeparation": 2.7010964668638264,
+              "medianSeparation": 2.6940066776927387,
               "qualityMargin": 3.579130085058628,
               "bandsUnchanged": true
             },
             "+1": {
               "separableAdjacentPairs": 2,
-              "medianSeparation": 2.8348076715749517,
+              "medianSeparation": 2.8373539644986363,
               "qualityMargin": 3.691867025490827,
               "bandsUnchanged": true
             }
@@ -24324,7 +24324,7 @@
           "liveBenchDependence": {
             "factor": 2.6457513110645907,
             "separableAdjacentPairs": 0,
-            "medianSeparation": 4.549230799182568,
+            "medianSeparation": 4.54628471451387,
             "qualityMargin": 6.138437107482621,
             "bandsUnchanged": false
           },
@@ -24332,26 +24332,26 @@
             "liveBenchFactor": 3.7416573867739418,
             "bugHuntRho": 1.0,
             "separableAdjacentPairs": 0,
-            "medianSeparation": 6.112762753701727,
+            "medianSeparation": 6.126840241420897,
             "qualityMargin": 8.266175050087986,
             "bandsUnchanged": false
           },
-          "costTolerance": 1.8267407969943341,
+          "costTolerance": 1.823854055476954,
           "clippedTolerance": {}
         },
         "plan": {
-          "adjacentPairs": 11,
-          "separableAdjacentPairs": 1,
+          "adjacentPairs": 12,
+          "separableAdjacentPairs": 2,
           "medianSeparation": 2.6940066776927387,
           "sameConfigurationAdjacentPairs": 16,
           "crossWorkloadAdjacentPairs": 2,
           "byCorrelation": {
-            "0.0": 1,
-            "0.3": 2,
-            "0.6": 6
+            "0.0": 2,
+            "0.3": 3,
+            "0.6": 7
           },
           "gdpvalWide": {
-            "separableAdjacentPairs": 1,
+            "separableAdjacentPairs": 2,
             "medianSeparation": 2.7043369120411143
           },
           "bands": {
@@ -24458,19 +24458,19 @@
           },
           "bugHuntCovariance": {
             "-1": {
-              "separableAdjacentPairs": 1,
-              "medianSeparation": 2.5482620434144048,
+              "separableAdjacentPairs": 2,
+              "medianSeparation": 2.548203617601168,
               "qualityMargin": 3.397070937962748,
               "bandsUnchanged": false
             },
             "+0": {
-              "separableAdjacentPairs": 1,
+              "separableAdjacentPairs": 2,
               "medianSeparation": 2.6940066776927387,
               "qualityMargin": 3.579130085058628,
               "bandsUnchanged": true
             },
             "+1": {
-              "separableAdjacentPairs": 1,
+              "separableAdjacentPairs": 2,
               "medianSeparation": 2.8455303597957036,
               "qualityMargin": 3.691867025490827,
               "bandsUnchanged": true
@@ -24478,7 +24478,7 @@
           },
           "liveBenchDependence": {
             "factor": 2.6457513110645907,
-            "separableAdjacentPairs": 1,
+            "separableAdjacentPairs": 2,
             "medianSeparation": 4.54628471451387,
             "qualityMargin": 6.138437107482621,
             "bandsUnchanged": false
@@ -24486,7 +24486,7 @@
           "jointAdverseStress": {
             "liveBenchFactor": 3.7416573867739418,
             "bugHuntRho": 1.0,
-            "separableAdjacentPairs": 0,
+            "separableAdjacentPairs": 1,
             "medianSeparation": 6.1310604764111885,
             "qualityMargin": 8.266175050087986,
             "bandsUnchanged": false
@@ -30147,7 +30147,7 @@
       "scenarios": 10000,
       "generator": {
         "module": "random (Mersenne Twister)",
-        "python": "3.13.16"
+        "python": "3.13.18"
       },
       "streamDescriptions": {
         "S0": "published-record reporting precision",
@@ -68957,7 +68957,7 @@
         "scenarios": 10000,
         "generator": {
           "module": "random (Mersenne Twister)",
-          "python": "3.13.16"
+          "python": "3.13.18"
         },
         "streamDescriptions": {
           "S0": "published-record reporting precision",
@@ -129608,7 +129608,7 @@
         "scenarios": 10000,
         "generator": {
           "module": "random (Mersenne Twister)",
-          "python": "3.13.16"
+          "python": "3.13.18"
         },
         "streamDescriptions": {
           "S0": "published-record reporting precision",

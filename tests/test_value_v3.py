@@ -1852,10 +1852,11 @@ def test_sampling_noise_per_leaf_and_rank_separability():
     result, frozen = scored()
     output = v.score(result, frozen)
     separability = output["diagnostics"]["rankSeparability"]
-    # The fixture's c is a subset-workload row, so its adjacent pairs cross workloads and are counted apart (reviewer 73).
+    # The fixture's c is a subset-workload row, so its mixed-display neighbours cross workloads and are counted apart (reviewer 73);
+    # the main-workload pair a-b is formed within the main workload's own order whether or not c sits between them (reviewer 158).
     api = separability["api"]
-    assert set(separability["valueSd"]) == {"a", "b", "c"} and api["adjacentPairs"] + api["crossWorkloadAdjacentPairs"] == 2
-    assert api["crossWorkloadAdjacentPairs"] >= 1 and (api["medianSeparation"] is None) == (api["adjacentPairs"] == 0)
+    assert set(separability["valueSd"]) == {"a", "b", "c"} and api["adjacentPairs"] == 1 and api["crossWorkloadAdjacentPairs"] >= 1
+    assert api["crossWorkloadAdjacentPairs"] + 1 >= 2 and (api["medianSeparation"] is None) == (api["adjacentPairs"] == 0)
     assert len(separability["assumptions"]) == len(v.SAMPLING_ASSUMPTIONS) == 5
     lone = v.rank_separability({"rows": result["rows"][:1]}, {"a": {basis: {"value": 1.0} for basis in v.BASES}})
     assert {key: lone["api"][key] for key in ("adjacentPairs", "separableAdjacentPairs", "medianSeparation")} == {"adjacentPairs": 0, "separableAdjacentPairs": 0, "medianSeparation": None}
@@ -1907,7 +1908,8 @@ def test_a_subset_workload_row_is_never_tested_or_banded_against_the_main_worklo
     rows = [{"id": name, "cost": {"workload": "sub" if name == "b" else "main"}, "plan": {}, "evidence": {"observations": {}, "provenance": {}}} for name in "abc"]
     values = {"a": 60.0, "b": 59.0, "c": 58.5}
     result = v.rank_separability({"rows": rows, "mainWorkload": "main"}, {name: {basis: {"value": values[name]} for basis in v.BASES} for name in "abc"})
-    assert result["api"]["crossWorkloadAdjacentPairs"] == 2 and result["api"]["adjacentPairs"] == 0
+    # a and c are adjacent in the main workload's own order though b sits between them in the mixed display (reviewer 158).
+    assert result["api"]["crossWorkloadAdjacentPairs"] == 2 and result["api"]["adjacentPairs"] == 1
     # The bands keep each row's position in the full value order (c is third), and b has none.
     assert result["api"]["bands"] == {"a": [1, 1], "c": [3, 3]}
 
@@ -2062,10 +2064,12 @@ def test_plan_rows_rank_every_plan_and_share_their_configuration():
     assert set(separability["bands"]) <= set(plan_rows)
     # E258: pairs of one configuration on two plans are counted apart; the threshold ranges over different configurations.
     ordered = [row_id for row_id, _ in sorted(((row_id, row["value"]) for row_id, row in plan_rows.items() if row["value"] is not None), key=lambda item: -item[1])]
-    same = sum(1 for first, second in zip(ordered, ordered[1:]) if first.split("@")[0] == second.split("@")[0])
+    main_order = [row_id for row_id in ordered if not row_id.startswith("c@")]
+    same = sum(1 for first, second in zip(main_order, main_order[1:]) if first.split("@")[0] == second.split("@")[0])
     assert separability["sameConfigurationAdjacentPairs"] == same
-    # Reviewer 73: pairs across workloads (the fixture's c is a subset row) are counted apart too.
-    assert separability["adjacentPairs"] + same + separability["crossWorkloadAdjacentPairs"] == len(ordered) - 1
+    # Reviewer 73: mixed-display neighbours across workloads (the fixture's c is a subset row) are counted apart; reviewer 158:
+    # the pairs that are tested are the main workload's own adjacent ranks, whatever sits between them in the mixed display.
+    assert separability["adjacentPairs"] + same == len(main_order) - 1
     assert separability["crossWorkloadAdjacentPairs"] >= 1
 
 

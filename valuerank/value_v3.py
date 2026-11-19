@@ -3902,8 +3902,14 @@ def rank_separability(assembled: dict, per_row: dict, exchange: dict | None = No
         main = assembled.get("mainWorkload")
         off = {row_id for _, row_id in ranked if main is not None and workload_of.get(configuration_of[row_id], main) != main}
         across = [pair for pair in pairs if (pair[0][1] in off) != (pair[1][1] in off)]
-        cross = [((high, first), (low, second)) for (high, first), (low, second) in pairs
-                 if configuration_of[first] != configuration_of[second] and ((high, first), (low, second)) not in across]
+        # Reviewer 158 (Gemini 4 Neon, E277): adjacent ranks are those of one workload's own order (O184), so a subset-workload
+        # row sitting between two main-workload rows in the mixed display does not break their pair; pairs are formed within
+        # each workload's value-ordered list, and the mixed-display neighbours across workloads are only counted.
+        strata: dict = {}
+        for entry in ranked:
+            strata.setdefault(workload_of.get(configuration_of[entry[1]], main), []).append(entry)
+        pairs = [pair for stratum in strata.values() for pair in zip(stratum, stratum[1:])]
+        cross = [pair for pair in pairs if configuration_of[pair[0][1]] != configuration_of[pair[1][1]]]
 
         def adjacent(sds: dict, rho: float) -> tuple[int, float | None]:
             thresholds = [separation(sds[configuration_of[first]], sds[configuration_of[second]], rho) for (_, first), (_, second) in cross]
