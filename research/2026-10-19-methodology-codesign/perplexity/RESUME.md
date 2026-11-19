@@ -102,4 +102,4 @@ To continue:
    `build_linked_prompt.py` with `reviewer-prompt.md` and `ledger-brief.md`, after pushing so the commit SHA resolves.
 4. Continue in panel order (GLM needs sections of at most two parts).
 | 157 | GLM 5.3 (eight sections, parts 1–17) | r228 | findings (wording: numerator exceptions, E214, fallback rows, MiMo day rate, E62(a)), folded into r229 and r230; GLM's clean run restarts |
-| 158 | Gemini 3.8 Flash (six sections, parts 1–17) | r230 | next |
+| 158 | Gemini 4 Neon (substituted for Gemini 3.8 Flash, O204; six sections, parts 1–17) | r230 | sent 2026-11-19 |
