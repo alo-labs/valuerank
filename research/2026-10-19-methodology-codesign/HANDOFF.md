@@ -39,3 +39,11 @@ Adopt verified real defects as code plus tests or as wording; put owner-decision
 
 ## Pause note
 The user paused all work on 2026-11-05. Resume only when the user says so. Session `session_013z3F7YTZ5T5DAJxAcCmeVV` ("SB") was also told to pause and acknowledged.
+
+
+## State at the 2026-11-24 pause (supersedes the older state lines above)
+- Branch claude/wizardly-volta-2ppc48, PR 2, all pushed. Current draft r232 (research/2026-10-19-methodology-codesign/draft-r232.md); the O195-O204 decisions are in ledger.md; the research README is README.md in this folder.
+- Panel: Sonnet 5.5, Grok 4.7 and GPT-6.1 Sol are done. Kimi K3 (last clean round 153, restarts), GLM 5.3 (restarts) and the substitute Gemini seat (Gemini 4 Neon, O204) each need two consecutive clean rounds on the final draft. Rounds 160 (Kimi), 161 (GLM) and 162 (Gemini) were launched in parallel on r232 and paused; their partial outputs are in perplexity/partial-r160-162/ (untriaged).
+- Pending: triage those outputs; continue the rounds with the runner (a resumable loop: skip sections whose output exceeds 3000 bytes; retry up to three times; a reply under 3000 bytes is a stalled reply). Worker restarts kill background jobs, so relaunch them detached (setsid nohup) and expect to resume; commit and push after every step.
+- After convergence: update PR 2's description, close the README task, report the open owner actions (monthly controlled saturation measurements; O193 unbuilt; next release: the 2026-11-12 AA chart re-cohort, the three-stage plan search for Meta, Fable 5.2, Anthropic and OpenAI).
+- Tests: the last complete full run (100% coverage) predates the rank-pairing fix; the changed value tests and docs-sensitive tests pass since. Run the full suite once more before the final push (python3 -m pytest -q -p no:cacheprovider -W ignore --cov; needs `pip install -r requirements-dev.txt` and `npm ci` after an environment rebuild).
