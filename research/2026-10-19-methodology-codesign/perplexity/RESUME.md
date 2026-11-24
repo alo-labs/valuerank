@@ -104,4 +104,7 @@ To continue:
 | 157 | GLM 5.3 (eight sections, parts 1–17) | r228 | findings (wording: numerator exceptions, E214, fallback rows, MiMo day rate, E62(a)), folded into r229 and r230; GLM's clean run restarts |
 | 158 | Gemini 4 Neon (substituted for Gemini 3.8 Flash, O204; six sections, parts 1–17) | r230 | findings (a rank-pairing defect fixed in code; O198 wording; the O94/O114 contradiction), folded into r231; the seat's clean run restarts |
 | 159 | Kimi K3 (four sections, parts 1–17) | r231 | findings (E192 population wording, Opus residual disclosure, near-point count), folded into r232; Kimi's clean run restarts |
-| 160-162 | Kimi K3, GLM 5.3 and Gemini 4 Neon in parallel | r232 | next |
+| 160 | Kimi K3 (four sections) | r232 | findings (Highs: repeated owner challenges and design additions; no defect adopted), not clean |
+| 161 | GLM 5.3 (eight sections) | r232 | findings (one wording fix, O198 tier bound, into r233), not clean |
+| 162 | Gemini 4 Neon (six sections) | r232 | CLEAN (all six sections NO FURTHER FEEDBACK); the seat's clean run is 1 of 2 |
+| 163-165 | Kimi K3, GLM 5.3, Gemini 4 Neon in parallel | r233 | next |
