@@ -110,4 +110,6 @@ To continue:
 | 163 | Kimi K3 (four sections) | r233 | repeats and additions plus one wording defect (O44/O171 precedence), into r234 |
 | 164 | GLM 5.3 (eight sections) | r233 | six wording defects into r234; the rest repeats and additions |
 | 165 | Gemini 4 Neon (six sections) | r233 | CLEAN (all six sections); with 162 the seat is DONE |
-| 166-167 | Kimi K3 and GLM 5.3 in parallel | r234 | next |
+| 166 | Kimi K3 (four sections) | r234 | sections 2–4 repeats and additions only; section 1 (parts 1–5) outstanding: GitHub connector disconnected on the Perplexity account and attachment uploads fail; retry later, or send parts 1–3 and 4–5 with `--attach` |
+| 167 | GLM 5.3 (eight sections) | r234 | all eight repeats and additions only (parts 15–17 and 13–14 sent as attachments); GLM count 1 of 2 |
+| 168-169 | Kimi K3 (confirming) and GLM 5.3 (confirming) | r234 | next; the attach route works (`/tmp/runatt.sh`: prompt with the connector paragraph replaced by an attachment paragraph, one `--attach` per part)
