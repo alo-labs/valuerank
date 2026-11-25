@@ -107,4 +107,7 @@ To continue:
 | 160 | Kimi K3 (four sections) | r232 | findings (Highs: repeated owner challenges and design additions; no defect adopted), not clean |
 | 161 | GLM 5.3 (eight sections) | r232 | findings (one wording fix, O198 tier bound, into r233), not clean |
 | 162 | Gemini 4 Neon (six sections) | r232 | CLEAN (all six sections NO FURTHER FEEDBACK); the seat's clean run is 1 of 2 |
-| 163-165 | Kimi K3, GLM 5.3, Gemini 4 Neon in parallel | r233 | next |
+| 163 | Kimi K3 (four sections) | r233 | repeats and additions plus one wording defect (O44/O171 precedence), into r234 |
+| 164 | GLM 5.3 (eight sections) | r233 | six wording defects into r234; the rest repeats and additions |
+| 165 | Gemini 4 Neon (six sections) | r233 | CLEAN (all six sections); with 162 the seat is DONE |
+| 166-167 | Kimi K3 and GLM 5.3 in parallel | r234 | next |
