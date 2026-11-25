@@ -115,5 +115,9 @@ To continue:
 | 166 s1 | Kimi K3 (parts 1–5) | r234 | received after the connector was reconnected: one defect (E203 omitted FrontierCode 1.1 Main), into r235 |
 | 168 | Kimi K3 (confirming) | r234 | sections 1–2 only, no defect; sections 3–4 stalled twice, superseded |
 | 169 | GLM 5.3 (eight sections) | r234 | one numeric wording error (Beta SD) and one clarity item, into r235 |
-| 170 | Kimi K3 (four sections) | r235 | next (outputs /tmp/outc-r170-N.md; runner /tmp/runconn.sh) |
-| 171 | GLM 5.3 (eight sections) | r235 | next |
+| 170 | Kimi K3 (four sections) | r235 | stalled on the connector, superseded |
+| 171 | GLM 5.3 (eight sections) | r235 | one unclear sentence (nine versus six evaluation costs) and three wording fixes, into r236 |
+| 172 | Kimi K3 (eight two-part sections) | r236 | CLEAN (no defect); 1 of 2 |
+| 173 | GLM 5.3 (eight sections) | r236 | CLEAN; 1 of 2 |
+| 174 | Kimi K3 (eight sections) | r236 | CLEAN; Kimi seat DONE |
+| 175 | GLM 5.3 (eight sections) | r236 | CLEAN; GLM seat DONE. All six seats done (O205); final draft r236 |
