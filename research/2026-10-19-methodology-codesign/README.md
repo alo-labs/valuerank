@@ -6,7 +6,7 @@ This folder is the record of the design of ValueRank's v3 value-scoring methodol
 
 | What | File |
 |---|---|
-| The release draft of the methodology (the generated text, figures resolved from the data) | `draft-r231.md` (and `.src.md`, the source with `{{...}}` placeholders); every earlier revision `draft-rNN.md` is kept |
+| The release draft of the methodology (the generated text, figures resolved from the data) | `draft-r236.md` (and `.src.md`, the source with `{{...}}` placeholders); every earlier revision `draft-rNN.md` is kept |
 | Every decision with its rationale (owner decisions O1 to O204, editor decisions E1 to E357+, reviewer by reviewer triage) | `ledger.md` |
 | The compact decision list that the reviewers read | `ledger-brief.md` |
 | The review panel's records, prompts, outputs and resume state | `perplexity/` (`RESUME.md` has one row per reviewer) |
