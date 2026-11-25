@@ -112,4 +112,8 @@ To continue:
 | 165 | Gemini 4 Neon (six sections) | r233 | CLEAN (all six sections); with 162 the seat is DONE |
 | 166 | Kimi K3 (four sections) | r234 | sections 2–4 repeats and additions only; section 1 (parts 1–5) outstanding: GitHub connector disconnected on the Perplexity account and attachment uploads fail; retry later, or send parts 1–3 and 4–5 with `--attach` |
 | 167 | GLM 5.3 (eight sections) | r234 | all eight repeats and additions only (parts 15–17 and 13–14 sent as attachments); GLM count 1 of 2 |
-| 168-169 | Kimi K3 (confirming) and GLM 5.3 (confirming) | r234 | next; the attach route works (`/tmp/runatt.sh`: prompt with the connector paragraph replaced by an attachment paragraph, one `--attach` per part)
+| 166 s1 | Kimi K3 (parts 1–5) | r234 | received after the connector was reconnected: one defect (E203 omitted FrontierCode 1.1 Main), into r235 |
+| 168 | Kimi K3 (confirming) | r234 | sections 1–2 only, no defect; sections 3–4 stalled twice, superseded |
+| 169 | GLM 5.3 (eight sections) | r234 | one numeric wording error (Beta SD) and one clarity item, into r235 |
+| 170 | Kimi K3 (four sections) | r235 | next (outputs /tmp/outc-r170-N.md; runner /tmp/runconn.sh) |
+| 171 | GLM 5.3 (eight sections) | r235 | next |
