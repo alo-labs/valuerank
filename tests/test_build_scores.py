@@ -660,6 +660,19 @@ def test_a_reasoning_only_frontier_identity_must_not_select_an_effort(world):
         run_main(world)
 
 
+def test_a_reasoning_only_frontier_identity_matches_a_catalog_model_with_no_effort(world):
+    """The frontier check accepts a "reasoning" inventory row for a catalog model that names no effort; whatever the build
+    reads afterwards (exact-effort evidence for that model) is its own concern, so only the identity check is asserted."""
+
+    edit(world, "capture", _as_reasoning_only)
+    edit(world, "inventory", _as_reasoning_only)
+    edit(world, "aa", aa_edit("gpt-6.2-sol", aaVariant=None))
+    try:
+        run_main(world)
+    except ValueError as error:
+        assert "reasoning-only frontier identity" not in str(error) and "effort does not match" not in str(error)
+
+
 def test_a_fallback_in_the_inventory_must_be_named_by_the_catalog_identity(world):
     """AA's chart no longer prints "with fallback", but an inventory row that still does must match the catalog's own labels."""
 
