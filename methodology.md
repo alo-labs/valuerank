@@ -1,7 +1,7 @@
 # ValueRank Methodology
 
-**Version:** v3.0.0 (methodology 3.0.0)
-**Updated:** October 19, 2026
+**Version:** v3.1.0 (methodology 3.1.0)
+**Updated:** November 26, 2026
 
 This page summarises how ValueRank scores value. The normative specification, its review record and every owner and editor decision are in [research/2026-10-19-methodology-codesign/](research/2026-10-19-methodology-codesign/); where this summary is less precise, the specification governs.
 

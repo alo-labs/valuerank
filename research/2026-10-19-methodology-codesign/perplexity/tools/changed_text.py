@@ -1,7 +1,7 @@
 """Changed-text extract for a targeted review (O209): the sentences of draft B that differ from draft A, each with its paragraph's
 opening words and the old wording beside it, so a reviewer reads only what changed.
 
-usage: python3 changed_text.py <review copy A> <review copy B> <out.md>
+usage: python3 changed_text.py <review copy A> <review copy B> <out.md> [title]
 """
 
 import difflib
@@ -33,7 +33,7 @@ def pair_lines(a: list[str], b: list[str]):
             yield best, new
 
 
-out = ["# Changed text of the 2026-11-26 draft (r237) against the previous release's draft (r236)", "",
+out = ["# Changed text of draft r237 since the first targeted check (commit 40b9a93)", "",
        "Each entry names the paragraph by its opening words, then lists the sentences that are new or reworded, with the previous wording of the replaced sentences after \"was:\". "
        "Review only these sentences against the decision ledger; text not shown here is unchanged and was reviewed in earlier rounds.", ""]
 count = 0

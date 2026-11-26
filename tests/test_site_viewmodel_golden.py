@@ -107,7 +107,7 @@ def test_rankings_header_and_bases(bundle, scores, v3):
     rankings = bundle.rankings
     assert rankings["version"] == VERSION and rankings["publishDate"] == DATE
     assert rankings["observedAt"] == scores["observedAt"] and rankings["defaultBasis"] == "plan"
-    assert rankings["methodologyVersion"] == v3["methodologyVersion"] == "3.0.0" and rankings["basketVersion"] == "SDLC basket v1"
+    assert rankings["methodologyVersion"] == v3["methodologyVersion"] == "3.1.0" and rankings["basketVersion"] == "SDLC basket v1"
     assert {basis: rankings["bases"][basis]["costUnit"] for basis in ("api", "plan")} == {"api": "USD per basket run", "plan": "USD per basket run"}
     assert rankings["costWeightPct"] == 25.0
     assert set(rankings["categories"]) == {"cost", "code", "prod", "rely", "intel"}

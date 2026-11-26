@@ -167,7 +167,7 @@ def test_readme_states_what_the_interval_outputs_support(emitted):
     # (costInfluence.{api,plan}.commonWorkload.varianceAllocation.cost = 0.643 and 0.026).
     assert "value is a 25% cost score (nominal weight; 64% of API and 3% of Plan value variance)" in readme
     assert ("That weight is nominal: on the current panel cost accounts for 64% of the variance in API value and 3% in Plan value, "
-            "because cost scores spread more than quality scores") in readme
+            "because cost scores spread more than quality scores on the API basis and less on the other") in readme
     assert "Plan basis: interval outputs not evaluated (no row has FullCost and an identified M_W (E61/E67))." in readme
     assert "so the Plan ranking is labelled exploratory" in readme
     assert "GPT-6.1 Sol (max) leads the Plan ranking at 68.0; GPT-6.1 Sol (max) leads the API ranking at 60.6; GPT-6 Astra (max) leads on quality." in readme

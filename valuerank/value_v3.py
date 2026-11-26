@@ -47,7 +47,7 @@ from valuerank.clock import utcnow
 from valuerank.paths import DATA, ROOT
 from valuerank.plan_costs import COST_WEIGHT_PCT
 
-METHODOLOGY_VERSION = "3.0.0"
+METHODOLOGY_VERSION = "3.1.0"
 BASKET_VERSION = "SDLC basket v1"
 BETA = COST_WEIGHT_PCT / 100.0
 BASES = ("api", "plan")

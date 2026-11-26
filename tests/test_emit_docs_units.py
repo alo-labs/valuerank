@@ -473,7 +473,10 @@ def test_influence_text_explains_a_negative_cost_allocation_and_workload_dash():
 
     negative = ed.influence_text(v3(-0.12, 0.3))
     assert "covariance allocation of value variance is -12% on the API basis and 30% on the Plan basis" in negative
-    assert "cost accounts for 40% of the variance in API value and 30% in Plan value" in ed.influence_text(v3(0.4, 0.3))
+    assert "cost accounts for 40% of the variance in API value and 30% in Plan value, because quality scores spread more than cost scores" in ed.influence_text(v3(0.4, 0.3))
+    assert "60% of the variance in API value and 70% in Plan value, because cost scores spread more than quality scores" in ed.influence_text(v3(0.6, 0.7))
+    assert "64% of the variance in API value and 3% in Plan value, because cost scores spread more than quality scores on the API basis and less on the other" in ed.influence_text(v3(0.64, 0.03))
+    assert "because cost scores spread more than quality scores on the Plan basis and less on the other" in ed.influence_text(v3(0.2, 0.9))
     # O179: a negative allocation on a basis prints the banner for that basis only.
     assert ed.negative_cost_banner(v3(-0.12, 0.3)) == ("\n\n**API basis: higher-cost configurations tend to score higher here because their quality "
                                                        "differences outweigh their cost penalties (cost's covariance allocation of value variance is -12%); at "
@@ -552,7 +555,7 @@ def test_safety_flags_follow_every_label_their_row_earns():
             {"id": "b", "agentSafety": {"status": "clear"}}, {"id": "c"}]
     facts = SimpleNamespace(v3={"rows": rows}, labels=lambda ids: ", ".join(item.upper() for item in ids))
     assert ed.label_safety_note(facts, ["a@plan", "b", "c"]) == (
-        " Safety-refusal flags (O63; costs and scores unchanged) on these labelled rows: A (0 blocked and 76 fallback attempts of 870).")
+        " Safety-refusal flags (O63; costs and scores unchanged) on these rows: A (0 blocked and 76 fallback attempts of 870).")
     assert ed.label_safety_note(facts, ["b", "c"]) == ""
     # O160: under a firing E41 warning every label note carries it; no labels, no note.
     warned = SimpleNamespace(v3={"rows": rows, "diagnostics": {"workloadCrossCheck": {"warning": "uncertain agreement", "tau": 0.547, "n": 20}}}, labels=facts.labels)

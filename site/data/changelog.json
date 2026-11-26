@@ -1,34 +1,28 @@
 {
   "versions": [
     {
-      "version": "v3.0.0",
-      "date": "October 19, 2026",
+      "version": "v3.1.0",
+      "date": "November 26, 2026",
       "models": 5,
       "dimensions": 15,
       "summary": "5 models ranked on 15 dimensions; GPT-6.1 Sol (max) is first on the API basis.",
       "rankChanges": [
         {
-          "slug": "gpt-6-1-sol",
-          "name": "GPT-6.1 Sol (max)",
-          "from": 2,
-          "to": 1
-        },
-        {
           "slug": "gpt-6-astra",
           "name": "GPT-6 Astra (max)",
-          "from": 4,
+          "from": 3,
           "to": 2
         },
         {
           "slug": "gpt-6-luna",
           "name": "GPT-6 Luna (max)",
-          "from": 11,
+          "from": 4,
           "to": 3
         },
         {
           "slug": "claude-sonnet-5-5",
           "name": "Claude Sonnet 5.5",
-          "from": 3,
+          "from": 6,
           "to": 4
         }
       ],
@@ -41,12 +35,69 @@
       },
       "added": [],
       "removed": [
+        "claude-haiku-5-5-max",
+        "deepseek-v4-1-flash-1017",
+        "gemini-4-argon"
+      ]
+    },
+    {
+      "version": "v3.0.0",
+      "date": "October 19, 2026",
+      "models": 8,
+      "dimensions": null,
+      "summary": "8 models ranked; GPT-6.1 Sol (max) first.",
+      "rankChanges": [
+        {
+          "slug": "gpt-6-1-sol",
+          "name": "GPT-6.1 Sol (max)",
+          "from": 2,
+          "to": 1
+        },
+        {
+          "slug": "gpt-6-astra",
+          "name": "GPT-6 Astra (max)",
+          "from": 4,
+          "to": 3
+        },
+        {
+          "slug": "gpt-6-luna",
+          "name": "GPT-6 Luna (max)",
+          "from": 11,
+          "to": 4
+        },
+        {
+          "slug": "claude-sonnet-5-5",
+          "name": "Claude Sonnet 5.5",
+          "from": 3,
+          "to": 6
+        },
+        {
+          "slug": "gemini-4-argon",
+          "name": "gemini-4-argon",
+          "from": 1,
+          "to": 8
+        }
+      ],
+      "ranks": {
+        "claude-haiku-5-5-max": 7,
+        "claude-opus-5-5": 5,
+        "claude-sonnet-5-5": 6,
+        "deepseek-v4-1-flash-1017": 2,
+        "gemini-4-argon": 8,
+        "gpt-6-astra": 3,
+        "gpt-6-luna": 4,
+        "gpt-6-1-sol": 1
+      },
+      "added": [
+        "claude-haiku-5-5-max",
+        "deepseek-v4-1-flash-1017"
+      ],
+      "removed": [
         "claude-haiku-5-5",
         "claude-opus-5",
         "deepseek-v4-flash",
         "deepseek-v4-pro",
         "gemini-3-8-flash",
-        "gemini-4-argon",
         "glm-5-3",
         "gpt-5-6-luna",
         "gpt-5-6-sol",

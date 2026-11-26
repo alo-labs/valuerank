@@ -1,6 +1,6 @@
-# ValueRank v3.0.0 Raw Data
+# ValueRank v3.1.0 Raw Data
 
-**Updated:** October 19, 2026 · methodology 3.0.0
+**Updated:** November 26, 2026 · methodology 3.1.0
 
 Every input behind the published scores, with the artifact and locator that holds it. Generated from the committed snapshots in [data/](data/); nothing here is edited by hand.
 

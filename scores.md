@@ -1,6 +1,6 @@
-# ValueRank v3.0.0 Scores
+# ValueRank v3.1.0 Scores
 
-**Updated:** October 19, 2026 · methodology 3.0.0 · SDLC basket v1 · anchor version `v3-2026-11-26-a4`
+**Updated:** November 26, 2026 · methodology 3.1.0 · SDLC basket v1 · anchor version `v3-2026-11-26-a4`
 
 Value = 25% × cost score + 75% × quality. Costs are USD per basket run; the cost score is log-scaled against the frozen anchors of the row's workload (see [methodology.md](methodology.md)).
 
@@ -935,7 +935,7 @@ Pairwise reversals: Claude Opus 5.5 (xhigh) and GPT-6.1 Sol (medium); GPT-6 Astr
 | GPT-6 Astra (xhigh) | disproved | disproved | GPT-6.1 Sol (max) | GPT-6.1 Sol (max) |
 | GPT-6 Luna (low) | certified | certified | — | — |
 | GPT-6.1 Sol (xhigh) | certified | certified | — | — |
-| GPT-6.1 Terra (low) | certified | certified | — | — | Safety-refusal flags (O63; costs and scores unchanged) on these labelled rows: GPT-6 Astra (max) (13 blocked and 0 fallback attempts of 966); GPT-6.1 Sol (max) (15 blocked and 0 fallback attempts of 966). These labels carry the workload cross-check warning (E41, O160, O183: cost per solved task, τ_b 0.53 on 29 configurations, uncertain agreement): the basket-cost order behind them agrees weakly with cost per solved task; the attribution is in scores.json `diagnostics.workloadCrossCheck.attribution`.
+| GPT-6.1 Terra (low) | certified | certified | — | — | Safety-refusal flags (O63; costs and scores unchanged) on these rows: GPT-6 Astra (max) (13 blocked and 0 fallback attempts of 966); GPT-6.1 Sol (max) (15 blocked and 0 fallback attempts of 966). These labels carry the workload cross-check warning (E41, O160, O183: cost per solved task, τ_b 0.53 on 29 configurations, uncertain agreement): the basket-cost order behind them agrees weakly with cost per solved task; the attribution is in scores.json `diagnostics.workloadCrossCheck.attribution`.
 
 **API basis, main workload: cheapest at or above quality 48.2** (lower-median displayed quality of the non-provisional cohort configurations at freeze (E192; headline bar)). Status certified; confirmed cheapest: none.
 
@@ -1911,7 +1911,7 @@ Pairwise reversals: none. Largest value change: 3.29 points.
 | Claude Opus 5.5 (max) | disproved | disproved | GPT-6.1 Sol (max) | GPT-6.1 Sol (max), GPT-6 Astra (max) |
 | GPT-6 Astra (max) | certified | certified | — | — |
 | Claude Sonnet 5.5 (max) | disproved | disproved | GPT-6.1 Sol (max) | GPT-6.1 Sol (max), GPT-6 Astra (max) |
-| GPT-6 Luna (max) | certified | certified | — | — | Safety-refusal flags (O63; costs and scores unchanged) on these labelled rows: GPT-6 Astra (max) (13 blocked and 0 fallback attempts of 966); GPT-6.1 Sol (max) (15 blocked and 0 fallback attempts of 966).
+| GPT-6 Luna (max) | certified | certified | — | — | Safety-refusal flags (O63; costs and scores unchanged) on these rows: GPT-6 Astra (max) (13 blocked and 0 fallback attempts of 966); GPT-6.1 Sol (max) (15 blocked and 0 fallback attempts of 966).
 
 **API basis, main workload: cheapest at or above quality 64.3** (lower-median displayed quality of the non-provisional cohort configurations at freeze (E192; headline bar)). Status labels withheld: the ranking's like-for-like workload cost check (basket cost against Terminal-Bench cost per attempted task) cannot be computed (a panel below the 8-row floor or no rank variation), so no label is cleared by it (O187).
 

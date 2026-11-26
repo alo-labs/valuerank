@@ -330,7 +330,7 @@ def label_safety_note(facts, row_ids):
     flags = {row["id"]: row.get("agentSafety") or {} for row in facts.v3.get("rows", [])}
     flagged = [f"{facts.labels([row_id])} ({flags[row_id]['blocked']} blocked and {flags[row_id]['fallback']} fallback attempts of {flags[row_id]['attempts']})"
                for row_id in sorted({row_id.split("@")[0] for row_id in row_ids}) if flags.get(row_id, {}).get("status") == "flagged"]
-    text = (" Safety-refusal flags (O63; costs and scores unchanged) on these labelled rows: " + "; ".join(flagged) + ".") if flagged else ""
+    text = (" Safety-refusal flags (O63; costs and scores unchanged) on these rows: " + "; ".join(flagged) + ".") if flagged else ""
     # O160 as amended by O182/O183: the like-for-like check gates the labels; any label issued while the success-adjusted
     # check warns carries that warning.
     check = (facts.v3.get("diagnostics") or {}).get("workloadCrossCheck") or {}
@@ -440,8 +440,12 @@ def influence_text(v3, short=False):
         return (f" That weight is nominal: on the current panel cost's covariance allocation of value variance is {pct(shares['api'], 0)} on the API basis "
                 f"and {pct(shares['plan'], 0)} on the Plan basis; a negative allocation means dearer configurations score higher on quality, so cost "
                 "offsets quality differences instead of adding spread of its own (see [methodology.md](methodology.md)).")
+    larger = [basis for basis in ("api", "plan") if shares[basis] > 0.5]
+    reason = ("because cost scores spread more than quality scores" if len(larger) == 2
+              else "because quality scores spread more than cost scores" if not larger
+              else f"because cost scores spread more than quality scores on the {larger[0].upper() if larger[0] == 'api' else 'Plan'} basis and less on the other")
     return (f" That weight is nominal: on the current panel cost accounts for {pct(shares['api'], 0)} of the variance in API value and "
-            f"{pct(shares['plan'], 0)} in Plan value, because cost scores spread more than quality scores (see [methodology.md](methodology.md)).")
+            f"{pct(shares['plan'], 0)} in Plan value, {reason} (see [methodology.md](methodology.md)).")
 
 
 def negative_cost_banner(v3):
