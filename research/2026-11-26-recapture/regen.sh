@@ -1,8 +1,8 @@
 #!/bin/bash
-# Regenerate every output at the 2026-11-01 release cutoff (O65, O145): scores, scenarios, scores again, docs, OG cards, the draft.
+# Regenerate every output at the 2026-11-26 release cutoff (O65, O145): scores, scenarios, scores again, docs, OG cards, the draft.
 set -e
 cd "$(dirname "$0")/../.."
-export VALUERANK_NOW=2026-11-01T06:10:00Z
+export VALUERANK_NOW=2026-11-26T14:00:00Z
 python3 -m valuerank.build_scores >/dev/null
 python3 -m valuerank.value_v3 scenarios >/dev/null
 python3 -m valuerank.build_scores >/dev/null

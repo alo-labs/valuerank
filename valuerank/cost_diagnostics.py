@@ -29,6 +29,7 @@ LEAF_FAMILIES = {
     "frontierCode": "frontiercode-2-0",
     "terminalBench": "terminal-bench-v4",
     "gdpval": "gdpval-aa",
+    "gdpPdf": "gdp-pdf",  # O210: AA's GDP.pdf all-pass score is priced by the Index's GDP.pdf component
     "automationBench": "automationbench-aa",
     "omniscience": "omniscience",
     "lcr": "artificial-analysis-long-context-reasoning",
@@ -56,6 +57,7 @@ MATCHED_FAMILIES = {
     "terminalBench": ("terminalbench-4-1", basket.INDEX_SDLC_TASKS["terminalbench-4-1"]),
     "frontierCode": ("frontiercode-2-0", basket.INDEX_SDLC_TASKS["frontiercode-2-0"]),
     "automationBench": ("automationbench-aa", basket.INDEX_SDLC_TASKS["automationbench-aa"]),
+    "gdpPdf": ("gdp-pdf", basket.INDEX_SDLC_TASKS["gdp-pdf"]),
     "tbScience": ("terminal-bench-science", basket.INDEX_SDLC_TASKS["terminal-bench-science"]),
     "hle": ("hle-diamond", basket.INDEX_RESIDUAL_TASKS["hle-diamond"]),
     "critpt": ("critpt-v2-hard", basket.INDEX_RESIDUAL_TASKS["critpt-v2-hard"]),

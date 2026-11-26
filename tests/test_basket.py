@@ -57,7 +57,7 @@ def test_index_components_without_a_full_set_or_published_total_cannot_reconcile
     assert reconciliation["sdlcUsd"] == 0
 
 
-def cai_record(total=290.0, mean=1.0, attempts=(300, 372, 198)):
+def cai_record(total=322.0, mean=1.0, attempts=(396, 372, 198)):
     return {
         "label": "Codex - GPT (max)",
         "totalCostUsd": total,
@@ -67,28 +67,28 @@ def cai_record(total=290.0, mean=1.0, attempts=(300, 372, 198)):
     }
 
 
-def test_coding_agent_component_prices_the_per_task_metric_over_290_tasks():
-    """O50: the Coding Agent Index v2.0 (FrontierCode 100, SWE-Atlas-QnA 124, Terminal-Bench 66 tasks)."""
+def test_coding_agent_component_prices_the_per_task_metric_over_322_tasks():
+    """O50 as of Coding Agent Index v2.1 (2026-11-26): FrontierCode 2.0 132, SWE-Atlas-QnA 124, Terminal-Bench 66 tasks."""
 
-    component = b.coding_agent_component(cai_record(total=288.6, mean=1.0))
-    assert component["costUsd"] == pytest.approx(290.0) and component["completeness"] == b.COMPLETE
+    component = b.coding_agent_component(cai_record(total=320.6, mean=1.0))
+    assert component["costUsd"] == pytest.approx(322.0) and component["completeness"] == b.COMPLETE
     assert component["configuration"] == "Codex - GPT (max)"
     assert component["detail"] == {
         "agent": None,
         "meanCostPerTaskUsd": 1.0,
-        "requiredTasks": 290,
-        "publishedSumUsd": 288.6,
-        "sumTaskEquivalent": pytest.approx(288.6),
-        "attempts": 870,
-        "requiredAttempts": 870,
+        "requiredTasks": 322,
+        "publishedSumUsd": 320.6,
+        "sumTaskEquivalent": pytest.approx(320.6),
+        "attempts": 966,
+        "requiredAttempts": 966,
     }
 
 
 def test_coding_agent_component_keeps_attempt_coverage_as_a_diagnostic():
-    record = cai_record(attempts=(296, 372, 198))
+    record = cai_record(attempts=(392, 372, 198))
     record["components"].append({"attempts": None})
     component = b.coding_agent_component(record)
-    assert component["detail"]["attempts"] == 866
+    assert component["detail"]["attempts"] == 962
     assert component["completeness"] == b.COMPLETE  # attempt coverage is a precision diagnostic (E53)
 
 

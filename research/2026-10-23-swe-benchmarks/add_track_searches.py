@@ -13,8 +13,8 @@ from pathlib import Path
 
 HERE = Path(__file__).parent
 ROOT = HERE.parent.parent
-SEARCHED = "2026-11-01"  # O68: every added-leaf board re-read in full on 2026-10-25; O132: on 2026-10-30 (v5 cohort); O145: on 2026-11-01 (37 configurations)
-READ = HERE.parent / "2026-11-01-recapture" / "third-party"
+SEARCHED = "2026-11-26"  # O68: every added-leaf board re-read in full on 2026-11-26 (45 configurations)
+READ = HERE.parent / "2026-11-26-recapture" / "third-party"
 MARK = "O53 track leaf search"
 RESEARCH = [
     "Claude deep research, three researchers: research/2026-10-23-swe-benchmarks/research_notes/SWE benchmark candidates/ (owner-named sources, Vals AI, other agentic benchmarks)",
@@ -23,16 +23,16 @@ RESEARCH = [
     "Check of Epoch MirrorCode, SWE-bench-Live and SWE-PolyBench (report addendum)",
     "Board re-read of 2026-10-25 (owner decision O68): research/2026-10-25-board-reread/ (Vals, AI Coding Daily with hidden rows, Bug Hunt at 9089dc5, LiveBench 2.0 release 2026-10-23)",
     "Kimi K3.1 Pro exhaustive search with open-web queries, 2026-10-25: research/2026-10-25-board-reread/kimi-search.md and kimi-search.json",
-    "Board re-read of 2026-11-01 for the 37-configuration cohort (O145): research/2026-11-01-recapture/third-party/ (Bug Hunt at 1249797, Vals, LiveBench 2.0 release 2026-10-25 as edited in place on 2026-10-30 (O139, O147), AI Coding Daily with hidden rows, tbench.ai), with Xiaomi's MiMo effort documentation (O140, O149) and MiniMax's (O148)",
+    "Board re-read of 2026-11-26 for the 45-configuration cohort (O211, O215, O216): research/2026-11-26-recapture/third-party/ (Bug Hunt at 3be9acd, Vals Vibe Code Bench v1.1.1 and Code Migration v1.1, LiveBench 2.0 release 2026-11-06, AI Coding Daily with hidden rows and the Python project, tbench.ai Terminal-Bench 4.1)",
 ]
 LEAVES = {
-    "bugHunt": ("other", "bug-hunt", "https://bughunt.productcompass.pm/data/benchmark.json and the owner's results at commit 12497971 (updated 2026-10-27, read 2026-11-01)"),
-    "vibeCode": ("vals", "vibe-code", "https://www.vals.ai/benchmarks/vibe-code (benchmark_view JSON, updated 2026-10-29, read 2026-11-01)"),
-    "codeMigration": ("vals", "code-migration-v1-1", "https://www.vals.ai/benchmarks/code-migration-v1-1 (benchmark_view JSON, updated 2026-10-28, read 2026-11-01)"),
+    "bugHunt": ("other", "bug-hunt", "https://bughunt.productcompass.pm/data/benchmark.json and the owner's results at commit 3be9acd (updated 2026-11-25, read 2026-11-26)"),
+    "vibeCode": ("vals", "vibe-code", "https://www.vals.ai/benchmarks/vibe-code (v1.1.1 benchmark_view JSON, updated 2026-11-21, read 2026-11-26; O216)"),
+    "codeMigration": ("vals", "code-migration-v1-1", "https://www.vals.ai/benchmarks/code-migration-v1-1 (benchmark_view JSON, updated 2026-11-19, read 2026-11-26)"),
     # O61: LiveBench 2.0 Overall replaces the Long Agentic and Coding categories; one LiveBench row per model, so its
     # coverage is the coding capture's.
-    "livebench2Overall": ("other", "livebench2-overall", "https://livebench.ai/data/20261025/table.csv and the site bundle's model metadata (release 2026-10-25, read 2026-11-01; O67, O139)"),
-    "aiCodingDaily": ("other", "aicd", "https://aicodingdaily.com/leaderboard, every row including hidden older models (updated 2026-10-27, read 2026-11-01)"),
+    "livebench2Overall": ("other", "livebench2-overall", "https://livebench.ai/data/20261106/table.csv and the site bundle's model metadata (release 2026-11-06, read 2026-11-26; O67, O211)"),
+    "aiCodingDaily": ("other", "aicd", "https://aicodingdaily.com/leaderboard, every row including hidden older models (updated 2026-11-25, read 2026-11-26; Python project included, O215)"),
 }
 
 
@@ -50,9 +50,9 @@ def own_search(model_id: str) -> dict | None:
 
 
 def main() -> None:
-    vals = {item["slug"]: item for item in json.loads((READ / "vals-catalogue-2026-11-01.json").read_text())["benchmarks"]}
-    other = {item["key"]: item for item in json.loads((READ / "coverage-2026-11-01.json").read_text())["benchmarks"]}
-    cohort = [row["id"] for row in json.loads((HERE.parent / "2026-11-01-recapture" / "cohort.json").read_text())["configurations"]]
+    vals = {item["slug"]: item for item in json.loads((READ / "vals-catalogue-2026-11-26.json").read_text())["benchmarks"]}
+    other = {item["key"]: item for item in json.loads((READ / "coverage-2026-11-26.json").read_text())["benchmarks"]}
+    cohort = [row["id"] for row in json.loads((HERE.parent / "2026-11-26-recapture" / "cohort.json").read_text())["configurations"]]
     records = {(record["modelId"], record["leaf"]) for record in json.loads((ROOT / "data" / "swe_tracks.json").read_text())["records"]}
     # O132: the Bug Hunt leaf's records are data/bug_hunt.json's matched rows.
     records |= {(model["modelId"], "bugHunt") for model in json.loads((ROOT / "data" / "bug_hunt.json").read_text())["models"] if model.get("matched")}

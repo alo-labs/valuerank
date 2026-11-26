@@ -1,11 +1,11 @@
 {
   "schemaVersion": 1,
   "benchmark": "Bug Hunt Bench",
-  "sourceCommit": "12497971d928cc5ad97a184755734720388bc07f",
-  "sourceUrl": "https://github.com/phuryn/bug-hunt-bench/blob/12497971d928cc5ad97a184755734720388bc07f/results/combined-scoreboard.csv",
-  "capturedAt": "2026-11-01T05:59:30Z",
-  "sourceUpdated": "2026-10-27",
-  "sha256": "260a1d2c056180d6dbe9dce07a0ca97f120aa85e600073925df03530745dffdd",
+  "sourceCommit": "3be9acdb221b8127e181fa20f0c5a87647d7550e",
+  "sourceUrl": "https://github.com/phuryn/bug-hunt-bench/blob/3be9acdb221b8127e181fa20f0c5a87647d7550e/results/combined-scoreboard.csv",
+  "capturedAt": "2026-11-26T03:03:40Z",
+  "sourceUpdated": "2026-11-25",
+  "sha256": "33581fedea98256cca86e99ca8fc6830a4fab978b830848b398e847aa6f71a0e",
   "purpose": "Every row of the owner's combined scoreboard at the pinned commit, so the build can check that every configuration with an exact AA DeepSWE result and a Bug Hunt result is in the roster (owner decision O31).",
   "rows": [
     {
@@ -1255,6 +1255,204 @@
       "harness": "Codex CLI",
       "fixedOf105": 6.0,
       "extras": 5.0
+    },
+    {
+      "model": "Fable 5.2 (max effort) - mean of 3",
+      "harness": "Claude Code",
+      "fixedOf105": 58.0,
+      "extras": 24.7
+    },
+    {
+      "model": "Fable 5.2 (xhigh effort) - mean of 3",
+      "harness": "Claude Code",
+      "fixedOf105": 49.0,
+      "extras": 16.7
+    },
+    {
+      "model": "Fable 5.2 (high effort) - mean of 2",
+      "harness": "Claude Code",
+      "fixedOf105": 43.0,
+      "extras": 16.5
+    },
+    {
+      "model": "Fable 5.2 (medium effort) - mean of 2",
+      "harness": "Claude Code",
+      "fixedOf105": 41.5,
+      "extras": 17.5
+    },
+    {
+      "model": "Fable 5.2 (low effort) - mean of 2",
+      "harness": "Claude Code",
+      "fixedOf105": 41.0,
+      "extras": 14.5
+    },
+    {
+      "model": "Gemini 4 Carbon (high effort, Antigravity CLI) - mean of 3",
+      "harness": "Antigravity CLI",
+      "fixedOf105": 57.3,
+      "extras": 25.0
+    },
+    {
+      "model": "Gemini 4 Carbon (medium effort, Antigravity CLI) - mean of 3",
+      "harness": "Antigravity CLI",
+      "fixedOf105": 56.0,
+      "extras": 46.7
+    },
+    {
+      "model": "Gemini 4 Hydrogen (xhigh effort, Antigravity CLI)",
+      "harness": "Antigravity CLI",
+      "fixedOf105": 43.0,
+      "extras": 74.0
+    },
+    {
+      "model": "Gemini 4 Hydrogen (xhigh effort, Antigravity CLI) - mean of 3",
+      "harness": "Antigravity CLI",
+      "fixedOf105": 32.7,
+      "extras": 34.3
+    },
+    {
+      "model": "Gemini 4 Hydrogen (high effort, Antigravity CLI) - mean of 3",
+      "harness": "Antigravity CLI",
+      "fixedOf105": 28.3,
+      "extras": 12.7
+    },
+    {
+      "model": "Gemini 4 Hydrogen (medium effort, Antigravity CLI) - mean of 3",
+      "harness": "Antigravity CLI",
+      "fixedOf105": 24.7,
+      "extras": 17.7
+    },
+    {
+      "model": "Gemini 4 Hydrogen (low effort, Antigravity CLI) - mean of 3",
+      "harness": "Antigravity CLI",
+      "fixedOf105": 10.3,
+      "extras": 6.0
+    },
+    {
+      "model": "Gemini 4 Carbon (low effort, Antigravity CLI) - mean of 3",
+      "harness": "Antigravity CLI",
+      "fixedOf105": 46.0,
+      "extras": 18.0
+    },
+    {
+      "model": "GPT-6.2 Astra (max effort) - mean of 3",
+      "harness": "Codex CLI",
+      "fixedOf105": 62.7,
+      "extras": 60.0
+    },
+    {
+      "model": "GPT-6.2 Astra (xhigh effort) - mean of 3",
+      "harness": "Codex CLI",
+      "fixedOf105": 60.0,
+      "extras": 76.0
+    },
+    {
+      "model": "GPT-6.2 Sol (max effort) - mean of 3",
+      "harness": "Codex CLI",
+      "fixedOf105": 54.7,
+      "extras": 56.0
+    },
+    {
+      "model": "GPT-6.2 Sol (xhigh effort) - mean of 3",
+      "harness": "Codex CLI",
+      "fixedOf105": 49.0,
+      "extras": 52.3
+    },
+    {
+      "model": "GPT-6.2 Sol (high effort) - mean of 3",
+      "harness": "Codex CLI",
+      "fixedOf105": 49.7,
+      "extras": 52.7
+    },
+    {
+      "model": "GPT-6.2 Sol (medium effort) - mean of 3",
+      "harness": "Codex CLI",
+      "fixedOf105": 45.7,
+      "extras": 49.3
+    },
+    {
+      "model": "GPT-6.2 Sol (low effort) - mean of 3",
+      "harness": "Codex CLI",
+      "fixedOf105": 36.0,
+      "extras": 28.7
+    },
+    {
+      "model": "GPT-6.2 Astra (xhigh effort) - mean of 5",
+      "harness": "Codex CLI",
+      "fixedOf105": 60.2,
+      "extras": 72.0
+    },
+    {
+      "model": "GPT-6.2 Astra (high effort) - mean of 5",
+      "harness": "Codex CLI",
+      "fixedOf105": 59.6,
+      "extras": 76.2
+    },
+    {
+      "model": "GPT-6.2 Astra (medium effort) - mean of 3",
+      "harness": "Codex CLI",
+      "fixedOf105": 50.3,
+      "extras": 62.7
+    },
+    {
+      "model": "GPT-6.2 Astra (low effort) - mean of 3",
+      "harness": "Codex CLI",
+      "fixedOf105": 46.3,
+      "extras": 39.0
+    },
+    {
+      "model": "Gemini 4 Neon (xhigh effort, Antigravity CLI) - mean of 3",
+      "harness": "Antigravity CLI",
+      "fixedOf105": 63.0,
+      "extras": 60.3
+    },
+    {
+      "model": "Gemini 4 Neon (high effort, Antigravity CLI) - mean of 3",
+      "harness": "Antigravity CLI",
+      "fixedOf105": 57.0,
+      "extras": 43.7
+    },
+    {
+      "model": "Gemini 4 Neon (medium effort, Antigravity CLI) - mean of 3",
+      "harness": "Antigravity CLI",
+      "fixedOf105": 47.7,
+      "extras": 23.0
+    },
+    {
+      "model": "Gemini 4 Neon (low effort, Antigravity CLI) - mean of 3",
+      "harness": "Antigravity CLI",
+      "fixedOf105": 29.7,
+      "extras": 6.3
+    },
+    {
+      "model": "GLM-5.4 (max effort, Z.ai API)",
+      "harness": "Claude Code / Z.ai API",
+      "fixedOf105": 28.0,
+      "extras": 3.0
+    },
+    {
+      "model": "Gemini 4 Neon (low effort, Antigravity CLI 1.5.16) - mean of 3",
+      "harness": "Antigravity CLI",
+      "fixedOf105": 29.7,
+      "extras": 6.7
+    },
+    {
+      "model": "Gemini 4 Neon (medium effort, Antigravity CLI 1.5.16) - mean of 3",
+      "harness": "Antigravity CLI",
+      "fixedOf105": 48.3,
+      "extras": 20.7
+    },
+    {
+      "model": "Gemini 4 Neon (high effort, Antigravity CLI 1.5.16) - mean of 3",
+      "harness": "Antigravity CLI",
+      "fixedOf105": 56.0,
+      "extras": 36.3
+    },
+    {
+      "model": "Gemini 4 Neon (xhigh effort, Antigravity CLI 1.5.16) - mean of 3",
+      "harness": "Antigravity CLI",
+      "fixedOf105": 61.0,
+      "extras": 42.0
     }
   ]
 }

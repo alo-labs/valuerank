@@ -83,7 +83,7 @@
      "note": "Vals' Muse Ember page (vals/_models/meta_muse-ember.html) records 'Reasoning Effort: max'.",
      "version": "v1.1.1"
     },
-    "gpt-6-1-terra-medium": {
+    "gpt-6.1-terra-medium": {
      "status": "absent",
      "value": null,
      "stderr": null,
@@ -92,7 +92,7 @@
      "note": "Vals ran this model only at max (75.52), not medium; not transferred.",
      "version": "v1.1.1"
     },
-    "gpt-6-2-sol-low": {
+    "gpt-6.2-sol-low": {
      "status": "absent",
      "value": null,
      "stderr": null,
@@ -101,7 +101,7 @@
      "note": "Vals ran this model only at max (79.483), not low; not transferred.",
      "version": "v1.1.1"
     },
-    "gpt-6-1-terra-high": {
+    "gpt-6.1-terra-high": {
      "status": "absent",
      "value": null,
      "stderr": null,
@@ -110,7 +110,7 @@
      "note": "Vals ran this model only at max (75.52), not high; not transferred.",
      "version": "v1.1.1"
     },
-    "gpt-6-1-sol-medium": {
+    "gpt-6.1-sol-medium": {
      "status": "absent",
      "value": null,
      "stderr": null,
@@ -119,7 +119,7 @@
      "note": "Vals ran this model only at max (75.101), not medium; not transferred.",
      "version": "v1.1.1"
     },
-    "gpt-6-2-sol-medium": {
+    "gpt-6.2-sol-medium": {
      "status": "absent",
      "value": null,
      "stderr": null,
@@ -128,7 +128,7 @@
      "note": "Vals ran this model only at max (79.483), not medium; not transferred.",
      "version": "v1.1.1"
     },
-    "gpt-6-2-sol-high": {
+    "gpt-6.2-sol-high": {
      "status": "absent",
      "value": null,
      "stderr": null,
@@ -137,7 +137,7 @@
      "note": "Vals ran this model only at max (79.483), not high; not transferred.",
      "version": "v1.1.1"
     },
-    "gpt-6-2-sol-xhigh": {
+    "gpt-6.2-sol-xhigh": {
      "status": "absent",
      "value": null,
      "stderr": null,
@@ -146,7 +146,7 @@
      "note": "Vals ran this model only at max (79.483), not xhigh; not transferred.",
      "version": "v1.1.1"
     },
-    "gpt-6-2-sol": {
+    "gpt-6.2-sol": {
      "status": "exact",
      "value": 79.483,
      "stderr": 3.658,
@@ -156,7 +156,7 @@
      "note": null,
      "version": "v1.1.1"
     },
-    "gpt-6-2-astra-high": {
+    "gpt-6.2-astra-high": {
      "status": "absent",
      "value": null,
      "stderr": null,
@@ -165,7 +165,7 @@
      "note": "Vals ran this model only at max (78.567), not high; not transferred.",
      "version": "v1.1.1"
     },
-    "gpt-6-2-astra-xhigh": {
+    "gpt-6.2-astra-xhigh": {
      "status": "absent",
      "value": null,
      "stderr": null,
@@ -174,7 +174,7 @@
      "note": "Vals ran this model only at max (78.567), not xhigh; not transferred.",
      "version": "v1.1.1"
     },
-    "gpt-6-2-astra": {
+    "gpt-6.2-astra": {
      "status": "exact",
      "value": 78.567,
      "stderr": 3.47,
@@ -257,7 +257,7 @@
      "note": "AA's pages name this configuration '(<Effort>, Default Fallback)' (its chart label shows only the effort since 2026-11-26, and said 'with fallback' before); the source has no fallback qualifier (as on 2026-10-25 and 2026-11-01).",
      "version": "v1.1.1"
     },
-    "gpt-6-2-astra-medium": {
+    "gpt-6.2-astra-medium": {
      "status": "absent",
      "value": null,
      "stderr": null,
@@ -275,7 +275,7 @@
      "note": "Vals ran this model only at xhigh (80.228), not medium; not transferred.",
      "version": "v1.1.1"
     },
-    "gpt-6-1-sol": {
+    "gpt-6.1-sol": {
      "status": "exact",
      "value": 75.101,
      "stderr": 3.466,
@@ -285,7 +285,7 @@
      "note": null,
      "version": "v1.1.1"
     },
-    "gpt-6-1-terra-xhigh": {
+    "gpt-6.1-terra-xhigh": {
      "status": "absent",
      "value": null,
      "stderr": null,
@@ -294,7 +294,7 @@
      "note": "Vals ran this model only at max (75.52), not xhigh; not transferred.",
      "version": "v1.1.1"
     },
-    "claude-haiku-5-5-xhigh": {
+    "claude-haiku-5-5": {
      "status": "absent",
      "value": null,
      "stderr": null,
@@ -323,7 +323,7 @@
      "note": "Owner decision O135 (2026-10-30): AA plots MiMo-V2.6-Flash without an effort; Xiaomi's API documents a single thinking mode (thinking.type enabled/disabled, default enabled; on the Responses API every reasoning.effort other than none enables the same, undifferentiated reasoning), so the configuration is thinking enabled, the default (../../2026-10-30-v5-recapture/third-party/mimo-flash-effort.md; Xiaomi docs last read 2026-11-01, ../../2026-11-01-recapture/third-party/mimo/; not re-read on 2026-11-26). Vals records reasoning, reasoning_effort and compute_effort as null; its MiMo-V2.6-Pro model page (vals/_models/xiaomi_mimo-v2.6-pro.html, re-read 2026-11-26), in its 2026-09-22 update covering both MiMo V2.6 models, still says 'We evaluated them with reasoning enabled' through the official Xiaomi API, so the record is the thinking-enabled configuration (owner decision O149, 2026-11-01). The v1.1.1 row has the same cost per test as the v1.1 row (v1.1.1 re-grades the v1.1 runs), so the setting the model page describes applies to it.",
      "version": "v1.1.1"
     },
-    "gpt-6-1-terra-low": {
+    "gpt-6.1-terra-low": {
      "status": "absent",
      "value": null,
      "stderr": null,
@@ -341,7 +341,7 @@
      "note": "Vals ran this model only at max (76.586), not high; not transferred.",
      "version": "v1.1.1"
     },
-    "gpt-6-1-sol-high": {
+    "gpt-6.1-sol-high": {
      "status": "absent",
      "value": null,
      "stderr": null,
@@ -350,7 +350,7 @@
      "note": "Vals ran this model only at max (75.101), not high; not transferred.",
      "version": "v1.1.1"
     },
-    "gpt-6-1-sol-xhigh": {
+    "gpt-6.1-sol-xhigh": {
      "status": "absent",
      "value": null,
      "stderr": null,
@@ -396,7 +396,7 @@
      "note": null,
      "version": "v1.1.1"
     },
-    "gpt-6-1-sol-low": {
+    "gpt-6.1-sol-low": {
      "status": "absent",
      "value": null,
      "stderr": null,
@@ -405,7 +405,7 @@
      "note": "Vals ran this model only at max (75.101), not low; not transferred.",
      "version": "v1.1.1"
     },
-    "gpt-6-1-terra": {
+    "gpt-6.1-terra": {
      "status": "exact",
      "value": 75.52,
      "stderr": 4.113,
@@ -479,7 +479,7 @@
       "value": 78.49
      }
     },
-    "gpt-6-1-sol": {
+    "gpt-6.1-sol": {
      "20261101": {
       "status": "exact",
       "value": 88.931
@@ -509,7 +509,7 @@
       "value": 65.315
      }
     },
-    "gpt-6-1-terra": {
+    "gpt-6.1-terra": {
      "20261101": {
       "status": "exact",
       "value": 83.997
@@ -543,20 +543,20 @@
    "configurationsNotInThe20261101Cohort": [
     "muse-ember-xhigh",
     "muse-ember",
-    "gpt-6-2-sol-low",
-    "gpt-6-2-sol-medium",
-    "gpt-6-2-sol-high",
-    "gpt-6-2-sol-xhigh",
-    "gpt-6-2-sol",
-    "gpt-6-2-astra-high",
-    "gpt-6-2-astra-xhigh",
-    "gpt-6-2-astra",
+    "gpt-6.2-sol-low",
+    "gpt-6.2-sol-medium",
+    "gpt-6.2-sol-high",
+    "gpt-6.2-sol-xhigh",
+    "gpt-6.2-sol",
+    "gpt-6.2-astra-high",
+    "gpt-6.2-astra-xhigh",
+    "gpt-6.2-astra",
     "claude-fable-5-2-xhigh",
     "claude-fable-5-2",
     "claude-fable-5-2-high",
     "gemini-4-neon",
     "gemini-4-neon-high",
-    "gpt-6-2-astra-medium",
+    "gpt-6.2-astra-medium",
     "gemini-4-neon-medium"
    ],
    "valueChangesBasis": "The 2026-11-01 values were Vibe Code Bench v1.1 (see predecessorReference); every change here is the v1.1 to v1.1.1 regrade (and the Vals rows added since), not a movement of the same board.",
@@ -606,14 +606,14 @@
       "effort": "max",
       "version": "v1.1"
      },
-     "gpt-6-2-sol": {
+     "gpt-6.2-sol": {
       "value": 87.616,
       "stderr": 2.195,
       "valsKey": "openai/gpt-6.2-sol",
       "effort": "max",
       "version": "v1.1"
      },
-     "gpt-6-2-astra": {
+     "gpt-6.2-astra": {
       "value": 89.898,
       "stderr": 2.04,
       "valsKey": "openai/gpt-6.2-astra",
@@ -648,7 +648,7 @@
       "effort": "max",
       "version": "v1.1"
      },
-     "gpt-6-1-sol": {
+     "gpt-6.1-sol": {
       "value": 88.931,
       "stderr": 1.893,
       "valsKey": "openai/gpt-6.1-sol",
@@ -669,7 +669,7 @@
       "effort": "max",
       "version": "v1.1"
      },
-     "gpt-6-1-terra": {
+     "gpt-6.1-terra": {
       "value": 83.997,
       "stderr": 2.865,
       "valsKey": "openai/gpt-6.1-terra",
@@ -771,7 +771,7 @@
      "effort": null,
      "note": "No meta/muse-ember row on this board."
     },
-    "gpt-6-1-terra-medium": {
+    "gpt-6.1-terra-medium": {
      "status": "absent",
      "value": null,
      "stderr": null,
@@ -779,7 +779,7 @@
      "effort": null,
      "note": "No openai/gpt-6.1-terra row on this board."
     },
-    "gpt-6-2-sol-low": {
+    "gpt-6.2-sol-low": {
      "status": "absent",
      "value": null,
      "stderr": null,
@@ -787,7 +787,7 @@
      "effort": null,
      "note": "No openai/gpt-6.2-sol row on this board."
     },
-    "gpt-6-1-terra-high": {
+    "gpt-6.1-terra-high": {
      "status": "absent",
      "value": null,
      "stderr": null,
@@ -795,7 +795,7 @@
      "effort": null,
      "note": "No openai/gpt-6.1-terra row on this board."
     },
-    "gpt-6-1-sol-medium": {
+    "gpt-6.1-sol-medium": {
      "status": "absent",
      "value": null,
      "stderr": null,
@@ -803,7 +803,7 @@
      "effort": null,
      "note": "Vals ran this model only at max (77.324), not medium; not transferred."
     },
-    "gpt-6-2-sol-medium": {
+    "gpt-6.2-sol-medium": {
      "status": "absent",
      "value": null,
      "stderr": null,
@@ -811,7 +811,7 @@
      "effort": null,
      "note": "No openai/gpt-6.2-sol row on this board."
     },
-    "gpt-6-2-sol-high": {
+    "gpt-6.2-sol-high": {
      "status": "absent",
      "value": null,
      "stderr": null,
@@ -819,7 +819,7 @@
      "effort": null,
      "note": "No openai/gpt-6.2-sol row on this board."
     },
-    "gpt-6-2-sol-xhigh": {
+    "gpt-6.2-sol-xhigh": {
      "status": "absent",
      "value": null,
      "stderr": null,
@@ -827,7 +827,7 @@
      "effort": null,
      "note": "No openai/gpt-6.2-sol row on this board."
     },
-    "gpt-6-2-sol": {
+    "gpt-6.2-sol": {
      "status": "absent",
      "value": null,
      "stderr": null,
@@ -835,7 +835,7 @@
      "effort": null,
      "note": "No openai/gpt-6.2-sol row on this board."
     },
-    "gpt-6-2-astra-high": {
+    "gpt-6.2-astra-high": {
      "status": "absent",
      "value": null,
      "stderr": null,
@@ -843,7 +843,7 @@
      "effort": null,
      "note": "No openai/gpt-6.2-astra row on this board."
     },
-    "gpt-6-2-astra-xhigh": {
+    "gpt-6.2-astra-xhigh": {
      "status": "absent",
      "value": null,
      "stderr": null,
@@ -851,7 +851,7 @@
      "effort": null,
      "note": "No openai/gpt-6.2-astra row on this board."
     },
-    "gpt-6-2-astra": {
+    "gpt-6.2-astra": {
      "status": "absent",
      "value": null,
      "stderr": null,
@@ -917,7 +917,7 @@
      "harness": null,
      "note": "AA's pages name this configuration '(<Effort>, Default Fallback)' (its chart label shows only the effort since 2026-11-26, and said 'with fallback' before); the source has no fallback qualifier (as on 2026-10-25 and 2026-11-01)."
     },
-    "gpt-6-2-astra-medium": {
+    "gpt-6.2-astra-medium": {
      "status": "absent",
      "value": null,
      "stderr": null,
@@ -933,7 +933,7 @@
      "effort": null,
      "note": "No google/cobalt-c-high-1p00 row on this board. The board lists no Gemini 4 Neon row."
     },
-    "gpt-6-1-sol": {
+    "gpt-6.1-sol": {
      "status": "exact",
      "value": 77.324,
      "stderr": 2.976,
@@ -942,7 +942,7 @@
      "harness": null,
      "note": null
     },
-    "gpt-6-1-terra-xhigh": {
+    "gpt-6.1-terra-xhigh": {
      "status": "absent",
      "value": null,
      "stderr": null,
@@ -950,7 +950,7 @@
      "effort": null,
      "note": "No openai/gpt-6.1-terra row on this board."
     },
-    "claude-haiku-5-5-xhigh": {
+    "claude-haiku-5-5": {
      "status": "absent",
      "value": null,
      "stderr": null,
@@ -976,7 +976,7 @@
      "match": "owner (O149)",
      "note": "Owner decision O135 (2026-10-30): AA plots MiMo-V2.6-Flash without an effort; Xiaomi's API documents a single thinking mode (thinking.type enabled/disabled, default enabled; on the Responses API every reasoning.effort other than none enables the same, undifferentiated reasoning), so the configuration is thinking enabled, the default (../../2026-10-30-v5-recapture/third-party/mimo-flash-effort.md; Xiaomi docs last read 2026-11-01, ../../2026-11-01-recapture/third-party/mimo/; not re-read on 2026-11-26). Vals records reasoning, reasoning_effort and compute_effort as null; its MiMo-V2.6-Pro model page (vals/_models/xiaomi_mimo-v2.6-pro.html, re-read 2026-11-26), in its 2026-09-22 update covering both MiMo V2.6 models, still says 'We evaluated them with reasoning enabled' through the official Xiaomi API, so the record is the thinking-enabled configuration (owner decision O149, 2026-11-01)."
     },
-    "gpt-6-1-terra-low": {
+    "gpt-6.1-terra-low": {
      "status": "absent",
      "value": null,
      "stderr": null,
@@ -992,7 +992,7 @@
      "effort": null,
      "note": "Vals ran this model only at max (52.36), not high; not transferred."
     },
-    "gpt-6-1-sol-high": {
+    "gpt-6.1-sol-high": {
      "status": "absent",
      "value": null,
      "stderr": null,
@@ -1000,7 +1000,7 @@
      "effort": null,
      "note": "Vals ran this model only at max (77.324), not high; not transferred."
     },
-    "gpt-6-1-sol-xhigh": {
+    "gpt-6.1-sol-xhigh": {
      "status": "absent",
      "value": null,
      "stderr": null,
@@ -1041,7 +1041,7 @@
      "harness": null,
      "note": null
     },
-    "gpt-6-1-sol-low": {
+    "gpt-6.1-sol-low": {
      "status": "absent",
      "value": null,
      "stderr": null,
@@ -1049,7 +1049,7 @@
      "effort": null,
      "note": "Vals ran this model only at max (77.324), not low; not transferred."
     },
-    "gpt-6-1-terra": {
+    "gpt-6.1-terra": {
      "status": "absent",
      "value": null,
      "stderr": null,
@@ -1099,20 +1099,20 @@
    "configurationsNotInThe20261101Cohort": [
     "muse-ember-xhigh",
     "muse-ember",
-    "gpt-6-2-sol-low",
-    "gpt-6-2-sol-medium",
-    "gpt-6-2-sol-high",
-    "gpt-6-2-sol-xhigh",
-    "gpt-6-2-sol",
-    "gpt-6-2-astra-high",
-    "gpt-6-2-astra-xhigh",
-    "gpt-6-2-astra",
+    "gpt-6.2-sol-low",
+    "gpt-6.2-sol-medium",
+    "gpt-6.2-sol-high",
+    "gpt-6.2-sol-xhigh",
+    "gpt-6.2-sol",
+    "gpt-6.2-astra-high",
+    "gpt-6.2-astra-xhigh",
+    "gpt-6.2-astra",
     "claude-fable-5-2-xhigh",
     "claude-fable-5-2",
     "claude-fable-5-2-high",
     "gemini-4-neon",
     "gemini-4-neon-high",
-    "gpt-6-2-astra-medium",
+    "gpt-6.2-astra-medium",
     "gemini-4-neon-medium"
    ]
   }

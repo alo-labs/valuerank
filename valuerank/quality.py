@@ -36,7 +36,7 @@ BUG_HUNT_BUGS = 105.0
 # denominator from the board; the default before it is set is the planted count alone (fixtures).
 BUG_HUNT_SCALE = {"maxPlanted": BUG_HUNT_BUGS, "maxUnplanted": 0.0, "scale": BUG_HUNT_BUGS}
 MISSING_UPPER: dict = {}
-AICD_POINTS = 60.0  # AI Coding Daily's Laravel quality, React-TS quality and edge-case columns (20 points each)
+AICD_POINTS = 80.0  # AI Coding Daily's Laravel quality, React-TS quality, Python quality and edge-case columns (20 points each; O215)
 
 
 @dataclass(frozen=True)
@@ -189,7 +189,7 @@ def gdpval_logistic_z(elo: float) -> float:
 
 
 def aicd_z(points: float) -> Observation:
-    """AI Coding Daily points out of 60 (bug-finding column excluded), on anchors 0 and 60."""
+    """AI Coding Daily points out of 80 (bug-finding column and consistency penalty excluded, O215), on anchors 0 and 80."""
 
     return Observation(clip(100.0 * points / AICD_POINTS))
 
@@ -314,7 +314,7 @@ LEAF_DOMAINS = {
     "vibeCode": ("percent", 0.0, 100.0),
     "codeMigration": ("percent", 0.0, 100.0),
     "livebench2Overall": ("percent", 0.0, 100.0),
-    "aiCodingDaily": ("points of 60", 0.0, AICD_POINTS),
+    "aiCodingDaily": ("points of 80", 0.0, AICD_POINTS),
 }
 
 

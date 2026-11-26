@@ -1,6 +1,6 @@
 {
   "schemaVersion": "valuerank-plan-routes/v1",
-  "asOf": "2026-11-05",
+  "asOf": "2026-11-26",
   "currency": "USD",
   "costMix": {
     "id": "valuerank-billed-3",
@@ -72,8 +72,8 @@
       ]
     },
     "reportingWindow": {
-      "start": "2026-10-02",
-      "end": "2026-11-01"
+      "start": "2026-10-27",
+      "end": "2026-11-26"
     },
     "planAliases": {
       "Claude Max 5x": {
@@ -329,17 +329,24 @@
             "stage": "plain web search",
             "method": "WebSearch tool plus direct page fetches",
             "record": "research/2026-11-26-plan-allowances/stage1/queries-websearch.md",
-            "queries": 37
+            "queries": 37,
+            "actualStage": "plain web search",
+            "outcome": "no new report admitted by this stage alone; 37 searches and about 70 page fetches (stage1/queries-websearch.md)"
           },
           {
             "stage": "Claude's Deep Research",
             "method": "anthropic-skills deep-research loaded; no Agent tool, so one researcher followed researcher.md; structured sweeps of Reddit, Hacker News, Bluesky, X, forums",
-            "record": "research/2026-11-26-plan-allowances/stage2/README.md"
+            "record": "research/2026-11-26-plan-allowances/stage2/README.md",
+            "actualStage": "Claude's Deep Research",
+            "outcome": "structured sweeps of 38,996 Reddit posts, 3,919 comments, 1,695 Hacker News items, 341 Bluesky posts and X post JSON; the Google forum, OpenAI community and LINUX DO sweeps were rate-limited and partial (stage2/README.md)"
           },
           {
-            "stage": "Perplexity (Silver Bullet's Deep Research unavailable)",
+            "stage": "Silver Bullet's Deep Research",
             "method": "perplexity skill driver, one prompt to three models, every claim re-fetched",
-            "record": "research/2026-11-26-plan-allowances/stage3/README.md"
+            "record": "research/2026-11-26-plan-allowances/stage3/README.md",
+            "actualStage": "Perplexity (Silver Bullet's Deep Research unavailable)",
+            "outcome": "the same prompt to three Perplexity models (Claude Sonnet 5.5, GPT-6.2 Sol, Kimi K3); every claim re-fetched; several of their claims were wrong or unverifiable (stage3/README.md)",
+            "degraded": "Silver Bullet's Deep Research is unavailable in this environment; this stage ran through Perplexity (three models), as the record states"
           }
         ],
         "models": [
@@ -785,7 +792,7 @@
         }
       ]
     },
-    "openCodeGoApplication": "Owner decisions O198 and O199 (2026-11-11), an explicit exception to the end-user numerator rule: OpenCode's published monthly dollar limit per model on the single-member Go plan ($10 a month) is the plan's actual limit, a hard cap on usage metered at OpenCode's listed token prices, so each cohort model it lists takes limit / fee as its Value Multiple at full use of the limit, labelled a published dollar limit (the plan's terms, not a measurement and not a ceiling), and needs no staged end-user-report search. Go Plus and Go Teams are not Plan-basis plans. Evidence: research/2026-11-11-opencode-go/ (page archived with its SHA-256). Owner decision O203 (2026-11-14): the page was read on 2026-11-11 and read again on 2026-11-12 with identical tables, both after the 2026-11-01 release cutoff, and the routes are admitted at this release on that reading; the plan's terms at the cutoff itself were not observed. The page was read again on 2026-11-26T03:10:58Z (SHA-256 40c238db6cfc8ae3dcb3ecef1c309af1e1a376bebd2ca12cf7b85228a971379c, research/2026-11-26-plan-allowances/opencode-go/): no cohort model's monthly dollar limit or fee changed and none was added or removed.",
+    "openCodeGoApplication": "Owner decisions O198 and O199 (2026-11-11), an explicit exception to the end-user numerator rule: OpenCode's published monthly dollar limit per model on the single-member Go plan ($10 a month) is the plan's actual limit, a hard cap on usage metered at OpenCode's listed token prices, so each cohort model it lists takes limit / fee as its Value Multiple at full use of the limit, labelled a published dollar limit (the plan's terms, not a measurement and not a ceiling), and needs no staged end-user-report search. Go Plus and Go Teams are not Plan-basis plans. Evidence: research/2026-11-11-opencode-go/ (page archived with its SHA-256). Owner decision O203 (2026-11-14): the page was read on 2026-11-11 and read again on 2026-11-12 with identical tables, both after the 2026-11-01 release cutoff, and the routes are admitted at this release on that reading; the plan's terms at the cutoff itself were not observed. The page was read again on 2026-11-26T03:10:58Z (SHA-256 40c238db6cfc8ae3dcb3ecef1c309af1e1a376bebd2ca12cf7b85228a971379c, research/2026-11-26-plan-allowances/opencode-go/): no cohort model's monthly dollar limit or fee changed and none was added or removed. The page was read again on 2026-11-26T03:10:58Z (SHA-256 40c238db6cfc8ae3dcb3ecef1c309af1e1a376bebd2ca12cf7b85228a971379c, research/2026-11-26-plan-allowances/opencode-go/): no cohort model's monthly dollar limit or fee changed and none was added or removed. The page was read again on 2026-11-26T03:10:58Z (SHA-256 40c238db6cfc8ae3dcb3ecef1c309af1e1a376bebd2ca12cf7b85228a971379c, research/2026-11-26-plan-allowances/opencode-go/): no cohort model's monthly dollar limit or fee changed and none was added or removed. The page was read again on 2026-11-26T03:10:58Z (SHA-256 40c238db6cfc8ae3dcb3ecef1c309af1e1a376bebd2ca12cf7b85228a971379c, research/2026-11-26-plan-allowances/opencode-go/): no cohort model's monthly dollar limit or fee changed and none was added or removed.",
     "mimoApplication": "Owner decision O46 (2026-10-23), an explicit exception to the end-user numerator rule: each MiMo-V2.6 model takes, per Token Plan tier, the quota-implied ceiling (the tier's monthly credits valued at Xiaomi's pay-as-you-go rate for that model, divided by the list fee), labelled provider-derived. It replaces the 2026-10-08 provisional 1.5x assumption. End-user measurements for the exact model and tier replace the ceiling once they meet the admission rule of any other provider's route (O11); one report alone does not (owner decision O62).",
     "unsupportedModels": "Use API fallback; do not transfer evidence across model versions or variants except for the explicit common GPT, Claude and MiMo assumptions; across thinking effort, plan-allowance evidence for a model serves its other efforts (O87 for user reports, O88 for SemiAnalysis measurements, labelled and counted as measured evidence under O90).",
     "claudeApplication": "User authorizes (2026-10-18, Option 2) applying Opus 5.5's measured SemiAnalysis Claude plan multiples to every other Claude model. Opus 5.5 keeps its exact measured routes; the shared routes are labelled user assumptions, carry the recorded caution that allowances are model-specific (Fable 5.1 measured 12.4-12.7x on the same plans), and are superseded by any exact measurement for the listed model. Claude Fable 5.1 (retained 2026-10-21, owner decision O31) has exact SemiAnalysis measurements on Max 5x (12.73x) and Max 20x (12.425x), which replace the shared routes for it; it has no Pro route, because the source records Fable as unavailable on Pro, so there is no Pro allowance to measure or assume. Owner decision O33 (2026-10-21) ranks Claude Haiku 5.5 (max, high, medium, low) and Claude Sonnet 5.5 (xhigh, high, medium, low) as their own rows; as other Claude models in the roster they take the shared assumption routes. Owner decision O88 (2026-10-28): Opus 5.5's other efforts (xhigh, high, medium) take its figure as a same-model measurement from another effort (measured evidence under O90), not as the shared assumption; the multiple is the same."
@@ -847,6 +854,13 @@
         {
           "readOn": "2026-10-07",
           "result": "selection transcription (the first release's read; O130)"
+        },
+        {
+          "readOn": "2026-11-26",
+          "result": "the article page was fetched again (public part); the two figures it states in text, $2,485 of Fable 5.1 on Max 20x and $2,897 of GPT-6 Astra on Pro 200, equal the transcription; the other transcribed figures sit in chart images that this read cannot decode, so they are not re-verified; the page still shows the publication date Oct 05, 2026 and dateModified equals datePublished (2026-10-05T20:01:09Z), so no revision note",
+          "file": "research/2026-11-26-plan-allowances/semianalysis/anthropic-subscriptions-offer-5x.html",
+          "sha256": "0fbe882b6a9c3f728ef04bc1954a1769103b236b0fb313502bc2560adc1c30f5",
+          "fetchedAt": "2026-11-26T13:40:00Z"
         }
       ],
       "evidenceClass": "controlled_account_workload_projection",

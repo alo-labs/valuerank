@@ -460,7 +460,7 @@ def render(text: str, scores: dict, manifest: dict) -> str:
 
 # A "today" sentence may still hold numbers that are not current-release figures: names, versions, decision tags, dates
 # and the rule constants below. Everything else must be a placeholder.
-RULE_CONSTANTS = ("above 100%", "more than 5 points", "within 3 points", "n = 8 rows", "Pro $100", "Pro $200", "Pro $500", "of 60 points", "> 5 points", "40 of the 100", "n = 60", "n = 6", "÷ 60", "÷ √6", "±26 Elo", "1/0.75", "carries 75%", "below 3 points", "> 0", "under 40%", "290 ×", "× 290", "290 required", "the 290", "⌈2N/3⌉", "10⁻⁶", "0–100", "0 or 100", "correlations 0, 0.3 and 0.6", "correlation 0", "sum to 1", "25% cost", "the 25% weight", "1.96", "√2", "0.75", "0.25",
+RULE_CONSTANTS = ("above 100%", "more than 5 points", "within 3 points", "n = 8 rows", "Pro $100", "Pro $200", "Pro $500", "of 80 points", "> 5 points", "40 of the 100", "n = 80", "n = 7", "÷ 80", "÷ √7", "±26 Elo", "1/0.75", "carries 75%", "below 3 points", "> 0", "under 40%", "322 ×", "× 322", "322 required", "the 322", "⌈2N/3⌉", "10⁻⁶", "0–100", "0 or 100", "correlations 0, 0.3 and 0.6", "correlation 0", "sum to 1", "25% cost", "the 25% weight", "1.96", "√2", "0.75", "0.25",
                   "factor-2", "factor of 2", "tolerance 0.5 px", "two-thirds", "30 days", "7 days", "45 days", "0.5 W_g", "1.5 W_g")
 _NOT_A_FIGURE = re.compile(
     r"\b[OEIL]\d+\b|\br\d+\b|\b\d{4}-\d{2}-\d{2}(T\d{2}:\d{2}:\d{2}Z)?\b|\b\d{2}:\d{2}(:\d{2})?Z\b"
@@ -484,7 +484,7 @@ def known_names(scores: dict, data: Path = DATA) -> list[str]:
     names |= {leaf.label for leaf in q.ALL_LEAVES.values()}
     routes = json.loads((data / "plan_cost_routes.json").read_text())
     names |= {route["plan"] for route in routes["routes"] if route.get("plan")}
-    names |= {"LiveBench 2.0", "Terminal-Bench 4.0", "FrontierCode 1.1", "Vibe Code Bench v1.1", "Code Migration v1.1", "Bug Hunt Bench",
+    names |= {"LiveBench 2.0", "Terminal-Bench 4.1", "FrontierCode 1.1", "Vibe Code Bench v1.1", "Code Migration v1.1", "Bug Hunt Bench",
               "Coding Agent Index v2.0", "Intelligence Index v4.3.2", "AA-LCR v1.1", "Max 5x", "Max 20x", "Pro 500"}
     return sorted((name for name in names if name and re.search(r"\d", name)), key=len, reverse=True)
 

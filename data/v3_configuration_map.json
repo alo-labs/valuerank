@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "observedAt": "2026-10-25",
+  "observedAt": "2026-11-26",
   "purpose": "Pinned exact-configuration identities of each ranked ValueRank configuration in the AA cost sources that are not on the AA model page (owner decision O15 basket; exact model and effort only, never transferred between efforts or versions).",
   "derivedFrom": "research/2026-10-19-methodology-codesign/basket-cost-capture-2026-10-19.json",
   "sources": {
@@ -35,7 +35,7 @@
     },
     "claude-sonnet-5-5": {
       "coding-agent-index": null,
-      "frontiercode": "Claude Sonnet 5.5 (max with fallback)",
+      "frontiercode": "Claude Sonnet 5.5 (max)",
       "itbench-aa": null
     },
     "gpt-6-astra": {
@@ -45,8 +45,8 @@
     },
     "claude-opus-5-5": {
       "coding-agent-index": null,
-      "frontiercode": "Claude Opus 5.5 (max with fallback)",
-      "itbench-aa": "Claude Opus 5.5 (max with fallback)"
+      "frontiercode": "Claude Opus 5.5 (max)",
+      "itbench-aa": "Claude Opus 5.5 (max)"
     },
     "gpt-5.6-sol": {
       "coding-agent-index": null,
@@ -74,18 +74,18 @@
       "itbench-aa": "GPT-5.6 Luna (max)"
     },
     "gpt-6-luna": {
-      "coding-agent-index": null,
+      "coding-agent-index": "Codex - GPT-6 Luna (Max)",
       "frontiercode": "GPT-6 Luna (max)",
       "itbench-aa": null
     },
     "mimo-v2-6-flash": {
       "coding-agent-index": null,
-      "frontiercode": null,
+      "frontiercode": "MiMo-V2.6-Flash",
       "itbench-aa": null
     },
     "claude-haiku-5-5": {
       "coding-agent-index": null,
-      "frontiercode": null,
+      "frontiercode": "Claude Haiku 5.5 (xhigh)",
       "itbench-aa": null
     },
     "gemini-3.8-flash": {
@@ -140,22 +140,22 @@
     },
     "gpt-6.1-sol-xhigh": {
       "coding-agent-index": null,
-      "frontiercode": null,
+      "frontiercode": "GPT-6.1 Sol (xhigh)",
       "itbench-aa": null
     },
     "gpt-6.1-sol-high": {
       "coding-agent-index": null,
-      "frontiercode": null,
+      "frontiercode": "GPT-6.1 Sol (high)",
       "itbench-aa": null
     },
     "gpt-6.1-sol-medium": {
       "coding-agent-index": null,
-      "frontiercode": null,
+      "frontiercode": "GPT-6.1 Sol (medium)",
       "itbench-aa": null
     },
     "gpt-6.1-sol-low": {
       "coding-agent-index": null,
-      "frontiercode": null,
+      "frontiercode": "GPT-6.1 Sol (low)",
       "itbench-aa": null
     },
     "claude-haiku-5-5-max": {
@@ -165,17 +165,17 @@
     },
     "claude-haiku-5-5-high": {
       "coding-agent-index": null,
-      "frontiercode": null,
+      "frontiercode": "Claude Haiku 5.5 (high)",
       "itbench-aa": null
     },
     "claude-haiku-5-5-medium": {
       "coding-agent-index": null,
-      "frontiercode": null,
+      "frontiercode": "Claude Haiku 5.5 (medium)",
       "itbench-aa": null
     },
     "claude-haiku-5-5-low": {
       "coding-agent-index": null,
-      "frontiercode": null,
+      "frontiercode": "Claude Haiku 5.5 (low)",
       "itbench-aa": null
     },
     "claude-sonnet-5-5-xhigh": {
@@ -220,32 +220,32 @@
     },
     "gpt-6-luna-low": {
       "coding-agent-index": null,
-      "frontiercode": null,
+      "frontiercode": "GPT-6 Luna (low)",
       "itbench-aa": null
     },
     "gpt-6-luna-medium": {
       "coding-agent-index": null,
-      "frontiercode": null,
+      "frontiercode": "GPT-6 Luna (medium)",
       "itbench-aa": null
     },
     "gpt-6-luna-high": {
       "coding-agent-index": null,
-      "frontiercode": null,
+      "frontiercode": "GPT-6 Luna (high)",
       "itbench-aa": null
     },
     "gpt-6-luna-xhigh": {
       "coding-agent-index": null,
-      "frontiercode": null,
+      "frontiercode": "GPT-6 Luna (xhigh)",
       "itbench-aa": null
     },
     "claude-opus-5-5-high": {
       "coding-agent-index": null,
-      "frontiercode": null,
+      "frontiercode": "Claude Opus 5.5 (high)",
       "itbench-aa": null
     },
     "claude-opus-5-5-xhigh": {
       "coding-agent-index": null,
-      "frontiercode": null,
+      "frontiercode": "Claude Opus 5.5 (xhigh)",
       "itbench-aa": null
     },
     "claude-opus-5-5-medium": {
@@ -271,6 +271,121 @@
     "kimi-k3-1-pro": {
       "coding-agent-index": null,
       "frontiercode": "Kimi K3.1 Pro",
+      "itbench-aa": null
+    },
+    "muse-ember-xhigh": {
+      "coding-agent-index": null,
+      "frontiercode": null,
+      "itbench-aa": null
+    },
+    "muse-ember": {
+      "coding-agent-index": null,
+      "frontiercode": null,
+      "itbench-aa": null
+    },
+    "gpt-6.1-terra-medium": {
+      "coding-agent-index": null,
+      "frontiercode": "GPT-6.1 Terra (medium)",
+      "itbench-aa": null
+    },
+    "gpt-6.2-sol-low": {
+      "coding-agent-index": null,
+      "frontiercode": null,
+      "itbench-aa": null
+    },
+    "gpt-6.1-terra-high": {
+      "coding-agent-index": null,
+      "frontiercode": "GPT-6.1 Terra (high)",
+      "itbench-aa": null
+    },
+    "gpt-6.2-sol-medium": {
+      "coding-agent-index": null,
+      "frontiercode": null,
+      "itbench-aa": null
+    },
+    "gpt-6.2-sol-high": {
+      "coding-agent-index": null,
+      "frontiercode": null,
+      "itbench-aa": null
+    },
+    "gpt-6.2-sol-xhigh": {
+      "coding-agent-index": null,
+      "frontiercode": null,
+      "itbench-aa": null
+    },
+    "gpt-6.2-sol": {
+      "coding-agent-index": null,
+      "frontiercode": null,
+      "itbench-aa": null
+    },
+    "gpt-6.2-astra-high": {
+      "coding-agent-index": null,
+      "frontiercode": null,
+      "itbench-aa": null
+    },
+    "gpt-6.2-astra-xhigh": {
+      "coding-agent-index": null,
+      "frontiercode": null,
+      "itbench-aa": null
+    },
+    "gpt-6.2-astra": {
+      "coding-agent-index": null,
+      "frontiercode": null,
+      "itbench-aa": null
+    },
+    "claude-fable-5-2-xhigh": {
+      "coding-agent-index": null,
+      "frontiercode": "Claude Fable 5.2 (xhigh)",
+      "itbench-aa": null
+    },
+    "claude-fable-5-2": {
+      "coding-agent-index": null,
+      "frontiercode": "Claude Fable 5.2 (max)",
+      "itbench-aa": null
+    },
+    "claude-fable-5-2-high": {
+      "coding-agent-index": null,
+      "frontiercode": "Claude Fable 5.2 (high)",
+      "itbench-aa": null
+    },
+    "gemini-4-neon": {
+      "coding-agent-index": null,
+      "frontiercode": null,
+      "itbench-aa": null
+    },
+    "gemini-4-carbon": {
+      "coding-agent-index": null,
+      "frontiercode": null,
+      "itbench-aa": null
+    },
+    "gemini-4-neon-high": {
+      "coding-agent-index": null,
+      "frontiercode": null,
+      "itbench-aa": null
+    },
+    "gpt-6.2-astra-medium": {
+      "coding-agent-index": null,
+      "frontiercode": null,
+      "itbench-aa": null
+    },
+    "gemini-4-neon-medium": {
+      "coding-agent-index": null,
+      "frontiercode": null,
+      "itbench-aa": null
+    },
+    "gpt-6.1-terra-xhigh": {
+      "coding-agent-index": null,
+      "frontiercode": "GPT-6.1 Terra (xhigh)",
+      "itbench-aa": null
+    },
+    "gpt-6.1-terra-low": {
+      "coding-agent-index": null,
+      "frontiercode": "GPT-6.1 Terra (low)",
+      "itbench-aa": null
+    },
+    "gpt-6.1-terra": {
+      "coding-agent-index": null,
+      "frontiercode": "GPT-6.1 Terra (max)",
       "itbench-aa": null
     }
   },
@@ -396,6 +511,24 @@
         "id": "muse-spark-1-3",
         "chart": "itbench-aa",
         "label": "Muse Spark 1.3 (max)"
+      },
+      {
+        "id": "claude-opus-5-5",
+        "chart": "frontiercode",
+        "label": "Claude Opus 5.5 (max with fallback)",
+        "reason": "2026-11-26: AA's chart no longer holds this label (now 'Claude Opus 5.5 (max)')"
+      },
+      {
+        "id": "claude-opus-5-5",
+        "chart": "itbench-aa",
+        "label": "Claude Opus 5.5 (max with fallback)",
+        "reason": "2026-11-26: AA's chart no longer holds this label (now 'Claude Opus 5.5 (max)')"
+      },
+      {
+        "id": "claude-sonnet-5-5",
+        "chart": "frontiercode",
+        "label": "Claude Sonnet 5.5 (max with fallback)",
+        "reason": "2026-11-26: AA's chart no longer holds this label (now 'Claude Sonnet 5.5 (max)')"
       }
     ]
   }

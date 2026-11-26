@@ -15,11 +15,11 @@
   "claude-opus-5-5-high",
   "claude-opus-5-5-xhigh",
   "claude-sonnet-5-5",
-  "gpt-6-1-sol-high",
-  "gpt-6-1-sol-low",
-  "gpt-6-1-sol-xhigh",
-  "gpt-6-1-terra",
-  "gpt-6-1-terra-low",
+  "gpt-6.1-sol-high",
+  "gpt-6.1-sol-low",
+  "gpt-6.1-sol-xhigh",
+  "gpt-6.1-terra",
+  "gpt-6.1-terra-low",
   "gpt-6-astra",
   "gpt-6-astra-high",
   "gpt-6-astra-xhigh",
@@ -115,7 +115,7 @@
      "effort": null,
      "note": "No Muse Ember row, and no mention of the name, in benchmark.json, the combined scoreboard, runs, coverage or run notes at 3be9acd. The board's Meta rows are Muse Spark 1.2/1.3 and Muse Wonder (Full) 1.0, other models; none is transferred (O36)."
     },
-    "gpt-6-1-terra-medium": {
+    "gpt-6.1-terra-medium": {
      "status": "exact",
      "value": 7.3,
      "sourceLabel": "GPT-6.1 Terra (medium effort) - mean of 3",
@@ -127,7 +127,7 @@
      "nRuns": 3,
      "featured": false
     },
-    "gpt-6-2-sol-low": {
+    "gpt-6.2-sol-low": {
      "status": "exact",
      "value": 36,
      "sourceLabel": "GPT-6.2 Sol (low effort) - mean of 3",
@@ -139,7 +139,7 @@
      "nRuns": 3,
      "featured": false
     },
-    "gpt-6-1-terra-high": {
+    "gpt-6.1-terra-high": {
      "status": "exact",
      "value": 9.7,
      "sourceLabel": "GPT-6.1 Terra (high effort) - mean of 3",
@@ -151,7 +151,7 @@
      "nRuns": 3,
      "featured": false
     },
-    "gpt-6-1-sol-medium": {
+    "gpt-6.1-sol-medium": {
      "status": "exact",
      "value": 29,
      "sourceLabel": "GPT-6.1 Sol (medium effort) - mean of 2",
@@ -171,7 +171,7 @@
       }
      ]
     },
-    "gpt-6-2-sol-medium": {
+    "gpt-6.2-sol-medium": {
      "status": "exact",
      "value": 45.7,
      "sourceLabel": "GPT-6.2 Sol (medium effort) - mean of 3",
@@ -183,7 +183,7 @@
      "nRuns": 3,
      "featured": false
     },
-    "gpt-6-2-sol-high": {
+    "gpt-6.2-sol-high": {
      "status": "exact",
      "value": 49.7,
      "sourceLabel": "GPT-6.2 Sol (high effort) - mean of 3",
@@ -195,7 +195,7 @@
      "nRuns": 3,
      "featured": false
     },
-    "gpt-6-2-sol-xhigh": {
+    "gpt-6.2-sol-xhigh": {
      "status": "exact",
      "value": 49,
      "sourceLabel": "GPT-6.2 Sol (xhigh effort) - mean of 3",
@@ -207,7 +207,7 @@
      "nRuns": 3,
      "featured": true
     },
-    "gpt-6-2-sol": {
+    "gpt-6.2-sol": {
      "status": "exact",
      "value": 54.7,
      "sourceLabel": "GPT-6.2 Sol (max effort) - mean of 3",
@@ -219,7 +219,7 @@
      "nRuns": 3,
      "featured": true
     },
-    "gpt-6-2-astra-high": {
+    "gpt-6.2-astra-high": {
      "status": "exact",
      "value": 59.6,
      "sourceLabel": "GPT-6.2 Astra (high effort) - mean of 5",
@@ -231,7 +231,7 @@
      "nRuns": 5,
      "featured": false
     },
-    "gpt-6-2-astra-xhigh": {
+    "gpt-6.2-astra-xhigh": {
      "status": "exact",
      "value": 60.2,
      "sourceLabel": "GPT-6.2 Astra (xhigh effort) - mean of 5",
@@ -251,7 +251,7 @@
       }
      ]
     },
-    "gpt-6-2-astra": {
+    "gpt-6.2-astra": {
      "status": "exact",
      "value": 62.7,
      "sourceLabel": "GPT-6.2 Astra (max effort) - mean of 3",
@@ -377,7 +377,7 @@
       }
      ]
     },
-    "gpt-6-2-astra-medium": {
+    "gpt-6.2-astra-medium": {
      "status": "exact",
      "value": 50.3,
      "sourceLabel": "GPT-6.2 Astra (medium effort) - mean of 3",
@@ -409,7 +409,7 @@
       }
      ]
     },
-    "gpt-6-1-sol": {
+    "gpt-6.1-sol": {
      "status": "exact",
      "value": 44.3,
      "sourceLabel": "GPT-6.1 Sol (max effort) - mean of 3",
@@ -429,7 +429,7 @@
       }
      ]
     },
-    "gpt-6-1-terra-xhigh": {
+    "gpt-6.1-terra-xhigh": {
      "status": "exact",
      "value": 11.3,
      "sourceLabel": "GPT-6.1 Terra (xhigh effort) - mean of 3",
@@ -441,7 +441,7 @@
      "nRuns": 3,
      "featured": false
     },
-    "claude-haiku-5-5-xhigh": {
+    "claude-haiku-5-5": {
      "status": "exact",
      "value": 18.3,
      "sourceLabel": "Haiku 5.5 (xhigh effort) - mean of 3",
@@ -477,7 +477,7 @@
      "nRuns": 3,
      "routeModelId": "xiaomi/mimo-v2.6-flash"
     },
-    "gpt-6-1-terra-low": {
+    "gpt-6.1-terra-low": {
      "status": "exact",
      "value": 6,
      "sourceLabel": "GPT-6.1 Terra (low effort) - mean of 3",
@@ -509,7 +509,7 @@
       }
      ]
     },
-    "gpt-6-1-sol-high": {
+    "gpt-6.1-sol-high": {
      "status": "exact",
      "value": 36.5,
      "sourceLabel": "GPT-6.1 Sol (high effort) - mean of 2",
@@ -529,7 +529,7 @@
       }
      ]
     },
-    "gpt-6-1-sol-xhigh": {
+    "gpt-6.1-sol-xhigh": {
      "status": "exact",
      "value": 42.7,
      "sourceLabel": "GPT-6.1 Sol (xhigh effort) - mean of 3",
@@ -625,7 +625,7 @@
       }
      ]
     },
-    "gpt-6-1-sol-low": {
+    "gpt-6.1-sol-low": {
      "status": "exact",
      "value": 22.5,
      "sourceLabel": "GPT-6.1 Sol (low effort) - mean of 2",
@@ -645,7 +645,7 @@
       }
      ]
     },
-    "gpt-6-1-terra": {
+    "gpt-6.1-terra": {
      "status": "exact",
      "value": 40.7,
      "sourceLabel": "GPT-6.1 Terra (max effort) - mean of 3",
@@ -748,20 +748,20 @@
    "configurationsNotInThe20261101Cohort": [
     "muse-ember-xhigh",
     "muse-ember",
-    "gpt-6-2-sol-low",
-    "gpt-6-2-sol-medium",
-    "gpt-6-2-sol-high",
-    "gpt-6-2-sol-xhigh",
-    "gpt-6-2-sol",
-    "gpt-6-2-astra-high",
-    "gpt-6-2-astra-xhigh",
-    "gpt-6-2-astra",
+    "gpt-6.2-sol-low",
+    "gpt-6.2-sol-medium",
+    "gpt-6.2-sol-high",
+    "gpt-6.2-sol-xhigh",
+    "gpt-6.2-sol",
+    "gpt-6.2-astra-high",
+    "gpt-6.2-astra-xhigh",
+    "gpt-6.2-astra",
     "claude-fable-5-2-xhigh",
     "claude-fable-5-2",
     "claude-fable-5-2-high",
     "gemini-4-neon",
     "gemini-4-neon-high",
-    "gpt-6-2-astra-medium",
+    "gpt-6.2-astra-medium",
     "gemini-4-neon-medium"
    ]
   },
@@ -860,56 +860,56 @@
      "effort": null,
      "note": "No muse-ember row in release 20261106 (nor in the site's model metadata)."
     },
-    "gpt-6-1-terra-medium": {
+    "gpt-6.1-terra-medium": {
      "status": "absent",
      "value": null,
      "sourceLabel": null,
      "effort": null,
      "note": "LiveBench 2.0 has gpt-6.1-terra at max only (Overall 78.57); not transferred."
     },
-    "gpt-6-2-sol-low": {
+    "gpt-6.2-sol-low": {
      "status": "absent",
      "value": null,
      "sourceLabel": null,
      "effort": null,
      "note": "LiveBench 2.0 has gpt-6.2-sol at max only (Overall 80.31); not transferred."
     },
-    "gpt-6-1-terra-high": {
+    "gpt-6.1-terra-high": {
      "status": "absent",
      "value": null,
      "sourceLabel": null,
      "effort": null,
      "note": "LiveBench 2.0 has gpt-6.1-terra at max only (Overall 78.57); not transferred."
     },
-    "gpt-6-1-sol-medium": {
+    "gpt-6.1-sol-medium": {
      "status": "absent",
      "value": null,
      "sourceLabel": null,
      "effort": null,
      "note": "LiveBench 2.0 has gpt-6.1-sol at max only (Overall 81.17); not transferred."
     },
-    "gpt-6-2-sol-medium": {
+    "gpt-6.2-sol-medium": {
      "status": "absent",
      "value": null,
      "sourceLabel": null,
      "effort": null,
      "note": "LiveBench 2.0 has gpt-6.2-sol at max only (Overall 80.31); not transferred."
     },
-    "gpt-6-2-sol-high": {
+    "gpt-6.2-sol-high": {
      "status": "absent",
      "value": null,
      "sourceLabel": null,
      "effort": null,
      "note": "LiveBench 2.0 has gpt-6.2-sol at max only (Overall 80.31); not transferred."
     },
-    "gpt-6-2-sol-xhigh": {
+    "gpt-6.2-sol-xhigh": {
      "status": "absent",
      "value": null,
      "sourceLabel": null,
      "effort": null,
      "note": "LiveBench 2.0 has gpt-6.2-sol at max only (Overall 80.31); not transferred."
     },
-    "gpt-6-2-sol": {
+    "gpt-6.2-sol": {
      "status": "exact",
      "value": 80.31,
      "sourceLabel": "gpt-6.2-sol",
@@ -925,21 +925,21 @@
       "design": 80.0
      }
     },
-    "gpt-6-2-astra-high": {
+    "gpt-6.2-astra-high": {
      "status": "absent",
      "value": null,
      "sourceLabel": null,
      "effort": null,
      "note": "LiveBench 2.0 has gpt-6.2-astra at max only (Overall 84.87); not transferred."
     },
-    "gpt-6-2-astra-xhigh": {
+    "gpt-6.2-astra-xhigh": {
      "status": "absent",
      "value": null,
      "sourceLabel": null,
      "effort": null,
      "note": "LiveBench 2.0 has gpt-6.2-astra at max only (Overall 84.87); not transferred."
     },
-    "gpt-6-2-astra": {
+    "gpt-6.2-astra": {
      "status": "exact",
      "value": 84.87,
      "sourceLabel": "gpt-6.2-astra",
@@ -1042,7 +1042,7 @@
      },
      "previousPinOverall": 85.14
     },
-    "gpt-6-2-astra-medium": {
+    "gpt-6.2-astra-medium": {
      "status": "absent",
      "value": null,
      "sourceLabel": null,
@@ -1056,7 +1056,7 @@
      "effort": null,
      "note": "LiveBench 2.0 has gemini-4-neon at xhigh only (Overall 87.44); not transferred."
     },
-    "gpt-6-1-sol": {
+    "gpt-6.1-sol": {
      "status": "exact",
      "value": 81.17,
      "sourceLabel": "gpt-6.1-sol",
@@ -1073,14 +1073,14 @@
      },
      "previousPinOverall": 84.07
     },
-    "gpt-6-1-terra-xhigh": {
+    "gpt-6.1-terra-xhigh": {
      "status": "absent",
      "value": null,
      "sourceLabel": null,
      "effort": null,
      "note": "LiveBench 2.0 has gpt-6.1-terra at max only (Overall 78.57); not transferred."
     },
-    "claude-haiku-5-5-xhigh": {
+    "claude-haiku-5-5": {
      "status": "absent",
      "value": null,
      "sourceLabel": null,
@@ -1101,7 +1101,7 @@
      "effort": null,
      "note": "No mimo-v2.6-flash row in release 20261106 (nor in the site's model metadata)."
     },
-    "gpt-6-1-terra-low": {
+    "gpt-6.1-terra-low": {
      "status": "absent",
      "value": null,
      "sourceLabel": null,
@@ -1115,14 +1115,14 @@
      "effort": null,
      "note": "LiveBench 2.0 has claude-haiku-5.5 at max only (Overall 68.94); not transferred."
     },
-    "gpt-6-1-sol-high": {
+    "gpt-6.1-sol-high": {
      "status": "absent",
      "value": null,
      "sourceLabel": null,
      "effort": null,
      "note": "LiveBench 2.0 has gpt-6.1-sol at max only (Overall 81.17); not transferred."
     },
-    "gpt-6-1-sol-xhigh": {
+    "gpt-6.1-sol-xhigh": {
      "status": "absent",
      "value": null,
      "sourceLabel": null,
@@ -1167,14 +1167,14 @@
      },
      "previousPinOverall": 64.59
     },
-    "gpt-6-1-sol-low": {
+    "gpt-6.1-sol-low": {
      "status": "absent",
      "value": null,
      "sourceLabel": null,
      "effort": null,
      "note": "LiveBench 2.0 has gpt-6.1-sol at max only (Overall 81.17); not transferred."
     },
-    "gpt-6-1-terra": {
+    "gpt-6.1-terra": {
      "status": "exact",
      "value": 78.57,
      "sourceLabel": "gpt-6.1-terra",
@@ -1254,7 +1254,7 @@
       "value": 83.44
      }
     },
-    "gpt-6-1-sol": {
+    "gpt-6.1-sol": {
      "20261101": {
       "status": "exact",
       "value": 84.07
@@ -1274,7 +1274,7 @@
       "value": 60.42
      }
     },
-    "gpt-6-1-terra": {
+    "gpt-6.1-terra": {
      "20261101": {
       "status": "exact",
       "value": 77.79
@@ -1308,20 +1308,20 @@
    "configurationsNotInThe20261101Cohort": [
     "muse-ember-xhigh",
     "muse-ember",
-    "gpt-6-2-sol-low",
-    "gpt-6-2-sol-medium",
-    "gpt-6-2-sol-high",
-    "gpt-6-2-sol-xhigh",
-    "gpt-6-2-sol",
-    "gpt-6-2-astra-high",
-    "gpt-6-2-astra-xhigh",
-    "gpt-6-2-astra",
+    "gpt-6.2-sol-low",
+    "gpt-6.2-sol-medium",
+    "gpt-6.2-sol-high",
+    "gpt-6.2-sol-xhigh",
+    "gpt-6.2-sol",
+    "gpt-6.2-astra-high",
+    "gpt-6.2-astra-xhigh",
+    "gpt-6.2-astra",
     "claude-fable-5-2-xhigh",
     "claude-fable-5-2",
     "claude-fable-5-2-high",
     "gemini-4-neon",
     "gemini-4-neon-high",
-    "gpt-6-2-astra-medium",
+    "gpt-6.2-astra-medium",
     "gemini-4-neon-medium"
    ]
   },
@@ -1940,7 +1940,7 @@
       "note": "Bug Finding and the penalty are not in the leaf."
      }
     },
-    "gpt-6-1-terra-medium": {
+    "gpt-6.1-terra-medium": {
      "status": "exact",
      "value": 62.57,
      "sourceLabel": "GPT-6.1-Terra (Medium)",
@@ -1981,7 +1981,7 @@
       "note": "Bug Finding and the penalty are not in the leaf."
      }
     },
-    "gpt-6-2-sol-low": {
+    "gpt-6.2-sol-low": {
      "status": "exact",
      "value": 74.56,
      "sourceLabel": "GPT-6.2-Sol (Low)",
@@ -2022,7 +2022,7 @@
       "note": "Bug Finding and the penalty are not in the leaf."
      }
     },
-    "gpt-6-1-terra-high": {
+    "gpt-6.1-terra-high": {
      "status": "exact",
      "value": 61.46,
      "sourceLabel": "GPT-6.1-Terra (High)",
@@ -2063,7 +2063,7 @@
       "note": "Bug Finding and the penalty are not in the leaf."
      }
     },
-    "gpt-6-1-sol-medium": {
+    "gpt-6.1-sol-medium": {
      "status": "exact",
      "value": 73.94,
      "sourceLabel": "GPT-6.1-Sol (Medium)",
@@ -2104,7 +2104,7 @@
       "note": "Bug Finding and the penalty are not in the leaf."
      }
     },
-    "gpt-6-2-sol-medium": {
+    "gpt-6.2-sol-medium": {
      "status": "exact",
      "value": 74.99,
      "sourceLabel": "GPT-6.2-Sol (Medium)",
@@ -2145,7 +2145,7 @@
       "note": "Bug Finding and the penalty are not in the leaf."
      }
     },
-    "gpt-6-2-sol-high": {
+    "gpt-6.2-sol-high": {
      "status": "exact",
      "value": 74.61,
      "sourceLabel": "GPT-6.2-Sol (High)",
@@ -2186,21 +2186,21 @@
       "note": "Bug Finding and the penalty are not in the leaf."
      }
     },
-    "gpt-6-2-sol-xhigh": {
+    "gpt-6.2-sol-xhigh": {
      "status": "absent",
      "value": null,
      "sourceLabel": null,
      "effort": null,
      "note": "Non-matching rows at other efforts: GPT-6.2-Sol (High) [Codex CLI, 2026-11-20] = 83.53; GPT-6.2-Sol (Medium) [Codex CLI, 2026-11-18] = 83.1; GPT-6.2-Sol (Low) [Codex CLI, 2026-11-18] = 83.08."
     },
-    "gpt-6-2-sol": {
+    "gpt-6.2-sol": {
      "status": "absent",
      "value": null,
      "sourceLabel": null,
      "effort": null,
      "note": "Non-matching rows at other efforts: GPT-6.2-Sol (High) [Codex CLI, 2026-11-20] = 83.53; GPT-6.2-Sol (Medium) [Codex CLI, 2026-11-18] = 83.1; GPT-6.2-Sol (Low) [Codex CLI, 2026-11-18] = 83.08."
     },
-    "gpt-6-2-astra-high": {
+    "gpt-6.2-astra-high": {
      "status": "exact",
      "value": 76.33,
      "sourceLabel": "GPT-6.2-Astra (High)",
@@ -2241,14 +2241,14 @@
       "note": "Bug Finding and the penalty are not in the leaf."
      }
     },
-    "gpt-6-2-astra-xhigh": {
+    "gpt-6.2-astra-xhigh": {
      "status": "absent",
      "value": null,
      "sourceLabel": null,
      "effort": null,
      "note": "Non-matching rows at other efforts: GPT-6.2-Astra (High) [Codex CLI, 2026-11-18] = 84.48; GPT-6.2-Astra (Medium) [Codex CLI, 2026-11-18] = 84.06."
     },
-    "gpt-6-2-astra": {
+    "gpt-6.2-astra": {
      "status": "absent",
      "value": null,
      "sourceLabel": null,
@@ -2372,7 +2372,7 @@
      "effort": null,
      "note": "Non-matching rows at other efforts: Opus 5.5 (High) [Claude Code, 2026-11-13] = 84.95; Opus 5.5 (Medium) [Claude Code, 2026-11-13] = 83.15; Opus 5.5 (Low) [Claude Code, 2026-11-13] = 78.19."
     },
-    "gpt-6-2-astra-medium": {
+    "gpt-6.2-astra-medium": {
      "status": "exact",
      "value": 75.82,
      "sourceLabel": "GPT-6.2-Astra (Medium)",
@@ -2454,14 +2454,14 @@
       "note": "Bug Finding and the penalty are not in the leaf."
      }
     },
-    "gpt-6-1-sol": {
+    "gpt-6.1-sol": {
      "status": "absent",
      "value": null,
      "sourceLabel": null,
      "effort": null,
      "note": "Non-matching rows at other efforts: GPT-6.1-Sol (High) [Codex CLI, 2026-11-13] = 83.86; GPT-6.1-Sol (Medium) [Codex CLI, 2026-11-13] = 83.04; GPT-6.1-Sol (Low) [Codex CLI, 2026-11-13] = 78.8."
     },
-    "gpt-6-1-terra-xhigh": {
+    "gpt-6.1-terra-xhigh": {
      "status": "exact",
      "value": 63.7,
      "sourceLabel": "GPT-6.1-Terra (Xhigh)",
@@ -2502,7 +2502,7 @@
       "note": "Bug Finding and the penalty are not in the leaf."
      }
     },
-    "claude-haiku-5-5-xhigh": {
+    "claude-haiku-5-5": {
      "status": "absent",
      "value": null,
      "sourceLabel": null,
@@ -2591,7 +2591,7 @@
       "note": "Bug Finding and the penalty are not in the leaf."
      }
     },
-    "gpt-6-1-terra-low": {
+    "gpt-6.1-terra-low": {
      "status": "absent",
      "value": null,
      "sourceLabel": null,
@@ -2639,7 +2639,7 @@
       "note": "Bug Finding and the penalty are not in the leaf."
      }
     },
-    "gpt-6-1-sol-high": {
+    "gpt-6.1-sol-high": {
      "status": "exact",
      "value": 74.83,
      "sourceLabel": "GPT-6.1-Sol (High)",
@@ -2680,7 +2680,7 @@
       "note": "Bug Finding and the penalty are not in the leaf."
      }
     },
-    "gpt-6-1-sol-xhigh": {
+    "gpt-6.1-sol-xhigh": {
      "status": "absent",
      "value": null,
      "sourceLabel": null,
@@ -2783,7 +2783,7 @@
       "note": "Bug Finding and the penalty are not in the leaf."
      }
     },
-    "gpt-6-1-sol-low": {
+    "gpt-6.1-sol-low": {
      "status": "exact",
      "value": 70.8,
      "sourceLabel": "GPT-6.1-Sol (Low)",
@@ -2824,7 +2824,7 @@
       "note": "Bug Finding and the penalty are not in the leaf."
      }
     },
-    "gpt-6-1-terra": {
+    "gpt-6.1-terra": {
      "status": "exact",
      "value": 69.19,
      "sourceLabel": "GPT-6.1-Terra (Max)",
@@ -2936,20 +2936,20 @@
    "configurationsNotInThe20261101Cohort": [
     "muse-ember-xhigh",
     "muse-ember",
-    "gpt-6-2-sol-low",
-    "gpt-6-2-sol-medium",
-    "gpt-6-2-sol-high",
-    "gpt-6-2-sol-xhigh",
-    "gpt-6-2-sol",
-    "gpt-6-2-astra-high",
-    "gpt-6-2-astra-xhigh",
-    "gpt-6-2-astra",
+    "gpt-6.2-sol-low",
+    "gpt-6.2-sol-medium",
+    "gpt-6.2-sol-high",
+    "gpt-6.2-sol-xhigh",
+    "gpt-6.2-sol",
+    "gpt-6.2-astra-high",
+    "gpt-6.2-astra-xhigh",
+    "gpt-6.2-astra",
     "claude-fable-5-2-xhigh",
     "claude-fable-5-2",
     "claude-fable-5-2-high",
     "gemini-4-neon",
     "gemini-4-neon-high",
-    "gpt-6-2-astra-medium",
+    "gpt-6.2-astra-medium",
     "gemini-4-neon-medium"
    ],
    "valueChangesBasis": "The 2026-11-01 value was Laravel + React-TS + Edge-case (max 60); the changes are compared on that basis (diagnostics.nonBug60), not on today's 80-point value, which has no 2026-11-01 counterpart."
@@ -3031,56 +3031,56 @@
      "effort": null,
      "note": "Non-matching rows at other efforts: Muse Ember (xhigh) = 30.61."
     },
-    "gpt-6-1-terra-medium": {
+    "gpt-6.1-terra-medium": {
      "status": "absent",
      "value": null,
      "sourceLabel": null,
      "effort": null,
      "note": "Non-matching rows at other efforts: GPT-6.1 Terra (max) = 53.33."
     },
-    "gpt-6-2-sol-low": {
+    "gpt-6.2-sol-low": {
      "status": "absent",
      "value": null,
      "sourceLabel": null,
      "effort": null,
      "note": "Non-matching rows at other efforts: GPT-6.2 Sol (max) = 61.52."
     },
-    "gpt-6-1-terra-high": {
+    "gpt-6.1-terra-high": {
      "status": "absent",
      "value": null,
      "sourceLabel": null,
      "effort": null,
      "note": "Non-matching rows at other efforts: GPT-6.1 Terra (max) = 53.33."
     },
-    "gpt-6-1-sol-medium": {
+    "gpt-6.1-sol-medium": {
      "status": "absent",
      "value": null,
      "sourceLabel": null,
      "effort": null,
      "note": "Non-matching rows at other efforts: GPT-6.1 Sol (max) = 60.91."
     },
-    "gpt-6-2-sol-medium": {
+    "gpt-6.2-sol-medium": {
      "status": "absent",
      "value": null,
      "sourceLabel": null,
      "effort": null,
      "note": "Non-matching rows at other efforts: GPT-6.2 Sol (max) = 61.52."
     },
-    "gpt-6-2-sol-high": {
+    "gpt-6.2-sol-high": {
      "status": "absent",
      "value": null,
      "sourceLabel": null,
      "effort": null,
      "note": "Non-matching rows at other efforts: GPT-6.2 Sol (max) = 61.52."
     },
-    "gpt-6-2-sol-xhigh": {
+    "gpt-6.2-sol-xhigh": {
      "status": "absent",
      "value": null,
      "sourceLabel": null,
      "effort": null,
      "note": "Non-matching rows at other efforts: GPT-6.2 Sol (max) = 61.52."
     },
-    "gpt-6-2-sol": {
+    "gpt-6.2-sol": {
      "status": "exact",
      "value": 61.52,
      "sourceLabel": "GPT-6.2 Sol (max)",
@@ -3092,21 +3092,21 @@
      "version": "4.1",
      "renderedInTable": true
     },
-    "gpt-6-2-astra-high": {
+    "gpt-6.2-astra-high": {
      "status": "absent",
      "value": null,
      "sourceLabel": null,
      "effort": null,
      "note": "Non-matching rows at other efforts: GPT-6.2 Astra (max) = 62.12."
     },
-    "gpt-6-2-astra-xhigh": {
+    "gpt-6.2-astra-xhigh": {
      "status": "absent",
      "value": null,
      "sourceLabel": null,
      "effort": null,
      "note": "Non-matching rows at other efforts: GPT-6.2 Astra (max) = 62.12."
     },
-    "gpt-6-2-astra": {
+    "gpt-6.2-astra": {
      "status": "exact",
      "value": 62.12,
      "sourceLabel": "GPT-6.2 Astra (max)",
@@ -3187,7 +3187,7 @@
      "version": "4.1",
      "renderedInTable": true
     },
-    "gpt-6-2-astra-medium": {
+    "gpt-6.2-astra-medium": {
      "status": "absent",
      "value": null,
      "sourceLabel": null,
@@ -3201,7 +3201,7 @@
      "effort": null,
      "note": "Non-matching rows at other efforts: Gemini 4 Neon (xhigh) = 61.21."
     },
-    "gpt-6-1-sol": {
+    "gpt-6.1-sol": {
      "status": "exact",
      "value": 60.91,
      "sourceLabel": "GPT-6.1 Sol (max)",
@@ -3213,14 +3213,14 @@
      "version": "4.1",
      "renderedInTable": true
     },
-    "gpt-6-1-terra-xhigh": {
+    "gpt-6.1-terra-xhigh": {
      "status": "absent",
      "value": null,
      "sourceLabel": null,
      "effort": null,
      "note": "Non-matching rows at other efforts: GPT-6.1 Terra (max) = 53.33."
     },
-    "claude-haiku-5-5-xhigh": {
+    "claude-haiku-5-5": {
      "status": "absent",
      "value": null,
      "sourceLabel": null,
@@ -3246,7 +3246,7 @@
      "version": "4.1",
      "renderedInTable": true
     },
-    "gpt-6-1-terra-low": {
+    "gpt-6.1-terra-low": {
      "status": "absent",
      "value": null,
      "sourceLabel": null,
@@ -3260,14 +3260,14 @@
      "effort": null,
      "note": "Non-matching rows at other efforts: Haiku 5.5 (max) = 40."
     },
-    "gpt-6-1-sol-high": {
+    "gpt-6.1-sol-high": {
      "status": "absent",
      "value": null,
      "sourceLabel": null,
      "effort": null,
      "note": "Non-matching rows at other efforts: GPT-6.1 Sol (max) = 60.91."
     },
-    "gpt-6-1-sol-xhigh": {
+    "gpt-6.1-sol-xhigh": {
      "status": "absent",
      "value": null,
      "sourceLabel": null,
@@ -3317,14 +3317,14 @@
      "version": "4.1",
      "renderedInTable": true
     },
-    "gpt-6-1-sol-low": {
+    "gpt-6.1-sol-low": {
      "status": "absent",
      "value": null,
      "sourceLabel": null,
      "effort": null,
      "note": "Non-matching rows at other efforts: GPT-6.1 Sol (max) = 60.91."
     },
-    "gpt-6-1-terra": {
+    "gpt-6.1-terra": {
      "status": "exact",
      "value": 53.33,
      "sourceLabel": "GPT-6.1 Terra (max)",
@@ -3389,7 +3389,7 @@
       "value": 65.76
      }
     },
-    "gpt-6-1-sol": {
+    "gpt-6.1-sol": {
      "20261101": {
       "status": "exact",
       "value": 58.18
@@ -3439,7 +3439,7 @@
       "value": 15.15
      }
     },
-    "gpt-6-1-terra": {
+    "gpt-6.1-terra": {
      "20261101": {
       "status": "absent",
       "value": null
@@ -3473,20 +3473,20 @@
    "configurationsNotInThe20261101Cohort": [
     "muse-ember-xhigh",
     "muse-ember",
-    "gpt-6-2-sol-low",
-    "gpt-6-2-sol-medium",
-    "gpt-6-2-sol-high",
-    "gpt-6-2-sol-xhigh",
-    "gpt-6-2-sol",
-    "gpt-6-2-astra-high",
-    "gpt-6-2-astra-xhigh",
-    "gpt-6-2-astra",
+    "gpt-6.2-sol-low",
+    "gpt-6.2-sol-medium",
+    "gpt-6.2-sol-high",
+    "gpt-6.2-sol-xhigh",
+    "gpt-6.2-sol",
+    "gpt-6.2-astra-high",
+    "gpt-6.2-astra-xhigh",
+    "gpt-6.2-astra",
     "claude-fable-5-2-xhigh",
     "claude-fable-5-2",
     "claude-fable-5-2-high",
     "gemini-4-neon",
     "gemini-4-neon-high",
-    "gpt-6-2-astra-medium",
+    "gpt-6.2-astra-medium",
     "gemini-4-neon-medium"
    ]
   }

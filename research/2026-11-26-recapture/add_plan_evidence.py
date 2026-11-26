@@ -9,6 +9,7 @@ The recorder's own reading of each report is kept in the record's `recorderReadi
 
 from __future__ import annotations
 
+import hashlib
 import json
 import re
 from pathlib import Path
@@ -104,15 +105,35 @@ def routes_document() -> None:
             profile["partitionSplits"].append(record)
     entry = json.loads((RECORD / "searchlog-entry.json").read_text())
     entry.pop("note", None)
+    # The build names the three stages exactly (O71); stage 3 is the owner's Silver Bullet Deep Research, unavailable in this environment, so
+    # the record says what ran in its place (Perplexity, three models) and the entry carries the substitution plainly.
+    outcomes = ["no new report admitted by this stage alone; 37 searches and about 70 page fetches (stage1/queries-websearch.md)",
+                "structured sweeps of 38,996 Reddit posts, 3,919 comments, 1,695 Hacker News items, 341 Bluesky posts and X post JSON; the Google forum, OpenAI community and LINUX DO sweeps were rate-limited and partial (stage2/README.md)",
+                "the same prompt to three Perplexity models (Claude Sonnet 5.5, GPT-6.2 Sol, Kimi K3); every claim re-fetched; several of their claims were wrong or unverifiable (stage3/README.md)"]
+    names = list(__import__("valuerank.value_v3", fromlist=["O71_STAGES"]).O71_STAGES)
+    for stage, name, outcome in zip(entry["stages"], names, outcomes):
+        stage["actualStage"] = stage["stage"]
+        stage["stage"] = name
+        stage["outcome"] = outcome
+    entry["stages"][2]["degraded"] = "Silver Bullet's Deep Research is unavailable in this environment; this stage ran through Perplexity (three models), as the record states"
     entry["models"] = ["Claude Fable 5.2", "Claude Opus 5.5", "Claude Sonnet 5.5", "Claude Haiku 5.5", "GPT-6.2 Sol", "GPT-6.2 Astra", "GPT-6.1 Sol", "GPT-6.1 Terra",
                        "GPT-6 Astra", "GPT-6 Luna", "Gemini 4 Neon", "Gemini 4 Carbon", "Muse Ember", "MiMo-V2.6-Flash"]
-    if not any(item.get("searchedOn") == entry["searchedOn"] for item in policy["searchLog"]):
-        policy["searchLog"].append(entry)
+    policy["searchLog"] = [item for item in policy["searchLog"] if item.get("searchedOn") != entry["searchedOn"]] + [entry]
     policy["searchCutoff"] = entry["searchedOn"]
+    document["asOf"] = entry["searchedOn"]
+    policy["reportingWindow"] = {"start": "2026-10-27", "end": "2026-11-26"}  # E213: the 30 days ending on the release cutoff
     items = policy["announcedChanges"]["items"]
     for item in ANNOUNCED:
         if item not in items:
             items.append(item)
+    source = document["sourceEvidence"]["semianalysis"]
+    if not any(item.get("readOn") == "2026-11-26" for item in source["rereads"]):
+        source["rereads"].append({
+            "readOn": "2026-11-26",
+            "result": "the article page was fetched again (public part); the two figures it states in text, $2,485 of Fable 5.1 on Max 20x and $2,897 of GPT-6 Astra on Pro 200, equal the transcription; the other transcribed figures sit in chart images that this read cannot decode, so they are not re-verified; the page still shows the publication date Oct 05, 2026 and dateModified equals datePublished (2026-10-05T20:01:09Z), so no revision note",
+            "file": "research/2026-11-26-plan-allowances/semianalysis/anthropic-subscriptions-offer-5x.html",
+            "sha256": hashlib.sha256((ROOT / "research/2026-11-26-plan-allowances/semianalysis/anthropic-subscriptions-offer-5x.html").read_bytes()).hexdigest(),
+            "fetchedAt": "2026-11-26T13:40:00Z"})
     policy["openCodeGoApplication"] = policy["openCodeGoApplication"].rstrip() + (
         " The page was read again on 2026-11-26T03:10:58Z (SHA-256 40c238db6cfc8ae3dcb3ecef1c309af1e1a376bebd2ca12cf7b85228a971379c, "
         "research/2026-11-26-plan-allowances/opencode-go/): no cohort model's monthly dollar limit or fee changed and none was added or removed.")

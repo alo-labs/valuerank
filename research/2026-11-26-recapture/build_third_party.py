@@ -52,7 +52,7 @@ def bug_hunt() -> None:
         cell = bug["coverage"][model_id]
         old = previous.get(model_id) or {}
         if cell["status"] == "exact":
-            if old.get("matched") and old.get("fixedOf105") == cell["value"] and old.get("evaluatedModel") == cell["sourceLabel"]:
+            if old.get("matched") and old.get("fixedOf105") == cell["value"] and old.get("evaluatedModel") == cell["sourceLabel"] and not cell.get("supersededRowsOnBoard"):
                 models.append(old)
                 continue
             runs = cell.get("nRuns") or 1
@@ -66,6 +66,11 @@ def bug_hunt() -> None:
                 "note": cell.get("note") or f"Owner-published {'mean of ' + str(runs) if runs > 1 else 'single run'}, read 2026-11-26 (O145).",
                 # E206: a record that is not the largest-sample result carries the board read's selection reason.
                 **({"selectionReason": cell["selectionReason"]} if cell.get("selectionReason") else {}),
+                # 2026-11-26: a rerun on a newer harness version supersedes the board's older rows for the configuration (E206 keeps
+                # the largest-sample rule for current rows; a superseded row is not a candidate, and the record says so).
+                **({"selectionReason": "the board marks the older row(s) of this configuration superseded by this rerun on a newer harness version: "
+                                       + "; ".join(f"{row['id']} ({row['fixed']}, {row['date']})" for row in cell["supersededRowsOnBoard"])}
+                   if cell.get("supersededRowsOnBoard") and not cell.get("selectionReason") else {}),
             })
         else:
             reason = cell.get("note") or "No owner-published run of this exact configuration."

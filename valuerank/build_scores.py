@@ -120,6 +120,24 @@ DEVELOPER = {
     "Claude Sonnet 5.5 (low)": "Anthropic",
     "Muse Spark 1.3 (xhigh)": "Meta",
     "Grok 4.6 (xhigh)": "xAI",
+    # 2026-11-26 cohort (AA Intelligence Index v5.0.2): the new GPT-6.2, Claude Fable 5.2, Gemini 4 Neon and Muse Ember rows.
+    "Muse Ember (xhigh)": "Meta",
+    "Muse Ember (max)": "Meta",
+    "GPT-6.2 Sol (low)": "OpenAI",
+    "GPT-6.2 Sol (medium)": "OpenAI",
+    "GPT-6.2 Sol (high)": "OpenAI",
+    "GPT-6.2 Sol (xhigh)": "OpenAI",
+    "GPT-6.2 Sol (max)": "OpenAI",
+    "GPT-6.2 Astra (high)": "OpenAI",
+    "GPT-6.2 Astra (xhigh)": "OpenAI",
+    "GPT-6.2 Astra (max)": "OpenAI",
+    "Claude Fable 5.2 (xhigh)": "Anthropic",
+    "Claude Fable 5.2 (max)": "Anthropic",
+    "Claude Fable 5.2 (high)": "Anthropic",
+    "Gemini 4 Neon (xhigh)": "Google DeepMind",
+    "Gemini 4 Neon (high)": "Google DeepMind",
+    "GPT-6.2 Astra (medium)": "OpenAI",
+    "Gemini 4 Neon (medium)": "Google DeepMind",
 }
 
 SHORT = {
@@ -197,6 +215,24 @@ SHORT = {
     "Muse Spark 1.3 (xhigh)": "Muse Spark 1.3 (xhigh)",
     "Grok 4.6 (xhigh)": "Grok 4.6 (xhigh)",
     "Claude Haiku 5.5 (xhigh)": "Haiku 5.5 xhigh",
+    # 2026-11-26 cohort (AA Intelligence Index v5.0.2).
+    "Muse Ember (xhigh)": "Muse Ember (xhigh)",
+    "Muse Ember (max)": "Muse Ember (max)",
+    "GPT-6.2 Sol (low)": "GPT-6.2 Sol (low)",
+    "GPT-6.2 Sol (medium)": "GPT-6.2 Sol (medium)",
+    "GPT-6.2 Sol (high)": "GPT-6.2 Sol (high)",
+    "GPT-6.2 Sol (xhigh)": "GPT-6.2 Sol (xhigh)",
+    "GPT-6.2 Sol (max)": "GPT-6.2 Sol (max)",
+    "GPT-6.2 Astra (high)": "GPT-6.2 Astra (high)",
+    "GPT-6.2 Astra (xhigh)": "GPT-6.2 Astra (xhigh)",
+    "GPT-6.2 Astra (max)": "GPT-6.2 Astra (max)",
+    "Claude Fable 5.2 (xhigh)": "Fable 5.2 (xhigh)",
+    "Claude Fable 5.2 (max)": "Fable 5.2 (max)",
+    "Claude Fable 5.2 (high)": "Fable 5.2 (high)",
+    "Gemini 4 Neon (xhigh)": "Gem 4 Neon (xhigh)",
+    "Gemini 4 Neon (high)": "Gem 4 Neon (high)",
+    "GPT-6.2 Astra (medium)": "GPT-6.2 Astra (medium)",
+    "Gemini 4 Neon (medium)": "Gem 4 Neon (medium)",
 }
 
 # The priority values are ValueRank's quality priorities, not the Artificial
@@ -209,7 +245,7 @@ COST_MODE = "aa-per-index-point"
 CANDIDATES = [
     (COST_KEY, "Cost", False, None),
     ("omniNonHallucination", "Non-Hallucination", True, 6),
-    ("terminalBenchV4", "Terminal-Bench 4.0", True, 6),
+    ("terminalBenchV4", "Terminal-Bench 4.1", True, 6),
     ("livebenchInstructionFollowing", "Instruction Following (LiveBench)", True, 5),
     ("gdpvalV21", "GDPval-AA v2.1", True, 6),
     ("automationBenchAA", "AutomationBench-AA", True, 5),
@@ -1382,7 +1418,7 @@ def main(*, root: Path = ROOT, data: Path = DATA) -> int:
         },
         "terminalBenchV4": {
             "group": "primary" if "terminalBenchV4" in primary_dimension_keys else "supplemental",
-            "label": "Terminal-Bench 4.0",
+            "label": "Terminal-Bench 4.1",
             "availableN": sum(row["terminalBenchV4"] is not None for row in primary_rows),
             "cohortN": len(primary_rows),
             "coveragePct": round(100 * sum(row["terminalBenchV4"] is not None for row in primary_rows) / len(primary_rows), 2),
@@ -1561,7 +1597,7 @@ def main(*, root: Path = ROOT, data: Path = DATA) -> int:
         key: data["missing"] for key, data in coverage.items() if data["missing"]
     }
     manifest["scoring"]["providerClaimsUsed"] = [
-        {"model": row["name"], "benchmark": "Terminal-Bench 4.0", "sourceUrl": row["terminalBenchV4Claim"]["sourceUrl"]}
+        {"model": row["name"], "benchmark": "Terminal-Bench 4.1", "sourceUrl": row["terminalBenchV4Claim"]["sourceUrl"]}
         for row in primary_rows if row.get("terminalBenchV4Claim")
     ]
 
