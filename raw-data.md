@@ -258,6 +258,17 @@ Every input behind the published scores, with the artifact and locator that hold
 | GPT-6.1 Sol (xhigh) | HLE-Diamond | 0.558 | fraction | 55.80 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=gpt-6-1-sol-xhigh].model.hleDiamond` |
 | GPT-6.1 Sol (xhigh) | Terminal-Bench-Science 0.1 | 0.504761904761905 | fraction | 50.48 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=gpt-6-1-sol-xhigh].model.terminalBenchScience` |
 | GPT-6.1 Sol (xhigh) | CritPt v2 (hard subset) | 0.695 | fraction | 69.50 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=gpt-6-1-sol-xhigh].model.critptAgenticHard` |
+| Claude Fable 5.2 (high) | FrontierCode 2.0 | 0.491275757575758 | fraction | 49.13 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=claude-fable-5-2-high].model.frontierCode20` |
+| Claude Fable 5.2 (high) | Terminal-Bench 4.1 (AA run) | 60.1010101010101 | percent | 60.10 | mini-SWE-agent | `data/aa/aa_v432_snapshot.json` `pages[model.slug=claude-fable-5-2-high].model.terminalBench41` |
+| Claude Fable 5.2 (high) | Bug Hunt Bench | 59.5 | bugs fixed, planted plus unplanted (O163, O170) | 42.74 | Fable 5.2 (high effort) - mean of 2 | `data/bug_hunt.json` `models[modelId=claude-fable-5-2-high].fixedOf105 + models[modelId=claude-fable-5-2-high].extras` |
+| Claude Fable 5.2 (high) | GDPval-AA v2.1 | 1718.56 | Elo | 60.93 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=claude-fable-5-2-high].model.gdpval` |
+| Claude Fable 5.2 (high) | GDP.pdf (AA) | 0.218 | fraction | 21.80 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=claude-fable-5-2-high].model.gdpPdfAllPass` |
+| Claude Fable 5.2 (high) | AutomationBench-AA | 0.7135975994544773 | fraction | 71.36 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=claude-fable-5-2-high].model.automationBenchPartialScore` |
+| Claude Fable 5.2 (high) | AA-Omniscience v1.1 | 64.03333333333333 | AA Omniscience Index | 82.02 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=claude-fable-5-2-high].model.omniscience` |
+| Claude Fable 5.2 (high) | AA-LCR v1.1 | 0.833333333333333 | fraction | 83.33 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=claude-fable-5-2-high].model.lcr` |
+| Claude Fable 5.2 (high) | HLE-Diamond | 0.738 | fraction | 73.80 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=claude-fable-5-2-high].model.hleDiamond` |
+| Claude Fable 5.2 (high) | Terminal-Bench-Science 0.1 | 0.7 | fraction | 70.00 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=claude-fable-5-2-high].model.terminalBenchScience` |
+| Claude Fable 5.2 (high) | CritPt v2 (hard subset) | 0.73 | fraction | 73.00 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=claude-fable-5-2-high].model.critptAgenticHard` |
 | Claude Opus 5.5 (xhigh) | FrontierCode 2.0 | 0.442261111111111 | fraction | 44.23 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=claude-opus-5-5-xhigh].model.frontierCode20` |
 | Claude Opus 5.5 (xhigh) | Terminal-Bench 4.1 (AA run) | 59.5959595959596 | percent | 59.60 | mini-SWE-agent | `data/aa/aa_v432_snapshot.json` `pages[model.slug=claude-opus-5-5-xhigh].model.terminalBench41` |
 | Claude Opus 5.5 (xhigh) | Bug Hunt Bench | 49.3 | bugs fixed, planted plus unplanted (O163, O170) | 35.42 | Opus 5.5 (xhigh effort) - mean of 3 | `data/bug_hunt.json` `models[modelId=claude-opus-5-5-xhigh].fixedOf105 + models[modelId=claude-opus-5-5-xhigh].extras` |
@@ -269,6 +280,28 @@ Every input behind the published scores, with the artifact and locator that hold
 | Claude Opus 5.5 (xhigh) | HLE-Diamond | 0.64 | fraction | 64.00 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=claude-opus-5-5-xhigh].model.hleDiamond` |
 | Claude Opus 5.5 (xhigh) | Terminal-Bench-Science 0.1 | 0.619047619047619 | fraction | 61.90 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=claude-opus-5-5-xhigh].model.terminalBenchScience` |
 | Claude Opus 5.5 (xhigh) | CritPt v2 (hard subset) | 0.675 | fraction | 67.50 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=claude-opus-5-5-xhigh].model.critptAgenticHard` |
+| Claude Fable 5.2 (xhigh) | FrontierCode 2.0 | 0.475810858585859 | fraction | 47.58 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=claude-fable-5-2-xhigh].model.frontierCode20` |
+| Claude Fable 5.2 (xhigh) | Terminal-Bench 4.1 (AA run) | 61.616161616161605 | percent | 61.62 | mini-SWE-agent | `data/aa/aa_v432_snapshot.json` `pages[model.slug=claude-fable-5-2-xhigh].model.terminalBench41` |
+| Claude Fable 5.2 (xhigh) | Bug Hunt Bench | 65.7 | bugs fixed, planted plus unplanted (O163, O170) | 47.20 | Fable 5.2 (xhigh effort) - mean of 3 | `data/bug_hunt.json` `models[modelId=claude-fable-5-2-xhigh].fixedOf105 + models[modelId=claude-fable-5-2-xhigh].extras` |
+| Claude Fable 5.2 (xhigh) | GDPval-AA v2.1 | 1752.56 | Elo | 62.63 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=claude-fable-5-2-xhigh].model.gdpval` |
+| Claude Fable 5.2 (xhigh) | GDP.pdf (AA) | 0.214 | fraction | 21.40 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=claude-fable-5-2-xhigh].model.gdpPdfAllPass` |
+| Claude Fable 5.2 (xhigh) | AutomationBench-AA | 0.7416293165236524 | fraction | 74.16 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=claude-fable-5-2-xhigh].model.automationBenchPartialScore` |
+| Claude Fable 5.2 (xhigh) | AA-Omniscience v1.1 | 64.76666666666667 | AA Omniscience Index | 82.38 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=claude-fable-5-2-xhigh].model.omniscience` |
+| Claude Fable 5.2 (xhigh) | AA-LCR v1.1 | 0.826666666666667 | fraction | 82.67 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=claude-fable-5-2-xhigh].model.lcr` |
+| Claude Fable 5.2 (xhigh) | HLE-Diamond | 0.758 | fraction | 75.80 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=claude-fable-5-2-xhigh].model.hleDiamond` |
+| Claude Fable 5.2 (xhigh) | Terminal-Bench-Science 0.1 | 0.676190476190476 | fraction | 67.62 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=claude-fable-5-2-xhigh].model.terminalBenchScience` |
+| Claude Fable 5.2 (xhigh) | CritPt v2 (hard subset) | 0.735 | fraction | 73.50 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=claude-fable-5-2-xhigh].model.critptAgenticHard` |
+| Claude Fable 5.2 (max) | FrontierCode 2.0 | 0.487597222222222 | fraction | 48.76 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=claude-fable-5-2].model.frontierCode20` |
+| Claude Fable 5.2 (max) | Terminal-Bench 4.1 (AA run) | 61.616161616161605 | percent | 61.62 | mini-SWE-agent | `data/aa/aa_v432_snapshot.json` `pages[model.slug=claude-fable-5-2].model.terminalBench41` |
+| Claude Fable 5.2 (max) | Bug Hunt Bench | 82.7 | bugs fixed, planted plus unplanted (O163, O170) | 59.41 | Fable 5.2 (max effort) - mean of 3 | `data/bug_hunt.json` `models[modelId=claude-fable-5-2].fixedOf105 + models[modelId=claude-fable-5-2].extras` |
+| Claude Fable 5.2 (max) | GDPval-AA v2.1 | 1830.14 | Elo | 66.51 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=claude-fable-5-2].model.gdpval` |
+| Claude Fable 5.2 (max) | GDP.pdf (AA) | 0.242 | fraction | 24.20 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=claude-fable-5-2].model.gdpPdfAllPass` |
+| Claude Fable 5.2 (max) | AutomationBench-AA | 0.7642233832611831 | fraction | 76.42 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=claude-fable-5-2].model.automationBenchPartialScore` |
+| Claude Fable 5.2 (max) | AA-Omniscience v1.1 | 66.76666666666667 | AA Omniscience Index | 83.38 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=claude-fable-5-2].model.omniscience` |
+| Claude Fable 5.2 (max) | AA-LCR v1.1 | 0.833333333333333 | fraction | 83.33 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=claude-fable-5-2].model.lcr` |
+| Claude Fable 5.2 (max) | HLE-Diamond | 0.802 | fraction | 80.20 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=claude-fable-5-2].model.hleDiamond` |
+| Claude Fable 5.2 (max) | Terminal-Bench-Science 0.1 | 0.733333333333333 | fraction | 73.33 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=claude-fable-5-2].model.terminalBenchScience` |
+| Claude Fable 5.2 (max) | CritPt v2 (hard subset) | 0.765 | fraction | 76.50 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=claude-fable-5-2].model.critptAgenticHard` |
 | GPT-6 Astra (xhigh) | FrontierCode 2.0 | 0.414029545454545 | fraction | 41.40 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=gpt-6-astra-xhigh].model.frontierCode20` |
 | GPT-6 Astra (xhigh) | Terminal-Bench 4.1 (AA run) | 60.1010101010101 | percent | 60.10 | mini-SWE-agent | `data/aa/aa_v432_snapshot.json` `pages[model.slug=gpt-6-astra-xhigh].model.terminalBench41` |
 | GPT-6 Astra (xhigh) | Bug Hunt Bench | 96.0 | bugs fixed, planted plus unplanted (O163, O170) | 68.97 | GPT-6 Astra (xhigh effort) | `data/bug_hunt.json` `models[modelId=gpt-6-astra-xhigh].fixedOf105 + models[modelId=gpt-6-astra-xhigh].extras` |
@@ -302,39 +335,6 @@ Every input behind the published scores, with the artifact and locator that hold
 | GPT-6.1 Terra (low) | HLE-Diamond | 0.249 | fraction | 24.90 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=gpt-6-1-terra-low].model.hleDiamond` |
 | GPT-6.1 Terra (low) | Terminal-Bench-Science 0.1 | 0.0761904761904762 | fraction | 7.62 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=gpt-6-1-terra-low].model.terminalBenchScience` |
 | GPT-6.1 Terra (low) | CritPt v2 (hard subset) | 0.505 | fraction | 50.50 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=gpt-6-1-terra-low].model.critptAgenticHard` |
-| Claude Fable 5.2 (max) | FrontierCode 2.0 | 0.487597222222222 | fraction | 48.76 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=claude-fable-5-2].model.frontierCode20` |
-| Claude Fable 5.2 (max) | Terminal-Bench 4.1 (AA run) | 61.616161616161605 | percent | 61.62 | mini-SWE-agent | `data/aa/aa_v432_snapshot.json` `pages[model.slug=claude-fable-5-2].model.terminalBench41` |
-| Claude Fable 5.2 (max) | Bug Hunt Bench | 82.7 | bugs fixed, planted plus unplanted (O163, O170) | 59.41 | Fable 5.2 (max effort) - mean of 3 | `data/bug_hunt.json` `models[modelId=claude-fable-5-2].fixedOf105 + models[modelId=claude-fable-5-2].extras` |
-| Claude Fable 5.2 (max) | GDPval-AA v2.1 | 1830.14 | Elo | 66.51 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=claude-fable-5-2].model.gdpval` |
-| Claude Fable 5.2 (max) | GDP.pdf (AA) | 0.242 | fraction | 24.20 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=claude-fable-5-2].model.gdpPdfAllPass` |
-| Claude Fable 5.2 (max) | AutomationBench-AA | 0.7642233832611831 | fraction | 76.42 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=claude-fable-5-2].model.automationBenchPartialScore` |
-| Claude Fable 5.2 (max) | AA-Omniscience v1.1 | 66.76666666666667 | AA Omniscience Index | 83.38 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=claude-fable-5-2].model.omniscience` |
-| Claude Fable 5.2 (max) | AA-LCR v1.1 | 0.833333333333333 | fraction | 83.33 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=claude-fable-5-2].model.lcr` |
-| Claude Fable 5.2 (max) | HLE-Diamond | 0.802 | fraction | 80.20 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=claude-fable-5-2].model.hleDiamond` |
-| Claude Fable 5.2 (max) | Terminal-Bench-Science 0.1 | 0.733333333333333 | fraction | 73.33 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=claude-fable-5-2].model.terminalBenchScience` |
-| Claude Fable 5.2 (max) | CritPt v2 (hard subset) | 0.765 | fraction | 76.50 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=claude-fable-5-2].model.critptAgenticHard` |
-| Claude Fable 5.2 (xhigh) | FrontierCode 2.0 | 0.475810858585859 | fraction | 47.58 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=claude-fable-5-2-xhigh].model.frontierCode20` |
-| Claude Fable 5.2 (xhigh) | Terminal-Bench 4.1 (AA run) | 61.616161616161605 | percent | 61.62 | mini-SWE-agent | `data/aa/aa_v432_snapshot.json` `pages[model.slug=claude-fable-5-2-xhigh].model.terminalBench41` |
-| Claude Fable 5.2 (xhigh) | Bug Hunt Bench | 65.7 | bugs fixed, planted plus unplanted (O163, O170) | 47.20 | Fable 5.2 (xhigh effort) - mean of 3 | `data/bug_hunt.json` `models[modelId=claude-fable-5-2-xhigh].fixedOf105 + models[modelId=claude-fable-5-2-xhigh].extras` |
-| Claude Fable 5.2 (xhigh) | GDPval-AA v2.1 | 1752.56 | Elo | 62.63 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=claude-fable-5-2-xhigh].model.gdpval` |
-| Claude Fable 5.2 (xhigh) | GDP.pdf (AA) | 0.214 | fraction | 21.40 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=claude-fable-5-2-xhigh].model.gdpPdfAllPass` |
-| Claude Fable 5.2 (xhigh) | AutomationBench-AA | 0.7416293165236524 | fraction | 74.16 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=claude-fable-5-2-xhigh].model.automationBenchPartialScore` |
-| Claude Fable 5.2 (xhigh) | AA-Omniscience v1.1 | 64.76666666666667 | AA Omniscience Index | 82.38 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=claude-fable-5-2-xhigh].model.omniscience` |
-| Claude Fable 5.2 (xhigh) | AA-LCR v1.1 | 0.826666666666667 | fraction | 82.67 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=claude-fable-5-2-xhigh].model.lcr` |
-| Claude Fable 5.2 (xhigh) | HLE-Diamond | 0.758 | fraction | 75.80 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=claude-fable-5-2-xhigh].model.hleDiamond` |
-| Claude Fable 5.2 (xhigh) | Terminal-Bench-Science 0.1 | 0.676190476190476 | fraction | 67.62 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=claude-fable-5-2-xhigh].model.terminalBenchScience` |
-| Claude Fable 5.2 (xhigh) | CritPt v2 (hard subset) | 0.735 | fraction | 73.50 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=claude-fable-5-2-xhigh].model.critptAgenticHard` |
-| Claude Fable 5.2 (high) | FrontierCode 2.0 | 0.491275757575758 | fraction | 49.13 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=claude-fable-5-2-high].model.frontierCode20` |
-| Claude Fable 5.2 (high) | Terminal-Bench 4.1 (AA run) | 60.1010101010101 | percent | 60.10 | mini-SWE-agent | `data/aa/aa_v432_snapshot.json` `pages[model.slug=claude-fable-5-2-high].model.terminalBench41` |
-| Claude Fable 5.2 (high) | Bug Hunt Bench | 59.5 | bugs fixed, planted plus unplanted (O163, O170) | 42.74 | Fable 5.2 (high effort) - mean of 2 | `data/bug_hunt.json` `models[modelId=claude-fable-5-2-high].fixedOf105 + models[modelId=claude-fable-5-2-high].extras` |
-| Claude Fable 5.2 (high) | GDPval-AA v2.1 | 1718.56 | Elo | 60.93 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=claude-fable-5-2-high].model.gdpval` |
-| Claude Fable 5.2 (high) | GDP.pdf (AA) | 0.218 | fraction | 21.80 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=claude-fable-5-2-high].model.gdpPdfAllPass` |
-| Claude Fable 5.2 (high) | AutomationBench-AA | 0.7135975994544773 | fraction | 71.36 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=claude-fable-5-2-high].model.automationBenchPartialScore` |
-| Claude Fable 5.2 (high) | AA-Omniscience v1.1 | 64.03333333333333 | AA Omniscience Index | 82.02 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=claude-fable-5-2-high].model.omniscience` |
-| Claude Fable 5.2 (high) | AA-LCR v1.1 | 0.833333333333333 | fraction | 83.33 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=claude-fable-5-2-high].model.lcr` |
-| Claude Fable 5.2 (high) | HLE-Diamond | 0.738 | fraction | 73.80 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=claude-fable-5-2-high].model.hleDiamond` |
-| Claude Fable 5.2 (high) | Terminal-Bench-Science 0.1 | 0.7 | fraction | 70.00 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=claude-fable-5-2-high].model.terminalBenchScience` |
-| Claude Fable 5.2 (high) | CritPt v2 (hard subset) | 0.73 | fraction | 73.00 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=claude-fable-5-2-high].model.critptAgenticHard` |
 | Claude Haiku 5.5 (low) | FrontierCode 2.0 | 0.0803666666666667 | fraction | 8.04 | — | `data/aa/aa_v432_snapshot.json` `pages[model.slug=claude-haiku-5-5-low].model.frontierCode20` |
 | Claude Haiku 5.5 (low) | Terminal-Bench 4.1 (AA run) | 12.6262626262626 | percent | 12.63 | mini-SWE-agent | `data/aa/aa_v432_snapshot.json` `pages[model.slug=claude-haiku-5-5-low].model.terminalBench41` |
 | Claude Haiku 5.5 (low) | Bug Hunt Bench | 13.0 | bugs fixed, planted plus unplanted (O163, O170) | 9.34 | Haiku 5.5 (low effort) | `data/bug_hunt.json` `models[modelId=claude-haiku-5-5-low].fixedOf105 + models[modelId=claude-haiku-5-5-low].extras` |
@@ -915,6 +915,13 @@ Route evidence as of 2026-11-26. Full allocation regimes, workloads and notes ar
 | OpenCode Go $10 · GPT-6 Luna (xhigh) · published dollar limit ($15 a month) | GPT-6 Luna (xhigh) | $10.00 | 1.5× | Published dollar limit (owner decisions O198 and O203; the plan's terms, read after the release cutoff, not a measurement) | — | 2026-11-11 | [Source](https://opencode.ai/docs/console/go/) |
 | OpenCode Go $10 · Kimi K3.1 Pro · published dollar limit ($15 a month) | kimi-k3-1-pro | $10.00 | 1.5× | Published dollar limit (owner decisions O198 and O203; the plan's terms, read after the release cutoff, not a measurement) | — | 2026-11-11 | [Source](https://opencode.ai/docs/console/go/) |
 | OpenCode Go $10 · MiMo-V2.6-Pro · published dollar limit ($15 a month) | mimo-v2-6-pro | $10.00 | 1.5× | Published dollar limit (owner decisions O198 and O203; the plan's terms, read after the release cutoff, not a measurement) | — | 2026-11-11 | [Source](https://opencode.ai/docs/console/go/) |
+| Claude Max 5x $100 · common Claude assumption | Claude Fable 5.2 (max) | $100.00 | 57.25× | Provisional assumption | Opus 5.5 | 2026-10-06 | [Source](https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x) |
+| Claude Max 5x $100 · common Claude assumption | Claude Fable 5.2 (high) | $100.00 | 57.25× | Provisional assumption | Opus 5.5 | 2026-10-06 | [Source](https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x) |
+| Claude Max 5x $100 · common Claude assumption | Claude Fable 5.2 (xhigh) | $100.00 | 57.25× | Provisional assumption | Opus 5.5 | 2026-10-06 | [Source](https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x) |
+| Claude Max 20x $200 · common Claude assumption | Claude Fable 5.2 (max) | $200.00 | 58.63× | Provisional assumption | Opus 5.5 | 2026-10-06 | [Source](https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x) |
+| Claude Max 20x $200 · common Claude assumption | Claude Fable 5.2 (high) | $200.00 | 58.63× | Provisional assumption | Opus 5.5 | 2026-10-06 | [Source](https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x) |
+| Claude Max 20x $200 · common Claude assumption | Claude Fable 5.2 (xhigh) | $200.00 | 58.63× | Provisional assumption | Opus 5.5 | 2026-10-06 | [Source](https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x) |
+| Claude Max $200 · Opus 5.5 · two end-user reports (O218) | Claude Opus 5.5 (max) | $200.00 | 54.21× | end user report | — | 2026-11-16 | [Source](https://www.reddit.com/r/ClaudeCode/comments/1xy4zwk/) |
 
 ### Plan amounts and their lineage
 
@@ -930,7 +937,7 @@ Each routed row's amount with what it measures, how it was derived and which obj
 
 ## Evidence bundle
 
-Bundle hash `b79762f96a06b3b62ee8abbb33aae7797fe91146b600b7a7b34f8322b70c8369`: every published output is rebuilt from these artifacts at the pinned publication clock (npm run verify:docs), never from live pages.
+Bundle hash `41d81f9cbf397403dee750f3485747efac16b2a228f22295b6ed52611c8f136d`: every published output is rebuilt from these artifacts at the pinned publication clock (npm run verify:docs), never from live pages.
 
 | Key | Artifact | SHA-256 | Captured | Extractor |
 |---|---|---|---|---|
@@ -944,7 +951,7 @@ Bundle hash `b79762f96a06b3b62ee8abbb33aae7797fe91146b600b7a7b34f8322b70c8369`: 
 | frontierCapture | `data/aa_frontier_capture.json` | `69a062faea329e408166def17d8de4e2404f621a33c100f1d5e889b18935a705` | 2026-11-26T02:18:20Z | browser capture of AA's Intelligence Index vs cost chart from public tooltips (frontier membership, E195; unevaluated cheaper siblings, E201) |
 | roster | `data/aa_mapping.json` | `bbdddb3a6775ccd470c6cceb9c4eceab0f6a6779ca79c58cb95665fbc5f2d8e7` | 2026-11-26T02:18:20Z | editorial roster: every configuration AA plots on its rendered frontier or within 3 Index points of it (O51) |
 | bugHuntScoreboard | `data/bug_hunt_scoreboard.json` | `e319bcaf9437ee330bea87d378d358698737097e7849aae129257aa0f42c8737` | 2026-11-26T03:03:40Z | the owner's combined scoreboard at the pinned commit (O31 roster check) |
-| planRoutes | `data/plan_cost_routes.json` | `80689c7a9700fb70ef689d4ea6e6adf55cca4e3b438d221c62f4fa2b6ae80773` | 2026-11-26 | editorial Plan evidence registry |
+| planRoutes | `data/plan_cost_routes.json` | `7d483391afc3f69cb37af17535b3540aa7ee162216f751486dccac9f6209ed0a` | 2026-11-26 | editorial Plan evidence registry |
 | priceRecords | `data/price_records.json` | `0c32e22ffec53a7ad9939927c8016a975c74e8b05d9ee05fe29f920cd1007ae5` | 2026-11-26T13:45:00Z | editorial E141 price-record registry (superseded and promotional tariffs) |
 | leafEvidence | `data/leaf_evidence.json` | `634150d417abddc730c879ef23fe06a47227752dada50d8cae9baccbd78e44f6` | 2026-11-26 | editorial supplementary leaf evidence and the exhaustive-search log (O36) |
 | cognitionFrontierCode | `data/cognition_frontiercode.json` | `b1901aef26f065b3df1eb95508c13f45e87b003f33f46dda9c11526534d2b5a8` | 2026-11-26 | Cognition's FrontierCode leaderboard data (https://cognition.com/data/frontiercode-leaderboard/data.json), captured unchanged (O37) |

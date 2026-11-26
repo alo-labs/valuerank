@@ -8,7 +8,7 @@
   "summary": {
     "rank": {
       "api": 5,
-      "plan": 8
+      "plan": 7
     },
     "overall": {
       "api": 51.36753359625901,
@@ -422,7 +422,7 @@
       "planIntervalEligible": false,
       "usdPerRun": 188.62166169327534,
       "selected": true,
-      "planRank": 8,
+      "planRank": 7,
       "planValue": 65.32612267928657
     },
     {
@@ -440,8 +440,8 @@
       "planIntervalEligible": false,
       "usdPerRun": 189.49029291717412,
       "selected": false,
-      "planRank": 9,
-      "planValue": 65.29117727553815
+      "planRank": null,
+      "planValue": null
     },
     {
       "id": "claude-max5x-opus55-semianalysis",
@@ -458,8 +458,26 @@
       "planIntervalEligible": false,
       "usdPerRun": 194.05791919185884,
       "selected": false,
-      "planRank": 10,
+      "planRank": 8,
       "planValue": 65.11001598642403
+    },
+    {
+      "id": "claude-max20x-opus55-user-reports",
+      "planLabel": "Claude Max $200 · Opus 5.5 · two end-user reports (O218)",
+      "planFeeUsd": 200,
+      "valueMultiple": 54.21,
+      "grade": "assumption",
+      "assumptionKind": null,
+      "evidenceLabel": "end user report",
+      "sourceUrl": "https://www.reddit.com/r/ClaudeCode/comments/1xy4zwk/",
+      "sourceDate": "2026-11-16",
+      "case": 3,
+      "officialDisplayEligible": true,
+      "planIntervalEligible": false,
+      "usdPerRun": 204.94034078092452,
+      "selected": false,
+      "planRank": 10,
+      "planValue": 64.6957049294266
     }
   ],
   "scenarios": {
@@ -688,7 +706,7 @@
       "date": "2026-11-26",
       "rank": {
         "api": 5,
-        "plan": 8
+        "plan": 7
       }
     }
   ],
@@ -709,7 +727,7 @@
       "rankingEligible": true,
       "rank": {
         "api": 5,
-        "plan": 8
+        "plan": 7
       },
       "overall": {
         "api": 51.36753359625901,
@@ -739,7 +757,7 @@
       "rankingEligible": true,
       "rank": {
         "api": 16,
-        "plan": 30
+        "plan": 33
       },
       "overall": {
         "api": 43.80117672168775,

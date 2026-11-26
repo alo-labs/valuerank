@@ -10,7 +10,7 @@ Value = 25% × cost score + 75% × quality. Costs are USD per basket run; the co
 |---|---:|---:|---:|---:|---:|---:|---:|---:|---|
 | [GPT-6.1 Sol (max)](https://valuerank.alolabs.dev/models/gpt-6-1-sol/) | 1 | 67.99 | 78.91 | 1 | 60.63 | 49.46 | 64.35 | 100% | main |
 | [Claude Sonnet 5.5 (max)](https://valuerank.alolabs.dev/models/claude-sonnet-5-5/) | 5 | 65.59 | 70.61 | 4 | 51.40 | 13.86 | 63.92 | 100% | main |
-| [Claude Opus 5.5 (max)](https://valuerank.alolabs.dev/models/claude-opus-5-5/) | 8 | 65.33 | 68.35 | 5 | 51.37 | 12.51 | 64.32 | 100% | main |
+| [Claude Opus 5.5 (max)](https://valuerank.alolabs.dev/models/claude-opus-5-5/) | 7 | 65.33 | 68.35 | 5 | 51.37 | 12.51 | 64.32 | 100% | main |
 | [GPT-6 Astra (max)](https://valuerank.alolabs.dev/models/gpt-6-astra/) | 11 | 58.83 | 38.77 | 2 | 54.21 | 20.29 | 65.52 | 100% | main |
 | [GPT-6 Luna (max)](https://valuerank.alolabs.dev/models/gpt-6-luna/) | 14 | 56.08 | 100.00 | 3 | 52.95 | 87.49 | 41.44 | 100% | main |
 
@@ -80,7 +80,7 @@ The configurations AI Coding Daily has tested, mostly at high and medium effort,
 | [GPT-6.1 Sol (high)](https://valuerank.alolabs.dev/models/gpt-6-1-sol-high/) | 1 | 58.65 | 63.94 | 1 | 53.16 | 41.98 | 56.88 | 100% | main |
 | [GPT-6.1 Sol (medium)](https://valuerank.alolabs.dev/models/gpt-6-1-sol-medium/) | 5 | 58.07 | 72.14 | 3 | 52.04 | 48.01 | 53.38 | 100% | main |
 | [Claude Opus 5.5 (high)](https://valuerank.alolabs.dev/models/claude-opus-5-5-high/) | 8 | 57.91 | 66.70 | 10 | 44.84 | 14.41 | 54.98 | 100% | main |
-| [GPT-6.1 Terra (max)](https://valuerank.alolabs.dev/models/gpt-6-1-terra/) | 11 | 57.80 | 56.81 | 2 | 52.78 | 36.75 | 58.12 | 100% | main |
+| [GPT-6.1 Terra (max)](https://valuerank.alolabs.dev/models/gpt-6-1-terra/) | 10 | 57.80 | 56.81 | 2 | 52.78 | 36.75 | 58.12 | 100% | main |
 | [GPT-6.1 Terra (high)](https://valuerank.alolabs.dev/models/gpt-6-1-terra-high/) | 16 | 55.27 | 82.12 | 5 | 48.57 | 55.33 | 46.32 | 100% | main |
 | [GPT-6.1 Terra (xhigh)](https://valuerank.alolabs.dev/models/gpt-6-1-terra-xhigh/) | 19 | 55.00 | 74.22 | 4 | 48.83 | 49.54 | 48.60 | 100% | main |
 | [GPT-6.1 Terra (medium)](https://valuerank.alolabs.dev/models/gpt-6-1-terra-medium/) | 22 | 54.76 | 89.32 | 6 | 47.59 | 60.62 | 43.24 | 100% | main |
@@ -129,7 +129,7 @@ The configurations AI Coding Daily has tested, mostly at high and medium effort,
 - Plan route flags on these bars' cheapest plan rows: Claude Haiku 5.5 (high) on Claude Pro (possibly-superseded); GPT-6.1 Sol (low) on ChatGPT Pro 500 (possibly-superseded, measured inside an acknowledged accounting-fault window (O91, O92)); GPT-6.1 Sol (medium) on ChatGPT Pro 500 (possibly-superseded, measured inside an acknowledged accounting-fault window (O91, O92)); GPT-6.1 Terra (medium) on ChatGPT Pro 500 (possibly-superseded, measured inside an acknowledged accounting-fault window (O91, O92)).
 - These outputs compare ranked configurations only; listed families shown with an indicative value (O41) are outside them (O43): GPT-6.1 Sol (max), Claude Opus 5.5 (max), GPT-6 Astra (max), Claude Sonnet 5.5, Claude Fable 5.2 (high), Claude Fable 5.2 (max), Claude Fable 5.2 (xhigh), Claude Haiku 5.5 (low), Claude Haiku 5.5 (xhigh), Claude Opus 5.5 (xhigh), GPT-6 Astra (xhigh), GPT-6 Luna (low), GPT-6.1 Sol (xhigh), GPT-6.1 Terra (low), GPT-6.2 Astra (high), GPT-6.2 Astra (max), GPT-6.2 Astra (medium), GPT-6.2 Astra (xhigh), GPT-6.2 Sol (high), GPT-6.2 Sol (low), GPT-6.2 Sol (max), GPT-6.2 Sol (medium), GPT-6.2 Sol (xhigh), Gemini 4 Carbon, Gemini 4 Neon (high), Gemini 4 Neon (medium), Gemini 4 Neon (xhigh), MiMo-V2.6-Flash, Muse Ember (max), Muse Ember (xhigh).
 
-Benchmark sampling noise (O39, an independent-task approximation): two values must differ by about 4.1 value points (median, 95%) to separate, and 0 of 14 adjacent API ranks and 0 of 29 adjacent Plan ranks of different configurations do (33 more adjacent Plan pairs are one configuration on two plans, ordered by the plans' multiples alone; E258). Its net direction is not established: every configuration is scored on the same tasks, which correlates their errors and narrows the true threshold (API 0 at correlation 0.3, 1 at correlation 0.6; Plan 1 at correlation 0.3, 1 at correlation 0.6), while sources it leaves out widen it (run-to-run and harness variance, AA's single cost run and, for the 44 Plan rows on an owner assumption (38 owner-named transfers and 6 O198 published dollar limits), that assumption's error). The noise band column groups each row with the band's first row it cannot be told apart from (O42); a Plan band marked † rests on an owner assumption (an owner-named transfer, an O46 provider quota ceiling or an O198 published dollar limit) and excludes its error: an assumed multiple can be wrong by a factor of about 2.0 before the row's value moves by the median threshold (a tolerance, not an estimate of the assumption's error). The S1T scenario shares in [scores.md](scores.md) show each row's rank-1 and top-3 frequencies under that noise. AI Coding Daily's noise treats its seven graded projects as seven trials of the share of 80 points (n = 7, the wide reading, E263); read as 80 trials, the median threshold would be 3.1 (API) and 3.0 (Plan), with 0 and 2 adjacent ranks separable.
+Benchmark sampling noise (O39, an independent-task approximation): two values must differ by about 4.1 value points (median, 95%) to separate, and 0 of 14 adjacent API ranks and 0 of 31 adjacent Plan ranks of different configurations do (31 more adjacent Plan pairs are one configuration on two plans, ordered by the plans' multiples alone; E258). Its net direction is not established: every configuration is scored on the same tasks, which correlates their errors and narrows the true threshold (API 0 at correlation 0.3, 1 at correlation 0.6; Plan 1 at correlation 0.3, 1 at correlation 0.6), while sources it leaves out widen it (run-to-run and harness variance, AA's single cost run and, for the 44 Plan rows on an owner assumption (38 owner-named transfers and 6 O198 published dollar limits), that assumption's error). The noise band column groups each row with the band's first row it cannot be told apart from (O42); a Plan band marked † rests on an owner assumption (an owner-named transfer, an O46 provider quota ceiling or an O198 published dollar limit) and excludes its error: an assumed multiple can be wrong by a factor of about 2.0 before the row's value moves by the median threshold (a tolerance, not an estimate of the assumption's error). The S1T scenario shares in [scores.md](scores.md) show each row's rank-1 and top-3 frequencies under that noise. AI Coding Daily's noise treats its seven graded projects as seven trials of the share of 80 points (n = 7, the wide reading, E263); read as 80 trials, the median threshold would be 3.1 (API) and 3.0 (Plan), with 0 and 2 adjacent ranks separable.
 
 
 **Listed frontier families: indicative value, not ranked and not comparable (O41).** Quality is the mean over the leaves the configuration has, renormalised, with no imputation, so these values cannot be compared with the ranking above.
@@ -140,9 +140,9 @@ Benchmark sampling noise (O39, an independent-task approximation): two values mu
 | Claude Opus 5.5 (max) | AI Coding Daily (excl. bug finding) | 56.5 | 90% | 52.8 | 42.4 | $7,048.37 | $119.67 |
 | GPT-6 Astra (max) | AI Coding Daily (excl. bug finding) | 59.0 | 90% | 48.8 | 45.0 | $4,767.90 | $329.16 |
 | Claude Sonnet 5.5 | AI Coding Daily (excl. bug finding) | 57.6 | 90% | 54.0 | 43.2 | $6,644.38 | $112.81 |
-| Claude Fable 5.2 (high) | AI Coding Daily (excl. bug finding) | 58.8 | 90% | 44.1 | 44.1 | $6,545.30 | $6,545.30 |
-| Claude Fable 5.2 (max) | AI Coding Daily (excl. bug finding) | 62.6 | 90% | 47.0 | 47.0 | $19,550.04 | $19,550.04 |
-| Claude Fable 5.2 (xhigh) | AI Coding Daily (excl. bug finding) | 59.7 | 90% | 44.8 | 44.8 | $10,674.12 | $10,674.12 |
+| Claude Fable 5.2 (high) | AI Coding Daily (excl. bug finding) | 58.8 | 90% | 54.8 | 44.1 | $6,545.30 | $114.33 |
+| Claude Fable 5.2 (max) | AI Coding Daily (excl. bug finding) | 62.6 | 90% | 51.2 | 47.0 | $19,550.04 | $341.49 |
+| Claude Fable 5.2 (xhigh) | AI Coding Daily (excl. bug finding) | 59.7 | 90% | 52.6 | 44.8 | $10,674.12 | $186.45 |
 | Claude Haiku 5.5 (low) | AI Coding Daily (excl. bug finding) | 20.8 | 90% | 40.6 | 37.5 | $36.79 | $0.62 |
 | Claude Haiku 5.5 (xhigh) | AI Coding Daily (excl. bug finding) | 34.8 | 90% | 51.1 | 41.5 | $164.01 | $2.78 |
 | Claude Opus 5.5 (xhigh) | AI Coding Daily (excl. bug finding) | 54.9 | 90% | 54.7 | 42.5 | $4,214.23 | $71.55 |
@@ -443,8 +443,8 @@ Plan streams S1, S2, S1 endpoint-heavy, S1M, S1T and S1T recentred run with owne
 | Claude Haiku 5.5 (medium) on Claude Max 5x | 0.0% | — | — | — | — | — | — |
 | Claude Haiku 5.5 (medium) on Claude Pro | 0.0% | — | — | — | — | — | — |
 | Claude Haiku 5.5 (medium) on OpenCode Go | 0.0% | — | — | — | — | — | — |
-| Claude Opus 5.5 (high) on Claude Max 20x | 0.0% | 0.0% | 18.0% | 0.0% | 0.0% | 24.9% | 24.7% |
-| Claude Opus 5.5 (high) on Claude Max 5x | 0.0% | 0.0% | 8.4% | 0.0% | 0.0% | 20.4% | 19.9% |
+| Claude Opus 5.5 (high) on Claude Max 20x | 0.0% | 0.0% | 2.4% | 0.0% | 0.0% | 15.2% | 14.8% |
+| Claude Opus 5.5 (high) on Claude Max 5x | 0.0% | 0.0% | 12.3% | 0.0% | 0.0% | 22.4% | 21.8% |
 | Claude Opus 5.5 (high) on Claude Pro | 0.0% | 0.0% | 19.1% | 0.0% | 0.0% | 25.4% | 25.3% |
 | GPT-6 Astra (high) on ChatGPT Plus | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
 | GPT-6 Astra (high) on ChatGPT Pro 100 | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
@@ -470,18 +470,18 @@ Plan streams S1, S2, S1 endpoint-heavy, S1M, S1T and S1T recentred run with owne
 | GPT-6 Luna (xhigh) on ChatGPT Pro 200 | 0.0% | — | — | — | — | — | — |
 | GPT-6 Luna (xhigh) on ChatGPT Pro 500 | 0.0% | — | — | — | — | — | — |
 | GPT-6 Luna (xhigh) on OpenCode Go | 0.0% | — | — | — | — | — | — |
-| GPT-6.1 Sol (high) on ChatGPT Plus | 100.0% | 100.0% | 82.0% | 100.0% | 100.0% | 46.5% | 46.7% |
-| GPT-6.1 Sol (high) on ChatGPT Pro 100 | 100.0% | 100.0% | 82.0% | 100.0% | 100.0% | 46.5% | 46.7% |
+| GPT-6.1 Sol (high) on ChatGPT Plus | 100.0% | 100.0% | 87.3% | 100.0% | 100.0% | 47.9% | 48.3% |
+| GPT-6.1 Sol (high) on ChatGPT Pro 100 | 100.0% | 100.0% | 87.3% | 100.0% | 100.0% | 47.9% | 48.3% |
 | GPT-6.1 Sol (high) on ChatGPT Pro 200 | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| GPT-6.1 Sol (high) on ChatGPT Pro 500 | 100.0% | 100.0% | 91.5% | 100.0% | 100.0% | 50.7% | 51.2% |
+| GPT-6.1 Sol (high) on ChatGPT Pro 500 | 100.0% | 100.0% | 97.3% | 100.0% | 100.0% | 53.8% | 54.2% |
 | GPT-6.1 Sol (low) on ChatGPT Plus | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
 | GPT-6.1 Sol (low) on ChatGPT Pro 100 | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
 | GPT-6.1 Sol (low) on ChatGPT Pro 200 | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
 | GPT-6.1 Sol (low) on ChatGPT Pro 500 | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.1% |
-| GPT-6.1 Sol (medium) on ChatGPT Plus | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 28.5% | 28.4% |
-| GPT-6.1 Sol (medium) on ChatGPT Pro 100 | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 28.5% | 28.4% |
+| GPT-6.1 Sol (medium) on ChatGPT Plus | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 29.6% | 29.4% |
+| GPT-6.1 Sol (medium) on ChatGPT Pro 100 | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 29.6% | 29.4% |
 | GPT-6.1 Sol (medium) on ChatGPT Pro 200 | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| GPT-6.1 Sol (medium) on ChatGPT Pro 500 | 0.0% | 0.0% | 0.3% | 0.0% | 0.0% | 32.2% | 31.9% |
+| GPT-6.1 Sol (medium) on ChatGPT Pro 500 | 0.0% | 0.0% | 0.9% | 0.0% | 0.0% | 34.4% | 34.1% |
 | GPT-6.1 Terra (high) on ChatGPT Plus | 0.0% | — | — | — | — | — | — |
 | GPT-6.1 Terra (high) on ChatGPT Pro 100 | 0.0% | — | — | — | — | — | — |
 | GPT-6.1 Terra (high) on ChatGPT Pro 200 | 0.0% | — | — | — | — | — | — |
@@ -658,7 +658,7 @@ The 90% rule's error bound holds per published event (candidate and kernel assig
 
 - **Terminal-Bench cross-source agreement (AA's mini-SWE-agent run against tbench.ai):** undefined (panel too small); 0 rows take the leaf from tbench.ai (gap fill).
 - **Workload cross-check (E41, mandatory diagnostic):** Terminal-Bench 4.1 cost per solved task on AA's own execution against basket cost: τ_b 0.12 (interval -0.40 to 0.57), low agreement; panel (15): Claude Haiku 5.5 (high), Claude Haiku 5.5 (medium), Claude Opus 5.5 (high), GPT-6 Astra (high), GPT-6 Luna (max), GPT-6 Luna (high), GPT-6 Luna (medium), GPT-6 Luna (xhigh), GPT-6.1 Sol (high), GPT-6.1 Sol (low), GPT-6.1 Sol (medium), GPT-6.1 Terra (max), GPT-6.1 Terra (high), GPT-6.1 Terra (medium), GPT-6.1 Terra (xhigh).
-- **Rank separability (O39, independent-task approximation):** median separation 4.10 value points (API) and 4.09 (Plan); separable adjacent ranks: API 0 of 14, Plan 0 of 29. Assumptions: tasks are independent and each leaf's score is a mean over its published task count (a binomial leaf drawn from its Jeffreys posterior Beta(k + 1/2, n - k + 1/2), O142; plug-in SDs with the proportion (k + 1/2) / (n + 1), I28); attempts averaged within a task and tasks shared across models are ignored, so the noise is approximate; GDPval-AA: each row's rating interval as AA's model page displays it, read as a 95% normal interval (AA states no level), SD = half-width / 1.96; AA-Omniscience: each of 3,000 questions scores +1, 0 or -1, with the shares from AA's accuracy and hallucination rate; Vals boards (Vibe Code Bench v1.1, Code Migration v1.1): Vals' published standard error per record, read as the leaf's SD; AI Coding Daily: judged points over its seven graded projects read as a binomial share of 80 points (an assumption; the board publishes no error).
+- **Rank separability (O39, independent-task approximation):** median separation 4.10 value points (API) and 4.12 (Plan); separable adjacent ranks: API 0 of 14, Plan 0 of 31. Assumptions: tasks are independent and each leaf's score is a mean over its published task count (a binomial leaf drawn from its Jeffreys posterior Beta(k + 1/2, n - k + 1/2), O142; plug-in SDs with the proportion (k + 1/2) / (n + 1), I28); attempts averaged within a task and tasks shared across models are ignored, so the noise is approximate; GDPval-AA: each row's rating interval as AA's model page displays it, read as a 95% normal interval (AA states no level), SD = half-width / 1.96; AA-Omniscience: each of 3,000 questions scores +1, 0 or -1, with the shares from AA's accuracy and hallucination rate; Vals boards (Vibe Code Bench v1.1, Code Migration v1.1): Vals' published standard error per record, read as the leaf's SD; AI Coding Daily: judged points over its seven graded projects read as a binomial share of 80 points (an assumption; the board publishes no error).
 - **FrontierCode against Cognition:** FrontierCode 2.0 cross-source agreement (AA against Cognition, exact model and effort; E234, O153): Kendall tau 0.91 (interval 0.81 to 0.98) on 22 rows. Cognition minus AA: mean +0.2 points, largest 3.9.
 - **Gap-fill removal (E234, diagnostic):** no ranked row has a leaf from another party or the provider.
 - **Bar results without the gap fills (E234, sensitivity; labels unchanged):** cheapest displayed row as published, with fills removed, and with third-party fills third-party fills minus the signed mean offset +0.2 points (third party minus AA) — API quality 44.0: GPT-6.1 Sol (low) in all three; API quality 33.0: GPT-6 Luna (xhigh) in all three; API quality 53.4: GPT-6.1 Sol (medium) in all three; Plan quality 44.0: GPT-6.1 Sol (low) in all three; Plan quality 33.0: Claude Haiku 5.5 (high) in all three; Plan quality 53.4: GPT-6.1 Sol (medium) in all three.
@@ -746,7 +746,7 @@ No row is scored on a subset workload.
 | partial component flag (E37) | vacuous | AA declined- or missing-task markers, or an Index reconstruction that misses AA's total (E209) |
 | route dominance filter (E88) | vacuous | certifiably dearer routes set aside |
 | Plan exploratory label (E61) | fired | fewer than half of Plan rows have an identified M_W |
-| Plan evidence lifecycle and change detection (E18, E151, E269, O77, O79) | fired | 57 of 63 plan rows carry a possibly-superseded or expired route: claude-haiku-5-5-high@claude-max-20x, claude-haiku-5-5-high@claude-max-5x, claude-haiku-5-5-high@claude-pro, claude-haiku-5-5-medium@claude-max-20x, claude-haiku-5-5-medium@claude-max-5x, claude-haiku-5-5-medium@claude-pro, claude-opus-5-5-high@claude-max-20x, claude-opus-5-5-high@claude-max-5x, claude-opus-5-5-high@claude-pro, gpt-6-astra-high@chatgpt-plus, gpt-6-astra-high@chatgpt-pro-100, gpt-6-astra-high@chatgpt-pro-200, gpt-6-astra-high@chatgpt-pro-500, gpt-6-luna-high@chatgpt-plus, gpt-6-luna-high@chatgpt-pro-100, gpt-6-luna-high@chatgpt-pro-200, gpt-6-luna-high@chatgpt-pro-500, gpt-6-luna-medium@chatgpt-plus, gpt-6-luna-medium@chatgpt-pro-100, gpt-6-luna-medium@chatgpt-pro-200, gpt-6-luna-medium@chatgpt-pro-500, gpt-6-luna-xhigh@chatgpt-plus, gpt-6-luna-xhigh@chatgpt-pro-100, gpt-6-luna-xhigh@chatgpt-pro-200, gpt-6-luna-xhigh@chatgpt-pro-500, gpt-6-luna@chatgpt-plus, gpt-6-luna@chatgpt-pro-100, gpt-6-luna@chatgpt-pro-200, gpt-6-luna@chatgpt-pro-500, gpt-6.1-sol-high@chatgpt-plus, gpt-6.1-sol-high@chatgpt-pro-100, gpt-6.1-sol-high@chatgpt-pro-200, gpt-6.1-sol-high@chatgpt-pro-500, gpt-6.1-sol-low@chatgpt-plus, gpt-6.1-sol-low@chatgpt-pro-100, gpt-6.1-sol-low@chatgpt-pro-200, gpt-6.1-sol-low@chatgpt-pro-500, gpt-6.1-sol-medium@chatgpt-plus, gpt-6.1-sol-medium@chatgpt-pro-100, gpt-6.1-sol-medium@chatgpt-pro-200, gpt-6.1-sol-medium@chatgpt-pro-500, gpt-6.1-terra-high@chatgpt-plus, gpt-6.1-terra-high@chatgpt-pro-100, gpt-6.1-terra-high@chatgpt-pro-200, gpt-6.1-terra-high@chatgpt-pro-500, gpt-6.1-terra-medium@chatgpt-plus, gpt-6.1-terra-medium@chatgpt-pro-100, gpt-6.1-terra-medium@chatgpt-pro-200, gpt-6.1-terra-medium@chatgpt-pro-500, gpt-6.1-terra-xhigh@chatgpt-plus, gpt-6.1-terra-xhigh@chatgpt-pro-100, gpt-6.1-terra-xhigh@chatgpt-pro-200, gpt-6.1-terra-xhigh@chatgpt-pro-500, gpt-6.1-terra@chatgpt-plus, gpt-6.1-terra@chatgpt-pro-100, gpt-6.1-terra@chatgpt-pro-200, gpt-6.1-terra@chatgpt-pro-500 |
+| Plan evidence lifecycle and change detection (E18, E151, E269, O77, O79) | fired | 54 of 63 plan rows carry a possibly-superseded or expired route: claude-haiku-5-5-high@claude-max-5x, claude-haiku-5-5-high@claude-pro, claude-haiku-5-5-medium@claude-max-5x, claude-haiku-5-5-medium@claude-pro, claude-opus-5-5-high@claude-max-5x, claude-opus-5-5-high@claude-pro, gpt-6-astra-high@chatgpt-plus, gpt-6-astra-high@chatgpt-pro-100, gpt-6-astra-high@chatgpt-pro-200, gpt-6-astra-high@chatgpt-pro-500, gpt-6-luna-high@chatgpt-plus, gpt-6-luna-high@chatgpt-pro-100, gpt-6-luna-high@chatgpt-pro-200, gpt-6-luna-high@chatgpt-pro-500, gpt-6-luna-medium@chatgpt-plus, gpt-6-luna-medium@chatgpt-pro-100, gpt-6-luna-medium@chatgpt-pro-200, gpt-6-luna-medium@chatgpt-pro-500, gpt-6-luna-xhigh@chatgpt-plus, gpt-6-luna-xhigh@chatgpt-pro-100, gpt-6-luna-xhigh@chatgpt-pro-200, gpt-6-luna-xhigh@chatgpt-pro-500, gpt-6-luna@chatgpt-plus, gpt-6-luna@chatgpt-pro-100, gpt-6-luna@chatgpt-pro-200, gpt-6-luna@chatgpt-pro-500, gpt-6.1-sol-high@chatgpt-plus, gpt-6.1-sol-high@chatgpt-pro-100, gpt-6.1-sol-high@chatgpt-pro-200, gpt-6.1-sol-high@chatgpt-pro-500, gpt-6.1-sol-low@chatgpt-plus, gpt-6.1-sol-low@chatgpt-pro-100, gpt-6.1-sol-low@chatgpt-pro-200, gpt-6.1-sol-low@chatgpt-pro-500, gpt-6.1-sol-medium@chatgpt-plus, gpt-6.1-sol-medium@chatgpt-pro-100, gpt-6.1-sol-medium@chatgpt-pro-200, gpt-6.1-sol-medium@chatgpt-pro-500, gpt-6.1-terra-high@chatgpt-plus, gpt-6.1-terra-high@chatgpt-pro-100, gpt-6.1-terra-high@chatgpt-pro-200, gpt-6.1-terra-high@chatgpt-pro-500, gpt-6.1-terra-medium@chatgpt-plus, gpt-6.1-terra-medium@chatgpt-pro-100, gpt-6.1-terra-medium@chatgpt-pro-200, gpt-6.1-terra-medium@chatgpt-pro-500, gpt-6.1-terra-xhigh@chatgpt-plus, gpt-6.1-terra-xhigh@chatgpt-pro-100, gpt-6.1-terra-xhigh@chatgpt-pro-200, gpt-6.1-terra-xhigh@chatgpt-pro-500, gpt-6.1-terra@chatgpt-plus, gpt-6.1-terra@chatgpt-pro-100, gpt-6.1-terra@chatgpt-pro-200, gpt-6.1-terra@chatgpt-pro-500 |
 | acknowledged accounting-fault windows (O91, O92, O93, O95, O96) | fired | 12 of 63 plan rows rest on a measurement inside an acknowledged fault window; they stay selected and yield to two concordant user reports for their own model and plan, and the transfers resting on them follow: gpt-6-astra-high@chatgpt-pro-500, gpt-6-luna-high@chatgpt-pro-500, gpt-6-luna-medium@chatgpt-pro-500, gpt-6-luna-xhigh@chatgpt-pro-500, gpt-6-luna@chatgpt-pro-500, gpt-6.1-sol-high@chatgpt-pro-500, gpt-6.1-sol-low@chatgpt-pro-500, gpt-6.1-sol-medium@chatgpt-pro-500, gpt-6.1-terra-high@chatgpt-pro-500, gpt-6.1-terra-medium@chatgpt-pro-500, gpt-6.1-terra-xhigh@chatgpt-pro-500, gpt-6.1-terra@chatgpt-pro-500 |
 | AA cost omits a pricing term (O94, O98, O100, O106, O108, O109, O114) | fired | ranked at the published cost; compete in interval outputs and the scenario labels' BlockerSafe test over [C, factor × C] ([C, ∞) without a stated factor, O98) without a label (scenario frequencies draw them at the published cost, O114), and leave the anchor population at the next freeze: claude-haiku-5-5-high (up to 5×), claude-haiku-5-5-medium (up to 5×) |
 | valuation-basis gate (E170) | passed | every ranked row is compatible as captured or after evidenced revaluation |
@@ -785,31 +785,31 @@ Diagnostic only (O121): every configuration with AA's leaves and Bug Hunt, at an
 | [GPT-6.1 Sol (max)](https://valuerank.alolabs.dev/models/gpt-6-1-sol/) | 5 | 57.52 | 54.73 | 1 | 52.08 | 32.99 | 58.44 | 100% | main |
 | [GPT-6.1 Terra (max)](https://valuerank.alolabs.dev/models/gpt-6-1-terra/) | 9 | 56.46 | 61.55 | 3 | 50.31 | 36.94 | 54.77 | 100% | main |
 | [GPT-6.1 Sol (high)](https://valuerank.alolabs.dev/models/gpt-6-1-sol-high/) | 12 | 56.11 | 67.90 | 4 | 49.29 | 40.62 | 52.18 | 100% | main |
-| [Claude Opus 5.5 (xhigh)](https://valuerank.alolabs.dev/models/claude-opus-5-5-xhigh/) | 16 | 55.34 | 59.16 | 14 | 44.24 | 14.77 | 54.07 | 100% | main |
-| [Claude Sonnet 5.5 (max)](https://valuerank.alolabs.dev/models/claude-sonnet-5-5/) | 18 | 55.21 | 49.55 | 11 | 45.13 | 9.20 | 57.10 | 100% | main |
+| [Claude Fable 5.2 (high)](https://valuerank.alolabs.dev/models/claude-fable-5-2-high/) | 16 | 55.79 | 49.26 | 9 | 45.82 | 9.39 | 57.97 | 100% | main |
+| [Claude Opus 5.5 (xhigh)](https://valuerank.alolabs.dev/models/claude-opus-5-5-xhigh/) | 18 | 55.34 | 59.16 | 14 | 44.24 | 14.77 | 54.07 | 100% | main |
+| [Claude Sonnet 5.5 (max)](https://valuerank.alolabs.dev/models/claude-sonnet-5-5/) | 19 | 55.21 | 49.55 | 11 | 45.13 | 9.20 | 57.10 | 100% | main |
 | [GPT-6.1 Sol (medium)](https://valuerank.alolabs.dev/models/gpt-6-1-sol-medium/) | 23 | 54.95 | 75.20 | 7 | 47.36 | 44.84 | 48.20 | 100% | main |
-| [Claude Opus 5.5 (high)](https://valuerank.alolabs.dev/models/claude-opus-5-5-high/) | 27 | 54.74 | 70.36 | 17 | 42.46 | 21.26 | 49.53 | 100% | main |
-| [Claude Opus 5.5 (max)](https://valuerank.alolabs.dev/models/claude-opus-5-5/) | 30 | 53.76 | 48.30 | 16 | 43.80 | 8.48 | 55.57 | 100% | main |
-| [GPT-6 Astra (xhigh)](https://valuerank.alolabs.dev/models/gpt-6-astra-xhigh/) | 33 | 52.38 | 35.44 | 5 | 48.07 | 18.19 | 58.03 | 100% | main |
-| [GPT-6.1 Terra (high)](https://valuerank.alolabs.dev/models/gpt-6-1-terra-high/) | 34 | 52.35 | 84.08 | 15 | 43.83 | 49.99 | 41.78 | 100% | main |
-| [GPT-6.1 Terra (xhigh)](https://valuerank.alolabs.dev/models/gpt-6-1-terra-xhigh/) | 35 | 52.35 | 77.06 | 13 | 44.56 | 45.92 | 44.11 | 100% | main |
-| [GPT-6.1 Terra (medium)](https://valuerank.alolabs.dev/models/gpt-6-1-terra-medium/) | 42 | 51.18 | 90.49 | 18 | 41.98 | 53.70 | 38.07 | 100% | main |
-| [GPT-6 Astra (max)](https://valuerank.alolabs.dev/models/gpt-6-astra/) | 47 | 50.80 | 26.92 | 6 | 47.38 | 13.26 | 58.75 | 100% | main |
-| [Claude Haiku 5.5 (xhigh)](https://valuerank.alolabs.dev/models/claude-haiku-5-5/) | 49 | 50.41 | 100.00 | 20 | 39.03 | 54.49 | 33.88 | 100% | main |
-| [GPT-6 Astra (high)](https://valuerank.alolabs.dev/models/gpt-6-astra-high/) | 53 | 50.15 | 37.91 | 10 | 45.58 | 19.63 | 54.23 | 100% | main |
-| [GPT-6.1 Sol (low)](https://valuerank.alolabs.dev/models/gpt-6-1-sol-low/) | 55 | 49.72 | 85.36 | 19 | 41.06 | 50.72 | 37.84 | 100% | main |
-| [GPT-6 Luna (max)](https://valuerank.alolabs.dev/models/gpt-6-luna/) | 62 | 48.96 | 99.75 | 21 | 38.79 | 59.06 | 32.03 | 100% | main |
-| [GPT-6.1 Terra (low)](https://valuerank.alolabs.dev/models/gpt-6-1-terra-low/) | 65 | 47.94 | 100.00 | 22 | 37.93 | 59.95 | 30.58 | 100% | main |
-| [Claude Haiku 5.5 (high)](https://valuerank.alolabs.dev/models/claude-haiku-5-5-high/) | 70 | 47.11 | 100.00 | 23 | 37.02 | 59.62 | 29.48 | 100% | main |
-| [Claude Fable 5.2 (max)](https://valuerank.alolabs.dev/models/claude-fable-5-2/) | 75 | 46.46 | 0.00 | 8 | 46.46 | 0.00 | 61.94 | 100% | main |
-| [GPT-6 Luna (xhigh)](https://valuerank.alolabs.dev/models/gpt-6-luna-xhigh/) | 76 | 44.72 | 100.00 | 24 | 35.68 | 63.84 | 26.29 | 100% | main |
-| [Claude Fable 5.2 (xhigh)](https://valuerank.alolabs.dev/models/claude-fable-5-2-xhigh/) | 80 | 44.18 | 0.00 | 12 | 45.03 | 3.40 | 58.90 | 100% | main |
-| [Claude Fable 5.2 (high)](https://valuerank.alolabs.dev/models/claude-fable-5-2-high/) | 81 | 43.48 | 0.00 | 9 | 45.82 | 9.39 | 57.97 | 100% | main |
-| [GPT-6 Luna (high)](https://valuerank.alolabs.dev/models/gpt-6-luna-high/) | 82 | 43.43 | 100.00 | 25 | 35.29 | 67.45 | 24.57 | 100% | main |
-| [Claude Haiku 5.5 (medium)](https://valuerank.alolabs.dev/models/claude-haiku-5-5-medium/) | 86 | 43.25 | 100.00 | 26 | 34.62 | 65.48 | 24.34 | 100% | main |
-| [GPT-6 Luna (medium)](https://valuerank.alolabs.dev/models/gpt-6-luna-medium/) | 89 | 39.82 | 100.00 | 27 | 33.04 | 72.86 | 19.76 | 100% | main |
-| [Claude Haiku 5.5 (low)](https://valuerank.alolabs.dev/models/claude-haiku-5-5-low/) | 93 | 39.77 | 100.00 | 28 | 32.96 | 72.77 | 19.70 | 100% | main |
-| [GPT-6 Luna (low)](https://valuerank.alolabs.dev/models/gpt-6-luna-low/) | 104 | 34.82 | 100.00 | 29 | 32.70 | 91.52 | 13.10 | 100% | main |
+| [Claude Opus 5.5 (high)](https://valuerank.alolabs.dev/models/claude-opus-5-5-high/) | 29 | 54.74 | 70.36 | 17 | 42.46 | 21.26 | 49.53 | 100% | main |
+| [Claude Fable 5.2 (xhigh)](https://valuerank.alolabs.dev/models/claude-fable-5-2-xhigh/) | 32 | 53.91 | 38.93 | 12 | 45.03 | 3.40 | 58.90 | 100% | main |
+| [Claude Opus 5.5 (max)](https://valuerank.alolabs.dev/models/claude-opus-5-5/) | 33 | 53.76 | 48.30 | 16 | 43.80 | 8.48 | 55.57 | 100% | main |
+| [Claude Fable 5.2 (max)](https://valuerank.alolabs.dev/models/claude-fable-5-2/) | 37 | 52.99 | 26.15 | 8 | 46.46 | 0.00 | 61.94 | 100% | main |
+| [GPT-6 Astra (xhigh)](https://valuerank.alolabs.dev/models/gpt-6-astra-xhigh/) | 39 | 52.38 | 35.44 | 5 | 48.07 | 18.19 | 58.03 | 100% | main |
+| [GPT-6.1 Terra (high)](https://valuerank.alolabs.dev/models/gpt-6-1-terra-high/) | 40 | 52.35 | 84.08 | 15 | 43.83 | 49.99 | 41.78 | 100% | main |
+| [GPT-6.1 Terra (xhigh)](https://valuerank.alolabs.dev/models/gpt-6-1-terra-xhigh/) | 41 | 52.35 | 77.06 | 13 | 44.56 | 45.92 | 44.11 | 100% | main |
+| [GPT-6.1 Terra (medium)](https://valuerank.alolabs.dev/models/gpt-6-1-terra-medium/) | 48 | 51.18 | 90.49 | 18 | 41.98 | 53.70 | 38.07 | 100% | main |
+| [GPT-6 Astra (max)](https://valuerank.alolabs.dev/models/gpt-6-astra/) | 53 | 50.80 | 26.92 | 6 | 47.38 | 13.26 | 58.75 | 100% | main |
+| [Claude Haiku 5.5 (xhigh)](https://valuerank.alolabs.dev/models/claude-haiku-5-5/) | 55 | 50.41 | 100.00 | 20 | 39.03 | 54.49 | 33.88 | 100% | main |
+| [GPT-6 Astra (high)](https://valuerank.alolabs.dev/models/gpt-6-astra-high/) | 59 | 50.15 | 37.91 | 10 | 45.58 | 19.63 | 54.23 | 100% | main |
+| [GPT-6.1 Sol (low)](https://valuerank.alolabs.dev/models/gpt-6-1-sol-low/) | 61 | 49.72 | 85.36 | 19 | 41.06 | 50.72 | 37.84 | 100% | main |
+| [GPT-6 Luna (max)](https://valuerank.alolabs.dev/models/gpt-6-luna/) | 68 | 48.96 | 99.75 | 21 | 38.79 | 59.06 | 32.03 | 100% | main |
+| [GPT-6.1 Terra (low)](https://valuerank.alolabs.dev/models/gpt-6-1-terra-low/) | 71 | 47.94 | 100.00 | 22 | 37.93 | 59.95 | 30.58 | 100% | main |
+| [Claude Haiku 5.5 (high)](https://valuerank.alolabs.dev/models/claude-haiku-5-5-high/) | 76 | 47.11 | 100.00 | 23 | 37.02 | 59.62 | 29.48 | 100% | main |
+| [GPT-6 Luna (xhigh)](https://valuerank.alolabs.dev/models/gpt-6-luna-xhigh/) | 81 | 44.72 | 100.00 | 24 | 35.68 | 63.84 | 26.29 | 100% | main |
+| [GPT-6 Luna (high)](https://valuerank.alolabs.dev/models/gpt-6-luna-high/) | 85 | 43.43 | 100.00 | 25 | 35.29 | 67.45 | 24.57 | 100% | main |
+| [Claude Haiku 5.5 (medium)](https://valuerank.alolabs.dev/models/claude-haiku-5-5-medium/) | 89 | 43.25 | 100.00 | 26 | 34.62 | 65.48 | 24.34 | 100% | main |
+| [GPT-6 Luna (medium)](https://valuerank.alolabs.dev/models/gpt-6-luna-medium/) | 92 | 39.82 | 100.00 | 27 | 33.04 | 72.86 | 19.76 | 100% | main |
+| [Claude Haiku 5.5 (low)](https://valuerank.alolabs.dev/models/claude-haiku-5-5-low/) | 96 | 39.77 | 100.00 | 28 | 32.96 | 72.77 | 19.70 | 100% | main |
+| [GPT-6 Luna (low)](https://valuerank.alolabs.dev/models/gpt-6-luna-low/) | 107 | 34.82 | 100.00 | 29 | 32.70 | 91.52 | 13.10 | 100% | main |
 
 ### Common-leaf ranking (diagnostic): quality leaf scores
 
@@ -819,11 +819,14 @@ Diagnostic only (O121): every configuration with AA's leaves and Bug Hunt, at an
 | GPT-6.1 Sol (max) | 40.6 | 56.6 | 78.7 | 55.4 | 31.0 | 64.9 | 71.0 | 83.0 | 58.8 | 58.1 | 69.5 | 58.44 | no |
 | GPT-6.1 Terra (max) | 42.1 | 56.6 | 63.7 | 48.7 | 28.6 | 60.2 | 64.8 | 82.7 | 47.3 | 57.6 | 68.0 | 54.77 | no |
 | GPT-6.1 Sol (high) | 36.7 | 51.0 | 55.0 | 51.1 | 32.0 | 64.5 | 70.5 | 82.3 | 51.9 | 46.2 | 68.5 | 52.18 | no |
+| Claude Fable 5.2 (high) | 49.1 | 60.1 | 42.7 | 60.9 | 21.8 | 71.4 | 82.0 | 83.3 | 73.8 | 70.0 | 73.0 | 57.97 | no |
 | Claude Opus 5.5 (xhigh) | 44.2 | 59.6 | 35.4 | 66.8 | 26.6 | 65.0 | 71.6 | 84.7 | 64.0 | 61.9 | 67.5 | 54.07 | no |
 | Claude Sonnet 5.5 (max) | 41.9 | 65.2 | 55.7 | 66.9 | 25.8 | 71.8 | 65.2 | 82.7 | 53.3 | 53.3 | 59.0 | 57.10 | no |
 | GPT-6.1 Sol (medium) | 33.4 | 48.0 | 42.7 | 48.2 | 30.0 | 62.6 | 70.1 | 83.3 | 46.0 | 37.1 | 67.0 | 48.20 | no |
 | Claude Opus 5.5 (high) | 35.9 | 56.1 | 30.5 | 60.4 | 28.8 | 63.2 | 71.2 | 82.7 | 55.6 | 49.0 | 59.5 | 49.53 | no |
+| Claude Fable 5.2 (xhigh) | 47.6 | 61.6 | 47.2 | 62.6 | 21.4 | 74.2 | 82.4 | 82.7 | 75.8 | 67.6 | 73.5 | 58.90 | no |
 | Claude Opus 5.5 (max) | 46.9 | 59.1 | 36.4 | 68.3 | 26.2 | 69.5 | 74.1 | 84.7 | 67.9 | 59.0 | 68.0 | 55.57 | no |
+| Claude Fable 5.2 (max) | 48.8 | 61.6 | 59.4 | 66.5 | 24.2 | 76.4 | 83.4 | 83.3 | 80.2 | 73.3 | 76.5 | 61.94 | no |
 | GPT-6 Astra (xhigh) | 41.4 | 60.1 | 69.0 | 53.6 | 32.2 | 67.2 | 71.8 | 80.0 | 61.5 | 54.8 | 71.0 | 58.03 | no |
 | GPT-6.1 Terra (high) | 37.5 | 42.9 | 11.8 | 42.7 | 28.0 | 58.5 | 63.9 | 82.3 | 35.4 | 33.3 | 61.5 | 41.78 | no |
 | GPT-6.1 Terra (xhigh) | 36.9 | 46.5 | 20.3 | 45.8 | 26.6 | 59.9 | 64.5 | 81.7 | 42.3 | 41.9 | 60.5 | 44.11 | no |
@@ -835,10 +838,7 @@ Diagnostic only (O121): every configuration with AA's leaves and Bug Hunt, at an
 | GPT-6 Luna (max) | 25.2 | 12.6 | 29.5 | 47.2 | 22.8 | 53.2 | 45.9 | 83.3 | 22.2 | 8.6 | 42.5 | 32.03 | no |
 | GPT-6.1 Terra (low) | 24.5 | 15.2 | 7.9 | 35.2 | 25.6 | 56.2 | 61.5 | 81.0 | 24.9 | 7.6 | 50.5 | 30.58 | no |
 | Claude Haiku 5.5 (high) | 23.2 | 22.7 | 14.4 | 46.2 | 17.2 | 33.7 | 52.6 | 77.3 | 23.7 | 10.0 | 45.0 | 29.48 | no |
-| Claude Fable 5.2 (max) | 48.8 | 61.6 | 59.4 | 66.5 | 24.2 | 76.4 | 83.4 | 83.3 | 80.2 | 73.3 | 76.5 | 61.94 | no |
 | GPT-6 Luna (xhigh) | 18.4 | 8.1 | 18.7 | 43.7 | 18.6 | 47.8 | 43.5 | 80.0 | 18.9 | 5.2 | 37.0 | 26.29 | no |
-| Claude Fable 5.2 (xhigh) | 47.6 | 61.6 | 47.2 | 62.6 | 21.4 | 74.2 | 82.4 | 82.7 | 75.8 | 67.6 | 73.5 | 58.90 | no |
-| Claude Fable 5.2 (high) | 49.1 | 60.1 | 42.7 | 60.9 | 21.8 | 71.4 | 82.0 | 83.3 | 73.8 | 70.0 | 73.0 | 57.97 | no |
 | GPT-6 Luna (high) | 18.6 | 5.1 | 12.9 | 42.5 | 18.2 | 47.8 | 43.6 | 79.3 | 15.6 | 2.9 | 31.0 | 24.57 | no |
 | Claude Haiku 5.5 (medium) | 16.1 | 15.2 | 11.5 | 39.1 | 15.2 | 28.6 | 52.1 | 77.3 | 16.8 | 7.1 | 30.5 | 24.34 | no |
 | GPT-6 Luna (medium) | 12.8 | 2.5 | 2.9 | 38.5 | 13.8 | 40.5 | 43.2 | 78.3 | 15.1 | 1.4 | 27.5 | 19.76 | no |
@@ -850,15 +850,15 @@ Diagnostic only (O121): every configuration with AA's leaves and Bug Hunt, at an
 - API basis, displayed record (not a claim; E203): cheapest at or above quality 48.2: GPT-6.1 Sol (medium) ($360.71 per basket run; 15 reach it); at or above quality 30.6: GPT-6.1 Terra (low) ($104.95 per basket run; 22 reach it); at or above quality 56.0: GPT-6.1 Sol (xhigh) ($617.20 per basket run; 8 reach it).
 - API basis, pointwise noise-margin screen (O171; Δ = (Q − H)/√(σ² + σ_H²) at correlation 0 with the bar setter, 1.96 per comparison; separate comparisons, not a simultaneous confidence statement, E337): at or above quality 48.2: rounding-stable only (contested by GPT-6.1 Terra (xhigh)), 14 cheaper rows compared; at or above quality 30.6: rounding-stable only, 6 cheaper rows compared; at or above quality 56.0: rounding-stable only (contested by GPT-6.1 Sol (high)), 16 cheaper rows compared.
 - API basis, noise-margin companion (O44; each bar plus 4.9 quality points, so the bar's own configuration cannot decide it): cheapest at or above quality 53.1: GPT-6.1 Sol (xhigh) ($617.20 per basket run); at or above quality 35.5: GPT-6.1 Terra (medium) ($174.91 per basket run); at or above quality 60.9: Claude Fable 5.2 (max) ($19,550.04 per basket run).
-- Plan basis, displayed record (not a claim; E203): cheapest at or above quality 48.2: GPT-6.1 Sol (medium) on ChatGPT Pro 500 ($33.49 per basket run; 47 reach it); at or above quality 30.6: Claude Haiku 5.5 (xhigh) on Claude Pro ($2.78 per basket run; 76 reach it); at or above quality 56.0: GPT-6.1 Sol (xhigh) on ChatGPT Pro 500 ($57.30 per basket run; 22 reach it).
+- Plan basis, displayed record (not a claim; E203): cheapest at or above quality 48.2: GPT-6.1 Sol (medium) on ChatGPT Pro 500 ($33.49 per basket run; 50 reach it); at or above quality 30.6: Claude Haiku 5.5 (xhigh) on Claude Pro ($2.78 per basket run; 79 reach it); at or above quality 56.0: GPT-6.1 Sol (xhigh) on ChatGPT Pro 500 ($57.30 per basket run; 25 reach it).
 - Plan basis, pointwise noise-margin screen (O171; Δ = (Q − H)/√(σ² + σ_H²) at correlation 0 with the bar setter, 1.96 per comparison; separate comparisons, not a simultaneous confidence statement, E337): at or above quality 48.2: rounding-stable only (contested by GPT-6.1 Terra (xhigh) on ChatGPT Pro 100, GPT-6.1 Terra (xhigh) on ChatGPT Pro 200, GPT-6.1 Terra (xhigh) on ChatGPT Pro 500), 54 cheaper rows compared; at or above quality 30.6: rounding-stable only (contested by Claude Haiku 5.5 (high) on Claude Max 20x, Claude Haiku 5.5 (high) on Claude Max 5x, Claude Haiku 5.5 (high) on Claude Pro), 13 cheaper rows compared; at or above quality 56.0: rounding-stable only (contested by GPT-6.1 Sol (high) on ChatGPT Plus, GPT-6.1 Sol (high) on ChatGPT Pro 100, GPT-6.1 Sol (high) on ChatGPT Pro 200, GPT-6.1 Sol (high) on ChatGPT Pro 500), 69 cheaper rows compared.
-- Plan basis, noise-margin companion (O44; each bar plus 4.9 quality points, so the bar's own configuration cannot decide it): cheapest at or above quality 53.1: GPT-6.1 Sol (xhigh) on ChatGPT Pro 500 ($57.30 per basket run); at or above quality 35.5: GPT-6.1 Terra (medium) on ChatGPT Pro 500 ($16.24 per basket run); at or above quality 60.9: Claude Fable 5.2 (max) on API-cost fallback ($19,550.04 per basket run).
+- Plan basis, noise-margin companion (O44; each bar plus 4.9 quality points, so the bar's own configuration cannot decide it): cheapest at or above quality 53.1: GPT-6.1 Sol (xhigh) on ChatGPT Pro 500 ($57.30 per basket run); at or above quality 35.5: GPT-6.1 Terra (medium) on ChatGPT Pro 500 ($16.24 per basket run); at or above quality 60.9: Claude Fable 5.2 (max) on Claude Max 5x ($341.49 per basket run).
 - Safety-refusal flags (O63; costs and scores unchanged) on these bars' cheapest rows: Claude Fable 5.2 (max) (0 blocked and 63 fallback attempts of 966).
 - AA cost caveat (O94; ranked at the published cost, no label of its own) on these bars' cheapest rows: Claude Haiku 5.5 (xhigh) (AA's cost omits a pricing term; up to 5× on its cost).
-- Plan route flags on these bars' cheapest plan rows: Claude Haiku 5.5 (xhigh) on Claude Pro (possibly-superseded); GPT-6.1 Sol (medium) on ChatGPT Pro 500 (possibly-superseded, measured inside an acknowledged accounting-fault window (O91, O92)); GPT-6.1 Sol (xhigh) on ChatGPT Pro 500 (possibly-superseded, measured inside an acknowledged accounting-fault window (O91, O92)); GPT-6.1 Terra (medium) on ChatGPT Pro 500 (possibly-superseded, measured inside an acknowledged accounting-fault window (O91, O92)).
+- Plan route flags on these bars' cheapest plan rows: Claude Fable 5.2 (max) on Claude Max 5x (possibly-superseded); Claude Haiku 5.5 (xhigh) on Claude Pro (possibly-superseded); GPT-6.1 Sol (medium) on ChatGPT Pro 500 (possibly-superseded, measured inside an acknowledged accounting-fault window (O91, O92)); GPT-6.1 Sol (xhigh) on ChatGPT Pro 500 (possibly-superseded, measured inside an acknowledged accounting-fault window (O91, O92)); GPT-6.1 Terra (medium) on ChatGPT Pro 500 (possibly-superseded, measured inside an acknowledged accounting-fault window (O91, O92)).
 - These outputs compare ranked configurations only; listed families shown with an indicative value (O41) are outside them (O43): GPT-6.2 Astra (high), GPT-6.2 Astra (max), GPT-6.2 Astra (medium), GPT-6.2 Astra (xhigh), GPT-6.2 Sol (high), GPT-6.2 Sol (low), GPT-6.2 Sol (max), GPT-6.2 Sol (medium), GPT-6.2 Sol (xhigh), Gemini 4 Carbon, Gemini 4 Neon (high), Gemini 4 Neon (medium), Gemini 4 Neon (xhigh), MiMo-V2.6-Flash, Muse Ember (max), Muse Ember (xhigh).
 
-Benchmark sampling noise (O39, an independent-task approximation): two values must differ by about 3.7 value points (median, 95%) to separate, and 0 of 28 adjacent API ranks and 1 of 55 adjacent Plan ranks of different configurations do (52 more adjacent Plan pairs are one configuration on two plans, ordered by the plans' multiples alone; E258). Its net direction is not established: every configuration is scored on the same tasks, which correlates their errors and narrows the true threshold (API 0 at correlation 0.3, 1 at correlation 0.6; Plan 1 at correlation 0.3, 1 at correlation 0.6), while sources it leaves out widen it (run-to-run and harness variance, AA's single cost run and, for the 64 Plan rows on an owner assumption (55 owner-named transfers and 9 O198 published dollar limits), that assumption's error). The noise band column groups each row with the band's first row it cannot be told apart from (O42); a Plan band marked † rests on an owner assumption (an owner-named transfer, an O46 provider quota ceiling or an O198 published dollar limit) and excludes its error: an assumed multiple can be wrong by a factor of about 2.0 before the row's value moves by the median threshold (a tolerance, not an estimate of the assumption's error). The S1T scenario shares in [scores.md](scores.md) show each row's rank-1 and top-3 frequencies under that noise.
+Benchmark sampling noise (O39, an independent-task approximation): two values must differ by about 3.7 value points (median, 95%) to separate, and 0 of 28 adjacent API ranks and 1 of 61 adjacent Plan ranks of different configurations do (49 more adjacent Plan pairs are one configuration on two plans, ordered by the plans' multiples alone; E258). Its net direction is not established: every configuration is scored on the same tasks, which correlates their errors and narrows the true threshold (API 0 at correlation 0.3, 1 at correlation 0.6; Plan 1 at correlation 0.3, 2 at correlation 0.6), while sources it leaves out widen it (run-to-run and harness variance, AA's single cost run and, for the 70 Plan rows on an owner assumption (61 owner-named transfers and 9 O198 published dollar limits), that assumption's error). The noise band column groups each row with the band's first row it cannot be told apart from (O42); a Plan band marked † rests on an owner assumption (an owner-named transfer, an O46 provider quota ceiling or an O198 published dollar limit) and excludes its error: an assumed multiple can be wrong by a factor of about 2.0 before the row's value moves by the median threshold (a tolerance, not an estimate of the assumption's error). The S1T scenario shares in [scores.md](scores.md) show each row's rank-1 and top-3 frequencies under that noise.
 
 
 **Listed frontier families: indicative value, not ranked and not comparable (O41).** Quality is the mean over the leaves the configuration has, renormalised, with no imputation, so these values cannot be compared with the ranking above.
@@ -1174,15 +1174,18 @@ Frequencies over 10,000 scenarios per run (seed 20261126); streams are defined i
 | GPT-6.1 Terra (medium) | 0.00 (+0.00) | 0.00 (+0.00) | 1.26 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.21 (+0.00) | 1.23 (+0.00) |
 | GPT-6.1 Terra (xhigh) | 0.00 (+0.00) | 0.00 (+0.00) | 1.11 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.30 (+0.00) | 1.30 (+0.00) |
 
-Plan streams S1, S2, S1 endpoint-heavy, S1M, S1T and S1T recentred run with owner assumptions off (owner-named transfers, O46 provider quota ceilings and O198 published dollar limits; E167): Claude Haiku 5.5 (high) on Claude Max 20x, Claude Haiku 5.5 (high) on Claude Max 5x, Claude Haiku 5.5 (high) on Claude Pro, Claude Haiku 5.5 (high) on OpenCode Go, Claude Haiku 5.5 (low) on Claude Max 20x, Claude Haiku 5.5 (low) on Claude Max 5x, Claude Haiku 5.5 (low) on Claude Pro, Claude Haiku 5.5 (low) on OpenCode Go, Claude Haiku 5.5 (medium) on Claude Max 20x, Claude Haiku 5.5 (medium) on Claude Max 5x, Claude Haiku 5.5 (medium) on Claude Pro, Claude Haiku 5.5 (medium) on OpenCode Go, Claude Haiku 5.5 (xhigh) on Claude Max 20x, Claude Haiku 5.5 (xhigh) on Claude Max 5x, Claude Haiku 5.5 (xhigh) on Claude Pro, Claude Haiku 5.5 (xhigh) on OpenCode Go, Claude Sonnet 5.5 (max) on Claude Max 20x, Claude Sonnet 5.5 (max) on Claude Max 5x, Claude Sonnet 5.5 (max) on Claude Pro, GPT-6 Luna (high) on ChatGPT Plus, GPT-6 Luna (high) on ChatGPT Pro 100, GPT-6 Luna (high) on ChatGPT Pro 200, GPT-6 Luna (high) on ChatGPT Pro 500, GPT-6 Luna (high) on OpenCode Go, GPT-6 Luna (low) on ChatGPT Plus, GPT-6 Luna (low) on ChatGPT Pro 100, GPT-6 Luna (low) on ChatGPT Pro 200, GPT-6 Luna (low) on ChatGPT Pro 500, GPT-6 Luna (low) on OpenCode Go, GPT-6 Luna (max) on ChatGPT Plus, GPT-6 Luna (max) on ChatGPT Pro 100, GPT-6 Luna (max) on ChatGPT Pro 200, GPT-6 Luna (max) on ChatGPT Pro 500, GPT-6 Luna (max) on OpenCode Go, GPT-6 Luna (medium) on ChatGPT Plus, GPT-6 Luna (medium) on ChatGPT Pro 100, GPT-6 Luna (medium) on ChatGPT Pro 200, GPT-6 Luna (medium) on ChatGPT Pro 500, GPT-6 Luna (medium) on OpenCode Go, GPT-6 Luna (xhigh) on ChatGPT Plus, GPT-6 Luna (xhigh) on ChatGPT Pro 100, GPT-6 Luna (xhigh) on ChatGPT Pro 200, GPT-6 Luna (xhigh) on ChatGPT Pro 500, GPT-6 Luna (xhigh) on OpenCode Go, GPT-6.1 Terra (high) on ChatGPT Plus, GPT-6.1 Terra (high) on ChatGPT Pro 100, GPT-6.1 Terra (high) on ChatGPT Pro 200, GPT-6.1 Terra (high) on ChatGPT Pro 500, GPT-6.1 Terra (low) on ChatGPT Plus, GPT-6.1 Terra (low) on ChatGPT Pro 100, GPT-6.1 Terra (low) on ChatGPT Pro 200, GPT-6.1 Terra (low) on ChatGPT Pro 500, GPT-6.1 Terra (max) on ChatGPT Plus, GPT-6.1 Terra (max) on ChatGPT Pro 100, GPT-6.1 Terra (max) on ChatGPT Pro 200, GPT-6.1 Terra (max) on ChatGPT Pro 500, GPT-6.1 Terra (medium) on ChatGPT Plus, GPT-6.1 Terra (medium) on ChatGPT Pro 100, GPT-6.1 Terra (medium) on ChatGPT Pro 200, GPT-6.1 Terra (medium) on ChatGPT Pro 500, GPT-6.1 Terra (xhigh) on ChatGPT Plus, GPT-6.1 Terra (xhigh) on ChatGPT Pro 100, GPT-6.1 Terra (xhigh) on ChatGPT Pro 200, GPT-6.1 Terra (xhigh) on ChatGPT Pro 500 depend on an owner assumption and are unevaluable there (—), never reselected or replaced by API cost.
+Plan streams S1, S2, S1 endpoint-heavy, S1M, S1T and S1T recentred run with owner assumptions off (owner-named transfers, O46 provider quota ceilings and O198 published dollar limits; E167): Claude Fable 5.2 (high) on Claude Max 20x, Claude Fable 5.2 (high) on Claude Max 5x, Claude Fable 5.2 (max) on Claude Max 20x, Claude Fable 5.2 (max) on Claude Max 5x, Claude Fable 5.2 (xhigh) on Claude Max 20x, Claude Fable 5.2 (xhigh) on Claude Max 5x, Claude Haiku 5.5 (high) on Claude Max 20x, Claude Haiku 5.5 (high) on Claude Max 5x, Claude Haiku 5.5 (high) on Claude Pro, Claude Haiku 5.5 (high) on OpenCode Go, Claude Haiku 5.5 (low) on Claude Max 20x, Claude Haiku 5.5 (low) on Claude Max 5x, Claude Haiku 5.5 (low) on Claude Pro, Claude Haiku 5.5 (low) on OpenCode Go, Claude Haiku 5.5 (medium) on Claude Max 20x, Claude Haiku 5.5 (medium) on Claude Max 5x, Claude Haiku 5.5 (medium) on Claude Pro, Claude Haiku 5.5 (medium) on OpenCode Go, Claude Haiku 5.5 (xhigh) on Claude Max 20x, Claude Haiku 5.5 (xhigh) on Claude Max 5x, Claude Haiku 5.5 (xhigh) on Claude Pro, Claude Haiku 5.5 (xhigh) on OpenCode Go, Claude Sonnet 5.5 (max) on Claude Max 20x, Claude Sonnet 5.5 (max) on Claude Max 5x, Claude Sonnet 5.5 (max) on Claude Pro, GPT-6 Luna (high) on ChatGPT Plus, GPT-6 Luna (high) on ChatGPT Pro 100, GPT-6 Luna (high) on ChatGPT Pro 200, GPT-6 Luna (high) on ChatGPT Pro 500, GPT-6 Luna (high) on OpenCode Go, GPT-6 Luna (low) on ChatGPT Plus, GPT-6 Luna (low) on ChatGPT Pro 100, GPT-6 Luna (low) on ChatGPT Pro 200, GPT-6 Luna (low) on ChatGPT Pro 500, GPT-6 Luna (low) on OpenCode Go, GPT-6 Luna (max) on ChatGPT Plus, GPT-6 Luna (max) on ChatGPT Pro 100, GPT-6 Luna (max) on ChatGPT Pro 200, GPT-6 Luna (max) on ChatGPT Pro 500, GPT-6 Luna (max) on OpenCode Go, GPT-6 Luna (medium) on ChatGPT Plus, GPT-6 Luna (medium) on ChatGPT Pro 100, GPT-6 Luna (medium) on ChatGPT Pro 200, GPT-6 Luna (medium) on ChatGPT Pro 500, GPT-6 Luna (medium) on OpenCode Go, GPT-6 Luna (xhigh) on ChatGPT Plus, GPT-6 Luna (xhigh) on ChatGPT Pro 100, GPT-6 Luna (xhigh) on ChatGPT Pro 200, GPT-6 Luna (xhigh) on ChatGPT Pro 500, GPT-6 Luna (xhigh) on OpenCode Go, GPT-6.1 Terra (high) on ChatGPT Plus, GPT-6.1 Terra (high) on ChatGPT Pro 100, GPT-6.1 Terra (high) on ChatGPT Pro 200, GPT-6.1 Terra (high) on ChatGPT Pro 500, GPT-6.1 Terra (low) on ChatGPT Plus, GPT-6.1 Terra (low) on ChatGPT Pro 100, GPT-6.1 Terra (low) on ChatGPT Pro 200, GPT-6.1 Terra (low) on ChatGPT Pro 500, GPT-6.1 Terra (max) on ChatGPT Plus, GPT-6.1 Terra (max) on ChatGPT Pro 100, GPT-6.1 Terra (max) on ChatGPT Pro 200, GPT-6.1 Terra (max) on ChatGPT Pro 500, GPT-6.1 Terra (medium) on ChatGPT Plus, GPT-6.1 Terra (medium) on ChatGPT Pro 100, GPT-6.1 Terra (medium) on ChatGPT Pro 200, GPT-6.1 Terra (medium) on ChatGPT Pro 500, GPT-6.1 Terra (xhigh) on ChatGPT Plus, GPT-6.1 Terra (xhigh) on ChatGPT Pro 100, GPT-6.1 Terra (xhigh) on ChatGPT Pro 200, GPT-6.1 Terra (xhigh) on ChatGPT Pro 500 depend on an owner assumption and are unevaluable there (—), never reselected or replaced by API cost.
 
 ### Plan basis: rank 1
 
 | Configuration | S0 | S1 | S2 | S1 endpoint-heavy | S1M | S1T | S1T recentred |
 |---|---:|---:|---:|---:|---:|---:|---:|
-| Claude Fable 5.2 (high) on API-cost fallback | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| Claude Fable 5.2 (max) on API-cost fallback | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| Claude Fable 5.2 (xhigh) on API-cost fallback | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| Claude Fable 5.2 (high) on Claude Max 20x | 0.0% | — | — | — | — | — | — |
+| Claude Fable 5.2 (high) on Claude Max 5x | 0.0% | — | — | — | — | — | — |
+| Claude Fable 5.2 (max) on Claude Max 20x | 0.0% | — | — | — | — | — | — |
+| Claude Fable 5.2 (max) on Claude Max 5x | 0.0% | — | — | — | — | — | — |
+| Claude Fable 5.2 (xhigh) on Claude Max 20x | 0.0% | — | — | — | — | — | — |
+| Claude Fable 5.2 (xhigh) on Claude Max 5x | 0.0% | — | — | — | — | — | — |
 | Claude Haiku 5.5 (high) on Claude Max 20x | 0.0% | — | — | — | — | — | — |
 | Claude Haiku 5.5 (high) on Claude Max 5x | 0.0% | — | — | — | — | — | — |
 | Claude Haiku 5.5 (high) on Claude Pro | 0.0% | — | — | — | — | — | — |
@@ -1201,13 +1204,13 @@ Plan streams S1, S2, S1 endpoint-heavy, S1M, S1T and S1T recentred run with owne
 | Claude Haiku 5.5 (xhigh) on OpenCode Go | 0.0% | — | — | — | — | — | — |
 | Claude Opus 5.5 (high) on Claude Max 20x | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
 | Claude Opus 5.5 (high) on Claude Max 5x | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| Claude Opus 5.5 (high) on Claude Pro | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 1.0% | 0.9% |
+| Claude Opus 5.5 (high) on Claude Pro | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.8% | 1.1% |
 | Claude Opus 5.5 (max) on Claude Max 20x | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
 | Claude Opus 5.5 (max) on Claude Max 5x | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
 | Claude Opus 5.5 (max) on Claude Pro | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.1% | 0.2% |
 | Claude Opus 5.5 (xhigh) on Claude Max 20x | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
 | Claude Opus 5.5 (xhigh) on Claude Max 5x | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| Claude Opus 5.5 (xhigh) on Claude Pro | 0.0% | 0.0% | 0.5% | 0.0% | 0.0% | 2.4% | 2.5% |
+| Claude Opus 5.5 (xhigh) on Claude Pro | 0.0% | 0.0% | 0.6% | 0.0% | 0.0% | 2.5% | 2.6% |
 | Claude Sonnet 5.5 (max) on Claude Max 20x | 0.0% | — | — | — | — | — | — |
 | Claude Sonnet 5.5 (max) on Claude Max 5x | 0.0% | — | — | — | — | — | — |
 | Claude Sonnet 5.5 (max) on Claude Pro | 0.0% | — | — | — | — | — | — |
@@ -1251,7 +1254,7 @@ Plan streams S1, S2, S1 endpoint-heavy, S1M, S1T and S1T recentred run with owne
 | GPT-6.1 Sol (high) on ChatGPT Plus | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
 | GPT-6.1 Sol (high) on ChatGPT Pro 100 | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
 | GPT-6.1 Sol (high) on ChatGPT Pro 200 | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| GPT-6.1 Sol (high) on ChatGPT Pro 500 | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 7.7% | 8.0% |
+| GPT-6.1 Sol (high) on ChatGPT Pro 500 | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 8.6% | 7.5% |
 | GPT-6.1 Sol (low) on ChatGPT Plus | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
 | GPT-6.1 Sol (low) on ChatGPT Pro 100 | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
 | GPT-6.1 Sol (low) on ChatGPT Pro 200 | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
@@ -1259,15 +1262,15 @@ Plan streams S1, S2, S1 endpoint-heavy, S1M, S1T and S1T recentred run with owne
 | GPT-6.1 Sol (max) on ChatGPT Plus | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
 | GPT-6.1 Sol (max) on ChatGPT Pro 100 | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
 | GPT-6.1 Sol (max) on ChatGPT Pro 200 | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| GPT-6.1 Sol (max) on ChatGPT Pro 500 | 0.0% | 0.0% | 1.7% | 0.0% | 0.0% | 35.0% | 35.6% |
+| GPT-6.1 Sol (max) on ChatGPT Pro 500 | 0.0% | 0.0% | 1.7% | 0.0% | 0.0% | 35.9% | 35.8% |
 | GPT-6.1 Sol (medium) on ChatGPT Plus | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
 | GPT-6.1 Sol (medium) on ChatGPT Pro 100 | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
 | GPT-6.1 Sol (medium) on ChatGPT Pro 200 | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| GPT-6.1 Sol (medium) on ChatGPT Pro 500 | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 1.8% | 1.6% |
+| GPT-6.1 Sol (medium) on ChatGPT Pro 500 | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 1.7% | 1.7% |
 | GPT-6.1 Sol (xhigh) on ChatGPT Plus | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
 | GPT-6.1 Sol (xhigh) on ChatGPT Pro 100 | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
 | GPT-6.1 Sol (xhigh) on ChatGPT Pro 200 | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| GPT-6.1 Sol (xhigh) on ChatGPT Pro 500 | 100.0% | 100.0% | 97.8% | 100.0% | 100.0% | 51.9% | 51.3% |
+| GPT-6.1 Sol (xhigh) on ChatGPT Pro 500 | 100.0% | 100.0% | 97.7% | 100.0% | 100.0% | 50.3% | 51.1% |
 | GPT-6.1 Terra (high) on ChatGPT Plus | 0.0% | — | — | — | — | — | — |
 | GPT-6.1 Terra (high) on ChatGPT Pro 100 | 0.0% | — | — | — | — | — | — |
 | GPT-6.1 Terra (high) on ChatGPT Pro 200 | 0.0% | — | — | — | — | — | — |
@@ -1293,9 +1296,12 @@ Plan streams S1, S2, S1 endpoint-heavy, S1M, S1T and S1T recentred run with owne
 
 | Configuration | S0 | S1 | S2 | S1 endpoint-heavy | S1M | S1T | S1T recentred |
 |---|---:|---:|---:|---:|---:|---:|---:|
-| Claude Fable 5.2 (high) on API-cost fallback | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| Claude Fable 5.2 (max) on API-cost fallback | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| Claude Fable 5.2 (xhigh) on API-cost fallback | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+| Claude Fable 5.2 (high) on Claude Max 20x | 0.0% | — | — | — | — | — | — |
+| Claude Fable 5.2 (high) on Claude Max 5x | 0.0% | — | — | — | — | — | — |
+| Claude Fable 5.2 (max) on Claude Max 20x | 0.0% | — | — | — | — | — | — |
+| Claude Fable 5.2 (max) on Claude Max 5x | 0.0% | — | — | — | — | — | — |
+| Claude Fable 5.2 (xhigh) on Claude Max 20x | 0.0% | — | — | — | — | — | — |
+| Claude Fable 5.2 (xhigh) on Claude Max 5x | 0.0% | — | — | — | — | — | — |
 | Claude Haiku 5.5 (high) on Claude Max 20x | 0.0% | — | — | — | — | — | — |
 | Claude Haiku 5.5 (high) on Claude Max 5x | 0.0% | — | — | — | — | — | — |
 | Claude Haiku 5.5 (high) on Claude Pro | 0.0% | — | — | — | — | — | — |
@@ -1312,15 +1318,15 @@ Plan streams S1, S2, S1 endpoint-heavy, S1M, S1T and S1T recentred run with owne
 | Claude Haiku 5.5 (xhigh) on Claude Max 5x | 0.0% | — | — | — | — | — | — |
 | Claude Haiku 5.5 (xhigh) on Claude Pro | 0.0% | — | — | — | — | — | — |
 | Claude Haiku 5.5 (xhigh) on OpenCode Go | 0.0% | — | — | — | — | — | — |
-| Claude Opus 5.5 (high) on Claude Max 20x | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 1.1% | 1.0% |
-| Claude Opus 5.5 (high) on Claude Max 5x | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.8% | 0.6% |
-| Claude Opus 5.5 (high) on Claude Pro | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 1.2% | 1.1% |
-| Claude Opus 5.5 (max) on Claude Max 20x | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.1% | 0.2% |
-| Claude Opus 5.5 (max) on Claude Max 5x | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.1% | 0.1% |
+| Claude Opus 5.5 (high) on Claude Max 20x | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.4% | 0.5% |
+| Claude Opus 5.5 (high) on Claude Max 5x | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.8% | 1.0% |
+| Claude Opus 5.5 (high) on Claude Pro | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.9% | 1.3% |
+| Claude Opus 5.5 (max) on Claude Max 20x | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.1% | 0.1% |
+| Claude Opus 5.5 (max) on Claude Max 5x | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.1% | 0.2% |
 | Claude Opus 5.5 (max) on Claude Pro | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.1% | 0.2% |
-| Claude Opus 5.5 (xhigh) on Claude Max 20x | 0.0% | 0.0% | 0.8% | 0.0% | 0.0% | 2.7% | 2.7% |
-| Claude Opus 5.5 (xhigh) on Claude Max 5x | 0.0% | 0.0% | 0.3% | 0.0% | 0.0% | 2.0% | 1.9% |
-| Claude Opus 5.5 (xhigh) on Claude Pro | 0.0% | 0.0% | 0.8% | 0.0% | 0.0% | 2.9% | 2.8% |
+| Claude Opus 5.5 (xhigh) on Claude Max 20x | 0.0% | 0.0% | 0.1% | 0.0% | 0.0% | 1.3% | 1.4% |
+| Claude Opus 5.5 (xhigh) on Claude Max 5x | 0.0% | 0.0% | 0.5% | 0.0% | 0.0% | 2.4% | 2.4% |
+| Claude Opus 5.5 (xhigh) on Claude Pro | 0.0% | 0.0% | 0.8% | 0.0% | 0.0% | 3.0% | 3.1% |
 | Claude Sonnet 5.5 (max) on Claude Max 20x | 0.0% | — | — | — | — | — | — |
 | Claude Sonnet 5.5 (max) on Claude Max 5x | 0.0% | — | — | — | — | — | — |
 | Claude Sonnet 5.5 (max) on Claude Pro | 0.0% | — | — | — | — | — | — |
@@ -1361,26 +1367,26 @@ Plan streams S1, S2, S1 endpoint-heavy, S1M, S1T and S1T recentred run with owne
 | GPT-6 Luna (xhigh) on ChatGPT Pro 200 | 0.0% | — | — | — | — | — | — |
 | GPT-6 Luna (xhigh) on ChatGPT Pro 500 | 0.0% | — | — | — | — | — | — |
 | GPT-6 Luna (xhigh) on OpenCode Go | 0.0% | — | — | — | — | — | — |
-| GPT-6.1 Sol (high) on ChatGPT Plus | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 7.6% | 7.9% |
-| GPT-6.1 Sol (high) on ChatGPT Pro 100 | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 7.6% | 7.9% |
+| GPT-6.1 Sol (high) on ChatGPT Plus | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 8.6% | 7.5% |
+| GPT-6.1 Sol (high) on ChatGPT Pro 100 | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 8.6% | 7.5% |
 | GPT-6.1 Sol (high) on ChatGPT Pro 200 | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| GPT-6.1 Sol (high) on ChatGPT Pro 500 | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 8.7% | 9.0% |
+| GPT-6.1 Sol (high) on ChatGPT Pro 500 | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 10.0% | 8.7% |
 | GPT-6.1 Sol (low) on ChatGPT Plus | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
 | GPT-6.1 Sol (low) on ChatGPT Pro 100 | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
 | GPT-6.1 Sol (low) on ChatGPT Pro 200 | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
 | GPT-6.1 Sol (low) on ChatGPT Pro 500 | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| GPT-6.1 Sol (max) on ChatGPT Plus | 0.0% | 0.0% | 1.7% | 0.0% | 0.0% | 34.8% | 35.5% |
-| GPT-6.1 Sol (max) on ChatGPT Pro 100 | 0.0% | 0.0% | 1.7% | 0.0% | 0.0% | 34.8% | 35.5% |
+| GPT-6.1 Sol (max) on ChatGPT Plus | 0.0% | 0.0% | 1.7% | 0.0% | 0.0% | 35.9% | 35.8% |
+| GPT-6.1 Sol (max) on ChatGPT Pro 100 | 0.0% | 0.0% | 1.7% | 0.0% | 0.0% | 35.9% | 35.8% |
 | GPT-6.1 Sol (max) on ChatGPT Pro 200 | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| GPT-6.1 Sol (max) on ChatGPT Pro 500 | 0.0% | 0.0% | 5.5% | 0.0% | 0.0% | 37.2% | 37.9% |
-| GPT-6.1 Sol (medium) on ChatGPT Plus | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 1.7% | 1.5% |
-| GPT-6.1 Sol (medium) on ChatGPT Pro 100 | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 1.7% | 1.5% |
+| GPT-6.1 Sol (max) on ChatGPT Pro 500 | 0.0% | 0.0% | 5.2% | 0.0% | 0.0% | 38.5% | 38.5% |
+| GPT-6.1 Sol (medium) on ChatGPT Plus | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 1.7% | 1.7% |
+| GPT-6.1 Sol (medium) on ChatGPT Pro 100 | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 1.7% | 1.7% |
 | GPT-6.1 Sol (medium) on ChatGPT Pro 200 | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| GPT-6.1 Sol (medium) on ChatGPT Pro 500 | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 2.1% | 1.8% |
-| GPT-6.1 Sol (xhigh) on ChatGPT Plus | 100.0% | 100.0% | 97.5% | 100.0% | 100.0% | 51.7% | 51.1% |
-| GPT-6.1 Sol (xhigh) on ChatGPT Pro 100 | 100.0% | 100.0% | 97.5% | 100.0% | 100.0% | 51.7% | 51.1% |
+| GPT-6.1 Sol (medium) on ChatGPT Pro 500 | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 2.0% | 2.1% |
+| GPT-6.1 Sol (xhigh) on ChatGPT Plus | 100.0% | 100.0% | 97.8% | 100.0% | 100.0% | 50.3% | 51.2% |
+| GPT-6.1 Sol (xhigh) on ChatGPT Pro 100 | 100.0% | 100.0% | 97.8% | 100.0% | 100.0% | 50.3% | 51.2% |
 | GPT-6.1 Sol (xhigh) on ChatGPT Pro 200 | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| GPT-6.1 Sol (xhigh) on ChatGPT Pro 500 | 100.0% | 100.0% | 99.2% | 100.0% | 100.0% | 54.3% | 53.6% |
+| GPT-6.1 Sol (xhigh) on ChatGPT Pro 500 | 100.0% | 100.0% | 99.5% | 100.0% | 100.0% | 53.2% | 54.0% |
 | GPT-6.1 Terra (high) on ChatGPT Plus | 0.0% | — | — | — | — | — | — |
 | GPT-6.1 Terra (high) on ChatGPT Pro 100 | 0.0% | — | — | — | — | — | — |
 | GPT-6.1 Terra (high) on ChatGPT Pro 200 | 0.0% | — | — | — | — | — | — |
@@ -1406,9 +1412,12 @@ Plan streams S1, S2, S1 endpoint-heavy, S1M, S1T and S1T recentred run with owne
 
 | Configuration | S0 | S1 | S2 | S1 endpoint-heavy | S1M | S1T | S1T recentred |
 |---|---:|---:|---:|---:|---:|---:|---:|
-| Claude Fable 5.2 (high) on API-cost fallback | 0.0% | 0.0% | 28.6% | 0.0% | 0.0% | 17.5% | 17.0% |
-| Claude Fable 5.2 (max) on API-cost fallback | 100.0% | 100.0% | 99.7% | 100.0% | 100.0% | 71.4% | 72.0% |
-| Claude Fable 5.2 (xhigh) on API-cost fallback | 100.0% | 100.0% | 57.1% | 100.0% | 100.0% | 26.2% | 26.0% |
+| Claude Fable 5.2 (high) on Claude Max 20x | 0.0% | — | — | — | — | — | — |
+| Claude Fable 5.2 (high) on Claude Max 5x | 0.0% | — | — | — | — | — | — |
+| Claude Fable 5.2 (max) on Claude Max 20x | 0.0% | — | — | — | — | — | — |
+| Claude Fable 5.2 (max) on Claude Max 5x | 100.0% | — | — | — | — | — | — |
+| Claude Fable 5.2 (xhigh) on Claude Max 20x | 0.0% | — | — | — | — | — | — |
+| Claude Fable 5.2 (xhigh) on Claude Max 5x | 100.0% | — | — | — | — | — | — |
 | Claude Haiku 5.5 (high) on Claude Max 20x | 0.0% | — | — | — | — | — | — |
 | Claude Haiku 5.5 (high) on Claude Max 5x | 0.0% | — | — | — | — | — | — |
 | Claude Haiku 5.5 (high) on Claude Pro | 100.0% | — | — | — | — | — | — |
@@ -1427,27 +1436,27 @@ Plan streams S1, S2, S1 endpoint-heavy, S1M, S1T and S1T recentred run with owne
 | Claude Haiku 5.5 (xhigh) on OpenCode Go | 0.0% | — | — | — | — | — | — |
 | Claude Opus 5.5 (high) on Claude Max 20x | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
 | Claude Opus 5.5 (high) on Claude Max 5x | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| Claude Opus 5.5 (high) on Claude Pro | 100.0% | 100.0% | 96.7% | 100.0% | 100.0% | 69.3% | 70.4% |
+| Claude Opus 5.5 (high) on Claude Pro | 100.0% | 100.0% | 96.7% | 100.0% | 100.0% | 70.5% | 70.3% |
 | Claude Opus 5.5 (max) on Claude Max 20x | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
 | Claude Opus 5.5 (max) on Claude Max 5x | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| Claude Opus 5.5 (max) on Claude Pro | 0.0% | 0.0% | 4.3% | 0.0% | 0.0% | 9.5% | 9.7% |
+| Claude Opus 5.5 (max) on Claude Pro | 0.0% | 0.0% | 4.0% | 0.0% | 0.0% | 9.3% | 10.2% |
 | Claude Opus 5.5 (xhigh) on Claude Max 20x | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
 | Claude Opus 5.5 (xhigh) on Claude Max 5x | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| Claude Opus 5.5 (xhigh) on Claude Pro | 0.0% | 0.0% | 10.8% | 0.0% | 0.0% | 20.1% | 20.9% |
+| Claude Opus 5.5 (xhigh) on Claude Pro | 0.0% | 0.0% | 10.3% | 0.0% | 0.0% | 21.8% | 22.1% |
 | Claude Sonnet 5.5 (max) on Claude Max 20x | 0.0% | — | — | — | — | — | — |
 | Claude Sonnet 5.5 (max) on Claude Max 5x | 0.0% | — | — | — | — | — | — |
 | Claude Sonnet 5.5 (max) on Claude Pro | 0.0% | — | — | — | — | — | — |
 | GPT-6 Astra (high) on ChatGPT Plus | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
 | GPT-6 Astra (high) on ChatGPT Pro 100 | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| GPT-6 Astra (high) on ChatGPT Pro 200 | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 2.9% | 2.8% |
+| GPT-6 Astra (high) on ChatGPT Pro 200 | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 2.7% | 2.7% |
 | GPT-6 Astra (high) on ChatGPT Pro 500 | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
 | GPT-6 Astra (max) on ChatGPT Plus | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
 | GPT-6 Astra (max) on ChatGPT Pro 100 | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| GPT-6 Astra (max) on ChatGPT Pro 200 | 100.0% | 100.0% | 81.0% | 100.0% | 100.0% | 37.6% | 38.8% |
+| GPT-6 Astra (max) on ChatGPT Pro 200 | 0.0% | 100.0% | 81.7% | 100.0% | 100.0% | 38.5% | 39.2% |
 | GPT-6 Astra (max) on ChatGPT Pro 500 | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
 | GPT-6 Astra (xhigh) on ChatGPT Plus | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
 | GPT-6 Astra (xhigh) on ChatGPT Pro 100 | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| GPT-6 Astra (xhigh) on ChatGPT Pro 200 | 0.0% | 0.0% | 15.7% | 0.0% | 0.0% | 36.8% | 37.3% |
+| GPT-6 Astra (xhigh) on ChatGPT Pro 200 | 0.0% | 0.0% | 15.7% | 0.0% | 0.0% | 36.1% | 37.6% |
 | GPT-6 Astra (xhigh) on ChatGPT Pro 500 | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
 | GPT-6 Luna (high) on ChatGPT Plus | 0.0% | — | — | — | — | — | — |
 | GPT-6 Luna (high) on ChatGPT Pro 100 | 0.0% | — | — | — | — | — | — |
@@ -1477,7 +1486,7 @@ Plan streams S1, S2, S1 endpoint-heavy, S1M, S1T and S1T recentred run with owne
 | GPT-6.1 Sol (high) on ChatGPT Plus | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
 | GPT-6.1 Sol (high) on ChatGPT Pro 100 | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
 | GPT-6.1 Sol (high) on ChatGPT Pro 200 | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| GPT-6.1 Sol (high) on ChatGPT Pro 500 | 100.0% | 100.0% | 99.9% | 100.0% | 100.0% | 81.9% | 81.9% |
+| GPT-6.1 Sol (high) on ChatGPT Pro 500 | 100.0% | 100.0% | 99.8% | 100.0% | 100.0% | 82.1% | 82.1% |
 | GPT-6.1 Sol (low) on ChatGPT Plus | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
 | GPT-6.1 Sol (low) on ChatGPT Pro 100 | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
 | GPT-6.1 Sol (low) on ChatGPT Pro 200 | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
@@ -1485,7 +1494,7 @@ Plan streams S1, S2, S1 endpoint-heavy, S1M, S1T and S1T recentred run with owne
 | GPT-6.1 Sol (max) on ChatGPT Plus | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
 | GPT-6.1 Sol (max) on ChatGPT Pro 100 | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
 | GPT-6.1 Sol (max) on ChatGPT Pro 200 | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| GPT-6.1 Sol (max) on ChatGPT Pro 500 | 100.0% | 100.0% | 99.9% | 100.0% | 100.0% | 78.8% | 79.6% |
+| GPT-6.1 Sol (max) on ChatGPT Pro 500 | 100.0% | 100.0% | 99.8% | 100.0% | 100.0% | 80.1% | 79.4% |
 | GPT-6.1 Sol (medium) on ChatGPT Plus | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
 | GPT-6.1 Sol (medium) on ChatGPT Pro 100 | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
 | GPT-6.1 Sol (medium) on ChatGPT Pro 200 | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
@@ -1493,7 +1502,7 @@ Plan streams S1, S2, S1 endpoint-heavy, S1M, S1T and S1T recentred run with owne
 | GPT-6.1 Sol (xhigh) on ChatGPT Plus | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
 | GPT-6.1 Sol (xhigh) on ChatGPT Pro 100 | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
 | GPT-6.1 Sol (xhigh) on ChatGPT Pro 200 | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| GPT-6.1 Sol (xhigh) on ChatGPT Pro 500 | 100.0% | 100.0% | 100.0% | 100.0% | 100.0% | 92.3% | 91.8% |
+| GPT-6.1 Sol (xhigh) on ChatGPT Pro 500 | 100.0% | 100.0% | 100.0% | 100.0% | 100.0% | 91.0% | 92.4% |
 | GPT-6.1 Terra (high) on ChatGPT Plus | 0.0% | — | — | — | — | — | — |
 | GPT-6.1 Terra (high) on ChatGPT Pro 100 | 0.0% | — | — | — | — | — | — |
 | GPT-6.1 Terra (high) on ChatGPT Pro 200 | 0.0% | — | — | — | — | — | — |
@@ -1519,9 +1528,12 @@ Plan streams S1, S2, S1 endpoint-heavy, S1M, S1T and S1T recentred run with owne
 
 | Configuration | S0 | S1 | S2 | S1 endpoint-heavy | S1M | S1T | S1T recentred |
 |---|---:|---:|---:|---:|---:|---:|---:|
-| Claude Fable 5.2 (high) on API-cost fallback | 0.00 (+0.00) | 0.00 (+0.00) | 1.04 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.34 (+0.00) | 1.35 (+0.00) |
-| Claude Fable 5.2 (max) on API-cost fallback | 0.00 (+0.00) | 0.00 (+0.00) | 0.96 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.37 (+0.00) | 1.36 (+0.00) |
-| Claude Fable 5.2 (xhigh) on API-cost fallback | 0.00 (+0.00) | 0.00 (+0.00) | 1.02 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.33 (+0.00) | 1.33 (+0.00) |
+| Claude Fable 5.2 (high) on Claude Max 20x | 0.00 (+0.00) | — | — | — | — | — | — |
+| Claude Fable 5.2 (high) on Claude Max 5x | 0.00 (+0.00) | — | — | — | — | — | — |
+| Claude Fable 5.2 (max) on Claude Max 20x | 0.00 (+0.00) | — | — | — | — | — | — |
+| Claude Fable 5.2 (max) on Claude Max 5x | 0.00 (+0.00) | — | — | — | — | — | — |
+| Claude Fable 5.2 (xhigh) on Claude Max 20x | 0.00 (+0.00) | — | — | — | — | — | — |
+| Claude Fable 5.2 (xhigh) on Claude Max 5x | 0.00 (+0.00) | — | — | — | — | — | — |
 | Claude Haiku 5.5 (high) on Claude Max 20x | 0.00 (+0.00) | — | — | — | — | — | — |
 | Claude Haiku 5.5 (high) on Claude Max 5x | 0.00 (+0.00) | — | — | — | — | — | — |
 | Claude Haiku 5.5 (high) on Claude Pro | 0.00 (+0.00) | — | — | — | — | — | — |
@@ -1538,30 +1550,30 @@ Plan streams S1, S2, S1 endpoint-heavy, S1M, S1T and S1T recentred run with owne
 | Claude Haiku 5.5 (xhigh) on Claude Max 5x | 0.00 (+0.00) | — | — | — | — | — | — |
 | Claude Haiku 5.5 (xhigh) on Claude Pro | 0.00 (+0.00) | — | — | — | — | — | — |
 | Claude Haiku 5.5 (xhigh) on OpenCode Go | 0.00 (+0.00) | — | — | — | — | — | — |
-| Claude Opus 5.5 (high) on Claude Max 20x | 0.00 (+0.00) | 0.00 (+0.00) | 1.14 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.31 (+0.00) | 1.31 (+0.00) |
-| Claude Opus 5.5 (high) on Claude Max 5x | 0.00 (+0.00) | 0.00 (+0.00) | 1.14 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.31 (+0.00) | 1.31 (+0.00) |
-| Claude Opus 5.5 (high) on Claude Pro | 0.00 (+0.00) | 0.00 (+0.00) | 1.14 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.31 (+0.00) | 1.31 (+0.00) |
-| Claude Opus 5.5 (max) on Claude Max 20x | 0.00 (+0.00) | 0.00 (+0.00) | 1.03 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.31 (+0.00) | 1.34 (+0.00) |
-| Claude Opus 5.5 (max) on Claude Max 5x | 0.00 (+0.00) | 0.00 (+0.00) | 1.03 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.31 (+0.00) | 1.34 (+0.00) |
-| Claude Opus 5.5 (max) on Claude Pro | 0.00 (+0.00) | 0.00 (+0.00) | 1.03 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.31 (+0.00) | 1.34 (+0.00) |
-| Claude Opus 5.5 (xhigh) on Claude Max 20x | 0.00 (+0.00) | 0.00 (+0.00) | 1.04 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.33 (+0.00) | 1.31 (+0.00) |
-| Claude Opus 5.5 (xhigh) on Claude Max 5x | 0.00 (+0.00) | 0.00 (+0.00) | 1.04 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.33 (+0.00) | 1.31 (+0.00) |
-| Claude Opus 5.5 (xhigh) on Claude Pro | 0.00 (+0.00) | 0.00 (+0.00) | 1.04 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.33 (+0.00) | 1.31 (+0.00) |
+| Claude Opus 5.5 (high) on Claude Max 20x | 0.00 (+0.00) | 0.00 (+0.00) | 1.12 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.31 (+0.00) | 1.32 (+0.00) |
+| Claude Opus 5.5 (high) on Claude Max 5x | 0.00 (+0.00) | 0.00 (+0.00) | 1.12 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.31 (+0.00) | 1.32 (+0.00) |
+| Claude Opus 5.5 (high) on Claude Pro | 0.00 (+0.00) | 0.00 (+0.00) | 1.12 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.31 (+0.00) | 1.32 (+0.00) |
+| Claude Opus 5.5 (max) on Claude Max 20x | 0.00 (+0.00) | 0.00 (+0.00) | 1.01 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.31 (+0.00) | 1.33 (+0.00) |
+| Claude Opus 5.5 (max) on Claude Max 5x | 0.00 (+0.00) | 0.00 (+0.00) | 1.01 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.31 (+0.00) | 1.33 (+0.00) |
+| Claude Opus 5.5 (max) on Claude Pro | 0.00 (+0.00) | 0.00 (+0.00) | 1.01 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.31 (+0.00) | 1.33 (+0.00) |
+| Claude Opus 5.5 (xhigh) on Claude Max 20x | 0.00 (+0.00) | 0.00 (+0.00) | 1.02 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.32 (+0.00) | 1.33 (+0.00) |
+| Claude Opus 5.5 (xhigh) on Claude Max 5x | 0.00 (+0.00) | 0.00 (+0.00) | 1.02 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.32 (+0.00) | 1.33 (+0.00) |
+| Claude Opus 5.5 (xhigh) on Claude Pro | 0.00 (+0.00) | 0.00 (+0.00) | 1.02 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.32 (+0.00) | 1.33 (+0.00) |
 | Claude Sonnet 5.5 (max) on Claude Max 20x | 0.00 (+0.00) | — | — | — | — | — | — |
 | Claude Sonnet 5.5 (max) on Claude Max 5x | 0.00 (+0.00) | — | — | — | — | — | — |
 | Claude Sonnet 5.5 (max) on Claude Pro | 0.00 (+0.00) | — | — | — | — | — | — |
-| GPT-6 Astra (high) on ChatGPT Plus | 0.00 (+0.00) | 0.00 (+0.00) | 0.87 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.40 (+0.00) | 1.39 (+0.00) |
-| GPT-6 Astra (high) on ChatGPT Pro 100 | 0.00 (+0.00) | 0.00 (+0.00) | 0.87 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.40 (+0.00) | 1.39 (+0.00) |
-| GPT-6 Astra (high) on ChatGPT Pro 200 | 0.00 (+0.00) | 0.00 (+0.00) | 0.87 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.40 (+0.00) | 1.39 (+0.00) |
-| GPT-6 Astra (high) on ChatGPT Pro 500 | 0.00 (+0.00) | 0.00 (+0.00) | 0.87 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.40 (+0.00) | 1.39 (+0.00) |
-| GPT-6 Astra (max) on ChatGPT Plus | 0.00 (+0.00) | 0.00 (+0.00) | 0.96 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.44 (+0.00) | 1.43 (+0.00) |
-| GPT-6 Astra (max) on ChatGPT Pro 100 | 0.00 (+0.00) | 0.00 (+0.00) | 0.96 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.44 (+0.00) | 1.43 (+0.00) |
-| GPT-6 Astra (max) on ChatGPT Pro 200 | 0.00 (+0.00) | 0.00 (+0.00) | 0.96 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.44 (+0.00) | 1.43 (+0.00) |
-| GPT-6 Astra (max) on ChatGPT Pro 500 | 0.00 (+0.00) | 0.00 (+0.00) | 0.96 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.44 (+0.00) | 1.43 (+0.00) |
-| GPT-6 Astra (xhigh) on ChatGPT Plus | 0.00 (+0.00) | 0.00 (+0.00) | 0.94 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.43 (+0.00) | 1.42 (+0.00) |
-| GPT-6 Astra (xhigh) on ChatGPT Pro 100 | 0.00 (+0.00) | 0.00 (+0.00) | 0.94 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.43 (+0.00) | 1.42 (+0.00) |
-| GPT-6 Astra (xhigh) on ChatGPT Pro 200 | 0.00 (+0.00) | 0.00 (+0.00) | 0.94 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.43 (+0.00) | 1.42 (+0.00) |
-| GPT-6 Astra (xhigh) on ChatGPT Pro 500 | 0.00 (+0.00) | 0.00 (+0.00) | 0.94 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.43 (+0.00) | 1.42 (+0.00) |
+| GPT-6 Astra (high) on ChatGPT Plus | 0.00 (+0.00) | 0.00 (+0.00) | 0.86 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.40 (+0.00) | 1.40 (+0.00) |
+| GPT-6 Astra (high) on ChatGPT Pro 100 | 0.00 (+0.00) | 0.00 (+0.00) | 0.86 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.40 (+0.00) | 1.40 (+0.00) |
+| GPT-6 Astra (high) on ChatGPT Pro 200 | 0.00 (+0.00) | 0.00 (+0.00) | 0.86 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.40 (+0.00) | 1.40 (+0.00) |
+| GPT-6 Astra (high) on ChatGPT Pro 500 | 0.00 (+0.00) | 0.00 (+0.00) | 0.86 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.40 (+0.00) | 1.40 (+0.00) |
+| GPT-6 Astra (max) on ChatGPT Plus | 0.00 (+0.00) | 0.00 (+0.00) | 0.96 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.43 (+0.00) | 1.42 (+0.00) |
+| GPT-6 Astra (max) on ChatGPT Pro 100 | 0.00 (+0.00) | 0.00 (+0.00) | 0.96 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.43 (+0.00) | 1.42 (+0.00) |
+| GPT-6 Astra (max) on ChatGPT Pro 200 | 0.00 (+0.00) | 0.00 (+0.00) | 0.96 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.43 (+0.00) | 1.42 (+0.00) |
+| GPT-6 Astra (max) on ChatGPT Pro 500 | 0.00 (+0.00) | 0.00 (+0.00) | 0.96 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.43 (+0.00) | 1.42 (+0.00) |
+| GPT-6 Astra (xhigh) on ChatGPT Plus | 0.00 (+0.00) | 0.00 (+0.00) | 0.93 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.42 (+0.00) | 1.44 (+0.00) |
+| GPT-6 Astra (xhigh) on ChatGPT Pro 100 | 0.00 (+0.00) | 0.00 (+0.00) | 0.93 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.42 (+0.00) | 1.44 (+0.00) |
+| GPT-6 Astra (xhigh) on ChatGPT Pro 200 | 0.00 (+0.00) | 0.00 (+0.00) | 0.93 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.42 (+0.00) | 1.44 (+0.00) |
+| GPT-6 Astra (xhigh) on ChatGPT Pro 500 | 0.00 (+0.00) | 0.00 (+0.00) | 0.93 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.42 (+0.00) | 1.44 (+0.00) |
 | GPT-6 Luna (high) on ChatGPT Plus | 0.00 (+0.00) | — | — | — | — | — | — |
 | GPT-6 Luna (high) on ChatGPT Pro 100 | 0.00 (+0.00) | — | — | — | — | — | — |
 | GPT-6 Luna (high) on ChatGPT Pro 200 | 0.00 (+0.00) | — | — | — | — | — | — |
@@ -1587,26 +1599,26 @@ Plan streams S1, S2, S1 endpoint-heavy, S1M, S1T and S1T recentred run with owne
 | GPT-6 Luna (xhigh) on ChatGPT Pro 200 | 0.00 (+0.00) | — | — | — | — | — | — |
 | GPT-6 Luna (xhigh) on ChatGPT Pro 500 | 0.00 (+0.00) | — | — | — | — | — | — |
 | GPT-6 Luna (xhigh) on OpenCode Go | 0.00 (+0.00) | — | — | — | — | — | — |
-| GPT-6.1 Sol (high) on ChatGPT Plus | 0.00 (+0.00) | 0.00 (+0.00) | 0.91 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.39 (+0.00) | 1.40 (+0.00) |
-| GPT-6.1 Sol (high) on ChatGPT Pro 100 | 0.00 (+0.00) | 0.00 (+0.00) | 0.91 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.39 (+0.00) | 1.40 (+0.00) |
-| GPT-6.1 Sol (high) on ChatGPT Pro 200 | 0.00 (+0.00) | 0.00 (+0.00) | 0.91 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.39 (+0.00) | 1.40 (+0.00) |
-| GPT-6.1 Sol (high) on ChatGPT Pro 500 | 0.00 (+0.00) | 0.00 (+0.00) | 0.91 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.39 (+0.00) | 1.40 (+0.00) |
-| GPT-6.1 Sol (low) on ChatGPT Plus | 0.00 (+0.00) | 0.00 (+0.00) | 1.23 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.22 (+0.00) | 1.22 (+0.00) |
-| GPT-6.1 Sol (low) on ChatGPT Pro 100 | 0.00 (+0.00) | 0.00 (+0.00) | 1.23 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.22 (+0.00) | 1.22 (+0.00) |
-| GPT-6.1 Sol (low) on ChatGPT Pro 200 | 0.00 (+0.00) | 0.00 (+0.00) | 1.23 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.22 (+0.00) | 1.22 (+0.00) |
-| GPT-6.1 Sol (low) on ChatGPT Pro 500 | 0.00 (+0.00) | 0.00 (+0.00) | 1.23 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.22 (+0.00) | 1.22 (+0.00) |
-| GPT-6.1 Sol (max) on ChatGPT Plus | 0.00 (+0.00) | 0.00 (+0.00) | 1.12 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.45 (+0.00) | 1.47 (+0.00) |
-| GPT-6.1 Sol (max) on ChatGPT Pro 100 | 0.00 (+0.00) | 0.00 (+0.00) | 1.12 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.45 (+0.00) | 1.47 (+0.00) |
-| GPT-6.1 Sol (max) on ChatGPT Pro 200 | 0.00 (+0.00) | 0.00 (+0.00) | 1.12 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.45 (+0.00) | 1.47 (+0.00) |
-| GPT-6.1 Sol (max) on ChatGPT Pro 500 | 0.00 (+0.00) | 0.00 (+0.00) | 1.12 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.45 (+0.00) | 1.47 (+0.00) |
-| GPT-6.1 Sol (medium) on ChatGPT Plus | 0.00 (+0.00) | 0.00 (+0.00) | 0.97 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.36 (+0.00) | 1.34 (+0.00) |
-| GPT-6.1 Sol (medium) on ChatGPT Pro 100 | 0.00 (+0.00) | 0.00 (+0.00) | 0.97 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.36 (+0.00) | 1.34 (+0.00) |
-| GPT-6.1 Sol (medium) on ChatGPT Pro 200 | 0.00 (+0.00) | 0.00 (+0.00) | 0.97 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.36 (+0.00) | 1.34 (+0.00) |
-| GPT-6.1 Sol (medium) on ChatGPT Pro 500 | 0.00 (+0.00) | 0.00 (+0.00) | 0.97 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.36 (+0.00) | 1.34 (+0.00) |
-| GPT-6.1 Sol (xhigh) on ChatGPT Plus | 0.00 (+0.00) | 0.00 (+0.00) | 1.03 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.44 (+0.00) | 1.43 (+0.00) |
-| GPT-6.1 Sol (xhigh) on ChatGPT Pro 100 | 0.00 (+0.00) | 0.00 (+0.00) | 1.03 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.44 (+0.00) | 1.43 (+0.00) |
-| GPT-6.1 Sol (xhigh) on ChatGPT Pro 200 | 0.00 (+0.00) | 0.00 (+0.00) | 1.03 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.44 (+0.00) | 1.43 (+0.00) |
-| GPT-6.1 Sol (xhigh) on ChatGPT Pro 500 | 0.00 (+0.00) | 0.00 (+0.00) | 1.03 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.44 (+0.00) | 1.43 (+0.00) |
+| GPT-6.1 Sol (high) on ChatGPT Plus | 0.00 (+0.00) | 0.00 (+0.00) | 0.90 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.40 (+0.00) | 1.37 (+0.00) |
+| GPT-6.1 Sol (high) on ChatGPT Pro 100 | 0.00 (+0.00) | 0.00 (+0.00) | 0.90 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.40 (+0.00) | 1.37 (+0.00) |
+| GPT-6.1 Sol (high) on ChatGPT Pro 200 | 0.00 (+0.00) | 0.00 (+0.00) | 0.90 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.40 (+0.00) | 1.37 (+0.00) |
+| GPT-6.1 Sol (high) on ChatGPT Pro 500 | 0.00 (+0.00) | 0.00 (+0.00) | 0.90 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.40 (+0.00) | 1.37 (+0.00) |
+| GPT-6.1 Sol (low) on ChatGPT Plus | 0.00 (+0.00) | 0.00 (+0.00) | 1.23 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.23 (+0.00) | 1.21 (+0.00) |
+| GPT-6.1 Sol (low) on ChatGPT Pro 100 | 0.00 (+0.00) | 0.00 (+0.00) | 1.23 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.23 (+0.00) | 1.21 (+0.00) |
+| GPT-6.1 Sol (low) on ChatGPT Pro 200 | 0.00 (+0.00) | 0.00 (+0.00) | 1.23 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.23 (+0.00) | 1.21 (+0.00) |
+| GPT-6.1 Sol (low) on ChatGPT Pro 500 | 0.00 (+0.00) | 0.00 (+0.00) | 1.23 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.23 (+0.00) | 1.21 (+0.00) |
+| GPT-6.1 Sol (max) on ChatGPT Plus | 0.00 (+0.00) | 0.00 (+0.00) | 1.11 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.45 (+0.00) | 1.47 (+0.00) |
+| GPT-6.1 Sol (max) on ChatGPT Pro 100 | 0.00 (+0.00) | 0.00 (+0.00) | 1.11 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.45 (+0.00) | 1.47 (+0.00) |
+| GPT-6.1 Sol (max) on ChatGPT Pro 200 | 0.00 (+0.00) | 0.00 (+0.00) | 1.11 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.45 (+0.00) | 1.47 (+0.00) |
+| GPT-6.1 Sol (max) on ChatGPT Pro 500 | 0.00 (+0.00) | 0.00 (+0.00) | 1.11 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.45 (+0.00) | 1.47 (+0.00) |
+| GPT-6.1 Sol (medium) on ChatGPT Plus | 0.00 (+0.00) | 0.00 (+0.00) | 0.96 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.35 (+0.00) | 1.36 (+0.00) |
+| GPT-6.1 Sol (medium) on ChatGPT Pro 100 | 0.00 (+0.00) | 0.00 (+0.00) | 0.96 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.35 (+0.00) | 1.36 (+0.00) |
+| GPT-6.1 Sol (medium) on ChatGPT Pro 200 | 0.00 (+0.00) | 0.00 (+0.00) | 0.96 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.35 (+0.00) | 1.36 (+0.00) |
+| GPT-6.1 Sol (medium) on ChatGPT Pro 500 | 0.00 (+0.00) | 0.00 (+0.00) | 0.96 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.35 (+0.00) | 1.36 (+0.00) |
+| GPT-6.1 Sol (xhigh) on ChatGPT Plus | 0.00 (+0.00) | 0.00 (+0.00) | 1.03 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.44 (+0.00) | 1.42 (+0.00) |
+| GPT-6.1 Sol (xhigh) on ChatGPT Pro 100 | 0.00 (+0.00) | 0.00 (+0.00) | 1.03 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.44 (+0.00) | 1.42 (+0.00) |
+| GPT-6.1 Sol (xhigh) on ChatGPT Pro 200 | 0.00 (+0.00) | 0.00 (+0.00) | 1.03 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.44 (+0.00) | 1.42 (+0.00) |
+| GPT-6.1 Sol (xhigh) on ChatGPT Pro 500 | 0.00 (+0.00) | 0.00 (+0.00) | 1.03 (+0.00) | 0.00 (+0.00) | 0.00 (+0.00) | 1.44 (+0.00) | 1.42 (+0.00) |
 | GPT-6.1 Terra (high) on ChatGPT Plus | 0.00 (+0.00) | — | — | — | — | — | — |
 | GPT-6.1 Terra (high) on ChatGPT Pro 100 | 0.00 (+0.00) | — | — | — | — | — | — |
 | GPT-6.1 Terra (high) on ChatGPT Pro 200 | 0.00 (+0.00) | — | — | — | — | — | — |
@@ -1638,31 +1650,31 @@ Plan streams S1, S2, S1 endpoint-heavy, S1M, S1T and S1T recentred run with owne
 
 - **Terminal-Bench cross-source agreement (AA's mini-SWE-agent run against tbench.ai):** defined; 0 rows take the leaf from tbench.ai (gap fill).
 - **Workload cross-check (E41, mandatory diagnostic):** Terminal-Bench 4.1 cost per solved task on AA's own execution against basket cost: τ_b 0.53 (interval 0.18 to 0.81), uncertain agreement; panel (29): Claude Fable 5.2 (max), Claude Fable 5.2 (high), Claude Fable 5.2 (xhigh), Claude Haiku 5.5 (xhigh), Claude Haiku 5.5 (high), Claude Haiku 5.5 (low), Claude Haiku 5.5 (medium), Claude Opus 5.5 (max), Claude Opus 5.5 (high), Claude Opus 5.5 (xhigh), Claude Sonnet 5.5 (max), GPT-6 Astra (max), GPT-6 Astra (high), GPT-6 Astra (xhigh), GPT-6 Luna (max), GPT-6 Luna (high), GPT-6 Luna (low), GPT-6 Luna (medium), GPT-6 Luna (xhigh), GPT-6.1 Sol (max), GPT-6.1 Sol (high), GPT-6.1 Sol (low), GPT-6.1 Sol (medium), GPT-6.1 Sol (xhigh), GPT-6.1 Terra (max), GPT-6.1 Terra (high), GPT-6.1 Terra (low), GPT-6.1 Terra (medium), GPT-6.1 Terra (xhigh).
-- **Rank separability (O39, independent-task approximation):** median separation 3.67 value points (API) and 3.61 (Plan); separable adjacent ranks: API 0 of 28, Plan 1 of 55. Assumptions: tasks are independent and each leaf's score is a mean over its published task count (a binomial leaf drawn from its Jeffreys posterior Beta(k + 1/2, n - k + 1/2), O142; plug-in SDs with the proportion (k + 1/2) / (n + 1), I28); attempts averaged within a task and tasks shared across models are ignored, so the noise is approximate; GDPval-AA: each row's rating interval as AA's model page displays it, read as a 95% normal interval (AA states no level), SD = half-width / 1.96; AA-Omniscience: each of 3,000 questions scores +1, 0 or -1, with the shares from AA's accuracy and hallucination rate; Vals boards (Vibe Code Bench v1.1, Code Migration v1.1): Vals' published standard error per record, read as the leaf's SD; AI Coding Daily: judged points over its seven graded projects read as a binomial share of 80 points (an assumption; the board publishes no error).
+- **Rank separability (O39, independent-task approximation):** median separation 3.67 value points (API) and 3.67 (Plan); separable adjacent ranks: API 0 of 28, Plan 1 of 61. Assumptions: tasks are independent and each leaf's score is a mean over its published task count (a binomial leaf drawn from its Jeffreys posterior Beta(k + 1/2, n - k + 1/2), O142; plug-in SDs with the proportion (k + 1/2) / (n + 1), I28); attempts averaged within a task and tasks shared across models are ignored, so the noise is approximate; GDPval-AA: each row's rating interval as AA's model page displays it, read as a 95% normal interval (AA states no level), SD = half-width / 1.96; AA-Omniscience: each of 3,000 questions scores +1, 0 or -1, with the shares from AA's accuracy and hallucination rate; Vals boards (Vibe Code Bench v1.1, Code Migration v1.1): Vals' published standard error per record, read as the leaf's SD; AI Coding Daily: judged points over its seven graded projects read as a binomial share of 80 points (an assumption; the board publishes no error).
 - **FrontierCode against Cognition:** FrontierCode 2.0 cross-source agreement (AA against Cognition, exact model and effort; E234, O153): Kendall tau 0.91 (interval 0.81 to 0.98) on 22 rows. Cognition minus AA: mean +0.2 points, largest 3.9.
 - **Gap-fill removal (E234, diagnostic):** no ranked row has a leaf from another party or the provider.
 - **Bar results without the gap fills (E234, sensitivity; labels unchanged):** cheapest displayed row as published, with fills removed, and with third-party fills third-party fills minus the signed mean offset +0.2 points (third party minus AA) — API quality 48.2: GPT-6.1 Sol (medium) in all three; API quality 30.6: GPT-6.1 Terra (low) in all three; API quality 56.0: GPT-6.1 Sol (xhigh) in all three; Plan quality 48.2: GPT-6.1 Sol (medium) in all three; Plan quality 30.6: Claude Haiku 5.5 (xhigh) in all three; Plan quality 56.0: GPT-6.1 Sol (xhigh) in all three.
 - **Harness cost (O123, S2 stress):** agent effects on log cost (Claude Code -0.08, Codex -0.03, DeepSeek Harness +0.36, Devin CLI -0.10, GitHub Copilot -0.25, Grok Build +0.15, Kimi Code CLI +0.22, Mistral Vibe -0.17, Muse Code +0.70, OpenCode -0.11, Pi -0.48, Qwen Code -0.14, mini-swe-agent -0.08); API ranks with each agent's effect removed: GPT-6.1 Sol (max) 1; GPT-6.1 Sol (xhigh) 2; GPT-6.1 Terra (max) 3; GPT-6.1 Sol (high) 4; GPT-6 Astra (xhigh) 5; GPT-6 Astra (max) 6; GPT-6.1 Sol (medium) 7; Claude Fable 5.2 (max) 8; Claude Fable 5.2 (high) 9; GPT-6 Astra (high) 10; Claude Sonnet 5.5 (max) 11; Claude Fable 5.2 (xhigh) 12; GPT-6.1 Terra (xhigh) 13; Claude Opus 5.5 (xhigh) 14; GPT-6.1 Terra (high) 15; Claude Opus 5.5 (max) 16; Claude Opus 5.5 (high) 17; GPT-6.1 Terra (medium) 18; GPT-6.1 Sol (low) 19; Claude Haiku 5.5 (xhigh) 20; GPT-6 Luna (max) 21; GPT-6.1 Terra (low) 22; Claude Haiku 5.5 (high) 23; GPT-6 Luna (xhigh) 24; GPT-6 Luna (high) 25; Claude Haiku 5.5 (medium) 26; GPT-6 Luna (medium) 27; Claude Haiku 5.5 (low) 28; GPT-6 Luna (low) 29. Coding Agent Index agents (each part of its costed configuration; none is the run behind the FrontierCode or Terminal-Bench leaf): GPT-6.1 Sol (max): Codex; Claude Opus 5.5 (max): Claude Code; GPT-6 Astra (max): Codex; GPT-6.1 Terra (max): Codex; Claude Sonnet 5.5 (max): Claude Code; GPT-6 Luna (max): Codex; Claude Fable 5.2 (high): Claude Code; Claude Fable 5.2 (max): Claude Code; Claude Fable 5.2 (xhigh): Claude Code.
 - **Quality agreement:** quality agreement (matched-panel sensitivity): Kendall tau 0.72 (interval 0.61 to 0.82) on 29 rows.
 - **Quality-substitution value agreement (API):** quality-substitution value agreement, api basis (matched-panel sensitivity): Kendall tau 0.65 (interval 0.47 to 0.81) on 29 rows.
-- **Quality-substitution value agreement (Plan):** quality-substitution value agreement, plan basis (matched-panel sensitivity): Kendall tau 0.55 (interval 0.32 to 0.75) on 29 rows.
+- **Quality-substitution value agreement (Plan):** quality-substitution value agreement, plan basis (matched-panel sensitivity): Kendall tau 0.53 (interval 0.31 to 0.71) on 29 rows.
 - **Disjoint-evidence agreement:** disjoint-evidence agreement (restricted evidence comparison, not an eligible ranking): Kendall tau 0.60 (interval 0.43 to 0.73) on 29 rows.
 - **Quality source shares:** AA-run 85%, independent 15%.
 - **Non-discriminating leaves:** lcr.
 - **Group drift:** estimated; flagged: none.
 - **Omniscience abstention sensitivity** (z_pen = max(0, I)): 11 rows move; largest move 2 (Claude Fable 5.2 (xhigh)).
-- **GDPval-AA logistic sensitivity** (z = 100 / (1 + 10^((1600 - E) / 400)) against AA's pinned anchor; every other input fixed): API 9 rows move; largest move 2 (Claude Opus 5.5 (max), GPT-6 Astra (high), GPT-6.1 Terra (xhigh)); Plan 13 rows move; largest move 2 (GPT-6.1 Sol (high)).
+- **GDPval-AA logistic sensitivity** (z = 100 / (1 + 10^((1600 - E) / 400)) against AA's pinned anchor; every other input fixed): API 9 rows move; largest move 2 (Claude Opus 5.5 (max), GPT-6 Astra (high), GPT-6.1 Terra (xhigh)); Plan 13 rows move; largest move 3 (GPT-6.1 Sol (high)).
 - **Anchor stability:** trimmed anchors (P10 / 2 and P90 x 2 (diagnostic only)) give $29.40 to $9,425.07; 19 rows move; largest move 7 (GPT-6.1 Terra (high)).
 
 - **Basket readiness (E22):** priced leaves cover 62% of nominal quality weight (AutomationBench-AA, FrontierCode 2.0, GDP.pdf (AA), Terminal-Bench-Science 0.1, Terminal-Bench 4.1 (AA run)); pending components: Coding Agent Index, ITBench-AA.
 - **SWE cost companion (O14, diagnostic):** 9 rows evaluated; flagged far from the median ratio: none.
 - **Matched-cost diagnostic (E55):** evaluated at 75% priced quality weight; basket/matched cost-order reversals with separated intervals: 1; rank-gap warnings: 0.
-- **Frontier-families anchors (E187, diagnostic):** anchors rebuilt from the 13 frontier and near-frontier references move API no rank changes (value points per cost doubling 2.12 vs 2.12 frozen); Plan 25 rows move; largest move 10 (GPT-6 Astra (high), GPT-6 Astra (xhigh)) (value points per cost doubling 6.51 vs 3.66 frozen).
+- **Frontier-families anchors (E187, diagnostic):** anchors rebuilt from the 13 frontier and near-frontier references move API no rank changes (value points per cost doubling 2.12 vs 2.12 frozen); Plan 25 rows move; largest move 11 (GPT-6.1 Terra (medium)) (value points per cost doubling 6.51 vs 3.66 frozen).
 - **Frontier-families bar (E199, sensitivity; the frozen bar stays primary):** quality 38.1 over 16 configurations; cheapest at or above it on the API main workload: not unique; possibly GPT-6.1 Terra (high), GPT-6.1 Terra (medium) (compares 15 configurations that can qualify and 3 blocker(s) that can qualify but earn no label (E315)).
-- **One row per family (E205, diagnostic; the frozen ladder and anchors stay primary):** with each family's primary configuration only (6 rows in the one-row-per-family bar population), the ladder (headline, lower quartile, upper quartile) would be 41.8 / 24.6 / 48.2 against 48.2 / 30.6 / 56.0 frozen; anchors rebuilt from its 5 references move API 16 rows move; largest move 6 (GPT-6.1 Terra (high)) (value points per cost doubling 2.79 vs 2.12 frozen); Plan 25 rows move; largest move 10 (GPT-6 Astra (high), GPT-6 Astra (xhigh)) (value points per cost doubling 6.51 vs 3.66 frozen).
+- **One row per family (E205, diagnostic; the frozen ladder and anchors stay primary):** with each family's primary configuration only (6 rows in the one-row-per-family bar population), the ladder (headline, lower quartile, upper quartile) would be 41.8 / 24.6 / 48.2 against 48.2 / 30.6 / 56.0 frozen; anchors rebuilt from its 5 references move API 16 rows move; largest move 6 (GPT-6.1 Terra (high)) (value points per cost doubling 2.79 vs 2.12 frozen); Plan 25 rows move; largest move 11 (GPT-6.1 Terra (medium)) (value points per cost doubling 6.51 vs 3.66 frozen).
 - **Ladder over scored rows (I28, sensitivity; the frozen ladder stays primary):** the bar population keeps full-benchmark rows that have no cost; today every such row has a cost, so the ladder is unchanged.
 - **Bar currency (E207, informational):** rows reaching each frozen bar: quality 48.2: 15 of 29; quality 30.6: 22 of 29; quality 56.0: 8 of 29; the current population would freeze 48.2 / 30.6 / 56.0; lifetime until the next anchor re-freeze or methodology version, whichever comes first; no staleness flag.
-- **Token mix (E208):** 26 selected routes: mix unidentified: the basket's token-category shares are set-identified only (E124), so the L1 test (above 0.30 flags mix-unmatched) is not computed.
+- **Token mix (E208):** 29 selected routes: mix unidentified: the basket's token-category shares are set-identified only (E124), so the L1 test (above 0.30 flags mix-unmatched) is not computed.
 - **Observed-range sensitivity (E219, not evidence; no label changes):** with each missing leaf inside the cohort's observed range for that leaf, quality 48.2: 12 can qualify, 11 confirmed; possibly cheapest GPT-6.1 Sol (high), GPT-6.1 Sol (medium); quality 30.6: 18 can qualify, 17 confirmed; possibly cheapest GPT-6 Luna (max), GPT-6.1 Terra (low); quality 56.0: 5 can qualify, 4 confirmed; possibly cheapest GPT-6.1 Sol (max), GPT-6.1 Sol (xhigh).
 - **What would settle the headline bar (E221, not a claim):** rows that can but need not reach quality 48.2, with the mean score their missing leaves would need: GPT-6.1 Sol (medium) (no missing leaf; reporting precision only).
 - **Common leaf set (E226, diagnostic; scores unchanged):** without the leaves fewer than 90% of the ranking's ranked rows have (none), API no rank changes; Plan no rank changes; rows reaching each bar: quality 48.2: 15 → 15; quality 30.6: 22 → 22; quality 56.0: 8 → 8; rows whose displayed quality differs from common-leaf quality by more than one cost doubling's worth: none.
@@ -1675,12 +1687,12 @@ Each admitted basket unit removed in turn, scored on anchors rebuilt by the free
 
 | Removed component | API rank changes | Plan rank changes | API value points per cost doubling |
 |---|---|---|---:|
-| AA-Briefcase | 6 rows move; largest move 1 (Claude Haiku 5.5 (low), Claude Opus 5.5 (max), Claude Opus 5.5 (xhigh), GPT-6 Luna (medium), GPT-6.1 Terra (high), GPT-6.1 Terra (xhigh)) | 14 rows move; largest move 4 (GPT-6 Astra (xhigh)) | 2.19 |
-| GDP.pdf | 5 rows move; largest move 2 (GPT-6 Luna (low)) | 16 rows move; largest move 4 (GPT-6 Astra (xhigh)) | 2.07 |
-| AutomationBench-AA | 11 rows move; largest move 2 (Claude Haiku 5.5 (xhigh), GPT-6 Luna (low), GPT-6.1 Terra (low)) | 16 rows move; largest move 4 (Claude Haiku 5.5 (xhigh), GPT-6 Astra (max)) | 1.99 |
-| Terminal-Bench 4.1 (AA Index run) | 4 rows move; largest move 1 (Claude Haiku 5.5 (low), GPT-6 Astra (max), GPT-6 Luna (medium), GPT-6.1 Sol (medium)) | 14 rows move; largest move 4 (GPT-6 Astra (xhigh)) | 2.14 |
-| FrontierCode 2.0 | 4 rows move; largest move 1 (Claude Fable 5.2 (xhigh), Claude Sonnet 5.5 (max), GPT-6 Astra (max), GPT-6.1 Sol (medium)) | 11 rows move; largest move 4 (GPT-6 Astra (xhigh)) | 2.16 |
-| Terminal-Bench-Science | no rank changes | 13 rows move; largest move 4 (GPT-6 Astra (xhigh)) | 2.16 |
+| AA-Briefcase | 6 rows move; largest move 1 (Claude Haiku 5.5 (low), Claude Opus 5.5 (max), Claude Opus 5.5 (xhigh), GPT-6 Luna (medium), GPT-6.1 Terra (high), GPT-6.1 Terra (xhigh)) | 19 rows move; largest move 4 (GPT-6 Astra (xhigh)) | 2.19 |
+| GDP.pdf | 5 rows move; largest move 2 (GPT-6 Luna (low)) | 20 rows move; largest move 4 (Claude Fable 5.2 (max), GPT-6 Astra (xhigh)) | 2.07 |
+| AutomationBench-AA | 11 rows move; largest move 2 (Claude Haiku 5.5 (xhigh), GPT-6 Luna (low), GPT-6.1 Terra (low)) | 19 rows move; largest move 5 (Claude Fable 5.2 (max), Claude Haiku 5.5 (xhigh)) | 1.99 |
+| Terminal-Bench 4.1 (AA Index run) | 4 rows move; largest move 1 (Claude Haiku 5.5 (low), GPT-6 Astra (max), GPT-6 Luna (medium), GPT-6.1 Sol (medium)) | 17 rows move; largest move 4 (Claude Fable 5.2 (max), GPT-6 Astra (xhigh)) | 2.14 |
+| FrontierCode 2.0 | 4 rows move; largest move 1 (Claude Fable 5.2 (xhigh), Claude Sonnet 5.5 (max), GPT-6 Astra (max), GPT-6.1 Sol (medium)) | 16 rows move; largest move 4 (GPT-6 Astra (xhigh)) | 2.16 |
+| Terminal-Bench-Science | no rank changes | 16 rows move; largest move 4 (Claude Fable 5.2 (max), Claude Opus 5.5 (high), GPT-6 Astra (xhigh), GPT-6.1 Terra (high), GPT-6.1 Terra (xhigh)) | 2.16 |
 
 ### Subset rows: paired bridge and missing spend (E10, E173)
 
@@ -1690,19 +1702,19 @@ No row is scored on a subset workload.
 
 | Branch | Retained nominal weight | Status | API rank changes | Plan rank changes |
 |---|---:|---|---|---|
-| leave-out:frontierCode | 75% | evaluated | 15 rows move; largest move 3 (GPT-6.1 Terra (high)) | 23 rows move; largest move 4 (GPT-6.1 Sol (low), GPT-6.1 Terra (high)) |
-| leave-out:terminalBench | 80% | evaluated | 20 rows move; largest move 3 (Claude Opus 5.5 (high), GPT-6 Luna (max)) | 20 rows move; largest move 8 (GPT-6 Luna (max)) |
-| leave-out:bugHunt | 85% | evaluated | 19 rows move; largest move 8 (GPT-6 Astra (max), GPT-6.1 Terra (high)) | 20 rows move; largest move 9 (GPT-6.1 Sol (max)) |
-| leave-out:gdpval | 95% | evaluated | 6 rows move; largest move 1 (Claude Fable 5.2 (xhigh), Claude Haiku 5.5 (low), Claude Opus 5.5 (xhigh), Claude Sonnet 5.5 (max), GPT-6 Luna (medium), GPT-6.1 Terra (high)) | 9 rows move; largest move 2 (GPT-6.1 Sol (medium)) |
-| leave-out:gdpPdf | 95% | evaluated | 9 rows move; largest move 2 (Claude Fable 5.2 (xhigh)) | 14 rows move; largest move 1 (Claude Fable 5.2 (max), Claude Fable 5.2 (xhigh), Claude Haiku 5.5 (xhigh), Claude Haiku 5.5 (high), Claude Haiku 5.5 (low), Claude Opus 5.5 (xhigh), Claude Sonnet 5.5 (max), GPT-6 Astra (max), GPT-6 Astra (high), GPT-6 Luna (medium), GPT-6 Luna (xhigh), GPT-6.1 Terra (high), GPT-6.1 Terra (medium), GPT-6.1 Terra (xhigh)) |
-| leave-out:automationBench | 90% | evaluated | 11 rows move; largest move 2 (Claude Haiku 5.5 (medium), GPT-6 Luna (low), GPT-6 Luna (medium)) | 11 rows move; largest move 2 (Claude Haiku 5.5 (xhigh), Claude Haiku 5.5 (medium), GPT-6.1 Terra (medium)) |
-| leave-out:omniscience | 90% | evaluated | 8 rows move; largest move 2 (Claude Fable 5.2 (high), Claude Sonnet 5.5 (max)) | 10 rows move; largest move 1 (Claude Fable 5.2 (high), Claude Opus 5.5 (xhigh), Claude Sonnet 5.5 (max), GPT-6 Astra (max), GPT-6 Luna (max), GPT-6 Luna (high), GPT-6.1 Sol (low), GPT-6.1 Terra (high), GPT-6.1 Terra (medium), GPT-6.1 Terra (xhigh)) |
-| leave-out:lcr | 95% | evaluated | 4 rows move; largest move 1 (Claude Haiku 5.5 (low), Claude Opus 5.5 (max), GPT-6 Luna (medium), GPT-6.1 Terra (high)) | 14 rows move; largest move 1 (Claude Fable 5.2 (max), Claude Fable 5.2 (xhigh), Claude Haiku 5.5 (xhigh), Claude Haiku 5.5 (high), Claude Haiku 5.5 (low), Claude Opus 5.5 (xhigh), Claude Sonnet 5.5 (max), GPT-6 Astra (max), GPT-6 Astra (high), GPT-6 Luna (medium), GPT-6 Luna (xhigh), GPT-6.1 Terra (high), GPT-6.1 Terra (medium), GPT-6.1 Terra (xhigh)) |
-| leave-out:hle | 98% | evaluated | 2 rows move; largest move 1 (GPT-6 Astra (max), GPT-6.1 Sol (medium)) | 8 rows move; largest move 2 (Claude Fable 5.2 (high), GPT-6 Astra (xhigh)) |
-| leave-out:tbScience | 98% | evaluated | 2 rows move; largest move 1 (GPT-6 Astra (max), GPT-6.1 Sol (medium)) | 7 rows move; largest move 2 (Claude Fable 5.2 (high)) |
-| leave-out:critpt | 98% | evaluated | 4 rows move; largest move 1 (Claude Haiku 5.5 (low), Claude Opus 5.5 (max), GPT-6 Luna (medium), GPT-6.1 Terra (high)) | 8 rows move; largest move 1 (Claude Fable 5.2 (high), Claude Haiku 5.5 (low), Claude Opus 5.5 (xhigh), Claude Sonnet 5.5 (max), GPT-6 Luna (high), GPT-6 Luna (medium), GPT-6.1 Terra (high), GPT-6.1 Terra (xhigh)) |
+| leave-out:frontierCode | 75% | evaluated | 15 rows move; largest move 3 (GPT-6.1 Terra (high)) | 19 rows move; largest move 4 (GPT-6.1 Sol (low), GPT-6.1 Terra (high)) |
+| leave-out:terminalBench | 80% | evaluated | 20 rows move; largest move 3 (Claude Opus 5.5 (high), GPT-6 Luna (max)) | 14 rows move; largest move 8 (GPT-6 Luna (max)) |
+| leave-out:bugHunt | 85% | evaluated | 19 rows move; largest move 8 (GPT-6 Astra (max), GPT-6.1 Terra (high)) | 20 rows move; largest move 11 (GPT-6.1 Sol (max)) |
+| leave-out:gdpval | 95% | evaluated | 6 rows move; largest move 1 (Claude Fable 5.2 (xhigh), Claude Haiku 5.5 (low), Claude Opus 5.5 (xhigh), Claude Sonnet 5.5 (max), GPT-6 Luna (medium), GPT-6.1 Terra (high)) | 7 rows move; largest move 2 (GPT-6.1 Sol (medium)) |
+| leave-out:gdpPdf | 95% | evaluated | 9 rows move; largest move 2 (Claude Fable 5.2 (xhigh)) | 12 rows move; largest move 1 (Claude Fable 5.2 (high), Claude Haiku 5.5 (xhigh), Claude Haiku 5.5 (low), Claude Opus 5.5 (xhigh), Claude Sonnet 5.5 (max), GPT-6 Astra (max), GPT-6 Astra (high), GPT-6 Luna (medium), GPT-6.1 Sol (high), GPT-6.1 Terra (high), GPT-6.1 Terra (medium), GPT-6.1 Terra (xhigh)) |
+| leave-out:automationBench | 90% | evaluated | 11 rows move; largest move 2 (Claude Haiku 5.5 (medium), GPT-6 Luna (low), GPT-6 Luna (medium)) | 10 rows move; largest move 2 (Claude Haiku 5.5 (xhigh), GPT-6.1 Terra (medium)) |
+| leave-out:omniscience | 90% | evaluated | 8 rows move; largest move 2 (Claude Fable 5.2 (high), Claude Sonnet 5.5 (max)) | 12 rows move; largest move 2 (Claude Fable 5.2 (high), Claude Sonnet 5.5 (max)) |
+| leave-out:lcr | 95% | evaluated | 4 rows move; largest move 1 (Claude Haiku 5.5 (low), Claude Opus 5.5 (max), GPT-6 Luna (medium), GPT-6.1 Terra (high)) | 10 rows move; largest move 1 (Claude Haiku 5.5 (xhigh), Claude Haiku 5.5 (low), Claude Opus 5.5 (xhigh), Claude Sonnet 5.5 (max), GPT-6 Astra (max), GPT-6 Astra (high), GPT-6 Luna (medium), GPT-6.1 Terra (high), GPT-6.1 Terra (medium), GPT-6.1 Terra (xhigh)) |
+| leave-out:hle | 98% | evaluated | 2 rows move; largest move 1 (GPT-6 Astra (max), GPT-6.1 Sol (medium)) | 5 rows move; largest move 2 (GPT-6 Astra (xhigh)) |
+| leave-out:tbScience | 98% | evaluated | 2 rows move; largest move 1 (GPT-6 Astra (max), GPT-6.1 Sol (medium)) | 4 rows move; largest move 1 (Claude Opus 5.5 (xhigh), Claude Sonnet 5.5 (max), GPT-6 Astra (xhigh), GPT-6.1 Terra (high)) |
+| leave-out:critpt | 98% | evaluated | 4 rows move; largest move 1 (Claude Haiku 5.5 (low), Claude Opus 5.5 (max), GPT-6 Luna (medium), GPT-6.1 Terra (high)) | 6 rows move; largest move 1 (Claude Haiku 5.5 (low), Claude Opus 5.5 (xhigh), Claude Sonnet 5.5 (max), GPT-6 Luna (medium), GPT-6.1 Terra (high), GPT-6.1 Terra (xhigh)) |
 | leave-source-out:Artificial Analysis | 15% | not identifiable under the coverage rule | — | — |
-| basket-scope | 87% | evaluated | 11 rows move; largest move 3 (Claude Sonnet 5.5 (max)) | 12 rows move; largest move 2 (Claude Sonnet 5.5 (max), GPT-6 Luna (high)) |
+| basket-scope | 87% | evaluated | 11 rows move; largest move 3 (Claude Sonnet 5.5 (max)) | 13 rows move; largest move 3 (Claude Sonnet 5.5 (max)) |
 
 ### Cost-component removal (Terminal-Bench 4.1 (AA Index run): evaluated)
 
@@ -1711,7 +1723,7 @@ No row is scored on a subset workload.
 | api | cost-component removal, original anchors | 2 rows move; largest move 1 (Claude Haiku 5.5 (low), GPT-6 Luna (medium)) |
 | api | alternative workload, recalibrated anchors | 4 rows move; largest move 1 (Claude Haiku 5.5 (low), GPT-6 Astra (max), GPT-6 Luna (medium), GPT-6.1 Sol (medium)) |
 | plan | cost-component removal, original anchors; fixed-multiple arithmetic stress (not identified Plan economics for the altered workload) | 5 rows move; largest move 2 (GPT-6.1 Terra (xhigh)) |
-| plan | alternative workload, recalibrated anchors; fixed-multiple arithmetic stress (not identified Plan economics for the altered workload) | 14 rows move; largest move 4 (GPT-6 Astra (xhigh)) |
+| plan | alternative workload, recalibrated anchors; fixed-multiple arithmetic stress (not identified Plan economics for the altered workload) | 17 rows move; largest move 4 (Claude Fable 5.2 (max), GPT-6 Astra (xhigh)) |
 
 ### Common-leaf ranking (diagnostic): release gates
 
@@ -1719,14 +1731,14 @@ No row is scored on a subset workload.
 |---|---|---|
 | clip gate (E20) | passed | no basis exceeds the clipping allowance |
 | cost influence flag (E91) | passed | cost not discriminating (< 10%); informational only; beta never changes (O2) |
-| realised influence (E272) | fired | API: cost term offsetting (-78% of value variance); Plan: cost term offsetting (-35% of value variance); informational only, beta never changes (O2) |
+| realised influence (E272) | fired | API: cost term offsetting (-78% of value variance); Plan: cost term offsetting (-44% of value variance); informational only, beta never changes (O2) |
 | quality influence flag (E126) | passed | quality not discriminating (cost share > 90%); informational only |
 | subset scoring (O17) | vacuous | subset rows scored on their own workload and anchors |
 | partial component flag (E37) | vacuous | AA declined- or missing-task markers, or an Index reconstruction that misses AA's total (E209) |
 | route dominance filter (E88) | vacuous | certifiably dearer routes set aside |
 | Plan exploratory label (E61) | fired | fewer than half of Plan rows have an identified M_W |
-| Plan evidence lifecycle and change detection (E18, E151, E269, O77, O79) | fired | 96 of 108 plan rows carry a possibly-superseded or expired route: claude-haiku-5-5-high@claude-max-20x, claude-haiku-5-5-high@claude-max-5x, claude-haiku-5-5-high@claude-pro, claude-haiku-5-5-low@claude-max-20x, claude-haiku-5-5-low@claude-max-5x, claude-haiku-5-5-low@claude-pro, claude-haiku-5-5-medium@claude-max-20x, claude-haiku-5-5-medium@claude-max-5x, claude-haiku-5-5-medium@claude-pro, claude-haiku-5-5@claude-max-20x, claude-haiku-5-5@claude-max-5x, claude-haiku-5-5@claude-pro, claude-opus-5-5-high@claude-max-20x, claude-opus-5-5-high@claude-max-5x, claude-opus-5-5-high@claude-pro, claude-opus-5-5-xhigh@claude-max-20x, claude-opus-5-5-xhigh@claude-max-5x, claude-opus-5-5-xhigh@claude-pro, claude-opus-5-5@claude-max-20x, claude-opus-5-5@claude-max-5x, claude-opus-5-5@claude-pro, claude-sonnet-5-5@claude-max-20x, claude-sonnet-5-5@claude-max-5x, claude-sonnet-5-5@claude-pro, gpt-6-astra-high@chatgpt-plus, gpt-6-astra-high@chatgpt-pro-100, gpt-6-astra-high@chatgpt-pro-200, gpt-6-astra-high@chatgpt-pro-500, gpt-6-astra-xhigh@chatgpt-plus, gpt-6-astra-xhigh@chatgpt-pro-100, gpt-6-astra-xhigh@chatgpt-pro-200, gpt-6-astra-xhigh@chatgpt-pro-500, gpt-6-astra@chatgpt-plus, gpt-6-astra@chatgpt-pro-100, gpt-6-astra@chatgpt-pro-200, gpt-6-astra@chatgpt-pro-500, gpt-6-luna-high@chatgpt-plus, gpt-6-luna-high@chatgpt-pro-100, gpt-6-luna-high@chatgpt-pro-200, gpt-6-luna-high@chatgpt-pro-500, gpt-6-luna-low@chatgpt-plus, gpt-6-luna-low@chatgpt-pro-100, gpt-6-luna-low@chatgpt-pro-200, gpt-6-luna-low@chatgpt-pro-500, gpt-6-luna-medium@chatgpt-plus, gpt-6-luna-medium@chatgpt-pro-100, gpt-6-luna-medium@chatgpt-pro-200, gpt-6-luna-medium@chatgpt-pro-500, gpt-6-luna-xhigh@chatgpt-plus, gpt-6-luna-xhigh@chatgpt-pro-100, gpt-6-luna-xhigh@chatgpt-pro-200, gpt-6-luna-xhigh@chatgpt-pro-500, gpt-6-luna@chatgpt-plus, gpt-6-luna@chatgpt-pro-100, gpt-6-luna@chatgpt-pro-200, gpt-6-luna@chatgpt-pro-500, gpt-6.1-sol-high@chatgpt-plus, gpt-6.1-sol-high@chatgpt-pro-100, gpt-6.1-sol-high@chatgpt-pro-200, gpt-6.1-sol-high@chatgpt-pro-500, gpt-6.1-sol-low@chatgpt-plus, gpt-6.1-sol-low@chatgpt-pro-100, gpt-6.1-sol-low@chatgpt-pro-200, gpt-6.1-sol-low@chatgpt-pro-500, gpt-6.1-sol-medium@chatgpt-plus, gpt-6.1-sol-medium@chatgpt-pro-100, gpt-6.1-sol-medium@chatgpt-pro-200, gpt-6.1-sol-medium@chatgpt-pro-500, gpt-6.1-sol-xhigh@chatgpt-plus, gpt-6.1-sol-xhigh@chatgpt-pro-100, gpt-6.1-sol-xhigh@chatgpt-pro-200, gpt-6.1-sol-xhigh@chatgpt-pro-500, gpt-6.1-sol@chatgpt-plus, gpt-6.1-sol@chatgpt-pro-100, gpt-6.1-sol@chatgpt-pro-200, gpt-6.1-sol@chatgpt-pro-500, gpt-6.1-terra-high@chatgpt-plus, gpt-6.1-terra-high@chatgpt-pro-100, gpt-6.1-terra-high@chatgpt-pro-200, gpt-6.1-terra-high@chatgpt-pro-500, gpt-6.1-terra-low@chatgpt-plus, gpt-6.1-terra-low@chatgpt-pro-100, gpt-6.1-terra-low@chatgpt-pro-200, gpt-6.1-terra-low@chatgpt-pro-500, gpt-6.1-terra-medium@chatgpt-plus, gpt-6.1-terra-medium@chatgpt-pro-100, gpt-6.1-terra-medium@chatgpt-pro-200, gpt-6.1-terra-medium@chatgpt-pro-500, gpt-6.1-terra-xhigh@chatgpt-plus, gpt-6.1-terra-xhigh@chatgpt-pro-100, gpt-6.1-terra-xhigh@chatgpt-pro-200, gpt-6.1-terra-xhigh@chatgpt-pro-500, gpt-6.1-terra@chatgpt-plus, gpt-6.1-terra@chatgpt-pro-100, gpt-6.1-terra@chatgpt-pro-200, gpt-6.1-terra@chatgpt-pro-500 |
-| acknowledged accounting-fault windows (O91, O92, O93, O95, O96) | fired | 18 of 108 plan rows rest on a measurement inside an acknowledged fault window; they stay selected and yield to two concordant user reports for their own model and plan, and the transfers resting on them follow: gpt-6-astra-high@chatgpt-pro-500, gpt-6-astra-xhigh@chatgpt-pro-500, gpt-6-astra@chatgpt-pro-500, gpt-6-luna-high@chatgpt-pro-500, gpt-6-luna-low@chatgpt-pro-500, gpt-6-luna-medium@chatgpt-pro-500, gpt-6-luna-xhigh@chatgpt-pro-500, gpt-6-luna@chatgpt-pro-500, gpt-6.1-sol-high@chatgpt-pro-500, gpt-6.1-sol-low@chatgpt-pro-500, gpt-6.1-sol-medium@chatgpt-pro-500, gpt-6.1-sol-xhigh@chatgpt-pro-500, gpt-6.1-sol@chatgpt-pro-500, gpt-6.1-terra-high@chatgpt-pro-500, gpt-6.1-terra-low@chatgpt-pro-500, gpt-6.1-terra-medium@chatgpt-pro-500, gpt-6.1-terra-xhigh@chatgpt-pro-500, gpt-6.1-terra@chatgpt-pro-500 |
+| Plan evidence lifecycle and change detection (E18, E151, E269, O77, O79) | fired | 91 of 111 plan rows carry a possibly-superseded or expired route: claude-fable-5-2-high@claude-max-5x, claude-fable-5-2-xhigh@claude-max-5x, claude-fable-5-2@claude-max-5x, claude-haiku-5-5-high@claude-max-5x, claude-haiku-5-5-high@claude-pro, claude-haiku-5-5-low@claude-max-5x, claude-haiku-5-5-low@claude-pro, claude-haiku-5-5-medium@claude-max-5x, claude-haiku-5-5-medium@claude-pro, claude-haiku-5-5@claude-max-5x, claude-haiku-5-5@claude-pro, claude-opus-5-5-high@claude-max-5x, claude-opus-5-5-high@claude-pro, claude-opus-5-5-xhigh@claude-max-5x, claude-opus-5-5-xhigh@claude-pro, claude-opus-5-5@claude-max-5x, claude-opus-5-5@claude-pro, claude-sonnet-5-5@claude-max-5x, claude-sonnet-5-5@claude-pro, gpt-6-astra-high@chatgpt-plus, gpt-6-astra-high@chatgpt-pro-100, gpt-6-astra-high@chatgpt-pro-200, gpt-6-astra-high@chatgpt-pro-500, gpt-6-astra-xhigh@chatgpt-plus, gpt-6-astra-xhigh@chatgpt-pro-100, gpt-6-astra-xhigh@chatgpt-pro-200, gpt-6-astra-xhigh@chatgpt-pro-500, gpt-6-astra@chatgpt-plus, gpt-6-astra@chatgpt-pro-100, gpt-6-astra@chatgpt-pro-200, gpt-6-astra@chatgpt-pro-500, gpt-6-luna-high@chatgpt-plus, gpt-6-luna-high@chatgpt-pro-100, gpt-6-luna-high@chatgpt-pro-200, gpt-6-luna-high@chatgpt-pro-500, gpt-6-luna-low@chatgpt-plus, gpt-6-luna-low@chatgpt-pro-100, gpt-6-luna-low@chatgpt-pro-200, gpt-6-luna-low@chatgpt-pro-500, gpt-6-luna-medium@chatgpt-plus, gpt-6-luna-medium@chatgpt-pro-100, gpt-6-luna-medium@chatgpt-pro-200, gpt-6-luna-medium@chatgpt-pro-500, gpt-6-luna-xhigh@chatgpt-plus, gpt-6-luna-xhigh@chatgpt-pro-100, gpt-6-luna-xhigh@chatgpt-pro-200, gpt-6-luna-xhigh@chatgpt-pro-500, gpt-6-luna@chatgpt-plus, gpt-6-luna@chatgpt-pro-100, gpt-6-luna@chatgpt-pro-200, gpt-6-luna@chatgpt-pro-500, gpt-6.1-sol-high@chatgpt-plus, gpt-6.1-sol-high@chatgpt-pro-100, gpt-6.1-sol-high@chatgpt-pro-200, gpt-6.1-sol-high@chatgpt-pro-500, gpt-6.1-sol-low@chatgpt-plus, gpt-6.1-sol-low@chatgpt-pro-100, gpt-6.1-sol-low@chatgpt-pro-200, gpt-6.1-sol-low@chatgpt-pro-500, gpt-6.1-sol-medium@chatgpt-plus, gpt-6.1-sol-medium@chatgpt-pro-100, gpt-6.1-sol-medium@chatgpt-pro-200, gpt-6.1-sol-medium@chatgpt-pro-500, gpt-6.1-sol-xhigh@chatgpt-plus, gpt-6.1-sol-xhigh@chatgpt-pro-100, gpt-6.1-sol-xhigh@chatgpt-pro-200, gpt-6.1-sol-xhigh@chatgpt-pro-500, gpt-6.1-sol@chatgpt-plus, gpt-6.1-sol@chatgpt-pro-100, gpt-6.1-sol@chatgpt-pro-200, gpt-6.1-sol@chatgpt-pro-500, gpt-6.1-terra-high@chatgpt-plus, gpt-6.1-terra-high@chatgpt-pro-100, gpt-6.1-terra-high@chatgpt-pro-200, gpt-6.1-terra-high@chatgpt-pro-500, gpt-6.1-terra-low@chatgpt-plus, gpt-6.1-terra-low@chatgpt-pro-100, gpt-6.1-terra-low@chatgpt-pro-200, gpt-6.1-terra-low@chatgpt-pro-500, gpt-6.1-terra-medium@chatgpt-plus, gpt-6.1-terra-medium@chatgpt-pro-100, gpt-6.1-terra-medium@chatgpt-pro-200, gpt-6.1-terra-medium@chatgpt-pro-500, gpt-6.1-terra-xhigh@chatgpt-plus, gpt-6.1-terra-xhigh@chatgpt-pro-100, gpt-6.1-terra-xhigh@chatgpt-pro-200, gpt-6.1-terra-xhigh@chatgpt-pro-500, gpt-6.1-terra@chatgpt-plus, gpt-6.1-terra@chatgpt-pro-100, gpt-6.1-terra@chatgpt-pro-200, gpt-6.1-terra@chatgpt-pro-500 |
+| acknowledged accounting-fault windows (O91, O92, O93, O95, O96) | fired | 18 of 111 plan rows rest on a measurement inside an acknowledged fault window; they stay selected and yield to two concordant user reports for their own model and plan, and the transfers resting on them follow: gpt-6-astra-high@chatgpt-pro-500, gpt-6-astra-xhigh@chatgpt-pro-500, gpt-6-astra@chatgpt-pro-500, gpt-6-luna-high@chatgpt-pro-500, gpt-6-luna-low@chatgpt-pro-500, gpt-6-luna-medium@chatgpt-pro-500, gpt-6-luna-xhigh@chatgpt-pro-500, gpt-6-luna@chatgpt-pro-500, gpt-6.1-sol-high@chatgpt-pro-500, gpt-6.1-sol-low@chatgpt-pro-500, gpt-6.1-sol-medium@chatgpt-pro-500, gpt-6.1-sol-xhigh@chatgpt-pro-500, gpt-6.1-sol@chatgpt-pro-500, gpt-6.1-terra-high@chatgpt-pro-500, gpt-6.1-terra-low@chatgpt-pro-500, gpt-6.1-terra-medium@chatgpt-pro-500, gpt-6.1-terra-xhigh@chatgpt-pro-500, gpt-6.1-terra@chatgpt-pro-500 |
 | AA cost omits a pricing term (O94, O98, O100, O106, O108, O109, O114) | fired | ranked at the published cost; compete in interval outputs and the scenario labels' BlockerSafe test over [C, factor × C] ([C, ∞) without a stated factor, O98) without a label (scenario frequencies draw them at the published cost, O114), and leave the anchor population at the next freeze: claude-haiku-5-5 (up to 5×), claude-haiku-5-5-high (up to 5×), claude-haiku-5-5-low (up to 5×), claude-haiku-5-5-medium (up to 5×) |
 | valuation-basis gate (E170) | fired | rows outside the scored valuation outcomes: claude-fable-5-2, claude-fable-5-2-high, claude-fable-5-2-xhigh |
 | source clocks and evidence freshness (O59, O60, O65, E211, E216, E217, E218) | passed | every capture is within its age gate and none after the cutoff unless its source predates the cutoff's day; the build stops otherwise |
@@ -1780,8 +1792,8 @@ Every admissible route-measurement pair in comparator order (E171) and the compa
 | Configuration | Admissible pairs | Unidentified | Pairs (multiple, status) | Leave-selected-out choice |
 |---|---:|---:|---|---|
 | GPT-6.1 Sol (max) | 4 | 4 | chatgpt-pro500-gpt61sol-semianalysis (10.772×, selected); chatgpt-plus-gpt61sol-semianalysis (10.55×, not selected by the comparator); chatgpt-pro100-gpt61sol-semianalysis (10.55×, not selected by the comparator); chatgpt-pro200-gpt61sol-semianalysis (10.42×, not selected by the comparator) | chatgpt-plus-gpt61sol-semianalysis (10.55×, value 67.83) |
-| Claude Sonnet 5.5 (max) | 3 | 3 | claude-pro-claude-sonnet-5-5-common-opus55-assumption (58.9×, selected); claude-max20x-claude-sonnet-5-5-common-opus55-assumption (58.63×, not selected by the comparator); claude-max5x-claude-sonnet-5-5-common-opus55-assumption (57.25×, not selected by the comparator) | claude-max20x-claude-sonnet-5-5-common-opus55-assumption (58.63×, value 65.56) |
-| Claude Opus 5.5 (max) | 3 | 3 | claude-pro-opus55-semianalysis (58.9×, selected); claude-max20x-opus55-semianalysis (58.63×, not selected by the comparator); claude-max5x-opus55-semianalysis (57.25×, not selected by the comparator) | claude-max20x-opus55-semianalysis (58.63×, value 65.29) |
+| Claude Sonnet 5.5 (max) | 3 | 3 | claude-pro-claude-sonnet-5-5-common-opus55-assumption (58.9×, selected); claude-max5x-claude-sonnet-5-5-common-opus55-assumption (57.25×, not selected by the comparator); claude-max20x-claude-sonnet-5-5-common-opus55-assumption (54.2148×, not selected by the comparator) | claude-max5x-claude-sonnet-5-5-common-opus55-assumption (57.25×, value 65.38) |
+| Claude Opus 5.5 (max) | 4 | 4 | claude-pro-opus55-semianalysis (58.9×, selected); claude-max20x-opus55-semianalysis (58.63×, not selected by the comparator); claude-max5x-opus55-semianalysis (57.25×, not selected by the comparator); claude-max20x-opus55-user-reports#m1 (54.2148×, not selected by the comparator) | claude-max5x-opus55-semianalysis (57.25×, value 65.11) |
 | GPT-6 Astra (max) | 4 | 4 | chatgpt-pro200-gpt6astra-semianalysis (14.485×, selected); chatgpt-pro500-gpt6astra-semianalysis (13.91×, not selected by the comparator); chatgpt-pro100-gpt6astra-semianalysis (13.22×, not selected by the comparator); chatgpt-plus-gpt6astra-semianalysis (8.1×, not selected by the comparator) | chatgpt-pro500-gpt6astra-semianalysis (13.91×, value 58.52) |
 | GPT-6 Luna (max) | 5 | 5 | chatgpt-pro500-gpt-6-luna-common-gpt-assumption (10.772×, selected); chatgpt-pro100-gpt-6-luna-common-gpt-assumption (10.55×, not selected by the comparator); chatgpt-pro200-gpt-6-luna-common-gpt-assumption (10.42×, not selected by the comparator); chatgpt-plus-gpt-6-luna-common-gpt-assumption (8.1×, not selected by the comparator); opencode-go-gpt-6-luna-dollar-limit (1.5×, not selected by the comparator) | chatgpt-pro100-gpt-6-luna-common-gpt-assumption (10.55×, value 56.08) |
 
@@ -1793,8 +1805,8 @@ A plan meter counts tokens (O126), so a multiple measured on one model or effort
 
 | Plan row | Rule | Price ratio r | Multiple range | Plan value range | Plan rank range |
 |---|---|---:|---|---|---|
-| Claude Sonnet 5.5 (max) on claude-max-20x | O144 | 0.500 | 29.32–58.63 | 60.29–65.56 | 6–10 |
-| Claude Sonnet 5.5 (max) on claude-max-5x | O144 | 0.500 | 28.62–57.25 | 60.10–65.38 | 7–10 |
+| Claude Sonnet 5.5 (max) on claude-max-20x | O144 | 0.500 | 27.11–54.21 | 59.69–64.96 | 9–10 |
+| Claude Sonnet 5.5 (max) on claude-max-5x | O144 | 0.500 | 28.62–57.25 | 60.10–65.38 | 6–10 |
 | Claude Sonnet 5.5 (max) on claude-pro | O144 | 0.500 | 29.45–58.90 | 60.32–65.59 | 5–10 |
 
 ### Plan allowance report cells (O71, O81)
@@ -1997,8 +2009,8 @@ Plan streams S1, S2, S1 endpoint-heavy, S1M, S1T and S1T recentred run with owne
 
 | Configuration | S0 | S1 | S2 | S1 endpoint-heavy | S1M | S1T | S1T recentred |
 |---|---:|---:|---:|---:|---:|---:|---:|
-| Claude Opus 5.5 (max) on Claude Max 20x | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 3.8% | 3.8% |
-| Claude Opus 5.5 (max) on Claude Max 5x | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 2.1% | 2.3% |
+| Claude Opus 5.5 (max) on Claude Max 20x | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.9% | 1.2% |
+| Claude Opus 5.5 (max) on Claude Max 5x | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 2.8% | 2.8% |
 | Claude Opus 5.5 (max) on Claude Pro | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 4.1% | 4.0% |
 | Claude Sonnet 5.5 (max) on Claude Max 20x | 0.0% | — | — | — | — | — | — |
 | Claude Sonnet 5.5 (max) on Claude Max 5x | 0.0% | — | — | — | — | — | — |
@@ -2012,10 +2024,10 @@ Plan streams S1, S2, S1 endpoint-heavy, S1M, S1T and S1T recentred run with owne
 | GPT-6 Luna (max) on ChatGPT Pro 200 | 0.0% | — | — | — | — | — | — |
 | GPT-6 Luna (max) on ChatGPT Pro 500 | 0.0% | — | — | — | — | — | — |
 | GPT-6 Luna (max) on OpenCode Go | 0.0% | — | — | — | — | — | — |
-| GPT-6.1 Sol (max) on ChatGPT Plus | 100.0% | 100.0% | 100.0% | 100.0% | 100.0% | 96.2% | 96.2% |
-| GPT-6.1 Sol (max) on ChatGPT Pro 100 | 100.0% | 100.0% | 100.0% | 100.0% | 100.0% | 96.2% | 96.2% |
+| GPT-6.1 Sol (max) on ChatGPT Plus | 100.0% | 100.0% | 100.0% | 100.0% | 100.0% | 97.2% | 97.2% |
+| GPT-6.1 Sol (max) on ChatGPT Pro 100 | 100.0% | 100.0% | 100.0% | 100.0% | 100.0% | 97.2% | 97.2% |
 | GPT-6.1 Sol (max) on ChatGPT Pro 200 | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% | 0.0% |
-| GPT-6.1 Sol (max) on ChatGPT Pro 500 | 100.0% | 100.0% | 100.0% | 100.0% | 100.0% | 97.9% | 97.7% |
+| GPT-6.1 Sol (max) on ChatGPT Pro 500 | 100.0% | 100.0% | 100.0% | 100.0% | 100.0% | 99.1% | 98.8% |
 
 ### Plan basis: on the frontier
 
@@ -2086,7 +2098,7 @@ The 90% rule's error bound holds per published event (candidate and kernel assig
 
 - **Terminal-Bench cross-source agreement (AA's mini-SWE-agent run against tbench.ai):** defined; 0 rows take the leaf from tbench.ai (gap fill).
 - **Workload cross-check (E41, mandatory diagnostic):** Terminal-Bench 4.1 cost per solved task on AA's own execution against basket cost: suppressed: 5 rows, below the 8-row floor; panel (5): Claude Opus 5.5 (max), Claude Sonnet 5.5 (max), GPT-6 Astra (max), GPT-6 Luna (max), GPT-6.1 Sol (max).
-- **Rank separability (O39, independent-task approximation):** median separation 2.70 value points (API) and 2.70 (Plan); separable adjacent ranks: API 1 of 4, Plan 1 of 6. Assumptions: tasks are independent and each leaf's score is a mean over its published task count (a binomial leaf drawn from its Jeffreys posterior Beta(k + 1/2, n - k + 1/2), O142; plug-in SDs with the proportion (k + 1/2) / (n + 1), I28); attempts averaged within a task and tasks shared across models are ignored, so the noise is approximate; GDPval-AA: each row's rating interval as AA's model page displays it, read as a 95% normal interval (AA states no level), SD = half-width / 1.96; AA-Omniscience: each of 3,000 questions scores +1, 0 or -1, with the shares from AA's accuracy and hallucination rate; Vals boards (Vibe Code Bench v1.1, Code Migration v1.1): Vals' published standard error per record, read as the leaf's SD; AI Coding Daily: judged points over its seven graded projects read as a binomial share of 80 points (an assumption; the board publishes no error).
+- **Rank separability (O39, independent-task approximation):** median separation 2.70 value points (API) and 2.73 (Plan); separable adjacent ranks: API 1 of 4, Plan 1 of 8. Assumptions: tasks are independent and each leaf's score is a mean over its published task count (a binomial leaf drawn from its Jeffreys posterior Beta(k + 1/2, n - k + 1/2), O142; plug-in SDs with the proportion (k + 1/2) / (n + 1), I28); attempts averaged within a task and tasks shared across models are ignored, so the noise is approximate; GDPval-AA: each row's rating interval as AA's model page displays it, read as a 95% normal interval (AA states no level), SD = half-width / 1.96; AA-Omniscience: each of 3,000 questions scores +1, 0 or -1, with the shares from AA's accuracy and hallucination rate; Vals boards (Vibe Code Bench v1.1, Code Migration v1.1): Vals' published standard error per record, read as the leaf's SD; AI Coding Daily: judged points over its seven graded projects read as a binomial share of 80 points (an assumption; the board publishes no error).
 - **FrontierCode against Cognition:** FrontierCode 2.0 cross-source agreement (AA against Cognition, exact model and effort; E234, O153): Kendall tau 0.91 (interval 0.81 to 0.98) on 22 rows. Cognition minus AA: mean +0.2 points, largest 3.9.
 - **Gap-fill removal (E234, diagnostic):** no ranked row has a leaf from another party or the provider.
 - **Bar results without the gap fills (E234, sensitivity; labels unchanged):** cheapest displayed row as published, with fills removed, and with third-party fills third-party fills minus the signed mean offset +0.2 points (third party minus AA) — API quality 64.3: GPT-6.1 Sol (max) in all three; API quality 63.9: GPT-6.1 Sol (max) in all three; API quality 64.3: GPT-6.1 Sol (max) in all three; Plan quality 64.3: GPT-6.1 Sol (max) in all three; Plan quality 63.9: GPT-6.1 Sol (max) in all three; Plan quality 64.3: GPT-6.1 Sol (max) in all three.
@@ -2178,7 +2190,7 @@ No row is scored on a subset workload.
 | partial component flag (E37) | vacuous | AA declined- or missing-task markers, or an Index reconstruction that misses AA's total (E209) |
 | route dominance filter (E88) | vacuous | certifiably dearer routes set aside |
 | Plan exploratory label (E61) | fired | fewer than half of Plan rows have an identified M_W |
-| Plan evidence lifecycle and change detection (E18, E151, E269, O77, O79) | fired | 18 of 19 plan rows carry a possibly-superseded or expired route: claude-opus-5-5@claude-max-20x, claude-opus-5-5@claude-max-5x, claude-opus-5-5@claude-pro, claude-sonnet-5-5@claude-max-20x, claude-sonnet-5-5@claude-max-5x, claude-sonnet-5-5@claude-pro, gpt-6-astra@chatgpt-plus, gpt-6-astra@chatgpt-pro-100, gpt-6-astra@chatgpt-pro-200, gpt-6-astra@chatgpt-pro-500, gpt-6-luna@chatgpt-plus, gpt-6-luna@chatgpt-pro-100, gpt-6-luna@chatgpt-pro-200, gpt-6-luna@chatgpt-pro-500, gpt-6.1-sol@chatgpt-plus, gpt-6.1-sol@chatgpt-pro-100, gpt-6.1-sol@chatgpt-pro-200, gpt-6.1-sol@chatgpt-pro-500 |
+| Plan evidence lifecycle and change detection (E18, E151, E269, O77, O79) | fired | 16 of 19 plan rows carry a possibly-superseded or expired route: claude-opus-5-5@claude-max-5x, claude-opus-5-5@claude-pro, claude-sonnet-5-5@claude-max-5x, claude-sonnet-5-5@claude-pro, gpt-6-astra@chatgpt-plus, gpt-6-astra@chatgpt-pro-100, gpt-6-astra@chatgpt-pro-200, gpt-6-astra@chatgpt-pro-500, gpt-6-luna@chatgpt-plus, gpt-6-luna@chatgpt-pro-100, gpt-6-luna@chatgpt-pro-200, gpt-6-luna@chatgpt-pro-500, gpt-6.1-sol@chatgpt-plus, gpt-6.1-sol@chatgpt-pro-100, gpt-6.1-sol@chatgpt-pro-200, gpt-6.1-sol@chatgpt-pro-500 |
 | acknowledged accounting-fault windows (O91, O92, O93, O95, O96) | fired | 3 of 19 plan rows rest on a measurement inside an acknowledged fault window; they stay selected and yield to two concordant user reports for their own model and plan, and the transfers resting on them follow: gpt-6-astra@chatgpt-pro-500, gpt-6-luna@chatgpt-pro-500, gpt-6.1-sol@chatgpt-pro-500 |
 | AA cost omits a pricing term (O94, O98, O100, O106, O108, O109, O114) | passed | no AA cost note names an omitted pricing term |
 | valuation-basis gate (E170) | passed | every ranked row is compatible as captured or after evidenced revaluation |

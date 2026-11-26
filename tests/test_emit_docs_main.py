@@ -164,9 +164,9 @@ def test_readme_states_what_the_interval_outputs_support(emitted):
     assert api_sentence.count(f"Cheapest at or above quality 63.9: {withheld}") == 1
     assert "(confirmed)" not in api_sentence and "Bar comparison" not in api_sentence
     # E196: the nominal cost weight is printed with cost's share of the variance in value
-    # (costInfluence.{api,plan}.commonWorkload.varianceAllocation.cost = 0.643 and 0.026).
-    assert "value is a 25% cost score (nominal weight; 64% of API and 3% of Plan value variance)" in readme
-    assert ("That weight is nominal: on the current panel cost accounts for 64% of the variance in API value and 3% in Plan value, "
+    # (costInfluence.{api,plan}.commonWorkload.varianceAllocation.cost = 0.643 and 0.020).
+    assert "value is a 25% cost score (nominal weight; 64% of API and 2% of Plan value variance)" in readme
+    assert ("That weight is nominal: on the current panel cost accounts for 64% of the variance in API value and 2% in Plan value, "
             "because cost scores spread more than quality scores on the API basis and less on the other") in readme
     assert "Plan basis: interval outputs not evaluated (no row has FullCost and an identified M_W (E61/E67))." in readme
     assert "so the Plan ranking is labelled exploratory" in readme

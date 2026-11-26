@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "inputHash": "12de857e0ff419174ffad1118cd549156b6bff9bb8165ee201ef8ccd20d6d5c6",
+  "inputHash": "42933b7cfe9f9bab20fe26de35cf480cb9f272b8802fd19503501a97e4e56689",
   "seed": 20261126,
   "scenarios": 10000,
   "generator": {
@@ -2171,8 +2171,8 @@
           },
           "claude-opus-5-5@claude-max-20x": {
             "top3": {
-              "share": 0.0001,
-              "monteCarloSe": 9.999499987499375e-05
+              "share": 0.0,
+              "monteCarloSe": 0.0
             },
             "top1": {
               "share": 0.0,
@@ -2196,8 +2196,8 @@
           },
           "claude-opus-5-5@claude-max-5x": {
             "top3": {
-              "share": 0.0,
-              "monteCarloSe": 0.0
+              "share": 0.0001,
+              "monteCarloSe": 9.999499987499375e-05
             },
             "top1": {
               "share": 0.0,
@@ -3120,8 +3120,8 @@
         "rows": {
           "gpt-6.1-sol@chatgpt-plus": {
             "top3": {
-              "share": 0.962,
-              "monteCarloSe": 0.001911962342725401
+              "share": 0.9722,
+              "monteCarloSe": 0.0016439939172636876
             },
             "top1": {
               "share": 0.0,
@@ -3145,8 +3145,8 @@
           },
           "gpt-6.1-sol@chatgpt-pro-100": {
             "top3": {
-              "share": 0.962,
-              "monteCarloSe": 0.001911962342725401
+              "share": 0.9722,
+              "monteCarloSe": 0.0016439939172636876
             },
             "top1": {
               "share": 0.0,
@@ -3195,8 +3195,8 @@
           },
           "gpt-6.1-sol@chatgpt-pro-500": {
             "top3": {
-              "share": 0.9793,
-              "monteCarloSe": 0.0014237805308403414
+              "share": 0.9905,
+              "monteCarloSe": 0.000970038659023441
             },
             "top1": {
               "share": 0.9684,
@@ -3220,8 +3220,8 @@
           },
           "claude-opus-5-5@claude-max-20x": {
             "top3": {
-              "share": 0.038,
-              "monteCarloSe": 0.0019119623427254
+              "share": 0.0095,
+              "monteCarloSe": 0.0009700386590234432
             },
             "top1": {
               "share": 0.0,
@@ -3245,8 +3245,8 @@
           },
           "claude-opus-5-5@claude-max-5x": {
             "top3": {
-              "share": 0.0207,
-              "monteCarloSe": 0.00142378053084034
+              "share": 0.0278,
+              "monteCarloSe": 0.0016439939172636863
             },
             "top1": {
               "share": 0.0,
@@ -3470,8 +3470,8 @@
         "rows": {
           "gpt-6.1-sol@chatgpt-plus": {
             "top3": {
-              "share": 0.9617,
-              "monteCarloSe": 0.0019191954043296373
+              "share": 0.9718,
+              "monteCarloSe": 0.0016554383105389342
             },
             "top1": {
               "share": 0.0,
@@ -3495,8 +3495,8 @@
           },
           "gpt-6.1-sol@chatgpt-pro-100": {
             "top3": {
-              "share": 0.9617,
-              "monteCarloSe": 0.0019191954043296373
+              "share": 0.9718,
+              "monteCarloSe": 0.0016554383105389342
             },
             "top1": {
               "share": 0.0,
@@ -3545,8 +3545,8 @@
           },
           "gpt-6.1-sol@chatgpt-pro-500": {
             "top3": {
-              "share": 0.9771,
-              "monteCarloSe": 0.0014958472515601328
+              "share": 0.9877,
+              "monteCarloSe": 0.0011022118671108552
             },
             "top1": {
               "share": 0.9694,
@@ -3570,8 +3570,8 @@
           },
           "claude-opus-5-5@claude-max-20x": {
             "top3": {
-              "share": 0.0383,
-              "monteCarloSe": 0.0019191954043296373
+              "share": 0.0123,
+              "monteCarloSe": 0.0011022118671108563
             },
             "top1": {
               "share": 0.0,
@@ -3595,8 +3595,8 @@
           },
           "claude-opus-5-5@claude-max-5x": {
             "top3": {
-              "share": 0.0229,
-              "monteCarloSe": 0.0014958472515601317
+              "share": 0.0282,
+              "monteCarloSe": 0.001655438310538934
             },
             "top1": {
               "share": 0.0,

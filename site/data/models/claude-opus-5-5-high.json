@@ -387,8 +387,8 @@
       "planIntervalEligible": false,
       "usdPerRun": 42.30133981118406,
       "selected": false,
-      "planRank": 9,
-      "planValue": 57.88485786183894
+      "planRank": null,
+      "planValue": null
     },
     {
       "id": "claude-max5x-claude-opus-5-5-high-common-opus55-assumption",
@@ -405,8 +405,26 @@
       "planIntervalEligible": false,
       "usdPerRun": 43.321005294842294,
       "selected": false,
-      "planRank": 12,
+      "planRank": 11,
       "planValue": 57.74352980337896
+    },
+    {
+      "id": "claude-max20x-opus55-user-reports",
+      "planLabel": "Claude Max $200 · Opus 5.5 · two end-user reports (O218)",
+      "planFeeUsd": 200,
+      "valueMultiple": 54.21,
+      "grade": "assumption",
+      "assumptionKind": null,
+      "evidenceLabel": "end user report",
+      "sourceUrl": "https://www.reddit.com/r/ClaudeCode/comments/1xy4zwk/",
+      "sourceDate": "2026-11-16",
+      "case": 3,
+      "officialDisplayEligible": true,
+      "planIntervalEligible": false,
+      "usdPerRun": 45.75036991569307,
+      "selected": false,
+      "planRank": 14,
+      "planValue": 57.42031628701311
     }
   ],
   "scenarios": {
@@ -606,7 +624,7 @@
       "rankingEligible": true,
       "rank": {
         "api": 17,
-        "plan": 27
+        "plan": 29
       },
       "overall": {
         "api": 42.46403522653948,

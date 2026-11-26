@@ -438,7 +438,7 @@
         ],
         "plan": [
           1,
-          9
+          7
         ]
       },
       "bandExcludesTransfer": false
@@ -575,7 +575,7 @@
         ],
         "plan": [
           1,
-          9
+          7
         ]
       },
       "bandExcludesTransfer": true
@@ -600,7 +600,7 @@
       "aaFrontierFootnote": null,
       "rank": {
         "api": 5,
-        "plan": 8
+        "plan": 7
       },
       "rankWithinWorkload": {
         "api": null,
@@ -715,7 +715,7 @@
         ],
         "plan": [
           1,
-          9
+          7
         ]
       },
       "bandExcludesTransfer": false
@@ -5936,7 +5936,7 @@
         ],
         "plan": [
           1,
-          9
+          7
         ]
       },
       "bandExcludesTransfer": false,
@@ -6083,7 +6083,7 @@
         ],
         "plan": [
           1,
-          9
+          7
         ]
       },
       "bandExcludesTransfer": false,
@@ -6230,7 +6230,7 @@
         ],
         "plan": [
           1,
-          9
+          7
         ]
       },
       "bandExcludesTransfer": false,
@@ -6377,7 +6377,7 @@
         ],
         "plan": [
           1,
-          9
+          7
         ]
       },
       "bandExcludesTransfer": false,
@@ -6521,7 +6521,7 @@
         ],
         "plan": [
           1,
-          9
+          7
         ]
       },
       "bandExcludesTransfer": true,
@@ -6531,150 +6531,6 @@
         "routeId": "claude-pro-claude-sonnet-5-5-common-opus55-assumption",
         "multiple": 58.9,
         "representative": true
-      }
-    },
-    {
-      "slug": "claude-sonnet-5-5",
-      "name": "Claude Sonnet 5.5 · Claude Max 20x",
-      "shortName": "Sonnet 5.5",
-      "developer": "Anthropic",
-      "aaUrl": "https://artificialanalysis.ai/models/claude-sonnet-5-5",
-      "aaVariant": "max",
-      "rankingEligible": true,
-      "exclusionReasons": [],
-      "intelligenceIndex": {
-        "value": 54.7282014953324,
-        "status": "measured"
-      },
-      "speed": null,
-      "aaFrontierTier": "left cohort",
-      "aaFrontierConfiguration": "Claude Sonnet 5.5 (max)",
-      "aaFrontierIntelligenceGap": null,
-      "aaFrontierFootnote": null,
-      "rank": {
-        "api": 4,
-        "plan": 6
-      },
-      "rankWithinWorkload": {
-        "api": null,
-        "plan": null
-      },
-      "rankNote": null,
-      "overall": {
-        "api": 51.404073926690316,
-        "plan": 65.55732826418173
-      },
-      "quality": 63.9203449199042,
-      "qualityRank": 4,
-      "dims": {
-        "costComposite": null,
-        "frontierCode": 41.9350252525253,
-        "terminalBench": 65.1515151515151,
-        "bugHunt": 55.747126436781606,
-        "vibeCode": 80.88,
-        "codeMigration": 86.875,
-        "livebench2Overall": 76.79,
-        "gdpval": 66.891,
-        "gdpPdf": 25.8,
-        "automationBench": 71.76882128193995,
-        "omniscience": 65.23333333333333,
-        "lcr": 82.6666666666667,
-        "hle": 53.300000000000004,
-        "tbScience": 53.3333333333333,
-        "critpt": 59.0
-      },
-      "costDims": {
-        "api": 13.85526094704866,
-        "plan": 70.46827829701436
-      },
-      "raw": {
-        "frontierCode": 0.419350252525253,
-        "terminalBench": 65.1515151515151,
-        "bugHunt": 77.6,
-        "vibeCode": 80.88,
-        "codeMigration": 86.875,
-        "livebench2Overall": 76.79,
-        "gdpval": 1837.82,
-        "gdpPdf": 0.258,
-        "automationBench": 0.7176882128193995,
-        "omniscience": 30.466666666666665,
-        "lcr": 0.826666666666667,
-        "hle": 0.533,
-        "tbScience": 0.533333333333333,
-        "critpt": 0.59
-      },
-      "coverage": {
-        "pct": 100.0,
-        "costAvailable": true,
-        "missing": [],
-        "provisional": false,
-        "provisionalReasons": []
-      },
-      "cost": {
-        "apiUsd": 10314.721013086955,
-        "planUsd": 175.92906384252012,
-        "fallback": null,
-        "route": {
-          "id": "claude-max20x-claude-sonnet-5-5-common-opus55-assumption",
-          "planLabel": "Claude Max 20x $200 · common Claude assumption",
-          "planFeeUsd": 200,
-          "valueMultiple": 58.63,
-          "grade": "assumption",
-          "assumptionKind": "transfer",
-          "evidenceLabel": "Provisional assumption",
-          "sourceModel": "Opus 5.5",
-          "sourceUrl": "https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x",
-          "sourceDate": "2026-10-06"
-        },
-        "subset": false,
-        "partialComponents": [],
-        "workload": "2774ca1a24867d8c",
-        "planFlags": [
-          "workload-unmatched",
-          "owner-named transfer (assumption)",
-          "possibly-superseded",
-          "valuation basis unverified"
-        ]
-      },
-      "grade": "measured",
-      "pareto": {
-        "api": false,
-        "plan": false
-      },
-      "frontierStatus": {
-        "api": {
-          "definite": "disproved",
-          "possible": "disproved"
-        },
-        "plan": null
-      },
-      "scenario": {
-        "api": {
-          "top1": 0.0,
-          "top3": 0.0,
-          "frontier": 0.0
-        },
-        "plan": null
-      },
-      "flags": [],
-      "tier": "Mid-Range",
-      "band": {
-        "api": [
-          4,
-          5
-        ],
-        "plan": [
-          1,
-          9
-        ]
-      },
-      "bandExcludesTransfer": true,
-      "key": "claude-sonnet-5-5--claude-max-20x",
-      "planRow": {
-        "plan": "Claude Max 20x",
-        "routeId": "claude-max20x-claude-sonnet-5-5-common-opus55-assumption",
-        "multiple": 58.63,
-        "representative": false
       }
     },
     {
@@ -6697,7 +6553,7 @@
       "aaFrontierFootnote": null,
       "rank": {
         "api": 4,
-        "plan": 7
+        "plan": 6
       },
       "rankWithinWorkload": {
         "api": null,
@@ -6809,7 +6665,7 @@
         ],
         "plan": [
           1,
-          9
+          7
         ]
       },
       "bandExcludesTransfer": true,
@@ -6841,7 +6697,7 @@
       "aaFrontierFootnote": null,
       "rank": {
         "api": 5,
-        "plan": 8
+        "plan": 7
       },
       "rankWithinWorkload": {
         "api": null,
@@ -6956,7 +6812,7 @@
         ],
         "plan": [
           1,
-          9
+          7
         ]
       },
       "bandExcludesTransfer": false,
@@ -6966,153 +6822,6 @@
         "routeId": "claude-pro-opus55-semianalysis",
         "multiple": 58.9,
         "representative": true
-      }
-    },
-    {
-      "slug": "claude-opus-5-5",
-      "name": "Claude Opus 5.5 (max) · Claude Max 20x",
-      "shortName": "Opus 5.5 (max)",
-      "developer": "Anthropic",
-      "aaUrl": "https://artificialanalysis.ai/models/claude-opus-5-5",
-      "aaVariant": "max",
-      "rankingEligible": true,
-      "exclusionReasons": [],
-      "intelligenceIndex": {
-        "value": 59.1249717392035,
-        "status": "measured"
-      },
-      "speed": null,
-      "aaFrontierTier": "near",
-      "aaFrontierConfiguration": "Claude Opus 5.5 (max)",
-      "aaFrontierIntelligenceGap": 3,
-      "aaFrontierFootnote": null,
-      "rank": {
-        "api": 5,
-        "plan": 9
-      },
-      "rankWithinWorkload": {
-        "api": null,
-        "plan": null
-      },
-      "rankNote": null,
-      "overall": {
-        "api": 51.36753359625901,
-        "plan": 65.29117727553815
-      },
-      "quality": 64.31852033742345,
-      "qualityRank": 3,
-      "dims": {
-        "costComposite": null,
-        "frontierCode": 46.8989141414141,
-        "terminalBench": 59.09090909090911,
-        "bugHunt": 36.42241379310345,
-        "vibeCode": 78.49,
-        "codeMigration": 81.012,
-        "livebench2Overall": 83.44,
-        "gdpval": 68.3135,
-        "gdpPdf": 26.200000000000003,
-        "automationBench": 69.5386812863607,
-        "omniscience": 74.06666666666666,
-        "lcr": 84.6666666666667,
-        "hle": 67.9,
-        "tbScience": 59.047619047619,
-        "critpt": 68.0
-      },
-      "costDims": {
-        "api": 12.514573372765675,
-        "plan": 68.20914808988225
-      },
-      "raw": {
-        "frontierCode": 0.468989141414141,
-        "terminalBench": 59.09090909090911,
-        "bugHunt": 50.7,
-        "vibeCode": 78.49,
-        "codeMigration": 81.012,
-        "livebench2Overall": 83.44,
-        "gdpval": 1866.27,
-        "gdpPdf": 0.262,
-        "automationBench": 0.6953868128636069,
-        "omniscience": 48.13333333333333,
-        "lcr": 0.846666666666667,
-        "hle": 0.679,
-        "tbScience": 0.59047619047619,
-        "critpt": 0.68
-      },
-      "coverage": {
-        "pct": 100.0,
-        "costAvailable": true,
-        "missing": [],
-        "provisional": false,
-        "provisionalReasons": []
-      },
-      "cost": {
-        "apiUsd": 11109.815873733918,
-        "planUsd": 189.49029291717412,
-        "fallback": null,
-        "route": {
-          "id": "claude-max20x-opus55-semianalysis",
-          "planLabel": "Claude Max $200 · Opus 5.5",
-          "planFeeUsd": 200,
-          "valueMultiple": 58.63,
-          "grade": "measured",
-          "assumptionKind": null,
-          "evidenceLabel": "Controlled account measurement / workload projection",
-          "sourceModel": "Opus 5.5",
-          "sourceUrl": "https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x",
-          "sourceDate": "2026-10-06"
-        },
-        "subset": false,
-        "partialComponents": [],
-        "workload": "2774ca1a24867d8c",
-        "planFlags": [
-          "workload-unmatched",
-          "possibly-superseded",
-          "valuation basis unverified"
-        ]
-      },
-      "grade": "measured",
-      "pareto": {
-        "api": false,
-        "plan": false
-      },
-      "frontierStatus": {
-        "api": {
-          "definite": "disproved",
-          "possible": "disproved"
-        },
-        "plan": null
-      },
-      "scenario": {
-        "api": {
-          "top1": 0.0,
-          "top3": 0.0,
-          "frontier": 0.0
-        },
-        "plan": {
-          "top1": 0.0,
-          "top3": 0.0,
-          "frontier": 0.0
-        }
-      },
-      "flags": [],
-      "tier": "Mid-Range",
-      "band": {
-        "api": [
-          4,
-          5
-        ],
-        "plan": [
-          1,
-          9
-        ]
-      },
-      "bandExcludesTransfer": false,
-      "key": "claude-opus-5-5--claude-max-20x",
-      "planRow": {
-        "plan": "Claude Max 20x",
-        "routeId": "claude-max20x-opus55-semianalysis",
-        "multiple": 58.63,
-        "representative": false
       }
     },
     {
@@ -7135,7 +6844,7 @@
       "aaFrontierFootnote": null,
       "rank": {
         "api": 5,
-        "plan": 10
+        "plan": 8
       },
       "rankWithinWorkload": {
         "api": null,
@@ -7249,7 +6958,7 @@
           5
         ],
         "plan": [
-          10,
+          8,
           10
         ]
       },
@@ -7259,6 +6968,286 @@
         "plan": "Claude Max 5x",
         "routeId": "claude-max5x-opus55-semianalysis",
         "multiple": 57.25,
+        "representative": false
+      }
+    },
+    {
+      "slug": "claude-sonnet-5-5",
+      "name": "Claude Sonnet 5.5 · Claude Max 20x",
+      "shortName": "Sonnet 5.5",
+      "developer": "Anthropic",
+      "aaUrl": "https://artificialanalysis.ai/models/claude-sonnet-5-5",
+      "aaVariant": "max",
+      "rankingEligible": true,
+      "exclusionReasons": [],
+      "intelligenceIndex": {
+        "value": 54.7282014953324,
+        "status": "measured"
+      },
+      "speed": null,
+      "aaFrontierTier": "left cohort",
+      "aaFrontierConfiguration": "Claude Sonnet 5.5 (max)",
+      "aaFrontierIntelligenceGap": null,
+      "aaFrontierFootnote": null,
+      "rank": {
+        "api": 4,
+        "plan": 9
+      },
+      "rankWithinWorkload": {
+        "api": null,
+        "plan": null
+      },
+      "rankNote": null,
+      "overall": {
+        "api": 51.404073926690316,
+        "plan": 64.96185591807019
+      },
+      "quality": 63.9203449199042,
+      "qualityRank": 4,
+      "dims": {
+        "costComposite": null,
+        "frontierCode": 41.9350252525253,
+        "terminalBench": 65.1515151515151,
+        "bugHunt": 55.747126436781606,
+        "vibeCode": 80.88,
+        "codeMigration": 86.875,
+        "livebench2Overall": 76.79,
+        "gdpval": 66.891,
+        "gdpPdf": 25.8,
+        "automationBench": 71.76882128193995,
+        "omniscience": 65.23333333333333,
+        "lcr": 82.6666666666667,
+        "hle": 53.300000000000004,
+        "tbScience": 53.3333333333333,
+        "critpt": 59.0
+      },
+      "costDims": {
+        "api": 13.85526094704866,
+        "plan": 68.08638891256814
+      },
+      "raw": {
+        "frontierCode": 0.419350252525253,
+        "terminalBench": 65.1515151515151,
+        "bugHunt": 77.6,
+        "vibeCode": 80.88,
+        "codeMigration": 86.875,
+        "livebench2Overall": 76.79,
+        "gdpval": 1837.82,
+        "gdpPdf": 0.258,
+        "automationBench": 0.7176882128193995,
+        "omniscience": 30.466666666666665,
+        "lcr": 0.826666666666667,
+        "hle": 0.533,
+        "tbScience": 0.533333333333333,
+        "critpt": 0.59
+      },
+      "coverage": {
+        "pct": 100.0,
+        "costAvailable": true,
+        "missing": [],
+        "provisional": false,
+        "provisionalReasons": []
+      },
+      "cost": {
+        "apiUsd": 10314.721013086955,
+        "planUsd": 190.25644178897835,
+        "fallback": null,
+        "route": {
+          "id": "claude-max20x-claude-sonnet-5-5-common-opus55-assumption",
+          "planLabel": "Claude Max 20x $200 · common Claude assumption",
+          "planFeeUsd": 200,
+          "valueMultiple": 58.63,
+          "grade": "assumption",
+          "assumptionKind": "transfer",
+          "evidenceLabel": "Provisional assumption",
+          "sourceModel": "Opus 5.5",
+          "sourceUrl": "https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x",
+          "sourceDate": "2026-10-06"
+        },
+        "subset": false,
+        "partialComponents": [],
+        "workload": "2774ca1a24867d8c",
+        "planFlags": [
+          "workload-unmatched",
+          "owner-named transfer (assumption)",
+          "valuation basis unverified",
+          "observed-usage multiple; full utilisation not established"
+        ]
+      },
+      "grade": "measured",
+      "pareto": {
+        "api": false,
+        "plan": false
+      },
+      "frontierStatus": {
+        "api": {
+          "definite": "disproved",
+          "possible": "disproved"
+        },
+        "plan": null
+      },
+      "scenario": {
+        "api": {
+          "top1": 0.0,
+          "top3": 0.0,
+          "frontier": 0.0
+        },
+        "plan": null
+      },
+      "flags": [],
+      "tier": "Mid-Range",
+      "band": {
+        "api": [
+          4,
+          5
+        ],
+        "plan": [
+          8,
+          10
+        ]
+      },
+      "bandExcludesTransfer": true,
+      "key": "claude-sonnet-5-5--claude-max-20x",
+      "planRow": {
+        "plan": "Claude Max 20x",
+        "routeId": "claude-max20x-claude-sonnet-5-5-common-opus55-assumption",
+        "multiple": 54.21483191895,
+        "representative": false
+      }
+    },
+    {
+      "slug": "claude-opus-5-5",
+      "name": "Claude Opus 5.5 (max) · Claude Max 20x",
+      "shortName": "Opus 5.5 (max)",
+      "developer": "Anthropic",
+      "aaUrl": "https://artificialanalysis.ai/models/claude-opus-5-5",
+      "aaVariant": "max",
+      "rankingEligible": true,
+      "exclusionReasons": [],
+      "intelligenceIndex": {
+        "value": 59.1249717392035,
+        "status": "measured"
+      },
+      "speed": null,
+      "aaFrontierTier": "near",
+      "aaFrontierConfiguration": "Claude Opus 5.5 (max)",
+      "aaFrontierIntelligenceGap": 3,
+      "aaFrontierFootnote": null,
+      "rank": {
+        "api": 5,
+        "plan": 10
+      },
+      "rankWithinWorkload": {
+        "api": null,
+        "plan": null
+      },
+      "rankNote": null,
+      "overall": {
+        "api": 51.36753359625901,
+        "plan": 64.6957049294266
+      },
+      "quality": 64.31852033742345,
+      "qualityRank": 3,
+      "dims": {
+        "costComposite": null,
+        "frontierCode": 46.8989141414141,
+        "terminalBench": 59.09090909090911,
+        "bugHunt": 36.42241379310345,
+        "vibeCode": 78.49,
+        "codeMigration": 81.012,
+        "livebench2Overall": 83.44,
+        "gdpval": 68.3135,
+        "gdpPdf": 26.200000000000003,
+        "automationBench": 69.5386812863607,
+        "omniscience": 74.06666666666666,
+        "lcr": 84.6666666666667,
+        "hle": 67.9,
+        "tbScience": 59.047619047619,
+        "critpt": 68.0
+      },
+      "costDims": {
+        "api": 12.514573372765675,
+        "plan": 65.82725870543601
+      },
+      "raw": {
+        "frontierCode": 0.468989141414141,
+        "terminalBench": 59.09090909090911,
+        "bugHunt": 50.7,
+        "vibeCode": 78.49,
+        "codeMigration": 81.012,
+        "livebench2Overall": 83.44,
+        "gdpval": 1866.27,
+        "gdpPdf": 0.262,
+        "automationBench": 0.6953868128636069,
+        "omniscience": 48.13333333333333,
+        "lcr": 0.846666666666667,
+        "hle": 0.679,
+        "tbScience": 0.59047619047619,
+        "critpt": 0.68
+      },
+      "coverage": {
+        "pct": 100.0,
+        "costAvailable": true,
+        "missing": [],
+        "provisional": false,
+        "provisionalReasons": []
+      },
+      "cost": {
+        "apiUsd": 11109.815873733918,
+        "planUsd": 204.92207538968032,
+        "fallback": null,
+        "route": null,
+        "subset": false,
+        "partialComponents": [],
+        "workload": "2774ca1a24867d8c",
+        "planFlags": [
+          "workload-unmatched",
+          "valuation basis unverified",
+          "observed-usage multiple; full utilisation not established"
+        ]
+      },
+      "grade": "measured",
+      "pareto": {
+        "api": false,
+        "plan": false
+      },
+      "frontierStatus": {
+        "api": {
+          "definite": "disproved",
+          "possible": "disproved"
+        },
+        "plan": null
+      },
+      "scenario": {
+        "api": {
+          "top1": 0.0,
+          "top3": 0.0,
+          "frontier": 0.0
+        },
+        "plan": {
+          "top1": 0.0,
+          "top3": 0.0,
+          "frontier": 0.0
+        }
+      },
+      "flags": [],
+      "tier": "Mid-Range",
+      "band": {
+        "api": [
+          4,
+          5
+        ],
+        "plan": [
+          8,
+          10
+        ]
+      },
+      "bandExcludesTransfer": false,
+      "key": "claude-opus-5-5--claude-max-20x",
+      "planRow": {
+        "plan": "Claude Max 20x",
+        "routeId": "claude-max20x-opus55-user-reports#m1",
+        "multiple": 54.21483191895,
         "representative": false
       }
     },

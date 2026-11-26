@@ -3685,6 +3685,125 @@
         "mimo-v2-6-pro"
       ],
       "notes": "Owner decision O198 (2026-11-11): OpenCode's published monthly limit for MiMo-V2.6-Pro on the $10 Go plan, $15, is the plan's actual limit (a hard cap on usage metered at OpenCode's listed token prices), so the multiple is 15 / 10 = 1.5x at full use of the limit; it is the plan's terms, not an end-user measurement and not a ceiling to be replaced by user reports. The 5-hour (20%) and weekly (50%) caps do not change the monthly figure. OpenCode's listed price equals AA's list price. Go Plus and Go Teams are not Plan-basis plans (O199)."
+    },
+    {
+      "id": "claude-max5x-claude-fable-5-2-common-opus55-assumption",
+      "provider": "Anthropic",
+      "planLabel": "Claude Max 5x $100 · common Claude assumption",
+      "planFeeUsd": 100,
+      "valueMultiple": 57.25,
+      "apiEquivalentUsd": 5725,
+      "grade": "assumption",
+      "evidenceLabel": "Provisional assumption",
+      "sourceModel": "Opus 5.5",
+      "sourceUrl": "https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x",
+      "sourceDate": "2026-10-06",
+      "modelSlugs": [
+        "claude-fable-5-2"
+      ],
+      "notes": "Applies Opus 5.5's measured Claude Max 5x figure ($5,725/month at $100, 57.25x) to every other Claude model in the roster. Owner-authorized cross-model application on 2026-10-18 (Option 2) over the recorded caution that the allowance is model-specific: on the same plans SemiAnalysis measured Fable 5.1 at 12.73x (Max 5x) and 12.425x (Max 20x) against Opus 5.5's 57.25x and 58.63x, and Haiku 5.5's per-token API price is far lower, so the applied multiple may overstate the plan value of cheaper Claude models. The numerator is Opus 5.5's measured figure, not a measurement of the listed models. O217 (2026-11-26): the owner chose to apply Opus 5.5's figure to Claude Fable 5.2 as a labelled assumption, knowing its Fable meter differs; Claude Pro is excluded because Fable 5.2 is on Pro only through usage credits."
+    },
+    {
+      "id": "claude-max5x-claude-fable-5-2-high-common-opus55-assumption",
+      "provider": "Anthropic",
+      "planLabel": "Claude Max 5x $100 · common Claude assumption",
+      "planFeeUsd": 100,
+      "valueMultiple": 57.25,
+      "apiEquivalentUsd": 5725,
+      "grade": "assumption",
+      "evidenceLabel": "Provisional assumption",
+      "sourceModel": "Opus 5.5",
+      "sourceUrl": "https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x",
+      "sourceDate": "2026-10-06",
+      "modelSlugs": [
+        "claude-fable-5-2-high"
+      ],
+      "notes": "Applies Opus 5.5's measured Claude Max 5x figure ($5,725/month at $100, 57.25x) to every other Claude model in the roster. Owner-authorized cross-model application on 2026-10-18 (Option 2) over the recorded caution that the allowance is model-specific: on the same plans SemiAnalysis measured Fable 5.1 at 12.73x (Max 5x) and 12.425x (Max 20x) against Opus 5.5's 57.25x and 58.63x, and Haiku 5.5's per-token API price is far lower, so the applied multiple may overstate the plan value of cheaper Claude models. The numerator is Opus 5.5's measured figure, not a measurement of the listed models. O217 (2026-11-26): the owner chose to apply Opus 5.5's figure to Claude Fable 5.2 as a labelled assumption, knowing its Fable meter differs; Claude Pro is excluded because Fable 5.2 is on Pro only through usage credits."
+    },
+    {
+      "id": "claude-max5x-claude-fable-5-2-xhigh-common-opus55-assumption",
+      "provider": "Anthropic",
+      "planLabel": "Claude Max 5x $100 · common Claude assumption",
+      "planFeeUsd": 100,
+      "valueMultiple": 57.25,
+      "apiEquivalentUsd": 5725,
+      "grade": "assumption",
+      "evidenceLabel": "Provisional assumption",
+      "sourceModel": "Opus 5.5",
+      "sourceUrl": "https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x",
+      "sourceDate": "2026-10-06",
+      "modelSlugs": [
+        "claude-fable-5-2-xhigh"
+      ],
+      "notes": "Applies Opus 5.5's measured Claude Max 5x figure ($5,725/month at $100, 57.25x) to every other Claude model in the roster. Owner-authorized cross-model application on 2026-10-18 (Option 2) over the recorded caution that the allowance is model-specific: on the same plans SemiAnalysis measured Fable 5.1 at 12.73x (Max 5x) and 12.425x (Max 20x) against Opus 5.5's 57.25x and 58.63x, and Haiku 5.5's per-token API price is far lower, so the applied multiple may overstate the plan value of cheaper Claude models. The numerator is Opus 5.5's measured figure, not a measurement of the listed models. O217 (2026-11-26): the owner chose to apply Opus 5.5's figure to Claude Fable 5.2 as a labelled assumption, knowing its Fable meter differs; Claude Pro is excluded because Fable 5.2 is on Pro only through usage credits."
+    },
+    {
+      "id": "claude-max20x-claude-fable-5-2-common-opus55-assumption",
+      "provider": "Anthropic",
+      "planLabel": "Claude Max 20x $200 · common Claude assumption",
+      "planFeeUsd": 200,
+      "valueMultiple": 58.63,
+      "apiEquivalentUsd": 11726,
+      "grade": "assumption",
+      "evidenceLabel": "Provisional assumption",
+      "sourceModel": "Opus 5.5",
+      "sourceUrl": "https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x",
+      "sourceDate": "2026-10-06",
+      "modelSlugs": [
+        "claude-fable-5-2"
+      ],
+      "notes": "Applies Opus 5.5's measured Claude Max 20x figure ($11,726/month at $200, 58.63x) to every other Claude model in the roster. Owner-authorized cross-model application on 2026-10-18 (Option 2) over the recorded caution that the allowance is model-specific: on the same plans SemiAnalysis measured Fable 5.1 at 12.73x (Max 5x) and 12.425x (Max 20x) against Opus 5.5's 57.25x and 58.63x, and Haiku 5.5's per-token API price is far lower, so the applied multiple may overstate the plan value of cheaper Claude models. The numerator is Opus 5.5's measured figure, not a measurement of the listed models. O217 (2026-11-26): the owner chose to apply Opus 5.5's figure to Claude Fable 5.2 as a labelled assumption, knowing its Fable meter differs; Claude Pro is excluded because Fable 5.2 is on Pro only through usage credits."
+    },
+    {
+      "id": "claude-max20x-claude-fable-5-2-high-common-opus55-assumption",
+      "provider": "Anthropic",
+      "planLabel": "Claude Max 20x $200 · common Claude assumption",
+      "planFeeUsd": 200,
+      "valueMultiple": 58.63,
+      "apiEquivalentUsd": 11726,
+      "grade": "assumption",
+      "evidenceLabel": "Provisional assumption",
+      "sourceModel": "Opus 5.5",
+      "sourceUrl": "https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x",
+      "sourceDate": "2026-10-06",
+      "modelSlugs": [
+        "claude-fable-5-2-high"
+      ],
+      "notes": "Applies Opus 5.5's measured Claude Max 20x figure ($11,726/month at $200, 58.63x) to every other Claude model in the roster. Owner-authorized cross-model application on 2026-10-18 (Option 2) over the recorded caution that the allowance is model-specific: on the same plans SemiAnalysis measured Fable 5.1 at 12.73x (Max 5x) and 12.425x (Max 20x) against Opus 5.5's 57.25x and 58.63x, and Haiku 5.5's per-token API price is far lower, so the applied multiple may overstate the plan value of cheaper Claude models. The numerator is Opus 5.5's measured figure, not a measurement of the listed models. O217 (2026-11-26): the owner chose to apply Opus 5.5's figure to Claude Fable 5.2 as a labelled assumption, knowing its Fable meter differs; Claude Pro is excluded because Fable 5.2 is on Pro only through usage credits."
+    },
+    {
+      "id": "claude-max20x-claude-fable-5-2-xhigh-common-opus55-assumption",
+      "provider": "Anthropic",
+      "planLabel": "Claude Max 20x $200 · common Claude assumption",
+      "planFeeUsd": 200,
+      "valueMultiple": 58.63,
+      "apiEquivalentUsd": 11726,
+      "grade": "assumption",
+      "evidenceLabel": "Provisional assumption",
+      "sourceModel": "Opus 5.5",
+      "sourceUrl": "https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x",
+      "sourceDate": "2026-10-06",
+      "modelSlugs": [
+        "claude-fable-5-2-xhigh"
+      ],
+      "notes": "Applies Opus 5.5's measured Claude Max 20x figure ($11,726/month at $200, 58.63x) to every other Claude model in the roster. Owner-authorized cross-model application on 2026-10-18 (Option 2) over the recorded caution that the allowance is model-specific: on the same plans SemiAnalysis measured Fable 5.1 at 12.73x (Max 5x) and 12.425x (Max 20x) against Opus 5.5's 57.25x and 58.63x, and Haiku 5.5's per-token API price is far lower, so the applied multiple may overstate the plan value of cheaper Claude models. The numerator is Opus 5.5's measured figure, not a measurement of the listed models. O217 (2026-11-26): the owner chose to apply Opus 5.5's figure to Claude Fable 5.2 as a labelled assumption, knowing its Fable meter differs; Claude Pro is excluded because Fable 5.2 is on Pro only through usage credits."
+    },
+    {
+      "id": "claude-max20x-opus55-user-reports",
+      "provider": "Anthropic",
+      "planLabel": "Claude Max $200 · Opus 5.5 · two end-user reports (O218)",
+      "planFeeUsd": 200,
+      "valueMultiple": 54.21,
+      "apiEquivalentUsd": 10842.97,
+      "grade": "assumption",
+      "evidenceLabel": "end user report",
+      "sourceModel": null,
+      "sourceUrl": "https://www.reddit.com/r/ClaudeCode/comments/1xy4zwk/",
+      "sourceDate": "2026-11-16",
+      "modelSlugs": [
+        "claude-opus-5-5"
+      ],
+      "notes": "O218 (2026-11-26): the passing O71 cell Claude Opus 5.5 x Claude Max 20x x week (WuM1ha1nho, gianfrugo; archived with SHA-256 under research/2026-11-26-plan-allowances/archive/) as a report route. Each multiple is the report's weekly API-priced value midpoint x 52/12 / $200; the pooled multiple is their geometric mean. Both used Claude Code on Opus 5.5 at list prices after the 2026-10-30 Max 20x partition opened."
     }
   ],
   "candidates": [
@@ -3693,7 +3812,7 @@
       "name": "Claude Opus 5.5 (max)",
       "rank": {
         "api": 5,
-        "plan": 8
+        "plan": 7
       },
       "apiUsd": 11109.815873733918,
       "planUsd": 188.62166169327534,
