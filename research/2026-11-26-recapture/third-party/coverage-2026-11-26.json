@@ -26,7 +26,7 @@
   "gpt-6-luna",
   "mimo-v2-6-flash"
  ],
- "statusRule": "exact = source row names the same model version and the same reasoning effort as the AA configuration (where AA plots no effort: the documented default under O135/O140/O149 for MiMo-V2.6-Flash); plausible = same model, effort not confirmable (MiMo-V2.6-Flash rows that record no effort or 'default'/'none'; O140 keeps them unmatched); absent = no row at this effort or no row for the model. No value is transferred across efforts or versions.",
+ "statusRule": "exact = source row names the same model version and the same reasoning effort as the AA configuration (where AA plots no effort: the documented default under O135/O140/O149 for MiMo-V2.6-Flash); plausible = same model, effort not confirmable (MiMo-V2.6-Flash rows that record no effort or 'default'/'none'; O140 keeps them unmatched); absent = no row at this effort or no row for the model. No value is transferred across efforts or versions. Leaves (owner decisions of 2026-11-26): AI Coding Daily value = Laravel + React-TS + Python + Edge-case (max 80; Bug Finding and the consistency penalty are not in it, the components and diagnostics are stored per cell; a row without a Python Code Quality score is absent); the Vals Vibe Code Bench leaf is v1.1.1 (each cell states version v1.1.1; v1.1 values are only in the vals catalogue's predecessorReference).",
  "laterRowCheck": "No row on any board is dated after 2026-11-26T02:18:20Z (the 2026-11-26 chart capture); the build stops on a Bug Hunt or AI Coding Daily row dated after that day. Newest rows: Bug Hunt 2026-11-25 (Gemini 4 Neon 1.5.16 reruns, commit 3be9acd), AI Coding Daily 2026-11-25 (Gemini 4 Carbon), Vals boards updated 2026-11-19 (v1.1) and 2026-11-21 (v1.1.1), LiveBench release 2026-11-06, tbench.ai 4.1 leaderboard updated 2026-11-20, Cognition changelog 2026-11-24. Changes after the previous cutoff (2026-11-01T05:53:05Z) are listed in README.md.",
  "benchmarks": [
   {
@@ -1346,8 +1346,13 @@
     "lastUpdate": "November 25th, 2026 (Added Gemini 4 Carbon)",
     "penaltyColumn": "Penalty = points deducted for inconsistent results across attempts (negative or 0); total = Laravel + React-TS + Bug Finding + Python + Edge-case + Penalty"
    },
-   "values": "value = nonBug = Laravel + React-TS + Edge-case (max 60, the ValueRank leaf as before); each row also carries total (now max 90), python (new project, max 20), bug (max 10), penalty and the other columns",
-   "methodologyChange": "Since 2026-11-11 the board scores 8 projects / 33 prompts and adds the Python 'Pricing Engine' project and a per-project Consistency Penalty (methodology article, aicd/articles/methodology.html, published 2026-11-11). The total moved from max 70 to max 90; Laravel, React-TS and Edge-case keep their max of 20 and their definitions, so the non-bug leaf (max 60) is still well defined, but a leaf that included Python would be max 80 (nonBugWithPython). Almost every row was re-dated 2026-11-13/14 when its Python run was added; its Laravel, React-TS and Edge-case scores are unchanged except where listed in rowChangesSince20261101.",
+   "leaf": {
+    "definition": "Laravel Code Quality + React-TS Code Quality + Python Code Quality + Edge-case Testing, each max 20, so max 80",
+    "decision": "Owner decision 2026-11-26. Bug Finding is excluded; the per-project Consistency Penalty is NOT in the leaf (it is a diagnostic: the total column is the five project columns plus the penalty, and the four leaf columns are the displayed, pre-penalty values). A row without a Python Code Quality score (tested before the Python project) is absent from this leaf, with the reason in the cell's note.",
+    "previousLeaf": "Laravel + React-TS + Edge-case (max 60, 2026-11-01 and the first 2026-11-26 build); still stored per cell as diagnostics.nonBug60 and used for valueChangesSince20261101"
+   },
+   "values": "value = Laravel + React-TS + Python + Edge-case (max 80, the ValueRank leaf); each cell stores the four components, and the diagnostics (total of max 90, bug finding, penalty, the old 60-point sum); each row also carries every board column",
+   "methodologyChange": "Since 2026-11-11 the board scores 8 projects / 33 prompts and adds the Python 'Pricing Engine' project and a per-project Consistency Penalty (methodology article, aicd/articles/methodology.html, published 2026-11-11). The total moved from max 70 to max 90; Laravel, React-TS and Edge-case keep their max of 20 and their definitions. Almost every row was re-dated 2026-11-13/14 (the dates fit the Python project being run then; the board gives no reason); its Laravel, React-TS and Edge-case scores are unchanged except where listed in rowChangesSince20261101.",
    "totalIdentityCheck": "87 of 87 rows satisfy total = columns + penalty within 0.02",
    "rowChangesSince20261101": {
     "added": [
@@ -1759,7 +1764,7 @@
     },
     "gpt-6-luna-medium": {
      "status": "exact",
-     "value": 40.2,
+     "value": 55.03,
      "sourceLabel": "GPT-6-Luna (Medium)",
      "effort": "medium",
      "note": null,
@@ -1767,7 +1772,7 @@
       {
        "total": 56.7,
        "nonBug": 40.2,
-       "nonBugWithPython": 55.03,
+       "leaf80": 55.03,
        "laravel": 16.33,
        "react": 14.17,
        "bug": 3.89,
@@ -1781,7 +1786,22 @@
        "time": "02:13",
        "rank": "65"
       }
-     ]
+     ],
+     "components": {
+      "laravel": 16.33,
+      "react": 14.17,
+      "python": 14.83,
+      "edge": 9.7,
+      "leafMax": 80
+     },
+     "diagnostics": {
+      "total": 56.7,
+      "totalMax": 90,
+      "bug": 3.89,
+      "penalty": -2.22,
+      "nonBug60": 40.2,
+      "note": "Bug Finding and the penalty are not in the leaf."
+     }
     },
     "claude-haiku-5-5-low": {
      "status": "absent",
@@ -1792,7 +1812,7 @@
     },
     "gpt-6-luna-high": {
      "status": "exact",
-     "value": 47.73,
+     "value": 63.26,
      "sourceLabel": "GPT-6-Luna (High)",
      "effort": "high",
      "note": null,
@@ -1800,7 +1820,7 @@
       {
        "total": 67.33,
        "nonBug": 47.73,
-       "nonBugWithPython": 63.26,
+       "leaf80": 63.26,
        "laravel": 16.9,
        "react": 15.83,
        "bug": 5.35,
@@ -1814,11 +1834,26 @@
        "time": "03:51",
        "rank": "49"
       }
-     ]
+     ],
+     "components": {
+      "laravel": 16.9,
+      "react": 15.83,
+      "python": 15.53,
+      "edge": 15.0,
+      "leafMax": 80
+     },
+     "diagnostics": {
+      "total": 67.33,
+      "totalMax": 90,
+      "bug": 5.35,
+      "penalty": -1.28,
+      "nonBug60": 47.73,
+      "note": "Bug Finding and the penalty are not in the leaf."
+     }
     },
     "claude-haiku-5-5-medium": {
      "status": "exact",
-     "value": 51.32,
+     "value": 68.75,
      "sourceLabel": "Haiku 5.5 (Medium)",
      "effort": "medium",
      "note": null,
@@ -1826,7 +1861,7 @@
       {
        "total": 75.84,
        "nonBug": 51.32,
-       "nonBugWithPython": 68.75,
+       "leaf80": 68.75,
        "laravel": 17.32,
        "react": 17.0,
        "bug": 7.09,
@@ -1840,7 +1875,22 @@
        "time": "02:37",
        "rank": "27"
       }
-     ]
+     ],
+     "components": {
+      "laravel": 17.32,
+      "react": 17.0,
+      "python": 17.43,
+      "edge": 17.0,
+      "leafMax": 80
+     },
+     "diagnostics": {
+      "total": 75.84,
+      "totalMax": 90,
+      "bug": 7.09,
+      "penalty": 0.0,
+      "nonBug60": 51.32,
+      "note": "Bug Finding and the penalty are not in the leaf."
+     }
     },
     "muse-ember-xhigh": {
      "status": "absent",
@@ -1851,7 +1901,7 @@
     },
     "muse-ember": {
      "status": "exact",
-     "value": 47.32,
+     "value": 61.65,
      "sourceLabel": "Muse Ember 1.0 (Max)",
      "effort": "max",
      "note": "The board names the model 'Muse Ember 1.0'; AA, Vals and tbench.ai name it 'Muse Ember' (no version), and the board's own video title is 'I Tested NEW Muse Ember on Coding' (aicd/model-pages/muse-ember-1-0.html). No other Muse Ember version appears on any board, so '1.0' is read as the model's release name, not a second version. Flag for the owner (O36 asks for the same model version).",
@@ -1859,7 +1909,7 @@
       {
        "total": 64.52,
        "nonBug": 47.32,
-       "nonBugWithPython": 61.65,
+       "leaf80": 61.65,
        "laravel": 15.95,
        "react": 16.67,
        "bug": 5.31,
@@ -1873,11 +1923,26 @@
        "time": "02:16",
        "rank": "54"
       }
-     ]
+     ],
+     "components": {
+      "laravel": 15.95,
+      "react": 16.67,
+      "python": 14.33,
+      "edge": 14.7,
+      "leafMax": 80
+     },
+     "diagnostics": {
+      "total": 64.52,
+      "totalMax": 90,
+      "bug": 5.31,
+      "penalty": -2.44,
+      "nonBug60": 47.32,
+      "note": "Bug Finding and the penalty are not in the leaf."
+     }
     },
     "gpt-6-1-terra-medium": {
      "status": "exact",
-     "value": 46.9,
+     "value": 62.57,
      "sourceLabel": "GPT-6.1-Terra (Medium)",
      "effort": "medium",
      "note": null,
@@ -1885,7 +1950,7 @@
       {
        "total": 68.22,
        "nonBug": 46.9,
-       "nonBugWithPython": 62.57,
+       "leaf80": 62.57,
        "laravel": 16.28,
        "react": 16.17,
        "bug": 7.43,
@@ -1899,11 +1964,26 @@
        "time": "00:31",
        "rank": "48"
       }
-     ]
+     ],
+     "components": {
+      "laravel": 16.28,
+      "react": 16.17,
+      "python": 15.67,
+      "edge": 14.45,
+      "leafMax": 80
+     },
+     "diagnostics": {
+      "total": 68.22,
+      "totalMax": 90,
+      "bug": 7.43,
+      "penalty": -1.78,
+      "nonBug60": 46.9,
+      "note": "Bug Finding and the penalty are not in the leaf."
+     }
     },
     "gpt-6-2-sol-low": {
      "status": "exact",
-     "value": 56.76,
+     "value": 74.56,
      "sourceLabel": "GPT-6.2-Sol (Low)",
      "effort": "low",
      "note": null,
@@ -1911,7 +1991,7 @@
       {
        "total": 83.08,
        "nonBug": 56.76,
-       "nonBugWithPython": 74.56,
+       "leaf80": 74.56,
        "laravel": 18.43,
        "react": 18.83,
        "bug": 8.54,
@@ -1925,11 +2005,26 @@
        "time": "01:44",
        "rank": "11"
       }
-     ]
+     ],
+     "components": {
+      "laravel": 18.43,
+      "react": 18.83,
+      "python": 17.8,
+      "edge": 19.5,
+      "leafMax": 80
+     },
+     "diagnostics": {
+      "total": 83.08,
+      "totalMax": 90,
+      "bug": 8.54,
+      "penalty": -0.02,
+      "nonBug60": 56.76,
+      "note": "Bug Finding and the penalty are not in the leaf."
+     }
     },
     "gpt-6-1-terra-high": {
      "status": "exact",
-     "value": 46.69,
+     "value": 61.46,
      "sourceLabel": "GPT-6.1-Terra (High)",
      "effort": "high",
      "note": null,
@@ -1937,7 +2032,7 @@
       {
        "total": 69.31,
        "nonBug": 46.69,
-       "nonBugWithPython": 61.46,
+       "leaf80": 61.46,
        "laravel": 16.12,
        "react": 16.17,
        "bug": 7.85,
@@ -1951,11 +2046,26 @@
        "time": "00:46",
        "rank": "44"
       }
-     ]
+     ],
+     "components": {
+      "laravel": 16.12,
+      "react": 16.17,
+      "python": 14.77,
+      "edge": 14.4,
+      "leafMax": 80
+     },
+     "diagnostics": {
+      "total": 69.31,
+      "totalMax": 90,
+      "bug": 7.85,
+      "penalty": 0.0,
+      "nonBug60": 46.69,
+      "note": "Bug Finding and the penalty are not in the leaf."
+     }
     },
     "gpt-6-1-sol-medium": {
      "status": "exact",
-     "value": 55.67,
+     "value": 73.94,
      "sourceLabel": "GPT-6.1-Sol (Medium)",
      "effort": "medium",
      "note": null,
@@ -1963,7 +2073,7 @@
       {
        "total": 83.04,
        "nonBug": 55.67,
-       "nonBugWithPython": 73.94,
+       "leaf80": 73.94,
        "laravel": 18.17,
        "react": 18.0,
        "bug": 9.1,
@@ -1977,11 +2087,26 @@
        "time": "02:24",
        "rank": "12"
       }
-     ]
+     ],
+     "components": {
+      "laravel": 18.17,
+      "react": 18.0,
+      "python": 18.27,
+      "edge": 19.5,
+      "leafMax": 80
+     },
+     "diagnostics": {
+      "total": 83.04,
+      "totalMax": 90,
+      "bug": 9.1,
+      "penalty": 0.0,
+      "nonBug60": 55.67,
+      "note": "Bug Finding and the penalty are not in the leaf."
+     }
     },
     "gpt-6-2-sol-medium": {
      "status": "exact",
-     "value": 57.49,
+     "value": 74.99,
      "sourceLabel": "GPT-6.2-Sol (Medium)",
      "effort": "medium",
      "note": null,
@@ -1989,7 +2114,7 @@
       {
        "total": 83.1,
        "nonBug": 57.49,
-       "nonBugWithPython": 74.99,
+       "leaf80": 74.99,
        "laravel": 19.12,
        "react": 19.17,
        "bug": 8.61,
@@ -2003,11 +2128,26 @@
        "time": "03:27",
        "rank": "10"
       }
-     ]
+     ],
+     "components": {
+      "laravel": 19.12,
+      "react": 19.17,
+      "python": 17.5,
+      "edge": 19.2,
+      "leafMax": 80
+     },
+     "diagnostics": {
+      "total": 83.1,
+      "totalMax": 90,
+      "bug": 8.61,
+      "penalty": -0.5,
+      "nonBug60": 57.49,
+      "note": "Bug Finding and the penalty are not in the leaf."
+     }
     },
     "gpt-6-2-sol-high": {
      "status": "exact",
-     "value": 57.34,
+     "value": 74.61,
      "sourceLabel": "GPT-6.2-Sol (High)",
      "effort": "high",
      "note": null,
@@ -2015,7 +2155,7 @@
       {
        "total": 83.53,
        "nonBug": 57.34,
-       "nonBugWithPython": 74.61,
+       "leaf80": 74.61,
        "laravel": 19.17,
        "react": 19.17,
        "bug": 8.92,
@@ -2029,7 +2169,22 @@
        "time": "05:29",
        "rank": "8"
       }
-     ]
+     ],
+     "components": {
+      "laravel": 19.17,
+      "react": 19.17,
+      "python": 17.27,
+      "edge": 19.0,
+      "leafMax": 80
+     },
+     "diagnostics": {
+      "total": 83.53,
+      "totalMax": 90,
+      "bug": 8.92,
+      "penalty": 0.0,
+      "nonBug60": 57.34,
+      "note": "Bug Finding and the penalty are not in the leaf."
+     }
     },
     "gpt-6-2-sol-xhigh": {
      "status": "absent",
@@ -2047,7 +2202,7 @@
     },
     "gpt-6-2-astra-high": {
      "status": "exact",
-     "value": 58.56,
+     "value": 76.33,
      "sourceLabel": "GPT-6.2-Astra (High)",
      "effort": "high",
      "note": null,
@@ -2055,7 +2210,7 @@
       {
        "total": 84.48,
        "nonBug": 58.56,
-       "nonBugWithPython": 76.33,
+       "leaf80": 76.33,
        "laravel": 18.73,
        "react": 19.83,
        "bug": 8.15,
@@ -2069,7 +2224,22 @@
        "time": "05:40",
        "rank": "3"
       }
-     ]
+     ],
+     "components": {
+      "laravel": 18.73,
+      "react": 19.83,
+      "python": 17.77,
+      "edge": 20.0,
+      "leafMax": 80
+     },
+     "diagnostics": {
+      "total": 84.48,
+      "totalMax": 90,
+      "bug": 8.15,
+      "penalty": 0.0,
+      "nonBug60": 58.56,
+      "note": "Bug Finding and the penalty are not in the leaf."
+     }
     },
     "gpt-6-2-astra-xhigh": {
      "status": "absent",
@@ -2108,7 +2278,7 @@
     },
     "gemini-4-neon": {
      "status": "exact",
-     "value": 54.33,
+     "value": 70.13,
      "sourceLabel": "Gemini 4 Neon (Xhigh)",
      "effort": "xhigh",
      "note": null,
@@ -2116,7 +2286,7 @@
       {
        "total": 80.05,
        "nonBug": 54.33,
-       "nonBugWithPython": 70.13,
+       "leaf80": 70.13,
        "laravel": 18.08,
        "react": 17.5,
        "bug": 9.92,
@@ -2130,7 +2300,22 @@
        "time": "10:56",
        "rank": "15"
       }
-     ]
+     ],
+     "components": {
+      "laravel": 18.08,
+      "react": 17.5,
+      "python": 15.8,
+      "edge": 18.75,
+      "leafMax": 80
+     },
+     "diagnostics": {
+      "total": 80.05,
+      "totalMax": 90,
+      "bug": 9.92,
+      "penalty": 0.0,
+      "nonBug60": 54.33,
+      "note": "Bug Finding and the penalty are not in the leaf."
+     }
     },
     "gemini-4-carbon": {
      "status": "absent",
@@ -2141,7 +2326,7 @@
     },
     "gemini-4-neon-high": {
      "status": "exact",
-     "value": 54.05,
+     "value": 69.85,
      "sourceLabel": "Gemini 4 Neon (High)",
      "effort": "high",
      "note": null,
@@ -2149,7 +2334,7 @@
       {
        "total": 78.87,
        "nonBug": 54.05,
-       "nonBugWithPython": 69.85,
+       "leaf80": 69.85,
        "laravel": 17.8,
        "react": 17.5,
        "bug": 9.27,
@@ -2163,7 +2348,22 @@
        "time": "07:25",
        "rank": "17"
       }
-     ]
+     ],
+     "components": {
+      "laravel": 17.8,
+      "react": 17.5,
+      "python": 15.8,
+      "edge": 18.75,
+      "leafMax": 80
+     },
+     "diagnostics": {
+      "total": 78.87,
+      "totalMax": 90,
+      "bug": 9.27,
+      "penalty": -0.25,
+      "nonBug60": 54.05,
+      "note": "Bug Finding and the penalty are not in the leaf."
+     }
     },
     "claude-opus-5-5": {
      "status": "absent",
@@ -2174,7 +2374,7 @@
     },
     "gpt-6-2-astra-medium": {
      "status": "exact",
-     "value": 57.59,
+     "value": 75.82,
      "sourceLabel": "GPT-6.2-Astra (Medium)",
      "effort": "medium",
      "note": null,
@@ -2182,7 +2382,7 @@
       {
        "total": 84.06,
        "nonBug": 57.59,
-       "nonBugWithPython": 75.82,
+       "leaf80": 75.82,
        "laravel": 18.42,
        "react": 19.17,
        "bug": 8.24,
@@ -2196,11 +2396,26 @@
        "time": "02:20",
        "rank": "5"
       }
-     ]
+     ],
+     "components": {
+      "laravel": 18.42,
+      "react": 19.17,
+      "python": 18.23,
+      "edge": 20.0,
+      "leafMax": 80
+     },
+     "diagnostics": {
+      "total": 84.06,
+      "totalMax": 90,
+      "bug": 8.24,
+      "penalty": 0.0,
+      "nonBug60": 57.59,
+      "note": "Bug Finding and the penalty are not in the leaf."
+     }
     },
     "gemini-4-neon-medium": {
      "status": "exact",
-     "value": 52.45,
+     "value": 69.32,
      "sourceLabel": "Gemini 4 Neon (Medium)",
      "effort": "medium",
      "note": null,
@@ -2208,7 +2423,7 @@
       {
        "total": 77.34,
        "nonBug": 52.45,
-       "nonBugWithPython": 69.32,
+       "leaf80": 69.32,
        "laravel": 16.95,
        "react": 18.0,
        "bug": 8.02,
@@ -2222,7 +2437,22 @@
        "time": "03:57",
        "rank": "24"
       }
-     ]
+     ],
+     "components": {
+      "laravel": 16.95,
+      "react": 18.0,
+      "python": 16.87,
+      "edge": 17.5,
+      "leafMax": 80
+     },
+     "diagnostics": {
+      "total": 77.34,
+      "totalMax": 90,
+      "bug": 8.02,
+      "penalty": 0.0,
+      "nonBug60": 52.45,
+      "note": "Bug Finding and the penalty are not in the leaf."
+     }
     },
     "gpt-6-1-sol": {
      "status": "absent",
@@ -2233,7 +2463,7 @@
     },
     "gpt-6-1-terra-xhigh": {
      "status": "exact",
-     "value": 48.13,
+     "value": 63.7,
      "sourceLabel": "GPT-6.1-Terra (Xhigh)",
      "effort": "xhigh",
      "note": null,
@@ -2241,7 +2471,7 @@
       {
        "total": 71.99,
        "nonBug": 48.13,
-       "nonBugWithPython": 63.7,
+       "leaf80": 63.7,
        "laravel": 16.23,
        "react": 17.5,
        "bug": 8.82,
@@ -2255,7 +2485,22 @@
        "time": "01:29",
        "rank": "37"
       }
-     ]
+     ],
+     "components": {
+      "laravel": 16.23,
+      "react": 17.5,
+      "python": 15.57,
+      "edge": 14.4,
+      "leafMax": 80
+     },
+     "diagnostics": {
+      "total": 71.99,
+      "totalMax": 90,
+      "bug": 8.82,
+      "penalty": -0.53,
+      "nonBug60": 48.13,
+      "note": "Bug Finding and the penalty are not in the leaf."
+     }
     },
     "claude-haiku-5-5-xhigh": {
      "status": "absent",
@@ -2266,7 +2511,7 @@
     },
     "gpt-6-luna-xhigh": {
      "status": "exact",
-     "value": 49.94,
+     "value": 65.94,
      "sourceLabel": "GPT-6-Luna (Xhigh)",
      "effort": "xhigh",
      "note": null,
@@ -2274,7 +2519,7 @@
       {
        "total": 70.75,
        "nonBug": 49.94,
-       "nonBugWithPython": 65.94,
+       "leaf80": 65.94,
        "laravel": 17.02,
        "react": 17.17,
        "bug": 6.39,
@@ -2288,11 +2533,26 @@
        "time": "10:08",
        "rank": "40"
       }
-     ]
+     ],
+     "components": {
+      "laravel": 17.02,
+      "react": 17.17,
+      "python": 16.0,
+      "edge": 15.75,
+      "leafMax": 80
+     },
+     "diagnostics": {
+      "total": 70.75,
+      "totalMax": 90,
+      "bug": 6.39,
+      "penalty": -1.58,
+      "nonBug60": 49.94,
+      "note": "Bug Finding and the penalty are not in the leaf."
+     }
     },
     "mimo-v2-6-flash": {
      "status": "exact",
-     "value": 45.48,
+     "value": 59.58,
      "sourceLabel": "MiMo-V2.6 Flash (High)",
      "effort": "high",
      "note": "Owner decision O135 (2026-10-30): AA plots MiMo-V2.6-Flash without an effort; Xiaomi's API documents a single thinking mode (thinking.type enabled/disabled, default enabled; on the Responses API every reasoning.effort other than none enables the same, undifferentiated reasoning), so the configuration is thinking enabled, the default (../../2026-10-30-v5-recapture/third-party/mimo-flash-effort.md; Xiaomi docs last read 2026-11-01, ../../2026-11-01-recapture/third-party/mimo/; not re-read on 2026-11-26). The board's only MiMo-V2.6-Flash row is labelled High; Xiaomi documents every enabled level as the same reasoning ('Values xhigh, max and ultra are mapped to high'), so the High row is the documented default configuration (thinking enabled). The row does not name the provider route behind OpenCode.",
@@ -2300,7 +2560,7 @@
       {
        "total": 64.39,
        "nonBug": 45.48,
-       "nonBugWithPython": 59.58,
+       "leaf80": 59.58,
        "laravel": 17.83,
        "react": 17.5,
        "bug": 7.46,
@@ -2314,7 +2574,22 @@
        "time": "17:56",
        "rank": "55"
       }
-     ]
+     ],
+     "components": {
+      "laravel": 17.83,
+      "react": 17.5,
+      "python": 14.1,
+      "edge": 10.15,
+      "leafMax": 80
+     },
+     "diagnostics": {
+      "total": 64.39,
+      "totalMax": 90,
+      "bug": 7.46,
+      "penalty": -2.65,
+      "nonBug60": 45.48,
+      "note": "Bug Finding and the penalty are not in the leaf."
+     }
     },
     "gpt-6-1-terra-low": {
      "status": "absent",
@@ -2325,7 +2600,7 @@
     },
     "claude-haiku-5-5-high": {
      "status": "exact",
-     "value": 52.55,
+     "value": 69.78,
      "sourceLabel": "Haiku 5.5 (High)",
      "effort": "high",
      "note": null,
@@ -2333,7 +2608,7 @@
       {
        "total": 76.3,
        "nonBug": 52.55,
-       "nonBugWithPython": 69.78,
+       "leaf80": 69.78,
        "laravel": 17.3,
        "react": 18.0,
        "bug": 7.22,
@@ -2347,11 +2622,26 @@
        "time": "03:37",
        "rank": "26"
       }
-     ]
+     ],
+     "components": {
+      "laravel": 17.3,
+      "react": 18.0,
+      "python": 17.23,
+      "edge": 17.25,
+      "leafMax": 80
+     },
+     "diagnostics": {
+      "total": 76.3,
+      "totalMax": 90,
+      "bug": 7.22,
+      "penalty": -0.7,
+      "nonBug60": 52.55,
+      "note": "Bug Finding and the penalty are not in the leaf."
+     }
     },
     "gpt-6-1-sol-high": {
      "status": "exact",
-     "value": 56.83,
+     "value": 74.83,
      "sourceLabel": "GPT-6.1-Sol (High)",
      "effort": "high",
      "note": null,
@@ -2359,7 +2649,7 @@
       {
        "total": 83.86,
        "nonBug": 56.83,
-       "nonBugWithPython": 74.83,
+       "leaf80": 74.83,
        "laravel": 18.5,
        "react": 18.83,
        "bug": 9.03,
@@ -2373,7 +2663,22 @@
        "time": "04:19",
        "rank": "7"
       }
-     ]
+     ],
+     "components": {
+      "laravel": 18.5,
+      "react": 18.83,
+      "python": 18.0,
+      "edge": 19.5,
+      "leafMax": 80
+     },
+     "diagnostics": {
+      "total": 83.86,
+      "totalMax": 90,
+      "bug": 9.03,
+      "penalty": 0.0,
+      "nonBug60": 56.83,
+      "note": "Bug Finding and the penalty are not in the leaf."
+     }
     },
     "gpt-6-1-sol-xhigh": {
      "status": "absent",
@@ -2384,7 +2689,7 @@
     },
     "gpt-6-astra-high": {
      "status": "exact",
-     "value": 56.77,
+     "value": 75.24,
      "sourceLabel": "GPT-6-Astra (High)",
      "effort": "high",
      "note": null,
@@ -2392,7 +2697,7 @@
       {
        "total": 84.25,
        "nonBug": 56.77,
-       "nonBugWithPython": 75.24,
+       "leaf80": 75.24,
        "laravel": 18.6,
        "react": 18.17,
        "bug": 9.03,
@@ -2406,7 +2711,22 @@
        "time": "04:34",
        "rank": "4"
       }
-     ]
+     ],
+     "components": {
+      "laravel": 18.6,
+      "react": 18.17,
+      "python": 18.47,
+      "edge": 20.0,
+      "leafMax": 80
+     },
+     "diagnostics": {
+      "total": 84.25,
+      "totalMax": 90,
+      "bug": 9.03,
+      "penalty": -0.02,
+      "nonBug60": 56.77,
+      "note": "Bug Finding and the penalty are not in the leaf."
+     }
     },
     "gpt-6-astra-xhigh": {
      "status": "absent",
@@ -2424,7 +2744,7 @@
     },
     "gpt-6-luna": {
      "status": "exact",
-     "value": 51.99,
+     "value": 68.02,
      "sourceLabel": "GPT-6-Luna (Max)",
      "effort": "max",
      "note": null,
@@ -2432,7 +2752,7 @@
       {
        "total": 73.06,
        "nonBug": 51.99,
-       "nonBugWithPython": 68.02,
+       "leaf80": 68.02,
        "laravel": 18.12,
        "react": 17.17,
        "bug": 7.08,
@@ -2446,11 +2766,26 @@
        "time": "11:03",
        "rank": "33"
       }
-     ]
+     ],
+     "components": {
+      "laravel": 18.12,
+      "react": 17.17,
+      "python": 16.03,
+      "edge": 16.7,
+      "leafMax": 80
+     },
+     "diagnostics": {
+      "total": 73.06,
+      "totalMax": 90,
+      "bug": 7.08,
+      "penalty": -2.04,
+      "nonBug60": 51.99,
+      "note": "Bug Finding and the penalty are not in the leaf."
+     }
     },
     "gpt-6-1-sol-low": {
      "status": "exact",
-     "value": 52.7,
+     "value": 70.8,
      "sourceLabel": "GPT-6.1-Sol (Low)",
      "effort": "low",
      "note": null,
@@ -2458,7 +2793,7 @@
       {
        "total": 78.8,
        "nonBug": 52.7,
-       "nonBugWithPython": 70.8,
+       "leaf80": 70.8,
        "laravel": 17.53,
        "react": 16.67,
        "bug": 8.75,
@@ -2472,11 +2807,26 @@
        "time": "01:21",
        "rank": "18"
       }
-     ]
+     ],
+     "components": {
+      "laravel": 17.53,
+      "react": 16.67,
+      "python": 18.1,
+      "edge": 18.5,
+      "leafMax": 80
+     },
+     "diagnostics": {
+      "total": 78.8,
+      "totalMax": 90,
+      "bug": 8.75,
+      "penalty": -0.75,
+      "nonBug60": 52.7,
+      "note": "Bug Finding and the penalty are not in the leaf."
+     }
     },
     "gpt-6-1-terra": {
      "status": "exact",
-     "value": 52.49,
+     "value": 69.19,
      "sourceLabel": "GPT-6.1-Terra (Max)",
      "effort": "max",
      "note": null,
@@ -2484,7 +2834,7 @@
       {
        "total": 77.67,
        "nonBug": 52.49,
-       "nonBugWithPython": 69.19,
+       "leaf80": 69.19,
        "laravel": 17.82,
        "react": 18.17,
        "bug": 8.61,
@@ -2498,11 +2848,26 @@
        "time": "07:55",
        "rank": "21"
       }
-     ]
+     ],
+     "components": {
+      "laravel": 17.82,
+      "react": 18.17,
+      "python": 16.7,
+      "edge": 16.5,
+      "leafMax": 80
+     },
+     "diagnostics": {
+      "total": 77.67,
+      "totalMax": 90,
+      "bug": 8.61,
+      "penalty": -0.13,
+      "nonBug60": 52.49,
+      "note": "Bug Finding and the penalty are not in the leaf."
+     }
     },
     "claude-opus-5-5-high": {
      "status": "exact",
-     "value": 57.68,
+     "value": 75.85,
      "sourceLabel": "Opus 5.5 (High)",
      "effort": "high",
      "note": "AA's pages name this configuration '(<Effort>, Default Fallback)' (its chart label shows only the effort since 2026-11-26, and said 'with fallback' before); the source has no fallback qualifier (as on 2026-10-25 and 2026-11-01).",
@@ -2510,7 +2875,7 @@
       {
        "total": 84.95,
        "nonBug": 57.68,
-       "nonBugWithPython": 75.85,
+       "leaf80": 75.85,
        "laravel": 18.68,
        "react": 19.0,
        "bug": 9.1,
@@ -2524,7 +2889,22 @@
        "time": "03:42",
        "rank": "1"
       }
-     ]
+     ],
+     "components": {
+      "laravel": 18.68,
+      "react": 19.0,
+      "python": 18.17,
+      "edge": 20.0,
+      "leafMax": 80
+     },
+     "diagnostics": {
+      "total": 84.95,
+      "totalMax": 90,
+      "bug": 9.1,
+      "penalty": 0.0,
+      "nonBug60": 57.68,
+      "note": "Bug Finding and the penalty are not in the leaf."
+     }
     },
     "gpt-6-astra": {
      "status": "absent",
@@ -2571,7 +2951,8 @@
     "gemini-4-neon-high",
     "gpt-6-2-astra-medium",
     "gemini-4-neon-medium"
-   ]
+   ],
+   "valueChangesBasis": "The 2026-11-01 value was Laravel + React-TS + Edge-case (max 60); the changes are compared on that basis (diagnostics.nonBug60), not on today's 80-point value, which has no 2026-11-01 counterpart."
   },
   {
    "key": "tbench-4",
