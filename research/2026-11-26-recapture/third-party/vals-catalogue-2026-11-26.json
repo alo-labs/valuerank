@@ -1,38 +1,22 @@
 {
- "capturedAt": "2026-11-26T03:04:33Z",
- "method": "As on 2026-10-25, 2026-10-30 and 2026-11-01: each board page read, its benchmarkViewUrl prop's hashed /_astro/benchmark_view_*.json downloaded (vals/<slug>.json, URL in vals/<slug>.jsonUrl.txt); values from tasks.overall.<model key>. Exact = same Vals model key (model version) and reasoning_effort/compute_effort equal to AA's effort, or, where AA plots no effort, the documented or owner-stated equivalent (O149 MiMo-V2.6-Flash); absent otherwise. Vals model pages read 2026-11-26 in vals/_models/ (read 2026-11-26T03:05:37Z; MiMo-V2.6-Pro page 2026-11-26T03:14:51Z).",
+ "capturedAt": "2026-11-26T13:18:00Z",
+ "method": "As on 2026-10-25, 2026-10-30 and 2026-11-01: each board page read, its benchmarkViewUrl prop's hashed /_astro/benchmark_view_*.json downloaded (vals/<stem>.json, URL in vals/<stem>.jsonUrl.txt); values from tasks.overall.<model key>. Exact = same Vals model key (model version) and reasoning_effort/compute_effort equal to AA's effort, or, where AA plots no effort, the documented or owner-stated equivalent (O149 MiMo-V2.6-Flash); absent otherwise. The Vibe Code Bench leaf is v1.1.1 (owner decision 2026-11-26; Vals archived v1.1): the 'vibe-code' board's coverage holds v1.1.1 values, each cell stating version v1.1.1, and the v1.1 values are in that board's predecessorReference, never in coverage. Code Migration stays v1.1. Vals model pages read 2026-11-26 in vals/_models/ (read 2026-11-26T03:05:37Z; MiMo-V2.6-Pro page 2026-11-26T03:14:51Z).",
  "cohortSource": "research/2026-11-26-recapture/cohort.json (45 configurations: 31 current + 14 retained)",
  "benchmarks": [
   {
    "slug": "vibe-code",
-   "name": "Vibe Code Bench v1.1",
-   "version": "1.1",
-   "updated": "2026-11-19",
-   "models": 134,
+   "name": "Vibe Code Bench v1.1.1",
+   "version": "1.1.1",
+   "updated": "2026-11-21",
+   "models": 51,
    "harness": "OpenHands, the same for every model row",
-   "sourceUrl": "https://www.vals.ai/benchmarks/vibe-code",
-   "jsonUrl": "https://www.vals.ai/_astro/benchmark_view_vibe_code_bench.DVjiQ-hd.json",
-   "captureFile": "research/2026-11-26-recapture/third-party/vals/vibe-code.json",
-   "readAt": "2026-11-26T03:04:33Z",
+   "sourceUrl": "https://www.vals.ai/benchmarks/vibe-code-v1-1-1",
+   "jsonUrl": "https://www.vals.ai/_astro/benchmark_view_vibe_code_bench_v1_1_1.CpJZFzHs.json",
+   "captureFile": "research/2026-11-26-recapture/third-party/vals/vibe-code-v1-1-1.json",
+   "readAt": "2026-11-26T13:18:00Z",
    "changesSince20261101": {
-    "added": [
-     "alibaba/qwen4-max",
-     "anthropic/claude-fable-5-2",
-     "google/cobalt-c-high-1p00",
-     "google/gemini-4-hydrogen",
-     "meta/muse-ember",
-     "openai/gpt-6.2-astra",
-     "openai/gpt-6.2-sol",
-     "tencent/hy4",
-     "tencent/hy4-flash",
-     "thinkingmachines/inkling-2-small",
-     "thinkingmachines/inkling-mini-1117"
-    ],
-    "removed": [],
-    "valueChanged": [
-     "baseten/nemotron-3.5-super-vl-120b-a12b"
-    ],
-    "fileIdentical": false
+    "comparable": false,
+    "note": "The 2026-11-01 read used Vibe Code Bench v1.1; v1.1.1 is a different grader on the same runs, so its file is not diffed against the v1.1 file (see predecessorReference.changesSince20261101 for the v1.1 file changes)."
    },
    "coverage": {
     "gpt-6-luna-low": {
@@ -41,7 +25,8 @@
      "stderr": null,
      "valsKey": null,
      "effort": null,
-     "note": "Vals ran this model only at max (81.649), not low; not transferred."
+     "note": "Vals ran this model only at max (65.315), not low; not transferred.",
+     "version": "v1.1.1"
     },
     "gpt-6-luna-medium": {
      "status": "absent",
@@ -49,7 +34,8 @@
      "stderr": null,
      "valsKey": null,
      "effort": null,
-     "note": "Vals ran this model only at max (81.649), not medium; not transferred."
+     "note": "Vals ran this model only at max (65.315), not medium; not transferred.",
+     "version": "v1.1.1"
     },
     "claude-haiku-5-5-low": {
      "status": "absent",
@@ -57,7 +43,8 @@
      "stderr": null,
      "valsKey": null,
      "effort": null,
-     "note": "Vals ran this model only at max (90.444), not low; not transferred."
+     "note": "Vals ran this model only at max (76.586), not low; not transferred.",
+     "version": "v1.1.1"
     },
     "gpt-6-luna-high": {
      "status": "absent",
@@ -65,7 +52,8 @@
      "stderr": null,
      "valsKey": null,
      "effort": null,
-     "note": "Vals ran this model only at max (81.649), not high; not transferred."
+     "note": "Vals ran this model only at max (65.315), not high; not transferred.",
+     "version": "v1.1.1"
     },
     "claude-haiku-5-5-medium": {
      "status": "absent",
@@ -73,7 +61,8 @@
      "stderr": null,
      "valsKey": null,
      "effort": null,
-     "note": "Vals ran this model only at max (90.444), not medium; not transferred."
+     "note": "Vals ran this model only at max (76.586), not medium; not transferred.",
+     "version": "v1.1.1"
     },
     "muse-ember-xhigh": {
      "status": "absent",
@@ -81,16 +70,18 @@
      "stderr": null,
      "valsKey": null,
      "effort": null,
-     "note": "Vals ran this model only at max (83.703), not xhigh; not transferred."
+     "note": "Vals ran this model only at max (63.962), not xhigh; not transferred.",
+     "version": "v1.1.1"
     },
     "muse-ember": {
      "status": "exact",
-     "value": 83.703,
-     "stderr": 2.756,
+     "value": 63.962,
+     "stderr": 4.164,
      "valsKey": "meta/muse-ember",
      "effort": "max",
      "harness": "OpenHands",
-     "note": "Vals' Muse Ember page (vals/_models/meta_muse-ember.html) records 'Reasoning Effort: max'."
+     "note": "Vals' Muse Ember page (vals/_models/meta_muse-ember.html) records 'Reasoning Effort: max'.",
+     "version": "v1.1.1"
     },
     "gpt-6-1-terra-medium": {
      "status": "absent",
@@ -98,7 +89,8 @@
      "stderr": null,
      "valsKey": null,
      "effort": null,
-     "note": "Vals ran this model only at max (83.997), not medium; not transferred."
+     "note": "Vals ran this model only at max (75.52), not medium; not transferred.",
+     "version": "v1.1.1"
     },
     "gpt-6-2-sol-low": {
      "status": "absent",
@@ -106,7 +98,8 @@
      "stderr": null,
      "valsKey": null,
      "effort": null,
-     "note": "Vals ran this model only at max (87.616), not low; not transferred."
+     "note": "Vals ran this model only at max (79.483), not low; not transferred.",
+     "version": "v1.1.1"
     },
     "gpt-6-1-terra-high": {
      "status": "absent",
@@ -114,7 +107,8 @@
      "stderr": null,
      "valsKey": null,
      "effort": null,
-     "note": "Vals ran this model only at max (83.997), not high; not transferred."
+     "note": "Vals ran this model only at max (75.52), not high; not transferred.",
+     "version": "v1.1.1"
     },
     "gpt-6-1-sol-medium": {
      "status": "absent",
@@ -122,7 +116,8 @@
      "stderr": null,
      "valsKey": null,
      "effort": null,
-     "note": "Vals ran this model only at max (88.931), not medium; not transferred."
+     "note": "Vals ran this model only at max (75.101), not medium; not transferred.",
+     "version": "v1.1.1"
     },
     "gpt-6-2-sol-medium": {
      "status": "absent",
@@ -130,7 +125,8 @@
      "stderr": null,
      "valsKey": null,
      "effort": null,
-     "note": "Vals ran this model only at max (87.616), not medium; not transferred."
+     "note": "Vals ran this model only at max (79.483), not medium; not transferred.",
+     "version": "v1.1.1"
     },
     "gpt-6-2-sol-high": {
      "status": "absent",
@@ -138,7 +134,8 @@
      "stderr": null,
      "valsKey": null,
      "effort": null,
-     "note": "Vals ran this model only at max (87.616), not high; not transferred."
+     "note": "Vals ran this model only at max (79.483), not high; not transferred.",
+     "version": "v1.1.1"
     },
     "gpt-6-2-sol-xhigh": {
      "status": "absent",
@@ -146,16 +143,18 @@
      "stderr": null,
      "valsKey": null,
      "effort": null,
-     "note": "Vals ran this model only at max (87.616), not xhigh; not transferred."
+     "note": "Vals ran this model only at max (79.483), not xhigh; not transferred.",
+     "version": "v1.1.1"
     },
     "gpt-6-2-sol": {
      "status": "exact",
-     "value": 87.616,
-     "stderr": 2.195,
+     "value": 79.483,
+     "stderr": 3.658,
      "valsKey": "openai/gpt-6.2-sol",
      "effort": "max",
      "harness": "OpenHands",
-     "note": null
+     "note": null,
+     "version": "v1.1.1"
     },
     "gpt-6-2-astra-high": {
      "status": "absent",
@@ -163,7 +162,8 @@
      "stderr": null,
      "valsKey": null,
      "effort": null,
-     "note": "Vals ran this model only at max (89.898), not high; not transferred."
+     "note": "Vals ran this model only at max (78.567), not high; not transferred.",
+     "version": "v1.1.1"
     },
     "gpt-6-2-astra-xhigh": {
      "status": "absent",
@@ -171,16 +171,18 @@
      "stderr": null,
      "valsKey": null,
      "effort": null,
-     "note": "Vals ran this model only at max (89.898), not xhigh; not transferred."
+     "note": "Vals ran this model only at max (78.567), not xhigh; not transferred.",
+     "version": "v1.1.1"
     },
     "gpt-6-2-astra": {
      "status": "exact",
-     "value": 89.898,
-     "stderr": 2.04,
+     "value": 78.567,
+     "stderr": 3.47,
      "valsKey": "openai/gpt-6.2-astra",
      "effort": "max",
      "harness": "OpenHands",
-     "note": null
+     "note": null,
+     "version": "v1.1.1"
     },
     "claude-fable-5-2-xhigh": {
      "status": "absent",
@@ -188,7 +190,8 @@
      "stderr": null,
      "valsKey": null,
      "effort": null,
-     "note": "Vals ran this model only at high (93.771), not xhigh; not transferred."
+     "note": "Vals ran this model only at high (83.519), not xhigh; not transferred.",
+     "version": "v1.1.1"
     },
     "claude-fable-5-2": {
      "status": "absent",
@@ -196,40 +199,44 @@
      "stderr": null,
      "valsKey": null,
      "effort": null,
-     "note": "Vals ran this model only at high (93.771), not max; not transferred."
+     "note": "Vals ran this model only at high (83.519), not max; not transferred.",
+     "version": "v1.1.1"
     },
     "claude-fable-5-2-high": {
      "status": "exact",
-     "value": 93.771,
-     "stderr": 1.152,
+     "value": 83.519,
+     "stderr": 3.25,
      "valsKey": "anthropic/claude-fable-5-2",
      "effort": "high",
      "harness": "OpenHands",
-     "note": "AA's pages name this configuration '(<Effort>, Default Fallback)' (its chart label shows only the effort since 2026-11-26, and said 'with fallback' before); the source has no fallback qualifier (as on 2026-10-25 and 2026-11-01). Vals' Claude Fable 5.2 page (vals/_models/anthropic_claude-fable-5-2.html) records 'Compute Effort: high'; Vals evaluated this model at high only."
+     "note": "AA's pages name this configuration '(<Effort>, Default Fallback)' (its chart label shows only the effort since 2026-11-26, and said 'with fallback' before); the source has no fallback qualifier (as on 2026-10-25 and 2026-11-01). Vals' Claude Fable 5.2 page (vals/_models/anthropic_claude-fable-5-2.html) records 'Compute Effort: high'; Vals evaluated this model at high only.",
+     "version": "v1.1.1"
     },
     "gemini-4-neon": {
      "status": "exact",
-     "value": 93.698,
-     "stderr": 1.165,
+     "value": 80.228,
+     "stderr": 3.248,
      "valsKey": "google/cobalt-c-high-1p00",
      "effort": "xhigh",
      "harness": "OpenHands",
-     "note": "Vals' JSON names this row 'google/cobalt-c-high-1p00' (a pre-release codename); the benchmark page labels the same row 'Gemini 4 Neon' (link /models/google_gemini-4-neon) with identical score (93.7%) and cost ($6.76), and the Gemini 4 Neon model page (vals/_models/google_gemini-4-neon.html) records Reasoning Effort: xhigh, equal to the key's reasoning_effort.",
+     "note": "Vals' JSON names this row 'google/cobalt-c-high-1p00' (a pre-release codename); the benchmark page labels the same row 'Gemini 4 Neon' (link /models/google_gemini-4-neon) with identical score (80.23%) and cost ($6.76), and the Gemini 4 Neon model page (vals/_models/google_gemini-4-neon.html) records Reasoning Effort: xhigh, equal to the key's reasoning_effort.",
      "match": "page label (rendered row)",
      "renderedRow": {
       "model": "Gemini 4 Neon",
-      "scorePct": 93.7,
+      "scorePct": 80.23,
       "costPerTest": 6.76
-     }
+     },
+     "version": "v1.1.1"
     },
     "gemini-4-carbon": {
      "status": "exact",
-     "value": 89.06,
-     "stderr": 2.294,
+     "value": 75.772,
+     "stderr": 3.601,
      "valsKey": "google/gemini-4-carbon",
      "effort": "high",
      "harness": "OpenHands",
-     "note": null
+     "note": null,
+     "version": "v1.1.1"
     },
     "gemini-4-neon-high": {
      "status": "absent",
@@ -237,16 +244,18 @@
      "stderr": null,
      "valsKey": null,
      "effort": null,
-     "note": "Vals ran this model only at xhigh (93.698), not high; not transferred."
+     "note": "Vals ran this model only at xhigh (80.228), not high; not transferred.",
+     "version": "v1.1.1"
     },
     "claude-opus-5-5": {
      "status": "exact",
-     "value": 90.294,
-     "stderr": 1.526,
+     "value": 78.49,
+     "stderr": 3.328,
      "valsKey": "anthropic/claude-opus-5-5",
      "effort": "max",
      "harness": "OpenHands",
-     "note": "AA's pages name this configuration '(<Effort>, Default Fallback)' (its chart label shows only the effort since 2026-11-26, and said 'with fallback' before); the source has no fallback qualifier (as on 2026-10-25 and 2026-11-01)."
+     "note": "AA's pages name this configuration '(<Effort>, Default Fallback)' (its chart label shows only the effort since 2026-11-26, and said 'with fallback' before); the source has no fallback qualifier (as on 2026-10-25 and 2026-11-01).",
+     "version": "v1.1.1"
     },
     "gpt-6-2-astra-medium": {
      "status": "absent",
@@ -254,7 +263,8 @@
      "stderr": null,
      "valsKey": null,
      "effort": null,
-     "note": "Vals ran this model only at max (89.898), not medium; not transferred."
+     "note": "Vals ran this model only at max (78.567), not medium; not transferred.",
+     "version": "v1.1.1"
     },
     "gemini-4-neon-medium": {
      "status": "absent",
@@ -262,16 +272,18 @@
      "stderr": null,
      "valsKey": null,
      "effort": null,
-     "note": "Vals ran this model only at xhigh (93.698), not medium; not transferred."
+     "note": "Vals ran this model only at xhigh (80.228), not medium; not transferred.",
+     "version": "v1.1.1"
     },
     "gpt-6-1-sol": {
      "status": "exact",
-     "value": 88.931,
-     "stderr": 1.893,
+     "value": 75.101,
+     "stderr": 3.466,
      "valsKey": "openai/gpt-6.1-sol",
      "effort": "max",
      "harness": "OpenHands",
-     "note": null
+     "note": null,
+     "version": "v1.1.1"
     },
     "gpt-6-1-terra-xhigh": {
      "status": "absent",
@@ -279,7 +291,8 @@
      "stderr": null,
      "valsKey": null,
      "effort": null,
-     "note": "Vals ran this model only at max (83.997), not xhigh; not transferred."
+     "note": "Vals ran this model only at max (75.52), not xhigh; not transferred.",
+     "version": "v1.1.1"
     },
     "claude-haiku-5-5-xhigh": {
      "status": "absent",
@@ -287,7 +300,8 @@
      "stderr": null,
      "valsKey": null,
      "effort": null,
-     "note": "Vals ran this model only at max (90.444), not xhigh; not transferred."
+     "note": "Vals ran this model only at max (76.586), not xhigh; not transferred.",
+     "version": "v1.1.1"
     },
     "gpt-6-luna-xhigh": {
      "status": "absent",
@@ -295,17 +309,19 @@
      "stderr": null,
      "valsKey": null,
      "effort": null,
-     "note": "Vals ran this model only at max (81.649), not xhigh; not transferred."
+     "note": "Vals ran this model only at max (65.315), not xhigh; not transferred.",
+     "version": "v1.1.1"
     },
     "mimo-v2-6-flash": {
      "status": "exact",
-     "value": 78.96,
-     "stderr": 4.045,
+     "value": 56.569,
+     "stderr": 4.699,
      "valsKey": "xiaomi/mimo-v2.6-flash",
      "effort": "enabled (O140)",
      "harness": "OpenHands",
      "match": "owner (O149)",
-     "note": "Owner decision O135 (2026-10-30): AA plots MiMo-V2.6-Flash without an effort; Xiaomi's API documents a single thinking mode (thinking.type enabled/disabled, default enabled; on the Responses API every reasoning.effort other than none enables the same, undifferentiated reasoning), so the configuration is thinking enabled, the default (../../2026-10-30-v5-recapture/third-party/mimo-flash-effort.md; Xiaomi docs last read 2026-11-01, ../../2026-11-01-recapture/third-party/mimo/; not re-read on 2026-11-26). Vals records reasoning, reasoning_effort and compute_effort as null; its MiMo-V2.6-Pro model page (vals/_models/xiaomi_mimo-v2.6-pro.html, re-read 2026-11-26), in its 2026-09-22 update covering both MiMo V2.6 models, still says 'We evaluated them with reasoning enabled' through the official Xiaomi API, so the record is the thinking-enabled configuration (owner decision O149, 2026-11-01)."
+     "note": "Owner decision O135 (2026-10-30): AA plots MiMo-V2.6-Flash without an effort; Xiaomi's API documents a single thinking mode (thinking.type enabled/disabled, default enabled; on the Responses API every reasoning.effort other than none enables the same, undifferentiated reasoning), so the configuration is thinking enabled, the default (../../2026-10-30-v5-recapture/third-party/mimo-flash-effort.md; Xiaomi docs last read 2026-11-01, ../../2026-11-01-recapture/third-party/mimo/; not re-read on 2026-11-26). Vals records reasoning, reasoning_effort and compute_effort as null; its MiMo-V2.6-Pro model page (vals/_models/xiaomi_mimo-v2.6-pro.html, re-read 2026-11-26), in its 2026-09-22 update covering both MiMo V2.6 models, still says 'We evaluated them with reasoning enabled' through the official Xiaomi API, so the record is the thinking-enabled configuration (owner decision O149, 2026-11-01). The v1.1.1 row has the same cost per test as the v1.1 row (v1.1.1 re-grades the v1.1 runs), so the setting the model page describes applies to it.",
+     "version": "v1.1.1"
     },
     "gpt-6-1-terra-low": {
      "status": "absent",
@@ -313,7 +329,8 @@
      "stderr": null,
      "valsKey": null,
      "effort": null,
-     "note": "Vals ran this model only at max (83.997), not low; not transferred."
+     "note": "Vals ran this model only at max (75.52), not low; not transferred.",
+     "version": "v1.1.1"
     },
     "claude-haiku-5-5-high": {
      "status": "absent",
@@ -321,7 +338,8 @@
      "stderr": null,
      "valsKey": null,
      "effort": null,
-     "note": "Vals ran this model only at max (90.444), not high; not transferred."
+     "note": "Vals ran this model only at max (76.586), not high; not transferred.",
+     "version": "v1.1.1"
     },
     "gpt-6-1-sol-high": {
      "status": "absent",
@@ -329,7 +347,8 @@
      "stderr": null,
      "valsKey": null,
      "effort": null,
-     "note": "Vals ran this model only at max (88.931), not high; not transferred."
+     "note": "Vals ran this model only at max (75.101), not high; not transferred.",
+     "version": "v1.1.1"
     },
     "gpt-6-1-sol-xhigh": {
      "status": "absent",
@@ -337,7 +356,8 @@
      "stderr": null,
      "valsKey": null,
      "effort": null,
-     "note": "Vals ran this model only at max (88.931), not xhigh; not transferred."
+     "note": "Vals ran this model only at max (75.101), not xhigh; not transferred.",
+     "version": "v1.1.1"
     },
     "gpt-6-astra-high": {
      "status": "absent",
@@ -345,7 +365,8 @@
      "stderr": null,
      "valsKey": null,
      "effort": null,
-     "note": "Vals ran this model only at max (89.594), not high; not transferred."
+     "note": "Vals ran this model only at max (77.535), not high; not transferred.",
+     "version": "v1.1.1"
     },
     "gpt-6-astra-xhigh": {
      "status": "absent",
@@ -353,7 +374,8 @@
      "stderr": null,
      "valsKey": null,
      "effort": null,
-     "note": "Vals ran this model only at max (89.594), not xhigh; not transferred."
+     "note": "Vals ran this model only at max (77.535), not xhigh; not transferred.",
+     "version": "v1.1.1"
     },
     "claude-opus-5-5-xhigh": {
      "status": "absent",
@@ -361,16 +383,18 @@
      "stderr": null,
      "valsKey": null,
      "effort": null,
-     "note": "Vals ran this model only at max (90.294), not xhigh; not transferred."
+     "note": "Vals ran this model only at max (78.49), not xhigh; not transferred.",
+     "version": "v1.1.1"
     },
     "gpt-6-luna": {
      "status": "exact",
-     "value": 81.649,
-     "stderr": 3.377,
+     "value": 65.315,
+     "stderr": 4.632,
      "valsKey": "openai/gpt-6-luna",
      "effort": "max",
      "harness": "OpenHands",
-     "note": null
+     "note": null,
+     "version": "v1.1.1"
     },
     "gpt-6-1-sol-low": {
      "status": "absent",
@@ -378,16 +402,18 @@
      "stderr": null,
      "valsKey": null,
      "effort": null,
-     "note": "Vals ran this model only at max (88.931), not low; not transferred."
+     "note": "Vals ran this model only at max (75.101), not low; not transferred.",
+     "version": "v1.1.1"
     },
     "gpt-6-1-terra": {
      "status": "exact",
-     "value": 83.997,
-     "stderr": 2.865,
+     "value": 75.52,
+     "stderr": 4.113,
      "valsKey": "openai/gpt-6.1-terra",
      "effort": "max",
      "harness": "OpenHands",
-     "note": null
+     "note": null,
+     "version": "v1.1.1"
     },
     "claude-opus-5-5-high": {
      "status": "absent",
@@ -395,40 +421,125 @@
      "stderr": null,
      "valsKey": null,
      "effort": null,
-     "note": "Vals ran this model only at max (90.294), not high; not transferred."
+     "note": "Vals ran this model only at max (78.49), not high; not transferred.",
+     "version": "v1.1.1"
     },
     "gpt-6-astra": {
      "status": "exact",
-     "value": 89.594,
-     "stderr": 2.174,
+     "value": 77.535,
+     "stderr": 3.808,
      "valsKey": "openai/gpt-6-astra",
      "effort": "max",
      "harness": "OpenHands",
-     "note": null
+     "note": null,
+     "version": "v1.1.1"
     },
     "claude-sonnet-5-5": {
      "status": "exact",
-     "value": 92.392,
-     "stderr": 1.26,
+     "value": 80.88,
+     "stderr": 3.27,
      "valsKey": "anthropic/claude-sonnet-5-5",
      "effort": "max",
      "harness": "OpenHands",
-     "note": "AA's pages name this configuration '(<Effort>, Default Fallback)' (its chart label shows only the effort since 2026-11-26, and said 'with fallback' before); the source has no fallback qualifier (as on 2026-10-25 and 2026-11-01)."
+     "note": "AA's pages name this configuration '(<Effort>, Default Fallback)' (its chart label shows only the effort since 2026-11-26, and said 'with fallback' before); the source has no fallback qualifier (as on 2026-10-25 and 2026-11-01).",
+     "version": "v1.1.1"
     }
    },
+   "pageSlug": "vibe-code-v1-1-1",
    "versionStatus": {
-    "archived": true,
-    "bannerText": "Vibe Code Bench v1.1 has been superseded by v1.1.1, which upgrades the grader, requires every substep to pass, and fixes ambiguous tests. Previous results are preserved here.",
-    "supersededBy": "Vibe Code Bench v1.1.1",
-    "successorSlug": "vibe-code-v1-1-1",
-    "pinnedHere": "v1.1 stays the leaf (owner instruction 2026-11-26); v1.1.1 values are reference only (successorReference), never moved into coverage."
+    "archived": false,
+    "bannerText": null,
+    "supersededBy": null,
+    "note": "No 'superseded' or 'Archived Benchmark' banner on the page on 2026-11-26.",
+    "leafDecision": "Owner decision 2026-11-26: v1.1.1 is the leaf; Vals marks v1.1 archived and superseded by it."
    },
    "coverageCounts": {
     "exact": 13,
     "plausible": 0,
     "absent": 32
    },
-   "valueChangesSince20261101": {},
+   "valueChangesSince20261101": {
+    "gemini-4-carbon": {
+     "20261101": {
+      "status": "exact",
+      "value": 89.06
+     },
+     "20261126": {
+      "status": "exact",
+      "value": 75.772
+     }
+    },
+    "claude-opus-5-5": {
+     "20261101": {
+      "status": "exact",
+      "value": 90.294
+     },
+     "20261126": {
+      "status": "exact",
+      "value": 78.49
+     }
+    },
+    "gpt-6-1-sol": {
+     "20261101": {
+      "status": "exact",
+      "value": 88.931
+     },
+     "20261126": {
+      "status": "exact",
+      "value": 75.101
+     }
+    },
+    "mimo-v2-6-flash": {
+     "20261101": {
+      "status": "exact",
+      "value": 78.96
+     },
+     "20261126": {
+      "status": "exact",
+      "value": 56.569
+     }
+    },
+    "gpt-6-luna": {
+     "20261101": {
+      "status": "exact",
+      "value": 81.649
+     },
+     "20261126": {
+      "status": "exact",
+      "value": 65.315
+     }
+    },
+    "gpt-6-1-terra": {
+     "20261101": {
+      "status": "exact",
+      "value": 83.997
+     },
+     "20261126": {
+      "status": "exact",
+      "value": 75.52
+     }
+    },
+    "gpt-6-astra": {
+     "20261101": {
+      "status": "exact",
+      "value": 89.594
+     },
+     "20261126": {
+      "status": "exact",
+      "value": 77.535
+     }
+    },
+    "claude-sonnet-5-5": {
+     "20261101": {
+      "status": "exact",
+      "value": 92.392
+     },
+     "20261126": {
+      "status": "exact",
+      "value": 80.88
+     }
+    }
+   },
    "configurationsNotInThe20261101Cohort": [
     "muse-ember-xhigh",
     "muse-ember",
@@ -448,103 +559,139 @@
     "gpt-6-2-astra-medium",
     "gemini-4-neon-medium"
    ],
-   "successorReference": {
-    "notUsedAsLeaf": true,
-    "slug": "vibe-code-v1-1-1",
-    "version": "1.1.1",
-    "updated": "2026-11-21",
-    "models": 51,
-    "jsonUrl": "https://www.vals.ai/_astro/benchmark_view_vibe_code_bench_v1_1_1.CpJZFzHs.json",
-    "captureFile": "research/2026-11-26-recapture/third-party/vals/vibe-code-v1-1-1.json",
-    "readAt": "2026-11-26T03:04:49Z",
+   "valueChangesBasis": "The 2026-11-01 values were Vibe Code Bench v1.1 (see predecessorReference); every change here is the v1.1 to v1.1.1 regrade (and the Vals rows added since), not a movement of the same board.",
+   "predecessorReference": {
+    "neverInCoverage": true,
+    "slug": "vibe-code",
+    "version": "1.1",
+    "updated": "2026-11-19",
+    "models": 134,
+    "sourceUrl": "https://www.vals.ai/benchmarks/vibe-code",
+    "jsonUrl": "https://www.vals.ai/_astro/benchmark_view_vibe_code_bench.DVjiQ-hd.json",
+    "captureFile": "research/2026-11-26-recapture/third-party/vals/vibe-code.json",
+    "readAt": "2026-11-26T03:04:33Z",
+    "versionStatus": {
+     "archived": true,
+     "bannerText": "Vibe Code Bench v1.1 has been superseded by v1.1.1, which upgrades the grader, requires every substep to pass, and fixes ambiguous tests. Previous results are preserved here.",
+     "supersededBy": "Vibe Code Bench v1.1.1",
+     "successorSlug": "vibe-code-v1-1-1"
+    },
+    "changesSince20261101": {
+     "added": [
+      "alibaba/qwen4-max",
+      "anthropic/claude-fable-5-2",
+      "google/cobalt-c-high-1p00",
+      "google/gemini-4-hydrogen",
+      "meta/muse-ember",
+      "openai/gpt-6.2-astra",
+      "openai/gpt-6.2-sol",
+      "tencent/hy4",
+      "tencent/hy4-flash",
+      "thinkingmachines/inkling-2-small",
+      "thinkingmachines/inkling-mini-1117"
+     ],
+     "removed": [],
+     "valueChanged": [
+      "baseten/nemotron-3.5-super-vl-120b-a12b"
+     ],
+     "fileIdentical": false
+    },
     "whatChanged": "Vals' banner on v1.1: 'superseded by v1.1.1, which upgrades the grader, requires every substep to pass, and fixes ambiguous tests'. Of the 51 model keys on both versions, 51 have identical cost per test (the runs look reused and re-graded) and the accuracy falls by 0.7 to 25.7 points (mean 14.7).",
-    "coverageAtSameEffort": {
+    "valuesNote": "The v1.1 value and stderr of every cohort configuration that matched exactly on v1.1 (the same exact-effort rule as v1.1.1). Reference only.",
+    "values": {
      "muse-ember": {
+      "value": 83.703,
+      "stderr": 2.756,
       "valsKey": "meta/muse-ember",
-      "value": 63.962,
-      "stderr": 4.164,
-      "valsEffort": "max",
-      "v1_1Value": 83.703
+      "effort": "max",
+      "version": "v1.1"
      },
      "gpt-6-2-sol": {
+      "value": 87.616,
+      "stderr": 2.195,
       "valsKey": "openai/gpt-6.2-sol",
-      "value": 79.483,
-      "stderr": 3.658,
-      "valsEffort": "max",
-      "v1_1Value": 87.616
+      "effort": "max",
+      "version": "v1.1"
      },
      "gpt-6-2-astra": {
+      "value": 89.898,
+      "stderr": 2.04,
       "valsKey": "openai/gpt-6.2-astra",
-      "value": 78.567,
-      "stderr": 3.47,
-      "valsEffort": "max",
-      "v1_1Value": 89.898
+      "effort": "max",
+      "version": "v1.1"
      },
      "claude-fable-5-2-high": {
+      "value": 93.771,
+      "stderr": 1.152,
       "valsKey": "anthropic/claude-fable-5-2",
-      "value": 83.519,
-      "stderr": 3.25,
-      "valsEffort": "high",
-      "v1_1Value": 93.771
+      "effort": "high",
+      "version": "v1.1"
      },
      "gemini-4-neon": {
+      "value": 93.698,
+      "stderr": 1.165,
       "valsKey": "google/cobalt-c-high-1p00",
-      "value": 80.228,
-      "stderr": 3.248,
-      "valsEffort": "xhigh",
-      "v1_1Value": 93.698
+      "effort": "xhigh",
+      "version": "v1.1"
      },
      "gemini-4-carbon": {
+      "value": 89.06,
+      "stderr": 2.294,
       "valsKey": "google/gemini-4-carbon",
-      "value": 75.772,
-      "stderr": 3.601,
-      "valsEffort": "high",
-      "v1_1Value": 89.06
+      "effort": "high",
+      "version": "v1.1"
      },
      "claude-opus-5-5": {
+      "value": 90.294,
+      "stderr": 1.526,
       "valsKey": "anthropic/claude-opus-5-5",
-      "value": 78.49,
-      "stderr": 3.328,
-      "valsEffort": "max",
-      "v1_1Value": 90.294
+      "effort": "max",
+      "version": "v1.1"
      },
      "gpt-6-1-sol": {
+      "value": 88.931,
+      "stderr": 1.893,
       "valsKey": "openai/gpt-6.1-sol",
-      "value": 75.101,
-      "stderr": 3.466,
-      "valsEffort": "max",
-      "v1_1Value": 88.931
+      "effort": "max",
+      "version": "v1.1"
+     },
+     "mimo-v2-6-flash": {
+      "value": 78.96,
+      "stderr": 4.045,
+      "valsKey": "xiaomi/mimo-v2.6-flash",
+      "effort": "enabled (O140)",
+      "version": "v1.1"
      },
      "gpt-6-luna": {
+      "value": 81.649,
+      "stderr": 3.377,
       "valsKey": "openai/gpt-6-luna",
-      "value": 65.315,
-      "stderr": 4.632,
-      "valsEffort": "max",
-      "v1_1Value": 81.649
+      "effort": "max",
+      "version": "v1.1"
      },
      "gpt-6-1-terra": {
+      "value": 83.997,
+      "stderr": 2.865,
       "valsKey": "openai/gpt-6.1-terra",
-      "value": 75.52,
-      "stderr": 4.113,
-      "valsEffort": "max",
-      "v1_1Value": 83.997
+      "effort": "max",
+      "version": "v1.1"
      },
      "gpt-6-astra": {
+      "value": 89.594,
+      "stderr": 2.174,
       "valsKey": "openai/gpt-6-astra",
-      "value": 77.535,
-      "stderr": 3.808,
-      "valsEffort": "max",
-      "v1_1Value": 89.594
+      "effort": "max",
+      "version": "v1.1"
      },
      "claude-sonnet-5-5": {
+      "value": 92.392,
+      "stderr": 1.26,
       "valsKey": "anthropic/claude-sonnet-5-5",
-      "value": 80.88,
-      "stderr": 3.27,
-      "valsEffort": "max",
-      "v1_1Value": 92.392
+      "effort": "max",
+      "version": "v1.1"
      }
     },
-    "coverageAtSameEffortNote": "Cohort configurations whose Vals effort equals AA's, with the v1.1.1 value beside the v1.1 leaf. Reference only: no v1.1.1 value enters coverage. Vals' v1.1.1 board has no Gemini 4 Neon row under 'google/gemini-4-neon' either; its page labels the codename key 'google/cobalt-c-high-1p00' as Gemini 4 Neon (80.23%), which is the same alias as on v1.1."
+    "v1_1OnlyConfigurations": []
    }
   },
   {

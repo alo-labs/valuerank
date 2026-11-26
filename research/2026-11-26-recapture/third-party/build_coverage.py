@@ -2,10 +2,14 @@
 
 Adapted from research/2026-11-01-recapture/third-party/build_coverage.py (the 37-configuration read of 2026-11-01), which
 followed research/2026-10-25-board-reread/ and research/2026-10-30-v5-recapture/third-party/. It re-reads every board a
-ranking uses: Bug Hunt Bench, Vals Vibe Code Bench v1.1 and Code Migration v1.1 (the pinned versions), LiveBench 2.0
+ranking uses: Bug Hunt Bench, Vals Vibe Code Bench v1.1.1 (v1.1 is archived) and Code Migration v1.1, LiveBench 2.0
 (release 20261106, owner decision O211), AI Coding Daily (every row, hidden older rows included), the tbench.ai
 Terminal-Bench leaderboard (4.1 since AA's Coding Agent Index v2.1) and, as a cross-check source (E234), Cognition's
 FrontierCode 2.0 leaderboard. The cohort is ../cohort.json (45 configurations: 20 frontier, 11 near, 14 retained).
+
+Owner decisions of 2026-11-26 on two leaves: the AI Coding Daily value is Laravel + React-TS + Python + Edge-case (max 80; Bug
+Finding and the consistency penalty are excluded, a row without Python is absent), and the Vals Vibe Code Bench leaf is v1.1.1
+(v1.1 values are only in predecessorReference).
 
 Matching is exact configuration only (O36): the source row must name the same model version and the same reasoning effort
 as the AA configuration; no value moves across efforts or versions. Where AA plots no effort, the configuration is the
@@ -177,16 +181,19 @@ PREVIOUS_OTHER = previous_values(PREVIOUS / "coverage-2026-11-01.json", "key")
 PREVIOUS_VALS = previous_values(PREVIOUS / "vals-catalogue-2026-11-01.json", "slug")
 
 
-def annotate(board: dict, key: str, previous: dict) -> dict:
-    """Per-board change record against the 2026-11-01 read (the cohort ids of that read, matched through old_id)."""
+def annotate(board: dict, key: str, previous: dict, value_of=None) -> dict:
+    """Per-board change record against the 2026-11-01 read (the cohort ids of that read, matched through old_id).
+
+    value_of(cell) gives the value on the 2026-11-01 basis when the board's leaf definition has since changed (AI Coding Daily)."""
     old = previous.get(key, {})
     changed, new_configurations = {}, []
     for model_id, c in board["coverage"].items():
         before = old.get(old_id(model_id))
+        now = value_of(c) if value_of else c["value"]
         if before is None:
             new_configurations.append(model_id)
-        elif before != (c["status"], c["value"]):
-            changed[model_id] = {PREVIOUS_TAG: {"status": before[0], "value": before[1]}, TAG: {"status": c["status"], "value": c["value"]}}
+        elif before != (c["status"], now):
+            changed[model_id] = {PREVIOUS_TAG: {"status": before[0], "value": before[1]}, TAG: {"status": c["status"], "value": now}}
     board[f"valueChangesSince{PREVIOUS_TAG}"] = changed
     board["configurationsNotInThe20261101Cohort"] = new_configurations
     return board
@@ -298,120 +305,153 @@ def vals_page_text(path: Path) -> str:
     return re.sub(r"\s+", " ", html.unescape(re.sub(r"<[^>]+>", " ", text)))
 
 
+def vals_cell(model_id: str, family: str, effort, rows: dict, page: str, stem: str, version: str | None) -> dict:
+    """One Vals cell for a cohort configuration: exact only at the same model key and the same effort (O36)."""
+    key = VALS[family]
+    row = rows.get(key)
+    row_effort = (row.get("reasoning_effort") or row.get("compute_effort")) if row else None
+    if row is None:
+        result = {"status": "absent", "value": None, "stderr": None, "valsKey": None, "effort": None,
+                  "note": f"No {key} row on this board." + (" The board lists no Gemini 4 Neon row." if family == "neon" else "")}
+    elif family == "mimo-flash":
+        # O149 (2026-11-01): Vals states both MiMo models were evaluated with reasoning enabled, which is
+        # MiMo-V2.6-Flash's configuration (thinking enabled, O140), so its records match.
+        mimo_page = vals_page_text(HERE / "vals" / "_models" / "xiaomi_mimo-v2.6-pro.html")
+        if "We evaluated them with reasoning enabled" not in mimo_page:
+            raise ValueError("Vals' MiMo model page no longer says 'We evaluated them with reasoning enabled'")
+        same_runs = ""
+        if version == "v1.1.1":
+            v11_row = json.loads((HERE / "vals" / "vibe-code.json").read_text())["tasks"]["overall"][key]
+            if v11_row["cost_per_test"] != row["cost_per_test"]:
+                raise ValueError("MiMo-V2.6-Flash v1.1.1 cost per test differs from v1.1: the runs are not the ones the model page describes")
+            same_runs = (" The v1.1.1 row has the same cost per test as the v1.1 row (v1.1.1 re-grades the v1.1 runs), so the setting the "
+                         "model page describes applies to it.")
+        result = {"status": "exact", "value": row["accuracy"], "stderr": row["stderr"], "valsKey": key,
+                  "effort": "enabled (O140)", "harness": row.get("harness"), "match": "owner (O149)",
+                  "note": O135 + " Vals records reasoning, reasoning_effort and compute_effort as null; its "
+                          "MiMo-V2.6-Pro model page (vals/_models/xiaomi_mimo-v2.6-pro.html, re-read "
+                          "2026-11-26), in its 2026-09-22 update covering both MiMo V2.6 models, still says "
+                          "'We evaluated them with reasoning enabled' through the official Xiaomi API, so the "
+                          "record is the thinking-enabled configuration (owner decision O149, 2026-11-01)." + same_runs}
+    elif row_effort == effort:
+        note = base_note(model_id)
+        extra = {}
+        if family == "neon":
+            # Vals' JSON keeps the pre-release codename; its page labels the row "Gemini 4 Neon". The saved page's rendered
+            # row must carry the same score and cost as the JSON key, or the alias is not established.
+            rendered = rendered_vals_row(page, "google_gemini-4-neon", "Gemini 4 Neon")
+            if rendered is None or abs(rendered[0] - round(row["accuracy"], 2)) > 0.011 or abs(rendered[1] - round(row["cost_per_test"], 2)) > 0.011:
+                raise ValueError(f"{stem}: rendered 'Gemini 4 Neon' row {rendered} does not match JSON key {key}")
+            extra = {"match": "page label (rendered row)", "renderedRow": {"model": "Gemini 4 Neon", "scorePct": rendered[0], "costPerTest": rendered[1]}}
+            note = join_notes(note, f"Vals' JSON names this row '{key}' (a pre-release codename); the benchmark page labels the same "
+                                    f"row 'Gemini 4 Neon' (link /models/google_gemini-4-neon) with identical score ({rendered[0]}%) and "
+                                    f"cost (${rendered[1]}), and the Gemini 4 Neon model page (vals/_models/google_gemini-4-neon.html) "
+                                    "records Reasoning Effort: xhigh, equal to the key's reasoning_effort.")
+        if family == "fable":
+            note = join_notes(note, "Vals' Claude Fable 5.2 page (vals/_models/anthropic_claude-fable-5-2.html) records 'Compute "
+                                    "Effort: high'; Vals evaluated this model at high only.")
+        if family == "ember":
+            note = join_notes(note, "Vals' Muse Ember page (vals/_models/meta_muse-ember.html) records 'Reasoning Effort: max'.")
+        result = {"status": "exact", "value": row["accuracy"], "stderr": row["stderr"], "valsKey": key,
+                  "effort": effort, "harness": row.get("harness"), "note": note, **extra}
+    else:
+        result = {"status": "absent", "value": None, "stderr": None, "valsKey": None, "effort": None,
+                  "note": f"Vals ran this model only at {row_effort} ({row['accuracy']}), not {effort}; not transferred."}
+    return {**result, "version": version} if version else result
+
+
+def vals_version_status(stem: str) -> dict:
+    text = vals_page_text(HERE / "vals" / f"{stem}.html")
+    superseded = re.search(r"Archived Benchmark (.{0,260}?Previous results are preserved here\.)", text)
+    if superseded:
+        return {"archived": True, "bannerText": superseded.group(1).strip(), "supersededBy": "Vibe Code Bench v1.1.1",
+                "successorSlug": "vibe-code-v1-1-1"}
+    return {"archived": False, "bannerText": None, "supersededBy": None,
+            "note": "No 'superseded' or 'Archived Benchmark' banner on the page on 2026-11-26."}
+
+
+def vals_board(slug: str, name: str, version: str, harness: str, stem: str, page_slug: str, cell_version: str | None) -> dict:
+    source = json.loads((HERE / "vals" / f"{stem}.json").read_text())
+    rows = source["tasks"]["overall"]
+    page = (HERE / "vals" / f"{stem}.html").read_text()
+    board = {"slug": slug, "name": name, "version": version, "updated": source["metadata"]["updated"], "models": len(rows),
+             "harness": harness + ", the same for every model row", "sourceUrl": f"https://www.vals.ai/benchmarks/{page_slug}",
+             "jsonUrl": (HERE / "vals" / f"{stem}.jsonUrl.txt").read_text().strip(),
+             "captureFile": f"research/2026-11-26-recapture/third-party/vals/{stem}.json", "readAt": READ[stem],
+             f"changesSince{PREVIOUS_TAG}": None, "coverage": {}}
+    for model_id, (family, effort) in COHORT.items():
+        board["coverage"][model_id] = vals_cell(model_id, family, effort, rows, page, stem, cell_version)
+    return board
+
+
+def file_changes(stem: str, rows: dict) -> dict:
+    old = json.loads((PREVIOUS / "vals" / f"{stem}.json").read_text())["tasks"]["overall"]
+    return {"added": sorted(set(rows) - set(old)), "removed": sorted(set(old) - set(rows)),
+            "valueChanged": sorted(key for key in old if key in rows and
+                                   (old[key]["accuracy"], old[key]["stderr"]) != (rows[key]["accuracy"], rows[key]["stderr"])),
+            "fileIdentical": (HERE / "vals" / f"{stem}.json").read_bytes() == (PREVIOUS / "vals" / f"{stem}.json").read_bytes()}
+
+
 def vals() -> dict:
-    document = {"capturedAt": max(READ["vibe-code"], READ["code-migration-v1-1"]),
+    document = {"capturedAt": max(READ["vibe-code-v1-1-1"], READ["code-migration-v1-1"]),
                 "method": "As on 2026-10-25, 2026-10-30 and 2026-11-01: each board page read, its benchmarkViewUrl prop's hashed "
-                          "/_astro/benchmark_view_*.json downloaded (vals/<slug>.json, URL in vals/<slug>.jsonUrl.txt); values from "
+                          "/_astro/benchmark_view_*.json downloaded (vals/<stem>.json, URL in vals/<stem>.jsonUrl.txt); values from "
                           "tasks.overall.<model key>. Exact = same Vals model key (model version) and reasoning_effort/compute_effort "
                           "equal to AA's effort, or, where AA plots no effort, the documented or owner-stated equivalent (O149 "
-                          "MiMo-V2.6-Flash); absent otherwise. Vals model pages read 2026-11-26 in vals/_models/ (read "
-                          + (HERE / "vals" / "_models" / "readAt.txt").read_text().strip() + "; MiMo-V2.6-Pro page "
-                          + (HERE / "vals" / "_models" / "mimo.readAt.txt").read_text().strip() + ").",
+                          "MiMo-V2.6-Flash); absent otherwise. The Vibe Code Bench leaf is v1.1.1 (owner decision 2026-11-26; Vals "
+                          "archived v1.1): the 'vibe-code' board's coverage holds v1.1.1 values, each cell stating version v1.1.1, and the v1.1 "
+                          "values are in that board's predecessorReference, never in coverage. Code Migration stays v1.1. Vals model pages read "
+                          "2026-11-26 in vals/_models/ (read " + (HERE / "vals" / "_models" / "readAt.txt").read_text().strip()
+                          + "; MiMo-V2.6-Pro page " + (HERE / "vals" / "_models" / "mimo.readAt.txt").read_text().strip() + ").",
                 "cohortSource": "research/2026-11-26-recapture/cohort.json (45 configurations: 31 current + 14 retained)", "benchmarks": []}
-    for slug, name, harness in (("vibe-code", "Vibe Code Bench v1.1", "OpenHands"), ("code-migration-v1-1", "Code Migration v1.1", "Pi agent harness")):
-        source = json.loads((HERE / "vals" / f"{slug}.json").read_text())
-        old = json.loads((PREVIOUS / "vals" / f"{slug}.json").read_text())["tasks"]["overall"]
-        rows = source["tasks"]["overall"]
-        page = (HERE / "vals" / f"{slug}.html").read_text()
-        board = {"slug": slug, "name": name, "version": "1.1", "updated": source["metadata"]["updated"], "models": len(rows),
-                 "harness": harness + ", the same for every model row", "sourceUrl": f"https://www.vals.ai/benchmarks/{slug}",
-                 "jsonUrl": (HERE / "vals" / f"{slug}.jsonUrl.txt").read_text().strip(),
-                 "captureFile": f"research/2026-11-26-recapture/third-party/vals/{slug}.json", "readAt": READ[slug],
-                 f"changesSince{PREVIOUS_TAG}": {
-                     "added": sorted(set(rows) - set(old)), "removed": sorted(set(old) - set(rows)),
-                     "valueChanged": sorted(key for key in old if key in rows and
-                                            (old[key]["accuracy"], old[key]["stderr"]) != (rows[key]["accuracy"], rows[key]["stderr"])),
-                     "fileIdentical": (HERE / "vals" / f"{slug}.json").read_bytes() == (PREVIOUS / "vals" / f"{slug}.json").read_bytes()},
-                 "coverage": {}}
-        text = vals_page_text(HERE / "vals" / f"{slug}.html")
-        superseded = re.search(r"Archived Benchmark (.{0,260}?Previous results are preserved here\.)", text)
-        board["versionStatus"] = ({"archived": True, "bannerText": superseded.group(1).strip(), "supersededBy": "Vibe Code Bench v1.1.1",
-                                   "successorSlug": "vibe-code-v1-1-1", "pinnedHere": "v1.1 stays the leaf (owner instruction 2026-11-26); "
-                                   "v1.1.1 values are reference only (successorReference), never moved into coverage."}
-                                  if superseded else
-                                  {"archived": False, "bannerText": None, "supersededBy": None,
-                                   "note": "No 'superseded' or 'Archived Benchmark' banner on the page on 2026-11-26."})
-        for model_id, (family, effort) in COHORT.items():
-            key = VALS[family]
-            row = rows.get(key)
-            row_effort = (row.get("reasoning_effort") or row.get("compute_effort")) if row else None
-            if row is None:
-                board["coverage"][model_id] = {"status": "absent", "value": None, "stderr": None, "valsKey": None, "effort": None,
-                                               "note": f"No {key} row on this board." + (" The board lists no Gemini 4 Neon row." if family == "neon" else "")}
-            elif family == "mimo-flash":
-                # O149 (2026-11-01): Vals states both MiMo models were evaluated with reasoning enabled, which is
-                # MiMo-V2.6-Flash's configuration (thinking enabled, O140), so its records match.
-                mimo_page = vals_page_text(HERE / "vals" / "_models" / "xiaomi_mimo-v2.6-pro.html")
-                if "We evaluated them with reasoning enabled" not in mimo_page:
-                    raise ValueError("Vals' MiMo model page no longer says 'We evaluated them with reasoning enabled'")
-                board["coverage"][model_id] = {"status": "exact", "value": row["accuracy"], "stderr": row["stderr"], "valsKey": key,
-                                               "effort": "enabled (O140)", "harness": row.get("harness"), "match": "owner (O149)",
-                                               "note": O135 + " Vals records reasoning, reasoning_effort and compute_effort as null; its "
-                                                       "MiMo-V2.6-Pro model page (vals/_models/xiaomi_mimo-v2.6-pro.html, re-read "
-                                                       "2026-11-26), in its 2026-09-22 update covering both MiMo V2.6 models, still says "
-                                                       "'We evaluated them with reasoning enabled' through the official Xiaomi API, so the "
-                                                       "record is the thinking-enabled configuration (owner decision O149, 2026-11-01)."}
-            elif row_effort == effort:
-                note = base_note(model_id)
-                extra = {}
-                if family == "neon":
-                    # Vals' JSON keeps the pre-release codename; its page labels the row "Gemini 4 Neon". The saved page's rendered
-                    # row must carry the same score and cost as the JSON key, or the alias is not established.
-                    rendered = rendered_vals_row(page, "google_gemini-4-neon", "Gemini 4 Neon")
-                    if rendered is None or abs(rendered[0] - round(row["accuracy"], 2)) > 0.011 or abs(rendered[1] - round(row["cost_per_test"], 2)) > 0.011:
-                        raise ValueError(f"{slug}: rendered 'Gemini 4 Neon' row {rendered} does not match JSON key {key}")
-                    extra = {"match": "page label (rendered row)", "renderedRow": {"model": "Gemini 4 Neon", "scorePct": rendered[0], "costPerTest": rendered[1]}}
-                    note = join_notes(note, f"Vals' JSON names this row '{key}' (a pre-release codename); the benchmark page labels the same "
-                                            f"row 'Gemini 4 Neon' (link /models/google_gemini-4-neon) with identical score ({rendered[0]}%) and "
-                                            f"cost (${rendered[1]}), and the Gemini 4 Neon model page (vals/_models/google_gemini-4-neon.html) "
-                                            "records Reasoning Effort: xhigh, equal to the key's reasoning_effort.")
-                if family == "fable":
-                    note = join_notes(note, "Vals' Claude Fable 5.2 page (vals/_models/anthropic_claude-fable-5-2.html) records 'Compute "
-                                            "Effort: high'; Vals evaluated this model at high only.")
-                if family == "ember":
-                    note = join_notes(note, "Vals' Muse Ember page (vals/_models/meta_muse-ember.html) records 'Reasoning Effort: max'.")
-                board["coverage"][model_id] = {"status": "exact", "value": row["accuracy"], "stderr": row["stderr"], "valsKey": key,
-                                               "effort": effort, "harness": row.get("harness"), "note": note, **extra}
-            else:
-                board["coverage"][model_id] = {"status": "absent", "value": None, "stderr": None, "valsKey": None, "effort": None,
-                                               "note": f"Vals ran this model only at {row_effort} ({row['accuracy']}), not {effort}; not transferred."}
-        board["coverageCounts"] = counts(board)
-        board = annotate(board, slug, PREVIOUS_VALS)
-        if slug == "vibe-code":
-            board["successorReference"] = vals_successor()
-        document["benchmarks"].append(board)
+
+    # Vibe Code Bench: the leaf is v1.1.1 (owner decision 2026-11-26). The slug stays 'vibe-code' (the board key the build reads).
+    vibe = vals_board("vibe-code", "Vibe Code Bench v1.1.1", "1.1.1", "OpenHands", "vibe-code-v1-1-1", "vibe-code-v1-1-1", "v1.1.1")
+    vibe["pageSlug"] = "vibe-code-v1-1-1"
+    rows111 = json.loads((HERE / "vals" / "vibe-code-v1-1-1.json").read_text())["tasks"]["overall"]
+    vibe["readAt"] = READ["vibe-code-v1-1-1"]
+    vibe["changesSince" + PREVIOUS_TAG] = {"comparable": False,
+                                           "note": "The 2026-11-01 read used Vibe Code Bench v1.1; v1.1.1 is a different grader on the same runs, so "
+                                                   "its file is not diffed against the v1.1 file (see predecessorReference.changesSince20261101 for "
+                                                   "the v1.1 file changes)."}
+    vibe["versionStatus"] = vals_version_status("vibe-code-v1-1-1")
+    vibe["versionStatus"]["leafDecision"] = ("Owner decision 2026-11-26: v1.1.1 is the leaf; Vals marks v1.1 archived and superseded by it.")
+    if vibe["versionStatus"]["archived"]:
+        raise ValueError("Vals now marks Vibe Code Bench v1.1.1 itself archived or superseded; review")
+    vibe["coverageCounts"] = counts(vibe)
+    annotate(vibe, "vibe-code", PREVIOUS_VALS)
+    vibe["valueChangesBasis"] = ("The 2026-11-01 values were Vibe Code Bench v1.1 (see predecessorReference); every change here is the "
+                                 "v1.1 to v1.1.1 regrade (and the Vals rows added since), not a movement of the same board.")
+
+    v11 = vals_board("vibe-code", "Vibe Code Bench v1.1", "1.1", "OpenHands", "vibe-code", "vibe-code", "v1.1")
+    rows11 = json.loads((HERE / "vals" / "vibe-code.json").read_text())["tasks"]["overall"]
+    shared = sorted(set(rows111) & set(rows11))
+    same_cost = sum(1 for k in shared if rows111[k]["cost_per_test"] == rows11[k]["cost_per_test"])
+    drops = [rows11[k]["accuracy"] - rows111[k]["accuracy"] for k in shared]
+    vibe["predecessorReference"] = {
+        "neverInCoverage": True, "slug": "vibe-code", "version": "1.1", "updated": v11["updated"], "models": v11["models"],
+        "sourceUrl": v11["sourceUrl"], "jsonUrl": v11["jsonUrl"], "captureFile": v11["captureFile"], "readAt": READ["vibe-code"],
+        "versionStatus": vals_version_status("vibe-code"), f"changesSince{PREVIOUS_TAG}": file_changes("vibe-code", rows11),
+        "whatChanged": "Vals' banner on v1.1: 'superseded by v1.1.1, which upgrades the grader, requires every substep to pass, and fixes "
+                       "ambiguous tests'. Of the {n} model keys on both versions, {c} have identical cost per test (the runs look reused and "
+                       "re-graded) and the accuracy falls by {lo:.1f} to {hi:.1f} points (mean {mean:.1f}).".format(
+                           n=len(shared), c=same_cost, lo=min(drops), hi=max(drops), mean=sum(drops) / len(drops)),
+        "valuesNote": "The v1.1 value and stderr of every cohort configuration that matched exactly on v1.1 (the same exact-effort rule as v1.1.1). "
+                      "Reference only.",
+        "values": {model_id: {k: c[k] for k in ("value", "stderr", "valsKey", "effort", "version")}
+                   for model_id, c in v11["coverage"].items() if c["status"] == "exact"},
+        "v1_1OnlyConfigurations": sorted(model_id for model_id, c in v11["coverage"].items()
+                                          if c["status"] == "exact" and vibe["coverage"][model_id]["status"] != "exact")}
+    document["benchmarks"].append(vibe)
+
+    cm = vals_board("code-migration-v1-1", "Code Migration v1.1", "1.1", "Pi agent harness", "code-migration-v1-1", "code-migration-v1-1", None)
+    cm_rows = json.loads((HERE / "vals" / "code-migration-v1-1.json").read_text())["tasks"]["overall"]
+    cm[f"changesSince{PREVIOUS_TAG}"] = file_changes("code-migration-v1-1", cm_rows)
+    cm["versionStatus"] = vals_version_status("code-migration-v1-1")
+    cm["coverageCounts"] = counts(cm)
+    annotate(cm, "code-migration-v1-1", PREVIOUS_VALS)
+    document["benchmarks"].append(cm)
     return document
-
-
-def vals_successor() -> dict:
-    """Vibe Code Bench v1.1.1 facts for the README note: reference only, never matched into coverage."""
-    source = json.loads((HERE / "vals" / "vibe-code-v1-1-1.json").read_text())
-    rows = source["tasks"]["overall"]
-    v11 = json.loads((HERE / "vals" / "vibe-code.json").read_text())["tasks"]["overall"]
-    values = {}
-    for model_id, (family, effort) in COHORT.items():
-        key = VALS[family]
-        row = rows.get(key)
-        if row is None or family == "mimo-flash":
-            continue
-        row_effort = row.get("reasoning_effort") or row.get("compute_effort")
-        if row_effort == effort:
-            values[model_id] = {"valsKey": key, "value": row["accuracy"], "stderr": row["stderr"], "valsEffort": row_effort,
-                                "v1_1Value": v11[key]["accuracy"]}
-    shared = sorted(set(rows) & set(v11))
-    same_cost = sum(1 for k in shared if rows[k]["cost_per_test"] == v11[k]["cost_per_test"])
-    drops = [v11[k]["accuracy"] - rows[k]["accuracy"] for k in shared]
-    return {"notUsedAsLeaf": True, "slug": "vibe-code-v1-1-1", "version": source["metadata"]["version"], "updated": source["metadata"]["updated"],
-            "models": len(rows), "jsonUrl": (HERE / "vals" / "vibe-code-v1-1-1.jsonUrl.txt").read_text().strip(),
-            "captureFile": "research/2026-11-26-recapture/third-party/vals/vibe-code-v1-1-1.json", "readAt": READ["vibe-code-v1-1-1"],
-            "whatChanged": "Vals' banner on v1.1: 'superseded by v1.1.1, which upgrades the grader, requires every substep to pass, and fixes "
-                           "ambiguous tests'. Of the {n} model keys on both versions, {c} have identical cost per test (the runs look reused and re-graded) "
-                           "and the accuracy falls by {lo:.1f} to {hi:.1f} points (mean {mean:.1f}).".format(
-                               n=len(shared), c=same_cost, lo=min(drops), hi=max(drops), mean=sum(drops) / len(drops)),
-            "coverageAtSameEffort": values,
-            "coverageAtSameEffortNote": "Cohort configurations whose Vals effort equals AA's, with the v1.1.1 value beside the v1.1 leaf. Reference only: "
-                                        "no v1.1.1 value enters coverage. Vals' v1.1.1 board has no Gemini 4 Neon row under 'google/gemini-4-neon' either; "
-                                        "its page labels the codename key '" + VALS_NEON_KEY + "' as Gemini 4 Neon (80.23%), which is the same alias as on v1.1."}
 
 
 def livebench_effort(site: str, label: str) -> str | None:
@@ -511,8 +551,8 @@ def aicd_header() -> dict:
               "react": re.search(r"React-TS Code Quality \(max (\d+)\)", text), "bug": re.search(r"Bug Finding Test \(max (\d+)\)", text),
               "python": re.search(r"Python Code Quality \(max (\d+)\)", text), "edge": re.search(r"Edge-case Testing \((\d+) projects, max (\d+)\)", text)}
     parsed = {key: int(match.group(match.lastindex)) for key, match in maxima.items() if match}
-    if (parsed.get("laravel"), parsed.get("react"), parsed.get("edge")) != (20, 20, 20):
-        raise ValueError(f"AI Coding Daily leaf columns no longer max 20 each: {parsed}")
+    if (parsed.get("laravel"), parsed.get("react"), parsed.get("python"), parsed.get("edge")) != (20, 20, 20, 20):
+        raise ValueError(f"AI Coding Daily leaf columns no longer max 20 each (leaf max 80): {parsed}")
     update = re.search(r"Last update: ([^()]*\([^)]*\))", text)
     return {"maxima": parsed, "edgeProjects": int(maxima["edge"].group(1)), "lastUpdate": update.group(1).strip() if update else None,
             "penaltyColumn": "Penalty = points deducted for inconsistent results across attempts (negative or 0); total = Laravel + React-TS + "
@@ -536,14 +576,20 @@ def aicd(bughunt_board: dict) -> dict:
              "sourceUrl": "https://aicodingdaily.com/leaderboard (every row: Livewire POST to /livewire-71a08158/update with "
                           "hiddenOlderModelIds=[]; bestHarnessOnly false)",
              "rows": len(rows), "boardHeader": header,
-             "values": "value = nonBug = Laravel + React-TS + Edge-case (max 60, the ValueRank leaf as before); each row also carries total (now "
-                       "max 90), python (new project, max 20), bug (max 10), penalty and the other columns",
+             "leaf": {"definition": "Laravel Code Quality + React-TS Code Quality + Python Code Quality + Edge-case Testing, each max 20, so max 80",
+                      "decision": "Owner decision 2026-11-26. Bug Finding is excluded; the per-project Consistency Penalty is NOT in the leaf "
+                                  "(it is a diagnostic: the total column is the five project columns plus the penalty, and the four leaf columns "
+                                  "are the displayed, pre-penalty values). A row without a Python Code Quality score (tested before the Python "
+                                  "project) is absent from this leaf, with the reason in the cell's note.",
+                      "previousLeaf": "Laravel + React-TS + Edge-case (max 60, 2026-11-01 and the first 2026-11-26 build); still stored per cell as "
+                                      "diagnostics.nonBug60 and used for valueChangesSince20261101"},
+             "values": "value = Laravel + React-TS + Python + Edge-case (max 80, the ValueRank leaf); each cell stores the four components, and the "
+                       "diagnostics (total of max 90, bug finding, penalty, the old 60-point sum); each row also carries every board column",
              "methodologyChange": "Since 2026-11-11 the board scores 8 projects / 33 prompts and adds the Python 'Pricing Engine' project and a "
                                   "per-project Consistency Penalty (methodology article, aicd/articles/methodology.html, published 2026-11-11). The "
-                                  "total moved from max 70 to max 90; Laravel, React-TS and Edge-case keep their max of 20 and their definitions, so the "
-                                  "non-bug leaf (max 60) is still well defined, but a leaf that included Python would be max 80 (nonBugWithPython). "
-                                  "Almost every row was re-dated 2026-11-13/14 when its Python run was added; its Laravel, React-TS and Edge-case "
-                                  "scores are unchanged except where listed in rowChangesSince20261101.",
+                                  "total moved from max 70 to max 90; Laravel, React-TS and Edge-case keep their max of 20 and their definitions. "
+                                  "Almost every row was re-dated 2026-11-13/14 (the dates fit the Python project being run then; the board gives no "
+                                  "reason); its Laravel, React-TS and Edge-case scores are unchanged except where listed in rowChangesSince20261101.",
              "totalIdentityCheck": f"{identity_ok} of {len(rows)} rows satisfy total = columns + penalty within 0.02",
              f"rowChangesSince{PREVIOUS_TAG}": {
                  "added": sorted(f"{m} [{h}]" for (m, h) in new_keys - set(old_rows)),
@@ -572,7 +618,8 @@ def aicd(bughunt_board: dict) -> dict:
             python = float(row["python"]) if row.get("python") else None
             non_bug = round(float(row["laravel"]) + float(row["react"]) + float(row["edge"]), 2)
             entries.append({"total": float(row["total"]), "nonBug": non_bug,
-                            "nonBugWithPython": round(non_bug + python, 2) if python is not None else None,
+                            "leaf80": (round(float(row["laravel"]) + float(row["react"]) + python + float(row["edge"]), 2)
+                                       if python is not None else None),
                             "laravel": float(row["laravel"]), "react": float(row["react"]), "bug": bug, "python": python,
                             "edge": float(row["edge"]), "penalty": float(row["penalty"].replace("−", "-")),
                             "harness": row["harness"], "tested": row["tested"], "ageText": row["age"], "cost": row["cost"],
@@ -601,17 +648,26 @@ def aicd(bughunt_board: dict) -> dict:
                     "video title is 'I Tested NEW Muse Ember on Coding' (aicd/model-pages/muse-ember-1-0.html). No other Muse Ember version "
                     "appears on any board, so '1.0' is read as the model's release name, not a second version. Flag for the owner (O36 asks for the "
                     "same model version).")
-        if entries[0]["bug"] is None:
-            note = join_notes(note, f"Tested {entries[0]['tested']}, before the Bug Finding project was added (2026-10-03): the listed "
-                                    f"total {entries[0]['total']} is out of 60 (Laravel + React-TS + Edge-case), so no total with bug-finding "
-                                    "exists; the non-bug leaf is exact. Row is hidden by default as an older LLM.")
-        if entries[0]["python"] is None:
-            note = join_notes(note, "No Python Code Quality score on this row (total and the new methodology's Python project are absent).")
+        chosen_row = entries[0]
         extra = {"rows": entries}
         if selection:
             extra["selection"] = selection
-        board["coverage"][model_id] = cell("exact", entries[0]["nonBug"], hit[0]["model"], wanted, note, **extra)
-    return annotate(board, "aicd", PREVIOUS_OTHER)
+        if chosen_row["leaf80"] is None:
+            # Owner decision 2026-11-26: a row without the Python project is not on the 80-point leaf.
+            note = join_notes(note, f"The row ({hit[0]['model']} [{chosen_row['harness']}], tested {chosen_row['tested']}) has no Python "
+                                    f"Code Quality score (tested before the Python project), so it drops out of the 80-point leaf (owner decision "
+                                    f"2026-11-26); its Laravel + React-TS + Edge-case sum is {chosen_row['nonBug']} of 60 and is not substituted.")
+            board["coverage"][model_id] = cell("absent", None, hit[0]["model"], wanted, note, **extra)
+            continue
+        extra["components"] = {"laravel": chosen_row["laravel"], "react": chosen_row["react"], "python": chosen_row["python"],
+                               "edge": chosen_row["edge"], "leafMax": 80}
+        extra["diagnostics"] = {"total": chosen_row["total"], "totalMax": 90, "bug": chosen_row["bug"], "penalty": chosen_row["penalty"],
+                                "nonBug60": chosen_row["nonBug"], "note": "Bug Finding and the penalty are not in the leaf."}
+        board["coverage"][model_id] = cell("exact", chosen_row["leaf80"], hit[0]["model"], wanted, note, **extra)
+    annotate(board, "aicd", PREVIOUS_OTHER, value_of=lambda c: c["rows"][0]["nonBug"] if c.get("rows") else c["value"])
+    board["valueChangesBasis"] = ("The 2026-11-01 value was Laravel + React-TS + Edge-case (max 60); the changes are compared on that basis "
+                                  "(diagnostics.nonBug60), not on today's 80-point value, which has no 2026-11-01 counterpart.")
+    return board
 
 
 def tbench() -> dict:
@@ -824,7 +880,11 @@ def main() -> None:
              "statusRule": "exact = source row names the same model version and the same reasoning effort as the AA configuration (where AA "
                            "plots no effort: the documented default under O135/O140/O149 for MiMo-V2.6-Flash); plausible = same model, effort "
                            "not confirmable (MiMo-V2.6-Flash rows that record no effort or 'default'/'none'; O140 keeps them unmatched); absent = "
-                           "no row at this effort or no row for the model. No value is transferred across efforts or versions.",
+                           "no row at this effort or no row for the model. No value is transferred across efforts or versions. Leaves "
+                           "(owner decisions of 2026-11-26): AI Coding Daily value = Laravel + React-TS + Python + Edge-case (max 80; Bug "
+                           "Finding and the consistency penalty are not in it, the components and diagnostics are stored per cell; a row "
+                           "without a Python Code Quality score is absent); the Vals Vibe Code Bench leaf is v1.1.1 (each cell states "
+                           "version v1.1.1; v1.1 values are only in the vals catalogue's predecessorReference).",
              "laterRowCheck": later_rows(),
              "benchmarks": boards}
     (HERE / f"coverage-2026-11-26.json").write_text(json.dumps(other, indent=1, ensure_ascii=False) + "\n")
@@ -839,6 +899,17 @@ def main() -> None:
         print(f"{board.get('key') or board['slug']:34} {c['exact']:>5} {c['plausible']:>9} {c['absent']:>6}")
     exact = sum(1 for i in cognition_document["cohortMapping"]["configurations"] if i["status"] == "exact")
     print(f"{'cognition-frontiercode-2.0':34} {exact:>5} {0:>9} {len(COHORT) - exact:>6}")
+    aicd_board = next(b for b in boards if b["key"] == "aicd")
+    no_python = sorted(m for m, c in aicd_board["coverage"].items() if c["status"] == "absent" and c.get("rows"))
+    leaf80 = sum(1 for c in aicd_board["coverage"].values() if c["status"] == "exact")
+    print(f"AI Coding Daily leaf: {leaf80} configurations on the 80-point leaf; {len(no_python)} rows dropped for no Python score "
+          f"({', '.join(no_python) or '-'}); {len(COHORT) - leaf80 - len(no_python)} with no row at the effort")
+    vibe = next(b for b in vals_document["benchmarks"] if b["slug"] == "vibe-code")
+    only_old = vibe["predecessorReference"]["v1_1OnlyConfigurations"]
+    v111 = sum(1 for c in vibe["coverage"].values() if c["status"] == "exact")
+    v11 = len(vibe["predecessorReference"]["values"])
+    print(f"Vibe Code leaf: {v111} configurations on v1.1.1 (all with version v1.1.1); {v11} would have matched on v1.1; "
+          f"v1.1-only configurations (no v1.1.1 value): {', '.join(only_old) or '-'}")
     print("new-family exact matches:")
     for board in boards + vals_document["benchmarks"]:
         hits = sorted(model_id for model_id, c in board["coverage"].items() if c["status"] == "exact" and COHORT[model_id][0] in NEW_FAMILIES)
