@@ -419,8 +419,7 @@ def coding_share_text(v3):
                f"({pct(wide[1], 0)} to {pct(wide[2], 0)}; E343)" if wide else "")
     return (f" Coding and terminal tasks ({labels}) make up {pct(middle, 0)} of the basket's cost (median over {n} configurations "
             f"with the full basket; {pct(low, 0)} to {pct(high, 0)}){science}; {', '.join(component_label(key) for key in UNREWARDED_COMPONENTS)}, "
-            f"{'which has' if len(UNREWARDED_COMPONENTS) == 1 else 'which have'} no quality leaf, "
-            f"{'makes' if len(UNREWARDED_COMPONENTS) == 1 else 'make'} up {pct(unrewarded, 0)}{atlas}.")
+            f"which has no quality leaf, makes up {pct(unrewarded, 0)}{atlas}.")
 
 
 def influence_text(v3, short=False):

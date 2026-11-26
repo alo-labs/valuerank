@@ -237,7 +237,7 @@ def pages(bundle) -> list[tuple[str, str, dict]]:
 
 
 def remove_stale_model_pages(out_dir: Path, keep: set[str]) -> list[Path]:
-    """Delete generated model pages whose model left the roster."""
+    """Delete the generated page, public data document and share card of every model that left the roster."""
 
     removed = []
     models_dir = out_dir / "models"
@@ -246,6 +246,13 @@ def remove_stale_model_pages(out_dir: Path, keep: set[str]) -> list[Path]:
             if child.is_dir() and child.name not in keep:
                 shutil.rmtree(child)
                 removed.append(child)
+    # The per-model JSON the pages read and the share cards are written per model too; a retired model's would otherwise stay.
+    for directory, pattern in ((out_dir / "data" / "models", "*.json"), (out_dir / "og" / "models", "*.png")):
+        if directory.exists():
+            for child in sorted(directory.glob(pattern)):
+                if child.stem not in keep:
+                    child.unlink()
+                    removed.append(child)
     return removed
 
 

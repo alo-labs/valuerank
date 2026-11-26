@@ -91,7 +91,8 @@ def test_catalogue_gives_every_page_a_key_and_its_boot_module(generated):
     from valuerank.site import viewmodel
 
     pages = {path: page for path, _template, page in build.pages(viewmodel.build_bundle())}
-    assert len(pages) == 48 and "/models/" in pages and "/rankings/ai-coding-daily/" in pages
+    # 11 core pages and one page per roster model (45 configurations in the 2026-11-26 release).
+    assert len(pages) == 56 and "/models/" in pages and "/rankings/ai-coding-daily/" in pages
     assert pages["/rankings/ai-coding-daily/"]["scripts"] == ["/assets/js/pages/rankings.js"] and pages["/rankings/ai-coding-daily/"]["heading"] == "AI Coding Daily ranking"
     assert pages["/"]["scripts"] == ["/assets/js/pages/index.js"]
     assert pages["/rankings/"]["scripts"] == ["/assets/js/pages/rankings.js"]
@@ -117,7 +118,7 @@ def test_pages_embed_the_data_the_scripts_read(generated):
         html = (generated / path).read_text()
         start = html.index('<script type="application/json" id="rankings-data">') + len('<script type="application/json" id="rankings-data">')
         payload = json.loads(html[start:html.index("</script>", start)])
-        assert payload["version"] == build.VERSION and len(payload["models"]) == 37
+        assert payload["version"] == build.VERSION and len(payload["models"]) == 45
 
 
 def test_stale_model_pages_are_removed_on_rebuild(tmp_path):
@@ -134,6 +135,20 @@ def test_stale_model_pages_are_removed_on_rebuild(tmp_path):
     assert build.remove_stale_model_pages(tmp_path / "missing", set()) == []
 
 
+def test_a_retired_models_data_document_and_share_card_are_removed_too(tmp_path):
+    out = tmp_path / "site"
+    for relative in ("data/models/gpt-6-1-sol.json", "data/models/retired-model.json", "og/models/gpt-6-1-sol.png", "og/models/retired-model.png"):
+        (out / relative).parent.mkdir(parents=True, exist_ok=True)
+        (out / relative).write_text("x")
+    (out / "og" / "models" / "readme.txt").write_text("not a card")
+
+    removed = build.remove_stale_model_pages(out, {"gpt-6-1-sol"})
+
+    assert removed == [out / "data" / "models" / "retired-model.json", out / "og" / "models" / "retired-model.png"]
+    assert (out / "data" / "models" / "gpt-6-1-sol.json").exists() and (out / "og" / "models" / "gpt-6-1-sol.png").exists()
+    assert (out / "og" / "models" / "readme.txt").exists()
+
+
 def test_module_entry_point_generates_into_a_copy(repo_copy, monkeypatch, capsys):
     # runpy executes build.py afresh, so its ``from valuerank.paths import ...`` must see the patched paths.
     monkeypatch.setattr("valuerank.paths.ROOT", repo_copy)
@@ -146,7 +161,7 @@ def test_module_entry_point_generates_into_a_copy(repo_copy, monkeypatch, capsys
         runpy.run_module("valuerank.site.build", run_name="__main__", alter_sys=True)
 
     assert exit_info.value.code == 0
-    assert json.loads(capsys.readouterr().out)["pages"] == 48
+    assert json.loads(capsys.readouterr().out)["pages"] == 56
     assert (repo_copy / "site" / "rankings" / "index.html").is_file()
 
 
@@ -158,8 +173,8 @@ def test_og_image_meta_points_each_generated_page_at_its_share_card(generated):
         assert meta_content(html, 'property="og:image"') == build.BASE_URL + card, path
         assert meta_content(html, 'name="twitter:image"') == build.BASE_URL + card, path
         cards.add(card)
-    # 9 core cards (11 core pages; the three rankings share one card), one card per roster model (37) and the archive page.
-    assert len(cards) == 47
+    # 9 core cards (11 core pages; the three rankings share one card), one card per roster model (45) and the archive page.
+    assert len(cards) == 55
 
 
 def test_share_cards_on_disk_are_exactly_the_ones_the_pages_reference():

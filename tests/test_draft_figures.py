@@ -275,9 +275,14 @@ def test_excluded_configurations_partition_into_five_classes():
     order = lambda ids: f.series([names[item] for item in sorted(ids)])
     excluded = {item["id"] for item in SCORES["v3"]["incompleteEvidence"]} & {item["id"] for item in SCORES["v3Tracks"]["aicd"]["incompleteEvidence"]}
     figures = f.family_figures(SCORES, excluded, order)
-    assert figures["excluded.frontierPrimaries"] == "Claude Opus 5.5 (xhigh), Gemini 4 Carbon (high), GPT-6 Astra (xhigh) and MiMo-V2.6-Flash"
-    assert figures["excluded.frontierPoints"] == "Claude Haiku 5.5 (low), GPT-6 Luna (low), GPT-6.1 Sol (xhigh) and GPT-6.1 Terra (low)"
-    assert figures["excluded.nearPrimaries"] == figures["excluded.nearPoints"] == figures["excluded.nearFamilyPoints"] == "none"
+    assert figures["excluded.frontierPrimaries"] == "Claude Fable 5.2 (max), GPT-6.2 Astra (max), GPT-6.2 Sol (max) and Muse Ember (max)"
+    assert figures["excluded.frontierPoints"] == (
+        "Claude Fable 5.2 (xhigh), Claude Haiku 5.5 (low), GPT-6 Luna (low), GPT-6.2 Astra (high), GPT-6.2 Astra (xhigh), GPT-6.2 Sol (high), "
+        "GPT-6.2 Sol (low), GPT-6.2 Sol (medium), GPT-6.2 Sol (xhigh) and Muse Ember (xhigh)")
+    assert figures["excluded.nearPrimaries"] == "Gemini 4 Carbon (high) and Gemini 4 Neon (xhigh)"
+    assert figures["excluded.nearPoints"] == "Claude Fable 5.2 (high), Claude Haiku 5.5 (xhigh) and GPT-6.2 Astra (medium)"
+    assert figures["excluded.nearFamilyPoints"] == "Gemini 4 Neon (high) and Gemini 4 Neon (medium)"
+    assert figures["excluded.retainedPoints"] == "Claude Opus 5.5 (xhigh), GPT-6 Astra (xhigh), GPT-6.1 Sol (xhigh), GPT-6.1 Terra (low) and MiMo-V2.6-Flash"
     with pytest.raises(f.FigureError, match="do not partition"):
         f.family_figures(SCORES, excluded | {"not-in-the-cohort"}, order)
 

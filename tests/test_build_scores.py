@@ -66,8 +66,8 @@ def log_searches(*model_ids):
     """O36: an exhaustive search logged on the cutoff for every leaf of the named configurations, with its open-web step (I28)."""
 
     def fn(document):
-        document["searches"] += [{"modelId": model_id, "leaf": leaf.key, "searchedOn": "2026-10-30", "result": "not found", "sources": [],
-                                  "openWeb": {"searchedOn": "2026-10-30", "queries": [f"{model_id} {leaf.key}"], "candidates": []}}
+        document["searches"] += [{"modelId": model_id, "leaf": leaf.key, "searchedOn": "2026-11-26", "result": "not found", "sources": [],
+                                  "openWeb": {"searchedOn": "2026-11-26", "queries": [f"{model_id} {leaf.key}"], "candidates": []}}
                                  for model_id in model_ids for leaf in quality.ALL_LEAVES.values()]
     return fn
 
@@ -1247,13 +1247,14 @@ def test_every_model_row_reports_its_aa_frontier_tier(world):
         seen_tiers.add(want[0])
         assert "frontierSelection" in model  # existing field untouched
     assert seen_tiers == {"frontier", "near", "left cohort", None}
-    # e.g. GPT-6.1 Sol (xhigh), GPT-6.1 Sol (low), Claude Sonnet 5.5 (xhigh) (retained, O145), the synthetic Claude Sonnet 5.5 (high)
-    assert sibling_tiers == {"frontier", "near", "left cohort", None}
+    # e.g. GPT-6.1 Sol (xhigh) and (low), Claude Opus 5.5 (xhigh) (retained, O145). The synthetic Claude Sonnet 5.5 (high) is no
+    # sibling of a plotted family here (Sonnet 5.5 is retained only), so no sibling reports the unplotted tier; it is checked below.
+    assert sibling_tiers == {"frontier", "near", "left cohort"}
     rows = model_rows(world)
     # O51: a plotted sibling enters the cohort on its own point; an unplotted one (the synthetic Claude Sonnet 5.5 (high)) does not.
     assert rows["claude-haiku-5-5-low"]["rankingInclusionReasons"] == ["Plotted on or within the near gap of AA's rendered frontier (O51)"]
     assert rows["claude-haiku-5-5-low"]["frontierSelection"] is None and rows["claude-haiku-5-5-low"]["family"] == "Claude Haiku 5.5"
-    assert rows["gpt-6.1-sol-low"]["rankingInclusionReasons"] == ["Plotted on or within the near gap of AA's rendered frontier (O51)"]
+    assert rows["gpt-6.2-sol-low"]["rankingInclusionReasons"] == ["Plotted on or within the near gap of AA's rendered frontier (O51)"]
     assert rows[OFF_COHORT_ID]["rankingInclusionReasons"] == [] and rows[OFF_COHORT_ID]["rankingEligible"] is False
     assert rows[OFF_COHORT_ID]["aaFrontierTier"] is None and rows[OFF_COHORT_ID]["family"] == "Claude Sonnet 5.5"
 
@@ -1313,7 +1314,7 @@ def test_near_family_without_overlap_coverage_still_ranks(world):
     # E278 (reviewer 74 M1): a new cohort family needs a three-stage O71 search that names it on its seller's plans.
     with pytest.raises(ValueError, match=r"no three-stage O71 search names these cohort model and plan cells \(O71, O75\): GPT-5.5 on ChatGPT Plus"):
         run_main(world)
-    edit(world, "routes", lambda document: next(entry for entry in document["evidencePolicy"]["searchLog"] if entry["searchedOn"] == "2026-10-31")["models"].append("GPT-5.5"))
+    edit(world, "routes", lambda document: next(entry for entry in document["evidencePolicy"]["searchLog"] if entry["searchedOn"] == "2026-11-26")["models"].append("GPT-5.5"))
     # O36: without Bug Hunt the near family enters the cohort but is listed, not ranked, once its search is logged.
     with pytest.raises(ValueError, match=r"gpt-5.5: no exhaustive search for (bugHunt|frontierCode|vibeCode|aiCodingDaily)"):
         run_main(world)
@@ -1356,8 +1357,8 @@ def test_a_frontier_family_must_rank_its_highest_rendered_frontier_point(world):
     """E193: a catalog that tracks a lower frontier point of a frontier family fails the build."""
 
     def fn(document):
-        document["models"]["claude-haiku-5-5-high"].update(
-            aaUrl=AA_URL + "claude-haiku-5-5-medium", aaSlug="claude-haiku-5-5-medium", aaVariant="medium")
+        document["models"]["claude-haiku-5-5-medium"].update(
+            aaUrl=AA_URL + "claude-haiku-5-5-low", aaSlug="claude-haiku-5-5-low", aaVariant="low")
     edit(world, "aa", fn)
     with pytest.raises(ValueError, match=r"must rank its highest rendered-frontier point \(E193\): Claude Haiku 5.5"):
         run_main(world)
@@ -1403,14 +1404,14 @@ def test_the_cohort_is_every_plotted_frontier_and_near_configuration(world):
     plotted = {row["sourceUrl"] for row in inventory["rows"] + inventory["nearFrontierRows"]}
     # O145: a configuration that left the frontier and near gap at this release stays a cohort row for one more release.
     retained = {row["sourceUrl"] for row in inventory["retainedRows"]}
-    assert len(retained) == 10 and not retained & plotted
+    assert len(retained) == 14 and not retained & plotted
     for model in model_rows(world).values():
         assert bool(model["rankingInclusionReasons"]) is (model["aaUrl"] in plotted | retained), model["id"]
         if model["aaUrl"] in retained:
             assert model["aaFrontierTier"] == "left cohort", model["id"]
             assert model["rankingInclusionReasons"][0].startswith("Left AA's rendered frontier and near gap at this release"), model["id"]
     rows = model_rows(world)
-    assert len([m for m in rows.values() if m["rankingInclusionReasons"]]) == 37
+    assert len([m for m in rows.values() if m["rankingInclusionReasons"]]) == 45
     assert rows[OFF_COHORT_ID]["rankingStatus"] == "excluded_from_primary_cohort"
     # O53: a cohort row is ranked in each ranking whose full set it has, and listed when it has none.
     assert rows["claude-opus-5-5-high"]["rankingEligible"] is True and rows["claude-opus-5-5-high"]["rankings"] == {"max": False, "aicd": True, "common": True}
@@ -1469,8 +1470,8 @@ def test_bug_hunt_cross_harness_lists_each_harness_at_the_exact_effort():
 
 
 def test_the_build_rejects_a_bug_hunt_record_that_is_not_the_largest_sample(world):
-    edit(world, "bughunt", lambda d: next(item for item in d["models"] if item["modelId"] == "gpt-6-astra").update(sampleN=1))
-    with pytest.raises(ValueError, match=r"gpt-6-astra is not the owner's largest-sample result"):
+    edit(world, "bughunt", lambda d: next(item for item in d["models"] if item["modelId"] == "gpt-6.2-sol").update(sampleN=1))
+    with pytest.raises(ValueError, match=r"gpt-6.2-sol is not the owner's largest-sample result"):
         run_main(world)
 
 
@@ -1545,9 +1546,9 @@ def test_the_legacy_composite_takes_terminal_bench_only_at_the_configurations_ef
     run_main(world)
     rows = model_rows(world)
     assert rows["claude-opus-5-5-xhigh"]["terminalBenchV4"] is None and rows["claude-opus-5-5-xhigh"]["terminalBenchV4Effort"] is None
-    assert rows["claude-opus-5-5"]["terminalBenchV4"] == pytest.approx(0.648)  # Opus 5.5 (max) is exact
+    assert rows["claude-opus-5-5"]["terminalBenchV4"] == pytest.approx(0.658)  # Opus 5.5 (max) is exact
     assert rows["claude-opus-5-5"]["terminalBenchV4Effort"] == "Opus 5.5 (max)"
-    assert rows["gpt-6-astra"]["terminalBenchV4"] == pytest.approx(0.582)  # GPT-6 Astra (max) is exact
+    assert rows["gpt-6-astra"]["terminalBenchV4"] == pytest.approx(0.603)  # GPT-6 Astra (max) is exact
 
 
 def test_bug_hunt_version_suffixes_match_only_registered_aliases():
