@@ -10565,16 +10565,16 @@
           "medium",
           "unstated"
         ],
-        "value": 2502.318924517818,
-        "monthlyUsd": 10843.382006243877,
-        "multiple": 54.216910031219385,
+        "value": 2502.2230116438473,
+        "monthlyUsd": 10842.966383790004,
+        "multiple": 54.21483191895002,
         "range": [
           2000.0,
           2800.0
         ],
         "feasibleRange": [
           2166.666666666667,
-          3141.6
+          3141.12
         ],
         "reports": [
           {
@@ -10785,9 +10785,9 @@
             "id": "gianfrugo-ultra-opus-wk",
             "observer": "gianfrugo",
             "valueLower": 2600.0,
-            "valueUpper": 2618.0,
+            "valueUpper": 2617.6,
             "testLower": 2600.0,
-            "testUpper": 2618.0,
+            "testUpper": 2617.6,
             "partition": 5,
             "provisional": false,
             "speedMode": null,
@@ -10852,7 +10852,7 @@
         ],
         "allReportsBand": [
           2166.666666666667,
-          3141.6
+          3141.12
         ],
         "admittingObservers": [
           "WuM1ha1nho",
@@ -23411,19 +23411,19 @@
         "stratum": "S2",
         "status": "evaluated",
         "agentEffects": {
-          "Pi": -0.47735274377623593,
-          "DeepSeek Harness": 0.35774041323595707,
-          "mini-swe-agent": -0.07986623090765842,
-          "OpenCode": -0.10548604664230556,
-          "Claude Code": -0.0753374555224899,
-          "Muse Code": 0.7019097195122759,
-          "Kimi Code CLI": 0.21544371346000188,
-          "Devin CLI": -0.09539573440702916,
-          "Mistral Vibe": -0.17052953661919876,
-          "Qwen Code": -0.13909662380990237,
           "GitHub Copilot": -0.2490626859111715,
+          "Mistral Vibe": -0.17052953661919876,
+          "DeepSeek Harness": 0.35774041323595707,
+          "Codex": -0.032178497846096075,
+          "OpenCode": -0.10548604664230556,
+          "mini-swe-agent": -0.07986623090765842,
           "Grok Build": 0.14921170923385282,
-          "Codex": -0.032178497846096075
+          "Qwen Code": -0.13909662380990237,
+          "Devin CLI": -0.09539573440702916,
+          "Kimi Code CLI": 0.21544371346000188,
+          "Pi": -0.47735274377623593,
+          "Muse Code": 0.7019097195122759,
+          "Claude Code": -0.0753374555224899
         },
         "rows": {
           "claude-opus-5-5": {
@@ -27121,7 +27121,7 @@
         {
           "key": "planReports",
           "artifact": "data/plan_reports.json",
-          "sha256": "348bd06096f0d3a4af00151e5151e6bc138c4061891be61fdb2c4e08f6352e5f",
+          "sha256": "6d942f199a56a053e44d79c60da2ef60c5532cd5931fa4f422719c1eaafbfee5",
           "capturedAt": "2026-11-24",
           "extractor": "editorial table of every O71 user report with the facts E270 needs; the build derives admission from it (O81)"
         },
@@ -27175,7 +27175,7 @@
           "extractor": "valuerank.value_v3 freeze"
         }
       ],
-      "bundleHash": "4b3ceef3c6aaf7774f6822baa07e45b3bd0ec86ca80ded662919552ff6ea5823",
+      "bundleHash": "ed71d1119854f05d07aeba425d83f248e374b45e07a22bb1eb29e3ae90717dc9",
       "rebuild": "every published output is rebuilt from these artifacts at the pinned publication clock (npm run verify:docs), never from live pages"
     },
     "track": {
@@ -33551,16 +33551,16 @@
             "medium",
             "unstated"
           ],
-          "value": 2502.318924517818,
-          "monthlyUsd": 10843.382006243877,
-          "multiple": 54.216910031219385,
+          "value": 2502.2230116438473,
+          "monthlyUsd": 10842.966383790004,
+          "multiple": 54.21483191895002,
           "range": [
             2000.0,
             2800.0
           ],
           "feasibleRange": [
             2166.666666666667,
-            3141.6
+            3141.12
           ],
           "reports": [
             {
@@ -33771,9 +33771,9 @@
               "id": "gianfrugo-ultra-opus-wk",
               "observer": "gianfrugo",
               "valueLower": 2600.0,
-              "valueUpper": 2618.0,
+              "valueUpper": 2617.6,
               "testLower": 2600.0,
-              "testUpper": 2618.0,
+              "testUpper": 2617.6,
               "partition": 5,
               "provisional": false,
               "speedMode": null,
@@ -33838,7 +33838,7 @@
           ],
           "allReportsBand": [
             2166.666666666667,
-            3141.6
+            3141.12
           ],
           "admittingObservers": [
             "WuM1ha1nho",
@@ -56052,19 +56052,19 @@
           "stratum": "S2",
           "status": "evaluated",
           "agentEffects": {
-            "Pi": -0.47735274377623593,
-            "DeepSeek Harness": 0.35774041323595707,
-            "mini-swe-agent": -0.07986623090765842,
-            "OpenCode": -0.10548604664230556,
-            "Claude Code": -0.0753374555224899,
-            "Muse Code": 0.7019097195122759,
-            "Kimi Code CLI": 0.21544371346000188,
-            "Devin CLI": -0.09539573440702916,
-            "Mistral Vibe": -0.17052953661919876,
-            "Qwen Code": -0.13909662380990237,
             "GitHub Copilot": -0.2490626859111715,
+            "Mistral Vibe": -0.17052953661919876,
+            "DeepSeek Harness": 0.35774041323595707,
+            "Codex": -0.032178497846096075,
+            "OpenCode": -0.10548604664230556,
+            "mini-swe-agent": -0.07986623090765842,
             "Grok Build": 0.14921170923385282,
-            "Codex": -0.032178497846096075
+            "Qwen Code": -0.13909662380990237,
+            "Devin CLI": -0.09539573440702916,
+            "Kimi Code CLI": 0.21544371346000188,
+            "Pi": -0.47735274377623593,
+            "Muse Code": 0.7019097195122759,
+            "Claude Code": -0.0753374555224899
           },
           "rows": {
             "claude-haiku-5-5-high": {
@@ -61784,7 +61784,7 @@
           {
             "key": "planReports",
             "artifact": "data/plan_reports.json",
-            "sha256": "348bd06096f0d3a4af00151e5151e6bc138c4061891be61fdb2c4e08f6352e5f",
+            "sha256": "6d942f199a56a053e44d79c60da2ef60c5532cd5931fa4f422719c1eaafbfee5",
             "capturedAt": "2026-11-24",
             "extractor": "editorial table of every O71 user report with the facts E270 needs; the build derives admission from it (O81)"
           },
@@ -61838,7 +61838,7 @@
             "extractor": "valuerank.value_v3 freeze"
           }
         ],
-        "bundleHash": "4b3ceef3c6aaf7774f6822baa07e45b3bd0ec86ca80ded662919552ff6ea5823",
+        "bundleHash": "ed71d1119854f05d07aeba425d83f248e374b45e07a22bb1eb29e3ae90717dc9",
         "rebuild": "every published output is rebuilt from these artifacts at the pinned publication clock (npm run verify:docs), never from live pages"
       },
       "track": {
@@ -74531,16 +74531,16 @@
             "medium",
             "unstated"
           ],
-          "value": 2502.318924517818,
-          "monthlyUsd": 10843.382006243877,
-          "multiple": 54.216910031219385,
+          "value": 2502.2230116438473,
+          "monthlyUsd": 10842.966383790004,
+          "multiple": 54.21483191895002,
           "range": [
             2000.0,
             2800.0
           ],
           "feasibleRange": [
             2166.666666666667,
-            3141.6
+            3141.12
           ],
           "reports": [
             {
@@ -74751,9 +74751,9 @@
               "id": "gianfrugo-ultra-opus-wk",
               "observer": "gianfrugo",
               "valueLower": 2600.0,
-              "valueUpper": 2618.0,
+              "valueUpper": 2617.6,
               "testLower": 2600.0,
-              "testUpper": 2618.0,
+              "testUpper": 2617.6,
               "partition": 5,
               "provisional": false,
               "speedMode": null,
@@ -74818,7 +74818,7 @@
           ],
           "allReportsBand": [
             2166.666666666667,
-            3141.6
+            3141.12
           ],
           "admittingObservers": [
             "WuM1ha1nho",
@@ -109447,19 +109447,19 @@
           "stratum": "S2",
           "status": "evaluated",
           "agentEffects": {
-            "Pi": -0.47735274377623593,
-            "DeepSeek Harness": 0.35774041323595707,
-            "mini-swe-agent": -0.07986623090765842,
-            "OpenCode": -0.10548604664230556,
-            "Claude Code": -0.0753374555224899,
-            "Muse Code": 0.7019097195122759,
-            "Kimi Code CLI": 0.21544371346000188,
-            "Devin CLI": -0.09539573440702916,
-            "Mistral Vibe": -0.17052953661919876,
-            "Qwen Code": -0.13909662380990237,
             "GitHub Copilot": -0.2490626859111715,
+            "Mistral Vibe": -0.17052953661919876,
+            "DeepSeek Harness": 0.35774041323595707,
+            "Codex": -0.032178497846096075,
+            "OpenCode": -0.10548604664230556,
+            "mini-swe-agent": -0.07986623090765842,
             "Grok Build": 0.14921170923385282,
-            "Codex": -0.032178497846096075
+            "Qwen Code": -0.13909662380990237,
+            "Devin CLI": -0.09539573440702916,
+            "Kimi Code CLI": 0.21544371346000188,
+            "Pi": -0.47735274377623593,
+            "Muse Code": 0.7019097195122759,
+            "Claude Code": -0.0753374555224899
           },
           "rows": {
             "claude-fable-5-2": {
@@ -118456,7 +118456,7 @@
           {
             "key": "planReports",
             "artifact": "data/plan_reports.json",
-            "sha256": "348bd06096f0d3a4af00151e5151e6bc138c4061891be61fdb2c4e08f6352e5f",
+            "sha256": "6d942f199a56a053e44d79c60da2ef60c5532cd5931fa4f422719c1eaafbfee5",
             "capturedAt": "2026-11-24",
             "extractor": "editorial table of every O71 user report with the facts E270 needs; the build derives admission from it (O81)"
           },
@@ -118510,7 +118510,7 @@
             "extractor": "valuerank.value_v3 freeze"
           }
         ],
-        "bundleHash": "4b3ceef3c6aaf7774f6822baa07e45b3bd0ec86ca80ded662919552ff6ea5823",
+        "bundleHash": "ed71d1119854f05d07aeba425d83f248e374b45e07a22bb1eb29e3ae90717dc9",
         "rebuild": "every published output is rebuilt from these artifacts at the pinned publication clock (npm run verify:docs), never from live pages"
       },
       "track": {

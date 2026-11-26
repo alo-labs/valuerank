@@ -64,7 +64,7 @@ def synthetic(tmp_path_factory):
 
     GPT-6 Luna (max), a main-workload row, is moved onto a subset workload (O17), left out of the scenario streams as the
     scenario engine leaves such a row; Claude Sonnet 5.5 has no plan route and falls back to API cost; GPT-6 Astra (max) carries an AA cost
-    caveat; MiMo-V2.6-Flash has a provider-claimed Terminal-Bench 4.0 result and no official row.
+    caveat; MiMo-V2.6-Flash has a provider-claimed Terminal-Bench 4.1 result and no official row.
     """
 
     data = _copy_data(tmp_path_factory.mktemp("synthetic") / "data")

@@ -23,6 +23,7 @@ STAGE3 = ROOT / "research" / "2026-10-25-plan-allowances-sb-deep-research"
 MIMO = ROOT / "research" / "2026-10-23-mimo-token-plans"
 ENTRANTS = ROOT / "research" / "2026-10-31-plan-allowances-v5-entrants"
 NOVEMBER = ROOT / "research" / "2026-11-05-plan-allowances"
+RELEASE = ROOT / "research" / "2026-11-26-plan-allowances"
 
 
 def record_files() -> list[Path]:
@@ -37,6 +38,10 @@ def record_files() -> list[Path]:
     # O185 (2026-11-05): the November search, all three stages.
     files += sorted(NOVEMBER.glob("stage1-*.md")) + sorted((NOVEMBER / "stage2" / "research_notes").rglob("*.md")) + sorted((NOVEMBER / "stage2" / "reports").glob("*.md"))
     files += [NOVEMBER / "stage3-sb-deep-research" / name for name in ("research_report.md", "evidence.jsonl", "sources.jsonl", "decision-record.md")]
+    # O209 (2026-11-26): the release search, all three stages: its report records, change records, stage notes, the stage-3 panel
+    # answers and the byte-exact archive's rendered text.
+    files += [RELEASE / "README.md", RELEASE / "reports.json", RELEASE / "changes.json"] + sorted(RELEASE.glob("stage*/**/*.md"))
+    files += sorted((RELEASE / "archive").rglob("*.md")) + sorted((RELEASE / "archive").rglob("*.json"))
     return files
 
 

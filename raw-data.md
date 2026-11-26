@@ -930,7 +930,7 @@ Each routed row's amount with what it measures, how it was derived and which obj
 
 ## Evidence bundle
 
-Bundle hash `4b3ceef3c6aaf7774f6822baa07e45b3bd0ec86ca80ded662919552ff6ea5823`: every published output is rebuilt from these artifacts at the pinned publication clock (npm run verify:docs), never from live pages.
+Bundle hash `ed71d1119854f05d07aeba425d83f248e374b45e07a22bb1eb29e3ae90717dc9`: every published output is rebuilt from these artifacts at the pinned publication clock (npm run verify:docs), never from live pages.
 
 | Key | Artifact | SHA-256 | Captured | Extractor |
 |---|---|---|---|---|
@@ -949,7 +949,7 @@ Bundle hash `4b3ceef3c6aaf7774f6822baa07e45b3bd0ec86ca80ded662919552ff6ea5823`: 
 | leafEvidence | `data/leaf_evidence.json` | `634150d417abddc730c879ef23fe06a47227752dada50d8cae9baccbd78e44f6` | 2026-11-26 | editorial supplementary leaf evidence and the exhaustive-search log (O36) |
 | cognitionFrontierCode | `data/cognition_frontiercode.json` | `b1901aef26f065b3df1eb95508c13f45e87b003f33f46dda9c11526534d2b5a8` | 2026-11-26 | Cognition's FrontierCode leaderboard data (https://cognition.com/data/frontiercode-leaderboard/data.json), captured unchanged (O37) |
 | sweTracks | `data/swe_tracks.json` | `4bce48b8ef0cb9dcd2e198fbd47e7f58b8d22019ce298ac02a977619ce502cae` | 2026-11-26T13:18:00Z | research/2026-10-23-swe-benchmarks/build_swe_tracks.py from the verified coverage captures (O53-O55) |
-| planReports | `data/plan_reports.json` | `348bd06096f0d3a4af00151e5151e6bc138c4061891be61fdb2c4e08f6352e5f` | 2026-11-24 | editorial table of every O71 user report with the facts E270 needs; the build derives admission from it (O81) |
+| planReports | `data/plan_reports.json` | `6d942f199a56a053e44d79c60da2ef60c5532cd5931fa4f422719c1eaafbfee5` | 2026-11-24 | editorial table of every O71 user report with the facts E270 needs; the build derives admission from it (O81) |
 | aaPreviousCapture | `data/aa/aa_previous_capture.json` | `e3f458870a662e0c7fff03c35cf0dda9f1c3f6728588ff1c836bd420fa726329` | 2026-11-01T05:57:26Z | valuerank.capture_aa: digest of the model-page capture this one replaced (I60) |
 | fallbackPrices | `data/fallback_prices.json` | `3ab915c9d8ad8a357d7dbcc326dd39a2af64e89b5ef312477d68ea3f3cf50ea9` | 2026-11-01T11:59:15Z | editorial capture of the list API prices of AA's named fallback models (O158 sensitivity only) |
 | sourceRereads | `data/source_rereads.json` | `c982efc6c6080bd7b224d5b0e4dd7c92efbd0f6bad9f3630799273b096b4ab95` | 2026-11-26 | editorial record of the O68 re-reads, each 'unchanged' result verified against the re-read file |

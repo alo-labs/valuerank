@@ -1,4 +1,4 @@
-"""Behavior tests for the Terminal-Bench 4.0 normalisation stage (valuerank.build_tb4).
+"""Behavior tests for the Terminal-Bench 4.1 normalisation stage (valuerank.build_tb4).
 
 The stage reads a rendered leaderboard capture plus the AA cohort map and the
 provider-claims file. These tests use the hand-written synthetic copies under
@@ -185,7 +185,7 @@ def test_main_normalises_rows_matches_the_cohort_and_records_capture_provenance(
     document = read_document(output)
     assert document["schemaVersion"] == "valuerank-terminal-bench-v1"
     assert document["version"] == "4.0"
-    assert document["observedAt"] == "2026-11-01T06:10:00Z"
+    assert document["observedAt"] == "2026-11-26T14:00:00Z"
     assert document["source"] == {
         "publisher": "Terminal-Bench / Harbor",
         "targetUrl": "https://www.tbench.ai/leaderboard/terminal-bench/4.0",

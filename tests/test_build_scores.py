@@ -440,7 +440,7 @@ def test_cost_is_api_cost_per_index_point_on_a_log_scale(built):
     assert built["scores.json"]["costMode"] == "aa-per-index-point"
 
 
-DEEPSEEK_CLAIM = {"model": "DeepSeek V4 Flash", "benchmark": "Terminal-Bench 4.0", "sourceUrl": "https://api-docs.deepseek.com/updates/"}
+DEEPSEEK_CLAIM = {"model": "DeepSeek V4 Flash", "benchmark": "Terminal-Bench 4.1", "sourceUrl": "https://api-docs.deepseek.com/updates/"}
 
 
 def test_manifest_and_outputs_list_expected_relative_paths(world, capsys):
@@ -452,7 +452,7 @@ def test_manifest_and_outputs_list_expected_relative_paths(world, capsys):
     manifest = json.loads((world / "data/run_manifest.json").read_text())
     scoring = manifest["scoring"]
     assert scoring["weights"] == json.loads((world / "data/scores.json").read_text())["weights"]
-    assert scoring["observedAt"] == "2026-11-01T06:10:00Z"
+    assert scoring["observedAt"] == "2026-11-26T14:00:00Z"
     # O51: DeepSeek V4 Flash is off the frontier, so no committed claim targets a cohort configuration.
     assert scoring["providerClaimsUsed"] == []
     assert scoring["primaryMissingFields"]
@@ -783,7 +783,7 @@ def test_provider_claim_for_primary_model_is_recorded(world):
     assert row["terminalBenchV4SourceType"] == "model_provider_claim"
     assert row["terminalBenchV4"] == 0.312
     assert out["run_manifest.json"]["scoring"]["providerClaimsUsed"] == [
-        {"model": "MiMo-V2.6-Flash", "benchmark": "Terminal-Bench 4.0", "sourceUrl": "https://example.invalid/claim"}
+        {"model": "MiMo-V2.6-Flash", "benchmark": "Terminal-Bench 4.1", "sourceUrl": "https://example.invalid/claim"}
     ]
 
 

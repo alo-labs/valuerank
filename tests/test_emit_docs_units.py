@@ -215,7 +215,7 @@ def cost_world(**overrides):
 
 def test_cost_diagnostics_markdown_covers_readiness_family_and_subset_bridges():
     text = ed.cost_diagnostics_markdown(cost_world())
-    assert "priced leaves cover 67% of nominal quality weight (Terminal-Bench 4.0 (AA run), AA-LCR v1.1)" in text and "pending components: Coding Agent Index" in text
+    assert "priced leaves cover 67% of nominal quality weight (Terminal-Bench 4.1 (AA run), AA-LCR v1.1)" in text and "pending components: Coding Agent Index" in text
     assert "flagged far from the median ratio: a." in text and "reversals with separated intervals: 1" in text
     assert "have no cost (a); without them (2 rows) the ladder (headline, lower quartile, upper quartile) would be 50.0 / 45.0 / 55.0." in text
     assert ed.costed_ladder_text({"excluded": [], "population": 3, "levels": []}, StubFacts({})).endswith("today every such row has a cost, so the ladder is unchanged.")
@@ -240,7 +240,7 @@ def test_cost_diagnostics_markdown_covers_readiness_family_and_subset_bridges():
             "quality 56.7: 17 can qualify, 5 confirmed; possibly cheapest a, b; quality 60.9: 3 can qualify, 3 confirmed; a confirmed cheapest.") in text
     assert ed.observed_range_text({"status": "unavailable: no bar"}, StubFacts({})).endswith("unavailable: no bar.")
     assert ("- **What would settle the headline bar (E221, not a claim):** rows that can but need not reach quality 56.7, with the mean score their missing leaves would need: "
-            "a 27.3 (FrontierCode 2.0, Terminal-Bench 4.0 (AA run)); b (no missing leaf; reporting precision only).") in text
+            "a 27.3 (FrontierCode 2.0, Terminal-Bench 4.1 (AA run)); b (no missing leaf; reporting precision only).") in text
     assert ed.required_scores_text({"status": "evaluated", "bars": [{"bar": "x", "level": 50.0, "rows": []}]}, StubFacts({})).endswith("no row is open at quality 50.0.")
     assert ed.required_scores_text({"status": "evaluated", "bars": []}, StubFacts({})).endswith("no bar.")
     assert ed.required_scores_text({"status": "unavailable: x", "bars": []}, StubFacts({})).endswith("unavailable: x.")
@@ -687,7 +687,7 @@ def test_workload_cross_check_is_printed_suppressed_or_absent_and_shared_costs_n
             return ", ".join(ids)
 
     assert ed.workload_cross_check_text(Labels, None) == "- **Workload cross-check (E41):** not computed."
-    suppressed = {"benchmark": "Terminal-Bench 4.0", "panel": [], "n": 0, "minRows": 8, "tau": None, "interval": None, "warning": None}
+    suppressed = {"benchmark": "Terminal-Bench 4.1", "panel": [], "n": 0, "minRows": 8, "tau": None, "interval": None, "warning": None}
     assert "suppressed: 0 rows, below the 8-row floor; panel (0): none." in ed.workload_cross_check_text(Labels, suppressed)
     computed = dict(suppressed, panel=["a"], n=9, tau=0.4, interval=None, warning="low agreement")
     assert "τ_b 0.40, low agreement; panel (9): a." in ed.workload_cross_check_text(Labels, computed)

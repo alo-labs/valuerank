@@ -313,10 +313,10 @@ def test_absence_statements_carry_a_marker_whose_claim_holds(tmp_path):
     data = tmp_path / "data"
     shutil.copytree(DATA, data, ignore=shutil.ignore_patterns("site", "*.html"))
     snapshot = json.loads((data / "aa" / "aa_v432_snapshot.json").read_text())
-    snapshot["pages"][0]["model"]["terminalBench40Interval"] = {"lower": 1, "upper": 2}
+    snapshot["pages"][0]["model"]["terminalBench41Interval"] = {"lower": 1, "upper": 2}
     (data / "aa" / "aa_v432_snapshot.json").write_text(json.dumps(snapshot))
     assert f.absence_problems("AA's run publishes no interval{{absent:aa.terminalBenchInterval}}.", data) == [
-        "line 1: absence claim aa.terminalBenchInterval (AA's pages carry no Terminal-Bench 4.0 interval) no longer holds; rewrite the sentence"]
+        "line 1: absence claim aa.terminalBenchInterval (AA's pages carry no Terminal-Bench 4.1 interval) no longer holds; rewrite the sentence"]
     assert not f.ABSENCE_CLAIMS["aa.leafIntervals"][1](data)
 
 

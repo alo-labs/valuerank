@@ -22,7 +22,7 @@ DOCUMENT = {
 
 
 def evidence(track: str) -> dict:
-    page = {"slug": "a-max", "terminalBench40": None}
+    page = {"slug": "a-max", "terminalBench41": None}
     with q.active_track(track):
         return v.leaf_evidence("a", "max", page, [], None, {}, v.track_records({"sweTracks": DOCUMENT}))
 
