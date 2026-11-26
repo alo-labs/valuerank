@@ -1,0 +1,863 @@
+{
+  "schemaVersion": 1,
+  "capturedAt": "2026-11-01T06:03:32.614Z",
+  "rule": "Owner decisions O53-O55: leaves added by the max-effort and AI Coding Daily rankings; exact configuration only (O36), MiMo-V2.6-Pro matched at high by owner statement (O54, E252)",
+  "sources": {
+    "vibeCode": {
+      "benchmark": "Vibe Code Bench v1.1",
+      "publisher": "Vals AI",
+      "updated": "2026-10-29",
+      "url": "https://www.vals.ai/benchmarks/vibe-code",
+      "harness": "OpenHands, the same for every model",
+      "metric": "test-workflow pass rate (percent), with Vals' published standard error",
+      "unit": "percent",
+      "sampling": {
+        "kind": "publishedStandardError"
+      },
+      "capturedAt": "2026-11-01T06:00:09Z"
+    },
+    "codeMigration": {
+      "benchmark": "Code Migration v1.1",
+      "publisher": "Vals AI",
+      "updated": "2026-10-28",
+      "url": "https://www.vals.ai/benchmarks/code-migration-v1-1",
+      "harness": "Pi agent harness, the same for every model",
+      "metric": "hidden-test pass rate (percent), with Vals' published standard error",
+      "unit": "percent",
+      "sampling": {
+        "kind": "publishedStandardError",
+        "tasks": 130
+      },
+      "capturedAt": "2026-11-01T06:00:09Z"
+    },
+    "livebench2Overall": {
+      "benchmark": "LiveBench 2.0 Overall (release 2026-10-25)",
+      "publisher": "LiveBench",
+      "updated": "2026-10-25",
+      "updatedBasis": "the site's displayed release date ('25 October 2026'); the release files' HTTP Last-Modified is 2026-10-30",
+      "url": "https://livebench.ai/data/20261025/table.csv",
+      "harness": "LiveBench's own, one run per model at its top effort",
+      "metric": "LiveBench's weighted Overall of the seven category scores (Long Agentic 2, Coding 1.5, Design 1.5, Reasoning, Browser, Data Analysis and Research 1; O67), 0-100",
+      "unit": "percent",
+      "sampling": {
+        "kind": "categories",
+        "tasks": {
+          "long_agentic": 18,
+          "reasoning": 4,
+          "coding": 29,
+          "browser": 25,
+          "data_analysis": 3,
+          "research": 22,
+          "design": 25
+        }
+      },
+      "capturedAt": "2026-11-01T06:03:32.614Z"
+    },
+    "aiCodingDaily": {
+      "benchmark": "AI Coding Daily LLM Coding Leaderboard (Laravel quality + React-TS quality + edge-case testing, max 60)",
+      "publisher": "AI Coding Daily (Povilas Korop)",
+      "updated": "2026-10-27",
+      "url": "https://aicodingdaily.com/leaderboard",
+      "harness": "varies by model: Claude Code, Codex CLI, OpenCode, Devin, DeepSeek's harness (named on each record)",
+      "metric": "judged points out of 60 (the 10-point bug-finding column is excluded: it overlaps Bug Hunt)",
+      "unit": "points of 60",
+      "sampling": {
+        "kind": "tasks",
+        "tasks": 6,
+        "unit": "graded projects (Laravel, React-TS and 4 edge-case projects)"
+      },
+      "capturedAt": "2026-11-01T06:03:32.614Z"
+    }
+  },
+  "records": [
+    {
+      "modelId": "mimo-v2-6-flash",
+      "leaf": "vibeCode",
+      "value": 78.96,
+      "sourceLabel": "xiaomi/mimo-v2.6-flash",
+      "effort": "enabled (O140)",
+      "locator": "research/2026-11-01-recapture/third-party/vals-catalogue-2026-11-01.json benchmarks[slug=vibe-code].coverage[mimo-v2-6-flash]",
+      "stderr": 4.045,
+      "note": "Owner decision O135 (2026-10-30): AA plots MiMo-V2.6-Flash without an effort; Xiaomi's API documents a single thinking mode (thinking.type enabled/disabled, default enabled; on the Responses API every reasoning.effort other than none enables the same, undifferentiated reasoning), so the configuration is thinking enabled, the default (../../2026-10-30-v5-recapture/third-party/mimo-flash-effort.md; Xiaomi docs re-read 2026-11-01, mimo/). Vals records reasoning, reasoning_effort and compute_effort as null; its MiMo-V2.6-Pro model page (vals/_models/xiaomi_mimo-v2.6-pro.html, read 2026-11-01), in its 2026-09-22 update covering both MiMo V2.6 models, says 'We evaluated them with reasoning enabled' through the official Xiaomi API, so the record is the thinking-enabled configuration (owner decision O149, 2026-11-01)."
+    },
+    {
+      "modelId": "gpt-6.1-sol",
+      "leaf": "vibeCode",
+      "value": 88.931,
+      "sourceLabel": "openai/gpt-6.1-sol",
+      "effort": "max",
+      "locator": "research/2026-11-01-recapture/third-party/vals-catalogue-2026-11-01.json benchmarks[slug=vibe-code].coverage[gpt-6.1-sol]",
+      "stderr": 1.893
+    },
+    {
+      "modelId": "gemini-4-carbon",
+      "leaf": "vibeCode",
+      "value": 89.06,
+      "sourceLabel": "google/gemini-4-carbon",
+      "effort": "high",
+      "locator": "research/2026-11-01-recapture/third-party/vals-catalogue-2026-11-01.json benchmarks[slug=vibe-code].coverage[gemini-4-carbon]",
+      "stderr": 2.294
+    },
+    {
+      "modelId": "gpt-6-luna",
+      "leaf": "vibeCode",
+      "value": 81.649,
+      "sourceLabel": "openai/gpt-6-luna",
+      "effort": "max",
+      "locator": "research/2026-11-01-recapture/third-party/vals-catalogue-2026-11-01.json benchmarks[slug=vibe-code].coverage[gpt-6-luna]",
+      "stderr": 3.377
+    },
+    {
+      "modelId": "gpt-6.1-terra",
+      "leaf": "vibeCode",
+      "value": 83.997,
+      "sourceLabel": "openai/gpt-6.1-terra",
+      "effort": "max",
+      "locator": "research/2026-11-01-recapture/third-party/vals-catalogue-2026-11-01.json benchmarks[slug=vibe-code].coverage[gpt-6.1-terra]",
+      "stderr": 2.865
+    },
+    {
+      "modelId": "gpt-6-astra",
+      "leaf": "vibeCode",
+      "value": 89.594,
+      "sourceLabel": "openai/gpt-6-astra",
+      "effort": "max",
+      "locator": "research/2026-11-01-recapture/third-party/vals-catalogue-2026-11-01.json benchmarks[slug=vibe-code].coverage[gpt-6-astra]",
+      "stderr": 2.174
+    },
+    {
+      "modelId": "claude-sonnet-5-5",
+      "leaf": "vibeCode",
+      "value": 92.392,
+      "sourceLabel": "anthropic/claude-sonnet-5-5",
+      "effort": "max",
+      "locator": "research/2026-11-01-recapture/third-party/vals-catalogue-2026-11-01.json benchmarks[slug=vibe-code].coverage[claude-sonnet-5-5]",
+      "stderr": 1.26,
+      "note": "AA labels this configuration '... with default fallback'; the source has no fallback qualifier (as on 2026-10-25)."
+    },
+    {
+      "modelId": "claude-opus-5-5",
+      "leaf": "vibeCode",
+      "value": 90.294,
+      "sourceLabel": "anthropic/claude-opus-5-5",
+      "effort": "max",
+      "locator": "research/2026-11-01-recapture/third-party/vals-catalogue-2026-11-01.json benchmarks[slug=vibe-code].coverage[claude-opus-5-5]",
+      "stderr": 1.526,
+      "note": "AA labels this configuration '... with default fallback'; the source has no fallback qualifier (as on 2026-10-25)."
+    },
+    {
+      "modelId": "claude-haiku-5-5-max",
+      "leaf": "vibeCode",
+      "value": 90.444,
+      "sourceLabel": "anthropic/claude-haiku-5-5",
+      "effort": "max",
+      "locator": "research/2026-11-01-recapture/third-party/vals-catalogue-2026-11-01.json benchmarks[slug=vibe-code].coverage[claude-haiku-5-5-max]",
+      "stderr": 1.725
+    },
+    {
+      "modelId": "deepseek-v4-1-flash-1017",
+      "leaf": "vibeCode",
+      "value": 87.73,
+      "sourceLabel": "deepseek/deepseek-v4.1-flash-1017",
+      "effort": "max",
+      "locator": "research/2026-11-01-recapture/third-party/vals-catalogue-2026-11-01.json benchmarks[slug=vibe-code].coverage[deepseek-v4-1-flash-1017]",
+      "stderr": 2.752
+    },
+    {
+      "modelId": "gemini-4-argon",
+      "leaf": "vibeCode",
+      "value": 91.906,
+      "sourceLabel": "google/gemini-4-argon",
+      "effort": "high",
+      "locator": "research/2026-11-01-recapture/third-party/vals-catalogue-2026-11-01.json benchmarks[slug=vibe-code].coverage[gemini-4-argon]",
+      "stderr": 1.899
+    },
+    {
+      "modelId": "kimi-k3-1-pro",
+      "leaf": "vibeCode",
+      "value": 84.894,
+      "sourceLabel": "kimi/kimi-k3.1-pro",
+      "effort": "max",
+      "locator": "research/2026-11-01-recapture/third-party/vals-catalogue-2026-11-01.json benchmarks[slug=vibe-code].coverage[kimi-k3-1-pro]",
+      "stderr": 2.949,
+      "note": "Owner decision O66 (2026-10-25): AA plots Kimi K3.1 Pro without an effort; Moonshot's API documents reasoning_effort low / high / max with max the default, so its configuration is taken at max, its maximum effort."
+    },
+    {
+      "modelId": "mimo-v2-6-pro",
+      "leaf": "vibeCode",
+      "value": 85.223,
+      "sourceLabel": "xiaomi/mimo-v2.6-pro",
+      "effort": "enabled (high, O54)",
+      "locator": "research/2026-11-01-recapture/third-party/vals-catalogue-2026-11-01.json benchmarks[slug=vibe-code].coverage[mimo-v2-6-pro]",
+      "stderr": 3.392,
+      "note": "Owner decision O54 / E252: AA plots MiMo-V2.6-Pro without an effort; Xiaomi documents one thinking mode for mimo-v2.6-pro (thinking.type enabled/disabled, default enabled; re-read 2026-11-01, mimo/), so the configuration is thinking enabled, which the owner labels high: a source row labelled high, or stating reasoning enabled, is that configuration. Vals records reasoning, reasoning_effort and compute_effort as null; its model page (read 2026-11-01) says of MiMo V2.6 Pro and Flash 'We evaluated them with reasoning enabled' through the official Xiaomi API (2026-09-22 update)."
+    },
+    {
+      "modelId": "minimax-m3-1-flash",
+      "leaf": "vibeCode",
+      "value": 73.944,
+      "sourceLabel": "minimax/MiniMax-M3.1-flash",
+      "effort": "max",
+      "locator": "research/2026-11-01-recapture/third-party/vals-catalogue-2026-11-01.json benchmarks[slug=vibe-code].coverage[minimax-m3-1-flash]",
+      "stderr": 4.249,
+      "note": "Owner decision O135 (2026-10-30) applied to MiniMax-M3.1-Flash: AA plots it without an effort; MiniMax's API documents reasoning_effort / output_config.effort low, medium, high, xhigh, max with max the default when omitted, and thinking cannot be disabled (minimax-effort.md, read 2026-11-01), so the configuration is max. The owner confirmed it at max (owner decision O148, 2026-11-01), as O140 did for MiMo-V2.6-Flash. Vals' model page (read 2026-11-01): run 'via the official MiniMax API at temperature 1, top_p 0.95, compute effort max'."
+    },
+    {
+      "modelId": "mimo-v2-6-flash",
+      "leaf": "codeMigration",
+      "value": 39.552,
+      "sourceLabel": "xiaomi/mimo-v2.6-flash",
+      "effort": "enabled (O140)",
+      "locator": "research/2026-11-01-recapture/third-party/vals-catalogue-2026-11-01.json benchmarks[slug=code-migration-v1-1].coverage[mimo-v2-6-flash]",
+      "stderr": 3.537,
+      "note": "Owner decision O135 (2026-10-30): AA plots MiMo-V2.6-Flash without an effort; Xiaomi's API documents a single thinking mode (thinking.type enabled/disabled, default enabled; on the Responses API every reasoning.effort other than none enables the same, undifferentiated reasoning), so the configuration is thinking enabled, the default (../../2026-10-30-v5-recapture/third-party/mimo-flash-effort.md; Xiaomi docs re-read 2026-11-01, mimo/). Vals records reasoning, reasoning_effort and compute_effort as null; its MiMo-V2.6-Pro model page (vals/_models/xiaomi_mimo-v2.6-pro.html, read 2026-11-01), in its 2026-09-22 update covering both MiMo V2.6 models, says 'We evaluated them with reasoning enabled' through the official Xiaomi API, so the record is the thinking-enabled configuration (owner decision O149, 2026-11-01)."
+    },
+    {
+      "modelId": "gpt-6.1-sol",
+      "leaf": "codeMigration",
+      "value": 77.324,
+      "sourceLabel": "openai/gpt-6.1-sol",
+      "effort": "max",
+      "locator": "research/2026-11-01-recapture/third-party/vals-catalogue-2026-11-01.json benchmarks[slug=code-migration-v1-1].coverage[gpt-6.1-sol]",
+      "stderr": 2.976
+    },
+    {
+      "modelId": "gpt-6-luna",
+      "leaf": "codeMigration",
+      "value": 46.669,
+      "sourceLabel": "openai/gpt-6-luna",
+      "effort": "max",
+      "locator": "research/2026-11-01-recapture/third-party/vals-catalogue-2026-11-01.json benchmarks[slug=code-migration-v1-1].coverage[gpt-6-luna]",
+      "stderr": 3.613
+    },
+    {
+      "modelId": "gpt-6-astra",
+      "leaf": "codeMigration",
+      "value": 80.579,
+      "sourceLabel": "openai/gpt-6-astra",
+      "effort": "max",
+      "locator": "research/2026-11-01-recapture/third-party/vals-catalogue-2026-11-01.json benchmarks[slug=code-migration-v1-1].coverage[gpt-6-astra]",
+      "stderr": 2.336
+    },
+    {
+      "modelId": "claude-sonnet-5-5",
+      "leaf": "codeMigration",
+      "value": 86.875,
+      "sourceLabel": "anthropic/claude-sonnet-5-5",
+      "effort": "max",
+      "locator": "research/2026-11-01-recapture/third-party/vals-catalogue-2026-11-01.json benchmarks[slug=code-migration-v1-1].coverage[claude-sonnet-5-5]",
+      "stderr": 1.521,
+      "note": "AA labels this configuration '... with default fallback'; the source has no fallback qualifier (as on 2026-10-25)."
+    },
+    {
+      "modelId": "claude-opus-5-5",
+      "leaf": "codeMigration",
+      "value": 81.012,
+      "sourceLabel": "anthropic/claude-opus-5-5",
+      "effort": "max",
+      "locator": "research/2026-11-01-recapture/third-party/vals-catalogue-2026-11-01.json benchmarks[slug=code-migration-v1-1].coverage[claude-opus-5-5]",
+      "stderr": 3.207,
+      "note": "AA labels this configuration '... with default fallback'; the source has no fallback qualifier (as on 2026-10-25)."
+    },
+    {
+      "modelId": "claude-haiku-5-5-max",
+      "leaf": "codeMigration",
+      "value": 52.36,
+      "sourceLabel": "anthropic/claude-haiku-5-5",
+      "effort": "max",
+      "locator": "research/2026-11-01-recapture/third-party/vals-catalogue-2026-11-01.json benchmarks[slug=code-migration-v1-1].coverage[claude-haiku-5-5-max]",
+      "stderr": 3.489
+    },
+    {
+      "modelId": "deepseek-v4-1-flash-1017",
+      "leaf": "codeMigration",
+      "value": 67.524,
+      "sourceLabel": "deepseek/deepseek-v4.1-flash-1017",
+      "effort": "max",
+      "locator": "research/2026-11-01-recapture/third-party/vals-catalogue-2026-11-01.json benchmarks[slug=code-migration-v1-1].coverage[deepseek-v4-1-flash-1017]",
+      "stderr": 2.763
+    },
+    {
+      "modelId": "gemini-4-argon",
+      "leaf": "codeMigration",
+      "value": 70.796,
+      "sourceLabel": "google/gemini-4-argon",
+      "effort": "high",
+      "locator": "research/2026-11-01-recapture/third-party/vals-catalogue-2026-11-01.json benchmarks[slug=code-migration-v1-1].coverage[gemini-4-argon]",
+      "stderr": 3.723
+    },
+    {
+      "modelId": "mimo-v2-6-pro",
+      "leaf": "codeMigration",
+      "value": 48.786,
+      "sourceLabel": "xiaomi/mimo-v2.6-pro",
+      "effort": "enabled (high, O54)",
+      "locator": "research/2026-11-01-recapture/third-party/vals-catalogue-2026-11-01.json benchmarks[slug=code-migration-v1-1].coverage[mimo-v2-6-pro]",
+      "stderr": 3.876,
+      "note": "Owner decision O54 / E252: AA plots MiMo-V2.6-Pro without an effort; Xiaomi documents one thinking mode for mimo-v2.6-pro (thinking.type enabled/disabled, default enabled; re-read 2026-11-01, mimo/), so the configuration is thinking enabled, which the owner labels high: a source row labelled high, or stating reasoning enabled, is that configuration. Vals records reasoning, reasoning_effort and compute_effort as null; its model page (read 2026-11-01) says of MiMo V2.6 Pro and Flash 'We evaluated them with reasoning enabled' through the official Xiaomi API (2026-09-22 update)."
+    },
+    {
+      "modelId": "gpt-6.1-sol",
+      "leaf": "livebench2Overall",
+      "value": 84.07,
+      "sourceLabel": "gpt-6.1-sol",
+      "effort": "max",
+      "locator": "research/2026-11-01-recapture/third-party/coverage-2026-11-01.json benchmarks[key=livebench2-overall].coverage[gpt-6.1-sol]",
+      "categories": {
+        "long_agentic": 68.7,
+        "reasoning": 92.6,
+        "coding": 96.0,
+        "browser": 93.3,
+        "data_analysis": 82.7,
+        "research": 83.5,
+        "design": 82.1
+      },
+      "weights": {
+        "long_agentic": 2.0,
+        "reasoning": 1.0,
+        "coding": 1.5,
+        "browser": 1.0,
+        "data_analysis": 1.0,
+        "research": 1.0,
+        "design": 1.5
+      }
+    },
+    {
+      "modelId": "gpt-6-luna",
+      "leaf": "livebench2Overall",
+      "value": 64.59,
+      "sourceLabel": "gpt-6-luna",
+      "effort": "max",
+      "locator": "research/2026-11-01-recapture/third-party/coverage-2026-11-01.json benchmarks[key=livebench2-overall].coverage[gpt-6-luna]",
+      "categories": {
+        "long_agentic": 30.9,
+        "reasoning": 81.8,
+        "coding": 84.5,
+        "browser": 70.3,
+        "data_analysis": 73.4,
+        "research": 43.5,
+        "design": 82.5
+      },
+      "weights": {
+        "long_agentic": 2.0,
+        "reasoning": 1.0,
+        "coding": 1.5,
+        "browser": 1.0,
+        "data_analysis": 1.0,
+        "research": 1.0,
+        "design": 1.5
+      }
+    },
+    {
+      "modelId": "gpt-6.1-terra",
+      "leaf": "livebench2Overall",
+      "value": 77.79,
+      "sourceLabel": "gpt-6.1-terra",
+      "effort": "max",
+      "locator": "research/2026-11-01-recapture/third-party/coverage-2026-11-01.json benchmarks[key=livebench2-overall].coverage[gpt-6.1-terra]",
+      "categories": {
+        "long_agentic": 48.6,
+        "reasoning": 88.7,
+        "coding": 94.3,
+        "browser": 93.1,
+        "data_analysis": 82.3,
+        "research": 73.9,
+        "design": 82.3
+      },
+      "weights": {
+        "long_agentic": 2.0,
+        "reasoning": 1.0,
+        "coding": 1.5,
+        "browser": 1.0,
+        "data_analysis": 1.0,
+        "research": 1.0,
+        "design": 1.5
+      }
+    },
+    {
+      "modelId": "gpt-6-astra",
+      "leaf": "livebench2Overall",
+      "value": 85.64,
+      "sourceLabel": "gpt-6-astra",
+      "effort": "max",
+      "locator": "research/2026-11-01-recapture/third-party/coverage-2026-11-01.json benchmarks[key=livebench2-overall].coverage[gpt-6-astra]",
+      "categories": {
+        "long_agentic": 77.5,
+        "reasoning": 92.7,
+        "coding": 93.7,
+        "browser": 91.3,
+        "data_analysis": 83.0,
+        "research": 85.2,
+        "design": 82.0
+      },
+      "weights": {
+        "long_agentic": 2.0,
+        "reasoning": 1.0,
+        "coding": 1.5,
+        "browser": 1.0,
+        "data_analysis": 1.0,
+        "research": 1.0,
+        "design": 1.5
+      }
+    },
+    {
+      "modelId": "claude-sonnet-5-5",
+      "leaf": "livebench2Overall",
+      "value": 80.04,
+      "sourceLabel": "claude-sonnet-5.5",
+      "effort": "max",
+      "locator": "research/2026-11-01-recapture/third-party/coverage-2026-11-01.json benchmarks[key=livebench2-overall].coverage[claude-sonnet-5-5]",
+      "categories": {
+        "long_agentic": 63.4,
+        "reasoning": 91.6,
+        "coding": 94.7,
+        "browser": 89.3,
+        "data_analysis": 59.5,
+        "research": 83.6,
+        "design": 85.0
+      },
+      "weights": {
+        "long_agentic": 2.0,
+        "reasoning": 1.0,
+        "coding": 1.5,
+        "browser": 1.0,
+        "data_analysis": 1.0,
+        "research": 1.0,
+        "design": 1.5
+      },
+      "note": "AA labels this configuration '... with default fallback'; the source has no fallback qualifier (as on 2026-10-25)."
+    },
+    {
+      "modelId": "claude-opus-5-5",
+      "leaf": "livebench2Overall",
+      "value": 85.14,
+      "sourceLabel": "claude-opus-5.5",
+      "effort": "max",
+      "locator": "research/2026-11-01-recapture/third-party/coverage-2026-11-01.json benchmarks[key=livebench2-overall].coverage[claude-opus-5-5]",
+      "categories": {
+        "long_agentic": 72.8,
+        "reasoning": 92.2,
+        "coding": 96.3,
+        "browser": 88.4,
+        "data_analysis": 80.3,
+        "research": 85.0,
+        "design": 86.9
+      },
+      "weights": {
+        "long_agentic": 2.0,
+        "reasoning": 1.0,
+        "coding": 1.5,
+        "browser": 1.0,
+        "data_analysis": 1.0,
+        "research": 1.0,
+        "design": 1.5
+      },
+      "note": "AA labels this configuration '... with default fallback'; the source has no fallback qualifier (as on 2026-10-25)."
+    },
+    {
+      "modelId": "claude-haiku-5-5-max",
+      "leaf": "livebench2Overall",
+      "value": 69.85,
+      "sourceLabel": "claude-haiku-5.5",
+      "effort": "max",
+      "locator": "research/2026-11-01-recapture/third-party/coverage-2026-11-01.json benchmarks[key=livebench2-overall].coverage[claude-haiku-5-5-max]",
+      "categories": {
+        "long_agentic": 40.0,
+        "reasoning": 82.4,
+        "coding": 91.4,
+        "browser": 69.5,
+        "data_analysis": 53.1,
+        "research": 81.9,
+        "design": 83.1
+      },
+      "weights": {
+        "long_agentic": 2.0,
+        "reasoning": 1.0,
+        "coding": 1.5,
+        "browser": 1.0,
+        "data_analysis": 1.0,
+        "research": 1.0,
+        "design": 1.5
+      }
+    },
+    {
+      "modelId": "deepseek-v4-1-flash-1017",
+      "leaf": "livebench2Overall",
+      "value": 72.87,
+      "sourceLabel": "deepseek-v4.1-flash-1017",
+      "effort": "max",
+      "locator": "research/2026-11-01-recapture/third-party/coverage-2026-11-01.json benchmarks[key=livebench2-overall].coverage[deepseek-v4-1-flash-1017]",
+      "categories": {
+        "long_agentic": 35.7,
+        "reasoning": 89.1,
+        "coding": 96.0,
+        "browser": 67.2,
+        "data_analysis": 79.5,
+        "research": 79.5,
+        "design": 83.4
+      },
+      "weights": {
+        "long_agentic": 2.0,
+        "reasoning": 1.0,
+        "coding": 1.5,
+        "browser": 1.0,
+        "data_analysis": 1.0,
+        "research": 1.0,
+        "design": 1.5
+      },
+      "note": "Release 20261025 was edited in place after the 2026-10-30 read: long_agentic 40.9 -> 35.7 (Overall 74.02 -> 72.87)."
+    },
+    {
+      "modelId": "gemini-4-argon",
+      "leaf": "livebench2Overall",
+      "value": 79.3,
+      "sourceLabel": "gemini-4-argon",
+      "effort": "high",
+      "locator": "research/2026-11-01-recapture/third-party/coverage-2026-11-01.json benchmarks[key=livebench2-overall].coverage[gemini-4-argon]",
+      "categories": {
+        "long_agentic": 61.2,
+        "reasoning": 95.1,
+        "coding": 89.7,
+        "browser": 82.8,
+        "data_analysis": 85.2,
+        "research": 83.1,
+        "design": 73.7
+      },
+      "weights": {
+        "long_agentic": 2.0,
+        "reasoning": 1.0,
+        "coding": 1.5,
+        "browser": 1.0,
+        "data_analysis": 1.0,
+        "research": 1.0,
+        "design": 1.5
+      }
+    },
+    {
+      "modelId": "kimi-k3-1-pro",
+      "leaf": "livebench2Overall",
+      "value": 71.29,
+      "sourceLabel": "kimi-k3.1-pro",
+      "effort": "max",
+      "locator": "research/2026-11-01-recapture/third-party/coverage-2026-11-01.json benchmarks[key=livebench2-overall].coverage[kimi-k3-1-pro]",
+      "categories": {
+        "long_agentic": 39.1,
+        "reasoning": 91.1,
+        "coding": 81.8,
+        "browser": 75.9,
+        "data_analysis": 79.1,
+        "research": 77.9,
+        "design": 77.8
+      },
+      "weights": {
+        "long_agentic": 2.0,
+        "reasoning": 1.0,
+        "coding": 1.5,
+        "browser": 1.0,
+        "data_analysis": 1.0,
+        "research": 1.0,
+        "design": 1.5
+      },
+      "note": "Owner decision O66 (2026-10-25): AA plots Kimi K3.1 Pro without an effort; Moonshot's API documents reasoning_effort low / high / max with max the default, so its configuration is taken at max, its maximum effort."
+    },
+    {
+      "modelId": "mimo-v2-6-pro",
+      "leaf": "livebench2Overall",
+      "value": 68.48,
+      "sourceLabel": "mimo-v2.6-pro",
+      "effort": "high",
+      "locator": "research/2026-11-01-recapture/third-party/coverage-2026-11-01.json benchmarks[key=livebench2-overall].coverage[mimo-v2-6-pro]",
+      "categories": {
+        "long_agentic": 35.2,
+        "reasoning": 79.6,
+        "coding": 81.5,
+        "browser": 77.3,
+        "data_analysis": 72.3,
+        "research": 76.7,
+        "design": 78.5
+      },
+      "weights": {
+        "long_agentic": 2.0,
+        "reasoning": 1.0,
+        "coding": 1.5,
+        "browser": 1.0,
+        "data_analysis": 1.0,
+        "research": 1.0,
+        "design": 1.5
+      },
+      "note": "Owner decision O54 / E252: AA plots MiMo-V2.6-Pro without an effort; Xiaomi documents one thinking mode for mimo-v2.6-pro (thinking.type enabled/disabled, default enabled; re-read 2026-11-01, mimo/), so the configuration is thinking enabled, which the owner labels high: a source row labelled high, or stating reasoning enabled, is that configuration."
+    },
+    {
+      "modelId": "minimax-m3-1-flash",
+      "leaf": "livebench2Overall",
+      "value": 66.89,
+      "sourceLabel": "minimax-m3.1-flash",
+      "effort": "max",
+      "locator": "research/2026-11-01-recapture/third-party/coverage-2026-11-01.json benchmarks[key=livebench2-overall].coverage[minimax-m3-1-flash]",
+      "categories": {
+        "long_agentic": 28.8,
+        "reasoning": 82.9,
+        "coding": 83.9,
+        "browser": 80.6,
+        "data_analysis": 71.4,
+        "research": 72.7,
+        "design": 74.0
+      },
+      "weights": {
+        "long_agentic": 2.0,
+        "reasoning": 1.0,
+        "coding": 1.5,
+        "browser": 1.0,
+        "data_analysis": 1.0,
+        "research": 1.0,
+        "design": 1.5
+      },
+      "note": "Owner decision O135 (2026-10-30) applied to MiniMax-M3.1-Flash: AA plots it without an effort; MiniMax's API documents reasoning_effort / output_config.effort low, medium, high, xhigh, max with max the default when omitted, and thinking cannot be disabled (minimax-effort.md, read 2026-11-01), so the configuration is max. The owner confirmed it at max (owner decision O148, 2026-11-01), as O140 did for MiMo-V2.6-Flash."
+    },
+    {
+      "modelId": "gpt-6-luna-medium",
+      "leaf": "aiCodingDaily",
+      "value": 40.2,
+      "sourceLabel": "GPT-6-Luna (Medium)",
+      "effort": "medium",
+      "locator": "research/2026-11-01-recapture/third-party/coverage-2026-11-01.json benchmarks[key=aicd].coverage[gpt-6-luna-medium]",
+      "harness": "Codex CLI",
+      "tested": "2026-09-30"
+    },
+    {
+      "modelId": "gpt-6-luna-high",
+      "leaf": "aiCodingDaily",
+      "value": 47.73,
+      "sourceLabel": "GPT-6-Luna (High)",
+      "effort": "high",
+      "locator": "research/2026-11-01-recapture/third-party/coverage-2026-11-01.json benchmarks[key=aicd].coverage[gpt-6-luna-high]",
+      "harness": "Codex CLI",
+      "tested": "2026-10-01"
+    },
+    {
+      "modelId": "claude-haiku-5-5-medium",
+      "leaf": "aiCodingDaily",
+      "value": 51.32,
+      "sourceLabel": "Haiku 5.5 (Medium)",
+      "effort": "medium",
+      "locator": "research/2026-11-01-recapture/third-party/coverage-2026-11-01.json benchmarks[key=aicd].coverage[claude-haiku-5-5-medium]",
+      "harness": "Claude Code",
+      "tested": "2026-10-08"
+    },
+    {
+      "modelId": "mimo-v2-6-flash",
+      "leaf": "aiCodingDaily",
+      "value": 45.48,
+      "sourceLabel": "MiMo-V2.6 Flash (High)",
+      "effort": "high",
+      "locator": "research/2026-11-01-recapture/third-party/coverage-2026-11-01.json benchmarks[key=aicd].coverage[mimo-v2-6-flash]",
+      "note": "Owner decision O135 (2026-10-30): AA plots MiMo-V2.6-Flash without an effort; Xiaomi's API documents a single thinking mode (thinking.type enabled/disabled, default enabled; on the Responses API every reasoning.effort other than none enables the same, undifferentiated reasoning), so the configuration is thinking enabled, the default (../../2026-10-30-v5-recapture/third-party/mimo-flash-effort.md; Xiaomi docs re-read 2026-11-01, mimo/). The board's only MiMo-V2.6-Flash row is labelled High; Xiaomi documents every enabled level as the same reasoning ('Values xhigh, max and ultra are mapped to high'), so the High row is the documented default configuration (thinking enabled). The row does not name the provider route behind OpenCode.",
+      "harness": "OpenCode",
+      "tested": "2026-10-02"
+    },
+    {
+      "modelId": "claude-haiku-5-5-high",
+      "leaf": "aiCodingDaily",
+      "value": 51.55,
+      "sourceLabel": "Haiku 5.5 (High)",
+      "effort": "high",
+      "locator": "research/2026-11-01-recapture/third-party/coverage-2026-11-01.json benchmarks[key=aicd].coverage[claude-haiku-5-5-high]",
+      "harness": "Claude Code",
+      "tested": "2026-10-08"
+    },
+    {
+      "modelId": "gpt-6.1-terra-medium",
+      "leaf": "aiCodingDaily",
+      "value": 46.9,
+      "sourceLabel": "GPT-6.1-Terra (Medium)",
+      "effort": "medium",
+      "locator": "research/2026-11-01-recapture/third-party/coverage-2026-11-01.json benchmarks[key=aicd].coverage[gpt-6.1-terra-medium]",
+      "harness": "Codex CLI",
+      "tested": "2026-10-26"
+    },
+    {
+      "modelId": "gpt-6.1-terra-high",
+      "leaf": "aiCodingDaily",
+      "value": 46.69,
+      "sourceLabel": "GPT-6.1-Terra (High)",
+      "effort": "high",
+      "locator": "research/2026-11-01-recapture/third-party/coverage-2026-11-01.json benchmarks[key=aicd].coverage[gpt-6.1-terra-high]",
+      "harness": "Codex CLI",
+      "tested": "2026-10-26"
+    },
+    {
+      "modelId": "gpt-6.1-sol-medium",
+      "leaf": "aiCodingDaily",
+      "value": 55.67,
+      "sourceLabel": "GPT-6.1-Sol (Medium)",
+      "effort": "medium",
+      "locator": "research/2026-11-01-recapture/third-party/coverage-2026-11-01.json benchmarks[key=aicd].coverage[gpt-6.1-sol-medium]",
+      "harness": "Codex CLI",
+      "tested": "2026-10-19"
+    },
+    {
+      "modelId": "gpt-6.1-sol-high",
+      "leaf": "aiCodingDaily",
+      "value": 56.83,
+      "sourceLabel": "GPT-6.1-Sol (High)",
+      "effort": "high",
+      "locator": "research/2026-11-01-recapture/third-party/coverage-2026-11-01.json benchmarks[key=aicd].coverage[gpt-6.1-sol-high]",
+      "harness": "Codex CLI",
+      "tested": "2026-10-19"
+    },
+    {
+      "modelId": "gpt-6-astra-high",
+      "leaf": "aiCodingDaily",
+      "value": 56.77,
+      "sourceLabel": "GPT-6-Astra (High)",
+      "effort": "high",
+      "locator": "research/2026-11-01-recapture/third-party/coverage-2026-11-01.json benchmarks[key=aicd].coverage[gpt-6-astra-high]",
+      "harness": "Codex CLI",
+      "tested": "2026-10-01"
+    },
+    {
+      "modelId": "gpt-6-luna-xhigh",
+      "leaf": "aiCodingDaily",
+      "value": 49.94,
+      "sourceLabel": "GPT-6-Luna (Xhigh)",
+      "effort": "xhigh",
+      "locator": "research/2026-11-01-recapture/third-party/coverage-2026-11-01.json benchmarks[key=aicd].coverage[gpt-6-luna-xhigh]",
+      "harness": "Codex CLI",
+      "tested": "2026-10-01"
+    },
+    {
+      "modelId": "gpt-6-luna",
+      "leaf": "aiCodingDaily",
+      "value": 51.99,
+      "sourceLabel": "GPT-6-Luna (Max)",
+      "effort": "max",
+      "locator": "research/2026-11-01-recapture/third-party/coverage-2026-11-01.json benchmarks[key=aicd].coverage[gpt-6-luna]",
+      "harness": "Codex CLI",
+      "tested": "2026-10-01"
+    },
+    {
+      "modelId": "gpt-6.1-sol-low",
+      "leaf": "aiCodingDaily",
+      "value": 52.7,
+      "sourceLabel": "GPT-6.1-Sol (Low)",
+      "effort": "low",
+      "locator": "research/2026-11-01-recapture/third-party/coverage-2026-11-01.json benchmarks[key=aicd].coverage[gpt-6.1-sol-low]",
+      "harness": "Codex CLI",
+      "tested": "2026-10-19"
+    },
+    {
+      "modelId": "gpt-6.1-terra-xhigh",
+      "leaf": "aiCodingDaily",
+      "value": 48.13,
+      "sourceLabel": "GPT-6.1-Terra (Xhigh)",
+      "effort": "xhigh",
+      "locator": "research/2026-11-01-recapture/third-party/coverage-2026-11-01.json benchmarks[key=aicd].coverage[gpt-6.1-terra-xhigh]",
+      "harness": "Codex CLI",
+      "tested": "2026-10-27"
+    },
+    {
+      "modelId": "gpt-6.1-terra",
+      "leaf": "aiCodingDaily",
+      "value": 52.49,
+      "sourceLabel": "GPT-6.1-Terra (Max)",
+      "effort": "max",
+      "locator": "research/2026-11-01-recapture/third-party/coverage-2026-11-01.json benchmarks[key=aicd].coverage[gpt-6.1-terra]",
+      "harness": "Codex CLI",
+      "tested": "2026-10-27"
+    },
+    {
+      "modelId": "claude-opus-5-5-high",
+      "leaf": "aiCodingDaily",
+      "value": 57.68,
+      "sourceLabel": "Opus 5.5 (High)",
+      "effort": "high",
+      "locator": "research/2026-11-01-recapture/third-party/coverage-2026-11-01.json benchmarks[key=aicd].coverage[claude-opus-5-5-high]",
+      "note": "AA labels this configuration '... with default fallback'; the source has no fallback qualifier (as on 2026-10-25).",
+      "harness": "Claude Code",
+      "tested": "2026-10-20"
+    },
+    {
+      "modelId": "claude-opus-5-5-medium",
+      "leaf": "aiCodingDaily",
+      "value": 56.95,
+      "sourceLabel": "Opus 5.5 (Medium)",
+      "effort": "medium",
+      "locator": "research/2026-11-01-recapture/third-party/coverage-2026-11-01.json benchmarks[key=aicd].coverage[claude-opus-5-5-medium]",
+      "harness": "Claude Code",
+      "tested": "2026-10-19"
+    },
+    {
+      "modelId": "deepseek-v4-1-flash-1017",
+      "leaf": "aiCodingDaily",
+      "value": 52.24,
+      "sourceLabel": "Deepseek-V4.1-Flash-1017 (Max)",
+      "effort": "max",
+      "locator": "research/2026-11-01-recapture/third-party/coverage-2026-11-01.json benchmarks[key=aicd].coverage[deepseek-v4-1-flash-1017]",
+      "harness": "DeepSeek Harness",
+      "tested": "2026-10-18",
+      "selection": "one of 2 rows for this configuration, chosen by the harness of its Bug Hunt record (I50 M2)",
+      "alternates": [
+        {
+          "harness": "OpenCode",
+          "tested": "2026-10-17",
+          "value": 52.84
+        }
+      ],
+      "note": "Tested 2026-10-18 with DeepSeek Harness; one of 2 rows for this configuration, chosen by the harness of its Bug Hunt record (I50 M2); the other rows are listed under alternates."
+    },
+    {
+      "modelId": "gemini-4-argon",
+      "leaf": "aiCodingDaily",
+      "value": 49.9,
+      "sourceLabel": "Gemini 4 Argon (High)",
+      "effort": "high",
+      "locator": "research/2026-11-01-recapture/third-party/coverage-2026-11-01.json benchmarks[key=aicd].coverage[gemini-4-argon]",
+      "harness": "Devin",
+      "tested": "2026-10-14"
+    },
+    {
+      "modelId": "gpt-5.6-luna-low",
+      "leaf": "aiCodingDaily",
+      "value": 30.51,
+      "sourceLabel": "GPT-5.6-Luna (Low)",
+      "effort": "low",
+      "locator": "research/2026-11-01-recapture/third-party/coverage-2026-11-01.json benchmarks[key=aicd].coverage[gpt-5.6-luna-low]",
+      "note": "Tested 2026-09-12, before the Bug Finding project was added (2026-10-03): the listed total 30.51 is out of 60 (Laravel + React-TS + Edge-case), so no /70 total or bug-finding score exists; the non-bug leaf is exact. Row is hidden by default as an older LLM.",
+      "harness": "Codex CLI",
+      "tested": "2026-09-12"
+    },
+    {
+      "modelId": "kimi-k3-1-pro",
+      "leaf": "aiCodingDaily",
+      "value": 54.63,
+      "sourceLabel": "Kimi K3.1 Pro (Max)",
+      "effort": "max",
+      "locator": "research/2026-11-01-recapture/third-party/coverage-2026-11-01.json benchmarks[key=aicd].coverage[kimi-k3-1-pro]",
+      "note": "Owner decision O66 (2026-10-25): AA plots Kimi K3.1 Pro without an effort; Moonshot's API documents reasoning_effort low / high / max with max the default, so its configuration is taken at max, its maximum effort.",
+      "harness": "OpenCode",
+      "tested": "2026-10-25"
+    },
+    {
+      "modelId": "mimo-v2-6-pro",
+      "leaf": "aiCodingDaily",
+      "value": 47.56,
+      "sourceLabel": "MiMo-V2.6 Pro (High)",
+      "effort": "high",
+      "locator": "research/2026-11-01-recapture/third-party/coverage-2026-11-01.json benchmarks[key=aicd].coverage[mimo-v2-6-pro]",
+      "note": "Owner decision O54 / E252: AA plots MiMo-V2.6-Pro without an effort; Xiaomi documents one thinking mode for mimo-v2.6-pro (thinking.type enabled/disabled, default enabled; re-read 2026-11-01, mimo/), so the configuration is thinking enabled, which the owner labels high: a source row labelled high, or stating reasoning enabled, is that configuration. The board's only MiMo-V2.6-Pro row is labelled High.",
+      "harness": "OpenCode",
+      "tested": "2026-10-02"
+    },
+    {
+      "modelId": "minimax-m3-1-flash",
+      "leaf": "aiCodingDaily",
+      "value": 49.69,
+      "sourceLabel": "MiniMax M3.1-Flash (Max)",
+      "effort": "max",
+      "locator": "research/2026-11-01-recapture/third-party/coverage-2026-11-01.json benchmarks[key=aicd].coverage[minimax-m3-1-flash]",
+      "note": "Owner decision O135 (2026-10-30) applied to MiniMax-M3.1-Flash: AA plots it without an effort; MiniMax's API documents reasoning_effort / output_config.effort low, medium, high, xhigh, max with max the default when omitted, and thinking cannot be disabled (minimax-effort.md, read 2026-11-01), so the configuration is max. The owner confirmed it at max (owner decision O148, 2026-11-01), as O140 did for MiMo-V2.6-Flash.",
+      "harness": "OpenCode",
+      "tested": "2026-10-20"
+    }
+  ]
+}

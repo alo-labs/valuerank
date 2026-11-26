@@ -1,0 +1,17 @@
+{
+  "workflow_id": "WF-SILVER-DEEP-RESEARCH",
+  "flow_step": "FS-SILVER_DEEP_RESEARCH",
+  "mode": "deep",
+  "phases": [
+    {"phase": "DR-SCOPE", "input_contract": "task statement + stage-1/2 files", "work_product": "scope.md", "evidence_refs": [], "verification": "bounded question, in/out scope, assumptions listed", "validation": "phase_gate scope", "repair": "none", "status": "pass"},
+    {"phase": "DR-PLAN", "input_contract": "scope.md", "work_product": "research-plan.md", "evidence_refs": [], "verification": "source classes, search strategy, mode rationale, blocked venues recorded", "validation": "phase_gate plan", "repair": "none", "status": "pass"},
+    {"phase": "DR-RETRIEVE", "input_contract": "research-plan.md", "work_product": "sources.jsonl, evidence.jsonl, raw/", "evidence_refs": ["sources.jsonl", "evidence.jsonl", "raw/MANIFEST.sha256"], "verification": "37 sources, 132 evidence rows; provider manifest in run_manifest.json (search-cli unavailable, fallback recorded); source diversity: GitHub, Reddit, X, HN, Google forum, LINUX DO mirror, aiplans, blog, vendor docs", "validation": "phase_gate retrieve", "repair": "none", "status": "pass"},
+    {"phase": "DR-TRIANGULATE", "input_contract": "evidence.jsonl", "work_product": "triangulation.md", "evidence_refs": ["triangulation.md"], "verification": "9 core claims cross-checked; contradictions and single-sourced claims listed", "validation": "phase_gate triangulate", "repair": "none", "status": "pass"},
+    {"phase": "DR-OUTLINE", "input_contract": "triangulation.md", "work_product": "outline.md", "evidence_refs": ["outline.md"], "verification": "findings map tied to sources and evidence rows", "validation": "phase_gate outline", "repair": "none", "status": "pass"},
+    {"phase": "DR-SYNTHESIZE", "input_contract": "outline.md", "work_product": "research_report.md, claims.jsonl", "evidence_refs": ["research_report.md", "claims.jsonl"], "verification": "claims extracted from the report and linked to bibliography sources", "validation": "validate_report.py, verify_claim_support.py", "repair": "see validation logs", "status": "pass"},
+    {"phase": "DR-CRITIQUE", "input_contract": "research_report.md", "work_product": "critique.md", "evidence_refs": ["critique.md"], "verification": "two adversarial cycles (deep); 12 attacks recorded; loopback decision: repair, no new retrieval", "validation": "phase_gate critique", "repair": "Google, Kimi and x2v wording scoped; Limitations extended", "status": "pass"},
+    {"phase": "DR-REFINE", "input_contract": "critique.md", "work_product": "research_report.md (final)", "evidence_refs": ["research_report.md"], "verification": "unsupported or partial claims repaired or downgraded to candidate", "validation": "verify_claim_support.py", "repair": "reworded sentences with weak evidence overlap", "status": "pass"},
+    {"phase": "DR-PACKAGE", "input_contract": "final report", "work_product": "decision-record.md, handoff.md, vloop-rollup.json", "evidence_refs": ["decision-record.md", "handoff.md", "validation/"], "verification": "ART-DECIDE rollup complete; validation logs present", "validation": "phase_gate --mode deep", "repair": "none", "status": "pass"}
+  ],
+  "rollup": {"af_decide": "pass", "blockers": [], "notes": "No cell passes O11 at the cutoff; see decision-record.md. Search-cli unavailable; fallback recorded."}
+}

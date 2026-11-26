@@ -295,9 +295,11 @@ def test_blend_accepts_another_cost_weight():
     assert plan_costs.blend(100, 60, 100) == 100.0
 
 
-def test_without_quality_there_is_no_overall_score_and_without_cost_quality_stands_alone():
+def test_without_quality_or_without_cost_there_is_no_overall_score():
+    # AGENTS.md: a configuration without a cost gets no value score; neither gap is filled in.
     assert plan_costs.blend(90, None) is None
-    assert plan_costs.blend(None, 61.25) == 61.2
+    assert plan_costs.blend(None, 61.25) is None
+    assert plan_costs.blend(None, None) is None
 
 
 # --- cost_per_index_point ---------------------------------------------------
@@ -491,18 +493,33 @@ def test_api_basis_compares_cost_per_index_point_not_run_cost():
 
 def test_every_claude_model_resolves_to_a_claude_plan_route_at_opus_55_multiples(repo_copy):
     # Owner decision 2026-10-18 (Option 2): Opus 5.5's measured SemiAnalysis multiples apply to every
-    # Claude model as a labelled assumption; Opus 5.5 itself keeps its exact measured routes.
+    # Claude model as a labelled assumption; Opus 5.5 itself keeps its exact measured routes, and so does
+    # Fable 5.1 (SemiAnalysis measured it on Max 5x and Max 20x; it is not offered on Pro).
     routes = plan_costs.load_plan_routes(repo_copy / "data" / "plan_cost_routes.json")
     mapping = json.loads((repo_copy / "data" / "aa_mapping.json").read_text(encoding="utf-8"))
     claude_ids = [entry["id"] for entry in mapping if entry["id"].startswith("claude-")]
-    assert "claude-haiku-5-5" in claude_ids and "claude-sonnet-5-5" in claude_ids
+    assert "claude-haiku-5-5-high" in claude_ids and "claude-sonnet-5-5" in claude_ids and "claude-opus-5-5" in claude_ids
     opus = plan_costs.select_best_route("claude-opus-5-5", routes)
     assert opus["provider"] == "Anthropic" and opus["evidenceClass"] == "controlled_account_workload_projection"
     for model_id in claude_ids:
         route = plan_costs.select_best_route(model_id, routes)
         assert route is not None, model_id
         assert route["provider"] == "Anthropic"
+        if model_id == "claude-fable-5-1":
+            continue
         assert route["valueMultiple"] == opus["valueMultiple"] and route["plan"] == opus["plan"]
         if model_id != "claude-opus-5-5":
             assert route["evidenceClass"] == "user_assumption" and route["sourceModel"] == "Opus 5.5"
             assert "2026-10-18" in route["notes"]
+
+
+def test_fable_5_1_keeps_its_own_measured_max_routes_and_has_no_pro_route(repo_copy):
+    routes = plan_costs.load_plan_routes(repo_copy / "data" / "plan_cost_routes.json")
+    fable = [route for route in routes["routes"] if "claude-fable-5-1" in route["modelIds"]]
+    assert sorted((route["plan"], route["valueMultiple"]) for route in fable) == [("Claude Max 20x", 12.425), ("Claude Max 5x", 12.73)]
+    for route in fable:
+        assert route["evidenceClass"] == "controlled_account_workload_projection" and route["sourceModel"] == "Fable 5.1"
+        assert "semianalysis" in route["id"]
+    assert not any("claude-fable-5-1" in route["modelIds"] for route in routes["routes"] if route["evidenceClass"] == "user_assumption")
+    best = plan_costs.select_best_route("claude-fable-5-1", routes)
+    assert (best["plan"], best["valueMultiple"]) == ("Claude Max 5x", 12.73)

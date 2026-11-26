@@ -47,6 +47,19 @@ def repo_copy(tmp_path: Path) -> Path:
 def pinned_clock(monkeypatch: pytest.MonkeyPatch) -> str:
     """Pin ``VALUERANK_NOW`` to the instant stamped into the committed publication."""
 
-    instant = "2026-10-17T20:23:57Z"
+    instant = "2026-11-01T06:10:00Z"
     monkeypatch.setenv("VALUERANK_NOW", instant)
     return instant
+
+
+@pytest.fixture(autouse=True)
+def _reset_bug_hunt_scale():
+    """O170: the Bug Hunt scale is release state set by assemble; each test starts from a fixture board whose maxima sum to
+    100, so a fixture count reads as its own percentage."""
+
+    from valuerank import quality
+
+    saved = dict(quality.BUG_HUNT_SCALE)
+    quality.BUG_HUNT_SCALE.update({"maxPlanted": 60.0, "maxUnplanted": 40.0, "scale": 100.0})
+    yield
+    quality.BUG_HUNT_SCALE.update(saved)

@@ -1,0 +1,136 @@
+Yiji_Kong | 2026-10-28 04:03:48 UTC | #1
+
+### Summary
+I ran a controlled A/B test in Google Antigravity (2.27.0, Ultra 5x, Windows) comparing how much of the shared 5-hour Gemini quota bucket a single, comparable request consumes on **Gemini 4 Argon (High)** vs **Gemini 3.8 Flash (High)**.
+
+Normalized by each model's published API price, **Argon consumes exactly 3.0x more quota per dollar than Flash**. If Flash is billed at its published rate, the implied bucket size is ~150 USD, and Argon's consumption matches **6.00 / 30.00 USD per 1M input/output tokens** (3x the advertised 2.00 / 10.00 launch price).
+
+### Method
+- Quota: `quotaInfo.remainingFraction` from the local language server RPC `LanguageServerService/GetUserStatus`, polled every 30 s. Argon and Flash share the same bucket (identical fraction and `resetTime`).
+- Tokens: per-step usage from `GetCascadeTrajectoryGeneratorMetadata` (`inputTokens`, `cacheReadTokens`, `outputTokens`).
+- Each test: a fresh conversation, one prompt ("no tools, write a ~2000-word article"), a single model step, zero cache reads. Before each test, the bucket was idle and stable for at least 8 minutes, and nothing else was running.
+
+### Results
+
+| Model | Input / Output tokens | Quota drop | Cost at published price | Quota per USD |
+|---|---|---|---|---|
+| Gemini 4 Argon (High) | 14,918 / 4,233 | 0.00144340 | 0.0722 USD (2 / 10) | 0.0200 |
+| Gemini 3.8 Flash (High) | 15,111 / 3,451 | 0.00016180 | 0.0243 USD (0.75 / 3.75) | 0.00667 |
+
+```text
+Argon / Flash quota-per-USD ratio = 0.0200 / 0.00667 = 3.00
+
+Implied bucket if Flash is billed at its published price:
+  0.024274 / 0.00016180 = 150.0 USD
+Implied bucket if Argon is billed at 6 / 30 USD per 1M tokens:
+  (14,918*6 + 4,233*30) / 1e6 / 0.00144340 = 150.0 USD
+```
+
+A separate 42-step Argon session (220,998 input / 3,948,273 cache-read / 71,432 output tokens, quota drop 0.03154810) gives an implied bucket of ~147.5 USD at 6 / 0.30 / 30. This is consistent, and suggests cache reads are weighted at ~0.30 USD per 1M tokens.
+
+### Observations / caveats
+- Settlement is delayed: Flash settled in under 1 minute, Argon in about 4 to 5 minutes, and some multi-step sessions took up to about 10 minutes.
+- `remainingFraction` occasionally rises by about 0.0028 (seen twice, ~30 minutes apart) with no change to `resetTime`. The source is unclear.
+- Context compaction model calls do not appear in the trajectory token metadata, so their quota cost is invisible to users.
+- n = 1 per model for the clean A/B. Others are encouraged to reproduce it.
+
+### Questions
+1. Is a 3x quota weight for Gemini 4 Argon (relative to its published price) intentional?
+2. Can Antigravity publish per-model quota weights, and show per-request quota cost in the UI?
+
+-------------------------
+
+Yiji_Kong | 2026-10-28 04:02:02 UTC | #2
+
+- A subagent probe routed to `gemini-3.8-flash-tiered` (`M322`, 12,773 input / 16,332 output tokens, 0 cache) dropped `remainingFraction` by `0.01048544` across two settlement ticks—roughly **22x** the `~0.00047` expected at standard Flash rates. It is unclear whether `flash-tiered` has a different quota weight or if spawning a subagent triggers unlogged background calls.
+
+-------------------------
+
+RobW | 2026-10-28 18:18:32 UTC | #3
+
+I did my own tests and concluded that Argon burns 3.8x faster through tokens with the exact same task as Gemini Pro 3.1, both thinking other l level medium. 
+
+I use the browser chat interface for coding in C, AI being my 'colleague'.
+
+And Argon is not great, it hallucinates more than Gemini.
+
+-------------------------
+
+shuai_guo | 2026-10-29 03:32:12 UTC | #4
+
+Same experience here on the Google AI Ultra (5x) plan inside Antigravity IDE.
+
+Running standard multi-step agentic tasks with Gemini 4 Argon drains the weekly 5x quota at an unsustainable rate compared to Gemini 3.8 Flash:
+
+1. The internal quota multiplier for Argon feels disproportionately high (\~3x over its published API token pricing ratio, resulting in an \~8-9x faster drain than 3.8 Flash per step).
+2. Mid-turn steering or long agent tool-call loops frequently invalidate the implicit prefix cache, causing the entire conversation history to be re-billed against the
+
+-------------------------
+
+Yiji_Kong | 2026-10-29 07:37:18 UTC | #5
+
+### Follow-Up Update: Cross-Verifying on Gemini Web (8-Decimal Usage Telemetry) + Zero-Output Pure-Input Control Test
+
+To rule out the possibility that the 3.0x over-burn is merely a client-side accounting quirk in Antigravity's local language server (`GetCascadeTrajectoryGeneratorMetadata`) or an artifact of hidden thinking tokens, I ran a controlled follow-up A/B test on the **Gemini Web app** (`gemini.google.com`) under the same Google AI Ultra subscription.
+
+While the `/usage` settings UI rounds usage to integer percentages via `Math.round(percentageUsed * 100)`, the underlying `/usage` query response returns the exact 8-decimal float `percentageUsed` for the **Weekly pool** (alongside the 2-decimal **5-Hourly pool**, where **1 Weekly Pool = 20 × 5-Hourly Pool**).
+
+---
+
+#### 1. Experiment Design (Eliminating Thinking & Output Variance)
+
+To isolate **pure input token weighting** with zero output/thinking variance and zero prefix-cache hits:
+
+- **Test 1 (Pure Input, Zero Cache, Zero Thinking)**:
+  We generated 400 fixed-format English log lines (`51,262` characters, ~13,500 tokens) and created two different line permutations (**Permutation A** and **Permutation B** — identical BPE token count, zero shared prefix) ending with:
+  `Ignore the text above and reply with ONLY the single word: OK`
+  Both models were run in fresh conversations on **Low thinking**, and both replied with only `"OK"` (0 thinking tokens, 1 output token).
+- **Test 2 (High Thinking, ~4,000-Word Technical Article)**:
+  Fresh conversations with the exact same 107-character prompt (`Write a detailed ~2000-word technical article explaining Paxos and Raft consensus algorithms. Plain text only.`) on **High thinking**. Both models produced nearly identical output lengths (`28,389` chars / `4,013` words on **3.8 Flash** vs. `27,859` chars / `4,284` words on **4 Argon** — within 1.87% of each other).
+- **Test 3 (Trivial Prompt Baseline Calibration)**:
+  A fresh conversation on **4 Argon (Low)** sending only the 28-character prompt `Reply with only the word: OK` to measure the fixed per-turn base overhead (implicit system prompt + user profile context).
+
+---
+
+#### 2. Measured Results (8-Decimal Weekly Pool & 5-Hourly Pool Deltas)
+
+| Step | Model & Thinking | Input / Output Payload | 5-Hourly Pool (`percentageUsed`) | Weekly Pool (`percentageUsed`, 8-dec) | Exact Weekly Pool Drop (ΔWeekly) |
+| :--- | :--- | :--- | :---: | :---: | :---: |
+| **0. Baseline** | — | Stationary across 2 polls | `0.10` | `0.09984048` | `0.00000000` |
+| **1A (Pure Input)** | **Gemini 3.8 Flash (Low)** | `51,262` chars (Perm A) in / `"OK"` (`2`c) out | `0.10 → 0.10` (`0.00`) | `0.09984048 → 0.09987733` | **`+0.00003685`** |
+| **1B (Pure Input)** | **Gemini 4 Argon (Low)** | `51,262` chars (Perm B) in / `"OK"` (`2`c) out | `0.10 → 0.12` (**`+0.02`**) | `0.09987733 → 0.10078641` | **`+0.00090908`** |
+| **2A (Long Output)** | **Gemini 3.8 Flash (High)** | `107` chars in / `28,389` chars (`4,013`w) out | `0.12 → 0.12` (`0.00`) | `0.10078641 → 0.10092798` | **`+0.00014157`** |
+| **2B (Long Output)** | **Gemini 4 Argon (High)** | `107` chars in / `27,859` chars (`4,284`w) out | `0.12 → 0.15` (**`+0.03`**) | `0.10092798 → 0.10249875` | **`+0.00157077`** |
+| **1C (Tiny Prompt)** | **Gemini 4 Argon (Low)** | `28` chars (`"Reply... OK"`) in / `"OK"` (`2`c) out | `0.15 → 0.16` (**`+0.01`**) | `0.10249875 → 0.10265724` | **`+0.00015849`** |
+
+---
+
+#### 3. Key Findings
+
+1. **The Discrepancy Is Even Larger on Web (and Cannot Be Explained by Thinking Tokens)**:
+   - At published API prices (`$2.00 / $10.00` for **4 Argon** vs. `$0.75 / $3.75` for **3.8 Flash**), **4 Argon** should draw quota at **2.67x** (`8 / 3`) the rate of **3.8 Flash** for identical token counts.
+   - **In Test 1 (Pure Input, 0 thinking, `"OK"` output)**: **4 Argon** drew **24.67x** as much quota as **3.8 Flash** (`0.00090908 / 0.00003685`), or **9.25x per published dollar**. Even after subtracting **4 Argon**'s entire per-turn base overhead from Step 1C (`0.00090908 - 0.00015849 = 0.00075059`), the net marginal input burn ratio is still **20.37x raw (7.64x per published dollar)**.
+   - **In Test 2 (High-Thinking ~4k-word generation)**: **4 Argon** drew **11.10x** as much quota as **3.8 Flash** (**11.31x** normalized per output character), or **4.24x per published dollar** — burning **~3.1% of the 5-hour Ultra pool in a single turn**.
+2. **A Single `"OK"` Turn on 4 Argon (Low) Costs More Quota Than a 4,000-Word Article on 3.8 Flash (High)**:
+   - In Step 1C, sending just `"Reply with only the word: OK"` (`28` chars) in a fresh chat on **4 Argon (Low)** burned **`+0.00015849`** of weekly quota (~`0.32%` of the 5-hour pool), which is **12% more** than **3.8 Flash (High)** writing a full 4,013-word technical article on Paxos and Raft (`+0.00014157`).
+
+This confirms across both surfaces that **Gemini 4 Argon**'s internal quota multiplier is configured at a substantial multiple above its published `$2 / $10` launch pricing relative to **3.8 Flash**.
+
+-------------------------
+
+Maniraj_Chervirala | 2026-10-29 07:17:13 UTC | #6
+
+Hi all, 
+
+Higher subscription quota consumption on Gemini 4 Argon compared to Gemini 3.8 Flash is expected: promotional per-token rates on https://ai.google.dev/gemini-api/docs/pricing apply only to pay-as-you-go API billing, whereas 5-hour and weekly subscription limits reflect available capacity, model compute, and total agent work rather than matching API token list prices (see https://antigravity.google/docs/plans and [https://support.google.com/gemini/answer/16275805](https://support.google.com/gemini/answer/16275805%29)).
+
+Fixed per-model quota multipliers are not published because subscription limits adjust dynamically with system capacity. Because \[subagents\]( https://antigravity.google/docs/subagents ) run multi-step turns in their own context windows, routing subagents and routine tasks to Gemini 3.8 Flash while reserving Gemini 4 Argon for complex reasoning helps conserve your 5-hour and weekly quota.
+
+-------------------------
+
+Yiji_Kong | 2026-10-29 07:57:50 UTC | #7
+
+If you actually know how to explain or resolve this, please address the specific data in the OP and my follow-up tests above instead of using an AI to generate a boilerplate reply without even reading the thread. If you don't have a real answer, please stop posting misleading copy-paste responses here
+
+-------------------------
+

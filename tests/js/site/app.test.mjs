@@ -201,10 +201,10 @@ test('syncBasisText names the active basis and cost unit wherever the page asks 
   const win = createWindow();
   const label = add(win.document.body, 'span', { 'data-basis-label': '' });
   const unit = add(win.document.body, 'span', { 'data-cost-unit': '' });
-  const bases = { api: { label: 'API ranking', costUnit: 'USD per Index run' }, plan: { label: 'Plan ranking', costUnit: 'USD per Index point' } };
+  const bases = { api: { label: 'API ranking', costUnit: 'USD per basket run' }, plan: { label: 'Plan ranking', costUnit: 'USD per basket run' } };
   syncBasisText(win.document, bases, 'api');
   assert.equal(label.textContent, 'API ranking');
-  assert.equal(unit.textContent, 'USD per Index run');
+  assert.equal(unit.textContent, 'USD per basket run');
   syncBasisText(win.document, bases, 'plan');
   assert.equal(label.textContent, 'Plan ranking');
 });

@@ -1,6 +1,6 @@
 {%- macro coverage_bar(cov) -%}
 {%- set pct = cov.pct if cov and cov.pct is not none else 0 -%}
-<span class="cov" title="{{ pct | round(1) }}% of priority weight has an eligible value{% if cov and cov.missing %}. Missing: {{ cov.missing | join(', ') }}{% endif %}">
+<span class="cov" title="{{ pct | round(1) }}% of the quality weight is observed for this exact configuration{% if cov and cov.missing %}. Missing: {{ cov.missing | join(', ') }}{% endif %}">
   <span class="cov-bar" aria-hidden="true"><span class="cov-fill" style="width: {{ pct | round(0) | int }}%"></span></span>
   <span class="cov-num">{{ pct | round(0) | int }}%</span>
 </span>

@@ -1,0 +1,62 @@
+Muhammed_Alpler | 2026-10-19 05:56:53 UTC | #1
+
+Component: Antigravity Subscription Quota Meter (Google AI Pro $19.99/mo)
+Reference Session: 9d3614f4-c2ee-4841-ac95-5eadbdd0f411
+
+1. Wholesale Pricing Baseline (Oct 2026):
+- gemini-4-argon (1st-Party TPU): $2.00/1M in, $10.00/1M out, $0.10/1M cached read, $0.00 cache write, 0% partner margin.
+- claude-opus-5-5 (3rd-Party Partner): $4.00/1M in, $20.00/1M out, $0.20/1M cached read, $5-$8/1M cache write.
+
+2. Contradiction:
+Despite Argon running on first-party TPUs at 50% lower API cost and zero external licensing fee, multi-step tasks on gemini-4-argon (High) deplete the Google AI Pro weekly quota bar faster than claude-opus-5-5 (High). In session 9d3614f4-c2ee-4841-ac95-5eadbdd0f411, 2.61M total tokens ($0.864 wholesale API value) drained ~10.2% of the weekly pool.
+
+3. Expected Fix:
+Recalibrate quota burn weights to reflect internal TPU COGS and $0 implicit cache-write overhead, granting gemini-4-argon 1.5x-2.0x the effective budget of 3rd-party partner models.
+
+-------------------------
+
+chunduriv | 2026-10-28 00:40:19 UTC | #2
+
+Hi @Muhammed_Alpler,
+
+Welcome to the Forum,
+
+Thank you for the detailed analysis. Antigravity quota isn't based on public API prices. Each model's quota is set based on available capacity and the amount of work the agent does, which also depends on the thinking level, how many tokens a task uses and how much of the context can be reused. That means the same task can use a different share of quota on different models. 
+
+You can see per-model usage on the Settings page, which can help you determine the most quota-efficient model to use for your specific workflows.
+
+-------------------------
+
+Gabriel_Carranza | 2026-11-02 03:56:16 UTC | #3
+
+Dear Google Antigravity team,
+
+I’d like to raise a serious concern about Gemini 4 Argon’s quota consumption under the Google AI Pro subscription.
+
+In my experience, Claude Opus 5.5 consistently delivers better results on complex software development tasks. It demonstrates stronger execution, requires fewer corrective iterations, and provides a more productive coding experience.
+
+At the same time, Gemini 4 Argon consumes its available quota disproportionately fast.
+
+My perceived difference in effective usable work is approximately **10:1 in favor of Claude Opus 5.5, potentially higher**. This is an experiential estimate rather than a controlled benchmark, but it reflects a significant problem with the subscription’s practical value.
+
+I understand Google’s explanation that quotas are calculated according to available capacity, reasoning effort, context reuse, and computational workload rather than public API pricing.
+
+However, that explanation doesn’t address the main concern: **why should paying subscribers receive dramatically less productive work from a model that, in my experience, already performs worse on their development tasks?**
+
+I respectfully request that Google:
+
+1. Substantially increase Gemini 4 Argon’s quotas for Google AI Pro subscribers.
+2. Provide transparent information about quota consumption per agent task.
+3. Reconsider how unsuccessful iterations and repeated agent errors affect quota depletion.
+4. Benchmark subscription value against competing coding agents using completed tasks rather than raw computational consumption.
+
+Google has the infrastructure, research capabilities, and engineering talent to compete at the highest level.
+
+But even an excellent model becomes impractical if its usage allowance is exhausted before meaningful work can be completed.
+
+**Please reconsider Gemini 4 Argon’s quota policy. Paying users need a competitive amount of useful work, not just access to a powerful model on paper.**
+
+Thank you.
+
+-------------------------
+

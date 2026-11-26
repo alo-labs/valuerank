@@ -1,0 +1,103 @@
+{
+  "version": "3.0.0",
+  "query": "O71 stage 3: end-user plan-allowance reports for GPT-6.1 Terra (ChatGPT Plus / Pro 100 / 200 / 500 in Codex) and Gemini 4 Carbon (Google consumer plans), O11 test",
+  "mode": "deep",
+  "started_at": "2026-10-31T06:09:01.397363+00:00",
+  "finished_at": "2026-10-31T06:18:55.765825+00:00",
+  "assumptions": [
+    {
+      "assumption_id": "asm_s3t01",
+      "text": "Terra list prices $1 / $0.05 / $5 per 1M (AA snapshot) apply to every conversion",
+      "materiality": "high",
+      "status": "user_confirmed"
+    },
+    {
+      "assumption_id": "asm_s3t02",
+      "text": "evidencePolicy.reportEligibilityProfile (O71 v1, E270) is the operative reading of O11",
+      "materiality": "high",
+      "status": "user_confirmed"
+    },
+    {
+      "assumption_id": "asm_s3t03",
+      "text": "A reporter's usage tool prices tokens at list unless shown otherwise; feasibility checked where the split is partial",
+      "materiality": "medium",
+      "status": "evidence_validated"
+    },
+    {
+      "assumption_id": "asm_s3t04",
+      "text": "locdd.com reproduces LINUX DO posts and images faithfully",
+      "materiality": "medium",
+      "status": "implicit"
+    }
+  ],
+  "provider_config": {
+    "primary": "WebSearch+WebFetch+curl (fallback)",
+    "scholarly": null
+  },
+  "report_dir": "/home/user/valuerank/research/2026-10-31-plan-allowances-v5-entrants/stage3-sb-deep-research",
+  "artifact_paths": {
+    "sources": "sources.jsonl",
+    "evidence": "evidence.jsonl",
+    "claims": "claims.jsonl",
+    "report": "research_report.md"
+  },
+  "continuation": null,
+  "workflow_id": "WF-SILVER-DEEP-RESEARCH",
+  "atomic_flow": "AF-DECIDE",
+  "flow_step": "FS-SILVER_DEEP_RESEARCH",
+  "owner_decision": "O71 stage 3 (test against O11)",
+  "question": "For GPT-6.1 Terra on ChatGPT Plus, Pro $100, Pro $200 and Pro $500 in Codex (5h, week, month; Pro split at 2026-10-29; readings spanning the 2026-10-27 reset excluded) and Gemini 4 Carbon on Google consumer plans, find actual end-user reports of the API-list-price allowance per unit and judge each model x tier x unit against O11 (two independent non-provisional reports; largest lower bound <= 1.20 x smallest upper bound).",
+  "research_type": "default",
+  "release_cutoff": "2026-10-31T04:10:00Z",
+  "report_window": "2026-10-01..2026-10-31",
+  "search_cli": {
+    "status": "unavailable",
+    "providers_available": [],
+    "probe": "command -v search -> not found (2026-10-31T05:52Z)"
+  },
+  "fallback_reason": "search-cli not installed; host WebSearch and WebFetch plus curl through the agent proxy used for all retrieval (Reddit via arctic-shift, LINUX DO via the locdd.com mirror, Bluesky via api.bsky.app, X via Yahoo! JAPAN real-time search, HN via Algolia, GitHub pages via WebFetch, YouTube result metadata only). No Task/Agent tool was available in this session, so helper agents were not spawned; retrieval ran sequentially in the lead agent (same degradation as the 2026-10-25 run).",
+  "retrieval": {
+    "intent_class": "factual",
+    "portals_attempted": [],
+    "portals_succeeded": [],
+    "fallback_reason": "search-cli unavailable; non-landscape run, portals not used",
+    "channels_succeeded": [
+      "arctic-shift Reddit API",
+      "locdd.com (LINUX DO mirror) search + topics + images",
+      "api.bsky.app searchPosts",
+      "Yahoo! JAPAN realtime search (X posts)",
+      "HN Algolia",
+      "GitHub issues/search via WebFetch",
+      "Fei2411/real-api-pricing issues",
+      "OpenAI forum search.json",
+      "sov2ex",
+      "YouTube results metadata",
+      "WebSearch",
+      "Google blog / Gemini API changelog / Gemini release notes / Antigravity changelog"
+    ],
+    "channels_failed": [
+      "linux.do (403)",
+      "X direct (login wall)",
+      "YouTube watch pages/transcripts (302 consent/bot check, not circumvented)",
+      "Zhihu (403)",
+      "Xiaohongshu (301)",
+      "Bilibili search API (412)",
+      "public.api.bsky.app (403)",
+      "mastodon.social (empty)",
+      "note.com search API (empty)",
+      "GitHub REST/GraphQL (not used; 403 earlier)",
+      "Task/Agent tool for helper agents (not available)"
+    ],
+    "sources_registered": 39,
+    "evidence_spans": 67,
+    "deep_budget_min_avg_credibility": 70,
+    "credibility_note": "user-report evidence class C-D; offset by O11 concordance requirement"
+  },
+  "prior_stages": [
+    "research/2026-10-31-plan-allowances-v5-entrants/stage1-openai-terra.md",
+    "research/2026-10-31-plan-allowances-v5-entrants/stage1-google-carbon.md",
+    "research/2026-10-31-plan-allowances-v5-entrants/stage2/report.md",
+    "research/2026-10-31-plan-allowances-v5-entrants/stage2/research_notes/"
+  ],
+  "model_run_reference": "research/2026-10-25-plan-allowances-sb-deep-research/"
+}

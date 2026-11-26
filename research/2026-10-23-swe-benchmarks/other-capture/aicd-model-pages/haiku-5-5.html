@@ -1,0 +1,988 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Haiku 5.5 Coding Benchmark - AI Coding Daily</title>
+    <meta name="description" content="Benchmark results for Haiku 5.5: coding score, average cost and time per prompt, and points per project, compared to the nearest models on the LLM Coding Leaderboard.">
+    <link rel="icon" type="image/png" href="https://aicodingdaily.com/favicon.png" sizes="512x512">
+    <meta name="theme-color" content="#FDF8F3">
+
+    
+    <meta property="og:title" content="Haiku 5.5 Coding Benchmark">
+    <meta property="og:description" content="Benchmark results for Haiku 5.5: coding score, average cost and time per prompt, and points per project, compared to the nearest models on the LLM Coding Leaderboard.">
+    <meta property="og:image" content="https://aicodingdaily.com/images/llm-leaderboard.jpg">
+    <meta property="og:url" content="https://aicodingdaily.com/model/haiku-5-5">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="AI Coding Daily">
+
+    
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Haiku 5.5 Coding Benchmark">
+    <meta name="twitter:description" content="Benchmark results for Haiku 5.5: coding score, average cost and time per prompt, and points per project, compared to the nearest models on the LLM Coding Leaderboard.">
+    <meta name="twitter:image" content="https://aicodingdaily.com/images/llm-leaderboard.jpg">
+
+    <link rel="alternate" type="application/rss+xml" title="AI Coding Daily RSS Feed" href="https://aicodingdaily.com/rss">
+
+    <script>
+        window.theme = {
+            /** Storage access throws when site data is blocked, so every read and write is guarded. */
+            stored() {
+                try {
+                    return window.localStorage.theme ?? null;
+                } catch (e) {
+                    return null;
+                }
+            },
+            store(value) {
+                try {
+                    if (value === null) {
+                        window.localStorage.removeItem('theme');
+                    } else {
+                        window.localStorage.theme = value;
+                    }
+                } catch (e) {
+                    // Storage unavailable: the choice applies to this page view only.
+                }
+            },
+            prefersDark() {
+                return window.matchMedia('(prefers-color-scheme: dark)').matches;
+            },
+            isDark() {
+                const stored = this.stored();
+
+                return stored === 'dark' || (stored !== 'light' && this.prefersDark());
+            },
+            apply() {
+                const dark = this.isDark();
+
+                document.documentElement.classList.toggle('dark', dark);
+
+                const meta = document.querySelector('meta[name="theme-color"]');
+
+                if (meta) {
+                    meta.content = dark ? '#1C1917' : '#FDF8F3';
+                }
+
+                return dark;
+            },
+        };
+
+        window.theme.apply();
+
+        // No explicit choice stored means "follow the system", so keep following it.
+        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => {
+            if (window.theme.stored() === null) {
+                window.theme.apply();
+            }
+        });
+    </script>
+
+    <link rel="preload" as="style" href="https://aicodingdaily.com/build/assets/app-CaSjWhn6.css" /><link rel="modulepreload" as="script" href="https://aicodingdaily.com/build/assets/app-Cpvw7DU2.js" /><link rel="stylesheet" href="https://aicodingdaily.com/build/assets/app-CaSjWhn6.css" data-navigate-track="reload" /><script type="module" src="https://aicodingdaily.com/build/assets/app-Cpvw7DU2.js" data-navigate-track="reload"></script>    <link rel="preconnect" href="https://fonts.bunny.net">
+    <link href="https://fonts.bunny.net/css?family=plus-jakarta-sans:400,500,600,700,800&family=caveat:700&display=swap"
+        rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+            background: var(--cream);
+            color: var(--ink);
+        }
+
+        .font-handwritten {
+            font-family: 'Caveat', cursive;
+        }
+
+        .card-hover {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .card-hover:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 40px -12px rgba(0, 0, 0, 0.1);
+        }
+
+        .dark .card-hover:hover {
+            box-shadow: 0 20px 40px -12px rgba(0, 0, 0, 0.7);
+        }
+
+        .gradient-text {
+            background: linear-gradient(135deg, var(--rose) 0%, var(--amber) 50%, var(--mint) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .dots-pattern {
+            background-image: radial-gradient(circle, var(--rose) 1px, transparent 1px);
+            background-size: 20px 20px;
+        }
+
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--cream-dark);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(to bottom, var(--rose), var(--amber));
+            border-radius: 5px;
+        }
+
+        .pill-hover {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .pill-hover::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, var(--rose), var(--amber));
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .pill-hover:hover::before {
+            opacity: 1;
+        }
+
+        .pill-hover span {
+            position: relative;
+            z-index: 1;
+        }
+
+        @keyframes shine {
+            0% {
+                background-position: -200% center;
+            }
+
+            100% {
+                background-position: 200% center;
+            }
+        }
+
+        .shine-effect {
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+            background-size: 200% 100%;
+            animation: shine 3s infinite;
+        }
+
+        [x-cloak] {
+            display: none !important;
+        }
+
+        .grecaptcha-badge {
+            visibility: hidden !important;
+        }
+
+        @keyframes heroFadeUp {
+            from { opacity: 0; transform: translateY(24px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .animate-hero-fade-up { animation: heroFadeUp 0.7s cubic-bezier(0.22, 1, 0.36, 1) both; }
+        .animate-hero-fade-up-1 { animation: heroFadeUp 0.7s cubic-bezier(0.22, 1, 0.36, 1) 0.12s both; }
+        .animate-hero-fade-up-2 { animation: heroFadeUp 0.7s cubic-bezier(0.22, 1, 0.36, 1) 0.24s both; }
+        .animate-hero-fade-up-3 { animation: heroFadeUp 0.7s cubic-bezier(0.22, 1, 0.36, 1) 0.36s both; }
+    </style>
+        <!-- Livewire Styles --><style >[wire\:loading][wire\:loading], [wire\:loading\.delay][wire\:loading\.delay], [wire\:loading\.list-item][wire\:loading\.list-item], [wire\:loading\.inline-block][wire\:loading\.inline-block], [wire\:loading\.inline][wire\:loading\.inline], [wire\:loading\.block][wire\:loading\.block], [wire\:loading\.flex][wire\:loading\.flex], [wire\:loading\.table][wire\:loading\.table], [wire\:loading\.grid][wire\:loading\.grid], [wire\:loading\.inline-flex][wire\:loading\.inline-flex] {display: none;}[wire\:loading\.delay\.none][wire\:loading\.delay\.none], [wire\:loading\.delay\.shortest][wire\:loading\.delay\.shortest], [wire\:loading\.delay\.shorter][wire\:loading\.delay\.shorter], [wire\:loading\.delay\.short][wire\:loading\.delay\.short], [wire\:loading\.delay\.default][wire\:loading\.delay\.default], [wire\:loading\.delay\.long][wire\:loading\.delay\.long], [wire\:loading\.delay\.longer][wire\:loading\.delay\.longer], [wire\:loading\.delay\.longest][wire\:loading\.delay\.longest] {display: none;}[wire\:offline][wire\:offline] {display: none;}[wire\:dirty]:not(textarea):not(input):not(select) {display: none;}:root {--livewire-progress-bar-color: #2299dd;}[x-cloak="x-cloak"],[x-cloak=""] {display: none !important;}[wire\:cloak="wire:cloak"],[wire\:cloak=""] {display: none !important;}dialog#livewire-error::backdrop {background-color: rgba(0, 0, 0, .6);}</style>
+
+    
+</head>
+
+<body class="antialiased">
+    
+    
+    <header x-data="{
+        mobileMenuOpen: false,
+        darkMode: document.documentElement.classList.contains('dark'),
+        init() {
+            window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => {
+                this.darkMode = document.documentElement.classList.contains('dark');
+            });
+        },
+        toggleTheme() {
+            const dark = !this.darkMode;
+
+            // Matching the system preference clears the override, so the site follows the system again.
+            window.theme.store(dark === window.theme.prefersDark() ? null : (dark ? 'dark' : 'light'));
+
+            this.darkMode = window.theme.apply();
+        }
+    }"
+        class="sticky top-0 z-50 border-b border-[var(--cream-dark)] bg-[var(--cream)]/90 backdrop-blur-xl">
+        <div class="mx-auto flex max-w-7xl items-center justify-between px-4 py-4 sm:px-6 lg:px-8">
+            <div class="flex items-center gap-8">
+                <a href="https://aicodingdaily.com" class="group flex items-center gap-3">
+                    <div
+                        class="relative flex h-11 w-11 items-center justify-center overflow-hidden rounded-2xl bg-gradient-to-br from-[var(--rose)] to-[var(--amber)] text-white shadow-lg shadow-[var(--rose)]/30 transition-transform group-hover:scale-105">
+                        <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
+                        </svg>
+                        <div class="shine-effect absolute inset-0"></div>
+                    </div>
+                    <span class="text-lg font-extrabold tracking-tight text-[var(--ink)]">AI Coding Daily</span>
+                </a>
+
+                
+                <nav class="hidden md:flex md:items-center md:gap-1">
+                                            <a href="https://aicodingdaily.com" class="rounded-full px-4 py-2 text-sm font-semibold transition pill-hover text-[var(--ink-light)] hover:text-white">
+                            <span>Tutorials</span>
+                        </a>
+                                        <a href="https://aicodingdaily.com/courses" class="rounded-full px-4 py-2 text-sm font-semibold transition pill-hover text-[var(--ink-light)] hover:text-white">
+                        <span>Courses</span>
+                    </a>
+                                        <a href="https://aicodingdaily.com/leaderboard"
+                        class="whitespace-nowrap rounded-full px-4 py-2 text-sm font-semibold transition pill-hover text-[var(--ink-light)] hover:text-white">
+                        <span>LLM Leaderboard</span>
+                    </a>
+                    <a href="https://aicodingdaily.com/models"
+                        class="rounded-full px-4 py-2 text-sm font-semibold transition bg-gradient-to-r from-[var(--rose)] to-[var(--amber)] text-white">
+                        <span>Models</span>
+                    </a>
+                    <a href="https://aicodingdaily.com/advertising" class="whitespace-nowrap rounded-full px-4 py-2 text-sm font-semibold transition pill-hover text-[var(--ink-light)] hover:text-white">
+                        <span>Advertise</span>
+                    </a>
+                    <a href="https://aicodingdaily.com/newsletter" class="rounded-full px-4 py-2 text-sm font-semibold transition pill-hover text-[var(--ink-light)] hover:text-white">
+                        <span>Newsletter</span>
+                    </a>
+                </nav>
+            </div>
+
+            <div class="flex items-center gap-4">
+                                    <a href="https://aicodingdaily.com/pricing"
+                        class="hidden text-sm font-semibold text-[var(--ink-light)] transition hover:text-[var(--rose)] md:block">Pricing</a>
+                    <a href="https://aicodingdaily.com/login"
+                        class="hidden text-sm font-semibold text-[var(--ink-light)] transition hover:text-[var(--rose)] md:block">Login</a>
+                    <a href="https://aicodingdaily.com/register"
+                        class="hidden rounded-full bg-gradient-to-r from-[var(--rose)] to-[var(--amber)] px-4 py-2 text-sm font-semibold text-white transition hover:scale-105 md:block">Register</a>
+                
+                
+                <button @click="toggleTheme()" type="button" aria-label="Toggle theme" :aria-pressed="darkMode"
+                    class="hidden md:inline-flex items-center justify-center rounded-full p-2 text-[var(--ink-light)] transition hover:bg-[var(--cream-dark)] hover:text-[var(--rose)]">
+                    <svg x-show="!darkMode" x-cloak class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+                    </svg>
+                    <svg x-show="darkMode" x-cloak class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+                    </svg>
+                </button>
+
+                
+                <button @click="mobileMenuOpen = !mobileMenuOpen" type="button"
+                    class="inline-flex items-center justify-center rounded-lg p-2 text-[var(--ink-light)] transition hover:bg-[var(--cream-dark)] hover:text-[var(--rose)] md:hidden">
+                    <span class="sr-only">Open main menu</span>
+                    <svg x-show="!mobileMenuOpen" class="h-6 w-6" fill="none" stroke="currentColor"
+                        viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M4 6h16M4 12h16M4 18h16" />
+                    </svg>
+                    <svg x-show="mobileMenuOpen" x-cloak class="h-6 w-6" fill="none" stroke="currentColor"
+                        viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                </button>
+            </div>
+        </div>
+
+        
+        <div x-show="mobileMenuOpen" x-cloak x-transition:enter="transition ease-out duration-200"
+            x-transition:enter-start="opacity-0 -translate-y-1" x-transition:enter-end="opacity-100 translate-y-0"
+            x-transition:leave="transition ease-in duration-150" x-transition:leave-start="opacity-100 translate-y-0"
+            x-transition:leave-end="opacity-0 -translate-y-1"
+            class="border-t border-[var(--cream-dark)] bg-[var(--cream)] md:hidden">
+            <nav class="mx-auto max-w-7xl px-4 py-4 sm:px-6 lg:px-8">
+                <div class="flex flex-col gap-2">
+                                            <a href="https://aicodingdaily.com" class="rounded-xl px-4 py-3 text-sm font-semibold transition text-[var(--ink-light)] hover:bg-[var(--cream-dark)] hover:text-[var(--rose)]">
+                            Tutorials
+                        </a>
+                                        <a href="https://aicodingdaily.com/courses" class="rounded-xl px-4 py-3 text-sm font-semibold transition text-[var(--ink-light)] hover:bg-[var(--cream-dark)] hover:text-[var(--rose)]">
+                        Courses
+                    </a>
+                                        <a href="https://aicodingdaily.com/leaderboard"
+                        class="rounded-xl px-4 py-3 text-sm font-semibold transition text-[var(--ink-light)] hover:bg-[var(--cream-dark)] hover:text-[var(--rose)]">
+                        LLM Leaderboard
+                    </a>
+                    <a href="https://aicodingdaily.com/models"
+                        class="rounded-xl px-4 py-3 text-sm font-semibold transition bg-gradient-to-r from-[var(--rose)] to-[var(--amber)] text-white">
+                        Models
+                    </a>
+                    <a href="https://aicodingdaily.com/advertising" class="rounded-xl px-4 py-3 text-sm font-semibold transition text-[var(--ink-light)] hover:bg-[var(--cream-dark)] hover:text-[var(--rose)]">
+                        Advertise
+                    </a>
+                    <a href="https://aicodingdaily.com/newsletter" class="rounded-xl px-4 py-3 text-sm font-semibold transition text-[var(--ink-light)] hover:bg-[var(--cream-dark)] hover:text-[var(--rose)]">
+                        Newsletter
+                    </a>
+                    <div class="my-2 border-t border-[var(--cream-dark)]"></div>
+                    <button @click="toggleTheme()" type="button" aria-label="Toggle theme" :aria-pressed="darkMode"
+                        class="flex w-full items-center justify-between rounded-xl px-4 py-3 text-sm font-semibold text-[var(--ink-light)] transition hover:bg-[var(--cream-dark)] hover:text-[var(--rose)]">
+                        <span x-text="darkMode ? 'Light mode' : 'Dark mode'">Dark mode</span>
+                        <svg x-show="!darkMode" x-cloak class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+                        </svg>
+                        <svg x-show="darkMode" x-cloak class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+                        </svg>
+                    </button>
+                                            <a href="https://aicodingdaily.com/pricing"
+                            class="block rounded-xl px-4 py-3 text-sm font-semibold text-[var(--ink-light)] transition hover:bg-[var(--cream-dark)] hover:text-[var(--rose)]">
+                            Pricing
+                        </a>
+                        <a href="https://aicodingdaily.com/login"
+                            class="block rounded-xl px-4 py-3 text-sm font-semibold text-[var(--ink-light)] transition hover:bg-[var(--cream-dark)] hover:text-[var(--rose)]">
+                            Login
+                        </a>
+                        <a href="https://aicodingdaily.com/register"
+                            class="block rounded-xl bg-gradient-to-r from-[var(--rose)] to-[var(--amber)] px-4 py-3 text-center text-sm font-semibold text-white transition">
+                            Register
+                        </a>
+                                    </div>
+            </nav>
+        </div>
+    </header>
+
+        <div class="relative bg-[var(--cream-dark)] py-12">
+        <div class="dots-pattern absolute inset-0 opacity-30"></div>
+
+        <div class="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            
+            <a href="https://aicodingdaily.com/leaderboard" class="group mb-8 inline-flex items-center gap-2 text-sm font-semibold text-[var(--ink-light)] transition hover:text-[var(--rose)]">
+                <svg class="h-4 w-4 transition-transform group-hover:-translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+                </svg>
+                Back to the full leaderboard
+            </a>
+
+            <article class="overflow-hidden rounded-3xl border border-[var(--surface-border)] bg-[var(--surface)] shadow-xl">
+                <div class="p-5 sm:p-8 lg:p-12">
+                    <h1 class="mb-3 text-3xl font-extrabold leading-tight text-[var(--ink)] sm:text-4xl lg:text-5xl">
+                        Haiku 5.5 Coding Benchmark
+                    </h1>
+
+                    
+                    <div wire:key="lw-1078826583-0" wire:snapshot="{&quot;data&quot;:{&quot;source&quot;:&quot;model-page&quot;,&quot;heading&quot;:null,&quot;email&quot;:&quot;&quot;,&quot;subscribed&quot;:false,&quot;error&quot;:null},&quot;memo&quot;:{&quot;id&quot;:&quot;Culn8klETfuezq2k6Sqk&quot;,&quot;name&quot;:&quot;model-benchmark-notify&quot;,&quot;path&quot;:&quot;model\/haiku-5-5&quot;,&quot;method&quot;:&quot;GET&quot;,&quot;release&quot;:&quot;a-a-a&quot;,&quot;children&quot;:[],&quot;scripts&quot;:[],&quot;assets&quot;:[],&quot;errors&quot;:[],&quot;locale&quot;:&quot;en&quot;,&quot;islands&quot;:[]},&quot;checksum&quot;:&quot;b13be2dff1b49bd6145c0fcf19791268fa296161e3fa5542d8378e1443eb9df1&quot;}" wire:effects="{&quot;partials&quot;:[]}" wire:id="Culn8klETfuezq2k6Sqk" wire:name="model-benchmark-notify" class="mb-8 rounded-2xl border border-[var(--rose)]/30 bg-[var(--rose)]/5 px-4 py-4 sm:px-5">
+    <!--[if BLOCK]><![endif]-->        <form wire:submit="subscribe" class="flex flex-col gap-3 lg:flex-row lg:items-center lg:gap-5">
+            <div class="lg:flex-1">
+                <p class="font-bold text-[var(--ink)]">Notify me when a new model is benchmarked</p>
+                <p class="text-sm text-[var(--ink-light)]">New rankings go out in the weekly AI Coding Daily newsletter. Unsubscribe anytime.</p>
+            </div>
+
+            <div class="flex flex-col gap-2 sm:flex-row lg:w-[28rem]">
+                <input
+                    wire:model="email"
+                    type="email"
+                    placeholder="Enter your email"
+                    aria-label="Email address"
+                    class="flex-1 rounded-xl border border-[var(--cream-dark)] bg-[var(--surface)] px-4 py-2.5 text-[var(--ink)] placeholder-[var(--ink-light)]/60 transition focus:border-[var(--rose)] focus:outline-none focus:ring-4 focus:ring-[var(--rose)]/20"
+                >
+                <button
+                    type="submit"
+                    wire:loading.attr="disabled"
+                    wire:loading.class="opacity-75 cursor-wait"
+                    class="inline-flex items-center justify-center rounded-xl bg-gradient-to-r from-[var(--rose)] to-[var(--amber)] px-5 py-2.5 font-bold text-white shadow transition hover:shadow-lg hover:shadow-[var(--rose)]/30"
+                >
+                    <span wire:loading.remove>Notify me</span>
+                    <span wire:loading>Subscribing...</span>
+                </button>
+            </div>
+        </form>
+
+        <!--[if BLOCK]><![endif]--><!--[if ENDBLOCK]><![endif]-->
+        <!--[if BLOCK]><![endif]--><!--[if ENDBLOCK]><![endif]-->    <!--[if ENDBLOCK]><![endif]--></div>
+
+                                        <p class="mb-8 text-lg text-[var(--ink-light)]">
+                        How Haiku 5.5 ranks on the
+                        <a class="underline" href="https://aicodingdaily.com/leaderboard">LLM Coding Leaderboard</a>,
+                        shown next to the three models directly above and below it, with the top three models included for reference.
+                                                    Haiku 5.5 was tested at 2 effort levels, each ranked separately.
+                                            </p>
+
+                                            <p class="mb-6 text-[var(--ink-light)]">
+                                                            Last evaluated: <b class="text-[var(--ink)]">2 weeks ago</b> (October 8, 2026), with <b class="text-[var(--ink)]">Claude Code</b>.
+                                                    </p>
+                    
+                    <div class="overflow-x-auto rounded-2xl border border-[var(--cream-dark)]">
+    <table class="w-full border-collapse text-left text-sm">
+        <thead class="bg-[var(--cream-dark)] text-xs font-bold uppercase tracking-wide text-[var(--ink)]">
+            <tr>
+                <th class="px-2.5 py-3" rowspan="2">#</th>
+                <th class="px-2.5 py-3" rowspan="2">Model</th>
+                <th class="px-2.5 py-3 text-center" rowspan="2">Total points<br>(max 70)</th>
+                <th class="px-2.5 py-3 text-center" rowspan="2">Avg cost<br>per prompt</th>
+                <th class="px-2.5 py-3 text-center" rowspan="2">Avg time<br>per prompt</th>
+                <th class="px-2.5 py-3 text-center" rowspan="2">Video</th>
+                <th class="px-2.5 py-3 text-center" rowspan="2">Tested with</th>
+                                    <th class="border-l border-[var(--cream)] px-2.5 py-3 text-center" colspan="4">Points per project</th>
+                            </tr>
+            <tr>
+                                    <th
+                        class="px-2.5 py-3 text-center border-l border-[var(--cream)]"
+                                            >
+                        Laravel Code Quality
+
+                                                    <br>(max 20)
+                                            </th>
+                                    <th
+                        class="px-2.5 py-3 text-center"
+                                            >
+                        React-TS Code Quality
+
+                                                    <br>(max 20)
+                                            </th>
+                                    <th
+                        class="px-2.5 py-3 text-center"
+                                            >
+                        Bug Finding Test
+
+                                                    <br>(max 10)
+                                            </th>
+                                                    <th
+                        class="border-l border-[var(--cream)] px-2.5 py-3 text-center"
+                        title="CSV Import (PHP), Offline Sync (PHP), Bank Feed (Dart / Flutter), Shipping Quotes (Go)"
+                    >
+                        Edge-case Testing<br>(4 projects, max 20)
+                    </th>
+                            </tr>
+        </thead>
+        <tbody>
+                                                                            <tr class="border-t border-[var(--cream-dark)] odd:bg-[var(--surface)] even:bg-[var(--cream)]/40">
+                    <td class="whitespace-nowrap px-2.5 py-3 font-semibold text-[var(--ink-light)]">1</td>
+                    <td class="whitespace-nowrap px-2.5 py-3 font-bold text-[var(--ink)]">
+                                                    <a href="https://aicodingdaily.com/model/opus-5-5" class="underline transition hover:text-[var(--rose)]">Opus 5.5 (High)</a>
+                                            </td>
+                    <td class="whitespace-nowrap px-2.5 py-3 text-center font-bold text-[var(--ink)]">67.26</td>
+                    <td class="whitespace-nowrap px-2.5 py-3 text-center text-[var(--ink-light)]">
+                                                    $0.83
+                                            </td>
+                    <td class="whitespace-nowrap px-2.5 py-3 text-center text-[var(--ink-light)]">03:42</td>
+                    <td class="whitespace-nowrap px-2.5 py-3 text-center">
+                                                    <a
+                                href="https://www.youtube.com/watch?v=asRxO3xIoVI"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                title="Watch the review of Opus 5.5 (High) on YouTube"
+                                aria-label="Watch the review of Opus 5.5 (High) on YouTube"
+                                class="inline-flex text-[#FF0000] transition hover:opacity-70"
+                            >
+                                <svg class="h-5 w-5" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                                    <path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.6 12 3.6 12 3.6s-7.5 0-9.4.5A3 3 0 0 0 .5 6.2C0 8.1 0 12 0 12s0 3.9.5 5.8a3 3 0 0 0 2.1 2.1c1.9.5 9.4.5 9.4.5s7.5 0 9.4-.5a3 3 0 0 0 2.1-2.1c.5-1.9.5-5.8.5-5.8s0-3.9-.5-5.8ZM9.6 15.6V8.4l6.2 3.6-6.2 3.6Z" />
+                                </svg>
+                            </a>
+                                            </td>
+                    <td class="whitespace-nowrap px-2.5 py-3 text-center text-xs text-[var(--ink-light)]">
+                                                    <time datetime="2026-10-20" title="October 20, 2026">3 days ago</time><br>
+                                                Claude Code
+                    </td>
+                                            <td class="whitespace-nowrap px-2.5 py-3 text-center text-[var(--ink-light)]">18.68</td>
+                                            <td class="whitespace-nowrap px-2.5 py-3 text-center text-[var(--ink-light)]">19</td>
+                                            <td class="whitespace-nowrap px-2.5 py-3 text-center text-[var(--ink-light)]">9.58</td>
+                                                                <td class="whitespace-nowrap px-2.5 py-3 text-center text-[var(--ink-light)]">20</td>
+                                    </tr>
+                                                                            <tr class="border-t border-[var(--cream-dark)] odd:bg-[var(--surface)] even:bg-[var(--cream)]/40">
+                    <td class="whitespace-nowrap px-2.5 py-3 font-semibold text-[var(--ink-light)]">2</td>
+                    <td class="whitespace-nowrap px-2.5 py-3 font-bold text-[var(--ink)]">
+                                                    <a href="https://aicodingdaily.com/model/gpt-6-astra" class="underline transition hover:text-[var(--rose)]">GPT-6-Astra (High)</a>
+                                            </td>
+                    <td class="whitespace-nowrap px-2.5 py-3 text-center font-bold text-[var(--ink)]">66.35</td>
+                    <td class="whitespace-nowrap px-2.5 py-3 text-center text-[var(--ink-light)]">
+                                                    $0.96
+                                            </td>
+                    <td class="whitespace-nowrap px-2.5 py-3 text-center text-[var(--ink-light)]">04:34</td>
+                    <td class="whitespace-nowrap px-2.5 py-3 text-center">
+                                                    <a
+                                href="https://www.youtube.com/watch?v=ZanDMmlWSzk"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                title="Watch the review of GPT-6-Astra (High) on YouTube"
+                                aria-label="Watch the review of GPT-6-Astra (High) on YouTube"
+                                class="inline-flex text-[#FF0000] transition hover:opacity-70"
+                            >
+                                <svg class="h-5 w-5" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                                    <path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.6 12 3.6 12 3.6s-7.5 0-9.4.5A3 3 0 0 0 .5 6.2C0 8.1 0 12 0 12s0 3.9.5 5.8a3 3 0 0 0 2.1 2.1c1.9.5 9.4.5 9.4.5s7.5 0 9.4-.5a3 3 0 0 0 2.1-2.1c.5-1.9.5-5.8.5-5.8s0-3.9-.5-5.8ZM9.6 15.6V8.4l6.2 3.6-6.2 3.6Z" />
+                                </svg>
+                            </a>
+                                            </td>
+                    <td class="whitespace-nowrap px-2.5 py-3 text-center text-xs text-[var(--ink-light)]">
+                                                    <time datetime="2026-10-01" title="October 1, 2026">3 weeks ago</time><br>
+                                                Codex CLI
+                    </td>
+                                            <td class="whitespace-nowrap px-2.5 py-3 text-center text-[var(--ink-light)]">18.6</td>
+                                            <td class="whitespace-nowrap px-2.5 py-3 text-center text-[var(--ink-light)]">18.17</td>
+                                            <td class="whitespace-nowrap px-2.5 py-3 text-center text-[var(--ink-light)]">9.58</td>
+                                                                <td class="whitespace-nowrap px-2.5 py-3 text-center text-[var(--ink-light)]">20</td>
+                                    </tr>
+                                                                            <tr class="border-t border-[var(--cream-dark)] odd:bg-[var(--surface)] even:bg-[var(--cream)]/40">
+                    <td class="whitespace-nowrap px-2.5 py-3 font-semibold text-[var(--ink-light)]">3</td>
+                    <td class="whitespace-nowrap px-2.5 py-3 font-bold text-[var(--ink)]">
+                                                    <a href="https://aicodingdaily.com/model/gpt-6-astra" class="underline transition hover:text-[var(--rose)]">GPT-6-Astra (Medium)</a>
+                                            </td>
+                    <td class="whitespace-nowrap px-2.5 py-3 text-center font-bold text-[var(--ink)]">66.03</td>
+                    <td class="whitespace-nowrap px-2.5 py-3 text-center text-[var(--ink-light)]">
+                                                    $0.69
+                                            </td>
+                    <td class="whitespace-nowrap px-2.5 py-3 text-center text-[var(--ink-light)]">03:08</td>
+                    <td class="whitespace-nowrap px-2.5 py-3 text-center">
+                                                    <a
+                                href="https://www.youtube.com/watch?v=ZanDMmlWSzk"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                title="Watch the review of GPT-6-Astra (Medium) on YouTube"
+                                aria-label="Watch the review of GPT-6-Astra (Medium) on YouTube"
+                                class="inline-flex text-[#FF0000] transition hover:opacity-70"
+                            >
+                                <svg class="h-5 w-5" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                                    <path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.6 12 3.6 12 3.6s-7.5 0-9.4.5A3 3 0 0 0 .5 6.2C0 8.1 0 12 0 12s0 3.9.5 5.8a3 3 0 0 0 2.1 2.1c1.9.5 9.4.5 9.4.5s7.5 0 9.4-.5a3 3 0 0 0 2.1-2.1c.5-1.9.5-5.8.5-5.8s0-3.9-.5-5.8ZM9.6 15.6V8.4l6.2 3.6-6.2 3.6Z" />
+                                </svg>
+                            </a>
+                                            </td>
+                    <td class="whitespace-nowrap px-2.5 py-3 text-center text-xs text-[var(--ink-light)]">
+                                                    <time datetime="2026-09-30" title="September 30, 2026">3 weeks ago</time><br>
+                                                Codex CLI
+                    </td>
+                                            <td class="whitespace-nowrap px-2.5 py-3 text-center text-[var(--ink-light)]">18.2</td>
+                                            <td class="whitespace-nowrap px-2.5 py-3 text-center text-[var(--ink-light)]">17.83</td>
+                                            <td class="whitespace-nowrap px-2.5 py-3 text-center text-[var(--ink-light)]">10</td>
+                                                                <td class="whitespace-nowrap px-2.5 py-3 text-center text-[var(--ink-light)]">20</td>
+                                    </tr>
+                                                <tr class="border-t border-[var(--cream-dark)] bg-[var(--cream)]/40">
+                        <td class="px-2.5 py-2 text-center text-[var(--ink-light)]" colspan="11">
+                            &ctdot; 9 places not shown &ctdot;
+                        </td>
+                    </tr>
+                                                                <tr class="border-t border-[var(--cream-dark)] odd:bg-[var(--surface)] even:bg-[var(--cream)]/40">
+                    <td class="whitespace-nowrap px-2.5 py-3 font-semibold text-[var(--ink-light)]">13</td>
+                    <td class="whitespace-nowrap px-2.5 py-3 font-bold text-[var(--ink)]">
+                                                    <a href="https://aicodingdaily.com/model/opus-5-5" class="underline transition hover:text-[var(--rose)]">Opus 5.5 (Low)</a>
+                                            </td>
+                    <td class="whitespace-nowrap px-2.5 py-3 text-center font-bold text-[var(--ink)]">60.5</td>
+                    <td class="whitespace-nowrap px-2.5 py-3 text-center text-[var(--ink-light)]">
+                                                    $0.37
+                                            </td>
+                    <td class="whitespace-nowrap px-2.5 py-3 text-center text-[var(--ink-light)]">01:21</td>
+                    <td class="whitespace-nowrap px-2.5 py-3 text-center">
+                                                    <a
+                                href="https://www.youtube.com/watch?v=asRxO3xIoVI"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                title="Watch the review of Opus 5.5 (Low) on YouTube"
+                                aria-label="Watch the review of Opus 5.5 (Low) on YouTube"
+                                class="inline-flex text-[#FF0000] transition hover:opacity-70"
+                            >
+                                <svg class="h-5 w-5" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                                    <path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.6 12 3.6 12 3.6s-7.5 0-9.4.5A3 3 0 0 0 .5 6.2C0 8.1 0 12 0 12s0 3.9.5 5.8a3 3 0 0 0 2.1 2.1c1.9.5 9.4.5 9.4.5s7.5 0 9.4-.5a3 3 0 0 0 2.1-2.1c.5-1.9.5-5.8.5-5.8s0-3.9-.5-5.8ZM9.6 15.6V8.4l6.2 3.6-6.2 3.6Z" />
+                                </svg>
+                            </a>
+                                            </td>
+                    <td class="whitespace-nowrap px-2.5 py-3 text-center text-xs text-[var(--ink-light)]">
+                                                    <time datetime="2026-10-19" title="October 19, 2026">4 days ago</time><br>
+                                                Claude Code
+                    </td>
+                                            <td class="whitespace-nowrap px-2.5 py-3 text-center text-[var(--ink-light)]">17.37</td>
+                                            <td class="whitespace-nowrap px-2.5 py-3 text-center text-[var(--ink-light)]">18.17</td>
+                                            <td class="whitespace-nowrap px-2.5 py-3 text-center text-[var(--ink-light)]">6.46</td>
+                                                                <td class="whitespace-nowrap px-2.5 py-3 text-center text-[var(--ink-light)]">18.5</td>
+                                    </tr>
+                                                                            <tr class="border-t border-[var(--cream-dark)] odd:bg-[var(--surface)] even:bg-[var(--cream)]/40">
+                    <td class="whitespace-nowrap px-2.5 py-3 font-semibold text-[var(--ink-light)]">14</td>
+                    <td class="whitespace-nowrap px-2.5 py-3 font-bold text-[var(--ink)]">
+                                                    <a href="https://aicodingdaily.com/model/grok-4-7" class="underline transition hover:text-[var(--rose)]">Grok 4.7 (High)</a>
+                                            </td>
+                    <td class="whitespace-nowrap px-2.5 py-3 text-center font-bold text-[var(--ink)]">60.09</td>
+                    <td class="whitespace-nowrap px-2.5 py-3 text-center text-[var(--ink-light)]">
+                                                    $1.85
+                                            </td>
+                    <td class="whitespace-nowrap px-2.5 py-3 text-center text-[var(--ink-light)]">23:27</td>
+                    <td class="whitespace-nowrap px-2.5 py-3 text-center">
+                                                    <a
+                                href="https://www.youtube.com/watch?v=VPOwJjRAm3I"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                title="Watch the review of Grok 4.7 (High) on YouTube"
+                                aria-label="Watch the review of Grok 4.7 (High) on YouTube"
+                                class="inline-flex text-[#FF0000] transition hover:opacity-70"
+                            >
+                                <svg class="h-5 w-5" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                                    <path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.6 12 3.6 12 3.6s-7.5 0-9.4.5A3 3 0 0 0 .5 6.2C0 8.1 0 12 0 12s0 3.9.5 5.8a3 3 0 0 0 2.1 2.1c1.9.5 9.4.5 9.4.5s7.5 0 9.4-.5a3 3 0 0 0 2.1-2.1c.5-1.9.5-5.8.5-5.8s0-3.9-.5-5.8ZM9.6 15.6V8.4l6.2 3.6-6.2 3.6Z" />
+                                </svg>
+                            </a>
+                                            </td>
+                    <td class="whitespace-nowrap px-2.5 py-3 text-center text-xs text-[var(--ink-light)]">
+                                                    <time datetime="2026-10-01" title="October 1, 2026">3 weeks ago</time><br>
+                                                Cursor
+                    </td>
+                                            <td class="whitespace-nowrap px-2.5 py-3 text-center text-[var(--ink-light)]">17.7</td>
+                                            <td class="whitespace-nowrap px-2.5 py-3 text-center text-[var(--ink-light)]">18.33</td>
+                                            <td class="whitespace-nowrap px-2.5 py-3 text-center text-[var(--ink-light)]">7.81</td>
+                                                                <td class="whitespace-nowrap px-2.5 py-3 text-center text-[var(--ink-light)]">16.25</td>
+                                    </tr>
+                                                                            <tr class="border-t border-[var(--cream-dark)] odd:bg-[var(--surface)] even:bg-[var(--cream)]/40">
+                    <td class="whitespace-nowrap px-2.5 py-3 font-semibold text-[var(--ink-light)]">15</td>
+                    <td class="whitespace-nowrap px-2.5 py-3 font-bold text-[var(--ink)]">
+                                                    <a href="https://aicodingdaily.com/model/gpt-6-luna" class="underline transition hover:text-[var(--rose)]">GPT-6-Luna (Max)</a>
+                                            </td>
+                    <td class="whitespace-nowrap px-2.5 py-3 text-center font-bold text-[var(--ink)]">59.07</td>
+                    <td class="whitespace-nowrap px-2.5 py-3 text-center text-[var(--ink-light)]">
+                                                    $0.03
+                                            </td>
+                    <td class="whitespace-nowrap px-2.5 py-3 text-center text-[var(--ink-light)]">11:03</td>
+                    <td class="whitespace-nowrap px-2.5 py-3 text-center">
+                                                    <a
+                                href="https://www.youtube.com/watch?v=Zvy--4U146M"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                title="Watch the review of GPT-6-Luna (Max) on YouTube"
+                                aria-label="Watch the review of GPT-6-Luna (Max) on YouTube"
+                                class="inline-flex text-[#FF0000] transition hover:opacity-70"
+                            >
+                                <svg class="h-5 w-5" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                                    <path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.6 12 3.6 12 3.6s-7.5 0-9.4.5A3 3 0 0 0 .5 6.2C0 8.1 0 12 0 12s0 3.9.5 5.8a3 3 0 0 0 2.1 2.1c1.9.5 9.4.5 9.4.5s7.5 0 9.4-.5a3 3 0 0 0 2.1-2.1c.5-1.9.5-5.8.5-5.8s0-3.9-.5-5.8ZM9.6 15.6V8.4l6.2 3.6-6.2 3.6Z" />
+                                </svg>
+                            </a>
+                                            </td>
+                    <td class="whitespace-nowrap px-2.5 py-3 text-center text-xs text-[var(--ink-light)]">
+                                                    <time datetime="2026-10-01" title="October 1, 2026">3 weeks ago</time><br>
+                                                Codex CLI
+                    </td>
+                                            <td class="whitespace-nowrap px-2.5 py-3 text-center text-[var(--ink-light)]">18.12</td>
+                                            <td class="whitespace-nowrap px-2.5 py-3 text-center text-[var(--ink-light)]">17.17</td>
+                                            <td class="whitespace-nowrap px-2.5 py-3 text-center text-[var(--ink-light)]">7.08</td>
+                                                                <td class="whitespace-nowrap px-2.5 py-3 text-center text-[var(--ink-light)]">16.7</td>
+                                    </tr>
+                                                                            <tr class="border-t border-[var(--cream-dark)] bg-[var(--amber)]/20 shadow-[inset_4px_0_0_var(--amber)]">
+                    <td class="whitespace-nowrap px-2.5 py-3 font-semibold text-[var(--ink-light)]">16</td>
+                    <td class="whitespace-nowrap px-2.5 py-3 font-bold text-[var(--ink)]">
+                                                    Haiku 5.5 (High)
+                                            </td>
+                    <td class="whitespace-nowrap px-2.5 py-3 text-center font-bold text-[var(--ink)]">58.63</td>
+                    <td class="whitespace-nowrap px-2.5 py-3 text-center text-[var(--ink-light)]">
+                                                    $0.05
+                                            </td>
+                    <td class="whitespace-nowrap px-2.5 py-3 text-center text-[var(--ink-light)]">03:37</td>
+                    <td class="whitespace-nowrap px-2.5 py-3 text-center">
+                                                    <a
+                                href="https://www.youtube.com/watch?v=M-FSZVhLRTg"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                title="Watch the review of Haiku 5.5 (High) on YouTube"
+                                aria-label="Watch the review of Haiku 5.5 (High) on YouTube"
+                                class="inline-flex text-[#FF0000] transition hover:opacity-70"
+                            >
+                                <svg class="h-5 w-5" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                                    <path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.6 12 3.6 12 3.6s-7.5 0-9.4.5A3 3 0 0 0 .5 6.2C0 8.1 0 12 0 12s0 3.9.5 5.8a3 3 0 0 0 2.1 2.1c1.9.5 9.4.5 9.4.5s7.5 0 9.4-.5a3 3 0 0 0 2.1-2.1c.5-1.9.5-5.8.5-5.8s0-3.9-.5-5.8ZM9.6 15.6V8.4l6.2 3.6-6.2 3.6Z" />
+                                </svg>
+                            </a>
+                                            </td>
+                    <td class="whitespace-nowrap px-2.5 py-3 text-center text-xs text-[var(--ink-light)]">
+                                                    <time datetime="2026-10-08" title="October 8, 2026">2 weeks ago</time><br>
+                                                Claude Code
+                    </td>
+                                            <td class="whitespace-nowrap px-2.5 py-3 text-center text-[var(--ink-light)]">17.3</td>
+                                            <td class="whitespace-nowrap px-2.5 py-3 text-center text-[var(--ink-light)]">17</td>
+                                            <td class="whitespace-nowrap px-2.5 py-3 text-center text-[var(--ink-light)]">7.08</td>
+                                                                <td class="whitespace-nowrap px-2.5 py-3 text-center text-[var(--ink-light)]">17.25</td>
+                                    </tr>
+                                                                            <tr class="border-t border-[var(--cream-dark)] bg-[var(--amber)]/20 shadow-[inset_4px_0_0_var(--amber)]">
+                    <td class="whitespace-nowrap px-2.5 py-3 font-semibold text-[var(--ink-light)]">17</td>
+                    <td class="whitespace-nowrap px-2.5 py-3 font-bold text-[var(--ink)]">
+                                                    Haiku 5.5 (Medium)
+                                            </td>
+                    <td class="whitespace-nowrap px-2.5 py-3 text-center font-bold text-[var(--ink)]">58.2</td>
+                    <td class="whitespace-nowrap px-2.5 py-3 text-center text-[var(--ink-light)]">
+                                                    $0.03
+                                            </td>
+                    <td class="whitespace-nowrap px-2.5 py-3 text-center text-[var(--ink-light)]">02:37</td>
+                    <td class="whitespace-nowrap px-2.5 py-3 text-center">
+                                                    <a
+                                href="https://www.youtube.com/watch?v=M-FSZVhLRTg"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                title="Watch the review of Haiku 5.5 (Medium) on YouTube"
+                                aria-label="Watch the review of Haiku 5.5 (Medium) on YouTube"
+                                class="inline-flex text-[#FF0000] transition hover:opacity-70"
+                            >
+                                <svg class="h-5 w-5" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                                    <path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.6 12 3.6 12 3.6s-7.5 0-9.4.5A3 3 0 0 0 .5 6.2C0 8.1 0 12 0 12s0 3.9.5 5.8a3 3 0 0 0 2.1 2.1c1.9.5 9.4.5 9.4.5s7.5 0 9.4-.5a3 3 0 0 0 2.1-2.1c.5-1.9.5-5.8.5-5.8s0-3.9-.5-5.8ZM9.6 15.6V8.4l6.2 3.6-6.2 3.6Z" />
+                                </svg>
+                            </a>
+                                            </td>
+                    <td class="whitespace-nowrap px-2.5 py-3 text-center text-xs text-[var(--ink-light)]">
+                                                    <time datetime="2026-10-08" title="October 8, 2026">2 weeks ago</time><br>
+                                                Claude Code
+                    </td>
+                                            <td class="whitespace-nowrap px-2.5 py-3 text-center text-[var(--ink-light)]">17.32</td>
+                                            <td class="whitespace-nowrap px-2.5 py-3 text-center text-[var(--ink-light)]">17</td>
+                                            <td class="whitespace-nowrap px-2.5 py-3 text-center text-[var(--ink-light)]">6.88</td>
+                                                                <td class="whitespace-nowrap px-2.5 py-3 text-center text-[var(--ink-light)]">17</td>
+                                    </tr>
+                                                                            <tr class="border-t border-[var(--cream-dark)] odd:bg-[var(--surface)] even:bg-[var(--cream)]/40">
+                    <td class="whitespace-nowrap px-2.5 py-3 font-semibold text-[var(--ink-light)]">18</td>
+                    <td class="whitespace-nowrap px-2.5 py-3 font-bold text-[var(--ink)]">
+                                                    <a href="https://aicodingdaily.com/model/gemini-4-argon" class="underline transition hover:text-[var(--rose)]">Gemini 4 Argon (High)</a>
+                                            </td>
+                    <td class="whitespace-nowrap px-2.5 py-3 text-center font-bold text-[var(--ink)]">57.09</td>
+                    <td class="whitespace-nowrap px-2.5 py-3 text-center text-[var(--ink-light)]">
+                                                    N/A
+                                            </td>
+                    <td class="whitespace-nowrap px-2.5 py-3 text-center text-[var(--ink-light)]">09:41</td>
+                    <td class="whitespace-nowrap px-2.5 py-3 text-center">
+                                                    <a
+                                href="https://www.youtube.com/watch?v=e_GBFt-o_FY"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                title="Watch the review of Gemini 4 Argon (High) on YouTube"
+                                aria-label="Watch the review of Gemini 4 Argon (High) on YouTube"
+                                class="inline-flex text-[#FF0000] transition hover:opacity-70"
+                            >
+                                <svg class="h-5 w-5" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                                    <path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.6 12 3.6 12 3.6s-7.5 0-9.4.5A3 3 0 0 0 .5 6.2C0 8.1 0 12 0 12s0 3.9.5 5.8a3 3 0 0 0 2.1 2.1c1.9.5 9.4.5 9.4.5s7.5 0 9.4-.5a3 3 0 0 0 2.1-2.1c.5-1.9.5-5.8.5-5.8s0-3.9-.5-5.8ZM9.6 15.6V8.4l6.2 3.6-6.2 3.6Z" />
+                                </svg>
+                            </a>
+                                            </td>
+                    <td class="whitespace-nowrap px-2.5 py-3 text-center text-xs text-[var(--ink-light)]">
+                                                    <time datetime="2026-10-14" title="October 14, 2026">1 week ago</time><br>
+                                                Devin
+                    </td>
+                                            <td class="whitespace-nowrap px-2.5 py-3 text-center text-[var(--ink-light)]">17.15</td>
+                                            <td class="whitespace-nowrap px-2.5 py-3 text-center text-[var(--ink-light)]">18.5</td>
+                                            <td class="whitespace-nowrap px-2.5 py-3 text-center text-[var(--ink-light)]">7.19</td>
+                                                                <td class="whitespace-nowrap px-2.5 py-3 text-center text-[var(--ink-light)]">14.25</td>
+                                    </tr>
+                                                                            <tr class="border-t border-[var(--cream-dark)] odd:bg-[var(--surface)] even:bg-[var(--cream)]/40">
+                    <td class="whitespace-nowrap px-2.5 py-3 font-semibold text-[var(--ink-light)]">19</td>
+                    <td class="whitespace-nowrap px-2.5 py-3 font-bold text-[var(--ink)]">
+                                                    <a href="https://aicodingdaily.com/model/swe-2" class="underline transition hover:text-[var(--rose)]">SWE-2 (Max)</a>
+                                            </td>
+                    <td class="whitespace-nowrap px-2.5 py-3 text-center font-bold text-[var(--ink)]">57.07</td>
+                    <td class="whitespace-nowrap px-2.5 py-3 text-center text-[var(--ink-light)]">
+                                                    N/A
+                                            </td>
+                    <td class="whitespace-nowrap px-2.5 py-3 text-center text-[var(--ink-light)]">11:59</td>
+                    <td class="whitespace-nowrap px-2.5 py-3 text-center">
+                                                    <a
+                                href="https://www.youtube.com/watch?v=RfWpWWR5YHk"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                title="Watch the review of SWE-2 (Max) on YouTube"
+                                aria-label="Watch the review of SWE-2 (Max) on YouTube"
+                                class="inline-flex text-[#FF0000] transition hover:opacity-70"
+                            >
+                                <svg class="h-5 w-5" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                                    <path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.6 12 3.6 12 3.6s-7.5 0-9.4.5A3 3 0 0 0 .5 6.2C0 8.1 0 12 0 12s0 3.9.5 5.8a3 3 0 0 0 2.1 2.1c1.9.5 9.4.5 9.4.5s7.5 0 9.4-.5a3 3 0 0 0 2.1-2.1c.5-1.9.5-5.8.5-5.8s0-3.9-.5-5.8ZM9.6 15.6V8.4l6.2 3.6-6.2 3.6Z" />
+                                </svg>
+                            </a>
+                                            </td>
+                    <td class="whitespace-nowrap px-2.5 py-3 text-center text-xs text-[var(--ink-light)]">
+                                                    <time datetime="2026-10-01" title="October 1, 2026">3 weeks ago</time><br>
+                                                Devin
+                    </td>
+                                            <td class="whitespace-nowrap px-2.5 py-3 text-center text-[var(--ink-light)]">17.5</td>
+                                            <td class="whitespace-nowrap px-2.5 py-3 text-center text-[var(--ink-light)]">17.83</td>
+                                            <td class="whitespace-nowrap px-2.5 py-3 text-center text-[var(--ink-light)]">7.29</td>
+                                                                <td class="whitespace-nowrap px-2.5 py-3 text-center text-[var(--ink-light)]">14.45</td>
+                                    </tr>
+                                                                            <tr class="border-t border-[var(--cream-dark)] odd:bg-[var(--surface)] even:bg-[var(--cream)]/40">
+                    <td class="whitespace-nowrap px-2.5 py-3 font-semibold text-[var(--ink-light)]">20</td>
+                    <td class="whitespace-nowrap px-2.5 py-3 font-bold text-[var(--ink)]">
+                                                    <a href="https://aicodingdaily.com/model/kimi-k3" class="underline transition hover:text-[var(--rose)]">Kimi K3 (High)</a>
+                                            </td>
+                    <td class="whitespace-nowrap px-2.5 py-3 text-center font-bold text-[var(--ink)]">56.89</td>
+                    <td class="whitespace-nowrap px-2.5 py-3 text-center text-[var(--ink-light)]">
+                                                    $0.63
+                                            </td>
+                    <td class="whitespace-nowrap px-2.5 py-3 text-center text-[var(--ink-light)]">12:49</td>
+                    <td class="whitespace-nowrap px-2.5 py-3 text-center">
+                                                    <a
+                                href="https://www.youtube.com/watch?v=y9qrEhoeMR8"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                title="Watch the review of Kimi K3 (High) on YouTube"
+                                aria-label="Watch the review of Kimi K3 (High) on YouTube"
+                                class="inline-flex text-[#FF0000] transition hover:opacity-70"
+                            >
+                                <svg class="h-5 w-5" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                                    <path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.6 12 3.6 12 3.6s-7.5 0-9.4.5A3 3 0 0 0 .5 6.2C0 8.1 0 12 0 12s0 3.9.5 5.8a3 3 0 0 0 2.1 2.1c1.9.5 9.4.5 9.4.5s7.5 0 9.4-.5a3 3 0 0 0 2.1-2.1c.5-1.9.5-5.8.5-5.8s0-3.9-.5-5.8ZM9.6 15.6V8.4l6.2 3.6-6.2 3.6Z" />
+                                </svg>
+                            </a>
+                                            </td>
+                    <td class="whitespace-nowrap px-2.5 py-3 text-center text-xs text-[var(--ink-light)]">
+                                                    <time datetime="2026-09-29" title="September 29, 2026">3 weeks ago</time><br>
+                                                OpenCode
+                    </td>
+                                            <td class="whitespace-nowrap px-2.5 py-3 text-center text-[var(--ink-light)]">18.4</td>
+                                            <td class="whitespace-nowrap px-2.5 py-3 text-center text-[var(--ink-light)]">17.5</td>
+                                            <td class="whitespace-nowrap px-2.5 py-3 text-center text-[var(--ink-light)]">6.04</td>
+                                                                <td class="whitespace-nowrap px-2.5 py-3 text-center text-[var(--ink-light)]">14.95</td>
+                                    </tr>
+                    </tbody>
+    </table>
+</div>
+                    
+                    <div class="mt-10 space-y-8 text-[var(--ink-light)]">
+                                                    <section>
+                                <h2 class="mb-3 text-xl font-extrabold text-[var(--ink)]">Tutorials about Haiku 5.5</h2>
+                                <div class="grid grid-cols-1 gap-6 sm:grid-cols-3">
+                                                                            <article class="card-hover group relative overflow-hidden rounded-3xl border border-[var(--surface-border)] bg-[var(--surface)] shadow-lg">
+                                            
+                                            <img
+                                                src="https://img.youtube.com/vi/M-FSZVhLRTg/hqdefault.jpg"
+                                                alt="I Tested NEW Haiku 5.5 on 27 Coding Prompts"
+                                                loading="lazy"
+                                                class="aspect-[1200/630] w-full object-cover"
+                                                onerror="this.onerror=null;this.src='https://aicodingdaily.com/images/og-default.png';"
+                                            >
+
+                                            <div class="p-6">
+                                                <span class="mb-2 block text-sm text-[var(--ink-light)]/60">
+                                                    Video
+                                                                                                            &middot; Oct 8, 2026
+                                                                                                                                                        </span>
+                                                <h3 class="text-lg font-bold leading-tight text-[var(--ink)] transition group-hover:text-[var(--rose)]">
+                                                    <a
+                                                        href="https://www.youtube.com/watch?v=M-FSZVhLRTg"
+                                                         target="_blank" rel="noopener noreferrer"                                                         class="before:absolute before:inset-0"
+                                                    >I Tested NEW Haiku 5.5 on 27 Coding Prompts</a>
+                                                </h3>
+                                            </div>
+                                        </article>
+                                                                    </div>
+                            </section>
+
+                            <hr class="border-[var(--cream-dark)]">
+                        
+                                                <section>
+                            <h2 class="mb-3 text-xl font-extrabold text-[var(--ink)]">How to read this</h2>
+                            <ul class="list-disc space-y-2 pl-5">
+                                <li>Each score measures a <strong class="font-bold text-[var(--ink)]">model-and-harness configuration</strong>, not the model in isolation.</li>
+                                <li>Prices are calculated with <strong class="font-bold text-[var(--ink)]">API</strong> costs. Models tested on a subscription plan show <strong class="font-bold text-[var(--ink)]">N/A</strong>.</li>
+                                <li>Full methodology and scoring formulas are explained <a class="underline" href="https://aicodingdaily.com/article/llm-coding-leaderboard-my-methodology-and-scoring-formulas" target="_blank">in this article</a>.</li>
+                            </ul>
+                        </section>
+
+                        <hr class="border-[var(--cream-dark)]">
+                        
+                        <p>
+                            See every tested model side by side on the
+                            <a class="underline" href="https://aicodingdaily.com/leaderboard">full LLM Coding Leaderboard</a>.
+                        </p>
+                    </div>
+                </div>
+            </article>
+        </div>
+    </div>
+
+            <section id="newsletter" class="relative scroll-mt-24 overflow-hidden bg-gradient-to-br from-[var(--ink)] via-[var(--ink-light)] to-[var(--ink)] dark:from-[#0c0a09] dark:via-[#171412] dark:to-[#0c0a09] py-20">
+    <div class="absolute -left-20 top-0 h-64 w-64 rounded-full bg-[var(--rose)]/20 blur-3xl"></div>
+    <div class="absolute -right-20 bottom-0 h-64 w-64 rounded-full bg-[var(--mint)]/20 blur-3xl"></div>
+    <div class="absolute left-1/2 top-1/2 h-96 w-96 -translate-x-1/2 -translate-y-1/2 rounded-full bg-[var(--amber)]/10 blur-3xl"></div>
+
+    <div class="relative mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+        <div class="flex flex-col items-center gap-8 md:flex-row md:gap-12">
+            <div class="shrink-0">
+                <img src="https://aicodingdaily.com/images/povilas-korop.jpg" alt="Povilas Korop" class="h-28 w-28 rounded-full border-4 border-white/20 shadow-xl md:h-36 md:w-36">
+            </div>
+
+            <div class="text-center md:text-left">
+                <h2 class="mb-2 text-3xl font-extrabold text-white sm:text-4xl">
+                    Get Weekly AI Coding News
+                </h2>
+                <div class="mb-6 text-white/70">
+                    <p class="mb-3">You'll also get two free tutorials:</p>
+                    <ul class="flex flex-col gap-2">
+                        <li>
+                            <a href="https://aicodingdaily.com/article/claude-code-my-favorite-10-tips-tricks" class="font-semibold text-white underline decoration-[var(--rose)] decoration-2 underline-offset-4 transition hover:text-[var(--amber)]">
+                                Claude Code: My Favorite Tips and Tricks
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://aicodingdaily.com/article/codex-cli-10-tips-and-tricks" class="font-semibold text-white underline decoration-[var(--rose)] decoration-2 underline-offset-4 transition hover:text-[var(--amber)]">
+                                Codex CLI: My Favorite Tips and Tricks
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div wire:key="lw-2420064178-0" wire:snapshot="{&quot;data&quot;:{&quot;email&quot;:&quot;&quot;,&quot;subscribed&quot;:false,&quot;error&quot;:null},&quot;memo&quot;:{&quot;id&quot;:&quot;kd458inDP150TmHcA3Q4&quot;,&quot;name&quot;:&quot;newsletter-subscribe&quot;,&quot;path&quot;:&quot;model\/haiku-5-5&quot;,&quot;method&quot;:&quot;GET&quot;,&quot;release&quot;:&quot;a-a-a&quot;,&quot;children&quot;:[],&quot;scripts&quot;:[],&quot;assets&quot;:[],&quot;errors&quot;:[],&quot;locale&quot;:&quot;en&quot;,&quot;islands&quot;:[]},&quot;checksum&quot;:&quot;818789a3842db4f4509a1b0a28eba30942aab1bce94c1413d17a908f72c57349&quot;}" wire:effects="{&quot;partials&quot;:[]}" wire:id="kd458inDP150TmHcA3Q4" wire:name="newsletter-subscribe">
+    <!--[if BLOCK]><![endif]-->        <form wire:submit="subscribe" class="flex flex-col gap-4 sm:flex-row">
+            <input
+                wire:model="email"
+                type="email"
+                placeholder="Enter your email"
+                class="flex-1 rounded-2xl border-2 border-white/20 bg-white/10 px-6 py-4 text-white placeholder-white/50 backdrop-blur transition focus:border-[var(--rose)] focus:outline-none focus:ring-4 focus:ring-[var(--rose)]/20"
+            >
+            <button
+                type="submit"
+                wire:loading.attr="disabled"
+                wire:loading.class="opacity-75 cursor-wait"
+                class="inline-flex items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-[var(--rose)] to-[var(--amber)] px-8 py-4 font-bold text-white shadow-xl transition-all hover:scale-105 hover:shadow-2xl hover:shadow-[var(--rose)]/30 disabled:hover:scale-100"
+            >
+                <span wire:loading.remove>Subscribe</span>
+                <span wire:loading>Subscribing...</span>
+                <svg wire:loading.remove class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
+                </svg>
+                <svg wire:loading class="h-5 w-5 animate-spin" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                    <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                    <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"></path>
+                </svg>
+            </button>
+        </form>
+
+        <!--[if BLOCK]><![endif]--><!--[if ENDBLOCK]><![endif]-->
+        <!--[if BLOCK]><![endif]--><!--[if ENDBLOCK]><![endif]-->
+        <p class="mt-4 text-sm text-white/50">
+            Sent every Wednesday. No spam, ever. Unsubscribe anytime.
+        </p>
+    <!--[if ENDBLOCK]><![endif]--></div>
+            </div>
+        </div>
+    </div>
+</section>
+    
+    
+    <footer class="border-t border-[var(--cream-dark)] bg-[var(--cream)] py-16">
+        <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col items-center justify-between gap-4 sm:flex-row">
+                <p class="text-sm text-[var(--ink-light)]">&copy; 2026 AI Coding Daily by <a
+                        href="https://x.com/povilaskorop" target="_blank"
+                        class="underline transition hover:text-[var(--rose)]">Povilas Korop</a>. All rights reserved.
+                </p>
+                <div class="flex flex-wrap justify-center items-center gap-x-4 gap-y-2 text-sm text-[var(--ink-light)]">
+                    <a href="https://aicodingdaily.com/about" class="underline transition hover:text-[var(--rose)]">About / Contact</a>
+                    <span aria-hidden="true">·</span>
+                    <a href="https://aicodingdaily.com/advertising" class="underline transition hover:text-[var(--rose)]">Advertise</a>
+                    <span aria-hidden="true">·</span>
+                    <a href="https://aicodingdaily.com/terms" class="underline transition hover:text-[var(--rose)]">Terms</a>
+                    <span aria-hidden="true">·</span>
+                    <a href="https://aicodingdaily.com/privacy" class="underline transition hover:text-[var(--rose)]">Privacy</a>
+                    <span aria-hidden="true">·</span>
+                    <span>povilas@laraveldaily.com</span>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+    window._paq = window._paq || [];
+
+    window.trackMembershipEvent = function (action, name) {
+        window._paq.push(['trackEvent', 'Membership', action, name || '']);
+    };
+
+    window.addEventListener('track-membership-event', function (event) {
+        window.trackMembershipEvent(event.detail.action, event.detail.name);
+    });
+
+    </script>
+
+    <script src="https://aicodingdaily.com/livewire-71a08158/livewire.min.js?id=8ea5922c"   data-csrf="xzzCFLcxcBWsyhM8R2wDzcSmmkllhWEOmon8jsNF" data-module-url="https://aicodingdaily.com/livewire-71a08158" data-update-uri="https://aicodingdaily.com/livewire-71a08158/update" data-navigate-once="true"></script>
+    </body>
+
+</html>

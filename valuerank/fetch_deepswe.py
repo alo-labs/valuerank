@@ -159,6 +159,16 @@ def effort_text(effort: str | None) -> str:
     return effort or "no effort"
 
 
+def roster_names(entry: dict) -> dict[str, str]:
+    """The comparable names a roster model answers to on the chart, each with how it matched."""
+
+    names = {normalise_name(entry["displayName"]): f"display name {entry['displayName']!r}"}
+    family = TRAILING_PAREN.sub("", entry.get("aaShortName") or "")
+    if family:
+        names.setdefault(normalise_name(family), f"AA short name {family!r}")
+    return names
+
+
 def map_to_roster(configs: list[dict], roster: dict) -> list[dict]:
     """Attach ``valueRankModelId``/``matchStatus``/``matchNote`` to each configuration.
 
@@ -170,11 +180,7 @@ def map_to_roster(configs: list[dict], roster: dict) -> list[dict]:
 
     families: dict[str, list[tuple[str, dict, str]]] = {}
     for model_id, entry in roster.items():
-        names = {normalise_name(entry["displayName"]): f"display name {entry['displayName']!r}"}
-        family = TRAILING_PAREN.sub("", entry.get("aaShortName") or "")
-        if family:
-            names.setdefault(normalise_name(family), f"AA short name {family!r}")
-        for key, matched in names.items():
+        for key, matched in roster_names(entry).items():
             families.setdefault(key, []).append((model_id, entry, matched))
     kept: dict[str, dict] = {}
     for item in configs:

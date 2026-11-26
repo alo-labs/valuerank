@@ -1,0 +1,123 @@
+# Resuming the Perplexity panel (round 13)
+
+State on 2026-11-01: draft r177 (reviewers 78–94 folded in; O153–O172, Plan anchors re-frozen as version a2 under O157; cutoff 2026-11-01T06:10:00Z, 37-configuration cohort under O145) is committed; its review copy goes in `perplexity/parts-r177/`. The ledger (`ledger.md`) and the condensed brief (`ledger-brief.md`) run through
+owner decision O167 and reviewer 84 (O164 amends O75 to a monthly per-cell research cadence; O167 adds a release-time freshness check). Round 13 continues with Kimi K3 on r177 (Claude Sonnet 5.5 has one clean round; Grok 4.7's and GPT-6.1 Sol's runs restarted).
+
+Panel order and status for round 13 (O56: a model's round is clean with no Medium-or-higher finding; each model needs
+two consecutive clean rounds and the panel ends when every model says NO FURTHER FEEDBACK on the same revision):
+
+| Reviewer | Model | Revision | Status |
+|---|---|---|---|
+| 73 | Grok 4.7 (round 12) | r155 | findings, folded into r156 (O132–O140, E277) |
+| 74 | GPT-6.1 Sol | r156 | findings (two Mediums, one Low), folded into r157 (E278) |
+| 75 | Gemini 3.8 Flash (sectional) | r157 | findings (a Critical, Highs), folded into r158 (O141, O142, E279–E281) |
+| 76 | Claude Sonnet 5.5 (whole draft, part 6 re-sent) | r158 | findings, folded into r159 (O143–O149, E282–E284; cutoff moved under O145) |
+| 77 | Kimi K3 (four sections) | r159 | findings (a Critical, Highs), folded into r160 (O150–O152, E285–E288) |
+| 78 | GLM 5.3 (sections of at most two parts) | r160 | findings (Highs, Mediums), folded into r161 (O153–O159, E289–E298) |
+| 79 | Grok 4.7 | r161 | findings (Highs, Mediums), folded into r162 (O160–O162, E299, E300) |
+| 80 | GPT-6.1 Sol | r162 | findings (Highs, Mediums), folded into r163 (E302–E304) |
+| 81 | Gemini 3.8 Flash (sectional) | r163 | findings (Mediums), folded into r164 (E305–E308) |
+| 82 | Claude Sonnet 5.5 | r164 | findings (two Mediums, one Low), folded into r165 (E309, E310) |
+| 83 | Kimi K3 (four sections) | r165 | findings (six Mediums, five Lows; owner decisions O164–O166), folded into r166 (E311–E315) |
+| 84 | GLM 5.3 (seven sections) | r166 | findings (four Mediums, three Lows; owner decision O167), folded into r167 (E316–E319) |
+| 85 | Grok 4.7 | r167 | clean (three Lows), folded into r168; first clean round |
+| 86 | GPT-6.1 Sol | r168 | clean (one Low), folded into r169 (E320); first clean round |
+| 87 | Gemini 3.8 Flash (five sections) | r169 | findings (six Mediums, five Lows), folded into r170 (E321–E326) |
+| 88 | Claude Sonnet 5.5 | r170 | clean (two Lows), folded into r171 (E327); first clean round |
+| 89 | Kimi K3 (four sections) | r171 | findings (five Mediums, one Low), folded into r172 (E328–E331) |
+| 90 | GLM 5.3 (seven sections) | r172 | findings (one High, six Mediums, two Lows; owner decision O168), folded into r173 (E332–E334) |
+| 91 | Grok 4.7 | r173 | findings (one Medium, one Low), folded into r174 (E335); clean run restarts |
+| 92 | GPT-6.1 Sol | r174 | findings (two Mediums, one Low; owner decision O169), folded into r175; clean run restarts |
+| 93 | Gemini 3.8 Flash (five sections) | r175 | findings (three Highs, nine Mediums: clarifications, E336, several declined as owner decisions or verified correct), folded into r176 |
+| 94 | Claude Sonnet 5.5 | r176 | owner decision challenges; owner decisions O170–O172, folded into r177 (re-freeze a4); clean run restarts |
+| 95 | Kimi K3 (four sections) | r177 | findings (two Highs, five Mediums; owner decisions O173–O174), folded into r178 (E337–E340); clean run restarts |
+| 96 | GLM 5.3 (eight sections) | r178 | findings (five Highs; owner decisions O175–O177), folded into r179 (E341); clean run restarts |
+| 97 | Grok 4.7 | r179 | findings (three Highs, one Medium; owner decisions O178–O179), folded into r180; clean run restarts |
+| 98 | GPT-6.1 Sol | r180 | findings (two Mediums; owner decision O180), folded into r181; clean run restarts |
+| 99 | Gemini 3.8 Flash (five sections) | r181 | findings (one High verified not a defect, three Mediums: E342 adopted, two declined; two sections clean), folded into r182; clean run restarts |
+| 100 | Claude Sonnet 5.5 | r182 | findings (two Highs, five Mediums; owner answers), folded into r183 (E343); clean run restarts |
+| 101 | Kimi K3 (four sections) | r183 | clean (three Lows, two sections NO FURTHER FEEDBACK), folded into r184; Kimi's first clean round |
+| 102 | GLM 5.3 (eight sections) | r184 | findings (one High, eight Mediums; two sections clean), folded into r185; clean run restarts |
+| 103 | Grok 4.7 | r185 | findings (two Highs, three Mediums; owner decisions O181–O182), folded into r186; clean run restarts |
+| 104 | GPT-6.1 Sol | r186 | findings (one Medium, one Low), folded into r187; clean run restarts |
+| 105 | Gemini 3.8 Flash (six sections) | r187 | findings (two Mediums, owner decisions O183–O184; four sections clean), folded into r188; clean run restarts |
+| 106 | Claude Sonnet 5.5 | r188 | findings (one Critical, three Highs; owner decisions O185–O186: research ladder rerun, announced-change sensitivity), folded into r189; clean run restarts |
+| 107 | Kimi K3 (four sections) | r189 | findings (two Highs, one a wrong-premise owner challenge; owner decision O187: a label check that cannot be computed withholds labels), folded into r190; Kimi's clean run restarts |
+| 108 | GLM 5.3 (eight two-part sections) | r190 | findings (Highs; one real text defect from the 2026-11-05 search; owner decision O188: O87 stands), folded into r191; GLM's clean run restarts |
+| 109 | Grok 4.7 (whole draft) | r191 | findings (two Mediums, text only), folded into r192; Grok's clean run restarts |
+| 110 | GPT-6.1 Sol (whole draft) | r192 | findings (one Medium, one Low, text only), folded into r193; Sol's clean run restarts |
+| 111 | Gemini 3.8 Flash (six sections) | r193 | findings (Mediums; owner decision O189: an observer whose readings disagree is withheld), folded into r194; Gemini's clean run restarts |
+| 112 | Claude Sonnet 5.5 (whole draft) | r194 | findings (a High that is an owner action, Mediums that are owner-decision challenges; owner decision O190: Bug Hunt's live scale stays); draft unchanged; Sonnet's clean run restarts |
+| 113 | Kimi K3 (four sections) | r194 | findings (two Mediums in two sections, the other two sections clean), folded into r195; Kimi's clean run restarts |
+| 114 | GLM 5.3 (eight two-part sections) | r195 | findings (two text Mediums; six of eight sections clean), folded into r196; GLM's clean run restarts |
+| 115 | Grok 4.7 (whole draft) | r196 | findings (one Medium; owner decision O191: a withheld discordant observer blocks the cell), folded into r197; Grok's clean run restarts |
+| 116 | GPT-6.1 Sol (whole draft) | r197 | findings (one Medium: E348 extends O191 to a re-checked provisional observer), folded into r198; Sol's clean run restarts |
+| 117 | Gemini 3.8 Flash (six sections) | r198 | CLEAN (one Low, wording folded into r199); Gemini's clean run is 1 of 2 |
+| 118 | Claude Sonnet 5.5 (whole draft) | r199 | CLEAN (no findings); Sonnet's clean run is 1 of 2 |
+| 119 | Kimi K3 (four sections) | r199 | findings (a Medium, two Lows; two of four sections clean), folded into r200 as text; Kimi's clean run restarts |
+| 120 | GLM 5.3 (eight two-part sections) | r200 | findings (a High and Mediums that are design additions; four of eight sections clean), one wording folded into r201; GLM's clean run restarts |
+| 121 | Grok 4.7 (whole draft) | r201 | findings (one Medium on the 52/12 convention, one Low), wording folded into r202; Grok's clean run restarts |
+| 122 | GPT-6.1 Sol (whole draft) | r202 | CLEAN (two Lows, wording folded into r203); Sol's clean run is 1 of 2 |
+| 123 | Gemini 3.8 Flash (six sections) | r203 | findings (Mediums; owner decision O192: the observer test reads tightest readings), folded into r204; Gemini's clean run restarts |
+| 124 | Claude Sonnet 5.5 (whole draft) | r204 | findings (one Medium: E349 applies the label gate to subset-workload labels), folded into r205; Sonnet's clean run restarts |
+| 125 | Kimi K3 (four sections) | r205 | findings (one real gap in O192, E350; three of four sections clean), folded into r206; Kimi's clean run restarts |
+| 126 | GLM 5.3 (eight two-part sections) | r206 | findings (Mediums, three wording fixes into r207; two of eight sections clean); GLM's clean run restarts |
+| 127 | Grok 4.7 (whole draft) | r207 | findings (one Medium: E351 a departed setter reads rounding-stable only), folded into r208; Grok's clean run restarts |
+| 128 | GPT-6.1 Sol (whole draft) | r208 | findings (one Medium: E352 freezes the bar setter's SD with the bar), folded into r209; Sol's clean run restarts |
+| 129 | Gemini 3.8 Flash (six sections) | r209 | findings (a High that O86 allows by design, repeats and design additions; two of six sections clean), one wording folded into r210; Gemini's clean run restarts |
+| 130 | Claude Sonnet 5.5 (whole draft) | r210 | findings (one Medium: E353 states the Beta draw's variance), folded into r211 as text; Sonnet's clean run restarts |
+| 131 | Kimi K3 (four sections) | r211 | findings (one Medium: E354 states the LiveBench dependence envelope; three of four sections clean), folded into r212; Kimi's clean run restarts |
+| 132 | GLM 5.3 (eight two-part sections) | r212 | findings (a High and Mediums, two wordings folded into r213; four of eight sections clean); GLM's clean run restarts |
+| 133 | Grok 4.7 (whole draft) | r213 | findings (one Medium: wording in r214), Grok's clean run restarts |
+| 134 | GPT-6.1 Sol (whole draft) | r214 | findings (one Medium, wording in r215), Sol's clean run restarts |
+| 135 | Gemini 3.8 Flash (six sections, parts 1–17) | r215 | findings (Mediums; four of six sections clean), one wording into r216; Gemini's clean run restarts |
+| 136 | Claude Sonnet 5.5 (whole draft) | r216 | CLEAN (no findings); Sonnet's clean run is 1 of 2 |
+| 137 | Kimi K3 (four sections, parts 1–17) | r216 | findings (one Medium: E355 restates the diagnostics at the LiveBench dependence envelope; three of four sections clean), folded into r217; Kimi's clean run restarts |
+| 138 | GLM 5.3 (eight two-part sections, parts 1–17) | r217 | findings (a High repeating O170, Mediums; three of eight sections clean), one wording into r218; GLM's clean run restarts |
+| 139 | Grok 4.7 (whole draft) | r218 | CLEAN (one Low, wording folded into r219); Grok's clean run is 1 of 2 |
+| 140 | GPT-6.1 Sol (whole draft) | r219 | findings (one Medium repeating the O182 gate, wording folded into r220), Sol's clean run restarts |
+| 141 | Gemini 3.8 Flash (six sections, parts 1–17) | r220 | CLEAN (one Low, left); Gemini's clean run is 1 of 2 |
+| 142 | Claude Sonnet 5.5 (whole draft) | r220 | CLEAN (no findings); Sonnet is DONE (two consecutive clean rounds, 136 and 142) |
+| 143 | Kimi K3 (four sections, parts 1–17) | r220 | findings (two Highs that repeat owner decisions, Mediums that are presentation additions; three of four sections clean); draft unchanged; Kimi's clean run restarts |
+| 144 | GLM 5.3 (eight two-part sections, parts 1–17) | r220 | findings (a wording on O123 into r221; a repeated unstated-window Medium; six of eight sections clean); GLM's clean run restarts |
+| 145 | Grok 4.7 (whole draft) | r221 | CLEAN (no findings); Grok is DONE (two consecutive clean rounds, 139 and 145) |
+| 146 | GPT-6.1 Sol (whole draft) | r221 | findings (one Medium; owner decision O193: the API basis migrates alone when Plan references are short, built when first needed), folded into r222; Sol's clean run restarts |
+| 147 | Gemini 3.8 Flash (six sections, parts 1–17) | r222 | findings (one Medium: E356 joint adverse stress; four of six sections clean), folded into r223; Gemini's clean run restarts |
+| 148 | Kimi K3 (four sections, parts 1–17) | r223 | findings (owner decision O194: an unstated-window report is timing-unresolved; a wording; two Highs repeating owner decisions), folded into r224; Kimi's clean run restarts |
+| 149 | GLM 5.3 (eight two-part sections, parts 1–17) | r224 | findings (one Medium, wording into r225; six of eight sections clean); GLM's clean run restarts |
+| 150 | GPT-6.1 Sol (whole draft) | r225 | CLEAN (no findings); Sol's clean run is 1 of 2 |
+| 151 | Gemini 3.8 Flash (six sections, parts 1–17) | r225 | findings (one Medium, wording into r226; five of six sections clean); Gemini's clean run restarts |
+| 152 | GPT-6.1 Sol (whole draft) | r226 | CLEAN (no findings); Sol is DONE (two consecutive clean rounds, 150 and 152) |
+| 153 | Kimi K3 (four sections, parts 1–17) | r226 | CLEAN (all four sections); Kimi's clean run is 1 of 2 |
+| 154 | GLM 5.3 (eight sections, parts 1–17) | r226 | findings (sections 1, 5, 6, 7, 8; owner decisions O196, O197), folded into r227; GLM's clean run restarts |
+| 155 | Gemini 3.8 Flash (six sections, parts 1–17) | r227 | findings (O196 factor wording defect; no owner questions), folded into r228; Gemini's clean run restarts |
+| 156 | Kimi K3 (four sections, parts 1–17) | r227 | findings (O201 wording, E212 wording; owner decisions O200-O202), folded into r228 after the cutoff move; Kimi's clean run restarts |
+
+To continue:
+
+1. Send the next reviewer; models whose answers cannot read all 14 parts (Gemini, Kimi) review in sections. The `fetch` command re-reads a thread whose answer the driver saved too early.
+2. Triage it as for reviewers 68–70: verify each claim against the draft and code, put owner-decision challenges to the
+   owner, implement adopted items with tests (100% coverage), regenerate, and write the ledger entry.
+3. Build the next review copy and prompt: `tools/review_copy.py`, `tools/split_draft_26k.py` (26,500-character parts) (or `tools/build_section_prompt.py` for Gemini's five sectional sends) and the skill's
+   `build_linked_prompt.py` with `reviewer-prompt.md` and `ledger-brief.md`, after pushing so the commit SHA resolves.
+4. Continue in panel order (GLM needs sections of at most two parts).
+| 157 | GLM 5.3 (eight sections, parts 1–17) | r228 | findings (wording: numerator exceptions, E214, fallback rows, MiMo day rate, E62(a)), folded into r229 and r230; GLM's clean run restarts |
+| 158 | Gemini 4 Neon (substituted for Gemini 3.8 Flash, O204; six sections, parts 1–17) | r230 | findings (a rank-pairing defect fixed in code; O198 wording; the O94/O114 contradiction), folded into r231; the seat's clean run restarts |
+| 159 | Kimi K3 (four sections, parts 1–17) | r231 | findings (E192 population wording, Opus residual disclosure, near-point count), folded into r232; Kimi's clean run restarts |
+| 160 | Kimi K3 (four sections) | r232 | findings (Highs: repeated owner challenges and design additions; no defect adopted), not clean |
+| 161 | GLM 5.3 (eight sections) | r232 | findings (one wording fix, O198 tier bound, into r233), not clean |
+| 162 | Gemini 4 Neon (six sections) | r232 | CLEAN (all six sections NO FURTHER FEEDBACK); the seat's clean run is 1 of 2 |
+| 163 | Kimi K3 (four sections) | r233 | repeats and additions plus one wording defect (O44/O171 precedence), into r234 |
+| 164 | GLM 5.3 (eight sections) | r233 | six wording defects into r234; the rest repeats and additions |
+| 165 | Gemini 4 Neon (six sections) | r233 | CLEAN (all six sections); with 162 the seat is DONE |
+| 166 | Kimi K3 (four sections) | r234 | sections 2–4 repeats and additions only; section 1 (parts 1–5) outstanding: GitHub connector disconnected on the Perplexity account and attachment uploads fail; retry later, or send parts 1–3 and 4–5 with `--attach` |
+| 167 | GLM 5.3 (eight sections) | r234 | all eight repeats and additions only (parts 15–17 and 13–14 sent as attachments); GLM count 1 of 2 |
+| 166 s1 | Kimi K3 (parts 1–5) | r234 | received after the connector was reconnected: one defect (E203 omitted FrontierCode 1.1 Main), into r235 |
+| 168 | Kimi K3 (confirming) | r234 | sections 1–2 only, no defect; sections 3–4 stalled twice, superseded |
+| 169 | GLM 5.3 (eight sections) | r234 | one numeric wording error (Beta SD) and one clarity item, into r235 |
+| 170 | Kimi K3 (four sections) | r235 | stalled on the connector, superseded |
+| 171 | GLM 5.3 (eight sections) | r235 | one unclear sentence (nine versus six evaluation costs) and three wording fixes, into r236 |
+| 172 | Kimi K3 (eight two-part sections) | r236 | CLEAN (no defect); 1 of 2 |
+| 173 | GLM 5.3 (eight sections) | r236 | CLEAN; 1 of 2 |
+| 174 | Kimi K3 (eight sections) | r236 | CLEAN; Kimi seat DONE |
+| 175 | GLM 5.3 (eight sections) | r236 | CLEAN; GLM seat DONE. All six seats done (O205); final draft r236 |

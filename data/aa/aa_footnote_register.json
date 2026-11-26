@@ -1,0 +1,18 @@
+{
+  "reviewedOn": "2026-10-31",
+  "rule": "Owner decisions O100 and O103 (2026-10-28): every note an AA capture records is registered here by its exact text and classified once by an editor: 'pricing omission' (AA says its published cost omits a pricing term; O94), with the largest factor of at least 1 the note states for that term or null when it states none (O98: the row then competes over [C, infinity)), or 'not a pricing omission', with a reason. This covers every footnote on any point of the Intelligence Index chart capture now and, from the first capture later than the 2026-10-25T09:56:47Z release captures, the notes AA prints on model pages, the Coding Agent Index and the cost charts (O103). The build stops on any unregistered or changed note, on a ranked row whose reconciliation-inventory note differs from the chart capture, and on a post-O103 capture that records no notes. A note printed for a whole chart or index names no row, so as a pricing omission it must list the configurations it applies to (appliesTo); only the charts and index admitted to the ranking's cost workload count (O106, O108, O109); every configuration an appliesTo list names must be in the cohort; notes that count for nothing are published as disclosures.",
+  "notes": [
+    {
+      "text": "Claude Haiku 5.5 has 5x higher pricing on longer-context inputs which are not currently reflected; we are working to include this in cost figures across Artificial Analysis.",
+      "kind": "pricing omission",
+      "factor": 5.0,
+      "reason": "AA states 5x higher pricing on longer-context inputs that its cost figures do not yet reflect."
+    },
+    {
+      "text": "The model or provider declined some tasks on safety grounds",
+      "kind": "not a pricing omission",
+      "factor": null,
+      "reason": "The cost charts' legend for the '*' bar marker: declined tasks make the run incomplete (O27, 'partial component'); it names no pricing term."
+    }
+  ]
+}

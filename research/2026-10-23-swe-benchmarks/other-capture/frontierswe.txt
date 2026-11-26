@@ -1,0 +1,506 @@
+FrontierSWE
+Tasks
+Traces
+V1
+Blog
+Changelog
+Contribute
+Tasks
+Traces
+V1
+Blog
+Changelog
+Contribute
+GitHub
+FrontierSWE
+V2
+Benchmarking software engineering skill at the edge of human ability.
+By
+Read Blog
+Contribute
+Leaderboard
+Per provider
+Best
+Recent
+All
+mean@5
+worst→best@5
+Scores across all 34 tasks. Each model runs 5 trials per task with a 20-hour budget.
+#
+Model
+Score
+Avg Cost
+Time
+1
+GPT-6 Astra
+proximus
+65.5
+%
+±
+8.9
+$1029.65
+12.1h
+2
+Claude Opus 5.5
+proximus
+62.3
+%
+±
+9.8
+$98.87
+14.2h
+3
+Gemini 4 Argon
+proximus
+55.0
+%
+±
+9.9
+$129.36
+*
+10.6h
+4
+GLM-5.3
+proximus
+30.2
+%
+±
+11.5
+$97.22
+17.0h
+5
+Grok 4.7
+proximus
+29.5
+%
+±
+12.6
+$318.77
+12.1h
+6
+Kimi K3
+proximus
+25.9
+%
+±
+11.8
+$109.71
+18.4h
+7
+Muse Spark 1.3
+proximus
+25.8
+%
+±
+14.2
+$243.34
+17.0h
+8
+Qwen3.8-Max-0902
+proximus
+17.8
+%
+±
+9.4
+$51.27
+19.4h
+9
+DeepSeek V4 Flash Vision Exp
+proximus
+14.8
+%
+±
+9.7
+$8.57
+14.8h
+10
+Inkling
+proximus
+4.1
+%
+±
+5.3
+$9.15
+70m
+0
+%
+20
+%
+40
+%
+60
+%
+80
+%
+100
+%
+0
+%
+20
+%
+40
+%
+60
+%
+80
+%
+100
+%
+Bar and value are mean@5, whiskers span worst@5–best@5. Green marks the top result. Cost and time are per-trial averages.
+*
+Gemini 4 Argon: Cache hit rate is much lower due to a non-production setting.
+Task Highlights
+See all
+34
+tasks
+→
+Vision-only TORCS Racing Bot
+Flight-Sim Renderer in OpenGL
+Fitness-Recap Video in Remotion
+Snooker Prediction
+Astronomy Toolkit
+Analysis
+Coverage
+Pareto
+Saturation
+Score for every model on every task; stronger color is higher. The
+"Best"
+column is the highest score any model achieved on that task. Click a cell for that pair's traces; click a Best cell to open the top-scoring run's trace.
+0%
+100%
+Mean@5
+Best@5
+Best
+01
+Astronomy Toolkit
+02
+Cranelift Codegen Optimization
+03
+Crash-Proof Flash Filesystem
+04
+Dart Style in Haskell
+05
+FFmpeg libswscale Optimization
+06
+Fitness-Recap Video in Remotion
+07
+Flight-Sim Renderer in OpenGL
+08
+FrogsGame Post-Training
+09
+Git to Zig
+10
+Granite Mamba2 Inference Optimization
+11
+Higgs Uncertainty Inference
+12
+Kolmogorov Audio Compression
+13
+Lean 4 Kernel Type Checker in Pascal
+14
+libexpat Optimization
+15
+Lua Native Compiler
+16
+Machine-Learned Interatomic Potential
+17
+Medium-Range Weather Forecast
+18
+MEG Speech Decoding
+19
+MS/MS De Novo Generation
+20
+Multi-GPU Efficient Finetuning
+21
+Notebook Compression
+22
+Optimizer Design
+23
+PostgreSQL 18 on SQLite
+24
+Quantum ESPRESSO pw.x in Rust
+25
+Qubit Routing
+26
+Reconnaissance Blind Chess Recovery
+27
+SGLang Inference System Optimization
+28
+Snooker Prediction
+29
+SPICE Circuit Simulator in Rust
+30
+Stepper Music Sequencer GBA
+31
+Synthetic Music Diarization
+32
+Verilog Simulator in Swift
+33
+Vision-only TORCS Racing Bot
+34
+Wan 2.1 on MAX/Mojo
+Final score (
+mean
+@5)
+73
+66
+62
+62
+57
+55
+52
+47
+44
+32
+30
+30
+26
+26
+25
+20
+20
+18
+18
+16
+15
+12
+4
+Mean score against cost per run or wall-clock time. Filter by tag or pick specific tasks.
+AI Research
+Implementation
+Performance Optimisation
+Scientific Computing
+Visual Reasoning
+Tasks:
+all 34
+▾
+pick tasks
+Astronomy Toolkit
+Cranelift Codegen Optimization
+Crash-Proof Flash Filesystem
+Dart Style in Haskell
+FFmpeg libswscale Optimization
+Fitness-Recap Video in Remotion
+Flight-Sim Renderer in OpenGL
+FrogsGame Post-Training
+Git to Zig
+Granite Mamba2 Inference Optimization
+Higgs Uncertainty Inference
+Kolmogorov Audio Compression
+Lean 4 Kernel Type Checker in Pascal
+libexpat Optimization
+Lua Native Compiler
+Machine-Learned Interatomic Potential
+Medium-Range Weather Forecast
+MEG Speech Decoding
+MS/MS De Novo Generation
+Multi-GPU Efficient Finetuning
+Notebook Compression
+Optimizer Design
+PostgreSQL 18 on SQLite
+Quantum ESPRESSO pw.x in Rust
+Qubit Routing
+Reconnaissance Blind Chess Recovery
+SGLang Inference System Optimization
+Snooker Prediction
+SPICE Circuit Simulator in Rust
+Stepper Music Sequencer GBA
+Synthetic Music Diarization
+Verilog Simulator in Swift
+Vision-only TORCS Racing Bot
+Wan 2.1 on MAX/Mojo
+Models:
+all 22
+▾
+all
+none
+Claude Fable 5
+Claude Fable 5.1
+Claude Haiku 5.5
+Claude Opus 5
+Claude Opus 5.5
+Claude Sonnet 5.5
+DeepSeek V4 Flash Vision Exp
+Gemini 3.7 Flash
+Gemini 3.8 Flash
+Gemini 4 Argon
+GLM-5.3
+GLM-5.3 Flash
+GPT-5.6 Sol
+GPT-6 Astra
+Grok 4.6
+Grok 4.7
+Inkling
+Kimi K3
+Muse Spark 1.2
+Muse Spark 1.3
+Qwen3.8-Max
+Qwen3.8-Max-0902
+Claude Fable 5
+Claude Fable 5.1
+Claude Haiku 5.5
+Claude Opus 5
+Claude Opus 5.5
+Claude Sonnet 5.5
+DeepSeek V4 Flash Vision Exp
+Gemini 3.7 Flash
+Gemini 3.8 Flash
+Gemini 4 Argon
+GLM-5.3
+GLM-5.3 Flash
+GPT-5.6 Sol
+GPT-6 Astra
+Grok 4.6
+Grok 4.7
+Inkling
+Kimi K3
+Muse Spark 1.2
+Muse Spark 1.3
+Qwen3.8-Max
+Qwen3.8-Max-0902
+fig · pareto · per-model means
+Cost / trial ($)
+Mean time (h)
+0.000
+0.233
+0.467
+0.700
+$8
+$16
+$32
+$64
+$128
+$256
+$512
+$1024
+mean cost per run (usd, log)
+mean reward
+Claude Fable 5
+Claude Fable 5: mean reward 0.4720 over 170 runs, mean cost $293.78
+Claude Fable 5.1
+Claude Fable 5.1: mean reward 0.5653 over 170 runs, mean cost $135.84
+Claude Haiku 5.5
+Claude Haiku 5.5: mean reward 0.4377 over 170 runs, mean cost $20.55 (frontier)
+Claude Opus 5
+Claude Opus 5: mean reward 0.5201 over 170 runs, mean cost $196.71
+Claude Opus 5.5
+Claude Opus 5.5: mean reward 0.6233 over 170 runs, mean cost $98.87 (frontier)
+Claude Sonnet 5.5
+Claude Sonnet 5.5: mean reward 0.6189 over 170 runs, mean cost $110.45
+DeepSeek V4 Flash Vision Exp
+DeepSeek V4 Flash Vision Exp: mean reward 0.1483 over 167 runs, mean cost $8.44 (frontier)
+Gemini 3.7 Flash
+Gemini 3.7 Flash: mean reward 0.2026 over 170 runs, mean cost $34.14
+Gemini 3.8 Flash
+Gemini 3.8 Flash: mean reward 0.1963 over 170 runs, mean cost $38.75
+Gemini 4 Argon
+*
+Gemini 4 Argon*: mean reward 0.5496 over 170 runs, mean cost $129.36
+GLM-5.3
+GLM-5.3: mean reward 0.3018 over 170 runs, mean cost $97.22
+GLM-5.3 Flash
+GLM-5.3 Flash: mean reward 0.1813 over 170 runs, mean cost $11.03 (frontier)
+GPT-5.6 Sol
+GPT-5.6 Sol: mean reward 0.3220 over 170 runs, mean cost $179.64
+GPT-6 Astra
+GPT-6 Astra: mean reward 0.6551 over 169 runs, mean cost $1039.36 (frontier)
+Grok 4.6
+Grok 4.6: mean reward 0.2529 over 170 runs, mean cost $243.43
+Grok 4.7
+Grok 4.7: mean reward 0.2950 over 170 runs, mean cost $318.77
+Inkling
+Inkling: mean reward 0.0412 over 170 runs, mean cost $9.15
+Kimi K3
+Kimi K3: mean reward 0.2587 over 165 runs, mean cost $108.20
+Muse Spark 1.2
+Muse Spark 1.2: mean reward 0.1197 over 170 runs, mean cost $27.81
+Muse Spark 1.3
+Muse Spark 1.3: mean reward 0.2580 over 170 runs, mean cost $243.34
+Qwen3.8-Max
+Qwen3.8-Max: mean reward 0.1581 over 170 runs, mean cost $55.14
+Qwen3.8-Max-0902
+Qwen3.8-Max-0902: mean reward 0.1781 over 170 runs, mean cost $51.27
+*
+Gemini 4 Argon
+:
+Cache hit rate is much lower due to a non-production setting.
+Share of a model's runs scoring at or above each reward threshold, pooled over every task. The dashed Best of all curve takes the highest-scoring run on each task regardless of model. Click a model below to toggle its curve.
+0
+%
+0
+%
+20
+%
+20
+%
+40
+%
+40
+%
+60
+%
+60
+%
+80
+%
+80
+%
+100
+%
+100
+%
+reward threshold
+% runs ≥ threshold
+GPT-6 Astra: 169 graded trials
+Claude Opus 5.5: 170 graded trials
+Claude Sonnet 5.5: 170 graded trials
+Claude Fable 5.1: 170 graded trials
+Gemini 4 Argon: 170 graded trials
+Claude Opus 5: 170 graded trials
+Claude Fable 5: 170 graded trials
+Claude Haiku 5.5: 170 graded trials
+GPT-5.6 Sol: 170 graded trials
+GLM-5.3: 170 graded trials
+Grok 4.7: 170 graded trials
+Kimi K3: 165 graded trials
+Muse Spark 1.3: 170 graded trials
+Grok 4.6: 170 graded trials
+Gemini 3.7 Flash: 170 graded trials
+Gemini 3.8 Flash: 170 graded trials
+GLM-5.3 Flash: 170 graded trials
+Qwen3.8-Max-0902: 170 graded trials
+Qwen3.8-Max: 170 graded trials
+DeepSeek V4 Flash Vision Exp: 167 graded trials
+Muse Spark 1.2: 170 graded trials
+Inkling: 170 graded trials
+Best of all: highest-scoring run per task over 34 tasks
+Best of all
+GPT-6 Astra
+Claude Opus 5.5
+Claude Sonnet 5.5
+Claude Fable 5.1
+Gemini 4 Argon
+Claude Opus 5
+Claude Fable 5
+Claude Haiku 5.5
+GPT-5.6 Sol
+GLM-5.3
+Grok 4.7
+Kimi K3
+Muse Spark 1.3
+Grok 4.6
+Gemini 3.7 Flash
+Gemini 3.8 Flash
+GLM-5.3 Flash
+Qwen3.8-Max-0902
+Qwen3.8-Max
+DeepSeek V4 Flash Vision Exp
+Muse Spark 1.2
+Inkling
+clear all
+©
+2026
+FrontierSWE, San Francisco, CA
+Blog
+Privacy
+Careers

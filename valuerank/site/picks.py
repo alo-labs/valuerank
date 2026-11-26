@@ -11,8 +11,8 @@
 * ``budget`` is the best overall model in the cheapest third by the basis' cost score. When that
   third holds several models, models already picked are skipped (unless that would empty it).
 
-Reasons are built from the data and stay under 25 words. ``assets/js/scoring.js`` applies the same rule
-when the cost weight moves.
+Reasons are built from the data and stay under 25 words; a subset-cost pick (O17) says its cross-workload
+ordering is not identified. ``assets/js/scoring.js`` applies the same rule when the cost weight moves.
 """
 
 from __future__ import annotations
@@ -21,18 +21,20 @@ import math
 
 
 def _cost_text(model: dict, basis: str) -> str:
+    """The basis' cost of one run of the SDLC basket (methodology v3); the Plan basis notes an API fallback."""
+
     cost = model["cost"]
-    if basis == "api":
-        value = cost["apiUsd"]
-        return "with no cost data" if value is None else f"${value:,.2f} per Index run"
-    value = cost["planComparableUsdPerPoint"]
+    value = cost["apiUsd"] if basis == "api" else cost["planUsd"]
     if value is None:
         return "with no cost data"
-    suffix = " (API fallback)" if cost["fallback"] else ""
-    return f"${value:,.2f} per Index point{suffix}"
+    suffix = " (API fallback)" if basis == "plan" and cost["fallback"] else ""
+    return f"${value:,.2f} per basket run{suffix}"
 
 
 def _pick(model: dict, label: str, reason: str, score: float, unit: str) -> dict:
+    # O17: a subset-cost row is scored on its own workload; its ordering against full-basket rows is not identified.
+    if model["cost"]["subset"]:
+        reason += " Subset cost: cross-workload ordering not identified."
     return {"slug": model["slug"], "label": label, "reason": reason, "score": score, "unit": unit}
 
 

@@ -1,0 +1,28 @@
+jyongchulwp | 2026-11-04 13:40:27 UTC | #1
+
+Hello Antigravity team and community,
+
+We subscribe to Google AI Ultra and use the Antigravity CLI (`agy`), including headless mode (`agy -p`) for scripting and CLI workflows.
+
+We ran the exact same three short prompts on a single account and model (`gemini-4-argon-high`), comparing interactive mode against `agy -p`, and recorded `/usage` before and after each run:
+- On `gemini-4-argon-high`, interactive mode consumed **26.5% less** of the 5-hour quota than `agy -p` resuming the same conversation (`307 ppm` vs `418 ppm`).
+- On a cold start (`agy -p` without a warm session cache), the same three turns consumed **2.5x to 7.2x more** quota than on a warm interactive cache (`1,294 ppm`).
+
+The `/usage` description states: *"Quota is consumed proportionally to the cost of the tokens."* However, there is no disclosure in `/usage` or the CLI documentation that headless (`agy -p`) invocations can drain the 5-hour subscription quota significantly faster for the same work (we have not established a weekly-quota difference).
+
+Could the team clarify:
+1. How headless (`agy -p`) runs are counted against the Google AI Ultra 5-hour and weekly subscription quotas compared to interactive sessions?
+2. Whether quota credits or billing adjustments are available for subscribers whose weekly quota was exhausted days before reset due to this undisclosed difference?
+
+-------------------------
+
+jyongchulwp | 2026-11-04 05:49:39 UTC | #2
+
+We are attaching our controlled measurement chart (**Figure 1**) comparing 5-hour quota consumption (in parts per million of the `/usage` remaining fraction before and after each run) for the exact same three prompts on a single Google AI Ultra account:
+
+![Google Antigravity CLI: 5-hour quota used for the same 3 prompts](upload://kHNndkFtkZtOwh5LH5ytd1iawms.png)
+
+We measured Antigravity headless (`agy -p`) and interactive sessions on the same account. For the Flash model, quota per token was effectively the same (about 0.98×). The difference we observed comes from prompt cache being cold at the start of each new headless process, which can consume 2.5–7.2× more quota for the same turns. This cost is not described in the `/usage` documentation ("quota is consumed proportionally to the cost of the tokens"). We ask Google to document how cache state affects quota consumption for headless use and to consider a quota credit for the affected period.
+
+-------------------------
+

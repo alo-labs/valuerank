@@ -52,38 +52,41 @@
           "api": 1,
           "plan": 2
         },
-        "intelligenceIndex": {
-          "value": 52.0,
-          "status": "measured"
-        },
         "apiUsd": 1081.55,
-        "planUsdPerRun": 100.4,
-        "planUsdPerPoint": 1.931,
+        "planUsd": 100.4,
         "fallback": null,
-        "routeId": "r1"
+        "routeId": "r1",
+        "flags": [
+          "workload-unmatched"
+        ],
+        "measuredOnly": null
       }
     ],
     "workedExample": {
       "slugs": [
-        "alpha-one",
-        "beta-two"
+        "alpha-one"
       ]
+    },
+    "identificationYield": {
+      "rows": 1,
+      "pointIdentified": 0,
+      "setIdentified": 0,
+      "unidentified": 1,
+      "exploratory": true
     }
   },
   "workedExample": {
-    "slugs": [
-      "alpha-one",
-      "beta-two"
-    ],
     "models": [
       {
         "slug": "alpha-one",
         "name": "Alpha <b>x</b> One",
-        "apiUsd": 1081.55,
+        "routeLabel": "Pro $200",
+        "planFeeUsd": 200,
         "valueMultiple": 10.7,
-        "planUsdPerRun": 100.4,
-        "indexValue": 52.0,
-        "planUsdPerPoint": 1.931
+        "grade": "assumption",
+        "evidenceLabel": "Provisional assumption",
+        "apiUsd": 1081.55,
+        "planUsd": 100.4
       }
     ]
   },

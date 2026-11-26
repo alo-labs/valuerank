@@ -23,7 +23,7 @@ test('toCsv quotes commas, quotes and newlines and doubles embedded quotes', () 
 });
 
 test('toCsv uses the plan cost under the plan basis', () => {
-  assert.match(toCsv([models[1]], cols, 'plan'), /Beta,Bolt AI,69\.4,2\.25,estimate,/);
+  assert.match(toCsv([models[1]], cols, 'plan'), /Beta,Bolt AI,69\.4,2500,estimate,/);
 });
 
 test('toJson emits an array of objects keyed by column key, with nulls preserved', () => {

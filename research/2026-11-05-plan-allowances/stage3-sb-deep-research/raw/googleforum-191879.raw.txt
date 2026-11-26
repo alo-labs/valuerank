@@ -1,0 +1,46 @@
+Faheem_Anis1 | 2026-10-26 04:48:13 UTC | #1
+
+Continuation of previous post
+
+https://discuss.ai.google.dev/t/estimating-included-quota-in-google-ai-pro/183629
+
+We estimated about `16,258` sample requests / week on Google AI Pro ($20) plan through Gemini 3.8 flash. Now that Gemini 4 Argon and Claude 5.5 models are available, I want to estimate their available quota.
+
+Since data is limited, the following calculations might be error prone.
+
+![image|184x246](upload://48HdYR7tX14VfmaUq2anVf8ktG6.png)
+
+**Gemini 4 Argon**
+Input Tokens: 185,443 (185k)
+Cache Read: 1,684,364 (1.68m)
+Output: 19,961 (19k)
+
+This is planning for a single task. It does seem that Gemini 4 Argon is actually quite efficient (at least compared to 3.8 flash).
+
+**Current Usage Remaining**
+
+![image|287x310](upload://fZ2nEmjrk2ndPbyD1oLOtfWcvzw.png)
+
+**Estimated Quota (Calculated at Introductory Pricing):**
+
+* Currently Used: 0.72$
+* **Weekly:** $12 API value (\~17 times less than 3.8 flash) — **\~442 requests**
+
+**Sonnet 5.5 (Too Limited to be Practical - will add updated data later)**
+Input Tokens: 13,692 (13k)
+Output: 5 (five)
+
+This was the prompt
+
+> Reply exactly with TEST
+
+**Estimated Quota (Calculated at Introductory Pricing):**
+
+* Currently Used: 0.03$
+* **5-Hour:** $3 API value — **\~110 requests**
+* **Weekly:** IDK ($4 or $5 USD, doesn't seem high)
+
+**Assumption per request:** 80k cached input tokens + 8k input tokens + 310 output tokens (\~88.31k total tokens/request).
+
+-------------------------
+

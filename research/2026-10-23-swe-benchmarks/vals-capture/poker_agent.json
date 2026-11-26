@@ -1,0 +1,1143 @@
+{
+    "metadata": {
+      "benchmark": "Agent Poker Bench",
+      "slug": "poker_agent",
+      "description": "Which model can make the most money playing poker?",
+      "benchmark_id": "poker_agent",
+      "family": "poker_agent",
+      "version": "1",
+      "dataset_type": "private",
+      "industry": "beta",
+      "mode": "agentic",
+      "total_models": 17,
+      "accuracy_label": "TrueSkill Rating",
+    "models": [
+      "openai/gpt-5.2-2025-12-11",
+      "openai/gpt-5-2025-08-07",
+      "google/gemini-3-flash-preview",
+      "fireworks/deepseek-v3p2-thinking",
+      "google/gemini-3-pro-preview",
+      "grok/grok-4-1-fast-reasoning",
+      "fireworks/deepseek-v3p1",
+      "anthropic/claude-sonnet-4-5-20250929",
+      "openai/gpt-5.1-2025-11-13",
+      "grok/grok-4-fast-reasoning",
+      "google/gemini-2.5-pro",
+      "anthropic/claude-opus-4-5-20251101",
+      "fireworks/gpt-oss-120b",
+      "fireworks/kimi-k2-thinking",
+      "alibaba/qwen3-max-preview",
+      "fireworks/glm-4p6",
+      "fireworks/llama4-maverick-instruct-basic"
+    ],
+    "updated": "2025-12-23",
+    "visible": true,
+    "showBadge": true,
+    "partners": [
+      {
+        "name": "graphite",
+        "url": "https://www.thegraphitegroup.com/"
+      }
+    ],
+    "use_cost_per_test": true,
+    "cost_label": "Cost / Hand",
+    "cost_decimals": 3,
+    "tasks": {
+      "overall": "Overall"
+    }
+  },
+  "tasks": {
+    "overall": {
+      "openai/gpt-5.2-2025-12-11": {
+        "accuracy": 1131.832739229475,
+        "latency": 145.95231141549124,
+        "stderr": 0.0,
+        "cost_per_test": 0.08980820242349798
+      },
+      "openai/gpt-5-2025-08-07": {
+        "accuracy": 1103.1750450374514,
+        "latency": 76.03939085804956,
+        "stderr": 0.0,
+        "cost_per_test": 0.05482942854251021
+      },
+      "google/gemini-3-flash-preview": {
+        "accuracy": 1100.2125195039544,
+        "latency": 7.7072606111437345,
+        "stderr": 0.0,
+        "cost_per_test": 0.00872674530884417
+      },
+      "fireworks/deepseek-v3p2-thinking": {
+        "accuracy": 1090.3042378394075,
+        "latency": 35.654173868899655,
+        "stderr": 0.0,
+        "cost_per_test": 0.01352755699978692
+      },
+      "google/gemini-3-pro-preview": {
+        "accuracy": 1078.9046046507783,
+        "latency": 22.353908267671784,
+        "stderr": 0.0,
+        "cost_per_test": 0.03343475539568342
+      },
+      "grok/grok-4-1-fast-reasoning": {
+        "accuracy": 1079.2154109067953,
+        "latency": 14.792755439569213,
+        "stderr": 0.0,
+        "cost_per_test": 0.004366472477375571
+      },
+      "fireworks/deepseek-v3p1": {
+        "accuracy": 1058.2325209691314,
+        "latency": 3.9977358921550272,
+        "stderr": 0.0,
+        "cost_per_test": 0.007085498012100262
+      },
+      "anthropic/claude-sonnet-4-5-20250929": {
+        "accuracy": 1055.504459218733,
+        "latency": 16.67560795007542,
+        "stderr": 0.0,
+        "cost_per_test": 0.027591309991158296
+      },
+      "openai/gpt-5.1-2025-11-13": {
+        "accuracy": 1038.5925586989251,
+        "latency": 58.69792635737953,
+        "stderr": 0.0,
+        "cost_per_test": 0.03587991108247422
+      },
+      "grok/grok-4-fast-reasoning": {
+        "accuracy": 1034.299831048473,
+        "latency": 7.782650674131283,
+        "stderr": 0.0,
+        "cost_per_test": 0.0038871887884872796
+      },
+      "google/gemini-2.5-pro": {
+        "accuracy": 1032.5962096202413,
+        "latency": 19.79321908170333,
+        "stderr": 0.0,
+        "cost_per_test": 0.02165833147163121
+      },
+      "anthropic/claude-opus-4-5-20251101": {
+        "accuracy": 1033.3789020943957,
+        "latency": 8.852645959989609,
+        "stderr": 0.0,
+        "cost_per_test": 0.04247890808080806
+      },
+      "fireworks/gpt-oss-120b": {
+        "accuracy": 1015.3311053208165,
+        "latency": 13.452568330134357,
+        "stderr": 0.0,
+        "cost_per_test": 0.004534421914446
+      },
+      "kimi/kimi-k2-thinking": {
+        "accuracy": 1011.6338984569229,
+        "latency": 71.72413331456877,
+        "stderr": 0.0,
+        "cost_per_test": 0.02410503610648917
+      },
+      "alibaba/qwen3-max-preview": {
+        "accuracy": 994.5115993602194,
+        "latency": 10.279249585339961,
+        "stderr": 0.0,
+        "cost_per_test": 0.020775621656804744
+      },
+      "zai/glm-4.6": {
+        "accuracy": 945.7558288256936,
+        "latency": 42.55249388614798,
+        "stderr": 0.0,
+        "cost_per_test": 0.019527262827635273
+      },
+      "fireworks/llama4-maverick-instruct-basic": {
+        "accuracy": 890.5037748478502,
+        "latency": 13.958395570116652,
+        "stderr": 0.0,
+        "cost_per_test": 0.005185648762098834
+      }
+    }
+  },
+  "poker_models": {
+    "openai/gpt-5.2-2025-12-11": {
+      "model": "openai/gpt-5.2-2025-12-11",
+      "performance": {
+        "trueskill_rating": 1131.832739229475,
+        "trueskill_sigma": 30.290279730367153,
+        "trueskill_conservative": 1101.542459499108,
+        "trueskill_rank": 1,
+        "average_profit": 63.016949152542395,
+        "stdev_profit": 222.21102827511413,
+        "average_ending_chips": 263.0169491525424,
+        "stdev_ending_chips": 222.21102827511413,
+        "games_played": 49,
+        "accuracy": 1131.832739229475,
+        "latency": 145.95231141549124,
+        "average_latency_per_decision_seconds": 145.95231141549124
+      },
+      "gameplay_metrics": {
+        "hands_played_pct": 30.239910730890827,
+        "aggressive_actions_per_game": 26.220338983050848,
+        "average_raise_size": 15.918743228602384,
+        "percent_bet": 9.265033407572384,
+        "percent_call": 13.15515961395694,
+        "percent_check": 7.6317743132887905,
+        "percent_fold": 56.243504083147734,
+        "percent_raise": 13.70452858203415,
+        "average_call_size": 13.654627539503386
+      },
+      "personality_metrics": {
+        "raw_percentages": {
+          "hands_played_pct": 30.239910730890827,
+          "aggressive_action_pct": 52.49406175771971,
+          "fold_after_invest_pct": 36.34686346863469,
+          "avg_bet_size_pct": 45.646937201959126,
+          "win_before_showdown_pct": 2.3962896160783305,
+          "win_at_showdown_pct": 49.66577540106952
+        },
+        "relative_to_field_pct": {
+          "hands_played_pct": 124.67217074158683,
+          "aggressive_action_pct": 121.95366523450124,
+          "fold_after_invest_pct": 80.86901580411406,
+          "avg_bet_size_pct": 73.29341318809892,
+          "win_before_showdown_pct": 82.38413380033343,
+          "win_at_showdown_pct": 166.66442037069294
+        },
+        "field_means_used": {
+          "hands_played_pct": 24.25554199547094,
+          "aggressive_action_pct": 43.044267391865894,
+          "fold_after_invest_pct": 44.945351575288505,
+          "avg_bet_size_pct": 62.27972639889431,
+          "win_at_showdown_pct": 29.799866876567606,
+          "win_before_showdown_pct": 2.9086785349785784
+        }
+      },
+      "cost_metrics": {
+        "cost_per_hand": 0.08980820242349798
+      },
+      "cost_per_test": 0.08980820242349798
+    },
+    "openai/gpt-5-2025-08-07": {
+      "model": "openai/gpt-5-2025-08-07",
+      "performance": {
+        "trueskill_rating": 1103.1750450374514,
+        "trueskill_sigma": 25.355578067442885,
+        "trueskill_conservative": 1077.8194669700085,
+        "trueskill_rank": 2,
+        "average_profit": 62.08965517241381,
+        "stdev_profit": 228.11464336434295,
+        "average_ending_chips": 262.0896551724138,
+        "stdev_ending_chips": 228.11464336434295,
+        "games_played": 145,
+        "accuracy": 1103.1750450374514,
+        "latency": 76.03939085804956,
+        "average_latency_per_decision_seconds": 76.03939085804956
+      },
+      "gameplay_metrics": {
+        "hands_played_pct": 25.23458928829219,
+        "aggressive_actions_per_game": 23.73793103448276,
+        "average_raise_size": 17.0473061760841,
+        "percent_bet": 7.012766987354027,
+        "percent_call": 12.82144369819084,
+        "percent_check": 10.19543776850003,
+        "percent_fold": 56.156592242996304,
+        "percent_raise": 13.813759302958795,
+        "average_call_size": 13.56536101934875
+      },
+      "personality_metrics": {
+        "raw_percentages": {
+          "hands_played_pct": 25.23458928829219,
+          "aggressive_action_pct": 47.5020701076456,
+          "fold_after_invest_pct": 36.98512585812357,
+          "avg_bet_size_pct": 59.03024142908595,
+          "win_before_showdown_pct": 3.1625091326583865,
+          "win_at_showdown_pct": 36.22747484203136
+        },
+        "relative_to_field_pct": {
+          "hands_played_pct": 104.03638596492324,
+          "aggressive_action_pct": 110.35632149386308,
+          "fold_after_invest_pct": 82.28910123479474,
+          "avg_bet_size_pct": 94.78243538034224,
+          "win_before_showdown_pct": 108.72666383126719,
+          "win_at_showdown_pct": 121.56925060131042
+        },
+        "field_means_used": {
+          "hands_played_pct": 24.25554199547094,
+          "aggressive_action_pct": 43.044267391865894,
+          "fold_after_invest_pct": 44.945351575288505,
+          "avg_bet_size_pct": 62.27972639889431,
+          "win_at_showdown_pct": 29.799866876567606,
+          "win_before_showdown_pct": 2.9086785349785784
+        }
+      },
+      "cost_metrics": {
+        "cost_per_hand": 0.05482942854251021
+      },
+      "cost_per_test": 0.05482942854251021
+    },
+    "google/gemini-3-flash-preview": {
+      "model": "google/gemini-3-flash-preview",
+      "performance": {
+        "trueskill_rating": 1100.2125195039544,
+        "trueskill_sigma": 30.131018459901707,
+        "trueskill_conservative": 1070.0815010440526,
+        "trueskill_rank": 3,
+        "average_profit": 27.48214285714286,
+        "stdev_profit": 215.82164278289258,
+        "average_ending_chips": 227.48214285714286,
+        "stdev_ending_chips": 215.82164278289258,
+        "games_played": 49,
+        "accuracy": 1100.2125195039544,
+        "latency": 7.7072606111437345,
+        "average_latency_per_decision_seconds": 7.7072606111437345
+      },
+      "gameplay_metrics": {
+        "hands_played_pct": 21.453420950908388,
+        "aggressive_actions_per_game": 15.107142857142858,
+        "average_raise_size": 16.14757281553398,
+        "percent_bet": 5.524954097813387,
+        "percent_call": 13.520280420630945,
+        "percent_check": 10.315473209814723,
+        "percent_fold": 62.04306459689535,
+        "percent_raise": 8.596227674845602,
+        "average_call_size": 14.102469135802469
+      },
+      "personality_metrics": {
+        "raw_percentages": {
+          "hands_played_pct": 21.453420950908388,
+          "aggressive_action_pct": 37.203166226912934,
+          "fold_after_invest_pct": 40.9009009009009,
+          "avg_bet_size_pct": 57.897824028869216,
+          "win_before_showdown_pct": 1.1961722488038278,
+          "win_at_showdown_pct": 29.81586402266289
+        },
+        "relative_to_field_pct": {
+          "hands_played_pct": 88.44750183242341,
+          "aggressive_action_pct": 86.43001375356953,
+          "fold_after_invest_pct": 91.0014038546062,
+          "avg_bet_size_pct": 92.96415924829289,
+          "win_before_showdown_pct": 41.12425056324202,
+          "win_at_showdown_pct": 100.05368193811586
+        },
+        "field_means_used": {
+          "hands_played_pct": 24.25554199547094,
+          "aggressive_action_pct": 43.044267391865894,
+          "fold_after_invest_pct": 44.945351575288505,
+          "avg_bet_size_pct": 62.27972639889431,
+          "win_at_showdown_pct": 29.799866876567606,
+          "win_before_showdown_pct": 2.9086785349785784
+        }
+      },
+      "cost_metrics": {
+        "cost_per_hand": 0.00872674530884417
+      },
+      "cost_per_test": 0.00872674530884417
+    },
+    "fireworks/deepseek-v3p2-thinking": {
+      "model": "fireworks/deepseek-v3p2-thinking",
+      "performance": {
+        "trueskill_rating": 1090.3042378394075,
+        "trueskill_sigma": 25.837560725323456,
+        "trueskill_conservative": 1064.466677114084,
+        "trueskill_rank": 4,
+        "average_profit": 29.48214285714286,
+        "stdev_profit": 196.16618171698417,
+        "average_ending_chips": 229.48214285714286,
+        "stdev_ending_chips": 196.16618171698417,
+        "games_played": 98,
+        "accuracy": 1090.3042378394075,
+        "latency": 35.654173868899655,
+        "average_latency_per_decision_seconds": 35.654173868899655
+      },
+      "gameplay_metrics": {
+        "hands_played_pct": 20.976558880756045,
+        "aggressive_actions_per_game": 17.830357142857142,
+        "average_raise_size": 19.351083032490976,
+        "percent_bet": 7.082536647546207,
+        "percent_call": 11.647546207775655,
+        "percent_check": 6.492989165073296,
+        "percent_fold": 65.94964945825367,
+        "percent_raise": 8.827278521351179,
+        "average_call_size": 11.03625170998632
+      },
+      "personality_metrics": {
+        "raw_percentages": {
+          "hands_played_pct": 20.976558880756045,
+          "aggressive_action_pct": 46.724379971923256,
+          "fold_after_invest_pct": 43.28621908127209,
+          "avg_bet_size_pct": 66.08464661523983,
+          "win_before_showdown_pct": 2.43959929286977,
+          "win_at_showdown_pct": 34.27209705372617
+        },
+        "relative_to_field_pct": {
+          "hands_played_pct": 86.48150960581646,
+          "aggressive_action_pct": 108.54959975634944,
+          "fold_after_invest_pct": 96.30855597772512,
+          "avg_bet_size_pct": 106.10940419355002,
+          "win_before_showdown_pct": 83.87311500848742,
+          "win_at_showdown_pct": 115.00755085813887
+        },
+        "field_means_used": {
+          "hands_played_pct": 24.25554199547094,
+          "aggressive_action_pct": 43.044267391865894,
+          "fold_after_invest_pct": 44.945351575288505,
+          "avg_bet_size_pct": 62.27972639889431,
+          "win_at_showdown_pct": 29.799866876567606,
+          "win_before_showdown_pct": 2.9086785349785784
+        }
+      },
+      "cost_metrics": {
+        "cost_per_hand": 0.01352755699978692
+      },
+      "cost_per_test": 0.01352755699978692
+    },
+    "google/gemini-3-pro-preview": {
+      "model": "google/gemini-3-pro-preview",
+      "performance": {
+        "trueskill_rating": 1078.9046046507783,
+        "trueskill_sigma": 27.562585428978657,
+        "trueskill_conservative": 1051.3420192217995,
+        "trueskill_rank": 5,
+        "average_profit": 20.634920634920633,
+        "stdev_profit": 167.27226228105673,
+        "average_ending_chips": 220.63492063492063,
+        "stdev_ending_chips": 167.27226228105673,
+        "games_played": 63,
+        "accuracy": 1078.9046046507783,
+        "latency": 22.353908267671784,
+        "average_latency_per_decision_seconds": 22.353908267671784
+      },
+      "gameplay_metrics": {
+        "hands_played_pct": 13.741431531962379,
+        "aggressive_actions_per_game": 9.238095238095237,
+        "average_raise_size": 18.051063829787235,
+        "percent_bet": 1.4975264072736998,
+        "percent_call": 9.025270758122744,
+        "percent_check": 9.640326246824442,
+        "percent_fold": 73.55261398582698,
+        "percent_raise": 6.284262601952133,
+        "average_call_size": 14.654814814814815
+      },
+      "personality_metrics": {
+        "raw_percentages": {
+          "hands_played_pct": 13.741431531962379,
+          "aggressive_action_pct": 29.42366026289181,
+          "fold_after_invest_pct": 45.707656612529,
+          "avg_bet_size_pct": 67.68479685033311,
+          "win_before_showdown_pct": 0.7218913553510197,
+          "win_at_showdown_pct": 43.0327868852459
+        },
+        "relative_to_field_pct": {
+          "hands_played_pct": 56.652749852088306,
+          "aggressive_action_pct": 68.35674538266628,
+          "fold_after_invest_pct": 101.69607091839865,
+          "avg_bet_size_pct": 108.67869973740727,
+          "win_before_showdown_pct": 24.818533456683145,
+          "win_at_showdown_pct": 144.40597021285245
+        },
+        "field_means_used": {
+          "hands_played_pct": 24.25554199547094,
+          "aggressive_action_pct": 43.044267391865894,
+          "fold_after_invest_pct": 44.945351575288505,
+          "avg_bet_size_pct": 62.27972639889431,
+          "win_at_showdown_pct": 29.799866876567606,
+          "win_before_showdown_pct": 2.9086785349785784
+        }
+      },
+      "cost_metrics": {
+        "cost_per_hand": 0.03343475539568342
+      },
+      "cost_per_test": 0.03343475539568342
+    },
+    "grok/grok-4-1-fast-reasoning": {
+      "model": "grok/grok-4-1-fast-reasoning",
+      "performance": {
+        "trueskill_rating": 1079.2154109067953,
+        "trueskill_sigma": 30.99012895892201,
+        "trueskill_conservative": 1048.2252819478733,
+        "trueskill_rank": 6,
+        "average_profit": 37.721311475409834,
+        "stdev_profit": 255.2938262177878,
+        "average_ending_chips": 237.72131147540983,
+        "stdev_ending_chips": 255.2938262177878,
+        "games_played": 49,
+        "accuracy": 1079.2154109067953,
+        "latency": 14.792755439569213,
+        "average_latency_per_decision_seconds": 14.792755439569213
+      },
+      "gameplay_metrics": {
+        "hands_played_pct": 27.969924812030072,
+        "aggressive_actions_per_game": 26.9672131147541,
+        "average_raise_size": 19.85807150595883,
+        "percent_bet": 11.443968933269932,
+        "percent_call": 13.044856554129023,
+        "percent_check": 6.498652718338881,
+        "percent_fold": 54.3826279917578,
+        "percent_raise": 14.629893802504359,
+        "average_call_size": 12.161603888213852
+      },
+      "personality_metrics": {
+        "raw_percentages": {
+          "hands_played_pct": 27.969924812030072,
+          "aggressive_action_pct": 57.15774843641418,
+          "fold_after_invest_pct": 38.50806451612903,
+          "avg_bet_size_pct": 64.60217539607154,
+          "win_before_showdown_pct": 4.081632653061225,
+          "win_at_showdown_pct": 33.3907056798623
+        },
+        "relative_to_field_pct": {
+          "hands_played_pct": 115.31354284828059,
+          "aggressive_action_pct": 132.78829423686585,
+          "fold_after_invest_pct": 85.67752429664213,
+          "avg_bet_size_pct": 103.72906101465864,
+          "win_before_showdown_pct": 140.32601416681766,
+          "win_at_showdown_pct": 112.04984847136437
+        },
+        "field_means_used": {
+          "hands_played_pct": 24.25554199547094,
+          "aggressive_action_pct": 43.044267391865894,
+          "fold_after_invest_pct": 44.945351575288505,
+          "avg_bet_size_pct": 62.27972639889431,
+          "win_at_showdown_pct": 29.799866876567606,
+          "win_before_showdown_pct": 2.9086785349785784
+        }
+      },
+      "cost_metrics": {
+        "cost_per_hand": 0.004366472477375571
+      },
+      "cost_per_test": 0.004366472477375571
+    },
+    "fireworks/deepseek-v3p1": {
+      "model": "fireworks/deepseek-v3p1",
+      "performance": {
+        "trueskill_rating": 1058.2325209691314,
+        "trueskill_sigma": 24.93473635275011,
+        "trueskill_conservative": 1033.2977846163813,
+        "trueskill_rank": 7,
+        "average_profit": 32.425806451612914,
+        "stdev_profit": 151.24770893991317,
+        "average_ending_chips": 232.4258064516129,
+        "stdev_ending_chips": 151.24770893991317,
+        "games_played": 154,
+        "accuracy": 1058.2325209691314,
+        "latency": 3.9977358921550272,
+        "average_latency_per_decision_seconds": 3.9977358921550272
+      },
+      "gameplay_metrics": {
+        "hands_played_pct": 16.80294358135732,
+        "aggressive_actions_per_game": 14.084415584415584,
+        "average_raise_size": 17.958300550747442,
+        "percent_bet": 5.597107953128896,
+        "percent_call": 8.339566192969334,
+        "percent_check": 4.62478184991274,
+        "percent_fold": 73.51657940663176,
+        "percent_raise": 7.921964597357267,
+        "average_call_size": 7.492526158445441
+      },
+      "personality_metrics": {
+        "raw_percentages": {
+          "hands_played_pct": 16.80294358135732,
+          "aggressive_action_pct": 51.04730524829372,
+          "fold_after_invest_pct": 48.74290348742903,
+          "avg_bet_size_pct": 75.28349050231981,
+          "win_before_showdown_pct": 1.73109243697479,
+          "win_at_showdown_pct": 33.21325648414985
+        },
+        "relative_to_field_pct": {
+          "hands_played_pct": 69.2746572494435,
+          "aggressive_action_pct": 118.59257536798073,
+          "fold_after_invest_pct": 108.4492651165031,
+          "avg_bet_size_pct": 120.87961019632283,
+          "win_before_showdown_pct": 59.51473894957384,
+          "win_at_showdown_pct": 111.4543787115582
+        },
+        "field_means_used": {
+          "hands_played_pct": 24.25554199547094,
+          "aggressive_action_pct": 43.044267391865894,
+          "fold_after_invest_pct": 44.945351575288505,
+          "avg_bet_size_pct": 62.27972639889431,
+          "win_at_showdown_pct": 29.799866876567606,
+          "win_before_showdown_pct": 2.9086785349785784
+        }
+      },
+      "cost_metrics": {
+        "cost_per_hand": 0.007085498012100262
+      },
+      "cost_per_test": 0.007085498012100262
+    },
+    "anthropic/claude-sonnet-4-5-20250929": {
+      "model": "anthropic/claude-sonnet-4-5-20250929",
+      "performance": {
+        "trueskill_rating": 1055.504459218733,
+        "trueskill_sigma": 25.044031439113652,
+        "trueskill_conservative": 1030.4604277796193,
+        "trueskill_rank": 8,
+        "average_profit": 10.97999999999999,
+        "stdev_profit": 167.7832762382321,
+        "average_ending_chips": 210.98,
+        "stdev_ending_chips": 167.7832762382321,
+        "games_played": 150,
+        "accuracy": 1055.504459218733,
+        "latency": 16.67560795007542,
+        "average_latency_per_decision_seconds": 16.67560795007542
+      },
+      "gameplay_metrics": {
+        "hands_played_pct": 20.582456140350878,
+        "aggressive_actions_per_game": 16.086666666666666,
+        "average_raise_size": 18.889112903225808,
+        "percent_bet": 5.817610062893082,
+        "percent_call": 12.377358490566037,
+        "percent_check": 7.09433962264151,
+        "percent_fold": 65.35220125786164,
+        "percent_raise": 9.358490566037736,
+        "average_call_size": 9.096544715447154
+      },
+      "personality_metrics": {
+        "raw_percentages": {
+          "hands_played_pct": 20.582456140350878,
+          "aggressive_action_pct": 43.801052822653844,
+          "fold_after_invest_pct": 46.06205250596659,
+          "avg_bet_size_pct": 66.6551136298586,
+          "win_before_showdown_pct": 1.9357884796978282,
+          "win_at_showdown_pct": 28.825136612021858
+        },
+        "relative_to_field_pct": {
+          "hands_played_pct": 84.85671498989423,
+          "aggressive_action_pct": 101.75815614167234,
+          "fold_after_invest_pct": 102.4845749149553,
+          "avg_bet_size_pct": 107.02537966037366,
+          "win_before_showdown_pct": 66.55216299837977,
+          "win_at_showdown_pct": 96.72907846003767
+        },
+        "field_means_used": {
+          "hands_played_pct": 24.25554199547094,
+          "aggressive_action_pct": 43.044267391865894,
+          "fold_after_invest_pct": 44.945351575288505,
+          "avg_bet_size_pct": 62.27972639889431,
+          "win_at_showdown_pct": 29.799866876567606,
+          "win_before_showdown_pct": 2.9086785349785784
+        }
+      },
+      "cost_metrics": {
+        "cost_per_hand": 0.027591309991158296
+      },
+      "cost_per_test": 0.027591309991158296
+    },
+    "openai/gpt-5.1-2025-11-13": {
+      "model": "openai/gpt-5.1-2025-11-13",
+      "performance": {
+        "trueskill_rating": 1038.5925586989251,
+        "trueskill_sigma": 27.55612451474539,
+        "trueskill_conservative": 1011.0364341841797,
+        "trueskill_rank": 9,
+        "average_profit": -0.8484848484848442,
+        "stdev_profit": 186.22816794494472,
+        "average_ending_chips": 199.15151515151516,
+        "stdev_ending_chips": 186.22816794494472,
+        "games_played": 66,
+        "accuracy": 1038.5925586989251,
+        "latency": 58.69792635737953,
+        "average_latency_per_decision_seconds": 58.69792635737953
+      },
+      "gameplay_metrics": {
+        "hands_played_pct": 24.0995115995116,
+        "aggressive_actions_per_game": 23.939393939393938,
+        "average_raise_size": 15.617248062015504,
+        "percent_bet": 7.12243306472576,
+        "percent_call": 12.490252144528204,
+        "percent_check": 8.82505848713283,
+        "percent_fold": 58.149207174421626,
+        "percent_raise": 13.41304912919158,
+        "average_call_size": 14.35483870967742
+      },
+      "personality_metrics": {
+        "raw_percentages": {
+          "hands_played_pct": 24.0995115995116,
+          "aggressive_action_pct": 49.06832298136646,
+          "fold_after_invest_pct": 41.86193793540215,
+          "avg_bet_size_pct": 57.29669378879447,
+          "win_before_showdown_pct": 3.577586206896552,
+          "win_at_showdown_pct": 30.700836820083683
+        },
+        "relative_to_field_pct": {
+          "hands_played_pct": 99.35672269871986,
+          "aggressive_action_pct": 113.9950240868519,
+          "fold_after_invest_pct": 93.13963840126762,
+          "avg_bet_size_pct": 91.99894909912722,
+          "win_before_showdown_pct": 122.99696112423437,
+          "win_at_showdown_pct": 103.02340257843412
+        },
+        "field_means_used": {
+          "hands_played_pct": 24.25554199547094,
+          "aggressive_action_pct": 43.044267391865894,
+          "fold_after_invest_pct": 44.945351575288505,
+          "avg_bet_size_pct": 62.27972639889431,
+          "win_at_showdown_pct": 29.799866876567606,
+          "win_before_showdown_pct": 2.9086785349785784
+        }
+      },
+      "cost_metrics": {
+        "cost_per_hand": 0.03587991108247422
+      },
+      "cost_per_test": 0.03587991108247422
+    },
+    "grok/grok-4-fast-reasoning": {
+      "model": "grok/grok-4-fast-reasoning",
+      "performance": {
+        "trueskill_rating": 1034.299831048473,
+        "trueskill_sigma": 25.179848669763018,
+        "trueskill_conservative": 1009.1199823787099,
+        "trueskill_rank": 10,
+        "average_profit": 33.973509933774835,
+        "stdev_profit": 238.01845718402785,
+        "average_ending_chips": 233.97350993377484,
+        "stdev_ending_chips": 238.01845718402785,
+        "games_played": 151,
+        "accuracy": 1034.299831048473,
+        "latency": 7.782650674131283,
+        "average_latency_per_decision_seconds": 7.782650674131283
+      },
+      "gameplay_metrics": {
+        "hands_played_pct": 23.721640185943247,
+        "aggressive_actions_per_game": 23.894039735099337,
+        "average_raise_size": 17.81386514719848,
+        "percent_bet": 9.593765968318856,
+        "percent_call": 13.132345426673481,
+        "percent_check": 7.728666326009198,
+        "percent_fold": 56.093510475217165,
+        "percent_raise": 13.451711803781297,
+        "average_call_size": 12.048151750972762
+      },
+      "personality_metrics": {
+        "raw_percentages": {
+          "hands_played_pct": 23.721640185943247,
+          "aggressive_action_pct": 52.48763456502764,
+          "fold_after_invest_pct": 41.76659842059082,
+          "avg_bet_size_pct": 61.177927637921314,
+          "win_before_showdown_pct": 3.7199604959947328,
+          "win_at_showdown_pct": 24.07547169811321
+        },
+        "relative_to_field_pct": {
+          "hands_played_pct": 97.79884609617307,
+          "aggressive_action_pct": 121.93873364643734,
+          "fold_after_invest_pct": 92.92751520839053,
+          "avg_bet_size_pct": 98.23088696004201,
+          "win_before_showdown_pct": 127.89177116893494,
+          "win_at_showdown_pct": 80.79053439344175
+        },
+        "field_means_used": {
+          "hands_played_pct": 24.25554199547094,
+          "aggressive_action_pct": 43.044267391865894,
+          "fold_after_invest_pct": 44.945351575288505,
+          "avg_bet_size_pct": 62.27972639889431,
+          "win_at_showdown_pct": 29.799866876567606,
+          "win_before_showdown_pct": 2.9086785349785784
+        }
+      },
+      "cost_metrics": {
+        "cost_per_hand": 0.0038871887884872796
+      },
+      "cost_per_test": 0.0038871887884872796
+    },
+    "google/gemini-2.5-pro": {
+      "model": "google/gemini-2.5-pro",
+      "performance": {
+        "trueskill_rating": 1032.5962096202413,
+        "trueskill_sigma": 25.223944666439703,
+        "trueskill_conservative": 1007.3722649538016,
+        "trueskill_rank": 11,
+        "average_profit": 14.99342105263159,
+        "stdev_profit": 221.04964821573085,
+        "average_ending_chips": 214.9934210526316,
+        "stdev_ending_chips": 221.04964821573085,
+        "games_played": 152,
+        "accuracy": 1032.5962096202413,
+        "latency": 19.79321908170333,
+        "average_latency_per_decision_seconds": 19.79321908170333
+      },
+      "gameplay_metrics": {
+        "hands_played_pct": 22.437015841998743,
+        "aggressive_actions_per_game": 20.730263157894736,
+        "average_raise_size": 29.86420905272982,
+        "percent_bet": 6.569343065693431,
+        "percent_call": 13.262513034410844,
+        "percent_check": 10.251564129301356,
+        "percent_fold": 55.95020855057351,
+        "percent_raise": 13.966371220020854,
+        "average_call_size": 12.37051597051597
+      },
+      "personality_metrics": {
+        "raw_percentages": {
+          "hands_played_pct": 22.437015841998743,
+          "aggressive_action_pct": 46.61932238496819,
+          "fold_after_invest_pct": 35.89424572317263,
+          "avg_bet_size_pct": 75.28925478369747,
+          "win_before_showdown_pct": 3.7481764111771967,
+          "win_at_showdown_pct": 23.440383905500184
+        },
+        "relative_to_field_pct": {
+          "hands_played_pct": 92.50263649514922,
+          "aggressive_action_pct": 108.30553104913079,
+          "fold_after_invest_pct": 79.86197563288773,
+          "avg_bet_size_pct": 120.8888656662983,
+          "win_before_showdown_pct": 128.86183076277285,
+          "win_at_showdown_pct": 78.65935778368176
+        },
+        "field_means_used": {
+          "hands_played_pct": 24.25554199547094,
+          "aggressive_action_pct": 43.044267391865894,
+          "fold_after_invest_pct": 44.945351575288505,
+          "avg_bet_size_pct": 62.27972639889431,
+          "win_at_showdown_pct": 29.799866876567606,
+          "win_before_showdown_pct": 2.9086785349785784
+        }
+      },
+      "cost_metrics": {
+        "cost_per_hand": 0.02165833147163121
+      },
+      "cost_per_test": 0.02165833147163121
+    },
+    "anthropic/claude-opus-4-5-20251101": {
+      "model": "anthropic/claude-opus-4-5-20251101",
+      "performance": {
+        "trueskill_rating": 1033.3789020943957,
+        "trueskill_sigma": 28.42195621721487,
+        "trueskill_conservative": 1004.9569458771808,
+        "trueskill_rank": 12,
+        "average_profit": -10.051724137931046,
+        "stdev_profit": 217.31531157766588,
+        "average_ending_chips": 189.94827586206895,
+        "stdev_ending_chips": 217.31531157766588,
+        "games_played": 58,
+        "accuracy": 1033.3789020943957,
+        "latency": 8.852645959989609,
+        "average_latency_per_decision_seconds": 8.852645959989609
+      },
+      "gameplay_metrics": {
+        "hands_played_pct": 28.697152717860224,
+        "aggressive_actions_per_game": 27.086206896551722,
+        "average_raise_size": 15.651612903225807,
+        "percent_bet": 8.326838139776566,
+        "percent_call": 15.302676019745387,
+        "percent_check": 10.392309690828787,
+        "percent_fold": 53.897116134060795,
+        "percent_raise": 12.081060015588465,
+        "average_call_size": 12.000848896434634
+      },
+      "personality_metrics": {
+        "raw_percentages": {
+          "hands_played_pct": 28.697152717860224,
+          "aggressive_action_pct": 44.26599041983658,
+          "fold_after_invest_pct": 49.909801563439565,
+          "avg_bet_size_pct": 62.49967945285244,
+          "win_before_showdown_pct": 3.556485355648536,
+          "win_at_showdown_pct": 38.04420629604823
+        },
+        "relative_to_field_pct": {
+          "hands_played_pct": 118.31173561579715,
+          "aggressive_action_pct": 102.83829439318453,
+          "fold_after_invest_pct": 111.04552487443569,
+          "avg_bet_size_pct": 100.3531695893289,
+          "win_before_showdown_pct": 122.27151652819992,
+          "win_at_showdown_pct": 127.66569211073677
+        },
+        "field_means_used": {
+          "hands_played_pct": 24.25554199547094,
+          "aggressive_action_pct": 43.044267391865894,
+          "fold_after_invest_pct": 44.945351575288505,
+          "avg_bet_size_pct": 62.27972639889431,
+          "win_at_showdown_pct": 29.799866876567606,
+          "win_before_showdown_pct": 2.9086785349785784
+        }
+      },
+      "cost_metrics": {
+        "cost_per_hand": 0.04247890808080806
+      },
+      "cost_per_test": 0.04247890808080806
+    },
+    "fireworks/gpt-oss-120b": {
+      "model": "fireworks/gpt-oss-120b",
+      "performance": {
+        "trueskill_rating": 1015.3311053208166,
+        "trueskill_sigma": 25.118474765311408,
+        "trueskill_conservative": 990.2126305555053,
+        "trueskill_rank": 13,
+        "average_profit": 3.73333333333332,
+        "stdev_profit": 225.16424032923723,
+        "average_ending_chips": 203.73333333333332,
+        "stdev_ending_chips": 225.16424032923723,
+        "games_played": 150,
+        "accuracy": 1015.3311053208165,
+        "latency": 13.452568330134357,
+        "average_latency_per_decision_seconds": 13.452568330134357
+      },
+      "gameplay_metrics": {
+        "hands_played_pct": 22.849063273241427,
+        "aggressive_actions_per_game": 21.35333333333333,
+        "average_raise_size": 16.924100542138984,
+        "percent_bet": 7.440740271263785,
+        "percent_call": 12.94840917733553,
+        "percent_check": 9.120294080365065,
+        "percent_fold": 57.630878438331855,
+        "percent_raise": 12.859678032703764,
+        "average_call_size": 14.18208516886931
+      },
+      "personality_metrics": {
+        "raw_percentages": {
+          "hands_played_pct": 22.849063273241427,
+          "aggressive_action_pct": 47.913238593866865,
+          "fold_after_invest_pct": 42.945544554455445,
+          "avg_bet_size_pct": 56.2159214553705,
+          "win_before_showdown_pct": 2.6566684520621315,
+          "win_at_showdown_pct": 24.71933471933472
+        },
+        "relative_to_field_pct": {
+          "hands_played_pct": 94.20141292867365,
+          "aggressive_action_pct": 111.31154389892362,
+          "fold_after_invest_pct": 95.55058098169916,
+          "avg_bet_size_pct": 90.26359733071745,
+          "win_before_showdown_pct": 91.335925235949,
+          "win_at_showdown_pct": 82.95115821061658
+        },
+        "field_means_used": {
+          "hands_played_pct": 24.25554199547094,
+          "aggressive_action_pct": 43.044267391865894,
+          "fold_after_invest_pct": 44.945351575288505,
+          "avg_bet_size_pct": 62.27972639889431,
+          "win_at_showdown_pct": 29.799866876567606,
+          "win_before_showdown_pct": 2.9086785349785784
+        }
+      },
+      "cost_metrics": {
+        "cost_per_hand": 0.004534421914446
+      },
+      "cost_per_test": 0.004534421914446
+    },
+    "kimi/kimi-k2-thinking": {
+      "model": "kimi/kimi-k2-thinking",
+      "performance": {
+        "trueskill_rating": 1011.6338984569228,
+        "trueskill_sigma": 25.27201919123057,
+        "trueskill_conservative": 986.3618792656922,
+        "trueskill_rank": 14,
+        "average_profit": -21.109677419354853,
+        "stdev_profit": 178.51816335039737,
+        "average_ending_chips": 178.89032258064515,
+        "stdev_ending_chips": 178.51816335039737,
+        "games_played": 155,
+        "accuracy": 1011.6338984569229,
+        "latency": 71.72413331456877,
+        "average_latency_per_decision_seconds": 71.72413331456877
+      },
+      "gameplay_metrics": {
+        "hands_played_pct": 20.08617152236356,
+        "aggressive_actions_per_game": 14.258064516129032,
+        "average_raise_size": 16.934322033898304,
+        "percent_bet": 4.900024685262898,
+        "percent_call": 15.199950629474204,
+        "percent_check": 10.843001727968403,
+        "percent_fold": 60.31843989138485,
+        "percent_raise": 8.738583065909653,
+        "average_call_size": 14.314656922452293
+      },
+      "personality_metrics": {
+        "raw_percentages": {
+          "hands_played_pct": 20.08617152236356,
+          "aggressive_action_pct": 34.3701399688958,
+          "fold_after_invest_pct": 42.288049029622066,
+          "avg_bet_size_pct": 60.05810709601932,
+          "win_before_showdown_pct": 1.7499748566830935,
+          "win_at_showdown_pct": 21.885018166274843
+        },
+        "relative_to_field_pct": {
+          "hands_played_pct": 82.8106480824634,
+          "aggressive_action_pct": 79.8483562421851,
+          "fold_after_invest_pct": 94.08770328291868,
+          "avg_bet_size_pct": 96.4328370862682,
+          "win_before_showdown_pct": 60.16391414996919,
+          "win_at_showdown_pct": 73.43998634934705
+        },
+        "field_means_used": {
+          "hands_played_pct": 24.25554199547094,
+          "aggressive_action_pct": 43.044267391865894,
+          "fold_after_invest_pct": 44.945351575288505,
+          "avg_bet_size_pct": 62.27972639889431,
+          "win_at_showdown_pct": 29.799866876567606,
+          "win_before_showdown_pct": 2.9086785349785784
+        }
+      },
+      "cost_metrics": {
+        "cost_per_hand": 0.02410503610648917
+      },
+      "cost_per_test": 0.02410503610648917
+    },
+    "alibaba/qwen3-max-preview": {
+      "model": "alibaba/qwen3-max-preview",
+      "performance": {
+        "trueskill_rating": 994.5115993602194,
+        "trueskill_sigma": 25.14669006395585,
+        "trueskill_conservative": 969.3649092962636,
+        "trueskill_rank": 15,
+        "average_profit": -25.90789473684211,
+        "stdev_profit": 192.81914647803688,
+        "average_ending_chips": 174.0921052631579,
+        "stdev_ending_chips": 192.81914647803688,
+        "games_played": 152,
+        "accuracy": 994.5115993602194,
+        "latency": 10.279249585339961,
+        "average_latency_per_decision_seconds": 10.279249585339961
+      },
+      "gameplay_metrics": {
+        "hands_played_pct": 33.852819903557204,
+        "aggressive_actions_per_game": 17.769736842105264,
+        "average_raise_size": 17.18554062699936,
+        "percent_bet": 6.451978682390294,
+        "percent_call": 21.606758135843066,
+        "percent_check": 8.38530445628756,
+        "percent_fold": 54.694409797029145,
+        "percent_raise": 8.861548928449938,
+        "average_call_size": 6.606140120703228
+      },
+      "personality_metrics": {
+        "raw_percentages": {
+          "hands_played_pct": 33.852819903557204,
+          "aggressive_action_pct": 33.8005255912902,
+          "fold_after_invest_pct": 63.25350949628407,
+          "avg_bet_size_pct": 67.82979193398353,
+          "win_before_showdown_pct": 2.606587189331178,
+          "win_at_showdown_pct": 25.119020630242577
+        },
+        "relative_to_field_pct": {
+          "hands_played_pct": 139.567361182357,
+          "aggressive_action_pct": 78.52503396927952,
+          "fold_after_invest_pct": 140.73426345398,
+          "avg_bet_size_pct": 108.9115123909532,
+          "win_before_showdown_pct": 89.61413775999742,
+          "win_at_showdown_pct": 84.29239209116838
+        },
+        "field_means_used": {
+          "hands_played_pct": 24.25554199547094,
+          "aggressive_action_pct": 43.044267391865894,
+          "fold_after_invest_pct": 44.945351575288505,
+          "avg_bet_size_pct": 62.27972639889431,
+          "win_at_showdown_pct": 29.799866876567606,
+          "win_before_showdown_pct": 2.9086785349785784
+        }
+      },
+      "cost_metrics": {
+        "cost_per_hand": 0.020775621656804744
+      },
+      "cost_per_test": 0.020775621656804744
+    },
+    "zai/glm-4.6": {
+      "model": "zai/glm-4.6",
+      "performance": {
+        "trueskill_rating": 945.7558288256935,
+        "trueskill_sigma": 25.20741513299229,
+        "trueskill_conservative": 920.5484136927012,
+        "trueskill_rank": 16,
+        "average_profit": -77.6887417218543,
+        "stdev_profit": 170.90637536111063,
+        "average_ending_chips": 122.3112582781457,
+        "stdev_ending_chips": 170.90637536111063,
+        "games_played": 151,
+        "accuracy": 945.7558288256936,
+        "latency": 42.55249388614798,
+        "average_latency_per_decision_seconds": 42.55249388614798
+      },
+      "gameplay_metrics": {
+        "hands_played_pct": 26.689165436265206,
+        "aggressive_actions_per_game": 17.4635761589404,
+        "average_raise_size": 14.414874001229256,
+        "percent_bet": 6.17359413202934,
+        "percent_call": 21.69926650366748,
+        "percent_check": 12.616136919315405,
+        "percent_fold": 49.56601466992665,
+        "percent_raise": 9.944987775061124,
+        "average_call_size": 12.399718309859155
+      },
+      "personality_metrics": {
+        "raw_percentages": {
+          "hands_played_pct": 26.689165436265206,
+          "aggressive_action_pct": 31.959762453035996,
+          "fold_after_invest_pct": 50.474183350895686,
+          "avg_bet_size_pct": 63.51880240822979,
+          "win_before_showdown_pct": 3.4786752442220634,
+          "win_at_showdown_pct": 18.819694630296794
+        },
+        "relative_to_field_pct": {
+          "hands_played_pct": 110.03326761879278,
+          "aggressive_action_pct": 74.24859194856562,
+          "fold_after_invest_pct": 112.30123156639628,
+          "avg_bet_size_pct": 101.98953348221112,
+          "win_before_showdown_pct": 119.59641474260347,
+          "win_at_showdown_pct": 63.153619807258934
+        },
+        "field_means_used": {
+          "hands_played_pct": 24.25554199547094,
+          "aggressive_action_pct": 43.044267391865894,
+          "fold_after_invest_pct": 44.945351575288505,
+          "avg_bet_size_pct": 62.27972639889431,
+          "win_at_showdown_pct": 29.799866876567606,
+          "win_before_showdown_pct": 2.9086785349785784
+        }
+      },
+      "cost_metrics": {
+        "cost_per_hand": 0.019527262827635273
+      },
+      "cost_per_test": 0.019527262827635273
+    },
+    "fireworks/llama4-maverick-instruct-basic": {
+      "model": "fireworks/llama4-maverick-instruct-basic",
+      "performance": {
+        "trueskill_rating": 890.5037748478503,
+        "trueskill_sigma": 25.81324498385811,
+        "trueskill_conservative": 864.6905298639922,
+        "trueskill_rank": 17,
+        "average_profit": -101.22077922077922,
+        "stdev_profit": 179.69346617955853,
+        "average_ending_chips": 98.77922077922078,
+        "stdev_ending_chips": 179.69346617955853,
+        "games_played": 153,
+        "accuracy": 890.5037748478502,
+        "latency": 13.958395570116652,
+        "average_latency_per_decision_seconds": 13.958395570116652
+      },
+      "gameplay_metrics": {
+        "hands_played_pct": 32.91043752571664,
+        "aggressive_actions_per_game": 18.545454545454547,
+        "average_raise_size": 13.49947201689546,
+        "percent_bet": 11.612628505383539,
+        "percent_call": 36.45598880710506,
+        "percent_check": 13.212482511101648,
+        "percent_fold": 32.95820913680881,
+        "percent_raise": 5.760691039600949,
+        "average_call_size": 10.045052561321542
+      },
+      "personality_metrics": {
+        "raw_percentages": {
+          "hands_played_pct": 32.91043752571664,
+          "aggressive_action_pct": 25.914163868977408,
+          "fold_after_invest_pct": 59.137320275057306,
+          "avg_bet_size_pct": 51.983944570597195,
+          "win_before_showdown_pct": 6.688445667125172,
+          "win_at_showdown_pct": 11.35067305498517
+        },
+        "relative_to_field_pct": {
+          "hands_played_pct": 135.68213619741732,
+          "aggressive_action_pct": 60.20351939797314,
+          "fold_after_invest_pct": 131.57605448028517,
+          "avg_bet_size_pct": 83.46848577600703,
+          "win_before_showdown_pct": 229.94791575255425,
+          "win_at_showdown_pct": 38.08967705124379
+        },
+        "field_means_used": {
+          "hands_played_pct": 24.25554199547094,
+          "aggressive_action_pct": 43.044267391865894,
+          "fold_after_invest_pct": 44.945351575288505,
+          "avg_bet_size_pct": 62.27972639889431,
+          "win_at_showdown_pct": 29.799866876567606,
+          "win_before_showdown_pct": 2.9086785349785784
+        }
+      },
+      "cost_metrics": {
+        "cost_per_hand": 0.005185648762098834
+      },
+      "cost_per_test": 0.005185648762098834
+    }
+  }
+}

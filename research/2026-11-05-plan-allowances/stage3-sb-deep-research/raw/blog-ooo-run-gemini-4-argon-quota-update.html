@@ -1,0 +1,891 @@
+<!doctype html>
+
+<html lang="zh-CN" data-fancybox-enabled="1">
+<head>
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#f7f3e9" data-flatpaper-theme-color>
+
+<title>Google 大幅提升付费用户 Antigravity 中的 Gemini 4 Argon 配额 | O&#39;s World</title>
+<meta name="description" content="面对首批用户对 Gemini 4 Argon 初始配额“不够塞牙缝”的密集反馈，Google 近期悄然完成了配额提升，并对周额度进行了一次全面重置。此次调整中，主力订阅档位的可用额度近乎翻倍。 即便账面额度翻倍，不同订阅档位折算成真实 API 额度后对比 Codex &#x2F; Claude Pro 订阅依然差距悬殊。本文将结合最新实测数据，全面拆解 Ge...">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Google 大幅提升付费用户 Antigravity 中的 Gemini 4 Argon 配额 | O&#39;s World">
+<meta property="og:url" content="https://ooo.run/post/gemini-4-argon-antigravity-quota-update.html">
+<meta property="og:site_name" content="O&#39;s World">
+<meta property="og:description" content="面对首批用户对 Gemini 4 Argon 初始配额“不够塞牙缝”的密集反馈，Google 近期悄然完成了配额提升，并对周额度进行了一次全面重置。此次调整中，主力订阅档位的可用额度近乎翻倍。 即便账面额度翻倍，不同订阅档位折算成真实 API 额度后对比 Codex &#x2F; Claude Pro 订阅依然差距悬殊。本文将结合最新实测数据，全面拆解 Ge...">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://img.nep.me/ooo/cover-gemini4-argon-upgrade.webp">
+<meta property="article:published_time" content="2026-10-22T11:43:09.000Z">
+<meta property="article:modified_time" content="2026-10-22T12:19:57.704Z">
+<meta property="article:author" content="Mr. O">
+<meta property="article:tag" content="AI 编程">
+<meta property="article:tag" content="Antigravity IDE">
+<meta property="article:tag" content="Gemini 4 Argon">
+<meta property="article:tag" content="Google AI Studio">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://img.nep.me/ooo/cover-gemini4-argon-upgrade.webp">
+<link rel="canonical" href="https://ooo.run/post/gemini-4-argon-antigravity-quota-update.html">
+
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"Google 大幅提升付费用户 Antigravity 中的 Gemini 4 Argon 配额","name":"Google 大幅提升付费用户 Antigravity 中的 Gemini 4 Argon 配额 | O's World","description":"面对首批用户对 Gemini 4 Argon 初始配额“不够塞牙缝”的密集反馈，Google 近期悄然完成了配额提升，并对周额度进行了一次全面重置。此次调整中，主力订阅档位的可用额度近乎翻倍。 即便账面额度翻倍，不同订阅档位折算成真实 API 额度后对比 Codex &#x2F; Claude Pro 订阅依然差距悬殊。本文将结合最新实测数据，全面拆解 Ge...","url":"https://ooo.run/post/gemini-4-argon-antigravity-quota-update.html","inLanguage":"zh-CN","isPartOf":{"@type":"WebSite","name":"O's World","url":"https://ooo.run/"},"image":["https://img.nep.me/ooo/cover-gemini4-argon-upgrade.webp"],"mainEntityOfPage":"https://ooo.run/post/gemini-4-argon-antigravity-quota-update.html","datePublished":"2026-10-22T11:43:09.000Z","dateModified":"2026-10-22T12:19:57.704Z","author":{"@type":"Person","name":"Mr. O"},"publisher":{"@type":"Organization","name":"O's World"},"keywords":"Gemini 4 Argon, Antigravity IDE, Google AI Studio, AI 编程"}</script>
+
+<script>
+  (function () {
+    var accents = { orange: 1, purple: 1, sakura: 1, blue: 1, pink: 1, green: 1, black: 1 };
+    var match = document.cookie.match(/(?:^|;\s*)flatpaper-accent=([^;]+)/);
+    var accent = 'blue';
+    if (match) {
+      try { accent = decodeURIComponent(match[1]); } catch (e) {}
+    }
+    if (!accents[accent]) accent = 'blue';
+    document.documentElement.setAttribute('data-accent', accent);
+    try {
+      if (localStorage.getItem('flatpaper-mode') === 'dark') {
+        document.documentElement.classList.add('dark-mode');
+      }
+    } catch (e) {}
+    // Reveal-on-scroll opts in from here so it is applied before first paint
+    // (no flash) and never applies without JS. If main.js never runs the
+    // observer, the timeout drops the class again so nothing stays hidden.
+    if ('IntersectionObserver' in window) {
+      document.documentElement.classList.add('reveal-ready');
+      setTimeout(function () {
+        if (!window.flatpaperRevealReady) {
+          document.documentElement.classList.remove('reveal-ready');
+        }
+      }, 2000);
+    }
+  })();
+</script>
+
+<link rel="stylesheet" href="/css/style.css">
+
+
+
+
+
+
+  
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-PZSHQ0MC4Q"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-PZSHQ0MC4Q');
+</script>
+
+
+  
+<script defer src="https://u.nep.me/script.js" data-website-id="768b68c3-d4ed-429e-aa11-f5099ea5adbf" data-domains="ooo.run"></script>
+
+
+  
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8052638941019443" crossorigin="anonymous"></script>
+
+
+  
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/artalk@2.9.1/dist/Artalk.css">
+
+<script defer src="https://cdn.jsdelivr.net/npm/artalk@2.9.1/dist/Artalk.js"></script>
+
+
+  
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.css">
+<script defer src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.umd.js"></script>
+
+
+  
+<meta name="generator" content="Hexo 8.1.2"><link rel="alternate" href="/atom.xml" title="O's World" type="application/atom+xml">
+</head>
+
+<body
+  class="is-post tag-style-tape bg-style-default"
+  data-default-accent="blue"
+  data-code-theme="simple"
+  data-note-style="sticky"
+  data-note-icons="on"
+  data-button-style="tape"
+  data-strong-accent="on"
+>
+  <svg width="0" height="0" style="position:absolute;z-index:-1;" aria-hidden="true">
+    <defs>
+      <filter id="paper-edge" x="-5%" y="-5%" width="110%" height="110%">
+        <feTurbulence type="fractalNoise" baseFrequency="0.04" result="noise" />
+        <feDisplacementMap in="SourceGraphic" in2="noise" scale="3" xChannelSelector="R" yChannelSelector="G" />
+      </filter>
+    </defs>
+  </svg>
+  
+  <header class="site-header">
+  
+  <button class="icon-button js-sidebar-toggle sidebar-toggle" type="button" aria-label="打开侧边栏" aria-controls="paper-sidebar-drawer" aria-expanded="false">
+    
+<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-menu flatpaper-icon flatpaper-icon--lucide" aria-hidden="true"><use href="/icons.svg#flatpaper-icon-lucide-menu"></use></svg>
+
+  </button>
+
+  <div class="brand">
+    <div class="brand-mark-wrapper">
+      
+        <button class="brand-mark" type="button" aria-label="打开站点导航" aria-haspopup="true" aria-expanded="false" aria-controls="brand-nav-menu">
+          
+<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-layout-grid flatpaper-icon flatpaper-icon--lucide" aria-hidden="true"><use href="/icons.svg#flatpaper-icon-lucide-layout-grid"></use></svg>
+
+        </button>
+        <div class="brand-nav-menu" id="brand-nav-menu" role="menu">
+          
+            <div class="brand-nav-group">
+              <div class="brand-nav-title">Blog</div>
+              
+                <a role="menuitem" href="https://ooo.run/" target="_blank" rel="noopener noreferrer">
+                  
+                    <img src="https://ooo.run/favicon.ico" alt="" class="nav-img-icon" aria-hidden="true" />
+                  
+                  <span>O&#39;s World</span>
+                </a>
+              
+            </div>
+          
+            <div class="brand-nav-group">
+              <div class="brand-nav-title">Project</div>
+              
+                <a role="menuitem" href="https://tools.ooo.run" target="_blank" rel="noopener noreferrer">
+                  
+                    <img src="https://tools.ooo.run/favicon.png" alt="" class="nav-img-icon" aria-hidden="true" />
+                  
+                  <span>简易工具</span>
+                </a>
+              
+            </div>
+          
+        </div>
+      
+    </div>
+    <a class="brand-text" href="/">O&#39;s World</a>
+  </div>
+
+  <nav class="site-nav" aria-label="主导航">
+    
+      
+        <a class="site-nav-link " href="/">
+          
+<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-house flatpaper-icon flatpaper-icon--lucide" aria-hidden="true"><use href="/icons.svg#flatpaper-icon-lucide-house"></use></svg>
+
+          <span>首页</span>
+        </a>
+      
+    
+      
+        <a class="site-nav-link " href="/links/">
+          
+<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-link flatpaper-icon flatpaper-icon--lucide" aria-hidden="true"><use href="/icons.svg#flatpaper-icon-lucide-link"></use></svg>
+
+          <span>友链</span>
+        </a>
+      
+    
+      
+        <div class="site-nav-item has-children">
+          <button class="site-nav-link site-nav-parent" type="button" aria-haspopup="true" aria-expanded="false">
+            
+<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-folder flatpaper-icon flatpaper-icon--lucide" aria-hidden="true"><use href="/icons.svg#flatpaper-icon-lucide-folder"></use></svg>
+
+            <span>文章</span>
+          </button>
+          <div class="site-nav-menu" role="menu">
+            
+              <a role="menuitem" class="" href="/archives/">
+                
+<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-archive flatpaper-icon flatpaper-icon--lucide" aria-hidden="true"><use href="/icons.svg#flatpaper-icon-lucide-archive"></use></svg>
+
+                <span>归档</span>
+              </a>
+            
+              <a role="menuitem" class="" href="/categories/">
+                
+<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-folder flatpaper-icon flatpaper-icon--lucide" aria-hidden="true"><use href="/icons.svg#flatpaper-icon-lucide-folder"></use></svg>
+
+                <span>分类</span>
+              </a>
+            
+              <a role="menuitem" class="" href="/tags/">
+                
+<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-tag flatpaper-icon flatpaper-icon--lucide" aria-hidden="true"><use href="/icons.svg#flatpaper-icon-lucide-tag"></use></svg>
+
+                <span>标签</span>
+              </a>
+            
+          </div>
+        </div>
+      
+    
+      
+        <a class="site-nav-link " target="_blank" rel="noopener" href="https://www.travellings.cn/go.html">
+          
+<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-tram-front flatpaper-icon flatpaper-icon--lucide" aria-hidden="true"><use href="/icons.svg#flatpaper-icon-lucide-tram-front"></use></svg>
+
+          <span>开往</span>
+        </a>
+      
+    
+  </nav>
+
+  <div class="header-tools">
+    <button class="icon-button js-search-open" type="button" aria-label="搜索文章">
+      
+<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-search flatpaper-icon flatpaper-icon--lucide" aria-hidden="true"><use href="/icons.svg#flatpaper-icon-lucide-search"></use></svg>
+
+    </button>
+    <div class="accent-picker">
+      <button class="icon-button accent-toggle" type="button" aria-label="选择主题色" title="选择主题色" aria-haspopup="true" aria-expanded="false" aria-controls="accent-menu">
+        
+<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-palette flatpaper-icon flatpaper-icon--lucide" aria-hidden="true"><use href="/icons.svg#flatpaper-icon-lucide-palette"></use></svg>
+
+      </button>
+      <div class="accent-menu" id="accent-menu" role="menu" aria-label="主题色">
+        <button type="button" class="accent-option" role="menuitemradio" aria-label="橙色" aria-checked="false" data-accent-option="orange">
+          <span class="accent-swatch accent-swatch--orange" aria-hidden="true"></span>
+        </button>
+        <button type="button" class="accent-option" role="menuitemradio" aria-label="紫色" aria-checked="false" data-accent-option="purple">
+          <span class="accent-swatch accent-swatch--purple" aria-hidden="true"></span>
+        </button>
+        <button type="button" class="accent-option" role="menuitemradio" aria-label="樱花粉" aria-checked="false" data-accent-option="sakura">
+          <span class="accent-swatch accent-swatch--sakura" aria-hidden="true"></span>
+        </button>
+        <button type="button" class="accent-option" role="menuitemradio" aria-label="蓝色" aria-checked="false" data-accent-option="blue">
+          <span class="accent-swatch accent-swatch--blue" aria-hidden="true"></span>
+        </button>
+        <button type="button" class="accent-option" role="menuitemradio" aria-label="粉色" aria-checked="false" data-accent-option="pink">
+          <span class="accent-swatch accent-swatch--pink" aria-hidden="true"></span>
+        </button>
+        <button type="button" class="accent-option" role="menuitemradio" aria-label="绿色" aria-checked="false" data-accent-option="green">
+          <span class="accent-swatch accent-swatch--green" aria-hidden="true"></span>
+        </button>
+        <button type="button" class="accent-option" role="menuitemradio" aria-label="黑色" aria-checked="false" data-accent-option="black">
+          <span class="accent-swatch accent-swatch--black" aria-hidden="true"></span>
+        </button>
+      </div>
+    </div>
+    <button class="theme-toggle" type="button" aria-label="切换颜色模式">
+      <span class="theme-icon theme-icon--sun">
+<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-sun flatpaper-icon flatpaper-icon--lucide" aria-hidden="true"><use href="/icons.svg#flatpaper-icon-lucide-sun"></use></svg>
+</span>
+      <span class="theme-icon theme-icon--moon">
+<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-moon flatpaper-icon flatpaper-icon--lucide" aria-hidden="true"><use href="/icons.svg#flatpaper-icon-lucide-moon"></use></svg>
+</span>
+    </button>
+  </div>
+</header>
+
+
+  
+  <main class="paper-shell paper-shell--article">
+    
+
+<aside id="paper-sidebar-drawer" class="paper-sidebar paper-sidebar--right" aria-label="侧边栏">
+  <div class="drawer-toolbar" aria-label="侧边栏工具">
+    <div class="drawer-accent-options" role="group" aria-label="主题色">
+      <button type="button" class="accent-option" aria-label="橙色" aria-pressed="false" data-accent-option="orange">
+        <span class="accent-swatch accent-swatch--orange" aria-hidden="true"></span>
+      </button>
+      <button type="button" class="accent-option" aria-label="紫色" aria-pressed="false" data-accent-option="purple">
+        <span class="accent-swatch accent-swatch--purple" aria-hidden="true"></span>
+      </button>
+      <button type="button" class="accent-option" aria-label="樱花粉" aria-pressed="false" data-accent-option="sakura">
+        <span class="accent-swatch accent-swatch--sakura" aria-hidden="true"></span>
+      </button>
+      <button type="button" class="accent-option" aria-label="蓝色" aria-pressed="false" data-accent-option="blue">
+        <span class="accent-swatch accent-swatch--blue" aria-hidden="true"></span>
+      </button>
+      <button type="button" class="accent-option" aria-label="粉色" aria-pressed="false" data-accent-option="pink">
+        <span class="accent-swatch accent-swatch--pink" aria-hidden="true"></span>
+      </button>
+      <button type="button" class="accent-option" aria-label="绿色" aria-pressed="false" data-accent-option="green">
+        <span class="accent-swatch accent-swatch--green" aria-hidden="true"></span>
+      </button>
+      <button type="button" class="accent-option" aria-label="黑色" aria-pressed="false" data-accent-option="black">
+        <span class="accent-swatch accent-swatch--black" aria-hidden="true"></span>
+      </button>
+    </div>
+    <button class="icon-button drawer-close js-sidebar-close" type="button" aria-label="关闭侧边栏">
+      
+<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x flatpaper-icon flatpaper-icon--lucide" aria-hidden="true"><use href="/icons.svg#flatpaper-icon-lucide-x"></use></svg>
+
+    </button>
+  </div>
+
+  <section class="side-card nav-card">
+    <nav class="site-nav-drawer" aria-label="移动端导航">
+      
+        
+          <a class="" href="/">
+            
+<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-house flatpaper-icon flatpaper-icon--lucide" aria-hidden="true"><use href="/icons.svg#flatpaper-icon-lucide-house"></use></svg>
+
+            <span>首页</span>
+          </a>
+        
+      
+        
+          <a class="" href="/links/">
+            
+<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-link flatpaper-icon flatpaper-icon--lucide" aria-hidden="true"><use href="/icons.svg#flatpaper-icon-lucide-link"></use></svg>
+
+            <span>友链</span>
+          </a>
+        
+      
+        
+          <div class="drawer-nav-group">
+            <button class="drawer-nav-parent" type="button" aria-expanded="false">
+              
+<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-folder flatpaper-icon flatpaper-icon--lucide" aria-hidden="true"><use href="/icons.svg#flatpaper-icon-lucide-folder"></use></svg>
+
+              <span>文章</span>
+            </button>
+            <div class="drawer-nav-children">
+              
+                <a class="" href="/archives/">
+                  
+<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-archive flatpaper-icon flatpaper-icon--lucide" aria-hidden="true"><use href="/icons.svg#flatpaper-icon-lucide-archive"></use></svg>
+
+                  <span>归档</span>
+                </a>
+              
+                <a class="" href="/categories/">
+                  
+<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-folder flatpaper-icon flatpaper-icon--lucide" aria-hidden="true"><use href="/icons.svg#flatpaper-icon-lucide-folder"></use></svg>
+
+                  <span>分类</span>
+                </a>
+              
+                <a class="" href="/tags/">
+                  
+<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-tag flatpaper-icon flatpaper-icon--lucide" aria-hidden="true"><use href="/icons.svg#flatpaper-icon-lucide-tag"></use></svg>
+
+                  <span>标签</span>
+                </a>
+              
+            </div>
+          </div>
+        
+      
+        
+          <a class="" target="_blank" rel="noopener" href="https://www.travellings.cn/go.html">
+            
+<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-tram-front flatpaper-icon flatpaper-icon--lucide" aria-hidden="true"><use href="/icons.svg#flatpaper-icon-lucide-tram-front"></use></svg>
+
+            <span>开往</span>
+          </a>
+        
+      
+    </nav>
+  </section>
+
+  <section class="side-card profile-card reveal">
+    
+      <div class="avatar avatar--image avatar--circle">
+        <img src="/images/avatar.png" alt="Mr. O" loading="lazy" referrerpolicy="no-referrer">
+      </div>
+    
+    <h3>Mr. O</h3>
+    <p class="profile-role">独立开发者</p>
+    <p>探索互联网世界，分享实用教程与精彩内容，发现更多有趣之处。</p>
+    
+      <div class="site-info" aria-label="站点信息">
+        
+          
+            <a class="site-info__item" href="/archives/">
+              <strong>93</strong>
+              <span>文章</span>
+            </a>
+          
+        
+          
+            <a class="site-info__item" href="/categories/">
+              <strong>7</strong>
+              <span>分类</span>
+            </a>
+          
+        
+          
+            <a class="site-info__item" href="/tags/">
+              <strong>142</strong>
+              <span>标签</span>
+            </a>
+          
+        
+      </div>
+    
+    <div class="socials">
+      
+        <a href="https://tools.ooo.run" target="_blank" rel="noopener" aria-label="Tools" data-tooltip="Tools">
+          
+            
+<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-tool-case flatpaper-icon flatpaper-icon--lucide" aria-hidden="true"><use href="/icons.svg#flatpaper-icon-lucide-tool-case"></use></svg>
+
+          
+        </a>
+      
+      
+        
+        
+        <a href="/atom.xml" aria-label="RSS feed" data-tooltip="RSS feed">
+          
+<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-rss flatpaper-icon flatpaper-icon--lucide" aria-hidden="true"><use href="/icons.svg#flatpaper-icon-lucide-rss"></use></svg>
+
+        </a>
+      
+    </div>
+  </section>
+
+  
+    <section class="side-card brand-link-card" aria-label="站点链接">
+      
+        <div class="brand-link-group">
+          <div class="brand-link-title">Blog</div>
+          <div class="brand-link-list">
+            
+              <a href="https://ooo.run/" target="_blank" rel="noopener noreferrer">
+                
+                  <img src="https://ooo.run/favicon.ico" alt="" class="nav-img-icon" aria-hidden="true" />
+                
+                <span>O&#39;s World</span>
+              </a>
+            
+          </div>
+        </div>
+      
+        <div class="brand-link-group">
+          <div class="brand-link-title">Project</div>
+          <div class="brand-link-list">
+            
+              <a href="https://tools.ooo.run" target="_blank" rel="noopener noreferrer">
+                
+                  <img src="https://tools.ooo.run/favicon.png" alt="" class="nav-img-icon" aria-hidden="true" />
+                
+                <span>简易工具</span>
+              </a>
+            
+          </div>
+        </div>
+      
+    </section>
+  
+
+  
+    <div class="post-sticky-stack">
+      <section class="side-card toc-card">
+        <header class="toc-card__head">
+          <h2>
+<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-table-of-contents flatpaper-icon flatpaper-icon--lucide" aria-hidden="true"><use href="/icons.svg#flatpaper-icon-lucide-table-of-contents"></use></svg>
+文章目录</h2>
+          <button type="button" class="toc-toggle-all" data-action="toggle-toc" aria-pressed="false" aria-label="展开全部目录" title="展开全部目录">
+            
+<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-down flatpaper-icon flatpaper-icon--lucide" aria-hidden="true"><use href="/icons.svg#flatpaper-icon-lucide-chevron-down"></use></svg>
+
+          </button>
+        </header>
+        <div class="toc-content">
+          
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A0%B8%E5%BF%83%E8%A6%81%E7%82%B9%E9%80%9F%E8%A7%88"><span class="toc-text">核心要点速览</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80%E3%80%81-%E6%96%B0%E6%97%A7%E9%85%8D%E9%A2%9D%E5%AE%9E%E6%B5%8B%E5%AF%B9%E6%AF%94%EF%BC%9A%E4%B8%BB%E5%8A%9B%E6%A1%A3%E4%BD%8D%E8%BF%91%E4%B9%8E%E7%BF%BB%E5%80%8D"><span class="toc-text">一、 新旧配额实测对比：主力档位近乎翻倍</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C%E3%80%81-%E7%BE%8E%E9%87%91%E9%A2%9D%E5%BA%A6%E4%B8%8E-Token-%E6%95%B0%E9%87%8F%E7%9B%B4%E8%A7%82%E6%8D%A2%E7%AE%97"><span class="toc-text">二、 美金额度与 Token 数量直观换算</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%89%E3%80%81-%E5%9B%9B%E5%A4%A7%E6%B8%A0%E9%81%93%E6%9D%83%E9%99%90%E7%9F%A9%E9%98%B5%E4%B8%8E%E2%80%9C%E9%9D%9E%E4%BB%98%E8%B4%B9-Pro%E2%80%9D%E9%99%90%E5%88%B6%E8%AF%B4%E6%98%8E"><span class="toc-text">三、 四大渠道权限矩阵与“非付费 Pro”限制说明</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9B%9B%E3%80%81-%E8%AE%A2%E9%98%85%E5%86%B3%E7%AD%96%E4%B8%8E%E2%80%9C%E9%98%B2%E5%9D%91%E2%80%9D%E5%BB%BA%E8%AE%AE"><span class="toc-text">四、 订阅决策与“防坑”建议</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%94%E3%80%81-%E5%BB%B6%E4%BC%B8%E8%AF%84%E4%BC%B0%EF%BC%9AGoogle-AI-Pro%EF%BC%88-20-%E6%9C%88%EF%BC%89%E8%BF%98%E5%80%BC%E5%BE%97%E8%AE%A2%E9%98%85%E5%90%97%EF%BC%9F"><span class="toc-text">五、 延伸评估：Google AI Pro（$20&#x2F;月）还值得订阅吗？</span></a></li></ol>
+          
+        </div>
+      </section>
+      
+
+  <section class="side-card recent-card latest-posts-card">
+    <h2>
+<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-history flatpaper-icon flatpaper-icon--lucide" aria-hidden="true"><use href="/icons.svg#flatpaper-icon-lucide-history"></use></svg>
+最新文章</h2>
+    <ul class="recent-list">
+      
+        <li>
+          <a class="recent-item" href="/post/video-2-game-skill.html">
+            <strong>Video to Game：先让 AI 生成游戏视频，再让 Claude 把它做成能玩的游戏(31个游戏案例)</strong>
+            <em>2026-10-29</em>
+          </a>
+        </li>
+      
+        <li>
+          <a class="recent-item" href="/post/why-gemini-3-5-pro-disappear.html">
+            <strong>消失的 Gemini 3.5 Pro：Google CEO 亲口揭秘，AI 时代慢一步就是出局</strong>
+            <em>2026-10-24</em>
+          </a>
+        </li>
+      
+        <li>
+          <a class="recent-item" href="/post/claude-duet-vs-grok-bot-vs-chatgpt-dots-vs-meta-muse.html">
+            <strong>Claude Duet、Grok Bot、ChatGPT dots 与 Meta Muse 全面对比：功能、价格与订阅权益</strong>
+            <em>2026-10-23</em>
+          </a>
+        </li>
+      
+        <li>
+          <a class="recent-item" href="/post/why-emudhra-key-leak-matters.html">
+            <strong>把金库密码设成 4？一文看懂 eMudhra 证书私钥泄露为何影响全球每个人</strong>
+            <em>2026-10-22</em>
+          </a>
+        </li>
+      
+        <li>
+          <a class="recent-item" href="/post/claude-p5js-p5brush-hand-painted-animation.html">
+            <strong>告别“抽卡”：为什么 p5.js + p5.brush 在 Claude 动态手绘视频圈彻底火了？</strong>
+            <em>2026-10-19</em>
+          </a>
+        </li>
+      
+    </ul>
+  </section>
+
+
+    </div>
+  
+
+  
+
+</aside>
+
+    <section class="paper-main">
+      
+
+<div class="article-tape-wrap">
+<span class="tape tape--top-right" aria-hidden="true"></span>
+<article class="article-paper article-paper--with-top-img">
+  
+    <figure class="article-top-img" aria-label="Google 大幅提升付费用户 Antigravity 中的 Gemini 4 Argon 配额">
+      <img src="https://img.nep.me/ooo/cover-gemini4-argon-upgrade.webp" alt="" loading="eager" fetchpriority="high" referrerpolicy="no-referrer" draggable="false">
+    </figure>
+  
+  <header class="article-header">
+    
+      <a class="label-pill" href="/categories/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/">
+        
+<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-folder flatpaper-icon flatpaper-icon--lucide" aria-hidden="true"><use href="/icons.svg#flatpaper-icon-lucide-folder"></use></svg>
+
+        开发工具
+      </a>
+    
+    <h1>Google 大幅提升付费用户 Antigravity 中的 Gemini 4 Argon 配额</h1>
+    <div class="meta-line meta-line--article">
+      <span class="meta-date">
+<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-calendar flatpaper-icon flatpaper-icon--lucide" aria-hidden="true"><use href="/icons.svg#flatpaper-icon-lucide-calendar"></use></svg>
+2026-10-22</span>
+      
+        <span class="meta-tags">
+          
+<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-tag flatpaper-icon flatpaper-icon--lucide" aria-hidden="true"><use href="/icons.svg#flatpaper-icon-lucide-tag"></use></svg>
+
+          <a class="meta-tag-link" href="/tags/Gemini-4-Argon/">#Gemini 4 Argon</a><a class="meta-tag-link" href="/tags/Antigravity-IDE/">#Antigravity IDE</a><a class="meta-tag-link" href="/tags/Google-AI-Studio/">#Google AI Studio</a><a class="meta-tag-link" href="/tags/AI-%E7%BC%96%E7%A8%8B/">#AI 编程</a>
+        </span>
+      
+    </div>
+  </header>
+
+  
+
+
+  <div class="article-content">
+    <p>面对首批用户对 Gemini 4 Argon 初始配额“不够塞牙缝”的密集反馈，Google 近期悄然完成了配额提升，并对周额度进行了一次全面重置。此次调整中，主力订阅档位的可用额度近乎翻倍。</p>
+<p>即便账面额度翻倍，不同订阅档位折算成真实 API 额度后对比 Codex &#x2F; Claude Pro 订阅依然差距悬殊。本文将结合最新实测数据，全面拆解 Gemini 4 Argon 的最新配额机制、Token 折算标准、四大渠道权限矩阵以及当下的订阅策略。</p>
+<hr>
+<h2 id="核心要点速览"><a href="#核心要点速览" class="headerlink" title="核心要点速览"></a>核心要点速览</h2><ul>
+<li><strong>配额大幅跃升</strong>：Pro（$20&#x2F;月）升至 <strong>$15&#x2F;周</strong>；Ultra（$100&#x2F;月）翻倍至 <strong>$50&#x2F;5小时、$200&#x2F;周</strong>。</li>
+<li><strong>Token 换算标准</strong>：在常规高缓存命中率下，**$1 约合 1.6M 至 2.0M Tokens**。</li>
+<li><strong>白嫖&#x2F;特惠限制</strong>：通过<strong>学生优惠、印度 Jio</strong> 等渠道获取的“非付费 Pro”账号，<strong>无法在 Antigravity IDE 中调用该模型</strong>，但现已获准在 <strong>AI Studio</strong> 中免费体验。</li>
+<li><strong>订阅防坑指南</strong>：<strong>Ultra $100 档</strong> 为当前性价比最高的档位；鉴于官方策略调整频繁，强烈建议<strong>按月付费</strong>，切勿盲目锁定长期或年付订阅。</li>
+</ul>
+<p><img src="https://img.nep.me/ooo/cover-gemini4-argon-agy-ds.webp" alt="cover-gemini4-argon-agy-ds.png"></p>
+<hr>
+<h2 id="一、-新旧配额实测对比：主力档位近乎翻倍"><a href="#一、-新旧配额实测对比：主力档位近乎翻倍" class="headerlink" title="一、 新旧配额实测对比：主力档位近乎翻倍"></a>一、 新旧配额实测对比：主力档位近乎翻倍</h2><p>在完成周配额重置后，各付费档位的账面可用额度（以等效 API 消耗美金计）迎来了显著提升：</p>
+<table>
+<thead>
+<tr>
+<th align="left">档位</th>
+<th align="left">价格&#x2F;月</th>
+<th align="left">旧版配额</th>
+<th align="left">最新配额</th>
+<th align="left">实测表现与定位</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><strong>Pro</strong></td>
+<td align="left">$20</td>
+<td align="left">$10 &#x2F; 周</td>
+<td align="left"><strong>$15&#x2F;周</strong></td>
+<td align="left">提升 50%。经社群实测，用于深度撰写单篇长论文或中型代码库重构仍略显局促。</td>
+</tr>
+<tr>
+<td align="left"><strong>Ultra 5x</strong></td>
+<td align="left">$100</td>
+<td align="left">$25&#x2F;5H<br>$100&#x2F;周</td>
+<td align="left"><strong>$50&#x2F;5H</strong><br><strong>$200&#x2F;周</strong></td>
+<td align="left"><strong>额度全面翻倍</strong>。实测消耗 6% 的 5 小时额度约合 $3，是目前综合性价比最高的 <strong>主力档位</strong>。</td>
+</tr>
+<tr>
+<td align="left"><strong>Ultra 20x</strong></td>
+<td align="left">$200</td>
+<td align="left">$70&#x2F;5H<br>$200&#x2F;周</td>
+<td align="left"><strong>$200&#x2F;5H</strong><br><strong>$800&#x2F;周</strong></td>
+<td align="left">迎来爆发式扩容（网传测算数据），适合极高强度的全天候自动化 Agent 与大型工程开发。</td>
+</tr>
+</tbody></table>
+<hr>
+<h2 id="二、-美金额度与-Token-数量直观换算"><a href="#二、-美金额度与-Token-数量直观换算" class="headerlink" title="二、 美金额度与 Token 数量直观换算"></a>二、 美金额度与 Token 数量直观换算</h2><p>抛开单纯的账面美金数字，结合真实开发环境下的后台用量统计，可以更直观地评估各档位的实际生产力：</p>
+<ul>
+<li><strong>实测基准参考</strong>：单日 45 次调用产生 <strong>4.83M 总 Token</strong>（其中输入用量 696.5k，包含直接输入与 4.02M 缓存读取；输出用量 119.2k，包含内容生成 78.3k 与思考推理 40.9k），在 <strong>85.2% 缓存命中率</strong>下，预估费用为 <strong>$2.99</strong>。</li>
+<li><strong>折算比率</strong>：综合测算下来，<strong>每 $1 配额约可支撑 1.6M - 2.0M Tokens</strong> 的调用量。</li>
+</ul>
+<p>按此基准比率折算，各档位的实际 Token 承载力如下：</p>
+<ul>
+<li><strong>Pro（$20 档）</strong>：<ul>
+<li>每周可用：<strong>24M - 30M Tokens</strong></li>
+</ul>
+</li>
+<li><strong>Ultra 5x</strong>：<ul>
+<li>每 5 小时可用：<strong>80M - 100M Tokens</strong></li>
+<li>每周合计可用：<strong>320M - 400M Tokens</strong>（约为 Pro 档的 13 倍以上）</li>
+</ul>
+</li>
+<li><strong>Ultra 50x</strong>：<ul>
+<li>每 5 小时可用：<strong>320M - 400M Tokens</strong></li>
+<li>每周合计可用：<strong>1,280M - 1,600M Tokens</strong></li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2 id="三、-四大渠道权限矩阵与“非付费-Pro”限制说明"><a href="#三、-四大渠道权限矩阵与“非付费-Pro”限制说明" class="headerlink" title="三、 四大渠道权限矩阵与“非付费 Pro”限制说明"></a>三、 四大渠道权限矩阵与“非付费 Pro”限制说明</h2><p>很多用户关心通过<strong>学生教育优惠（Student Discount）</strong>、<strong>印度 Jio 联名赠送</strong>或试用活动获得的“非付费 Pro（Unpaid Pro）”账号，在此次更新后能否愉快玩耍。以下是四大官方渠道的最新权限划分：</p>
+<table>
+<thead>
+<tr>
+<th align="left">平台 &#x2F; 渠道</th>
+<th align="left">适用人群与权限要求</th>
+<th align="left">核心政策说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><strong>Antigravity IDE</strong></td>
+<td align="left"><strong>仅限真实付费 Pro &#x2F; Ultra</strong></td>
+<td align="left"><strong>维持严格付费墙</strong>。通过学生优惠、Jio 赠送等渠道获得的<strong>非付费 Pro 账号无法在 Antigravity 中使用</strong>。即便未来向非付费用户开放，免费配额也将面临极其严苛的限流瓶颈。</td>
+</tr>
+<tr>
+<td align="left"><strong>Google AI Studio</strong></td>
+<td align="left"><strong>非付费 Pro</strong> &#x2F; 付费 Pro &#x2F; Ultra</td>
+<td align="left"><strong>权限正式拓宽</strong>。手持学生优惠或 Jio 非付费 Pro 账号的用户，现已可以在 AI Studio 中正式调用并体验 Gemini 4 Argon。</td>
+</tr>
+<tr>
+<td align="left"><strong>Gemini App &amp; Web</strong></td>
+<td align="left">所有 Pro 及 Ultra 用户</td>
+<td align="left">政策维持不变，含非付费与付费在内的所有 Pro&#x2F;Ultra 订阅用户均可正常使用。</td>
+</tr>
+<tr>
+<td align="left"><strong>Vertex AI</strong></td>
+<td align="left">仅限付费 API 用户</td>
+<td align="left">政策维持不变，仅面向绑定结算账户的企业及付费 API 开发者开放调用。</td>
+</tr>
+</tbody></table>
+<hr>
+<h2 id="四、-订阅决策与“防坑”建议"><a href="#四、-订阅决策与“防坑”建议" class="headerlink" title="四、 订阅决策与“防坑”建议"></a>四、 订阅决策与“防坑”建议</h2><ol>
+<li><strong>首选档位推荐</strong>：<br>如果你在 Antigravity IDE 中有高频编码、长上下文分析或重度 Agent 生产力需求，$20 的 Pro 档位（24M-30M Tokens&#x2F;周）很容易触发周上限；建议直接选择 <strong>Ultra $100 档位</strong>，其每 5 小时 80M-100M Tokens、每周最高 400M Tokens 的容量足以应对绝大多数高强度开发场景，且单位 Token 成本远低于 Pro 档。</li>
+<li><strong>切勿锁定长期订阅</strong>：<br>虽然 Google 此次迅速响应社区呼声、将配额翻倍的操作值得肯定，但熟悉 Google 在 Antigravity 及 AI 订阅生态历史操作的老玩家都非常清楚其策略调整与模型更迭的频繁程度（如随时可能出现的动态限流、计费权重调整或新模型分流）。因此，当下强烈建议坚持<strong>“按月付费（Month-to-Month）”</strong>，保持随时升降级或退订的灵活性，切忌盲目锁死年付等长期订阅。</li>
+<li><strong>非付费 Pro 用户的最优解</strong>：<br>持有学生认证优惠或 Jio 权益的用户，无需在 Antigravity IDE 中耗费精力尝试突破权限限制，直接转向 <strong>Google AI Studio</strong> 或 <strong>Gemini Web&#x2F;App</strong> 即可零成本体验 Gemini 4 Argon 的完整能力。</li>
+</ol>
+<hr>
+<h2 id="五、-延伸评估：Google-AI-Pro（-20-月）还值得订阅吗？"><a href="#五、-延伸评估：Google-AI-Pro（-20-月）还值得订阅吗？" class="headerlink" title="五、 延伸评估：Google AI Pro（$20&#x2F;月）还值得订阅吗？"></a>五、 延伸评估：Google AI Pro（$20&#x2F;月）还值得订阅吗？</h2><p>如果单看 Antigravity IDE 中的 AI 编程配额，$20&#x2F;月的 Pro 档位（每周 $15，约合 24M - 30M Tokens）面对高强度 Vibe Coding 或大型代码库重构时确实略显局促，在纯编码性价比上不如 Codex &#x2F; Claude 订阅。</p>
+<p>但如果跳出“纯编码工具”的单一维度，从 <strong>Google 全家桶生态</strong>的视角来审视，这 $20&#x2F;月的含金量依然极高 —— 甚至可以说属于“买全家桶送 AI 额度”：</p>
+<ul>
+<li><strong>5TB Google Drive 云端存储</strong>：大容量云盘空间（支持家庭组共享），涵盖 Google Photos 原画质备份、Gmail 与 Google Drive，单买同级别云存储本身就价值不菲。</li>
+<li><strong>YouTube Premium Lite 权益</strong>：附加轻量级免广告视频体验，大幅提升日常浏览与查阅技术教程的舒适度。</li>
+<li><strong>Google Colab 算力与权益加成</strong>：提供更充裕的云端计算单元与更强的 GPU 分配优先级，对需要跑数据科学、模型微调或脚本测试的开发者极为实用。</li>
+<li><strong>GCE 每月 10 美元额度</strong>：除了解锁 AI Studio 权限外，还能在 Google 云计算平台每月 10 美元的额度。</li>
+</ul>
+<p><strong>选购建议总结</strong>：</p>
+<ul>
+<li><strong>全生态综合型用户（强烈推荐 Pro $20 档）</strong>：如果你本身就有 Google Drive 扩容、YouTube 观看、Colab 算力或日常综合 AI 助手的需求，那么 $20 的 Pro 套餐综合回本率极高，附赠的每周 24M - 30M Tokens 足以应付日常轻中度代码补全与脚本编写。</li>
+<li><strong>重度沉浸式编码开发者（建议直上 Ultra 5x $100 档或专精工具）</strong>：如果你订阅的核心诉求是全天候在 Antigravity IDE 中进行高强度 Agent 编码，Pro 档的周限额很快就会见底，此时按月订阅 <strong>Ultra $100 档</strong>（每周最高 400M Tokens）才是更纯粹的生产力选择。</li>
+</ul>
+
+  </div>
+
+  <footer class="article-reactions">
+    <div class="reaction-group">
+      <button type="button" class="reaction reaction--comment" aria-label="跳转到评论区" data-action="scroll-to-comments">
+        
+<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-message-circle flatpaper-icon flatpaper-icon--lucide" aria-hidden="true"><use href="/icons.svg#flatpaper-icon-lucide-message-circle"></use></svg>
+
+      </button>
+      <span class="reaction-label">评论</span>
+      
+    </div>
+    <div class="reaction-group reaction-group--right">
+      
+      <button type="button" class="reaction reaction--share" aria-label="分享" data-action="share">
+        
+<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-share-2 flatpaper-icon flatpaper-icon--lucide" aria-hidden="true"><use href="/icons.svg#flatpaper-icon-lucide-share-2"></use></svg>
+
+      </button>
+      <span class="reaction-label">分享</span>
+    </div>
+  </footer>
+
+  
+
+
+  <nav class="article-actions">
+    
+      <a class="article-action article-action--prev" href="/post/claude-duet-vs-grok-bot-vs-chatgpt-dots-vs-meta-muse.html">
+        
+<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-left flatpaper-icon flatpaper-icon--lucide" aria-hidden="true"><use href="/icons.svg#flatpaper-icon-lucide-arrow-left"></use></svg>
+
+        <span class="action-label">上一篇</span>
+        <span class="action-title">Claude Duet、Grok Bot、ChatGPT dots 与 Meta Muse 全面对比：功能、价格与订阅权益</span>
+      </a>
+    
+    
+      <a class="article-action article-action--next" href="/post/why-emudhra-key-leak-matters.html">
+        <span class="action-label">下一篇</span>
+        <span class="action-title">把金库密码设成 4？一文看懂 eMudhra 证书私钥泄露为何影响全球每个人</span>
+        
+<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-right flatpaper-icon flatpaper-icon--lucide" aria-hidden="true"><use href="/icons.svg#flatpaper-icon-lucide-arrow-right"></use></svg>
+
+      </a>
+    
+  </nav>
+</article>
+</div>
+
+<button type="button" class="back-to-top" data-action="scroll-to-top" aria-label="返回顶部" hidden>
+  
+<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-up flatpaper-icon flatpaper-icon--lucide" aria-hidden="true"><use href="/icons.svg#flatpaper-icon-lucide-arrow-up"></use></svg>
+
+</button>
+
+
+  <section class="related-paper">
+    <header class="related-paper__head">
+      <h2>
+<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-link flatpaper-icon flatpaper-icon--lucide" aria-hidden="true"><use href="/icons.svg#flatpaper-icon-lucide-link"></use></svg>
+相关文章</h2>
+      <a class="related-paper__more" href="/archives/">
+        <span>查看更多</span>
+        
+<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-right flatpaper-icon flatpaper-icon--lucide" aria-hidden="true"><use href="/icons.svg#flatpaper-icon-lucide-arrow-right"></use></svg>
+
+      </a>
+    </header>
+    <div class="related-paper__grid">
+      
+        <a class="related-card" href="/post/get-antigravity-ide-back.html">
+          <span class="related-card__thumb">
+            
+<div class="paper-thumb paper-thumb-0 paper-thumb--cover">
+  
+    <img class="paper-thumb__img" src="https://img.nep.me/ooo/cover-antigravity-ide-back.webp" alt="找回 Antigravity 代码编辑器(Antigravity IDE)" loading="lazy" referrerpolicy="no-referrer">
+  
+</div>
+
+          </span>
+          <span class="related-card__body">
+            <strong class="related-card__title">找回 Antigravity 代码编辑器(Antigravity IDE)</strong>
+            <em class="related-card__date">2026-05-23</em>
+          </span>
+        </a>
+      
+        <a class="related-card" href="/post/google-launch-antigravity-cli.html">
+          <span class="related-card__thumb">
+            
+<div class="paper-thumb paper-thumb-1 paper-thumb--cover">
+  
+    <img class="paper-thumb__img" src="https://img.nep.me/ooo/cover-antigravity.webp" alt="Google 发布 Antigravity 2.0 ，以及 Antigravity-CLI" loading="lazy" referrerpolicy="no-referrer">
+  
+</div>
+
+          </span>
+          <span class="related-card__body">
+            <strong class="related-card__title">Google 发布 Antigravity 2.0 ，以及 Antigravity-CLI</strong>
+            <em class="related-card__date">2026-05-20</em>
+          </span>
+        </a>
+      
+    </div>
+  </section>
+
+
+      
+
+<section class="comments-section" aria-label="评论">
+  <header class="comments-section__head">
+    <h2>
+<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-message-circle flatpaper-icon flatpaper-icon--lucide" aria-hidden="true"><use href="/icons.svg#flatpaper-icon-lucide-message-circle"></use></svg>
+评论</h2>
+  </header>
+  <div id="artalk-comments"></div>
+</section>
+<script>
+window.addEventListener('load', function () {
+  if (typeof Artalk === 'undefined' || typeof Artalk.init !== 'function') return;
+  Artalk.init({
+    el: '#artalk-comments',
+    pageKey: "https://ooo.run/post/gemini-4-argon-antigravity-quota-update.html",
+    pageTitle: "Google 大幅提升付费用户 Antigravity 中的 Gemini 4 Argon 配额",
+    server: "https://artalk.ooo.run",
+    site: "Mr. O 的博客"
+  });
+});
+</script>
+
+
+    </section>
+    
+  </main>
+
+  <div class="sidebar-backdrop js-sidebar-close" aria-hidden="true"></div>
+
+  
+<footer class="site-footer">
+  <span class="site-footer__left">© 2026 By Mr. O</span>
+  
+    <span class="site-footer__right">
+      
+        <span class="site-footer__row"><a href="/terms">服务条款</a><span class="site-footer__separator"> · </span><a href="/privacy">隐私政策</a><span class="site-footer__separator"> · </span><span class="site-footer__powered"><span class="site-footer__powered-prefix">Powered by Theme</span> <a href="https://github.com/Homulilly/hexo-theme-flatpaper" target="_blank" rel="noopener">FlatPaper</a></span></span>
+      
+        <span class="site-footer__row"><a href="https://tools.ooo.run" target="_blank" rel="noopener">简易工具</a><span class="site-footer__separator"> · </span><a href="https://endfield.ooo.run" target="_blank" rel="noopener">终末地基质工具箱</a></span>
+      
+    </span>
+  
+</footer>
+
+  
+<div class="search-panel" aria-hidden="true" data-index-url="/flatpaper-search.json">
+  <div class="search-backdrop js-search-close"></div>
+  <section class="search-dialog" role="dialog" aria-modal="true" aria-label="搜索文章">
+    <span class="tape tape--top-left" aria-hidden="true"></span>
+    <header class="search-head">
+      <h2><span class="green-dot"></span>搜索文章</h2>
+      <button class="icon-button js-search-close" type="button" aria-label="关闭搜索">
+        
+<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x flatpaper-icon flatpaper-icon--lucide" aria-hidden="true"><use href="/icons.svg#flatpaper-icon-lucide-x"></use></svg>
+
+      </button>
+    </header>
+    <label class="search-field">
+      
+<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-search flatpaper-icon flatpaper-icon--lucide" aria-hidden="true"><use href="/icons.svg#flatpaper-icon-lucide-search"></use></svg>
+
+      <input id="flatpaper-search" class="search-input" type="search" placeholder="输入关键词，按 Esc 关闭" autocomplete="off">
+    </label>
+    <div class="search-results" data-empty="输入关键词后显示匹配的文章">
+      <p class="search-empty">输入关键词后显示匹配的文章</p>
+    </div>
+  </section>
+</div>
+
+  <script>
+  window.FLATPAPER_I18N = {"language":"zh-CN","common.posts":"文章","common.categories":"分类","common.tags":"标签","common.comments":"评论","common.share":"分享","common.page":"页面","common.archive":"归档","common.post_list":"文章列表","common.search_posts":"搜索文章","common.random_posts":"随机文章","common.reward":"赞赏","common.view_all":"查看全部","pagination.prev":"上一页","pagination.next":"下一页","pagination.post_pager":"文章分页","pagination.archive_pager":"归档分页","index.featured":"精选文章","index.pinned":"置顶","index.read_more":"阅读全文","index.previous_slide":"上一张","index.next_slide":"下一张","index.carousel_pagination":"轮播页码","index.carousel_slide":"第 %d 张","index.latest_posts":"最新文章","index.empty_posts":"还没有文章。创建第一篇文章后，这里会显示最新内容。","archive.title":"归档","archive.post_list":"文章列表","taxonomy.category_count":"%d 篇","taxonomy.empty_categories":"暂时还没有分类。","taxonomy.empty_tags":"暂时还没有标签。","links.label":"友链","links.title":"友情链接","links.empty_data":"暂未加载到友链数据。请确认 source/_data/links.yml 存在并已 hexo clean。","links.rss_label":"%s 的 RSS","friends_feed.label":"朋友圈","friends_feed.title":"友链朋友圈","friends_feed.loading":"正在加载友链动态…","friends_feed.missing_url":"暂未配置 all.json 地址。","friends_feed.load_failed":"友链动态加载失败，请稍后再试。","friends_feed.empty":"暂时没有抓取到友链文章。","friends_feed.load_more":"加载更多","friends_feed.updated_at":"更新于 %s","friends_feed.friend_count":"%d 位友邻","friends_feed.active_count":"%d 位活跃","friends_feed.article_count":"%d 篇文章","friends_feed.unknown_author":"未知站点","friends_feed.date_unknown":"时间未知","guestbook.label":"留言板","guestbook.title":"留言板","guestbook.loading":"正在铺开留言墙…","guestbook.missing_config":"留言墙需要评论系统：请在主题配置中设置 comments: twikoo（并填写 envId）或 comments: artalk（并填写 server）。","guestbook.load_failed":"留言加载失败，请稍后再试。","guestbook.empty":"墙上还空着，来贴第一张留言吧！","guestbook.load_more":"展开更多留言","guestbook.total_count":"共 %d 条留言","guestbook.latest_note":"墙上展示最新 %d 条","guestbook.jump_to_comment":"查看留言","guestbook.sort_time":"查看最新","guestbook.sort_random":"随机排序","guestbook.anonymous":"匿名访客","guestbook.write_hint":"在下方留言，刷新后就会贴到墙上","post.scroll_to_comments":"跳转到评论区","post.previous":"上一篇","post.next":"下一篇","post.no_previous":"没有更早的文章了","post.no_next":"已经是最新的一篇","post.back_to_top":"返回顶部","post.related_posts":"相关文章","post.view_more":"查看更多","not_found.label":"页面走丢了","not_found.title":"找不到这个页面","not_found.text":"这个地址可能已经移动、删除，或者从未存在。","not_found.home":"返回首页","not_found.search":"搜索文章","search.placeholder":"输入关键词，按 Esc 关闭","search.empty":"输入关键词后显示匹配的文章","search.loading":"正在加载搜索索引…","search.load_failed":"搜索索引加载失败，请重新打开搜索重试","search.no_result":"没有找到与 \"%s\" 相关的文章","search.close":"关闭搜索","code.copy":"复制代码","code.collapse":"折叠代码","code.expand":"展开代码","heading.anchor":"链接到此节: %s","head.tag":"标签：%s","head.category":"分类：%s","head.archive":"归档","head.archive_with_date":"归档：%s","head.page_number":"第 %d 页","navigation.primary":"主导航","navigation.mobile":"移动端导航","navigation.brand_home":"FlatPaper 首页","navigation.brand_menu":"打开站点导航","navigation.open_sidebar":"打开侧边栏","navigation.close_sidebar":"关闭侧边栏","navigation.sidebar":"侧边栏","navigation.sidebar_tools":"侧边栏工具","navigation.site_links":"站点链接","navigation.site_info":"站点信息","colors.choose_theme_color":"选择主题色","colors.theme_color":"主题色","colors.toggle_color_mode":"切换颜色模式","colors.green":"绿色","colors.purple":"紫色","colors.pink":"粉色","colors.sakura":"樱花粉","colors.blue":"蓝色","colors.orange":"橙色","colors.black":"黑色","profile.default_bio":"热爱生活，热爱代码，喜欢分享技术与生活中的点滴。","welcome.cta":"开始阅读","welcome.title":"欢迎来到 FlatPaper","welcome.text":"一个专注于内容与阅读体验的博客主题。","typed.from":"出自","stack_album.label":"堆叠相册","home_hero.label":"首页开屏","home_hero.enter":"开始阅读","home_hero.note":"今日","home_hero.default_subtitle":"日常记录","home_hero.nav_links":"开屏导航","home_hero.profile_links":"个人链接","home_hero.tools":"开屏工具","home_hero.shuffle_stickers":"打乱贴纸位置","home_hero.link":"链接","home_hero.sticker_image":"贴纸图片","home_hero.visit_confirm":"要访问 %s 吗？","home_hero.visit":"访问","home_hero.cancel":"取消","toc.title":"文章目录","toc.empty":"目录会根据文章标题自动生成。","toc.expand_all":"展开全部目录","toc.collapse_all":"收起全部目录","sidebar.hot_tags":"热门标签","sidebar.latest_posts":"最新文章"};
+  </script>
+  
+<script src="/js/main.js"></script>
+
+  
+</body>
+</html>

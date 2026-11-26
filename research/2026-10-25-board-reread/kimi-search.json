@@ -1,0 +1,417 @@
+{
+ "model": "Kimi K3.1 Pro",
+ "searchedAt": "2026-10-25T10:03:00Z",
+ "leaves": {
+  "bugHunt": {
+   "result": "found",
+   "value": 36.0,
+   "details": {
+    "fixedOf105": 36.0,
+    "runs": 3,
+    "runScores": [
+     36,
+     42,
+     30
+    ],
+    "mean": 36.0,
+    "repo1Mean": 17.0,
+    "repo2Mean": 19.0,
+    "effort": "max (Claude Code sends output_config.effort=max; Moonshot default; effort_status first_party)",
+    "harness": "Claude Code 2.1.309 / Moonshot API (direct)",
+    "modelId": "kimi-k3.1-pro",
+    "rowDate": "2026-10-23",
+    "mainCommitSha": "9089dc552a2b4eb94749c4da34d2cb872c7e0b43",
+    "mainCommitDate": "2026-10-23T23:01:17+02:00 (21:01:17Z)",
+    "commitMessage": "bug hunt bench: Kimi K3.1 Pro (max effort, Moonshot API) - mean of 3 (36/105)",
+    "judge": "Grok",
+    "caveat": "one repo-2 attempt collapsed and was re-run; counted as 0 the mean is 32.0",
+    "benchmarkJsonMetaUpdated": "2026-10-23",
+    "rowLabel": "Kimi K3.1 Pro (max effort, Moonshot API) - mean of 3"
+   },
+   "sources": [
+    {
+     "url": "https://raw.githubusercontent.com/phuryn/bug-hunt-bench/main/results/combined-scoreboard.csv",
+     "finding": "row 'Kimi K3.1 Pro (max effort, Moonshot API) - mean of 3',Claude Code / Moonshot API,36.0,17.0,19.0,29.3,64.8,13.76",
+     "sourceUpdated": null,
+     "readAt": "2026-10-25T09:58:44Z"
+    },
+    {
+     "url": "https://raw.githubusercontent.com/phuryn/bug-hunt-bench/main/results/run-notes.md",
+     "finding": "section '## Kimi K3.1 Pro (max effort, Moonshot API) - mean of 3' with run scores 36/42/30",
+     "sourceUpdated": null,
+     "readAt": "2026-10-25T09:58:44Z"
+    },
+    {
+     "url": "https://raw.githubusercontent.com/phuryn/bug-hunt-bench/main/scoreboard.csv",
+     "finding": "HTTP 404; file does not exist on main (root has no scoreboard.csv; per-repo scoreboards are in results/)",
+     "sourceUpdated": null,
+     "readAt": "2026-10-25T09:58:44Z"
+    },
+    {
+     "url": "https://raw.githubusercontent.com/phuryn/bug-hunt-bench/main/notes.md",
+     "finding": "HTTP 404; file does not exist on main",
+     "sourceUpdated": null,
+     "readAt": "2026-10-25T09:58:44Z"
+    },
+    {
+     "url": "https://bughunt.productcompass.pm/data/benchmark.json",
+     "finding": "runs[37] model 'Kimi K3.1 Pro', fixed 36, n_runs 3, effort max, harness Claude Code / Moonshot API",
+     "sourceUpdated": "2026-10-23 (meta.updated)",
+     "readAt": "2026-10-25T09:58:44Z"
+    },
+    {
+     "url": "git ls-remote / git clone --depth 1 https://github.com/phuryn/bug-hunt-bench.git",
+     "finding": "main = 9089dc552a2b4eb94749c4da34d2cb872c7e0b43, committed 2026-10-23T23:01:17+02:00",
+     "sourceUpdated": "2026-10-23",
+     "readAt": "2026-10-25T09:59:30Z"
+    },
+    {
+     "url": "https://api.github.com/repos/phuryn/bug-hunt-bench/commits/main",
+     "finding": "HTTP 403 (session proxy); SHA taken from git instead",
+     "sourceUpdated": null,
+     "readAt": "2026-10-25T09:58:44Z"
+    }
+   ]
+  },
+  "vibeCode": {
+   "result": "found",
+   "value": 84.894,
+   "details": {
+    "accuracyPct": 84.894,
+    "stderr": 2.949,
+    "harness": "OpenHands",
+    "rank": 17,
+    "costPerTest": 7.485,
+    "pricing": "$2 / $10",
+    "latency": "50m29s",
+    "pageUpdated": "2026-10-24",
+    "modelKey": "kimi/kimi-k3.1-pro",
+    "benchmarkVersion": "v1.1 (page /benchmarks/vibe-code)",
+    "effortLabel": "none shown on Vals"
+   },
+   "sources": [
+    {
+     "url": "https://www.vals.ai/benchmarks/vibe-code",
+     "finding": "row 17 Kimi K3.1 Pro OpenHands 84.89% (stderr 2.949)",
+     "sourceUpdated": "2026-10-24 (page 'Updated 10/24/2026')",
+     "readAt": "2026-10-25T09:58:45Z"
+    },
+    {
+     "url": "https://www.vals.ai/models/kimi_kimi-k3.1-pro",
+     "finding": "Vibe Code Bench v1.1 84.89% \u00b1 2.95, 17/119",
+     "sourceUpdated": "not shown",
+     "readAt": "2026-10-25T10:01:06Z"
+    }
+   ]
+  },
+  "codeMigration": {
+   "result": "not found",
+   "value": null,
+   "details": {
+    "note": "Page lists only 'Kimi K3' (28.587%, $35.75, 4h31m) among Kimi models; no kimi-k3.1-pro entry in the leaderboard data. Kimi K3 must not be transferred.",
+    "pageUpdated": "2026-10-20"
+   },
+   "sources": [
+    {
+     "url": "https://www.vals.ai/benchmarks/code-migration-v1-1",
+     "finding": "no K3.1 Pro row; page predates K3.1 Pro release; only Kimi K3 row",
+     "sourceUpdated": "2026-10-20 (page 'Updated 10/20/2026')",
+     "readAt": "2026-10-25T09:58:45Z"
+    },
+    {
+     "url": "https://www.vals.ai/models/kimi_kimi-k3.1-pro",
+     "finding": "model page benchmark list shows no Code Migration entry",
+     "sourceUpdated": "not shown",
+     "readAt": "2026-10-25T10:01:06Z"
+    }
+   ]
+  },
+  "livebench2Overall": {
+   "result": "found",
+   "value": 76.743,
+   "details": {
+    "note": "Two release tables contain the exact row 'kimi-k3.1-pro'. The public default release is 20261014 (site code Yt=['20261014']; table.csv Last-Modified 2026-10-24 15:27:14 GMT, i.e. K3.1 Pro was added to it in place after release). Release 20261023 (site label '23 October 2026') is newer in the data but only shown at livebench.ai/new/. Values differ in Long Agentic (49.5 vs 39.1) and Browser (80.0 vs 75.9). Owner decision needed on which release is 'newest'.",
+    "categories": [
+     "Long Agentic",
+     "Reasoning",
+     "Coding",
+     "Browser",
+     "Data Analysis",
+     "Research",
+     "Design"
+    ],
+    "release_20261014": {
+     "Long Agentic": 49.5,
+     "Reasoning": 91.1,
+     "Coding": 81.8,
+     "Browser": 80.0,
+     "Data Analysis": 79.1,
+     "Research": 77.9,
+     "Design": 77.8
+    },
+    "mean7_20261014": 76.743,
+    "release_20261023": {
+     "Long Agentic": 39.1,
+     "Reasoning": 91.1,
+     "Coding": 81.8,
+     "Browser": 75.9,
+     "Data Analysis": 79.1,
+     "Research": 77.9,
+     "Design": 77.8
+    },
+    "mean7_20261023": 74.671,
+    "release_20261023_overall_weights": {
+     "Long Agentic": 2.0,
+     "Coding": 1.5,
+     "Design": 1.5,
+     "others": 1.0
+    },
+    "siteReleaseDateLabel": "23 October 2026"
+   },
+   "sources": [
+    {
+     "url": "https://livebench.ai/data/20261023/table.csv",
+     "finding": "kimi-k3.1-pro,39.1,91.1,81.8,75.9,79.1,77.9,77.8 (also kimi-k3 26.4,90.7,59.3,75.2,78.7,79.0,77.2)",
+     "sourceUpdated": "Last-Modified 2026-10-24 15:27:14 GMT",
+     "readAt": "2026-10-25T09:59:50Z"
+    },
+    {
+     "url": "https://livebench.ai/data/20261014/table.csv",
+     "finding": "kimi-k3.1-pro,49.5,91.1,81.8,80.0,79.1,77.9,77.8",
+     "sourceUpdated": "Last-Modified 2026-10-24 15:27:14 GMT",
+     "readAt": "2026-10-25T09:59:50Z"
+    },
+    {
+     "url": "https://livebench.ai/ (static/js/main.27333af3.js)",
+     "finding": "SPA; release list found in bundle; data/<id>/table.csv pattern; 20261023 gated behind /new path",
+     "sourceUpdated": "n/a",
+     "readAt": "2026-10-25T09:58:45Z"
+    },
+    {
+     "url": "https://livebench.ai/data/2026-10-14/table.csv and 2026-09-10",
+     "finding": "404 (release ids are compact 20261014 form for v2)",
+     "sourceUpdated": null,
+     "readAt": "2026-10-25T09:58:44Z"
+    }
+   ]
+  },
+  "aiCodingDaily": {
+   "result": "found",
+   "value": null,
+   "details": {
+    "leaderboardLastUpdate": "2026-10-24",
+    "rows": [
+     {
+      "model": "Kimi K3.1 Pro (Max)",
+      "effort": "Max",
+      "rank": 8,
+      "total70": 63.8,
+      "laravel20": 18.55,
+      "react20": 18.33,
+      "bugFinding10": 9.17,
+      "edgeCase20": 17.75,
+      "avgCostPerPrompt": "$0.74",
+      "avgTime": "13:39",
+      "tested": "9 hours ago (relative, as read 2026-10-25 ~09:58Z; i.e. about 2026-10-25 00:58Z or the 24 Oct update)",
+      "harness": "OpenCode"
+     },
+     {
+      "model": "Kimi K3.1 Pro (High)",
+      "effort": "High",
+      "rank": 16,
+      "total70": 59.99,
+      "laravel20": 17.7,
+      "react20": 17.33,
+      "bugFinding10": 7.71,
+      "edgeCase20": 17.25,
+      "avgCostPerPrompt": "$0.25",
+      "avgTime": "05:23",
+      "tested": "1 day ago (relative)",
+      "harness": "OpenCode"
+     }
+    ],
+    "changelog": "October 24th: Added Kimi K3.1-Pro",
+    "modelPage": "https://aicodingdaily.com/model/kimi-k3-1-pro",
+    "note": "Table has no explicit tested-date; shows relative age. Max and High are separate efforts; do not mix. Maximum 'tested' date is uncertain (relative strings)."
+   },
+   "sources": [
+    {
+     "url": "https://aicodingdaily.com/leaderboard",
+     "finding": "two exact rows (Max, High), no Medium/Low row seen",
+     "sourceUpdated": "October 24th, 2026 (Last update)",
+     "readAt": "2026-10-25T09:58:46Z"
+    }
+   ]
+  },
+  "terminalBench": {
+   "result": "not found",
+   "value": null,
+   "details": {
+    "tbenchAiFinding": "no Kimi row of any version in the 35-row leaderboard; leaderboard updated_at 2026-10-23T00:29:02Z (before K3.1 Pro release)",
+    "providerPublished": {
+     "score": 65.7,
+     "unit": "% resolved",
+     "benchmark": "Terminal-Bench 4.0",
+     "effort": "max",
+     "harness": "Claude Code",
+     "source": "https://www.kimi.com/blog/kimi-k3-1-pro (Moonshot launch post, dated 2026-10-24 on kimi.com research index)",
+     "note": "Provider-published fallback (preference 3); Moonshot states K3.1 Pro 65.7% vs Claude Opus 5.5 66.4%."
+    },
+    "otherPartyNonTbenchAi": {
+     "score": 63.64,
+     "stderr": 1.75,
+     "rank": "3 / 55",
+     "source": "https://www.vals.ai/models/kimi_kimi-k3.1-pro (Vals.ai model page, Terminal-Bench 4.0)",
+     "note": "Vals-run Terminal-Bench 4.0, harness/effort not shown on page; not tbench.ai leaderboard. Candidate only; owner to judge whether AA/tbench.ai-only policy (O37) admits it."
+    }
+   },
+   "sources": [
+    {
+     "url": "https://www.tbench.ai/leaderboard",
+     "finding": "no Kimi row; 35 rows",
+     "sourceUpdated": "2026-10-23T00:29:02Z (leaderboard updated_at in page data)",
+     "readAt": "2026-10-25T09:58:47Z"
+    },
+    {
+     "url": "https://www.kimi.com/blog/kimi-k3-1-pro",
+     "finding": "Terminal-Bench 4.0 65.7% (max effort, Claude Code harness)",
+     "sourceUpdated": "2026-10-24",
+     "readAt": "2026-10-25T10:00:00Z"
+    },
+    {
+     "url": "https://www.vals.ai/models/kimi_kimi-k3.1-pro",
+     "finding": "Terminal-Bench 4.0 63.64% \u00b1 1.75, 3/55",
+     "sourceUpdated": "not shown",
+     "readAt": "2026-10-25T10:01:06Z"
+    },
+    {
+     "url": "https://artificialanalysis.ai/models/kimi-k3-1-pro",
+     "finding": "page reachable (HTTP 200); title 'Kimi K3.1 Pro'; no effort label found; benchmark values not extracted",
+     "sourceUpdated": "n/a",
+     "readAt": "2026-10-25T09:58:48Z"
+    }
+   ]
+  },
+  "frontierCode": {
+   "result": "not found",
+   "value": null,
+   "details": {
+    "note": "data.json has v1 and v1_1 sections; models list includes Kimi K2.5/K2.6/K2.7 (v1) and Kimi K3 (v1_1) but no K3.1 Pro. No updated date field in the JSON."
+   },
+   "sources": [
+    {
+     "url": "https://cognition.com/data/frontiercode-leaderboard/data.json",
+     "finding": "no Kimi K3.1 Pro in v1 or v1_1 models; only Kimi K3 (v1_1)",
+     "sourceUpdated": "none published",
+     "readAt": "2026-10-25T09:58:47Z"
+    },
+    {
+     "url": "https://www.kimi.com/blog/kimi-k3-1-pro",
+     "finding": "launch post lists no FrontierCode result; reports Terminal-Bench 4.0, Terminal-Bench-Science 0.1, DeepSWE v1.1, SWE-Marathon v1.1, PostTrainBench, ProgramBench",
+     "sourceUpdated": "2026-10-24",
+     "readAt": "2026-10-25T10:00:00Z"
+    }
+   ]
+  }
+ },
+ "providerSources": [
+  {
+   "url": "https://www.kimi.com/blog/kimi-k3-1-pro",
+   "finding": "Launch post: all results at reasoning effort 'max', temp 1.0, top-p 0.95; no Bug Hunt, LiveBench, Vals Vibe/Migration, AI Coding Daily or FrontierCode figure; Terminal-Bench 4.0 65.7%"
+  },
+  {
+   "url": "https://platform.moonshot.ai/docs",
+   "finding": "K3.1 Pro and K3.1 Pro Highspeed documented; no benchmark results on these leaves"
+  },
+  {
+   "url": "https://huggingface.co/moonshotai/Kimi-K3.1-Pro",
+   "finding": "HTTP 401 (not reachable/gated)"
+  }
+ ],
+ "openWeb": [
+  {
+   "query": "Kimi K3.1 Pro launch benchmarks Moonshot",
+   "candidates": [
+    {
+     "url": "https://decrypt.co/373716",
+     "verdict": "rejected",
+     "reason": "covers Kimi K3 (July), not K3.1 Pro"
+    },
+    {
+     "url": "https://apidog.com/blog/kimi-k3-benchmarks/",
+     "verdict": "rejected",
+     "reason": "Kimi K3 only"
+    }
+   ]
+  },
+  {
+   "query": "Kimi K3.1 Pro Bug Hunt Bench",
+   "candidates": [
+    {
+     "url": "https://orcarouter.ai/ar/blog/kimi-k3-1-next-week-leak",
+     "verdict": "rejected",
+     "reason": "pre-release leak article, no results"
+    }
+   ]
+  },
+  {
+   "query": "Kimi K3.1 Pro LiveBench",
+   "candidates": [
+    {
+     "url": "https://llmrun.dev/model/moonshotai-kimi-k3/benchmarks",
+     "verdict": "rejected",
+     "reason": "aggregator, Kimi K3 (coding 81.5) not K3.1 Pro"
+    },
+    {
+     "url": "https://www.benchlm.ai/compare/gemini-3-1-pro-vs-kimi-3",
+     "verdict": "rejected",
+     "reason": "Kimi K3"
+    }
+   ]
+  },
+  {
+   "query": "Kimi K3.1 Pro vibe code bench vals.ai",
+   "candidates": [
+    {
+     "url": "https://www.vals.ai/models/kimi_kimi-k3",
+     "verdict": "rejected",
+     "reason": "Kimi K3 (84.97), different model"
+    },
+    {
+     "url": "https://anotherwrapper.com/tools/llm-pricing/evals/vibe-code",
+     "verdict": "rejected",
+     "reason": "aggregator, K3 only"
+    }
+   ]
+  },
+  {
+   "query": "\"Kimi K3.1 Pro\" FrontierCode OR \"Terminal-Bench 4.0\" OR \"AI Coding Daily\"",
+   "candidates": [
+    {
+     "url": "https://devin.ai/blog/kimi-k3",
+     "verdict": "rejected",
+     "reason": "FrontierCode 1.1 for Kimi K3, not K3.1 Pro"
+    }
+   ]
+  },
+  {
+   "query": "\"Kimi K3.1 Pro\" Code Migration Vals",
+   "candidates": [
+    {
+     "url": "https://www.vals.ai/models/kimi_kimi-k3",
+     "verdict": "rejected",
+     "reason": "Kimi K3 only"
+    }
+   ]
+  }
+ ],
+ "openWebNote": "Web search index predates K3.1 Pro (released 2026-10-23); direct primary-source fetches were far more productive. No search result returned an exact K3.1 Pro result.",
+ "unreachable": [
+  "https://api.github.com/repos/phuryn/bug-hunt-bench/commits/main (403)",
+  "https://huggingface.co/moonshotai/Kimi-K3.1-Pro (401)",
+  "https://moonshotai.github.io/Kimi-K3.1-Pro/ (404)",
+  "raw scoreboard.csv and notes.md at repo root (404, files do not exist)",
+  "https://livebench.ai/data/2026-10-14/table.csv (404, wrong id format)",
+  "AA page benchmark values not extracted (page fetched, effort label absent)"
+ ]
+}

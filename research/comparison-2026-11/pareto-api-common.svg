@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="920" viewBox="0 0 1400 920" role="img">
+<title>ValueRank cost and quality comparison</title><rect width="100%" height="100%" fill="white"/>
+<style>text{font-family:Arial,sans-serif;fill:#172337}.axis{stroke:#34445c;stroke-width:1.5}.grid{stroke:#d8e0eb}.frontier-step{fill:none;stroke:#176d64;stroke-width:3}.fallback-link{stroke:#6c788b;stroke-width:1.5}.small{font-size:15px}.key{font-size:15px}</style>
+<text x="50" y="40" font-size="25" font-weight="bold">Api Common</text>
+<text x="50" y="67" class="small">Lower cost and higher quality are better; x-axis uses a log scale.</text>
+<text x="50" y="115" font-size="20" font-weight="bold">Common leaves · API · workload 835a9baf594a1251</text>
+<line class="grid" x1="110" y1="480.00" x2="900" y2="480.00"/><text class="small" x="55" y="485.00">28.5</text>
+<line class="grid" x1="110.00" y1="150" x2="110.00" y2="480"/><text class="small" text-anchor="middle" x="110.00" y="503">$88.23</text>
+<line class="grid" x1="110" y1="397.50" x2="900" y2="397.50"/><text class="small" x="55" y="402.50">33.9</text>
+<line class="grid" x1="307.50" y1="150" x2="307.50" y2="480"/><text class="small" text-anchor="middle" x="307.50" y="503">$138.12</text>
+<line class="grid" x1="110" y1="315.00" x2="900" y2="315.00"/><text class="small" x="55" y="320.00">39.3</text>
+<line class="grid" x1="505.00" y1="150" x2="505.00" y2="480"/><text class="small" text-anchor="middle" x="505.00" y="503">$216.23</text>
+<line class="grid" x1="110" y1="232.50" x2="900" y2="232.50"/><text class="small" x="55" y="237.50">44.7</text>
+<line class="grid" x1="702.50" y1="150" x2="702.50" y2="480"/><text class="small" text-anchor="middle" x="702.50" y="503">$338.50</text>
+<line class="grid" x1="110" y1="150.00" x2="900" y2="150.00"/><text class="small" x="55" y="155.00">50.1</text>
+<line class="grid" x1="900.00" y1="150" x2="900.00" y2="480"/><text class="small" text-anchor="middle" x="900.00" y="503">$529.92</text>
+<line class="axis" x1="110" y1="480" x2="900" y2="480"/><line class="axis" x1="110" y1="150" x2="110" y2="480"/>
+<text class="small" x="340" y="528">Whole workload cost in USD (log scale)</text><text class="small" transform="translate(22 440) rotate(-90)">Displayed quality</text>
+<path class="frontier-step" d="M 186.45 438.88 H 218.40 V 398.40 H 383.21 V 366.37 H 411.56 V 319.35 H 603.93 V 312.19 H 823.55 V 188.08"/>
+<g><title>DeepSeek V4.1 Flash 1017 · $445.52 · quality 47.63</title><circle cx="823.55" cy="188.08" r="10" fill="#126c62" stroke="#183445"/><text x="823.55" y="192.08" text-anchor="middle" font-size="11" font-weight="bold" style="fill:white">1</text></g>
+<text class="key" x="930" y="170">1. DeepSeek V4.1 Flash 1017 (max)</text>
+<text class="small" x="950" y="187">frontier; not on full-track Pareto set</text>
+<g><title>Claude Haiku 5.5 (max) · $270.65 · quality 39.49</title><circle cx="603.93" cy="312.19" r="10" fill="#126c62" stroke="#183445"/><text x="603.93" y="316.19" text-anchor="middle" font-size="11" font-weight="bold" style="fill:white">2</text></g>
+<text class="key" x="930" y="208">2. Claude Haiku 5.5 (max)</text>
+<text class="small" x="950" y="225">frontier; not on full-track Pareto set</text>
+<g><title>Claude Haiku 5.5 (high) · $107.80 · quality 30.99</title><circle cx="198.27" cy="441.92" r="10" fill="#a6b0bc" stroke="#183445"/><text x="198.27" y="445.92" text-anchor="middle" font-size="11" font-weight="bold" style="fill:white">3</text></g>
+<text class="key" x="930" y="246">3. Claude Haiku 5.5 (high)</text>
+<text class="small" x="950" y="263">dominated; not on full-track Pareto set</text>
+<g><title>GPT-6 Luna (max) · $112.84 · quality 33.84</title><circle cx="218.40" cy="398.40" r="10" fill="#126c62" stroke="#183445"/><text x="218.40" y="402.40" text-anchor="middle" font-size="11" font-weight="bold" style="fill:white">4</text></g>
+<text class="key" x="930" y="284">4. GPT-6 Luna (max)</text>
+<text class="small" x="950" y="301">frontier; full-track Pareto set</text>
+<g><title>GPT-6.1 Terra (medium) · $174.91 · quality 39.02</title><circle cx="411.56" cy="319.35" r="10" fill="#126c62" stroke="#183445"/><text x="411.56" y="323.35" text-anchor="middle" font-size="11" font-weight="bold" style="fill:white">5</text></g>
+<text class="key" x="930" y="322">5. GPT-6.1 Terra (medium)</text>
+<text class="small" x="950" y="339">frontier; full-track Pareto set</text>
+<g><title>Claude Haiku 5.5 (xhigh) · $164.01 · quality 35.94</title><circle cx="383.21" cy="366.37" r="10" fill="#126c62" stroke="#183445"/><text x="383.21" y="370.37" text-anchor="middle" font-size="11" font-weight="bold" style="fill:white">6</text></g>
+<text class="key" x="930" y="360">6. Claude Haiku 5.5 (xhigh)</text>
+<text class="small" x="950" y="377">frontier; full-track Pareto set</text>
+<circle cx="186.45" cy="438.88" r="3" fill="#172337"/><line class="marker-leader" x1="186.45" y1="438.88" x2="186.45" y2="414.88" stroke="#172337"/>
+<g><title>GPT-6.1 Terra (low) · $104.95 · quality 31.19</title><circle cx="186.45" cy="414.88" r="10" fill="#126c62" stroke="#183445"/><text x="186.45" y="418.88" text-anchor="middle" font-size="11" font-weight="bold" style="fill:white">7</text></g>
+<text class="key" x="930" y="398">7. GPT-6.1 Terra (low)</text>
+<text class="small" x="950" y="415">frontier; full-track Pareto set</text>
+<text class="small" x="50" y="562">Step: frontier among plotted points only. Grey: dominated. Leader lines offset overlapping markers from their exact points.</text>
+<text class="small" x="50" y="855">Source: data/scores.json via comparison.json · cutoff 2026-11-01T06:10:00Z · displayed-record precision, not sampling uncertainty.</text>
+<text class="small" x="50" y="878">Plan multiples are owner-authorised or assumed unless controlled. See comparison for neighbouring pairs not separable.</text></svg>

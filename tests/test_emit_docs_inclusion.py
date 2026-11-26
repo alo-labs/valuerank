@@ -3,7 +3,7 @@
 import pytest
 
 from test_emit_docs_support import edit_json, emit
-from test_emit_docs_units import FOOTNOTE, SELECTION
+from test_publication import FOOTNOTE, SELECTION
 
 pytestmark = pytest.mark.integration
 
@@ -24,8 +24,7 @@ def test_readme_and_methodology_carry_the_model_inclusion_passage(repo_copy, pin
         assert "**Near-frontier rule.**" in text and "Within 3 Index points of the frontier at its cost." in text
         assert "- Gemini 4 Argon: Gemini 4 Argon (high), 2 Index points below the frontier" in text
         assert FOOTNOTE in text
-    assert "near-frontier" in (repo_copy / "scores.md").read_text()
-    assert "see Model inclusion" in (repo_copy / "README.md").read_text()
+    assert "(see Model inclusion)" in (repo_copy / "README.md").read_text()
 
 
 def without_policy_data(document):

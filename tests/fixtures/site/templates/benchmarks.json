@@ -19,14 +19,8 @@
           "cohort": 16
         },
         "unit": "% pass@1",
-        "notes": "Owner board."
-      }
-    ],
-    "aaComponents": [
-      {
-        "name": "GDPval",
-        "weightPct": 10.0,
-        "url": "https://example.test/gdpval"
+        "notes": "Owner board.",
+        "execution": "AA-run"
       }
     ],
     "coverageMatrix": {
@@ -57,6 +51,33 @@
           "sourceUrl": "https://example.test/g"
         }
       ]
+    },
+    "basket": {
+      "version": "SDLC basket v1",
+      "admitted": [
+        {
+          "key": "scicode",
+          "label": "SciCode"
+        },
+        {
+          "key": "coding-agent-index",
+          "label": "Coding Agent Index"
+        }
+      ],
+      "pending": [
+        {
+          "key": "frontiercode",
+          "label": "FrontierCode",
+          "covered": 11,
+          "ranked": 19
+        }
+      ],
+      "referencePanelSize": 16,
+      "requiredPanelSize": 13
+    },
+    "qualitySourceShares": {
+      "aa": 0.8,
+      "independent": 0.2
     }
   },
   "key": "benchmarks",
