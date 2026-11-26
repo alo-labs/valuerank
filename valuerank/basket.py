@@ -3,7 +3,7 @@
 C_W, the scored API cost, is the sum of AA's published costs for the admitted
 basket components of an exact configuration: the six SDLC evaluations of the
 AA Intelligence Index v5 (owner decision O137: AA-Briefcase, AutomationBench-AA,
-GDP.pdf, FrontierCode 2.0, Terminal-Bench 4.0 and Terminal-Bench-Science), the
+GDP.pdf, FrontierCode 2.0, Terminal-Bench 4.1 and Terminal-Bench-Science), the
 Coding Agent Index total (O50) and, once admitted, the chart-captured ITBench-AA
 total. HLE-Diamond, AA-Omniscience and CritPt v2 are excluded from C_W; together
 with the six they reconcile to AA's published total Index cost, which stays a
@@ -30,13 +30,42 @@ INDEX_SDLC_TASKS = {
     "aa-briefcase": 91,
     "gdp-pdf": 100,
     "automationbench-aa": 657,
-    "terminalbench-4-0": 66,
+    "terminalbench-4-1": 66,
     "frontiercode-2-0": 132,
     "terminal-bench-science": 70,
 }
 INDEX_RESIDUAL_TASKS = {"hle-diamond": 1000, "critpt-v2-hard": 40, "omniscience": 3000}
-# Owner decision O50 (2026-10-23): AA's Coding Agent Index v2.0 replaced DeepSWE v1.1 with FrontierCode v1.1 Main.
-CODING_AGENT_TASKS = {"frontiercode-v1.1-main": 100, "swe-atlas-qna": 124, "terminal-bench-v4": 66}
+# AA's Intelligence Index v5 evaluation weights (fractions of the Index; AA's Intelligence Benchmarking methodology). Since Index v5.0.2
+# (read 2026-11-26) a model page no longer lists each evaluation's cost per task: it lists `weightedCostPerTask`, the evaluation's cost per
+# task times its Index weight, and the weighted values sum to the Index's cost per task. Dividing by the weight recovers the cost per task,
+# which reproduces every published Index total (relative error below 1e-6 except the Claude Opus 5.5 and Fable 5.2 rows, 0.02-0.07%).
+INDEX_EVALUATION_WEIGHTS = {
+    "aa-briefcase": 0.15, "automationbench-aa": 0.05, "gdp-pdf": 0.05, "frontiercode-2-0": 0.15, "terminalbench-4-1": 0.10,
+    "terminal-bench-science": 0.15, "hle-diamond": 0.10, "critpt-v2-hard": 0.10, "omniscience": 0.15,
+}
+
+
+def evaluations_from_weighted(model: dict) -> list[dict]:
+    """The model page's per-evaluation cost per task, derived from AA's weighted values (empty when the page has none).
+
+    An evaluation with no registered Index weight (AA added or renamed one) is kept with its weighted value only and no cost per
+    task, so the reconciliation fails visibly instead of guessing a weight.
+    """
+
+    listed = ((model.get("intelligenceIndexCostPerTask") or {}).get("evaluations")) or []
+    rows = []
+    for item in listed:
+        weight = INDEX_EVALUATION_WEIGHTS.get(item.get("slug"))
+        weighted = item.get("weightedCostPerTask")
+        row = {"slug": item.get("slug"), "weightedCostPerTask": weighted, "indexWeight": weight,
+               "derivedFrom": "intelligenceIndexCostPerTask.evaluations[].weightedCostPerTask / Index weight"}
+        if weight and isinstance(weighted, (int, float)):
+            row["costPerTask"] = weighted / weight
+        rows.append(row)
+    return rows
+# Owner decision O50 (2026-10-23): AA's Coding Agent Index v2.0 replaced DeepSWE v1.1 with FrontierCode v1.1 Main. On 2026-11-26 the
+# index is v2.1 (FrontierCode 2.0's 132 tasks, SWE-Atlas QnA's 124 and Terminal-Bench v4's 66: 322 required tasks, three attempts each).
+CODING_AGENT_TASKS = {"frontiercode-v2.0": 132, "swe-atlas-qna": 124, "terminal-bench-v4": 66}
 CODING_AGENT_REPETITIONS = 3
 CODING_AGENT_INDEX = "coding-agent-index"
 # O137: FrontierCode 2.0 is priced inside the v5 Index, so FrontierCode's chart stand-in (O116) retired.
@@ -48,7 +77,7 @@ COMPONENT_LABELS = {
     "aa-briefcase": "AA-Briefcase",
     "gdp-pdf": "GDP.pdf",
     "automationbench-aa": "AutomationBench-AA",
-    "terminalbench-4-0": "Terminal-Bench 4.0 (AA Index run)",
+    "terminalbench-4-1": "Terminal-Bench 4.1 (AA Index run)",
     "frontiercode-2-0": "FrontierCode 2.0",
     "terminal-bench-science": "Terminal-Bench-Science",
 }
@@ -128,7 +157,7 @@ def coding_agent_component(record: dict | None) -> dict | None:
 
     The record is AA's documented cost-to-run metric (average API cost per task,
     a pooled per-task-attempt average that excludes missing telemetry) times the
-    required tasks (290 in v2.0, O50). AA's undocumented ``sums.costUsd`` is kept only as a
+    required tasks (322 in v2.1; 290 in v2.0, O50). AA's undocumented ``sums.costUsd`` is kept only as a
     reconciliation diagnostic; attempt coverage is a precision diagnostic (E53).
     """
 
@@ -141,7 +170,7 @@ def coding_agent_component(record: dict | None) -> dict | None:
     return component_cost(
         mean * required_tasks,
         completeness=COMPLETE,
-        source=f"AA Coding Agent Index v2.0 cost to run (mean API cost per task) x {required_tasks} tasks",
+        source=f"AA Coding Agent Index v2.1 cost to run (mean API cost per task) x {required_tasks} tasks",
         configuration=record["label"],
         detail={
             "agent": record.get("agent"),  # O123: the vendor agent is part of the costed configuration

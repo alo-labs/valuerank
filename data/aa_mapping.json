@@ -50,37 +50,27 @@
     "family": "Claude Haiku 5.5"
   },
   {
-    "id": "mimo-v2-6-flash",
-    "displayName": "MiMo-V2.6-Flash",
+    "id": "muse-ember-xhigh",
+    "displayName": "Muse Ember (xhigh)",
     "urls": [
-      "https://artificialanalysis.ai/models/mimo-v2-6-flash"
+      "https://artificialanalysis.ai/models/muse-ember-xhigh"
     ],
-    "aaSlug": "mimo-v2-6-flash",
-    "aaVariant": null,
-    "family": "MiMo-V2.6-Flash"
+    "aaSlug": "muse-ember-xhigh",
+    "aaVariant": "xhigh",
+    "family": "Muse Ember"
   },
   {
-    "id": "gpt-6.1-terra-low",
-    "displayName": "GPT-6.1 Terra (low)",
+    "id": "muse-ember",
+    "displayName": "Muse Ember (max)",
     "urls": [
-      "https://artificialanalysis.ai/models/gpt-6-1-terra-low"
+      "https://artificialanalysis.ai/models/muse-ember"
     ],
-    "aaSlug": "gpt-6-1-terra-low",
-    "aaVariant": "low",
-    "family": "GPT-6.1 Terra"
+    "aaSlug": "muse-ember",
+    "aaVariant": "max",
+    "family": "Muse Ember"
   },
   {
-    "id": "claude-haiku-5-5-high",
-    "displayName": "Claude Haiku 5.5 (high)",
-    "urls": [
-      "https://artificialanalysis.ai/models/claude-haiku-5-5-high"
-    ],
-    "aaSlug": "claude-haiku-5-5-high",
-    "aaVariant": "high",
-    "family": "Claude Haiku 5.5"
-  },
-  {
-    "id": "gpt-6.1-terra-medium",
+    "id": "gpt-6-1-terra-medium",
     "displayName": "GPT-6.1 Terra (medium)",
     "urls": [
       "https://artificialanalysis.ai/models/gpt-6-1-terra-medium"
@@ -90,7 +80,17 @@
     "family": "GPT-6.1 Terra"
   },
   {
-    "id": "gpt-6.1-terra-high",
+    "id": "gpt-6-2-sol-low",
+    "displayName": "GPT-6.2 Sol (low)",
+    "urls": [
+      "https://artificialanalysis.ai/models/gpt-6-2-sol-low"
+    ],
+    "aaSlug": "gpt-6-2-sol-low",
+    "aaVariant": "low",
+    "family": "GPT-6.2 Sol"
+  },
+  {
+    "id": "gpt-6-1-terra-high",
     "displayName": "GPT-6.1 Terra (high)",
     "urls": [
       "https://artificialanalysis.ai/models/gpt-6-1-terra-high"
@@ -100,7 +100,7 @@
     "family": "GPT-6.1 Terra"
   },
   {
-    "id": "gpt-6.1-sol-medium",
+    "id": "gpt-6-1-sol-medium",
     "displayName": "GPT-6.1 Sol (medium)",
     "urls": [
       "https://artificialanalysis.ai/models/gpt-6-1-sol-medium"
@@ -110,64 +110,114 @@
     "family": "GPT-6.1 Sol"
   },
   {
-    "id": "gpt-6.1-sol-high",
-    "displayName": "GPT-6.1 Sol (high)",
+    "id": "gpt-6-2-sol-medium",
+    "displayName": "GPT-6.2 Sol (medium)",
     "urls": [
-      "https://artificialanalysis.ai/models/gpt-6-1-sol-high"
+      "https://artificialanalysis.ai/models/gpt-6-2-sol-medium"
     ],
-    "aaSlug": "gpt-6-1-sol-high",
+    "aaSlug": "gpt-6-2-sol-medium",
+    "aaVariant": "medium",
+    "family": "GPT-6.2 Sol"
+  },
+  {
+    "id": "gpt-6-2-sol-high",
+    "displayName": "GPT-6.2 Sol (high)",
+    "urls": [
+      "https://artificialanalysis.ai/models/gpt-6-2-sol-high"
+    ],
+    "aaSlug": "gpt-6-2-sol-high",
     "aaVariant": "high",
-    "family": "GPT-6.1 Sol"
+    "family": "GPT-6.2 Sol"
   },
   {
-    "id": "gpt-6.1-sol-xhigh",
-    "displayName": "GPT-6.1 Sol (xhigh)",
+    "id": "gpt-6-2-sol-xhigh",
+    "displayName": "GPT-6.2 Sol (xhigh)",
     "urls": [
-      "https://artificialanalysis.ai/models/gpt-6-1-sol-xhigh"
+      "https://artificialanalysis.ai/models/gpt-6-2-sol-xhigh"
     ],
-    "aaSlug": "gpt-6-1-sol-xhigh",
+    "aaSlug": "gpt-6-2-sol-xhigh",
     "aaVariant": "xhigh",
-    "family": "GPT-6.1 Sol"
+    "family": "GPT-6.2 Sol"
   },
   {
-    "id": "gpt-6.1-sol",
-    "displayName": "GPT-6.1 Sol (max)",
+    "id": "gpt-6-2-sol",
+    "displayName": "GPT-6.2 Sol (max)",
     "urls": [
-      "https://artificialanalysis.ai/models/gpt-6-1-sol"
+      "https://artificialanalysis.ai/models/gpt-6-2-sol"
     ],
-    "aaSlug": "gpt-6-1-sol",
+    "aaSlug": "gpt-6-2-sol",
     "aaVariant": "max",
-    "family": "GPT-6.1 Sol"
+    "family": "GPT-6.2 Sol"
   },
   {
-    "id": "gpt-6-astra-high",
-    "displayName": "GPT-6 Astra (high)",
+    "id": "gpt-6-2-astra-high",
+    "displayName": "GPT-6.2 Astra (high)",
     "urls": [
-      "https://artificialanalysis.ai/models/gpt-6-astra-high"
+      "https://artificialanalysis.ai/models/gpt-6-2-astra-high"
     ],
-    "aaSlug": "gpt-6-astra-high",
+    "aaSlug": "gpt-6-2-astra-high",
     "aaVariant": "high",
-    "family": "GPT-6 Astra"
+    "family": "GPT-6.2 Astra"
   },
   {
-    "id": "gpt-6-astra-xhigh",
-    "displayName": "GPT-6 Astra (xhigh)",
+    "id": "gpt-6-2-astra-xhigh",
+    "displayName": "GPT-6.2 Astra (xhigh)",
     "urls": [
-      "https://artificialanalysis.ai/models/gpt-6-astra-xhigh"
+      "https://artificialanalysis.ai/models/gpt-6-2-astra-xhigh"
     ],
-    "aaSlug": "gpt-6-astra-xhigh",
+    "aaSlug": "gpt-6-2-astra-xhigh",
     "aaVariant": "xhigh",
-    "family": "GPT-6 Astra"
+    "family": "GPT-6.2 Astra"
   },
   {
-    "id": "claude-opus-5-5-xhigh",
-    "displayName": "Claude Opus 5.5 (xhigh)",
+    "id": "gpt-6-2-astra",
+    "displayName": "GPT-6.2 Astra (max)",
     "urls": [
-      "https://artificialanalysis.ai/models/claude-opus-5-5-xhigh"
+      "https://artificialanalysis.ai/models/gpt-6-2-astra"
     ],
-    "aaSlug": "claude-opus-5-5-xhigh",
+    "aaSlug": "gpt-6-2-astra",
+    "aaVariant": "max",
+    "family": "GPT-6.2 Astra"
+  },
+  {
+    "id": "claude-fable-5-2-xhigh",
+    "displayName": "Claude Fable 5.2 (xhigh)",
+    "urls": [
+      "https://artificialanalysis.ai/models/claude-fable-5-2-xhigh"
+    ],
+    "aaSlug": "claude-fable-5-2-xhigh",
     "aaVariant": "xhigh",
-    "family": "Claude Opus 5.5"
+    "family": "Claude Fable 5.2"
+  },
+  {
+    "id": "claude-fable-5-2",
+    "displayName": "Claude Fable 5.2 (max)",
+    "urls": [
+      "https://artificialanalysis.ai/models/claude-fable-5-2"
+    ],
+    "aaSlug": "claude-fable-5-2",
+    "aaVariant": "max",
+    "family": "Claude Fable 5.2"
+  },
+  {
+    "id": "claude-fable-5-2-high",
+    "displayName": "Claude Fable 5.2 (high)",
+    "urls": [
+      "https://artificialanalysis.ai/models/claude-fable-5-2-high"
+    ],
+    "aaSlug": "claude-fable-5-2-high",
+    "aaVariant": "high",
+    "family": "Claude Fable 5.2"
+  },
+  {
+    "id": "gemini-4-neon",
+    "displayName": "Gemini 4 Neon (xhigh)",
+    "urls": [
+      "https://artificialanalysis.ai/models/gemini-4-neon"
+    ],
+    "aaSlug": "gemini-4-neon",
+    "aaVariant": "xhigh",
+    "family": "Gemini 4 Neon"
   },
   {
     "id": "gemini-4-carbon",
@@ -180,6 +230,76 @@
     "family": "Gemini 4 Carbon"
   },
   {
+    "id": "gemini-4-neon-high",
+    "displayName": "Gemini 4 Neon (high)",
+    "urls": [
+      "https://artificialanalysis.ai/models/gemini-4-neon-high"
+    ],
+    "aaSlug": "gemini-4-neon-high",
+    "aaVariant": "high",
+    "family": "Gemini 4 Neon"
+  },
+  {
+    "id": "claude-opus-5-5",
+    "displayName": "Claude Opus 5.5",
+    "urls": [
+      "https://artificialanalysis.ai/models/claude-opus-5-5"
+    ],
+    "aaSlug": "claude-opus-5-5",
+    "aaVariant": "max",
+    "family": "Claude Opus 5.5"
+  },
+  {
+    "id": "gpt-6-2-astra-medium",
+    "displayName": "GPT-6.2 Astra (medium)",
+    "urls": [
+      "https://artificialanalysis.ai/models/gpt-6-2-astra-medium"
+    ],
+    "aaSlug": "gpt-6-2-astra-medium",
+    "aaVariant": "medium",
+    "family": "GPT-6.2 Astra"
+  },
+  {
+    "id": "gemini-4-neon-medium",
+    "displayName": "Gemini 4 Neon (medium)",
+    "urls": [
+      "https://artificialanalysis.ai/models/gemini-4-neon-medium"
+    ],
+    "aaSlug": "gemini-4-neon-medium",
+    "aaVariant": "medium",
+    "family": "Gemini 4 Neon"
+  },
+  {
+    "id": "gpt-6-1-sol",
+    "displayName": "GPT-6.1 Sol (max)",
+    "urls": [
+      "https://artificialanalysis.ai/models/gpt-6-1-sol"
+    ],
+    "aaSlug": "gpt-6-1-sol",
+    "aaVariant": "max",
+    "family": "GPT-6.1 Sol"
+  },
+  {
+    "id": "gpt-6-1-terra-xhigh",
+    "displayName": "GPT-6.1 Terra (xhigh)",
+    "urls": [
+      "https://artificialanalysis.ai/models/gpt-6-1-terra-xhigh"
+    ],
+    "aaSlug": "gpt-6-1-terra-xhigh",
+    "aaVariant": "xhigh",
+    "family": "GPT-6.1 Terra"
+  },
+  {
+    "id": "claude-haiku-5-5-xhigh",
+    "displayName": "Claude Haiku 5.5 (xhigh)",
+    "urls": [
+      "https://artificialanalysis.ai/models/claude-haiku-5-5-xhigh"
+    ],
+    "aaSlug": "claude-haiku-5-5-xhigh",
+    "aaVariant": "xhigh",
+    "family": "Claude Haiku 5.5"
+  },
+  {
     "id": "gpt-6-luna-xhigh",
     "displayName": "GPT-6 Luna (xhigh)",
     "urls": [
@@ -190,6 +310,94 @@
     "family": "GPT-6 Luna"
   },
   {
+    "id": "mimo-v2-6-flash",
+    "displayName": "MiMo-V2.6-Flash",
+    "urls": [
+      "https://artificialanalysis.ai/models/mimo-v2-6-flash"
+    ],
+    "aaSlug": "mimo-v2-6-flash",
+    "aaVariant": null,
+    "family": "MiMo-V2.6-Flash",
+    "retained": "O145"
+  },
+  {
+    "id": "gpt-6-1-terra-low",
+    "displayName": "GPT-6.1 Terra (low)",
+    "urls": [
+      "https://artificialanalysis.ai/models/gpt-6-1-terra-low"
+    ],
+    "aaSlug": "gpt-6-1-terra-low",
+    "aaVariant": "low",
+    "family": "GPT-6.1 Terra",
+    "retained": "O145"
+  },
+  {
+    "id": "claude-haiku-5-5-high",
+    "displayName": "Claude Haiku 5.5 (high)",
+    "urls": [
+      "https://artificialanalysis.ai/models/claude-haiku-5-5-high"
+    ],
+    "aaSlug": "claude-haiku-5-5-high",
+    "aaVariant": "high",
+    "family": "Claude Haiku 5.5",
+    "retained": "O145"
+  },
+  {
+    "id": "gpt-6-1-sol-high",
+    "displayName": "GPT-6.1 Sol (high)",
+    "urls": [
+      "https://artificialanalysis.ai/models/gpt-6-1-sol-high"
+    ],
+    "aaSlug": "gpt-6-1-sol-high",
+    "aaVariant": "high",
+    "family": "GPT-6.1 Sol",
+    "retained": "O145"
+  },
+  {
+    "id": "gpt-6-1-sol-xhigh",
+    "displayName": "GPT-6.1 Sol (xhigh)",
+    "urls": [
+      "https://artificialanalysis.ai/models/gpt-6-1-sol-xhigh"
+    ],
+    "aaSlug": "gpt-6-1-sol-xhigh",
+    "aaVariant": "xhigh",
+    "family": "GPT-6.1 Sol",
+    "retained": "O145"
+  },
+  {
+    "id": "gpt-6-astra-high",
+    "displayName": "GPT-6 Astra (high)",
+    "urls": [
+      "https://artificialanalysis.ai/models/gpt-6-astra-high"
+    ],
+    "aaSlug": "gpt-6-astra-high",
+    "aaVariant": "high",
+    "family": "GPT-6 Astra",
+    "retained": "O145"
+  },
+  {
+    "id": "gpt-6-astra-xhigh",
+    "displayName": "GPT-6 Astra (xhigh)",
+    "urls": [
+      "https://artificialanalysis.ai/models/gpt-6-astra-xhigh"
+    ],
+    "aaSlug": "gpt-6-astra-xhigh",
+    "aaVariant": "xhigh",
+    "family": "GPT-6 Astra",
+    "retained": "O145"
+  },
+  {
+    "id": "claude-opus-5-5-xhigh",
+    "displayName": "Claude Opus 5.5 (xhigh)",
+    "urls": [
+      "https://artificialanalysis.ai/models/claude-opus-5-5-xhigh"
+    ],
+    "aaSlug": "claude-opus-5-5-xhigh",
+    "aaVariant": "xhigh",
+    "family": "Claude Opus 5.5",
+    "retained": "O145"
+  },
+  {
     "id": "gpt-6-luna",
     "displayName": "GPT-6 Luna (max)",
     "urls": [
@@ -197,37 +405,30 @@
     ],
     "aaSlug": "gpt-6-luna",
     "aaVariant": "max",
-    "family": "GPT-6 Luna"
+    "family": "GPT-6 Luna",
+    "retained": "O145"
   },
   {
-    "id": "gpt-6.1-sol-low",
+    "id": "gpt-6-1-sol-low",
     "displayName": "GPT-6.1 Sol (low)",
     "urls": [
       "https://artificialanalysis.ai/models/gpt-6-1-sol-low"
     ],
     "aaSlug": "gpt-6-1-sol-low",
     "aaVariant": "low",
-    "family": "GPT-6.1 Sol"
+    "family": "GPT-6.1 Sol",
+    "retained": "O145"
   },
   {
-    "id": "gpt-6.1-terra-xhigh",
-    "displayName": "GPT-6.1 Terra (xhigh)",
-    "urls": [
-      "https://artificialanalysis.ai/models/gpt-6-1-terra-xhigh"
-    ],
-    "aaSlug": "gpt-6-1-terra-xhigh",
-    "aaVariant": "xhigh",
-    "family": "GPT-6.1 Terra"
-  },
-  {
-    "id": "gpt-6.1-terra",
+    "id": "gpt-6-1-terra",
     "displayName": "GPT-6.1 Terra (max)",
     "urls": [
       "https://artificialanalysis.ai/models/gpt-6-1-terra"
     ],
     "aaSlug": "gpt-6-1-terra",
     "aaVariant": "max",
-    "family": "GPT-6.1 Terra"
+    "family": "GPT-6.1 Terra",
+    "retained": "O145"
   },
   {
     "id": "claude-opus-5-5-high",
@@ -237,7 +438,8 @@
     ],
     "aaSlug": "claude-opus-5-5-high",
     "aaVariant": "high",
-    "family": "Claude Opus 5.5"
+    "family": "Claude Opus 5.5",
+    "retained": "O145"
   },
   {
     "id": "gpt-6-astra",
@@ -247,7 +449,8 @@
     ],
     "aaSlug": "gpt-6-astra",
     "aaVariant": "max",
-    "family": "GPT-6 Astra"
+    "family": "GPT-6 Astra",
+    "retained": "O145"
   },
   {
     "id": "claude-sonnet-5-5",
@@ -257,126 +460,7 @@
     ],
     "aaSlug": "claude-sonnet-5-5",
     "aaVariant": "max",
-    "family": "Claude Sonnet 5.5"
-  },
-  {
-    "id": "claude-opus-5-5",
-    "displayName": "Claude Opus 5.5 (max)",
-    "urls": [
-      "https://artificialanalysis.ai/models/claude-opus-5-5"
-    ],
-    "aaSlug": "claude-opus-5-5",
-    "aaVariant": "max",
-    "family": "Claude Opus 5.5"
-  },
-  {
-    "id": "claude-haiku-5-5",
-    "displayName": "Claude Haiku 5.5 (xhigh)",
-    "urls": [
-      "https://artificialanalysis.ai/models/claude-haiku-5-5-xhigh"
-    ],
-    "aaSlug": "claude-haiku-5-5-xhigh",
-    "aaVariant": "xhigh",
-    "family": "Claude Haiku 5.5",
-    "retained": "O145"
-  },
-  {
-    "id": "claude-haiku-5-5-max",
-    "displayName": "Claude Haiku 5.5 (max)",
-    "urls": [
-      "https://artificialanalysis.ai/models/claude-haiku-5-5"
-    ],
-    "aaSlug": "claude-haiku-5-5",
-    "aaVariant": "max",
-    "family": "Claude Haiku 5.5",
-    "retained": "O145"
-  },
-  {
-    "id": "claude-opus-5-5-medium",
-    "displayName": "Claude Opus 5.5 (medium)",
-    "urls": [
-      "https://artificialanalysis.ai/models/claude-opus-5-5-medium"
-    ],
-    "aaSlug": "claude-opus-5-5-medium",
-    "aaVariant": "medium",
-    "family": "Claude Opus 5.5",
-    "retained": "O145"
-  },
-  {
-    "id": "claude-sonnet-5-5-xhigh",
-    "displayName": "Claude Sonnet 5.5 (xhigh)",
-    "urls": [
-      "https://artificialanalysis.ai/models/claude-sonnet-5-5-xhigh"
-    ],
-    "aaSlug": "claude-sonnet-5-5-xhigh",
-    "aaVariant": "xhigh",
     "family": "Claude Sonnet 5.5",
-    "retained": "O145"
-  },
-  {
-    "id": "deepseek-v4-1-flash-1017",
-    "displayName": "DeepSeek V4.1 Flash 1017",
-    "urls": [
-      "https://artificialanalysis.ai/models/deepseek-v4-1-flash-1017"
-    ],
-    "aaSlug": "deepseek-v4-1-flash-1017",
-    "aaVariant": "max",
-    "family": "DeepSeek V4.1 Flash 1017",
-    "retained": "O145"
-  },
-  {
-    "id": "gemini-4-argon",
-    "displayName": "Gemini 4 Argon",
-    "urls": [
-      "https://artificialanalysis.ai/models/gemini-4-argon"
-    ],
-    "aaSlug": "gemini-4-argon",
-    "aaVariant": "high",
-    "family": "Gemini 4 Argon",
-    "retained": "O145"
-  },
-  {
-    "id": "gpt-5.6-luna-low",
-    "displayName": "GPT-5.6 Luna",
-    "urls": [
-      "https://artificialanalysis.ai/models/gpt-5-6-luna-low"
-    ],
-    "aaSlug": "gpt-5-6-luna-low",
-    "aaVariant": "low",
-    "family": "GPT-5.6 Luna",
-    "retained": "O145"
-  },
-  {
-    "id": "kimi-k3-1-pro",
-    "displayName": "Kimi K3.1 Pro",
-    "urls": [
-      "https://artificialanalysis.ai/models/kimi-k3-1-pro"
-    ],
-    "aaSlug": "kimi-k3-1-pro",
-    "aaVariant": null,
-    "family": "Kimi K3.1 Pro",
-    "retained": "O145"
-  },
-  {
-    "id": "mimo-v2-6-pro",
-    "displayName": "MiMo-V2.6-Pro",
-    "urls": [
-      "https://artificialanalysis.ai/models/mimo-v2-6-pro"
-    ],
-    "aaSlug": "mimo-v2-6-pro",
-    "aaVariant": null,
-    "family": "MiMo-V2.6-Pro",
-    "retained": "O145"
-  },
-  {
-    "id": "minimax-m3-1-flash",
-    "displayName": "MiniMax-M3.1-Flash",
-    "urls": [
-      "https://artificialanalysis.ai/models/minimax-m3-1-flash"
-    ],
-    "aaSlug": "minimax-m3-1-flash",
-    "aaVariant": null,
-    "family": "MiniMax-M3.1-Flash",
     "retained": "O145"
   }
 ]

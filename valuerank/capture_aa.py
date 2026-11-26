@@ -12,6 +12,7 @@ from pathlib import Path
 
 from valuerank.clock import iso_z, utcnow
 
+from valuerank import basket
 from valuerank.build_aa_metrics import decode_page_model, page_slug, printed_notes
 
 from valuerank.paths import DATA, ROOT
@@ -72,6 +73,9 @@ def capture(entry: dict, preserved_pages: dict) -> dict:
         html = payload.decode("utf-8", errors="replace")
         # O103: the notes AA prints on the page, verbatim, beside its model object.
         model = {**decode_page_model(html, page_slug(url)), "notes": printed_notes(html)}
+        # Index v5.0.2 pages list weighted cost per task only; the per-evaluation cost per task is derived (basket.evaluations_from_weighted).
+        if not model.get("intelligenceIndexEvaluations"):
+            model["intelligenceIndexEvaluations"] = basket.evaluations_from_weighted(model)
         return {
             "id": entry["id"],
             "requestedName": entry.get("displayName"),
