@@ -1,0 +1,345 @@
+<!DOCTYPE html><html lang="en"> <head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><!-- The page heading is on screen from the first paint, so without this it
+       lands in the fallback face and reflows when Archivo arrives: @fontsource
+       ships font-display: swap. Costs nothing extra, the file is fetched
+       either way. Same reasoning as Home.astro. --><link rel="preload" as="font" type="font/woff2" href="/_astro/archivo-latin-wght-normal.E0tuGl4L.woff2" crossorigin><meta name="astro-view-transitions-enabled" content="true"><meta name="astro-view-transitions-fallback" content="animate"><script type="module" src="/_astro/ClientRouter.astro_astro_type_script_index_0_lang.4nu6hubr.js"></script>  <!--
+  Both blocks below are is:inline and neither carries data-astro-rerun, so each
+  runs once and never again. That is deliberate. They listen on `document`,
+  which is the one thing the router does not replace, so their listeners outlive
+  every swap. Written as module scripts they would be deferred and would miss
+  the inline scripts further down the first page, which is the moment the first
+  of them is needed.
+--> <script>
+  /**
+   * An AbortSignal for the lifetime of the page currently on screen.
+   *
+   * The router keeps one window across navigations, so a scroll or resize
+   * listener bound by a page stays bound after that page is gone, firing into a
+   * document that no longer contains the element it was written for. One of
+   * those per navigation is a leak; four of them is the site.
+   *
+   * Pass window.__pageSignal() as the signal on any listener bound to window,
+   * document or matchMedia from page-level script, and the browser drops it
+   * when the page is swapped out. Listeners on elements inside the page do not
+   * need it: those go when their nodes do.
+   */
+  (function () {
+    var controller = new AbortController();
+    window.__pageSignal = function () { return controller.signal; };
+    document.addEventListener('astro:before-swap', function () {
+      controller.abort();
+      // Renewed here rather than on page-load, because the scripts of the
+      // incoming page run after the swap and ask for the signal immediately.
+      controller = new AbortController();
+    });
+  })();
+</script> <script>
+  /**
+   * Mark every persisted element the first time it survives a navigation.
+   *
+   * transition:persist keeps a node and everything JavaScript put in it, which
+   * is what saves the hero canvas from being drawn again. It does not always
+   * keep the node in place: only where Node.moveBefore exists does the router
+   * move it, and everywhere else, which today includes Safari and Firefox, it
+   * takes the node out of the document and puts it back. Detaching an element
+   * restarts every CSS animation on it, so the hero would re-zoom and the core
+   * re-flash on exactly the navigation all of this exists to leave undisturbed.
+   *
+   * The class is what the stylesheet keys the entrance animations off. An
+   * element wearing it has already made its entrance, so it does not make it
+   * again.
+   *
+   * Reading each animation's position and writing it back afterwards was the
+   * first attempt and does not work: .hero-field is display:none until the
+   * class that shows it is put back on the new section, so at the moment of the
+   * swap it has no animations to read at all. Anything that restores state has
+   * to happen after that class returns, and nothing here can know when a page
+   * has finished doing its own work.
+   */
+  (function () {
+    document.addEventListener('astro:before-swap', function () {
+      document.querySelectorAll('[data-astro-transition-persist]').forEach(function (el) {
+        el.classList.add('carried');
+      });
+    });
+  })();
+</script> <script>
+  /**
+   * Keep the reader where they were when they switch language.
+   *
+   * The router scrolls to the top on a forward navigation, which is right for
+   * following a link to somewhere else and wrong for asking the same page for
+   * the same words in another language. Reading halfway down and wanting it in
+   * Dutch should not cost the reader their place.
+   *
+   * Only the language switch does this, matched on the element that was
+   * clicked, so every other link keeps the ordinary behaviour.
+   *
+   * A translation is not the same length as its original, so on a post the
+   * offset lands near rather than exactly. The browser clamps it to the new
+   * document, and near the right paragraph beats the top of the page.
+   */
+  (function () {
+    var keep = null;
+
+    document.addEventListener('astro:before-preparation', function (event) {
+      var source = event.sourceElement;
+      keep = source && source.closest && source.closest('[data-lang-switch]')
+        ? window.scrollY
+        : null;
+    });
+
+    // after-swap, because the router has set its own scroll position by then
+    // and this has to be the last word on it.
+    document.addEventListener('astro:after-swap', function () {
+      if (keep === null) return;
+      window.scrollTo({ top: keep, behavior: 'instant' });
+    });
+
+    /**
+     * Focus goes back on the switch, and it has to wait for page-load to do it.
+     *
+     * The router restores focus only onto persisted elements. The switch sits
+     * in the header, which is not one, so focus falls back to the body: the
+     * reader keeps their place on screen and loses it in the tab order, and the
+     * first Tab afterwards throws them to the skip link at the top. That is
+     * worse than the reload this replaces, which at least lost both together.
+     *
+     * Not in after-swap, where the scroll restore above lives. Focus set there
+     * did not stick: the browser reported document.body afterwards, and moving
+     * the call to page-load fixed it. Measured rather than reasoned about, so
+     * do not move it back without checking where focus actually lands.
+     */
+    document.addEventListener('astro:page-load', function () {
+      if (keep === null) return;
+      keep = null;
+      var link = document.querySelector('[data-lang-switch]');
+      if (link) link.focus({ preventScroll: true });
+    });
+  })();
+</script><title>Claude Fable 5.2 Usage Limits on Max and Ultra — MulletIQ</title><meta name="description" content="On Claude Ultra, the weekly Fable 5.2 limit held about $630 of API-equivalent usage: around 17 hours of Claude Code. A week on Opus 5.5 holds $2,494."><link rel="canonical" href="https://mulletiq.com/blog/claude-fable-5-2-usage-limits"><link rel="icon" href="/favicon.svg" type="image/svg+xml"><link rel="icon" href="/favicon.ico" sizes="32x32"><!-- Open Graph --><meta property="og:type" content="article"><meta property="og:title" content="Claude Fable 5.2 on Max and Ultra: how much do you get? We measured it"><meta property="og:description" content="On Claude Ultra, the weekly Fable 5.2 limit held about $630 of API-equivalent usage: around 17 hours of Claude Code. A week on Opus 5.5 holds $2,494."><meta property="og:url" content="https://mulletiq.com/blog/claude-fable-5-2-usage-limits"><meta property="og:site_name" content="MulletIQ"><meta property="og:locale" content="en_GB"><meta property="og:image" content="https://mulletiq.com/blog/claude-fable-5-2-ultra-week.png"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="og:image:alt" content="Claude Fable 5.2 on Max and Ultra: how much do you get? We measured it"><!-- Twitter --><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="Claude Fable 5.2 on Max and Ultra: how much do you get? We measured it"><meta name="twitter:description" content="On Claude Ultra, the weekly Fable 5.2 limit held about $630 of API-equivalent usage: around 17 hours of Claude Code. A week on Opus 5.5 holds $2,494."><meta name="twitter:image" content="https://mulletiq.com/blog/claude-fable-5-2-ultra-week.png"><!-- RSS autodiscovery, for the feed in this page's language. A reader who
+     subscribes from a Dutch page expects Dutch posts, and a single feed
+     carrying both would be half unreadable whichever one they came from. --><link rel="alternate" type="application/rss+xml" title="MulletIQ Blog" href="/rss.xml"><!-- Structured Data --><script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","@id":"https://mulletiq.com/#organisatie","name":"MulletIQ","legalName":"MulletIQ B.V.","url":"https://mulletiq.com","description":"MulletIQ guides established companies through the AI transition, from advisory through to work that reaches production.","email":"info@mulletiq.com","logo":"https://mulletiq.com/logo.png","foundingDate":"2024","address":{"@type":"PostalAddress","addressLocality":"Rotterdam","addressCountry":"NL"},"identifier":{"@type":"PropertyValue","propertyID":"KvK","name":"KvK","value":"97102555"},"areaServed":[{"@type":"Country","name":"Netherlands"},{"@type":"Place","name":"Worldwide"}],"knowsAbout":["AI strategy","AI transition","Autonomous AI agents","Private AI for company knowledge","Large language models"],"sameAs":["https://www.linkedin.com/company/mulletiq/","https://apps.apple.com/developer/mulletiq-b-v/id6773703629","https://github.com/mulletiq"],"founder":{"@type":"Person","@id":"https://mulletiq.com/#merijn","name":"Merijn","alternateName":"Merijn van Es","image":"https://mulletiq.com/authors/merijn-van-es.jpg","sameAs":["https://www.linkedin.com/in/merijn-van-es-44841bb7/","https://github.com/merijnvanes","https://x.com/merijnvanes"]}}</script><script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","@id":"https://mulletiq.com/#website","name":"MulletIQ","url":"https://mulletiq.com","publisher":{"@id":"https://mulletiq.com/#organisatie"}}</script><!-- Cloudflare Web Analytics, the only third-party script on the site. It lives
+     here rather than before </body> because the home page builds its own
+     document and does not use Base.astro; this component is the one place both
+     go through. A module script is deferred anyway.
+
+     By hand, because Cloudflare only injects it automatically on Pages and this
+     site runs on a Worker, so nothing was counted until now. No integrity hash:
+     Cloudflare updates the file without publishing one. --><script type="module" src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon="{&quot;token&quot;: &quot;20ec5923c0f249f4a5405c128196ac66&quot;}"></script><link rel="alternate" hreflang="nl" href="https://mulletiq.com/nl/blog/claude-fable-5-2-gebruikslimieten"><link rel="alternate" hreflang="en" href="https://mulletiq.com/blog/claude-fable-5-2-usage-limits"><link rel="alternate" hreflang="x-default" href="https://mulletiq.com/blog/claude-fable-5-2-usage-limits"> <meta property="article:published_time" content="2026-11-14T00:00:00.000Z"> <meta property="article:tag" content="claude-fable"><meta property="article:tag" content="claude-max"><meta property="article:tag" content="claude-code"><meta property="article:tag" content="ai-agent-cost"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","@id":"https://mulletiq.com/blog/claude-fable-5-2-usage-limits","headline":"Claude Fable 5.2 on Max and Ultra: how much do you get? We measured it","description":"On Claude Ultra, the weekly Fable 5.2 limit held about $630 of API-equivalent usage: around 17 hours of Claude Code. A week on Opus 5.5 holds $2,494.","datePublished":"2026-11-14T00:00:00.000Z","image":"https://mulletiq.com/blog/claude-fable-5-2-ultra-week.png","author":{"@type":"Person","@id":"https://mulletiq.com/#merijn","name":"Merijn","sameAs":["https://www.linkedin.com/in/merijn-van-es-44841bb7/","https://github.com/merijnvanes","https://x.com/merijnvanes"],"image":"https://mulletiq.com/authors/merijn-van-es.jpg"},"inLanguage":"en","publisher":{"@id":"https://mulletiq.com/#organisatie"},"url":"https://mulletiq.com/blog/claude-fable-5-2-usage-limits","mainEntityOfPage":"https://mulletiq.com/blog/claude-fable-5-2-usage-limits","keywords":["claude-fable","claude-max","claude-code","ai-agent-cost"]}</script> <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://mulletiq.com/"},{"@type":"ListItem","position":2,"name":"Blog","item":"https://mulletiq.com/blog"},{"@type":"ListItem","position":3,"name":"Claude Fable 5.2 on Max and Ultra: how much do you get? We measured it","item":"https://mulletiq.com/blog/claude-fable-5-2-usage-limits"}]}</script> <style>@font-face{font-family:Archivo Variable;font-style:normal;font-display:swap;font-weight:100 900;src:url(/_astro/archivo-vietnamese-wght-normal.XAtsl5Q_.woff2) format("woff2-variations");unicode-range:U+0102-0103,U+0110-0111,U+0128-0129,U+0168-0169,U+01A0-01A1,U+01AF-01B0,U+0300-0301,U+0303-0304,U+0308-0309,U+0323,U+0329,U+1EA0-1EF9,U+20AB}@font-face{font-family:Archivo Variable;font-style:normal;font-display:swap;font-weight:100 900;src:url(/_astro/archivo-latin-ext-wght-normal.C4zznr8T.woff2) format("woff2-variations");unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}@font-face{font-family:Archivo Variable;font-style:normal;font-display:swap;font-weight:100 900;src:url(/_astro/archivo-latin-wght-normal.E0tuGl4L.woff2) format("woff2-variations");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}.astro-route-announcer{position:absolute;left:0;top:0;clip:rect(0 0 0 0);clip-path:inset(50%);overflow:hidden;white-space:nowrap;width:1px;height:1px}@media(prefers-reduced-motion:reduce){::view-transition-group(*),::view-transition-old(*),::view-transition-new(*){animation:none!important}}
+</style><link rel="stylesheet" href="/_astro/SeoHead.CLMvY_Mt.css"><style>.offer[data-astro-cid-zi4jiz5z]{position:fixed;bottom:24px;right:24px;width:260px;background:var(--bg);border:1px solid var(--line);border-radius:12px;padding:16px 18px 18px;box-shadow:0 10px 30px #16181d17;z-index:40;display:none}.offer[data-astro-cid-zi4jiz5z].visible{display:block;animation:offer-in .4s cubic-bezier(.16,1,.3,1) both}@keyframes offer-in{0%{opacity:0;transform:translateY(16px)}}.offer-close[data-astro-cid-zi4jiz5z]{position:absolute;top:4px;right:4px;width:28px;height:28px;background:none;border:none;border-radius:6px;color:var(--faint);font-size:1.05rem;line-height:1;cursor:pointer;transition:color .18s ease}.offer-close[data-astro-cid-zi4jiz5z]:hover{color:var(--ink)}.offer-close[data-astro-cid-zi4jiz5z]:focus-visible{outline:2px solid var(--accent);outline-offset:1px}.offer-label[data-astro-cid-zi4jiz5z]{font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;color:var(--accent-text);margin:0 0 8px}.offer-heading[data-astro-cid-zi4jiz5z]{font-size:.95rem;font-weight:600;letter-spacing:-.012em;line-height:1.3;color:var(--ink);margin:0 0 6px}.offer-detail[data-astro-cid-zi4jiz5z]{font-size:.82rem;line-height:1.5;color:var(--mut);margin:0 0 14px}.offer-cta[data-astro-cid-zi4jiz5z]{display:block;text-align:center;font-size:.82rem;font-weight:600;color:#fff;background:var(--ink);border-radius:8px;padding:9px 14px;text-decoration:none;transition:background-color .18s ease}.offer-cta[data-astro-cid-zi4jiz5z]:hover{background:#2c2f36}.offer-cta[data-astro-cid-zi4jiz5z]:focus-visible{outline:2px solid var(--accent);outline-offset:2px}@media(max-width:768px){.offer[data-astro-cid-zi4jiz5z]{bottom:16px;right:16px;left:16px;width:auto}body:has(.offer.visible){padding-bottom:var(--offer-h, 0px)}}@media(prefers-reduced-motion:reduce){.offer[data-astro-cid-zi4jiz5z].visible{animation:none}.offer-close[data-astro-cid-zi4jiz5z],.offer-cta[data-astro-cid-zi4jiz5z]{transition:none}}.byline[data-astro-cid-2yvawtqt]{display:inline-flex;align-items:center;gap:8px;vertical-align:middle}.byline-name[data-astro-cid-2yvawtqt]{min-width:0;overflow-wrap:anywhere}.byline-avatar[data-astro-cid-2yvawtqt]{width:var(--avatar-size);height:var(--avatar-size);object-fit:cover;aspect-ratio:1;border-radius:50%;border:1px solid var(--line);flex-shrink:0;display:block}
+:root{--bg: #FFFFFF;--ink: #16181D;--mut: #5D6470;--faint: #98A0AB;--line: #E8E9EC;--accent: #C95E3F;--accent-text: #B34F32;--green: #14B85C;--font-sans: "Archivo Variable", system-ui, sans-serif;--font-mono: "JetBrains Mono Variable", ui-monospace, monospace;--header-h: 67px}*{margin:0;padding:0;box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:var(--header-h)}main:focus{outline:none}body{background:var(--bg);color:var(--ink);font-family:var(--font-sans);font-size:16px;line-height:1.62;-webkit-font-smoothing:antialiased;overflow-x:clip;min-height:100svh;display:flex;flex-direction:column}body>main{flex:1 0 auto}::selection{background:#c95e3f2e}img{max-width:100%;display:block}a{color:inherit}.wrap{max-width:1120px;margin:0 auto;padding:0 clamp(20px,4vw,40px)}.mono{font-family:var(--font-mono)}h1,h2,h3{font-weight:580;letter-spacing:-.028em;line-height:1.08}h2{font-size:clamp(1.7rem,1.2rem + 2vw,2.5rem);margin-bottom:18px}h3{font-size:1.1rem;margin-bottom:6px;letter-spacing:-.012em}.section{padding:clamp(56px,8.5vw,104px) 0 0}.skip-link{position:fixed;top:12px;left:12px;z-index:70;background:var(--ink);color:#fff;padding:11px 18px;border-radius:10px;font-size:.9rem;font-weight:600;text-decoration:none;transform:translateY(-160%);transition:transform .2s ease}.skip-link:focus{transform:translateY(0)}.btn{display:inline-flex;align-items:center;justify-content:center;font-family:var(--font-sans);font-size:.95rem;font-weight:600;text-decoration:none;border-radius:10px;padding:13px 26px;transition:background-color .18s ease,transform .18s ease;white-space:nowrap}.btn-solid{background:var(--ink);color:#fff}.btn-solid:hover{background:#2c2f36;transform:translateY(-1px)}.btn-sm{padding:8px 16px;font-size:.85rem}.btn:focus-visible{outline:2px solid var(--accent);outline-offset:2px}.site-header{position:sticky;top:0;z-index:50;background:var(--bg);border-bottom:1px solid var(--line)}.site-header .nav-bar{max-width:1060px;margin:0 auto;padding:14px clamp(20px,4vw,40px);display:flex;align-items:center;justify-content:space-between;gap:18px;flex-wrap:wrap;row-gap:10px}.site-header .nav-right{display:flex;align-items:center;gap:clamp(14px,3vw,24px);flex-wrap:wrap;row-gap:8px}.nav-link{font-family:var(--font-mono);font-size:.74rem;letter-spacing:.04em;color:var(--mut);text-decoration:none;transition:color .18s ease}.nav-link:hover{color:var(--accent-text)}.nav-link:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:4px}.brand{font-weight:800;letter-spacing:-.045em;font-size:1.08rem;text-transform:uppercase;text-decoration:none}.brand-iq{color:var(--accent)}.brand:focus-visible{outline:2px solid var(--accent);outline-offset:4px;border-radius:4px}@media(max-width:420px){.site-header .nav-bar{padding-left:16px;padding-right:16px}.brand{font-size:1rem}.btn-sm{padding:8px 12px}.nav-bar .btn{white-space:normal}}.kicker-line{display:flex;align-items:center;gap:10px;margin-bottom:18px;font-size:.66rem;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:var(--mut)}.kicker-line:after{content:"";flex:1;height:1px;max-width:120px;background:linear-gradient(to right,var(--line),transparent)}.status-dot{width:7px;height:7px;border-radius:50%;background:var(--green);box-shadow:0 0 0 3px #14b85c2e}.prose{max-width:56ch;margin-bottom:30px}.prose p{color:var(--mut);font-size:1.02rem}.prose p+p{margin-top:16px}.footer{border-top:1px solid var(--line);padding:26px 0}.footer-inner{display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px;font-size:.72rem;color:var(--faint)}.footer a{color:var(--faint);text-decoration:none}.footer a:hover{color:var(--accent-text)}.arw{transition:transform .18s ease}.table-scroll{overflow-x:auto;margin:0 0 24px;border:1px solid var(--line);border-radius:10px}.table-scroll>table{width:100%;border-collapse:collapse;margin:0;border:0}@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.btn,.skip-link,.arw{transition:none}}
+</style><link rel="stylesheet" href="/_astro/BlogPost.PPVnTGZ1.css"></head> <body> <a class="skip-link" href="#main" lang="en">Skip to content</a> <header class="site-header" lang="en"> <nav class="nav-bar" aria-label="Main"> <!-- The home page in the language of the chrome around it. Fixed at /, a
+           Dutch reader clicking the logo left the language. --> <a class="brand" href="/">Mullet<span class="brand-iq">IQ</span></a> <div class="nav-right"> <!-- The old Base.astro mounted ProgressWireNav, which carried this
+             link, so /privacy and /terms could reach the blog. Moving them onto
+             this layout dropped it, and the blog was left reachable only from
+             /404, /agents and its own pages. --> <a class="nav-link" href="/blog">Blog</a> <!-- data-lang-switch is read by Transitions.astro, which keeps the reader's
+       scroll position when this particular link is the one followed. -->
+  <a class="nav-link" data-lang-switch href="/nl/blog/claude-fable-5-2-gebruikslimieten" hreflang="nl" lang="nl" aria-label="NL, Nederlands">NL</a> <a class="btn btn-solid btn-sm" href="https://cal.com/merijn-mulletiq/mulletiq-autonomous-ai-agents" target="_blank" rel="noopener">Book a conversation</a> </div> </nav> </header> <main id="main" tabindex="-1">   <div class="reading-wire" id="reading-wire" aria-hidden="true" data-astro-cid-bvzihdzo></div>  <article class="post" data-slug="claude-fable-5-2-usage-limits" data-astro-cid-bvzihdzo> <header class="post-header" data-astro-cid-bvzihdzo> <p class="post-crumb mono" data-astro-cid-bvzihdzo><a href="/blog" data-astro-cid-bvzihdzo>Blog</a></p> <h1 data-astro-cid-bvzihdzo>Claude Fable 5.2 on Max and Ultra: how much do you get? We measured it</h1> <p class="post-standfirst" data-astro-cid-bvzihdzo>On Claude Ultra, the weekly Fable 5.2 limit held about $630 of API-equivalent usage: around 17 hours of Claude Code. A week on Opus 5.5 holds $2,494.</p> <p class="post-meta mono" data-astro-cid-bvzihdzo> <time datetime="2026-11-14T00:00:00.000Z" data-astro-cid-bvzihdzo>November 14, 2026</time>  <span class="meta-group" data-astro-cid-bvzihdzo> <span class="sep" aria-hidden="true" data-astro-cid-bvzihdzo>/</span> <span class="byline" data-astro-cid-2yvawtqt> <img class="byline-avatar" src="/authors/merijn-van-es.jpg" alt="" width="26" height="26" style="--avatar-size: 26px" loading="lazy" decoding="async" data-astro-cid-2yvawtqt> <span class="byline-name" data-astro-cid-2yvawtqt>Merijn</span> </span> </span>   </p> <ul class="post-tags" data-astro-cid-bvzihdzo> <li class="tag mono" data-astro-cid-bvzihdzo>claude-fable</li><li class="tag mono" data-astro-cid-bvzihdzo>claude-max</li><li class="tag mono" data-astro-cid-bvzihdzo>claude-code</li><li class="tag mono" data-astro-cid-bvzihdzo>ai-agent-cost</li> </ul> </header> <img class="post-hero" src="/blog/claude-fable-5-2-ultra-week.png" alt="Bar chart of what a week holds in API-equivalent dollars. Ultra: $2,494 on Opus 5.5, about 151 active hours, and a Fable 5.2 limit of $629, about 17 active hours. Max: $1,248 on Opus 5.5, about 76 hours, and an estimated Fable 5.2 limit of $314, about 8 hours." width="1200" height="630" data-astro-cid-bvzihdzo> <div class="post-content" data-astro-cid-bvzihdzo>  <p>Anthropic released <a href="https://www.anthropic.com/claude-fable-and-mythos-5-2">Claude Fable 5.2</a> on November 9, 2026. On the Max and Ultra plans it doesn’t share the weekly limit freely with the other models. It has a weekly limit of its own, and Anthropic doesn’t say how big that limit is in usage.</p>
+<p>So we measured it on our own Claude Ultra account. We read the Fable limit every 30 minutes and matched the readings to Claude Code’s token logs.</p>
+<p><strong>The short answer:</strong> a full Fable 5.2 limit on Ultra held about <strong>$630</strong> of usage at API list prices per week. At this account’s pace that’s about <strong>17 hours</strong> of Claude Code. A week on Opus 5.5 holds about $2,494.</p>
+<div class="table-scroll">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th></th><th>Max ($100/month)</th><th>Ultra ($200/month)</th></tr></thead><tbody><tr><td>Weekly limit, all on Opus 5.5</td><td>$1,248</td><td>$2,494</td></tr><tr><td>Fable 5.2 limit per week</td><td>about $315 (estimate)</td><td><strong>about $630</strong> (range $560 to $720)</td></tr><tr><td>Fable usage per $1 of plan price, per month</td><td>about $14</td><td>about $14</td></tr><tr><td>Typical Claude Code hours of Fable per week</td><td>about 8</td><td>about 17</td></tr><tr><td>5-hour limit</td><td>Yes</td><td>None on verified accounts</td></tr></tbody></table></div>
+<p>These are early numbers. The direct reading comes from one day of use. We’ll update this post after a full measured week, November 19 to 26.</p>
+<h2 id="how-does-the-fable-limit-work">How does the Fable limit work?</h2>
+<p>Anthropic’s help page says you can use <a href="https://support.claude.com/en/articles/15424964-claude-fable-models-on-your-plan">“up to 50% of your weekly usage limits on Fable models at no extra cost”</a>. Fable counts toward the normal weekly limit too, and it uses it <a href="https://support.claude.com/en/articles/15424964-claude-fable-models-on-your-plan">“faster than other Claude models”</a>.</p>
+<p>In practice that gives you two meters. The usage page and <code>/usage</code> in Claude Code show the normal weekly limit plus a separate Fable limit. Only Fable usage moves the Fable meter. When it reaches 100%, Claude Code says “You’re out of usage credits” and offers two ways forward: buy <a href="https://support.claude.com/en/articles/12429409-manage-usage-credits-for-paid-claude-plans">usage credits</a>, which are “billed at standard API rates”, or switch to another model.</p>
+<p>One detail is easy to miss. The 50% is a ceiling on the Fable share, not an addition: you <a href="https://support.claude.com/en/articles/15424964-claude-fable-models-on-your-plan">“can never use more than your weekly limit”</a>. A full Fable limit uses half your week. Opus 5.5 and the other models get the other half.</p>
+<h2 id="how-much-fable-fits-in-a-week">How much Fable fits in a week?</h2>
+<p>On Ultra, about <strong>$630</strong> of Fable 5.2 usage at Anthropic’s API list prices ($8 per million input tokens, $40 output, $0.20 cache reads). That’s the measured value. Because the meter shows whole percentages, the range is $560 to $720.</p>
+<figure>
+  <img src="/blog/claude-fable-5-2-ultra-week.png" alt="Bar chart of what a week holds in API-equivalent dollars. Ultra: $2,494 on Opus 5.5 and a Fable 5.2 limit of $629. Max: $1,248 on Opus 5.5 and an estimated Fable 5.2 limit of $314. Hours at this account&#x27;s pace: 151, 17, 76 and 8." width="1200" height="630" loading="lazy" decoding="async">
+  <figcaption>A full Fable limit holds about a quarter of what a whole week on Opus 5.5 holds, at list prices.</figcaption>
+</figure>
+<p>A second method gives almost the same answer. In the days when this account used Fable and Opus side by side, each dollar of Fable moved the normal weekly meter about <strong>2.2 times</strong> as far as a dollar of Opus 5.5 (95% interval: 1.2x to 3.0x). Half a week on Ultra is $1,247 of Opus usage. Divided by 2.2, that is about $570 of Fable.</p>
+<p>“API-equivalent” means what the same tokens would cost on the Anthropic API at list price. It measures usage, not money you pay. It is also the price you’d pay for Fable after the limit, because usage credits are billed at API rates.</p>
+<h3 id="and-on-max">And on Max?</h3>
+<p>We measured Ultra only. Anthropic says Ultra gets <a href="https://support.claude.com/en/articles/17728952-what-is-the-ultra-plan">“10 times the Pro plan’s usage every week”</a> and Max five times, and in <a href="/blog/claude-max-20x-vs-5x">our earlier measurement</a> the Ultra week was 2.00x the Max week. If the 50% rule works the same way on both plans, a Max Fable limit holds about <strong>$315</strong> a week. That’s a calculation, not a measurement.</p>
+<h2 id="fable-fills-the-week-about-45-times-faster-per-hour">Fable fills the week about 4.5 times faster per hour</h2>
+<p>Per dollar, Fable moves the weekly meter about 2.2 times as fast as Opus 5.5. Per hour of work the gap is bigger, because a Fable hour also costs more at list price. At this account’s pace, a typical active hour in Claude Code cost <strong>$38</strong> on Fable 5.2 and <strong>$16.50</strong> on Opus 5.5.</p>
+<figure>
+  <img src="/blog/claude-fable-5-2-week-per-hour.png" alt="Bar chart of the share of the Ultra weekly limit used per active hour. Opus 5.5: 0.7% in a typical hour, 2.0% in a heavy hour. Fable 5.2: 3.0% in a typical hour, 8.6% in a heavy hour." width="1600" height="900" loading="lazy" decoding="async">
+  <figcaption>On Ultra, a typical Fable hour uses 3.0% of the week. A typical Opus 5.5 hour uses 0.7%.</figcaption>
+</figure>
+<ul>
+<li><strong>Opus 5.5:</strong> a typical hour uses <strong>0.7%</strong> of the Ultra week, a heavy hour 2.0%. A full week holds about 150 typical hours.</li>
+<li><strong>Fable 5.2:</strong> a typical hour uses <strong>3.0%</strong>, a heavy hour 8.6%. The Fable limit (50% of the week) is gone after about 17 typical hours, or 6 heavy ones.</li>
+</ul>
+<p>On Max every number doubles: about 6% of the week per typical Fable hour, and a Fable limit of about 8 hours.</p>
+<h2 id="what-the-launch-resets-are-worth">What the launch resets are worth</h2>
+<p>Anthropic gives existing subscribers free <a href="https://support.claude.com/en/articles/17506494-claude-fable-5-2-launch-offers">Fable limit resets</a>. On Max and Ultra you get one, two or three, depending on how long you’ve paid: under six months, six to twelve months, or longer. They expire on March 8, 2027, and only accounts with paid billing before November 9, 2026 get them. You use one under Settings > Usage > Limit resets.</p>
+<p>A reset gives back the Fable usage you have spent, and leaves the usage of other models where it is. On Ultra that’s one more Fable limit: about <strong>$630</strong> of usage per reset. This account had two, and used both in the first week.</p>
+<p>On this account the weekly reset day stayed the same after both resets. Use a reset when the Fable meter is full, not before: a reset at 30% gives back only 30%.</p>
+<h2 id="is-fable-on-a-subscription-worth-it">Is Fable on a subscription worth it?</h2>
+<p>At full use, the Fable limit holds about <strong>$14 of usage per $1</strong> of plan price per month, on Max and on Ultra. For Opus 5.5 that figure is $54. Per dollar, a subscription gives you much less Fable than Opus. It still beats the API: the same Fable usage costs about $2,700 a month on the API, and on Ultra it fits inside $200, with half of every week left for other models.</p>
+<div class="table-scroll">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>How you use Fable</th><th>Max</th><th>Ultra</th></tr></thead><tbody><tr><td>A few hard tasks a week</td><td>Fits, about 8 hours</td><td><strong>Fits</strong>, about 17 hours</td></tr><tr><td>Fable as your default model all day</td><td>Limit gone in one day</td><td>Limit gone in two or three days</td></tr><tr><td>More Fable than the limit</td><td>Usage credits at API rates</td><td>Usage credits at API rates</td></tr></tbody></table></div>
+<p>To see where you are, open the usage page in Claude settings or run <code>/usage</code> in Claude Code. The Fable limit has its own meter there.</p>
+<h2 id="what-else-changed-on-max-and-ultra">What else changed on Max and Ultra</h2>
+<p>On October 30, 2026, Anthropic renamed its plans. Max 20x is now <a href="https://support.claude.com/en/articles/17728952-what-is-the-ultra-plan">Ultra</a>, at the same $200 a month. Max 5x is now Max, at $100. Ultra has <a href="https://support.claude.com/en/articles/17728952-what-is-the-ultra-plan">“no five-hour limit for verified accounts”</a>; Anthropic verifies accounts automatically. Our account lost its 5-hour limit with the rename.</p>
+<p>Anthropic now also publishes the weekly ratio: Ultra is 10x Pro per week, Max 5x. That’s the 2.00x we measured <a href="/blog/claude-max-20x-vs-5x">in October</a>.</p>
+<h2 id="how-we-measured">How we measured</h2>
+<ul>
+<li><strong>The Fable limit:</strong> Anthropic’s usage endpoint, the source of the usage page and <code>/usage</code>, reports the Fable limit as its own percentage. We read it every 30 minutes for this account. On November 14 it went from 0% to 8% while this account used $50.28 of Fable, so 100% is about $630.</li>
+<li><strong>Usage:</strong> every Fable 5.2 request in Claude Code’s local logs, priced at $8 per million input tokens, $40 output, $0.20 cache reads, and 1.25x or 2x the input price for 5-minute or 1-hour cache writes.</li>
+<li><strong>Cross-check:</strong> a regression of the normal weekly meter on Fable and non-Fable usage, per meter interval, October 23 to November 13 (370 intervals, $368 of them Fable), using <a href="https://github.com/steipete/CodexBar">CodexBar</a>’s hourly readings. The Opus 5.5 weekly limit of $2,494 comes from <a href="/blog/claude-max-20x-vs-5x">our September and October measurement</a>.</li>
+<li><strong>Pace:</strong> API-equivalent usage per clock hour with more than $5 of usage, October 19 to November 14: 37 Fable hours and 155 hours on other models. Scripted runs without a transcript are left out of the pace.</li>
+</ul>
+<p><strong>Limits of this measurement:</strong></p>
+<ul>
+<li>It’s early. The direct reading spans one day and eight percentage points, so the range is wide.</li>
+<li>One account, one person’s coding work. Your hours depend on your pace.</li>
+<li>Max isn’t measured. Its numbers assume the 50% rule and the 2x weekly ratio hold.</li>
+<li>On November 13, after a login error, some Fable sessions on this machine billed to a second account. That day is left out.</li>
+<li>Anthropic can change limits at any time. These numbers describe November 2026.</li>
+</ul>
+<h2 id="faq">FAQ</h2>
+<h3 id="how-much-fable-52-do-you-get-on-claude-ultra">How much Fable 5.2 do you get on Claude Ultra?</h3>
+<p>About $630 of usage at API list prices per week, measured in November 2026, with a range of $560 to $720. That’s half the weekly limit, and about 17 hours of typical Claude Code use.</p>
+<h3 id="how-much-fable-52-do-you-get-on-claude-max">How much Fable 5.2 do you get on Claude Max?</h3>
+<p>We estimate about $315 a week, half of Ultra, or about 8 hours of Claude Code. We didn’t measure Max directly.</p>
+<h3 id="does-fable-52-use-the-limit-faster-than-opus-55">Does Fable 5.2 use the limit faster than Opus 5.5?</h3>
+<p>Yes. Per dollar at list price, it moves the weekly meter about 2.2 times as far. Per hour of work it’s about 4.5 times: 3.0% of the Ultra week in a typical Fable hour against 0.7% on Opus 5.5.</p>
+<h3 id="what-happens-when-you-hit-the-fable-limit">What happens when you hit the Fable limit?</h3>
+<p>Claude Code stops Fable requests. You can buy usage credits, billed at API rates, or switch to another model. The rest of your weekly limit stays available for the other models.</p>
+<h3 id="what-is-a-fable-limit-reset">What is a Fable limit reset?</h3>
+<p>A launch offer that gives back the Fable usage you’ve spent. Max and Ultra subscribers get one to three, depending on how long they’ve paid, to use before March 8, 2027. On Ultra one reset is worth about $630 of usage.</p>
+<h3 id="does-claude-ultra-still-have-a-5-hour-limit">Does Claude Ultra still have a 5-hour limit?</h3>
+<p>Not on verified accounts. Since October 30, 2026, Ultra has only weekly limits once Anthropic has verified the account. Max still has a 5-hour limit.</p>  </div>  <nav class="post-prevnext" aria-label="Adjacent posts" data-astro-cid-bvzihdzo> <a href="/blog/snake-neural-network-is-the-game" class="pn pn-prev" data-astro-cid-bvzihdzo> <span class="pn-label mono" data-astro-cid-bvzihdzo>&larr; Older</span> <span class="pn-title" data-astro-cid-bvzihdzo>Snake with no game code: a neural network is the game</span> </a>  </nav> <footer class="post-footer mono" data-astro-cid-bvzihdzo> <a href="/blog" data-astro-cid-bvzihdzo>&larr; All posts</a> <a href="/rss.xml" target="_blank" data-astro-cid-bvzihdzo>RSS</a> </footer> </article> <aside class="offer" id="sticky-offer" aria-label="Free conversation" data-astro-cid-zi4jiz5z> <button class="offer-close" id="sticky-offer-close" aria-label="Dismiss" data-astro-cid-zi4jiz5z>&times;</button> <p class="offer-label mono" data-astro-cid-zi4jiz5z>Free conversation</p> <p class="offer-heading" data-astro-cid-zi4jiz5z>Stuck between pilot and production?</p> <p class="offer-detail" data-astro-cid-zi4jiz5z>Half an hour, plain language, an honest answer either way.</p> <!-- target/rel rather than data-astro-reload: the router never intercepts a
+       cross-origin link, so there is nothing here to opt out of. --> <a href="https://cal.com/merijn-mulletiq/mulletiq-autonomous-ai-agents?utm_source=mulletiq&amp;utm_medium=sticky-offer&amp;utm_campaign=advisory-call" class="offer-cta" target="_blank" rel="noopener" data-astro-cid-zi4jiz5z>Book a conversation</a> </aside>  <!-- Re-runs per page, because the box is a new element each time and the timer
+     that reveals it is per page too. The signal covers both the resize listener
+     and the timer: a reader who moves on before the minute is up should not
+     have the previous page's offer appear over the new one. --> <script data-astro-rerun>
+(function() {
+  var KEY = 'mulletiq-offer-dismissed';
+  var DELAY = 60000;
+  var el = document.getElementById('sticky-offer');
+  var btn = document.getElementById('sticky-offer-close');
+  if (!el || !btn) return;
+  if (sessionStorage.getItem(KEY)) return;
+  var signal = window.__pageSignal();
+  // The CSS above spends this on body padding, but only under 768px, so the
+  // page can still be scrolled past the offer to the links it covers. Measured
+  // rather than guessed: the box grows with the copy and with text scaling.
+  function reserve() {
+    document.documentElement.style.setProperty(
+      '--offer-h', (el.offsetHeight + 24) + 'px');
+  }
+  var timer = setTimeout(function() {
+    if (!sessionStorage.getItem(KEY)) {
+      el.classList.add('visible');
+      reserve();
+      window.addEventListener('resize', reserve, { passive: true, signal: signal });
+    }
+  }, DELAY);
+  signal.addEventListener('abort', function() {
+    clearTimeout(timer);
+    // The reserved room is on the document, which outlives the page that
+    // measured it, so it has to be given back by hand.
+    document.documentElement.style.removeProperty('--offer-h');
+  });
+  btn.addEventListener('click', function() {
+    el.classList.remove('visible');
+    document.documentElement.style.removeProperty('--offer-h');
+    window.removeEventListener('resize', reserve);
+    sessionStorage.setItem(KEY, '1');
+  });
+})();
+</script>  </main> <footer class="footer" lang="en"> <div class="wrap footer-inner mono"> <p>&copy; 2026 MulletIQ B.V. &middot; Rotterdam, The Netherlands</p> <p> <a href="mailto:info@mulletiq.com">info@mulletiq.com</a> &middot;
+<a href="https://www.linkedin.com/in/merijn-van-es-44841bb7/" target="_blank" rel="noopener">LinkedIn</a> &middot;
+<a href="/privacy">Privacy</a> &middot;
+<a href="/terms">Terms</a> </p> </div> </footer> </body></html>  <!-- Re-runs per page, because each post has its own wire, and the scroll
+     listener carries the page signal so the last post's wire is not still being
+     measured on the next one. --> <script data-astro-rerun>
+(function() {
+  var wire = document.getElementById('reading-wire');
+  if (!wire) return;
+  function update() {
+    var scrollTop = window.scrollY;
+    var docHeight = document.documentElement.scrollHeight - window.innerHeight;
+    if (docHeight <= 0) { wire.style.width = '0%'; return; }
+    wire.style.width = Math.min(100, (scrollTop / docHeight) * 100) + '%';
+  }
+  window.addEventListener('scroll', update, { passive: true, signal: window.__pageSignal() });
+  update();
+})();
+</script> <!-- Re-runs per page: the links it tags are the ones in this post's body. --> <script data-astro-rerun>
+(function() {
+  var article = document.querySelector('.post[data-slug]');
+  var content = document.querySelector('.post-content');
+  if (!article || !content) return;
+  // The id the server rendered, so the campaign name is the same whatever
+  // prefix the post is served under. Derived from the path it was one regex
+  // that had to know which leading segments are routing, and a nested post id
+  // makes that undecidable from the address alone.
+  var slug = article.getAttribute('data-slug');
+  var links = content.querySelectorAll('a[href^="http"]');
+  for (var i = 0; i < links.length; i++) {
+    var href = links[i].href;
+    if (href.indexOf('mulletiq.com') !== -1) continue;
+    // An author who writes the params into the markdown by hand would otherwise
+    // get them twice: ?utm_source=...&utm_source=... Legal, and analytics takes
+    // the first, but it is an ugly address to hand someone.
+    if (href.indexOf('utm_source=') !== -1) continue;
+    var sep = href.indexOf('?') === -1 ? '?' : '&';
+    links[i].href = href + sep + 'utm_source=mulletiq&utm_medium=blog&utm_campaign=' + encodeURIComponent(slug);
+  }
+})();
+</script>

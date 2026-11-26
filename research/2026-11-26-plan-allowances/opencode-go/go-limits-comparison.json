@@ -1,0 +1,513 @@
+{
+ "sourceNew": "https://opencode.ai/inference/go/v1/models (model list API, field go.monthly_usage; Go docs page links to it for Go monthly limits)",
+ "sourceOld": "research/2026-11-11-opencode-go/raw/opencode-go-docs.html (docs table, fetched 2026-11-11T11:56:17Z)",
+ "rows": [
+  {
+   "model": "DeepSeek V4.1 Flash 1017",
+   "id": "deepseek-v4.1-flash",
+   "new": {
+    "go": 100,
+    "go-plus": 200,
+    "go-teams": 105
+   },
+   "old": {
+    "go": 100,
+    "go-plus": 200,
+    "go-teams": 105
+   },
+   "changed": false
+  },
+  {
+   "model": "DeepSeek V4 Pro",
+   "id": "deepseek-v4-pro",
+   "new": {
+    "go": 15,
+    "go-plus": 60,
+    "go-teams": 20
+   },
+   "old": {
+    "go": 15,
+    "go-plus": 60,
+    "go-teams": 20
+   },
+   "changed": false
+  },
+  {
+   "model": "GLM-5.3",
+   "id": "glm-5.3",
+   "new": {
+    "go": 200,
+    "go-plus": 400,
+    "go-teams": 205
+   },
+   "old": {
+    "go": 15,
+    "go-plus": 120,
+    "go-teams": 20
+   },
+   "changed": true
+  },
+  {
+   "model": "Grok 4.7",
+   "id": "grok-4.7",
+   "new": {
+    "go": 15,
+    "go-plus": 60,
+    "go-teams": 20
+   },
+   "old": {
+    "go": 15,
+    "go-plus": 60,
+    "go-teams": 20
+   },
+   "changed": false
+  },
+  {
+   "model": "Muse Spark 1.2 Contributor",
+   "id": "muse-spark-1.2-contributor",
+   "new": {
+    "go": 60,
+    "go-plus": 120,
+    "go-teams": 65
+   },
+   "old": {
+    "go": 60,
+    "go-plus": 120,
+    "go-teams": 65
+   },
+   "changed": false
+  },
+  {
+   "model": "Muse Spark 1.3 Contributor",
+   "id": "muse-spark-1.3-contributor",
+   "new": {
+    "go": 60,
+    "go-plus": 120,
+    "go-teams": 65
+   },
+   "old": {
+    "go": 60,
+    "go-plus": 120,
+    "go-teams": 65
+   },
+   "changed": false
+  },
+  {
+   "model": "GLM-5.3-Flash",
+   "id": "glm-5.3-flash",
+   "new": {
+    "go": 60,
+    "go-plus": 180,
+    "go-teams": 65
+   },
+   "old": {
+    "go": 60,
+    "go-plus": 180,
+    "go-teams": 65
+   },
+   "changed": false
+  },
+  {
+   "model": "GPT-5.6 Luna",
+   "id": "gpt-5.6-luna",
+   "new": {
+    "go": 15,
+    "go-plus": 60,
+    "go-teams": 20
+   },
+   "old": {
+    "go": 15,
+    "go-plus": 60,
+    "go-teams": 20
+   },
+   "changed": false
+  },
+  {
+   "model": "GPT-6 Luna",
+   "id": "gpt-6-luna",
+   "new": {
+    "go": 15,
+    "go-plus": 60,
+    "go-teams": 20
+   },
+   "old": {
+    "go": 15,
+    "go-plus": 60,
+    "go-teams": 20
+   },
+   "changed": false
+  },
+  {
+   "model": "Claude Haiku 5.5",
+   "id": "claude-haiku-5-5",
+   "new": {
+    "go": 15,
+    "go-plus": 60,
+    "go-teams": 20
+   },
+   "old": {
+    "go": 15,
+    "go-plus": 60,
+    "go-teams": 20
+   },
+   "changed": false
+  },
+  {
+   "model": "Hy3",
+   "id": "hy3",
+   "new": {
+    "go": 60,
+    "go-plus": 240,
+    "go-teams": 65
+   },
+   "old": {
+    "go": 60,
+    "go-plus": 240,
+    "go-teams": 65
+   },
+   "changed": false
+  },
+  {
+   "model": "Hy4 preview",
+   "id": "hy4-preview",
+   "new": {
+    "go": 30,
+    "go-plus": 120,
+    "go-teams": 35
+   },
+   "old": {
+    "go": 30,
+    "go-plus": 120,
+    "go-teams": 35
+   },
+   "changed": false
+  },
+  {
+   "model": "Kimi K2.7 Code",
+   "id": "kimi-k2.7-code",
+   "new": {
+    "go": 60,
+    "go-plus": 180,
+    "go-teams": 65
+   },
+   "old": {
+    "go": 60,
+    "go-plus": 180,
+    "go-teams": 65
+   },
+   "changed": false
+  },
+  {
+   "model": "Kimi K3",
+   "id": "kimi-k3",
+   "new": {
+    "go": 15,
+    "go-plus": 60,
+    "go-teams": 20
+   },
+   "old": {
+    "go": 15,
+    "go-plus": 60,
+    "go-teams": 20
+   },
+   "changed": false
+  },
+  {
+   "model": "MiMo-V2.6-Flash",
+   "id": "mimo-v2.6-flash",
+   "new": {
+    "go": 60,
+    "go-plus": 120,
+    "go-teams": 65
+   },
+   "old": {
+    "go": 60,
+    "go-plus": 120,
+    "go-teams": 65
+   },
+   "changed": false
+  },
+  {
+   "model": "MiMo-V2.6-Pro",
+   "id": "mimo-v2.6-pro",
+   "new": {
+    "go": 15,
+    "go-plus": 60,
+    "go-teams": 20
+   },
+   "old": {
+    "go": 15,
+    "go-plus": 60,
+    "go-teams": 20
+   },
+   "changed": false
+  },
+  {
+   "model": "MiniMax-M3",
+   "id": "minimax-m3",
+   "new": {
+    "go": 60,
+    "go-plus": 180,
+    "go-teams": 65
+   },
+   "old": {
+    "go": 60,
+    "go-plus": 180,
+    "go-teams": 65
+   },
+   "changed": false
+  },
+  {
+   "model": "MiniMax M3.1 Flash",
+   "id": "minimax-m3.1-flash",
+   "new": {
+    "go": 20,
+    "go-plus": 80,
+    "go-teams": 25
+   },
+   "old": {
+    "go": 20,
+    "go-plus": 80,
+    "go-teams": 25
+   },
+   "changed": false
+  },
+  {
+   "model": "Step 5 Preview",
+   "id": "step-5-preview",
+   "new": {
+    "go": 15,
+    "go-plus": 60,
+    "go-teams": 20
+   },
+   "old": {
+    "go": 15,
+    "go-plus": 60,
+    "go-teams": 20
+   },
+   "changed": false
+  },
+  {
+   "model": "Beam Free",
+   "id": "beam-free",
+   "new": null,
+   "old": {
+    "go": "Unlimited",
+    "go-plus": "Unlimited",
+    "go-teams": "Unlimited"
+   },
+   "changed": "no monthly_usage in API (was in table)"
+  },
+  {
+   "model": "Qwen3.8 Max",
+   "id": "qwen3.8-max",
+   "new": {
+    "go": 15,
+    "go-plus": 60,
+    "go-teams": 20
+   },
+   "old": {
+    "go": 15,
+    "go-plus": 60,
+    "go-teams": 20
+   },
+   "changed": false
+  },
+  {
+   "model": "Qwen3.8 Flash",
+   "id": "qwen3.8-flash",
+   "new": {
+    "go": 30,
+    "go-plus": 90,
+    "go-teams": 35
+   },
+   "old": {
+    "go": 30,
+    "go-plus": 90,
+    "go-teams": 35
+   },
+   "changed": false
+  },
+  {
+   "model": "Qwen3.7 Plus",
+   "id": "qwen3.7-plus",
+   "new": {
+    "go": 60,
+    "go-plus": 180,
+    "go-teams": 65
+   },
+   "old": {
+    "go": 60,
+    "go-plus": 180,
+    "go-teams": 65
+   },
+   "changed": false
+  },
+  {
+   "model": "Kimi K3.1 Pro",
+   "id": "kimi-k3.1-pro",
+   "new": {
+    "go": 60,
+    "go-plus": 120,
+    "go-teams": 65
+   },
+   "old": {
+    "go": 15,
+    "go-plus": 60,
+    "go-teams": 20
+   },
+   "changed": true
+  },
+  {
+   "model": "Iceman Contributor Free",
+   "id": "iceman-contributor-free",
+   "new": null,
+   "old": {
+    "go": "Unlimited",
+    "go-plus": "Unlimited",
+    "go-teams": "Unlimited"
+   },
+   "changed": "no monthly_usage in API (was in table)"
+  },
+  {
+   "model": "Gemini 4 Argon",
+   "id": "gemini-4-argon",
+   "new": {
+    "go": 30,
+    "go-plus": 120,
+    "go-teams": 35
+   },
+   "old": {
+    "go": 30,
+    "go-plus": 120,
+    "go-teams": 35
+   },
+   "changed": false
+  },
+  {
+   "model": "Hy4",
+   "id": "hy4",
+   "new": {
+    "go": 60,
+    "go-plus": 240,
+    "go-teams": 65
+   },
+   "old": {
+    "go": 60,
+    "go-plus": 240,
+    "go-teams": 65
+   },
+   "changed": false
+  },
+  {
+   "model": "Hy4 flash Free",
+   "id": "hy4-flash-free",
+   "new": null,
+   "old": null
+  },
+  {
+   "model": "Qwen4 Max",
+   "id": "qwen4-max",
+   "new": {
+    "go": 15,
+    "go-plus": 60,
+    "go-teams": 20
+   },
+   "old": null,
+   "changed": "added (not in the 2026-11-11 table)"
+  },
+  {
+   "model": "LongCat-2.5",
+   "id": "longcat-2.5",
+   "new": {
+    "go": 60,
+    "go-plus": 240,
+    "go-teams": 65
+   },
+   "old": {
+    "go": "Unlimited",
+    "go-plus": "Unlimited",
+    "go-teams": "Unlimited"
+   },
+   "changed": true
+  },
+  {
+   "model": "HungerG Free",
+   "id": "hungerg-free",
+   "new": null,
+   "old": null
+  },
+  {
+   "model": "Jev 1.14",
+   "id": "jev-1.14",
+   "new": {
+    "go": 10,
+    "go-plus": 40,
+    "go-teams": 15
+   },
+   "old": null,
+   "changed": "added (not in the 2026-11-11 table)"
+  },
+  {
+   "model": "Gemini Decision 1",
+   "id": "gemini-decision-1",
+   "new": {
+    "go": 10,
+    "go-plus": 40,
+    "go-teams": 15
+   },
+   "old": null,
+   "changed": "added (not in the 2026-11-11 table)"
+  },
+  {
+   "model": "GPT-6 Luna Decision",
+   "id": "gpt-6-luna-decision",
+   "new": {
+    "go": 10,
+    "go-plus": 40,
+    "go-teams": 15
+   },
+   "old": null,
+   "changed": "added (not in the 2026-11-11 table)"
+  },
+  {
+   "model": "text-embedding-3-small",
+   "id": "text-embedding-3-small",
+   "new": {
+    "go": 10,
+    "go-plus": 40,
+    "go-teams": 15
+   },
+   "old": null,
+   "changed": "added (not in the 2026-11-11 table)"
+  },
+  {
+   "model": "Qwen3 Embedding 8B",
+   "id": "qwen3-embedding-8b",
+   "new": {
+    "go": 10,
+    "go-plus": 40,
+    "go-teams": 15
+   },
+   "old": null,
+   "changed": "added (not in the 2026-11-11 table)"
+  },
+  {
+   "model": "Gemini Embedding 2",
+   "id": "gemini-embedding-2",
+   "new": {
+    "go": 10,
+    "go-plus": 40,
+    "go-teams": 15
+   },
+   "old": null,
+   "changed": "added (not in the 2026-11-11 table)"
+  }
+ ],
+ "oldRowsNotInNewList": [
+  "GLM-5.2",
+  "LongCat-2.0",
+  "MiMo-V2.5",
+  "MiMo-V2.5-Pro"
+ ]
+}
