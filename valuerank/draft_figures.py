@@ -484,8 +484,8 @@ def known_names(scores: dict, data: Path = DATA) -> list[str]:
     names |= {leaf.label for leaf in q.ALL_LEAVES.values()}
     routes = json.loads((data / "plan_cost_routes.json").read_text())
     names |= {route["plan"] for route in routes["routes"] if route.get("plan")}
-    names |= {"LiveBench 2.0", "Terminal-Bench 4.1", "FrontierCode 1.1", "Vibe Code Bench v1.1", "Code Migration v1.1", "Bug Hunt Bench",
-              "Coding Agent Index v2.0", "Intelligence Index v4.3.2", "AA-LCR v1.1", "Max 5x", "Max 20x", "Pro 500"}
+    names |= {"LiveBench 2.0", "Terminal-Bench 4.1", "FrontierCode 1.1", "Vibe Code Bench v1.1", "Vibe Code Bench v1.1.1", "Code Migration v1.1", "Bug Hunt Bench",
+              "Coding Agent Index v2.0", "Coding Agent Index v2.1", "Intelligence Index v5.0.2", "Intelligence Index v4.3.2", "AA-LCR v1.1", "Max 5x", "Max 20x", "Pro 500"}
     return sorted((name for name in names if name and re.search(r"\d", name)), key=len, reverse=True)
 
 

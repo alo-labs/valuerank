@@ -49,6 +49,7 @@ LEAF_TRANSFORMS = {
     "frontierCode": "z = 100 × score",
     "terminalBench": "z = resolution %",
     "gdpval": "z = 100 × (Elo − 500) / 2000 (AA's integration transform)",
+    "gdpPdf": "z = 100 × share of tasks fully passed (O210)",
     "automationBench": "z = 100 × score",
     "omniscience": "z = (I + 100) / 2 on AA's Omniscience Index I (O28)",
     "lcr": "z = 100 × accuracy",
@@ -57,7 +58,7 @@ LEAF_TRANSFORMS = {
     "critpt": "z = 100 × score",
     "vibeCode": "z = pass rate %",
     "codeMigration": "z = pass rate %",
-    "livebench2Overall": "z = LiveBench's weighted Overall of the seven category scores (release 2026-10-25, O67, O139)",
+    "livebench2Overall": "z = LiveBench's weighted Overall of the seven category scores (release 2026-11-06, O67, O211)",
     "aiCodingDaily": "z = 100 × points / 80",
 }
 SOURCE_LABELS = {"aa": "AA-run", "independent": "independent"}
@@ -388,7 +389,7 @@ CODING_COMPONENTS = ("coding-agent-index", "terminalbench-4-1", "frontiercode-2-
 # quality sits with science (O136), so the share is also printed with it counted.
 TERMINAL_SCIENCE = "terminal-bench-science"
 # Basket components priced in the cost but with no quality leaf of their own (E203 disclosure; O6 and O15 stand).
-UNREWARDED_COMPONENTS = ("aa-briefcase", "gdp-pdf")
+UNREWARDED_COMPONENTS = ("aa-briefcase",)  # GDP.pdf has a quality leaf since O210
 
 
 def _median_share(v3, keys):
@@ -418,7 +419,8 @@ def coding_share_text(v3):
                f"({pct(wide[1], 0)} to {pct(wide[2], 0)}; E343)" if wide else "")
     return (f" Coding and terminal tasks ({labels}) make up {pct(middle, 0)} of the basket's cost (median over {n} configurations "
             f"with the full basket; {pct(low, 0)} to {pct(high, 0)}){science}; {', '.join(component_label(key) for key in UNREWARDED_COMPONENTS)}, "
-            f"which have no quality leaf, make up {pct(unrewarded, 0)}{atlas}.")
+            f"{'which has' if len(UNREWARDED_COMPONENTS) == 1 else 'which have'} no quality leaf, "
+            f"{'makes' if len(UNREWARDED_COMPONENTS) == 1 else 'make'} up {pct(unrewarded, 0)}{atlas}.")
 
 
 def influence_text(v3, short=False):
@@ -978,7 +980,7 @@ Scenario shares by stream, diagnostics and the release gates are in [scores.md](
 ## Sources and audit trail
 
 - [Artificial Analysis methodology]({AA_METHODOLOGY_URL}) and its model pages: Intelligence Index component scores and the per-task evaluation costs of the basket.
-- [AA Coding Agent Index v2.0]({AA_CODING_AGENTS_URL}): the Coding Agent Index cost (FrontierCode, Terminal-Bench and SWE-Atlas-QnA-AA) for each exact configuration (O50); AA withdrew DeepSWE v1.1 in October 2026 and it is no longer a leaf (O49).
+- [AA Coding Agent Index v2.1]({AA_CODING_AGENTS_URL}): the Coding Agent Index cost (FrontierCode 2.0, Terminal-Bench and SWE-Atlas-QnA-AA) for each exact configuration (O50); AA withdrew DeepSWE v1.1 in October 2026 and it is no longer a leaf (O49).
 - AA's own Terminal-Bench 4.1 run (the leaf; [tbench.ai]({TERMINAL_BENCH_URL}) rows fill a gap and serve as a cross-check, O37), [Bug Hunt Bench]({BUG_HUNT_URL}) owner-published runs, [Cognition's FrontierCode leaderboard]({facts.leaf_evidence['cognitionCapture']['url']}) and model-provider results for leaves AA has not run (O36).
 - [SemiAnalysis subscription measurements]({SEMIANALYSIS_URL}) (owner-selected 2026-10-07) for the Claude and ChatGPT plan Value Multiples; owner-named transfers are labelled as assumptions.
 - The evidence bundle in `data/scores.json` lists every input artifact with its SHA-256; bundle hash `{v3['evidenceBundle']['bundleHash']}`.
@@ -1721,7 +1723,8 @@ def cost_diagnostics_markdown(facts):
     if frontier["status"] == "evaluated":
         lines.append(
             f"- **Frontier-families anchors (E187, diagnostic):** anchors rebuilt from the {len(frontier['references'])} frontier and near-frontier references move "
-            + "; ".join(f"{label} {rank_change_text(frontier['bases'][basis]['rankChanges']['changes'], facts.labels)} (value points per cost doubling {fnum(frontier['bases'][basis]['exchangeRate']['valuePointsPerCostDoubling'], 2)} vs {fnum(frontier['bases'][basis]['frozenExchangeRate']['valuePointsPerCostDoubling'], 2)} frozen)" for basis, label in (("api", "API"), ("plan", "Plan")))
+            + "; ".join(f"{label} {rank_change_text(frontier['bases'][basis]['rankChanges']['changes'], facts.labels)} (value points per cost doubling {fnum(frontier['bases'][basis]['exchangeRate']['valuePointsPerCostDoubling'], 2)} vs {fnum(frontier['bases'][basis]['frozenExchangeRate']['valuePointsPerCostDoubling'], 2)} frozen)"
+                        if "rankChanges" in frontier["bases"][basis] else f"{label} anchors {frontier['bases'][basis]['status']}" for basis, label in (("api", "API"), ("plan", "Plan")))
             + "."
         )
     else:

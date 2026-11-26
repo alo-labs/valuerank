@@ -1,5 +1,5 @@
 {
-  "asOf": "2026-11-05",
+  "asOf": "2026-11-26",
   "policy": {
     "announcedChanges": {
       "rule": "Provider announcements of changes that take effect after the release cutoff: recorded when seen, flag nothing until in force, then recorded as a typed change (O77, O99) at the release at which they take effect (reviewer 78).",
@@ -17,12 +17,52 @@
           "change": "one token allowance shared by ChatGPT and Codex for Plus, Pro and Business (instant chat excluded); per-plan sizes not published",
           "source": "OpenAI help center (updated 2026-10-31), as reported by several outlets on 2026-10-31 and 2026-11-01; Fei2411/real-api-pricing issue 178",
           "status": "announced, not in force at the 2026-11-01T06:10:00Z cutoff"
+        },
+        {
+          "provider": "Anthropic",
+          "plans": [
+            "Claude Pro",
+            "Claude Max 5x",
+            "Claude Max 20x"
+          ],
+          "announcedOn": "2026-11-26",
+          "effective": "2026-12-07",
+          "change": "purchased usage credits expire after 12 months (plan allowances untouched)",
+          "source": "research/2026-11-26-plan-allowances/changes.json (anthropic-usage-credit-expiry)",
+          "status": "announced, not in force"
+        },
+        {
+          "provider": "OpenAI",
+          "plans": [
+            "ChatGPT Plus",
+            "ChatGPT Pro 100",
+            "ChatGPT Pro 200",
+            "ChatGPT Pro 500"
+          ],
+          "announcedOn": "2026-10-31",
+          "effective": "December 2026 (no day stated)",
+          "change": "the shared ChatGPT and Codex token allowance is still announced, not in force on 2026-11-26 (help article updated 2026-11-25, no sizes)",
+          "source": "research/2026-11-26-plan-allowances/changes.json (openai-december-shared-allowance)",
+          "status": "announced, not in force at the 2026-11-26 cutoff"
+        },
+        {
+          "provider": "Google",
+          "plans": [
+            "Google AI Pro",
+            "Google AI Ultra 5x",
+            "Google AI Ultra 20x"
+          ],
+          "announcedOn": "2026-11-23",
+          "effective": "2026-11-30 and 2026-12-01",
+          "change": "Gemini 4 Argon and Carbon API prices rise from $2/$10 to $4/$20 and Argon, Gemini 3.8 Flash, GPT-OSS-120b and Claude 4.6 leave Antigravity",
+          "source": "research/2026-11-26-plan-allowances/changes.json (google-30-nov-removals-and-carbon-price)",
+          "status": "announced, not in force at the 2026-11-26 cutoff"
         }
       ]
     },
     "reportingWindow": {
-      "start": "2026-10-02",
-      "end": "2026-11-01"
+      "start": "2026-10-27",
+      "end": "2026-11-26"
     },
     "planAliases": {
       "Claude Max 5x": {
@@ -36,7 +76,7 @@
         "source": "Anthropic announcement, 2026-10-30"
       }
     },
-    "searchCutoff": "2026-11-05",
+    "searchCutoff": "2026-11-26",
     "searchLog": [
       {
         "searchedOn": "2026-10-08",
@@ -253,6 +293,66 @@
             "reached": "host search and fetch; Arctic Shift; Hacker News; GitHub issue pages via fetch; Google AI forum; aiplans.dev; LINUX DO topic 3071240 directly",
             "unreachable": "linux.do search and latest (Cloudflare challenge); X search; GitHub REST for openai/codex and anthropics/claude-code; Zhihu; YouTube"
           }
+        ]
+      },
+      {
+        "searchedOn": "2026-11-26",
+        "scope": "New cohort models (Claude Fable 5.2, GPT-6.2 Sol, GPT-6.2 Astra, Gemini 4 Neon, Muse Ember) and the retained cohort models on every first-party plan (Anthropic Claude Pro/Max 5x/Max 20x (Ultra); OpenAI ChatGPT Plus and Pro 100/200/500 in Codex and Work; Google AI Pro and Ultra 5x/20x in Antigravity and the Gemini app; Meta Muse Code plans; Xiaomi MiMo Token Plan), plus the OpenCode Go re-fetch (O198), in three stages: plain web search, Claude's Deep Research (degraded: no Agent tool, one researcher), Perplexity (Silver Bullet Deep Research unavailable)",
+        "record": "research/2026-11-26-plan-allowances/",
+        "reached": "web search; provider help centres, pricing pages and release notes (Anthropic, OpenAI, Google Antigravity and AI plans, Meta Muse Code and Model API docs, Xiaomi MiMo docs); Reddit via Arctic Shift (38,996 posts in 17 subreddits, 3,919 comments); Hacker News (Algolia); Bluesky; X post JSON via fxtwitter; aiplans.dev; Atlas ADE; single Google AI forum, OpenAI community and LINUX DO (locdd mirror) topics; Perplexity (Claude Sonnet 5.5, GPT-6.2 Sol, Kimi K3)",
+        "unreachable": "github.com and api.github.com (session proxy; the four queued GitHub reports have no byte-exact copy); claudeissues.com, thenewstack.io, androidauthority.com, fourweekmba.com, reddit.com direct; X search; Google AI forum, OpenAI community and LINUX DO sweeps (rate limited, partial); r/ClaudeAI and r/ChatGPTPro comment sweeps; V2EX; Zhihu",
+        "qualifyingNewReports": 15,
+        "qualifyingNewReportsNote": "records, from 9 observers, eligible under the recorder's reading of O11/O82/O86/O87/O165; 30 records from 15 observers have byte-exact archives; the four queued GitHub reports and the unarchivable ricardoraposo comment are not counted",
+        "o164Result": "recorder's reading: Fable 5.2 x Ultra x week passes (MulletIQ $560-$720 Fable meter, MRC2021 $565 at the half-week cap); Opus 5.5 x Ultra x week borderline (every pair passes, the three together miss the 1.20 margin by 3%); Opus 5.5 x Max 5x x month passes only if sunaurus's weekly range is pooled into the month at 52/12 with Huryn; every other cell has at most one eligible report",
+        "providers": [
+          "Anthropic",
+          "OpenAI",
+          "Google",
+          "Meta",
+          "Xiaomi",
+          "OpenCode Go (O198)"
+        ],
+        "changesFound": "research/2026-11-26-plan-allowances/changes.json: 21 records, 13 benign, 6 unclear, 2 adverse (purchased-credit expiry from 2026-12-07; GPT-6.2 Sol on Plus measured at 0.83 by one observer)",
+        "stages": [
+          {
+            "stage": "plain web search",
+            "method": "WebSearch tool plus direct page fetches",
+            "record": "research/2026-11-26-plan-allowances/stage1/queries-websearch.md",
+            "queries": 37,
+            "actualStage": "plain web search",
+            "outcome": "no new report admitted by this stage alone; 37 searches and about 70 page fetches (stage1/queries-websearch.md)"
+          },
+          {
+            "stage": "Claude's Deep Research",
+            "method": "anthropic-skills deep-research loaded; no Agent tool, so one researcher followed researcher.md; structured sweeps of Reddit, Hacker News, Bluesky, X, forums",
+            "record": "research/2026-11-26-plan-allowances/stage2/README.md",
+            "actualStage": "Claude's Deep Research",
+            "outcome": "structured sweeps of 38,996 Reddit posts, 3,919 comments, 1,695 Hacker News items, 341 Bluesky posts and X post JSON; the Google forum, OpenAI community and LINUX DO sweeps were rate-limited and partial (stage2/README.md)"
+          },
+          {
+            "stage": "Silver Bullet's Deep Research",
+            "method": "perplexity skill driver, one prompt to three models, every claim re-fetched",
+            "record": "research/2026-11-26-plan-allowances/stage3/README.md",
+            "actualStage": "Perplexity (Silver Bullet's Deep Research unavailable)",
+            "outcome": "the same prompt to three Perplexity models (Claude Sonnet 5.5, GPT-6.2 Sol, Kimi K3); every claim re-fetched; several of their claims were wrong or unverifiable (stage3/README.md)",
+            "degraded": "Silver Bullet's Deep Research is unavailable in this environment; this stage ran through Perplexity (three models), as the record states"
+          }
+        ],
+        "models": [
+          "Claude Fable 5.2",
+          "Claude Opus 5.5",
+          "Claude Sonnet 5.5",
+          "Claude Haiku 5.5",
+          "GPT-6.2 Sol",
+          "GPT-6.2 Astra",
+          "GPT-6.1 Sol",
+          "GPT-6.1 Terra",
+          "GPT-6 Astra",
+          "GPT-6 Luna",
+          "Gemini 4 Neon",
+          "Gemini 4 Carbon",
+          "Muse Ember",
+          "MiMo-V2.6-Flash"
         ]
       }
     ],
@@ -595,20 +695,103 @@
           "type": "limit",
           "direction": "benign",
           "basis": "E18 change detected: an ≈50% quota increase measured by kojimako and okarin (independent per-token fits) on CN plans; owner decision O84 (2026-10-28): it splits every Kimi plan"
+        },
+        {
+          "provider": "Anthropic",
+          "meterFamily": "Claude",
+          "date": "2026-11-09",
+          "type": "availability",
+          "basis": "Claude Fable 5.2 launched on the Claude plans: Max and Ultra inside the weekly pool (up to 50% of the weekly limit), Pro on usage credits (Claude help centre, archived in research/2026-11-26-plan-allowances/)"
+        },
+        {
+          "provider": "Google",
+          "plans": [
+            "Google AI Ultra 5x",
+            "Google AI Ultra 20x"
+          ],
+          "date": "2026-11-10",
+          "type": "availability",
+          "basis": "Gemini 4 Carbon offered on Google AI Ultra (research/2026-11-26-plan-allowances/, google-carbon-gemini-app-ultra)"
+        },
+        {
+          "provider": "OpenAI",
+          "plans": [
+            "ChatGPT Plus",
+            "ChatGPT Pro 100",
+            "ChatGPT Pro 200",
+            "ChatGPT Pro 500"
+          ],
+          "date": "2026-11-17",
+          "type": "availability",
+          "basis": "GPT-6.2 Sol and Astra offered in ChatGPT Work and Codex on the plans (OpenAI release notes; research/2026-11-26-plan-allowances/)"
+        },
+        {
+          "provider": "OpenAI",
+          "plans": [
+            "ChatGPT Plus",
+            "ChatGPT Pro 100",
+            "ChatGPT Pro 200",
+            "ChatGPT Pro 500"
+          ],
+          "date": "2026-11-17",
+          "type": "metering",
+          "basis": "GPT-6.2's speed modes meter at Fast 2x and Ultrafast 6x (GPT-6.1 and GPT-6: 2.5x and 8x); a metering announcement is logged, it does not split (O99)"
+        },
+        {
+          "provider": "Google",
+          "plans": [
+            "Google AI Pro",
+            "Google AI Ultra 5x",
+            "Google AI Ultra 20x"
+          ],
+          "date": "2026-11-17",
+          "type": "reset",
+          "basis": "Antigravity quota reset for all users (research/2026-11-26-plan-allowances/, google-antigravity-reset-first-birthday)"
+        },
+        {
+          "provider": "Google",
+          "plans": [
+            "Google AI Pro",
+            "Google AI Ultra 5x",
+            "Google AI Ultra 20x"
+          ],
+          "date": "2026-11-18",
+          "type": "availability",
+          "basis": "Gemini 4 Neon launched in Antigravity and the Gemini app on Google AI Pro and Ultra (research/2026-11-26-plan-allowances/)"
+        },
+        {
+          "provider": "Google",
+          "plans": [
+            "Google AI Pro",
+            "Google AI Ultra 5x",
+            "Google AI Ultra 20x"
+          ],
+          "date": "2026-11-21",
+          "type": "metering",
+          "basis": "Antigravity caching gain announced with a reset; metering is logged, not split (O99)"
+        },
+        {
+          "provider": "Google",
+          "plans": [
+            "Google AI Pro"
+          ],
+          "date": "2026-11-23",
+          "type": "availability",
+          "basis": "Gemini 4 Carbon offered on paid Google AI Pro in Antigravity (research/2026-11-26-plan-allowances/)"
         }
       ]
     },
-    "openCodeGoApplication": "Owner decisions O198 and O199 (2026-11-11), an explicit exception to the end-user numerator rule: OpenCode's published monthly dollar limit per model on the single-member Go plan ($10 a month) is the plan's actual limit, a hard cap on usage metered at OpenCode's listed token prices, so each cohort model it lists takes limit / fee as its Value Multiple at full use of the limit, labelled a published dollar limit (the plan's terms, not a measurement and not a ceiling), and needs no staged end-user-report search. Go Plus and Go Teams are not Plan-basis plans. Evidence: research/2026-11-11-opencode-go/ (page archived with its SHA-256). Owner decision O203 (2026-11-14): the page was read on 2026-11-11 and read again on 2026-11-12 with identical tables, both after the 2026-11-01 release cutoff, and the routes are admitted at this release on that reading; the plan's terms at the cutoff itself were not observed.",
+    "openCodeGoApplication": "Owner decisions O198 and O199 (2026-11-11), an explicit exception to the end-user numerator rule: OpenCode's published monthly dollar limit per model on the single-member Go plan ($10 a month) is the plan's actual limit, a hard cap on usage metered at OpenCode's listed token prices, so each cohort model it lists takes limit / fee as its Value Multiple at full use of the limit, labelled a published dollar limit (the plan's terms, not a measurement and not a ceiling), and needs no staged end-user-report search. Go Plus and Go Teams are not Plan-basis plans. Evidence: research/2026-11-11-opencode-go/ (page archived with its SHA-256). Owner decision O203 (2026-11-14): the page was read on 2026-11-11 and read again on 2026-11-12 with identical tables, both after the 2026-11-01 release cutoff, and the routes are admitted at this release on that reading; the plan's terms at the cutoff itself were not observed. The page was read again on 2026-11-26T03:10:58Z (SHA-256 40c238db6cfc8ae3dcb3ecef1c309af1e1a376bebd2ca12cf7b85228a971379c, research/2026-11-26-plan-allowances/opencode-go/): no cohort model's monthly dollar limit or fee changed and none was added or removed. The page was read again on 2026-11-26T03:10:58Z (SHA-256 40c238db6cfc8ae3dcb3ecef1c309af1e1a376bebd2ca12cf7b85228a971379c, research/2026-11-26-plan-allowances/opencode-go/): no cohort model's monthly dollar limit or fee changed and none was added or removed. The page was read again on 2026-11-26T03:10:58Z (SHA-256 40c238db6cfc8ae3dcb3ecef1c309af1e1a376bebd2ca12cf7b85228a971379c, research/2026-11-26-plan-allowances/opencode-go/): no cohort model's monthly dollar limit or fee changed and none was added or removed. The page was read again on 2026-11-26T03:10:58Z (SHA-256 40c238db6cfc8ae3dcb3ecef1c309af1e1a376bebd2ca12cf7b85228a971379c, research/2026-11-26-plan-allowances/opencode-go/): no cohort model's monthly dollar limit or fee changed and none was added or removed.",
     "mimoApplication": "Owner decision O46 (2026-10-23), an explicit exception to the end-user numerator rule: each MiMo-V2.6 model takes, per Token Plan tier, the quota-implied ceiling (the tier's monthly credits valued at Xiaomi's pay-as-you-go rate for that model, divided by the list fee), labelled provider-derived. It replaces the 2026-10-08 provisional 1.5x assumption. End-user measurements for the exact model and tier replace the ceiling once they meet the admission rule of any other provider's route (O11); one report alone does not (owner decision O62).",
     "unsupportedModels": "Use API fallback; do not transfer evidence across model versions or variants except for the explicit common GPT, Claude and MiMo assumptions; across thinking effort, plan-allowance evidence for a model serves its other efforts (O87 for user reports, O88 for SemiAnalysis measurements, labelled and counted as measured evidence under O90).",
     "claudeApplication": "User authorizes (2026-10-18, Option 2) applying Opus 5.5's measured SemiAnalysis Claude plan multiples to every other Claude model. Opus 5.5 keeps its exact measured routes; the shared routes are labelled user assumptions, carry the recorded caution that allowances are model-specific (Fable 5.1 measured 12.4-12.7x on the same plans), and are superseded by any exact measurement for the listed model. Claude Fable 5.1 (retained 2026-10-21, owner decision O31) has exact SemiAnalysis measurements on Max 5x (12.73x) and Max 20x (12.425x), which replace the shared routes for it; it has no Pro route, because the source records Fable as unavailable on Pro, so there is no Pro allowance to measure or assume. Owner decision O33 (2026-10-21) ranks Claude Haiku 5.5 (max, high, medium, low) and Claude Sonnet 5.5 (xhigh, high, medium, low) as their own rows; as other Claude models in the roster they take the shared assumption routes. Owner decision O88 (2026-10-28): Opus 5.5's other efforts (xhigh, high, medium) take its figure as a same-model measurement from another effort (measured evidence under O90), not as the shared assumption; the multiple is the same."
   },
   "identificationYield": {
-    "rows": 30,
+    "rows": 19,
     "pointIdentified": 0,
     "setIdentified": 0,
-    "unidentified": 30,
-    "configurations": 9,
+    "unidentified": 19,
+    "configurations": 5,
     "configurationBalancedYield": 0.0,
     "exploratory": true
   },
@@ -3506,35 +3689,14 @@
   ],
   "candidates": [
     {
-      "slug": "claude-haiku-5-5-max",
-      "name": "Claude Haiku 5.5 (max)",
-      "rank": {
-        "api": 7,
-        "plan": 12
-      },
-      "apiUsd": 1046.0801077265787,
-      "planUsd": 17.760273475833255,
-      "fallback": null,
-      "routeId": "claude-pro-claude-haiku-5-5-max-common-opus55-assumption",
-      "flags": [
-        "workload-unmatched",
-        "owner-named transfer (assumption)",
-        "possibly-superseded",
-        "valuation basis unverified"
-      ],
-      "measuredOnly": {
-        "status": "no measured route"
-      }
-    },
-    {
       "slug": "claude-opus-5-5",
-      "name": "Claude Opus 5.5 (max)",
+      "name": "Claude Opus 5.5",
       "rank": {
         "api": 5,
-        "plan": 5
+        "plan": 8
       },
-      "apiUsd": 10360.959965732674,
-      "planUsd": 175.90763948612351,
+      "apiUsd": 11109.815873733918,
+      "planUsd": 188.62166169327534,
       "fallback": null,
       "routeId": "claude-pro-opus55-semianalysis",
       "flags": [
@@ -3547,9 +3709,9 @@
         "routeId": "claude-pro-opus55-semianalysis",
         "crossEffort": false,
         "faultWindow": null,
-        "costUsd": 175.90763948612351,
-        "costScore": 69.18996378638403,
-        "value": 67.95360314931419,
+        "costUsd": 188.62166169327534,
+        "costScore": 68.34892970487594,
+        "value": 65.32612267928657,
         "rank": 2
       }
     },
@@ -3557,11 +3719,11 @@
       "slug": "claude-sonnet-5-5",
       "name": "Claude Sonnet 5.5",
       "rank": {
-        "api": 6,
-        "plan": 7
+        "api": 4,
+        "plan": 5
       },
-      "apiUsd": 10501.818258108602,
-      "planUsd": 178.29912152985742,
+      "apiUsd": 10314.721013086955,
+      "planUsd": 175.1225978452794,
       "fallback": null,
       "routeId": "claude-pro-claude-sonnet-5-5-common-opus55-assumption",
       "flags": [
@@ -3575,52 +3737,14 @@
       }
     },
     {
-      "slug": "deepseek-v4-1-flash-1017",
-      "name": "DeepSeek V4.1 Flash 1017",
-      "rank": {
-        "api": 2,
-        "plan": 11
-      },
-      "apiUsd": 531.4356367333653,
-      "planUsd": 53.14356367333653,
-      "fallback": null,
-      "routeId": "opencode-go-deepseek-v4-1-flash-1017-dollar-limit",
-      "flags": [
-        "workload-unmatched",
-        "published dollar limit; full use of the limit assumed, at the seller's listed token prices (O198)"
-      ],
-      "measuredOnly": {
-        "status": "no measured route"
-      }
-    },
-    {
-      "slug": "gemini-4-argon",
-      "name": "Gemini 4 Argon",
-      "rank": {
-        "api": 8,
-        "plan": 24
-      },
-      "apiUsd": 8880.92222822785,
-      "planUsd": 2960.307409409283,
-      "fallback": null,
-      "routeId": "opencode-go-gemini-4-argon-dollar-limit",
-      "flags": [
-        "workload-unmatched",
-        "published dollar limit; full use of the limit assumed, at the seller's listed token prices (O198)"
-      ],
-      "measuredOnly": {
-        "status": "no measured route"
-      }
-    },
-    {
       "slug": "gpt-6-1-sol",
       "name": "GPT-6.1 Sol (max)",
       "rank": {
         "api": 1,
         "plan": 1
       },
-      "apiUsd": 1387.027111800466,
-      "planUsd": 128.76226437063366,
+      "apiUsd": 1435.8027861947912,
+      "planUsd": 133.29026979156993,
       "fallback": null,
       "routeId": "chatgpt-pro500-gpt61sol-semianalysis",
       "flags": [
@@ -3634,9 +3758,9 @@
         "routeId": "chatgpt-pro500-gpt61sol-semianalysis",
         "crossEffort": false,
         "faultWindow": "OpenAI support e-mail quoted by Vanja Petreski: Pro 200 → Pro 500 upgrades kept the previous plan's allowance until corrected on 2026-10-16",
-        "costUsd": 128.76226437063366,
-        "costScore": 78.75328586775798,
-        "value": 70.31274993732659,
+        "costUsd": 133.29026979156993,
+        "costScore": 78.91227510562544,
+        "value": 67.98948489846025,
         "rank": 1
       }
     },
@@ -3644,11 +3768,11 @@
       "slug": "gpt-6-astra",
       "name": "GPT-6 Astra (max)",
       "rank": {
-        "api": 3,
-        "plan": 15
+        "api": 2,
+        "plan": 11
       },
-      "apiUsd": 6808.390554424009,
-      "planUsd": 470.0304145270286,
+      "apiUsd": 7223.31220571871,
+      "planUsd": 498.67533349801244,
       "fallback": null,
       "routeId": "chatgpt-pro200-gpt6astra-semianalysis",
       "flags": [
@@ -3661,9 +3785,9 @@
         "routeId": "chatgpt-pro200-gpt6astra-semianalysis",
         "crossEffort": false,
         "faultWindow": null,
-        "costUsd": 470.0304145270286,
-        "costScore": 39.063483485023276,
-        "value": 60.97171984452988,
+        "costUsd": 498.67533349801244,
+        "costScore": 38.771171298344626,
+        "value": 58.83127394658296,
         "rank": 3
       }
     },
@@ -3671,11 +3795,11 @@
       "slug": "gpt-6-luna",
       "name": "GPT-6 Luna (max)",
       "rank": {
-        "api": 4,
-        "plan": 18
+        "api": 3,
+        "plan": 14
       },
-      "apiUsd": 158.9913590982512,
-      "planUsd": 14.759687996495655,
+      "apiUsd": 174.71545036374937,
+      "planUsd": 16.219406829163514,
       "fallback": null,
       "routeId": "chatgpt-pro500-gpt-6-luna-common-gpt-assumption",
       "flags": [
@@ -3684,25 +3808,6 @@
         "possibly-superseded",
         "measured inside an acknowledged accounting-fault window (O91, O92)",
         "valuation basis unverified"
-      ],
-      "measuredOnly": {
-        "status": "no measured route"
-      }
-    },
-    {
-      "slug": "mimo-v2-6-pro",
-      "name": "MiMo-V2.6-Pro",
-      "rank": {
-        "api": null,
-        "plan": null
-      },
-      "apiUsd": 171.70030964750728,
-      "planUsd": 114.46687309833818,
-      "fallback": null,
-      "routeId": "opencode-go-mimo-v2-6-pro-dollar-limit",
-      "flags": [
-        "workload-unmatched",
-        "published dollar limit; full use of the limit assumed, at the seller's listed token prices (O198)"
       ],
       "measuredOnly": {
         "status": "no measured route"

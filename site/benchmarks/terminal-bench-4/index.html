@@ -3,19 +3,19 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Terminal-Bench 4.0: resolution rate versus cost · ValueRank</title>
-  <meta name="description" content="The official Terminal-Bench 4.0 leaderboard against run cost, with ValueRank cohort coverage and labelled provider claims.">
+  <title>Terminal-Bench 4.1: resolution rate versus cost · ValueRank</title>
+  <meta name="description" content="The official Terminal-Bench 4.1 leaderboard against run cost, with ValueRank cohort coverage and labelled provider claims.">
   <link rel="canonical" href="https://valuerank.alolabs.dev/benchmarks/terminal-bench-4/">
   <meta name="theme-color" content="#4f46e5">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="ValueRank">
-  <meta property="og:title" content="Terminal-Bench 4.0: resolution rate versus cost · ValueRank">
-  <meta property="og:description" content="The official Terminal-Bench 4.0 leaderboard against run cost, with ValueRank cohort coverage and labelled provider claims.">
+  <meta property="og:title" content="Terminal-Bench 4.1: resolution rate versus cost · ValueRank">
+  <meta property="og:description" content="The official Terminal-Bench 4.1 leaderboard against run cost, with ValueRank cohort coverage and labelled provider claims.">
   <meta property="og:url" content="https://valuerank.alolabs.dev/benchmarks/terminal-bench-4/">
   <meta property="og:image" content="https://valuerank.alolabs.dev/og/tb4.png">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Terminal-Bench 4.0: resolution rate versus cost · ValueRank">
-  <meta name="twitter:description" content="The official Terminal-Bench 4.0 leaderboard against run cost, with ValueRank cohort coverage and labelled provider claims.">
+  <meta name="twitter:title" content="Terminal-Bench 4.1: resolution rate versus cost · ValueRank">
+  <meta name="twitter:description" content="The official Terminal-Bench 4.1 leaderboard against run cost, with ValueRank cohort coverage and labelled provider claims.">
   <meta name="twitter:image" content="https://valuerank.alolabs.dev/og/tb4.png">
   <link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
   <script>
@@ -50,9 +50,9 @@
   </header>
   <main id="main" class="wrap main" tabindex="-1">
 <header class="page-head">
-  <p class="eyebrow"><a href="/benchmarks/">Benchmarks</a> / Terminal-Bench 4.0</p>
-  <h1 id="page-title">Terminal-Bench 4.0</h1>
-  <p class="lead">Terminal-Bench measures how often an agent completes real command-line tasks. 23 official rows were captured, 5 of 37 roster models match one, and 3 sit on the frontier. Observed 2026-11-01 from <a href="https://www.tbench.ai/leaderboard/terminal-bench/4.0" rel="noopener">Terminal-Bench / Harbor</a>.</p>
+  <p class="eyebrow"><a href="/benchmarks/">Benchmarks</a> / Terminal-Bench 4.1</p>
+  <h1 id="page-title">Terminal-Bench 4.1</h1>
+  <p class="lead">Terminal-Bench measures how often an agent completes real command-line tasks. 54 official rows were captured, 12 of 45 roster models match one, and 6 sit on the frontier. Observed 2026-11-26 from <a href="https://www.tbench.ai/leaderboard/terminal-bench/4.1" rel="noopener">Terminal-Bench / Harbor</a>.</p>
 </header>
 
 <section class="block" id="score-vs-cost" aria-labelledby="svc-title">
@@ -73,165 +73,382 @@
       <thead><tr><th scope="col" class="col-num">Rank</th><th scope="col" class="col-model">Model</th><th scope="col">Agent</th><th scope="col" class="col-num">Resolved</th><th scope="col" class="col-num">&plusmn;</th><th scope="col" class="col-num">Cost (USD)</th></tr></thead>
       <tbody>        <tr>
           <td class="cell-num">1</td>
-          <th scope="row" class="cell-model"><span class="model-id"><span class="fn-host"><span class="model-name">Opus 5.5 (max)</span><sup class="fn-ref"><a href="#ev-tb4-official" id="evref-tb4-official-1" aria-label="Evidence note 1 for Opus 5.5 (max)">1</a></sup></span><span class="model-dev">Sep 22, 2026 &middot; 8.0B tokens</span></span></th>
+          <th scope="row" class="cell-model"><span class="model-id"><span class="fn-host"><span class="model-name">Copilot Fusion (max)</span><sup class="fn-ref"><a href="#ev-tb4-official" id="evref-tb4-official-1" aria-label="Evidence note 1 for Copilot Fusion (max)">1</a></sup></span><span class="model-dev">Nov 17, 2026 &middot; 3.3B tokens</span></span></th>
+          <td>GitHub Copilot</td>
+          <td class="cell-num">71.2%</td>
+          <td class="cell-num">2.9</td>
+          <td class="cell-num">$2,000</td>
+        </tr>        <tr>
+          <td class="cell-num">2</td>
+          <th scope="row" class="cell-model"><span class="model-id"><span class="fn-host"><span class="model-name">Opus 5.5 (max)</span><sup class="fn-ref"><a href="#ev-tb4-official" id="evref-tb4-official-2" aria-label="Evidence note 1 for Opus 5.5 (max)">1</a></sup></span><span class="model-dev">Sep 22, 2026 &middot; 8.0B tokens</span></span></th>
           <td>Claude Code</td>
-          <td class="cell-num">64.8%</td>
+          <td class="cell-num">65.8%</td>
           <td class="cell-num">3.1</td>
           <td class="cell-num">$4,700</td>
         </tr>        <tr>
           <td class="cell-num">2</td>
-          <th scope="row" class="cell-model"><span class="model-id"><span class="fn-host"><span class="model-name">Sonnet 5.5 (max)</span><sup class="fn-ref"><a href="#ev-tb4-official" id="evref-tb4-official-2" aria-label="Evidence note 1 for Sonnet 5.5 (max)">1</a></sup></span><span class="model-dev">Sep 28, 2026 &middot; 19.4B tokens</span></span></th>
+          <th scope="row" class="cell-model"><span class="model-id"><span class="fn-host"><span class="model-name">Fable 5.2 (max)</span><sup class="fn-ref"><a href="#ev-tb4-official" id="evref-tb4-official-3" aria-label="Evidence note 1 for Fable 5.2 (max)">1</a></sup></span><span class="model-dev">Nov 9, 2026 &middot; 15.7B tokens</span></span></th>
           <td>Claude Code</td>
-          <td class="cell-num">61.8%</td>
-          <td class="cell-num">2.9</td>
+          <td class="cell-num">65.8%</td>
+          <td class="cell-num">2.8</td>
+          <td class="cell-num">$16,500</td>
+        </tr>        <tr>
+          <td class="cell-num">4</td>
+          <th scope="row" class="cell-model"><span class="model-id"><span class="fn-host"><span class="model-name">Gemini 4 Carbon (high)</span><sup class="fn-ref"><a href="#ev-tb4-official" id="evref-tb4-official-4" aria-label="Evidence note 1 for Gemini 4 Carbon (high)">1</a></sup></span><span class="model-dev">Oct 28, 2026 &middot; 3.8B tokens</span></span></th>
+          <td>Antigravity CLI</td>
+          <td class="cell-num">64.5%</td>
+          <td class="cell-num">3.2</td>
+          <td class="cell-num">$1,400</td>
+        </tr>        <tr>
+          <td class="cell-num">5</td>
+          <th scope="row" class="cell-model"><span class="model-id"><span class="fn-host"><span class="model-name">Sonnet 5.5 (max)</span><sup class="fn-ref"><a href="#ev-tb4-official" id="evref-tb4-official-5" aria-label="Evidence note 1 for Sonnet 5.5 (max)">1</a></sup></span><span class="model-dev">Sep 28, 2026 &middot; 19.4B tokens</span></span></th>
+          <td>Claude Code</td>
+          <td class="cell-num">63.9%</td>
+          <td class="cell-num">3.0</td>
           <td class="cell-num">$7,300</td>
         </tr>        <tr>
-          <td class="cell-num">3</td>
-          <th scope="row" class="cell-model"><span class="model-id"><span class="fn-host"><span class="model-name">GPT-6 Astra (max)</span><sup class="fn-ref"><a href="#ev-tb4-official" id="evref-tb4-official-3" aria-label="Evidence note 1 for GPT-6 Astra (max)">1</a></sup></span><span class="model-dev">Sep 3, 2026 &middot; 1.5B tokens</span></span></th>
+          <td class="cell-num">6</td>
+          <th scope="row" class="cell-model"><span class="model-id"><span class="fn-host"><span class="model-name">GPT-6.2 Astra (max)</span><sup class="fn-ref"><a href="#ev-tb4-official" id="evref-tb4-official-6" aria-label="Evidence note 1 for GPT-6.2 Astra (max)">1</a></sup></span><span class="model-dev">Nov 17, 2026 &middot; 1.1B tokens</span></span></th>
           <td>Codex</td>
-          <td class="cell-num">58.2%</td>
+          <td class="cell-num">62.1%</td>
+          <td class="cell-num">2.3</td>
+          <td class="cell-num">$1,400</td>
+        </tr>        <tr>
+          <td class="cell-num">7</td>
+          <th scope="row" class="cell-model"><span class="model-id"><span class="fn-host"><span class="model-name">GPT-6.2 Sol (max)</span><sup class="fn-ref"><a href="#ev-tb4-official" id="evref-tb4-official-7" aria-label="Evidence note 1 for GPT-6.2 Sol (max)">1</a></sup></span><span class="model-dev">Nov 17, 2026 &middot; 1.1B tokens</span></span></th>
+          <td>Codex</td>
+          <td class="cell-num">61.5%</td>
+          <td class="cell-num">2.8</td>
+          <td class="cell-num">$300</td>
+        </tr>        <tr>
+          <td class="cell-num">8</td>
+          <th scope="row" class="cell-model"><span class="model-id"><span class="fn-host"><span class="model-name">Gemini 4 Neon (xhigh)</span><sup class="fn-ref"><a href="#ev-tb4-official" id="evref-tb4-official-8" aria-label="Evidence note 1 for Gemini 4 Neon (xhigh)">1</a></sup></span><span class="model-dev">Nov 18, 2026 &middot; 3.2B tokens</span></span></th>
+          <td>Antigravity CLI</td>
+          <td class="cell-num">61.2%</td>
+          <td class="cell-num">2.8</td>
+          <td class="cell-num">$1,900</td>
+        </tr>        <tr>
+          <td class="cell-num">9</td>
+          <th scope="row" class="cell-model"><span class="model-id"><span class="fn-host"><span class="model-name">GPT-6.1 Sol (max)</span><sup class="fn-ref"><a href="#ev-tb4-official" id="evref-tb4-official-9" aria-label="Evidence note 1 for GPT-6.1 Sol (max)">1</a></sup></span><span class="model-dev">Sep 29, 2026 &middot; 1.5B tokens</span></span></th>
+          <td>Codex</td>
+          <td class="cell-num">60.9%</td>
+          <td class="cell-num">3.0</td>
+          <td class="cell-num">$600</td>
+        </tr>        <tr>
+          <td class="cell-num">10</td>
+          <th scope="row" class="cell-model"><span class="model-id"><span class="fn-host"><span class="model-name">GPT-6 Astra (max)</span><sup class="fn-ref"><a href="#ev-tb4-official" id="evref-tb4-official-10" aria-label="Evidence note 1 for GPT-6 Astra (max)">1</a></sup></span><span class="model-dev">Sep 3, 2026 &middot; 1.5B tokens</span></span></th>
+          <td>Codex</td>
+          <td class="cell-num">60.3%</td>
           <td class="cell-num">2.8</td>
           <td class="cell-num">$3,300</td>
         </tr>        <tr>
-          <td class="cell-num">3</td>
-          <th scope="row" class="cell-model"><span class="model-id"><span class="fn-host"><span class="model-name">GPT-6.1 Sol (max)</span><sup class="fn-ref"><a href="#ev-tb4-official" id="evref-tb4-official-4" aria-label="Evidence note 1 for GPT-6.1 Sol (max)">1</a></sup></span><span class="model-dev">Sep 29, 2026 &middot; 1.5B tokens</span></span></th>
-          <td>Codex</td>
-          <td class="cell-num">58.2%</td>
+          <td class="cell-num">11</td>
+          <th scope="row" class="cell-model"><span class="model-id"><span class="fn-host"><span class="model-name">Kimi K3.1 Pro (max)</span><sup class="fn-ref"><a href="#ev-tb4-official" id="evref-tb4-official-11" aria-label="Evidence note 1 for Kimi K3.1 Pro (max)">1</a></sup></span><span class="model-dev">Oct 24, 2026 &middot; 3.2B tokens</span></span></th>
+          <td>Claude Code</td>
+          <td class="cell-num">59.7%</td>
+          <td class="cell-num">4.2</td>
+          <td class="cell-num">$1,100</td>
+        </tr>        <tr>
+          <td class="cell-num">12</td>
+          <th scope="row" class="cell-model"><span class="model-id"><span class="fn-host"><span class="model-name">Fable 5.1 (xhigh)</span><sup class="fn-ref"><a href="#ev-tb4-official" id="evref-tb4-official-12" aria-label="Evidence note 1 for Fable 5.1 (xhigh)">1</a></sup></span><span class="model-dev">Sep 1, 2026 &middot; 2.3B tokens</span></span></th>
+          <td>Claude Code</td>
+          <td class="cell-num">57.6%</td>
+          <td class="cell-num">3.3</td>
+          <td class="cell-num">$4,900</td>
+        </tr>        <tr>
+          <td class="cell-num">13</td>
+          <th scope="row" class="cell-model"><span class="model-id"><span class="fn-host"><span class="model-name">Gemini 4 Hydrogen (high)</span><sup class="fn-ref"><a href="#ev-tb4-official" id="evref-tb4-official-13" aria-label="Evidence note 1 for Gemini 4 Hydrogen (high)">1</a></sup></span><span class="model-dev">Nov 12, 2026 &middot; 3.6B tokens</span></span></th>
+          <td>Antigravity CLI</td>
+          <td class="cell-num">56.4%</td>
+          <td class="cell-num">3.0</td>
+          <td class="cell-num">$800</td>
+        </tr>        <tr>
+          <td class="cell-num">14</td>
+          <th scope="row" class="cell-model"><span class="model-id"><span class="fn-host"><span class="model-name">Gemini 4 Argon (high)</span><sup class="fn-ref"><a href="#ev-tb4-official" id="evref-tb4-official-14" aria-label="Evidence note 1 for Gemini 4 Argon (high)">1</a></sup></span><span class="model-dev">Sep 30, 2026 &middot; 2.8B tokens</span></span></th>
+          <td>Antigravity CLI</td>
+          <td class="cell-num">55.5%</td>
+          <td class="cell-num">2.8</td>
+          <td class="cell-num">$1,100</td>
+        </tr>        <tr>
+          <td class="cell-num">15</td>
+          <th scope="row" class="cell-model"><span class="model-id"><span class="fn-host"><span class="model-name">Opus 5 (xhigh)</span><sup class="fn-ref"><a href="#ev-tb4-official" id="evref-tb4-official-15" aria-label="Evidence note 1 for Opus 5 (xhigh)">1</a></sup></span><span class="model-dev">Jul 24, 2026 &middot; 6.9B tokens</span></span></th>
+          <td>Claude Code</td>
+          <td class="cell-num">53.3%</td>
           <td class="cell-num">3.1</td>
-          <td class="cell-num">$600</td>
-        </tr>        <tr>
-          <td class="cell-num">5</td>
-          <th scope="row" class="cell-model"><span class="model-id"><span class="fn-host"><span class="model-name">Fable 5.1 (max)</span><sup class="fn-ref"><a href="#ev-tb4-official" id="evref-tb4-official-5" aria-label="Evidence note 1 for Fable 5.1 (max)">1</a></sup></span><span class="model-dev">Sep 1, 2026 &middot; 2.7B tokens</span></span></th>
-          <td>Claude Code</td>
-          <td class="cell-num">57.9%</td>
-          <td class="cell-num">3.8</td>
-          <td class="cell-num">$6,200</td>
-        </tr>        <tr>
-          <td class="cell-num">6</td>
-          <th scope="row" class="cell-model"><span class="model-id"><span class="fn-host"><span class="model-name">Opus 5 (xhigh)</span><sup class="fn-ref"><a href="#ev-tb4-official" id="evref-tb4-official-6" aria-label="Evidence note 1 for Opus 5 (xhigh)">1</a></sup></span><span class="model-dev">Jul 24, 2026 &middot; 6.9B tokens</span></span></th>
-          <td>Claude Code</td>
-          <td class="cell-num">53.9%</td>
-          <td class="cell-num">3.2</td>
           <td class="cell-num">$6,100</td>
         </tr>        <tr>
-          <td class="cell-num">7</td>
-          <th scope="row" class="cell-model"><span class="model-id"><span class="fn-host"><span class="model-name">GPT-6 Sol (max)</span><sup class="fn-ref"><a href="#ev-tb4-official" id="evref-tb4-official-7" aria-label="Evidence note 1 for GPT-6 Sol (max)">1</a></sup></span><span class="model-dev">Sep 22, 2026 &middot; 5.0B tokens</span></span></th>
+          <td class="cell-num">15</td>
+          <th scope="row" class="cell-model"><span class="model-id"><span class="fn-host"><span class="model-name">GPT-6.1 Terra (max)</span><sup class="fn-ref"><a href="#ev-tb4-official" id="evref-tb4-official-16" aria-label="Evidence note 1 for GPT-6.1 Terra (max)">1</a></sup></span><span class="model-dev">Oct 26, 2026 &middot; 8.5B tokens</span></span></th>
           <td>Codex</td>
-          <td class="cell-num">49.4%</td>
+          <td class="cell-num">53.3%</td>
+          <td class="cell-num">3.1</td>
+          <td class="cell-num">$900</td>
+        </tr>        <tr>
+          <td class="cell-num">17</td>
+          <th scope="row" class="cell-model"><span class="model-id"><span class="fn-host"><span class="model-name">GPT-6 Sol (max)</span><sup class="fn-ref"><a href="#ev-tb4-official" id="evref-tb4-official-17" aria-label="Evidence note 1 for GPT-6 Sol (max)">1</a></sup></span><span class="model-dev">Sep 22, 2026 &middot; 5.0B tokens</span></span></th>
+          <td>Codex</td>
+          <td class="cell-num">50.3%</td>
           <td class="cell-num">3.2</td>
           <td class="cell-num">$1,500</td>
         </tr>        <tr>
-          <td class="cell-num">8</td>
-          <th scope="row" class="cell-model"><span class="model-id"><span class="fn-host"><span class="model-name">Fable 5 (max)</span><sup class="fn-ref"><a href="#ev-tb4-official" id="evref-tb4-official-8" aria-label="Evidence note 1 for Fable 5 (max)">1</a></sup></span><span class="model-dev">Jun 9, 2026 &middot; 3.8B tokens</span></span></th>
-          <td>Claude Code</td>
-          <td class="cell-num">44.5%</td>
-          <td class="cell-num">3.8</td>
-          <td class="cell-num">$7,300</td>
-        </tr>        <tr>
-          <td class="cell-num">9</td>
-          <th scope="row" class="cell-model"><span class="model-id"><span class="fn-host"><span class="model-name">GLM-5.3 (max)</span><sup class="fn-ref"><a href="#ev-tb4-official" id="evref-tb4-official-9" aria-label="Evidence note 1 for GLM-5.3 (max)">1</a></sup></span><span class="model-dev">Aug 14, 2026 &middot; 8.7B tokens</span></span></th>
-          <td>Claude Code</td>
-          <td class="cell-num">41.8%</td>
-          <td class="cell-num">3.2</td>
-          <td class="cell-num">$2,700</td>
-        </tr>        <tr>
-          <td class="cell-num">10</td>
-          <th scope="row" class="cell-model"><span class="model-id"><span class="fn-host"><span class="model-name">Grok 4.7 (xhigh)</span><sup class="fn-ref"><a href="#ev-tb4-official" id="evref-tb4-official-10" aria-label="Evidence note 1 for Grok 4.7 (xhigh)">1</a></sup></span><span class="model-dev">Sep 21, 2026 &middot; 5.5B tokens</span></span></th>
-          <td>Grok Build</td>
-          <td class="cell-num">37.6%</td>
-          <td class="cell-num">3.5</td>
-          <td class="cell-num">$3,700</td>
-        </tr>        <tr>
-          <td class="cell-num">11</td>
-          <th scope="row" class="cell-model"><span class="model-id"><span class="fn-host"><span class="model-name">GPT-5.6 Sol (max)</span><sup class="fn-ref"><a href="#ev-tb4-official" id="evref-tb4-official-11" aria-label="Evidence note 1 for GPT-5.6 Sol (max)">1</a></sup></span><span class="model-dev">Jun 26, 2026 &middot; 4.4B tokens</span></span></th>
-          <td>Codex</td>
-          <td class="cell-num">37.3%</td>
+          <td class="cell-num">18</td>
+          <th scope="row" class="cell-model"><span class="model-id"><span class="fn-host"><span class="model-name">Muse Wonder (xhigh)</span><sup class="fn-ref"><a href="#ev-tb4-official" id="evref-tb4-official-18" aria-label="Evidence note 1 for Muse Wonder (xhigh)">1</a></sup></span><span class="model-dev">Oct 12, 2026 &middot; 5.5B tokens</span></span></th>
+          <td>Muse Code</td>
+          <td class="cell-num">47.0%</td>
           <td class="cell-num">3.8</td>
           <td class="cell-num">$2,500</td>
         </tr>        <tr>
-          <td class="cell-num">12</td>
-          <th scope="row" class="cell-model"><span class="model-id"><span class="fn-host"><span class="model-name">GLM-5.3-Flash (none)</span><sup class="fn-ref"><a href="#ev-tb4-official" id="evref-tb4-official-12" aria-label="Evidence note 1 for GLM-5.3-Flash (none)">1</a></sup></span><span class="model-dev">Aug 26, 2026 &middot; 2.9B tokens</span></span></th>
+          <td class="cell-num">19</td>
+          <th scope="row" class="cell-model"><span class="model-id"><span class="fn-host"><span class="model-name">Fable 5 (max)</span><sup class="fn-ref"><a href="#ev-tb4-official" id="evref-tb4-official-19" aria-label="Evidence note 1 for Fable 5 (max)">1</a></sup></span><span class="model-dev">Jun 9, 2026 &middot; 3.8B tokens</span></span></th>
           <td>Claude Code</td>
-          <td class="cell-num">35.8%</td>
-          <td class="cell-num">3.5</td>
-          <td class="cell-num">$100</td>
+          <td class="cell-num">44.8%</td>
+          <td class="cell-num">3.8</td>
+          <td class="cell-num">$7,300</td>
         </tr>        <tr>
-          <td class="cell-num">13</td>
-          <th scope="row" class="cell-model"><span class="model-id"><span class="fn-host"><span class="model-name">Qwen3.8-Max-0902 (max)</span><sup class="fn-ref"><a href="#ev-tb4-official" id="evref-tb4-official-13" aria-label="Evidence note 1 for Qwen3.8-Max-0902 (max)">1</a></sup></span><span class="model-dev">Sep 2, 2026 &middot; 3.0B tokens</span></span></th>
+          <td class="cell-num">20</td>
+          <th scope="row" class="cell-model"><span class="model-id"><span class="fn-host"><span class="model-name">GLM-5.3 (max)</span><sup class="fn-ref"><a href="#ev-tb4-official" id="evref-tb4-official-20" aria-label="Evidence note 1 for GLM-5.3 (max)">1</a></sup></span><span class="model-dev">Aug 14, 2026 &middot; 8.7B tokens</span></span></th>
+          <td>Claude Code</td>
+          <td class="cell-num">41.2%</td>
+          <td class="cell-num">3.3</td>
+          <td class="cell-num">$2,700</td>
+        </tr>        <tr>
+          <td class="cell-num">21</td>
+          <th scope="row" class="cell-model"><span class="model-id"><span class="fn-host"><span class="model-name">Haiku 5.5 (max)</span><sup class="fn-ref"><a href="#ev-tb4-official" id="evref-tb4-official-21" aria-label="Evidence note 1 for Haiku 5.5 (max)">1</a></sup></span><span class="model-dev">Oct 7, 2026 &middot; 12.1B tokens</span></span></th>
+          <td>Claude Code</td>
+          <td class="cell-num">40.0%</td>
+          <td class="cell-num">3.6</td>
+          <td class="cell-num">$1,000</td>
+        </tr>        <tr>
+          <td class="cell-num">22</td>
+          <th scope="row" class="cell-model"><span class="model-id"><span class="fn-host"><span class="model-name">Grok 4.7 (xhigh)</span><sup class="fn-ref"><a href="#ev-tb4-official" id="evref-tb4-official-22" aria-label="Evidence note 1 for Grok 4.7 (xhigh)">1</a></sup></span><span class="model-dev">Sep 21, 2026 &middot; 5.5B tokens</span></span></th>
+          <td>Grok Build</td>
+          <td class="cell-num">38.8%</td>
+          <td class="cell-num">3.6</td>
+          <td class="cell-num">$3,700</td>
+        </tr>        <tr>
+          <td class="cell-num">23</td>
+          <th scope="row" class="cell-model"><span class="model-id"><span class="fn-host"><span class="model-name">GPT-5.6 Sol (max)</span><sup class="fn-ref"><a href="#ev-tb4-official" id="evref-tb4-official-23" aria-label="Evidence note 1 for GPT-5.6 Sol (max)">1</a></sup></span><span class="model-dev">Jun 26, 2026 &middot; 4.4B tokens</span></span></th>
+          <td>Codex</td>
+          <td class="cell-num">38.5%</td>
+          <td class="cell-num">3.8</td>
+          <td class="cell-num">$2,500</td>
+        </tr>        <tr>
+          <td class="cell-num">23</td>
+          <th scope="row" class="cell-model"><span class="model-id"><span class="fn-host"><span class="model-name">DeepSeek V4.1 Flash 1017 (max)</span><sup class="fn-ref"><a href="#ev-tb4-official" id="evref-tb4-official-24" aria-label="Evidence note 1 for DeepSeek V4.1 Flash 1017 (max)">1</a></sup></span><span class="model-dev">Oct 17, 2026 &middot; 8.2B tokens</span></span></th>
+          <td>Claude Code</td>
+          <td class="cell-num">38.5%</td>
+          <td class="cell-num">3.8</td>
+          <td class="cell-num">$200</td>
+        </tr>        <tr>
+          <td class="cell-num">25</td>
+          <th scope="row" class="cell-model"><span class="model-id"><span class="fn-host"><span class="model-name">Hy4 (max)</span><sup class="fn-ref"><a href="#ev-tb4-official" id="evref-tb4-official-25" aria-label="Evidence note 1 for Hy4 (max)">1</a></sup></span><span class="model-dev">Nov 4, 2026 &middot; 5.3B tokens</span></span></th>
+          <td>Claude Code</td>
+          <td class="cell-num">37.9%</td>
+          <td class="cell-num">3.5</td>
+          <td class="cell-num">$300</td>
+        </tr>        <tr>
+          <td class="cell-num">26</td>
+          <th scope="row" class="cell-model"><span class="model-id"><span class="fn-host"><span class="model-name">GLM-5.3-Flash (max)</span><sup class="fn-ref"><a href="#ev-tb4-official" id="evref-tb4-official-26" aria-label="Evidence note 1 for GLM-5.3-Flash (max)">1</a></sup></span><span class="model-dev">Aug 26, 2026 &middot; 8.2B tokens</span></span></th>
+          <td>Claude Code</td>
+          <td class="cell-num">37.0%</td>
+          <td class="cell-num">3.6</td>
+          <td class="cell-num">$400</td>
+        </tr>        <tr>
+          <td class="cell-num">27</td>
+          <th scope="row" class="cell-model"><span class="model-id"><span class="fn-host"><span class="model-name">Muse Ember (xhigh)</span><sup class="fn-ref"><a href="#ev-tb4-official" id="evref-tb4-official-27" aria-label="Evidence note 1 for Muse Ember (xhigh)">1</a></sup></span><span class="model-dev">Nov 9, 2026 &middot; 8.1B tokens</span></span></th>
+          <td>Muse Code</td>
+          <td class="cell-num">30.6%</td>
+          <td class="cell-num">3.8</td>
+          <td class="cell-num">$200</td>
+        </tr>        <tr>
+          <td class="cell-num">28</td>
+          <th scope="row" class="cell-model"><span class="model-id"><span class="fn-host"><span class="model-name">Mistral Large 4 (max)</span><sup class="fn-ref"><a href="#ev-tb4-official" id="evref-tb4-official-28" aria-label="Evidence note 1 for Mistral Large 4 (max)">1</a></sup></span><span class="model-dev">Oct 6, 2026 &middot; 5.8B tokens</span></span></th>
+          <td>Claude Code</td>
+          <td class="cell-num">27.6%</td>
+          <td class="cell-num">3.9</td>
+          <td class="cell-num">$700</td>
+        </tr>        <tr>
+          <td class="cell-num">29</td>
+          <th scope="row" class="cell-model"><span class="model-id"><span class="fn-host"><span class="model-name">Qwen3.8-Max-0902 (max)</span><sup class="fn-ref"><a href="#ev-tb4-official" id="evref-tb4-official-29" aria-label="Evidence note 1 for Qwen3.8-Max-0902 (max)">1</a></sup></span><span class="model-dev">Sep 2, 2026 &middot; 3.0B tokens</span></span></th>
           <td>Claude Code</td>
           <td class="cell-num">27.0%</td>
-          <td class="cell-num">3.8</td>
+          <td class="cell-num">3.9</td>
           <td class="cell-num">$4,600</td>
         </tr>        <tr>
-          <td class="cell-num">14</td>
-          <th scope="row" class="cell-model"><span class="model-id"><span class="fn-host"><span class="model-name">Opus 4.8 (max)</span><sup class="fn-ref"><a href="#ev-tb4-official" id="evref-tb4-official-14" aria-label="Evidence note 1 for Opus 4.8 (max)">1</a></sup></span><span class="model-dev">May 28, 2026 &middot; 6.4B tokens</span></span></th>
+          <td class="cell-num">29</td>
+          <th scope="row" class="cell-model"><span class="model-id"><span class="fn-host"><span class="model-name">MiMo V2.6 Pro (none)</span><sup class="fn-ref"><a href="#ev-tb4-official" id="evref-tb4-official-30" aria-label="Evidence note 1 for MiMo V2.6 Pro (none)">1</a></sup></span><span class="model-dev">Sep 22, 2026 &middot; 7.8B tokens</span></span></th>
+          <td>mini-swe-agent</td>
+          <td class="cell-num">27.0%</td>
+          <td class="cell-num">3.6</td>
+          <td class="cell-num">$300</td>
+        </tr>        <tr>
+          <td class="cell-num">31</td>
+          <th scope="row" class="cell-model"><span class="model-id"><span class="fn-host"><span class="model-name">Opus 4.8 (max)</span><sup class="fn-ref"><a href="#ev-tb4-official" id="evref-tb4-official-31" aria-label="Evidence note 1 for Opus 4.8 (max)">1</a></sup></span><span class="model-dev">May 28, 2026 &middot; 6.4B tokens</span></span></th>
           <td>Claude Code</td>
           <td class="cell-num">23.6%</td>
           <td class="cell-num">3.6</td>
           <td class="cell-num">$6,500</td>
         </tr>        <tr>
-          <td class="cell-num">15</td>
-          <th scope="row" class="cell-model"><span class="model-id"><span class="fn-host"><span class="model-name">GPT-5.6 Terra (max)</span><sup class="fn-ref"><a href="#ev-tb4-official" id="evref-tb4-official-15" aria-label="Evidence note 1 for GPT-5.6 Terra (max)">1</a></sup></span><span class="model-dev">Jun 26, 2026 &middot; 5.7B tokens</span></span></th>
+          <td class="cell-num">32</td>
+          <th scope="row" class="cell-model"><span class="model-id"><span class="fn-host"><span class="model-name">Kimi K3 (max)</span><sup class="fn-ref"><a href="#ev-tb4-official" id="evref-tb4-official-32" aria-label="Evidence note 1 for Kimi K3 (max)">1</a></sup></span><span class="model-dev">Jul 16, 2026 &middot; 4.9B tokens</span></span></th>
+          <td>Claude Code</td>
+          <td class="cell-num">23.0%</td>
+          <td class="cell-num">3.7</td>
+          <td class="cell-num">$1,900</td>
+        </tr>        <tr>
+          <td class="cell-num">33</td>
+          <th scope="row" class="cell-model"><span class="model-id"><span class="fn-host"><span class="model-name">Ember-1 (none)</span><sup class="fn-ref"><a href="#ev-tb4-official" id="evref-tb4-official-33" aria-label="Evidence note 1 for Ember-1 (none)">1</a></sup></span><span class="model-dev">Sep 24, 2026 &middot; 11.9B tokens</span></span></th>
+          <td>mini-swe-agent</td>
+          <td class="cell-num">21.8%</td>
+          <td class="cell-num">3.5</td>
+          <td class="cell-num">$4,700</td>
+        </tr>        <tr>
+          <td class="cell-num">34</td>
+          <th scope="row" class="cell-model"><span class="model-id"><span class="fn-host"><span class="model-name">GPT-5.6 Terra (max)</span><sup class="fn-ref"><a href="#ev-tb4-official" id="evref-tb4-official-34" aria-label="Evidence note 1 for GPT-5.6 Terra (max)">1</a></sup></span><span class="model-dev">Jun 26, 2026 &middot; 5.7B tokens</span></span></th>
           <td>Codex</td>
           <td class="cell-num">21.5%</td>
           <td class="cell-num">3.3</td>
           <td class="cell-num">$1,700</td>
         </tr>        <tr>
-          <td class="cell-num">16</td>
-          <th scope="row" class="cell-model"><span class="model-id"><span class="fn-host"><span class="model-name">Grok 4.6 (high)</span><sup class="fn-ref"><a href="#ev-tb4-official" id="evref-tb4-official-16" aria-label="Evidence note 1 for Grok 4.6 (high)">1</a></sup></span><span class="model-dev">Aug 12, 2026 &middot; 4.0B tokens</span></span></th>
+          <td class="cell-num">35</td>
+          <th scope="row" class="cell-model"><span class="model-id"><span class="fn-host"><span class="model-name">Grok 4.6 (high)</span><sup class="fn-ref"><a href="#ev-tb4-official" id="evref-tb4-official-35" aria-label="Evidence note 1 for Grok 4.6 (high)">1</a></sup></span><span class="model-dev">Aug 12, 2026 &middot; 4.0B tokens</span></span></th>
           <td>Grok Build</td>
-          <td class="cell-num">20.3%</td>
+          <td class="cell-num">19.7%</td>
           <td class="cell-num">3.1</td>
           <td class="cell-num">$3,600</td>
         </tr>        <tr>
-          <td class="cell-num">17</td>
-          <th scope="row" class="cell-model"><span class="model-id"><span class="fn-host"><span class="model-name">Gemini 3.8 Flash (high)</span><sup class="fn-ref"><a href="#ev-tb4-official" id="evref-tb4-official-17" aria-label="Evidence note 1 for Gemini 3.8 Flash (high)">1</a></sup></span><span class="model-dev">Sep 2, 2026 &middot; 17.2B tokens</span></span></th>
-          <td>mini-SWE-agent</td>
+          <td class="cell-num">36</td>
+          <th scope="row" class="cell-model"><span class="model-id"><span class="fn-host"><span class="model-name">Hy4 Preview (max)</span><sup class="fn-ref"><a href="#ev-tb4-official" id="evref-tb4-official-36" aria-label="Evidence note 1 for Hy4 Preview (max)">1</a></sup></span><span class="model-dev">Aug 28, 2026 &middot; 6.0B tokens</span></span></th>
+          <td>Claude Code</td>
           <td class="cell-num">19.1%</td>
+          <td class="cell-num">3.1</td>
+          <td class="cell-num">$700</td>
+        </tr>        <tr>
+          <td class="cell-num">37</td>
+          <th scope="row" class="cell-model"><span class="model-id"><span class="fn-host"><span class="model-name">Gemini 3.8 Flash (high)</span><sup class="fn-ref"><a href="#ev-tb4-official" id="evref-tb4-official-37" aria-label="Evidence note 1 for Gemini 3.8 Flash (high)">1</a></sup></span><span class="model-dev">Sep 2, 2026 &middot; 17.2B tokens</span></span></th>
+          <td>mini-SWE-agent</td>
+          <td class="cell-num">18.2%</td>
           <td class="cell-num">3.4</td>
           <td class="cell-num">$1,800</td>
         </tr>        <tr>
-          <td class="cell-num">18</td>
-          <th scope="row" class="cell-model"><span class="model-id"><span class="fn-host"><span class="model-name">GPT-5.6 Luna (max)</span><sup class="fn-ref"><a href="#ev-tb4-official" id="evref-tb4-official-18" aria-label="Evidence note 1 for GPT-5.6 Luna (max)">1</a></sup></span><span class="model-dev">Jun 26, 2026 &middot; 11.6B tokens</span></span></th>
+          <td class="cell-num">38</td>
+          <th scope="row" class="cell-model"><span class="model-id"><span class="fn-host"><span class="model-name">GPT-5.6 Luna (max)</span><sup class="fn-ref"><a href="#ev-tb4-official" id="evref-tb4-official-38" aria-label="Evidence note 1 for GPT-5.6 Luna (max)">1</a></sup></span><span class="model-dev">Jun 26, 2026 &middot; 11.6B tokens</span></span></th>
           <td>Codex</td>
-          <td class="cell-num">17.3%</td>
-          <td class="cell-num">2.8</td>
+          <td class="cell-num">17.6%</td>
+          <td class="cell-num">2.9</td>
           <td class="cell-num">$300</td>
         </tr>        <tr>
-          <td class="cell-num">19</td>
-          <th scope="row" class="cell-model"><span class="model-id"><span class="fn-host"><span class="model-name">GPT-6 Luna (max)</span><sup class="fn-ref"><a href="#ev-tb4-official" id="evref-tb4-official-19" aria-label="Evidence note 1 for GPT-6 Luna (max)">1</a></sup></span><span class="model-dev">Sep 22, 2026 &middot; 3.9B tokens</span></span></th>
+          <td class="cell-num">39</td>
+          <th scope="row" class="cell-model"><span class="model-id"><span class="fn-host"><span class="model-name">MiMo V2.6 Flash (none)</span><sup class="fn-ref"><a href="#ev-tb4-official" id="evref-tb4-official-39" aria-label="Evidence note 1 for MiMo V2.6 Flash (none)">1</a></sup></span><span class="model-dev">Sep 22, 2026 &middot; 9.9B tokens</span></span></th>
+          <td>mini-swe-agent</td>
+          <td class="cell-num">16.1%</td>
+          <td class="cell-num">3.4</td>
+          <td class="cell-num">$200</td>
+        </tr>        <tr>
+          <td class="cell-num">40</td>
+          <th scope="row" class="cell-model"><span class="model-id"><span class="fn-host"><span class="model-name">GPT-6 Luna (max)</span><sup class="fn-ref"><a href="#ev-tb4-official" id="evref-tb4-official-40" aria-label="Evidence note 1 for GPT-6 Luna (max)">1</a></sup></span><span class="model-dev">Sep 22, 2026 &middot; 3.9B tokens</span></span></th>
           <td>Codex</td>
-          <td class="cell-num">16.4%</td>
+          <td class="cell-num">15.2%</td>
           <td class="cell-num">2.7</td>
           <td class="cell-num">$100</td>
         </tr>        <tr>
-          <td class="cell-num">20</td>
-          <th scope="row" class="cell-model"><span class="model-id"><span class="fn-host"><span class="model-name">Muse Spark 1.3 (xhigh)</span><sup class="fn-ref"><a href="#ev-tb4-official" id="evref-tb4-official-20" aria-label="Evidence note 1 for Muse Spark 1.3 (xhigh)">1</a></sup></span><span class="model-dev">Sep 2, 2026 &middot; 9.0B tokens</span></span></th>
+          <td class="cell-num">41</td>
+          <th scope="row" class="cell-model"><span class="model-id"><span class="fn-host"><span class="model-name">Muse Spark 1.3 (xhigh)</span><sup class="fn-ref"><a href="#ev-tb4-official" id="evref-tb4-official-41" aria-label="Evidence note 1 for Muse Spark 1.3 (xhigh)">1</a></sup></span><span class="model-dev">Sep 2, 2026 &middot; 9.0B tokens</span></span></th>
           <td>Muse Code</td>
-          <td class="cell-num">14.5%</td>
-          <td class="cell-num">2.9</td>
+          <td class="cell-num">14.8%</td>
+          <td class="cell-num">3.0</td>
           <td class="cell-num">Not published</td>
         </tr>        <tr>
-          <td class="cell-num">21</td>
-          <th scope="row" class="cell-model"><span class="model-id"><span class="fn-host"><span class="model-name">Grok 4.5 (high)</span><sup class="fn-ref"><a href="#ev-tb4-official" id="evref-tb4-official-21" aria-label="Evidence note 1 for Grok 4.5 (high)">1</a></sup></span><span class="model-dev">Jul 16, 2026 &middot; 3.4B tokens</span></span></th>
+          <td class="cell-num">42</td>
+          <th scope="row" class="cell-model"><span class="model-id"><span class="fn-host"><span class="model-name">Inkling Small 2 (xhigh)</span><sup class="fn-ref"><a href="#ev-tb4-official" id="evref-tb4-official-42" aria-label="Evidence note 1 for Inkling Small 2 (xhigh)">1</a></sup></span><span class="model-dev">Nov 5, 2026 &middot; 27.5B tokens</span></span></th>
+          <td>mini-swe-agent</td>
+          <td class="cell-num">13.0%</td>
+          <td class="cell-num">2.8</td>
+          <td class="cell-num">$1,000</td>
+        </tr>        <tr>
+          <td class="cell-num">43</td>
+          <th scope="row" class="cell-model"><span class="model-id"><span class="fn-host"><span class="model-name">Gemini 3.7 Flash (high)</span><sup class="fn-ref"><a href="#ev-tb4-official" id="evref-tb4-official-43" aria-label="Evidence note 1 for Gemini 3.7 Flash (high)">1</a></sup></span><span class="model-dev">Aug 13, 2026 &middot; 11.1B tokens</span></span></th>
+          <td>mini-SWE-agent</td>
+          <td class="cell-num">12.4%</td>
+          <td class="cell-num">2.5</td>
+          <td class="cell-num">$1,300</td>
+        </tr>        <tr>
+          <td class="cell-num">43</td>
+          <th scope="row" class="cell-model"><span class="model-id"><span class="fn-host"><span class="model-name">Grok 4.5 (high)</span><sup class="fn-ref"><a href="#ev-tb4-official" id="evref-tb4-official-44" aria-label="Evidence note 1 for Grok 4.5 (high)">1</a></sup></span><span class="model-dev">Jul 16, 2026 &middot; 3.4B tokens</span></span></th>
           <td>Grok Build</td>
           <td class="cell-num">12.4%</td>
           <td class="cell-num">2.6</td>
           <td class="cell-num">$2,100</td>
         </tr>        <tr>
-          <td class="cell-num">21</td>
-          <th scope="row" class="cell-model"><span class="model-id"><span class="fn-host"><span class="model-name">Sonnet 5 (max)</span><sup class="fn-ref"><a href="#ev-tb4-official" id="evref-tb4-official-22" aria-label="Evidence note 1 for Sonnet 5 (max)">1</a></sup></span><span class="model-dev">Jun 30, 2026 &middot; 21.6B tokens</span></span></th>
+          <td class="cell-num">45</td>
+          <th scope="row" class="cell-model"><span class="model-id"><span class="fn-host"><span class="model-name">Sonnet 5 (max)</span><sup class="fn-ref"><a href="#ev-tb4-official" id="evref-tb4-official-45" aria-label="Evidence note 1 for Sonnet 5 (max)">1</a></sup></span><span class="model-dev">Jun 30, 2026 &middot; 21.6B tokens</span></span></th>
           <td>Claude Code</td>
-          <td class="cell-num">12.4%</td>
-          <td class="cell-num">3.1</td>
+          <td class="cell-num">12.1%</td>
+          <td class="cell-num">3.0</td>
           <td class="cell-num">$9,600</td>
         </tr>        <tr>
-          <td class="cell-num">23</td>
-          <th scope="row" class="cell-model"><span class="model-id"><span class="fn-host"><span class="model-name">Gemini 3.7 Flash (high)</span><sup class="fn-ref"><a href="#ev-tb4-official" id="evref-tb4-official-23" aria-label="Evidence note 1 for Gemini 3.7 Flash (high)">1</a></sup></span><span class="model-dev">Aug 13, 2026 &middot; 11.1B tokens</span></span></th>
-          <td>mini-SWE-agent</td>
-          <td class="cell-num">11.2%</td>
-          <td class="cell-num">2.4</td>
-          <td class="cell-num">$1,300</td>
+          <td class="cell-num">46</td>
+          <th scope="row" class="cell-model"><span class="model-id"><span class="fn-host"><span class="model-name">Hy4 Flash (none)</span><sup class="fn-ref"><a href="#ev-tb4-official" id="evref-tb4-official-46" aria-label="Evidence note 1 for Hy4 Flash (none)">1</a></sup></span><span class="model-dev">Nov 16, 2026 &middot; 4.5B tokens</span></span></th>
+          <td>mini-swe-agent</td>
+          <td class="cell-num">11.8%</td>
+          <td class="cell-num">2.8</td>
+          <td class="cell-num">$0</td>
+        </tr>        <tr>
+          <td class="cell-num">47</td>
+          <th scope="row" class="cell-model"><span class="model-id"><span class="fn-host"><span class="model-name">MiniMax M3 (none)</span><sup class="fn-ref"><a href="#ev-tb4-official" id="evref-tb4-official-47" aria-label="Evidence note 1 for MiniMax M3 (none)">1</a></sup></span><span class="model-dev">Jun 1, 2026 &middot; 16.5B tokens</span></span></th>
+          <td>mini-swe-agent</td>
+          <td class="cell-num">7.6%</td>
+          <td class="cell-num">2.8</td>
+          <td class="cell-num">$1,100</td>
+        </tr>        <tr>
+          <td class="cell-num">48</td>
+          <th scope="row" class="cell-model"><span class="model-id"><span class="fn-host"><span class="model-name">DeepSeek V4 Pro 0813 (max)</span><sup class="fn-ref"><a href="#ev-tb4-official" id="evref-tb4-official-48" aria-label="Evidence note 1 for DeepSeek V4 Pro 0813 (max)">1</a></sup></span><span class="model-dev">Aug 13, 2026 &middot; 3.8B tokens</span></span></th>
+          <td>Claude Code</td>
+          <td class="cell-num">6.7%</td>
+          <td class="cell-num">2.5</td>
+          <td class="cell-num">$700</td>
+        </tr>        <tr>
+          <td class="cell-num">49</td>
+          <th scope="row" class="cell-model"><span class="model-id"><span class="fn-host"><span class="model-name">Beam 1.0 (none)</span><sup class="fn-ref"><a href="#ev-tb4-official" id="evref-tb4-official-49" aria-label="Evidence note 1 for Beam 1.0 (none)">1</a></sup></span><span class="model-dev">Oct 16, 2026 &middot; 4.1B tokens</span></span></th>
+          <td>mini-swe-agent</td>
+          <td class="cell-num">6.4%</td>
+          <td class="cell-num">1.7</td>
+          <td class="cell-num">$200</td>
+        </tr>        <tr>
+          <td class="cell-num">50</td>
+          <th scope="row" class="cell-model"><span class="model-id"><span class="fn-host"><span class="model-name">Gemini 3.1 Pro (high)</span><sup class="fn-ref"><a href="#ev-tb4-official" id="evref-tb4-official-50" aria-label="Evidence note 1 for Gemini 3.1 Pro (high)">1</a></sup></span><span class="model-dev">Feb 19, 2026 &middot; 7.9B tokens</span></span></th>
+          <td>Antigravity CLI</td>
+          <td class="cell-num">2.7%</td>
+          <td class="cell-num">1.7</td>
+          <td class="cell-num">$3,700</td>
+        </tr>        <tr>
+          <td class="cell-num">51</td>
+          <th scope="row" class="cell-model"><span class="model-id"><span class="fn-host"><span class="model-name">GPT-5.4 Mini (xhigh)</span><sup class="fn-ref"><a href="#ev-tb4-official" id="evref-tb4-official-51" aria-label="Evidence note 1 for GPT-5.4 Mini (xhigh)">1</a></sup></span><span class="model-dev">Mar 17, 2026 &middot; 4.2B tokens</span></span></th>
+          <td>Codex</td>
+          <td class="cell-num">1.8%</td>
+          <td class="cell-num">1.3</td>
+          <td class="cell-num">$700</td>
+        </tr>        <tr>
+          <td class="cell-num">52</td>
+          <th scope="row" class="cell-model"><span class="model-id"><span class="fn-host"><span class="model-name">Inkling Small (none)</span><sup class="fn-ref"><a href="#ev-tb4-official" id="evref-tb4-official-52" aria-label="Evidence note 1 for Inkling Small (none)">1</a></sup></span><span class="model-dev">Jul 30, 2026 &middot; 0.4B tokens</span></span></th>
+          <td>mini-swe-agent</td>
+          <td class="cell-num">0.9%</td>
+          <td class="cell-num">0.9</td>
+          <td class="cell-num">$0</td>
+        </tr>        <tr>
+          <td class="cell-num">53</td>
+          <th scope="row" class="cell-model"><span class="model-id"><span class="fn-host"><span class="model-name">Nemotron 3.5 Super VL (none)</span><sup class="fn-ref"><a href="#ev-tb4-official" id="evref-tb4-official-53" aria-label="Evidence note 1 for Nemotron 3.5 Super VL (none)">1</a></sup></span><span class="model-dev">Oct 15, 2026 &middot; 3.3B tokens</span></span></th>
+          <td>mini-swe-agent</td>
+          <td class="cell-num">0.3%</td>
+          <td class="cell-num">0.6</td>
+          <td class="cell-num">$200</td>
+        </tr>        <tr>
+          <td class="cell-num">54</td>
+          <th scope="row" class="cell-model"><span class="model-id"><span class="fn-host"><span class="model-name">Inkling (none)</span><sup class="fn-ref"><a href="#ev-tb4-official" id="evref-tb4-official-54" aria-label="Evidence note 1 for Inkling (none)">1</a></sup></span><span class="model-dev">Jul 17, 2026 &middot; 1.4B tokens</span></span></th>
+          <td>mini-swe-agent</td>
+          <td class="cell-num">0.0%</td>
+          <td class="cell-num">0.0</td>
+          <td class="cell-num">$1,000</td>
         </tr>      </tbody>
     </table>
   </div>
@@ -239,39 +456,28 @@
 
 <section class="block" id="provider-claims" aria-labelledby="claims-title">
   <h2 id="claims-title" class="section-title">Provider claim supplement</h2>
-  <p class="muted">Use exact-version provider claims only while the benchmark owner has no result; preserve claim type and evaluated model/alias details.</p>  <div class="table-wrap" tabindex="0" role="region" aria-label="Provider claim supplement table">
-    <table class="data-table">
-      <thead><tr><th scope="col" class="col-model">Model</th><th scope="col" class="col-num">Claimed</th><th scope="col">Publisher</th><th scope="col">Published</th><th scope="col">Scope</th></tr></thead>
-      <tbody>        <tr>
-          <th scope="row" class="cell-model"><span class="model-id"><span class="fn-host"><a class="model-name" href="https://api-docs.deepseek.com/updates/" rel="noopener">DeepSeek V4.1-Flash</a><sup class="fn-ref"><a href="#ev-tb4-claim-1" id="evref-tb4-claim-1" aria-label="Evidence note 2 for DeepSeek V4.1-Flash">2</a></sup></span></span></th>
-          <td class="cell-num">31.2%</td>
-          <td>DeepSeek</td>
-          <td>2026-09-10</td>
-          <td>current API alias<details class="evidence"><summary>Caveat</summary><p class="small">The provider reports TB4.0 for V4.1-Flash and says the deepseek-v4-flash API name is temporarily routed to it. This is a current-route claim, not a direct measurement of the retired V4 Flash model version. Remove the claim when the benchmark owner publishes a result for the mapped current route.</p></details></td>
-        </tr>      </tbody>
-    </table>
-  </div></section>
+  <p class="muted">Use exact-version provider claims only while the benchmark owner has no result; preserve claim type and evaluated model/alias details.</p>  <p class="state-box">No provider claims are used for this benchmark.</p></section>
 
 <section class="block" id="coverage" aria-labelledby="cov-title">
   <h2 id="cov-title" class="section-title">Roster coverage</h2>
-  <p>6 of 37 roster models have an eligible Terminal-Bench value. Models without one are excluded from this dimension and their score is renormalised.</p>  <h3 class="subhead">Without an eligible value</h3>
-  <ul class="chip-list"><li><span class="chip">GPT-6 Luna (low)</span></li><li><span class="chip">GPT-6 Luna (medium)</span></li><li><span class="chip">Claude Haiku 5.5 (low)</span></li><li><span class="chip">GPT-6 Luna (high)</span></li><li><span class="chip">Claude Haiku 5.5 (medium)</span></li><li><span class="chip">MiMo-V2.6-Flash</span></li><li><span class="chip">GPT-6.1 Terra (low)</span></li><li><span class="chip">Claude Haiku 5.5 (high)</span></li><li><span class="chip">GPT-6.1 Terra (medium)</span></li><li><span class="chip">GPT-6.1 Terra (high)</span></li><li><span class="chip">GPT-6.1 Sol (medium)</span></li><li><span class="chip">GPT-6.1 Sol (high)</span></li><li><span class="chip">GPT-6.1 Sol (xhigh)</span></li><li><span class="chip">GPT-6 Astra (high)</span></li><li><span class="chip">GPT-6 Astra (xhigh)</span></li><li><span class="chip">Claude Opus 5.5 (xhigh)</span></li><li><span class="chip">Gemini 4 Carbon</span></li><li><span class="chip">GPT-6 Luna (xhigh)</span></li><li><span class="chip">GPT-6.1 Sol (low)</span></li><li><span class="chip">GPT-6.1 Terra (xhigh)</span></li><li><span class="chip">GPT-6.1 Terra (max)</span></li><li><span class="chip">Claude Opus 5.5 (high)</span></li><li><span class="chip">Claude Haiku 5.5 (xhigh)</span></li><li><span class="chip">Claude Haiku 5.5 (max)</span></li><li><span class="chip">Claude Opus 5.5 (medium)</span></li><li><span class="chip">Claude Sonnet 5.5 (xhigh)</span></li><li><span class="chip">DeepSeek V4.1 Flash 1017</span></li><li><span class="chip">Gemini 4 Argon</span></li><li><span class="chip">GPT-5.6 Luna</span></li><li><span class="chip">Kimi K3.1 Pro</span></li><li><span class="chip">MiMo-V2.6-Pro</span></li><li><span class="chip">MiniMax-M3.1-Flash</span></li>  </ul></section>
+  <p>12 of 45 roster models have an eligible Terminal-Bench value. Models without one are excluded from this dimension and their score is renormalised.</p>  <h3 class="subhead">Without an eligible value</h3>
+  <ul class="chip-list"><li><span class="chip">GPT-6 Luna (low)</span></li><li><span class="chip">GPT-6 Luna (medium)</span></li><li><span class="chip">Claude Haiku 5.5 (low)</span></li><li><span class="chip">GPT-6 Luna (high)</span></li><li><span class="chip">Claude Haiku 5.5 (medium)</span></li><li><span class="chip">Muse Ember (max)</span></li><li><span class="chip">GPT-6.1 Terra (medium)</span></li><li><span class="chip">GPT-6.2 Sol (low)</span></li><li><span class="chip">GPT-6.1 Terra (high)</span></li><li><span class="chip">GPT-6.1 Sol (medium)</span></li><li><span class="chip">GPT-6.2 Sol (medium)</span></li><li><span class="chip">GPT-6.2 Sol (high)</span></li><li><span class="chip">GPT-6.2 Sol (xhigh)</span></li><li><span class="chip">GPT-6.2 Astra (high)</span></li><li><span class="chip">GPT-6.2 Astra (xhigh)</span></li><li><span class="chip">Claude Fable 5.2 (xhigh)</span></li><li><span class="chip">Claude Fable 5.2 (high)</span></li><li><span class="chip">Gemini 4 Neon (high)</span></li><li><span class="chip">GPT-6.2 Astra (medium)</span></li><li><span class="chip">Gemini 4 Neon (medium)</span></li><li><span class="chip">GPT-6.1 Terra (xhigh)</span></li><li><span class="chip">Claude Haiku 5.5 (xhigh)</span></li><li><span class="chip">GPT-6 Luna (xhigh)</span></li><li><span class="chip">MiMo-V2.6-Flash</span></li><li><span class="chip">GPT-6.1 Terra (low)</span></li><li><span class="chip">Claude Haiku 5.5 (high)</span></li><li><span class="chip">GPT-6.1 Sol (high)</span></li><li><span class="chip">GPT-6.1 Sol (xhigh)</span></li><li><span class="chip">GPT-6 Astra (high)</span></li><li><span class="chip">GPT-6 Astra (xhigh)</span></li><li><span class="chip">Claude Opus 5.5 (xhigh)</span></li><li><span class="chip">GPT-6.1 Sol (low)</span></li><li><span class="chip">Claude Opus 5.5 (high)</span></li>  </ul></section>
 
 <section class="block" id="evidence-notes" aria-labelledby="evidence-notes-title">
   <h2 id="evidence-notes-title" class="section-title">Evidence</h2>    <ol class="footnotes">
-<li id="ev-tb4-official" class="fn-item"><span class="fn-label">Official leaderboard rows</span> <a class="fn-back" href="#official-rows" aria-label="Back to the official leaderboard rows">&#8617;&#xFE0E;</a><div class="fn-body"><span class="badge badge-measured" title="Measured by the benchmark owner or in a controlled account measurement.">Measured</span> <span class="fn-text">Every official row: Measured by the benchmark owner or in a controlled account measurement. Captured 2026-11-01 from <a href="https://www.tbench.ai/leaderboard/terminal-bench/4.0" rel="noopener">Terminal-Bench / Harbor</a>.</span></div></li><li id="ev-tb4-claim-1" class="fn-item"><span class="fn-label">DeepSeek V4.1-Flash</span> <a class="fn-back" href="#evref-tb4-claim-1" aria-label="Back to DeepSeek V4.1-Flash in the table">&#8617;&#xFE0E;</a><div class="fn-body"><span class="badge badge-claim" title="Published by the model provider for the exact benchmark version and evaluated variant.">Provider claim</span> <span class="fn-text">Provider claim used for ranking: DeepSeek, 2026-09-10.</span> <a href="https://api-docs.deepseek.com/updates/" rel="noopener">Source</a></div></li>  </ol>
+<li id="ev-tb4-official" class="fn-item"><span class="fn-label">Official leaderboard rows</span> <a class="fn-back" href="#official-rows" aria-label="Back to the official leaderboard rows">&#8617;&#xFE0E;</a><div class="fn-body"><span class="badge badge-measured" title="Measured by the benchmark owner or in a controlled account measurement.">Measured</span> <span class="fn-text">Every official row: Measured by the benchmark owner or in a controlled account measurement. Captured 2026-11-26 from <a href="https://www.tbench.ai/leaderboard/terminal-bench/4.1" rel="noopener">Terminal-Bench / Harbor</a>.</span></div></li>  </ol>
 
 </section>  </main>
 <footer class="site-footer">
   <div class="wrap footer-grid">
     <div>
       <p class="footer-brand">ValueRank <span class="mono">v3.0.0</span></p>
-      <p class="muted">Published October 19, 2026. Data observed 2026-11-01. Every score is traceable to a source, a date and an evidence grade.</p>
+      <p class="muted">Published October 19, 2026. Data observed 2026-11-26. Every score is traceable to a source, a date and an evidence grade.</p>
     </div>
     <nav aria-label="Footer">
       <ul class="footer-links">        <li><a href="/rankings/">Rankings</a></li>        <li><a href="/models/">Models</a></li>        <li><a href="/plans/">Plans</a></li>        <li><a href="/benchmarks/">Benchmarks</a></li>        <li><a href="/methodology/">Methodology</a></li>        <li><a href="/changelog/">Changelog</a></li>        <li><a href="/data/">Data</a></li>        <li><a href="/archive/coding-agents-v0.3/">Archive</a></li>
       </ul>
     </nav>
   </div>
-</footer><script type="application/json" id="page-data">{"cohortMapping": {"claude-haiku-5-5": {"evaluatedModel": null, "rank": null, "resolutionRatePct": null, "status": "missing"}, "claude-haiku-5-5-high": {"evaluatedModel": null, "rank": null, "resolutionRatePct": null, "status": "missing"}, "claude-haiku-5-5-low": {"evaluatedModel": null, "rank": null, "resolutionRatePct": null, "status": "missing"}, "claude-haiku-5-5-max": {"evaluatedModel": null, "rank": null, "resolutionRatePct": null, "status": "missing"}, "claude-haiku-5-5-medium": {"evaluatedModel": null, "rank": null, "resolutionRatePct": null, "status": "missing"}, "claude-opus-5-5": {"evaluatedModel": "Opus 5.5 (max)", "rank": 1, "resolutionRatePct": 64.8, "status": "official"}, "claude-opus-5-5-high": {"evaluatedModel": null, "rank": null, "resolutionRatePct": null, "status": "missing"}, "claude-opus-5-5-medium": {"evaluatedModel": null, "rank": null, "resolutionRatePct": null, "status": "missing"}, "claude-opus-5-5-xhigh": {"evaluatedModel": null, "rank": null, "resolutionRatePct": null, "status": "missing"}, "claude-sonnet-5-5": {"evaluatedModel": "Sonnet 5.5 (max)", "rank": 2, "resolutionRatePct": 61.8, "status": "official"}, "claude-sonnet-5-5-xhigh": {"evaluatedModel": null, "rank": null, "resolutionRatePct": null, "status": "missing"}, "deepseek-v4-1-flash-1017": {"evaluatedModel": null, "rank": null, "resolutionRatePct": null, "status": "missing"}, "gemini-4-argon": {"evaluatedModel": null, "rank": null, "resolutionRatePct": null, "status": "missing"}, "gemini-4-carbon": {"evaluatedModel": null, "rank": null, "resolutionRatePct": null, "status": "missing"}, "gpt-5-6-luna-low": {"evaluatedModel": null, "rank": null, "resolutionRatePct": null, "status": "missing"}, "gpt-6-1-sol": {"evaluatedModel": "GPT-6.1 Sol (max)", "rank": 3, "resolutionRatePct": 58.2, "status": "official"}, "gpt-6-1-sol-high": {"evaluatedModel": null, "rank": null, "resolutionRatePct": null, "status": "missing"}, "gpt-6-1-sol-low": {"evaluatedModel": null, "rank": null, "resolutionRatePct": null, "status": "missing"}, "gpt-6-1-sol-medium": {"evaluatedModel": null, "rank": null, "resolutionRatePct": null, "status": "missing"}, "gpt-6-1-sol-xhigh": {"evaluatedModel": null, "rank": null, "resolutionRatePct": null, "status": "missing"}, "gpt-6-1-terra": {"evaluatedModel": null, "rank": null, "resolutionRatePct": null, "status": "missing"}, "gpt-6-1-terra-high": {"evaluatedModel": null, "rank": null, "resolutionRatePct": null, "status": "missing"}, "gpt-6-1-terra-low": {"evaluatedModel": null, "rank": null, "resolutionRatePct": null, "status": "missing"}, "gpt-6-1-terra-medium": {"evaluatedModel": null, "rank": null, "resolutionRatePct": null, "status": "missing"}, "gpt-6-1-terra-xhigh": {"evaluatedModel": null, "rank": null, "resolutionRatePct": null, "status": "missing"}, "gpt-6-astra": {"evaluatedModel": "GPT-6 Astra (max)", "rank": 3, "resolutionRatePct": 58.2, "status": "official"}, "gpt-6-astra-high": {"evaluatedModel": null, "rank": null, "resolutionRatePct": null, "status": "missing"}, "gpt-6-astra-xhigh": {"evaluatedModel": null, "rank": null, "resolutionRatePct": null, "status": "missing"}, "gpt-6-luna": {"evaluatedModel": "GPT-6 Luna (max)", "rank": 19, "resolutionRatePct": 16.4, "status": "official"}, "gpt-6-luna-high": {"evaluatedModel": null, "rank": null, "resolutionRatePct": null, "status": "missing"}, "gpt-6-luna-low": {"evaluatedModel": null, "rank": null, "resolutionRatePct": null, "status": "missing"}, "gpt-6-luna-medium": {"evaluatedModel": null, "rank": null, "resolutionRatePct": null, "status": "missing"}, "gpt-6-luna-xhigh": {"evaluatedModel": null, "rank": null, "resolutionRatePct": null, "status": "missing"}, "kimi-k3-1-pro": {"evaluatedModel": null, "rank": null, "resolutionRatePct": null, "status": "missing"}, "mimo-v2-6-flash": {"evaluatedModel": null, "rank": null, "resolutionRatePct": null, "status": "missing"}, "mimo-v2-6-pro": {"evaluatedModel": null, "rank": null, "resolutionRatePct": null, "status": "missing"}, "minimax-m3-1-flash": {"evaluatedModel": null, "rank": null, "resolutionRatePct": null, "status": "missing"}}, "cohortN": 37, "cohortRows": {"claude-opus-5-5": {"agent": "Claude Code", "baseModel": "Opus 5.5", "cohortModelId": "claude-opus-5-5", "costUsd": 4700.0, "model": "Opus 5.5 (max)", "rank": 1, "rankLabel": "1", "releaseDate": "Sep 22, 2026", "resolutionRate": 0.648, "resolutionRatePct": 64.8, "tokens": "8.0B", "uncertaintyPct": 3.1}, "claude-sonnet-5-5": {"agent": "Claude Code", "baseModel": "Sonnet 5.5", "cohortModelId": "claude-sonnet-5-5", "costUsd": 7300.0, "model": "Sonnet 5.5 (max)", "rank": 2, "rankLabel": "2", "releaseDate": "Sep 28, 2026", "resolutionRate": 0.618, "resolutionRatePct": 61.8, "tokens": "19.4B", "uncertaintyPct": 2.9}, "gpt-6-astra": {"agent": "Codex", "baseModel": "GPT-6 Astra", "cohortModelId": "gpt-6-astra", "costUsd": 3300.0, "model": "GPT-6 Astra (max)", "rank": 3, "rankLabel": "3", "releaseDate": "Sep 3, 2026", "resolutionRate": 0.582, "resolutionRatePct": 58.2, "tokens": "1.5B", "uncertaintyPct": 2.8}, "gpt-6-luna": {"agent": "Codex", "baseModel": "GPT-6 Luna", "cohortModelId": "gpt-6-luna", "costUsd": 100.0, "model": "GPT-6 Luna (max)", "rank": 19, "rankLabel": "19", "releaseDate": "Sep 22, 2026", "resolutionRate": 0.164, "resolutionRatePct": 16.4, "tokens": "3.9B", "uncertaintyPct": 2.7}, "gpt-6.1-sol": {"agent": "Codex", "baseModel": "GPT-6.1 Sol", "cohortModelId": "gpt-6.1-sol", "costUsd": 600.0, "model": "GPT-6.1 Sol (max)", "rank": 3, "rankLabel": "3", "releaseDate": "Sep 29, 2026", "resolutionRate": 0.582, "resolutionRatePct": 58.2, "tokens": "1.5B", "uncertaintyPct": 3.1}}, "frontierCount": 3, "matchedN": 5, "missingModels": ["GPT-6 Luna (low)", "GPT-6 Luna (medium)", "Claude Haiku 5.5 (low)", "GPT-6 Luna (high)", "Claude Haiku 5.5 (medium)", "MiMo-V2.6-Flash", "GPT-6.1 Terra (low)", "Claude Haiku 5.5 (high)", "GPT-6.1 Terra (medium)", "GPT-6.1 Terra (high)", "GPT-6.1 Sol (medium)", "GPT-6.1 Sol (high)", "GPT-6.1 Sol (xhigh)", "GPT-6 Astra (high)", "GPT-6 Astra (xhigh)", "Claude Opus 5.5 (xhigh)", "Gemini 4 Carbon", "GPT-6 Luna (xhigh)", "GPT-6.1 Sol (low)", "GPT-6.1 Terra (xhigh)", "GPT-6.1 Terra (max)", "Claude Opus 5.5 (high)", "Claude Haiku 5.5 (xhigh)", "Claude Haiku 5.5 (max)", "Claude Opus 5.5 (medium)", "Claude Sonnet 5.5 (xhigh)", "DeepSeek V4.1 Flash 1017", "Gemini 4 Argon", "GPT-5.6 Luna", "Kimi K3.1 Pro", "MiMo-V2.6-Pro", "MiniMax-M3.1-Flash"], "observedAt": "2026-11-01T06:10:00Z", "providerClaimN": 1, "providerClaimPolicy": "Use exact-version provider claims only while the benchmark owner has no result; preserve claim type and evaluated model/alias details.", "providerClaims": [{"alias": "deepseek-v4-flash", "aliasStatus": "temporarily routed to DeepSeek V4.1-Flash", "benchmark": "Terminal-Bench", "benchmarkVersion": "4.0", "caveat": "The provider reports TB4.0 for V4.1-Flash and says the deepseek-v4-flash API name is temporarily routed to it. This is a current-route claim, not a direct measurement of the retired V4 Flash model version. Remove the claim when the benchmark owner publishes a result for the mapped current route.", "claimId": "deepseek-v41-flash-terminal-bench-40-20260910", "cohortModelId": "deepseek-v4-flash", "component": "resolutionRate", "eligibilityScope": "current API alias", "eligibleForRanking": true, "evaluatedModel": "DeepSeek V4.1-Flash", "publishedOn": "2026-09-10", "publisher": "DeepSeek", "sourceType": "model_provider_claim", "sourceUrl": "https://api-docs.deepseek.com/updates/", "value": 0.312, "valuePct": 31.2}], "rankingAvailableN": 6, "rankingMissingModels": ["GPT-6 Luna (low)", "GPT-6 Luna (medium)", "Claude Haiku 5.5 (low)", "GPT-6 Luna (high)", "Claude Haiku 5.5 (medium)", "MiMo-V2.6-Flash", "GPT-6.1 Terra (low)", "Claude Haiku 5.5 (high)", "GPT-6.1 Terra (medium)", "GPT-6.1 Terra (high)", "GPT-6.1 Sol (medium)", "GPT-6.1 Sol (high)", "GPT-6.1 Sol (xhigh)", "GPT-6 Astra (high)", "GPT-6 Astra (xhigh)", "Claude Opus 5.5 (xhigh)", "Gemini 4 Carbon", "GPT-6 Luna (xhigh)", "GPT-6.1 Sol (low)", "GPT-6.1 Terra (xhigh)", "GPT-6.1 Terra (max)", "Claude Opus 5.5 (high)", "Claude Haiku 5.5 (xhigh)", "Claude Haiku 5.5 (max)", "Claude Opus 5.5 (medium)", "Claude Sonnet 5.5 (xhigh)", "DeepSeek V4.1 Flash 1017", "Gemini 4 Argon", "GPT-5.6 Luna", "Kimi K3.1 Pro", "MiMo-V2.6-Pro", "MiniMax-M3.1-Flash"], "rowN": 23, "rows": [{"agent": "Claude Code", "baseModel": "Opus 5.5", "cohortModelId": "claude-opus-5-5", "costUsd": 4700.0, "model": "Opus 5.5 (max)", "rank": 1, "rankLabel": "1", "releaseDate": "Sep 22, 2026", "resolutionRate": 0.648, "resolutionRatePct": 64.8, "tokens": "8.0B", "uncertaintyPct": 3.1}, {"agent": "Claude Code", "baseModel": "Sonnet 5.5", "cohortModelId": "claude-sonnet-5-5", "costUsd": 7300.0, "model": "Sonnet 5.5 (max)", "rank": 2, "rankLabel": "2", "releaseDate": "Sep 28, 2026", "resolutionRate": 0.618, "resolutionRatePct": 61.8, "tokens": "19.4B", "uncertaintyPct": 2.9}, {"agent": "Codex", "baseModel": "GPT-6 Astra", "cohortModelId": "gpt-6-astra", "costUsd": 3300.0, "model": "GPT-6 Astra (max)", "rank": 3, "rankLabel": "3", "releaseDate": "Sep 3, 2026", "resolutionRate": 0.582, "resolutionRatePct": 58.2, "tokens": "1.5B", "uncertaintyPct": 2.8}, {"agent": "Codex", "baseModel": "GPT-6.1 Sol", "cohortModelId": "gpt-6.1-sol", "costUsd": 600.0, "model": "GPT-6.1 Sol (max)", "rank": 3, "rankLabel": "3", "releaseDate": "Sep 29, 2026", "resolutionRate": 0.582, "resolutionRatePct": 58.2, "tokens": "1.5B", "uncertaintyPct": 3.1}, {"agent": "Claude Code", "baseModel": "Fable 5.1", "cohortModelId": null, "costUsd": 6200.0, "model": "Fable 5.1 (max)", "rank": 5, "rankLabel": "5", "releaseDate": "Sep 1, 2026", "resolutionRate": 0.579, "resolutionRatePct": 57.9, "tokens": "2.7B", "uncertaintyPct": 3.8}, {"agent": "Claude Code", "baseModel": "Opus 5", "cohortModelId": null, "costUsd": 6100.0, "model": "Opus 5 (xhigh)", "rank": 6, "rankLabel": "6", "releaseDate": "Jul 24, 2026", "resolutionRate": 0.539, "resolutionRatePct": 53.9, "tokens": "6.9B", "uncertaintyPct": 3.2}, {"agent": "Codex", "baseModel": "GPT-6 Sol", "cohortModelId": null, "costUsd": 1500.0, "model": "GPT-6 Sol (max)", "rank": 7, "rankLabel": "7", "releaseDate": "Sep 22, 2026", "resolutionRate": 0.494, "resolutionRatePct": 49.4, "tokens": "5.0B", "uncertaintyPct": 3.2}, {"agent": "Claude Code", "baseModel": "Fable 5", "cohortModelId": null, "costUsd": 7300.0, "model": "Fable 5 (max)", "rank": 8, "rankLabel": "8", "releaseDate": "Jun 9, 2026", "resolutionRate": 0.445, "resolutionRatePct": 44.5, "tokens": "3.8B", "uncertaintyPct": 3.8}, {"agent": "Claude Code", "baseModel": "GLM-5.3", "cohortModelId": null, "costUsd": 2700.0, "model": "GLM-5.3 (max)", "rank": 9, "rankLabel": "9", "releaseDate": "Aug 14, 2026", "resolutionRate": 0.418, "resolutionRatePct": 41.8, "tokens": "8.7B", "uncertaintyPct": 3.2}, {"agent": "Grok Build", "baseModel": "Grok 4.7", "cohortModelId": null, "costUsd": 3700.0, "model": "Grok 4.7 (xhigh)", "rank": 10, "rankLabel": "10", "releaseDate": "Sep 21, 2026", "resolutionRate": 0.376, "resolutionRatePct": 37.6, "tokens": "5.5B", "uncertaintyPct": 3.5}, {"agent": "Codex", "baseModel": "GPT-5.6 Sol", "cohortModelId": null, "costUsd": 2500.0, "model": "GPT-5.6 Sol (max)", "rank": 11, "rankLabel": "11", "releaseDate": "Jun 26, 2026", "resolutionRate": 0.373, "resolutionRatePct": 37.3, "tokens": "4.4B", "uncertaintyPct": 3.8}, {"agent": "Claude Code", "baseModel": "GLM-5.3-Flash", "cohortModelId": null, "costUsd": 100.0, "model": "GLM-5.3-Flash (none)", "rank": 12, "rankLabel": "12", "releaseDate": "Aug 26, 2026", "resolutionRate": 0.358, "resolutionRatePct": 35.8, "tokens": "2.9B", "uncertaintyPct": 3.5}, {"agent": "Claude Code", "baseModel": "Qwen3.8-Max-0902", "cohortModelId": null, "costUsd": 4600.0, "model": "Qwen3.8-Max-0902 (max)", "rank": 13, "rankLabel": "13", "releaseDate": "Sep 2, 2026", "resolutionRate": 0.27, "resolutionRatePct": 27.0, "tokens": "3.0B", "uncertaintyPct": 3.8}, {"agent": "Claude Code", "baseModel": "Opus 4.8", "cohortModelId": null, "costUsd": 6500.0, "model": "Opus 4.8 (max)", "rank": 14, "rankLabel": "14", "releaseDate": "May 28, 2026", "resolutionRate": 0.236, "resolutionRatePct": 23.6, "tokens": "6.4B", "uncertaintyPct": 3.6}, {"agent": "Codex", "baseModel": "GPT-5.6 Terra", "cohortModelId": null, "costUsd": 1700.0, "model": "GPT-5.6 Terra (max)", "rank": 15, "rankLabel": "15", "releaseDate": "Jun 26, 2026", "resolutionRate": 0.215, "resolutionRatePct": 21.5, "tokens": "5.7B", "uncertaintyPct": 3.3}, {"agent": "Grok Build", "baseModel": "Grok 4.6", "cohortModelId": null, "costUsd": 3600.0, "model": "Grok 4.6 (high)", "rank": 16, "rankLabel": "16", "releaseDate": "Aug 12, 2026", "resolutionRate": 0.203, "resolutionRatePct": 20.3, "tokens": "4.0B", "uncertaintyPct": 3.1}, {"agent": "mini-SWE-agent", "baseModel": "Gemini 3.8 Flash", "cohortModelId": null, "costUsd": 1800.0, "model": "Gemini 3.8 Flash (high)", "rank": 17, "rankLabel": "17", "releaseDate": "Sep 2, 2026", "resolutionRate": 0.191, "resolutionRatePct": 19.1, "tokens": "17.2B", "uncertaintyPct": 3.4}, {"agent": "Codex", "baseModel": "GPT-5.6 Luna", "cohortModelId": null, "costUsd": 300.0, "model": "GPT-5.6 Luna (max)", "rank": 18, "rankLabel": "18", "releaseDate": "Jun 26, 2026", "resolutionRate": 0.173, "resolutionRatePct": 17.3, "tokens": "11.6B", "uncertaintyPct": 2.8}, {"agent": "Codex", "baseModel": "GPT-6 Luna", "cohortModelId": "gpt-6-luna", "costUsd": 100.0, "model": "GPT-6 Luna (max)", "rank": 19, "rankLabel": "19", "releaseDate": "Sep 22, 2026", "resolutionRate": 0.164, "resolutionRatePct": 16.4, "tokens": "3.9B", "uncertaintyPct": 2.7}, {"agent": "Muse Code", "baseModel": "Muse Spark 1.3", "cohortModelId": null, "costUsd": null, "model": "Muse Spark 1.3 (xhigh)", "rank": 20, "rankLabel": "20", "releaseDate": "Sep 2, 2026", "resolutionRate": 0.145, "resolutionRatePct": 14.5, "tokens": "9.0B", "uncertaintyPct": 2.9}, {"agent": "Grok Build", "baseModel": "Grok 4.5", "cohortModelId": null, "costUsd": 2100.0, "model": "Grok 4.5 (high)", "rank": 21, "rankLabel": "21", "releaseDate": "Jul 16, 2026", "resolutionRate": 0.124, "resolutionRatePct": 12.4, "tokens": "3.4B", "uncertaintyPct": 2.6}, {"agent": "Claude Code", "baseModel": "Sonnet 5", "cohortModelId": null, "costUsd": 9600.0, "model": "Sonnet 5 (max)", "rank": 21, "rankLabel": "21", "releaseDate": "Jun 30, 2026", "resolutionRate": 0.124, "resolutionRatePct": 12.4, "tokens": "21.6B", "uncertaintyPct": 3.1}, {"agent": "mini-SWE-agent", "baseModel": "Gemini 3.7 Flash", "cohortModelId": null, "costUsd": 1300.0, "model": "Gemini 3.7 Flash (high)", "rank": 23, "rankLabel": "23", "releaseDate": "Aug 13, 2026", "resolutionRate": 0.112, "resolutionRatePct": 11.2, "tokens": "11.1B", "uncertaintyPct": 2.4}], "rowsWithoutCostN": 1, "schemaVersion": "valuerank-terminal-bench-v1", "source": {"captureMethod": "rendered leaderboard snapshot", "capturePath": "/home/user/valuerank/data/tb4-scrape.json", "captureSha256": "12c4bbe399c7454d7c57c3721fca0ac35c823d963d96eff8d15679db68c384f0", "capturedAt": "2026-11-01T06:03:32.614Z", "homepage": "https://www.tbench.ai/", "publisher": "Terminal-Bench / Harbor", "renderedUrl": "https://www.tbench.ai/", "targetUrl": "https://www.tbench.ai/leaderboard/terminal-bench/4.0", "tasksUrl": "https://hub.harborframework.com/datasets/terminal-bench/terminal-bench/4?tab=tasks"}, "version": "4.0"}</script>  <script type="module" src="/assets/js/pages/tb4.js"></script></body>
+</footer><script type="application/json" id="page-data">{"cohortMapping": {"claude-fable-5-2": {"evaluatedModel": "Fable 5.2 (max)", "rank": 2, "resolutionRatePct": 65.8, "status": "official"}, "claude-fable-5-2-high": {"evaluatedModel": null, "rank": null, "resolutionRatePct": null, "status": "missing"}, "claude-fable-5-2-xhigh": {"evaluatedModel": null, "rank": null, "resolutionRatePct": null, "status": "missing"}, "claude-haiku-5-5": {"evaluatedModel": null, "rank": null, "resolutionRatePct": null, "status": "missing"}, "claude-haiku-5-5-high": {"evaluatedModel": null, "rank": null, "resolutionRatePct": null, "status": "missing"}, "claude-haiku-5-5-low": {"evaluatedModel": null, "rank": null, "resolutionRatePct": null, "status": "missing"}, "claude-haiku-5-5-medium": {"evaluatedModel": null, "rank": null, "resolutionRatePct": null, "status": "missing"}, "claude-opus-5-5": {"evaluatedModel": "Opus 5.5 (max)", "rank": 2, "resolutionRatePct": 65.8, "status": "official"}, "claude-opus-5-5-high": {"evaluatedModel": null, "rank": null, "resolutionRatePct": null, "status": "missing"}, "claude-opus-5-5-xhigh": {"evaluatedModel": null, "rank": null, "resolutionRatePct": null, "status": "missing"}, "claude-sonnet-5-5": {"evaluatedModel": "Sonnet 5.5 (max)", "rank": 5, "resolutionRatePct": 63.9, "status": "official"}, "gemini-4-carbon": {"evaluatedModel": "Gemini 4 Carbon (high)", "rank": 4, "resolutionRatePct": 64.5, "status": "official"}, "gemini-4-neon": {"evaluatedModel": "Gemini 4 Neon (xhigh)", "rank": 8, "resolutionRatePct": 61.2, "status": "official"}, "gemini-4-neon-high": {"evaluatedModel": null, "rank": null, "resolutionRatePct": null, "status": "missing"}, "gemini-4-neon-medium": {"evaluatedModel": null, "rank": null, "resolutionRatePct": null, "status": "missing"}, "gpt-6-1-sol": {"evaluatedModel": "GPT-6.1 Sol (max)", "rank": 9, "resolutionRatePct": 60.9, "status": "official"}, "gpt-6-1-sol-high": {"evaluatedModel": null, "rank": null, "resolutionRatePct": null, "status": "missing"}, "gpt-6-1-sol-low": {"evaluatedModel": null, "rank": null, "resolutionRatePct": null, "status": "missing"}, "gpt-6-1-sol-medium": {"evaluatedModel": null, "rank": null, "resolutionRatePct": null, "status": "missing"}, "gpt-6-1-sol-xhigh": {"evaluatedModel": null, "rank": null, "resolutionRatePct": null, "status": "missing"}, "gpt-6-1-terra": {"evaluatedModel": "GPT-6.1 Terra (max)", "rank": 15, "resolutionRatePct": 53.3, "status": "official"}, "gpt-6-1-terra-high": {"evaluatedModel": null, "rank": null, "resolutionRatePct": null, "status": "missing"}, "gpt-6-1-terra-low": {"evaluatedModel": null, "rank": null, "resolutionRatePct": null, "status": "missing"}, "gpt-6-1-terra-medium": {"evaluatedModel": null, "rank": null, "resolutionRatePct": null, "status": "missing"}, "gpt-6-1-terra-xhigh": {"evaluatedModel": null, "rank": null, "resolutionRatePct": null, "status": "missing"}, "gpt-6-2-astra": {"evaluatedModel": "GPT-6.2 Astra (max)", "rank": 6, "resolutionRatePct": 62.1, "status": "official"}, "gpt-6-2-astra-high": {"evaluatedModel": null, "rank": null, "resolutionRatePct": null, "status": "missing"}, "gpt-6-2-astra-medium": {"evaluatedModel": null, "rank": null, "resolutionRatePct": null, "status": "missing"}, "gpt-6-2-astra-xhigh": {"evaluatedModel": null, "rank": null, "resolutionRatePct": null, "status": "missing"}, "gpt-6-2-sol": {"evaluatedModel": "GPT-6.2 Sol (max)", "rank": 7, "resolutionRatePct": 61.5, "status": "official"}, "gpt-6-2-sol-high": {"evaluatedModel": null, "rank": null, "resolutionRatePct": null, "status": "missing"}, "gpt-6-2-sol-low": {"evaluatedModel": null, "rank": null, "resolutionRatePct": null, "status": "missing"}, "gpt-6-2-sol-medium": {"evaluatedModel": null, "rank": null, "resolutionRatePct": null, "status": "missing"}, "gpt-6-2-sol-xhigh": {"evaluatedModel": null, "rank": null, "resolutionRatePct": null, "status": "missing"}, "gpt-6-astra": {"evaluatedModel": "GPT-6 Astra (max)", "rank": 10, "resolutionRatePct": 60.3, "status": "official"}, "gpt-6-astra-high": {"evaluatedModel": null, "rank": null, "resolutionRatePct": null, "status": "missing"}, "gpt-6-astra-xhigh": {"evaluatedModel": null, "rank": null, "resolutionRatePct": null, "status": "missing"}, "gpt-6-luna": {"evaluatedModel": "GPT-6 Luna (max)", "rank": 40, "resolutionRatePct": 15.2, "status": "official"}, "gpt-6-luna-high": {"evaluatedModel": null, "rank": null, "resolutionRatePct": null, "status": "missing"}, "gpt-6-luna-low": {"evaluatedModel": null, "rank": null, "resolutionRatePct": null, "status": "missing"}, "gpt-6-luna-medium": {"evaluatedModel": null, "rank": null, "resolutionRatePct": null, "status": "missing"}, "gpt-6-luna-xhigh": {"evaluatedModel": null, "rank": null, "resolutionRatePct": null, "status": "missing"}, "mimo-v2-6-flash": {"evaluatedModel": null, "rank": null, "resolutionRatePct": null, "status": "missing"}, "muse-ember": {"evaluatedModel": null, "rank": null, "resolutionRatePct": null, "status": "missing"}, "muse-ember-xhigh": {"evaluatedModel": "Muse Ember (xhigh)", "rank": 27, "resolutionRatePct": 30.6, "status": "official"}}, "cohortN": 45, "cohortRows": {"claude-fable-5-2": {"agent": "Claude Code", "baseModel": "Fable 5.2", "cohortModelId": "claude-fable-5-2", "costUsd": 16500.0, "model": "Fable 5.2 (max)", "rank": 2, "rankLabel": "2", "releaseDate": "Nov 9, 2026", "resolutionRate": 0.658, "resolutionRatePct": 65.8, "tokens": "15.7B", "uncertaintyPct": 2.8}, "claude-opus-5-5": {"agent": "Claude Code", "baseModel": "Opus 5.5", "cohortModelId": "claude-opus-5-5", "costUsd": 4700.0, "model": "Opus 5.5 (max)", "rank": 2, "rankLabel": "2", "releaseDate": "Sep 22, 2026", "resolutionRate": 0.658, "resolutionRatePct": 65.8, "tokens": "8.0B", "uncertaintyPct": 3.1}, "claude-sonnet-5-5": {"agent": "Claude Code", "baseModel": "Sonnet 5.5", "cohortModelId": "claude-sonnet-5-5", "costUsd": 7300.0, "model": "Sonnet 5.5 (max)", "rank": 5, "rankLabel": "5", "releaseDate": "Sep 28, 2026", "resolutionRate": 0.639, "resolutionRatePct": 63.9, "tokens": "19.4B", "uncertaintyPct": 3.0}, "gemini-4-carbon": {"agent": "Antigravity CLI", "baseModel": "Gemini 4 Carbon", "cohortModelId": "gemini-4-carbon", "costUsd": 1400.0, "model": "Gemini 4 Carbon (high)", "rank": 4, "rankLabel": "4", "releaseDate": "Oct 28, 2026", "resolutionRate": 0.645, "resolutionRatePct": 64.5, "tokens": "3.8B", "uncertaintyPct": 3.2}, "gemini-4-neon": {"agent": "Antigravity CLI", "baseModel": "Gemini 4 Neon", "cohortModelId": "gemini-4-neon", "costUsd": 1900.0, "model": "Gemini 4 Neon (xhigh)", "rank": 8, "rankLabel": "8", "releaseDate": "Nov 18, 2026", "resolutionRate": 0.612, "resolutionRatePct": 61.2, "tokens": "3.2B", "uncertaintyPct": 2.8}, "gpt-6-astra": {"agent": "Codex", "baseModel": "GPT-6 Astra", "cohortModelId": "gpt-6-astra", "costUsd": 3300.0, "model": "GPT-6 Astra (max)", "rank": 10, "rankLabel": "10", "releaseDate": "Sep 3, 2026", "resolutionRate": 0.603, "resolutionRatePct": 60.3, "tokens": "1.5B", "uncertaintyPct": 2.8}, "gpt-6-luna": {"agent": "Codex", "baseModel": "GPT-6 Luna", "cohortModelId": "gpt-6-luna", "costUsd": 100.0, "model": "GPT-6 Luna (max)", "rank": 40, "rankLabel": "40", "releaseDate": "Sep 22, 2026", "resolutionRate": 0.152, "resolutionRatePct": 15.2, "tokens": "3.9B", "uncertaintyPct": 2.7}, "gpt-6.1-sol": {"agent": "Codex", "baseModel": "GPT-6.1 Sol", "cohortModelId": "gpt-6.1-sol", "costUsd": 600.0, "model": "GPT-6.1 Sol (max)", "rank": 9, "rankLabel": "9", "releaseDate": "Sep 29, 2026", "resolutionRate": 0.609, "resolutionRatePct": 60.9, "tokens": "1.5B", "uncertaintyPct": 3.0}, "gpt-6.1-terra": {"agent": "Codex", "baseModel": "GPT-6.1 Terra", "cohortModelId": "gpt-6.1-terra", "costUsd": 900.0, "model": "GPT-6.1 Terra (max)", "rank": 15, "rankLabel": "15", "releaseDate": "Oct 26, 2026", "resolutionRate": 0.533, "resolutionRatePct": 53.3, "tokens": "8.5B", "uncertaintyPct": 3.1}, "gpt-6.2-astra": {"agent": "Codex", "baseModel": "GPT-6.2 Astra", "cohortModelId": "gpt-6.2-astra", "costUsd": 1400.0, "model": "GPT-6.2 Astra (max)", "rank": 6, "rankLabel": "6", "releaseDate": "Nov 17, 2026", "resolutionRate": 0.621, "resolutionRatePct": 62.1, "tokens": "1.1B", "uncertaintyPct": 2.3}, "gpt-6.2-sol": {"agent": "Codex", "baseModel": "GPT-6.2 Sol", "cohortModelId": "gpt-6.2-sol", "costUsd": 300.0, "model": "GPT-6.2 Sol (max)", "rank": 7, "rankLabel": "7", "releaseDate": "Nov 17, 2026", "resolutionRate": 0.615, "resolutionRatePct": 61.5, "tokens": "1.1B", "uncertaintyPct": 2.8}, "muse-ember-xhigh": {"agent": "Muse Code", "baseModel": "Muse Ember", "cohortModelId": "muse-ember-xhigh", "costUsd": 200.0, "model": "Muse Ember (xhigh)", "rank": 27, "rankLabel": "27", "releaseDate": "Nov 9, 2026", "resolutionRate": 0.306, "resolutionRatePct": 30.6, "tokens": "8.1B", "uncertaintyPct": 3.8}}, "frontierCount": 6, "matchedN": 12, "missingModels": ["GPT-6 Luna (low)", "GPT-6 Luna (medium)", "Claude Haiku 5.5 (low)", "GPT-6 Luna (high)", "Claude Haiku 5.5 (medium)", "Muse Ember (max)", "GPT-6.1 Terra (medium)", "GPT-6.2 Sol (low)", "GPT-6.1 Terra (high)", "GPT-6.1 Sol (medium)", "GPT-6.2 Sol (medium)", "GPT-6.2 Sol (high)", "GPT-6.2 Sol (xhigh)", "GPT-6.2 Astra (high)", "GPT-6.2 Astra (xhigh)", "Claude Fable 5.2 (xhigh)", "Claude Fable 5.2 (high)", "Gemini 4 Neon (high)", "GPT-6.2 Astra (medium)", "Gemini 4 Neon (medium)", "GPT-6.1 Terra (xhigh)", "Claude Haiku 5.5 (xhigh)", "GPT-6 Luna (xhigh)", "MiMo-V2.6-Flash", "GPT-6.1 Terra (low)", "Claude Haiku 5.5 (high)", "GPT-6.1 Sol (high)", "GPT-6.1 Sol (xhigh)", "GPT-6 Astra (high)", "GPT-6 Astra (xhigh)", "Claude Opus 5.5 (xhigh)", "GPT-6.1 Sol (low)", "Claude Opus 5.5 (high)"], "observedAt": "2026-11-26T13:24:53Z", "providerClaimN": 0, "providerClaimPolicy": "Use exact-version provider claims only while the benchmark owner has no result; preserve claim type and evaluated model/alias details.", "providerClaims": [], "rankingAvailableN": 12, "rankingMissingModels": ["GPT-6 Luna (low)", "GPT-6 Luna (medium)", "Claude Haiku 5.5 (low)", "GPT-6 Luna (high)", "Claude Haiku 5.5 (medium)", "Muse Ember (max)", "GPT-6.1 Terra (medium)", "GPT-6.2 Sol (low)", "GPT-6.1 Terra (high)", "GPT-6.1 Sol (medium)", "GPT-6.2 Sol (medium)", "GPT-6.2 Sol (high)", "GPT-6.2 Sol (xhigh)", "GPT-6.2 Astra (high)", "GPT-6.2 Astra (xhigh)", "Claude Fable 5.2 (xhigh)", "Claude Fable 5.2 (high)", "Gemini 4 Neon (high)", "GPT-6.2 Astra (medium)", "Gemini 4 Neon (medium)", "GPT-6.1 Terra (xhigh)", "Claude Haiku 5.5 (xhigh)", "GPT-6 Luna (xhigh)", "MiMo-V2.6-Flash", "GPT-6.1 Terra (low)", "Claude Haiku 5.5 (high)", "GPT-6.1 Sol (high)", "GPT-6.1 Sol (xhigh)", "GPT-6 Astra (high)", "GPT-6 Astra (xhigh)", "Claude Opus 5.5 (xhigh)", "GPT-6.1 Sol (low)", "Claude Opus 5.5 (high)"], "rowN": 54, "rows": [{"agent": "GitHub Copilot", "baseModel": "Copilot Fusion", "cohortModelId": null, "costUsd": 2000.0, "model": "Copilot Fusion (max)", "rank": 1, "rankLabel": "1", "releaseDate": "Nov 17, 2026", "resolutionRate": 0.712, "resolutionRatePct": 71.2, "tokens": "3.3B", "uncertaintyPct": 2.9}, {"agent": "Claude Code", "baseModel": "Opus 5.5", "cohortModelId": "claude-opus-5-5", "costUsd": 4700.0, "model": "Opus 5.5 (max)", "rank": 2, "rankLabel": "2", "releaseDate": "Sep 22, 2026", "resolutionRate": 0.658, "resolutionRatePct": 65.8, "tokens": "8.0B", "uncertaintyPct": 3.1}, {"agent": "Claude Code", "baseModel": "Fable 5.2", "cohortModelId": "claude-fable-5-2", "costUsd": 16500.0, "model": "Fable 5.2 (max)", "rank": 2, "rankLabel": "2", "releaseDate": "Nov 9, 2026", "resolutionRate": 0.658, "resolutionRatePct": 65.8, "tokens": "15.7B", "uncertaintyPct": 2.8}, {"agent": "Antigravity CLI", "baseModel": "Gemini 4 Carbon", "cohortModelId": "gemini-4-carbon", "costUsd": 1400.0, "model": "Gemini 4 Carbon (high)", "rank": 4, "rankLabel": "4", "releaseDate": "Oct 28, 2026", "resolutionRate": 0.645, "resolutionRatePct": 64.5, "tokens": "3.8B", "uncertaintyPct": 3.2}, {"agent": "Claude Code", "baseModel": "Sonnet 5.5", "cohortModelId": "claude-sonnet-5-5", "costUsd": 7300.0, "model": "Sonnet 5.5 (max)", "rank": 5, "rankLabel": "5", "releaseDate": "Sep 28, 2026", "resolutionRate": 0.639, "resolutionRatePct": 63.9, "tokens": "19.4B", "uncertaintyPct": 3.0}, {"agent": "Codex", "baseModel": "GPT-6.2 Astra", "cohortModelId": "gpt-6.2-astra", "costUsd": 1400.0, "model": "GPT-6.2 Astra (max)", "rank": 6, "rankLabel": "6", "releaseDate": "Nov 17, 2026", "resolutionRate": 0.621, "resolutionRatePct": 62.1, "tokens": "1.1B", "uncertaintyPct": 2.3}, {"agent": "Codex", "baseModel": "GPT-6.2 Sol", "cohortModelId": "gpt-6.2-sol", "costUsd": 300.0, "model": "GPT-6.2 Sol (max)", "rank": 7, "rankLabel": "7", "releaseDate": "Nov 17, 2026", "resolutionRate": 0.615, "resolutionRatePct": 61.5, "tokens": "1.1B", "uncertaintyPct": 2.8}, {"agent": "Antigravity CLI", "baseModel": "Gemini 4 Neon", "cohortModelId": "gemini-4-neon", "costUsd": 1900.0, "model": "Gemini 4 Neon (xhigh)", "rank": 8, "rankLabel": "8", "releaseDate": "Nov 18, 2026", "resolutionRate": 0.612, "resolutionRatePct": 61.2, "tokens": "3.2B", "uncertaintyPct": 2.8}, {"agent": "Codex", "baseModel": "GPT-6.1 Sol", "cohortModelId": "gpt-6.1-sol", "costUsd": 600.0, "model": "GPT-6.1 Sol (max)", "rank": 9, "rankLabel": "9", "releaseDate": "Sep 29, 2026", "resolutionRate": 0.609, "resolutionRatePct": 60.9, "tokens": "1.5B", "uncertaintyPct": 3.0}, {"agent": "Codex", "baseModel": "GPT-6 Astra", "cohortModelId": "gpt-6-astra", "costUsd": 3300.0, "model": "GPT-6 Astra (max)", "rank": 10, "rankLabel": "10", "releaseDate": "Sep 3, 2026", "resolutionRate": 0.603, "resolutionRatePct": 60.3, "tokens": "1.5B", "uncertaintyPct": 2.8}, {"agent": "Claude Code", "baseModel": "Kimi K3.1 Pro", "cohortModelId": null, "costUsd": 1100.0, "model": "Kimi K3.1 Pro (max)", "rank": 11, "rankLabel": "11", "releaseDate": "Oct 24, 2026", "resolutionRate": 0.597, "resolutionRatePct": 59.7, "tokens": "3.2B", "uncertaintyPct": 4.2}, {"agent": "Claude Code", "baseModel": "Fable 5.1", "cohortModelId": null, "costUsd": 4900.0, "model": "Fable 5.1 (xhigh)", "rank": 12, "rankLabel": "12", "releaseDate": "Sep 1, 2026", "resolutionRate": 0.576, "resolutionRatePct": 57.6, "tokens": "2.3B", "uncertaintyPct": 3.3}, {"agent": "Antigravity CLI", "baseModel": "Gemini 4 Hydrogen", "cohortModelId": null, "costUsd": 800.0, "model": "Gemini 4 Hydrogen (high)", "rank": 13, "rankLabel": "13", "releaseDate": "Nov 12, 2026", "resolutionRate": 0.564, "resolutionRatePct": 56.4, "tokens": "3.6B", "uncertaintyPct": 3.0}, {"agent": "Antigravity CLI", "baseModel": "Gemini 4 Argon", "cohortModelId": null, "costUsd": 1100.0, "model": "Gemini 4 Argon (high)", "rank": 14, "rankLabel": "14", "releaseDate": "Sep 30, 2026", "resolutionRate": 0.555, "resolutionRatePct": 55.5, "tokens": "2.8B", "uncertaintyPct": 2.8}, {"agent": "Claude Code", "baseModel": "Opus 5", "cohortModelId": null, "costUsd": 6100.0, "model": "Opus 5 (xhigh)", "rank": 15, "rankLabel": "15", "releaseDate": "Jul 24, 2026", "resolutionRate": 0.533, "resolutionRatePct": 53.3, "tokens": "6.9B", "uncertaintyPct": 3.1}, {"agent": "Codex", "baseModel": "GPT-6.1 Terra", "cohortModelId": "gpt-6.1-terra", "costUsd": 900.0, "model": "GPT-6.1 Terra (max)", "rank": 15, "rankLabel": "15", "releaseDate": "Oct 26, 2026", "resolutionRate": 0.533, "resolutionRatePct": 53.3, "tokens": "8.5B", "uncertaintyPct": 3.1}, {"agent": "Codex", "baseModel": "GPT-6 Sol", "cohortModelId": null, "costUsd": 1500.0, "model": "GPT-6 Sol (max)", "rank": 17, "rankLabel": "17", "releaseDate": "Sep 22, 2026", "resolutionRate": 0.503, "resolutionRatePct": 50.3, "tokens": "5.0B", "uncertaintyPct": 3.2}, {"agent": "Muse Code", "baseModel": "Muse Wonder", "cohortModelId": null, "costUsd": 2500.0, "model": "Muse Wonder (xhigh)", "rank": 18, "rankLabel": "18", "releaseDate": "Oct 12, 2026", "resolutionRate": 0.47, "resolutionRatePct": 47.0, "tokens": "5.5B", "uncertaintyPct": 3.8}, {"agent": "Claude Code", "baseModel": "Fable 5", "cohortModelId": null, "costUsd": 7300.0, "model": "Fable 5 (max)", "rank": 19, "rankLabel": "19", "releaseDate": "Jun 9, 2026", "resolutionRate": 0.448, "resolutionRatePct": 44.8, "tokens": "3.8B", "uncertaintyPct": 3.8}, {"agent": "Claude Code", "baseModel": "GLM-5.3", "cohortModelId": null, "costUsd": 2700.0, "model": "GLM-5.3 (max)", "rank": 20, "rankLabel": "20", "releaseDate": "Aug 14, 2026", "resolutionRate": 0.412, "resolutionRatePct": 41.2, "tokens": "8.7B", "uncertaintyPct": 3.3}, {"agent": "Claude Code", "baseModel": "Haiku 5.5", "cohortModelId": null, "costUsd": 1000.0, "model": "Haiku 5.5 (max)", "rank": 21, "rankLabel": "21", "releaseDate": "Oct 7, 2026", "resolutionRate": 0.4, "resolutionRatePct": 40.0, "tokens": "12.1B", "uncertaintyPct": 3.6}, {"agent": "Grok Build", "baseModel": "Grok 4.7", "cohortModelId": null, "costUsd": 3700.0, "model": "Grok 4.7 (xhigh)", "rank": 22, "rankLabel": "22", "releaseDate": "Sep 21, 2026", "resolutionRate": 0.388, "resolutionRatePct": 38.8, "tokens": "5.5B", "uncertaintyPct": 3.6}, {"agent": "Codex", "baseModel": "GPT-5.6 Sol", "cohortModelId": null, "costUsd": 2500.0, "model": "GPT-5.6 Sol (max)", "rank": 23, "rankLabel": "23", "releaseDate": "Jun 26, 2026", "resolutionRate": 0.385, "resolutionRatePct": 38.5, "tokens": "4.4B", "uncertaintyPct": 3.8}, {"agent": "Claude Code", "baseModel": "DeepSeek V4.1 Flash 1017", "cohortModelId": null, "costUsd": 200.0, "model": "DeepSeek V4.1 Flash 1017 (max)", "rank": 23, "rankLabel": "23", "releaseDate": "Oct 17, 2026", "resolutionRate": 0.385, "resolutionRatePct": 38.5, "tokens": "8.2B", "uncertaintyPct": 3.8}, {"agent": "Claude Code", "baseModel": "Hy4", "cohortModelId": null, "costUsd": 300.0, "model": "Hy4 (max)", "rank": 25, "rankLabel": "25", "releaseDate": "Nov 4, 2026", "resolutionRate": 0.379, "resolutionRatePct": 37.9, "tokens": "5.3B", "uncertaintyPct": 3.5}, {"agent": "Claude Code", "baseModel": "GLM-5.3-Flash", "cohortModelId": null, "costUsd": 400.0, "model": "GLM-5.3-Flash (max)", "rank": 26, "rankLabel": "26", "releaseDate": "Aug 26, 2026", "resolutionRate": 0.37, "resolutionRatePct": 37.0, "tokens": "8.2B", "uncertaintyPct": 3.6}, {"agent": "Muse Code", "baseModel": "Muse Ember", "cohortModelId": "muse-ember-xhigh", "costUsd": 200.0, "model": "Muse Ember (xhigh)", "rank": 27, "rankLabel": "27", "releaseDate": "Nov 9, 2026", "resolutionRate": 0.306, "resolutionRatePct": 30.6, "tokens": "8.1B", "uncertaintyPct": 3.8}, {"agent": "Claude Code", "baseModel": "Mistral Large 4", "cohortModelId": null, "costUsd": 700.0, "model": "Mistral Large 4 (max)", "rank": 28, "rankLabel": "28", "releaseDate": "Oct 6, 2026", "resolutionRate": 0.276, "resolutionRatePct": 27.6, "tokens": "5.8B", "uncertaintyPct": 3.9}, {"agent": "Claude Code", "baseModel": "Qwen3.8-Max-0902", "cohortModelId": null, "costUsd": 4600.0, "model": "Qwen3.8-Max-0902 (max)", "rank": 29, "rankLabel": "29", "releaseDate": "Sep 2, 2026", "resolutionRate": 0.27, "resolutionRatePct": 27.0, "tokens": "3.0B", "uncertaintyPct": 3.9}, {"agent": "mini-swe-agent", "baseModel": "MiMo V2.6 Pro", "cohortModelId": null, "costUsd": 300.0, "model": "MiMo V2.6 Pro (none)", "rank": 29, "rankLabel": "29", "releaseDate": "Sep 22, 2026", "resolutionRate": 0.27, "resolutionRatePct": 27.0, "tokens": "7.8B", "uncertaintyPct": 3.6}, {"agent": "Claude Code", "baseModel": "Opus 4.8", "cohortModelId": null, "costUsd": 6500.0, "model": "Opus 4.8 (max)", "rank": 31, "rankLabel": "31", "releaseDate": "May 28, 2026", "resolutionRate": 0.236, "resolutionRatePct": 23.6, "tokens": "6.4B", "uncertaintyPct": 3.6}, {"agent": "Claude Code", "baseModel": "Kimi K3", "cohortModelId": null, "costUsd": 1900.0, "model": "Kimi K3 (max)", "rank": 32, "rankLabel": "32", "releaseDate": "Jul 16, 2026", "resolutionRate": 0.23, "resolutionRatePct": 23.0, "tokens": "4.9B", "uncertaintyPct": 3.7}, {"agent": "mini-swe-agent", "baseModel": "Ember-1", "cohortModelId": null, "costUsd": 4700.0, "model": "Ember-1 (none)", "rank": 33, "rankLabel": "33", "releaseDate": "Sep 24, 2026", "resolutionRate": 0.218, "resolutionRatePct": 21.8, "tokens": "11.9B", "uncertaintyPct": 3.5}, {"agent": "Codex", "baseModel": "GPT-5.6 Terra", "cohortModelId": null, "costUsd": 1700.0, "model": "GPT-5.6 Terra (max)", "rank": 34, "rankLabel": "34", "releaseDate": "Jun 26, 2026", "resolutionRate": 0.215, "resolutionRatePct": 21.5, "tokens": "5.7B", "uncertaintyPct": 3.3}, {"agent": "Grok Build", "baseModel": "Grok 4.6", "cohortModelId": null, "costUsd": 3600.0, "model": "Grok 4.6 (high)", "rank": 35, "rankLabel": "35", "releaseDate": "Aug 12, 2026", "resolutionRate": 0.197, "resolutionRatePct": 19.7, "tokens": "4.0B", "uncertaintyPct": 3.1}, {"agent": "Claude Code", "baseModel": "Hy4 Preview", "cohortModelId": null, "costUsd": 700.0, "model": "Hy4 Preview (max)", "rank": 36, "rankLabel": "36", "releaseDate": "Aug 28, 2026", "resolutionRate": 0.191, "resolutionRatePct": 19.1, "tokens": "6.0B", "uncertaintyPct": 3.1}, {"agent": "mini-SWE-agent", "baseModel": "Gemini 3.8 Flash", "cohortModelId": null, "costUsd": 1800.0, "model": "Gemini 3.8 Flash (high)", "rank": 37, "rankLabel": "37", "releaseDate": "Sep 2, 2026", "resolutionRate": 0.182, "resolutionRatePct": 18.2, "tokens": "17.2B", "uncertaintyPct": 3.4}, {"agent": "Codex", "baseModel": "GPT-5.6 Luna", "cohortModelId": null, "costUsd": 300.0, "model": "GPT-5.6 Luna (max)", "rank": 38, "rankLabel": "38", "releaseDate": "Jun 26, 2026", "resolutionRate": 0.176, "resolutionRatePct": 17.6, "tokens": "11.6B", "uncertaintyPct": 2.9}, {"agent": "mini-swe-agent", "baseModel": "MiMo V2.6 Flash", "cohortModelId": null, "costUsd": 200.0, "model": "MiMo V2.6 Flash (none)", "rank": 39, "rankLabel": "39", "releaseDate": "Sep 22, 2026", "resolutionRate": 0.161, "resolutionRatePct": 16.1, "tokens": "9.9B", "uncertaintyPct": 3.4}, {"agent": "Codex", "baseModel": "GPT-6 Luna", "cohortModelId": "gpt-6-luna", "costUsd": 100.0, "model": "GPT-6 Luna (max)", "rank": 40, "rankLabel": "40", "releaseDate": "Sep 22, 2026", "resolutionRate": 0.152, "resolutionRatePct": 15.2, "tokens": "3.9B", "uncertaintyPct": 2.7}, {"agent": "Muse Code", "baseModel": "Muse Spark 1.3", "cohortModelId": null, "costUsd": null, "model": "Muse Spark 1.3 (xhigh)", "rank": 41, "rankLabel": "41", "releaseDate": "Sep 2, 2026", "resolutionRate": 0.148, "resolutionRatePct": 14.8, "tokens": "9.0B", "uncertaintyPct": 3.0}, {"agent": "mini-swe-agent", "baseModel": "Inkling Small 2", "cohortModelId": null, "costUsd": 1000.0, "model": "Inkling Small 2 (xhigh)", "rank": 42, "rankLabel": "42", "releaseDate": "Nov 5, 2026", "resolutionRate": 0.13, "resolutionRatePct": 13.0, "tokens": "27.5B", "uncertaintyPct": 2.8}, {"agent": "mini-SWE-agent", "baseModel": "Gemini 3.7 Flash", "cohortModelId": null, "costUsd": 1300.0, "model": "Gemini 3.7 Flash (high)", "rank": 43, "rankLabel": "43", "releaseDate": "Aug 13, 2026", "resolutionRate": 0.124, "resolutionRatePct": 12.4, "tokens": "11.1B", "uncertaintyPct": 2.5}, {"agent": "Grok Build", "baseModel": "Grok 4.5", "cohortModelId": null, "costUsd": 2100.0, "model": "Grok 4.5 (high)", "rank": 43, "rankLabel": "43", "releaseDate": "Jul 16, 2026", "resolutionRate": 0.124, "resolutionRatePct": 12.4, "tokens": "3.4B", "uncertaintyPct": 2.6}, {"agent": "Claude Code", "baseModel": "Sonnet 5", "cohortModelId": null, "costUsd": 9600.0, "model": "Sonnet 5 (max)", "rank": 45, "rankLabel": "45", "releaseDate": "Jun 30, 2026", "resolutionRate": 0.121, "resolutionRatePct": 12.1, "tokens": "21.6B", "uncertaintyPct": 3.0}, {"agent": "mini-swe-agent", "baseModel": "Hy4 Flash", "cohortModelId": null, "costUsd": 0.0, "model": "Hy4 Flash (none)", "rank": 46, "rankLabel": "46", "releaseDate": "Nov 16, 2026", "resolutionRate": 0.118, "resolutionRatePct": 11.8, "tokens": "4.5B", "uncertaintyPct": 2.8}, {"agent": "mini-swe-agent", "baseModel": "MiniMax M3", "cohortModelId": null, "costUsd": 1100.0, "model": "MiniMax M3 (none)", "rank": 47, "rankLabel": "47", "releaseDate": "Jun 1, 2026", "resolutionRate": 0.076, "resolutionRatePct": 7.6, "tokens": "16.5B", "uncertaintyPct": 2.8}, {"agent": "Claude Code", "baseModel": "DeepSeek V4 Pro 0813", "cohortModelId": null, "costUsd": 700.0, "model": "DeepSeek V4 Pro 0813 (max)", "rank": 48, "rankLabel": "48", "releaseDate": "Aug 13, 2026", "resolutionRate": 0.067, "resolutionRatePct": 6.7, "tokens": "3.8B", "uncertaintyPct": 2.5}, {"agent": "mini-swe-agent", "baseModel": "Beam 1.0", "cohortModelId": null, "costUsd": 200.0, "model": "Beam 1.0 (none)", "rank": 49, "rankLabel": "49", "releaseDate": "Oct 16, 2026", "resolutionRate": 0.064, "resolutionRatePct": 6.4, "tokens": "4.1B", "uncertaintyPct": 1.7}, {"agent": "Antigravity CLI", "baseModel": "Gemini 3.1 Pro", "cohortModelId": null, "costUsd": 3700.0, "model": "Gemini 3.1 Pro (high)", "rank": 50, "rankLabel": "50", "releaseDate": "Feb 19, 2026", "resolutionRate": 0.027, "resolutionRatePct": 2.7, "tokens": "7.9B", "uncertaintyPct": 1.7}, {"agent": "Codex", "baseModel": "GPT-5.4 Mini", "cohortModelId": null, "costUsd": 700.0, "model": "GPT-5.4 Mini (xhigh)", "rank": 51, "rankLabel": "51", "releaseDate": "Mar 17, 2026", "resolutionRate": 0.018, "resolutionRatePct": 1.8, "tokens": "4.2B", "uncertaintyPct": 1.3}, {"agent": "mini-swe-agent", "baseModel": "Inkling Small", "cohortModelId": null, "costUsd": 0.0, "model": "Inkling Small (none)", "rank": 52, "rankLabel": "52", "releaseDate": "Jul 30, 2026", "resolutionRate": 0.009, "resolutionRatePct": 0.9, "tokens": "0.4B", "uncertaintyPct": 0.9}, {"agent": "mini-swe-agent", "baseModel": "Nemotron 3.5 Super VL", "cohortModelId": null, "costUsd": 200.0, "model": "Nemotron 3.5 Super VL (none)", "rank": 53, "rankLabel": "53", "releaseDate": "Oct 15, 2026", "resolutionRate": 0.003, "resolutionRatePct": 0.3, "tokens": "3.3B", "uncertaintyPct": 0.6}, {"agent": "mini-swe-agent", "baseModel": "Inkling", "cohortModelId": null, "costUsd": 1000.0, "model": "Inkling (none)", "rank": 54, "rankLabel": "54", "releaseDate": "Jul 17, 2026", "resolutionRate": 0.0, "resolutionRatePct": 0.0, "tokens": "1.4B", "uncertaintyPct": 0.0}], "rowsWithoutCostN": 1, "schemaVersion": "valuerank-terminal-bench-v1", "source": {"captureMethod": "rendered leaderboard snapshot", "capturePath": "/home/user/valuerank/data/tb4-scrape.json", "captureSha256": "c8b154ba586b355497a5bc8305bd5f5ff1ea85847edd575c316dc7173a47a928", "capturedAt": "2026-11-26T03:11:03.572Z", "homepage": "https://www.tbench.ai/", "publisher": "Terminal-Bench / Harbor", "renderedUrl": "https://www.tbench.ai/", "targetUrl": "https://www.tbench.ai/leaderboard/terminal-bench/4.1", "tasksUrl": "https://hub.harborframework.com/datasets/terminal-bench/terminal-bench/4?tab=tasks"}, "version": "4.1"}</script>  <script type="module" src="/assets/js/pages/tb4.js"></script></body>
 </html>

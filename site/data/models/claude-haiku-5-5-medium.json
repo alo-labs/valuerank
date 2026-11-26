@@ -7,15 +7,15 @@
   "selectedPage": "https://artificialanalysis.ai/models/claude-haiku-5-5-medium",
   "summary": {
     "rank": {
-      "api": 18,
-      "plan": 51
+      "api": 14,
+      "plan": 46
     },
     "overall": {
-      "api": 44.55005611093705,
-      "plan": 49.617871754648576
+      "api": 42.965116237122366,
+      "plan": 48.615103220342036
     },
-    "quality": 32.8238290061981,
-    "qualityRank": 18,
+    "quality": 31.486804293789387,
+    "qualityRank": 13,
     "coverage": {
       "pct": 100.0,
       "costAvailable": true,
@@ -41,17 +41,17 @@
       "unit": "AA score (0-1)",
       "normalized": 16.091994949495,
       "source": {
-        "name": "Artificial Analysis model page (Intelligence Index v5.0)",
+        "name": "Artificial Analysis model page (Intelligence Index v5.0.2)",
         "url": "https://artificialanalysis.ai/evaluations/frontiercode-2-0"
       },
-      "observedAt": "2026-11-01",
+      "observedAt": "2026-11-26",
       "evaluatedVariant": null,
       "note": null,
       "grade": "measured"
     },
     {
       "key": "terminalBench",
-      "label": "Terminal-Bench 4.0 (AA run)",
+      "label": "Terminal-Bench 4.1 (AA run)",
       "category": "Software engineering",
       "weightPct": 12.75,
       "value": 15.151515151515198,
@@ -59,10 +59,10 @@
       "unit": "% resolved",
       "normalized": 15.151515151515198,
       "source": {
-        "name": "Artificial Analysis Terminal-Bench 4.0 run (mini-SWE-agent)",
-        "url": "https://www.tbench.ai/leaderboard/terminal-bench/4.0"
+        "name": "Artificial Analysis Terminal-Bench 4.1 run (mini-SWE-agent)",
+        "url": "https://www.tbench.ai/leaderboard/terminal-bench/4.1"
       },
-      "observedAt": "2026-11-01",
+      "observedAt": "2026-11-26",
       "evaluatedVariant": "mini-SWE-agent",
       "note": null,
       "grade": "measured"
@@ -75,12 +75,12 @@
       "value": 16.0,
       "decimals": 1,
       "unit": "% of the board's best planted plus best unplanted bugs fixed (O163, O170)",
-      "normalized": 13.082583810302536,
+      "normalized": 11.49425287356322,
       "source": {
         "name": "Bug Hunt Bench published runs",
         "url": "https://bughunt.productcompass.pm/"
       },
-      "observedAt": "2026-10-27",
+      "observedAt": "2026-11-25",
       "evaluatedVariant": "Haiku 5.5 (medium effort) / Claude Code",
       "note": null,
       "grade": "measured"
@@ -90,34 +90,16 @@
       "label": "AI Coding Daily (excl. bug finding)",
       "category": "Software engineering",
       "weightPct": 7.5,
-      "value": 51.32,
+      "value": 68.75,
       "decimals": 1,
-      "unit": "points of 60",
-      "normalized": 85.53333333333333,
+      "unit": "points of 80",
+      "normalized": 85.9375,
       "source": {
-        "name": "Artificial Analysis model page (Intelligence Index v5.0)",
+        "name": "Artificial Analysis model page (Intelligence Index v5.0.2)",
         "url": "https://aicodingdaily.com/leaderboard"
       },
-      "observedAt": "2026-11-01",
+      "observedAt": "2026-11-26",
       "evaluatedVariant": "Haiku 5.5 (Medium) / Claude Code",
-      "note": null,
-      "grade": "measured"
-    },
-    {
-      "key": "gdpval",
-      "label": "GDPval-AA v2.1",
-      "category": "Professional work",
-      "weightPct": 7.5,
-      "value": 1282.5,
-      "decimals": 1,
-      "unit": "Elo",
-      "normalized": 39.125,
-      "source": {
-        "name": "Artificial Analysis model page (Intelligence Index v5.0)",
-        "url": "https://artificialanalysis.ai/evaluations/gdpval-aa"
-      },
-      "observedAt": "2026-11-01",
-      "evaluatedVariant": null,
       "note": null,
       "grade": "measured"
     },
@@ -131,10 +113,10 @@
       "unit": "AA score (0-1)",
       "normalized": 28.589614814293164,
       "source": {
-        "name": "Artificial Analysis model page (Intelligence Index v5.0)",
+        "name": "Artificial Analysis model page (Intelligence Index v5.0.2)",
         "url": "https://artificialanalysis.ai/evaluations/automationbench-aa"
       },
-      "observedAt": "2026-11-01",
+      "observedAt": "2026-11-26",
       "evaluatedVariant": null,
       "note": null,
       "grade": "measured"
@@ -149,10 +131,46 @@
       "unit": "AA Omniscience Index (-100 to 100)",
       "normalized": 52.083333333333336,
       "source": {
-        "name": "Artificial Analysis model page (Intelligence Index v5.0)",
+        "name": "Artificial Analysis model page (Intelligence Index v5.0.2)",
         "url": "https://artificialanalysis.ai/evaluations/omniscience"
       },
-      "observedAt": "2026-11-01",
+      "observedAt": "2026-11-26",
+      "evaluatedVariant": null,
+      "note": null,
+      "grade": "measured"
+    },
+    {
+      "key": "gdpval",
+      "label": "GDPval-AA v2.1",
+      "category": "Professional work",
+      "weightPct": 3.75,
+      "value": 1282.93,
+      "decimals": 1,
+      "unit": "Elo",
+      "normalized": 39.1465,
+      "source": {
+        "name": "Artificial Analysis model page (Intelligence Index v5.0.2)",
+        "url": "https://artificialanalysis.ai/evaluations/gdpval-aa"
+      },
+      "observedAt": "2026-11-26",
+      "evaluatedVariant": null,
+      "note": null,
+      "grade": "measured"
+    },
+    {
+      "key": "gdpPdf",
+      "label": "GDP.pdf (AA)",
+      "category": "Professional work",
+      "weightPct": 3.75,
+      "value": 0.152,
+      "decimals": 3,
+      "unit": "share of tasks fully passed (0-1)",
+      "normalized": 15.2,
+      "source": {
+        "name": "Artificial Analysis model page (Intelligence Index v5.0.2)",
+        "url": "https://artificialanalysis.ai/evaluations/gdp-pdf"
+      },
+      "observedAt": "2026-11-26",
       "evaluatedVariant": null,
       "note": null,
       "grade": "measured"
@@ -167,10 +185,10 @@
       "unit": "accuracy (0-1)",
       "normalized": 77.3333333333333,
       "source": {
-        "name": "Artificial Analysis model page (Intelligence Index v5.0)",
+        "name": "Artificial Analysis model page (Intelligence Index v5.0.2)",
         "url": "https://artificialanalysis.ai/evaluations/artificial-analysis-long-context-reasoning"
       },
-      "observedAt": "2026-11-01",
+      "observedAt": "2026-11-26",
       "evaluatedVariant": null,
       "note": null,
       "grade": "measured"
@@ -185,10 +203,10 @@
       "unit": "accuracy (0-1)",
       "normalized": 16.8,
       "source": {
-        "name": "Artificial Analysis model page (Intelligence Index v5.0)",
+        "name": "Artificial Analysis model page (Intelligence Index v5.0.2)",
         "url": "https://artificialanalysis.ai/evaluations/hle-diamond"
       },
-      "observedAt": "2026-11-01",
+      "observedAt": "2026-11-26",
       "evaluatedVariant": null,
       "note": null,
       "grade": "measured"
@@ -203,10 +221,10 @@
       "unit": "% resolved (0-1)",
       "normalized": 7.14285714285714,
       "source": {
-        "name": "Artificial Analysis model page (Intelligence Index v5.0)",
+        "name": "Artificial Analysis model page (Intelligence Index v5.0.2)",
         "url": "https://artificialanalysis.ai/evaluations/terminal-bench-science"
       },
-      "observedAt": "2026-11-01",
+      "observedAt": "2026-11-26",
       "evaluatedVariant": null,
       "note": null,
       "grade": "measured"
@@ -216,15 +234,15 @@
       "label": "CritPt v2 (hard subset)",
       "category": "Knowledge and science",
       "weightPct": 1.25,
-      "value": 0.3,
+      "value": 0.305,
       "decimals": 3,
       "unit": "score (0-1)",
-      "normalized": 30.0,
+      "normalized": 30.5,
       "source": {
-        "name": "Artificial Analysis model page (Intelligence Index v5.0)",
+        "name": "Artificial Analysis model page (Intelligence Index v5.0.2)",
         "url": "https://artificialanalysis.ai/evaluations/critpt-v2"
       },
-      "observedAt": "2026-11-01",
+      "observedAt": "2026-11-26",
       "evaluatedVariant": null,
       "note": null,
       "grade": "measured"
@@ -248,7 +266,7 @@
     },
     "subset": false,
     "partialComponents": [],
-    "workload": "835a9baf594a1251",
+    "workload": "9c122a3ecb672aae",
     "planFlags": [
       "workload-unmatched",
       "owner-named transfer (assumption)",
@@ -256,14 +274,14 @@
       "valuation basis unverified"
     ],
     "costScore": {
-      "api": 79.72873742515391,
+      "api": 77.40005206712131,
       "plan": 100.0
     },
     "components": [
       {
         "key": "aa-briefcase",
         "label": "AA-Briefcase",
-        "costUsd": 12.10322039627551,
+        "costUsd": 12.103220396275514,
         "completeness": "confirmed-complete",
         "source": "AA Intelligence Index evaluation cost (cost per task x task count)",
         "agent": null,
@@ -288,9 +306,9 @@
         "admitted": true
       },
       {
-        "key": "terminalbench-4-0",
-        "label": "Terminal-Bench 4.0 (AA Index run)",
-        "costUsd": 12.789680501671759,
+        "key": "terminalbench-4-1",
+        "label": "Terminal-Bench 4.1 (AA Index run)",
+        "costUsd": 12.789680501671757,
         "completeness": "confirmed-complete",
         "source": "AA Intelligence Index evaluation cost (cost per task x task count)",
         "agent": null,
@@ -299,7 +317,7 @@
       {
         "key": "frontiercode-2-0",
         "label": "FrontierCode 2.0",
-        "costUsd": 10.05937723323133,
+        "costUsd": 10.059377233231329,
         "completeness": "confirmed-complete",
         "source": "AA Intelligence Index evaluation cost (cost per task x task count)",
         "agent": null,
@@ -308,7 +326,7 @@
       {
         "key": "terminal-bench-science",
         "label": "Terminal-Bench-Science",
-        "costUsd": 17.205049875137156,
+        "costUsd": 17.20504987513716,
         "completeness": "confirmed-complete",
         "source": "AA Intelligence Index evaluation cost (cost per task x task count)",
         "agent": null,
@@ -353,8 +371,8 @@
       "planIntervalEligible": false,
       "usdPerRun": 1.1339466466831103,
       "selected": true,
-      "planRank": 51,
-      "planValue": 49.617871754648576
+      "planRank": 46,
+      "planValue": 48.615103220342036
     },
     {
       "id": "claude-max20x-claude-haiku-5-5-medium-common-opus55-assumption",
@@ -371,8 +389,8 @@
       "planIntervalEligible": false,
       "usdPerRun": 1.139168642156493,
       "selected": false,
-      "planRank": 51,
-      "planValue": 49.617871754648576
+      "planRank": 46,
+      "planValue": 48.615103220342036
     },
     {
       "id": "claude-max5x-claude-haiku-5-5-medium-common-opus55-assumption",
@@ -389,8 +407,8 @@
       "planIntervalEligible": false,
       "usdPerRun": 1.1666280784215755,
       "selected": false,
-      "planRank": 51,
-      "planValue": 49.617871754648576
+      "planRank": 46,
+      "planValue": 48.615103220342036
     },
     {
       "id": "opencode-go-claude-haiku-5-5-medium-dollar-limit",
@@ -407,8 +425,8 @@
       "planIntervalEligible": false,
       "usdPerRun": 44.52630499309013,
       "selected": false,
-      "planRank": 71,
-      "planValue": 40.96264469073802
+      "planRank": 62,
+      "planValue": 39.95987615643148
     }
   ],
   "scenarios": {
@@ -439,7 +457,7 @@
         "unevaluable": null,
         "top1": 0.0,
         "top3": 0.0,
-        "frontier": 0.6205
+        "frontier": 0.6467
       },
       {
         "stratum": "S1",
@@ -466,7 +484,7 @@
         "unevaluable": null,
         "top1": 0.0,
         "top3": 0.0,
-        "frontier": 0.5189
+        "frontier": 0.5307
       },
       {
         "stratum": "S1T",
@@ -475,7 +493,7 @@
         "unevaluable": null,
         "top1": 0.0,
         "top3": 0.0,
-        "frontier": 0.5315
+        "frontier": 0.5554
       }
     ],
     "plan": [
@@ -555,8 +573,8 @@
       "version": "v3.0.0",
       "date": "2026-10-19",
       "rank": {
-        "api": 18,
-        "plan": 51
+        "api": 14,
+        "plan": 46
       }
     }
   ],
@@ -591,12 +609,12 @@
       "shown": true,
       "rankingEligible": true,
       "rank": {
-        "api": 18,
-        "plan": 51
+        "api": 14,
+        "plan": 46
       },
       "overall": {
-        "api": 44.55005611093705,
-        "plan": 49.617871754648576
+        "api": 42.965116237122366,
+        "plan": 48.615103220342036
       }
     },
     {
@@ -606,12 +624,12 @@
       "shown": false,
       "rankingEligible": true,
       "rank": {
-        "api": 30,
-        "plan": 93
+        "api": 26,
+        "plan": 86
       },
       "overall": {
-        "api": 35.62752494220455,
-        "plan": 44.32089882977433
+        "api": 34.6214817564006,
+        "plan": 43.25208034939115
       }
     }
   ]

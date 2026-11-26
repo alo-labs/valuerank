@@ -163,7 +163,7 @@ def swe_companion(rows: list[dict], main_workload: str) -> dict:
     median = statistics.median(ratios.values()) if ratios else None
     return {
         "rule": "c_SWE = Coding Agent Index cost + Terminal-Bench 4.1 (AA Index run) cost, from published per-task costs; flagged when its ratio to the basket cost deviates by more than 50% from the panel median",
-        "excludedComponents": {},  # O50: FrontierCode is priced inside the Coding Agent Index v2.0
+        "excludedComponents": {},  # O50: FrontierCode is priced inside the Coding Agent Index (v2.0, then v2.1)
         "medianRatio": median,
         "rows": {
             row_id: {"cSweUsd": costs[row_id], "ratio": ratio, "flag": abs(ratio / median - 1.0) > SWE_DEVIATION_LIMIT}

@@ -21,12 +21,13 @@
       "costAvailable": false,
       "missing": [
         "FrontierCode 2.0",
-        "Terminal-Bench 4.0 (AA run)",
+        "Terminal-Bench 4.1 (AA run)",
         "Bug Hunt Bench",
         "Vibe Code Bench v1.1 (Vals)",
         "Code Migration v1.1 (Vals)",
         "LiveBench 2.0 Overall",
         "GDPval-AA v2.1",
+        "GDP.pdf (AA)",
         "AutomationBench-AA",
         "AA-Omniscience v1.1",
         "AA-LCR v1.1",
@@ -77,27 +78,12 @@
     },
     {
       "key": "terminalBench",
-      "label": "Terminal-Bench 4.0 (AA run)",
+      "label": "Terminal-Bench 4.1 (AA run)",
       "category": "Software engineering",
       "weightPct": 8.25,
       "value": null,
       "decimals": 1,
       "unit": "% resolved",
-      "normalized": null,
-      "source": null,
-      "observedAt": null,
-      "evaluatedVariant": null,
-      "note": null,
-      "grade": "missing"
-    },
-    {
-      "key": "gdpval",
-      "label": "GDPval-AA v2.1",
-      "category": "Professional work",
-      "weightPct": 7.5,
-      "value": null,
-      "decimals": 1,
-      "unit": "Elo",
       "normalized": null,
       "source": null,
       "observedAt": null,
@@ -173,6 +159,36 @@
       "value": null,
       "decimals": 1,
       "unit": "% of test workflows passed",
+      "normalized": null,
+      "source": null,
+      "observedAt": null,
+      "evaluatedVariant": null,
+      "note": null,
+      "grade": "missing"
+    },
+    {
+      "key": "gdpval",
+      "label": "GDPval-AA v2.1",
+      "category": "Professional work",
+      "weightPct": 3.75,
+      "value": null,
+      "decimals": 1,
+      "unit": "Elo",
+      "normalized": null,
+      "source": null,
+      "observedAt": null,
+      "evaluatedVariant": null,
+      "note": null,
+      "grade": "missing"
+    },
+    {
+      "key": "gdpPdf",
+      "label": "GDP.pdf (AA)",
+      "category": "Professional work",
+      "weightPct": 3.75,
+      "value": null,
+      "decimals": 3,
+      "unit": "share of tasks fully passed (0-1)",
       "normalized": null,
       "source": null,
       "observedAt": null,
@@ -298,9 +314,9 @@
   "frontier": {
     "onAaFrontier": false,
     "aaFrontierNote": "Not on the observed Artificial Analysis Intelligence Index versus total cost frontier.",
-    "tier": "left cohort",
+    "tier": "near",
     "configuration": "Claude Haiku 5.5 (xhigh)",
-    "intelligenceGap": null,
+    "intelligenceGap": 3,
     "footnote": "Claude Haiku 5.5 has 5x higher pricing on longer-context inputs which are not currently reflected; we are working to include this in cost figures across Artificial Analysis."
   },
   "rankings": [
@@ -341,12 +357,12 @@
       "shown": false,
       "rankingEligible": true,
       "rank": {
-        "api": 24,
-        "plan": 55
+        "api": 20,
+        "plan": 49
       },
       "overall": {
-        "api": 40.49602481788262,
-        "plan": 51.957133743087184
+        "api": 39.03142344457445,
+        "plan": 50.409771119855904
       }
     }
   ]
