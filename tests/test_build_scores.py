@@ -572,7 +572,7 @@ CAPTURE_CASES += [
     ("capture", lambda d: d.update(rendered_pareto_svg_path="M 1 2 Q 3 4"), "M/L coordinate pairs"),
     ("capture", lambda d: d.pop("rendered_pareto_svg_path"), "M/L coordinate pairs"),
     ("capture", _capture_path_falls, "does not rise strictly"),
-    ("capture", lambda d: d["points"].append({**next(item for item in d["points"] if item["fallback"]), "model_name": "Twin", "fallback": None}),
+    ("capture", lambda d: d["points"].append({**next(item for item in d["points"] if item["family"].startswith("Claude")), "model_name": "Twin", "fallback": "Default Fallback"}),
      r"both with and without fallback \(a matching decision is required, E214\): Claude"),
     ("capture", lambda d: d["points"].append({**d["points"][0], "model_name": "Cheaper Model", "svg_x": min(item["svg_x"] for item in d["frontier"]) - 10}),
      r"left of the rendered Pareto path \(an owner decision is required, E204\): Cheaper Model"),
@@ -617,11 +617,9 @@ def aa_edit(model_id, **changes):
 
 AA_IDENTITY_CASES = [
     (aa_edit("gpt-6-luna-high", aaUrl="https://artificialanalysis.ai/models/not-a-row"), "must identify one exact selected source URL"),
-    (aa_edit("gpt-6.1-sol", aaSlug="other-slug"), "source slug does not match"),
-    (aa_edit("gpt-6.1-sol", displayName="GPT-6 Astra"), "family does not match selected catalog identity"),
-    (aa_edit("mimo-v2-6-flash", aaVariant="high"), "unexpected selected effort"),
-    (aa_edit("gpt-6.1-sol", aaVariant="min"), "effort does not match selected catalog variant"),
-    (aa_edit("claude-opus-5-5-xhigh", aaName="Claude Opus 5.5 (Xhigh)", aaShortName="Opus 5.5 (xhigh)"), "fallback does not match"),
+    (aa_edit("gpt-6.2-sol", aaSlug="other-slug"), "source slug does not match"),
+    (aa_edit("gpt-6.2-sol", displayName="GPT-6 Astra"), "family does not match selected catalog identity"),
+    (aa_edit("gpt-6.2-sol", aaVariant="min"), "effort does not match selected catalog variant"),
 ]
 
 
@@ -629,6 +627,54 @@ AA_IDENTITY_CASES = [
 def test_frontier_family_must_match_selected_catalog(world, mutation, message):
     edit(world, "aa", mutation)
     with pytest.raises(ValueError, match=message):
+        run_main(world)
+
+
+SOL_URL = "https://artificialanalysis.ai/models/gpt-6-2-sol"
+FABLE_URL = "https://artificialanalysis.ai/models/claude-fable-5-2"
+
+
+def _capture_rows(document):
+    return [item for key in ("points", "frontier", "near_frontier") for item in document.get(key) or []]
+
+
+def _inventory_rows(document):
+    return [item for key in ("rows", "nearFrontierRows") for item in document.get(key) or []]
+
+
+def _as_reasoning_only(document):
+    """AA plots a model with no effort setting as "reasoning" in the inventory and with no effort in the capture."""
+
+    for item in _capture_rows(document):
+        if item.get("url") == SOL_URL:
+            item["effort"] = None
+    for item in _inventory_rows(document):
+        if item.get("sourceUrl") == SOL_URL:
+            item["evaluatedVariant"] = "Reasoning"
+
+
+def test_a_reasoning_only_frontier_identity_must_not_select_an_effort(world):
+    edit(world, "capture", _as_reasoning_only)
+    edit(world, "inventory", _as_reasoning_only)
+    with pytest.raises(ValueError, match="unexpected selected effort"):
+        run_main(world)
+
+
+def test_a_fallback_in_the_inventory_must_be_named_by_the_catalog_identity(world):
+    """AA's chart no longer prints "with fallback", but an inventory row that still does must match the catalog's own labels."""
+
+    def with_fallback(document):
+        for item in _capture_rows(document):
+            if item.get("url") == FABLE_URL:
+                item["fallback"] = "Default Fallback"
+        for item in _inventory_rows(document):
+            if item.get("sourceUrl") == FABLE_URL:
+                item["evaluatedVariant"] = f"{item['evaluatedVariant']} with fallback"
+
+    edit(world, "capture", with_fallback)
+    edit(world, "inventory", with_fallback)
+    edit(world, "aa", aa_edit("claude-fable-5-2", aaName="Claude Fable 5.2 (Max)", aaShortName="Fable 5.2 (max)"))
+    with pytest.raises(ValueError, match="fallback does not match"):
         run_main(world)
 
 
@@ -773,9 +819,13 @@ def test_single_missing_cost_leaves_that_row_unnormalized(world):
 
 def test_provider_claim_for_primary_model_is_recorded(world):
     def fn(document):
-        claim = dict(document["providerClaims"][0])
-        claim.update(cohortModelId="mimo-v2-6-flash", claimId="mimo-claim", sourceUrl="https://example.invalid/claim")
-        document["providerClaims"].append(claim)
+        # The release carries no provider claim, so the record is written out in full.
+        document["providerClaims"].append({
+            "claimId": "mimo-claim", "benchmark": "Terminal-Bench", "benchmarkVersion": "4.1", "component": "resolutionRate",
+            "cohortModelId": "mimo-v2-6-flash", "evaluatedModel": "MiMo-V2.6-Flash", "value": 0.312, "valuePct": 31.2,
+            "sourceType": "model_provider_claim", "publisher": "Xiaomi", "publishedOn": "2026-11-01", "sourceUrl": "https://example.invalid/claim",
+            "eligibleForRanking": True, "eligibilityScope": "current API alias", "alias": "mimo-v2.6-flash", "aliasStatus": "current", "caveat": "fixture",
+        })
     edit(world, "tb4", fn)
     run_main(world)
     out = outputs(world)

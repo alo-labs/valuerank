@@ -284,7 +284,7 @@ def test_coding_share_text_reports_the_median_coding_share():
     assert "make up 30% of the basket's cost (median over 2 configurations with the full basket; 20% to 40%)" in text and "SWE-Atlas" not in text
     # O50: SWE-Atlas QnA's share is stated only while the Coding Agent Index is in the basket.
     with_index = ed.coding_share_text({"rows": rows, "admission": {"admitted": ["coding-agent-index", "gdpval-aa"]}})
-    assert "SWE-Atlas QnA (124 of its 290 tasks) has no quality leaf either" in with_index
+    assert "SWE-Atlas QnA (124 of its 322 tasks) has no quality leaf either" in with_index
     assert ed.coding_share_text({"rows": rows[2:], "admission": {"admitted": []}}) == ""
     # E343: with Terminal-Bench-Science admitted, the share is also printed with its terminal tasks counted.
     science = [row({"frontiercode-2-0": 20.0, "terminal-bench-science": 30.0, "gdpval-aa": 50.0})]

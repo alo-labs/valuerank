@@ -183,6 +183,17 @@ def test_capture_fetches_and_decodes_page(net):
     assert headers["User-agent"] == "ValueRank/1.6 official-source-refresh"
 
 
+def test_capture_derives_per_evaluation_costs_from_weighted_values(net):
+    """Index v5.0.2 pages list weighted cost per task only (an evaluation's cost per task times its Index weight)."""
+
+    listed = {"evaluations": [{"slug": "aa-briefcase", "weightedCostPerTask": 0.3}, {"slug": "renamed-by-aa", "weightedCostPerTask": 0.1}]}
+    body = page_html({"slug": "m", "intelligenceIndexCostPerTask": listed}).encode()
+    net.pages["https://artificialanalysis.ai/models/m"] = FakeResponse(body)
+    derived = ca.capture(entry(), {})["model"]["intelligenceIndexEvaluations"]
+    assert derived[0]["slug"] == "aa-briefcase" and derived[0]["costPerTask"] == pytest.approx(0.3 / 0.15)
+    assert derived[1]["slug"] == "renamed-by-aa" and "costPerTask" not in derived[1] and derived[1]["indexWeight"] is None
+
+
 def test_capture_defaults_missing_content_type_to_empty(net):
     net.pages["https://artificialanalysis.ai/models/m"] = FakeResponse(
         page_html({"slug": "m"}).encode(), content_type=None)

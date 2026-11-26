@@ -74,8 +74,8 @@ def capture(entry: dict, preserved_pages: dict) -> dict:
         # O103: the notes AA prints on the page, verbatim, beside its model object.
         model = {**decode_page_model(html, page_slug(url)), "notes": printed_notes(html)}
         # Index v5.0.2 pages list weighted cost per task only; the per-evaluation cost per task is derived (basket.evaluations_from_weighted).
-        if not model.get("intelligenceIndexEvaluations"):
-            model["intelligenceIndexEvaluations"] = basket.evaluations_from_weighted(model)
+        if not model.get("intelligenceIndexEvaluations") and (derived := basket.evaluations_from_weighted(model)):
+            model["intelligenceIndexEvaluations"] = derived
         return {
             "id": entry["id"],
             "requestedName": entry.get("displayName"),

@@ -6,7 +6,7 @@ export VALUERANK_NOW=2026-11-26T14:00:00Z
 python3 -m valuerank.build_scores >/dev/null
 python3 -m valuerank.value_v3 scenarios >/dev/null
 python3 -m valuerank.build_scores >/dev/null
-python3 -m valuerank.aa_reconciliation >/dev/null || true
+python3 -m valuerank.aa_reconciliation >/dev/null
 npm run -s build:docs >/dev/null
 npm run -s generate:og >/dev/null 2>&1 || true
 python3 -m valuerank.draft_figures render

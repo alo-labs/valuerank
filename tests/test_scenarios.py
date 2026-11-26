@@ -309,15 +309,15 @@ def test_singleton_group_within_weight_is_exactly_one():
 
 
 def test_only_the_full_composite_s1_core_branch_authorises_the_label():
-    """E100 fixture: 70% coverage, observed leaves at 100, against a fully observed reference at 80."""
+    """E100 fixture: 85% coverage, observed leaves at 100, against a fully observed reference at 90."""
 
-    observed = {leaf.key: Kernel("fixed", (100.0,)) for leaf in q.LEAVES if leaf.key not in {"gdpval", "automationBench", "omniscience"}}
+    observed = {leaf.key: Kernel("fixed", (100.0,)) for leaf in q.LEAVES if leaf.key not in {"gdpval", "gdpPdf", "lcr"}}
     candidate = RowInputs("c", observed, Kernel("fixed", (10.0,)))
-    reference = full_row("ref", 80.0, 100.0)
+    reference = full_row("ref", 90.0, 100.0)
     s0 = sc.scenario_supported_cheapest([candidate, reference], "c", "ref", "S0", random.Random(11), batch=500, looks=2)
     assert s0["share"] == 1.0 and s0["labelAuthorized"] is False and s0["label"] is False
     assert s0["decisionTarget"]["qualityEquation"].startswith("observed leaves")
-    # Full composite: 70 + 0.1 * (U1 + U2 + U3) >= 80 holds with probability 5/6, below the 90% bar.
+    # Full composite: 85 + 0.05 * (U1 + U2 + U3) >= 90 holds with probability 5/6, below the 90% bar.
     s1 = sc.scenario_supported_cheapest([candidate, reference], "c", "ref", "S1", random.Random(11), batch=1000, looks=2)
     assert s1["labelAuthorized"] is True and s1["status"] == "not met" and s1["label"] is False
     assert s1["share"] == pytest.approx(5 / 6, abs=0.04)
@@ -328,15 +328,15 @@ def test_only_the_full_composite_s1_core_branch_authorises_the_label():
 
 
 def test_kernel_robust_label_needs_every_kernel():
-    """E112 fixture: 70% coverage, three missing 10% leaves (GDPval-AA, AutomationBench-AA, Omniscience), reference at 78.
+    """E112 fixture: 85% coverage, three missing 5% leaves (GDPval-AA, GDP.pdf, AA-LCR), reference at 89.
 
-    The candidate qualifies when 70 + 0.1 * (U1 + U2 + U3) >= 78: about 91.5% of
+    The candidate qualifies when 85 + 0.05 * (U1 + U2 + U3) >= 89: about 91.5% of
     uniform draws but 86.7% of arcsine (endpoint-heavy) draws, so no label.
     """
 
-    missing = {"gdpval", "automationBench", "omniscience"}
+    missing = {"gdpval", "gdpPdf", "lcr"}
     candidate = RowInputs("c", {leaf.key: Kernel("fixed", (100.0,)) for leaf in q.LEAVES if leaf.key not in missing}, Kernel("fixed", (10.0,)))
-    reference = full_row("ref", 78.0, 100.0)
+    reference = full_row("ref", 89.0, 100.0)
     result = sc.kernel_robust_cheapest([candidate, reference], "c", "ref", 21, batch=10000, looks=2)
     primary, heavy = result["assignments"]["UU"], result["assignments"]["HU"]
     assert sorted(result["assignments"]) == ["HH", "HU", "UH", "UU"]  # no competitors: the empty competitor block takes no letter
@@ -344,19 +344,19 @@ def test_kernel_robust_label_needs_every_kernel():
     assert heavy["status"] == "not met" and heavy["share"] == pytest.approx(0.867, abs=0.01)
     assert result["label"] is False and result["reading"] == "primary-kernel frequency >= 90%; kernel-sensitive"
     assert result["frequencyRange"][0] < 0.9 <= result["frequencyRange"][1]
-    always = sc.kernel_robust_cheapest([full_row("c", 80.0, 10.0), reference, full_row("x", 90.0, 500.0)], "c", "ref", 3, batch=100, looks=1)
+    always = sc.kernel_robust_cheapest([full_row("c", 91.0, 10.0), reference, full_row("x", 95.0, 500.0)], "c", "ref", 3, batch=100, looks=1)
     assert len(always["assignments"]) == 8 and always["label"] is True and always["reading"] == "supported under all registered role-group kernel checks"
     assert always["kernelCheck"]["switchGroups"]["competitors"] == ["x"] and always["kernelCheck"]["executionStatus"] == "completed"
     assert result["kernelCheck"]["dependencyComponents"] == [["c"], ["ref"]]
-    borderline = sc.kernel_robust_cheapest([candidate, full_row("ref", 79.0, 100.0)], "c", "ref", 2, batch=200, looks=1)
+    borderline = sc.kernel_robust_cheapest([candidate, full_row("ref", 89.5, 100.0)], "c", "ref", 2, batch=200, looks=1)
     assert borderline["kernelCheck"]["executionStatus"] == "threshold unresolved"
     assert borderline["reading"] == "scenario threshold unresolved" and borderline["label"] is False
     assert len(borderline["kernelCheck"]["assignmentSetHash"]) == 16
     # Several independent competitor components map to one competitor group: group assignments only.
-    crowd = [full_row("c", 80.0, 10.0), reference] + [full_row(f"x{i}", 90.0, 500.0) for i in range(4)]
+    crowd = [full_row("c", 91.0, 10.0), reference] + [full_row(f"x{i}", 95.0, 500.0) for i in range(4)]
     grouped = sc.kernel_robust_cheapest(crowd, "c", "ref", 4, batch=100, looks=1)
     assert len(grouped["assignments"]) == 8 and grouped["kernelCheck"]["switchGroups"]["competitors"] == ["x0", "x1", "x2", "x3"]
-    provisional = sc.kernel_robust_cheapest([full_row("c", 80.0, 10.0, provisional=True), reference], "c", "ref", 3, batch=100, looks=1)
+    provisional = sc.kernel_robust_cheapest([full_row("c", 91.0, 10.0, provisional=True), reference], "c", "ref", 3, batch=100, looks=1)
     assert provisional["label"] is False and provisional["reading"] == "frequency only (provisional row)"
     never = sc.kernel_robust_cheapest([full_row("c", 50.0, 10.0), reference], "c", "ref", 3, batch=100, looks=1)
     assert never["reading"] == "not scenario-supported"
@@ -365,17 +365,17 @@ def test_kernel_robust_label_needs_every_kernel():
 
 
 def test_a_quality_level_bar_has_no_reference_block():
-    """E192: the E121 fixture with the bar as the level 78 gives the same frequencies; codes cover candidate and competitors."""
+    """E192: the E121 fixture with the bar as the level 89 gives the same frequencies; codes cover candidate and competitors."""
 
-    missing = {"gdpval", "automationBench", "omniscience"}
+    missing = {"gdpval", "gdpPdf", "lcr"}
     candidate = RowInputs("c", {leaf.key: Kernel("fixed", (100.0,)) for leaf in q.LEAVES if leaf.key not in missing}, Kernel("fixed", (10.0,)))
-    result = sc.kernel_robust_cheapest([candidate], "c", 78.0, 21, batch=10000, looks=2)
+    result = sc.kernel_robust_cheapest([candidate], "c", 89.0, 21, batch=10000, looks=2)
     assert sorted(result["assignments"]) == ["H", "U"]
     assert result["assignments"]["U"]["share"] == pytest.approx(0.915, abs=0.01) and result["assignments"]["H"]["share"] == pytest.approx(0.867, abs=0.01)
-    assert result["assignments"]["U"]["decisionTarget"]["referenceObjectId"] == {"level": 78.0}
+    assert result["assignments"]["U"]["decisionTarget"]["referenceObjectId"] == {"level": 89.0}
     assert result["kernelCheck"]["switchGroups"] == {"candidate": ["c"], "reference": [], "competitors": []}
-    rival = full_row("x", 90.0, 500.0)
-    assert [item["id"] for item in sc.kernel_assignments([candidate, rival], "c", 78.0)] == ["UU", "UH", "HU", "HH"]
+    rival = full_row("x", 95.0, 500.0)
+    assert [item["id"] for item in sc.kernel_assignments([candidate, rival], "c", 89.0)] == ["UU", "UH", "HU", "HH"]
     assert sc.cheapest_qualifier({"c": (10.0, 80.0), "x": (500.0, 90.0)}, 78.0) == "c"
     assert sc.cheapest_qualifier({"c": (10.0, 70.0), "x": (500.0, 90.0)}, 78.0) == "x"
 

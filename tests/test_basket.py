@@ -239,5 +239,18 @@ def test_admission_units_are_the_named_targets_whatever_the_accounting_represent
     children = {row: {key: value for key, value in entry.items() if key != b.CODING_AGENT_INDEX} for row, entry in costs.items()}
     for row in ("1", "2", "3", "4"):
         children[row].update({task: FULL for task in b.CODING_AGENT_TASKS})
-    with pytest.raises(ValueError, match="not a unit: frontiercode-v1.1-main, swe-atlas-qna, terminal-bench-v4"):
+    with pytest.raises(ValueError, match="not a unit: frontiercode-v2.0, swe-atlas-qna, terminal-bench-v4"):
         b.admission_panel(children, ranked)
+
+
+def test_index_evaluation_weights_sum_to_one_and_derive_cost_per_task():
+    """Index v5.0.2 prints each evaluation's weighted cost per task; dividing by the registered weight gives the cost per task."""
+
+    assert sum(b.INDEX_EVALUATION_WEIGHTS.values()) == pytest.approx(1.0)
+    listed = {"intelligenceIndexCostPerTask": {"evaluations": [
+        {"slug": "omniscience", "weightedCostPerTask": 3.0}, {"slug": "unknown-eval", "weightedCostPerTask": 1.0}, {"slug": "hle-diamond"},
+    ]}}
+    rows = {row["slug"]: row for row in b.evaluations_from_weighted(listed)}
+    assert rows["omniscience"]["costPerTask"] == pytest.approx(3.0 / 0.15)
+    assert "costPerTask" not in rows["unknown-eval"] and rows["unknown-eval"]["indexWeight"] is None
+    assert "costPerTask" not in rows["hle-diamond"] and b.evaluations_from_weighted({}) == []

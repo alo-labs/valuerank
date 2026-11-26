@@ -771,7 +771,7 @@
       {
         "rank": 4,
         "modelId": "claude-opus-5-5",
-        "name": "Claude Opus 5.5",
+        "name": "Claude Opus 5.5 (max)",
         "fixedOf105": 41.7,
         "emphasisScore": 50.6,
         "primaryRank": 2
@@ -1106,9 +1106,9 @@
     },
     {
       "id": "claude-opus-5-5",
-      "name": "Claude Opus 5.5",
+      "name": "Claude Opus 5.5 (max)",
       "family": "Claude Opus 5.5",
-      "shortName": "Opus 5.5",
+      "shortName": "Opus 5.5 (max)",
       "developer": "Anthropic",
       "frontierSelection": null,
       "aaFrontierTier": "near",
@@ -9399,7 +9399,7 @@
     "Claude Haiku 5.5 (medium)",
     "GPT-6.1 Terra (high)",
     "GPT-6.1 Sol (medium)",
-    "Claude Opus 5.5",
+    "Claude Opus 5.5 (max)",
     "GPT-6.1 Sol (max)",
     "GPT-6 Luna (xhigh)",
     "Claude Haiku 5.5 (high)",
@@ -16542,7 +16542,7 @@
       },
       {
         "id": "claude-opus-5-5",
-        "name": "Claude Opus 5.5",
+        "name": "Claude Opus 5.5 (max)",
         "effort": "max",
         "aaSlug": "claude-opus-5-5",
         "configurationMapped": true,
@@ -20112,7 +20112,7 @@
       {
         "id": "claude-opus-5-5@claude-max-20x",
         "configurationId": "claude-opus-5-5",
-        "name": "Claude Opus 5.5",
+        "name": "Claude Opus 5.5 (max)",
         "plan": "Claude Max 20x",
         "representative": false,
         "routeId": "claude-max20x-opus55-semianalysis",
@@ -20136,7 +20136,7 @@
       {
         "id": "claude-opus-5-5@claude-max-5x",
         "configurationId": "claude-opus-5-5",
-        "name": "Claude Opus 5.5",
+        "name": "Claude Opus 5.5 (max)",
         "plan": "Claude Max 5x",
         "representative": false,
         "routeId": "claude-max5x-opus55-semianalysis",
@@ -20160,7 +20160,7 @@
       {
         "id": "claude-opus-5-5@claude-pro",
         "configurationId": "claude-opus-5-5",
-        "name": "Claude Opus 5.5",
+        "name": "Claude Opus 5.5 (max)",
         "plan": "Claude Pro",
         "representative": true,
         "routeId": "claude-pro-opus55-semianalysis",
@@ -23411,19 +23411,19 @@
         "stratum": "S2",
         "status": "evaluated",
         "agentEffects": {
-          "GitHub Copilot": -0.2490626859111715,
-          "Mistral Vibe": -0.17052953661919876,
-          "DeepSeek Harness": 0.35774041323595707,
+          "Claude Code": -0.0753374555224899,
           "Codex": -0.032178497846096075,
-          "OpenCode": -0.10548604664230556,
-          "mini-swe-agent": -0.07986623090765842,
-          "Grok Build": 0.14921170923385282,
-          "Qwen Code": -0.13909662380990237,
+          "DeepSeek Harness": 0.35774041323595707,
           "Devin CLI": -0.09539573440702916,
+          "GitHub Copilot": -0.2490626859111715,
+          "Grok Build": 0.14921170923385282,
           "Kimi Code CLI": 0.21544371346000188,
-          "Pi": -0.47735274377623593,
+          "Mistral Vibe": -0.17052953661919876,
           "Muse Code": 0.7019097195122759,
-          "Claude Code": -0.0753374555224899
+          "OpenCode": -0.10548604664230556,
+          "Pi": -0.47735274377623593,
+          "Qwen Code": -0.13909662380990237,
+          "mini-swe-agent": -0.07986623090765842
         },
         "rows": {
           "claude-opus-5-5": {
@@ -27072,7 +27072,7 @@
         {
           "key": "roster",
           "artifact": "data/aa_mapping.json",
-          "sha256": "c8e5a9c1fbf88a4364bd8d1357ce7857d27f43d5c804819714997edff2486f10",
+          "sha256": "bbdddb3a6775ccd470c6cceb9c4eceab0f6a6779ca79c58cb95665fbc5f2d8e7",
           "capturedAt": "2026-11-26T02:18:20Z",
           "extractor": "editorial roster: every configuration AA plots on its rendered frontier or within 3 Index points of it (O51)"
         },
@@ -27175,7 +27175,7 @@
           "extractor": "valuerank.value_v3 freeze"
         }
       ],
-      "bundleHash": "ed71d1119854f05d07aeba425d83f248e374b45e07a22bb1eb29e3ae90717dc9",
+      "bundleHash": "b79762f96a06b3b62ee8abbb33aae7797fe91146b600b7a7b34f8322b70c8369",
       "rebuild": "every published output is rebuilt from these artifacts at the pinned publication clock (npm run verify:docs), never from live pages"
     },
     "track": {
@@ -39194,7 +39194,7 @@
         "listedBeyondAnchors": [
           {
             "id": "claude-opus-5-5",
-            "name": "Claude Opus 5.5",
+            "name": "Claude Opus 5.5 (max)",
             "basis": "api",
             "workload": "9c122a3ecb672aae",
             "costUsd": 7048.371103550178,
@@ -53157,7 +53157,7 @@
         },
         {
           "id": "claude-opus-5-5",
-          "name": "Claude Opus 5.5",
+          "name": "Claude Opus 5.5 (max)",
           "effort": "max",
           "missing": [
             "aiCodingDaily"
@@ -53442,7 +53442,7 @@
         },
         {
           "id": "claude-opus-5-5",
-          "name": "Claude Opus 5.5",
+          "name": "Claude Opus 5.5 (max)",
           "label": "not ranked, not comparable: quality on the leaves the configuration has, renormalised, with no imputation (O41)",
           "workload": "9c122a3ecb672aae",
           "missing": [
@@ -56052,19 +56052,19 @@
           "stratum": "S2",
           "status": "evaluated",
           "agentEffects": {
-            "GitHub Copilot": -0.2490626859111715,
-            "Mistral Vibe": -0.17052953661919876,
-            "DeepSeek Harness": 0.35774041323595707,
+            "Claude Code": -0.0753374555224899,
             "Codex": -0.032178497846096075,
-            "OpenCode": -0.10548604664230556,
-            "mini-swe-agent": -0.07986623090765842,
-            "Grok Build": 0.14921170923385282,
-            "Qwen Code": -0.13909662380990237,
+            "DeepSeek Harness": 0.35774041323595707,
             "Devin CLI": -0.09539573440702916,
+            "GitHub Copilot": -0.2490626859111715,
+            "Grok Build": 0.14921170923385282,
             "Kimi Code CLI": 0.21544371346000188,
-            "Pi": -0.47735274377623593,
+            "Mistral Vibe": -0.17052953661919876,
             "Muse Code": 0.7019097195122759,
-            "Claude Code": -0.0753374555224899
+            "OpenCode": -0.10548604664230556,
+            "Pi": -0.47735274377623593,
+            "Qwen Code": -0.13909662380990237,
+            "mini-swe-agent": -0.07986623090765842
           },
           "rows": {
             "claude-haiku-5-5-high": {
@@ -61735,7 +61735,7 @@
           {
             "key": "roster",
             "artifact": "data/aa_mapping.json",
-            "sha256": "c8e5a9c1fbf88a4364bd8d1357ce7857d27f43d5c804819714997edff2486f10",
+            "sha256": "bbdddb3a6775ccd470c6cceb9c4eceab0f6a6779ca79c58cb95665fbc5f2d8e7",
             "capturedAt": "2026-11-26T02:18:20Z",
             "extractor": "editorial roster: every configuration AA plots on its rendered frontier or within 3 Index points of it (O51)"
           },
@@ -61838,7 +61838,7 @@
             "extractor": "valuerank.value_v3 freeze"
           }
         ],
-        "bundleHash": "ed71d1119854f05d07aeba425d83f248e374b45e07a22bb1eb29e3ae90717dc9",
+        "bundleHash": "b79762f96a06b3b62ee8abbb33aae7797fe91146b600b7a7b34f8322b70c8369",
         "rebuild": "every published output is rebuilt from these artifacts at the pinned publication clock (npm run verify:docs), never from live pages"
       },
       "track": {
@@ -82232,7 +82232,7 @@
         },
         {
           "id": "claude-opus-5-5",
-          "name": "Claude Opus 5.5",
+          "name": "Claude Opus 5.5 (max)",
           "effort": "max",
           "aaSlug": "claude-opus-5-5",
           "configurationMapped": true,
@@ -102412,7 +102412,7 @@
         {
           "id": "claude-opus-5-5@claude-max-20x",
           "configurationId": "claude-opus-5-5",
-          "name": "Claude Opus 5.5",
+          "name": "Claude Opus 5.5 (max)",
           "plan": "Claude Max 20x",
           "representative": false,
           "routeId": "claude-max20x-opus55-semianalysis",
@@ -102436,7 +102436,7 @@
         {
           "id": "claude-opus-5-5@claude-max-5x",
           "configurationId": "claude-opus-5-5",
-          "name": "Claude Opus 5.5",
+          "name": "Claude Opus 5.5 (max)",
           "plan": "Claude Max 5x",
           "representative": false,
           "routeId": "claude-max5x-opus55-semianalysis",
@@ -102460,7 +102460,7 @@
         {
           "id": "claude-opus-5-5@claude-pro",
           "configurationId": "claude-opus-5-5",
-          "name": "Claude Opus 5.5",
+          "name": "Claude Opus 5.5 (max)",
           "plan": "Claude Pro",
           "representative": true,
           "routeId": "claude-pro-opus55-semianalysis",
@@ -109447,19 +109447,19 @@
           "stratum": "S2",
           "status": "evaluated",
           "agentEffects": {
-            "GitHub Copilot": -0.2490626859111715,
-            "Mistral Vibe": -0.17052953661919876,
-            "DeepSeek Harness": 0.35774041323595707,
+            "Claude Code": -0.0753374555224899,
             "Codex": -0.032178497846096075,
-            "OpenCode": -0.10548604664230556,
-            "mini-swe-agent": -0.07986623090765842,
-            "Grok Build": 0.14921170923385282,
-            "Qwen Code": -0.13909662380990237,
+            "DeepSeek Harness": 0.35774041323595707,
             "Devin CLI": -0.09539573440702916,
+            "GitHub Copilot": -0.2490626859111715,
+            "Grok Build": 0.14921170923385282,
             "Kimi Code CLI": 0.21544371346000188,
-            "Pi": -0.47735274377623593,
+            "Mistral Vibe": -0.17052953661919876,
             "Muse Code": 0.7019097195122759,
-            "Claude Code": -0.0753374555224899
+            "OpenCode": -0.10548604664230556,
+            "Pi": -0.47735274377623593,
+            "Qwen Code": -0.13909662380990237,
+            "mini-swe-agent": -0.07986623090765842
           },
           "rows": {
             "claude-fable-5-2": {
@@ -118407,7 +118407,7 @@
           {
             "key": "roster",
             "artifact": "data/aa_mapping.json",
-            "sha256": "c8e5a9c1fbf88a4364bd8d1357ce7857d27f43d5c804819714997edff2486f10",
+            "sha256": "bbdddb3a6775ccd470c6cceb9c4eceab0f6a6779ca79c58cb95665fbc5f2d8e7",
             "capturedAt": "2026-11-26T02:18:20Z",
             "extractor": "editorial roster: every configuration AA plots on its rendered frontier or within 3 Index points of it (O51)"
           },
@@ -118510,7 +118510,7 @@
             "extractor": "valuerank.value_v3 freeze"
           }
         ],
-        "bundleHash": "ed71d1119854f05d07aeba425d83f248e374b45e07a22bb1eb29e3ae90717dc9",
+        "bundleHash": "b79762f96a06b3b62ee8abbb33aae7797fe91146b600b7a7b34f8322b70c8369",
         "rebuild": "every published output is rebuilt from these artifacts at the pinned publication clock (npm run verify:docs), never from live pages"
       },
       "track": {

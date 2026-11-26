@@ -121,3 +121,4 @@ To continue:
 | 173 | GLM 5.3 (eight sections) | r236 | CLEAN; 1 of 2 |
 | 174 | Kimi K3 (eight sections) | r236 | CLEAN; Kimi seat DONE |
 | 175 | GLM 5.3 (eight sections) | r236 | CLEAN; GLM seat DONE. All six seats done (O205); final draft r236 |
+| 176 | (release 2026-11-26) | r237 | draft r237 rendered (CHECK_OK); targeted check under O209 (Kimi K3 and GLM 5.3, changed text only) pending |

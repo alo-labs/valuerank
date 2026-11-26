@@ -3,10 +3,7 @@
   "checkedAt": "2026-11-26T14:00:00+00:00",
   "inventoryPath": "data/aa_reconciliation_inventory.json",
   "maxAgeDays": 7,
-  "issues": [
-    "Required AA frontier family Claude Fable 5.2 (claude-fable-5-2) must resolve to one exact selected frontier configuration and appear in the primary ranking.",
-    "Frontier entrants missing from exact source roster without a dated review decision: claude-fable-5-2-xhigh :: Claude Fable 5.2 (xhigh), claude-fable-5-2 :: Claude Fable 5.2 (max). Add exact evidence with gaps or explicitly defer each evaluated variant; never transfer a lower-effort result to the selected variant."
-  ],
+  "issues": [],
   "frontier": [
     {
       "aaId": "gpt-6-luna-low",
@@ -367,14 +364,14 @@
       "family": "Claude Fable 5.2",
       "requiredFamilyModelId": "claude-fable-5-2",
       "sourceFootnote": null,
-      "valueRankModelId": null,
+      "valueRankModelId": "claude-fable-5-2-xhigh",
       "intelligenceIndexPrecision": "rounded_whole_public_label",
       "rosterDecision": null,
       "primaryRankingGaps": [
-        "Exact evaluated variant absent from source roster"
+        "Incomplete benchmark evidence after an exhaustive search (O36, O53): Max-effort ranking: no Vibe Code Bench v1.1 (Vals), Code Migration v1.1 (Vals); AI Coding Daily ranking: no AI Coding Daily (excl. bug finding)"
       ],
       "metricGap": null,
-      "rankStatus": "Missing from source roster"
+      "rankStatus": "Unranked: incomplete benchmark evidence (O36)"
     },
     {
       "aaId": "claude-fable-5-2",
@@ -387,58 +384,17 @@
       "family": "Claude Fable 5.2",
       "requiredFamilyModelId": "claude-fable-5-2",
       "sourceFootnote": null,
-      "valueRankModelId": null,
+      "valueRankModelId": "claude-fable-5-2",
       "intelligenceIndexPrecision": "rounded_whole_public_label",
       "rosterDecision": null,
       "primaryRankingGaps": [
-        "Exact evaluated variant absent from source roster"
+        "Incomplete benchmark evidence after an exhaustive search (O36, O53): Max-effort ranking: no Vibe Code Bench v1.1 (Vals), Code Migration v1.1 (Vals), LiveBench 2.0 Overall; AI Coding Daily ranking: no AI Coding Daily (excl. bug finding)"
       ],
       "metricGap": null,
-      "rankStatus": "Missing from source roster"
+      "rankStatus": "Unranked: incomplete benchmark evidence (O36)"
     }
   ],
-  "comparisonCandidates": [
-    {
-      "aaId": "claude-fable-5-2-xhigh",
-      "name": "Claude Fable 5.2 (xhigh)",
-      "evaluatedVariant": "xhigh",
-      "intelligenceIndex": 62,
-      "totalCostUsd": 11741.62,
-      "directlyObservedFrontier": true,
-      "sourceUrl": "https://artificialanalysis.ai/models/claude-fable-5-2-xhigh",
-      "family": "Claude Fable 5.2",
-      "requiredFamilyModelId": "claude-fable-5-2",
-      "sourceFootnote": null,
-      "valueRankModelId": null,
-      "intelligenceIndexPrecision": "rounded_whole_public_label",
-      "rosterDecision": null,
-      "primaryRankingGaps": [
-        "Exact evaluated variant absent from source roster"
-      ],
-      "metricGap": null,
-      "rankStatus": "Missing from source roster"
-    },
-    {
-      "aaId": "claude-fable-5-2",
-      "name": "Claude Fable 5.2 (max)",
-      "evaluatedVariant": "max",
-      "intelligenceIndex": 65,
-      "totalCostUsd": 22191.42,
-      "directlyObservedFrontier": true,
-      "sourceUrl": "https://artificialanalysis.ai/models/claude-fable-5-2",
-      "family": "Claude Fable 5.2",
-      "requiredFamilyModelId": "claude-fable-5-2",
-      "sourceFootnote": null,
-      "valueRankModelId": null,
-      "intelligenceIndexPrecision": "rounded_whole_public_label",
-      "rosterDecision": null,
-      "primaryRankingGaps": [
-        "Exact evaluated variant absent from source roster"
-      ],
-      "metricGap": null,
-      "rankStatus": "Missing from source roster"
-    }
-  ],
+  "comparisonCandidates": [],
   "frontierDefinition": "Directly observed AA displayed intelligence-versus-total-cost frontier; not recomputed from a subset.",
   "scope": "Complete displayed intelligence versus total evaluation cost Pareto line with all 155 catalog models selected; 136 eligible plotted points, every one read from its public tooltip. This is not ValueRank's composite-quality frontier.",
   "completeness": {
@@ -620,14 +576,14 @@
       "family": "Claude Fable 5.2",
       "requiredFamilyModelId": "claude-fable-5-2",
       "sourceFootnote": null,
-      "valueRankModelId": null,
+      "valueRankModelId": "claude-fable-5-2-high",
       "intelligenceIndexPrecision": "rounded_whole_public_label",
       "rosterDecision": null,
       "primaryRankingGaps": [
-        "Exact evaluated variant absent from source roster"
+        "Incomplete benchmark evidence after an exhaustive search (O36, O53): Max-effort ranking: no LiveBench 2.0 Overall; AI Coding Daily ranking: no AI Coding Daily (excl. bug finding)"
       ],
       "metricGap": null,
-      "rankStatus": "Missing from source roster"
+      "rankStatus": "Unranked: incomplete benchmark evidence (O36)"
     },
     {
       "aaId": "gemini-4-neon",
@@ -689,14 +645,12 @@
       "family": "Claude Opus 5.5",
       "requiredFamilyModelId": "claude-opus-5-5",
       "sourceFootnote": null,
-      "valueRankModelId": null,
+      "valueRankModelId": "claude-opus-5-5",
       "intelligenceIndexPrecision": "rounded_whole_public_label",
       "rosterDecision": null,
-      "primaryRankingGaps": [
-        "Exact evaluated variant absent from source roster"
-      ],
+      "primaryRankingGaps": [],
       "metricGap": null,
-      "rankStatus": "Missing from source roster"
+      "rankStatus": "Primary ranked"
     }
   ],
   "nearFrontierFamilies": [
@@ -782,14 +736,8 @@
       "incompleteEvidence": false
     }
   ],
-  "missingNearFrontierIds": [
-    "claude-fable-5-2-high :: Claude Fable 5.2 (high)",
-    "claude-opus-5-5 :: Claude Opus 5.5 (max)"
-  ],
-  "unresolvedNearFrontierIds": [
-    "claude-fable-5-2-high :: Claude Fable 5.2 (high)",
-    "claude-opus-5-5 :: Claude Opus 5.5 (max)"
-  ],
+  "missingNearFrontierIds": [],
+  "unresolvedNearFrontierIds": [],
   "deferredNearFrontierIds": [],
   "observedAt": "2026-11-26T02:18:20Z",
   "benchmarkVersion": "Artificial Analysis Intelligence Index v5.0",
@@ -855,22 +803,16 @@
     {
       "family": "Claude Fable 5.2",
       "modelId": "claude-fable-5-2",
-      "selectedFrontierConfigurationN": 0,
+      "selectedFrontierConfigurationN": 1,
       "primaryRanked": false,
-      "incompleteEvidence": false
+      "incompleteEvidence": true
     }
   ],
   "metricGaps": [],
   "observedRowN": 20,
   "validRowN": 20,
-  "missingFrontierIds": [
-    "claude-fable-5-2-xhigh :: Claude Fable 5.2 (xhigh)",
-    "claude-fable-5-2 :: Claude Fable 5.2 (max)"
-  ],
-  "unresolvedFrontierIds": [
-    "claude-fable-5-2-xhigh :: Claude Fable 5.2 (xhigh)",
-    "claude-fable-5-2 :: Claude Fable 5.2 (max)"
-  ],
+  "missingFrontierIds": [],
+  "unresolvedFrontierIds": [],
   "deferredFrontierIds": [],
-  "status": "blocked"
+  "status": "reconciled"
 }

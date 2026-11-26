@@ -52,15 +52,15 @@ def test_basket_readiness_prices_leaves_by_family_and_reports_concentration():
     rows = [make_row("a"), make_row("b", cai=None), make_row("s", workload="w-subset"), make_row("z", cost=0.0)]
     result = cd.basket_readiness(rows, admission(rows), MAIN)
     agents = result["components"][basket.CODING_AGENT_INDEX]
-    assert agents["status"] == "admitted" and agents["tasks"] == 290 and agents["missingConfigurations"] == ["b"]
+    assert agents["status"] == "admitted" and agents["tasks"] == 322 and agents["missingConfigurations"] == ["b"]
     # O50: Terminal-Bench (11%) runs inside the Coding Agent Index v2.0; its FrontierCode is version 1.1, not the leaf's 2.0 (O136).
     assert agents["pricedQualityWeight"] == pytest.approx(0.11)
     assert result["components"]["itbench-aa"]["tasks"] == "chart total (no task count)"
     assert result["components"]["itbench-aa"]["missingConfigurations"] == ["a", "b", "s", "z"]
     assert result["components"]["terminal-bench-science"]["tasks"] == 70 and result["components"]["aa-briefcase"]["pricedQualityWeight"] == 0.0
-    assert result["pricedLeaves"] == ["automationBench", "frontierCode", "tbScience", "terminalBench"]
-    # FrontierCode 2.0 15, Terminal-Bench 11, AutomationBench 10 and Terminal-Bench-Science 5/3 percent of quality (O61, O136, O137).
-    assert result["pricedMixCoverage"] == pytest.approx((15 + 11 + 10 + 5 / 3) / 100)
+    assert result["pricedLeaves"] == ["automationBench", "frontierCode", "gdpPdf", "tbScience", "terminalBench"]
+    # FrontierCode 2.0 15, Terminal-Bench 11, AutomationBench 10, GDP.pdf 5 and Terminal-Bench-Science 5/3 percent of quality (O61, O136, O137, O210).
+    assert result["pricedMixCoverage"] == pytest.approx((15 + 11 + 10 + 5 + 5 / 3) / 100)
     assert set(result["expenditure"]) == {"a", "b"}  # main workload with a positive cost only
     shares = result["expenditure"]["a"]["shares"]
     assert sum(shares.values()) == pytest.approx(1.0) and result["expenditure"]["a"]["hhi"] == pytest.approx(sum(s * s for s in shares.values()))
@@ -84,7 +84,7 @@ def test_matched_cost_reversals_need_separated_basket_intervals_and_warnings_nee
     rows.append(make_row("subset", workload="w-subset"))
     rows.append(make_row("unsolved", index_cost=2.0, z=0.0))
     result = cd.matched_cost(rows, MAIN)
-    assert result["status"] == "evaluated" and result["pricedQualityWeight"] == pytest.approx(0.51)
+    assert result["status"] == "evaluated" and result["pricedQualityWeight"] == pytest.approx(0.56)
     # O55, O61: LiveBench 2.0 Overall and the Vals leaves run outside every AA cost component; O137: so do GDPval-AA and AA-LCR.
     assert set(result["unpricedLeaves"]) == {"bugHunt", "gdpval", "lcr", "vibeCode", "codeMigration", "livebench2Overall"}
     assert result["unidentified"] == ["gap", "subset"]

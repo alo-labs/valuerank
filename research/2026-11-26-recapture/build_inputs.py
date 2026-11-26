@@ -213,15 +213,6 @@ def main() -> None:
                 "note": (f"AA Intelligence Index v5 cohort (O51, O132): {item['chartTier']} point on the 2026-11-26 chart." if item["chartTier"] != "retained" else
                          "Retained one release under owner decision O145: in the 2026-10-25 cohort, left the frontier and near gap at the v5 re-capture.")} for item in everyone]
     (DATA / "aa" / "aa_extract.json").write_text(json.dumps(extract, indent=2, ensure_ascii=False) + "\n")
-    mapping = []
-    for item in cohort:
-        point = point_by_url[item["url"]]
-        # Every configuration of a multi-effort family names its effort ("GPT-6 Luna (max)"); a single-configuration family
-        # keeps its bare name. The fallback note is a route detail, so it stays out of the name.
-        siblings = sum(1 for other in cohort_points if other["family"] == point["family"])
-        name = point["family"] if siblings == 1 or not point["effort"] else f"{point['family']} ({point['effort']})"
-        mapping.append({"id": item["id"], "displayName": name, "urls": [item["url"]], "aaSlug": item["url"].rsplit("/", 1)[1],
-                        "aaVariant": point["effort"], "family": point["family"]})
     def family_effort(item: dict) -> tuple[str, str | None]:
         """O145: a retained configuration's family and effort, from its chart point, else (AA no longer plots it, as for
         GPT-5.6 Luna (low)) from its display name."""
@@ -232,6 +223,17 @@ def main() -> None:
         match = re.fullmatch(r"(.+?) \((.+)\)", item["displayName"])
         return (match.group(1), match.group(2)) if match else (item["displayName"], None)
 
+    mapping = []
+    retained_families = [family_effort(item)[0] for item in retained]
+    for item in cohort:
+        point = point_by_url[item["url"]]
+        # Every configuration of a multi-effort family names its effort ("GPT-6 Luna (max)"), counting the configurations O145
+        # retains (Claude Opus 5.5 plots only at max but keeps high and xhigh); a single-configuration family keeps its bare name.
+        # The fallback note is a route detail, so it stays out of the name.
+        siblings = sum(1 for other in cohort_points if other["family"] == point["family"]) + retained_families.count(point["family"])
+        name = point["family"] if siblings == 1 or not point["effort"] else f"{point['family']} ({point['effort']})"
+        mapping.append({"id": item["id"], "displayName": name, "urls": [item["url"]], "aaSlug": item["url"].rsplit("/", 1)[1],
+                        "aaVariant": point["effort"], "family": point["family"]})
     for item in retained:
         family, effort = family_effort(item)
         siblings = sum(1 for other in cohort_points if other["family"] == family) + sum(1 for other in retained if other is not item and family_effort(other)[0] == family)

@@ -399,7 +399,7 @@ def test_main_decodes_markerless_html_page_through_its_slug_keyed_object(world):
     assert metrics["briefcaseElo"] == 1531.52 and metrics["briefcaseNormalized"] == pytest.approx((1531.52 - 500) / 2000)
     assert metrics["gdpvalV21"] == 1513.05 and metrics["gdpvalV21Normalized"] == 0.506525
     assert metrics["automationBenchAA"] == pytest.approx(0.35953889773428194)
-    assert metrics["terminalBenchV41"] == pytest.approx(0.292929292929293)
+    assert metrics["terminalBenchV41"] is None  # the saved page predates Terminal-Bench 4.1 (it carries `terminalBench40`, which is not read)
     # O136: the v5 successor fields this (pre-v5) page already carries are read; the ones it lacks stay missing.
     assert metrics["terminalBenchScience"] == pytest.approx(0.180952380952381) and metrics["hleDiamond"] is None
     assert metrics["gdpPdfAllPass"] == 0.182 and metrics["critptV2Hard"] is None
@@ -429,7 +429,7 @@ def test_main_alternate_field_names_and_estimated_index(world):
     world.page("alt", "alt", {
         "slug": "alt", "effort": {"slug": "std"}, "intelligenceIndex": 50, "intelligenceIndexIsEstimated": True,
         "briefcaseElo": 1000, "briefcaseNormalizedDisplay": 0.9, "gdpvalNormalized": 0.25,
-        "terminalbench40": 0.45, "omniscienceAccuracy": 0.55, "omniscienceNonHallucination": 0.8,
+        "terminalbench41": 0.45, "omniscienceAccuracy": 0.55, "omniscienceNonHallucination": 0.8,
         "aaEvalCost": 7, "speed": "fast", "terminalbenchV21": 0.12, "gpqa": "oops",
         "briefcaseBreakdown": {"overall": {"elo": 2000}},
     }, speed_text="Model summary\nSpeed N/A Output tokens per second")

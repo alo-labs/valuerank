@@ -3657,7 +3657,8 @@ def agent_effects(configurations: list[dict]) -> dict:
                 frontier.extend(a for model in shared if current in agents_of[model] for a in agents_of[model])
         seen |= group
         groups.append(group)
-    return {agent: effects[agent] - statistics.fmean(effects[item] for item in group) for group in groups for agent in group}
+    # A group is a set, whose order changes with the process's hash seed; sorted, the published order is the same on every run.
+    return {agent: effects[agent] - statistics.fmean(effects[item] for item in group) for group in groups for agent in sorted(group)}
 
 
 HARNESS_UNEVALUABLE = "no model is listed under two or more agents in AA's Coding Agent Index capture, so no agent effect is identified (O123)"

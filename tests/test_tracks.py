@@ -12,11 +12,11 @@ DOCUMENT = {
         "vibeCode": {"benchmark": "Vibe Code Bench v1.1", "publisher": "Vals AI", "updated": "2026-10-20", "url": "https://www.vals.ai/benchmarks/vibe-code",
                      "harness": "OpenHands", "unit": "percent"},
         "aiCodingDaily": {"benchmark": "AI Coding Daily", "publisher": "AI Coding Daily", "updated": "2026-10-21", "url": "https://aicodingdaily.com/leaderboard",
-                          "harness": "varies", "unit": "points of 60"},
+                          "harness": "varies", "unit": "points of 80"},
     },
     "records": [
         {"modelId": "a", "leaf": "vibeCode", "value": 90.0, "stderr": 1.5, "sourceLabel": "vendor/a", "effort": "max"},
-        {"modelId": "a", "leaf": "aiCodingDaily", "value": 45.0, "sourceLabel": "A (High)", "effort": "high", "match": "owner (O54)"},
+        {"modelId": "a", "leaf": "aiCodingDaily", "value": 60.0, "sourceLabel": "A (High)", "effort": "high", "match": "owner (O54)"},
     ],
 }
 
@@ -73,11 +73,11 @@ def test_a_publisher_of_two_leaves_is_a_source_branch():
 
 
 def test_ai_coding_daily_noise_has_a_narrow_reading():
-    """E263: n = 6 (the wide reading) scores the noise; n = 60 is a named sensitivity, smaller by about sqrt(10)."""
+    """E263: n = 7 (the wide reading) scores the noise; n = 80 is a named sensitivity, smaller by about sqrt(80/7)."""
 
     wide = v.sampling_sd("aiCodingDaily", q.Observation(50.0), {})
     narrow = v.sampling_sd("aiCodingDaily", q.Observation(50.0), {}, tasks_of={**v.SAMPLING_TASKS, "aiCodingDaily": v.AICD_NARROW_TASKS})
-    assert wide == pytest.approx(100 * (3.5 / 7 * (1 - 3.5 / 7) / 6) ** 0.5) and narrow == pytest.approx(100 * (30.5 / 61 * (1 - 30.5 / 61) / 60) ** 0.5)
+    assert wide == pytest.approx(100 * (4 / 8 * (1 - 4 / 8) / 7) ** 0.5) and narrow == pytest.approx(100 * (40.5 / 81 * (1 - 40.5 / 81) / 80) ** 0.5)
 
 
 def test_livebench_noise_uses_the_release_weights():
