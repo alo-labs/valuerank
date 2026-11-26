@@ -59,7 +59,7 @@ def main() -> None:
         best = max(reach, key=lambda f: f["intelligence_index_display"]) if reach else None
         if best and best["intelligence_index_display"] - p["intelligence_index_display"] <= GAP:
             near.append(p)
-    previous = json.loads((ROOT / "data" / "aa_frontier_capture.json").read_text())
+    previous = json.loads((HERE / "previous-frontier-capture-full.json").read_text())
     # AA's chart dropped the " with fallback" wording on the Claude labels (page names still say "Default Fallback"); same slugs and costs.
     previous_names = [re.sub(r" with fallback\)$", ")", re.sub(r" with fallback$", "", p["model_name"])).replace(" with fallback)", ")")
                       for p in previous["frontier"] + previous["near_frontier"]]
@@ -94,6 +94,13 @@ def main() -> None:
             slug = resolve(p)
             out.append({"id": slug, "displayName": p["model_name"], "url": urls[p["model_name"]],
                         "chartTier": tier, "intelligenceIndex": p["intelligence_index_display"], "totalCostUsd": p["total_cost_usd"]})
+    # Stable ids: a configuration of the previous cohort keeps its id (plan routes, reports and boards key on it); a new GPT-6.2 row
+    # follows the GPT-6.1 convention (dots in the version: gpt-6.2-sol-high); the unsuffixed id is the family's max effort.
+    previous_ids = {row["url"]: row["id"] for row in json.loads((ROOT / "research" / "2026-11-01-recapture" / "cohort.json").read_text())["configurations"]}
+    for row in out:
+        row["id"] = previous_ids.get(row["url"]) or re.sub(r"^gpt-6-2-", "gpt-6.2-", row["id"])
+    if len({row["id"] for row in out}) != len(out):
+        raise ValueError("cohort ids are not unique")
     (HERE / "cohort.json").write_text(json.dumps({"capturedFrom": "chart-capture.json", "configurations": out}, indent=2) + "\n")
     print(json.dumps({"frontier": len(frontier), "near": len(near), "retained": len(retained), "left_chart_entirely": gone,
                       "unresolved": [o["displayName"] for o in out if not o["url"]], "unresolved_points": [n for n, u in urls.items() if not u]}, indent=1))

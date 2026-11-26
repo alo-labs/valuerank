@@ -9,7 +9,7 @@ import json
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
-BOARD = ROOT / "research/2026-11-01-recapture/third-party/bughunt"
+BOARD = ROOT / "research/2026-11-26-recapture/third-party/bughunt"
 
 
 def main() -> None:

@@ -3,7 +3,7 @@ configurations retained under owner decision O145. Its source repository commit 
 2026-11-01), so the snapshot is extended, not re-fetched: every retained configuration postdates the release, so each gets the
 unmatched row valuerank.fetch_livebench writes for a configuration with no verified exact mapping (COHORT_MAP None).
 
-    PYTHONPATH=. python3 research/2026-11-01-recapture/extend_livebench.py
+    PYTHONPATH=. python3 research/2026-11-26-recapture/extend_livebench.py
 """
 
 import json

@@ -1,7 +1,7 @@
-"""Rebuild the third-party leaf data for the 2026-11-01 cohort (37 configurations, O145) from the 2026-11-01 board re-read
+"""Rebuild the third-party leaf data for the 2026-11-26 cohort (45 configurations, O145) from the 2026-11-26 board re-read
 (O68, O139, O140, O147-O149).
 
-    PYTHONPATH=. python3 research/2026-11-01-recapture/build_third_party.py
+    PYTHONPATH=. python3 research/2026-11-26-recapture/build_third_party.py
 
 Writes data/bug_hunt_scoreboard.json (every row of the owner's combined scoreboard at the re-read commit) and
 data/bug_hunt.json (one record per cohort configuration: an exact owner run, else unmatched with the reason). A
@@ -19,7 +19,7 @@ from pathlib import Path
 HERE = Path(__file__).parent
 ROOT = HERE.parent.parent
 PARTY = HERE / "third-party"
-COVERAGE = json.loads((PARTY / "coverage-2026-11-01.json").read_text())
+COVERAGE = json.loads((PARTY / "coverage-2026-11-26.json").read_text())
 COHORT = [row["id"] for row in json.loads((HERE / "cohort.json").read_text())["configurations"]]
 
 
@@ -63,7 +63,7 @@ def bug_hunt() -> None:
                 "harnessVersion": cell.get("harnessVersion"), "route": "the harness's own provider route",
                 "sourceType": "benchmark_owner", "observedAt": bug["readAt"][:10], "reportedOn": cell["date"], "sourceCommit": commit,
                 "sourceUrl": f"https://github.com/phuryn/bug-hunt-bench/blob/{commit}/results/run-notes.md",
-                "note": cell.get("note") or f"Owner-published {'mean of ' + str(runs) if runs > 1 else 'single run'}, read 2026-11-01 (O145).",
+                "note": cell.get("note") or f"Owner-published {'mean of ' + str(runs) if runs > 1 else 'single run'}, read 2026-11-26 (O145).",
                 # E206: a record that is not the largest-sample result carries the board read's selection reason.
                 **({"selectionReason": cell["selectionReason"]} if cell.get("selectionReason") else {}),
             })

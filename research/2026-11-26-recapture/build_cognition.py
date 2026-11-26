@@ -10,12 +10,12 @@ import json
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
-CAPTURE = ROOT / "research/2026-11-01-recapture/third-party/cognition"
+CAPTURE = ROOT / "research/2026-11-26-recapture/third-party/cognition"
 
 
 def main() -> None:
     raw = (CAPTURE / "frontier-code-2.0-data.json").read_bytes()
-    capture = json.loads((CAPTURE / "frontiercode-2.0-2026-11-01.json").read_text())
+    capture = json.loads((CAPTURE / "frontiercode-2.0-2026-11-26.json").read_text())
     exact = {item["configurationId"]: {"model": item["cognitionModel"], "effort": item["cognitionEffort"], "harness": item["cognitionHarness"],
                                        **({"caveat": item["caveat"]} if item.get("caveat") else {})}
              for item in capture["cohortMapping"]["configurations"] if item["status"] == "exact"}
@@ -28,7 +28,7 @@ def main() -> None:
     evidence = json.loads(path.read_text())
     evidence["cognitionCapture"] = {"url": "https://cognition.com/data/frontier-code-2.0/data.json", "lastModified": "2026-10-31T13:46:59Z",
                                     "capturedOn": capture["capturedAt"][:10], "sha256": hashlib.sha256(raw).hexdigest(),
-                                    "file": "data/cognition_frontiercode.json", "artifact": "research/2026-11-01-recapture/third-party/cognition/frontier-code-2.0-data.json",
+                                    "file": "data/cognition_frontiercode.json", "artifact": "research/2026-11-26-recapture/third-party/cognition/frontier-code-2.0-data.json",
                                     "note": "O153: Cognition's FrontierCode 2.0 board gap-fills the leaf after AA's run (exact model and effort, v2_0Map) and feeds the AA-Cognition agreement diagnostic."}
     path.write_text(json.dumps(evidence, indent=2, ensure_ascii=False) + "\n")
     print(json.dumps({"exact": len(exact)}))
