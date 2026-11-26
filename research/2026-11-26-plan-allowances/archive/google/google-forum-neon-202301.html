@@ -1,0 +1,678 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Gemini 4 Neon and Orchestrator (Neon) are now available in Google Antigravity - Google Antigravity - Google AI Developers Forum</title>
+    <meta name="description" content="Hi everyone, 
+Gemini 4 Neon is rolling out today in the Antigravity app, Antigravity CLI, and Antigravity IDE Extensions. Neon sits between Gemini 4 Carbon (deepest long-horizon work) and Gemini 4 Hydrogen (fast everyday…">
+    <meta name="generator" content="Discourse 2026.12.0-latest - https://github.com/discourse/discourse version 46f6a2747a3d3aed74d21a8288df665c52532d2d">
+<link rel="icon" type="image/png" href="https://d3qe71uytubmmx.cloudfront.net/optimized/3X/8/8/88be55a0931c66b04a4c40aea967c11ffae49c7a_2_32x32.png">
+<link rel="apple-touch-icon" type="image/png" href="https://d3qe71uytubmmx.cloudfront.net/optimized/2X/8/8bfe64fc593eb7baba8df149ebba4457c16ca1f9_2_180x180.png">
+<meta name="theme-color" media="all" content="#1f1f1f">
+
+<meta name="color-scheme" content="dark">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, viewport-fit=cover">
+<link rel="canonical" href="https://discuss.ai.google.dev/t/gemini-4-neon-and-orchestrator-neon-are-now-available-in-google-antigravity/202301" />
+
+<meta name="discourse-track-view-session-id" content="k85ZYIwZNoxuEVvGhj7QqrZySY1DSHME">
+  <link rel="search" type="application/opensearchdescription+xml" href="https://discuss.ai.google.dev/opensearch.xml" title="Google AI Developers Forum Search">
+
+    
+    <link href="https://d1dlmcr85iqnpo.cloudfront.net/stylesheets/color_definitions_google-ai-for-developers_15_13_349a4a83131b1e9a7939dff73818ccda32a9d65c.css?__ws=discuss.ai.google.dev" media="all" rel="stylesheet" class="light-scheme" data-scheme-id="15"/>
+
+<link href="https://d1dlmcr85iqnpo.cloudfront.net/stylesheets/common_6d8c4291c741fc4188fad01ef92828d9a98801c0.css?__ws=discuss.ai.google.dev" media="all" rel="stylesheet" data-target="common"  />
+
+
+
+  <link href="https://d1dlmcr85iqnpo.cloudfront.net/stylesheets/automation_6d8c4291c741fc4188fad01ef92828d9a98801c0.css?__ws=discuss.ai.google.dev" media="all" rel="stylesheet" data-target="automation"  />
+  <link href="https://d1dlmcr85iqnpo.cloudfront.net/stylesheets/boards_6d8c4291c741fc4188fad01ef92828d9a98801c0.css?__ws=discuss.ai.google.dev" media="all" rel="stylesheet" data-target="boards"  />
+  <link href="https://d1dlmcr85iqnpo.cloudfront.net/stylesheets/checklist_6d8c4291c741fc4188fad01ef92828d9a98801c0.css?__ws=discuss.ai.google.dev" media="all" rel="stylesheet" data-target="checklist"  />
+  <link href="https://d1dlmcr85iqnpo.cloudfront.net/stylesheets/discourse-ai_6d8c4291c741fc4188fad01ef92828d9a98801c0.css?__ws=discuss.ai.google.dev" media="all" rel="stylesheet" data-target="discourse-ai"  />
+  <link href="https://d1dlmcr85iqnpo.cloudfront.net/stylesheets/discourse-cakeday_6d8c4291c741fc4188fad01ef92828d9a98801c0.css?__ws=discuss.ai.google.dev" media="all" rel="stylesheet" data-target="discourse-cakeday"  />
+  <link href="https://d1dlmcr85iqnpo.cloudfront.net/stylesheets/discourse-data-explorer_6d8c4291c741fc4188fad01ef92828d9a98801c0.css?__ws=discuss.ai.google.dev" media="all" rel="stylesheet" data-target="discourse-data-explorer"  />
+  <link href="https://d1dlmcr85iqnpo.cloudfront.net/stylesheets/discourse-details_6d8c4291c741fc4188fad01ef92828d9a98801c0.css?__ws=discuss.ai.google.dev" media="all" rel="stylesheet" data-target="discourse-details"  />
+  <link href="https://d1dlmcr85iqnpo.cloudfront.net/stylesheets/discourse-github_6d8c4291c741fc4188fad01ef92828d9a98801c0.css?__ws=discuss.ai.google.dev" media="all" rel="stylesheet" data-target="discourse-github"  />
+  <link href="https://d1dlmcr85iqnpo.cloudfront.net/stylesheets/discourse-lazy-videos_6d8c4291c741fc4188fad01ef92828d9a98801c0.css?__ws=discuss.ai.google.dev" media="all" rel="stylesheet" data-target="discourse-lazy-videos"  />
+  <link href="https://d1dlmcr85iqnpo.cloudfront.net/stylesheets/discourse-local-dates_6d8c4291c741fc4188fad01ef92828d9a98801c0.css?__ws=discuss.ai.google.dev" media="all" rel="stylesheet" data-target="discourse-local-dates"  />
+  <link href="https://d1dlmcr85iqnpo.cloudfront.net/stylesheets/discourse-narrative-bot_6d8c4291c741fc4188fad01ef92828d9a98801c0.css?__ws=discuss.ai.google.dev" media="all" rel="stylesheet" data-target="discourse-narrative-bot"  />
+  <link href="https://d1dlmcr85iqnpo.cloudfront.net/stylesheets/discourse-policy_6d8c4291c741fc4188fad01ef92828d9a98801c0.css?__ws=discuss.ai.google.dev" media="all" rel="stylesheet" data-target="discourse-policy"  />
+  <link href="https://d1dlmcr85iqnpo.cloudfront.net/stylesheets/discourse-presence_6d8c4291c741fc4188fad01ef92828d9a98801c0.css?__ws=discuss.ai.google.dev" media="all" rel="stylesheet" data-target="discourse-presence"  />
+  <link href="https://d1dlmcr85iqnpo.cloudfront.net/stylesheets/discourse-reactions_6d8c4291c741fc4188fad01ef92828d9a98801c0.css?__ws=discuss.ai.google.dev" media="all" rel="stylesheet" data-target="discourse-reactions"  />
+  <link href="https://d1dlmcr85iqnpo.cloudfront.net/stylesheets/discourse-solved_6d8c4291c741fc4188fad01ef92828d9a98801c0.css?__ws=discuss.ai.google.dev" media="all" rel="stylesheet" data-target="discourse-solved"  />
+  <link href="https://d1dlmcr85iqnpo.cloudfront.net/stylesheets/discourse-staff-alias_6d8c4291c741fc4188fad01ef92828d9a98801c0.css?__ws=discuss.ai.google.dev" media="all" rel="stylesheet" data-target="discourse-staff-alias"  />
+  <link href="https://d1dlmcr85iqnpo.cloudfront.net/stylesheets/discourse-templates_6d8c4291c741fc4188fad01ef92828d9a98801c0.css?__ws=discuss.ai.google.dev" media="all" rel="stylesheet" data-target="discourse-templates"  />
+  <link href="https://d1dlmcr85iqnpo.cloudfront.net/stylesheets/discourse-topic-voting_6d8c4291c741fc4188fad01ef92828d9a98801c0.css?__ws=discuss.ai.google.dev" media="all" rel="stylesheet" data-target="discourse-topic-voting"  />
+  <link href="https://d1dlmcr85iqnpo.cloudfront.net/stylesheets/discourse-workflows_6d8c4291c741fc4188fad01ef92828d9a98801c0.css?__ws=discuss.ai.google.dev" media="all" rel="stylesheet" data-target="discourse-workflows"  />
+  <link href="https://d1dlmcr85iqnpo.cloudfront.net/stylesheets/footnote_6d8c4291c741fc4188fad01ef92828d9a98801c0.css?__ws=discuss.ai.google.dev" media="all" rel="stylesheet" data-target="footnote"  />
+  <link href="https://d1dlmcr85iqnpo.cloudfront.net/stylesheets/hosted-site_6d8c4291c741fc4188fad01ef92828d9a98801c0.css?__ws=discuss.ai.google.dev" media="all" rel="stylesheet" data-target="hosted-site"  />
+  <link href="https://d1dlmcr85iqnpo.cloudfront.net/stylesheets/poll_6d8c4291c741fc4188fad01ef92828d9a98801c0.css?__ws=discuss.ai.google.dev" media="all" rel="stylesheet" data-target="poll"  />
+  <link href="https://d1dlmcr85iqnpo.cloudfront.net/stylesheets/spoiler-alert_6d8c4291c741fc4188fad01ef92828d9a98801c0.css?__ws=discuss.ai.google.dev" media="all" rel="stylesheet" data-target="spoiler-alert"  />
+  <link href="https://d1dlmcr85iqnpo.cloudfront.net/stylesheets/discourse-ai_mobile_6d8c4291c741fc4188fad01ef92828d9a98801c0.css?__ws=discuss.ai.google.dev" media="(width < 40rem)" rel="stylesheet" data-target="discourse-ai_mobile"  />
+  <link href="https://d1dlmcr85iqnpo.cloudfront.net/stylesheets/discourse-reactions_mobile_6d8c4291c741fc4188fad01ef92828d9a98801c0.css?__ws=discuss.ai.google.dev" media="(width < 40rem)" rel="stylesheet" data-target="discourse-reactions_mobile"  />
+  <link href="https://d1dlmcr85iqnpo.cloudfront.net/stylesheets/discourse-ai_desktop_6d8c4291c741fc4188fad01ef92828d9a98801c0.css?__ws=discuss.ai.google.dev" media="(width >= 40rem)" rel="stylesheet" data-target="discourse-ai_desktop"  />
+  <link href="https://d1dlmcr85iqnpo.cloudfront.net/stylesheets/discourse-reactions_desktop_6d8c4291c741fc4188fad01ef92828d9a98801c0.css?__ws=discuss.ai.google.dev" media="(width >= 40rem)" rel="stylesheet" data-target="discourse-reactions_desktop"  />
+  <link href="https://d1dlmcr85iqnpo.cloudfront.net/stylesheets/poll_desktop_6d8c4291c741fc4188fad01ef92828d9a98801c0.css?__ws=discuss.ai.google.dev" media="(width >= 40rem)" rel="stylesheet" data-target="poll_desktop"  />
+
+  <link href="https://d1dlmcr85iqnpo.cloudfront.net/stylesheets/common_theme_4_18fe8f38102ec483b9f3919f1c315ef1845be1d6.css?__ws=discuss.ai.google.dev" media="all" rel="stylesheet" data-target="common_theme" data-theme-id="4" data-theme-name="discourse header search"/>
+<link href="https://d1dlmcr85iqnpo.cloudfront.net/stylesheets/common_theme_13_0ebd92bf1c49847522a48f736df3fdfacc4c7303.css?__ws=discuss.ai.google.dev" media="all" rel="stylesheet" data-target="common_theme" data-theme-id="13" data-theme-name="google ai"/>
+<link href="https://d1dlmcr85iqnpo.cloudfront.net/stylesheets/common_theme_9_28c77e51f0f4ea584588a08b5542b2dfcdf0b9c4.css?__ws=discuss.ai.google.dev" media="all" rel="stylesheet" data-target="common_theme" data-theme-id="9" data-theme-name="global notice custom css"/>
+<link href="https://d1dlmcr85iqnpo.cloudfront.net/stylesheets/common_theme_21_14957731e76155e6730076414ebff8a97d4e76f1.css?__ws=discuss.ai.google.dev" media="all" rel="stylesheet" data-target="common_theme" data-theme-id="21" data-theme-name="hide individual user profiles"/>
+<link href="https://d1dlmcr85iqnpo.cloudfront.net/stylesheets/common_theme_18_a8936cc8e8b693bae41b5a36f1db8bcd42af6c61.css?__ws=discuss.ai.google.dev" media="all" rel="stylesheet" data-target="common_theme" data-theme-id="18" data-theme-name="hide moderator and admin accounts"/>
+<link href="https://d1dlmcr85iqnpo.cloudfront.net/stylesheets/common_theme_8_e34031ed7deb1ea472b979aedc86705165d30ae1.css?__ws=discuss.ai.google.dev" media="all" rel="stylesheet" data-target="common_theme" data-theme-id="8" data-theme-name="temp fixes"/>
+  <link href="https://d1dlmcr85iqnpo.cloudfront.net/stylesheets/mobile_theme_13_c1f3ceafae8c7b2f1067eee14c88bcfccf1e6066.css?__ws=discuss.ai.google.dev" media="(width < 40rem)" rel="stylesheet" data-target="mobile_theme" data-theme-id="13" data-theme-name="google ai"/>
+  <link href="https://d1dlmcr85iqnpo.cloudfront.net/stylesheets/desktop_theme_13_35530004d2c2158d43a96ca4e74e18ac8695b115.css?__ws=discuss.ai.google.dev" media="(width >= 40rem)" rel="stylesheet" data-target="desktop_theme" data-theme-id="13" data-theme-name="google ai"/>
+
+
+
+
+    
+    
+        <link rel="alternate nofollow" type="application/rss+xml" title="RSS feed of &#39;Gemini 4 Neon and Orchestrator (Neon) are now available in Google Antigravity&#39;" href="https://discuss.ai.google.dev/t/gemini-4-neon-and-orchestrator-neon-are-now-available-in-google-antigravity/202301.rss" />
+    <meta property="og:site_name" content="Google AI Developers Forum" />
+<meta property="og:type" content="website" />
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:image" content="https://d3qe71uytubmmx.cloudfront.net/original/2X/8/8bfe64fc593eb7baba8df149ebba4457c16ca1f9.png" />
+<meta property="og:image" content="https://d3qe71uytubmmx.cloudfront.net/original/2X/8/8bfe64fc593eb7baba8df149ebba4457c16ca1f9.png" />
+<meta property="og:url" content="https://discuss.ai.google.dev/t/gemini-4-neon-and-orchestrator-neon-are-now-available-in-google-antigravity/202301" />
+<meta name="twitter:url" content="https://discuss.ai.google.dev/t/gemini-4-neon-and-orchestrator-neon-are-now-available-in-google-antigravity/202301" />
+<meta property="og:title" content="Gemini 4 Neon and Orchestrator (Neon) are now available in Google Antigravity" />
+<meta name="twitter:title" content="Gemini 4 Neon and Orchestrator (Neon) are now available in Google Antigravity" />
+<meta property="og:description" content="Hi everyone,  Gemini 4 Neon is rolling out today in the Antigravity app, Antigravity CLI, and Antigravity IDE Extensions. Neon sits between Gemini 4 Carbon (deepest long-horizon work) and Gemini 4 Hydrogen (fast everyday execution), and it becomes the default model for new conversations on plans that include it.  Why try Neon   Built for daily coding and agent work: repo-level edits, debugging, refactoring, and multi-step instructions, with the lowest fabrication rate we have measured in Antigra..." />
+<meta name="twitter:description" content="Hi everyone,  Gemini 4 Neon is rolling out today in the Antigravity app, Antigravity CLI, and Antigravity IDE Extensions. Neon sits between Gemini 4 Carbon (deepest long-horizon work) and Gemini 4 Hydrogen (fast everyday execution), and it becomes the default model for new conversations on plans that include it.  Why try Neon   Built for daily coding and agent work: repo-level edits, debugging, refactoring, and multi-step instructions, with the lowest fabrication rate we have measured in Antigra..." />
+<meta property="og:article:section" content="Google Antigravity" />
+<meta property="og:article:section:color" content="3AB54A" />
+<meta property="og:article:tag" content="model" />
+<meta name="twitter:label1" value="Reading time" />
+<meta name="twitter:data1" value="1 min 🕑" />
+<meta name="twitter:label2" value="Likes" />
+<meta name="twitter:data2" value="4 ❤" />
+<meta property="article:published_time" content="2026-11-18T22:58:38+00:00" />
+<meta property="og:ignore_canonical" content="true" />
+
+
+    <link rel="alternate" type="text/markdown" href="https://discuss.ai.google.dev/t/gemini-4-neon-and-orchestrator-neon-are-now-available-in-google-antigravity/202301.md">
+    
+<script type="application/ld+json">{"@context":"http://schema.org","@type":"QAPage","name":"Gemini 4 Neon and Orchestrator (Neon) are now available in Google Antigravity","datePublished":"2026-11-18T22:58:37.899Z","mainEntity":{"@type":"Question","answerCount":6,"author":{"@type":"Person","name":"rody","url":"https://discuss.ai.google.dev/u/rody"},"dateModified":"2026-11-19T05:23:55.528Z","datePublished":"2026-11-18T22:58:37.899Z","name":"Gemini 4 Neon and Orchestrator (Neon) are now available in Google Antigravity","text":"Hi everyone,\n\nGemini 4 Neon is rolling out today in the Antigravity app, Antigravity CLI, and Antigravity IDE Extensions. Neon sits between Gemini 4 Carbon (deepest long-horizon work) and Gemini 4 Hydrogen (fast everyday execution), and it becomes the default model for new conversations on plans that include it.\n\nWhy try Neon\n\nBuilt for daily coding and agent work: repo-level edits, debugging, refactoring, and multi-step instructions, with the lowest fabrication rate we have measured in Antigravity testing.\n\n#1 on the Artificial Analysis Coding Agent Index (58.6) and #3 overall on the Artificial Analysis Intelligence Index (61, at Extra High).\n\nAt its default High thinking level, about 32% lower cost per task than Carbon, so your quota goes further.\n\nFour thinking levels: Low, Medium, High (default), and Extra. In the CLI: --model gemini-4-neon-xhigh or --effort xhigh.\n\nContext window of up to 512K tokens in Antigravity.\n\nOrchestrator (Neon)\n\nOrchestrator pairs two Gemini 4 models in one conversation. With Orchestrator (Neon), Neon plans and reviews, and Hydrogen does the implementation work: code edits, package updates, and test runs. If Hydrogen gets stuck, it hands control back to Neon to inspect the state, fix the plan, and continue. You get Neon’s judgment where it matters and Hydrogen’s speed everywhere else. Select Orchestrator (Neon) in the model selector under the prompt box.\n\nWho gets what\n\nPlan\n\nGemini 4 Neon\n\nOrchestrator (Neon)\n\nFree and Google AI Plus\n\nNot included\n\nNot included\n\nGoogle AI Pro (paid)\n\nIncluded\n\nIncluded\n\nGoogle AI Pro (trial)\n\nOnly on trials with eligible premium devices\n\nOnly on trials with eligible premium devices\n\nGoogle AI Ultra\n\nIncluded\n\nIncluded\n\nEnterprise\n\nIncluded through Gemini for business\n\nNot included\n\nIf you are on a Google AI Pro trial and want to switch to a paid plan, you can submit a request. The full model and plan table is on the Choose a model page.\n\nRead more in the launch post. If you hit a problem with Neon or Orchestrator, reply in a new topic with your Antigravity version, plan, and the model you selected so we can follow up.\n\nHappy building, The Google Antigravity team","upvoteCount":1,"suggestedAnswer":[{"@type":"Answer","author":{"@type":"Person","name":"Devjay","url":"https://discuss.ai.google.dev/u/Devjay"},"dateModified":"2026-11-19T00:06:47.717Z","datePublished":"2026-11-19T00:06:47.670Z","text":"@rody Hey Rody, a lot of us paid Ultra users have been stuck since 15 to 18 Nov and haven’t heard anything back yet, so posting here.\n\nNeon doesn’t run for us either. On Neon (XHigh) the first message fails with:\n\nINVALID_ARGUMENT (code 400): Thinking level is unsupported: THINKING_LEVEL_XHIGH\n\nSame story on Carbon, Argon and Hydrogen:\n\nanswers in seconds with almost no thinking\n\nlong chats cut to about 100K, the older part just dropped, no summary\n\nthe app log shows the plan as empty:\n\nSetUserTier called with userTier: “”, tierDisplayName: “”\n\nCCPA routed this account to AICode\n\nupdating to 2.33.0 didn’t fix it\n\nFor me it switched on 18 Nov at 04:43 UTC, right after my 5-hour limit reset. Every chat changed in the same minute. Before that the same chats ran to 511K with full thinking.\n\nEveryone’s reports are in these two threads:\n\n[image]\n\nSevere intelligence degradation across ALL models since November 15, Is Google routing requests to inferior models? Google Antigravity\n\nHello Google Antigravity team,\n\nSince November 15, 2026, I have been experiencing a massive degradation in intelligence, reasoning, and coding capabilities across all models I use in Google Antigravity.\n\nThe difference in quality compared to previous days is extremely noticeable. Antigravity has become practically unusable for serious software development.\n\nThe following issues are occurring across all models:\n\nResponses are significantly less intelligent, superficial, and incomplete.\n\nModel…\n\n[image]\n\n[Bug] Gemini 4 Hydrogen Extra unavailable; Carbon \u0026 Argon (all modes) respond instantly without thinking and fail to work Google Antigravity\n\nI am experiencing two critical issues with Gemini 4 models in Google Antigravity right now and am not sure what is causing them:\n\nHydrogen Extra Unavailable: The Gemini 4 Hydrogen Extra model is currently unavailable / locked for my account, even though my subscription should cover it.\n\nCarbon \u0026 Argon Failing / Skipping Thinking (All Modes): When switching to Gemini 4 Carbon or Gemini 4 Argon (across all available modes), they completely skip the thinking/reasoning process, output an instant res…\n\nOur Ultra plans are just sitting there unused. Would really appreciate if you can get it checked.","upvoteCount":3,"url":"https://discuss.ai.google.dev/t/gemini-4-neon-and-orchestrator-neon-are-now-available-in-google-antigravity/202301/2"},{"@type":"Answer","author":{"@type":"Person","name":"Rebbanpalli_Naveen","url":"https://discuss.ai.google.dev/u/Rebbanpalli_Naveen"},"dateModified":"2026-11-20T12:33:28.101Z","datePublished":"2026-11-20T12:33:28.036Z","text":"Hi @Devjay,\n\nThanks for flagging this here and linking both threads.\n\nSeveral users in those threads have since confirmed normal thinking and Extra/Orchestrator behavior returning later on November 19, so please re-test in a fresh conversation on Antigravity App v2.33.0 (and try signing out and back in per Authenticate if you haven’t since then).\n\nIf you are still seeing the THINKING_LEVEL_XHIGH error, shallow responses, or early context cutoff on your Ultra account:\n\nInterim fallback: Switch to Claude Sonnet 5.5 (thinking) or Claude Opus 5.5 (thinking) (Models).\n\nLong chats: Use /plan (Plan) for reviewable plans and workspace rules like AGENTS.md or .agents/rules/ (Rules) so key instructions stay intact across fresh conversations.\n\nPlease reply here and let us know whether this is still happening after re-testing so we can look into it further.","upvoteCount":0,"url":"https://discuss.ai.google.dev/t/gemini-4-neon-and-orchestrator-neon-are-now-available-in-google-antigravity/202301/3"},{"@type":"Answer","author":{"@type":"Person","name":"jwin","url":"https://discuss.ai.google.dev/u/jwin"},"dateModified":"2026-11-22T01:55:44.002Z","datePublished":"2026-11-22T01:55:43.979Z","text":"Not many people discussing this orchestrator but it’s instanely reliable and deliver real good work. The comparison is with Opus 5.5 High. And i am using this extra high.","upvoteCount":0,"url":"https://discuss.ai.google.dev/t/gemini-4-neon-and-orchestrator-neon-are-now-available-in-google-antigravity/202301/5"},{"@type":"Answer","author":{"@type":"Person","name":"Devjay","url":"https://discuss.ai.google.dev/u/Devjay"},"dateModified":"2026-11-22T09:06:22.149Z","datePublished":"2026-11-22T09:06:22.114Z","text":"Hi @Rebbanpalli_Naveen,\n\nYes, it is fixed. Thank you so much. Sorry, missed your reply on this thread.","upvoteCount":0,"url":"https://discuss.ai.google.dev/t/gemini-4-neon-and-orchestrator-neon-are-now-available-in-google-antigravity/202301/6"},{"@type":"Answer","author":{"@type":"Person","name":"Kasempiternal","url":"https://discuss.ai.google.dev/u/Kasempiternal"},"dateModified":"2026-11-23T11:38:46.419Z","datePublished":"2026-11-23T11:38:46.392Z","text":"This might be a big request, but it would help a lot on deciding if to use orchestrator or not if we had some benchmarks Cognition fusion style, where you show Artificial Analysis index or some benchmark results on Neon solo vs Neon in orchestrator.","upvoteCount":0,"url":"https://discuss.ai.google.dev/t/gemini-4-neon-and-orchestrator-neon-are-now-available-in-google-antigravity/202301/7"},{"@type":"Answer","author":{"@type":"Person","name":"Max_Lunau","url":"https://discuss.ai.google.dev/u/Max_Lunau"},"dateModified":"2026-11-25T13:28:38.943Z","datePublished":"2026-11-25T13:28:38.921Z","text":"I wanted to try Neon in Antigravity.\n\nBut, you really make it impossible to sub to a paid plan for AI Pro without first subbing to the AI Pro trail, contacting support and waiting in chat support for 2 hours and only then can I give Google my money?\n\nNot very intuitive.","upvoteCount":0,"url":"https://discuss.ai.google.dev/t/gemini-4-neon-and-orchestrator-neon-are-now-available-in-google-antigravity/202301/8"}]}}</script>
+  </head>
+  <body class="crawler ">
+    
+    <header>
+  <a href="/">Google AI Developers Forum</a>
+</header>
+
+    <div id="main-outlet" class="wrap" role="main">
+        <div id="topic-title">
+    <h1>
+      <a href="/t/gemini-4-neon-and-orchestrator-neon-are-now-available-in-google-antigravity/202301">Gemini 4 Neon and Orchestrator (Neon) are now available in Google Antigravity</a>
+    </h1>
+
+      <div class="topic-category" itemscope itemtype="http://schema.org/BreadcrumbList">
+          <span itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+            <a href="/c/antigravity/64" class="badge-wrapper bullet" itemprop="item">
+              <span class='badge-category-bg' style='background-color: #3AB54A'></span>
+              <span class='badge-category clear-badge'>
+                <span class='category-name' itemprop='name'>Google Antigravity</span>
+              </span>
+            </a>
+            <meta itemprop="position" content="1" />
+          </span>
+        <span itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+          <meta itemprop="name" content="Gemini 4 Neon and Orchestrator (Neon) are now available in Google Antigravity" />
+          <link itemprop="item" href="https://discuss.ai.google.dev/t/gemini-4-neon-and-orchestrator-neon-are-now-available-in-google-antigravity/202301" />
+          <meta itemprop="position" content="2" />
+        </span>
+      </div>
+
+      <div class="topic-category">
+        <div class='discourse-tags list-tags'>
+            <a href='https://discuss.ai.google.dev/tag/model' class='discourse-tag' rel="tag">model</a>
+        </div>
+      </div>
+  </div>
+
+  
+
+    <div itemscope="itemscope" itemtype="https://schema.org/QAPage">
+      <meta itemprop='name' content='Gemini 4 Neon and Orchestrator (Neon) are now available in Google Antigravity'>
+      <link itemprop='url' href='https://discuss.ai.google.dev/t/gemini-4-neon-and-orchestrator-neon-are-now-available-in-google-antigravity/202301'>
+      <meta itemprop='datePublished' content='2026-11-18T22:58:37Z'>
+      <meta itemprop='keywords' content='model'>
+
+      
+
+        <div itemprop="mainEntity" itemscope="itemscope" itemtype="https://schema.org/Question">
+          <meta itemprop='answerCount' content='6'><meta itemprop='datePublished' content='2026-11-18T22:58:37Z'><meta itemprop='name' content='Gemini 4 Neon and Orchestrator (Neon) are now available in Google Antigravity'><meta itemprop='upvoteCount' content='1'>
+
+
+          <div id='post_1' data-qa-question="true" class='topic-body crawler-post'>
+            <div class='crawler-post-meta'>
+              <span class="creator" itemprop="author" itemscope="itemscope" itemtype="http://schema.org/Person">
+                <a rel='nofollow' href='https://discuss.ai.google.dev/u/rody'><span itemprop="name">rody</span></a>
+                  <meta itemprop='url' content='https://discuss.ai.google.dev/u/rody'>
+                
+              </span>
+
+
+
+              <span class="crawler-post-infos">
+                  <time  datetime='2026-11-18T22:58:38Z' class='post-time'>
+                    November 18, 2026, 10:58pm
+                  </time>
+                  <meta itemprop='dateModified' content='2026-11-19T05:23:55Z'>
+              <span itemprop="position">1</span>
+              </span>
+            </div>
+            <div class='post' itemprop="text">
+              <p>Hi everyone,</p>
+<p>Gemini 4 Neon is rolling out today in the Antigravity app, Antigravity CLI, and Antigravity IDE Extensions. Neon sits between Gemini 4 Carbon (deepest long-horizon work) and Gemini 4 Hydrogen (fast everyday execution), and it becomes the default model for new conversations on plans that include it.</p>
+<p><strong>Why try Neon</strong></p>
+<ul>
+<li>Built for daily coding and agent work: repo-level edits, debugging, refactoring, and multi-step instructions, with the lowest fabrication rate we have measured in Antigravity testing.</li>
+<li><span class="hashtag-raw">#1</span> on the Artificial Analysis Coding Agent Index (58.6) and <span class="hashtag-raw">#3</span> overall on the Artificial Analysis Intelligence Index (61, at Extra High).</li>
+<li>At its default High thinking level, about 32% lower cost per task than Carbon, so your quota goes further.</li>
+<li>Four thinking levels: Low, Medium, High (default), and Extra. In the CLI: <code>--model gemini-4-neon-xhigh</code> or <code>--effort xhigh</code>.</li>
+<li>Context window of up to 512K tokens in Antigravity.</li>
+</ul>
+<p><strong>Orchestrator (Neon)</strong></p>
+<p>Orchestrator pairs two Gemini 4 models in one conversation. With Orchestrator (Neon), Neon plans and reviews, and Hydrogen does the implementation work: code edits, package updates, and test runs. If Hydrogen gets stuck, it hands control back to Neon to inspect the state, fix the plan, and continue. You get Neon’s judgment where it matters and Hydrogen’s speed everywhere else. Select <strong>Orchestrator (Neon)</strong> in the model selector under the prompt box.</p>
+<p><strong>Who gets what</strong></p>
+<div class="md-table">
+<table>
+<thead>
+<tr>
+<th style="text-align:left"><strong>Plan</strong></th>
+<th style="text-align:left"><strong>Gemini 4 Neon</strong></th>
+<th style="text-align:left"><strong>Orchestrator (Neon)</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">Free and Google AI Plus</td>
+<td style="text-align:left">Not included</td>
+<td style="text-align:left">Not included</td>
+</tr>
+<tr>
+<td style="text-align:left">Google AI Pro (paid)</td>
+<td style="text-align:left">Included</td>
+<td style="text-align:left">Included</td>
+</tr>
+<tr>
+<td style="text-align:left">Google AI Pro (trial)</td>
+<td style="text-align:left">Only on trials with eligible premium devices</td>
+<td style="text-align:left">Only on trials with eligible premium devices</td>
+</tr>
+<tr>
+<td style="text-align:left">Google AI Ultra</td>
+<td style="text-align:left">Included</td>
+<td style="text-align:left">Included</td>
+</tr>
+<tr>
+<td style="text-align:left">Enterprise</td>
+<td style="text-align:left">Included through Gemini for business</td>
+<td style="text-align:left">Not included</td>
+</tr>
+</tbody>
+</table>
+</div><p>If you are on a Google AI Pro trial and want to switch to a paid plan, you can <a href="https://one.google.com/support">submit a request</a>. The full model and plan table is on the <a href="https://antigravity.google/docs/models">Choose a model</a> page.</p>
+<p>Read more in the <a href="https://antigravity.google/blog/gemini-4-neon-in-google-antigravity">launch post</a>. If you hit a problem with Neon or Orchestrator, reply in a new topic with your Antigravity version, plan, and the model you selected so we can follow up.</p>
+<p>Happy building, The Google Antigravity team</p>
+            </div>
+
+
+
+            
+
+
+          </div>
+          <div id='post_2' itemprop="suggestedAnswer" itemscope="itemscope" itemtype="https://schema.org/Answer" class='topic-body crawler-post'>
+            <div class='crawler-post-meta'>
+              <span class="creator" itemprop="author" itemscope="itemscope" itemtype="http://schema.org/Person">
+                <a rel='nofollow' href='https://discuss.ai.google.dev/u/Devjay'><span itemprop="name">Devjay</span></a>
+                  <meta itemprop='url' content='https://discuss.ai.google.dev/u/Devjay'>
+                
+              </span>
+
+
+
+              <span class="crawler-post-infos">
+                  <time itemprop="datePublished" datetime='2026-11-19T00:06:47Z' class='post-time'>
+                    November 19, 2026, 12:06am
+                  </time>
+                  <meta itemprop='dateModified' content='2026-11-19T00:06:47Z'>
+              <span itemprop="position">2</span>
+              </span>
+            </div>
+            <div class='post' itemprop="text">
+              <p><a class="mention" href="/u/rody">@rody</a> Hey Rody, a lot of us paid Ultra users have been stuck since 15 to 18 Nov and haven’t heard anything back yet, so posting here.</p>
+<p>Neon doesn’t run for us either. On Neon (XHigh) the first message fails with:<br>
+INVALID_ARGUMENT (code 400): Thinking level is unsupported: THINKING_LEVEL_XHIGH</p>
+<p>Same story on Carbon, Argon and Hydrogen:</p>
+<ul>
+<li>answers in seconds with almost no thinking</li>
+<li>long chats cut to about 100K, the older part just dropped, no summary</li>
+<li>the app log shows the plan as empty:<br>
+SetUserTier called with userTier: “”, tierDisplayName: “”<br>
+CCPA routed this account to AICode</li>
+<li>updating to 2.33.0 didn’t fix it</li>
+</ul>
+<p>For me it switched on 18 Nov at 04:43 UTC, right after my 5-hour limit reset. Every chat changed in the same minute. Before that the same chats ran to 511K with full thinking.</p>
+<p>Everyone’s reports are in these two threads:</p>
+<aside class="quote quote-modified" data-post="1" data-topic="201295">
+  <div class="title">
+    <div class="quote-controls"></div>
+    <img alt="" width="24" height="24" src="https://d1dlmcr85iqnpo.cloudfront.net/user_avatar/discuss.ai.google.dev/beta/48/99023_2.png" class="avatar">
+    <div class="quote-title__text-content">
+      <a href="https://discuss.ai.google.dev/t/severe-intelligence-degradation-across-all-models-since-november-15-is-google-routing-requests-to-inferior-models/201295">Severe intelligence degradation across ALL models since November 15, Is Google routing requests to inferior models?</a> <a class="badge-category__wrapper " href="/c/antigravity/64"><span data-category-id="64" style="--category-badge-color: #3AB54A; --category-badge-text-color: #FFFFFF;" data-drop-close="true" class="badge-category --style-square "><span class="badge-category__name">Google Antigravity</span></span></a>
+    </div>
+  </div>
+  <blockquote>
+    Hello Google Antigravity team, 
+Since November 15, 2026, I have been experiencing a massive degradation in intelligence, reasoning, and coding capabilities across all models I use in Google Antigravity. 
+The difference in quality compared to previous days is extremely noticeable. Antigravity has become practically unusable for serious software development. 
+The following issues are occurring across all models: 
+
+
+Responses are significantly less intelligent, superficial, and incomplete. 
+
+
+Model…
+  </blockquote>
+</aside>
+
+<aside class="quote quote-modified" data-post="1" data-topic="201226">
+  <div class="title">
+    <div class="quote-controls"></div>
+    <img alt="" width="24" height="24" src="https://d1dlmcr85iqnpo.cloudfront.net/user_avatar/discuss.ai.google.dev/ycaptain/48/171479_2.png" class="avatar">
+    <div class="quote-title__text-content">
+      <a href="https://discuss.ai.google.dev/t/bug-gemini-4-hydrogen-extra-unavailable-carbon-argon-all-modes-respond-instantly-without-thinking-and-fail-to-work/201226">[Bug] Gemini 4 Hydrogen Extra unavailable; Carbon &amp; Argon (all modes) respond instantly without thinking and fail to work</a> <a class="badge-category__wrapper " href="/c/antigravity/64"><span data-category-id="64" style="--category-badge-color: #3AB54A; --category-badge-text-color: #FFFFFF;" data-drop-close="true" class="badge-category --style-square "><span class="badge-category__name">Google Antigravity</span></span></a>
+    </div>
+  </div>
+  <blockquote>
+    I am experiencing two critical issues with Gemini 4 models in Google Antigravity right now and am not sure what is causing them: 
+
+Hydrogen Extra Unavailable: The Gemini 4 Hydrogen Extra model is currently unavailable / locked for my account, even though my subscription should cover it.
+Carbon &amp; Argon Failing / Skipping Thinking (All Modes): When switching to Gemini 4 Carbon or Gemini 4 Argon (across all available modes), they completely skip the thinking/reasoning process, output an instant res…
+  </blockquote>
+</aside>
+
+<p>Our Ultra plans are just sitting there unused. Would really appreciate if you can get it checked.</p>
+            </div>
+
+
+
+            
+
+<meta itemprop='upvoteCount' content='3'><meta itemprop='url' content='https://discuss.ai.google.dev/t/gemini-4-neon-and-orchestrator-neon-are-now-available-in-google-antigravity/202301/2'>
+          </div>
+          <div id='post_3' itemprop="suggestedAnswer" itemscope="itemscope" itemtype="https://schema.org/Answer" class='topic-body crawler-post'>
+            <div class='crawler-post-meta'>
+              <span class="creator" itemprop="author" itemscope="itemscope" itemtype="http://schema.org/Person">
+                <a rel='nofollow' href='https://discuss.ai.google.dev/u/Rebbanpalli_Naveen'><span itemprop="name">Rebbanpalli_Naveen</span></a>
+                  <meta itemprop='url' content='https://discuss.ai.google.dev/u/Rebbanpalli_Naveen'>
+                
+              </span>
+
+
+
+              <span class="crawler-post-infos">
+                  <time itemprop="datePublished" datetime='2026-11-20T12:33:28Z' class='post-time'>
+                    November 20, 2026, 12:33pm
+                  </time>
+                  <meta itemprop='dateModified' content='2026-11-20T12:33:28Z'>
+              <span itemprop="position">3</span>
+              </span>
+            </div>
+            <div class='post' itemprop="text">
+              <p>Hi <a class="mention" href="/u/devjay">@Devjay</a>,</p>
+<p>Thanks for flagging this here and linking both threads.</p>
+<p>Several users in those threads have since confirmed normal thinking and <code>Extra</code>/Orchestrator behavior returning later on November 19, so please re-test in a fresh conversation on Antigravity App v2.33.0 (and try signing out and back in per <a href="https://antigravity.google/docs/install">Authenticate</a> if you haven’t since then).</p>
+<p>If you are still seeing the <code>THINKING_LEVEL_XHIGH</code> error, shallow responses, or early context cutoff on your Ultra account:</p>
+<ul>
+<li><strong>Interim fallback:</strong> Switch to <strong>Claude Sonnet 5.5 (thinking)</strong> or <strong>Claude Opus 5.5 (thinking)</strong> (<a href="https://antigravity.google/docs/models">Models</a>).</li>
+<li><strong>Long chats:</strong> Use <code>/plan</code> (<a href="https://antigravity.google/docs/plan">Plan</a>) for reviewable plans and workspace rules like <code>AGENTS.md</code> or <code>.agents/rules/</code> (<a href="https://antigravity.google/docs/rules">Rules</a>) so key instructions stay intact across fresh conversations.</li>
+</ul>
+<p>Please reply here and let us know whether this is still happening after re-testing so we can look into it further.</p>
+            </div>
+
+
+
+            
+
+<meta itemprop='upvoteCount' content='0'><meta itemprop='url' content='https://discuss.ai.google.dev/t/gemini-4-neon-and-orchestrator-neon-are-now-available-in-google-antigravity/202301/3'>
+          </div>
+          <div id='post_5' itemprop="suggestedAnswer" itemscope="itemscope" itemtype="https://schema.org/Answer" class='topic-body crawler-post'>
+            <div class='crawler-post-meta'>
+              <span class="creator" itemprop="author" itemscope="itemscope" itemtype="http://schema.org/Person">
+                <a rel='nofollow' href='https://discuss.ai.google.dev/u/jwin'><span itemprop="name">jwin</span></a>
+                  <meta itemprop='url' content='https://discuss.ai.google.dev/u/jwin'>
+                
+              </span>
+
+
+
+              <span class="crawler-post-infos">
+                  <time itemprop="datePublished" datetime='2026-11-22T01:55:43Z' class='post-time'>
+                    November 22, 2026,  1:55am
+                  </time>
+                  <meta itemprop='dateModified' content='2026-11-22T01:55:43Z'>
+              <span itemprop="position">5</span>
+              </span>
+            </div>
+            <div class='post' itemprop="text">
+              <p>Not many people discussing this orchestrator but it’s instanely reliable and deliver real good work. The comparison is with Opus 5.5 High. And i am using this extra high.</p>
+            </div>
+
+
+
+            
+
+<meta itemprop='upvoteCount' content='0'><meta itemprop='url' content='https://discuss.ai.google.dev/t/gemini-4-neon-and-orchestrator-neon-are-now-available-in-google-antigravity/202301/5'>
+          </div>
+          <div id='post_6' itemprop="suggestedAnswer" itemscope="itemscope" itemtype="https://schema.org/Answer" class='topic-body crawler-post'>
+            <div class='crawler-post-meta'>
+              <span class="creator" itemprop="author" itemscope="itemscope" itemtype="http://schema.org/Person">
+                <a rel='nofollow' href='https://discuss.ai.google.dev/u/Devjay'><span itemprop="name">Devjay</span></a>
+                  <meta itemprop='url' content='https://discuss.ai.google.dev/u/Devjay'>
+                
+              </span>
+
+
+
+              <span class="crawler-post-infos">
+                  <time itemprop="datePublished" datetime='2026-11-22T09:06:22Z' class='post-time'>
+                    November 22, 2026,  9:06am
+                  </time>
+                  <meta itemprop='dateModified' content='2026-11-22T09:06:22Z'>
+              <span itemprop="position">6</span>
+              </span>
+            </div>
+            <div class='post' itemprop="text">
+              <p>Hi <a class="mention" href="/u/rebbanpalli_naveen">@Rebbanpalli_Naveen</a>,<br>
+Yes, it is fixed. Thank you so much. Sorry, missed your reply on this thread.</p>
+            </div>
+
+
+
+            
+
+<meta itemprop='upvoteCount' content='0'><meta itemprop='url' content='https://discuss.ai.google.dev/t/gemini-4-neon-and-orchestrator-neon-are-now-available-in-google-antigravity/202301/6'>
+          </div>
+          <div id='post_7' itemprop="suggestedAnswer" itemscope="itemscope" itemtype="https://schema.org/Answer" class='topic-body crawler-post'>
+            <div class='crawler-post-meta'>
+              <span class="creator" itemprop="author" itemscope="itemscope" itemtype="http://schema.org/Person">
+                <a rel='nofollow' href='https://discuss.ai.google.dev/u/Kasempiternal'><span itemprop="name">Kasempiternal</span></a>
+                  <meta itemprop='url' content='https://discuss.ai.google.dev/u/Kasempiternal'>
+                
+              </span>
+
+
+
+              <span class="crawler-post-infos">
+                  <time itemprop="datePublished" datetime='2026-11-23T11:38:46Z' class='post-time'>
+                    November 23, 2026, 11:38am
+                  </time>
+                  <meta itemprop='dateModified' content='2026-11-23T11:38:46Z'>
+              <span itemprop="position">7</span>
+              </span>
+            </div>
+            <div class='post' itemprop="text">
+              <p>This might be a big request, but it would help a lot on deciding if to use orchestrator or not if we had some benchmarks Cognition fusion style, where you show Artificial Analysis index or some benchmark results on Neon solo vs Neon in orchestrator.</p>
+            </div>
+
+
+
+            
+
+<meta itemprop='upvoteCount' content='0'><meta itemprop='url' content='https://discuss.ai.google.dev/t/gemini-4-neon-and-orchestrator-neon-are-now-available-in-google-antigravity/202301/7'>
+          </div>
+          <div id='post_8' itemprop="suggestedAnswer" itemscope="itemscope" itemtype="https://schema.org/Answer" class='topic-body crawler-post'>
+            <div class='crawler-post-meta'>
+              <span class="creator" itemprop="author" itemscope="itemscope" itemtype="http://schema.org/Person">
+                <a rel='nofollow' href='https://discuss.ai.google.dev/u/Max_Lunau'><span itemprop="name">Max_Lunau</span></a>
+                  <meta itemprop='url' content='https://discuss.ai.google.dev/u/Max_Lunau'>
+                
+              </span>
+
+
+
+              <span class="crawler-post-infos">
+                  <time itemprop="datePublished" datetime='2026-11-25T13:28:38Z' class='post-time'>
+                    November 25, 2026,  1:28pm
+                  </time>
+                  <meta itemprop='dateModified' content='2026-11-25T13:28:38Z'>
+              <span itemprop="position">8</span>
+              </span>
+            </div>
+            <div class='post' itemprop="text">
+              <p>I wanted to try Neon in Antigravity.<br>
+But, you really make it impossible to sub to a paid plan for <strong>AI Pro</strong> without first subbing to the <strong>AI Pro trail,</strong> contacting support and waiting in chat support for 2 hours and only then can I give Google my money?<br>
+Not very intuitive.</p>
+            </div>
+
+
+
+            
+
+<meta itemprop='upvoteCount' content='0'><meta itemprop='url' content='https://discuss.ai.google.dev/t/gemini-4-neon-and-orchestrator-neon-are-now-available-in-google-antigravity/202301/8'>
+          </div>
+
+        </div>
+    </div>
+
+
+    <div id="related-topics" class="more-topics__list " role="complementary" aria-labelledby="related-topics-title">
+  <h3 id="related-topics-title" class="more-topics__list-title">
+    Related topics
+  </h3>
+  <div class="topic-list-container" itemscope itemtype='http://schema.org/ItemList'>
+    <meta itemprop='itemListOrder' content='http://schema.org/ItemListOrderDescending'>
+    <table class='topic-list'>
+      <thead>
+        <tr>
+          <th>Topic</th>
+          <th></th>
+          <th class="replies">Replies</th>
+          <th class="views">Views</th>
+          <th>Activity</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="topic-list-item" id="topic-list-item-203511">
+            <td class="main-link" itemprop='itemListElement' itemscope itemtype='http://schema.org/ListItem'>
+              <meta itemprop='position' content='1'>
+              <span class="link-top-line">
+                <a itemprop='url' href='https://discuss.ai.google.dev/t/gemini-4-neon-missing-despite-active-google-ai-pro-plan/203511' class='title raw-link raw-topic-link'>Gemini 4 Neon missing despite active Google AI Pro plan</a>
+              </span>
+              <div class="link-bottom-line">
+                  <a href='/c/antigravity/64' class='badge-wrapper bullet'>
+                    <span class='badge-category-bg' style='background-color: #3AB54A'></span>
+                    <span class='badge-category clear-badge'>
+                      <span class='category-name'>Google Antigravity</span>
+                    </span>
+                  </a>
+                  <div class="discourse-tags">
+                      <a href='https://discuss.ai.google.dev/tag/models/20' class='discourse-tag'>models</a>
+                      
+                  </div>
+              </div>
+            </td>
+            <td class="replies">
+              <span class='posts' title='posts'>4</span>
+            </td>
+            <td class="views">
+              <span class='views' title='views'>266</span>
+            </td>
+            <td>
+              November 25, 2026
+            </td>
+          </tr>
+          <tr class="topic-list-item" id="topic-list-item-203602">
+            <td class="main-link" itemprop='itemListElement' itemscope itemtype='http://schema.org/ListItem'>
+              <meta itemprop='position' content='2'>
+              <span class="link-top-line">
+                <a itemprop='url' href='https://discuss.ai.google.dev/t/gemini-4-neon-and-hydrogen-unavailable-in-antigravity-2-34-0-on-google-ai-pro-work-on-web/203602' class='title raw-link raw-topic-link'>Gemini 4 Neon and Hydrogen unavailable in Antigravity 2.34.0 on Google AI Pro (work on web)</a>
+              </span>
+              <div class="link-bottom-line">
+                  <a href='/c/antigravity/64' class='badge-wrapper bullet'>
+                    <span class='badge-category-bg' style='background-color: #3AB54A'></span>
+                    <span class='badge-category clear-badge'>
+                      <span class='category-name'>Google Antigravity</span>
+                    </span>
+                  </a>
+                  <div class="discourse-tags">
+                      <a href='https://discuss.ai.google.dev/tag/bug/7' class='discourse-tag'>bug</a>
+                      ,&nbsp;
+                      <a href='https://discuss.ai.google.dev/tag/models/20' class='discourse-tag'>models</a>
+                      ,&nbsp;
+                      <a href='https://discuss.ai.google.dev/tag/gemini/44' class='discourse-tag'>gemini</a>
+                      
+                  </div>
+              </div>
+            </td>
+            <td class="replies">
+              <span class='posts' title='posts'>2</span>
+            </td>
+            <td class="views">
+              <span class='views' title='views'>180</span>
+            </td>
+            <td>
+              November 25, 2026
+            </td>
+          </tr>
+          <tr class="topic-list-item" id="topic-list-item-205355">
+            <td class="main-link" itemprop='itemListElement' itemscope itemtype='http://schema.org/ListItem'>
+              <meta itemprop='position' content='3'>
+              <span class="link-top-line">
+                <a itemprop='url' href='https://discuss.ai.google.dev/t/google-ai-ultra-gemini-4-neon-carbon-and-argon-missing-in-antigravity-cli/205355' class='title raw-link raw-topic-link'>[Google AI Ultra] Gemini 4 Neon, Carbon and Argon missing in Antigravity CLI</a>
+              </span>
+              <div class="link-bottom-line">
+                  <a href='/c/antigravity/64' class='badge-wrapper bullet'>
+                    <span class='badge-category-bg' style='background-color: #3AB54A'></span>
+                    <span class='badge-category clear-badge'>
+                      <span class='category-name'>Google Antigravity</span>
+                    </span>
+                  </a>
+                  <div class="discourse-tags">
+                  </div>
+              </div>
+            </td>
+            <td class="replies">
+              <span class='posts' title='posts'>0</span>
+            </td>
+            <td class="views">
+              <span class='views' title='views'>22</span>
+            </td>
+            <td>
+              November 25, 2026
+            </td>
+          </tr>
+          <tr class="topic-list-item" id="topic-list-item-201555">
+            <td class="main-link" itemprop='itemListElement' itemscope itemtype='http://schema.org/ListItem'>
+              <meta itemprop='position' content='4'>
+              <span class="link-top-line">
+                <a itemprop='url' href='https://discuss.ai.google.dev/t/urgent-google-ai-ultra-gemini-4-carbon-unavailable-stalling-in-google-antigravity-thailand-apac/201555' class='title raw-link raw-topic-link'>[Urgent / Google AI Ultra] Gemini 4 Carbon Unavailable / Stalling in Google Antigravity (Thailand / APAC)</a>
+              </span>
+              <div class="link-bottom-line">
+                  <a href='/c/antigravity/64' class='badge-wrapper bullet'>
+                    <span class='badge-category-bg' style='background-color: #3AB54A'></span>
+                    <span class='badge-category clear-badge'>
+                      <span class='category-name'>Google Antigravity</span>
+                    </span>
+                  </a>
+                  <div class="discourse-tags">
+                      <a href='https://discuss.ai.google.dev/tag/ai/141' class='discourse-tag'>ai</a>
+                      
+                  </div>
+              </div>
+            </td>
+            <td class="replies">
+              <span class='posts' title='posts'>3</span>
+            </td>
+            <td class="views">
+              <span class='views' title='views'>189</span>
+            </td>
+            <td>
+              November 25, 2026
+            </td>
+          </tr>
+          <tr class="topic-list-item" id="topic-list-item-202335">
+            <td class="main-link" itemprop='itemListElement' itemscope itemtype='http://schema.org/ListItem'>
+              <meta itemprop='position' content='5'>
+              <span class="link-top-line">
+                <a itemprop='url' href='https://discuss.ai.google.dev/t/entitlement-sync-google-ai-plus-subscriber-cannot-access-gemini-4-hydrogen-in-antigravity-app-cli/202335' class='title raw-link raw-topic-link'>[Entitlement Sync] Google AI Plus subscriber cannot access Gemini 4 Hydrogen in Antigravity (App &amp; CLI)</a>
+              </span>
+              <div class="link-bottom-line">
+                  <a href='/c/antigravity/64' class='badge-wrapper bullet'>
+                    <span class='badge-category-bg' style='background-color: #3AB54A'></span>
+                    <span class='badge-category clear-badge'>
+                      <span class='category-name'>Google Antigravity</span>
+                    </span>
+                  </a>
+                  <div class="discourse-tags">
+                      <a href='https://discuss.ai.google.dev/tag/models/20' class='discourse-tag'>models</a>
+                      ,&nbsp;
+                      <a href='https://discuss.ai.google.dev/tag/billing/406' class='discourse-tag'>billing</a>
+                      
+                  </div>
+              </div>
+            </td>
+            <td class="replies">
+              <span class='posts' title='posts'>2</span>
+            </td>
+            <td class="views">
+              <span class='views' title='views'>197</span>
+            </td>
+            <td>
+              November 25, 2026
+            </td>
+          </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+
+
+
+
+    </div>
+    <footer class="container wrap">
+  <nav class='crawler-nav'>
+    <ul>
+      <li itemscope itemtype='http://schema.org/SiteNavigationElement'>
+        <span itemprop='name'>
+          <a href='/' itemprop="url">Home </a>
+        </span>
+      </li>
+      <li itemscope itemtype='http://schema.org/SiteNavigationElement'>
+        <span itemprop='name'>
+          <a href='/categories' itemprop="url">Categories </a>
+        </span>
+      </li>
+      
+      <li itemscope itemtype='http://schema.org/SiteNavigationElement'>
+        <span itemprop='name'>
+          <a href='/guidelines' itemprop="url">Guidelines </a>
+        </span>
+      </li>
+        <li itemscope itemtype='http://schema.org/SiteNavigationElement'>
+          <span itemprop='name'>
+            <a href='https://policies.google.com/terms' itemprop="url">Terms of Service </a>
+          </span>
+        </li>
+        <li itemscope itemtype='http://schema.org/SiteNavigationElement'>
+          <span itemprop='name'>
+            <a href='https://policies.google.com/privacy' itemprop="url">Privacy Policy </a>
+          </span>
+        </li>
+    </ul>
+  </nav>
+  <p class='powered-by-link'>Powered by <a href="https://www.discourse.org">Discourse</a>, best viewed with JavaScript enabled</p>
+</footer>
+
+    
+    
+  </body>
+  
+</html>

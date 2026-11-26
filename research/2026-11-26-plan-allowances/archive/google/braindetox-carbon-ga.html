@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<!--
+ * Technical Blog Post Template
+ * Copyright (c) 2023-2026 braindetox.kr
+-->
+<html lang="en">
+<head>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-YE3ELRSMZE"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-YE3ELRSMZE');
+    </script>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gemini 4 Carbon now available: $2/$10 intro price, $4/$20 from Dec 1</title>
+    <meta name="description" content="Gemini 4 Carbon is generally available: paid API access, a $2/$10 intro price, $4/$20 from December 1, limits, and what to change when moving Argon.">
+    <meta name="keywords" content="Gemini 4 Carbon, gemini-4-carbon, Gemini 4 Carbon pricing, Gemini 4 Carbon availability, Gemini API pricing, Gemini 4 Argon vs Carbon, Google AI Ultra, thinking level, long decode">
+
+    <link rel="canonical" href="https://braindetox.kr/en/posts/gemini_4_carbon_general_availability.html">
+    <meta name="robots" content="index, follow, max-image-preview:large">
+    <link rel="alternate" type="application/rss+xml" title="BrainDetox RSS (English)" href="https://braindetox.kr/en/rss.xml">
+
+    <meta property="og:title" content="Gemini 4 Carbon now available: $2/$10 intro price, $4/$20 from Dec 1">
+    <meta property="og:description" content="Gemini 4 Carbon is generally available: paid API access, a $2/$10 intro price, $4/$20 from December 1, limits, and what to change when moving Argon.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://braindetox.kr/en/posts/gemini_4_carbon_general_availability.html">
+    <meta property="og:image" content="https://braindetox.kr/en/posts/images/gemini_4_carbon_general_availability.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:locale" content="en_US">
+    <meta property="article:published_time" content="2026-11-11">
+    <meta property="article:section" content="Tech &amp; IT">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Gemini 4 Carbon now available: $2/$10 intro price, $4/$20 from Dec 1">
+    <meta name="twitter:description" content="Gemini 4 Carbon is generally available: paid API access, a $2/$10 intro price, $4/$20 from December 1, limits, and what to change when moving Argon.">
+    <meta name="twitter:image" content="https://braindetox.kr/en/posts/images/gemini_4_carbon_general_availability.png">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../styles.css">
+
+    <style>
+        .post-content-header { margin-bottom: 2rem; border-bottom: 1px solid #eaeaea; padding-bottom: 1rem; }
+        .post-title { font-size: 2rem; font-weight: 700; color: #333; margin-bottom: 0.5rem; }
+        .post-subtitle { font-size: 1.3rem; font-weight: 400; color: #666; margin-bottom: 1rem; }
+        .post-meta { display: flex; flex-wrap: wrap; gap: 1rem; color: #777; font-size: 0.9rem; }
+        .post-date { display: inline-block; }
+        .post-category { display: inline-block; background-color: #f0f0f0; padding: 0.2rem 0.5rem; border-radius: 3px; }
+        .post-content { line-height: 1.8; color: #333; }
+        .post-content h2 { margin-top: 2rem; margin-bottom: 1rem; color: #2c3e50; }
+        .post-content h3 { margin-top: 1.5rem; margin-bottom: 0.8rem; color: #34495e; }
+        .post-content p { margin-bottom: 1.2rem; }
+        .post-content ul, .post-content ol { margin-bottom: 1.2rem; padding-left: 2rem; }
+        .post-content li { margin-bottom: 0.5rem; }
+        .post-content blockquote { border-left: 4px solid #3498db; padding-left: 1rem; color: #555; font-style: italic; margin: 1.5rem 0; }
+        .post-content code { background-color: #f8f8f8; padding: 0.2rem 0.4rem; border-radius: 3px; font-family: Consolas, Monaco, monospace; font-size: 0.9em; }
+        .post-content pre { background-color: #f8f8f8; padding: 1rem; border-radius: 6px; overflow-x: auto; margin: 1.5rem 0; }
+        .post-content pre code { background: none; padding: 0; font-size: 0.86em; line-height: 1.6; }
+        .post-content table { width: 100%; border-collapse: collapse; margin: 1.5rem 0; }
+        .post-content th, .post-content td { padding: 0.7rem; border: 1px solid #e0e0e0; }
+        .post-content th { background-color: #f5f5f5; font-weight: 600; }
+        .post-content tr:nth-child(even) { background-color: #f9f9f9; }
+        .tbl-wrap { overflow-x: auto; }
+        .callout { background:#fff8e1; border-left:4px solid #f0ad4e; padding:1rem 1.2rem; margin:1.5rem 0; border-radius:4px; }
+        .post-toc { background:#f7f9fb; border:1px solid #e3e9ef; border-radius:6px; padding:1rem 1.2rem; margin:1.5rem 0; }
+        .post-toc h3 { margin:0 0 0.6rem; font-size:1.05rem; }
+        .post-toc ol { margin:0; padding-left:1.4rem; }
+        .post-toc li { margin-bottom:0.3rem; }
+        .back-to-list { margin-top: 3rem; padding-top: 1rem; border-top: 1px solid #eaeaea; }
+        .back-link { display: inline-block; padding: 0.5rem 1rem; background-color: #3498db; color: white; text-decoration: none; border-radius: 4px; }
+        .back-link:hover { background-color: #2980b9; }
+        @media (max-width: 768px) {
+            .post-title { font-size: 1.7rem; }
+            .post-subtitle { font-size: 1.1rem; }
+        }
+    </style>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/github.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js" defer></script>
+
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7911569280980377" crossorigin="anonymous"></script>
+
+    <link rel="alternate" hreflang="ko" href="https://braindetox.kr/posts/gemini_4_carbon_general_availability.html">
+    <link rel="alternate" hreflang="en" href="https://braindetox.kr/en/posts/gemini_4_carbon_general_availability.html">
+    <link rel="alternate" hreflang="ja" href="https://braindetox.kr/ja/posts/gemini_4_carbon_general_availability.html">
+    <link rel="alternate" hreflang="zh" href="https://braindetox.kr/zh/posts/gemini_4_carbon_general_availability.html">
+    <link rel="alternate" hreflang="x-default" href="https://braindetox.kr/posts/gemini_4_carbon_general_availability.html">
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BlogPosting",
+      "headline": "Gemini 4 Carbon now available: $2/$10 intro price, $4/$20 from Dec 1",
+      "alternativeHeadline": "Who can use it, model ID, 1M context and output limits, how it differs from Argon, and the introductory price that ends November 30, from Google’s own pages",
+      "datePublished": "2026-11-11",
+      "dateModified": "2026-11-11",
+      "inLanguage": "en-US",
+      "articleSection": "Tech & IT",
+      "author": {
+        "@type": "Person",
+        "name": "BrainDetox"
+      },
+      "keywords": "Gemini 4 Carbon, gemini-4-carbon, Gemini 4 Carbon pricing, Gemini 4 Carbon availability, Gemini API pricing, Gemini 4 Argon vs Carbon, Google AI Ultra, thinking level, long decode",
+      "publisher": {
+        "@type": "Organization",
+        "name": "BrainDetox",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://braindetox.kr/site_logo.png"
+        }
+      },
+      "image": {
+        "@type": "ImageObject",
+        "url": "https://braindetox.kr/en/posts/images/gemini_4_carbon_general_availability.png",
+        "width": 1200,
+        "height": 630
+      },
+      "mainEntityOfPage": "https://braindetox.kr/en/posts/gemini_4_carbon_general_availability.html"
+    }
+    </script>
+
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://braindetox.kr/en/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Tech",
+      "item": "https://braindetox.kr/en/category/tech.html"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "Gemini 4 Carbon now available: $2/$10 intro price, $4/$20 from Dec 1",
+      "item": "https://braindetox.kr/en/posts/gemini_4_carbon_general_availability.html"
+    }
+  ]
+}
+</script>
+</head>
+<body>
+    <div id="header-placeholder"></div>
+
+    <main class="container">
+        <section class="content-section">
+            <article class="blog-post-content" itemscope itemtype="https://schema.org/BlogPosting">
+                <meta itemprop="inLanguage" content="en-US">
+                <meta itemprop="datePublished" content="2026-11-11">
+                <meta itemprop="dateModified" content="2026-11-11">
+                <meta itemprop="author" content="BrainDetox">
+                <meta itemprop="keywords" content="Gemini 4 Carbon, gemini-4-carbon, Gemini 4 Carbon pricing, Gemini 4 Carbon availability, Gemini API pricing, Gemini 4 Argon vs Carbon, Google AI Ultra, thinking level, long decode">
+                <meta itemprop="image" content="https://braindetox.kr/en/posts/images/gemini_4_carbon_general_availability.png">
+                <meta itemprop="mainEntityOfPage" content="https://braindetox.kr/en/posts/gemini_4_carbon_general_availability.html">
+
+                <div class="post-content-header">
+                    <h1 class="post-title" itemprop="name">Gemini 4 Carbon now available: $2/$10 intro price, $4/$20 from Dec 1</h1>
+                    <h2 class="post-subtitle">Who can use it, model ID, 1M context and output limits, how it differs from Argon, and the introductory price that ends November 30, from Google’s own pages</h2>
+                    <div class="post-meta">
+                        <span class="post-date" itemprop="datePublished" content="2026-11-11">November 11, 2026</span>
+                        <a class="post-category-link" href="../category/tech.html"><span class="post-category" itemprop="articleSection">Tech &amp; IT</span></a>
+                    </div>
+                </div>
+
+                <div class="post-content" itemprop="articleBody">
+
+                    <nav class="post-toc">
+                        <h3>What This Article Covers</h3>
+                        <ol>
+                            <li><a href="#sec-1">What changed at general availability, at a glance</a></li>
+                            <li><a href="#sec-2">Who can use it and where</a></li>
+                            <li><a href="#sec-3">Pricing: the intro price that ends November 30</a></li>
+                            <li><a href="#sec-4">Carbon and Argon: same price per token, different token use</a></li>
+                            <li><a href="#sec-5">Limits and features listed on the model page</a></li>
+                            <li><a href="#sec-6">Performance and cost claims, read with their conditions</a></li>
+                            <li><a href="#sec-7">Safety and security figures within what Google reported</a></li>
+                            <li><a href="#sec-8">Who is affected and how</a></li>
+                            <li><a href="#sec-9">What you can do now: decision criteria by situation</a></li>
+                            <li><a href="#sec-10">What remains unverified</a></li>
+                            <li><a href="#sec-11">References</a></li>
+                        </ol>
+                    </nav>
+
+                    <div class="callout">
+                    This is a walkthrough based on Google’s blog post of November 10, 2026 announcing general availability of Gemini 4 Carbon (author: Koray Kavukcuoglu, SVP, Google DeepMind and Chief AI Architect) and the Gemini API model, pricing, and what’s-new pages, all viewed on November 11, 2026. It covers what changed at general availability: availability, price, limits, and how to switch. Performance and safety figures are Google’s own unless marked otherwise, and prices and terms can change. This is general information and not a substitute for purchasing or contract advice.
+                    </div>
+                    
+                    <h2 id="sec-1">What changed at general availability, at a glance</h2>
+                    
+                    <p>In its November 10 post, Google said developers, enterprises, scientists, and consumers can now try Gemini 4 Carbon. The same post says Carbon was released two weeks earlier to a set of cybersecurity defenders through the Fairwind Program. The model’s own benchmark and security details were covered in earlier articles, so this one concentrates on what was newly set at general availability: who can use it, what it costs, what the limits are, and what to change in existing code. For the model itself, see <a href="../posts/gemini_4_carbon_security_agent_model_2026.html">Gemini 4 Carbon staged rollout: security scores and pricing</a>; for the external index ranking, see <a href="../posts/aaii_v5_index_gemini_4_carbon_first_place.html">Gemini 4 Carbon Tops AA Index v5: What the 59 Means</a>.</p>
+                    
+                    <ul>
+                    <li><strong>The audience widened.</strong> Google says availability moved from an earlier release to defenders to an offering addressed to developers, enterprises, scientists, and consumers.</li>
+                    <li><strong>The API is open to paying developers and enterprises.</strong> The post says it is available through Google AI Studio and Gemini for business to all paying developers and enterprises. The free tier is excluded.</li>
+                    <li><strong>The model ID is gemini-4-carbon.</strong> The model page lists gemini-4-carbon as the stable version identifier and shows the latest update as November 2026.</li>
+                    <li><strong>The price is an introductory price.</strong> Both the post and the pricing page say $2 input and $10 output through November 30, 2026, with $4 input and $20 output applying afterward.</li>
+                    <li><strong>It sits on the same price sheet as Argon.</strong> The docs say the two models share the 1M unified context window, built-in tools, and per-token pricing. The difference is how many thinking tokens each spends per turn.</li>
+                    </ul>
+                    
+                    <h2 id="sec-2">Who can use it and where</h2>
+                    
+                    <p>The “Getting started” list in the post, sorted by reader, looks like this. Every cell is what the post says; neither the post nor the docs include a list of countries or regions.</p>
+                    
+                    <div class="tbl-wrap">
+                    <table>
+                    <thead><tr><th scope="col">Audience</th><th scope="col">Route named in the post</th><th scope="col">Conditions and wording</th></tr></thead>
+                    <tbody>
+                    <tr><td>Developers</td><td>Gemini API paid tier in AI Studio and Android Studio</td><td>Google says Google AI Ultra subscribers can also try it in Google Antigravity and AI Studio</td></tr>
+                    <tr><td>Enterprises</td><td>Gemini for business via the API or model drop down, Google Antigravity, or CodeMender</td><td>The API is stated to be available to all paying developers and enterprises</td></tr>
+                    <tr><td>Everyday users</td><td>The Gemini app and AI Mode in Search</td><td>For Google AI Ultra subscribers, and described as rolling out to all Ultra subscribers</td></tr>
+                    <tr><td>Scientists and researchers</td><td>Google Antigravity’s highest usage tier, free for 6 months</td><td>By application, subject to eligibility, capacity, and selection, onboarded on a rolling basis</td></tr>
+                    <tr><td>Cybersecurity defenders</td><td>Apply to the Fairwind Program</td><td>On a rolling basis; the model for this route is described as Carbon for cyber</td></tr>
+                    <tr><td>Free-tier users</td><td>—</td><td>The pricing page says Gemini 4 Carbon is not available on the Free tier</td></tr>
+                    </tbody>
+                    </table>
+                    </div>
+                    
+                    <ul>
+                    <li>The strength of the wording differs by route. The API is “available,” while products for Ultra subscribers are “rolling out.” Nothing in the post supports reading this as visible on every account on the same day.</li>
+                    <li>The scientist program continues the one opened for Argon. The post says applications opened four weeks earlier to give 10,000 scientists six months of free Argon access, that thousands have been onboarded, and that access to Carbon is now expanded for current and future participants.</li>
+                    <li>Fairwind remains a separate route from general availability. The post says defenders who apply get Carbon for cyber on a rolling basis.</li>
+                    </ul>
+                    
+                    <h2 id="sec-3">Pricing: the intro price that ends November 30</h2>
+                    
+                    <p>The Gemini API pricing page lists every rate for Carbon by date. The figures below are US dollars per 1M tokens; the left side of the arrow is through November 30, 2026, and the right side is from December 1, 2026. Output rates include thinking tokens.</p>
+                    
+                    <div class="tbl-wrap">
+                    <table>
+                    <thead><tr><th scope="col">Mode</th><th scope="col">Input</th><th scope="col">Output (thinking tokens included)</th><th scope="col">Cached input</th></tr></thead>
+                    <tbody>
+                    <tr><td>Standard</td><td>$2.00 → $4.00</td><td>$10.00 → $20.00</td><td>$0.10 → $0.20</td></tr>
+                    <tr><td>Batch</td><td>$1.00 → $2.00</td><td>$5.00 → $10.00</td><td>$0.05 → $0.10</td></tr>
+                    <tr><td>Flex</td><td>$1.00 → $2.00</td><td>$5.00 → $10.00</td><td>$0.05 → $0.10</td></tr>
+                    <tr><td>Priority</td><td>$3.60 → $7.20</td><td>$18.00 → $36.00</td><td>$0.18 → $0.36</td></tr>
+                    </tbody>
+                    </table>
+                    </div>
+                    
+                    <ul>
+                    <li>The post says Carbon is at the same introductory price as Argon ($2 per million input tokens and $10 per million output tokens), and a footnote says that after the introductory period expires on November 30, 2026, $4 per 1M input tokens and $20 per 1M output tokens will apply.</li>
+                    <li>On December 1 the standard input and output rates each double (calculation: 4.00 ÷ 2.00 and 20.00 ÷ 10.00). Dividing the two columns for Batch, Flex, and Priority gives the same ratio.</li>
+                    <li>Only implicit caching is available. Explicit caching is not supported; the docs say implicit caching is on by default for prompts of at least 4,096 tokens and discounts cached input tokens by 95% on cache hits.</li>
+                    <li>Every token the model processes is counted and billed. The pricing page says this includes thinking tokens and, when grounding is used, internal tool system instructions and function declarations.</li>
+                    <li>Grounding with Google Search is billed separately: 5,000 free requests per month (shared across all Gemini 3 and newer models), then $14 per 1,000 requests, with a daily cap of 1,500 requests. A single request may trigger more than one search query, and each query is charged.</li>
+                    <li>The “Used to improve our products” row is “No” on the paid tier. The free tier is “Not available” because the model cannot be used there.</li>
+                    </ul>
+                    
+                    <p>To build your own estimate, enter the rates above into the <a href="../static/llm_price_calculator.html">LLM API Price Calculator</a> and compare the two periods side by side. The footnote in the post also carries the sentence “Applies to the Carbon model intended for public access only,” and the source gives no further explanation of what that scope covers.</p>
+                    
+                    <h2 id="sec-4">Carbon and Argon: same price per token, different token use</h2>
+                    
+                    <p>The “Choosing between Carbon, Argon, and other models” section of the Gemini API docs says the two models share the same 1M unified context window, built-in tools, and per-token pricing, and that the main difference is how many thinking tokens each spends per turn. The post likewise says Argon remains the ideal choice for the majority of software engineering and knowledge work, while Carbon is built for tasks that test the limits of a model’s intelligence.</p>
+                    
+                    <ul>
+                    <li><strong>Carbon.</strong> Built for tasks that push the limits of reasoning depth, per the docs. It spends more thinking tokens per turn to explore thoroughly and verify its work, which increases per-turn token use and latency compared with Argon. The docs name complex root-cause debugging, architectural design, dense multimodal synthesis, scientific proofs, and security auditing.</li>
+                    <li><strong>Argon.</strong> Described as ideal for most advanced software engineering and knowledge work. It offers faster responses and lower token spend per turn, and the docs point to interactive coding, day-to-day feature work, and fast production loops.</li>
+                    <li>The cost implication is this: since the per-token price is the same, any difference arises from how many tokens the same job consumes. Neither the docs nor the post gives a comparison of tokens used by the two models on the same request.</li>
+                    <li>Carbon has three thinking levels, low, medium, and high, with medium as the default. The docs summarize them in the table below.</li>
+                    </ul>
+                    
+                    <div class="tbl-wrap">
+                    <table>
+                    <thead><tr><th scope="col">Thinking level</th><th scope="col">Token use</th><th scope="col">Use recommended by the docs</th></tr></thead>
+                    <tbody>
+                    <tr><td>low</td><td>Fewest tokens, lowest latency</td><td>Simpler tasks and cost-sensitive work; also analysis and writing that need light thinking, though quality can drop on hard tasks</td></tr>
+                    <tr><td>medium (default)</td><td>Balanced</td><td>Recommended for most tasks, including complex code and agentic use cases</td></tr>
+                    <tr><td>high</td><td>Most tokens, slowest first token</td><td>Complex reasoning, hard math and science, and the most difficult code or agent tasks; pairs well with long decode for long outputs</td></tr>
+                    </tbody>
+                    </table>
+                    </div>
+                    
+                    <ul>
+                    <li>The docs’ operating advice is to run your evaluations at all three levels and pick the lowest level that meets your quality bar.</li>
+                    <li>To use fewer tokens, the docs say to lower the thinking level rather than the output limit.</li>
+                    <li>The docs also say the Antigravity agent in Gemini Managed Agents now supports gemini-4-carbon.</li>
+                    </ul>
+                    
+                    <h2 id="sec-5">Limits and features listed on the model page</h2>
+                    
+                    <p>The gemini-4-carbon model page lists limits and feature support in a table. What follows restates it in plain terms. The Carbon page alone does not show whether any value differs from Argon, but the model list gives the same context and maximum output for both models.</p>
+                    
+                    <ul>
+                    <li><strong>Context window.</strong> The unified input and output limit is 1,048,576 tokens. The docs say input, thinking, and output tokens share one window.</li>
+                    <li><strong>Maximum output.</strong> The default synchronous response is 65,536 tokens, and up to 1,048,576 tokens with long decode. The model list writes this as “65K / 1M tokens.”</li>
+                    <li><strong>To generate past 65K tokens.</strong> Synchronous responses stop at 65,536 tokens, so turn on background and raise the maximum output tokens above 65,536. The ceiling is the 1M unified window minus your input tokens.</li>
+                    <li><strong>Input and output formats.</strong> Inputs are text, image, video, audio, and PDF; output is text.</li>
+                    <li><strong>Supported features.</strong> Code execution, computer use, file search, function calling, grounding with Google Maps and Google Search, structured outputs, URL context, and thinking (low, medium, high) are marked supported. Agentic video understanding defaults to static.</li>
+                    <li><strong>Unsupported features.</strong> Audio generation, image generation, and the Live API are marked not supported. Context caching is supported for the implicit kind only.</li>
+                    <li><strong>Consumption options.</strong> Batch API, Flex inference, and Priority inference are marked supported, and the pricing page lists a rate for each.</li>
+                    </ul>
+                    
+                    <p>The hop structure and billing conditions of long decode were covered first for its sibling model in <a href="../posts/gemini_4_argon_general_availability_2026.html">Gemini 4 Argon now available: long decode, limits, pricing</a>. The Carbon docs describe the same background execution method.</p>
+                    
+                    <h2 id="sec-6">Performance and cost claims, read with their conditions</h2>
+                    
+                    <p>The post says that across “independent benchmarks,” Carbon pairs frontier accuracy with practical production economics. Here are those statements, split out with their conditions.</p>
+                    
+                    <ul>
+                    <li><strong>Workflow rankings.</strong> Google says Carbon ranks #1 on CursorBench 4.0, Perplexity’s WANDR, and Zapier’s AutomationBench, at more than 2X lower cost per task compared to the next best external model. The post does not name that model.</li>
+                    <li><strong>Multimodal knowledge agents.</strong> On the Multimodal Knowledge Agent (MKA) benchmark launched with Artificial Analysis, Carbon ranks #2 and is more than 6X lower in average cost per task than the top performing model. That wording states, along with the multiple, that Carbon is not first.</li>
+                    <li><strong>Finance evaluations.</strong> In pre-release evaluations, Carbon matched the best model tested on Hebbia’s E2E Financial Agentic evaluation and ranked at the top out of 23 frontier model configurations on Balyasny Asset Management’s General Financial Intelligence benchmark, according to the post.</li>
+                    <li><strong>Engineering.</strong> The post says Carbon performs exceptionally well on tasks that require multi-agent collaboration, such as multi-package migrations, cross-subsystem root-cause investigations, and complex architectural redesigns. For web apps, it says Carbon runs build-and-verify loops, recovers from errors, and checks both its code and the rendered UI.</li>
+                    <li><strong>/swarm in Antigravity.</strong> Google says it is previewing /swarm, which turns a single prompt into a coordinated team of agents you can track in real time. Carbon can be assigned roles that demand the deepest reasoning, such as design, coordination, and auditing, paired with faster, lighter models.</li>
+                    </ul>
+                    
+                    <p>Here is when these numbers hold. The rankings are on the named benchmarks, and the cost-per-task comparisons are against the comparison targets Google chose (the next best external model, or the MKA top model). Your own cost per task depends on the thinking level and output limit, as seen above, so carrying the multiples from a ranking table straight into a budget goes beyond what the source allows.</p>
+                    
+                    <ul>
+                    <li>Raw benchmark scores do not appear in the body of the post; only rankings and multiples are given.</li>
+                    <li>The post describes the two finance evaluations as pre-release evaluations.</li>
+                    </ul>
+                    
+                    <h2 id="sec-7">Safety and security figures within what Google reported</h2>
+                    
+                    <p>The post says Google strengthened misuse safeguards as the model’s cyber capabilities grew stronger. All figures below are Google’s, and each comes with a test environment and a comparison target.</p>
+                    
+                    <ul>
+                    <li><strong>Simulated attack tests.</strong> In simulated cyberattack environments seeded with ExploitBench and CyScenarioBench, Google says Carbon blocked 99% of attack trajectories from an adaptive red-teaming agent that can revisit its plans after each block.</li>
+                    <li><strong>Per-attempt breach rate.</strong> The post says Carbon’s safeguards lowered it to just 0.8%, down from 3.1% on Argon.</li>
+                    <li><strong>Gray Swan testing.</strong> The automated cyberattack query success rate was 2.17%, compared with 9.86% on Argon, Google says.</li>
+                    <li><strong>External testing.</strong> Trajectory Labs found zero new universal jailbreaks across 132 hours and over 13,000 requests, according to the post.</li>
+                    <li><strong>Honesty benchmark.</strong> On a 375-task agentic honesty benchmark, Carbon passed 92% of tasks (compared with 70% for Argon), declining to fill in missing experimental data 98% of the time and flagging methodological flaws 68% of the time.</li>
+                    <li><strong>Indirect prompt injection.</strong> Google says Carbon reached a 0% attack success rate on the Gray Swan IPI benchmark two weeks earlier, and adds in the same passage that prompt injection robustness remains an area for continued improvement and that its automated red teaming showed models could be further improved against sophisticated attacks in some distributions.</li>
+                    </ul>
+                    
+                    <p>Security teams should note the last item. Google wrote the limitation in the same paragraph, so a design that does not rest injection defense on Carbon alone does not conflict with these figures.</p>
+                    
+                    <h2 id="sec-8">Who is affected and how</h2>
+                    
+                    <div class="tbl-wrap">
+                    <table>
+                    <thead><tr><th scope="col">Reader</th><th scope="col">What changes</th><th scope="col">Decision criterion</th></tr></thead>
+                    <tbody>
+                    <tr><td>API developers using Argon</td><td>Can test by swapping the model string; the docs say no request schema changes are required</td><td>Does the workload need deep reasoning such as root-cause debugging, design, or auditing? If not, staying on Argon fits the docs’ guidance</td></tr>
+                    <tr><td>Developers adopting for the first time</td><td>Usable only on the paid tier; the free tier is excluded</td><td>First decide whether any task is hard enough to justify opening a paid tier</td></tr>
+                    <tr><td>Cost owners</td><td>Standard input and output rates each double on December 1 (calculation)</td><td>If the budget was set on the intro price alone, also calculate with the post-December 1 rates. Token consumption depends on the thinking level</td></tr>
+                    <tr><td>Google AI Ultra subscribers</td><td>Opens on a rolling basis in the Gemini app, AI Mode in Search, and Antigravity</td><td>Because it is rolling out, check whether the model choice appears in your account</td></tr>
+                    <tr><td>Researchers</td><td>The free top-usage-tier program in Antigravity extends to Carbon</td><td>By application, subject to eligibility, capacity, and selection</td></tr>
+                    <tr><td>Security teams</td><td>Carbon for cyber is obtained through Fairwind, not the general route</td><td>Follow the Fairwind Program instructions to see whether a defender application is needed</td></tr>
+                    </tbody>
+                    </table>
+                    </div>
+                    
+                    <h2 id="sec-9">What you can do now: decision criteria by situation</h2>
+                    
+                    <p>The items below split the migration checklist in the Gemini API’s what’s-new page (What’s new in Gemini 4 Carbon) by situation. No procedure that is absent from the docs has been added.</p>
+                    
+                    <ul>
+                    <li><strong>If you already run Argon.</strong> Change the model string from gemini-4-argon to gemini-4-carbon and test with the same request. The docs say no request schema changes are required.</li>
+                    <li><strong>Start from the lower thinking level.</strong> Keep the default medium, and raise to high only when a workload needs it. Evaluate at all three levels and pick the lowest that meets your quality bar.</li>
+                    <li><strong>Check the output limit.</strong> If an existing app’s limit is below 32K, the docs advise raising max output tokens to at least 32,768, because Carbon can spend more of the limit on thinking than earlier models. To use fewer tokens, lower the thinking level instead.</li>
+                    <li><strong>Use background for long outputs.</strong> For generation past 64K, turn on background and set max output tokens above 65,536. For complex reasoning and coding, the docs give 131,072 or 262,144 as starting values.</li>
+                    <li><strong>Lengthen timeouts.</strong> Hard prompts can take several minutes, so the docs advise using background execution or setting HTTP client timeouts to at least 15 minutes.</li>
+                    <li><strong>If you use explicit caching.</strong> Remove calls to cachedContents and caches.create and any reference to cached_content from your requests. Implicit caching is on by default for prompts of at least 4,096 tokens.</li>
+                    <li><strong>Remove sampling parameters.</strong> The docs say temperature, top_p, and top_k are ignored if provided.</li>
+                    <li><strong>Redo the cost estimate.</strong> All tokens are billed, so include internal tool instructions and function declarations when grounding, and run the numbers at both the pre- and post-December 1 rates. For multi-turn conversations, the docs advise keeping state on the server with previous_interaction_id.</li>
+                    </ul>
+                    
+                    <p>The docs’ starter example follows. It is a request that sets the thinking level to medium explicitly.</p>
+                    
+                    <pre><code class="language-python">from google import genai
+                    
+                    client = genai.Client()
+                    
+                    interaction = client.interactions.create(
+                        model="gemini-4-carbon",
+                        input="Analyze this payment processing pipeline for race conditions during retry attempts and rewrite the transaction locks safely.",
+                        generation_config={
+                            "thinking_level": "medium"  # balanced reasoning effort for complex tasks
+                        }
+                    )
+                    print(interaction.output_text)
+                    </code></pre>
+                    
+                    <h2 id="sec-10">What remains unverified</h2>
+                    
+                    <ul>
+                    <li>Countries and regions of availability: neither the post, the model page, nor the pricing page includes a list of countries or regions.</li>
+                    <li>A comparison of tokens used by Carbon and Argon on the same request: the source has no value for this.</li>
+                    <li>Absolute cost per task and the name of the comparison model: the name of the “next best external model” and the cost figures are not in the post.</li>
+                    <li>Raw benchmark scores: for CursorBench 4.0, WANDR, AutomationBench, and MKA, the post body gives only rankings and multiples.</li>
+                    <li>The scope of the pricing footnote “Applies to the Carbon model intended for public access only”: the source offers no explanation.</li>
+                    <li>The contents of the model card: this article did not open that document.</li>
+                    <li>Completion dates for the rolling rollout to Google AI Ultra subscribers by product: the post gives no dates.</li>
+                    <li>A comparison against Argon’s post-December 1 rates: this article only reports that the docs say the per-token price is the same for both models, and did not cross-check Argon’s price page.</li>
+                    </ul>
+                    
+                    <h2 id="sec-11">References</h2>
+                    
+                    <ul>
+                    <li><a href="https://blog.google/innovation-and-ai/models-and-research/gemini-models/gemini-4-carbon-now-available/" target="_blank" rel="noopener">Gemini 4 Carbon is now available</a> — Google blog, November 10, 2026. Availability, intro price, footnote, performance and safety figures.</li>
+                    <li><a href="https://ai.google.dev/gemini-api/docs/pricing" target="_blank" rel="noopener">Gemini Developer API pricing</a> — Google AI for Developers. Rates by mode and date, free-tier exclusion, grounding charges.</li>
+                    <li><a href="https://ai.google.dev/gemini-api/docs/models/gemini-4-carbon" target="_blank" rel="noopener">Gemini 4 Carbon model page</a> — Google AI for Developers. Token limits, feature support table, stable version identifier.</li>
+                    <li><a href="https://ai.google.dev/gemini-api/docs/whats-new-gemini-4-carbon" target="_blank" rel="noopener">What’s new in Gemini 4 Carbon</a> — Google AI for Developers. Migration checklist, thinking levels, output limit guidance.</li>
+                    <li><a href="https://ai.google.dev/gemini-api/docs/models" target="_blank" rel="noopener">Gemini API models list</a> — Google AI for Developers. Context, maximum output, and input formats for Carbon and Argon.</li>
+                    <li><a href="https://news.hada.io/topic?id=36950" target="_blank" rel="noopener">GeekNews item</a> — the GeekNews discussion page where this news was shared.</li>
+                    </ul>
+
+                    <!-- faq-start -->
+                    <section class="post-faq">
+                    <h2>Frequently asked questions</h2>
+                    <div class="faq-item">
+                        <h3>How much does the Gemini 4 Carbon API cost?</h3>
+                        <p>Google says the standard rate is $2 per million input tokens and $10 per million output tokens (thinking tokens included) as an introductory price through November 30, 2026. From December 1 the price is $4 for input and $20 for output. It is not available on the free tier.</p>
+                    </div>
+                    <div class="faq-item">
+                        <h3>What account do I need to use Carbon?</h3>
+                        <p>Google says the API is available through Google AI Studio and Gemini for business to all paying developers and enterprises. The Gemini app and AI Mode in Search are rolling out to Google AI Ultra subscribers. It is not available on the free tier.</p>
+                    </div>
+                    <div class="faq-item">
+                        <h3>Do I have to rewrite much code to move from Argon to Carbon?</h3>
+                        <p>The official docs say no request schema changes are required: change the model string from gemini-4-argon to gemini-4-carbon. They do advise checking output limits and HTTP timeouts, because Carbon spends more thinking tokens on hard tasks.</p>
+                    </div>
+                    <div class="faq-item">
+                        <h3>Is Carbon more expensive than Argon?</h3>
+                        <p>The docs say the per-token price is the same. The difference is how many thinking tokens each model spends per turn, and the docs say Carbon increases per-turn token use and latency compared with Argon. No comparison of actual bills for the same request appears in the source.</p>
+                    </div>
+                    <div class="faq-item">
+                        <h3>As of when are the prices and conditions in this article?</h3>
+                        <p>They are based on Google’s announcement and the Gemini API docs as viewed on November 11, 2026. The end date of the intro price and the later rates are written in the docs, but terms can change. This is general information and not a substitute for purchasing or contract advice.</p>
+                    </div>
+                    </section>
+                    <!-- faq-end -->
+
+                </div>
+
+                <div class="share-section">
+                    <h3>Share this post</h3>
+                    <div class="social-share">
+                        <button id="facebook-share" class="share-btn facebook-btn">Facebook</button>
+                        <button id="twitter-share" class="share-btn twitter-btn">X (Twitter)</button>
+                        <button id="threads-share" class="share-btn threads-btn">Threads</button>
+                        <button id="link-copy" class="share-btn link-btn">Copy Link</button>
+                    </div>
+                </div>
+
+                <div class="back-to-list">
+                    <a href="../blog.html" class="back-link">Back to List</a>
+                </div>
+<!-- tools-start -->
+    <div class="related-tools" data-rt="match" style="margin:2.5rem 0 0;padding:1.5rem 0 0;border-top:1px solid #e5e7eb;">
+      <h2 style="font-size:1.3rem;margin-bottom:0.8rem;">Free tools you may find useful</h2>
+      <ul style="line-height:1.9;padding-left:1.2rem;">
+      <li><a href="../static/llm_price_calculator.html">LLM API Price Calculator</a></li>
+      </ul>
+      <p style="margin-top:0.6rem;"><a href="../static_index.html">See all tools &rarr;</a></p>
+    </div>
+    <!-- tools-end -->
+                <!-- related-start -->
+    <div class="related-posts" style="margin:2.5rem 0 0;padding:1.5rem 0 0;border-top:1px solid #e5e7eb;">
+      <h2 style="font-size:1.3rem;margin-bottom:0.8rem;">Related Posts</h2>
+      <ul style="line-height:1.9;padding-left:1.2rem;">
+      <li><a href="gemini_4_argon_general_availability_2026.html">Gemini 4 Argon now available: long decode, limits, pricing</a></li>
+      <li><a href="gemini_4_carbon_security_agent_model_2026.html">Gemini 4 Carbon staged rollout: security scores and pricing</a></li>
+      <li><a href="gemini_4_argon_announcement_2026.html">A Staged Rollout Starting with Trusted Defenders - What Gemini 4 Argon Claims and What Remains Unconfirmed</a></li>
+      <li><a href="gemini_4_neon_release_pricing.html">Gemini 4 Neon Release: $3 Input, $15 Output per 1M Tokens</a></li>
+      </ul>
+    </div>
+    <!-- related-end -->
+</article>
+        </section>
+    </main>
+
+    <div id="footer-placeholder"></div>
+    <script src="../../common.js"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            document.querySelectorAll('pre code').forEach((block) => { hljs.highlightElement(block); });
+        });
+    </script>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const facebookShareBtn = document.getElementById('facebook-share');
+        if (facebookShareBtn) facebookShareBtn.addEventListener('click', () => window.open('https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent(location.href), '_blank'));
+        const twitterShareBtn = document.getElementById('twitter-share');
+        if (twitterShareBtn) twitterShareBtn.addEventListener('click', () => window.open('https://twitter.com/intent/tweet?url=' + encodeURIComponent(location.href) + '&text=' + encodeURIComponent(document.title), '_blank'));
+        const threadsShareBtn = document.getElementById('threads-share');
+        if (threadsShareBtn) {
+            threadsShareBtn.addEventListener('click', function() {
+                navigator.clipboard.writeText(location.href);
+                alert("Link copied to clipboard. Share it on Threads!");
+            });
+        }
+        const linkCopyBtn = document.getElementById('link-copy');
+        if (linkCopyBtn) linkCopyBtn.addEventListener('click', () => { navigator.clipboard.writeText(location.href); alert("Link copied to clipboard!"); });
+    });
+    </script>
+</body>
+</html>

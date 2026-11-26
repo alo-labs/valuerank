@@ -1,0 +1,18 @@
+{
+ "note": "Proposed evidencePolicy.searchLog entry in the shape of the 2026-11-05 entry; the recorder's reading, for the reviewer to verify and edit. Not written into data/.",
+ "searchedOn": "2026-11-26",
+ "scope": "New cohort models (Claude Fable 5.2, GPT-6.2 Sol, GPT-6.2 Astra, Gemini 4 Neon, Muse Ember) and the retained cohort models on every first-party plan (Anthropic Claude Pro/Max 5x/Max 20x (Ultra); OpenAI ChatGPT Plus and Pro 100/200/500 in Codex and Work; Google AI Pro and Ultra 5x/20x in Antigravity and the Gemini app; Meta Muse Code plans; Xiaomi MiMo Token Plan), plus the OpenCode Go re-fetch (O198), in three stages: plain web search, Claude's Deep Research (degraded: no Agent tool, one researcher), Perplexity (Silver Bullet Deep Research unavailable)",
+ "record": "research/2026-11-26-plan-allowances/",
+ "reached": "web search; provider help centres, pricing pages and release notes (Anthropic, OpenAI, Google Antigravity and AI plans, Meta Muse Code and Model API docs, Xiaomi MiMo docs); Reddit via Arctic Shift (38,996 posts in 17 subreddits, 3,919 comments); Hacker News (Algolia); Bluesky; X post JSON via fxtwitter; aiplans.dev; Atlas ADE; single Google AI forum, OpenAI community and LINUX DO (locdd mirror) topics; Perplexity (Claude Sonnet 5.5, GPT-6.2 Sol, Kimi K3)",
+ "unreachable": "github.com and api.github.com (session proxy; the four queued GitHub reports have no byte-exact copy); claudeissues.com, thenewstack.io, androidauthority.com, fourweekmba.com, reddit.com direct; X search; Google AI forum, OpenAI community and LINUX DO sweeps (rate limited, partial); r/ClaudeAI and r/ChatGPTPro comment sweeps; V2EX; Zhihu",
+ "qualifyingNewReports": 15,
+ "qualifyingNewReportsNote": "records, from 9 observers, eligible under the recorder's reading of O11/O82/O86/O87/O165; 30 records from 15 observers have byte-exact archives; the four queued GitHub reports and the unarchivable ricardoraposo comment are not counted",
+ "o164Result": "recorder's reading: Fable 5.2 x Ultra x week passes (MulletIQ $560-$720 Fable meter, MRC2021 $565 at the half-week cap); Opus 5.5 x Ultra x week borderline (every pair passes, the three together miss the 1.20 margin by 3%); Opus 5.5 x Max 5x x month passes only if sunaurus's weekly range is pooled into the month at 52/12 with Huryn; every other cell has at most one eligible report",
+ "providers": ["Anthropic", "OpenAI", "Google", "Meta", "Xiaomi", "OpenCode Go (O198)"],
+ "changesFound": "research/2026-11-26-plan-allowances/changes.json: 21 records, 13 benign, 6 unclear, 2 adverse (purchased-credit expiry from 2026-12-07; GPT-6.2 Sol on Plus measured at 0.83 by one observer)",
+ "stages": [
+  {"stage": "plain web search", "method": "WebSearch tool plus direct page fetches", "record": "research/2026-11-26-plan-allowances/stage1/queries-websearch.md", "queries": 37},
+  {"stage": "Claude's Deep Research", "method": "anthropic-skills deep-research loaded; no Agent tool, so one researcher followed researcher.md; structured sweeps of Reddit, Hacker News, Bluesky, X, forums", "record": "research/2026-11-26-plan-allowances/stage2/README.md"},
+  {"stage": "Perplexity (Silver Bullet's Deep Research unavailable)", "method": "perplexity skill driver, one prompt to three models, every claim re-fetched", "record": "research/2026-11-26-plan-allowances/stage3/README.md"}
+ ]
+}

@@ -1,0 +1,779 @@
+{
+ "schemaVersion": "o196-plan-changes-2026-11-26-v1",
+ "asOf": "2026-11-26",
+ "since": "2026-11-05",
+ "directionKey": "benign = raises or leaves what a plan buys; adverse = cuts what a plan buys (announcedFactor or measuredFactor where stated); unclear = cannot tell (O196)",
+ "changes": [
+  {
+   "id": "anthropic-fable52-on-claude-plans",
+   "provider": "Anthropic",
+   "plans": [
+    "Claude Pro",
+    "Claude Max 5x (Max)",
+    "Claude Max 20x (Ultra)"
+   ],
+   "models": [
+    "Claude Fable 5.2"
+   ],
+   "date": "2026-11-09",
+   "type": "availability",
+   "direction": "benign",
+   "announcedFactor": null,
+   "inForce": true,
+   "summary": "Fable 5.2 launched on every paid Claude plan. Max and Ultra include Fable models inside the weekly pool, up to 50% of the weekly limit (a ceiling, not an addition; Fable \"uses them faster\"). Pro and Team standard seats run Fable models only on pay-as-you-go usage credits, as for Fable 5.1.",
+   "sources": [
+    {
+     "url": "https://support.claude.com/en/articles/15424964-claude-fable-models-on-your-plan",
+     "archive": "archive/anthropic/claude-fable-models-on-your-plan.html",
+     "sha256": "20721d45a07ea94198ed7f53981c520ce531887a97c0a58d9d29a6612107f613",
+     "fetchedAt": "2026-11-26T03:13:13Z",
+     "quote": "\"On Max plans, Ultra plans ... all three models are a standard part of your plan. On Pro plans ... all three models run on pay-as-you-go usage credits.\"; \"You can use up to 50% of your weekly usage limits on Fable models at no extra cost.\""
+    },
+    {
+     "url": "https://support.claude.com/en/articles/12138966-release-notes",
+     "archive": "archive/anthropic/anthropic-release-notes.html",
+     "sha256": "67cf18b518ecbf32c82e7d12d1c1aa6575a915a6ca26867737970b03c8664e3e",
+     "fetchedAt": "2026-11-26T03:15:10Z",
+     "quote": "release-notes page fetched 2026-11-26 (does not carry a Fable 5.2 line in the November block; launch date from the launch-offers article and press)"
+    },
+    {
+     "url": "https://claude.com/pricing",
+     "archive": "archive/anthropic/claude-pricing.html",
+     "sha256": "339b20f23f1761c9d92b754bde8b4e79a0822531240a2d221988e7e9d4896dc8",
+     "fetchedAt": "2026-11-26T03:15:09Z",
+     "quote": "plan page: Pro \"Fable, paid with usage credits\"; Max \"Fable included, up to half your weekly limit\""
+    }
+   ],
+   "notes": "Launch date 2026-11-09 is from the help article \"Claude Fable 5.2 launch offers\" and the API price table. Not a limit change: no plan size is published."
+  },
+  {
+   "id": "anthropic-fable52-launch-offers",
+   "provider": "Anthropic",
+   "plans": [
+    "Claude Pro",
+    "Claude Max 5x (Max)",
+    "Claude Max 20x (Ultra)"
+   ],
+   "models": [
+    "Claude Fable 5.2",
+    "Claude Fable 5.1",
+    "Claude Fable 5"
+   ],
+   "date": "2026-11-09",
+   "effective": "2026-11-09 to 2026-11-16 23:59 PT (Pro, Team standard); resets usable to 2027-03-08 23:59 PT (Max, Ultra)",
+   "type": "reset",
+   "direction": "benign",
+   "announcedFactor": null,
+   "inForce": false,
+   "summary": "Pro and Team standard: all Fable models included up to 50% of the weekly limit for one week (to 2026-11-16 23:59 PT) plus one Fable reset. Max and Ultra: 1, 2 or 3 Fable resets by subscription tenure (under 6 months, 6-12 months, over 12 months), expiring 2027-03-08. A reset restores the weekly usage spent on Fable and refills a five-hour window; it does not raise a limit. The Pro week has ended.",
+   "sources": [
+    {
+     "url": "https://support.claude.com/en/articles/17506494",
+     "archive": "archive/anthropic/claude-fable52-launch-offers.html",
+     "sha256": "8a3e2ad20b311ce71eb1ad9a5d492159c8175b61b357bbf164d79e7e372e7429",
+     "fetchedAt": "2026-11-26T03:15:08Z",
+     "quote": "\"all Fable models are included in your plan's weekly usage limits from launch on November 9, 2026 through November 16, 2026 at 11:59 pm PT ... A reset doesn't raise your limits.\""
+    }
+   ],
+   "notes": "Reports taken inside the Pro week (AnshulJ999, 2026-11-10) describe a window that has closed."
+  },
+  {
+   "id": "anthropic-fable52-api-price",
+   "provider": "Anthropic",
+   "plans": [
+    "Claude API rate card (numerator pricing for every Claude plan route)"
+   ],
+   "models": [
+    "Claude Fable 5.2"
+   ],
+   "date": "2026-11-09",
+   "type": "price",
+   "direction": "unclear",
+   "announcedFactor": 0.8,
+   "inForce": true,
+   "summary": "Fable 5.2 is priced $8 input / $40 output / $0.20 cache read / $10 5-min write / $16 1-h write per million tokens; Fable 5.1 is $10 / $50 / $0.25 / $12.50 / $20. Opus 5.5 ($4 / $20), Sonnet 5.5 ($2 / $10) and Haiku 5.5 ($0.10 / $0.50, up to 100K-token prompts) are unchanged from the rates used in the 2026-11-05 record.",
+   "sources": [
+    {
+     "url": "https://platform.claude.com/docs/en/about-claude/pricing",
+     "archive": "archive/anthropic/anthropic-api-pricing.html",
+     "sha256": "193c6892d1e485e9bb050ad2878177351d47e3ca917590ceff2ef436db3bdd9c",
+     "fetchedAt": "2026-11-26T03:15:10Z",
+     "quote": "Claude Fable 5.2 $8 / $40; Claude Fable 5.1 $10 / $50; Claude Opus 5.5 $4 / $20; Claude Sonnet 5.5 $2 / $10"
+    }
+   ],
+   "notes": "A rate-card cut does not change a plan meter. Direction is unclear: the plan buys the same tokens, so the API-priced value of a fixed token allowance falls by the 20% factor, but nothing the plan includes was cut. The reviewer should decide how a rate-card change is typed."
+  },
+  {
+   "id": "anthropic-usage-credit-expiry",
+   "provider": "Anthropic",
+   "plans": [
+    "Claude Pro",
+    "Claude Max 5x (Max)",
+    "Claude Max 20x (Ultra)",
+    "Team"
+   ],
+   "models": [],
+   "date": "2026-12-07",
+   "announcedOn": "by 2026-11-10 (help article marked \"Updated over 2 weeks ago\" on 2026-11-26; a secondary source puts the e-mail on 2026-11-06)",
+   "type": "credit",
+   "direction": "adverse",
+   "announcedFactor": null,
+   "inForce": false,
+   "summary": "Usage credits (one-time purchases, bundles, auto-reload) bought on or after 2026-12-07 expire 12 months after purchase; credits bought earlier never expire. Plan allowances are not touched.",
+   "sources": [
+    {
+     "url": "https://support.claude.com/en/articles/12429409-manage-usage-credits-for-paid-claude-plans",
+     "archive": "archive/anthropic/claude-usage-credits-12429409.html",
+     "sha256": "b4fb027dcd4fe7cc120b9627c4b484ff3dcd8c538409bab6dd1c56a8030c8328",
+     "fetchedAt": "2026-11-26T03:54:51Z",
+     "quote": "\"Generally, usage credits purchased on or after December 7, 2026 expire 12 months after the purchase date ... Credits purchased before December 7, 2026 don't expire.\""
+    }
+   ],
+   "notes": "Adverse for purchased credits only. No effect on any plan route (credits are not part of the plan allowance). Announced, not in force on 2026-11-26."
+  },
+  {
+   "id": "anthropic-claimed-weekly-limit-shrink",
+   "provider": "Anthropic",
+   "plans": [
+    "Claude Max 5x (Max)",
+    "tier unstated"
+   ],
+   "models": [
+    "Claude Opus 5.5"
+   ],
+   "date": "about 2026-11-04 to 2026-11-13",
+   "type": "limit",
+   "direction": "unclear",
+   "announcedFactor": null,
+   "inForce": null,
+   "status": "unannounced; user-detected; contested",
+   "summary": "Three users report a smaller weekly allowance for Opus 5.5 in early to mid November: sunaurus (Max 5x, 2026-11-08: the open week to 11-11 at 98% = $1,225.04, against $1,617-$1,815 per 100% in the three weeks before, about 30% lower); Machine2024 (tier unstated, Opus 5.5 medium only, 2026-11-13: 84% = 515M tokens two weeks ago against 51% = 220M this week, titled \"about 20% drop\", 168 comments); Noob_Kid (comment 2026-11-13, mixed Fable 5.1/Opus 5.5, Max about 1k-1.3k to 600-700 USD per week, Ultra about 2k-2.5k to 1k-1.2k). Against it: WuM1ha1nho (Ultra, 8 weeks of telemetry: November 1-3 low at $20-22 per 1%, November 6 and 16 back to $26-28), perfektcrash (Ultra: \"no sign of a cut on Ultra so far\") and the Wokey tracker (no cut measured, week 11-16 to 11-23).",
+   "sources": [
+    {
+     "url": "https://arctic-shift.photon-reddit.com/api/posts/ids?ids=1xqlof1",
+     "archive": "archive/reddit/1xqlof1-sunaurus-max5x.posts.json",
+     "sha256": "dfce330d015c0016d33f82d543dc491e1b39865f22f830f370fdc173c300e93f",
+     "fetchedAt": "2026-11-26T03:40:07Z"
+    },
+    {
+     "url": "https://arctic-shift.photon-reddit.com/api/posts/ids?ids=1xvb26p",
+     "archive": "archive/reddit/1xvb26p-machine2024-weekly-limit-shrinking.posts.json",
+     "sha256": "35b603df82c8afb1ec4b49d62bb23a294c8ba23455c93d65a5aa743c86c4067f",
+     "fetchedAt": "2026-11-26T03:54:49Z"
+    },
+    {
+     "url": "https://arctic-shift.photon-reddit.com/api/posts/ids?ids=1xy4zwk",
+     "archive": "archive/reddit/1xy4zwk-wum1ha1nho-ultra.posts.json",
+     "sha256": "a74bd232bf7d16ce0e2d6321d82486f03f98ca4c6bb8c43e3137170315e77f2d",
+     "fetchedAt": "2026-11-26T03:42:38Z"
+    },
+    {
+     "url": "https://wokey.ai/claude-usage-limits",
+     "archive": "archive/stage3-found/wokey-claude-usage-limits.html",
+     "sha256": "25dfd90db2eef5692199aa115d563c0d0104236314efe41b2e77b730ec1897eb",
+     "fetchedAt": "2026-11-26T03:54:52Z"
+    }
+   ],
+   "notes": "No Anthropic statement. Not typed as a split. If real it would be adverse (about 0.7-0.8x); one observer per claim and two Ultra telemetry observers disagree, so direction is unclear."
+  },
+  {
+   "id": "openai-gpt62-on-chatgpt-plans",
+   "provider": "OpenAI",
+   "plans": [
+    "ChatGPT Plus",
+    "ChatGPT Pro 100",
+    "ChatGPT Pro 200",
+    "ChatGPT Pro 500"
+   ],
+   "models": [
+    "GPT-6.2 Sol",
+    "GPT-6.2 Astra"
+   ],
+   "date": "2026-11-17",
+   "type": "availability",
+   "direction": "benign",
+   "announcedFactor": null,
+   "inForce": true,
+   "summary": "GPT-6.2 Astra and GPT-6.2 Sol were added to ChatGPT Work and Codex on Plus and Pro (and Business, Enterprise, Edu; off by default for Enterprise/Edu). Regular Chat keeps its models until 2026-11-23 (next record). OpenAI publishes plan estimates, not allowances: Plus local messages per five hours GPT-6.2 Astra 6-50 (GPT-6 Astra 5-45), GPT-6.2 Sol 17-180 (GPT-6.1 Sol 15-160). Pro 100/200/500 have no five-hour limit in Work and Codex.",
+   "sources": [
+    {
+     "url": "https://help.openai.com/en/articles/6825453-chatgpt-release-notes",
+     "archive": "archive/openai/openai-release-notes-chatgpt.html",
+     "sha256": "08bffada8ab09624790de57d612af288de1b9165fc08d3f35f3c50ba7c00a2cf",
+     "fetchedAt": "2026-11-26T03:15:58Z",
+     "quote": "Nov 17: \"We're introducing GPT-6.2 Astra and GPT-6.2 Sol in ChatGPT Work and Codex ... On Plus or Pro, choose either model in the Work model picker or the Codex model selector.\""
+    },
+    {
+     "url": "https://learn.chatgpt.com/docs/pricing.md",
+     "archive": "archive/openai/learn-chatgpt-pricing.md",
+     "sha256": "edc2e93d156ebd01ef8c3ad59fcc3fc1001e5235df7cd9d8a43ab70f746c74b5",
+     "fetchedAt": "2026-11-26T03:15:57Z",
+     "quote": "GPT-6.2 Astra 6-50 / GPT-6.2 Sol 17-180 local messages per five hours on Plus"
+    }
+   ],
+   "notes": "Provider estimates are not used as numerators (AGENTS.md). Plus also gets GPT-6 Astra at a limited allowance (help 20001275)."
+  },
+  {
+   "id": "openai-gpt62-api-price",
+   "provider": "OpenAI",
+   "plans": [
+    "OpenAI API rate card (numerator pricing for every ChatGPT plan route)"
+   ],
+   "models": [
+    "GPT-6.2 Astra",
+    "GPT-6.2 Sol"
+   ],
+   "date": "2026-11-17",
+   "type": "price",
+   "direction": "unclear",
+   "announcedFactor": 0.8,
+   "inForce": true,
+   "summary": "GPT-6.2 Astra: $8 input / $0.40 cached / $40 output per million tokens against GPT-6 Astra $10 / $1.00 / $50 (-20% on input and output, -60% on cached input). GPT-6.2 Sol: $2 / $0.10 / $10, the same as GPT-6.1 Sol.",
+   "sources": [
+    {
+     "url": "https://developers.openai.com/api/docs/pricing",
+     "archive": "archive/openai/openai-api-pricing.html",
+     "sha256": "46c04d8efeabef55a137c0616bb6aff10bc3c6a4721067873f8311489c13ac92",
+     "fetchedAt": "2026-11-26T03:15:57Z",
+     "quote": "gpt-6.2-astra $8.00 | $40.00 | $0.40; gpt-6.2-sol $2.00 | $10.00 | $0.10; gpt-6-astra $10.00 | $50.00 | $1.00; gpt-6.1-sol $2.00 | $10.00 | $0.10"
+    }
+   ],
+   "notes": "Same typing question as anthropic-fable52-api-price."
+  },
+  {
+   "id": "openai-gpt62-speed-metering",
+   "provider": "OpenAI",
+   "plans": [
+    "ChatGPT Plus",
+    "ChatGPT Pro 100",
+    "ChatGPT Pro 200",
+    "ChatGPT Pro 500"
+   ],
+   "models": [
+    "GPT-6.2 Sol",
+    "GPT-6.2 Astra"
+   ],
+   "date": "2026-11-17",
+   "type": "metering",
+   "direction": "benign",
+   "announcedFactor": null,
+   "inForce": true,
+   "summary": "Speed modes for the GPT-6.2 models draw less of the included allowance: Fast 2x Standard (GPT-6.1 Sol/Terra and GPT-6 Astra/Sol/Luna: 2.5x); Ultrafast 6x included (GPT-6 Astra and GPT-6.1 Sol: 8x); purchased-credit Ultrafast 3x to 2027-02-28, then 6x. Ultrafast access: Pro 500 on both 6.2 models, Pro 200 on GPT-6.2 Sol in Codex only, none on Plus or Pro 100.",
+   "sources": [
+    {
+     "url": "https://learn.chatgpt.com/docs/pricing.md",
+     "archive": "archive/openai/learn-chatgpt-pricing.md",
+     "sha256": "edc2e93d156ebd01ef8c3ad59fcc3fc1001e5235df7cd9d8a43ab70f746c74b5",
+     "fetchedAt": "2026-11-26T03:15:57Z",
+     "quote": "Speed multipliers: \"GPT-6.2 Astra / GPT-6.2 Sol | 2x | 2x\"; \"GPT-6.1 Sol / GPT-6.1 Terra | 2.5x | 2x\"; Ultrafast \"GPT-6.2 Astra / GPT-6.2 Sol | 6x | 3x* / 6x\"; \"GPT-6 Astra | 8x | 6x\""
+    },
+    {
+     "url": "https://help.openai.com/en/articles/9793128-about-chatgpt-pro-tiers",
+     "archive": "archive/openai/openai-help-9793128-pro-tiers.html",
+     "sha256": "d8d24e62f3a9025aa716c71c47f2d242eea6ffd2f8d466ad3a35d599eebfa5a1",
+     "fetchedAt": "2026-11-26T03:15:57Z",
+     "quote": "\"Pro 200 | $200 | GPT-6.2 Sol in Codex only\"; \"Pro 500 | Included\"; \"Pro 100 | Not included\""
+    },
+    {
+     "url": "https://help.openai.com/en/articles/20001275-chatgpt-work-and-codex",
+     "archive": "archive/stage3-found/openai-help-20001275-chatgpt-work-and-codex.html",
+     "sha256": "2f44bc162e84bcdc84903c666fe690056f047f759f909865ddf3cbd1fb2a146b",
+     "fetchedAt": "2026-11-26T03:50:34Z",
+     "quote": "Ultrafast rules for Pro $500 and Pro $200"
+    }
+   ],
+   "notes": "O76 converts a speed-mode report to standard-equivalent at the provider's published multiplier; the registry holds fast 2.5 and ultrafast 8 for OpenAI, which no longer hold for the GPT-6.2 models (fast 2, ultrafast 6). Metering-only: splits nothing (O99)."
+  },
+  {
+   "id": "openai-gpt62-chat-tab",
+   "provider": "OpenAI",
+   "plans": [
+    "ChatGPT Plus",
+    "ChatGPT Pro 100",
+    "ChatGPT Pro 200",
+    "ChatGPT Pro 500"
+   ],
+   "models": [
+    "GPT-6.2 Sol"
+   ],
+   "date": "2026-11-23",
+   "type": "availability",
+   "direction": "benign",
+   "announcedFactor": null,
+   "inForce": true,
+   "summary": "A chat-tuned version of GPT-6.2 (powered by a version of GPT-6.2 Sol) rolled out in the Chat tab for Plus, Pro, Business and Enterprise. \"The models powering Work and Codex are not changing as part of this release.\"",
+   "sources": [
+    {
+     "url": "https://help.openai.com/en/articles/6825453-chatgpt-release-notes",
+     "archive": "archive/openai/openai-release-notes-chatgpt.html",
+     "sha256": "08bffada8ab09624790de57d612af288de1b9165fc08d3f35f3c50ba7c00a2cf",
+     "fetchedAt": "2026-11-26T03:15:58Z",
+     "quote": "Nov 23: \"GPT-6.2, now in the chat tab ... The models powering Work and Codex are not changing as part of this release.\""
+    }
+   ],
+   "notes": "Chat-side; no Work or Codex allowance change."
+  },
+  {
+   "id": "openai-december-shared-allowance",
+   "provider": "OpenAI",
+   "plans": [
+    "ChatGPT Plus",
+    "ChatGPT Pro 100",
+    "ChatGPT Pro 200",
+    "ChatGPT Pro 500"
+   ],
+   "models": [
+    "all ChatGPT and Codex models"
+   ],
+   "date": "December 2026 (no day stated)",
+   "announcedOn": "2026-10-31 (already registered in announcedChanges)",
+   "type": "metering",
+   "direction": "unclear",
+   "announcedFactor": null,
+   "inForce": false,
+   "summary": "Status on 2026-11-26: the help article \"Understanding ChatGPT and Codex usage limits\" (marked \"Updated: yesterday\") still says \"Starting in December, Plus, Pro, and Business plans' usage allowance will be shared across ChatGPT and Codex\", measured in tokens, Instant chat excluded, \"We expect most users won't need to wait for their usage to reset more often than they do now\", and \"A small group of users may see the usage changes before December\". No per-plan size is published.",
+   "sources": [
+    {
+     "url": "https://help.openai.com/en/articles/20001625-understand-chatgpt-and-codex-usage-limits",
+     "archive": "archive/openai/openai-help-20001625.html",
+     "sha256": "7479f6723d9f141305f7270205c490d17ec37ec7d84e265e2be5a2c61300eaaa",
+     "fetchedAt": "2026-11-26T03:15:56Z",
+     "quote": "\"Starting in December, Plus, Pro, and Business plans' usage allowance will be shared across ChatGPT and Codex ... A small group of users may see the usage changes before December ...\""
+    },
+    {
+     "url": "https://www.androidauthority.com/chatgpt-codex-shared-usage-limits-3739254/",
+     "archive": "archive/stage3-found/androidauthority-chatgpt-codex-shared-limits.html",
+     "sha256": "ea5d2aeb69e84d0b1d248c0d261224076dba0bdb162023c73d570b2e8e571b13",
+     "fetchedAt": "2026-11-26T03:50:35Z"
+    }
+   ],
+   "notes": "Not in force. Needs a three-stage search for OpenAI again when it takes effect (O164)."
+  },
+  {
+   "id": "openai-plus-sol62-allowance-cut-claim",
+   "provider": "OpenAI",
+   "plans": [
+    "ChatGPT Plus (and Pro as a multiple, per the observer)"
+   ],
+   "models": [
+    "GPT-6.2 Sol"
+   ],
+   "date": "2026-11-24 (observed; the launch reading was 2026-11-17/18)",
+   "type": "limit",
+   "direction": "adverse",
+   "announcedFactor": null,
+   "measuredFactor": 0.83,
+   "inForce": true,
+   "status": "unannounced; user-measured by one observer",
+   "summary": "IndividualPlus2011 measured the Plus five-hour allowance for GPT-6.2 Sol at $11.75 at launch and $9.75 on 2026-11-24 (-17%; the post body also says \"15% decrease\"). It is the observer's first observed post-release decrease for a model. He expects Pro to move by the same factor (\"calculated as a multiple of the Plus account\"). dave-lon (Pro $200, 2026-11-24, no measurement) says the launch-week improvement \"seems to have been short-lived\".",
+   "sources": [
+    {
+     "url": "https://arctic-shift.photon-reddit.com/api/posts/ids?ids=1y4fuap",
+     "archive": "archive/reddit/1y4fuap-individualplus2011-sol62.posts.json",
+     "sha256": "8a13d8cf759e35370fa0658c8c1fbc64395a1943fec21aec94e25341443904f7",
+     "fetchedAt": "2026-11-26T03:42:37Z"
+    },
+    {
+     "url": "https://arctic-shift.photon-reddit.com/api/comments/tree?link_id=1y4fuap&limit=500",
+     "archive": "archive/reddit/1y4fuap-individualplus2011-sol62.comments.json",
+     "sha256": "1394e8195168bb087ef47abe403080a83d3e1ff6e20051c70887985c6d2976ca",
+     "fetchedAt": "2026-11-26T03:35:45Z"
+    }
+   ],
+   "notes": "No OpenAI statement; one observer; not independently confirmed. If typed as a split it would be adverse with factor about 0.83 on the GPT-6.2 Sol route only."
+  },
+  {
+   "id": "google-carbon-gemini-app-ultra",
+   "provider": "Google",
+   "plans": [
+    "Google AI Ultra 5x",
+    "Google AI Ultra 20x"
+   ],
+   "models": [
+    "Gemini 4 Carbon"
+   ],
+   "date": "2026-11-10",
+   "type": "availability",
+   "direction": "benign",
+   "announcedFactor": null,
+   "inForce": true,
+   "summary": "Gemini 4 Carbon opened to Google AI Ultra subscribers (Gemini app, AI Mode in Search, Antigravity). At the 2026-10-31 search it was offered on no consumer plan (limited cyber-defender release).",
+   "sources": [
+    {
+     "url": "https://braindetox.kr/en/posts/gemini_4_carbon_general_availability.html",
+     "archive": "archive/google/braindetox-carbon-ga.html",
+     "sha256": "be51655c106a9558598e7f0ccbfb5b915590af18486e17fd1304c31e8db95f42",
+     "fetchedAt": "2026-11-26T03:16:51Z"
+    },
+    {
+     "url": "https://smartscope.blog/en/blog/antigravity-gemini-4-carbon-availability-ai-ultra-enterprise-2026/",
+     "archive": "archive/google/smartscope-carbon-antigravity.html",
+     "sha256": "61c06d284711ccd5a382c7b78c982e6858a18e41bb45ff1a310ec735ccdf25b7",
+     "fetchedAt": "2026-11-26T03:16:50Z",
+     "quote": "Antigravity table read 2026-11-13 listed Pro as not available for Carbon; read 2026-11-25 lists it as available"
+    }
+   ],
+   "notes": "Date from secondary coverage (the Google launch post was not fetched). Ultra 5x vs 20x not separated in the sources."
+  },
+  {
+   "id": "google-neon-launch",
+   "provider": "Google",
+   "plans": [
+    "Google AI Pro",
+    "Google AI Ultra 5x",
+    "Google AI Ultra 20x"
+   ],
+   "models": [
+    "Gemini 4 Neon"
+   ],
+   "date": "2026-11-18",
+   "type": "availability",
+   "direction": "benign",
+   "announcedFactor": null,
+   "inForce": true,
+   "summary": "Gemini 4 Neon launched in the Gemini app (Pro and Ultra), Antigravity (app, CLI, IDE extensions; default model for new conversations) and AI Studio. Free and Google AI Plus do not get it. No allowance or factor is stated. The Antigravity model table lists Neon, Carbon and Argon on paid Pro, Ultra and Enterprise.",
+   "sources": [
+    {
+     "url": "https://discuss.ai.google.dev/t/gemini-4-neon-and-orchestrator-neon-are-now-available-in-google-antigravity/202301",
+     "archive": "archive/google/google-forum-neon-202301.html",
+     "sha256": "9658db7b93338870982005837d2301bee996d26497ff278567a170f73537422a",
+     "fetchedAt": "2026-11-26T03:16:48Z",
+     "quote": "\"Gemini 4 Neon is rolling out today in the Antigravity app ... Google AI Pro (paid) | Included\""
+    },
+    {
+     "url": "https://antigravity.google/docs/models",
+     "archive": "archive/google/antigravity-docs-models.html",
+     "sha256": "eecab4922460f3249d702b33a8e70e98467c3773021178179853f0cf22641d16",
+     "fetchedAt": "2026-11-26T03:17:05Z",
+     "quote": "\"Gemini 4 Neon | Free & Google AI Plus no | Google AI Pro yes | Google AI Ultra yes | Enterprise yes\""
+    },
+    {
+     "url": "https://blog.google/innovation-and-ai/models-and-research/gemini-models/introducing-gemini-4-neon/",
+     "archive": "archive/stage3-found/blog-google-introducing-gemini-4-neon.html",
+     "sha256": "a2c1ccc4365c1a729397742bb4a11e3694060f138d295bf9cf1e60e3e27b8044",
+     "fetchedAt": "2026-11-26T03:50:34Z"
+    },
+    {
+     "url": "https://one.google.com/about/google-ai-plans/",
+     "archive": "archive/google/google-ai-plans.html",
+     "sha256": "ede7b0753580c62da2c3d19f0b2274af9e44cc5d47c453e6a60b349ef4efcc01",
+     "fetchedAt": "2026-11-26T03:16:49Z"
+    }
+   ],
+   "notes": "Pro and Ultra both on AI plan pages. Forum thread 200156 (135 posts, 2026-11-13 to 11-25, not archived) reports Jio-bundled Pro accounts treated as trials in Antigravity."
+  },
+  {
+   "id": "google-antigravity-reset-first-birthday",
+   "provider": "Google",
+   "plans": [
+    "Google AI Pro",
+    "Google AI Ultra 5x",
+    "Google AI Ultra 20x",
+    "Free"
+   ],
+   "models": [
+    "all Antigravity models"
+   ],
+   "date": "2026-11-17",
+   "type": "reset",
+   "direction": "benign",
+   "announcedFactor": null,
+   "inForce": false,
+   "summary": "Varun Mohan (Google DeepMind) on X, 2026-11-17 US time: \"In honor of Antigravity turning 1, we're resetting quota for everyone across all models!\" Restores used quota; no ceiling change.",
+   "sources": [
+    {
+     "url": "https://pasqualepillitteri.it/en/news/34583/google-gives-all-antigravity-users-a-free-quota-reset",
+     "archive": "archive/google/pasqualepillitteri-antigravity-reset.html",
+     "sha256": "f43f5d301d5de28198436cdea0f86df7f473f062b70908eb5f0ecb9fa18a646e",
+     "fetchedAt": "2026-11-26T03:50:04Z",
+     "quote": "announced \"at 12:38 a.m. Italian time on November 18, 2026 (November 17 in the United States)\""
+    },
+    {
+     "url": "https://tproger.ru/news/google-sbrosila-kvoty-v-antigravity-na-vseh-modelyah-v-chest-dnya",
+     "archive": "archive/google/tproger-antigravity-reset.html",
+     "sha256": "baf76c8d787ed8adc75ef92ddf7d907f825b557f842689bf958794e1b307b383",
+     "fetchedAt": "2026-11-26T03:50:05Z"
+    }
+   ],
+   "notes": "Reset; a reading that spans it is excluded under O112."
+  },
+  {
+   "id": "google-antigravity-cache-22pct-and-reset",
+   "provider": "Google",
+   "plans": [
+    "Google AI Pro",
+    "Google AI Ultra 5x",
+    "Google AI Ultra 20x"
+   ],
+   "models": [
+    "Gemini 4 models in Antigravity"
+   ],
+   "date": "2026-11-21",
+   "type": "metering",
+   "direction": "benign",
+   "announcedFactor": 1.22,
+   "inForce": true,
+   "summary": "Antigravity caching improvements \"increased the amount you can get done in quota by 22%\" with a quota reset on Saturday 2026-11-21.",
+   "sources": [
+    {
+     "url": "https://9to5google.com/2026/11/23/antigravity-gemini-4-carbon/",
+     "archive": "archive/stage3-found/9to5google-antigravity-gemini-4-carbon-2026-11-23.html",
+     "sha256": "78beb005776f207c7f03368fd8ebc7b53f3fe0011cd14c29c1b817397d247e85",
+     "fetchedAt": "2026-11-26T03:50:30Z",
+     "quote": "\"This follows another reset on Saturday after the team introduced caching improvements that 'increased the amount you can get done in quota by 22%.'\""
+    },
+    {
+     "url": "https://www.techcityauthority.com/2026/11/users-say-antigravity-neon-fix-still-burns-weekly-quotas.html",
+     "archive": "archive/stage3-found/techcityauthority-antigravity-neon-fix.html",
+     "sha256": "5f6538d30f6fa5a6ff6d283b085b881dc50fe91ef124a80bacd7b265cd32aded",
+     "fetchedAt": "2026-11-26T03:54:55Z"
+    }
+   ],
+   "notes": "A metering improvement stated as a work-per-quota gain, not a change to a published limit; typed metering (splits nothing under O99)."
+  },
+  {
+   "id": "google-carbon-on-ai-pro-and-reset",
+   "provider": "Google",
+   "plans": [
+    "Google AI Pro"
+   ],
+   "models": [
+    "Gemini 4 Carbon",
+    "Gemini 4 Hydrogen"
+   ],
+   "date": "2026-11-23",
+   "type": "availability",
+   "direction": "benign",
+   "announcedFactor": null,
+   "inForce": true,
+   "summary": "\"Resetting Gemini quotas for everyone on Antigravity because we're upgrading models across tiers! Paid Pro users will now have access to Carbon and Hydrogen will be available to all users as promised!\" (Varun Mohan, via 9to5google and a Reddit quote). The Antigravity plans table now lists Carbon as available on paid AI Pro. The Gemini app still lists Carbon under AI Ultra on the plan page.",
+   "sources": [
+    {
+     "url": "https://9to5google.com/2026/11/23/antigravity-gemini-4-carbon/",
+     "archive": "archive/stage3-found/9to5google-antigravity-gemini-4-carbon-2026-11-23.html",
+     "sha256": "78beb005776f207c7f03368fd8ebc7b53f3fe0011cd14c29c1b817397d247e85",
+     "fetchedAt": "2026-11-26T03:50:30Z",
+     "quote": "\"paid AI Pro ($19.99 per month) users 'now have access to Carbon' after previously requiring AI Ultra\""
+    },
+    {
+     "url": "https://antigravity.google/docs/models",
+     "archive": "archive/google/antigravity-docs-models.html",
+     "sha256": "eecab4922460f3249d702b33a8e70e98467c3773021178179853f0cf22641d16",
+     "fetchedAt": "2026-11-26T03:17:05Z",
+     "quote": "\"Gemini 4 Carbon is included on paid Google AI Pro plans ... Google AI Ultra, and Gemini Enterprise within the shared Gemini quota.\""
+    },
+    {
+     "url": "https://arctic-shift.photon-reddit.com/api/comments/tree?link_id=1y3srb2&limit=500",
+     "archive": "archive/reddit/1y3srb2-mcd0m-pool-120.comments.json",
+     "sha256": "a231d228ecea5580cb546a92295d08b6db96d7e4e84a4ae789a691d17f649a72",
+     "fetchedAt": "2026-11-26T03:50:02Z"
+    }
+   ],
+   "notes": "Carbon was Ultra-only on 2026-11-12/13 (forum 199770)."
+  },
+  {
+   "id": "google-pro-gemini-weekly-pool-105-to-120",
+   "provider": "Google",
+   "plans": [
+    "Google AI Pro"
+   ],
+   "models": [
+    "Gemini 4 Neon",
+    "Gemini 4 Carbon",
+    "Gemini 4 Hydrogen",
+    "Gemini 4 Argon"
+   ],
+   "date": "2026-11-23",
+   "type": "limit",
+   "direction": "unclear",
+   "announcedFactor": null,
+   "measuredFactor": 1.143,
+   "inForce": true,
+   "status": "unannounced; user-detected by one observer",
+   "summary": "mcD0m logged the Pro shared Gemini weekly pool at $105 API-equivalent (2026-11-17) and at $120 after the 2026-11-23 update, with the separate $15 Argon weekly pool \"merged in\" (a second user: \"they also merged gemini and argon quotas for AI PRO\"). A forum user (205526) then reports \"45% of my weekly quota consumed in one session\" on Pro after \"the recent update that removed the separate Argon pool\".",
+   "sources": [
+    {
+     "url": "https://arctic-shift.photon-reddit.com/api/posts/ids?ids=1xyzwfl",
+     "archive": "archive/reddit/1xyzwfl-mcd0m-google-pro-gemini-pool.posts.json",
+     "sha256": "c3834671adf6412b26e5a2c065099b2a2d80fb3b6cc7cda2b020c15968744d40",
+     "fetchedAt": "2026-11-26T03:49:58Z"
+    },
+    {
+     "url": "https://arctic-shift.photon-reddit.com/api/comments/tree?link_id=1y3srb2&limit=500",
+     "archive": "archive/reddit/1y3srb2-mcd0m-pool-120.comments.json",
+     "sha256": "a231d228ecea5580cb546a92295d08b6db96d7e4e84a4ae789a691d17f649a72",
+     "fetchedAt": "2026-11-26T03:50:02Z"
+    },
+    {
+     "url": "https://discuss.ai.google.dev/t/205526.json",
+     "archive": "archive/google-forum/205526-little_princess-argon-pool-removal.topic.json",
+     "sha256": "23b32830b46258fee10db691118df2cecf9ce06e8fd8e3f1a4bff404f179e68e",
+     "fetchedAt": "2026-11-26T03:50:03Z"
+    }
+   ],
+   "notes": "For Hydrogen and Flash a +14% weekly pool (105 to 120); for anyone who used the separate Argon pool the total is unchanged ($105 + $15); Neon and Carbon draw at their own multiplier (Argon and Carbon 3.00x per published dollar, Yiji_Kong 2026-11-13). Direction unclear for the cohort."
+  },
+  {
+   "id": "google-30-nov-removals-and-carbon-price",
+   "provider": "Google",
+   "plans": [
+    "Google AI Pro",
+    "Google AI Ultra 5x",
+    "Google AI Ultra 20x"
+   ],
+   "models": [
+    "Gemini 4 Carbon",
+    "Gemini 4 Argon",
+    "Gemini 3.8 Flash"
+   ],
+   "date": "2026-11-30 and 2026-12-01",
+   "type": "price",
+   "direction": "unclear",
+   "announcedFactor": 2.0,
+   "inForce": false,
+   "summary": "Announced, not in force. (1) Gemini 4 Carbon and Gemini 4 Argon API list price goes from the introductory $2 input / $10 output / $0.10 cached to $4 / $20 / $0.20 per million tokens on 2026-12-01. (2) Gemini 4 Argon, Gemini 3.8 Flash, GPT-OSS-120b and the Claude 4.6 models leave Antigravity on 2026-11-30. Argon is not a cohort model.",
+   "sources": [
+    {
+     "url": "https://ai.google.dev/gemini-api/docs/pricing",
+     "archive": "archive/google/gemini-api-pricing.html",
+     "sha256": "ad4c2a2765475fa9a01b5594e731ef3e9bdb5ca4ca2c9624c2e2272bfec970dc",
+     "fetchedAt": "2026-11-26T03:50:06Z",
+     "quote": "Gemini 4 Carbon: \"$4.00 starting December 1, 2026\"; output \"$20.00 starting December 1, 2026\"; cached \"$0.20 starting December 1, 2026\""
+    },
+    {
+     "url": "https://antigravity.google/docs/models",
+     "archive": "archive/google/antigravity-docs-models.html",
+     "sha256": "eecab4922460f3249d702b33a8e70e98467c3773021178179853f0cf22641d16",
+     "fetchedAt": "2026-11-26T03:17:05Z",
+     "quote": "\"Gemini 4 Argon, Gemini 3.8 Flash, GPT-OSS-120b, and Claude 4.6 models are leaving on November 30, 2026.\""
+    }
+   ],
+   "notes": "Antigravity meters Carbon and Argon at 3.00x of the published price (Yiji_Kong); whether the meter follows the doubled price is not stated. If it does the plan buys half the Carbon tokens (adverse, factor 0.5); if it does not, the API-priced value of the allowance doubles. Hence unclear. A new three-stage search for Google is due once this takes effect."
+  },
+  {
+   "id": "meta-muse-ember-in-muse-code-plans",
+   "provider": "Meta",
+   "plans": [
+    "Muse Code Everyday Usage ($5)",
+    "Muse Code High Usage ($15)",
+    "Muse Code Power Usage ($50)",
+    "Muse Code Maximum Usage ($200)"
+   ],
+   "models": [
+    "Muse Ember"
+   ],
+   "date": "2026-11-09",
+   "type": "availability",
+   "direction": "benign",
+   "announcedFactor": null,
+   "inForce": true,
+   "summary": "Muse Ember (muse-ember-1.0) launched 2026-11-09 on the Meta Model API and in Muse Code. The Muse Code subscription documentation lists \"Access to Muse Ember, Muse Spark, Muse Wonder and Muse Image\" on Everyday Usage, with High, Power and Maximum \"Everything from\" the lower plan at 5x, 20x and 80x the Everyday usage; Everyday is \"10-50 prompts every 5 hours\". The developer.meta.com product page lists Everyday as \"Muse Spark, Muse Wonder and Muse Image\" without Ember (a conflict, not resolved). No consumer Muse plan (Power $20, Maximum $100) is documented to include Ember. Plan allowances are prompt counts and multiples, with no dollar figure.",
+   "sources": [
+    {
+     "url": "https://dev.meta.ai/docs/muse-code/subscriptions",
+     "archive": "archive/meta/dmeta-muse-code-subscriptions.html",
+     "sha256": "5e9a476b170c898250cb1b955c30cbc9c9091b007934659101117ba1f926955c",
+     "fetchedAt": "2026-11-26T03:23:49Z",
+     "quote": "\"Everyday Usage | Access to Muse Ember, Muse Spark, Muse Wonder and Muse Image | Send 10-50 prompts every 5 hours\""
+    },
+    {
+     "url": "https://developer.meta.com/ai/products/muse-code/",
+     "archive": "archive/meta/meta-muse-code-product.html",
+     "sha256": "cbaf4b101df118f1fa3c826ed2178d0083b605a47d041855b038967d2de60966",
+     "fetchedAt": "2026-11-26T03:13:21Z",
+     "quote": "\"Everyday Usage ... Access to Muse Spark, Muse Wonder and Muse Image\""
+    },
+    {
+     "url": "https://research.meta.ai/blog/muse-ember",
+     "archive": "archive/stage3-found/research-meta-ai-muse-ember.html",
+     "sha256": "b008449c3e94a07a38ca51a62d33321ad701c604ca7dc56a2668134a6443deed",
+     "fetchedAt": "2026-11-26T03:50:33Z"
+    },
+    {
+     "url": "https://www.nocode.mba/ai-release-tracker/releases/muse-ember",
+     "archive": "archive/meta/nocode-mba-muse-ember.html",
+     "sha256": "5bc1dc4d82dc00604520a3fbd88e148b29b484534f39f54bc21ad5070933795a",
+     "fetchedAt": "2026-11-26T03:50:06Z"
+    },
+    {
+     "url": "https://dev.meta.ai/docs/pricing-rate-limits",
+     "archive": "archive/meta/meta-https---dev-meta-ai-docs-pricing-rate-limits.html",
+     "sha256": "db90ff9af172bd356392ed9cfc82222937f03e987159bb6157c58037b884d26d",
+     "fetchedAt": "2026-11-26T03:23:30Z",
+     "quote": "muse-ember-1.0 API $0.10 in / $0.004 cached / $0.50 out per 1M (up to 200K input)"
+    }
+   ],
+   "notes": "Ember has no end-user report on any Meta plan; its plans are request-capped provider allowances (O-rule: never a numerator). A third-party tracker dates inclusion to about 2026-11-03."
+  },
+  {
+   "id": "xiaomi-team-token-plan",
+   "provider": "Xiaomi",
+   "plans": [
+    "MiMo Token Plan Team (Standard, Pro, Max; minimum 2 seats)"
+   ],
+   "models": [
+    "MiMo-V2.6-Flash",
+    "MiMo-V2.6-Pro"
+   ],
+   "date": "by 2026-11-19",
+   "type": "availability",
+   "direction": "benign",
+   "announcedFactor": null,
+   "inForce": true,
+   "summary": "A Team Token Plan was added beside the individual plan: Standard $16, Pro $50, Max $100 per seat per month (CNY 99 / 329 / 659), the same monthly credits per seat as the individual tiers (11B / 38B / 82B), minimum 2 seats. Individual Lite $6 / Standard $16 / Pro $50 / Max $100 and 4.1B / 11B / 38B / 82B credits are unchanged from the 2026-10-23 record; the flash credit rate is 2 / 100 / 200 credits per cache-hit / cache-miss / output unit and the 0.8x off-peak coefficient is as documented.",
+   "sources": [
+    {
+     "url": "https://mimo.mi.com/docs/en-US/tokenplan/Token%20Plan/team",
+     "archive": "archive/xiaomi/mimo-team-token-plan.html",
+     "sha256": "0ec13bcab0dacbf5652199ca8076c99458f1182e55291651ced9a6f95c328245",
+     "fetchedAt": "2026-11-26T03:54:55Z",
+     "quote": "\"All subscription tiers require a minimum purchase of 2 seats.\""
+    },
+    {
+     "url": "https://mimo.mi.com/docs/en-US/tokenplan/Token%20Plan/subscription",
+     "archive": "archive/xiaomi/mimo-mi-tokenplan-subscription.html",
+     "sha256": "13a60d323c5ef413e54cd912b5d6c2ff6891434e17d54a6f63df92daf2bd7dc7",
+     "fetchedAt": "2026-11-26T03:44:17Z",
+     "quote": "individual tiers Lite $6 4.1B, Standard $16 11B, Pro $50 38B, Max $100 82B credits; mimo-v2.6-flash 2 / 100 / 200 credits"
+    }
+   ],
+   "notes": "A Team plan is not a Plan-basis plan. No change to the individual MiMo-V2.6-Flash route. The 10-23 O46 ceiling is unaffected. A third-party answer (Kimi K3 via Perplexity) quoted 60M / 1.6B credits from the release note; the archived individual-plan page says 4.1B-82B and matches the 2026-10-23 record."
+  },
+  {
+   "id": "opencode-go-2026-11-11-to-11-26",
+   "provider": "OpenCode",
+   "plans": [
+    "OpenCode Go",
+    "Go Plus",
+    "Go Teams"
+   ],
+   "models": [
+    "GLM-5.3",
+    "Kimi K3.1 Pro",
+    "LongCat-2.5",
+    "cohort models: GPT-6 Luna, Claude Haiku 5.5, MiMo-V2.6-Flash"
+   ],
+   "date": "between 2026-11-11 and 2026-11-26",
+   "type": "limit",
+   "direction": "benign",
+   "announcedFactor": null,
+   "inForce": true,
+   "summary": "Per-model monthly dollar limits changed for GLM-5.3 ($15 to $200 on Go) and Kimi K3.1 Pro ($15 to $60), LongCat went from free to a paid $60 entry, six decision/embedding models and Qwen4 Max were added, GLM-5.2, LongCat-2.0, MiMo-V2.5 and MiMo-V2.5-Pro were removed, and Go Teams now has a 2-member minimum. The three cohort models (GPT-6 Luna $15, Claude Haiku 5.5 $15, MiMo-V2.6-Flash $60 on Go) are unchanged, as are the Go fee ($10) and the 20% / 50% five-hour and weekly rules.",
+   "sources": [
+    {
+     "url": "https://opencode.ai/docs/console/go/",
+     "archive": "opencode-go/raw/opencode-go-docs.html",
+     "sha256": "40c238db6cfc8ae3dcb3ecef1c309af1e1a376bebd2ca12cf7b85228a971379c",
+     "fetchedAt": "2026-11-26T03:10:58Z"
+    },
+    {
+     "url": "https://opencode.ai/inference/go/v1/models",
+     "archive": "opencode-go/raw/go-v1-models.json",
+     "sha256": "d49d1038b073755d87567b0febf56e3015e66c89b16a9920437f50d5b23ccc8f",
+     "fetchedAt": "2026-11-26T03:11:17Z"
+    }
+   ],
+   "notes": "Detail in opencode-go/README.md and go-limits-comparison.json. No effect on the three cohort routes."
+  }
+ ]
+}
