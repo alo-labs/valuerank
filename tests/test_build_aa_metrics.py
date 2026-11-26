@@ -330,7 +330,7 @@ def test_main_decodes_html_pages_into_metrics_with_units_and_nulls(world, capsys
     world.page("full", "full", {
         "slug": "full", "name": "Full (Max)", "shortName": "Full", "release": "2026-07", "isReasoning": True,
         "effort": {"slug": "max"}, "intelligenceIndex": 61, "gdpval": 1500, "lcr": 0.5, "hle": 0.25,
-        "gpqa": 0.9, "scicode": 0.4, "critpt": 0.1, "gdpPdfAllPass": 0.3, "terminalBench40": 0.6,
+        "gpqa": 0.9, "scicode": 0.4, "critpt": 0.1, "gdpPdfAllPass": 0.3, "terminalBench41": 0.6,
         "automationBenchPartialScore": 0.2, "gdpvalNormalizedDisplay": 0.5,
         "briefcaseBreakdown": {"overall": {"elo": 1500}, "rubricPassRate": 0.8, "totalCost": 12.5},
         "omniscienceBreakdown": {"accuracy": 0.4, "hallucinationRate": 0.3},
@@ -351,7 +351,7 @@ def test_main_decodes_html_pages_into_metrics_with_units_and_nulls(world, capsys
     assert metrics["omniNonHallucination"] == pytest.approx(0.7)  # 1 - hallucination rate
     assert metrics["aaEvalCost"] == 99.5
     assert metrics["speed"] == 42.0
-    assert metrics["terminalBenchV40"] == 0.6 and metrics["aaLcr"] == 0.5 and metrics["gpqaDiamond"] == 0.9
+    assert metrics["terminalBenchV41"] == 0.6 and metrics["aaLcr"] == 0.5 and metrics["gpqaDiamond"] == 0.9
     assert model["supplemental"]["mmmuPro"] == 0.7
     assert model["supplemental"]["briefcaseElo"] == 1500.0
     assert model["supplemental"]["briefcaseRubricPassRate"] == 0.8
@@ -367,7 +367,7 @@ def test_main_decodes_html_pages_into_metrics_with_units_and_nulls(world, capsys
     assert extraction["textSnapshot"] == "data/aa/full__full.txt"
     assert extraction["sourceSnapshot"] is None and extraction["captureMode"] == "html"
     assert extraction["method"] == "decoded currentModel object from first-party page payload"
-    assert output["sourceSnapshot"] is None and output["observedAt"] == "2026-11-01T06:10:00Z"
+    assert output["sourceSnapshot"] is None and output["observedAt"] == "2026-11-26T14:00:00Z"
     assert output["benchmarkVersion"] == VERSION and output["providerClaimPolicy"] == "policy-text"
     assert coverage["cohortN"] == 1 and coverage["cohort"].endswith("1-model ValueRank comparison roster")
     assert coverage["sourceSnapshot"] is None
@@ -399,7 +399,7 @@ def test_main_decodes_markerless_html_page_through_its_slug_keyed_object(world):
     assert metrics["briefcaseElo"] == 1531.52 and metrics["briefcaseNormalized"] == pytest.approx((1531.52 - 500) / 2000)
     assert metrics["gdpvalV21"] == 1513.05 and metrics["gdpvalV21Normalized"] == 0.506525
     assert metrics["automationBenchAA"] == pytest.approx(0.35953889773428194)
-    assert metrics["terminalBenchV40"] == pytest.approx(0.292929292929293)
+    assert metrics["terminalBenchV41"] is None  # the saved page predates Terminal-Bench 4.1 (it carries `terminalBench40`, which is not read)
     # O136: the v5 successor fields this (pre-v5) page already carries are read; the ones it lacks stay missing.
     assert metrics["terminalBenchScience"] == pytest.approx(0.180952380952381) and metrics["hleDiamond"] is None
     assert metrics["gdpPdfAllPass"] == 0.182 and metrics["critptV2Hard"] is None
@@ -429,7 +429,7 @@ def test_main_alternate_field_names_and_estimated_index(world):
     world.page("alt", "alt", {
         "slug": "alt", "effort": {"slug": "std"}, "intelligenceIndex": 50, "intelligenceIndexIsEstimated": True,
         "briefcaseElo": 1000, "briefcaseNormalizedDisplay": 0.9, "gdpvalNormalized": 0.25,
-        "terminalbench40": 0.45, "omniscienceAccuracy": 0.55, "omniscienceNonHallucination": 0.8,
+        "terminalbench41": 0.45, "omniscienceAccuracy": 0.55, "omniscienceNonHallucination": 0.8,
         "aaEvalCost": 7, "speed": "fast", "terminalbenchV21": 0.12, "gpqa": "oops",
         "briefcaseBreakdown": {"overall": {"elo": 2000}},
     }, speed_text="Model summary\nSpeed N/A Output tokens per second")
@@ -440,7 +440,7 @@ def test_main_alternate_field_names_and_estimated_index(world):
     assert metrics["briefcaseElo"] == 1000.0  # direct field wins over breakdown
     assert metrics["briefcaseNormalized"] == 0.9  # displayed value wins over derived Elo normalisation
     assert metrics["gdpvalV21Normalized"] == 0.25
-    assert metrics["terminalBenchV40"] == 0.45
+    assert metrics["terminalBenchV41"] == 0.45
     assert metrics["omniAccuracy"] == 0.55 and metrics["omniNonHallucination"] == 0.8
     assert metrics["aaEvalCost"] == 7.0
     assert metrics["speed"] is None  # HTML mode reads the summary text, which says N/A
@@ -504,7 +504,7 @@ def test_main_provider_claims_fill_only_exactly_eligible_missing_metrics(world):
         claim("gpqaDiamond", "0.3"),
         claim("notAMetric", 0.3),
         claim("intelligenceIndex", 99),  # already measured by AA: provider claim must not override
-        claim("terminalBenchV40", 0.3, cohortModelId="other"),
+        claim("terminalBenchV41", 0.3, cohortModelId="other"),
     ]
     world.write(extract=[entry("m")], claims=claims)
     world.page("m", "m", {"slug": "m", "effort": {"slug": "max"}, "intelligenceIndex": 55})
@@ -514,7 +514,7 @@ def test_main_provider_claims_fill_only_exactly_eligible_missing_metrics(world):
     assert metrics["hleDiamond"] == 0.77 and metrics["critptV2Hard"] == 0.4
     assert model["metricSources"]["hleDiamond"] == {"sourceType": "model_provider_claim",
                                                      "sourceUrl": "https://provider.example/claim", "claimId": "c-hleDiamond"}
-    for rejected in ("terminalBenchScience", "aaLcr", "gdpvalV21", "gpqaDiamond", "terminalBenchV40"):
+    for rejected in ("terminalBenchScience", "aaLcr", "gdpvalV21", "gpqaDiamond", "terminalBenchV41"):
         assert metrics[rejected] is None, rejected
     assert metrics["intelligenceIndex"] == 55.0
     assert model["metricSources"]["intelligenceIndex"]["sourceType"] == "benchmark_owner"

@@ -11,7 +11,7 @@ AA_METHODOLOGY_URL = "https://artificialanalysis.ai/methodology/intelligence-ben
 AA_DEEPSWE_URL = "https://artificialanalysis.ai/agents/coding-agents?coding-agents-performance-chart=deep-swe-v1.1"
 AA_CODING_AGENTS_URL = "https://artificialanalysis.ai/agents/coding-agents"
 LIVEBENCH_URL = "https://livebench.ai/"
-TERMINAL_BENCH_URL = "https://www.tbench.ai/leaderboard/terminal-bench/4.0"
+TERMINAL_BENCH_URL = "https://www.tbench.ai/leaderboard/terminal-bench/4.1"
 BUG_HUNT_URL = "https://bughunt.productcompass.pm/"
 
 BENCHMARK_URLS = {
@@ -19,10 +19,12 @@ BENCHMARK_URLS = {
     "AA-Briefcase": "https://artificialanalysis.ai/evaluations/aa-briefcase",
     "GDPval-AA v2.1": "https://artificialanalysis.ai/evaluations/gdpval-aa",
     "AutomationBench-AA": "https://artificialanalysis.ai/evaluations/automationbench-aa",
-    "Terminal-Bench 4.0 (AA evaluation)": "https://artificialanalysis.ai/evaluations/terminalbench-4-0",
+    "Terminal-Bench 4.1 (AA evaluation)": "https://artificialanalysis.ai/evaluations/terminalbench-4-1",
+    "Terminal-Bench 4.1 (AA run)": "https://artificialanalysis.ai/evaluations/terminalbench-4-1",
+    "GDP.pdf (AA)": "https://artificialanalysis.ai/evaluations/gdp-pdf",
     "τ³-Banking (legacy)": "https://artificialanalysis.ai/evaluations/tau3-banking",
     "Terminal-Bench v2.1 (legacy)": "https://artificialanalysis.ai/evaluations/terminalbench-2-1",
-    "Terminal-Bench 4.0": TERMINAL_BENCH_URL,
+    "Terminal-Bench 4.1": TERMINAL_BENCH_URL,
     "SciCode": "https://artificialanalysis.ai/evaluations/scicode",
     # O136: the AA Intelligence Index v5 successors.
     "FrontierCode 2.0": "https://artificialanalysis.ai/evaluations/frontiercode-2-0",

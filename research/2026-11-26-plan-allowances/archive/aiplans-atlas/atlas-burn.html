@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Plan usage burn data · Atlas ADE docs</title>
+<meta name="description" content="Claude Code plans don&#x27;t give you a token allowance. They give you two meters that run from 0 to 100%.">
+<meta property="og:title" content="Plan usage burn data · Atlas ADE docs">
+<meta property="og:description" content="Claude Code plans don&#x27;t give you a token allowance. They give you two meters that run from 0 to 100%.">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Atlas ADE">
+<meta property="og:url" content="https://atlas-ade.dev/docs/plan-usage-burn-data/">
+<meta property="og:image" content="https://atlas-ade.dev/assets/og.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="canonical" href="https://atlas-ade.dev/docs/plan-usage-burn-data/">
+<script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "Organization", "@id": "https://atlas-ade.dev/#org", "name": "Atlas ADE", "url": "https://atlas-ade.dev/", "logo": "https://atlas-ade.dev/assets/og.png", "sameAs": ["https://discord.gg/9yvJjY57xF", "https://www.reddit.com/r/AtlasADE/"], "description": "Atlas ADE is the meta-harness for your agentic workflows: it drives the agent you already have (Claude Code, Codex, OpenCode or Pi, alone or side by side) and adds the loop, the map of your code and the records around it."}, {"@type": "TechArticle", "headline": "Plan usage burn data", "description": "Claude Code plans don't give you a token allowance. They give you two meters that run from 0 to 100%.", "url": "https://atlas-ade.dev/docs/plan-usage-burn-data/", "author": {"@id": "https://atlas-ade.dev/#org"}, "publisher": {"@id": "https://atlas-ade.dev/#org"}, "dateModified": "2026-10-29"}]}</script>
+<meta name="theme-color" content="#0A1116">
+<link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
+<link rel="preload" href="../../assets/fonts/bricolage-grotesque.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="../../assets/fonts/schibsted-grotesk.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="../../assets/site.css?v=43f8c79916">
+<script>
+  // Before first paint: the saved theme (if any) and a flag that JavaScript is running.
+  (function () {
+    var d = document.documentElement; d.classList.add("js");
+    try { var t = localStorage.getItem("ade-theme"); if (t === "light" || t === "dark") d.setAttribute("data-theme", t); } catch (e) {}
+  })();
+</script>
+</head>
+<body data-page="docs" data-root="../../">
+<a class="skip" href="#main">Skip to content</a>
+<header class="site-header">
+  <div class="wrap nav">
+    <a class="brand" href="../../" aria-label="Atlas ADE home">
+      <svg width="26" height="26" viewBox="0 0 26 26" aria-hidden="true"><path d="M13 2 L22.5 7.5 L22.5 18.5 L13 24 L3.5 18.5 L3.5 7.5 Z" fill="none" stroke="var(--course)" stroke-width="1.8"/><circle cx="13" cy="13" r="2.6" fill="var(--course)"/></svg>
+      <span class="brand-name">Atlas ADE</span>
+      <span class="brand-tag">DOCS</span>
+    </a>
+    <div class="search"><label for="docsearch"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg><input id="docsearch" type="search" placeholder="Search the docs" autocomplete="off" aria-label="Search the docs"><kbd>/</kbd></label><ul class="search-results" data-search-results hidden></ul></div>
+    <nav class="nav-links" aria-label="Main">
+      <a class="hide-sm" href="../../#parts">How it works</a>
+      <a class="hide-sm" href="../../demo/" >Demo</a>
+      <a href="../../docs/overview/" aria-current="page">Docs</a>
+      <a href="../../pricing/" >Get it</a>
+      <button class="theme-toggle" type="button" data-theme-toggle aria-label="Switch to day chart">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><path d="M12 2v2.5M12 19.5V22M2 12h2.5M19.5 12H22M4.9 4.9l1.8 1.8M17.3 17.3l1.8 1.8M4.9 19.1l1.8-1.8M17.3 6.7l1.8-1.8"/></svg>
+      </button>
+      <a class="btn btn-course btn-sm" href="../../#get">Get Atlas ADE</a>
+    </nav>
+  </div>
+</header>
+<main id="main">
+<div class="docs-shell"><aside class="docs-side"><details open><summary>Docs menu</summary><nav aria-label="Docs"><div class="docs-group"><span class="eyebrow">Start</span><a href="../../docs/overview/">Overview</a><a href="../../docs/install/">Install</a><a href="../../docs/quickstart/">Quickstart</a><a href="../../docs/new-to-claude-code/">New to Claude Code? Start here</a></div><div class="docs-group"><span class="eyebrow">Concepts</span><a href="../../docs/how-it-flies/">How it flies</a><a href="../../docs/the-verbs/">The verbs</a><a href="../../docs/safety-and-privacy/">Safety and privacy</a></div><div class="docs-group"><span class="eyebrow">Guides</span><a href="../../docs/porting/">Porting a project</a><a href="../../docs/day-to-day/">Day to day</a><a href="../../docs/release-notes/">Release notes</a></div><div class="docs-group"><span class="eyebrow">How it works</span><a href="../../docs/prove-a-card-is-done/">Prove a card is done</a><a href="../../docs/choosing-models/">Choosing models</a><a href="../../docs/one-day-on-ade/">ADE against plain sessions and a hand-built loop</a></div><div class="docs-group"><span class="eyebrow">Field guide</span><a href="../../docs/claude-md-and-agents-md/">Setting up CLAUDE.md and AGENTS.md</a><a href="../../docs/fork-compact-clear/">When to fork, compact, auto-compact or clear</a><a href="../../docs/custom-agents/">What is a custom agent, and how do you make one?</a><a href="../../docs/what-is-a-loop-in-agentic-coding/">What is a loop in agentic coding?</a><a href="../../docs/hooks-for-burn-rate/">Hooks for burn rate in Claude Code and Codex</a><a href="../../docs/not-every-issue-is-a-gate/">Not every issue should become a gate</a><a href="../../docs/long-horizon-context-management/">Context management for long-horizon agent work</a><a href="../../docs/handover-recency-bias/">How to stop agent handovers becoming recency-biased</a><a href="../../docs/graph-derived-test-selection/">Graph-derived test selection for Claude Code and Codex</a><a href="../../docs/claude-code-usage-limits/">Claude Code usage limits by plan: how many tokens is Ultra (Max 20x)?</a><a href="../../docs/claude-code-burn-rate/">Claude Code burn rate: why is my usage draining so fast?</a><a href="../../docs/claude-code-cache-cost/">What a cold cache costs in Claude Code</a><a href="../../docs/prompt-cache-ttl/">Setting the prompt cache TTL in Claude Code</a><a href="../../docs/run-lanes-on-api-credits/">Run lanes on your plan&#x27;s API credits</a><a href="../../docs/hidden-costs-of-subagents/">Why do subagents use so much of my Claude plan?</a><a href="../../docs/plan-usage-burn-data/" aria-current="page">Plan usage burn data</a></div><div class="docs-group"><span class="eyebrow">Reference</span><a href="../../docs/configure/">What you can configure</a><a href="../../docs/commands/">Commands</a><a href="../../docs/config/">ade.toml</a><a href="../../docs/troubleshooting/">Troubleshooting</a></div></nav></details></aside><article class="docs-main prose"><div class="crumbs">Docs / Field guide / <b>Plan usage burn data</b><span class="md-links"><a href="index.md">VIEW .MD</a><button type="button" data-copy-md>COPY AS MARKDOWN</button></span></div><h1>Plan usage burn data</h1><p class="dateline">Generated from model a5v3 · Last checked against a live meter 29/10/2026</p>
+<p>Claude Code plans don't give you a token allowance. They give you two meters that run from 0 to 100%. This page shows what moves those meters, and what the same usage would cost at API prices. Every reading here was taken in interactive Claude Code sessions on an Ultra plan (formerly Max 20x); the other plans are derived from it.</p>
+<p>Measured by the team behind <a href="../../">Atlas ADE</a>, the meta-harness for your agentic workflows. It's free and open source under the MIT licence.</p>
+<blockquote><p>Model a5v3 · last checked against a live meter on 29/10/2026 · measured on an Ultra plan (formerly Max 20x)</p></blockquote>
+<h2 id="what-a-week-holds-by-plan">What a week holds, by plan<a class="anchor" href="#what-a-week-holds-by-plan" aria-label="Link to this section">#</a></h2>
+<div class="table-box"><table><thead><tr><th>Plan</th><th>Price a month</th><th>Opus cache-read tokens a week</th><th>In one five-hour window</th><th>Source</th></tr></thead><tbody><tr><td>Pro</td><td>$20</td><td>1.7B</td><td>220M</td><td>derived from Ultra</td></tr><tr><td>Max (formerly Max 5x)</td><td>$100</td><td>8.7B</td><td>1.1B</td><td>derived from Ultra</td></tr><tr><td>Ultra (formerly Max 20x)</td><td>$200</td><td>17B</td><td>no limit</td><td>measured</td></tr></tbody></table></div>
+<p>Cache reads are the figure the model pins down best; output figures are the least certain part of the fit.</p>
+<p>Only Ultra is measured. Pro and Max are derived from it using the plan-size ratios in u/flobernd's subscription cost model, so treat them as estimates. Earlier versions of this page used the limits <a href="https://she-llac.com/claude-limits">shellac</a> published on 25/01/2026. Note the shape: Ultra's week is about twice Max's, and before 31/10/2026 its five-hour window was about four times Max's. Plan prices checked 31/10/2026.</p>
+<h2 id="the-two-meters">The two meters<a class="anchor" href="#the-two-meters" aria-label="Link to this section">#</a></h2>
+<ul><li><strong>Weekly</strong>: the budget. 100% is one week's allowance, and it resets once a week.</li><li><strong>Five-hour</strong>: a speed limit inside the week on Pro and Max. Ultra has had no five-hour limit since 31/10/2026 (verified accounts). Measured on Ultra before that change, the same work moved it about 3.96× as far as the weekly meter, so a full five-hour window is about 25% of a week.</li></ul>
+<h2 id="interactive-and-headless-use">Interactive and headless use<a class="anchor" href="#interactive-and-headless-use" aria-label="Link to this section">#</a></h2>
+<p>u/flobernd found why: Claude meters a request by where it came from, so an interactive session and a headless <code>claude -p</code> run of the same work move the five-hour window by different amounts.</p>
+<p>Headless runs (<code>claude -p</code>, or the Agent SDK) are metered differently from interactive sessions. On Pro and Max, they use up the five-hour window faster for the same work, while the weekly meter moves much less. One public measurement over three Ultra (formerly Max 20x) accounts, measured before the change, found headless work moved the five-hour meter about 1.5 times as far (<a href="https://github.com/jonathanavis96/claude-usage-tracker/blob/main/docs/findings/2026-10-05-headless-repro/PROOF.md">claude-usage-tracker</a>). In our own data, interactive work showed no weekday peak-hours effect. Our weekly figures include some headless use, so for purely interactive work they may read slightly low.</p>
+<h2 id="what-1-of-an-ultra-week-buys">What 1% of an Ultra week buys<a class="anchor" href="#what-1-of-an-ultra-week-buys" aria-label="Link to this section">#</a></h2>
+<p>Every request spends four kinds of token, and the meter weighs them very differently. Each row is how many tokens of that kind alone would move the weekly meter by 1%.</p>
+<div class="table-box"><table><thead><tr><th>What you spend</th><th>Opus tokens per 1%</th><th>Sonnet tokens per 1%</th><th>Fable 5.1 tokens per 1% (estimate)</th><th>Those Opus tokens at API prices</th></tr></thead><tbody><tr><td>Output</td><td>660k</td><td>1.1M</td><td>160k</td><td>about $13</td></tr><tr><td>Input</td><td>3M</td><td>5M</td><td>700k</td><td>about $12</td></tr><tr><td>Cache read</td><td>170M</td><td>290M</td><td>41M</td><td>about $35</td></tr><tr><td>Cache write</td><td>4.6M</td><td>7.7M</td><td>1.1M</td><td>about $37 at the one-hour price, $23 at the five-minute price</td></tr></tbody></table></div>
+<p>Fable 5.2 (released 9 Nov 2026) is 20% cheaper than 5.1 at API prices. Its plan weight isn't measured yet, so this column is for 5.1.</p>
+<p>On a plan, Claude Code keeps the main conversation's cache for an hour, but subagents get five minutes unless you <a href="../../docs/prompt-cache-ttl/">set their TTL</a>. On an API key it uses five minutes unless you change it, and five-minute writes cost less, so we show both prices.</p>
+<p>Two things stand out. Output is the dearest token: 1% of a week buys only 660k of them. And the plan is most generous on cache: 1% spent on cache reads would cost about $35 at API prices, against $13 spent on output. A full Ultra week is worth roughly $1,200 to $3,700 of Opus 5.5 at API list prices, depending on what you spend it on.</p>
+<h2 id="what-a-turn-costs">What a turn costs<a class="anchor" href="#what-a-turn-costs" aria-label="Link to this section">#</a></h2>
+<div class="table-box"><table><thead><tr><th>One Opus turn, 2,000 tokens out</th><th>Share of a week</th><th>Turns like it in a week</th></tr></thead><tbody><tr><td>200k context, warm cache</td><td>0.004%</td><td>about 24,000</td></tr><tr><td>200k context, cold cache (rewritten)</td><td>0.046%</td><td>about 2,200</td></tr><tr><td>800k context, warm cache</td><td>0.008%</td><td>about 13,000</td></tr><tr><td>800k context, cold cache (rewritten)</td><td>0.176%</td><td>about 570</td></tr></tbody></table></div>
+<p>A warm turn reads the conversation from cache. A cold turn has to write it all again, after a long pause, a compaction or a model switch. At 800k context that one turn costs about 23× a warm one. <a href="../../docs/claude-code-cache-cost/">What a cold cache costs</a> explains why, and <a href="../../docs/prompt-cache-ttl/">setting the cache TTL</a> how to have fewer of them.</p>
+<h2 id="try-it">Try it<a class="anchor" href="#try-it" aria-label="Link to this section">#</a></h2>
+<script type="application/json" id="burn-params">{"prices":{"in":0.285,"out":1.28,"cacheRead":0.008,"coldWrite":0.3},"sets":[{"A":1.181,"B":0.719,"fableWeight":4.25},{"A":0.7285,"B":0.7276,"fableWeight":4.5}],"weights":{"opus":1.0,"sonnet":0.6,"haiku":0.2,"fable":"set.fableWeight"},"fiveHour":3.96}</script><div class="burn-calc" data-burn>
+<div class="burn-in">
+<label class="field">Model<select data-model><option value="opus">Opus</option><option value="sonnet">Sonnet</option><option value="haiku">Haiku</option><option value="fable">Fable</option></select></label>
+<label class="field">Context, thousands of tokens<input data-ctx type="number" min="0" step="10" value="200" inputmode="numeric"></label>
+<label class="field">Cache<select data-cache><option value="warm">warm (read from cache)</option><option value="cold">cold (rewritten)</option></select></label>
+<label class="field">Output tokens per turn<input data-out type="number" min="0" step="100" value="2000" inputmode="numeric"></label>
+<label class="field">Turns<input data-turns type="number" min="0" step="10" value="100" inputmode="numeric"></label>
+</div>
+<dl class="burn-out" aria-live="polite">
+<div><dt>Share of a week</dt><dd data-week>-</dd></div>
+<div><dt>Share of a five-hour window</dt><dd data-five>-</dd></div>
+<div><dt>Turns like this in a full week</dt><dd data-per-week>-</dd></div>
+</dl>
+<p class="fine">Ultra. Where two figures show, the model can't yet tell which of two readings of cache writes is right.</p>
+</div>
+<script src="../../assets/burn.js?v=5fe340c7c4" defer></script>
+<h2 id="where-these-numbers-come-from">Where these numbers come from<a class="anchor" href="#where-these-numbers-come-from" aria-label="Link to this section">#</a></h2>
+<p>We cross-analysed our own OpenTelemetry records of every request against the usage Claude Code reported, and fitted a model that turns token counts into meter points. It is checked against the live meter, and weekly totals land within about 2 points. It isn't exact: it comes from one account's long agentic coding, the Sonnet weight is an estimate, and whether small cache writes count is still open. The per-token rates the fit starts from are the ones <a href="https://www.reddit.com/r/ClaudeCode/comments/1wjsb04/i_measured_what_prompt_caching_actually_costs/">u/flobernd</a> measured; our fit to the live meter adjusts them. API prices are list prices, checked 03/11/2026. We also checked the token side against a real API bill: three Claude Code runs on a dedicated key, priced from their own logs, matched the bill line by line.</p>
+<p>Codex numbers will follow once we have a clean measured week.</p><aside class="onward"><p>These guides come out of building Atlas ADE, the meta-harness for your agentic workflows.</p><p><a href="../../demo/" data-keep-ref>Try it in your browser (no sign-up)</a> · <a href="../../pricing/" data-keep-ref>Get the kit</a></p><script>(function(){var r=new URLSearchParams(location.search).get("ref");if(!r)return;document.querySelectorAll("[data-keep-ref]").forEach(function(a){a.href+="?ref="+encodeURIComponent(r)})})()</script></aside><div class="pager"><a href="../../docs/hidden-costs-of-subagents/"><small>PREVIOUS</small>Why do subagents use so much of my Claude plan?</a><a class="next" href="../../docs/configure/"><small>NEXT</small>What you can configure</a></div></article><aside class="docs-toc" aria-label="On this page"><nav><span class="eyebrow" style="color: var(--faint); font-size: 11px">On this page</span><a class="lv2" href="#what-a-week-holds-by-plan">What a week holds, by plan</a><a class="lv2" href="#the-two-meters">The two meters</a><a class="lv2" href="#interactive-and-headless-use">Interactive and headless use</a><a class="lv2" href="#what-1-of-an-ultra-week-buys">What 1% of an Ultra week buys</a><a class="lv2" href="#what-a-turn-costs">What a turn costs</a><a class="lv2" href="#try-it">Try it</a><a class="lv2" href="#where-these-numbers-come-from">Where these numbers come from</a></nav></aside></div>
+</main>
+<footer class="site-footer">
+  <div class="wrap">
+    <span class="footer-mark">ATLAS ADE · <a href="../../docs/release-notes/">KIT V1.1.0</a> · BUILT WITH ITSELF</span>
+    <nav aria-label="Footer">
+      <a href="../../docs/overview/">Docs</a>
+      <a href="../../demo/">Demo</a>
+      <a href="../../about/">About</a>
+      <a href="../../support/">Support</a>
+      <a href="../../credits/">Credits</a>
+      <a href="../../licence/">Licence</a>
+      <a href="../../privacy/">Privacy</a>
+      <a href="../../pricing/">Get it</a>
+      <a href="https://discord.gg/9yvJjY57xF" rel="noopener">Discord</a>
+      <a href="/cdn-cgi/l/email-protection#caa2afa6a6a58aabbea6abb9e7abaeafe4aeafbc"><span class="__cf_email__" data-cfemail="e68e838a8a89a687928a8795cb878283c8828390">[email&#160;protected]</span></a>
+    </nav>
+  </div>
+</footer>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="../../assets/site.js?v=a0f2f4e237" defer></script>
+<!-- Cloudflare Pages Analytics --><script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "1aea179e6f8a48da80cd9effa38a9688"}'></script><!-- Cloudflare Pages Analytics --></body>
+</html>

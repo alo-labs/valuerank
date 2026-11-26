@@ -215,7 +215,7 @@ def cost_world(**overrides):
 
 def test_cost_diagnostics_markdown_covers_readiness_family_and_subset_bridges():
     text = ed.cost_diagnostics_markdown(cost_world())
-    assert "priced leaves cover 67% of nominal quality weight (Terminal-Bench 4.0 (AA run), AA-LCR v1.1)" in text and "pending components: Coding Agent Index" in text
+    assert "priced leaves cover 67% of nominal quality weight (Terminal-Bench 4.1 (AA run), AA-LCR v1.1)" in text and "pending components: Coding Agent Index" in text
     assert "flagged far from the median ratio: a." in text and "reversals with separated intervals: 1" in text
     assert "have no cost (a); without them (2 rows) the ladder (headline, lower quartile, upper quartile) would be 50.0 / 45.0 / 55.0." in text
     assert ed.costed_ladder_text({"excluded": [], "population": 3, "levels": []}, StubFacts({})).endswith("today every such row has a cost, so the ladder is unchanged.")
@@ -240,7 +240,7 @@ def test_cost_diagnostics_markdown_covers_readiness_family_and_subset_bridges():
             "quality 56.7: 17 can qualify, 5 confirmed; possibly cheapest a, b; quality 60.9: 3 can qualify, 3 confirmed; a confirmed cheapest.") in text
     assert ed.observed_range_text({"status": "unavailable: no bar"}, StubFacts({})).endswith("unavailable: no bar.")
     assert ("- **What would settle the headline bar (E221, not a claim):** rows that can but need not reach quality 56.7, with the mean score their missing leaves would need: "
-            "a 27.3 (FrontierCode 2.0, Terminal-Bench 4.0 (AA run)); b (no missing leaf; reporting precision only).") in text
+            "a 27.3 (FrontierCode 2.0, Terminal-Bench 4.1 (AA run)); b (no missing leaf; reporting precision only).") in text
     assert ed.required_scores_text({"status": "evaluated", "bars": [{"bar": "x", "level": 50.0, "rows": []}]}, StubFacts({})).endswith("no row is open at quality 50.0.")
     assert ed.required_scores_text({"status": "evaluated", "bars": []}, StubFacts({})).endswith("no bar.")
     assert ed.required_scores_text({"status": "unavailable: x", "bars": []}, StubFacts({})).endswith("unavailable: x.")
@@ -284,7 +284,7 @@ def test_coding_share_text_reports_the_median_coding_share():
     assert "make up 30% of the basket's cost (median over 2 configurations with the full basket; 20% to 40%)" in text and "SWE-Atlas" not in text
     # O50: SWE-Atlas QnA's share is stated only while the Coding Agent Index is in the basket.
     with_index = ed.coding_share_text({"rows": rows, "admission": {"admitted": ["coding-agent-index", "gdpval-aa"]}})
-    assert "SWE-Atlas QnA (124 of its 290 tasks) has no quality leaf either" in with_index
+    assert "SWE-Atlas QnA (124 of its 322 tasks) has no quality leaf either" in with_index
     assert ed.coding_share_text({"rows": rows[2:], "admission": {"admitted": []}}) == ""
     # E343: with Terminal-Bench-Science admitted, the share is also printed with its terminal tasks counted.
     science = [row({"frontiercode-2-0": 20.0, "terminal-bench-science": 30.0, "gdpval-aa": 50.0})]
@@ -473,7 +473,10 @@ def test_influence_text_explains_a_negative_cost_allocation_and_workload_dash():
 
     negative = ed.influence_text(v3(-0.12, 0.3))
     assert "covariance allocation of value variance is -12% on the API basis and 30% on the Plan basis" in negative
-    assert "cost accounts for 40% of the variance in API value and 30% in Plan value" in ed.influence_text(v3(0.4, 0.3))
+    assert "cost accounts for 40% of the variance in API value and 30% in Plan value, because quality scores spread more than cost scores" in ed.influence_text(v3(0.4, 0.3))
+    assert "60% of the variance in API value and 70% in Plan value, because cost scores spread more than quality scores" in ed.influence_text(v3(0.6, 0.7))
+    assert "64% of the variance in API value and 3% in Plan value, because cost scores spread more than quality scores on the API basis and less on the other" in ed.influence_text(v3(0.64, 0.03))
+    assert "because cost scores spread more than quality scores on the Plan basis and less on the other" in ed.influence_text(v3(0.2, 0.9))
     # O179: a negative allocation on a basis prints the banner for that basis only.
     assert ed.negative_cost_banner(v3(-0.12, 0.3)) == ("\n\n**API basis: higher-cost configurations tend to score higher here because their quality "
                                                        "differences outweigh their cost penalties (cost's covariance allocation of value variance is -12%); at "
@@ -552,7 +555,7 @@ def test_safety_flags_follow_every_label_their_row_earns():
             {"id": "b", "agentSafety": {"status": "clear"}}, {"id": "c"}]
     facts = SimpleNamespace(v3={"rows": rows}, labels=lambda ids: ", ".join(item.upper() for item in ids))
     assert ed.label_safety_note(facts, ["a@plan", "b", "c"]) == (
-        " Safety-refusal flags (O63; costs and scores unchanged) on these labelled rows: A (0 blocked and 76 fallback attempts of 870).")
+        " Safety-refusal flags (O63; costs and scores unchanged) on these rows: A (0 blocked and 76 fallback attempts of 870).")
     assert ed.label_safety_note(facts, ["b", "c"]) == ""
     # O160: under a firing E41 warning every label note carries it; no labels, no note.
     warned = SimpleNamespace(v3={"rows": rows, "diagnostics": {"workloadCrossCheck": {"warning": "uncertain agreement", "tau": 0.547, "n": 20}}}, labels=facts.labels)
@@ -687,7 +690,7 @@ def test_workload_cross_check_is_printed_suppressed_or_absent_and_shared_costs_n
             return ", ".join(ids)
 
     assert ed.workload_cross_check_text(Labels, None) == "- **Workload cross-check (E41):** not computed."
-    suppressed = {"benchmark": "Terminal-Bench 4.0", "panel": [], "n": 0, "minRows": 8, "tau": None, "interval": None, "warning": None}
+    suppressed = {"benchmark": "Terminal-Bench 4.1", "panel": [], "n": 0, "minRows": 8, "tau": None, "interval": None, "warning": None}
     assert "suppressed: 0 rows, below the 8-row floor; panel (0): none." in ed.workload_cross_check_text(Labels, suppressed)
     computed = dict(suppressed, panel=["a"], n=9, tau=0.4, interval=None, warning="low agreement")
     assert "τ_b 0.40, low agreement; panel (9): a." in ed.workload_cross_check_text(Labels, computed)

@@ -44,9 +44,9 @@ def test_each_ranking_weighs_100_percent_with_software_engineering_at_60():
     assert set(q.ALL_LEAVES) == {leaf.key for leaves in q.TRACKS.values() for leaf in leaves}
 
 
-def test_ai_coding_daily_points_are_scored_out_of_60():
-    assert q.aicd_z(45.0).z == pytest.approx(75.0) and q.aicd_z(70.0).z == 100.0
-    assert q.unclipped_z("aiCodingDaily", 66.0) == pytest.approx(110.0)
+def test_ai_coding_daily_points_are_scored_out_of_80():
+    assert q.aicd_z(60.0).z == pytest.approx(75.0) and q.aicd_z(90.0).z == 100.0
+    assert q.unclipped_z("aiCodingDaily", 88.0) == pytest.approx(110.0)
     # A leaf outside the active ranking keeps its own nominal weight in the clipping audit.
     assert q.clip_audit("aiCodingDaily", 30.0)["weight"] == 10.0
 
@@ -153,7 +153,7 @@ def test_provisional_rule_reports_every_failed_condition():
         summary = q.summarize(observations)
     assert summary.provisional is True
     assert summary.provisional_reasons == (
-        "coverage 22% below 70%",
+        "coverage 17% below 70%",
         "1 SWE leaves observed (need 2)",
         "observed SWE weight 12% below 40%",
         "FrontierCode 2.0 missing",

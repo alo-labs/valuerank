@@ -1,0 +1,2019 @@
+{
+ "schemaVersion": "o11-plan-reports-2026-11-26-v1",
+ "asOf": "2026-11-26",
+ "window": {
+  "start": "2026-10-02",
+  "end": "2026-11-26"
+ },
+ "note": "Each record is a report found by the 2026-11-26 three-stage search. `archive` lists the saved copies with SHA-256 and fetch instant (O165); `byteExact: false` marks a WebFetch rendering that does not satisfy O165. `reading` is the recorder's own application of O11/O86/O87 (reviewer verifies). Values are API-priced dollars per unit as quoted or derived as stated in `derivation`; nothing else is estimated.",
+ "reports": [
+  {
+   "id": "sunaurus-max5x-opus-wk",
+   "provider": "Anthropic",
+   "plan": "Claude Max 5x",
+   "planAs": "Claude Max (plan named \"Max (5x)\" in the post, 2026-11-08, after the 2026-10-30 rename)",
+   "modelId": "claude-opus-5-5",
+   "modelAsStated": "Opus 5.5 (\"Exclusively Opus 5.5\")",
+   "effort": null,
+   "speedMode": null,
+   "stage": "S2",
+   "observer": "sunaurus",
+   "url": "https://www.reddit.com/r/ClaudeCode/comments/1xqlof1/",
+   "mirrorUrls": [
+    "https://arctic-shift.photon-reddit.com/api/posts/ids?ids=1xqlof1"
+   ],
+   "reportDate": "2026-11-08",
+   "windowStated": true,
+   "windowStart": "2026-10-14",
+   "windowEnd": "2026-11-11 (last row open at post time)",
+   "unit": "week",
+   "valueLower": 1250.0,
+   "valueUpper": 1815.08,
+   "quotedSpan": "Weekly limit used / API-equivalent USD per weekly period: 10-14..10-21 100% $1,616.94; 10-21..10-28 100% $1,815.08; 10-28..11-04 99% $1,758.45; 11-04..11-11 98% $1,225.04 (open when posted, 2026-11-08)",
+   "derivation": "Range = $1,225.04/0.98 = $1,250.04 (open week, the post's own \"massively reduced\" row) to $1,815.08. Per-100% values: 1,616.94; 1,815.08; 1,758.45/0.99 = 1,776.21; 1,250.04. The 10-14..10-21 row spans the 2026-10-17T13:00Z split.",
+   "flags": {
+    "provisional": false,
+    "mixedModel": false,
+    "modelUnstated": false,
+    "tierUnstated": false,
+    "lowerBound": false,
+    "aggregator": false,
+    "challenged": false,
+    "derived": false,
+    "anomaly": false,
+    "spansSplit": false,
+    "nonInteractiveEntrypoint": false,
+    "controlledSynthetic": false,
+    "undercountRisk": true,
+    "outsideWindow": false
+   },
+   "archive": [
+    {
+     "file": "archive/reddit/1xqlof1-sunaurus-max5x.posts.json",
+     "sha256": "dfce330d015c0016d33f82d543dc491e1b39865f22f830f370fdc173c300e93f",
+     "bytes": 3352,
+     "fetchedAt": "2026-11-26T03:40:07Z",
+     "url": "https://arctic-shift.photon-reddit.com/api/posts/ids?ids=1xqlof1"
+    },
+    {
+     "file": "archive/reddit/1xqlof1-sunaurus-max5x.comments.json",
+     "sha256": "e88386d1a45a411d4f8ea9acc129bd8e9d8099bfc858962dce9ad747c512c07f",
+     "bytes": 71341,
+     "fetchedAt": "2026-11-26T03:35:54Z",
+     "url": "https://arctic-shift.photon-reddit.com/api/comments/tree?link_id=1xqlof1&limit=500"
+    }
+   ],
+   "reading": {
+    "eligibleInPartition": true,
+    "why": "single model (Opus 5.5), tier stated, tied to a meter fraction, in window; the 10-14 row spans a split and is excluded; the open 11-04 row is 30% below the other three and is the observer's own suspected cut"
+   }
+  },
+  {
+   "id": "wum1ha1nho-ultra-opus-wk",
+   "provider": "Anthropic",
+   "plan": "Claude Max 20x",
+   "planAs": "Ultra (post says \"Max 20x\"; weekly bar and five-hour bar both visible, so not a verified Ultra account)",
+   "modelId": "claude-opus-5-5",
+   "modelAsStated": "Opus 5.5 (days with at least 95% Opus 5.5 and a weekly bar move of at least 20 points)",
+   "effort": null,
+   "speedMode": null,
+   "stage": "S2",
+   "observer": "WuM1ha1nho",
+   "url": "https://www.reddit.com/r/ClaudeCode/comments/1xy4zwk/",
+   "mirrorUrls": [
+    "https://arctic-shift.photon-reddit.com/api/posts/ids?ids=1xy4zwk"
+   ],
+   "reportDate": "2026-11-16",
+   "windowStated": true,
+   "windowStart": "2026-09 (8 weeks of logs)",
+   "windowEnd": "2026-11-16",
+   "unit": "week",
+   "valueLower": 2000.0,
+   "valueUpper": 2800.0,
+   "quotedSpan": "\"On Max 20x, 1% of the weekly bar bought about $26 of Opus 5.5 work ... a full week of the bar is about $2,600\"; \"Before November, 1% ... $26.40 ... November 1 to 3 came in at $20 to $22 ... November 6 and 16 were back at $26 to $28\"",
+   "derivation": "$26/1% x 100 = $2,600; range over post-10-30 days: $20-22 (Nov 1-3) to $26-28 (Nov 6, 16) per 1% = $2,000-$2,800 per week. Source of dollars: Claude Code OpenTelemetry and a Cloudflare AI Gateway log, not transcripts (observer says transcripts undercount 3-7%, up to 25% on some October days).",
+   "flags": {
+    "provisional": false,
+    "mixedModel": false,
+    "modelUnstated": false,
+    "tierUnstated": false,
+    "lowerBound": false,
+    "aggregator": false,
+    "challenged": false,
+    "derived": false,
+    "anomaly": false,
+    "spansSplit": false,
+    "nonInteractiveEntrypoint": false,
+    "controlledSynthetic": false,
+    "undercountRisk": false,
+    "outsideWindow": false
+   },
+   "archive": [
+    {
+     "file": "archive/reddit/1xy4zwk-wum1ha1nho-ultra.posts.json",
+     "sha256": "a74bd232bf7d16ce0e2d6321d82486f03f98ca4c6bb8c43e3137170315e77f2d",
+     "bytes": 9448,
+     "fetchedAt": "2026-11-26T03:42:38Z",
+     "url": "https://arctic-shift.photon-reddit.com/api/posts/ids?ids=1xy4zwk"
+    },
+    {
+     "file": "archive/reddit/1xy4zwk-wum1ha1nho-ultra.comments.json",
+     "sha256": "2a223f0970ca127332198b9f44d355402586eefe15bf25a42ae6079bdc216043",
+     "bytes": 5176,
+     "fetchedAt": "2026-11-26T03:35:48Z",
+     "url": "https://arctic-shift.photon-reddit.com/api/comments/tree?link_id=1xy4zwk&limit=500"
+    }
+   ],
+   "reading": {
+    "eligibleInPartition": true,
+    "why": "single-model days, tier stated, telemetry-priced; the same post gives Sonnet 5.5 (about $19 per 1%) and Fable 5.2 (about $15 per 1%) only by a \"credit table\" reading, so those two are recorded as derived and not counted"
+   }
+  },
+  {
+   "id": "wum1ha1nho-ultra-sonnet-wk-derived",
+   "provider": "Anthropic",
+   "plan": "Claude Max 20x",
+   "planAs": "Ultra",
+   "modelId": "claude-sonnet-5-5",
+   "modelAsStated": "Sonnet 5.5",
+   "effort": null,
+   "speedMode": null,
+   "stage": "S2",
+   "observer": "WuM1ha1nho",
+   "url": "https://www.reddit.com/r/ClaudeCode/comments/1xy4zwk/",
+   "mirrorUrls": [
+    "https://arctic-shift.photon-reddit.com/api/posts/ids?ids=1xy4zwk"
+   ],
+   "reportDate": "2026-11-16",
+   "windowStated": true,
+   "windowStart": null,
+   "windowEnd": "2026-11-16",
+   "unit": "week",
+   "valueLower": 1900.0,
+   "valueUpper": 1900.0,
+   "quotedSpan": "\"By the credit table, the same 1% buys about $19 of Sonnet 5.5\" (\"Sonnet 5.5 ... about $19 ... about $1,900\")",
+   "derivation": "from the credit table in ~/.claude.json, not from a Sonnet-only meter reading",
+   "flags": {
+    "provisional": false,
+    "mixedModel": false,
+    "modelUnstated": false,
+    "tierUnstated": false,
+    "lowerBound": false,
+    "aggregator": false,
+    "challenged": false,
+    "derived": true,
+    "anomaly": false,
+    "spansSplit": false,
+    "nonInteractiveEntrypoint": false,
+    "controlledSynthetic": false,
+    "undercountRisk": false,
+    "outsideWindow": false
+   },
+   "archive": [
+    {
+     "file": "archive/reddit/1xy4zwk-wum1ha1nho-ultra.posts.json",
+     "sha256": "a74bd232bf7d16ce0e2d6321d82486f03f98ca4c6bb8c43e3137170315e77f2d",
+     "bytes": 9448,
+     "fetchedAt": "2026-11-26T03:42:38Z",
+     "url": "https://arctic-shift.photon-reddit.com/api/posts/ids?ids=1xy4zwk"
+    }
+   ],
+   "reading": {
+    "eligibleInPartition": false,
+    "why": "derived from a credit table, not a meter reading on Sonnet 5.5"
+   }
+  },
+  {
+   "id": "wum1ha1nho-ultra-fable52-wk-derived",
+   "provider": "Anthropic",
+   "plan": "Claude Max 20x",
+   "planAs": "Ultra",
+   "modelId": "claude-fable-5-2",
+   "modelAsStated": "Fable 5.2",
+   "effort": null,
+   "speedMode": null,
+   "stage": "S2",
+   "observer": "WuM1ha1nho",
+   "url": "https://www.reddit.com/r/ClaudeCode/comments/1xy4zwk/",
+   "mirrorUrls": [
+    "https://arctic-shift.photon-reddit.com/api/posts/ids?ids=1xy4zwk"
+   ],
+   "reportDate": "2026-11-16",
+   "windowStated": true,
+   "windowStart": null,
+   "windowEnd": "2026-11-16",
+   "unit": "week",
+   "valueLower": 740.0,
+   "valueUpper": 1500.0,
+   "quotedSpan": "\"Fable 5.2 | 6,667 credits per 1M | about $15 per 1% | about $740 (Fable can use at most half the week)\"; \"I measured the per-dollar figure on my own five-hour bar and got 1.80, close to the table's 1.79\"",
+   "derivation": "$15 x 100 = $1,500 for a whole week; $740 is the post's figure for the half-week Fable cap. Credit-table derivation with one own cross-check of the Fable/Opus per-dollar ratio on the five-hour bar (1.80).",
+   "flags": {
+    "provisional": false,
+    "mixedModel": false,
+    "modelUnstated": false,
+    "tierUnstated": false,
+    "lowerBound": false,
+    "aggregator": false,
+    "challenged": false,
+    "derived": true,
+    "anomaly": false,
+    "spansSplit": false,
+    "nonInteractiveEntrypoint": false,
+    "controlledSynthetic": false,
+    "undercountRisk": false,
+    "outsideWindow": false
+   },
+   "archive": [
+    {
+     "file": "archive/reddit/1xy4zwk-wum1ha1nho-ultra.posts.json",
+     "sha256": "a74bd232bf7d16ce0e2d6321d82486f03f98ca4c6bb8c43e3137170315e77f2d",
+     "bytes": 9448,
+     "fetchedAt": "2026-11-26T03:42:38Z",
+     "url": "https://arctic-shift.photon-reddit.com/api/posts/ids?ids=1xy4zwk"
+    }
+   ],
+   "reading": {
+    "eligibleInPartition": false,
+    "why": "derived from a credit table"
+   }
+  },
+  {
+   "id": "gianfrugo-ultra-opus-wk",
+   "provider": "Anthropic",
+   "plan": "Claude Max 20x",
+   "planAs": "Ultra (\"Ultra plan\", post 2026-11-14)",
+   "modelId": "claude-opus-5-5",
+   "modelAsStated": "Opus 5.5 (\"one account that only runs Opus 5.5 agent work, fully metered\")",
+   "effort": null,
+   "speedMode": null,
+   "stage": "S2",
+   "observer": "gianfrugo",
+   "url": "https://www.reddit.com/r/ClaudeAI/comments/1xwfhwn/",
+   "mirrorUrls": [
+    "https://arctic-shift.photon-reddit.com/api/posts/ids?ids=1xwfhwn"
+   ],
+   "reportDate": "2026-11-14",
+   "windowStated": true,
+   "windowStart": null,
+   "windowEnd": "2026-11-14 (current weekly window)",
+   "unit": "week",
+   "valueLower": 2600.0,
+   "valueUpper": 2618.0,
+   "quotedSpan": "\"68% of the weekly limit matched about $1,780 at list prices, so 100% = $2,600/week. About half of that value was cache reads.\"",
+   "derivation": "$1,780 / 0.68 = $2,617.6; the post states about $2,600.",
+   "flags": {
+    "provisional": false,
+    "mixedModel": false,
+    "modelUnstated": false,
+    "tierUnstated": false,
+    "lowerBound": false,
+    "aggregator": false,
+    "challenged": false,
+    "derived": false,
+    "anomaly": false,
+    "spansSplit": false,
+    "nonInteractiveEntrypoint": false,
+    "controlledSynthetic": false,
+    "undercountRisk": true,
+    "outsideWindow": false
+   },
+   "archive": [
+    {
+     "file": "archive/reddit/1xwfhwn-gianfrugo-ultra.posts.json",
+     "sha256": "c6b9f4518fb409d6eb23c10108bec1ba331db55622ecde9ffb58140313dd6d8d",
+     "bytes": 7652,
+     "fetchedAt": "2026-11-26T03:42:39Z",
+     "url": "https://arctic-shift.photon-reddit.com/api/posts/ids?ids=1xwfhwn"
+    },
+    {
+     "file": "archive/reddit/1xwfhwn-gianfrugo-ultra.comments.json",
+     "sha256": "f00663235b32a55fbe7dd41069228fea95c031930998f529ba5567dfaeff6354",
+     "bytes": 12889,
+     "fetchedAt": "2026-11-26T03:35:49Z",
+     "url": "https://arctic-shift.photon-reddit.com/api/comments/tree?link_id=1xwfhwn&limit=500"
+    }
+   ],
+   "reading": {
+    "eligibleInPartition": true,
+    "why": "single model, tier stated, percentage-tied; priced from Claude Code transcripts (undercount risk 2-16% per the 2026-11-05 record)"
+   }
+  },
+  {
+   "id": "mrc2021-ultra-opus-wk",
+   "provider": "Anthropic",
+   "plan": "Claude Max 20x",
+   "planAs": "Ultra (\"Ultra weekly usage\")",
+   "modelId": "claude-opus-5-5",
+   "modelAsStated": "Opus 5.5 medium",
+   "effort": "medium",
+   "speedMode": null,
+   "stage": "S2",
+   "observer": "MRC2021",
+   "url": "https://www.reddit.com/r/ClaudeCode/comments/1xumexe/",
+   "mirrorUrls": [
+    "https://arctic-shift.photon-reddit.com/api/posts/ids?ids=1xumexe"
+   ],
+   "reportDate": "2026-11-12",
+   "windowStated": false,
+   "windowStart": null,
+   "windowEnd": "2026-11-12",
+   "unit": "week",
+   "valueLower": 2098.0,
+   "valueUpper": 2098.0,
+   "quotedSpan": "Opus 5.5 medium: API cost per task $0.128, weekly limit used per 1,000 tasks 6.1%; 630 tasks, ~4% of the Ultra weekly meter per model",
+   "derivation": "$0.128 x 1,000 / 6.1% = $20.98 per 1% = $2,098 per 100%. Derived by the recorder from the two quoted cells.",
+   "flags": {
+    "provisional": false,
+    "mixedModel": false,
+    "modelUnstated": false,
+    "tierUnstated": false,
+    "lowerBound": false,
+    "aggregator": false,
+    "challenged": false,
+    "derived": false,
+    "anomaly": false,
+    "spansSplit": false,
+    "nonInteractiveEntrypoint": false,
+    "controlledSynthetic": true,
+    "undercountRisk": false,
+    "outsideWindow": false
+   },
+   "archive": [
+    {
+     "file": "archive/reddit/1xumexe-mrc2021-ultra.posts.json",
+     "sha256": "e7591990f227e8313fd7aacc95cffa7daa6910ba9e83a43862c6263971359a64",
+     "bytes": 4188,
+     "fetchedAt": "2026-11-26T03:40:06Z",
+     "url": "https://arctic-shift.photon-reddit.com/api/posts/ids?ids=1xumexe"
+    },
+    {
+     "file": "archive/reddit/1xumexe-mrc2021-ultra.comments.json",
+     "sha256": "df2557f26d6115db534d932ee3d850e7009665b4fa8081db48c149906274e2e0",
+     "bytes": 29291,
+     "fetchedAt": "2026-11-26T03:35:51Z",
+     "url": "https://arctic-shift.photon-reddit.com/api/comments/tree?link_id=1xumexe&limit=500"
+    }
+   ],
+   "reading": {
+    "eligibleInPartition": true,
+    "why": "controlled run, one model per arm, meter-tied; small-meter move (about 4 points) so the integer rounding is wide"
+   }
+  },
+  {
+   "id": "mrc2021-ultra-fable52-wk",
+   "provider": "Anthropic",
+   "plan": "Claude Max 20x",
+   "planAs": "Ultra",
+   "modelId": "claude-fable-5-2",
+   "modelAsStated": "Fable 5.2 medium",
+   "effort": "medium",
+   "speedMode": null,
+   "stage": "S2",
+   "observer": "MRC2021",
+   "url": "https://www.reddit.com/r/ClaudeCode/comments/1xumexe/",
+   "mirrorUrls": [
+    "https://arctic-shift.photon-reddit.com/api/posts/ids?ids=1xumexe"
+   ],
+   "reportDate": "2026-11-12",
+   "windowStated": false,
+   "windowStart": null,
+   "windowEnd": "2026-11-12",
+   "unit": "week",
+   "valueLower": 1130.0,
+   "valueUpper": 1130.0,
+   "quotedSpan": "Fable 5.2 medium: API cost per task $0.130, weekly limit used per 1,000 tasks 11.5%; 210 tasks",
+   "derivation": "$0.130 x 1,000 / 11.5% = $11.30 per 1% = $1,130 per 100% of the weekly bar (Fable may use at most 50% of the week, so a full Fable limit holds about $565 on this reading)",
+   "flags": {
+    "provisional": false,
+    "mixedModel": false,
+    "modelUnstated": false,
+    "tierUnstated": false,
+    "lowerBound": false,
+    "aggregator": false,
+    "challenged": false,
+    "derived": false,
+    "anomaly": false,
+    "spansSplit": false,
+    "nonInteractiveEntrypoint": false,
+    "controlledSynthetic": true,
+    "undercountRisk": false,
+    "outsideWindow": false
+   },
+   "archive": [
+    {
+     "file": "archive/reddit/1xumexe-mrc2021-ultra.posts.json",
+     "sha256": "e7591990f227e8313fd7aacc95cffa7daa6910ba9e83a43862c6263971359a64",
+     "bytes": 4188,
+     "fetchedAt": "2026-11-26T03:40:06Z",
+     "url": "https://arctic-shift.photon-reddit.com/api/posts/ids?ids=1xumexe"
+    },
+    {
+     "file": "archive/reddit/1xumexe-mrc2021-ultra.comments.json",
+     "sha256": "df2557f26d6115db534d932ee3d850e7009665b4fa8081db48c149906274e2e0",
+     "bytes": 29291,
+     "fetchedAt": "2026-11-26T03:35:51Z",
+     "url": "https://arctic-shift.photon-reddit.com/api/comments/tree?link_id=1xumexe&limit=500"
+    }
+   ],
+   "reading": {
+    "eligibleInPartition": true,
+    "why": "controlled run, single model, meter-tied; the one directly measured Fable 5.2 weekly reading besides MulletIQ"
+   }
+  },
+  {
+   "id": "mrc2021-ultra-sonnet55-wk",
+   "provider": "Anthropic",
+   "plan": "Claude Max 20x",
+   "planAs": "Ultra",
+   "modelId": "claude-sonnet-5-5",
+   "modelAsStated": "Sonnet 5.5 high",
+   "effort": "high",
+   "speedMode": null,
+   "stage": "S2",
+   "observer": "MRC2021",
+   "url": "https://www.reddit.com/r/ClaudeCode/comments/1xumexe/",
+   "mirrorUrls": [
+    "https://arctic-shift.photon-reddit.com/api/posts/ids?ids=1xumexe"
+   ],
+   "reportDate": "2026-11-12",
+   "windowStated": false,
+   "windowStart": null,
+   "windowEnd": "2026-11-12",
+   "unit": "week",
+   "valueLower": 2074.0,
+   "valueUpper": 2074.0,
+   "quotedSpan": "Sonnet 5.5 high: API cost per task $0.056, weekly limit used per 1,000 tasks 2.7%; 600 tasks",
+   "derivation": "$0.056 x 1,000 / 2.7% = $20.74 per 1% = $2,074 per 100%",
+   "flags": {
+    "provisional": false,
+    "mixedModel": false,
+    "modelUnstated": false,
+    "tierUnstated": false,
+    "lowerBound": false,
+    "aggregator": false,
+    "challenged": false,
+    "derived": false,
+    "anomaly": false,
+    "spansSplit": false,
+    "nonInteractiveEntrypoint": false,
+    "controlledSynthetic": true,
+    "undercountRisk": false,
+    "outsideWindow": false
+   },
+   "archive": [
+    {
+     "file": "archive/reddit/1xumexe-mrc2021-ultra.posts.json",
+     "sha256": "e7591990f227e8313fd7aacc95cffa7daa6910ba9e83a43862c6263971359a64",
+     "bytes": 4188,
+     "fetchedAt": "2026-11-26T03:40:06Z",
+     "url": "https://arctic-shift.photon-reddit.com/api/posts/ids?ids=1xumexe"
+    },
+    {
+     "file": "archive/reddit/1xumexe-mrc2021-ultra.comments.json",
+     "sha256": "df2557f26d6115db534d932ee3d850e7009665b4fa8081db48c149906274e2e0",
+     "bytes": 29291,
+     "fetchedAt": "2026-11-26T03:35:51Z",
+     "url": "https://arctic-shift.photon-reddit.com/api/comments/tree?link_id=1xumexe&limit=500"
+    }
+   ],
+   "reading": {
+    "eligibleInPartition": true,
+    "why": "controlled run, single model, meter-tied; first Sonnet 5.5 weekly reading on a tier"
+   }
+  },
+  {
+   "id": "mulletiq-ultra-fable52-wk",
+   "provider": "Anthropic",
+   "plan": "Claude Max 20x",
+   "planAs": "Ultra (\"our own Claude Ultra account\")",
+   "modelId": "claude-fable-5-2",
+   "modelAsStated": "Fable 5.2 (separate weekly Fable meter)",
+   "effort": null,
+   "speedMode": null,
+   "stage": "S3",
+   "observer": "Merijn (MulletIQ)",
+   "url": "https://mulletiq.com/blog/claude-fable-5-2-usage-limits",
+   "mirrorUrls": [],
+   "reportDate": "2026-11-14",
+   "windowStated": true,
+   "windowStart": "2026-11-14 (one day, meter read every 30 minutes)",
+   "windowEnd": "2026-11-14",
+   "unit": "week",
+   "valueLower": 560.0,
+   "valueUpper": 720.0,
+   "quotedSpan": "\"On November 14 it went from 0% to 8% while this account used $50.28 of Fable, so 100% is about $630\" (range $560 to $720); a second method puts it at about $570",
+   "derivation": "$50.28 / 0.08 = $628.5. The $630 is the value of the Fable meter at 100% (the Fable limit, which is at most 50% of the weekly limit).",
+   "flags": {
+    "provisional": false,
+    "mixedModel": false,
+    "modelUnstated": false,
+    "tierUnstated": false,
+    "lowerBound": false,
+    "aggregator": false,
+    "challenged": false,
+    "derived": false,
+    "anomaly": false,
+    "spansSplit": false,
+    "nonInteractiveEntrypoint": false,
+    "controlledSynthetic": false,
+    "undercountRisk": false,
+    "outsideWindow": false
+   },
+   "archive": [
+    {
+     "file": "archive/stage3-found/mulletiq-fable-52-usage-limits.html",
+     "sha256": "96d466c2eb65401ede731fecd6cd969466881ce7c862b11ecff666a871c44d66",
+     "bytes": 41690,
+     "fetchedAt": "2026-11-26T03:50:30Z",
+     "url": "https://mulletiq.com/blog/claude-fable-5-2-usage-limits"
+    }
+   ],
+   "reading": {
+    "eligibleInPartition": true,
+    "why": "single model, tier stated, direct meter reading; found only by stage 3. Its Opus 5.5 week ($2,494) is from an earlier September-October measurement, so it is listed in the next record as not counted"
+   }
+  },
+  {
+   "id": "mulletiq-ultra-opus55-wk-earlier",
+   "provider": "Anthropic",
+   "plan": "Claude Max 20x",
+   "planAs": "Ultra",
+   "modelId": "claude-opus-5-5",
+   "modelAsStated": "Opus 5.5",
+   "effort": null,
+   "speedMode": null,
+   "stage": "S3",
+   "observer": "Merijn (MulletIQ)",
+   "url": "https://mulletiq.com/blog/claude-fable-5-2-usage-limits",
+   "mirrorUrls": [],
+   "reportDate": "2026-11-14",
+   "windowStated": false,
+   "windowStart": "2026-09 to 2026-10 (measured earlier)",
+   "windowEnd": "2026-11-14",
+   "unit": "week",
+   "valueLower": 2494.0,
+   "valueUpper": 2494.0,
+   "quotedSpan": "\"The Opus 5.5 weekly limit of $2,494 comes from our September and October measurement.\"; Max $1,248 is \"a calculation\" (2.00x ratio)",
+   "derivation": null,
+   "flags": {
+    "provisional": false,
+    "mixedModel": false,
+    "modelUnstated": false,
+    "tierUnstated": false,
+    "lowerBound": false,
+    "aggregator": false,
+    "challenged": false,
+    "derived": false,
+    "anomaly": false,
+    "spansSplit": true,
+    "nonInteractiveEntrypoint": false,
+    "controlledSynthetic": false,
+    "undercountRisk": false,
+    "outsideWindow": false
+   },
+   "archive": [
+    {
+     "file": "archive/stage3-found/mulletiq-fable-52-usage-limits.html",
+     "sha256": "96d466c2eb65401ede731fecd6cd969466881ce7c862b11ecff666a871c44d66",
+     "bytes": 41690,
+     "fetchedAt": "2026-11-26T03:50:30Z",
+     "url": "https://mulletiq.com/blog/claude-fable-5-2-usage-limits"
+    }
+   ],
+   "reading": {
+    "eligibleInPartition": false,
+    "why": "measured before the 2026-10-30 Ultra split (September-October), restated in a post dated 2026-11-14"
+   }
+  },
+  {
+   "id": "theo-ultra-opus55-wk",
+   "provider": "Anthropic",
+   "plan": "Claude Max 20x",
+   "planAs": "Ultra (\"The $200 Claude Ultra plan\")",
+   "modelId": "claude-opus-5-5",
+   "modelAsStated": "Opus 5.5 only",
+   "effort": null,
+   "speedMode": null,
+   "stage": "S2",
+   "observer": "theo (t3.gg, @theo)",
+   "url": "https://x.com/theo/status/2119960608816988596",
+   "mirrorUrls": [
+    "https://api.fxtwitter.com/theo/status/2119960608816988596",
+    "https://bsky.app/profile/theo.xmirror.bot/post/3mzwbgxdaru25",
+    "https://pasqualepillitteri.it/en/news/31652/claude-ultra-opus-5-5-fable-5-2-usage-limits"
+   ],
+   "reportDate": "2026-11-10",
+   "windowStated": true,
+   "windowStart": "2026-08-11",
+   "windowEnd": "2026-11-09",
+   "unit": "week",
+   "valueLower": 3421.0,
+   "valueUpper": 3421.0,
+   "quotedSpan": "Chart: \"What $200 of Claude Ultra gets you ... A month of only Opus 5.5 is worth $14,662 at API prices ... One month is 30 days, which is 4.3 weekly limits. One week of only Opus 5.5 is worth $3,421. Claude Ultra ($200 per month) - one account - API list prices - measured from 1.1M proxied requests, Aug 11 to Nov 9, 2026\"",
+   "derivation": "$14,662 / 4.3 = $3,410; the chart states $3,421.",
+   "flags": {
+    "provisional": false,
+    "mixedModel": false,
+    "modelUnstated": false,
+    "tierUnstated": false,
+    "lowerBound": false,
+    "aggregator": false,
+    "challenged": false,
+    "derived": false,
+    "anomaly": false,
+    "spansSplit": true,
+    "nonInteractiveEntrypoint": false,
+    "controlledSynthetic": false,
+    "undercountRisk": false,
+    "outsideWindow": false
+   },
+   "archive": [
+    {
+     "file": "archive/x/x-theo-2119960608816988596.json",
+     "sha256": "b1ee39cf1cff65bf503ffe5658590e21eb8a435bc8be054cdd06647848dd7786",
+     "bytes": 2383,
+     "fetchedAt": "2026-11-26T03:26:15Z",
+     "url": "https://api.fxtwitter.com/theo/status/2119960608816988596"
+    },
+    {
+     "file": "archive/x/x-theo-chart.jpg",
+     "sha256": "491eb8007a5227010eddb89b6b85f3a0e238c0a6667b62caec3cc39157b48b68",
+     "bytes": 89146,
+     "fetchedAt": "2026-11-26T03:26:19Z",
+     "url": "https://pbs.twimg.com/media/HWuc23BbYAAtFvt.jpg?name=orig"
+    },
+    {
+     "file": "archive/x/theo-bluesky-mirror-3mzwbgxdaru25.thread.json",
+     "sha256": "bbd415e21f8a558518de94df0920caead79f497f7a2bfd801077ac968f251a05",
+     "bytes": 5260,
+     "fetchedAt": "2026-11-26T03:45:41Z",
+     "url": "https://public.api.bsky.app/xrpc/app.bsky.feed.getPostThread?uri=at%3A%2F%2Fdid%3Aplc%3Abvsrpph72nmygfwlrzb5xkfm%2Fapp.bsky.feed.post%2F3mzwbgxdaru25&depth=2"
+    }
+   ],
+   "reading": {
+    "eligibleInPartition": false,
+    "why": "the measured span (Aug 11 to Nov 9) crosses the 09-14, 09-22, 10-09, 10-17T13:00Z and 10-30 splits; one pooled number for 1.1M requests, not a meter-fraction reading"
+   }
+  },
+  {
+   "id": "theo-ultra-fable52-month",
+   "provider": "Anthropic",
+   "plan": "Claude Max 20x",
+   "planAs": "Ultra",
+   "modelId": "claude-fable-5-2",
+   "modelAsStated": "Fable 5.2 only",
+   "effort": null,
+   "speedMode": null,
+   "stage": "S2",
+   "observer": "theo (t3.gg, @theo)",
+   "url": "https://x.com/theo/status/2119960608816988596",
+   "mirrorUrls": [
+    "https://api.fxtwitter.com/theo/status/2119960608816988596"
+   ],
+   "reportDate": "2026-11-10",
+   "windowStated": true,
+   "windowStart": "2026-08-11",
+   "windowEnd": "2026-11-09",
+   "unit": "month",
+   "valueLower": 3021.0,
+   "valueUpper": 3021.0,
+   "quotedSpan": "\"Fable 5.2 only $3,021 (15x the $200 ... 79% less)\"; \"Fable 5.1 only $2,197\"; the tweet text says \"only around $3,000 of Fable 5.5\" while the chart labels the model Fable 5.2",
+   "derivation": "$3,021 per month at 4.3 weekly limits = $703 per week",
+   "flags": {
+    "provisional": false,
+    "mixedModel": false,
+    "modelUnstated": false,
+    "tierUnstated": false,
+    "lowerBound": false,
+    "aggregator": false,
+    "challenged": false,
+    "derived": true,
+    "anomaly": false,
+    "spansSplit": true,
+    "nonInteractiveEntrypoint": false,
+    "controlledSynthetic": false,
+    "undercountRisk": false,
+    "outsideWindow": false
+   },
+   "archive": [
+    {
+     "file": "archive/x/x-theo-2119960608816988596.json",
+     "sha256": "b1ee39cf1cff65bf503ffe5658590e21eb8a435bc8be054cdd06647848dd7786",
+     "bytes": 2383,
+     "fetchedAt": "2026-11-26T03:26:15Z",
+     "url": "https://api.fxtwitter.com/theo/status/2119960608816988596"
+    },
+    {
+     "file": "archive/x/x-theo-chart.jpg",
+     "sha256": "491eb8007a5227010eddb89b6b85f3a0e238c0a6667b62caec3cc39157b48b68",
+     "bytes": 89146,
+     "fetchedAt": "2026-11-26T03:26:19Z",
+     "url": "https://pbs.twimg.com/media/HWuc23BbYAAtFvt.jpg?name=orig"
+    }
+   ],
+   "reading": {
+    "eligibleInPartition": false,
+    "why": "the Fable 5.2 figure cannot rest on a measurement span that begins 2026-08-11 (Fable 5.2 launched 2026-11-09); the tweet and chart disagree on the model name"
+   }
+  },
+  {
+   "id": "hhspiny-max-opus55-5h",
+   "provider": "Anthropic",
+   "plan": "Claude Max 5x",
+   "planAs": "Max (\"$100/mo plan\", post 2026-11-16)",
+   "modelId": "claude-opus-5-5",
+   "modelAsStated": "Opus 5.5",
+   "effort": null,
+   "speedMode": null,
+   "stage": "S2",
+   "observer": "hhspiny",
+   "url": "https://www.reddit.com/r/ClaudeCode/comments/1xxtb2r/",
+   "mirrorUrls": [
+    "https://arctic-shift.photon-reddit.com/api/posts/ids?ids=1xxtb2r"
+   ],
+   "reportDate": "2026-11-16",
+   "windowStated": false,
+   "windowStart": null,
+   "windowEnd": "2026-11-16",
+   "unit": "5h",
+   "valueLower": 66.0,
+   "valueUpper": 131.0,
+   "quotedSpan": "Per 5-hour window, equivalent API $ for one token class at a time (about 2,000 requests per arm): Opus 5.5 fresh input $67, 5m cache write $66, 1h cache write $109, cache read $131, output $66. \"Monthly equivalent on a $100/mo plan ... Opus 5.5 input/output basis ~$3,450/mo (34x), cache-read basis ~$6,860/mo (69x)\"",
+   "derivation": "Range = cheapest class ($66) to cache read ($131); a real workload sits between. Weekly is the observer's own 12.2 x five-hour cycles; monthly = weekly x 30/7. Read from Anthropic unified rate-limit headers (1% resolution).",
+   "flags": {
+    "provisional": false,
+    "mixedModel": false,
+    "modelUnstated": false,
+    "tierUnstated": false,
+    "lowerBound": false,
+    "aggregator": false,
+    "challenged": false,
+    "derived": true,
+    "anomaly": false,
+    "spansSplit": false,
+    "nonInteractiveEntrypoint": false,
+    "controlledSynthetic": true,
+    "undercountRisk": false,
+    "outsideWindow": false
+   },
+   "archive": [
+    {
+     "file": "archive/reddit/1xxtb2r-hhspiny-max.posts.json",
+     "sha256": "0728d9fc6c066317ae57abf8bd7b050fe191d35c0d141a5d802bc72d7bfb5f58",
+     "bytes": 4751,
+     "fetchedAt": "2026-11-26T03:40:07Z",
+     "url": "https://arctic-shift.photon-reddit.com/api/posts/ids?ids=1xxtb2r"
+    },
+    {
+     "file": "archive/reddit/1xxtb2r-hhspiny-max.comments.json",
+     "sha256": "fcaa8e23849fac48ba532a159092861b060f2aa318c7927890e21cb26425faae",
+     "bytes": 8151,
+     "fetchedAt": "2026-11-26T03:35:53Z",
+     "url": "https://arctic-shift.photon-reddit.com/api/comments/tree?link_id=1xxtb2r&limit=500"
+    }
+   ],
+   "reading": {
+    "eligibleInPartition": false,
+    "why": "single-token-class synthetic arms, not a mixed workload; weekly and monthly values are derived from the 12.2 ratio. Counts at most as a cross-check"
+   }
+  },
+  {
+   "id": "hhspiny-max-sonnet55-5h",
+   "provider": "Anthropic",
+   "plan": "Claude Max 5x",
+   "planAs": "Max (\"$100/mo plan\")",
+   "modelId": "claude-sonnet-5-5",
+   "modelAsStated": "Sonnet 5.5",
+   "effort": null,
+   "speedMode": null,
+   "stage": "S2",
+   "observer": "hhspiny",
+   "url": "https://www.reddit.com/r/ClaudeCode/comments/1xxtb2r/",
+   "mirrorUrls": [
+    "https://arctic-shift.photon-reddit.com/api/posts/ids?ids=1xxtb2r"
+   ],
+   "reportDate": "2026-11-16",
+   "windowStated": false,
+   "windowStart": null,
+   "windowEnd": "2026-11-16",
+   "unit": "5h",
+   "valueLower": 49.0,
+   "valueUpper": 95.0,
+   "quotedSpan": "Sonnet 5.5 per 5-hour window: fresh input $50, 5m cache write $49, 1h cache write $77, cache read $95, output $49; monthly ~$2,550 (26x) input/output basis, ~$4,990 (50x) cache-read basis",
+   "derivation": "as for Opus 5.5",
+   "flags": {
+    "provisional": false,
+    "mixedModel": false,
+    "modelUnstated": false,
+    "tierUnstated": false,
+    "lowerBound": false,
+    "aggregator": false,
+    "challenged": false,
+    "derived": true,
+    "anomaly": false,
+    "spansSplit": false,
+    "nonInteractiveEntrypoint": false,
+    "controlledSynthetic": true,
+    "undercountRisk": false,
+    "outsideWindow": false
+   },
+   "archive": [
+    {
+     "file": "archive/reddit/1xxtb2r-hhspiny-max.posts.json",
+     "sha256": "0728d9fc6c066317ae57abf8bd7b050fe191d35c0d141a5d802bc72d7bfb5f58",
+     "bytes": 4751,
+     "fetchedAt": "2026-11-26T03:40:07Z",
+     "url": "https://arctic-shift.photon-reddit.com/api/posts/ids?ids=1xxtb2r"
+    }
+   ],
+   "reading": {
+    "eligibleInPartition": false,
+    "why": "single-token-class synthetic arms; first Sonnet 5.5 reading on Max"
+   }
+  },
+  {
+   "id": "hhspiny-max-haiku55-5h",
+   "provider": "Anthropic",
+   "plan": "Claude Max 5x",
+   "planAs": "Max (\"$100/mo plan\")",
+   "modelId": "claude-haiku-5-5",
+   "modelAsStated": "Haiku 5.5",
+   "effort": null,
+   "speedMode": null,
+   "stage": "S2",
+   "observer": "hhspiny",
+   "url": "https://www.reddit.com/r/ClaudeCode/comments/1xxtb2r/",
+   "mirrorUrls": [
+    "https://arctic-shift.photon-reddit.com/api/posts/ids?ids=1xxtb2r"
+   ],
+   "reportDate": "2026-11-16",
+   "windowStated": false,
+   "windowStart": null,
+   "windowEnd": "2026-11-16",
+   "unit": "5h",
+   "valueLower": 37.0,
+   "valueUpper": 72.0,
+   "quotedSpan": "Haiku 5.5 per 5-hour window: fresh input $37, 5m cache write $37, 1h cache write $59, cache read $72, output $37; monthly ~$1,930 (19x) / ~$3,750 (38x)",
+   "derivation": "as for Opus 5.5",
+   "flags": {
+    "provisional": false,
+    "mixedModel": false,
+    "modelUnstated": false,
+    "tierUnstated": false,
+    "lowerBound": false,
+    "aggregator": false,
+    "challenged": false,
+    "derived": true,
+    "anomaly": false,
+    "spansSplit": false,
+    "nonInteractiveEntrypoint": false,
+    "controlledSynthetic": true,
+    "undercountRisk": false,
+    "outsideWindow": false
+   },
+   "archive": [
+    {
+     "file": "archive/reddit/1xxtb2r-hhspiny-max.posts.json",
+     "sha256": "0728d9fc6c066317ae57abf8bd7b050fe191d35c0d141a5d802bc72d7bfb5f58",
+     "bytes": 4751,
+     "fetchedAt": "2026-11-26T03:40:07Z",
+     "url": "https://arctic-shift.photon-reddit.com/api/posts/ids?ids=1xxtb2r"
+    }
+   ],
+   "reading": {
+    "eligibleInPartition": false,
+    "why": "single-token-class synthetic arms; first Haiku 5.5 reading on any tier"
+   }
+  },
+  {
+   "id": "huryn-max-opus55-month",
+   "provider": "Anthropic",
+   "plan": "Claude Max 5x",
+   "planAs": "Claude Max ($100/mo)",
+   "modelId": "claude-opus-5-5",
+   "modelAsStated": "Opus 5.5 (Claude Code)",
+   "effort": null,
+   "speedMode": null,
+   "stage": "S3",
+   "observer": "Pawel Huryn (@PawelHuryn, productcompass.pm)",
+   "url": "https://x.com/PawelHuryn/status/2123650574373605874",
+   "mirrorUrls": [
+    "https://api.fxtwitter.com/PawelHuryn/status/2123650574373605874"
+   ],
+   "reportDate": "2026-11-20",
+   "windowStated": true,
+   "windowStart": "2026-11-19",
+   "windowEnd": "2026-11-20",
+   "unit": "month",
+   "valueLower": 4520.0,
+   "valueUpper": 4760.0,
+   "quotedSpan": "Tweet: \"$100 of Claude Max buys about $4,640 of Opus at API prices ... Claude Max ($100): 46.4x on Opus 5.5\". Chart: \"46.4x (45.2-47.6x) ... about $4,640 of API usage a month ... Measured Nov 19 ... on each plan's own meter, at public API list rates. Assumes the whole week is usable. Claude Max's $100 of monthly API credits not counted.\"",
+   "derivation": "46.4 x $100 = $4,640; range 45.2-47.6x = $4,520-$4,760. The author's week-to-month conversion is not stated; at 52/12 weeks per month it is $1,071 per week.",
+   "flags": {
+    "provisional": false,
+    "mixedModel": false,
+    "modelUnstated": false,
+    "tierUnstated": false,
+    "lowerBound": false,
+    "aggregator": false,
+    "challenged": false,
+    "derived": false,
+    "anomaly": false,
+    "spansSplit": false,
+    "nonInteractiveEntrypoint": false,
+    "controlledSynthetic": true,
+    "undercountRisk": false,
+    "outsideWindow": false
+   },
+   "archive": [
+    {
+     "file": "archive/x/x-pawelhuryn-2123650574373605874.json",
+     "sha256": "1d71ce2661d8fd4cc06cb80c95bddcfe5fe7cc077053536eabb368630d6df4e7",
+     "bytes": 2993,
+     "fetchedAt": "2026-11-26T03:32:13Z",
+     "url": "https://api.fxtwitter.com/PawelHuryn/status/2123650574373605874"
+    },
+    {
+     "file": "archive/x/x-pawelhuryn-chart.jpg",
+     "sha256": "c6e5cac6d1a64b32bd724f60304bd7bffd5eaf32855ab310ed20ac2a449d53c3",
+     "bytes": 221556,
+     "fetchedAt": "2026-11-26T03:32:20Z",
+     "url": "https://pbs.twimg.com/media/HXi48LLXcAAlzcM.jpg?name=orig"
+    }
+   ],
+   "reading": {
+    "eligibleInPartition": true,
+    "why": "named plan, single model, measured on the plan's own meter in window; unit is the month, so it is its own cell; the underlying experiment repository (github.com/phuryn/experiments) was unreachable"
+   }
+  },
+  {
+   "id": "huryn-max-fable52-month",
+   "provider": "Anthropic",
+   "plan": "Claude Max 5x",
+   "planAs": "Claude Max ($100/mo)",
+   "modelId": "claude-fable-5-2",
+   "modelAsStated": "Fable 5.2 (Claude Code)",
+   "effort": null,
+   "speedMode": null,
+   "stage": "S3",
+   "observer": "Pawel Huryn (@PawelHuryn, productcompass.pm)",
+   "url": "https://x.com/PawelHuryn/status/2123650574373605874",
+   "mirrorUrls": [
+    "https://api.fxtwitter.com/PawelHuryn/status/2123650574373605874"
+   ],
+   "reportDate": "2026-11-20",
+   "windowStated": true,
+   "windowStart": "2026-11-19",
+   "windowEnd": "2026-11-20",
+   "unit": "month",
+   "valueLower": 2560.0,
+   "valueUpper": 2900.0,
+   "quotedSpan": "\"27.3x on Fable 5.2\" (chart: \"27.3x (25.6-29.0x) ... about $1,360 of Fable a month ... Fable may use only half the week: 13.6x on Fable alone\")",
+   "derivation": "27.3 x $100 = $2,730 for a whole week of Fable; with Fable capped at half the week the chart gives about $1,360 a month (13.6x); range 25.6-29.0x = $2,560-$2,900 (whole-week basis)",
+   "flags": {
+    "provisional": false,
+    "mixedModel": false,
+    "modelUnstated": false,
+    "tierUnstated": false,
+    "lowerBound": false,
+    "aggregator": false,
+    "challenged": false,
+    "derived": false,
+    "anomaly": false,
+    "spansSplit": false,
+    "nonInteractiveEntrypoint": false,
+    "controlledSynthetic": true,
+    "undercountRisk": false,
+    "outsideWindow": false
+   },
+   "archive": [
+    {
+     "file": "archive/x/x-pawelhuryn-2123650574373605874.json",
+     "sha256": "1d71ce2661d8fd4cc06cb80c95bddcfe5fe7cc077053536eabb368630d6df4e7",
+     "bytes": 2993,
+     "fetchedAt": "2026-11-26T03:32:13Z",
+     "url": "https://api.fxtwitter.com/PawelHuryn/status/2123650574373605874"
+    },
+    {
+     "file": "archive/x/x-pawelhuryn-chart.jpg",
+     "sha256": "c6e5cac6d1a64b32bd724f60304bd7bffd5eaf32855ab310ed20ac2a449d53c3",
+     "bytes": 221556,
+     "fetchedAt": "2026-11-26T03:32:20Z",
+     "url": "https://pbs.twimg.com/media/HXi48LLXcAAlzcM.jpg?name=orig"
+    }
+   ],
+   "reading": {
+    "eligibleInPartition": true,
+    "why": "named plan and model, plan's own meter, in window; first Fable 5.2 reading on Max; whole-week basis, half-week cap shown separately"
+   }
+  },
+  {
+   "id": "anshulj999-pro-opus55-5h",
+   "provider": "Anthropic",
+   "plan": "Claude Pro",
+   "planAs": "Pro",
+   "modelId": "claude-opus-5-5",
+   "modelAsStated": "Opus 5.5 (Claude Code session)",
+   "effort": null,
+   "speedMode": null,
+   "stage": "S2",
+   "observer": "AnshulJ999",
+   "url": "https://www.reddit.com/r/ClaudeCode/comments/1xt1eo1/",
+   "mirrorUrls": [
+    "https://arctic-shift.photon-reddit.com/api/posts/ids?ids=1xt1eo1"
+   ],
+   "reportDate": "2026-11-10",
+   "windowStated": false,
+   "windowStart": null,
+   "windowEnd": "2026-11-10",
+   "unit": "5h",
+   "valueLower": 36.26,
+   "valueUpper": 44.0,
+   "quotedSpan": "\"5-hour limit used 91%, API-equivalent cost $33, cost per 1% $0.36 ... a full 5-hour window is worth roughly $20 of Fable vs $40 of Opus (and my Opus average over the past month is closer to $44 per 5-hour window)\"",
+   "derivation": "$33 / 0.91 = $36.26 (post: $0.36 per 1%, about $40); upper bound $44 is the post's own one-month Opus average.",
+   "flags": {
+    "provisional": false,
+    "mixedModel": false,
+    "modelUnstated": false,
+    "tierUnstated": false,
+    "lowerBound": false,
+    "aggregator": false,
+    "challenged": false,
+    "derived": false,
+    "anomaly": false,
+    "spansSplit": false,
+    "nonInteractiveEntrypoint": false,
+    "controlledSynthetic": false,
+    "undercountRisk": true,
+    "outsideWindow": false
+   },
+   "archive": [
+    {
+     "file": "archive/reddit/1xt1eo1-anshulj999-pro.posts.json",
+     "sha256": "755441953dcafc401465731e96646703c65a2206b46916c3b0ecb6d08ee38b91",
+     "bytes": 4516,
+     "fetchedAt": "2026-11-26T03:40:08Z",
+     "url": "https://arctic-shift.photon-reddit.com/api/posts/ids?ids=1xt1eo1"
+    },
+    {
+     "file": "archive/reddit/1xt1eo1-anshulj999-pro.comments.json",
+     "sha256": "3c2ea7f4b3c11f5d197da549c4040630c181ae53933a3b0cd65dee3328894315",
+     "bytes": 98215,
+     "fetchedAt": "2026-11-26T03:35:56Z",
+     "url": "https://arctic-shift.photon-reddit.com/api/comments/tree?link_id=1xt1eo1&limit=500"
+    }
+   ],
+   "reading": {
+    "eligibleInPartition": true,
+    "why": "Pro tier stated, single model per session, percentage-tied; tool-logged (Claudemeter) rather than transcript"
+   }
+  },
+  {
+   "id": "anshulj999-pro-fable52-5h",
+   "provider": "Anthropic",
+   "plan": "Claude Pro",
+   "planAs": "Pro (Fable 5.2 inside the one-week launch inclusion of 2026-11-09..11-16)",
+   "modelId": "claude-fable-5-2",
+   "modelAsStated": "Fable 5.2",
+   "effort": null,
+   "speedMode": null,
+   "stage": "S2",
+   "observer": "AnshulJ999",
+   "url": "https://www.reddit.com/r/ClaudeCode/comments/1xt1eo1/",
+   "mirrorUrls": [
+    "https://arctic-shift.photon-reddit.com/api/posts/ids?ids=1xt1eo1"
+   ],
+   "reportDate": "2026-11-10",
+   "windowStated": false,
+   "windowStart": null,
+   "windowEnd": "2026-11-10",
+   "unit": "5h",
+   "valueLower": 19.12,
+   "valueUpper": 20.0,
+   "quotedSpan": "Fable 5.2 session: 5-hour limit used 68%, API-equivalent cost $13, cost per 1% $0.19, tokens per 1% 0.26M; \"a full 5-hour window is worth roughly $20 of Fable\"",
+   "derivation": "$13 / 0.68 = $19.12",
+   "flags": {
+    "provisional": false,
+    "mixedModel": false,
+    "modelUnstated": false,
+    "tierUnstated": false,
+    "lowerBound": false,
+    "aggregator": false,
+    "challenged": false,
+    "derived": false,
+    "anomaly": false,
+    "spansSplit": false,
+    "nonInteractiveEntrypoint": false,
+    "controlledSynthetic": false,
+    "undercountRisk": false,
+    "outsideWindow": false
+   },
+   "archive": [
+    {
+     "file": "archive/reddit/1xt1eo1-anshulj999-pro.posts.json",
+     "sha256": "755441953dcafc401465731e96646703c65a2206b46916c3b0ecb6d08ee38b91",
+     "bytes": 4516,
+     "fetchedAt": "2026-11-26T03:40:08Z",
+     "url": "https://arctic-shift.photon-reddit.com/api/posts/ids?ids=1xt1eo1"
+    },
+    {
+     "file": "archive/reddit/1xt1eo1-anshulj999-pro.comments.json",
+     "sha256": "3c2ea7f4b3c11f5d197da549c4040630c181ae53933a3b0cd65dee3328894315",
+     "bytes": 98215,
+     "fetchedAt": "2026-11-26T03:35:56Z",
+     "url": "https://arctic-shift.photon-reddit.com/api/comments/tree?link_id=1xt1eo1&limit=500"
+    }
+   ],
+   "reading": {
+    "eligibleInPartition": true,
+    "why": "taken during the launch week in which Pro included Fable up to 50% of the weekly limit; outside that week Pro runs Fable on usage credits, so the reading is for a window that has closed"
+   }
+  },
+  {
+   "id": "x2v-pro-opus55",
+   "provider": "Anthropic",
+   "plan": "Claude Pro",
+   "planAs": "Pro",
+   "modelId": "claude-opus-5-5",
+   "modelAsStated": "Opus 5.5 (147 controlled calls, headless claude -p, --effort medium, no tools)",
+   "effort": "medium",
+   "speedMode": null,
+   "stage": "S1",
+   "observer": "x2v (aiplans.dev operator)",
+   "url": "https://aiplans.dev/reports/claude-pro-opus55-2026-11-04.md",
+   "mirrorUrls": [
+    "https://aiplans.dev/en/guides/claude-pro-opus-5-5-quota",
+    "https://claude.ai/artifact/DcK5UbxR1SmkgDn38QtBo2"
+   ],
+   "reportDate": "2026-11-04",
+   "windowStated": false,
+   "windowStart": null,
+   "windowEnd": "2026-11-04",
+   "unit": "5h",
+   "valueLower": 26.0,
+   "valueUpper": 44.0,
+   "quotedSpan": "5 hours: output-heavy about 1.3M output tokens, $26-29; agentic coding mix (99% cache reads) about 160M tokens, $44. 1 week (7.2 windows): $185-205 / $320. 1 month: $800-890 / $1,390.",
+   "derivation": "the report's own fit (a about 0.55, b about 0.5, L about $25.75 per 5h); weekly = 7.2 five-hour windows from a 3-point weekly move",
+   "flags": {
+    "provisional": false,
+    "mixedModel": false,
+    "modelUnstated": false,
+    "tierUnstated": false,
+    "lowerBound": false,
+    "aggregator": false,
+    "challenged": false,
+    "derived": true,
+    "anomaly": false,
+    "spansSplit": false,
+    "nonInteractiveEntrypoint": true,
+    "controlledSynthetic": true,
+    "undercountRisk": false,
+    "outsideWindow": false
+   },
+   "archive": [
+    {
+     "file": "archive/aiplans-atlas/aiplans-claude-pro-opus55-2026-11-04.md",
+     "sha256": "512bb066bc9633649b9dedd8035be1ae4f1c565bd9b1f9c0bb2beee772251732",
+     "bytes": 1148,
+     "fetchedAt": "2026-11-26T03:14:32Z",
+     "url": "https://aiplans.dev/reports/claude-pro-opus55-2026-11-04.md"
+    },
+    {
+     "file": "archive/aiplans-atlas/aiplans-guide-claude-pro-opus-5-5-quota.html",
+     "sha256": "140db21e1c1251e827adb59af32463e9a6032f7d371104d0f5e88ded12b76ccf",
+     "bytes": 113627,
+     "fetchedAt": "2026-11-26T03:14:33Z",
+     "url": "https://aiplans.dev/en/guides/claude-pro-opus-5-5-quota"
+    },
+    {
+     "file": "archive/aiplans-atlas/x2v-claude-artifact.html",
+     "sha256": "f167b179f89f9119a9119e72375823ad9a3c7fe80d2ae2f0508e7cc36c4a739e",
+     "bytes": 41475,
+     "fetchedAt": "2026-11-26T03:14:35Z",
+     "url": "https://claude.ai/artifact/DcK5UbxR1SmkgDn38QtBo2"
+    }
+   ],
+   "reading": {
+    "eligibleInPartition": false,
+    "why": "headless claude -p draws the five-hour meter about 1.95x faster than the interactive terminal (douflou, unarchived), so a five-hour dollar figure from that entrypoint is not comparable; weekly ratio rests on a 3-point move; the aiplans.dev page is a copy of the operator's own artifact (the same record the 2026-11-05 bundle hashed: SHA-256 512bb066...)"
+   }
+  },
+  {
+   "id": "individualplus2011-plus-sol62-5h-launch",
+   "provider": "OpenAI",
+   "plan": "ChatGPT Plus",
+   "planAs": "Plus",
+   "modelId": "gpt-6.2-sol",
+   "modelAsStated": "GPT-6.2 Sol",
+   "effort": null,
+   "speedMode": null,
+   "stage": "S2",
+   "observer": "IndividualPlus2011",
+   "url": "https://www.reddit.com/r/codex/comments/1y4fuap/",
+   "mirrorUrls": [
+    "https://arctic-shift.photon-reddit.com/api/posts/ids?ids=1y4fuap"
+   ],
+   "reportDate": "2026-11-24",
+   "windowStated": true,
+   "windowStart": "2026-11-17 (release)",
+   "windowEnd": "2026-11-18 (launch-day measurement)",
+   "unit": "5h",
+   "valueLower": 11.75,
+   "valueUpper": 11.75,
+   "quotedSpan": "\"At launch, Sol 6.2 had a $11.75 allowance per 5-hour window, 50% more than 6.1 Sol.\"",
+   "derivation": "$11.75 / $7.80 (the same observer's 6.1 Sol figure in r/codex 1xhhrxs) = 1.51",
+   "flags": {
+    "provisional": false,
+    "mixedModel": false,
+    "modelUnstated": false,
+    "tierUnstated": false,
+    "lowerBound": false,
+    "aggregator": false,
+    "challenged": false,
+    "derived": false,
+    "anomaly": false,
+    "spansSplit": false,
+    "nonInteractiveEntrypoint": false,
+    "controlledSynthetic": false,
+    "undercountRisk": false,
+    "outsideWindow": false
+   },
+   "archive": [
+    {
+     "file": "archive/reddit/1y4fuap-individualplus2011-sol62.posts.json",
+     "sha256": "8a13d8cf759e35370fa0658c8c1fbc64395a1943fec21aec94e25341443904f7",
+     "bytes": 4001,
+     "fetchedAt": "2026-11-26T03:42:37Z",
+     "url": "https://arctic-shift.photon-reddit.com/api/posts/ids?ids=1y4fuap"
+    },
+    {
+     "file": "archive/reddit/1y4fuap-individualplus2011-sol62.comments.json",
+     "sha256": "1394e8195168bb087ef47abe403080a83d3e1ff6e20051c70887985c6d2976ca",
+     "bytes": 165109,
+     "fetchedAt": "2026-11-26T03:35:45Z",
+     "url": "https://arctic-shift.photon-reddit.com/api/comments/tree?link_id=1y4fuap&limit=500"
+    },
+    {
+     "file": "archive/reddit/1xhhrxs-individualplus2011-allowance-table.posts.json",
+     "sha256": "96f734f750515b71d7ad126abba24098202da9d5eb42b5daf7490012b70249c1",
+     "bytes": 9163,
+     "fetchedAt": "2026-11-26T03:35:46Z",
+     "url": "https://arctic-shift.photon-reddit.com/api/posts/ids?ids=1xhhrxs"
+    }
+   ],
+   "reading": {
+    "eligibleInPartition": false,
+    "why": "launch-day value, superseded by the 2026-11-24 value on the same observer's own measurement; the launch day (11-17) is not a provider-acknowledged fault day but the observer reports a change after it"
+   }
+  },
+  {
+   "id": "individualplus2011-plus-sol62-5h-1124",
+   "provider": "OpenAI",
+   "plan": "ChatGPT Plus",
+   "planAs": "Plus",
+   "modelId": "gpt-6.2-sol",
+   "modelAsStated": "GPT-6.2 Sol",
+   "effort": null,
+   "speedMode": null,
+   "stage": "S2",
+   "observer": "IndividualPlus2011",
+   "url": "https://www.reddit.com/r/codex/comments/1y4fuap/",
+   "mirrorUrls": [
+    "https://arctic-shift.photon-reddit.com/api/posts/ids?ids=1y4fuap"
+   ],
+   "reportDate": "2026-11-24",
+   "windowStated": true,
+   "windowStart": "2026-11-24",
+   "windowEnd": "2026-11-24",
+   "unit": "5h",
+   "valueLower": 9.75,
+   "valueUpper": 9.75,
+   "quotedSpan": "\"But I retested it today, and Sol usage has been decreased to $9.75 ... a 15% decrease\" (title: \"Allowance for Sol has been lowered by 17%\"); \"One 5-hour window is 1/6 of a weekly one\"; comment: \"5.6 Sol gave $370 in API value (monthly), 6.2 Sol gives $250\"",
+   "derivation": "$9.75 / $11.75 = 0.830 (-17.0%); weekly = 6 x $9.75 = $58.50 (the observer's stated 1/6 ratio); monthly $250 = $58.50 x 30/7 = $250.7. Context kept under 272k tokens; counts tokens and API cost equivalent, Plus account.",
+   "flags": {
+    "provisional": false,
+    "mixedModel": false,
+    "modelUnstated": false,
+    "tierUnstated": false,
+    "lowerBound": false,
+    "aggregator": false,
+    "challenged": false,
+    "derived": false,
+    "anomaly": false,
+    "spansSplit": false,
+    "nonInteractiveEntrypoint": false,
+    "controlledSynthetic": false,
+    "undercountRisk": false,
+    "outsideWindow": false
+   },
+   "archive": [
+    {
+     "file": "archive/reddit/1y4fuap-individualplus2011-sol62.posts.json",
+     "sha256": "8a13d8cf759e35370fa0658c8c1fbc64395a1943fec21aec94e25341443904f7",
+     "bytes": 4001,
+     "fetchedAt": "2026-11-26T03:42:37Z",
+     "url": "https://arctic-shift.photon-reddit.com/api/posts/ids?ids=1y4fuap"
+    },
+    {
+     "file": "archive/reddit/1y4fuap-individualplus2011-sol62.comments.json",
+     "sha256": "1394e8195168bb087ef47abe403080a83d3e1ff6e20051c70887985c6d2976ca",
+     "bytes": 165109,
+     "fetchedAt": "2026-11-26T03:35:45Z",
+     "url": "https://arctic-shift.photon-reddit.com/api/comments/tree?link_id=1y4fuap&limit=500"
+    }
+   ],
+   "reading": {
+    "eligibleInPartition": true,
+    "why": "single model, Plus stated, token-counted at API price; one observer, so the cell has one report; observer is already on file for GPT-6.1 Terra. Standard speed assumed (not stated)"
+   }
+  },
+  {
+   "id": "individualplus2011-plus-sol61-5h-launchday62",
+   "provider": "OpenAI",
+   "plan": "ChatGPT Plus",
+   "planAs": "Plus",
+   "modelId": "gpt-6.1-sol",
+   "modelAsStated": "GPT-6.1 Sol",
+   "effort": null,
+   "speedMode": null,
+   "stage": "S2",
+   "observer": "IndividualPlus2011",
+   "url": "https://www.reddit.com/r/codex/comments/1y4fuap/",
+   "mirrorUrls": [
+    "https://arctic-shift.photon-reddit.com/api/posts/ids?ids=1y4fuap"
+   ],
+   "reportDate": "2026-11-24",
+   "windowStated": false,
+   "windowStart": null,
+   "windowEnd": "2026-11-18 (6.2 release day)",
+   "unit": "5h",
+   "valueLower": 7.8,
+   "valueUpper": 7.8,
+   "quotedSpan": "Comment: \"I have not re-measured Sol 6.1, only Sol 6.2. Sol 6.1 numbers come from 6.2 release day.\" and the post: \"50% more than 6.1 Sol\" ($11.75 / 1.5 = $7.83); his 2026-10-28 table (r/codex 1xhhrxs) gives GPT-6.1 Sol $7.8 per 5h",
+   "derivation": "no new measurement; $7.8 is from the 2026-10-28 table, restated by the observer as still true on 2026-11-18",
+   "flags": {
+    "provisional": false,
+    "mixedModel": false,
+    "modelUnstated": false,
+    "tierUnstated": false,
+    "lowerBound": false,
+    "aggregator": false,
+    "challenged": false,
+    "derived": true,
+    "anomaly": false,
+    "spansSplit": false,
+    "nonInteractiveEntrypoint": false,
+    "controlledSynthetic": false,
+    "undercountRisk": false,
+    "outsideWindow": false
+   },
+   "archive": [
+    {
+     "file": "archive/reddit/1y4fuap-individualplus2011-sol62.comments.json",
+     "sha256": "1394e8195168bb087ef47abe403080a83d3e1ff6e20051c70887985c6d2976ca",
+     "bytes": 165109,
+     "fetchedAt": "2026-11-26T03:35:45Z",
+     "url": "https://arctic-shift.photon-reddit.com/api/comments/tree?link_id=1y4fuap&limit=500"
+    },
+    {
+     "file": "archive/reddit/1xhhrxs-individualplus2011-allowance-table.posts.json",
+     "sha256": "96f734f750515b71d7ad126abba24098202da9d5eb42b5daf7490012b70249c1",
+     "bytes": 9163,
+     "fetchedAt": "2026-11-26T03:35:46Z",
+     "url": "https://arctic-shift.photon-reddit.com/api/posts/ids?ids=1xhhrxs"
+    }
+   ],
+   "reading": {
+    "eligibleInPartition": false,
+    "why": "restated October figure, not a new measurement"
+   }
+  },
+  {
+   "id": "deepturned180-plus-sol61-luna-derived",
+   "provider": "OpenAI",
+   "plan": "ChatGPT Plus",
+   "planAs": "Plus",
+   "modelId": "gpt-6.1-sol",
+   "modelAsStated": "GPT-6.1 Sol High (and GPT-6 Luna High in the same post)",
+   "effort": "high",
+   "speedMode": null,
+   "stage": "S2",
+   "observer": "deepturned180isdeep",
+   "url": "https://www.reddit.com/r/codex/comments/1y0efhw/",
+   "mirrorUrls": [
+    "https://arctic-shift.photon-reddit.com/api/posts/ids?ids=1y0efhw"
+   ],
+   "reportDate": "2026-11-19",
+   "windowStated": true,
+   "windowStart": "2026-11-12",
+   "windowEnd": "2026-11-19",
+   "unit": "week",
+   "valueLower": 100.0,
+   "valueUpper": 133.0,
+   "quotedSpan": "Observed 11/12-11/19, Plus: GPT-6.1 Sol High 1.7M input, 190K output, 102.6M cache read, 508 calls, ~30 minutes, \"[W] usage equivalence ~15-20%\", equivalent cost ~$20; GPT-6 Luna High 14.4M in, 3.3M out, 807M cache read, 5,625 calls, ~15 hours, \"~10-15%\", ~$10. \"100% [W] = ~6.3 x 100% [5H]\" (from a third-party page)",
+   "derivation": "$20 / 0.20 = $100 to $20 / 0.15 = $133 per week for Sol; Luna $10 / 0.15 = $67 to $10 / 0.10 = $100 (never reached 100% of a five-hour window). The weekly percentage is derived from a third-party 6.3 ratio, not read off the meter.",
+   "flags": {
+    "provisional": false,
+    "mixedModel": false,
+    "modelUnstated": false,
+    "tierUnstated": false,
+    "lowerBound": false,
+    "aggregator": false,
+    "challenged": false,
+    "derived": true,
+    "anomaly": false,
+    "spansSplit": false,
+    "nonInteractiveEntrypoint": false,
+    "controlledSynthetic": false,
+    "undercountRisk": false,
+    "outsideWindow": false
+   },
+   "archive": [
+    {
+     "file": "archive/reddit/1y0efhw-deepturned180-plus.posts.json",
+     "sha256": "af0af09d75abf751c6a6ac291224d94270cff7a1ac0054284567f8fc362e2b3b",
+     "bytes": 8045,
+     "fetchedAt": "2026-11-26T03:40:10Z",
+     "url": "https://arctic-shift.photon-reddit.com/api/posts/ids?ids=1y0efhw"
+    }
+   ],
+   "reading": {
+    "eligibleInPartition": false,
+    "why": "weekly equivalence is derived from a ratio; Sol and Luna measured in different sessions; the post is a usage ledger, not a meter reading at a limit"
+   }
+  },
+  {
+   "id": "huryn-ultra5x-neon-month",
+   "provider": "Google",
+   "plan": "Google AI Ultra 5x",
+   "planAs": "Google AI Ultra ($99.99/mo)",
+   "modelId": "gemini-4-neon",
+   "modelAsStated": "Gemini 4 Neon (Antigravity CLI)",
+   "effort": null,
+   "speedMode": null,
+   "stage": "S3",
+   "observer": "Pawel Huryn (@PawelHuryn, productcompass.pm)",
+   "url": "https://x.com/PawelHuryn/status/2123650574373605874",
+   "mirrorUrls": [
+    "https://api.fxtwitter.com/PawelHuryn/status/2123650574373605874"
+   ],
+   "reportDate": "2026-11-20",
+   "windowStated": true,
+   "windowStart": "2026-11-19",
+   "windowEnd": "2026-11-20",
+   "unit": "month",
+   "valueLower": 2530.0,
+   "valueUpper": 2630.0,
+   "quotedSpan": "Tweet: \"Google AI Ultra ($99.99): 25.8x on Gemini 4 Neon\". Chart: \"25.8x (25.3-26.3x) ... about $2,580 of API usage a month ... Likely 28-41x: the CLI's token counts read 10-38% low ... Measured Nov 19-20, 2026 ... on each plan's own meter, at public API list rates\"",
+   "derivation": "25.8 x $99.99 = $2,579.7; range 25.3-26.3x = $2,530-$2,630. The author flags that the CLI token counts read 10-38% low, so the true multiple may be 28-41x ($2,800-$4,100); the lower figure is the one counted here.",
+   "flags": {
+    "provisional": false,
+    "mixedModel": false,
+    "modelUnstated": false,
+    "tierUnstated": false,
+    "lowerBound": false,
+    "aggregator": false,
+    "challenged": false,
+    "derived": false,
+    "anomaly": false,
+    "spansSplit": false,
+    "nonInteractiveEntrypoint": false,
+    "controlledSynthetic": true,
+    "undercountRisk": true,
+    "outsideWindow": false
+   },
+   "archive": [
+    {
+     "file": "archive/x/x-pawelhuryn-2123650574373605874.json",
+     "sha256": "1d71ce2661d8fd4cc06cb80c95bddcfe5fe7cc077053536eabb368630d6df4e7",
+     "bytes": 2993,
+     "fetchedAt": "2026-11-26T03:32:13Z",
+     "url": "https://api.fxtwitter.com/PawelHuryn/status/2123650574373605874"
+    },
+    {
+     "file": "archive/x/x-pawelhuryn-chart.jpg",
+     "sha256": "c6e5cac6d1a64b32bd724f60304bd7bffd5eaf32855ab310ed20ac2a449d53c3",
+     "bytes": 221556,
+     "fetchedAt": "2026-11-26T03:32:20Z",
+     "url": "https://pbs.twimg.com/media/HXi48LLXcAAlzcM.jpg?name=orig"
+    }
+   ],
+   "reading": {
+    "eligibleInPartition": true,
+    "why": "named plan tier (Ultra $99.99 is the 5x tier), single model, plan's own meter, in window; one report; the observer's own undercount note applies"
+   }
+  },
+  {
+   "id": "yiji-kong-ultra5x-carbon-5h-inferred",
+   "provider": "Google",
+   "plan": "Google AI Ultra 5x",
+   "planAs": "Google AI Ultra ($100 plan)",
+   "modelId": "gemini-4-carbon",
+   "modelAsStated": "Gemini 4 Carbon (High)",
+   "effort": "high",
+   "speedMode": null,
+   "stage": "S2",
+   "observer": "Yiji_Kong",
+   "url": "https://discuss.ai.google.dev/t/196351/10",
+   "mirrorUrls": [
+    "https://discuss.ai.google.dev/t/196351.json"
+   ],
+   "reportDate": "2026-11-13",
+   "windowStated": false,
+   "windowStart": null,
+   "windowEnd": "2026-11-13",
+   "unit": "5h",
+   "valueLower": 49.2,
+   "valueUpper": 50.0,
+   "quotedSpan": "\"Update with new measurements (single-turn prompts, no cache reads ...): Gemini 3.8 Flash (High) 1.00x of published API price; Gemini 4 Hydrogen (High) 1.00x; Gemini 4 Argon (High) 3.00x; Gemini 4 Carbon (High) 3.00x ... The 5-hour and Weekly buckets give the same multiplier in every run. Published prices: Carbon and Argon ... $2 / $10 per 1M\"",
+   "derivation": "No dollar figure is given for Carbon. The same observer's earlier Argon (High) five-hour reading is $49.2-$50.0 at the $2/$10 published price (2026-10-28, already on file as yiji-kong-ultra-5h); Carbon draws at the same 3.00x of the same published price, so its five-hour value would be the same. This is the recorder's inference, not a quoted figure.",
+   "flags": {
+    "provisional": false,
+    "mixedModel": false,
+    "modelUnstated": false,
+    "tierUnstated": false,
+    "lowerBound": false,
+    "aggregator": false,
+    "challenged": false,
+    "derived": true,
+    "anomaly": false,
+    "spansSplit": false,
+    "nonInteractiveEntrypoint": false,
+    "controlledSynthetic": false,
+    "undercountRisk": false,
+    "outsideWindow": false
+   },
+   "archive": [
+    {
+     "file": "archive/google-forum/196351-yiji-kong-m_b4.topic.json",
+     "sha256": "1ad2acd17cbb2f607a26709604475762f71726f569bbbb656e19394db1300f0b",
+     "bytes": 64144,
+     "fetchedAt": "2026-11-26T03:45:45Z",
+     "url": "https://discuss.ai.google.dev/t/196351.json"
+    }
+   ],
+   "reading": {
+    "eligibleInPartition": false,
+    "why": "multiplier only, no dollar reading for Carbon; the 2026-11-30 end of the $2/$10 introductory price (to $4/$20 on 2026-12-01) will change the published-price basis"
+   }
+  },
+  {
+   "id": "ubelai-ultra20x-carbon-5h",
+   "provider": "Google",
+   "plan": "Google AI Ultra 20x",
+   "planAs": "Ultra 20x (\"an Ultra 20x plan\", post 2026-11-11)",
+   "modelId": "gemini-4-carbon",
+   "modelAsStated": "Gemini 4 Carbon (Low), Antigravity Language Server RPC remainingFraction + local SQLite generation records",
+   "effort": "low",
+   "speedMode": null,
+   "stage": "S2",
+   "observer": "ubelai",
+   "url": "https://www.reddit.com/r/google_antigravity/comments/1xt8owo/",
+   "mirrorUrls": [
+    "https://arctic-shift.photon-reddit.com/api/posts/ids?ids=1xt8owo"
+   ],
+   "reportDate": "2026-11-11",
+   "windowStated": true,
+   "windowStart": "2026-11-11T03:34:15Z",
+   "windowEnd": "2026-11-11T03:36:53Z",
+   "unit": "5h",
+   "valueLower": 203.9,
+   "valueUpper": 211.8,
+   "quotedSpan": "Isolated 158-second pure Carbon (Low) window: 13 turns, 133,460 uncached in, 1,839,827 cached in, 12,508 out; \"gemini-5h burned +0.28242% ... gemini-weekly +0.07061%\". Five-hour window with zero Argon: Carbon Low 212 steps (3.44M uncached in, 30.45M cached, 0.21M out) + Flash Low 36 steps; \"$12.24 burned at the published launch price ... actual live remainingFraction 94.22% remaining (5.78% burned)\". Published launch price $2.00 / $10.00 / $0.10 per 1M through Nov 30 ($4 / $20 / $0.20 from Dec 1).",
+   "derivation": "Recorder's arithmetic from the quoted tokens at the $2 / $10 / $0.10 introductory price: isolated window $0.57598 / 0.0028242 = $203.9 per five hours; five-hour window $12.2425 (incl. $0.2175 of Flash at $0.75 / $3.75 / $0.075) / 0.0578 = $211.8. The observer's own reading is that Antigravity meters Carbon at 3.0x the published price ($6 / $30 / $0.30) against an assumed $600 five-hour bucket; the dollars above do not depend on that assumed bucket. At the 2026-12-01 price ($4 / $20 / $0.20) the same tokens are worth twice as much.",
+   "flags": {
+    "provisional": false,
+    "mixedModel": false,
+    "modelUnstated": false,
+    "tierUnstated": false,
+    "lowerBound": false,
+    "aggregator": false,
+    "challenged": false,
+    "derived": true,
+    "anomaly": false,
+    "spansSplit": false,
+    "nonInteractiveEntrypoint": false,
+    "controlledSynthetic": false,
+    "undercountRisk": false,
+    "outsideWindow": false
+   },
+   "archive": [
+    {
+     "file": "archive/reddit/1xt8owo-ubelai-ultra20x-carbon-audit.posts.json",
+     "sha256": "e1277a3d18124da6515ac4c99fc4b4fa18a83d0f2031f5b706632d846efde02f",
+     "bytes": 8674,
+     "fetchedAt": "2026-11-26T03:57:57Z",
+     "url": "https://arctic-shift.photon-reddit.com/api/posts/ids?ids=1xt8owo"
+    },
+    {
+     "file": "archive/reddit/1xt8owo-ubelai-ultra20x-carbon-audit.comments.json",
+     "sha256": "f67d917b55ec4af5c5380cc69e6c856ae770e4ec1a5e8ad9f45f86464750baad",
+     "bytes": 81250,
+     "fetchedAt": "2026-11-26T03:57:59Z",
+     "url": "https://arctic-shift.photon-reddit.com/api/comments/tree?link_id=1xt8owo&limit=500"
+    }
+   ],
+   "reading": {
+    "eligibleInPartition": true,
+    "why": "single model, tier stated, tied to the live remainingFraction; priced at the introductory price that ends 2026-11-30; effort Low (allowances are effort-invariant, O87); first Carbon dollar reading; consistent with Yiji_Kong's Ultra 5x Argon reading ($49.2-$50.0 per five hours = a quarter of this Ultra 20x pool)"
+   }
+  },
+  {
+   "id": "ubelai-ultra20x-carbon-wk",
+   "provider": "Google",
+   "plan": "Google AI Ultra 20x",
+   "planAs": "Ultra 20x",
+   "modelId": "gemini-4-carbon",
+   "modelAsStated": "Gemini 4 Carbon (Low)",
+   "effort": "low",
+   "speedMode": null,
+   "stage": "S2",
+   "observer": "ubelai",
+   "url": "https://www.reddit.com/r/google_antigravity/comments/1xt8owo/",
+   "mirrorUrls": [
+    "https://arctic-shift.photon-reddit.com/api/posts/ids?ids=1xt8owo"
+   ],
+   "reportDate": "2026-11-11",
+   "windowStated": true,
+   "windowStart": "2026-11-11T03:34:15Z",
+   "windowEnd": "2026-11-11T03:36:53Z",
+   "unit": "week",
+   "valueLower": 815.7,
+   "valueUpper": 817.2,
+   "quotedSpan": "Same isolated window: \"gemini-weekly burned +0.07061%\" (the weekly and five-hour meters moved at 3.9999:1). Full weekly window, 10,567 generations (5,817 Argon, 564 Carbon, 4,186 Flash): \"Expected @ Published Launch ($2/$10/$0.10): $392.20 ... Actual live remainingFraction 52.01% remaining (47.99% burned)\".",
+   "derivation": "Isolated window: $0.57598 / 0.0007061 = $815.7 per week. Mixed weekly window: $392.1795 / 0.4799 = $817.2 per week (Argon, Carbon and Flash priced at the launch rates, as the observer lists them; Flash is metered at 1.0x). Both at the $2 / $10 / $0.10 introductory price.",
+   "flags": {
+    "provisional": false,
+    "mixedModel": false,
+    "modelUnstated": false,
+    "tierUnstated": false,
+    "lowerBound": false,
+    "aggregator": false,
+    "challenged": false,
+    "derived": true,
+    "anomaly": false,
+    "spansSplit": false,
+    "nonInteractiveEntrypoint": false,
+    "controlledSynthetic": false,
+    "undercountRisk": false,
+    "outsideWindow": false
+   },
+   "archive": [
+    {
+     "file": "archive/reddit/1xt8owo-ubelai-ultra20x-carbon-audit.posts.json",
+     "sha256": "e1277a3d18124da6515ac4c99fc4b4fa18a83d0f2031f5b706632d846efde02f",
+     "bytes": 8674,
+     "fetchedAt": "2026-11-26T03:57:57Z",
+     "url": "https://arctic-shift.photon-reddit.com/api/posts/ids?ids=1xt8owo"
+    },
+    {
+     "file": "archive/reddit/1xt8owo-ubelai-ultra20x-carbon-audit.comments.json",
+     "sha256": "f67d917b55ec4af5c5380cc69e6c856ae770e4ec1a5e8ad9f45f86464750baad",
+     "bytes": 81250,
+     "fetchedAt": "2026-11-26T03:57:59Z",
+     "url": "https://arctic-shift.photon-reddit.com/api/comments/tree?link_id=1xt8owo&limit=500"
+    }
+   ],
+   "reading": {
+    "eligibleInPartition": true,
+    "why": "the isolated window is pure Carbon (Low); the full-week figure mixes three models and is shown only as a cross-check"
+   }
+  },
+  {
+   "id": "mcd0m-googleaipro-gemini-pool",
+   "provider": "Google",
+   "plan": "Google AI Pro",
+   "planAs": "Google AI Pro (Antigravity CLI)",
+   "modelId": "gemini-4-hydrogen",
+   "modelAsStated": "Gemini 4 Hydrogen (Medium); also Gemini 3.8 Flash, Gemini 4 Argon, Claude Sonnet 5.5 (third-party pool)",
+   "effort": "medium",
+   "speedMode": null,
+   "stage": "S2",
+   "observer": "mcD0m",
+   "url": "https://www.reddit.com/r/google_antigravity/comments/1xyzwfl/",
+   "mirrorUrls": [
+    "https://arctic-shift.photon-reddit.com/api/posts/ids?ids=1xyzwfl"
+   ],
+   "reportDate": "2026-11-17",
+   "windowStated": false,
+   "windowStart": null,
+   "windowEnd": "2026-11-17",
+   "unit": "5h",
+   "valueLower": 30.0,
+   "valueUpper": 30.0,
+   "quotedSpan": "Hydrogen (Medium): gemini-5h bucket \"$30.00 / 5h\" and gemini-weekly \"$105.00 / week\" at $1.50 / $7.50 / $0.075 per 1M; Flash 3.8 the same pool; Argon weekly pool \"$15.00 / week\"; Claude Sonnet 5.5 3rd-party pool \"$2.50 / 5h\", \"$5.00 / week\". Follow-up 2026-11-23: \"they also increased the weekly quota from $105 API equivalent to $120. So the $15 Argon quota was merged in.\"",
+   "derivation": "value per window quoted by the observer from statusLine token deltas against Antigravity usage percentages; weekly $105 = 3.5 x the 5h window",
+   "flags": {
+    "provisional": false,
+    "mixedModel": false,
+    "modelUnstated": false,
+    "tierUnstated": false,
+    "lowerBound": false,
+    "aggregator": false,
+    "challenged": false,
+    "derived": false,
+    "anomaly": false,
+    "spansSplit": false,
+    "nonInteractiveEntrypoint": false,
+    "controlledSynthetic": false,
+    "undercountRisk": false,
+    "outsideWindow": false
+   },
+   "archive": [
+    {
+     "file": "archive/reddit/1xyzwfl-mcd0m-google-pro-gemini-pool.posts.json",
+     "sha256": "c3834671adf6412b26e5a2c065099b2a2d80fb3b6cc7cda2b020c15968744d40",
+     "bytes": 4772,
+     "fetchedAt": "2026-11-26T03:49:58Z",
+     "url": "https://arctic-shift.photon-reddit.com/api/posts/ids?ids=1xyzwfl"
+    },
+    {
+     "file": "archive/reddit/1xyzwfl-mcd0m-google-pro-gemini-pool.comments.json",
+     "sha256": "9d95a7129b241f4c9af3d576c42e684e82588fd129a38151f2e85183e98985b3",
+     "bytes": 26641,
+     "fetchedAt": "2026-11-26T03:49:59Z",
+     "url": "https://arctic-shift.photon-reddit.com/api/comments/tree?link_id=1xyzwfl&limit=500"
+    },
+    {
+     "file": "archive/reddit/1y3srb2-mcd0m-pool-120.comments.json",
+     "sha256": "a231d228ecea5580cb546a92295d08b6db96d7e4e84a4ae789a691d17f649a72",
+     "bytes": 134979,
+     "fetchedAt": "2026-11-26T03:50:02Z",
+     "url": "https://arctic-shift.photon-reddit.com/api/comments/tree?link_id=1y3srb2&limit=500"
+    }
+   ],
+   "reading": {
+    "eligibleInPartition": false,
+    "why": "none of Hydrogen, Flash 3.8, Argon is a cohort configuration; kept as the only Google AI Pro dollar reading in window and as the evidence for the Pro weekly pool change ($105 to $120) in changes.json. Neon and Carbon draw at their own multipliers (Argon and Carbon 3.00x per published dollar, per Yiji_Kong), which this post does not give"
+   }
+  },
+  {
+   "id": "douflou-max-opus55-5h",
+   "provider": "Anthropic",
+   "plan": "Claude Max (tier not stated; \"a Max plan\")",
+   "planAs": "inferred Max 5x",
+   "modelId": "claude-opus-5-5",
+   "modelAsStated": "Opus 5.5, effort medium, Claude Code 2.1.316",
+   "effort": "medium",
+   "speedMode": null,
+   "stage": "S1",
+   "observer": "douflou",
+   "url": "https://github.com/anthropics/claude-code/issues/106375",
+   "mirrorUrls": [],
+   "reportDate": "2026-11-03",
+   "windowStated": true,
+   "windowStart": "2026-11-02",
+   "windowEnd": "2026-11-03",
+   "unit": "5h",
+   "valueLower": 204.0,
+   "valueUpper": 204.0,
+   "quotedSpan": "interactive TUI (cli): $20.46 -> 5h meter 16 to 26% (4.9 points per $10); claude -p / Agent SDK: $19.83-$20.03 -> 9.5-9.6 points per $10 (about 1.95x faster); weekly moved 3 points per path (about $40 of work each)",
+   "derivation": "$20.46 / 0.10 = $204.6 per 5h interactive; about $104 through non-interactive paths; weekly $40 / 0.03 = $1,333 (range $1,143-$1,600 at 2.5-3.5 points)",
+   "flags": {
+    "provisional": false,
+    "mixedModel": false,
+    "modelUnstated": false,
+    "tierUnstated": true,
+    "lowerBound": false,
+    "aggregator": false,
+    "challenged": false,
+    "derived": false,
+    "anomaly": false,
+    "spansSplit": false,
+    "nonInteractiveEntrypoint": false,
+    "controlledSynthetic": true,
+    "undercountRisk": false,
+    "outsideWindow": false
+   },
+   "archive": [
+    {
+     "file": "archive/github-rendered/anthropics-claude-code-106375-douflou.rendered.md",
+     "sha256": "67ba27adba59ca3abba586667bad701f06d413de3e857e7b5f5a04e911c66907",
+     "bytes": 3277,
+     "fetchedAt": "2026-11-26 (WebFetch tool reply, see file header)",
+     "url": "https://github.com/anthropics/claude-code/issues/106375",
+     "byteExact": false,
+     "note": "WebFetch tool rendering; github.com and api.github.com were refused by the session proxy"
+    }
+   ],
+   "reading": {
+    "eligibleInPartition": false,
+    "why": "no byte-exact copy of the page could be obtained (O165): not counted"
+   }
+  },
+  {
+   "id": "ricardoraposo-ultra-opus55",
+   "provider": "Anthropic",
+   "plan": "Claude Max 20x / Ultra",
+   "planAs": "Max 20x / Ultra",
+   "modelId": "claude-opus-5-5",
+   "modelAsStated": "Opus 5.5, low effort",
+   "effort": "low",
+   "speedMode": null,
+   "stage": "S1",
+   "observer": "ricardoraposo",
+   "url": "https://github.com/anthropics/claude-code/issues/97074",
+   "mirrorUrls": [],
+   "reportDate": "2026-11-03",
+   "windowStated": false,
+   "windowStart": null,
+   "windowEnd": "2026-11-03",
+   "unit": "week",
+   "valueLower": 1560.0,
+   "valueUpper": 3087.0,
+   "quotedSpan": "(from the 2026-11-05 record, not re-read): $15.6 per weekly point (sdk-ts, uncached) to $30.87 (cache on, custom label); interactive uncached $20.6",
+   "derivation": "the 2026-11-05 stage-2 note, not re-verified",
+   "flags": {
+    "provisional": false,
+    "mixedModel": false,
+    "modelUnstated": false,
+    "tierUnstated": false,
+    "lowerBound": false,
+    "aggregator": false,
+    "challenged": false,
+    "derived": false,
+    "anomaly": false,
+    "spansSplit": false,
+    "nonInteractiveEntrypoint": false,
+    "controlledSynthetic": false,
+    "undercountRisk": false,
+    "outsideWindow": false
+   },
+   "archive": [
+    {
+     "file": "archive/github-rendered/anthropics-claude-code-97074-ricardoraposo.NOT-FOUND.md",
+     "sha256": "ecce44edfe44f64602dbbfaae4255aa4b9af71c4188d0f3122e6ee1edb47f711",
+     "bytes": 1335,
+     "fetchedAt": "2026-11-26 (WebFetch tool reply, see file header)",
+     "url": "https://github.com/anthropics/claude-code/issues/97074",
+     "byteExact": false,
+     "note": "WebFetch tool could not find the comment (122 collapsed items); no copy of the report exists"
+    }
+   ],
+   "reading": {
+    "eligibleInPartition": false,
+    "why": "source page not retrievable and the comment not found in the visible part of the thread: not counted"
+   }
+  },
+  {
+   "id": "smaug42-pro-opus55",
+   "provider": "Anthropic",
+   "plan": "Claude Pro",
+   "planAs": "Pro",
+   "modelId": "claude-opus-5-5",
+   "modelAsStated": "Opus 5.5 (Claude Code 2.1.311, Linux)",
+   "effort": null,
+   "speedMode": null,
+   "stage": "S1",
+   "observer": "smaug42",
+   "url": "https://github.com/anthropics/claude-code/issues/105621",
+   "mirrorUrls": [],
+   "reportDate": "2026-11-02",
+   "windowStated": true,
+   "windowStart": "2026-11-02T07:30-08:50 PT",
+   "windowEnd": "2026-11-02",
+   "unit": "5h",
+   "valueLower": 194.0,
+   "valueUpper": 206.0,
+   "quotedSpan": "\"a single task of ~99M tokens (approx $32 API-equivalent, 07:30-08:50 PT) used 16% of the 5-hour session and 3% of the weekly limit\"",
+   "derivation": "$32 / 0.16 = $200 per 5h; weekly $32 / 0.03 = $1,067 (range $914-$1,280 at 2.5-3.5%)",
+   "flags": {
+    "provisional": false,
+    "mixedModel": false,
+    "modelUnstated": false,
+    "tierUnstated": false,
+    "lowerBound": false,
+    "aggregator": false,
+    "challenged": false,
+    "derived": false,
+    "anomaly": true,
+    "spansSplit": false,
+    "nonInteractiveEntrypoint": false,
+    "controlledSynthetic": false,
+    "undercountRisk": false,
+    "outsideWindow": false
+   },
+   "archive": [
+    {
+     "file": "archive/github-rendered/anthropics-claude-code-105621-smaug42-jcorners68.rendered.md",
+     "sha256": "f2a756b9341aa9be22f50eacca77916a5ed339b25a0c2a6cb7cf690662aa1920",
+     "bytes": 2696,
+     "fetchedAt": "2026-11-26 (WebFetch tool reply, see file header)",
+     "url": "https://github.com/anthropics/claude-code/issues/105621",
+     "byteExact": false,
+     "note": "WebFetch tool rendering; github.com and api.github.com were refused by the session proxy"
+    }
+   ],
+   "reading": {
+    "eligibleInPartition": false,
+    "why": "no byte-exact copy (O165); also about 4x every other Pro reading"
+   }
+  },
+  {
+   "id": "sergiokapone-pro-opus55-mixed-5h",
+   "provider": "Anthropic",
+   "plan": "Claude Pro",
+   "planAs": "Pro",
+   "modelId": "claude-opus-5-5",
+   "modelAsStated": "Opus 5.5 main session (153 requests), Haiku 4.5 (22 requests), Sonnet 5.5 (1 request)",
+   "effort": null,
+   "speedMode": null,
+   "stage": "S2",
+   "observer": "sergiokapone",
+   "url": "https://github.com/anthropics/claude-code/issues/101937",
+   "mirrorUrls": [],
+   "reportDate": "2026-10-27",
+   "windowStated": true,
+   "windowStart": "2026-10-27T13:30+02:00",
+   "windowEnd": "2026-10-27T15:07+02:00",
+   "unit": "5h",
+   "valueLower": 13.0,
+   "valueUpper": 14.0,
+   "quotedSpan": "\"5h limit reached 100% at ~15:07 ... weekly limit only 10% ... API-equivalent cost of the whole window: roughly $13-14\"",
+   "derivation": null,
+   "flags": {
+    "provisional": false,
+    "mixedModel": true,
+    "modelUnstated": false,
+    "tierUnstated": false,
+    "lowerBound": false,
+    "aggregator": false,
+    "challenged": false,
+    "derived": false,
+    "anomaly": false,
+    "spansSplit": false,
+    "nonInteractiveEntrypoint": false,
+    "controlledSynthetic": false,
+    "undercountRisk": false,
+    "outsideWindow": false
+   },
+   "archive": [
+    {
+     "file": "archive/github-rendered/anthropics-claude-code-101937-sergiokapone.rendered.md",
+     "sha256": "a78697dcea17e6f0e046f13e3b5cca68d17844e40f7c94b744da1f2bba728185",
+     "bytes": 4270,
+     "fetchedAt": "2026-11-26 (WebFetch tool reply, see file header)",
+     "url": "https://github.com/anthropics/claude-code/issues/101937",
+     "byteExact": false,
+     "note": "WebFetch tool rendering; github.com and api.github.com were refused by the session proxy"
+    }
+   ],
+   "reading": {
+    "eligibleInPartition": false,
+    "why": "mixed models and no byte-exact copy (O165): not counted"
+   }
+  },
+  {
+   "id": "x2v-aiplans-2026-11-04-queued",
+   "provider": "Anthropic",
+   "plan": "Claude Pro",
+   "planAs": "see x2v-pro-opus55",
+   "modelId": "claude-opus-5-5",
+   "modelAsStated": "see x2v-pro-opus55",
+   "effort": "medium",
+   "speedMode": null,
+   "stage": "S1",
+   "observer": "x2v (aiplans.dev)",
+   "url": "https://aiplans.dev/reports/claude-pro-opus55-2026-11-04.md",
+   "mirrorUrls": [],
+   "reportDate": "2026-11-04",
+   "windowStated": false,
+   "windowStart": null,
+   "windowEnd": "2026-11-04",
+   "unit": "5h",
+   "valueLower": 26.0,
+   "valueUpper": 44.0,
+   "quotedSpan": "see x2v-pro-opus55",
+   "derivation": null,
+   "flags": {
+    "provisional": false,
+    "mixedModel": false,
+    "modelUnstated": false,
+    "tierUnstated": false,
+    "lowerBound": false,
+    "aggregator": false,
+    "challenged": false,
+    "derived": false,
+    "anomaly": false,
+    "spansSplit": false,
+    "nonInteractiveEntrypoint": true,
+    "controlledSynthetic": true,
+    "undercountRisk": false,
+    "outsideWindow": false
+   },
+   "archive": [
+    {
+     "file": "archive/aiplans-atlas/aiplans-claude-pro-opus55-2026-11-04.md",
+     "sha256": "512bb066bc9633649b9dedd8035be1ae4f1c565bd9b1f9c0bb2beee772251732",
+     "bytes": 1148,
+     "fetchedAt": "2026-11-26T03:14:32Z",
+     "url": "https://aiplans.dev/reports/claude-pro-opus55-2026-11-04.md"
+    }
+   ],
+   "reading": {
+    "eligibleInPartition": false,
+    "why": "the queued record is now archived byte-exact: fetched 2026-11-26T03:14:32Z, 1,148 bytes, SHA-256 512bb066bc9633649b9dedd8035be1ae4f1c565bd9b1f9c0bb2beee772251732, identical to the 2026-11-05 copy; same reading as x2v-pro-opus55"
+   }
+  }
+ ]
+}

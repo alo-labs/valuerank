@@ -52,12 +52,12 @@ def test_write_redirect_renders_a_stub_pointing_at_the_new_location(templates, t
     env = build.jinja_env(templates)
     out = tmp_path / "site" / "tb4" / "index.html"
 
-    build.write_redirect(env, out, target="/benchmarks/terminal-bench-4/", title="Terminal-Bench 4.0 moved", canonical="https://x.test/benchmarks/terminal-bench-4/")
+    build.write_redirect(env, out, target="/benchmarks/terminal-bench-4/", title="Terminal-Bench 4.1 moved", canonical="https://x.test/benchmarks/terminal-bench-4/")
 
     text = out.read_text()
     assert 'content="0; url=/benchmarks/terminal-bench-4/"' in text
     assert 'rel="canonical" href="https://x.test/benchmarks/terminal-bench-4/"' in text
-    assert "Terminal-Bench 4.0 moved" in text
+    assert "Terminal-Bench 4.1 moved" in text
 
 
 def test_archive_legacy_page_injects_the_banner_after_the_body_tag(templates, tmp_path):

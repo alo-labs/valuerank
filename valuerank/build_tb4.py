@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Normalize the rendered official Terminal-Bench 4.0 leaderboard capture."""
+"""Normalize the rendered official Terminal-Bench 4.1 leaderboard capture."""
 
 from __future__ import annotations
 
@@ -13,7 +13,7 @@ from valuerank.clock import iso_z
 
 
 from valuerank.paths import DATA, ROOT
-TARGET_URL = "https://www.tbench.ai/leaderboard/terminal-bench/4.0"
+TARGET_URL = "https://www.tbench.ai/leaderboard/terminal-bench/4.1"
 HOMEPAGE_URL = "https://www.tbench.ai/"
 
 # O132 (2026-10-30): the AA Intelligence Index v5 cohort. tbench.ai shows one row per model (its best effort), so every
@@ -21,11 +21,19 @@ HOMEPAGE_URL = "https://www.tbench.ai/"
 COHORT_ALIAS: dict[str, str] = {}
 
 EXACT_ALIAS = {
+    # O211/2026-11-26: the 4.1 board's rendered rows (one per model, its best effort) that are exactly a cohort configuration.
+    "Fable 5.2 (max)": "claude-fable-5-2",
+    "GPT-6 Astra (max)": "gpt-6-astra",
+    "GPT-6 Luna (max)": "gpt-6-luna",
+    "GPT-6.1 Sol (max)": "gpt-6.1-sol",
+    "GPT-6.1 Terra (max)": "gpt-6.1-terra",
+    "GPT-6.2 Astra (max)": "gpt-6.2-astra",
+    "GPT-6.2 Sol (max)": "gpt-6.2-sol",
+    "Gemini 4 Carbon (high)": "gemini-4-carbon",
+    "Gemini 4 Neon (xhigh)": "gemini-4-neon",
+    "Muse Ember (xhigh)": "muse-ember-xhigh",
     "Opus 5.5 (max)": "claude-opus-5-5",
     "Sonnet 5.5 (max)": "claude-sonnet-5-5",
-    "GPT-6 Astra (max)": "gpt-6-astra",
-    "GPT-6.1 Sol (max)": "gpt-6.1-sol",
-    "GPT-6 Luna (max)": "gpt-6-luna",
 }
 
 
@@ -57,7 +65,7 @@ def main(argv: list[str] | None = None, *, data: Path = DATA) -> int:
     raw = json.loads(raw_bytes)
     rows = raw.get("rows", [])
     if not rows or rows[0] != ["RANK", "MODEL", "AGENT", "RESOLUTION RATE", "RELEASE DATE", "TOKENS", "COST"]:
-        raise ValueError("Terminal-Bench capture does not contain the expected 4.0 table header")
+        raise ValueError("Terminal-Bench capture does not contain the expected 4.1 table header")
     entries = []
     for index, values in enumerate(rows[1:], 1):
         if len(values) != 7:
@@ -92,7 +100,7 @@ def main(argv: list[str] | None = None, *, data: Path = DATA) -> int:
     provider_claims = [
         claim for claim in claim_document.get("claims", [])
         if claim.get("benchmark") == "Terminal-Bench"
-        and claim.get("benchmarkVersion") == "4.0"
+        and claim.get("benchmarkVersion") == "4.1"
         and claim.get("eligibleForRanking") is True
         and claim.get("cohortModelId") not in matches
     ]
@@ -103,7 +111,7 @@ def main(argv: list[str] | None = None, *, data: Path = DATA) -> int:
     ]
     document = {
         "schemaVersion": "valuerank-terminal-bench-v1",
-        "version": "4.0",
+        "version": "4.1",
         "observedAt": iso_z(),
         "source": {
             "publisher": "Terminal-Bench / Harbor",

@@ -8,14 +8,14 @@
   "summary": {
     "rank": {
       "api": 3,
-      "plan": 12
+      "plan": 5
     },
     "overall": {
-      "api": 54.576831663758206,
-      "plan": 59.271315491890235
+      "api": 52.03999523918208,
+      "plan": 58.07381473150029
     },
-    "quality": 54.98104151382072,
-    "qualityRank": 7,
+    "quality": 53.3843738333008,
+    "qualityRank": 5,
     "coverage": {
       "pct": 100.0,
       "costAvailable": true,
@@ -39,17 +39,17 @@
       "unit": "AA score (0-1)",
       "normalized": 33.387575757575796,
       "source": {
-        "name": "Artificial Analysis model page (Intelligence Index v5.0)",
+        "name": "Artificial Analysis model page (Intelligence Index v5.0.2)",
         "url": "https://artificialanalysis.ai/evaluations/frontiercode-2-0"
       },
-      "observedAt": "2026-11-01",
+      "observedAt": "2026-11-26",
       "evaluatedVariant": null,
       "note": null,
       "grade": "measured"
     },
     {
       "key": "terminalBench",
-      "label": "Terminal-Bench 4.0 (AA run)",
+      "label": "Terminal-Bench 4.1 (AA run)",
       "category": "Software engineering",
       "weightPct": 12.75,
       "value": 47.979797979798,
@@ -57,10 +57,10 @@
       "unit": "% resolved",
       "normalized": 47.979797979798,
       "source": {
-        "name": "Artificial Analysis Terminal-Bench 4.0 run (mini-SWE-agent)",
-        "url": "https://www.tbench.ai/leaderboard/terminal-bench/4.0"
+        "name": "Artificial Analysis Terminal-Bench 4.1 run (mini-SWE-agent)",
+        "url": "https://www.tbench.ai/leaderboard/terminal-bench/4.1"
       },
-      "observedAt": "2026-11-01",
+      "observedAt": "2026-11-26",
       "evaluatedVariant": "mini-SWE-agent",
       "note": null,
       "grade": "measured"
@@ -73,12 +73,12 @@
       "value": 59.5,
       "decimals": 1,
       "unit": "% of the board's best planted plus best unplanted bugs fixed (O163, O170)",
-      "normalized": 48.65085854456255,
+      "normalized": 42.74425287356322,
       "source": {
         "name": "Bug Hunt Bench published runs",
         "url": "https://bughunt.productcompass.pm/"
       },
-      "observedAt": "2026-10-27",
+      "observedAt": "2026-11-25",
       "evaluatedVariant": "GPT-6.1 Sol (medium effort) - mean of 2 / Codex CLI",
       "note": null,
       "grade": "measured"
@@ -88,34 +88,16 @@
       "label": "AI Coding Daily (excl. bug finding)",
       "category": "Software engineering",
       "weightPct": 7.5,
-      "value": 55.67,
+      "value": 73.94,
       "decimals": 1,
-      "unit": "points of 60",
-      "normalized": 92.78333333333333,
+      "unit": "points of 80",
+      "normalized": 92.425,
       "source": {
-        "name": "Artificial Analysis model page (Intelligence Index v5.0)",
+        "name": "Artificial Analysis model page (Intelligence Index v5.0.2)",
         "url": "https://aicodingdaily.com/leaderboard"
       },
-      "observedAt": "2026-11-01",
+      "observedAt": "2026-11-26",
       "evaluatedVariant": "GPT-6.1-Sol (Medium) / Codex CLI",
-      "note": null,
-      "grade": "measured"
-    },
-    {
-      "key": "gdpval",
-      "label": "GDPval-AA v2.1",
-      "category": "Professional work",
-      "weightPct": 7.5,
-      "value": 1459.05,
-      "decimals": 1,
-      "unit": "Elo",
-      "normalized": 47.9525,
-      "source": {
-        "name": "Artificial Analysis model page (Intelligence Index v5.0)",
-        "url": "https://artificialanalysis.ai/evaluations/gdpval-aa"
-      },
-      "observedAt": "2026-11-01",
-      "evaluatedVariant": null,
       "note": null,
       "grade": "measured"
     },
@@ -129,10 +111,10 @@
       "unit": "AA score (0-1)",
       "normalized": 62.573509704356866,
       "source": {
-        "name": "Artificial Analysis model page (Intelligence Index v5.0)",
+        "name": "Artificial Analysis model page (Intelligence Index v5.0.2)",
         "url": "https://artificialanalysis.ai/evaluations/automationbench-aa"
       },
-      "observedAt": "2026-11-01",
+      "observedAt": "2026-11-26",
       "evaluatedVariant": null,
       "note": null,
       "grade": "measured"
@@ -147,10 +129,46 @@
       "unit": "AA Omniscience Index (-100 to 100)",
       "normalized": 70.08333333333333,
       "source": {
-        "name": "Artificial Analysis model page (Intelligence Index v5.0)",
+        "name": "Artificial Analysis model page (Intelligence Index v5.0.2)",
         "url": "https://artificialanalysis.ai/evaluations/omniscience"
       },
-      "observedAt": "2026-11-01",
+      "observedAt": "2026-11-26",
+      "evaluatedVariant": null,
+      "note": null,
+      "grade": "measured"
+    },
+    {
+      "key": "gdpval",
+      "label": "GDPval-AA v2.1",
+      "category": "Professional work",
+      "weightPct": 3.75,
+      "value": 1463.95,
+      "decimals": 1,
+      "unit": "Elo",
+      "normalized": 48.1975,
+      "source": {
+        "name": "Artificial Analysis model page (Intelligence Index v5.0.2)",
+        "url": "https://artificialanalysis.ai/evaluations/gdpval-aa"
+      },
+      "observedAt": "2026-11-26",
+      "evaluatedVariant": null,
+      "note": null,
+      "grade": "measured"
+    },
+    {
+      "key": "gdpPdf",
+      "label": "GDP.pdf (AA)",
+      "category": "Professional work",
+      "weightPct": 3.75,
+      "value": 0.3,
+      "decimals": 3,
+      "unit": "share of tasks fully passed (0-1)",
+      "normalized": 30.0,
+      "source": {
+        "name": "Artificial Analysis model page (Intelligence Index v5.0.2)",
+        "url": "https://artificialanalysis.ai/evaluations/gdp-pdf"
+      },
+      "observedAt": "2026-11-26",
       "evaluatedVariant": null,
       "note": null,
       "grade": "measured"
@@ -165,10 +183,10 @@
       "unit": "accuracy (0-1)",
       "normalized": 83.3333333333333,
       "source": {
-        "name": "Artificial Analysis model page (Intelligence Index v5.0)",
+        "name": "Artificial Analysis model page (Intelligence Index v5.0.2)",
         "url": "https://artificialanalysis.ai/evaluations/artificial-analysis-long-context-reasoning"
       },
-      "observedAt": "2026-11-01",
+      "observedAt": "2026-11-26",
       "evaluatedVariant": null,
       "note": null,
       "grade": "measured"
@@ -183,10 +201,10 @@
       "unit": "accuracy (0-1)",
       "normalized": 46.0,
       "source": {
-        "name": "Artificial Analysis model page (Intelligence Index v5.0)",
+        "name": "Artificial Analysis model page (Intelligence Index v5.0.2)",
         "url": "https://artificialanalysis.ai/evaluations/hle-diamond"
       },
-      "observedAt": "2026-11-01",
+      "observedAt": "2026-11-26",
       "evaluatedVariant": null,
       "note": null,
       "grade": "measured"
@@ -201,10 +219,10 @@
       "unit": "% resolved (0-1)",
       "normalized": 37.142857142857096,
       "source": {
-        "name": "Artificial Analysis model page (Intelligence Index v5.0)",
+        "name": "Artificial Analysis model page (Intelligence Index v5.0.2)",
         "url": "https://artificialanalysis.ai/evaluations/terminal-bench-science"
       },
-      "observedAt": "2026-11-01",
+      "observedAt": "2026-11-26",
       "evaluatedVariant": null,
       "note": null,
       "grade": "measured"
@@ -214,15 +232,15 @@
       "label": "CritPt v2 (hard subset)",
       "category": "Knowledge and science",
       "weightPct": 1.25,
-      "value": 0.65,
+      "value": 0.67,
       "decimals": 3,
       "unit": "score (0-1)",
-      "normalized": 65.0,
+      "normalized": 67.0,
       "source": {
-        "name": "Artificial Analysis model page (Intelligence Index v5.0)",
+        "name": "Artificial Analysis model page (Intelligence Index v5.0.2)",
         "url": "https://artificialanalysis.ai/evaluations/critpt-v2"
       },
-      "observedAt": "2026-11-01",
+      "observedAt": "2026-11-26",
       "evaluatedVariant": null,
       "note": null,
       "grade": "measured"
@@ -246,7 +264,7 @@
     },
     "subset": false,
     "partialComponents": [],
-    "workload": "835a9baf594a1251",
+    "workload": "9c122a3ecb672aae",
     "planFlags": [
       "workload-unmatched",
       "same-model measurement from another effort (O88, O90)",
@@ -255,7 +273,7 @@
       "valuation basis unverified"
     ],
     "costScore": {
-      "api": 53.36420211357066,
+      "api": 48.00685945682594,
       "plan": 72.14213742609876
     },
     "components": [
@@ -287,9 +305,9 @@
         "admitted": true
       },
       {
-        "key": "terminalbench-4-0",
-        "label": "Terminal-Bench 4.0 (AA Index run)",
-        "costUsd": 40.50786105603271,
+        "key": "terminalbench-4-1",
+        "label": "Terminal-Bench 4.1 (AA Index run)",
+        "costUsd": 40.5078610560327,
         "completeness": "confirmed-complete",
         "source": "AA Intelligence Index evaluation cost (cost per task x task count)",
         "agent": null,
@@ -307,7 +325,7 @@
       {
         "key": "terminal-bench-science",
         "label": "Terminal-Bench-Science",
-        "costUsd": 61.01671168028233,
+        "costUsd": 61.016711680282334,
         "completeness": "confirmed-complete",
         "source": "AA Intelligence Index evaluation cost (cost per task x task count)",
         "agent": null,
@@ -352,8 +370,8 @@
       "planIntervalEligible": false,
       "usdPerRun": 33.48594962739886,
       "selected": true,
-      "planRank": 12,
-      "planValue": 59.271315491890235
+      "planRank": 5,
+      "planValue": 58.07381473150029
     },
     {
       "id": "chatgpt-plus-gpt-6.1-sol-medium-common-gpt-assumption",
@@ -370,8 +388,8 @@
       "planIntervalEligible": false,
       "usdPerRun": 34.190582880221854,
       "selected": false,
-      "planRank": 14,
-      "planValue": 59.14775546608959
+      "planRank": 6,
+      "planValue": 57.95025470569965
     },
     {
       "id": "chatgpt-pro100-gpt-6.1-sol-medium-common-gpt-assumption",
@@ -388,8 +406,8 @@
       "planIntervalEligible": false,
       "usdPerRun": 34.190582880221854,
       "selected": false,
-      "planRank": 14,
-      "planValue": 59.14775546608959
+      "planRank": 6,
+      "planValue": 57.95025470569965
     },
     {
       "id": "chatgpt-pro200-gpt-6.1-sol-medium-common-gpt-assumption",
@@ -406,8 +424,8 @@
       "planIntervalEligible": false,
       "usdPerRun": 34.61714485473518,
       "selected": false,
-      "planRank": 17,
-      "planValue": 59.0741876699091
+      "planRank": 9,
+      "planValue": 57.87668690951916
     }
   ],
   "scenarios": {
@@ -437,7 +455,7 @@
         "targetProfile": "published-record reporting precision + conventional identification of missing leaves + weight-specification stress",
         "unevaluable": null,
         "top1": 0.0,
-        "top3": 0.996,
+        "top3": 1.0,
         "frontier": 1.0
       },
       {
@@ -463,18 +481,18 @@
         "kernel": "primary",
         "targetProfile": "mixed-target performance dispersion stress, not a common confidence interval for published mean performance (reviewer 101): published-record leaf values redrawn from task-count approximations (binomial leaves from their Jeffreys Beta posterior, O142, with its recentred, clipped alternative, O154, whose realised mean shift is reported; independent-task approximation), Vals' published standard errors, an assumed reading of GDPval-AA's displayed rating interval and Bug Hunt's single-run dispersion + conventional identification of missing leaves",
         "unevaluable": null,
-        "top1": 0.101,
-        "top3": 0.8604,
-        "frontier": 0.9553
+        "top1": 0.1644,
+        "top3": 0.8888,
+        "frontier": 0.9424
       },
       {
         "stratum": "S1T",
         "kernel": "recentred",
         "targetProfile": "mixed-target performance dispersion stress, not a common confidence interval for published mean performance (reviewer 101): published-record leaf values redrawn from task-count approximations (binomial leaves from their Jeffreys Beta posterior, O142, with its recentred, clipped alternative, O154, whose realised mean shift is reported; independent-task approximation), Vals' published standard errors, an assumed reading of GDPval-AA's displayed rating interval and Bug Hunt's single-run dispersion + conventional identification of missing leaves",
         "unevaluable": null,
-        "top1": 0.0984,
-        "top3": 0.878,
-        "frontier": 0.9596
+        "top1": 0.1701,
+        "top3": 0.9037,
+        "frontier": 0.9522
       }
     ],
     "plan": [
@@ -501,9 +519,9 @@
         "kernel": "primary",
         "targetProfile": "published-record reporting precision + conventional identification of missing leaves + weight-specification stress",
         "unevaluable": null,
-        "top1": 0.0,
-        "top3": 0.0,
-        "frontier": 0.5408
+        "top1": 0.0002,
+        "top3": 0.0087,
+        "frontier": 1.0
       },
       {
         "stratum": "S1",
@@ -528,18 +546,18 @@
         "kernel": "primary",
         "targetProfile": "mixed-target performance dispersion stress, not a common confidence interval for published mean performance (reviewer 101): published-record leaf values redrawn from task-count approximations (binomial leaves from their Jeffreys Beta posterior, O142, with its recentred, clipped alternative, O154, whose realised mean shift is reported; independent-task approximation), Vals' published standard errors, an assumed reading of GDPval-AA's displayed rating interval and Bug Hunt's single-run dispersion + conventional identification of missing leaves",
         "unevaluable": null,
-        "top1": 0.1744,
-        "top3": 0.1956,
-        "frontier": 0.5211
+        "top1": 0.2929,
+        "top3": 0.3442,
+        "frontier": 0.9995
       },
       {
         "stratum": "S1T",
         "kernel": "recentred",
         "targetProfile": "mixed-target performance dispersion stress, not a common confidence interval for published mean performance (reviewer 101): published-record leaf values redrawn from task-count approximations (binomial leaves from their Jeffreys Beta posterior, O142, with its recentred, clipped alternative, O154, whose realised mean shift is reported; independent-task approximation), Vals' published standard errors, an assumed reading of GDPval-AA's displayed rating interval and Bug Hunt's single-run dispersion + conventional identification of missing leaves",
         "unevaluable": null,
-        "top1": 0.1646,
-        "top3": 0.1881,
-        "frontier": 0.5199
+        "top1": 0.2913,
+        "top3": 0.3409,
+        "frontier": 0.9995
       }
     ]
   },
@@ -552,11 +570,11 @@
   },
   "history": [
     {
-      "version": "v3.0.0",
-      "date": "2026-10-19",
+      "version": "v3.1.0",
+      "date": "2026-11-26",
       "rank": {
         "api": 3,
-        "plan": 12
+        "plan": 5
       }
     }
   ],
@@ -592,11 +610,11 @@
       "rankingEligible": true,
       "rank": {
         "api": 3,
-        "plan": 12
+        "plan": 5
       },
       "overall": {
-        "api": 54.576831663758206,
-        "plan": 59.271315491890235
+        "api": 52.03999523918208,
+        "plan": 58.07381473150029
       }
     },
     {
@@ -607,11 +625,11 @@
       "rankingEligible": true,
       "rank": {
         "api": 7,
-        "plan": 26
+        "plan": 23
       },
       "overall": {
-        "api": 48.56375174950048,
-        "plan": 56.25372062165623
+        "api": 47.36052123258464,
+        "plan": 54.950196233668805
       }
     }
   ]

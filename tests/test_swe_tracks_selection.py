@@ -31,9 +31,11 @@ def test_selection_prefers_the_bug_hunt_harness_then_the_latest_date_then_stops(
         tracks.select_aicd("m", "M", {"M": [row("A", "2026-10-05"), other]})
 
 
-def test_the_real_board_selects_deepseeks_harness_row():
+def test_the_real_board_selects_the_one_row_a_model_has():
+    """Since the 2026-11-13 board lists DeepSeek V4.1 Flash only under OpenCode, the rule has nothing to choose between; the points are out of 80 (O215)."""
+
     chosen = tracks.select_aicd("deepseek-v4-1-flash-1017", "Deepseek-V4.1-Flash-1017 (Max)", tracks.aicd_rows())
-    assert chosen["row"]["harness"] == "DeepSeek Harness" and tracks.aicd_points(chosen["row"]) == 52.24
+    assert chosen["row"]["harness"] == "OpenCode" and chosen["alternates"] == [] and tracks.aicd_points(chosen["row"]) == 69.11
 
 
 def test_row_dates_follow_o69():

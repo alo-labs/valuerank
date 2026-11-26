@@ -49,6 +49,7 @@ LEAF_TRANSFORMS = {
     "frontierCode": "z = 100 × score",
     "terminalBench": "z = resolution %",
     "gdpval": "z = 100 × (Elo − 500) / 2000 (AA's integration transform)",
+    "gdpPdf": "z = 100 × share of tasks fully passed (O210)",
     "automationBench": "z = 100 × score",
     "omniscience": "z = (I + 100) / 2 on AA's Omniscience Index I (O28)",
     "lcr": "z = 100 × accuracy",
@@ -57,8 +58,8 @@ LEAF_TRANSFORMS = {
     "critpt": "z = 100 × score",
     "vibeCode": "z = pass rate %",
     "codeMigration": "z = pass rate %",
-    "livebench2Overall": "z = LiveBench's weighted Overall of the seven category scores (release 2026-10-25, O67, O139)",
-    "aiCodingDaily": "z = 100 × points / 60",
+    "livebench2Overall": "z = LiveBench's weighted Overall of the seven category scores (release 2026-11-06, O67, O211)",
+    "aiCodingDaily": "z = 100 × points / 80",
 }
 SOURCE_LABELS = {"aa": "AA-run", "independent": "independent"}
 SOURCE_TYPE_LABELS = {"aa_recapture": "newer AA capture", "independent": "independent run", "model_provider_claim": "model-provider result"}
@@ -329,7 +330,7 @@ def label_safety_note(facts, row_ids):
     flags = {row["id"]: row.get("agentSafety") or {} for row in facts.v3.get("rows", [])}
     flagged = [f"{facts.labels([row_id])} ({flags[row_id]['blocked']} blocked and {flags[row_id]['fallback']} fallback attempts of {flags[row_id]['attempts']})"
                for row_id in sorted({row_id.split("@")[0] for row_id in row_ids}) if flags.get(row_id, {}).get("status") == "flagged"]
-    text = (" Safety-refusal flags (O63; costs and scores unchanged) on these labelled rows: " + "; ".join(flagged) + ".") if flagged else ""
+    text = (" Safety-refusal flags (O63; costs and scores unchanged) on these rows: " + "; ".join(flagged) + ".") if flagged else ""
     # O160 as amended by O182/O183: the like-for-like check gates the labels; any label issued while the success-adjusted
     # check warns carries that warning.
     check = (facts.v3.get("diagnostics") or {}).get("workloadCrossCheck") or {}
@@ -383,12 +384,12 @@ def interval_sentences(facts):
     return sentences
 
 
-CODING_COMPONENTS = ("coding-agent-index", "terminalbench-4-0", "frontiercode-2-0")
+CODING_COMPONENTS = ("coding-agent-index", "terminalbench-4-1", "frontiercode-2-0")
 # E343 (reviewer 100, owner correction): Terminal-Bench-Science is terminal-task execution in the SDLC basket (O137) although its
 # quality sits with science (O136), so the share is also printed with it counted.
 TERMINAL_SCIENCE = "terminal-bench-science"
 # Basket components priced in the cost but with no quality leaf of their own (E203 disclosure; O6 and O15 stand).
-UNREWARDED_COMPONENTS = ("aa-briefcase", "gdp-pdf")
+UNREWARDED_COMPONENTS = ("aa-briefcase",)  # GDP.pdf has a quality leaf since O210
 
 
 def _median_share(v3, keys):
@@ -418,7 +419,7 @@ def coding_share_text(v3):
                f"({pct(wide[1], 0)} to {pct(wide[2], 0)}; E343)" if wide else "")
     return (f" Coding and terminal tasks ({labels}) make up {pct(middle, 0)} of the basket's cost (median over {n} configurations "
             f"with the full basket; {pct(low, 0)} to {pct(high, 0)}){science}; {', '.join(component_label(key) for key in UNREWARDED_COMPONENTS)}, "
-            f"which have no quality leaf, make up {pct(unrewarded, 0)}{atlas}.")
+            f"which has no quality leaf, makes up {pct(unrewarded, 0)}{atlas}.")
 
 
 def influence_text(v3, short=False):
@@ -439,8 +440,12 @@ def influence_text(v3, short=False):
         return (f" That weight is nominal: on the current panel cost's covariance allocation of value variance is {pct(shares['api'], 0)} on the API basis "
                 f"and {pct(shares['plan'], 0)} on the Plan basis; a negative allocation means dearer configurations score higher on quality, so cost "
                 "offsets quality differences instead of adding spread of its own (see [methodology.md](methodology.md)).")
+    larger = [basis for basis in ("api", "plan") if shares[basis] > 0.5]
+    reason = ("because cost scores spread more than quality scores" if len(larger) == 2
+              else "because quality scores spread more than cost scores" if not larger
+              else f"because cost scores spread more than quality scores on the {larger[0].upper() if larger[0] == 'api' else 'Plan'} basis and less on the other")
     return (f" That weight is nominal: on the current panel cost accounts for {pct(shares['api'], 0)} of the variance in API value and "
-            f"{pct(shares['plan'], 0)} in Plan value, because cost scores spread more than quality scores (see [methodology.md](methodology.md)).")
+            f"{pct(shares['plan'], 0)} in Plan value, {reason} (see [methodology.md](methodology.md)).")
 
 
 def negative_cost_banner(v3):
@@ -511,7 +516,7 @@ def search_gap_text(policy):
 def sampling_counts_text():
     """O39, O142: each binomial leaf's published task count, from the engine's table (never restated by hand)."""
 
-    labels = {"frontierCode": "FrontierCode 2.0", "terminalBench": "Terminal-Bench 4.0", "automationBench": "AutomationBench-AA", "lcr": "AA-LCR",
+    labels = {"frontierCode": "FrontierCode 2.0", "terminalBench": "Terminal-Bench 4.1", "gdpPdf": "GDP.pdf", "automationBench": "AutomationBench-AA", "lcr": "AA-LCR",
               "tbScience": "Terminal-Bench-Science", "hle": "HLE-Diamond", "critpt": "CritPt v2 (hard subset)"}
     counts = ", ".join(f"{label} {value_v3.SAMPLING_TASKS[key]:,}" for key, label in labels.items())
     return f"{counts}, Bug Hunt's {value_v3.SAMPLING_TASKS['bugHunt']} bugs"
@@ -978,8 +983,8 @@ Scenario shares by stream, diagnostics and the release gates are in [scores.md](
 ## Sources and audit trail
 
 - [Artificial Analysis methodology]({AA_METHODOLOGY_URL}) and its model pages: Intelligence Index component scores and the per-task evaluation costs of the basket.
-- [AA Coding Agent Index v2.0]({AA_CODING_AGENTS_URL}): the Coding Agent Index cost (FrontierCode, Terminal-Bench and SWE-Atlas-QnA-AA) for each exact configuration (O50); AA withdrew DeepSWE v1.1 in October 2026 and it is no longer a leaf (O49).
-- AA's own Terminal-Bench 4.0 run (the leaf; [tbench.ai]({TERMINAL_BENCH_URL}) rows fill a gap and serve as a cross-check, O37), [Bug Hunt Bench]({BUG_HUNT_URL}) owner-published runs, [Cognition's FrontierCode leaderboard]({facts.leaf_evidence['cognitionCapture']['url']}) and model-provider results for leaves AA has not run (O36).
+- [AA Coding Agent Index v2.1]({AA_CODING_AGENTS_URL}): the Coding Agent Index cost (FrontierCode 2.0, Terminal-Bench and SWE-Atlas-QnA-AA) for each exact configuration (O50); AA withdrew DeepSWE v1.1 in October 2026 and it is no longer a leaf (O49).
+- AA's own Terminal-Bench 4.1 run (the leaf; [tbench.ai]({TERMINAL_BENCH_URL}) rows fill a gap and serve as a cross-check, O37), [Bug Hunt Bench]({BUG_HUNT_URL}) owner-published runs, [Cognition's FrontierCode leaderboard]({facts.leaf_evidence['cognitionCapture']['url']}) and model-provider results for leaves AA has not run (O36).
 - [SemiAnalysis subscription measurements]({SEMIANALYSIS_URL}) (owner-selected 2026-10-07) for the Claude and ChatGPT plan Value Multiples; owner-named transfers are labelled as assumptions.
 - The evidence bundle in `data/scores.json` lists every input artifact with its SHA-256; bundle hash `{v3['evidenceBundle']['bundleHash']}`.
 - [Methodology co-design record]({SPEC_DIR}): the reviewed specification, every owner and editor decision, and each reviewer's findings.
@@ -990,7 +995,7 @@ Scenario shares by stream, diagnostics and the release gates are in [scores.md](
 - [scores.md](scores.md): rankings, leaf scores, basket costs, Plan routes, interval outputs, scenario shares, diagnostics and release gates
 - [raw-data.md](raw-data.md): every leaf input with its evidence locator, component costs, benchmark source tables, Plan routes and the evidence bundle
 - [https://valuerank.alolabs.dev/](https://valuerank.alolabs.dev/): website, generated by `valuerank.site.build` (source under [valuerank/site/](valuerank/site/))
-- [https://valuerank.alolabs.dev/benchmarks/terminal-bench-4/](https://valuerank.alolabs.dev/benchmarks/terminal-bench-4/): current Terminal-Bench 4.0 score-versus-cost page
+- [https://valuerank.alolabs.dev/benchmarks/terminal-bench-4/](https://valuerank.alolabs.dev/benchmarks/terminal-bench-4/): current Terminal-Bench 4.1 score-versus-cost page
 - [data/](data/): machine-readable snapshots and generated outputs (pipeline code lives in [valuerank/](valuerank/))
 - [docs/](docs/README.md): contributor documentation (repository layout, architecture, development, testing, refresh and release); `npm run verify` runs every check
 """ + facts.reconciliation_md
@@ -1099,7 +1104,7 @@ The cost figure is the **{boundary['label']}**. {v3['basketVersion']} holds the 
 
 {markdown_table(['Component', 'Status', 'Exact cost available', 'Complete', 'Ranked'], component_rows, numeric={2, 3, 4})}
 
-A configuration's basket cost is the sum of AA's published costs for the admitted components at that exact model and effort: each Intelligence Index component is AA's cost per task times its task count, and the Coding Agent Index cost is AA's unrounded mean cost per task times its 290 required tasks (O27, O50). The Index components plus AA's residual reproduce AA's published Index total for every configuration (see raw-data.md).
+A configuration's basket cost is the sum of AA's published costs for the admitted components at that exact model and effort: each Intelligence Index component is AA's cost per task times its task count, and the Coding Agent Index cost is AA's unrounded mean cost per task times its 322 required tasks (O27, O50; v2.1). The Index components plus AA's residual reproduce AA's published Index total for every configuration (see raw-data.md).
 
 **Cost boundary.** Source: {boundary['source']}. AA's cost covers the contestant model's API tokens; other charges are included, excluded or unknown per component:
 
@@ -1652,12 +1657,12 @@ def separability_text(facts):
 
 
 def aicd_narrow_text(api, plan):
-    """E263: AI Coding Daily's noise is read as six trials of the points share; the n = 60 reading is a sensitivity."""
+    """E263: AI Coding Daily's noise is read as seven trials of the points share; the n = 80 reading is a sensitivity."""
 
     if "aicdNarrow" not in api:
         return ""
-    return (" AI Coding Daily's noise treats its six graded projects as six trials of the share of 60 points (n = 6, the wide reading, E263); "
-            f"read as 60 trials, the median threshold would be {api['aicdNarrow']['medianSeparation']:.1f} (API) and "
+    return (" AI Coding Daily's noise treats its seven graded projects as seven trials of the share of 80 points (n = 7, the wide reading, E263); "
+            f"read as 80 trials, the median threshold would be {api['aicdNarrow']['medianSeparation']:.1f} (API) and "
             f"{plan['aicdNarrow']['medianSeparation']:.1f} (Plan), with {api['aicdNarrow']['separableAdjacentPairs']} and "
             f"{plan['aicdNarrow']['separableAdjacentPairs']} adjacent ranks separable.")
 
@@ -1721,7 +1726,8 @@ def cost_diagnostics_markdown(facts):
     if frontier["status"] == "evaluated":
         lines.append(
             f"- **Frontier-families anchors (E187, diagnostic):** anchors rebuilt from the {len(frontier['references'])} frontier and near-frontier references move "
-            + "; ".join(f"{label} {rank_change_text(frontier['bases'][basis]['rankChanges']['changes'], facts.labels)} (value points per cost doubling {fnum(frontier['bases'][basis]['exchangeRate']['valuePointsPerCostDoubling'], 2)} vs {fnum(frontier['bases'][basis]['frozenExchangeRate']['valuePointsPerCostDoubling'], 2)} frozen)" for basis, label in (("api", "API"), ("plan", "Plan")))
+            + "; ".join(f"{label} {rank_change_text(frontier['bases'][basis]['rankChanges']['changes'], facts.labels)} (value points per cost doubling {fnum(frontier['bases'][basis]['exchangeRate']['valuePointsPerCostDoubling'], 2)} vs {fnum(frontier['bases'][basis]['frozenExchangeRate']['valuePointsPerCostDoubling'], 2)} frozen)"
+                        if "rankChanges" in frontier["bases"][basis] else f"{label} anchors {frontier['bases'][basis]['status']}" for basis, label in (("api", "API"), ("plan", "Plan")))
             + "."
         )
     else:
@@ -1982,7 +1988,7 @@ AA withdrew DeepSWE v1.1 from its Coding Agent Index (v2.0, October 2026) and th
 |---:|---|---|---|---:|---|---|
 {deepswe_chart_table(deepswe)}
 
-## Terminal-Bench 4.0 official rows
+## Terminal-Bench 4.1 official rows
 
 {tb4['rowN']} official rows ({tb4['matchedN']} of {tb4['cohortN']} cohort matches), observed {tb4.get('observedAt', DASH)}. The published ± is the source's 95% confidence interval (used by stream S1M). {selected_agents_text(facts, tb4)}
 

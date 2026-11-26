@@ -21,12 +21,13 @@
       "costAvailable": false,
       "missing": [
         "FrontierCode 2.0",
-        "Terminal-Bench 4.0 (AA run)",
+        "Terminal-Bench 4.1 (AA run)",
         "Bug Hunt Bench",
         "Vibe Code Bench v1.1 (Vals)",
         "Code Migration v1.1 (Vals)",
         "LiveBench 2.0 Overall",
         "GDPval-AA v2.1",
+        "GDP.pdf (AA)",
         "AutomationBench-AA",
         "AA-Omniscience v1.1",
         "AA-LCR v1.1",
@@ -77,27 +78,12 @@
     },
     {
       "key": "terminalBench",
-      "label": "Terminal-Bench 4.0 (AA run)",
+      "label": "Terminal-Bench 4.1 (AA run)",
       "category": "Software engineering",
       "weightPct": 8.25,
       "value": null,
       "decimals": 1,
       "unit": "% resolved",
-      "normalized": null,
-      "source": null,
-      "observedAt": null,
-      "evaluatedVariant": null,
-      "note": null,
-      "grade": "missing"
-    },
-    {
-      "key": "gdpval",
-      "label": "GDPval-AA v2.1",
-      "category": "Professional work",
-      "weightPct": 7.5,
-      "value": null,
-      "decimals": 1,
-      "unit": "Elo",
       "normalized": null,
       "source": null,
       "observedAt": null,
@@ -173,6 +159,36 @@
       "value": null,
       "decimals": 1,
       "unit": "% of test workflows passed",
+      "normalized": null,
+      "source": null,
+      "observedAt": null,
+      "evaluatedVariant": null,
+      "note": null,
+      "grade": "missing"
+    },
+    {
+      "key": "gdpval",
+      "label": "GDPval-AA v2.1",
+      "category": "Professional work",
+      "weightPct": 3.75,
+      "value": null,
+      "decimals": 1,
+      "unit": "Elo",
+      "normalized": null,
+      "source": null,
+      "observedAt": null,
+      "evaluatedVariant": null,
+      "note": null,
+      "grade": "missing"
+    },
+    {
+      "key": "gdpPdf",
+      "label": "GDP.pdf (AA)",
+      "category": "Professional work",
+      "weightPct": 3.75,
+      "value": null,
+      "decimals": 3,
+      "unit": "share of tasks fully passed (0-1)",
       "normalized": null,
       "source": null,
       "observedAt": null,
@@ -271,11 +287,11 @@
   },
   "history": [],
   "frontier": {
-    "onAaFrontier": true,
-    "aaFrontierNote": "On the observed Artificial Analysis Intelligence Index versus total cost frontier as GPT-6 Astra (xhigh).",
-    "tier": "frontier",
+    "onAaFrontier": false,
+    "aaFrontierNote": "Not on the observed Artificial Analysis Intelligence Index versus total cost frontier.",
+    "tier": "left cohort",
     "configuration": "GPT-6 Astra (xhigh)",
-    "intelligenceGap": 0,
+    "intelligenceGap": null,
     "footnote": null
   },
   "rankings": [
@@ -317,11 +333,11 @@
       "rankingEligible": true,
       "rank": {
         "api": 5,
-        "plan": 42
+        "plan": 39
       },
       "overall": {
-        "api": 49.70291297617585,
-        "plan": 54.16261252462399
+        "api": 48.06760613351162,
+        "plan": 52.378546718082525
       }
     }
   ]

@@ -66,8 +66,8 @@ def log_searches(*model_ids):
     """O36: an exhaustive search logged on the cutoff for every leaf of the named configurations, with its open-web step (I28)."""
 
     def fn(document):
-        document["searches"] += [{"modelId": model_id, "leaf": leaf.key, "searchedOn": "2026-10-30", "result": "not found", "sources": [],
-                                  "openWeb": {"searchedOn": "2026-10-30", "queries": [f"{model_id} {leaf.key}"], "candidates": []}}
+        document["searches"] += [{"modelId": model_id, "leaf": leaf.key, "searchedOn": "2026-11-26", "result": "not found", "sources": [],
+                                  "openWeb": {"searchedOn": "2026-11-26", "queries": [f"{model_id} {leaf.key}"], "candidates": []}}
                                  for model_id in model_ids for leaf in quality.ALL_LEAVES.values()]
     return fn
 
@@ -440,7 +440,7 @@ def test_cost_is_api_cost_per_index_point_on_a_log_scale(built):
     assert built["scores.json"]["costMode"] == "aa-per-index-point"
 
 
-DEEPSEEK_CLAIM = {"model": "DeepSeek V4 Flash", "benchmark": "Terminal-Bench 4.0", "sourceUrl": "https://api-docs.deepseek.com/updates/"}
+DEEPSEEK_CLAIM = {"model": "DeepSeek V4 Flash", "benchmark": "Terminal-Bench 4.1", "sourceUrl": "https://api-docs.deepseek.com/updates/"}
 
 
 def test_manifest_and_outputs_list_expected_relative_paths(world, capsys):
@@ -452,7 +452,7 @@ def test_manifest_and_outputs_list_expected_relative_paths(world, capsys):
     manifest = json.loads((world / "data/run_manifest.json").read_text())
     scoring = manifest["scoring"]
     assert scoring["weights"] == json.loads((world / "data/scores.json").read_text())["weights"]
-    assert scoring["observedAt"] == "2026-11-01T06:10:00Z"
+    assert scoring["observedAt"] == "2026-11-26T14:00:00Z"
     # O51: DeepSeek V4 Flash is off the frontier, so no committed claim targets a cohort configuration.
     assert scoring["providerClaimsUsed"] == []
     assert scoring["primaryMissingFields"]
@@ -572,7 +572,7 @@ CAPTURE_CASES += [
     ("capture", lambda d: d.update(rendered_pareto_svg_path="M 1 2 Q 3 4"), "M/L coordinate pairs"),
     ("capture", lambda d: d.pop("rendered_pareto_svg_path"), "M/L coordinate pairs"),
     ("capture", _capture_path_falls, "does not rise strictly"),
-    ("capture", lambda d: d["points"].append({**next(item for item in d["points"] if item["fallback"]), "model_name": "Twin", "fallback": None}),
+    ("capture", lambda d: d["points"].append({**next(item for item in d["points"] if item["family"].startswith("Claude")), "model_name": "Twin", "fallback": "Default Fallback"}),
      r"both with and without fallback \(a matching decision is required, E214\): Claude"),
     ("capture", lambda d: d["points"].append({**d["points"][0], "model_name": "Cheaper Model", "svg_x": min(item["svg_x"] for item in d["frontier"]) - 10}),
      r"left of the rendered Pareto path \(an owner decision is required, E204\): Cheaper Model"),
@@ -617,11 +617,9 @@ def aa_edit(model_id, **changes):
 
 AA_IDENTITY_CASES = [
     (aa_edit("gpt-6-luna-high", aaUrl="https://artificialanalysis.ai/models/not-a-row"), "must identify one exact selected source URL"),
-    (aa_edit("gpt-6.1-sol", aaSlug="other-slug"), "source slug does not match"),
-    (aa_edit("gpt-6.1-sol", displayName="GPT-6 Astra"), "family does not match selected catalog identity"),
-    (aa_edit("mimo-v2-6-flash", aaVariant="high"), "unexpected selected effort"),
-    (aa_edit("gpt-6.1-sol", aaVariant="min"), "effort does not match selected catalog variant"),
-    (aa_edit("claude-opus-5-5-xhigh", aaName="Claude Opus 5.5 (Xhigh)", aaShortName="Opus 5.5 (xhigh)"), "fallback does not match"),
+    (aa_edit("gpt-6.2-sol", aaSlug="other-slug"), "source slug does not match"),
+    (aa_edit("gpt-6.2-sol", displayName="GPT-6 Astra"), "family does not match selected catalog identity"),
+    (aa_edit("gpt-6.2-sol", aaVariant="min"), "effort does not match selected catalog variant"),
 ]
 
 
@@ -629,6 +627,67 @@ AA_IDENTITY_CASES = [
 def test_frontier_family_must_match_selected_catalog(world, mutation, message):
     edit(world, "aa", mutation)
     with pytest.raises(ValueError, match=message):
+        run_main(world)
+
+
+SOL_URL = "https://artificialanalysis.ai/models/gpt-6-2-sol"
+FABLE_URL = "https://artificialanalysis.ai/models/claude-fable-5-2"
+
+
+def _capture_rows(document):
+    return [item for key in ("points", "frontier", "near_frontier") for item in document.get(key) or []]
+
+
+def _inventory_rows(document):
+    return [item for key in ("rows", "nearFrontierRows") for item in document.get(key) or []]
+
+
+def _as_reasoning_only(document):
+    """AA plots a model with no effort setting as "reasoning" in the inventory and with no effort in the capture."""
+
+    for item in _capture_rows(document):
+        if item.get("url") == SOL_URL:
+            item["effort"] = None
+    for item in _inventory_rows(document):
+        if item.get("sourceUrl") == SOL_URL:
+            item["evaluatedVariant"] = "Reasoning"
+
+
+def test_a_reasoning_only_frontier_identity_must_not_select_an_effort(world):
+    edit(world, "capture", _as_reasoning_only)
+    edit(world, "inventory", _as_reasoning_only)
+    with pytest.raises(ValueError, match="unexpected selected effort"):
+        run_main(world)
+
+
+def test_a_reasoning_only_frontier_identity_matches_a_catalog_model_with_no_effort(world):
+    """The frontier check accepts a "reasoning" inventory row for a catalog model that names no effort; whatever the build
+    reads afterwards (exact-effort evidence for that model) is its own concern, so only the identity check is asserted."""
+
+    edit(world, "capture", _as_reasoning_only)
+    edit(world, "inventory", _as_reasoning_only)
+    edit(world, "aa", aa_edit("gpt-6.2-sol", aaVariant=None))
+    try:
+        run_main(world)
+    except ValueError as error:
+        assert "reasoning-only frontier identity" not in str(error) and "effort does not match" not in str(error)
+
+
+def test_a_fallback_in_the_inventory_must_be_named_by_the_catalog_identity(world):
+    """AA's chart no longer prints "with fallback", but an inventory row that still does must match the catalog's own labels."""
+
+    def with_fallback(document):
+        for item in _capture_rows(document):
+            if item.get("url") == FABLE_URL:
+                item["fallback"] = "Default Fallback"
+        for item in _inventory_rows(document):
+            if item.get("sourceUrl") == FABLE_URL:
+                item["evaluatedVariant"] = f"{item['evaluatedVariant']} with fallback"
+
+    edit(world, "capture", with_fallback)
+    edit(world, "inventory", with_fallback)
+    edit(world, "aa", aa_edit("claude-fable-5-2", aaName="Claude Fable 5.2 (Max)", aaShortName="Fable 5.2 (max)"))
+    with pytest.raises(ValueError, match="fallback does not match"):
         run_main(world)
 
 
@@ -773,9 +832,13 @@ def test_single_missing_cost_leaves_that_row_unnormalized(world):
 
 def test_provider_claim_for_primary_model_is_recorded(world):
     def fn(document):
-        claim = dict(document["providerClaims"][0])
-        claim.update(cohortModelId="mimo-v2-6-flash", claimId="mimo-claim", sourceUrl="https://example.invalid/claim")
-        document["providerClaims"].append(claim)
+        # The release carries no provider claim, so the record is written out in full.
+        document["providerClaims"].append({
+            "claimId": "mimo-claim", "benchmark": "Terminal-Bench", "benchmarkVersion": "4.1", "component": "resolutionRate",
+            "cohortModelId": "mimo-v2-6-flash", "evaluatedModel": "MiMo-V2.6-Flash", "value": 0.312, "valuePct": 31.2,
+            "sourceType": "model_provider_claim", "publisher": "Xiaomi", "publishedOn": "2026-11-01", "sourceUrl": "https://example.invalid/claim",
+            "eligibleForRanking": True, "eligibilityScope": "current API alias", "alias": "mimo-v2.6-flash", "aliasStatus": "current", "caveat": "fixture",
+        })
     edit(world, "tb4", fn)
     run_main(world)
     out = outputs(world)
@@ -783,7 +846,7 @@ def test_provider_claim_for_primary_model_is_recorded(world):
     assert row["terminalBenchV4SourceType"] == "model_provider_claim"
     assert row["terminalBenchV4"] == 0.312
     assert out["run_manifest.json"]["scoring"]["providerClaimsUsed"] == [
-        {"model": "MiMo-V2.6-Flash", "benchmark": "Terminal-Bench 4.0", "sourceUrl": "https://example.invalid/claim"}
+        {"model": "MiMo-V2.6-Flash", "benchmark": "Terminal-Bench 4.1", "sourceUrl": "https://example.invalid/claim"}
     ]
 
 
@@ -1197,13 +1260,14 @@ def test_every_model_row_reports_its_aa_frontier_tier(world):
         seen_tiers.add(want[0])
         assert "frontierSelection" in model  # existing field untouched
     assert seen_tiers == {"frontier", "near", "left cohort", None}
-    # e.g. GPT-6.1 Sol (xhigh), GPT-6.1 Sol (low), Claude Sonnet 5.5 (xhigh) (retained, O145), the synthetic Claude Sonnet 5.5 (high)
-    assert sibling_tiers == {"frontier", "near", "left cohort", None}
+    # e.g. GPT-6.1 Sol (xhigh) and (low), Claude Opus 5.5 (xhigh) (retained, O145). The synthetic Claude Sonnet 5.5 (high) is no
+    # sibling of a plotted family here (Sonnet 5.5 is retained only), so no sibling reports the unplotted tier; it is checked below.
+    assert sibling_tiers == {"frontier", "near", "left cohort"}
     rows = model_rows(world)
     # O51: a plotted sibling enters the cohort on its own point; an unplotted one (the synthetic Claude Sonnet 5.5 (high)) does not.
     assert rows["claude-haiku-5-5-low"]["rankingInclusionReasons"] == ["Plotted on or within the near gap of AA's rendered frontier (O51)"]
     assert rows["claude-haiku-5-5-low"]["frontierSelection"] is None and rows["claude-haiku-5-5-low"]["family"] == "Claude Haiku 5.5"
-    assert rows["gpt-6.1-sol-low"]["rankingInclusionReasons"] == ["Plotted on or within the near gap of AA's rendered frontier (O51)"]
+    assert rows["gpt-6.2-sol-low"]["rankingInclusionReasons"] == ["Plotted on or within the near gap of AA's rendered frontier (O51)"]
     assert rows[OFF_COHORT_ID]["rankingInclusionReasons"] == [] and rows[OFF_COHORT_ID]["rankingEligible"] is False
     assert rows[OFF_COHORT_ID]["aaFrontierTier"] is None and rows[OFF_COHORT_ID]["family"] == "Claude Sonnet 5.5"
 
@@ -1263,7 +1327,7 @@ def test_near_family_without_overlap_coverage_still_ranks(world):
     # E278 (reviewer 74 M1): a new cohort family needs a three-stage O71 search that names it on its seller's plans.
     with pytest.raises(ValueError, match=r"no three-stage O71 search names these cohort model and plan cells \(O71, O75\): GPT-5.5 on ChatGPT Plus"):
         run_main(world)
-    edit(world, "routes", lambda document: next(entry for entry in document["evidencePolicy"]["searchLog"] if entry["searchedOn"] == "2026-10-31")["models"].append("GPT-5.5"))
+    edit(world, "routes", lambda document: next(entry for entry in document["evidencePolicy"]["searchLog"] if entry["searchedOn"] == "2026-11-26")["models"].append("GPT-5.5"))
     # O36: without Bug Hunt the near family enters the cohort but is listed, not ranked, once its search is logged.
     with pytest.raises(ValueError, match=r"gpt-5.5: no exhaustive search for (bugHunt|frontierCode|vibeCode|aiCodingDaily)"):
         run_main(world)
@@ -1306,8 +1370,8 @@ def test_a_frontier_family_must_rank_its_highest_rendered_frontier_point(world):
     """E193: a catalog that tracks a lower frontier point of a frontier family fails the build."""
 
     def fn(document):
-        document["models"]["claude-haiku-5-5-high"].update(
-            aaUrl=AA_URL + "claude-haiku-5-5-medium", aaSlug="claude-haiku-5-5-medium", aaVariant="medium")
+        document["models"]["claude-haiku-5-5-medium"].update(
+            aaUrl=AA_URL + "claude-haiku-5-5-low", aaSlug="claude-haiku-5-5-low", aaVariant="low")
     edit(world, "aa", fn)
     with pytest.raises(ValueError, match=r"must rank its highest rendered-frontier point \(E193\): Claude Haiku 5.5"):
         run_main(world)
@@ -1353,14 +1417,14 @@ def test_the_cohort_is_every_plotted_frontier_and_near_configuration(world):
     plotted = {row["sourceUrl"] for row in inventory["rows"] + inventory["nearFrontierRows"]}
     # O145: a configuration that left the frontier and near gap at this release stays a cohort row for one more release.
     retained = {row["sourceUrl"] for row in inventory["retainedRows"]}
-    assert len(retained) == 10 and not retained & plotted
+    assert len(retained) == 14 and not retained & plotted
     for model in model_rows(world).values():
         assert bool(model["rankingInclusionReasons"]) is (model["aaUrl"] in plotted | retained), model["id"]
         if model["aaUrl"] in retained:
             assert model["aaFrontierTier"] == "left cohort", model["id"]
             assert model["rankingInclusionReasons"][0].startswith("Left AA's rendered frontier and near gap at this release"), model["id"]
     rows = model_rows(world)
-    assert len([m for m in rows.values() if m["rankingInclusionReasons"]]) == 37
+    assert len([m for m in rows.values() if m["rankingInclusionReasons"]]) == 45
     assert rows[OFF_COHORT_ID]["rankingStatus"] == "excluded_from_primary_cohort"
     # O53: a cohort row is ranked in each ranking whose full set it has, and listed when it has none.
     assert rows["claude-opus-5-5-high"]["rankingEligible"] is True and rows["claude-opus-5-5-high"]["rankings"] == {"max": False, "aicd": True, "common": True}
@@ -1419,8 +1483,8 @@ def test_bug_hunt_cross_harness_lists_each_harness_at_the_exact_effort():
 
 
 def test_the_build_rejects_a_bug_hunt_record_that_is_not_the_largest_sample(world):
-    edit(world, "bughunt", lambda d: next(item for item in d["models"] if item["modelId"] == "gpt-6-astra").update(sampleN=1))
-    with pytest.raises(ValueError, match=r"gpt-6-astra is not the owner's largest-sample result"):
+    edit(world, "bughunt", lambda d: next(item for item in d["models"] if item["modelId"] == "gpt-6.2-sol").update(sampleN=1))
+    with pytest.raises(ValueError, match=r"gpt-6.2-sol is not the owner's largest-sample result"):
         run_main(world)
 
 
@@ -1495,9 +1559,9 @@ def test_the_legacy_composite_takes_terminal_bench_only_at_the_configurations_ef
     run_main(world)
     rows = model_rows(world)
     assert rows["claude-opus-5-5-xhigh"]["terminalBenchV4"] is None and rows["claude-opus-5-5-xhigh"]["terminalBenchV4Effort"] is None
-    assert rows["claude-opus-5-5"]["terminalBenchV4"] == pytest.approx(0.648)  # Opus 5.5 (max) is exact
+    assert rows["claude-opus-5-5"]["terminalBenchV4"] == pytest.approx(0.658)  # Opus 5.5 (max) is exact
     assert rows["claude-opus-5-5"]["terminalBenchV4Effort"] == "Opus 5.5 (max)"
-    assert rows["gpt-6-astra"]["terminalBenchV4"] == pytest.approx(0.582)  # GPT-6 Astra (max) is exact
+    assert rows["gpt-6-astra"]["terminalBenchV4"] == pytest.approx(0.603)  # GPT-6 Astra (max) is exact
 
 
 def test_bug_hunt_version_suffixes_match_only_registered_aliases():

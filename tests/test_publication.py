@@ -33,7 +33,7 @@ def test_evidence_labels():
 
 
 def test_benchmark_urls_share_the_source_constants():
-    assert pub.BENCHMARK_URLS["Terminal-Bench 4.0"] == pub.TERMINAL_BENCH_URL
+    assert pub.BENCHMARK_URLS["Terminal-Bench 4.1"] == pub.TERMINAL_BENCH_URL
     assert pub.BENCHMARK_URLS["DeepSWE pass@1"] == pub.AA_DEEPSWE_URL
     assert pub.BENCHMARK_URLS["Bug Hunt Bench"] == pub.BUG_HUNT_URL
 

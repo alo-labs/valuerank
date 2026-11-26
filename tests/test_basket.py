@@ -57,7 +57,7 @@ def test_index_components_without_a_full_set_or_published_total_cannot_reconcile
     assert reconciliation["sdlcUsd"] == 0
 
 
-def cai_record(total=290.0, mean=1.0, attempts=(300, 372, 198)):
+def cai_record(total=322.0, mean=1.0, attempts=(396, 372, 198)):
     return {
         "label": "Codex - GPT (max)",
         "totalCostUsd": total,
@@ -67,28 +67,28 @@ def cai_record(total=290.0, mean=1.0, attempts=(300, 372, 198)):
     }
 
 
-def test_coding_agent_component_prices_the_per_task_metric_over_290_tasks():
-    """O50: the Coding Agent Index v2.0 (FrontierCode 100, SWE-Atlas-QnA 124, Terminal-Bench 66 tasks)."""
+def test_coding_agent_component_prices_the_per_task_metric_over_322_tasks():
+    """O50 as of Coding Agent Index v2.1 (2026-11-26): FrontierCode 2.0 132, SWE-Atlas-QnA 124, Terminal-Bench 66 tasks."""
 
-    component = b.coding_agent_component(cai_record(total=288.6, mean=1.0))
-    assert component["costUsd"] == pytest.approx(290.0) and component["completeness"] == b.COMPLETE
+    component = b.coding_agent_component(cai_record(total=320.6, mean=1.0))
+    assert component["costUsd"] == pytest.approx(322.0) and component["completeness"] == b.COMPLETE
     assert component["configuration"] == "Codex - GPT (max)"
     assert component["detail"] == {
         "agent": None,
         "meanCostPerTaskUsd": 1.0,
-        "requiredTasks": 290,
-        "publishedSumUsd": 288.6,
-        "sumTaskEquivalent": pytest.approx(288.6),
-        "attempts": 870,
-        "requiredAttempts": 870,
+        "requiredTasks": 322,
+        "publishedSumUsd": 320.6,
+        "sumTaskEquivalent": pytest.approx(320.6),
+        "attempts": 966,
+        "requiredAttempts": 966,
     }
 
 
 def test_coding_agent_component_keeps_attempt_coverage_as_a_diagnostic():
-    record = cai_record(attempts=(296, 372, 198))
+    record = cai_record(attempts=(392, 372, 198))
     record["components"].append({"attempts": None})
     component = b.coding_agent_component(record)
-    assert component["detail"]["attempts"] == 866
+    assert component["detail"]["attempts"] == 962
     assert component["completeness"] == b.COMPLETE  # attempt coverage is a precision diagnostic (E53)
 
 
@@ -239,5 +239,18 @@ def test_admission_units_are_the_named_targets_whatever_the_accounting_represent
     children = {row: {key: value for key, value in entry.items() if key != b.CODING_AGENT_INDEX} for row, entry in costs.items()}
     for row in ("1", "2", "3", "4"):
         children[row].update({task: FULL for task in b.CODING_AGENT_TASKS})
-    with pytest.raises(ValueError, match="not a unit: frontiercode-v1.1-main, swe-atlas-qna, terminal-bench-v4"):
+    with pytest.raises(ValueError, match="not a unit: frontiercode-v2.0, swe-atlas-qna, terminal-bench-v4"):
         b.admission_panel(children, ranked)
+
+
+def test_index_evaluation_weights_sum_to_one_and_derive_cost_per_task():
+    """Index v5.0.2 prints each evaluation's weighted cost per task; dividing by the registered weight gives the cost per task."""
+
+    assert sum(b.INDEX_EVALUATION_WEIGHTS.values()) == pytest.approx(1.0)
+    listed = {"intelligenceIndexCostPerTask": {"evaluations": [
+        {"slug": "omniscience", "weightedCostPerTask": 3.0}, {"slug": "unknown-eval", "weightedCostPerTask": 1.0}, {"slug": "hle-diamond"},
+    ]}}
+    rows = {row["slug"]: row for row in b.evaluations_from_weighted(listed)}
+    assert rows["omniscience"]["costPerTask"] == pytest.approx(3.0 / 0.15)
+    assert "costPerTask" not in rows["unknown-eval"] and rows["unknown-eval"]["indexWeight"] is None
+    assert "costPerTask" not in rows["hle-diamond"] and b.evaluations_from_weighted({}) == []

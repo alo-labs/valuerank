@@ -1,4 +1,4 @@
-"""Behavior tests for the Terminal-Bench 4.0 normalisation stage (valuerank.build_tb4).
+"""Behavior tests for the Terminal-Bench 4.1 normalisation stage (valuerank.build_tb4).
 
 The stage reads a rendered leaderboard capture plus the AA cohort map and the
 provider-claims file. These tests use the hand-written synthetic copies under
@@ -55,13 +55,13 @@ def fixture_aliases(monkeypatch):
 
 
 def test_the_live_aliases_name_only_exact_max_effort_rows_of_the_cohort():
-    """O33: under the v5 cohort every alias is an exact model-and-effort label; no family is aliased by base name."""
+    """O33: under the v5 cohort every alias is an exact model-and-effort label of its cohort configuration; no family is aliased by base name."""
 
     live = runpy.run_path(str(ROOT / "valuerank" / "build_tb4.py"))
     assert live["COHORT_ALIAS"] == {}
     cohort = json.loads((ROOT / "data" / "aa_metrics.json").read_text())["models"]
     assert set(live["EXACT_ALIAS"].values()) <= set(cohort)
-    assert all(label.endswith("(max)") for label in live["EXACT_ALIAS"])
+    assert all(label.rsplit("(", 1)[1].rstrip(")") == cohort[model_id]["aaVariant"] for label, model_id in live["EXACT_ALIAS"].items())
 
 
 def synthetic_scrape() -> dict:
@@ -184,11 +184,11 @@ def test_main_normalises_rows_matches_the_cohort_and_records_capture_provenance(
 
     document = read_document(output)
     assert document["schemaVersion"] == "valuerank-terminal-bench-v1"
-    assert document["version"] == "4.0"
-    assert document["observedAt"] == "2026-11-01T06:10:00Z"
+    assert document["version"] == "4.1"
+    assert document["observedAt"] == "2026-11-26T14:00:00Z"
     assert document["source"] == {
         "publisher": "Terminal-Bench / Harbor",
-        "targetUrl": "https://www.tbench.ai/leaderboard/terminal-bench/4.0",
+        "targetUrl": "https://www.tbench.ai/leaderboard/terminal-bench/4.1",
         "renderedUrl": "https://www.tbench.ai/",
         "homepage": "https://www.tbench.ai/",
         "tasksUrl": "https://hub.harborframework.com/datasets/terminal-bench/terminal-bench/4?tab=tasks",
@@ -241,7 +241,7 @@ def test_main_summary_reports_counts_missing_models_and_the_output_path(data_dir
 
     summary = json.loads(capsys.readouterr().out)
     assert summary == {
-        "version": "4.0",
+        "version": "4.1",
         "rows": 4,
         "rowsWithoutCostN": 0,
         "cohortN": 6,
@@ -344,7 +344,7 @@ def test_main_refuses_a_capture_without_the_expected_table_header(data_dir, rows
         capture["rows"] = rows
     scrape = write_json(data_dir / "scrape.json", capture)
 
-    with pytest.raises(ValueError, match="Terminal-Bench capture does not contain the expected 4.0 table header"):
+    with pytest.raises(ValueError, match="Terminal-Bench capture does not contain the expected 4.1 table header"):
         build_tb4.main([str(scrape), str(data_dir / "tb4.json")], data=data_dir)
     assert not (data_dir / "tb4.json").exists()
 

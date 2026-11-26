@@ -1,0 +1,1251 @@
+<!DOCTYPE html>
+<html lang="en" class="h-full">
+  <head>
+
+    <meta charset="utf-8">
+    <title>Codex Usage Limits: 5-Hour Window, Weekly Cap, What Resets (2026)</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="facebook-domain-verification" content="htttrrja3l8wtqtciaym2t1r0ykvqz">
+    <meta name="description" content="Codex usage is metered in a rolling 5-hour window: Plus gets roughly 15 to 160 GPT-6.1 Sol messages, Pro has no 5-hour limit, and a weekly cap may apply.">
+    <meta name="author" content="Justin McKelvey">
+    <meta name="msvalidate.01" content="4945CBB6A409FFE8A69D73A069DE0521">
+      <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+    <meta name="theme-color" content="#0D0D0D">
+
+    <meta property="og:title" content="Codex Usage Limits Explained (2026)">
+    <meta property="og:description" content="Not a message count: a five-hour rolling allowance, a weekly cap, and the behaviors that burn it 3–5x faster. What Plus, Pro, and Business actually get.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://justinmckelvey.com/blog/codex-usage-limits">
+    <meta property="og:site_name" content="Justin McKelvey">
+    <meta property="og:image" content="https://justinmckelvey.com/rails/active_storage/blobs/redirect/eyJfcmFpbHMiOnsiZGF0YSI6NDk2LCJwdXIiOiJibG9iX2lkIn19--d4c5b9822952e94d4231dddc7d5944086eb633c5/codex-usage-limits.png">
+      <meta property="og:image:width" content="1200">
+      <meta property="og:image:height" content="630">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:image:alt" content="Codex Usage Limits Explained (2026)">
+        <meta property="article:published_time" content="2026-09-08T07:30:00-05:00">
+  <meta property="article:modified_time" content="2026-11-09T09:00:00-06:00">
+  <meta property="article:author" content="https://justinmckelvey.com/about">
+    <meta property="article:section" content="Vibe Code Rescue">
+
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Codex Usage Limits Explained (2026)">
+    <meta name="twitter:description" content="Not a message count: a five-hour rolling allowance, a weekly cap, and the behaviors that burn it 3–5x faster. What Plus, Pro, and Business actually get.">
+    <meta name="twitter:image" content="https://justinmckelvey.com/rails/active_storage/blobs/redirect/eyJfcmFpbHMiOnsiZGF0YSI6NDk2LCJwdXIiOiJibG9iX2lkIn19--d4c5b9822952e94d4231dddc7d5944086eb633c5/codex-usage-limits.png">
+    <meta name="twitter:site" content="@justinmckelvey">
+    <meta name="twitter:creator" content="@justinmckelvey">
+
+    <link rel="canonical" href="https://justinmckelvey.com/blog/codex-usage-limits">
+    <link rel="alternate" type="application/atom+xml" title="Justin McKelvey Blog" href="/feed.xml">
+    <link rel="alternate" type="text/plain" href="/llms.txt" title="LLM Content Index">
+    <link rel="alternate" type="text/plain" href="/llms-full.txt" title="LLM Full Content">
+      <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebSite","@id":"https://justinmckelvey.com/#website","url":"https://justinmckelvey.com","name":"Justin McKelvey","description":"AI consulting for business owners and teams of 10 to 200: AI readiness assessments, Claude, ChatGPT and Microsoft Copilot rollouts, and fractional CTO work. Austin, TX and remote.","inLanguage":"en-US","publisher":{"@id":"https://justinmckelvey.com/#person"},"potentialAction":{"@type":"SearchAction","target":"https://justinmckelvey.com/blog?q={search_term_string}","query-input":"required name=search_term_string"}},{"@type":"Person","@id":"https://justinmckelvey.com/#person","name":"Justin McKelvey","alternateName":["Justin Mckelvey","JM"],"url":"https://justinmckelvey.com","jobTitle":"AI Consultant \u0026 Founder of SuperDupr","alumniOf":{"@type":"CollegeOrUniversity","name":"Texas State University","url":"https://www.txst.edu"},"hasOccupation":{"@type":"Occupation","name":"AI Consultant","occupationalCategory":"15-1199.00","skills":"AI consulting, AI implementation, AI readiness assessment, Claude, ChatGPT and Microsoft Copilot rollouts, fractional CTO services, Ruby on Rails, MVP development, AI product strategy, vibe code rescue, AI readiness assessment, startup technical leadership","occupationLocation":{"@type":"City","name":"Austin","containedInPlace":{"@type":"State","name":"Texas"}}},"description":"AI consultant for business owners in Austin, TX and remote. Finds where AI saves a team time and money, then sets it up. Ran snowboard and mountain-bike shops for 12 years, taught himself to code, shipped 50+ products, and was Head of Product at a national sports platform and CTO at an AI startup.","image":"https://justinmckelvey.com/og-image-v2.jpg","knowsAbout":["AI Consulting","AI Implementation","AI Readiness Assessment","Claude, ChatGPT and Microsoft Copilot Rollouts","AI for Associations and Nonprofits","AI Search Visibility","Fractional CTO Services","AI Product Development","Ruby on Rails","Vibe Code Rescue","MVP Development","Product Strategy","Startup Technical Leadership"],"sameAs":["https://www.linkedin.com/in/justinmckelvey","https://github.com/JWade34","https://x.com/justinmckelvey","https://www.youtube.com/@JustinMcKelvey","https://instagram.com/justinmckelvey","https://tiktok.com/@justinmckelvey","https://threads.net/@justinmckelvey","https://bsky.app/profile/justinmckelvey.com"],"worksFor":[{"@id":"https://justinmckelvey.com/#organization"},{"@type":"Organization","@id":"https://superdupr.com/#organization","name":"SuperDupr","url":"https://superdupr.com"}],"knowsLanguage":"en"},{"@type":"Organization","@id":"https://justinmckelvey.com/#organization","name":"Justin McKelvey Consulting","legalName":"Fast City LLC","url":"https://justinmckelvey.com","logo":{"@type":"ImageObject","url":"https://justinmckelvey.com/favicon-32x32.png"},"founder":{"@id":"https://justinmckelvey.com/#person"},"foundingLocation":{"@type":"Place","address":{"@type":"PostalAddress","addressLocality":"Austin","addressRegion":"TX","addressCountry":"US"}},"areaServed":{"@type":"Country","name":"US"}},{"@type":"Article","@id":"https://justinmckelvey.com/blog/codex-usage-limits","headline":"Codex Usage Limits Explained: The 5-Hour Window, the Weekly Cap, and What Actually Resets (2026)","url":"https://justinmckelvey.com/blog/codex-usage-limits","mainEntityOfPage":{"@type":"WebPage","@id":"https://justinmckelvey.com/blog/codex-usage-limits"},"author":{"@id":"https://justinmckelvey.com/#person"},"datePublished":"2026-09-08T07:30:00-05:00","dateModified":"2026-11-09T09:00:00-06:00","description":"Codex usage is metered in a rolling 5-hour window: Plus gets roughly 15 to 160 GPT-6.1 Sol messages, Pro has no 5-hour limit, and a weekly cap may apply.","wordCount":3994,"inLanguage":"en-US","isAccessibleForFree":true,"speakable":{"@type":"SpeakableSpecification","cssSelector":["h1",".post-quick-answer",".post-faq dt",".post-faq dd"]},"isPartOf":{"@id":"https://justinmckelvey.com/#website"},"publisher":{"@id":"https://justinmckelvey.com/#organization"},"image":{"@type":"ImageObject","url":"https://justinmckelvey.com/rails/active_storage/blobs/redirect/eyJfcmFpbHMiOnsiZGF0YSI6NDk2LCJwdXIiOiJibG9iX2lkIn19--d4c5b9822952e94d4231dddc7d5944086eb633c5/codex-usage-limits.png","name":"Codex Usage Limits Explained: The 5-Hour Window, the Weekly Cap, and What Actually Resets (2026)","caption":"Codex Usage Limits Explained (2026)","description":"Not a message count: a five-hour rolling allowance, a weekly cap, and the behaviors that burn it 3–5x faster. What Plus, Pro, and Business actually get.","representativeOfPage":true}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://justinmckelvey.com/"},{"@type":"ListItem","position":2,"name":"Blog","item":"https://justinmckelvey.com/blog"},{"@type":"ListItem","position":3,"name":"Vibe Code Rescue","item":"https://justinmckelvey.com/blog/category/vibe-code-rescue"},{"@type":"ListItem","position":4,"name":"Codex Usage Limits Explained: The 5-Hour Window, the Weekly Cap, and What Actually Resets (2026)","item":"https://justinmckelvey.com/blog/codex-usage-limits"}]},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What are the Codex usage limits?","acceptedAnswer":{"@type":"Answer","text":"As of November 23, 2026 OpenAI describes Codex limits as an allowance per rolling five-hour window, not a fixed message count. Its own estimates for local messages per five-hour window on Plus ($20/mo) are roughly 6–50 with GPT-6.2 Astra, 17–180 with GPT-6.2 Sol, 15–160 with GPT-6.1 Sol, 35–285 with GPT-6.1 Terra and 350–3,000 with GPT-6 Luna. Pro ($100, $200 or $500) currently has no five-hour limit. A weekly limit may also apply on top, cloud tasks can use more than local messages, and starting in December ChatGPT and Codex share one allowance on Plus, Pro and Business."}},{"@type":"Question","name":"Is there a Codex weekly limit?","acceptedAnswer":{"@type":"Answer","text":"Yes, potentially. OpenAI's pricing page says local messages and cloud chats share the plan's allowance and that weekly limits may also apply, without publishing the weekly number. In practice the five-hour window is the one you feel first on an ordinary day; the weekly cap is the one you feel after several heavy days in a row. The usage dashboard in ChatGPT and the /status command in the Codex CLI show your current limits and reset times."}},{"@type":"Question","name":"What happens when Codex hits the usage limit mid-task?","acceptedAnswer":{"@type":"Answer","text":"The agent is allowed to finish the turn it is on, subject to fair use, so a long refactor does not die halfway. After that you wait for the window to reset, switch to a smaller model to stretch what is left, buy additional credits (available on Plus and Pro without changing plan), or run extra local sessions against an API key billed at usage rates. Upgrading the plan is the fourth option, not the first."}},{"@type":"Question","name":"How do Codex Pro limits compare to Plus?","acceptedAnswer":{"@type":"Answer","text":"As of November 23, 2026, Pro comes in three tiers, $100, $200 and $500 a month, and OpenAI's Codex page says Pro plans currently have no five-hour limit. Plus sits at roughly 17–180 GPT-6.2 Sol or 6–50 GPT-6.2 Astra messages per five-hour window. OpenAI publishes no per-window numbers for Pro, only that Pro 200 includes more usage than Pro 100 and Pro 500 the most, and weekly limits can still apply. OpenAI's Pro article now says Pro 100 and Pro 500 get twice their previous Work and Codex allowance, and the lower Pro 200 allowance announced in September was canceled, so every Pro 200 subscriber has the same, higher allowance. A Standard Business seat ($20 per user per month billed annually, $25 monthly) gets the Plus estimates; a Premium seat gets more included usage and no five-hour limit."}},{"@type":"Question","name":"Why did I hit the Codex limit so fast?","acceptedAnswer":{"@type":"Answer","text":"Because the allowance is spent by tokens, not messages. Model choice, context size, reasoning depth, tool use, retrieval, and caching all change how much one message costs; cloud tasks can use more than local messages; Fast mode draws included usage at 2x the Standard rate on the GPT-6.2 models and 2.5x on the older ones, and Ultrafast at 6x (GPT-6.2) or 8x (GPT-6 Astra, GPT-6.1 Sol); every MCP server you leave connected adds context to each message; image generation uses the allowance roughly three to five times faster; and a session that holds a large codebase in context burns more per turn than a fresh one. Two tasks that look identical can cost very different amounts of the window."}},{"@type":"Question","name":"Are Codex usage limits the same as Codex rate limits?","acceptedAnswer":{"@type":"Answer","text":"People use the phrases interchangeably, and OpenAI's own page mixes them. The rolling five-hour allowance and the weekly cap are what most people mean by either phrase. A separate meaning of rate limit applies to API keys, where requests and tokens per minute are governed by your API tier rather than a ChatGPT plan; if you run Codex against an API key, those limits and usage-based billing apply instead of the plan windows."}},{"@type":"Question","name":"What is the Codex rate limit?","acceptedAnswer":{"@type":"Answer","text":"On a ChatGPT plan, the Codex rate limit is the plan allowance: a per-model estimate of local messages per five-hour window (OpenAI's page, read November 23, 2026, gives roughly 17 to 180 GPT-6.2 Sol messages on Plus and says Pro plans currently have no five-hour limit) plus a weekly limit that OpenAI says may apply without publishing the number. Both reset on schedules shown in the ChatGPT usage dashboard and via /status and /usage in the Codex CLI. The other meaning, API rate limits in requests and tokens per minute, applies only when you run Codex with an API key, and that route is billed at usage rates instead of the plan windows."}},{"@type":"Question","name":"What is the GPT Reserve or Luna Reserve limit in Codex?","acceptedAnswer":{"@type":"Answer","text":"Luna Reserve (shown as gpt-reserve in some builds) is OpenAI's fallback allowance: per its help article re-read November 23, 2026, selected personal Plus and Pro accounts get extra usage on GPT-5.6 Luna after their regular usage runs out. It has its own meter, it does not refill the five-hour or weekly allowance, it does not unlock the stronger models, and Business and Enterprise workspaces don't get it. OpenAI does not publish its size, and eligibility can change."}},{"@type":"Question","name":"Will ChatGPT and Codex share usage limits?","acceptedAnswer":{"@type":"Answer","text":"Yes, starting in December 2026. OpenAI's help article (read November 23, 2026) says Plus, Pro and Business plans will share one usage allowance across ChatGPT and Codex, measured in tokens, so heavier models and longer tasks use more of it. Instant chat will not draw from it. OpenAI says it expects most users won't wait for resets more often than they do now, and the combined remaining usage and reset times will show in Settings, Usage. It has not published new per-plan numbers for the shared allowance."}},{"@type":"Question","name":"How do I check my Codex usage?","acceptedAnswer":{"@type":"Answer","text":"Open the usage dashboard at chatgpt.com/codex/settings/usage for your current limits and reset times, or run /status inside an active Codex CLI session to see what's left. OpenAI's pricing page (read October 10, 2026) suggests checking the dashboard every week or two. Plus gets an estimated 15 to 160 GPT-6.1 Sol local messages per five hours; Pro plans have no five-hour limit."}},{"@type":"Question","name":"How many Codex messages do you get on ChatGPT Plus?","acceptedAnswer":{"@type":"Answer","text":"OpenAI's Codex pricing page, re-read November 9, 2026, estimates a Plus ($20 a month) user gets 15 to 160 GPT-6.1 Sol local messages per five-hour window, 35 to 285 on GPT-6.1 Terra, 15 to 150 on GPT-6 Sol, 5 to 45 on GPT-6 Astra and 350 to 3,000 on GPT-6 Luna. Those are estimates, not fixed limits. Local messages and cloud chats share the same allowance, a weekly limit may also apply, and a Standard Business seat gets the same ranges. When it runs out you can wait for the window, switch to a smaller model, or buy ChatGPT credits."}},{"@type":"Question","name":"Does Codex share a usage limit with ChatGPT?","acceptedAnswer":{"@type":"Answer","text":"From December 2026 it does, on Plus, Pro and Business. OpenAI says the allowance will be shared across ChatGPT and Codex and measured in tokens, so heavy ChatGPT work leaves less for Codex. Instant chat is excluded. Settings, then Usage shows the combined total; /status in the Codex CLI shows what's left in a session."}}]}]}</script>
+
+    <meta name="csrf-param" content="authenticity_token" />
+<meta name="csrf-token" content="VAHJFl8Lp1gWSvAfONSP_wcL15VCNNs0_NVGgN_2GlZLkvH-FumjCfJz0-1YlQm9ecxq72hrGR1qZEn9Zvv2Qg" />
+    
+    
+
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons&display=swap" media="print" onload="this.media='all'">
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons&display=swap"></noscript>
+      <script async src="https://www.googletagmanager.com/gtag/js?id=G-BXZYVTS9FV"></script>
+      <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-BXZYVTS9FV');</script>
+      <script>
+  window.phDropNoise = function (event) {
+    if (!event || event.event !== '$exception') return event;
+    // posthog-js sends $exception_list [{type, value}]; $exception_types/_values
+    // are only filled in server-side, so read both (fixed 10/20, the first
+    // version read only the server fields and matched nothing).
+    var props = event.properties || {};
+    var parts = [].concat(props.$exception_types || [], props.$exception_values || []);
+    (props.$exception_list || []).forEach(function (x) { parts.push(x && x.type, x && x.value); });
+    // The browser's cross-origin placeholder is exactly "Script error." with no detail.
+    if (parts.some(function (p) { return /^Script error\.?$/.test(p); })) return null;
+    var text = parts.filter(Boolean).join(' ');
+    var noise = [/TurnstileError/, /Object Not Found Matching Id/, /ResizeObserver loop/,
+                 /runtime\.sendMessage/, /webkit\.messageHandlers/, /originalQuery/];
+    for (var i = 0; i < noise.length; i++) { if (noise[i].test(text)) return null; }
+    return event;
+  };
+</script>
+
+  <script>
+    !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.async=!0,p.src=s.api_host.replace(".i.posthog.com","-assets.i.posthog.com")+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="init capture register register_once register_for_session unregister opt_out_capturing has_opted_out_capturing opt_in_capturing reset isFeatureEnabled getFeatureFlag getFeatureFlagPayload reloadFeatureFlags group identify setPersonProperties setPersonPropertiesForFlags resetPersonPropertiesForFlags setGroupPropertiesForFlags resetGroupPropertiesForFlags resetGroups onFeatureFlags addFeatureFlagsHandler onSessionId getSurveys getActiveMatchingSurveys renderSurvey canRenderSurvey getNextSurveyStep".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
+    // 2026-09-18: automated browsers (the 9/15 Firefox burst was 123 fake persons) never reach PostHog
+    if (navigator.webdriver) { window.posthog = undefined; } else
+    posthog.init('phc_NqRWiJNVGty36HeOWGR2ArhleZw9nkUPrdcp5hSsOOs', {
+      api_host: 'https://us.i.posthog.com',
+      defaults: '2026-01-30',
+          before_send: window.phDropNoise
+    })
+  </script>
+
+    <link rel="stylesheet" href="/assets/actiontext-d0a584ed.css" data-turbo-track="reload" />
+<link rel="stylesheet" href="/assets/application-8b441ae0.css" data-turbo-track="reload" />
+<link rel="stylesheet" href="/assets/tailwind-7dcf28c1.css" data-turbo-track="reload" />
+    <script type="importmap" data-turbo-track="reload">{
+  "imports": {
+    "application": "/assets/application-3da76259.js",
+    "@hotwired/turbo-rails": "/assets/turbo.min-9fd88cd5.js",
+    "@hotwired/stimulus": "/assets/stimulus.min-4b1e420e.js",
+    "@hotwired/stimulus-loading": "/assets/stimulus-loading-1fc53fe7.js",
+    "trix": "/assets/trix-4b540cb5.js",
+    "@rails/actiontext": "/assets/actiontext.esm-f1c04d34.js",
+    "controllers/ai_cta_controller": "/assets/controllers/ai_cta_controller-cb886153.js",
+    "controllers/analytics_controller": "/assets/controllers/analytics_controller-abcb0bfb.js",
+    "controllers/application": "/assets/controllers/application-3affb389.js",
+    "controllers/audience_count_controller": "/assets/controllers/audience_count_controller-0449e778.js",
+    "controllers/auto_refresh_controller": "/assets/controllers/auto_refresh_controller-4799112c.js",
+    "controllers/blueprint_steps_controller": "/assets/controllers/blueprint_steps_controller-a93bb6f8.js",
+    "controllers/booking_calendar_controller": "/assets/controllers/booking_calendar_controller-a68e31f1.js",
+    "controllers/capture_block_controller": "/assets/controllers/capture_block_controller-a779b2a6.js",
+    "controllers/clipboard_controller": "/assets/controllers/clipboard_controller-61417b6d.js",
+    "controllers/counter_controller": "/assets/controllers/counter_controller-41ba7460.js",
+    "controllers/dropdown_controller": "/assets/controllers/dropdown_controller-fa33c5cc.js",
+    "controllers/exit_intent_controller": "/assets/controllers/exit_intent_controller-def93e29.js",
+    "controllers/form_guard_controller": "/assets/controllers/form_guard_controller-a94232ff.js",
+    "controllers/hello_controller": "/assets/controllers/hello_controller-708796bd.js",
+    "controllers": "/assets/controllers/index-ee64e1f1.js",
+    "controllers/kanban_controller": "/assets/controllers/kanban_controller-c6cf99e3.js",
+    "controllers/mobile_menu_controller": "/assets/controllers/mobile_menu_controller-09cc1c30.js",
+    "controllers/offer_block_controller": "/assets/controllers/offer_block_controller-d798f22a.js",
+    "controllers/offer_controller": "/assets/controllers/offer_controller-2c2e4daf.js",
+    "controllers/oto_controller": "/assets/controllers/oto_controller-b15cb253.js",
+    "controllers/print_controller": "/assets/controllers/print_controller-e921f6ee.js",
+    "controllers/progress_bar_controller": "/assets/controllers/progress_bar_controller-7b2ee83a.js",
+    "controllers/quick_add_controller": "/assets/controllers/quick_add_controller-df941cb3.js",
+    "controllers/reader_answer_controller": "/assets/controllers/reader_answer_controller-a85a16b8.js",
+    "controllers/readiness_checklist_controller": "/assets/controllers/readiness_checklist_controller-77fe2b15.js",
+    "controllers/reveal_controller": "/assets/controllers/reveal_controller-4bf75a2f.js",
+    "controllers/roi_calculator_controller": "/assets/controllers/roi_calculator_controller-b1050eba.js",
+    "controllers/scroll_reveal_controller": "/assets/controllers/scroll_reveal_controller-eca48e08.js",
+    "controllers/seed_stories_controller": "/assets/controllers/seed_stories_controller-1f54653e.js",
+    "controllers/sidebar_controller": "/assets/controllers/sidebar_controller-09428244.js",
+    "controllers/sticky_bar_controller": "/assets/controllers/sticky_bar_controller-1a00b5f7.js",
+    "controllers/sticky_hide_controller": "/assets/controllers/sticky_hide_controller-ff950be1.js",
+    "controllers/story_picker_controller": "/assets/controllers/story_picker_controller-8fbdd8b8.js",
+    "controllers/template_copy_controller": "/assets/controllers/template_copy_controller-504d5cf1.js",
+    "controllers/ticker_controller": "/assets/controllers/ticker_controller-060b7ce4.js",
+    "controllers/toggle_controller": "/assets/controllers/toggle_controller-8a5aee5f.js",
+    "controllers/video_template_controller": "/assets/controllers/video_template_controller-bc834911.js"
+  }
+}</script>
+<link rel="modulepreload" href="/assets/application-3da76259.js">
+<link rel="modulepreload" href="/assets/turbo.min-9fd88cd5.js">
+<link rel="modulepreload" href="/assets/stimulus.min-4b1e420e.js">
+<link rel="modulepreload" href="/assets/stimulus-loading-1fc53fe7.js">
+<link rel="modulepreload" href="/assets/trix-4b540cb5.js">
+<link rel="modulepreload" href="/assets/actiontext.esm-f1c04d34.js">
+<link rel="modulepreload" href="/assets/controllers/ai_cta_controller-cb886153.js">
+<link rel="modulepreload" href="/assets/controllers/analytics_controller-abcb0bfb.js">
+<link rel="modulepreload" href="/assets/controllers/application-3affb389.js">
+<link rel="modulepreload" href="/assets/controllers/audience_count_controller-0449e778.js">
+<link rel="modulepreload" href="/assets/controllers/auto_refresh_controller-4799112c.js">
+<link rel="modulepreload" href="/assets/controllers/blueprint_steps_controller-a93bb6f8.js">
+<link rel="modulepreload" href="/assets/controllers/booking_calendar_controller-a68e31f1.js">
+<link rel="modulepreload" href="/assets/controllers/capture_block_controller-a779b2a6.js">
+<link rel="modulepreload" href="/assets/controllers/clipboard_controller-61417b6d.js">
+<link rel="modulepreload" href="/assets/controllers/counter_controller-41ba7460.js">
+<link rel="modulepreload" href="/assets/controllers/dropdown_controller-fa33c5cc.js">
+<link rel="modulepreload" href="/assets/controllers/exit_intent_controller-def93e29.js">
+<link rel="modulepreload" href="/assets/controllers/form_guard_controller-a94232ff.js">
+<link rel="modulepreload" href="/assets/controllers/hello_controller-708796bd.js">
+<link rel="modulepreload" href="/assets/controllers/index-ee64e1f1.js">
+<link rel="modulepreload" href="/assets/controllers/kanban_controller-c6cf99e3.js">
+<link rel="modulepreload" href="/assets/controllers/mobile_menu_controller-09cc1c30.js">
+<link rel="modulepreload" href="/assets/controllers/offer_block_controller-d798f22a.js">
+<link rel="modulepreload" href="/assets/controllers/offer_controller-2c2e4daf.js">
+<link rel="modulepreload" href="/assets/controllers/oto_controller-b15cb253.js">
+<link rel="modulepreload" href="/assets/controllers/print_controller-e921f6ee.js">
+<link rel="modulepreload" href="/assets/controllers/progress_bar_controller-7b2ee83a.js">
+<link rel="modulepreload" href="/assets/controllers/quick_add_controller-df941cb3.js">
+<link rel="modulepreload" href="/assets/controllers/reader_answer_controller-a85a16b8.js">
+<link rel="modulepreload" href="/assets/controllers/readiness_checklist_controller-77fe2b15.js">
+<link rel="modulepreload" href="/assets/controllers/reveal_controller-4bf75a2f.js">
+<link rel="modulepreload" href="/assets/controllers/roi_calculator_controller-b1050eba.js">
+<link rel="modulepreload" href="/assets/controllers/scroll_reveal_controller-eca48e08.js">
+<link rel="modulepreload" href="/assets/controllers/seed_stories_controller-1f54653e.js">
+<link rel="modulepreload" href="/assets/controllers/sidebar_controller-09428244.js">
+<link rel="modulepreload" href="/assets/controllers/sticky_bar_controller-1a00b5f7.js">
+<link rel="modulepreload" href="/assets/controllers/sticky_hide_controller-ff950be1.js">
+<link rel="modulepreload" href="/assets/controllers/story_picker_controller-8fbdd8b8.js">
+<link rel="modulepreload" href="/assets/controllers/template_copy_controller-504d5cf1.js">
+<link rel="modulepreload" href="/assets/controllers/ticker_controller-060b7ce4.js">
+<link rel="modulepreload" href="/assets/controllers/toggle_controller-8a5aee5f.js">
+<link rel="modulepreload" href="/assets/controllers/video_template_controller-bc834911.js">
+<script type="module">import "application"</script>
+    <script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window, document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '734523093806169');
+fbq('track', 'PageView');
+</script>
+<noscript><img height="1" width="1" style="display:none"
+src="https://www.facebook.com/tr?id=734523093806169&ev=PageView&noscript=1"
+/></noscript>
+
+  </head>
+
+  <body class="min-h-full bg-bg-neutral text-gray-100 antialiased font-sans">
+    <nav class="fixed top-0 w-full z-50 glass-nav border-b border-white/5" data-controller="mobile-menu">
+  <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+    <a href="/" class="flex items-center group shrink-0 mr-6">
+      <img alt="Justin McKelvey" class="h-10" src="/assets/logo-white-b7af8889.png" />
+    </a>
+
+    <div class="hidden lg:flex items-center space-x-4 xl:space-x-5 2xl:space-x-8">
+      <a class="whitespace-nowrap text-xs 2xl:text-sm font-medium hover:text-accent-cyan transition-colors uppercase tracking-wider 2xl:tracking-widest" href="/work">Work</a>
+      <a class="whitespace-nowrap text-xs 2xl:text-sm font-medium hover:text-accent-cyan transition-colors uppercase tracking-wider 2xl:tracking-widest" href="/about">About</a>
+      <a class="whitespace-nowrap text-xs 2xl:text-sm font-medium hover:text-accent-cyan transition-colors uppercase tracking-wider 2xl:tracking-widest" href="/work-with-me">Work With Me</a>
+      <a class="whitespace-nowrap text-xs 2xl:text-sm font-medium hover:text-accent-cyan transition-colors uppercase tracking-wider 2xl:tracking-widest" href="/frameworks">Frameworks</a>
+      <a class="whitespace-nowrap text-xs 2xl:text-sm font-medium text-primary-teal hover:brightness-110 transition-all uppercase tracking-wider 2xl:tracking-widest" href="/claude-for-small-business">Claude Setup</a>
+      <a class="whitespace-nowrap text-xs 2xl:text-sm font-medium text-primary-teal hover:brightness-110 transition-all uppercase tracking-wider 2xl:tracking-widest" href="/vibe-code-rescue">Rescue</a>
+      <a class="whitespace-nowrap text-xs 2xl:text-sm font-medium text-primary-teal hover:brightness-110 transition-all uppercase tracking-wider 2xl:tracking-widest" href="/ai-search-program">AI Search</a>
+      <a class="whitespace-nowrap text-xs 2xl:text-sm font-medium hover:text-accent-cyan transition-colors uppercase tracking-wider 2xl:tracking-widest" href="/blog">Blog</a>
+        <a class="whitespace-nowrap px-4 2xl:px-5 py-2.5 bg-primary-teal text-black hover:brightness-110 transition-all rounded-lg text-sm font-bold uppercase tracking-widest shadow-lg shadow-primary-teal/20" href="/book/strategy-call">Book a Call</a>
+    </div>
+
+    <button class="lg:hidden p-2 text-white/70 hover:text-white" data-action="mobile-menu#toggle" data-mobile-menu-target="button" aria-label="Toggle menu">
+      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path data-mobile-menu-target="openIcon" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+        <path data-mobile-menu-target="closeIcon" class="hidden" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+      </svg>
+    </button>
+  </div>
+
+  <div class="hidden lg:hidden border-t border-white/5 bg-bg-neutral/95 backdrop-blur-xl" data-mobile-menu-target="menu">
+    <div class="px-6 py-6 space-y-4">
+      <a class="block text-sm font-medium hover:text-accent-cyan transition-colors uppercase tracking-widest" href="/work">Work</a>
+      <a class="block text-sm font-medium hover:text-accent-cyan transition-colors uppercase tracking-widest" href="/about">About</a>
+      <a class="block text-sm font-medium hover:text-accent-cyan transition-colors uppercase tracking-widest" href="/projects">Projects</a>
+      <a class="block text-sm font-medium hover:text-accent-cyan transition-colors uppercase tracking-widest" href="/frameworks">Frameworks</a>
+      <a class="block text-sm font-medium text-primary-teal hover:brightness-110 transition-all uppercase tracking-widest" href="/claude-for-small-business">Claude Setup</a>
+      <a class="block text-sm font-medium text-primary-teal hover:brightness-110 transition-all uppercase tracking-widest" href="/vibe-code-rescue">Rescue</a>
+      <a class="block text-sm font-medium text-primary-teal hover:brightness-110 transition-all uppercase tracking-widest" href="/ai-search-program">AI Search</a>
+      <a class="block text-sm font-medium hover:text-accent-cyan transition-colors uppercase tracking-widest" href="/work-with-me">Work With Me</a>
+      <a class="block text-sm font-medium hover:text-accent-cyan transition-colors uppercase tracking-widest" href="/blog">Blog</a>
+      <a class="block text-sm font-medium hover:text-accent-cyan transition-colors uppercase tracking-widest" href="/contact">Contact</a>
+        <a class="block w-full text-center px-5 py-3 bg-primary-teal text-black hover:brightness-110 transition-all rounded-lg text-sm font-bold uppercase tracking-widest mt-4" href="/book/strategy-call">Book a Call</a>
+    </div>
+  </div>
+</nav>
+
+
+    <main class="pt-20" data-controller="analytics">
+      
+
+<div class="fixed top-0 left-0 w-full z-[100]" data-controller="progress-bar">
+  <div class="progress-bar" data-progress-bar-target="bar" style="width: 0%"></div>
+</div>
+
+<section class="pt-12 pb-24 px-6" data-controller="analytics">
+  <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12">
+    <article class="lg:col-span-8">
+        <nav aria-label="Breadcrumb" class="mb-6">
+          <ol class="flex items-center gap-2 mono-text text-xs uppercase tracking-widest text-white/40">
+            <li><a href="/blog" class="hover:text-primary-teal transition-colors">Blog</a></li>
+            <li><span>&rsaquo;</span></li>
+            <li><a href="/blog/category/vibe-code-rescue" class="hover:text-primary-teal transition-colors">Vibe Code Rescue</a></li>
+          </ol>
+        </nav>
+
+      <div class="flex items-center gap-3 mb-6">
+        <img alt="Justin McKelvey" width="40" height="40" class="w-10 h-10 rounded-full object-cover ring-1 ring-primary-teal/40 shrink-0" src="/assets/justin-headshot-128-afb1d3f3.webp" />
+        <div>
+          <p class="text-white font-semibold text-sm">Justin McKelvey</p>
+          <p class="text-white/50 text-xs">Ran snowboard shops. Taught myself to code. Now I build AI that does real work.</p>
+        </div>
+      </div>
+
+      <div class="flex flex-wrap items-center gap-4 mb-6 mono-text text-sm uppercase tracking-widest">
+        <a href="/about" rel="author" class="text-white/80 hover:text-primary-teal">By Justin McKelvey</a>
+        <span class="text-white/30">&bull;</span>
+          <span class="text-primary-teal font-semibold">Vibe Code Rescue</span>
+          <span class="text-white/30">&bull;</span>
+          <span class="text-white/60">17 min read</span>
+          <span class="text-white/30">&bull;</span>
+            <meta itemprop="datePublished" content="2026-09-08T07:30:00-05:00">
+            <span class="text-primary-teal/80">
+              <time datetime="2026-11-09T09:00:00-06:00" itemprop="dateModified">Updated Nov 09, 2026</time>
+            </span>
+      </div>
+
+      <h1 class="serif-text text-5xl md:text-6xl leading-[0.95] mb-10 tracking-tight">
+        Codex Usage Limits Explained: The 5-Hour Window, the Weekly Cap, and What Actually Resets (2026)
+      </h1>
+
+
+
+
+        <div class="lg:hidden mb-10">
+          <nav class="p-6 rounded-xl bg-white/5 border border-white/10" aria-label="Table of contents">
+  <p class="mono-text text-xs uppercase tracking-widest text-primary-teal mb-4">On this page</p>
+  <ol class="space-y-2 max-h-[30vh] overflow-y-auto pr-2">
+      <li class="">
+        <a href="#tl-dr-codex-usage-limits-are-a-window-not-a-count" class="text-white/60 hover:text-primary-teal transition-colors text-sm leading-relaxed">
+          TL;DR: Codex Usage Limits Are a Window, Not a Count
+        </a>
+      </li>
+      <li class="">
+        <a href="#what-changed-in-november-2026" class="text-white/60 hover:text-primary-teal transition-colors text-sm leading-relaxed">
+          What changed in November 2026
+        </a>
+      </li>
+      <li class="">
+        <a href="#december-2026-codex-and-chatgpt-share-one-allowance" class="text-white/60 hover:text-primary-teal transition-colors text-sm leading-relaxed">
+          December 2026: Codex and ChatGPT share one allowance
+        </a>
+      </li>
+      <li class="">
+        <a href="#the-codex-limits-by-plan-from-openai-s-own-page-november-2026" class="text-white/60 hover:text-primary-teal transition-colors text-sm leading-relaxed">
+          The Codex limits by plan, from OpenAI&#39;s own page (November 2026)
+        </a>
+      </li>
+      <li class="">
+        <a href="#one-astra-message-in-other-models-messages" class="text-white/60 hover:text-primary-teal transition-colors text-sm leading-relaxed">
+          One Astra message, in other models&#39; messages
+        </a>
+      </li>
+      <li class="">
+        <a href="#codex-on-free-and-go-and-the-monthly-limit-question" class="text-white/60 hover:text-primary-teal transition-colors text-sm leading-relaxed">
+          Codex on Free and Go, and the &quot;monthly limit&quot; question
+        </a>
+      </li>
+      <li class="">
+        <a href="#how-to-check-your-codex-usage-and-what-uses-it-up" class="text-white/60 hover:text-primary-teal transition-colors text-sm leading-relaxed">
+          How to check your Codex usage (and what uses it up)
+        </a>
+      </li>
+      <li class="">
+        <a href="#the-5-hour-window-what-resets-and-when" class="text-white/60 hover:text-primary-teal transition-colors text-sm leading-relaxed">
+          The 5-hour window: what resets and when
+        </a>
+      </li>
+      <li class="">
+        <a href="#the-codex-weekly-limit" class="text-white/60 hover:text-primary-teal transition-colors text-sm leading-relaxed">
+          The Codex weekly limit
+        </a>
+      </li>
+      <li class="">
+        <a href="#codex-rate-limits-vs-usage-limits" class="text-white/60 hover:text-primary-teal transition-colors text-sm leading-relaxed">
+          Codex rate limits vs usage limits
+        </a>
+      </li>
+      <li class="">
+        <a href="#what-burns-the-allowance-faster-than-you-think" class="text-white/60 hover:text-primary-teal transition-colors text-sm leading-relaxed">
+          What burns the allowance faster than you think
+        </a>
+      </li>
+      <li class="">
+        <a href="#what-happens-when-you-hit-the-limit-mid-task" class="text-white/60 hover:text-primary-teal transition-colors text-sm leading-relaxed">
+          What happens when you hit the limit mid-task
+        </a>
+      </li>
+      <li class="">
+        <a href="#what-is-luna-reserve-the-gpt-reserve-limit-in-codex" class="text-white/60 hover:text-primary-teal transition-colors text-sm leading-relaxed">
+          What is Luna Reserve (the &quot;GPT Reserve&quot; limit) in Codex?
+        </a>
+      </li>
+      <li class="">
+        <a href="#should-you-upgrade-to-pro-for-the-limits" class="text-white/60 hover:text-primary-teal transition-colors text-sm leading-relaxed">
+          Should you upgrade to Pro for the limits?
+        </a>
+      </li>
+      <li class="">
+        <a href="#codex-rate-limits-what-resets-and-when" class="text-white/60 hover:text-primary-teal transition-colors text-sm leading-relaxed">
+          Codex rate limits: what resets and when
+        </a>
+      </li>
+      <li class="">
+        <a href="#codex-limits-when-you-re-paying-for-the-team" class="text-white/60 hover:text-primary-teal transition-colors text-sm leading-relaxed">
+          Codex limits when you&#39;re paying for the team
+        </a>
+      </li>
+      <li class="">
+        <a href="#pro-200-s-smaller-allowance-was-canceled" class="text-white/60 hover:text-primary-teal transition-colors text-sm leading-relaxed">
+          Pro 200&#39;s smaller allowance was canceled
+        </a>
+      </li>
+      <li class="">
+        <a href="#sources" class="text-white/60 hover:text-primary-teal transition-colors text-sm leading-relaxed">
+          Sources
+        </a>
+      </li>
+  </ol>
+</nav>
+
+        </div>
+
+      <div class="blog-prose max-w-[720px]">
+          <div class="trix-content">
+  <div class="post-quick-answer not-prose mb-10 rounded-xl border border-primary-teal/40 bg-primary-teal/5 p-6">
+  <p class="mono-text text-xs uppercase tracking-widest text-primary-teal mb-3">Quick Answer</p>
+  <p class="text-white text-lg leading-relaxed"><strong>Codex usage limits are a rolling five-hour allowance per model, with a weekly cap that may sit on top, and OpenAI publishes ranges rather than numbers.</strong> As of November 23, 2026 its own page estimates a Plus ($20/month) user gets roughly 17–180 GPT-6.2 Sol messages per five-hour window (6–50 on GPT-6.2 Astra, 350–3,000 on GPT-6 Luna), and Pro ($100, $200 or $500) currently has no five-hour limit at all. Starting in December, ChatGPT and Codex share one allowance on Plus, Pro and Business. When you hit the wall mid-task, the agent finishes the turn. The meter counts tokens, not messages.</p>
+  <p class="mt-4 text-sm text-white/60 mono-text">Updated November 2026 · verified November 23, 2026 against OpenAI's Codex pricing page and help center · Author: Justin McKelvey, fractional CTO &amp; founder of Vibe Code Rescue, 15 years in software, 50+ products shipped</p>
+</div>
+
+<h2 id="tl-dr-codex-usage-limits-are-a-window-not-a-count">TL;DR: Codex Usage Limits Are a Window, Not a Count</h2>
+
+<p><strong>The question "what are the Codex usage limits" has no single-number answer, and that is by design.</strong> OpenAI's pricing page, read today, describes an allowance that refills on a rolling five-hour window, varies by which model you run, may also be capped weekly, and is spent by tokens rather than by messages. Plus is the base allowance and a Standard Business seat matches it; a Premium Business seat gets more included usage with no 5-hour limit, and Pro ($100, $200 or $500) currently has no five-hour limit either. Nothing here is a fixed cap, which is why two people on the same plan report wildly different experiences. One runs Luna for quick edits and never sees the limit; the other keeps a 40-file repo in context on Sol and hits it before lunch.</p>
+
+<p>I run Codex, Claude Code, and Cursor side by side on real client work, and the honest version of this post is that the limits stopped being the interesting question once I understood the meter. Here is the meter.</p>
+
+<h2 id="what-changed-in-november-2026">What changed in November 2026</h2>
+
+<ul>
+  <li>
+<strong>Two new models with their own rows.</strong> GPT-6.2 Astra (6–50 per five hours on Plus) and GPT-6.2 Sol (17–180) now top OpenAI's table. Both give a little more per window than the GPT-6 and 6.1 versions they sit above.</li>
+  <li>
+<strong>Pro got more, not less.</strong> OpenAI's Pro article now says Pro 100 and Pro 500 get twice their previous Work and Codex allowance, and the lower Pro 200 allowance announced on September 29 is canceled. Every Pro 200 subscriber, new or old, is on the same, higher allowance at $200.</li>
+  <li>
+<strong>ChatGPT and Codex share one meter from December.</strong> On Plus, Pro and Business, ChatGPT and Codex will draw from one allowance measured in tokens. Instant chat won't count against it.</li>
+  <li>
+<strong>Premium Business seats lost their "5x".</strong> OpenAI's Business article no longer says Premium is five times Standard. It says Premium has higher included usage and no five-hour limit.</li>
+</ul>
+
+<h2 id="december-2026-codex-and-chatgpt-share-one-allowance">December 2026: Codex and ChatGPT share one allowance</h2>
+<p><strong>Starting in December 2026, on Plus, Pro and Business, Codex stops having its own separate budget: it shares one token-based allowance with ChatGPT.</strong> Source: OpenAI's help article <a href="https://help.openai.com/en/articles/20001625-understanding-chatgpt-and-codex-usage-limits">Understanding ChatGPT and Codex usage limits</a> (read November 9, 2026).</p>
+<ul>
+<li>
+<strong>How it's measured:</strong> tokens, not messages. The model you pick and the size of the task decide how fast the allowance goes.</li>
+<li>
+<strong>What's left out:</strong> Instant chat in ChatGPT doesn't draw from it.</li>
+<li>
+<strong>Where to check:</strong> Settings, then Usage in ChatGPT for the combined number. Inside a Codex CLI session, <code>/status</code> still shows what you have left.</li>
+<li>
+<strong>At the limit:</strong> wait for the reset, upgrade, or buy credits.</li>
+</ul>
+<p>The practical change: a long ChatGPT work session in the afternoon leaves less for Codex that evening, and the other way around. The ranges below (15 to 160 GPT-6.1 Sol messages on Plus, per <a href="https://chatgpt.com/codex/pricing/">chatgpt.com/codex/pricing</a>) describe today's setup.</p>
+<h2 id="the-codex-limits-by-plan-from-openai-s-own-page-november-2026">The Codex limits by plan, from OpenAI's own page (November 2026)</h2>
+
+<p>These are OpenAI's published estimates of <em>local messages per five-hour period</em>, re-read on November 23, 2026, and the page says out loud that they are estimates, not fixed message limits. Cloud tasks may consume more of the allowance than a local message does. A Standard Business seat gets exactly the Plus column. Pro has no column: the page says "Pro plans currently have no five-hour limit."</p>
+
+<p>First, the plan-by-plan view:</p>
+
+<table>
+  <thead>
+    <tr>
+<th>Plan</th>
+<th>Price</th>
+<th>Five-hour window</th>
+<th>Weekly limit</th>
+</tr>
+  </thead>
+  <tbody>
+    <tr>
+<td>Free</td>
+<td>$0</td>
+<td>No published number (GPT-6 Luna in the desktop app, subject to rollout; no Codex Cloud)</td>
+<td>Not published</td>
+</tr>
+    <tr>
+<td>Go</td>
+<td>$8 / month</td>
+<td>No published number (same as Free)</td>
+<td>Not published</td>
+</tr>
+    <tr>
+<td>Plus</td>
+<td>$20 / month</td>
+<td>Estimates in the model table below</td>
+<td>"May also apply," no number</td>
+</tr>
+    <tr>
+<td>Pro 100 / 200 / 500</td>
+<td>$100, $200, $500 / month</td>
+<td>None at the moment</td>
+<td>Can still apply; 200 has more usage than 100, 500 the most</td>
+</tr>
+    <tr>
+<td>Business, Standard seat</td>
+<td>$20 / user / month yearly ($25 monthly)</td>
+<td>Same estimates as Plus</td>
+<td>"May also apply"</td>
+</tr>
+    <tr>
+<td>Business, Premium seat</td>
+<td>Not listed on the Codex page</td>
+<td>None</td>
+<td>Not published</td>
+</tr>
+    <tr>
+<td>Enterprise and Edu</td>
+<td>Contact sales</td>
+<td>With flexible pricing: "no fixed rate limits," spend credits. Without it: the Plus per-seat limits for most features</td>
+<td>Same split</td>
+</tr>
+    <tr>
+<td>API key</td>
+<td>API token rates</td>
+<td>No plan window; API rate limits by tier</td>
+<td>None</td>
+</tr>
+  </tbody>
+</table>
+
+<p>And the per-model estimates for Plus and a Standard Business seat:</p>
+
+<table>
+  <thead>
+    <tr>
+<th>Model</th>
+<th>Plus ($20) and Standard Business</th>
+<th>Pro ($100, $200, $500)</th>
+</tr>
+  </thead>
+  <tbody>
+    <tr>
+<td>GPT-6.2 Astra</td>
+<td>6–50</td>
+<td>No five-hour limit</td>
+</tr>
+    <tr>
+<td>GPT-6.2 Sol</td>
+<td>17–180</td>
+<td>No five-hour limit</td>
+</tr>
+    <tr>
+<td>GPT-6 Astra</td>
+<td>5–45</td>
+<td>No five-hour limit</td>
+</tr>
+    <tr>
+<td>GPT-6.1 Sol</td>
+<td>15–160</td>
+<td>No five-hour limit</td>
+</tr>
+    <tr>
+<td>GPT-6.1 Terra</td>
+<td>35–285</td>
+<td>No five-hour limit</td>
+</tr>
+    <tr>
+<td>GPT-6 Sol</td>
+<td>15–150</td>
+<td>No five-hour limit</td>
+</tr>
+    <tr>
+<td>GPT-6 Luna</td>
+<td>350–3,000</td>
+<td>No five-hour limit</td>
+</tr>
+  </tbody>
+</table>
+
+<p>The GPT-5.6 models have no row in the pricing page's table (they still have credit rates further down it). OpenAI's Business help article, read the same day, is a step behind: it has no GPT-6.2 rows yet, still lists GPT-5.6 Sol at 10–100, 5.6 Terra at 25–200 and 5.6 Luna at 250–2,000 for a Standard seat, and groups GPT-6.1 Sol with GPT-6 Sol at 15–150, so the two pages disagree by ten messages at the top of the 6.1 range.</p>
+
+<p>Three lines of fine print matter more than the table. <strong>A Standard Business seat ($20 per user per month billed annually, $25 monthly, two-user minimum) gets the Plus estimates; OpenAI's Business article says Premium seats have "higher included usage for Work and Codex and no five-hour usage limit," and Standard seats get only limited GPT-6 Astra use inside their allowance.</strong> <strong>"Weekly limits may also apply"</strong> is the page's exact phrasing, with no weekly number published. And <strong>"ChatGPT Work and Codex share usage"</strong>, meaning agentic work you run inside ChatGPT draws down the same allowance as your CLI sessions. ChatGPT for Excel on Plus and Pro draws from that shared pool too, so a long spreadsheet session spends the same budget as your coding. And from December the pool gets bigger in scope: OpenAI's help center says Plus, Pro and Business will share one token-measured allowance across ChatGPT and Codex, with Instant chat left out. OpenAI says it expects most people won't hit resets more often than they do now, but it hasn't published the new numbers, so treat the table above as the November picture.</p>
+
+</div>
+              <aside class="post-limits-sheet-capture not-prose my-12 p-6 md:p-8 rounded-xl bg-primary-teal/5 border border-primary-teal/30"
+       data-controller="capture-block"
+       data-capture-block-placement-value="tools_mid"
+       data-capture-block-asset-value="limits_sheet"
+       data-capture-block-post-slug-value="codex-usage-limits">
+  <p class="mono-text text-xs uppercase tracking-widest text-primary-teal mb-3">Hit the cap?</p>
+  <p class="text-white text-lg md:text-xl font-semibold leading-snug mb-2">
+    Every plan's limits on one page, plus the cheapest way around each.
+  </p>
+  <p class="text-white/70 leading-relaxed mb-5">
+    25 plans across ChatGPT, Codex, Claude, Gemini, and Copilot: what's metered, what resets when, and what to do while you wait. Verified November 16, 2026. Re-sent when a limit moves.
+  </p>
+  <div id="limits-sheet-form-tools_mid">
+    <form class="flex flex-col sm:flex-row gap-3" data-controller="form-guard" action="/ai-usage-limits-cheat-sheet" accept-charset="UTF-8" method="post"><input type="hidden" name="authenticity_token" value="ZRrJ92EiFyja0iw0Iv8sm9WnWPXejaT2qfKKhuMgvpoXRTDVewBqBtCi741gbl0Aa3-Tf5P0eyZM21qxOFSKJg" autocomplete="off" />
+      <div aria-hidden="true" style="position:absolute;left:-9999px;top:-9999px;height:0;width:0;overflow:hidden;"><input type="text" name="website_url" tabindex="-1" autocomplete="off"></div>
+<input type="hidden" name="_challenge" value="" data-form-guard-target="challenge" data-token="eyJfcmFpbHMiOnsiZGF0YSI6MTc5NTY2NTAzNiwiZXhwIjoiMjAyNi0xMS0yNlQwOTo1MDozNi4wOTVaIiwicHVyIjoiZm9ybV9ndWFyZCJ9fQ==--60f4f00ca1c49cbfce2748965f800c78be97a85d">
+  <div class="cf-turnstile" data-sitekey="0x4AAAAAAFYm0CXnrInwpNBv" data-size="flexible" data-appearance="interaction-only"></div>
+    <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+
+      <input type="email" name="email" placeholder="you@work.com" required value=""
+             class="flex-1 bg-bg-neutral border border-white/10 rounded-lg px-4 py-3 text-white focus:outline-none focus:ring-2 focus:ring-primary-teal/50 placeholder:text-white/30">
+      <button type="submit" data-capture-click
+              class="bg-primary-teal text-black font-bold px-6 py-3 rounded-lg hover:brightness-110 transition-all whitespace-nowrap">
+        Send me the cheat sheet
+      </button>
+</form>    <p class="mt-3 text-sm text-white/40">No spam. The new sheet when a limit moves, plus an occasional AI email from me. One-click unsubscribe.</p>
+  </div>
+</aside>
+
+
+            <div class="trix-content"><h2 id="one-astra-message-in-other-models-messages">One Astra message, in other models' messages</h2>
+
+<p>OpenAI never says how the models compare, but its own ranges do. Divide each model's range by GPT-6 Astra's on the same plan and you get an exchange rate for the window. The ratios hold for a standard Business seat too, because its column is identical to Plus.</p>
+
+<table>
+  <thead>
+    <tr>
+<th>Model</th>
+<th>Plus range</th>
+<th>Messages worth one Astra message (small tasks / large tasks)</th>
+</tr>
+  </thead>
+  <tbody>
+    <tr>
+<td>GPT-6 Astra</td>
+<td>5–45</td>
+<td>1 / 1</td>
+</tr>
+    <tr>
+<td>GPT-6.2 Astra</td>
+<td>6–50</td>
+<td>1.1 / 1.2</td>
+</tr>
+    <tr>
+<td>GPT-6.2 Sol</td>
+<td>17–180</td>
+<td>4 / 3.4</td>
+</tr>
+    <tr>
+<td>GPT-6 Sol</td>
+<td>15–150</td>
+<td>3.3 / 3</td>
+</tr>
+    <tr>
+<td>GPT-6.1 Sol</td>
+<td>15–160</td>
+<td>3.6 / 3</td>
+</tr>
+    <tr>
+<td>GPT-6 Luna</td>
+<td>350–3,000</td>
+<td>67 / 70</td>
+</tr>
+  </tbody>
+</table>
+
+<p>A worked morning, to make that concrete. Say you send ten Codex turns on Plus. On Astra, ten turns are 22% of a window if your tasks are small enough to sit at the top of OpenAI's range (45 per window), and two full windows if they're big enough to sit at the bottom (5 per window), which is ten hours of waiting. The same ten turns on GPT-6 Sol are 7% to 67% of one window. The assumption doing the work: a task that sits at the top of one model's range sits at the top of the others' too. OpenAI doesn't state that, but it is the only way to read ranges published side by side.</p>
+
+<p>The practical rule it gives you: each Astra turn costs about three to four Sol turns, so keep it for the turn that needs it and let GPT-6.2 Sol or Luna do the rest. GPT-6.2 Sol is now the best value of the strong models on the table: the most messages per window of any Sol.</p>
+
+<h2 id="codex-on-free-and-go-and-the-monthly-limit-question">Codex on Free and Go, and the "monthly limit" question</h2>
+
+<p>Free ($0) and Go ($8 a month) are both listed as "GPT-6 Luna at Standard speed in the desktop app, subject to rollout." Neither gets a column in the estimate table, so OpenAI publishes no per-window number for either. OpenAI's Codex help article confirms Codex is included on Free and Go, but Codex Cloud isn't; the web, CLI, IDE and iOS surfaces and the cloud integrations are listed on the Plus card. Image generation isn't available on Free at all.</p>
+
+<p>There is no monthly Codex limit on a ChatGPT plan. The two clocks are the five-hour window and the weekly cap. The only monthly-shaped meters are on the business side: Enterprise and Edu workspaces with flexible pricing have "no fixed rate limits" and spend credits instead, and without flexible pricing they get "the same per-seat usage limits as Plus."</p>
+
+<h2 id="how-to-check-your-codex-usage-and-what-uses-it-up">How to check your Codex usage (and what uses it up)</h2>
+<p>There are two places to look, and OpenAI names both on its Codex pricing page (read October 10, 2026). <strong>The usage dashboard</strong> at chatgpt.com/codex/settings/usage shows your current limits and when each one resets. <strong>The <code>/status</code> command</strong> shows what's left from inside an active Codex CLI session, which is the one to run before you start a long task, not after it stalls.</p>
+<p>What you'll see is a share of an allowance, not a message count, because OpenAI's numbers are estimates: 15 to 160 GPT-6.1 Sol local messages per five hours on Plus and on a Standard Business seat, and no five-hour limit on Pro plans. Where you land in that range depends on what you ask for. Three things move it most:</p>
+<ul>
+  <li>
+<strong>Speed mode.</strong> Fast uses your included usage at 2.5x the Standard rate. Ultrafast on GPT-6 Astra or GPT-6.1 Sol uses it at 8x.</li>
+  <li>
+<strong>Image generation.</strong> 3 to 5x faster than a similar turn without images, depending on quality and size.</li>
+  <li>
+<strong>Cloud tasks and big context.</strong> Cloud tasks may use more than local messages, and long sessions that hold a lot of the codebase in context cost more per message than small scripts.</li>
+</ul>
+<p>OpenAI's own advice is to check the dashboard every week or two to learn your pace. Mine is the same with a deadline: three normal working days, then decide whether you need more room or a smaller model.</p>
+<h2 id="the-5-hour-window-what-resets-and-when">The 5-hour window: what resets and when</h2>
+
+<p>The window is rolling, not calendar-based. Usage you spent at 9am frees up at 2pm regardless of what you did in between, which is why a heavy morning and a heavy afternoon feel like two separate budgets and a heavy single stretch feels like a wall. The ChatGPT usage dashboard shows current limits and reset times; inside a Codex CLI session, <code>/status</code> shows the same thing without leaving the terminal. If you have never typed that command, type it before you decide you need a bigger plan.</p>
+
+<h2 id="the-codex-weekly-limit">The Codex weekly limit</h2>
+
+<p>OpenAI states that a weekly cap may apply on top of the five-hour allowance and does not publish it, which is the single most-searched frustration about this product and the reason "codex weekly limit" is its own query. Read the two meters together and the order of events is predictable: on an ordinary week the five-hour window is the one you meet, and the weekly cap only shows itself after several days of long agentic runs in a row, at which point the five-hour reset stops helping. If you are hitting it, you are a heavy user by any definition, and the plan question below is a real one for you rather than a hypothetical.</p>
+
+<h2 id="codex-rate-limits-vs-usage-limits">Codex rate limits vs usage limits</h2>
+
+<p>The two phrases get used for the same thing, and the page itself mixes them. The rolling window and the weekly cap are what a ChatGPT-plan user means by either. The other meaning, rate limits in the API sense (requests and tokens per minute by API tier), only applies if you authenticate Codex with an API key instead of a ChatGPT login. That route drops the plan windows entirely, bills at API pricing, and gives up the cloud features (GitHub code review, Slack) that live on the ChatGPT side. It is the right choice for CI and shared environments and the wrong one for a person who wants a predictable monthly bill.</p>
+
+<p>If you do switch Codex to an API key, you stop paying in windows and start paying per token, so look up the model you run in <a href="/blog/openai-api-pricing">OpenAI API pricing</a> before you move a long session over. Cached input bills at 10% of the input price, which helps a long session that keeps resending the same context.</p>
+<h2 id="what-burns-the-allowance-faster-than-you-think">What burns the allowance faster than you think</h2>
+
+<ul>
+  <li>
+<strong>Context.</strong> A session holding a large codebase costs more per turn than a fresh one; the page lists context, reasoning, tool use, retrieval, and caching as the variables, and says prompt length alone is not a reliable estimate.</li>
+  <li>
+<strong>Cloud chats.</strong> OpenAI says cloud tasks may use more of the allowance than local messages.</li>
+  <li>
+<strong>Fast mode.</strong> On GPT-6.2 Astra and GPT-6.2 Sol, Fast uses included usage at 2x the Standard rate and Ultrafast at 6x (purchased credits pay 3x for Ultrafast through February 28, 2027, then 6x). On the older models, Fast is 2.5x (2x on credits) and Ultrafast is 8x (6x on credits) on GPT-6 Astra and GPT-6.1 Sol. OpenAI notes these are allowance rates, not speed guarantees. Among the Pro plans, Pro 500 includes Ultrafast and Pro 200 gets it for GPT-6.2 Sol in Codex only.</li>
+  <li>
+<strong>MCP servers and a big AGENTS.md.</strong> OpenAI's own tips: every connected MCP server adds context to every message, so disconnect the ones you aren't using, and nest AGENTS.md files instead of keeping one giant one at the root.</li>
+  <li>
+<strong>Images.</strong> Image generation draws on the same limits roughly three to five times faster on average.</li>
+  <li>
+<strong>Voice.</strong> Voice in Desktop now spends your existing Codex budget "at $0.05 per minute," and the model doing the task is billed on top at its normal rate. On credit-billed workspaces it's 1.25 credits a minute.</li>
+</ul>
+
+</div>
+              <aside class="post-offer-block not-prose my-12 p-6 md:p-8 rounded-xl bg-card-dark border border-primary-teal/40"
+       data-controller="offer-block" data-offer-block-offer-value="cost_sheet_prompt_pack"
+       data-offer-block-post-slug-value="codex-usage-limits" data-offer-block-placement-value="mid_post_late">
+  <p class="mono-text text-xs uppercase tracking-widest text-primary-teal mb-3">The matching offer</p>
+  <p class="text-white text-lg md:text-xl font-semibold leading-snug mb-3">Picking a coding agent? Price it at real usage, not the sticker.</p>
+  <p class="text-white/70 leading-relaxed mb-5">The free AI Stack Cost Sheet shows what heavy use actually costs for Cursor, Claude Code, Replit and more, and it updates when prices move. Already running one? The $7 Agent Audit Prompt Pack gives your agent 10 read-only prompts to audit its own work.</p>
+  <a href="/ai-stack-cost-sheet"
+     class="inline-flex items-center gap-2 bg-primary-teal text-black font-bold px-6 py-3 rounded-lg hover:brightness-110 transition-all"
+     data-event="offer_block_clicked" data-offer="cost_sheet_prompt_pack"
+     data-post-slug="codex-usage-limits" data-placement="mid_post_late">
+    Get the free cost sheet <span aria-hidden="true">&rarr;</span>
+  </a>
+    <a href="/buy/prompt-pack"
+       class="block sm:inline-block mt-4 sm:mt-0 sm:ml-5 text-primary-teal font-semibold hover:brightness-110 transition-all"
+       data-event="offer_block_clicked" data-offer="prompt_pack"
+       data-post-slug="codex-usage-limits" data-placement="mid_post_late_secondary">
+      Or have your agent audit its own work <span aria-hidden="true">&rarr;</span>
+    </a>
+</aside>
+
+          <div class="trix-content"><h2 id="what-happens-when-you-hit-the-limit-mid-task">What happens when you hit the limit mid-task</h2>
+
+<p>The page is explicit that work in progress gets to finish: if you reach the limit during an active turn, the agent continues that turn subject to fair use. So a long migration does not die halfway; it stops accepting the next instruction. From there you have four moves, cheapest first: wait for the window, switch to a smaller model (Terra or Luna instead of Sol) so what remains lasts longer, buy additional credits (Plus and Pro can do this without changing plan), or run extra local chats against an API key at usage rates. Upgrading is the fourth option, and it is the one people reach for first.</p>
+
+<h2 id="what-is-luna-reserve-the-gpt-reserve-limit-in-codex">What is Luna Reserve (the "GPT Reserve" limit) in Codex?</h2>
+
+<p>If your usage screen shows a second meter called Luna Reserve, or a model labeled <code>gpt-reserve</code>, that is OpenAI's fallback allowance, not a new plan. OpenAI's help article on it (re-read November 23, 2026) says it gives selected accounts extra usage on GPT-5.6 Luna once regular usage runs out. Four details matter more than the name:</p>
+
+<ul>
+  <li>
+<strong>Personal Plus and Pro accounts only.</strong> Business and Enterprise workspaces don't get it. So the same developer can "last longer" on a home Plus account than on the company's Business seat, and the plan isn't the reason.</li>
+  <li>
+<strong>It doesn't refill your regular allowance.</strong> The five-hour window and the weekly limit above keep their own clocks. The reserve is a separate allowance with its own meter, and OpenAI doesn't publish its size.</li>
+  <li>
+<strong>It doesn't unlock the stronger models.</strong> You get Luna, the small model. By the exchange rates above, a Luna turn is the cheapest turn in the window. That's also why it can't stand in for Sol or Astra on a hard refactor.</li>
+  <li>
+<strong>Eligibility can change.</strong> "Selected accounts" means you might not have it at all, and having it this week is no promise for next week.</li>
+</ul>
+
+<p>What I'd do with it: let the reserve handle the cleanup (renames, tests, small edits) after the window runs out, and save the big task for the reset. If your team runs on Business seats and keeps hitting the wall, the reserve won't help you. The options are the four moves in the section above.</p>
+
+<h2 id="should-you-upgrade-to-pro-for-the-limits">Should you upgrade to Pro for the limits?</h2>
+
+<p>Decide it from the meter, not from a bad afternoon. OpenAI's page itself suggests checking the usage dashboard "every week or two" to learn your pace. Run <code>/status</code> at the end of three normal working days and note how often you were actually blocked versus annoyed. If Plus blocks you most days, Pro at $100 is the honest tier, and it is worth knowing that OpenAI now sells that middle rung; the "$20 then $200 cliff" I described in my <a href="/blog/codex-pricing">Codex pricing breakdown</a> has had a $100 step in it since September 2026, Pro drops the five-hour window entirely, and as of November Pro 100 carries twice its previous Work and Codex allowance. If you are blocked once a week, buy credits and keep the $20 plan. If you are blocked because every session starts by re-explaining the whole codebase, fix the AGENTS.md and the task scoping first; <a href="/blog/how-to-use-codex">how to use Codex</a> covers both, and it is free. The same three-step order (threads, scoping, then money) is what I wrote for the Claude side in <a href="/blog/claude-usage-limits">Claude usage limits</a>. If you're weighing a switch rather than an upgrade, Claude's, Gemini's and Copilot's ceilings sit next to OpenAI's in the <a href="/blog/ai-usage-limits">AI usage limits by plan</a> table.</p>
+
+<h2 id="codex-rate-limits-what-resets-and-when">Codex rate limits: what resets and when</h2>
+
+<p>"Codex rate limits" is the phrase people type. The thing they are hitting is the plan allowance above, so here is the reset behavior in one place, from OpenAI's Codex pricing page and its Codex help articles, re-read on November 23, 2026. There are two clocks. The five-hour window refills on its own schedule, and the usage dashboard shows the exact reset time. The weekly limit resets on a fixed date; OpenAI's help center confirms both exist by describing how a banked reset "refreshes your 5-hour and weekly Codex usage windows and changes your weekly reset date." OpenAI publishes neither the weekly number nor a reset day.</p>
+
+<p><strong>You can also buy a reset, per OpenAI's help article (re-read November 23, 2026).</strong> Personal Plus and Pro accounts can buy an instant reset from Usage settings in the desktop app, or from a banner once they hit the weekly limit. Hitting only the five-hour limit doesn't trigger the banner. It isn't available on Free, Go, Business, Enterprise or Edu. Two things to know before you pay. It applies the moment checkout finishes, even if you have usage left, and it can't be saved for later. And it pulls your normal weekly allowance forward rather than adding extra usage: your next automatic weekly reset lands 7 days after your first request following the reset, so your weekly date moves. OpenAI shows the price at checkout, publishes no price in the article, and says it generally doesn't refund these.</p>
+
+<p>What hitting one looks like: OpenAI publishes no exact error string. In the app you get a limit banner that names which allowance is exhausted and lists your options: add credits, apply an available reset, upgrade, or wait for the displayed reset time. In the CLI, <code>/status</code> shows token usage and <code>/usage</code> shows daily, weekly, or cumulative activity and lets you redeem an earned reset. Support will not reset a limit for you; the help center says so directly.</p>
+
+<p>Two things that are not this limit. API rate limits (requests and tokens per minute by tier) belong to an API key and only apply if you signed in with one. And ChatGPT's own caps on images, uploads, and voice have separate banners and, in OpenAI's words, "do not apply to Codex." One thing that doesn't spend the limit at all: auto-review safety checks, when you're signed in with a ChatGPT account, are free and don't count toward your plan's usage.</p>
+
+<h2 id="codex-limits-when-you-re-paying-for-the-team">Codex limits when you're paying for the team</h2>
+
+<p>If you own the company rather than write the code, here is the version I give on calls. A developer hitting Codex limits every day is either doing genuinely heavy work, in which case $100 a month is the cheapest engineer-hour you will ever buy, or is running the same kind of task by hand every morning, in which case the limit is a symptom and the fix is a workflow, not a plan tier. The <a href="/buy/assessment">AI Readiness Assessment</a> ($2,500, credited in full against a build within 90 days) is how I tell those two apart in two weeks. And whatever tier you land on: before real users touch what Codex shipped, run it against the free <a href="/vibe-coding-security-checklist">20-point vibe coding security checklist</a>. Unreviewed agent output under a generous allowance is exactly how apps end up in my <a href="/vibe-code-rescue">rescue queue</a>.</p>
+
+<p>Related: <a href="/blog/codex-pricing">Codex pricing</a> · <a href="/blog/is-codex-free">is Codex free?</a> · <a href="/blog/how-to-use-codex">how to use Codex</a> · <a href="/blog/openai-codex-review">Codex review</a> · <a href="/blog/cursor-vs-claude-code-vs-codex">Cursor vs Claude Code vs Codex</a> · <a href="/blog/claude-usage-limits">Claude usage limits</a> · <a href="/blog/cursor-usage-limits">Cursor usage limits</a>.</p>
+
+<h2 id="pro-200-s-smaller-allowance-was-canceled">Pro 200's smaller allowance was canceled</h2>
+
+<p><strong>Updated November 23, 2026:</strong> in September OpenAI reopened Pro 200 to new subscribers at a lower allowance and told existing subscribers they'd drop to it after October 29. That's off. OpenAI's Pro article now says the reduction announced in its September 29 email "is canceled": if you had the higher allowance you keep it, and if you had the lower one it doubled to match, at the same $200. Pro 100 and Pro 500 also get twice their previous Work and Codex allowance, applied automatically without waiting for renewal. Plus is unchanged. OpenAI still puts no number on any Pro allowance, and it warns that a bigger allowance "does not guarantee twice as many completed tasks."</p>
+
+<h2 id="sources">Sources</h2>
+
+<ul>
+  <li>
+<a href="https://learn.chatgpt.com/docs/pricing">OpenAI, Codex pricing</a> (formerly developers.openai.com/codex/pricing; plans, per-model estimates including GPT-6.2, Pro's missing five-hour limit, speed multipliers, weekly-limit and fair-use wording, Voice, MCP tips): read September 8, 15, 28 and 29, October 12 and November 23, 2026</li>
+  <li>
+<a href="https://help.openai.com/en/articles/9793128-about-chatgpt-pro-plans">OpenAI Help, About ChatGPT Pro tiers</a> (Pro 100, 200 and 500; allowance doubled; Pro 200 reduction canceled; Ultrafast by tier): read September 20 and 29 and November 23, 2026</li>
+  <li>
+<a href="https://help.openai.com/en/articles/12003714-chatgpt-business-models-and-limits">OpenAI Help, ChatGPT Business models and limits</a> (Standard seat estimates, Premium seat wording): read September 29 and November 23, 2026</li>
+  <li>
+<a href="https://help.openai.com/en/articles/20001625-understanding-chatgpt-and-codex-usage-limits">OpenAI Help, Understanding ChatGPT and Codex usage limits</a> (one shared allowance from December): read November 23, 2026</li>
+  <li>
+<a href="https://help.openai.com/en/articles/11369540-using-codex-with-your-chatgpt-plan">OpenAI Help, Using Codex with your ChatGPT plan</a> (Free and Go access, banked resets, /status, auto-review not counted): read September 15 and November 23, 2026</li>
+  <li>
+<a href="https://help.openai.com/en/articles/20001507">OpenAI Help, Paid weekly Work and Codex rate limit resets</a>: read November 2 and 23, 2026</li>
+  <li>
+<a href="https://help.openai.com/en/articles/20001499-luna-reserve-in-codex-and-chatgpt-work">OpenAI Help, Luna Reserve in Codex and ChatGPT Work</a> (fallback on GPT-5.6 Luna, personal Plus and Pro only, separate allowance, no regular-usage refill): read October 16 and November 23, 2026</li>
+</ul>
+<p><strong>Re-checked November 9, 2026:</strong> OpenAI's Codex pricing page, now served at learn.chatgpt.com/docs/pricing, shows the same five ranges for Plus and a Standard Business seat (GPT-6.1 Sol 15 to 160, GPT-6.1 Terra 35 to 285, GPT-6 Sol 15 to 150, GPT-6 Astra 5 to 45, GPT-6 Luna 350 to 3,000), Pro at $100, $200 or $500 with no five-hour limit, Go at $8 and Free at $0 with no published number, and Business at $20 a user billed annually or $25 monthly for 2 or more users. Nothing in the table moved since November 2.</p>
+</div>
+      </div>
+
+        <p class="mt-10 text-white/60 max-w-[720px]">
+          <span class="mono-text text-xs uppercase tracking-widest text-primary-teal mr-2">Next step</span>
+          <a href="/ai-stack-cost-sheet" class="text-primary-teal font-semibold hover:brightness-110 transition-all"
+             data-event="offer_block_clicked" data-offer="cost_sheet_prompt_pack"
+             data-post-slug="codex-usage-limits" data-placement="next_step_line">
+            Get the free cost sheet &rarr;
+          </a>
+        </p>
+
+      <div class="lg:hidden mt-12">
+        <div class="bg-white/5 border border-white/10 rounded-xl p-8 overflow-hidden relative group">
+  <div class="absolute -top-12 -right-12 w-32 h-32 bg-primary-teal/10 blur-3xl group-hover:bg-primary-teal/20 transition-all"></div>
+  <div class="relative z-10">
+    <div class="flex items-center justify-between mb-6">
+      <span class="mono-text text-[10px] uppercase tracking-wider text-primary-teal bg-primary-teal/10 px-3 py-1 rounded-full">Free Resource</span>
+      <img alt="Justin McKelvey" width="40" height="40" loading="lazy" decoding="async" class="w-10 h-10 rounded-full object-cover ring-1 ring-primary-teal/40" src="/assets/justin-headshot-128-afb1d3f3.webp" />
+    </div>
+    <h4 class="serif-text text-3xl mb-4 leading-tight">Hit the cap? Every plan&#39;s limit, one page.</h4>
+    <p class="text-white/60 mb-8 leading-relaxed">
+      ChatGPT, Codex, Claude, Gemini, and Copilot: what&#39;s metered, what resets when, and the cheapest way around each. Re-sent when a limit moves.
+    </p>
+      <form data-controller="form-guard" action="/ai-usage-limits-cheat-sheet" accept-charset="UTF-8" method="post"><input type="hidden" name="authenticity_token" value="US3krYyy2hABvs8CsKBpU7YIrenm-oLRIM8p3qupdNMjch2PlpCnPgvODLvyMRjICNBmY6uDXQHF5vnpcN1Abw" autocomplete="off" />
+        <div aria-hidden="true" style="position:absolute;left:-9999px;top:-9999px;height:0;width:0;overflow:hidden;"><input type="text" name="website_url" tabindex="-1" autocomplete="off"></div>
+<input type="hidden" name="_challenge" value="" data-form-guard-target="challenge" data-token="eyJfcmFpbHMiOnsiZGF0YSI6MTc5NTY2NTAzNiwiZXhwIjoiMjAyNi0xMS0yNlQwOTo1MDozNi4wOTZaIiwicHVyIjoiZm9ybV9ndWFyZCJ9fQ==--0ac3e5a92cae1bf98c7a191db67abdea2a1283a5">
+  <div class="cf-turnstile" data-sitekey="0x4AAAAAAFYm0CXnrInwpNBv" data-size="flexible" data-appearance="interaction-only"></div>
+
+        <input type="email" name="email" placeholder="you@work.com" required value=""
+               class="w-full bg-bg-neutral border border-white/10 rounded-lg px-4 py-3 text-white focus:outline-none focus:ring-2 focus:ring-primary-teal/50 placeholder:text-white/30 mb-4">
+        <button type="submit" class="w-full bg-primary-teal text-black font-bold py-4 rounded-lg transition-all flex items-center justify-center gap-2 hover:brightness-110"
+                data-event="magnet_card_submit" data-post-slug="codex-usage-limits"
+                data-placement="mobile_inline" data-magnet="ai_usage_limits_cheat_sheet">
+          Send me the cheat sheet
+          <span class="material-icons text-sm">arrow_forward</span>
+        </button>
+</form>  </div>
+</div>
+
+      </div>
+
+        <div class="max-w-[720px]">
+          <aside id="ai-team-rollout" class="post-team-rollout-bridge not-prose my-12 p-6 md:p-8 rounded-xl bg-card-dark border border-primary-teal/40 border-l-4 border-l-primary-teal"
+       data-controller="offer-block" data-offer-block-event-value="bridge_block_viewed"
+       data-offer-block-offer-value="ai_consulting"
+       data-offer-block-post-slug-value="codex-usage-limits" data-offer-block-placement-value="bridge_pre_faq">
+  <p class="mono-text text-xs uppercase tracking-widest text-primary-teal mb-3">AI Team Rollout</p>
+  <p class="text-white text-lg md:text-xl font-semibold leading-snug mb-3">Rolling coding agents out to your dev team?</p>
+  <p class="text-white/70 leading-relaxed mb-5">Limits and pricing are the easy part. Who gets which seat, what the agent can touch, and how its work gets reviewed are the decisions that matter, and a free 30-minute call is where I&#39;d start.</p>
+  <div class="flex flex-col sm:flex-row sm:items-center gap-4 sm:gap-6">
+    <a href="/ai-consulting"
+       class="inline-flex self-start items-center gap-2 bg-primary-teal text-black font-bold px-6 py-3 rounded-lg hover:brightness-110 transition-all"
+       data-event="cta_clicked" data-position="bridge" data-tool="codex"
+       data-offer="ai_consulting" data-variant="coding_agents"
+       data-post-slug="codex-usage-limits" data-placement="bridge_pre_faq">
+      Get started <span aria-hidden="true">&rarr;</span>
+    </a>
+    <a href="/ai-readiness-checklist"
+       class="text-sm text-white/60 hover:text-primary-teal underline underline-offset-4 decoration-white/20 hover:decoration-primary-teal transition-colors"
+       data-event="cta_clicked" data-position="bridge_secondary" data-tool="codex"
+       data-offer="readiness_checklist" data-variant="coding_agents"
+       data-post-slug="codex-usage-limits" data-placement="bridge_pre_faq">
+      Not sure you&#39;re ready? Take the free readiness checklist
+    </a>
+  </div>
+</aside>
+
+        </div>
+
+        <section class="post-faq mt-16 border-t border-white/10 pt-12" id="faq">
+          <h2 class="mono-text text-xs uppercase tracking-widest text-primary-teal mb-8">
+            Frequently Asked Questions
+          </h2>
+          <dl class="space-y-8">
+              <div class="border-l-2 border-primary-teal/30 pl-6">
+                <dt class="font-semibold text-white text-lg mb-3">What are the Codex usage limits?</dt>
+                <dd class="text-white/70 leading-relaxed">As of November 23, 2026 OpenAI describes Codex limits as an allowance per rolling five-hour window, not a fixed message count. Its own estimates for local messages per five-hour window on Plus ($20/mo) are roughly 6–50 with GPT-6.2 Astra, 17–180 with GPT-6.2 Sol, 15–160 with GPT-6.1 Sol, 35–285 with GPT-6.1 Terra and 350–3,000 with GPT-6 Luna. Pro ($100, $200 or $500) currently has no five-hour limit. A weekly limit may also apply on top, cloud tasks can use more than local messages, and starting in December ChatGPT and Codex share one allowance on Plus, Pro and Business.</dd>
+              </div>
+              <div class="border-l-2 border-primary-teal/30 pl-6">
+                <dt class="font-semibold text-white text-lg mb-3">Is there a Codex weekly limit?</dt>
+                <dd class="text-white/70 leading-relaxed">Yes, potentially. OpenAI's pricing page says local messages and cloud chats share the plan's allowance and that weekly limits may also apply, without publishing the weekly number. In practice the five-hour window is the one you feel first on an ordinary day; the weekly cap is the one you feel after several heavy days in a row. The usage dashboard in ChatGPT and the /status command in the Codex CLI show your current limits and reset times.</dd>
+              </div>
+              <div class="border-l-2 border-primary-teal/30 pl-6">
+                <dt class="font-semibold text-white text-lg mb-3">What happens when Codex hits the usage limit mid-task?</dt>
+                <dd class="text-white/70 leading-relaxed">The agent is allowed to finish the turn it is on, subject to fair use, so a long refactor does not die halfway. After that you wait for the window to reset, switch to a smaller model to stretch what is left, buy additional credits (available on Plus and Pro without changing plan), or run extra local sessions against an API key billed at usage rates. Upgrading the plan is the fourth option, not the first.</dd>
+              </div>
+              <div class="border-l-2 border-primary-teal/30 pl-6">
+                <dt class="font-semibold text-white text-lg mb-3">How do Codex Pro limits compare to Plus?</dt>
+                <dd class="text-white/70 leading-relaxed">As of November 23, 2026, Pro comes in three tiers, $100, $200 and $500 a month, and OpenAI's Codex page says Pro plans currently have no five-hour limit. Plus sits at roughly 17–180 GPT-6.2 Sol or 6–50 GPT-6.2 Astra messages per five-hour window. OpenAI publishes no per-window numbers for Pro, only that Pro 200 includes more usage than Pro 100 and Pro 500 the most, and weekly limits can still apply. OpenAI's Pro article now says Pro 100 and Pro 500 get twice their previous Work and Codex allowance, and the lower Pro 200 allowance announced in September was canceled, so every Pro 200 subscriber has the same, higher allowance. A Standard Business seat ($20 per user per month billed annually, $25 monthly) gets the Plus estimates; a Premium seat gets more included usage and no five-hour limit.</dd>
+              </div>
+              <div class="border-l-2 border-primary-teal/30 pl-6">
+                <dt class="font-semibold text-white text-lg mb-3">Why did I hit the Codex limit so fast?</dt>
+                <dd class="text-white/70 leading-relaxed">Because the allowance is spent by tokens, not messages. Model choice, context size, reasoning depth, tool use, retrieval, and caching all change how much one message costs; cloud tasks can use more than local messages; Fast mode draws included usage at 2x the Standard rate on the GPT-6.2 models and 2.5x on the older ones, and Ultrafast at 6x (GPT-6.2) or 8x (GPT-6 Astra, GPT-6.1 Sol); every MCP server you leave connected adds context to each message; image generation uses the allowance roughly three to five times faster; and a session that holds a large codebase in context burns more per turn than a fresh one. Two tasks that look identical can cost very different amounts of the window.</dd>
+              </div>
+              <div class="border-l-2 border-primary-teal/30 pl-6">
+                <dt class="font-semibold text-white text-lg mb-3">Are Codex usage limits the same as Codex rate limits?</dt>
+                <dd class="text-white/70 leading-relaxed">People use the phrases interchangeably, and OpenAI's own page mixes them. The rolling five-hour allowance and the weekly cap are what most people mean by either phrase. A separate meaning of rate limit applies to API keys, where requests and tokens per minute are governed by your API tier rather than a ChatGPT plan; if you run Codex against an API key, those limits and usage-based billing apply instead of the plan windows.</dd>
+              </div>
+              <div class="border-l-2 border-primary-teal/30 pl-6">
+                <dt class="font-semibold text-white text-lg mb-3">What is the Codex rate limit?</dt>
+                <dd class="text-white/70 leading-relaxed">On a ChatGPT plan, the Codex rate limit is the plan allowance: a per-model estimate of local messages per five-hour window (OpenAI's page, read November 23, 2026, gives roughly 17 to 180 GPT-6.2 Sol messages on Plus and says Pro plans currently have no five-hour limit) plus a weekly limit that OpenAI says may apply without publishing the number. Both reset on schedules shown in the ChatGPT usage dashboard and via /status and /usage in the Codex CLI. The other meaning, API rate limits in requests and tokens per minute, applies only when you run Codex with an API key, and that route is billed at usage rates instead of the plan windows.</dd>
+              </div>
+              <div class="border-l-2 border-primary-teal/30 pl-6">
+                <dt class="font-semibold text-white text-lg mb-3">What is the GPT Reserve or Luna Reserve limit in Codex?</dt>
+                <dd class="text-white/70 leading-relaxed">Luna Reserve (shown as gpt-reserve in some builds) is OpenAI's fallback allowance: per its help article re-read November 23, 2026, selected personal Plus and Pro accounts get extra usage on GPT-5.6 Luna after their regular usage runs out. It has its own meter, it does not refill the five-hour or weekly allowance, it does not unlock the stronger models, and Business and Enterprise workspaces don't get it. OpenAI does not publish its size, and eligibility can change.</dd>
+              </div>
+              <div class="border-l-2 border-primary-teal/30 pl-6">
+                <dt class="font-semibold text-white text-lg mb-3">Will ChatGPT and Codex share usage limits?</dt>
+                <dd class="text-white/70 leading-relaxed">Yes, starting in December 2026. OpenAI's help article (read November 23, 2026) says Plus, Pro and Business plans will share one usage allowance across ChatGPT and Codex, measured in tokens, so heavier models and longer tasks use more of it. Instant chat will not draw from it. OpenAI says it expects most users won't wait for resets more often than they do now, and the combined remaining usage and reset times will show in Settings, Usage. It has not published new per-plan numbers for the shared allowance.</dd>
+              </div>
+              <div class="border-l-2 border-primary-teal/30 pl-6">
+                <dt class="font-semibold text-white text-lg mb-3">How do I check my Codex usage?</dt>
+                <dd class="text-white/70 leading-relaxed">Open the usage dashboard at chatgpt.com/codex/settings/usage for your current limits and reset times, or run /status inside an active Codex CLI session to see what's left. OpenAI's pricing page (read October 10, 2026) suggests checking the dashboard every week or two. Plus gets an estimated 15 to 160 GPT-6.1 Sol local messages per five hours; Pro plans have no five-hour limit.</dd>
+              </div>
+              <div class="border-l-2 border-primary-teal/30 pl-6">
+                <dt class="font-semibold text-white text-lg mb-3">How many Codex messages do you get on ChatGPT Plus?</dt>
+                <dd class="text-white/70 leading-relaxed">OpenAI's Codex pricing page, re-read November 9, 2026, estimates a Plus ($20 a month) user gets 15 to 160 GPT-6.1 Sol local messages per five-hour window, 35 to 285 on GPT-6.1 Terra, 15 to 150 on GPT-6 Sol, 5 to 45 on GPT-6 Astra and 350 to 3,000 on GPT-6 Luna. Those are estimates, not fixed limits. Local messages and cloud chats share the same allowance, a weekly limit may also apply, and a Standard Business seat gets the same ranges. When it runs out you can wait for the window, switch to a smaller model, or buy ChatGPT credits.</dd>
+              </div>
+              <div class="border-l-2 border-primary-teal/30 pl-6">
+                <dt class="font-semibold text-white text-lg mb-3">Does Codex share a usage limit with ChatGPT?</dt>
+                <dd class="text-white/70 leading-relaxed">From December 2026 it does, on Plus, Pro and Business. OpenAI says the allowance will be shared across ChatGPT and Codex and measured in tokens, so heavy ChatGPT work leaves less for Codex. Instant chat is excluded. Settings, then Usage shows the combined total; /status in the Codex CLI shows what's left in a session.</dd>
+              </div>
+          </dl>
+        </section>
+
+        <div class="mt-20 border-t border-white/10 pt-12">
+          <h3 class="mono-text text-xs uppercase tracking-widest text-primary-teal mb-6">
+            More on Vibe Code Rescue
+          </h3>
+          <div class="grid gap-4">
+              <a href="/blog/codex-security" class="group flex items-start gap-4 rounded-xl bg-white/5 border border-white/10 p-5 hover:border-primary-teal/30 transition-all">
+                  <img alt="Codex Security (2026): What OpenAI&#39;s Code Scanner Does, Which Plan Runs It, and How to Use It on an AI-Built App" width="128" height="67" loading="lazy" decoding="async" class="hidden sm:block w-32 h-auto rounded-lg border border-white/10 shrink-0" src="/rails/active_storage/blobs/redirect/eyJfcmFpbHMiOnsiZGF0YSI6NzExLCJwdXIiOiJibG9iX2lkIn19--1dfb2564c8d389a004339270c40e82975e74749f/codex-security.png" />
+                <div class="flex-1">
+                  <h4 class="text-white font-semibold group-hover:text-primary-teal transition-colors">Codex Security (2026): What OpenAI&#39;s Code Scanner Does, Which Plan Runs It, and How to Use It on an AI-Built App</h4>
+                    <p class="mt-1 text-sm text-white/50 line-clamp-2">Codex Security is OpenAI&#39;s vulnerability scanner inside Codex. It comes four ways: a plugin for local scans, a CLI for CI, an SDK, and Daybreak Defense Factory for connected GitHub repos. The GitHub version is Enterprise-only; OpenAI doesn&#39;t publish which plans get the local plugin. Here&#39;s how an owner of an AI-built app should run a first scan.</p>
+                </div>
+                  <span class="mono-text text-xs text-white/30 shrink-0">6 min</span>
+              </a>
+              <a href="/blog/neon-pricing" class="group flex items-start gap-4 rounded-xl bg-white/5 border border-white/10 p-5 hover:border-primary-teal/30 transition-all">
+                  <img alt="Neon Pricing (2026): Free Plan Limits, $0.106 per CU-Hour, and When Scale-to-Zero Stops Saving You Money" width="128" height="67" loading="lazy" decoding="async" class="hidden sm:block w-32 h-auto rounded-lg border border-white/10 shrink-0" src="/rails/active_storage/blobs/redirect/eyJfcmFpbHMiOnsiZGF0YSI6NzA4LCJwdXIiOiJibG9iX2lkIn19--33242232fe2a77838f7bf6e48f644ad96db30aef/neon-pricing.png" />
+                <div class="flex-1">
+                  <h4 class="text-white font-semibold group-hover:text-primary-teal transition-colors">Neon Pricing (2026): Free Plan Limits, $0.106 per CU-Hour, and When Scale-to-Zero Stops Saving You Money</h4>
+                    <p class="mt-1 text-sm text-white/50 line-clamp-2">Neon&#39;s Free plan gives each project 100 compute hours a month, and its paid Launch plan bills $0.106 per CU-hour plus $0.35 per GB of storage. A small database that sleeps when idle costs about $15 a month; the same database left on all month is about $21, and on the Free plan it gets suspended around day 17.</p>
+                </div>
+                  <span class="mono-text text-xs text-white/30 shrink-0">8 min</span>
+              </a>
+              <a href="/blog/supabase-pricing" class="group flex items-start gap-4 rounded-xl bg-white/5 border border-white/10 p-5 hover:border-primary-teal/30 transition-all">
+                  <img alt="Supabase Pricing (2026): Free, Pro $25, Team $599, and the Line Item That Jumps Your Bill" width="128" height="67" loading="lazy" decoding="async" class="hidden sm:block w-32 h-auto rounded-lg border border-white/10 shrink-0" src="/rails/active_storage/blobs/redirect/eyJfcmFpbHMiOnsiZGF0YSI6NzA3LCJwdXIiOiJibG9iX2lkIn19--bd4ec876ce9498585636bf1bd965a560cfdfbaab/supabase-pricing.png" />
+                <div class="flex-1">
+                  <h4 class="text-white font-semibold group-hover:text-primary-teal transition-colors">Supabase Pricing (2026): Free, Pro $25, Team $599, and the Line Item That Jumps Your Bill</h4>
+                    <p class="mt-1 text-sm text-white/50 line-clamp-2">Supabase is free for 2 small projects, $25 a month on Pro and $599 on Team. Most Pro apps pay exactly $25, until monthly active users pass 100,000: then each extra user costs $0.00325, and a $25 bill becomes $204.</p>
+                </div>
+                  <span class="mono-text text-xs text-white/30 shrink-0">6 min</span>
+              </a>
+              <a href="/blog/digitalocean-pricing" class="group flex items-start gap-4 rounded-xl bg-white/5 border border-white/10 p-5 hover:border-primary-teal/30 transition-all">
+                  <img alt="DigitalOcean Pricing (2026): Droplets from $4, App Platform from $5, and the Same App Priced Three Ways" width="128" height="67" loading="lazy" decoding="async" class="hidden sm:block w-32 h-auto rounded-lg border border-white/10 shrink-0" src="/rails/active_storage/blobs/redirect/eyJfcmFpbHMiOnsiZGF0YSI6NzA2LCJwdXIiOiJibG9iX2lkIn19--5417247504f69732c15807d62a9a26836015a4eb/digitalocean-pricing.png" />
+                <div class="flex-1">
+                  <h4 class="text-white font-semibold group-hover:text-primary-teal transition-colors">DigitalOcean Pricing (2026): Droplets from $4, App Platform from $5, and the Same App Priced Three Ways</h4>
+                    <p class="mt-1 text-sm text-white/50 line-clamp-2">DigitalOcean Droplets start at $4 a month and App Platform containers at $5, but the real question is which way to run your app. The same small app with a database costs $14.40, $29.55 or $39.15 a month depending on how much DigitalOcean manages for you.</p>
+                </div>
+                  <span class="mono-text text-xs text-white/30 shrink-0">7 min</span>
+              </a>
+          </div>
+        </div>
+
+      <div class="mt-20 border-t border-white/10 pt-12">
+        <div class="flex flex-col sm:flex-row items-start gap-6">
+          <img alt="Justin McKelvey, Austin, TX" width="96" height="96" loading="lazy" decoding="async" class="w-24 h-24 rounded-full object-cover ring-2 ring-primary-teal/40 shrink-0" src="/assets/justin-headshot-256-935076cd.webp" />
+          <div>
+            <p class="mono-text text-xs uppercase tracking-widest text-primary-teal mb-2">Written by</p>
+            <h3 class="text-white font-semibold text-xl mb-3">Justin McKelvey</h3>
+            <p class="text-white/60 leading-relaxed mb-4">
+              I spent 12 years running snowboard and mountain-bike shops in Colorado, then taught myself to code.
+              Since then: 50+ products shipped, Head of Product at a national sports platform, CTO at an AI startup.
+              Now I put AI to work in real businesses in Austin, TX and remote, and write down what actually works.
+            </p>
+            <a href="/work-with-me" class="inline-flex items-center gap-2 text-primary-teal font-semibold hover:brightness-110 transition-all"
+               data-event="author_bio_cta_click" data-post-slug="codex-usage-limits">
+              Work with me <span aria-hidden="true">&rarr;</span>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <aside class="post-newsletter-cta mt-8 p-6 md:p-8 rounded-xl bg-card-dark border border-white/10"
+       data-controller="capture-block"
+       data-capture-block-placement-value="newsletter_end"
+       data-capture-block-asset-value="newsletter"
+       data-capture-block-post-slug-value="codex-usage-limits">
+  <p class="mono-text text-xs uppercase tracking-widest text-primary-teal mb-3">The Weekly Playbook</p>
+  <p class="text-white text-lg font-semibold leading-snug mb-5">
+    Usage limits change without a press release. I send what changed, what each plan actually gets now, and the updated cheat sheet the moment a cap moves. Weekly, no hype.
+  </p>
+  <form class="flex flex-col sm:flex-row gap-3" data-controller="form-guard" action="/the-ai-leaders-weekly-playbook" accept-charset="UTF-8" method="post"><input type="hidden" name="authenticity_token" value="tZXsvKil82u1TA4hecbXh-3k6fUo9Rl_zFGwR0ywQySyF2MsZSfv9YhXOae-LIFZIKFfYWdod3YEZ0cUH3YWkg" autocomplete="off" />
+    <div aria-hidden="true" style="position:absolute;left:-9999px;top:-9999px;height:0;width:0;overflow:hidden;"><input type="text" name="website_url" tabindex="-1" autocomplete="off"></div>
+<input type="hidden" name="_challenge" value="" data-form-guard-target="challenge" data-token="eyJfcmFpbHMiOnsiZGF0YSI6MTc5NTY2NTAzNiwiZXhwIjoiMjAyNi0xMS0yNlQwOTo1MDozNi4xMDBaIiwicHVyIjoiZm9ybV9ndWFyZCJ9fQ==--c66155e3481b026eea3e55ec51c0a5cae570ce2d">
+  <div class="cf-turnstile" data-sitekey="0x4AAAAAAFYm0CXnrInwpNBv" data-size="flexible" data-appearance="interaction-only"></div>
+
+    <input type="hidden" name="post_slug" value="codex-usage-limits">
+    <input type="email" name="email" placeholder="you@work.com" required value=""
+           class="flex-1 bg-bg-neutral border border-white/10 rounded-lg px-4 py-3 text-white focus:outline-none focus:ring-2 focus:ring-primary-teal/50 placeholder:text-white/30">
+    <button type="submit"
+            class="bg-primary-teal text-black font-bold px-6 py-3 rounded-lg hover:brightness-110 transition-all whitespace-nowrap"
+            data-event="newsletter_optin_submit" data-post-slug="codex-usage-limits" data-placement="post_footer">
+      Get the breakdowns
+    </button>
+</form>  <p class="mt-3 text-sm text-white/40">One email a week. No spam. One-click unsubscribe.</p>
+</aside>
+
+
+      <p class="mt-6 text-sm text-white/50">
+        Want more help?
+          <a class="text-primary-teal hover:underline" href="/ai-stack-cost-sheet"
+             data-event="footer_cta_click" data-post-slug="codex-usage-limits" data-cta="ai_stack_cost_sheet">Get the free AI stack cost sheet</a>
+           · <a class="text-primary-teal hover:underline" href="/buy/prompt-pack"
+             data-event="footer_cta_click" data-post-slug="codex-usage-limits" data-cta="prompt_pack">Have your agent audit its own work</a>
+      </p>
+
+
+    </article>
+
+    <aside class="lg:col-span-4 hidden lg:block">
+      <div class="sticky top-24">
+        <div class="bg-white/5 border border-white/10 rounded-xl p-8 overflow-hidden relative group">
+  <div class="absolute -top-12 -right-12 w-32 h-32 bg-primary-teal/10 blur-3xl group-hover:bg-primary-teal/20 transition-all"></div>
+  <div class="relative z-10">
+    <div class="flex items-center justify-between mb-6">
+      <span class="mono-text text-[10px] uppercase tracking-wider text-primary-teal bg-primary-teal/10 px-3 py-1 rounded-full">Free Resource</span>
+      <img alt="Justin McKelvey" width="40" height="40" loading="lazy" decoding="async" class="w-10 h-10 rounded-full object-cover ring-1 ring-primary-teal/40" src="/assets/justin-headshot-128-afb1d3f3.webp" />
+    </div>
+    <h4 class="serif-text text-3xl mb-4 leading-tight">Hit the cap? Every plan&#39;s limit, one page.</h4>
+    <p class="text-white/60 mb-8 leading-relaxed">
+      ChatGPT, Codex, Claude, Gemini, and Copilot: what&#39;s metered, what resets when, and the cheapest way around each. Re-sent when a limit moves.
+    </p>
+      <form data-controller="form-guard" action="/ai-usage-limits-cheat-sheet" accept-charset="UTF-8" method="post"><input type="hidden" name="authenticity_token" value="fbhOchuKHntw4OgD1ATBnlcSgoYt_7I9JmnQ8HXTDtcP57dQAahjVXqQK7qWlbAF6cpJDGCGbe3DQADHrqc6aw" autocomplete="off" />
+        <div aria-hidden="true" style="position:absolute;left:-9999px;top:-9999px;height:0;width:0;overflow:hidden;"><input type="text" name="website_url" tabindex="-1" autocomplete="off"></div>
+<input type="hidden" name="_challenge" value="" data-form-guard-target="challenge" data-token="eyJfcmFpbHMiOnsiZGF0YSI6MTc5NTY2NTAzNiwiZXhwIjoiMjAyNi0xMS0yNlQwOTo1MDozNi4xMDBaIiwicHVyIjoiZm9ybV9ndWFyZCJ9fQ==--c66155e3481b026eea3e55ec51c0a5cae570ce2d">
+  <div class="cf-turnstile" data-sitekey="0x4AAAAAAFYm0CXnrInwpNBv" data-size="flexible" data-appearance="interaction-only"></div>
+
+        <input type="email" name="email" placeholder="you@work.com" required value=""
+               class="w-full bg-bg-neutral border border-white/10 rounded-lg px-4 py-3 text-white focus:outline-none focus:ring-2 focus:ring-primary-teal/50 placeholder:text-white/30 mb-4">
+        <button type="submit" class="w-full bg-primary-teal text-black font-bold py-4 rounded-lg transition-all flex items-center justify-center gap-2 hover:brightness-110"
+                data-event="magnet_card_submit" data-post-slug="codex-usage-limits"
+                data-placement="sidebar" data-magnet="ai_usage_limits_cheat_sheet">
+          Send me the cheat sheet
+          <span class="material-icons text-sm">arrow_forward</span>
+        </button>
+</form>  </div>
+</div>
+
+
+
+          <div class="mt-8">
+            <nav class="p-6 rounded-xl bg-white/5 border border-white/10" aria-label="Table of contents">
+  <p class="mono-text text-xs uppercase tracking-widest text-primary-teal mb-4">On this page</p>
+  <ol class="space-y-2 max-h-[30vh] overflow-y-auto pr-2">
+      <li class="">
+        <a href="#tl-dr-codex-usage-limits-are-a-window-not-a-count" class="text-white/60 hover:text-primary-teal transition-colors text-sm leading-relaxed">
+          TL;DR: Codex Usage Limits Are a Window, Not a Count
+        </a>
+      </li>
+      <li class="">
+        <a href="#what-changed-in-november-2026" class="text-white/60 hover:text-primary-teal transition-colors text-sm leading-relaxed">
+          What changed in November 2026
+        </a>
+      </li>
+      <li class="">
+        <a href="#december-2026-codex-and-chatgpt-share-one-allowance" class="text-white/60 hover:text-primary-teal transition-colors text-sm leading-relaxed">
+          December 2026: Codex and ChatGPT share one allowance
+        </a>
+      </li>
+      <li class="">
+        <a href="#the-codex-limits-by-plan-from-openai-s-own-page-november-2026" class="text-white/60 hover:text-primary-teal transition-colors text-sm leading-relaxed">
+          The Codex limits by plan, from OpenAI&#39;s own page (November 2026)
+        </a>
+      </li>
+      <li class="">
+        <a href="#one-astra-message-in-other-models-messages" class="text-white/60 hover:text-primary-teal transition-colors text-sm leading-relaxed">
+          One Astra message, in other models&#39; messages
+        </a>
+      </li>
+      <li class="">
+        <a href="#codex-on-free-and-go-and-the-monthly-limit-question" class="text-white/60 hover:text-primary-teal transition-colors text-sm leading-relaxed">
+          Codex on Free and Go, and the &quot;monthly limit&quot; question
+        </a>
+      </li>
+      <li class="">
+        <a href="#how-to-check-your-codex-usage-and-what-uses-it-up" class="text-white/60 hover:text-primary-teal transition-colors text-sm leading-relaxed">
+          How to check your Codex usage (and what uses it up)
+        </a>
+      </li>
+      <li class="">
+        <a href="#the-5-hour-window-what-resets-and-when" class="text-white/60 hover:text-primary-teal transition-colors text-sm leading-relaxed">
+          The 5-hour window: what resets and when
+        </a>
+      </li>
+      <li class="">
+        <a href="#the-codex-weekly-limit" class="text-white/60 hover:text-primary-teal transition-colors text-sm leading-relaxed">
+          The Codex weekly limit
+        </a>
+      </li>
+      <li class="">
+        <a href="#codex-rate-limits-vs-usage-limits" class="text-white/60 hover:text-primary-teal transition-colors text-sm leading-relaxed">
+          Codex rate limits vs usage limits
+        </a>
+      </li>
+      <li class="">
+        <a href="#what-burns-the-allowance-faster-than-you-think" class="text-white/60 hover:text-primary-teal transition-colors text-sm leading-relaxed">
+          What burns the allowance faster than you think
+        </a>
+      </li>
+      <li class="">
+        <a href="#what-happens-when-you-hit-the-limit-mid-task" class="text-white/60 hover:text-primary-teal transition-colors text-sm leading-relaxed">
+          What happens when you hit the limit mid-task
+        </a>
+      </li>
+      <li class="">
+        <a href="#what-is-luna-reserve-the-gpt-reserve-limit-in-codex" class="text-white/60 hover:text-primary-teal transition-colors text-sm leading-relaxed">
+          What is Luna Reserve (the &quot;GPT Reserve&quot; limit) in Codex?
+        </a>
+      </li>
+      <li class="">
+        <a href="#should-you-upgrade-to-pro-for-the-limits" class="text-white/60 hover:text-primary-teal transition-colors text-sm leading-relaxed">
+          Should you upgrade to Pro for the limits?
+        </a>
+      </li>
+      <li class="">
+        <a href="#codex-rate-limits-what-resets-and-when" class="text-white/60 hover:text-primary-teal transition-colors text-sm leading-relaxed">
+          Codex rate limits: what resets and when
+        </a>
+      </li>
+      <li class="">
+        <a href="#codex-limits-when-you-re-paying-for-the-team" class="text-white/60 hover:text-primary-teal transition-colors text-sm leading-relaxed">
+          Codex limits when you&#39;re paying for the team
+        </a>
+      </li>
+      <li class="">
+        <a href="#pro-200-s-smaller-allowance-was-canceled" class="text-white/60 hover:text-primary-teal transition-colors text-sm leading-relaxed">
+          Pro 200&#39;s smaller allowance was canceled
+        </a>
+      </li>
+      <li class="">
+        <a href="#sources" class="text-white/60 hover:text-primary-teal transition-colors text-sm leading-relaxed">
+          Sources
+        </a>
+      </li>
+  </ol>
+</nav>
+
+          </div>
+
+        <div class="mt-8 px-8">
+          <p class="mono-text text-xs text-white/40 uppercase mb-4 tracking-widest text-center">Follow the journey</p>
+          <div class="flex gap-4 justify-center">
+            <a class="text-white/50 hover:text-primary-teal transition-colors text-sm" href="https://x.com/justinmckelvey" target="_blank" rel="noopener">X</a>
+            <a class="text-white/50 hover:text-primary-teal transition-colors text-sm" href="https://linkedin.com/in/justinmckelvey" target="_blank" rel="noopener">LinkedIn</a>
+            <a class="text-white/50 hover:text-primary-teal transition-colors text-sm" href="https://youtube.com/@justinmckelvey" target="_blank" rel="noopener">YouTube</a>
+          </div>
+        </div>
+      </div>
+    </aside>
+  </div>
+</section>
+
+    </main>
+
+    <footer class="py-24 px-6 border-t border-white/5 bg-bg-neutral" data-controller="analytics">
+  <div class="max-w-7xl mx-auto">
+    <div class="mb-20 pb-16 border-b border-white/5">
+      <div class="flex flex-col lg:flex-row lg:items-center gap-8">
+        <div class="flex items-start gap-5 flex-1">
+          <img alt="Justin McKelvey" width="56" height="56" loading="lazy" decoding="async" class="w-14 h-14 rounded-full object-cover ring-1 ring-primary-teal/40 shrink-0" src="/assets/justin-headshot-128-afb1d3f3.webp" />
+          <div>
+            <h4 class="serif-text text-2xl md:text-3xl text-white leading-tight mb-2">The AI Leader's Weekly Playbook</h4>
+            <p class="text-white/50 text-sm max-w-md leading-relaxed">One practical AI play for your business every week. Real numbers, real builds, no hype.</p>
+          </div>
+        </div>
+        <form class="flex flex-col sm:flex-row gap-3 w-full lg:w-auto lg:min-w-[420px]" data-controller="form-guard" action="/the-ai-leaders-weekly-playbook" accept-charset="UTF-8" method="post"><input type="hidden" name="authenticity_token" value="LOlZ4baJtROKxR8Vh-HjL-__aDUiHDrF981DihvSuI4ra9ZxewupjbfeKJNAC7XxIrreoW2BVMw_-7TZSBTtOA" autocomplete="off" />
+          <div aria-hidden="true" style="position:absolute;left:-9999px;top:-9999px;height:0;width:0;overflow:hidden;"><input type="text" name="website_url" tabindex="-1" autocomplete="off"></div>
+<input type="hidden" name="_challenge" value="" data-form-guard-target="challenge" data-token="eyJfcmFpbHMiOnsiZGF0YSI6MTc5NTY2NTAzNiwiZXhwIjoiMjAyNi0xMS0yNlQwOTo1MDozNi4xMDFaIiwicHVyIjoiZm9ybV9ndWFyZCJ9fQ==--fde743770c70f511fba744e0be212c2bdd21d8dc">
+  <div class="cf-turnstile" data-sitekey="0x4AAAAAAFYm0CXnrInwpNBv" data-size="flexible" data-appearance="interaction-only"></div>
+
+          <input type="email" name="email" placeholder="you@work.com" required
+                 class="flex-1 bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-white focus:outline-none focus:ring-2 focus:ring-primary-teal/50 placeholder:text-white/30">
+          <button type="submit" class="bg-primary-teal text-black font-bold px-6 py-3 rounded-lg hover:brightness-110 transition-all whitespace-nowrap"
+                  data-event="footer_newsletter_submit">
+            Subscribe
+          </button>
+</form>      </div>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-5 gap-16 mb-20">
+      <div class="col-span-1 md:col-span-2 space-y-8">
+        <a href="/" class="flex items-center">
+          <img alt="Justin McKelvey" class="h-8" src="/assets/logo-white-b7af8889.png" />
+        </a>
+        <p class="text-white/40 text-base max-w-sm font-light leading-relaxed">
+          Ship faster, grow smarter, and build for the future of AI. Fractional leadership for the world's most ambitious founders.
+        </p>
+        <div class="flex flex-wrap gap-6">
+          <a class="text-white/30 hover:text-accent-cyan transition-colors" href="https://linkedin.com/in/justinmckelvey" target="_blank" rel="noopener" aria-label="LinkedIn">
+            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+          </a>
+          <a class="text-white/30 hover:text-accent-cyan transition-colors" href="https://x.com/justinmckelvey" target="_blank" rel="noopener" aria-label="X">
+            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+          </a>
+          <a class="text-white/30 hover:text-accent-cyan transition-colors" href="https://youtube.com/@justinmckelvey" target="_blank" rel="noopener" aria-label="YouTube">
+            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+          </a>
+          <a class="text-white/30 hover:text-accent-cyan transition-colors" href="https://instagram.com/justinmckelvey" target="_blank" rel="noopener" aria-label="Instagram">
+            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg>
+          </a>
+          <a class="text-white/30 hover:text-accent-cyan transition-colors" href="https://tiktok.com/@justinmckelvey" target="_blank" rel="noopener" aria-label="TikTok">
+            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/></svg>
+          </a>
+          <a class="text-white/30 hover:text-accent-cyan transition-colors" href="https://threads.net/@justinmckelvey" target="_blank" rel="noopener" aria-label="Threads">
+            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 192 192"><path d="M141.537 88.988a66.667 66.667 0 0 0-2.518-1.143c-1.482-27.307-16.403-42.94-41.457-43.1h-.34c-14.986 0-27.449 6.396-35.12 18.036l13.779 9.452c5.73-8.695 14.724-10.548 21.348-10.548h.229c8.249.053 14.474 2.452 18.503 7.129 2.932 3.405 4.893 8.111 5.864 14.05-7.314-1.243-15.224-1.626-23.68-1.14-23.82 1.371-39.134 15.24-38.263 34.678.44 9.846 5.063 18.338 13.024 23.916 6.724 4.714 15.4 7.072 24.403 6.632 11.893-.58 21.2-4.924 27.67-12.91 4.913-6.064 8.044-13.907 9.467-23.735 5.676 3.43 9.894 7.974 12.37 13.349 4.202 9.118 4.452 24.087-3.47 32.04-6.97 6.997-15.347 10.024-27.916 10.112-13.948-.097-24.51-4.593-31.394-13.37-6.407-8.174-9.738-19.953-9.904-35.03.166-15.079 3.497-26.858 9.904-35.032 6.884-8.777 17.446-13.273 31.394-13.37 14.08.097 24.808 4.634 31.878 13.488 3.457 4.332 6.084 9.725 7.893 16.071l14.8-3.95c-2.355-8.272-6.08-15.377-11.196-21.296C152.36 18.396 138.376 12.58 120.832 12.441l-.089-.001c-17.417.14-31.334 5.997-41.364 17.407-11.28 12.834-17.117 30.823-17.343 53.44v1.424c.226 22.618 6.063 40.607 17.343 53.44 10.03 11.41 23.947 17.267 41.364 17.407h.089c15.494-.112 27.428-4.583 36.49-13.673 12.02-12.058 11.723-27.002 6.46-38.427-3.77-8.188-10.677-14.908-19.855-19.47zm-46.476 29.326c-9.976.553-20.356-3.924-20.88-12.635-.381-6.321 4.484-13.372 24.072-14.5 2.123-.122 4.198-.183 6.228-.183 6.36 0 12.328.613 17.762 1.8-2.024 20.518-14.692 24.965-27.182 25.518z"/></svg>
+          </a>
+          <a class="text-white/30 hover:text-accent-cyan transition-colors" href="https://bsky.app/profile/justinmckelvey.com" target="_blank" rel="noopener" aria-label="Bluesky">
+            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 10.8c-1.087-2.114-4.046-6.053-6.798-7.995C2.566.944 1.561 1.266.902 1.565.139 1.908 0 3.08 0 3.768c0 .69.378 5.65.624 6.479.785 2.627 3.6 3.497 6.168 3.16-.376.528-.63 1.386-.167 2.483 1.264 2.325 4.318 1.495 5.375.791-.001 0-.001 0 0 0s-.001 0 0 0c1.057.704 4.11 1.534 5.375-.79.462-1.098.208-1.956-.168-2.484 2.568.337 5.383-.533 6.168-3.16.246-.828.624-5.788.624-6.478 0-.69-.139-1.861-.902-2.206-.66-.298-1.664-.62-4.3 1.24C16.046 4.748 13.087 8.687 12 10.8z"/></svg>
+          </a>
+          <a class="text-white/30 hover:text-accent-cyan transition-colors" href="https://www.facebook.com/JustinWMcKelvey" target="_blank" rel="noopener" aria-label="Facebook">
+            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+          </a>
+        </div>
+      </div>
+
+      <div>
+        <h5 class="text-[10px] mono-text text-accent-cyan uppercase tracking-[0.3em] mb-8">Navigation</h5>
+        <ul class="space-y-4 text-sm font-medium text-white/50">
+          <li><a class="hover:text-white transition-colors" href="/work">Case Studies</a></li>
+          <li><a class="hover:text-white transition-colors" href="/about">About</a></li>
+          <li><a class="hover:text-white transition-colors" href="/projects">Projects</a></li>
+          <li><a class="hover:text-white transition-colors" href="/blog">Blog</a></li>
+          <li><a class="hover:text-white transition-colors" href="/contact">Contact</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h5 class="text-[10px] mono-text text-accent-cyan uppercase tracking-[0.3em] mb-8">Services</h5>
+        <ul class="space-y-4 text-sm font-medium text-white/50">
+          <li><a class="hover:text-white transition-colors" href="/work-with-me">Work With Me</a></li>
+          <li><a class="hover:text-white transition-colors" href="/ai-consulting">AI Consulting Services</a></li>
+          <li><a class="hover:text-white transition-colors" href="/ai-training">AI Training for Employees</a></li>
+          <li><a class="hover:text-white transition-colors" href="/ai-for-business-owners">AI for Business Owners</a></li>
+          <li><a class="hover:text-white transition-colors" href="/academy">The Shop: Claude Course</a></li>
+          <li><a class="hover:text-white transition-colors" href="/fractional-cto">Fractional CTO</a></li>
+          <li><a class="hover:text-white transition-colors" href="/ai-implementation">AI Implementation</a></li>
+          <li><a class="hover:text-white transition-colors" href="/ai-search-program">AI Search Program</a></li>
+          <li><a class="hover:text-white transition-colors" href="/ai-search-audit">AI Search Audit</a></li>
+          <li><a class="hover:text-white transition-colors" href="/ai-product-development">AI Product Development</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h5 class="text-[10px] mono-text text-accent-cyan uppercase tracking-[0.3em] mb-8">Connect</h5>
+        <ul class="space-y-4 text-sm font-medium text-white/50">
+          <li><a class="hover:text-accent-cyan transition-colors font-bold text-accent-cyan" href="/book/strategy-call">Book a Call</a></li>
+          <li><a class="hover:text-white transition-colors" href="/assessment">AI Readiness Assessment</a></li>
+          <li><a class="hover:text-white transition-colors" href="/free">All Free Resources</a></li>
+          <li><a class="hover:text-white transition-colors" href="/ai-readiness-checklist">Free: AI Readiness Checklist</a></li>
+          <li><a class="hover:text-white transition-colors" href="/ai-discoverability-checklist">Free: AI Discoverability Checklist</a></li>
+          <li><a class="hover:text-white transition-colors" href="mailto:hello@justinmckelvey.com">Email Me</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="flex flex-col md:flex-row justify-between items-center pt-12 border-t border-white/5 gap-6">
+      <p class="text-[10px] text-white/20 uppercase tracking-[0.3em]">&copy; 2026 Justin McKelvey &middot; Fast City LLC.</p>
+      <div class="flex space-x-10">
+        <a class="text-[10px] text-white/20 hover:text-white transition-colors uppercase tracking-[0.3em]" href="/privacy">Privacy</a>
+        <a class="text-[10px] text-white/20 hover:text-white transition-colors uppercase tracking-[0.3em]" href="/terms">Terms</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+
+
+      <script>function loadScript(a){var b=document.getElementsByTagName("head")[0],c=document.createElement("script");c.type="text/javascript",c.src="https://tracker.metricool.com/resources/be.js",c.onreadystatechange=a,c.onload=a,b.appendChild(c)}loadScript(function(){beTracker.t({hash:"ff5578f82b27a0930d4176ffe8411a7"})});</script>
+
+      <script id="vtag-ai-js" async src="https://r2.leadsy.ai/tag.js" data-pid="10hXKZCMtIRe9OhKz" data-version="062024"></script>
+  </body>
+</html>

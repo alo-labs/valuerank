@@ -1,4 +1,4 @@
-"""Exact-configuration matching for independently executed leaves (Terminal-Bench 4.0, Bug Hunt).
+"""Exact-configuration matching for independently executed leaves (Terminal-Bench 4.1, Bug Hunt).
 
 AGENTS.md forbids transferring results between reasoning efforts or model
 versions. A leaf value counts for a ranked configuration only when the

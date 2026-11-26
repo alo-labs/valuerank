@@ -126,7 +126,12 @@ def exact_roster_match(row, roster):
         if item.get("aaSlug") != row["aaId"]:
             continue
         selected = combined_variant(item.get("aaVariant"), " ".join(str(item.get(key) or "") for key in ("aaName", "aaShortName")), item.get("isReasoning"))
-        if selected is None or captured["effort"] != selected["effort"] or captured["fallback"] != selected["fallback"]:
+        if selected is None or captured["effort"] != selected["effort"]:
+            continue
+        # E214 (2026-11-26): AA's chart dropped the "with fallback" wording while its model pages still name the "Default Fallback"
+        # serving setting, so a chart row without the qualifier matches a page that names one; a chart row that names it still
+        # needs a page that does (the qualifier is a serving setting, never a second configuration).
+        if captured["fallback"] and not selected["fallback"]:
             continue
         if captured["reasoning"] is not None and captured["reasoning"] != selected["reasoning"]:
             continue

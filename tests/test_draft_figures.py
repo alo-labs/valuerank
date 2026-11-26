@@ -204,13 +204,11 @@ def test_registry_figures_name_changes_and_refuse_two_semianalysis_dates():
 
 
 def test_duplicate_rows_name_the_chosen_harness(tmp_path):
-    """I50 M2: a configuration a board lists twice is named with the row the selection rule chose (AI Coding Daily lists
-    DeepSeek V4.1 Flash 1017 (max) twice since O145 retained it; a second record is given a second row as well)."""
+    """I50 M2: a configuration a board lists twice is named with the row the selection rule chose. The board of 2026-11-13 lists
+    none twice, so the figure reads "none" until a record carries a second row (made here)."""
 
     names = f.display_names(SCORES)
-    deepseek = (f"{names['deepseek-v4-1-flash-1017']} on AI Coding Daily "
-                "(DeepSeek Harness chosen over OpenCode by the harness of its Bug Hunt record)")
-    assert f.named_figures(SCORES)["duplicateRows"] == deepseek
+    assert f.named_figures(SCORES)["duplicateRows"] == "none"
     data = tmp_path / "data"
     shutil.copytree(DATA, data, ignore=shutil.ignore_patterns("site", "*.html"))
     tracks = json.loads((data / "swe_tracks.json").read_text())
@@ -219,7 +217,7 @@ def test_duplicate_rows_name_the_chosen_harness(tmp_path):
                   alternates=[{"harness": "OpenCode", "tested": "2026-10-17", "value": record["value"] - 1}])
     (data / "swe_tracks.json").write_text(json.dumps(tracks))
     assert f.named_figures(SCORES, data)["duplicateRows"] == (
-        f"{names['gpt-6.1-sol-high']} on AI Coding Daily (Codex CLI chosen over OpenCode by the harness of its Bug Hunt record) and {deepseek}")
+        f"{names['gpt-6.1-sol-high']} on AI Coding Daily (Codex CLI chosen over OpenCode by the harness of its Bug Hunt record)")
 
 
 def test_names_render_from_ids_and_names_in_undated_sentences_are_flagged():
@@ -255,7 +253,7 @@ def test_subset_strata_and_excluded_missing_leaves_render_from_the_build(tmp_pat
         section["incompleteEvidence"] = []
     # Reviewer 78 H: with nothing in neither ranking, a consistent copy's cohort is the ranked rows alone, so the
     # configurations that were excluded leave the captured cohort too (or the coverage figures do not close).
-    with pytest.raises(f.FigureError, match=r"coverage does not close: 25 ranked \+ 0 in neither != cohort 37"):
+    with pytest.raises(f.FigureError, match=r"coverage does not close: 19 ranked \+ 0 in neither != cohort 45"):
         f.named_figures(empty)
     data = tmp_path / "data"
     shutil.copytree(DATA, data, ignore=shutil.ignore_patterns("site", "*.html"))
@@ -266,7 +264,7 @@ def test_subset_strata_and_excluded_missing_leaves_render_from_the_build(tmp_pat
     capture["retained"] = [item for item in capture["retained"] if item["sourceUrl"] not in urls]
     (data / "aa_frontier_capture.json").write_text(json.dumps(capture))
     figures = f.named_figures(empty, data)
-    assert figures["cohort.size"] == figures["rankedAny"] == "25" and figures["excluded"] == "0"
+    assert figures["cohort.size"] == figures["rankedAny"] == "19" and figures["excluded"] == "0"
     assert figures["subsetStrata"] == "no ranking has a subset stratum" and figures["excluded.missingCore"] == "none"
 
 
@@ -277,9 +275,14 @@ def test_excluded_configurations_partition_into_five_classes():
     order = lambda ids: f.series([names[item] for item in sorted(ids)])
     excluded = {item["id"] for item in SCORES["v3"]["incompleteEvidence"]} & {item["id"] for item in SCORES["v3Tracks"]["aicd"]["incompleteEvidence"]}
     figures = f.family_figures(SCORES, excluded, order)
-    assert figures["excluded.frontierPrimaries"] == "Claude Opus 5.5 (xhigh), Gemini 4 Carbon (high), GPT-6 Astra (xhigh) and MiMo-V2.6-Flash"
-    assert figures["excluded.frontierPoints"] == "Claude Haiku 5.5 (low), GPT-6 Luna (low), GPT-6.1 Sol (xhigh) and GPT-6.1 Terra (low)"
-    assert figures["excluded.nearPrimaries"] == figures["excluded.nearPoints"] == figures["excluded.nearFamilyPoints"] == "none"
+    assert figures["excluded.frontierPrimaries"] == "Claude Fable 5.2 (max), GPT-6.2 Astra (max), GPT-6.2 Sol (max) and Muse Ember (max)"
+    assert figures["excluded.frontierPoints"] == (
+        "Claude Fable 5.2 (xhigh), Claude Haiku 5.5 (low), GPT-6 Luna (low), GPT-6.2 Astra (high), GPT-6.2 Astra (xhigh), GPT-6.2 Sol (high), "
+        "GPT-6.2 Sol (low), GPT-6.2 Sol (medium), GPT-6.2 Sol (xhigh) and Muse Ember (xhigh)")
+    assert figures["excluded.nearPrimaries"] == "Gemini 4 Carbon (high) and Gemini 4 Neon (xhigh)"
+    assert figures["excluded.nearPoints"] == "Claude Fable 5.2 (high), Claude Haiku 5.5 (xhigh) and GPT-6.2 Astra (medium)"
+    assert figures["excluded.nearFamilyPoints"] == "Gemini 4 Neon (high) and Gemini 4 Neon (medium)"
+    assert figures["excluded.retainedPoints"] == "Claude Opus 5.5 (xhigh), GPT-6 Astra (xhigh), GPT-6.1 Sol (xhigh), GPT-6.1 Terra (low) and MiMo-V2.6-Flash"
     with pytest.raises(f.FigureError, match="do not partition"):
         f.family_figures(SCORES, excluded | {"not-in-the-cohort"}, order)
 
@@ -313,10 +316,10 @@ def test_absence_statements_carry_a_marker_whose_claim_holds(tmp_path):
     data = tmp_path / "data"
     shutil.copytree(DATA, data, ignore=shutil.ignore_patterns("site", "*.html"))
     snapshot = json.loads((data / "aa" / "aa_v432_snapshot.json").read_text())
-    snapshot["pages"][0]["model"]["terminalBench40Interval"] = {"lower": 1, "upper": 2}
+    snapshot["pages"][0]["model"]["terminalBench41Interval"] = {"lower": 1, "upper": 2}
     (data / "aa" / "aa_v432_snapshot.json").write_text(json.dumps(snapshot))
     assert f.absence_problems("AA's run publishes no interval{{absent:aa.terminalBenchInterval}}.", data) == [
-        "line 1: absence claim aa.terminalBenchInterval (AA's pages carry no Terminal-Bench 4.0 interval) no longer holds; rewrite the sentence"]
+        "line 1: absence claim aa.terminalBenchInterval (AA's pages carry no Terminal-Bench 4.1 interval) no longer holds; rewrite the sentence"]
     assert not f.ABSENCE_CLAIMS["aa.leafIntervals"][1](data)
 
 

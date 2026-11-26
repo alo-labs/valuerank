@@ -81,8 +81,9 @@ LEAF_INFO = {
     "deepswe": {"unit": "% pass@1", "url": BENCHMARK_URLS["DeepSWE pass@1"]},
     "bugHunt": {"unit": "% of the board's best planted plus best unplanted bugs fixed (O163, O170)", "url": BENCHMARK_URLS["Bug Hunt Bench"]},
     "frontierCode": {"unit": "AA score (0-1)", "url": BENCHMARK_URLS["FrontierCode 2.0"]},
-    "terminalBench": {"unit": "% resolved", "url": BENCHMARK_URLS["Terminal-Bench 4.0"]},
+    "terminalBench": {"unit": "% resolved", "url": BENCHMARK_URLS["Terminal-Bench 4.1"]},
     "gdpval": {"unit": "Elo", "url": BENCHMARK_URLS["GDPval-AA v2.1"]},
+    "gdpPdf": {"unit": "share of tasks fully passed (0-1)", "url": BENCHMARK_URLS["GDP.pdf"]},
     "automationBench": {"unit": "AA score (0-1)", "url": BENCHMARK_URLS["AutomationBench-AA"]},
     "omniscience": {"unit": "AA Omniscience Index (-100 to 100)", "url": BENCHMARK_URLS["AA-Omniscience Accuracy"]},
     "lcr": {"unit": "accuracy (0-1)", "url": BENCHMARK_URLS["AA-LCR v1.1"]},
@@ -94,16 +95,16 @@ LEAF_INFO = {
     "vibeCode": {"unit": "% of test workflows passed", "url": "https://www.vals.ai/benchmarks/vibe-code"},
     "codeMigration": {"unit": "% of hidden tests passed", "url": "https://www.vals.ai/benchmarks/code-migration-v1-1"},
     "livebench2Overall": {"unit": "LiveBench's weighted Overall of seven category scores (0-100)", "url": "https://livebench.ai/new"},
-    "aiCodingDaily": {"unit": "points of 60", "url": "https://aicodingdaily.com/leaderboard"},
+    "aiCodingDaily": {"unit": "points of 80", "url": "https://aicodingdaily.com/leaderboard"},
 }
 # Public source names (the engine's provenance strings are internal and stay in scores.json).
-AA_SOURCE = "Artificial Analysis model page (Intelligence Index v5.0)"
+AA_SOURCE = "Artificial Analysis model page (Intelligence Index v5.0.2)"
 SOURCE_NAMES = {
     "deepswe": "AA Coding Agent Index (DeepSWE v1.1)",
     "bugHunt": "Bug Hunt Bench published runs",
-    "terminalBench": "Artificial Analysis Terminal-Bench 4.0 run (mini-SWE-agent)",
+    "terminalBench": "Artificial Analysis Terminal-Bench 4.1 run (mini-SWE-agent)",
 }
-TB_GAP_SOURCE = "tbench.ai Terminal-Bench 4.0 leaderboard (gap fill, O37)"
+TB_GAP_SOURCE = "tbench.ai Terminal-Bench 4.1 leaderboard (gap fill, O37)"
 LEAF_NOTES = {
     "gdpval": "Scored with AA's integration transform, (Elo - 500) / 2000, on the Elo AA's model page displays at the capture (O70).",
     "omniscience": "Scored as AA's Omniscience Index I (correct minus incorrect over all questions), z = (I + 100) / 2 (owner decision O28).",
@@ -1097,7 +1098,7 @@ def data_page(bundle: Bundle) -> dict:
         ("/data/models/<slug>.json", "One document per roster model with every quality leaf, its source, the cost basket, plan routes, scenario shares and history.", schema(sample)),
         ("/data/plans.json", "Subscription routes, their evidence and every candidate's API and Plan basket cost.", schema(bundle.plans)),
         ("/data/benchmarks.json", "Quality-leaf sources and coverage, the admitted cost basket and the Artificial Analysis frontier.", schema(bundle.benchmarks)),
-        ("/data/benchmarks/terminal-bench-4.json", "Terminal-Bench 4.0 official rows, provider claims and cohort mapping.", schema(bundle.tb4)),
+        ("/data/benchmarks/terminal-bench-4.json", "Terminal-Bench 4.1 official rows, provider claims and cohort mapping.", schema(bundle.tb4)),
         ("/data/changelog.json", "Versions, newest first, with recorded ranks and rank changes between consecutive releases.", schema(bundle.changelog)),
         ("/data/livebench.json", "Matched LiveBench rows (no longer scored; owner decision O26), with cost per successful task.", schema(bundle.livebench)),
     ]

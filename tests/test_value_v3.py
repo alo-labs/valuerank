@@ -28,7 +28,7 @@ ALL_TASKS = {**basket.INDEX_SDLC_TASKS, **basket.INDEX_RESIDUAL_TASKS}
 # The engine is the same for every leaf table; the rankings' own leaf sets are tested in test_tracks.py.
 FIXTURE_LEAVES = (
     q.Leaf("frontierCode", "FrontierCode 2.0", "swe", 25.0, "aa"),
-    q.Leaf("terminalBench", "Terminal-Bench 4.0 (AA run)", "swe", 20.0, "aa"),
+    q.Leaf("terminalBench", "Terminal-Bench 4.1 (AA run)", "swe", 20.0, "aa"),
     q.Leaf("bugHunt", "Bug Hunt Bench", "swe", 15.0, "independent"),
     *q.COMMON_LEAVES,
 )
@@ -53,9 +53,10 @@ def page(slug: str, cost_per_task: float, **fields) -> dict:
         "intelligenceIndexEvaluations": evaluations,
         "intelligenceIndexCost": {"total": cost_per_task * sum(ALL_TASKS.values())},
         "gdpval": 1500.0,
+        "gdpPdfAllPass": 0.5,
         "automationBenchPartialScore": 0.5,
         "frontierCode20": 0.45,
-        "terminalBench40": 0.5,
+        "terminalBench41": 0.5,
         "lcr": 0.8,
         "hleDiamond": 0.3,
         "terminalBenchScience": 0.4,
@@ -82,7 +83,7 @@ REGISTRY = {leaf.key: ["Registered party"] for leaf in FIXTURE_LEAVES}
 
 def documents(**overrides) -> dict:
     base = {
-        "snapshot": {"pages": [page("a-max", 1.0), page("b-max", 4.0, gdpval=2000.0), page("c-max", 0.5, frontierCode20=None)]},
+        "snapshot": {"pages": [page("a-max", 1.0), page("b-max", 4.0, gdpval=2000.0, gdpPdfAllPass=0.75), page("c-max", 0.5, frontierCode20=None)]},
         "bugHunt": {"models": [
             {"modelId": "a", "matched": True, "effort": "max", "fixedOf105": 52.0, "extras": 0.0, "sampleN": 3},
             {"modelId": "b", "matched": False, "fixedOf105": None},
@@ -188,12 +189,12 @@ def test_leaf_evidence_uses_exact_configurations_only():
         v.leaf_evidence("claude-opus-5-5", "max", model, tb4, {**record, "extras": None})
     with pytest.raises(ValueError, match=r"exceeds the board's planted plus unplanted maxima 119.0 \(O170\)"):
         v.leaf_evidence("claude-opus-5-5", "max", model, tb4, {**record, "fixedOf105": 61.0, "extras": 59.0})
-    # O37: AA's own Terminal-Bench 4.0 run is the leaf; tbench.ai fills a gap only.
+    # O37: AA's own Terminal-Bench 4.1 run is the leaf; tbench.ai fills a gap only.
     assert observations["terminalBench"].z == 50.0
     assert observations["omniscience"].z == pytest.approx(65.0)
     assert evidence["provenance"]["omniscience"]["indexFromRates"] == pytest.approx(30.0)
     assert evidence["provenance"]["terminalBench"]["agent"] == "mini-SWE-agent"
-    gap = v.leaf_evidence("claude-opus-5-5", "max", {**model, "terminalBench40": None}, tb4, None)
+    gap = v.leaf_evidence("claude-opus-5-5", "max", {**model, "terminalBench41": None}, tb4, None)
     assert gap["observations"]["terminalBench"].z == 60.0 and gap["provenance"]["terminalBench"]["agent"] == "Terminus 2"
     # A different effort never transfers; absent fields stay missing.
     sparse = v.leaf_evidence("x", "max", {"gdpval": None}, [], None)
@@ -780,7 +781,7 @@ def test_terminal_bench_same_harness_diagnostic():
     for model_id in ("claude-opus-5-5", "claude-sonnet-5-5", "claude-haiku-5-5"):
         evidence = v.leaf_evidence(model_id, "max", {}, tb4, None)
         rows.append({"id": model_id, "effort": "max", "evidence": evidence})
-    rows[0]["evidence"] = v.leaf_evidence("claude-opus-5-5", "max", {"terminalBench40": 0.6}, tb4, None)  # AA's own run
+    rows[0]["evidence"] = v.leaf_evidence("claude-opus-5-5", "max", {"terminalBench41": 0.6}, tb4, None)  # AA's own run
     result = v._tb_same_harness(rows, tb4)
     assert result["defaultHarness"] == "mini-SWE-agent" and result["harnessMixed"] == ["claude-haiku-5-5", "claude-sonnet-5-5"]
     assert result["restricted"] == {"claude-opus-5-5": 64.0, "claude-sonnet-5-5": 50.0, "claude-haiku-5-5": 30.0}
@@ -893,8 +894,8 @@ def test_standing_cost_removal_has_fixed_and_recalibrated_calculations():
     result, frozen = scored()
     output = v.score(result, frozen)
     removal = output["diagnostics"]["costRemoval"]
-    assert removal["status"] == "evaluated" and removal["component"] == "terminalbench-4-0"
-    assert "terminalbench-4-0" not in removal["alternativeWorkload"]["components"]
+    assert removal["status"] == "evaluated" and removal["component"] == "terminalbench-4-1"
+    assert "terminalbench-4-1" not in removal["alternativeWorkload"]["components"]
     api, plan = removal["bases"]["api"], removal["bases"]["plan"]
     assert api["fixedAnchors"]["label"] == v.FIXED_ANCHOR_LABEL and api["multiplePolicy"] is None
     assert plan["multiplePolicy"] == v.FIXED_MULTIPLE_LABEL
@@ -913,8 +914,8 @@ def test_cost_removal_is_typed_by_basis():
         return basket.component_cost(cost, completeness=basket.COMPLETE, source="s")
 
     route_ = {"id": "p", "valueMultiple": 4.0}
-    row = {"components": {"scicode": component(80.0), "terminalbench-4-0": component(20.0)}, "routeSelection": {"selected": {"route": route_}}}
-    full, removed = ["scicode", "terminalbench-4-0"], ["scicode"]
+    row = {"components": {"scicode": component(80.0), "terminalbench-4-1": component(20.0)}, "routeSelection": {"selected": {"route": route_}}}
+    full, removed = ["scicode", "terminalbench-4-1"], ["scicode"]
     assert v.basis_cost_on(row, full, "plan") == 25.0 and v.basis_cost_on(row, removed, "plan") == 20.0  # never 25 - 20 = 5
     assert v.basis_cost_on(row, removed, "api") == 80.0  # scored only against API anchors
     fallback = dict(row, routeSelection={"selected": None})
@@ -2162,10 +2163,11 @@ def test_the_manifest_registers_every_aa_row_and_matches_the_grammar():
     v.check_agent_manifest(captured, manifest)
     records = {item["label"]: item for item in captured}
     scores = json.loads((DATA / "scores.json").read_text())
+    mapping = json.loads((DATA / "v3_configuration_map.json").read_text())["rows"]  # E267: a pin chooses among several exact records
     for model in scores["models"]:
         if model.get("aaFrontierTier"):
             configuration = {"id": model["id"], "name": model["name"], "family": model.get("family") or model["name"], "effort": model.get("aaVariant")}
-            v.agent_record_for(configuration, {}, records, manifest)
+            v.agent_record_for(configuration, mapping, records, manifest)
 
 
 def test_any_change_to_aa_rows_stops_the_build_until_the_manifest_is_reviewed():
@@ -2265,7 +2267,15 @@ def test_rereads_name_the_pinned_capture_and_match_their_files(tmp_path):
     documents = v.load_documents(v.DATA)
     v.check_rereads(documents)
     assert all(v.reread_matches(item) for item in documents["sourceRereads"]["rereads"])
-    record = documents["sourceRereads"]["rereads"][0]
+    # No re-read is recorded at this release (O211 removed the last one); a record built from the pinned Cognition capture
+    # exercises the same checks, so the guard stays tested whether or not the data file carries a record.
+    capture = documents["leafEvidence"]["cognitionCapture"]
+    synthetic = {"source": "Cognition: FrontierCode leaderboard", "pinned": capture["file"], "file": capture["artifact"],
+                 "reReadAt": "2026-11-26T00:00:00Z", "result": "unchanged", "compare": "sha256", "pinnedSha256": capture["sha256"], "lastModified": capture["lastModified"],
+                 "pinnedKey": "leafEvidence.cognitionCapture.sha256"}
+    v.check_rereads({**documents, "sourceRereads": {"rereads": [synthetic]}})
+    assert v.reread_matches(synthetic)
+    record = (documents["sourceRereads"]["rereads"] or [synthetic])[0]
     stale = {**documents, "sourceRereads": {"rereads": [{**record, "pinnedSha256": "0" * 64}]}}
     with pytest.raises(ValueError, match="not the pinned one"):
         v.check_rereads(stale)
@@ -2281,8 +2291,8 @@ def test_rereads_name_the_pinned_capture_and_match_their_files(tmp_path):
     assert not v.reread_matches({**scrape, "comparedSha256": "0" * 64}, tmp_path)
     assert not v.reread_matches({**scrape, "pinned": "other.json"}, tmp_path)
     assert not v.reread_matches({**scrape, "file": "other.json"}, tmp_path)
-    clocks = {clock["source"]: clock for clock in v.source_clocks(documents)}
-    assert clocks["Cognition: FrontierCode leaderboard"]["reRead"]["lastModified"] == "2026-10-31T13:46:59Z"
+    clocks = {clock["source"]: clock for clock in v.source_clocks({**documents, "sourceRereads": {"rereads": [synthetic]}})}
+    assert clocks["Cognition: FrontierCode leaderboard"]["reRead"]["lastModified"] == capture["lastModified"]
 
 
 def test_bug_hunt_dates_follow_o69():
@@ -2691,10 +2701,10 @@ def test_workload_cross_check_skips_a_row_without_a_per_task_cost():
     """E41, reviewer 77: a row priced by AA's own Terminal-Bench run but without a per-task cost is not in the panel."""
 
     observation = q.Observation(z=50.0)
-    row = {"id": "a", "cost": {"workload": "W", "costUsd": 10.0}, "components": {"terminalbench-4-0": {"detail": {}}},
-           "evidence": {"observations": {"terminalBench": observation}, "provenance": {"terminalBench": {"source": "AA Terminal-Bench 4.0 run"}}}}
+    row = {"id": "a", "cost": {"workload": "W", "costUsd": 10.0}, "components": {"terminalbench-4-1": {"detail": {}}},
+           "evidence": {"observations": {"terminalBench": observation}, "provenance": {"terminalBench": {"source": "AA Terminal-Bench 4.1 run"}}}}
     result = v.workload_cross_check([row, {**row, "id": "b", "cost": {"workload": "other", "costUsd": 1.0}}], "W")
-    assert result["n"] == 0 and result["status"] == "undefined (panel too small)" and result["benchmark"] == "Terminal-Bench 4.0"
+    assert result["n"] == 0 and result["status"] == "undefined (panel too small)" and result["benchmark"] == "Terminal-Bench 4.1"
 
 
 def test_fallback_repricing_moves_only_flagged_priced_rows():

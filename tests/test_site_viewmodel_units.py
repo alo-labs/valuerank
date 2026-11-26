@@ -41,7 +41,8 @@ def test_dimensions_give_cost_a_fixed_share_and_split_the_rest_by_leaf_weight():
     rows = viewmodel.dimensions()
     assert rows[0]["key"] == viewmodel.COST_KEY and rows[0]["weightPct"] == 25.0 and rows[0]["category"] == "cost"
     leaves = rows[1:]
-    assert len(leaves) == 13 and sum(row["weightPct"] for row in leaves) == pytest.approx(75.0)
+    # 14 leaves since the 2026-11-26 release added the GDP.pdf quality leaf (gdpPdf) beside GDPval-AA.
+    assert len(leaves) == 14 and "gdpPdf" in {row["key"] for row in leaves} and sum(row["weightPct"] for row in leaves) == pytest.approx(75.0)
     frontiercode = next(row for row in leaves if row["key"] == "frontierCode")
     assert frontiercode["weightPct"] == 11.25 and frontiercode["priority"] == 15.0 and frontiercode["category"] == "code"
     assert {row["category"] for row in leaves} == {"code", "prod", "rely", "intel"}

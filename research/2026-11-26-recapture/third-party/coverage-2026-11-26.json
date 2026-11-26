@@ -1,0 +1,3494 @@
+{
+ "capturedAt": "2026-11-26T03:11:03.572Z",
+ "readAt": {
+  "bugHunt": "2026-11-26T03:03:40Z",
+  "liveBench": "2026-11-26T03:06:24Z",
+  "aiCodingDaily": "2026-11-26T03:08:19Z",
+  "aiCodingDailyPage": "2026-11-26T03:08:19Z",
+  "tbench": "2026-11-26T03:11:03.572Z",
+  "cognition": "2026-11-26T03:12:28Z"
+ },
+ "cutoff": "2026-11-26T02:18:20Z",
+ "cohort": "research/2026-11-26-recapture/cohort.json (45 configurations: 20 frontier, 11 near, 14 retained)",
+ "retained": [
+  "claude-haiku-5-5-high",
+  "claude-opus-5-5-high",
+  "claude-opus-5-5-xhigh",
+  "claude-sonnet-5-5",
+  "gpt-6.1-sol-high",
+  "gpt-6.1-sol-low",
+  "gpt-6.1-sol-xhigh",
+  "gpt-6.1-terra",
+  "gpt-6.1-terra-low",
+  "gpt-6-astra",
+  "gpt-6-astra-high",
+  "gpt-6-astra-xhigh",
+  "gpt-6-luna",
+  "mimo-v2-6-flash"
+ ],
+ "statusRule": "exact = source row names the same model version and the same reasoning effort as the AA configuration (where AA plots no effort: the documented default under O135/O140/O149 for MiMo-V2.6-Flash); plausible = same model, effort not confirmable (MiMo-V2.6-Flash rows that record no effort or 'default'/'none'; O140 keeps them unmatched); absent = no row at this effort or no row for the model. No value is transferred across efforts or versions. Leaves (owner decisions of 2026-11-26): AI Coding Daily value = Laravel + React-TS + Python + Edge-case (max 80; Bug Finding and the consistency penalty are not in it, the components and diagnostics are stored per cell; a row without a Python Code Quality score is absent); the Vals Vibe Code Bench leaf is v1.1.1 (each cell states version v1.1.1; v1.1 values are only in the vals catalogue's predecessorReference).",
+ "laterRowCheck": "No row on any board is dated after 2026-11-26T02:18:20Z (the 2026-11-26 chart capture); the build stops on a Bug Hunt or AI Coding Daily row dated after that day. Newest rows: Bug Hunt 2026-11-25 (Gemini 4 Neon 1.5.16 reruns, commit 3be9acd), AI Coding Daily 2026-11-25 (Gemini 4 Carbon), Vals boards updated 2026-11-19 (v1.1) and 2026-11-21 (v1.1.1), LiveBench release 2026-11-06, tbench.ai 4.1 leaderboard updated 2026-11-20, Cognition changelog 2026-11-24. Changes after the previous cutoff (2026-11-01T05:53:05Z) are listed in README.md.",
+ "benchmarks": [
+  {
+   "key": "bug-hunt",
+   "name": "Bug Hunt Bench",
+   "updated": "2026-11-25",
+   "readAt": "2026-11-26T03:03:40Z",
+   "sourceUrl": "https://bughunt.productcompass.pm/data/benchmark.json; https://github.com/phuryn/bug-hunt-bench/tree/3be9acdb221b8127e181fa20f0c5a87647d7550e/results (combined-scoreboard.csv, run-notes.md)",
+   "sourceCommit": "3be9acdb221b8127e181fa20f0c5a87647d7550e",
+   "metric": "planted bugs fixed of 105 (owner-published mean where repeated runs exist)",
+   "matching": "the board's current row (not superseded) for the same model and effort; the owner's largest-sample mean when repeated runs exist (E206), a tie broken only by a recorded selection reason",
+   "harness": "each model's native agentic CLI (named per row)",
+   "boardSchemaNote": "benchmark.json gained a top-level 'harness_comparison_runs' list (14 DeepSeek V4.1 Flash 1017 rows, none in this cohort) with the 2026-11-23 Harness Comparisons reports; run rows are unchanged in shape.",
+   "coverage": {
+    "gpt-6-luna-low": {
+     "status": "exact",
+     "value": 4,
+     "sourceLabel": "GPT-6 Luna (low effort)",
+     "effort": "low",
+     "note": null,
+     "harness": "Codex CLI",
+     "harnessVersion": "codex-cli 0.155.1",
+     "date": "2026-09-23",
+     "nRuns": 1,
+     "featured": false
+    },
+    "gpt-6-luna-medium": {
+     "status": "exact",
+     "value": 4,
+     "sourceLabel": "GPT-6 Luna (medium effort)",
+     "effort": "medium",
+     "note": null,
+     "harness": "Codex CLI",
+     "harnessVersion": "codex-cli 0.155.1",
+     "date": "2026-09-23",
+     "nRuns": 1,
+     "featured": false
+    },
+    "claude-haiku-5-5-low": {
+     "status": "exact",
+     "value": 11,
+     "sourceLabel": "Haiku 5.5 (low effort)",
+     "effort": "low",
+     "note": null,
+     "harness": "Claude Code",
+     "harnessVersion": "Claude Code 2.1.292",
+     "date": "2026-10-08",
+     "nRuns": 1,
+     "featured": false
+    },
+    "gpt-6-luna-high": {
+     "status": "exact",
+     "value": 9,
+     "sourceLabel": "GPT-6 Luna (high effort)",
+     "effort": "high",
+     "note": null,
+     "harness": "Codex CLI",
+     "harnessVersion": "codex-cli 0.155.1",
+     "date": "2026-09-23",
+     "nRuns": 1,
+     "featured": false
+    },
+    "claude-haiku-5-5-medium": {
+     "status": "exact",
+     "value": 12,
+     "sourceLabel": "Haiku 5.5 (medium effort)",
+     "effort": "medium",
+     "note": null,
+     "harness": "Claude Code",
+     "harnessVersion": "Claude Code 2.1.292",
+     "date": "2026-10-08",
+     "nRuns": 1,
+     "featured": false
+    },
+    "muse-ember-xhigh": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "No Muse Ember row, and no mention of the name, in benchmark.json, the combined scoreboard, runs, coverage or run notes at 3be9acd. The board's Meta rows are Muse Spark 1.2/1.3 and Muse Wonder (Full) 1.0, other models; none is transferred (O36)."
+    },
+    "muse-ember": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "No Muse Ember row, and no mention of the name, in benchmark.json, the combined scoreboard, runs, coverage or run notes at 3be9acd. The board's Meta rows are Muse Spark 1.2/1.3 and Muse Wonder (Full) 1.0, other models; none is transferred (O36)."
+    },
+    "gpt-6.1-terra-medium": {
+     "status": "exact",
+     "value": 7.3,
+     "sourceLabel": "GPT-6.1 Terra (medium effort) - mean of 3",
+     "effort": "medium",
+     "note": null,
+     "harness": "Codex CLI",
+     "harnessVersion": "codex-cli 0.159.0",
+     "date": "2026-10-27",
+     "nRuns": 3,
+     "featured": false
+    },
+    "gpt-6.2-sol-low": {
+     "status": "exact",
+     "value": 36,
+     "sourceLabel": "GPT-6.2 Sol (low effort) - mean of 3",
+     "effort": "low",
+     "note": null,
+     "harness": "Codex CLI",
+     "harnessVersion": "codex-cli 0.166.0",
+     "date": "2026-11-18",
+     "nRuns": 3,
+     "featured": false
+    },
+    "gpt-6.1-terra-high": {
+     "status": "exact",
+     "value": 9.7,
+     "sourceLabel": "GPT-6.1 Terra (high effort) - mean of 3",
+     "effort": "high",
+     "note": null,
+     "harness": "Codex CLI",
+     "harnessVersion": "codex-cli 0.159.0",
+     "date": "2026-10-26",
+     "nRuns": 3,
+     "featured": false
+    },
+    "gpt-6.1-sol-medium": {
+     "status": "exact",
+     "value": 29,
+     "sourceLabel": "GPT-6.1 Sol (medium effort) - mean of 2",
+     "effort": "medium",
+     "note": null,
+     "harness": "Codex CLI",
+     "harnessVersion": "codex-cli 0.159.0",
+     "date": "2026-09-30",
+     "nRuns": 2,
+     "featured": false,
+     "supersededRowsOnBoard": [
+      {
+       "id": "GPT-6.1 Sol (medium effort)",
+       "fixed": 28,
+       "nRuns": 1,
+       "date": "2026-09-29"
+      }
+     ]
+    },
+    "gpt-6.2-sol-medium": {
+     "status": "exact",
+     "value": 45.7,
+     "sourceLabel": "GPT-6.2 Sol (medium effort) - mean of 3",
+     "effort": "medium",
+     "note": null,
+     "harness": "Codex CLI",
+     "harnessVersion": "codex-cli 0.166.0",
+     "date": "2026-11-18",
+     "nRuns": 3,
+     "featured": false
+    },
+    "gpt-6.2-sol-high": {
+     "status": "exact",
+     "value": 49.7,
+     "sourceLabel": "GPT-6.2 Sol (high effort) - mean of 3",
+     "effort": "high",
+     "note": null,
+     "harness": "Codex CLI",
+     "harnessVersion": "codex-cli 0.166.0",
+     "date": "2026-11-18",
+     "nRuns": 3,
+     "featured": false
+    },
+    "gpt-6.2-sol-xhigh": {
+     "status": "exact",
+     "value": 49,
+     "sourceLabel": "GPT-6.2 Sol (xhigh effort) - mean of 3",
+     "effort": "xhigh",
+     "note": null,
+     "harness": "Codex CLI",
+     "harnessVersion": "codex-cli 0.166.0",
+     "date": "2026-11-18",
+     "nRuns": 3,
+     "featured": true
+    },
+    "gpt-6.2-sol": {
+     "status": "exact",
+     "value": 54.7,
+     "sourceLabel": "GPT-6.2 Sol (max effort) - mean of 3",
+     "effort": "max",
+     "note": null,
+     "harness": "Codex CLI",
+     "harnessVersion": "codex-cli 0.166.0",
+     "date": "2026-11-18",
+     "nRuns": 3,
+     "featured": true
+    },
+    "gpt-6.2-astra-high": {
+     "status": "exact",
+     "value": 59.6,
+     "sourceLabel": "GPT-6.2 Astra (high effort) - mean of 5",
+     "effort": "high",
+     "note": null,
+     "harness": "Codex CLI",
+     "harnessVersion": "codex-cli 0.166.0",
+     "date": "2026-11-18",
+     "nRuns": 5,
+     "featured": false
+    },
+    "gpt-6.2-astra-xhigh": {
+     "status": "exact",
+     "value": 60.2,
+     "sourceLabel": "GPT-6.2 Astra (xhigh effort) - mean of 5",
+     "effort": "xhigh",
+     "note": null,
+     "harness": "Codex CLI",
+     "harnessVersion": "codex-cli 0.166.0",
+     "date": "2026-11-18",
+     "nRuns": 5,
+     "featured": true,
+     "supersededRowsOnBoard": [
+      {
+       "id": "GPT-6.2 Astra (xhigh effort) - mean of 3",
+       "fixed": 60,
+       "nRuns": 3,
+       "date": "2026-11-18"
+      }
+     ]
+    },
+    "gpt-6.2-astra": {
+     "status": "exact",
+     "value": 62.7,
+     "sourceLabel": "GPT-6.2 Astra (max effort) - mean of 3",
+     "effort": "max",
+     "note": null,
+     "harness": "Codex CLI",
+     "harnessVersion": "codex-cli 0.166.0",
+     "date": "2026-11-18",
+     "nRuns": 3,
+     "featured": true
+    },
+    "claude-fable-5-2-xhigh": {
+     "status": "exact",
+     "value": 49,
+     "sourceLabel": "Fable 5.2 (xhigh effort) - mean of 3",
+     "effort": "xhigh",
+     "note": "AA's pages name this configuration '(<Effort>, Default Fallback)' (its chart label shows only the effort since 2026-11-26, and said 'with fallback' before); the source has no fallback qualifier (as on 2026-10-25 and 2026-11-01).",
+     "harness": "Claude Code",
+     "harnessVersion": "Claude Code 2.1.321",
+     "date": "2026-11-10",
+     "nRuns": 3,
+     "featured": true
+    },
+    "claude-fable-5-2": {
+     "status": "exact",
+     "value": 58,
+     "sourceLabel": "Fable 5.2 (max effort) - mean of 3",
+     "effort": "max",
+     "note": "AA's pages name this configuration '(<Effort>, Default Fallback)' (its chart label shows only the effort since 2026-11-26, and said 'with fallback' before); the source has no fallback qualifier (as on 2026-10-25 and 2026-11-01).",
+     "harness": "Claude Code",
+     "harnessVersion": "Claude Code 2.1.321",
+     "date": "2026-11-09",
+     "nRuns": 3,
+     "featured": true
+    },
+    "claude-fable-5-2-high": {
+     "status": "exact",
+     "value": 43,
+     "sourceLabel": "Fable 5.2 (high effort) - mean of 2",
+     "effort": "high",
+     "note": "AA's pages name this configuration '(<Effort>, Default Fallback)' (its chart label shows only the effort since 2026-11-26, and said 'with fallback' before); the source has no fallback qualifier (as on 2026-10-25 and 2026-11-01).",
+     "harness": "Claude Code",
+     "harnessVersion": "Claude Code 2.1.321",
+     "date": "2026-11-10",
+     "nRuns": 2,
+     "featured": false
+    },
+    "gemini-4-neon": {
+     "status": "exact",
+     "value": 61,
+     "sourceLabel": "Gemini 4 Neon (xhigh effort, Antigravity CLI 1.5.16) - mean of 3",
+     "effort": "xhigh",
+     "note": "The 2026-11-19 row on Antigravity CLI 1.5.11 (63 of 105, mean of 3) is superseded on the board by this 2026-11-25 rerun on Antigravity CLI 1.5.16; the current row is the leaf. No score is retracted, per the board.",
+     "harness": "Antigravity CLI",
+     "harnessVersion": "Antigravity CLI 1.5.16",
+     "date": "2026-11-25",
+     "nRuns": 3,
+     "featured": true,
+     "supersededRowsOnBoard": [
+      {
+       "id": "Gemini 4 Neon (xhigh effort, Antigravity CLI) - mean of 3",
+       "fixed": 63,
+       "nRuns": 3,
+       "date": "2026-11-19"
+      }
+     ]
+    },
+    "gemini-4-carbon": {
+     "status": "exact",
+     "value": 57.3,
+     "sourceLabel": "Gemini 4 Carbon (high effort, Antigravity CLI) - mean of 3",
+     "effort": "high",
+     "note": null,
+     "harness": "Antigravity CLI",
+     "harnessVersion": "agy 1.5.5",
+     "date": "2026-11-10",
+     "nRuns": 3,
+     "featured": true
+    },
+    "gemini-4-neon-high": {
+     "status": "exact",
+     "value": 56,
+     "sourceLabel": "Gemini 4 Neon (high effort, Antigravity CLI 1.5.16) - mean of 3",
+     "effort": "high",
+     "note": "The 2026-11-19 row on Antigravity CLI 1.5.11 (57 of 105, mean of 3) is superseded on the board by this 2026-11-25 rerun on Antigravity CLI 1.5.16; the current row is the leaf. No score is retracted, per the board.",
+     "harness": "Antigravity CLI",
+     "harnessVersion": "Antigravity CLI 1.5.16",
+     "date": "2026-11-25",
+     "nRuns": 3,
+     "featured": true,
+     "supersededRowsOnBoard": [
+      {
+       "id": "Gemini 4 Neon (high effort, Antigravity CLI) - mean of 3",
+       "fixed": 57,
+       "nRuns": 3,
+       "date": "2026-11-19"
+      }
+     ]
+    },
+    "claude-opus-5-5": {
+     "status": "exact",
+     "value": 41.7,
+     "sourceLabel": "Opus 5.5 (max effort) - mean of 3",
+     "effort": "max",
+     "note": "AA's pages name this configuration '(<Effort>, Default Fallback)' (its chart label shows only the effort since 2026-11-26, and said 'with fallback' before); the source has no fallback qualifier (as on 2026-10-25 and 2026-11-01).",
+     "harness": "Claude Code",
+     "harnessVersion": "Claude Code 2.1.280",
+     "date": "2026-09-23",
+     "nRuns": 3,
+     "featured": true,
+     "supersededRowsOnBoard": [
+      {
+       "id": "Opus 5.5 (max effort)",
+       "fixed": 43,
+       "nRuns": 1,
+       "date": "2026-09-22"
+      },
+      {
+       "id": "Opus 5.5 (max effort) - mean of 2",
+       "fixed": 41,
+       "nRuns": 2,
+       "date": "2026-09-23"
+      }
+     ]
+    },
+    "gpt-6.2-astra-medium": {
+     "status": "exact",
+     "value": 50.3,
+     "sourceLabel": "GPT-6.2 Astra (medium effort) - mean of 3",
+     "effort": "medium",
+     "note": null,
+     "harness": "Codex CLI",
+     "harnessVersion": "codex-cli 0.166.0",
+     "date": "2026-11-18",
+     "nRuns": 3,
+     "featured": false
+    },
+    "gemini-4-neon-medium": {
+     "status": "exact",
+     "value": 48.3,
+     "sourceLabel": "Gemini 4 Neon (medium effort, Antigravity CLI 1.5.16) - mean of 3",
+     "effort": "medium",
+     "note": "The 2026-11-19 row on Antigravity CLI 1.5.11 (47.7 of 105, mean of 3) is superseded on the board by this 2026-11-25 rerun on Antigravity CLI 1.5.16; the current row is the leaf. No score is retracted, per the board.",
+     "harness": "Antigravity CLI",
+     "harnessVersion": "Antigravity CLI 1.5.16",
+     "date": "2026-11-25",
+     "nRuns": 3,
+     "featured": false,
+     "supersededRowsOnBoard": [
+      {
+       "id": "Gemini 4 Neon (medium effort, Antigravity CLI) - mean of 3",
+       "fixed": 47.7,
+       "nRuns": 3,
+       "date": "2026-11-19"
+      }
+     ]
+    },
+    "gpt-6.1-sol": {
+     "status": "exact",
+     "value": 44.3,
+     "sourceLabel": "GPT-6.1 Sol (max effort) - mean of 3",
+     "effort": "max",
+     "note": null,
+     "harness": "Codex CLI",
+     "harnessVersion": "codex-cli 0.159.0",
+     "date": "2026-09-30",
+     "nRuns": 3,
+     "featured": true,
+     "supersededRowsOnBoard": [
+      {
+       "id": "GPT-6.1 Sol (max effort)",
+       "fixed": 44,
+       "nRuns": 1,
+       "date": "2026-09-29"
+      }
+     ]
+    },
+    "gpt-6.1-terra-xhigh": {
+     "status": "exact",
+     "value": 11.3,
+     "sourceLabel": "GPT-6.1 Terra (xhigh effort) - mean of 3",
+     "effort": "xhigh",
+     "note": null,
+     "harness": "Codex CLI",
+     "harnessVersion": "codex-cli 0.159.0",
+     "date": "2026-10-26",
+     "nRuns": 3,
+     "featured": false
+    },
+    "claude-haiku-5-5": {
+     "status": "exact",
+     "value": 18.3,
+     "sourceLabel": "Haiku 5.5 (xhigh effort) - mean of 3",
+     "effort": "xhigh",
+     "note": null,
+     "harness": "Claude Code",
+     "harnessVersion": "Claude Code 2.1.292",
+     "date": "2026-10-07",
+     "nRuns": 3,
+     "featured": false
+    },
+    "gpt-6-luna-xhigh": {
+     "status": "exact",
+     "value": 14,
+     "sourceLabel": "GPT-6 Luna (xhigh effort)",
+     "effort": "xhigh",
+     "note": null,
+     "harness": "Codex CLI",
+     "harnessVersion": "codex-cli 0.155.1",
+     "date": "2026-09-23",
+     "nRuns": 1,
+     "featured": false
+    },
+    "mimo-v2-6-flash": {
+     "status": "plausible",
+     "value": 23.3,
+     "sourceLabel": "MiMo-V2.6-Flash - mean of 3",
+     "effort": "default",
+     "note": "Owner decision O135 (2026-10-30): AA plots MiMo-V2.6-Flash without an effort; Xiaomi's API documents a single thinking mode (thinking.type enabled/disabled, default enabled; on the Responses API every reasoning.effort other than none enables the same, undifferentiated reasoning), so the configuration is thinking enabled, the default (../../2026-10-30-v5-recapture/third-party/mimo-flash-effort.md; Xiaomi docs last read 2026-11-01, ../../2026-11-01-recapture/third-party/mimo/; not re-read on 2026-11-26). Bug Hunt ran the provider default through OpenRouter without asserting a reasoning state ('effort is `default` ... for this model the dial is untested rather than known-inert', run notes). The board does not show that this route's default is Xiaomi's documented default (thinking enabled), so the run stays unmatched (owner decision O140, 2026-10-30).",
+     "harness": "Claude Code / OpenRouter",
+     "harnessVersion": "Claude Code 2.1.278 / Claude Code 2.1.280",
+     "date": "2026-09-22",
+     "nRuns": 3,
+     "routeModelId": "xiaomi/mimo-v2.6-flash"
+    },
+    "gpt-6.1-terra-low": {
+     "status": "exact",
+     "value": 6,
+     "sourceLabel": "GPT-6.1 Terra (low effort) - mean of 3",
+     "effort": "low",
+     "note": null,
+     "harness": "Codex CLI",
+     "harnessVersion": "codex-cli 0.159.0",
+     "date": "2026-10-27",
+     "nRuns": 3,
+     "featured": false
+    },
+    "claude-haiku-5-5-high": {
+     "status": "exact",
+     "value": 16,
+     "sourceLabel": "Haiku 5.5 (high effort) - mean of 2",
+     "effort": "high",
+     "note": null,
+     "harness": "Claude Code",
+     "harnessVersion": "Claude Code 2.1.292",
+     "date": "2026-10-07",
+     "nRuns": 2,
+     "featured": false,
+     "supersededRowsOnBoard": [
+      {
+       "id": "Haiku 5.5 (high effort)",
+       "fixed": 15,
+       "nRuns": 1,
+       "date": "2026-10-07"
+      }
+     ]
+    },
+    "gpt-6.1-sol-high": {
+     "status": "exact",
+     "value": 36.5,
+     "sourceLabel": "GPT-6.1 Sol (high effort) - mean of 2",
+     "effort": "high",
+     "note": null,
+     "harness": "Codex CLI",
+     "harnessVersion": "codex-cli 0.159.0",
+     "date": "2026-09-30",
+     "nRuns": 2,
+     "featured": false,
+     "supersededRowsOnBoard": [
+      {
+       "id": "GPT-6.1 Sol (high effort)",
+       "fixed": 38,
+       "nRuns": 1,
+       "date": "2026-09-29"
+      }
+     ]
+    },
+    "gpt-6.1-sol-xhigh": {
+     "status": "exact",
+     "value": 42.7,
+     "sourceLabel": "GPT-6.1 Sol (xhigh effort) - mean of 3",
+     "effort": "xhigh",
+     "note": null,
+     "harness": "Codex CLI",
+     "harnessVersion": "codex-cli 0.159.0",
+     "date": "2026-09-30",
+     "nRuns": 3,
+     "featured": false,
+     "supersededRowsOnBoard": [
+      {
+       "id": "GPT-6.1 Sol (xhigh effort)",
+       "fixed": 41,
+       "nRuns": 1,
+       "date": "2026-09-29"
+      }
+     ]
+    },
+    "gpt-6-astra-high": {
+     "status": "exact",
+     "value": 35,
+     "sourceLabel": "GPT-6 Astra (high effort)",
+     "effort": "high",
+     "note": null,
+     "harness": "Codex CLI",
+     "harnessVersion": null,
+     "date": "2026-09-04",
+     "nRuns": 1,
+     "featured": false
+    },
+    "gpt-6-astra-xhigh": {
+     "status": "exact",
+     "value": 43,
+     "sourceLabel": "GPT-6 Astra (xhigh effort)",
+     "effort": "xhigh",
+     "note": null,
+     "harness": "Codex CLI",
+     "harnessVersion": null,
+     "date": "2026-09-04",
+     "nRuns": 1,
+     "featured": false
+    },
+    "claude-opus-5-5-xhigh": {
+     "status": "exact",
+     "value": 36,
+     "sourceLabel": "Opus 5.5 (xhigh effort) - mean of 3",
+     "effort": "xhigh",
+     "note": "AA's pages name this configuration '(<Effort>, Default Fallback)' (its chart label shows only the effort since 2026-11-26, and said 'with fallback' before); the source has no fallback qualifier (as on 2026-10-25 and 2026-11-01).",
+     "harness": "Claude Code",
+     "harnessVersion": "Claude Code 2.1.280",
+     "date": "2026-09-23",
+     "nRuns": 3,
+     "featured": true,
+     "supersededRowsOnBoard": [
+      {
+       "id": "Opus 5.5 (xhigh effort) - mean of 2",
+       "fixed": 36,
+       "nRuns": 2,
+       "date": "2026-09-23"
+      },
+      {
+       "id": "Opus 5.5 (xhigh effort)",
+       "fixed": 35,
+       "nRuns": 1,
+       "date": "2026-09-22"
+      }
+     ]
+    },
+    "gpt-6-luna": {
+     "status": "exact",
+     "value": 18.3,
+     "sourceLabel": "GPT-6 Luna (max effort) - mean of 3",
+     "effort": "max",
+     "note": null,
+     "harness": "Codex CLI",
+     "harnessVersion": "codex-cli 0.155.1",
+     "date": "2026-09-23",
+     "nRuns": 3,
+     "featured": false,
+     "supersededRowsOnBoard": [
+      {
+       "id": "GPT-6 Luna (max effort) - mean of 2",
+       "fixed": 19,
+       "nRuns": 2,
+       "date": "2026-09-23"
+      },
+      {
+       "id": "GPT-6 Luna (max effort)",
+       "fixed": 17,
+       "nRuns": 1,
+       "date": "2026-09-23"
+      }
+     ]
+    },
+    "gpt-6.1-sol-low": {
+     "status": "exact",
+     "value": 22.5,
+     "sourceLabel": "GPT-6.1 Sol (low effort) - mean of 2",
+     "effort": "low",
+     "note": null,
+     "harness": "Codex CLI",
+     "harnessVersion": "codex-cli 0.159.0",
+     "date": "2026-10-01",
+     "nRuns": 2,
+     "featured": false,
+     "supersededRowsOnBoard": [
+      {
+       "id": "GPT-6.1 Sol (low effort)",
+       "fixed": 31,
+       "nRuns": 1,
+       "date": "2026-09-29"
+      }
+     ]
+    },
+    "gpt-6.1-terra": {
+     "status": "exact",
+     "value": 40.7,
+     "sourceLabel": "GPT-6.1 Terra (max effort) - mean of 3",
+     "effort": "max",
+     "note": null,
+     "harness": "Codex CLI",
+     "harnessVersion": "codex-cli 0.159.0",
+     "date": "2026-10-26",
+     "nRuns": 3,
+     "featured": false
+    },
+    "claude-opus-5-5-high": {
+     "status": "exact",
+     "value": 31.7,
+     "sourceLabel": "Opus 5.5 (high effort) - mean of 3",
+     "effort": "high",
+     "note": "AA's pages name this configuration '(<Effort>, Default Fallback)' (its chart label shows only the effort since 2026-11-26, and said 'with fallback' before); the source has no fallback qualifier (as on 2026-10-25 and 2026-11-01).",
+     "harness": "Claude Code",
+     "harnessVersion": "Claude Code 2.1.280",
+     "date": "2026-09-23",
+     "nRuns": 3,
+     "featured": false,
+     "supersededRowsOnBoard": [
+      {
+       "id": "Opus 5.5 (high effort) - mean of 2",
+       "fixed": 32,
+       "nRuns": 2,
+       "date": "2026-09-23"
+      },
+      {
+       "id": "Opus 5.5 (high effort)",
+       "fixed": 32,
+       "nRuns": 1,
+       "date": "2026-09-22"
+      }
+     ]
+    },
+    "gpt-6-astra": {
+     "status": "exact",
+     "value": 45,
+     "sourceLabel": "GPT-6 Astra (max effort) - mean of 3",
+     "effort": "max",
+     "note": null,
+     "harness": "Codex CLI",
+     "harnessVersion": null,
+     "date": "2026-09-14",
+     "nRuns": 3,
+     "featured": true,
+     "supersededRowsOnBoard": [
+      {
+       "id": "GPT-6 Astra (max effort)",
+       "fixed": 48,
+       "nRuns": 1,
+       "date": "2026-09-04"
+      }
+     ]
+    },
+    "claude-sonnet-5-5": {
+     "status": "exact",
+     "value": 51.3,
+     "sourceLabel": "Sonnet 5.5 (max effort) - mean of 3",
+     "effort": "max",
+     "note": "AA's pages name this configuration '(<Effort>, Default Fallback)' (its chart label shows only the effort since 2026-11-26, and said 'with fallback' before); the source has no fallback qualifier (as on 2026-10-25 and 2026-11-01).",
+     "harness": "Claude Code",
+     "harnessVersion": "Claude Code 2.1.283",
+     "date": "2026-09-29",
+     "nRuns": 3,
+     "featured": true,
+     "supersededRowsOnBoard": [
+      {
+       "id": "Sonnet 5.5 (max effort)",
+       "fixed": 57,
+       "nRuns": 1,
+       "date": "2026-09-28"
+      },
+      {
+       "id": "Sonnet 5.5 (max effort) - mean of 2",
+       "fixed": 55.5,
+       "nRuns": 2,
+       "date": "2026-09-28"
+      }
+     ]
+    }
+   },
+   "crossCheck": {
+    "cellsMatchedToCombinedScoreboardCsv": 42
+   },
+   "valueChangesSince20261101": {
+    "gemini-4-carbon": {
+     "20261101": {
+      "status": "absent",
+      "value": null
+     },
+     "20261126": {
+      "status": "exact",
+      "value": 57.3
+     }
+    }
+   },
+   "configurationsNotInThe20261101Cohort": [
+    "muse-ember-xhigh",
+    "muse-ember",
+    "gpt-6.2-sol-low",
+    "gpt-6.2-sol-medium",
+    "gpt-6.2-sol-high",
+    "gpt-6.2-sol-xhigh",
+    "gpt-6.2-sol",
+    "gpt-6.2-astra-high",
+    "gpt-6.2-astra-xhigh",
+    "gpt-6.2-astra",
+    "claude-fable-5-2-xhigh",
+    "claude-fable-5-2",
+    "claude-fable-5-2-high",
+    "gemini-4-neon",
+    "gemini-4-neon-high",
+    "gpt-6.2-astra-medium",
+    "gemini-4-neon-medium"
+   ]
+  },
+  {
+   "key": "livebench2-overall",
+   "name": "LiveBench 2.0 Overall",
+   "version": "LiveBench 2.0 release 20261106",
+   "updated": "2026-11-06 (release 20261106; release files' HTTP Last-Modified Tue, 24 Nov 2026 00:11:21 GMT)",
+   "readAt": "2026-11-26T03:06:24Z",
+   "sourceUrl": "https://livebench.ai/data/20261106/table.csv",
+   "pinnedReleaseStatus": "Release 20261106 is pinned under owner decision O211 (the 2026-11-01 read pinned 20261025, O139). On 2026-11-26 the site bundle (main.099aad9b.js) lists releases ['20261014', '20261025', '20261106']; no newer release exists (data/20261107 to data/20261126 return 404, livebench/newer-release-probe.txt). Release 20261025 and 20261014 are still served and saved.",
+   "previousPin": {
+    "release": "20261025",
+    "inPlaceEditsSince20261101": {
+     "table-20261025.csv": "identical",
+     "table-20261014.csv": "identical",
+     "categories-20261025.json": "identical",
+     "categories-20261014.json": "identical",
+     "cost-20261025.csv": "identical",
+     "cost-20261014.csv": "identical",
+     "notes-20261025.json": "identical",
+     "notes-20261014.json": "identical",
+     "breakdown-20261025.json": "changed since the 2026-11-01 copy",
+     "breakdown-20261014.json": "identical"
+    },
+    "breakdownScoreEdits": [
+     {
+      "category": "Coding",
+      "model": "gpt-6-astra",
+      "Product & UX": [
+       94.5,
+       94.4
+      ]
+     }
+    ]
+   },
+   "weights": {
+    "long_agentic": 2.0,
+    "reasoning": 1.0,
+    "coding": 1.5,
+    "browser": 1.0,
+    "data_analysis": 1.0,
+    "research": 1.0,
+    "design": 1.5
+   },
+   "harness": "LiveBench's own; one run per model at its highest supported effort (effort from the site bundle's model metadata)",
+   "metric": "weighted mean of the seven category scores with the release's _overall_weights (as O67), 0-100",
+   "weightsNote": "notes.json still says 'Every suite counts equally' while categories.json carries _overall_weights (Long Agentic 2.0, Coding 1.5, Design 1.5). The site's own Overall for Claude Fable 5.2 (xhigh), 84.9 (notes.json), equals the weighted mean 84.88 and not the unweighted mean 85.56, so the weighted method (O67) is the board's own.",
+   "coverage": {
+    "gpt-6-luna-low": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "LiveBench 2.0 has gpt-6-luna at max only (Overall 60.42); not transferred."
+    },
+    "gpt-6-luna-medium": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "LiveBench 2.0 has gpt-6-luna at max only (Overall 60.42); not transferred."
+    },
+    "claude-haiku-5-5-low": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "LiveBench 2.0 has claude-haiku-5.5 at max only (Overall 68.94); not transferred."
+    },
+    "gpt-6-luna-high": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "LiveBench 2.0 has gpt-6-luna at max only (Overall 60.42); not transferred."
+    },
+    "claude-haiku-5-5-medium": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "LiveBench 2.0 has claude-haiku-5.5 at max only (Overall 68.94); not transferred."
+    },
+    "muse-ember-xhigh": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "No muse-ember row in release 20261106 (nor in the site's model metadata)."
+    },
+    "muse-ember": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "No muse-ember row in release 20261106 (nor in the site's model metadata)."
+    },
+    "gpt-6.1-terra-medium": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "LiveBench 2.0 has gpt-6.1-terra at max only (Overall 78.57); not transferred."
+    },
+    "gpt-6.2-sol-low": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "LiveBench 2.0 has gpt-6.2-sol at max only (Overall 80.31); not transferred."
+    },
+    "gpt-6.1-terra-high": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "LiveBench 2.0 has gpt-6.1-terra at max only (Overall 78.57); not transferred."
+    },
+    "gpt-6.1-sol-medium": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "LiveBench 2.0 has gpt-6.1-sol at max only (Overall 81.17); not transferred."
+    },
+    "gpt-6.2-sol-medium": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "LiveBench 2.0 has gpt-6.2-sol at max only (Overall 80.31); not transferred."
+    },
+    "gpt-6.2-sol-high": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "LiveBench 2.0 has gpt-6.2-sol at max only (Overall 80.31); not transferred."
+    },
+    "gpt-6.2-sol-xhigh": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "LiveBench 2.0 has gpt-6.2-sol at max only (Overall 80.31); not transferred."
+    },
+    "gpt-6.2-sol": {
+     "status": "exact",
+     "value": 80.31,
+     "sourceLabel": "gpt-6.2-sol",
+     "effort": "max",
+     "note": null,
+     "categories": {
+      "long_agentic": 63.6,
+      "reasoning": 90.6,
+      "coding": 83.7,
+      "browser": 88.2,
+      "data_analysis": 81.1,
+      "research": 90.1,
+      "design": 80.0
+     }
+    },
+    "gpt-6.2-astra-high": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "LiveBench 2.0 has gpt-6.2-astra at max only (Overall 84.87); not transferred."
+    },
+    "gpt-6.2-astra-xhigh": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "LiveBench 2.0 has gpt-6.2-astra at max only (Overall 84.87); not transferred."
+    },
+    "gpt-6.2-astra": {
+     "status": "exact",
+     "value": 84.87,
+     "sourceLabel": "gpt-6.2-astra",
+     "effort": "max",
+     "note": null,
+     "categories": {
+      "long_agentic": 70.8,
+      "reasoning": 91.6,
+      "coding": 91.9,
+      "browser": 93.0,
+      "data_analysis": 84.1,
+      "research": 91.5,
+      "design": 82.8
+     }
+    },
+    "claude-fable-5-2-xhigh": {
+     "status": "exact",
+     "value": 84.88,
+     "sourceLabel": "claude-fable-5.2",
+     "effort": "xhigh",
+     "note": "AA's pages name this configuration '(<Effort>, Default Fallback)' (its chart label shows only the effort since 2026-11-26, and said 'with fallback' before); the source has no fallback qualifier (as on 2026-10-25 and 2026-11-01). LiveBench shows Claude Fable 5.2 at xhigh: its notes.json says 'Claude Fable 5.2 is shown at xhigh because its max-effort run scored lower overall (84.2 at max against 84.9)'. The weighted Overall rebuilt here, 84.88, rounds to the site's 84.9.",
+     "categories": {
+      "long_agentic": 82.9,
+      "reasoning": 88.8,
+      "coding": 79.2,
+      "browser": 86.9,
+      "data_analysis": 81.5,
+      "research": 94.5,
+      "design": 85.1
+     }
+    },
+    "claude-fable-5-2": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "LiveBench has Claude Fable 5.2 at xhigh only (Overall 84.88). Its notes.json states that the max-effort run scored 84.2 overall (against 84.9 at xhigh) but publishes no row or category scores for that run, so the weighted Overall cannot be rebuilt and no value is entered; the stated figure is carried as siteNoteOverallAtMax for the owner's decision (it is the same Overall metric at the same effort, but it is a note, not a table row).",
+     "siteNoteOverallAtMax": 84.2
+    },
+    "claude-fable-5-2-high": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "LiveBench 2.0 has claude-fable-5.2 at xhigh only (Overall 84.88); not transferred."
+    },
+    "gemini-4-neon": {
+     "status": "exact",
+     "value": 87.44,
+     "sourceLabel": "gemini-4-neon",
+     "effort": "xhigh",
+     "note": null,
+     "categories": {
+      "long_agentic": 82.6,
+      "reasoning": 89.6,
+      "coding": 89.7,
+      "browser": 95.6,
+      "data_analysis": 85.3,
+      "research": 94.5,
+      "design": 81.5
+     }
+    },
+    "gemini-4-carbon": {
+     "status": "exact",
+     "value": 83.33,
+     "sourceLabel": "gemini-4-carbon",
+     "effort": "high",
+     "note": null,
+     "categories": {
+      "long_agentic": 71.8,
+      "reasoning": 90.6,
+      "coding": 91.0,
+      "browser": 80.0,
+      "data_analysis": 86.5,
+      "research": 92.5,
+      "design": 80.2
+     }
+    },
+    "gemini-4-neon-high": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "LiveBench 2.0 has gemini-4-neon at xhigh only (Overall 87.44); not transferred."
+    },
+    "claude-opus-5-5": {
+     "status": "exact",
+     "value": 83.44,
+     "sourceLabel": "claude-opus-5.5",
+     "effort": "max",
+     "note": "AA's pages name this configuration '(<Effort>, Default Fallback)' (its chart label shows only the effort since 2026-11-26, and said 'with fallback' before); the source has no fallback qualifier (as on 2026-10-25 and 2026-11-01).",
+     "categories": {
+      "long_agentic": 72.8,
+      "reasoning": 92.2,
+      "coding": 87.1,
+      "browser": 88.4,
+      "data_analysis": 80.3,
+      "research": 88.9,
+      "design": 83.3
+     },
+     "previousPinOverall": 85.14
+    },
+    "gpt-6.2-astra-medium": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "LiveBench 2.0 has gpt-6.2-astra at max only (Overall 84.87); not transferred."
+    },
+    "gemini-4-neon-medium": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "LiveBench 2.0 has gemini-4-neon at xhigh only (Overall 87.44); not transferred."
+    },
+    "gpt-6.1-sol": {
+     "status": "exact",
+     "value": 81.17,
+     "sourceLabel": "gpt-6.1-sol",
+     "effort": "max",
+     "note": null,
+     "categories": {
+      "long_agentic": 64.7,
+      "reasoning": 92.6,
+      "coding": 82.1,
+      "browser": 93.3,
+      "data_analysis": 82.7,
+      "research": 90.0,
+      "design": 79.6
+     },
+     "previousPinOverall": 84.07
+    },
+    "gpt-6.1-terra-xhigh": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "LiveBench 2.0 has gpt-6.1-terra at max only (Overall 78.57); not transferred."
+    },
+    "claude-haiku-5-5": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "LiveBench 2.0 has claude-haiku-5.5 at max only (Overall 68.94); not transferred."
+    },
+    "gpt-6-luna-xhigh": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "LiveBench 2.0 has gpt-6-luna at max only (Overall 60.42); not transferred."
+    },
+    "mimo-v2-6-flash": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "No mimo-v2.6-flash row in release 20261106 (nor in the site's model metadata)."
+    },
+    "gpt-6.1-terra-low": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "LiveBench 2.0 has gpt-6.1-terra at max only (Overall 78.57); not transferred."
+    },
+    "claude-haiku-5-5-high": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "LiveBench 2.0 has claude-haiku-5.5 at max only (Overall 68.94); not transferred."
+    },
+    "gpt-6.1-sol-high": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "LiveBench 2.0 has gpt-6.1-sol at max only (Overall 81.17); not transferred."
+    },
+    "gpt-6.1-sol-xhigh": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "LiveBench 2.0 has gpt-6.1-sol at max only (Overall 81.17); not transferred."
+    },
+    "gpt-6-astra-high": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "LiveBench 2.0 has gpt-6-astra at max only (Overall 84.25); not transferred."
+    },
+    "gpt-6-astra-xhigh": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "LiveBench 2.0 has gpt-6-astra at max only (Overall 84.25); not transferred."
+    },
+    "claude-opus-5-5-xhigh": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "LiveBench 2.0 has claude-opus-5.5 at max only (Overall 83.44); not transferred."
+    },
+    "gpt-6-luna": {
+     "status": "exact",
+     "value": 60.42,
+     "sourceLabel": "gpt-6-luna",
+     "effort": "max",
+     "note": null,
+     "categories": {
+      "long_agentic": 24.7,
+      "reasoning": 81.8,
+      "coding": 70.8,
+      "browser": 70.3,
+      "data_analysis": 73.4,
+      "research": 48.5,
+      "design": 76.1
+     },
+     "previousPinOverall": 64.59
+    },
+    "gpt-6.1-sol-low": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "LiveBench 2.0 has gpt-6.1-sol at max only (Overall 81.17); not transferred."
+    },
+    "gpt-6.1-terra": {
+     "status": "exact",
+     "value": 78.57,
+     "sourceLabel": "gpt-6.1-terra",
+     "effort": "max",
+     "note": null,
+     "categories": {
+      "long_agentic": 55.3,
+      "reasoning": 88.7,
+      "coding": 89.2,
+      "browser": 93.1,
+      "data_analysis": 82.3,
+      "research": 79.1,
+      "design": 79.7
+     },
+     "previousPinOverall": 77.79
+    },
+    "claude-opus-5-5-high": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "LiveBench 2.0 has claude-opus-5.5 at max only (Overall 83.44); not transferred."
+    },
+    "gpt-6-astra": {
+     "status": "exact",
+     "value": 84.25,
+     "sourceLabel": "gpt-6-astra",
+     "effort": "max",
+     "note": null,
+     "categories": {
+      "long_agentic": 74.7,
+      "reasoning": 92.7,
+      "coding": 87.5,
+      "browser": 91.3,
+      "data_analysis": 83.0,
+      "research": 90.6,
+      "design": 80.0
+     },
+     "previousPinOverall": 85.64
+    },
+    "claude-sonnet-5-5": {
+     "status": "exact",
+     "value": 76.79,
+     "sourceLabel": "claude-sonnet-5.5",
+     "effort": "max",
+     "note": "AA's pages name this configuration '(<Effort>, Default Fallback)' (its chart label shows only the effort since 2026-11-26, and said 'with fallback' before); the source has no fallback qualifier (as on 2026-10-25 and 2026-11-01).",
+     "categories": {
+      "long_agentic": 62.5,
+      "reasoning": 91.6,
+      "coding": 77.2,
+      "browser": 89.3,
+      "data_analysis": 59.5,
+      "research": 88.0,
+      "design": 81.3
+     },
+     "previousPinOverall": 80.04
+    }
+   },
+   "valueChangesSince20261101": {
+    "gemini-4-carbon": {
+     "20261101": {
+      "status": "absent",
+      "value": null
+     },
+     "20261126": {
+      "status": "exact",
+      "value": 83.33
+     }
+    },
+    "claude-opus-5-5": {
+     "20261101": {
+      "status": "exact",
+      "value": 85.14
+     },
+     "20261126": {
+      "status": "exact",
+      "value": 83.44
+     }
+    },
+    "gpt-6.1-sol": {
+     "20261101": {
+      "status": "exact",
+      "value": 84.07
+     },
+     "20261126": {
+      "status": "exact",
+      "value": 81.17
+     }
+    },
+    "gpt-6-luna": {
+     "20261101": {
+      "status": "exact",
+      "value": 64.59
+     },
+     "20261126": {
+      "status": "exact",
+      "value": 60.42
+     }
+    },
+    "gpt-6.1-terra": {
+     "20261101": {
+      "status": "exact",
+      "value": 77.79
+     },
+     "20261126": {
+      "status": "exact",
+      "value": 78.57
+     }
+    },
+    "gpt-6-astra": {
+     "20261101": {
+      "status": "exact",
+      "value": 85.64
+     },
+     "20261126": {
+      "status": "exact",
+      "value": 84.25
+     }
+    },
+    "claude-sonnet-5-5": {
+     "20261101": {
+      "status": "exact",
+      "value": 80.04
+     },
+     "20261126": {
+      "status": "exact",
+      "value": 76.79
+     }
+    }
+   },
+   "configurationsNotInThe20261101Cohort": [
+    "muse-ember-xhigh",
+    "muse-ember",
+    "gpt-6.2-sol-low",
+    "gpt-6.2-sol-medium",
+    "gpt-6.2-sol-high",
+    "gpt-6.2-sol-xhigh",
+    "gpt-6.2-sol",
+    "gpt-6.2-astra-high",
+    "gpt-6.2-astra-xhigh",
+    "gpt-6.2-astra",
+    "claude-fable-5-2-xhigh",
+    "claude-fable-5-2",
+    "claude-fable-5-2-high",
+    "gemini-4-neon",
+    "gemini-4-neon-high",
+    "gpt-6.2-astra-medium",
+    "gemini-4-neon-medium"
+   ]
+  },
+  {
+   "key": "aicd",
+   "name": "AI Coding Daily LLM Coding Leaderboard",
+   "version": "v3 scoring: Laravel + React-TS + Bug Finding + Python + Edge-case (max 90) less a consistency penalty",
+   "readAt": "2026-11-26T03:08:19Z",
+   "pageReadAt": "2026-11-26T03:08:19Z",
+   "sourceUrl": "https://aicodingdaily.com/leaderboard (every row: Livewire POST to /livewire-71a08158/update with hiddenOlderModelIds=[]; bestHarnessOnly false)",
+   "rows": 87,
+   "boardHeader": {
+    "maxima": {
+     "total": 90,
+     "laravel": 20,
+     "react": 20,
+     "bug": 10,
+     "python": 20,
+     "edge": 20
+    },
+    "edgeProjects": 4,
+    "lastUpdate": "November 25th, 2026 (Added Gemini 4 Carbon)",
+    "penaltyColumn": "Penalty = points deducted for inconsistent results across attempts (negative or 0); total = Laravel + React-TS + Bug Finding + Python + Edge-case + Penalty"
+   },
+   "leaf": {
+    "definition": "Laravel Code Quality + React-TS Code Quality + Python Code Quality + Edge-case Testing, each max 20, so max 80",
+    "decision": "Owner decision 2026-11-26. Bug Finding is excluded; the per-project Consistency Penalty is NOT in the leaf (it is a diagnostic: the total column is the five project columns plus the penalty, and the four leaf columns are the displayed, pre-penalty values). A row without a Python Code Quality score (tested before the Python project) is absent from this leaf, with the reason in the cell's note.",
+    "previousLeaf": "Laravel + React-TS + Edge-case (max 60, 2026-11-01 and the first 2026-11-26 build); still stored per cell as diagnostics.nonBug60 and used for valueChangesSince20261101"
+   },
+   "values": "value = Laravel + React-TS + Python + Edge-case (max 80, the ValueRank leaf); each cell stores the four components, and the diagnostics (total of max 90, bug finding, penalty, the old 60-point sum); each row also carries every board column",
+   "methodologyChange": "Since 2026-11-11 the board scores 8 projects / 33 prompts and adds the Python 'Pricing Engine' project and a per-project Consistency Penalty (methodology article, aicd/articles/methodology.html, published 2026-11-11). The total moved from max 70 to max 90; Laravel, React-TS and Edge-case keep their max of 20 and their definitions. Almost every row was re-dated 2026-11-13/14 (the dates fit the Python project being run then; the board gives no reason); its Laravel, React-TS and Edge-case scores are unchanged except where listed in rowChangesSince20261101.",
+   "totalIdentityCheck": "87 of 87 rows satisfy total = columns + penalty within 0.02",
+   "rowChangesSince20261101": {
+    "added": [
+     "Fable 5.2 (Medium) [Claude Code]",
+     "GPT-6.2-Astra (High) [Codex CLI]",
+     "GPT-6.2-Astra (Medium) [Codex CLI]",
+     "GPT-6.2-Sol (High) [Codex CLI]",
+     "GPT-6.2-Sol (Low) [Codex CLI]",
+     "GPT-6.2-Sol (Medium) [Codex CLI]",
+     "Gemini 4 Carbon (Medium) [Antigravity]",
+     "Gemini 4 Hydrogen (High) [Antigravity]",
+     "Gemini 4 Hydrogen (Medium) [Antigravity]",
+     "Gemini 4 Neon (High) [Antigravity]",
+     "Gemini 4 Neon (Medium) [Antigravity]",
+     "Gemini 4 Neon (Xhigh) [Antigravity]",
+     "Inkling 2 Mini (Max) [OpenCode]",
+     "Inkling 2 Mini (Medium) [OpenCode]",
+     "Inkling 2 Small (Max) [OpenCode]",
+     "Inkling 2 Small (Medium) [OpenCode]",
+     "MAI Code 2 (High) [OpenCode]",
+     "MAI Code 2 Flash (High) [OpenCode]",
+     "Muse Ember 1.0 (Max) [OpenCode]",
+     "Muse Spark 1.3 (Xhigh) [OpenCode]",
+     "Qwen 3.8 Flash (Xhigh) [OpenCode]",
+     "Qwen4-Max (High) [OpenCode]",
+     "SWE-2 Flash (High) [Devin]",
+     "Tencent Hy4 (High) [OpenCode]",
+     "Tencent Hy4 Flash (High) [OpenCode]"
+    ],
+    "removed": [
+     "Deepseek-V4.1-Flash-1017 (Max) [DeepSeek Harness]",
+     "Gemini-3.1-Pro [OpenCode]",
+     "LongCat-2.5-Preview [OpenCode]",
+     "Mercury 3 (High) [OpenCode]",
+     "Muse Spark 1.3 (Max) [OpenCode]",
+     "Qwen 3.8 Flash (Max) [OpenCode]"
+    ],
+    "leafOrBugColumnChanged": [
+     {
+      "row": "Opus 5.5 (High) [Claude Code]",
+      "changes": {
+       "bug": [
+        "9.58",
+        "9.1"
+       ]
+      }
+     },
+     {
+      "row": "GPT-6-Astra (High) [Codex CLI]",
+      "changes": {
+       "bug": [
+        "9.58",
+        "9.03"
+       ]
+      }
+     },
+     {
+      "row": "GPT-6-Astra (Medium) [Codex CLI]",
+      "changes": {
+       "bug": [
+        "10",
+        "9.38"
+       ]
+      }
+     },
+     {
+      "row": "GPT-6.1-Sol (High) [Codex CLI]",
+      "changes": {
+       "bug": [
+        "9.17",
+        "9.03"
+       ]
+      }
+     },
+     {
+      "row": "Opus 5.5 (Medium) [Claude Code]",
+      "changes": {
+       "bug": [
+        "8.33",
+        "7.98"
+       ]
+      }
+     },
+     {
+      "row": "GPT-6.1-Sol (Medium) [Codex CLI]",
+      "changes": {
+       "bug": [
+        "9.38",
+        "9.1"
+       ]
+      }
+     },
+     {
+      "row": "Sonnet 5.5 (High) [Claude Code]",
+      "changes": {
+       "bug": [
+        "8.13",
+        "7.6"
+       ]
+      }
+     },
+     {
+      "row": "Kimi K3.1 Pro (Max) [OpenCode]",
+      "changes": {
+       "bug": [
+        "9.17",
+        "8.75"
+       ]
+      }
+     },
+     {
+      "row": "Opus 5.5 (Low) [Claude Code]",
+      "changes": {
+       "bug": [
+        "6.46",
+        "6.63"
+       ]
+      }
+     },
+     {
+      "row": "GPT-6.1-Terra (Max) [Codex CLI]",
+      "changes": {
+       "bug": [
+        "7.92",
+        "8.61"
+       ]
+      }
+     },
+     {
+      "row": "Deepseek-V4.1-Flash-1017 (Max) [OpenCode]",
+      "changes": {
+       "bug": [
+        "8.13",
+        "8.47"
+       ]
+      }
+     },
+     {
+      "row": "Haiku 5.5 (High) [Claude Code]",
+      "changes": {
+       "react": [
+        "17",
+        "18"
+       ],
+       "bug": [
+        "7.08",
+        "7.22"
+       ]
+      }
+     },
+     {
+      "row": "Haiku 5.5 (Medium) [Claude Code]",
+      "changes": {
+       "bug": [
+        "6.88",
+        "7.09"
+       ]
+      }
+     },
+     {
+      "row": "Kimi K3.1 Pro (High) [OpenCode]",
+      "changes": {
+       "bug": [
+        "7.71",
+        "7.36"
+       ]
+      }
+     },
+     {
+      "row": "Sonnet 5.5 (Medium) [Claude Code]",
+      "changes": {
+       "bug": [
+        "7.08",
+        "6.18"
+       ]
+      }
+     },
+     {
+      "row": "Grok 4.7 (High) [Cursor]",
+      "changes": {
+       "bug": [
+        "7.81",
+        "8.06"
+       ]
+      }
+     },
+     {
+      "row": "Gemini 4 Argon (High) [Devin]",
+      "changes": {
+       "bug": [
+        "7.19",
+        "7.64"
+       ]
+      }
+     },
+     {
+      "row": "SWE-2 (Max) [Devin]",
+      "changes": {
+       "bug": [
+        "7.29",
+        "6.67"
+       ]
+      }
+     },
+     {
+      "row": "GPT-6.1-Terra (Xhigh) [Codex CLI]",
+      "changes": {
+       "bug": [
+        "8.96",
+        "8.82"
+       ]
+      }
+     },
+     {
+      "row": "Deepseek-V4.1-Flash-1017 (High) [OpenCode]",
+      "changes": {
+       "bug": [
+        "6.15",
+        "6.88"
+       ]
+      }
+     },
+     {
+      "row": "MiniMax M3.1-Flash (Max) [OpenCode]",
+      "changes": {
+       "bug": [
+        "4.79",
+        "5.31"
+       ]
+      }
+     },
+     {
+      "row": "GPT-6-Luna (Xhigh) [Codex CLI]",
+      "changes": {
+       "bug": [
+        "6.46",
+        "6.39"
+       ]
+      }
+     },
+     {
+      "row": "Qwen 3.8 Max (0902) (High) [OpenCode]",
+      "changes": {
+       "bug": [
+        "4.69",
+        "5.45"
+       ]
+      }
+     },
+     {
+      "row": "GLM-5.3 (High) [OpenCode]",
+      "changes": {
+       "bug": [
+        "4.9",
+        "5.38"
+       ]
+      }
+     },
+     {
+      "row": "GPT-6.1-Terra (High) [Codex CLI]",
+      "changes": {
+       "bug": [
+        "8.13",
+        "7.85"
+       ]
+      }
+     },
+     {
+      "row": "MiMo-V2.6 Pro (High) [OpenCode]",
+      "changes": {
+       "bug": [
+        "6.25",
+        "6.18"
+       ]
+      }
+     },
+     {
+      "row": "GPT-6.1-Terra (Medium) [Codex CLI]",
+      "changes": {
+       "bug": [
+        "7.71",
+        "7.43"
+       ]
+      }
+     },
+     {
+      "row": "GPT-6-Luna (High) [Codex CLI]",
+      "changes": {
+       "bug": [
+        "5.31",
+        "5.35"
+       ]
+      }
+     },
+     {
+      "row": "Deepseek-V4-Pro-0813 (Max) [OpenCode]",
+      "changes": {
+       "bug": [
+        "4.9",
+        "4.62"
+       ]
+      }
+     },
+     {
+      "row": "Deepseek-V4-Pro-0813 (High) [OpenCode]",
+      "changes": {
+       "bug": [
+        "2.71",
+        "3.47"
+       ]
+      }
+     },
+     {
+      "row": "Mistral Large 4 (High) [OpenCode]",
+      "changes": {
+       "bug": [
+        "3.13",
+        "4.14"
+       ]
+      }
+     },
+     {
+      "row": "MiMo-V2.6 Flash (High) [OpenCode]",
+      "changes": {
+       "bug": [
+        "7.81",
+        "7.46"
+       ]
+      }
+     },
+     {
+      "row": "Tencent Hy3 (High) [OpenCode]",
+      "changes": {
+       "bug": [
+        "2.29",
+        "2.64"
+       ]
+      }
+     },
+     {
+      "row": "GLM-5.3-Flash (Max) [OpenCode]",
+      "changes": {
+       "bug": [
+        "4.69",
+        "4.79"
+       ]
+      }
+     },
+     {
+      "row": "Qwen 3.8 27B (Xhigh) [OpenCode]",
+      "changes": {
+       "bug": [
+        "2.71",
+        "3.26"
+       ]
+      }
+     },
+     {
+      "row": "GPT-6-Luna (Medium) [Codex CLI]",
+      "changes": {
+       "bug": [
+        "3.54",
+        "3.89"
+       ]
+      }
+     },
+     {
+      "row": "Beam (Max) [OpenCode]",
+      "changes": {
+       "bug": [
+        "2.08",
+        "2.36"
+       ],
+       "edge": [
+        "9.25",
+        "10.15"
+       ]
+      }
+     },
+     {
+      "row": "Composer 2.5 [Cursor]",
+      "changes": {
+       "bug": [
+        "3.96",
+        "3.3"
+       ]
+      }
+     },
+     {
+      "row": "Nemotron 3.5 Super VL (High) [OpenCode]",
+      "changes": {
+       "bug": [
+        "3.13",
+        "2.3"
+       ]
+      }
+     }
+    ],
+    "testedDateMoved": 44,
+    "rowsCompared": 62
+   },
+   "coverage": {
+    "gpt-6-luna-low": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "Non-matching rows at other efforts: GPT-6-Luna (Max) [Codex CLI, 2026-11-14] = 73.06; GPT-6-Luna (Xhigh) [Codex CLI, 2026-11-14] = 70.75; GPT-6-Luna (High) [Codex CLI, 2026-11-14] = 67.33; GPT-6-Luna (Medium) [Codex CLI, 2026-11-14] = 56.7."
+    },
+    "gpt-6-luna-medium": {
+     "status": "exact",
+     "value": 55.03,
+     "sourceLabel": "GPT-6-Luna (Medium)",
+     "effort": "medium",
+     "note": null,
+     "rows": [
+      {
+       "total": 56.7,
+       "nonBug": 40.2,
+       "leaf80": 55.03,
+       "laravel": 16.33,
+       "react": 14.17,
+       "bug": 3.89,
+       "python": 14.83,
+       "edge": 9.7,
+       "penalty": -2.22,
+       "harness": "Codex CLI",
+       "tested": "2026-11-14",
+       "ageText": "1 week ago",
+       "cost": "$0.01 <1% / week",
+       "time": "02:13",
+       "rank": "65"
+      }
+     ],
+     "components": {
+      "laravel": 16.33,
+      "react": 14.17,
+      "python": 14.83,
+      "edge": 9.7,
+      "leafMax": 80
+     },
+     "diagnostics": {
+      "total": 56.7,
+      "totalMax": 90,
+      "bug": 3.89,
+      "penalty": -2.22,
+      "nonBug60": 40.2,
+      "note": "Bug Finding and the penalty are not in the leaf."
+     }
+    },
+    "claude-haiku-5-5-low": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "Non-matching rows at other efforts: Haiku 5.5 (High) [Claude Code, 2026-11-13] = 76.3; Haiku 5.5 (Medium) [Claude Code, 2026-11-14] = 75.84."
+    },
+    "gpt-6-luna-high": {
+     "status": "exact",
+     "value": 63.26,
+     "sourceLabel": "GPT-6-Luna (High)",
+     "effort": "high",
+     "note": null,
+     "rows": [
+      {
+       "total": 67.33,
+       "nonBug": 47.73,
+       "leaf80": 63.26,
+       "laravel": 16.9,
+       "react": 15.83,
+       "bug": 5.35,
+       "python": 15.53,
+       "edge": 15.0,
+       "penalty": -1.28,
+       "harness": "Codex CLI",
+       "tested": "2026-11-14",
+       "ageText": "1 week ago",
+       "cost": "$0.01 1% / week",
+       "time": "03:51",
+       "rank": "49"
+      }
+     ],
+     "components": {
+      "laravel": 16.9,
+      "react": 15.83,
+      "python": 15.53,
+      "edge": 15.0,
+      "leafMax": 80
+     },
+     "diagnostics": {
+      "total": 67.33,
+      "totalMax": 90,
+      "bug": 5.35,
+      "penalty": -1.28,
+      "nonBug60": 47.73,
+      "note": "Bug Finding and the penalty are not in the leaf."
+     }
+    },
+    "claude-haiku-5-5-medium": {
+     "status": "exact",
+     "value": 68.75,
+     "sourceLabel": "Haiku 5.5 (Medium)",
+     "effort": "medium",
+     "note": null,
+     "rows": [
+      {
+       "total": 75.84,
+       "nonBug": 51.32,
+       "leaf80": 68.75,
+       "laravel": 17.32,
+       "react": 17.0,
+       "bug": 7.09,
+       "python": 17.43,
+       "edge": 17.0,
+       "penalty": 0.0,
+       "harness": "Claude Code",
+       "tested": "2026-11-14",
+       "ageText": "1 week ago",
+       "cost": "$0.03 <1% / week",
+       "time": "02:37",
+       "rank": "27"
+      }
+     ],
+     "components": {
+      "laravel": 17.32,
+      "react": 17.0,
+      "python": 17.43,
+      "edge": 17.0,
+      "leafMax": 80
+     },
+     "diagnostics": {
+      "total": 75.84,
+      "totalMax": 90,
+      "bug": 7.09,
+      "penalty": 0.0,
+      "nonBug60": 51.32,
+      "note": "Bug Finding and the penalty are not in the leaf."
+     }
+    },
+    "muse-ember-xhigh": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "Non-matching rows at other efforts: Muse Ember 1.0 (Max) [OpenCode, 2026-11-14] = 64.52."
+    },
+    "muse-ember": {
+     "status": "exact",
+     "value": 61.65,
+     "sourceLabel": "Muse Ember 1.0 (Max)",
+     "effort": "max",
+     "note": "The board names the model 'Muse Ember 1.0'; AA, Vals and tbench.ai name it 'Muse Ember' (no version), and the board's own video title is 'I Tested NEW Muse Ember on Coding' (aicd/model-pages/muse-ember-1-0.html). No other Muse Ember version appears on any board, so '1.0' is read as the model's release name, not a second version. Flag for the owner (O36 asks for the same model version).",
+     "rows": [
+      {
+       "total": 64.52,
+       "nonBug": 47.32,
+       "leaf80": 61.65,
+       "laravel": 15.95,
+       "react": 16.67,
+       "bug": 5.31,
+       "python": 14.33,
+       "edge": 14.7,
+       "penalty": -2.44,
+       "harness": "OpenCode",
+       "tested": "2026-11-14",
+       "ageText": "1 week ago",
+       "cost": "$0.03",
+       "time": "02:16",
+       "rank": "54"
+      }
+     ],
+     "components": {
+      "laravel": 15.95,
+      "react": 16.67,
+      "python": 14.33,
+      "edge": 14.7,
+      "leafMax": 80
+     },
+     "diagnostics": {
+      "total": 64.52,
+      "totalMax": 90,
+      "bug": 5.31,
+      "penalty": -2.44,
+      "nonBug60": 47.32,
+      "note": "Bug Finding and the penalty are not in the leaf."
+     }
+    },
+    "gpt-6.1-terra-medium": {
+     "status": "exact",
+     "value": 62.57,
+     "sourceLabel": "GPT-6.1-Terra (Medium)",
+     "effort": "medium",
+     "note": null,
+     "rows": [
+      {
+       "total": 68.22,
+       "nonBug": 46.9,
+       "leaf80": 62.57,
+       "laravel": 16.28,
+       "react": 16.17,
+       "bug": 7.43,
+       "python": 15.67,
+       "edge": 14.45,
+       "penalty": -1.78,
+       "harness": "Codex CLI",
+       "tested": "2026-11-14",
+       "ageText": "1 week ago",
+       "cost": "$0.04 2% / week",
+       "time": "00:31",
+       "rank": "48"
+      }
+     ],
+     "components": {
+      "laravel": 16.28,
+      "react": 16.17,
+      "python": 15.67,
+      "edge": 14.45,
+      "leafMax": 80
+     },
+     "diagnostics": {
+      "total": 68.22,
+      "totalMax": 90,
+      "bug": 7.43,
+      "penalty": -1.78,
+      "nonBug60": 46.9,
+      "note": "Bug Finding and the penalty are not in the leaf."
+     }
+    },
+    "gpt-6.2-sol-low": {
+     "status": "exact",
+     "value": 74.56,
+     "sourceLabel": "GPT-6.2-Sol (Low)",
+     "effort": "low",
+     "note": null,
+     "rows": [
+      {
+       "total": 83.08,
+       "nonBug": 56.76,
+       "leaf80": 74.56,
+       "laravel": 18.43,
+       "react": 18.83,
+       "bug": 8.54,
+       "python": 17.8,
+       "edge": 19.5,
+       "penalty": -0.02,
+       "harness": "Codex CLI",
+       "tested": "2026-11-18",
+       "ageText": "1 week ago",
+       "cost": "$0.13 4% / week",
+       "time": "01:44",
+       "rank": "11"
+      }
+     ],
+     "components": {
+      "laravel": 18.43,
+      "react": 18.83,
+      "python": 17.8,
+      "edge": 19.5,
+      "leafMax": 80
+     },
+     "diagnostics": {
+      "total": 83.08,
+      "totalMax": 90,
+      "bug": 8.54,
+      "penalty": -0.02,
+      "nonBug60": 56.76,
+      "note": "Bug Finding and the penalty are not in the leaf."
+     }
+    },
+    "gpt-6.1-terra-high": {
+     "status": "exact",
+     "value": 61.46,
+     "sourceLabel": "GPT-6.1-Terra (High)",
+     "effort": "high",
+     "note": null,
+     "rows": [
+      {
+       "total": 69.31,
+       "nonBug": 46.69,
+       "leaf80": 61.46,
+       "laravel": 16.12,
+       "react": 16.17,
+       "bug": 7.85,
+       "python": 14.77,
+       "edge": 14.4,
+       "penalty": 0.0,
+       "harness": "Codex CLI",
+       "tested": "2026-11-13",
+       "ageText": "1 week ago",
+       "cost": "$0.05 2% / week",
+       "time": "00:46",
+       "rank": "44"
+      }
+     ],
+     "components": {
+      "laravel": 16.12,
+      "react": 16.17,
+      "python": 14.77,
+      "edge": 14.4,
+      "leafMax": 80
+     },
+     "diagnostics": {
+      "total": 69.31,
+      "totalMax": 90,
+      "bug": 7.85,
+      "penalty": 0.0,
+      "nonBug60": 46.69,
+      "note": "Bug Finding and the penalty are not in the leaf."
+     }
+    },
+    "gpt-6.1-sol-medium": {
+     "status": "exact",
+     "value": 73.94,
+     "sourceLabel": "GPT-6.1-Sol (Medium)",
+     "effort": "medium",
+     "note": null,
+     "rows": [
+      {
+       "total": 83.04,
+       "nonBug": 55.67,
+       "leaf80": 73.94,
+       "laravel": 18.17,
+       "react": 18.0,
+       "bug": 9.1,
+       "python": 18.27,
+       "edge": 19.5,
+       "penalty": 0.0,
+       "harness": "Codex CLI",
+       "tested": "2026-11-13",
+       "ageText": "1 week ago",
+       "cost": "$0.15 6% / week",
+       "time": "02:24",
+       "rank": "12"
+      }
+     ],
+     "components": {
+      "laravel": 18.17,
+      "react": 18.0,
+      "python": 18.27,
+      "edge": 19.5,
+      "leafMax": 80
+     },
+     "diagnostics": {
+      "total": 83.04,
+      "totalMax": 90,
+      "bug": 9.1,
+      "penalty": 0.0,
+      "nonBug60": 55.67,
+      "note": "Bug Finding and the penalty are not in the leaf."
+     }
+    },
+    "gpt-6.2-sol-medium": {
+     "status": "exact",
+     "value": 74.99,
+     "sourceLabel": "GPT-6.2-Sol (Medium)",
+     "effort": "medium",
+     "note": null,
+     "rows": [
+      {
+       "total": 83.1,
+       "nonBug": 57.49,
+       "leaf80": 74.99,
+       "laravel": 19.12,
+       "react": 19.17,
+       "bug": 8.61,
+       "python": 17.5,
+       "edge": 19.2,
+       "penalty": -0.5,
+       "harness": "Codex CLI",
+       "tested": "2026-11-18",
+       "ageText": "1 week ago",
+       "cost": "$0.22 6% / week",
+       "time": "03:27",
+       "rank": "10"
+      }
+     ],
+     "components": {
+      "laravel": 19.12,
+      "react": 19.17,
+      "python": 17.5,
+      "edge": 19.2,
+      "leafMax": 80
+     },
+     "diagnostics": {
+      "total": 83.1,
+      "totalMax": 90,
+      "bug": 8.61,
+      "penalty": -0.5,
+      "nonBug60": 57.49,
+      "note": "Bug Finding and the penalty are not in the leaf."
+     }
+    },
+    "gpt-6.2-sol-high": {
+     "status": "exact",
+     "value": 74.61,
+     "sourceLabel": "GPT-6.2-Sol (High)",
+     "effort": "high",
+     "note": null,
+     "rows": [
+      {
+       "total": 83.53,
+       "nonBug": 57.34,
+       "leaf80": 74.61,
+       "laravel": 19.17,
+       "react": 19.17,
+       "bug": 8.92,
+       "python": 17.27,
+       "edge": 19.0,
+       "penalty": 0.0,
+       "harness": "Codex CLI",
+       "tested": "2026-11-20",
+       "ageText": "6 days ago",
+       "cost": "$0.30 8% / week",
+       "time": "05:29",
+       "rank": "8"
+      }
+     ],
+     "components": {
+      "laravel": 19.17,
+      "react": 19.17,
+      "python": 17.27,
+      "edge": 19.0,
+      "leafMax": 80
+     },
+     "diagnostics": {
+      "total": 83.53,
+      "totalMax": 90,
+      "bug": 8.92,
+      "penalty": 0.0,
+      "nonBug60": 57.34,
+      "note": "Bug Finding and the penalty are not in the leaf."
+     }
+    },
+    "gpt-6.2-sol-xhigh": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "Non-matching rows at other efforts: GPT-6.2-Sol (High) [Codex CLI, 2026-11-20] = 83.53; GPT-6.2-Sol (Medium) [Codex CLI, 2026-11-18] = 83.1; GPT-6.2-Sol (Low) [Codex CLI, 2026-11-18] = 83.08."
+    },
+    "gpt-6.2-sol": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "Non-matching rows at other efforts: GPT-6.2-Sol (High) [Codex CLI, 2026-11-20] = 83.53; GPT-6.2-Sol (Medium) [Codex CLI, 2026-11-18] = 83.1; GPT-6.2-Sol (Low) [Codex CLI, 2026-11-18] = 83.08."
+    },
+    "gpt-6.2-astra-high": {
+     "status": "exact",
+     "value": 76.33,
+     "sourceLabel": "GPT-6.2-Astra (High)",
+     "effort": "high",
+     "note": null,
+     "rows": [
+      {
+       "total": 84.48,
+       "nonBug": 58.56,
+       "leaf80": 76.33,
+       "laravel": 18.73,
+       "react": 19.83,
+       "bug": 8.15,
+       "python": 17.77,
+       "edge": 20.0,
+       "penalty": 0.0,
+       "harness": "Codex CLI",
+       "tested": "2026-11-18",
+       "ageText": "1 week ago",
+       "cost": "$0.72",
+       "time": "05:40",
+       "rank": "3"
+      }
+     ],
+     "components": {
+      "laravel": 18.73,
+      "react": 19.83,
+      "python": 17.77,
+      "edge": 20.0,
+      "leafMax": 80
+     },
+     "diagnostics": {
+      "total": 84.48,
+      "totalMax": 90,
+      "bug": 8.15,
+      "penalty": 0.0,
+      "nonBug60": 58.56,
+      "note": "Bug Finding and the penalty are not in the leaf."
+     }
+    },
+    "gpt-6.2-astra-xhigh": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "Non-matching rows at other efforts: GPT-6.2-Astra (High) [Codex CLI, 2026-11-18] = 84.48; GPT-6.2-Astra (Medium) [Codex CLI, 2026-11-18] = 84.06."
+    },
+    "gpt-6.2-astra": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "Non-matching rows at other efforts: GPT-6.2-Astra (High) [Codex CLI, 2026-11-18] = 84.48; GPT-6.2-Astra (Medium) [Codex CLI, 2026-11-18] = 84.06."
+    },
+    "claude-fable-5-2-xhigh": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "Non-matching rows at other efforts: Fable 5.2 (Medium) [Claude Code, 2026-11-13] = 84.7."
+    },
+    "claude-fable-5-2": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "Non-matching rows at other efforts: Fable 5.2 (Medium) [Claude Code, 2026-11-13] = 84.7."
+    },
+    "claude-fable-5-2-high": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "Non-matching rows at other efforts: Fable 5.2 (Medium) [Claude Code, 2026-11-13] = 84.7."
+    },
+    "gemini-4-neon": {
+     "status": "exact",
+     "value": 70.13,
+     "sourceLabel": "Gemini 4 Neon (Xhigh)",
+     "effort": "xhigh",
+     "note": null,
+     "rows": [
+      {
+       "total": 80.05,
+       "nonBug": 54.33,
+       "leaf80": 70.13,
+       "laravel": 18.08,
+       "react": 17.5,
+       "bug": 9.92,
+       "python": 15.8,
+       "edge": 18.75,
+       "penalty": 0.0,
+       "harness": "Antigravity",
+       "tested": "2026-11-20",
+       "ageText": "6 days ago",
+       "cost": "N/A 27% / week",
+       "time": "10:56",
+       "rank": "15"
+      }
+     ],
+     "components": {
+      "laravel": 18.08,
+      "react": 17.5,
+      "python": 15.8,
+      "edge": 18.75,
+      "leafMax": 80
+     },
+     "diagnostics": {
+      "total": 80.05,
+      "totalMax": 90,
+      "bug": 9.92,
+      "penalty": 0.0,
+      "nonBug60": 54.33,
+      "note": "Bug Finding and the penalty are not in the leaf."
+     }
+    },
+    "gemini-4-carbon": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "Non-matching rows at other efforts: Gemini 4 Carbon (Medium) [Antigravity, 2026-11-25] = 80.49."
+    },
+    "gemini-4-neon-high": {
+     "status": "exact",
+     "value": 69.85,
+     "sourceLabel": "Gemini 4 Neon (High)",
+     "effort": "high",
+     "note": null,
+     "rows": [
+      {
+       "total": 78.87,
+       "nonBug": 54.05,
+       "leaf80": 69.85,
+       "laravel": 17.8,
+       "react": 17.5,
+       "bug": 9.27,
+       "python": 15.8,
+       "edge": 18.75,
+       "penalty": -0.25,
+       "harness": "Antigravity",
+       "tested": "2026-11-22",
+       "ageText": "4 days ago",
+       "cost": "N/A 21% / week",
+       "time": "07:25",
+       "rank": "17"
+      }
+     ],
+     "components": {
+      "laravel": 17.8,
+      "react": 17.5,
+      "python": 15.8,
+      "edge": 18.75,
+      "leafMax": 80
+     },
+     "diagnostics": {
+      "total": 78.87,
+      "totalMax": 90,
+      "bug": 9.27,
+      "penalty": -0.25,
+      "nonBug60": 54.05,
+      "note": "Bug Finding and the penalty are not in the leaf."
+     }
+    },
+    "claude-opus-5-5": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "Non-matching rows at other efforts: Opus 5.5 (High) [Claude Code, 2026-11-13] = 84.95; Opus 5.5 (Medium) [Claude Code, 2026-11-13] = 83.15; Opus 5.5 (Low) [Claude Code, 2026-11-13] = 78.19."
+    },
+    "gpt-6.2-astra-medium": {
+     "status": "exact",
+     "value": 75.82,
+     "sourceLabel": "GPT-6.2-Astra (Medium)",
+     "effort": "medium",
+     "note": null,
+     "rows": [
+      {
+       "total": 84.06,
+       "nonBug": 57.59,
+       "leaf80": 75.82,
+       "laravel": 18.42,
+       "react": 19.17,
+       "bug": 8.24,
+       "python": 18.23,
+       "edge": 20.0,
+       "penalty": 0.0,
+       "harness": "Codex CLI",
+       "tested": "2026-11-18",
+       "ageText": "1 week ago",
+       "cost": "$0.48",
+       "time": "02:20",
+       "rank": "5"
+      }
+     ],
+     "components": {
+      "laravel": 18.42,
+      "react": 19.17,
+      "python": 18.23,
+      "edge": 20.0,
+      "leafMax": 80
+     },
+     "diagnostics": {
+      "total": 84.06,
+      "totalMax": 90,
+      "bug": 8.24,
+      "penalty": 0.0,
+      "nonBug60": 57.59,
+      "note": "Bug Finding and the penalty are not in the leaf."
+     }
+    },
+    "gemini-4-neon-medium": {
+     "status": "exact",
+     "value": 69.32,
+     "sourceLabel": "Gemini 4 Neon (Medium)",
+     "effort": "medium",
+     "note": null,
+     "rows": [
+      {
+       "total": 77.34,
+       "nonBug": 52.45,
+       "leaf80": 69.32,
+       "laravel": 16.95,
+       "react": 18.0,
+       "bug": 8.02,
+       "python": 16.87,
+       "edge": 17.5,
+       "penalty": 0.0,
+       "harness": "Antigravity",
+       "tested": "2026-11-19",
+       "ageText": "1 week ago",
+       "cost": "N/A 11% / week",
+       "time": "03:57",
+       "rank": "24"
+      }
+     ],
+     "components": {
+      "laravel": 16.95,
+      "react": 18.0,
+      "python": 16.87,
+      "edge": 17.5,
+      "leafMax": 80
+     },
+     "diagnostics": {
+      "total": 77.34,
+      "totalMax": 90,
+      "bug": 8.02,
+      "penalty": 0.0,
+      "nonBug60": 52.45,
+      "note": "Bug Finding and the penalty are not in the leaf."
+     }
+    },
+    "gpt-6.1-sol": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "Non-matching rows at other efforts: GPT-6.1-Sol (High) [Codex CLI, 2026-11-13] = 83.86; GPT-6.1-Sol (Medium) [Codex CLI, 2026-11-13] = 83.04; GPT-6.1-Sol (Low) [Codex CLI, 2026-11-13] = 78.8."
+    },
+    "gpt-6.1-terra-xhigh": {
+     "status": "exact",
+     "value": 63.7,
+     "sourceLabel": "GPT-6.1-Terra (Xhigh)",
+     "effort": "xhigh",
+     "note": null,
+     "rows": [
+      {
+       "total": 71.99,
+       "nonBug": 48.13,
+       "leaf80": 63.7,
+       "laravel": 16.23,
+       "react": 17.5,
+       "bug": 8.82,
+       "python": 15.57,
+       "edge": 14.4,
+       "penalty": -0.53,
+       "harness": "Codex CLI",
+       "tested": "2026-11-13",
+       "ageText": "1 week ago",
+       "cost": "$0.07 5% / week",
+       "time": "01:29",
+       "rank": "37"
+      }
+     ],
+     "components": {
+      "laravel": 16.23,
+      "react": 17.5,
+      "python": 15.57,
+      "edge": 14.4,
+      "leafMax": 80
+     },
+     "diagnostics": {
+      "total": 71.99,
+      "totalMax": 90,
+      "bug": 8.82,
+      "penalty": -0.53,
+      "nonBug60": 48.13,
+      "note": "Bug Finding and the penalty are not in the leaf."
+     }
+    },
+    "claude-haiku-5-5": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "Non-matching rows at other efforts: Haiku 5.5 (High) [Claude Code, 2026-11-13] = 76.3; Haiku 5.5 (Medium) [Claude Code, 2026-11-14] = 75.84."
+    },
+    "gpt-6-luna-xhigh": {
+     "status": "exact",
+     "value": 65.94,
+     "sourceLabel": "GPT-6-Luna (Xhigh)",
+     "effort": "xhigh",
+     "note": null,
+     "rows": [
+      {
+       "total": 70.75,
+       "nonBug": 49.94,
+       "leaf80": 65.94,
+       "laravel": 17.02,
+       "react": 17.17,
+       "bug": 6.39,
+       "python": 16.0,
+       "edge": 15.75,
+       "penalty": -1.58,
+       "harness": "Codex CLI",
+       "tested": "2026-11-14",
+       "ageText": "1 week ago",
+       "cost": "$0.03 2% / week",
+       "time": "10:08",
+       "rank": "40"
+      }
+     ],
+     "components": {
+      "laravel": 17.02,
+      "react": 17.17,
+      "python": 16.0,
+      "edge": 15.75,
+      "leafMax": 80
+     },
+     "diagnostics": {
+      "total": 70.75,
+      "totalMax": 90,
+      "bug": 6.39,
+      "penalty": -1.58,
+      "nonBug60": 49.94,
+      "note": "Bug Finding and the penalty are not in the leaf."
+     }
+    },
+    "mimo-v2-6-flash": {
+     "status": "exact",
+     "value": 59.58,
+     "sourceLabel": "MiMo-V2.6 Flash (High)",
+     "effort": "high",
+     "note": "Owner decision O135 (2026-10-30): AA plots MiMo-V2.6-Flash without an effort; Xiaomi's API documents a single thinking mode (thinking.type enabled/disabled, default enabled; on the Responses API every reasoning.effort other than none enables the same, undifferentiated reasoning), so the configuration is thinking enabled, the default (../../2026-10-30-v5-recapture/third-party/mimo-flash-effort.md; Xiaomi docs last read 2026-11-01, ../../2026-11-01-recapture/third-party/mimo/; not re-read on 2026-11-26). The board's only MiMo-V2.6-Flash row is labelled High; Xiaomi documents every enabled level as the same reasoning ('Values xhigh, max and ultra are mapped to high'), so the High row is the documented default configuration (thinking enabled). The row does not name the provider route behind OpenCode.",
+     "rows": [
+      {
+       "total": 64.39,
+       "nonBug": 45.48,
+       "leaf80": 59.58,
+       "laravel": 17.83,
+       "react": 17.5,
+       "bug": 7.46,
+       "python": 14.1,
+       "edge": 10.15,
+       "penalty": -2.65,
+       "harness": "OpenCode",
+       "tested": "2026-11-14",
+       "ageText": "1 week ago",
+       "cost": "$0.04",
+       "time": "17:56",
+       "rank": "55"
+      }
+     ],
+     "components": {
+      "laravel": 17.83,
+      "react": 17.5,
+      "python": 14.1,
+      "edge": 10.15,
+      "leafMax": 80
+     },
+     "diagnostics": {
+      "total": 64.39,
+      "totalMax": 90,
+      "bug": 7.46,
+      "penalty": -2.65,
+      "nonBug60": 45.48,
+      "note": "Bug Finding and the penalty are not in the leaf."
+     }
+    },
+    "gpt-6.1-terra-low": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "Non-matching rows at other efforts: GPT-6.1-Terra (Max) [Codex CLI, 2026-11-13] = 77.67; GPT-6.1-Terra (Xhigh) [Codex CLI, 2026-11-13] = 71.99; GPT-6.1-Terra (High) [Codex CLI, 2026-11-13] = 69.31; GPT-6.1-Terra (Medium) [Codex CLI, 2026-11-14] = 68.22."
+    },
+    "claude-haiku-5-5-high": {
+     "status": "exact",
+     "value": 69.78,
+     "sourceLabel": "Haiku 5.5 (High)",
+     "effort": "high",
+     "note": null,
+     "rows": [
+      {
+       "total": 76.3,
+       "nonBug": 52.55,
+       "leaf80": 69.78,
+       "laravel": 17.3,
+       "react": 18.0,
+       "bug": 7.22,
+       "python": 17.23,
+       "edge": 17.25,
+       "penalty": -0.7,
+       "harness": "Claude Code",
+       "tested": "2026-11-13",
+       "ageText": "1 week ago",
+       "cost": "$0.05 1% / week",
+       "time": "03:37",
+       "rank": "26"
+      }
+     ],
+     "components": {
+      "laravel": 17.3,
+      "react": 18.0,
+      "python": 17.23,
+      "edge": 17.25,
+      "leafMax": 80
+     },
+     "diagnostics": {
+      "total": 76.3,
+      "totalMax": 90,
+      "bug": 7.22,
+      "penalty": -0.7,
+      "nonBug60": 52.55,
+      "note": "Bug Finding and the penalty are not in the leaf."
+     }
+    },
+    "gpt-6.1-sol-high": {
+     "status": "exact",
+     "value": 74.83,
+     "sourceLabel": "GPT-6.1-Sol (High)",
+     "effort": "high",
+     "note": null,
+     "rows": [
+      {
+       "total": 83.86,
+       "nonBug": 56.83,
+       "leaf80": 74.83,
+       "laravel": 18.5,
+       "react": 18.83,
+       "bug": 9.03,
+       "python": 18.0,
+       "edge": 19.5,
+       "penalty": 0.0,
+       "harness": "Codex CLI",
+       "tested": "2026-11-13",
+       "ageText": "1 week ago",
+       "cost": "$0.23 10% / week",
+       "time": "04:19",
+       "rank": "7"
+      }
+     ],
+     "components": {
+      "laravel": 18.5,
+      "react": 18.83,
+      "python": 18.0,
+      "edge": 19.5,
+      "leafMax": 80
+     },
+     "diagnostics": {
+      "total": 83.86,
+      "totalMax": 90,
+      "bug": 9.03,
+      "penalty": 0.0,
+      "nonBug60": 56.83,
+      "note": "Bug Finding and the penalty are not in the leaf."
+     }
+    },
+    "gpt-6.1-sol-xhigh": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "Non-matching rows at other efforts: GPT-6.1-Sol (High) [Codex CLI, 2026-11-13] = 83.86; GPT-6.1-Sol (Medium) [Codex CLI, 2026-11-13] = 83.04; GPT-6.1-Sol (Low) [Codex CLI, 2026-11-13] = 78.8."
+    },
+    "gpt-6-astra-high": {
+     "status": "exact",
+     "value": 75.24,
+     "sourceLabel": "GPT-6-Astra (High)",
+     "effort": "high",
+     "note": null,
+     "rows": [
+      {
+       "total": 84.25,
+       "nonBug": 56.77,
+       "leaf80": 75.24,
+       "laravel": 18.6,
+       "react": 18.17,
+       "bug": 9.03,
+       "python": 18.47,
+       "edge": 20.0,
+       "penalty": -0.02,
+       "harness": "Codex CLI",
+       "tested": "2026-11-13",
+       "ageText": "1 week ago",
+       "cost": "$0.96 16% / week",
+       "time": "04:34",
+       "rank": "4"
+      }
+     ],
+     "components": {
+      "laravel": 18.6,
+      "react": 18.17,
+      "python": 18.47,
+      "edge": 20.0,
+      "leafMax": 80
+     },
+     "diagnostics": {
+      "total": 84.25,
+      "totalMax": 90,
+      "bug": 9.03,
+      "penalty": -0.02,
+      "nonBug60": 56.77,
+      "note": "Bug Finding and the penalty are not in the leaf."
+     }
+    },
+    "gpt-6-astra-xhigh": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "Non-matching rows at other efforts: GPT-6-Astra (High) [Codex CLI, 2026-11-13] = 84.25; GPT-6-Astra (Medium) [Codex CLI, 2026-11-13] = 83.89."
+    },
+    "claude-opus-5-5-xhigh": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "Non-matching rows at other efforts: Opus 5.5 (High) [Claude Code, 2026-11-13] = 84.95; Opus 5.5 (Medium) [Claude Code, 2026-11-13] = 83.15; Opus 5.5 (Low) [Claude Code, 2026-11-13] = 78.19."
+    },
+    "gpt-6-luna": {
+     "status": "exact",
+     "value": 68.02,
+     "sourceLabel": "GPT-6-Luna (Max)",
+     "effort": "max",
+     "note": null,
+     "rows": [
+      {
+       "total": 73.06,
+       "nonBug": 51.99,
+       "leaf80": 68.02,
+       "laravel": 18.12,
+       "react": 17.17,
+       "bug": 7.08,
+       "python": 16.03,
+       "edge": 16.7,
+       "penalty": -2.04,
+       "harness": "Codex CLI",
+       "tested": "2026-11-14",
+       "ageText": "1 week ago",
+       "cost": "$0.03 2% / week",
+       "time": "11:03",
+       "rank": "33"
+      }
+     ],
+     "components": {
+      "laravel": 18.12,
+      "react": 17.17,
+      "python": 16.03,
+      "edge": 16.7,
+      "leafMax": 80
+     },
+     "diagnostics": {
+      "total": 73.06,
+      "totalMax": 90,
+      "bug": 7.08,
+      "penalty": -2.04,
+      "nonBug60": 51.99,
+      "note": "Bug Finding and the penalty are not in the leaf."
+     }
+    },
+    "gpt-6.1-sol-low": {
+     "status": "exact",
+     "value": 70.8,
+     "sourceLabel": "GPT-6.1-Sol (Low)",
+     "effort": "low",
+     "note": null,
+     "rows": [
+      {
+       "total": 78.8,
+       "nonBug": 52.7,
+       "leaf80": 70.8,
+       "laravel": 17.53,
+       "react": 16.67,
+       "bug": 8.75,
+       "python": 18.1,
+       "edge": 18.5,
+       "penalty": -0.75,
+       "harness": "Codex CLI",
+       "tested": "2026-11-13",
+       "ageText": "1 week ago",
+       "cost": "$0.10 4% / week",
+       "time": "01:21",
+       "rank": "18"
+      }
+     ],
+     "components": {
+      "laravel": 17.53,
+      "react": 16.67,
+      "python": 18.1,
+      "edge": 18.5,
+      "leafMax": 80
+     },
+     "diagnostics": {
+      "total": 78.8,
+      "totalMax": 90,
+      "bug": 8.75,
+      "penalty": -0.75,
+      "nonBug60": 52.7,
+      "note": "Bug Finding and the penalty are not in the leaf."
+     }
+    },
+    "gpt-6.1-terra": {
+     "status": "exact",
+     "value": 69.19,
+     "sourceLabel": "GPT-6.1-Terra (Max)",
+     "effort": "max",
+     "note": null,
+     "rows": [
+      {
+       "total": 77.67,
+       "nonBug": 52.49,
+       "leaf80": 69.19,
+       "laravel": 17.82,
+       "react": 18.17,
+       "bug": 8.61,
+       "python": 16.7,
+       "edge": 16.5,
+       "penalty": -0.13,
+       "harness": "Codex CLI",
+       "tested": "2026-11-13",
+       "ageText": "1 week ago",
+       "cost": "$0.27 14% / week",
+       "time": "07:55",
+       "rank": "21"
+      }
+     ],
+     "components": {
+      "laravel": 17.82,
+      "react": 18.17,
+      "python": 16.7,
+      "edge": 16.5,
+      "leafMax": 80
+     },
+     "diagnostics": {
+      "total": 77.67,
+      "totalMax": 90,
+      "bug": 8.61,
+      "penalty": -0.13,
+      "nonBug60": 52.49,
+      "note": "Bug Finding and the penalty are not in the leaf."
+     }
+    },
+    "claude-opus-5-5-high": {
+     "status": "exact",
+     "value": 75.85,
+     "sourceLabel": "Opus 5.5 (High)",
+     "effort": "high",
+     "note": "AA's pages name this configuration '(<Effort>, Default Fallback)' (its chart label shows only the effort since 2026-11-26, and said 'with fallback' before); the source has no fallback qualifier (as on 2026-10-25 and 2026-11-01).",
+     "rows": [
+      {
+       "total": 84.95,
+       "nonBug": 57.68,
+       "leaf80": 75.85,
+       "laravel": 18.68,
+       "react": 19.0,
+       "bug": 9.1,
+       "python": 18.17,
+       "edge": 20.0,
+       "penalty": 0.0,
+       "harness": "Claude Code",
+       "tested": "2026-11-13",
+       "ageText": "1 week ago",
+       "cost": "$0.83 9% / week",
+       "time": "03:42",
+       "rank": "1"
+      }
+     ],
+     "components": {
+      "laravel": 18.68,
+      "react": 19.0,
+      "python": 18.17,
+      "edge": 20.0,
+      "leafMax": 80
+     },
+     "diagnostics": {
+      "total": 84.95,
+      "totalMax": 90,
+      "bug": 9.1,
+      "penalty": 0.0,
+      "nonBug60": 57.68,
+      "note": "Bug Finding and the penalty are not in the leaf."
+     }
+    },
+    "gpt-6-astra": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "Non-matching rows at other efforts: GPT-6-Astra (High) [Codex CLI, 2026-11-13] = 84.25; GPT-6-Astra (Medium) [Codex CLI, 2026-11-13] = 83.89."
+    },
+    "claude-sonnet-5-5": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "Non-matching rows at other efforts: Sonnet 5.5 (High) [Claude Code, 2026-11-13] = 80.58; Sonnet 5.5 (Medium) [Claude Code, 2026-11-13] = 75.44."
+    }
+   },
+   "valueChangesSince20261101": {
+    "claude-haiku-5-5-high": {
+     "20261101": {
+      "status": "exact",
+      "value": 51.55
+     },
+     "20261126": {
+      "status": "exact",
+      "value": 52.55
+     }
+    }
+   },
+   "configurationsNotInThe20261101Cohort": [
+    "muse-ember-xhigh",
+    "muse-ember",
+    "gpt-6.2-sol-low",
+    "gpt-6.2-sol-medium",
+    "gpt-6.2-sol-high",
+    "gpt-6.2-sol-xhigh",
+    "gpt-6.2-sol",
+    "gpt-6.2-astra-high",
+    "gpt-6.2-astra-xhigh",
+    "gpt-6.2-astra",
+    "claude-fable-5-2-xhigh",
+    "claude-fable-5-2",
+    "claude-fable-5-2-high",
+    "gemini-4-neon",
+    "gemini-4-neon-high",
+    "gpt-6.2-astra-medium",
+    "gemini-4-neon-medium"
+   ],
+   "valueChangesBasis": "The 2026-11-01 value was Laravel + React-TS + Edge-case (max 60); the changes are compared on that basis (diagnostics.nonBug60), not on today's 80-point value, which has no 2026-11-01 counterpart."
+  },
+  {
+   "key": "tbench-4",
+   "name": "Terminal-Bench 4.1 (tbench.ai)",
+   "version": "4.1",
+   "updated": "2026-11-20T16:07:10.159846+00:00",
+   "readAt": "2026-11-26T03:11:03.572Z",
+   "sourceUrl": "https://www.tbench.ai/ (the /leaderboard/terminal-bench/4.0 and /4.1 paths redirect to the home page)",
+   "leaderboard": {
+    "id": "947c0b13-1d0f-43e0-bd7b-7e5d8c16187a",
+    "name": "4-1-0",
+    "title": "Terminal-Bench 4.1",
+    "description": "The official leaderboard for Terminal-Bench 4.1.",
+    "datasetVersionIds": [
+     "753d0cbf-a35c-4f27-8f78-c25a843f1c69"
+    ],
+    "rowVersionRule": "The embedded payload has one leaderboard (id above, name 4-1-0) and no per-row version field; every row is therefore a Terminal-Bench 4.1 row (cell.version)."
+   },
+   "versionsOffered": {
+    "4.1": "default board (67 payload rows, 54 in the rendered table)",
+    "4.0": "older board, rendered with /?version=4.0 (44 rows; saved only as tbench/tbench-v40-scrape-2026-11-26.json for reference, its rows are fetched client-side and are not in the embedded payload); 3.0 is also selectable (/leaderboard/terminal-bench/3.0 redirects to /?version=3.0). 4.0 values are never matched: AA's Index runs 4.1."
+   },
+   "note": "Reference only: ValueRank's Terminal-Bench leaf comes from AA, whose Coding Agent Index v2.1 runs Terminal-Bench 4.1. The rendered table shows 54 rows (one per model, its best effort); the page's own embedded leaderboard payload holds 67 rows (status 'display'), including lower-effort rows the default view hides.",
+   "coverage": {
+    "gpt-6-luna-low": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "Non-matching rows at other efforts: GPT-6 Luna (max) = 15.15."
+    },
+    "gpt-6-luna-medium": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "Non-matching rows at other efforts: GPT-6 Luna (max) = 15.15."
+    },
+    "claude-haiku-5-5-low": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "Non-matching rows at other efforts: Haiku 5.5 (max) = 40."
+    },
+    "gpt-6-luna-high": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "Non-matching rows at other efforts: GPT-6 Luna (max) = 15.15."
+    },
+    "claude-haiku-5-5-medium": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "Non-matching rows at other efforts: Haiku 5.5 (max) = 40."
+    },
+    "muse-ember-xhigh": {
+     "status": "exact",
+     "value": 30.61,
+     "sourceLabel": "Muse Ember (xhigh)",
+     "effort": "xhigh",
+     "note": null,
+     "agent": "Muse Code",
+     "ci95": 3.8,
+     "date": "2026-11-09",
+     "version": "4.1",
+     "renderedInTable": true
+    },
+    "muse-ember": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "Non-matching rows at other efforts: Muse Ember (xhigh) = 30.61."
+    },
+    "gpt-6.1-terra-medium": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "Non-matching rows at other efforts: GPT-6.1 Terra (max) = 53.33."
+    },
+    "gpt-6.2-sol-low": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "Non-matching rows at other efforts: GPT-6.2 Sol (max) = 61.52."
+    },
+    "gpt-6.1-terra-high": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "Non-matching rows at other efforts: GPT-6.1 Terra (max) = 53.33."
+    },
+    "gpt-6.1-sol-medium": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "Non-matching rows at other efforts: GPT-6.1 Sol (max) = 60.91."
+    },
+    "gpt-6.2-sol-medium": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "Non-matching rows at other efforts: GPT-6.2 Sol (max) = 61.52."
+    },
+    "gpt-6.2-sol-high": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "Non-matching rows at other efforts: GPT-6.2 Sol (max) = 61.52."
+    },
+    "gpt-6.2-sol-xhigh": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "Non-matching rows at other efforts: GPT-6.2 Sol (max) = 61.52."
+    },
+    "gpt-6.2-sol": {
+     "status": "exact",
+     "value": 61.52,
+     "sourceLabel": "GPT-6.2 Sol (max)",
+     "effort": "max",
+     "note": null,
+     "agent": "Codex",
+     "ci95": 2.75,
+     "date": "2026-11-17",
+     "version": "4.1",
+     "renderedInTable": true
+    },
+    "gpt-6.2-astra-high": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "Non-matching rows at other efforts: GPT-6.2 Astra (max) = 62.12."
+    },
+    "gpt-6.2-astra-xhigh": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "Non-matching rows at other efforts: GPT-6.2 Astra (max) = 62.12."
+    },
+    "gpt-6.2-astra": {
+     "status": "exact",
+     "value": 62.12,
+     "sourceLabel": "GPT-6.2 Astra (max)",
+     "effort": "max",
+     "note": null,
+     "agent": "Codex",
+     "ci95": 2.3,
+     "date": "2026-11-17",
+     "version": "4.1",
+     "renderedInTable": true
+    },
+    "claude-fable-5-2-xhigh": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "Non-matching rows at other efforts: Fable 5.2 (max) = 65.76."
+    },
+    "claude-fable-5-2": {
+     "status": "exact",
+     "value": 65.76,
+     "sourceLabel": "Fable 5.2 (max)",
+     "effort": "max",
+     "note": "AA's pages name this configuration '(<Effort>, Default Fallback)' (its chart label shows only the effort since 2026-11-26, and said 'with fallback' before); the source has no fallback qualifier (as on 2026-10-25 and 2026-11-01).",
+     "agent": "Claude Code",
+     "ci95": 2.85,
+     "date": "2026-11-09",
+     "version": "4.1",
+     "renderedInTable": true
+    },
+    "claude-fable-5-2-high": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "Non-matching rows at other efforts: Fable 5.2 (max) = 65.76."
+    },
+    "gemini-4-neon": {
+     "status": "exact",
+     "value": 61.21,
+     "sourceLabel": "Gemini 4 Neon (xhigh)",
+     "effort": "xhigh",
+     "note": null,
+     "agent": "Antigravity CLI",
+     "ci95": 2.85,
+     "date": "2026-11-18",
+     "version": "4.1",
+     "renderedInTable": true
+    },
+    "gemini-4-carbon": {
+     "status": "exact",
+     "value": 64.55,
+     "sourceLabel": "Gemini 4 Carbon (high)",
+     "effort": "high",
+     "note": null,
+     "agent": "Antigravity CLI",
+     "ci95": 3.23,
+     "date": "2026-10-28",
+     "version": "4.1",
+     "renderedInTable": true
+    },
+    "gemini-4-neon-high": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "Non-matching rows at other efforts: Gemini 4 Neon (xhigh) = 61.21."
+    },
+    "claude-opus-5-5": {
+     "status": "exact",
+     "value": 65.76,
+     "sourceLabel": "Opus 5.5 (max)",
+     "effort": "max",
+     "note": "AA's pages name this configuration '(<Effort>, Default Fallback)' (its chart label shows only the effort since 2026-11-26, and said 'with fallback' before); the source has no fallback qualifier (as on 2026-10-25 and 2026-11-01). The 2026-11-01 read of the Terminal-Bench 4.0 board listed this row at 64.85; that is a different version and is not used.",
+     "agent": "Claude Code",
+     "ci95": 3.11,
+     "date": "2026-09-22",
+     "version": "4.1",
+     "renderedInTable": true
+    },
+    "gpt-6.2-astra-medium": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "Non-matching rows at other efforts: GPT-6.2 Astra (max) = 62.12."
+    },
+    "gemini-4-neon-medium": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "Non-matching rows at other efforts: Gemini 4 Neon (xhigh) = 61.21."
+    },
+    "gpt-6.1-sol": {
+     "status": "exact",
+     "value": 60.91,
+     "sourceLabel": "GPT-6.1 Sol (max)",
+     "effort": "max",
+     "note": "The 2026-11-01 read of the Terminal-Bench 4.0 board listed this row at 58.18; that is a different version and is not used.",
+     "agent": "Codex",
+     "ci95": 2.97,
+     "date": "2026-09-29",
+     "version": "4.1",
+     "renderedInTable": true
+    },
+    "gpt-6.1-terra-xhigh": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "Non-matching rows at other efforts: GPT-6.1 Terra (max) = 53.33."
+    },
+    "claude-haiku-5-5": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "Non-matching rows at other efforts: Haiku 5.5 (max) = 40."
+    },
+    "gpt-6-luna-xhigh": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "Non-matching rows at other efforts: GPT-6 Luna (max) = 15.15."
+    },
+    "mimo-v2-6-flash": {
+     "status": "plausible",
+     "value": 16.06,
+     "sourceLabel": "MiMo V2.6 Flash (none)",
+     "effort": "none",
+     "note": "Owner decision O135 (2026-10-30): AA plots MiMo-V2.6-Flash without an effort; Xiaomi's API documents a single thinking mode (thinking.type enabled/disabled, default enabled; on the Responses API every reasoning.effort other than none enables the same, undifferentiated reasoning), so the configuration is thinking enabled, the default (../../2026-10-30-v5-recapture/third-party/mimo-flash-effort.md; Xiaomi docs last read 2026-11-01, ../../2026-11-01-recapture/third-party/mimo/; not re-read on 2026-11-26). tbench.ai's only MiMo V2.6 Flash row is labelled effort 'none' on mini-swe-agent: the board does not say whether that is the provider default (thinking enabled) or reasoning off, so the row stays unmatched (the O140 rule for a board that records no effort). Version 4.1.",
+     "agent": "mini-swe-agent",
+     "ci95": 3.36,
+     "date": "2026-09-22",
+     "version": "4.1",
+     "renderedInTable": true
+    },
+    "gpt-6.1-terra-low": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "Non-matching rows at other efforts: GPT-6.1 Terra (max) = 53.33."
+    },
+    "claude-haiku-5-5-high": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "Non-matching rows at other efforts: Haiku 5.5 (max) = 40."
+    },
+    "gpt-6.1-sol-high": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "Non-matching rows at other efforts: GPT-6.1 Sol (max) = 60.91."
+    },
+    "gpt-6.1-sol-xhigh": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "Non-matching rows at other efforts: GPT-6.1 Sol (max) = 60.91."
+    },
+    "gpt-6-astra-high": {
+     "status": "exact",
+     "value": 60,
+     "sourceLabel": "GPT-6 Astra (high)",
+     "effort": "high",
+     "note": "In the page payload only, not in the default rendered table. The 2026-11-01 read of the Terminal-Bench 4.0 board listed this row at 57.88; that is a different version and is not used.",
+     "agent": "Codex",
+     "ci95": 2.79,
+     "date": "2026-09-03",
+     "version": "4.1",
+     "renderedInTable": false
+    },
+    "gpt-6-astra-xhigh": {
+     "status": "exact",
+     "value": 59.7,
+     "sourceLabel": "GPT-6 Astra (xhigh)",
+     "effort": "xhigh",
+     "note": "In the page payload only, not in the default rendered table. The 2026-11-01 read of the Terminal-Bench 4.0 board listed this row at 57.88; that is a different version and is not used.",
+     "agent": "Codex",
+     "ci95": 2.69,
+     "date": "2026-09-03",
+     "version": "4.1",
+     "renderedInTable": false
+    },
+    "claude-opus-5-5-xhigh": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "Non-matching rows at other efforts: Opus 5.5 (max) = 65.76."
+    },
+    "gpt-6-luna": {
+     "status": "exact",
+     "value": 15.15,
+     "sourceLabel": "GPT-6 Luna (max)",
+     "effort": "max",
+     "note": "The 2026-11-01 read of the Terminal-Bench 4.0 board listed this row at 16.36; that is a different version and is not used.",
+     "agent": "Codex",
+     "ci95": 2.66,
+     "date": "2026-09-22",
+     "version": "4.1",
+     "renderedInTable": true
+    },
+    "gpt-6.1-sol-low": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "Non-matching rows at other efforts: GPT-6.1 Sol (max) = 60.91."
+    },
+    "gpt-6.1-terra": {
+     "status": "exact",
+     "value": 53.33,
+     "sourceLabel": "GPT-6.1 Terra (max)",
+     "effort": "max",
+     "note": null,
+     "agent": "Codex",
+     "ci95": 3.09,
+     "date": "2026-10-26",
+     "version": "4.1",
+     "renderedInTable": true
+    },
+    "claude-opus-5-5-high": {
+     "status": "absent",
+     "value": null,
+     "sourceLabel": null,
+     "effort": null,
+     "note": "Non-matching rows at other efforts: Opus 5.5 (max) = 65.76."
+    },
+    "gpt-6-astra": {
+     "status": "exact",
+     "value": 60.3,
+     "sourceLabel": "GPT-6 Astra (max)",
+     "effort": "max",
+     "note": "The 2026-11-01 read of the Terminal-Bench 4.0 board listed this row at 58.18; that is a different version and is not used.",
+     "agent": "Codex",
+     "ci95": 2.82,
+     "date": "2026-09-03",
+     "version": "4.1",
+     "renderedInTable": true
+    },
+    "claude-sonnet-5-5": {
+     "status": "exact",
+     "value": 63.94,
+     "sourceLabel": "Sonnet 5.5 (max)",
+     "effort": "max",
+     "note": "AA's pages name this configuration '(<Effort>, Default Fallback)' (its chart label shows only the effort since 2026-11-26, and said 'with fallback' before); the source has no fallback qualifier (as on 2026-10-25 and 2026-11-01). The 2026-11-01 read of the Terminal-Bench 4.0 board listed this row at 61.82; that is a different version and is not used.",
+     "agent": "Claude Code",
+     "ci95": 3,
+     "date": "2026-09-28",
+     "version": "4.1",
+     "renderedInTable": true
+    }
+   },
+   "valueChangesSince20261101": {
+    "gemini-4-carbon": {
+     "20261101": {
+      "status": "absent",
+      "value": null
+     },
+     "20261126": {
+      "status": "exact",
+      "value": 64.55
+     }
+    },
+    "claude-opus-5-5": {
+     "20261101": {
+      "status": "exact",
+      "value": 64.85
+     },
+     "20261126": {
+      "status": "exact",
+      "value": 65.76
+     }
+    },
+    "gpt-6.1-sol": {
+     "20261101": {
+      "status": "exact",
+      "value": 58.18
+     },
+     "20261126": {
+      "status": "exact",
+      "value": 60.91
+     }
+    },
+    "mimo-v2-6-flash": {
+     "20261101": {
+      "status": "absent",
+      "value": null
+     },
+     "20261126": {
+      "status": "plausible",
+      "value": 16.06
+     }
+    },
+    "gpt-6-astra-high": {
+     "20261101": {
+      "status": "exact",
+      "value": 57.88
+     },
+     "20261126": {
+      "status": "exact",
+      "value": 60
+     }
+    },
+    "gpt-6-astra-xhigh": {
+     "20261101": {
+      "status": "exact",
+      "value": 57.88
+     },
+     "20261126": {
+      "status": "exact",
+      "value": 59.7
+     }
+    },
+    "gpt-6-luna": {
+     "20261101": {
+      "status": "exact",
+      "value": 16.36
+     },
+     "20261126": {
+      "status": "exact",
+      "value": 15.15
+     }
+    },
+    "gpt-6.1-terra": {
+     "20261101": {
+      "status": "absent",
+      "value": null
+     },
+     "20261126": {
+      "status": "exact",
+      "value": 53.33
+     }
+    },
+    "gpt-6-astra": {
+     "20261101": {
+      "status": "exact",
+      "value": 58.18
+     },
+     "20261126": {
+      "status": "exact",
+      "value": 60.3
+     }
+    },
+    "claude-sonnet-5-5": {
+     "20261101": {
+      "status": "exact",
+      "value": 61.82
+     },
+     "20261126": {
+      "status": "exact",
+      "value": 63.94
+     }
+    }
+   },
+   "configurationsNotInThe20261101Cohort": [
+    "muse-ember-xhigh",
+    "muse-ember",
+    "gpt-6.2-sol-low",
+    "gpt-6.2-sol-medium",
+    "gpt-6.2-sol-high",
+    "gpt-6.2-sol-xhigh",
+    "gpt-6.2-sol",
+    "gpt-6.2-astra-high",
+    "gpt-6.2-astra-xhigh",
+    "gpt-6.2-astra",
+    "claude-fable-5-2-xhigh",
+    "claude-fable-5-2",
+    "claude-fable-5-2-high",
+    "gemini-4-neon",
+    "gemini-4-neon-high",
+    "gpt-6.2-astra-medium",
+    "gemini-4-neon-medium"
+   ]
+  }
+ ]
+}

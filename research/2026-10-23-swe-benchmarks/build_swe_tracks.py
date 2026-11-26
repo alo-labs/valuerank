@@ -16,23 +16,24 @@ from pathlib import Path
 HERE = Path(__file__).parent
 # O68 (2026-10-25): every added-leaf board re-read in full on 2026-10-25; O132 (2026-10-30): re-read again for the AA
 # Intelligence Index v5 cohort, with LiveBench's release 2026-10-25 (O139).
-READ = HERE.parent / "2026-11-01-recapture" / "third-party"
-READ_DATE = "2026-11-01"
-COHORT_FILE = HERE.parent / "2026-11-01-recapture" / "cohort.json"
-LIVEBENCH_RELEASE = "20261025"
+READ = HERE.parent / "2026-11-26-recapture" / "third-party"
+READ_DATE = "2026-11-26"
+COHORT_FILE = HERE.parent / "2026-11-26-recapture" / "cohort.json"
+LIVEBENCH_RELEASE = "20261106"  # O211 (2026-11-26): the third release, a re-score of the category scores
+RELEASE_CUTOFF = "2026-11-26T14:00:00Z"  # the pinned release clock (regen.sh); every capture precedes it (O65)
 ROOT = HERE.parent.parent
 OWNER_MATCHED = {"mimo-v2-6-pro"}  # O54, E252
 
 LEAVES = {
     # leaf key: (coverage key, coverage file, source metadata)
     "vibeCode": ("vibe-code", "vals", {
-        "benchmark": "Vibe Code Bench v1.1", "publisher": "Vals AI", "updated": "2026-10-29",
+        "benchmark": "Vibe Code Bench v1.1.1", "publisher": "Vals AI", "updated": "2026-11-21",
         "url": "https://www.vals.ai/benchmarks/vibe-code", "harness": "OpenHands, the same for every model",
-        "metric": "test-workflow pass rate (percent), with Vals' published standard error", "unit": "percent",
+        "metric": "test-workflow pass rate (percent) under the v1.1.1 grader (O216), with Vals' published standard error", "unit": "percent",
         "sampling": {"kind": "publishedStandardError"},
     }),
     "codeMigration": ("code-migration-v1-1", "vals", {
-        "benchmark": "Code Migration v1.1", "publisher": "Vals AI", "updated": "2026-10-28",
+        "benchmark": "Code Migration v1.1", "publisher": "Vals AI", "updated": "2026-11-19",
         "url": "https://www.vals.ai/benchmarks/code-migration-v1-1", "harness": "Pi agent harness, the same for every model",
         "metric": "hidden-test pass rate (percent), with Vals' published standard error", "unit": "percent",
         "sampling": {"kind": "publishedStandardError", "tasks": 130},
@@ -42,20 +43,20 @@ LEAVES = {
     # mean of its seven categories (the release's _overall_weights), to two decimals. The configuration match is the
     # coverage capture's (one LiveBench row per model, at its top effort); the categories come from the release table.
     "livebench2Overall": ("livebench2-overall", "other", {
-        "benchmark": "LiveBench 2.0 Overall (release 2026-10-25)", "publisher": "LiveBench", "updated": "2026-10-25",
-        "updatedBasis": "the site's displayed release date ('25 October 2026'); the release files' HTTP Last-Modified is 2026-10-30",
-        "url": "https://livebench.ai/data/20261025/table.csv", "harness": "LiveBench's own, one run per model at its top effort",
+        "benchmark": "LiveBench 2.0 Overall (release 2026-11-06)", "publisher": "LiveBench", "updated": "2026-11-06",
+        "updatedBasis": "the release label (20261106); the release files' HTTP Last-Modified is 2026-11-24",
+        "url": "https://livebench.ai/data/20261106/table.csv", "harness": "LiveBench's own, one run per model at its top effort",
         "metric": "LiveBench's weighted Overall of the seven category scores (Long Agentic 2, Coding 1.5, Design 1.5, Reasoning, Browser, Data Analysis and Research 1; O67), 0-100",
         "unit": "percent",
         "sampling": {"kind": "categories", "tasks": {"long_agentic": 18, "reasoning": 4, "coding": 29, "browser": 25, "data_analysis": 3,
                                                      "research": 22, "design": 25}},
     }),
     "aiCodingDaily": ("aicd", "other", {
-        "benchmark": "AI Coding Daily LLM Coding Leaderboard (Laravel quality + React-TS quality + edge-case testing, max 60)",
-        "publisher": "AI Coding Daily (Povilas Korop)", "updated": "2026-10-27", "url": "https://aicodingdaily.com/leaderboard",
+        "benchmark": "AI Coding Daily LLM Coding Leaderboard (Laravel quality + React-TS quality + Python quality + edge-case testing, max 80; O215)",
+        "publisher": "AI Coding Daily (Povilas Korop)", "updated": "2026-11-25", "url": "https://aicodingdaily.com/leaderboard",
         "harness": "varies by model: Claude Code, Codex CLI, OpenCode, Devin, DeepSeek's harness (named on each record)",
-        "metric": "judged points out of 60 (the 10-point bug-finding column is excluded: it overlaps Bug Hunt)", "unit": "points of 60",
-        "sampling": {"kind": "tasks", "tasks": 6, "unit": "graded projects (Laravel, React-TS and 4 edge-case projects)"},
+        "metric": "judged points out of 80 (the 10-point bug-finding column and the consistency penalty are excluded: bug finding overlaps Bug Hunt, O215)", "unit": "points of 80",
+        "sampling": {"kind": "tasks", "tasks": 7, "unit": "graded projects (Laravel, React-TS, Python and 4 edge-case projects)"},
     }),
 }
 
@@ -103,7 +104,7 @@ def select_aicd(model_id: str, label: str, board: dict[str, list[dict]]) -> dict
 # placed by the bound the archived read supports: shown "N hours ago" at the read instant, it was tested no later than
 # the read minus N - 1 hours (reviewer 72: valid whether the board rounds, truncates or ceils the age; I60 L2's N - 1/2
 # assumed rounding), and not before the day's UTC midnight. No minute is claimed.
-AICD_READ = ("research/2026-11-01-recapture/third-party/aicd/leaderboard-allrows-parsed.json", "2026-11-01T06:02:22Z")
+AICD_READ = ("research/2026-11-26-recapture/third-party/aicd/leaderboard-allrows-parsed.json", "2026-11-26T03:08:19Z")
 _AGE = re.compile(r"\b(\d+) (minute|hour)s? ago\b")
 
 
@@ -132,7 +133,7 @@ def check_row_date(row: dict, cutoff: str, read: tuple[str, str] = AICD_READ) ->
 
 
 def aicd_points(row: dict) -> float:
-    return round(float(row["laravel"]) + float(row["react"]) + float(row["edge"]), 2)
+    return round(float(row["laravel"]) + float(row["react"]) + float(row["python"]) + float(row["edge"]), 2)
 
 
 def main() -> None:
@@ -146,7 +147,7 @@ def main() -> None:
     table = {row["model"]: row for row in csv.DictReader((READ / "livebench" / f"table-{LIVEBENCH_RELEASE}.csv").open())}
     weights = json.loads((READ / "livebench" / f"weights-{LIVEBENCH_RELEASE}.json").read_text())
     board = aicd_rows()
-    cutoff = json.loads((ROOT / "data" / "aa" / "aa_v432_snapshot.json").read_text())["capturedAt"]  # the release cutoff (O65)
+    cutoff = RELEASE_CUTOFF  # the release cutoff (O65): the pinned release clock, after every capture
     records, sources = [], {}
     for leaf, (key, origin, meta) in LEAVES.items():
         sources[leaf] = {**meta, "capturedAt": captured[origin]}

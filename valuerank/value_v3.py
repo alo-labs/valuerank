@@ -47,7 +47,7 @@ from valuerank.clock import utcnow
 from valuerank.paths import DATA, ROOT
 from valuerank.plan_costs import COST_WEIGHT_PCT
 
-METHODOLOGY_VERSION = "3.0.0"
+METHODOLOGY_VERSION = "3.1.0"
 BASKET_VERSION = "SDLC basket v1"
 BETA = COST_WEIGHT_PCT / 100.0
 BASES = ("api", "plan")
@@ -57,6 +57,7 @@ BUG_HUNT_HALF_WIDTH = 0.05  # owner means of bugs fixed are published to 0.1 bug
 # O136: the v5 successors' page fields (FrontierCode 2.0, HLE-Diamond, CritPt v2 hard subset, Terminal-Bench-Science).
 FRACTION_LEAVES = {
     "frontierCode": "frontierCode20",
+    "gdpPdf": "gdpPdfAllPass",
     "automationBench": "automationBenchPartialScore",
     "lcr": "lcr",
     "hle": "hleDiamond",
@@ -74,13 +75,13 @@ SAMPLING_STREAM = "S1T"  # O39: benchmark sampling noise, independent-task appro
 # methodology; FrontierCode 1.1 Main's 100 tasks; Bug Hunt's 105 planted bugs).
 LCR_TASKS = 100  # AA-LCR v1.1's documents; v5 runs it outside the Index, so it is no longer a basket component (O137)
 SAMPLING_TASKS = {
-    "frontierCode": basket.INDEX_SDLC_TASKS["frontiercode-2-0"], "terminalBench": basket.INDEX_SDLC_TASKS["terminalbench-4-0"],
+    "frontierCode": basket.INDEX_SDLC_TASKS["frontiercode-2-0"], "terminalBench": basket.INDEX_SDLC_TASKS["terminalbench-4-1"], "gdpPdf": basket.INDEX_SDLC_TASKS["gdp-pdf"],
     "bugHunt": 105, "automationBench": basket.INDEX_SDLC_TASKS["automationbench-aa"], "lcr": LCR_TASKS,
     "tbScience": basket.INDEX_SDLC_TASKS["terminal-bench-science"], "hle": basket.INDEX_RESIDUAL_TASKS["hle-diamond"],
     "critpt": basket.INDEX_RESIDUAL_TASKS["critpt-v2-hard"], "omniscience": basket.INDEX_RESIDUAL_TASKS["omniscience"],
-    # O53-O55: AI Coding Daily's six graded projects (judged points read as a binomial share, an assumption). Vals
+    # O53-O55: AI Coding Daily's seven graded projects (judged points read as a binomial share, an assumption). Vals
     # publishes a standard error per record, which the stream reads instead; LiveBench 2.0 Overall is read per category.
-    "aiCodingDaily": 6,
+    "aiCodingDaily": 7,
 }
 # O61, E264, O67, E311: LiveBench 2.0 Overall is the release's weighted mean of seven category means, so its SD is the weighted
 # mean of seven category variance bounds p(1 - p)/n (exact for binary outcomes, an upper bound for fractional part scores). Counts are LiveBench's published task counts; Reasoning and Data Analysis publish only their parts (4
@@ -96,14 +97,14 @@ SAMPLING_ASSUMPTIONS = (
     "GDPval-AA: each row's rating interval as AA's model page displays it, read as a 95% normal interval (AA states no level), SD = half-width / 1.96",
     f"AA-Omniscience: each of {SAMPLING_TASKS['omniscience']:,} questions scores +1, 0 or -1, with the shares from AA's accuracy and hallucination rate",
     "Vals boards (Vibe Code Bench v1.1, Code Migration v1.1): Vals' published standard error per record, read as the leaf's SD",
-    "AI Coding Daily: judged points over its six graded projects read as a binomial share of 60 points (an assumption; the board publishes no error)",
+    "AI Coding Daily: judged points over its seven graded projects read as a binomial share of 80 points (an assumption; the board publishes no error)",
 )
 MEASUREMENT_STREAM = "S1M"  # E162/E165: S1 plus conventional range sensitivity inside published 95% intervals (Terminal-Bench today)
 # E165: Terminal-Bench documents a 95% confidence interval (its leaderboard whiskers; accuracy_ci95_half_width with
 # n_trials) but not its estimand, method or sampling unit, so S1M's draws inside it are a conventional sensitivity.
 TB_INTERVAL_CONTRACT = {
     "leaf": "terminalBench",
-    "source": "https://www.tbench.ai/leaderboard/terminal-bench/4.0",
+    "source": "https://www.tbench.ai/leaderboard/terminal-bench/4.1",
     "sourceStatement": "The whiskers span the 95% confidence interval",
     "confidenceLevel": 0.95,
     "sourceFields": ["accuracy_ci95_half_width", "n_trials"],
@@ -140,7 +141,7 @@ LEAF_SEARCH_MAX_AGE_DAYS = 7
 
 
 # E237: the benchmark version a gap fill must state (O36: "the same benchmark version on the exact configuration").
-SUPPLEMENT_VERSIONS = {"bugHunt": "Bug Hunt Bench", "frontierCode": "FrontierCode 2.0", "terminalBench": "Terminal-Bench 4.0"}
+SUPPLEMENT_VERSIONS = {"bugHunt": "Bug Hunt Bench", "frontierCode": "FrontierCode 2.0", "terminalBench": "Terminal-Bench 4.1"}
 
 
 def check_comparability(entry: dict) -> None:
@@ -185,7 +186,7 @@ def track_records(documents: dict) -> dict:
     return {(record["modelId"], record["leaf"]): {**record, "sourceMeta": tracks["sources"][record["leaf"]]} for record in tracks["records"]}
 
 
-TRACK_UNITS = {"percent": q.percent_z, "points of 60": q.aicd_z}
+TRACK_UNITS = {"percent": q.percent_z, "points of 80": q.aicd_z}
 
 
 def leaf_evidence(model_id: str, effort: str | None, page: dict, tb4_rows: list[dict], bug_hunt: dict | None,
@@ -215,15 +216,16 @@ def leaf_evidence(model_id: str, effort: str | None, page: dict, tb4_rows: list[
             {"source": "Bug Hunt Bench owner-published runs", "configuration": bug_hunt.get("evaluatedModel"), "harness": bug_hunt.get("harness"), "runs": bug_hunt.get("sampleN"),
              "planted": bug_hunt["fixedOf105"], "unplanted": bug_hunt["extras"]},
             "bugHunt", f"models[modelId={model_id}].fixedOf105 + models[modelId={model_id}].extras")
-    # O37: AA's own Terminal-Bench 4.0 run (one harness, every configuration) is the leaf; tbench.ai fills a gap.
-    if page.get("terminalBench40") is not None:
-        add("terminalBench", 100.0 * page["terminalBench40"], q.percent_z(100.0 * page["terminalBench40"]),
-            {"source": "AA Terminal-Bench 4.0 run (Intelligence Index, mini-SWE-agent harness)", "agent": "mini-SWE-agent"},
-            "snapshot", f"{page_path}.terminalBench40")
+    # O37: AA's own Terminal-Bench 4.1 run (one harness, every configuration) is the leaf; tbench.ai fills a gap. O136 precedent: AA's
+    # Index v5.0.2 runs 4.1 (the same 66 tasks) where v5.0 ran 4.0, so the leaf takes the successor at its weight.
+    if page.get("terminalBench41") is not None:
+        add("terminalBench", 100.0 * page["terminalBench41"], q.percent_z(100.0 * page["terminalBench41"]),
+            {"source": "AA Terminal-Bench 4.1 run (Intelligence Index, mini-SWE-agent harness)", "agent": "mini-SWE-agent"},
+            "snapshot", f"{page_path}.terminalBench41")
     tb4 = None if "terminalBench" in observations else exact_match.select_tb4_row(model_id, effort, tb4_rows)
     if tb4 is not None:
         add("terminalBench", tb4["resolutionRatePct"], q.percent_z(tb4["resolutionRatePct"], TB4_HALF_WIDTH_PCT),
-            {"source": "tbench.ai Terminal-Bench 4.0 leaderboard", "configuration": tb4["model"], "agent": tb4.get("agent"),
+            {"source": "tbench.ai Terminal-Bench 4.1 leaderboard", "configuration": tb4["model"], "agent": tb4.get("agent"),
              "ci95HalfWidthPct": tb4.get("uncertaintyPct")},
             "tb4", f"rows[model={tb4['model']}, agent={tb4.get('agent')}].resolutionRatePct")
     if page.get("gdpval") is not None:
@@ -460,11 +462,20 @@ BOUND_UNAVAILABLE = "unavailable: a category priced at zero when AA valued the c
 NOT_IN_FORCE_FLAGS = {"superseded": "AA cost at superseded price", "promotional": "AA cost at standard price during a promotion"}
 
 
+# AA-published cache-write premiums over the input price, by provider (every captured row through 2026-11-01: OpenAI and Anthropic 1.25, Google none).
+CACHE_WRITE_PREMIUM = {"openai": 1.25, "anthropic": 1.25}
+
+
 def displayed_prices(page: dict) -> dict | None:
     """AA's displayed per-category prices (USD per 1M tokens); cache writes at the input rate where none is listed."""
 
     prices = {"input": page.get("price1mInputTokens"), "cacheRead": page.get("cacheHitPrice"), "output": page.get("price1mOutputTokens")}
-    prices["cacheWrite"] = page.get("cacheWritePrice") if page.get("cacheWritePrice") is not None else prices["input"]
+    prices["cacheWrite"] = page.get("cacheWritePrice")
+    if prices["cacheWrite"] is None and isinstance(prices["input"], (int, float)) and not isinstance(prices["input"], bool):
+        # AA's pages carried a cacheWritePrice through the 2026-11-01 capture (1.25x the input price for every OpenAI and Anthropic
+        # row, the input price for the others) and no longer do; its Index cost still prices writes that way, so the registered rule
+        # supplies the price (2026-11-26) where the page lists none.
+        prices["cacheWrite"] = prices["input"] * CACHE_WRITE_PREMIUM.get((page.get("creator") or {}).get("slug"), 1.0)
     # A cache category may be free (E185); uncached input and output must carry a price.
     valid = all(isinstance(value, (int, float)) and not isinstance(value, bool) and math.isfinite(value) and value >= 0 for value in prices.values())
     return prices if valid and prices["input"] > 0 and prices["output"] > 0 else None
@@ -644,7 +655,7 @@ def source_clocks(documents: dict) -> list[dict]:
     tb4 = documents.get("tb4") or {}
     if tb4:
         # I58 M2: the leaderboard scrape's own instant, not the build stamp of the derived file.
-        clocks.append({"source": "tbench.ai Terminal-Bench 4.0 leaderboard", "artifact": "data/tb4.json",
+        clocks.append({"source": "tbench.ai Terminal-Bench 4.1 leaderboard", "artifact": "data/tb4.json",
                        "capturedAt": (tb4.get("source") or {}).get("capturedAt") or tb4.get("observedAt"), "sourceUpdated": tb4.get("sourceUpdated")})
     cognition = (documents.get("leafEvidence") or {}).get("cognitionCapture")
     if cognition:
@@ -2326,8 +2337,8 @@ def common_leaf_diagnostic(rows: list[dict], per_row: dict, frozen: dict, qualit
 
 
 # E64/E149: the standing cost-component removal. The Coding Agent Index runs Terminal-Bench v4 too, so the
-# column removes AA's Index-run Terminal-Bench 4.0 cost; quality stays primary (E146 governs quality deletion).
-STANDING_COST_REMOVAL = "terminalbench-4-0"
+# column removes AA's Index-run Terminal-Bench 4.1 cost; quality stays primary (E146 governs quality deletion).
+STANDING_COST_REMOVAL = "terminalbench-4-1"
 FIXED_ANCHOR_LABEL = "cost-component removal, original anchors"
 RECALIBRATED_LABEL = "alternative workload, recalibrated anchors"
 FIXED_MULTIPLE_LABEL = "fixed-multiple arithmetic stress (not identified Plan economics for the altered workload)"
@@ -2871,7 +2882,7 @@ def announced_change_sensitivity(plan_rows: list[dict], per_plan: dict, frozen: 
     return {"label": ANNOUNCED_CHANGE_LABEL, "rows": out}
 
 
-CROSSCHECK_COMPONENT = "terminalbench-4-0"
+CROSSCHECK_COMPONENT = "terminalbench-4-1"
 
 
 # O182 (2026-11-03, on reviewer 103, amending O160): while a ranking's workload cross-check (E41) reads "low agreement" (τ_b
@@ -2906,7 +2917,7 @@ def withhold_bars(result: dict, gate: str | None) -> dict:
 
 
 def workload_cross_check(rows: list[dict], main: str, components: list[str] | None = None) -> dict:
-    """E41, E68 (reviewer 77): Terminal-Bench 4.0's cost per solved task on AA's own execution (the component's cost per
+    """E41, E68 (reviewer 77): Terminal-Bench 4.1's cost per solved task on AA's own execution (the component's cost per
     attempted task over AA's resolved fraction, never a tbench.ai gap fill) against the basket-cost rank, over the main-
     workload rows that have both; the statistic is suppressed below 8 rows, and the panel and its size are always published."""
 
@@ -2921,12 +2932,12 @@ def workload_cross_check(rows: list[dict], main: str, components: list[str] | No
         if value is not None:
             per_solve[row["id"]], basket[row["id"]] = value, row["cost"]["costUsd"]
             per_attempt[row["id"]] = component["costPerTaskUsd"]
-    result = diagnostics.workload_crosscheck(per_solve, basket, label="Terminal-Bench 4.0 cost per solved task (AA execution) against basket cost")
+    result = diagnostics.workload_crosscheck(per_solve, basket, label="Terminal-Bench 4.1 cost per solved task (AA execution) against basket cost")
     # O183 (2026-11-05, on reviewer 105, amending O182): cost per solved task also reads success, so a ranking whose basket
     # tracks the execution's cost per attempted task exactly can still read low agreement; the like-for-like check (cost per
     # attempted task against basket cost) is the one that gates labels, the success-adjusted one stays a diagnostic.
-    attempt = diagnostics.workload_crosscheck(per_attempt, basket, label="Terminal-Bench 4.0 cost per attempted task (AA execution) against basket cost")
-    return {**result, "benchmark": "Terminal-Bench 4.0", "n": len(result["panel"]), "minRows": diagnostics.CROSSCHECK_MIN_ROWS,
+    attempt = diagnostics.workload_crosscheck(per_attempt, basket, label="Terminal-Bench 4.1 cost per attempted task (AA execution) against basket cost")
+    return {**result, "benchmark": "Terminal-Bench 4.1", "n": len(result["panel"]), "minRows": diagnostics.CROSSCHECK_MIN_ROWS,
             "attemptCheck": {key: attempt[key] for key in ("tau", "interval", "warning")},
             "attribution": cross_check_attribution(rows, per_solve, components) if components and result["tau"] is not None else None}
 
@@ -3646,7 +3657,8 @@ def agent_effects(configurations: list[dict]) -> dict:
                 frontier.extend(a for model in shared if current in agents_of[model] for a in agents_of[model])
         seen |= group
         groups.append(group)
-    return {agent: effects[agent] - statistics.fmean(effects[item] for item in group) for group in groups for agent in group}
+    # A group is a set, whose order changes with the process's hash seed; sorted, the published order is the same on every run.
+    return {agent: effects[agent] - statistics.fmean(effects[item] for item in group) for group in groups for agent in sorted(group)}
 
 
 HARNESS_UNEVALUABLE = "no model is listed under two or more agents in AA's Coding Agent Index capture, so no agent effect is identified (O123)"
@@ -3872,8 +3884,8 @@ def rank_separability(assembled: dict, per_row: dict, exchange: dict | None = No
 
     sd = {row["id"]: (1.0 - BETA) * quality_sd(row) for row in assembled["rows"]}
     wide = {row["id"]: (1.0 - BETA) * quality_sd(row, GDPVAL_WIDE_SD) for row in assembled["rows"]}
-    # E263: AI Coding Daily's noise reads its six graded projects as n = 6 trials of the points share (wide); the narrow
-    # reading, n = 60 (one trial per point), is a named sensitivity in the ranking that has the leaf.
+    # E263: AI Coding Daily's noise reads its seven graded projects as n = 7 trials of the points share (wide); the narrow
+    # reading, n = 80 (one trial per point), is a named sensitivity in the ranking that has the leaf.
     narrow = {row["id"]: (1.0 - BETA) * quality_sd(row, tasks_of={**SAMPLING_TASKS, "aiCodingDaily": AICD_NARROW_TASKS}) for row in assembled["rows"]}
     # O48: the Plan basis is ranked over plan rows; a plan row carries its configuration's quality noise.
     plan_rows = (plan_assembled or assembled)["rows"]
@@ -3989,7 +4001,7 @@ def clipped_tolerance(scores: dict, exchange: dict, median: float | None, doubli
 
 SEPARABILITY_CORRELATIONS = (0.0, 0.3, 0.6)
 BUG_HUNT_RHOS = (-1.0, 0.0, 1.0)  # E309: planted/unplanted correlation stress endpoints (not estimates)
-AICD_NARROW_TASKS = 60  # E263: one trial per point of 60, the narrow reading of AI Coding Daily's noise
+AICD_NARROW_TASKS = 80  # E263: one trial per point of 80, the narrow reading of AI Coding Daily's noise
 GDPVAL_WIDE_SD = 26.0  # I26, I60: AA's displayed +/-26 Elo for Claude Opus 5.5 read as one SD for every row, the wide reading of an interval whose level is unstated
 SEPARABILITY_BIAS = ("net direction not established: treating two rows' errors as independent overstates the threshold, because every row "
                      "is scored on the same tasks and attempts are averaged within a task; sources it omits (run-to-run and harness "

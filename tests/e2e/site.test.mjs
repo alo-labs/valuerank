@@ -154,10 +154,9 @@ describe('rankings instrument', () => {
   test('filters, sorting, columns and comparison all live in the URL', async () => {
     const { page, context, errors } = await open('/rankings/');
     // O48/O53: the max-effort ranking's Plan basis has one row per configuration and plan, then every roster model it does not
-    // rank; under v5 the roster is the 37-configuration cohort (O132, O145): 30 plan rows and 28 unranked models. O198 gives
-    // DeepSeek V4.1 Flash and Gemini 4 Argon an OpenCode Go row in place of their API-fallback row and adds an OpenCode Go row
-    // for Claude Haiku 5.5 (max), GPT-6 Luna (max) and MiMo-V2.6-Pro.
-    assert.equal(await page.locator('#rankings-body tr').count(), 58);
+    // rank; at the 2026-11-26 release the roster is the 45-configuration cohort (O145): 19 plan rows (5 ranked configurations) and 40
+    // unranked models. O198 gives GPT-6 Luna (max) an OpenCode Go row beside its plan rows.
+    assert.equal(await page.locator('#rankings-body tr').count(), 59);
 
     await page.locator('#filters input[name="provider"][value="OpenAI"]').check();
     assert.match(await query(page), /provider=OpenAI/);
@@ -284,15 +283,15 @@ describe('charts, model, plans and listing pages', () => {
     await context.close();
   });
 
-  test('the models index lists all 37 models and links to their pages', async () => {
+  test('the models index lists all 45 models and links to their pages', async () => {
     const { page, context } = await open('/models/');
-    assert.equal(await page.locator('#models-table tbody tr').count(), 37);
+    assert.equal(await page.locator('#models-table tbody tr').count(), 45);
     // O33: each ranked effort of a family has its own row and page.
     assert.equal(await page.locator('#models-table a.model-name[href$="/models/gpt-6-1-sol-xhigh/"]').innerText(), 'GPT-6.1 Sol (xhigh)');
     await page.locator('#models-table a.model-name', { hasText: /^GPT-6\.1 Sol \(max\)$/ }).click();
     await page.waitForURL(/\/models\/gpt-6-1-sol\/$/);
     assert.equal(await page.locator('h1').innerText(), 'GPT-6.1 Sol (max)');
-    assert.equal(await page.locator('#dimension-table tbody tr').count(), 13); // the max-effort ranking's thirteen leaves (O55, O61)
+    assert.equal(await page.locator('#dimension-table tbody tr').count(), 14); // the max-effort ranking's fourteen leaves (O55, O61, O210)
     assert.equal(await page.locator('nav[aria-label="Primary"] a[aria-current="page"]').innerText(), 'Models');
     await context.close();
   });
@@ -308,7 +307,7 @@ describe('charts, model, plans and listing pages', () => {
 
   test('legacy benchmarks pages keep working: Terminal-Bench shows its table and a chart placeholder', async () => {
     const { page, context } = await open('/benchmarks/terminal-bench-4/');
-    assert.equal(await page.locator('#official-rows tbody tr').count(), 23);
+    assert.equal(await page.locator('#official-rows tbody tr').count(), 54); // the Terminal-Bench 4.1 leaderboard's rows (data/tb4.json rowN)
     await page.locator('[data-chart="tb4"]').scrollIntoViewIfNeeded();
     await page.waitForFunction(() => document.querySelector('[data-chart="tb4"]').dataset.chartStatus === 'error');
     await context.close();

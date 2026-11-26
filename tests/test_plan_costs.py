@@ -503,6 +503,12 @@ def test_every_claude_model_resolves_to_a_claude_plan_route_at_opus_55_multiples
     assert opus["provider"] == "Anthropic" and opus["evidenceClass"] == "controlled_account_workload_projection"
     for model_id in claude_ids:
         route = plan_costs.select_best_route(model_id, routes)
+        if model_id.startswith("claude-fable-5-2"):
+            # O217: Fable 5.2 has its own meter (a Fable meter capped at half the weekly pool), and the owner chose Opus 5.5's multiples
+            # as a labelled assumption on the Max plans; Claude Pro is excluded because Fable 5.2 is on Pro only through usage credits.
+            assert route is not None and route["evidenceClass"] == "user_assumption" and route["sourceModel"] == "Opus 5.5", model_id
+            assert route["plan"] in {"Claude Max 5x", "Claude Max 20x"} and "O217" in route["notes"]
+            continue
         assert route is not None, model_id
         assert route["provider"] == "Anthropic"
         if model_id == "claude-fable-5-1":

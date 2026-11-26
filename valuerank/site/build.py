@@ -137,7 +137,7 @@ LEGACY_CODING_AGENTS = PACKAGE_DIR / "legacy" / "coding-agents-v0.3.html"
 ARCHIVE_PATH = "/archive/coding-agents-v0.3/"
 ARCHIVE_CARD = "/og/archive.png"
 REDIRECTS = {
-    "/tb4/": ("/benchmarks/terminal-bench-4/", "Terminal-Bench 4.0 has moved"),
+    "/tb4/": ("/benchmarks/terminal-bench-4/", "Terminal-Bench 4.1 has moved"),
     "/coding-agents/": (ARCHIVE_PATH, "The coding-agents snapshot is archived"),
 }
 
@@ -206,8 +206,8 @@ def pages(bundle) -> list[tuple[str, str, dict]]:
          f"Benchmark sources · ValueRank {version}",
          "The benchmarks behind each dimension, their owners, versions, observation dates and coverage."),
         ("/benchmarks/terminal-bench-4/", "benchmark_tb4.html", viewmodel.tb4_page(bundle), "tb4",
-         "Terminal-Bench 4.0: resolution rate versus cost · ValueRank",
-         "The official Terminal-Bench 4.0 leaderboard against run cost, with ValueRank cohort coverage and labelled provider claims."),
+         "Terminal-Bench 4.1: resolution rate versus cost · ValueRank",
+         "The official Terminal-Bench 4.1 leaderboard against run cost, with ValueRank cohort coverage and labelled provider claims."),
         ("/methodology/", "methodology.html", viewmodel.methodology_page(bundle), "methodology",
          f"Methodology · ValueRank {version}",
          "How ValueRank scores models: dimensions, weights, renormalisation, evidence grades and limitations, with a worked example."),
@@ -237,7 +237,7 @@ def pages(bundle) -> list[tuple[str, str, dict]]:
 
 
 def remove_stale_model_pages(out_dir: Path, keep: set[str]) -> list[Path]:
-    """Delete generated model pages whose model left the roster."""
+    """Delete the generated page, public data document and share card of every model that left the roster."""
 
     removed = []
     models_dir = out_dir / "models"
@@ -246,6 +246,13 @@ def remove_stale_model_pages(out_dir: Path, keep: set[str]) -> list[Path]:
             if child.is_dir() and child.name not in keep:
                 shutil.rmtree(child)
                 removed.append(child)
+    # The per-model JSON the pages read and the share cards are written per model too; a retired model's would otherwise stay.
+    for directory, pattern in ((out_dir / "data" / "models", "*.json"), (out_dir / "og" / "models", "*.png")):
+        if directory.exists():
+            for child in sorted(directory.glob(pattern)):
+                if child.stem not in keep:
+                    child.unlink()
+                    removed.append(child)
     return removed
 
 
@@ -269,7 +276,7 @@ def main(*, root: Path = ROOT, data: Path = DATA, out: Path | None = None, templ
     written.append(archive_legacy_page(
         env, LEGACY_CODING_AGENTS, out_dir.joinpath(*ARCHIVE_PATH.strip("/").split("/")) / "index.html",
         archive_date="2026-10-18", archive_href="/benchmarks/",
-        note="This coding-agents v0.3 snapshot (July 2026, Terminal-Bench 2.1) is kept for provenance and is no longer updated. Current results live in the ValueRank rankings and the Terminal-Bench 4.0 benchmark page.",
+        note="This coding-agents v0.3 snapshot (July 2026, Terminal-Bench 2.1) is kept for provenance and is no longer updated. Current results live in the ValueRank rankings and the Terminal-Bench 4.1 benchmark page.",
         og_image=BASE_URL + ARCHIVE_CARD,
     ))
     written.append(write_sitemap(out_dir, BASE_URL, [path for path, _template, _page in pages(bundle)] + [ARCHIVE_PATH], lastmod=bundle.rankings["observedAt"][:10]))

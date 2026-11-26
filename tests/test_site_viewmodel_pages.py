@@ -56,20 +56,33 @@ def test_export_writes_frontier_tier_fields_and_model_inclusion(data, tmp_path):
     assert {"tier", "configuration", "intelligenceGap", "footnote"} <= set(model_doc["frontier"])
 
 
-def test_models_index_lists_every_roster_model_ranked_first(bundle):
+def test_models_index_lists_every_roster_model_ranked_first(bundle, tmp_path):
     page = viewmodel.models_page(bundle)
     models = page["models"]
-    assert len(models) == 37
+    # 2026-11-26: 45 configurations, 5 ranked in the max-effort ranking (data/scores.json v3.rows).
+    assert len(models) == 45
     assert {"slug", "name", "developer", "rank", "overall", "grade", "rankingEligible", "coveragePct"} <= set(models[0])
     ranked = [m for m in models if m["rank"]["plan"] is not None]
     plan_ranks = [m["rank"]["plan"] for m in ranked]
-    # O184: eight main-workload rows ranked, then the subset-workload row ranked only within its workload.
-    assert plan_ranks == sorted(plan_ranks) and plan_ranks[0] == 1 and len(ranked) == 8
-    assert models[:8] == ranked and models[8]["slug"] == "mimo-v2-6-pro"
-    assert all(m["rank"]["plan"] is None for m in models[8:])
+    assert plan_ranks == sorted(plan_ranks) and plan_ranks[0] == 1 and len(ranked) == 5
+    assert models[:5] == ranked and all(m["rank"]["plan"] is None for m in models[5:])
     # O51: every configuration with the max-effort ranking's full set has a cost and a rank there.
-    assert [m["slug"] for m in models[9:] if m["rankingEligible"]] == []
-    assert page["rankedCount"] == 9 and page["unrankedCount"] == 28
+    assert [m["slug"] for m in models[5:] if m["rankingEligible"]] == []
+    assert page["rankedCount"] == 5 and page["unrankedCount"] == 40
+    # O184: a subset-workload row, ranked only within its workload, follows the ranked rows. This release has no subset row,
+    # so a copy of the data gives GPT-6 Luna (max) the engine's outcome for one.
+    copy = tmp_path / "data"
+    copy.mkdir()
+    for source in DATA.glob("*.json"):
+        shutil.copy2(source, copy / source.name)
+    scores = json.loads((copy / "scores.json").read_text())
+    luna = next(row for row in scores["v3"]["rows"] if row["id"] == "gpt-6-luna")
+    luna["cost"].update({"subset": True, "workload": "subset-gpt-6-luna"})
+    luna["api"].update({"rank": None, "rankWithinWorkload": 1, "rankNote": "O184: ranked only within its own subset workload"})
+    luna["planScore"].update({"rank": None, "rankWithinWorkload": 1})
+    (copy / "scores.json").write_text(json.dumps(scores))
+    moved = viewmodel.models_page(viewmodel.build_bundle(copy))["models"]
+    assert [m["rank"]["plan"] is not None for m in moved[:5]] == [True, True, True, True, False] and moved[4]["slug"] == "gpt-6-luna"
 
 
 def test_index_models_carry_the_coverage_object(bundle):

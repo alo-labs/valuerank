@@ -121,3 +121,6 @@ To continue:
 | 173 | GLM 5.3 (eight sections) | r236 | CLEAN; 1 of 2 |
 | 174 | Kimi K3 (eight sections) | r236 | CLEAN; Kimi seat DONE |
 | 175 | GLM 5.3 (eight sections) | r236 | CLEAN; GLM seat DONE. All six seats done (O205); final draft r236 |
+| 176 | Kimi K3 (three sections of the changed-text extract) | r237 | two Mediums (wording), one High left as a design candidate (AA's cache-pricing page), folded into r237 |
+| 177 | GLM 5.3 (three sections of the same extract) | r237 | one High and two Mediums real (anchor-reference sentence, stale rules for models that left the cohort, near-point sum), folded into r237 |
+| 178 | Kimi K3 and GLM 5.3 (confirmation on the folded sentences) | r237 | no Critical or High that stands; the re-freeze paragraph and wording folded; the O209 targeted check is complete |

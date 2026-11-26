@@ -4512,10 +4512,12 @@
  },
  "v2_0": {
   "models": [
+   "SWE-2.1",
    "SWE-2",
    "Beam 1.0",
-   "DeepSeek V4.1 Flash",
+   "DeepSeek V4.1 Flash 1017",
    "Claude Fable 5.1",
+   "Claude Fable 5.2",
    "GLM 5.3",
    "GLM 5.3 Flash",
    "GPT-5.5",
@@ -4524,12 +4526,18 @@
    "GPT-6 Luna",
    "GPT-6 Sol",
    "GPT-6.1 Sol",
+   "GPT-6.2 Astra",
+   "GPT-6.2 Sol",
    "Gemini 4 Argon",
    "Gemini 4 Carbon",
+   "Gemini 4 Hydrogen",
+   "Gemini 4 Neon",
    "Grok 4.7",
    "Claude Haiku 5.5",
    "Inkling Small",
+   "Inkling 2 Small",
    "Kimi K3",
+   "Kimi K3.1 Pro",
    "Mistral Large 4",
    "Muse Wonder 1.0",
    "Claude Opus 4.8",
@@ -4537,81 +4545,113 @@
    "Claude Opus 5.5",
    "Claude Sonnet 5.5",
    "SWE-1.6",
-   "SWE-1.7"
+   "SWE-1.7",
+   "SWE-2 Flash",
+   "Muse Spark Open"
   ],
   "colors": {
-   "SWE-2": "#3ABBDED9",
-   "Beam 1.0": "#786FE1D9",
-   "DeepSeek V4.1 Flash": "#786FE1D9",
-   "Claude Fable 5.1": "#FF5833D9",
-   "GLM 5.3": "#786FE1D9",
-   "GLM 5.3 Flash": "#786FE1D9",
-   "GPT-5.5": "#10B552D9",
-   "GPT-5.6 Sol": "#10B552D9",
-   "GPT-6 Astra": "#10B552D9",
-   "GPT-6 Luna": "#10B552D9",
-   "GPT-6 Sol": "#10B552D9",
-   "GPT-6.1 Sol": "#10B552D9",
+   "SWE-2.1": "#4BB8E0D9",
+   "SWE-2": "#7CD0F0D9",
+   "Beam 1.0": "#264841D9",
+   "DeepSeek V4.1 Flash 1017": "#5E0E36D9",
+   "Claude Fable 5.1": "#EC6442D9",
+   "Claude Fable 5.2": "#EC6442D9",
+   "GLM 5.3": "#B8B2F9D9",
+   "GLM 5.3 Flash": "#B8B2F9D9",
+   "GPT-5.5": "#6FC986D9",
+   "GPT-5.6 Sol": "#6FC986D9",
+   "GPT-6 Astra": "#6FC986D9",
+   "GPT-6 Luna": "#6FC986D9",
+   "GPT-6 Sol": "#6FC986D9",
+   "GPT-6.1 Sol": "#6FC986D9",
+   "GPT-6.2 Astra": "#6FC986D9",
+   "GPT-6.2 Sol": "#6FC986D9",
    "Gemini 4 Argon": "#D1A700D9",
    "Gemini 4 Carbon": "#D1A700D9",
-   "Grok 4.7": "#786FE1D9",
-   "Claude Haiku 5.5": "#FF5833D9",
-   "Inkling Small": "#D1A700D9",
-   "Kimi K3": "#459487D9",
-   "Mistral Large 4": "#DB58C8D9",
-   "Muse Wonder 1.0": "#2050CFD9",
-   "Claude Opus 4.8": "#FF5833D9",
-   "Claude Opus 5": "#FF5833D9",
-   "Claude Opus 5.5": "#FF5833D9",
-   "Claude Sonnet 5.5": "#FF5833D9",
-   "SWE-1.6": "#3ABBDED9",
-   "SWE-1.7": "#3ABBDED9"
+   "Gemini 4 Hydrogen": "#D1A700D9",
+   "Gemini 4 Neon": "#D1A700D9",
+   "Grok 4.7": "#6F5C1AD9",
+   "Claude Haiku 5.5": "#EC6442D9",
+   "Inkling Small": "#653B26D9",
+   "Kimi K3": "#6420A2D9",
+   "Kimi K3.1 Pro": "#6420A2D9",
+   "Mistral Large 4": "#EF87E5D9",
+   "Muse Wonder 1.0": "#2D4FC7D9",
+   "Claude Opus 4.8": "#EC6442D9",
+   "Claude Opus 5": "#EC6442D9",
+   "Claude Opus 5.5": "#EC6442D9",
+   "Claude Sonnet 5.5": "#EC6442D9",
+   "SWE-1.6": "#8AD9F6D9",
+   "SWE-1.7": "#8AD9F6D9",
+   "SWE-2 Flash": "#A3E0F7D9",
+   "Muse Spark Open": "#2D4FC7D9",
+   "Inkling 2 Small": "#653B26D9"
   },
   "lab_colors": {
-   "Anthropic": "#FF5833D9",
-   "OpenAI": "#10B552D9",
-   "xAI": "#786FE1D9",
-   "Cognition": "#3ABBDED9",
-   "Moonshot": "#459487D9",
-   "Cursor": "#D1A700D9",
-   "Zhipu": "#786FE1D9",
-   "DeepSeek": "#786FE1D9",
-   "MiniMax": "#2050CFD9",
-   "Thinking Machines": "#D1A700D9",
-   "Alibaba": "#D1A700D9",
-   "NVIDIA": "#10B552D9",
+   "Anthropic": "#EC6442D9",
+   "OpenAI": "#6FC986D9",
+   "xAI": "#6F5C1AD9",
+   "Cognition": "#8AD9F6D9",
+   "Moonshot": "#6420A2D9",
+   "Zhipu": "#B8B2F9D9",
+   "DeepSeek": "#5E0E36D9",
+   "Thinking Machines": "#653B26D9",
    "Google": "#D1A700D9",
-   "Mistral": "#DB58C8D9"
+   "Mistral": "#EF87E5D9"
   },
   "harness": {
-   "SWE-2": "devin",
-   "Beam 1.0": "devin-cli",
-   "DeepSeek V4.1 Flash": "devin-cli",
-   "Claude Fable 5.1": "claude-code",
-   "GLM 5.3": "devin-cli",
-   "GLM 5.3 Flash": "devin-cli",
-   "GPT-5.5": "codex",
-   "GPT-5.6 Sol": "codex",
-   "GPT-6 Astra": "codex",
-   "GPT-6 Luna": "codex",
-   "GPT-6 Sol": "codex",
-   "GPT-6.1 Sol": "codex",
-   "Gemini 4 Argon": "devin-cli",
-   "Gemini 4 Carbon": "devin-cli",
-   "Grok 4.7": "grok-build",
-   "Claude Haiku 5.5": "claude-code",
-   "Inkling Small": "devin-cli",
-   "Kimi K3": "devin-cli",
-   "Mistral Large 4": "vibe",
-   "Muse Wonder 1.0": "muse",
-   "Claude Opus 4.8": "claude-code",
-   "Claude Opus 5": "claude-code",
-   "Claude Opus 5.5": "claude-code",
-   "Claude Sonnet 5.5": "claude-code",
-   "SWE-1.6": "devin-cli-swe1",
-   "SWE-1.7": "devin-cli-swe1"
+   "SWE-2.1": "Devin CLI",
+   "SWE-2": "Devin CLI",
+   "Beam 1.0": "Devin CLI",
+   "DeepSeek V4.1 Flash 1017": "Devin CLI",
+   "Claude Fable 5.1": "Claude Code",
+   "Claude Fable 5.2": "Claude Code",
+   "GLM 5.3": "Devin CLI",
+   "GLM 5.3 Flash": "Devin CLI",
+   "GPT-5.5": "Codex",
+   "GPT-5.6 Sol": "Codex",
+   "GPT-6 Astra": "Codex",
+   "GPT-6 Luna": "Codex",
+   "GPT-6 Sol": "Codex",
+   "GPT-6.1 Sol": "Codex",
+   "GPT-6.2 Astra": "Codex",
+   "GPT-6.2 Sol": "Codex",
+   "Gemini 4 Argon": "Devin CLI",
+   "Gemini 4 Carbon": "Antigravity CLI",
+   "Gemini 4 Hydrogen": "Antigravity CLI",
+   "Gemini 4 Neon": "Antigravity CLI",
+   "Grok 4.7": "Grok Build",
+   "Claude Haiku 5.5": "Claude Code",
+   "Inkling Small": "Devin CLI",
+   "Kimi K3": "Devin CLI",
+   "Kimi K3.1 Pro": "Devin CLI",
+   "Mistral Large 4": "Mistral Vibe",
+   "Muse Wonder 1.0": "Muse Code",
+   "Claude Opus 4.8": "Claude Code",
+   "Claude Opus 5": "Claude Code",
+   "Claude Opus 5.5": "Claude Code",
+   "Claude Sonnet 5.5": "Claude Code",
+   "SWE-1.6": "Devin CLI",
+   "SWE-1.7": "Devin CLI",
+   "SWE-2 Flash": "Devin CLI",
+   "Muse Spark Open": "Devin CLI",
+   "Inkling 2 Small": "Devin CLI"
   },
   "efforts": {
+   "SWE-2.1": [
+    "low",
+    "medium",
+    "high",
+    "xhigh",
+    "max"
+   ],
+   "Claude Fable 5.2": [
+    "low",
+    "medium",
+    "high",
+    "xhigh",
+    "max"
+   ],
    "SWE-2": [
     "medium",
     "high",
@@ -4625,7 +4665,7 @@
     "xhigh",
     "max"
    ],
-   "DeepSeek V4.1 Flash": [
+   "DeepSeek V4.1 Flash 1017": [
     "low",
     "high",
     "max"
@@ -4688,6 +4728,20 @@
     "xhigh",
     "max"
    ],
+   "GPT-6.2 Astra": [
+    "low",
+    "medium",
+    "high",
+    "xhigh",
+    "max"
+   ],
+   "GPT-6.2 Sol": [
+    "low",
+    "medium",
+    "high",
+    "xhigh",
+    "max"
+   ],
    "Gemini 4 Argon": [
     "low",
     "medium",
@@ -4697,6 +4751,18 @@
     "low",
     "medium",
     "high"
+   ],
+   "Gemini 4 Hydrogen": [
+    "low",
+    "medium",
+    "high",
+    "xhigh"
+   ],
+   "Gemini 4 Neon": [
+    "low",
+    "medium",
+    "high",
+    "xhigh"
    ],
    "Grok 4.7": [
     "low",
@@ -4716,6 +4782,11 @@
     "max"
    ],
    "Kimi K3": [
+    "low",
+    "high",
+    "max"
+   ],
+   "Kimi K3.1 Pro": [
     "low",
     "high",
     "max"
@@ -4764,47 +4835,150 @@
    ],
    "SWE-1.7": [
     "na"
+   ],
+   "SWE-2 Flash": [
+    "low",
+    "max"
+   ],
+   "Muse Spark Open": [
+    "low",
+    "medium",
+    "high",
+    "xhigh"
+   ],
+   "Inkling 2 Small": [
+    "none",
+    "low",
+    "medium",
+    "high",
+    "xhigh",
+    "max"
    ]
   },
   "subsets": {
    "main": 132
   },
   "data": {
-   "SWE-2": {
+   "SWE-2.1": {
+    "low": {
+     "main": {
+      "correct": 0.1869,
+      "new_score": 0.167,
+      "tokens": 31168,
+      "cost": 0.39,
+      "flagged_rate": 0.0
+     }
+    },
     "medium": {
      "main": {
-      "correct": 0.176,
-      "new_score": 0.1556,
-      "tokens": 28705,
-      "cost": 0.442,
-      "duration_min": null,
-      "tool_calls": null,
-      "ote": null,
-      "flagged_rate": 0.0197
+      "correct": 0.2904,
+      "new_score": 0.261,
+      "tokens": 48631,
+      "cost": 0.77,
+      "flagged_rate": 0.0
      }
     },
     "high": {
      "main": {
-      "correct": 0.2595,
-      "new_score": 0.2306,
-      "tokens": 68546,
-      "cost": 0.958,
-      "duration_min": null,
-      "tool_calls": null,
-      "ote": null,
-      "flagged_rate": 0.0288
+      "correct": 0.3384,
+      "new_score": 0.305,
+      "tokens": 72289,
+      "cost": 1.18,
+      "flagged_rate": 0.0
+     }
+    },
+    "xhigh": {
+     "main": {
+      "correct": 0.4116,
+      "new_score": 0.374,
+      "tokens": 147756,
+      "cost": 2.38,
+      "flagged_rate": 0.0
      }
     },
     "max": {
      "main": {
-      "correct": 0.2667,
-      "new_score": 0.2378,
+      "correct": 0.4545,
+      "new_score": 0.413,
+      "tokens": 284492,
+      "cost": 4.44,
+      "flagged_rate": 0.0
+     }
+    }
+   },
+   "Claude Fable 5.2": {
+    "low": {
+     "main": {
+      "correct": 0.3864,
+      "new_score": 0.3526,
+      "tokens": 23907,
+      "cost": 2.623,
+      "flagged_rate": 0.0
+     }
+    },
+    "medium": {
+     "main": {
+      "correct": 0.4242,
+      "new_score": 0.3878,
+      "tokens": 28384,
+      "cost": 3.103,
+      "flagged_rate": 0.0
+     }
+    },
+    "high": {
+     "main": {
+      "correct": 0.5045,
+      "new_score": 0.4624,
+      "tokens": 75978,
+      "cost": 8.402,
+      "flagged_rate": 0.0
+     }
+    },
+    "xhigh": {
+     "main": {
+      "correct": 0.547,
+      "new_score": 0.5018,
+      "tokens": 156009,
+      "cost": 17.734,
+      "flagged_rate": 0.0
+     }
+    },
+    "max": {
+     "main": {
+      "correct": 0.5273,
+      "new_score": 0.4823,
+      "tokens": 417808,
+      "cost": 55.868,
+      "flagged_rate": 0.0015
+     }
+    }
+   },
+   "SWE-2": {
+    "medium": {
+     "main": {
+      "correct": 0.1833,
+      "new_score": 0.162,
+      "tokens": 28705,
+      "cost": 0.442,
+      "flagged_rate": 0.0045
+     }
+    },
+    "high": {
+     "main": {
+      "correct": 0.2712,
+      "new_score": 0.2407,
+      "tokens": 68546,
+      "cost": 0.958,
+      "flagged_rate": 0.0152
+     }
+    },
+    "max": {
+     "main": {
+      "correct": 0.2697,
+      "new_score": 0.2399,
       "tokens": 97584,
       "cost": 1.261,
-      "duration_min": null,
-      "tool_calls": null,
-      "ote": null,
-      "flagged_rate": 0.0242
+      "flagged_rate": 0.0152
      }
     }
    },
@@ -4815,9 +4989,6 @@
       "new_score": 0.0,
       "tokens": 1550,
       "cost": 0.059,
-      "duration_min": null,
-      "tool_calls": null,
-      "ote": null,
       "flagged_rate": 0.0025
      }
     },
@@ -4827,9 +4998,6 @@
       "new_score": 0.0,
       "tokens": 3490,
       "cost": 0.142,
-      "duration_min": null,
-      "tool_calls": null,
-      "ote": null,
       "flagged_rate": 0.0051
      }
     },
@@ -4839,146 +5007,110 @@
       "new_score": 0.0083,
       "tokens": 7243,
       "cost": 0.315,
-      "duration_min": null,
-      "tool_calls": null,
-      "ote": null,
-      "flagged_rate": 0.0127
+      "flagged_rate": 0.0025
      }
     },
     "high": {
      "main": {
-      "correct": 0.0202,
-      "new_score": 0.0174,
+      "correct": 0.0227,
+      "new_score": 0.0199,
       "tokens": 14068,
       "cost": 0.612,
-      "duration_min": null,
-      "tool_calls": null,
-      "ote": null,
-      "flagged_rate": 0.0227
+      "flagged_rate": 0.0177
      }
     },
     "xhigh": {
      "main": {
-      "correct": 0.0278,
-      "new_score": 0.0243,
+      "correct": 0.0303,
+      "new_score": 0.0269,
       "tokens": 23156,
       "cost": 1.126,
-      "duration_min": null,
-      "tool_calls": null,
-      "ote": null,
-      "flagged_rate": 0.0379
+      "flagged_rate": 0.0354
      }
     },
     "max": {
      "main": {
-      "correct": 0.0329,
-      "new_score": 0.029,
+      "correct": 0.0379,
+      "new_score": 0.0341,
       "tokens": 27971,
       "cost": 1.299,
-      "duration_min": null,
-      "tool_calls": null,
-      "ote": null,
-      "flagged_rate": 0.0278
+      "flagged_rate": 0.0227
      }
     }
    },
-   "DeepSeek V4.1 Flash": {
+   "DeepSeek V4.1 Flash 1017": {
     "low": {
      "main": {
-      "correct": 0.182,
-      "new_score": 0.1596,
+      "correct": 0.197,
+      "new_score": 0.1732,
       "tokens": 40659,
       "cost": 0.206,
-      "duration_min": null,
-      "tool_calls": null,
-      "ote": null,
-      "flagged_rate": 0.0265
+      "flagged_rate": 0.0013
      }
     },
     "high": {
      "main": {
-      "correct": 0.2062,
-      "new_score": 0.1821,
+      "correct": 0.2239,
+      "new_score": 0.1978,
       "tokens": 57169,
       "cost": 0.274,
-      "duration_min": null,
-      "tool_calls": null,
-      "ote": null,
-      "flagged_rate": 0.0286
+      "flagged_rate": 0.0017
      }
     },
     "max": {
      "main": {
-      "correct": 0.2177,
-      "new_score": 0.193,
+      "correct": 0.2298,
+      "new_score": 0.2019,
       "tokens": 82220,
       "cost": 0.384,
-      "duration_min": null,
-      "tool_calls": null,
-      "ote": null,
-      "flagged_rate": 0.0228
+      "flagged_rate": 0.0025
      }
     }
    },
    "Claude Fable 5.1": {
     "low": {
      "main": {
-      "correct": 0.2288,
-      "new_score": 0.2059,
+      "correct": 0.2364,
+      "new_score": 0.2121,
       "tokens": 28797,
       "cost": 3.007,
-      "duration_min": null,
-      "tool_calls": null,
-      "ote": null,
-      "flagged_rate": 0.0152
+      "flagged_rate": 0.0
      }
     },
     "medium": {
      "main": {
-      "correct": 0.2379,
-      "new_score": 0.2147,
+      "correct": 0.247,
+      "new_score": 0.2225,
       "tokens": 37911,
       "cost": 3.891,
-      "duration_min": null,
-      "tool_calls": null,
-      "ote": null,
-      "flagged_rate": 0.0182
+      "flagged_rate": 0.0
      }
     },
     "high": {
      "main": {
-      "correct": 0.2848,
-      "new_score": 0.2567,
+      "correct": 0.2955,
+      "new_score": 0.2658,
       "tokens": 54242,
       "cost": 5.386,
-      "duration_min": null,
-      "tool_calls": null,
-      "ote": null,
-      "flagged_rate": 0.0182
+      "flagged_rate": 0.0
      }
     },
     "xhigh": {
      "main": {
-      "correct": 0.3576,
-      "new_score": 0.3244,
+      "correct": 0.3758,
+      "new_score": 0.3403,
       "tokens": 92813,
       "cost": 8.68,
-      "duration_min": null,
-      "tool_calls": null,
-      "ote": null,
-      "flagged_rate": 0.0212
+      "flagged_rate": 0.0
      }
     },
     "max": {
      "main": {
-      "correct": 0.3485,
-      "new_score": 0.3167,
+      "correct": 0.3636,
+      "new_score": 0.3298,
       "tokens": 119089,
       "cost": 11.457,
-      "duration_min": null,
-      "tool_calls": null,
-      "ote": null,
-      "flagged_rate": 0.0197
+      "flagged_rate": 0.0
      }
     }
    },
@@ -4986,187 +5118,142 @@
     "low": {
      "main": {
       "correct": 0.1616,
-      "new_score": 0.1437,
+      "new_score": 0.1436,
       "tokens": 47199,
       "cost": 3.189,
-      "duration_min": null,
-      "tool_calls": null,
-      "ote": null,
-      "flagged_rate": 0.0177
+      "flagged_rate": 0.0051
      }
     },
     "high": {
      "main": {
-      "correct": 0.1894,
-      "new_score": 0.1684,
+      "correct": 0.202,
+      "new_score": 0.1802,
       "tokens": 73247,
       "cost": 5.181,
-      "duration_min": null,
-      "tool_calls": null,
-      "ote": null,
-      "flagged_rate": 0.0227
+      "flagged_rate": 0.0025
      }
     },
     "max": {
      "main": {
-      "correct": 0.202,
-      "new_score": 0.1781,
+      "correct": 0.2273,
+      "new_score": 0.2015,
       "tokens": 100706,
       "cost": 7.516,
-      "duration_min": null,
-      "tool_calls": null,
-      "ote": null,
-      "flagged_rate": 0.0429
+      "flagged_rate": 0.0076
      }
     }
    },
    "GLM 5.3 Flash": {
     "low": {
      "main": {
-      "correct": 0.0888,
-      "new_score": 0.0781,
+      "correct": 0.0909,
+      "new_score": 0.0801,
       "tokens": 35321,
       "cost": 0.43,
-      "duration_min": null,
-      "tool_calls": null,
-      "ote": null,
-      "flagged_rate": 0.0254
+      "flagged_rate": 0.0025
      }
     },
     "high": {
      "main": {
-      "correct": 0.1414,
-      "new_score": 0.1241,
+      "correct": 0.1465,
+      "new_score": 0.1286,
       "tokens": 56914,
       "cost": 0.584,
-      "duration_min": null,
-      "tool_calls": null,
-      "ote": null,
-      "flagged_rate": 0.0253
+      "flagged_rate": 0.0
      }
     },
     "max": {
      "main": {
-      "correct": 0.1587,
-      "new_score": 0.1418,
+      "correct": 0.1673,
+      "new_score": 0.1495,
       "tokens": 90044,
       "cost": 0.792,
-      "duration_min": null,
-      "tool_calls": null,
-      "ote": null,
-      "flagged_rate": 0.0234
+      "flagged_rate": 0.0038
      }
     }
    },
    "GPT-5.5": {
     "low": {
      "main": {
-      "correct": 0.0821,
-      "new_score": 0.072,
+      "correct": 0.0833,
+      "new_score": 0.0732,
       "tokens": 10332,
       "cost": 1.9753,
-      "duration_min": null,
-      "tool_calls": null,
-      "ote": null,
-      "flagged_rate": 0.0046
+      "flagged_rate": 0.0
      }
     },
     "medium": {
      "main": {
-      "correct": 0.1591,
-      "new_score": 0.1422,
+      "correct": 0.1636,
+      "new_score": 0.1465,
       "tokens": 16320,
       "cost": 2.9515,
-      "duration_min": null,
-      "tool_calls": null,
-      "ote": null,
-      "flagged_rate": 0.0076
+      "flagged_rate": 0.0
      }
     },
     "high": {
      "main": {
-      "correct": 0.2158,
-      "new_score": 0.1909,
+      "correct": 0.2212,
+      "new_score": 0.1967,
       "tokens": 21907,
       "cost": 3.8021,
-      "duration_min": null,
-      "tool_calls": null,
-      "ote": null,
-      "flagged_rate": 0.0076
+      "flagged_rate": 0.0
      }
     },
     "xhigh": {
      "main": {
-      "correct": 0.253,
-      "new_score": 0.2262,
+      "correct": 0.2636,
+      "new_score": 0.2362,
       "tokens": 30925,
       "cost": 5.2771,
-      "duration_min": null,
-      "tool_calls": null,
-      "ote": null,
-      "flagged_rate": 0.0121
+      "flagged_rate": 0.0
      }
     }
    },
    "GPT-5.6 Sol": {
     "low": {
      "main": {
-      "correct": 0.1442,
-      "new_score": 0.1279,
+      "correct": 0.1455,
+      "new_score": 0.1291,
       "tokens": 9806,
       "cost": 1.451,
-      "duration_min": null,
-      "tool_calls": null,
-      "ote": null,
-      "flagged_rate": 0.0061
+      "flagged_rate": 0.0
      }
     },
     "medium": {
      "main": {
-      "correct": 0.2212,
-      "new_score": 0.1952,
+      "correct": 0.2258,
+      "new_score": 0.2002,
       "tokens": 15446,
       "cost": 2.36,
-      "duration_min": null,
-      "tool_calls": null,
-      "ote": null,
-      "flagged_rate": 0.0121
+      "flagged_rate": 0.0
      }
     },
     "high": {
      "main": {
-      "correct": 0.2727,
-      "new_score": 0.2429,
+      "correct": 0.2788,
+      "new_score": 0.2485,
       "tokens": 20920,
       "cost": 3.166,
-      "duration_min": null,
-      "tool_calls": null,
-      "ote": null,
-      "flagged_rate": 0.0091
+      "flagged_rate": 0.0
      }
     },
     "xhigh": {
      "main": {
-      "correct": 0.2697,
-      "new_score": 0.2408,
+      "correct": 0.2788,
+      "new_score": 0.2502,
       "tokens": 26415,
       "cost": 3.83,
-      "duration_min": null,
-      "tool_calls": null,
-      "ote": null,
-      "flagged_rate": 0.0091
+      "flagged_rate": 0.0
      }
     },
     "max": {
      "main": {
-      "correct": 0.3061,
-      "new_score": 0.2764,
+      "correct": 0.3227,
+      "new_score": 0.2889,
       "tokens": 38352,
       "cost": 5.503,
-      "duration_min": null,
-      "tool_calls": null,
-      "ote": null,
-      "flagged_rate": 0.0167
+      "flagged_rate": 0.0
      }
     }
    },
@@ -5177,58 +5264,43 @@
       "new_score": 0.3111,
       "tokens": 8987,
       "cost": 2.437,
-      "duration_min": null,
-      "tool_calls": null,
-      "ote": null,
-      "flagged_rate": 0.0076
+      "flagged_rate": 0.0
      }
     },
     "medium": {
      "main": {
-      "correct": 0.4015,
-      "new_score": 0.3675,
+      "correct": 0.4076,
+      "new_score": 0.3729,
       "tokens": 14065,
       "cost": 3.493,
-      "duration_min": null,
-      "tool_calls": null,
-      "ote": null,
-      "flagged_rate": 0.0167
+      "flagged_rate": 0.0
      }
     },
     "high": {
      "main": {
-      "correct": 0.4136,
-      "new_score": 0.3831,
+      "correct": 0.4197,
+      "new_score": 0.3883,
       "tokens": 18433,
       "cost": 4.277,
-      "duration_min": null,
-      "tool_calls": null,
-      "ote": null,
-      "flagged_rate": 0.0242
+      "flagged_rate": 0.0
      }
     },
     "xhigh": {
      "main": {
-      "correct": 0.4485,
-      "new_score": 0.4141,
+      "correct": 0.4515,
+      "new_score": 0.4169,
       "tokens": 20869,
       "cost": 4.539,
-      "duration_min": null,
-      "tool_calls": null,
-      "ote": null,
-      "flagged_rate": 0.0152
+      "flagged_rate": 0.0
      }
     },
     "max": {
      "main": {
-      "correct": 0.4621,
-      "new_score": 0.4277,
+      "correct": 0.4758,
+      "new_score": 0.4402,
       "tokens": 36354,
       "cost": 6.676,
-      "duration_min": null,
-      "tool_calls": null,
-      "ote": null,
-      "flagged_rate": 0.0227
+      "flagged_rate": 0.0
      }
     }
    },
@@ -5239,21 +5311,15 @@
       "new_score": 0.0405,
       "tokens": 6519,
       "cost": 0.023,
-      "duration_min": null,
-      "tool_calls": null,
-      "ote": null,
-      "flagged_rate": 0.003
+      "flagged_rate": 0.0
      }
     },
     "medium": {
      "main": {
-      "correct": 0.1773,
-      "new_score": 0.1597,
+      "correct": 0.1788,
+      "new_score": 0.1612,
       "tokens": 31360,
       "cost": 0.092,
-      "duration_min": null,
-      "tool_calls": null,
-      "ote": null,
       "flagged_rate": 0.0015
      }
     },
@@ -5263,10 +5329,7 @@
       "new_score": 0.165,
       "tokens": 42170,
       "cost": 0.115,
-      "duration_min": null,
-      "tool_calls": null,
-      "ote": null,
-      "flagged_rate": 0.003
+      "flagged_rate": 0.0
      }
     },
     "xhigh": {
@@ -5275,22 +5338,16 @@
       "new_score": 0.1844,
       "tokens": 50565,
       "cost": 0.132,
-      "duration_min": null,
-      "tool_calls": null,
-      "ote": null,
-      "flagged_rate": 0.0045
+      "flagged_rate": 0.0
      }
     },
     "max": {
      "main": {
-      "correct": 0.2424,
-      "new_score": 0.2187,
+      "correct": 0.2515,
+      "new_score": 0.2274,
       "tokens": 79659,
       "cost": 0.174,
-      "duration_min": null,
-      "tool_calls": null,
-      "ote": null,
-      "flagged_rate": 0.0121
+      "flagged_rate": 0.0
      }
     }
    },
@@ -5301,372 +5358,481 @@
       "new_score": 0.1049,
       "tokens": 6487,
       "cost": 0.4164,
-      "duration_min": null,
-      "tool_calls": null,
-      "ote": null,
-      "flagged_rate": 0.0076
+      "flagged_rate": 0.0
      }
     },
     "medium": {
      "main": {
-      "correct": 0.2409,
-      "new_score": 0.2163,
+      "correct": 0.2455,
+      "new_score": 0.2205,
       "tokens": 13750,
       "cost": 0.8225,
-      "duration_min": null,
-      "tool_calls": null,
-      "ote": null,
-      "flagged_rate": 0.0121
+      "flagged_rate": 0.0
      }
     },
     "high": {
      "main": {
-      "correct": 0.253,
-      "new_score": 0.2281,
+      "correct": 0.2591,
+      "new_score": 0.2334,
       "tokens": 19393,
       "cost": 1.0714,
-      "duration_min": null,
-      "tool_calls": null,
-      "ote": null,
-      "flagged_rate": 0.0182
+      "flagged_rate": 0.0
      }
     },
     "xhigh": {
      "main": {
-      "correct": 0.3348,
-      "new_score": 0.3032,
+      "correct": 0.3364,
+      "new_score": 0.3045,
       "tokens": 28587,
       "cost": 1.4432,
-      "duration_min": null,
-      "tool_calls": null,
-      "ote": null,
-      "flagged_rate": 0.0136
+      "flagged_rate": 0.0
      }
     },
     "max": {
      "main": {
-      "correct": 0.3758,
-      "new_score": 0.3425,
+      "correct": 0.3833,
+      "new_score": 0.3491,
       "tokens": 54181,
       "cost": 2.3547,
-      "duration_min": null,
-      "tool_calls": null,
-      "ote": null,
-      "flagged_rate": 0.0152
+      "flagged_rate": 0.0
      }
     }
    },
    "GPT-6.1 Sol": {
     "low": {
      "main": {
-      "correct": 0.2833,
-      "new_score": 0.256,
+      "correct": 0.2848,
+      "new_score": 0.2574,
       "tokens": 10042,
       "cost": 0.341,
-      "duration_min": null,
-      "tool_calls": null,
-      "ote": null,
-      "flagged_rate": 0.0091
+      "flagged_rate": 0.0
      }
     },
     "medium": {
      "main": {
-      "correct": 0.3227,
-      "new_score": 0.2958,
+      "correct": 0.3303,
+      "new_score": 0.3027,
       "tokens": 15686,
       "cost": 0.492,
-      "duration_min": null,
-      "tool_calls": null,
-      "ote": null,
-      "flagged_rate": 0.0136
+      "flagged_rate": 0.0
      }
     },
     "high": {
      "main": {
-      "correct": 0.3803,
-      "new_score": 0.3482,
+      "correct": 0.3833,
+      "new_score": 0.3509,
       "tokens": 22419,
       "cost": 0.647,
-      "duration_min": null,
-      "tool_calls": null,
-      "ote": null,
-      "flagged_rate": 0.0152
+      "flagged_rate": 0.0
      }
     },
     "xhigh": {
      "main": {
-      "correct": 0.353,
-      "new_score": 0.3233,
+      "correct": 0.3606,
+      "new_score": 0.3303,
       "tokens": 24789,
       "cost": 0.695,
-      "duration_min": null,
-      "tool_calls": null,
-      "ote": null,
-      "flagged_rate": 0.0167
+      "flagged_rate": 0.0
      }
     },
     "max": {
      "main": {
-      "correct": 0.4227,
-      "new_score": 0.3895,
+      "correct": 0.4303,
+      "new_score": 0.3965,
       "tokens": 41479,
       "cost": 1.029,
-      "duration_min": null,
-      "tool_calls": null,
-      "ote": null,
-      "flagged_rate": 0.0167
+      "flagged_rate": 0.0
+     }
+    }
+   },
+   "GPT-6.2 Astra": {
+    "low": {
+     "main": {
+      "correct": 0.4217,
+      "new_score": 0.3807,
+      "tokens": 8154,
+      "cost": 1.415,
+      "flagged_rate": 0.0
+     }
+    },
+    "medium": {
+     "main": {
+      "correct": 0.4647,
+      "new_score": 0.422,
+      "tokens": 14364,
+      "cost": 2.469,
+      "flagged_rate": 0.0
+     }
+    },
+    "high": {
+     "main": {
+      "correct": 0.4773,
+      "new_score": 0.4356,
+      "tokens": 24452,
+      "cost": 3.952,
+      "flagged_rate": 0.0
+     }
+    },
+    "xhigh": {
+     "main": {
+      "correct": 0.4849,
+      "new_score": 0.4412,
+      "tokens": 28568,
+      "cost": 4.289,
+      "flagged_rate": 0.0
+     }
+    },
+    "max": {
+     "main": {
+      "correct": 0.4823,
+      "new_score": 0.4419,
+      "tokens": 45974,
+      "cost": 5.966,
+      "flagged_rate": 0.0
+     }
+    }
+   },
+   "GPT-6.2 Sol": {
+    "low": {
+     "main": {
+      "correct": 0.3662,
+      "new_score": 0.3314,
+      "tokens": 9789,
+      "cost": 0.402,
+      "flagged_rate": 0.0
+     }
+    },
+    "medium": {
+     "main": {
+      "correct": 0.4217,
+      "new_score": 0.3829,
+      "tokens": 16457,
+      "cost": 0.685,
+      "flagged_rate": 0.0
+     }
+    },
+    "high": {
+     "main": {
+      "correct": 0.4394,
+      "new_score": 0.3972,
+      "tokens": 22415,
+      "cost": 0.876,
+      "flagged_rate": 0.0
+     }
+    },
+    "xhigh": {
+     "main": {
+      "correct": 0.4394,
+      "new_score": 0.3978,
+      "tokens": 26387,
+      "cost": 0.98,
+      "flagged_rate": 0.0
+     }
+    },
+    "max": {
+     "main": {
+      "correct": 0.4823,
+      "new_score": 0.4376,
+      "tokens": 38078,
+      "cost": 1.287,
+      "flagged_rate": 0.0
      }
     }
    },
    "Gemini 4 Argon": {
     "low": {
      "main": {
-      "correct": 0.2379,
-      "new_score": 0.2147,
+      "correct": 0.2485,
+      "new_score": 0.2241,
       "tokens": 63291,
       "cost": 3.977,
-      "duration_min": null,
-      "tool_calls": null,
-      "ote": null,
-      "flagged_rate": 0.0136
+      "flagged_rate": 0.0
      }
     },
     "medium": {
      "main": {
-      "correct": 0.2606,
-      "new_score": 0.2345,
+      "correct": 0.2712,
+      "new_score": 0.2443,
       "tokens": 123879,
       "cost": 5.688,
-      "duration_min": null,
-      "tool_calls": null,
-      "ote": null,
-      "flagged_rate": 0.0091
+      "flagged_rate": 0.0
      }
     },
     "high": {
      "main": {
-      "correct": 0.2909,
-      "new_score": 0.263,
+      "correct": 0.3061,
+      "new_score": 0.2763,
       "tokens": 148569,
       "cost": 6.514,
-      "duration_min": null,
-      "tool_calls": null,
-      "ote": null,
-      "flagged_rate": 0.0167
+      "flagged_rate": 0.0
      }
     }
    },
    "Gemini 4 Carbon": {
     "low": {
      "main": {
-      "correct": 0.3535,
-      "new_score": 0.3188,
-      "tokens": 57868,
-      "cost": 4.548,
-      "duration_min": null,
-      "tool_calls": null,
-      "ote": null,
-      "flagged_rate": 0.023
+      "correct": 0.346,
+      "new_score": 0.3153,
+      "tokens": 51553,
+      "cost": 7.723,
+      "flagged_rate": 0.0
      }
     },
     "medium": {
      "main": {
-      "correct": 0.4432,
-      "new_score": 0.4,
-      "tokens": 109126,
-      "cost": 4.044,
-      "duration_min": null,
-      "tool_calls": null,
-      "ote": null,
-      "flagged_rate": 0.0105
+      "correct": 0.452,
+      "new_score": 0.409,
+      "tokens": 114385,
+      "cost": 4.486,
+      "flagged_rate": 0.0
      }
     },
     "high": {
      "main": {
-      "correct": 0.4167,
-      "new_score": 0.3748,
-      "tokens": 121442,
-      "cost": 4.434,
-      "duration_min": null,
-      "tool_calls": null,
-      "ote": null,
-      "flagged_rate": 0.0183
+      "correct": 0.4692,
+      "new_score": 0.4262,
+      "tokens": 127641,
+      "cost": 5.057,
+      "flagged_rate": 0.0026
+     }
+    }
+   },
+   "Gemini 4 Hydrogen": {
+    "low": {
+     "main": {
+      "correct": 0.1187,
+      "new_score": 0.1052,
+      "tokens": 14953,
+      "cost": 0.353,
+      "flagged_rate": 0.0
+     }
+    },
+    "medium": {
+     "main": {
+      "correct": 0.3157,
+      "new_score": 0.2821,
+      "tokens": 37841,
+      "cost": 0.901,
+      "flagged_rate": 0.0
+     }
+    },
+    "high": {
+     "main": {
+      "correct": 0.4217,
+      "new_score": 0.3823,
+      "tokens": 85996,
+      "cost": 2.404,
+      "flagged_rate": 0.0
+     }
+    },
+    "xhigh": {
+     "main": {
+      "correct": 0.4318,
+      "new_score": 0.3887,
+      "tokens": 153739,
+      "cost": 4.953,
+      "flagged_rate": 0.0
+     }
+    }
+   },
+   "Gemini 4 Neon": {
+    "low": {
+     "main": {
+      "correct": 0.3056,
+      "new_score": 0.2741,
+      "tokens": 21049,
+      "cost": 0.959,
+      "flagged_rate": 0.0
+     }
+    },
+    "medium": {
+     "main": {
+      "correct": 0.4217,
+      "new_score": 0.3816,
+      "tokens": 45888,
+      "cost": 2.174,
+      "flagged_rate": 0.0
+     }
+    },
+    "high": {
+     "main": {
+      "correct": 0.5076,
+      "new_score": 0.4624,
+      "tokens": 85592,
+      "cost": 4.382,
+      "flagged_rate": 0.0
+     }
+    },
+    "xhigh": {
+     "main": {
+      "correct": 0.4924,
+      "new_score": 0.4483,
+      "tokens": 127992,
+      "cost": 7.666,
+      "flagged_rate": 0.0
      }
     }
    },
    "Grok 4.7": {
     "low": {
      "main": {
-      "correct": 0.2337,
-      "new_score": 0.208,
+      "correct": 0.2364,
+      "new_score": 0.2106,
       "tokens": 38161,
       "cost": 3.873,
-      "duration_min": null,
-      "tool_calls": null,
-      "ote": null,
-      "flagged_rate": 0.0106
+      "flagged_rate": 0.0
      }
     },
     "medium": {
      "main": {
-      "correct": 0.2924,
-      "new_score": 0.2594,
+      "correct": 0.2939,
+      "new_score": 0.2607,
       "tokens": 72180,
       "cost": 8.028,
-      "duration_min": null,
-      "tool_calls": null,
-      "ote": null,
-      "flagged_rate": 0.0091
+      "flagged_rate": 0.0015
      }
     },
     "high": {
      "main": {
       "correct": 0.297,
-      "new_score": 0.2655,
+      "new_score": 0.2654,
       "tokens": 94341,
       "cost": 11.094,
-      "duration_min": null,
-      "tool_calls": null,
-      "ote": null,
-      "flagged_rate": 0.0152
+      "flagged_rate": 0.0091
      }
     },
     "xhigh": {
      "main": {
-      "correct": 0.3197,
-      "new_score": 0.2862,
+      "correct": 0.3227,
+      "new_score": 0.289,
       "tokens": 110790,
       "cost": 14.36,
-      "duration_min": null,
-      "tool_calls": null,
-      "ote": null,
-      "flagged_rate": 0.0167
+      "flagged_rate": 0.0076
      }
     }
    },
    "Claude Haiku 5.5": {
     "low": {
      "main": {
-      "correct": 0.1168,
-      "new_score": 0.1046,
+      "correct": 0.1182,
+      "new_score": 0.1059,
       "tokens": 39366,
       "cost": 0.065,
-      "duration_min": null,
-      "tool_calls": null,
-      "ote": null,
-      "flagged_rate": 0.0091
+      "flagged_rate": 0.0
      }
     },
     "medium": {
      "main": {
-      "correct": 0.15,
-      "new_score": 0.1342,
+      "correct": 0.1576,
+      "new_score": 0.1405,
       "tokens": 57582,
       "cost": 0.097,
-      "duration_min": null,
-      "tool_calls": null,
-      "ote": null,
-      "flagged_rate": 0.0152
+      "flagged_rate": 0.0015
      }
     },
     "high": {
      "main": {
-      "correct": 0.2076,
-      "new_score": 0.1864,
+      "correct": 0.2152,
+      "new_score": 0.1927,
       "tokens": 80993,
       "cost": 0.139,
-      "duration_min": null,
-      "tool_calls": null,
-      "ote": null,
-      "flagged_rate": 0.0197
+      "flagged_rate": 0.0
      }
     },
     "xhigh": {
      "main": {
-      "correct": 0.2477,
-      "new_score": 0.2228,
+      "correct": 0.2545,
+      "new_score": 0.2292,
       "tokens": 127735,
       "cost": 0.226,
-      "duration_min": null,
-      "tool_calls": null,
-      "ote": null,
-      "flagged_rate": 0.0167
+      "flagged_rate": 0.0
      }
     },
     "max": {
      "main": {
-      "correct": 0.305,
-      "new_score": 0.2772,
+      "correct": 0.3186,
+      "new_score": 0.2893,
       "tokens": 205112,
       "cost": 0.366,
-      "duration_min": null,
-      "tool_calls": null,
-      "ote": null,
-      "flagged_rate": 0.0258
+      "flagged_rate": 0.0
      }
     }
    },
    "Inkling Small": {
     "high": {
      "main": {
-      "correct": 0.0154,
-      "new_score": 0.0127,
+      "correct": 0.0204,
+      "new_score": 0.0178,
       "tokens": 13658,
       "cost": 1.366,
-      "duration_min": null,
-      "tool_calls": null,
-      "ote": null,
-      "flagged_rate": 0.0256
+      "flagged_rate": 0.0127
      }
     },
     "max": {
      "main": {
-      "correct": 0.0379,
-      "new_score": 0.0321,
+      "correct": 0.0455,
+      "new_score": 0.0396,
       "tokens": 39077,
       "cost": 3.684,
-      "duration_min": null,
-      "tool_calls": null,
-      "ote": null,
-      "flagged_rate": 0.0606
+      "flagged_rate": 0.0404
      }
     }
    },
    "Kimi K3": {
     "low": {
      "main": {
-      "correct": 0.1237,
-      "new_score": 0.111,
+      "correct": 0.1263,
+      "new_score": 0.1132,
       "tokens": 28740,
       "cost": 2.977,
-      "duration_min": null,
-      "tool_calls": null,
-      "ote": null,
-      "flagged_rate": 0.0177
+      "flagged_rate": 0.0051
      }
     },
     "high": {
      "main": {
-      "correct": 0.1975,
-      "new_score": 0.1774,
+      "correct": 0.2109,
+      "new_score": 0.1885,
       "tokens": 49854,
       "cost": 4.475,
-      "duration_min": null,
-      "tool_calls": null,
-      "ote": null,
-      "flagged_rate": 0.0203
+      "flagged_rate": 0.0025
      }
     },
     "max": {
      "main": {
-      "correct": 0.1944,
-      "new_score": 0.1731,
+      "correct": 0.2071,
+      "new_score": 0.1843,
       "tokens": 64271,
       "cost": 5.456,
-      "duration_min": null,
-      "tool_calls": null,
-      "ote": null,
-      "flagged_rate": 0.0202
+      "flagged_rate": 0.0025
+     }
+    }
+   },
+   "Kimi K3.1 Pro": {
+    "low": {
+     "main": {
+      "correct": 0.1414,
+      "new_score": 0.1286,
+      "tokens": 20367,
+      "cost": 1.877,
+      "flagged_rate": 0.0
+     }
+    },
+    "high": {
+     "main": {
+      "correct": 0.1944,
+      "new_score": 0.1751,
+      "tokens": 27628,
+      "cost": 2.358,
+      "flagged_rate": 0.0
+     }
+    },
+    "max": {
+     "main": {
+      "correct": 0.2197,
+      "new_score": 0.1989,
+      "tokens": 37242,
+      "cost": 3.033,
+      "flagged_rate": 0.0
      }
     }
    },
@@ -5677,9 +5843,6 @@
       "new_score": 0.095,
       "tokens": 28384,
       "cost": 0.669,
-      "duration_min": null,
-      "tool_calls": null,
-      "ote": null,
       "flagged_rate": 0.0
      }
     },
@@ -5689,9 +5852,6 @@
       "new_score": 0.0878,
       "tokens": 51238,
       "cost": 1.031,
-      "duration_min": null,
-      "tool_calls": null,
-      "ote": null,
       "flagged_rate": 0.0
      }
     },
@@ -5701,9 +5861,6 @@
       "new_score": 0.1965,
       "tokens": 88069,
       "cost": 1.549,
-      "duration_min": null,
-      "tool_calls": null,
-      "ote": null,
       "flagged_rate": 0.0
      }
     }
@@ -5711,298 +5868,226 @@
    "Muse Wonder 1.0": {
     "low": {
      "main": {
-      "correct": 0.2413,
-      "new_score": 0.2121,
+      "correct": 0.2455,
+      "new_score": 0.216,
       "tokens": 20301,
       "cost": 1.843,
-      "duration_min": null,
-      "tool_calls": null,
-      "ote": null,
-      "flagged_rate": 0.0152
+      "flagged_rate": 0.0
      }
     },
     "medium": {
      "main": {
-      "correct": 0.2606,
-      "new_score": 0.2314,
+      "correct": 0.2697,
+      "new_score": 0.2392,
       "tokens": 26714,
       "cost": 2.534,
-      "duration_min": null,
-      "tool_calls": null,
-      "ote": null,
-      "flagged_rate": 0.0182
+      "flagged_rate": 0.0
      }
     },
     "high": {
      "main": {
-      "correct": 0.2742,
-      "new_score": 0.2428,
+      "correct": 0.2818,
+      "new_score": 0.2492,
       "tokens": 32832,
       "cost": 3.143,
-      "duration_min": null,
-      "tool_calls": null,
-      "ote": null,
-      "flagged_rate": 0.0167
+      "flagged_rate": 0.0
      }
     },
     "xhigh": {
      "main": {
-      "correct": 0.2747,
-      "new_score": 0.2411,
+      "correct": 0.2879,
+      "new_score": 0.2532,
       "tokens": 38672,
       "cost": 3.793,
-      "duration_min": null,
-      "tool_calls": null,
-      "ote": null,
-      "flagged_rate": 0.0197
+      "flagged_rate": 0.0
      }
     }
    },
    "Claude Opus 4.8": {
     "low": {
      "main": {
-      "correct": 0.1061,
-      "new_score": 0.0955,
+      "correct": 0.1091,
+      "new_score": 0.0979,
       "tokens": 40687,
       "cost": 4.195,
-      "duration_min": null,
-      "tool_calls": null,
-      "ote": null,
-      "flagged_rate": 0.0091
+      "flagged_rate": 0.0
      }
     },
     "medium": {
      "main": {
-      "correct": 0.1227,
-      "new_score": 0.1102,
+      "correct": 0.1258,
+      "new_score": 0.1126,
       "tokens": 57192,
       "cost": 5.588,
-      "duration_min": null,
-      "tool_calls": null,
-      "ote": null,
-      "flagged_rate": 0.0106
+      "flagged_rate": 0.0
      }
     },
     "high": {
      "main": {
-      "correct": 0.1212,
-      "new_score": 0.1086,
+      "correct": 0.1242,
+      "new_score": 0.111,
       "tokens": 62298,
       "cost": 6.316,
-      "duration_min": null,
-      "tool_calls": null,
-      "ote": null,
-      "flagged_rate": 0.0061
+      "flagged_rate": 0.0
      }
     },
     "xhigh": {
      "main": {
-      "correct": 0.1591,
-      "new_score": 0.1428,
+      "correct": 0.1667,
+      "new_score": 0.1487,
       "tokens": 88364,
       "cost": 9.133,
-      "duration_min": null,
-      "tool_calls": null,
-      "ote": null,
-      "flagged_rate": 0.0106
+      "flagged_rate": 0.0
      }
     },
     "max": {
      "main": {
-      "correct": 0.1636,
-      "new_score": 0.1472,
+      "correct": 0.1712,
+      "new_score": 0.1532,
       "tokens": 125863,
       "cost": 12.129,
-      "duration_min": null,
-      "tool_calls": null,
-      "ote": null,
-      "flagged_rate": 0.0121
+      "flagged_rate": 0.0
      }
     }
    },
    "Claude Opus 5": {
     "low": {
      "main": {
-      "correct": 0.2091,
-      "new_score": 0.1869,
+      "correct": 0.2167,
+      "new_score": 0.1932,
       "tokens": 26898,
       "cost": 3.276,
-      "duration_min": null,
-      "tool_calls": null,
-      "ote": null,
-      "flagged_rate": 0.0182
+      "flagged_rate": 0.0
      }
     },
     "medium": {
      "main": {
-      "correct": 0.2682,
-      "new_score": 0.2397,
+      "correct": 0.2758,
+      "new_score": 0.2456,
       "tokens": 39813,
       "cost": 5.217,
-      "duration_min": null,
-      "tool_calls": null,
-      "ote": null,
-      "flagged_rate": 0.0152
+      "flagged_rate": 0.0
      }
     },
     "high": {
      "main": {
-      "correct": 0.297,
-      "new_score": 0.2672,
+      "correct": 0.3136,
+      "new_score": 0.2813,
       "tokens": 59260,
       "cost": 8.361,
-      "duration_min": null,
-      "tool_calls": null,
-      "ote": null,
-      "flagged_rate": 0.0212
+      "flagged_rate": 0.0
      }
     },
     "xhigh": {
      "main": {
-      "correct": 0.2985,
-      "new_score": 0.2674,
+      "correct": 0.3045,
+      "new_score": 0.2738,
       "tokens": 76436,
       "cost": 11.093,
-      "duration_min": null,
-      "tool_calls": null,
-      "ote": null,
-      "flagged_rate": 0.0152
+      "flagged_rate": 0.0045
      }
     },
     "max": {
      "main": {
-      "correct": 0.297,
-      "new_score": 0.2658,
+      "correct": 0.3045,
+      "new_score": 0.272,
       "tokens": 88196,
       "cost": 12.997,
-      "duration_min": null,
-      "tool_calls": null,
-      "ote": null,
-      "flagged_rate": 0.0152
+      "flagged_rate": 0.0
      }
     }
    },
    "Claude Opus 5.5": {
     "low": {
      "main": {
-      "correct": 0.1636,
-      "new_score": 0.1472,
+      "correct": 0.1652,
+      "new_score": 0.1485,
       "tokens": 14230,
       "cost": 0.746,
-      "duration_min": null,
-      "tool_calls": null,
-      "ote": null,
-      "flagged_rate": 0.0121
+      "flagged_rate": 0.0
      }
     },
     "medium": {
      "main": {
-      "correct": 0.3303,
-      "new_score": 0.301,
+      "correct": 0.3455,
+      "new_score": 0.3143,
       "tokens": 30068,
       "cost": 1.699,
-      "duration_min": null,
-      "tool_calls": null,
-      "ote": null,
-      "flagged_rate": 0.0152
+      "flagged_rate": 0.0
      }
     },
     "high": {
      "main": {
-      "correct": 0.3788,
-      "new_score": 0.3453,
+      "correct": 0.3985,
+      "new_score": 0.3627,
       "tokens": 41233,
       "cost": 2.423,
-      "duration_min": null,
-      "tool_calls": null,
-      "ote": null,
-      "flagged_rate": 0.0152
+      "flagged_rate": 0.0
      }
     },
     "xhigh": {
      "main": {
-      "correct": 0.4727,
-      "new_score": 0.4338,
+      "correct": 0.4879,
+      "new_score": 0.4472,
       "tokens": 88053,
       "cost": 5.184,
-      "duration_min": null,
-      "tool_calls": null,
-      "ote": null,
-      "flagged_rate": 0.0212
+      "flagged_rate": 0.0015
      }
     },
     "max": {
      "main": {
-      "correct": 0.497,
-      "new_score": 0.4545,
+      "correct": 0.5182,
+      "new_score": 0.4734,
       "tokens": 201919,
       "cost": 12.821,
-      "duration_min": null,
-      "tool_calls": null,
-      "ote": null,
-      "flagged_rate": 0.0288
+      "flagged_rate": 0.0
      }
     }
    },
    "Claude Sonnet 5.5": {
     "low": {
      "main": {
-      "correct": 0.1062,
-      "new_score": 0.0941,
+      "correct": 0.1091,
+      "new_score": 0.0966,
       "tokens": 11265,
       "cost": 0.369,
-      "duration_min": null,
-      "tool_calls": null,
-      "ote": null,
-      "flagged_rate": 0.0106
+      "flagged_rate": 0.0
      }
     },
     "medium": {
      "main": {
-      "correct": 0.1576,
-      "new_score": 0.1417,
+      "correct": 0.1667,
+      "new_score": 0.1496,
       "tokens": 14449,
       "cost": 0.482,
-      "duration_min": null,
-      "tool_calls": null,
-      "ote": null,
-      "flagged_rate": 0.0136
+      "flagged_rate": 0.0
      }
     },
     "high": {
      "main": {
-      "correct": 0.2428,
-      "new_score": 0.219,
+      "correct": 0.2545,
+      "new_score": 0.2295,
       "tokens": 27839,
       "cost": 1.066,
-      "duration_min": null,
-      "tool_calls": null,
-      "ote": null,
-      "flagged_rate": 0.0137
+      "flagged_rate": 0.0
      }
     },
     "xhigh": {
      "main": {
-      "correct": 0.3803,
-      "new_score": 0.3475,
+      "correct": 0.4,
+      "new_score": 0.365,
       "tokens": 80433,
       "cost": 3.315,
-      "duration_min": null,
-      "tool_calls": null,
-      "ote": null,
-      "flagged_rate": 0.0227
+      "flagged_rate": 0.0
      }
     },
     "max": {
      "main": {
-      "correct": 0.45,
-      "new_score": 0.4096,
+      "correct": 0.4636,
+      "new_score": 0.4224,
       "tokens": 514722,
       "cost": 19.941,
-      "duration_min": null,
-      "tool_calls": null,
-      "ote": null,
-      "flagged_rate": 0.0379
+      "flagged_rate": 0.0121
      }
     }
    },
@@ -6013,9 +6098,6 @@
       "new_score": 0.0134,
       "tokens": 23990,
       "cost": 1.3592,
-      "duration_min": null,
-      "tool_calls": null,
-      "ote": null,
       "flagged_rate": 0.0
      }
     }
@@ -6023,22 +6105,143 @@
    "SWE-1.7": {
     "na": {
      "main": {
-      "correct": 0.189,
-      "new_score": 0.1615,
+      "correct": 0.1756,
+      "new_score": 0.1551,
       "tokens": 89251,
       "cost": 3.5209,
-      "duration_min": null,
-      "tool_calls": null,
-      "ote": null,
-      "flagged_rate": 0.0076
+      "flagged_rate": 0.0229
+     }
+    }
+   },
+   "SWE-2 Flash": {
+    "low": {
+     "main": {
+      "correct": 0.2576,
+      "new_score": 0.2317,
+      "tokens": 95841,
+      "cost": 0.203,
+      "flagged_rate": 0.0
+     }
+    },
+    "max": {
+     "main": {
+      "correct": 0.2727,
+      "new_score": 0.24,
+      "tokens": 91090,
+      "cost": 0.2024,
+      "flagged_rate": 0.0
+     }
+    }
+   },
+   "Muse Spark Open": {
+    "low": {
+     "main": {
+      "correct": 0.0051,
+      "new_score": 0.0042,
+      "tokens": 4472,
+      "cost": 0.593,
+      "flagged_rate": 0.0
+     }
+    },
+    "medium": {
+     "main": {
+      "correct": 0.0177,
+      "new_score": 0.0163,
+      "tokens": 11576,
+      "cost": 1.865,
+      "flagged_rate": 0.0
+     }
+    },
+    "high": {
+     "main": {
+      "correct": 0.0455,
+      "new_score": 0.0415,
+      "tokens": 33810,
+      "cost": 6.78,
+      "flagged_rate": 0.0
+     }
+    },
+    "xhigh": {
+     "main": {
+      "correct": 0.0732,
+      "new_score": 0.0646,
+      "tokens": 44615,
+      "cost": 9.157,
+      "flagged_rate": 0.0
+     }
+    }
+   },
+   "Inkling 2 Small": {
+    "none": {
+     "main": {
+      "correct": 0.1944,
+      "new_score": 0.1743,
+      "tokens": 62628,
+      "cost": 0.439,
+      "flagged_rate": 0.0
+     }
+    },
+    "low": {
+     "main": {
+      "correct": 0.1768,
+      "new_score": 0.1557,
+      "tokens": 36894,
+      "cost": 0.286,
+      "flagged_rate": 0.0
+     }
+    },
+    "medium": {
+     "main": {
+      "correct": 0.2146,
+      "new_score": 0.1913,
+      "tokens": 59165,
+      "cost": 0.417,
+      "flagged_rate": 0.0025
+     }
+    },
+    "high": {
+     "main": {
+      "correct": 0.25,
+      "new_score": 0.2227,
+      "tokens": 89707,
+      "cost": 0.562,
+      "flagged_rate": 0.0
+     }
+    },
+    "xhigh": {
+     "main": {
+      "correct": 0.2323,
+      "new_score": 0.2068,
+      "tokens": 100243,
+      "cost": 0.615,
+      "flagged_rate": 0.0
+     }
+    },
+    "max": {
+     "main": {
+      "correct": 0.2551,
+      "new_score": 0.2257,
+      "tokens": 95400,
+      "cost": 0.584,
+      "flagged_rate": 0.0
      }
     }
    }
   }
  },
  "v2_0Map": {
-  "claude-haiku-5-5": {
-   "model": "Claude Haiku 5.5",
+  "claude-fable-5-2": {
+   "model": "Claude Fable 5.2",
+   "effort": "max",
+   "harness": "Claude Code"
+  },
+  "claude-fable-5-2-high": {
+   "model": "Claude Fable 5.2",
+   "effort": "high",
+   "harness": "Claude Code"
+  },
+  "claude-fable-5-2-xhigh": {
+   "model": "Claude Fable 5.2",
    "effort": "xhigh",
    "harness": "Claude Code"
   },
@@ -6052,77 +6255,148 @@
    "effort": "low",
    "harness": "Claude Code"
   },
-  "claude-haiku-5-5-max": {
-   "model": "Claude Haiku 5.5",
-   "effort": "max",
-   "harness": "Claude Code"
-  },
   "claude-haiku-5-5-medium": {
    "model": "Claude Haiku 5.5",
    "effort": "medium",
    "harness": "Claude Code"
   },
+  "claude-haiku-5-5-xhigh": {
+   "model": "Claude Haiku 5.5",
+   "effort": "xhigh",
+   "harness": "Claude Code"
+  },
   "claude-opus-5-5": {
    "model": "Claude Opus 5.5",
    "effort": "max",
-   "harness": "Claude Code",
-   "caveat": "AA labels this configuration 'Default Fallback'; Cognition's board states model + effort (Claude Code harness) but says nothing about a fallback setting, so that qualifier is unverified on Cognition's side."
+   "harness": "Claude Code"
   },
   "claude-opus-5-5-high": {
    "model": "Claude Opus 5.5",
    "effort": "high",
-   "harness": "Claude Code",
-   "caveat": "AA labels this configuration 'Default Fallback'; Cognition's board states model + effort (Claude Code harness) but says nothing about a fallback setting, so that qualifier is unverified on Cognition's side."
-  },
-  "claude-opus-5-5-medium": {
-   "model": "Claude Opus 5.5",
-   "effort": "medium",
-   "harness": "Claude Code",
-   "caveat": "AA labels this configuration 'Default Fallback'; Cognition's board states model + effort (Claude Code harness) but says nothing about a fallback setting, so that qualifier is unverified on Cognition's side."
+   "harness": "Claude Code"
   },
   "claude-opus-5-5-xhigh": {
    "model": "Claude Opus 5.5",
    "effort": "xhigh",
-   "harness": "Claude Code",
-   "caveat": "AA labels this configuration 'Default Fallback'; Cognition's board states model + effort (Claude Code harness) but says nothing about a fallback setting, so that qualifier is unverified on Cognition's side."
+   "harness": "Claude Code"
   },
   "claude-sonnet-5-5": {
    "model": "Claude Sonnet 5.5",
    "effort": "max",
-   "harness": "Claude Code",
-   "caveat": "AA labels this configuration 'Default Fallback'; Cognition's board states model + effort (Claude Code harness) but says nothing about a fallback setting, so that qualifier is unverified on Cognition's side."
-  },
-  "claude-sonnet-5-5-xhigh": {
-   "model": "Claude Sonnet 5.5",
-   "effort": "xhigh",
-   "harness": "Claude Code",
-   "caveat": "AA labels this configuration 'Default Fallback'; Cognition's board states model + effort (Claude Code harness) but says nothing about a fallback setting, so that qualifier is unverified on Cognition's side."
-  },
-  "gemini-4-argon": {
-   "model": "Gemini 4 Argon",
-   "effort": "high",
-   "harness": "Devin CLI",
-   "caveat": "Cohort display name has no effort; AA page states effort high."
+   "harness": "Claude Code"
   },
   "gemini-4-carbon": {
    "model": "Gemini 4 Carbon",
    "effort": "high",
-   "harness": "Devin CLI"
+   "harness": "Antigravity CLI"
+  },
+  "gemini-4-neon": {
+   "model": "Gemini 4 Neon",
+   "effort": "xhigh",
+   "harness": "Antigravity CLI"
+  },
+  "gemini-4-neon-high": {
+   "model": "Gemini 4 Neon",
+   "effort": "high",
+   "harness": "Antigravity CLI"
+  },
+  "gemini-4-neon-medium": {
+   "model": "Gemini 4 Neon",
+   "effort": "medium",
+   "harness": "Antigravity CLI"
+  },
+  "gpt-6-1-sol": {
+   "model": "GPT-6.1 Sol",
+   "effort": "max",
+   "harness": "Codex",
+   "caveat": "Cognition's board JS lists this model under another model's lineage (shown in the lineage animation on hover, excluded from the default list); its row is in data.json."
+  },
+  "gpt-6-1-sol-high": {
+   "model": "GPT-6.1 Sol",
+   "effort": "high",
+   "harness": "Codex",
+   "caveat": "Cognition's board JS lists this model under another model's lineage (shown in the lineage animation on hover, excluded from the default list); its row is in data.json."
+  },
+  "gpt-6-1-sol-low": {
+   "model": "GPT-6.1 Sol",
+   "effort": "low",
+   "harness": "Codex",
+   "caveat": "Cognition's board JS lists this model under another model's lineage (shown in the lineage animation on hover, excluded from the default list); its row is in data.json."
+  },
+  "gpt-6-1-sol-medium": {
+   "model": "GPT-6.1 Sol",
+   "effort": "medium",
+   "harness": "Codex",
+   "caveat": "Cognition's board JS lists this model under another model's lineage (shown in the lineage animation on hover, excluded from the default list); its row is in data.json."
+  },
+  "gpt-6-1-sol-xhigh": {
+   "model": "GPT-6.1 Sol",
+   "effort": "xhigh",
+   "harness": "Codex",
+   "caveat": "Cognition's board JS lists this model under another model's lineage (shown in the lineage animation on hover, excluded from the default list); its row is in data.json."
+  },
+  "gpt-6-2-astra": {
+   "model": "GPT-6.2 Astra",
+   "effort": "max",
+   "harness": "Codex"
+  },
+  "gpt-6-2-astra-high": {
+   "model": "GPT-6.2 Astra",
+   "effort": "high",
+   "harness": "Codex"
+  },
+  "gpt-6-2-astra-medium": {
+   "model": "GPT-6.2 Astra",
+   "effort": "medium",
+   "harness": "Codex"
+  },
+  "gpt-6-2-astra-xhigh": {
+   "model": "GPT-6.2 Astra",
+   "effort": "xhigh",
+   "harness": "Codex"
+  },
+  "gpt-6-2-sol": {
+   "model": "GPT-6.2 Sol",
+   "effort": "max",
+   "harness": "Codex"
+  },
+  "gpt-6-2-sol-high": {
+   "model": "GPT-6.2 Sol",
+   "effort": "high",
+   "harness": "Codex"
+  },
+  "gpt-6-2-sol-low": {
+   "model": "GPT-6.2 Sol",
+   "effort": "low",
+   "harness": "Codex"
+  },
+  "gpt-6-2-sol-medium": {
+   "model": "GPT-6.2 Sol",
+   "effort": "medium",
+   "harness": "Codex"
+  },
+  "gpt-6-2-sol-xhigh": {
+   "model": "GPT-6.2 Sol",
+   "effort": "xhigh",
+   "harness": "Codex"
   },
   "gpt-6-astra": {
    "model": "GPT-6 Astra",
    "effort": "max",
-   "harness": "Codex"
+   "harness": "Codex",
+   "caveat": "Cognition's board JS lists this model under another model's lineage (shown in the lineage animation on hover, excluded from the default list); its row is in data.json."
   },
   "gpt-6-astra-high": {
    "model": "GPT-6 Astra",
    "effort": "high",
-   "harness": "Codex"
+   "harness": "Codex",
+   "caveat": "Cognition's board JS lists this model under another model's lineage (shown in the lineage animation on hover, excluded from the default list); its row is in data.json."
   },
   "gpt-6-astra-xhigh": {
    "model": "GPT-6 Astra",
    "effort": "xhigh",
-   "harness": "Codex"
+   "harness": "Codex",
+   "caveat": "Cognition's board JS lists this model under another model's lineage (shown in the lineage animation on hover, excluded from the default list); its row is in data.json."
   },
   "gpt-6-luna": {
    "model": "GPT-6 Luna",
@@ -6146,31 +6420,6 @@
   },
   "gpt-6-luna-xhigh": {
    "model": "GPT-6 Luna",
-   "effort": "xhigh",
-   "harness": "Codex"
-  },
-  "gpt-6.1-sol": {
-   "model": "GPT-6.1 Sol",
-   "effort": "max",
-   "harness": "Codex"
-  },
-  "gpt-6.1-sol-high": {
-   "model": "GPT-6.1 Sol",
-   "effort": "high",
-   "harness": "Codex"
-  },
-  "gpt-6.1-sol-low": {
-   "model": "GPT-6.1 Sol",
-   "effort": "low",
-   "harness": "Codex"
-  },
-  "gpt-6.1-sol-medium": {
-   "model": "GPT-6.1 Sol",
-   "effort": "medium",
-   "harness": "Codex"
-  },
-  "gpt-6.1-sol-xhigh": {
-   "model": "GPT-6.1 Sol",
    "effort": "xhigh",
    "harness": "Codex"
   }
