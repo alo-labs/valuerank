@@ -47,13 +47,13 @@ COMPONENT_FAMILIES = {
     "itbench-aa": ("itbench-aa",),
     **{component: (component,) for component in basket.INDEX_SDLC_TASKS},
 }
-COMPONENT_FAMILIES["terminalbench-4-0"] = ("terminal-bench-v4",)
+COMPONENT_FAMILIES["terminalbench-4-1"] = ("terminal-bench-v4",)
 POOLED = "unidentified: the component publishes one pooled cost across its families"
 
 # Matched-cost families (E103): leaves whose execution family has an exact AA per-evaluation cost per task for
 # every configuration (task count x mean cost per task); the AA Index evaluation slug and its task count.
 MATCHED_FAMILIES = {
-    "terminalBench": ("terminalbench-4-0", basket.INDEX_SDLC_TASKS["terminalbench-4-0"]),
+    "terminalBench": ("terminalbench-4-1", basket.INDEX_SDLC_TASKS["terminalbench-4-1"]),
     "frontierCode": ("frontiercode-2-0", basket.INDEX_SDLC_TASKS["frontiercode-2-0"]),
     "automationBench": ("automationbench-aa", basket.INDEX_SDLC_TASKS["automationbench-aa"]),
     "tbScience": ("terminal-bench-science", basket.INDEX_SDLC_TASKS["terminal-bench-science"]),
@@ -76,7 +76,7 @@ SOLVED_FRACTION_LEAVES = {"frontierCode", "terminalBench", "lcr", "hle", "tbScie
 MATCHED_MIN_PRICED_WEIGHT = 0.40
 MATCHED_RATIO_LIMIT = 1.5
 MATCHED_RANK_LIMIT = 3
-SWE_COMPONENTS = (basket.CODING_AGENT_INDEX, "terminalbench-4-0")
+SWE_COMPONENTS = (basket.CODING_AGENT_INDEX, "terminalbench-4-1")
 SWE_DEVIATION_LIMIT = 0.5
 
 
@@ -160,7 +160,7 @@ def swe_companion(rows: list[dict], main_workload: str) -> dict:
     ratios = _panel_ratios(costs, basket_costs)
     median = statistics.median(ratios.values()) if ratios else None
     return {
-        "rule": "c_SWE = Coding Agent Index cost + Terminal-Bench 4.0 (AA Index run) cost, from published per-task costs; flagged when its ratio to the basket cost deviates by more than 50% from the panel median",
+        "rule": "c_SWE = Coding Agent Index cost + Terminal-Bench 4.1 (AA Index run) cost, from published per-task costs; flagged when its ratio to the basket cost deviates by more than 50% from the panel median",
         "excludedComponents": {},  # O50: FrontierCode is priced inside the Coding Agent Index v2.0
         "medianRatio": median,
         "rows": {

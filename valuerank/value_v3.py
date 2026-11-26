@@ -57,6 +57,7 @@ BUG_HUNT_HALF_WIDTH = 0.05  # owner means of bugs fixed are published to 0.1 bug
 # O136: the v5 successors' page fields (FrontierCode 2.0, HLE-Diamond, CritPt v2 hard subset, Terminal-Bench-Science).
 FRACTION_LEAVES = {
     "frontierCode": "frontierCode20",
+    "gdpPdf": "gdpPdfAllPass",
     "automationBench": "automationBenchPartialScore",
     "lcr": "lcr",
     "hle": "hleDiamond",
@@ -74,7 +75,7 @@ SAMPLING_STREAM = "S1T"  # O39: benchmark sampling noise, independent-task appro
 # methodology; FrontierCode 1.1 Main's 100 tasks; Bug Hunt's 105 planted bugs).
 LCR_TASKS = 100  # AA-LCR v1.1's documents; v5 runs it outside the Index, so it is no longer a basket component (O137)
 SAMPLING_TASKS = {
-    "frontierCode": basket.INDEX_SDLC_TASKS["frontiercode-2-0"], "terminalBench": basket.INDEX_SDLC_TASKS["terminalbench-4-0"],
+    "frontierCode": basket.INDEX_SDLC_TASKS["frontiercode-2-0"], "terminalBench": basket.INDEX_SDLC_TASKS["terminalbench-4-1"], "gdpPdf": basket.INDEX_SDLC_TASKS["gdp-pdf"],
     "bugHunt": 105, "automationBench": basket.INDEX_SDLC_TASKS["automationbench-aa"], "lcr": LCR_TASKS,
     "tbScience": basket.INDEX_SDLC_TASKS["terminal-bench-science"], "hle": basket.INDEX_RESIDUAL_TASKS["hle-diamond"],
     "critpt": basket.INDEX_RESIDUAL_TASKS["critpt-v2-hard"], "omniscience": basket.INDEX_RESIDUAL_TASKS["omniscience"],
@@ -140,7 +141,7 @@ LEAF_SEARCH_MAX_AGE_DAYS = 7
 
 
 # E237: the benchmark version a gap fill must state (O36: "the same benchmark version on the exact configuration").
-SUPPLEMENT_VERSIONS = {"bugHunt": "Bug Hunt Bench", "frontierCode": "FrontierCode 2.0", "terminalBench": "Terminal-Bench 4.0"}
+SUPPLEMENT_VERSIONS = {"bugHunt": "Bug Hunt Bench", "frontierCode": "FrontierCode 2.0", "terminalBench": "Terminal-Bench 4.1"}
 
 
 def check_comparability(entry: dict) -> None:
@@ -215,11 +216,12 @@ def leaf_evidence(model_id: str, effort: str | None, page: dict, tb4_rows: list[
             {"source": "Bug Hunt Bench owner-published runs", "configuration": bug_hunt.get("evaluatedModel"), "harness": bug_hunt.get("harness"), "runs": bug_hunt.get("sampleN"),
              "planted": bug_hunt["fixedOf105"], "unplanted": bug_hunt["extras"]},
             "bugHunt", f"models[modelId={model_id}].fixedOf105 + models[modelId={model_id}].extras")
-    # O37: AA's own Terminal-Bench 4.0 run (one harness, every configuration) is the leaf; tbench.ai fills a gap.
-    if page.get("terminalBench40") is not None:
-        add("terminalBench", 100.0 * page["terminalBench40"], q.percent_z(100.0 * page["terminalBench40"]),
-            {"source": "AA Terminal-Bench 4.0 run (Intelligence Index, mini-SWE-agent harness)", "agent": "mini-SWE-agent"},
-            "snapshot", f"{page_path}.terminalBench40")
+    # O37: AA's own Terminal-Bench 4.1 run (one harness, every configuration) is the leaf; tbench.ai fills a gap. O136 precedent: AA's
+    # Index v5.0.2 runs 4.1 (the same 66 tasks) where v5.0 ran 4.0, so the leaf takes the successor at its weight.
+    if page.get("terminalBench41") is not None:
+        add("terminalBench", 100.0 * page["terminalBench41"], q.percent_z(100.0 * page["terminalBench41"]),
+            {"source": "AA Terminal-Bench 4.1 run (Intelligence Index, mini-SWE-agent harness)", "agent": "mini-SWE-agent"},
+            "snapshot", f"{page_path}.terminalBench41")
     tb4 = None if "terminalBench" in observations else exact_match.select_tb4_row(model_id, effort, tb4_rows)
     if tb4 is not None:
         add("terminalBench", tb4["resolutionRatePct"], q.percent_z(tb4["resolutionRatePct"], TB4_HALF_WIDTH_PCT),
@@ -2327,7 +2329,7 @@ def common_leaf_diagnostic(rows: list[dict], per_row: dict, frozen: dict, qualit
 
 # E64/E149: the standing cost-component removal. The Coding Agent Index runs Terminal-Bench v4 too, so the
 # column removes AA's Index-run Terminal-Bench 4.0 cost; quality stays primary (E146 governs quality deletion).
-STANDING_COST_REMOVAL = "terminalbench-4-0"
+STANDING_COST_REMOVAL = "terminalbench-4-1"
 FIXED_ANCHOR_LABEL = "cost-component removal, original anchors"
 RECALIBRATED_LABEL = "alternative workload, recalibrated anchors"
 FIXED_MULTIPLE_LABEL = "fixed-multiple arithmetic stress (not identified Plan economics for the altered workload)"
@@ -2871,7 +2873,7 @@ def announced_change_sensitivity(plan_rows: list[dict], per_plan: dict, frozen: 
     return {"label": ANNOUNCED_CHANGE_LABEL, "rows": out}
 
 
-CROSSCHECK_COMPONENT = "terminalbench-4-0"
+CROSSCHECK_COMPONENT = "terminalbench-4-1"
 
 
 # O182 (2026-11-03, on reviewer 103, amending O160): while a ranking's workload cross-check (E41) reads "low agreement" (τ_b

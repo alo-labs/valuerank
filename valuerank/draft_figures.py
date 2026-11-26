@@ -670,7 +670,7 @@ def _bug_hunt_search_empty(model_id: str):
     return holds
 
 
-AA_LEAF_FIELDS = (*value_v3.FRACTION_LEAVES.values(), "terminalBench40", "omniscience", "gdpval")
+AA_LEAF_FIELDS = (*value_v3.FRACTION_LEAVES.values(), "terminalBench41", "omniscience", "gdpval")
 _INTERVAL_SUFFIX = re.compile(r"(?i)(?:Interval|Ci95|Ci|Lower|Upper|Stderr|Se|Error)\Z")
 
 
@@ -736,7 +736,7 @@ ABSENCE_CLAIMS = {
     "aicd.error": ("AI Coding Daily rows carry no error", _no_key("research/2026-10-25-board-reread/aicd/leaderboard-allrows-parsed.json", r"(?i)error|stderr|interval|ci\b")),
     "livebench.taskCounts": ("the 2026-10-23 LiveBench release carries no task counts",
                              _no_key("research/2026-10-25-board-reread/livebench/categories-20261023.json", r"(?i)count|tasks|questions")),
-    "aa.terminalBenchInterval": ("AA's pages carry no Terminal-Bench 4.0 interval", lambda data: not _leaf_interval_fields(data, ("terminalBench40",))),
+    "aa.terminalBenchInterval": ("AA's pages carry no Terminal-Bench 4.1 interval", lambda data: not _leaf_interval_fields(data, ("terminalBench41",))),
     "aa.leafIntervals": ("AA's pages carry no interval for a ValueRank AA leaf other than GDPval-AA's",
                          lambda data: _leaf_interval_fields(data, AA_LEAF_FIELDS) == {"gdpvalInterval"}),
 }

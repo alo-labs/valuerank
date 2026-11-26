@@ -50,7 +50,9 @@ class Leaf:
 
 # The seven leaves outside software engineering, shared by every ranking.
 COMMON_LEAVES = (
-    Leaf("gdpval", "GDPval-AA v2.1", "professional", 10.0, "aa"),
+    Leaf("gdpval", "GDPval-AA v2.1", "professional", 5.0, "aa"),
+    # O210 (2026-11-26): AA's GDP.pdf all-pass score joins GDPval-AA, which keeps half of its former 10 points (O213: both leaves stay, strictly).
+    Leaf("gdpPdf", "GDP.pdf (AA)", "professional", 5.0, "aa"),
     Leaf("automationBench", "AutomationBench-AA", "professional", 10.0, "aa"),
     # LiveBench instruction following is retired (owner decision O26): Omniscience takes the group's 10%.
     Leaf("omniscience", "AA-Omniscience v1.1", "reliability", 10.0, "aa"),
@@ -69,7 +71,7 @@ COMMON_LEAVES = (
 TRACKS = {
     "max": (
         Leaf("frontierCode", "FrontierCode 2.0", "swe", 15.0, "aa"),
-        Leaf("terminalBench", "Terminal-Bench 4.0 (AA run)", "swe", 11.0, "aa"),
+        Leaf("terminalBench", "Terminal-Bench 4.1 (AA run)", "swe", 11.0, "aa"),
         Leaf("bugHunt", "Bug Hunt Bench", "swe", 8.0, "independent"),
         Leaf("vibeCode", "Vibe Code Bench v1.1 (Vals)", "swe", 5.0, "independent"),
         Leaf("codeMigration", "Code Migration v1.1 (Vals)", "swe", 6.0, "independent"),
@@ -78,7 +80,7 @@ TRACKS = {
     ),
     "aicd": (
         Leaf("frontierCode", "FrontierCode 2.0", "swe", 21.0, "aa"),
-        Leaf("terminalBench", "Terminal-Bench 4.0 (AA run)", "swe", 17.0, "aa"),
+        Leaf("terminalBench", "Terminal-Bench 4.1 (AA run)", "swe", 17.0, "aa"),
         Leaf("bugHunt", "Bug Hunt Bench", "swe", 12.0, "independent"),
         Leaf("aiCodingDaily", "AI Coding Daily (excl. bug finding)", "swe", 10.0, "independent"),
         *COMMON_LEAVES,
@@ -88,7 +90,7 @@ TRACKS = {
     # and scenario run, but it earns no label and never holds a release; it is not a headline ranking.
     "common": (
         Leaf("frontierCode", "FrontierCode 2.0", "swe", 25.0, "aa"),
-        Leaf("terminalBench", "Terminal-Bench 4.0 (AA run)", "swe", 20.0, "aa"),
+        Leaf("terminalBench", "Terminal-Bench 4.1 (AA run)", "swe", 20.0, "aa"),
         Leaf("bugHunt", "Bug Hunt Bench", "swe", 15.0, "independent"),
         *COMMON_LEAVES,
     ),
@@ -302,6 +304,7 @@ LEAF_DOMAINS = {
     "frontierCode": ("fraction", 0.0, 1.0),
     "terminalBench": ("percent", 0.0, 100.0),
     "gdpval": ("Elo", -math.inf, math.inf),
+    "gdpPdf": ("fraction", 0.0, 1.0),
     "automationBench": ("fraction", 0.0, 1.0),
     "omniscience": ("AA Omniscience Index", -100.0, 100.0),
     "lcr": ("fraction", 0.0, 1.0),

@@ -83,6 +83,7 @@ LEAF_INFO = {
     "frontierCode": {"unit": "AA score (0-1)", "url": BENCHMARK_URLS["FrontierCode 2.0"]},
     "terminalBench": {"unit": "% resolved", "url": BENCHMARK_URLS["Terminal-Bench 4.0"]},
     "gdpval": {"unit": "Elo", "url": BENCHMARK_URLS["GDPval-AA v2.1"]},
+    "gdpPdf": {"unit": "share of tasks fully passed (0-1)", "url": BENCHMARK_URLS["GDP.pdf"]},
     "automationBench": {"unit": "AA score (0-1)", "url": BENCHMARK_URLS["AutomationBench-AA"]},
     "omniscience": {"unit": "AA Omniscience Index (-100 to 100)", "url": BENCHMARK_URLS["AA-Omniscience Accuracy"]},
     "lcr": {"unit": "accuracy (0-1)", "url": BENCHMARK_URLS["AA-LCR v1.1"]},
@@ -97,11 +98,11 @@ LEAF_INFO = {
     "aiCodingDaily": {"unit": "points of 60", "url": "https://aicodingdaily.com/leaderboard"},
 }
 # Public source names (the engine's provenance strings are internal and stay in scores.json).
-AA_SOURCE = "Artificial Analysis model page (Intelligence Index v5.0)"
+AA_SOURCE = "Artificial Analysis model page (Intelligence Index v5.0.2)"
 SOURCE_NAMES = {
     "deepswe": "AA Coding Agent Index (DeepSWE v1.1)",
     "bugHunt": "Bug Hunt Bench published runs",
-    "terminalBench": "Artificial Analysis Terminal-Bench 4.0 run (mini-SWE-agent)",
+    "terminalBench": "Artificial Analysis Terminal-Bench 4.1 run (mini-SWE-agent)",
 }
 TB_GAP_SOURCE = "tbench.ai Terminal-Bench 4.0 leaderboard (gap fill, O37)"
 LEAF_NOTES = {

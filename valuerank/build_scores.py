@@ -943,7 +943,7 @@ def main(*, root: Path = ROOT, data: Path = DATA) -> int:
             "gdpvalV21": aa_metrics.get("gdpvalV21"),
             "gdpvalV21Normalized": aa_metrics.get("gdpvalV21Normalized"),
             "automationBenchAA": aa_metrics.get("automationBenchAA"),
-            "aaTerminalBenchV40": aa_metrics.get("terminalBenchV40"),
+            "aaTerminalBenchV41": aa_metrics.get("terminalBenchV41"),
             "aaTerminalBenchV21": supplemental.get("terminalBenchV21"),
             "legacyTau3Banking": supplemental.get("tauBanking"),
             "livebenchModel": livebench.get("livebenchModel"),

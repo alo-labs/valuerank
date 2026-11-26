@@ -383,7 +383,7 @@ def interval_sentences(facts):
     return sentences
 
 
-CODING_COMPONENTS = ("coding-agent-index", "terminalbench-4-0", "frontiercode-2-0")
+CODING_COMPONENTS = ("coding-agent-index", "terminalbench-4-1", "frontiercode-2-0")
 # E343 (reviewer 100, owner correction): Terminal-Bench-Science is terminal-task execution in the SDLC basket (O137) although its
 # quality sits with science (O136), so the share is also printed with it counted.
 TERMINAL_SCIENCE = "terminal-bench-science"
@@ -511,7 +511,7 @@ def search_gap_text(policy):
 def sampling_counts_text():
     """O39, O142: each binomial leaf's published task count, from the engine's table (never restated by hand)."""
 
-    labels = {"frontierCode": "FrontierCode 2.0", "terminalBench": "Terminal-Bench 4.0", "automationBench": "AutomationBench-AA", "lcr": "AA-LCR",
+    labels = {"frontierCode": "FrontierCode 2.0", "terminalBench": "Terminal-Bench 4.1", "gdpPdf": "GDP.pdf", "automationBench": "AutomationBench-AA", "lcr": "AA-LCR",
               "tbScience": "Terminal-Bench-Science", "hle": "HLE-Diamond", "critpt": "CritPt v2 (hard subset)"}
     counts = ", ".join(f"{label} {value_v3.SAMPLING_TASKS[key]:,}" for key, label in labels.items())
     return f"{counts}, Bug Hunt's {value_v3.SAMPLING_TASKS['bugHunt']} bugs"
