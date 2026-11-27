@@ -2979,3 +2979,11 @@ Asked on I64 Q1 whether future O71 admissions should be executed by the build fr
   - The review copy names `draft-r238.md` for the omitted revision history.
 - Not adopted (design recommendations for a later release): structural dual-run provenance stamps, a quantifier lint, a leave-one-reference-out Plan anchor range, a vacuous-rule index for the multi-row rules, and richer `planAlternatives` fields.
 - E359 (2026-11-27, editorial, O219's tie rule made explicit): a configuration's ranked plan is the plan whose comparator-chosen route has the largest comparison multiple. That is the multiple E74 scores (a set-identified route's lower bound), so it gives the lowest Plan cost. On equal multiples the plan of the comparator's choice over all routes is kept, then the first plan name. Selection runs per configuration within the E88 filter, so within one valuation basis and allocation regime. The measured-only view (E113) reruns the same selection among measured candidates.
+- Confirmation round on the folded sentences (Kimi K3, GLM 5.3, at fceb29e): both returned HAS FEEDBACK with no Critical or High finding. Folded as wording:
+  - The dual-run rule now applies to same-workload re-freezes (a workload migration has no dual run, E184).
+  - The a4 API-anchor clause is rewritten so it parses.
+  - The fault-window clause states its count ("2 and 11 of them").
+  - The 2026-11-01 a4 is dated where two a4 versions appear.
+  - The band span count is marked as one that cannot be non-zero while O219 holds (kept as a build check).
+  - The dual run's API side is said to compare identical anchors.
+  Under O209 the targeted check of r238 is complete.
