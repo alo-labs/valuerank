@@ -77,3 +77,5 @@ E-numbers in the draft mark editor decisions; each adopted one is reflected in t
 - O209 targeted re-review after the 2026-11-26 release; O210 GDP.pdf leaf added (GDPval-AA 5 + GDP.pdf 5); O211 LiveBench pin advances to 20261106; O212 temporary introductory prices are never used.
 - O213/O214 GDPval-AA and AA-LCR stay (strict, rows without them are listed, not ranked); O215 AI Coding Daily leaf out of 80 with the Python project; O216 Vibe Code Bench migrates to v1.1.1. Draft r237: Index v5.0.2, Coding Agent Index v2.1 (322 tasks; FrontierCode 2.0 and Terminal-Bench each priced twice, O24/O208), Terminal-Bench 4.1, GDP.pdf leaf (E203 unrewarded share is AA-Briefcase plus SWE-Atlas QnA, 124/322), cache-write rule re-checked by reconciliation.
 
+
+- O219 (2026-11-27, amends O48): each configuration is ranked once on the Plan basis, on its most favorable plan (the plan whose comparator-selected route gives the lowest Plan cost; tie: the comparator's choice); other plans are disclosed alternatives, never ranked; Plan anchors re-frozen (a5) with a dual run.
