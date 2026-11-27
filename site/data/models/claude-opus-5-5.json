@@ -8,11 +8,11 @@
   "summary": {
     "rank": {
       "api": 5,
-      "plan": 7
+      "plan": 3
     },
     "overall": {
       "api": 51.36753359625901,
-      "plan": 65.32612267928657
+      "plan": 63.626282304716064
     },
     "quality": 64.31852033742345,
     "qualityRank": 3,
@@ -308,7 +308,7 @@
     ],
     "costScore": {
       "api": 12.514573372765675,
-      "plan": 68.34892970487594
+      "plan": 61.54956820659391
     },
     "components": [
       {
@@ -422,8 +422,8 @@
       "planIntervalEligible": false,
       "usdPerRun": 188.62166169327534,
       "selected": true,
-      "planRank": 7,
-      "planValue": 65.32612267928657
+      "planRank": 3,
+      "planValue": 63.626282304716064
     },
     {
       "id": "claude-max20x-opus55-semianalysis",
@@ -458,8 +458,8 @@
       "planIntervalEligible": false,
       "usdPerRun": 194.05791919185884,
       "selected": false,
-      "planRank": 8,
-      "planValue": 65.11001598642403
+      "planRank": null,
+      "planValue": null
     },
     {
       "id": "claude-max20x-opus55-user-reports",
@@ -476,8 +476,8 @@
       "planIntervalEligible": false,
       "usdPerRun": 204.94034078092452,
       "selected": false,
-      "planRank": 10,
-      "planValue": 64.6957049294266
+      "planRank": null,
+      "planValue": null
     }
   ],
   "scenarios": {
@@ -554,7 +554,7 @@
         "targetProfile": "published-record reporting precision",
         "unevaluable": null,
         "top1": 0.0,
-        "top3": 0.0,
+        "top3": 1.0,
         "frontier": 0.0
       },
       {
@@ -563,7 +563,7 @@
         "targetProfile": "published-record reporting precision + conventional identification of missing leaves",
         "unevaluable": null,
         "top1": 0.0,
-        "top3": 0.0,
+        "top3": 1.0,
         "frontier": 0.0
       },
       {
@@ -571,8 +571,8 @@
         "kernel": "primary",
         "targetProfile": "published-record reporting precision + conventional identification of missing leaves + weight-specification stress",
         "unevaluable": null,
-        "top1": 0.0001,
-        "top3": 0.0002,
+        "top1": 0.0,
+        "top3": 1.0,
         "frontier": 0.5411
       },
       {
@@ -581,7 +581,7 @@
         "targetProfile": "published-record reporting precision + conventional identification of missing leaves",
         "unevaluable": null,
         "top1": 0.0,
-        "top3": 0.0,
+        "top3": 1.0,
         "frontier": 0.0
       },
       {
@@ -590,7 +590,7 @@
         "targetProfile": "published-record reporting precision + conventional identification of missing leaves + conventional range sensitivity inside published 95% confidence intervals (no tail model)",
         "unevaluable": null,
         "top1": 0.0,
-        "top3": 0.0,
+        "top3": 1.0,
         "frontier": 0.0
       },
       {
@@ -598,8 +598,8 @@
         "kernel": "primary",
         "targetProfile": "mixed-target performance dispersion stress, not a common confidence interval for published mean performance (reviewer 101): published-record leaf values redrawn from task-count approximations (binomial leaves from their Jeffreys Beta posterior, O142, with its recentred, clipped alternative, O154, whose realised mean shift is reported; independent-task approximation), Vals' published standard errors, an assumed reading of GDPval-AA's displayed rating interval and Bug Hunt's single-run dispersion + conventional identification of missing leaves",
         "unevaluable": null,
-        "top1": 0.0316,
-        "top3": 0.0406,
+        "top1": 0.0104,
+        "top3": 1.0,
         "frontier": 0.4877
       },
       {
@@ -607,8 +607,8 @@
         "kernel": "recentred",
         "targetProfile": "mixed-target performance dispersion stress, not a common confidence interval for published mean performance (reviewer 101): published-record leaf values redrawn from task-count approximations (binomial leaves from their Jeffreys Beta posterior, O142, with its recentred, clipped alternative, O154, whose realised mean shift is reported; independent-task approximation), Vals' published standard errors, an assumed reading of GDPval-AA's displayed rating interval and Bug Hunt's single-run dispersion + conventional identification of missing leaves",
         "unevaluable": null,
-        "top1": 0.0306,
-        "top3": 0.04,
+        "top1": 0.0132,
+        "top3": 1.0,
         "frontier": 0.4957
       }
     ]
@@ -706,7 +706,15 @@
       "date": "2026-11-26",
       "rank": {
         "api": 5,
-        "plan": 7
+        "plan": null
+      }
+    },
+    {
+      "version": "v3.2.0",
+      "date": "2026-11-27",
+      "rank": {
+        "api": 5,
+        "plan": 3
       }
     }
   ],
@@ -727,11 +735,11 @@
       "rankingEligible": true,
       "rank": {
         "api": 5,
-        "plan": 7
+        "plan": 3
       },
       "overall": {
         "api": 51.36753359625901,
-        "plan": 65.32612267928657
+        "plan": 63.626282304716064
       }
     },
     {
@@ -757,11 +765,11 @@
       "rankingEligible": true,
       "rank": {
         "api": 16,
-        "plan": 33
+        "plan": 10
       },
       "overall": {
         "api": 43.80117672168775,
-        "plan": 53.755753493580016
+        "plan": 51.946429926232945
       }
     }
   ]

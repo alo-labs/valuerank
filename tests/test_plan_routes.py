@@ -386,14 +386,20 @@ def test_pooled_partitions_age_with_their_contributing_reports():
 
 
 def test_measured_only_selection_drops_transfers_and_reruns_the_selector():
-    """E113: the measured-only view keeps exact-route measurements and reruns selection."""
+    """E113: the measured-only view keeps exact-route measurements and reruns selection, O219's most favorable plan
+    included."""
 
     transfer = candidate("transfer", 50.0, "assumption")
     measured = candidate("measured", 8.0, "controlled")
     report = candidate("report", 9.0, "reports")
+    for item in (transfer, measured, report):
+        item["route"]["plan"] = "Pro"
     assert pr.route_selection([transfer, report])["selected"]["route"]["id"] == "report"
     view = pr.measured_only_selection([transfer, measured, report])
-    assert view["selected"]["route"]["id"] == "measured"
+    assert view["selected"]["route"]["id"] == "measured"  # one plan: the comparator's grade order decides
+    report["route"]["plan"] = "Max"
+    across = pr.measured_only_selection([transfer, measured, report])
+    assert across["selected"]["route"]["id"] == "report" and across["plan"] == "Max"  # O219: the larger multiple's plan
     assert pr.measured_only_selection([transfer])["selected"] is None
 
 
@@ -980,3 +986,28 @@ def test_a_paywalled_article_needs_a_recent_reread():
         with pytest.raises(ValueError, match="O130"):
             pr.check_source_rereads({"sourceEvidence": {"sa": stale}}, day)
     assert pr.check_source_rereads({"sourceEvidence": {"sa": {"paywalled": True, "rereads": [{"readOn": "2026-09-25"}]}}}, day) == "2026-09-25"
+
+
+def test_a_configuration_is_ranked_once_on_its_most_favorable_plan():
+    """O219: the plan whose own selected route has the largest multiple (the lowest Plan cost) wins, even over the E85
+    comparator's grade order; a tie keeps the comparator's choice; the other plans are disclosed alternatives."""
+
+    def on(plan, identifier, multiple, grade):
+        item = candidate(identifier, multiple, grade)
+        item["route"]["plan"] = plan
+        return item
+
+    measured = on("Pro", "pro-measured", 8.0, "controlled")
+    assumed = on("Max", "max-assumed", 12.0, "assumption")
+    selection = pr.favorable_selection([measured, assumed])
+    assert pr.route_selection([measured, assumed])["selected"]["route"]["id"] == "pro-measured"  # the comparator ranks grade first
+    assert selection["selected"]["route"]["id"] == "max-assumed" and selection["plan"] == "Max" and selection["reason"] == pr.FAVORABLE_PLAN
+    assert selection["alternatives"] == [{"plan": "Pro", "routeId": "pro-measured", "multiple": 8.0}]
+    tie = pr.favorable_selection([measured, on("Max", "max-tie", 8.0, "assumption")])
+    assert tie["selected"]["route"]["id"] == "pro-measured" and tie["plan"] == "Pro" and tie["reason"] != pr.FAVORABLE_PLAN
+    unnamed = candidate("no-plan", 3.0, "controlled")
+    unnamed["route"].pop("plan", None)
+    assert pr.favorable_selection([unnamed])["plan"] == "no-plan"
+    none = pr.favorable_selection([candidate("gone", 3.0, "diagnostic")])
+    assert none["selected"] is None and none["plan"] is None and none["alternatives"] == []
+    assert pr.plan_selections([measured, assumed]).keys() == {"Max", "Pro"}

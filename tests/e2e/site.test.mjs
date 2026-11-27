@@ -42,7 +42,7 @@ describe('answer page', () => {
     assert.equal(await page.locator('h1 [data-basis-only="api"]').isVisible(), false);
     assert.equal(await page.evaluate(() => document.documentElement.dataset.basis), 'plan');
     assert.equal(await page.locator('[data-pick]:visible').count(), 3);
-    assert.equal(await page.locator('#index-body tr').count(), 16);
+    assert.equal(await page.locator('#index-body tr').count(), 5); // O219: one row per ranked configuration
     assert.equal(await query(page), '');
     assert.deepEqual(errors, []);
     await context.close();
@@ -98,7 +98,7 @@ describe('evidence footnotes', () => {
   test('the answer page has no Evidence column and its notes follow the basis', async () => {
     const { page, context, errors } = await open('/');
     assert.equal(await page.locator('#answer-table thead th', { hasText: 'Evidence' }).count(), 0);
-    assert.equal(await page.locator('#index-evidence li').count(), 16);
+    assert.equal(await page.locator('#index-evidence li').count(), 5);
     assert.equal(await notesMatchRows(page, '#index-body', '#index-evidence'), true);
     await page.locator('#basis-toggle [data-basis="api"]').click();
     assert.equal(await notesMatchRows(page, '#index-body', '#index-evidence'), true);
@@ -153,10 +153,9 @@ describe('evidence footnotes', () => {
 describe('rankings instrument', () => {
   test('filters, sorting, columns and comparison all live in the URL', async () => {
     const { page, context, errors } = await open('/rankings/');
-    // O48/O53: the max-effort ranking's Plan basis has one row per configuration and plan, then every roster model it does not
-    // rank; at the 2026-11-26 release the roster is the 45-configuration cohort (O145): 19 plan rows (5 ranked configurations) and 40
-    // unranked models. O198 gives GPT-6 Luna (max) an OpenCode Go row beside its plan rows.
-    assert.equal(await page.locator('#rankings-body tr').count(), 59);
+    // O53/O219: the max-effort ranking's Plan basis has one row per ranked configuration, on its most favorable plan (5), then
+    // every roster model it does not rank (40, of the 45-configuration cohort).
+    assert.equal(await page.locator('#rankings-body tr').count(), 45);
 
     await page.locator('#filters input[name="provider"][value="OpenAI"]').check();
     assert.match(await query(page), /provider=OpenAI/);

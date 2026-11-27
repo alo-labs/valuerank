@@ -159,6 +159,19 @@ def test_missing_ranges_use_observed_values_and_default_to_the_domain():
     assert sc.missing_ranges(rows[1:])["bugHunt"] == (0.0, 100.0)  # O170
 
 
+def test_rows_of_one_group_share_their_quality_and_api_cost_draws():
+    # O48's shared draw stays in the engine's contract; since O219 the release passes one plan row per configuration,
+    # so this path is exercised here directly.
+    rng = random.Random(7)
+    leaves = {"frontierCode": Kernel("uniform", (40.0, 80.0))}
+    first = RowInputs("a@plan-1", leaves, Kernel("uniform", (90.0, 110.0)), meta={"group": "a", "costRatio": 0.5})
+    second = RowInputs("a@plan-2", leaves, Kernel("uniform", (900.0, 1100.0)), meta={"group": "a", "costRatio": 0.25})
+    scenario = sc.draw_scenario([first, second], "S0", rng)
+    (cost_1, quality_1), (cost_2, quality_2) = scenario["a@plan-1"], scenario["a@plan-2"]
+    assert quality_2 == quality_1
+    assert cost_2 == pytest.approx(cost_1 / 0.5 * 0.25)
+
+
 def test_draw_scenario_strata():
     rng = random.Random(4)
     partial = RowInputs("p", {"frontierCode": Kernel("fixed", (80.0,))}, Kernel("uniform", (90.0, 110.0)))

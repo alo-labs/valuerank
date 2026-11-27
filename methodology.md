@@ -1,7 +1,7 @@
 # ValueRank Methodology
 
-**Version:** v3.1.0 (methodology 3.1.0)
-**Updated:** November 26, 2026
+**Version:** v3.2.0 (methodology 3.2.0)
+**Updated:** November 27, 2026
 
 This page summarises how ValueRank scores value. The normative specification, its review record and every owner and editor decision are in [research/2026-10-19-methodology-codesign/](research/2026-10-19-methodology-codesign/); where this summary is less precise, the specification governs.
 
@@ -100,23 +100,23 @@ Cost score S_C = 100 × (ln c_H − ln c) / (ln c_H − ln c_L), clipped to 0–
 | Workload | Basis | Low anchor c_L (USD) | High anchor c_H (USD) | References | Status |
 |---|---|---:|---:|---:|---|
 | `2774ca1a24867d8c` (main) | api | $87.36 | $22,219.63 | 5 | frozen |
-| `2774ca1a24867d8c` (main) | plan | $66.65 | $1,783.53 | 11 | frozen |
+| `2774ca1a24867d8c` (main) | plan | $66.65 | $997.35 | 3 | frozen |
 
-**Anchor policy** (`complete-evidence-panel` v4). Population: ranked configurations with complete cost evidence (exact cost, no AA missing- or declined-task marker) on every component of the workload at the freeze cutoff; on the main workload this is the admission reference panel. Plan anchors: the same configurations' plan rows whose displayed Plan cost is measured (a controlled measurement or concordant reports, O157); owner assumptions and API-cost fallbacks are scored on these anchors and flagged, and are outside the Plan clip gate. At least 2 references; below that, anchors unavailable: configurations on that workload get no cost score (the main workload must meet the minimum). Lifetime: reference IDs and costs are frozen; a population or rule change is a new anchor version with an old/new bridge, and evidence lost after freezing never rebuilds an anchor.
+**Anchor policy** (`complete-evidence-panel` v5). Population: ranked configurations with complete cost evidence (exact cost, no AA missing- or declined-task marker) on every component of the workload at the freeze cutoff; on the main workload this is the admission reference panel. Plan anchors: the same configurations' ranked plan rows (one per configuration, on its most favorable plan, O219) whose displayed Plan cost is measured (a controlled measurement or concordant reports, O157); owner assumptions and API-cost fallbacks are scored on these anchors and flagged, and are outside the Plan clip gate. At least 2 references; below that, anchors unavailable: configurations on that workload get no cost score (the main workload must meet the minimum). Lifetime: reference IDs and costs are frozen; a population or rule change is a new anchor version with an old/new bridge, and evidence lost after freezing never rebuilds an anchor.
 
 **Exchange rate.** In the unclipped region a cost doubling changes value by −100 × 0.25 × ln 2 / ln(c_H / c_L) points, offset by +100 × 0.25 × ln 2 / ((1 − 0.25) × ln(c_H / c_L)) quality points. At the main-workload anchors:
 
 | Basis | Anchor ratio c_H / c_L | Value points per cost doubling | Quality points that offset it |
 |---|---:|---:|---:|
 | api | 254.4 | 3.13 | 4.17 |
-| plan | 26.8 | 5.27 | 7.03 |
+| plan | 15.0 | 6.40 | 8.54 |
 
 **Within-cohort influence (E91, E126).** Cost's share of the value dispersion on the common-workload panel, 0.25 × SD(S_C) / (0.25 × SD(S_C) + 0.75 × SD(S_Q)), is published and flagged below 10% or above 90%; the flag is informational and the cost weight never changes (O2). Because cost and quality covary, that ratio describes dispersion; the value-variance allocation Cov(0.25 S_C, V) / Var(V) and the Kendall tau of the cost-only and quality-only orderings against the value ordering show contribution (E189).
 
 | Basis | Panel | Cost's share | Status | Cost's variance allocation | Tau, cost vs value | Tau, quality vs value |
 |---|---:|---:|---|---:|---:|---:|
 | api | 5 | 50.8% | defined | 64.3% | 0.60 | 0.20 |
-| plan | 19 | 42.4% | defined | 2.0% | 0.18 | 0.27 |
+| plan | 5 | 46.4% | defined | 20.7% | 0.40 | 0.00 |
 
 ## Quality
 
@@ -152,7 +152,7 @@ Coverage is the observed share of quality weight. A row is **provisional** when 
 
 Plan cost = basket API cost ÷ a subscription route's Value Multiple, at full utilisation. **The Plan ranking has one row per configuration and plan (owner decision O48)**: every plan on which the configuration has an eligible route, each plan's route chosen by the comparator below among that plan's candidates; rows of one configuration share its quality and API cost and differ only by the plan's multiple, share every scenario draw, and are told apart by any value gap; a configuration's own Plan figures (the main table, model pages, and the Plan diagnostics that rebuild anchors or move evidence) are those of its selected route's plan row. Every route record names one model and one plan (O45). A Value Multiple is the API-priced usage a subscription delivers per dollar of fee. Route evidence is graded: **controlled** measurements of the exact model (or, ranked just below them, of the same model at another effort: an O88 route, measured evidence under O90), **reports** (at least two independent, comparable end-user reports concordant within 20%), owner **assumptions** (a measured multiple transferred to another model, or an O46 quota ceiling, labelled), and **diagnostic** evidence, which is shown but never ranked. Two owner-authorised classes sit beside them: GPT-6.1 Sol and GPT-6 Astra keep their own SemiAnalysis figure on every ChatGPT plan (a figure that names a model without an effort binds to its unsuffixed, max row), and every other GPT row takes the lower of the two figures per plan as a labelled assumption (O45); each MiMo-V2.6 model takes, per Token Plan tier, the quota-implied ceiling — the tier's monthly credits valued at Xiaomi's API rate for that model over the list fee — labelled provider-derived and not a measurement (O46), because Xiaomi prices credits at parity with its API and no end-user measurement of a V2.6 billing period exists. Routes certifiably dearer than another identified route of at least equal grade are set aside (E88); the official route is then chosen by identification class, evidence grade, the comparison multiple, lower gross cash and route ID (E85). Evidence past its 90-day expiry and 30-day grace is demoted to diagnostic. A configuration without an admitted route uses its API cost, flagged. Each Plan row publishes its fee period, the cash paid and the selected multiple's amount (multiple × gross cash), typed by what the measurement establishes (E166): measured-workload capacity, observed eligible consumption with capacity not established, assumed API-equivalent consumption for an owner-named transfer (with its donor), consumption measured on the same model at another effort (an O88 route, with its donor), the full quota at API rates for an O46 ceiling, or identified target-workload capacity; API-fallback rows publish none.
 
-**Identification (E61).** A multiple is measured on its own workload; it identifies the basket's multiple only when the workloads match. Today 0 of 19 Plan rows are point-identified and 0 set-identified, so the Plan ranking is labelled exploratory. A measured-only Plan view (`9182e20ccc12e25d`) re-runs the selection over measurement candidates of grade controlled (exact effort, or the same model at another effort, O90) or concordant reports (no owner assumption of any kind, no diagnostics), without owner assumptions or API fallbacks. Because the official Plan anchors include owner assumptions and API fallbacks, a calibration diagnostic rescores the measured-only rows on anchors built from measured evidence alone (E164), so an assumption's effect through the exchange rate is visible.
+**Identification (E61).** A multiple is measured on its own workload; it identifies the basket's multiple only when the workloads match. Today 0 of 5 Plan rows are point-identified and 0 set-identified, so the Plan ranking is labelled exploratory. A measured-only Plan view (`676893c8c756d597`) re-runs the selection over measurement candidates of grade controlled (exact effort, or the same model at another effort, O90) or concordant reports (no owner assumption of any kind, no diagnostics), without owner assumptions or API fallbacks. Because the official Plan anchors include owner assumptions and API fallbacks, a calibration diagnostic rescores the measured-only rows on anchors built from measured evidence alone (E164), so an assumption's effect through the exchange rate is visible.
 
 **Subscription evidence policy** (as of 2026-11-26; reporting window 2026-10-27 to 2026-11-26):
 
@@ -170,7 +170,7 @@ Plan cost = basket API cost ÷ a subscription route's Value Multiple, at full ut
 
 **Interval outputs (O25).** Each observed leaf is placed anywhere inside its published reporting precision, each missing leaf anywhere in 0–100 and each cost inside its rounding. A configuration is on the **definite frontier** when no other configuration can beat it on both cost and quality for any values in those boxes, and on the **possible frontier** when some values put it there. The **cheapest above a quality bar** is confirmed only when its worst cost is below the best cost of every other configuration that could qualify. The bar is pinned by policy `quality-quartile-ladder` v3: the lower quartile, lower median (the headline bar) and upper quartile, each the displayed quality at zero-based position floor((n - 1) * k / 4), k = 1, 2, 3 (O34) of non-provisional ranked configurations with a displayed quality, ordered by displayed quality ascending, then configuration ID, selected deterministic at anchor freeze, before any bar outcome is computed; the displayed quality at each ladder position, frozen as a level; the configuration at that position is recorded for audit and competes like any other; a frozen level is never a configuration, so no bar can return its setter by construction; whether a result compares alternatives is published per result (possibleQualifierN, E198); fixed for the anchor version; replaced only by a versioned re-freeze that publishes old- and new-bar results on the common evaluable panel. Current headline bar: quality 64.3 (the displayed quality of Claude Opus 5.5 (max) at freeze); ladder: quality 63.9, quality 64.3.
 
-**Scenario shares** are frequencies over declared streams, never probabilities (10,000 scenarios per run, seed 20261126, input hash `42933b7cfe9f9bab`):
+**Scenario shares** are frequencies over declared streams, never probabilities (10,000 scenarios per run, seed 20261126, input hash `617efc35fab8884b`):
 
 - **S0**: published-record reporting precision.
 - **S1**: published-record reporting precision + conventional identification of missing leaves.
@@ -199,8 +199,8 @@ Diagnostics are published beside the ranking and never change a score: Terminal-
 | partial component flag (E37) | vacuous | AA declined- or missing-task markers, or an Index reconstruction that misses AA's total (E209) |
 | route dominance filter (E88) | vacuous | certifiably dearer routes set aside |
 | Plan exploratory label (E61) | fired | fewer than half of Plan rows have an identified M_W |
-| Plan evidence lifecycle and change detection (E18, E151, E269, O77, O79) | fired | 16 of 19 plan rows carry a possibly-superseded or expired route: claude-opus-5-5@claude-max-5x, claude-opus-5-5@claude-pro, claude-sonnet-5-5@claude-max-5x, claude-sonnet-5-5@claude-pro, gpt-6-astra@chatgpt-plus, gpt-6-astra@chatgpt-pro-100, gpt-6-astra@chatgpt-pro-200, gpt-6-astra@chatgpt-pro-500, gpt-6-luna@chatgpt-plus, gpt-6-luna@chatgpt-pro-100, gpt-6-luna@chatgpt-pro-200, gpt-6-luna@chatgpt-pro-500, gpt-6.1-sol@chatgpt-plus, gpt-6.1-sol@chatgpt-pro-100, gpt-6.1-sol@chatgpt-pro-200, gpt-6.1-sol@chatgpt-pro-500 |
-| acknowledged accounting-fault windows (O91, O92, O93, O95, O96) | fired | 3 of 19 plan rows rest on a measurement inside an acknowledged fault window; they stay selected and yield to two concordant user reports for their own model and plan, and the transfers resting on them follow: gpt-6-astra@chatgpt-pro-500, gpt-6-luna@chatgpt-pro-500, gpt-6.1-sol@chatgpt-pro-500 |
+| Plan evidence lifecycle and change detection (E18, E151, E269, O77, O79) | fired | 5 of 5 plan rows carry a possibly-superseded or expired route: claude-opus-5-5@claude-pro, claude-sonnet-5-5@claude-pro, gpt-6-astra@chatgpt-pro-200, gpt-6-luna@chatgpt-pro-500, gpt-6.1-sol@chatgpt-pro-500 |
+| acknowledged accounting-fault windows (O91, O92, O93, O95, O96) | fired | 2 of 5 plan rows rest on a measurement inside an acknowledged fault window; they stay selected and yield to two concordant user reports for their own model and plan, and the transfers resting on them follow: gpt-6-luna@chatgpt-pro-500, gpt-6.1-sol@chatgpt-pro-500 |
 | AA cost omits a pricing term (O94, O98, O100, O106, O108, O109, O114) | passed | no AA cost note names an omitted pricing term |
 | valuation-basis gate (E170) | passed | every ranked row is compatible as captured or after evidenced revaluation |
 | source clocks and evidence freshness (O59, O60, O65, E211, E216, E217, E218) | passed | every capture is within its age gate and none after the cutoff unless its source predates the cutoff's day; the build stops otherwise |
@@ -230,7 +230,7 @@ Diagnostics are published beside the ranking and never change a score: Terminal-
 
 - [data/scores.json](data/scores.json): the `v3` section holds every row, workload, anchor, interval output, scenario result, diagnostic and the evidence bundle
 - [data/plan_cost_routes.json](data/plan_cost_routes.json): subscription routes, their evidence, sources and policy
-- [data/v3_frozen.json](data/v3_frozen.json): frozen anchors, bar policy and anchor policy for anchor version `v3-2026-11-26-a4`
+- [data/v3_frozen.json](data/v3_frozen.json): frozen anchors, bar policy and anchor policy for anchor version `v3-2026-11-26-a5`
 - [data/v3_scenarios.json](data/v3_scenarios.json): scenario-share runs for every stream
 - [data/tb4.json](data/tb4.json), [data/bug_hunt.json](data/bug_hunt.json): independent benchmark snapshots ([data/aa_deepswe.json](data/aa_deepswe.json) keeps AA's last DeepSWE v1.1 capture, no longer scored, O49)
 - [data/leaf_evidence.json](data/leaf_evidence.json), [data/cognition_frontiercode.json](data/cognition_frontiercode.json): leaf gap fills and the exhaustive-search log (O36/O37)

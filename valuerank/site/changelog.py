@@ -20,8 +20,8 @@ from __future__ import annotations
 import datetime as dt
 import re
 
-# Release dates that are stated in the repository (the v1.5.0 page header; valuerank/release.py at v2.0.0 and v3.0.0); all others are unknown.
-VERSION_DATES = {"v1.5.0": "2026-09-06", "v2.0.0": "2026-10-19", "v3.0.0": "2026-10-19"}
+# Release dates that are stated in the repository (the v1.5.0 page header; valuerank/release.py at v2.0.0, v3.0.0 and v3.1.0); all others are unknown.
+VERSION_DATES = {"v1.5.0": "2026-09-06", "v2.0.0": "2026-10-19", "v3.0.0": "2026-10-19", "v3.1.0": "2026-11-26"}
 
 _KEY = re.compile(r"^v(\d)(\d)(\d)$")
 

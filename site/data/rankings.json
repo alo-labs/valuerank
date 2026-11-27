@@ -4,10 +4,10 @@
     "label": "Max-effort ranking",
     "href": "/rankings/"
   },
-  "version": "v3.1.0",
-  "publishDate": "November 26, 2026",
+  "version": "v3.2.0",
+  "publishDate": "November 27, 2026",
   "observedAt": "2026-11-26T14:00:00Z",
-  "methodologyVersion": "3.1.0",
+  "methodologyVersion": "3.2.0",
   "basketVersion": "SDLC basket v1",
   "bases": {
     "api": {
@@ -36,9 +36,9 @@
       "anchorRatio": 254.35222473121416
     },
     "plan": {
-      "valuePointsPerCostDoubling": 5.27193122359364,
-      "qualityPointsPerCostDoubling": 7.029241631458187,
-      "anchorRatio": 26.761651555574215
+      "valuePointsPerCostDoubling": 6.404460577231821,
+      "qualityPointsPerCostDoubling": 8.539280769642428,
+      "anchorRatio": 14.96509337936839
     }
   },
   "planExploratory": true,
@@ -331,7 +331,7 @@
       "rankNote": null,
       "overall": {
         "api": 60.62551864255374,
-        "plan": 67.98948489846025
+        "plan": 66.85695554482207
       },
       "quality": 64.34855482940519,
       "qualityRank": 2,
@@ -354,7 +354,7 @@
       },
       "costDims": {
         "api": 49.45641008199944,
-        "plan": 78.91227510562544
+        "plan": 74.38215769107272
       },
       "raw": {
         "frontierCode": 0.406262878787879,
@@ -430,7 +430,7 @@
         }
       },
       "flags": [],
-      "tier": "Near-Budget",
+      "tier": "Mid-Range",
       "band": {
         "api": [
           1,
@@ -438,7 +438,7 @@
         ],
         "plan": [
           1,
-          7
+          1
         ]
       },
       "bandExcludesTransfer": false
@@ -463,7 +463,7 @@
       "aaFrontierFootnote": null,
       "rank": {
         "api": 4,
-        "plan": 5
+        "plan": 2
       },
       "rankWithinWorkload": {
         "api": null,
@@ -472,7 +472,7 @@
       "rankNote": null,
       "overall": {
         "api": 51.404073926690316,
-        "plan": 65.59227366793016
+        "plan": 64.01376128327243
       },
       "quality": 63.9203449199042,
       "qualityRank": 4,
@@ -495,7 +495,7 @@
       },
       "costDims": {
         "api": 13.85526094704866,
-        "plan": 70.60805991200806
+        "plan": 64.29401037337709
       },
       "raw": {
         "frontierCode": 0.419350252525253,
@@ -567,15 +567,15 @@
         "plan": null
       },
       "flags": [],
-      "tier": "Mid-Range",
+      "tier": "Premium",
       "band": {
         "api": [
           4,
           5
         ],
         "plan": [
-          1,
-          7
+          2,
+          3
         ]
       },
       "bandExcludesTransfer": true
@@ -600,7 +600,7 @@
       "aaFrontierFootnote": null,
       "rank": {
         "api": 5,
-        "plan": 7
+        "plan": 3
       },
       "rankWithinWorkload": {
         "api": null,
@@ -609,7 +609,7 @@
       "rankNote": null,
       "overall": {
         "api": 51.36753359625901,
-        "plan": 65.32612267928657
+        "plan": 63.626282304716064
       },
       "quality": 64.31852033742345,
       "qualityRank": 3,
@@ -632,7 +632,7 @@
       },
       "costDims": {
         "api": 12.514573372765675,
-        "plan": 68.34892970487594
+        "plan": 61.54956820659391
       },
       "raw": {
         "frontierCode": 0.468989141414141,
@@ -702,160 +702,20 @@
         },
         "plan": {
           "top1": 0.0,
-          "top3": 0.0,
+          "top3": 1.0,
           "frontier": 0.0
         }
       },
       "flags": [],
-      "tier": "Mid-Range",
+      "tier": "Premium",
       "band": {
         "api": [
           4,
           5
         ],
         "plan": [
-          1,
-          7
-        ]
-      },
-      "bandExcludesTransfer": false
-    },
-    {
-      "slug": "gpt-6-astra",
-      "name": "GPT-6 Astra (max)",
-      "shortName": "GPT-6 Astra (max)",
-      "developer": "OpenAI",
-      "aaUrl": "https://artificialanalysis.ai/models/gpt-6-astra",
-      "aaVariant": "max",
-      "rankingEligible": true,
-      "exclusionReasons": [],
-      "intelligenceIndex": {
-        "value": 56.8538559596797,
-        "status": "measured"
-      },
-      "speed": null,
-      "aaFrontierTier": "left cohort",
-      "aaFrontierConfiguration": "GPT-6 Astra (max)",
-      "aaFrontierIntelligenceGap": null,
-      "aaFrontierFootnote": null,
-      "rank": {
-        "api": 2,
-        "plan": 11
-      },
-      "rankWithinWorkload": {
-        "api": null,
-        "plan": null
-      },
-      "rankNote": null,
-      "overall": {
-        "api": 54.21033258517324,
-        "plan": 58.83127394658296
-      },
-      "quality": 65.51797482932908,
-      "qualityRank": 1,
-      "dims": {
-        "costComposite": null,
-        "frontierCode": 42.374797979798004,
-        "terminalBench": 59.09090909090911,
-        "bugHunt": 71.83908045977012,
-        "vibeCode": 77.535,
-        "codeMigration": 80.579,
-        "livebench2Overall": 84.25,
-        "gdpval": 54.3515,
-        "gdpPdf": 31.0,
-        "automationBench": 68.49174806688876,
-        "omniscience": 71.21666666666667,
-        "lcr": 80.6666666666667,
-        "hle": 63.800000000000004,
-        "tbScience": 63.3333333333333,
-        "critpt": 70.5
-      },
-      "costDims": {
-        "api": 20.287405852705753,
-        "plan": 38.771171298344626
-      },
-      "raw": {
-        "frontierCode": 0.42374797979798,
-        "terminalBench": 59.09090909090911,
-        "bugHunt": 100,
-        "vibeCode": 77.535,
-        "codeMigration": 80.579,
-        "livebench2Overall": 84.25,
-        "gdpval": 1587.03,
-        "gdpPdf": 0.31,
-        "automationBench": 0.6849174806688876,
-        "omniscience": 42.43333333333333,
-        "lcr": 0.806666666666667,
-        "hle": 0.638,
-        "tbScience": 0.633333333333333,
-        "critpt": 0.705
-      },
-      "coverage": {
-        "pct": 100.0,
-        "costAvailable": true,
-        "missing": [],
-        "provisional": false,
-        "provisionalReasons": []
-      },
-      "cost": {
-        "apiUsd": 7223.31220571871,
-        "planUsd": 498.67533349801244,
-        "fallback": null,
-        "route": {
-          "id": "chatgpt-pro200-gpt6astra-semianalysis",
-          "planLabel": "ChatGPT Pro 200 $200 · GPT-6 Astra",
-          "planFeeUsd": 200,
-          "valueMultiple": 14.485,
-          "grade": "measured",
-          "assumptionKind": null,
-          "evidenceLabel": "Controlled account measurement / workload projection",
-          "sourceModel": "GPT-6 Astra",
-          "sourceUrl": "https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x",
-          "sourceDate": "2026-10-06"
-        },
-        "subset": false,
-        "partialComponents": [],
-        "workload": "2774ca1a24867d8c",
-        "planFlags": [
-          "workload-unmatched",
-          "possibly-superseded",
-          "valuation basis unverified"
-        ]
-      },
-      "grade": "measured",
-      "pareto": {
-        "api": true,
-        "plan": true
-      },
-      "frontierStatus": {
-        "api": {
-          "definite": "certified",
-          "possible": "certified"
-        },
-        "plan": null
-      },
-      "scenario": {
-        "api": {
-          "top1": 0.0,
-          "top3": 1.0,
-          "frontier": 1.0
-        },
-        "plan": {
-          "top1": 0.0,
-          "top3": 0.0,
-          "frontier": 1.0
-        }
-      },
-      "flags": [],
-      "tier": "Expensive",
-      "band": {
-        "api": [
           2,
           3
-        ],
-        "plan": [
-          11,
-          13
         ]
       },
       "bandExcludesTransfer": false
@@ -880,7 +740,7 @@
       "aaFrontierFootnote": null,
       "rank": {
         "api": 3,
-        "plan": 14
+        "plan": 4
       },
       "rankWithinWorkload": {
         "api": null,
@@ -992,11 +852,151 @@
           3
         ],
         "plan": [
-          14,
-          19
+          4,
+          5
         ]
       },
       "bandExcludesTransfer": true
+    },
+    {
+      "slug": "gpt-6-astra",
+      "name": "GPT-6 Astra (max)",
+      "shortName": "GPT-6 Astra (max)",
+      "developer": "OpenAI",
+      "aaUrl": "https://artificialanalysis.ai/models/gpt-6-astra",
+      "aaVariant": "max",
+      "rankingEligible": true,
+      "exclusionReasons": [],
+      "intelligenceIndex": {
+        "value": 56.8538559596797,
+        "status": "measured"
+      },
+      "speed": null,
+      "aaFrontierTier": "left cohort",
+      "aaFrontierConfiguration": "GPT-6 Astra (max)",
+      "aaFrontierIntelligenceGap": null,
+      "aaFrontierFootnote": null,
+      "rank": {
+        "api": 2,
+        "plan": 5
+      },
+      "rankWithinWorkload": {
+        "api": null,
+        "plan": null
+      },
+      "rankNote": null,
+      "overall": {
+        "api": 54.21033258517324,
+        "plan": 55.54294169922863
+      },
+      "quality": 65.51797482932908,
+      "qualityRank": 1,
+      "dims": {
+        "costComposite": null,
+        "frontierCode": 42.374797979798004,
+        "terminalBench": 59.09090909090911,
+        "bugHunt": 71.83908045977012,
+        "vibeCode": 77.535,
+        "codeMigration": 80.579,
+        "livebench2Overall": 84.25,
+        "gdpval": 54.3515,
+        "gdpPdf": 31.0,
+        "automationBench": 68.49174806688876,
+        "omniscience": 71.21666666666667,
+        "lcr": 80.6666666666667,
+        "hle": 63.800000000000004,
+        "tbScience": 63.3333333333333,
+        "critpt": 70.5
+      },
+      "costDims": {
+        "api": 20.287405852705753,
+        "plan": 25.61784230892729
+      },
+      "raw": {
+        "frontierCode": 0.42374797979798,
+        "terminalBench": 59.09090909090911,
+        "bugHunt": 100,
+        "vibeCode": 77.535,
+        "codeMigration": 80.579,
+        "livebench2Overall": 84.25,
+        "gdpval": 1587.03,
+        "gdpPdf": 0.31,
+        "automationBench": 0.6849174806688876,
+        "omniscience": 42.43333333333333,
+        "lcr": 0.806666666666667,
+        "hle": 0.638,
+        "tbScience": 0.633333333333333,
+        "critpt": 0.705
+      },
+      "coverage": {
+        "pct": 100.0,
+        "costAvailable": true,
+        "missing": [],
+        "provisional": false,
+        "provisionalReasons": []
+      },
+      "cost": {
+        "apiUsd": 7223.31220571871,
+        "planUsd": 498.67533349801244,
+        "fallback": null,
+        "route": {
+          "id": "chatgpt-pro200-gpt6astra-semianalysis",
+          "planLabel": "ChatGPT Pro 200 $200 · GPT-6 Astra",
+          "planFeeUsd": 200,
+          "valueMultiple": 14.485,
+          "grade": "measured",
+          "assumptionKind": null,
+          "evidenceLabel": "Controlled account measurement / workload projection",
+          "sourceModel": "GPT-6 Astra",
+          "sourceUrl": "https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x",
+          "sourceDate": "2026-10-06"
+        },
+        "subset": false,
+        "partialComponents": [],
+        "workload": "2774ca1a24867d8c",
+        "planFlags": [
+          "workload-unmatched",
+          "possibly-superseded",
+          "valuation basis unverified"
+        ]
+      },
+      "grade": "measured",
+      "pareto": {
+        "api": true,
+        "plan": true
+      },
+      "frontierStatus": {
+        "api": {
+          "definite": "certified",
+          "possible": "certified"
+        },
+        "plan": null
+      },
+      "scenario": {
+        "api": {
+          "top1": 0.0,
+          "top3": 1.0,
+          "frontier": 1.0
+        },
+        "plan": {
+          "top1": 0.0,
+          "top3": 1.0,
+          "frontier": 1.0
+        }
+      },
+      "flags": [],
+      "tier": "Expensive",
+      "band": {
+        "api": [
+          2,
+          3
+        ],
+        "plan": [
+          4,
+          5
+        ]
+      },
+      "bandExcludesTransfer": false
     },
     {
       "slug": "claude-fable-5-2-high",
@@ -5829,7 +5829,7 @@
       "rankNote": null,
       "overall": {
         "api": 60.62551864255374,
-        "plan": 67.98948489846025
+        "plan": 66.85695554482207
       },
       "quality": 64.34855482940519,
       "qualityRank": 2,
@@ -5852,7 +5852,7 @@
       },
       "costDims": {
         "api": 49.45641008199944,
-        "plan": 78.91227510562544
+        "plan": 74.38215769107272
       },
       "raw": {
         "frontierCode": 0.406262878787879,
@@ -5928,7 +5928,7 @@
         }
       },
       "flags": [],
-      "tier": "Near-Budget",
+      "tier": "Mid-Range",
       "band": {
         "api": [
           1,
@@ -5936,7 +5936,7 @@
         ],
         "plan": [
           1,
-          7
+          1
         ]
       },
       "bandExcludesTransfer": false,
@@ -5946,447 +5946,6 @@
         "routeId": "chatgpt-pro500-gpt61sol-semianalysis",
         "multiple": 10.772,
         "representative": true
-      }
-    },
-    {
-      "slug": "gpt-6-1-sol",
-      "name": "GPT-6.1 Sol (max) · ChatGPT Plus",
-      "shortName": "GPT-6.1 Sol (max)",
-      "developer": "OpenAI",
-      "aaUrl": "https://artificialanalysis.ai/models/gpt-6-1-sol",
-      "aaVariant": "max",
-      "rankingEligible": true,
-      "exclusionReasons": [],
-      "intelligenceIndex": {
-        "value": 54.6592388643199,
-        "status": "measured"
-      },
-      "speed": null,
-      "aaFrontierTier": "near",
-      "aaFrontierConfiguration": "GPT-6.1 Sol (max)",
-      "aaFrontierIntelligenceGap": 2,
-      "aaFrontierFootnote": null,
-      "rank": {
-        "api": 1,
-        "plan": 2
-      },
-      "rankWithinWorkload": {
-        "api": null,
-        "plan": null
-      },
-      "rankNote": null,
-      "overall": {
-        "api": 60.62551864255374,
-        "plan": 67.831099551623
-      },
-      "quality": 64.34855482940519,
-      "qualityRank": 2,
-      "dims": {
-        "costComposite": null,
-        "frontierCode": 40.6262878787879,
-        "terminalBench": 56.565656565656596,
-        "bugHunt": 78.73563218390805,
-        "vibeCode": 75.101,
-        "codeMigration": 77.324,
-        "livebench2Overall": 81.17,
-        "gdpval": 55.36900000000001,
-        "gdpPdf": 31.0,
-        "automationBench": 64.86844882398171,
-        "omniscience": 71.01666666666667,
-        "lcr": 83.0,
-        "hle": 58.8,
-        "tbScience": 58.0952380952381,
-        "critpt": 69.5
-      },
-      "costDims": {
-        "api": 49.45641008199944,
-        "plan": 78.27873371827644
-      },
-      "raw": {
-        "frontierCode": 0.406262878787879,
-        "terminalBench": 56.565656565656596,
-        "bugHunt": 109.6,
-        "vibeCode": 75.101,
-        "codeMigration": 77.324,
-        "livebench2Overall": 81.17,
-        "gdpval": 1607.38,
-        "gdpPdf": 0.31,
-        "automationBench": 0.6486844882398171,
-        "omniscience": 42.03333333333333,
-        "lcr": 0.83,
-        "hle": 0.588,
-        "tbScience": 0.580952380952381,
-        "critpt": 0.695
-      },
-      "coverage": {
-        "pct": 100.0,
-        "costAvailable": true,
-        "missing": [],
-        "provisional": false,
-        "provisionalReasons": []
-      },
-      "cost": {
-        "apiUsd": 1435.8027861947912,
-        "planUsd": 136.09505082415083,
-        "fallback": null,
-        "route": {
-          "id": "chatgpt-plus-gpt61sol-semianalysis",
-          "planLabel": "ChatGPT Plus $20 · GPT-6.1 Sol",
-          "planFeeUsd": 20,
-          "valueMultiple": 10.55,
-          "grade": "measured",
-          "assumptionKind": null,
-          "evidenceLabel": "Controlled account measurement / workload projection",
-          "sourceModel": "GPT-6.1 Sol",
-          "sourceUrl": "https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x",
-          "sourceDate": "2026-10-06"
-        },
-        "subset": false,
-        "partialComponents": [],
-        "workload": "2774ca1a24867d8c",
-        "planFlags": [
-          "workload-unmatched",
-          "possibly-superseded",
-          "valuation basis unverified"
-        ]
-      },
-      "grade": "measured",
-      "pareto": {
-        "api": true,
-        "plan": true
-      },
-      "frontierStatus": {
-        "api": {
-          "definite": "certified",
-          "possible": "certified"
-        },
-        "plan": null
-      },
-      "scenario": {
-        "api": {
-          "top1": 1.0,
-          "top3": 1.0,
-          "frontier": 1.0
-        },
-        "plan": {
-          "top1": 0.0,
-          "top3": 1.0,
-          "frontier": 0.0
-        }
-      },
-      "flags": [],
-      "tier": "Near-Budget",
-      "band": {
-        "api": [
-          1,
-          1
-        ],
-        "plan": [
-          1,
-          7
-        ]
-      },
-      "bandExcludesTransfer": false,
-      "key": "gpt-6-1-sol--chatgpt-plus",
-      "planRow": {
-        "plan": "ChatGPT Plus",
-        "routeId": "chatgpt-plus-gpt61sol-semianalysis",
-        "multiple": 10.55,
-        "representative": false
-      }
-    },
-    {
-      "slug": "gpt-6-1-sol",
-      "name": "GPT-6.1 Sol (max) · ChatGPT Pro 100",
-      "shortName": "GPT-6.1 Sol (max)",
-      "developer": "OpenAI",
-      "aaUrl": "https://artificialanalysis.ai/models/gpt-6-1-sol",
-      "aaVariant": "max",
-      "rankingEligible": true,
-      "exclusionReasons": [],
-      "intelligenceIndex": {
-        "value": 54.6592388643199,
-        "status": "measured"
-      },
-      "speed": null,
-      "aaFrontierTier": "near",
-      "aaFrontierConfiguration": "GPT-6.1 Sol (max)",
-      "aaFrontierIntelligenceGap": 2,
-      "aaFrontierFootnote": null,
-      "rank": {
-        "api": 1,
-        "plan": 2
-      },
-      "rankWithinWorkload": {
-        "api": null,
-        "plan": null
-      },
-      "rankNote": null,
-      "overall": {
-        "api": 60.62551864255374,
-        "plan": 67.831099551623
-      },
-      "quality": 64.34855482940519,
-      "qualityRank": 2,
-      "dims": {
-        "costComposite": null,
-        "frontierCode": 40.6262878787879,
-        "terminalBench": 56.565656565656596,
-        "bugHunt": 78.73563218390805,
-        "vibeCode": 75.101,
-        "codeMigration": 77.324,
-        "livebench2Overall": 81.17,
-        "gdpval": 55.36900000000001,
-        "gdpPdf": 31.0,
-        "automationBench": 64.86844882398171,
-        "omniscience": 71.01666666666667,
-        "lcr": 83.0,
-        "hle": 58.8,
-        "tbScience": 58.0952380952381,
-        "critpt": 69.5
-      },
-      "costDims": {
-        "api": 49.45641008199944,
-        "plan": 78.27873371827644
-      },
-      "raw": {
-        "frontierCode": 0.406262878787879,
-        "terminalBench": 56.565656565656596,
-        "bugHunt": 109.6,
-        "vibeCode": 75.101,
-        "codeMigration": 77.324,
-        "livebench2Overall": 81.17,
-        "gdpval": 1607.38,
-        "gdpPdf": 0.31,
-        "automationBench": 0.6486844882398171,
-        "omniscience": 42.03333333333333,
-        "lcr": 0.83,
-        "hle": 0.588,
-        "tbScience": 0.580952380952381,
-        "critpt": 0.695
-      },
-      "coverage": {
-        "pct": 100.0,
-        "costAvailable": true,
-        "missing": [],
-        "provisional": false,
-        "provisionalReasons": []
-      },
-      "cost": {
-        "apiUsd": 1435.8027861947912,
-        "planUsd": 136.09505082415083,
-        "fallback": null,
-        "route": {
-          "id": "chatgpt-pro100-gpt61sol-semianalysis",
-          "planLabel": "ChatGPT Pro 100 $100 · GPT-6.1 Sol",
-          "planFeeUsd": 100,
-          "valueMultiple": 10.55,
-          "grade": "measured",
-          "assumptionKind": null,
-          "evidenceLabel": "Controlled account measurement / workload projection",
-          "sourceModel": "GPT-6.1 Sol",
-          "sourceUrl": "https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x",
-          "sourceDate": "2026-10-06"
-        },
-        "subset": false,
-        "partialComponents": [],
-        "workload": "2774ca1a24867d8c",
-        "planFlags": [
-          "workload-unmatched",
-          "possibly-superseded",
-          "valuation basis unverified"
-        ]
-      },
-      "grade": "measured",
-      "pareto": {
-        "api": true,
-        "plan": true
-      },
-      "frontierStatus": {
-        "api": {
-          "definite": "certified",
-          "possible": "certified"
-        },
-        "plan": null
-      },
-      "scenario": {
-        "api": {
-          "top1": 1.0,
-          "top3": 1.0,
-          "frontier": 1.0
-        },
-        "plan": {
-          "top1": 0.0,
-          "top3": 1.0,
-          "frontier": 0.0
-        }
-      },
-      "flags": [],
-      "tier": "Near-Budget",
-      "band": {
-        "api": [
-          1,
-          1
-        ],
-        "plan": [
-          1,
-          7
-        ]
-      },
-      "bandExcludesTransfer": false,
-      "key": "gpt-6-1-sol--chatgpt-pro-100",
-      "planRow": {
-        "plan": "ChatGPT Pro 100",
-        "routeId": "chatgpt-pro100-gpt61sol-semianalysis",
-        "multiple": 10.55,
-        "representative": false
-      }
-    },
-    {
-      "slug": "gpt-6-1-sol",
-      "name": "GPT-6.1 Sol (max) · ChatGPT Pro 200",
-      "shortName": "GPT-6.1 Sol (max)",
-      "developer": "OpenAI",
-      "aaUrl": "https://artificialanalysis.ai/models/gpt-6-1-sol",
-      "aaVariant": "max",
-      "rankingEligible": true,
-      "exclusionReasons": [],
-      "intelligenceIndex": {
-        "value": 54.6592388643199,
-        "status": "measured"
-      },
-      "speed": null,
-      "aaFrontierTier": "near",
-      "aaFrontierConfiguration": "GPT-6.1 Sol (max)",
-      "aaFrontierIntelligenceGap": 2,
-      "aaFrontierFootnote": null,
-      "rank": {
-        "api": 1,
-        "plan": 4
-      },
-      "rankWithinWorkload": {
-        "api": null,
-        "plan": null
-      },
-      "rankNote": null,
-      "overall": {
-        "api": 60.62551864255374,
-        "plan": 67.73679671509802
-      },
-      "quality": 64.34855482940519,
-      "qualityRank": 2,
-      "dims": {
-        "costComposite": null,
-        "frontierCode": 40.6262878787879,
-        "terminalBench": 56.565656565656596,
-        "bugHunt": 78.73563218390805,
-        "vibeCode": 75.101,
-        "codeMigration": 77.324,
-        "livebench2Overall": 81.17,
-        "gdpval": 55.36900000000001,
-        "gdpPdf": 31.0,
-        "automationBench": 64.86844882398171,
-        "omniscience": 71.01666666666667,
-        "lcr": 83.0,
-        "hle": 58.8,
-        "tbScience": 58.0952380952381,
-        "critpt": 69.5
-      },
-      "costDims": {
-        "api": 49.45641008199944,
-        "plan": 77.90152237217654
-      },
-      "raw": {
-        "frontierCode": 0.406262878787879,
-        "terminalBench": 56.565656565656596,
-        "bugHunt": 109.6,
-        "vibeCode": 75.101,
-        "codeMigration": 77.324,
-        "livebench2Overall": 81.17,
-        "gdpval": 1607.38,
-        "gdpPdf": 0.31,
-        "automationBench": 0.6486844882398171,
-        "omniscience": 42.03333333333333,
-        "lcr": 0.83,
-        "hle": 0.588,
-        "tbScience": 0.580952380952381,
-        "critpt": 0.695
-      },
-      "coverage": {
-        "pct": 100.0,
-        "costAvailable": true,
-        "missing": [],
-        "provisional": false,
-        "provisionalReasons": []
-      },
-      "cost": {
-        "apiUsd": 1435.8027861947912,
-        "planUsd": 137.79297372310856,
-        "fallback": null,
-        "route": {
-          "id": "chatgpt-pro200-gpt61sol-semianalysis",
-          "planLabel": "ChatGPT Pro 200 $200 · GPT-6.1 Sol",
-          "planFeeUsd": 200,
-          "valueMultiple": 10.42,
-          "grade": "measured",
-          "assumptionKind": null,
-          "evidenceLabel": "Controlled account measurement / workload projection",
-          "sourceModel": "GPT-6.1 Sol",
-          "sourceUrl": "https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x",
-          "sourceDate": "2026-10-06"
-        },
-        "subset": false,
-        "partialComponents": [],
-        "workload": "2774ca1a24867d8c",
-        "planFlags": [
-          "workload-unmatched",
-          "possibly-superseded",
-          "valuation basis unverified"
-        ]
-      },
-      "grade": "measured",
-      "pareto": {
-        "api": true,
-        "plan": true
-      },
-      "frontierStatus": {
-        "api": {
-          "definite": "certified",
-          "possible": "certified"
-        },
-        "plan": null
-      },
-      "scenario": {
-        "api": {
-          "top1": 1.0,
-          "top3": 1.0,
-          "frontier": 1.0
-        },
-        "plan": {
-          "top1": 0.0,
-          "top3": 0.0,
-          "frontier": 0.0
-        }
-      },
-      "flags": [],
-      "tier": "Mid-Range",
-      "band": {
-        "api": [
-          1,
-          1
-        ],
-        "plan": [
-          1,
-          7
-        ]
-      },
-      "bandExcludesTransfer": false,
-      "key": "gpt-6-1-sol--chatgpt-pro-200",
-      "planRow": {
-        "plan": "ChatGPT Pro 200",
-        "routeId": "chatgpt-pro200-gpt61sol-semianalysis",
-        "multiple": 10.42,
-        "representative": false
       }
     },
     {
@@ -6409,7 +5968,7 @@
       "aaFrontierFootnote": null,
       "rank": {
         "api": 4,
-        "plan": 5
+        "plan": 2
       },
       "rankWithinWorkload": {
         "api": null,
@@ -6418,7 +5977,7 @@
       "rankNote": null,
       "overall": {
         "api": 51.404073926690316,
-        "plan": 65.59227366793016
+        "plan": 64.01376128327243
       },
       "quality": 63.9203449199042,
       "qualityRank": 4,
@@ -6441,7 +6000,7 @@
       },
       "costDims": {
         "api": 13.85526094704866,
-        "plan": 70.60805991200806
+        "plan": 64.29401037337709
       },
       "raw": {
         "frontierCode": 0.419350252525253,
@@ -6513,15 +6072,15 @@
         "plan": null
       },
       "flags": [],
-      "tier": "Mid-Range",
+      "tier": "Premium",
       "band": {
         "api": [
           4,
           5
         ],
         "plan": [
-          1,
-          7
+          2,
+          3
         ]
       },
       "bandExcludesTransfer": true,
@@ -6531,150 +6090,6 @@
         "routeId": "claude-pro-claude-sonnet-5-5-common-opus55-assumption",
         "multiple": 58.9,
         "representative": true
-      }
-    },
-    {
-      "slug": "claude-sonnet-5-5",
-      "name": "Claude Sonnet 5.5 · Claude Max 5x",
-      "shortName": "Sonnet 5.5",
-      "developer": "Anthropic",
-      "aaUrl": "https://artificialanalysis.ai/models/claude-sonnet-5-5",
-      "aaVariant": "max",
-      "rankingEligible": true,
-      "exclusionReasons": [],
-      "intelligenceIndex": {
-        "value": 54.7282014953324,
-        "status": "measured"
-      },
-      "speed": null,
-      "aaFrontierTier": "left cohort",
-      "aaFrontierConfiguration": "Claude Sonnet 5.5 (max)",
-      "aaFrontierIntelligenceGap": null,
-      "aaFrontierFootnote": null,
-      "rank": {
-        "api": 4,
-        "plan": 6
-      },
-      "rankWithinWorkload": {
-        "api": null,
-        "plan": null
-      },
-      "rankNote": null,
-      "overall": {
-        "api": 51.404073926690316,
-        "plan": 65.37616697506763
-      },
-      "quality": 63.9203449199042,
-      "qualityRank": 4,
-      "dims": {
-        "costComposite": null,
-        "frontierCode": 41.9350252525253,
-        "terminalBench": 65.1515151515151,
-        "bugHunt": 55.747126436781606,
-        "vibeCode": 80.88,
-        "codeMigration": 86.875,
-        "livebench2Overall": 76.79,
-        "gdpval": 66.891,
-        "gdpPdf": 25.8,
-        "automationBench": 71.76882128193995,
-        "omniscience": 65.23333333333333,
-        "lcr": 82.6666666666667,
-        "hle": 53.300000000000004,
-        "tbScience": 53.3333333333333,
-        "critpt": 59.0
-      },
-      "costDims": {
-        "api": 13.85526094704866,
-        "plan": 69.7436331405579
-      },
-      "raw": {
-        "frontierCode": 0.419350252525253,
-        "terminalBench": 65.1515151515151,
-        "bugHunt": 77.6,
-        "vibeCode": 80.88,
-        "codeMigration": 86.875,
-        "livebench2Overall": 76.79,
-        "gdpval": 1837.82,
-        "gdpPdf": 0.258,
-        "automationBench": 0.7176882128193995,
-        "omniscience": 30.466666666666665,
-        "lcr": 0.826666666666667,
-        "hle": 0.533,
-        "tbScience": 0.533333333333333,
-        "critpt": 0.59
-      },
-      "coverage": {
-        "pct": 100.0,
-        "costAvailable": true,
-        "missing": [],
-        "provisional": false,
-        "provisionalReasons": []
-      },
-      "cost": {
-        "apiUsd": 10314.721013086955,
-        "planUsd": 180.16979935523065,
-        "fallback": null,
-        "route": {
-          "id": "claude-max5x-claude-sonnet-5-5-common-opus55-assumption",
-          "planLabel": "Claude Max 5x $100 · common Claude assumption",
-          "planFeeUsd": 100,
-          "valueMultiple": 57.25,
-          "grade": "assumption",
-          "assumptionKind": "transfer",
-          "evidenceLabel": "Provisional assumption",
-          "sourceModel": "Opus 5.5",
-          "sourceUrl": "https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x",
-          "sourceDate": "2026-10-06"
-        },
-        "subset": false,
-        "partialComponents": [],
-        "workload": "2774ca1a24867d8c",
-        "planFlags": [
-          "workload-unmatched",
-          "owner-named transfer (assumption)",
-          "possibly-superseded",
-          "valuation basis unverified"
-        ]
-      },
-      "grade": "measured",
-      "pareto": {
-        "api": false,
-        "plan": false
-      },
-      "frontierStatus": {
-        "api": {
-          "definite": "disproved",
-          "possible": "disproved"
-        },
-        "plan": null
-      },
-      "scenario": {
-        "api": {
-          "top1": 0.0,
-          "top3": 0.0,
-          "frontier": 0.0
-        },
-        "plan": null
-      },
-      "flags": [],
-      "tier": "Mid-Range",
-      "band": {
-        "api": [
-          4,
-          5
-        ],
-        "plan": [
-          1,
-          7
-        ]
-      },
-      "bandExcludesTransfer": true,
-      "key": "claude-sonnet-5-5--claude-max-5x",
-      "planRow": {
-        "plan": "Claude Max 5x",
-        "routeId": "claude-max5x-claude-sonnet-5-5-common-opus55-assumption",
-        "multiple": 57.25,
-        "representative": false
       }
     },
     {
@@ -6697,7 +6112,7 @@
       "aaFrontierFootnote": null,
       "rank": {
         "api": 5,
-        "plan": 7
+        "plan": 3
       },
       "rankWithinWorkload": {
         "api": null,
@@ -6706,7 +6121,7 @@
       "rankNote": null,
       "overall": {
         "api": 51.36753359625901,
-        "plan": 65.32612267928657
+        "plan": 63.626282304716064
       },
       "quality": 64.31852033742345,
       "qualityRank": 3,
@@ -6729,7 +6144,7 @@
       },
       "costDims": {
         "api": 12.514573372765675,
-        "plan": 68.34892970487594
+        "plan": 61.54956820659391
       },
       "raw": {
         "frontierCode": 0.468989141414141,
@@ -6799,20 +6214,20 @@
         },
         "plan": {
           "top1": 0.0,
-          "top3": 0.0,
+          "top3": 1.0,
           "frontier": 0.0
         }
       },
       "flags": [],
-      "tier": "Mid-Range",
+      "tier": "Premium",
       "band": {
         "api": [
           4,
           5
         ],
         "plan": [
-          1,
-          7
+          2,
+          3
         ]
       },
       "bandExcludesTransfer": false,
@@ -6822,1307 +6237,6 @@
         "routeId": "claude-pro-opus55-semianalysis",
         "multiple": 58.9,
         "representative": true
-      }
-    },
-    {
-      "slug": "claude-opus-5-5",
-      "name": "Claude Opus 5.5 (max) · Claude Max 5x",
-      "shortName": "Opus 5.5 (max)",
-      "developer": "Anthropic",
-      "aaUrl": "https://artificialanalysis.ai/models/claude-opus-5-5",
-      "aaVariant": "max",
-      "rankingEligible": true,
-      "exclusionReasons": [],
-      "intelligenceIndex": {
-        "value": 59.1249717392035,
-        "status": "measured"
-      },
-      "speed": null,
-      "aaFrontierTier": "near",
-      "aaFrontierConfiguration": "Claude Opus 5.5 (max)",
-      "aaFrontierIntelligenceGap": 3,
-      "aaFrontierFootnote": null,
-      "rank": {
-        "api": 5,
-        "plan": 8
-      },
-      "rankWithinWorkload": {
-        "api": null,
-        "plan": null
-      },
-      "rankNote": null,
-      "overall": {
-        "api": 51.36753359625901,
-        "plan": 65.11001598642403
-      },
-      "quality": 64.31852033742345,
-      "qualityRank": 3,
-      "dims": {
-        "costComposite": null,
-        "frontierCode": 46.8989141414141,
-        "terminalBench": 59.09090909090911,
-        "bugHunt": 36.42241379310345,
-        "vibeCode": 78.49,
-        "codeMigration": 81.012,
-        "livebench2Overall": 83.44,
-        "gdpval": 68.3135,
-        "gdpPdf": 26.200000000000003,
-        "automationBench": 69.5386812863607,
-        "omniscience": 74.06666666666666,
-        "lcr": 84.6666666666667,
-        "hle": 67.9,
-        "tbScience": 59.047619047619,
-        "critpt": 68.0
-      },
-      "costDims": {
-        "api": 12.514573372765675,
-        "plan": 67.48450293342577
-      },
-      "raw": {
-        "frontierCode": 0.468989141414141,
-        "terminalBench": 59.09090909090911,
-        "bugHunt": 50.7,
-        "vibeCode": 78.49,
-        "codeMigration": 81.012,
-        "livebench2Overall": 83.44,
-        "gdpval": 1866.27,
-        "gdpPdf": 0.262,
-        "automationBench": 0.6953868128636069,
-        "omniscience": 48.13333333333333,
-        "lcr": 0.846666666666667,
-        "hle": 0.679,
-        "tbScience": 0.59047619047619,
-        "critpt": 0.68
-      },
-      "coverage": {
-        "pct": 100.0,
-        "costAvailable": true,
-        "missing": [],
-        "provisional": false,
-        "provisionalReasons": []
-      },
-      "cost": {
-        "apiUsd": 11109.815873733918,
-        "planUsd": 194.05791919185884,
-        "fallback": null,
-        "route": {
-          "id": "claude-max5x-opus55-semianalysis",
-          "planLabel": "Claude Max $100 · Opus 5.5",
-          "planFeeUsd": 100,
-          "valueMultiple": 57.25,
-          "grade": "measured",
-          "assumptionKind": null,
-          "evidenceLabel": "Controlled account measurement / workload projection",
-          "sourceModel": "Opus 5.5",
-          "sourceUrl": "https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x",
-          "sourceDate": "2026-10-06"
-        },
-        "subset": false,
-        "partialComponents": [],
-        "workload": "2774ca1a24867d8c",
-        "planFlags": [
-          "workload-unmatched",
-          "possibly-superseded",
-          "valuation basis unverified"
-        ]
-      },
-      "grade": "measured",
-      "pareto": {
-        "api": false,
-        "plan": false
-      },
-      "frontierStatus": {
-        "api": {
-          "definite": "disproved",
-          "possible": "disproved"
-        },
-        "plan": null
-      },
-      "scenario": {
-        "api": {
-          "top1": 0.0,
-          "top3": 0.0,
-          "frontier": 0.0
-        },
-        "plan": {
-          "top1": 0.0,
-          "top3": 0.0,
-          "frontier": 0.0
-        }
-      },
-      "flags": [],
-      "tier": "Mid-Range",
-      "band": {
-        "api": [
-          4,
-          5
-        ],
-        "plan": [
-          8,
-          10
-        ]
-      },
-      "bandExcludesTransfer": false,
-      "key": "claude-opus-5-5--claude-max-5x",
-      "planRow": {
-        "plan": "Claude Max 5x",
-        "routeId": "claude-max5x-opus55-semianalysis",
-        "multiple": 57.25,
-        "representative": false
-      }
-    },
-    {
-      "slug": "claude-sonnet-5-5",
-      "name": "Claude Sonnet 5.5 · Claude Max 20x",
-      "shortName": "Sonnet 5.5",
-      "developer": "Anthropic",
-      "aaUrl": "https://artificialanalysis.ai/models/claude-sonnet-5-5",
-      "aaVariant": "max",
-      "rankingEligible": true,
-      "exclusionReasons": [],
-      "intelligenceIndex": {
-        "value": 54.7282014953324,
-        "status": "measured"
-      },
-      "speed": null,
-      "aaFrontierTier": "left cohort",
-      "aaFrontierConfiguration": "Claude Sonnet 5.5 (max)",
-      "aaFrontierIntelligenceGap": null,
-      "aaFrontierFootnote": null,
-      "rank": {
-        "api": 4,
-        "plan": 9
-      },
-      "rankWithinWorkload": {
-        "api": null,
-        "plan": null
-      },
-      "rankNote": null,
-      "overall": {
-        "api": 51.404073926690316,
-        "plan": 64.96185591807019
-      },
-      "quality": 63.9203449199042,
-      "qualityRank": 4,
-      "dims": {
-        "costComposite": null,
-        "frontierCode": 41.9350252525253,
-        "terminalBench": 65.1515151515151,
-        "bugHunt": 55.747126436781606,
-        "vibeCode": 80.88,
-        "codeMigration": 86.875,
-        "livebench2Overall": 76.79,
-        "gdpval": 66.891,
-        "gdpPdf": 25.8,
-        "automationBench": 71.76882128193995,
-        "omniscience": 65.23333333333333,
-        "lcr": 82.6666666666667,
-        "hle": 53.300000000000004,
-        "tbScience": 53.3333333333333,
-        "critpt": 59.0
-      },
-      "costDims": {
-        "api": 13.85526094704866,
-        "plan": 68.08638891256814
-      },
-      "raw": {
-        "frontierCode": 0.419350252525253,
-        "terminalBench": 65.1515151515151,
-        "bugHunt": 77.6,
-        "vibeCode": 80.88,
-        "codeMigration": 86.875,
-        "livebench2Overall": 76.79,
-        "gdpval": 1837.82,
-        "gdpPdf": 0.258,
-        "automationBench": 0.7176882128193995,
-        "omniscience": 30.466666666666665,
-        "lcr": 0.826666666666667,
-        "hle": 0.533,
-        "tbScience": 0.533333333333333,
-        "critpt": 0.59
-      },
-      "coverage": {
-        "pct": 100.0,
-        "costAvailable": true,
-        "missing": [],
-        "provisional": false,
-        "provisionalReasons": []
-      },
-      "cost": {
-        "apiUsd": 10314.721013086955,
-        "planUsd": 190.25644178897835,
-        "fallback": null,
-        "route": {
-          "id": "claude-max20x-claude-sonnet-5-5-common-opus55-assumption",
-          "planLabel": "Claude Max 20x $200 · common Claude assumption",
-          "planFeeUsd": 200,
-          "valueMultiple": 58.63,
-          "grade": "assumption",
-          "assumptionKind": "transfer",
-          "evidenceLabel": "Provisional assumption",
-          "sourceModel": "Opus 5.5",
-          "sourceUrl": "https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x",
-          "sourceDate": "2026-10-06"
-        },
-        "subset": false,
-        "partialComponents": [],
-        "workload": "2774ca1a24867d8c",
-        "planFlags": [
-          "workload-unmatched",
-          "owner-named transfer (assumption)",
-          "valuation basis unverified",
-          "observed-usage multiple; full utilisation not established"
-        ]
-      },
-      "grade": "measured",
-      "pareto": {
-        "api": false,
-        "plan": false
-      },
-      "frontierStatus": {
-        "api": {
-          "definite": "disproved",
-          "possible": "disproved"
-        },
-        "plan": null
-      },
-      "scenario": {
-        "api": {
-          "top1": 0.0,
-          "top3": 0.0,
-          "frontier": 0.0
-        },
-        "plan": null
-      },
-      "flags": [],
-      "tier": "Mid-Range",
-      "band": {
-        "api": [
-          4,
-          5
-        ],
-        "plan": [
-          8,
-          10
-        ]
-      },
-      "bandExcludesTransfer": true,
-      "key": "claude-sonnet-5-5--claude-max-20x",
-      "planRow": {
-        "plan": "Claude Max 20x",
-        "routeId": "claude-max20x-claude-sonnet-5-5-common-opus55-assumption",
-        "multiple": 54.21483191895,
-        "representative": false
-      }
-    },
-    {
-      "slug": "claude-opus-5-5",
-      "name": "Claude Opus 5.5 (max) · Claude Max 20x",
-      "shortName": "Opus 5.5 (max)",
-      "developer": "Anthropic",
-      "aaUrl": "https://artificialanalysis.ai/models/claude-opus-5-5",
-      "aaVariant": "max",
-      "rankingEligible": true,
-      "exclusionReasons": [],
-      "intelligenceIndex": {
-        "value": 59.1249717392035,
-        "status": "measured"
-      },
-      "speed": null,
-      "aaFrontierTier": "near",
-      "aaFrontierConfiguration": "Claude Opus 5.5 (max)",
-      "aaFrontierIntelligenceGap": 3,
-      "aaFrontierFootnote": null,
-      "rank": {
-        "api": 5,
-        "plan": 10
-      },
-      "rankWithinWorkload": {
-        "api": null,
-        "plan": null
-      },
-      "rankNote": null,
-      "overall": {
-        "api": 51.36753359625901,
-        "plan": 64.6957049294266
-      },
-      "quality": 64.31852033742345,
-      "qualityRank": 3,
-      "dims": {
-        "costComposite": null,
-        "frontierCode": 46.8989141414141,
-        "terminalBench": 59.09090909090911,
-        "bugHunt": 36.42241379310345,
-        "vibeCode": 78.49,
-        "codeMigration": 81.012,
-        "livebench2Overall": 83.44,
-        "gdpval": 68.3135,
-        "gdpPdf": 26.200000000000003,
-        "automationBench": 69.5386812863607,
-        "omniscience": 74.06666666666666,
-        "lcr": 84.6666666666667,
-        "hle": 67.9,
-        "tbScience": 59.047619047619,
-        "critpt": 68.0
-      },
-      "costDims": {
-        "api": 12.514573372765675,
-        "plan": 65.82725870543601
-      },
-      "raw": {
-        "frontierCode": 0.468989141414141,
-        "terminalBench": 59.09090909090911,
-        "bugHunt": 50.7,
-        "vibeCode": 78.49,
-        "codeMigration": 81.012,
-        "livebench2Overall": 83.44,
-        "gdpval": 1866.27,
-        "gdpPdf": 0.262,
-        "automationBench": 0.6953868128636069,
-        "omniscience": 48.13333333333333,
-        "lcr": 0.846666666666667,
-        "hle": 0.679,
-        "tbScience": 0.59047619047619,
-        "critpt": 0.68
-      },
-      "coverage": {
-        "pct": 100.0,
-        "costAvailable": true,
-        "missing": [],
-        "provisional": false,
-        "provisionalReasons": []
-      },
-      "cost": {
-        "apiUsd": 11109.815873733918,
-        "planUsd": 204.92207538968032,
-        "fallback": null,
-        "route": null,
-        "subset": false,
-        "partialComponents": [],
-        "workload": "2774ca1a24867d8c",
-        "planFlags": [
-          "workload-unmatched",
-          "valuation basis unverified",
-          "observed-usage multiple; full utilisation not established"
-        ]
-      },
-      "grade": "measured",
-      "pareto": {
-        "api": false,
-        "plan": false
-      },
-      "frontierStatus": {
-        "api": {
-          "definite": "disproved",
-          "possible": "disproved"
-        },
-        "plan": null
-      },
-      "scenario": {
-        "api": {
-          "top1": 0.0,
-          "top3": 0.0,
-          "frontier": 0.0
-        },
-        "plan": {
-          "top1": 0.0,
-          "top3": 0.0,
-          "frontier": 0.0
-        }
-      },
-      "flags": [],
-      "tier": "Mid-Range",
-      "band": {
-        "api": [
-          4,
-          5
-        ],
-        "plan": [
-          8,
-          10
-        ]
-      },
-      "bandExcludesTransfer": false,
-      "key": "claude-opus-5-5--claude-max-20x",
-      "planRow": {
-        "plan": "Claude Max 20x",
-        "routeId": "claude-max20x-opus55-user-reports#m1",
-        "multiple": 54.21483191895,
-        "representative": false
-      }
-    },
-    {
-      "slug": "gpt-6-astra",
-      "name": "GPT-6 Astra (max) · ChatGPT Pro 200",
-      "shortName": "GPT-6 Astra (max)",
-      "developer": "OpenAI",
-      "aaUrl": "https://artificialanalysis.ai/models/gpt-6-astra",
-      "aaVariant": "max",
-      "rankingEligible": true,
-      "exclusionReasons": [],
-      "intelligenceIndex": {
-        "value": 56.8538559596797,
-        "status": "measured"
-      },
-      "speed": null,
-      "aaFrontierTier": "left cohort",
-      "aaFrontierConfiguration": "GPT-6 Astra (max)",
-      "aaFrontierIntelligenceGap": null,
-      "aaFrontierFootnote": null,
-      "rank": {
-        "api": 2,
-        "plan": 11
-      },
-      "rankWithinWorkload": {
-        "api": null,
-        "plan": null
-      },
-      "rankNote": null,
-      "overall": {
-        "api": 54.21033258517324,
-        "plan": 58.83127394658296
-      },
-      "quality": 65.51797482932908,
-      "qualityRank": 1,
-      "dims": {
-        "costComposite": null,
-        "frontierCode": 42.374797979798004,
-        "terminalBench": 59.09090909090911,
-        "bugHunt": 71.83908045977012,
-        "vibeCode": 77.535,
-        "codeMigration": 80.579,
-        "livebench2Overall": 84.25,
-        "gdpval": 54.3515,
-        "gdpPdf": 31.0,
-        "automationBench": 68.49174806688876,
-        "omniscience": 71.21666666666667,
-        "lcr": 80.6666666666667,
-        "hle": 63.800000000000004,
-        "tbScience": 63.3333333333333,
-        "critpt": 70.5
-      },
-      "costDims": {
-        "api": 20.287405852705753,
-        "plan": 38.771171298344626
-      },
-      "raw": {
-        "frontierCode": 0.42374797979798,
-        "terminalBench": 59.09090909090911,
-        "bugHunt": 100,
-        "vibeCode": 77.535,
-        "codeMigration": 80.579,
-        "livebench2Overall": 84.25,
-        "gdpval": 1587.03,
-        "gdpPdf": 0.31,
-        "automationBench": 0.6849174806688876,
-        "omniscience": 42.43333333333333,
-        "lcr": 0.806666666666667,
-        "hle": 0.638,
-        "tbScience": 0.633333333333333,
-        "critpt": 0.705
-      },
-      "coverage": {
-        "pct": 100.0,
-        "costAvailable": true,
-        "missing": [],
-        "provisional": false,
-        "provisionalReasons": []
-      },
-      "cost": {
-        "apiUsd": 7223.31220571871,
-        "planUsd": 498.67533349801244,
-        "fallback": null,
-        "route": {
-          "id": "chatgpt-pro200-gpt6astra-semianalysis",
-          "planLabel": "ChatGPT Pro 200 $200 · GPT-6 Astra",
-          "planFeeUsd": 200,
-          "valueMultiple": 14.485,
-          "grade": "measured",
-          "assumptionKind": null,
-          "evidenceLabel": "Controlled account measurement / workload projection",
-          "sourceModel": "GPT-6 Astra",
-          "sourceUrl": "https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x",
-          "sourceDate": "2026-10-06"
-        },
-        "subset": false,
-        "partialComponents": [],
-        "workload": "2774ca1a24867d8c",
-        "planFlags": [
-          "workload-unmatched",
-          "possibly-superseded",
-          "valuation basis unverified"
-        ]
-      },
-      "grade": "measured",
-      "pareto": {
-        "api": true,
-        "plan": true
-      },
-      "frontierStatus": {
-        "api": {
-          "definite": "certified",
-          "possible": "certified"
-        },
-        "plan": null
-      },
-      "scenario": {
-        "api": {
-          "top1": 0.0,
-          "top3": 1.0,
-          "frontier": 1.0
-        },
-        "plan": {
-          "top1": 0.0,
-          "top3": 0.0,
-          "frontier": 1.0
-        }
-      },
-      "flags": [],
-      "tier": "Expensive",
-      "band": {
-        "api": [
-          2,
-          3
-        ],
-        "plan": [
-          11,
-          13
-        ]
-      },
-      "bandExcludesTransfer": false,
-      "key": "gpt-6-astra--chatgpt-pro-200",
-      "planRow": {
-        "plan": "ChatGPT Pro 200",
-        "routeId": "chatgpt-pro200-gpt6astra-semianalysis",
-        "multiple": 14.485,
-        "representative": true
-      }
-    },
-    {
-      "slug": "gpt-6-astra",
-      "name": "GPT-6 Astra (max) · ChatGPT Pro 500",
-      "shortName": "GPT-6 Astra (max)",
-      "developer": "OpenAI",
-      "aaUrl": "https://artificialanalysis.ai/models/gpt-6-astra",
-      "aaVariant": "max",
-      "rankingEligible": true,
-      "exclusionReasons": [],
-      "intelligenceIndex": {
-        "value": 56.8538559596797,
-        "status": "measured"
-      },
-      "speed": null,
-      "aaFrontierTier": "left cohort",
-      "aaFrontierConfiguration": "GPT-6 Astra (max)",
-      "aaFrontierIntelligenceGap": null,
-      "aaFrontierFootnote": null,
-      "rank": {
-        "api": 2,
-        "plan": 12
-      },
-      "rankWithinWorkload": {
-        "api": null,
-        "plan": null
-      },
-      "rankNote": null,
-      "overall": {
-        "api": 54.21033258517324,
-        "plan": 58.52319670604115
-      },
-      "quality": 65.51797482932908,
-      "qualityRank": 1,
-      "dims": {
-        "costComposite": null,
-        "frontierCode": 42.374797979798004,
-        "terminalBench": 59.09090909090911,
-        "bugHunt": 71.83908045977012,
-        "vibeCode": 77.535,
-        "codeMigration": 80.579,
-        "livebench2Overall": 84.25,
-        "gdpval": 54.3515,
-        "gdpPdf": 31.0,
-        "automationBench": 68.49174806688876,
-        "omniscience": 71.21666666666667,
-        "lcr": 80.6666666666667,
-        "hle": 63.800000000000004,
-        "tbScience": 63.3333333333333,
-        "critpt": 70.5
-      },
-      "costDims": {
-        "api": 20.287405852705753,
-        "plan": 37.53886233617736
-      },
-      "raw": {
-        "frontierCode": 0.42374797979798,
-        "terminalBench": 59.09090909090911,
-        "bugHunt": 100,
-        "vibeCode": 77.535,
-        "codeMigration": 80.579,
-        "livebench2Overall": 84.25,
-        "gdpval": 1587.03,
-        "gdpPdf": 0.31,
-        "automationBench": 0.6849174806688876,
-        "omniscience": 42.43333333333333,
-        "lcr": 0.806666666666667,
-        "hle": 0.638,
-        "tbScience": 0.633333333333333,
-        "critpt": 0.705
-      },
-      "coverage": {
-        "pct": 100.0,
-        "costAvailable": true,
-        "missing": [],
-        "provisional": false,
-        "provisionalReasons": []
-      },
-      "cost": {
-        "apiUsd": 7223.31220571871,
-        "planUsd": 519.2891592896269,
-        "fallback": null,
-        "route": {
-          "id": "chatgpt-pro500-gpt6astra-semianalysis",
-          "planLabel": "ChatGPT Pro 500 $500 · GPT-6 Astra",
-          "planFeeUsd": 500,
-          "valueMultiple": 13.91,
-          "grade": "measured",
-          "assumptionKind": null,
-          "evidenceLabel": "Controlled account measurement / workload projection",
-          "sourceModel": "GPT-6 Astra",
-          "sourceUrl": "https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x",
-          "sourceDate": "2026-10-06"
-        },
-        "subset": false,
-        "partialComponents": [],
-        "workload": "2774ca1a24867d8c",
-        "planFlags": [
-          "workload-unmatched",
-          "possibly-superseded",
-          "measured inside an acknowledged accounting-fault window (O91, O92)",
-          "valuation basis unverified"
-        ]
-      },
-      "grade": "measured",
-      "pareto": {
-        "api": true,
-        "plan": true
-      },
-      "frontierStatus": {
-        "api": {
-          "definite": "certified",
-          "possible": "certified"
-        },
-        "plan": null
-      },
-      "scenario": {
-        "api": {
-          "top1": 0.0,
-          "top3": 1.0,
-          "frontier": 1.0
-        },
-        "plan": {
-          "top1": 0.0,
-          "top3": 0.0,
-          "frontier": 0.0
-        }
-      },
-      "flags": [],
-      "tier": "Expensive",
-      "band": {
-        "api": [
-          2,
-          3
-        ],
-        "plan": [
-          11,
-          13
-        ]
-      },
-      "bandExcludesTransfer": false,
-      "key": "gpt-6-astra--chatgpt-pro-500",
-      "planRow": {
-        "plan": "ChatGPT Pro 500",
-        "routeId": "chatgpt-pro500-gpt6astra-semianalysis",
-        "multiple": 13.91,
-        "representative": false
-      }
-    },
-    {
-      "slug": "gpt-6-astra",
-      "name": "GPT-6 Astra (max) · ChatGPT Pro 100",
-      "shortName": "GPT-6 Astra (max)",
-      "developer": "OpenAI",
-      "aaUrl": "https://artificialanalysis.ai/models/gpt-6-astra",
-      "aaVariant": "max",
-      "rankingEligible": true,
-      "exclusionReasons": [],
-      "intelligenceIndex": {
-        "value": 56.8538559596797,
-        "status": "measured"
-      },
-      "speed": null,
-      "aaFrontierTier": "left cohort",
-      "aaFrontierConfiguration": "GPT-6 Astra (max)",
-      "aaFrontierIntelligenceGap": null,
-      "aaFrontierFootnote": null,
-      "rank": {
-        "api": 2,
-        "plan": 13
-      },
-      "rankWithinWorkload": {
-        "api": null,
-        "plan": null
-      },
-      "rankNote": null,
-      "overall": {
-        "api": 54.21033258517324,
-        "plan": 58.13623567296795
-      },
-      "quality": 65.51797482932908,
-      "qualityRank": 1,
-      "dims": {
-        "costComposite": null,
-        "frontierCode": 42.374797979798004,
-        "terminalBench": 59.09090909090911,
-        "bugHunt": 71.83908045977012,
-        "vibeCode": 77.535,
-        "codeMigration": 80.579,
-        "livebench2Overall": 84.25,
-        "gdpval": 54.3515,
-        "gdpPdf": 31.0,
-        "automationBench": 68.49174806688876,
-        "omniscience": 71.21666666666667,
-        "lcr": 80.6666666666667,
-        "hle": 63.800000000000004,
-        "tbScience": 63.3333333333333,
-        "critpt": 70.5
-      },
-      "costDims": {
-        "api": 20.287405852705753,
-        "plan": 35.99101820388458
-      },
-      "raw": {
-        "frontierCode": 0.42374797979798,
-        "terminalBench": 59.09090909090911,
-        "bugHunt": 100,
-        "vibeCode": 77.535,
-        "codeMigration": 80.579,
-        "livebench2Overall": 84.25,
-        "gdpval": 1587.03,
-        "gdpPdf": 0.31,
-        "automationBench": 0.6849174806688876,
-        "omniscience": 42.43333333333333,
-        "lcr": 0.806666666666667,
-        "hle": 0.638,
-        "tbScience": 0.633333333333333,
-        "critpt": 0.705
-      },
-      "coverage": {
-        "pct": 100.0,
-        "costAvailable": true,
-        "missing": [],
-        "provisional": false,
-        "provisionalReasons": []
-      },
-      "cost": {
-        "apiUsd": 7223.31220571871,
-        "planUsd": 546.3927538365136,
-        "fallback": null,
-        "route": {
-          "id": "chatgpt-pro100-gpt6astra-semianalysis",
-          "planLabel": "ChatGPT Pro 100 $100 · GPT-6 Astra",
-          "planFeeUsd": 100,
-          "valueMultiple": 13.22,
-          "grade": "measured",
-          "assumptionKind": null,
-          "evidenceLabel": "Controlled account measurement / workload projection",
-          "sourceModel": "GPT-6 Astra",
-          "sourceUrl": "https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x",
-          "sourceDate": "2026-10-06"
-        },
-        "subset": false,
-        "partialComponents": [],
-        "workload": "2774ca1a24867d8c",
-        "planFlags": [
-          "workload-unmatched",
-          "possibly-superseded",
-          "valuation basis unverified"
-        ]
-      },
-      "grade": "measured",
-      "pareto": {
-        "api": true,
-        "plan": true
-      },
-      "frontierStatus": {
-        "api": {
-          "definite": "certified",
-          "possible": "certified"
-        },
-        "plan": null
-      },
-      "scenario": {
-        "api": {
-          "top1": 0.0,
-          "top3": 1.0,
-          "frontier": 1.0
-        },
-        "plan": {
-          "top1": 0.0,
-          "top3": 0.0,
-          "frontier": 0.0
-        }
-      },
-      "flags": [],
-      "tier": "Expensive",
-      "band": {
-        "api": [
-          2,
-          3
-        ],
-        "plan": [
-          11,
-          13
-        ]
-      },
-      "bandExcludesTransfer": false,
-      "key": "gpt-6-astra--chatgpt-pro-100",
-      "planRow": {
-        "plan": "ChatGPT Pro 100",
-        "routeId": "chatgpt-pro100-gpt6astra-semianalysis",
-        "multiple": 13.22,
-        "representative": false
-      }
-    },
-    {
-      "slug": "gpt-6-luna",
-      "name": "GPT-6 Luna (max) · ChatGPT Plus",
-      "shortName": "GPT-6 Luna (max)",
-      "developer": "OpenAI",
-      "aaUrl": "https://artificialanalysis.ai/models/gpt-6-luna",
-      "aaVariant": "max",
-      "rankingEligible": true,
-      "exclusionReasons": [],
-      "intelligenceIndex": {
-        "value": 27.8552004938153,
-        "status": "measured"
-      },
-      "speed": null,
-      "aaFrontierTier": "left cohort",
-      "aaFrontierConfiguration": "GPT-6 Luna (max)",
-      "aaFrontierIntelligenceGap": null,
-      "aaFrontierFootnote": null,
-      "rank": {
-        "api": 3,
-        "plan": 14
-      },
-      "rankWithinWorkload": {
-        "api": null,
-        "plan": null
-      },
-      "rankNote": null,
-      "overall": {
-        "api": 52.95089126760901,
-        "plan": 56.07953461080042
-      },
-      "quality": 41.439379481067235,
-      "qualityRank": 5,
-      "dims": {
-        "costComposite": null,
-        "frontierCode": 25.1747727272727,
-        "terminalBench": 12.6262626262626,
-        "bugHunt": 29.45402298850575,
-        "vibeCode": 65.315,
-        "codeMigration": 46.669,
-        "livebench2Overall": 60.42,
-        "gdpval": 47.15449999999999,
-        "gdpPdf": 22.8,
-        "automationBench": 53.16814034483175,
-        "omniscience": 45.86666666666667,
-        "lcr": 83.3333333333333,
-        "hle": 22.2,
-        "tbScience": 8.57142857142857,
-        "critpt": 42.5
-      },
-      "costDims": {
-        "api": 87.48542662723433,
-        "plan": 100.0
-      },
-      "raw": {
-        "frontierCode": 0.251747727272727,
-        "terminalBench": 12.6262626262626,
-        "bugHunt": 41.0,
-        "vibeCode": 65.315,
-        "codeMigration": 46.669,
-        "livebench2Overall": 60.42,
-        "gdpval": 1443.09,
-        "gdpPdf": 0.228,
-        "automationBench": 0.5316814034483175,
-        "omniscience": -8.266666666666667,
-        "lcr": 0.833333333333333,
-        "hle": 0.222,
-        "tbScience": 0.0857142857142857,
-        "critpt": 0.425
-      },
-      "coverage": {
-        "pct": 100.0,
-        "costAvailable": true,
-        "missing": [],
-        "provisional": false,
-        "provisionalReasons": []
-      },
-      "cost": {
-        "apiUsd": 174.71545036374937,
-        "planUsd": 21.569808686882638,
-        "fallback": null,
-        "route": {
-          "id": "chatgpt-plus-gpt-6-luna-common-gpt-assumption",
-          "planLabel": "ChatGPT Plus $20 · common GPT assumption",
-          "planFeeUsd": 20,
-          "valueMultiple": 8.1,
-          "grade": "assumption",
-          "assumptionKind": "transfer",
-          "evidenceLabel": "Provisional assumption",
-          "sourceModel": "GPT-6 Astra",
-          "sourceUrl": "https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x",
-          "sourceDate": "2026-10-06"
-        },
-        "subset": false,
-        "partialComponents": [],
-        "workload": "2774ca1a24867d8c",
-        "planFlags": [
-          "workload-unmatched",
-          "owner-named transfer (assumption)",
-          "possibly-superseded",
-          "valuation basis unverified"
-        ]
-      },
-      "grade": "measured",
-      "pareto": {
-        "api": true,
-        "plan": true
-      },
-      "frontierStatus": {
-        "api": {
-          "definite": "certified",
-          "possible": "certified"
-        },
-        "plan": null
-      },
-      "scenario": {
-        "api": {
-          "top1": 0.0,
-          "top3": 1.0,
-          "frontier": 1.0
-        },
-        "plan": null
-      },
-      "flags": [],
-      "tier": "Budget",
-      "band": {
-        "api": [
-          2,
-          3
-        ],
-        "plan": [
-          14,
-          19
-        ]
-      },
-      "bandExcludesTransfer": true,
-      "key": "gpt-6-luna--chatgpt-plus",
-      "planRow": {
-        "plan": "ChatGPT Plus",
-        "routeId": "chatgpt-plus-gpt-6-luna-common-gpt-assumption",
-        "multiple": 8.1,
-        "representative": false
-      }
-    },
-    {
-      "slug": "gpt-6-luna",
-      "name": "GPT-6 Luna (max) · ChatGPT Pro 100",
-      "shortName": "GPT-6 Luna (max)",
-      "developer": "OpenAI",
-      "aaUrl": "https://artificialanalysis.ai/models/gpt-6-luna",
-      "aaVariant": "max",
-      "rankingEligible": true,
-      "exclusionReasons": [],
-      "intelligenceIndex": {
-        "value": 27.8552004938153,
-        "status": "measured"
-      },
-      "speed": null,
-      "aaFrontierTier": "left cohort",
-      "aaFrontierConfiguration": "GPT-6 Luna (max)",
-      "aaFrontierIntelligenceGap": null,
-      "aaFrontierFootnote": null,
-      "rank": {
-        "api": 3,
-        "plan": 14
-      },
-      "rankWithinWorkload": {
-        "api": null,
-        "plan": null
-      },
-      "rankNote": null,
-      "overall": {
-        "api": 52.95089126760901,
-        "plan": 56.07953461080042
-      },
-      "quality": 41.439379481067235,
-      "qualityRank": 5,
-      "dims": {
-        "costComposite": null,
-        "frontierCode": 25.1747727272727,
-        "terminalBench": 12.6262626262626,
-        "bugHunt": 29.45402298850575,
-        "vibeCode": 65.315,
-        "codeMigration": 46.669,
-        "livebench2Overall": 60.42,
-        "gdpval": 47.15449999999999,
-        "gdpPdf": 22.8,
-        "automationBench": 53.16814034483175,
-        "omniscience": 45.86666666666667,
-        "lcr": 83.3333333333333,
-        "hle": 22.2,
-        "tbScience": 8.57142857142857,
-        "critpt": 42.5
-      },
-      "costDims": {
-        "api": 87.48542662723433,
-        "plan": 100.0
-      },
-      "raw": {
-        "frontierCode": 0.251747727272727,
-        "terminalBench": 12.6262626262626,
-        "bugHunt": 41.0,
-        "vibeCode": 65.315,
-        "codeMigration": 46.669,
-        "livebench2Overall": 60.42,
-        "gdpval": 1443.09,
-        "gdpPdf": 0.228,
-        "automationBench": 0.5316814034483175,
-        "omniscience": -8.266666666666667,
-        "lcr": 0.833333333333333,
-        "hle": 0.222,
-        "tbScience": 0.0857142857142857,
-        "critpt": 0.425
-      },
-      "coverage": {
-        "pct": 100.0,
-        "costAvailable": true,
-        "missing": [],
-        "provisional": false,
-        "provisionalReasons": []
-      },
-      "cost": {
-        "apiUsd": 174.71545036374937,
-        "planUsd": 16.560706195616053,
-        "fallback": null,
-        "route": {
-          "id": "chatgpt-pro100-gpt-6-luna-common-gpt-assumption",
-          "planLabel": "ChatGPT Pro 100 $100 · common GPT assumption",
-          "planFeeUsd": 100,
-          "valueMultiple": 10.55,
-          "grade": "assumption",
-          "assumptionKind": "transfer",
-          "evidenceLabel": "Provisional assumption",
-          "sourceModel": "GPT-6.1 Sol",
-          "sourceUrl": "https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x",
-          "sourceDate": "2026-10-06"
-        },
-        "subset": false,
-        "partialComponents": [],
-        "workload": "2774ca1a24867d8c",
-        "planFlags": [
-          "workload-unmatched",
-          "owner-named transfer (assumption)",
-          "possibly-superseded",
-          "valuation basis unverified"
-        ]
-      },
-      "grade": "measured",
-      "pareto": {
-        "api": true,
-        "plan": true
-      },
-      "frontierStatus": {
-        "api": {
-          "definite": "certified",
-          "possible": "certified"
-        },
-        "plan": null
-      },
-      "scenario": {
-        "api": {
-          "top1": 0.0,
-          "top3": 1.0,
-          "frontier": 1.0
-        },
-        "plan": null
-      },
-      "flags": [],
-      "tier": "Budget",
-      "band": {
-        "api": [
-          2,
-          3
-        ],
-        "plan": [
-          14,
-          19
-        ]
-      },
-      "bandExcludesTransfer": true,
-      "key": "gpt-6-luna--chatgpt-pro-100",
-      "planRow": {
-        "plan": "ChatGPT Pro 100",
-        "routeId": "chatgpt-pro100-gpt-6-luna-common-gpt-assumption",
-        "multiple": 10.55,
-        "representative": false
-      }
-    },
-    {
-      "slug": "gpt-6-luna",
-      "name": "GPT-6 Luna (max) · ChatGPT Pro 200",
-      "shortName": "GPT-6 Luna (max)",
-      "developer": "OpenAI",
-      "aaUrl": "https://artificialanalysis.ai/models/gpt-6-luna",
-      "aaVariant": "max",
-      "rankingEligible": true,
-      "exclusionReasons": [],
-      "intelligenceIndex": {
-        "value": 27.8552004938153,
-        "status": "measured"
-      },
-      "speed": null,
-      "aaFrontierTier": "left cohort",
-      "aaFrontierConfiguration": "GPT-6 Luna (max)",
-      "aaFrontierIntelligenceGap": null,
-      "aaFrontierFootnote": null,
-      "rank": {
-        "api": 3,
-        "plan": 14
-      },
-      "rankWithinWorkload": {
-        "api": null,
-        "plan": null
-      },
-      "rankNote": null,
-      "overall": {
-        "api": 52.95089126760901,
-        "plan": 56.07953461080042
-      },
-      "quality": 41.439379481067235,
-      "qualityRank": 5,
-      "dims": {
-        "costComposite": null,
-        "frontierCode": 25.1747727272727,
-        "terminalBench": 12.6262626262626,
-        "bugHunt": 29.45402298850575,
-        "vibeCode": 65.315,
-        "codeMigration": 46.669,
-        "livebench2Overall": 60.42,
-        "gdpval": 47.15449999999999,
-        "gdpPdf": 22.8,
-        "automationBench": 53.16814034483175,
-        "omniscience": 45.86666666666667,
-        "lcr": 83.3333333333333,
-        "hle": 22.2,
-        "tbScience": 8.57142857142857,
-        "critpt": 42.5
-      },
-      "costDims": {
-        "api": 87.48542662723433,
-        "plan": 100.0
-      },
-      "raw": {
-        "frontierCode": 0.251747727272727,
-        "terminalBench": 12.6262626262626,
-        "bugHunt": 41.0,
-        "vibeCode": 65.315,
-        "codeMigration": 46.669,
-        "livebench2Overall": 60.42,
-        "gdpval": 1443.09,
-        "gdpPdf": 0.228,
-        "automationBench": 0.5316814034483175,
-        "omniscience": -8.266666666666667,
-        "lcr": 0.833333333333333,
-        "hle": 0.222,
-        "tbScience": 0.0857142857142857,
-        "critpt": 0.425
-      },
-      "coverage": {
-        "pct": 100.0,
-        "costAvailable": true,
-        "missing": [],
-        "provisional": false,
-        "provisionalReasons": []
-      },
-      "cost": {
-        "apiUsd": 174.71545036374937,
-        "planUsd": 16.767317693258097,
-        "fallback": null,
-        "route": {
-          "id": "chatgpt-pro200-gpt-6-luna-common-gpt-assumption",
-          "planLabel": "ChatGPT Pro 200 $200 · common GPT assumption",
-          "planFeeUsd": 200,
-          "valueMultiple": 10.42,
-          "grade": "assumption",
-          "assumptionKind": "transfer",
-          "evidenceLabel": "Provisional assumption",
-          "sourceModel": "GPT-6.1 Sol",
-          "sourceUrl": "https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x",
-          "sourceDate": "2026-10-06"
-        },
-        "subset": false,
-        "partialComponents": [],
-        "workload": "2774ca1a24867d8c",
-        "planFlags": [
-          "workload-unmatched",
-          "owner-named transfer (assumption)",
-          "possibly-superseded",
-          "valuation basis unverified"
-        ]
-      },
-      "grade": "measured",
-      "pareto": {
-        "api": true,
-        "plan": true
-      },
-      "frontierStatus": {
-        "api": {
-          "definite": "certified",
-          "possible": "certified"
-        },
-        "plan": null
-      },
-      "scenario": {
-        "api": {
-          "top1": 0.0,
-          "top3": 1.0,
-          "frontier": 1.0
-        },
-        "plan": null
-      },
-      "flags": [],
-      "tier": "Budget",
-      "band": {
-        "api": [
-          2,
-          3
-        ],
-        "plan": [
-          14,
-          19
-        ]
-      },
-      "bandExcludesTransfer": true,
-      "key": "gpt-6-luna--chatgpt-pro-200",
-      "planRow": {
-        "plan": "ChatGPT Pro 200",
-        "routeId": "chatgpt-pro200-gpt-6-luna-common-gpt-assumption",
-        "multiple": 10.42,
-        "representative": false
       }
     },
     {
@@ -8145,7 +6259,7 @@
       "aaFrontierFootnote": null,
       "rank": {
         "api": 3,
-        "plan": 14
+        "plan": 4
       },
       "rankWithinWorkload": {
         "api": null,
@@ -8257,8 +6371,8 @@
           3
         ],
         "plan": [
-          14,
-          19
+          4,
+          5
         ]
       },
       "bandExcludesTransfer": true,
@@ -8272,7 +6386,7 @@
     },
     {
       "slug": "gpt-6-astra",
-      "name": "GPT-6 Astra (max) · ChatGPT Plus",
+      "name": "GPT-6 Astra (max) · ChatGPT Pro 200",
       "shortName": "GPT-6 Astra (max)",
       "developer": "OpenAI",
       "aaUrl": "https://artificialanalysis.ai/models/gpt-6-astra",
@@ -8290,7 +6404,7 @@
       "aaFrontierFootnote": null,
       "rank": {
         "api": 2,
-        "plan": 18
+        "plan": 5
       },
       "rankWithinWorkload": {
         "api": null,
@@ -8299,7 +6413,7 @@
       "rankNote": null,
       "overall": {
         "api": 54.21033258517324,
-        "plan": 54.410412345590444
+        "plan": 55.54294169922863
       },
       "quality": 65.51797482932908,
       "qualityRank": 1,
@@ -8322,7 +6436,7 @@
       },
       "costDims": {
         "api": 20.287405852705753,
-        "plan": 21.087724894374567
+        "plan": 25.61784230892729
       },
       "raw": {
         "frontierCode": 0.42374797979798,
@@ -8349,13 +6463,13 @@
       },
       "cost": {
         "apiUsd": 7223.31220571871,
-        "planUsd": 891.7669389776186,
+        "planUsd": 498.67533349801244,
         "fallback": null,
         "route": {
-          "id": "chatgpt-plus-gpt6astra-semianalysis",
-          "planLabel": "ChatGPT Plus $20 · GPT-6 Astra",
-          "planFeeUsd": 20,
-          "valueMultiple": 8.1,
+          "id": "chatgpt-pro200-gpt6astra-semianalysis",
+          "planLabel": "ChatGPT Pro 200 $200 · GPT-6 Astra",
+          "planFeeUsd": 200,
+          "valueMultiple": 14.485,
           "grade": "measured",
           "assumptionKind": null,
           "evidenceLabel": "Controlled account measurement / workload projection",
@@ -8392,8 +6506,8 @@
         },
         "plan": {
           "top1": 0.0,
-          "top3": 0.0,
-          "frontier": 0.0
+          "top3": 1.0,
+          "frontier": 1.0
         }
       },
       "flags": [],
@@ -8404,159 +6518,17 @@
           3
         ],
         "plan": [
-          14,
-          19
+          4,
+          5
         ]
       },
       "bandExcludesTransfer": false,
-      "key": "gpt-6-astra--chatgpt-plus",
+      "key": "gpt-6-astra--chatgpt-pro-200",
       "planRow": {
-        "plan": "ChatGPT Plus",
-        "routeId": "chatgpt-plus-gpt6astra-semianalysis",
-        "multiple": 8.1,
-        "representative": false
-      }
-    },
-    {
-      "slug": "gpt-6-luna",
-      "name": "GPT-6 Luna (max) · OpenCode Go",
-      "shortName": "GPT-6 Luna (max)",
-      "developer": "OpenAI",
-      "aaUrl": "https://artificialanalysis.ai/models/gpt-6-luna",
-      "aaVariant": "max",
-      "rankingEligible": true,
-      "exclusionReasons": [],
-      "intelligenceIndex": {
-        "value": 27.8552004938153,
-        "status": "measured"
-      },
-      "speed": null,
-      "aaFrontierTier": "left cohort",
-      "aaFrontierConfiguration": "GPT-6 Luna (max)",
-      "aaFrontierIntelligenceGap": null,
-      "aaFrontierFootnote": null,
-      "rank": {
-        "api": 3,
-        "plan": 19
-      },
-      "rankWithinWorkload": {
-        "api": null,
-        "plan": null
-      },
-      "rankNote": null,
-      "overall": {
-        "api": 52.95089126760901,
-        "plan": 51.833135162725895
-      },
-      "quality": 41.439379481067235,
-      "qualityRank": 5,
-      "dims": {
-        "costComposite": null,
-        "frontierCode": 25.1747727272727,
-        "terminalBench": 12.6262626262626,
-        "bugHunt": 29.45402298850575,
-        "vibeCode": 65.315,
-        "codeMigration": 46.669,
-        "livebench2Overall": 60.42,
-        "gdpval": 47.15449999999999,
-        "gdpPdf": 22.8,
-        "automationBench": 53.16814034483175,
-        "omniscience": 45.86666666666667,
-        "lcr": 83.3333333333333,
-        "hle": 22.2,
-        "tbScience": 8.57142857142857,
-        "critpt": 42.5
-      },
-      "costDims": {
-        "api": 87.48542662723433,
-        "plan": 83.01440220770189
-      },
-      "raw": {
-        "frontierCode": 0.251747727272727,
-        "terminalBench": 12.6262626262626,
-        "bugHunt": 41.0,
-        "vibeCode": 65.315,
-        "codeMigration": 46.669,
-        "livebench2Overall": 60.42,
-        "gdpval": 1443.09,
-        "gdpPdf": 0.228,
-        "automationBench": 0.5316814034483175,
-        "omniscience": -8.266666666666667,
-        "lcr": 0.833333333333333,
-        "hle": 0.222,
-        "tbScience": 0.0857142857142857,
-        "critpt": 0.425
-      },
-      "coverage": {
-        "pct": 100.0,
-        "costAvailable": true,
-        "missing": [],
-        "provisional": false,
-        "provisionalReasons": []
-      },
-      "cost": {
-        "apiUsd": 174.71545036374937,
-        "planUsd": 116.47696690916625,
-        "fallback": null,
-        "route": {
-          "id": "opencode-go-gpt-6-luna-dollar-limit",
-          "planLabel": "OpenCode Go $10 · GPT-6 Luna (max) · published dollar limit ($15 a month)",
-          "planFeeUsd": 10,
-          "valueMultiple": 1.5,
-          "grade": "assumption",
-          "assumptionKind": "dollarLimit",
-          "evidenceLabel": "Published dollar limit (owner decisions O198 and O203; the plan's terms, read after the release cutoff, not a measurement)",
-          "sourceModel": null,
-          "sourceUrl": "https://opencode.ai/docs/console/go/",
-          "sourceDate": "2026-11-11"
-        },
-        "subset": false,
-        "partialComponents": [],
-        "workload": "2774ca1a24867d8c",
-        "planFlags": [
-          "workload-unmatched",
-          "published dollar limit; full use of the limit assumed, at the seller's listed token prices (O198)"
-        ]
-      },
-      "grade": "measured",
-      "pareto": {
-        "api": true,
-        "plan": true
-      },
-      "frontierStatus": {
-        "api": {
-          "definite": "certified",
-          "possible": "certified"
-        },
-        "plan": null
-      },
-      "scenario": {
-        "api": {
-          "top1": 0.0,
-          "top3": 1.0,
-          "frontier": 1.0
-        },
-        "plan": null
-      },
-      "flags": [],
-      "tier": "Near-Budget",
-      "band": {
-        "api": [
-          2,
-          3
-        ],
-        "plan": [
-          14,
-          19
-        ]
-      },
-      "bandExcludesTransfer": true,
-      "key": "gpt-6-luna--opencode-go",
-      "planRow": {
-        "plan": "OpenCode Go",
-        "routeId": "opencode-go-gpt-6-luna-dollar-limit",
-        "multiple": 1.5,
-        "representative": false
+        "plan": "ChatGPT Pro 200",
+        "routeId": "chatgpt-pro200-gpt6astra-semianalysis",
+        "multiple": 14.485,
+        "representative": true
       }
     },
     {
@@ -13388,14 +11360,14 @@
       "value": {
         "slug": "gpt-6-1-sol",
         "label": "Best overall value",
-        "reason": "GPT-6.1 Sol (max) has the highest overall score in the Plan ranking at 68.0, costing $133.29 per basket run.",
-        "score": 67.98948489846025,
+        "reason": "GPT-6.1 Sol (max) has the highest overall score in the Plan ranking at 66.9, costing $133.29 per basket run.",
+        "score": 66.85695554482207,
         "unit": "overall"
       },
       "other": {
         "slug": "gpt-6-astra",
         "label": "Best quality, any cost",
-        "reason": "GPT-6 Astra (max) has the best quality score (65.5) before cost; it ranks #11 in the Plan ranking.",
+        "reason": "GPT-6 Astra (max) has the best quality score (65.5) before cost; it ranks #5 in the Plan ranking.",
         "score": 65.51797482932908,
         "unit": "quality"
       },
