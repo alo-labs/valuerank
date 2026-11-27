@@ -3192,7 +3192,7 @@ def score(assembled: dict, frozen: dict) -> dict:
 
 MEASURED_VIEW_SPEC = {
     "admission": "measurement candidates of grade controlled (exact effort, or the same model at another effort, O90) or concordant reports (no owner assumption of any kind, no diagnostics)",
-    "selection": "the official selector (E111, E88, E85) rerun among the admitted candidates",
+    "selection": "the official selector (E111, E88, E85, then the most favorable plan, O219) rerun among the admitted candidates",
     "anchors": "the official Plan anchor object of the row's workload",
     "panel": "rows with an admitted measured candidate; others listed as 'no measured route' (no API fallback)",
 }

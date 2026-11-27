@@ -953,9 +953,10 @@ MEASURED_GRADES = {"controlled", "reports"}
 
 
 def measured_only_selection(candidates: list[dict]) -> dict:
-    """E113: the measured-only view reruns the same selector among measurements (no owner assumption of any kind)."""
+    """E113: the measured-only view reruns the same selector among measurements (no owner assumption of any kind),
+    the O219 most-favorable-plan step included, so it also has one row per configuration."""
 
-    return route_selection([candidate for candidate in candidates if candidate["grade"] in MEASURED_GRADES])
+    return favorable_selection([candidate for candidate in candidates if candidate["grade"] in MEASURED_GRADES])
 
 
 def select_route(candidates: list[dict]) -> dict | None:

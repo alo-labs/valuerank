@@ -79,3 +79,4 @@ E-numbers in the draft mark editor decisions; each adopted one is reflected in t
 
 
 - O219 (2026-11-27, amends O48): each configuration is ranked once on the Plan basis, on its most favorable plan (the plan whose comparator-selected route gives the lowest Plan cost; tie: the comparator's choice); other plans are disclosed alternatives, never ranked; Plan anchors re-frozen (a5) with a dual run.
+- E359 (2026-11-27, editorial): O219 tie rule: largest comparison multiple (E74 lower bound for a set-identified route) = lowest Plan cost; equal multiples keep the plan of the comparator's choice over all routes, then the first plan name; the measured-only view (E113) reruns the same selection among measured candidates.

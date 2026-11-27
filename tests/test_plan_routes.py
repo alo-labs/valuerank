@@ -386,14 +386,20 @@ def test_pooled_partitions_age_with_their_contributing_reports():
 
 
 def test_measured_only_selection_drops_transfers_and_reruns_the_selector():
-    """E113: the measured-only view keeps exact-route measurements and reruns selection."""
+    """E113: the measured-only view keeps exact-route measurements and reruns selection, O219's most favorable plan
+    included."""
 
     transfer = candidate("transfer", 50.0, "assumption")
     measured = candidate("measured", 8.0, "controlled")
     report = candidate("report", 9.0, "reports")
+    for item in (transfer, measured, report):
+        item["route"]["plan"] = "Pro"
     assert pr.route_selection([transfer, report])["selected"]["route"]["id"] == "report"
     view = pr.measured_only_selection([transfer, measured, report])
-    assert view["selected"]["route"]["id"] == "measured"
+    assert view["selected"]["route"]["id"] == "measured"  # one plan: the comparator's grade order decides
+    report["route"]["plan"] = "Max"
+    across = pr.measured_only_selection([transfer, measured, report])
+    assert across["selected"]["route"]["id"] == "report" and across["plan"] == "Max"  # O219: the larger multiple's plan
     assert pr.measured_only_selection([transfer])["selected"] is None
 
 

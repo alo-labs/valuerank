@@ -2964,3 +2964,18 @@ Asked on I64 Q1 whether future O71 admissions should be executed by the build fr
 
 ## Owner decision O219 (2026-11-27): one ranked row per configuration
 - The owner stated: "Each model-effort level will be ranked only once in the ranking, belonging to only one and the most favorable plan tier." This amends O48 (one row per configuration and plan). Applied: on the Plan basis a configuration is ranked once, on the plan whose own selected route (the E85 comparator among that plan's eligible routes) has the largest comparison multiple, i.e. the lowest Plan cost at the configuration's quality; a tie keeps the comparator's overall choice, then the plan name. The other plans are published per row as `planAlternatives` and never ranked. Plan statistics (anchors, separability, noise bands, scenario streams, flag counts) then range over one row per configuration, so the Plan anchors are re-frozen (anchor policy a5) with an O12 dual run, and the release is v3.2.0 (methodology 3.2.0).
+
+## Targeted check on r238 (O209), Kimi K3 and GLM 5.3 on the O219 changed text (2026-11-27)
+- Both returned HAS FEEDBACK, no Critical. Real and folded:
+  - (High, both) The dual-run sentence still named the O163 objects against the O170 re-freeze. It now names the a4 objects against the O219 re-freeze, matching `data/v3_dual_run*.json` (previousAnchorVersion a4, anchorVersion a5).
+  - (Medium, Kimi; Low, GLM) The 2026-11-26 O65 re-freeze was given the a5 version string. It keeps a4, and the O219 re-freeze to a5 is stated as its own event.
+  - (Medium, Kimi) "most plan rows rest on a route flagged possibly superseded" is now quantifier-neutral, since every Plan row is flagged (5 of 5, 15 of 15).
+  - (Low, GLM) The band rule's own-plan-rows clause now carries the "none since O219" guard.
+  - (Medium, GLM; Low, Kimi) The plan tie rule is recorded as E359.
+  - (Recommendation, GLM) The measured-only Plan view's selection now includes the O219 step.
+- Explained, not a defect (High, GLM): the max-effort and AI Coding Daily "not ranked, not comparable" Plan-clip lists grew (GPT-6.2 Astra (medium) and GPT-6.2 Sol (max); GPT-6.2 Sol (high) and (xhigh)). The cause is the O219 re-freeze: the removed rows included the dearest Plan references, so the Plan high anchors fell from 1,783.53 to 997.35 USD (max-effort) and from 699.78 to 391.32 USD (AI Coding Daily). The O219 paragraph now says so.
+- Review-copy tooling:
+  - The changed-text extract's title is now taken from its argument (it had been fixed to r237's).
+  - The review copy names `draft-r238.md` for the omitted revision history.
+- Not adopted (design recommendations for a later release): structural dual-run provenance stamps, a quantifier lint, a leave-one-reference-out Plan anchor range, a vacuous-rule index for the multi-row rules, and richer `planAlternatives` fields.
+- E359 (2026-11-27, editorial, O219's tie rule made explicit): a configuration's ranked plan is the plan whose comparator-chosen route has the largest comparison multiple. That is the multiple E74 scores (a set-identified route's lower bound), so it gives the lowest Plan cost. On equal multiples the plan of the comparator's choice over all routes is kept, then the first plan name. Selection runs per configuration within the E88 filter, so within one valuation basis and allocation regime. The measured-only view (E113) reruns the same selection among measured candidates.

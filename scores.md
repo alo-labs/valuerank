@@ -1367,7 +1367,7 @@ A plan meter counts tokens (O126), so a multiple measured on one model or effort
 
 ### Measured-only Plan view
 
-Admission: measurement candidates of grade controlled (exact effort, or the same model at another effort, O90) or concordant reports (no owner assumption of any kind, no diagnostics). Selection: the official selector (E111, E88, E85) rerun among the admitted candidates. Panel: rows with an admitted measured candidate; others listed as 'no measured route' (no API fallback).
+Admission: measurement candidates of grade controlled (exact effort, or the same model at another effort, O90) or concordant reports (no owner assumption of any kind, no diagnostics). Selection: the official selector (E111, E88, E85, then the most favorable plan, O219) rerun among the admitted candidates. Panel: rows with an admitted measured candidate; others listed as 'no measured route' (no API fallback).
 
 | Configuration | Status | Route | Plan cost | Value | Rank |
 |---|---|---|---:|---:|---:|

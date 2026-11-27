@@ -33,7 +33,7 @@ def pair_lines(a: list[str], b: list[str]):
             yield best, new
 
 
-out = ["# Changed text of draft r237 since the first targeted check (commit 40b9a93)", "",
+out = [f"# {sys.argv[4] if len(sys.argv) > 4 else 'Changed text'}", "",
        "Each entry names the paragraph by its opening words, then lists the sentences that are new or reworded, with the previous wording of the replaced sentences after \"was:\". "
        "Review only these sentences against the decision ledger; text not shown here is unchanged and was reviewed in earlier rounds.", ""]
 count = 0
