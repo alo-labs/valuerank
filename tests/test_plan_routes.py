@@ -980,3 +980,28 @@ def test_a_paywalled_article_needs_a_recent_reread():
         with pytest.raises(ValueError, match="O130"):
             pr.check_source_rereads({"sourceEvidence": {"sa": stale}}, day)
     assert pr.check_source_rereads({"sourceEvidence": {"sa": {"paywalled": True, "rereads": [{"readOn": "2026-09-25"}]}}}, day) == "2026-09-25"
+
+
+def test_a_configuration_is_ranked_once_on_its_most_favorable_plan():
+    """O219: the plan whose own selected route has the largest multiple (the lowest Plan cost) wins, even over the E85
+    comparator's grade order; a tie keeps the comparator's choice; the other plans are disclosed alternatives."""
+
+    def on(plan, identifier, multiple, grade):
+        item = candidate(identifier, multiple, grade)
+        item["route"]["plan"] = plan
+        return item
+
+    measured = on("Pro", "pro-measured", 8.0, "controlled")
+    assumed = on("Max", "max-assumed", 12.0, "assumption")
+    selection = pr.favorable_selection([measured, assumed])
+    assert pr.route_selection([measured, assumed])["selected"]["route"]["id"] == "pro-measured"  # the comparator ranks grade first
+    assert selection["selected"]["route"]["id"] == "max-assumed" and selection["plan"] == "Max" and selection["reason"] == pr.FAVORABLE_PLAN
+    assert selection["alternatives"] == [{"plan": "Pro", "routeId": "pro-measured", "multiple": 8.0}]
+    tie = pr.favorable_selection([measured, on("Max", "max-tie", 8.0, "assumption")])
+    assert tie["selected"]["route"]["id"] == "pro-measured" and tie["plan"] == "Pro" and tie["reason"] != pr.FAVORABLE_PLAN
+    unnamed = candidate("no-plan", 3.0, "controlled")
+    unnamed["route"].pop("plan", None)
+    assert pr.favorable_selection([unnamed])["plan"] == "no-plan"
+    none = pr.favorable_selection([candidate("gone", 3.0, "diagnostic")])
+    assert none["selected"] is None and none["plan"] is None and none["alternatives"] == []
+    assert pr.plan_selections([measured, assumed]).keys() == {"Max", "Pro"}

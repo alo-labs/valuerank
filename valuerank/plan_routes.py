@@ -886,6 +886,37 @@ def route_selection(candidates: list[dict]) -> dict:
     return {"selected": ordered[0], "reason": deciding, "dominated": dominated, "tuples": tuples}
 
 
+FAVORABLE_PLAN = "most favorable plan (O219): the plan whose selected route gives the lowest Plan cost"
+
+
+def plan_selections(candidates: list[dict]) -> dict:
+    """O48: each plan's own official route among its eligible candidates (a route without a recorded plan is its own plan)."""
+
+    by_plan: dict[str, list] = {}
+    for candidate in candidates:
+        if candidate["grade"] != "diagnostic":
+            by_plan.setdefault(candidate["route"].get("plan") or candidate["route"]["id"], []).append(candidate)
+    return {plan: route_selection(items) for plan, items in sorted(by_plan.items())}
+
+
+def favorable_selection(candidates: list[dict]) -> dict:
+    """O219 (2026-11-27): a configuration is ranked once, on its most favorable plan: the plan whose own selected route has the
+    largest comparison multiple (the lowest Plan cost; quality is the configuration's on every plan). A tie keeps the E85
+    comparator's own choice, then the plan name. The other plans' selections are kept as disclosed alternatives."""
+
+    overall = route_selection(candidates)
+    plans = {name: item for name, item in plan_selections(candidates).items() if item["selected"] is not None}
+    if not plans:
+        return {**overall, "plan": None, "alternatives": []}
+    chosen_route = (overall["selected"] or {}).get("route") or {}
+    chosen_plan = chosen_route.get("plan") or chosen_route.get("id")
+    plan = min(plans, key=lambda name: (-comparison_multiple(plans[name]["selected"]["route"]), name != chosen_plan, name))
+    selection = overall if plan == chosen_plan else {**plans[plan], "reason": FAVORABLE_PLAN}
+    alternatives = [{"plan": name, "routeId": item["selected"]["route"]["id"], "multiple": comparison_multiple(item["selected"]["route"])}
+                    for name, item in plans.items() if name != plan]
+    return {**selection, "plan": plan, "alternatives": alternatives}
+
+
 # I71: the one registry of owner-assumption kinds; every flag, amount type, count and enumeration is generated from it.
 OWNER_ASSUMPTIONS = {
     "transfer": ("owner-named transfer", "owner-named transfers"),

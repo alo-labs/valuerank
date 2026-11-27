@@ -8,11 +8,11 @@
   "summary": {
     "rank": {
       "api": 4,
-      "plan": 5
+      "plan": 2
     },
     "overall": {
       "api": 51.404073926690316,
-      "plan": 65.59227366793016
+      "plan": 64.01376128327243
     },
     "quality": 63.9203449199042,
     "qualityRank": 4,
@@ -309,7 +309,7 @@
     ],
     "costScore": {
       "api": 13.85526094704866,
-      "plan": 70.60805991200806
+      "plan": 64.29401037337709
     },
     "components": [
       {
@@ -414,8 +414,8 @@
       "planIntervalEligible": false,
       "usdPerRun": 175.1225978452794,
       "selected": true,
-      "planRank": 5,
-      "planValue": 65.59227366793016
+      "planRank": 2,
+      "planValue": 64.01376128327243
     },
     {
       "id": "claude-max20x-claude-sonnet-5-5-common-opus55-assumption",
@@ -432,8 +432,8 @@
       "planIntervalEligible": false,
       "usdPerRun": 175.92906384252012,
       "selected": false,
-      "planRank": 9,
-      "planValue": 64.96185591807019
+      "planRank": null,
+      "planValue": null
     },
     {
       "id": "claude-max5x-claude-sonnet-5-5-common-opus55-assumption",
@@ -450,8 +450,8 @@
       "planIntervalEligible": false,
       "usdPerRun": 180.16979935523065,
       "selected": false,
-      "planRank": 6,
-      "planValue": 65.37616697506763
+      "planRank": null,
+      "planValue": null
     }
   ],
   "scenarios": {
@@ -528,7 +528,7 @@
         "targetProfile": "published-record reporting precision",
         "unevaluable": null,
         "top1": 0.0,
-        "top3": 0.0,
+        "top3": 1.0,
         "frontier": 0.0
       },
       {
@@ -632,7 +632,15 @@
       "date": "2026-11-26",
       "rank": {
         "api": 4,
-        "plan": 5
+        "plan": null
+      }
+    },
+    {
+      "version": "v3.2.0",
+      "date": "2026-11-27",
+      "rank": {
+        "api": 4,
+        "plan": 2
       }
     }
   ],
@@ -653,11 +661,11 @@
       "rankingEligible": true,
       "rank": {
         "api": 4,
-        "plan": 5
+        "plan": 2
       },
       "overall": {
         "api": 51.404073926690316,
-        "plan": 65.59227366793016
+        "plan": 64.01376128327243
       }
     },
     {
@@ -683,11 +691,11 @@
       "rankingEligible": true,
       "rank": {
         "api": 11,
-        "plan": 19
+        "plan": 9
       },
       "overall": {
         "api": 45.1290830850926,
-        "plan": 55.21486906383036
+        "plan": 53.44918267715526
       }
     }
   ]

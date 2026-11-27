@@ -8,7 +8,7 @@
   "summary": {
     "rank": {
       "api": 3,
-      "plan": 14
+      "plan": 4
     },
     "overall": {
       "api": 52.95089126760901,
@@ -415,7 +415,7 @@
       "planIntervalEligible": false,
       "usdPerRun": 16.219406829163514,
       "selected": true,
-      "planRank": 14,
+      "planRank": 4,
       "planValue": 56.07953461080042
     },
     {
@@ -433,8 +433,8 @@
       "planIntervalEligible": false,
       "usdPerRun": 16.560706195616053,
       "selected": false,
-      "planRank": 14,
-      "planValue": 56.07953461080042
+      "planRank": null,
+      "planValue": null
     },
     {
       "id": "chatgpt-pro200-gpt-6-luna-common-gpt-assumption",
@@ -451,8 +451,8 @@
       "planIntervalEligible": false,
       "usdPerRun": 16.767317693258097,
       "selected": false,
-      "planRank": 14,
-      "planValue": 56.07953461080042
+      "planRank": null,
+      "planValue": null
     },
     {
       "id": "chatgpt-plus-gpt-6-luna-common-gpt-assumption",
@@ -469,8 +469,8 @@
       "planIntervalEligible": false,
       "usdPerRun": 21.569808686882638,
       "selected": false,
-      "planRank": 14,
-      "planValue": 56.07953461080042
+      "planRank": null,
+      "planValue": null
     },
     {
       "id": "opencode-go-gpt-6-luna-dollar-limit",
@@ -487,8 +487,8 @@
       "planIntervalEligible": false,
       "usdPerRun": 116.47696690916625,
       "selected": false,
-      "planRank": 19,
-      "planValue": 51.833135162725895
+      "planRank": null,
+      "planValue": null
     }
   ],
   "scenarios": {
@@ -701,7 +701,15 @@
       "date": "2026-11-26",
       "rank": {
         "api": 3,
-        "plan": 14
+        "plan": null
+      }
+    },
+    {
+      "version": "v3.2.0",
+      "date": "2026-11-27",
+      "rank": {
+        "api": 3,
+        "plan": 4
       }
     }
   ],
@@ -722,7 +730,7 @@
       "rankingEligible": true,
       "rank": {
         "api": 3,
-        "plan": 14
+        "plan": 4
       },
       "overall": {
         "api": 52.95089126760901,
@@ -737,11 +745,11 @@
       "rankingEligible": true,
       "rank": {
         "api": 9,
-        "plan": 29
+        "plan": 8
       },
       "overall": {
         "api": 45.75961894945701,
-        "plan": 53.62543400129286
+        "plan": 53.6143959369477
       }
     },
     {
@@ -752,11 +760,11 @@
       "rankingEligible": true,
       "rank": {
         "api": 21,
-        "plan": 68
+        "plan": 19
       },
       "overall": {
         "api": 38.78514707305182,
-        "plan": 48.958188443370105
+        "plan": 48.949594205074675
       }
     }
   ]

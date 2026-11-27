@@ -1,11 +1,28 @@
 {
   "versions": [
     {
-      "version": "v3.1.0",
-      "date": "November 26, 2026",
+      "version": "v3.2.0",
+      "date": "November 27, 2026",
       "models": 5,
       "dimensions": 15,
       "summary": "5 models ranked on 15 dimensions; GPT-6.1 Sol (max) is first on the API basis.",
+      "rankChanges": [],
+      "ranks": {
+        "claude-opus-5-5": 5,
+        "claude-sonnet-5-5": 4,
+        "gpt-6-astra": 2,
+        "gpt-6-luna": 3,
+        "gpt-6-1-sol": 1
+      },
+      "added": [],
+      "removed": []
+    },
+    {
+      "version": "v3.1.0",
+      "date": "November 26, 2026",
+      "models": 5,
+      "dimensions": null,
+      "summary": "5 models ranked; GPT-6.1 Sol (max) first.",
       "rankChanges": [
         {
           "slug": "gpt-6-astra",

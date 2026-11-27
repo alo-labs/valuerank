@@ -124,3 +124,4 @@ To continue:
 | 176 | Kimi K3 (three sections of the changed-text extract) | r237 | two Mediums (wording), one High left as a design candidate (AA's cache-pricing page), folded into r237 |
 | 177 | GLM 5.3 (three sections of the same extract) | r237 | one High and two Mediums real (anchor-reference sentence, stale rules for models that left the cohort, near-point sum), folded into r237 |
 | 178 | Kimi K3 and GLM 5.3 (confirmation on the folded sentences) | r237 | no Critical or High that stands; the re-freeze paragraph and wording folded; the O209 targeted check is complete |
+| 179 | Kimi K3 and GLM 5.3 (O209-style check of the O219 changed text) | r238 | pending at commit time; see ledger.md "Targeted check on r238"

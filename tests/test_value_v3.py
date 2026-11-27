@@ -18,6 +18,7 @@ from valuerank import anchors as anchor_math
 from valuerank import basket
 from valuerank import diagnostics
 from valuerank import plan_routes as pr
+from valuerank import plan_routes as plan_routes_module
 from valuerank import quality as q
 from valuerank import scenarios
 from valuerank import value_v3 as v
@@ -1085,26 +1086,26 @@ def test_rounded_records_need_a_registered_joint_law():
     assert v.JOINT_LAWS == {"singleton": "independent uniform within the reporting interval (arcsine alternative)"} and v.SAMPLING_IDENTITIES == ()
 
 
-def test_core_plan_streams_run_with_transfers_off():
+def test_core_plan_streams_run_with_transfers_off(monkeypatch):
     """E167: a transfer-dependent row is unevaluable in S1, S2 and S1M on the Plan basis; S0 keeps the displayed record."""
 
     routes = documents()["planRoutes"]
     routes["routes"][0].update(valueMultipleKind="user_assumption", evidenceClass="user_assumption")
-    # O157: the Plan anchors freeze over measured plan rows only, so with a's route assumed the main workload needs a
-    # second measured reference: b's measured route on a second plan.
+    # O157: the Plan anchors freeze over measured plan rows only; with a's route assumed, b is the main workload's one measured
+    # plan row (O219: one row per configuration), below the two-reference minimum.
     with pytest.raises(ValueError, match="the main workload has 1 measured Plan anchor references"):
         scored(planRoutes=routes)
-    routes["routes"].append({**routes["routes"][1], "id": "plan-b2", "valueMultiple": 4.0, "identification": "unidentified"})
-    del routes["routes"][-1]["valuationBasis"]
+    # The fixture has no third main-workload configuration, so the minimum is lowered here to test the streams themselves.
+    monkeypatch.setattr(v, "MIN_ANCHOR_REFERENCES", 1)
     result, frozen = scored(planRoutes=routes)
-    assert frozen["workloads"][result["mainWorkload"]]["anchors"]["plan"]["referenceIds"] == ["b@plan-b", "b@plan-b2"]
+    assert frozen["workloads"][result["mainWorkload"]]["anchors"]["plan"]["referenceIds"] == ["b@plan-b"]
     # O157: the assumed plan row is scored and flagged but stays outside the Plan clip gate, which lists it.
     (main_gate,) = [item for item in v.score(result, frozen)["gates"]["clip"]["plan"] if item["workload"] == result["mainWorkload"]]
-    assert main_gate["rows"] == 2 and main_gate["outsideGate"] == ["a@plan-a"]
+    assert main_gate["rows"] == 1 and main_gate["outsideGate"] == ["a@plan-a"]
     rows = {row["id"]: row for row in result["rows"]}
     assert v.transfer_dependent(rows["a"]) and not v.transfer_dependent(rows["b"]) and not v.transfer_dependent(rows["c"])
-    assert [item.row for item in v.scenario_panel(result, "plan")] == ["a@plan-a", "b@plan-b", "b@plan-b2"]
-    assert [item.row for item in v.scenario_panel(result, "plan", transfers=False)] == ["b@plan-b", "b@plan-b2"]
+    assert [item.row for item in v.scenario_panel(result, "plan")] == ["a@plan-a", "b@plan-b"]
+    assert [item.row for item in v.scenario_panel(result, "plan", transfers=False)] == ["b@plan-b"]
     assert [item.row for item in v.scenario_panel(result, "api", transfers=False)] == [item.row for item in v.scenario_panel(result, "api")]
     assert v.transfers_on("S0") and not any(v.transfers_on(stratum) for stratum in ("S1", "S2", "S1M"))
     document = v.run_scenarios(result, frozen, n=50, seed=3)
@@ -1112,7 +1113,7 @@ def test_core_plan_streams_run_with_transfers_off():
     assert runs[("S0", False)]["transfers"] == "on (the displayed record)" and runs[("S0", False)]["excluded"] == [] and "a@plan-a" in runs[("S0", False)]["rows"]
     for key in (("S1", False), ("S2", False), ("S1", True), ("S1M", False)):
         assert runs[key]["transfers"] == "off" and runs[key]["excluded"] == [{"row": "a@plan-a", "reason": "owner-named transfer: unevaluable with owner assumptions off (never reselected or replaced by API cost)"}]
-        assert list(runs[key]["rows"]) == ["b@plan-b", "b@plan-b2"]
+        assert list(runs[key]["rows"]) == ["b@plan-b"]
     assert all("transfers" not in run and "excluded" not in run for run in document["results"]["api"])
     assert document["inputHash"] != v.run_scenarios(*scored(), n=50, seed=3)["inputHash"]
 
@@ -1124,7 +1125,7 @@ def test_plan_anchors_freeze_over_measured_plan_rows_only():
     assert v.plan_measured({"plan": {"fallback": None, "grade": "controlled"}}) and v.plan_measured({"plan": {"fallback": None, "grade": "reports"}})
     assert not v.plan_measured({"plan": {"fallback": None, "grade": "assumption"}}) and not v.plan_measured({"plan": {"fallback": "api", "grade": None}})
     result, frozen = scored()
-    assert frozen["anchorVersion"] == f"v3-2026-10-19-a{v.ANCHOR_POLICY['version']}" == "v3-2026-10-19-a4"
+    assert frozen["anchorVersion"] == f"v3-2026-10-19-a{v.ANCHOR_POLICY['version']}" == "v3-2026-10-19-a5"
     # A non-main workload whose references are b (measured) and c (API-cost fallback): one measured Plan reference.
     rows = {row["id"]: row for row in result["rows"]}
     for row_id in ("b", "c"):
@@ -2029,9 +2030,9 @@ def test_the_screen_reads_the_setters_frozen_noise_not_its_current_noise():
     assert [item and item["setter"] for item in frozen_sd] == [item and item["setter"] for item in current_sd]
 
 
-def test_plan_rows_rank_every_plan_and_share_their_configuration():
-    """O48: one Plan row per configuration and plan, the comparator choosing within a plan; rows of one configuration
-    share quality and API cost, every scenario draw and a band, and the configuration keeps its selected route's row."""
+def test_a_configuration_has_one_plan_row_on_its_most_favorable_plan(monkeypatch):
+    """O219 (amending O48): each configuration is ranked once, on the plan whose route gives the lowest Plan cost; its other
+    plans are disclosed as alternatives; the band and separability rules for one configuration's several rows stay correct."""
 
     routes = documents()["planRoutes"]
     routes["routes"][0]["plan"] = "Plan One"
@@ -2039,38 +2040,28 @@ def test_plan_rows_rank_every_plan_and_share_their_configuration():
                              "modelIds": ["a"], "planPriceUsd": 20, "checkedOn": "2026-10-10", "allocationRegime": "single-model allocation"})
     result, frozen = scored(planRoutes=routes)
     variants = {row["id"]: row for row in v.plan_variants(result)["rows"]}
-    assert set(variants) == {"a@plan-one", "a@plan-two", "b@plan-b", "c@api"}
-    assert variants["a@plan-one"]["representative"] and not variants["a@plan-two"]["representative"]
-    assert variants["c@api"]["representative"] and variants["c@api"]["plan"]["fallback"] in (None, "api")
-    assert variants["a@plan-two"]["plan"]["costUsd"] == pytest.approx(variants["a@plan-one"]["plan"]["costUsd"] * 10.0 / 4.0)
+    assert set(variants) == {"a@plan-one", "b@plan-b", "c@api"} and all(row["representative"] for row in variants.values())
+    assert variants["c@api"]["plan"]["fallback"] in (None, "api")
     output = v.score(result, frozen)
     plan_rows = {row["id"]: row for row in output["planRows"]}
     rows = {row["id"]: row for row in output["rows"]}
     assert rows["a"]["planRowId"] == "a@plan-one" and rows["a"]["planScore"]["rank"] == plan_rows["a@plan-one"]["rank"]
-    assert plan_rows["a@plan-one"]["value"] > plan_rows["a@plan-two"]["value"] and plan_rows["a@plan-two"]["plan"] == "Plan Two"
-    assert output["planRowRule"] == v.PLAN_ROW_RULE
-    # One configuration's plan rows share every draw: the cost ratio between them holds in each scenario.
-    panel = v.scenario_panel(result, "plan")
-    assert {item.meta["group"] for item in panel if item.row.startswith("a@")} == {"a"}
-    import random
-    scenario = scenarios.draw_scenario(panel, "S1", random.Random(5))
-    (cost_one, quality_one), (cost_two, quality_two) = scenario["a@plan-one"], scenario["a@plan-two"]
-    assert quality_one == quality_two and cost_two == pytest.approx(cost_one * 10.0 / 4.0)
-    # Bands: a row of the band's first configuration on another plan stays in its band.
+    assert rows["a"]["planAlternatives"] == [{"plan": "Plan Two", "routeId": "plan-a2", "multiple": 4.0}]
+    assert output["planRowRule"] == v.PLAN_ROW_RULE and "O219" in v.PLAN_ROW_RULE
+    # A cheaper plan with a weaker grade still wins (the most favorable plan), and its route becomes the configuration's selection.
+    routes["routes"].append({"id": "plan-a3", "plan": "Plan Three", "valueMultiple": 30.0, "valueMultipleKind": "user_assumption",
+                             "evidenceClass": "user_assumption", "modelIds": ["a"], "planPriceUsd": 20, "checkedOn": "2026-10-10"})
+    monkeypatch.setattr(v, "MIN_ANCHOR_REFERENCES", 1)  # a's assumed plan leaves b as the one measured Plan reference (O157)
+    favoured, _ = scored(planRoutes=routes)
+    row = next(item for item in favoured["rows"] if item["id"] == "a")
+    assert row["routeSelection"]["plan"] == "Plan Three" and row["routeSelection"]["reason"] == plan_routes_module.FAVORABLE_PLAN
+    # The band rule for a configuration's several rows (no instance since O219) stays exact.
     sd = {"a": 1.0, "b": 1.0}
     of = {"a@1": "a", "a@2": "a", "b@1": "b"}
     assert v.rank_bands([(60.0, "a@1"), (50.0, "a@2"), (59.0, "b@1")], sd, of) == {"a@1": [1, 3], "a@2": [1, 3], "b@1": [1, 3]}
     assert v.rank_bands([(60.0, "a@1"), (50.0, "b@1")], sd, of) == {"a@1": [1, 1], "b@1": [2, 2]}
     separability = output["diagnostics"]["rankSeparability"]["plan"]
-    assert set(separability["bands"]) <= set(plan_rows)
-    # E258: pairs of one configuration on two plans are counted apart; the threshold ranges over different configurations.
-    ordered = [row_id for row_id, _ in sorted(((row_id, row["value"]) for row_id, row in plan_rows.items() if row["value"] is not None), key=lambda item: -item[1])]
-    main_order = [row_id for row_id in ordered if not row_id.startswith("c@")]
-    same = sum(1 for first, second in zip(main_order, main_order[1:]) if first.split("@")[0] == second.split("@")[0])
-    assert separability["sameConfigurationAdjacentPairs"] == same
-    # Reviewer 73: mixed-display neighbours across workloads (the fixture's c is a subset row) are counted apart; reviewer 158:
-    # the pairs that are tested are the main workload's own adjacent ranks, whatever sits between them in the mixed display.
-    assert separability["adjacentPairs"] + same == len(main_order) - 1
+    assert set(separability["bands"]) <= set(plan_rows) and separability["sameConfigurationAdjacentPairs"] == 0
     assert separability["crossWorkloadAdjacentPairs"] >= 1
 
 

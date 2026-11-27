@@ -8,11 +8,11 @@
   "summary": {
     "rank": {
       "api": 8,
-      "plan": 25
+      "plan": 9
     },
     "overall": {
       "api": 47.06016517972625,
-      "plan": 53.85162814627279
+      "plan": 53.193468149032746
     },
     "quality": 43.9525094379525,
     "qualityRank": 8,
@@ -274,7 +274,7 @@
     ],
     "costScore": {
       "api": 56.3831324050475,
-      "plan": 83.54898427123366
+      "plan": 80.91634428227349
     },
     "components": [
       {
@@ -370,8 +370,8 @@
       "planIntervalEligible": false,
       "usdPerRun": 20.707786596798154,
       "selected": true,
-      "planRank": 25,
-      "planValue": 53.85162814627279
+      "planRank": 9,
+      "planValue": 53.193468149032746
     },
     {
       "id": "chatgpt-plus-gpt-6.1-sol-low-common-gpt-assumption",
@@ -388,8 +388,8 @@
       "planIntervalEligible": false,
       "usdPerRun": 21.143533385849263,
       "selected": false,
-      "planRank": 26,
-      "planValue": 53.728068120472145
+      "planRank": null,
+      "planValue": null
     },
     {
       "id": "chatgpt-pro100-gpt-6.1-sol-low-common-gpt-assumption",
@@ -406,8 +406,8 @@
       "planIntervalEligible": false,
       "usdPerRun": 21.143533385849263,
       "selected": false,
-      "planRank": 26,
-      "planValue": 53.728068120472145
+      "planRank": null,
+      "planValue": null
     },
     {
       "id": "chatgpt-pro200-gpt-6.1-sol-low-common-gpt-assumption",
@@ -424,8 +424,8 @@
       "planIntervalEligible": false,
       "usdPerRun": 21.407320270701508,
       "selected": false,
-      "planRank": 28,
-      "planValue": 53.65450032429166
+      "planRank": null,
+      "planValue": null
     }
   ],
   "scenarios": {
@@ -546,8 +546,8 @@
         "kernel": "primary",
         "targetProfile": "mixed-target performance dispersion stress, not a common confidence interval for published mean performance (reviewer 101): published-record leaf values redrawn from task-count approximations (binomial leaves from their Jeffreys Beta posterior, O142, with its recentred, clipped alternative, O154, whose realised mean shift is reported; independent-task approximation), Vals' published standard errors, an assumed reading of GDPval-AA's displayed rating interval and Bug Hunt's single-run dispersion + conventional identification of missing leaves",
         "unevaluable": null,
-        "top1": 0.0003,
-        "top3": 0.0004,
+        "top1": 0.0016,
+        "top3": 0.092,
         "frontier": 1.0
       },
       {
@@ -555,8 +555,8 @@
         "kernel": "recentred",
         "targetProfile": "mixed-target performance dispersion stress, not a common confidence interval for published mean performance (reviewer 101): published-record leaf values redrawn from task-count approximations (binomial leaves from their Jeffreys Beta posterior, O142, with its recentred, clipped alternative, O154, whose realised mean shift is reported; independent-task approximation), Vals' published standard errors, an assumed reading of GDPval-AA's displayed rating interval and Bug Hunt's single-run dispersion + conventional identification of missing leaves",
         "unevaluable": null,
-        "top1": 0.0004,
-        "top3": 0.0006,
+        "top1": 0.0011,
+        "top3": 0.0781,
         "frontier": 1.0
       }
     ]
@@ -570,11 +570,11 @@
   },
   "history": [
     {
-      "version": "v3.1.0",
-      "date": "2026-11-26",
+      "version": "v3.2.0",
+      "date": "2026-11-27",
       "rank": {
         "api": 8,
-        "plan": 25
+        "plan": 9
       }
     }
   ],
@@ -610,11 +610,11 @@
       "rankingEligible": true,
       "rank": {
         "api": 8,
-        "plan": 25
+        "plan": 9
       },
       "overall": {
         "api": 47.06016517972625,
-        "plan": 53.85162814627279
+        "plan": 53.193468149032746
       }
     },
     {
@@ -625,11 +625,11 @@
       "rankingEligible": true,
       "rank": {
         "api": 19,
-        "plan": 61
+        "plan": 18
       },
       "overall": {
         "api": 41.057510321893965,
-        "plan": 49.71556709990041
+        "plan": 49.20312364279362
       }
     }
   ]

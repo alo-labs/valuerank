@@ -47,7 +47,7 @@ from valuerank.clock import utcnow
 from valuerank.paths import DATA, ROOT
 from valuerank.plan_costs import COST_WEIGHT_PCT
 
-METHODOLOGY_VERSION = "3.1.0"
+METHODOLOGY_VERSION = "3.2.0"
 BASKET_VERSION = "SDLC basket v1"
 BETA = COST_WEIGHT_PCT / 100.0
 BASES = ("api", "plan")
@@ -1084,7 +1084,7 @@ def assemble(configurations: list[dict], documents: dict, *, release_day: date, 
             "configurationMapped": model_id in mapping,
             # O63: AA's safety-refusal outcomes on the row's Coding Agent Index record, disclosed and flagged only.
             "agentSafety": agent_safety(agent_records.get(agent_labels[model_id])),
-            "routeSelection": plan_routes.route_selection(candidates),
+            "routeSelection": plan_routes.favorable_selection(candidates),
             # O100, O106: the registered class of every AA note on the row's chart point, model page, Coding Agent Index record
             # and cost-chart rows (and their charts), combined (the build stops on an unregistered note).
             # O109: the notes by surface; the class is combined after admission, from the admitted components only.
@@ -1181,10 +1181,11 @@ def workload_catalog(assembled: dict) -> dict:
     return catalog
 
 
-PLAN_ROW_RULE = ("O48: the Plan basis ranks one row per configuration and plan: every plan on which the configuration has an eligible "
-                 "(non-diagnostic) route, the route chosen by the official comparator among that plan's candidates (E85, E88); a "
-                 "configuration with no eligible route keeps one API-cost fallback row (O13). Rows of one configuration share its quality "
-                 "and its API cost, so they differ only by the plan's multiple")
+PLAN_ROW_RULE = ("O219 (amending O48): the Plan basis ranks each configuration once, on its most favorable plan: of the plans on which "
+                 "it has an eligible (non-diagnostic) route, each plan's route chosen by the official comparator among that plan's "
+                 "candidates (E85, E88), the plan whose route gives the lowest Plan cost (a tie keeps the comparator's choice, then the "
+                 "plan name); its other plans are disclosed as alternatives, never ranked; a configuration with no eligible route keeps "
+                 "one API-cost fallback row (O13)")
 API_FALLBACK_PLAN = "api"
 
 
@@ -1193,30 +1194,22 @@ def plan_slug(plan: str) -> str:
 
 
 def plan_variants(assembled: dict) -> dict:
-    """O48: the Plan-basis population, one row per configuration and plan (``<configuration>@<plan>``), each carrying the
-    configuration's evidence and cost with the plan's selected route; ``configurationId`` names the configuration and
-    ``representative`` marks the row on the configuration's own selected route."""
+    """O48 as amended by O219: the Plan-basis population, one row per configuration (``<configuration>@<plan>``) on its most
+    favorable plan, carrying the configuration's evidence and cost with that plan's selected route; ``configurationId`` names
+    the configuration and ``representative`` is always true (kept for the row contract)."""
 
     rows = []
     for row in assembled["rows"]:
-        by_plan: dict[str, list] = {}
-        for candidate in row.get("routeCandidates", []):
-            if candidate["grade"] != "diagnostic":
-                # A route without a recorded plan name is its own plan.
-                by_plan.setdefault(candidate["route"].get("plan") or candidate["route"]["id"], []).append(candidate)
-        chosen = row["routeSelection"]["selected"]
-        variants = [(plan, plan_routes.route_selection(candidates)) for plan, candidates in sorted(by_plan.items())] or [(None, row["routeSelection"])]
-        for plan, selection in variants:
-            selected = selection["selected"]
-            rows.append({
-                **row,
-                "id": f"{row['id']}@{plan_slug(plan) if plan else API_FALLBACK_PLAN}",
-                "configurationId": row["id"],
-                "planName": plan,
-                "routeSelection": selection,
-                "plan": plan_routes.plan_cost(row["cost"]["costUsd"], selected),
-                "representative": (selected is None and chosen is None) or (selected is not None and chosen is not None and selected["route"]["id"] == chosen["route"]["id"]),
-            })
+        selection = row["routeSelection"]
+        plan = selection.get("plan")
+        rows.append({
+            **row,
+            "id": f"{row['id']}@{plan_slug(plan) if plan else API_FALLBACK_PLAN}",
+            "configurationId": row["id"],
+            "planName": plan,
+            "plan": plan_routes.plan_cost(row["cost"]["costUsd"], selection["selected"]),
+            "representative": True,
+        })
     return {**assembled, "rows": rows}
 
 
@@ -1634,9 +1627,9 @@ def bar_levels(assembled: dict) -> tuple[list[str], list[dict]]:
 # E160: the registered rule that selects each workload's anchor references (separate from workload admission).
 ANCHOR_POLICY = {
     "policyId": "complete-evidence-panel",
-    "version": 4,  # a4: re-frozen for O170's 0-100 Bug Hunt scale (the bar levels read the rescaled leaf)
+    "version": 5,  # a5: re-frozen for O219 (the Plan anchors over one row per configuration, on its most favorable plan); a4: O170's 0-100 Bug Hunt scale
     "populationRule": "ranked configurations with complete cost evidence (exact cost, no AA missing- or declined-task marker) on every component of the workload at the freeze cutoff; on the main workload this is the admission reference panel",
-    "planRule": "the same configurations' plan rows whose displayed Plan cost is measured (a controlled measurement or concordant reports, O157); owner assumptions and API-cost fallbacks are scored on these anchors and flagged, and are outside the Plan clip gate",
+    "planRule": "the same configurations' ranked plan rows (one per configuration, on its most favorable plan, O219) whose displayed Plan cost is measured (a controlled measurement or concordant reports, O157); owner assumptions and API-cost fallbacks are scored on these anchors and flagged, and are outside the Plan clip gate",
     "minimumReferences": 2,
     "belowMinimum": "anchors unavailable: configurations on that workload get no cost score (the main workload must meet the minimum)",
     "lifetime": "reference IDs and costs are frozen; a population or rule change is a new anchor version with an old/new bridge, and evidence lost after freezing never rebuilds an anchor",
@@ -3139,7 +3132,9 @@ def score(assembled: dict, frozen: dict) -> dict:
                   "population": "ranked rows only; listed rows beyond the anchors are disclosed and never hold a release (O58)"},
         "identificationYield": yield_,
         "rows": [{**_row_json(row, per_row[row["id"]], ranks, route_alternatives(row, _anchors_for(frozen, row["cost"]["workload"], "plan"))),
-                  "planRowId": representative.get(row["id"])} for row in rows],
+                  "planRowId": representative.get(row["id"]),
+                  # O219: the configuration's other plans, disclosed and never ranked.
+                  "planAlternatives": row["routeSelection"].get("alternatives", [])} for row in rows],
         "planRowRule": PLAN_ROW_RULE,
         "planRows": [_plan_row_json(row, per_plan[row["id"]]["plan"], plan_ranks.get(row["id"])) for row in plan_rows],
         "intervals": {basis: withhold_bars(interval_outputs(source, frozen, basis), label_gate(rows, main))

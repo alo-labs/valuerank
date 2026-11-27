@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
-  "methodologyVersion": "3.0.0",
-  "anchorVersion": "v3-2026-11-26-a4",
+  "methodologyVersion": "3.2.0",
+  "anchorVersion": "v3-2026-11-26-a5",
   "frozenAt": "2026-11-26",
   "basketVersion": "SDLC basket v1",
   "mainWorkload": "2774ca1a24867d8c",
@@ -45,33 +45,17 @@
           "workload": "2774ca1a24867d8c",
           "units": "USD per workload pass",
           "referenceIds": [
-            "claude-opus-5-5@claude-max-20x",
-            "claude-opus-5-5@claude-max-5x",
             "claude-opus-5-5@claude-pro",
-            "gpt-6-astra@chatgpt-plus",
-            "gpt-6-astra@chatgpt-pro-100",
             "gpt-6-astra@chatgpt-pro-200",
-            "gpt-6-astra@chatgpt-pro-500",
-            "gpt-6.1-sol@chatgpt-plus",
-            "gpt-6.1-sol@chatgpt-pro-100",
-            "gpt-6.1-sol@chatgpt-pro-200",
             "gpt-6.1-sol@chatgpt-pro-500"
           ],
           "referenceCosts": {
-            "claude-opus-5-5@claude-max-20x": 189.49029291717412,
-            "claude-opus-5-5@claude-max-5x": 194.05791919185884,
             "claude-opus-5-5@claude-pro": 188.62166169327534,
-            "gpt-6-astra@chatgpt-plus": 891.7669389776186,
-            "gpt-6-astra@chatgpt-pro-100": 546.3927538365136,
             "gpt-6-astra@chatgpt-pro-200": 498.67533349801244,
-            "gpt-6-astra@chatgpt-pro-500": 519.2891592896269,
-            "gpt-6.1-sol@chatgpt-plus": 136.09505082415083,
-            "gpt-6.1-sol@chatgpt-pro-100": 136.09505082415083,
-            "gpt-6.1-sol@chatgpt-pro-200": 137.79297372310856,
             "gpt-6.1-sol@chatgpt-pro-500": 133.29026979156993
           },
           "low": 66.64513489578496,
-          "high": 1783.5338779552371,
+          "high": 997.3506669960249,
           "padding": 2.0
         }
       },
@@ -103,9 +87,9 @@
   ],
   "anchorPolicy": {
     "policyId": "complete-evidence-panel",
-    "version": 4,
+    "version": 5,
     "populationRule": "ranked configurations with complete cost evidence (exact cost, no AA missing- or declined-task marker) on every component of the workload at the freeze cutoff; on the main workload this is the admission reference panel",
-    "planRule": "the same configurations' plan rows whose displayed Plan cost is measured (a controlled measurement or concordant reports, O157); owner assumptions and API-cost fallbacks are scored on these anchors and flagged, and are outside the Plan clip gate",
+    "planRule": "the same configurations' ranked plan rows (one per configuration, on its most favorable plan, O219) whose displayed Plan cost is measured (a controlled measurement or concordant reports, O157); owner assumptions and API-cost fallbacks are scored on these anchors and flagged, and are outside the Plan clip gate",
     "minimumReferences": 2,
     "belowMinimum": "anchors unavailable: configurations on that workload get no cost score (the main workload must meet the minimum)",
     "lifetime": "reference IDs and costs are frozen; a population or rule change is a new anchor version with an old/new bridge, and evidence lost after freezing never rebuilds an anchor"

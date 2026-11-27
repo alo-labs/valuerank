@@ -107,7 +107,7 @@ def test_rankings_header_and_bases(bundle, scores, v3):
     rankings = bundle.rankings
     assert rankings["version"] == VERSION and rankings["publishDate"] == DATE
     assert rankings["observedAt"] == scores["observedAt"] and rankings["defaultBasis"] == "plan"
-    assert rankings["methodologyVersion"] == v3["methodologyVersion"] == "3.1.0" and rankings["basketVersion"] == "SDLC basket v1"
+    assert rankings["methodologyVersion"] == v3["methodologyVersion"] == "3.2.0" and rankings["basketVersion"] == "SDLC basket v1"
     assert {basis: rankings["bases"][basis]["costUnit"] for basis in ("api", "plan")} == {"api": "USD per basket run", "plan": "USD per basket run"}
     assert rankings["costWeightPct"] == 25.0
     assert set(rankings["categories"]) == {"cost", "code", "prod", "rely", "intel"}
@@ -183,13 +183,14 @@ def test_ranks_are_competition_ranks_on_unrounded_values(bundle, synthetic):
     assert len(ranked) == 5
     for model in ranked:
         assert model["rank"]["api"] == 1 + sum(1 for other in ranked if other["overall"]["api"] > model["overall"]["api"])
-    # O48: the Plan basis ranks plan rows, so a configuration's Plan rank is its own plan row's rank among every plan row.
+    # O219: the Plan basis ranks one plan row per configuration (its most favorable plan), so there are as many plan rows as
+    # ranked configurations, each a different configuration.
     plan_rows = [m for m in bundle.rankings["planModels"] if m["rankingEligible"] and m["overall"]["plan"] is not None]
-    assert len(plan_rows) > len(ranked) and len({m["key"] for m in plan_rows}) == len(plan_rows)
+    assert len(plan_rows) == len(ranked) and len({m["key"] for m in plan_rows}) == len({m["slug"] for m in plan_rows}) == len(plan_rows)
     # O184: subset-workload plan rows take no rank among the main-workload plan rows. Every plan row of this release is on
     # the main workload; the synthetic copy's GPT-6 Luna (max) plan rows are the unranked, noted ones.
     main_rows = [row for row in plan_rows if row["rank"]["plan"] is not None]
-    assert len(main_rows) == len(plan_rows) == 19
+    assert len(main_rows) == len(plan_rows) == 5
     moved = [m for m in synthetic.rankings["planModels"] if m["rankingEligible"] and m["overall"]["plan"] is not None]
     unranked = [row for row in moved if row["rank"]["plan"] is None]
     assert unranked and {row["slug"] for row in unranked} == {"gpt-6-luna"} and all(row["rankNote"] for row in unranked)
@@ -402,7 +403,7 @@ def test_changelog_document(bundle):
 def test_index_page(bundle):
     page = viewmodel.index_page(bundle)
     assert page["headline"]["api"] == "GPT-6.1 Sol (max) leads the API ranking at 60.6; GPT-6 Astra (max) leads on quality."
-    assert page["headline"]["plan"] == "GPT-6.1 Sol (max) leads the Plan ranking at 68.0; GPT-6 Astra (max) leads on quality."
+    assert page["headline"]["plan"] == "GPT-6.1 Sol (max) leads the Plan ranking at 66.9; GPT-6 Astra (max) leads on quality."
     assert page["picks"] == bundle.rankings["picks"] and page["rankingsJson"] is bundle.rankings
     assert len(page["models"]) == 5 and page["dimensions"] == bundle.rankings["dimensions"]
     assert len(page["chart"]["api"]) == len(page["chart"]["plan"]) == 5  # a row without a cost has no point and set(page["chart"]["plan"][0]) == {"slug", "name", "x", "y", "pareto", "costLabel"}

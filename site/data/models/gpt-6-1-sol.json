@@ -12,7 +12,7 @@
     },
     "overall": {
       "api": 60.62551864255374,
-      "plan": 67.98948489846025
+      "plan": 66.85695554482207
     },
     "quality": 64.34855482940519,
     "qualityRank": 2,
@@ -309,7 +309,7 @@
     ],
     "costScore": {
       "api": 49.45641008199944,
-      "plan": 78.91227510562544
+      "plan": 74.38215769107272
     },
     "components": [
       {
@@ -415,7 +415,7 @@
       "usdPerRun": 133.29026979156993,
       "selected": true,
       "planRank": 1,
-      "planValue": 67.98948489846025
+      "planValue": 66.85695554482207
     },
     {
       "id": "chatgpt-plus-gpt61sol-semianalysis",
@@ -432,8 +432,8 @@
       "planIntervalEligible": false,
       "usdPerRun": 136.09505082415083,
       "selected": false,
-      "planRank": 2,
-      "planValue": 67.831099551623
+      "planRank": null,
+      "planValue": null
     },
     {
       "id": "chatgpt-pro100-gpt61sol-semianalysis",
@@ -450,8 +450,8 @@
       "planIntervalEligible": false,
       "usdPerRun": 136.09505082415083,
       "selected": false,
-      "planRank": 2,
-      "planValue": 67.831099551623
+      "planRank": null,
+      "planValue": null
     },
     {
       "id": "chatgpt-pro200-gpt61sol-semianalysis",
@@ -468,8 +468,8 @@
       "planIntervalEligible": false,
       "usdPerRun": 137.79297372310856,
       "selected": false,
-      "planRank": 4,
-      "planValue": 67.73679671509802
+      "planRank": null,
+      "planValue": null
     }
   ],
   "scenarios": {
@@ -563,7 +563,7 @@
         "kernel": "primary",
         "targetProfile": "published-record reporting precision + conventional identification of missing leaves + weight-specification stress",
         "unevaluable": null,
-        "top1": 0.9999,
+        "top1": 1.0,
         "top3": 1.0,
         "frontier": 1.0
       },
@@ -590,8 +590,8 @@
         "kernel": "primary",
         "targetProfile": "mixed-target performance dispersion stress, not a common confidence interval for published mean performance (reviewer 101): published-record leaf values redrawn from task-count approximations (binomial leaves from their Jeffreys Beta posterior, O142, with its recentred, clipped alternative, O154, whose realised mean shift is reported; independent-task approximation), Vals' published standard errors, an assumed reading of GDPval-AA's displayed rating interval and Bug Hunt's single-run dispersion + conventional identification of missing leaves",
         "unevaluable": null,
-        "top1": 0.9684,
-        "top3": 0.9905,
+        "top1": 0.9896,
+        "top3": 1.0,
         "frontier": 1.0
       },
       {
@@ -599,8 +599,8 @@
         "kernel": "recentred",
         "targetProfile": "mixed-target performance dispersion stress, not a common confidence interval for published mean performance (reviewer 101): published-record leaf values redrawn from task-count approximations (binomial leaves from their Jeffreys Beta posterior, O142, with its recentred, clipped alternative, O154, whose realised mean shift is reported; independent-task approximation), Vals' published standard errors, an assumed reading of GDPval-AA's displayed rating interval and Bug Hunt's single-run dispersion + conventional identification of missing leaves",
         "unevaluable": null,
-        "top1": 0.9694,
-        "top3": 0.9877,
+        "top1": 0.9868,
+        "top3": 1.0,
         "frontier": 1.0
       }
     ]
@@ -658,6 +658,14 @@
       "date": "2026-11-26",
       "rank": {
         "api": 1,
+        "plan": null
+      }
+    },
+    {
+      "version": "v3.2.0",
+      "date": "2026-11-27",
+      "rank": {
+        "api": 1,
         "plan": 1
       }
     }
@@ -683,7 +691,7 @@
       },
       "overall": {
         "api": 60.62551864255374,
-        "plan": 67.98948489846025
+        "plan": 66.85695554482207
       }
     },
     {
@@ -709,11 +717,11 @@
       "rankingEligible": true,
       "rank": {
         "api": 1,
-        "plan": 5
+        "plan": 2
       },
       "overall": {
         "api": 52.079921836995034,
-        "plan": 57.515336473021364
+        "plan": 55.93111596023674
       }
     }
   ]

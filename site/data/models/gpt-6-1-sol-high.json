@@ -12,7 +12,7 @@
     },
     "overall": {
       "api": 53.1569788452822,
-      "plan": 58.645923259143544
+      "plan": 57.203208240336124
     },
     "quality": 56.88167566904072,
     "qualityRank": 3,
@@ -274,7 +274,7 @@
     ],
     "costScore": {
       "api": 41.982888374006606,
-      "plan": 63.938666029451994
+      "plan": 58.16780595422233
     },
     "components": [
       {
@@ -371,7 +371,7 @@
       "usdPerRun": 47.31233493564381,
       "selected": true,
       "planRank": 1,
-      "planValue": 58.645923259143544
+      "planValue": 57.203208240336124
     },
     {
       "id": "chatgpt-plus-gpt-6.1-sol-high-common-gpt-assumption",
@@ -388,8 +388,8 @@
       "planIntervalEligible": false,
       "usdPerRun": 48.30791203097205,
       "selected": false,
-      "planRank": 2,
-      "planValue": 58.5223632333429
+      "planRank": null,
+      "planValue": null
     },
     {
       "id": "chatgpt-pro100-gpt-6.1-sol-high-common-gpt-assumption",
@@ -406,8 +406,8 @@
       "planIntervalEligible": false,
       "usdPerRun": 48.30791203097205,
       "selected": false,
-      "planRank": 2,
-      "planValue": 58.5223632333429
+      "planRank": null,
+      "planValue": null
     },
     {
       "id": "chatgpt-pro200-gpt-6.1-sol-high-common-gpt-assumption",
@@ -424,8 +424,8 @@
       "planIntervalEligible": false,
       "usdPerRun": 48.91060191235654,
       "selected": false,
-      "planRank": 4,
-      "planValue": 58.44879543716241
+      "planRank": null,
+      "planValue": null
     }
   ],
   "scenarios": {
@@ -519,8 +519,8 @@
         "kernel": "primary",
         "targetProfile": "published-record reporting precision + conventional identification of missing leaves + weight-specification stress",
         "unevaluable": null,
-        "top1": 0.8598,
-        "top3": 0.9731,
+        "top1": 0.7529,
+        "top3": 1.0,
         "frontier": 0.9911
       },
       {
@@ -546,8 +546,8 @@
         "kernel": "primary",
         "targetProfile": "mixed-target performance dispersion stress, not a common confidence interval for published mean performance (reviewer 101): published-record leaf values redrawn from task-count approximations (binomial leaves from their Jeffreys Beta posterior, O142, with its recentred, clipped alternative, O154, whose realised mean shift is reported; independent-task approximation), Vals' published standard errors, an assumed reading of GDPval-AA's displayed rating interval and Bug Hunt's single-run dispersion + conventional identification of missing leaves",
         "unevaluable": null,
-        "top1": 0.4737,
-        "top3": 0.538,
+        "top1": 0.4222,
+        "top3": 0.9786,
         "frontier": 0.7399
       },
       {
@@ -555,8 +555,8 @@
         "kernel": "recentred",
         "targetProfile": "mixed-target performance dispersion stress, not a common confidence interval for published mean performance (reviewer 101): published-record leaf values redrawn from task-count approximations (binomial leaves from their Jeffreys Beta posterior, O142, with its recentred, clipped alternative, O154, whose realised mean shift is reported; independent-task approximation), Vals' published standard errors, an assumed reading of GDPval-AA's displayed rating interval and Bug Hunt's single-run dispersion + conventional identification of missing leaves",
         "unevaluable": null,
-        "top1": 0.4801,
-        "top3": 0.5424,
+        "top1": 0.4247,
+        "top3": 0.9819,
         "frontier": 0.7463
       }
     ]
@@ -570,8 +570,8 @@
   },
   "history": [
     {
-      "version": "v3.1.0",
-      "date": "2026-11-26",
+      "version": "v3.2.0",
+      "date": "2026-11-27",
       "rank": {
         "api": 1,
         "plan": 1
@@ -614,7 +614,7 @@
       },
       "overall": {
         "api": 53.1569788452822,
-        "plan": 58.645923259143544
+        "plan": 57.203208240336124
       }
     },
     {
@@ -625,11 +625,11 @@
       "rankingEligible": true,
       "rank": {
         "api": 4,
-        "plan": 12
+        "plan": 4
       },
       "overall": {
         "api": 49.28637290925597,
-        "plan": 56.10769891199985
+        "plan": 54.98440081585634
       }
     }
   ]

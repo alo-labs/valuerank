@@ -38,9 +38,9 @@ describe('print', () => {
         assert.equal(await visible(page, hidden), 0, `${hidden} should not print`);
       }
       assert.equal(await visible(page, '#answer-table'), 1);
-      assert.equal(await visible(page, '#answer-table tbody tr'), 16);
+      assert.equal(await visible(page, '#answer-table tbody tr'), 5); // O219: one row per ranked configuration
       assert.equal(await visible(page, '#answer-table thead th'), 6); // no Evidence column: evidence is footnoted
-      assert.equal(await visible(page, '#index-evidence li'), 16);
+      assert.equal(await visible(page, '#index-evidence li'), 5);
       assert.equal(await visible(page, '.fn-back'), 0); // back-links are screen-only
       assert.equal(await page.locator('.table-wrap').first().evaluate((node) => getComputedStyle(node).overflowX), 'visible');
       const ink = await page.evaluate(() => ({ background: getComputedStyle(document.body).backgroundColor, color: getComputedStyle(document.body).color }));

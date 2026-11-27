@@ -8,11 +8,11 @@
   "summary": {
     "rank": {
       "api": 2,
-      "plan": 11
+      "plan": 5
     },
     "overall": {
       "api": 54.21033258517324,
-      "plan": 58.83127394658296
+      "plan": 55.54294169922863
     },
     "quality": 65.51797482932908,
     "qualityRank": 1,
@@ -308,7 +308,7 @@
     ],
     "costScore": {
       "api": 20.287405852705753,
-      "plan": 38.771171298344626
+      "plan": 25.61784230892729
     },
     "components": [
       {
@@ -422,8 +422,8 @@
       "planIntervalEligible": false,
       "usdPerRun": 498.67533349801244,
       "selected": true,
-      "planRank": 11,
-      "planValue": 58.83127394658296
+      "planRank": 5,
+      "planValue": 55.54294169922863
     },
     {
       "id": "chatgpt-pro500-gpt6astra-semianalysis",
@@ -440,8 +440,8 @@
       "planIntervalEligible": false,
       "usdPerRun": 519.2891592896269,
       "selected": false,
-      "planRank": 12,
-      "planValue": 58.52319670604115
+      "planRank": null,
+      "planValue": null
     },
     {
       "id": "chatgpt-pro100-gpt6astra-semianalysis",
@@ -458,8 +458,8 @@
       "planIntervalEligible": false,
       "usdPerRun": 546.3927538365136,
       "selected": false,
-      "planRank": 13,
-      "planValue": 58.13623567296795
+      "planRank": null,
+      "planValue": null
     },
     {
       "id": "chatgpt-plus-gpt6astra-semianalysis",
@@ -476,8 +476,8 @@
       "planIntervalEligible": false,
       "usdPerRun": 891.7669389776186,
       "selected": false,
-      "planRank": 18,
-      "planValue": 54.410412345590444
+      "planRank": null,
+      "planValue": null
     }
   ],
   "scenarios": {
@@ -563,7 +563,7 @@
         "targetProfile": "published-record reporting precision + conventional identification of missing leaves",
         "unevaluable": null,
         "top1": 0.0,
-        "top3": 0.0,
+        "top3": 1.0,
         "frontier": 1.0
       },
       {
@@ -572,7 +572,7 @@
         "targetProfile": "published-record reporting precision + conventional identification of missing leaves + weight-specification stress",
         "unevaluable": null,
         "top1": 0.0,
-        "top3": 0.0,
+        "top3": 1.0,
         "frontier": 0.8652
       },
       {
@@ -581,7 +581,7 @@
         "targetProfile": "published-record reporting precision + conventional identification of missing leaves",
         "unevaluable": null,
         "top1": 0.0,
-        "top3": 0.0,
+        "top3": 1.0,
         "frontier": 1.0
       },
       {
@@ -590,7 +590,7 @@
         "targetProfile": "published-record reporting precision + conventional identification of missing leaves + conventional range sensitivity inside published 95% confidence intervals (no tail model)",
         "unevaluable": null,
         "top1": 0.0,
-        "top3": 0.0,
+        "top3": 1.0,
         "frontier": 1.0
       },
       {
@@ -599,7 +599,7 @@
         "targetProfile": "mixed-target performance dispersion stress, not a common confidence interval for published mean performance (reviewer 101): published-record leaf values redrawn from task-count approximations (binomial leaves from their Jeffreys Beta posterior, O142, with its recentred, clipped alternative, O154, whose realised mean shift is reported; independent-task approximation), Vals' published standard errors, an assumed reading of GDPval-AA's displayed rating interval and Bug Hunt's single-run dispersion + conventional identification of missing leaves",
         "unevaluable": null,
         "top1": 0.0,
-        "top3": 0.0,
+        "top3": 1.0,
         "frontier": 0.6063
       },
       {
@@ -608,7 +608,7 @@
         "targetProfile": "mixed-target performance dispersion stress, not a common confidence interval for published mean performance (reviewer 101): published-record leaf values redrawn from task-count approximations (binomial leaves from their Jeffreys Beta posterior, O142, with its recentred, clipped alternative, O154, whose realised mean shift is reported; independent-task approximation), Vals' published standard errors, an assumed reading of GDPval-AA's displayed rating interval and Bug Hunt's single-run dispersion + conventional identification of missing leaves",
         "unevaluable": null,
         "top1": 0.0,
-        "top3": 0.0,
+        "top3": 1.0,
         "frontier": 0.6066
       }
     ]
@@ -722,7 +722,15 @@
       "date": "2026-11-26",
       "rank": {
         "api": 2,
-        "plan": 11
+        "plan": null
+      }
+    },
+    {
+      "version": "v3.2.0",
+      "date": "2026-11-27",
+      "rank": {
+        "api": 2,
+        "plan": 5
       }
     }
   ],
@@ -743,11 +751,11 @@
       "rankingEligible": true,
       "rank": {
         "api": 2,
-        "plan": 11
+        "plan": 5
       },
       "overall": {
         "api": 54.21033258517324,
-        "plan": 58.83127394658296
+        "plan": 55.54294169922863
       }
     },
     {
@@ -773,11 +781,11 @@
       "rankingEligible": true,
       "rank": {
         "api": 6,
-        "plan": 53
+        "plan": 20
       },
       "overall": {
         "api": 47.38053048867936,
-        "plan": 50.79565069006703
+        "plan": 48.238275767176454
       }
     }
   ]
